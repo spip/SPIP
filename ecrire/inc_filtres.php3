@@ -477,9 +477,9 @@ function centrer($letexte) {
 //
 
 function filtrer_ical ($texte) {
-	global $charset;
 	$texte = html2unicode($texte);
-	$texte = unicode2charset(charset2unicode($texte, $charset, 1), 'utf-8');
+	if ('utf-8' <> ($charset = lire_meta('charset')))
+		$texte = unicode2charset(charset2unicode($texte, $charset, 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
 	$texte = ereg_replace(",", "\,", $texte);
 

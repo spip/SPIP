@@ -1,10 +1,11 @@
 <?php
 
 $fond = "ical";
-$delais = 6 * 3600;
+$delais = 3600;
 
 @header ("content-type:text/calendar");
 
+$flag_preserver=true;
 include ("inc-public.php3");
 
 
