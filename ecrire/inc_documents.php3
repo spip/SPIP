@@ -299,7 +299,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			if ($descriptif) $retour .= "<div style='text-align:left;'>$descriptif</div>";
 
 			if ($mode == 'document')
-				$retour .= "<div>(<a href='$fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
+				$retour .= "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
 
 			$retour .= "</div>\n</td>";
 			if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
