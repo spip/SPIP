@@ -1507,9 +1507,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				onMouseOver=\"changeclass(this,'fondgrison2')\"
 				onMouseOut=\"changeclass(this,'fondgris')\"><a
 				href='". $lien->getUrl() ."' class='icone'><font color='black'>Interface
-				simplifi&eacute;e</font></a></span> <span style='padding: 3px;
-				margin: 1px; border: 1px solid $couleur_claire; color:
-				$couleur_claire'><b>interface compl&egrave;te</b></span>";
+				simplifi&eacute;e</font></a></span>";
+			echo " <span class = 'fondo'><b>interface compl&egrave;te</b></span>";
 
 		}
 		else {
