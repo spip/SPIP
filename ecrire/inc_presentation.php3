@@ -3169,7 +3169,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 
 function http_style_background($img, $att='')
 {
-  return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '");' .
+  return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
     ($att ? (' ' . $att) : '') . ";'";
 }
 ?>
