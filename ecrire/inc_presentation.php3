@@ -1204,27 +1204,27 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 			echo "\n<td width=100% valign='top'>";
 
-		if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
-			include_ecrire("inc_logos.php3");
-			$logo_auteur = get_image("auton$id_auteur");
-			if ($logo_auteur) {
-				$fichier = $logo_auteur[0];
-				$taille = $logo_auteur[1];
-				$taille_x = $taille[0];
-				$taille_y = $taille[1];
-				$taille = image_ratio($taille_x, $taille_y, 48, 48);
-				$w = $taille[0];
-				$h = $taille[1];
-				$fid = $logo_auteur[2];
-				$hash = calculer_action_auteur ("reduire $w $h");
-
-				$titre = "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".$titre;
-				
+			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+				include_ecrire("inc_logos.php3");
+				$logo_auteur = get_image("auton$id_auteur");
+				if ($logo_auteur) {
+					$fichier = $logo_auteur[0];
+					$taille = $logo_auteur[1];
+					$taille_x = $taille[0];
+					$taille_y = $taille[1];
+					$taille = image_ratio($taille_x, $taille_y, 48, 48);
+					$w = $taille[0];
+					$h = $taille[1];
+					$fid = $logo_auteur[2];
+					$hash = calculer_action_auteur ("reduire $w $h");
+	
+					$titre_boite = "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".$titre;
+					
+				}
 			}
-		}
 
-			if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre));
-			else echo debut_cadre_thread_forum("", false, "", typo($titre));
+			if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre_boite));
+			else echo debut_cadre_thread_forum("", false, "", typo($titre_boite));
 			
 			// Si refuse, cadre rouge
 			if ($statut=="off") {
