@@ -1455,19 +1455,19 @@ if ((lire_meta('multi_articles') == 'oui')
 <!--
 function puce_statut(selection){
 	if (selection=="publie"){
-		return "img_pack/puce-verte.gif";
+		return "puce-verte.gif";
 	}
 	if (selection=="prepa"){
-		return "img_pack/puce-blanche.gif";
+		return "puce-blanche.gif";
 	}
 	if (selection=="prop"){
-		return "img_pack/puce-orange.gif";
+		return "puce-orange.gif";
 	}
 	if (selection=="refuse"){
-		return "img_pack/puce-rouge.gif";
+		return "puce-rouge.gif";
 	}
 	if (selection=="poubelle"){
-		return "img_pack/puce-poubelle.gif";
+		return "puce-poubelle.gif";
 	}
 }
 // -->
@@ -1484,7 +1484,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo "<B>"._T('texte_article_statut')."</B> ";
 
 	// $statut_url_javascript="\"articles.php3?id_article=$id_article&methode=image&alea=\"+Math.random()+\"&statut_nouv=\"+options[selectedIndex].value";
-	$statut_url_javascript="puce_statut(options[selectedIndex].value);";
+	$statut_url_javascript="'" . _DIR_IMG_PACK . "' + puce_statut(options[selectedIndex].value);";
 	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange=\"document.statut.src=$statut_url_javascript; setvisibility('valider_statut', 'visible');\">";
 	echo "<OPTION" . mySel("prepa", $statut_article) ." style='background-color: white'>"._T('texte_statut_en_cours_redaction')."\n";
 	echo "<OPTION" . mySel("prop", $statut_article) . " style='background-color: #FFF1C6'>"._T('texte_statut_propose_evaluation')."\n";
