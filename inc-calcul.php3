@@ -47,7 +47,13 @@ function squelette_obsolete($skel, $squelette) {
 }
 
 
-// Charge un squelette (en demande au besoin la compilation)
+# Charge un squelette (au besoin le compile)
+# Charge egalement un fichier homonyme de celui du squelette
+# mais de suffixe '_fonctions.php3' pouvant contenir:
+# - des filtres
+# - des fonctions de traduction de balise, de critere et de boucle
+# - des declaration de tables SQL supplementaires
+
 function charger_squelette ($squelette) {
 	$ext = $GLOBALS['extension_squelette'];
 	$nom = $ext . '_' . md5($squelette);
@@ -58,20 +64,21 @@ function charger_squelette ($squelette) {
 
 	$phpfile = 'CACHE/skel_' . $nom . '.php';
 
-	// le squelette est-il deja compile, lisible, etc ?
+	// le squelette est-il deja compile et perenne ?
 	if (!squelette_obsolete($phpfile, $sourcefile)
 	      AND lire_fichier ($phpfile, $contenu,
 				array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
+
+	// sinon, charger le compilateur et verifier que le source est lisible
 	if (!function_exists($nom)) {
-		// sinon charger le compilateur et tester le source
 		include_local("inc-compilo.php3");
 		lire_fichier ($sourcefile, $skel);
 	}
 
-	// ce fichier peut contenir deux sortes de choses:
+	// Le fichier suivant peut contenir entre autres:
 	// 1. les filtres utilises par le squelette
-	// 2. d'eventuels ajouts a $tables_principales
+	// 2. des ajouts au compilateur
 	// Le point 1 exige qu'il soit lu dans tous les cas.
 	// Le point 2 exige qu'il soit lu apres inc-compilo
 	// (car celui-ci initialise $tables_principales) mais avant la compil
@@ -122,33 +129,21 @@ function charger_squelette ($squelette) {
 
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-# La recherche est assuree par la fonction cherche_squelette
-# definie dans inc-chercher, fichier non charge s'il existe un fichier
-# mon-chercher dans $dossier_squelettes ou dans le rep principal de Spip,
-# pour charger une autre definition de cette fonction.
-
-# L'execution est precedee du chargement eventuel d'un fichier homonyme
-# de celui du squelette mais d'extension .php  pouvant contenir:
-# - des filtres
-# - des fonctions de traduction de balise (cf inc-index-squel)
+# La recherche est assuree par la fonction cherche_squelette,
+# definie dans inc-chercher, fichier non charge si elle est deja definie
+# (typiquement dans mes_fonctions.php3)
 
 function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	global $dossier_squelettes, $delais;
 
-	/*
-	$dir = "$dossier_squelettes/mon-chercher.php3";
-	if (file_exists($dir)) {
-		include($dir);
-		} else  */ { 
-		include_local("inc-chercher.php3"); # a renommer
-	 }
+	if (!function_exists('chercher_squelette'))
+		include_local("inc-chercher.php3"); # a renommer ?
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$skel = chercher_squelette($fond,
-		$id_rubrique,
-		$dossier_squelettes ? "$dossier_squelettes/" :'',
-		$lang
-	);
+			$id_rubrique,
+			$dossier_squelettes ? "$dossier_squelettes/" :'',
+			$lang);
 
 	// Charger le squelette et recuperer sa fonction principale
 	// (compilation automatique au besoin)
