@@ -451,7 +451,7 @@ if ($id_parent == "0" AND $activer_breves!="non"){
 
 //// Les sites references
 
-if (lire_meta("activer_syndic") != 'non') {
+if (lire_meta("activer_sites") == 'oui') {
 	include_ecrire("inc_sites.php3");
 	afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
 }
