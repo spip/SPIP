@@ -167,6 +167,9 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 
 
 // C
+'cache_mode_compresse' => '<NEW>Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
+'cache_mode_non_compresse' => '<NEW>Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
+'cache_modifiable_webmestre' => '<NEW>Ces param&egrave;tres sont modifiables par le webmestre du site.',
 'calendrier_synchro' => 'Je&#347;li u&#380;ywasz program&oacute;w - terminarzy kompatybinych z <b>iCal</b>, mo&#380;esz go zsynchronizowa&#263; z informacjami tego serwisu.',
 
 
@@ -306,6 +309,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'entree_titre_image' => 'Tytu&#322; obrazka:',
 'entree_titre_obligatoire' => '<B>Tytu&#322;</b> [Obowi&#261;zkowo]<BR>',
 'entree_url' => 'URL Twojej strony',
+'envoi_via_le_site' => '<NEW>Envoi via le site',
 'erreur_boucle_double' => 'BOUCLE@id@: podw&oacute;jna definicja',
 'erreur_boucle_fermant' => 'BOUCLE@id@: brakuje znacznika zamykaj&#261;cego',
 'erreur_boucle_syntaxe' => 'Sk&#322;adnia p&#281;tli (boucle) nieprawid&#322;owa',
@@ -326,7 +330,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'form_forum_message_auto' => '(to jest wiadomo&#347;&#263; automatyczna)',
 'form_forum_pass' => 'has&#322;o:',
 'form_forum_probleme_mail' => 'Problem z poczt&#261;: Tw&oacute;j identyfikator nie mo&#380;e zosta&#263; wys&#322;any.',
-'form_forum_voici1' => 'Oto Tw&oacute;j identyfikator do brania udzia&#322;u w forum
+'form_forum_voici1' => '<MODIF>Oto Tw&oacute;j identyfikator do brania udzia&#322;u w forum
 "@nom_site_spip@" (@adresse_site@/):',
 'form_forum_voici2' => 'Oto Tw&oacute;j identyfikator do zatwierdzania artyku&#322;&oacute;w dla
 strony "@nom_site_spip@" (@adresse_site@/ecrire/):',
@@ -692,6 +696,7 @@ Dzi&#281;kujemy za uczestnictwo
   zarejestrownych redaktor&oacute;w. Mo&#380;ecie tak&#380;e aktywowa&#263;
   dodatkowe forum, zarezerwowane jedynie dla admin&oacute;w.',
 'info_forum_statistiques' => 'Odwied&#378; statystyki',
+'info_forums_abo_invites' => '<NEW>Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
 'info_gauche_admin_effacer' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<B><P> Daje ona dost&#281;p do funkcji konserwacji technicznej.Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego procesu uwierzytelniaj&#261;cego, do kt&oacute;rego potrzebny jest dost&#281;p do FTP strony internetowej.',
 'info_gauche_admin_tech' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
 funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
@@ -699,7 +704,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_gauche_admin_vider' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
 funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
 , kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
-'info_gauche_auteurs' => 'Znajdziecie tutaj informacje o wszystkich autorach serwisu.
+'info_gauche_auteurs' => '<MODIF>Znajdziecie tutaj informacje o wszystkich autorach serwisu.
  Ich status jest zaznaczony przez kolor ikony (redaktor = zielony; administrator = &#380;&oacute;&#322;ty).',
 'info_gauche_auteurs_exterieurs' => 'Autorzy zewn&#281;trzni, bez dost&#281;pu do strefy publicznej s&#261; zaznaczeni ikon&#261; niebiesk&#261;&nbsp;;
   autorzy skasowani.',
@@ -809,10 +814,6 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_multi_rubriques' => 'W&#322;&#261;cz menu j&#281;zykowe w dzia&#322;ach&nbsp;?',
 'info_multi_secteurs' => ' ... tylko dla dzia&#322;&oacute;w podstawowych&nbsp;?',
 'info_multilinguisme' => 'Wieloj&#281;zyczny',
-'info_nexen_1' => 'Twoim serwisem hostingowym jest Nexen Services.',
-'info_nexen_2' => 'Zabezpieczenie katalogu <tt>ecrire/data/</tt> powinno zosta&#263; wykonane przez',
-'info_nexen_3' => 'obszar webmastera',
-'info_nexen_4' => 'Stw&oacute;rz r&#281;cznie zabezpieczenie dla tego katalogu (potrzebne s&#261; login/has&#322;o).',
 'info_nom' => 'Nazwisko',
 'info_nom_destinataire' => 'Nazwisko odbiorcy',
 'info_nom_non_utilisateurs_connectes' => 'Twoja nazwa nie pojawia si&#281; na li&#347;cie pod&#322;&#261;czonych u&#380;ytkownik&oacute;w.',
@@ -842,12 +843,16 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'ARTYKU&#321; NUMER&nbsp;:',
 'info_obligatoire_02' => '[Obowi&#261;zkowo]',
+'info_option_accepter_visiteurs' => '<NEW>Accepter l\'inscription de visiteurs du site public',
 'info_option_email' => 'Kiedy odwiedzaj&#261;cy stron&#281; zostawi&#261; na forum wiadomo&#347;&#263;
   zwi&#261;zan&#261; z artyku&#322;em, autorzy artyku&#322;u mog&#261; zosta&#263;
   poinformowani o tym przez e-mail. Czy chcesz zastosowa&#263; t&#281; opcj&#281;?',
 'info_option_faire_suivre' => 'Przes&#322;a&#263; wiadomo&#347;ci tego forum do autor&oacute;w artyku&#322;&oacute;w',
+'info_option_ne_pas_accepter_visiteurs' => '<NEW>Refuser l\'inscription des visiteurs',
 'info_option_ne_pas_faire_suivre' => 'Nie przesy&#322;a&#263; wiadomo&#347;ci tego forum',
 'info_options_avancees' => 'OPCJE ZAAWANSOWANE',
+'info_ortho_activer' => '<NEW>Activer le v&eacute;rificateur d\'orthographe',
+'info_ortho_desactiver' => '<NEW>D&eacute;sactiver le v&eacute;rificateur d\'orthographe',
 'info_ou' => 'lub...',
 'info_oui_suppression_mot_cle' => 'chc&#281; definitywni usun&#261;&#263; to s&#322;owo kluczowe.',
 'info_page_interdite' => 'Strona zabroniona',
@@ -876,6 +881,10 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_pour' => 'dla',
 'info_premier_resultat' => '[@debut_limit@ pierwsze wyniki z @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ pierwsze wyniki z @total@]',
+'info_preview_admin' => '<NEW>Seuls les administrateurs peuvent pr&eacute;visualiser le site',
+'info_preview_comite' => '<NEW>Tous les r&eacute;dacteurs peuvent pr&eacute;visualiser le site',
+'info_preview_desactive' => '<NEW>La pr&eacute;visualisation est totalement d&eacute;sactiv&eacute;e',
+'info_preview_texte' => '<NEW>Il est possible de pr&eacute;visualiser le site comme si tous les articles et les br&egrave;ves (ayant au moins le statut &laquo;&nbsp;propos&eacute;&nbsp;&raquo;) &eacute;taient publi&eacute;s. Cette possibilit&eacute; doit-elle &ecirc;tre ouverte aux administrateurs seulement, &agrave; tous les r&eacute;dacteurs, ou &agrave; personne&nbsp;?',
 'info_principaux_correspondants' => 'Wasi g&#322;&oacute;wni korespondenci',
 'info_probleme_grave' => 'b&#322;&#261;d',
 'info_procedez_par_etape' => 'etap za etapem',
@@ -893,6 +902,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_publie_2' => 'Artyku&#322; opublikowany
 -----------------',
 'info_publies' => 'Twoje artyku&#322;y opublikowane online',
+'info_question_accepter_visiteurs' => '<NEW>Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
 'info_question_gerer_statistiques' => 'Czy Twoja strona ma prowadzi&#263; statystyk&#281; odwiedzin?',
 'info_question_inscription_nouveaux_redacteurs' => 'Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
   za po&#347;rednictwem stron publicznych&nbsp;? Je&#347;li tak, odwiedz&#261;cy b&#281;d&#281; mogli si&#281; zapisa&#263;
@@ -1207,72 +1217,7 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 
 // M
-'menu_aide_articles' => 'Artyku&#322;y',
-'menu_aide_articles_auteurs' => 'Autorzy',
-'menu_aide_articles_chapeau' => 'Nag&#322;&oacute;wek',
-'menu_aide_articles_choix_rubrique' => 'Wybierz dzia&#322;',
-'menu_aide_articles_date' => 'Data',
-'menu_aide_articles_date_anterieure' => 'Data poprzedniej publikacji',
-'menu_aide_articles_descriptif_rapide' => 'Kr&oacute;tki opis',
-'menu_aide_articles_en_cours_modification' => 'Artyku&#322;y w trakcie redakcji',
-'menu_aide_articles_logos' => 'Logo artyku&#322;u',
-'menu_aide_articles_proposer' => 'Zatwierdzanie artyku&#322;u',
-'menu_aide_articles_raccourcis_typo' => 'Skr&oacute;ty typograficzne',
-'menu_aide_articles_redirection' => 'Przekierowanie artyku&#322;u',
-'menu_aide_articles_statut' => 'Status artyku&#322;u',
-'menu_aide_articles_texte' => 'Tekst',
-'menu_aide_articles_titres' => 'Tytu&#322;, nadtytu&#322;, podtytu&#322;',
-'menu_aide_breves' => 'Newsy',
-'menu_aide_breves_breves' => 'Newsy',
-'menu_aide_breves_choix' => 'Wybierz dzia&#322;',
-'menu_aide_breves_lien' => 'Hiper&#322;&#261;cze',
-'menu_aide_breves_logo' => 'Logo newsa',
-'menu_aide_breves_statut' => 'Status newsa',
-'menu_aide_images_doc' => 'Obrazki i dokumenty',
-'menu_aide_images_doc_ftp' => 'Zamieszczanie plik&oacute;w przez FTP',
-'menu_aide_images_doc_inserer' => 'Zamieszczanie obrazk&oacute;w',
-'menu_aide_images_doc_joindre' => 'Za&#322;&#261;czanie dokument&oacute;w',
 'menu_aide_installation_choix_base' => 'Wybieranie bazy danych',
-'menu_aide_installation_connexion_mysql' => 'Twoje po&#322;&#261;czenie MySQL',
-'menu_aide_installation_ftp' => 'Weryfikacja przez FTP',
-'menu_aide_installation_informations_personnelles' => 'Informacje osobiste',
-'menu_aide_installation_probleme_squelette' => 'Temat rozwa&#380;a&#324;?',
-'menu_aide_installation_reactuliser_droits' => 'Ustawienia pozwole&#324;',
-'menu_aide_installation_spip' => 'Instalacja SPIP',
-'menu_aide_interface_perso' => 'Konfiguracja osobistego interfejsu',
-'menu_aide_interface_perso_cookie' => 'Cookies korespondencji',
-'menu_aide_interface_perso_deconnecter' => 'Roz&#322;&#261;czanie',
-'menu_aide_interface_perso_simplifiee' => 'Uproszczony / kompletny interfejs',
-'menu_aide_messagerie' => 'Poczta wewn&#281;trzna',
-'menu_aide_messagerie_calendrier' => 'Kalendarz',
-'menu_aide_messagerie_configuration_perso' => 'Osobista konfiguracja poczty wewn&#281;trznej',
-'menu_aide_messagerie_pense_bete' => 'Notatki',
-'menu_aide_messagerie_utilisateurs' => 'Wiadomo&#347;ci mi&#281;dzy u&#380;ytkownikami',
-'menu_aide_mots_cles' => 'S&#322;owa kluczowe',
-'menu_aide_mots_cles_groupes' => 'Grupy s&#322;&oacute;w kluczowych',
-'menu_aide_mots_cles_mots_cles' => 'S&#322;owa kluczowe',
-'menu_aide_mots_cles_principe' => 'Zasada s&#322;&oacute;w kluczowych',
-'menu_aide_rubriques' => 'Dzia&#322;y',
-'menu_aide_rubriques_choix' => 'Wybierz dzia&#322;',
-'menu_aide_rubriques_logo' => 'Logo dzia&#322;u',
-'menu_aide_rubriques_structure' => 'Hierarchiczna struktura dzia&#322;&oacute;w',
-'menu_aide_sites' => 'Zlinkowane strony',
-'menu_aide_sites_articles_syndiques' => 'Artyku&#322;y syndykowane',
-'menu_aide_sites_proxy' => 'U&#380;ywanie proxy',
-'menu_aide_sites_referencer' => 'Dodaj link',
-'menu_aide_sites_syndiquer' => 'Serwisy syndykowane',
-'menu_aide_suivi_forum' => 'Archiwum forum',
-'menu_aide_suivi_forum_articles_postes' => 'Artyku&#322;y post-datowane',
-'menu_aide_suivi_forum_configuration' => 'Konfiguracja serwisu',
-'menu_aide_suivi_forum_contenu_articles' => 'Zawarto&#347;&#263; artyku&#322;&oacute;w',
-'menu_aide_suivi_forum_envoi_emails' => 'Automatyczne e-mailowanie',
-'menu_aide_suivi_forum_fonctionnement' => 'Funkcjonowanie Forum',
-'menu_aide_suivi_forum_messagerie_interne' => 'Poczta wewn&#281;trzna',
-'menu_aide_suivi_forum_moteur_recherche' => 'Zintegrowana wyszukiwarka',
-'menu_aide_suivi_forum_nom_adresse' => 'Nazwa i URL Twojej strony',
-'menu_aide_suivi_forum_statistiques' => 'Statystyka odwiedzin',
-'menu_aide_suivi_forum_suivi' => 'Archiwum forum',
-'menu_aide_suivi_forum_systeme_breves' => 'System news&oacute;w',
 'module_fichier_langue' => 'Plik j&#281;zykowy',
 'module_fichiers_langues' => 'Pliki j&#281;zykowe',
 'module_raccourci' => 'Skr&oacute;t',
@@ -1305,6 +1250,20 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'onglet_repartition_rubrique' => 'Roz&#322;o&#380;enie dzia&#322;&oacute;w',
 'onglet_save_restaur_base' => 'Backup/zapisywanie bazy danych',
 'onglet_vider_cache' => 'Opr&oacute;&#380;nij cache',
+'ortho_ajouter_ce_mot' => '<NEW>Ajouter ce mot au dictionnaire',
+'ortho_aucune_suggestion' => '<NEW>Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.',
+'ortho_avis_privacy' => '<NEW>Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:',
+'ortho_avis_privacy2' => '<NEW>Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).',
+'ortho_ce_mot_connu' => '<NEW>Ce mot fait partie du dictionnaire du site.',
+'ortho_dico_absent' => '<NEW>Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue',
+'ortho_mode_demploi' => '<NEW>Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.',
+'ortho_mots_a_corriger' => '<NEW>mots &agrave; corriger',
+'ortho_orthographe' => '<NEW>Orthographe',
+'ortho_supprimer_ce_mot' => '<NEW>Enlever ce mot du dictionnaire',
+'ortho_trop_de_fautes' => '<NEW>Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.',
+'ortho_trop_de_fautes2' => '<NEW>Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
+'ortho_verif_impossible' => '<NEW>Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
+'ortho_verifier' => '<NEW>V&eacute;rifier l\'orthographe',
 
 
 // P
@@ -1347,6 +1306,8 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'pass_retour_public' => 'Powr&oacute;t do strony publicznej',
 'pass_rien_a_faire_ici' => 'Nie ma tu nic do zrobienia.',
 'pass_vousinscrire' => 'Zapisa&#347; si&#281; w tym serwisie',
+'previsualisation' => '<NEW>Pr&eacute;visualisation',
+'previsualiser' => '<NEW>Pr&eacute;visualiser',
 
 
 // S
@@ -1355,9 +1316,14 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 
 
 // T
+'taille_cache_infinie' => '<NEW>Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.',
+'taille_cache_maxi' => '<NEW>SPIP essaie de limiter la taille du r&eacute;pertoire <code>CACHE/</code> de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
+'taille_cache_octets' => '<NEW>La taille du cache est actuellement de @octets@.',
+'taille_cache_vide' => '<NEW>Le cache est vide.',
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
 'taille_octets' => '@taille@&nbsp;bytes',
+'taille_repertoire_cache' => '<NEW>Taille du r&eacute;pertoire cache',
 'text_article_propose_publication' => 'Artyku&#322; zatwierdzony do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; przez forum dotycz&#261;ce tego artyku&#322;u (na dole strony).',
 'texte_acces_ldap_anonyme_1' => 'Niekt&oacute;re serwery LDAP nie akceptuj&#261; dost&#281;pu anonimowego. W tym przypadku nale&#380;y poda&#263; indentyfikator dost&#281;pu, aby m&oacute;c przeszukiwa&#263; katalog. Niemniej, w wi&#281;kszo&#347;ci przypadk&oacute;w poni&#380;sze pola powinny pozosta&#263; puste.',
 'texte_actualite_site_1' => '<MODIF>Ta strona grupuje aktualno&#347;ci strony i pozwala Ci &#347;ledzi&#263; Tw&oacute;j wk&#322;ad w stron&#281;. Znajdziezs tu artyku&#322;y, kt&oacute;re s&#261; w&#322;a&#347;nie redagowane, artyku&#322;y i nowo&#347;ci, na kt&oacute;rych temat mo&#380;esz si&#281; wypowiedzie&#263;, oraz przypomnienie Twojego wk&#322;adu w stron&#281;.<p><hr><p>Kiedy zaznajomisz si&#281; z interfejsem, mo&#380;esz klikn&#261;&#263; na &laquo; ',
@@ -1452,9 +1418,9 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
  funkcjonowanie Twojego serwisu. Radzimy nie zatwierdza&#263; tych zmian do momentu, w kt&oacute;rym nie b&#281;dziecie
  dobrze obeznani z funkcjonowaniem systemu SPIP. <P align="justify"><B>Najbardziej
  zalecamy, poproszenie o dokonanie zmian g&#322;&oacute;wnego adminsitratora serwisu.</B>',
-'texte_inc_meta_1' => 'Jako administrator strony, prosz&#281;',
-'texte_inc_meta_2' => 'zweryfikuj pisemne pozwolenia',
-'texte_inc_meta_3' => 'w katalogu ecrire/',
+'texte_inc_meta_1' => '<MODIF>Jako administrator strony, prosz&#281;',
+'texte_inc_meta_2' => '<MODIF>zweryfikuj pisemne pozwolenia',
+'texte_inc_meta_3' => '<MODIF>w katalogu ecrire/',
 'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
 'texte_informations_personnelles_2' => '(Informacja: je&#347;li jest to reinstalacja, a Tw&oacute;j dost&#281;p wci&#261;&#380; dzia&#322;a, mo&#380;esz',
 'texte_introductif_article' => '(Tekst wprowadzaj&#261;cy do artyku&#322;u.)',
@@ -1695,7 +1661,20 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem',
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
-'trad_reference' => '(artyku&#322; wzorcowy)'
+'trad_reference' => '(artyku&#322; wzorcowy)',
+
+
+// U
+'upload_fichier_zip' => '<NEW>Fichier ZIP',
+'upload_fichier_zip_texte' => '<NEW>Le fichier que vous proposez d\'installer est un fichier Zip.',
+'upload_fichier_zip_texte2' => '<NEW>Ce fichier peut &ecirc;tre&nbsp;:',
+'upload_limit' => '<NEW>Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
+'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
+'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
+
+
+// V
+'version_initiale' => '<NEW>Version initiale'
 
 );
 
