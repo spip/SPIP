@@ -21,11 +21,11 @@ if ($ajout_forum) {
 $fichier_requete = $REQUEST_URI;
 $fichier_requete = strtr($fichier_requete, '?', '&');
 $fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
-$fichier_requete = ereg_replace('^/+', '', $fichier_requete);
 
 $md_cache = md5($fichier_requete);
 
-$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_requete);
+$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
+$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
 $fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
 $fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
 if (strlen($fichier_cache) > 24)
