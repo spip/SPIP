@@ -32,11 +32,8 @@ error_reporting(E_ALL ^ E_NOTICE);
 
 $table_prefix = "spip";
 
-//
-// Dossier des squelettes
-// (a modifier pour essayer plusieurs modèles de sites)
-// + chaine vide => racine du site (standard)
-
+// Securite : dossier des squelettes a preciser dans mes_fonctions.php3,
+// sous la forme d'une ligne : < ? php $GLOBALS['dossier_squelettes'] = 'toto'; ? >
 $dossier_squelettes = '';
 
 //
