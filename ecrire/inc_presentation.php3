@@ -1935,20 +1935,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	debut_html($titre, $rubrique, $onLoad);
 
-	$ctitre = _T('titre_changer_couleur_interface');
-	echo "\n<map name='map_couleur'>";
-	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_couleur', 2, '24,0,34,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_couleur', 3, '36,0,46,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_couleur', 4, '48,0,58,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_couleur', 5, '60,0,70,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
-	echo "\n</map>";
-
+	$link = $clean_link;
 	echo "\n<map name='map_layout'>";
-	echo lien_change_var ($clean_link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo lien_change_var ($clean_link, 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var ($link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var ($link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var ($link, 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo "\n</map>";
 
 
@@ -2224,20 +2215,14 @@ else {
 
 			// Choix de la couleur: automatique en fonction de $couleurs_spip
 
-			// nettoyer le lien global
-			$clean_link->delVar('var_lang');
-			$clean_link->delVar('set_options');
-			$clean_link->delVar('set_couleur');
-			$clean_link->delVar('set_disp');
-			$clean_link->delVar('set_ecran');
-						
+			$link = $clean_link;
 			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
 			ksort($couleurs_spip);
 			while (list($key,$val) = each($couleurs_spip)) {
-					$clean_link->delVar('set_couleur');
-					$clean_link->addVar('set_couleur', $key);
+					$link->delVar('set_couleur');
+					$link->addVar('set_couleur', $key);
 					
-					echo "<a href=\"".$clean_link->getUrl()."\"><img src='img_pack/rien.gif' width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' /></a>";
+					echo "<a href=\"".$link->getUrl()."\"><img src='img_pack/rien.gif' width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' /></a>";
 
 			}
 			
