@@ -207,7 +207,6 @@ function echappe_html($letexte, $source, $no_transform=false) {
 
 	$texte_a_voir = $letexte;
 	while (ereg("<math>", $texte_a_voir)) {
-		include_ecrire ("inc_filtres_wem.php");
 		$debut =strpos($texte_a_voir, "<math>");
 		$fin = strpos($texte_a_voir,"</math>") + strlen("</math>");
 
@@ -217,6 +216,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
 
 		$traiter_math = "image";
+		$traiter_math = "mathml";
 		
 		if ($traiter_math == "image") {
 			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {
@@ -237,15 +237,22 @@ function echappe_html($letexte, $source, $no_transform=false) {
 					.substr($texte_milieu,$pos+strlen($regs[0]));
 			}
 		} else {
-
-			$texte_milieu = ereg_replace(">", "&#gt;", $texte_milieu);	
-			$texte_milieu = ereg_replace("<", "&#lt;", $texte_milieu);	
-			$fflag = 0;
-			while((ereg("$",$texte_milieu)) && ($fflag<5)) {
-				$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n\n<p class=\"spip\" style=\"text-align: center;\"><html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></p></html>\n\n'",$texte_milieu);
-				$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","'<html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></html>'",$texte_milieu);
-			
-				$fflag++;
+			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {
+				$num_echap++;
+				$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".mathml_math($regs[2])."</p>\n";
+				$pos = strpos($texte_milieu, $regs[0]);
+				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
+					.substr($texte_milieu,$pos+strlen($regs[0]));
+				
+				//$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n<p class=\"spip\" style=\"text-align: center;\">'.image_math(\"$2\").'</p>\n'",$texte_milieu);
+		//		$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","image_math(\"$2\")",$texte_milieu);
+			}
+			while((ereg("(\\$){1}([^$]+)(\\$){1}",$texte_milieu, $regs))) {
+				$num_echap++;
+				$les_echap[$num_echap] = mathml_math($regs[2]);
+				$pos = strpos($texte_milieu, $regs[0]);
+				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
+					.substr($texte_milieu,$pos+strlen($regs[0]));
 			}
 		}
 
@@ -765,36 +772,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	// Corriger HTML
 	$letexte = eregi_replace("</?p>","\n\n\n",$letexte);
-
-
-	// Traiter LaTeX
-	
-	$texte_a_voir = $letexte;
-	while (ereg("<latex>", $texte_a_voir)) {
-		include_ecrire ("inc_filtres_wem.php");
-		$debut =strpos($texte_a_voir, "<latex>");
-		$fin = strpos($texte_a_voir,"</latex>") + strlen("</latex>");
-
-		$texte_debut = substr($texte_a_voir, 0, $debut);
-		
-		$texte_milieu = substr($texte_a_voir, $debut+strlen("<latex>"), $fin-$debut-strlen("<latex></latex>"));
-		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
-
-		$texte_milieu = ereg_replace(">", "&#gt;", $texte_milieu);	
-		$texte_milieu = ereg_replace("<", "&#lt;", $texte_milieu);	
-		$fflag = 0;
-		while((ereg("$",$texte_milieu)) && ($fflag<5)) {
-			$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n\n<p class=\"spip\" style=\"text-align: center;\"><html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></p></html>\n\n'",$texte_milieu);
-			$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","'<html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></html>'",$texte_milieu);
-		
-			$fflag++;
-		}
-		
-				
-		$texte_a_voir = $texte_debut.$texte_milieu.$texte_fin;
-		
-	}
-	$letexte = $texte_a_voir;
 
 	//
 	// Notes de bas de page
