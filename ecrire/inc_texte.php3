@@ -69,14 +69,16 @@ function nettoyer_chapo($chapo){
 function spip_avant_propre ($letexte) {
 	$letexte = extraire_multi($letexte);
 
-	if (@function_exists('avant_propre'))
-		return avant_propre ($letexte);
+	$letexte = appliquer_fonction ("avant_propre", $letexte);
+//	if (@function_exists('avant_propre'))
+//		return avant_propre ($letexte);
 	return $letexte;
 }
 
 function spip_apres_propre ($letexte) {
-	if (@function_exists('apres_propre'))
-		return apres_propre ($letexte);
+	$letexte = appliquer_fonction ("avant_propre", $letexte);
+//	if (@function_exists('apres_propre'))
+//		return apres_propre ($letexte);
 
 	return $letexte;
 }
@@ -84,8 +86,9 @@ function spip_apres_propre ($letexte) {
 function spip_avant_typo ($letexte) {
 	$letexte = extraire_multi($letexte);
 
-	if (@function_exists('avant_typo'))
-		return avant_typo ($letexte);
+	$letexte = appliquer_fonction ("avant_typo", $letexte);
+//	if (@function_exists('avant_typo'))
+//		return avant_typo ($letexte);
 
 	return $letexte;
 }
@@ -100,8 +103,9 @@ function spip_apres_typo ($letexte) {
 	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
 		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
 
-	if (@function_exists('apres_typo'))
-		return apres_typo ($letexte);
+	$letexte = appliquer_fonction ("apres_typo", $letexte);
+//	if (@function_exists('apres_typo'))
+//		return apres_typo ($letexte);
 
 	return $letexte;
 }
