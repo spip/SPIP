@@ -163,7 +163,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	$raccourci_doc = "<font size='1'>\n";
 	$raccourci_doc .= "<div align='center'><b>Raccourcis</b></div>\n";
 	$raccourci_doc .= "<div align='left'>&lt;img$id_document|left&gt;</div>\n".
-		"<div align='center'>&lt;center&gt;&lt;img$id_document|center&gt;&lt;/center&gt;</div>\n".
+		"<div align='center'>&lt;img$id_document|center&gt;</div>\n".
 		"<div align='right'>&lt;img$id_document|right&gt;</div>\n";
 	$raccourci_doc .=  "<div align='center'>&lt;doc$id_document|...&gt;</div>\n";
 	$raccourci_doc .= "</font>\n";
