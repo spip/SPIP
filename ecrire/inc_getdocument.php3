@@ -380,15 +380,18 @@ function ajout_logo($source, $dest) {
 
 	if ($type) {
 		$poids = filesize($f);
-		if ($poids > _LOGO_MAX_SIZE*1024) {
+		if (_LOGO_MAX_SIZE > 0
+		AND $poids > _LOGO_MAX_SIZE*1024) {
 			@unlink ($f);
 			check_upload_error(6,
 			_T('info_logo_max_poids',
 				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
 				'actuel' => taille_en_octets($poids))));
 		}
-		if (($size[0] > _LOGO_MAX_WIDTH)
-		OR ($size[1] > _LOGO_MAX_HEIGHT)) {
+
+		if (_LOGO_MAX_WIDTH * _LOGO_MAX_HEIGHT
+		AND ($size[0] > _LOGO_MAX_WIDTH
+		OR $size[1] > _LOGO_MAX_HEIGHT)) {
 			@unlink ($f);
 			check_upload_error(6, 
 			_T('info_logo_max_taille',
