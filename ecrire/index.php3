@@ -116,7 +116,7 @@ if ($connect_statut == "0minirezo" AND $cookie_admin) {
 }
 
 if ($options == "avancees") {
-       icone_horizontale("Afficher les informations de s&eacute;curit&eacute;", "index.php3?secu=oui", "base-24.gif", "");
+       icone_horizontale("Afficher les r&eacute;glages de s&eacute;curit&eacute;", "index.php3?secu=oui", "base-24.gif", "");
 }
 
 echo fin_block();
