@@ -12,6 +12,10 @@ define("_ECRIRE_INC_FILTRES", "1");
 function corriger_entites_html($texte) {
 	return ereg_replace('&amp;(#[0-9]+;)', '&\1', $texte);
 }
+// idem mais corriger aussi les &amp;eacute; en &eacute; (pour backend)
+function corriger_toutes_entites_html($texte) {
+	return eregi_replace('&amp;(#?[a-z0-9]+;)', '&\1', $texte);
+}
 
 function entites_html($texte) {
 	return corriger_entites_html(htmlspecialchars($texte));
@@ -30,6 +34,23 @@ function filtrer_entites($texte) {
 function entites_unicode($texte) {
 	include_ecrire('inc_charsets.php3');
 	return charset2unicode($texte);
+}
+
+// Nettoyer les backend
+function texte_backend($texte) {
+	// supprimer tags et sauts de ligne
+	$texte = str_replace("\n"," ",textebrut($texte));
+
+	// " -> &quot; et tout ce genre de choses
+	$texte = corriger_toutes_entites_html(htmlspecialchars($texte));
+
+	// verifier le charset
+	$texte = entites_unicode($texte);
+
+	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers
+	$texte = str_replace("&#8217;","'",$texte);
+
+	return $texte;
 }
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
