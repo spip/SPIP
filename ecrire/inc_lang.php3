@@ -133,6 +133,7 @@ function regler_langue_navigateur() {
 function traduire_chaine($code, $args) {
 	global $spip_lang, $flag_ecrire;
 
+	// liste des modules a parcourir
 	$modules = array('spip');
 	if (strpos($code, ':')) {
 		if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
@@ -141,6 +142,7 @@ function traduire_chaine($code, $args) {
 		}
 	}
 
+	// parcourir tous les modules jusqu'a ce qu'on trouve
 	while (!$text AND (list(,$module) = each ($modules))) {
 		$var = "i18n_".$module."_".$spip_lang;
 		if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
@@ -154,12 +156,24 @@ function traduire_chaine($code, $args) {
 		$text = $GLOBALS[$var][$code];
 	}
 
-	if (!$args) return $text;
+	// langues pas finies ou en retard (eh oui, c'est moche...)
+	if ($spip_lang<>'fr') {
+		$text = ereg_replace("^<(NEW|MODIF)>","",$text);
+		if (!$text) {
+			$spip_lang_temp = $spip_lang;
+			$spip_lang = 'fr';
+			$text = traduire_chaine($code, $args);
+			$spip_lang = $spip_lang_temp;
+		}
+	}
 
+	// inserer les variables
+	if (!$args) return $text;
 	while (list($name, $value) = each($args))
 		$text = str_replace ("@$name@", $value, $text);
 	return $text;
 }
+
 
 function traduire_nom_langue($lang) {
 	$codes_langues = array(
