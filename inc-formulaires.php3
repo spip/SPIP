@@ -284,6 +284,7 @@ function forums_sur_abo() {
 	if (lire_meta("forums_publics") == "abo")
 		return true;
 	else {
+		include_ecrire("inc_connect.php3");
 		$res = spip_query ("SELECT * FROM spip_articles WHERE accepter_forum='abo'");
 		if (mysql_num_rows($res)>0)
 			return true;
@@ -291,26 +292,23 @@ function forums_sur_abo() {
 }
 
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
-function formulaire_inscription() {
+function formulaire_inscription($type) {
 	$request_uri = $GLOBALS["REQUEST_URI"];
 	global $mail_inscription;
 	global $nom_inscription;
 	
-	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
-
-	if ($inscriptions_ecrire) {
-		$ecrire = "ecrire/";
+	if ($type == 'redac') {
+		if (lire_meta("accepter_inscriptions") != "oui") return;
 		$statut = "nouveau";
 	}
-	else if (forums_sur_abo()) {
-		$ecrire = "";
+	else if ($type == 'forum') {
 		$statut = "6forum";
 	}
 	else {
 		return; // tentative de hack...?
 	}
 
-	if ($mail_inscription) {
+	if ($mail_inscription && $nom_inscription) {
 		include_ecrire("inc_connect.php3");
 		$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
 		$result = spip_query($query);
@@ -345,8 +343,14 @@ function formulaire_inscription() {
 
 			$message = "(ceci est un message automatique)\n\n";	
 			$message .= "Bonjour\n\n";
-			$message .= "Voici vos identifiants pour pouvoir participer aux forums\n";
-			$message .= "du site \"$nom_site_spip\" ($adresse_site/$ecrire) :\n\n";
+			if ($type == 'forum') {
+				$message .= "Voici vos identifiants pour pouvoir participer aux forums\n";
+				$message .= "du site \"$nom_site_spip\" ($adresse_site/) :\n\n";
+			}
+			else {
+				$message .= "Voici vos identifiants pour proposer des articles sur\n";
+				$message .= "le site \"$nom_site_spip\" ($adresse_site/ecrire/) :\n\n";
+			}
 			$message .= "- login : $login\n";
 			$message .= "- mot de passe : $pass\n\n";
 
