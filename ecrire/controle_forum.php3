@@ -67,7 +67,6 @@ debut_droite();
 
 
 function forum_parent($id_forum) {
-
 	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=\"$id_forum\" AND statut != 'redac'";
  	$result_forum = spip_query($query_forum);
 
@@ -183,12 +182,12 @@ function controle_forum($request,$adresse_retour) {
 		$forum_id_article = $row['id_article'];
 		$forum_id_breve = $row['id_breve'];
 		$forum_date_heure = $row['date_heure'];
-		$forum_titre = $row['titre'];
-		$forum_texte = $row['texte'];
-		$forum_auteur = $row['auteur'];
-		$forum_email_auteur = $row['email_auteur'];
-		$forum_nom_site = $row['nom_site'];
-		$forum_url_site = $row['url_site'];
+		$forum_titre = echapper_tags($row['titre']);
+		$forum_texte = echapper_tags($row['texte']);
+		$forum_auteur = echapper_tags($row['auteur']);
+		$forum_email_auteur = echapper_tags($row['email_auteur']);
+		$forum_nom_site = echapper_tags($row['nom_site']);
+		$forum_url_site = echapper_tags($row['url_site']);
 		$forum_stat = $row['statut'];
 		$forum_ip = $row['ip'];
 		$forum_id_auteur = $row["id_auteur"];

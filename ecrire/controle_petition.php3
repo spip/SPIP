@@ -56,11 +56,11 @@ function controle_forum($request,$adresse_retour) {
 		$id_signature = $row['id_signature'];
 		$id_article = $row['id_article'];
 		$date_time = $row['date_time'];
-		$nom_email= typo($row['nom_email']);
-		$ad_email = $row['ad_email'];
-		$nom_site = typo($row['nom_site']);
-		$url_site = $row['url_site'];
-		$message = propre($row['message']);
+		$nom_email= typo(echapper_tags($row['nom_email']));
+		$ad_email = echapper_tags($row['ad_email']);
+		$nom_site = typo(echapper_tags($row['nom_site']));
+		$url_site = echapper_tags($row['url_site']);
+		$message = propre(echapper_tags($row['message']));
 		$statut = $row['statut'];
 		
 		
