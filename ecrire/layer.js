@@ -3,7 +3,7 @@ var vis = new Array();
 
 	var memo_obj = new Array();
 
-	function findObj(n) { //v4.0
+	function findObj(n) { 
 		var p,i,x;
 
 		// Voir si on n'a pas deja memoriser cet element		

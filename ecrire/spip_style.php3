@@ -129,6 +129,7 @@ td {
 	color: black;
 	text-align: center;
 	font-weight: bold;
+	height: 22px;
 }
 
 .bandeau_couleur_sous {

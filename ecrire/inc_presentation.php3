@@ -548,7 +548,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if ($options == "avancees")  $ajout_col = 1;
 	else $ajout_col = 0;
 
-	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 + $ajout_col : 2 + $ajout_col);
+	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
@@ -608,30 +608,50 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			switch ($statut) {
 			case 'publie':
+				$clip = 2;
 				$puce = 'verte';
 				$title = _T('info_article_publie');
 				break;
 			case 'prepa':
+				$clip = 0;
 				$puce = 'blanche';
 				$title = _T('info_article_redaction');
 				break;
 			case 'prop':
+				$clip = 1;
 				$puce = 'orange';
 				$title = _T('info_article_propose');
 				break;
 			case 'refuse':
+				$clip = 3;
 				$puce = 'rouge';
 				$title = _T('info_article_refuse');
 				break;
 			case 'poubelle':
+				$clip = 4;
 				$puce = 'poubelle';
 				$title = _T('info_article_supprime');
 				break;
 			}
 			$puce = "puce-$puce.gif";
 			
-			$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 14px;'>";
-
+			if ($connect_statut == '0minirezo') {
+			
+				$inser_puce = "<div id='statut$id_article' style='position: relative; height: 11px;'>"
+					. "<div style='position: absolute;' onmouseover=\"montrer('statutdecal$id_article');\"><img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'></div>"
+					. "<div id='statutdecal$id_article' onmouseout=\"cacher('statutdecal$id_article');\" style='position: absolute; visibility: hidden; margin-$spip_lang_left: -".((11*$clip)+1)."px; margin-top: -1px; top: 0px; border: 1px solid #666666; width: 55px; background-color: #cccccc; z-index: 10; -moz-border-radius: 2px;'>"
+					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 0, 'prepa');\"><img src='img_pack/puce-blanche.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_en_cours_redaction')."\"></a>"
+					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 1, 'prop');\"><img src='img_pack/puce-orange.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_propose_evaluation')."\"></a>"
+					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 2, 'publie');\"><img src='img_pack/puce-verte.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_publie')."\"></a>"
+					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 3, 'refuse');\"><img src='img_pack/puce-rouge.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_refuse')."\"></a>"
+					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 4, 'poubelle');\"><img src='img_pack/puce-poubelle.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_poubelle')."\"></a>"
+					. "</div></div>";
+			} else {
+				$inser_puce = "<img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'>";
+			}
+			$vals[] = $inser_puce;
+	
+			$s = "<div>";
 				
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
@@ -690,19 +710,19 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 		if ($options == "avancees") { // Afficher le numero (JMB)
 			if ($afficher_auteurs) {
-				$largeurs = array('', 80, 100, 30);
-				$styles = array('arial2', 'arial1', 'arial1', 'arial1');
+				$largeurs = array(11, '', 80, 100, 35);
+				$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 			} else {
-				$largeurs = array('', 100, 30);
-				$styles = array('arial2', 'arial1', 'arial1');
+				$largeurs = array(11, '', 100, 35);
+				$styles = array('', 'arial2', 'arial1', 'arial1');
 			}
 		} else {
 			if ($afficher_auteurs) {
-				$largeurs = array('', 100, 100);
-				$styles = array('arial2', 'arial1', 'arial1');
+				$largeurs = array(11, '', 100, 100);
+				$styles = array('', 'arial2', 'arial1', 'arial1');
 			} else {
-				$largeurs = array('', 100);
-				$styles = array('arial2', 'arial1');
+				$largeurs = array(11, '', 100);
+				$styles = array('', 'arial2', 'arial1');
 			}
 		}
 		afficher_liste($largeurs, $table, $styles);
@@ -1500,6 +1520,24 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		
 	}	
 	
+	
+	function selec_statut_art(id_article, clip, statut) {
+		decal = -1 * ((clip*11) + 1);
+		changestyle ('statutdecal'+id_article, 'marginLeft', decal+'px');
+		cacher ('statutdecal'+id_article);
+
+		if (clip == 0) puce = 'blanche';
+		else if (clip == 1) puce = 'orange';
+		else if (clip == 2) puce = 'verte';
+		else if (clip == 3) puce = 'rouge';
+		else if (clip == 4) puce = 'poubelle';
+
+		findObj('imgstatut'+id_article).src= 'img_pack/puce-'+puce +'.gif';
+		
+		frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_article&id_article='+id_article+'&statut='+statut;
+	
+	}iframe_action
+	
 	function changeclass(objet, myClass)
 	{
 			objet.className = myClass;
@@ -2095,6 +2133,9 @@ if ($spip_display == "4") {
 else {
 	// Icones principales
 	
+	echo "<iframe id='iframe_action' name='iframe_action' width='1' height='1' style='position: absolute; visibility: hidden;'></iframe>";
+	
+	
 	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
 	
 	echo "<div id='haut-page'>";
@@ -2301,7 +2342,7 @@ else {
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\"><img src='img_pack/tout-site.png' border='0' alt='' /></a>";
+		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\"><img src='img_pack/tout-site.png' width='26' height='20' border='0' alt='' /></a>";
 
 		$id_rubrique = $GLOBALS['id_rubrique'];
 		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\"><img src='img_pack/naviguer-site.png' alt='' width='26' height='20' border='0'></a>";
