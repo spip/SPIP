@@ -271,7 +271,6 @@ function parser($texte, $id_parent, &$boucles) {
 			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
 				$id_boucle . 
 				_L('&nbsp;: balise B en aval'));
-			exit;
 		}
 
 		//
@@ -284,7 +283,6 @@ function parser($texte, $id_parent, &$boucles) {
 			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
 				_T('erreur_boucle_fermant',
 				array('id'=>$id_boucle)));
-			exit;
 		}
 		$texte = substr($milieu, $p + strlen($s));
 		$milieu = substr($milieu, 0, $p);

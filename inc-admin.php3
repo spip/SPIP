@@ -17,31 +17,7 @@ function bouton_admin($titre, $lien) {
 }
 
 
-function boutons_admin_debug($forcer_debug = false) {
-	global $debug_messages;
-
-	if (($forcer_debug OR $GLOBALS['bouton_admin_debug']
-	OR $GLOBALS['var_afficher_debug'])
-	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
-		include_ecrire('inc_filtres.php3');
-
-		$link = $GLOBALS['clean_link'];
-		$link->addvar('var_afficher_debug', 'page');
-		$link->addvar('recalcul', 'oui');
-		$ret .= bouton_admin(_L('Debug cache'), $link->getUrl());
-
-		$link = $GLOBALS['clean_link'];
-		$link->addvar('var_afficher_debug', 'skel');
-		$link->addvar('recalcul', 'oui');
-		$ret .= bouton_admin(_L('Debug skel'), $link->getUrl());
-	}
-
-	$ret .= $debug_messages;
-
-	return $ret;
-}
-
-function afficher_boutons_admin($pop, $forcer_debug = false) {
+function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval() plante dans inc-public */) {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	global $var_preview;
 	include_ecrire("inc_filtres.php3");
@@ -87,7 +63,9 @@ function afficher_boutons_admin($pop, $forcer_debug = false) {
 		// Bouton Recalculer
 		$link = $GLOBALS['clean_link'];
 		$link->addVar('recalcul', 'oui');
-		$link->delVar('var_afficher_debug');
+		$link->delVar('var_debug');
+		$link->delVar('debug_objet');
+		$link->delVar('debug_affiche');
 		$lien = $link->getUrl();
 		$ret .= bouton_admin(_T('admin_recalculer').$pop, $lien);
 
@@ -104,8 +82,21 @@ function afficher_boutons_admin($pop, $forcer_debug = false) {
 			}
 		}
 
-		// Boutons debug
-		$ret .= boutons_admin_debug($forcer_debug);
+		// Bouton de debug
+		if (($forcer_debug
+			OR $GLOBALS['bouton_admin_debug']
+			OR (!$GLOBALS['var_debug']
+				AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug'] ==
+				$GLOBALS['code_activation_debug'])
+		) AND $GLOBALS['code_activation_debug'] <> '') {
+			$link = $GLOBALS['clean_link'];
+			$link->addvar('var_debug', $GLOBALS['code_activation_debug']);
+			$ret .= bouton_admin(_L('Debug'), $link->getUrl());
+		}
+
+		// Messages de debug
+		global $debug_messages;
+		$ret .= $debug_messages;
 	}
 
 	$ret .= "</ul></div></div></div>";
@@ -131,27 +122,6 @@ function calcul_admin_page($cached, $texte) {
 	return $texte;
 }
 
-
-function page_debug($type,$texte,$fichier) {
-	@header('Content-Type: text/html; charset='.lire_meta('charset'));
-	echo "<html><head><title>Debug $type : $fichier</title>
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-	<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
-	if (@file_exists('spip_admin_perso.css')) echo "\t<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
-	echo "</head><body>\n";
-	echo "<p style='whitespace: nowrap;'><br /><code>$fichier</code><hr />\n";
-
-	$tableau = explode("\n", $texte);
-	$format = "%0".strlen(count($tableau))."d";
-	$texte = '';
-	foreach ($tableau as $ligne)
-		$texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
-	highlight_string($texte);
-
-	echo "</p>";
-	echo afficher_boutons_admin('', true);
-	echo "</body></html>\n";
-}
 
 //
 // Leve un drapeau si le squelette donne une page generant de graves erreurs php
@@ -278,9 +248,9 @@ function erreur_squelette($message, $fautif, $lieu) {
 
 	// Pour un visiteur normal, ne rien afficher, si SPIP peut s'en sortir
 	// tant mieux, sinon l'erreur se verra de toutes facons :-(
-	// ajouter &afficher_erreurs=1 pour discuter sur spip@rezo.net
+	// ajouter &var_debug=oui pour discuter sur spip@rezo.net
 	if ($HTTP_COOKIE_VARS['spip_admin'] OR $auteur_session
-	OR $GLOBALS['afficher_erreurs']) {
+	OR $GLOBALS['var_debug']) {
 		$message = "<h2>"._T('info_erreur_squelette')."</h2><p>$message</p>";
 		if ($fautif)
 			$message .= ' (<FONT color="#FF000">'
@@ -293,6 +263,132 @@ function erreur_squelette($message, $fautif, $lieu) {
 
 	// Eviter les boucles infernales
 	if (++$runs > 4) die ($debug_messages);
+}
+
+//
+// Le debugueur v2
+//
+
+// appelee a chaque sortie de boucle (inc-compilo)
+function boucle_debug_resultat ($nom, $resultat) {
+	global $debug_objets;
+
+	// ne pas memoriser plus de 3 tours d'une meme boucle
+	if (count($debug_objets['resultats'][$nom]) < 3)
+		$debug_objets['resultats'][$nom][] = $resultat;
+}
+
+// appelee a chaque compilation de boucle (inc-compilo)
+function boucle_debug_compile ($id, $nom, $pretty, $sourcefile, $code) {
+	global $debug_objets;
+
+	$debug_objets['boucles'][$nom.$id] = $code;
+	$debug_objets['pretty'][$nom.$id] = $pretty;
+}
+
+// appelee a chaque compilation de squelette (inc-compilo)
+function squelette_debug_compile($nom, $sourcefile, $squelette) {
+	global $debug_objets;
+
+	$debug_objets['squelettes'][$nom] = $squelette;
+	$debug_objets['sourcefile'][$nom] = $sourcefile;
+}
+
+// l'environnement graphique du debuggueur 
+function debug_page($no_exit = false) {
+	global $flag_ob;
+	global $debug_objets, $debug_objet, $debug_affiche;
+
+	if ($flag_ob)
+		ob_end_clean();
+
+
+	@header("Content-Type: text/html; charset=".lire_meta('charset'));
+	echo afficher_boutons_admin();
+	echo "<h3>Structure de la page</h3>\n";
+
+	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
+		echo "<li><b>".$sourcefile."</b>";
+		$link = $GLOBALS['clean_link'];
+		$link->addvar('debug_objet', $nom_skel);
+		$link->delvar('debug_affiche');
+		echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
+		echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
+		echo "</li>\n<ul>\n";
+
+		if (is_array($debug_objets['pretty']))
+		foreach ($debug_objets['pretty'] as $nom => $pretty)
+			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
+				echo "<li>";
+				echo "&lt;".$pretty."&gt;";
+				$link = $GLOBALS['clean_link'];
+				$link->addvar('debug_objet', $nom);
+				$link->delvar('debug_affiche');
+				echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
+				echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
+				echo "</li>\n";
+			}
+		echo "</ul>\n";
+	}
+
+	if ($debug_objet AND $debug_affiche == 'resultat' AND ($res = $debug_objets['resultats'][$debug_objet])) {
+		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
+		echo "les premiers appels &agrave; cette boucle ont donn&eacute; les r&eacute;sultats ci-dessous:<br />";
+		foreach ($res as $view) {
+			echo "<hr>".interdire_scripts($view);
+		}
+	} else if ($debug_objet AND $debug_affiche == 'code' AND $res = $debug_objets['boucles'][$debug_objet]) {
+		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
+		highlight_string("<"."?php\n".$res."\n?".">");
+	}
+
+
+	if (!$no_exit) exit;
+}
+
+function debug_dumpfile ($texte) {
+	global $flag_ob;
+
+	# un peu violent : si on est un fichier inclus,
+	# il faut d'abord vider le ob_
+	if ($flag_ob)
+		ob_end_clean();
+
+	debug_page('no exit');
+
+	$tableau = explode("\n", $texte);
+	$format = "%0".strlen(count($tableau))."d";
+	$texte = '';
+	foreach ($tableau as $ligne)
+		$texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
+	highlight_string($texte);
+
+	exit;
+}
+
+
+function verifie_cookie_debug() {
+	global $code_activation_debug;
+
+	if ($GLOBALS['HTTP_COOKIE_VARS']['spip_debug']
+	!= $code_activation_debug) {
+		spip_setcookie('spip_debug', $code_activation_debug, time()+3600);
+		include_ecrire('inc_presentation.php3');
+		install_debut_html(_L('Bienvenue dans le debuggueur de SPIP'));
+		echo "<P>"._L("Cet outil vous permet d'analyser les pages produites par
+		SPIP. Il est parfois de lecture difficile, mais il offre en contrepartie
+		une grande capacit&eacute; de recherche des erreurs, et une meilleure
+		compr&eacute;hension du fonctionnement des boucles et balises du
+		syst&egrave;me.</p>");
+		echo "<P>"._L("Pour entrer, il vous suffit de recharger cette page,
+		apr&egrave;s avoir accept&eacute; un cookie (ce dernier permet
+		d'&eacute;carter les moteurs de recherche, et installe un bouton
+		d'administration suppl&eacute;mentaire &laquo;debug&raquo; sur
+		votre &eacute;cran, pendant une heure).</p>");
+		install_fin_html();
+		exit;
+	} else
+		return true;
 }
 
 ?>

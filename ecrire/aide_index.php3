@@ -21,7 +21,7 @@ echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.
 echo "<html>";
 echo "<head>";
 echo "<title dir=\"".($spip_lang_rtl ? 'rtl' : 'ltr')."\">"._T('info_aide_en_ligne')."</title>";
-echo "</head><body>";
+echo "</head>\n";
 
 $frame_menu = "<frame src=\"aide_gauche.php3?aide=$aide&les_rub=$les_rub&var_lang=$spip_lang#$ancre\" name=\"gauche\" scrolling=\"auto\" noresize>\n";
 $frame_body = "<frame src=\"aide_droite.php3?aide=$aide&var_lang=$spip_lang\" name=\"droite\" scrolling=\"auto\" noresize>\n";
@@ -36,7 +36,7 @@ else {
 }
 echo '</frameset>';
 
-echo "</body></html>";
+echo "\n</html>";
 
 ?>
 

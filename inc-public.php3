@@ -39,14 +39,9 @@ else {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
-	// Faut-il preparer les boutons d'admin ?
-	if ($affiche_boutons_admin = (!$flag_preserver
-	AND $HTTP_COOKIE_VARS['spip_admin'])) {
-		include_local('inc-admin.php3');
-	}
 
 	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non')) {
+	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($HTTP_POST_VARS)) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
@@ -54,7 +49,6 @@ else {
 		include_ecrire('inc_lang.php3');
 		lang_select($HTTP_GET_VARS['lang']);
 	}
-
 
 	// Ajout_forum (pour les forums) et $val_confirm signalent des modifications
 	// a faire avant d'afficher la page
@@ -74,23 +68,40 @@ else {
 		reponse_confirmation($id_article);
 	}
 
+
+	// demande de debug ?
+	if ($var_debug == $code_activation_debug AND $code_activation_debug <> '') {
+		// verifier que ce n'est pas un robot, en posant un cookie,
+		// car ces calculs coutent trop cher pour pouvoir etre "aspires".
+		// (pour la securite, cf. $code_activation_debug dans inc_version)
+		// ce cookie ne dure qu'une heure, car il sert aussi a afficher
+		// le bouton 'debug' sur toutes les pages
+		include_local('inc-admin.php3');
+		if ($var_debug = verifie_cookie_debug()) {
+			$recalcul = 'oui';
+			$var_debug = true;
+			spip_log('debug !');
+		}
+	} else
+		$var_debug = false;
+
+	// Faut-il preparer les boutons d'admin ?
+	if ($affiche_boutons_admin = (!$flag_preserver
+	AND $HTTP_COOKIE_VARS['spip_admin'])) {
+		include_local('inc-admin.php3');
+	}
+
 	include_local ("inc-public-global.php3");
 
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
+	// Demarrer un buffer pour le content-length (ou le debug)
+	if ($flag_ob)
+		ob_start();
+
 	// Afficher la page ; le cas PHP est assez rigolo avec le traitement
 	// d'erreurs
 	if ($page['process_ins'] == 'php') {
-
-		// Envoyer le debugguer ?
-		afficher_page_si_demande_admin ('page', $page['texte'],
-		_L("Fond : ").$page['squelette']." ; ".($page['cache'] ?
-		"fichier produit : ".$page['cache'] : "pas de fichier produit
-		(\$delais=0)"));
-
-		// Demarrer un buffer pour le content-length (ou le debug)
-		if ($flag_ob)
-			ob_start();
 
 		// Ici on va ruser pour intercepter les erreurs (meme les FATAL)
 		// dans le eval : on envoie le bouton debug, et on le supprime
@@ -98,7 +109,7 @@ else {
 		// on est propre, et sinon on a le bouton
 		if ($affiche_boutons_admin) {
 
-			// recuperer les parse errors etc.
+			// recuperer les parse errors etc., type "FATAL" (cf. infra)
 			if ($auteur_session['statut'] == '0minirezo') {
 				$tableau_des_erreurs = array();
 				$page_principale = $page;
@@ -107,7 +118,7 @@ else {
 			}
 
 			if ($flag_ob)
-				echo afficher_boutons_admin('', true).'<!-- @@START@@ -->';
+				echo afficher_boutons_admin('', 'debug').'<!-- @@START@@ -->';
 		}
 
 		//
@@ -137,6 +148,10 @@ else {
 
 	} else
 		echo $page['texte']; // page tout 'html'
+
+	// Passer la main au debuggueur le cas echeant
+	if ($var_debug)
+		debug_page();
 
 	//
 	// Et l'envoyer si on est bufferise (ce qu'il faut souhaiter)

@@ -351,7 +351,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// Conclusion et retour
 	//
 	$conclusion = "\n	@spip_free_result(\$result);";
-	$conclusion .= "\n	return \$t0;";
 
 	return $texte . $init . $corps . $conclusion;
 }
@@ -633,11 +632,27 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			$pretty = ereg_replace("[\r\n]", " ", $pretty);
 
 			// Puis envoyer son code
-			$code .= "\n//\n// <$pretty>\n//\n"
+			$codeboucle = "\n//\n// <$pretty>\n//\n"
 			."function $nom" . ereg_replace("-","_",$id) .
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
-			$boucle->return .
-			"\n}\n\n";
+			$boucle->return;
+
+			$fincode = "\n	return \$t0;"
+			."\n}\n\n";
+
+			## inserer les elements pour le debuggueur, a deux niveaux :
+			## 1) apres le calcul d'une boucle compilee, envoyer le code
+			##    compile vers boucle_debug_compile()
+			## 2) le resultat de la boucle, lui, sera plus tard envoye vers
+			##    boucle_debug_resultat()
+			if ($GLOBALS['var_debug']) {
+				boucle_debug_compile ($id, $nom, $pretty,
+					$sourcefile, $codeboucle.$fincode);
+				$codedebug = "\n	boucle_debug_resultat
+					('$nom$id', \$t0);";
+			}
+
+			$code .= $codeboucle.$codedebug.$fincode;
 		}
 	}
 
@@ -649,7 +664,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	else
 		$aff_boucles = "pas de boucle";
 
-	return "
+	$squelette_compile = "
 /*
  * Squelette : $sourcefile
  * Date :      ".http_gmoddate(@filemtime($sourcefile))." GMT
@@ -674,6 +689,10 @@ $corps
 }
 ";
 
+	if ($GLOBALS['var_debug'])
+		squelette_debug_compile($nom, $sourcefile, $squelette_compile);
+
+	return $squelette_compile;
 }
 
 ?>
