@@ -294,6 +294,7 @@ function init_codes_langues() {
 	'ru' => "&#1088;&#1091;&#1089;&#1089;&#1082;&#1080;&#1081;",
 	'rw' => "Kinyarwanda",
 	'sa' => "&#2360;&#2306;&#2360;&#2381;&#2325;&#2371;&#2340;",
+	'sc' => "sarde",
 	'sd' => "Sindhi",
 	'sg' => "Sangho",
 	'sh' => "srpskohrvastski",
