@@ -143,7 +143,7 @@ echo _T('ical_titre_js')."</FONT></B></TD></TR>";
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='serif'>";
 echo _T('ical_texte_js').'<p>';
 
-echo propre('<cadre><script src="'.$adresse_site.'/distrib.php3"></script></cadre>');
+echo propre('<cadre><script type="text/javascript" src="'.$adresse_site.'/distrib.php3"></script></cadre>');
 
 echo "</TD></TR>";
 echo "</TABLE>";
