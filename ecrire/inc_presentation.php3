@@ -471,7 +471,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
 	global $options, $spip_display;
-	global $spip_lang_left;
+	global $spip_lang_left, $spip_lang_right;
 
 
 	$activer_messagerie = "oui";
@@ -616,10 +616,31 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$puce = "puce-$puce.gif";
 				
 				$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 14px;'>";
-	
+
+					
 				if (acces_restreint_rubrique($id_rubrique))
 					$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
-				$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">".typo($titre);
+				$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
+				
+				if ($spip_display != 1 AND lire_meta('image_process') != "non") {
+					$logo = get_image("arton$id_article");
+					if ($logo) {
+						$fichier = $logo[0];
+						$taille = $logo[1];
+						$taille_x = $taille[0];
+						$taille_y = $taille[1];
+						$taille = image_ratio($taille_x, $taille_y, 26, 18);
+						$w = $taille[0];
+						$h = $taille[1];
+						$fid = $logo[2];
+						$hash = calculer_action_auteur ("reduire $w $h");
+	
+						$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>";
+						
+					}
+				}
+				
+				$s .= typo($titre);
 				if ($afficher_langue AND $lang != $langue_defaut)
 					$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
 				if ($petition) $s .= " <font size=1 color='red'>"._T('lien_petitions')."</font>";
