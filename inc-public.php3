@@ -1,9 +1,7 @@
 <?php
 
-
 // Distinguer une inclusion d'un appel initial
-
-if (defined("_INC_PUBLIC_GLOBAL")) {
+if (defined("_INC_PUBLIC")) {
 	$page = inclure_page($fond, $delais, $contexte_inclus);
 	if ($page['process_ins'] == 'html')
 		echo $page['texte'];
@@ -18,15 +16,65 @@ if (defined("_INC_PUBLIC_GLOBAL")) {
 	include ("ecrire/inc_version.php3");
 	include_local('inc-public-global.php3');
 
-	list($http_status, $page) = calcule_header_et_page($fond, $delai);
-	echo $page;
+	// Calculer la page sans evaluer le php qu'elle contient
+	$page = calcule_header_et_page ($fond, $delais);
 
-	// Si le 404 a ete renvoye (page vide), donner un message approprie
-	if ($http_status == 404) {
-		$contexte_inclus = array('erreur_aucun' => message_erreur_404());
-		include(find_in_path('404.php3'));
+	// Execution de la page calculee
+
+	// 1. Cas d'une page contenant uniquement du HTML :
+	if ($page['process_ins'] == 'html') {
+		$page = $page['texte'];
 	}
 
+	// 2. Cas d'une page contenant du PHP :
+	// Attention cette partie eval() doit imperativement
+	// etre declenchee dans l'espace des globales (donc pas
+	// dans une fonction).
+	else {
+	
+		// Une page "normale" va s'afficher ici
+		if (!($flag_ob AND ($var_mode == 'debug'
+		OR $var_recherche OR $affiche_boutons_admin))) {
+			eval('?' . '>' . $page['texte']);
+			$page = '';
+		}
+
+		// Certains cas demandent un ob_start() de plus
+		else {
+			ob_start(); 
+			$res = eval('?' . '>' . $page['texte']);
+			$page = ob_get_contents(); 
+			ob_end_clean();
+
+			// en cas d'erreur lors du eval,
+			// la memoriser dans le tableau des erreurs
+			// On ne revient pas ici si le nb d'erreurs > 4
+			if ($res === false AND $affiche_boutons_admin
+			AND $auteur_session['statut'] == '0minirezo') {
+				include_ecrire('inc_debug_sql.php3');
+				erreur_squelette(_T('zbug_erreur_execution_page'));
+			}
+		}
+	}
+
+	// Passer la main au debuggueur le cas echeant 
+	if ($var_mode == 'debug') {
+		include_ecrire("inc_debug_sql.php3");
+		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
+	} 
+	if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
+	  $page = affiche_erreurs_page($tableau_des_erreurs) . $page;
+
+	// Traiter var_recherche pour surligner les mots
+	if ($var_recherche) {
+		include_ecrire("inc_surligne.php3");
+		$page = surligner_mots($page, $var_recherche);
+	}
+
+	// Affichage final s'il en reste
+	echo $page;
+
+	// Taches de fond ?
 	terminer_public_global();
 }
 
