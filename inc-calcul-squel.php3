@@ -1825,8 +1825,11 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		"$query<br>\n<font color=\'red\'><b>&gt; ".
 		mysql_error()."</b></font><br>\n".
 		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt>\n";
-		if ($GLOBALS[\'spip_admin\'])
-			$retour .= aide("erreur_mysql");
+		$retour .= "<" ."?php
+			if (\$GLOBALS[\'spip_admin\']) {
+			include_ecrire(\'inc_presentation.php3\');
+			echo aide(\'erreur_mysql\');
+		} ?".">";
 		$retour .= "<br><br>\n"; // debugger les squelettes
 	}
 	$total_boucle = @mysql_num_rows($result);
