@@ -12,15 +12,15 @@ define("_ECRIRE_INC_LANG", "1");
 function charger_langue($lang, $module='spip') {
 	global $dir_ecrire;
 
-	$fichier_lang = "lang/".$module."_".$lang.".php3";
+	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
 	if (file_exists($dir_ecrire.$fichier_lang)) {
 		include_ecrire ($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// le francais, qui *par definition* doit exister, et on copie le
 		// tableau 'fr' dans la var liee a la langue
-		include_ecrire ("lang/${module}_fr.php3");
-		$GLOBALS["i18n_".$module.'_'.$lang] = $GLOBALS["i18n_".$module.'_'.'fr'];
+		include_ecrire ('lang/'.$module.'_fr.php3');
+		$GLOBALS['i18n_'.$module.'_'.$lang] = $GLOBALS['i18n_'.$module.'_fr'];
 	}
 
 	// surcharge perso
@@ -308,13 +308,13 @@ function utiliser_langue_visiteur() {
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $flag_ecrire, $langue_site;
+	global $all_langs, $dir_ecrire, $langue_site;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
 
-	if (!$all_langs || !$langue_site || $flag_ecrire) {
-		$d = opendir($flag_ecrire ? "lang" : "ecrire/lang");
+	if (!$all_langs || !$langue_site || !$dir_ecrire) {
+		$d = opendir($dir_ecrire.'lang');
 		while ($f = readdir($d)) {
 			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
 				$toutes_langs[] = $regs[1];
