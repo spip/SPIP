@@ -13,7 +13,7 @@ if (LOCK_UN!=3) {
 	define ('LOCK_NB', 4);
 }
 
-function test_flock ($fichier, $fp=false) {
+function test_flock ($fichier, $ecriture = false) {
 	static $flock = array();
 	global $flag_flock;
 	if (!$flag_flock)
@@ -35,8 +35,12 @@ function test_flock ($fichier, $fp=false) {
 		AND (filemtime("$dir/.flock_naze") > time() - 3600))
 			$flock[$dir] = false;
 
-		else {
-			// pas d'infos de flock, on va tester
+		// pas d'infos de flock, on va tester
+		// MAIS attention on ne veut effectivement
+		// tester que les repertoires dans lesquels on ecrit
+		// Si on ne fait qu'y lire, pas necessaire (et pas
+		// forcement autorise)
+		else if ($ecrire) {
 			$fichiertest = $dir.'/'
 			.substr(uniqid(@getmypid(), true),-6).".tmp";
 			if ($fp = @fopen($fichiertest, 'w')) {
@@ -45,6 +49,7 @@ function test_flock ($fichier, $fp=false) {
 					$flock[$dir] = true;
 					@touch("$dir/.flock_ok");
 					@unlink("$dir/.flock_naze");
+					@fclose($fp);
 					spip_log("test $dir: flock ok");
 				} else {
 					$flock[$dir] = false;
@@ -58,7 +63,8 @@ function test_flock ($fichier, $fp=false) {
 				@touch("$dir/.flock_naze");
 				@unlink("$dir/.flock_ok");
 			}
-		}
+		} else
+			$flock[$dir] = false;
 	}
 
 	return $flock[$dir];
@@ -66,8 +72,8 @@ function test_flock ($fichier, $fp=false) {
 
 // Si flock ne marche pas dans ce repertoire ou chez cet hebergeur,
 // on renvoie OK pour ne pas bloquer
-function spip_flock($filehandle, $mode, $fichier) {
-	if (!test_flock($fichier))
+function spip_flock($filehandle, $mode, $fichier, $ecriture = false) {
+	if (!test_flock($fichier, $ecriture))
 		return true;
 
 	$r = flock($filehandle, $mode);
@@ -151,7 +157,7 @@ function ecrire_fichier ($fichier, $contenu) {
 
 	// verrouiller le fichier destination
 	if ($fp = @fopen($fichier, 'a'))
-		while (!spip_flock($fp, LOCK_EX, $fichier));
+		while (!spip_flock($fp, LOCK_EX, $fichier, 'ecriture'));
 	else
 		return false;
 
@@ -183,7 +189,7 @@ function supprimer_fichier($fichier) {
 		return;
 
 	// verrouiller le fichier destination
-	if ($flock = test_flock($fichier)) {
+	if ($flock = test_flock($fichier, 'ecriture')) {
 		if ($fp = @fopen($fichier, 'a'))
 			while (!spip_flock($fp, LOCK_EX, $fichier));
 		else
