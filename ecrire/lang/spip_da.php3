@@ -665,6 +665,9 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_multi_cet_article' => 'Denne artikel er p&aring;:',
 'info_multi_cette_rubrique' => 'Dette afsnit er p&aring;:',
 'info_multi_herit' => '<MODIF> langue du parent',
+'info_multi_langues_choisies' => 'V&aelig;lg de sprog der skal v&aelig;re til r&aring;dighed for redakt&oslash;rer p&aring; webstedet.
+  Sprog der allerede er i brug p&aring; webstedet (de f&oslash;rstn&aelig;vnte) kan ikke frav&aelig;lges.
+  Bem&aelig;rk&nbsp;: kun de sprog som er fremh&aelig;vet med fede typer kan fuldt ud h&aring;ndteres af  systemet.',
 'info_multi_rubriques' => 'Muligg&oslash;re sprogvalg til afsnit?',
 'info_multi_secteurs' => 'Kun for afsnit placeret i roden&nbsp;?',
 'info_multilinguisme' => 'Flersprogethed',
@@ -1315,7 +1318,7 @@ og igen f&aring; adgang til webstedet.',
 		eller benytte disse egenskaber til at tilpasse artiklerne i dine skabeloner.',
 'texte_mots_cles_dans_forum' => 'Vil du tillade brug af n&oslash;gleord, som brugerne kan v&aelig;lge, i de offentlige forummer p&aring; webstedet? (Advarsel: denne facilitet er temmelig vanskelig at bruge rigtigt.)',
 'texte_multilinguisme' => 'Hvis du &oslash;nsker at administrere artikler p&aring; flere sprog med den deraf f&oslash;lgende st&oslash;rre kompleksitet, kan du forsyne afsnit og/eller artikler med en sprogvalgsmenu. Denne funktion er afh&aelig;ngig af strukturen p&aring; websiden.',
-'texte_multilinguisme_trad' => 'Du kan ogs&aring; v&aelig;lge at have link mellem de forskellige versioner af en artikel.',
+'texte_multilinguisme_trad' => '<MODIF> Du kan ogs&aring; v&aelig;lge at have link mellem de forskellige versioner af en artikel.',
 'texte_non_compresse' => '<i>ukomprimeret</i> (din server underst&oslash;tter ikke denne funktion)',
 'texte_non_fonction_referencement' => 'Du kan v&aelig;lge ikke at bruge denne automatiske funktion, og selv angive de elementer, der er vigtige for webstedet...',
 'texte_nouveau_message' => 'Ny meddelelse',
@@ -1444,6 +1447,9 @@ og igen f&aring; adgang til webstedet.',
 'titre_image_redacteur_02' => 'Forfatter',
 'titre_image_visiteur' => 'Bes&oslash;gende',
 'titre_joindre_document' => 'VEDH&AElig;FT DOKUMENT',
+'titre_langue_article' => 'ARTIKLENS SPROG',
+'titre_langue_breve' => 'NYHEDENS SPROG',
+'titre_langue_trad_article' => 'ARTIKLENS SPROG OG OVERS&AElig;TTELSER',
 'titre_les_articles' => 'ARTIKLER',
 'titre_liens_entrants' => 'Dagens indkomne links',
 'titre_mots_cles' => 'N&Oslash;GLEORD',
@@ -1505,7 +1511,12 @@ og igen f&aring; adgang til webstedet.',
 'trad_delier' => 'Afbryd forbindelsen mellem denne artikel og overs&aelig;ttelserne',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
 'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
-'trad_reference' => '(referenceartikel)'
+'trad_reference' => '(referenceartikel)',
+
+
+// CONFLIT
+'onglet_evolution_visite' => 'Udvikling i bes&oslash;gstal',
+'onglet_langue' => 'Sprog'
 
 );
 

@@ -98,13 +98,21 @@ if (!$aide) {
 
 
 // Selection du fichier d'aide correspondant a la langue
-$lang_aide = $GLOBALS['spip_lang'];
-if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
-	$html = join('', file($fichier_aide));
-	$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
-	$html = substr($html, 0, strpos($html, "</$aide>"));
+function fichier_aide($lang_aide, $aide) {
+	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
+		$html = join('', file($fichier_aide));
+		$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
+		$html = substr($html, 0, strpos($html, "</$aide>"));
+	}
+	else	// reduction ISO du code langue oci_prv_ni => oci_prv => oci
+	if (ereg("(.*)_", $lang_aide, $regs))
+		$html = fichier_aide($regs[1], $aide);
+
+	return $html;
 }
 
+$lang_aide = $GLOBALS['spip_lang'];
+$html = fichier_aide($lang_aide, $aide);
 if (!$html)
 	$html = _T('aide_non_disponible');
 
@@ -122,7 +130,7 @@ while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 $html .= $suite;
 
 // hack pour que la langue de typo() soit celle de l'aide en ligne
-$langue_site = $lang_aide;
+$spip_lang = $lang_aide;
 
 $html = justifier(propre($html)."<p>");
 // Remplacer les liens externes par des liens ouvrants (a cause des frames)
