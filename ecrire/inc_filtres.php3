@@ -315,7 +315,7 @@ function affdate_base($numdate, $vue) {
 		if ($avjc) return $annee;
 		$a = date('Y');
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+		if ($annee != $a) return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>ucfirst($nommois), 'annee'=>$annee)));
 		return  d_apostrophe(_T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
 
 	case 'entier':
