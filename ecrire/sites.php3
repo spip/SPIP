@@ -44,7 +44,7 @@ function afficher_mois($mois){
 
 function afficher_annee($annee){
 	// Cette ligne permettrait de faire des articles sans date de publication
-	// my_sel("0000","n.c.",$annee); 
+	// my_sel("0000","n.c.",$annee);
 
 	if($annee<1996 AND $annee <> 0){
 		echo "<OPTION VALUE='$annee' SELECTED>$annee\n";
@@ -84,11 +84,12 @@ if ($new == 'oui' AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 	$id_syndic = spip_insert_id();
 }
 
-$query = "SELECT statut FROM spip_syndic WHERE id_syndic='$id_syndic'";
+$query = "SELECT statut, id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
 $result = spip_query($query);
 
 if ($row = spip_fetch_array($result)) {
 	$statut = $row["statut"];
+	$id_rubrique = $row["id_rubrique"];
 }
 if ($new == 'oui') $statut = 'prop';
 
