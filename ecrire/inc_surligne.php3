@@ -8,6 +8,9 @@ define("_ECRIRE_INC_SURLIGNE", "1");
 // utilise avec ob_start() et ob_get_contents() pour
 // mettre en rouge les mots passes dans $var_recherche
 function surligner_mots($page, $mots) {
+	global $nombre_surligne;
+	include_ecrire("inc_texte.php3"); // pour le reglage de $nombre_surligne
+
 	$accents =
 		/* A */ chr(192).chr(193).chr(194).chr(195).chr(196).chr(197).
 		/* a */ chr(224).chr(225).chr(226).chr(227).chr(228).chr(229).
@@ -47,8 +50,8 @@ function surligner_mots($page, $mots) {
 	// Remplacer une occurence de mot maxi par espace inter-tag (max 1 par paragraphe, sauf italiques etc.)
 	// se limiter a 4 remplacements pour ne pas bouffer le CPU
 	if ($mots_surligne) {
-		$regexp = '/(>([^<]*[^[:alnum:]])?)(('.join('|', $mots_surligne).')[[:alnum:]]*?)/Uis';
-		$page = preg_replace($regexp, '\1<span class="spip_surligne">\3</span>', $page, 4);
+		$regexp = '/((^|>)([^<]*[^[:alnum:]<])?)(('.join('|', $mots_surligne).')[[:alnum:]]*?)/Uis';
+		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
 	}
 
 	return $page;
