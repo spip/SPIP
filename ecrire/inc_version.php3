@@ -436,7 +436,6 @@ function tester_accesdistant() {
 // compressee pour economiser de la bande passante
 //
 
-$auto_compress = false;
 if ($auto_compress && $flag_obgz) {
 	$use_gz = true;
 
