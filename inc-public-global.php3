@@ -328,15 +328,16 @@ if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire("inc_texte.php3");
 			include_ecrire("inc_filtres.php3");
 			include_ecrire("inc_index.php3");
-			$suite = file($fichier_index);
-			$s = $suite[0];
-			$f = fopen($fichier_index, 'w');
+			if ($s = sizeof($suite = file($fichier_index)))
+				$s = $suite[rand(0,$s)];
+			$pid = @getmypid();
+			$f = fopen($fichier_index.".tmp-$pid", 'w');
 			while (list(,$ligne) = each($suite))
 				if ($ligne <> $s)
 					fwrite($f, $ligne);
 			fclose($f);
+			@rename($fichier_index.".tmp-$pid",$fichier_index);
 			$s = explode(' ', trim($s));
-			spip_log("indexation $s[0] $s[1]");
 			indexer_objet($s[0], $s[1], false);
 			$timeout = true;
 		}
