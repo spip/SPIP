@@ -1359,7 +1359,7 @@ e vos tornar connectar au sit.
 'taille_octets' => '@taille@&nbsp;octets',
 'text_article_propose_publication' => 'Article prepausat per la publicacion. Esitetz pas de donar v&ograve;stre vejaire gr&agrave;cias au forum estacat a aquel article (en bas de pagina).',
 'texte_acces_ldap_anonyme_1' => 'D\'unei servidors LDAP acc&egrave;ptan ges d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder puei recercar d\'informacions dins l\'annuari. Pasmens, lei camps seguents se podr&agrave;n laissar vueges dins la m&agrave;ger part dei cas.',
-'texte_actualite_site_1' => 'Aquela pagina recensa l\'actualitat dau sit e vos permet de seguir v&ograve;strei contribucions. I tornaretz trobar v&ograve;streis articles en cors de redaccion, leis articles e lei br&egrave;vas que vos convidam de legir per donar v&ograve;stre vejaire, puei una remembran&ccedil;a de v&ograve;strei contribucions.<p><hr><p>Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, podretz clicar sus "',
+'texte_actualite_site_1' => 'Quand vos seretz familiarizat/ada amb l\'interf&agrave;cia, podretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'Interf&agrave;cia completa',
 'texte_actualite_site_3' => '" per dobrir mai de possibilitats.',
 'texte_admin_effacer_01' => 'Aquela comanda escafa <i>tot</i> lo contengut de la basa de donadas,

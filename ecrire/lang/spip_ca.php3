@@ -1364,7 +1364,7 @@ i tornar-vos a connectar al lloc.
 'taille_octets' => '@taille@&nbsp;bytes',
 'text_article_propose_publication' => 'Article proposat a la seva publicaci&oacute;. No dubteu a donar la vostra opini&oacute; gr&agrave;cies al f&ograve;rum adjunt a aquest article (al capdavall de la p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidors LDAP no accepten accessos an&ograve;nims. En aquest cas &eacute;s necessari especificar un identificador d\'acc&eacute;s inicial per tal de poder buscar informacions en el directori. En la majoria de casos tanmateix, els camps seg&uuml;ents es podr&aacute;n deixar buits.',
-'texte_actualite_site_1' => 'Aquesta p&agrave;gina cont&eacute; l\'actualitat del lloc i us permet seguir les vostres contribucions. Hi trobareu els vostres articles en proc&eacute;s de redacci&oacute;, els articles i els breus sobre els que esteu convidats a opinar i tamb&eacute; un recordatori de les vostres contribucions anteriors. <p><hr><p>Quan estigueu familiaritzats amb la interf&iacute;cie, podeu clicar a &laquo;',
+'texte_actualite_site_1' => 'Quan estareu familiaritzats amb la interf&iacute;cie, podreu clicar a &laquo;',
 'texte_actualite_site_2' => 'interf&iacute;cie completa',
 'texte_actualite_site_3' => '" per obrir m&eacute;s possibilitats.',
 'texte_admin_effacer_01' => 'Aquesta comanda esborra <i>tot</i> el contingut de la base de dades,
