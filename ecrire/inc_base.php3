@@ -88,6 +88,8 @@ function creer_base() {
 		lien_url text NOT NULL,
 		statut varchar(6) NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
+		lang VARCHAR(10) DEFAULT '' NOT NULL,
+		langue_choisie VARCHAR(3) DEFAULT 'non',
 		maj TIMESTAMP,
 		extra longblob NULL,
 		PRIMARY KEY (id_breve),
@@ -1320,6 +1322,13 @@ function maj_base() {
 		spip_query("UPDATE spip_rubriques SET lang=MID(lang,2,8) WHERE langue_choisie = 'non'");
 		maj_version (1.707);
 	}
+	
+	if ($version_installee < 1.708) {
+		spip_query("ALTER TABLE spip_breves ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_breves ADD langue_choisie VARCHAR(3) DEFAULT 'non'");
+		maj_version (1.708);
+	}
+
 }
 
 ?>
