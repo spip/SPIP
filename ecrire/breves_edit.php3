@@ -17,8 +17,11 @@ function mySel($varaut,$variable){
 function enfant($leparent) {
 	global $id_parent;
 	global $id_rubrique;
+	global $spip_lang_left;
+	
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent'";
  	$result=spip_query($query);
+	$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat; padding-$spip_lang_left: 16px;";
 
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
@@ -30,7 +33,7 @@ function enfant($leparent) {
 		
 		$titre = couper($titre." ", 50); // largeur maxi
 		if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">".supprimer_tags($titre)."\n";		
+		echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style='$style'>".supprimer_tags($titre)."\n";		
 	}
 }
 
@@ -128,14 +131,11 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	$lien_titre = entites_html($lien_titre);
 
 	echo _T('entree_titre_obligatoire');
-	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
-
-		echo "<B>"._T('entree_interieur_rubrique')."</B>".aide ("brevesrub")."<BR>\n";
-
+	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $onfocus>";
 
 
 	/// Dans la rubrique....
-	echo "<INPUT TYPE='Hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\">";
+	echo "<INPUT TYPE='Hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\"><p />";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
@@ -148,18 +148,19 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		else $logo_parent = "rubrique-24.gif";
 	}
 
-	debut_cadre_relief("$logo_parent");
 
-		echo "<SELECT NAME='id_rubrique' CLASS='forml' SIZE=1>\n";
+	debut_cadre_couleur("$logo_parent", false, "",_T('entree_interieur_rubrique').aide ("brevesrub"));
+
+		echo "<SELECT NAME='id_rubrique' CLASS='forml' style='max-height: 24px; font-size: 90%;' SIZE=1>\n";
 		enfant(0);
-		echo "</SELECT><P>\n";
+		echo "</SELECT>\n";
 
-	fin_cadre_relief();
+	fin_cadre_couleur();
 	
 	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
 	
-	echo "<B>"._T('entree_texte_breve')."</B><BR>";
+	echo "<p /><B>"._T('entree_texte_breve')."</B><BR>";
 	echo afficher_barre('formulaire', 'texte');
 	echo "<TEXTAREA NAME='texte' ".afficher_claret()." ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
