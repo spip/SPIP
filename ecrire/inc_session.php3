@@ -49,12 +49,14 @@ function ajouter_session($auteur, $id_session) {
 		$texte .= "\$GLOBALS['auteur_session']['$var'] = '".addslashes($auteur[$var])."';\n";
 	}
 	$texte .= "?".">\n";
-	if ($f = fopen($fichier_session, "wb")) {
+
+	if ($f = @fopen($fichier_session, "wb")) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
 		$dir = $GLOBALS['flag_ecrire'] ? '../' : '';
-		@Header($dir."spip_test_dirs.php3");
+		@header("Location: ${dir}spip_test_dirs.php3");
+		exit;
 	}
 }
 
