@@ -1357,7 +1357,7 @@ et vous reconnecter au site.
 'taille_octets' => '@taille@&nbsp;octets',
 'text_article_propose_publication' => 'Article propos&eacute; pour la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).',
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
-'texte_actualite_site_1' => 'Cette page recense l\'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec l\'interface, vous pourrez cliquer sur &laquo;',
+'texte_actualite_site_1' => 'Quand vous serez familiaris&eacute;(e) avec l\'interface, vous pourrez cliquer sur &laquo;',
 'texte_actualite_site_2' => 'interface compl&egrave;te',
 'texte_actualite_site_3' => '&raquo; pour ouvrir plus de possibilit&eacute;s.',
 'texte_admin_effacer_01' => 'Cette commande efface <i>tout</i> le contenu de la base de donn&eacute;es,

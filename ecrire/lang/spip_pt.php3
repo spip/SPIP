@@ -1388,7 +1388,7 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 'taille_octets' => ' @taille@&nbsp;octets',
 'text_article_propose_publication' => 'Artigo proposto para publica&ccedil;&atilde;o. N&atilde;o hesite a dar a sua opini&atilde;o gra&ccedil;as ao f&oacute;rum ligado a este artigo ( em baixo da p&aacute;gina).',
 'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP n&atilde;o aceitam nenhum acesso an&oacute;nimo. Nesse caso, &eacute; preciso especificar um identificador de acesso inicial afim de poder depois procurar informa&ccedil;&otilde;es no anu&aacute;rio. Na maior parte dos casos por&eacute;m, os seguintes campos poder&atilde;o ser deixados vazios.',
-'texte_actualite_site_1' => '<Esta p&aacute;gina recensea a actualidade do s&iacute;tio e permite-lhe acompanhar as suas contribui&ccedil;&otilde;es. Encontrar&aacute; nela os seus artigos em curso de redac&ccedil;&atilde;o, os artigos e as not&iacute;ciaspara os quais est&aacute; convidado a dar a sua opini&atilde;o,  e  depois, uma recorda&ccedil;&atilde;o das suas precedentes  contribui&ccedil;&otilde;es. <p><hr><p>Quando estiver familiarizado(a) com a interface, poder&aacute; clicar sobre &laquo;',
+'texte_actualite_site_1' => 'Quando estiver familiarizado(a) com a interface, poder&aacute; clicar sobre &laquo;',
 'texte_actualite_site_2' => 'interface completa',
 'texte_actualite_site_3' => '&raquo; para abrir mais possibilidades.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>tudo</i> o conte&uacute;do da base de dados,
