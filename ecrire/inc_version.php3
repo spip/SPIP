@@ -395,7 +395,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 $spip_version = 1.813;
 
 // version de spip
-$spip_version_affichee = "1.8 PR2 CVS";
+$spip_version_affichee = "1.8 PR3 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
