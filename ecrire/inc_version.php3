@@ -378,6 +378,21 @@ function http_status($status) {
 	else Header("HTTP/1.0 ".$status_string[$status]);
 }
 
+function http_last_modified($lastmodified, $expire = 0) {
+	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']) {
+		$if_modified_since = ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE']);
+		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
+		if ($if_modified_since == $gmoddate) {
+			http_status(304);
+			$headers_only = true;
+		}
+	}
+	@Header ("Last-Modified: ".$gmoddate." GMT");
+	if ($expire) 
+		@Header ("Expires: ".gmdate("D, d M Y H:i:s", $expire)." GMT");
+	return $headers_only;
+}
 
 $flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
 

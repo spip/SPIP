@@ -9,10 +9,48 @@ if (file_exists("inc_connect.php3")) {
 
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
+if ($var_lang) changer_langue($var_lang);
 
-include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_filtres.php3");
+// Selection du fichier d'aide correspondant a la langue
+function fichier_aide($lang_aide) {
+	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide")) 
+		return array($fichier_aide, $lang_aide);
+	else	// reduction ISO du code langue oci_prv_ni => oci_prv => oci
+		if (ereg("(.*)_", $lang_aide, $regs))
+			return fichier_aide($regs[1]);
 
+	return false;
+}
+
+if (!$aide) $aide = 'spip';
+$lang_aide = $spip_lang;
+
+// Recuperation du contenu de l'aide demandee
+list($fichier_aide, $l) = fichier_aide($lang_aide);
+if (!$fichier_aide)
+	$html = _T('aide_non_disponible');
+else {
+	$lastmodified = filemtime($fichier_aide);
+	$headers_only = http_last_modified($lastmodified);
+	if ($headers_only) exit;
+	
+	$html = join('', file($fichier_aide));
+	$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
+	$html = substr($html, 0, strpos($html, "</$aide>"));
+
+	// Localisation des images de l'aide (si disponibles)
+	$suite = $html;
+	$html = "";
+	while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
+		$f = $r[1];
+		if (file_exists("AIDE/$l/$f")) $f = "$l/$f";
+		else if (file_exists("AIDE/fr/$f")) $f = "fr/$f";
+		$p = strpos($suite, $r[0]);
+		$html .= substr($suite, 0, $p) . "AIDE/$f";
+		$suite = substr($suite, $p + strlen($r[0]));
+	}
+	$html .= $suite;
+}
 
 ?>
 <html>
@@ -70,13 +108,15 @@ table.spip td {
 </head>
 <?php
 
+include_ecrire ("inc_texte.php3");
+include_ecrire ("inc_filtres.php3");
+
 echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"';
 if ($spip_lang_rtl)
 	echo " dir='rtl'";
 echo ">";
 
-if (!$aide) {
-	$aide = 'spip';
+if ($aide == 'spip') {
 	echo '<TABLE BORDER=0 WIDTH=100% HEIGHT=60%>
 <TR WIDTH=100% HEIGHT=60%>
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
@@ -87,39 +127,6 @@ if (!$aide) {
 
 </TD></TR></TABLE>';
 }
-
-
-// Selection du fichier d'aide correspondant a la langue
-function fichier_aide($lang_aide, $aide) {
-	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
-		$html = join('', file($fichier_aide));
-		$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
-		$html = substr($html, 0, strpos($html, "</$aide>"));
-	}
-	else	// reduction ISO du code langue oci_prv_ni => oci_prv => oci
-	if (ereg("(.*)_", $lang_aide, $regs))
-		list($html,$lang_aide) = fichier_aide($regs[1], $aide);
-
-	return array($html,$lang_aide);
-}
-
-$lang_aide = $GLOBALS['spip_lang'];
-list($html,$l) = fichier_aide($lang_aide, $aide);
-if (!$html)
-	$html = _T('aide_non_disponible');
-
-// Localisation des images de l'aide (si disponibles)
-$suite = $html;
-$html = "";
-while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
-	$f = $r[1];
-	if (file_exists("AIDE/$l/$f")) $f = "$l/$f";
-	else if (file_exists("AIDE/fr/$f")) $f = "fr/$f";
-	$p = strpos($suite, $r[0]);
-	$html .= substr($suite, 0, $p) . "AIDE/$f";
-	$suite = substr($suite, $p + strlen($r[0]));
-}
-$html .= $suite;
 
 // hack pour que la langue de typo() soit celle de l'aide en ligne
 $spip_lang = $lang_aide;

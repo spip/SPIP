@@ -13,11 +13,11 @@ utiliser_langue_visiteur();
 // Aide
 //
 function aide($aide='') {
-	global $couleur_foncee, $spip_lang_rtl, $dir_ecrire;
+	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $dir_ecrire;
 
 	if (!$aide) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire."aide_index.php3?aide=$aide\" target=\"spip_aide\" ".
+	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire."aide_index.php3?aide=$aide&var_lang=$spip_lang\" target=\"spip_aide\" ".
 		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
 		"resizable=yes, width=740, height=580'); return false;\"><img ".
 		"src=\"img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
@@ -1336,7 +1336,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_toutes_rubriques;
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display, $spip_ecran;
-	global $spip_lang_rtl;
+	global $spip_lang, $spip_lang_rtl;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	global $clean_link;
 
@@ -1399,7 +1399,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</tr></table>\n";
 	echo "<table class='droite'><tr>\n";
 
-	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
+	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3?var_lang=$spip_lang");
 	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.gif");
 
 	echo "</tr></table>\n";

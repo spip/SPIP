@@ -2,6 +2,10 @@
 
 include ("inc_version.php3");
 
+$lastmodified = filemtime("aide_gauche.php3");
+$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
+if ($headers_only) exit;
+
 if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
 	include_ecrire("inc_auth.php3");
 	$aide_statut = ($connect_statut == '1comite') ? 'redac' : 'admin';
@@ -10,6 +14,7 @@ else $aide_statut = 'admin';
 
 include_ecrire("inc_lang.php3");
 utiliser_langue_visiteur();
+if ($var_lang) changer_langue($var_lang);
 
 ?>
 <HTML>
