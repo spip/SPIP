@@ -6,6 +6,12 @@ if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
 
+// Balises qui ne font rien en mode normal
+// mais  vont etre substitue'es en mode recherche
+// voir les champs SURLIGNE dans inc-index-squel
+
+define("MARQUEUR_SURLIGNE", 'span class="spip_surligneconditionnel">');
+define("MARQUEUR_FSURLIGNE", '/' . MARQUEUR_SURLIGNE);
 
 function surligner_sans_accents ($mot) {
 	$accents =
@@ -65,7 +71,7 @@ function surligner_regexp_accents ($mot) {
 	return $mot;
 }
 
-// utilise avec ob_start() et ob_get_contents() pour
+
 // mettre en rouge les mots passes dans $var_recherche
 function surligner_mots($page, $mots) {
 	global $nombre_surligne;
@@ -82,84 +88,53 @@ function surligner_mots($page, $mots) {
 		}
 	}
 
-	if (is_array($mots_surligne))
-		$mots_surligne = join('|', $mots_surligne);
+	if (!$mots_surligne) return $page;
 
-	// ne pas traiter tout ce qui est avant </head> ou <body>
-	$regexp = '/<\/head>|<body[^>]*>/i';
-	if (preg_match($regexp, $page, $exp)) {
-		$debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
-		$page = substr($page, strlen($debut));
+	$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)((' .
+	  join('|', $mots_surligne).
+	  ')[[:alnum:]_]*?)/Uis';
+
+	// en cas de surlignement limite' (champs #SURLIGNE), 
+	// le compilateur a inse're' les balises de surlignement
+	// sur toute la zone; reste a` raffiner.
+	// On boucle pour le cas ou` il y a plusieurs zones
+
+	$p = strpos($page, MARQUEUR_SURLIGNE);
+	if ($p) 
+	  {
+	    $debut = '';
+	    while ($p) {
+	      $debut .= substr($page, 0, $p-1);
+	      $page = substr($page, $p+strlen(MARQUEUR_SURLIGNE));
+	      $q = strpos($page,MARQUEUR_FSURLIGNE);
+	      $debut .= trouve_surligne(substr($page, 0, $q-1), $regexp);
+	      $page = substr($page, $q+strlen(MARQUEUR_SURLIGNE)+1);
+	      $p = strpos($page,MARQUEUR_SURLIGNE);
+	    }
+	    return $debut . $page;
+	  } else {
+
+	// pour toute la page: ignorer ce qui est avant </head> ou <body>
+	$re = '/<\/head>|<body[^>]*>/i';
+	if (preg_match($re, $page, $exp)) {
+	  $debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
+	  $page = substr($page, strlen($debut));
 	} else
-		$debut = '';
-
-	// Remplacer une occurence de mot maxi par espace inter-tag (max 1 par paragraphe, sauf italiques etc.)
-	// se limiter a 4 remplacements pour ne pas bouffer le CPU ;
-	// traiter <textarea...>....</textarea> comme un tag.
-	if ($mots_surligne) {
-		$page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
-		$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('.$mots_surligne.')[[:alnum:]_]*?)/Uis';
-		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
-		$page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
-	}
-	return $debut.$page;
+	  $debut = '';
+	return $debut . trouve_surligne($page, $regexp);
+	  }
 }
 
-
-// debut et fin, appeles depuis les squelettes
-function debut_surligne($mots, $mode_surligne) {
-	switch ($mode_surligne) {
-		case 'auto' :	// on arrive du debut de la page, on ne touche pas au buffer
-			ob_end_flush();
-			ob_start();
-			$mode_surligne = 'actif';
-			break;
-
-		case 'actif' :	// il y a un buffer a traiter
-			$la_page = surligner_mots(ob_get_contents(), $mots);
-			ob_end_clean();
-			echo $la_page;
-			ob_start();
-			$mode_surligne = 'actif';
-			break;
-
-		case 'inactif' :	// il n'y a pas de buffer
-			ob_start();
-			$mode_surligne = 'actif';
-			break;
-
-		case false :	// conditions pas reunies (flag_preserver, etc.)
-			break;
-	}
-
-	return $mode_surligne;
-}
-
-function fin_surligne($mots, $mode_surligne) {
-	switch ($mode_surligne) {
-		case 'auto' :	// on arrive du debut de la page, on s'occupe du buffer
-			$la_page = surligner_mots(ob_get_contents(), $mots);
-			ob_end_clean();
-			echo $la_page;
-			ob_start();
-			$mode_surligne = 'inactif';
-			break;
-
-		case 'actif' :	// il y a un buffer a traiter
-			$la_page = surligner_mots(ob_get_contents(), $mots);
-			ob_end_clean();
-			echo $la_page;
-			$mode_surligne = 'inactif';
-			break;
-
-		case 'inactif' :	// il n'y a pas de buffer
-			break;
-
-		case false :	// conditions pas reunies (flag_preserver, etc.)
-			break;
-	}
-
-	return $mode_surligne;
+function trouve_surligne($page, $regexp) {
+  // Remplacer une occurrence de mot maxi par espace inter-tag
+  // (max 1 par paragraphe, sauf italiques etc.)
+  // se limiter a 4 remplacements pour ne pas bouffer le CPU ;
+  // traiter <textarea...>....</textarea> comme un tag.
+  global $nombre_surligne;
+  $page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
+  $page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
+  $page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
+  return $page ;
 }
 
 ?>

@@ -5,7 +5,6 @@
 if (defined("_INC_LOGIN")) return;
 define("_INC_LOGIN", "1");
 
-
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
@@ -41,7 +40,7 @@ function ouvre_login($titre='') {
 
 	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
 
-	$retour .= '<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 2;">';
+	$retour .= '<div style="font-family: Verdana,arial,helvetica,sans-serif: font-size: 2">';
 	return $retour;
 }
 
@@ -51,7 +50,11 @@ function ferme_login() {
 	return $retour;
 }
 
-function login($cible = '', $prive = 'prive', $message_login='') {
+function login($cible, $prive = 'prive', $message_login='') {
+
+  $pass_popup ='href="spip_pass.php3" target="spip_pass" onclick="'
+                       . "javascript:window.open('spip_pass.php3', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\"";
+
 	$login = $GLOBALS['var_login'];
 	$erreur = '';
 	$essai_auth_http = $GLOBALS['var_essai_auth_http'];
@@ -62,13 +65,14 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
 	// et pas un echec cookie.
 	if ($GLOBALS['var_echec_cookie'])
-		$echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
+	  $echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
 
 	global $auteur_session;
 	global $spip_session, $PHP_AUTH_USER, $ignore_auth_http;
 	global $spip_admin;
 	global $php_module;
 	global $clean_link;
+
 
 	if (!$cible) {
 		if ($GLOBALS['var_url']) $cible = new Link($GLOBALS['var_url']);
@@ -80,12 +84,12 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	$cible->delVar('var_url');
 	$clean_link->delVar('var_erreur');
 	$clean_link->delVar('var_login');
+	$url = $cible->getUrl();
 
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 	if ($auteur_session AND !$logout AND
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
-		$url = $cible->getUrl();
 		if ($url != $GLOBALS['clean_link']->getUrl())
 			@Header("Location: $url");
 		echo "<a href='$url'>"._T('login_par_ici')."</a>\n";
@@ -108,13 +112,14 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 
 	$flag_autres_sources = $GLOBALS['ldap_present'];
 
+	// quels sont les aleas a passer ?
 	if ($login) {
 		$statut_login = 0; // statut inconnu
 		$login = addslashes($login);
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
-			if ($row['statut'] == '5poubelle' OR ($row['source'] == 'spip' AND $row['pass'] == '')) {
+		  if ($row['statut'] == '5poubelle' OR ($row['source'] == 'spip' AND $row['pass'] == '')) {
 				$statut_login = -1; // refus
 			} else {
 
@@ -143,7 +148,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 			@spip_setcookie("spip_admin", "", time() - 3600);
 		}
 	}
-
+	
 	// javascript pour le focus
 	if ($login)
 		$js_focus = 'document.form_login.session_password.focus();';
@@ -157,8 +162,21 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	}
 	else {
 		echo ouvre_login ();
-		if (strlen($message_login) > 0) echo "<br>$message_login<br>\n";
+		echo 
+		  (!$message_login ? '' :
+		   ("<br>" . 
+		    _T("forum_vous_enregistrer") . 
+		    "<a $pass_popup>" .
+		    _T("forum_vous_inscrire") .
+		    "</a><br><br>\n")) ;
+		   
 	}
+
+	# e'quivalent $clean_link->getUrl() si celui-ci n'e'tait bugge'...
+	$p = strpos($GLOBALS[REQUEST_URI], '?');
+	$action = 
+	  substr($GLOBALS[PHP_SELF], strrpos($GLOBALS[PHP_SELF], '/')+1) . 
+	  ($p ? substr($GLOBALS[REQUEST_URI], $p) : '');
 
 	if ($login) {
 		// Affiche formulaire de login en incluant le javascript MD5
@@ -178,7 +196,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		if ($flag_challenge_md5) {
 			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 			echo "<script type=\"text/javascript\"><!--\n" .
-				"document.write('".addslashes(_T('login_login'))." <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>".addslashes(_T('login_autre_identifiant'))."</a>]</font>');\n" .
+			  "document.write('".addslashes(_T('login_login'))." <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($action)."\\'>"._T('login_autre_identifiant')."</a>]</font>');\n" .
 				"//--></script>\n";
 			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
@@ -198,27 +216,23 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'$rester_checked> ";
 		echo "<label for='session_remember'>"._T('login_rester_identifie')."</label>";
 
-		$url = $cible->getUrl();
 		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<input type='hidden' name='session_password_md5' value=''>\n";
 		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
-		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='"._T('bouton_valider')."'></div>\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'></div>\n";
 		echo "</div>";
 		echo "</form>";
 	}
 	else { // demander seulement le login
 
-		$url = $cible->getUrl();
-		$action = $clean_link->getUrl();
-
 		echo "<form name='form_login' action='$action' method='post'>\n";
-		echo "<div class='spip_encadrer'>";
+		echo "<div class='spip_encadrer' style='text-align:".$GLOBALS["spip_lang_left"].";'>";
 		if ($erreur) echo "<span style='color:red;'><b>$erreur</b></span><p />";
 		echo "<label><b>"._T('login_login2')."</b><br></label>";
 		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40' />\n";
 
 		echo "<input type='hidden' name='var_url' value='$url' />\n";
-		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='"._T('bouton_valider')."' /></div>\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('bouton_valider')."'/></div>\n";
 		echo "</div>";
 		echo "</form>";
 	}
@@ -230,23 +244,19 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<form action='spip_cookie.php3' method='get'>";
 		echo "<fieldset>\n<p>";
 		echo _T('login_preferez_refuser')." \n";
-		echo "<input type='hidden' name='essai_auth_http' value='oui' /> ";
-		$url = $cible->getUrl();
-		echo "<input type='hidden' name='url' value='$url' />\n";
-		echo "<div align='right'><input type='submit' name='submit' class='spip_bouton' value='"._T('login_sans_cookiie')."'></div>\n";
+		echo "<input type='hidden' name='essai_auth_http' value='oui'/> ";
+		echo "<input type='hidden' name='url' value='$url'/>\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' value='"._T('login_sans_cookiie')."'/></div>\n";
 		echo "</fieldset></form>\n";
 	}
 
 	echo "\n<center>"; // debut du pied de login
 
-	// Bouton s'inscrire
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
-	if ((!$prive AND (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) OR ($prive AND $inscriptions_ecrire)) {
-		echo '[<a href="spip_pass.php3" target="spip_pass" onclick="'
-			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\">"
-			._T('login_sinscrire').'</a>]';
-	}
-	// Bouton oubli de mot de passe
+	if ((!$prive AND (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) OR ($prive AND $inscriptions_ecrire)) 
+		echo " [<a $pass_popup>" . _T('login_sinscrire').'</a>]';
+
+	// bouton oubli de mot de passe
 	include_ecrire ("inc_mail.php3");
 	if (tester_mail()) {
 		echo ' [<a href="spip_pass.php3?oubli_pass=oui" target="spip_pass" onclick="'
@@ -254,6 +264,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 			._T('login_motpasseoublie').'</a>]';
 	}
 	// Bouton retour au site public
+
 	if ($prive) echo " [<a href='$url_site'>"._T('login_retoursitepublic')."</a>]";
 
 	echo "</center>\n";

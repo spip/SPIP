@@ -56,7 +56,7 @@ function cron_archiver_stats($last_date) {
 // La fonction de base qui distribue les taches
 //
 function spip_cron() {
-	global $flag_ecrire, $dir_ecrire, $use_cache, $db_ok;
+	global $flag_ecrire, $dir_ecrire, $db_ok;
 
 	include_ecrire("inc_connect.php3");
 	if (!$db_ok) {
@@ -73,22 +73,45 @@ function spip_cron() {
 
 	//
 	// Envoi du mail quoi de neuf
-	//
-	if (!$flag_ecrire AND (lire_meta('quoi_de_neuf') == 'oui') AND ($jours_neuf = lire_meta('jours_neuf'))
-	AND ($adresse_neuf = lire_meta('adresse_neuf')) AND (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
+	
+	$adresse_neuf = lire_meta('adresse_neuf');
+	$jours_neuf = lire_meta('jours_neuf');
+	if (!$flag_ecrire AND 
+	    $adresse_neuf AND 
+	    $jours_neuf AND
+	    (lire_meta('quoi_de_neuf') == 'oui') AND 
+	    (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
 
-		if (timeout('quoide_neuf')) {
+	  if (timeout('quoide_neuf')) { 
 			ecrire_meta('majnouv', time());
 			ecrire_metas();
 
-			// preparation mail
-			unset ($mail_nouveautes);
-			unset ($sujet_nouveautes);
-			$fond = 'nouveautes';
-			$delais = 0;
-			$contexte_inclus = array('date' => date('Y-m-d H:i:s', $majnouv));
-			include(inclure_fichier($fond, $delais, $contexte_inclus));
-
+			include_local("inc-calcul.php3");
+			$page= cherche_page('nouveautes',
+					    '',
+					    array('date' => date('Y-m-d H:i:s', $majnouv)),
+					    '',
+					    '');
+			$page = $page['texte'];
+			if (substr($page,0,5) == '<?php')
+			  {
+# ancienne version: squelette en PHP avec affections. 1 passe de +
+			    unset ($mail_nouveautes);
+			    unset ($sujet_nouveautes);
+			    eval ('?' . '>' . $page);
+			  }
+			else 
+			  { 
+# nouvelle version: squelette en mode texte, 1ere ligne = sujet
+# il faudrait ge'ne'raliser en produisant les Headers standars SMTP
+# a` passer en 4e argument de mail. Surtout utile pour le charset.
+			    $page = stripslashes($page);
+			    $p = strpos($page,"\n");
+			    $sujet_nouveautes = substr($page,0,$p);
+			    $mail_nouveautes = ereg_replace('\$jours_neuf',
+							    "$jours_neuf",
+							    substr($page,$p+1));
+			  }
 			// envoi
 			if ($mail_nouveautes) {
 				spip_log("envoi mail nouveautes");
@@ -96,9 +119,8 @@ function spip_cron() {
 				envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
 			} else
 				spip_log("envoi mail nouveautes : pas de nouveautes");
-		}
-	}
-
+					}
+	  	}
 
 	//
 	// Statistiques
@@ -130,46 +152,12 @@ function spip_cron() {
 
 
 	//
-	// Faire du menage dans le cache (effacer les fichiers tres anciens ou inutilises)
-	// Se declenche une fois par heure quand le cache n'est pas recalcule
-	//
-	if (!$flag_ecrire AND $use_cache AND @file_exists('CACHE/.purge2')) {
-		if (timeout('purge_cache')) {
-			unlink('CACHE/.purge2');
-			spip_log("purge cache niveau 2");
-			$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
-			$result = spip_query($query);
-			unset($fichiers);
-			while ($row = spip_fetch_array($result)) {
-				$fichier = $row['fichier'];
-				if (!@file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
-			}
-			if ($fichiers) {
-				$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
-				spip_query($query);
-			}
-		}
-	}
-	if (!$flag_ecrire AND $use_cache AND @file_exists('CACHE/.purge')) {
-		if (timeout('purge_cache')) {
-			$dir = 'CACHE/'.dechex((time() / 3600) & 0xF);
-			unlink('CACHE/.purge');
-			spip_log("purge cache niveau 1: $dir");
-			$f = fopen('CACHE/.purge2', 'w');
-			fclose($f);
-			include_local ("inc-cache.php3");
-			purger_repertoire($dir, 14 * 24 * 3600);
-		}
-	}
-
-
-
-	//
 	// Gerer l'indexation
 	//
 
-	if ($use_cache AND (lire_meta('activer_moteur') == 'oui')) {
+	if (lire_meta('activer_moteur') == 'oui') {
 		if (timeout('indexation')) {
+		  spip_log('effectuer_une_indexation');
 			include_ecrire("inc_index.php3");
 			effectuer_une_indexation();
 		}
