@@ -355,7 +355,7 @@ function couper_intro($texte, $long) {
 
 // Securite : empecher l'execution de code PHP
 function interdire_scripts($source) {
-	$source = eregi_replace("<(\%|\?|([[:space:]]*)script)", "&lt;\\1", $source);
+	$source = preg_replace(",<(\%|\?|([[:space:]]*)script),", "&lt;\\1", $source);
 	return $source;
 }
 
@@ -376,9 +376,8 @@ function typo_fr($letexte) {
 			"&deg;" => "&#176;"
 		);
 		$chars = array(160 => '~', 187 => '&#187;', 171 => '&#171;', 148 => '&#148;', 147 => '&#147;', 176 => '&#176;');
-		$charset = lire_meta('charset');
-		include_ecrire('inc_charsets.php3');
 
+		include_ecrire('inc_charsets.php3');
 		while (list($c, $r) = each($chars)) {
 			$c = unicode2charset(charset2unicode(chr($c), 'iso-8859-1', 'forcer'));
 			$trans[$c] = $r;
@@ -589,7 +588,7 @@ function extraire_lien ($regs) {
 		include_ecrire("inc_filtres.php3");
 		$lien_texte = supprimer_numero($lien_texte);
 	}
-	else if (ereg('^\?(.*)$', $lien_url, $regs)) {
+	else if (preg_match(',^\?(.*)$,s', $lien_url, $regs)) {
 		// Liens glossaire
 		$lien_url = substr($lien_url, 1);
 		$class_lien = "glossaire";
@@ -599,14 +598,14 @@ function extraire_lien ($regs) {
 		$class_lien = "out";
 		// texte vide ?
 		if ((!$lien_texte) and (!$lien_interne)) {
-			$lien_texte = ereg_replace('"', '', $lien_url);
+			$lien_texte = str_replace('"', '', $lien_url);
 			if (strlen($lien_texte)>40)
 				$lien_texte = substr($lien_texte,0,35).'...';
 			$class_lien = "url";
 			$lien_texte = "<html>$lien_texte</html>";
 		}
 		// petites corrections d'URL
-		if (ereg("^www\.[^@]+$",$lien_url))
+		if (preg_match(",^www\.[^@]+$,",$lien_url))
 			$lien_url = "http://".$lien_url;
 		else if (strpos($lien_url, "@") && email_valide($lien_url))
 			$lien_url = "mailto:".$lien_url;
@@ -622,7 +621,7 @@ function extraire_lien ($regs) {
 // Traitement des listes (merci a Michael Parienti)
 //
 function traiter_listes ($texte) {
-	$parags = split ("\n[[:space:]]*\n", $texte);
+	$parags = preg_split(",\n[[:space:]]*\n,", $texte);
 	unset($texte);
 
 	// chaque paragraphe est traite a part
@@ -637,7 +636,7 @@ function traiter_listes ($texte) {
 		// chaque item a sa profondeur = nb d'etoiles
 		unset ($type);
 		while (list(,$item) = each($lignes)) {
-			ereg("^([*]*|[#]*)([^*#].*)", $item, $regs);
+			preg_match(",^([*]*|[#]*)([^*#].*)$,s", $item, $regs);
 			$profond = strlen($regs[1]);
 
 			if ($profond > 0) {
@@ -724,10 +723,10 @@ function traiter_raccourcis_generale($letexte) {
 		$puce = $GLOBALS['puce'];
 
 	// Harmoniser les retours chariot
-	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
+	$letexte = preg_replace(",\r\n?,", "\n", $letexte);
 
 	// Corriger HTML
-	$letexte = eregi_replace("</?p>","\n\n\n",$letexte);
+	$letexte = preg_replace(",</?p>,i", "\n\n\n", $letexte);
 
 	//
 	// Notes de bas de page
@@ -740,9 +739,9 @@ function traiter_raccourcis_generale($letexte) {
 		$num_note = false;
 
 		// note auto ou pas ?
-		if (ereg("^ *<([^>]*)>", $note_texte, $regs)){
+		if (preg_match(",^ *<([^>]*)>,", $note_texte, $regs)){
 			$num_note = $regs[1];
-			$note_texte = ereg_replace ("^ *<([^>]*)>", "", $note_texte);
+			$note_texte = str_replace($regs[0], "", $note_texte);
 		} else {
 			$compt_note++;
 			$num_note = $compt_note;
@@ -792,7 +791,7 @@ function traiter_raccourcis_generale($letexte) {
 		if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 		foreach ($matches as $regs) {
 			$terme = trim($regs[1]);
-			$terme_underscore = urlencode(ereg_replace('[[:space:]]+', '_', $terme));
+			$terme_underscore = urlencode(preg_replace(',\s+,', '_', $terme));
 			if (strstr($url_glossaire_externe,"%s"))
 				$url = str_replace("%s", $terme_underscore, $url_glossaire_externe);
 			else
@@ -834,8 +833,8 @@ function traiter_raccourcis_generale($letexte) {
 	//
 	// Tableaux
 	//
-	$letexte = ereg_replace("^\n?\|", "\n\n|", $letexte);
-	$letexte = ereg_replace("\|\n?$", "|\n\n", $letexte);
+	$letexte = preg_replace(",^\n?\|,", "\n\n|", $letexte);
+	$letexte = preg_replace(",\|\n?$,", "|\n\n", $letexte);
 
 	$tableBeginPos = strpos($letexte, "\n\n|");
 	$tableEndPos = strpos($letexte, "|\n\n");

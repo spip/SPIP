@@ -559,21 +559,21 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	if ($num_rows <= 1.5 * $nombre_aff) $nombre_aff = $num_rows;
 
 		if ($num_rows > 0) {
-			echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
-			echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
+			echo "<p><table width='100%' cellpadding='0' cellspacing='0' border='0'><tr><td width='100%' background=''>";
+			echo "<table width='100%' cellpadding='3' cellspacing='0' border='0'>";
 
 			bandeau_titre_boite($titre_table, true);
 
 			if ($num_rows > $nombre_aff) {
-				echo "<tr><td background='' class='arial2' colspan=4>";
+				echo "<tr><td background='' class='arial2' colspan='4'>";
 				for ($i = 0; $i < $num_rows; $i = $i + $nombre_aff){
 					$deb = $i + 1;
 					$fin = $i + $nombre_aff;
 					if ($fin > $num_rows) $fin = $num_rows;
 					if ($debut_liste_sites[$n_liste_sites] == $i) {
-						echo "[<B>$deb-$fin</B>] ";
+						echo "[<b>$deb-$fin</b>] ";
 					} else {
-						echo "[<A HREF='".$adresse_page.$lien_url."debut_liste_sites[$n_liste_sites]=$i'>$deb-$fin</A>] ";
+						echo "[<a href='".$adresse_page.$lien_url."debut_liste_sites[$n_liste_sites]=$i'>$deb-$fin</a>] ";
 					}
 				}
 				echo "</td></tr>";
@@ -601,7 +601,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 					echo "<tr bgcolor='$couleur'>";
 					
 					echo "<td class='arial1'>";
-					echo "<A HREF='$url'>";
+					echo "<a href='$url'>";
 					if ($statut=='publie') {
 						if (acces_restreint_rubrique($id_rubrique))
 							$puce = 'puce-verte-anim.gif';
@@ -620,17 +620,17 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 							$puce = 'puce-rouge-anim.gif';
 					}
 
-					echo "<img src='img_pack/$puce' width='7' height='7' border='0'>";
+					echo "<img src='img_pack/$puce' width='7' height='7' border='0' alt='' />";
 
 					if ($statut == "refuse")
 						echo "<font color='black'>&nbsp;&nbsp;$titre</font>";
 					else
 						echo "&nbsp;&nbsp;".$titre;
 
-					echo "</A>";
+					echo "</a>";
 
-					if (strlen($lesauteurs)>0) echo "<br>"._T('info_auteurs_nombre')." <font color='#336666'>$lesauteurs</font>";
-					if (strlen($descriptif)>0) echo "<br>"._T('info_descriptif_nombre')." <font color='#336666'>$descriptif</font>";
+					if (strlen($lesauteurs)>0) echo "<br />"._T('info_auteurs_nombre')." <font color='#336666'>$lesauteurs</font>";
+					if (strlen($descriptif)>0) echo "<br />"._T('info_descriptif_nombre')." <font color='#336666'>$descriptif</font>";
 					
 					echo "</td>";
 					
@@ -672,7 +672,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$compteur_liste++;
 
 		}
-		echo "</TABLE></TD></TR></TABLE>";
+		echo "</table></td></tr></table></p>";
 	}
 }
 
