@@ -288,7 +288,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo bouton_block_visible("forumarticle");
 	else
 		echo bouton_block_invisible("forumarticle");
-	echo "CONFIGURER LE FORUM";
+	echo "FORUM PUBLIC";
 	echo "</b></font></td></tr></table></center>";
 
 	if ($visible)
@@ -299,7 +299,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "\n<form action='articles.php3' method='get'>";
 
 	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
-	echo "<br>Mode de mod&eacute;ration du forum&nbsp;:\n";
+	echo "<br>Fonctionnement du forum&nbsp;:\n";
 	if ($forums_publics == "pos") {
 		echo "<br><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos' checked>";
 		echo "<B><label for='accepterforumpos'> mod&eacute;r&eacute; &agrave; posteriori</label></B>";
@@ -344,8 +344,8 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	//
 	// Resultat formulaire
 	//
-	if ($petition) {
-		if ($petition == "on") {
+	if ($change_petition) {
+		if ($change_petition == "on") {
 			if (!$email_unique) $email_unique = "non";
 			if (!$site_obli) $site_obli = "non";
 			if (!$site_unique) $site_unique = "non";
@@ -357,7 +357,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 				"VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')";
 			$result_pet = mysql_query($query_pet);
 		}
-		else {
+		else if ($change_petition == "off") {
 			$query_pet = "DELETE FROM spip_petitions WHERE id_article=$id_article";
 			$result_pet = mysql_query($query_pet);
 		}
@@ -376,7 +376,12 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$texte_petition=$row[5];
 	}
 
-	if ($petition) $visible = true;
+	// boite petition ouverte ? si changement ou si petition activee :
+	// du coup pas besoin de changer le titre de la boite petition
+	if ($change_petition || $petition)
+		$visible = true;
+	else
+		$visible = false;
 
 	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
 	echo "<tr><td width='100%' align='center' bgcolor='#FFCC66'>\n";
@@ -386,10 +391,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	else
 		echo bouton_block_invisible("petition");
 
-	if ($petition)
-		echo "CONFIGURER LA PETITION";
-	else
-		echo "AJOUTER UNE PETITION";
+	echo "P&Eacute;TITION";
 	echo "</b></font></td></tr></table></center>";
 
 	if ($visible)
@@ -402,48 +404,46 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
 	if ($petition){
-		echo "<input type='radio' name='petition' value='on' id='petitionon' checked>";
-		echo "<B><label for='petitionon'>Cet article est une p&eacute;tition</label></B>";
+		echo "<input type='radio' name='change_petition' value='on' id='petitionon' checked>";
+		echo "<B><label for='petitionon'>P&eacute;tition activ&eacute;e</label></B>";
 
-		echo "<FONT SIZE=1>";
+		echo "<P><FONT SIZE=1>";
 		if ($email_unique=="oui")
-			echo "<BR><input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
+			echo "<input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
 		else
-			echo "<BR><input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
-		echo " <label for='emailunique'>une seule signature par adresse email</label>";
+			echo "<input type='checkbox' name='email_unique' value='oui' id='emailunique'>";
+		echo " <label for='emailunique'>une seule signature par adresse email</label><BR>";
 		if ($site_obli=="oui")
-			echo "<BR><input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
+			echo "<input type='checkbox' name='site_obli' value='oui' id='siteobli' checked>";
 		else
-			echo "<BR><input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
-		echo " <label for='siteobli'>indiquer obligatoirement un site Web</label>";
+			echo "<input type='checkbox' name='site_obli' value='oui' id='siteobli'>";
+		echo " <label for='siteobli'>indiquer obligatoirement un site Web</label><BR>";
 		if ($site_unique=="oui")
-			echo "<BR><input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
+			echo "<input type='checkbox' name='site_unique' value='oui' id='siteunique' checked>";
 		else
-			echo "<BR><input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
-		echo " <label for='siteunique'>une seule signature par site Web</label>";
+			echo "<input type='checkbox' name='site_unique' value='oui' id='siteunique'>";
+		echo " <label for='siteunique'>une seule signature par site Web</label><BR>";
 		if ($message=="oui")
-			echo "<BR><input type='checkbox' name='message' value='oui' id='message' checked>";
+			echo "<input type='checkbox' name='message' value='oui' id='message' checked>";
 		else
-			echo "<BR><input type='checkbox' name='message' value='oui' id='message'>";
+			echo "<input type='checkbox' name='message' value='oui' id='message'>";
 		echo " <label for='message'>possibilit&eacute; d'envoyer un message</label>";
 		
-		echo "<P>Descriptif de cette p&eacute;tition&nbsp;:</BR>";
+		echo "<P>Descriptif de la p&eacute;tition&nbsp;:<BR>";
 		echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
 		echo $texte_petition;
-		echo "</TEXTAREA><P>\n";
-
-		echo "</FONT>";
+		echo "</TEXTAREA></FONT><P>\n";
 
 	}
 	else {
-		echo "<input type='radio' name='petition' value='on' id='petitionon'>";
-		echo "<label for='petitionon'>Ajouter une p&eacute;tition</label>";
+		echo "<input type='radio' name='change_petition' value='on' id='petitionon'>";
+		echo "<label for='petitionon'>Activer la p&eacute;tition</label>";
 	}
 	if (!$petition){
-		echo "<br><input type='radio' name='petition' value='off' id='petitionoff' checked>";
+		echo "<br><input type='radio' name='change_petition' value='off' id='petitionoff' checked>";
 		echo "<B><label for='petitionoff'>Pas de p&eacute;tition</label></B>";
 	}else{
-		echo "<br><input type='radio' name='petition' value='off' id='petitionoff'>";
+		echo "<br><input type='radio' name='change_petition' value='off' id='petitionoff'>";
 		echo "<label for='petitionoff'>Supprimer la p&eacute;tition</label>";
 	}
 	
