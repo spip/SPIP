@@ -16,6 +16,14 @@ $flag_dynamique = true;
 $flag_preserver = true;
 $forcer_lang = true;
 
+// Compatibilite anciennes versions de SPIP : si un 'var_url' (cible du login)
+// est passe, renvoyer vers la meme adresse mais avec 'url'
+if (strpos($_SERVER['REQUEST_URI'], 'var_url')) {
+	header('Location: '.str_replace('var_url', 'url', $_SERVER['REQUEST_URI']));
+	exit;
+}
+// Fin compatibilite
+
 include ("inc-public.php3");
 
 ?>
