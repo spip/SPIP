@@ -619,6 +619,87 @@ a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
 
 /*
+ * Correction orthographique
+ */
+ 
+.ortho {
+	background: #ffe0e0;
+	border: 2px transparent;
+	border-bottom: 2px dashed red;
+	color: inherit;
+	text-decoration: none;
+}
+a.ortho:hover {
+	border: 2px dashed red;
+	color: inherit;
+	text-decoration: none;
+}
+.suggest-actif, .suggest-inactif {
+	font-family: "Trebuchet Sans MS", Verdana, Arial, sans-serif;
+	font-size: 95%;
+	font-weight: bold;
+	margin: 8px;
+	z-index: 1;
+}
+.suggest-actif .detail, .suggest-inactif .detail {
+	margin: 8px;
+	margin-top: -0.5em;
+	padding: 0.5em;
+	padding-top: 1em;
+	border: 1px solid #c8c8c8;
+	background: #f3f2f3;
+	font-family: Georgia, Garamond, "Times New Roman", serif;
+	font-weight: normal;
+	z-index: 0;
+}
+.suggest-actif .detail {
+	display: block;
+}
+.suggest-inactif .detail {
+	display: none;
+}
+
+/*
+ * Comparaison d'articles
+ */
+
+.diff-para-deplace {
+	background: #e8e8ff;
+}
+.diff-para-ajoute {
+	background: #d0ffc0;
+	color: #000000;
+}
+.diff-para-supprime {
+	background: #ffd0c0;
+	color: #904040;
+	text-decoration: line-through;
+}
+.diff-deplace {
+	background: #e8e8ff;
+}
+.diff-ajoute {
+	background: #d0ffc0;
+}
+.diff-supprime {
+	background: #ffd0c0;
+	color: #802020;
+	text-decoration: line-through;
+}
+.diff-para-deplace .diff-ajoute {
+	border: 1px solid #808080;
+	background: #b8ffb8;
+}
+.diff-para-deplace .diff-supprime {
+	border: 1px solid #808080;
+	background: #ffb8b8;
+}
+.diff-para-deplace .diff-deplace {
+	border: 1px solid #808080;
+	background: #b8b8ff;
+}
+
+/*
  * Barre de raccourcis
  */
 
