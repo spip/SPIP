@@ -86,6 +86,16 @@ blockquote.spip {
 	padding: 5px;
 }
 
+div.spip_poesie {
+	margin-left: 10px;
+	padding-left: 10px;
+	border-left: 1px solid #999999;
+}
+div.spip_poesie div {
+	text-indent: -60px;
+	margin-left: 60px;
+}
+
 
 .spip_bouton { background-color: #FFCC00;}
 
