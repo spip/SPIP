@@ -20,7 +20,7 @@ $GLOBALS['i18n_spip_oci_gsc'] = array(
 'admin_modifier_rubrique' => 'Modificar aquera rubrica',
 'admin_recalculer' => 'Tornar calcular la pagina',
 'aide_non_disponible' => 'Aquera part de l\'ajuda en linha n\'ei pas enq&uuml;&egrave;ra disponibla t&agrave; aquesta lenga.',
-'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Qu\'ei impossible d\'actualizar la basa MySQL de cap t&agrave; la version @version@, dilh&egrave;u a causa d\'un probl&egrave;ma de permissions.',
+'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Qu\'ei impossible d\'actualizar la basa MySQL de cap t&agrave; la version @version@; dilh&egrave;u que i a un probl&egrave;ma relatiu au dret de modificar la basa de dadas. Volhatz contactar lo v&ograve;ste aubergader.',
 'avis_acces_interdit' => 'Acc&egrave;s pro&iuml;bit.',
 'avis_archive_incorrect' => 'lo fichi&egrave;r archiu n\'ei pas un fichi&egrave;r SPIP',
 'avis_archive_invalide' => 'lo fichi&egrave;r archiu n\'ei pas valid',
@@ -69,6 +69,22 @@ la documentacion d\'SPIP</a>.',
 
 
 // B
+'barre_a_accent_grave' => 'Inserir ua A accent gr&egrave;u majuscula',
+'barre_aide' => 'Utilizar las acorcidas tipograficas ent&agrave; enriquir la v&ograve;sta compaginacion',
+'barre_aide_rac' => 'Sab&eacute;\'n mei sus las acorcidas tipograficas',
+'barre_e_accent_aigu' => 'Inserir ua E accent agut majuscula',
+'barre_eo' => 'Inserir ua E dens l\'O',
+'barre_eo_maj' => 'Inserir ua E dens l\'O majuscula',
+'barre_gras' => 'Hicar en {{gras}}',
+'barre_guillemets' => 'Enrodar dab &laquo; verguetas francesas &raquo;',
+'barre_guillemets_de' => 'Enrodar dab &#8222;verguetas&#8220;',
+'barre_guillemets_simples' => 'Enrodar dab &#8220;verguetas&#8221;',
+'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
+'barre_italic' => 'Hicar en {italics}',
+'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
+'barre_lien_input' => 'Volhatz indicar l\'adre&ccedil;a deu v&ograve;ste ligam (que podetz indicar ua adre&ccedil;a web devath la forma http://www.lomensit.com o simplament indicar lo num&egrave;ro d\'un article d\'aqueth sit).',
+'barre_note' => 'Transformar en [[N&ograve;ta de bas de pagina]]',
+'barre_quote' => '<quote>Citar un messatge</quote>',
 'bouton_acces_ldap' => 'Ajustar l\'acc&egrave;s a LDAP >>',
 'bouton_ajouter' => 'Ajustar',
 'bouton_ajouter_document' => 'AJUSTAR UN DOCUMENT',
@@ -1581,7 +1597,6 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
-
 
 );
 
