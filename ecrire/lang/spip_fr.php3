@@ -1729,10 +1729,12 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 
 // Z
 'zbug_balise_b_aval' => '&nbsp;: balise B en aval',
+'zbug_boucle' => 'boucle',
 'zbug_boucle_recursive_undef' => 'boucle r&eacute;cursive non d&eacute;finie',
 'zbug_champ_argument_manquant' => 'Champ @champ@&nbsp;: argument manquant',
 'zbug_champ_hors_boucle' => 'Champ @champ@ hors boucle',
 'zbug_champ_hors_motif' => 'Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => 'r&eacute;sultat',
 'zbug_critere_inconnu' => 'crit&egrave;re inconnu @critere@',
 'zbug_distant_interdit' => 'distant interdit',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: double d&eacute;finition',
@@ -1745,6 +1747,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'zbug_info_erreur_squelette' => 'Erreur sur le site',
 'zbug_inversion_ordre_inexistant' => 'inversion d\'un ordre inexistant',
 'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => 'r&eacute;sultat',
 'zbug_serveur_indefini' => 'serveur SQL ind&eacute;fini',
 'zbug_table_inconnue' => 'Table SQL &laquo; @table@ &raquo; inconnue'
 
