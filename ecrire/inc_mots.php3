@@ -358,6 +358,12 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		else
 			echo debut_block_invisible("lesmots");
 
+		if ($nombre_mots_associes > 3) {
+			echo "<div align='right' class='arial1'>";
+			echo "<a href=\"$url_base&supp_mot=-1#mots\">"._T('info_retirer_mots')."</a>";
+			echo "</div><br />\n";
+		}
+
 		$form_mot = "<FORM ACTION='$url_base#mots' METHOD='post' STYLE='margin:1px;'>"
 			."<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet'>";
 
@@ -448,11 +454,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		echo fin_block();
 	}
 
-	if ($nombre_mots_associes > 3) {
-		echo "<DIV ALIGN='right'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url_base&supp_mot=-1#mots\">"._T('info_retirer_mots')."</A></FONT>";
-		echo "</DIV>";
-	}
 
 	fin_cadre_enfonce();
 }
