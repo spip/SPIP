@@ -52,20 +52,21 @@ a:active.spip-admin-boutons {
 
 
 /* Style pour le mode debug */
-#spip_debug {
+#spip-debug {
 	background-color: #FFECD9;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
-#spip_debug ul ul {
+#spip-debug ul ul {
 	font-size: 80%;
 }
 
-#spip_debug fieldset {
+#spip-debug fieldset {
 	background-color: #FFF;
 	font-family: "Courier New", Courier, monospace;
+	font-size: 12;
 }
 
-#spip_debug legend {
+#spip-debug legend {
 	background-color: #FFF;
 	border: solid 1px #F00;
 	padding: 1px 1em;
@@ -73,10 +74,10 @@ a:active.spip-admin-boutons {
 	font-weight: bold;
 }
 
-#spip_debug ul ul a {
+#spip-debug ul ul a {
 	text-decoration: none;
 }
 
-#spip_debug ul ul a:hover {
+#spip-debug ul ul a:hover {
 	text-decoration: underline;
 }
