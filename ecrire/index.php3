@@ -18,7 +18,7 @@ if($options != 'avancees') {
 
 
 function enfant($collection){
-	global $les_enfants;
+	global $les_enfants, $couleur_foncee;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 	
@@ -42,7 +42,7 @@ function enfant($collection){
 		if  (acces_restreint_rubrique($id_rubrique)){
 			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='red'>".typo($titre)."</font></A></B>";
 		}else{
-			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'>".typo($titre)."</A></B>";
+			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
 		}
 		if (strlen($descriptif)>1)
 			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";

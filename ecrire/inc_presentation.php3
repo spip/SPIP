@@ -1755,7 +1755,7 @@ function fin_page() {
 // Afficher la hierarchie des rubriques
 //
 function afficher_parents($collection){
-	global $parents;
+	global $parents, $couleur_foncee;
 	global $coll;
 	$parents=ereg_replace("(~+)","\\1~",$parents);
 	if ($collection!=0){	
@@ -1768,13 +1768,13 @@ function afficher_parents($collection){
 			$titre = $row['titre'];
 			
 			if (acces_restreint_rubrique($id_rubrique)) {
-				$parents="~ <IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
+				$parents="~ <IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n$parents";
 			}
 			else {
 				if ($id_parent == "0"){
-					$parents="~ <IMG SRC='img_pack/secteur-24.gif' alt='o' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
+					$parents="~ <IMG SRC='img_pack/secteur-24.gif' alt='o' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n$parents";
 				} else {
-					$parents="~ <IMG SRC='img_pack/rubrique-24.gif' alt='o' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
+					$parents="~ <IMG SRC='img_pack/rubrique-24.gif' alt='o' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>$titre</font></a></FONT><BR>\n$parents";
 				}
 			}
 		}
