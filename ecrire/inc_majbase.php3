@@ -954,6 +954,12 @@ function maj_base() {
 		maj_version(1.810);
 	}
 
+	if ($version_installee < 1.811) {
+		spip_query("ALTER TABLE spip_syndic ADD extra longblob NULL");
+		maj_version(1.811);
+	}
+	
+	
 	return true;
 }
 
