@@ -2096,6 +2096,8 @@ if ($spip_display == "4") {
 else {
 	// Icones principales
 	
+	echo "<div class='invisible_au_chargement' style='height: 0px;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
+	
 	echo "<div id='haut-page'>";
 
 	echo "<div class='bandeau-principal' align='center'>\n";
@@ -3052,7 +3054,7 @@ function fin_page($credits='') {
 	echo "<div align='right' class='verdana2'>";
 
 	if ($spip_display == 4) {
-		echo "<div><a href=\"index.php3?set_disp=2\">"."Retour a l'interface complete"."</a></div>";
+		echo "<div><a href=\"index.php3?set_disp=2\">"._T("access_interface_graphique")."</a></div>";
 	}
 
 	echo "<b>SPIP $spip_version_affichee</b> ";
