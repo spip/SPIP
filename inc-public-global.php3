@@ -260,6 +260,8 @@ function bouton_admin($titre, $lien) {
 
 
 if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
+	include_ecrire("inc_filtres.php3");
+
 	if ($id_article) {
 		bouton_admin("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
