@@ -802,16 +802,17 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			
 			$les_auteurs = "$les_auteurs";
 
-	
+			// La petite puce de changement de statut
 			$vals[] = puce_statut_article($id_article, $statut);
-	
-	
+
+			// Le titre (et la langue)
 			$s = "<div>";
-				
+
 			if (acces_restreint_rubrique($id_rubrique))
-			  $s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'))
-			    . "&nbsp;<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
-			
+				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
+
+			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
+
 			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo = decrire_logo("arton$id_article");
@@ -841,21 +842,14 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			
 			$vals[] = $s;
 
+			// Les auteurs
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
+			// La date
 			$s = affdate_jourcourt($date);
-			
-			/* # ca fait mal a la tete ce truc
-			if ($afficher_visites AND $visites > 0) {
-				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_visites', array('visites' => $visites))."</a></font>";
-				if ($popularite > 0) $s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_popularite', array('popularite' => $popularite))."</a></font>";
-
-				$s = "<div class='liste_clip' style='width: 100px;'>$s</div>";
-			}
-			*/
-			
 			$vals[] = $s;
-			
+
+			// Le numero (moche)
 			if ($options == "avancees") {
 				$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
 			}
