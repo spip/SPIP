@@ -218,7 +218,9 @@ function executer_squelette($squelette, $contexte) {
 	$use_cache = false;
 	if (file_exists($squelette_cache)) {
 		$t = filemtime($squelette_cache);
-		if ((filemtime("$squelette.html") < $t) AND (filemtime("inc-calcul-squel.php3") < $t)) {
+		if ((filemtime("$squelette.html") < $t)
+		AND (filemtime("inc-calcul-squel.php3") < $t)
+		AND (filemtime("mes_fonctions.php3") < $t)) {
 			$use_cache = true;
 		}
 	}
