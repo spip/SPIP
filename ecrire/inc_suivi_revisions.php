@@ -10,16 +10,20 @@ include_spip("revisions.php");
 include_spip("diff.php");
 
 
-function afficher_para_modifies ($texte) {
+function afficher_para_modifies ($texte, $court = false) {
+	// Limiter la taille de l'affichage
+	if ($court) $max = 200;
+	else $max = 2000;
+	
 	$paras = explode ("\n",$texte);
-	for ($i = 0; $i < count($paras); $i++) {
+	for ($i = 0; $i < count($paras) AND strlen($texte_ret) < $max; $i++) {
 		if (ereg("diff-", $paras[$i])) $texte_ret .= $paras[$i]."\n\n";
 	}
 	$texte = $texte_ret;
 	return $texte;
 }
 
-function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "") {
+function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false) {
 	global $connect_id_auteur, $connect_statut, $dir_lang;
 	
 	$nb_aff = 10;
@@ -35,9 +39,9 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	if ($id_secteur > 0) $req_where .= " AND articles.id_secteur = $id_secteur";
 
 	$query = "
-SELECT versions.*, articles.statut, articles.titre 
-FROM spip_versions AS versions, spip_articles AS articles 
-WHERE versions.id_article = articles.id_article AND versions.id_version > 1 $req_where ";
+		SELECT versions.*, articles.statut, articles.titre 
+		FROM spip_versions AS versions, spip_articles AS articles 
+		WHERE versions.id_article = articles.id_article AND versions.id_version > 1 $req_where ";
 	
 	$result = spip_query($query . " ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
 	if (spip_num_rows($result) > 0) {	
@@ -144,7 +148,7 @@ WHERE id_article='$id_article'";
 				foreach ($champs as $champ) {
 					if (!$new[$champ] && !$old[$champ]) continue;			
 					$diff = new Diff(new DiffTexte);
-					$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))));
+					$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
 				}
 			}		
 			
