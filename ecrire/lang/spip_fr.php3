@@ -627,6 +627,8 @@ Merci de votre participation
 'info_choix_base' => 'Troisi&egrave;me &eacute;tape&nbsp;:',
 'info_classement_1' => '<sup>er</sup> sur @liste@',
 'info_classement_2' => '<sup>e</sup> sur @liste@',
+'info_classement_3' => '<sup>e</sup> sur @liste@',
+'info_classement_4' => '<sup>e</sup> sur @liste@',
 'info_code_acces' => 'N\'oubliez pas vos propres codes d\'acc&egrave;s&nbsp;!',
 'info_comment_lire_tableau' => 'Comment lire ce tableau',
 'info_config_suivi' => 'Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
