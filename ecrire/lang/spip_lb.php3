@@ -184,7 +184,7 @@ Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat dee
 'form_deja_inscrit' => 'Dir sidd schon ugemelt.',
 'form_email_non_valide' => '&Auml;r Email-Adress ass n&euml;t richteg.',
 'form_forum_access_refuse' => 'Dir hutt keen Zougang m&eacute;i zu d&euml;sem Site.',
-'form_forum_bonjour' => 'Bonjour,',
+'form_forum_bonjour' => 'Moien @nom@,',
 'form_forum_email_deja_enregistre' => 'D&euml;s Email-Adress ass schon ageschriwen, dir k&euml;nnt also &auml;rt normadt Passwuert benotzen.',
 'form_forum_identifiant_mail' => '&Auml;re neie Login gouf Iech lo grad per Email gesch&eacute;ckt.',
 'form_forum_identifiants' => 'Pers&eacute;inlech Identifikatiounen',

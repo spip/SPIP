@@ -79,10 +79,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_enregistrement_obligatoire' => 'Cadastro obrigat&oacute;rio (os usu&aacute;rios devem se cadastrar, fornecendo seu e-mail, antes de poderem enviar suas contribui&ccedil;&otilde;es).',
 'bouton_radio_envoi_annonces_adresse' => 'Enviar os avisos para o endere&ccedil;o:',
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista de novidades',
-'bouton_radio_moderation_priori' => 'Modera&ccedil;&atilde;o a priori (as contribui&ccedil;&otilde;es s&oacute; ser&atilde;o exibidas publicamente ap&oacute;s a aprova&ccedil;&atilde;o dos administradores).',
+'bouton_radio_moderation_priori' => 'Modera&ccedil;&atilde;o pr&eacute;via (as contribui&ccedil;&otilde;es s&oacute; ser&atilde;o exibidas publicamente ap&oacute;s a aprova&ccedil;&atilde;o dos administradores).',
 'bouton_radio_modere_abonnement' => 'moderado por assinatura',
 'bouton_radio_modere_posteriori' => 'moderado a posteriori',
-'bouton_radio_modere_priori' => 'moderado a priori',
+'bouton_radio_modere_priori' => 'moderado previamente',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'N&atilde;o aparecer na lista de redatores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar os avisos editoriais',
 'bouton_radio_non_syndication' => 'Sem sindica&ccedil;&atilde;o',
@@ -101,7 +101,7 @@ O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 'bouton_redirection' => 'REDIRECIONAMENTO',
 'bouton_relancer_installation' => 'Reiniciar a instala&ccedil;&atilde;o',
 'bouton_restaurer_base' => 'Restaurar a base',
-'bouton_suivant' => 'Pr&oacute;ximo',
+'bouton_suivant' => 'Avan&ccedil;ar',
 'bouton_tenter_recuperation' => 'Tentar uma repara&ccedil;&atilde;o',
 'bouton_test_proxy' => 'Testar o proxy',
 'bouton_vider_cache' => 'Limpar o cache',
@@ -109,8 +109,8 @@ O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 
 
 // C
-'cache_mode_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo comprimido.',
-'cache_mode_non_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo n&atilde;o comprimido.',
+'cache_mode_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo compactado.',
+'cache_mode_non_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo n&atilde;o compactado.',
 'cache_modifiable_webmestre' => 'Estes par&acirc;metros s&atilde;o modific&aacute;veis pelo webmaster do site.',
 'calendrier_synchro' => 'Se voc&ecirc; usa um programa de agenda compat&iacute;vel com <b>iCal</b>, voc&ecirc; pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste site.',
 
@@ -239,7 +239,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_ajouter_rubrique' => 'Incluir outra se&ccedil;&atilde;o para administrar:',
 'info_annonce_nouveautes' => 'Aviso das novidades',
 'info_annuler_blocage_priori' => 'Anular
-    este bloqueio a priori',
+    este bloqueio pr&eacute;vio',
 'info_anterieur' => 'anterior',
 'info_appliquer_choix_moderation' => 'Atribuir esta escolha de modera&ccedil;&atilde;o:',
 'info_article' => 'mat&eacute;ria',
@@ -299,7 +299,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 <b>@titre_mot@</b> (@type_mot@). Esta palavra-chave est&aacute; associada a
 <b>@texte_lie@</b>; voc&ecirc; precisa confirmar esta decis&atilde;o:',
 'info_demander_blocage_priori' => 'Solicitar
-    um bloqueio a priori',
+    um bloqueio pr&eacute;vio',
 'info_derniere_etape' => '&ugrave;ltimo passo: <b>Terminou!',
 'info_derniere_syndication' => 'A &uacute;ltima sindica&ccedil;&atilde;o deste site foi efetuada em',
 'info_derniers_articles_publies' => 'Suas &uacute;ltimas mat&eacute;rias publicadas online',
@@ -537,7 +537,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_statut_site_3' => 'Proposto',
 'info_statut_site_4' => 'Na lixeira',
 'info_statut_utilisateurs_1' => 'Status padr&atilde;o dos usu&aacute;rios importados',
-'info_statut_utilisateurs_2' => '<NEW>Choisissez le statut qui est attribu&eacute; aux personnes pr&eacute;sentes dans l\'annuaire LDAP lorsqu\'elles se connectent pour la premi&egrave;re fois. Vous pourrez par la suite modifier cette valeur pour chaque auteur au cas par cas.',
+'info_statut_utilisateurs_2' => 'Escolha o status atribu&iacute;do &agrave;s pessoas que constam do diret&oacute;rio LDAP, quando elas se conectarem pela primeira v&ecirc;z. Voc&ecirc; poder&aacute;, em seguida, alterar caso a caso este valor para cada autor.',
 'info_suivi_activite' => 'Acompanhamento da atividade editorial',
 'info_supprimer_mot' => 'excluir&nbsp;esta&nbsp;palavra-chave',
 'info_surtitre' => 'Sobret&iacute;tulo:',
@@ -574,7 +574,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'info_urlref' => 'Link hipertexto:',
 'info_utilisation_spip' => 'Voc&ecirc; pode agora come&ccedil;ar a utilizar o sistema de publica&ccedil;&atilde;o assistida...',
 'info_visites_par_mois' => 'Exibir por m&ecirc;s:',
-'info_visites_plus_populaires' => '<NEW>Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publi&eacute;s&nbsp;:</b>',
+'info_visites_plus_populaires' => 'Exibir os visitantes para <b>as mat&eacute;rias mais populares</b> e para <b>as mais recentes mat&eacute;rias publicadas:</b>',
 'info_visiteur_1' => 'Visitante',
 'info_visiteur_2' => 'do site p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
@@ -715,55 +715,41 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'taille_cache_vide' => 'O cache est&aacute; vazio.',
 'taille_repertoire_cache' => 'Tamanho do diret&oacute;rio cache',
 'text_article_propose_publication' => 'Mat&eacute;ria proposta para publica&ccedil;&atilde;o. N&atilde;o deixe de contribuir no f&oacute;rum anexado &agrave; mat&eacute;ria (no p&eacute; da p&aacute;gina).',
-'texte_acces_ldap_anonyme_1' => '<NEW>Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
+'texte_acces_ldap_anonyme_1' => 'Alguns servidores LDAP n&atilde;o aceitam nenhum acesso an&ocirc;nimo. Neste caso, &eacute; necess&aacute;rio especificar um identificador de acesso inicial de modo a poder, em seguida, pesquisar as informa&ccedil;&otilde;es no diret&oacute;rio. Na maior parte dos casos, entretanto, os campos a seguir poder&atilde;o ser deixados em branco.',
 'texte_admin_effacer_01' => 'Este comando apaga <i>todo</i> o conte&uacute;do da base de dados,incluindo <i>todos</i> os acessos dos redatores e administradores. Ap&oacute;s execut&aacute;-lo, voc&ecirc; dever&aacute; reinstalar o SPIP para recriar uma nova base de dados bem como um acesso inicial de administrador.',
 'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite-lhe fazer uma c&oacute;pia de seguran&ccedil;a do conte&uacute;do da base num arquivo que ser&aacute; gravado no diret&oacute;rio <i>ecrire/data/</i>. N&atilde;o se esque&ccedil;a, tamb&eacute;m, de tranferir a totalidade do diret&oacute;rio <i>IMG/</i>, que cont&eacute;m as imagens o os documentos usados nas mat&eacute;rias e nas se&ccedil;&otilde;es.',
 'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta c&oacute;pia de seguran&ccedil;a s&oacute; poder&aacute; ser restaurada em um site com a mesma vers&atilde;o do SPIP. Sobretudo, n&atilde;o &laquo;limpe a base&raquo; com o objetivo de reinstalar a c&oacute;pia de seguran&ccedil;a ap&oacute;s uma atualiza&ccedil;&atilde;o... Consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o do SPIP</a>.',
-'texte_admin_tech_03' => '<NEW>Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
-	d\'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d\'&eacute;conomiser de l\'espace disque.',
+'texte_admin_tech_03' => 'Voc&ecirc; pode escolher fazer a c&oacute;pia de seguran&ccedil;a em formato compactado, para encurtar a sua transfer&ecirc;ncia para a sua m&aacute;quina local, ou para um servidor de c&oacute;pias de seguran&ccedil;a, e para economizar espa&ccedil;o em disco.',
 'texte_adresse_annuaire_1' => '(Se o seu diret&oacute;rio est&aacute; instalado na mesma m&aacute;quina que este website, trata-se provavelmente de &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'O autor a seguir foi inclu&iacute;do na mat&eacute;ria:',
-'texte_annuaire_ldap_1' => '<NEW>Si vous avez acc&egrave;s &agrave; un annuaire (LDAP), vous pouvez l\'utiliser pour importer automatiquement des utilisateurs sous SPIP.',
+'texte_annuaire_ldap_1' => 'Se voc&ecirc; tem acesso a um diret&oacute;rio LDAP, voc&ecirc; poder&aacute; utiliz&aacute;-lo para importar automaticamente os usu&aacute;rios para o SPIP.',
 'texte_article_statut' => 'Esta mat&eacute;ria est&aacute;:',
 'texte_article_virtuel' => 'Mat&eacute;ria virtual',
-'texte_article_virtuel_reference' => '<NEW><b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL. Pour supprimer la redirection, effacez l\'URL ci-dessus.',
+'texte_article_virtuel_reference' => '<b>Mat&eacute;ria virtual:</b> mat&eacute;ria referenciada no seu site SPIP, mas redirecionada para um outro URL. Para cancelar o redirecionamento, apague o URL abaixo.',
 'texte_aucun_resultat_auteur' => 'Nenhum resultado para "@cherche_auteur@"',
 'texte_auteur_messagerie' => 'Este site pode monitorar permanentemente a lista de editores conectados, permitindo-lhe trocar mensagens em tempo real. Voc&ecirc; pode decidir n&atilde;o aparecer nessa lista (ficando "invis&iacute;vel" para os outros usu&aacute;rios).',
-'texte_auteur_messagerie_1' => '<NEW>Ce site permet l\'&eacute;change de messages et la constitution de forums de discussion priv&eacute;s entre les participants du site. Vous pouvez d&eacute;cider de ne pas participer &agrave; ces &eacute;changes.',
+'texte_auteur_messagerie_1' => 'Este site permite a troca de mensagens e o estabelecimento de f&oacute;runs de discuss&atilde;o privados entre os participantes do site. Voc&ecirc; pode decidir n&atilde;o participar dessas trocas.',
 'texte_auteurs' => 'OS AUTORES',
 'texte_breves' => 'As notas s&atilde;o textos curtos e simples que permitem rapidamente disponibilizar online informa&ccedil;&otilde;es concisas, gerenciar o clipping, um calend&aacute;rio de eventos...',
 'texte_choix_base_1' => 'Escolha a sua base:',
 'texte_choix_base_2' => 'O servidor MySQL cont&eacute;m diversas bases de dados.',
 'texte_choix_base_3' => '<B>Escolha</B> abaixo a que lhe foi atribu&iacute;da pelo seu servi&ccedil;o de hospedagem:',
-'texte_commande_vider_tables_indexation' => '<NEW>Utilisez cette commande afin de vider les tables d\'indexation utilis&eacute;es
-			par le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP. Cela vous permettra
-			de gagner de l\'espace disque.',
-'texte_comment_lire_tableau' => '<NEW>Le rang de l\'article,
-		dans le classement par popularit&eacute;, est indiqu&eacute; dans la
-		marge&nbsp;; la popularit&eacute; de l\'article (une estimation du
-		nombre de visites quotidiennes qu\'il recevra si le rythme actuel de
-		consultation se maintient) et le nombre de visites re&ccedil;ues
-		depuis le d&eacute;but sont affich&eacute;es dans la bulle qui
-		appara&icirc;t lorsque la souris survole le titre.',
-'texte_compresse_ou_non' => '<NEW>(celui-ci peut &ecirc;tre compress&eacute; ou non)',
+'texte_commande_vider_tables_indexation' => 'Use este comando para esvaziar as tabelas de indexa&ccedil;&atilde;o usadas pelo motor de busca integrado ao SPIP. Isto permitir&aacute; ganhar espa&ccedil;o em disco.',
+'texte_comment_lire_tableau' => 'A classifica&ccedil;&atilde;o da mat&eacute;ria, na classifica&ccedil;&atilde;o por popularidade, &eacute; indicada na margem; a popularidade de uma mat&eacute;ria (uma estimativa do n&uacute;mero de visitas di&aacute;rias que ela receberia se o ritmo atual de acesso se mantivesse) e o n&uacute;mero de visitas recebidas depois do lan&ccedil;amento s&atilde;o exibidas na dica que aparece quando o cursor do mouse se sobrep&otilde;e ao t&iacute;tulo.',
+'texte_compresse_ou_non' => '(pode ser compactado ou n&atilde;o)',
 'texte_compte_element' => '@count@ elemento',
 'texte_compte_elements' => '@count@ elementos',
 'texte_config_groupe_mots_cles' => 'Voc&ecirc; deseja ativar a configura&ccedil;&atilde;o avan&ccedil;ada das palavras-chave, indicando, por exemplo, que se pode selecionar uma &uacute;nica palavra-chave por grupo, ou que um grupo &eacute; importante...&nbsp;?',
 'texte_connexion_mysql' => 'Consulte as informa&ccedil;&otilde;es que lhe foram fornecidas pelo seu servi&ccedil;o de hospedagem: nelas voc&ecirc; dever&aacute; descobrir se o seu servi&ccedil;o suporta MySQL e os c&oacute;digos de conex&atilde;o ao servidor MySQL.',
 'texte_contenu_article' => '(Conte&uacute;do da mat&eacute;ria em poucas palavras.)',
-'texte_contenu_articles' => '<NEW>Selon la maquette adopt&eacute;e pour votre site, vous pouvez d&eacute;cider
-		que certains &eacute;l&eacute;ments des articles ne sont pas utilis&eacute;s.
-		Utilisez la liste ci-dessous pour indiquer quels &eacute;l&eacute;ments sont disponibles.',
-'texte_crash_base' => '<NEW>Si votre base de donn&eacute;es a
-			crash&eacute;, vous pouvez tenter une r&eacute;paration
-			automatique.',
+'texte_contenu_articles' => 'De acoordo com o layout adotado pelo seu site, voc&ecirc; poder&aacute; decidir se certos elementos das mat&eacute;rias ser&atilde;o utilizados. Use a listagem abaixo para indicar quais elementos est&atilde;o dispon&iacute;veis.',
+'texte_crash_base' => 'Se a sua base de dados se corrompeu, voc&ecirc; poder&aacute; tentar uma repara&ccedil;&atilde;o autom&aacute;tica.',
 'texte_creer_rubrique' => 'Antes de poder escrever mat&eacute;rias, voc&ecirc; precisa criar uma se&ccedil;&atilde;o.',
 'texte_date_creation_article' => 'DATA DE CRIA&Ccedil;&Atilde;O DA MAT&Eacute;RIA:',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ANTERIOR:',
 'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de publica&ccedil;&atilde;o anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
-'texte_demander_blocage_priori' => '<NEW>Les prochains liens en
-				provenance de ce site seront bloqu&eacute;s a priori.',
+'texte_demander_blocage_priori' => 'Os pr&oacute;ximos links provenientes deste site ser&atilde;o bloqueados previamente.',
 'texte_descriptif_petition' => 'Descri&ccedil;&atilde;o da peti&ccedil;&atilde;o',
 'texte_descriptif_rapide' => 'Descri&ccedil;&atilde;o r&aacute;pida',
 'texte_documents_joints' => 'Voc&ecirc; pode autorizar a inclus&atilde;o de documentos (arquivos, imagens,  multim&iacute;dia etc.) &agrave;s mat&eacute;rias e/ou &agrave;s se&ccedil;&otilde;es. Estes arquivos podem, em seguida, ser referenciados na mat&eacute;ria, ou exibidos separadamente.<p />',
@@ -772,61 +758,33 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_effacer_donnees_indexation' => 'Apagar os dados de indexa&ccedil;&atilde;o',
 'texte_en_cours_validation' => 'As mat&eacute;rias e notas abaixo est&atilde;o propostas para publica&ccedil;&atilde;o. N&atilde;o hesite a dar a sua opini&atilde;o sobre as mesmas nos f&oacute;runs anexos.',
 'texte_enrichir_mise_a_jour' => 'Voc&ecirc; pode enriquecer a diagrama&ccedil;&atilde;o do seu texto usando &laquo;atalhos tipogr&aacute;ficos&raquo;.',
-'texte_fichier_authent' => '<NEW><b>SPIP doit-il cr&eacute;er les fichiers sp&eacute;ciaux <tt>.htpasswd</tt>
-  et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire <tt>ecrire/data/</tt> ?</b><p />
-  Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
-  et administrateurs en d\'autres endroits de votre site
-  (programme externe de statistiques, par exemple).<p />
-  Si vous n\'en avez pas utilit&eacute;, vous pouvez laisser cette option
-  &agrave; sa valeur par d&eacute;faut (pas de cr&eacute;ation 
-  des fichiers).',
+'texte_fichier_authent' => '<b>O SPIP pode criar os arquivos especiais  <tt>.htpasswd</tt> e <tt>.htpasswd-admin</tt> no diret&oacute;rio <tt>ecrire/data/</tt>?</b><p />
+Estes arquivos podem servir para restringir o acesso aos autores e administradores em outras &aacute;reas do seu site (programas externos de estat&iacute;sticas, por exemplo).<p />
+Se eles n&atilde;o forem &uacute;teis, voc&ecirc; poder&aacute; deixar esta op&ccedil;&atilde;o com o seu valor padr&atilde;o (sem criar os arquivos).',
 'texte_informations_personnelles_1' => 'O sistema vai criar agora um acesso personalizado ao site.',
-'texte_informations_personnelles_2' => '<NEW>(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
+'texte_informations_personnelles_2' => '(Nota: se se trata de uma reinstala&ccedil;&atilde;o, e os seus acessos funcionam sem problemas, voc&ecirc; pode',
 'texte_introductif_article' => '(Texto introdut&oacute;rio da mat&eacute;ria.)',
-'texte_jeu_caractere' => '<NEW>Cette option est utile si votre site doit afficher des alphabets
-	diff&eacute;rents de l\'alphabet romain (ou &laquo;&nbsp;occidental&nbsp;&raquo;) et ses d&eacute;riv&eacute;s.
-	Dans ce cas, il peut &ecirc;tre pr&eacute;f&eacute;rable de changer le r&eacute;glage par d&eacute;faut pour 
-	un jeu de caract&egrave;res appropri&eacute;&nbsp;; nous vous conseillons dans tous les cas de faire des essais
-	afin de trouver une solution satisfaisante. Si vous modifiez ce param&egrave;tre, n\'oubliez pas non plus d\'adapter
-	le site public en cons&eacute;quence (balise <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => '<NEW>Ce r&eacute;glage n\'a pas d\'effet r&eacute;troactif. Par
-	cons&eacute;quent, les textes d&eacute;j&agrave; entr&eacute;s peuvent s\'afficher
-	incorrectement &agrave; la suite d\'une modification du r&eacute;glage. Dans tous
-	les cas, vous pourrez sans dommage revenir au r&eacute;glage pr&eacute;c&eacute;dent.',
+'texte_jeu_caractere' => 'Esta op&ccedil;&atilde;o &eacute; &uacute;til se o seu site precisa exibir alfabetos diferentes do alfabeto romano (ou &laquo;ocidental&raquo;) e seus derivados.
+Neste caso, &eacute; prefer&iacute;vel alterar a op&ccedil;&atilde;o padr&atilde;o para um conjunto de craract&eacute;res apropriado; &eacute; aconselh&aacute;vel, em todos os casos, efetuar testes para encontrar uma solu&ccedil;&atilde;o satisfat&oacute;ria. Se voc&ecirc; modificar este par&acirc;metro, n&atilde;o se esque&ccedil;a de adaptar o site p&uacute;blico consequentemente (tag <tt>#CHARSET</tt>).',
+'texte_jeu_caractere_2' => 'Esta configura&ccedil;&atilde;o n&atilde;o tem efeito retroativo. Consequentemente, os textos j&aacute; gravados na base de dados podem ser exibidos incorretamente ap&oacute;s uma altera&ccedil;&atilde;o da configura&ccedil;&atilde;o. Em todo o caso, voc&ecirc; poder&aacute; voltar sem problemas &agrave; configura&ccedil;&atilde;o anterior.',
 'texte_lien_hypertexte' => '(Se a sua mensagem se refere a uma mat&eacute;ria publicada na web, ou a uma p&aacute;gina fornecendo informa&ccedil;&otilde;es adicionais, por favor, informe o t&iacute;tulo da p&aacute;gina e respectivo URL.)',
-'texte_liens_sites_syndiques' => '<NEW>Les liens issus des sites syndiqu&eacute;s peuvent
-			&ecirc;tre bloqu&eacute;s a priori&nbsp;; le r&eacute;glage
-			ci-dessous indique le r&eacute;glage par d&eacute;faut des
-			sites syndiqu&eacute;s apr&egrave;s leur cr&eacute;ation. Il
-			est ensuite possible, de toutes fa&ccedil;ons, de
-			d&eacute;bloquer chaque lien individuellement, ou de
-			choisir, site par site, de bloquer les liens &agrave; venir
-			de tel ou tel site.',
-'texte_liens_syndication' => '<NEW>Les prochains liens en
-				provenance de ce site seront affich&eacute;s imm&eacute;diatement sur le site public.',
-'texte_login_ldap_1' => '<NEW>(Laisser vide pour un acc&egrave;s anonyme, ou entrer le chemin complet, par exemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)',
+'texte_liens_sites_syndiques' => 'Os links gerados pelos sites sindicados podem ser bloqueados previamente; a configura&ccedil;&atilde;o abaixo indica a op&ccedil;&atilde;o padr&atilde;o para os sites sindicados, ap&oacute;s a sua inclus&atilde;o. &Eacute; poss&iacute;vel, em seguida, desbloquear cada link individualmente, ou escolher, site a site, o bloqueio de links originados de um ou outro site.',
+'texte_liens_syndication' => 'Os pr&oacute;ximos links originados deste site ser&atilde;o exibidos imediatamente no site p&uacute;blico.',
+'texte_login_ldap_1' => '(Deixe em branco para acesso an&ocirc;nimo, ou informe o caminho completo, por exemplo &laquo;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Aten&ccedil;&atilde;o! Este &eacute; o login com o qual voc&ecirc; est&aacute; conectado agora. Use este formul&aacute;rio com precau&ccedil;&atilde;o...',
-'texte_message_edit' => '<NEW>Attention&nbsp;: ce message peut &ecirc;tre modifi&eacute; par tous les administrateurs du site, et est visible par tous les r&eacute;dacteurs. N\'utilisez les annonces que pour exposer des &eacute;v&eacute;nements importants de la vie du site.',
+'texte_message_edit' => 'Aten&ccedil;&atilde;o: esta mensagem pode ser alterada por todos os administradores do site, e &eacute; vis&iacute;vell para todos os redatores. Use os avisos apenas para difundir os eventos importantes da vida do site.',
 'texte_messages_publics' => 'Mensagens p&uacute;blicas da mat&eacute;ria:',
-'texte_mise_a_niveau_base_1' => '<NEW>Vous venez de mettre &agrave; jour les fichiers SPIP.
-	Il faut maintenant mettre &agrave; niveau la base de donn&eacute;es
-	du site.',
+'texte_mise_a_niveau_base_1' => 'Voc&ecirc; acabou de atualizar os arquivos do SPIP.
+Agora &eacute; necess&aacute;rio atualizar a base de dados do site.',
 'texte_modifier_article' => 'Editar a mat&eacute;ria:',
-'texte_moteur_recherche_active' => '<NEW><b>Le moteur de recherche est activ&eacute;.</b> Utilisez cette commande
-		si vous souhaitez proc&eacute;der &agrave; une r&eacute;indexation rapide (apr&egrave;s restauration
-		d\'une sauvegarde par exemple). Notez que les documents modifi&eacute;s de
-		fa&ccedil;on normale (depuis l\'interface SPIP) sont automatiquement
-		r&eacute;index&eacute;s&nbsp;: cette commande n\'est donc utile que de fa&ccedil;on exceptionnelle.',
+'texte_moteur_recherche_active' => '<b>O motor de busca foi ativado.</b> Use este comando se quiser proceder a uma reindexa&ccedil;&atilde;o r&aacute;pida (ap&oacute;s restaura&ccedil;&atilde;o de uma c&oacute;pia de seguran&ccedil;a, por exemplo). Note que os documentos modificados de modo normal (atrav&eacute;s da interface do SPIP) s&atilde;o automaticamente reindexados: este comando s&oacute; tem utilidade pontual.',
 'texte_moteur_recherche_non_active' => 'O motor de busca n&atilde;o est&aacute; ativado.',
-'texte_mots_cles' => '<NEW>Les mots-cl&eacute;s permettent de cr&eacute;er des liens th&eacute;matiques entre vos articles
-		ind&eacute;pendamment de leur placement dans des rubriques. Vous pouvez ainsi
-		enrichir la navigation de votre site, voire utiliser ces propri&eacute;t&eacute;s
-		pour personnaliser la pr&eacute;sentation des articles dans vos squelettes.',
-'texte_mots_cles_dans_forum' => '<NEW>Souhaitez-vous permettre d\'utilisation des mots-cl&eacute;s, s&eacute;lectionnables par les visiteurs, dans les forums du site public&nbsp;? (Attention&nbsp;: cette option est relativement complexe &agrave; utiliser correctement.)',
-'texte_multilinguisme' => '<NEW>Si vous souhaitez g&eacute;rer des articles en plusieurs langues, avec une navigation complexe, vous pouvez ajouter un menu de s&eacute;lection de langue sur les articles et/ou sur les rubriques, en fonction de l\'organisation de votre site.',
-'texte_multilinguisme_trad' => '<NEW>Vous pouvez &eacute;galement activer un syst&egrave;me de gestion de liens entre les diff&eacute;rentes traductions d\'un article.',
-'texte_non_compresse' => '<NEW><i>non compress&eacute;</i> (votre serveur ne supportant pas cette fonctionnalit&eacute;)',
-'texte_non_fonction_referencement' => '<NEW>Vous pouvez pr&eacute;f&eacute;rer ne pas utiliser cette fonction automatique, et indiquer vous-m&ecirc;me les &eacute;l&eacute;ments concernant ce site...',
+'texte_mots_cles' => 'As palavras-chave permitem criar links tem&aacute;ticos entre as suas mat&eacute;rias, independentemente de sua localiza&ccedil;&atilde;o nas se&ccedil;&otilde;es. Voc&ecirc; poder&aacute; dessa forma enriquecer a navega&ccedil;&atilde;o do seu site, utilizando essas propriedades para personalizar a apresenta&ccedil;&atilde;o das mat&eacute;rias nos seus gabaritos.',
+'texte_mots_cles_dans_forum' => 'Voc&ecirc; deseja permitir a utiliza&ccedil;&atilde;o de palavras-chaves, selecion&aacute;veis pelos visitantes, nos f&oacute;runs do site p&uacute;blico? (Aten&ccedil;&atilde;o: esta op&ccedil;&atilde;o &eacute; relativamente complexa de se utilizar corretamente.)',
+'texte_multilinguisme' => 'Se voc&ecirc; deseja gerar mat&eacute;rias em diversos idiomas, com uma navega&ccedil;&atilde;o complexa, voc&ecirc; pode incluir um menu de sele&ccedil;&atilde;o de idioma nas mat&eacute;rias e/ou nas se&ccedil;&otilde;es, de acordo com a organiza&ccedil;&atilde;o do seu site.',
+'texte_multilinguisme_trad' => 'Voc&ecirc; pode, igualmente, ativar o sistema de gerenciamento de links entre as diferentes tradu&ccedil;&otilde;es de uma mat&eacute;ria.',
+'texte_non_compresse' => '<i>n&atilde; compactado</i> (seu servidor n&atilde;o suporta esta funcionalidade)',
+'texte_non_fonction_referencement' => 'Voc&ecirc; pode preferir n&atilde;o usar esta fun&ccedil;&atilde;o autom&aacute;tica, e indicar voc&ecirc; mesmo os elementos relativos a este site...',
 'texte_nouveau_message' => 'Nova mensagem',
 'texte_nouveau_mot' => 'Nova palavra-chave',
 'texte_nouvelle_version_spip_1' => 'Voc&ecirc; instalou uma nova vers&atilde;o do SPIP.',
@@ -836,45 +794,31 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_plusieurs_articles' => 'Demasiados autores encontrados para "@cherche_auteur@":',
 'texte_port_annuaire' => '(O valor padr&atilde;o indicado &eacute; geralmente conveniente.)',
 'texte_proposer_publication' => 'Assim que a sua mat&eacute;ria estiver pronta, voc&ecirc; pode propor a sua publica&ccedil;&atilde;o.',
-'texte_proxy' => '<NEW>Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s...),
-		il peut &ecirc;tre n&eacute;cessaire d\'utiliser un <I>proxy HTTP</I> pour atteindre les sites syndiqu&eacute;s.
-		Le cas &eacute;ch&eacute;ant, indiquez ci-dessous son adresse, sous la forme
-		<tt><html>http://proxy:8080</html></tt>. En g&eacute;n&eacute;ral,
-		vous laisserez cette case vide.',
+'texte_proxy' => 'Em alguns casos (intranet, redes protegidas...), pode ser necess&aacute;rio utilizar-se um <i>proxy HTTP</i> para atender aos sites sindicados.
+Nesse caso, informe abaixo o endere&ccedil;o, no formato
+  <tt><html>http://proxy:8080</html></tt>.Geralmente, voc&ecirc; pode deixar este campo vazio.',
 'texte_publication_articles_post_dates' => 'Que comportamento o SPIP deve adotar face &agrave;s mat&eacute;rias em que a data de publica&ccedil;&atilde;o est&aacute; pr&eacute;-datada?',
 'texte_rappel_selection_champs' => '[N&atilde;o se esque&ccedil;a de selecionar corretamente este campo.]',
-'texte_recalcul_page' => '<NEW>Si vous voulez
-recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-y le bouton &laquo; recalculer &raquo;.',
-'texte_recapitiule_liste_documents' => '<NEW>Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute;s dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
+'texte_recalcul_page' => 'Se voc&ecirc; quiser recalcular uma &uacute;nica p&aacute;gina, passe para o espa&ccedil;o p&uacute;blico e clique no bot&atilde;o &laquo;atualizar&raquo;.',
+'texte_recapitiule_liste_documents' => 'Esta p&aacute;gina compila a lista de documentos que voc&ecirc; anexou &agrave;s se&ccedil;&otilde;es. Para modificar as informa&ccedil;&otilde;es de cada documento, siga o link para a p&aacute;gina da respectiva se&ccedil;&atilde;o.',
 'texte_recuperer_base' => 'Reparar a base de dados',
 'texte_reference_mais_redirige' => 'mat&eacute;ria referenciada no seu site em  SPIP, mas redirecionada para outro URL.',
-'texte_referencement_automatique' => '<NEW><b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
-'texte_requetes_echouent' => '<NEW><b>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
-  syst&eacute;matiquement et sans raison apparente, il est possible
-  que ce soit &agrave; cause de la base de donn&eacute;es
-  elle-m&ecirc;me.</b><p />
-  MySQL dispose d\'une facult&eacute; de r&eacute;paration de ses
-  tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
-  accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
-  cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
-  peut-&ecirc;tre des indices de ce qui ne va pas...<p />
-  Si le probl&egrave;me persiste, prenez contact avec votre
-  h&eacute;bergeur.<p />',
+'texte_referencement_automatique' => '<b>Referenciamento automatizado de um site</b><br>Voc&ecirc; pode referenciar rapidamente um websites indicando abaixo o URL desejado, ou o endere&ccedil;o do seu arquivo de backend. O SPIP recuperar&aacute; automaticamente as informa&ccedil;&otilde;es relativas ao site (t&iacute;tulo, descri&ccedil;&atilde;o...).',
+'texte_requetes_echouent' => 'J&aacute; que certas solicita&ccedil;&otilde;es MySQL falharam sistematicamente e sem raz&atilde;o aparente, &eacute; poss&iacute;vel que a causa esteja na base de dados em si.</b><p />
+O MySQL disp&otilde;e de uma funcionalidade de repara&ccedil;&atilde;o das suas tabelas quando elas s&atilde;o danificadas por acidente. Voc&ecirc; poder&aacute; tentar esta repara&ccedil;&atilde;o; em caso de falha, conserve uma c&oacute;pia da mensagem de erro, que poder&aacute; conter ind&iacute;cios do que n&atilde;o est&aacute; funcionando...<p />
+Se o problema persistir, contate o seu servi&ccedil;o de hospedagem.<p />',
 'texte_restaurer_base' => 'Restaurar o conte&uacute;do de uma c&oacute;pia de seguran&ccedil;a da base',
-'texte_restaurer_sauvegarde' => '<NEW>Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
-		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
-		plac&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.
-		Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pertes &eacute;ventuelles, sont
-		irr&eacute;versibles.</b>',
+'texte_restaurer_sauvegarde' => 'Esta op&ccedil;&atilde;o permite-lhe restaurar uma c&oacute;pia de seguran&ccedil;a previamente efetuada na base. Para isso, o arquivo contendo a c&oacute;pia de seguran&ccedil;a precisa ser colocada no diret&oacute;rio <i>ecrire/data/</i>.
+Seja cuidadoso com esta funcionalidade: <b>as perdas eventuais causadas pela modifica&ccedil;&atilde;o s&atilde;o irrevers&iacute;veis.</b>',
 'texte_sauvegarde' => 'Fazer uma c&oacute;pia de seguran&ccedil;a do conte&uacute;do da base',
 'texte_sauvegarde_base' => 'Fazer uma c&oacute;pia de seguran&ccedil;a da base',
 'texte_sauvegarde_compressee' => 'A c&oacute;pia de seguran&ccedil;a da base ser&aacute; feita no arquivo n&atilde;o compactado <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => '<NEW>Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
-	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
-	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
-	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
-	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
-'texte_signification' => '<NEW>Les barres fonc&eacute;es repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres claires le nombre de visites pour chaque rubrique.',
+'texte_selection_langue_principale' => 'Voc&ecirc; pode escolher abaixo o &laquo;idioma principal&raquo; do site. esta escolha n&atilde;o o obriga - felizmente! - a escrever as suas mat&eacute;rias no idioma selecionado, mas permite determinar:
+ <ul><li> o formato padr&atilde;o das datas no site p&uacute;blico;</li>
+ <li> a natureza do motor tipogr&aacute;fico que o SPIP dever&aacute; usar para a composi&ccedil;&atilde;o dos textos;</li>
+ <li> o idioma usado nos formul&aacute;rios do site p&uacute;blico;</li>
+ <li> o idioma padr&atilde;o exibido no espa&ccedil;o privado.</li></ul>',
+'texte_signification' => 'As barras escuras represent&atilde;o as entradas acumuladas (total das subse&ccedil;&otilde;es), as barras claras, o n&uacute;mero de visitas para cada se&ccedil;&atilde;o.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(barras escuras:  domingo / curva escura: evolu&ccedil;&atilde;o da m&eacute;dia)',
 'texte_statut_attente_validation' => 'aguardando valida&ccedil;&atilde;o',
@@ -882,44 +826,22 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_statut_refuses' => 'recusados',
 'texte_suppression_fichiers' => 'Use este comando para excluir todos os arquivos que constam do cache do SPIP. Isto permite, por exemplo, for&ccedil;ar a reconstru&ccedil;&atilde;o de todas as p&aacute;ginas, caso voc&ecirc; tenha feito altera&ccedil;&otilde;es importantes no layout ou na estrutura do site.',
 'texte_sur_titre' => 'Sobret&iacute;tulo',
-'texte_syndication' => '<NEW>Il est possible de r&eacute;cup&eacute;rer automatiquement, lorsqu\'un site Web le permet, 
-		la liste de ses nouveaut&eacute;s. Pour cela, vous devez activer la syndication. 
-		<blockquote><i>Certains h&eacute;bergeurs d&eacute;sactivent cette fonctionnalit&eacute;&nbsp;; 
-		dans ce cas, vous ne pourrez pas utiliser la syndication de contenu
-		depuis votre site.</i></blockquote>',
+'texte_syndication' => '&Eacute; poss&iacute;vel recuperar automaticamente, desde que o site o permita, a lista das suas novidades. Para isso, voc&ecirc; dever&aacute; ativar a sindica&ccedil;&atilde;o.
+  <blockquote><i>Alguns servi&ccedil;os de hospedagem desativam esta funcionalidade;
+neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o de conte&uacute;do no seu site.</i></blockquote>',
 'texte_table_ok' => ': esta tabela est&aacute; OK.',
 'texte_tables_indexation_vides' => 'As tabelas de indexa&ccedil;&atilde;o do motor de busca est&atilde;o vazias.',
 'texte_tentative_recuperation' => 'Tentativa de repara&ccedil;&atilde;o',
 'texte_tenter_reparation' => 'Tentar uma repara&ccedil;&atilde;o da base de dados',
-'texte_test_proxy' => '<NEW>Pour faire un essai de ce proxy, indiquez ici l\'adresse d\'un site Web
-				que vous souhaitez tester.',
+'texte_test_proxy' => 'Para testar este proxy, informe aqui o endere&ccedil;o de um website que voc&ecirc; deseje testar.',
 'texte_titre_02' => 'T&iacute;tulo:',
 'texte_titre_obligatoire' => '<B>T&iacute;tulo</B> [obrigat&oacute;rio]',
 'texte_travail_article' => '@nom_auteur_modif@ trabalhou nesta mat&eacute;ria h&aacute; @date_diff@ minutos',
-'texte_travail_collaboratif' => '<NEW>S\'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
-		travaillent sur le m&ecirc;me article, le syst&egrave;me
-		peut afficher les articles r&eacute;cemment &laquo;&nbsp;ouverts&nbsp;&raquo;
-		afin d\'&eacute;viter les modifications simultan&eacute;es.
-		Cette option est d&eacute;sactiv&eacute;e par d&eacute;faut
-		afin d\'&eacute;viter d\'afficher des messages d\'avertissement
-		intempestifs.',
+'texte_travail_collaboratif' => 'Se &eacute; frequente acontecer de mais de um redator trabalhar em uma mesma mat&eacute;ria, o sistema pode exibir as mat&eacute;rias recentemente &laquo;abertas&raquo;, de modo a evitar modifica&ccedil;&otilde;es concorrentes.Esta op&ccedil;&atilde;o est&aacute; desativada por padr&atilde;o para evitar a exibi&ccedil;&atilde;o de mensagens de aviso intempestivas.',
 'texte_trop_resultats_auteurs' => 'Demasiados resultados para "@cherche_auteur@"; por favor, refine a pesquisa.',
 'texte_unpack' => 'transfer&ecirc;ncia da &uacute;ltima vers&atilde;o',
-'texte_utilisation_moteur_syndiques' => '<NEW>Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute; 
-				&agrave; SPIP, vous pouvez effectuer les recherches sur les sites et
-				les articles syndiqu&eacute;s de deux mani&egrave;res
-				diff&eacute;rentes. <br><img src=\'puce.gif\'> La plus
-				simple consiste &agrave; rechercher uniquement dans les
-				titres et les descriptifs des articles. <br><img src=\'puce.gif\'>
-				Une seconde m&eacute;thode, beaucoup plus puissante, permet
-				&agrave; SPIP de rechercher &eacute;galement dans le texte des
-				sites r&eacute;f&eacute;renc&eacute;s&nbsp;. Si vous
-				r&eacute;f&eacute;rencez un site, SPIP va alors effectuer la
-				recherche dans le texte du site lui-m&ecirc;me.',
-'texte_utilisation_moteur_syndiques_2' => '<NEW>Cette m&eacute;thode oblige SPIP &agrave; visiter
-				r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
-				ce qui peut provoquer un l&eacute;ger ralentissement de votre propre
-				site.',
+'texte_utilisation_moteur_syndiques' => 'J&aacute; que voc&ecirc; utiliza o motor de busca integrado ao SPIP, voc&ecirc; poder&aacute; efetuar procuras nos sites e nas mat&eacute;rias sindicadas de dois modos diferentes.<br><img src=\'puce.gif\'> A mais simples consiste em procurar unicamente nos t&iacute;tulos e nas descri&ccedil;&otilde;es das mat&eacute;rias.<br><img src=\'puce.gif\'> O outro m&eacute;todo, muito mais potente, permite ao SPIP procurar no texto dos sites referenciados. Se voc&ecirc; referenciar um site, o SPIP ir&aacute; efetuar a busca no texto do site.',
+'texte_utilisation_moteur_syndiques_2' => 'Este m&eacute;todo obriga o SPIP a visitar regularmente os sites referenciados, o que pode provocar um ligeiro retardamento do seu pr&oacute;prio site.',
 'texte_vide' => 'vazia',
 'texte_vider_cache' => 'Esvaziar o cache',
 'titre_admin_effacer' => 'Manuten&ccedil;&atilde;o t&eacute;cnica',
