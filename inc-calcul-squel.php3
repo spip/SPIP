@@ -514,6 +514,8 @@ function parser_boucle($texte, $id_parent) {
 					$req_where[] = "articles.statut='publie'";
 					$req_group = " GROUP BY $table.$id_objet";
 				}
+				// pas d'auteurs poubellises
+				$req_where[] = "NOT($table.statut='5poubelle')";
 				break;
 			}
 		}
@@ -789,7 +791,7 @@ function parser($texte) {
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE', 
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
 		'DATE', 'DATE_REDAC', 'INCLUS',
-		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'URL_SITE', 'NOM', 'BIO', 'TYPE', 'PGP', 
+		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP', 
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 
@@ -813,7 +815,7 @@ function parser($texte) {
 	// Textes utilisateur : ajouter la securite anti-script
 	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'URL_SITE', 'NOM', 'IP', 'BIO', 'TYPE', 'PGP'
+		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'IP', 'BIO', 'TYPE', 'PGP'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -822,7 +824,7 @@ function parser($texte) {
 	}
 
 	// Textes courts : ajouter le traitement typographique
-	$c = array('NOM_SITE_SPIP', 'SURTITRE', 'TITRE', 'SOUSTITRE', 'NOM_SITE', 'NOM');
+	$c = array('NOM_SITE_SPIP', 'SURTITRE', 'TITRE', 'SOUSTITRE', 'NOM_SITE', 'LIEN_TITRE', 'NOM');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'typo';
@@ -882,6 +884,8 @@ function parser($texte) {
 		'TEXTE' => 'texte',
 		'NOM_SITE' => 'lien_titre',
 		'URL_SITE' => 'lien_url',
+		'LIEN_TITRE' => 'lien_titre',
+		'LIEN_URL' => 'lien_url',
 		'POINTS' => 'points'
 	);
 	$rows_forums = array(
