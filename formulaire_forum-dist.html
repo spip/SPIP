@@ -1,4 +1,4 @@
-<form action='[(#HTTP_VARS{url})]' method='post' id='formulaire'>
+<form action='[(#HTTP_VARS{url})]' method='post' name='formulaire'>
       <input type='hidden' name='ajout_forum' value="oui" />
       <input type='hidden' name='id_message' value="[(#HTTP_VARS{id_message})]" />
       <input type='hidden' name='alea' value="[(#HTTP_VARS{alea})]" />
@@ -18,9 +18,7 @@
       <fieldset class='spip_encadrer'>
 	<legend><b><:forum_texte:></b></legend>
 	<p><:info_creation_paragraphe:></p>
-	[(#HTTP_VARS*{afficher_barre})]
-	<textarea name='texte' rows='12' class='forml' cols='40'
-	  [(#HTTP_VARS{afficher_claret})] >[(#HTTP_VARS{texte})]</textarea>
+[(#HTTP_VARS{texte}|barre_forum)]
       </fieldset>
       <br />
       [(#HTTP_VARS*{table})]

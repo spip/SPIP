@@ -88,12 +88,14 @@ document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img nam
 //
 function verif_butineur() {
 	global $HTTP_USER_AGENT, $browser_name, $browser_version;
-	global $browser_description, $browser_rev, $browser_layer;
+	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
 	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $HTTP_USER_AGENT, $match);
 	$browser_name = $match[1];
 	$browser_version = $match[2];
 	$browser_description = $match[3];
 	$browser_layer = '';
+	$browser_layer = '';
+	$browser_barre = '';
 
 	if (eregi("opera", $browser_description)) {
 		eregi("Opera ([^\ ]*)", $browser_description, $match);
@@ -106,6 +108,7 @@ function verif_butineur() {
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
 		$browser_layer = (($browser_version < 5) ? '' :  http_script('', _DIR_INCLUDE . 'layer.js',''));
+		$browser_barre = ($browser_version >= 5.5);
 	}
 	else if (eregi("KHTML", $browser_description) &&
 		eregi("Safari/([^;]*)", $browser_description, $match)) {
@@ -123,11 +126,18 @@ function verif_butineur() {
 			$browser_rev = 1.4;
 		// Machins quelconques => equivalents 1.0 par defaut (Konqueror, etc.)
 		else $browser_rev = 1.0;
+		$browser_barre = $browser_rev >= 1.3;
 	}
 
 	if (!$browser_name) $browser_name = "Mozilla";
 }
 
 verif_butineur();
+
+$GLOBALS['browser_caret'] =  (!$GLOBALS['browser_barre'] ? '' : "
+onselect='storeCaret(this);'
+onclick='storeCaret(this);'
+onkeyup='storeCaret(this);'
+ondbclick='storeCaret(this);'");
 
 ?>

@@ -7,7 +7,6 @@ include_ecrire('inc_texte.php3');
 include_ecrire('inc_filtres.php3');
 include_ecrire('inc_lang.php3');
 include_ecrire('inc_mail.php3');
-include_ecrire('inc_barre.php3');
 include_ecrire('inc_forum.php3');
 include_ecrire("inc_abstract_sql.php3");
 include_local(_FILE_CONNECT);
@@ -167,9 +166,6 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		     'formulaire_forum',
 		     0,
 		     array(
-		     'afficher_claret' => afficher_claret(),
-		     // ca devrait plutot etre un squelette
-		     'afficher_barre' => afficher_barre('formulaire', 'texte', true),
 		     'afficher_non' => 
 		     ($afficher_texte != 'non' ? '' :
 		      (boutonne('hidden', 'titre', htmlspecialchars($titre)) .
@@ -194,6 +190,26 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		     'url' =>  $url,
 		     'url_site' => ($url_site ? $url_site : "http://")
 		     ));
+}
+
+
+function barre_forum($texte)
+{
+	include_ecrire('inc_layer.php3');
+
+	if (!$GLOBALS['browser_barre'])
+		return "<textarea rows='12' class='forml' cols='40'>$texte</textarea>";
+	static $num_formulaire = 0;
+	$num_formulaire++;
+	include_ecrire('inc_barre.php3');
+	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true) .
+	  "
+<textarea rows='12' class='forml' cols='40'
+id='formulaire_$num_formulaire'
+onselect='storeCaret(this);'
+onclick='storeCaret(this);'
+onkeyup='storeCaret(this);'
+ondbclick='storeCaret(this);'>$texte</textarea>";
 }
 
 // Mots-cles dans les forums :

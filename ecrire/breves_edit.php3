@@ -155,8 +155,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else $rows = 15;
 	
 	echo "<p /><B>"._T('entree_texte_breve')."</B><BR>";
-	echo afficher_barre('formulaire', 'texte');
-	echo "<TEXTAREA NAME='texte' ".afficher_claret()." ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
+	echo afficher_barre('document.formulaire.texte');
+	echo "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
