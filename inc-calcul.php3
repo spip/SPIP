@@ -355,7 +355,7 @@ function spip_abstract_select (
 
 	$DB = 'spip_';
 	$q = " FROM $DB" . join(", $DB", $from)
-	. (is_array($where) ? ' WHERE ' . join(' AND ', $where) : '')
+	. ($where ? ' WHERE ' . join(' AND ', $where) : '')
 	. ($groupby ? " GROUP BY $groupby" : '')
 	. ($orderby ? "\nORDER BY $orderby" : '')
 	. ($limit ? "\nLIMIT $limit" : '');
