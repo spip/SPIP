@@ -1495,6 +1495,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			case "forums":
 			default:
 				$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
+				unset($element);
 				while (list(,$champ) = each ($liste_champs)) {
 					if ($contexte[$champ]) $element[] = "$champ=$contexte[$champ]";
 				}
