@@ -467,7 +467,7 @@ function utiliser_langue_site() {
 }
 
 function utiliser_langue_visiteur() {
-	global $var_lang, $menu_lang, $HTTP_COOKIE_VARS, $flag_ecrire;
+	global $var_lang, $HTTP_COOKIE_VARS, $flag_ecrire;
 
 	if (!regler_langue_navigateur())
 		utiliser_langue_site();
