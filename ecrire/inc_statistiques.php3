@@ -240,12 +240,13 @@ function supprimer_referers($type = "") {
 	$query = "SELECT visites FROM $table ".
 		"ORDER BY visites LIMIT ".intval($count * 100).",1";
 	$result = spip_query($query);
+	$visites_min =  1;
 	if ($row = @mysql_fetch_array($result)) {
 		$visites_min = $row['visites'];
 	}
 
 	$query = "DELETE FROM $table WHERE date < DATE_SUB(NOW(),INTERVAL 7 DAY)";
-	if ($visites_min) $query .= " AND visites <= $visites_min";
+	$query .= " AND visites <= $visites_min";
 	$result = spip_query($query);
 }
 
