@@ -1423,12 +1423,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_delier' => 'Artikel nicht mehr mit diesen &Uuml;bersetzungen verbinden',
 'trad_lier' => 'Dieser Artikel ist eine &Uuml;bersetzung des Artikels Nummer&nbsp;',
 'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen',
-'trad_reference' => '(Referenzartikel)',
-
-
-// CONFLIT
-'onglet_evolution_visite' => 'Entwicklung der Besuche',
-'onglet_langue' => 'Sprachen'
+'trad_reference' => '(Referenzartikel)'
 
 );
 

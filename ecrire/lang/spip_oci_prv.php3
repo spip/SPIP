@@ -49,7 +49,7 @@ $GLOBALS['i18n_spip_oci_prv'] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cau pas apelar aquela foncion dins aqueu cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<MODIF> <B>Atencion! Lo fichier @archive@ corresp&ograve;nd a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz dev&egrave;rs de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rs dau sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
+'avis_erreur_version_archive' => '<B>Atencion! Lo fichier @archive@ corresp&ograve;nd a una autra version d\'SPIP que la qu\'av&egrave;tz installada.</b> Anatz dev&egrave;rs de dificultats grandassas: risca de destruccion de v&ograve;stra basa de donadas, disfoncionaments div&egrave;rs dau sit, etc. Validetz pas aquela demanda d\'importacion.<p> Per mai d\'informacions, vejatz
 <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion d\'SPIP</a>.',
 'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
@@ -519,7 +519,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_contenu_articles' => 'Contengut deis articles',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'es un logiciau liure distribuit per <a href=\'copyright_fr.html\'> sota lic&eacute;ncia GPL.</a>',
-'info_copyright_doc' => '<MODIF> Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
 'info_cours_edition' => 'V&ograve;streis articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; lei mots claus dau sit',
 'info_creation_paragraphe' => '(Per crear de paragrafs, basta que laissetz de linhas vuejas.)',
@@ -677,7 +677,6 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_moyenne' => 'mejana:',
 'info_multi_articles' => 'Activar lo menut de lenga per leis articles?',
 'info_multi_cet_article' => 'Lenga d\'aquest article:',
-'info_multi_cette_rubrique' => 'Lenga emplegada dins aquesta rubrica:',
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Vougatz seleccionar &ccedil;ai sota lei lengas que son a posita dei redactors de v&ograve;stre sit.
   Lei lengas ja emplegadas dins v&ograve;stre sit (afichadas d\'en primier) se p&ograve;don pas desactivar.',
@@ -1061,7 +1060,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'login_login2' => 'Login (identificant de connexion au sit):',
 'login_login_pass_incorrect' => '(Login o mot de santa Clara incorr&egrave;cte.)',
 'login_motpasseoublie' => 'mot&nbsp;de&nbsp;santa&nbsp;Clara&nbsp;oblidat?',
-'login_non_securise' => '<MODIF> Atencion, aqueu formulari es pas securizat.
+'login_non_securise' => 'Atencion, aqueu formulari es pas securizat.
     Se vol&egrave;tz pas que v&ograve;stre mot de santa Clara si&aacute;
    interceptat sus la ret, vougatz activar Javascript 
    dins v&ograve;stre navigador e',
@@ -1241,7 +1240,7 @@ e vos tornar connectar au sit.
  incl&uacute;s <i>totei</i> leis acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e mai un primier acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquela opcion vos permet de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
 Oblidetz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>, que conten leis imatges e lei documents utilizats dins leis articles e rubricas.',
-'texte_admin_tech_02' => '<MODIF> Atencion: aquela sauvagarda se podr&agrave; restaurar
+'texte_admin_tech_02' => 'Atencion: aquela sauvagarda se podr&agrave; restaurar
  REN QUE dins un sit installat amb la meteissa version d\'SPIP. L\'error
  que consist&iacute;s a far una sauvagarda avans de far una actualizacion d\'SPIP es correnta... Per mai de detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz chausir de sauvagardar lo fichier sota forma comprimida, per fin
