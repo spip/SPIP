@@ -52,8 +52,8 @@ function init_config() {
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1',
-		
-		'secu_avertissement' => 'oui',
+
+		'secu_avertissement' => 'non',
 		'creer_htpasswd' => 'non'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
