@@ -92,6 +92,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 
 	if (ereg("\.([^.]+)$", $orig, $match)) {
 		$ext = addslashes(strtolower($match[1]));
+		if ($ext == 'jpeg')
+			$ext = 'jpg';
 	}
 	$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
 
