@@ -538,17 +538,17 @@ function afficher_breves($titre_table, $requete) {
 			$s .= "</a>";
 			$vals[] = $s;
 
-			$s = "<div align=\"right\"><font size='2'>";
+			$s = "<div align=\"right\">";
 			if ($statut == "prop") $s .= "[<font color=\"red\">&agrave; valider</font>]";
 			else $s .= affdate($date_heure);
-			$s .= "</font></div>";
+			$s .= "</div>";
 			$vals[] = $s;
 			$table[] = $vals;
 		}
 		mysql_free_result($result);
 
 		$largeurs = array('', '');
-		$styles = array('arial2', 'arial2');
+		$styles = array('arial2', 'arial1');
 		afficher_liste($largeurs, $table, $styles);
 
 		if ($titre_table) echo "</TABLE></TD></TR>";
