@@ -126,8 +126,9 @@ else $logo = "redacteurs-24.gif";
 		if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
 		echo "<P>".propre($bio)."</P>";
 		if ($supplement && function_exists(champs_supplement)) {
+			$champs_suppl=champs_supplement("auteur", $id_auteur, $statut);
 			include_ecrire("inc_supplement.php3");
-			supplement_affichage($supplement);
+			supplement_affichage($supplement, $champs_suppl);
 		}
 		echo "</FONT>";
 		fin_cadre_relief();
