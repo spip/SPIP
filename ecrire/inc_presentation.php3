@@ -399,10 +399,10 @@ function afficher_breves($titre_table, $requete) {
 			$s .= "</A>";
 			$vals[] = $s;
 
-			$s = "<div align=\"right\">";
+			$s = "<div align=\"right\"><font size='2'>";
 			if ($statut == "prop") $s .= "[<font color=\"red\">&agrave; valider</font>]";
 			else $s .= affdate($date_heure);
-			$s .= "</div>";
+			$s .= "</font></div>";
 			$vals[] = $s;
 			$table[] = $vals;
 		}
