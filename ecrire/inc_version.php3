@@ -320,12 +320,18 @@ $extension_squelette = 'html';
 @umask(0);
 
 //
-// Définition des repertoires standards, _FILE_OPTIONS ayant priorite
+// Definition des repertoires standards, _FILE_OPTIONS ayant priorite
 //
 
 if (@file_exists(_FILE_OPTIONS)) {
   include(_FILE_OPTIONS);
- }
+}
+
+// la taille maxi des logos
+define_once('_LOGO_MAX_SIZE', 200); # poids en ko
+define_once('_LOGO_MAX_WIDTH', 300); # largeur en pixels
+define_once('_LOGO_MAX_HEIGHT', 200); # hauteur en pixels
+
 
 define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));

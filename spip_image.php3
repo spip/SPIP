@@ -5,17 +5,24 @@ include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_ecrire("inc_abstract_sql.php3");
+include_ecrire('inc_presentation.php3'); # pour regler la langue en cas d'erreur
 
 
 // Recuperer les variables d'upload
 if (!$_FILES)
 $_FILES = &$HTTP_POST_FILES;
+if (is_array($_FILES))
+foreach ($_FILES as $id => $file) {
+	if ($file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+		unset ($_FILES[$id]);
+}
 
-function effacer_image($nom) {
+
+function effacer_logo($nom) {
 	global $hash_id_auteur, $hash;
 
 	if ((!strstr($nom, "..")) AND
-	    verifier_action_auteur("supp_image $nom", $hash, $hash_id_auteur))
+	    verifier_action_auteur("supp_logo $nom", $hash, $hash_id_auteur))
 		@unlink(_DIR_IMG . $nom);
 }
 
@@ -110,6 +117,7 @@ function deplacer_fichier_upload($source, $dest) {
 		exit;
 	}
 
+
 	$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
 	if ($ok)
@@ -123,18 +131,45 @@ function deplacer_fichier_upload($source, $dest) {
 					    dirname($dest));
 		}
 		@unlink($dest);
-
-		if (($GLOBALS['_FILES']['size'] == 0) AND !$GLOBALS['action_zip']) {
-			include_ecrire('inc_presentation.php3');
-			install_debut_html(_T('forum_titre_erreur'));
-			echo "<p>"._T('upload_limit',
-				array('max' => ini_get('upload_max_filesize')));
-			install_fin_html();
-			exit;
-		}
 	}
 
 	return $ok;
+}
+
+// Erreurs d'upload
+// renvoie false si pas d'erreur
+// et true si erreur = pas de fichier
+// pour les autres erreurs affiche le message d'erreur et meurt
+function check_upload_error($error, $msg='') {
+	switch ($error) {
+		case 0:
+			return false;
+		case 4: /* UPLOAD_ERR_NO_FILE */
+			return true;
+
+		# on peut affiner les differents messages d'erreur
+		case 1: /* UPLOAD_ERR_INI_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 2: /* UPLOAD_ERR_FORM_SIZE */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+		case 3: /* UPLOAD_ERR_PARTIAL  */
+			$msg = _T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+			break;
+	}
+
+	spip_log ("erreur upload $error");
+
+	include_ecrire('inc_presentation.php3');
+	install_debut_html(_T('forum_titre_erreur'));
+	echo "<p>$msg</p>\n";
+
+	install_fin_html(_DIR_RESTREINT . $GLOBALS['retour']);
+	exit;
 }
 
 
@@ -184,30 +219,64 @@ function corriger_extension($ext) {
 
 
 //
-// Ajouter une image (logo)
+// Ajouter un logo
 //
 
-function ajout_image($source, $dest) {
+// $source = $_FILES[0]
+// $dest = arton12.xxx
+function ajout_logo($source, $dest) {
 	global $redirect_url, $hash_id_auteur, $hash, $num_img, $dossier_squelettes;
 
 	// Securite
-	if (!(verifier_action_auteur("ajout_image $dest", $hash, $hash_id_auteur)
-	      AND _DIR_DOC != $dossier_squelettes)) {
-	  spip_log("interdiction ajout_image($source, $dest)");
-	  return;
+	if (!(verifier_action_auteur("ajout_logo $dest", $hash, $hash_id_auteur)
+	AND _DIR_DOC != $dossier_squelettes)) {
+		spip_log("interdiction ajout_logo($source, $dest)");
+		return;
 	}
+
+	// Intercepter une erreur d'upload
+	if (check_upload_error($source['error'])) return;
 
 	// analyse le type de l'image (on ne fait pas confiance au nom de
 	// fichier envoye par le browser : pour les Macs c'est plus sur)
-
 	$f =_DIR_DOC . $dest . '.tmp';
-	deplacer_fichier_upload($source, $f);
+	deplacer_fichier_upload($source['tmp_name'], $f);
 	$size = @getimagesize($f);
 	$type = decoder_type_image($size[2], true);
-	if ($type)
+	if ($type) {
+		$poids = filesize($f);
+		if ($poids > _LOGO_MAX_SIZE*1024) {
+			@unlink ($f);
+			check_upload_error(6,
+			_T('info_logo_max_poids',
+				array('maxi' => taille_en_octets(_LOGO_MAX_SIZE*1024),
+				'actuel' => taille_en_octets($poids))));
+		}
+		if (($size[0] > _LOGO_MAX_WIDTH)
+		OR ($size[1] > _LOGO_MAX_HEIGHT)) {
+			@unlink ($f);
+			check_upload_error(6, 
+			_T('info_logo_max_taille',
+				array(
+				'maxi' =>
+					_T('info_largeur_vignette',
+						array('largeur_vignette' => _LOGO_MAX_WIDTH,
+						'hauteur_vignette' => _LOGO_MAX_HEIGHT)),
+				'actuel' =>
+					_T('info_largeur_vignette',
+						array('largeur_vignette' => $size[0],
+						'hauteur_vignette' => $size[1]))
+			)));
+		}
 		@rename ($f, _DIR_DOC . $dest . ".$type");
-	else
+	}
+	else {
 		@unlink ($f);
+		check_upload_error(6,
+			_T('info_logo_format_interdit',
+			array ('formats' => 'GIF, JPG, PNG'))
+		);
+	}
 }
 
 //
@@ -429,6 +498,7 @@ else {
 			);
 		} 
 
+		// Traiter les fichiers uploades
 		if (is_array($_FILES))
 		foreach ($_FILES as $file) {
 			// ajout d'un doc normal
@@ -451,16 +521,15 @@ else {
 					$forcer_document, $action_zip, $id_document, $hash, $link);
 			}
 		}	// foreach $_FILES
-
 	}
 
 	// Ajout d'un logo
 	else if ($ajout_logo == "oui")
-		ajout_image($image, $logo);
+		ajout_logo($_FILES['image'], $logo);
 
 	// Suppression d'un logo
 	else if ($image_supp)
-		effacer_image($image_supp);
+		effacer_logo($image_supp);
 
 	// Suppression d'un document et de sa vignette
 	else if ($doc_supp)

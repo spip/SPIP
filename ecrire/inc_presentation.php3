@@ -3073,7 +3073,19 @@ function install_debut_html($titre = 'AUTO') {
 	<font face='Verdana,Arial,Sans,sans-serif' size='4' color='#970038'><B>$titre</b></font>\n<p>";
 }
 
-function install_fin_html() {
+function install_fin_html($suite = '') {
+
+	// bouton retour
+	global $spip_lang_right;
+	if ($suite) {
+		$link = new Link($suite);
+		echo $link->getForm();
+		echo "<DIV align='$spip_lang_right'>"
+		. "<INPUT TYPE='submit' CLASS='fondl'  VALUE='"
+		. _T('bouton_suivant')." >>'></div>"
+		. "</FORM>";
+	}
+
 	echo '
 	</td></tr></table>
 	</center>
