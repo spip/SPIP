@@ -808,7 +808,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 13 */	"/<p>/",
 			/* 14 */	"/\n/",
 			/* 15 */	"/<quote>/",
-			/* 16 */	"/<\/quote>/",
+			/* 16 */	"/<\/quote>/"
 		);
 		$remplace1 = array(
 			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
@@ -828,7 +828,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 13 */	"<p class=\"spip\">",
 			/* 14 */	" ",
 			/* 15 */	"<div class=\"spip_quote\">",
-			/* 16 */	"</div>",
+			/* 16 */	"</div>"
 		);
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}
