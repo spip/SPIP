@@ -138,7 +138,7 @@ if ($jour_redac && $flag_editable) {
 
 // appliquer la modification de langue
 if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
-	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$rubrique_article"));
 	$langue_parent = $row['lang'];
 
 	if ($changer_lang) {
