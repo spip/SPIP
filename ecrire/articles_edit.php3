@@ -293,11 +293,10 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE='$id_article'>";
 	else if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
-		
+
 	if ($lier_trad) echo "<INPUT TYPE='Hidden' NAME='lier_trad' VALUE='$lier_trad'>";
 
-
-	if (($articles_surtitre != "non") OR $surtitre) {
+	if (($options == "avancees" AND $articles_surtitre != "non") OR $surtitre) {
 		echo "<B>"._T('texte_sur_titre')."</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
