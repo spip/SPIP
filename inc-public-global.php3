@@ -257,6 +257,7 @@ if ((lire_meta('quoi_de_neuf') == 'oui') AND ($jours_neuf = lire_meta('jours_neu
 	AND ($adresse_neuf = lire_meta('adresse_neuf')) AND (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
 
 	if (timeout('quoide_neuf')) {
+		include_ecrire('inc_meta.php3');
 		ecrire_meta('majnouv', time());
 		ecrire_metas();
 
