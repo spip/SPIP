@@ -993,6 +993,25 @@ function parser($texte) {
 //
 //////////////////////////////////////////////////////////////////////////////
 
+//
+// appliquer les filtres a un champ
+//
+function applique_filtres ($fonctions, $code) {
+	global $flag_function_exists;
+
+	if ($fonctions) {
+		while (list(, $fonc) = each($fonctions)) {
+			if ($fonc) {
+				if ((!$flag_function_exists) OR function_exists($fonc))
+					$code = "$fonc($code)";
+				else
+					$code = "'Erreur : filtre <b>&laquo; $fonc &raquo;</b> non d&eacute;fini'";
+			}
+		}
+	}
+	return $code;
+}
+
 
 //
 // Generer le code PHP correspondant a un champ SPIP
@@ -1033,9 +1052,9 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		
 		if ($offset_boucle) $code = "\$pile_boucles[\$id_instance-$offset_boucle]->row[$id_row]";
 		else $code = "\$row[$id_row]";
-		if ($fonctions) {
-			while (list(, $fonc) = each($fonctions)) $code = "$fonc($code)";
-		}
+
+		$code = applique_filtres ($fonctions, $code);
+
 		return "	\$$nom_var = $code;\n";
 	}
 
@@ -1070,17 +1089,30 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		ereg("^LOGO_(([a-zA-Z]+).*)$", $nom_champ, $regs);
 		$type_logo = $regs[1];
 		$type_objet = strtolower($regs[2]);
+		$filtres = '';
 		if ($fonctions) {
 			while (list(, $nom) = each($fonctions)) {
 				if (ereg('^(left|right|center|top|bottom)$', $nom))
 					$align = $nom;
-				else if ($nom == 'lien')
+				else if ($nom == 'lien') {
 					$flag_lien_auto = 'oui';
-				else if ($nom == 'fichier')
+					$flag_stop = true;
+				}
+				else if ($nom == 'fichier') {
 					$flag_fichier = 'oui';
-				else $lien = $nom;
+					$flag_stop = true;
+				}
+				else if ($nom == '')	// double || signifie "on passe aux filtres"
+					$flag_stop = true;
+				else if (!$flag_stop) {
+					$lien = $nom;
+					$flag_stop = true;
+				}
+				else // apres un URL ou || ou |fichier ce sont des filtres (sauf left...lien...fichier)
+					$filtres[] = $nom;
 			}
-			$fonctions = '';
+			// recuperer les filtres s'il y en a
+			$fonctions = $filtres;
 		}
 		if ($flag_lien_auto && !$lien) {
 			$milieu .= "
@@ -1285,8 +1317,11 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	case 'FORMULAIRE_RECHERCHE':
 		if ($fonctions) {
-			list(, $lien) = each($fonctions);
-			$fonctions = '';
+			list(, $lien) = each($fonctions);	// le premier est un url
+			while (list(, $filtre) = each($fonctions)) {
+				$filtres[] = $filtre;			// les suivants sont des filtres
+			}
+			$fonctions = $filtres;
 		}
 		if (!$lien) $lien = 'recherche.php3';
 		$milieu = "
@@ -1498,9 +1533,9 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	} // switch
 
 	if (!$code) $code = "\$$nom_var";
-	if ($fonctions) {
-		while (list(, $fonc) = each($fonctions)) $code = "$fonc($code)";
-	}
+
+	$code = applique_filtres ($fonctions, $code);
+
 	$milieu .= "	\$$nom_var = $code;\n";
 
 	return $milieu;
