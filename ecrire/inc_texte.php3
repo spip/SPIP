@@ -224,7 +224,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = trim(entites_html($regs[9]));
 			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "<form><textarea readonly='readonly' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
+			$les_echap[$num_echap] = "<form action=\"get\"><textarea readonly='readonly' cols='40' wrap='off' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
 		}
 		else
 		if ($regs[12]) {
