@@ -18,9 +18,8 @@ if (!isset($delais))
 }*/
 
 //
-// Inclusions de squelettes
+// Gestion de la langue du visiteur
 //
-
 function chercher_langue_squelette ($fichier_cache, $contexte='') {
 	global $lang, $multilang, $spip_lang;
 
@@ -38,6 +37,17 @@ function chercher_langue_squelette ($fichier_cache, $contexte='') {
 
 	return array($fichier_cache, $lang_squel, $contexte);
 }
+
+// securite
+if ($lang) {
+	if (!ereg("^[a-z_]+$", $lang)) unset($lang);
+	if (!ereg(",$lang,", ",".lire_meta('langues_utilisees').",")) unset($lang);
+}
+
+
+//
+// Inclusions de squelettes
+//
 
 function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	global $fichier_cache;
@@ -83,21 +93,6 @@ if ($HTTP_COOKIE_VARS['spip_session'] OR ($PHP_AUTH_USER AND !$ignore_auth_http)
 
 
 //
-// Gerer modif langue visiteur
-//
-if ($HTTP_COOKIE_VARS['spip_lang']) {
-	include_ecrire('inc_lang.php3');
-	utiliser_langue_visiteur();
-}
-$menu_lang = $GLOBALS['spip_lang'];
-
-// securite lang
-if ($lang) {
-	if (!ereg("^[a-z_]+$", $lang)) unset($lang);
-	if (!ereg(",$lang,", ",".lire_meta('langues_utilisees').",")) unset($lang);
-}
-
-//
 // Gestion du cache et calcul de la page
 //
 
@@ -109,7 +104,11 @@ $fichier_requete = eregi_replace('&(submit|valider|PHPSESSID|(var_[^=&]*)|recalc
 $fichier_cache = generer_nom_fichier_cache($fichier_requete);
 
 list ($fichier_cache, $lang_squel) = chercher_langue_squelette($fichier_cache, $contexte);
+
 if ($multilang AND !$lang) $lang = $lang_squel;
+if ($multilang) $spip_lang = $lang;
+$menu_lang = $spip_lang;
+
 $chemin_cache = "CACHE/$fichier_cache";
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
@@ -221,7 +220,6 @@ $flag_preserver |= $headers_only;	// ne pas se fatiguer a envoyer des donnees
 if (!$flag_preserver) {
 	@Header("Content-Type: text/html; charset=".lire_meta('charset'));
 }
-
 
 // Envoyer la page
 if (@file_exists($chemin_cache)) {
