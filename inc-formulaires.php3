@@ -6,6 +6,7 @@ if (defined("_INC_FORMULAIRES")) return;
 define("_INC_FORMULAIRES", "1");
 
 include_ecrire('inc_filtres.php3');
+include_ecrire('inc_lang.php3');	// pour lang_select
 
 function test_pass() {
 	include_ecrire("inc_acces.php3");
