@@ -200,10 +200,10 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	echo "<input type='hidden' name='modif_document' value='oui'>";
 
 	echo "<b>Titre&nbsp;:</b><br>\n";
-	echo "<INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"".htmlspecialchars($titre)."\" SIZE='40'><br>";
+	echo "<input type='text' name='titre' class='formo' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 
 	echo "<b>Description&nbsp;:</b><br>\n";
-	echo "<textarea name='descriptif' CLASS='forml' ROWS='5' COLS='*' wrap='soft'>";
+	echo "<textarea name='descriptif' rows='5' class='formo' cols='*' wrap='soft'>";
 	echo htmlspecialchars($descriptif);
 	echo "</textarea>\n";
 
@@ -227,7 +227,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			$taille_vignette = $vignette->get('taille');
 		}
 
-		echo "<td width='150' align='center' valign='top'>\n";
+		echo "<td align='center' valign='top'>\n";
 		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
 
 		if ($fichier_vignette) {
