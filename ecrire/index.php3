@@ -365,7 +365,7 @@ if ($relief) {
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
 		if (($row = mysql_fetch_array($result)) AND $row['compte'])
-			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." articles syndiqu&eacute;s</a> sont en attente de validation.</small>";
+			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." liens syndiqu&eacute;s</a> sont en attente de validation.</small>";
 	}
 
 	fin_cadre_enfonce();	

@@ -99,9 +99,9 @@ function fin_cadre_relief($return = false){
 	global $spip_display;
 	if ($spip_display != 1){	
 
-		$retour_aff.= "</TD></TR></TABLE>";
-		$retour_aff.= "</TD>";
-		$retour_aff.= "<td background='img_pack/rond-d.gif' width='5'><img src='img_pack/rien.gif' alt='\' width='5' height='5'></td>";
+		$retour_aff.= "</td></tr></table>";
+		$retour_aff.= "</td>";
+		$retour_aff.= "<td background='img_pack/rond-d.gif' width='5'><img src='img_pack/rien.gif' alt='\' width='5' height='5'></td></tr>";
 		$retour_aff.= "<tr>";
 		$retour_aff.= "<td width='5'><img src='img_pack/rond-bg.gif' alt='\' width='5' height='5'></td>";
 		$retour_aff.= "<td background='img_pack/rond-b.gif'><img src='img_pack/rien.gif' alt='-' width='5' height='5'></td>";
@@ -1522,8 +1522,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='Verdana,Arial,Helvetica,sans-serif'>";
-		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span style='padding: 3px; margin: 1px; border: 1px solid $couleur_claire; color: $couleur_claire'><b>interface compl&egrave;te</b></span>";
-		else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <span style='padding: 3px; margin: 1px; border: 1px solid $couleur_claire; color: $couleur_claire'><b>interface compl&egrave;te</b></span>";
+		else echo "<span class='fondgrison2'><b>Interface simplifi&eacute;e</b></span> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
@@ -1819,7 +1819,7 @@ function debut_droite() {
 function fin_html() {
 	global $spip_version_affichee;
 ?>
-<blockquote><p>&nbsp;</p>
+</font><blockquote><p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
 est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
@@ -1832,7 +1832,8 @@ if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statist
 	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>, par Jean-Pierre D&eacute;z&eacute;lus";
 }
 ?>
-</div></blockquote>
+</font></div></blockquote>
+
 <?php 
 // rejouer le cookie de session en mode parano
 if ($GLOBALS['spip_session'] && $GLOBALS['prefs']['securite'] == 'strict') {
