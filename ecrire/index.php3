@@ -90,7 +90,7 @@ if (lire_meta('activer_messagerie') != 'non') {
 		echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
 }
 
-icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
+icone_horizontale("Modifier vos informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
 
 //
 // Supprimer le cookie, se deconnecter...
