@@ -52,7 +52,7 @@ function init_config() {
 		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1',
 		
-		'secu_stricte' => 'non',
+		'secu_avertissement' => 'non',
 		'creer_htpasswd' => 'non'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
@@ -212,12 +212,14 @@ function appliquer_modifs_config() {
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
 	ecrire_metas();
 
+
+	// modifs de secu (necessitent une authentification ftp)
 	$liste_meta = array(
-		'secu_stricte',
+		'secu_avertissement',
 		'creer_htpasswd'
 	);
 	while (list(,$i) = each($liste_meta))
-		if (isset($GLOBALS[$i]))
+		if (isset($GLOBALS[$i]) AND ($GLOBALS[$i] != lire_meta($i)))
 			$modif_secu=true;
 	if ($modif_secu) {
 		include_ecrire('inc_admin.php3');
@@ -229,6 +231,8 @@ function appliquer_modifs_config() {
 		ecrire_metas();
 		fin_admin($admin);
 	}
+
+
 	if ($purger_skel) {
 		$hash = calculer_action_auteur("purger_squelettes");
 		@header ("Location:../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($clean_link->getUrl()));

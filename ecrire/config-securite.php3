@@ -33,27 +33,25 @@ echo "<form action='config-securite.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
-/********* PAS FINI
-
 //
 // Connexions paralleles ?
 //
 
 debut_cadre_relief("base-24.gif");
 
-$secu_stricte = lire_meta("secu_stricte");
+$secu_avertissement = lire_meta("secu_avertissement");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Connexions parall&egrave;les</FONT></B></TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Avertissement de connexion</FONT></B></TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-echo propre("{{Autorisez-vous les utilisateurs &agrave; se connecter de plusieurs ordinateurs et/ou navigateurs en m&ecirc;me temps?}}\n\nSi oui, il existe un risque qu'un pirate astucieux ins&egrave;re dans votre site (via un forum ou dans un article propos&eacute; &agrave; la publication) un code lui permettant de &laquo;voler&raquo; le {cookie} de connexion d'un utilisateur, dont il pourrait ensuite faire usage pour naviguer incognito sur l'espace priv&eacute;. Si vous subissez une telle attaque, commencez par activer cette option, puis sauvegardez votre base de donn&eacute;es pour une inspection approfondie.\n\nEn interdisant les connexions parall&egrave;les, toute nouvelle connexion &agrave; l'espace priv&eacute; de l'utilisateur l&eacute;gitime &laquo;tue&raquo; les autres sessions.")."<p>".propre("Cette option peut &eacute;galement s'av&eacute;rer utile si la plupart des administrateurs du site se connectent depuis un cybercaf&eacute; et oublient de se d&eacute;connecter...").aide("deconnect");
+echo propre("{{Voulez-vous afficher les avertissements de s&eacute;curit&eacute; lors de la connexion?}}\n\nLorsqu'un r&eacute;dacteur se connecte &agrave; l'espace priv&eacute;, SPIP v&eacute;rifie qu'il s'est bien d&eacute;connect&eacute; lors de sa pr&eacute;c&eacute;dente session, et affiche au besoin un message attirant son attention sur la fonction de d&eacute;connexion.")."<p>".propre("Cette option peut s'av&eacute;rer utile si les r&eacute;dacteurs du site - notamment les administrateurs - se connectent depuis un cybercaf&eacute; et oublient de se d&eacute;connecter.").aide("deconnect");
 echo "</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
-afficher_choix('secu_stricte', $secu_stricte,
-	array('non' => 'Autoriser les connexions parall&egrave;les',
-		'oui' => 'Interdire'), ' &nbsp; ');
+afficher_choix('secu_avertissement', $secu_avertissement,
+	array('oui' => 'Afficher l\'avertissement',
+		'non' => 'Pas d\'avertissement'), ' &nbsp; ');
 echo "</TD></TR>";
 
 echo "<TR><TD ALIGN='right'>";
@@ -64,7 +62,7 @@ echo "</TABLE>";
 fin_cadre_relief();
 
 echo "<p>";
-*/
+
 
 //
 // Creer fichier .htpasswd ?
