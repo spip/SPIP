@@ -381,7 +381,6 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 function ajout_forum() {
 	global $texte, $titre, $nom_site_forum, $url_site, $auteur, $email_auteur, $retour_forum, $id_message, $confirmer;
 	global $forum_id_rubrique, $forum_id_parent, $forum_id_article, $forum_id_breve, $forum_id_auteur, $forum_id_syndic, $alea, $hash;
-//	global $hash_email, $email_forum_abo, $pass_forum_abo;
 	global $auteur_session;
 	global $ajouter_mot, $new;
 	global $HTTP_HOST, $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
@@ -485,38 +484,6 @@ function ajout_forum() {
 
 
 	if ($forums_publics == 'abo') {
-/*	
-		$cookie_email = $HTTP_COOKIE_VARS['spip_forum_email'];
-		if ($hash_email && $forum_id_auteur) {
-			if (verifier_action_auteur("email $cookie_email", $hash_email, $forum_id_auteur)) {
-				$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$forum_id_auteur AND email='$cookie_email'";
-				$result = spip_query($query);
-				if ($row = mysql_fetch_array($result)) $ok = true;
-			}
-		}
-		if (!$ok) {
-			if ($email_forum_abo && $pass_forum_abo) {
-				$query = "SELECT * FROM spip_auteurs WHERE email='$email_forum_abo'";
-				$result = spip_query($query);
-				$mdpass = md5($pass_forum_abo);
-				while ($row = mysql_fetch_array($result)) {
-					if ($mdpass == $row['pass'] OR "$auteur_session" == "$email_forum_abo") {
-						$ok = true;
-						poser_cookie_forum($email_forum_abo, $row["id_auteur"]);
-						
-						$fich = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1)."&id_message=$id_message";
-						
-						@header("Location: $fich");
-						break;
-					}
-				}
-			}
-			else {
-				enlever_cookie_forum();
-				die ("<h4>Vous devez indiquer votre adresse et votre mot de passe.</h4>
-				Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
-			}
-		}*/
 		if ($auteur_session) {
 			$statut = $auteur_session['statut'];
 			
