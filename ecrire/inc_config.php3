@@ -53,7 +53,7 @@ function init_config() {
 		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1',
 		
-		'secu_avertissement' => 'non',
+		'secu_avertissement' => 'oui',
 		'creer_htpasswd' => 'non'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {

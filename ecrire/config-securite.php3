@@ -33,36 +33,6 @@ echo "<form action='config-securite.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
-//
-// Connexions paralleles ?
-//
-
-debut_cadre_relief("base-24.gif");
-
-$secu_avertissement = lire_meta("secu_avertissement");
-
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Avertissement de connexion</FONT></B></TD></TR>";
-
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-echo propre("{{Voulez-vous afficher les avertissements de s&eacute;curit&eacute; lors de la connexion?}}\n\nLorsqu'un r&eacute;dacteur se connecte &agrave; l'espace priv&eacute;, SPIP v&eacute;rifie qu'il s'est bien d&eacute;connect&eacute; lors de sa pr&eacute;c&eacute;dente session, et affiche au besoin un message attirant son attention sur la fonction de d&eacute;connexion.")."<p>".propre("Cette option peut s'av&eacute;rer utile si les r&eacute;dacteurs du site - notamment les administrateurs - se connectent depuis un cybercaf&eacute; et oublient de se d&eacute;connecter.").aide("deconnect");
-echo "</TD></TR>";
-
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
-afficher_choix('secu_avertissement', $secu_avertissement,
-	array('oui' => 'Afficher l\'avertissement',
-		'non' => 'Pas d\'avertissement'), ' &nbsp; ');
-echo "</TD></TR>";
-
-echo "<TR><TD ALIGN='right'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>";
-
-fin_cadre_relief();
-
-echo "<p>";
-
 
 //
 // Creer fichier .htpasswd ?
