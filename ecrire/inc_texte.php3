@@ -95,10 +95,6 @@ function spip_avant_typo ($letexte) {
 
 function spip_apres_typo ($letexte) {
 
-	// caracteres speciaux
-	$letexte = corriger_caracteres($letexte);
-	$letexte = str_replace("'", "&#8217;", $letexte);
-
 	// relecture des &nbsp;
 	if (!_DIR_RESTREINT AND $GLOBALS['revision_nbsp'])
 		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
@@ -195,17 +191,6 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		$letexte = str_replace($match[0],
 			"</no p>@@SPIP_$source$num_echap@@<no p>", $letexte);
 		$les_echap[$num_echap] = $match;
-	}
-
-	//
-	// Echapper les tags html contenant des caracteres sensibles a la typo
-	//
-	$regexp_echap = "<[a-zA-Z!][^<>!':;\?]*[!':;\?][^<>]*>";
-	if (preg_match_all("/$regexp_echap/ims", $letexte, $regs, PREG_SET_ORDER))
-	foreach ($regs as $reg) {
-		$num_echap++;
-		$les_echap[$num_echap] = $reg[0];
-		$letexte = str_replace($reg[0], "@@SPIP_$source$num_echap@@", $letexte);
 	}
 
 	return array($letexte, $les_echap);
@@ -472,23 +457,50 @@ function typo_en($letexte) {
 	return $letexte;
 }
 
-// Typographie generale : francaise si la langue est 'cpf', 'fr' ou 'eo',
-// sinon anglaise (minimaliste)
+//
+// Typographie generale
+//
 function typo_generale($letexte) {
-	global $spip_lang, $lang_typo;
+	global $spip_lang;
 
 	// Appeler la fonction de pre-traitement
 	$letexte = spip_avant_typo ($letexte);
 
-	if (!$lang = $lang_typo) {
+	// Caracteres de controle "illegaux"
+	$letexte = corriger_caracteres($letexte);
+
+	// Proteger les caracteres typographiques a l'interieur des tags html
+	$protege = "!':;?";
+	$illegal = "\x1\x2\x3\x4\x5";
+	if (preg_match_all("/<[a-z!][^<>!':;\?]*[!':;\?][^<>]*>/ims",
+	$letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$insert = $reg[0];
+			// hack: on transforme les caracteres a proteger en les remplacant
+			// par des caracteres "illegaux". (cf corriger_caracteres())
+			$insert = strtr($insert, $protege, $illegal);
+			$letexte = str_replace($reg[0], $insert, $letexte);
+		}
+	}
+
+	// zouli apostrophe
+	$letexte = str_replace("'", "&#8217;", $letexte);
+
+	// typo francaise ou anglaise ?
+	// $lang_typo est fixee dans l'interface privee pour editer
+	// un texte anglais en interface francaise (ou l'inverse) ;
+	// sinon determiner la typo en fonction de la langue
+	if (!$lang = $GLOBALS['lang_typo']) {
 		include_ecrire('inc_lang.php3');
 		$lang = lang_typo($spip_lang);
 	}
-
 	if ($lang == 'fr')
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
+
+	// Retablir les caracteres proteges
+	$letexte = strtr($letexte, $illegal, $protege);
 
 	// Appeler la fonction de post-traitement
 	return spip_apres_typo ($letexte);
