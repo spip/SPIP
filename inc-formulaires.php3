@@ -309,7 +309,7 @@ function formulaire_inscription() {
 		$statut = "6forum";
 	}
 	else {
-		//return; // tentative de hack...?
+		return; // tentative de hack...?
 	}
 
 	if ($mail_inscription) {
