@@ -76,10 +76,6 @@ function sous_enfant($collection2){
 }
 
 
-
-
-
-
 //
 // Infos personnelles : nom, utilisation de la messagerie
 //
@@ -188,9 +184,6 @@ if ($options == "avancees") {
 	
 	if ($connect_statut == "0minirezo") {
 		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
-	}
-	if ($activer_message != "non") {
-		icone_horizontale("Votre messagerie interne", "messagerie.php3", "messagerie-24.gif","rien.gif");
 	}
 	if ($connect_statut == "0minirezo") {
 		echo "<p>";
@@ -449,14 +442,21 @@ if (($date - $date_opt) > 24 * 3600) {
 	ecrire_metas();
 	include ("optimiser.php3");
 }
+
 // Traitement des statistiques
-if (($date - $date_opt) > 8 * 3600) {
+$date_stats = $meta['date_stats_process'];
+if (($date - $date_stats) > 24 * 3600) {
+	ecrire_meta("date_stats_process", "$date");
+	ecrire_metas();
 	include ("inc_statistiques.php3");
 	calculer_visites();
 }
 
 // Optimiser les referers
-if (($date - $date_opt) > 19 * 3600) {
+$date_refs = $meta['date_stats_referers'];
+if (($date - $date_refs) > 24 * 3600) {
+	ecrire_meta("date_stats_referers", "$date");
+	ecrire_metas();
 	include ("inc_statistiques.php3");
 	optimiser_referers();
 }
