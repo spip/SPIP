@@ -1,7 +1,7 @@
 <?php
 
 include ("inc_version.php3");
-include_ecrire ("inc_mysql.php3");
+//include_ecrire ("inc_db_mysql.php3");
 include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
@@ -35,7 +35,7 @@ if ($etape == 6) {
 		$result = spip_query_db($query);
 		unset($id_auteur);
 		while ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
-		
+
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
 
@@ -81,7 +81,7 @@ else if ($etape == 5) {
 
 	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Cinqui&egrave;me &eacute;tape : <B>Informations personnelles</B></FONT>";
 	echo "<P>";
-	
+
 	echo "<b>Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.</b>";
 	echo aide ("install5");
 	echo "<p>(Note : s'il s'agit d'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez ";
@@ -94,7 +94,7 @@ else if ($etape == 5) {
 	echo "<B>Signature</B><BR>";
 	echo "(Votre nom ou votre pseudo)<BR>";
 	echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"$nom\" SIZE='40'><P>";
-		
+
 	echo "<B>Votre adresse email</B><BR>";
 	echo "<INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"$email\" SIZE='40'></fieldset><P>\n";
 
@@ -102,7 +102,7 @@ else if ($etape == 5) {
 	echo "<B>Votre login</B><BR>";
 	echo "(Plus de 3 caract&egrave;res)<BR>";
 	echo "<INPUT TYPE='text' NAME='login' CLASS='formo' VALUE=\"$login\" SIZE='40'><P>\n";
-	
+
 	echo "<B>Votre mot de passe</B> <BR>";
 	echo "(Plus de 5 caract&egrave;res)<BR>";
 	echo "<INPUT TYPE='text' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40'></fieldset><P>\n";
@@ -130,6 +130,9 @@ else if ($etape == 4) {
 
 	install_debut_html();
 
+	// Necessaire pour appeler les fonctions SQL wrappees
+	include_ecrire("inc_db_mysql.php3");
+
 	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Quatri&egrave;me &eacute;tape : <B>Cr&eacute;ation des tables de la base</B></FONT>";
 	echo "<P>";
 
@@ -139,7 +142,7 @@ else if ($etape == 4) {
 
 	if ($choix_db == "new_spip") {
 		$sel_db = $table_new;
-		mysql_create_db($sel_db);		
+		mysql_create_db($sel_db);
 	}
 	else {
 		$sel_db = $choix_db;
@@ -155,15 +158,15 @@ else if ($etape == 4) {
 
 	echo "-->";
 
-	
+
 	if ($result_ok) {
 		$conn = "<"."?php\n";
 		$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
 		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
-		$conn .= "\$GLOBALS['db_ok'] = true;\n";
-		$conn .= "@mysql_connect('$adresse_db','$login_db','$pass_db');\n";
-		$conn .= "@mysql_select_db('$sel_db');\n";
-		$conn .= "\$GLOBALS['db_ok'] &= !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
+		$conn .= "\$GLOBALS['spip_connect_version'] = 0.1;\n";
+		$conn .= "include_ecrire('inc_db_mysql.php3');\n";
+		$conn .= "@spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
+		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
 		$myFile = fopen("inc_connect_install.php3", "wb");
 		fputs($myFile, $conn);
@@ -206,12 +209,11 @@ else if ($etape == 3) {
 
 	echo "<fieldset><label><B>Choisissez votre base :</B><BR></label>";
 
-	if ($result AND (@spip_num_rows($result) > 0)) {
+	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
 		echo "<B>Le serveur MySQL contient plusieurs bases de donn&eacute;es.</B><P> <B>S&eacute;lectionnez</B> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:";
-		echo "<UL>";	
-		$i=0;
+		echo "<UL>";
 		$bases = "";
-		while ($i < spip_num_rows($result)) {
+		for ($i = 0; $i < $n; $i++) {
 			$table_nom = mysql_dbname($result, $i);
 			$base = "<INPUT NAME=\"choix_db\" VALUE=\"".$table_nom."\" TYPE=Radio id='tab$i'";
 			$base_fin = "><label for='tab$i'>".$table_nom."</label><BR>\n";
@@ -222,7 +224,6 @@ else if ($etape == 3) {
 			else {
 				$bases .= "$base$base_fin\n";
 			}
-			$i++;
 		}
 		echo $bases."</UL>";
 		echo "ou... ";
@@ -265,9 +266,9 @@ else if ($etape == 2) {
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
 	$db_connect = mysql_errno();
 	echo "-->";
-	
+
 	echo "<P>";
-	
+
 	if (($db_connect=="0") && $link){
 		echo "<B>La connexion a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l'&eacute;tape suivante.";
 
@@ -287,7 +288,7 @@ else if ($etape == 2) {
 	}
 
 	install_fin_html();
-		
+
 }
 else if ($etape == 1) {
 	install_debut_html();
@@ -302,12 +303,17 @@ else if ($etape == 1) {
 	$login_db = $login_hebergeur;
 	$pass_db = '';
 
-	// Recuperer les anciennes donnees (si presentes)
+	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
 	if (file_exists("inc_connect_install.php3")) {
 		$s = @join('', @file("inc_connect_install.php3"));
-		if (ereg('mysql_connect\("(.*)","(.*)","(.*)"\)', $s, $regs)) {
+		if (ereg("mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)", $s, $regs)) {
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
+		}
+		else if (ereg("spip_connect_db\('(.*)','(.*)','(.*)','(.*)','(.*)'\)", $s, $regs)) {
+			$adresse_db = $regs[1];
+			if ($port_db = $regs[2]) $adresse_db .= ':'.$port_db;
+			$login_db = $regs[3];
 		}
 	}
 
