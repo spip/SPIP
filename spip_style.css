@@ -36,6 +36,9 @@ h3.spip {
 	font-size : 70%;
 }
 
+.spip_logos {
+	border: none;
+}
 
 table.spip {
 }
