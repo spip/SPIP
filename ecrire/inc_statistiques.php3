@@ -70,13 +70,15 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		}
 	}
 
-	$nom_url = substr(strip_tags($kw_referer_host),0,40);
+	$nom_url = strip_tags($kw_referer_host);
+	$title = htmlspecialchars("Go to ".$kw_referer);
+	if (strlen($nom_url) > 50) $nom_url = substr($nom_url, 0, 48) . "...";
 
-	$buffer = "&nbsp;<a href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
+	$buffer = "&nbsp;<a title=\"$title\" href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
 
 	if ($keywords != '')
 	{
-		$buffer .= "(<b>" .trim(stripslashes(htmlentities($keywords)))."</b>)\n";
+		$buffer .= "(<b>" .trim(htmlspecialchars($keywords))."</b>)\n";
 	}
 
 	return( $buffer );

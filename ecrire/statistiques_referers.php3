@@ -8,7 +8,7 @@ debut_page("Statistiques", "administration", "statistiques");
 
 
 echo "<br><br><br>";
-gros_titre("Les referers du jour");
+gros_titre("Les liens entrants du jour");
 barre_onglets("statistiques", "referers");
 
 debut_gauche();
@@ -39,50 +39,30 @@ if ($connect_statut != '0minirezo') {
 
 //////
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 
 
-		echo "<ul>";
-		// Recuperer les donnees du log	
-		$query = "SELECT INET_NTOA(ip) AS ip, type, id_objet, referer FROM spip_referers_temp";
-		$result = spip_query($query);
+echo "<ul>";
+// Recuperer les donnees du log	
+$query = "SELECT referer, COUNT(DISTINCT ip) AS count FROM spip_referers_temp ".
+	"GROUP BY referer_md5 ORDER BY count DESC";
+$result = spip_query($query);
+
+while ($row = @mysql_fetch_array($result)) {
+	$referer = $row['referer'];
+	$count = $row['count'];
 	
-		while ($row = mysql_fetch_array($result)) {
-			$ip = $row['ip'];
-			$id_objet = $row['id_objet'];
-			$type = $row['type'];
-			$referer = $row['referer'];
-			
-			if (strlen($referer) > 0) {
-				$referers[$referer][$type.$id_objet][$ip] = 1;
-			}
-		}
+	echo "\n<li>";
+	if ($count > 5) echo "<font color='red'>$count visites : </font>";
+	else if ($count > 1) echo "$count visites : ";
+	else echo "<font color='#999999'>$count visite : </font>";
 
-		while ($referers && (list($key, $value) = each($referers))) {
-			$referer = $key;
-			$ref_md5 = substr(md5($referer), 0, 15);
+	echo stats_show_keywords($referer, $referer);
+	echo "</li>\n";
+}
 
-			echo "\n<li>";
-
-			$total_ref = 0;
-			while (list($key2,$value2) = each ($value)) {
-				$value2 = count($value2);
-				$total_ref = $total_ref + $value2;
-			}
-	
-			if ($total_ref > 5) echo "<font color='red'>$total_ref liens : </font>";
-			else if ($total_ref > 1) echo "$total_ref liens : ";
-			else echo "<font color='#999999'>$total_ref lien : </font>";
-
-			echo stats_show_keywords($referer, $referer);
-
-
-		}
-
-
-
-	echo "</ul>";
-	echo "</font>";
+echo "</ul>";
+echo "</font>";
 
 fin_page();
 

@@ -114,6 +114,7 @@ if ($essai_login == "oui") {
 	}
 }
 
+
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
