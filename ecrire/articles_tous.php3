@@ -1,7 +1,6 @@
 <?php
 
 include ("inc.php3");
-include_ecrire("inc_layer.php3");
 
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';
@@ -317,7 +316,7 @@ $javasc_ouvrir = "manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$las
 $javasc_fermer = "manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche, '" . _DIR_IMG_PACK . "')";
 
 // Demarrer l'affichage
-if ($les_rubriques AND test_layer()) {
+if ($les_rubriques AND $browser_layer) {
 	$les_rubriques = join($les_rubriques,",");
 	echo "<div>&nbsp;</div>";
 	echo "<b class='verdana3'>";

@@ -383,11 +383,9 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo debut_block_visible("lesmots");
 			// vilain hack pour redresser un triangle
 			$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
-			if (test_layer()) echo "<script type='text/javascript'><!--
-			triangle = findObj('triangle' + $couche_a_redresser);
-			if (triangle) triangle.src = '" .
-			  _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';
-			//--></script>";
+			if ($GLOBALS['browser_layer']) echo http_script("
+triangle = findObj('triangle' + $couche_a_redresser);
+if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif';");
 		}
 		else
 			echo debut_block_invisible("lesmots");
