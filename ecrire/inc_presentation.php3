@@ -1423,7 +1423,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
 		if ($connect_toutes_rubriques) {
 			if ($options == "avancees") {
-				icone_bandeau_secondaire (_T('icone_maintenace_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 			}
 			else {
 				icone_bandeau_secondaire (_T('icone_save_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
