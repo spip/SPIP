@@ -392,6 +392,10 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$query_pet="UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";
 		$result_pet=spip_query($query_pet);
 		$forums_publics = $change_accepter_forum;
+		if ($change_accepter_forum == 'abo') {
+			ecrire_meta('accepter_visiteurs', 'oui');
+			ecrire_metas();
+		}
 	}
 
 	if (!$boite_ouverte) {

@@ -279,18 +279,6 @@ function formulaire_signature($id_article) {
 }
 
 
-// y a t il des forums sur abonnement ?
-function forums_sur_abo() {
-	if (lire_meta("forums_publics") == "abo")
-		return true;
-	else {
-		include_ecrire("inc_connect.php3");
-		$res = spip_query ("SELECT * FROM spip_articles WHERE accepter_forum='abo'");
-		if (mysql_num_rows($res)>0)
-			return true;
-	}
-}
-
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
 function formulaire_inscription($type) {
 	$request_uri = $GLOBALS["REQUEST_URI"];

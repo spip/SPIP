@@ -102,7 +102,7 @@ if ($oubli_pass == 'oui') {
 		echo '  <input type=submit class="fondl" name="oubli" value="OK"></div></form>';
 	}
 }
-else if ($inscriptions_ecrire || forums_sur_abo()) {
+else if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
 	install_debut_html("Vous inscrire sur ce site");
 	echo "<p>";
@@ -121,10 +121,13 @@ else if ($inscriptions_ecrire || forums_sur_abo()) {
 
 	formulaire_inscription(($inscriptions_ecrire)? 'redac' : 'forum');
 }
+else {
+	install_debut_html("Erreur");
+	echo "<p>".propre("Rien &agrave; faire ici.");
+}
 
 echo "<p align='right'><script type='text/javascript'><!--
-	function ciao() { window.opener.location.href=window.opener.location.href; close(); }
-	if (window.opener) document.write(\"<a href='javascript:ciao();'>\");
+	if (window.opener) document.write(\"<a href='javascript:close();'>\");
 	else document.write(\"<a href='./'>\");
 	document.write(\"Quitter cette fen&ecirc;tre</a>\");
 	//--></script>

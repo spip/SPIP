@@ -24,7 +24,7 @@ else
 	$retour = $myretour;
 $retour = urlencode($retour);
 
-if ($visiteurs == "oui")
+if ($visiteurs == "oui" && (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
 	debut_page("Visiteurs","redacteurs","redacteurs");
 else
 	debut_page("Auteurs$partri","redacteurs","redacteurs");
@@ -34,7 +34,7 @@ debut_gauche();
 
 
 debut_boite_info();
-	if ($visiteurs == "oui")
+	if ($visiteurs == "oui" && (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
 		echo "<p class='arial1'>".propre("Vous trouverez ici les visiteurs enregistr&eacute;s
 		dans l'espace public du site (forums sur abonnement).");
 	else {
@@ -50,7 +50,8 @@ fin_boite_info();
 if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
 	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
-	icone_horizontale ("Afficher les visiteurs", "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
+	if ((lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
+		icone_horizontale ("Afficher les visiteurs", "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
 	fin_raccourcis();
 }
 debut_droite();
