@@ -63,7 +63,6 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 
 function utiliser_cache($chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS;
-	global $lastmodified;
 
 	// A priori cache
 	$ok_cache = true;
@@ -80,9 +79,6 @@ function utiliser_cache($chemin_cache, $delais) {
 		// fichier cache trop vieux ?
 		if (!$age_ok)
 			$ok_cache = false;
-
-		// Inclusions multiples : derniere modification
-		if ($lastmodified < $t) $lastmodified = $t;
 	}
 
 	// recalcul obligatoire
@@ -204,14 +200,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 				exit;
 			}
 		}
-
-		// On a le fichier cache et la date
-		if ($use_cache)
-			$lastmodified = filemtime($chemin_cache);
-			###  Si on utilise la fraicheur ce sera inutile
 	}
-
-	return $lastmodified;
 }
 
 ?>

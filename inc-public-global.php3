@@ -24,14 +24,18 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 				'contexte' => $contexte),
 			$delais,
 			$inclusion);
-		if ($chemin_cache)
-			$lastmodified = filemtime($chemin_cache);
-		spip_log (($inclusion ? 'inclus':'calcul').' ('.spip_timer().
+		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('.spip_timer().
 		"): $chemin_cache");
 	} else {
 		lire_fichier ($chemin_cache, $page['texte']);
 		# spip_log ("cache $chemin_cache");
 	}
+
+	// Fixer la date de derniere modif
+	if ($chemin_cache)
+		$lastmodified = max($lastmodified, @filemtime($chemin_cache));
+	else
+		$lastmodified = time();
 
 	// Analyser la carte d'identite du squelette
 	if (preg_match("/^<!-- ([^\n]*) -->\n/", $page['texte'], $match)) {
@@ -48,29 +52,30 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 // Appeler cette fonction pour obtenir la page principale
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
-	global $flag_preserver, $flag_dynamique, $recalcul, $last_modified;
+	global $flag_preserver, $recalcul, $lastmodified;
 	include_local ("inc-cache.php3");
 
 	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache('', $fond);
-	$lastmodified = determiner_cache($delais, $use_cache, $chemin_cache);
-	if ($lastmodified)
-		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
+	determiner_cache($delais, $use_cache, $chemin_cache);
 
 	// Repondre gentiment aux requetes sympas
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] && ($recalcul != oui)) {
-		$headers_only = (trim(str_replace('GMT', '',
-			ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE'])))
-			== $gmoddate);
-		if ($headers_only)
-			http_status(304);
+	// (ici on ne tient pas compte d'une obsolence du cache ou des
+	// eventuels fichiers inclus modifies depuis la date
+	// HTTP_IF_MODIFIED_SINCE du client)
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND $recalcul != oui
+	AND $chemin_cache) {
+		$lastmodified = @filemtime($chemin_cache);
+		$headers_only = http_last_modified($lastmodified);
 	}
-	else {
-		$headers_only  = ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] == 'HEAD');
-	}
+	$headers_only |= ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] == 'HEAD');
 
 	if ($headers_only) {
-		@header("Last-Modified: $gmoddate GMT");
-		@header("Connection: close");
+		if ($chemin_cache)
+			$t = @filemtime($chemin_cache);
+		else
+			$t = time();
+		@header('Last-Modified: '.http_gmoddate($t).' GMT');
+		@header('Connection: close');
 		// Pas de bouton admin pour un HEAD
 		$flag_preserver = true;
 	}
@@ -79,22 +84,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
 		$fond, false);
 
-		//
-		// Entetes
-		//
-
-		// Interdire au client de cacher un login, un admin ou un recalcul
-		if ($flag_dynamique OR ($recalcul == 'oui')
-		OR $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']) {
-			@header("Cache-Control: no-cache,must-revalidate");
-			@header("Pragma: no-cache");
-			$lastmodified = time()+3600;	// ne pas autoriser les
-											// inclus a rejouer ce header
-		} else if ($lastmodified) {
-			$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
-			@header("Last-Modified: $gmoddate GMT");
-		}
-
+		// Entete content-type: xml ou html ; charset
 		if ($xhtml) {
 			// Si Mozilla et tidy actif, passer en "application/xhtml+xml"
 			// extremement risque: Mozilla passe en mode debugueur strict
@@ -162,7 +152,7 @@ function terminer_public_global($use_cache, $chemin_cache='') {
 }
 
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
-	global $delais, $lastmodified;
+	global $delais;
 
 	$contexte_inclus['fond'] = $fond;
 
@@ -176,14 +166,6 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		include_ecrire('inc_lang.php3');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
-	}
-
-	// @header ne marchera qu'en output_buffering
-	$lastmod = determiner_cache($delais, $use_cache, $chemin_cache);
-	if ($lastmod > $lastmodified) {
-		$lastmodified = $lastmod;
-		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
-		@header("Last-Modified: $gmoddate GMT");
 	}
 
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais,
