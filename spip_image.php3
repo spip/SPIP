@@ -6,10 +6,18 @@ include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 
 function copier_document($ext, $orig, $source) {
-	$dest = creer_repertoire_documents($ext) .
+
+	$dir = creer_repertoire_documents($ext);
+	$dest = $dir .
 		ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
 			translitteration(ereg_replace("\.([^.]+)$", "", 
 						      ereg_replace("<[^>]*>", '', basename($orig)))));
+	/* bientot, en mieux ....
+	if ((lire_meta("creer_htpasswd")) == 'oui')
+	  {include_ecrire("inc_cron.php3");
+	    verifier_htaccess($dir);
+	  }
+	*/
 	# bien vu ?
 	if ($orig == ($dest . '.' . $ext)) return $orig;
 	$n = 0;
@@ -24,11 +32,6 @@ function effacer_repertoire_temporaire($nom) {
 		if (is_file($f = "$nom/$f")) @unlink($f);
 		}
 	@rmdir($nom);
-}
-
-function scinder_repertoire_documents($nom) {
-  eregi('^' . _DIR_IMG . '(.*/)?([^\./]+)\.([a-z0-9]+)$', $nom, $regs);
-  return $regs;
 }
 
 function effacer_image($nom) {
@@ -75,10 +78,9 @@ function tester_vignette ($test_vignette) {
 		include_ecrire('inc_logos.php3');
 		$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;
-		$loc =_DIR_IMG . "test_$test_vignette";
-		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg',
-					      $taille_preview, $taille_preview, 'jpg', $loc, $test_vignette, true))
-			return ("$loc." . $preview['format']);
+		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
+
+			return ($preview['fichier']);
 	}
 	return '';
 }
@@ -192,7 +194,7 @@ function ajout_image($source, $dest) {
 // Ajouter un document
 //
 
-function ajout_doc($orig, $source, $mode, $id_document, $titre_automatique=true) {
+function ajout_doc($orig, $source, $mode, $id_document) {
 	global $hash_id_auteur, $hash, $id_article, $type;
 
 	//
@@ -237,7 +239,6 @@ function ajout_doc($orig, $source, $mode, $id_document, $titre_automatique=true)
 				}
 			}
 
-
 	//
 	// Mettre a jour les infos du document uploade
 	//
@@ -251,39 +252,25 @@ function ajout_doc($orig, $source, $mode, $id_document, $titre_automatique=true)
 
 			if ($nouveau) {
 				if (!$mode) $mode = ($type_image AND $type_inclus == 'image') ? 'vignette' : 'document';
-				$titre = ereg_replace("\..*$", "", $orig);
-				$titre = ereg_replace("ecrire/|upload/", "", $titre);
-				$titre = strtr($titre, "_", " ");
-				if (!$titre_automatique) $titre = "";
-				//$update = "mode='$mode', titre='".addslashes($titre)."', ";
 				$update = "mode='$mode', ";
 			}
 
 			$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
 		"WHERE id_document=$id_document";
 			spip_query($query);
-			
+
 			if ($id_document_lie) {
 				$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
 				spip_query($query);
 				$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 			}
-
 	// Creer la vignette
 			if ($mode == 'document' AND lire_meta('creer_preview') == 'oui'
 			    AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
 				include_ecrire('inc_logos.php3');
-				$regs = scinder_repertoire_documents($dest_path);
-				if ($regs) {
-					$d = lire_meta('taille_preview');
-					creer_vignette($dest_path, 
-						       $d,
-						       $d,
-						       'jpg', 
-						       creer_repertoire_documents('vignettes').$regs[2].'-s',
-						       'AUTO',
-						       true);
-				}
+				$f = ereg_replace(".$ext$", '-s', basename($dest_path));
+				$d = lire_meta('taille_preview');
+				creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
 			}
 		}
 	}
@@ -349,31 +336,18 @@ function gdRotate($imagePath,$rtt){
 
 //
 // Creation automatique de vignette new style
-//
+// Normalement le test est vérifié donc on ne rend rien sinon
+
 function creer_fichier_vignette($vignette) {
-	$fichier_vignette = '';
-	$regs = scinder_repertoire_documents($vignette);
-	if ($regs) {
-		$source = $regs[0];
-		$format = $regs[3];
-		$destination = creer_repertoire_documents('vignettes').$regs[2].'-s';	// adresse new style
-
-		if (lire_meta("creer_preview") == 'oui') {
-			$taille_preview = lire_meta("taille_preview");
-			if ($taille_preview < 10) $taille_preview = 120;
-			include_ecrire('inc_logos.php3');
-			if ($preview = creer_vignette($source, $taille_preview, $taille_preview, $format, $destination))
-				$fichier_vignette = $preview['fichier'];
-		}
+	if ($vignette && lire_meta("creer_preview") == 'oui') {
+		eregi('\.([a-z0-9]+)$', $vignette, $regs);
+		$format = $regs[1];
+		$taille_preview = lire_meta("taille_preview");
+		if ($taille_preview < 10) $taille_preview = 120;
+		include_ecrire('inc_logos.php3');
+		$preview = creer_vignette($vignette, $taille_preview, $taille_preview, $format, 'vignettes', basename($vignette).'-s');
+		return $preview['fichier'];
 	}
-
-	if (!$fichier_vignette) {
-		include_ecrire('inc_documents.php3');
-		list($fichier_vignette) = vignette_par_defaut($format);
-		if (!$fichier_vignette)
-			list($fichier_vignette) = vignette_par_defaut('txt');
-	}
-	return $fichier_vignette;
 }
 
 function supprime_document_et_vignette($doc_supp) {
@@ -507,7 +481,6 @@ function afficher_compactes($image_name) {
 		// presenter une interface pour choisir si fichier joint ou decompacter
 		include_ecrire ("inc_presentation.php3");
 		install_debut_html(_T('upload_fichier_zip'));
-	
 		
 		echo "<p>"._T('upload_fichier_zip_texte')."</p>";
 		echo "<p>"._T('upload_fichier_zip_texte2')."</p>";
