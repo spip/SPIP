@@ -217,7 +217,7 @@ function couper($texte, $long) {
 	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
 
 	// supprimer les codes typos
-	$texte = strtr($texte,"{}","  ");
+	$texte = ereg_replace("[{}]", "", $texte);
 
 	$texte2 = substr($texte." ", 0, $long);
 	$texte2 = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $texte2);
