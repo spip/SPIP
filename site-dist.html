@@ -1,76 +1,63 @@
-<HTML lang="#LANG">
-<HEAD>
-<TITLE><BOUCLE0(SITES){id_syndic}>#NOM_SITE</BOUCLE0>Pas de site<//B0></TITLE>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="#LANG">
+<head>
+<title><BOUCLE0(SITES){id_syndic}>#NOM_SITE</BOUCLE0>Pas de site<//B0></title>
 <link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY BGCOLOR="#FFFFFF" dir="#LANG_DIR">
+</head>
 
-
-<CENTER>
+<body bgcolor="#FFFFFF" dir="#LANG_DIR">
+<center>
 <BOUCLE1(SITES){id_syndic}{unique}>
 
+<table width="750">
+<tr><td width="750" colspan="3">
+<font face="Arial,Helvetica" size="4">
 
 
+[<br><font size="6"><b>(#NOM_SITE)</b></font>]
 
-<TABLE WIDTH=750>
-<TR><TD WIDTH=750 COLSPAN=3>
-<font face=Arial,Helvetica SIZE=4>
-
-
-
-
-[<BR><FONT SIZE=6><B>(#NOM_SITE)</B></FONT>]
-
-
-
-<BR><BR>
-</FONT>
-</TD></TR>
-<TR><TD WIDTH=250 VALIGN="top">
+<br><br>
+</font>
+</td></tr>
+<tr><td width="250" valign="top">
 
 
 
 <B12>
-<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR="#000000" WIDTH=250>
-<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#444444' WIDTH="100%">
-<font face=Arial,Helvetica COLOR="#FFFFFF">
-<B>D'autres sites</B>
-</font>
-</TD></TR></TABLE>
+	<table cellpadding="1" cellspacing="0" border="0"><tr><td bgcolor="#000000" width="250">
+	<table cellpadding="5" cellspacing="0" border="0" width="100%"><tr><td bgcolor="#444444" width="100%">
+	<font face="Arial,Helvetica" color="#FFFFFF">
+	<b>D'autres sites</b>
+	</font>
+	</td></tr></table>
 
-<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
-<font face=Arial,Helvetica SIZE=2><UL>
-<BOUCLE12(SITES){par hasard}{doublons}{0,20}>
-<LI><A HREF="#URL_SITE">#NOM_SITE</A>
-</BOUCLE12>
-</UL>
-</font>
-</TD></TR></TABLE>
-</TD></TR></TABLE>
-</B12>
+	<table cellpadding="5" cellspacing="0" border="0" width="100%"><tr><td bgcolor="#EEEEEE" width="100%">
+	<font face="Arial,Helvetica" size="2">
+	<ul>
+	<BOUCLE12(SITES){par hasard}{doublons}{0,20}>
+		<li><a href="#URL_SITE">#NOM_SITE</a></li>
+	</BOUCLE12>
+	</ul>
+	</font>
+	</td></tr></table>
+	</td></tr></table>
+	</B12>
 
-<P>
-
-
-
+<p>
 
 
+</td><td width="10">&nbsp;</td>
+<td width="490" valign="top">
 
 
-</TD><TD WIDTH=10>&nbsp;</TD>
-<TD WIDTH=490 VALIGN="top">
+<font face="Arial,Helvetica" size="3">
+[<b>(#DESCRIPTIF|justifier)</b>]
 
-
-<font face=Arial,Helvetica SIZE=3>
-[<B>(#DESCRIPTIF|justifier)</B>]
-
-<P>
-<B4><B>Rubrique :</B>
+<p>
+<B4><b>Rubrique :</b>
 <ul>
 <BOUCLE4(RUBRIQUES){id_rubrique}>
-
-<li>
-<B><A HREF="#URL_RUBRIQUE">[(#TITRE|majuscules)]</A></B>
+	<li><b><a href="#URL_RUBRIQUE">[(#TITRE|majuscules)]</a></b></li>
 </BOUCLE4>
 </ul></B4>
 
@@ -78,120 +65,112 @@
 <B_articles_syndic><b>Articles :</b>
 <ul>
 <BOUCLE_articles_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}>
-<li> <a href="#URL_ARTICLE">[(#TITRE*)]</a>
+	<li><a href="#URL_ARTICLE">[(#TITRE*)]</a></li>
 </BOUCLE_articles_syndic>
 </ul></B_articles_syndic>
 
 
+	[<P align="right"><font size="3"><b><a href="forum.php3?(#PARAMETRES_FORUM)">Commenter ce site</a></b></font>]
 
 
-	[<P align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">Commenter ce site</A></B></font>]
+</font>
 
-
-</FONT>
-
-</TD></TR>
-</TABLE>
-
-
+</td></tr>
+</table>
 
 
 
 <B_forums_liens>
 
 
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-</TR>
-</TABLE>
+<table width="100%" cellpadding="0" cellspacing="0" border="0">
+<tr width="100%">
+<td width="100%" backgrundn="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></td>
+</tr>
+</table>
 
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=674>
-<TR WIDTH=674>
-<TD WIDTH=200 ALIGN="left" VALIGN="top">
-	<BR><BR>
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
-	<A NAME='liens_forums'>
+<table cellpadding="0" cellspacing="0" border="0" width="674">
+<tr width="674">
+<td width="200" align="left" valign="top">
+	<br><br>
+	<font face="arial,helvetica,sans-serif" size="2">
+	<a name="liens_forums">
 	<BOUCLE_forums_liens(FORUMS){id_syndic}{par date}{inverse}>
-		<A HREF="#forum#ID_FORUM"><IMG SRC="puce.gif" BORDER=0>#TITRE</A>
-		<BR>[(#DATE|affdate)][, par (#NOM)]
-		<BR>
+		<a href="#forum#ID_FORUM"><img src="puce.gif" border="0">#TITRE</a>
+		<br>[(#DATE|affdate)][, par (#NOM)]
+		<br>
 	</BOUCLE_forums_liens>
-	</FONT>
-	<BR><BR>
-</TD>
+	</font>
+	<br><br>
+</td>
 
-<TD WIDTH=12><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></TD>
-<TD WIDTH=462 VALIGN="top">
+<td width="12"><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></td>
+<td width="462" valign="top">
 
-	<BR><BR>
+	<br><br>
 
 	<BOUCLE_Forums(FORUMS){id_syndic}{par date}{inverse}>
-	<A NAME="forum#ID_FORUM">
-	<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=462 BGCOLOR="#000000">
-	<TR><TD BGCOLOR='#444444' WIDTH="100%">
-	<font face=Arial,Helvetica SIZE=2>
-	<B>[<FONT COLOR="#FFFFFF">(#TITRE)</FONT>]</B> 
+	<a name="forum#ID_FORUM">
+	<table cellpadding="5" cellspacing="1" border="0" width="462" bgcolor="#000000">
+	<tr><td bgcolor="#444444" width="100%">
+	<font face="Arial,Helvetica" SIZE="2">
+	<b>[<font color="#FFFFFF">(#TITRE)</font>]</b> 
 	</font>
-	</TD></TR>
-	<TR><TD BGCOLOR='#FFFFFF' WIDTH=100%>
-	<font face=Arial,Helvetica SIZE=1>
+	</td></tr>
+	<tr><td bgcolor="#FFFFFF" width="100%">
+	<font face="Arial,Helvetica" SIZE="1">
 	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-	 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
+	 &nbsp; [<A HREF="#liens_forums">retour au d&eacute;but des forums</A>]
 	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
 	</font>
-	</TD></TR>
-	<TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
-	<font face=Arial,Helvetica SIZE=2>
+	</td></tr>
+	<tr><TD BGCOLOR="#EEEEEE" width="100%">
+	<font face="Arial,Helvetica" SIZE="2">
 	<P>#TEXTE
-	<P align='right'>[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
+	<P align="right">[<font size="1"><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
 	</font>
-	</TD></TR></TABLE>
+	</td></tr></table>
 
 
 	<B_fils>
-	<UL>
-		<font face=Arial,Helvetica SIZE=2>
+	<ul>
+		<font face="Arial,Helvetica" SIZE="2">
 		<BOUCLE_fils(FORUMS){id_parent}{par date}>
-		<P>
-		<A NAME="forum#ID_FORUM">
-		<B>[(#TITRE)]</B>
-		<BR><font SIZE=1>
-		[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-		 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
-		[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
+		<p>
+		<a name="forum#ID_FORUM">
+		<b>[(#TITRE)]</b>
+		<br><font size="1">
+		[(#DATE|affdate)][, par <a href="mailto:#EMAIL">(#NOM)</a>]
+		 &nbsp; [<z href="#liens_forums">retour au d&eacute;but des forums</a>]
+		[<br><a href="#URL_SITE">(#NOM_SITE)</a>]
 		</font>
-		<HR NOSHADE SIZE=1>
+		<hr noshade size="1">
 		#TEXTE
-		<P align="right">[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]
+		<p align="right">[<font size="1"><a href="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</a></font>]
 			
 
 			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
 	
 		</BOUCLE_fils>
 		</font>
-	</UL>
+	</ul>
 	</B_fils>
 
 
 
-	<P>
+	<p>
 
 	</BOUCLE_Forums>
-</TD>
-</TR>
-</TABLE>
-<P>
+</td>
+</tr>
+</table>
+<p>
 </B_forums_liens>
 
 
-
-
-
-
-
 </BOUCLE1>
-<H2>Il n'y a pas de site à cette adresse</H2><//B1>
-</CENTER>
-</BODY>
-</HTML>
+<h2>Il n'y a pas de site &agrave; cette adresse</h2>
+<//B1>
+</center>
+</body>
+</html>

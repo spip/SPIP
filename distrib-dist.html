@@ -1,7 +1,7 @@
-document.write('<TABLE border="0" bgcolor="#000000" cellspacing="0" cellpadding="0"><TR><TD>');
-document.write('<TABLE border="0" bgcolor="#FFFFFF" cellspacing="1" cellpadding="2"><TR><TD bgcolor="#D0D0D0" align="center">');
-document.write('<A href="#URL_SITE_SPIP/"><B>[(#NOM_SITE_SPIP|addslashes)]</B></A>&nbsp;</TD></TR><TR><TD><SMALL>');
+document.write('<table border="0" bgcolor="#000000" cellspacing="0" cellpadding="0"><tr><td>');
+document.write('<table border="0" bgcolor="#FFFFFF" cellspacing="1" cellpadding="2"><tr><td bgcolor="#D0D0D0" align="center">');
+document.write('<a href="#URL_SITE_SPIP/"><b>[(#NOM_SITE_SPIP|addslashes)]</b></a>&nbsp;</td></tr><tr><td><ul><small>');
 <BOUCLE_articles(articles){tout}{par date}{inverse}{0,10}>
-document.write('<LI><A href="#URL_SITE_SPIP/#URL_ARTICLE"><FONT color="#000000">[(#TITRE|addslashes)]</FONT></A></LI>\n');
+document.write('<li><a href="#URL_SITE_SPIP/#URL_ARTICLE"><font color="#000000">[(#TITRE|addslashes)]</font></a></li>\n');
 </BOUCLE_articles>
-document.write('</SMALL></TD></TR></TABLE></TD></TR></TABLE>');
+document.write('</small></ul></td></tr></table></td></tr></table>');

@@ -14,8 +14,8 @@ function bouton_admin($titre, $lien) {
 	$link = new Link($lien);
 	$link->delVar('submit');
 	echo $link->getForm('GET');
-	echo "<INPUT TYPE='submit' NAME='submit' VALUE=\"".attribut_html($titre)."\" CLASS='spip_bouton'>\n";
-	echo "</FORM>";
+	echo "<input type='submit' name='submit' value=\"".attribut_html($titre)."\" class='spip_bouton'>\n";
+	echo "</form>";
 }
 
 function afficher_boutons_admin() {
