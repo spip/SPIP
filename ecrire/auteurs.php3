@@ -47,7 +47,8 @@ if ($connect_statut == '0minirezo') {
 	$flag_visiteurs = spip_num_rows($result) > 0;
 
 	debut_raccourcis();
-	icone_horizontale (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif","rien.gif");
 	if ($flag_visiteurs) {
 		if ($visiteurs == "oui")
 			icone_horizontale (_T('icone_afficher_auteurs'), "auteurs.php3", "redacteurs-24.gif", "");

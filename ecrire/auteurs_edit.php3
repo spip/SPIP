@@ -103,6 +103,12 @@ $artoff = "autoff$id_auteur";
 if ($id_auteur>0 AND (($connect_statut == '0minirezo') OR ($connect_id_auteur == $id_auteur)))
 	afficher_boite_logo($arton, $artoff, _T('logo_auteur').aide ("logoart"), _T('logo_survol'));
 
+// raccourcis
+if ($connect_id_auteur == $id_auteur) {
+	debut_raccourcis();
+	icone_horizontale(_T('icone_tous_auteur'), "auteurs.php3", "redacteurs-24.gif","rien.gif");
+	fin_raccourcis();
+}
 
 debut_droite();
 
