@@ -419,31 +419,31 @@ function formulaire_site($la_rubrique) {
 function ecrire_auteur($id_auteur,$email_auteur) {
 	global $flag_wordwrap;
 	$affiche_formulaire = true;
-	if ($GLOBALS['texte_message_auteur']) {
-		if ($GLOBALS['sujet_message_auteur'] == "")
+	if ($GLOBALS['texte_message_auteur'.$id_auteur]) {
+		if ($GLOBALS['sujet_message_auteur'.$id_auteur] == "")
 			$erreur .= erreur("Veuillez indiquer un sujet");
-		else if (! email_valide($GLOBALS['email_message_auteur']) )
+		else if (! email_valide($GLOBALS['email_message_auteur'.$id_auteur]) )
 			$erreur .= erreur("Veuillez indiquer une adresse email valide");
-		else if ($GLOBALS['valide_message_auteur']) {  // verifier hash ?
+		else if ($GLOBALS['valide_message_auteur'.$id_auteur]) {  // verifier hash ?
 			include_local("ecrire/inc_mail.php3");
-			$GLOBALS['texte_message_auteur'] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
+			$GLOBALS['texte_message_auteur'.$id_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
 			envoyer_mail($email_auteur,
-				$GLOBALS['sujet_message_auteur'],
-				$GLOBALS['texte_message_auteur'], $GLOBALS['email_message_auteur'],
+				$GLOBALS['sujet_message_auteur'.$id_auteur],
+				$GLOBALS['texte_message_auteur'.$id_auteur], $GLOBALS['email_message_auteur'.$id_auteur],
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
 			$erreur .= erreur("Message envoy&eacute;");
 			$affiche_formulaire = false;
 		} else { //preview
-			echo "<p><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur']."</b></div>";
+			echo "<p><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
 			if ($flag_wordwrap)
-				$GLOBALS['texte_message_auteur'] = wordwrap($GLOBALS['texte_message_auteur']);
-			echo "<pre>".entites_html($GLOBALS['texte_message_auteur'])."</pre>";
+				$GLOBALS['texte_message_auteur'.$id_auteur] = wordwrap($GLOBALS['texte_message_auteur'.$id_auteur]);
+			echo "<pre>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</pre>";
 			$affiche_formulaire = false;
 			$link = $GLOBALS['clean_link'];
-			$link->addVar('email_message_auteur', $GLOBALS['email_message_auteur']);
-			$link->addVar('sujet_message_auteur', $GLOBALS['sujet_message_auteur']);
-			$link->addVar('texte_message_auteur', $GLOBALS['texte_message_auteur']);
-			$link->addVar('valide_message_auteur', 'oui');			
+			$link->addVar('email_message_auteur'.$id_auteur, $GLOBALS['email_message_auteur'.$id_auteur]);
+			$link->addVar('sujet_message_auteur'.$id_auteur, $GLOBALS['sujet_message_auteur'.$id_auteur]);
+			$link->addVar('texte_message_auteur'.$id_auteur, $GLOBALS['texte_message_auteur'.$id_auteur]);
+			$link->addVar('valide_message_auteur'.$id_auteur, 'oui');			
 			echo $link->getForm('POST');
 			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer l'envoi\">";
 			echo "</DIV></FORM>";
@@ -458,10 +458,10 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('POST');
 		echo "<div class='spip_encadrer'><P><B>Votre adresse email</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur\" VALUE=\"".entites_html($GLOBALS[email_message_auteur])."\" SIZE=\"30\">\n";
+		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur$id_auteur\" VALUE=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\">\n";
 		echo  "<P><B>Sujet</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur\" VALUE=\"".entites_html($GLOBALS[sujet_message_auteur])."\" SIZE=\"30\">\n";
-		echo  "<P><TEXTAREA NAME='texte_message_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".entites_html($GLOBALS[texte_message_auteur])."</textarea></div>\n";
+		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur$id_auteur\" VALUE=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\">\n";
+		echo  "<P><TEXTAREA NAME='texte_message_auteur$id_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></div>\n";
 		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Envoyer un message\">";
 		echo  "</DIV></FORM>";
 	}
