@@ -43,17 +43,19 @@ function ecrire_stats() {
 			"VALUES ($log_ip, '$log_type', $log_id_num)";
 		spip_query($query);
 	}
-	if (lire_meta('activer_statistiques_ref') == 'oui') {
-		$url_site_spip = lire_meta('adresse_site');
-		$url_site_spip = eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site_spip);
-		$log_referer = $GLOBALS['HTTP_REFERER'];
-		if (($url_site_spip<>'') AND strpos('-'.strtolower($log_referer), strtolower($url_site_spip)) AND !$GLOBALS['var_recherche']) $log_referer = "";
-		if ($log_referer) {
-			$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
-			$query = "INSERT IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
-				"VALUES ($log_ip, '$log_referer', $referer_md5, '$log_type', $log_id_num)";
-			spip_query($query);
-		}
+
+	//
+	// Loguer le referer
+	//
+	$url_site_spip = lire_meta('adresse_site');
+	$url_site_spip = eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site_spip);
+	$log_referer = $GLOBALS['HTTP_REFERER'];
+	if (($url_site_spip<>'') AND strpos('-'.strtolower($log_referer), strtolower($url_site_spip)) AND !$GLOBALS['var_recherche']) $log_referer = "";
+	if ($log_referer) {
+		$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
+		$query = "INSERT IGNORE INTO spip_referers_temp (ip, referer, referer_md5, type, id_objet) ".
+			"VALUES ($log_ip, '$log_referer', $referer_md5, '$log_type', $log_id_num)";
+		spip_query($query);
 	}
 }
 
