@@ -1,4 +1,4 @@
-<?
+<?php
 //
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_LAYER")) return;
@@ -95,7 +95,7 @@ function MM_showHideLayers() { //v3.0
 //-->
 </script>
 
-<?
+<?php
 	}
 }
 

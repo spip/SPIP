@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -403,7 +403,7 @@ function calculer_page($fond) {
 	while (list($key, $val) = each($contexte_defaut)) {
 		if ($contexte[$val]) {
 			$GLOBALS[$val] = $contexte[$val];
-			$signale_globals .= '<? $'.$val.' = '.(int) $contexte[$val]."; ?>\n";
+			$signale_globals .= '<?php $'.$val.' = '.(int) $contexte[$val]."; ?>\n";
 		}
 	}
 

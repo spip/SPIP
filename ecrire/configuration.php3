@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc.php3");
 
@@ -128,7 +128,7 @@ familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus g&
 de laisser la charge de cette page au webmestre principal de votre site.</B>
 </FONT>
 
-<?
+<?php
 
 fin_boite_info();
 echo "<P>";

@@ -1,4 +1,4 @@
-<?
+<?php
 
 if (!file_exists("ecrire/inc_connect.php3")) {
 	$db_ok = 0;

@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc.php3");
 include_local ("inc_logos.php3");
@@ -1045,7 +1045,7 @@ function change_bouton(selObj){
 
 // - End of JavaScript - -->
 </SCRIPT>
-<?
+<?php
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo "<FORM ACTION='articles.php3' METHOD='get'>";

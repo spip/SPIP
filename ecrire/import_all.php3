@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc_version.php3");
 include_local ("inc_connect.php3");

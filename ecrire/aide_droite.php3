@@ -1,4 +1,4 @@
-<?
+<?php
 include ("inc_version.php3");
 include_local ("inc_texte.php3");
 ?>
@@ -54,7 +54,7 @@ table.spip td {
 
 <FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>
 
-<?
+<?php
 
 if (strlen($aide)<2) $aide = "spip";
 

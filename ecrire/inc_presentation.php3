@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -669,16 +669,16 @@ function debut_page($titre = "") {
 	?>
 	<html>
 	<head>
-	<title>[<? echo $nom_site_spip; ?>] <? echo $titre; ?></TITLE>
+	<title>[<?php echo $nom_site_spip; ?>] <?php echo $titre; ?></TITLE>
 	<meta http-equiv="Expires" content="0">
 	<meta http-equiv="cache-control" content="no-cache,no-store">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <style><!--
 	.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
-	.formo {width: 100%; background-color: <? echo $couleur_claire; ?>; background-position: center bottom; float: none;}
-	.fondl {background-color: <? echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
-	.fondo {background-color: <? echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
+	.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
+	.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
+	.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
 	.profondeur {border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid}
 	.hauteur {border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid}
@@ -736,7 +736,7 @@ function debut_page($titre = "") {
 	}
 
 --></style>
-<?
+<?php
 afficher_script_layer();
 ?>
 <script language="JavaScript">
@@ -750,7 +750,7 @@ afficher_script_layer();
 //-->
 </script>
 </head>
-<body bgcolor="#E4E4E4" <?
+<body bgcolor="#E4E4E4" <?php
 	global $fond;
 	if ($fond==1) $img='IMG2/rayures.gif';
 	if ($fond==2) $img='IMG2/blob.gif';
@@ -765,7 +765,7 @@ afficher_script_layer();
 	
 	<center>
 	
-<?
+<?php
 	global $spip_survol;
 	if ($spip_survol=="off"){
 
@@ -783,26 +783,26 @@ afficher_script_layer();
 		<td valign="top">
 		<table cellpadding="0" cellspacing="0" border="0">
 		<tr><td>
-		<?
+		<?php
 		global $articles_mots;
 		if ($articles_mots != "non"){
 		?>
 		<a href="mots_tous.php3" onMouseOver="fond.src='IMG2/cles-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/cles-off.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"></A>
-		<?
+		<?php
 	}else{
-	?><img src="IMG2/cles-non.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"><?
+	?><img src="IMG2/cles-non.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"><?php
 	}
 	?></td></tr>
-		<tr><td><? global $activer_breves;
+		<tr><td><?php global $activer_breves;
 		 if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="fond.src='IMG2/breves-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
 		</table></td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
-		<tr><td><a href="auteurs.php3" onMouseOver="fond.src='IMG2/redacteurs-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/redacteurs-off.gif" name="redacteurs" alt="Les r&eacute;dacteurs" width="52"  height="58" border="0"></A><?
+		<tr><td><a href="auteurs.php3" onMouseOver="fond.src='IMG2/redacteurs-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/redacteurs-off.gif" name="redacteurs" alt="Les r&eacute;dacteurs" width="52"  height="58" border="0"></A><?php
 		global $options;
 		global $connect_statut;
 		if ($options=='avancees' AND $connect_statut == '0minirezo'){
-		?><a href="controle_forum.php3" onMouseOver="fond.src='IMG2/suivre-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/suivre-off.gif" name="suivre" alt="Suivre les forums" width="58" height="58" border="0"></A><?
+		?><a href="controle_forum.php3" onMouseOver="fond.src='IMG2/suivre-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/suivre-off.gif" name="suivre" alt="Suivre les forums" width="58" height="58" border="0"></A><?php
 
 	global $activer_statistiques;
 
@@ -810,22 +810,22 @@ afficher_script_layer();
 		echo "<img src='IMG2/statistiques-non.gif' name='statistiques' alt='Statistiques' width='43' height='58' border='0'>";
 	}else{
 
-	?><A HREF="articles_class.php3" onMouseOver="fond.src='IMG2/statistiques-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/statistiques-off.gif" name="statistiques" alt="Statistiques" width="43" height="58" border="0"></A><?
+	?><A HREF="articles_class.php3" onMouseOver="fond.src='IMG2/statistiques-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/statistiques-off.gif" name="statistiques" alt="Statistiques" width="43" height="58" border="0"></A><?php
 	}
-	?><?
+	?><?php
 	global $connect_toutes_rubriques;
 	
 	if ($connect_toutes_rubriques){
-	?><A HREF="configuration.php3" onMouseOver="fond.src='IMG2/config-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/config-off.gif" name="config" alt="Configurer" width="44" height="58" border="0"></A><A HREF="admin_tech.php3" onMouseOver="fond.src='IMG2/sauvegarde-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/sauvegarde-off.gif" name="sauvegarde" alt="Sauvegarde de la base" width="53" height="58" border="0"></A><?
+	?><A HREF="configuration.php3" onMouseOver="fond.src='IMG2/config-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/config-off.gif" name="config" alt="Configurer" width="44" height="58" border="0"></A><A HREF="admin_tech.php3" onMouseOver="fond.src='IMG2/sauvegarde-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/sauvegarde-off.gif" name="sauvegarde" alt="Sauvegarde de la base" width="53" height="58" border="0"></A><?php
 	}else{
 		echo "<img src='IMG2/haut-vide.gif' alt='' width='97' height='58' border='0'>";
 	}?>
-	<?
+	<?php
 		}else{
-		?><img src="IMG2/haut-vide.gif" alt="" width="198" height="58" border="0"><?
+		?><img src="IMG2/haut-vide.gif" alt="" width="198" height="58" border="0"><?php
 		}
 		?><a href="forum.php3" onMouseOver="fond.src='IMG2/forum-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/forum-off.gif" name="forum" alt="Forum interne" width="57" height="58" border="0"></A><A HREF="#" onMouseDown="window.open('aide_index.php3','myWindow','scrollbars=yes,resizable=yes,width=550')" onMouseOver="fond.src='IMG2/aide-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/aide-off.gif" name="aide" alt="A l'aide" width="50" height="58" border="0"></A></TD></TR>
-		<tr><?
+		<tr><?php
 		if ($options != 'avancees'){
 			echo "<td background='IMG2/rond-vert-simp.gif'>";
 		}else{
@@ -841,7 +841,7 @@ afficher_script_layer();
 		<td valign="top">
 		
 		<table cellpadding=0 cellspacing=0 border=0>
-		<tr><td><?
+		<tr><td><?php
 		global $adresse_site;
 		if (strlen($adresse_site)<10) $adresse_site="../";
 
@@ -852,7 +852,7 @@ afficher_script_layer();
 		</tr></table>
 		</td>
 		</tr></table>
-<?
+<?php
 
 }else{
 
@@ -868,24 +868,24 @@ afficher_script_layer();
 		</td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
-		<tr><td><?
+		<tr><td><?php
 		global $articles_mots;
 		if ($articles_mots!="non"){
-		?><A HREF="mots_tous.php3" onMouseOver="cles.src='IMG2/cles-on.gif'; fond.src='IMG2/cles-texte.gif'" onMouseOut="cles.src='IMG2/cles-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/cles-off.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"></A><?
+		?><A HREF="mots_tous.php3" onMouseOver="cles.src='IMG2/cles-on.gif'; fond.src='IMG2/cles-texte.gif'" onMouseOut="cles.src='IMG2/cles-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/cles-off.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"></A><?php
 	}else{
-	?><img src="IMG2/cles-non.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"><?
+	?><img src="IMG2/cles-non.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"><?php
 	}
 	?></td></tr>
-		<tr><td><? global $activer_breves;
+		<tr><td><?php global $activer_breves;
 		 if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="breves.src='IMG2/breves-on.gif'; fond.src='IMG2/breves-texte.gif'" onMouseOut="breves.src='IMG2/breves-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
 		</table></td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
-		<tr><td><a href="auteurs.php3" onMouseOver="redacteurs.src='IMG2/redacteurs-on.gif'; fond.src='IMG2/redacteurs-texte.gif'" onMouseOut="redacteurs.src='IMG2/redacteurs-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/redacteurs-off.gif" name="redacteurs" alt="Les r&eacute;dacteurs" width="52"  height="58" border="0"></A><?
+		<tr><td><a href="auteurs.php3" onMouseOver="redacteurs.src='IMG2/redacteurs-on.gif'; fond.src='IMG2/redacteurs-texte.gif'" onMouseOut="redacteurs.src='IMG2/redacteurs-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/redacteurs-off.gif" name="redacteurs" alt="Les r&eacute;dacteurs" width="52"  height="58" border="0"></A><?php
 		global $options;
 		global $connect_statut;
 		if ($options=='avancees' AND $connect_statut == '0minirezo'){
-		?><a href="controle_forum.php3" onMouseOver="suivre.src='IMG2/suivre-on.gif'; fond.src='IMG2/suivre-texte.gif'" onMouseOut="suivre.src='IMG2/suivre-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/suivre-off.gif" name="suivre" alt="Suivre les forums" width="58" height="58" border="0"></A><?
+		?><a href="controle_forum.php3" onMouseOver="suivre.src='IMG2/suivre-on.gif'; fond.src='IMG2/suivre-texte.gif'" onMouseOut="suivre.src='IMG2/suivre-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/suivre-off.gif" name="suivre" alt="Suivre les forums" width="58" height="58" border="0"></A><?php
 
 	global $activer_statistiques;
 
@@ -893,23 +893,23 @@ afficher_script_layer();
 		echo "<img src='IMG2/statistiques-non.gif' name='statistiques' alt='Statistiques' width='43' height='58' border='0'>";
 	}else{
 
-	?><a href="articles_class.php3" onMouseOver="statistiques.src='IMG2/statistiques-on.gif'; fond.src='IMG2/statistiques-texte.gif'" onMouseOut="statistiques.src='IMG2/statistiques-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/statistiques-off.gif" name="statistiques" alt="Statistiques" width="43" height="58" border="0"></A><?
+	?><a href="articles_class.php3" onMouseOver="statistiques.src='IMG2/statistiques-on.gif'; fond.src='IMG2/statistiques-texte.gif'" onMouseOut="statistiques.src='IMG2/statistiques-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/statistiques-off.gif" name="statistiques" alt="Statistiques" width="43" height="58" border="0"></A><?php
 	}
-	?><?
+	?><?php
 	 global $connect_toutes_rubriques;
 
 	if ($connect_toutes_rubriques){	
-	?><a href="configuration.php3" onMouseOver="config.src='IMG2/config-on.gif'; fond.src='IMG2/config-texte.gif'" onMouseOut="config.src='IMG2/config-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/config-off.gif" name="config" alt="Configurer" width="44" height="58" border="0"></A><A HREF="admin_tech.php3" onMouseOver="sauvegarde.src='IMG2/sauvegarde-on.gif'; fond.src='IMG2/sauvegarde-texte.gif'" onMouseOut="sauvegarde.src='IMG2/sauvegarde-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/sauvegarde-off.gif" name="sauvegarde" alt="Sauvegarde de la base" width="53" height="58" border="0"></A><?
+	?><a href="configuration.php3" onMouseOver="config.src='IMG2/config-on.gif'; fond.src='IMG2/config-texte.gif'" onMouseOut="config.src='IMG2/config-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/config-off.gif" name="config" alt="Configurer" width="44" height="58" border="0"></A><A HREF="admin_tech.php3" onMouseOver="sauvegarde.src='IMG2/sauvegarde-on.gif'; fond.src='IMG2/sauvegarde-texte.gif'" onMouseOut="sauvegarde.src='IMG2/sauvegarde-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/sauvegarde-off.gif" name="sauvegarde" alt="Sauvegarde de la base" width="53" height="58" border="0"></A><?php
 	}else{
 		echo "<img src='IMG2/haut-vide.gif' alt='' width='97' height='58' border='0'>";
 	}
 	
-	?><?
+	?><?php
 		}else{
-		?><img src="IMG2/haut-vide.gif" alt="" width="198" height="58" border="0"><?
+		?><img src="IMG2/haut-vide.gif" alt="" width="198" height="58" border="0"><?php
 		}
 		?><a href="forum.php3" onMouseOver="forum.src='IMG2/forum-on.gif'; fond.src='IMG2/forum-texte.gif'" onMouseOut="forum.src='IMG2/forum-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/forum-off.gif" name="forum" alt="Forum interne" width="57" height="58" border="0"></A><A HREF="#" onMouseDown="window.open('aide_index.php3','myWindow','scrollbars=yes,resizable=yes,width=550')" onMouseOver="aide.src='IMG2/aide-on.gif'; fond.src='IMG2/aide-texte.gif'" onMouseOut="aide.src='IMG2/aide-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/aide-off.gif" name="aide" alt="A l'aide" width="50" height="58" border="0"></A></TD></TR>
-		<TR><?
+		<TR><?php
 		if ($options != 'avancees'){
 			echo "<td background='IMG2/rond-vert-simp.gif'>";
 		}else{
@@ -925,7 +925,7 @@ afficher_script_layer();
 		<td valign="top">
 		
 		<table cellpadding=0 cellspacing=0 border=0>
-		<tr><td><?
+		<tr><td><?php
 		global $adresse_site;
 		if (strlen($adresse_site)<10) $adresse_site="../";
 
@@ -936,7 +936,7 @@ afficher_script_layer();
 		</tr></table>
 		</td>
 		</tr></table>
-<?
+<?php
 }
 
 ?>
@@ -944,7 +944,7 @@ afficher_script_layer();
 
 	<map name="map-interface">
 	<area shape='rect' coords='19,29,31,44' href='interface.php3' onMouseOver="fond.src='IMG2/modifier-interface-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'">
-	<?
+	<?php
 
 	global $REQUEST_URI;
 	global $requete_fichier;
@@ -966,7 +966,7 @@ afficher_script_layer();
 
 	</map>
 
-	<?
+	<?php
 
 
 	/// Messagerie...
@@ -1044,7 +1044,7 @@ function debut_gauche() {
 	<tr>
 	<td width=180 valign="top">
 	<font face='Georgia,Garamond,Times,serif' size=2>
-	<?
+	<?php
 	
 	
 	// Afficher les auteurs recemment connectes
@@ -1114,7 +1114,7 @@ function debut_droite() {
 	<td width=40 rowspan=1>&nbsp;</td>
 	<td width=480 valign="top" rowspan=2>
 	<font face="Georgia,Garamond,Times,serif" size=3>
-	<?
+	<?php
 }
 
 
@@ -1126,10 +1126,10 @@ function fin_page() {
 
 ?>
 <p align='right'><font size='2'><a href='http://www.uzine.net/spip'>SPIP
-<? echo $spip_version_affichee; ?></a> est distribu&eacute;
+<?php echo $spip_version_affichee; ?></a> est distribu&eacute;
 <a href='gpl.txt'>sous licence GPL</a>.</p></td></tr>
 <tr><td width="180" valign="bottom"></td></tr></table></center></body></html>
-<?
+<?php
 	flush();
 }
 
@@ -1140,7 +1140,7 @@ function install_debut_html($titre="Installation du syst&egrave;me de publicatio
 	?>
 <HTML>
 <HEAD>
-<TITLE><? echo $titre; ?></TITLE>
+<TITLE><?php echo $titre; ?></TITLE>
 <META HTTP-EQUIV="Expires" CONTENT="0">
 <META HTTP-EQUIV="cache-control" CONTENT="no-cache,no-store">
 <META HTTP-EQUIV="pragma" CONTENT="no-cache">
@@ -1165,11 +1165,11 @@ function install_debut_html($titre="Installation du syst&egrave;me de publicatio
 <CENTER>
 <TABLE WIDTH=450>
 <TR><TD WIDTH=450>
-<FONT FACE="Verdana,Arial,Helvetica,sans-serif" SIZE=4 COLOR="#970038"><B><? 
+<FONT FACE="Verdana,Arial,Helvetica,sans-serif" SIZE=4 COLOR="#970038"><B><?php 
 	echo $titre; 
 ?></B></FONT>
 <FONT FACE="Georgia,Garamond,Times,serif" SIZE=3>
-	<?
+	<?php
 }
 
 function install_fin_html() {

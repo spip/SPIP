@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc_version.php3");
 

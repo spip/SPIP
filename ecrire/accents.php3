@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("inc_connect.php3");
 include_local ("inc_auth.php3");

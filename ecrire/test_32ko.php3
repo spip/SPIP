@@ -1,4 +1,4 @@
-<?
+<?php
 	include "inc_32ko_browsers.php3";
 	$toto = "Vous savez parler le 32ko ; moi non, mais je vous en remercie...\n";
 	$long = strlen($toto);

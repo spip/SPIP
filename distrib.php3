@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "distrib";
 $delais = 3600;
 

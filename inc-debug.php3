@@ -1,4 +1,4 @@
-<?
+<?php
 
 //
 // Ce fichier ne sera execute qu'une fois

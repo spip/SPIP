@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "auteur";
 $delais = 24 * 3600;
 

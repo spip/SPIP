@@ -1,4 +1,4 @@
-<?
+<?php
 
 include ("ecrire/inc_version.php3");
 
@@ -18,7 +18,7 @@ include_local ("inc-forum.php3");
 <TR WIDTH=100% HEIGHT=80%>
 <TD WIDTH=100% HEIGHT=80%>
 
-<?
+<?php
 
 if (!$email) {
 	echo"\n<FORM ACTION='spip_pass.php3' METHOD='post'>";

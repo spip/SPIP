@@ -1,4 +1,4 @@
-<?
+<?php
 
 if (file_exists("inc_connect.php3")) {
 	include ("inc_version.php3");

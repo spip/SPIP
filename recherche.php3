@@ -1,4 +1,4 @@
-<?
+<?php
 $fond = "recherche";
 $delais = 0;
 
