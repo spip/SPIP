@@ -10,6 +10,7 @@ include ("inc_version.php3");
 
 include_ecrire("inc_auth.php3");
 
+include_ecrire("inc_lang.php3");
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
@@ -37,7 +38,6 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs_mod = true;
 }
 if ($set_lang) {
-	include_ecrire("inc_lang.php3");
 	if (changer_langue($set_lang)) {
 		$prefs['spip_lang'] = $set_lang;
 		$prefs_mod = true;
@@ -73,7 +73,6 @@ $spip_display = $prefs['display'];
 
 // fixer la langue
 if ($prefs['spip_lang']) {
-	include_ecrire("inc_lang.php3");
 	changer_langue($prefs['spip_lang']);
 }
 

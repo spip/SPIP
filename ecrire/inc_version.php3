@@ -756,12 +756,6 @@ function _L($text) {
 	return "<div style='font-color:red;'>$text</div>";
 }
 
-// initialisation
-$i18n = lire_meta('langue_site');
-$langues_ok = 'fr';
-$langues_tests = 'zg';
-
-$all_langs = ",$langues_ok,$langues_tests,";
 
 
 //
