@@ -1532,7 +1532,26 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	if (strpos(lire_meta('langues_proposees'), ',')) {
 		//echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.gif' align='center'>";
 		echo "<td>   </td>";
-		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
+		
+		echo "<td align='center'>";
+			$lien = $clean_link;
+			$lien->addVar('changer_var', 'oui'); // Bidon, pour forcer point d'interrogation
+
+			echo "<form style='margin:0px; padding:0px;'>";
+			echo "\n<select name='langue_site' class='verdana1' style='background-color: $couleur_claire;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
+			$langues = explode(',', lire_meta('langues_proposees'));
+			while (list(,$l) = each ($langues)) {
+				if ($l == $GLOBALS['spip_lang']) $selected = "selected";
+				else $selected = "";
+
+				echo "<option value='$l' $selected style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
+			}
+			echo "</select>\n";
+			echo "</form>";
+		
+		echo "</td>";
+		
+/*		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
 		$langues = explode(',', lire_meta('langues_proposees'));
 		while (list(,$langue) = each ($langues)) {
 			if (file_exists("lang/drap_$langue.gif")) $icone = "<img src='lang/drap_$langue.gif' border='0'>";
@@ -1552,6 +1571,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "&nbsp;";
 		}
 		echo "</font></td>";
+*/
 	}
 	// fin langue [a placer ailleurs]
 
