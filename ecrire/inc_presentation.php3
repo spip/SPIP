@@ -12,7 +12,7 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 global $spip_couleur, $couleur_foncee, $couleur_claire;
 
 
-switch ($spip_couleur){
+switch ($spip_couleur) {
 
 	case 1:
 		/// Vert
@@ -1099,16 +1099,6 @@ function debut_gauche() {
 //
 
 function debut_droite() {
-	global $id_article;
-
-
-	//
-	// Pave "documents associes a l'article"
-	//
-	if (defined("_ECRIRE_INC_DOCUMENTS"))
-		echo pave_documents($id_article);
-
-
 	//
 	// Boite de recherche
 	//
