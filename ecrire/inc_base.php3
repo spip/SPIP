@@ -30,7 +30,8 @@ function creer_base() {
 		export VARCHAR(10) DEFAULT 'oui',
 		date_redac datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		visites INTEGER DEFAULT '0' NOT NULL,
-		referers BLOB NOT NULL,
+		referers INTEGER DEFAULT '0' NOT NULL,
+		popularite INTEGER DEFAULT '0' NOT NULL,
 		accepter_forum CHAR(3) NOT NULL,
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -835,6 +836,14 @@ function maj_base() {
 		$query = "ALTER TABLE spip_articles ADD auteur_modif bigint(21) DEFAULT '0' NOT NULL";
 		spip_query($query);
 		$query = "ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
+		spip_query($query);
+	}
+
+	if ($version_installee < 1.432) {
+		spip_query("ALTER TABLE spip_articles DROP referers");
+		$query = "ALTER TABLE spip_articles ADD referers INTEGER DEFAULT '0' NOT NULL";
+		spip_query($query);
+		$query = "ALTER TABLE spip_articles ADD popularite INTEGER DEFAULT '0' NOT NULL";
 		spip_query($query);
 	}
 

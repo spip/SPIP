@@ -201,9 +201,70 @@ function calculer_visites(){
 		$result_effacer = spip_query($query_effacer);	
 			
 	}	
-	$query_effacer = "DELETE FROM spip_visites_referers WHERE date < DATE_SUB(NOW(),INTERVAL 7 DAY) AND visites = '1'";
-	$result_effacer = spip_query($query_effacer);	
 }
+
+
+function supprimer_referers($type){
+
+	// Recuperer les 100 plus gros referers de ce type
+	$query = "SELECT id_referer, visites FROM spip_visites_referers WHERE type ='$type' ORDER BY visites DESC LIMIT 0,100";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$id_referer[] = $row['id_referer'];
+		$visites = $visites + $row['visites'];
+	}
+	
+	// Supprimer les autres s'ils datent de plus d'une semaine
+	if ($id_referer){
+		$referers = join($id_referer, ",");
+		$query = "DELETE FROM spip_visites_referers WHERE type ='$type' AND id_referer NOT IN ($referers) AND date < DATE_SUB(NOW(),INTERVAL 7 DAY)";
+		$result = spip_query($query);		
+	}
+	
+	// Reinjecter total des visites des referers dans spip_articles
+	if (ereg("article([0-9]+)", $type, $regs)){
+		$id_article = $regs[1];
+		if ($visites<1) $visites = 1;
+		$query = "UPDATE spip_articles SET referers = '$visites' WHERE id_article = '$id_article'";
+		$result = spip_query($query);
+	}
+	
+}
+
+function optimiser_referers(){
+
+	// Supprimer referers inutiles
+	
+	supprimer_referers("tout");
+	
+	$query = "SELECT id_article FROM spip_articles WHERE statut = 'publie'";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$id_article = $row['id_article'];
+		supprimer_referers("article$id_article");
+	}
+	
+	
+	// Calculer et reinjecter popularite
+	$query = "SELECT id_article, visites, referers FROM spip_articles WHERE statut = 'publie'";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$id_article = $row['id_article'];
+		$visites = $row['visites'];
+		$referers  = $row['referers'];
+		$popularite[$id_article] = $visites * $referers;
+	}
+	if (count($popularite)>0){
+		$max_pop = max($popularite);
+		while (list($id_article, $pop) = each($popularite)) {
+			$relatif = round($pop/$max_pop*1000000);
+			$query = "UPDATE spip_articles SET popularite = '$relatif' WHERE id_article = '$id_article'";
+			$result = spip_query($query);
+		}
+	}
+}
+
+
 
 
 ?>
