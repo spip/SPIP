@@ -87,6 +87,12 @@ function parser_champs($texte) {
 		return array_merge($result, parser_texte($texte));
 }
 
+// Gestion des imbrications:
+// on cherches les [..] les plus internes et on les remplace par une  chaine
+// %###N@ où N indexe un tableau comportant le résultat de leur phrasé
+// et où le nombre de # vaut le nombre d'emboitement (0 pour les + internes)
+// on recommence tant qu'il y a des [...] en substituant à l'appel suivant
+// le code n'est ni optimal ni lisible. Vivement SAX!
 
 function parser_champs_etendus($debut) {
 	$sep = '##';
@@ -97,6 +103,7 @@ function parser_champs_etendus($debut) {
 
 
 function parser_champs_exterieurs($debut, $sep, $nested) {
+  spip_log("$sep: $debut");
 	$res = array();
 	foreach (split("%$sep",$debut) as $v) {
 		if (!ereg("^([0-9]+)@(.*)$", $v, $m))
@@ -135,17 +142,26 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 
 		$p = strpos($texte, $regs[0]);
 		if ($p)
-			$result[$i++] = substr($texte, 0, $p);
-
+		  {
+		    foreach (split("%$sep",substr($texte, 0, $p)) as $v) {
+		      if (!ereg("^([0-9]+)@(.*)$", $v, $m))
+			$result[$i++] = $v;
+		      else  if ($m[2] == 'Object') {
+			$result[$i++] =  $nested[$m[1]];
+		      } else	{
+			$result[$i++] =  $m[2];
+		      }
+		    }  
+		  }
 		$result[$i++] = $champ;
 		$texte = $regs[8];
+		
 	}
-	if ($texte)
-		$result[$i] = $texte;
+	if ($texte) { $result[$i++] = $texte;}
 
 	$x ='';
 	$j=0;
-	while($j <= $i)
+	while($j < $i)
 		$x .= "%#$sep$j@" . $result[$j++];
 
 	if (ereg(CHAMP_ETENDU, $x)) 
