@@ -8,6 +8,8 @@ include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 
+// pour low_sec (iCal)
+include_ecrire("inc_acces.php3");
 
 function ligne_x ($texte) {
 	if (ereg("^BEGIN", $texte)) echo "<br>";
@@ -28,24 +30,27 @@ function filtrer_ical ($texte) {
 }
 
 
-
 if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 $nom_site = filtrer_ical(lire_meta("nom_site"));
 $adresse_site = lire_meta("adresse_site");
 
+// securite
+unset($id_utilisateur);
+$id_auteur = intval($id);
 
-if (strlen($cle)>1) {
-	$query = "SELECT * FROM spip_auteurs WHERE low_sec='$cle'";
+// verifier la cle
+if (verifier_low_sec($id_auteur, $cle, 'ical')) {
+	$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
 	$result = spip_query($query);
 
 	if ($row = spip_fetch_array($result)) {
 		$id_utilisateur=$row['id_auteur'];
 		$nom_utilisateur=$row['nom'];
 		$nom_utilisateur = filtrer_ical(unicode2charset(charset2unicode($nom_utilisateur, $charset, 1), 'utf-8'));
-	} else {
-		die ("Interdit");
 	}
-} else {
+}
+
+if (!$id_utilisateur) {
 	die ("Interdit");
 }	
 
