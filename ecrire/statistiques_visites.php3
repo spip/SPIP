@@ -600,7 +600,6 @@ if (count($log)>0){
 
 }
 
-
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 if ($activer_statistiques_ref != "non"){
 	// Affichage des referers
@@ -617,73 +616,62 @@ if ($activer_statistiques_ref != "non"){
 	while ($row = spip_fetch_array($result)) {
 		$referer = $row['referer'];
 		$visites = $row['visites'];
+		$tmp = "";
+		$aff = "";
+		
+		$buff = stats_show_keywords($referer, $referer);
 	
-	
-		$url   = parse_url( $referer );
-		$query = $url['query'];
-		$host  = $url['host'];
-		$found = false;
-
-		for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
-		{
-			if ($found = (ereg($arr_engines[$cnt][2], $host)))
-			{
-				$host = $arr_engines[$cnt][0];
-			}
-		}
-
-		$numero = substr(md5($host),0,8);
+		$numero = substr(md5($buff["host"]),0,8);
 	
 		$nbvisites[$numero] = $nbvisites[$numero] + $visites;
-		$lesreferers[$numero][] = stats_show_keywords($referer, $referer);
-		$lesdomaines[$numero] = $host;
-		
-	}
-	
-	arsort($nbvisites);
-	
-	echo "<ul>";
-	for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
-		$visites = pos($nbvisites);
-		echo "\n<li>";
-	
-		if ($visites > 5) echo "<font color='red'>$visites "._T('lnfo_liens')."&nbsp;</font>";
-		else if ($visites > 1) echo "$visites "._T('lnfo_liens')."&nbsp;";
-		else echo "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
-		
-		$referers = join ($lesreferers[$numero],"<br />");
-		if (count($lesreferers[$numero]) > 1) {
-			
-			echo "<b>$lesdomaines[$numero]</b>";
-			echo "<div>$referers</div>";
-			echo "</li><br />\n";
+
+		if (strlen($buff["keywords"]) > 0) {
+			$criteres = substr(md5($buff["keywords"]),0,8);
+			if (!$lescriteres[$numero][$criteres]) $tmp = "<a href='$referer'>critères</a> : ".$buff["keywords"];
+			$lescriteres[$numero][$criteres] = true;
 		} else {
-			echo "$referers";
-			echo "</li>";
+			$aff = $buff["path"];
+			if (strlen($buff["query"]) > 0) $aff .= "?".$buff['query'];
+	
+			if (strlen($aff) > 0) $tmp = "<a href='$referer'>".substr($aff, 0, 35)."</a>";
+			else $tmp = "<a href='$referer'><b>racine</b></a>";
 		}
-	}
-	echo "</ul>";
 
 
-/*
-	$query = "SELECT * FROM $table_ref WHERE $where ORDER BY visites DESC LIMIT 0,100";
-	$result = spip_query($query);
-	
-	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-	while ($row = spip_fetch_array($result)) {
-		$referer = $row['referer'];
-		$visites = $row['visites'];
-	
-		echo "\n<li>";
-	
-	
-		if ($visites > 5) echo "<font color='red'>$visites "._T('lnfo_liens')."&nbsp;</font>";
-		else if ($visites > 1) echo "$visites "._T('lnfo_liens')."&nbsp;";
-		else echo "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
-	
-		echo stats_show_keywords($referer, $referer);
+		if (strlen($tmp) > 0) $lesreferers[$numero][] = $tmp;
+		$lesdomaines[$numero] = $buff["host"];
+		$lesliens[$numero] = $referer;
+		
 	}
-*/
+	
+	if (count($nbvisites) > 0) {
+		arsort($nbvisites);
+		
+		echo "<ul>";
+		for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
+			$visites = pos($nbvisites);
+			$ret = "\n<li>";
+		
+			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('lnfo_liens')."&nbsp;</font>";
+			else if ($visites > 1) $ret .= "$visites "._T('lnfo_liens')."&nbsp;";
+			else $ret .= "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
+			
+			$referers = join ($lesreferers[$numero],"</li><li>");
+			if (count($lesreferers[$numero]) > 1) {
+				echo "<p />";
+				echo $ret;
+				echo "<b>$lesdomaines[$numero]</b>";
+				echo "<ul><font size='1'><li>$referers</li></font></ul>";
+				echo "</li><p />\n";
+			} else {
+				echo $ret;
+				echo "<a href='".$lesliens[$numero]."'><b>$lesdomaines[$numero]</b>/</a>";
+				echo "<font size='1'>$referers</font>";
+				echo "</li>";
+			}
+		}
+		echo "</ul>";
+	}
 
 
 
