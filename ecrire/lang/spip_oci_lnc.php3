@@ -6,7 +6,7 @@ $GLOBALS['i18n_spip_oci_lnc'] = array(
 
 
 // 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
+'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oci',
 '0_langue' => 'occitan (lengadocian) [oci_lnc]',
 '0_liste' => 'escambis.pedagogics@aprene.org',
 '0_mainteneur' => 'M&ograve;ni&nbsp;:&nbsp;escambis.pedagogics@aprene.org <br> Est&egrave;ve (Servici de l\'Emplec)&nbsp;:&nbsp;cros@emplec.net',
@@ -1581,11 +1581,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_delier' => 'Ligar pas mai aqueste article a sas reviradas ',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// CONFLIT
-'info_multi_cette_rubrique' => 'Lenga emplegada dins aquesta rubrica:'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

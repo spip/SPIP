@@ -20,6 +20,7 @@ $GLOBALS['i18n_spip_en'] = array(
 'admin_modifier_rubrique' => 'Modify this section',
 'admin_recalculer' => 'Refresh this page',
 'aide_non_disponible' => 'This part of the online help is not yet available in the present language.',
+'alerte_maj_impossible' => '<b>Alert&nbsp;!</b> Failed to update the MySQL database to version @version@, maybe due to a right problem.',
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_archive_incorrect' => 'archive file is not a valid SPIP file',
 'avis_archive_invalide' => 'archive file is not valid',
@@ -566,6 +567,8 @@ Thank you for your participation
 		disable this feature.',
 'info_ecire_message_prive' => 'Write a private message',
 'info_ecrire_article' => 'Before being able to write articles, you must create at least one section.',
+'info_email_envoi' => 'The sender\'s email address (optional)',
+'info_email_envoi_txt' => 'Enter the sender\'s email address used while sending the emails (by default, the recipient\'s address is used as the sender\'s address)&nbsp;:',
 'info_email_invalide' => 'Invalid e-mail address.',
 'info_email_webmestre' => 'Webmaster\'s e-mail address (optional)',
 'info_en_cours_validation' => 'Your articles in progress',
@@ -1034,6 +1037,7 @@ requiring an FTP access to the Web site.',
 'lien_forum_public' => 'Manage this article\'s public forum',
 'lien_icones_interface' => 'The interface icons are from <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'release',
+'lien_liberer_tous' => 'free these articles',
 'lien_mise_a_jour_syndication' => 'Update now',
 'lien_modifer_date' => 'Modify the date',
 'lien_nom_site' => 'SITE\'S NAME:',
@@ -1610,7 +1614,6 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
 'trad_reference' => '(reference article)'
-
 
 );
 
