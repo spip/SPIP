@@ -24,7 +24,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	if ($explicite !== false) {
 	// Recherche d'un champ dans un etage superieur
 	  while (($idb != $explicite) && ($idb !='')) {
-		spip_log("Cherchexpl: $nom_champ '$idb' '$i'");
+#		spip_log("Cherchexpl: $nom_champ '$idb' '$i'");
 			$i++;
 			$idb = $boucles[$idb]->id_parent;
 		}
@@ -215,7 +215,7 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	if ($boucles[$idb]->externe)
 		index_pile ($idb, $nom_champ, $boucles); // reserver chez soi-meme
 	// reserver chez le parent et renvoyer l'habituel $Pile[$SP]['nom_champ']
-	spip_log("boucles[$idb]->id_parent " . $boucles[$idb]->id_parent);
+#	spip_log("boucles[$idb]->id_parent " . $boucles[$idb]->id_parent);
 	return index_pile ($boucles[$idb]->id_parent, $nom_champ, $boucles);
 }
 

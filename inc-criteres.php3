@@ -364,7 +364,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			}
 
 			// Traitement general des relations externes
-			if ($s = $relations_externes[$type][$col]) {
+			if ($s = $tables_relations[$type][$col]) {
 				$col_table = $s;
 				$boucle->from[] = "$col_table AS $col_table";
 				$boucle->where[] = "$id_field=$col_table." . $primary;
