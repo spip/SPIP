@@ -208,19 +208,25 @@ function echappe_html($letexte,$source) {
 	}
 
 	//
-	// Echapper les <a href>
+	// Echapper les tags html contenant des caracteres sensibles a la typo
 	//
-
-	//$regexp_echap = "<a[[:space:]][^>]+>";
-	//$regexp_echap = "<(a|[^>]*')[^>]+>"; // Echappement tout HTML
-	$regexp_echap = "<([a-zA-Z]+[^>]*[':;\?])[^>]+>"; // Echappement tout HTML
-	while (eregi($regexp_echap, $letexte, $regs)) {
-		$num_echap++;
-		$les_echap[$num_echap] = $regs[0];
-		$pos = strpos($letexte, $les_echap[$num_echap]);
-		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-			.substr($letexte,$pos+strlen($les_echap[$num_echap]));
-	}
+	$regexp_echap = "<[^>!':;\?]*[!':;\?][^>]*>";
+	if ($flag_pcre)
+		if (preg_match_all("/$regexp_echap/", $letexte, $regs)) while (list(,$reg) = each($regs)) {
+			$num_echap++;
+			$les_echap[$num_echap] = $reg[0];
+			$pos = strpos($letexte, $les_echap[$num_echap]);
+			$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+				.substr($letexte,$pos+strlen($les_echap[$num_echap]));
+		}
+	else
+		while (ereg($regexp_echap, $letexte, $reg)) {
+			$num_echap++;
+			$les_echap[$num_echap] = $reg[0];
+			$pos = strpos($letexte, $les_echap[$num_echap]);
+			$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+				.substr($letexte,$pos+strlen($les_echap[$num_echap]));
+		}
 
 	return array($letexte, $les_echap);
 }
@@ -608,8 +614,10 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	// Puce
 	if (!$lang_dir)
 		$lang_dir = lang_dir($GLOBALS['spip_lang']);
-	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl']) $puce = $GLOBALS['puce_rtl'];
-	else $puce = $GLOBALS['puce'];
+	if ($lang_dir == 'rtl' AND $GLOBALS['puce_rtl'])
+		$puce = $GLOBALS['puce_rtl'];
+	else
+		$puce = $GLOBALS['puce'];
 
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
