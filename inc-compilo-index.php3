@@ -183,7 +183,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . filtres_arglist($param, $p, ',')
 	  . "),\n\tarray("
 	  . (!$p->fonctions ? '' : ("'" . join("','", $p->fonctions) . "'"))
-	  . "))";
+	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
 	$p->fonctions = '';
 	return $p;
