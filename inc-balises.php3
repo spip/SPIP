@@ -393,15 +393,23 @@ function balise_EMBED_DOCUMENT_dist($p) {
 // sinon elles seront remplacees par les fontions de inc_surligne
 // flag_pcre est juste une flag signalant que preg_match est dispo.
 
-function balise_DEBUT_SURLIGNE_dist($p) {
+function code_balise_surligne($p, $b)
+{
 	global $flag_pcre;
-	$p->code = ($flag_pcre ? ('\'<span class="spip_surligneconditionnel">\'') : "''");
+	$p->code = (!$flag_pcre ? "''" :
+		    ('(!$GLOBALS["var_recherche"] ? "" : \'<' . 
+		     $b .
+		     'span class="spip_surligneconditionnel">\')'));
+	$p->statut = 'php';
 	return $p;
 }
+
+function balise_DEBUT_SURLIGNE_dist($p) {
+	return code_balise_surligne($p, '');
+}
+
 function balise_FIN_SURLIGNE_dist($p) {
-	global $flag_pcre;
-	$p->code = ($flag_pcre ? ('\'</span class="spip_surligneconditionnel">\'') : "''");
-	return $p;
+	return code_balise_surligne($p, '/');
 }
 
 
