@@ -404,11 +404,11 @@ function affdate_heure($numdate) {
 //
 
 function aligner($letexte,$justif) {
-	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
-	if ($letexte) {
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='$justif'>", $letexte);
-		return "<p class='spip' align='$justif'>".$letexte;
+	$letexte = eregi_replace("<p([^>]*)", "<p\\1 align='$justif'", trim($letexte));
+    if(!ereg("^[[:space:]]*<p", $letexte)) {
+		$letexte = "<p class='spip' align='$justif'>" . $letexte . "</p>";
 	}
+	return $letexte;
 }
 
 function justifier($letexte) {
