@@ -261,7 +261,11 @@ function sinon ($texte, $sinon='') {
 
 // |choixsivide{vide,pasvide} affiche pasvide si la chaine n'est pas vide...
 
-function choixsivide($a, $vide, $pasvide) {return $a ? $pasvide : $vide;}
+function choixsivide($a, $vide, $pasvide)
+{
+  spip_log("choix '$a'" . $a ? $pasvide : $vide);
+  return $a ? $pasvide : $vide;
+}
 
 // |choixsiegal{aquoi,oui,non} affiche oui si la chaine est egal a aquoi ...
 function choixsiegal($a1,$a2,$v,$f) {return ($a1 == $a2) ? $v : $f;}
@@ -747,6 +751,7 @@ function http_script($script, $src='', $noscript='') {
 		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
 
+/* dans les squelettes a present.
 function http_script_window_close() {
   return http_script('
 document.write("<br /><div align=\'right\'><a href=\'")
@@ -755,6 +760,7 @@ document.write("\'>' . _T('pass_quitter_fenetre') . '<" + "/a></div>")',
 	      '',
 	      "&#91;<a href='./'><:pass_retour_public:></a>&#93");
 }
+*/
 
 function inscriptionok($site, $mode)
 {

@@ -3,7 +3,7 @@
 		<b><:login_cookie_oblige:></b>
 		  <:login_cookie_accepte:><p />
 ][
-(#HTTP_VARS{message})
+(#HTTP_VARS*{message})
 	<br />
 	 <:forum_vous_enregistrer:>
 	[<a href='(#URL_SITE_SPIP|inscriptionok{forum})spip_inscription.php3?mode=forum&amp;focus=nom_inscription&amp;target=spip_pass'
@@ -16,7 +16,7 @@
 	<script type="text/javascript" src="ecrire/md5.js"></script>
 	<form	id="login[_(#HTTP_VARS{login})]"
 		action="[(#HTTP_VARS{action2})]"
-		method="post"[(#HTTP_VARS{source}|choixsiegal{spip,' ',''})
+		method="post"[(#HTTP_VARS{source}|=={spip}|?{' ':''})
 		onSubmit='if (this.session_password.value) {
 			this.session_password_md5.value = calcMD5("[(#HTTP_VARS{alea_actuel})]" + this.session_password.value);
 			this.next_session_password_md5.value = calcMD5("[(#HTTP_VARS{alea_futur})]" + this.session_password.value);
@@ -25,7 +25,7 @@
 		<div class="spip_encadrer" style="[(#URL_SITE_SPIP|style_align)]">[
 			<div class="reponse_formulaire">(#HTTP_VARS*{erreur})<br /><br /></div>
 ][
-			<label><b><:login_login2:></b><br /></label>(#HTTP_VARS{login}|choixsivide{' ',''})
+			<label><b><:login_login2:></b><br /></label>(#HTTP_VARS{login}|?{'':' '})
 			<input type="text" id='var_login' name="var_login" class="forml" value="" size="40" />
 ][
 <div>

@@ -1,3 +1,7 @@
+[
+(#HTTP_VARS*{message})
+][
+(#HTTP_VARS*{message}|?{'':' '})
 <form id="oubli_form" action='spip_pass.php3' method='post'>
 	<fieldset style="border: none;"><legend></legend>[
 	<:pass_nouveau_pass:>
@@ -6,7 +10,7 @@
 	    <:pass_choix_pass:>
 	    <input type="password" name="oubli">
 	</label>][
-	(#HTTP_VARS{p}|choixsivide{' ',''})
+	(#HTTP_VARS{p}|?{'':' '})
 	<label>
 	  <:pass_indiquez_cidessous:>
 	  <input type="texte" name="oubli">
@@ -14,10 +18,14 @@
 	<input type=submit class="fondl" value="<:pass_ok:>">
       </fieldset>
 </form>
+]
 <br />
 <div align="right">
 <script type="text/javascript"><!--
+[
+(#HTTP_VARS*{message}|?{'':' '})
 document.oubli_form.oubli.focus()
+]
 document.write("<a href='")
 document.write((window.opener) ? "javascript:close()" : "./")
 document.write("'><:pass_quitter_fenetre:><" + "/a>");
@@ -27,5 +35,3 @@ document.write("'><:pass_quitter_fenetre:><" + "/a>");
 </noscript>
 </div>
 <br />
-
-

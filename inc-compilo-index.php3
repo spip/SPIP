@@ -227,8 +227,10 @@ function applique_filtres($p) {
 				}
 				if (function_exists($fonc))
 				  $code = "$fonc($code$arglist)";
-				else if (strpos(" < > <= >= == <> ", " $fonc "))
-				  $code = "$code $fonc " . substr($arglist,1);
+				else if (strpos(" < > <= >= == <> ? ", " $fonc "))
+				  $code = "($code $fonc "
+				    . substr($arglist,1)
+				    . ')';
 				else 
 				  $code = "erreur_squelette('".
 					  texte_script(
