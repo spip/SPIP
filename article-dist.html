@@ -185,6 +185,36 @@
 
 
 
+
+
+
+<B_documents>
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR>
+</TABLE>
+
+
+<center>Documents li&eacute;s</center>
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{inclus=non}>
+	<tr>
+	<td align='center'>
+	[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+	</td>
+	<td width=10>&nbsp;</td>
+	<td>
+	<font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
+	[: (#DESCRIPTIF)]<br>
+		(<BOUCLE_type_doc(TYPES_DOCUMENTS){id_type}>[(#TITRE) - ].#EXTENSION -</BOUCLE_type_doc>
+	[(#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]).
+	</td></tr>
+</BOUCLE_documents>
+<tr><td>&nbsp;</td></tr></table>
+</B_documents>
+
+
 <B_signatures><br><br><p>
 <font face="verdana, helvetica,arial,sans-serif" size=4><b>Les signataires</b></font><p>
 <table width="450" cellpadding="0" cellspacing="0" border="0">
@@ -222,28 +252,8 @@
 </B_signatures>
 
 
+
 [<p align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet article</A></B></font></p>]
-
-
-<B_documents>
-<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<TR WIDTH=100%>
-<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-</TR>
-</TABLE>
-
-
-<center>Documents li&eacute;s</center>
-<ul>
-<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}>
-	<li><font size="2"><a href="#URL_DOCUMENT">[(#TITRE|majuscules)]</a>
-	[: (#DESCRIPTIF)]
-		(<BOUCLE_type_doc(TYPES_DOCUMENTS){id_type}>[(#TITRE) - ].#EXTENSION -</BOUCLE_type_doc>
-	[(#TAILLE|taille_en_octets)][, (#LARGEUR) x #HAUTEUR pixels]).</li>
-</BOUCLE_documents>
-</ul>
-</B_documents>
-
 
 </FONT>
 <BR><BR>
