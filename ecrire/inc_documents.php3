@@ -646,7 +646,9 @@ function afficher_portfolio (
 				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 
 				// modifier la date (seulement dans les rubriques - et encore)
-				if ($type == 'rubrique' AND $options == "avancees") {
+				if ($type == 'rubrique'
+				AND $options == "avancees"
+				AND $connect_statut == '0minirezo') {
 					if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
 						$mois = $regs[2];
 						$jour = $regs[3];
@@ -1297,6 +1299,62 @@ function teste_doc_deplie($id_document) {
 		$deplies = split('-',$show_docs);
 
 	return in_array($id_document, $deplies);
+}
+
+
+// Mettre a jour la description du document postee par le redacteur
+// TODO: pour le moment cette fonction ne sait traiter qu'un document...
+function maj_documents ($id_objet, $type) {
+	global $_POST;
+
+	if ($id_objet
+	AND $id_document = intval($_POST['id_document'])
+	AND $_POST['modif_document'] == 'oui') {
+
+		// "securite" : verifier que le document est bien lie a l'objet
+		$result_doc = spip_query("SELECT * FROM spip_documents_".$type."s
+		WHERE id_document=".$id_document."
+		AND id_".$type." = $id_objet");
+		if (spip_num_rows($result_doc) > 0) {
+			$titre_document = addslashes(corriger_caracteres(
+				$_POST['titre_document']));
+			$descriptif_document = addslashes(corriger_caracteres(
+				$_POST['descriptif_document']));
+			$query = "UPDATE spip_documents
+			SET titre='$titre_document', descriptif='$descriptif_document'";
+
+			// taille du document (cas des embed)
+			if ($largeur_document = intval($_POST['largeur_document'])
+			AND $hauteur_document = intval($_POST['hauteur_document']))
+				$query .= ", largeur='$largeur_document',
+					hauteur='$hauteur_document'";
+
+			$query .= " WHERE id_document=".$_POST['id_document'];
+			spip_query($query);
+
+
+			// Date du document (uniquement dans les rubriques)
+			if ($_POST['jour_doc']) {
+				if ($_POST['annee_doc'] == "0000")
+					$_POST['mois_doc'] = "00";
+				if ($_POST['mois_doc'] == "00")
+					$_POST['jour_doc'] = "00";
+				$date = $_POST['annee_doc'].'-'
+				.$_POST['mois_doc'].'-'.$_POST['jour_doc'];
+
+				if (preg_match('/^[0-9-]+$/', $date)) {
+					spip_query("UPDATE spip_documents
+						SET date='$date'
+						WHERE id_document=$id_document");
+
+					// Changement de date, ce qui nous oblige a :
+					calculer_rubriques();
+				}
+			}
+
+		}
+
+	}
 }
 
 ?>

@@ -62,24 +62,6 @@ else {
 	$statut = "prop";
 }
 
-if ($id_document) {
-	$query_doc = "SELECT * FROM spip_documents_breves WHERE id_document=$id_document AND id_breve=$id_breve";
-	$result_doc = spip_query($query_doc);
-	$flag_document_editable = (spip_num_rows($result_doc) > 0);
-} else {
-	$flag_document_editable = false;
-}
-
-
-$modif_document = $GLOBALS['modif_document'];
-if ($modif_document == 'oui' AND $flag_document_editable) {
-	$titre_document = addslashes(corriger_caracteres($titre_document));
-	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
-	spip_query("UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document' WHERE id_document=$id_document");
- }
-
-
-
 
 debut_page(_T('titre_page_breves_edit', array('titre' => $titre)), "documents", "breves");
 
@@ -90,7 +72,8 @@ afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 debut_gauche();
-if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")){
+if ($new != 'oui' AND ($connect_statut=="0minirezo" OR $statut=="prop")) {
+	maj_documents($id_breve, 'breve');
 	afficher_documents_colonne($id_breve, "breve", true);
 }
 debut_droite();

@@ -183,7 +183,7 @@ else if ($ajout_doc == 'oui') {
 		ajouter_un_document (
 			$file['tmp_name'],	# le fichier sur le serveur (/var/tmp/xyz34)
 			$file['name'],		# son nom chez le client (portequoi.pdf)
-			$type,				# lie a un article ou  une rubrique ?
+			$type,				# lie a un article, une breve ou une rubrique ?
 			$id_article,		# identifiant de l'article (ou rubrique) lie
 			$mode,				# 'vignette' => vignette personnalisee
 			$id_document,		# pour une vignette, l'id_document de maman

@@ -67,12 +67,15 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	if (!$langue_new) $langue_new = lire_meta('langue_site');
 	$langue_choisie_new = 'non';
 
-	$id_breve = spip_abstract_insert("spip_breves", "(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
-			      "('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')");
+	$id_breve = spip_abstract_insert("spip_breves",
+		"(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
+		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')");
+
+	// Modifier le lien de base pour qu'il prenne en compte le nouvel id
+	unset($GLOBALS['_POST']['id_rubrique']);
+	$GLOBALS['_POST']['id_breve'] = $id_breve;
+	$clean_link = new Link();
 }
-
-
-$clean_link = new Link("breves_voir.php3?id_breve=$id_breve");
 
 
 if ($titre AND $modifier_breve) {
