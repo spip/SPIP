@@ -17,6 +17,7 @@ function ecrire_cache_lang($lang, $module) {
 		if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
 			@fwrite($t, "\$GLOBALS['i18n_".$module."_$lang'] = array(\n");
 			$texte = '';
+			ksort($cache);
 			reset($cache);
 			while (list($code, ) = each($cache))
 				$texte .= ",\n\t'".$code."' => '".texte_script($GLOBALS['i18n_'.$module.'_'.$lang][$code])."'";
