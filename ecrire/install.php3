@@ -204,7 +204,7 @@ else if ($etape == 4) {
 
 		echo "</FORM>";
 	}
-	else if (!$maj_ok) {
+	else if ($result_ok) {
 		echo _T('alerte_maj_impossible', array('version' => $spip_version));
 	}
 	else {
