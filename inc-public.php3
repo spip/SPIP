@@ -55,10 +55,29 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 
 	include_local ("inc-public-global.php3");
 	include_local ("inc-cache.php3");
-
+	if (file_exists("inc-urls.php3")) {
+		include_local ("inc-urls.php3");
+		}
+		else {
+		include_local ("inc-urls-dist.php3");
+		}
 
 	if (!isset($delais)) $delais = 1 * 3600;
-	$cle = nom_du_cache($fond, $HTTP_GET_VARS);
+
+	$contexte = $GLOBALS['HTTP_GET_VARS'];
+	if ($GLOBALS['date'])
+		$contexte['date'] = $contexte['date_redac'] = normaliser_date($GLOBALS['date']);
+	else
+		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
+
+	$cle = eregi_replace('&(submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*',
+			     '',
+			     strtr($GLOBALS['REQUEST_URI'], '?', '&'));
+
+	// Analyser les URLs personnalisees (inc-urls-...)
+	/* attention c'est assez sale : ça affecte la variable globale $contexte */
+	recuperer_parametres_url($fond, $cle);
+
 	$lastmodified = cv_du_cache($cle, $delais);
 	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
 
@@ -84,10 +103,11 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 	else
 	{
 		$fraicheur = $delais;
-		$page = ramener_cache($cle,
-			'cherche_page_incluante', 
-			array('fond' => $fond,
-				'var_recherche' => $HTTP_GET_VARS['var_recherche']),
+		$page = ramener_cache(	$cle,
+					'cherche_page_incluante', 
+					array(	'fond' => $fond,
+						'contexte' => $contexte,
+						'var_recherche' => $HTTP_GET_VARS['var_recherche']),
 			$delais);
 		# si la page est neuve, recalculer ces 2 valeurs
 		if (!$page['naissance'])
