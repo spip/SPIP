@@ -1227,9 +1227,9 @@ if ($virtuel) {
 	fin_boite_info();
 }
 else {
-	echo "<B>";
+	echo "<div><b>";
 	echo justifier(propre($chapo));
-	echo "</B>\n\n";
+	echo "</b></div>\n\n";
 
 	echo justifier(propre($texte));
 
