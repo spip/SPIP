@@ -83,6 +83,7 @@ function hr($color, $retour = false) {
 // Cadres
 //
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
+	global $browser_name;
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
 
@@ -92,6 +93,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 
 
 	$ret .= "<div style='position: relative; z-index: 1;'>";
+
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = " padding-$spip_lang_left: 38px;";
 		$ret .= "<div style='position: absolute; top: 0px; $spip_lang_left: 10px; z-index: 2;'>";
@@ -122,15 +124,22 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	}
 	
 	
+	
 	$ret .= "<div class='cadre-padding'>";
-	
-	
+	// Gaffe: hack MSIE, sinon les floats disparaissent
+	if ($browser_name == "MSIE") $ret .= "<table width='100%' cellpadding='0' cellspacing='0'><tr><td>";
+
 	return $ret;
 }
 
 
 function fin_cadre($style="") {
-	if ($style == "e") $ret = "</div>";
+	global $browser_name;
+	
+	// Fermture du hack MSIE	
+	if ($browser_name == "MSIE") $ret = "</td></tr></table>";
+
+	if ($style == "e") $ret .= "</div>";
 	$ret .= "</div></div></div>\n";
 	if ($style != "forum" AND $style != "thread-forum") $ret .= "<div style='height: 5px;'></div>";
 	
