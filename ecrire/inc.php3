@@ -84,36 +84,36 @@ if (!$couleurs_spip[1]) $couleurs_spip[1] = array (
 if (!$couleurs_spip[2]) $couleurs_spip[2] = array (
 		"couleur_foncee" => "#eb68b3",
 		"couleur_claire" => "#ffa9e6",
-		"couleur_lien" => "#E95503",
-		"couleur_lien_off" => "#8F004D"
+		"couleur_lien" => "#8F004D",
+		"couleur_lien_off" => "#BE6B97"
 );
 // Orange
 if (!$couleurs_spip[3]) $couleurs_spip[3] = array (
 		"couleur_foncee" => "#fa9a00",
 		"couleur_claire" => "#ffc000",
-		"couleur_lien" => "#81A0C1",
-		"couleur_lien_off" => "#FF5B00"
+		"couleur_lien" => "#FF5B00",
+		"couleur_lien_off" => "#B49280"
 );
 // Saumon
 if (!$couleurs_spip[4]) $couleurs_spip[4] = array (
 		"couleur_foncee" => "#CDA261",
 		"couleur_claire" => "#FFDDAA",
-		"couleur_lien" => "#5E0283",
-		"couleur_lien_off" => "#472854"
+		"couleur_lien" => "#AA6A09",
+		"couleur_lien_off" => "#B79562"
 );
 //  Bleu pastelle
 if (!$couleurs_spip[5]) $couleurs_spip[5] = array (
 		"couleur_foncee" => "#5da7c5",
 		"couleur_claire" => "#97d2e1",
-		"couleur_lien" => "#869100",
-		"couleur_lien_off" => "#5B55A0"
+		"couleur_lien" => "#116587",
+		"couleur_lien_off" => "#81B7CD"
 );
 //  Gris
 if (!$couleurs_spip[6]) $couleurs_spip[6] = array (
-		"couleur_foncee" => "#727D87",
+		"couleur_foncee" => "#85909A",
 		"couleur_claire" => "#C0CAD4",
-		"couleur_lien" => "#854270",
-		"couleur_lien_off" => "#666666"
+		"couleur_lien" => "#3B5063",
+		"couleur_lien_off" => "#6D8499"
 );
 
 

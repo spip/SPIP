@@ -933,7 +933,7 @@ if ($flag_editable AND $options == 'avancees') {
 	$bouton = bouton_block_invisible("auteursarticle");
 }
 
-debut_cadre_enfonce("redacteurs-24.gif", false, "", $bouton._T('texte_auteurs').aide ("artauteurs"));
+debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide ("artauteurs"));
 
 
 

@@ -47,13 +47,13 @@ if ($connect_statut == '0minirezo') {
 	$flag_visiteurs = spip_num_rows($result) > 0;
 
 	debut_raccourcis();
-	icone_horizontale(_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "auteur-24.gif", "creer.gif");
 	icone_horizontale(_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif","rien.gif");
 	if ($flag_visiteurs) {
 		if ($visiteurs == "oui")
-			icone_horizontale (_T('icone_afficher_auteurs'), "auteurs.php3", "redacteurs-24.gif", "");
+			icone_horizontale (_T('icone_afficher_auteurs'), "auteurs.php3", "auteur-24.gif", "");
 		else
-			icone_horizontale (_T('icone_afficher_visiteurs'), "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
+			icone_horizontale (_T('icone_afficher_visiteurs'), "auteurs.php3?visiteurs=oui", "auteur-24.gif", "");
 	}
 	fin_raccourcis();
 }
@@ -206,7 +206,7 @@ reset ($auteurs);
 while ($i++ < $debut AND each($auteurs));
 
 // ici commence la vraie boucle
-debut_cadre_relief('redacteurs-24.gif');
+debut_cadre_relief('auteur-24.gif');
 echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH='100%' class='arial2'>\n";
 echo "<tr bgcolor='#DBE1C5'>";
 echo "<td width='20'>";

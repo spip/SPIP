@@ -852,7 +852,7 @@ function afficher_auteurs ($titre_table, $requete) {
 
 	if (strlen($tranches)) {
 
-		debut_cadre_relief("redacteurs-24.gif");
+		debut_cadre_relief("auteur-24.gif");
 
 		if ($titre_table) {
 			echo "<p><table width=100% cellpadding=0 cellspacing=0 border=0 background=''>";
@@ -1646,7 +1646,7 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "auteur"){
-		onglet(_T('onglet_auteur'), "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
+		onglet(_T('onglet_auteur'), "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "auteur-24.gif");
 		onglet(_T('onglet_informations_personnelles'), "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
 	}
 
@@ -2076,7 +2076,7 @@ else {
 	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
 		echo "<div class='$class' id='bandeauauteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "xxx", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "redacteurs-24.gif", "xxx", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "auteur-24.gif", "xxx", $sous_rubrique);
 	
 		echo "</tr></table></div></div>";
 	}	
