@@ -58,10 +58,8 @@ if ($changer_config == 'oui') {
 	ecrire_meta("accepter_inscriptions", $accepter_inscriptions);
 	ecrire_meta("forums_publics","$forums_publics");
 
-/*	A REACTIVER QUAND ON SAURA QUOI EN FAIRE (cf infra)
 	if ($email_webmaster=='' OR email_valide($email_webmaster))
 		ecrire_meta("email_webmaster", $email_webmaster);
-*/
 
 	ecrire_metas();
 
@@ -102,13 +100,11 @@ debut_cadre_relief("racine-24.gif");
 	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='forml'>";
 	echo "</TD></TR>";
 
-/*	A REACTIVER QUAND ON SAURA QUOI EN FAIRE (cf supra)
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>Email du webmaster du site</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
 	echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='forml'>";
 	echo "</TD></TR>";
-*/
 
 	echo "<TR><TD ALIGN='right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
