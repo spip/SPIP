@@ -17,11 +17,11 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 /*
  * Formulaires
  */
-.forml { width: 100%; padding: 2px; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000 }
+.forml { width: 100%; padding: 2px; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000; }
 .formo { width: 100%; padding: 2px; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; }
-.fondl { background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000 }
-.fondo { background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF }
-.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519 }
+.fondl { background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000; }
+.fondo { background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF; }
+.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; }
 
 
 /*
@@ -136,12 +136,12 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .cellule36 a:hover span, .cellule48 a:hover span {
 	color: #000000; display: block; margin: 2px;
 	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
-	width: 100%
+	width: 100%;
 }
 .cellule36 a.selection span, .cellule48 a.selection span {
 	color: #000000; display: block; margin: 2px;
 	filter: DropShadow(Color=white, OffX=-1, OffY=-1, Positive=1) DropShadow(Color=#cccccc, OffX=1, OffY=1, Positive=1);
-	width: 100%
+	width: 100%;
 }
 
 .cellule36 a.aide, .cellule36 a.aide:hover {
@@ -325,13 +325,13 @@ a.cellule-h-texte:hover {
 }
 
 
-.reliefblanc { background-image: url(img_pack/barre-blanc.gif) }
-.reliefgris { background-image: url(img_pack/barre-noir.gif) }
+.reliefblanc { background-image: url(img_pack/barre-blanc.gif); }
+.reliefgris { background-image: url(img_pack/barre-noir.gif); }
 .iconeoff {
-	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0
+	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
 }
 .iconeon { cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee; }
-.iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif)}
+.iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif);}
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
 .arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
