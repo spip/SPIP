@@ -10,19 +10,39 @@ echo "<br><br><br>";
 gros_titre("&Eacute;volution des visites");
 barre_onglets("statistiques", "evolution");
 
+if ($id_article){
+	$query = "SELECT titre FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
+	$result = spip_query($query);
+
+	if ($row = mysql_fetch_array($result)) {
+		$titre = propre($row['titre']);
+		gros_titre($titre);
+	}
+}
+
+
 debut_gauche();
 
 
-/*
-debut_boite_info();
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo "<P align=left>".propre("Le syst&egrave;me de statistiques int&eacute;gr&eacute; &agrave; SPIP est volontairement rudimentaire (afin de ne pas alourdir la base de donn&eacute;es et de ne pas tracer les visiteurs du site). De ce fait, les nombres de visites indiqu&eacute;s ici doivent &ecirc;tre pond&eacute;r&eacute;s: ils servent uniquement d'{indication} sur la popularit&eacute; {relative} des articles et des rubriques. ");
-echo "</FONT>";
-fin_boite_info();
-*/
+	echo "<p>";
+	echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo propre("Afficher les visites pour:");
 
+	if ($id_article>0) {
+		echo "<li><b><a href='statistiques_visites.php3'>Tout le site</a></b>";
+	}
 
+	echo "<font size=1>";
+	$query = "SELECT id_article, titre FROM spip_articles WHERE statut='publie' AND id_article !='$id_article' AND visites > 0 ORDER BY date DESC LIMIT 0,20";
+	$result = spip_query($query);
 
+	while ($row = mysql_fetch_array($result)) {
+		$titre = propre($row['titre']);
+		$l_article = $row['id_article'];
+		echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a>";
+	}
+	echo "</font>";
+	echo "</font>";
 
 debut_droite();
 
@@ -41,7 +61,7 @@ if ($id_article) $page = "article$id_article";
 else $page = "tout";
 
 
-$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM spip_visites WHERE type = '$page' ORDER BY date";
+$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM spip_visites WHERE type = '$page' AND date > DATE_SUB(NOW(),INTERVAL 365 DAY) ORDER BY date";
 $result=spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
