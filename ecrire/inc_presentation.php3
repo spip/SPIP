@@ -3008,7 +3008,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 				$statut = 'prop';
 			if ($statut == 'publie')
 				$en_ligne = 'recalcul';
-			else
+			else if ($statut == 'prop')
 				$en_ligne = 'preview';
 			break;
 		case 'rubrique':
