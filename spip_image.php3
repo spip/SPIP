@@ -433,7 +433,7 @@ else {
 		foreach ($_FILES as $file) {
 			// ajout d'un doc normal
 			if (!eregi("\.zip$",$file['name']) OR count($_FILES) > 1)
-				ajout_doc_s($file['tmp_name'], $file['name'], $mode, $forcer_document, $id_document, $hash);
+				ajout_doc_s($file['tmp_name'], $file['name'], $mode, $forcer_document, $id_document, $hash, $file['error']);
 			else
 			// ajout d'un doc au format zip
 			{

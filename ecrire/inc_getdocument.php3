@@ -226,7 +226,17 @@ function ajout_doc_zip($image, $image_name, $mode, $forcer_document, $action_zip
 	ajout_doc_s($image, $image_name, $mode, $forcer_document,$id_document, $hash);
 }
 
-function ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash) {
+function ajout_doc_s($image, $image_name, $mode, $forcer_document, $id_document, $hash, $error=0) {
+
+	if ($error /* on pourrait affiner avec UPLOAD_ERR_INI_SIZE */) {
+		include_ecrire('inc_presentation.php3');
+		install_debut_html(_T('forum_titre_erreur'));
+		echo "<p>"._T('upload_limit',
+			array('max' => ini_get('upload_max_filesize')));
+		install_fin_html();
+		exit;
+	}
+
 	$mode = ($forcer_document == 'oui' ? "document" : $mode);
 
 	if (!is_dir($image_name)) {
