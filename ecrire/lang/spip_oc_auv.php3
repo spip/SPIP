@@ -62,7 +62,7 @@ la documentacion d\'SPIP</a>.',
 'avis_operation_echec' => 'L\'operacion a patracat.',
 'avis_probleme_archive' => 'Probl&egrave;ma de lectura dau fich&egrave;ir @archive@',
 'avis_site_introuvable' => 'Sit introbable',
-'avis_site_syndique_probleme' => 'Atencion: la sindicacion d\'aquel sit a encontrat un probl&egrave;ma; lo sist&egrave;ma es doncas interromput tempor&agrave;riament. Verificatz l\'adre&ccedil;a dau fich&egrave;ir de sindicacion d\'aquel sit (<b>@url_syndic@</b>), e tornatz assajar de recuperar las informacions.',
+'avis_site_syndique_probleme' => 'Atencion: la sindicacion d\'aquel sit a encontrat un probl&egrave;ma; lo sist&egrave;ma es doncas interromput tempor&agrave;riament. Verificatz l\'adrei&ccedil;a dau fich&egrave;ir de sindicacion d\'aquel sit (<b>@url_syndic@</b>), e tornatz assajar de recuperar las informacions.',
 'avis_sites_probleme_syndication' => 'Aqueles sits an encontrat un probl&egrave;ma de sindicacion',
 'avis_sites_syndiques_probleme' => 'Aqueles sits sindicats an pausat un probl&egrave;ma',
 'avis_suppression_base' => 'ATENCION, suprimir las donadas z-es irreversible',
@@ -82,7 +82,7 @@ la documentacion d\'SPIP</a>.',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [liam ipert&egrave;xt->http://...]',
-'barre_lien_input' => 'Volhatz indicar l\'adre&ccedil;a de v&ograve;stre liam (pod&egrave;tz indicar una adre&ccedil;a web sos la forma http://www.lomieusit.com o simplament indicar lo num&egrave;ro d\'un article d\'aquel sit).',
+'barre_lien_input' => 'Volhatz indicar l\'adrei&ccedil;a de v&ograve;stre liam (pod&egrave;tz indicar una adrei&ccedil;a web sos la forma http://www.lomieusit.com o simplament indicar lo num&egrave;ro d\'un article d\'aquel sit).',
 'barre_note' => 'Transformar en [[N&ograve;ta de bas de pagina]]',
 'barre_quote' => '<quote>Citar un messatge</quote>',
 'bouton_acces_ldap' => 'Apondre l\'acc&egrave;s a LDAP >>',
@@ -97,7 +97,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'los administrators dau sit',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'los redactors',
 'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'los vesitaires dau sit public quand mandan un messatge dins un forum.',
-'bouton_checkbox_signature_unique_email' => 'Mas una signatura per adre&ccedil;a e-mail',
+'bouton_checkbox_signature_unique_email' => 'Mas una signatura per adrei&ccedil;a e-mail',
 'bouton_checkbox_signature_unique_site' => 'Mas una signatura per sit web',
 'bouton_chercher' => 'Cerchar',
 'bouton_choisir' => 'Chausir',
@@ -120,10 +120,10 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_desactiver_messagerie' => 'Desactivar la messatjari&aacute;',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_enregistrement_obligatoire' => 'Registrament obligat&ograve;ri (los
- utilizaires se devon abonar en donar lor adre&ccedil;a e-mail avans de
+ utilizaires se devon abonar en donar lor adrei&ccedil;a e-mail avans de
  poder mandar de contribucions).',
 'bouton_radio_envoi_annonces' => 'Mandar los anoncis editoriaus',
-'bouton_radio_envoi_annonces_adresse' => 'Mandar los anoncis a l\'adre&ccedil;a:',
+'bouton_radio_envoi_annonces_adresse' => 'Mandar los anoncis a l\'adrei&ccedil;a:',
 'bouton_radio_envoi_liste_nouveautes' => 'Mandar la t&egrave;ira de las novetats',
 'bouton_radio_moderation_priori' => 'Moderacion a pri&ograve;ri (las
  contribucions apareisson en public mas se los administrators
@@ -278,12 +278,12 @@ la documentacion d\'SPIP</a>.',
 // E
 'email' => 'e-mail',
 'email_2' => 'e-mail:',
-'entree_adresse_annuaire' => 'Adre&ccedil;a de l\'annuari',
-'entree_adresse_email' => 'V&ograve;stra adre&ccedil;a e-mail',
-'entree_adresse_fichier_syndication' => 'Adre&ccedil;a dau fich&egrave;ir "backend" per la sindicacion:',
-'entree_adresse_site' => '<b>Adre&ccedil;a dau sit</b> [Obligat&ograve;ria]',
-'entree_base_donnee_1' => 'Adre&ccedil;a de la basa de donadas',
-'entree_base_donnee_2' => '(Sovent, aquela adre&ccedil;a correspond a aquela de v&ograve;stre sit, de c&ograve;ps correspond a la men&ccedil;on "localhost", de c&ograve;ps, se laissa voida completament.)',
+'entree_adresse_annuaire' => 'Adrei&ccedil;a de l\'annuari',
+'entree_adresse_email' => 'V&ograve;stra adrei&ccedil;a e-mail',
+'entree_adresse_fichier_syndication' => 'Adrei&ccedil;a dau fich&egrave;ir "backend" per la sindicacion:',
+'entree_adresse_site' => '<b>Adrei&ccedil;a dau sit</b> [Obligat&ograve;ria]',
+'entree_base_donnee_1' => 'Adrei&ccedil;a de la basa de donadas',
+'entree_base_donnee_2' => '(Sovent, aquela adrei&ccedil;a correspond a aquela de v&ograve;stre sit, de c&ograve;ps correspond a la men&ccedil;on "localhost", de c&ograve;ps, se laissa voida completament.)',
 'entree_biographie' => 'Biografia br&egrave;va, en quauques mots.',
 'entree_breve_publiee' => 'Aquela br&egrave;va la chau publicar?',
 'entree_chemin_acces' => '<B>Entrar</b> lo chamin d\'acc&egrave;s:',
@@ -317,7 +317,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'entree_titre_document' => 'T&iacute;tol dau document:',
 'entree_titre_image' => 'T&iacute;tol de l\'imatge:',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]<BR>',
-'entree_url' => 'L\'adre&ccedil;a (URL) de v&ograve;stre sit',
+'entree_url' => 'L\'adrei&ccedil;a (URL) de v&ograve;stre sit',
 'envoi_via_le_site' => 'Mandad&iacute;s amb lo biais dau sit web',
 'erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
@@ -328,13 +328,13 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 
 // F
 'form_deja_inscrit' => 'S&egrave;tz ja inscrit(a).',
-'form_email_non_valide' => 'V&ograve;stra adre&ccedil;a e-mail es pas valida.',
+'form_email_non_valide' => 'V&ograve;stra adrei&ccedil;a e-mail es pas valida.',
 'form_forum_access_refuse' => 'Pod&egrave;tz pas mai accedir v&egrave;rs aquel sit.',
 'form_forum_bonjour' => 'Bonjorn,',
-'form_forum_email_deja_enregistre' => 'Aquela adre&ccedil;a e-mail ja z-es registrada, adoncas pod&egrave;tz utilizar v&ograve;stre mot de santa Clara costum&egrave;ir.',
+'form_forum_email_deja_enregistre' => 'Aquela adrei&ccedil;a e-mail ja z-es registrada, adoncas pod&egrave;tz utilizar v&ograve;stre mot de santa Clara costum&egrave;ir.',
 'form_forum_identifiant_mail' => 'Vos av&egrave;m mandat v&ograve;stre identificant nov&egrave;l per e-mail.',
 'form_forum_identifiants' => 'Identificants personaus',
-'form_forum_indiquer_nom_email' => 'Indicatz aqu&iacute; v&ograve;stre nom e v&ograve;stra adre&ccedil;a e-mail. V&ograve;stre identificant personau arribar&aacute; regde, per e-mail.',
+'form_forum_indiquer_nom_email' => 'Indicatz aqu&iacute; v&ograve;stre nom e v&ograve;stra adrei&ccedil;a e-mail. V&ograve;stre identificant personau arribar&aacute; regde, per e-mail.',
 'form_forum_login' => 'login:',
 'form_forum_message_auto' => '(quo es un messatge automatic)',
 'form_forum_pass' => 'mot de santa Clara:',
@@ -343,15 +343,15 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 dau sit "@nom_site_spip@" (@adresse_site@/):',
 'form_forum_voici2' => 'Veiqu&iacute; v&ograve;stres identificants per prepausar d\'articles 
  sobre lo sit "@nom_site_spip@" (@adresse_site@/ecrire/):',
-'form_indiquer_email' => 'Volhatz indicar v&ograve;stra adre&ccedil;a e-mail.',
+'form_indiquer_email' => 'Volhatz indicar v&ograve;stra adrei&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Volhatz indicar v&ograve;stre nom.',
 'form_indiquer_nom_site' => 'Volhatz indicar lo nom de v&ograve;stre sit.',
-'form_pet_adresse_site' => 'Adre&ccedil;a de v&ograve;stre sit',
+'form_pet_adresse_site' => 'Adrei&ccedil;a de v&ograve;stre sit',
 'form_pet_aucune_signature' => 'Gran de signatura correspond pas a aquel c&ograve;de...',
 'form_pet_confirmation' => 'Volhatz confirmar v&ograve;stra signatura:',
 'form_pet_deja_enregistre' => 'Ja aquel sit es registrat',
 'form_pet_deja_signe' => 'Av&egrave;tz ja signat aquel t&egrave;xt.',
-'form_pet_envoi_mail_confirmation' => 'Ara recebretz un e-mail de confirmacion. Per validar v&ograve;stra signatura, chau vesitar l\'adre&ccedil;a web men&ccedil;onada per aqueste corr&egrave;ir.',
+'form_pet_envoi_mail_confirmation' => 'Ara recebretz un e-mail de confirmacion. Per validar v&ograve;stra signatura, chau vesitar l\'adrei&ccedil;a web men&ccedil;onada per aqueste corr&egrave;ir.',
 'form_pet_mail_confirmation' => 'Bonjorn,
 
 av&egrave;tz demandat de signar la peticion:
@@ -364,7 +364,7 @@ Av&egrave;tz fornidas las informacions seguentas:
 
 IMPORTANT...
 Per validar v&ograve;stra signatura, suf&iacute;s de vos connectar a 
- l\'adre&ccedil;a &ccedil;ai sos (senon se rebofar&aacute;
+ l\'adrei&ccedil;a &ccedil;ai sos (senon se rebofar&aacute;
 v&ograve;stra demanda): 
     @url@
 
@@ -378,21 +378,21 @@ Merc&eacute;s per v&ograve;stra participacion
 'form_pet_signature_validee' => 'V&ograve;stra signatura es validada. Merc&eacute;s!',
 'form_pet_site_deja_enregistre' => 'Ja aquel sit es registrat',
 'form_pet_url_invalide' => 'L\'URL qu\'av&egrave;tz indicada es pas valida.',
-'form_pet_votre_email' => 'V&ograve;stra adre&ccedil;a e-mail',
+'form_pet_votre_email' => 'V&ograve;stra adrei&ccedil;a e-mail',
 'form_pet_votre_nom' => 'V&ograve;stre nom o pseudonim',
 'form_pet_votre_site' => 'Se ten&egrave;tz un sit, o pod&egrave;tz marcar &ccedil;ai sos',
 'form_prop_confirmer_envoi' => 'Confirmar l\'enviament',
 'form_prop_description' => 'Descripcion/comentari',
 'form_prop_enregistre' => 'V&ograve;stra proposicion es plan registrada, apareisser&aacute; en linha entre que los responsables dau sit l\'aur&aacute;n validada .',
 'form_prop_envoyer' => 'Mandar un messatge',
-'form_prop_indiquer_email' => 'Volhatz indicar una adre&ccedil;a e-mail valida',
+'form_prop_indiquer_email' => 'Volhatz indicar una adrei&ccedil;a e-mail valida',
 'form_prop_indiquer_nom_site' => 'Volhatz indicar lo nom dau sit.',
 'form_prop_indiquer_sujet' => 'Volhatz indicar un subj&egrave;cte',
 'form_prop_message_envoye' => 'Messatge mandat',
 'form_prop_nom_site' => 'Nom dau sit',
 'form_prop_non_enregistre' => 'V&ograve;stra proposicion es pas estada registrada.',
 'form_prop_sujet' => 'Subj&egrave;cte',
-'form_prop_url_site' => 'Adre&ccedil;a (URL) dau sit',
+'form_prop_url_site' => 'Adrei&ccedil;a (URL) dau sit',
 'forum_acces_refuse' => 'Pod&egrave;tz pas mai accedir v&egrave;rs aqueles forums.',
 'forum_attention_dix_caracteres' => '<b>Atencion!</b> v&ograve;stre messatge ten mens de d&egrave;tz caract&egrave;rs.',
 'forum_attention_trois_caracteres' => '<b>Atencion!</b> v&ograve;stre t&iacute;tol ten mens de tres caract&egrave;rs.',
@@ -403,8 +403,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_lien_hyper' => '<b>Liam ipert&egrave;xt</b> (opcionau)',
 'forum_message_definitif' => 'Messatge definitiu : mandar au sit',
 'forum_message_trop_long' => 'V&ograve;stre messatge es tr&ograve;p long. La lonjor maximala es de 20&nbsp;000 caract&egrave;rs.',
-'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas per lo forum a l\'adre&ccedil;a seguenta: ',
-'forum_non_inscrit' => 'Si&aacute; s&egrave;tz pas inscrit(a), si&aacute; av&egrave;tz fait una error d\'adre&ccedil;a o de mot de santa Clara. ',
+'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail mas per lo forum a l\'adrei&ccedil;a seguenta: ',
+'forum_non_inscrit' => 'Si&aacute; s&egrave;tz pas inscrit(a), si&aacute; av&egrave;tz fait una error d\'adrei&ccedil;a o de mot de santa Clara. ',
 'forum_page_url' => '(se v&ograve;stre messatge se refer&iacute;s a un article publicat per lo web, o a una pagina que baile mai d\'informacions, volhatz marcar &ccedil;ai sos lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Messatge poste@parauteur@ que fai seguda a v&ograve;stre article.',
@@ -416,7 +416,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'forum_url' => 'URL:',
 'forum_valider' => 'Validar aquela chausida',
 'forum_voir_avant' => 'Veire lo messatge avans de lo mandar',
-'forum_votre_email' => 'V&ograve;stra adre&ccedil;a e-mail:',
+'forum_votre_email' => 'V&ograve;stra adrei&ccedil;a e-mail:',
 'forum_votre_nom' => 'V&ograve;stre nom (o pseudonim):',
 'forum_vous_enregistrer' => 'Per participar a
   aquel forum, d\'en prim&egrave;ir vos chau registrar. Merc&eacute;s
@@ -435,7 +435,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'ical_texte_prive' => 'Aquel chalend&egrave;ir, d\'usatge estrictament personau, vos informa de l\'activitat editoriala privada d\'aquel sit (&ograve;bras e rend&egrave;tz-vos personaus, articles e br&egrave;vas prepausats...).',
 'ical_texte_public' => 'Aquel chalend&egrave;ir vos permet de seguir l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
 'ical_texte_rss' => 'Pod&egrave;tz sindicar las novetats d\'aqueste sit dins quin legidor de fich&egrave;irs que si&aacute; en format XML/RSS (Rich Site Summary). Z-es maitot lo format que permet a SPIP de legir las novetats publicadas dins d\'autres sits en utilizar un format d\'eschamge compatible (sit sindicats).  ',
-'ical_texte_rss_articles' => 'Lo fich&egrave;ir "backend" daus articles d\'aqueste sit se tr&ograve;ba a l\'adre&ccedil;a:',
+'ical_texte_rss_articles' => 'Lo fich&egrave;ir "backend" daus articles d\'aqueste sit se tr&ograve;ba a l\'adrei&ccedil;a:',
 'ical_texte_rss_articles2' => 'Aitanben pod&egrave;tz obt&eacute;ner de fich&egrave;irs "backend" per los articles de chasca rubrica dau sit:',
 'ical_texte_rss_breves' => 'Existisson mai que d\'un fich&egrave;ir contenent las br&egrave;vas dau sit. En precisar un num&egrave;ro de rubrica,  obtendretz mas las br&egrave;vas de la rubrica aquela.',
 'ical_titre_js' => 'Javascript',
@@ -545,10 +545,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_administrateurs' => 'Administrators',
 'info_administrer_rubrique' => 'Pod&egrave;tz administrar aquela rubrica',
 'info_administrer_rubriques' => 'Pod&egrave;tz administrar aquela rubrica e sas sosrubricas',
-'info_adresse' => 'a l\'adre&ccedil;a:',
-'info_adresse_email' => 'ADRE&Ccedil;A E-MAIL:',
-'info_adresse_non_indiquee' => 'Av&egrave;tz pas indicat l\'adre&ccedil;a de testar!',
-'info_adresse_url' => 'Adre&ccedil;a (URL) dau sit public',
+'info_adresse' => 'a l\'adrei&ccedil;a:',
+'info_adresse_email' => 'ADREI&Ccedil;A E-MAIL:',
+'info_adresse_non_indiquee' => 'Av&egrave;tz pas indicat l\'adrei&ccedil;a de testar!',
+'info_adresse_url' => 'Adrei&ccedil;a (URL) dau sit public',
 'info_afficher_visites' => 'Afichar las vesitas per:',
 'info_affichier_visites_articles_plus_visites' => 'Afichar las vesitas per los <b>articles mai vesitats dempu&egrave;i l\'emprim&egrave;ir:</b>',
 'info_aide' => 'AJUDA:',
@@ -612,7 +612,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;stres c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coss&iacute; legir aquel tabl&egrave;u',
-'info_config_suivi' => 'S\'aquela adre&ccedil;a correspond a una lista de corr&egrave;ir, pod&egrave;tz indicar &ccedil;ai sos l\'adre&ccedil;a ont los participants au sit se p&ograve;don inscriure. Aquela adre&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adre&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi' => 'S\'aquela adrei&ccedil;a correspond a una lista de corr&egrave;ir, pod&egrave;tz indicar &ccedil;ai sos l\'adrei&ccedil;a ont los participants au sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la lista de difusion d\'aqueste sit. Adoncas recebretz per e-mail los anoncis d\'articles e de br&egrave;vas que se prepausa a la publicacion.',
 'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara nov&egrave;l:',
 'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
@@ -659,10 +659,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_echange_message' => 'SPIP permet d\'eschamjar de messatges e de constituir de forums privats de discussion entre los participants dau sit. Pod&egrave;tz activar o desactivar aquela foncionalitat.',
 'info_ecire_message_prive' => 'Escriure un messatge privat',
 'info_ecrire_article' => 'Avans de poder escriure d\'articles, vos chau crear per lo mens una rubrica.',
-'info_email_envoi' => 'Adre&ccedil;a e-mail d\'enviament (opcionau)',
-'info_email_envoi_txt' => 'Indicatz aic&iacute; l\'adre&ccedil;a d\'utilizar per enviar los e-mails (a fauta d\'aqu&ograve;, s\'utilizar&aacute; l\'adre&ccedil;a destinatari coma adre&ccedil;a d\'enviament):',
-'info_email_invalide' => 'Adre&ccedil;a e-mail invalida',
-'info_email_webmestre' => 'Adre&ccedil;a e-mail dau responsable dau sit (opcionau)',
+'info_email_envoi' => 'Adrei&ccedil;a e-mail d\'enviament (opcionau)',
+'info_email_envoi_txt' => 'Indicatz aic&iacute; l\'adrei&ccedil;a d\'utilizar per enviar los e-mails (a fauta d\'aqu&ograve;, s\'utilizar&aacute; l\'adrei&ccedil;a destinatari coma adrei&ccedil;a d\'enviament):',
+'info_email_invalide' => 'Adrei&ccedil;a e-mail invalida',
+'info_email_webmestre' => 'Adrei&ccedil;a e-mail dau responsable dau sit (opcionau)',
 'info_en_cours_validation' => 'V&ograve;stres articles en cors de redaccion',
 'info_en_ligne' => 'Ara en linha:',
 'info_entrer_code_alphabet' => 'Picatz lo c&ograve;de de l\'alfabet d\'utilizar:',
@@ -794,7 +794,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_moteur_recherche' => 'Motor de rec&egrave;rcha integrat',
 'info_mots_cles' => 'Los mots claus',
 'info_mots_cles_association' => 'Los mots claus d\'aquel grop se p&ograve;don associar:',
-'info_moyenne' => 'meiana:',
+'info_moyenne' => 'mejana:',
 'info_multi_articles' => 'Activar lo menut de lenga per los articles?',
 'info_multi_cet_article' => 'Lenga d\'aqueste article:',
 'info_multi_herit' => 'Lenga predefinida',
@@ -885,7 +885,7 @@ Merc&eacute;s per v&ograve;stra participacion
 ---------------',
 'info_propose_3' => 'L\'article "@titre@" z-es prepausat a la publicacion.',
 'info_propose_4' => 'Vos convidam a lo venir consultar e a balhar v&ograve;stre vejaire',
-'info_propose_5' => 'dins lo forum que li es estachat. Z-es disponible a l\'adre&ccedil;a:',
+'info_propose_5' => 'dins lo forum que li es estachat. Z-es disponible a l\'adrei&ccedil;a:',
 'info_ps' => 'P.S.',
 'info_publie_01' => 'L\'article "@titre@" z-es estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
@@ -922,7 +922,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempu&egrave;i lors s
 'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</b>',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
 'info_renvoi_article' => '<B>Redireccion.</b> Aquel article remanda a la pagina:',
-'info_reserve_admin' => 'Mas los administrators p&ograve;don modificar aquela adre&ccedil;a.',
+'info_reserve_admin' => 'Mas los administrators p&ograve;don modificar aquela adrei&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
 'info_resultat_recherche' => 'Resultats de la rec&egrave;rcha:',
@@ -1260,7 +1260,7 @@ una color indica lor estat:',
 'pass_erreur' => 'Error',
 'pass_erreur_acces_refuse' => '<b>Error :</b> pod&egrave;tz pas mai accedir a aquel sit.',
 'pass_erreur_code_inconnu' => '<b>Error:</b> aquel c&ograve;de correspond pas a ges de vesitaire que pu&egrave;scha accedir a aquel sit.',
-'pass_erreur_non_enregistre' => '<b>Error:</b> l\'adre&ccedil;a <tt>@email_oubli@</tt> z-es pas registrada sus aquel sit.',
+'pass_erreur_non_enregistre' => '<b>Error:</b> l\'adrei&ccedil;a <tt>@email_oubli@</tt> z-es pas registrada sus aquel sit.',
 'pass_erreur_non_valide' => '<b>Error:</b> aquel e-mail <tt>@email_oubli@</tt> z-es pas valid!',
 'pass_erreur_probleme_technique' => '<b>Error:</b> pr\'amor d\'un probl&egrave;ma tecnic, l\'e-mail se p&ograve;t pas mandar. ',
 'pass_espace_prive_bla' => 'L\'espaci privat d\'aqueste sit es badat v&egrave;rs los
@@ -1269,7 +1269,7 @@ una color indica lor estat:',
   prepausar d\'articles nov&egrave;ls e participar a totes los forums.',
 'pass_forum_bla' => 'Av&egrave;tz demandat d\'intervenir dins un forum
   reservat aus vesitaires registrats.',
-'pass_indiquez_cidessous' => 'Marcatz &ccedil;ai sos l\'adre&ccedil;a e-mail ont
+'pass_indiquez_cidessous' => 'Marcatz &ccedil;ai sos l\'adrei&ccedil;a e-mail ont
  vos registr&egrave;retz lo c&ograve;p passat. 
    Recebretz un e-mail que vos balhar&aacute; la man&egrave;ira de 
     tornar trobar v&ograve;stre acc&egrave;s.',
@@ -1277,7 +1277,7 @@ una color indica lor estat:',
 Per tornar trobar v&ograve;stre acc&egrave;s au sit
 @nom_site_spip@ (@adresse_site@)
 
-Volhatz anar a l\'adre&ccedil;a seguenta:
+Volhatz anar a l\'adrei&ccedil;a seguenta:
 
     @adresse_site@/spip_pass.php3?p=@cookie@
 
@@ -1424,7 +1424,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
  los t&egrave;xts ja sasits se p&ograve;don afichar
  d\'una man&egrave;ira incorr&egrave;cta apr&egrave;s que s\'aja modificat lo reglatge. Si&aacute; que si&aacute;
  poiretz tornar sens damatge au reglatge precedent.',
-'texte_lien_hypertexte' => '(Se v&ograve;stre messatge se refer&iacute;s a un article publicat sus lo web, o a una pagina fornissent mai d\'informacions, volhatz indicar &ccedil;ai sos lo t&iacute;tol de la pagina e son adre&ccedil;a URL.)',
+'texte_lien_hypertexte' => '(Se v&ograve;stre messatge se refer&iacute;s a un article publicat sus lo web, o a una pagina fornissent mai d\'informacions, volhatz indicar &ccedil;ai sos lo t&iacute;tol de la pagina e son adrei&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Los liams eissits daus sits sindicats se p&ograve;don
    blocar a pri&ograve;ri; lo reglatge
   &ccedil;ai sos indica lo reglatge predefinit daus
@@ -1469,7 +1469,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
 'texte_proposer_publication' => 'Quand auretz \'chabat v&ograve;stre article,<br> poiretz prepausar que si&aacute; publicat.',
 'texte_proxy' => 'Dins quauques cas (intranet, rets protegidas...),
   se p&ograve;t que chalha utilizar un <I>proxy HTTP</i> per at&eacute;nher los sits sindicats.
-  En aquel cas, marcatz &ccedil;ai sos son adre&ccedil;a, sos la forma
+  En aquel cas, marcatz &ccedil;ai sos son adrei&ccedil;a, sos la forma
   <tt><html>http://proxy:8080</html></tt>. En generau,
   laissaretz voida aquela casa.',
 'texte_publication_articles_post_dates' => 'Coss&iacute; SPIP se deu comportar f&agrave;cia aus articles que lor
@@ -1481,7 +1481,7 @@ tornar calcular mas una pagina, passatz pusl&egrave;u per l\'espaci public e uti
 'texte_recapitiule_liste_documents' => 'Aquesta pagina recapitula la t&egrave;ira daus documents qu\'av&egrave;tz pla&ccedil;ats dins las rubricas. Per modificar las informacions de chasque document, segu&egrave;tz lo liam v&egrave;rs la pagina de sa rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referenciat dins v&ograve;stre sit SPIP, mas redirigit v&egrave;rs una autra URL.',
-'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br> Pod&egrave;tz referenciar de briu un sit web en indicar &ccedil;ai sos l\'adre&ccedil;a URL desirada, o l\'adre&ccedil;a de son fich&egrave;ir backend. SPIP atrapar&aacute; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique' => '<b>Refer&eacute;nciament automatizat d\'un sit</b><br> Pod&egrave;tz referenciar de briu un sit web en indicar &ccedil;ai sos l\'adrei&ccedil;a URL desirada, o l\'adrei&ccedil;a de son fich&egrave;ir backend. SPIP atrapar&aacute; automaticament las informacions que concernisson aquel sit (t&iacute;tol, descripcion...).',
 'texte_requetes_echouent' => '<b>Quand quauques requistas MySQL patracan
   sistematicament e sens rason aparenta, se p&ograve;t
   qu\'aqu&ograve; venha be ben de la basa de donadas.  </b><p>
@@ -1508,7 +1508,7 @@ dins lo repert&ograve;ri <i>ecrire/data/</i>.
  <li> la lenga presentada coma predefinida dins l\'espaci privat.</li></ul>',
 'texte_signification' => 'Las barras escuras representan las entradas cumuladas (totau de las sosrubricas), las barras claras lo nombre de vesitas per chasca rubrica.',
 'texte_sous_titre' => 'Sost&iacute;tol',
-'texte_statistiques_visites' => '(barras escuras:  dimenge / corba escura: evolucion de la meiana)',
+'texte_statistiques_visites' => '(barras escuras:  dimenge / corba escura: evolucion de la mejana)',
 'texte_statut_attente_validation' => 'en ap&egrave;ita de validacion',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'au bordilh&egrave;ir',
@@ -1530,7 +1530,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'texte_tables_indexation_vides' => 'Las taulas d\'indexacion dau motor son voidas.',
 'texte_tentative_recuperation' => 'Assai de reparacion',
 'texte_tenter_reparation' => 'Assajar de reparar la basa de donadas',
-'texte_test_proxy' => 'Per assajar aquel proxy, indicatz aic&iacute; l\'adre&ccedil;a d\'un sit web
+'texte_test_proxy' => 'Per assajar aquel proxy, indicatz aic&iacute; l\'adrei&ccedil;a d\'un sit web
     que lo voudriatz esprovar.',
 'texte_titre_02' => 'T&iacute;tol:',
 'texte_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]',
