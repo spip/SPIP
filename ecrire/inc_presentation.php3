@@ -2957,7 +2957,7 @@ function install_fin_html() {
 function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc)
 {
   return icone($texte,
-	       "../spip_cache?$action=$id&amp;redirect=" .
+	       "../spip_cache.php3?$action=$id&amp;redirect=" .
 	       rawurlencode($lien),
 	       $fond,
 	       $fonction,
