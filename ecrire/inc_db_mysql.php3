@@ -12,7 +12,6 @@ define("_ECRIRE_INC_DB_MYSQL", "1");
 function spip_query_db($query) {
 	global $spip_mysql_link;
 	static $tt = 0;
-
 	$my_admin = (($GLOBALS['connect_statut'] == '0minirezo') OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'));
 	$my_profile = ($GLOBALS['mysql_profile'] AND $my_admin);
 	$my_debug = ($GLOBALS['mysql_debug'] AND $my_admin);
@@ -53,11 +52,20 @@ function traite_query($query) {
 		$db = '`'.$db.'`.';
 
 	// changer les noms des tables ($table_prefix)
-	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
-		$suite = $regs[0];
-		$query = substr($query, 0, -strlen($suite));
+	if ($GLOBALS['flag_pcre']) {
+		if (preg_match('/\s(VALUES|WHERE)\s/i', $query, $regs)) {
+			$suite = strstr($query, $regs[0]);
+			$query = substr($query, 0, -strlen($suite));
+		}
+		$query = preg_replace('/([,\s])spip_/', '\1'.$db.$GLOBALS['table_prefix'].'_', $query) . $suite;
 	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$db.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	else {
+		if (eregi('[[:space:]](VALUES|WHERE)[[:space:]]', $query, $regs)) {
+			$suite = strstr($query, $regs[0]);
+			$query = substr($query, 0, -strlen($suite));
+		}
+		$query = ereg_replace('([[:space:],])spip_', '\1'.$db.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	}
 
 	return $query;
 }
