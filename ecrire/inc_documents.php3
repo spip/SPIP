@@ -333,11 +333,10 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 	if ($mode == 'document') {
 		debut_cadre_enfonce("doc-24.gif");
-		//echo "<div style='border: 1px dashed #aaaaaa; padding: 0px; background-color: #e4e4e4;'>\n";
-			echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
-			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
-			echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre_aff)."</font></b>";
-			echo "</div>\n";
+		echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
+		echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
+		echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre_aff)."</font></b>";
+		echo "</div>\n";
 
 
 		if ($id_vignette) $vignette = fetch_document($id_vignette);
@@ -411,85 +410,74 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 		echo debut_block_invisible($block);
 		echo "<p></p><div style='border: 1px dashed #666666; padding: 0px; background-color: #f0f0f0;'>";	
-			
-			
-			
-			echo "<div style='padding: 5px;'>";	
-			if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
-			
 
-			if ($type_titre){
-				echo "$type_titre";
-			} else {
-				echo "Document ".majuscules($type_extension);
+		echo "<div style='padding: 5px;'>";	
+		if (strlen($descriptif)>0) echo propre($descriptif)."<br>";
+
+		if ($type_titre)
+			echo "$type_titre";
+		else 
+			echo "Document ".majuscules($type_extension);
+		echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
+
+		$link = new Link($redirect_url);
+		$link->addVar('modif_document', 'oui');
+		$link->addVar('id_document', $id_document);
+		echo $link->getForm('POST');
+
+		echo "<b>Titre du document&nbsp;:</b><br>\n";
+		echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+
+		if ($GLOBALS['coll'] > 0){
+			if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
+				$mois = $regs[2];
+				$jour = $regs[3];
+				$annee = $regs[1];
 			}
-			echo " : <a href='../$fichier'>".taille_en_octets($taille)."</a>";
+			echo "<b>Date de mise en ligne&nbsp;:</b><br>\n";
+			echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+			afficher_jour($jour);
+			echo "</SELECT> ";
+			echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+			afficher_mois($mois);
+			echo "</SELECT> ";
+			echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+			afficher_annee($annee);
+			echo "</SELECT><br>";
+		}
+		
+		echo "<b>Description&nbsp;:</b><br>\n";
+		echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
+		echo htmlspecialchars($descriptif);
+		echo "</textarea>\n";
 
-			$link = new Link($redirect_url);
-			$link->addVar('modif_document', 'oui');
-			$link->addVar('id_document', $id_document);
-			echo $link->getForm('POST');
-		
-			echo "<b>Titre du document&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
-	
-			if ($GLOBALS['coll'] > 0){
-				if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
-					$mois = $regs[2];
-					$jour = $regs[3];
-					$annee = $regs[1];
-				}
-				echo "<b>Date de mise en ligne&nbsp;:</b><br>\n";
-				echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
-				afficher_jour($jour);
-				echo "</SELECT> ";
-				echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
-				afficher_mois($mois);
-				echo "</SELECT> ";
-				echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
-				afficher_annee($annee);
-				echo "</SELECT><br>";
-		
-			}
-		
-			echo "<b>Description&nbsp;:</b><br>\n";
-			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
-			echo htmlspecialchars($descriptif);
-			echo "</textarea>\n";
-
-			if ($type_inclus == "embed" OR $type_inclus == "image") {
+		if ($type_inclus == "embed" OR $type_inclus == "image") {
 			echo "<br><b>Dimensions&nbsp;:</b><br>\n";
-				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
-			}
-		
-			echo "<div align='right'>";
-			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
-			echo "</div>";
-			echo "</form>";
+			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
+			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
+		}
+
+		echo "<div align='right'>";
+		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
+		echo "</div>";
+		echo "</form>";
 
 
-		
-			$link = $image_link;
-			$link->addVar('redirect', $redirect_url);
-			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('doc_supp', $id_document);
-		
-			echo "</font></center>\n";
-			echo "</div>";	
+		$link = $image_link;
+		$link->addVar('redirect', $redirect_url);
+		$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
+		$link->addVar('hash_id_auteur', $connect_id_auteur);
+		$link->addVar('doc_supp', $id_document);
 
+		echo "</font></center>\n";
+		echo "</div>";
+		echo "</div>";
 
+		echo "<p></p><div align='center'>";
+		icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.gif", "supprimer.gif");
+		echo "</div>";
+		echo fin_block();
 
-		
-			echo "</div>";	
-		
-			echo "<p></p><div align='center'>";
-			icone_horizontale("Supprimer ce document", $link->getUrl(), "doc-24.gif", "supprimer.gif");
-			echo "</div>";
-			echo fin_block();
-			
-		//echo "</div>\n";
 		fin_cadre_enfonce();
 	}
 
