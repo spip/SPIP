@@ -777,7 +777,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letout = ereg_replace("\|", "\|", $letout);
 		$id_document = $match[2];
 		$align = $match[4];
-		if ($match[1] == "EMB")
+		if (eregi("emb", $match[1]))
 			$rempl = embed_document($id_document, $align);
 		else 
 			$rempl = integre_image($id_document, $align, $match[1]);
