@@ -5,25 +5,17 @@ include ("inc.php3");
 
 debut_page("Suivi des forums", "messagerie", "forum-controle");
 
-$requete_base_controle =  "statut!='perso' AND statut != 'redac'";
+$requete_base_controle = "statut!='perso' AND statut != 'redac'";
+
+if (!$page) $page = "public";
 
 echo "<br><br><br>";
-if ($controle_sans == 'oui') {
-	$controle_sans = '&controle_sans=oui';
-	gros_titre("Messages sans texte");
-	barre_onglets("suivi_forum", "sans");
-} else {
-	$controle_sans = '';
-	gros_titre("Suivi des forums");
-	$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND texte='' LIMIT 0,1";
-	$result_forum = spip_query($query_forum);
-	if ($row = spip_fetch_array($result_forum))
-		barre_onglets("suivi_forum", "tous");
-}
+gros_titre("Suivi des forums");
+
+barre_onglets("suivi_forum", $page);
 
 
 debut_gauche();
-
 
 debut_boite_info();
 
@@ -83,7 +75,7 @@ function forum_parent($id_forum) {
 				$statut = $row['statut'];
 			}
 
-			if ($forum_stat == "prive") {
+			if ($forum_stat == "prive" OR $forum_stat == "privoff") {
 				return $retour."<B>R&eacute;ponse &agrave; l'article <A HREF='articles.php3?id_article=$id_article'>$titre</A></B>";
 			}
 			else {
@@ -136,7 +128,7 @@ function forum_parent($id_forum) {
 		}
 		else {
 			$retour = forum_parent($forum_id_parent);
-			
+
 			if (strlen($retour)>0) return $retour;
 			else return "<B>Message du <A HREF='forum.php3'>forum interne</A></B>";
 		}
@@ -150,7 +142,7 @@ function controle_forum($row, $new) {
 	global $couleur_foncee;
 	global $mots_cles_forums;
 	global $controle_sans;
-	global $debut;
+	global $debut, $page;
 
 	$controle = "<BR><BR>";
 
@@ -185,14 +177,14 @@ function controle_forum($row, $new) {
 	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
 	$controle .= "<TR><TD>";
 	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	if ($forum_stat=="publie" OR $forum_stat == "off") {
+	/*if ($forum_stat=="publie" OR $forum_stat == "off") {
 		$controle .= "<img src='img_pack/racine-site-24.gif' border=0 align='left'>";
 		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[sur le site public]</FONT> ";
 	}
 	else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm" OR $forum_stat == "privoff"){
 		$controle .= "<img src='img_pack/cadenas-24.gif' border=0 align='left'>";
 		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>[dans l'espace priv&eacute;]</FONT> ";
-	}
+	}*/
 
 	if ($new)
 		$new = " &nbsp; <i>(Nouveau)</i>";
@@ -204,11 +196,11 @@ function controle_forum($row, $new) {
 		$controle .= "<FONT FACE='arial,helvetica'> / <B>$forum_auteur</B></FONT>";
 	}
 
-	if ($forum_stat <> "off" AND $forum_stat <> "prioff") {
+	if ($forum_stat != "off" AND $forum_stat != "privoff") {
 		if ($forum_stat == "publie" OR $forum_stat == "prop")
-			$controle .= icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+			$controle .= icone("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
 		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
-			$controle .= icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
+			$controle .= icone("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans&page=$page", "forum-interne-24.gif", "supprimer.gif", "right", 'non');
 	}
 	else {
 		$controle .= "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
@@ -217,12 +209,12 @@ function controle_forum($row, $new) {
 	}
 
 	if ($forum_stat=="prop")
-		$controle .= icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "creer.gif", "right", 'non');
+		$controle .= icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut&page=$page", "forum-interne-24.gif", "creer.gif", "right", 'non');
 
 	$controle .= "<BR>".forum_parent($id_forum);
 
 	$controle .= "<P align='justify'>".propre($forum_texte);
-		
+
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
 		$controle .= "<P align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
 
@@ -240,12 +232,12 @@ function controle_forum($row, $new) {
 
 	$controle .= "</FONT>";
 	$controle .= "</TD></TR></TABLE>";
-		
+
 	$controle .= "</TD></TR></TABLE>\n";
-		
+
 	if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop'))
 		$controle .= "</div>";
-		
+
 	$controle .= "</div>";
 
 	return $controle;
@@ -254,11 +246,11 @@ function controle_forum($row, $new) {
 
 //
 // Debut de la page de controle
-//  
+//
 
 echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
- 
-if ($connect_statut != "0minirezo") {
+
+if ($connect_statut != "0minirezo" OR !$connect_toutes_rubriques) {
 	echo "<B>Vous n'avez pas acc&egrave;s &agrave; cette page.</B>";
 	exit;
 }
@@ -273,17 +265,32 @@ $limitnb = $debut + $enplus - $limitdeb;
 $wheretexte = $controle_sans ? "texte=''" : "texte!=''";
 
 
-$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND $wheretexte ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb";
+$query_forum = "SELECT * FROM spip_forum WHERE ";
+switch ($page) {
+case 'public':
+	$query_forum .= "statut IN ('publie', 'off') AND texte!=''";
+	break;
+case 'interne':
+	$query_forum .= "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
+	break;
+case 'vide':
+	$query_forum .= "statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND texte=''";
+	break;
+default:
+	$query_forum .= "0=1";
+	break;
+}
+
+$query_forum .= " ORDER BY date_heure DESC LIMIT $limitdeb, $limitnb";
 $result_forum = spip_query($query_forum);
 
 $controle = '';
 
 $i = $limitdeb;
 if ($i>0)
-	echo "<A HREF='controle_forum.php3'>0</A> ... | ";
+	echo "<A HREF='controle_forum.php3?page=$page'>0</A> ... | ";
 
 while ($row = spip_fetch_array($result_forum)) {
-
 	// est-ce que ce message doit s'afficher dans la liste ?
 	$ok_controle = (($i>=$debut) AND ($i<$debut + $pack));
 
@@ -292,7 +299,7 @@ while ($row = spip_fetch_array($result_forum)) {
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
-			echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>$i</A>";
+			echo "<A HREF='controle_forum.php3?debut=$i&page=$page'>$i</A>";
 		echo " | ";
 	}
 
@@ -303,7 +310,7 @@ while ($row = spip_fetch_array($result_forum)) {
 	$i ++;
 }
 
-echo "<A HREF='controle_forum.php3?debut=$i$controle_sans'>...</A>";
+echo "<A HREF='controle_forum.php3?debut=$i&page=$page'>...</A>";
 
 echo $controle;
 
