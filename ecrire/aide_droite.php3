@@ -65,17 +65,23 @@ table.spip td {
 
 if (strlen($aide) < 2) $aide = "spip";
 
-$fichier_aide = "AIDE/aide";
 
-if (@is_file($fichier_aide)) {
-	$html = join('', file($fichier_aide));
+// selection de la langue
+$ln = '_en';
 
-	$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
-	$html = substr($html, 0, strpos($html, "</$aide>"));
-
-	echo justifier(propre($html)."<p>");
-	echo "<font size=2>$les_notes</font><p>";
+if (!file_exists($fichier_aide = "AIDE$ln/aide")) {
+	$fichier_aide = "AIDE/aide";
+	$ln='';
 }
+
+$html = join('', file($fichier_aide));
+
+$html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
+$html = substr($html, 0, strpos($html, "</$aide>"));
+
+echo ereg_replace("AIDE(/[^[:space:]]+\.(gif|jpg))", "AIDE$ln\\1",
+justifier(propre($html)."<p>"));
+echo "<font size=2>$les_notes</font><p>";
 
 ?>
 
