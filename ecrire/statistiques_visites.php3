@@ -206,6 +206,9 @@ if (!$aff_jours) $aff_jours = 105;
 
 if (!$origine) {
 
+
+
+
 	if ($id_article) {
 		$table = "spip_visites_articles";
 		$table_ref = "spip_referers_articles";
@@ -300,8 +303,14 @@ if (!$origine) {
 		
 		if ($date_premier < $date_debut) echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article'><img src='img_pack/loupe-moins.gif' border='0' valign='center'></a>&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)  echo "<a href='statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article'><img src='img_pack/loupe-plus.gif' border='0' valign='center'></a>&nbsp;";
-		
-		
+	
+		echo "<div>";
+		echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
+		echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
+		echo "</object>";
+		echo "</div>";
+	
+		/*
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 
@@ -491,6 +500,8 @@ if (!$origine) {
 			}
 		}
 		echo "</div>";
+		
+		*/
 				
 		
 
