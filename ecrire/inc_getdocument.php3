@@ -270,7 +270,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		"(id_type, titre, date)", "($id_type, '', NOW())");
 
 		if ($id_lien
-		AND preg_match('/^[a-z]+$/', $type_lien) # securite
+		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
 		)
 			spip_query("INSERT INTO spip_documents_".$type_lien."s
 				(id_document, id_".$type_lien.")
