@@ -14,7 +14,7 @@ function calculer_params($type, $params, $idb, &$boucles)
     while (list(, $param) = each($params)) {
       if ($param == 'exclus') {
 	$boucle->where[] = "$id_field!='\"." .
-	  index_pile($boucles[$idb]->id_parent, $table_primary[$type], $boucles) .
+	  index_pile($boucle->id_parent, $table_primary[$type], $boucles) .
 	  ".\"'";  }
       else if ($param == 'unique' OR $param == 'doublons') {
 	$boucle->doublons = true;
@@ -72,7 +72,7 @@ function calculer_params($type, $params, $idb, &$boucles)
       // Gerer les traductions
       else if ($param == 'traduction') {
 	$boucle->where[] = "$id_table.id_trad > 0 AND  $id_table.id_trad ='\"." .
-	  index_pile($boucles[$idb]->id_parent, 'id_trad', $boucles) . ".\"'";
+	  index_pile($boucle->id_parent, 'id_trad', $boucles) . ".\"'";
       }
       else if ($param == 'origine_traduction') {
 	$boucle->where[] = "$id_table.id_trad = $id_table.id_article";
@@ -81,7 +81,7 @@ function calculer_params($type, $params, $idb, &$boucles)
       // Special rubriques
       else if ($param == 'meme_parent') {
 	$boucle->where[] = "$id_table.id_parent='\"." .
-	  index_pile($boucles[$idb]->id_parent, 'id_parent', $boucles) . ".\"'";
+	  index_pile($boucle->id_parent, 'id_parent', $boucles) . ".\"'";
 	if ($type == 'forums') {
 	  $boucle->where[] = "$id_table.id_parent > 0";
 	  $boucle->plat = true;
@@ -92,7 +92,7 @@ function calculer_params($type, $params, $idb, &$boucles)
       }
       else if (ereg("^branche *(\??)", $param, $regs)) {
 	$c = '".' ."calcul_mysql_in('$id_table.id_rubrique', calcul_branche(" .
-	  index_pile($boucles[$idb]->id_parent, 'id_rubrique', $boucles) .
+	  index_pile($boucle->id_parent, 'id_rubrique', $boucles) .
 	  "), '') . \"";
 	if (!$regs[1])
 	  $boucle->where[] = $c ;
@@ -102,7 +102,7 @@ function calculer_params($type, $params, $idb, &$boucles)
       else if ($type == 'hierarchie')
 	{
 	  // Hack spe'cifique; cf comple'ment dans calculer_boucle
-	  $boucle->tout = index_pile($boucles[$idb]->id_parent,
+	  $boucle->tout = index_pile($boucle->id_parent,
 				     'id_rubrique',
 				     $boucles);
 	}
@@ -124,7 +124,7 @@ function calculer_params($type, $params, $idb, &$boucles)
 	  // Si id_enfant, comparer l'id_objet avec l'id_parent de la boucle superieure
 	  else if ($val == 'id_enfant')
 	    $val = 'id_parent';
-	  $val = index_pile($boucles[$idb]->id_parent, $val, $boucles) ;
+	  $val = index_pile($boucle->id_parent, $val, $boucles) ;
 	}
 	if (ereg('^\$',$val))
 	  $val = '" . addslashes(' . $val . ') . "';
