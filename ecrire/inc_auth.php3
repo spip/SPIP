@@ -105,15 +105,15 @@ function auth() {
 	else if ($GLOBALS['bonjour'] == 'oui') {
 		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
-		$link->addVar('url', 'ecrire/'.$clean_link->getUrl());
+		$url = str_replace('/./', '/', 'ecrire/'.$clean_link->getUrl());
 		@header("Location: ".$link->getUrl());
 		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$url = urlencode('ecrire/'.$clean_link->getUrl());
-		@header("Location: ../spip_login.php3?var_url=$url");
+		$url = str_replace('/./', '/', 'ecrire/'.$clean_link->getUrl());
+		@header("Location: ../spip_login.php3?var_url=".urlencode($url));
 		exit;
 	}
 
