@@ -43,14 +43,15 @@ function creer_base() {
 		langue_choisie VARCHAR(3) DEFAULT 'non',
 		id_trad bigint(21) DEFAULT '0' NOT NULL,
 		extra longblob NULL,
-		url_ref text NOT NULL,
+		nom_site tinytext NOT NULL,
+		url_site text NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
 		KEY id_trad (id_trad),
 		KEY lang (lang),
 		KEY statut (statut, date),
-		KEY url_ref (url_ref (25)),
+		KEY url_site (url_site (25)),
 		KEY date_modif (date_modif))";
 	$result = spip_query($query);
 
@@ -1415,6 +1416,7 @@ function maj_base() {
 		maj_version (1.718);
 	}
 
+	/*
 	if ($version_installee < 1.720) {
 		spip_query("ALTER TABLE spip_articles ADD url_ref text NOT NULL");
 		maj_version (1.720);
@@ -1424,6 +1426,20 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_articles ADD INDEX url_ref (url_ref (25))");
 		maj_version (1.721);
 	}
+	*/
+
+	if ($version_installee < 1.722) {
+		spip_query("ALTER TABLE spip_articles ADD nom_site tinytext NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD url_site text NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD INDEX url_site (url_site (25))");
+		if ($version_installee >= 1.720) {
+			spip_query("UPDATE spip_articles SET url_site=url_ref");
+			spip_query("ALTER TABLE spip_articles DROP INDEX url_ref");
+			spip_query("ALTER TABLE spip_articles DROP url_ref");
+		}
+		maj_version (1.722);
+	}
+
 
 	return true;
 }

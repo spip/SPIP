@@ -232,23 +232,19 @@ function parser_boucle($texte, $id_parent) {
 				if ($type == 'articles') {
 					$s = "$table.id_article,$table.id_rubrique,$table.id_secteur,".
 						"$table.surtitre,$table.titre,$table.soustitre,$table.date,$table.date_redac,$table.date_modif,".
-						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang,$table.id_trad,$table.url_ref";
-					if (ereg('\#(TEXTE|INTRODUCTION)', $milieu)) {
+						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang,$table.id_trad";
+					if (ereg('\#(TEXTE|INTRODUCTION)', $milieu))
 						$s .= ",$table.texte";
-					}
-					if (ereg('\#(CHAPO|INTRODUCTION)', $milieu)) {
+					if (ereg('\#(CHAPO|INTRODUCTION)', $milieu))
 						$s .= ",$table.chapo";
-					}
-					if (ereg('\#(DESCRIPTIF|INTRODUCTION)', $milieu)) {
+					if (ereg('\#(DESCRIPTIF|INTRODUCTION)', $milieu))
 						$s .= ",$table.descriptif";
-					}
-					if (ereg('\#(PS)', $milieu)) {
+					if (ereg('\#(PS)', $milieu))
 						$s .= ",$table.ps";
-					}
-					if (ereg('\#(EXTRA)', $milieu)) {
+					if (ereg('\#(EXTRA)', $milieu))
 						$s .= ",$table.extra";
-					}
-
+					if (ereg("\#(NOM_SITE|URL_SITE)", $milieu))
+						$s .= ",$table.nom_site,$table.url_site";
 					$req_select[] = $s;
 				}
 				else $req_select[] = "$table.*";
