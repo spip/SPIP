@@ -399,6 +399,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		$toujours_afficher = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
+	global $options;
 	global $spip_lang_left;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
@@ -422,7 +423,10 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		$requete = $select . "FROM spip_articles AS articles " . $requete;
 	}
 
-	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
+	if ($options == "avancees")  $ajout_col = 1;
+	else $ajout_col = 0;
+
+	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 + $ajout_col : 2 + $ajout_col);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
@@ -503,7 +507,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				break;
 			}
 			$puce = "puce-$puce.gif";
-
+			
 			$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 14px;'>";
 
 			//$s. = "<a href=\"articles.php3?id_article=$id_article\" title=\"$title\">";
@@ -531,18 +535,32 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s = "<div class='liste_clip' style='width: 100px;'>$s</div>";
 			
 			$vals[] = $s;
+			
+			if ($options == "avancees") {
+				$vals[] = "<b>"._T('info_numero_abbreviation')."$id_article</b>";
+			}
+			
 
 			$table[] = $vals;
 		}
 		spip_free_result($result);
 
-		if ($afficher_auteurs) {
-			$largeurs = array('', 100, 100);
-			$styles = array('arial2', 'arial1', 'arial1');
-		}
-		else {
-			$largeurs = array('', 100);
-			$styles = array('arial2', 'arial1');
+		if ($options == "avancees") { // Afficher le numero (JMB)
+			if ($afficher_auteurs) {
+				$largeurs = array('', 80, 100, 30);
+				$styles = array('arial2', 'arial1', 'arial1', 'arial1');
+			} else {
+				$largeurs = array('', 100, 30);
+				$styles = array('arial2', 'arial1', 'arial1');
+			}
+		} else {
+			if ($afficher_auteurs) {
+				$largeurs = array('', 100, 100);
+				$styles = array('arial2', 'arial1', 'arial1');
+			} else {
+				$largeurs = array('', 100);
+				$styles = array('arial2', 'arial1');
+			}
 		}
 		afficher_liste($largeurs, $table, $styles);
 
@@ -562,6 +580,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global $connect_id_auteur, $spip_lang_right, $spip_lang_left, $dir_lang, $couleur_claire, $couleur_foncee;
+	global $options;
+	
 
 
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
@@ -570,8 +590,9 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
 		else $langue_defaut = lire_meta('langue_site');
 	}
-
-	$tranches = afficher_tranches_requete($requete, 2);
+	
+	if ($options == "avancees") $tranches = afficher_tranches_requete($requete, 3);
+	else  $tranches = afficher_tranches_requete($requete, 2);
 
 	if (strlen($tranches)) {
 
@@ -636,13 +657,25 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			else
 				$s .= _T('info_a_valider');
 			$vals[] = $s;
+			
+			if ($options == "avancees") {
+				$vals[] = "<b>"._T('info_numero_abbreviation')."$id_breve</b>";
+			}
+			
 			$table[] = $vals;
 		}
 		spip_free_result($result);
 
-		if ($affrub) $largeurs = array('', '170');
-		else  $largeurs = array('', '100');
-		$styles = array('arial11', 'arial1');
+		if ($options == "avancees") {
+			if ($affrub) $largeurs = array('', '170', '30');
+			else  $largeurs = array('', '100', '30');
+			$styles = array('arial11', 'arial1', 'arial1');
+		} else {
+			if ($affrub) $largeurs = array('', '170');
+			else  $largeurs = array('', '100');
+			$styles = array('arial11', 'arial1');
+		}
+
 		afficher_liste($largeurs, $table, $styles);
 
 		echo "</table></div>";
