@@ -737,6 +737,39 @@ function afficher_documents_colonne($id_article) {
 			}
 		}
 	
+
+		/// Ajouter nouvelle image
+		echo "\n<p>";
+		debut_cadre_relief();
+		
+		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: center; color: black;'>";	
+
+		echo bouton_block_invisible("ajouter_image");
+
+
+		echo "<b><font size=1>AJOUTER UNE IMAGE</font></b>";
+		echo "</div>\n";
+		
+		echo debut_block_invisible("ajouter_image");
+		echo "<font size=1>";
+		echo "<b>Vous pouvez installer des images aux formats JPEG, GIF et PNG.</b>";
+		echo "</font>";
+				
+		$link = $image_link;
+		$link->addVar('redirect', $redirect_url);
+		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+		$link->addVar('hash_id_auteur', $connect_id_auteur);
+		$link->addVar('ajout_doc', 'oui');
+		$link->addVar('mode', 'vignette');
+		
+		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
+		echo fin_block();
+	
+		echo "</font>\n";
+		
+		fin_cadre_relief();
+
+
 		if ($documents_lies) {
 		
 			reset($documents_lies);
@@ -748,21 +781,20 @@ function afficher_documents_colonne($id_article) {
 
 	
 	
-		/// Ajouter nouveau document/image
-		echo "<p><div style='border: 1px solid black; padding: 4px; background-color: #e4e4e4;'>\n";
+		/// Ajouter nouveau document
+		echo "\n<p>";
+		debut_cadre_relief();
 		
 		echo "<div style='padding: 2px; border : dashed 1px black; background-color: #aaaaaa; text-align: center; color: black;'>";	
 
-		echo bouton_block_invisible("ajouter_image");
+		echo bouton_block_invisible("ajouter_document");
 
 
-		echo "<b><font size=1>AJOUTER UNE IMAGE<br> OU UN DOCUMENT</font></b>";
+		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
 		echo "</div>\n";
 		
-		echo debut_block_invisible("ajouter_image");
-		echo "<p><font size=1><div style='border: 1px solid #E86519; padding: 5px; background-color: white;'>";
-		echo propre("Vous pouvez ins&eacute;rer les images et les documents que vous associez &agrave; votre article &agrave; l'int&eacute;rieur du texte. Pour cela, vous pouvez utiliser\n- les raccourcis de type &lt;IMGxx|yy&gt; pour ins&eacute;rer uniquement l'image ou la vignette,\n- les raccourcis de type &lt;DOCxxx|yy&gt; pour compl&eacute;ter l'affichage de la vignette du titre du document, de son descriptif, et &eacute;ventuellement de la taille du document joint.");	
-		echo "</div>";
+		echo debut_block_invisible("ajouter_document");
+		echo "<p><font size=1>";
 		echo "<p><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
 		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 		$result_types_docs = mysql_query($query_types_docs);
@@ -779,13 +811,14 @@ function afficher_documents_colonne($id_article) {
 		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('ajout_doc', 'oui');
+		$link->addVar('mode', 'document');
 		
 		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
 		echo fin_block();
 		
 		echo "</font>\n";
 		
-		echo "</div>";
+		fin_cadre_relief();
 	}
 
 }
@@ -883,8 +916,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('id_document', $id_document);
 			$link->addVar('mode', 'vignette');
 
+
 			$block = "doc_vignette $id_document";
-			echo bouton_block_invisible($block);
+			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
 			echo "<b>Vignette par d&eacute;faut</b>";
 			//echo "<font size=1 face='arial,helvetica,sans-serif' color='#666666'><div align=left>&lt;img$id_document|left&gt;</div><div align=center>&lt;img$id_document|center&gt;</div><div align=right>&lt;img$id_document|right&gt;</div></font>\n";
 	
