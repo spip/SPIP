@@ -426,8 +426,9 @@ fin_cadre_trait_couleur();
 	echo "<p>";
 }
 
-###### ATTENTION EXPERIMENTAL:
 
+/*
+###### PAS D'INTERFACE DE CONFIG POUR PROTEGER "/IMG"
 //
 // Creer fichier .htaccess dans les répertoires de documents 
 //
@@ -455,6 +456,7 @@ fin_cadre_trait_couleur();
 
 	echo "<p>";
 }
+*/
 
 
 echo "</form>";
