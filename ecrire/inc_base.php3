@@ -138,6 +138,7 @@ function creer_base() {
 		largeur integer NOT NULL,
 		hauteur integer NOT NULL,
 		mode ENUM('vignette', 'document') NOT NULL,
+		inclus VARCHAR(3) DEFAULT 'non',
 		maj TIMESTAMP,
 		PRIMARY KEY (id_document),
 		KEY id_vignette (id_vignette),
@@ -750,6 +751,10 @@ function maj_base() {
 		$query = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
 		$result = mysql_query($query);
 	}
+
+	if ($version_installee < 1.415) {
+		mysql_query("ALTER TABLE spip_documents ADD inclus VARCHAR(3) DEFAULT 'non'");
+	}	
 
 	//
 	// Mettre a jour le numero de version installee
