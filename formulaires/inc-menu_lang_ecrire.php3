@@ -9,7 +9,9 @@ $balise_MENU_LANG_ECRIRE_collecte = array('menu_lang');
 
 // s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
 function balise_MENU_LANG_ECRIRE_stat ($args, $filtres) {
-	if (!strpos(lire_meta('langues_proposees'),',')) return '';
+	global $all_langs;
+	include_ecrire('inc_lang.php3');
+	if (!strpos($all_langs,',')) return '';
 	return $args;
 }
 
