@@ -135,11 +135,13 @@ function afficher_logo($racine, $titre, $logo) {
 			echo "\n <div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='"._T('bouton_telecharger')."' CLASS='fondo' style='font-size:9px;'></div>";
 		} else {
 
-			$myDir = opendir("upload");
+			$myDir = opendir(_DIR_TRANSFERT);
 			while($entryName = readdir($myDir)){
 				if (!ereg("^\.",$entryName) AND eregi("(gif|jpg|png)$",$entryName)){
 					$entryName = addslashes($entryName);
-					$afficher .= "\n<OPTION VALUE='ecrire/upload/$entryName'>$entryName";
+					$afficher .= "\n<OPTION VALUE='" .
+						_DIR_TRANSFERT .
+						"$entryName'>$entryName";
 				}
 			}
 			closedir($myDir);
