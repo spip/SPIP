@@ -172,7 +172,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	|| ($GLOBALS['spip_lang'] != ($lang = lire_meta('langue_site')))) {
 		include_ecrire('inc_lang.php3');
 		lang_select($lang);
-		$lang_select = true; // pour lang_dselect ci-dessous
+		$lang_select = true; // pour lang_dselect en sortie
 	}
 
 	// @header ne marchera qu'en output_buffering
@@ -186,11 +186,10 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais,
 	$use_cache, $fond, true);
 
-	// Et enfin le contenu...
-	eval('?' . '>' . $page['texte']);
+	$page['lang_select'] = $lang_select;
 
-	if ($lang_select)
-		lang_dselect();
+	// Retourner le contenu...
+	return $page;
 
 }
 

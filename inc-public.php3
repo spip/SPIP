@@ -4,13 +4,16 @@
 if (defined("_INC_PUBLIC")) {
 	$page = inclure_page($fond, $delais, $contexte_inclus, $fichier_inclus);
 
-	/* if ($page['process_ins']) {
-		eval('?' . '>' .  $page['texte']); 
-	} else { 
-		echo $page['texte']; 
-	} */
+	if ($GLOBALS['afficher_page'] == 'oui'
+	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
+		@header('Content-Type: text/plain; charset='.lire_meta('charset'));
+		echo $page['texte'];
+	} else {
+		eval('?' . '>' . $page['texte']);
+	}
 
-	eval('?' . '>' .  $page['texte']); 
+	if ($page['lang_select'])
+		lang_dselect();
 }
 
 // Premier appel inc-public
