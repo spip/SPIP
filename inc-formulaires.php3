@@ -295,19 +295,19 @@ function formulaire_inscription() {
 	global $mail_inscription;
 	global $nom_inscription;
 	
-
+/*
 	include_ecrire("inc_connect.php3");
-	include_ecrire("inc_meta.php3");
+	include_ecrire("inc_meta.php3");*/
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
 
 	if ($inscriptions_ecrire) {
 		$ecrire = "ecrire/";
 		$statut = "nouveau";
 	}
-	else if (forums_sur_abo() ) {
+/*	else if (forums_sur_abo()) {
 		$ecrire = "";
 		$statut = "6forum";
-	}
+	}*/
 	else {
 		return; // tentative de hack...?
 	}
