@@ -13,7 +13,9 @@ if ($cookie_session == "non") {
 }
 else if ($essai_login == "oui") {
 	// verifie l'auteur
-	$md5pass = md5($session_password);
+	if ($session_password_md5) $md5pass = $session_password_md5;
+	else $md5pass = md5($session_password);
+
 	$login = addslashes($session_login);
 	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass'";
 	$result = spip_query($query);
