@@ -31,7 +31,7 @@
 <div>
 			<input type="hidden" name="session_login_hidden" value="(#HTTP_VARS{login})" />
 <script type="text/javascript"><!--
-document.write("<:login_login:>&nbsp;<b>[(#HTTP_VARS{login})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non&amp;url=[(#HTTP_VARS{url})]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
+document.write("<:login_login:>&nbsp;<b>[(#HTTP_VARS{login})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non&amp;url=[(#HTTP_VARS{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
 //--></script>
 <noscript>
 	<font face="Georgia, Garamond, Times, serif" size="3">
