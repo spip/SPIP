@@ -58,12 +58,15 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 
 	$link = new Link;
 
-	$link->delVar('var_debug');
-	$link->delVar('var_debug_objet');
-	$link->delVar('var_debug_affiche');
+	$link->delVar('var_mode');
+	$link->delVar('var_mode_objet');
+	$link->delVar('var_mode_affiche');
 # pour avoir toujours un "?" dans la balise 
-	$link->addVar('var_rien',0); 
-
+	$action = $link->getUrl();
+	if (!$action ||($action == './'))
+		$action = lire_meta('adresse_site');
+	$action = quote_amp($action . ((strpos($action, '?') === false) ? '?' : '&'));
+	spip_log($action);
   // en preview pas de stat ni de debug
 	if (!$var_preview) {
 		// Bouton statistiques
@@ -82,19 +85,18 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 		}
 
 		// Bouton de debug
-		if ($forcer_debug
-		OR $GLOBALS['bouton_admin_debug']
-		OR ($GLOBALS['var_debug'] == 'oui'
-		AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug'])) {
-		  if (!$debug = $GLOBALS['code_activation_debug'])
-			 if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
-				$debug = 'oui';
-		}
+		$debug = (($forcer_debug
+			  OR $GLOBALS['bouton_admin_debug']
+			  OR ($GLOBALS['var_mode'] == 'debug'
+			      AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug']))
+		  	AND ($GLOBALS['code_activation_debug'] == 'oui' OR
+			     ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) ?
+		  'debug' : '';
 	}
 
 	return array('formulaire_admin', 0,
 		     array(
-			   'action' => quote_amp($link->getUrl()),
+			   'action' => $action,
 			   'id_article' => $id_article,
 			   'id_auteur' => $id_auteur,
 			   'id_breve' => $id_breve,

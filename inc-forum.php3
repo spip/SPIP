@@ -351,7 +351,7 @@ function forum_dyn($titre, $table, $accepter_forum, $idr, $idf, $ida, $idb, $ids
 	// memoriser l'URL courante pour y revenir apres envoi du message
 	// aux appels suivants, reconduire la valeur.
 	if ($retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
-	  $retour_forum = ereg_replace('&var_debug=recalcul','',$retour_forum);
+	  $retour_forum = ereg_replace('&var_mode=recalcul','',$retour_forum);
 	else {
 	  if (!$retour_forum = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
 	    $retour_forum = $url;

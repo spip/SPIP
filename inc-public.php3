@@ -63,12 +63,12 @@ else {
 	include_local('inc-admin.php3');
 
 	//  refus du debug si pas dans les options generales ni admin connecte
-	if ($var_debug=='oui') {
-	  if (($code_activation_debug == $var_debug)
+	if ($var_mode=='debug') {
+	  if (($code_activation_debug == 'oui')
 	      OR $auteur_session['statut'] == '0minirezo')
 	    spip_log('debug !');
 	  else
-	    $var_debug = false; 
+	    $var_mode = false; 
 	}
 
 	// est-on admin ?
@@ -80,7 +80,7 @@ else {
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
 	// Interdire au client de cacher un login, un admin ou un recalcul
-	if ($flag_dynamique OR $var_debug 
+	if ($flag_dynamique OR $var_mode 
 			OR $HTTP_COOKIE_VARS['spip_admin']) {
 			@header("Cache-Control: no-cache,must-revalidate");
 			@header("Pragma: no-cache");
@@ -95,7 +95,7 @@ else {
 		// Faudra-t-il post-traiter la page ?
 
 	define('spip_active_ob', $flag_ob AND
-		($var_debug == 'oui' OR $var_recherche OR $affiche_boutons_admin));
+		($var_mode == 'debug' OR $var_recherche OR $affiche_boutons_admin));
 
 		// Cas d'une page contenant uniquement du HTML :
 
@@ -134,9 +134,9 @@ else {
 		}
 
 		// Passer la main au debuggueur le cas echeant 
-		if ($var_debug == 'oui') {
+		if ($var_mode == 'debug') {
 			include_ecrire("inc_debug_sql.php3");
-			debug_dumpfile('',$var_debug_objet,$var_debug_affiche);
+			debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
 			exit;
 		} else if (count($tableau_des_erreurs) > 0
 		AND $affiche_boutons_admin)

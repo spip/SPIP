@@ -511,8 +511,8 @@ function verifier_lang_url() {
 	{
 		$destination = new Link;
 		$destination->addvar('lang', $lang_demandee);
-		if ($GLOBALS['recalcul'] == 'oui')
-			$destination->addvar('recalcul', 'oui');
+		if ($d = $GLOBALS['var_mode'])
+			$destination->addvar('var_mode', $d);
 		redirige_par_entete($destination->getUrl());
 	}
 

@@ -66,7 +66,7 @@ function ecrire_fichier ($fichier, $contenu) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
-	if ($GLOBALS['var_preview'] OR $GLOBALS['var_debug']
+	if ($GLOBALS['var_preview'] OR ($GLOBALS['var_mode'] == 'debug')
 	OR defined('spip_erreur_fatale'))
 		return;
 
