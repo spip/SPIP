@@ -2,6 +2,23 @@
 
 include ("inc.php3");
 
+function texte_upload($inclus){
+	$myDir = opendir("upload");
+	while($entryName = readdir($myDir)) {
+		if (is_file("upload/".$entryName) AND !($entryName=='remove.txt')) {
+			if (ereg("\.([^.]+)$", $entryName, $match)) {
+				$ext = strtolower($match[1]);
+				$req = "SELECT * FROM spip_types_documents WHERE extension='$ext'";
+				if ($inclus)
+					$req .= " AND inclus='$inclus'";
+				if (@mysql_fetch_array(mysql_query($req)))
+					$texte_upload .= "\n<OPTION VALUE=\"ecrire/upload/$entryName\">$entryName";
+			}
+		}
+	}
+	closedir($myDir);
+	return ($texte_upload);
+}
 
 function afficher_document($id_document) {
 	global $connect_id_auteur, $connect_statut;
@@ -132,14 +149,7 @@ function afficher_document($id_document) {
 		}
 		if ($GLOBALS['connect_statut'] == '0minirezo') {
 			echo "<br>";
-			$texte_upload = '';
-			$myDir = opendir("upload");
-			while($entryName = readdir($myDir)) {
-				if (ereg('\.(gif|jpe?g|png)$', $entryName)) {
-					$texte_upload .= "\n<OPTION VALUE=\"ecrire/upload/$entryName\">$entryName";
-				}
-			}
-			closedir($myDir);
+			$texte_upload = texte_upload("image");
 			if ($texte_upload) {
 				echo "\nS&eacute;lectionner un fichier&nbsp;:";
 				echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
@@ -252,7 +262,7 @@ $docs_affiches = "";
 
 $query = "SELECT lien.id_document, documents.id_vignette FROM spip_documents_articles AS lien, spip_documents AS documents ".
 	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".
-	"AND documents.mode='document' AND documents.titre!='' ORDER BY documents.titre";
+	"AND documents.mode='document' ORDER BY documents.titre";
 $result = mysql_query($query);
 while ($row = mysql_fetch_array($result)) {
 	$id_document = $row[0];
@@ -273,12 +283,12 @@ echo "</td></tr>\n";
 
 if ($docs_affiches) $docs_affiches = "AND lien.id_document NOT IN (".join(',', $docs_affiches).") ";
 
-$query = "SELECT lien.id_document FROM spip_documents_articles AS lien, spip_documents AS documents ".
+$query = "SELECT lien.id_document as id_document FROM spip_documents_articles AS lien, spip_documents AS documents ".
 	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".$docs_affiches.
 	"AND documents.mode='vignette' AND documents.titre!='' ORDER BY documents.titre";
 $result = mysql_query($query);
 while ($row = mysql_fetch_array($result)) {
-	$id_document = $row[0];
+	$id_document = $row['id_document'];
 
 	echo "<tr><td>\n";
 	afficher_document($id_document);
@@ -310,31 +320,20 @@ echo "<INPUT NAME='id_article' TYPE=Hidden VALUE=$id_article>\n";
 echo "<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE=$connect_id_auteur>\n";
 echo "<INPUT NAME='hash' TYPE=Hidden VALUE=$hash>\n";
 echo "<INPUT NAME='ajout_doc' TYPE=Hidden VALUE='oui'>\n";
-if (tester_upload()) {
-	echo "Ajouter une image ou un document&nbsp;:";
-	echo aide("artimg");
-	echo "<br><small><INPUT NAME='image' TYPE=File CLASS='forml'></small>";
-	echo "   <INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'>";
-}
-if ($connect_statut == '0minirezo') {
-	$myDir = opendir("upload");
-	while($entryName = readdir($myDir)){
-		if (!ereg("^\.", $entryName) AND eregi("(gif|jpg|png)$", $entryName)) {
-			$entryName = addslashes($entryName);
-			$afficher .= "\n<OPTION VALUE='ecrire/upload/$entryName'>$entryName</OPTION>";
-		}
-	}
-	closedir($myDir);
-
-	if (strlen($afficher) > 10){
+echo "Ajouter une image ou un document&nbsp;:";
+echo aide("artimg");
+if (tester_upload() AND ($connect_statut == '0minirezo')) {
+	$texte_upload = texte_upload("");
+	if ($texte_upload){
 		echo "\nS&eacute;lectionner un fichier&nbsp;:";
 		echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
-		echo $afficher;
+		echo $texte_upload;
 		echo "\n</SELECT>";
 		echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='Choisir' CLASS='fondo'>";
 	}
-	else if (!tester_upload()) {
-		echo "Vous devez installer des images dans le dossier /ecrire/upload pour pouvoir les s&eacute;lectionner ici.<p>";
+	else {
+		echo "<br><small><INPUT NAME='image' TYPE=File CLASS='forml'></small>";
+		echo "   <INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'>";
 	}
 }
 echo "</FORM>";

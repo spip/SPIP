@@ -92,20 +92,19 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		exit;
 	}
 
-	if (ereg("\.([^.]+)$", $orig, $match)) {
+	if (ereg("\.([^.]+)$", $source, $match)) {
 		$ext = strtolower($match[1]);
 	}
-	$query = "SELECT * FROM spip_types_documents WHERE extension='$ext'";
+	$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
+
+	if ($mode == 'vignette')
+		$query .= " AND inclus='image'";
+
 	$result = mysql_query($query);
 	if ($row = @mysql_fetch_array($result)) {
 		$id_type = $row['id_type'];
-		$type_inclus = $row['inclus'];
-		$type_upload = $row['upload'];
-	}
-
-	// Ne pas accepter les types non autorises
-	if ($type_upload != 'oui') return;
-	if ($type_inclus == 'non' AND $mode == 'vignette') return;
+	} else
+		return;
 
 	//
 	// Preparation
@@ -198,6 +197,7 @@ if ($doc_supp) {
 		$fichier = $row['fichier'];
 		mysql_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
 		mysql_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
+		mysql_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
 		unlink($fichier);
 	}
 }
