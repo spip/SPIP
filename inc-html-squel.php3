@@ -6,8 +6,8 @@ define("_INC_HTML_SQUEL", "1");
 
 # Ce fichier doit IMPERATIVEMENT contenir la fonction "parser"
 # qui transforme un squelette en un tableau d'objets de classe Boucle
-# il est chargé par un include calculé dans inc-calcul-squel
-# pour permettre différentes syntaxes en entrée
+# il est charge par un include calcule dans inc-calcul-squel
+# pour permettre differentes syntaxes en entree
 
 define(NOM_DE_BOUCLE, "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define(NOM_DE_CHAMP, "#((" . NOM_DE_BOUCLE . ":)?([A-Z_]+))(\*?)");
@@ -15,16 +15,20 @@ define(CHAMP_ETENDU, '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^]\[)]*)\)([^]\[]*)\]')
 define(PARAM_DE_BOUCLE,'\{[^}]*\}');
 define(TYPE_DE_BOUCLE, "[^)]*");
 define(BALISE_DE_BOUCLE,
-       "^<BOUCLE(" .
-       NOM_DE_BOUCLE . 
-       ')[[:space:]]*\((' . 
-       TYPE_DE_BOUCLE .
-       ')\)[[:space:]]*(([[:space:]]*' .
-       PARAM_DE_BOUCLE . 
-       ')*)[[:space:]]*>');
+	"^<BOUCLE(" .
+	NOM_DE_BOUCLE .
+	')[[:space:]]*\((' .
+	TYPE_DE_BOUCLE .
+	')\)[[:space:]]*(([[:space:]]*' .
+	PARAM_DE_BOUCLE .
+	')*)[[:space:]]*>');
+define(BALISE_INCLURE,"<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)([^>]*)>");
+
+define(DEBUT_DE_BOUCLE,'/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
+
 
 function parser_texte($texte) {
-	while (ereg("<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)([^>]*)>", $texte, $match)) {
+	while (ereg(BALISE_INCLURE, $texte, $match)) {
 		$s = $match[0];
 		$p = strpos($texte, $s);
 		$debut = substr($texte, 0, $p);
@@ -76,7 +80,9 @@ function parser_champs($texte) {
 		$champ->nom_champ = $regs[1];
 
 		// traiter #CHAMP*
-		if ($regs[4]) $champ->etoile = true;
+		if ($regs[4])
+			$champ->etoile = true;
+
 		$result[] = $champ;
 	}
 	if (!$texte)
@@ -93,78 +99,76 @@ function parser_champs_etendus($debut) {
 	return parser_champs_interieurs($debut, $sep, array());
 }
 
-function parser_champs_exterieurs($debut, $sep, $nested)
-{
-  $res = array();
-  foreach (split("%$sep",$debut) as $v)
-    {
-      if (!ereg("^([0-9]+)@(.*)$", $v, $m))
-	$res = array_merge($res, parser_champs($v));
-      else
-	{
-	  if ($m[2] == 'Object')
-	    $res[]= $nested[$m[1]];
-	  else
-	    $res = array_merge($res, parser_champs($m[2]));
+## TODO: cette fonction du parser buggue avec un triple emboitement
+## [x[y[z(#DATE|jour)t](#DATE|mois)u](#DATE|annee)v]
+function parser_champs_exterieurs($debut, $sep, $nested) {
+	#echo "DEBUT: $debut<br>\nSEP:$sep<br>\n";
+	$res = array();
+	foreach (split("%$sep",$debut) as $v) {
+		if (!ereg("^([0-9]+)@(.*)$", $v, $m))
+			$res = array_merge($res, parser_champs($v));
+		else if ($m[2] == 'Object') {
+			$res[]= $nested[$m[1]];
+			#echo "NESTED : ";
+			#var_dump($nested[$m[1]]);
+			#echo "<br>\n";
+		} else
+			$res = array_merge($res, parser_champs($m[2]));
 	}
-    }
-  return $res;
+	return $res;
 }
-	
 
-function parser_champs_interieurs($texte, $sep, $nested)
-{
-  global $champs_traitement;
-  $result = array();
-  if (!$texte) return $result;
-  $i = 0;
-  while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
-	  $nom_champ = $regs[4];
-	  $fonctions = $regs[6];
-	  $champ = new Champ;
-	  $champ->nom_champ = $regs[2];
-	  if ($regs[5]) $champ->etoile = true;	## a verifier ???
-	  $champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
+function parser_champs_interieurs($texte, $sep, $nested) {
+	$result = array();
+	if (!$texte)
+		return $result;
 
-	  $champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
-	  if (!$regs[5] AND $champs_traitement[$nom_champ]) {
-	    reset($champs_traitement[$nom_champ]);
-	    while (list(, $f) = each($champs_traitement[$nom_champ])) {
-	      $champ->fonctions[]= $f;
-	    }
-	  }
-	  if ($fonctions) {
-	    $fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
-	    reset($fonctions);
-	    while (list(, $f) = each($fonctions)) $champ->fonctions[]= $f;
-	  }
-	  $p = strpos($texte, $regs[0]);
-	  if ($p) {
-	    $result[$i] = substr($texte, 0, $p);
-	    $i++;
-	  }
-	  $result[$i] = $champ;
-	  $i++;
-	  $texte = $regs[8];
-  }
-  if ($texte) {$result[$i] = $texte;$i++;}
-  $x ='';
-  $j=0;
-  while($j < $i) {$x .= "%#$sep$j@" . $result[$j];$j++;}
-  if (ereg(CHAMP_ETENDU, $x)) 
-    return (parser_champs_interieurs($x, "#$sep", $result));
-  $res2 = array();
-  foreach ($result as $k => $v)
-    {
-      if (is_object($v))
-	$res2[]= $v;
-      else
-	{ $c = parser_champs_exterieurs($v,$sep,$nested);
-	  reset($c);
-	  while (list(, $val) = each($c)) $res2[] = $val;
+	$i = 0;
+	while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
+		$nom_champ = $regs[4];
+		$fonctions = $regs[6];
+		$champ = new Champ;
+		$champ->nom_champ = $regs[2];
+		if ($regs[5])
+			$champ->etoile = true;
+
+		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
+		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
+
+		if ($fonctions) {
+			$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
+			foreach($fonctions as $f) $champ->fonctions[]= $f;
+		}
+
+		$p = strpos($texte, $regs[0]);
+		if ($p)
+			$result[$i++] = substr($texte, 0, $p);
+
+		$result[$i] = $champ;
+		$i++;
+		$texte = $regs[8];
 	}
-    }
-  return $res2;
+	if ($texte)
+		$result[$i++] = $texte;
+
+	$x ='';
+	$j=0;
+	while($j < $i)
+		$x .= "%#$sep$j@" . $result[$j++];
+
+	if (ereg(CHAMP_ETENDU, $x)) 
+		return (parser_champs_interieurs($x, "#$sep", $result));
+	$res2 = array();
+	foreach ($result as $k => $v) {
+		if (is_object($v))
+			$res2[]= $v;
+		else {
+			$c = parser_champs_exterieurs($v,$sep,$nested);
+			foreach($c as $val)
+				$res2[] = $val;
+		}
+	}
+	return $res2;
 }
 
 function parser_param($params, &$result, $idb) {
@@ -217,99 +221,112 @@ function parser_param($params, &$result, $idb) {
 
 function parser($texte, $id_parent, &$boucles) {
 
-  $all_res = array();
-  while (($p = strpos($texte, '<BOUCLE')) ||
-	 (substr($texte, 0, strlen('<BOUCLE')) == '<BOUCLE'))
-    {
+	$all_res = array();
 
-      $debut = substr($texte, 0, $p);
-      $milieu = substr($texte, $p);
+	while (preg_match(DEBUT_DE_BOUCLE, $texte, $regs)) {
+		$nom_boucle = $regs[1].$regs[2];
+		$p = strpos($texte, '<BOUCLE'.$nom_boucle);
 
-      if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
-	include_local("inc-debug-squel.php3");
-	erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu,'');
-      }
-      $id_boucle = $match[1];
+		//
+		// Recuperer la partie principale de la boucle
+		//
+		$debut = substr($texte, 0, $p);
+		$milieu = substr($texte, $p);
+		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
+			include_local("inc-debug-squel.php3");
+			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu,'');
+		}
+		$id_boucle = $match[1];
 
-      $result = new Boucle;
-      $result->id_parent = $id_parent;
-      $result->id_boucle = $id_boucle;
+		$result = new Boucle;
+		$result->id_parent = $id_parent;
+		$result->id_boucle = $id_boucle;
 
-      $type = strtolower($match[2]);
-      if (substr($type, 0, 6) == 'boucle') {
-	// Récursion: pas de paramètre, donc presque rien à faire  
-	$result->type_requete = 'boucle';
-	$result->param = substr($match[2], 6);
-      } else {
-	if ($type == 'sites') $type = 'syndication';
-	$result->type_requete = $type;
-	parser_param($match[3], $result, $id_boucle);
-      }
+		$type = strtolower($match[2]);
+		if ($type == 'sites') $type = 'syndication'; # alias
 
-	$s = "<B$id_boucle>";
-	$p = strpos($debut, $s);
-	if ($p || (substr($debut, 0, strlen($s)) == $s)) {
-		$result->cond_avant = substr($debut, $p + strlen($s));
-		$debut = substr($debut, 0, $p);
+		//
+		// Recuperer les criteres de la boucle (sauf boucle recursive)
+		//
+		if (substr($type, 0, 6) == 'boucle') {
+			$result->type_requete = 'boucle';
+			$result->param = substr($match[2], 6);
+		} else {
+			$result->type_requete = $type;
+			parser_param($match[3], $result, $id_boucle);
+		}
+
+		//
+		// Recuperer la partie conditionnelle avant
+		//
+		$s = "<B$id_boucle>";
+		$p = strpos($debut, $s);
+		if ($p || (substr($debut, 0, strlen($s)) == $s)) {
+			$result->cond_avant = substr($debut, $p + strlen($s));
+			$debut = substr($debut, 0, $p);
+		}
+		$milieu = substr($milieu, strlen($match[0]));
+		if (strpos($milieu, $s)) {
+			include_local("inc-debug-squel.php3");
+			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
+				$id_boucle . 
+				_L('&nbsp;: balise B en aval'));
+			exit;
+		}
+
+		//
+		// Recuperer la fin :
+		//
+		$s = "</BOUCLE$id_boucle>";
+		$p = strpos($milieu, $s);
+		if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) {
+			include_local("inc-debug-squel.php3");
+			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
+				_T('erreur_boucle_fermant',
+				array('id'=>$id_boucle)));
+			exit;
+		}
+		$texte = substr($milieu, $p + strlen($s));
+		$milieu = substr($milieu, 0, $p);
+
+		//
+		// 1. Recuperer la partie conditionnelle apres
+		//
+		$s = "</B$id_boucle>";
+		$p = strpos($texte, $s);
+		if ($p || (substr($texte, 0, strlen($s)) == $s)) {
+			$result->cond_fin = substr($texte, 0, $p);
+			$texte = substr($texte, $p + strlen($s));
+		}
+
+		//
+		// 2. Recuperer la partie alternative
+		//
+		$s = "<//B$id_boucle>";
+		$p = strpos($texte, $s);
+		if ($p || (substr($texte, 0, strlen($s)) == $s)) {
+			$result->cond_altern = substr($texte, 0, $p);
+			$texte = substr($texte, $p + strlen($s));
+		}
+
+		$result->cond_avant = parser($result->cond_avant, $id_parent,$boucles);
+		$result->cond_apres = parser($result->cond_fin, $id_parent,$boucles);
+		$result->cond_altern = parser($result->cond_altern,$id_parent,$boucles);
+		$result->milieu = parser($milieu, $id_boucle,$boucles);
+
+		$all_res = array_merge($all_res, parser_champs_etendus($debut));
+		$all_res[] = $result;
+		if ($boucles[$id_boucle]) {
+			include_local("inc-debug-squel.php3");
+			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
+				_T('erreur_boucle_double',
+				array('id'=>$id_boucle)));
+			exit;
+		}
+		$boucles[$id_boucle] = $result;
 	}
 
-	$milieu = substr($milieu, strlen($match[0]));
-
-	if (strpos($milieu, $s))
-	  {
-	    include_local("inc-debug-squel.php3");
-	    erreur_squelette(_T('erreur_boucle_syntaxe'), '',
-			     $id_boucle . 
-			     _L('&nbsp;: balise B en aval'));
-	    exit;
-	  }
-
-	$s = "</BOUCLE$id_boucle>";
-	$p = strpos($milieu, $s);
-	if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) 
-	  {
-	    include_local("inc-debug-squel.php3");
-	    erreur_squelette(_T('erreur_boucle_syntaxe'), '',
-				  _T('erreur_boucle_fermant',
-				     array('id'=>$id_boucle)));
-	    exit;
-	  }
-
-	$texte = substr($milieu, $p + strlen($s));
-	$milieu = substr($milieu, 0, $p);
-
-	$s = "</B$id_boucle>";
-	$p = strpos($texte, $s);
-	if ($p || (substr($texte, 0, strlen($s)) == $s)) {
-		$result->cond_fin = substr($texte, 0, $p);
-		$texte = substr($texte, $p + strlen($s));
-	}
-
-	$s = "<//B$id_boucle>";
-	$p = strpos($texte, $s);
-	if ($p || (substr($texte, 0, strlen($s)) == $s)) {
-		$result->cond_altern = substr($texte, 0, $p);
-		$texte = substr($texte, $p + strlen($s));
-	}
-
-	$result->cond_avant = parser($result->cond_avant, $id_parent,$boucles);
-	$result->cond_apres = parser($result->cond_fin, $id_parent,$boucles);
-	$result->cond_altern = parser($result->cond_altern, $id_parent,$boucles);
-	$result->milieu = parser($milieu, $id_boucle,$boucles);
-	
-	$all_res = array_merge($all_res, parser_champs_etendus($debut));
-	$all_res[] = $result;
-	if ($boucles[$id_boucle])
-	  {
-	    include_local("inc-debug-squel.php3");
-	    erreur_squelette(_T('erreur_boucle_syntaxe'), '',
-				  _T('erreur_boucle_double',
-				     array('id'=>$id_boucle)));
-	    exit;
-	  }
-	$boucles[$id_boucle] = $result;
-    }
-  return array_merge($all_res, parser_champs_etendus($texte));
+	return array_merge($all_res, parser_champs_etendus($texte));
 }
 
 ?>
