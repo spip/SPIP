@@ -52,7 +52,7 @@ spip_query("DROP TABLE spip_visites_articles");
 spip_query("DROP TABLE spip_visites_temp");
 spip_query("DROP TABLE spip_test");
 
-@unlink(".htaccess");
+@unlink(_ACCESS_FILE_NAME);
 @unlink("inc_connect.php3");
 
 @header("Location: ./");

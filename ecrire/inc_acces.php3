@@ -86,7 +86,7 @@ function ecrire_logins($fichier, $tableau_logins) {
 
 
 function ecrire_acces() {
-	$htaccess = $GLOBALS['dir_ecrire'].'.htaccess';
+	$htaccess = _DIR_RESTREINT . _ACCESS_FILE_NAME;
 	$htpasswd = _DIR_SESSIONS . '.htpasswd';
 
 	// si .htaccess existe, outrepasser spip_meta
@@ -130,20 +130,18 @@ function generer_htpass($pass) {
 
 function gerer_htaccess()
 {
-  $mode = lire_meta('creer_htaccess');
+	$mode = lire_meta('creer_htaccess');
 	$r = spip_query("SELECT extension FROM spip_types_documents");
 	while ($e = spip_fetch_array($r)) {
-	  spip_log(_DIR_DOC . $e['extension']);
 		if (is_dir($dir = _DIR_DOC . $e['extension'])) {
 			if ($mode == 'oui')
 				verifier_htaccess($dir);
-			else @unlink("$dir/.htaccess");
+			else @unlink("$dir/" . _ACCESS_FILE_NAME);
 		}
 	}
 	return $mode;
 }
 
 initialiser_sel();
-
 
 ?>

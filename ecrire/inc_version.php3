@@ -258,7 +258,9 @@ define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 define('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
 define('_DIR_TeX', _DIR_IMG . "TeX/");
 
-define('_DIR_VIGNETTES', _DIR_IMG . "vignettes/"); 
+// qq chaines standard
+
+define('_ACCESS_FILE_NAME', '.htaccess');
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -452,7 +454,7 @@ function spip_query($query) {
 		if (!$GLOBALS['db_ok'])
 			return;
 		if ($GLOBALS['spip_connect_version'] < 0.1) {
-			if (!ESPACE_RESTREINT) {
+			if (!_DIR_RESTREINT) {
 				$GLOBALS['db_ok'] = false;
 				return;
 			}
@@ -946,10 +948,12 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 // Verifier la presence des .htaccess
 //
 function verifier_htaccess($rep) {
-	if (!@file_exists("$rep/.htaccess")) {
-		spip_log("creation $rep/.htaccess");
+	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
+	spip_log($htaccess);
+	if (!@file_exists($htaccess)) {
+		spip_log("creation $htaccess");
 		if ($GLOBALS['hebergeur'] != 'nexenservices'){
-			$f = fopen("$rep/.htaccess", "w");
+			$f = fopen($htaccess, "w");
 			fputs($f, "deny from all\n");
 			fclose($f);
 		} else {
@@ -997,7 +1001,10 @@ function creer_repertoire($base, $subdir) {
 
 function creer_repertoire_documents($ext) {
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	return  _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	$rep = _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	if (lire_meta("creer_htaccess") == 'oui')
+		verifier_htaccess($rep);
+	return $rep;
 }
 
 // Pour les documents comme pour les logos, le filtre |fichier donne
