@@ -47,13 +47,13 @@ function surligner_mots($page, $mots) {
 		}
 	}
 
-	// supprimer tout ce qui est avant </head> ou <body>
-	if (eregi("(.*<\/head>)(.*)", $page, $exp))
-		list(,$debut,$page) = $exp;
-	else if (eregi("(.*<body[^>]*>)(.*)", $page, $exp))
-		list(,$debut,$page) = $exp;
-	else
-		$debut = '';
+	// ne pas traiter tout ce qui est avant </head> ou <body>
+	$regexp = '/<\/head>|<body[^>]*>/i';
+	if (preg_match($regexp, $page, $exp)) {
+		$debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
+		$page = substr($page, strlen($debut));
+	} else
+		 $debut = '';
 
 	// Remplacer une occurence de mot maxi par espace inter-tag (max 1 par paragraphe, sauf italiques etc.)
 	// se limiter a 4 remplacements pour ne pas bouffer le CPU
