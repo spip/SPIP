@@ -300,7 +300,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	echo '</td><td>';
 	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."&redirect=$retour'>".typo($row['nom']).'</a>';
 
-	if ($connect_statut == '0minirezo' AND $rub_restreinte[$row['id_auteur']])
+	if ($connect_statut == '0minirezo' AND $row['statut']=='0minirezo' AND $rub_restreinte[$row['id_auteur']])
 		echo " &nbsp;<small>(admin restreint)</small>";
 
 
