@@ -659,6 +659,7 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 	$t0 = explode(" ", microtime());
 	$delim = '[^-\''.pcre_lettres_unicode().']';
 	foreach ($mauvais as $mot => $suggest) {
+		$mot = unicode_to_utf_8(typo($mot));
 		$pattern = ",$delim".$mot."$delim,us";
 		// Recuperer les occurences du mot dans le texte
 		if (preg_match_all($pattern, $texte, $regs, PREG_SET_ORDER)) {
