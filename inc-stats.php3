@@ -8,7 +8,10 @@ define("_INC_STATS", "1");
 function ecrire_stats() {
 	global $id_article, $id_breve, $id_rubrique;
 
-	$log_ip = $GLOBALS['REMOTE_ADDR'];
+	if ($GLOBALS['HTTP_X_FORWARDED_FOR'])
+		$log_ip = $GLOBALS['HTTP_X_FORWARDED_FOR'];
+	else
+		$log_ip = $GLOBALS['REMOTE_ADDR'];
 	if ($id_rubrique > 0) {
 		$log_type = "rubrique";
 		$log_id_num = $id_rubrique;
