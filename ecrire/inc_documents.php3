@@ -596,7 +596,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				}
 			}
 			else {
-				$fichier_vignette = "../spip_images.php3?vignette=$fichier";
+				$fichier_vignette = "../spip_image.php3?vignette=$fichier";
 				echo "<a href='../$fichier'><img src='$fichier_vignette' border='0'></a>";
 			}
 				echo "</div>";
@@ -804,7 +804,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</div>";
 			}
 			else {
-				$fichier_vignette = "../spip_images.php3?vignette=$fichier";
+				$fichier_vignette = "../spip_image.php3?vignette=$fichier";
 				echo "<div style='text-align: center;'><a href='../$fichier'><img src='$fichier_vignette' border='0'></a></div>";
 			}
 			
