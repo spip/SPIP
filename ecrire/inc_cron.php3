@@ -215,6 +215,8 @@ function cron_visites($t) {
 function cron_mail($t) {
 	$adresse_neuf = lire_meta('adresse_neuf');
 	$jours_neuf = lire_meta('jours_neuf');
+	// $t = 0 si le fichier de lock a ete detruit
+	if (!$t) $t = 3600 * 24 * $jours_neuf;
 
 	include_local("inc-calcul.php3");
 	$page= cherche_page('',
