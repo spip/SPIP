@@ -75,20 +75,21 @@ function ecrire_stats() {
 				spip_query($query);
 			}
 		}
+	}
 
-		// Optimiser les referers
-		$date_refs = lire_meta('date_stats_referers');
-		if ((time() - $date_refs) > 24 * 3600) {
-			include_ecrire("inc_connect.php3");
-			if ($GLOBALS['db_ok']) {
-				include_ecrire("inc_meta.php3");
-				ecrire_meta("date_stats_referers", time());
-				ecrire_metas();
-				include_ecrire ("inc_statistiques.php3");
-				optimiser_referers();
-			}
+	// Optimiser les referers
+	$date_refs = lire_meta('date_stats_referers');
+	if ((time() - $date_refs) > 24 * 3600) {
+		include_ecrire("inc_connect.php3");
+		if ($GLOBALS['db_ok']) {
+			include_ecrire("inc_meta.php3");
+			ecrire_meta("date_stats_referers", time());
+			ecrire_metas();
+			include_ecrire ("inc_statistiques.php3");
+			optimiser_referers();
 		}
 	}
+	
 }
 
 
