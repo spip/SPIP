@@ -1329,7 +1329,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	debut_html($titre);
 
-	$ctitre = _T('titre_changer_couleur_interface');
+	$ctitre = addslashes(_T('titre_changer_couleur_interface'));
 	echo "\n<map name='map_couleur'>";
 	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
 	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
@@ -1377,7 +1377,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
-		echo "<img src='img_pack/choix-layout$spip_lang_rtl.gif' alt='' vspace=3 border=0 usemap='#map_layout'>";
+		echo "<img src='img_pack/choix-layout$spip_lang_rtl.gif' alt='abc' vspace=3 border=0 usemap='#map_layout'>";
 	echo "</font></td>";
 		icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3");
 		icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.gif");
