@@ -56,17 +56,7 @@ a.calendrier-annee:hover {
 
 .calendrier-table-large { 
 	border: 0px;
-	width: 975px;
- }
-
-.calendrier-td-large-centre { 
-	width: 535px;
-  	vertical-align: top;
- }
-
-.calendrier-td-large-bord { 
-	width: 200px;
-  	vertical-align: top;
+	width: 950px;
  }
 
 .calendrier-table-etroit { 
@@ -74,13 +64,30 @@ a.calendrier-annee:hover {
 	width: 750px;
  }
 
-.calendrier-td-etroit-centre { 
-	width: 630px;
+.calendrier-td-centre { 
+	width: 570px;
+	padding-left: 2%;
+	padding-right: 2%;
   	vertical-align: top;
  }
 
-.calendrier-td-etroit-bord { 
-	width: 100px;
+.calendrier-table-etroit  .calendrier-td-gauche {
+	width: 0px;
+  	vertical-align: top;
+ }
+
+.calendrier-table-large  .calendrier-td-gauche {
+	width: 180px;
+  	vertical-align: top;
+ }
+
+.calendrier-table-etroit  .calendrier-td-droit {
+	width: 180px;
+  	vertical-align: top;
+ }
+
+.calendrier-table-large  .calendrier-td-droit {
+	width: 180px;
   	vertical-align: top;
  }
 
