@@ -290,21 +290,6 @@ if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserv
 
 
 //
-// Gestion des statistiques par article
-//
-
-if (lire_meta("activer_statistiques") != "non") {
-	if ($id_article || $id_rubrique || $id_breve) {
-		include_ecrire("inc_connect.php3");
-		include_local ("inc-stats.php3");
-		if ($db_ok) ecrire_stats();
-		if ($admin_ok AND $id_article AND !$flag_preserver)
-			afficher_raccourci_stats($id_article);
-	}
-}
-
-
-//
 // Mise a jour d'un (ou de zero) site syndique
 //
 
@@ -316,6 +301,17 @@ if ($db_ok AND lire_meta("activer_syndic") != "non") {
 
 	executer_une_syndication();
 	executer_une_indexation_syndic();
+}
+
+//
+// Gestion des statistiques du site public
+//
+
+if (lire_meta("activer_statistiques") != "non") {
+	include_local ("inc-stats.php3");
+	ecrire_stats();
+	if ($admin_ok AND $id_article AND !$flag_preserver)
+		afficher_raccourci_stats($id_article);
 }
 
 ?>

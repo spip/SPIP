@@ -44,23 +44,23 @@ if ($connect_statut != '0minirezo') {
 
 		echo "<ul>";
 		// Recuperer les donnees du log	
-		$query = "SELECT date, INET_NTOA(ip) AS ip, type, referer FROM spip_visites_temp";
+		$query = "SELECT INET_NTOA(ip) AS ip, type, id_objet, referer FROM spip_referers_temp";
 		$result = spip_query($query);
 	
 		while ($row = mysql_fetch_array($result)) {
 			$ip = $row['ip'];
+			$id_objet = $row['id_objet'];
 			$type = $row['type'];
 			$referer = $row['referer'];
 			
 			if (strlen($referer) > 0) {
-				$referers[$referer][$type][$ip] = 1;
+				$referers[$referer][$type.$id_objet][$ip] = 1;
 			}
 		}
 
 		while ($referers && (list($key, $value) = each($referers))) {
 			$referer = $key;
 			$ref_md5 = substr(md5($referer), 0, 15);
-
 
 			echo "\n<li>";
 

@@ -37,8 +37,8 @@ if ($activer_statistiques_ref == "oui"){
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	if ($critere == "visites" OR !$critere) echo "[<b>par nombre de visites</b>] " ;
 		else  echo "[<a href='statistiques_recents.php3'>par nombre de visites</a>] ";
-	if ($critere == "referers") echo "[<b>par arriv&eacute;es directes sur la page</b>] ";
-		else echo "[<a href='statistiques_recents.php3?critere=referers'>par arriv&eacute;es directes sur la page</a>] ";
+/*	if ($critere == "referers") echo "[<b>par arriv&eacute;es directes sur la page</b>] ";
+		else echo "[<a href='statistiques_recents.php3?critere=referers'>par arriv&eacute;es directes sur la page</a>] ";*/
 	if ($critere == "popularite") echo "[<b>par popularit&eacute;</b>] ";
 		else echo "[<a href='statistiques_recents.php3?critere=popularite'>par popularit&eacute;</a>] ";
 	echo "</font><p>";

@@ -266,21 +266,56 @@ function creer_base() {
 		KEY id_article (id_article),
 		KEY statut(statut))";
 	$result = spip_query($query);
-
+/*
 	$query = "CREATE TABLE spip_visites_temp (
 		date DATE NOT NULL,
 		ip INTEGER UNSIGNED NOT NULL,
 		type varchar(16) NOT NULL,
 		referer text NOT NULL)";
 	$result = spip_query($query);
+*/
 
+	$query = "CREATE TABLE spip_visites_temp (
+		ip INTEGER UNSIGNED NOT NULL,
+		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
+		id_objet INTEGER UNSIGNED NOT NULL,
+		PRIMARY KEY (type, id_objet, ip))";
+	$result = spip_query($query);
+
+/*
 	$query = "CREATE TABLE spip_visites (
 		date DATE NOT NULL,
 		type varchar(16) NOT NULL,
 		visites bigint(21) DEFAULT '0' NOT NULL,
 		maj TIMESTAMP)";
 	$result = spip_query($query);
+*/
 
+	$query = "CREATE TABLE spip_visites (
+		date DATE NOT NULL,
+		visites INTEGER UNSIGNED NOT NULL,
+		maj TIMESTAMP,
+		PRIMARY KEY (date))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_visites_articles (
+		date DATE NOT NULL,
+		id_article INTEGER UNSIGNED NOT NULL,
+		visites INTEGER UNSIGNED NOT NULL,
+		maj TIMESTAMP,
+		PRIMARY KEY (date, id_article))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_referers_temp (
+		ip INTEGER UNSIGNED NOT NULL,
+		referer VARCHAR(255) NOT NULL,
+		referer_md5 BIGINT UNSIGNED NOT NULL,
+		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
+		id_objet INTEGER UNSIGNED NOT NULL,
+		PRIMARY KEY (type, id_objet, referer_md5, ip))";
+	$result = spip_query($query);
+
+/*
 	$query = "CREATE TABLE spip_visites_referers (
 		id_referer bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		date DATE NOT NULL,
@@ -293,7 +328,28 @@ function creer_base() {
 		KEY type (type),
 		KEY referer_md5 (referer_md5))";
 	$result = spip_query($query);
-	
+*/	
+
+	$query = "CREATE TABLE spip_referers (
+		referer_md5 BIGINT UNSIGNED NOT NULL,
+		date DATE NOT NULL,
+		referer VARCHAR(255) NOT NULL,
+		visites INTEGER UNSIGNED NOT NULL,
+		maj TIMESTAMP, 
+		PRIMARY KEY (referer_md5))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_referers_articles (
+		id_article INTEGER UNSIGNED NOT NULL,
+		referer_md5 BIGINT UNSIGNED NOT NULL,
+		date DATE NOT NULL,
+		referer VARCHAR(255) NOT NULL,
+		visites INTEGER UNSIGNED NOT NULL,
+		maj TIMESTAMP, 
+		PRIMARY KEY (id_article, referer_md5),
+		KEY referer_md5 (referer_md5))";
+	$result = spip_query($query);
+
 
 	//
 	// Relations
@@ -913,6 +969,13 @@ function maj_base() {
 
 	if ($version_installee < 1.444) {
 		spip_query("ALTER TABLE spip_syndic ADD moderation VARCHAR(3) NOT NULL");
+	}
+
+	if ($version_installee < 1.457) {
+		// tables remplacees lors de creer_base()
+		spip_query("DROP TABLE spip_visites");
+		spip_query("DROP TABLE spip_visites_temp");
+		spip_query("DROP TABLE spip_visites_referers");
 	}
 
 
