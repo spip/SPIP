@@ -45,7 +45,7 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 echo "<ul>";
 // Recuperer les donnees du log	
 $query = "SELECT referer, COUNT(DISTINCT ip) AS count FROM spip_referers_temp ".
-	"GROUP BY referer_md5 ORDER BY count DESC";
+	"GROUP BY referer_md5 ORDER BY count DESC, referer";
 $result = spip_query($query);
 
 while ($row = @mysql_fetch_array($result)) {
