@@ -24,7 +24,8 @@ function supprime_invalideurs() {
 function maj_invalideurs ($hache, $infosurpage) {
 	$hache = addslashes($hache); #parano
 	if ($hache == '') return;	// ne pas noter les POST et les delais=0
-	spip_query("DELETE FROM $table_caches WHERE hache='$hache'");
+	spip_query("DELETE FROM spip_caches WHERE hache='$hache'");
+	# spip_query("DELETE FROM spip_caches_inclus WHERE hache='$hache'");
 
 	// invalidation des forums
 	insere_invalideur($infosurpage['id_forum'],'id_forum', $hache);
