@@ -205,7 +205,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		left: 0px;
 		position: absolute;
 		"><a href="'.$url.'"><img src="ecrire/img_pack/naviguer-site.gif" align="left" border="0" /></a>
-&nbsp; PREVISUALISATION</div>';
+&nbsp; '._T('previsualisation').'</div>';
 	}
 
 	return $page;
