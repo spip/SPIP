@@ -139,7 +139,7 @@ else {
 }
 
 
-echo "<TR><TD ALIGN='$spip_lang_right'>";
+echo "<TR><td style='text-align:$spip_lang_right;'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
@@ -183,7 +183,7 @@ if ($options == "avancees") {
 	echo "</TD></TR>\n";
 
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -217,7 +217,7 @@ if ($options == "avancees") {
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
 	echo "</TD></TR>\n";
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
@@ -350,7 +350,7 @@ if (tester_mail()) {
 		echo "<TR><TD>&nbsp;</TD></TR>";
 	}
 
-	echo "<TR><TD ALIGN='$spip_lang_right'>";
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
 	echo "</TABLE>\n";
