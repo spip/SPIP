@@ -626,7 +626,7 @@ function calcul_balise_logo ($p) {
 	    "', $_id_objet," .
 	    (($suite_logo == '_RUBRIQUE') ? 
 	     champ_sql("id_rubrique", $p) :
-	     "''") .
+	     (($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
 	    ", $code_lien, '$flag_fichier')";
 	}
 	$p->statut = 'php';
