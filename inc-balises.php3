@@ -504,7 +504,11 @@ function calcul_balise_logo ($p) {
 	$type_logo = $regs[1];	// ARTICLE_RUBRIQUE
 	$type_objet = $regs[2];	// ARTICLE
 	$suite_logo = $regs[3];	// _RUBRIQUE
-	$_id_objet = champ_sql("id_$type_objet", $p);
+
+	if ($type_objet == 'SITE')
+		$_id_objet = champ_sql("id_syndic", $p);
+	else
+		$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
 
 	// analyser les filtres
 	$flag_fichier = 'false';
