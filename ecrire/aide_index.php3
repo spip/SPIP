@@ -56,11 +56,11 @@ function help_frame ($aide) {
 
 // Selection de l'aide correspondant a la langue demandee
 function fichier_aide($lang_aide = '') {
-	$help_server = $GLOBALS['spip_server']['aide'];
+	global $help_server;
 
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 
-	if (@file_exists($fichier_aide = "AIDE/$lang_aide/$lang_aide-aide.html")) 
+	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide.html")) 
 		return array(file($fichier_aide), $lang_aide);
 	else	// reduction ISO du code langue oc_prv_ni => oc_prv => oc
 		if (ereg("(.*)_", $lang_aide, $regs)
@@ -87,7 +87,7 @@ function fichier_aide($lang_aide = '') {
 
 
 function help_body($aide) {
-	$help_server = $GLOBALS['spip_server']['aide'];
+	global $help_server;
 
 	if (!$aide) $aide = 'spip';
 
@@ -221,7 +221,7 @@ table.spip td {
 // Recuperer une image dans le cache
 //
 function help_img($regs) {
-	$help_server = $GLOBALS['spip_server']['aide'];
+	global $help_server;
 
 	list ($cache, $lang, $file, $ext) = $regs;
 	header("Content-Type: image/$ext");
