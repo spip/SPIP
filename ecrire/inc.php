@@ -20,8 +20,8 @@
 					break;
 				default:
 					// charger la version spip-lab si presente
-					if (@file_exists($dir_ecrire.'inc_'.$fichier))
-						include_ecrire('inc_'.$fichier);
+					if (@file_exists($dir_ecrire.'lab_'.$fichier))
+						include_ecrire('lab_'.$fichier);
 					// sinon prendre la version spip-stable
 					else
 						if (@file_exists($dir_ecrire.'inc_'.$fichier.'3'))

@@ -833,11 +833,11 @@ function maj_base() {
 		maj_version(1.733);
 	}
 
-	if ($version_installee < 1.734) {
-		// integrer nouvelles tables auxiliaires du compilateur ESJ
-		creer_base();
-		maj_version(1.734);
-	}
+	#if ($version_installee < 1.734) {
+	#	// integrer nouvelles tables auxiliaires du compilateur ESJ
+	#	creer_base();
+	#	maj_version(1.734);
+	#}
 
 	if ($version_installee < 1.801) {
 		spip_query("ALTER TABLE spip_rubriques
@@ -867,7 +867,11 @@ function maj_base() {
 		maj_version(1.802);
 	}
 	if ($version_installee < 1.803) {
-		spip_query("DROP TABLE spip_forum_cache");
+
+	#	27 AOUT 2004 : conservons cette table pour autoriser les retours
+	#	de SPIP 1.8a6 CVS vers 1.7.2
+	#	spip_query("DROP TABLE spip_forum_cache");
+
 		spip_query("DROP TABLE spip_inclure_caches");
 		maj_version(1.803);
 	}
@@ -889,6 +893,10 @@ function maj_base() {
 	// tables d'orthographe
 	if ($version_installee < 1.806)
 		maj_version(1.806);
+
+
+	#	A remettre pour la 1.8 finale (cf. ci-dessus)
+	#	spip_query("DROP TABLE spip_forum_cache");
 
 	return true;
 }

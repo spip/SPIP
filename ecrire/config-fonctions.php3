@@ -277,10 +277,39 @@ debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_ti
 	echo "</div>";
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 	
-fin_cadre_trait_couleur();
+	fin_cadre_trait_couleur();
 
 	echo "<p>";
 }
+
+//
+// Correcteur d'orthographe
+//
+
+debut_cadre_trait_couleur("ortho-24.gif", false, "", _L('Orthographe'));
+	$articles_ortho = lire_meta("articles_ortho");
+
+	echo "<div class='verdana2'>";
+	echo _L('Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:');
+	echo "</div>";
+
+	echo "<div class='verdana2'>";
+	echo "<blockquote class='spip'>";
+	echo _L('Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).');
+	echo "</blockquote>\n";
+	echo "</div>";
+
+	echo "<div class='verdana2'>";
+	afficher_choix('articles_ortho', $articles_ortho,
+		array('oui' => _L('Activer le v&eacute;rificateur d\'orthographe'),
+			'non' => _L('D&eacute;sactiver le v&eacute;rificateur d\'orthographe')));
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+	fin_cadre_trait_couleur();
+
+	echo "<p>";
+
 
 //
 // Previsualisation sur le site public
