@@ -4,26 +4,44 @@
 # le repertoire des squelettes doit etre accessibles en ecriture
 
 include("ecrire/inc_serialbase.php3");
-@include("mes_fonctions.php3");
+include("inc-compilo-index.php3");
+include("inc-balises.php3");
+include("inc-boucles.php3");
+
+if (file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
 
 $res = '';
 
-foreach($tables_principales as $k => $v)
+foreach($table_des_tables as $k => $v)
 {
-  $f = $v['field'];
   $k = strtoupper($k);
-  if ($k=='FORUM') $k .='S'; else if ($k=='SYNDIC') $k .= 'ATION';
   $b = "BOUCLE_$k($k){0,1}";
   $res .= "<B_$k>\n<table border='1' width='100%'>\n";
   $res .= "<tr><td colspan=2 align=center>$b</td></tr>";
   $res .= "<$b>";
-  foreach($f as $n => $t) {
+  $p = new Champ;
+  $p->id_boucle = $k;
+  $p->boucles = '';
+  $p->id_mere = $k;
+  $p->etoile = false; # le + dur
+  $p->documents = true; # le + dur
+  $p->statut = 'html';
+  $p->type_requete = $v;
+  $p->code ='';
+
+  foreach($tables_principales[$v]['field'] as $n => $t) {
     $n = strtoupper($n);
     $res .= "\n\t<tr><td>" . $n . "</td><td>#$n</td></tr>";
+    $p->nom_champ = $n;
+    if (champs_traitements($p))
+      $res .= "\n\t<tr><td>" . $n . "*</td><td>#$n*</td></tr>";
+
   }
-  $res .= "\n</BOUCLE_$k>\n";
-  $res .= "</table>\n</B_$k>\n";
-  $res .= "<center>table $k vide</center>\n<//B_$k>\n<br><hr><br>\n";
+  $res .= "\n</BOUCLE_$k>\n"
+    . "</table>\n</B_$k>\n"
+    . "<center>table $k "
+    . (function_exists('boucle_' . $k . '_dist') ? 'vide' : 'inconnue')
+    . "</center>\n<//B_$k>\n<br><hr><br>\n";
 }
 
 $fond = "lagaffe";

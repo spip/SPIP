@@ -33,6 +33,9 @@ include_local("inc-criteres.php3");
 // gestion des balises de forums
 include_local("inc-forum.php3");
 
+// gestion des balises SQL
+include_ecrire('inc_serialbase.php3');
+
 // outils pour debugguer le compilateur
 #include_local("inc-compilo-debug.php3"); # desactive
 
