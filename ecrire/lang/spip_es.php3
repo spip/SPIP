@@ -1184,6 +1184,7 @@ Entonces podr&eacute;is poner una nueva contrase&ntilde;a y volver a conectaros 
 
 // S
 'stats_visites_et_popularite' => '@visites@ visitas; popularidad: @popularite@',
+'statut_admin_restreint' => '(administrador restringido)',
 
 
 // T

@@ -1222,6 +1222,7 @@ and connect again to the site.
 
 // S
 'stats_visites_et_popularite' => '@visites@ visits; popularity: @popularite@',
+'statut_admin_restreint' => '(restricted admin)',
 
 
 // T
