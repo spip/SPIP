@@ -50,10 +50,10 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 
 	if (_DIR_RESTREINT AND $fichier_lang_exists) {
 	  $ficher_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
-	  $fichier_cache_time = is_readable($fichier_cache) ? filemtime($ficher_cache) : false;
+	  $fichier_cache_time = @is_readable($fichier_cache) ? @filemtime($ficher_cache) : false;
 
 	  if (!$forcer AND $ficher_cache_time
-		AND ($ficher_cache_time > filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
+		AND ($ficher_cache_time > @filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
 		AND ($ficher_cache_time > @filemtime(_DIR_LANG . 'perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
 			if (lire_fichier($ficher_cache,	$contenu, array('phpcheck' => 'oui'))) {
@@ -431,13 +431,14 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$post = $lien->getUrl();
 		$cible = '';
 	} else {
-		if ($flag_ecrire) {
+		$site = lire_meta("adresse_site");
+		if (!_DIR_RESTREINT) {
 			include_ecrire('inc_admin.php3');
-			$cible = 'ecrire/'.$lien->getUrl();
-			$post = "../spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			$cible = _DIR_RESTREINT_ABS . $lien->getUrl();
+			$post = "$site/spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 		} else {
 			$cible = $lien->getUrl();
-			$post = 'spip_cookie.php3';
+			$post = "$site/spip_cookie.php3";
 		}
 	}
 
