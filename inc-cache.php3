@@ -89,6 +89,8 @@ function ramener_squelette($squelette)
   $r = calculer_squelette($r, $nom, $e);
   $timer_b = explode(" ", microtime());
   $timer = ceil(1000*($timer_b[0] + $timer_b[1]-$timer_a[0]-$timer_a[1]));
+
+	if (file_exists($phpfile)) unlink($phpfile); // eviter tout probleme de duplication de contenu !!
   $f=fopen($phpfile, "wb"); 
   fwrite($f,"<?php # $squelette pid: " .  getmypid() ."\n");
   fwrite($f,$r);
