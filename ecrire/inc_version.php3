@@ -856,7 +856,8 @@ function verif_butineur() {
 		$browser_name = "MSIE";
 		$browser_version = $match[1];
 	}
-	else if (eregi("KHTML", $browser_description) && eregi("Safari/([^;]*)",$browser_description, $match)) {
+	else if (eregi("KHTML", $browser_description) &&
+		eregi("Safari/([^;]*)", $browser_description, $match)) {
 		$browser_name = "Safari";
 		$browser_version = $match[1];
 	}
@@ -908,6 +909,31 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	return substr($hierarchie, 1); // Attention ca demarre toujours par '0'
 }
 
+
+//
+// Verifier la presence des .htaccess
+//
+function verifier_htaccess($rep) {
+	if (!@file_exists("$rep/.htaccess")) {
+		spip_log("creation $rep/.htaccess");
+		if ($GLOBALS['hebergeur'] != 'nexenservices'){
+			$f = fopen("$rep/.htaccess", "w");
+			fputs($f, "deny from all\n");
+			fclose($f);
+		} else {
+			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
+			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
+			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
+			par l'interm&eacute;diaire de ";
+			echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\"
+			target=\"_blank\">l'espace webmestres</a>.";
+			echo "Veuillez cr&eacute;er manuellement la protection pour
+			ce r&eacute;pertoire (un couple login/mot de passe est
+			n&eacute;cessaire).<br />";
+		}
+	}
+}
+
 //
 // Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
 //
@@ -941,7 +967,6 @@ function creer_repertoire_documents($ext) {
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
 	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
 }
-
 
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete

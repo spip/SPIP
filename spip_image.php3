@@ -12,18 +12,19 @@ function copier_document($ext, $orig, $source) {
 		ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
 			translitteration(ereg_replace("\.([^.]+)$", "", 
 						      ereg_replace("<[^>]*>", '', basename($orig)))));
-	/* bientot, en mieux ....
-	if ((lire_meta("creer_htpasswd")) == 'oui')
-	  {include_ecrire("inc_cron.php3");
-	    verifier_htaccess($dir);
-	  }
-	*/
+	// a améliorer au plus  vite
+	$secure = lire_meta("creer_htpasswd") == 'oui';
+	if ($secure)
+	  verifier_htaccess($dir);
+	else @unlink("$dir/.htaccess");
+
 	# bien vu ?
 	if ($orig == ($dest . '.' . $ext)) return $orig;
 	$n = 0;
 	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
 	$r = deplacer_fichier_upload($source, $newFile);
-	return ($r ? $newFile : '');
+	spip_log("ajout_doc: copie de $source dans $newFile impossible");
+	return (!$r ? '' : $newFile);
 }
 
 function effacer_repertoire_temporaire($nom) {
@@ -200,24 +201,26 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 	//
 	// Securite
 	//
-	if (verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur)) {
-		if (ereg("\.([^.]+)$", $orig, $match)) {
-			$ext = addslashes(strtolower($match[1]));
-			$ext = corriger_extension($ext);
-		}
-		$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
-
-		if ($mode == 'vignette')
-			$query .= " AND inclus='image'";
-
-		if ($row = @spip_fetch_array(spip_query($query))) {
-			$id_type = $row['id_type'];
-			$type_inclus = $row['inclus'];
+	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
+		return '';
+	if (ereg("\.([^.]+)$", $orig, $match)) {
+		$ext = corriger_extension(addslashes(strtolower($match[1])));
+	}
 	//
 	// Recopier le fichier
 	//
-			$dest_path = copier_document($ext,$orig, $source);
-			if (!$dest_path) return ;
+	$dest_path = copier_document($ext,$orig, $source);
+	if (!$dest_path) {
+	  return '';
+	}
+
+	$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
+
+	if ($mode == 'vignette') $query .= " AND inclus='image'";
+
+	if ($row = @spip_fetch_array(spip_query($query))) {
+			$id_type = $row['id_type'];
+			$type_inclus = $row['inclus'];
 
 	//
 	// Preparation
@@ -273,8 +276,8 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 				creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
 			}
 		}
-	}
 }
+
 
 
 //
@@ -339,14 +342,17 @@ function gdRotate($imagePath,$rtt){
 // Normalement le test est vérifié donc on ne rend rien sinon
 
 function creer_fichier_vignette($vignette) {
+  spip_log("creer_fich $vignette " . lire_meta("creer_preview"));
 	if ($vignette && lire_meta("creer_preview") == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
-		$format = $regs[1];
+		$ext = $regs[1];
 		$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
-		$preview = creer_vignette($vignette, $taille_preview, $taille_preview, $format, 'vignettes', basename($vignette).'-s');
-		return $preview['fichier'];
+		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s'))
+		  return $preview['fichier'];
+                include_ecrire('inc_documents.php3');
+		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }
 

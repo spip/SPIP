@@ -288,6 +288,7 @@ function admin_page($cached, $texte) {
 // (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
 	
+	verifier_htaccess('ecrire/data');
 	if (!@file_exists('ecrire/data/cron.lock')
 	OR (time() - @filemtime('ecrire/data/cron.lock') > 5)) {
 

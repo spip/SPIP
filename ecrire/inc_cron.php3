@@ -11,30 +11,6 @@ define("_ECRIRE_INC_CRON", "1");
 
 
 //
-// Verifier la presence du .htaccess dans le CACHE et dans ecrire/data
-//
-function verifier_htaccess($rep) {
-	if (!@file_exists("$rep/.htaccess")) {
-		spip_log("creation $rep/.htaccess");
-		if ($GLOBALS['hebergeur'] != 'nexenservices'){
-			$f = fopen("$rep/.htaccess", "w");
-			fputs($f, "deny from all\n");
-			fclose($f);
-		} else {
-			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
-			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
-			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
-			par l'interm&eacute;diaire de ";
-			echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\"
-			target=\"_blank\">l'espace webmestres</a>.";
-			echo "Veuillez cr&eacute;er manuellement la protection pour
-			ce r&eacute;pertoire (un couple login/mot de passe est
-			n&eacute;cessaire).<br />";
-		}
-	}
-}
-
-//
 // Calcul des referers
 //
 
@@ -84,8 +60,6 @@ function spip_cron() {
 	global $flag_ecrire, $dir_ecrire, $db_ok;
 
 	#echo "hum";	spip_log('hum');
-	verifier_htaccess('CACHE');
-	verifier_htaccess('ecrire/data');
 
 	include_ecrire("inc_connect.php3");
 	if (!$db_ok) {

@@ -21,6 +21,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 init_config();
 if ($changer_config == 'oui') {
 	appliquer_modifs_config();
+  
 }
 
 lire_metas();
@@ -392,29 +393,35 @@ fin_cadre_trait_couleur();
 }
 
 
-
+###### ATTENTION EXPERIMENTAL:
+# l'option htpasswd est remplacee par la securisation des IMG/*
 //
 // Creer fichier .htpasswd ?
 //
 
 if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
-	include_ecrire ("inc_acces.php3");
-	ecrire_acces();
+#	include_ecrire ("inc_acces.php3");
+#	ecrire_acces();
 
 
 
-debut_cadre_trait_couleur("cadenas-24.gif", false, "", _T('info_fichiers_authent'));
+debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
+			  #_T('info_fichiers_authent')
+			  _L("acc&egrave;s aux document joints par leur URL"));
 	$creer_htpasswd = lire_meta("creer_htpasswd");
 
-
 	echo "<div class='verdana2'>";
-	echo _T('texte_fichier_authent');
+#	echo _T('texte_fichier_authent');
+	echo _L("Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n'est pas publi&eacute");
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
 	afficher_choix('creer_htpasswd', $creer_htpasswd,
-		array('oui' => _T('item_creer_fichiers_authent'),
-		'non' => _T('item_non_creer_fichiers_authent')), ' &nbsp; ');
+		       array('oui' => _L("interdire la lecture"),
+		      #_T('item_creer_fichiers_authent'),
+			     'non' => _L("autoriser la lecture")),
+# _T('item_non_creer_fichiers_authent')),
+ ' &nbsp; ');
 	echo "</div>";
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 	
