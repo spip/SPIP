@@ -286,12 +286,13 @@ if ($flag_mots!='non' AND $flag_editable AND $options == 'avancees') {
 // Langue de la breve
 //
 if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$langue_parent = $row['lang'];
+
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
 			spip_query("UPDATE spip_breves SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_breve=$id_breve");
 		else {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_parent = $row['lang'];
 			spip_query("UPDATE spip_breves SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_breve=$id_breve");
 		}
 	}
