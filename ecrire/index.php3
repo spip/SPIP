@@ -339,12 +339,12 @@ if ($options == 'avancees') {
 		", spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
 
-
+	/* (Trop lourd)
 	// Dernieres modifications d'articles
 	echo "<p>";
 	include_ecrire("inc_suivi_revisions.php");
 	afficher_suivi_versions ();
-
+	*/
 
 
 }
