@@ -533,225 +533,110 @@ function affdate_base($numdate, $vue) {
 	else
 		return '';
 
-	if ($mois > 0){
-		$saison = 0;
-		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = 1;
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = 2;
-		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = 3;
-		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = 0;
-	}
-	
+	// 1er, 21st, etc.
+	$journum = $jour;
 	switch ($spip_lang) {
-
-	case 'de':
-		$tab_mois = array('',
-			'Januar', 'Februar', 'M&auml;rz', 'April', 'Mai', 'Juni',
-			'Juli', 'August', 'September', 'Oktober', 'November', 'Dezember');
-		$nom_saisons = array('Winter', 'Fr&uuml;hling', 'Sommer', 'Herbst');
-		$avjc = ' v.u.Z.';
-		break;
-
-	case 'es':
-		$tab_mois = array('',
-			'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-			'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre');
-		$nom_saisons = array('invierno', 'primavera', 'verano', 'oto&ntilde;o');
-		$avjc = ' B.C.';
-		break;
-
-	case 'en':
-		switch($jour) {
-		case '1':
-			$jour = '1st';
-			break;
-		case '2':
-			$jour = '2nd';
-			break;
-		case '3':
-			$jour = '3rd';
-			break;
-		case '21':
-			$jour = '21st';
-			break;
-		case '22':
-			$jour = '22nd';
-			break;
-		case '23':
-			$jour = '23rd';
-			break;
-		case '31':
-			$jour = '31st';
-			break;
-		}
-		$tab_mois = array('',
-			'January', 'February', 'March', 'April', 'May', 'June',
-			'July', 'August', 'September', 'October', 'November', 'December');
-		$nom_saisons = array('Winter', 'Spring', 'Summer', 'Autumn');
-		$avjc = ' B.C.';
-		break;
-
-	case 'fr':
-	default:
-		if ($jour == '1') $jour = '1er';
-		$tab_mois = array('',
-			'janvier', "f&eacute;vrier", 'mars', 'avril', 'mai', 'juin',
-			'juillet', "ao&ucirc;t", 'septembre', 'octobre', 'novembre', "d&eacute;cembre");
-		$nom_saisons = array('hiver', 'printemps', '&eacute;t&eacute;', 'automne');
-		$avjc = ' av. J.C.';
-
+		case 'en':
+			switch($jour) {
+			case '1': $jour = '1st';
+			case '2': $jour = '2nd';
+			case '3': $jour = '3rd';
+			case '21': $jour = '21st';
+			case '22': $jour = '22nd';
+			case '23': $jour = '23rd';
+			case '31': $jour = '31st';
+			}
+		case 'fr':
+			if ($jour == '1') $jour = '1er';
 	}
-	if ($jour == 0) $jour = "";
-	if ($jour) $jour .= ' ';
-	$mois = $tab_mois[(int) $mois];
+
+	if ($jour == 0)
+		$jour = '';
+
+	$mois = intval($mois);
+	if ($mois > 0 AND $mois < 13)
+		$nommois = _T('date_mois_'.$mois);
+	else
+		$nommois = '';
+
 	if ($annee < 0) {
-		$annee = -$annee.$avjc;
+		$annee = -$annee." "._T('date_avant_jc');
 		$avjc = true;
 	}
 	else $avjc = false;
 
 	switch ($vue) {
 	case 'saison':
-		return $nom_saisons[$saison];
+		if ($mois > 0){
+			$saison = 1;
+			if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = 2;
+			if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = 3;
+			if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = 4;
+			if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = 1;
+		}
+		return _T('date_saison_'.$saison);
 
 	case 'court':
 		if ($avjc) return $annee;
 		$a = date('Y');
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return ucfirst($mois)." $annee";
-		return $jour.$mois;
+		if ($annee != $a) return ucfirst($nommois)." $annee";
+		return  _T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee));
 
 	case 'entier':
 		if ($avjc) return $annee;
-		return "$jour$mois $annee";
+		return _T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee));
+
+	case 'nom_mois':
+		return $nommois;
 
 	case 'mois':
-		return "$mois";
+
+	case 'jour':
+		return $jour;
+
+	case 'journum':
+		return $journum;
+
+	case 'nom_jour':
+		if (!$mois OR !$jour) return '';
+		$nom = mktime(1,1,1,$mois,$jour,$annee);
+		$nom = 1+date('w',$nom);
+		return _T('date_jour_'.$nom);
 
 	case 'mois_annee':
 		if ($avjc) return $annee;
-		return "$mois $annee";
+		return trim(_T('date_fmt_mois_annee', array('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+
+	case 'annee':
+		return $annee;
 	}
 
 	return "<blink>"._T('info_format_non_defini')."</blink>";
 }
 
 function nom_jour($numdate) {
-	global $spip_lang;
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-
-	if (!$mois OR !$jour) return;
-
-	$nom = mktime(1,1,1,$mois,$jour,$annee);
-	$nom = date("w",$nom);
-
-	switch ($spip_lang) {
-		case 'de':
-		default:
-			$nom_jours = Array(
-			O => 'Sonntag',
-			1 => 'Montag',
-			2 => 'Dienstag',
-			3 => 'Mittwoch',
-			4 => 'Donnerstag',
-			5 => 'Freitag',
-			6 => 'Samstag'
-			);
-			break;
-
-		case 'en':
-		default:
-			$nom_jours = Array(
-			O => 'Sunday',
-			1 => 'Monday',
-			2 => 'Tuesday',
-			3 => 'Wednesday',
-			4 => 'Thursday',
-			5 => 'Friday',
-			6 => 'Saturday'
-			);
-			break;
-
-		case 'es':
-		default:
-			$nom_jours = Array(
-			O => 'domingo',
-			1 => 'lunes',
-			2 => 'martes',
-			3 => 'mi&eacute;rcoles',
-			4 => 'jueves',
-			5 => 'viernes',
-			6 => 's&aacute;bado'
-			);
-			break;
-
-		case 'fr':
-		default:
-			$nom_jours = Array(
-			O => 'dimanche',
-			1 => 'lundi',
-			2 => 'mardi',
-			3 => 'mercredi',
-			4 => 'jeudi',
-			5 => 'vendredi',
-			6 => 'samedi'
-			);
-			break;
-	}
-
-	return $nom_jours[$nom];
+	return affdate_base($numdate, 'nom_jour');
 }
 
 function jour($numdate) {
-	global $spip_lang;
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	if ($jour=="1") switch($spip_lang) {
-		case 'en':
-			$jour = "1st";
-			break;
-		
-		case 'fr':
-			$jour = "1er";
-
-		default:
-			$jour = "1";
-	}
-	return $jour;
+	return affdate_base($numdate, 'jour');
 }
 
-// la meme... mais avec '1' au lieu de '1er'
 function journum($numdate) {
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	return $jour;
+	return affdate_base($numdate, 'journum');
 }
 
 function mois($numdate) {
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-	return $mois;
-}
-
-function nom_mois($numdate) {
 	return affdate_base($numdate, 'mois');
 }
 
+function nom_mois($numdate) {
+	return affdate_base($numdate, 'nom_mois');
+}
+
 function annee($numdate) {
-	$date_array = recup_date($numdate);
-	if ($date_array)
-		list($annee,$mois,$jour) = $date_array;
-	else
-		return '';
-	return $annee;
+	return affdate_base($numdate, 'annee');
 }
 
 function saison($numdate) {
