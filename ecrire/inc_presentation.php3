@@ -807,119 +807,47 @@ function bouton($titre,$lien) {
 
 function debut_html($titre = "") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
+	global $flag_ecrire;
+
 	$nom_site_spip = htmlspecialchars(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
-	if ($nom_site_spip == "") $nom_site_spip="SPIP";
-
-	if (! $charset = lire_meta('charset'))
-		$charset = 'iso-8859-1';
-	
+	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	if (!$charset = lire_meta('charset')) $charset = 'iso-8859-1';
 	?>
-	<html>
-	<head>
-	<title>[<?php echo $nom_site_spip; ?>] <?php echo $titre; ?></TITLE>
-	<meta http-equiv="Expires" content="0">
-	<meta http-equiv="cache-control" content="no-cache,no-store">
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset ; ?>">
-<style><!--
-	.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
-	.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
-		.sanscadre {padding: 4px; margin: 0px; }
-		.aveccadre {cursor: pointer; padding: 3px; margin: 0px;  border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
-		.fondgris {cursor: pointer; padding: 4px; margin: 1px;}
-		.fondgrison {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;}
-		.fondgrison2 {cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;}
-	.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
-	.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
-	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
-	.profondeur {border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid}
-	.hauteur {border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid}
-	label {cursor: pointer;}
-	.arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
-	.arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
+<html>
+<head>
+<title>[<?php echo $nom_site_spip; ?>] <?php echo $titre; ?></TITLE>
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="cache-control" content="no-cache,no-store">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>">
+<link rel="stylesheet" type="text/css" href="<?php if (!$flag_ecrire) echo "ecrire/"; ?>spip_style.css">
+<style type="text/css"><!--
+.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
+.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
+.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
+.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
+.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
 
+.sanscadre {padding: 4px; margin: 0px; }
+.aveccadre {cursor: pointer; padding: 3px; margin: 0px; border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
 
-	.reliefblanc {background-image: url(img_pack/barre-blanc.gif)}
-	.reliefgris {background-image: url(img_pack/barre-noir.gif)}
-	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0}
-	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
-	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;}
-
-	a { text-decoration: none; }
-	a:hover { text-decoration: underline; }
-	a.icone { text-decoration: none; }
-	a.icone:hover { text-decoration: none; }
-
-	a.spip_in  {background-color:#eeeeee;}
-	a.spip_out {}
-	a.spip_note {}
-	.spip_recherche {width : 100px; font-size: 9px;}
-	.spip_cadre { 
-		width : 100%;
-		background-color: #FFFFFF; 
-		padding: 5px; 
-	}
-	
-	.boutonlien {
-		font-family: Verdana,Arial,Helvetica,sans-serif;
-		font-weight: bold;
-		font-size: 9px;
-	}
-	a.boutonlien:hover {color:#454545; text-decoration: none;}
-	a.boutonlien {color:#808080; text-decoration: none;}
-
-	h3.spip {
-		font-family: Verdana,Arial,Helvetica,sans-serif;
-		font-weight: bold;
-		font-size: 115%;
-		text-align: center;
-	}
-	.spip_documents{
-		font-family: Verdana,Arial,Helvetica,sans-serif;
-		font-size : 70%;
-	}
-	table.spip {
-	}
-	table.spip tr.row_first {
-		background-color: #FCF4D0;
-	}
-	table.spip tr.row_odd {
-		background-color: #C0C0C0;
-	}
-	table.spip tr.row_even {
-		background-color: #F0F0F0;
-	}
-	table.spip td {
-		padding: 1px;
-		text-align: left;
-		vertical-align: center;
-	}
-
---></style>
+.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
+//--></style>
 <?php
 afficher_script_layer();
 ?>
-<script language="JavaScript">
-<!--
-	function MM_preloadImages() { //v3.0
-		var d=document; if(d.images){ if(!d.MM_p) d.MM_p=new Array();
-		var i,j=d.MM_p.length,a=MM_preloadImages.arguments; for(i=0; i<a.length; i++)
-		if (a[i].indexOf("#")!=0){ d.MM_p[j]=new Image; d.MM_p[j++].src=a[i];}}
-	}
-
-	function changeclass(objet, myClass)
-	{ 
-	  objet.className = myClass;
-	}
-//-->
-</script>
+<script language="JavaScript"><!--
+function changeclass(objet, myClass)
+{ 
+  objet.className = myClass;
+}
+//--></script>
 </head>
 <body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_lien_off; ?>" alink="<?php echo $couleur_lien_off ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
 <?php
-
 }
 
 
@@ -967,12 +895,12 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 	if ($spip_display == 1) {
 		if ($onglet_ref == $onglet){
 			echo "\n<td  class='iconeon' valign='middle'>";
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='black'><b>$texte</b></font>";
+			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font>";
 			echo "</td>";
 		}
 		else {
 			echo "\n<td class='iconeoff' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\" valign='middle'>";
-			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a>";
+			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>$texte</b></font></a>";
 			echo "</td>";
 		}
 	}
@@ -985,7 +913,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 			echo "</td>";
 			}
 			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
-			echo "&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='black'><b>$texte</b></font> &nbsp;";
+			echo "&nbsp; <font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font> &nbsp;";
 			echo "</td>";
 		}
 		else {
@@ -996,7 +924,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 				echo "</td>";
 			}
 			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
-			echo "&nbsp; <a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><b>$texte</b></font></a> &nbsp;";
+			echo "&nbsp; <a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>$texte</b></font></a> &nbsp;";
 			echo "</td>";
 		}
 	}
@@ -1086,7 +1014,8 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	}
 
 	if ($rubrique_icone == $rubrique){
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgrison\" $onClick>";
+		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\" $onClick>";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -1098,9 +1027,11 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
+		echo "</td>\n";
 	} 
 	else {
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
+		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -1112,6 +1043,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
+		echo "</td>\n";
 	}
 }
 
@@ -1338,54 +1270,35 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "\n</map>";
 	
 	// Icones principales
-	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif) ; border-top: solid 1px white;' width='100%'><tr width='100%'><td width='100%' align='center'>";
+	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif);' width='100%'><tr width='100%'><td width='100%' align='center'>";
 	echo "<table cellpadding='0' background='' width='750'><tr width='750'>";
-	echo "<td background=''>";
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
-	echo "</td>";
-	echo "<td background=''>";
 		icone_bandeau_principal ("&Eacute;dition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
-	echo "</td>";
-	echo "<td background=''>";
-	echo "</td>";
-	echo "<td background=''>";
 		if ($options == "avancees") {
 			icone_bandeau_principal ("Auteurs", "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
 			icone_bandeau_principal ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
-	echo "</td>";
-	echo "<td background=''>";
 		if ($options == "avancees") {
 			if ($connect_statut == "0minirezo") 
 				icone_bandeau_principal ("Forums et p&eacute;titions", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
 			else
 				icone_bandeau_principal ("Forum interne", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
 		}
-	echo "</td>";
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques){
 	bandeau_barre_verticale();
-		echo "<td background=''>";
 			icone_bandeau_principal ("Administration du site", "configuration.php3", "administration-48.gif", "administration", $rubrique);
-		echo "</td>";
 	}
 	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques and lire_meta("activer_statistiques") != 'non'){
 	bandeau_barre_verticale();
-		echo "<td background=''>";
 			icone_bandeau_principal ("Statistiques du site", "statistiques_visites.php3", "administration-48.gif", "administration", $rubrique);
-		echo "</td>";
 	}
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
 		echo "<img src='img_pack/choix-layout.gif' alt='o' vspace=3 border=0 usemap='#map_layout'>";
 	echo "</font></td>";
-	echo "<td background=''>";
 		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); void(0);", "aide-48.gif", "vide", "", "aide_index.php3");
-
-	echo "</td>";
-	echo "<td background=''>";
 		icone_bandeau_principal ("Visiter le site", "$adresse_site", "visiter-48.gif");
-	echo "</td>";
 	echo "</tr></table>";
 	echo "</td></tr></table>";
 
@@ -1842,17 +1755,18 @@ function fin_page() {
 <p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
+est un logiciel libre distribu&eacute; <a href='gpl.txt'>sous licence GPL.</a>
 
 <?php
 if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
-	echo "<br>Les icones de l'interface sont de <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>";
+	echo "<br>Les icones de l'interface sont de <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>.";
 }
-if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statistiques_referers.php3$", $GLOBALS['REQUEST_URI'])) {
-	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>, par Jean-Pierre D&eacute;z&eacute;lus";
+if (ereg("statistiques(.*)\.php3$", $GLOBALS['REQUEST_URI'])) {
+	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>, par Jean-Pierre D&eacute;z&eacute;lus.";
 }
 ?>
 </font></div>
+<br>
 </td></tr></table></center>
 
 	<?php
