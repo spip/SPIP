@@ -19,7 +19,6 @@ function calculer_params($type, $params, $idb, &$boucles)
       else if ($param == 'unique' OR $param == 'doublons') {
 	$boucle->doublons = true;
 	$boucle->where[] = "$id_field NOT IN (\$doublons)";
-
       }
       else if (ereg('^(!)? *lang_select(=(oui|non))?$', $param, $match)) {
 	if (!$lang_select = $match[3]) $lang_select = 'oui';
@@ -59,8 +58,13 @@ function calculer_params($type, $params, $idb, &$boucles)
 
       // Classement par ordre inverse
       else if ($param == 'inverse') {
-	if ($boucle->order) 
+	if ($boucle->order != "''") 
 	   $boucle->order .= ". ' DESC'";
+	else
+	  {
+	    include_local("inc-debug-squel.php3");
+	    erreur_squelette(_L("Inversion d'un ordre inexistant"), $param, $idb);
+	  }
       }
 
       // Gerer les traductions
