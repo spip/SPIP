@@ -250,7 +250,7 @@ if (!$PATH_TRANSLATED) {
 //
 
 $included_files = '';
-$flag_ecrire = ereg('/ecrire/[^/]*', $REQUEST_URI)
+$flag_ecrire = ereg('^[^?]*/ecrire/[^/]*', $REQUEST_URI)
 	|| ereg('/ecrire/[^/]*', $SCRIPT_URL);
 
 function include_local($file) {
