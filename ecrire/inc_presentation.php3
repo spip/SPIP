@@ -1529,7 +1529,10 @@ function fin_html() {
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
 est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>.</p>
 <?php if ($GLOBALS['spip_session']) {
-	echo '<script src="../spip_cookie.php3?rejoue=oui"></script>';
+	echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
+	echo "<script type='text/javascript'><!-- \n";
+	echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";
+	echo "// --></script>\n";
 } ?></body></html>
 <?php
 	flush();
