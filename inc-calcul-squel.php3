@@ -1917,6 +1917,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$texte .= '
 		$contexte["id_signature"] = $row["id_signature"];
 		$contexte["date"] = $row["date"];
+		if ($instance->doublons == "oui") $id_doublons["signatures"] .= ",".$row["id_signature"];
 		';
 		break;
 
