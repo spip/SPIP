@@ -97,10 +97,10 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	display: block; text-align: center; background: url(img_pack/rien.gif) no-repeat top center;
 }
 .cellule36 a.selection {
-	display: block; text-align: center; background: url(img_pack/pave-gris-36.png) no-repeat top center;
+	display: block; text-align: center; background: url(img_pack/pave-blanc-36.png) no-repeat top center;
 }
 .cellule48 a.selection {
-	display: block; text-align: center; background: url(img_pack/pave-gris-48.png) no-repeat top center;
+	display: block; text-align: center; background: url(img_pack/pave-blanc-48.png) no-repeat top center;
 }
 /*.cellule36 a:hover {
 	background: url(img_pack/pave-blanc-36.png) no-repeat top center;
@@ -130,9 +130,13 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 }
 .cellule36 a span, .cellule48 a span {
 	color: #505050; display: block; margin: 2px;
+	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
+	width: 100%
 }
 .cellule36 a.selection span, .cellule48 a.selection span {
 	color: #000000; display: block; margin: 2px;
+	filter: DropShadow(Color=white, OffX=-1, OffY=-1, Positive=1) DropShadow(Color=#cccccc, OffX=1, OffY=1, Positive=1);
+	width: 100%
 }
 
 .cellule36 a.aide, .cellule36 a.aide:hover {
@@ -193,15 +197,15 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 a.cellule-h {
 	text-align: <?php echo $left; ?>;
 	display: block;
-	margin-top: 3px;
-	margin-bottom: 3px;
+	margin-top: 1px;
+	margin-bottom: 1px;
 }
 a.cellule-h {
-	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
+	text-decoration: none; 
 }
-/*a.cellule-h:hover {
-	text-decoration: none; background: url(img_pack/pave-blanc-24.png) no-repeat center <?php echo $left; ?>;
-}*/
+a.cellule-h:hover {
+	text-decoration: none; 
+}
 a.cellule-h img {
 	-moz-opacity: 0.5;
 	filter: alpha(opacity=50);
@@ -227,7 +231,7 @@ a.cellule-h td {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	color: #606060;
+	color: #666666;
 }
 a.cellule-h img {
 	width: 24px;
@@ -310,7 +314,9 @@ a.cellule-h-texte:hover {
 
 .reliefblanc { background-image: url(img_pack/barre-blanc.gif) }
 .reliefgris { background-image: url(img_pack/barre-noir.gif) }
-.iconeoff { padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0 }
+.iconeoff {
+	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0
+}
 .iconeon { cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee; }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif)}
 
@@ -360,6 +366,8 @@ td.icone a:hover {
 td.icone a img {
 	border: 0px;
 }
+
+
 
 /*
  * Cadre blanc arrondi
