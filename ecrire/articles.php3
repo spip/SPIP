@@ -614,7 +614,7 @@ function afficher_mois($mois){
 
 function afficher_annee($annee){
 	// Cette ligne permettrait de faire des articles sans date de publication
-	my_sel("0000","n.c.",$annee);
+	// my_sel("0000","n.c.",$annee);
 
 	if($annee<1996 AND $annee <> 0){
 		echo "<OPTION VALUE='$annee' SELECTED>$annee\n";
