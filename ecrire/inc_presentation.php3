@@ -1934,7 +1934,7 @@ function debut_droite($rubrique="") {
 					}
 					echo "<a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
 				}
-				if ($nb_liberer >= 2) {
+				if ($nb_liberer >= 4) {
 					$lien = $clean_link;
 					$lien->addVar('debloquer_article', 'tous');
 					echo "<br /><br /><a href='". $lien->getUrl() ."'><img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='top'><img src='img_pack/croix-rouge.gif' alt='' width='7' height='7' border='0' align='top'>&nbsp;["._T('lien_liberer_tous')."]</a>";
