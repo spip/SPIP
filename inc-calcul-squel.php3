@@ -2169,6 +2169,7 @@ function calculer_texte($texte)
 
 		ereg('^\\{(.*)\\}$', trim($match[2]), $params);
 		$code .= "	\$retour .= '<"."?php ';\n";
+		$code .= "	\$retour .= 'include_ecrire(\'inc_filtres.php3\'); lang_select(lire_meta(\'langue_site\'));';\n";
 		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
 
 		if ($params) {
@@ -2194,9 +2195,11 @@ function calculer_texte($texte)
 				include(\'$dossier_squelettes/$fichier\');
 			} else {
 				include(\'$fichier\');
-			} ?".">';\n";
+			}';\n";
 		} else
-			$code .= "	\$retour .= 'include(\'$fichier\'); ?".">';\n";
+			$code .= "	\$retour .= 'include(\'$fichier\');';\n";
+
+		$code .= "	\$retour .= 'lang_dselect(); ?".">';\n";
 	}
 
 	if ($texte)
