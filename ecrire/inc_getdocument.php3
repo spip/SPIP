@@ -229,8 +229,10 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 	// Recopier le fichier a son emplacement definitif
 	$definitif = copier_document($ext, $nom_envoye, $source);
-	if (!$definitif)
+	if (!$definitif) {
+		spip_log("Impossible de copier_document($ext, $nom_envoye, $source)");
 		return;
+	}
 
 	// Quelques infos sur le fichier
 	if (!@file_exists($definitif)
