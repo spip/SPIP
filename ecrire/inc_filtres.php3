@@ -88,11 +88,11 @@ function taille_en_octets ($taille) {
 
 
 // transforme n'importe quel champ en une chaine utilisable dans php en toute securite
-// < ? php $x = [(#TEXTE|chainephp)]; ? >
+// < ? php $x = '[(#TEXTE|chainephp)]'; ? >
 function chainephp ($texte) {
 	$texte = str_replace ('\\', '\\\\', $texte);
 	$texte = str_replace ('\'', '\\\'', $texte);
-	return '\''.$texte.'\'';
+	return $texte;
 }
 
 
