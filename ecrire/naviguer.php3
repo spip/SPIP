@@ -168,6 +168,15 @@ if ($coll > 0) {
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>RUBRIQUE NUM&Eacute;RO&nbsp;:</B></FONT>";
 	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$coll</B></FONT>";
 	echo "</CENTER>";
+	
+	
+		
+	if ($coll >0 AND $statut == 'publie') {
+		icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_rubrique=$coll&recalcul=oui", "racine-24.gif", "rien.gif");
+	}
+	
+	
+	
 	fin_boite_info();
 }
 
@@ -266,13 +275,6 @@ if (strlen($descriptif) > 1) {
 
 
 echo "</td>";
-
-if ($coll >0 AND $statut == 'publie') {
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='right'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_rubrique=$coll&recalcul=oui", "racine-24.gif", "rien.gif");
-	echo "</td>";
-}
 
 
 

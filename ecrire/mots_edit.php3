@@ -89,6 +89,10 @@ echo "<CENTER>";
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>MOT NUM&Eacute;RO :</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
 echo "</CENTER>";
+
+	icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
+
+
 fin_boite_info();
 
 echo "<p><center>";
@@ -165,12 +169,6 @@ if (strlen($descriptif) > 1) {
 	echo "</div>";
 }
 echo "</td>";
-
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
-	echo "<td  align='right' valign='top'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
-	echo "</td>";
-
 echo "</tr></table>\n";
 
 
