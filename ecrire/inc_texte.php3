@@ -864,11 +864,11 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	// branches de l'alternative (if (!flag_pcre).../else).
 	//
 
-	$letexte = trim($letexte);
+	$letexte = "\n".trim($letexte);
 
 
 	// les listes
-	if (ereg("\n-[*#]", "\n".$letexte))
+	if (ereg("\n-[*#]", $letexte))
 		$letexte = traiter_listes($letexte);
 
 	// autres raccourcis
@@ -877,8 +877,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   sans pcre ; toutefois les elements ci-dessous sont un peu optimises (str_replace
 		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
 		   permet de gagner un peu de temps chez les hergeurs nazes */
-		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
-		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
+		$letexte = ereg_replace("\n(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
 		$letexte = ereg_replace("\n-- *", "\n<br />&mdash&nbsp;",$letexte);
 		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
 		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
@@ -894,12 +893,12 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = str_replace("\n", " ", $letexte);
 		$letexte = str_replace("<quote>", "<div class=\"spip_quote\">", $letexte);
 		$letexte = str_replace("<\/quote>", "</div>", $letexte);
+		$letexte = ereg_replace("^ <br />", "", $letexte);
 	}
 	else {
 		$cherche1 = array(
-			/* 0 */ 	"/(^|\n)(----+|____+)/",
-			/* 1 */ 	"/^- */",
-			/* 1bis */ 	"/\n-- */",
+			/* 0 */ 	"/\n(----+|____+)/",
+			/* 1 */ 	"/\n-- */",
 			/* 2 */ 	"/\n- */",
 			/* 3 */ 	"/\n_ +/",
 			/* 4 */ 	"/(( *)\n){2,}/",
@@ -918,8 +917,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		);
 		$remplace1 = array(
 			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
-			/* 1 */ 	"$puce&nbsp;",
-			/* 1bis */ 	"\n<br />&mdash;&nbsp;",
+			/* 1 */ 	"\n<br />&mdash;&nbsp;",
 			/* 2 */ 	"\n<br />$puce&nbsp;",
 			/* 3 */ 	"\n<br />",
 			/* 4 */ 	"\n<p>",
@@ -937,6 +935,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 16 */	"</blockquote>"
 		);
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
+		$letexte = preg_replace("@^ <br />@", "", $letexte);
 	}
 
 	// paragrapher
