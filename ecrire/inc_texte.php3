@@ -378,16 +378,15 @@ function typo($letexte) {
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if (!$lang_typo) {
+	if (!$lang = $lang_typo) {
 		include_ecrire('inc_lang.php3');
-		lang_typo($spip_lang);
+		$lang = lang_typo($spip_lang);
 	}
 
-	if ($lang_typo == 'fr')
+	if ($lang == 'fr')
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
-
 
 	$letexte = str_replace("'", "&#146;", $letexte);
 
