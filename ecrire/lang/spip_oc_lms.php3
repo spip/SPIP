@@ -6,9 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
-'0_URL' => 'http://www.spip.net/oci',
-'0_langue' => 'occitan (lemosin) [oci_lms]',
-'0_liste' => 'spip-oci@rezo.net',
+'0_URL' => 'http://www.spip.net/oc',
+'0_langue' => 'occitan (lemosin) [oc_lms]',
+'0_liste' => 'spip-oc@rezo.net',
 '0_mainteneur' => 'Domergue Sumien: lenga.occitana@aprene.org ',
 
 
@@ -562,7 +562,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_contenu_articles' => 'Contengut daus articles',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'es un logiciau liure distribuit <a href=\'copyright_fr.html\'> sos lic&eacute;ncia GPL.</a>',
-'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => 'Per mai d\'informacions, veire lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
 'info_cours_edition' => '<MODIF> V&ograve;stres articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz aic&iacute; los mots claus dau sit',
 'info_creation_paragraphe' => '(Per crear daus paragrafs, suf&iacute;s que laissetz de las linhas voidas.)',

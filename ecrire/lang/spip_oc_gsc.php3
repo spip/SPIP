@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-'0_langue' => 'occitan (gascon) [oci_gsc]',
+'0_langue' => 'occitan (gascon) [oc_gsc]',
 '0_liste' => 'lenga.occitana@aprene.org',
 '0_mainteneur' => 'Domergue:&nbsp;lenga.occitana@aprene.org ',
 
@@ -566,7 +566,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_contenu_articles' => 'Contengut deus articles',
 'info_contribution' => 'Contribucions de forum',
 'info_copyright' => 'qu\'ei un logiciau liure distribuit <a href=\'copyright_fr.html\'>devath lic&eacute;ncia GPL.</a>',
-'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oci\'>http://www.spip.net/oci</a>.',
+'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
 'info_cours_edition' => '<MODIF> Los v&ograve;stes articles en cors d\'edicion',
 'info_creation_mots_cles' => 'Creatz e configuratz ac&iacute; los mots claus deu sit',
 'info_creation_paragraphe' => '(Ent&agrave; crear paragrafs, que suf&iacute;s que deishetz linhas vueitas.)',
