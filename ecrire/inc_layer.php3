@@ -74,7 +74,7 @@ function debut_block_invisible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		$retour = "\n<script language='JavaScript'><!--\n";
+		$retour = "\n<script type='text/javascript'><!--\n";
 		$retour .= "vis['".$numero_block["$nom_block"]."'] = 'hide';\n";
 		$retour .= "document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');\n";
 		$retour .= "//-->\n";
@@ -111,7 +111,7 @@ function bouton_block_invisible($nom_block) {
 
 			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\');";
 		}
-		$retour = "\n<script language='JavaScript'><!--\n";
+		$retour = "\n<script type='text/javascript'><!--\n";
 		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle$num_triangle\" src=\"img_pack/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
