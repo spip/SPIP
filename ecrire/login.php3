@@ -25,7 +25,7 @@ if ($erreur=='pass') $erreur = "Erreur de mot de passe.";
 
 // Le login est memorise dans le cookie d'admin eventuel
 if (!$login)
-	if (ereg("^@(.*)$", $spip_admin, $regs))
+	if (ereg("^@(.*)$", $HTTP_COOKIE_VARS['spip_admin'], $regs))
 		$login = $regs[1];
 
 // quels sont les aleas a passer ?
@@ -78,7 +78,7 @@ echo "<p>&nbsp;<p>";
 
 if ($login) {
 	// affiche formulaire de login en incluant le javascript MD5
-	$redirect = './ecrire/index.php3?essai_cookie=oui';
+	$redirect = './ecrire/index.php3?essai_cookie=oui&zap=oui';
 	$redirect_echec = './ecrire/login.php3';
 	$dir = "../";
 	echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
@@ -95,7 +95,7 @@ if ($login) {
 	} else if ($row['statut'] == '1comite') {
 		$icone = "redacteurs-24.gif";
 	}
-	debut_cadre_relief($icone);
+	debut_cadre_enfonce($icone);
 	if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 
 	if (file_exists("../IMG/auton$id_auteur.gif")) $logo = "../IMG/auton$id_auteur.gif";
@@ -132,61 +132,9 @@ if ($login) {
 	echo "</tr></table>";
 	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
 	//echo "</div>\n";
-	fin_cadre_relief();
+	fin_cadre_enfonce();
 	echo "</form>";
 
-	if ($secu == 'oui') {
-		// y a-t-il d'anciennes sessions pour ce login ? Si oui proposer de les zapper
-
-		debut_cadre_relief();
-
-		$zap_sessions = zap_sessions($login, false);
-		echo "<b>Options de s&eacute;curit&eacute;</b><p>";
-		echo "<font size='2' face='verdana,arial,helvetica,sans-serif'>";
-		if ($zap_sessions) {
-			$redirect = "./ecrire/login.php3?secu=oui&login=$login";
-			echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
-			echo "<form action='../spip_cookie.php3' method='post'";
-			echo " onSubmit='if (this.session_password.value) {
-					this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
-					this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
-					this.session_password.value = \"\";
-				}'";
-			echo ">\n";
-
-			echo "<b>Une connexion &agrave; l'espace priv&eacute; utilisant cet identifiant est en cours.</b>\n";
-			echo "Si vous &ecirc;tes en train d'utiliser un autre navigateur ou un autre ordinateur pour acc&eacute;der &agrave; ";
-			echo "l'espace priv&eacute;, cela est parfaitement normal. Si vous n'utilisez aucun autre logiciel de navigation <b>en ce moment</b>, ";
-			echo "vous pouvez tuer toutes les connexions en entrant votre mot de passe, cela renforcera la s&eacute;curit&eacute; du syst&egrave;me.";
-
-			echo "<p>\n";
-
-			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
-			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
-
-			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
-			echo "<noscript><label><b>Login (identifiant de connexion au site) :</b><br></label>\n";
-			echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>";
-
-			echo "<p>\n<label><b>Mot de passe</b><br></label>";
-			echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
-			echo "<input type='hidden' name='session_password_md5' value=''>\n";
-			echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
-
-			echo "<input type='hidden' name='essai_login' value='oui'>\n";
-			echo "<input type='hidden' name='redirect' value='$redirect'>\n";
-			echo "<input type='hidden' name='zap_sessions' value='oui'>\n";
-
-			echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Terminer toutes les connexions'></div>\n";
-			echo "</form>\n";
-		}
-		else {
-			echo ("Aucune connexion à l'espace priv&eacute; n'utilise actuellement cet identifiant.");
-		}
-		echo "</font>\n";
-
-		fin_cadre_relief();
-	}
 }
 
 else {
@@ -208,7 +156,7 @@ if ($echec_cookie == "oui" AND $php_module) {
 	echo "<fieldset>\n";
 	echo "<p><b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode ";
 	echo "non s&eacute;curis&eacute;e est &agrave; votre disposition&nbsp;: \n";
-	echo "<input type='hidden' name='redirect' value='./ecrire/'>";
+	echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?zap=oui'>";
 	echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 	echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
 	echo "</fieldset></form>\n";
@@ -219,11 +167,7 @@ $link = new Link;
 $link->addVar('secu', 'oui');
 
 echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
-echo "[<a href='".$link->getUrl()."'>options de s&eacute;curit&eacute;</a>";
-if ($url_site) {
-	echo " | <a href='$url_site'>retour au site public</a>";
-}
-echo "]</font>";
+echo "[<a href='$url_site'>retour au site public</a>]</font>";
 
 install_fin_html();
 
