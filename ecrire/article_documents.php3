@@ -3,6 +3,17 @@
 include ("inc.php3");
 include_local ("inc_documents.php3");
 
+$redirect_url = new Link('article_documents.php3');
+if ($id_document) $redirect_url->addVar('id_document', $id_document);
+if ($id_article) $redirect_url->addVar('id_article', $id_article);
+$redirect_url = $redirect_url->getUrl();
+
+$image_link = new Link('../spip_image.php3');
+if ($id_article) $image_link->addVar('id_article', $id_article);
+
+$id_doc_actif = $id_document;
+
+
 //
 // editable ?
 //
@@ -26,20 +37,6 @@ if (!$flag_editable) {
 // Gerer les modifications
 //
 
-if ($new == "oui") {
-	mysql_query("INSERT spip_documents (id_vignette, titre) ".
-		"VALUES ('$id_vignette', 'nouveau document')");
-	$id_document =  mysql_insert_id();
-
-	if ($id_article) {
-		mysql_query("INSERT spip_documents_articles (id_document, id_article) ".
-			"VALUES ($id_document, $id_article)");
-	}
-}
-
-// eventuel triangle a garder deplie
-$id_doc_actif = $id_document;
-
 if ($modif_document == 'oui') {
 	$titre = addslashes(corriger_caracteres($titre));
 	$descriptif = addslashes(corriger_caracteres($descriptif));
@@ -49,15 +46,15 @@ if ($modif_document == 'oui') {
 // transformer en vignette/document
 if ($transformer_image == 'document') {
 	mysql_query("UPDATE spip_documents SET mode='document' WHERE id_document=$id_document");
-} else if ($transformer_image == 'vignette') {
-	// est-ce qu'on met aussi id_vignette=0 ? (Non : on garde une trace de l'id_vignette en cas
-	// d'aller-retour document -> vignette -> document
-	mysql_query("UPDATE spip_documents SET mode='vignette' WHERE id_document=$id_document");
+}
+else if ($transformer_image == 'vignette') {
+	mysql_query("UPDATE spip_documents SET mode='vignette', id_vignette=0 WHERE id_document=$id_document");
 }
 
 //
 // Affichage
 //
+
 $query = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
 $result = mysql_query($query);
 if ($art = mysql_fetch_object($result)) {
@@ -90,7 +87,7 @@ if ($documents_lies) {
 	reset($documents_lies);
 	while (list(, $id_document) = each($documents_lies)) {
 		echo "<tr><td>\n";
-		afficher_document($id_document, $id_doc_actif);
+		afficher_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
 		echo "</td></tr>\n";
 	}
 	echo "<tr><td height='10'>&nbsp;</td></tr>\n";
@@ -123,7 +120,7 @@ if ($images_liees) {
 	reset($images_liees);
 	while (list(, $id_document) = each($images_liees)) {
 		echo "<tr><td>\n";
-		afficher_document($id_document, $id_doc_actif);
+		afficher_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
 		echo "</td></tr>\n";
 	}
 	echo "<tr><td height='10'>&nbsp;</td></tr>\n";
@@ -144,11 +141,11 @@ echo "</td></tr></table>\n";
 
 echo debut_boite_info();
 
-$link = new Link('../spip_image.php3');
+$link = $image_link;
+$link->addVar('redirect', $redirect_url);
 $link->addVar('hash', calculer_action_auteur("ajout_doc"));
 $link->addVar('hash_id_auteur', $connect_id_auteur);
 $link->addVar('ajout_doc', 'oui');
-$link->addVar('id_article', $id_article);
 
 afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
 

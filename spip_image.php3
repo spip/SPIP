@@ -26,6 +26,33 @@ function deplacer_fichier_upload($source, $dest) {
 
 
 //
+// Convertit le type numerique retourne par getimagesize() en extension fichier
+//
+
+function decoder_type_image($type, $strict = false) {
+	switch ($type) {
+	case 1:
+		return "gif";
+	case 2:
+		return "jpg";
+	case 3:
+		return "png";
+	case 4:
+		return $strict ? "" : "swf";
+	case 5:
+		return "psd";
+	case 6:
+		return "bmp";
+	case 7:
+	case 8:
+		return "tif";
+	default:
+		return "";
+	}
+}
+
+
+//
 // Ajouter une image (logo)
 //
 
@@ -42,13 +69,8 @@ function ajout_image($source, $dest) {
 
 	// analyse le type de l'image (on ne fait pas confiance au nom de
 	// fichier envoye par le browser : pour les Macs c'est plus sur)
-	$size = getimagesize($loc);
-	$type = $size[2];
-
-	if ($type=="1") $type="gif";
-	else if ($type=="2") $type="jpg";
-	else if ($type=="3") $type="png";
-	else $type = "";
+	$size = @getimagesize($loc);
+	$type = decoder_type_image($size[2], true);
 
 	if ($type) {
 		rename($loc, "$loc.$type");
@@ -88,8 +110,9 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	$result = mysql_query($query);
 	if ($row = @mysql_fetch_array($result)) {
 		$id_type = $row['id_type'];
+		$type_inclus = $row['inclus'];
 	}
-	else return array(false,0);
+	else return false;
 
 	//
 	// Preparation
@@ -124,14 +147,14 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	else
 		$dest_path = "IMG/$dest";
 
-	if (!deplacer_fichier_upload($source, $dest_path)) return;
+	if (!deplacer_fichier_upload($source, $dest_path)) return false;
 
 	//
 	// Recopier le fichier
 	//
 
 	$size_image = getimagesize($dest_path);
-	$type_image = $size_image[2];
+	$type_image = decoder_type_image($size_image[2]);
 	if ($type_image) {
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
@@ -139,7 +162,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	$taille = filesize($dest_path);
 
 	if ($nouveau) {
-		if (!$mode) $mode = $type_image ? 'vignette' : 'document';
+		if (!$mode) $mode = ($type_image AND $type_inclus == 'image') ? 'vignette' : 'document';
 		$titre = ereg_replace("\..*$", "", $orig);
 		$titre = ereg_replace("ecrire/|upload/", "", $titre);
 		$titre = strtr($titre, "_", " ");
@@ -156,25 +179,23 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 	}
 
-	return array (true,$id_document) ; // on veut bien effacer le fichier s'il est dans ftp/upload/
+	return $id_document;
 }
 
 
 
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 // par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
-$effacer_si_ok = false;
 if (!$image_name AND $image2) {
 	$image = "ecrire/upload/".$image2;
 	$image_name = $image;
-	$effacer_si_ok = true;
 }
 
 //
 // ajouter un document
 //
 if ($ajout_doc == 'oui') {
-	list ($ok, $id_document) = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	$id_document = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
 }
 
 
@@ -226,7 +247,7 @@ $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|id_document|transformer.*)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }
