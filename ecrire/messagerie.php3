@@ -177,7 +177,7 @@ $query_message = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs
 afficher_messages(_T('info_vos_rendez_vous'), $query_message, true, true);
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND rv='oui' AND type='affich'";
-afficher_messages(_T('info_tous_redacteurs'), $query_message, false, true, false, true);
+afficher_messages(_T('info_tous_redacteurs'), $query_message, false, true, false);
 
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
@@ -199,7 +199,7 @@ $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$conne
 afficher_messages(_T('info_pense_bete_ancien'), $query_message, false, false, false);
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
-afficher_messages(_T('info_tous_redacteurs'), $query_message, false, false, false, true);
+afficher_messages(_T('info_tous_redacteurs'), $query_message, false, false, false);
 
 fin_page();
 

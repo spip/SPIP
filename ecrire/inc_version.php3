@@ -211,6 +211,7 @@ $flag_ImagePng = function_exists("ImagePng");
 $flag_multibyte = function_exists("mb_encode_mimeheader");
 $flag_iconv = function_exists("iconv");
 $flag_strtotime = function_exists("strtotime");
+$flag_php_sapi_name = function_exists("php_sapi_name");
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 
@@ -400,10 +401,12 @@ if ($auto_compress && $flag_obgz) {
 	else if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT))
 		$use_gz = false;
 
-	// special bug Apache2x + php4.2.x (versions a preciser eventuellement si on retrouve)
+	// special bug Apache2x
 	else if (eregi("Apache(-[^ ]+)?/2", $SERVER_SOFTWARE))
 		$use_gz = false;
-
+	else if ($flag_php_sapi_name && ereg("^apache2", @php_sapi_name()))
+		$use_gz = false;
+	
 	if ($use_gz) {
 		@ob_start("ob_gzhandler");
 	}

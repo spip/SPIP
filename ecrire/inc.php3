@@ -67,7 +67,6 @@ if ($debloquer_article) {
 	spip_query ($query);
 }
 
-
 // deux globales (compatibilite ascendante)
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];
