@@ -715,6 +715,9 @@ function traiter_raccourcis_generale($letexte) {
 
 	// Appeler la fonction de pre_traitement
 	$letexte = spip_avant_propre ($letexte);
+	// Appeler les fonctions complementaires
+	$letexte = appliquer_fonction_avant("propre", $letexte);
+
 
 	// Puce
 	if (!$lang_dir) {
@@ -945,6 +948,8 @@ function traiter_raccourcis_generale($letexte) {
 
 	// Appeler la fonction de post-traitement
 	$letexte = spip_apres_propre ($letexte);
+	// Appeler les fonctions complementaires
+	$letexte = appliquer_fonction_apres("propre", $letexte);
 
 	return array($letexte,$mes_notes);
 }
