@@ -13,12 +13,12 @@ $GLOBALS['i18n_fr'] = array(
 
 
 // A
-'admin_recalculer' => 'Recalculer cette page',
 'admin_modifier_article' => 'Modifier cet article',
-'admin_modifier_breve' => 'Modifier cette br&egrave;ve',
-'admin_modifier_rubrique' => 'Modifier cette rubrique',
-'admin_modifier_mot' => 'Modifier ce mot-cl&eacute;',
 'admin_modifier_auteur' => 'Modifier cet auteur',
+'admin_modifier_breve' => 'Modifier cette br&egrave;ve',
+'admin_modifier_mot' => 'Modifier ce mot-cl&eacute;',
+'admin_modifier_rubrique' => 'Modifier cette rubrique',
+'admin_recalculer' => 'Recalculer cette page',
 'avis_acces_interdit' => 'Acc&egrave;s interdit.',
 'avis_archive_incorrect' => 'le fichier archive n\'est pas un fichier SPIP',
 'avis_archive_invalide' => 'le fichier archive n\'est pas valide',
@@ -191,8 +191,6 @@ $GLOBALS['i18n_fr'] = array(
 		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 
 
-
-
 // E
 'email' => 'email',
 'email_2' => 'email :',
@@ -252,9 +250,9 @@ $GLOBALS['i18n_fr'] = array(
 'form_forum_pass' => 'mot de passe :',
 'form_forum_probleme_mail' => 'Probl&egrave;me de mail&nbsp;: l\'identifiant ne peut pas &ecirc;tre envoy&eacute;.',
 'form_forum_voici1' => 'Voici vos identifiants pour pouvoir participer aux forums
-du site \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"@nom_site_spip@\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" (@adresse_site@/) :',
+du site "@nom_site_spip@" (@adresse_site@/) :',
 'form_forum_voici2' => 'Voici vos identifiants pour proposer des articles sur
-le site \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"@nom_site_spip@\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" (@adresse_site@/ecrire/) :',
+le site "@nom_site_spip@" (@adresse_site@/ecrire/) :',
 'form_indiquer_email' => 'Veuillez indiquer votre adresse email.',
 'form_indiquer_nom' => 'Veuillez indiquer votre nom.',
 'form_indiquer_nom_site' => 'Veuillez indiquer le nom de votre site.',
@@ -312,7 +310,6 @@ Merci de votre participation
 'forum_avez_selectionne' => 'Vous avez s&eacute;lectionn&eacute;&nbsp;:',
 'forum_cliquer_retour' => 'Cliquez <a href=\'@retour_forum@\'>ici</a> pour continuer.',
 'forum_creer_paragraphes' => '(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)',
-'forum_titre_erreur' => 'Erreur...',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.',
 'forum_lien_hyper' => '<B>Lien hypertexte</B> (optionnel)',
@@ -327,6 +324,7 @@ Merci de votre participation
 'forum_qui_etes_vous' => '<B>Qui &ecirc;tes-vous ?</B> (optionnel)',
 'forum_texte' => 'Texte de votre message :',
 'forum_titre' => 'Titre :',
+'forum_titre_erreur' => 'Erreur...',
 'forum_url' => 'URL :',
 'forum_valider' => 'Valider ce choix',
 'forum_voir_avant' => 'Voir ce message avant de le poster',
@@ -1225,8 +1223,10 @@ et vous reconnecter au site.
 'pass_rien_a_faire_ici' => 'Rien &agrave; faire ici.',
 'pass_vousinscrire' => 'Vous inscrire sur ce site',
 
+
 // S
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
+
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
