@@ -715,6 +715,33 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	// Corriger HTML
 	$letexte = eregi_replace("</?p>","\n\n\n",$letexte);
 
+
+	// Traiter LaTeX
+	
+	$texte_a_voir = $letexte;
+	while (ereg("<latex>", $texte_a_voir)) {
+		include_ecrire ("inc_filtres_wem.php");
+		$debut =strpos($texte_a_voir, "<latex>");
+		$fin = strpos($texte_a_voir,"</latex>") + strlen("</latex>");
+
+		$texte_debut = substr($texte_a_voir, 0, $debut);		
+		$texte_milieu = substr($texte_a_voir, $debut+strlen("<latex>"), $fin-$debut-strlen("<latex></latex>"));
+		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
+
+		$fflag = 0;
+		while((ereg("$",$texte_milieu)) && ($fflag<5)) {
+			$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n\n<p class=\"spip\" style=\"text-align: center;\"><html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></p></html>\n\n'",$texte_milieu);
+			$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","'<html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></html>'",$texte_milieu);
+		
+			$fflag++;
+		}
+		
+				
+		$texte_a_voir = $texte_debut.$texte_milieu.$texte_fin;
+		
+	}
+	$letexte = $texte_a_voir;
+
 	//
 	// Notes de bas de page
 	//

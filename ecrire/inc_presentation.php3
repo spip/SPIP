@@ -1243,9 +1243,13 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	@Header("Cache-Control: no-cache,no-store");
 	@Header("Pragma: no-cache");
 	@Header("Content-Type: text/html; charset=$charset");
-
-	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n<html>\n<head>\n<title>[$nom_site_spip] $titre</title>\n";
+	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n";
+	echo '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
+	echo '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
+	echo '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
+	echo "<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
+
 	echo '<link rel="stylesheet" type="text/css" href="';
 	if (!$flag_ecrire) echo 'ecrire/';
 	$link = new Link('spip_style.php3');
@@ -1257,6 +1261,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 	afficher_script_layer();
 ?>
+<script type="text/javascript" src="../mathmlinHTML.js"></script>
 <script type='text/javascript'><!--
 	var init_gauche = true;
 	var memo_obj = new Array();
@@ -1434,8 +1439,12 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	}
 	
 	
+
+	
+	
 	function verifForm() {
 	
+	convert2math();
 	<?php
 		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 		// meme principe que le behavior win_width.htc pour MSIE
