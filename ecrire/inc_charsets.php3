@@ -1990,19 +1990,42 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 
 
 	default:
-		spip_log("erreur charset $charset non supporte");
 		$GLOBALS['CHARSET'][$charset] = array();
 		return $charset;
 	}
 }
 
+//
+// Verifier qu'on peut utiliser mb_string
+//
+function init_mb_string() {
+	static $mb;
+
+	// verifier que tout est present et que le charset est connu de mb_string
+	if (!$mb) {
+		if (function_exists('mb_internal_encoding')
+		AND function_exists('mb_detect_order')
+		AND function_exists('mb_substr')
+		AND function_exists('mb_strlen')
+		AND function_exists('mb_encode_mimeheader')
+		AND mb_detect_order(lire_meta('charset'))
+		) {
+			mb_internal_encoding('utf-8');
+			$mb = 1;
+		} else
+			$mb = -1;
+	}
+
+	return ($mb == 1);
+}
 
 // Detecter les versions buggees d'iconv
 function test_iconv() {
 	static $iconv_ok;
 
 	if (!$iconv_ok) {
-		if (!$GLOBALS['flag_iconv']) $iconv_ok = -1;
+		if (!function_exists('iconv'))
+			$iconv_ok = -1;
 		else {
 			if (utf_32_to_unicode(@iconv('utf-8', 'utf-32', 'chaine de test')) == 'chaine de test')
 				$iconv_ok = 1;
@@ -2010,7 +2033,7 @@ function test_iconv() {
 				$iconv_ok = -1;
 		}
 	}
-	return $iconv_ok == 1;
+	return ($iconv_ok == 1);
 }
 
 // Test de fonctionnement du support UTF-8 dans PCRE
@@ -2089,7 +2112,6 @@ function mathml2unicode($texte) {
 // Transforme une chaine en entites unicode &#129;
 //
 function charset2unicode($texte, $charset='AUTO', $forcer = false) {
-	global $flag_multibyte;
 	static $trans;
 
 	if ($charset == 'AUTO')
@@ -2099,14 +2121,13 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	case 'utf-8':
 		// Le passage par utf-32 devrait etre plus rapide
 		// (traitements PHP reduits au minimum)
-		if (test_iconv()) {
-			$s = iconv('utf-8', 'utf-32le', $texte);
-			if ($s) return utf_32_to_unicode($s);
-		}
-		if ($flag_multibyte) {
+
+		// mbstring presente ?
+		if (init_mb_string()) {
 			$s = @mb_convert_encoding($texte, 'utf-32le', 'utf-8');
 			if ($s && $s != $texte) return utf_32_to_unicode($s);
 		}
+		// sinon fonction maison
 		return utf_8_to_unicode($texte);
 
 	case 'iso-8859-1':
@@ -2126,26 +2147,33 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 		if (!$forcer) return $texte;
 
 	default:
-		if (test_iconv()) {
-			$s = iconv($charset, 'utf-32le', $texte);
-			if ($s) return utf_32_to_unicode($s);
-		}
-		if ($flag_multibyte) {
-			$s = @mb_convert_encoding($texte, 'utf-32le', $charset);
+		// mbstring presente ?
+		if (init_mb_string()) {
+			$s = mb_convert_encoding($texte, 'utf-32le', $charset);
 			if ($s && $s != $texte) return utf_32_to_unicode($s);
 		}
 
-		if (!$trans[$charset]) {
+		// Sinon, peut-etre connaissons-nous ce charset ?
+		if (!isset($trans[$charset])) {
 			global $CHARSET;
 			load_charset($charset);
 			foreach ($CHARSET[$charset] as $key => $val) {
 				$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
 		}
+		if (count($trans[$charset]))
+			return strtr($texte, $trans[$charset]);
 
-		if ($trans[$charset])
-			$texte = strtr($texte, $trans[$charset]);
+		// Sinon demander a iconv (malgre le fait qu'il coupe quand un
+		// caractere n'appartient pas au charset, mais c'est un probleme
+		// surtout en utf-8, gere ci-dessus)
+		if (test_iconv()) {
+			$s = iconv($charset, 'utf-32le', $texte);
+			if ($s) return utf_32_to_unicode($s);
+		}
 
+		// Au pire ne rien faire
+		spip_log("erreur charset $charset non supporte");
 		return $texte;
 	}
 }
@@ -2283,42 +2311,32 @@ function utf_8_to_unicode($source) {
 
 // UTF-32 : utilise en interne car plus rapide qu'UTF-8
 function utf_32_to_unicode($source) {
-	/*while ($source) {
-		$words = unpack("V*", substr($source, 0, 1024));
-		$source = substr($source, 1024);
-		foreach ($words as $word) {
-			if ($word < 128) $texte .= chr($word);
-			else if ($word != 65279) $texte .= '&#'.$word.';';
-		}
-	}*/
-
-	// Attention, cette implementation peut produire des erreurs dans de tres rares cas :
-	// caracteres multiples de 256 et superieurs a 0x900
 	$chars = array();
 	$len = strlen($source);
 	$chunk_len = 16384;
+	$cherche = array();
+
 	// Extraire la liste des caracteres utilises
 	// (plusieurs iterations pour eviter l'explosion memoire)
 	for ($i = 0; $i <= $len; $i += $chunk_len) {
-		$chars = $chars + array_flip(unpack("V*", substr($source, $i, $chunk_len)));
+		$chars = $chars + array_flip(unpack("V*",
+			substr($source, $i, $chunk_len)));
 	}
-	$cherche = $remplace = array();
+
 	foreach ($chars as $c => $v) {
 		$from = pack("V", $c);
 		if ($c < 128)
-			$to = chr($c);
-		else if ($c != 65279)
-			$to = '&#'.$c.';';
-		else 
-			$to = '';
-		$cherche[] = $from;
-		$remplace[] = $to;
+			$cherche[$from] = chr($c);
+		else
+			$cherche[$from] =
+				// ignorer le BOM - http://www.unicode.org/faq/utf_bom.html
+				($c == 65279) ? '' :
+				"&#$c;";
 	}
-	$texte = str_replace($cherche, $remplace, $source);
-	
-	return $texte;
-}
 
+	krsort($cherche);
+	return str_replace(array_keys($cherche), $cherche, $source);
+}
 
 // Ce bloc provient de php.net, auteur Ronen
 function caractere_utf_8($num) {
@@ -2388,18 +2406,7 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 			$trans[$complexe][caractere_utf_8($key)] = $val;
 	}
 
-	$texte = strtr($texte, $trans[$complexe]);
-
-/*
-	// Le probleme d'iconv c'est qu'il risque de nous renvoyer des ? alors qu'on
-	// prefere garder l'utf-8 pour que la chaine soit indexable.
-	// 3. Translitterer grace a iconv
-	if ($GLOBALS['flag_iconv'] && ereg('&#0*([0-9]+);', $texte)) {
-		$texte = iconv('utf-8', 'ascii//translit', $texte);
-	}
-*/
-
-	return $texte;
+	return strtr($texte, $trans[$complexe]);
 }
 
 function translitteration_complexe($texte) {

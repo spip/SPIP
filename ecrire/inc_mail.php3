@@ -81,7 +81,8 @@ function tester_mail() {
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap;
-	include_ecrire("inc_filtres.php3");
+	include_ecrire('inc_filtres.php3');
+	include_ecrire('inc_charsets.php3');
 
 	if (!$from) {
 		$email_envoi = lire_meta("email_envoi");
@@ -113,7 +114,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	$sujet = str_replace("&mdash;", "--", $sujet);
 
 	// encoder le sujet si possible selon la RFC
-	if($GLOBALS['flag_multibyte'] AND @mb_internal_encoding($charset))
+	if(init_mb_string())
 		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q');
 
 	if ($flag_wordwrap) $texte = wordwrap($texte);
