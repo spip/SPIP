@@ -114,7 +114,7 @@ function recuperer_parametres_url($fond, $url) {
 	global $contexte;
 
 	// Migration depuis anciennes URLs ?
-	if ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] != 'POST' &&
+	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' &&
 		preg_match(',(^|/)(article|breve|rubrique|mot)\.php3?([\?&].*)?$,', $url, $regs)) {
 		$type = $regs[2];
 		$id_objet = intval($GLOBALS['id_'.$type]);
@@ -130,7 +130,7 @@ function recuperer_parametres_url($fond, $url) {
 		return;
 	}
 
-	$url_propre = $GLOBALS['HTTP_SERVER_VARS']['REDIRECT_url_propre'];
+	$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];
 	if (!$url_propre) $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
 	if (!$url_propre) $url_propre = substr($url, strrpos($url, '/') + 1);
 	if (!$url_propre) return;

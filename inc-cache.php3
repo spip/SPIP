@@ -112,16 +112,16 @@ function retire_caches() {
 // Retourne 0 s'il faut calculer le cache, 1 si on peut l'utiliser
 //
 function utiliser_cache($chemin_cache, $delais) {
-	global $HTTP_SERVER_VARS;
+	global $_SERVER;
 
 	// ne jamais calculer pour les moteurs de recherche, proxies...
-	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
+	if ($_SERVER['REQUEST_METHOD'] == 'HEAD')
 		return 1;
 
 	//  calcul par forcage
 	if ($GLOBALS['var_mode'] &&
-		($GLOBALS['HTTP_COOKIE_VARS']['spip_session']
-		|| $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']
+		($GLOBALS['_COOKIE']['spip_session']
+		|| $GLOBALS['_COOKIE']['spip_admin']
 		|| @file_exists(_ACCESS_FILE_NAME))) # insuffisant...
 		return 0;
 
@@ -170,7 +170,7 @@ function purger_squelettes() {
 function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 
 	// Le fichier cache est-il valide ?
-	if ($delais == 0 OR !empty($GLOBALS['HTTP_POST_VARS'])) {
+	if ($delais == 0 OR !empty($GLOBALS['_POST'])) {
 		$use_cache = 0;
 		$chemin_cache = '';
 	} else {

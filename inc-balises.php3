@@ -639,7 +639,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	}
 
 	$c .= '.
-	"&retour=".rawurlencode($lien=$GLOBALS["HTTP_GET_VARS"]["retour"] ? $lien : nettoyer_uri())';
+	"&retour=".rawurlencode($lien=$GLOBALS["_GET"]["retour"] ? $lien : nettoyer_uri())';
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 

@@ -78,7 +78,7 @@ function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_m
 			($forcer_debug
 			OR $GLOBALS['bouton_admin_debug']
 			OR ($GLOBALS['var_mode'] == 'debug'
-				AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug']
+				AND $GLOBALS['_COOKIE']['spip_debug']
 			)) AND ($GLOBALS['code_activation_debug'] == 'oui'
 				OR $GLOBALS['auteur_session']['statut'] == '0minirezo')
 		) ? 'debug' : '';

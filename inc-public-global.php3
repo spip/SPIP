@@ -28,7 +28,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 
 		// log
 		if (!$log = $chemin_cache) $log = "($fond, delais=$delais, "
-		. $GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'].")";
+		. $GLOBALS['_SERVER']['REQUEST_METHOD'].")";
 		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
 		.spip_timer('calculer_page')."): $log");
 
@@ -121,7 +121,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$lastmodified = @filemtime($chemin_cache);
 		$headers_only = http_last_modified($lastmodified);
 	}
-	$headers_only |= ($GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'] == 'HEAD');
+	$headers_only |= ($GLOBALS['_SERVER']['REQUEST_METHOD'] == 'HEAD');
 
 	if ($headers_only) {
 		if ($chemin_cache)

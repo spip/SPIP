@@ -19,7 +19,7 @@ else
     include_ecrire("inc_session.php3");
 
     global $auteur_session;
-    if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) 
+    if ($cookie_session = $_COOKIE['spip_session']) 
       {
 	if (verifier_session($cookie_session)) 
 	  {
