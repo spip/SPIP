@@ -85,13 +85,14 @@ td {
  */
 
 .bandeau-principal {
+	background-color: white;
 	margin: 0px;
 	padding: 0px;
-	background-color: white;
 	border-bottom: 1px solid black;
 }
 
 .bandeau-icones {
+	background-color: white;
 	margin: 0px;
 	padding: 0px;
 	padding-bottom: 2px; 
