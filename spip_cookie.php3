@@ -25,13 +25,14 @@ else if ($essai_auth_http == 'logout') {
 	exit;
 }
 
+/*
 // rejoue le cookie pour renouveler spip_session
-if ($change_session == "oui") {
+if ($change_session == 'oui') {
 	if (verifier_session($spip_session)) {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
-		if ($zap_session)
-			zap_sessions($auteur_session['id_auteur'], true);
+//		if ($zap_session)
+//			zap_sessions($auteur_session['id_auteur'], true);
 //		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
 		setcookie('spip_session', $cookie);
 		@header('Content-Type: image/gif');
@@ -42,6 +43,7 @@ if ($change_session == "oui") {
 		exit;
 	}
 }
+*/
 
 // zapper les mauvaises sessions
 if ($zap_session && verifier_session($spip_session))
@@ -81,6 +83,8 @@ else if ($essai_login == "oui") {
 
 		if ($row_auteur['statut'] == '0minirezo') { // force le cookie pour les admins
 			$cookie_admin = "@".$row_auteur['login'];
+			if ($spip_admin == $cookie_admin)
+				unset ($cookie_admin);
 		}
 		$cookie_session = creer_cookie_session($row_auteur);
 		setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
