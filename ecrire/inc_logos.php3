@@ -4,20 +4,21 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_LOGOS")) return;
 define("_ECRIRE_INC_LOGOS", "1");
-
+global $flag_ecrire;
+define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
 function get_image($racine) {
 	foreach (array('gif','jpg','png') as $fmt)
-		if (@file_exists("../IMG/$racine.".$fmt)) {
+		if (@file_exists(_DIR_IMG . $racine . '.' .$fmt)) {
 			$fichier = "$racine.".$fmt;
 			break;
 		}
 
 	if ($fichier) {
 		$taille = resize_logo($fichier);
-
+		$fid = _DIR_IMG . $fichier;
 		// contrer le cache du navigateur
-		if ($fid = @filesize("../IMG/$fichier") . @filemtime("../IMG/$fichier"))
+		if ($fid = @filesize($fid) . @filemtime($fid))
 			$fid = "?".md5($fid);
 		return array($fichier, $taille, $fid);
 	}
@@ -26,7 +27,7 @@ function get_image($racine) {
 
 
 function resize_logo($image, $maxi=190) {
-	$limage = @getimagesize("../IMG/$image");
+	$limage = @getimagesize( _DIR_IMG . $fichier);
 	if (!$limage) return;
 	$limagelarge = $limage[0];
 	$limagehaut = $limage[1];
@@ -104,7 +105,7 @@ function afficher_logo($racine, $titre) {
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
-		echo "<P><CENTER><IMG SRC='../IMG/$fichier$fid' $taille_html alt='' />";
+		echo "<P><CENTER><IMG SRC='" . _DIR_IMG . "$fichier$fid' $taille_html alt='' />";
 
 		echo debut_block_invisible(md5($titre));
 		echo "$taille_txt\n";
@@ -349,6 +350,55 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 
 	// renvoyer l'image
 	return $retour;
+}
+
+
+//
+// Reduire la taille d'un logo
+// [(#LOGO_ARTICLE||reduire_image{100,60})]
+//
+
+function reduire_image_logo($img, $taille = 120, $taille_y=0) {
+	if (!$taille_y)
+		$taille_y = $taille;
+
+	// recuperer le nom du fichier
+	if (eregi("src=\'([^']+)\'", $img, $regs)) $logo = $regs[1];
+	if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
+	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
+	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
+
+	if (!$logo)
+		$logo = $img; // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
+
+
+	if (ereg("^../",$logo))
+		$logo = substr($logo,3);
+
+	if (ereg("^" . _DIR_IMG, $logo))
+		$img = substr($logo,strlen(_DIR_IMG));
+	else { $img = $logo; $logo = _DIR_IMG . $logo;}
+	spip_log("$img, $logo" . file_exists($logo));
+	if (@file_exists($logo) AND
+	    eregi("^(.*)\.(jpg|gif|png)$", $img, $regs)) {
+		include_local('inc-cache.php3');
+		$nom = $regs[1];
+		$format = $regs[2];
+		$suffixe = '-'.$taille.'x'.$taille_y;
+		$cache_folder=  _DIR_IMG . creer_repertoire(_DIR_IMG, 'cache'.$suffixe);
+		$preview = creer_vignette($logo, $taille, $taille_y, $format, $cache_folder.$nom.$suffixe);
+		spip_log($preview['fichier'] . $cache_folder);
+		if ($preview) {
+			$vignette = $preview['fichier'];
+			$width = $preview['width'];
+			$height = $preview['height'];
+			return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
+		}
+		else if ($taille_origine = getimagesize($logo)) {
+			list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
+			return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
+		}
+	}
 }
 
 ?>

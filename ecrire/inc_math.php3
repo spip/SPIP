@@ -4,6 +4,7 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_MATH")) return;
 define("_ECRIRE_INC_MATH", "1");
+define('_DIR_TeX', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/TeX");
 
 
 //
@@ -24,10 +25,10 @@ function image_math($tex) {
 	}
 
 	// Regarder dans le repertoire local des images TeX et blocs MathML
-	$dir = ($GLOBALS['flag_ecrire'] ? '../' : '').'IMG/TeX';
-	if (!@is_dir($dir))
-		@mkdir ($dir, 0777);
-	$fichier = "$dir/".md5(trim($tex)).$ext;
+
+	if (!@is_dir(_DIR_TeX))
+		@mkdir (_DIR_TeX, 0777);
+	$fichier = _DIR_TeX .md5(trim($tex)).$ext;
 	
 
 	if (!@file_exists($fichier)) {

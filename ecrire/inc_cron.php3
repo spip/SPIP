@@ -5,7 +5,6 @@
 if (defined("_ECRIRE_INC_CRON")) return;
 define("_ECRIRE_INC_CRON", "1");
 
-
 // --------------------------
 // Gestion des taches de fond
 // --------------------------
@@ -257,8 +256,9 @@ function spip_cron() {
 					WHERE fichier='$s'";
 				$result = spip_query($query);
 
-				if (spip_num_rows($result) OR !ereg('^IMG/', $s)
-				OR strpos($s, '..'))
+				if (spip_num_rows($result) OR 
+				    !ereg('^' . _DIR_IMG, $s)
+				    OR strpos($s, '..'))
 					spip_log("Tentative d'effacement interdit: $s");
 				else
 					@unlink($s);
