@@ -1022,6 +1022,15 @@ if ($cherche_auteur) {
 	else {
 		echo "<B>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 	}
+
+	if ($GLOBALS['connect_statut'] == '0minirezo') {
+		echo "<div style='width: 200px;'>";
+		$retour = urlencode($GLOBALS['clean_link']->getUrl());
+		$titre = urlencode($cherche_auteur);
+		icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+		echo "</div> ";
+	}
+
 	fin_boite_info();
 	echo "<P>";
 

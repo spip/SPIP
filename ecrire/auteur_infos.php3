@@ -74,8 +74,10 @@ if ($id_auteur) {
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
 	$new = false;	// eviter hack
 } else {
-	$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
-	$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+	if (!$auteur['nom'] = $titre) {
+		$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
+		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+	}
 	$auteur['statut'] = '1comite';
 	$auteur['source'] = 'spip';
 }

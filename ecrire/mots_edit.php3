@@ -59,8 +59,10 @@ if ($connect_statut == '0minirezo') {
 		}
 	}
 	else if ($new == 'oui') {
-		$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
-		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		if (!$titre_mot = $titre) {
+			$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
+			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		}
 	}
 }
 
@@ -96,15 +98,17 @@ debut_gauche();
 // Boite "voir en ligne"
 //
 
-debut_boite_info();
-echo "<CENTER>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_gauche_mots_edit')."</B></FONT>";
-echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
-echo "</CENTER>";
+if ($id_mot) {
+	debut_boite_info();
+	echo "<CENTER>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_gauche_mots_edit')."</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
+	echo "</CENTER>";
 
-voir_en_ligne ('mot', $id_mot);
+	voir_en_ligne ('mot', $id_mot);
 
-fin_boite_info();
+	fin_boite_info();
+}
 
 echo "<p><center>";
 if ($new == 'oui') {
@@ -233,7 +237,7 @@ if ($connect_statut =="0minirezo"){
 		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
 		while ($row_groupes = spip_fetch_array($result)){
 			$groupe = $row_groupes['id_groupe'];
-			$titre_groupe = entites_html($row_groupes['titre']);
+			$titre_groupe = texte_backend(supprimer_tags(typo($row_groupes['titre'])));
 			echo  "<OPTION".mySel($groupe, $id_groupe).">$titre_groupe</OPTION>\n";
 		}			
 		echo  "</SELECT>";
