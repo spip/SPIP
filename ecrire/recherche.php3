@@ -2,6 +2,7 @@
 
 include ("inc.php3");
 include_ecrire ("inc_mots.php3");
+include_ecrire ("inc_sites.php3");
 
 debut_page("R&eacute;sultats de la recherche $recherche");
 
