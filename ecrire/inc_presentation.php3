@@ -2022,7 +2022,7 @@ function install_debut_html($titre='AUTO', $onload='') {
 		$titre=_T('info_installation_systeme_publication');
 
 	if (!$charset = lire_meta('charset'))
-		$charset = 'utf-8';
+		$charset = 'iso-8859-1';
 	@Header("Content-Type: text/html; charset=$charset");
 
 	echo "<html><head>

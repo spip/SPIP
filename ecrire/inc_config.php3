@@ -33,7 +33,7 @@ function init_config() {
 		'creer_preview' => 'non',
 		'taille_preview' => 150,
 		'articles_modif' => 'oui',
-		
+
 		'activer_sites' => 'oui',
 		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',
@@ -51,16 +51,16 @@ function init_config() {
 
 		'activer_moteur' => 'non',
 		'activer_statistiques' => 'oui',
-		'activer_statistiques_ref' => 'oui',
+		'activer_statistiques_ref' => 'non',
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
-		'charset' => 'utf-8',
+		'charset' => 'iso-8859-1',
 
 		'creer_htpasswd' => 'non',
-		
+
 		'langue_site' => $lang,
-		
+
 		'multi_articles' => 'non',
 		'multi_rubriques' => 'non',
 		'multi_secteurs' => 'non',
