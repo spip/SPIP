@@ -215,6 +215,7 @@ function calculer_n_referers($nb_referers) {
 
 
 function calculer_referers() {
+	spip_log("analyse referers");
 	$encore = calculer_n_referers(100);
 	if ($encore) {
 		include_ecrire("inc_meta.php3");
@@ -233,6 +234,7 @@ function calculer_referers() {
 //
 
 function calculer_visites($date = "") {
+	spip_log("analyse visites");
 
 	// calculer les popularites avant d'effacer les donnees
 	calculer_popularites();
@@ -290,6 +292,8 @@ function calculer_visites($date = "") {
 //
 
 function calculer_popularites() {
+	spip_log("analyse popularites");
+
 	$date = lire_meta('date_stats_popularite');
 	include_ecrire("inc_meta.php3");
 	ecrire_meta("date_stats_popularite", time());
