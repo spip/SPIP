@@ -228,9 +228,9 @@ function critere_par_dist($param, $not, &$boucle, $infos) {
 	}
 	// tris par critere bizarre
 	// (formule composee, virgules, etc).
-	else { 
-		$boucle->order = $tri;	// autorise le hack {par $GLOBALS["tri"]}
-	}
+	// autoriser le hack {par $GLOBALS["tri"]}
+	else
+		$boucle->order = "\"$tri\"";
 }
 
 
