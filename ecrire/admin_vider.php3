@@ -82,7 +82,7 @@ list ($taille) = spip_fetch_array(spip_query(
 "SELECT SUM(taille) FROM spip_caches WHERE type='t'"));
 
 if ($taille>0) {
-	$info = _T(taille_cache_octets, array('octets' => taille_en_octets($taille));
+	$info = _T('taille_cache_octets', array('octets' => taille_en_octets($taille)));
 } else
 	$info = _T('taille_cache_vide');
 
