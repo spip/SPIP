@@ -97,6 +97,12 @@ function extrait_article($row) {
 	return $extrait;
 }
 
+
+function nettoyer_titre_email($titre) {
+	$titre = ereg_replace("\n", ' ', supprimer_tags($titre));
+	return ($titre); 
+}
+
 function envoyer_mail_publication($id_article) {
 	global $connect_nom;
 	$adresse_suivi = lire_meta("adresse_suivi");
@@ -109,11 +115,11 @@ function envoyer_mail_publication($id_article) {
 		$result = spip_query($query);
 
 		if ($row = mysql_fetch_array($result)) {
-			$titre = $row['titre'];
+			$titre = nettoyer_titre_email($row['titre']);
 
-			$sujet = "[$nom_site_spip] Article publie";
-			$courr = "Article publié\n--------------\n\n";
-			$courr .= "L'article \"$titre\" a été validé par $connect_nom.\n\n\n";
+			$sujet = "[$nom_site_spip] PUBLIE : $titre";
+			$courr = "Article publi".chr(233)."\n--------------\n\n";
+			$courr .= "L'article \"$titre\" a ".chr(233)."t".chr(233)." valid".chr(233)." par $connect_nom.\n\n\n";
 			$courr .= extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 		}
@@ -131,13 +137,13 @@ function envoyer_mail_proposition($id_article) {
 		$result = spip_query($query);
 
 		if ($row = mysql_fetch_array($result)) {
-			$titre = $row['titre'];
+			$titre = nettoyer_titre_email($row['titre']);
 
-			$sujet = "[$nom_site_spip] Article propose";
-			$courr = "Article proposé\n---------------\n\n";
-			$courr .= "L'article \"$titre\" est proposé à la publication.\n";
-			$courr .= "Vous êtes invité à venir le consulter et à donner votre opinion\n";
-			$courr .= "dans le forum qui lui est attaché. Il est disponible à l'adresse :\n";
+			$sujet = "[$nom_site_spip] Propose : $titre";
+			$courr = "Article propos".chr(233)."\n---------------\n\n";
+			$courr .= "L'article \"$titre\" est propos".chr(233)." ".chr(224)." la publication.\n";
+			$courr .= "Vous êtes invit".chr(233)." ".chr(224)." venir le consulter et ".chr(224)." donner votre opinion\n";
+			$courr .= "dans le forum qui lui est attach".chr(233).". Il est disponible ".chr(224)." l'adresse :\n";
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
 			$courr .= extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
@@ -154,7 +160,7 @@ function envoyer_mail_nouveautes() {
 
 	$courr .= "Bonjour,\n\n";
 	$courr .= "Voici la lettre d'information du site \"$nom_site_spip\" ($adresse_site),\n";
-	$courr .= "qui recense les articles et les breves publiés depuis $jours_neuf jours.\n\n";
+	$courr .= "qui recense les articles et les breves publi".chr(233)."s depuis $jours_neuf jours.\n\n";
 
 	if ($post_dates == 'non')
 		$query_post_dates = 'AND date < NOW()';
