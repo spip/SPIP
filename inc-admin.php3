@@ -58,7 +58,7 @@ function afficher_boutons_admin($pop, $forcer_debug = false) {
 	// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
 	// puis celle du squelette (.spip-admin, cf. impression.css)
 	$ret .= "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
-	if (@file_exists('spip_admin_perso.css')) echo "\t<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
+	if (@file_exists('spip_admin_perso.css')) $ret .= "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
 	$ret .= '<div class="spip-admin-float">
 	<div class="spip-admin-bloc" dir="'.lang_dir($lang,'ltr','rtl').'">
 	<div class="spip-admin">
