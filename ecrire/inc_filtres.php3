@@ -693,4 +693,14 @@ function ajoute_popup_multi($langue_demandee, $trads, $texte) {
 }
 
 
+function extraire_attribut($balise, $attribut) {
+# la mise en facteur ne marche pas....
+#  if (preg_match("/<[^>]*\s+$attribut=(['\"])([^\\1]*)\\1/i", $balise, $r))
+  if (preg_match("/<[^>]*\s+$attribut='([^']*)'/i", $balise, $r))
+     return $r[1];
+  else if (preg_match("/<[^>]*\s+$attribut=\"([^\"]*)\"/i", $balise, $r))
+     return $r[1];
+  else return '';
+}
+
 ?>
