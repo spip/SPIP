@@ -126,6 +126,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 
 	/// Dans la rubrique....
+	echo "<INPUT TYPE='Hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\">";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {

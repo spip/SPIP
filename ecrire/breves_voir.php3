@@ -99,6 +99,26 @@ if ($titre AND $modifier_breve) {
 		indexer_breve($id_breve);
 	}
 	calculer_rubriques();
+	
+	
+// Changer la langue heritee
+if ($id_rubrique != id_rubrique_old) {
+	if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
+		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
+		$langue_old = $row['lang'];
+		$langue_choisie_old = $row['langue_choisie'];
+		
+		if ($langue_choisie_old != "oui") {
+			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$langue_new = $row['lang'];
+	
+			if ($langue_new != $langue_old) {
+				spip_query("UPDATE spip_breves SET lang = '$langue_new' WHERE id_breve = $id_breve");
+			}
+		}
+	}
+}
+	
 }
 
 
@@ -289,10 +309,11 @@ if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 	$langue_breve = $row['lang'];
 	$langue_choisie_breve = $row['langue_choisie'];
 	
-	//echo "[$langue_breve | $langue_choisie_breve]";
+	//	echo "[$langue_breve | $langue_choisie_breve]";
 
 	if ($langue_choisie_breve == 'oui') $herit = false;
 	else $herit = true;
+	
 
 	debut_cadre_enfonce("langues-24.gif");
 		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
