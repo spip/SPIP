@@ -456,7 +456,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	$tranches = afficher_tranches_requete($requete, 2);
 
 	if (strlen($tranches)) {
-		
+
 		debut_cadre_relief("breve-24.gif");
 
 		if ($titre_table) {
@@ -484,11 +484,22 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$titre = $row['titre'];
 			$statut = $row['statut'];
 			$id_rubrique = $row['id_rubrique'];
-			if ($statut == 'prop') $puce = "puce-blanche";
-			else if ($statut == 'publie') $puce = "puce-verte";
-			else if ($statut == 'refuse') $puce = "puce-rouge";
+			switch ($statut) {
+			case 'prop':
+				$puce = "puce-blanche";
+				$title = "Br&egrave;ve propos&eacute;e";
+				break;
+			case 'publie':
+				$puce = "puce-verte";
+				$title = "Br&egrave;ve publi&eacute;e";
+				break;
+			case 'publie':
+				$puce = "puce-rouge";
+				$title = "Br&egrave;ve refus&eacute;e";
+				break;
+			}
 
-			$s = "<a href='breves_voir.php3?id_breve=$id_breve'>";
+			$s = "<a href='breves_voir.php3?id_breve=$id_breve' title=\"$title\">";
 			$s .= "<img src='img_pack/$puce.gif' alt='' width='8' height='9' border='0'></a>&nbsp;&nbsp;";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'>";
 			$s .= typo($titre);

@@ -234,7 +234,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 function afficher_sites($titre_table, $requete) {
 	global $couleur_claire;
 	global $connect_id_auteur;
-	
+
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
 
@@ -279,31 +279,35 @@ function afficher_sites($titre_table, $requete) {
 			$link = new Link("sites.php3?id_syndic=$id_syndic");
 			$redirect = new Link;
 			$link->addVar('redirect', $redirect->getUrl());
-			echo "<A HREF=\"".$link->getUrl()."\">";
-			if ($statut=='publie') {
+			switch ($statut) {
+			case 'publie':
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-verte-anim.gif';
 				else
 					$puce='puce-verte.gif';
-			}
-			else if ($statut=='prop') {
+				$title = "Site r&eacute;f&eacute;renc&eacute; en ligne";
+				break;
+			case 'prop':
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-blanche-anim.gif';
 				else
 					$puce='puce-blanche.gif';
-			}
-			else if ($statut=='refuse') {
+				$title = "Site Web en attente de validation";
+				break;
+			case 'refuse':
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-poubelle-anim.gif';
 				else
 					$puce='puce-poubelle.gif';
+				$title = "Site Web refus&eacute;";
+				break;
 			}
-			
-			
 			if ($syndication == "off") {
-					$puce = 'puce-orange-anim.gif';
+				$puce = 'puce-orange-anim.gif';
+				$title = "Site syndiqu&eacute; en panne";
 			}
 
+			echo "<a href=\"".$link->getUrl()."\" title=\"$title\">";
 			echo "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 			if ($moderation == 'oui')
 				echo "<i>".typo($nom_site)."</i>";
@@ -312,7 +316,7 @@ function afficher_sites($titre_table, $requete) {
 
 			echo "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>visiter ce site</a>]</font>";
 			echo "</td>";
-			
+
 			echo "<td class='arial1' align='right'> &nbsp;";
 			if ($syndication == "off") {
 				echo "<font color='red'>probl&egrave;me de </font>";
