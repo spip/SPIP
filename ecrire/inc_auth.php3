@@ -12,30 +12,17 @@ include_ecrire ("inc_session.php3");
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
 
-function recuperer_sous_rubriques($id_parent) {
-	global $connect_id_rubrique;
-		
-	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_parent";
- 	$result = spip_query($query);
-
-	while ($row = spip_fetch_array($result)) {
-		$id_rubrique = $row['id_rubrique'];
-		$connect_id_rubrique[$id_rubrique] = $id_rubrique;
-		recuperer_sous_rubriques($id_rubrique);
-	}
-}
-
 function acces_rubrique($id_rubrique) {
 	global $connect_toutes_rubriques;
 	global $connect_id_rubrique;
-	
+
 	return ($connect_toutes_rubriques OR $connect_id_rubrique[$id_rubrique]);
 }
 
 function acces_restreint_rubrique($id_rubrique) {
 	global $connect_id_rubrique;
 	global $connect_statut;
-	
+
 	return ($connect_statut == "0minirezo" AND $connect_id_rubrique[$id_rubrique]);
 }
 
@@ -132,11 +119,11 @@ function auth() {
 	//
 	// Chercher le login dans la table auteurs
 	//
-	
+
 	$auth_login = addslashes($auth_login);
 	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
 	$result = @spip_query($query);
-	
+
 	if ($row = spip_fetch_array($result)) {
 		$connect_id_auteur = $row['id_auteur'];
 		$connect_nom = $row['nom'];
@@ -149,7 +136,7 @@ function auth() {
 		$connect_statut = $row['statut'];
 		$connect_activer_messagerie = $row["messagerie"];
 		$connect_activer_imessage = $row["imessage"];
-	
+
 		// Special : si dans la fiche auteur on modifie les valeurs
 		// de messagerie, utiliser ces valeurs plutot que celle de la base.
 		// D'ou leger bug si on modifie la fiche de quelqu'un d'autre.
@@ -157,7 +144,7 @@ function auth() {
 			$connect_activer_messagerie = $GLOBALS['perso_activer_messagerie'];
 			$connect_activer_imessage = $GLOBALS['perso_activer_imessage'];
 		}
-	
+
 		// regler les preferences de l'auteur
 		$prefs = unserialize($row['prefs']);
 
@@ -174,12 +161,12 @@ function auth() {
 		if ($connect_activer_messagerie != "non") {
 			@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 		}
-	
+
 		// Si administrateur, recuperer les rubriques gerees par l'admin
 		if ($connect_statut == '0minirezo') {
 			$query_admin = "SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'";
 			$result_admin = spip_query($query_admin);
-			
+
 			$connect_toutes_rubriques = (@spip_num_rows($result_admin) == 0);
 			if ($connect_toutes_rubriques) {
 				$connect_id_rubrique = array();
@@ -209,12 +196,12 @@ function auth() {
 		// ici on est dans un cas limite : l'auteur a ete identifie OK
 		// mais il n'existe pas dans la table auteur. Cause possible,
 		// notamment, une restauration de base de donnees dans laquelle
-		// il n'existe pas. 
+		// il n'existe pas.
 		include_ecrire('inc_presentation.php3');
 		include_ecrire('inc_texte.php3');
 		install_debut_html("Erreur de connexion");
 		echo "<br><br><p>".propre("Vous &ecirc;tes identifi&eacute; sous le
-		login {{$auth_login}}, mais celui-ci n'existe pas/plus dans la base. 
+		login {{$auth_login}}, mais celui-ci n'existe pas/plus dans la base.
 		Essayez de vous [reconnecter->../spip_cookie.php3?logout=$auth_login], apr&egrave;s
 		avoir &eacute;ventuellement quitt&eacute; puis
 		red&eacute;marr&eacute; votre navigateur.");
@@ -226,7 +213,7 @@ function auth() {
 		@header("Location: ../spip_login.php3?var_erreur=pass");
 		exit;
 	}
-	
+
 	if ($connect_statut == 'nouveau') {
 		$query = "UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$connect_id_auteur";
 		$result = spip_query($query);

@@ -27,7 +27,7 @@ class Auth_ldap {
 
 		// Attributs testes pour egalite avec le login
 		$atts = array('uid', 'login', 'userid', 'cn', 'sn');
-		$login_search = ereg_replace("[^[:space:][:alnum:]]", "", $login); // securite
+		$login_search = ereg_replace("[^-._[:space:][:alnum:]]", "", $login); // securite
 
 		// Tenter une recherche pour essayer de retrouver le DN
 		reset($atts);
