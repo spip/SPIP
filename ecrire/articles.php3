@@ -740,8 +740,8 @@ if ($flag_editable) {
 		}
 	}
 	if ($flag_modif) {
-		icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
-		echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
+		icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+		echo "<font face='arial,helvetica,sans-serif' size='2'>Attention, $nom_auteur_modif a travaill&eacute; sur cet article il y a $date_diff minutes</font>";
 		echo aide("artmodif");
 	}
 	else {
