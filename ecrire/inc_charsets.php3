@@ -14,13 +14,15 @@ define("_ECRIRE_INC_CHARSETS", "1");
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
+	$charset = strtolower($charset);
+
 	if (is_array($GLOBALS['CHARSET'][$charset]))
 		return $charset;
 
 	if ($langue_site == 'AUTO')
 		$langue_site = lire_meta('langue_site');
 
-	switch (strtolower($charset)) {
+	switch ($charset) {
 	case 'utf-8':
 		$GLOBALS['CHARSET'][$charset] = array();
 		return $charset;
@@ -313,6 +315,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
+	$charset = strtolower($charset);
 
 	switch ($charset) {
 	case 'utf-8':
@@ -364,6 +367,7 @@ function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
 		$charset=lire_meta('charset');
+	$charset = strtolower($charset);
 
 	switch($charset) {
 	case 'utf-8':
@@ -555,6 +559,7 @@ function translitteration($texte, $charset='AUTO') {
 	static $trans;
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
+	$charset = strtolower($charset);
 
 	// 1. Passer le charset et les &eacute en utf-8
 	$texte = unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
