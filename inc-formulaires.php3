@@ -148,7 +148,7 @@ function reponse_signature($id_article) {
 		// Eviter les doublons
 		$lock = "petition $id_article $adresse_email";
 		if (!spip_get_lock($lock, 5)) {
-			$reponse_signature = _T('form_pet_probleme_technique');
+			$reponse_signature .= _T('form_pet_probleme_technique');
 		}
 		else {
 			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
@@ -249,18 +249,18 @@ function reponse_signature($id_article) {
 		}
 	}
 	else {
-		$reponse_signature = _T('form_pet_probleme_technique');
+		$reponse_signature .= _T('form_pet_probleme_technique');
 	}
-	echo "<div class='reponse_formulaire'>$reponse_signature</div>";
+	echo "<div class='reponse_formulaire'><a name='sp$id_article'></a>$reponse_signature</div>";
 }
 
 //
 // Formulaire de signature d'une petition
 //
 
-function formulaire_signature($id_article) {
+function formulaire_signature_normal($id_article) {
 	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_mail.php3");
+
 	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 	$result_petition = spip_query($query_petition);
 
@@ -274,7 +274,6 @@ function formulaire_signature($id_article) {
 
 		$link = new Link;
 		$url = lire_meta("adresse_site").'/'.$link->getUrl();
-		$link = new Link;
 		$link->addVar('url_page', $url);
 		$retour .= $link->getForm('post', "sp$id_article");
 
@@ -315,9 +314,18 @@ function formulaire_signature($id_article) {
 }
 
 
+function formulaire_signature ($id_article) {
+spip_log("petition $id_article");
+	if ($GLOBALS['val_confirm'])
+		return reponse_confirmation($id_article);
+	else if ($GLOBALS['nom_email'] AND $GLOBALS['adresse_email'])
+		return reponse_signature($id_article);
+	else
+		return formulaire_signature_normal($id_article);
+}
+
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
 function formulaire_inscription($type) {
-  include_ecrire("inc_mail.php3");
 	$request_uri = $GLOBALS["REQUEST_URI"];
 	global $mail_inscription;
 	global $nom_inscription;
@@ -407,7 +415,6 @@ function formulaire_inscription($type) {
 
 
 function formulaire_site($la_rubrique) {
-  include_ecrire("inc_mail.php3");
 	$request_uri = $GLOBALS["REQUEST_URI"];
 	global $nom_site;
 	global $url_site;
