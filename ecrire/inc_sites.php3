@@ -194,7 +194,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					$la_date = $match[2];
 				else if (ereg("<pubDate>([^<]*)</pubDate>",$item[$i],$match))
 					$la_date = $match[1];
-				if ($la_date) {
+				if ($GLOBALS['flag_strtotime'] AND $la_date) {
 					// http://www.w3.org/TR/NOTE-datetime
 					if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
 						$la_date = str_replace("T", " ", $match[1])." GMT";

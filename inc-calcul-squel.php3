@@ -389,23 +389,25 @@ function parser_boucle($texte, $id_parent) {
 						// Cas particulier : id_secteur = id_rubrique pour certaines tables
 						else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
 							$col = 'id_rubrique';
+
+						// Cas particulier : expressions de date redac
+						$datecompare='date';
+						if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|annee_relatif)_redac(_redac)?$", $col, $regs)) {
+							$col_date = 'date_redac';
+							$col = $regs[1];
+							if ($regs[2])
+								$datecompare='date_redac';
+						}
+
 						// Cas particulier : expressions de date
-						else if ($col == 'date')
+						if ($col == 'date')
 							$col = $table.$col_date;
 						else if ($col == 'mois') {
 							$col = "MONTH($table.$col_date)";
 							$col_table = '';
 						}
-						else if ($col == 'mois_redac') {
-							$col = "MONTH($table.date_redac)";
-							$col_table = '';
-						}
 						else if ($col == 'annee') {
 							$col = "YEAR($table.$col_date)";
-							$col_table = '';
-						}
-						else if ($col == 'annee_redac') {
-							$col = "YEAR($table.date_redac)";
 							$col_table = '';
 						}
 						else if ($col == 'age') {
@@ -413,24 +415,19 @@ function parser_boucle($texte, $id_parent) {
 							$col_table = '';
 						}
 						else if ($col == 'age_relatif') {
-							$col = "LEAST((UNIX_TIMESTAMP('(\$date)')-UNIX_TIMESTAMP($table.$col_date))/86400,
-TO_DAYS('(\$date)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$date)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$date)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date)')-YEAR($table.$col_date)))";
+							$col = "LEAST((UNIX_TIMESTAMP('(\$$datecompare)')-UNIX_TIMESTAMP($table.$col_date))/86400, TO_DAYS('(\$$datecompare)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$$datecompare)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$$datecompare)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$$datecompare)')-YEAR($table.$col_date)))";
 							$col_table = '';
 						}
 						else if ($col == 'jour_relatif') {
-							$col = "LEAST(TO_DAYS('(\$date)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$date)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$date)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$date)')-YEAR($table.$col_date)))";
+							$col = "LEAST(TO_DAYS('(\$$datecompare)')-TO_DAYS($table.$col_date), DAYOFMONTH('(\$$datecompare)')-DAYOFMONTH($table.$col_date)+30.4368*(MONTH('(\$$datecompare)')-MONTH($table.$col_date))+365.2422*(YEAR('(\$$datecompare)')-YEAR($table.$col_date)))";
 							$col_table = '';
 						}
 						else if ($col == 'mois_relatif') {
-							$col = "(MONTH('(\$date)')-MONTH($table.$col_date)+12*(YEAR('(\$date)')-YEAR($table.$col_date)))";
+							$col = "(MONTH('(\$$datecompare)')-MONTH($table.$col_date)+12*(YEAR('(\$$datecompare)')-YEAR($table.$col_date)))";
 							$col_table = '';
 						}
 						else if ($col == 'annee_relatif') {
-							$col = "YEAR('(\$date)')-YEAR($table.$col_date)";
-							$col_table = '';
-						}
-						else if ($col == 'age_redac') {
-							$col = "(LEAST((TO_DAYS(now())-TO_DAYS(date_redac)),(DAYOFMONTH(now())-DAYOFMONTH(date_redac))+30.4368*(MONTH(now())-MONTH(date_redac))+365.2422*(YEAR(now())-YEAR(date_redac))))";
+							$col = "YEAR('(\$$datecompare)')-YEAR($table.$col_date)";
 							$col_table = '';
 						}
 
@@ -1353,6 +1350,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$code = "propre('- ')";
 		break;
 
+	case 'DATE':
+		$code = "\$GLOBALS['date']";	// uniquement hors-boucles, pour la date passee dans l'URL ou le contexte inclusion
+		break;
+
 	case 'DATE_NOUVEAUTES':
 		$milieu = "if (lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv'))
 			\$$nom_var = date('Y-m-d H:i:s', lire_meta('majnouv'));
@@ -1829,7 +1830,8 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				$contexte["id_rubrique"] = $row["id_rubrique"];
 				$contexte["id_parent"] = $row["id_parent"];
 				$contexte["id_secteur"] = $row["id_secteur"];
-				$contexte["date"] = $row["date"];
+				$contexte["date"] = normaliser_date($row["date"]);
+				$contexte["date_redac"] = normaliser_date($row["date_redac"]);
 	
 				if ($doublons == "oui") {
 					$id_doublons["rubriques"] .= ",".$row["id_rubrique"];
@@ -1949,7 +1951,8 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_article"] = $row["id_article"];
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["date"] = $row["date"];
+		$contexte["date"] = normaliser_date($row["date"]);
+		$contexte["date_redac"] = normaliser_date($row["date_redac"]);
 		$contexte["accepter_forum"] = $row["accepter_forum"];
 		if ($instance->doublons == "oui") $id_doublons["articles"] .= ",".$row["id_article"];
 		';
@@ -1960,7 +1963,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_breve"] = $row["id_breve"];
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_secteur"] = $row["id_rubrique"];
-		$contexte["date"] = $row["date_heure"];
+		$contexte["date"] = normaliser_date($row["date_heure"]);
 		if ($instance->doublons == "oui") $id_doublons["breves"] .= ",".$row["id_breve"];
 		';
 		break;
@@ -1971,7 +1974,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_secteur"] = $row["id_secteur"];
 		$contexte["url_site"] = $row["url_site"];
-		$contexte["date"] = $row["date"];
+		$contexte["date"] = normaliser_date($row["date"]);
 		if ($instance->doublons == "oui") $id_doublons["syndication"] .= ",".$row["id_syndic"];
 		';
 		break;
@@ -1996,7 +1999,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$texte .= '
 		$contexte["id_syndic"] = $row["id_syndic"];
 		$contexte["id_syndic_article"] = $row["id_syndic_article"];
-		$contexte["date"] = $row["date"];
+		$contexte["date"] = normaliser_date($row["date"]);
 		if ($instance->doublons == "oui") $id_doublons["syndic_articles"] .= ",".$row["syndic_articles"];
 		';
 		break;
@@ -2006,7 +2009,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_parent"] = $row["id_parent"];
 		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["date"] = $row["date"];
+		$contexte["date"] = normaliser_date($row["date"]);
 		if ($instance->doublons == "oui") $id_doublons["rubriques"] .= ",".$row["id_rubrique"];
 		$syn_rubrique .= ",".$row["id_rubrique"].",";
 		';
@@ -2019,7 +2022,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_article"] = $row["id_article"];
 		$contexte["id_breve"] = $row["id_breve"];
 		$contexte["id_parent"] = $row["id_parent"];
-		$contexte["date"] = $row["date_heure"];
+		$contexte["date"] = normaliser_date($row["date_heure"]);
 		if ($instance->doublons == "oui") $id_doublons["forums"] .= ",".$row["id_forum"];
 		';
 		break;
@@ -2034,7 +2037,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	case 'signatures':
 		$texte .= '
 		$contexte["id_signature"] = $row["id_signature"];
-		$contexte["date"] = $row["date_time"];
+		$contexte["date"] = normaliser_date($row["date_time"]);
 		if ($instance->doublons == "oui") $id_doublons["signatures"] .= ",".$row["id_signature"];
 		';
 		break;
