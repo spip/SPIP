@@ -150,7 +150,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else $rows = 15;
 	
 	echo "<B>Texte de la br&egrave;ve</B><BR>";
-	echo "<TEXTAREA NAME='texte' ROWS='$rows' CLASS='formo' COLS='40' wrap=soft>";
+	echo "<TEXTAREA NAME='texte' ROWS='$rows' style='padding: 5px;' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
