@@ -163,7 +163,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		if ($flag_challenge_md5) {
 			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 			echo "<script type=\"text/javascript\"><!--\n" .
-				"document.write('"._T('login_login')." <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>"._T('login_autre_identifiant')."</a>]</font>');\n" .
+				"document.write('".addslashes(_T('login_login'))." <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'spip_cookie.php3?cookie_admin=non&url=".rawurlencode($clean_link->getUrl())."\\'>".addslashes(_T('login_autre_identifiant'))."</a>]</font>');\n" .
 				"//--></script>\n";
 			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
