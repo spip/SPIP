@@ -103,7 +103,6 @@ function parser_champs_etendus($debut) {
 
 
 function parser_champs_exterieurs($debut, $sep, $nested) {
-  spip_log("$sep: $debut");
 	$res = array();
 	foreach (split("%$sep",$debut) as $v) {
 		if (!ereg("^([0-9]+)@(.*)$", $v, $m))

@@ -4,9 +4,9 @@
 // Ce fichier regroupe la quasi totalite des definitions de #BALISES de spip
 // Pour chaque balise, il est possible de surcharger, dans mes_fonctions.php3,
 // la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
-// meme API : recoit en entree plein de donnees, les modifie et les retourne.
-// Le format du bloc de donnees $p est un objet de la class ParamChamp,
-// definie dans inc-compilo-index.php3
+// meme API : 
+// elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
+// Cette classe est definie dans inc-compilo-index.php3
 //
 
 ## NB: les fonctions de forum sont definies dans inc-forum.php3
@@ -19,9 +19,9 @@ define("_INC_BALISES", "1");
 
 
 //
-// Pre-traitements standard de divers champs
+// Traitements standard de divers champs
 //
-function champs_traitements ($nom_champ) {
+function champs_traitements ($p) {
 	static $traitements = array (
 		'BIO' => 'traiter_raccourcis(%s)',
 		'CHAPO' => 'traiter_raccourcis(nettoyer_chapo(%s))',
@@ -52,8 +52,16 @@ function champs_traitements ($nom_champ) {
 		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))'
 	);
-
-	return $traitements[$nom_champ];
+	$ps = $traitements[$p->$nom_champ];
+	if (!$ps) return $p->code;
+	if ($p->documents)
+	  {$ps = str_replace('traite_raccourcis(', 
+			     'traite_raccourcis_doublon($doublons,',
+			     str_replace('typo(', 
+					 'ttypo_doublon($doublons,',
+					 $ps));
+	  }
+	return str_replace('%s', $p->code, $ps);				
 }
 
 //

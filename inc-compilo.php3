@@ -216,7 +216,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	
 	if ($lang_select AND !$constant)
 		$debut .= '
-			if ($x = $Pile[$SP]["lang"]) $spip_lang = $x; // lang_select';
+			if ($x = $Pile[$SP]["lang"]) $GLOBALS[\'spip_lang\'] = $x; // lang_select';
 
 	$corps = $debut . $invalide;
 
@@ -251,14 +251,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->hierarchie)
 		$texte .= "\n	".$boucle->hierarchie;
 
-	// hack doublons documents : s'il y a quelque chose dans
-	// $GLOBALS['doublons_documents'], c'est que des documents ont
-	// ete vus par integre_image() ou autre fournisseur officiel de
-	// doublons : on les transfere alors vers la vraie variable
-	$texte .= '
-	global $spip_lang, $doublons_documents;
-	$doublons[\'documents\'].=$doublons_documents; $doublons_documents="";';
-
 	// Recherche : recuperer les hash a partir de la chaine de recherche
 	if ($boucle->hash) {
 		$texte .=  '
@@ -287,8 +279,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 		// Memoriser la langue avant la boucle pour la restituer apres
 		if ($lang_select) {
-			$texte .= "\n	\$old_lang = \$spip_lang;";
-			$corps .= "\n	\$spip_lang = \$old_lang;";
+			$texte .= "\n	\$old_lang = \$GLOBLAS['spip_lang'];";
+			$corps .= "\n	\$GLOBAL['spip_lang'] = \$old_lang;";
 		}
 	}
 
