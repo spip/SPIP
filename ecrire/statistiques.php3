@@ -130,7 +130,7 @@ if ($nb_art){
 	$result = spip_fetch_array(spip_query($query));
 	$nb_forum = $result['cnt'];
 	if ($nb_forum) $cesite .= "<LI> $nb_forum contributions de forum";
-	echo "<P><B>Ce site contient:<UL> $cesite.</UL></B>";
+	echo "<P><B>Ce site contient&nbsp;:<UL> $cesite.</UL></B>";
 }
 
 
