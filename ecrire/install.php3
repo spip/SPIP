@@ -76,7 +76,8 @@ if ($etape == 6) {
 		spip_query_db($query);
 
 		// inserer email comme email webmaster principal
-		ecrire_meta('email_webmaster', $email);
+		spip_query_db("REPLACE spip_meta (nom, valeur)
+			VALUES ('email_webmaster', '".addslashes($email)."')");
 	}
 
 	include_ecrire("inc_config.php3");
