@@ -262,8 +262,11 @@ function parser_boucle($texte, $id_parent) {
 					if ($param == 'exclus') {
 						$req_where[] = "$table.$id_objet!=\$$id_objet";
 					}
-					else if ($param == 'tout' OR $param == 'plat') {
-						$$param = true;
+					else if ($param == 'tout' OR $param == 'tous') {
+						$tout = true;
+					}
+					else if ($param == 'plat') {
+						$plat = true;
 					}
 					else if ($param == 'unique' OR $param == 'doublons') {
 						$doublons = 'oui';
@@ -521,7 +524,7 @@ function parser_boucle($texte, $id_parent) {
 				break;
 
 			case 'rubriques':
-				$req_where[] = "$table.statut='publie'";
+				if (!$tout) $req_where[] = "$table.statut='publie'";
 				break;
 
 			case 'forums':
