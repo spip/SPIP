@@ -900,14 +900,15 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 	$contenu = '';
 	if (!@file_exists($fichier))
 		return false;
-
 	if ($fl = @fopen($fichier, 'r')) {
 
 		// verrou lecture
 		while (!spip_flock($fl, LOCK_SH, $fichier));
 
 		if (!$s = $options['size'])
-			$s = filesize($fichier);
+			$s = @filesize($fichier);
+		else
+			$s = min($s, @filesize($fichier));
 		$contenu = @fread($fl, $s);
 
 		// liberer le verrou
