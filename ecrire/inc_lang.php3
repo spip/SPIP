@@ -20,7 +20,7 @@ function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
  	if ($lang && ereg(",$lang,", ",$all_langs,")) {
 		$GLOBALS['spip_lang'] = $lang;
-		if ($lang == 'ar')
+		if ($lang == 'ar' OR $lang == 'fa')	// arabic, farsi
 			$spip_lang_rtl = '_rtl';
 		else
 			$spip_lang_rtl = '';
@@ -97,7 +97,7 @@ function traduire_nom_langue($lang) {
 	'ca' => "catal&#224;",
 	'co' => "Corsican",
 	'cpf' => "Kr&eacute;ol r&eacute;yon&eacute;",
-	'cpc' => "Krey&ograve;l",
+	'cpf_dom' => "Krey&ograve;l",
 	'cs' => "&#269;e&#353;tina",
 	'cy' => "Welsh",
 	'da' => "dansk",
@@ -163,7 +163,8 @@ function traduire_nom_langue($lang) {
 	'ne' => "Nepali",
 	'nl' => "Nederlands",
 	'no' => "norsk",
-	'oc' => "Occitan",
+	'oci_lnc' => "occitan",	// langadocian
+	'oci_prvni' => "ni&ccedil;ard",	// provencal nic,ard
 	'om' => "(Afan) Oromo",
 	'or' => "Oriya",
 	'pa' => "Punjabi",
@@ -291,7 +292,7 @@ function init_langues() {
 	if (!$all_langs || !$langue_site || $flag_ecrire) {
 		$d = opendir($flag_ecrire ? "lang" : "ecrire/lang");
 		while ($f = readdir($d)) {
-			if (ereg('^spip_([a-z]{2,3})\.php3?$', $f, $regs))
+			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
 				$toutes_langs[] = $regs[1];
 		}
 		closedir($d);
