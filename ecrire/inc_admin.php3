@@ -39,9 +39,9 @@ function debut_admin($action, $commentaire='') {
 		echo $this_link->getForm('POST');
 		echo "<P><B>"._T('info_authentification_ftp')."</B>";
 		echo aide("ftp_auth");
-		echo "<P>"._T('info_creer_repertoire')."&nbsp;:";
+		echo "<P>"._T('info_creer_repertoire');
 		echo "<P align='center'><INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"$fichier\" SIZE='30'>";
-		echo "<P> "._T('info_creer_repertoire_2')."&nbsp;:";
+		echo "<P> "._T('info_creer_repertoire_2');
 		echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_recharger_page')."' CLASS='fondo'>";
 		echo "</FORM>";
 
