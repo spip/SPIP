@@ -122,7 +122,7 @@ function creer_base() {
 		"('xls', 'Excel', 'non'), ".
 		"('xml', 'XML', 'non'), ".
 		"('zip', 'Zip', 'non')";
-	spip_query($query);
+	spip_query_db($query);
 }
 
 function stripslashes_base($table, $champs) {

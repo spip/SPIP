@@ -96,7 +96,7 @@ function erreur_squelette($message='', $lieu='') {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		    ($GLOBALS['var_mode'] == 'debug')) {
-			echo debut_entete('Debug'), '</head><body>',
+			echo debut_entete(_T('admin_debug')), '</head><body>',
 				affiche_erreurs_page($tableau_des_erreurs);
 			exit;
 		}
@@ -231,7 +231,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
-	echo inclure_balise_dynamique(balise_formulaire_admin_dyn('','','','','','',
+	echo inclure_balise_dynamique(balise_formulaire_admin_dyn('','','','','','div',
 		$debug_objets));
 	echo '</body></html>';
 	exit;

@@ -18,6 +18,7 @@ function spip_query_db($query) {
 
 	$query = traite_query($query);
 
+	#spip_log($query);
 	if ($my_profile)
 		$m1 = microtime();
 

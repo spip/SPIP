@@ -232,7 +232,7 @@ else if ($doc_rotate) {
 
 // si nous sommes diriges vers une vignette
 if ($retour_image) {
-	redirige_par_entete($redirect);
+	redirige_par_entete($retour_image);
 
 } else {
 	$link = new Link(_DIR_RESTREINT_ABS . $redirect);
@@ -241,7 +241,7 @@ if ($retour_image) {
 		$link->addVar('show_docs',$show_docs);
 	}
 
-	redirige_par_entete($link->getUrl());
+	redirige_par_entete($link->getUrl($ancre));
 }
 
 ?>
