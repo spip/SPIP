@@ -6,8 +6,14 @@ $flag_ecrire = true;	// hack : on veut pouvoir eventuellement proposer
 						// l'aide en ligne depuis l'espace public via un
 						// RewriteRule (c'est le cas sur uZine)
 
+// Recuperer les infos de langue (preferences auteur), si possible
+if (file_exists("inc_connect.php3")) {
+	include_ecrire ("inc_auth.php3");
+}
+
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
+include_ecrire ("inc_lang.php3");
 ?>
 <HTML>
 <head>
@@ -67,20 +73,23 @@ if (strlen($aide) < 2) $aide = "spip";
 
 
 // selection de la langue
-$ln = '_en';
+$lang_aide = $GLOBALS['spip_lang'];
+// provisoire ;-))
+if ($lang_aide == 'zg') $lang_aide = 'en';
 
-if (!file_exists($fichier_aide = "AIDE$ln/aide")) {
+if (!file_exists($fichier_aide = "AIDE_$lang_aide/aide")) {
 	$fichier_aide = "AIDE/aide";
-	$ln='';
+	$lang_aide = '';
 }
+else $lang_aide = '_'.$lang_aide;
 
 $html = join('', file($fichier_aide));
 
 $html = substr($html, strpos($html,"<$aide>") + strlen("<$aide>"));
 $html = substr($html, 0, strpos($html, "</$aide>"));
 
-echo ereg_replace("AIDE(/[^[:space:]]+\.(gif|jpg))", "AIDE$ln\\1",
-justifier(propre($html)."<p>"));
+echo ereg_replace("AIDE(/[^[:space:]]+\.(gif|jpg))", "AIDE$lang_aide\\1",
+	justifier(propre($html)."<p>"));
 echo "<font size=2>$les_notes</font><p>";
 
 ?>

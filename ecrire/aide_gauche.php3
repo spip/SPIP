@@ -2,11 +2,15 @@
 
 include ("inc_version.php3");
 if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) {
-	include_ecrire ("inc_session.php3");
+	/*include_ecrire ("inc_session.php3");
 	verifier_visiteur();
-	$aide_statut = ($auteur_session['statut'] == '1comite') ? 'redac' : 'admin';
+	$aide_statut = ($auteur_session['statut'] == '1comite') ? 'redac' : 'admin';*/
+	include_ecrire("inc_auth.php3");
+	$aide_statut = ($connect_statut == '1comite') ? 'redac' : 'admin';
 }
 else $aide_statut = 'admin';
+
+include_ecrire("inc_lang.php3");
 
 ?>
 <HTML>
@@ -24,8 +28,6 @@ else $aide_statut = 'admin';
 <body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
 
 
-
-
 <?php
 
 function rubrique($titre, $statut = "redac") {
@@ -37,16 +39,16 @@ function rubrique($titre, $statut = "redac") {
 	global $aff_ligne;
 	global $rubrique;
 	global $les_rub;
-	
+
 	global $aide_statut;
-	
+
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$larubrique++;
 		$ligne++;
-		
+
 		$texte[$ligne]="<TR><TD><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR><TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A>	<B><A HREF='#LIEN'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B></TD></TR>";
 		$rubrique[$ligne]=$larubrique;
-		
+
 		if (ereg(",$larubrique,","$les_rub")){
 			$afficher[$larubrique]=1;
 		}else{
@@ -66,11 +68,11 @@ function article($titre, $lien, $statut = "redac") {
 	global $afficher;
 	global $les_rub;
 	global $aide_statut;
-	
+
 
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$ligne++;
-		
+
 		$rubrique[$ligne]=$larubrique;
 		
 		if ($aide==$lien) {
@@ -198,7 +200,6 @@ for ($i=0; $i<=count($texte); $i++) {
 
 
 ?>
-
 
 
 

@@ -71,11 +71,6 @@ if ($debloquer_article) {
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];
 
-// fixer la langue
-if ($prefs['spip_lang']) {
-	changer_langue($prefs['spip_lang']);
-}
-
 switch ($prefs['couleur']) {
 	case 1:
 		/// Vert
