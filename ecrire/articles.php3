@@ -199,7 +199,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$texte = addslashes(corriger_caracteres($texte));
 	$ps = addslashes(corriger_caracteres($ps));
 
-	
+
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
@@ -866,6 +866,7 @@ else if ($statut_article == 'publie') {
 // Liste des auteurs de l'article
 //
 
+echo "<a name='auteurs'></a>";
 debut_cadre_enfonce("redacteurs-24.gif");
 
 echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
@@ -949,7 +950,7 @@ if ($cherche_auteur) {
 				echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur\">"._T('lien_ajouter_auteur')."</A>";
+				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</A>";
 
 				if (trim($bio_auteur)) {
 					echo "<BR><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n";
@@ -1063,7 +1064,7 @@ if (spip_num_rows($result)) {
 
 		echo "<TD CLASS='arial1' align='right'>";
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-			echo "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur'>"._T('lien_retirer_auteur')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
+			echo "<A HREF='articles.php3?id_article=$id_article&supp_auteur=$id_auteur#auteurs'>"._T('lien_retirer_auteur')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
 		}
 		else echo "&nbsp;";
 		echo "</TD>\n";
@@ -1089,7 +1090,7 @@ if ($flag_editable AND $options == 'avancees') {
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
-		echo "<FORM ACTION='articles.php3' METHOD='post'>";
+		echo "<FORM ACTION='articles.php3#auteurs' METHOD='post'>";
 		echo "<DIV align=right><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></FONT>\n";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
@@ -1516,10 +1517,9 @@ echo "</div>";
 //
 // Documents associes a l'article
 //
+
+echo "<a name='docs'></a>\n";
 afficher_documents_non_inclus($id_article, "article", $flag_editable);
-
-
-
 
 //
 // "Demander la publication"
