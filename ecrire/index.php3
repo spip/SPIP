@@ -1,6 +1,7 @@
 <?php
 
 include ("inc.php3");
+include_ecrire ("inc_calendrier.php");
 
 if ($HTTP_REFERER && !strpos($HTTP_REFERER, _DIR_RESTEINT_ABS)) $bonjour = 'oui';
 

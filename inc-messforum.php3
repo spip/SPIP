@@ -1,19 +1,51 @@
 <?php
 
-include_ecrire('inc_texte.php3');
-include_ecrire('inc_filtres.php3');
-include_ecrire('inc_mail.php3');
 include_ecrire('inc_forum.php3');
 include_local('inc-forum.php3');
 
-// Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3"))
-	include_local("inc-urls.php3");
-else
-	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
-
 // Ce fichier inclus par inc-public a un comportement special
 // Voir commentaires dans celui-ci et dans inc-forum
+
+function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre)
+{
+	include_ecrire('inc_texte.php3');
+	include_ecrire('inc_filtres.php3');
+	include_ecrire('inc_mail.php3');
+	// Gestionnaire d'URLs
+	if (@file_exists("inc-urls.php3"))
+	  include_local("inc-urls.php3");
+	else
+	  include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+	$url = ereg_replace('^/', '', generer_url_article($id_article));
+	$adresse_site = lire_meta("adresse_site");
+	$nom_site_spip = lire_meta("nom_site");
+	$url = "$adresse_site/$url";
+	$courr = _T('form_forum_message_auto')."\n\n";
+	$parauteur = '';
+	if (strlen($auteur) > 2) {
+		$parauteur = " "._T('forum_par_auteur',
+				    array('auteur' => $auteur));
+		if ($email_auteur)
+			$parauteur .= " <$email_auteur>";
+	}
+	$courr .= _T('forum_poste_par',
+		     array('parauteur' => $parauteur))."\n";
+	$courr .= _T('forum_ne_repondez_pas')."\n";
+	$courr .= "$url\n";
+	$courr .= "\n\n".$titre."\n\n".textebrut(propre($texte)).
+	  "\n\n$nom_site_forum\n$url_site\n";
+	$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
+	$result = spip_query("SELECT auteurs.* FROM spip_auteurs AS auteurs,
+				spip_auteurs_articles AS lien
+				WHERE lien.id_article='$id_article'
+				AND auteurs.id_auteur=lien.id_auteur");
+
+	while ($row = spip_fetch_array($result)) {
+		$email_auteur = trim($row["email"]);
+		if (strlen($email_auteur) < 3) continue;
+		envoyer_mail($email_auteur, $sujet, $courr);
+	}
+}			
 
 $retour_forum = rawurldecode($retour);
 $forum_id_article = intval($id_article);
@@ -32,10 +64,9 @@ if (!$id_auteur)
 	$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
 
 if ($forum_id_article) {
-	if ($s = spip_query("SELECT accepter_forum FROM spip_articles
-	WHERE id_article=$forum_id_article") AND
-	$obj = spip_fetch_array($s))
-		$forums_publics = $obj['accepter_forum'];
+	$r = spip_fetch_array(spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$forum_id_article"));
+	if ($r)
+		$forums_publics = $r['accepter_forum'];
 	else
 		$forums_publics = lire_meta("forums_publics");
 } else {
@@ -60,7 +91,7 @@ if ($forums_publics == "abo") {
 	// Ne pas autoriser de changement de nom si forum sur abonnement
 	$auteur = $auteur_session['nom'];
 	$email_auteur = $auteur_session['email'];
-} 
+ } 
 
 $slash_auteur = addslashes($auteur);
 $slash_email_auteur = addslashes($email_auteur);
@@ -122,6 +153,10 @@ if ($validation_finale) {
 		header("Status: 404");
 		exit;
 	} else {
+	  if (lire_meta("prevenir_auteurs") == "oui" AND ($afficher_texte != "non") AND ($id_article = $forum_id_article)) {
+			prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre);
+
+		}
 		// Poser un cookie pour ne pas retaper le nom / email
 		$cookie_user = array('nom' => $auteur, 'email' => $email_auteur);
 		spip_setcookie('spip_forum_user', serialize($cookie_user));
@@ -139,47 +174,6 @@ if ($validation_finale) {
 		}
 
 		$redirect = $retour_forum;
-
-
-		//
-		// Envoi d'un mail aux auteurs
-		//
-		$prevenir_auteurs = lire_meta("prevenir_auteurs");
-		if ($prevenir_auteurs == "oui" AND $afficher_texte != "non") {
-			if ($id_article = $forum_id_article) {
-				$url = ereg_replace('^/', '', generer_url_article($id_article));
-				$adresse_site = lire_meta("adresse_site");
-				$nom_site_spip = lire_meta("nom_site");
-				$url = "$adresse_site/$url";
-				$courr = _T('form_forum_message_auto')."\n\n";
-				$parauteur = '';
-				if (strlen($auteur) > 2) {
-					$parauteur = " "._T('forum_par_auteur',
-					array('auteur' => $auteur));
-					if ($email_auteur)
-						$parauteur .= " <$email_auteur>";
-				}
-				$courr .= _T('forum_poste_par',
-				array('parauteur' => $parauteur))."\n";
-				$courr .= _T('forum_ne_repondez_pas')."\n";
-				$courr .= "$url\n";
-				$courr .= "\n\n".$titre."\n\n".textebrut(propre($texte)).
-				"\n\n$nom_site_forum\n$url_site\n";
-				$sujet = "[$nom_site_spip] ["._T('forum_forum')."] $titre";
-				$query = "SELECT auteurs.* FROM spip_auteurs AS auteurs,
-				spip_auteurs_articles AS lien
-				WHERE lien.id_article='$id_article'
-				AND auteurs.id_auteur=lien.id_auteur";
-				$result = spip_query($query);
-
-				while ($row = spip_fetch_array($result)) {
-					$email_auteur = trim($row["email"]);
-					if (strlen($email_auteur) < 3) continue;
-					envoyer_mail($email_auteur, $sujet, $courr);
-				}
-			}
-		}
-
 	}
 }
 

@@ -663,14 +663,87 @@ function balise_EXTRA_dist ($p) {
 
 
 
-//
-// Traduction des champs "formulaire"
-//
+
+/*******************************************/
+/* DEFINITION DES BALISES LIEES AUX FORUMS */
+/*******************************************/
+
+// Noter l'invalideur de la page contenant ces parametres,
+// en cas de premier post sur le forum
+function code_invalideur_forums($p, $code) {
+	return '
+	// invalideur forums
+	(!($Cache[\'id_forum\'][calcul_index_forum(' . 
+				// Retournera 4 [$SP] mais force la demande du champ a MySQL
+				champ_sql('id_article', $p) . ',' .
+				champ_sql('id_breve', $p) .  ',' .
+				champ_sql('id_rubrique', $p) .',' .
+				champ_sql('id_syndic', $p) .  ")]=1)".
+				"?'':\n" . $code .")";
+}
+
+
+// Formulaire de reponse a un forum
+function balise_FORMULAIRE_FORUM_dist($p) {
+	$code = "code_de_forum_spip(" .
+	champ_sql('id_rubrique', $p) . ', ' .
+	champ_sql('id_forum', $p) . ', ' .
+	champ_sql('id_article', $p) . ', ' .
+	champ_sql('id_breve', $p) . ', ' .
+	champ_sql('id_syndic', $p) . ')';
+
+	$p->code = code_invalideur_forums($p, "(".$code.")");
+
+	$p->statut = 'php';
+	return $p;
+}
+
+
+// Parametres de reponse a un forum
+function balise_PARAMETRES_FORUM_dist($p) {
+	$_accepter_forum = champ_sql('accepter_forum', $p);
+	$p->code = '
+	// refus des forums ?
+	('.$_accepter_forum.'=="non" OR
+	(lire_meta("forums_publics") == "non" AND '.$_accepter_forum.'!="oui"))
+	? "" : // sinon:
+	';
+
+	switch ($p->type_requete) {
+		case 'articles':
+			$c = '"id_article=".' . champ_sql('id_article', $p);
+			break;
+		case 'breves':
+			$c = '"id_breve=".' . champ_sql('id_breve', $p);
+			break;
+		case 'rubriques':
+			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
+			break;
+		case 'syndication':
+			$c = '"id_syndic=".' . champ_sql('id_syndic', $p);
+			break;
+		case 'forums':
+		default:
+			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
+			foreach ($liste_champs as $champ) {
+				$x = champ_sql( $champ, $p);
+				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
+			}
+			$c = "substr($c,1)";
+			break;
+	}
+
+	$c .= '.
+	"&retour=".rawurlencode($lien=$GLOBALS["HTTP_GET_VARS"]["retour"] ? $lien : nettoyer_uri())';
+
+	$p->code .= code_invalideur_forums($p, "(".$c.")");
+
+	$p->statut = 'html';
+	return $p;
+}
 
 //
-// Note : les balises de gestion de forums (FORMULAIRE_FORUM et
-// PARAMETRES_FORUM) sont definies dans le fichier inc-forum.php3
-// qui centralise toute la gestion des forums
+// Traduction des champs "formulaire" autre que FORUM
 //
 
 //

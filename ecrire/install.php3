@@ -72,7 +72,7 @@ if ($etape == 6) {
 	}
 
 	echo "<FORM ACTION='index.php3' METHOD='post'>";
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
 	ecrire_metas();
@@ -113,7 +113,7 @@ else if ($etape == 5) {
 	echo _T('info_plus_cinq_car_2')."<BR />\n";
 	echo "<INPUT TYPE='password' NAME='pass' CLASS='formo' VALUE=\"$pass\" SIZE='40'></fieldset><P>\n";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 	echo "<p>\n";
 
@@ -123,7 +123,7 @@ else if ($etape == 5) {
 		echo "<p>\n"._T('texte_annuaire_ldap_1');
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1'>";
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE=\""._T('bouton_acces_ldap')."\">";
+		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE=\""._T('bouton_acces_ldap')."\">";
 		echo "</FORM>";
 	}
 
@@ -191,7 +191,7 @@ else if ($etape == 4) {
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 
 		echo "</FORM>";
 	}
@@ -263,7 +263,7 @@ else if ($etape == 3) {
 	echo "> <label for='nou'>"._T('info_creer_base')."</label> ";
 	echo "<INPUT TYPE='text' NAME='table_new' CLASS='fondo' VALUE=\"spip\" SIZE='20'></fieldset><P>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 
 
 	echo "</FORM>";
@@ -294,7 +294,7 @@ else if ($etape == 2) {
 		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
 		echo "<INPUT TYPE='hidden' NAME='pass_db' VALUE=\"$pass_db\"><P>";
 
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
 	}
 	else {
@@ -347,7 +347,7 @@ else if ($etape == 1) {
 	echo _T('entree_mot_passe_2')."<BR />\n";
 	echo "<INPUT TYPE='password' NAME='pass_db' CLASS='formo' VALUE=\"$pass_db\" SIZE='40'></fieldset><P>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 
 
 	echo "</FORM>";
@@ -379,7 +379,7 @@ else if (!$etape) {
 
 		echo "<p><FORM ACTION='install.php3' METHOD='get'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='dirs'>";
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
 
 		install_fin_html();
@@ -405,7 +405,7 @@ else if ($etape == 'ldap5') {
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 
 	echo "</FORM>";
 }
@@ -462,7 +462,7 @@ else if ($etape == 'ldap4') {
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"0minirezo\" id='admin'>";
 		echo "<label for='admin'><b>"._T('info_administrateur_1')."</b></label> "._T('info_administrateur_2')."<br />\n";
 	
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 
 		echo "</FORM>";
 	}
@@ -525,7 +525,7 @@ else if ($etape == 'ldap3') {
 	echo "<label for='manuel'>"._T('entree_chemin_acces')."</label> ";
 	echo "<INPUT TYPE='text' NAME='base_ldap_text' CLASS='formo' VALUE=\"ou=users, dc=mon-domaine, dc=com\" SIZE='40'></fieldset><P>";
 
-	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
 	install_fin_html();
@@ -552,7 +552,7 @@ else if ($etape == 'ldap2') {
 		echo "<INPUT TYPE='hidden' NAME='login_ldap' VALUE=\"$login_ldap\">";
 		echo "<INPUT TYPE='hidden' NAME='pass_ldap' VALUE=\"$pass_ldap\">";
 
-		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
 	}
 	else {
@@ -603,7 +603,7 @@ else if ($etape == 'ldap1') {
 	echo "<label><B>"._T('entree_passe_ldap')."</B><BR />\n</label>";
 	echo "<INPUT TYPE='password' NAME='pass_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
 
-	echo "<p><DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
+	echo "<p><DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 
 	echo "</FORM>";
 
