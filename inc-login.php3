@@ -136,7 +136,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 				// Bouton duree de connexion
 				if ($row['prefs']) {
 					$prefs = unserialize($row['prefs']);
-					$rester_checked = ($prefs['cnx'] == 'perma' ? ' checked':'');
+					$rester_checked = ($prefs['cnx'] == 'perma' ? ' checked=\'checked\'':'');
 				}
 			}
 		}
