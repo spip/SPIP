@@ -1,6 +1,7 @@
 <?php
 
 include ("inc.php3");
+include_ecrire ("inc_acces.php3");
 
 if ($supp_dest) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
@@ -36,7 +37,14 @@ echo aide ("messpense");
 echo "<p>"."<IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_jaune');
 
 
+
 fin_boite_info();
+
+
+echo "<div>&nbsp;</div>";
+icone ("iCal", "../spip_cal.php3?cle=".afficher_low_sec($connect_id_auteur), "calendrier-24.gif");
+
+
 
 debut_droite("messagerie");
 

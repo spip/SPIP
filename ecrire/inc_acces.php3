@@ -36,6 +36,25 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	return $pass;
 }
 
+function afficher_low_sec($id_auteur) {
+	$query = "SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur";
+	$result = spip_query($query);
+
+	if ($row = spip_fetch_array($result)) {
+		$low_sec = $row["low_sec"];
+		if (!$low_sec) {
+			$low_sec = creer_pass_aleatoire();
+			spip_query("UPDATE spip_auteurs SET low_sec = '$low_sec' WHERE id_auteur = $id_auteur");
+		}
+		return $low_sec;
+	}
+}
+
+function effacer_low_sec($id_auteur) {
+	spip_query("UPDATE spip_auteurs SET low_sec = '' WHERE id_auteur = $id_auteur");
+}
+
+
 function initialiser_sel() {
 	global $htsalt;
 
