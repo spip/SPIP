@@ -1,13 +1,16 @@
 <:form_forum_indiquer_nom_email:>
 <form method='post' action='#SELF' style='border: 0px; margin: 0px;'> 
-<div><b>
-<:form_pet_votre_nom:>
-</b></div>
-<div><input type="text" class="forml" name="nom_inscription" value="" size="30" /></div>
-<div><b>
-<:form_pet_votre_email:>
-</b></div>
-<div><input type="text" class="forml" name="mail_inscription" value="" size="30" /></div>
-<br />
-<div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div>
+      <fieldset style="border: none; font-weight: bold">
+	<legend></legend>
+	<label>
+	  <:form_pet_votre_nom:>
+	  <input type="text" class="forml" name="nom_inscription" value="" size="30" />
+	</label>
+	<label>
+	  <:form_pet_votre_email:>
+	  <input type="text" class="forml" name="mail_inscription" value="" size="30" />
+	</label>
+      </fieldset>
+      <div align="right"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div> 
 </form>
+
