@@ -180,26 +180,24 @@ function affiche_contexte_erreur($texte) {
 // ajouter &var_debug=oui pour voir les erreurs et en parler sur spip@rezo.net
 
 function affiche_erreurs_execution_page() {
-  global $tableau_des_erreurs, $affiche_boutons_admin;
-	echo "<div style='height: 100%; width: 100%; position: absolute; top: 10px; z-index: 1000; background-color: pink;'>";
-	if (!$affiche_boutons_admin)
-	  echo "<h2>",(_T('info_travaux_titre')), "</h2>";
-	else {
-	  echo "<h2>",
-	    _L("Squelette invalide"),
-	    "</h2>",
-	    "<p>",
-	    _L("PHP a rencontr&eacute; les erreurs suivantes :"),
-	    "<code><ul>";
-	  foreach ($tableau_des_erreurs as $err) {
-	    echo "<li>$err[2] $err[3]  $err[1]",
-	      "<small>$err[4]</small><br><br>",
-	      "</li>\n";
-	  }
-	  echo "</ul></code>";
-	  $GLOBALS['bouton_admin_debug'] = true;
+	global $tableau_des_erreurs, $affiche_boutons_admin;
+
+	if ($affiche_boutons_admin) {
+		echo "<div style='position: absolute; top: 10px;
+			z-index: 1000; background-color: pink;'>";
+		echo "<h2>",
+		_L("Erreur(s) dans le squelette"),
+		"</h2>",
+		"<code><ul>";
+		foreach ($tableau_des_erreurs as $err) {
+			echo "<li>$err[2] $err[3]  $err[1]",
+			"<small>$err[4]</small><br><br>",
+			"</li>\n";
+		}
+		echo "</ul></code>";
+		echo "</div>";
+		$GLOBALS['bouton_admin_debug'] = true;
 	}
-	echo "</div>";
 }
 
 //
@@ -253,24 +251,25 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 
 
 //
-// Erreur de syntaxe des squelettes : afficher le code fautif
+// Erreur de syntaxe des squelettes : memoriser le code fautif
 //
-function erreur_squelette($message, $lieu) {
+function erreur_squelette($message='', $lieu='') {
 	global $auteur_session;
 	static $runs;
-	
+
+	if (is_array($message)) list($message, $lieu) = $message;
+
 	spip_log("Erreur squelette: $message | $lieu ("
 		. $GLOBALS['fond'].".html)");
 	$GLOBALS['bouton_admin_debug'] = true;
 	spip_error_handler(1," $message $lieu ", '','','?');
 	// Eviter les boucles infernales
 	if (++$runs > 4) {
-		if (!$HTTP_COOKIE_VARS['spip_admin'] AND
-		    !$auteur_session AND
-		    !$GLOBALS['var_debug'])
-		  $messages =  "<h2>".(_T('info_travaux_titre')). "</h2>";
-		die ("<div style='position: fixed; top: 10px; left: 10px;
-		z-index: 10000; background-color: pink;'>$message</div>");
+		if ($HTTP_COOKIE_VARS['spip_admin'] OR
+		$auteur_session['statut'] == '0minirezo' OR
+		$GLOBALS['var_debug'])
+			die ("<div style='position: fixed; top: 10px; left: 10px;
+			z-index: 10000; background-color: pink;'>$message</div>");
 	}
 }
 

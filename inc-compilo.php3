@@ -12,29 +12,21 @@ define("_INC_COMPILO", "1");
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
 include_local("inc-compilo-index.php3");  # index ? structure ? pile ?
-#include_local("inc-index-squel.php3"); # (anciens noms des fichiers)
 
 // definition des boucles
 include_local("inc-boucles.php3");
-#include_local("inc-reqsql-squel.php3");
 
 // definition des criteres
 include_local("inc-criteres.php3");
-#include_local("inc-arg-squel.php3");
 
 // definition des balises
 include_local("inc-balises.php3");
-#include_local("inc-logo-squel.php3");
-#include_local("inc-vrac-squel.php3");
 
 // gestion des balises de forums
 include_local("inc-forum.php3");
-#include_local("inc-form-squel.php3");
 
 // definition de l'API
 include_local("inc-compilo-api.php3");
-#include_local("inc-bcl-squel.php3");
-#include_local("inc-champ-squel.php3");
 
 # definition des tables
 include_ecrire('inc_serialbase.php3');
@@ -439,7 +431,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 						$p->params,
 						$id_boucle,
 						$boucles);
-			$commentaire = "<INCLURE($p->fichier)>";
+			$commentaire = '<INCLURE('.$p->fichier.')>';
 			$avant='';
 			$apres='';
 			$altern = "''";
@@ -454,16 +446,18 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			  ereg_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire='';
-			$avant = calculer_liste($p->cond_avant, $newdescr, $boucles, $id_boucle, $niv+2);
-			$apres = calculer_liste($p->cond_apres, $newdescr, $boucles, $id_boucle, $niv+2);
-			$altern = calculer_liste($p->cond_altern, $newdescr, $boucles, $id_boucle, $niv+1);
+			$avant = calculer_liste($p->cond_avant,
+				$newdescr, $boucles, $id_boucle, $niv+2);
+			$apres = calculer_liste($p->cond_apres,
+				$newdescr, $boucles, $id_boucle, $niv+2);
+			$altern = calculer_liste($p->cond_altern,
+				$newdescr, $boucles, $id_boucle, $niv+1);
 			break;
 
 		// balise SPIP
 		default: 
 
-	// cette structure pourrait etre completee dès le phrasé (a faire)
-
+			// cette structure pourrait etre completee des le phrase' (a faire)
 			$p->id_boucle = $id_boucle;
 			$p->boucles = &$boucles;
 			$p->id_mere = $descr['id_mere'];
@@ -473,8 +467,10 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 
 			$code = calculer_champ($p);
 			$commentaire = '#' . $p->nom_champ . $p->etoile;
-			$avant = calculer_liste($p->cond_avant, $descr, $boucles, $id_boucle, $niv+1);
-			$apres = calculer_liste($p->cond_apres, $descr, $boucles, $id_boucle, $niv+1);
+			$avant = calculer_liste($p->cond_avant,
+				$descr, $boucles, $id_boucle, $niv+1);
+			$apres = calculer_liste($p->cond_apres,
+				$descr, $boucles, $id_boucle, $niv+1);
 			$altern = "''";
 			break;
 
@@ -526,7 +522,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 #	include_local('inc-compilo-debug.php3');
 #	 afftable($racine);
 #	 affboucles($boucles);
- 
+
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'documents' => false);
 
@@ -541,48 +537,48 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
 		foreach($boucles as $id => $boucle) { 
-		    if ($boucle->type_requete == 'boucle') {
-			$rec = &$boucles[$boucle->param];
-			if (!$rec) {
-			  return array(_T('info_erreur_squelette'),
-				       ($boucle->param . 
-					_L(' boucle recursive non definie')));
-			} 
-			$rec->externe = $id;
-			$descr['id_mere'] = $id;
-			$boucles[$id]->return =
-			  calculer_liste(array($rec),
-					 $descr,
-					 $boucles,
-					 $boucle->param);
-		    }
-		} 
-		foreach($boucles as $id => $boucle)
-		  { 
-		    $type = $boucle->type_requete;
-		    if ($type != 'boucle') 
-		      {
-			$boucles[$id]->id_table = $table_des_tables[$type];
-			if ($boucles[$id]->id_table) {
-			  $boucles[$id]->primary = $table_primary[$type];
-			} else { 
-			  // table non Spip.
-			  $boucles[$id]->id_table = $type;
-			  $serveur = $boucle->sql_serveur;
-			  $boucles[$id]->primary = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key']["PRIMARY KEY"]; 
+			if ($boucle->type_requete == 'boucle') {
+				$rec = &$boucles[$boucle->param];
+				if (!$rec) {
+					return array(_T('info_erreur_squelette'),
+						($boucle->param
+						. _L(' boucle recursive non definie')));
+				} else {
+					$rec->externe = $id;
+					$descr['id_mere'] = $id;
+					$boucles[$id]->return =
+						calculer_liste(array($rec),
+							 $descr,
+							 $boucles,
+							 $boucle->param);
+				}
 			}
-			if ($boucle->param) {
-				$res = calculer_criteres($id, $boucles);
-				if (is_array($res)) return $res; # erreur
-			}
-			$descr['id_mere'] = $id;
-			$boucles[$id]->return =
-			  calculer_liste($boucle->milieu,
+		}
+		foreach($boucles as $id => $boucle) { 
+			$type = $boucle->type_requete;
+			if ($type != 'boucle') {
+				$boucles[$id]->id_table = $table_des_tables[$type];
+				if ($boucles[$id]->id_table) {
+					$boucles[$id]->primary = $table_primary[$type];
+				} else { 
+					// table non Spip.
+					$boucles[$id]->id_table = $type;
+					$serveur = $boucle->sql_serveur;
+					$boucles[$id]->primary = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key']["PRIMARY KEY"]; 
+				}
+				if ($boucle->param) {
+					$res = calculer_criteres($id, $boucles);
+					if (is_array($res))
+						return $res; # erreur
+				}
+				$descr['id_mere'] = $id;
+				$boucles[$id]->return =
+				calculer_liste($boucle->milieu,
 					 $descr,
 					 $boucles,
 					 $id);
-		      }
-		  }
+			}
+		}
 	}
 
 	// idem pour la racine
@@ -598,15 +594,17 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	$code = '';
 	if ($boucles) {
+
 		foreach($boucles as $id => $boucle) {
-		  // appeler la fonction de definition de la boucle
+			// appeler la fonction de definition de la boucle
 			$f = 'boucle_'.strtoupper($boucle->type_requete);
-		  // si pas de definition perso, definition spip
+			// si pas de definition perso, definition spip
 			if (!function_exists($f)) $f = $f.'_dist';
-		  // laquelle a une definition par defaut
-			if (!function_exists($f)) $f = 'boucle_DEFAUT';	
+			// laquelle a une definition par defaut
+			if (!function_exists($f)) $f = 'boucle_DEFAUT';
 			$boucles[$id]->return = $f($id, $boucles);
 		}
+
 		foreach($boucles as $id => $boucle) {
 
 			// Reproduire la boucle en commentaire
