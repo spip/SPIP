@@ -148,10 +148,12 @@ function import_debut($f, $gz=false) {
 // importe un objet depuis le fichier, retourne true si ok, false si erreur ou fin de fichier
 //
 
+
 function import_objet_1_2($f, $gz=false) {
 	global $import_ok, $pos, $abs_pos;
 
-	static $tables = array(
+	static $tables;
+	if (!$tables) $tables = array(
 		'article' => 'spip_articles',
 		'auteur' => 'spip_auteurs',
 		'breve' => 'spip_breves',
