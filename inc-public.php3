@@ -272,7 +272,7 @@ if ($use_cache && file_exists('CACHE/.purge')) {
 // Afficher un bouton 
 //
 
-function bouton($titre, $lien) {
+function bouton_public($titre, $lien) {
 	$lapage=substr($lien, 0, strpos($lien,"?"));
 	$lesvars=substr($lien, strpos($lien,"?") + 1, strlen($lien));
 
@@ -298,19 +298,19 @@ $admin_ok = ($cookie_admin != '');
 
 if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
 	if ($id_article) {
-		bouton("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
+		bouton_public("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
 	else if ($id_breve) {
-		bouton("Modifier cette br&egrave;ve ($id_breve)", "./ecrire/breves_voir.php3?id_breve=$id_breve");
+		bouton_public("Modifier cette br&egrave;ve ($id_breve)", "./ecrire/breves_voir.php3?id_breve=$id_breve");
 	}
 	else if ($id_rubrique) {
-		bouton("Modifier cette rubrique ($id_rubrique)", "./ecrire/naviguer.php3?coll=$id_rubrique");
+		bouton_public("Modifier cette rubrique ($id_rubrique)", "./ecrire/naviguer.php3?coll=$id_rubrique");
 	}
 	else if ($id_mot) {
-		bouton("Modifier ce mot-cl&eacute; ($id_mot)", "./ecrire/mots_edit.php3?id_mot=$id_mot");
+		bouton_public("Modifier ce mot-cl&eacute; ($id_mot)", "./ecrire/mots_edit.php3?id_mot=$id_mot");
 	}
 	else if ($id_auteur) {
-		bouton("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
+		bouton_public("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
 
 	$link = new Link;
