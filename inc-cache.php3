@@ -41,29 +41,33 @@ function utiliser_cache($chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS, $HTTP_POST_VARS;
 	global $lastmodified;
 
+	// a priori cache
 	$use_cache = true;
+
+	// si le cache existe, verifier sa date
 	if (file_exists($chemin_cache)) {
 		$t = filemtime($chemin_cache);
 		$ledelais = time() - $t;
 		$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
 		// Inclusions multiples : derniere modification
 		if ($lastmodified < $t) $lastmodified = $t;
-
-		// Eviter de recalculer pour les moteurs de recherche, proxies...
-		if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD') {
-			$use_cache = true;
-		}
-	}
-	else {
+	} else
 		$use_cache = false;
-	}
+
+	// recalcul obligatoire
 	$use_cache &= ($GLOBALS['recalcul'] != 'oui');
 	$use_cache &= empty($HTTP_POST_VARS);
 
+	// ne jamais recalculer pour les moteurs de recherche, proxies...
+	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
+		$use_cache = true;
+
+	// si pas de connexion, cache obligatoire
 	if (!$use_cache) {
 		include_ecrire("inc_connect.php3");
 		if (!$GLOBALS['db_ok']) $use_cache = true;
 	}
+
 	return $use_cache;
 }
 
