@@ -6,6 +6,9 @@ if (defined("_INC_CALCUL_SQUEL")) return;
 define("_INC_CALCUL_SQUEL", "1");
 
 
+include_local("inc-champ-squel.php3");
+
+
 //////////////////////////////////////////////////////////////////////////////
 //
 //              Parsing des squelettes
@@ -126,7 +129,7 @@ function parser_boucle($texte, $id_parent) {
 		//
 		// Type boucle (recursion)
 		//
-		
+
 		if ($type == 'sites') $type = 'syndication';
 		
 		if (substr($type, 0, 6) == 'boucle') {
@@ -604,7 +607,7 @@ function parser_boucle($texte, $id_parent) {
 	$result->apres = $fin;
 	$result->partie = $partie;
 	$result->total_parties = $total_parties;
-	
+
 	return $result;
 }
 
@@ -784,301 +787,7 @@ function parser_texte($texte, $id_boucle) {
 
 
 function parser($texte) {
-
-	global $champs_valides;
-	global $champs_traitement, $champs_pretraitement, $champs_posttraitement;
-
-	global $rows_articles;
-	global $rows_signatures;
-	global $rows_syndication;
-	global $rows_syndic_articles;
-	global $rows_documents;
-	global $rows_types_documents;
-	global $rows_rubriques;
-	global $rows_forums;
-	global $rows_breves;
-	global $rows_auteurs;
-	global $rows_hierarchie;
-	global $rows_mots;
-	global $rows_groupes_mots;
-
-	global $tables_relations;
-
 	global $racine;
-
-	//
-	// Construire un tableau des tables de relations
-	//
-
-	$tables_relations = '';
-
-	$tables_relations['articles']['id_mot'] = 'spip_mots_articles';
-	$tables_relations['articles']['id_auteur'] = 'spip_auteurs_articles';
-	$tables_relations['articles']['id_document'] = 'spip_documents_articles';
-	$tables_relations['rubriques']['id_document'] = 'spip_documents_rubriques';
-
-	$tables_relations['auteurs']['id_article'] = 'spip_auteurs_articles';
-
-	$tables_relations['breves']['id_mot'] = 'spip_mots_breves';
-
-	$tables_relations['documents']['id_article'] = 'spip_documents_articles';
-	$tables_relations['documents']['id_rubrique'] = 'spip_documents_rubriques';
-	$tables_relations['documents']['id_breve'] = 'spip_documents_breves';
-
-	$tables_relations['mots']['id_article'] = 'spip_mots_articles';
-	$tables_relations['mots']['id_breve'] = 'spip_mots_breves';
-	$tables_relations['mots']['id_forum'] = 'spip_mots_forum';
-	$tables_relations['mots']['id_rubrique'] = 'spip_mots_rubriques';
-	$tables_relations['mots']['id_syndic'] = 'spip_mots_syndic';
-
-	$tables_relations['groupes_mots']['id_groupe'] = 'spip_mots';
-
-	$tables_relations['rubriques']['id_mot'] = 'spip_mots_rubriques';
-	$tables_relations['forums']['id_mot'] = 'spip_mots_forum';
-
-	$tables_relations['syndication']['id_mot'] = 'spip_mots_syndic';
-
-
-	//
-	// Construire un tableau associatif des codes de champ utilisables
-	//
-
-	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER',
-		'CHARSET', 'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM',
-		'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE', 'ID_AUTEUR',
-		'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE',
-		'ID_GROUPE', 'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF',
-		'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE', 'DATE',
-		'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES', 'INCLUS', 'LANG',
-		'LANG_LEFT', 'LANG_RIGHT', 'LANG_DIR', 'LESAUTEURS', 'EMAIL',
-		'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO',
-		'TYPE', 'PGP', 'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM',
-		'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE',
-		'RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
-		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL',
-		'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_AUTEUR_NORMAL',
-		'LOGO_AUTEUR_SURVOL', 'LOGO_SITE', 'LOGO_BREVE',
-		'LOGO_BREVE_RUBRIQUE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE',
-		'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL',
-		'LOGO_ARTICLE_SURVOL', 'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE',
-		'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT',
-		'EMBED_DOCUMENT', 'IP', 'VISITES', 'POPULARITE',
-		'POPULARITE_ABSOLUE', 'POPULARITE_MAX', 'POPULARITE_SITE', 'POINTS',
-		'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION', 'LARGEUR', 'HAUTEUR',
-		'TAILLE', 'EXTENSION', 'DEBUT_SURLIGNE', 'FIN_SURLIGNE',
-		'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT', 'FORMULAIRE_ADMIN',
-		'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'URL_LOGOUT', 'PUCE', 'EXTRA'
-	);
-	reset($c);
-	while (list(, $val) = each($c)) {
-		unset($champs_traitement[$val]);
-		unset($champs_pretraitement[$val]);
-		unset($champs_posttraitement[$val]);
-		$champs_valides[$val] = $val;
-	}
-
-
-	//
-	// Construire un tableau associatif des pre-traitements de champs
-	//
-
-	// Textes utilisateur : ajouter la securite anti-script
-	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER', 'CHARSET',
-		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'IP', 'BIO', 'TYPE', 'PGP',
-		'RECHERCHE'
-	);
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_pretraitement[$val][] = 'trim';
-		$champs_posttraitement[$val][] = 'interdire_scripts';
-	}
-
-	// Textes courts : ajouter le traitement typographique
-	$c = array('NOM_SITE_SPIP', 'SURTITRE', 'TITRE', 'SOUSTITRE', 'NOM_SITE', 'LIEN_TITRE', 'NOM');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'typo';
-	}
-
-	// Chapo : ne pas l'afficher si article virtuel
-	$c = array('CHAPO');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'nettoyer_chapo';
-	}
-
-	// Textes longs : ajouter le traitement typographique + mise en forme
-	$c = array('DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'BIO', 'MESSAGE');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'traiter_raccourcis';
-	}
-
-	// Dates : ajouter le vidage des dates egales a 00-00-0000
-	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF', 'DATE_NOUVEAUTES');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'vider_date';
-	}
-
-	// URL_SITE : vider les url == 'http://'
-	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'vider_url';
-	}
-
-	// URLs : remplacer les & par &amp;
-	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'PARAMETRES_FORUM',
-		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'htmlspecialchars';
-	}
-
-	//
-	// Construire un tableau associatif des champs de chaque type
-	// avec l'intitule de la colonne mysql correspondante
-	//
-
-	$rows_articles = array(
-		'ID_ARTICLE' => 'id_article',
-		'ID_RUBRIQUE' => 'id_rubrique',
-		'ID_SECTEUR' => 'id_secteur',
-		'SURTITRE' => 'surtitre',
-		'TITRE' => 'titre',
-		'SOUSTITRE' => 'soustitre',
-		'DESCRIPTIF' => 'descriptif',
-		'CHAPO' => 'chapo',
-		'TEXTE' => 'texte',
-		'PS' => 'ps',
-		'LANG' => 'lang',
-		'DATE' => 'date',
-		'DATE_REDAC' => 'date_redac',
-		'DATE_MODIF' => 'date_modif',
-		'VISITES' => 'visites',
-		'POINTS' => 'points'
-	);
-	$rows_auteurs = array(
-		'ID_AUTEUR' => 'id_auteur',
-		'NOM' => 'nom',
-		'BIO' => 'bio',
-		'EMAIL' => 'email',
-		'NOM_SITE' => 'nom_site',
-		'URL_SITE' => 'url_site',
-		'PGP' => 'pgp',
-		'LANG' => 'lang',
-		'POINTS' => 'points'
-	);
-	$rows_breves = array(
-		'ID_BREVE' => 'id_breve',
-		'ID_RUBRIQUE' => 'id_rubrique',
-		'ID_SECTEUR' => 'id_rubrique',
-		'DATE' => 'date_heure',
-		'TITRE' => 'titre',
-		'TEXTE' => 'texte',
-		'LANG' => 'lang',
-		'NOM_SITE' => 'lien_titre',
-		'URL_SITE' => 'lien_url',
-		'LIEN_TITRE' => 'lien_titre',
-		'LIEN_URL' => 'lien_url',
-		'POINTS' => 'points'
-	);
-	$rows_forums = array(
-		'ID_FORUM' => 'id_forum',
-		'ID_PARENT' => 'id_parent',
-		'ID_BREVE' => 'id_breve',
-		'ID_RUBRIQUE' => 'id_rubrique',
-		'ID_ARTICLE' => 'id_article',
-		'TITRE' => 'titre',
-		'TEXTE' => 'texte',
-		'DATE' => 'date_heure',
-		'NOM' => 'auteur',
-		'EMAIL' => 'email_auteur',
-		'NOM_SITE' => 'nom_site',
-		'URL_SITE' => 'url_site',
-		'IP' => 'ip'
-	);
-	$rows_documents = array(
-		'ID_DOCUMENT' => 'id_document',
-		'ID_VIGNETTE' => 'id_vignette',
-		'ID_TYPE' => 'id_type',
-		'TITRE' => 'titre',
-		'DESCRIPTIF' => 'descriptif',
-		'DATE' => 'date',
-		'LARGEUR' => 'largeur',
-		'HAUTEUR' => 'hauteur',
-		'TAILLE' => 'taille',
-		'TYPE_DOCUMENT' => 'type_document',
-		'EXTENSION_DOCUMENT' => 'extension_document'
-	);
-	$rows_types_documents = array(
-		'ID_TYPE' => 'id_type',
-		'TITRE' => 'titre',
-		'DESCRIPTIF' => 'descriptif',
-		'EXTENSION' => 'extension'
-	);
-	$rows_mots = array(
-		'ID_MOT' => 'id_mot',
-		'TYPE' => 'type',
-		'TITRE' => 'titre',
-		'DESCRIPTIF' => 'descriptif',
-		'TEXTE' => 'texte',
-		'POINTS' => 'points',
-		'ID_GROUPE' => 'id_groupe'
-	);
-	$rows_groupes_mots = array(
-		'ID_GROUPE' => 'id_groupe',
-		'TITRE' => 'titre'
-	);
-	$rows_rubriques = array(
-		'ID_RUBRIQUE' => 'id_rubrique',
-		'ID_PARENT' => 'id_parent',
-		'ID_SECTEUR' => 'id_secteur',
-		'TITRE' => 'titre',
-		'DESCRIPTIF' => 'descriptif',
-		'TEXTE' => 'texte',
-		'LANG' => 'lang',
-		'DATE' => 'date',
-		'POINTS' => 'points'
-	);
-	$rows_hierarchie = $rows_rubriques;
-
-	$rows_signatures = array(
-		'ID_SIGNATURE' => 'id_signature',
-		'ID_ARTICLE' => 'id_article',
-		'DATE' => 'date_time',
-		'NOM' => 'nom_email',
-		'EMAIL' => 'ad_email',
-		'NOM_SITE' => 'nom_site',
-		'URL_SITE' => 'url_site',
-		'MESSAGE' => 'message'
-	);
-
-	$rows_syndication = array(
-		'ID_SYNDIC' => 'id_syndic',
-		'ID_RUBRIQUE' => 'id_rubrique',
-		'ID_SECTEUR' => 'id_secteur',
-		'NOM_SITE' => 'nom_site',
-		'URL_SITE' => 'url_site',
-		'URL_SYNDIC' => 'url_syndic',
-		'DESCRIPTIF' => 'descriptif',
-		'DATE' => 'date',
-		'POINTS' => 'points'
-	);
-	$rows_syndic_articles = array(
-		'ID_SYNDIC_ARTICLE' => 'id_syndic_article',
-		'ID_SYNDIC' => 'id_syndic',
-		'TITRE' => 'titre',
-		'URL_ARTICLE' => 'url',
-		'DATE' => 'date',
-		'LESAUTEURS' => 'lesauteurs',
-		'DESCRIPTIF' => 'descriptif',
-		'NOM_SITE' => 'nom_site',
-		'URL_SITE' => 'url_site'
-	);
-
 
 	// Parser le texte et retourner le tableau racine
 
@@ -1168,8 +877,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	// Ici traitement des cas particuliers
 	//
 
-	$milieu = '<blink>#'.$champs[$id_champ]->nom_champ.'</blink>'; // pour debugger les squelettes
-	$milieu = "	\$$nom_var = '$milieu';\n";
+/*	$milieu = '<blink>#'.$champs[$id_champ]->nom_champ.'</blink>'; // pour debugger les squelettes
+	$milieu = "	\$$nom_var = '$milieu';\n";*/
 
 	$fonctions = $champs[$id_champ]->fonctions;
 	switch($nom_champ = $champs[$id_champ]->nom_champ) {
@@ -1798,6 +1507,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		';
 		break;
 
+	default:
+		$milieu = '<blink>#'.$champs[$id_champ]->nom_champ.'</blink>'; // pour debugger les squelettes
+		$milieu = "	\$$nom_var = '$milieu';\n";
+		break;
 	} // switch
 
 	if (!$code) $code = "\$$nom_var";
@@ -1817,6 +1530,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 function calculer_boucle($id_boucle, $prefix_boucle)
 {
 	global $boucles;
+	global $tables_code_contexte, $tables_doublons;
 
 	$func = $prefix_boucle.$id_boucle;
 	$boucle = $boucles[$id_boucle];
@@ -1826,7 +1540,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 
 	$texte .= "function $func".'($contexte) {
-	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $syn_rubriques, $rubriques_publiques, $id_article_img;
+	global $pile_boucles, $ptr_pile_boucles, $id_doublons, $fichier_cache, $requetes_cache, $rubriques_publiques, $id_article_img;
 
 	';
 
@@ -1845,6 +1559,15 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte[\'activer_url_recherche\'] = false;
 		';
 
+	if (ereg('\$date_redac[^_]', $boucle->requete)) {
+		$texte .= '$contexte[\'date_redac\'] = normaliser_date($contexte[\'date_redac\']);
+		';
+	}
+	if (ereg('\$date[^_]', $boucle->requete)) {
+		$texte .= '$contexte[\'date\'] = normaliser_date($contexte[\'date\']);
+		';
+	}
+
 	//
 	// Recuperation du contexte et creation de l'instance de boucle
 	//
@@ -1861,11 +1584,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$instance = new InstanceBoucle;
 
 	$instance->id_boucle = \''.$boucle->id_boucle.'\';
-	$instance->requete = "'.$boucle->requete.'";
 	$instance->type_requete = \''.$boucle->type_requete.'\';
-	$instance->separateur = \''.$boucle->separateur.'\';
-	$instance->doublons = \''.$boucle->doublons.'\';
-	$instance->lang_select = \''.$boucle->lang_select.'\';
 	$instance->partie = \''.$boucle->partie.'\';
 	$instance->total_parties = \''.$boucle->total_parties.'\';
 
@@ -1888,6 +1607,8 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$doublons = $boucle->doublons;
 	$partie = $boucle->partie;
 	$total_parties = $boucle->total_parties;
+	$lang_select = ($boucle->lang_select != "non") &&
+		($type_boucle == 'articles' OR $type_boucle == 'rubriques' OR $type_boucle == 'breves');
 
 	//
 	// Boucle recursive : simplement appeler la boucle interieure
@@ -1902,7 +1623,6 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	// Boucle 'hierarchie' : code specifique
 	//
 	else if ($type_boucle == 'hierarchie') {
-	
 		$texte .= '
 		if ($id_article || $id_syndic) $hierarchie = construire_hierarchie($id_rubrique);
 		else $hierarchie = construire_hierarchie($id_parent);
@@ -1914,32 +1634,40 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				if ($match[2]) $fin_class = $match[2] + $deb_class;
 			}
 			if (!$fin_class OR $fin_class > sizeof($hierarchie)) $fin_class = sizeof($hierarchie);
-	
-			$hierarchie = join(",", $hierarchie);
-			$query = "SELECT *, FIELD(id_rubrique, $hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN ($hierarchie)";
-			if ($instance->doublons == "oui") $query .= " AND id_rubrique NOT IN ($id_doublons[rubriques])";
+
+			$hierarchie = join(",", $hierarchie);';
+		if ($doublons == "oui") {
+			$texte .= '
+			$query = "SELECT *, FIELD(id_rubrique, $hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN ($hierarchie) AND id_rubrique NOT IN ($id_doublons[rubriques])";';
+		}
+		else {
+			$texte .= '
+			$query = "SELECT *, FIELD(id_rubrique, $hierarchie) AS _field FROM spip_rubriques WHERE id_rubrique IN ($hierarchie)";';
+		}
+		$texte .= '
 			$query .= " ORDER BY _field LIMIT $deb_class, ".($fin_class - $deb_class);
 			$result = spip_query($query);
 
 			if ($result) while ($row = spip_fetch_array($result)) {
-
 				$boucles[$id_boucle]->row = $row;
-				if ($retour) $retour .= $instance->separateur;
-
+		';
+		if ($boucle->separateur) {
+			$texte .= '	if ($retour) $retour .= \''.$boucle->separateur."';\n";
+		}
+		$texte .= '
 				$contexte["id_rubrique"] = $row["id_rubrique"];
 				$contexte["id_parent"] = $row["id_parent"];
 				$contexte["id_secteur"] = $row["id_secteur"];
 				$contexte["date"] = normaliser_date($row["date"]);
 				$contexte["date_redac"] = normaliser_date($row["date_redac"]);
-				if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
-				if ($doublons == "oui") {
-					$id_doublons["rubriques"] .= ",".$row["id_rubrique"];
-				}
-
-		';
+				if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);';
+		if ($doublons == "oui") {
+			$texte .= '
+				$id_doublons["rubriques"] .= ",".$row["id_rubrique"];';
+		}
 		$texte .= calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
 		$texte .= '
- 					if ($lang_dselect) lang_dselect();
+				if ($lang_dselect) lang_dselect();
 				} // if
 //			} // for
 		} // if
@@ -1954,7 +1682,6 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	// et de l'activation / desactivation par article
 	//
 	if ($type_boucle == 'forums') {
-
 		$texte .= '
 		if (!$id_rubrique AND !$id_article AND !$id_breve)
 			$my_id_forum = $id_forum;
@@ -1964,7 +1691,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		if (!$id_rubrique) $id_rubrique = 0;
 		if (!$id_breve) $id_breve = 0;
 		$valeurs = "$id_article, $id_rubrique, $id_breve, $my_id_forum, \'$fichier_cache\'";
-		
+
 		if (!$requetes_cache[$valeurs]) {
 			$query_cache = "INSERT INTO spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
 			spip_query($query_cache);
@@ -1981,23 +1708,13 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	// de resultats et de traitement des boucles par parties (e.g. 1/2)
 	//
 
-	$texte .= '	$query = $instance->requete;
+	$texte .= '	$query = "'.$boucle->requete.'";
 	$result = @spip_query($query);
 	if (!$result) {
-		$retour .= "<tt><br><br><blink>&lt;BOUCLE'.$id_boucle.'&gt;</blink><br>\n".
-		"<b>Erreur dans la requ&ecirc;te envoy&eacute;e &agrave; MySQL :</b><br>\n".
-		htmlspecialchars($query)."<br>\n<font color=\'red\'><b>&gt; ".
-		spip_sql_error()."</b></font><br>\n".
-		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt>\n";
-		$retour .= "<" ."?php
-			if (\$GLOBALS[\'spip_admin\']) {
-			include_ecrire(\'inc_presentation.php3\');
-			echo aide(\'erreur_mysql\');
-		} ?".">";
-		$retour .= "<br><br>\n"; // debugger les squelettes
+		include_local("inc-debug-squel.php3");
+		return erreur_requete_boucle($query, $instance->id_boucle);
 	}
 	$total_boucle = @spip_num_rows($result);
-	$pile_boucles[$id_instance]->num_rows = $total_boucle;
 	';
 
 	if ($partie AND $total_parties) {
@@ -2015,7 +1732,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		';
 	}
 
-	$texte .= '	
+	$texte .= '
 	$pile_boucles[$id_instance]->compteur_boucle = 0;
 	$compteur_boucle = 0;
 	';
@@ -2024,164 +1741,58 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	// Ecrire le code de recuperation des resultats
 	//
 
-	$texte .= '
-	while ($row = @spip_fetch_array($result)) {
-	$compteur_boucle++;
-	';
+	if ($lang_select)
+		$texte_debut .= '		$old_lang = $GLOBALS["spip_lang"];'."\n";
+	$texte_debut .= '
+	while ($row = @spip_fetch_array($result)) {';
 
 	if ($flag_parties) {
-		$texte .= '
-		if ($compteur_boucle >= $debut_boucle AND $compteur_boucle <= $fin_boucle) {
-		';
+		$texte_debut .= '
+		$compteur_boucle++;
+		if ($compteur_boucle >= $debut_boucle AND $compteur_boucle <= $fin_boucle) {';
 	}
-	$texte .= '
-	$pile_boucles[$id_instance]->compteur_boucle++;
-	$pile_boucles[$id_instance]->row = $row;
-	if ($retour) $retour .= $instance->separateur;
+	$texte_debut .= '
+		$pile_boucles[$id_instance]->compteur_boucle++;
+		$pile_boucles[$id_instance]->row = $row;
 	';
+	if ($boucle->separateur)
+		$texte_debut .= '		if ($retour) $retour .= \''.$boucle->separateur."';\n";
+	if ($lang_select)
+		$texte_debut .= '		$GLOBALS["spip_lang"] = $row["lang"];'."\n";
 
 	//
 	// Traitement different selon le type de boucle
 	//
 
-	switch($type_boucle) {
-
-	case 'articles':
-		$texte .= '
-		$contexte["id_article"] = $row["id_article"];
-		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["date"] = normaliser_date($row["date"]);
-		$contexte["date_redac"] = normaliser_date($row["date_redac"]);
-		$contexte["id_trad"] = $row["id_trad"];
-		if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
-		$contexte["accepter_forum"] = $row["accepter_forum"];
-		if ($instance->doublons == "oui") $id_doublons["articles"] .= ",".$row["id_article"];
-		';
-		break;
-
-	case 'breves':
-		$texte .= '
-		$contexte["id_breve"] = $row["id_breve"];
-		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_secteur"] = $row["id_rubrique"];
-		$contexte["date"] = normaliser_date($row["date_heure"]);
-		if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
-		if ($instance->doublons == "oui") $id_doublons["breves"] .= ",".$row["id_breve"];
-		';
-		break;
-
-	case 'syndication':
-		$texte .= '
-		$contexte["id_syndic"] = $row["id_syndic"];
-		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["url_site"] = $row["url_site"];
-		$contexte["date"] = normaliser_date($row["date"]);
-		if ($instance->doublons == "oui") $id_doublons["syndication"] .= ",".$row["id_syndic"];
-		';
-		break;
-		
-	case 'documents':
-		$texte .= '
-		$contexte["id_document"] = $row["id_document"];
-		$contexte["id_vignette"] = $row["id_vignette"];
-		$contexte["id_type"] = $row["id_type"];
-		if ($instance->doublons == "oui") $id_doublons["documents"] .= ",".$row["id_document"];
-		';
-		break;
-
-	case 'types_documents':
-		$texte .= '
-		$contexte["id_type"] = $row["id_type"];
-		if ($instance->doublons == "oui") $id_doublons["documents"] .= ",".$row["id_document"];
-		';
-		break;
-
-	case 'syndic_articles':
-		$texte .= '
-		$contexte["id_syndic"] = $row["id_syndic"];
-		$contexte["id_syndic_article"] = $row["id_syndic_article"];
-		$contexte["date"] = normaliser_date($row["date"]);
-		if ($instance->doublons == "oui") $id_doublons["syndic_articles"] .= ",".$row["syndic_articles"];
-		';
-		break;
-
-	case 'rubriques':
-		$texte .= '
-		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_parent"] = $row["id_parent"];
-		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["date"] = normaliser_date($row["date"]);
-		if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
-		if ($instance->doublons == "oui") $id_doublons["rubriques"] .= ",".$row["id_rubrique"];
-		$syn_rubrique .= ",".$row["id_rubrique"].",";
-		';
-		break;
-
-	case 'forums':
-		$texte .= '
-		$contexte["id_forum"] = $row["id_forum"];
-		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_article"] = $row["id_article"];
-		$contexte["id_breve"] = $row["id_breve"];
-		$contexte["id_parent"] = $row["id_parent"];
-		$contexte["date"] = normaliser_date($row["date_heure"]);
-		if ($instance->doublons == "oui") $id_doublons["forums"] .= ",".$row["id_forum"];
-		';
-		break;
-
-	case 'auteurs':
-		$texte .= '
-		$contexte["id_auteur"] = $row["id_auteur"];
-		if ($lang_dselect = ($instance->lang_select == "oui")) lang_select($row["lang"]);
-		if ($instance->doublons == "oui") $id_doublons["auteurs"] .= ",".$row["id_auteur"];
-		';
-		break;
-
-	case 'signatures':
-		$texte .= '
-		$contexte["id_signature"] = $row["id_signature"];
-		$contexte["date"] = normaliser_date($row["date_time"]);
-		if ($instance->doublons == "oui") $id_doublons["signatures"] .= ",".$row["id_signature"];
-		';
-		break;
-
-	case 'mots':
-		$texte .= '
-		$contexte["id_mot"] = $row["id_mot"];
-		$contexte["type"] = $row["type"];
-		$contexte["id_groupe"] = $row["id_groupe"];
-		if ($instance->doublons == "oui") $id_doublons["mots"] .= ",".$row["id_mot"];
-		';
-		break;
-
-	case 'groupes_mots':
-		$texte .= '
-		$contexte["id_groupe"] = $row["id_groupe"];
-		if ($instance->doublons == "oui") $id_doublons["groupes_mots"] .= ",".$row["id_groupe"];
-		';
-		break;
-	}
+	$texte_debut .= $tables_code_contexte[$type_boucle];
+	if ($doublons == "oui")
+		$texte_debut .= "\t\t\$id_doublons['$type_boucle'] .= ','.\$row['".$tables_doublons[$type_boucle]."'];\n";
 
 	//
 	// Inclusion du code correspondant a l'interieur de la boucle
 	//
-	$texte .= calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
+	$texte_liste = calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
+	if ($texte_liste) {
+		$texte .= $texte_debut . $texte_liste;
 
-	//
-	// Fermeture de la boucle spip_fetch_array et liberation des resultats
-	//
-	$texte .= "if (\$lang_dselect) lang_dselect();\n";
-	if ($flag_parties) {
-		$texte .= '
+		if ($flag_parties) {
+			$texte .= '
 		}
 		';
-	}
-	$texte .= '
+		}
+
+		// Fermeture de la boucle spip_fetch_array et liberation des resultats
+		$texte .= '
 	}
 	@spip_free_result($result);
 ';
+		if ($lang_select)
+			$texte .= '		$GLOBALS["spip_lang"] = $old_lang;'."\n";
+	}
+	else {
+		$texte .= '	$pile_boucles[$id_instance]->compteur_boucle = @spip_num_rows($result);
+';
+	}
 	$texte .= $code_fin;
 	return $texte;
 }
@@ -2299,26 +1910,39 @@ function calculer_liste($tableau, $prefix_boucle, $id_boucle)
 			$nb_milieu++;
 			$nom_var = "milieu$nb_milieu";
 			$nom_func = $prefix_boucle.$objet->id_boucle;
-			$texte .= "	\$$nom_var = $nom_func(\$contexte);\n";
-			$texte .= "	if (\$$nom_var) {\n";
-			if ($s = $objet->cond_avant) {
-				$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
-			}
-			$texte .= "	\$retour .= \$$nom_var;\n";
-			if ($s = $objet->cond_apres) {
-				$texte .= "	\$id_instance_cond++;\n";
-				$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
-				$texte .= "	\$id_instance_cond--;\n";
-			}
-			$texte .= "	}\n";
-			if ($s = $objet->cond_altern) {
-				$texte .= "	else {\n";
-				$texte .= "	\$id_instance_cond++;\n";
-				$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
-				$texte .= "	\$id_instance_cond--;\n";
+			if ($objet->cond_avant || $objet->cond_apres || $objet->cond_altern) {
+				$texte .= "	\$$nom_var = $nom_func(\$contexte);\n";
+				$texte .= "	if (\$$nom_var) {\n";
+				if ($s = $objet->cond_avant) {
+					$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
+				}
+				$texte .= "	\$retour .= \$$nom_var;\n";
+				if ($s = $objet->cond_apres) {
+					$texte2 = calculer_liste($s, $prefix_boucle, $id_boucle);
+					if (strpos($texte2, '$id_instance_cond')) {
+						$texte .= "	\$id_instance_cond++;\n";
+						$texte .= $texte2;
+						$texte .= "	\$id_instance_cond--;\n";
+					}
+					else $texte .= $texte2;
+				}
 				$texte .= "	}\n";
+				if ($s = $objet->cond_altern) {
+					$texte .= "	else {\n";
+					$texte2 = calculer_liste($s, $prefix_boucle, $id_boucle);
+					if (strpos($texte2, '$id_instance_cond')) {
+						$texte .= "	\$id_instance_cond++;\n";
+						$texte .= $texte2;
+						$texte .= "	\$id_instance_cond--;\n";
+					}
+					else $texte .= $texte2;
+					$texte .= "	}\n";
+				}
 			}
-			$texte .= "	unset(\$$nom_var);\n";
+			else {
+				$texte .= "	\$retour .= $nom_func(\$contexte);\n";
+			}
+			$nb_milieu--;
 
 			break;
 
@@ -2328,20 +1952,35 @@ function calculer_liste($tableau, $prefix_boucle, $id_boucle)
 		//
 		case 'champ':
 			$nb_milieu++;
-			$nom_var = "milieu$nb_milieu";
 			$texte .= "	\$id_article_img = \$contexte[\"id_article\"];\n";
-			$texte .= calculer_champ($objet->id_champ, $id_boucle, $nom_var);
+			if ($objet->cond_avant || $objet->cond_apres) {
+				$nom_var = "milieu$nb_milieu";
+				$texte .= calculer_champ($objet->id_champ, $id_boucle, $nom_var);
 
-			$texte .= "	if (\$$nom_var) {\n";
-			if ($s = $objet->cond_avant) {
-				$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
+				$texte .= "	if (\$$nom_var) {\n";
+				if ($s = $objet->cond_avant) {
+					$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
+				}
+				$texte .= "	\$retour .= \$$nom_var;\n";
+				if ($s = $objet->cond_apres) {
+					$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
+				}
+				$texte .= "	}\n";
 			}
-			$texte .= "	\$retour .= \$$nom_var;\n";
-			if ($s = $objet->cond_apres) {
-				$texte .= calculer_liste($s, $prefix_boucle, $id_boucle);
+			else {
+				$nom_var = "milieu$nb_milieu";
+				$texte2 = calculer_champ($objet->id_champ, $id_boucle, $nom_var);
+				$c = count(explode("\$$nom_var", $texte2));
+				if ($c <= 2) {
+					$texte2 = str_replace("\$$nom_var = ", "\$retour .= ", $texte2);
+					$texte .= $texte2;
+				}
+				else {
+					$texte .= $texte2;
+					$texte .= "	\$retour .= \$$nom_var;\n";
+				}
 			}
-			$texte .= "	}\n";
-			$texte .= "	unset(\$$nom_var);\n";
+			$nb_milieu--;
 			break;
 
 		} // switch

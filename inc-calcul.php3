@@ -300,14 +300,11 @@ class InstanceBoucle {
 
 	// Proprietes de la boucle
 	var $id_boucle;
-	var $requete;
 	var $type_requete;
-	var $separateur;
-	var $doublons;
 	var $partie, $total_parties;
 
 	// Stockage des resultats
-	var $row, $num_rows;
+	var $row;
 	var $compteur_boucle, $total_boucle;
 }
 
