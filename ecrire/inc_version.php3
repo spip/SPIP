@@ -14,6 +14,10 @@ define("_ECRIRE_INC_VERSION", "1");
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 $table_prefix = "spip";
 
+// Prefixe des cookies
+// (a modifier pour installer des sites SPIP dans des sous-repertoires)
+$cookie_prefix = "spip";
+
 // faut-il loger les infos de debug dans data/spip.log ?
 $debug = false;
 
@@ -173,6 +177,42 @@ function feed_post_files($table) {
 }
 
 feed_post_files('HTTP_POST_FILES');
+
+
+//
+// Appliquer le prefixe cookie
+//
+function spip_setcookie ($name='', $value='', $expire='', $path='', $domain='', $secure='') {
+	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
+	
+	if ($secure)
+		@setcookie ($name, $value, $expire, $path, $domain, $secure);
+	else if ($domain)
+		@setcookie ($name, $value, $expire, $path, $domain);
+	else if ($path)
+		@setcookie ($name, $value, $expire, $path);
+	else if ($expire)
+		@setcookie ($name, $value, $expire);
+	else
+		@setcookie ($name, $value);
+}
+if ($cookie_prefix <> 'spip') {
+	reset ($HTTP_COOKIE_VARS);
+	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
+		if (ereg('^spip', $name)) {
+			unset($HTTP_COOKIE_VARS[$name]);
+			unset($$name);
+		}
+	}
+	reset ($HTTP_COOKIE_VARS);
+	while (list($name,$value) = each($HTTP_COOKIE_VARS)) {
+		if (ereg('^'.$cookie_prefix, $name)) {
+			$spipname = ereg_replace ('^'.$cookie_prefix, 'spip', $name);
+			$HTTP_COOKIE_VARS[$spipname] = $value;
+			$$spipname = $value;
+		}
+	}
+}
 
 
 //

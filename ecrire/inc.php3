@@ -50,7 +50,7 @@ if ($prefs_mod) {
 }
 
 if ($set_ecran) {	// on pose un cookie long car ce reglage depend plus du navigateur que de l'utilisateur
-	setcookie('spip_ecran', $set_ecran, time() + 365 * 24 * 3600);
+	spip_setcookie('spip_ecran', $set_ecran, time() + 365 * 24 * 3600);
 	$spip_ecran = $set_ecran;
 }
 if (!$spip_ecran) $spip_ecran = "etroit";
@@ -244,7 +244,7 @@ function tester_rubrique_vide($id_rubrique) {
 // Recuperation du cookie
 //
 
-$cookie_admin = $HTTP_COOKIE_VARS["spip_admin"];
+$cookie_admin = $HTTP_COOKIE_VARS['spip_admin'];
 
 
 

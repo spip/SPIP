@@ -121,7 +121,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		} else if (!$flag_autres_sources) {
 			$erreur = "L'identifiant &laquo; $login &raquo; est inconnu.";
 			$login = '';
-			@setcookie("spip_admin", "", time() - 3600);
+			@spip_setcookie("spip_admin", "", time() - 3600);
 		}
 	}
 
