@@ -582,6 +582,7 @@ function parser_champs($texte) {
 	global $champs_posttraitement;
 
 	$debut = '';
+	$result=Array();
 	while ($texte) {
 		$r = ereg('(#([a-zA-Z_]+)(\*?))', $texte, $regs);
 		if ($r) {
