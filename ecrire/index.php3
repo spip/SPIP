@@ -12,7 +12,7 @@ function enfant($collection){
 	global $les_enfants, $couleur_foncee;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
-	
+
 	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
@@ -342,6 +342,7 @@ if ($relief) {
 	echo "<p>";
 	debut_cadre_enfonce();
 	echo "<font color='red'><b>Les articles et br&egrave;ves suivants sont propos&eacute;s pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.</b></font><p>";
+	
 	//
 	// Les articles a valider
 	//
@@ -349,13 +350,11 @@ if ($relief) {
 		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 		"FROM spip_articles WHERE statut='prop'$vos_articles ORDER BY date DESC");
 
-
 	//
 	// Les breves a valider
 	//
 	$query = "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC";
 	afficher_breves("Les br&egrave;ves &agrave; valider", $query);
-
 
 	//
 	// Les sites references a valider
@@ -373,7 +372,7 @@ if ($relief) {
 		afficher_sites("Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me",
 			"SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
 	}
-	
+
 	// Les articles syndiques en attente de validation
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
@@ -394,14 +393,12 @@ if ($relief) {
 		}
 	}
 
-	fin_cadre_enfonce();	
-}	
-
-
-enfant(0);
+	fin_cadre_enfonce();
+}
 
 
 if ($options == 'avancees') {
+	enfant(0);
 
 	$les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
 	if (strpos($les_enfants2,"<P>")){
@@ -412,7 +409,7 @@ if ($options == 'avancees') {
 		$les_enfants2="";
 	}
 
-// Afficher les sous-rubriques
+	// Afficher les sous-rubriques
 	echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr><td valign='top' width=50%>$les_enfants1</td>";
 	echo "<td width=20><img src='img_pack/rien.gif' width=20></td>";
@@ -420,7 +417,6 @@ if ($options == 'avancees') {
 	if (strlen($les_enfants2) > 0) echo "<p>";
 	echo "</td></tr>";
 	echo "</table>";
-
 
 	//
 	// Vos articles publies
