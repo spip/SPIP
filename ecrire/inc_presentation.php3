@@ -108,8 +108,11 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	}
 	
 	// accesskey pour accessibilite espace prive
-	$accesskey_c = chr($accesskey++);
-	$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
+	if ($accesskey <= 122) // z
+	{
+		$accesskey_c = chr($accesskey++);
+		$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
+	}
 
 	if ($style == "e") {
 		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
@@ -1595,8 +1598,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n";
 	$onLoadInvisible = " onLoad=\"setActiveStyleSheet('invisible'); ";
 
+	// favicon.ico
+	echo '<link rel="shortcut icon" href="', _DIR_IMG_PACK, 'favicon.ico" />';
+
 	// Fin des entetes
-	echo "</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
+	echo "\n</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
 
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
