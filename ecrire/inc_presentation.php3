@@ -1051,7 +1051,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 // Afficher les forums
 //
 
-function afficher_forum($request, $adresse_retour, $controle = "non", $recurrence = "oui") {
+function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 	global $debut;
 	static $compteur_forum;
 	static $nb_forum;
@@ -1087,7 +1087,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 		$id_auteur=$row["id_auteur"];
 
 		if ($compteur_forum==1) echo "\n<br /><br />";
-		$afficher = ($controle=="oui") ? ($statut!="perso") :
+		$afficher = ($controle_id_article) ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			OR ($statut=="publie" AND $id_parent > 0));
 
@@ -1134,39 +1134,29 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 				if ($bouton) echo "&nbsp;".$bouton;
 			}
 
-			if ($controle == "oui") {
+			if ($controle_id_article) {
 				if ($statut != "off") {
-				  echo controle_cache_forum('supp_forum',
-						       $id_forum,
-						       _T('icone_supprimer_message'), 
-						       "articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
-						       "forum-interne-24.gif",
-						       "supprimer.gif");
+					echo controle_cache_forum('supp_forum',
+						$id_forum,
+						_T('icone_supprimer_message'), 
+						"articles_forum.php3?id_article=$controle_id_article&debut=$debut#$id_forum",
+						"forum-interne-24.gif",
+						"supprimer.gif");
 				}
 				else {
 					echo "<br><font color='red'><b>"._T('info_message_supprime')." $ip</b></font>";
 					if ($id_auteur) {
-						echo " - <a href='auteurs_edit.php3?id_auteur=$id_auteur'>"._T('lien_voir_auteur')."</A>";
+						echo " - <a href='auteurs_edit.php3?id_auteur=$id_auteur'>"._T('lien_voir_auteur')."</a>";
 					}
 				}
 				if ($statut == "prop" OR $statut == "off") {
-		$appelant= "forum.php3?$type=$valeur&id_forum=$id_forum";
-		  echo controle_cache_forum('valid_forum',
-					    $id_forum,
-					    _T('icone_valider_message'), 
-       "articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
-					    "forum-interne-24.gif",
-					    "creer.gif"),
-		    controle_cache_forum('valid_forum',
-				       $id_forum,
-				       _T('icone_valider_message') . " &amp; " .
-				       _T('lien_repondre_message'),
-				       "../$appelant&url=" .
-				       rawurlencode($appelant) . 
-				       "&retour=" .
-       rawurlencode("ecrire/controle_forum.php3?$rappel&#$id_forum"), 
-				       "../img_pack/messagerie-24.gif",
-				       "creer.gif");
+					$appelant= "forum.php3?$type=$valeur&id_forum=$id_forum";
+					echo controle_cache_forum('valid_forum',
+						$id_forum,
+						_T('icone_valider_message'),
+						"articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
+						"forum-interne-24.gif",
+						"creer.gif");
 				}
 			}
 			echo justifier(propre($texte));
@@ -1175,7 +1165,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 				echo "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
 			}
 
-			if ($controle != "oui") {
+			if (!$controle_id_article) {
 				echo "<div align='right' class='verdana1'>";
 				$url = "forum_envoi.php3?id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)
 					."&titre_message=".rawurlencode($titre);
@@ -1203,7 +1193,8 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 			}
 			echo "</td></tr></table>\n";
 
-			if ($recurrence == "oui") forum($id_forum,$adresse_retour,$controle);
+			afficher_thread_forum($id_forum,$adresse_retour,$controle_id_article);
+
 		}
 		$i[$compteur_forum]++;
 	}
@@ -1211,10 +1202,10 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 	$compteur_forum--;
 }
 
-function forum($le_forum, $adresse_retour, $controle = "non") {
-      	echo "<div class='serif2'>";
+function afficher_thread_forum($le_forum, $adresse_retour, $controle = 0) {
+	echo "<div class='serif2'>";
 	
-	if ($controle == "oui") {
+	if ($controle) {
 		$query_forum2 = "SELECT * FROM spip_forum WHERE id_parent='$le_forum' ORDER BY date_heure";
 	}
 	else {
@@ -1225,6 +1216,7 @@ function forum($le_forum, $adresse_retour, $controle = "non") {
 	
 	echo "</div>";
 }
+
 
 //
 // un bouton (en POST) a partir d'un URL en format GET
@@ -2954,15 +2946,16 @@ function install_fin_html() {
 // a partir de l'espace des redacteurs (prive) 
 // utilisee aussi par controle_forum
 
-function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc)
-{
-  return icone($texte,
-	       "../spip_cache.php3?$action=$id&amp;redirect=" .
-	       rawurlencode($lien),
-	       $fond,
-	       $fonction,
-	       "right",
-	       'non');
+function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc) {
+	global $connect_id_auteur;
+	$hash = calculer_action_auteur("$action $id");
+	return icone($texte,
+		"../spip_cache.php3?$action=$id&hash=$hash&id_auteur=$connect_id_auteur&redirect=" .
+		rawurlencode($lien),
+		$fond,
+		$fonction,
+		"right",
+		'non');
 }
 
 ?>
