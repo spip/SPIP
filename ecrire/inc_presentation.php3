@@ -572,13 +572,16 @@ function bonhomme_statut($row) {
 		case "5poubelle":
 			$image = "<img src='img_pack/supprimer.gif' alt='Effac&eacute;' border='0'>";
 			break;
+		case "6forum":
+			$image = "<img src='img_pack/bonhomme-rouge.gif' alt='Visiteur' border='0'>";
+			break;
 		case "nouveau":
 		default:
 			$image = '';
 			break;
 	}
 	if ($image && $connect_statut=="0minirezo")
-		$image = "<A HREF='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>$image</a>";
+		$image = "<A HREF='auteur_infos.php3?id_auteur=".$row['id_auteur']."'>$image</a>";
 
 	return $image;
 }
