@@ -72,7 +72,7 @@ class Auth_ldap {
 	}
 
 	function lire() {
-		global $ldap_link, $ldap_base, $flag_utf8_decode;
+		global $ldap_link, $ldap_base;
 		$this->nom = $this->email = $this->pass = $this->statut = '';
 
 		if (!$this->login) return false;
@@ -115,12 +115,11 @@ class Auth_ldap {
 		}
 
 		// Convertir depuis UTF-8 (jeu de caracteres par defaut)
-		if ($flag_utf8_decode) {
-			$this->nom = utf8_decode($this->nom);
-			$this->email = utf8_decode($this->email);
-			$this->login = utf8_decode($this->login);
-			$this->bio = utf8_decode($this->bio);
-		}
+		$this->nom = importer_charset($this->nom, 'utf-8');
+		$this->email = importer_charset($this->email, 'utf-8');
+		$this->login = importer_charset($this->login, 'utf-8');
+		$this->bio = importer_charset($this->bio, 'utf-8');
+
 		return true;
 	}
 
