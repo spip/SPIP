@@ -354,10 +354,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
 
-	$today = getdate(time());
-	$annee_today = $today["year"];
-
-
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
@@ -468,8 +464,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
-			if (annee($date) == $annee_today) $s = jour($date)." ".nom_mois($date);
-			else $s = affdate($date);
+			$s = affdate_court($date);
 			
 			if ($afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_visites', array('visites' => $visites))."</a></font>";
@@ -505,8 +500,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
 	global $connect_id_auteur, $spip_lang_right, $dir_lang;
-	$today = getdate(time());
-	$annee_today = $today["year"];
 
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
 		$afficher_langue = true;
@@ -576,13 +569,10 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($affrub) {
 				$rub = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$s .= typo($rub['titre']);
-			} else if ($statut != "prop") {
-				if (annee($date_heure) == $annee_today) $s = jour($date_heure)." ".nom_mois($date_heure);
-				else $s = affdate($date_heure);
-			}
-			else {
+			} else if ($statut != "prop")
+				$s = affdate_court($date_heure);
+			else
 				$s .= _T('info_a_valider');
-			}
 			$s .= "</div>";
 			$vals[] = $s;
 			$table[] = $vals;
