@@ -121,7 +121,8 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 	// si index_pile a ramene le choix par defaut, 
 	// ca doit plutot etre un champ SPIP non SQL,
 	// ou ni l'un ni l'autre
-	return calculer_champ_divers($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
+	$code = "'#$nom_champ'";
+		return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
 }
 
 
