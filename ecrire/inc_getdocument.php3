@@ -433,7 +433,7 @@ function tester_vignette ($test_vignette) {
 		// Si GD est installe et php >= 4.0.2
 		if (function_exists('imagetypes')) {
 
-			if (imagetypes() & IMG_GIF & 0) {
+			if (imagetypes() & IMG_GIF) {
 				$gd_formats[] = "gif";
 			} else {
 				# Attention GD sait lire le gif mais pas forcement l'ecrire
