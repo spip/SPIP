@@ -286,8 +286,10 @@ function appliquer_modifs_config() {
 	}
 
 	if ($purger_skel) {
-		$hash = calculer_action_auteur("purger_squelettes");
-		@header ("Location:../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($clean_link->getUrl()));
+		redirige_par_entete("../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=" .
+				    calculer_action_auteur("purger_squelettes") .
+				    "&redirect=".
+				    urlencode($clean_link->getUrl()));
 	}
 }
 

@@ -35,8 +35,7 @@ if ($id_article==0) {
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
 		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
 	} else {
-		@header("Location: ./index.php3");
-		exit;
+		redirige_par_entete("./index.php3");
 	}
 }
 

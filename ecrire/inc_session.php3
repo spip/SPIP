@@ -52,9 +52,8 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-		$dir = $GLOBALS['flag_ecrire'] ? '../' : '';
-		@header("Location: ${dir}spip_test_dirs.php3");
-		exit;
+		redirige_par_entete((_DIR_RESTREINT ? "" : "../") .
+				    "spip_test_dirs.php3");
 	}
 }
 

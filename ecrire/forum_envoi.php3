@@ -24,8 +24,7 @@ if ($valider_forum AND ($statut!='')) {
 		$result = spip_query($query);
 	}
 
-	@header("Location: $adresse_retour");
-	die();
+	redirige_par_entete($adresse_retour);
 }
 
 if ($id_message) debut_page(_T('titre_page_forum_envoi'), "asuivre", "messagerie");

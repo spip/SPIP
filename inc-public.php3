@@ -64,10 +64,7 @@ else {
 	if ($ajout_forum) {
 		$redirect = '';
 		include('inc-messforum.php3');
-		if ($redirect) {
-			@header("Location: $redirect");
-			exit();
-		}
+		if ($redirect) redirige_par_entete($redirect);
 	}
 	if ($val_confirm) {
 		// il nous faut id_article ! C'est donc encore a nettoyer...
@@ -110,7 +107,6 @@ else {
 			@Header ("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
 
 	// si le squelette est nul se rabattre sur l'entete standard
-	spip_log("Page: " . $page['texte']);
 	if ($page['texte'])
 		@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	else echo debut_entete($fond);

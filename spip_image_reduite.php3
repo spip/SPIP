@@ -34,7 +34,7 @@ if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 //	header("Content-type: image/$format");
 //	echo implode ('', file ($retour));
 
-	header("Location: $retour");
+	redirige_par_entete($retour);
 	}
  }
 

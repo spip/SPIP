@@ -107,15 +107,13 @@ function auth() {
 		$clean_link->delVar('bonjour');
 		$url = str_replace('/./', '/', 'ecrire/'.$clean_link->getUrl());
 		$link->addVar('var_url', $url);
-		@header("Location: ".$link->getUrl());
-		exit;
+		redirige_par_entete($link->getUrl());
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
 		$url = str_replace('/./', '/', 'ecrire/'.$clean_link->getUrl());
-		@header("Location: ../spip_login.php3?var_url=".urlencode($url));
-		exit;
+		redirige_par_entete(" ../spip_login.php3?var_url=".urlencode($url));
 	}
 
 	//

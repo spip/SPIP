@@ -220,14 +220,15 @@ $flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
 
 define_once('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
 
-// essai d'un SPip multi-site. Expérimental.
+/* bientot
 
 if ($d = ($GLOBALS['HTTP_GET_VARS']['var_install']))
   {
     $d = substr($d,0,strrpos($d,'/')+1);
     define('_DIR_PREFIX1', $d);
     define('_DIR_PREFIX2', $d);
-    } else  {
+    } else   */
+{
   define('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
   define('_DIR_PREFIX2', _DIR_RESTREINT);
  }
@@ -1136,6 +1137,30 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 		$d = _DIR_IMG . "$chemin$nom.$format";
 		if (@file_exists($d)) return array(_DIR_IMG."$chemin", $nom, $format);
 	}
+}
+
+// Gestion des taches de fond ?  toutes les 5 secondes
+// (on mettra 30 s quand on aura prevu la preemption par une image-cron)
+function taches_de_fond() {
+	
+	verifier_htaccess(_DIR_SESSIONS);
+	if (!@file_exists(_FILE_CRON_LOCK)
+	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 5)) {
+
+		// Si MySQL est out, laisser souffler
+		if (!@file_exists(_FILE_MYSQL_OUT)
+		OR (time() - @filemtime(_FILE_MYSQL_OUT) > 300)) {
+			include_ecrire('inc_cron.php3');
+			spip_cron();
+		}
+	}
+}
+
+function redirige_par_entete($url)
+{
+	header("Location: $url");
+	taches_de_fond();
+	exit;
 }
 
 // Envoi des en-tetes

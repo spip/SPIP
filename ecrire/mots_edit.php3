@@ -70,8 +70,7 @@ if ($connect_statut == '0minirezo') {
 // redirection ou affichage
 //
 if ($redirect_ok == 'oui' && $redirect) {
-	@header("Location: ".rawurldecode($redirect));
-	exit;
+	redirige_par_entete(rawurldecode($redirect));
 }
 
 //
