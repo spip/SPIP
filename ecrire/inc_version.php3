@@ -601,8 +601,8 @@ class Link {
 	//
 
 	function delVar($name) {
-		unset($this->vars[$name]);
-		unset($this->arrays[$name]);
+		if($this->vars[$name]) unset($this->vars[$name]);
+		if($this->arrays[$name]) unset($this->arrays[$name]);
 	}
 
 	//
