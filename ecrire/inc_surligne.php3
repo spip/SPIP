@@ -47,6 +47,14 @@ function surligner_mots($page, $mots) {
 		}
 	}
 
+	// supprimer tout ce qui est avant </head> ou <body>
+	if (eregi("(.*<\/head>)(.*)", $page, $exp))
+		list(,$debut,$page) = $exp;
+	else if (eregi("(.*<body[^>]*>)(.*)", $page, $exp))
+		list(,$debut,$page) = $exp;
+	else
+		$debut = '';
+
 	// Remplacer une occurence de mot maxi par espace inter-tag (max 1 par paragraphe, sauf italiques etc.)
 	// se limiter a 4 remplacements pour ne pas bouffer le CPU
 	if ($mots_surligne) {
@@ -54,7 +62,7 @@ function surligner_mots($page, $mots) {
 		$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
 	}
 
-	return $page;
+	return $debut.$page;
 }
 
 
