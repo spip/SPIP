@@ -214,7 +214,7 @@ function calcule_document($id_document, $doubdoc, &$doublons){
 	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
 	if ($id_vignette) {
 		if ($res = spip_abstract_select(array('fichier'), array('documents AS documents'), array("id_document = $id_vignette"))) {
-			list($vigette) = spip_abstract_fetch($res);
+			list($vignette) = spip_abstract_fetch($res);
 			if (@file_exists($vignette))
 			  return generer_url_document($id_vignette);
 #			  return ($fichier); # en std g_u_d fait ça
