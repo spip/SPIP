@@ -421,13 +421,12 @@ function calculer_squelette($squelette, $nom, $gram) {
 	}
     }
   return $code . '
-function ' . $nom . '($Cache, $Pile, $doublons, $Numrows="", $SP=0)
- {
+function ' . $nom . '($Cache, $Pile, $doublons, $Numrows="", $SP=0) {
 ' .
     $corps . "\n \$t0 = " . $return . ';
     $Cache["squelette"]= "' . $nom . '";
     return array("texte" => $t0,
-	       "process_ins" =>	((strpos($t0,\'<?\')=== false) ? \'html\' : \'php\'),
+	       "process_ins" => ((strpos($t0,\'<\'.\'?\')=== false) ? \'html\' : \'php\'),
 	       "invalideurs" => $Cache);' .
     "\n}\n" ;
 }
