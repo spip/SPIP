@@ -36,8 +36,8 @@ function calculer_champ_FORMULAIRE_INSCRIPTION($fonctions, $nom_champ, $id_boucl
 {
   $milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];';
-  $code = '(lire_meta("accepter_inscriptions") != "oui") ? "" :
-			("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">")';
+  $code = '((lire_meta("accepter_inscriptions") != "oui") ? "" :
+			("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
   list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
   return array($c,$milieu . $m);
 }
