@@ -190,14 +190,14 @@ function formulaire_signature($id_article) {
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 
-				$messagex = "Bonjour,\n\nVous avez demand&eacute; &agrave; signer la p&eacute;tition :\n";
+				$messagex = "Bonjour,\n\nVous avez demand".chr(233)." ".chr(224)." signer la p".chr(233)."tition :\n";
 				$messagex .= "  (Hi, you have asked to sign the following petition:)\n";
 				$messagex .= "    $titre.\n\nVous avez fourni les informations suivantes :\n";
 				$messagex .= "  (You have given this information:)\n    Nom: $nom_email\n";
 				$messagex .= "    Site: $nom_site - $url_site\n\nIMPORTANT...\n";
-				$messagex .= "Pour valider votre signature, il suffit de vous connecter &agrave;\n";
+				$messagex .= "Pour valider votre signature, il suffit de vous connecter ".chr(224)."\n";
 				$messagex .= "l'adresse ci-dessous ; dans le cas contraire, votre demande\n";
-				$messagex .= "sera rejet&eacute;e :\n";
+				$messagex .= "sera rejet".chr(233)."e :\n";
 				$messagex .= "  (To confirm your signature, please follow this link, or\n";
 				$messagex .= "  your request will be discarded)\n\n";
 				$messagex .= "    $url\n\nMerci de votre participation\n  (Thank you!)\n\n";
