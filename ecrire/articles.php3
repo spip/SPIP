@@ -545,7 +545,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		echo bouton_block_visible("redirection");
 	else
 		echo bouton_block_invisible("redirection");
-	echo "REDIRECTION";
+	echo _T('bouton_redirection');
 	echo aide ("artvirt");
 	echo "</b></center></font>";
 	if ($visible)
@@ -1223,7 +1223,7 @@ echo "\n\n<DIV align=justify>";
 
 if ($virtuel) {
 	debut_boite_info();
-	echo _T('info_renvoi_article')."<center>[->$virtuel]</center>";
+	echo _T('info_renvoi_article').propre("<center>[->$virtuel]</center>");
 	fin_boite_info();
 }
 else {

@@ -145,6 +145,7 @@ $GLOBALS['i18n_fr'] = array(
 'bouton_radio_universel' => 'Alphabet universel&nbsp; (<tt>utf-8</tt>): permet l\'affichage de toutes les langues, mais n\'est pas reconnu
 		par tous les navigateurs &agrave; l\'heure actuelle.',
 'bouton_recharger_page' => 'recharger cette page',
+'bouton_redirection' => 'REDIRECTION',
 'bouton_relancer_installation' => 'Relancer l\'installation',
 'bouton_restaurer_base' => 'Restaurer la base',
 'bouton_suivant' => 'Suivant',
