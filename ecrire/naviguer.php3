@@ -508,7 +508,7 @@ if ($coll>0){
 
 ////// Supprimer cette rubrique (si vide)
 
-if (tester_rubrique_vide($coll) AND ($connect_statut=='0minirezo')) {
+if (($coll>0) AND tester_rubrique_vide($coll) AND ($connect_statut=='0minirezo')) {
 	$link = new Link('naviguer.php3');
 	$link->addVar('coll', $id_parent);
 	$link->addVar('supp_rubrique', $coll);
