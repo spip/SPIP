@@ -130,6 +130,39 @@ function nettoyer_chapo($chapo){
 	return $chapo;
 }
 
+// points d'entree de pre- et post-traitement pour propre() et typo()
+function spip_avant_propre ($letexte, $ref_echap) {
+	if (@function_exists('avant_propre'))
+		return avant_propre ($letexte, $ref_echap);
+
+	return $letexte;
+}
+
+function spip_apres_propre ($letexte, $ref_echap) {
+	if (@function_exists('apres_propre'))
+		return apres_propre ($letexte, $ref_echap);
+
+	return $letexte;
+}
+
+function spip_avant_typo ($letexte, $ref_echap) {
+	if (@function_exists('avant_typo'))
+		return avant_typo ($letexte, $ref_echap);
+
+	return $letexte;
+}
+
+function spip_apres_typo ($letexte, $ref_echap) {
+	if (@function_exists('apres_typo'))
+		return apres_typo ($letexte, $ref_echap);
+
+	// else
+	$letexte = corriger_caracteres($letexte);
+	$letexte = str_replace("'", "&#8217;", $letexte);
+	return $letexte;
+}
+
+
 
 // Mise de cote des echappements
 function echappe_html($letexte,$source) {
@@ -384,7 +417,11 @@ function typo_en($letexte) {
 function typo($letexte) {
 	global $spip_lang, $lang_typo;
 
+	// echapper les codes <html>...</html> etc.
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
+
+	// Appeler la fonction de pre-traitement
+	$letexte = spip_avant_typo ($letexte, &$les_echap);
 
 	if (!$lang = $lang_typo) {
 		include_ecrire('inc_lang.php3');
@@ -396,8 +433,10 @@ function typo($letexte) {
 	else
 		$letexte = typo_en($letexte);
 
-	$letexte = corriger_caracteres($letexte);
-	$letexte = str_replace("'", "&#8217;", $letexte);
+	// Appeler la fonction de post-traitement
+	$letexte = spip_apres_typo ($letexte, &$les_echap);
+
+	// reintegrer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
 
 	return $letexte;
@@ -603,7 +642,6 @@ function traiter_listes ($texte) {
 	return substr($texte, 0, -2);
 }
 
-
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = 'oui') {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
@@ -617,6 +655,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $flag_pcre;
 	global $lang_dir;
 
+	// echapper les <a href>, <html>...< /html>, <code>...< /code>
+	if (!$les_echap)
+		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
+
+	// Appeler la fonction de pre_traitement
+	$letexte = spip_avant_propre ($letexte, &$les_echap);
+
 	// Puce
 	if (!$lang_dir) {
 		include_ecrire('inc_lang.php3');
@@ -629,10 +674,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
-
-	// echapper les <a href>, <html>...< /html>, <code>...< /code>
-	if (!$les_echap)
-		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 
 	// Corriger HTML
 	$letexte = eregi_replace("</?p>","\n\n\n",$letexte);
@@ -850,6 +891,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
 	$letexte = ereg_replace('@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
+
+	// Appeler la fonction de post-traitement
+	$letexte = spip_apres_propre ($letexte, &$les_echap);
 
 	// Reinserer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCEPROPRE");
