@@ -10,22 +10,22 @@ include_local("inc-cache.php3");
 
 /// verifier les formats acceptes par GD
 
-if ($test_formats=="oui"){
-	if (function_exists(ImageCreateFromJPEG)) {
+if (($test_formats=="oui") AND $flag_function_exists){
+	if (function_exists('ImageCreateFromJPEG')) {
 		$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
 		if ($srcImage) {
 			$gd_formats[] = "jpg";
 			ImageDestroy( $srcImage ); 
 		}
 	}
-	if (function_exists(ImageCreateFromGIF)) {
-		$srcImage = ImageCreateFromGIF("IMG/test.gif");
+	if (function_exists('ImageCreateFromGIF')) {
+		$srcImage = @ImageCreateFromGIF("IMG/test.gif");
 		if ($srcImage) {
 			$gd_formats[] = "gif";
 			ImageDestroy( $srcImage ); 
 		}
 	}
-	if (function_exists(ImageCreateFromPNG)) {
+	if (function_exists('ImageCreateFromPNG')) {
 		$srcImage = @ImageCreateFromPNG("IMG/test.png");
 		if ($srcImage) {
 			$gd_formats[] = "png";
@@ -35,6 +35,7 @@ if ($test_formats=="oui"){
 
 	if ($gd_formats) $gd_formats = join($gd_formats, ",");
 	ecrire_meta("gd_formats", $gd_formats);
+	ecrire_metas();
 }
 
 
