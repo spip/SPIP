@@ -404,8 +404,8 @@ else if ($etape == 'ldap4') {
 		echo "<P>";
 
 		$conn = join('', file("inc_connect_install.php3"));
-		$conn = split('\?'.'\>', $conn, 2);
-		$conn = $conn[0];
+		if ($p = strpos($conn, '?'.'>')) 
+			$conn = substr($conn, 0, $p);
 		if (!strpos($conn, 'spip_connect_ldap')) {
 			$conn .= "function spip_connect_ldap() {\n";
 			$conn .= "\t\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n";
