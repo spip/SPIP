@@ -1338,8 +1338,7 @@ e vos tornar connectar au sit.
 'texte_admin_tech_01' => 'Aquela opcion vos permete de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; conservat dins lo repert&ograve;ri <i>ecrire/data/</i>.
 Oblidetz pas manco de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>, que conten lu imatges e lu documents utilisats dins lu articles e rubricas.',
 'texte_admin_tech_02' => 'M&egrave;fi: aquela sauvagarda se podr&agrave; restaurar
- SOLAMENT dins un sit installat emb la mema version de SPIP. L\'error
- que consiste da far una sauvagarda denant de far una actualisacion de SPIP es correnta... Per mai de detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion de SPIP</a>.',
+ SOLAMENT dins un sit installat emb la mema version de SPIP. Cau sobretot pas &laquo;&nbsp;vuar la basa&nbsp;&raquo; en esperar tornar installar la sauvagarda apr&egrave;s una mesa a jorn...Per mai de detalhs, consultatz la <a href="http://www.spip.net/fr_article1489.html">la documentacion de SPIP</a>.',
 'texte_admin_tech_03' => 'Pod&egrave;tz chausir de sauvagardar lo fichier sota forma comprimida, per fin
  d\'abrivar lo sieu transferiment dau v&ograve;stre &ograve; sus un servidor de sauvagardas, e per fin d\'esparnhar d\'espaci disc.',
 'texte_adresse_annuaire_1' => '(Se lo v&ograve;stre annuari es installat sus la mema maquina qu\'aqueu sit web, s\'agisse probablament de "localhost".)',

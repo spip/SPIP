@@ -410,8 +410,8 @@ Dankon pro via partopreno
 'ical_texte_public' => 'Per tiu kalendaro, vi povas observi la publikan funkciadon de tiu teksejo (publikigitaj informetoj kaj artikoloj).',
 'ical_texte_rss' => 'Vi povas asociigi la nova&#309;ojn de tiu teksejo &#265;e iu ajn dosier-legilo de XML/RSS formato (Rich Site Summary). Tiu formato anka&#365; ebligas SPIPon legi la nova&#309;ojn publikigitajn en aliaj teksejoj kiuj uzas kongruan formaton.',
 'ical_texte_rss_articles' => 'La dosiero &laquo;backend&raquo; de la artikoloj de tiu teksejo troveblas je la adreso :',
-'ical_texte_rss_articles2' => 'Vi anka&#365; povas ricevi &laquo;backend&raquo; dosierojn por artikoloj de &#265;iu rubriko en la tekesejo:',
-'ical_texte_rss_breves' => 'Plie, ekzistas dosieron enhavantas &#265;iujn informetojn de la teksejo. Per presizeco de numero de iu rubriko, vi nur ricevos la informetojn el tiu rubriko.',
+'ical_texte_rss_articles2' => 'Vi anka&#365; povas ricevi &laquo;backend&raquo; dosierojn por artikoloj de &#265;iu rubriko de la tekesejo:',
+'ical_texte_rss_breves' => 'Plie, ekzistas dosieron enhavanta &#265;iujn informetojn de la teksejo. Precizigante la numeron de rubriko, vi ricevos nur la informetojn de tiu rubriko.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Dissendolisto',
 'ical_titre_rss' => 'Dosieroj &laquo; backend &raquo;',
@@ -982,12 +982,12 @@ Dankon pro via partopreno
 'info_tout_afficher' => '&#264;ion afi&#349;i',
 'info_tout_site' => 'La tuta teksejo',
 'info_tout_site1' => 'Lingvo de la artikolo.',
-'info_tout_site2' => 'La artikolo ne estas tradukita en tiu lingvo.',
-'info_tout_site3' => 'La artikolo estas tradukita en tiu lingvo, sed modifika&#309;oj estis aldonita poste la redakcio de la artikolo. Bonvolu &#285;isdatigi la tradukon.',
-'info_tout_site4' => 'La artikolo estas tradukita en tiu lingvo, kaj la traduko bone &#285;isdatigas.',
+'info_tout_site2' => 'La artikolon oni ne tradukis al tiu lingvo.',
+'info_tout_site3' => 'La artikolo jam haveblas en tiu lingvo, sed modifoj estis aldonitaj post la verkado de tiu artikolo. Bonvolu &#285;isdatigi la tradukon.',
+'info_tout_site4' => 'La artikolo haveblas en tiu lingvo, kaj la traduko estas &#285;isdatigita.',
 'info_tout_site5' => 'Origina artikolo.',
-'info_tout_site6' => '<b>Attentu&nbsp;:</b> nun la originaj artikoloj estas afi&#349;itaj.
- La tradukoj estas kunligitaj al la orginalo, kun koloro kiu indikas sia stato&nbsp;:',
+'info_tout_site6' => '<b>Attentu&nbsp;:</b> nur la originaj artikoloj estas afi&#349;itaj.
+ La tradukoj estas kunligitaj al la orginalo, kun koloro kiu indikas ilian staton&nbsp;:',
 'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 'info_travaux_texte' => 'Tiu teksejo ne estas konfigurita jam. Bonvolu denove veni poste...',
 'info_travaux_titre' => 'Konstruado de la teksejo',
@@ -1252,7 +1252,7 @@ Dankon pro via partopreno
 
 
 // N
-'navigateur_pas_redirige' => '&#264;u via krozilo ne redirektigas, da&#365;rigu aklakante &#265;i tie.',
+'navigateur_pas_redirige' => 'Se via krozilo ne redirektigas, da&#365;rigu aklakante &#265;i tie.',
 
 
 // O

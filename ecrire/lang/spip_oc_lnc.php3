@@ -298,11 +298,11 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'entree_titre_image' => 'T&iacute;tol de l\'imatge:',
 'entree_titre_obligatoire' => '<B>T&iacute;tol</b> [Obligat&ograve;ri]<BR>',
 'entree_url' => 'L\'adrei&ccedil;a (URL) del v&ograve;stre sit',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
+'erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
+'erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
+'erreur_boucle_syntaxe2' => 'La bloca @milieu@ es incorr&egrave;cta.',
+'erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
 
 
 // F
