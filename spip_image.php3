@@ -222,35 +222,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		}
 	}
 
-	//
-	// Creer une vignette automatiquement
-	//
-	$creer_preview = lire_meta("creer_preview");
-	$taille_preview = lire_meta("taille_preview");
-
-	$format_img = strtolower(substr($dest_path, strrpos($dest_path,".")+1, strlen($dest_path)));
-	if ($format_img == "jpeg") $format_img == "jpg";
-	if ($taille_preview < 10) $taille_preview = 120;
-
-	if ($mode == 'document' AND $creer_preview == 'oui') {
-		include_ecrire('inc_logos.php3');
-		$destination_vignette = ereg_replace("\.$format_img$", "-s", $dest_path);
-		if ($preview = creer_vignette($dest_path, $taille_preview, $taille_preview, $format_img, $destination_vignette)) {
-			$hauteur_prev = $preview['height'];
-			$largeur_prev = $preview['width'];
-			$fichier_prev = $preview['fichier'];
-			$format_prev = $preview['format'];
-			if ($format_prev == "jpg") $format_prev = 1;
-			else if ($format_prev == "png") $format_prev = 2;
-			else if ($format_prev == "gif") $format_prev = 3;
-
-			$query = "INSERT INTO spip_documents (id_type, titre, largeur, hauteur, fichier, date) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev', NOW())";
-			spip_query($query);
-			$id_preview = spip_insert_id();
-			$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
-			spip_query($query);
-		}
-	}
 
 	//
 	// Mettre a jour les infos du document uploade
@@ -398,12 +369,35 @@ if ($doc_supp) {
 	}
 }
 
+//
+// Creation automatique de vignette new style
+//
+if ($vignette) {
+	// securite
+	$fichier_vignette = '';
+	if (!eregi('^(IMG/[^\.]+)\.([a-z0-9]+)$', $vignette, $regs)) exit;
+	$source = $regs[0];
+	$format = $regs[2];
+	$destination = $regs[1].'-s';
 
-// supprimer le fichier original si pris dans ecrire/upload
-/* en debat.... peser securite vs conformite upload http
-if ($supprimer_ecrire_upload)
-	@unlink ($supprimer_ecrire_upload);
-*/
+	if (lire_meta("creer_preview") == 'oui') {
+		$taille_preview = lire_meta("taille_preview");
+		if ($taille_preview < 10) $taille_preview = 120;
+		include_ecrire('inc_logos.php3');
+		if ($preview = creer_vignette($source, $taille_preview, $taille_preview, $format, $destination))
+			$fichier_vignette = $preview['fichier'];
+	}
+
+	if (!$fichier_vignette) {
+		include_ecrire('inc_documents.php3');
+		list($fichier_vignette) = vignette_par_defaut($extension);
+		if (!$fichier_vignette)
+			list($fichier_vignette) = vignette_par_defaut('txt');
+	}
+
+	@header("Location: $fichier_vignette");
+	exit;
+}
 
 
 //
