@@ -80,7 +80,7 @@ else {
 	}
 }
 
-debut_page("Modifier : $titre_page", "documents", "rubriques");
+debut_page("Modifier : $titre", "documents", "rubriques");
 
 if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 else $ze_logo = "rubrique-24.gif";
