@@ -109,9 +109,13 @@ if ($essai_login == "oui") {
 			$cible->addVar('bonjour','oui');
 	}
 	else {
-		$cible->addVar('var_login', $login);
-		if ($session_password || $session_password_md5)
-			$cible->addVar('var_erreur', 'pass');
+		if (ereg("ecrire/", $cible->getUrl())) {
+			$cible = new Link("./spip_login.php3");
+			$cible->addVar('var_login', $login);
+			if ($session_password || $session_password_md5)
+				$cible->addVar('var_erreur', 'pass');
+			$cible->addVar('url', urldecode($url));
+		}
 	}
 }
 
