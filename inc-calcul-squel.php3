@@ -1757,7 +1757,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		if (!$id_breve) $id_breve = 0;
 		$valeurs = "$id_article, $id_rubrique, $id_breve, $my_id_forum, \'$fichier_cache\'";
 		if (!$requetes_cache[$valeurs]) {
-			$query_cache = "INSERT INTO spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
+			$query_cache = "INSERT IGNORE INTO spip_forum_cache (id_article, id_rubrique, id_breve, id_forum, fichier) VALUES ($valeurs)";
 			spip_query($query_cache);
 			$requetes_cache[$valeurs] = 1;
 		}
