@@ -24,7 +24,7 @@ $mysql_debug = false;
 $mysql_profile = false;
 
 // faut-il autoriser SPIP a compresser les pages a la volee quand le navigateur l'accepte ?
-$auto_compress = true;
+$auto_compress = false;
 
 //
 // 	*** Fin du parametrage ***
