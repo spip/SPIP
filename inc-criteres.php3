@@ -351,7 +351,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				}
 				else {
 				// traitement special des valeurs textuelles
-				  $val = calculer_params_dynamiques($match[6], &$boucles, $idb);
+				  $val = calculer_params_dynamiques($match[6], $boucles, $idb);
 				}
 			}
 			
