@@ -5,7 +5,7 @@
 if (defined("_INC_LOGIN")) return;
 define("_INC_LOGIN", "1");
 
-include_ecrire ("inc_connect.php3");
+
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_presentation.php3");
 include_ecrire ("inc_session.php3");

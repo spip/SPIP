@@ -56,7 +56,8 @@ function auth() {
 	// Si pas MySQL, fini
 	//
 	if (!$GLOBALS['db_ok']) {
-		echo "<P><H4>Attention&nbsp;: un probl&egrave;me technique (serveur MySQL) emp&ecirc;che l'acc&egrave;s &agrave; cette partie du site.\nMerci de votre compr&eacute;hension.</H4><P><P>\n";
+		echo "<P><H4>Attention&nbsp;: un probl&egrave;me technique (serveur MySQL) emp&ecirc;che l'acc&egrave;s &agrave; cette partie du site.\nMerci de votre compr&eacute;hension.</H4><P><P>\n".
+		"<tt>".mysql_errno()." ".mysql_error()."</tt>";
 		return false;
 	}
 
