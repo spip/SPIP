@@ -10,7 +10,72 @@
 
 <BOUCLE_principale(ARTICLES){id_article}{doublons}>
 
-<INCLURE (hierarchie.php3) {id_rubrique} >
+<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+
+	<TR BGCOLOR="#000000" WIDTH=100%>
+	<TD ALIGN="center">
+	<A HREF="#URL_SITE_SPIP"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
+	</TD>	
+	<BOUCLE_hier1(HIERARCHIE){0,1}{doublons}>
+		<TD ALIGN="center" BGCOLOR="#FFFFFF">
+		<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></B></A>
+		</TD>	
+		
+		<BOUCLE_rub_hier(RUBRIQUES){meme_parent}{exclus}{par hasard}{0,4}>
+		<TD ALIGN="center">
+		<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR='#FFFFFF'>#TITRE</FONT></B></A>
+		</TD>	
+		</BOUCLE_rub_hier>
+	</BOUCLE_hier1>
+		<TD ALIGN="center" BGCOLOR="#FFFFFF">
+		&nbsp;
+		</TD>	
+		<TD COLSPAN=4> &nbsp; </TD>
+	<//B_hier1>
+	
+	</TR>
+<BOUCLE_hier2(HIERARCHIE){1,100}{doublons}>
+	<TR BGCOLOR="#000000">
+	<TD ALIGN="center">
+	&nbsp;
+	</TD>	
+	<TD ALIGN="center" BGCOLOR="#FFFFFF">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_rub_hier2(RUBRIQUES){meme_parent}{exclus}{par hasard}{0,4}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR="#FFFFFF">#TITRE</FONT></B></A>
+	</TD>	
+	
+	</BOUCLE_rub_hier2>
+	
+	</TR>
+</BOUCLE_hier2>
+
+	<TR BGCOLOR="#FFFFFF">
+	<TD ALIGN="center">
+	<BOUCLE_rub_hier3(RUBRIQUES){meme_parent}{exclus}{doublons}{par hasard}{0,1}>
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR="#000000">#TITRE</FONT></B></A>
+	</BOUCLE_rub_hier3>&nbsp;<//B_rub_hier3>
+	</TD>	
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_rub_hier4(RUBRIQUES){meme_parent}{exclus}{doublons}{par hasard}{0,4}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR="#000000">#TITRE</FONT></B></A>
+	</TD>	
+	</BOUCLE_rub_hier4>
+	<TD COLSPAN=4> &nbsp; </TD>
+	
+	</TR>
+</BOUCLE_rubrique>
+
+</TABLE>
+
 
 
 <TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
@@ -365,7 +430,26 @@
 
 <CENTER>
 
-<INCLURE(pied.php3)>
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR></TABLE>
+<TABLE WIDTH=95% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR>
+<TD ALIGN="right">
+<A HREF="http://www.uzine.net/spip"><img src="NAVPICS/petit-logo-spip.gif" alt="LOGO SPIP" width="88" height="31" border="0" align="left"></A>
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	[<A HREF="#URL_SITE_SPIP">(#NOM_SITE_SPIP|majuscules)</A>]
+	| <A HREF="resume.php3">EN R&Eacute;SUM&Eacute;</A>
+	| <A HREF="plan.php3">PLAN DU SITE</A>
+	| <A HREF="ecrire/">ADMIN</A>
+	</FONT>
+
+</TD>
+</TR>
+</TABLE>
+<BR><BR>
+
 
 </CENTER>
 
