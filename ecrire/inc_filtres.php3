@@ -47,6 +47,13 @@ function entites_unicode($texte) {
 	return charset2unicode($texte);
 }
 
+// caracteres de controle - http://www.w3.org/TR/REC-xml/#charsets
+function supprimer_caracteres_illegaux($texte) {
+	$from = "\x0\x1\x2\x3\x4\x5\x6\x7\x8\xB\xC\xE\xF\x10\x11\x12\x13\x14\x15\x16\x17\x18\x19\x1A\x1B\x1C\x1D\x1E\x1F";
+	$to = str_repeat('-', strlen($from));
+	return strtr($texte, $from, $to);
+}
+
 // Nettoyer les backend
 function texte_backend($texte) {
 
@@ -163,6 +170,9 @@ function corriger_caracteres($texte) {
 			chr(194).chr(133) => '...'
 		);
 	}
+
+	$texte = supprimer_caracteres_illegaux($texte);
+
 	$charset = lire_meta('charset');
 	if (!$trans[$charset]) return $texte;
 	return strtr($texte, $trans[$charset]);
