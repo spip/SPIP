@@ -75,6 +75,7 @@ if ($id_auteur) {
 	$new = false;	// eviter hack
 } else {
 	$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
+	$onfocus = " onfocus=\"this.value='';\"";
 	$auteur['statut'] = '1comite';
 	$auteur['source'] = 'spip';
 }
@@ -264,7 +265,7 @@ debut_cadre_relief("fiche-perso-24.gif");
 
 echo _T('titre_cadre_signature_obligatoire');
 echo "("._T('entree_nom_pseudo').")<BR>";
-echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40'><P>";
+echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40' $onfocus><P>";
 
 echo "<B>"._T('entree_adresse_email')."</B>";
 if ($connect_statut == "0minirezo") {
