@@ -163,7 +163,7 @@ $effacer_cache |= $ecraser_cache;	// ecraser le cache de l'article x s'il n'est 
 // Envoyer les entetes
 $headers_only = ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD');
 if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD') $flag_dynamique = true;
-if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui' && !!$HTTP_COOKIE_VARS['spip_admin']) {
+if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui' && !$HTTP_COOKIE_VARS['spip_admin']) {
 	if ($lastmodified) {
 		$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);
 		@Header ("Last-Modified: ".$gmoddate." GMT");
