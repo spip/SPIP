@@ -2228,9 +2228,43 @@ else {
 	echo "<div style='position: relative; z-index: 1000;'>";
 	
 	
-		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 170px;'>";
+		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
 		echo _T('icone_site_entier');
 		
+
+		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+		$result = spip_query($query);
+		
+		if (spip_num_rows($result) > 0) {
+			echo "<div>&nbsp;</div>";
+			$id_rubrique = $GLOBALS['id_rubrique'];
+			if ($id_rubrique > 0) {
+				$dans_rub = "&id_rubrique=$id_rubrique";
+				$dans_parent = "&id_parent=$id_rubrique";
+			}
+		
+			if ($id_rubrique > 0)
+				icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif");
+			else 
+				icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif");
+			
+
+			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif");
+		
+			$activer_breves = lire_meta("activer_breves");
+			if ($activer_breves != "non") {
+				icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif");
+			}
+			
+			if (lire_meta("activer_sites") == 'oui') {
+				icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif");
+			}
+			
+		}
+
+
+		// Mettre en attente l'affichage du menu de navigation (trop lourd)
+		/*
 		$result_racine = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY titre");
 		$i = spip_num_rows($result_racine);
 		if ($i > 0) {
@@ -2246,6 +2280,7 @@ else {
 			}
 			echo "</div>";
 		}
+		*/
 		
 		echo "</div>";
 	
@@ -2312,27 +2347,6 @@ else {
 		}
 	
 
-		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-		$result = spip_query($query);
-	
-		if (spip_num_rows($result) > 0) {
-			$id_rubrique = $GLOBALS['id_rubrique'];
-			if ($id_rubrique > 0) $dans_rub = "&id_rubrique=$id_rubrique";
-		
-			echo "<table><tr>";
-			
-			echo "<td>";
-			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif");
-			echo "</td>";
-			echo "<td>&nbsp;</td>";
-			echo "<td>";
-			$activer_breves = lire_meta("activer_breves");
-			if ($activer_breves != "non") {
-				icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif");
-			}
-			echo "</td>";
-			echo "</tr></table>";
-		}
 
 
 		echo "</div>";
@@ -2342,7 +2356,7 @@ else {
 				$recherche_aff = _T('info_rechercher');
 				$onfocus = "onfocus=this.value='';";
 			echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
-			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" '.$onfocus.'>';
+			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="formo" accesskey="r" '.$onfocus.'>';
 			echo "</form>";
 		echo "</div>";
 	
