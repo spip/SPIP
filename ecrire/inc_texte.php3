@@ -262,7 +262,7 @@ function interdire_scripts($source) {
 
 // Integration (embed) multimedia
 
-function embed_document($id_document, $parametres="") {
+function embed_document($id_document, $parametres="", $afficher_titre=true) {
 	global $id_doublons;
 
 	$id_doublons['documents'] .= ",$id_document";
@@ -344,15 +344,19 @@ function embed_document($id_document, $parametres="") {
 			}
 		}
 		
-		$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
-		$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
-		$retour .= $vignette;
+		if ($afficher_titre) {
+			$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
+			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
+			$retour .= $vignette;
 
-		if ($titre) $retour .= "<br><b>$titre</b>";
-		if ($descriptif) $retour .= "<br>$descriptif";
+			if ($titre) $retour .= "<br><b>$titre</b>";
+			if ($descriptif) $retour .= "<br>$descriptif";
 
-		$retour .= "</div>\n</td></tr>\n</table>\n";
-
+			$retour .= "</div>\n</td></tr>\n</table>\n";
+		}
+		else {
+			$retour = $vignette;
+		}
 
 		return $retour;		
 
