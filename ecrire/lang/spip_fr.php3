@@ -142,8 +142,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne pas envoyer d\'annonces &eacute;ditoriales',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Ne pas envoyer  la liste des nouveaut&eacute;s',
 'bouton_radio_non_syndication' => 'Pas de syndication',
-'bouton_radio_occidental' => 'Alphabet occidental&nbsp; (<tt>iso-8859-1</tt>): support&eacute; par tous les navigateurs, mais permet uniquement
-		l\'affichage des langues ouest-europ&eacute;ennes (anglais, fran&ccedil;ais, allemand...).',
+'bouton_radio_occidental' => 'Alphabet occidental (<tt>iso-8859-1</tt>)&nbsp;: permet principalement
+		l\'affichage des langues ouest-europ&eacute;ennes (anglais, fran&ccedil;ais, allemand...)&nbsp;;
+		SPIP permet cependant de g&eacute;rer relativement bien les autres langues.',
 'bouton_radio_pas_petition' => 'Pas de p&eacute;tition',
 'bouton_radio_personnalise' => 'Jeu de caract&egrave;res personnalis&eacute;&nbsp;: choisissez cette option si vous voulez
 		utiliser un jeu de caract&egrave;res sp&eacute;cifique',
@@ -155,8 +156,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'sauvegarde non compress&eacute;e sous <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Supprimer la p&eacute;tition',
 'bouton_radio_syndication' => 'Syndication :',
-'bouton_radio_universel' => 'Alphabet universel&nbsp; (<tt>utf-8</tt>): permet l\'affichage de toutes les langues, mais n\'est pas reconnu
-		par tous les navigateurs &agrave; l\'heure actuelle.',
+'bouton_radio_universel' => 'Alphabet universel&nbsp; (<tt>utf-8</tt>): permet l\'affichage de toutes les langues, mais peut poser des
+	probl&egrave;mes de compatibilit&eacute; avec les logiciels utilis&eacute;s pour modifier vos squelettes, et certains lecteurs de
+	courrier &eacute;lectronique.',
 'bouton_recharger_page' => 'recharger cette page',
 'bouton_redirection' => 'REDIRECTION',
 'bouton_relancer_installation' => 'Relancer l\'installation',
@@ -1433,8 +1435,9 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_introductif_article' => '(Texte introductif de l\'article.)',
 'texte_jeu_caractere' => 'Cette option est utile si votre site doit afficher des alphabets
 	diff&eacute;rents de l\'alphabet romain (ou &laquo;&nbsp;occidental&nbsp;&raquo;) et ses d&eacute;riv&eacute;s.
-	Dans ce cas, il faut changer le r&eacute;glage par d&eacute;faut pour utiliser
-	un jeu de caract&egrave;res appropri&eacute;. N\'oubliez pas non plus d\'adapter
+	Dans ce cas, il peut &ecirc;tre pr&eacute;f&eacute;rable de changer le r&eacute;glage par d&eacute;faut pour 
+	un jeu de caract&egrave;res appropri&eacute;&nbsp;; nous vous conseillons dans tous les cas de faire des essais
+	afin de trouver une solution satisfaisante. Si vous modifiez ce param&egrave;tre, n\'oubliez pas non plus d\'adapter
 	le site public en cons&eacute;quence (balise <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Ce r&eacute;glage n\'a pas d\'effet r&eacute;troactif. Par
 	cons&eacute;quent, les textes d&eacute;j&agrave; entr&eacute;s peuvent s\'afficher
