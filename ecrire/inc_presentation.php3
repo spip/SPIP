@@ -111,7 +111,7 @@ function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
 
 	$retour.= "<TR>";
 	$retour.= "<td background='img_pack/cadre-g.gif' width='5'><img src='img_pack/rien.gif' alt='rond-hg.gif' width='5' height='5'></td>";
-	$retour.= "<TD WIDTH=\"100%\" bgcolor='#dadada' background=''>";
+	$retour.= "<TD WIDTH=\"100%\" bgcolor='#e0e0e0' background=''>";
 	$retour.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD WIDTH=\"100%\">";
 
 	if ($return) return $retour;
@@ -899,8 +899,8 @@ function barre_onglets($rubrique, $onglet){
 		$activer_messagerie=lire_meta("activer_messagerie");
 		$activer_imessage=lire_meta("activer_imessage");
 		
-		onglet("L'auteur", "auteur_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteur-24.png");
-		onglet("Informations personnelles", "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "ficher-perso-24.png");
+		onglet("L'auteur", "auteur_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.png");
+		onglet("Informations personnelles", "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.png");
 		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur){
 			onglet("Messagerie", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.png");
 		}
@@ -1155,7 +1155,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif) ;border-bottom: solid 1px black; border-top: solid 1px white;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 	echo "<table cellpadding='0' background='' width='750'><tr width='750'>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("&Agrave; suivre", "index.ph3", "asuivre-48.png", "asuivre", $rubrique);
+		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.png", "asuivre", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
 		icone_bandeau_principal ("Les documents", "naviguer.php3", "documents-48.png", "documents", $rubrique);

@@ -128,7 +128,7 @@ echo "<P>";
 
 
 //// Accepter les inscriptions de redacteurs depuis le site public
-debut_cadre_relief("redacteur-24.png");
+debut_cadre_relief("redacteurs-24.png");
 
 	$accepter_inscriptions=lire_meta("accepter_inscriptions");
 
