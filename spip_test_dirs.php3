@@ -94,12 +94,10 @@ unset($absent_dirs);
 
 while (list(, $my_dir) = each($test_dirs)) {
 	if (!test_ecrire($my_dir)) {
-		@umask(0); 
-		if (!@file_exists($my_dir))
-			mkdir($my_dir, 0777);
-
+		@umask(0);
 		if (@file_exists($my_dir)) {
 			@chmod($my_dir, 0777);
+			// ???
 			if (!test_ecrire($my_dir))
 				@chmod($my_dir, 0775);
 			if (!test_ecrire($my_dir))
