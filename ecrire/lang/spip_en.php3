@@ -186,6 +186,11 @@ $GLOBALS['i18n_spip_en'] = array(
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <B>Setting up access permissions</b>',
 'dirs_probleme_droits' => '<b>Problem in access permissions</b>',
+'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
+		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'dirs_repertoires_suivants' => '<b>The following directories do not have write permission: <ul>@bad_dirs@.</ul> </b>
 
 		<P>To change this, use your FTP client in order to set access permissions for each

@@ -125,10 +125,6 @@ $test_i18n = false;
 $champs_extra = false;
 $champs_extra_proposes = false;
 
-// faut-il que les sessions de connexion durent (quelques jours) meme si
-// l'on quitte le navigateur ?
-$session_remember = true;
-
 
 //
 // 	*** Fin du parametrage ***

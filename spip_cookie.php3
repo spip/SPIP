@@ -166,7 +166,7 @@ else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 
 // cookie de session ?
 if ($cookie_session) {
-	if ($session_remember)
+	if ($session_remember == 'oui')
 		spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
 	else
 		spip_setcookie('spip_session', $cookie_session);
