@@ -156,9 +156,14 @@ function spip_apres_typo ($letexte, $ref_echap) {
 	if (@function_exists('apres_typo'))
 		return apres_typo ($letexte, $ref_echap);
 
-	// else
+	// caracteres speciaux
 	$letexte = corriger_caracteres($letexte);
 	$letexte = str_replace("'", "&#8217;", $letexte);
+
+	// relecture des &nbsp;
+	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
+		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
+
 	return $letexte;
 }
 
@@ -381,16 +386,10 @@ function typo_fr($letexte) {
 		'/(http|https|ftp|mailto)~:/',
 		'/~/'
 	);
-	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
-		$remplace2 = array(
-			'\1:',
-			'<span class="spip-nbsp">&nbsp;</span>'
-		);
-	else
-		$remplace2 = array(
-			'\1:',
-			'&nbsp;'
-		);
+	$remplace2 = array(
+		'\1:',
+		'&nbsp;'
+	);
 	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
 
 	return $letexte;
