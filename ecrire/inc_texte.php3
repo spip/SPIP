@@ -340,8 +340,22 @@ function extraire_lien ($regs) {
 		include_ecrire('inc_urls.php3');
 	}
 
+	$lien_ouvrant_manuel = lire_meta("lien_ouvrant_manuel");
+	$lien_ouvrant_in = lire_meta("lien_ouvrant_in");
+	$lien_ouvrant_out = lire_meta("lien_ouvrant_out");
+
+	if ($GLOBALS['flag_ecrire']) {
+		$signaler_lien_externe = "<img src='img_pack/ouvrir_fenetre.gif' alt='' width='8' height='8' border='0'>";
+	}
+
 	$lien_texte = $regs[1];
-	$ouvrant = ($regs[2] == '>');
+	$ouvrant_manuel = ($regs[2] == '>');
+	$ouvrant = $ouvrant_manuel;
+	
+	if ($lien_ouvrant_manuel != "oui") $ouvrant = false;
+	
+	
+	
 	$lien_url = trim($regs[3]);
 	$compt_liens++;
 	$lien_interne = false;
@@ -350,6 +364,7 @@ function extraire_lien ($regs) {
 		$id_lien = $match[6];
 		$type_lien = $match[1];
 		$lien_interne=true;
+		if ($lien_ouvrant_in == "oui") $ouvrant = true;
 		$class_lien = "in";
 		switch (substr($type_lien, 0, 2)) {
 			case 'ru':
@@ -403,6 +418,7 @@ function extraire_lien ($regs) {
 		}
 	} else {	// lien non automatique
 		$class_lien = "out";
+		if ($lien_ouvrant_out == "oui") $ouvrant = true;
 		// texte vide ?
 		if ((!$lien_texte) and (!$lien_interne)) {
 			$lien_texte = ereg_replace('"', '', $lien_url);
@@ -419,7 +435,7 @@ function extraire_lien ($regs) {
 
 	$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
 		.($ouvrant ? " target='_blank'" : '')
-		.">".typo($lien_texte)."</a>";
+		.">".typo($lien_texte).($ouvrant_manuel ? "$signaler_lien_externe" : '')."</a>";
 
 	return array($insert, $lien_url);
 }
