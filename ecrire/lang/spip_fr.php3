@@ -315,7 +315,6 @@ $GLOBALS['i18n_fr'] = array(
 'info_ajout_participant' => 'Le participant suivant est ajout&eacute;&nbsp;:',
 'info_ajouter_mot' => 'Ajouter ce mot',
 'info_ajouter_rubrique' => 'Ajouter une autre rubrique &agrave; administrer&nbsp;:',
-'info_aller_a' => 'Aller &agrave;',
 'info_annonce' => 'ANNONCE',
 'info_annonce_nouveautes' => 'Annonce des nouveaut&eacute;s',
 'info_annonces_generales' => 'Annonces g&eacute;n&eacute;rales&nbsp;:',
