@@ -85,7 +85,7 @@ if (!$use_cache) {
 	$calculer_cache = true;
 
 	// redirection d'article via le chapo =http...
-	if ($id_article) {
+	if ($id_article = intval($id_article)) {
 		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
 		while($row = spip_fetch_array($result)) {
@@ -96,7 +96,7 @@ if (!$use_cache) {
 
 			$regs = array('','','',substr($chapo, 1));
 			list(,$url) = extraire_lien($regs);
-
+			$url = addslashes($url);
 			$texte = "<"."?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
 			spip_log("redirection: $url");
