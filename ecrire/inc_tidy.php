@@ -63,9 +63,41 @@ function echappe_xhtml ($letexte) { // oui, c'est dingue... on echappe le mathml
 	return array($letexte, $les_echap);
 }
 
-
 function xhtml ($buffer) {
-	if (version_tidy() == "1") {
+	global $tidy_command;
+
+
+	if (strlen($tidy_command) > 0) {
+		// Si l'on a defini un chemin pour tidyHTML 
+		// en ligne de commande 
+		// (pour les sites qui n'ont pas tidyPHP)
+
+		include_ecrire("inc_texte.php3");
+
+		$retour_echap = echappe_xhtml ($buffer);
+		$buffer = $retour_echap[0];
+		$les_echap = $retour_echap[1];
+		$charset = lire_meta('charset');
+		if ($charset == "iso-8859-1") $enc_char = "latin1";
+		else if ($charset == "utf-8") $enc_char = "utf8";
+		else return echappe_retour($buffer, $les_echap, "xhtml");
+
+		$nomfich = _DIR_CACHE."bidouille".rand();
+		$f = fopen($nomfich, 'wb');
+		fputs($f, $buffer);
+		fclose($f);
+		
+		exec("$tidy_command --char-encoding $enc_char --quote-nbsp false --show-body-only false --clean true --indent true --wrap false --output-xhtml true --add-xml-decl false -m $nomfich");
+		
+		$tidy = join(file($nomfich),"");
+		@unlink($nomfich);
+		
+		$tidy = echappe_retour($tidy, $les_echap, "xhtml");
+		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
+		return $tidy;
+
+	}
+	else if (version_tidy() == "1") {
 		include_ecrire("inc_texte.php3");
 
 		$retour_echap = echappe_xhtml ($buffer);
