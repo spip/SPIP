@@ -45,8 +45,8 @@ function formulaire_signature($id_article) {
 
 	include_ecrire("inc_texte.php3");
 	include_ecrire("inc_filtres.php3");
-	include_ecrire("inc_mail.php3");
 
+	echo "<div class='formulaire'>";
 	echo "<a name='sp$id_article'></a>\n";
 
 	if ($val_confirm) {
@@ -114,7 +114,9 @@ function formulaire_signature($id_article) {
 	}
 	else if ($nom_email AND $adresse_email) {
 		if ($GLOBALS['db_ok']) {
-		 	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
+			include_ecrire("inc_mail.php3");
+
+			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 		 	$result_petition = spip_query($query_petition);
 
 			while($row = spip_fetch_array($result_petition)) {
@@ -125,7 +127,7 @@ function formulaire_signature($id_article) {
 				$message_petition = $row['message'];
 				$texte_petition = $row['texte'];
 			}
-			
+
 			if (strlen($nom_email) < 2) {
 				$reponse_signature .= erreur("Veuillez indiquer votre nom.");
 				$refus = "oui";
@@ -150,7 +152,7 @@ function formulaire_signature($id_article) {
 				$reponse_signature .= erreur("Votre adresse email n'est pas valide.");
 				$refus = "oui";
 			}
-			
+
 			if ($site_obli == "oui") {
 				if (!$nom_site) {
 					$reponse_signature .= erreur("Veuillez indiquer le nom de votre site.");
@@ -241,28 +243,28 @@ function formulaire_signature($id_article) {
 
 			echo propre($texte_petition);
 
-			echo "<P><div class=\"spip_encadrer\"><B>Votre nom ou pseudo</B><BR>(your name or pseudo)<BR>";
+			echo "<p><fieldset><B>Votre nom ou pseudo</B><BR>(your name or pseudo)<BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\">";
 
-			echo "<P><B>Votre adresse email</B><BR>(your email address)<BR>";
-			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"vous@fournisseur.com\" size=\"20\"></div>";
+			echo "<p><B>Votre adresse email</B><BR>(your email address)<BR>";
+			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\"></fieldset>";
 
-			echo "<P><div class=\"spip_encadrer\">";
+			echo "<P><fieldset>";
 			if ($site_obli != "oui") {
 				echo  "<B>Si vous avez un site Web, vous pouvez l'indiquer ci-dessous</B><br>(if you own a website...)<p>";
 			}
-			echo "<B>Nom de votre site</B><BR>(name of your website)<BR>";
+			echo "<B>Nom de votre site Web</B><BR>(name of your website)<BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\">";
 
-			echo "<P><B>Adresse de votre site</B><BR>(URL of your website)<BR>";
-			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\"></div>";
+			echo "<p><B>Adresse de votre site</B><BR>(URL of your website)<BR>";
+			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\"></fieldset>";
 
 			if ($message_petition == "oui") {
-				echo "<p><div class=\"spip_encadrer\">";
+				echo "<p><fieldset>";
 
 				echo "<B>Un message, un commentaire&nbsp;?</B><BR>(a message, any comment?)<BR>";
 				echo "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
-				echo "</textarea></div><p>\n";
+				echo "</textarea></fieldset><p>\n";
 			}
 			else {
 				echo "<input type=\"hidden\" name=\"message\" value=\"\">";
@@ -272,7 +274,7 @@ function formulaire_signature($id_article) {
 			echo "</DIV></FORM>\n";
 		}
 	}
-
+	echo "</div>\n";
 }
 
 
