@@ -200,8 +200,8 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 	$param = substr($param,3);
 
 	while ($param) {
-
-		preg_match('/[[:space:]]*([^, ]*)[[:space:]]*,?(.*)/ims',
+	  spip_log($param);
+		preg_match('/[[:space:]]*([^,]*)[[:space:]]*,?(.*)/ims',
 			   $param, $regs);
 		$param = $regs[2];
 		$tri = trim($regs[1]);
@@ -229,9 +229,9 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 		  $order= "'mots.type'";
 		}
 	// par num champ(, suite)
-		else if (ereg("^num[[:space:]]+([^,]*)(,.*)?",$tri, $match2)) {
+		else if (ereg("^num[[:space:]]+(.*)$",$tri, $match2)) {
 		  $boucle->select[] = "0+".$boucle->id_table.".".$match2[1]." AS num";
-		  $order = "'num".texte_script($match2[2])."'";
+		  $order = "'num'";
 	}
 	// par champ. Verifier qu'ils sont presents.
 		else if (ereg("^[a-z][a-z0-9]*$", $tri)) {
