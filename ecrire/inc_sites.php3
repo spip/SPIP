@@ -22,7 +22,7 @@ function recuperer_page($url) {
 	else
 		$via_proxy = " (proxy $http_proxy)";
 
-	spip_log("syndication $url$via_proxy");
+	spip_log("chargement $url$via_proxy");
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 		$t = @parse_url($url);
@@ -74,7 +74,7 @@ function recuperer_page($url) {
 	}
 
 	if (!$f) {
-		spip_log("ECHEC syndication $url$via_proxy");
+		spip_log("ECHEC chargement $url$via_proxy");
 		$result = '';
 	} else {
 		while (!feof($f))
@@ -82,30 +82,25 @@ function recuperer_page($url) {
 		fclose($f);
 	}
 
-	// analyser cette page pour trouver un charset connu hors iso-8859-1,
-	// et convertir dans le charset local ; si la page n'a pas de charset,
-	// ne pas la decoder (on suppose qu'elle est iso-8859-1)... sauf si
-	// le charset local n'est pas iso-8859-1
-	if (eregi("<[^>]*charset.[^>]*(utf-8)", $result, $regs)) {
-		$charset_page = $regs[1];
-		$result = unicode2charset(entites_unicode($result, $charset_page));
-	} else
-		if (lire_meta('charset') != 'iso-8859-1')
-			$result = unicode2charset(entites_unicode($result, 'FORCE-iso-8859-1'));
-
-	// FORCE-iso-8859-1 passe le message suivant : on VEUT la conversion, meme
-	// si elle est desactivee dans entites_unicode pour maintenir (temporairement)
-	// la lisibilite de notre backend sur des SPIP v<1.5
-
-
 	return $result;
+}
+
+
+function transcoder_page($texte) {
+	// cas special bizarre pour utf-8...
+	if (eregi('<\\?xml[[:space:]][^>]*(utf-8)', $texte, $regs)) {
+		$charset_page = $regs[1];
+		$texte = unicode2charset(entites_unicode($texte, $charset_page));
+	}
+	else $texte = unicode2charset(entites_unicode($texte, 'FORCE-iso-8859-1'));
+	return $texte;
 }
 
 
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3");
 
-	$texte = recuperer_page($url);
+	$texte = transcoder_page(recuperer_page($url));
 	if (!$texte) return false;
 	$result = '';
 	if (ereg('<channel[^>]*>(.*)</channel>', $texte, $regs)) {
@@ -164,7 +159,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	$le_retour = recuperer_page($la_query);
+	$le_retour = transcoder_page(recuperer_page($la_query));
 
 	if (strlen($le_retour)>10){
 
@@ -230,7 +225,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 				echo "<li> $le_titre / $le_lien";
 				
-			
+
 				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
 												
 				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
@@ -354,7 +349,6 @@ function afficher_sites($titre_table, $requete) {
 			echo "</tr></n>";
 		}
 		echo "</TABLE>";
-		//echo "</TD></TR></TABLE>";
 		fin_cadre_relief();
 	}
 	return $tous_id;
@@ -367,9 +361,9 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	global $REQUEST_URI;
 	global $debut_liste_sites;
 	global $flag_editable;
-	
+
 	static $n_liste_sites;
-	
+
 	$n_liste_sites++;
 	if (!$debut_liste_sites[$n_liste_sites]) $debut_liste_sites[$n_liste_sites] = 0;
 
@@ -393,7 +387,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 	// Ne pas couper pour trop peu
 	if ($num_rows <= 1.5 * $nombre_aff) $nombre_aff = $num_rows;
-	
+
 		if ($num_rows > 0) {
 			echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
 			echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
