@@ -43,6 +43,11 @@ function recuperer_page($url, $munge_charset=false) {
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 		$t = @parse_url($url);
 		$host = $t['host'];
+		if ($t['scheme'] == 'http') {
+			$scheme = 'http'; $scheme_fsock='';
+		} else {
+			$scheme = $t['scheme']; $scheme_fsock=$scheme.'://';
+		}
 		if (!($port = $t['port'])) $port = 80;
 		$query = $t['query'];
 		if (!($path = $t['path'])) $path = "/";
@@ -53,11 +58,11 @@ function recuperer_page($url, $munge_charset=false) {
 			if (!($proxy_port = $t2['port'])) $proxy_port = 80;
 			$f = @fsockopen($proxy_host, $proxy_port);
 		} else
-			$f = @fsockopen($host, $port);
+			$f = @fsockopen($scheme_fsock.$host, $port);
 
 		if ($f) {
 			if ($http_proxy)
-				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
+				fputs($f, "GET $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 			else
 				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 
@@ -76,6 +81,7 @@ function recuperer_page($url, $munge_charset=false) {
 				$headers .= $s."\n";
 				if (eregi('^Location: (.*)', $s, $r)) {
 					$location = $r[1];
+					spip_log($s);
 				}
 			}
 			if ($status >= 300 AND $status < 400 AND $location) $url = $location;
@@ -284,6 +290,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	if ($le_retour) {
 		// Echapper les CDATA
+		$echappe_cdata = array();
 		if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $le_retour, $regs, PREG_SET_ORDER)) {
 			foreach ($regs as $n => $reg) {
 				$echappe_cdata[$n] = $reg[1];
@@ -394,7 +401,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					(id_syndic, url, date, statut) VALUES
 					('$now_id_syndic', '$le_lien',
 					FROM_UNIXTIME($la_date), '$moderation')");
-					$flag_ajout_lien = true;
+					$liens_ajoutes ++;
 				}
 
 				// Mise a jour du contenu (titre,auteurs,description)
@@ -425,7 +432,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	// Ne pas oublier de liberer le verrou
 	spip_release_lock($url_syndic);
 
-	if ($flag_ajout_lien) {
+	if ($liens_ajoutes) {
+		spip_log("Syndication: $liens_ajoutes nouveau(x) lien(s)");
 		include_ecrire('inc_rubriques.php3');
 		calculer_rubriques();
 	}
