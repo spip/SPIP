@@ -28,8 +28,8 @@ function hash_env() {
 //
 function fichier_session($id_session, $alea) {
 	if (ereg("^([0-9]+_)", $id_session, $regs))
-		$id_auteur_ = $regs[1];
-	$fichier_session = 'session_'.$id_auteur_.md5($id_session.' '.$alea).'.php3';
+		$id_auteur = $regs[1];
+	$fichier_session = 'session_'.$id_auteur.md5($id_session.' '.$alea).'.php3';
 	$fichier_session = 'data/'.$fichier_session;
 	if (!$GLOBALS['flag_ecrire']) $fichier_session = 'ecrire/'.$fichier_session;
 	return $fichier_session;
@@ -128,7 +128,7 @@ function creer_uniqid() {
 
 	if ($flag_mt_rand) $s = mt_rand();
 	if (!$s) $s = rand();
-	return uniqid($s);
+	return uniqid($s, 1);
 }
 
 
