@@ -84,7 +84,6 @@ $GLOBALS['i18n_spip_da'] = array(
 'barre_gras' => '<NEW> Mettre en {{gras}}',
 'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
 'barre_guillemets_de' => '<NEW> Entourer de &bdquo;guillemets&ldquo;',
-'barre_guillemets_simples' => '<NEW> Entourer de &ldquo;guillemets&rdquo;',
 'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
 'barre_italic' => '<NEW> Mettre en {italique}',
 'barre_lien' => '<NEW> Transformer en [lien hypertexte->http://...]',
