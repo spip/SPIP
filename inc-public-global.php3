@@ -6,12 +6,10 @@ define("_INC_PUBLIC_GLOBAL", "1");
 
 // fonction principale declenchant tout le service
 
-function calcule_header_et_page($fond, $delais) 
-	{
+function calcule_header_et_page($fond, $delais) {
 	  global $affiche_boutons_admin, $auteur_session, $flag_dynamique, $flag_ob, $flag_preserver, $forcer_lang, $id_article, $ignore_auth_http, $lastmodified, $recherche, $use_cache, $val_confirm, $var_mode, $var_mode_affiche, $var_mode_objet, $var_recherche, $tableau_des_erreurs;
 
 	// Regler le $delais par defaut
-
 	if (!isset($delais))
 		$delais = 1 * 3600;
 	if ($recherche)
@@ -19,7 +17,7 @@ function calcule_header_et_page($fond, $delais)
 
 	// authentification du visiteur
 	if ($GLOBALS['_COOKIE']['spip_session'] OR
-	($GLOBALS['_PHP_AUTH_USER']  AND !$ignore_auth_http)) {
+	($GLOBALS['_SERVER']['PHP_AUTH_USER']  AND !$ignore_auth_http)) {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
@@ -62,7 +60,7 @@ function calcule_header_et_page($fond, $delais)
 	// est-on admin ?
 	if ($affiche_boutons_admin = (!$flag_preserver
 	AND ($GLOBALS['_COOKIE']['spip_admin']
-	     OR $GLOBALS['_COOKIE']['spip_debug'])))
+	OR $GLOBALS['_COOKIE']['spip_debug'])))
 		include_local(find_in_path('inc-formulaire_admin.php3'));
 
 	$tableau_des_erreurs = array();
@@ -71,23 +69,25 @@ function calcule_header_et_page($fond, $delais)
 
 	if (!$flag_preserver) {
 
-// si la page est vide, envoi d'un 404
+		// si la page est vide, envoi d'un 404
 		if (preg_match('/^[[:space:]]*$/', $page['texte'])) {
 			$header404 = true;
 			header("HTTP/1.0 404");
 			header("Content-Type: text/html; charset=".lire_meta('charset'));
-		} else {
-// Interdire au client de cacher un login, un admin ou un recalcul
-			if ($flag_dynamique OR $var_mode
-			    OR $GLOBALS['_COOKIE']['spip_admin']) {
-				header("Cache-Control: no-cache,must-revalidate");
-				header("Pragma: no-cache");
-// Pour les autres donner l'heure de modif
-			} else if ($lastmodified)
-				header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
-				header("Content-Type: text/html; charset=".lire_meta('charset'));
 		}
-// Inserer au besoin les boutons admins
+		// Interdire au client de cacher un login, un admin ou un recalcul
+		else if ($flag_dynamique OR $var_mode
+		OR $GLOBALS['_COOKIE']['spip_admin']) {
+			header("Cache-Control: no-cache,must-revalidate");
+			header("Pragma: no-cache");
+		}
+		// Pour les autres donner l'heure de modif
+		else if ($lastmodified) {
+			header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+			header("Content-Type: text/html; charset=".lire_meta('charset'));
+		}
+
+		// Inserer au besoin les boutons admins
 		if ($affiche_boutons_admin) {
 			include_local("inc-admin.php3");
 			$page['process_ins'] = 'php';
@@ -95,12 +95,15 @@ function calcule_header_et_page($fond, $delais)
 		}
 	}
 
-	if ($page['process_ins'] == 'html')
 	// Cas d'une page contenant uniquement du HTML :
+	if ($page['process_ins'] == 'html') {
 		$page = $page['texte'];
+	}
+
+	// Cas d'une page contenant du PHP :
 	else {
-	  // Cas d'une page contenant du PHP :
-		if (!($flag_ob AND ($var_mode == 'debug' OR $var_recherche OR $affiche_boutons_admin))) {
+		if (!($flag_ob AND ($var_mode == 'debug'
+		OR $var_recherche OR $affiche_boutons_admin))) {
 			eval('?' . '>' . $page['texte']);
 			$page = '';
 		} else {

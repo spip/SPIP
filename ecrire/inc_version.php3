@@ -76,136 +76,145 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
 	// Soit on est appele de l'exterieur (spikini, etc)
 }
 
+
 // *********** traiter les variables ************
+
+// Recuperer les superglobales $_GET si non definies
+// (en theorie c'est impossible depuis PHP 4.0.3, cf. track_vars)
+foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
+	if (!is_array($GLOBALS[$_table])) {
+		$GLOBALS[$_table] = array();
+		if (is_array($GLOBALS[$http_table_vars]))
+			$GLOBALS[$_table] = & $GLOBALS[$http_table_vars];
+	} /* else
+	$GLOBALS[$http_table_vars] = & $GLOBALS[$_table]; */
+}
+
+
 // Magic quotes : on n'en veut pas sur la base,
 // et on nettoie les GET/POST/COOKIE le cas echeant
-//
-
-function magic_unquote($_table, $http='') {
+function magic_unquote($_table) {
 	if (is_array($GLOBALS[$_table])) {
 		foreach ($GLOBALS[$_table] as $key => $val) {
 			if (is_string($val))
 				$GLOBALS[$_table][$key] = stripslashes($val);
 		}
 	}
-	else {
-		// Si _GET n'existe pas, nettoyer HTTP_GET_VARS
-		if (!$http) // ne pas boucler
-			magic_unquote('HTTP'.$_table.'_VARS', true);
-	}
 }
 
 @set_magic_quotes_runtime(0);
-
 if (@get_magic_quotes_gpc()) {
 	magic_unquote('_GET');
 	magic_unquote('_POST');
 	magic_unquote('_COOKIE');
 
-	// si register_globals est "on" mais ini_get desactive, on a un souci ;
-	// il faut alors mettre la ligne suivante dans un .htaccess a la racine
-	//   php_value magic_quotes_gpc 0
-	// ou commenter le if() ci-dessous
 	if (@ini_get('register_globals'))
 		magic_unquote('GLOBALS');
 }
 
 
-//
+
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
-// et contre la deprecation de HTTP_GET_VARS (PHP 5.0.x)
 // A remplacer (un jour!) par une gestion propre des variables admissibles ;-)
-//
 // Attention pour compatibilite max $_GET n'est pas superglobale
+// NB: c'est une fonction de maniere a ne pas pourrir $GLOBALS
+function spip_register_globals() {
 
+	// Liste des variables dont on refuse qu'elles puissent provenir du client
+	$refuse_gpc = array (
+		# inc-public.php3
+		'fond', 'delais',
 
-//
-// Une variable n'est pas "sure" si elle est arrivee par le client
-// Cette fonction sert a interdire tout hack de l'environnement
-// ou des variables de personnalisation
-//
-function is_insecure($var, $gpc='gpc') {
+		# ecrire/inc_auth.php3
+		'REMOTE_USER',
+		'PHP_AUTH_USER', 'PHP_AUTH_PW',
 
-	if (strpos('g',$gpc) !== false
-		AND isset($GLOBALS['_GET'][$var])
-		AND ($GLOBALS['_GET'][$var] === $GLOBALS[$var]))
-			return true;
+		# ecrire/inc_texte.php3
+		'debut_intertitre', 'fin_intertitre', 'ligne_horizontale',
+		'ouvre_ref', 'ferme_ref', 'ouvre_note', 'ferme_note',
+		'les_notes', 'compt_note', 'nombre_surligne',
+		'url_glossaire_externe', 'puce', 'puce_rtl'
+	);
 
-	if (strpos('p',$gpc) !== false
-		AND isset($GLOBALS['_POST'][$var])
-		AND ($GLOBALS['_POST'][$var] === $GLOBALS[$var]))
-			return true;
-
-	if (strpos('c',$gpc) !== false
-		AND isset($GLOBALS['_COOKIE'][$var])
-		AND ($GLOBALS['_COOKIE'][$var] === $GLOBALS[$var]))
-			return true;
-
-	return false;
-}
-
-
-function feed_globals($_table) {
-	$http_table_vars = 'HTTP'.$_table.'_VARS';
-
-	// identifier $GLOBALS[HTTP_GET_VARS] et $GLOBALS[_GET]
-	if (!is_array($GLOBALS[$_table])) {
-		$GLOBALS[$_table] = array();
-		if (is_array($GLOBALS[$http_table_vars]))
-			$GLOBALS[$_table] = & $GLOBALS[$http_table_vars];
-	} else
-		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
-
-	foreach ($GLOBALS[$_table] as $key => $val)
-		## securite
-		if (in_array($key,
-			array('REMOTE_USER', 'fond', 'delais'))
-		) {
-			die ("variable $_table"."[$key] interdite");
-			# NB: ici spip_log ne marche pas car _DIR_SESSIONS n'est pas encore definie !
-		}
-		else if (!isset($GLOBALS[$key])) {
-
-			## a ignorer si elles sont envoyees par le client
-			if (!in_array($key,
-				array(
-		'debut_intertitre', 'fin_intertitre',
-		'ligne_horizontale',
-		'ouvre_ref', 'ferme_ref', 'ouvre_note',
-		'ferme_note', 'les_notes', 'compt_note',
-		'nombre_surligne', 'url_glossaire_externe',
-		'puce', 'puce_rtl'
-				))
-
-			## a ignorer dans le cookie
-			AND ($_table <> '_COOKIE' OR
-			!in_array($key,
-				array(
+	// Liste des variables (contexte) dont on refuse qu'elles soient cookie
+	// (histoire que personne ne vienne fausser le cache)
+	$refuse_c = array (
+		# inc-calcul.php3
 		'id_parent', 'id_rubrique', 'id_article',
 		'id_auteur', 'id_breve', 'id_forum', 'id_secteur',
 		'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe',
 		'id_document', 'date', 'lang'
-				)
-			)))
-				$GLOBALS[$key] = $val;
-		}
-}
+	);
 
-feed_globals('_SERVER');
-feed_globals('_POST');
-feed_globals('_GET');
-feed_globals('_COOKIE');
-# note : les $_FILE sont geres dans spip_image.php3
+
+	// Si les variables sont passees en global par le serveur, il faut
+	// faire quelques verifications de base
+	if (@ini_get('register_globals')) {
+		foreach ($refuse_gpc as $var) {
+			if (isset($GLOBALS[$var])) {
+				foreach (array('_GET', '_POST', '_COOKIE') as $_table) {
+					if (
+					// demande par le client
+					isset ($GLOBALS[$_table][$var])
+					// et pas modifie par les fichiers d'appel
+					AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
+					) // On ne sait pas si c'est un hack
+					{
+						# REMOTE_USER, c'est grave si on lui fait confiance ;
+						# pour le reste (cookie 'lang', par exemple), simplement
+						# interdire la mise en cache de la page produite
+						if ($var == 'REMOTE_USER')
+							die ("$var interdite");
+						else
+							define ('spip_interdire_cache', true);
+					}
+				}
+			}
+		}
+		foreach ($refuse_c as $var) {
+			if (isset($GLOBALS[$var])) {
+				foreach (array('_COOKIE') as $_table) {
+					if (
+					// demande par le client
+					isset ($GLOBALS[$_table][$var])
+					// et pas modifie par les fichiers d'appel
+					AND $GLOBALS[$_table][$var] == $GLOBALS[$var]
+					)
+						define ('spip_interdire_cache', true);
+				}
+			}
+		}
+	}
+
+	// sinon il faut les passer nous-memes, a l'exception des interdites.
+	// (A changer en une liste des variables admissibles...)
+	else {
+		foreach (array('_SERVER', '_COOKIE', '_POST', '_GET') as $_table) {
+			foreach ($GLOBALS[$_table] as $var => $val) {
+				if (!isset($GLOBALS[$var])
+				AND isset($GLOBALS[$_table][$var])
+				AND ($_table == '_SERVER' OR !in_array($var, $refuse_gpc))
+				AND ($_table <> '_COOKIE' OR !in_array($var, $refuse_c)))
+					$GLOBALS[$var] = $val;
+			}
+		}
+	}
+}
+spip_register_globals();
+
+
+
+
 
 //
-// 	*** Parametrage par defaut de SPIP ***
+// *** Parametrage par defaut de SPIP ***
 //
 // Ces parametres d'ordre technique peuvent etre modifies
-// dans FILE_OPTIONS Les valeurs specifiees
-// dans ce dernier fichier remplaceront automatiquement
+// dans ecrire/mes_options.php3 (_FILE_OPTIONS) Les valeurs
+// specifiees dans ce dernier fichier remplaceront automatiquement
 // les valeurs ci-dessous.
 //
-// Pour creer _FILE_OPTIONS : recopier simplement
+// Pour creer ecrire/mes_options.php3 : recopier simplement
 // les lignes ci-dessous, et ajouter le marquage de debut et
 // de fin de fichier PHP ("< ?php" et "? >", sans les espaces)
 //
@@ -269,11 +278,8 @@ $champs_extra = false;
 $champs_extra_proposes = false;
 
 // faut-il ignorer l'authentification par auth http/remote_user ?
-// cela permet d'avoir un SPIP sous .htaccess (ignore_remote_user),
-// mais aussi de fonctionner sur des serveurs debiles se
-// bloquant sur PHP_AUTH_USER=root (ignore_auth_http)
 $ignore_auth_http = false;
-$ignore_remote_user = false;
+$ignore_remote_user = true; # methode obsolete et risquee
 
 // Faut-il "invalider" les caches quand on depublie ou modifie un article ?
 // (experimental)

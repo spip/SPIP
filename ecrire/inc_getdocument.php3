@@ -425,7 +425,7 @@ function effacer_logo($nom) {
 
 // Tester nos capacites
 function tester_vignette ($test_vignette) {
-	global $djpeg_command, $cjpeg_command, $pnmscale_command;
+	global $pnmscale_command;
 	// verifier les formats acceptes par GD
 	if ($test_vignette == "gd1") {
 		// Si GD est installe et php >= 4.0.2
@@ -471,8 +471,10 @@ function tester_vignette ($test_vignette) {
 		ecrire_meta("gd_formats", $gd_formats);
 		ecrire_metas();
 	}
+
 	// verifier les formats netpbm
-	else if ($test_vignette == "netpbm") {
+	else if ($test_vignette == "netpbm"
+	AND $pnmscale_command) {
 		$netpbm_formats= Array();
 
 		$jpegtopnm_command = str_replace("pnmscale",
@@ -502,7 +504,7 @@ function tester_vignette ($test_vignette) {
 		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
 		$vignette = _DIR_IMG . "test.png";
 		$dest = _DIR_IMG . "test-gif.jpg";
-		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest";
+		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
 		exec($commande);
 		if ($taille = @getimagesize($dest)) {
@@ -510,7 +512,10 @@ function tester_vignette ($test_vignette) {
 		}
 		
 
-		if ($netpbm_formats) $netpbm_formats = join(",", $netpbm_formats);
+		if ($netpbm_formats)
+			$netpbm_formats = join(",", $netpbm_formats);
+		else
+			$netpbm_formats = '';
 		ecrire_meta("netpbm_formats", $netpbm_formats);
 		ecrire_metas();
 	}

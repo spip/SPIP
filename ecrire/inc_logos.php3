@@ -206,7 +206,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destfile, $process='AUTO', $force=false, $test_cache_only = false) {
-	global $convert_command, $djpeg_command, $cjpeg_command, $pnmscale_command;
+	global $convert_command, $pnmscale_command;
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
 	if ($format == 'png')

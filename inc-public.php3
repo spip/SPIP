@@ -1,14 +1,13 @@
 <?php
 
-  // distinguer une inclusion d'un appel initial
+
+// Distinguer une inclusion d'un appel initial
 
 if (function_exists('inclure_page_lang'))
 	inclure_page_lang($fond, $delais, $contexte_inclus);
 else {
 	include ("ecrire/inc_version.php3");
 	include_local('inc-public-global.php3');
-
-	if (is_insecure('fond') || is_insecure('delais')) exit;
 
 	list($header404, $page) = calcule_header_et_page($fond, $delai);
 
@@ -24,5 +23,6 @@ else {
 
 	echo $page;
 	terminer_public_global();
- }
+}
+
 ?>

@@ -407,14 +407,13 @@ fin_cadre_trait_couleur();
 // Creer fichier .htpasswd ?
 //
 
-if ($options == "avancees" AND !@file_exists(_ACCESS_FILE_NAME) AND !$REMOTE_USER ) {
+
+if ($options == "avancees") {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
-
-
-debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
-			  _T('info_fichiers_authent'));
+	debut_cadre_trait_couleur("cadenas-24.gif", false, "",
+		_T('info_fichiers_authent'));
 
 	$creer_htpasswd = lire_meta("creer_htpasswd");
 
@@ -422,13 +421,13 @@ debut_cadre_trait_couleur("cadenas-24.gif", false, "",
 
 	echo "<div class='verdana2'>";
 	afficher_choix('creer_htpasswd', $creer_htpasswd,
-		       array('oui' => _T('item_creer_fichiers_authent'),
-			     'non' =>  _T('item_non_creer_fichiers_authent')),
-		       ' &nbsp; ');
+		array('oui' => _T('item_creer_fichiers_authent'),
+			'non' =>  _T('item_non_creer_fichiers_authent')),
+		' &nbsp; ');
 	echo "</div>";
 	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 	
-fin_cadre_trait_couleur();
+	fin_cadre_trait_couleur();
 
 	echo "<p>";
 }
