@@ -74,8 +74,7 @@ if ($changer_config == 'oui') {
 
 	if ($purger_skel) {
 		$hash = calculer_action_auteur("purger_squelettes");
-		$redirect = rawurlencode("configuration.php3");
-		@header ("Location: ../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect");
+		@header ("Location: ../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=config-fonctions.php3");
 	}
 }
 else {
