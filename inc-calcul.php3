@@ -51,46 +51,57 @@ function charger_squelette ($squelette) {
 	$nom = $ext . '_' . md5($squelette);
 	$sourcefile = $squelette . ".$ext";
 
-	if (function_exists($nom)) {
-		#spip_log("Squelette $squelette:\t($nom) deja en memoire");
-		return $nom;
-	}
+	// le squelette est-il deja en memoire (<inclure> a repetition)
+	if (function_exists($nom)) return $nom;
+
 	$phpfile = 'CACHE/skel_' . $nom . '.php';
 
 		// le squelette est-il deja compile, lisible, etc ?
 	if (!squelette_obsolete($phpfile, $sourcefile)
-		AND lire_fichier ($phpfile, $contenu,
-			array('critique' => 'oui', 'phpcheck' => 'oui'))) {
+	      AND lire_fichier ($phpfile, $contenu,
+				array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
-		if (function_exists($nom))
-			return $nom;
-		}
-
-		// sinon le compiler
-	include_local("inc-compilo.php3");
-	if (!lire_fichier ($sourcefile, $skel)) { 
+	if (!function_exists($nom)) {
+		// sinon charger le compilateur et tester le source
+		include_local("inc-compilo.php3");
+		if (!lire_fichier ($sourcefile, $skel)) { 
 			// erreur webmaster : $fond ne correspond a rien
 			include_ecrire ("inc_presentation.php3");
 			install_debut_html(_T('info_erreur_squelette'));
-			echo "<P>"._T('info_erreur_squelette2',
-			array('fichier'=>$squelette))."</P>";
-			spip_log ("ERREUR: aucun squelette '$squelette' n'est disponible...");
+			echo "<p>",
+				_T('info_erreur_squelette2',
+				   array('fichier'=>$squelette)),
+				"</p>";
+			spip_log("ERREUR: squelette '$squelette' indisponible");
 			install_fin_html();
 			exit;
 		}
+	}
 
+	// ce fichier peut contenir deux sortes de choses:
+	// 1. les filtres utilisés par le squelette
+	// 2. d'eventuels ajouts a $tables_principales
+	// Le point 1 exige qu'il soit lu dans tous les cas.
+	// Le point 2 exige qu'il soit lu apres inc-compilo
+	// (car celui-ci initialise $tables_principales) mais avant la compil
+
+	$f = $squelette . '_fonctions.php3';
+	if (file_exists($f)) include($f);
+
+	if (function_exists($nom))  return $nom;
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
-		// Tester si le compilateur renvoie une erreur
-	if (is_array($skel_code)) 
-	  {
-	    erreur_squelette($skel_code[0], $skel_code[1]) ; 
-	    $skel_compile = '';
-	    $skel_code = '';
-	  }
-	else
-	 $skel_compile = "<"."?php\n" . $skel_code ."\n?".">";
+	// Tester si le compilateur renvoie une erreur
 
-		// Parler au debugguer
+	if (is_array($skel_code)) 
+		{
+			erreur_squelette($skel_code[0], $skel_code[1]) ; 
+			$skel_compile = '';
+			$skel_code = '';
+		  }
+	else
+		$skel_compile = "<"."?php\n" . $skel_code ."\n?".">";
+
+	// Parler au debugguer
 	if ($GLOBALS['var_debug'] AND 
 	    $GLOBALS['debug_objet'] == $nom
 	    AND $GLOBALS['debug_affiche'] == 'code')
@@ -99,9 +110,10 @@ function charger_squelette ($squelette) {
 		// Evaluer le squelette
 	eval($skel_code);
 	if (function_exists($nom)) {
-			ecrire_fichier ($phpfile, $skel_compile);
-			return $nom;
-			}
+		ecrire_fichier ($phpfile, $skel_compile);
+		return $nom;
+	}
+
 		// en cas d'erreur afficher les boutons de debug
 	echo "<hr /><h2>".
 		_L("Erreur dans la compilation du squelette").
@@ -109,8 +121,6 @@ function charger_squelette ($squelette) {
 		$GLOBALS['bouton_admin_debug'] = true;
 		debug_dumpfile ($skel_compile);
 }
-
-
 
 # Provoque la recherche du squelette $fond d'une $lang donnee,
 # et l'applique sur un $contexte pour un certain $cache.
@@ -138,7 +148,7 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	$dir = "$dossier_squelettes/mon-chercher.php3";
 	if (file_exists($dir)) {
 		include($dir);
-		} else */ { 
+		} else  */ { 
 		include_local("inc-chercher.php3"); # a renommer
 	 }
 
@@ -149,13 +159,9 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 		$lang
 	);
 
-	/*  Idem
-	$dir = "$skel" . '_fonctions.php3';
-	if (file_exists($dir)) include($dir);
-	*/
+	// Charger le squelette et recuperer sa fonction principale
+	// (compilation automatique au besoin)
 
-	// Charger le squelette demande et recuperer sa fonction main()
-	// (on va le compiler si besoin est)
 	$fonc = charger_squelette($skel);
 
 	// Calculer la page a partir du main() du skel compile
@@ -254,7 +260,6 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 
 // Cf ramener_page +cherche_page_incluante+ cherche_page_incluse chez ESJ
 function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
-	include_local('inc-calcul.php3');
 
 	// Inclusion
 	if ($inclusion) {
@@ -303,15 +308,13 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 	return $page;
 }
 
-### A passer peut-etre dans inc_db_mysql
 // Cette fonction est systematiquement appelee par les squelettes
 // pour constuire une requete SQL de type "lecture" (SELECT) a partir
 // de chaque boucle.
 // Elle construit et exe'cute une reque^te SQL correspondant a` une balise
 // Boucle ; elle notifie une erreur SQL dans le flux de sortie et termine
 // le processus.
-// Sinon, retourne la ressource interrogeable par fetch_row ou fetch_array.
-// Elle peut etre re'de'finie pour s'interfacer avec d'autres serveurs SQL
+// Sinon, retourne la ressource interrogeable par spip_abstract_fetch.
 // Recoit en argument:
 // - le tableau des champs a` ramener
 // - le tableau des tables a` consulter
@@ -323,39 +326,64 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 // - un compteur de sous-requete
 // - le nom de la table
 // - le nom de la boucle (pour le message d'erreur e'ventuel)
-
+// - le serveur sollicite
 
 function spip_abstract_select (
 	$select = array(), $from = array(), $where = '',
 	$groupby = '', $orderby = '', $limit = '',
 	$sousrequete = '', $cpt = '',
-	$table = '', $id = '') {
+	$table = '', $id = '', $serveur='') {
 
-	$DB = 'spip_';
-	$q = " FROM $DB" . join(", $DB", $from)
-	. ($where ? ' WHERE ' . join(' AND ', $where) : '')
-	. ($groupby ? " GROUP BY $groupby" : '')
-	. ($orderby ? "\nORDER BY $orderby" : '')
-	. ($limit ? "\nLIMIT $limit" : '');
-
-	if (!$sousrequete)
-		$q = " SELECT ". join(", ", $select) . $q;
-	else
-		$q = " SELECT S_" . join(", S_", $select)
-		. " FROM (" . join(", ", $select)
-		. ", COUNT(".$sousrequete.") AS compteur " . $q
-		.") AS S_$table WHERE compteur=" . $cpt;
-
-	//
-	// Erreur ? C'est du debug, ou une erreur du serveur
-	//
-	if (!($result = @spip_query($q))) {
-		include_local('inc-admin.php3');
-		echo erreur_requete_boucle($q, $id, $table);
+	if (!$serveur)
+	  // le serveur par defaut est celui de inc_connect.php
+	  // tout est deja pret, notamment la fonction suivante:
+	  $f = 'spip_mysql_select';
+	else {
+	  // c'est un autre; est-il deja charge ?
+		$f = 'spip_' . $serveur . '_select';
+		if (!function_exists($f)) {
+		  // non, il est decrit dans le fichier ad hoc
+			$d = 'inc_connect-' . $serveur .'.php3';
+			if (file_exists('ecrire/' . $d))
+				include_ecrire($d);
+			serveur_defini($f, $serveur);
+		}
 	}
-
-#	 spip_log(spip_num_rows($result) . $q);
-	return $result;
+	return $f($select, $from, $where,
+		  $groupby, $orderby, $limit,
+		  $sousrequete, $cpt,
+		  $table, $id, $serveur);
 }
 
+function serveur_defini($f, $serveur) {
+  if (function_exists($f)) return $f;
+  include_local("inc-admin.php3");
+  erreur_squelette(_T('info_erreur_squelette'),
+		   $serveur . 
+		   _L(' serveur SQL indefini'));
+}
+
+// Les 3 fonctions suivantes exploitent le resultat de la precedente,
+// si l'include ne les a pas definies, erreur immediate
+
+function spip_abstract_fetch($res, $serveur='')
+{
+  if (!$serveur) return spip_fetch_array($res);
+  $f = serveur_defini('spip_' . $serveur . '_fetch', $serveur);
+  return $f($res);
+}
+
+function spip_abstract_count($res, $serveur='')
+{
+  if (!$serveur) return spip_num_rows($res);
+  $f = serveur_defini('spip_' . $serveur . '_count', $serveur);
+  return $f($res);
+}
+
+function spip_abstract_free($res, $serveur='')
+{
+  if (!$serveur) return spip_free_result($res);
+  $f = serveur_defini('spip_' . $serveur . '_free', $serveur);
+  return $f($res);
+}
 ?>

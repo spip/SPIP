@@ -2,7 +2,7 @@
 
 //
 // Des fonctions diverses utilisees lors du calcul d'une page ; ces fonctions
-// bien pratiques n'ont guère de logique organisationnelle ; elles sont
+// bien pratiques n'ont guere de logique organisationnelle ; elles sont
 // appelees par certaines balises au moment du calcul des pages. (Peut-on
 // trouver un modele de donnees qui les associe physiquement au fichier
 // definissant leur balise ???
@@ -130,8 +130,6 @@ function affiche_logos($logo, $lien, $align, $flag_fichier) {
 	return $milieu;
 }
 
-
-
 //
 // fonction standard de calcul de la balise #INTRODUCTION
 // on peut la surcharger en definissant dans mes_fonctions.php3 :
@@ -188,9 +186,9 @@ function calcul_exposer ($id, $type, $reference) {
 			if ($element == 'id_secteur') $element = 'id_rubrique';
 			if (ereg("id_(article|breve|rubrique|syndic)", $element, $regs)) {
 				$exposer[$element][$id_element] = true;
-				$table = "spip_".table_objet($regs[1]);
-				list ($id_rubrique) = spip_fetch_array(spip_query(
-				"SELECT id_rubrique FROM $table WHERE $element=$id_element"));
+				list ($id_rubrique) = spip_abstract_fetch(spip_abstract_select(array(id_rubrique), 
+											       array(table_objet($regs[1])),
+											       array("$element=$id_element")));
 				$hierarchie = substr(calculer_hierarchie($id_rubrique), 2);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
@@ -210,7 +208,7 @@ function calcul_generation ($generation) {
 							     $generation,
 							     '')),
 				       '','','','','','','');
-	while ($row = spip_fetch_array($result))
+	while ($row = spip_abstract_fetch($result))
 	  $lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);
 }
@@ -265,34 +263,34 @@ function sql_profondeur($id)
 
 function sql_parent($id_rubrique)
 {
-  $row = spip_fetch_array(spip_query("
-SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'
-"));
+  $row = spip_abstract_fetch(spip_abstract_select(array(id_parent), 
+						  array(rubriques), 
+						  array("id_rubrique='$id_rubrique'")));
   return $row['id_parent'];
 }
 
 function sql_rubrique($id_article)
 {
-  $row = spip_fetch_array(spip_query("
-SELECT id_rubrique FROM spip_articles WHERE id_article='$id_article'
-"));
+  $row = spip_abstract_fetch(spip_abstract_select(array(id_rubrique),
+						  array(articles),
+						  array("id_article='$id_article'")));
   return $row['id_rubrique'];
 }
 
-function sql_auteurs($id_article)
+function sql_auteurs($id_article, $table, $id_boucle, $serveur='')
 {
   $auteurs = "";
   if ($id_article)
     {
-      $result_auteurs = spip_query("
-SELECT	auteurs.nom, auteurs.email 
-FROM	spip_auteurs AS auteurs,
-	spip_auteurs_articles AS lien
-WHERE	lien.id_article=$id_article
- AND	auteurs.id_auteur=lien.id_auteur
-");
+      $result_auteurs = spip_abstract_select(array('auteurs.nom', 'auteurs.email'),
+					     array('auteurs AS auteurs',
+						   'auteurs_articles AS lien'), 
+					     array("lien.id_article=$id_article",
+						   "auteurs.id_auteur=lien.id_auteur"),
+					     '','','','',1, 
+					     $table, $id_boucle, $serveur);
 
-      while($row_auteur = spip_fetch_array($result_auteurs)) {
+      while($row_auteur = spip_abstract_fetch($result_auteurs)) {
 	$nom_auteur = typo($row_auteur["nom"]);
 	$email_auteur = $row_auteur["email"];
 	if ($email_auteur) {
@@ -306,23 +304,22 @@ WHERE	lien.id_article=$id_article
   return (!$auteurs) ? "" : join($auteurs, ", ");
 }
 
-function sql_petitions($id_article) {
-	$q = spip_query("SELECT
-	id_article, email_unique, site_obli, site_unique, message, texte
-	FROM spip_petitions
-	WHERE id_article=".intval($id_article));
-	return spip_fetch_array($q);
+function sql_petitions($id_article, $table, $id_boucle, $serveur='') {
+  return spip_abstract_fetch(spip_abstract_select(array('id_article', 'email_unique', 'site_obli', 'site_unique', 'message', 'texte'),
+						  array('petitions'),
+						  array("id_article=".intval($id_article)),
+						  '','','','',1, 
+						  $table, $id_boucle, $serveur));
 }
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 function sql_chapo($id_article)
 {
- return spip_fetch_array(spip_query("
-SELECT	chapo
-FROM	spip_articles
-WHERE	id_article='$id_article' AND statut='publie'
-"));
+  return spip_abstract_fetch(spip_abstract_select(array(chapo),
+			      array('articles'),
+			      array("id_article='$id_article'",
+				    "statut='publie'")));
 }
 
 // Calcul de la rubrique associee a la requete
@@ -331,16 +328,18 @@ WHERE	id_article='$id_article' AND statut='publie'
 function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
-		$row = spip_fetch_array(spip_query(
-		"SELECT lang FROM spip_rubriques WHERE id_rubrique='$id'"));
+	  $row = spip_abstract_fetch(spip_abstract_select(array('lang'),
+							  array('rubriques'),
+							  array("id_rubrique='$id'")));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array ($id, $lang);
 	}
 
 	if ($id  = intval($contexte['id_breve'])) {
-		$row = spip_fetch_array(spip_query(
-		"SELECT id_rubrique, lang FROM spip_breves WHERE id_breve='$id'"));
+	  $row = spip_abstract_fetch(spip_abstract_select(array('id_rubrique', 'lang'),
+							  array(breves), 
+							  array("id_breve='$id'")));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -348,19 +347,22 @@ function sql_rubrique_fond($contexte, $lang) {
 	}
 
 	if ($id = intval($contexte['id_syndic'])) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique
-		FROM spip_syndic WHERE id_syndic='$id'"));
+	  $row = spip_abstract_fetch(spip_abstract_select(array(id_rubrique),
+							  array(syndic),
+							  array("id_syndic='$id'")));
 		$id_rubrique_fond = $row['id_rubrique'];
-		$row = spip_fetch_array(spip_query("SELECT lang
-		FROM spip_rubriques WHERE id_rubrique='$id_rubrique_fond'"));
+		$row = spip_abstract_fetch(spip_abstract_select(array(lang),
+								array(rubriques),
+								array("id_rubrique='$id_rubrique_fond'")));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array($id_rubrique_fond, $lang);
 	}
 
 	if ($id = intval($contexte['id_article'])) {
-		$row = spip_fetch_array(spip_query("SELECT id_rubrique,lang
-		FROM spip_articles WHERE id_article='$id'"));
+	  $row = spip_abstract_fetch(spip_abstract_select(array('id_rubrique', 'lang'),
+							  array('articles'),
+							  array("id_article='$id'")));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];

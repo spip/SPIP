@@ -39,7 +39,6 @@ include_ecrire('inc_serialbase.php3');
 // outils pour debugguer le compilateur
 #include_local("inc-compilo-debug.php3"); # desactive
 
-
 //
 // Calculer un <INCLURE()>
 //
@@ -146,7 +145,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($type_boucle == 'boucle')
 	    return ("\n	return $return;");
 
-	// Cas general : appeler la fonction de definition de la boucle
+	// Toute autre boucle
+	
+	// appeler la fonction de definition de la boucle
 	$f = 'boucle_'.strtoupper($type_boucle);	// definition perso
 	if (!function_exists($f)) $f = $f.'_dist';			// definition spip
 	if (!function_exists($f)) $f = 'boucle_DEFAUT';		// definition par defaut
@@ -172,7 +173,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($lang_select)
 		$boucle->select[] = 
 			// cas des tables SPIP
-			(($id_table = $table_des_tables[$type_boucle]) ? $id_table.'.' : '')
+			($id_table ? $id_table.'.' : '')
 			// cas general ({lang_select} sur une table externe)
 			. 'lang';
 
@@ -180,7 +181,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$primary_key = $table_primary[$type_boucle];
 
 	// Calculer les invalideurs si c'est une boucle non constante
-	$constant = ereg("^'[^']*'$",$return);
+	$constant = ereg("^\(?'[^']*'\)?$",$return);
+
 	if ((!$primary_key) || $constant)
 		$invalide = '';
 	else {
@@ -201,6 +203,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	}
 
 	// Cas {1/3} {1,4} {n-2,1}...
+
 	$flag_cpt = $boucle->mode_partie || // pas '$compteur' a cause du cas 0
 		strpos($return,'compteur_boucle');
 
@@ -209,45 +212,57 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	$debut = '';
 	if ($flag_cpt)
-		$debut .= "\n		\$compteur_boucle++;";
+		$debut = "\n		\$compteur_boucle++;";
 
 	if ($boucle->mode_partie)
 		$debut .= '
 		if ($compteur_boucle-1 >= $debut_boucle
 		AND $compteur_boucle-1 <= $fin_boucle) {';
-
+	
 	if ($lang_select AND !$constant)
 		$debut .= '
 			if ($x = $Pile[$SP]["lang"]) $GLOBALS[\'spip_lang\'] = $x; // lang_select';
 
-	$corps = $debut . $invalide;
+	$debut .= $invalide;
 
 	if ($boucle->doublons)
-		$corps .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
+		$debut .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
 		index_pile($id_boucle, $primary_key, $boucles)
 		. "; // doublons";
 
+	// gestion optimale des separateurs et des boucles constantes
 
-	//
-	// L'ajouter au corps
-	//
-	// Separateur ?
-	if ($boucle->separateur) {
-		$corps .= "\n			\$t1 = $return;
-		\$t0 .= ((\$t1 && \$t0) ? '"
-		. $boucle->separateur
-		. "' : '')
-		. \$t1;";
-	} else if ($constant && !$debut) {
-		$corps .= $return;
-	} else {
-		$corps .= "\n			\$t0 .= $return;";
-	}
-
+	$corps = $debut . 
+		((!$boucle->separateur) ? 
+			(($constant && !$debut) ? $return :
+			 	("\n\t\t" . '$t0 .= ' . $return . ";")) :
+		 ("\n\t\t\$t1 " .
+			((strpos($return, '$t1.') === 0) ? 
+			 (".=" . substr($return,4)) :
+			 ('= ' . $return)) .
+		  ";\n\t\t" .
+		  '$t0 .= (($t1 && $t0) ? \'' . $boucle->separateur .
+		  "' : '') . \$t1;"));
+     
 	// Fin de parties
 	if ($boucle->mode_partie)
 		$corps .= "\n		}\n";
 
+	// si le corps est une constante, ne pas appeler le serveur N fois!
+	if (ereg("^\(?'[^']*'\)?$",$corps)) {
+		// vide ?
+		if (($corps == "''") || ($corps == "('')")) {
+			if (!$boucle->numrows)
+				return 'return "";';
+			else
+				$corps = "";
+		} else {
+			$boucle->numrows = true;
+			$corps = "\n		".'for($x=$Numrows["'.$id_boucle.'"];$x>0;$x--)
+			$t0 .= ' . $corps .';';
+		}
+		$texte = '';
+	} else {
 
 	// Gestion de la hierarchie (voir inc-boucles.php3)
 	if ($boucle->hierarchie)
@@ -259,25 +274,13 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// RECHERCHE
 	list($hash_recherche, $hash_recherche_strict) = requete_hash($GLOBALS["recherche"]);';
 	}
-
-	// si le corps est une constante, ne plus appeler le serveur
-	if (ereg("^'[^']*'$",$corps)) {
-		// vide ?
-		if ($corps == "''") {
-			if (!$boucle->numrows)
-				return 'return "";';
-			else
-				$corps = "";
-		} else {
-			$boucle->numrows = true;
-			$corps = "\n		".'for($x=$Numrows["'.$id_boucle.'"];$x>0;$x--)
-			$t0 .= ' . $corps .';';
-	    }
-	} else {
 		$corps = '
 
 	// RESULTATS
-	while ($Pile[$SP] = @spip_fetch_array($result)) {'. "\n$corps\n	}\n";
+	while ($Pile[$SP] = @spip_abstract_fetch($result,"' .
+		  $boucle->sql_serveur .
+		  '")) {'. "\n$corps\n	}\n";
+		 
 
 		// Memoriser la langue avant la boucle pour la restituer apres
 		if ($lang_select) {
@@ -298,12 +301,14 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$init .= "\$result = ";
 
 
-	// En absence de champ c'est un decompte : on prend la primary pour
-	// avoir qqch (le marteau-pilon * est trop couteux, et le COUNT
-	// incompatible avec le cas general)
+	// En absence de champ c'est un decompte : 
+	// on prend la primary pour avoir qqch
+	// car le COUNT incompatible avec le cas general
+	// pour les tables sans primary, prendre * mais faudrait trouver mieux
 	$init .= "spip_abstract_select(\n\t\tarray(\"". 
-		((!$boucle->select) ? $id_field :
-		join("\",\n\t\t\"", array_unique($boucle->select))) .
+		(($boucle->select) ? 
+			join("\",\n\t\t\"", array_unique($boucle->select)) :
+			((strlen($id_field) > 1) ? $id_field : '*')) .
 		'"), # SELECT
 		array("' .
 		join('","', array_unique($boucle->from)) .
@@ -320,27 +325,32 @@ function calculer_boucle($id_boucle, &$boucles) {
 		'".$boucle->sous_requete."', # sous
 		".$boucle->compte_requete.", # compte
 		'".$id_table."', # table
-		'".$boucle->id_boucle."'); # boucle";
-
+		'".$boucle->id_boucle."', # boucle
+		'".$boucle->sql_serveur."'); # serveur";
 
 	$init .= "\n	".'$t0 = "";
 	$SP++;';
 	if ($flag_cpt)
 		$init .= "\n	\$compteur_boucle = 0;";
 
-	$boucle->mode_partie.$boucle->partie.$boucle->total_parties."  ";
+
 	if ($boucle->mode_partie)
 		$init .= calculer_parties($boucle->partie,
 			$boucle->mode_partie,
 			$boucle->total_parties,
 			$id_boucle);
 	else if ($boucle->numrows)
-		$init .= "\n	\$Numrows['$id_boucle'] = @spip_num_rows(\$result);";
+		$init .= "\n	\$Numrows['" .
+			$id_boucle .
+			"'] = @spip_abstract_count(\$result,'" .
+			$boucle->sql_serveur .
+			"');";
 
 	//
 	// Conclusion et retour
 	//
-	$conclusion = "\n	@spip_free_result(\$result);";
+	$conclusion = "\n	@spip_abstract_free(\$result,'" .
+	  $boucle->sql_serveur . "');";
 
 	return $texte . $init . $corps . $conclusion;
 }
@@ -358,8 +368,10 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
 
 	// nombre total avant partition
-	$retour = "\n\n	// Partition\n	"
-	.'$nombre_boucle = @spip_num_rows($result);';
+	$retour = "\n\n	// Partition\n	" .
+		'$nombre_boucle = @spip_abstract_count($result,"' .
+		$boucle->sql_serveur .
+		'");';
 
 	ereg("([+-/])([+-/])?", $mode_partie, $regs);
 	list(,$op1,$op2) = $regs;
@@ -404,12 +416,6 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 
 	return $retour;
 }
-
-function nom_de_fonction($nom)
-{
-  return 'BOUCLE' . ereg_replace("-","_", $nom) . '_';
-}
-
 
 // Production du code PHP a partir de la sequence livree par le phraseur
 // $boucles est passe par reference pour affectation par index_pile.
@@ -519,7 +525,9 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
 	$boucles = '';
 	spip_timer('calcul_skel');
+
 	include_local("inc-$gram-squel.php3");
+
 	$racine = parser($squelette, '',$boucles, $nom);
 #	include_local('inc-compilo-debug.php3');
 #	 afftable($racine);
@@ -654,8 +662,9 @@ function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
 
 	if ($GLOBALS['var_debug'])
 		squelette_debug_compile($nom, $sourcefile, $squelette_compile);
-
+#	spip_log($squelette_compile);
 	return $squelette_compile;
+
 }
 
 ?>
