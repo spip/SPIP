@@ -140,6 +140,7 @@ else {
 
 		// Passer la main au debuggueur le cas echeant 
 		if ($var_debug) {
+			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile('');
 			exit;
 		} else if (count($tableau_des_erreurs) > 0

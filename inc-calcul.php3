@@ -96,9 +96,11 @@ function charger_squelette ($squelette) {
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
 		if ($GLOBALS['var_debug']
-		AND $GLOBALS['debug_objet'] == $nom
-		AND $GLOBALS['debug_affiche'] == 'code')
+		    AND $GLOBALS['debug_objet'] == $nom
+		    AND $GLOBALS['debug_affiche'] == 'code') {
+			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile ($skel_code);
+		}
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
@@ -135,7 +137,6 @@ function cherche_page ($cache, $contexte, $fond)  {
 	$lang ? $lang : lire_meta('langue_site')))
 		list($id_rubrique_fond, $lang) = $r;
 
-
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 
@@ -155,9 +156,11 @@ function cherche_page ($cache, $contexte, $fond)  {
 
 		// Passer la main au debuggueur)
 		if ($GLOBALS['var_debug']
-		AND $GLOBALS['debug_objet'] == $fonc
-		AND $GLOBALS['debug_affiche'] == 'resultat')
+		    AND $GLOBALS['debug_objet'] == $fonc
+		    AND $GLOBALS['debug_affiche'] == 'resultat') {
+			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile ($page['texte']);
+		}
 	}
 
 	// Nettoyer le resultat si on est fou de XML
