@@ -517,7 +517,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_contenu_articles' => 'Contentuto degli articoli',
 'info_contribution' => 'contributi dei forum',
 'info_copyright' => '&egrave; un software libero distribuito <a href=\'http://www.softwarelibero.it/gnudoc/gpl.it.txt\'>sotto licenza GPL.</a>',
-'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito di <a href=\'http://www.spip.net/it_\'>SPIP</a>.',
+'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito di <a href=\'http://www.spip.net/it\'>SPIP</a>.',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creation_mots_cles' => 'In questa pagina &egrave; possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',

@@ -504,7 +504,7 @@ Dankon pro via partopreno
 'info_contenu_articles' => 'Enhavo de la artikoloj',
 'info_contribution' => 'kontribua&#309;oj por la forumo',
 'info_copyright' => 'estas libera programo distribuata <a href=\'copyright_fr.html\'>sub GPL licenco.</a>',
-'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo_\'>http://www.spip.net/eo_</a>.',
+'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo\'>http://www.spip.net/eo</a>.',
 'info_cours_edition' => 'Viaj nun eldonataj artikoloj',
 'info_creation_mots_cles' => '&#264;i tie, bonvolu starigi kaj konfiguri la &#349;losilvortojn de la teksejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',

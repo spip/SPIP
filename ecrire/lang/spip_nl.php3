@@ -48,7 +48,7 @@ $GLOBALS['i18n_spip_nl'] = array(
 'avis_erreur_fonction_contexte' => 'Programmafout. Deze functie kan niet worden opgeroepen in deze context.',
 'avis_erreur_mysql' => 'MySQL fout',
 'avis_erreur_sauvegarde' => 'Backup fout (@type@ @id_objet@) !',
-'avis_erreur_version_archive' => '<B>Opgelet! Het bestand @archive@ komt overeen met een andere
+'avis_erreur_version_archive' => '<MODIF> <B>Opgelet! Het bestand @archive@ komt overeen met een andere
     SPIP-versie dan deze die is ge&iuml;nstalleerd.</B>Dit kan voor
  grote moeilijkheden zorgen : risico op het wissen van de databank,
  ontregeling van de website, enz. Ga niet verder met de invoer
@@ -520,7 +520,7 @@ Bedankt voor je deelname
 'info_contenu_articles' => 'Inhoud van de artikels',
 'info_contribution' => 'Bijdragen aan het forum',
 'info_copyright' => 'is vrije software verdeeld <a href=\'copyright_fr.html\'>onder GPL-licentie.</a>',
-'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl_\'>http://www.spip.net/nl_</a>.',
+'info_copyright_doc' => '<MODIF> Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl\'>http://www.spip.net/nl</a>.',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creation_mots_cles' => 'Cre&euml;er en configureer hier de trefwoorden van de site',
 'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)',
@@ -691,8 +691,9 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_multi_cet_article' => 'Gerbuikte taal in dit artikel is&nbsp;:',
 'info_multi_cette_rubrique' => 'Gerbuikte taal in deze rubriek is&nbsp;:',
 'info_multi_herit' => '<MODIF> taal van het ouderartikel',
-'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
+'info_multi_langues_choisies' => 'Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
+  Talen die al in gebruik zijn (als eerste in de lijst getoond) kunnen niet geschrapt worden.
+  Opgelet&nbsp;: alleen de in het vet weergegeven talen worden in het publicatiesysteem ge&iuml;ntegreerd.',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken&nbsp;?',
 'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap&nbsp;?',
 'info_multilinguisme' => 'Meertaligheid',
@@ -1075,7 +1076,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'login_login2' => 'Login (naam voor aanmelding bij deze site):',
 'login_login_pass_incorrect' => '(Foutieve loginnaam of paswoord).',
 'login_motpasseoublie' => 'Paswoord&nbsp;vergeten&nbsp;?',
-'login_non_securise' => 'Opgepast, dit formuilier is niet beveiligd.
+'login_non_securise' => '<MODIF> Opgepast, dit formuilier is niet beveiligd.
 
    Als je wil dat derden je paswoord niet kunnen onderscheppen
 
@@ -1087,6 +1088,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'login_pass2' => 'Paswoord&nbsp;:',
 'login_preferez_refuser' => '<b>Als je verkiest om koekies te weigeren</b>, is een andere (minder veilige) methode voor verbinding mogelijk &nbsp;:',
 'login_recharger' => 'Pagina hernieuwen',
+'login_rester_identifie' => 'Enkele dagen aangemeld blijven',
 'login_retour_public' => 'Terug naar de publieke site',
 'login_retour_site' => 'Terug naar de publieke site',
 'login_retoursitepublic' => 'Terug naar de publieke site',
@@ -1255,7 +1257,7 @@ verbinding maken met de site
 'texte_admin_effacer_01' => 'Met dit commando vernietig je de  <i>volledige</i> inhoud van de databank,
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
 'texte_admin_tech_01' => 'Deze optie laat je toe de inhoud van de databank te bewaren in de map <i>ecrire/data/</i>. Vergeet ook niet de map <i>IMG/</i>, die alle afbeeldingen en bijlagen bij de artikels en rubrieken bevat, integraal te bewaren.',
-'texte_admin_tech_02' => 'Opgelet: deze reservekopie kan ENKEL worden teruggezet
+'texte_admin_tech_02' => '<MODIF> Opgelet: deze reservekopie kan ENKEL worden teruggezet
  op een site met dezelfde SPIP-versie. Vaak wordt de
  fout gemaakt om een reservekopie te maken alvorens SPIP
  te updaten ... Voor meer info, kan je <a href="http://www.spip.net/fr_article1489.html">de documentatie van SPIP</a> er op naslaan.',
@@ -1442,7 +1444,7 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
  <li> de taal die gebruikt moet worden op de formulieren van de publieke site&nbsp;;</li>
  <li> de taal die standaard wordt voorgesteld in het private gedeelte.</li></ul>',
 'texte_signification' => 'De rode balkjes stellen alle samengetelde bezoeken weer (totaal van alle subrubrieken), de groene balkjes het aantal bezoeken voor elke rubriek.',
-'texte_sous_titre' => 'Ondertitle',
+'texte_sous_titre' => 'Ondertitel',
 'texte_statistiques_visites' => '(donkere balkjes :  zondag / donkere lijn : evolutie van het gemiddelde)',
 'texte_statut_attente_validation' => 'wachten op goedkeuring',
 'texte_statut_en_cours_redaction' => 'in redactie',
@@ -1531,9 +1533,9 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_image_redacteur_02' => 'Redacteur',
 'titre_image_visiteur' => 'Bezoeker',
 'titre_joindre_document' => 'Document toevoegen',
-'titre_langue_article' => '<NEW> LANGUE DE L\'ARTICLE',
-'titre_langue_breve' => '<NEW> LANGUE DE LA BR&Egrave;VE',
-'titre_langue_trad_article' => '<NEW> LANGUE ET TRADUCTIONS DE L\'ARTICLE',
+'titre_langue_article' => 'TAAL VAN HET ATIKEL',
+'titre_langue_breve' => 'TAAL VAN HET NIEUWSBERICHT',
+'titre_langue_trad_article' => 'TAAL EN VERTALINGEN VAN HET ARTIKEL',
 'titre_les_articles' => 'ARTIKELS',
 'titre_liens_entrants' => 'Inkomende koppelingen van vandaag',
 'titre_mots_cles' => 'TREFWOORDEN',

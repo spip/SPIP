@@ -519,7 +519,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_contenu_articles' => 'Contido dos artigos',
 'info_contribution' => 'contribuci&oacute;ns no foro',
 'info_copyright' => '&eacute; un programa libre distribuido <a href=\'copyright_fr.html\'>baixo licencia GPL.</a>',
-'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.spip.net/gl_\'>http://www.spip.net/gl_</a>.',
+'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.spip.net/gl\'>http://www.spip.net/gl</a>.',
 'info_cours_edition' => 'Os teus artigos en proceso de edici&oacute;n',
 'info_creation_mots_cles' => 'Crea e configura eiqu&iacute; as palabras chave do lugar',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as valeiras.)',
