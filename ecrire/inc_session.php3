@@ -271,15 +271,22 @@ function supprime_cookie_session () {
 
 // $login est optionnel
 function affiche_formulaire_login ($login, $redirect) {
-	if ($GLOBALS['flag_ecrire'])
-		$zap = "../";
+	if ($GLOBALS['flag_ecrire']) $dir = "../";
 
-	echo "<form action='$zap"."spip_cookie.php3' method='post'>\n";
-	echo "Login <input type='text' name='session_login' value='$login' size=10 style='font-size: 10pt'><br>\n";
-	echo "Mot de passe <input type='password' name='session_password' value='' size=10 style='font-size: 10pt'><br>\n";
-	if ($redirect)
-		echo "<input type='hidden' name='redirect' value='$redirect'>";
-	echo "<input type='submit' name='submit' value='Valider'>\n";
+	echo "<form action='$dir"."spip_cookie.php3' method='post'>\n";
+
+	echo "<fieldset>\n";
+
+	echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
+	echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'><p>\n";
+
+	echo "<label><b>Mot de passe</b><br></label>";
+	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
+
+	echo "<input type='hidden' name='redirect' value='$redirect'>";
+	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
+
+	echo "</fieldset>\n";
 
 	echo "</form>";
 }
