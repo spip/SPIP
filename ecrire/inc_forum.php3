@@ -133,7 +133,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-public-24.gif";
 			$valider = 'valid_forum';
 			$valider_repondre = true;
-			$supprimer = true;
+			$supprimer = 'supp_forum';
 			break;
 		default:
 			return;
