@@ -265,7 +265,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 		else {
 			// pas de vignette
 			echo "<div align='center' style='border: 0px; padding: 2px; background-color: #f0e8e4'>\n";
-			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($extension);
+			list($icone, $largeur_icone, $hauteur_icone) = vignette_par_defaut($type_extension);
 			if ($icone) {
 				echo "<img src='$icone' width='$largeur_icone' height='$hauteur_icone' align='right'>\n";
 			}
