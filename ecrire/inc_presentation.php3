@@ -1501,7 +1501,7 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "stat_depuis") {
-		onglet(_T('icone_repartition_actuelle'), "statistiquesphp3", "popularite", $onglet);
+		onglet(_T('icone_repartition_actuelle'), "statistiques.php3", "popularite", $onglet);
 		onglet(_T('onglet_repartition_debut'), "statistiques.php3?critere=debut", "debut", $onglet);
 
 	}
