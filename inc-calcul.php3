@@ -462,17 +462,16 @@ function calculer_page_globale($fond) {
 	if ($GLOBALS['lang'])
 		$contexte['lang'] = $GLOBALS['lang'];
 
-	$contexte_inclus = $contexte; // Par souci d'homogeneite (utile pour #EXPOSER)
-
 	// Analyser les URLs personnalisees (inc-urls-...)
 	recuperer_parametres_url($fond, $fichier_requete);
-	$lang = lire_meta('langue_site');
+	$contexte_inclus = $contexte; // Par souci d'homogeneite (utile pour #EXPOSER)
 
 	//
 	// Affiner le choix du squelette :
 	// calcul de la rubrique associee a la requete
 	// + selection de la langue
 	//
+	$lang = lire_meta('langue_site');
 	if ($contexte['lang']) {
 		$lang = $contexte['lang'];	// l'URL peut fixer lang=xx, mais inc-urls peut aussi agir sur $contexte[lang]
 	}
