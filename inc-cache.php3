@@ -142,9 +142,11 @@ function creer_repertoire($base, $subdir) {
 
 
 function purger_repertoire($dir, $age, $regexp = '') {
-	$handle = opendir($dir);
+	$handle = @opendir($dir);
+	if (!$handle) return;
+
 	$t = time();
-	while (($fichier = readdir($handle)) != '') {
+	while (($fichier = @readdir($handle)) != '') {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
