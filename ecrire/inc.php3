@@ -244,7 +244,7 @@ $cookie_admin = $HTTP_COOKIE_VARS['spip_admin'];
 //
 
 function changer_statut_forum($id_forum, $statut) {
-	global $connect_statut, $connect_toutes_rubriques;
+	global $connect_statut, $connect_toutes_rubriques, $dossier_cache;
 
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) return;
 
@@ -271,7 +271,10 @@ function changer_statut_forum($id_forum, $statut) {
 		unset($fichiers);
 		if ($result) while ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
-			@unlink("../CACHE/$fichier");
+			if ($dossier_cache[0] == '/')
+				@unlink("$dossier_cache/$fichier");
+			else
+				@unlink("../$dossier_cache/$fichier");
 			$fichiers[] = $fichier;
 		}
 		if ($fichiers) {
