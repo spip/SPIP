@@ -42,6 +42,7 @@ function creer_pass_aleatoire($longueur = 8, $sel = "") {
 // faible via les URLs (suivi RSS, iCal...)
 //
 function low_sec($id_auteur) {
+	id_auteur = intval($id_auteur); // jamais trop prudent ;)
 	$query = "SELECT * FROM spip_auteurs WHERE id_auteur = $id_auteur";
 	$result = spip_query($query);
 
