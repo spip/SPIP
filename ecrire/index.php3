@@ -106,6 +106,7 @@ if ($spip_display != 4) {
 	$nb_forum = $result['cnt'];
 
 	if ($nb_forum) {
+		if ($connect_statut == "0minirezo") echo afficher_plus("controle_forum.php3");
 		echo "<b>"._T('onglet_messages_publics')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		echo "<li><b>".$nb_forum."</b>";
