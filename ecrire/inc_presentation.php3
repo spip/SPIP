@@ -7,6 +7,9 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
+include_ecrire ("Include/PHP4/calendrier.php");
+include_ecrire ("Include/MySQL3/calendrier.php");
+include_ecrire ("Include/HTML4/calendrier.php");
 
 
 //
@@ -2411,12 +2414,11 @@ else {
 		echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
 		echo _T('icone_agenda');
 
-			include_ecrire("inc_agenda.php3");
 			
 			echo "<table><tr>";
 			echo "<td valign='top' width='200'>";
 				echo "<div>";
-				agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+			echo http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
 				echo "</div>";
 			echo "</td>";
 			if ($afficher_cal) {
@@ -2424,7 +2426,9 @@ else {
 				echo "<td valign='top' width='200'>";
 				echo "<div>&nbsp;</div>";
 				echo "<div style='color: black;'>";
-					afficher_taches();
+	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
+	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
 				echo "</div>";
 				echo "</td>";
 			}
