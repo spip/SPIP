@@ -329,11 +329,14 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if (!$auteur) $auteur = $nom_session;
 		if (!$email_auteur) $email_auteur = $nom_email;
 
+		if ($forums_publics == "abo")
+			$disabled = ' Disabled'; 
+
 		$ret .= "\n"._T('forum_votre_nom');
-		$ret .= "<BR>\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".entites_html($auteur)."\" SIZE='40'><BR>\n";
+		$ret .= "<BR>\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".entites_html($auteur)."\" SIZE='40'$disabled><BR>\n";
 
 		$ret .= _T('forum_votre_email');
-		$ret .= "<br>\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'></div>";
+		$ret .= "<br>\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'$disabled></div>";
 	}
 
 	if ($afficher_texte !="non") $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='"._T('forum_voir_avant')."'></DIV>";
@@ -366,6 +369,12 @@ function ajout_forum() {
 	$auteur = addslashes($auteur);
 	$retour_forum = rawurldecode($retour_forum);
 	$forums_publics = get_forums_publics($forum_id_article);
+
+	// ne pas autoriser de changement de nom si le forum est sur abonnement
+	if ($forums_publics == "abo") {
+		$auteur = $auteur_session['nom'];
+		$email_auteur = $auteur_session['email'];
+	}
 
 	if (strlen($confirmer) > 0 AND !verifier_action_auteur("ajout_forum $forum_id_rubrique $forum_id_parent $forum_id_article $forum_id_breve $forum_id_syndic $alea", $hash)) {
 		@header("Location: $retour_forum");
