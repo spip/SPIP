@@ -26,6 +26,12 @@ $mysql_profile = false;
 // faut-il autoriser SPIP a compresser les pages a la volee quand le navigateur l'accepte ?
 $auto_compress = true;
 
+// langue par defaut du site
+$i18nlang = 'fr';
+
+// langues proposees dans l'espace prive (il faut aussi le fichier i18n/spip_lang.php3)
+$all_langs = 'fr,en';
+
 //
 // 	*** Fin du parametrage ***
 //
@@ -636,6 +642,15 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 			break;
 		}
 	}
+}
+
+
+//
+// Fonctions d'i18n
+//
+function _T($text, $args='') {
+	include_ecrire('inc_gettext.php3');
+	return spip_gettext($text, $args, $GLOBALS['i18nlang']);
 }
 
 
