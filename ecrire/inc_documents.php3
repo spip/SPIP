@@ -298,9 +298,14 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
-	global $options;
+	global $options, $id_document_deplie;
 
 
+	if ($GLOBALS['id_document'] > 0) {
+		$id_document_deplie = $GLOBALS['id_document'];
+	}
+	if ($id_document == $id_document_deplie) $flag_deplie = true;
+	
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
 	$document = fetch_document($id_document);
@@ -332,7 +337,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	if ($mode == 'document') {
 		debut_cadre_enfonce("doc-24.gif");
 		echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
-		echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
+		if ($flag_deplie) echo bouton_block_visible("doc_vignette $id_document,document $id_document");
+		else echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
+		
 		echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre_aff)."</font></b>";
 		echo "</div>\n";
 
@@ -361,7 +368,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_vignette);
-			echo debut_block_invisible($block);
+			if ($flag_deplie) echo debut_block_visible($block);
+			else  echo debut_block_invisible($block);
+
 			echo "<b>Vignette personnalis&eacute;e</b>";
 			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
@@ -391,7 +400,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('mode', 'vignette');
 			
 			if ($options == 'avancees'){
-				echo debut_block_invisible($block);
+				if ($flag_deplie) echo debut_block_visible($block);
+				else  echo debut_block_invisible($block);
+			
 				echo "<b>Vignette par d&eacute;faut</b>";
 	
 				
@@ -406,7 +417,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 		$block = "document $id_document";
 
-		echo debut_block_invisible($block);
+		if ($flag_deplie) echo debut_block_visible($block);
+		else  echo debut_block_invisible($block);
+		
 		echo "<p></p><div style='border: 1px solid #666666; padding: 0px; background-color: #f0f0f0;'>";	
 
 		echo "<div style='padding: 5px;'>";	
@@ -494,6 +507,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire, $options;
 	global $clean_link;
+	
 	
 	if ($flag_modif){
 		$image_link = new Link('../spip_image.php3');
@@ -636,6 +650,14 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	global $clean_link;
 	global $options;
 	global $id_doublons;
+
+
+	if ($GLOBALS['id_document'] > 0) {
+		$id_document_deplie = $GLOBALS['id_document'];
+	}
+
+	
+	if ($id_document == $id_document_deplie) $flag_deplie = true;
 	
  	$doublons = $id_doublons['documents'].",";
 
@@ -669,7 +691,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		debut_cadre_enfonce("doc-24.gif");
 		//echo "<div style='border: 1px dashed #aaaaaa; padding: 0px; background-color: #e4e4e4;'>\n";
 			echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
-			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
+			if ($flag_deplie) echo bouton_block_visible("doc_vignette $id_document,document $id_document");
+			else  echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
 			echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre).propre($titre_fichier)."</font></b>";
 			echo "</div>\n";
 
@@ -698,7 +721,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_vignette);
-			echo debut_block_invisible($block);
+			if ($flag_deplie) echo debut_block_visible($block);
+			else  echo debut_block_invisible($block);
 			echo "<b>Vignette personnalis&eacute;e</b>";
 			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
 			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
@@ -728,7 +752,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$link->addVar('mode', 'vignette');
 			
 			if ($options == 'avancees'){
-				echo debut_block_invisible($block);
+				if ($flag_deplie) echo debut_block_visible($block);
+				else  echo debut_block_invisible($block);
 				echo "<b>Vignette par d&eacute;faut</b>";
 	
 				
@@ -759,7 +784,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 		$block = "document $id_document";
 
-		echo debut_block_invisible($block);
+		if ($flag_deplie) echo debut_block_visible($block);
+		else  echo debut_block_invisible($block);
 		if (ereg(",$id_document,", "$doublons")) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
 			echo "<div align=center>&lt;doc$id_document&gt;</div>\n";
@@ -835,7 +861,10 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 		$block = "image $id_document";
 		echo "<div style='padding: 2px; background-color: #e4e4e4; text-align: left; color: black;'>";	
-		echo bouton_block_invisible("$block");
+
+		if ($flag_deplie) echo bouton_block_visible("$block");
+		else  echo bouton_block_invisible("$block");
+
 		echo "<font size=1 face='arial,helvetica,sans-serif'>Image : </font> <b><font size=2>".propre($titre).propre($titre_fichier)."</font></b>";
 		echo "</div>\n";
 
@@ -880,7 +909,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if (!ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
 		}
 	
-		echo debut_block_invisible($block);
+		if ($flag_deplie) echo debut_block_visible($block);
+		else  echo debut_block_invisible($block);
 			if (ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
 			echo "\n<div align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>$largeur x $hauteur pixels<br></font></div>\n";
 
