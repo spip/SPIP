@@ -329,7 +329,7 @@ if ($spip_session) {
 // Gestion des statistiques par article
 //
 
-if ($id_article AND lire_meta("activer_statistiques") != "non" AND !$flag_preserver) {
+if (lire_meta("activer_statistiques") != "non" AND !$flag_preserver) {
 	include_ecrire("inc_connect.php3");
 	include_local ("inc-stats.php3");
 	if ($db_ok) $stats = ecrire_stats();

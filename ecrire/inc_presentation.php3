@@ -433,7 +433,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			$s = affdate($date);
 			if ($activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
-				$s .= "<br><font size=\"1\">($visites&nbsp;visites)</font>";
+				$s .= "<br><font size=\"1\">(<a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a>)</font>";
 			}
 			$vals[] = $s;
 
@@ -925,9 +925,12 @@ function barre_onglets($rubrique, $onglet){
 	debut_onglet();
 	
 	if ($rubrique == "statistiques"){
-		onglet("R&eacute;partition des entr&eacute;es", "statistiques.php3", "repartition", $onglet, "statistiques-24.gif");
+		onglet("&Eacute;volution des visites", "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
+		onglet("R&eacute;partition des entr&eacute;es", "statistiques.php3", "repartition", $onglet, "");
+		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+		if ($activer_statistiques_ref == "oui")	onglet("Les referers du jour", "statistiques_referers.php3", "referers", $onglet, "");
 		onglet("Articles r&eacute;cents", "statistiques_recents.php3", "recents", $onglet, "article-24.gif");
-		onglet("Tous les articles", "statistiques_tous.php3", "tous", $onglet, "article-24.gif");
+		onglet("Tous les articles", "statistiques_tous.php3", "tous", $onglet, "");
 	}
 	
 	if ($rubrique == "administration"){
@@ -1257,7 +1260,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques){
 	bandeau_barre_verticale();
 		echo "<td background=''>";
-			icone_bandeau_principal ("Statistiques du site", "statistiques.php3", "administration-48.gif", "administration", $rubrique);
+			icone_bandeau_principal ("Statistiques du site", "statistiques_visites.php3", "administration-48.gif", "administration", $rubrique);
 		echo "</td>";
 	}
 	echo "<td background='' width='100%'>   </td>";
@@ -1326,7 +1329,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			}
 		}
 		else if ($rubrique == "administration"){
-			icone_bandeau_secondaire ("Statistiques des visites", "statistiques.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
+			icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
 			if ($connect_toutes_rubriques) {
 				icone_bandeau_secondaire ("Configuration du site", "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
 				icone_bandeau_secondaire ("Gestion de la base", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
@@ -1567,7 +1570,10 @@ est distribu&eacute; <a href='gpl.txt'>sous licence GPL</a>
 
 <?php
 if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
-	echo "<br>Les icones de l'interface sont distribu&eacute;es en GPL par <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>";
+	echo "<br>Les icones de l'interface sont distribu&eacute;s en GPL par <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>";
+}
+if (ereg("statistiques_visites.php3$", $GLOBALS['REQUEST_URI']) OR ereg("statistiques_referers.php3$", $GLOBALS['REQUEST_URI'])) {
+	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>,<br> distribu&eacute; en GPL par Jean-Pierre D&eacute;z&eacute;lus.";
 }
 ?>
 </div></blockquote>
