@@ -2267,53 +2267,13 @@ else {
 	
 	
 	
-		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 460px;'>";
+		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
 
 		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
 		else echo "<a href='brouteur.php3' class='lien_sous'>";
 		echo _T('icone_brouteur');
 		echo "</a>";
 		
-
-		echo "<table><tr>";
-		
-		echo "<td width='150' valign='top'>";
-
-		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-		$result = spip_query($query);
-		
-		if (spip_num_rows($result) > 0) {
-			echo "<div>&nbsp;</div>";
-			$id_rubrique = $GLOBALS['id_rubrique'];
-			if ($id_rubrique > 0) {
-				$dans_rub = "&id_rubrique=$id_rubrique";
-				$dans_parent = "&id_parent=$id_rubrique";
-			}
-		
-			if ($id_rubrique > 0)
-				icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif");
-			else 
-				icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif");
-			
-
-			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif");
-		
-			$activer_breves = lire_meta("activer_breves");
-			if ($activer_breves != "non") {
-				icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif");
-			}
-			
-			if (lire_meta("activer_sites") == 'oui') {
-				icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif");
-			}
-			
-		}
-		
-		echo "</td>\n";
-		echo "<td width='10'>&nbsp;</td>";
-		echo "<td width='290' valign='top'>";
-
-
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
 			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 0,5");
 		if (spip_num_rows($vos_articles) > 0) {
@@ -2366,8 +2326,45 @@ else {
 			echo "</div>";
 			echo "</div>";
 		}
-		echo "</td></tr></table>";
-	
+
+
+		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+		$result = spip_query($query);
+		
+		if (spip_num_rows($result) > 0) {
+			echo "<div>&nbsp;</div>";
+			$id_rubrique = $GLOBALS['id_rubrique'];
+			if ($id_rubrique > 0) {
+				$dans_rub = "&id_rubrique=$id_rubrique";
+				$dans_parent = "&id_parent=$id_rubrique";
+			}
+		
+			echo "<div style='width: 140px; float: $spip_lang_left;'>";
+			if ($id_rubrique > 0)
+				icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif");
+			else 
+				icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif");
+			echo "</div>";
+			
+			echo "<div style='width: 140px; float: $spip_lang_left;'>";
+			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif");
+			echo "</div>";
+			
+			$activer_breves = lire_meta("activer_breves");
+			if ($activer_breves != "non") {
+				echo "<div style='width: 140px;  float: $spip_lang_left;'>";
+				icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif");
+				echo "</div>";
+			}
+			
+			if (lire_meta("activer_sites") == 'oui') {
+				echo "<div style='width: 140px; float: $spip_lang_left;'>";
+				icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif");
+				echo "</div>";
+			}
+			
+		}
+
 
 
 
