@@ -37,12 +37,12 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
-if ($set_lang) {
-	if (changer_langue($set_lang)) {
-		$prefs['spip_lang'] = $set_lang;
+if ($var_lang) {
+	if (changer_langue($var_lang)) {
+		$prefs['spip_lang'] = $var_lang;
 		$prefs_mod = true;
 		// Poser un cookie, pour les pages n'ayant pas acces aux meta
-		spip_setcookie('spip_lang', $set_lang, time() + 365 * 24 * 3600);
+		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
 	}
 }
 
