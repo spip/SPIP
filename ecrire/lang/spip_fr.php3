@@ -472,7 +472,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_gauche_messagerie' => 'La messagerie vous permet d\'&eacute;changer des messages entre r&eacute;dacteurs, de conserver des pense-b&ecirc;tes (pour votre usage personnel) ou d\'afficher des annonces sur la page d\'accueil de l\'espace priv&eacute; (si vous &ecirc;tes administrateur).',
 'info_gauche_numero_auteur' => 'AUTEUR NUM&Eacute;RO',
 'info_gauche_numero_breve' => 'BR&Egrave;VE NUM&Eacute;RO',
-'info_gauche_statistiques_referers' => 'Cette page pr&eacute;sente la liste des <I>referers</I>, c\'est-&agrave;-dire des sites contenant des liens menant vers votre propre site, uniquement pour aujourd\'hui: en effet, cette liste est remise &agrave; z&eacute;ro toutes les 24 heures.',
+'info_gauche_statistiques_referers' => 'Cette page pr&eacute;sente la liste des <I>referers</I>, c\'est-&agrave;-dire des sites contenant des liens menant vers votre propre site, uniquement pour aujourd\'hui&nbsp;: en effet, cette liste est remise &agrave; z&eacute;ro toutes les 24 heures.',
 'info_gauche_suivi_forum' => 'La page de <I>suivi des forums</I> est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions du forum public de cet article et vous permet de g&eacute;rer ces contributions.',
 'info_gauche_suivi_forum_2' => 'La page de <I>suivi des forums</I> est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions des forums du site, aussi bien celles du site public que de l\'espace priv&eacute; et vous permet de g&eacute;rer ces contributions.',
 'info_gauche_visiteurs_enregistres' => 'Vous trouverez ici les visiteurs enregistr&eacute;s
