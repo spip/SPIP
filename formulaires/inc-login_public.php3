@@ -100,8 +100,11 @@ function login_pour_tous($login, $cible, $action, $mode) {
 				WHERE (nom LIKE '" .addslashes($login) ."'
 				OR email LIKE '" .addslashes($login) ."')
 				AND login<>'' AND statut<>'5poubelle'"
-			)))
+			))) {
 				$row = $t;
+				$login_alt = $login; # afficher ce qu'on a tape
+				$login = $t['login'];
+			}
 		}
 
 		if ((!$row AND !$GLOBALS['ldap_present']) OR
@@ -142,7 +145,8 @@ function login_pour_tous($login, $cible, $action, $mode) {
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
 					'inscription'  => $inscription,
-					'login' => $login
+					'login' => $login,
+					'login_alt' => ($login_alt ? $login_alt : $login)
 					)
 				)
 			);
