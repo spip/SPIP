@@ -285,7 +285,7 @@ while($row = spip_fetch_array($result_message)) {
 			$result_auteurs_tmp = spip_query($query_auteurs);
 			while($row_tmp = spip_fetch_array($result_auteurs_tmp)) {
 				$id_auteur = $row_tmp["id_auteur"];
-				$auteurs_tmp[$id_message][] = typo($row_tmp["nom"]);
+				$auteurs_tmp[$id_message][] = "<a href='auteurs_edit.php3?id_auteur=$id_auteur'>".typo($row_tmp["nom"])."</a>";
 			}
 			
 			if (count($auteurs_tmp[$id_message]) > 0) echo " <font class='arial2'>".join($auteurs_tmp[$id_message],", ")."</font>";
