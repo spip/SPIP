@@ -217,7 +217,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich' title='"._T("lien_nouvelle_annonce")."'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
 			
-			if (count($les_rv[$j])>0){
+			if (is_array($les_rv[$j])){
 				echo join("\n", $les_rv[$j]);
 			}
 
