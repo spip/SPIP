@@ -3,22 +3,6 @@
 include ("inc.php3");
 include ("inc_statistiques.php3");
 
-/*$query = "SELECT * FROM spip_visites_temp WHERE date <= DATE_SUB(NOW(),INTERVAL 24 HOUR)";
-$result = spip_query($query);
-
-if (mysql_num_rows($result) > 0) {
-	ecrire_meta("date_stats_process", "$date");
-	ecrire_metas();
-	calculer_visites();
-}*/
-
-
-
-debut_page("Statistiques", "administration", "statistiques");
-
-echo "<br><br><br>";
-gros_titre("&Eacute;volution des visites<html>".aide("confstat")."</html>");
-barre_onglets("statistiques", "evolution");
 
 if ($id_article){
 	$query = "SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
@@ -28,7 +12,6 @@ if ($id_article){
 		$titre = typo($row['titre']);
 		$total_absolu = $row['visites'];
 		$val_popularite = round($row['popularite']);
-		gros_titre($titre);
 	}
 } 
 else {
@@ -40,6 +23,16 @@ else {
 	}
 }
 
+
+if($titre) $pourarticle = " pour &laquo; $titre &raquo;";
+
+debut_page("Statistiques des visites".$pourarticle, "administration", "statistiques");
+
+echo "<br><br><br>";
+gros_titre("&Eacute;volution des visites<html>".aide("confstat")."</html>");
+barre_onglets("statistiques", "evolution");
+
+if ($titre) gros_titre($titre);
 
 debut_gauche();
 
@@ -117,14 +110,23 @@ debut_gauche();
 				$numero = $classement[$l_article];
 				
 				if ($l_article == $id_article){
-					echo "\n<li value='$numero'><b>$titre</b>";
+					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a>";
+					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a></li>";
 				}
 			}
 		}
 			
 		echo "</ol>";
+
+		echo "<i><b>Comment lire ce tableau</b><br>Le rang de l'article,
+		dans le classement par popularit&eacute;, est indiqu&eacute; dans la
+		marge&nbsp;; la popularit&eacute; de l'article (une estimation du
+		nombre de visites quotidiennes qu'il recevra si le rythme actuel de
+		consultation se maintient) et le nombre de visites re&ccedil;ues
+		depuis le d&eacute;but sont affich&eacute;es dans la bulle qui
+		appara&icirc;t lorsque la souris survole le titre.</i>";
+
 		echo "</font>";
 		echo "</font>";
 		echo "</div>";
@@ -162,9 +164,9 @@ debut_gauche();
 				$numero = $classement[$l_article];
 				
 				if ($l_article == $id_article){
-					echo "\n<li value='$numero'><b>$titre</b>";
+					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a>";
+					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";
@@ -412,7 +414,7 @@ if (count($log)>0){
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo "aujourd'hui&nbsp;: $visites_today";
 		if ($val_prec > 0) echo "<br>hier&nbsp;: $val_prec";
-		if ($id_article) echo "<br>popularité&nbsp;: $val_popularite";
+		if ($id_article) echo "<br>popularit&eacute;&nbsp;: $val_popularite";
 
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
@@ -420,7 +422,8 @@ if (count($log)>0){
 		
 		if ($id_article) {
 			if ($classement[$id_article] > 0) {
-				echo "<br>".$classement[$id_article]."<sup>e</sup> sur $liste";
+				$er = ($classement[$id_article] == 1) ? "er" : "e";
+				echo "<br>".$classement[$id_article]."<sup>$er</sup> sur $liste";
 			}
 		} else {
 			echo "<font size=1>";

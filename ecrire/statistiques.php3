@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-debut_page("Statistiques", "administration", "statistiques");
+debut_page("Statistiques par rubriques", "administration", "statistiques");
 
 echo "<br><br><br>";
 gros_titre("Statistiques du site");
