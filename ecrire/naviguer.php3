@@ -377,18 +377,33 @@ if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND $flag_editable) {
 
 	if ($changer_lang) {
 		spip_log ("rubrique $id_rubrique = $changer_lang");
-		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."' WHERE id_rubrique=$coll");
+		if ($changer_lang != "herit") {
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$coll");
+		} else {
+			if ($id_parent == 0) {
+				$langue_parent = lire_meta('langue_site');
+			} else {
+				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+				$langue_parent = $row['lang'];			
+			}
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$coll");
+		}
 		calculer_langues_rubriques();
 	}
 
-	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$coll"));
+	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$coll"));
 	$langue_rubrique = $row['lang'];
-
-	$langue_default = ($langue_rubrique ? $langue_rubrique : '--');
+	$langue_choisie_rubrique = $row['langue_choisie'];
 	
+	if ($langue_choisie_rubrique == 'oui') $herit = false;
+	else $herit = true;
+
+	echo "[$langue_rubrique | $langue_choisie_rubrique]";
+
+
 	debut_cadre_enfonce("langues-24.gif");
 		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-		echo menu_langues('changer_lang', $langue_default, _T('info_multi_cette_rubrique').' ');
+		echo menu_langues('changer_lang', $langue_rubrique, _T('info_multi_cette_rubrique').' ', $herit);
 		echo "</font></center>\n";
 	fin_cadre_enfonce();
 }

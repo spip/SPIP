@@ -40,6 +40,7 @@ function creer_base() {
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
+		langue_choisie VARCHAR(3) DEFAULT 'non',
 		extra longblob NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
@@ -149,6 +150,7 @@ function creer_base() {
 		statut VARCHAR(10) NOT NULL,
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
+		langue_choisie VARCHAR(3) DEFAULT 'non',
 		extra longblob NULL,
 		PRIMARY KEY (id_rubrique),
 		KEY lang (lang),
@@ -1305,6 +1307,19 @@ function maj_base() {
 		maj_version (1.704);
 	}
 
+	if ($version_installee < 1.705) {
+		spip_query("ALTER TABLE spip_articles ADD langue_choisie VARCHAR(3) DEFAULT 'non'");
+		spip_query("ALTER TABLE spip_rubriques ADD langue_choisie VARCHAR(3) DEFAULT 'non'");
+		maj_version (1.705);
+	}
+
+	if ($version_installee < 1.707) {
+		spip_query("UPDATE spip_articles SET langue_choisie='oui' WHERE MID(lang,1,1) != '.'");
+		spip_query("UPDATE spip_articles SET lang=MID(lang,2,8) WHERE langue_choisie = 'non'");
+		spip_query("UPDATE spip_rubriques SET langue_choisie='oui' WHERE MID(lang,1,1) != '.'");
+		spip_query("UPDATE spip_rubriques SET lang=MID(lang,2,8) WHERE langue_choisie = 'non'");
+		maj_version (1.707);
+	}
 }
 
 ?>

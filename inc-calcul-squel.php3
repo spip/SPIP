@@ -917,7 +917,7 @@ function parser($texte) {
 	}
 
 	// langues : enlever le . pour les langues affectees automatiquement
-	$champs_traitement['LANG'][] = 'lang_supprimer_point';
+	//$champs_traitement['LANG'][] = 'lang_supprimer_point';
 
 	//
 	// Construire un tableau associatif des champs de chaque type
