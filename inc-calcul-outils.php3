@@ -342,18 +342,18 @@ function sql_chapo($id_article)
 function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
-	  $row = spip_abstract_fetsel(array('lang'),
-				      array('rubriques'),
-				      array("id_rubrique='$id'"));
+		$row = spip_abstract_fetsel(array('lang'),
+					array('rubriques'),
+					array("id_rubrique='$id'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array ($id, $lang);
 	}
 
 	if ($id  = intval($contexte['id_breve'])) {
-	  $row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-				      array('breves'), 
-				      array("id_breve='$id'"));
+		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+					array('breves'), 
+					array("id_breve='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -361,22 +361,22 @@ function sql_rubrique_fond($contexte, $lang) {
 	}
 
 	if ($id = intval($contexte['id_syndic'])) {
-	  $row = spip_abstract_fetsel(array('id_rubrique'),
-				      array('syndic'),
-				      array("id_syndic='$id'"));
+		$row = spip_abstract_fetsel(array('id_rubrique'),
+					array('syndic'),
+					array("id_syndic='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		$row = spip_abstract_fetsel(array('lang'),
-					    array('rubriques'),
-					    array("id_rubrique='$id_rubrique_fond'"));
+						array('rubriques'),
+						array("id_rubrique='$id_rubrique_fond'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array($id_rubrique_fond, $lang);
 	}
 
 	if ($id = intval($contexte['id_article'])) {
-	  $row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-				      array('articles'),
-				      array("id_article='$id'"));
+		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+					array('articles'),
+					array("id_article='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
