@@ -970,7 +970,7 @@ function traiter_raccourcis_generale($letexte) {
 
 function traiter_les_notes($mes_notes, $les_echap)
 {
-  $mes_notes = traiter_raccourcis_generale($mes_notes);
+  list($mes_notes,) = traiter_raccourcis_generale($mes_notes);
   if (ereg('<p class="spip">',$mes_notes))
     $mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
   else
