@@ -403,7 +403,7 @@ function retire_caches($caches)
     {
       $dir = dir_var();
       foreach ($caches as $path)
-	{ if (strpos($path, $dir) === 0)
+	{ if ((strpos($path, $dir) === 0) && (strpos($path, '../') === false))
 	    @unlink($GLOBALS['flag_ecrire'] ? ('../' . $path) : $path);
 	  else die("PIRATE");
 	}
