@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_colonne_inexistante' => 'La colonne @col@ n\'existe pas',
 'avis_connexion_echec_1' => 'La connexion au serveur MySQL a &eacute;chou&eacute;.',
 'avis_connexion_echec_2' => 'Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies.',
-'avis_connexion_echec_3' => '<B>N.B.</B> Sur de nombreux serveurs, vous devez <B>demander</B> l\'activation de votre acc&egrave;s &agrave; la base MySQL avant de pouvoir l\'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.',
+'avis_connexion_echec_3' => '<b>N.B.</b> Sur de nombreux serveurs, vous devez <b>demander</b> l\'activation de votre acc&egrave;s &agrave; la base MySQL avant de pouvoir l\'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.',
 'avis_connexion_ldap_echec_1' => 'La connexion au serveur LDAP a &eacute;chou&eacute;.',
 'avis_connexion_ldap_echec_2' => 'Revenez &agrave; la page pr&eacute;c&eacute;dente, et v&eacute;rifiez les informations que vous avez fournies.',
 'avis_connexion_ldap_echec_3' => 'Alternativement, n\'utilisez pas le support LDAP pour importer des utilisateurs.',
@@ -48,15 +48,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
-'avis_erreur_version_archive' => '<B>Attention! Le fichier @archive@ correspond &agrave;
-				une autre version de SPIP que celle que vous avez
-				install&eacute;e.</B> Vous allez au-devant de grosses
-				difficult&eacute;s: risque de destruction de votre base de
-				donn&eacute;es, dysfonctionnements divers du site, etc. Ne
-				validez pas cette demande d\'importation.<p>Pour plus
-				d\'informations, voyez <A HREF=\'http://www.spip.net/fr_article1489.html\'>
-                                la documentation de SPIP</A>.',
-'avis_espace_interdit' => '<B>Espace interdit</B><p>SPIP est d&eacute;j&agrave; install&eacute;.',
+'avis_erreur_version_archive' => '<b>Attention! Le fichier @archive@ correspond &agrave;
+    une autre version de SPIP que celle que vous avez
+    install&eacute;e.</b> Vous allez au-devant de grosses
+    difficult&eacute;s: risque de destruction de votre base de
+    donn&eacute;es, dysfonctionnements divers du site, etc. Ne
+    validez pas cette demande d\'importation.<p />Pour plus
+    d\'informations, voyez <a href=\'http://www.spip.net/fr_article1489.html\'>
+                                la documentation de SPIP</a>.',
+'avis_espace_interdit' => '<b>Espace interdit</b><p />SPIP est d&eacute;j&agrave; install&eacute;.',
 'avis_lecture_noms_bases_1' => 'Le programme d\'installation n\'a pas pu lire les noms des bases de donn&eacute;es install&eacute;es.',
 'avis_lecture_noms_bases_2' => 'Soit aucune base n\'est disponible, soit la fonction permettant de lister les bases a &eacute;t&eacute; d&eacute;sactiv&eacute;e
 		pour des raisons de s&eacute;curit&eacute; (ce qui est le cas chez de nombreux h&eacute;bergeurs).',
@@ -249,18 +249,24 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_2' => 'printemps',
 'date_saison_3' => '&eacute;t&eacute;',
 'date_saison_4' => 'automne',
+'diff_para_ajoute' => 'Paragraphe ajout&eacute;',
+'diff_para_deplace' => 'Paragraphe d&eacute;plac&eacute;',
+'diff_para_supprime' => 'Paragraphe supprim&eacute;',
+'diff_texte_ajoute' => 'Texte ajout&eacute;',
+'diff_texte_deplace' => 'Texte d&eacute;plac&eacute;',
+'diff_texte_supprime' => 'Texte supprim&eacute;',
 'dirs_commencer' => ' afin de commencer r&eacute;ellement l\'installation',
-'dirs_preliminaire' => 'Pr&eacute;liminaire : <B>R&eacute;gler les droits d\'acc&egrave;s</B>',
+'dirs_preliminaire' => 'Pr&eacute;liminaire : <b>R&eacute;gler les droits d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => '<b>Probl&egrave;me de droits d\'acc&egrave;s</b>',
-'dirs_repertoires_absents' => '<B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
-		<P>Il est probable que cela soit d&ucirc; &agrave; un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
-		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
-		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
-		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
-'dirs_repertoires_suivants' => '<B>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>@bad_dirs@.</ul> </B>
-		<P>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
-		de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.
-		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+'dirs_repertoires_absents' => '<b>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p />Il est probable que cela soit d&ucirc; &agrave; un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+  V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+  ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+  <p />Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+'dirs_repertoires_suivants' => '<b>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p />Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
+  de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.
+  <p />Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 
 
 // E
@@ -386,10 +392,9 @@ Merci de votre participation
 'forum_attention_trois_caracteres' => '<b>Attention&nbsp;!</b> votre titre fait moins de trois caract&egrave;res.',
 'forum_avez_selectionne' => 'Vous avez s&eacute;lectionn&eacute;&nbsp;:',
 'forum_cliquer_retour' => 'Cliquez <a href=\'@retour_forum@\'>ici</a> pour continuer.',
-'forum_creer_paragraphes' => '(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.',
-'forum_lien_hyper' => '<B>Lien hypertexte</B> (optionnel)',
+'forum_lien_hyper' => '<b>Lien hypertexte</b> (optionnel)',
 'forum_message_definitif' => 'Message d&eacute;finitif : envoyer au site',
 'forum_message_trop_long' => 'Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.',
 'forum_ne_repondez_pas' => 'Ne repondez pas a ce mail mais sur le forum a l\'adresse suivante :',
@@ -398,7 +403,7 @@ Merci de votre participation
 'forum_par_auteur' => 'par @auteur@',
 'forum_poste_par' => 'Message poste@parauteur@ a la suite de votre article.',
 'forum_probleme_database' => 'Probl&egrave;me de base de donn&eacute;es, votre message n\'a pas &eacute;t&eacute; enregistr&eacute;.',
-'forum_qui_etes_vous' => '<B>Qui &ecirc;tes-vous ?</B> (optionnel)',
+'forum_qui_etes_vous' => '<b>Qui &ecirc;tes-vous ?</b> (optionnel)',
 'forum_texte' => 'Texte de votre message :',
 'forum_titre' => 'Titre :',
 'forum_titre_erreur' => 'Erreur...',
@@ -610,7 +615,7 @@ Merci de votre participation
 'info_config_suivi_explication' => 'Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 'info_connexion_base' => 'Deuxi&egrave;me &eacute;tape : <B>Essai de connexion &agrave; la base</B>',
-'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
+'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</b><p /> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
 'info_connexion_mysql' => 'Premi&egrave;re &eacute;tape : <B>Votre connexion MySQL</B>',
 'info_connexion_ok' => 'La connexion a r&eacute;ussi.',
 'info_connexion_refusee' => 'Connexion refus&eacute;e',
@@ -696,11 +701,11 @@ Merci de votre participation
 		les r&eacute;dacteurs enregistr&eacute;s. Vous pouvez, ci-dessous, activer un
 		forum suppl&eacute;mentaire, r&eacute;serv&eacute; aux seuls administrateurs.',
 'info_forum_statistiques' => 'Statistiques des visites',
-'info_gauche_admin_effacer' => '<B>Cette page est uniquement accessible aux responsables du site.</B><P> Elle donne acc&egrave;s aux diff&eacute;rentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui exige d\'avoir un acc&egrave;s FTP au site Web.',
-'info_gauche_admin_tech' => '<B>Cette page est uniquement accessible aux responsables du site.</B><P> Elle donne acc&egrave;s aux diff&eacute;rentes
+'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui exige d\'avoir un acc&egrave;s FTP au site Web.',
+'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
 exige d\'avoir un acc&egrave;s FTP au site Web.',
-'info_gauche_admin_vider' => '<B>Cette page est uniquement accessible aux responsables du site.</B><P> Elle donne acc&egrave;s aux diff&eacute;rentes
+'info_gauche_admin_vider' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
 exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_gauche_auteurs' => 'Vous trouverez ici tous les auteurs du site.
@@ -723,9 +728,19 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 		mails depuis leurs serveurs. Dans ce cas, les fonctionnalit&eacute;s suivantes
 		de SPIP ne fonctionneront pas.',
 'info_hier' => 'hier&nbsp;:',
+'info_historique' => 'R&eacute;visions&nbsp;:',
+'info_historique_activer' => 'Activer le suivi des r&eacute;visions',
+'info_historique_affiche' => 'Afficher cette version',
+'info_historique_comparaison' => 'comparaison',
+'info_historique_desactiver' => 'D&eacute;sactiver le suivi des r&eacute;visions',
+'info_historique_lien' => 'Afficher l\'historique',
+'info_historique_texte' => 'Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.',
+'info_historique_titre' => 'Suivi des r&eacute;visions (versions) d\'articles',
 'info_identification_publique' => 'Votre identit&eacute; publique...',
 'info_image_aide' => 'AIDE',
 'info_image_process' => 'Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
+'info_image_process2' => '<b>N.B.</b> <i>Si aucune image n\'appara&icirc;t, alors le serveur qui h&eacute;berge votre site n\'a pas &eacute;t&eacute; configur&eacute; pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_image_process_titre' => 'M&eacute;thode de fabrication des vignettes',
 'info_impossible_lire_page' => '<B>Erreur !</B> Impossible de lire la page <tt><html>@test_proxy@</html></tt> &agrave; travers le proxy <tt>',
 'info_inclusion_directe' => 'Inclusion directe&nbsp;:',
 'info_inclusion_vignette' => 'Inclusion de la vignette&nbsp;:',
@@ -1422,9 +1437,9 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 				ins&eacute;r&eacute;s. Selon la mise en page du site public,
 				ils pourront appara&icirc;tre sous forme de documents joints.',
 'texte_documents_joints' => 'Vous pouvez autoriser l\'ajout de documents (fichiers bureautiques, images,
-	multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
-	peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
-	l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.<p>',
+ multim&eacute;dia, etc.) aux articles et/ou aux rubriques. Ces fichiers
+ peuvent ensuite &ecirc;tre r&eacute;f&eacute;renc&eacute;s dans
+ l\'article, ou affich&eacute;s s&eacute;par&eacute;ment.<p />',
 'texte_documents_joints_2' => 'Ce r&eacute;glage n\'emp&ecirc;che pas l\'insertion d\'images directement dans les articles.',
 'texte_effacer_base' => 'Effacer la base de donn&eacute;es SPIP',
 'texte_effacer_donnees_indexation' => 'Effacer les donn&eacute;es d\'indexation',
@@ -1436,13 +1451,13 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 		niveau, et enfin v&eacute;rifiez que les images apparaissent
 		toujours dans les articles.',
 'texte_fichier_authent' => '<b>SPIP doit-il cr&eacute;er les fichiers sp&eacute;ciaux <tt>.htpasswd</tt>
-		et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire <tt>ecrire/data/</tt> ?</b><p>
-		Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
-		et administrateurs en d\'autres endroits de votre site
-		(programme externe de statistiques, par exemple).<p>
-		Si vous n\'en avez pas utilit&eacute;, vous pouvez laisser cette option
-		&agrave; sa valeur par d&eacute;faut (pas de cr&eacute;ation 
-		des fichiers).',
+  et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire <tt>ecrire/data/</tt> ?</b><p />
+  Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
+  et administrateurs en d\'autres endroits de votre site
+  (programme externe de statistiques, par exemple).<p />
+  Si vous n\'en avez pas utilit&eacute;, vous pouvez laisser cette option
+  &agrave; sa valeur par d&eacute;faut (pas de cr&eacute;ation 
+  des fichiers).',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
 		login <B>@auth_login@</B>, mais celui-ci n\'existe pas/plus dans la base. 
 		Essayez de vous',
@@ -1508,7 +1523,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_nouveau_message' => 'Nouveau message',
 'texte_nouveau_mot' => 'Nouveau mot',
 'texte_nouvelle_version_spip_1' => 'Vous avez install&eacute; une nouvelle version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier <tt>inc_connect.php3</tt> du r&eacute;pertoire <tt>ecrire</tt> et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un oeil au fichier <tt>inc_connect.php3</tt> avant de le supprimer...)',
+'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier <tt>inc_connect.php3</tt> du r&eacute;pertoire <tt>ecrire</tt> et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p /> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un oeil au fichier <tt>inc_connect.php3</tt> avant de le supprimer...)',
 'texte_operation_echec' => 'Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.',
 'texte_plus_trois_car' => 'plus de 3 caract&egrave;res',
 'texte_plusieurs_articles' => 'Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',
@@ -1530,16 +1545,16 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
 'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
 'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
-		syst&eacute;matiquement et sans raison apparente, il est possible
-		que ce soit &agrave; cause de la base de donn&eacute;es
-		elle-m&ecirc;me.</b><p>
-		MySQL dispose d\'une facult&eacute; de r&eacute;paration de ses
-		tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
-		accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
-		cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
-		peut-&ecirc;tre des indices de ce qui ne va pas...<p>
-		Si le probl&egrave;me persiste, prenez contact avec votre
-		h&eacute;bergeur.<p>',
+  syst&eacute;matiquement et sans raison apparente, il est possible
+  que ce soit &agrave; cause de la base de donn&eacute;es
+  elle-m&ecirc;me.</b><p />
+  MySQL dispose d\'une facult&eacute; de r&eacute;paration de ses
+  tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
+  accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
+  cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
+  peut-&ecirc;tre des indices de ce qui ne va pas...<p />
+  Si le probl&egrave;me persiste, prenez contact avec votre
+  h&eacute;bergeur.<p />',
 'texte_restaurer_base' => 'Restaurer le contenu d\'une sauvegarde de la base',
 'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
 		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
@@ -1631,7 +1646,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_config_fonctions' => 'Configuration du site',
 'titre_config_groupe_mots_cles' => 'Configuration des groupes de mots-cl&eacute;s',
 'titre_configuration' => 'Configuration du site',
-'titre_connexion_ldap' => 'Options : <B>Votre connexion LDAP</B>',
+'titre_connexion_ldap' => 'Options : <b>Votre connexion LDAP</b>',
 'titre_dernier_article_syndique' => 'Derniers articles syndiqu&eacute;s',
 'titre_documents_joints' => 'Documents joints',
 'titre_evolution_visite' => '&Eacute;volution des visites',

@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_colonne_inexistante' => 'Kolumna @col@ nie istnieje',
 'avis_connexion_echec_1' => 'Po&#322;&#261;czenie z serwerem MySQL nie powiod&#322;o si&#281;.',
 'avis_connexion_echec_2' => 'Powr&oacute;&#263; do poprzedniej strony i zweryfikuj podane informacje.',
-'avis_connexion_echec_3' => '<B>N.B.</B> W przypadku wielu serwer&oacute;w musisz <B>poprosi&#263;</B> o uaktywnienie dost&#281;pu do bazy danych, aby m&oacute;c z niej korzysta&#263;. Je&#347;li nie mo&#380;esz si&#281; po&#322;&#261;czy&#263;, upewnij si&#281;, czy poprosi&#322;e&#347; o dost&#281;p.',
+'avis_connexion_echec_3' => '<MODIF><B>N.B.</B> W przypadku wielu serwer&oacute;w musisz <B>poprosi&#263;</B> o uaktywnienie dost&#281;pu do bazy danych, aby m&oacute;c z niej korzysta&#263;. Je&#347;li nie mo&#380;esz si&#281; po&#322;&#261;czy&#263;, upewnij si&#281;, czy poprosi&#322;e&#347; o dost&#281;p.',
 'avis_connexion_ldap_echec_1' => 'Po&#322;&#261;czenie z LDAP nie powiod&#322;o si&#281;.',
 'avis_connexion_ldap_echec_2' => 'Powr&oacute;&#263; do poprzedniej strony i zweryfikuj podane informacje.',
 'avis_connexion_ldap_echec_3' => 'Nie u&#380;ywaj wsparcia LDAP do importu u&#380;ytkownik&oacute;w.',
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'B&#322;&#261;d programowania. Ta funkcja nie powinna by&#263; wywo&#322;ywana w tym kontek&#347;cie.',
 'avis_erreur_mysql' => 'B&#322;&#261;d MySQL',
 'avis_erreur_sauvegarde' => 'B&#322;&#261;d archiwizacji (@type@ @id_objet@)!',
-'avis_erreur_version_archive' => '<B>Ostrze&#380;enie! Plik @archive@ odpowiada
+'avis_erreur_version_archive' => '<MODIF><B>Ostrze&#380;enie! Plik @archive@ odpowiada
     wersji SPIP innej, ni&#380;
     zainstalowana przez Ciebie.</b> Wi&#261;&#380;e si&#281; to z powa&#380;nymi
     trudno&#347;ciami: ryzykiem zniszczenia Twojej bazy danych,
@@ -57,7 +57,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
     spe&#322;niaj &#380;&#261;dania importu.<p>Wi&#281;cej
     informacji na <A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                  w dokumentacji SPIP</a>.',
-'avis_espace_interdit' => '<B>Obszar zabroniony</B><p>SPIP jest ju&#380; zainstalowany.',
+'avis_espace_interdit' => '<MODIF><B>Obszar zabroniony</B><p>SPIP jest ju&#380; zainstalowany.',
 'avis_lecture_noms_bases_1' => 'Program instalacyjny nie mo&#380;e odczyta&#263; nazw instalowanych baz danych.',
 'avis_lecture_noms_bases_2' => '&#379;adna baza danych nie jest dost&#281;pna, lub funkcja listingu baz danych nie dzia&#322;a
    ze wzgl&#281;d&oacute;w bezpiecze&#324;stwa(co jest cz&#281;stym przypadkiem wielu host&oacute;w).',
@@ -248,14 +248,14 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'date_saison_3' => 'lato',
 'date_saison_4' => 'jesie&#324;',
 'dirs_commencer' => ' w celu rzeczywistego rozpocz&#281;cia instalacji',
-'dirs_preliminaire' => 'Wst&#281;p: <B>Ustawienia pozwole&#324; dost&#281;pu</b>',
+'dirs_preliminaire' => '<MODIF>Wst&#281;p: <B>Ustawienia pozwole&#324; dost&#281;pu</b>',
 'dirs_probleme_droits' => '<b>Problem z pozwoleniami dost&#281;pu</b>',
-'dirs_repertoires_absents' => '<B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_absents' => '<MODIF><B>Nast&#281;puj&#261;ce katalogi nie zosta&#322;y odnalezione&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Mo&#380;liwe, &#380;e powodem tego jest nazwa, w kt&oacute;rej w niew&#322;a&#347;ciwym miejscu wystepuj&#261; du&#380;e i ma&#322;e litery.
   Sprawd&#378; nazwy pod wzgl&#281;dem ma&#322;ych i duzych liter.
   Je&#347;li rzeczywi&#347;cie wielko&#347;&#263; liter jest r&oacute;&#380;na, zmie&#324; nazwy katalog&oacute;w za pomoc&#261; dowolnego programu FTP
   <P>Po wykonaniu tej operacji b&#281;dziesz m&oacute;g&#322;',
-'dirs_repertoires_suivants' => '<B>Nast&#281;puj&#261;ce katalogi nie s&#261; udost&#281;pnione do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </B>
+'dirs_repertoires_suivants' => '<MODIF><B>Nast&#281;puj&#261;ce katalogi nie s&#261; udost&#281;pnione do zapisu&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Aby temu zapobiec, skorzystaj z klienta FTP i ureguluj konieczne prawa dost&#281;pu
   do tych katalog&oacute;w. Procedura jest wyt&#322;umaczona od A-Z w przewodniku instalacji.
   <P>Kiedy dokonasz koniecznych zmian, b&#281;dziesz m&oacute;g&#322;',
@@ -382,7 +382,7 @@ Dzi&#281;kujemy za uczestnictwo
 'forum_creer_paragraphes' => '(Aby utworzy&#263; akapity, zostaw po prostu puste linijki).',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'To forum jest moderowane&nbsp;: Tw&oacute;j wpis uka&#380;e si&#281; dopiero po weryfikacji przez administratora strony.',
-'forum_lien_hyper' => '<B>Link</B> (opcjonalny)',
+'forum_lien_hyper' => '<MODIF><B>Link</B> (opcjonalny)',
 'forum_message_definitif' => 'Wiadomo&#347;&#263; ko&#324;cowa: wy&#347;lij na stron&#281;',
 'forum_message_trop_long' => 'Twoja wiadomo&#347;&#263; jest za d&#322;uga. Maksymalna d&#322;ugo&#347;&#263; to 20000 znak&oacute;w.',
 'forum_ne_repondez_pas' => 'Nie odpowiadaj na tego maila, lecz na forum, pod nast&#281;puj&#261;cym adresem:',
@@ -391,7 +391,7 @@ Dzi&#281;kujemy za uczestnictwo
 'forum_par_auteur' => 'wg @auteur@',
 'forum_poste_par' => 'Wiadomo&#347;&#263; napisana przez@parauteur@ na temat twojego artyku&#322;u.',
 'forum_probleme_database' => 'Problem z baz&#261; danych, Twoja wiadomo&#347;&#263; nie mog&#322;a by&#263; zapisana.',
-'forum_qui_etes_vous' => '<B>Kim jeste&#347;?</B> (nieobowi&#261;zkowe)',
+'forum_qui_etes_vous' => '<MODIF><B>Kim jeste&#347;?</B> (nieobowi&#261;zkowe)',
 'forum_texte' => 'Tekst Twojej wiadomo&#347;ci:',
 'forum_titre' => 'Temat:',
 'forum_titre_erreur' => 'B&#322;&#261;d...',
@@ -608,7 +608,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_config_suivi_explication' => 'Mo&#380;esz automatycznie, za pomoc&#261; poczty elektronicznej otrzymywa&#263; og&#322;oszenia dotycz&#261;ce aktywno&#347;ci redakcyjnej tego serwisu. W tym celu powinniene&#347; si&#281; zapisa&#263; na list&#281; mailow&#261;.',
 'info_confirmer_passe' => 'Potwierd&#378; nowe has&#322;o:',
 'info_connexion_base' => 'Drugi krok: <B>Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych</B>',
-'info_connexion_ldap_ok' => '<B>Po&#322;&#261;czenie z LDAP powiod&#322;o si&#281;.B><P> Id&#378; do nast&#281;pnego kroku',
+'info_connexion_ldap_ok' => '<MODIF><B>Po&#322;&#261;czenie z LDAP powiod&#322;o si&#281;.B><P> Id&#378; do nast&#281;pnego kroku',
 'info_connexion_mysql' => 'Pierwszy krok: <B>Twoje po&#322;&#261;czenie MySQL</b>',
 'info_connexion_ok' => 'Po&#322;&#261;czenie powiod&#322;o si&#281;.',
 'info_connexion_refusee' => 'Brak po&#322;&#261;czenia',
@@ -697,11 +697,11 @@ Dzi&#281;kujemy za uczestnictwo
   zarejestrownych redaktor&oacute;w. Mo&#380;ecie tak&#380;e aktywowa&#263;
   dodatkowe forum, zarezerwowane jedynie dla admin&oacute;w.',
 'info_forum_statistiques' => 'Odwied&#378; statystyki',
-'info_gauche_admin_effacer' => '<B>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<B><P> Daje ona dost&#281;p do funkcji konserwacji technicznej.Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego procesu uwierzytelniaj&#261;cego, do kt&oacute;rego potrzebny jest dost&#281;p do FTP strony internetowej.',
-'info_gauche_admin_tech' => '<B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
+'info_gauche_admin_effacer' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<B><P> Daje ona dost&#281;p do funkcji konserwacji technicznej.Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego procesu uwierzytelniaj&#261;cego, do kt&oacute;rego potrzebny jest dost&#281;p do FTP strony internetowej.',
+'info_gauche_admin_tech' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
 funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
 , kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
-'info_gauche_admin_vider' => '<B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
+'info_gauche_admin_vider' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
 funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
 , kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
 'info_gauche_auteurs' => 'Znajdziecie tutaj informacje o wszystkich autorach serwisu.
@@ -724,9 +724,15 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
   emaili za po&#347;rednictwem ich serwer&oacute;w. W tym przypadku te funkcje
   SPIP nie b&#281;d&#261; dzia&#322;a&#322;y.',
 'info_hier' => 'wczoraj:',
+'info_historique_activer' => '<NEW>Activer le suivi des r&eacute;visions',
+'info_historique_desactiver' => '<NEW>D&eacute;sactiver le suivi des r&eacute;visions',
+'info_historique_texte' => '<NEW>Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.',
+'info_historique_titre' => '<NEW>Suivi des r&eacute;visions (versions) d\'articles',
 'info_identification_publique' => 'Twoja nazwa publiczna',
 'info_image_aide' => 'POMOC',
 'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkaj&#261;c na odpowiednim obrazku.',
+'info_image_process2' => '<NEW><b>N.B.</b> <i>Si aucune image n\'appara&icirc;t, alors le serveur qui h&eacute;berge votre site n\'a pas &eacute;t&eacute; configur&eacute; pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_image_process_titre' => '<NEW>M&eacute;thode de fabrication des vignettes',
 'info_impossible_lire_page' => '<B>B&#322;&#261;d !</B> Nie mo&#380;na odczyta&#263; strony<tt><html>@test_proxy@</html></tt> za po&#347;rednictwem proxy<tt>',
 'info_inclusion_directe' => 'Bezpo&#347;rednie do&#322;&#261;czenie&nbsp;:',
 'info_inclusion_vignette' => 'Do&#322;&#261;czenie miniaturki&nbsp;:',
@@ -1381,7 +1387,7 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'taille_octets' => '@taille@&nbsp;bytes',
 'text_article_propose_publication' => 'Artyku&#322; zatwierdzony do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; przez forum dotycz&#261;ce tego artyku&#322;u (na dole strony).',
 'texte_acces_ldap_anonyme_1' => 'Niekt&oacute;re serwery LDAP nie akceptuj&#261; dost&#281;pu anonimowego. W tym przypadku nale&#380;y poda&#263; indentyfikator dost&#281;pu, aby m&oacute;c przeszukiwa&#263; katalog. Niemniej, w wi&#281;kszo&#347;ci przypadk&oacute;w poni&#380;sze pola powinny pozosta&#263; puste.',
-'texte_actualite_site_1' => 'Ta strona grupuje aktualno&#347;ci strony i pozwala Ci &#347;ledzi&#263; Tw&oacute;j wk&#322;ad w stron&#281;. Znajdziezs tu artyku&#322;y, kt&oacute;re s&#261; w&#322;a&#347;nie redagowane, artyku&#322;y i nowo&#347;ci, na kt&oacute;rych temat mo&#380;esz si&#281; wypowiedzie&#263;, oraz przypomnienie Twojego wk&#322;adu w stron&#281;.<p><hr><p>Kiedy zaznajomisz si&#281; z interfejsem, mo&#380;esz klikn&#261;&#263; na &laquo; ',
+'texte_actualite_site_1' => '<MODIF>Ta strona grupuje aktualno&#347;ci strony i pozwala Ci &#347;ledzi&#263; Tw&oacute;j wk&#322;ad w stron&#281;. Znajdziezs tu artyku&#322;y, kt&oacute;re s&#261; w&#322;a&#347;nie redagowane, artyku&#322;y i nowo&#347;ci, na kt&oacute;rych temat mo&#380;esz si&#281; wypowiedzie&#263;, oraz przypomnienie Twojego wk&#322;adu w stron&#281;.<p><hr><p>Kiedy zaznajomisz si&#281; z interfejsem, mo&#380;esz klikn&#261;&#263; na &laquo; ',
 'texte_actualite_site_2' => 'kompletny interfejs',
 'texte_actualite_site_3' => '&raquo; aby uruchomi&#263; wi&#281;cej mo&#380;liwo&#347;ci.',
 'texte_admin_effacer_01' => 'Ta komenda usuwa <i>ca&#322;&#261;</i> zawarto&#347;&#263; bazy danych,
@@ -1445,7 +1451,7 @@ z tej strony, zostan&#261; automatycznie zablokowane.',
     ale nie zosta&#322;y bezpo&#347;rednio do niego
     do&#322;&#261;czone. Zale&#380;nie od uk&#322;adu stron publicznych,
     b&#281;d&#281; mog&#322;y pojawi&#263; si&#281; na nich jako za&#322;&#261;czniki.',
-'texte_documents_joints' => 'Mo&#380;esz autoryzowa&#263; dodawanie dokument&oacute;w tekstowych, obrazk&oacute;w,
+'texte_documents_joints' => '<MODIF>Mo&#380;esz autoryzowa&#263; dodawanie dokument&oacute;w tekstowych, obrazk&oacute;w,
 multimedi&oacute;we, itd.) do artyku&#322;&oacute;w b&#261;d&#378; rubryk. Te pliki
  mog&#261; zosta&#263; do&#322;&#261;czone do artyku&#322;u
  lub mog&#261; by&#263; u&#380;yte niezale&#380;nie.<p>',
@@ -1458,7 +1464,7 @@ multimedi&oacute;we, itd.) do artyku&#322;&oacute;w b&#261;d&#378; rubryk. Te pl
   Obrazek <B>@fichier@</B> nie przeszed&#322; (artyku&#322; @id_article@).
   Zapisz te dane, i spr&oacute;buj ponownego uaktualnienia,
 a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyku&#322;ach.',
-'texte_fichier_authent' => '<b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
   i <tt>.htpasswd-admin</tt> w katalogu <tt>ecrire/data/</tt> ?</b><p>
   Te pliki mog&#261; s&#322;u&#380;y&#263; jako ograniczenie dost&#281;pu dla autor&oacute;w
   i administrator&oacute;w do innych cz&#281;&#347;ci Twojego serwisu
@@ -1524,7 +1530,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'texte_nouveau_message' => 'Nowa wiadomo&#347;&#263;',
 'texte_nouveau_mot' => 'Nowe s&#322;owo kluczowe',
 'texte_nouvelle_version_spip_1' => 'Nowa wersja SPIP zosta&#322;a zainstalowana.',
-'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik <tt>inc_connect.php3</tt> z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku <tt>inc_connect.php3</tt> zanim go skasujesz...)',
+'texte_nouvelle_version_spip_2' => '<MODIF>Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik <tt>inc_connect.php3</tt> z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku <tt>inc_connect.php3</tt> zanim go skasujesz...)',
 'texte_operation_echec' => 'Powr&oacute;&#263; do poprzedniej strony, wybierz inn&#261; baz&#281; danych lub stw&oacute;rz now&#261;. Sprawd&#378; informacje podane przez tw&oacute;j serwis hostingowy.',
 'texte_plan_trad' => 'Ta strona s&#322;u&#380;y wizualizacji stanu przek&#322;ad&oacute;w dla wybranego j&#281;zyka.
 Strona wy&#347;wietla artyku&#322;y, kt&oacute;re s&#261; w trakcie przek&#322;adu, a tak&#380;e artyku&#322;y kt&oacute;rych przek&#322;ad zosta&#322; zaktualizowany, a tak&#380;e artyku&#322;y, kt&oacute;re nie by&#322;y jeszcze prze&#322;o&#380;one.',
@@ -1550,7 +1556,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
 'texte_recuperer_base' => 'Napraw baz&#281; danych',
 'texte_reference_mais_redirige' => 'linki z artyku&#322;&oacute;w w twoim serwisie SPIP, przekierowuj&#261;ce do innych URL-i.',
 'texte_referencement_automatique' => '<b>Zautomatyzowane dodawanie link&oacute;w</b><br>Mo&#380;esz szybko doda&#263; link do jakiej&#347; strony internetowej, wpisuj&#261;c poni&#380;ej jej adres, oraz adres jej pliku backend. SPIP automatycznie dopisze informacje, dotycz&#261;ce tej strony (tytu&#322;, opis...).',
-'texte_requetes_echouent' => '<b>Je&#347;li pewne zapytania MySQL nie udaj&#261; si&#281;
+'texte_requetes_echouent' => '<MODIF><b>Je&#347;li pewne zapytania MySQL nie udaj&#261; si&#281;
   regularnie i bez widocznego powodu, mo&#380;liwe jest
   &#380;e powodem tego jest baza danych</b><p>
   MySQL ma mo&#380;liwo&#347;&#263; naprawy poszczeg&oacute;lnych tabel
@@ -1646,7 +1652,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_config_fonctions' => 'Konfiguracja strony',
 'titre_config_groupe_mots_cles' => 'Konfiguracja grup s&#322;&oacute;w kluczowych',
 'titre_configuration' => 'Konfiguracja strony',
-'titre_connexion_ldap' => 'Opcje: <B>Twoje po&#322;&#261;czenie LDAP</b>',
+'titre_connexion_ldap' => '<MODIF>Opcje: <B>Twoje po&#322;&#261;czenie LDAP</b>',
 'titre_dernier_article_syndique' => 'Ostatnio syndykowane artyku&#322;y',
 'titre_documents_joints' => 'Za&#322;&#261;czniki',
 'titre_evolution_visite' => 'Ewolucja odwiedzin',

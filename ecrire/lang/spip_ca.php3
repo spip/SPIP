@@ -696,21 +696,9 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
   els redactors registrats. M&eacute;s avall, podeu activar un f&ograve;rum suplementari,
   reservat nom&eacute;s als adminsitradors. ',
 'info_forum_statistiques' => 'Estad&iacute;stiques de les visites',
-'info_gauche_admin_effacer' => '<B>Nom&eacute;s els administradors tenen acc&eacute;s
-  a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a
- les diferents funcions de manteniment
-t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al
- lloc Web.',
-'info_gauche_admin_tech' => '<B>Nom&eacute;s els administradors tenen acc&eacute;s
- a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a
- les diferents funcions de manteniment
-t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al
- lloc Web.',
-'info_gauche_admin_vider' => '<B>Nom&eacute;s els administradors tenen acc&eacute;s
-  a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a
- les diferents funcions de manteniment
-t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al
- lloc Web.',
+'info_gauche_admin_effacer' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_tech' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_vider' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
 'info_gauche_auteurs' => 'Aqu&iacute; hi trobareu tots els autors del lloc.
  El seu estat s\'indica pel color de la seva icona (redactor = verd; administrador = groc).',
 'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense acc&eacute;s al lloc, estan indicats amb una icona blava;
@@ -729,9 +717,15 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_groupe_important' => 'Grup important',
 'info_hebergeur_desactiver_envoi_email' => 'Alguns prove&iuml;dors d\'hostatge desactiven l\'enviament autom&agrave;tic de correus electr&ograve;nics des dels seus servidors. En aquest cas, les seg&uuml;ents funcions d\'SPIP no funcionen. ',
 'info_hier' => 'ahir:',
+'info_historique_activer' => 'Activar el seguiment de les revisions',
+'info_historique_desactiver' => 'Desactivar el seguiment de les revisions',
+'info_historique_texte' => 'El seguiment de les revisions permet conservar un hist&ograve;ric de totes les modificacions fetes al contingut d\'un article, i mostrar les difer&egrave;ncies entre les versions successives. ',
+'info_historique_titre' => 'Seguiment de les revisions (versions) d\'articles',
 'info_identification_publique' => 'La vostra identitat p&uacute;blica...',
 'info_image_aide' => 'AJUDA',
 'info_image_process' => 'Vulgueu seleccionar el millor m&egrave;tode de fabricaci&oacute; de vinyetes fent un clic damunt de la imatge corresponent. ',
+'info_image_process2' => '<b>N.B.</b> <i>Si no apareix cap imatge, aleshores &eacute;s que el servidor que allotja la vostra web no ha estat configurat per utilitzar aquestes eines. Si desitgeu emprar aquestes funcions, poseu-vos en contacte amb el responsable t&egrave;cnic i demaneu les extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
+'info_image_process_titre' => 'M&egrave;tode de fabricaci&oacute; de vignettes',
 'info_impossible_lire_page' => '<B>Error!</B> Impossible llegir la p&agrave;gina <tt><html>@test_proxy@</html></tt> per mitj&agrave; del proxy <tt>',
 'info_inclusion_directe' => 'Inclusi&oacute; directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute; de la icona:',
@@ -1420,9 +1414,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_descriptif_petition' => 'Descripci&oacute; de la petici&oacute;',
 'texte_descriptif_rapide' => 'Descripci&oacute; r&agrave;pida',
 'texte_documents_associes' => 'Els documents seg&uuml;ents estan associats a l\'article, per&ograve; no han estat directament inclosos. Segons la compaginaci&oacute; del lloc p&uacute;blic, es podran mostrar com a documents adjunts.',
-'texte_documents_joints' => 'Es pot permetre que els articles tinguen documents adjunts (fitxers ofim&agrave;tics, imatges,
-sons, video, etc.) als articles i/o a les seccions. Aquests fitxers
- poden deseguida ser inclosos a l\'article, o afegits de forma separada.<p>',
+'texte_documents_joints' => 'Es pot permetre afegir documents (fitxers ofim&agrave;tics, imatges, multim&egrave;dia, etc.) als articles i/o a les seccions. Aquests fitxers poden estar referenciats dins l\'article, o mostrats separadament.<p>',
 'texte_documents_joints_2' => 'Aquesta regla no impideix pas l\'inserci&oacute; d\'imatges directament als articles.',
 'texte_effacer_base' => 'Esborrar la base de dades SPIP',
 'texte_effacer_donnees_indexation' => 'Borrar les dades d\'indexaci&oacute;',
@@ -1433,12 +1425,9 @@ sons, video, etc.) als articles i/o a les seccions. Aquests fitxers
   Apunteu aquesta refer&egrave;ncia, reintenteu l\'actualitzaci&oacute; i finalment verifiqueu que les imatges apareixen
   sempre als articles.',
 'texte_fichier_authent' => '<b>SPIP ha de crear els fitxers especials <tt> .htpasswd</tt>
-i <tt>.htpasswd-admin</tt>al directori <tt>ecrire/date/</tt>? </b></p>
- Aquests fitxers poden servir per a restringir l\'acc&eacute;s als autors
- i els administradors en altres llocs de la vostra web
- (programa extern d\'estadistiques, per exemple).<p>
- Si no li hi veu cap utilitat  pot deixar aquesta opci&oacute;
-amb el seu valor per defecte(no creaci&oacute; dels fitxers).',
+i <tt>.htpasswd-admin</tt>en el directori <tt>ecrire/date/</tt>? </b></p>
+ Aquests fitxers poden servir per a restringir l\'acc&eacute;s als autors i als administradors en altres llocs de la vostra web (programa extern d\'estad&iacute;stiques, per exemple).<p>
+ Si no li veuieu cap utilitat podeu deixar aquesta opci&oacute; amb el seu valor per defecte (no creaci&oacute; dels fitxers).',
 'texte_inc_auth_1' => 'Us he identificat amb el login (nom d\'usuari) <B>@auth_login@</B>, per&ograve; aquest no existeix a la base de dades.
   Proveu de ',
 'texte_inc_auth_2' => 'reconnectar',
@@ -1490,7 +1479,7 @@ enriquir la navegaci&oacute; del vostre lloc, incl&uacute;s utilitzar aquestes p
 'texte_nouveau_message' => 'Missatge nou',
 'texte_nouveau_mot' => 'Nova paraula',
 'texte_nouvelle_version_spip_1' => 'Heu instal.lat una nova versi&oacute; d\'SPIP.',
-'texte_nouvelle_version_spip_2' => 'Per a aquesta nova versi&oacute; cal una actualitzaci&oacute; m&eacute;s completa que la normal. Si vost&eacute; &eacute;s webmestre/webmestressa del lloc,  si us plau borre el fitxer <tt>inc_connect.php3</tt> del directori <tt>ecrire</tt> i reprendre la instal.laci&oacute; per actualitzar els par&agrave;metres de la base de dades.<p> (NB.:<tt>inc_connect.php3</tt> abans de suprimir...)',
+'texte_nouvelle_version_spip_2' => 'Aquesta nova versi&oacute; necessita una actualitzaci&oacute; m&eacute;s complerta que la normal. Si sou el webmestre del lloc, vulgueu esborrar el fitxer <tt>inc_connect.php3</tt> del directori <tt>ecrire</tt> i reprendre la instal&middot;laci&oacute; per tal d\'actualitzar els par&agrave;metres de connexi&oacute; a la base de dades.<p />(NB.: si heu oblidat els vostres par&agrave;metres de connexi&oacute;, doneu un cop d\'ull al fitxer <tt>inc_connect.php3</tt> abans de suprimir-lo...)',
 'texte_operation_echec' => 'Torneu a la p&agrave;gina anterior, seleccioneu una altra base o creeu-ne una de nova. Verifiqueu les dades donades pel vostre prove&iuml;dor d\'hostatge.',
 'texte_plan_trad' => 'Aquesta p&agrave;gina permet visualitzar l\'estat de les traduccions per la llengua escollida. 
   La p&agrave;gina mostra els articles que estan en proc&eacute;s de traducci&oacute;, els articles la traducci&oacute; dels quals s\'ha d\'actualitzar, 
@@ -1591,7 +1580,7 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'titre_config_fonctions' => 'Configuraci&oacute; del web',
 'titre_config_groupe_mots_cles' => 'Configuraci&oacute; dels grups de paraules clau',
 'titre_configuration' => 'Configuraci&oacute; del lloc',
-'titre_connexion_ldap' => ' Opcions: <B>Vostre connexi&oacute; LDAP</B>',
+'titre_connexion_ldap' => 'Opcions: <B>Vostre connexi&oacute; LDAP</B>',
 'titre_dernier_article_syndique' => 'Darrers articles sindicats',
 'titre_documents_joints' => 'Documents adjunts',
 'titre_evolution_visite' => 'Evaluaci&oacute; de les visites',

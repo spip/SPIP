@@ -52,7 +52,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_version_archive' => '<b>D&agrave;ida&nbsp;! Lo fichier @archive@ corresp&ograve;nde a una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de dificultats grandassi&nbsp;: risca de destruccion de la v&ograve;stra basa de donadas, disfoncionaments div&egrave;rs dau sit etc. Non validetz aquela demanda d\'importacion.<p> Per mai d\'informacions, vegu&egrave;tz
 <a HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion de SPIP</a>.',
-'avis_espace_interdit' => '<B>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
+'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas poscut li&egrave;ger lu noms dei basas de donadas installadi.',
 'avis_lecture_noms_bases_2' => 'Sia minga de basa es pas disponibla, sia la foncion que permete d\'entierar li basas es estada desactivada per de rasons de seguretat (cen qu\'es lo cas de plusors aubergadors).',
 'avis_lecture_noms_bases_3' => 'Dins la segonda alternativa, es probable qu\'una basa que p&ograve;rta lo v&ograve;stre nom de connexion sigue utilisabla&nbsp;:',
@@ -237,17 +237,17 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 'date_saison_3' => 'estiu',
 'date_saison_4' => 'auton',
 'dirs_commencer' => 'per comen&ccedil;ar vertadierament l\'installacion',
-'dirs_preliminaire' => 'Preliminari : <B>Reglar lu drechs d\'acc&egrave;s</b>',
+'dirs_preliminaire' => 'Preliminari : <b>Reglar lu drechs d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => '<b>Probl&egrave;ma de drechs d\'acc&egrave;s</b>',
-'dirs_repertoires_absents' => '<B>Lu repert&ograve;ris seguents son pas estat trobats: <ul>@bad_dirs@.</ul> </b>
-  <P>Si p&ograve;ut que venga d\'un problema de majusculas &ograve; minusculas mau mesi.
+'dirs_repertoires_absents' => '<b>Lu repert&ograve;ris seguents son pas estat trobats: <ul>@bad_dirs@.</ul> </b>
+  <p />Si p&ograve;ut que venga d\'un problema de majusculas &ograve; minusculas mau mesi.
   Verificatz que li minusculas e majusculas d\'aquelu repert&ograve;ris correspondon ben emb cen qu\'es afichat
   &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar lu repert&ograve;ris emb lo v&ograve;stre logiciau FTP per corregir l\'error.
-  <P>Un c&ograve;up qu\'auretz fach aqu&ograve;, podretz ',
-'dirs_repertoires_suivants' => '<B>Lu repert&ograve;ris seguents son pas accessibles en escritura&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <P>Per adobar aqu&ograve;, utilisatz lo v&ograve;stre client FTP per fin de reglar lu drechs d\'acc&egrave;s de cadun
+  <p />Un c&ograve;up qu\'auretz fach aqu&ograve;, podretz ',
+'dirs_repertoires_suivants' => '<b>Lu repert&ograve;ris seguents son pas accessibles en escritura&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p />Per adobar aqu&ograve;, utilisatz lo v&ograve;stre client FTP per fin de reglar lu drechs d\'acc&egrave;s de cadun
   d\'aquelu repert&ograve;ris. Lo guida d\'installacion explica en detalh coma  proc&egrave;dre.
-  <P>Un c&ograve;up aquesta manipulacion facha, podretz ',
+  <p />Un c&ograve;up aquesta manipulacion facha, podretz ',
 
 
 // E
@@ -422,7 +422,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_afficher_auteurs' => 'Faire apar&egrave;isser lu autors',
 'icone_afficher_visiteurs' => 'Faire apar&egrave;isser lu visitaires',
 'icone_agenda' => 'Agenda',
-'icone_aide_ligne' => 'Ajuda en linha',
+'icone_aide_ligne' => 'Ajuda',
 'icone_arret_discussion' => 'Participar plus a aquela discussion',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Autors',
@@ -430,7 +430,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_brouteur' => 'Navigacion rapida',
 'icone_calendrier' => 'Calendier',
 'icone_calendrier_messagerie' => 'Agenda e messatgeria',
-'icone_configuration_site' => 'Configuracion dau sit',
+'icone_configuration_site' => 'Configuracion',
 'icone_configurer_site' => 'Configurar lo v&ograve;stre sit',
 'icone_creation_groupe_mots' => 'Crear un nov&egrave;u grop de m&ograve;ts',
 'icone_creation_mots_cles' => 'Crear un nov&egrave;u m&ograve;t clau ',
@@ -445,7 +445,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_doc_rubrique' => 'Documents dei rubricas',
 'icone_ecrire_article' => 'Escriure un nov&egrave;l article',
 'icone_ecrire_nouvel_article' => 'Li br&egrave;vas contengudi dins aquela rubrica',
-'icone_edition_site' => 'Edicion dau&nbsp;sit',
+'icone_edition_site' => 'Edicion',
 'icone_envoyer_message' => 'Mandar aqueu messatge',
 'icone_etat_traductions' => 'Estat dei reviradas',
 'icone_evolution_visites' => 'Evolucion dei visitas<br>@visites@ visitas',
@@ -482,7 +482,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_site_entier' => 'Tot lo sit',
 'icone_sites_references' => 'Sits referen&ccedil;ats',
 'icone_statistiques' => 'Estadisticas dau sit',
-'icone_statistiques_visites' => 'Estadisticas dei visitas',
+'icone_statistiques_visites' => 'Estadisticas',
 'icone_suivi_activite' => 'Seguir la vida dau sit',
 'icone_suivi_actualite' => 'Evolucion dau&nbsp;sit',
 'icone_suivi_forum' => 'Seguit dau forum public: @nb_forums@&nbsp;contribucion(s)',
@@ -499,7 +499,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_tous_auteur' => 'Toi lu autors',
 'icone_valider_message' => 'Validar aqueu messatge',
 'icone_valider_signature' => 'Validar aquela signatura',
-'icone_visiter_site' => 'Visitar lo sit',
+'icone_visiter_site' => 'Visitar',
 'icone_voir_en_ligne' => 'Veire en linha',
 'icone_voir_sites_references' => 'Veire lu sits referen&ccedil;ats',
 'icone_voir_tous_mots_cles' => 'Veire toi lu m&ograve;ts claus',
@@ -739,6 +739,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_login_trop_court' => 'Login tr&ograve;up cort.',
 'info_mail_fournisseur' => 'vos@provesidor.org',
 'info_maximum' => 'maximum&nbsp;:',
+'info_meme_rubrique' => 'Dins la mema rubrica',
 'info_message' => 'Messatge dau',
 'info_message_2' => 'MESSATGE',
 'info_message_efface' => 'MESSATGE ESFA&Ccedil;AT',
@@ -805,6 +806,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_nouvel_article' => 'Article n&ograve;u',
 'info_nouvelle_traduction' => 'Nov&egrave;la revirada&nbsp;:',
+'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'ARTICLE N&Uacute;MERO',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quora un visitaire dau sit p&ograve;sta un messatge nov&egrave;u dins lo forum, associat a un article, lu autors de l\'article p&ograve;don &egrave;stre avertits d\'aqueu messatge per corrier electronic. Desiratz d\'utilisar aquela opcion&nbsp;?',
@@ -1337,7 +1339,7 @@ e vos tornar connectar au sit.
 'taille_octets' => '@taille@&nbsp;octets',
 'text_article_propose_publication' => 'Article prepauat per la publicacion. Esitetz pas de donar lo v&ograve;stre vejaire gra&ccedil;a au forum estacat a aquel article (en bas de p&agrave;gina).',
 'texte_acces_ldap_anonyme_1' => 'Certans servidors LDAP acc&egrave;ptan minga d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder pi recercar d\'informacions dins l\'annuari. Lu camps seguents si podr&agrave;n qualora laissar vueis dins la m&agrave;ger part dei cas.',
-'texte_actualite_site_1' => 'Aquela p&agrave;gina recensa l\'actualitat dau sit e vos permete de seguir li v&ograve;stri contribucions. I tornaretz trobar lu v&ograve;stres articles en cors de redaccion, lu articles e li br&egrave;vas que si&egrave;tz convidat de li&egrave;ger per donar lo v&ograve;stre vejaire, pi una renembran&ccedil;a dei v&ograve;stri contribucions.<p><hr><p>Quora seretz familharisat/ada emb l\'interfa&ccedil;a, podretz clicar sus &laquo;',
+'texte_actualite_site_1' => 'Quora seretz familharisat/ada emb l\'interfa&ccedil;a, podretz clicar sus &laquo;',
 'texte_actualite_site_2' => 'interfa&ccedil;a completa',
 'texte_actualite_site_3' => '&raquo; per aver mai de possibilitats.',
 'texte_admin_effacer_01' => 'Aquela comanda esca&ccedil;a <i>tot</i> lo contengut de la basa de donadas,
@@ -1608,7 +1610,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_dernier_article_syndique' => 'Darriers articles sindicats',
 'titre_documents_joints' => 'Documents jonchs',
 'titre_evolution_visite' => 'Evolucion dei visitas',
-'titre_forum' => 'Forum interne',
+'titre_forum' => 'Forum',
 'titre_forum_suivi' => 'Seguit dei forums',
 'titre_gauche_mots_edit' => 'M&Ograve;T N&Uacute;MERO :',
 'titre_groupe_mots' => 'GROP DE M&Ograve;TS :',

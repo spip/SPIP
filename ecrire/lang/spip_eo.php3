@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_colonne_inexistante' => 'La kolumno @col@ ne ekzistas',
 'avis_connexion_echec_1' => 'Konekto al servilo MySQL fiaskis.',
 'avis_connexion_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu enmetitajn datenojn.',
-'avis_connexion_echec_3' => '<B>N.B.</b> &#264;e multaj serviloj, vi devas peti aktivadon de via aliro al MySQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi efektivigis tiun taskon.',
+'avis_connexion_echec_3' => '<B>N.B.</b> &#264;e multaj serviloj, vi devas <b>peti</b> aktivadon de via aliro al MySQL-datenbazo anta&#365; ol uzi &#285;in. Se vi ne povas konekti&#285;i, kontrolu ke vi efektivigis tiun taskon.',
 'avis_connexion_ldap_echec_1' => 'Konekto al servilo LDAP malsukcesis.',
 'avis_connexion_ldap_echec_2' => 'Revenu al la anta&#365;a pa&#285;o, kaj kontrolu la enmetitajn datenojn. ',
 'avis_connexion_ldap_echec_3' => 'Eventuale, provu ne uzi LDAP-materialon por importi uzantojn.',
@@ -49,15 +49,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programeraro. Tiu funkcio ne alvokeblas en tiu &#265;i kunteksto.',
 'avis_erreur_mysql' => 'MySQL-eraro',
 'avis_erreur_sauvegarde' => 'Eraro dum konservado(@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<B>Atentu! La dosiero @archive@ kongruas kun
-    alia versio de SPIP ol kun tiu kiun vi instalis.</B>
+'avis_erreur_version_archive' => '<b>Atentu! La dosiero @archive@ kongruas kun
+    alia versio de SPIP ol kun tiu kiun vi instalis.</b>
     Vi alfrontas grandegajn problemojn:
     risko de detruo de via datenbazo,
     diversaj misfunkcioj de la retpa&#285;o, ktp.
-    Ne validigu tiun importado-peton.<p>Por pli
-    da informoj, vidu <A HREF=\'http://www.spip.net/fr_article1489.html\'>
-                                la dokumentaron de SPIP</A>.',
-'avis_espace_interdit' => '<B>Malpermesita aliro</b><p>SPIP jam instalita.',
+    Ne validigu tiun importado-peton.<p />Por pli
+    da informoj, vidu <a HREF=\'http://www.spip.net/fr_article1489.html\'>
+                                la dokumentaron de SPIP</a>.',
+'avis_espace_interdit' => '<b>Malpermesita aliro</b><p />SPIP jam instalita.',
 'avis_lecture_noms_bases_1' => 'Instalprogramo ne sukcesis legi la nomojn de instalita datenbazo.',
 'avis_lecture_noms_bases_2' => 'A&#365; neniu datenbazo estas je dispono, a&#365; funkcio ebliganta listigi datenbazojn estis fermata pro sekurecaj ka&#365;zoj (tio ja okazas &#265;e multaj TTT-gastigantoj).',
 'avis_lecture_noms_bases_3' => 'Se estas dua alternativo, ver&#349;ajne uzeblas datenbazo uzanta vian salutnomon:',
@@ -241,16 +241,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_saison_3' => 'somero',
 'date_saison_4' => 'a&#365;tuno',
 'dirs_commencer' => 'por vere komenci la instaladon',
-'dirs_preliminaire' => 'Anta&#365;e: <B>&#284;ustigu la alirrajtojn</B>',
+'dirs_preliminaire' => 'Anta&#365;e: <b>&#284;ustigu la alirrajtojn</b>',
 'dirs_probleme_droits' => '<b>Problemo de alirrajtoj</b>',
-'dirs_repertoires_absents' => '<B>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>Kulpas ver&#349;ajne mal&#285;usta uskleco.
+'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
+  <p />Kulpas ver&#349;ajne mal&#285;usta uskleco.
   Certigu ke la uskleco akordas kun la afi&#349;ado &#265;i-supre;
   se ili ne akordas, bonvolu renomi la dosierujon per via FTP-programo por korekti la eraron.
-  <P>Post tio, vi povos',
+  <p />Post tio, vi povos',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas alireblaj skribe : 
 <ul>@bad_dirs@.</ul></b>
-<p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos ',
+<p />Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p />Post tiu manovro, vi povos ',
 
 
 // E
@@ -375,7 +375,7 @@ Dankon pro via partopreno
 'forum_creer_paragraphes' => '(Por krei paragrafojn, simple lasu liniojn malplenaj.)',
 'forum_forum' => 'forumo',
 'forum_info_modere' => 'Tiu &#265;i forumo estas mastrumata: via kontribua&#309;o aperos nur post validigo de mastrumanto de la forumo.',
-'forum_lien_hyper' => '<B>Hiperligo</B> (nedeviga)',
+'forum_lien_hyper' => '<b>hiperligo</b> (nedeviga)',
 'forum_message_definitif' => 'Definitiva mesa&#285;o: elsendu al la forumo',
 'forum_message_trop_long' => 'Via mesa&#285;o estas tro longa. La maksimuma longeco estas 20.000 signoj.',
 'forum_ne_repondez_pas' => 'Ne respondu al tiu &#265;i mesa&#285;o, sed en la forumo &#265;e sekva adreso:',
@@ -384,7 +384,7 @@ Dankon pro via partopreno
 'forum_par_auteur' => 'de @auteur@',
 'forum_poste_par' => 'Mesa&#285;o poste@parauteur@ post via artikolo.',
 'forum_probleme_database' => 'Problemo de datenbazo, via mesa&#285;o ne estas registrita.',
-'forum_qui_etes_vous' => '<B>Kiu vi estas?</B> (nedeviga)',
+'forum_qui_etes_vous' => '<b>Kiu vi estas?</b> (nedeviga)',
 'forum_texte' => 'Teksto de via mesa&#285;o:',
 'forum_titre' => 'Titolo:',
 'forum_titre_erreur' => 'Eraro...',
@@ -595,7 +595,7 @@ Dankon pro via partopreno
 'info_config_suivi_explication' => 'Vi povas registri&#285;i &#265;e la dissendolisto de tiu teksejo. Vi tiam ricevos per retmesa&#285;oj la anoncojn de artikoloj kaj informetoj proponitaj por publikado.',
 'info_confirmer_passe' => 'Konfirmi tiun novan pasvorton:',
 'info_connexion_base' => 'Dua etapo: <b>Konekt-provo al la datenbazo</b>',
-'info_connexion_ldap_ok' => 'La konekto al LDAP sukcesis.</b><P> Vi povas iri al la sekvanta etapo',
+'info_connexion_ldap_ok' => 'La konekto al LDAP sukcesis.</b><p /> Vi povas iri al la sekvanta etapo',
 'info_connexion_mysql' => 'Unua etapo: <B>Via MySQL-a konekto</b>',
 'info_connexion_ok' => 'La konekto sukcesis.',
 'info_connexion_refusee' => 'Konekto rifuzata',
@@ -675,9 +675,9 @@ Dankon pro via partopreno
   registritaj redaktistoj. Vi povas, &#265;i-sube, aktivigi
   plian forumon, rezervitan nur al mastrumantoj.',
 'info_forum_statistiques' => 'Statistikoj de la vizitoj',
-'info_gauche_admin_effacer' => '<B>Nur administrantoj de la teksejo rajtas aliri tiun pa&#285;on.</b><P>&#284;i ebligas aliron al la diversaj funkcioj pri teknika mastrumado. Certaj el ili rezultigas specifan a&#365;tentigan procezon, kiu necesiga FTP aliron al la teksejo.',
-'info_gauche_admin_tech' => '<B>Nur administrantoj de la teksejo rajtas aliri tiun pa&#285;on.</b><P>&#284;i ebligas aliron al la diversaj funkcioj pri teknika mastrumado. Certaj el ili rezultigas specifan a&#365;tentigan procezon, kiu necesiga FTP aliron al la teksejo.',
-'info_gauche_admin_vider' => '<B>Nur administrantoj de la teksejo eblas aliri al tiu pa&#285;o.</b><P>&#284;i ebligas aliron al la diversaj funkcioj pri teknika mastrumado. Certaj el ili rezultigas specifan a&#365;tentigan procezon, kiu necesiga FTP aliron al la teksejo.',
+'info_gauche_admin_effacer' => '<b>Nur administrantoj de la teksejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika mastrumado. Certaj el ili rezultigas specifan a&#365;tentigan procezon, kiu necesiga FTP aliron al la teksejo.',
+'info_gauche_admin_tech' => '<b>Nur administrantoj de la teksejo rajtas aliri tiun pa&#285;on.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika mastrumado. Certaj el ili rezultigas specifan a&#365;tentigan procezon, kiu necesiga FTP aliron al la teksejo.',
+'info_gauche_admin_vider' => '<b>Nur administrantoj de la teksejo eblas aliri al tiu pa&#285;o.</b><p />&#284;i ebligas aliron al la diversaj funkcioj pri teknika mastrumado. Certaj el ili rezultigas specifan a&#365;tentigan procezon, kiu necesiga FTP aliron al la teksejo.',
 'info_gauche_auteurs' => 'Vi trovos &#265;i tie &#265;iujn a&#365;torojn de la teksejo. La statuso de a&#365;toro estas indikita per koloro de lia piktogramo (redaktanto = verda, administranto = flava).',
 'info_gauche_auteurs_exterieurs' => 'La eksteraj a&#365;toroj, sen aliro al la teksejo, estas indikitaj per blua piktogramo; la a&#365;toroj forigita per balaa&#309;ujo.',
 'info_gauche_messagerie' => 'La mesa&#285;ilo ebligas al vi inter&#349;an&#285;i mesa&#285;ojn inter la a&#365;toroj, konservi memorigilojn (por via propra uzado) a&#365; afi&#349;i anoncojn en la akceptopa&#285;o de la privata spaco (se vi estas administranto).',
@@ -694,9 +694,15 @@ Dankon pro via partopreno
 'info_groupe_important' => 'Grava grupo',
 'info_hebergeur_desactiver_envoi_email' => '&#264;e kelkaj TTT-gastigantoj, la a&#365;tomata sendado de retpo&#349;t-mesa&#285;oj ekde ilia servilo ne aktivas. Tiam, la jenaj funkcioj de SPIP ne funkcios.',
 'info_hier' => 'hiera&#365;:',
+'info_historique_activer' => 'Aktivigi la supervidon de la revizioj',
+'info_historique_desactiver' => 'Malaktivigi la supervidon de la revizioj',
+'info_historique_texte' => 'La supervido de historio ebligas konservi historion de modifadojn aldonitaj al enhavo de artikolo, kaj afi&#349;eblas la diferenkoj inter la versioj de la artikolo.',
+'info_historique_titre' => 'Supervido de revizioj (versioj) de artikoloj',
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_aide' => 'HELPILO',
 'info_image_process' => 'Bonvolu elekti la pli bonan metodon por fabriki vinjetojn alklakante la tiurilatan bildon.',
+'info_image_process2' => '<NEW><b>N.B.</b> <i>Si aucune image n\'appara&icirc;t, alors le serveur qui h&eacute;berge votre site n\'a pas &eacute;t&eacute; configur&eacute; pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_image_process_titre' => '<NEW>M&eacute;thode de fabrication des vignettes',
 'info_impossible_lire_page' => '<B>Eraro!</b> Ne eblas legi la pa&#285;on <tt> <html>@test_proxy@</html> </tt> tra la prokura servilo <tt>',
 'info_inclusion_directe' => 'Rekta inkludo:',
 'info_inclusion_vignette' => 'Inkludo de la vinjeto:',
@@ -1418,7 +1424,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 				sed ili ne estis rekte enmetitaj en &#285;in.
 				La&#365; la enpa&#285;igo de la publika spaco,
 				ili povos aperi en formo de kunmetitaj dokumentoj.',
-'texte_documents_joints' => 'Vi povas permesi la aldonon de dokumentoj (oficejajn dosierojn, bildojn,
+'texte_documents_joints' => '<MODIF>Vi povas permesi la aldonon de dokumentoj (oficejajn dosierojn, bildojn,
 	son- kaj filma&#309;oj, ktp.) al la artikoloj kaj/a&#365; al la rubrikoj. Tiuj dosieroj
 	povas poste esti referencitaj en la artikolo
 	a&#365; afi&#349;itaj sendepende.<p>',
@@ -1432,7 +1438,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 		Notu bone tiun referencon, reprovu la niveligon,
 		kaj fine kontrolu ke la bildoj aperu
 		ankora&#365; en la artikoloj.',
-'texte_fichier_authent' => '<b>&#264;u SPIP devas krei la specialajn dosierojn <tt>.htpasswd</tt>
+'texte_fichier_authent' => '<MODIF><b>&#264;u SPIP devas krei la specialajn dosierojn <tt>.htpasswd</tt>
 		kaj <tt>.htpasswd-admin</tt> en la dosierujo <tt>ecrire/data/</tt> ?</b><p>
 		Tiuj dosieroj povas servi vin por limigi la aliron al la a&#365;toroj
 		kaj administrantoj en aliaj lokoj de via teksejo
@@ -1504,7 +1510,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_nouveau_message' => 'Nova mesa&#285;o',
 'texte_nouveau_mot' => 'Nova vorto',
 'texte_nouvelle_version_spip_1' => 'Vi instalis novan version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas teksestro de la teksejo, bonvolu forigi la dosieron <tt>inc_connect.php3</tt> de la dosierujo <tt>ecrire</tt> kaj rekomenci la instaladon por &#285;isdatigi viajn parametrojn de konektado al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron <tt>inc_connect.php3</tt> anta&#365; ol forigi &#285;in...)',
+'texte_nouvelle_version_spip_2' => '<MODIF>Tiu nova versio bezonas pli kompletan &#285;isdatigon ol kutime. Se vi estas teksestro de la teksejo, bonvolu forigi la dosieron <tt>inc_connect.php3</tt> de la dosierujo <tt>ecrire</tt> kaj rekomenci la instaladon por &#285;isdatigi viajn parametrojn de konektado al la datenbazo.<p> (Notu&nbsp;: se vi forgesis viajn konekto-parametrojn, rigardu la dosieron <tt>inc_connect.php3</tt> anta&#365; ol forigi &#285;in...)',
 'texte_operation_echec' => 'Reiru al la anta&#365;a pa&#285;o, elektu alian bazon a&#365; kreu novan. Kontrolu la informojn donitajn de via gastiganto.',
 'texte_plan_trad' => 'Tiu pa&#285;o prezentas la staton de tradukoj por elektita lingvo.
   La pa&#285;o afi&#349;as la artikolojn kiuj estas tradukataj, tiujn kies traduko necesas &#285;isdatigon, kaj tiujn kiujn estas tradukotaj.',
@@ -1532,7 +1538,7 @@ rekalkuli unusolan pa&#285;on, pasu prefere tra la publika spaco kaj tie uzu la 
 'texte_recuperer_base' => 'Ripari la datenbazon',
 'texte_reference_mais_redirige' => 'artikolo referencita en via SPIP-ejo, sed redirektita al alia URL.',
 'texte_referencement_automatique' => '<b>A&#365;tomata referencado de teksejo</b><br>Vi povas rapide referenci teksejon indikante &#265;i-sube la deziratan URL-adreson a&#365; la adreson de &#285;ia backend-dosiero. SPIP a&#365;tomate prenos la informojn kiuj koncernas tiun teksejon (titolon, priskribon...).',
-'texte_requetes_echouent' => '<b>Kiam certaj MySQL-ser&#265;adoj sisteme
+'texte_requetes_echouent' => '<MODIF><b>Kiam certaj MySQL-ser&#265;adoj sisteme
 kaj sen videbla ka&#365;zo malsukcesas, estas eble
 ke tio okazas pro la datenbazo
 mem.</b><p>
@@ -1635,7 +1641,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_config_fonctions' => 'Konfigurado de la teksejo',
 'titre_config_groupe_mots_cles' => 'Konfigurado de la &#349;losilvortaj grupoj',
 'titre_configuration' => 'Konfigurado de la teksejo',
-'titre_connexion_ldap' => 'Opcioj: <B>Via konekto LDAP</B>',
+'titre_connexion_ldap' => '<MODIF>Opcioj: <B>Via konekto LDAP</B>',
 'titre_dernier_article_syndique' => 'Lastaj kunligitaj artikoloj',
 'titre_documents_joints' => 'Kunmetitaj dokumentoj',
 'titre_evolution_visite' => 'Evoluo de la vizitoj',
