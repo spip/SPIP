@@ -1,7 +1,6 @@
 <?php
 
 include ("inc.php3");
-include_ecrire ("inc_calendrier.php");
 
 // sans arguments => mois courant
 if (!$mois){
