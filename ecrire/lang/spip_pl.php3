@@ -142,7 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysy&#322;aj &#380;adnych zawiadomie&#324; redakcyjnych',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Nie wysy&#322;aj najnowszej listy news&oacute;w',
 'bouton_radio_non_syndication' => 'Bez syndykacji',
-'bouton_radio_occidental' => 'Alfabet zachodni(<tt>iso-8859-1</tt>): preferowany przez wszystkie przegl&#261;darki, lecz wy&#347;wietlaj&#261;cy tylko j&#281;zyki zachodnioeuropejskie (angielski, francuski, niemiecki...).',
+'bouton_radio_occidental' => '<MODIF> Alfabet zachodni(<tt>iso-8859-1</tt>): preferowany przez wszystkie przegl&#261;darki, lecz wy&#347;wietlaj&#261;cy tylko j&#281;zyki zachodnioeuropejskie (angielski, francuski, niemiecki...).',
 'bouton_radio_pas_petition' => 'Wy&#322;&#261;cz og&#322;oszenia',
 'bouton_radio_personnalise' => 'Dostosuj zestaw znak&oacute;w: wybierz t&#281; opcj&#281;, je&#347;li chcesz u&#380;ywa&#263; szczeg&oacute;lnego zestawu znak&oacute;w',
 'bouton_radio_petition_activee' => 'Og&#322;oszenia w&#322;&#261;czone',
@@ -153,7 +153,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'Zapisz w postaci nieskompresowanej w <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Usu&#324; og&#322;oszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
-'bouton_radio_universel' => 'Alfabet (kodowanie) uniwersalny&nbsp; (<tt>utf-8</tt>): pozwala na wy&#347;wietlanie we wszystkich j&#281;zykach, ale nie jest rozpoznawany
+'bouton_radio_universel' => '<MODIF> Alfabet (kodowanie) uniwersalny&nbsp; (<tt>utf-8</tt>): pozwala na wy&#347;wietlanie we wszystkich j&#281;zykach, ale nie jest rozpoznawany
   przez wszystkie przegl&#261;darki.',
 'bouton_recharger_page' => 'ponownie za&#322;aduj t&#281; stron&#281;',
 'bouton_redirection' => 'PRZEKIERUJ',
@@ -781,6 +781,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_nouveaux_message' => 'Nowe wiadomo&#347;ci',
 'info_nouveaux_messages' => 'MASZ @total_messages@ NOWYCH WIADOMO&#346;CI',
 'info_nouvel_article' => 'Nowy artyku&#322;',
+'info_nouvelle_traduction' => 'Nowy przek&#322;ad&nbsp;:',
 'info_numero_article' => 'ARTYKU&#321; NUMER&nbsp;:',
 'info_obligatoire_02' => '[Obowi&#261;zkowo]',
 'info_option_email' => 'Kiedy odwiedzaj&#261;cy stron&#281; zostawi&#261; na forum wiadomo&#347;&#263;
@@ -1416,7 +1417,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
 'texte_informations_personnelles_2' => '(Informacja: je&#347;li jest to reinstalacja, a Tw&oacute;j dost&#281;p wci&#261;&#380; dzia&#322;a, mo&#380;esz',
 'texte_introductif_article' => '(Tekst wprowadzaj&#261;cy do artyku&#322;u.)',
-'texte_jeu_caractere' => 'Ta opcja jest u&#380;yteczna je&#347;li Twoja strona ma by&#263; wy&#347;wietlana w alfabecie
+'texte_jeu_caractere' => '<MODIF> Ta opcja jest u&#380;yteczna je&#347;li Twoja strona ma by&#263; wy&#347;wietlana w alfabecie
  innym ni&#380; alfabet roma&#324;ski (lub &laquo;&nbsp;zachodni&nbsp;&raquo;) i jego odmiany.
  W tym przypadku nale&#380;y zmieni&#263; domy&#347;lne ustawienia aby u&#380;ywa&#263;
  odpowiedniego kodowania. Nie zapomnij o dostosowania stron publicznych
