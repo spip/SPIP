@@ -26,14 +26,16 @@ function chercher_langue_squelette ($fichier_cache, $contexte='') {
 	// multilingue visiteur
 	if ($contexte['lang'])
 		$lang_squel = $contexte['lang'];
-	else if ($lang)
-		$contexte['lang'] = $lang_squel = $lang;
 	else if ($multilang) {
 		include_ecrire('inc_lang.php3');
 		utiliser_langue_visiteur();
 		$contexte['lang'] = $lang_squel = $spip_lang;
-		$fichier_cache .= "-$lang_squel";
 	}
+	else if ($lang)
+		$contexte['lang'] = $lang_squel = $lang;
+
+	if ($lang_squel)
+		$fichier_cache .= "-$lang_squel";
 
 	return array($fichier_cache, $lang_squel, $contexte);
 }
