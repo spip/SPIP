@@ -483,10 +483,6 @@ function creer_base() {
 	// Pre-remplissage de la base
 	//
 
-	if ($version_installee < 1.456) {
-		spip_query("DELETE FROM spip_types_documents");
-	}
-
 	$query = "INSERT IGNORE spip_types_documents (id_type, extension, titre, inclus) VALUES ".
 		"(1, 'jpg', 'JPEG', 'image'), ".
 		"(2, 'png', 'PNG', 'image'), ".
