@@ -333,8 +333,10 @@ function typo($letexte) {
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if (!$typo = $lang_typo)
+	if (!$typo = $lang_typo) {
+		include_ecrire('inc_lang.php3');
 		$typo = lang_typo($spip_lang);
+	}
 
 	if ($typo == 'fr')
 		$letexte = typo_fr($letexte);
