@@ -474,13 +474,14 @@ function afficher_documents_non_inclus($id_article) {
 			echo "$extension, ";
 		}
 		echo "<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>";
-		if (function_exists("imagejpeg")){
+		if (function_exists("imagejpeg") AND function_exists("ImageCreateFromJPEG")){
 			$creer_preview=lire_meta("creer_preview");
 			$taille_preview=lire_meta("taille_preview");
+			$gd_formats=lire_meta("gd_formats");
 			if ($taille_preview < 15) $taille_preview = 120;
 			
 			if ($creer_preview == 'oui'){
-					echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au format JPEG, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels. ";
+					echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au(x) format(s) $gd_formats, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels. ";
 			}
 			else {
 				if ($connect_statut == "0minirezo"){
