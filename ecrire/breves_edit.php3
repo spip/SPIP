@@ -3,7 +3,7 @@
 include ("inc.php3");
 include_local ("inc_documents.php3");
 
-
+/*
 if ($new=="oui") {
 	if (!$id_rubrique) $id_rubrique=0;
 
@@ -15,6 +15,7 @@ if ($new=="oui") {
 	$result=spip_query($query);
 	$id_breve=mysql_insert_id();
 }
+*/
 
 
 function mySel($varaut,$variable){
@@ -42,22 +43,23 @@ function enfant($leparent) {
 	}
 }
 
-
-$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
-$result = spip_query($query);
-
-while($row=mysql_fetch_array($result)){
-	$id_breve=$row['id_breve'];
-	$date_heure=$row['date_heure'];
-	$titre=$row['titre'];
-	$texte=$row['texte'];
-	$lien_titre=$row['lien_titre'];
-	$lien_url=$row['lien_url'];
-	$statut=$row['statut'];
-	$id_rubrique=$row['id_rubrique'];
-	if ($new == "oui") $statut = "prop";
+if ($new != "oui") {
+	$query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
+	$result = spip_query($query);
 	
-	$pour_doublons = propre ("$titre.$texte");
+	while($row=mysql_fetch_array($result)){
+		$id_breve=$row['id_breve'];
+		$date_heure=$row['date_heure'];
+		$titre=$row['titre'];
+		$texte=$row['texte'];
+		$lien_titre=$row['lien_titre'];
+		$lien_url=$row['lien_url'];
+		$statut=$row['statut'];
+		$id_rubrique=$row['id_rubrique'];
+		if ($new == "oui") $statut = "prop";
+		
+		$pour_doublons = propre ("$titre.$texte");
+	}
 }
 
 if ($id_document) {
@@ -101,26 +103,29 @@ debut_droite();
 debut_cadre_formulaire();
 
 
-echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-echo "<tr width='100%'>";
-echo "<td>";
-	icone("Retour", "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
+if ($new != "oui") {
+	echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+	echo "<tr width='100%'>";
+	echo "<td>";
+		icone("Retour", "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
+	
+	echo "</td>";
+		echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+	echo "<td width='100%'>";
+	echo "Modifier la br&egrave;ve :";
+	gros_titre($titre);
+	echo "</td></tr></table>";
+	echo "<p>";
+}
 
-echo "</td>";
-	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
-echo "<td width='100%'>";
-echo "Modifier la br&egrave;ve :";
-gros_titre($titre);
-echo "</td></tr></table>";
-echo "<p>";
 
-
-if ($connect_statut=="0minirezo" OR $statut=="prop") {
+if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	echo "<FORM ACTION='breves_voir.php3?id_breve=$id_breve' METHOD='post'>";
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_breve' VALUE=\"oui\">";
 	echo "<INPUT TYPE='Hidden' NAME='id_breve' VALUE=\"$id_breve\">";
 	echo "<INPUT TYPE='Hidden' NAME='statut_old' VALUE=\"$statut\">";
+	if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
 	$titre = htmlspecialchars($titre);
 	$lien_titre = htmlspecialchars($lien_titre);
