@@ -664,7 +664,7 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 				echo "</li><p />\n";
 			} else {
 				echo $ret;
-				echo "<a href='http://".$lesurls[$numero]."'><b>".$lesdomaines[$numero]."</b></a>";
+				echo "<a href='".$lesliens[$numero]."'><b>".$lesdomaines[$numero]."</b></a>";
 				if ($lien = ereg_replace(" \([0-9]+\)$", "",$lesreferers[$numero][0]));
 					echo "<font size='1'>$lien</font>";
 				echo "</li>";
@@ -676,7 +676,7 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 		if (spip_num_rows($result) == $limit) {
 			$lien = $clean_link;
 			$lien->addVar('limit',$limit+200);
-			echo "<p><a href='".$lien->getUrl()."'>+++</a></p>";
+			echo "<div style='text-align:right;'><b><a href='".$lien->getUrl()."'>+++</a></b></div>";
 		}
 	}
 
