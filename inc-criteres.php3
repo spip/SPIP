@@ -611,7 +611,7 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 	} else {
 	  if ($val[0]== '%') {
 	    spip_log($val .
-		     " est obsolete; utiliser HTTP_VARS{" .  substr($val,1) . "}");
+		     " est obsolete; utiliser ENV{" .  substr($val,1) . "}");
 		  return '" . addslashes($Pile[0][\''. substr($val,1)  ."']) . \"";
 	  }
 		else

@@ -47,7 +47,7 @@ function champs_traitements ($p) {
 		'URL_SITE_SPIP' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))',
-		'HTTP_VARS' => 'entites_html(%s)'
+		'ENV' => 'entites_html(%s)'
 	);
 	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
@@ -694,22 +694,29 @@ function balise_SELF_dist($p) {
 	return $p;
 }
 
+
 //
-// Reference aux parametres GET & POST (ou params dynamiques)
+// #ENV
+// l'"environnement", id est le $contexte (ou $contexte_inclus)
 //
 // en standard on applique |entites_html, mais attention si
-// vous utilisez [(#HTTP_VARS*{toto})] il *faut* vous assurer vous-memes
+// vous utilisez [(#ENV*{toto})] il *faut* vous assurer vous-memes
 // de la securite anti-php et anti-javascript
 //
-function balise_HTTP_VARS_dist($p) {
+// La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
+//
+function balise_ENV_dist($p) {
 	$nom = param_balise($p);
-	if (!$nom)
-		erreur_squelette(
-			_T('zbug_champ_argument_manquant',
-				array('champ' => '#HTTP_VARS')
-			), $p->id_boucle);
-	else {
-		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
+	if (!$nom) {
+		// cas de #ENV sans argument : on retourne le serialize() du tableau
+		// une belle fonction [(#ENV|affiche_env)] serait pratique
+		$p->code = 'serialize($Pile[0])';
+		$p->statut = 'html';
+	} else {
+		// admet deux arguments : nom de variable, valeur par defaut si vide
+		$nom = split(',', $nom, 2);
+		$p->code = 'sinon($Pile[0]["' . addslashes($nom[0]) . '"],
+			\''. texte_script($nom[1]) .'\')';
 		$p->statut = 'php';
 	}
 	return $p;
