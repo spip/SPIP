@@ -232,7 +232,7 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 //
 
 echo "<p>";
-$vos_articles = afficher_articles(_T('info_en_cours_validation'),
+$vos_articles = afficher_articles(afficher_plus('articles_page.php3')._T('info_en_cours_validation'),
 	", spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
 	"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
 
@@ -285,14 +285,14 @@ if ($relief) {
 	// Les breves a valider
 	//
 	$query = "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC";
-	afficher_breves(_T('info_breves_valider'), $query, true);
+	afficher_breves(afficher_plus('breves.php3')._T('info_breves_valider'), $query, true);
 
 	//
 	// Les sites references a valider
 	//
-	if (lire_meta('activer_syndic') != 'non') {
+	if (afficher_plus('sites_tous.php3').lire_meta('activer_syndic') != 'non') {
 		include_ecrire("inc_sites.php3");
-		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
+		afficher_sites(afficher_plus('sites_tous.php3')._T('info_site_valider'), "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
 	}
 
 	//
@@ -300,7 +300,7 @@ if ($relief) {
 	//
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
-		afficher_sites(_T('avis_sites_syndiques_probleme'),
+		afficher_sites(afficher_plus('sites_tous.php3')._T('avis_sites_syndiques_probleme'),
 			"SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
 	}
 
@@ -335,7 +335,7 @@ if ($options == 'avancees') {
 	//
 
 	echo "<p>";
-	afficher_articles(_T('info_derniers_articles_publies'),
+	afficher_articles(afficher_plus('articles_page.php3')._T('info_derniers_articles_publies'),
 		", spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
 

@@ -325,6 +325,17 @@ function fin_raccourcis() {
 	fin_cadre_enfonce();
 }
 
+
+// Afficher un petit "+" pour lien vers autre page
+
+function afficher_plus($lien) {
+	global $options, $spip_lang_right;
+	
+	if ($options == "avancees") return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'><img src='img_pack/plus.gif' border='0'></a></div>";
+}
+
+
+
 //
 // Fonctions d'affichage
 //

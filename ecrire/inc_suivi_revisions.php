@@ -46,6 +46,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	$result = spip_query($query . " ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
 	if (spip_num_rows($result) > 0) {	
 		$titre_table = _T('icone_suivi_revisions');
+		if ($court) $titre_table = afficher_plus("suivi_revisions.php3").$titre_table;
 		echo "<div style='height: 12px;'></div>";
 		echo "<div class='liste'>";
 		bandeau_titre_boite2($titre_table, "historique-24.gif");
@@ -77,9 +78,9 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			$titre = propre($row['titre']);	
 			$nom = "";
 			$query_auteur = "
-SELECT nom
-FROM spip_auteurs
-WHERE id_auteur = $id_auteur";
+				SELECT nom
+				FROM spip_auteurs
+				WHERE id_auteur = $id_auteur";
 			$result_auteur = spip_query($query_auteur);
 			if ($row_auteur = spip_fetch_array($result_auteur)) {
 				$nom = propre($row_auteur["nom"]);
@@ -101,10 +102,10 @@ WHERE id_auteur = $id_auteur";
 			echo "</span>";
 		
 			$query_diff = "
-SELECT id_version
-FROM spip_versions
-WHERE id_article=$id_article AND id_version<$id_version 
-ORDER BY id_version DESC LIMIT 0,1";
+				SELECT id_version
+				FROM spip_versions
+				WHERE id_article=$id_article AND id_version<$id_version 
+				ORDER BY id_version DESC LIMIT 0,1";
 				if ($result_diff = spip_query($query_diff)) {
 					$row_diff = mysql_fetch_array($result_diff);
 					$id_diff = $row_diff['id_version'];
@@ -112,9 +113,9 @@ ORDER BY id_version DESC LIMIT 0,1";
 	
 	
 			$query_art = "
-SELECT *
-FROM spip_articles
-WHERE id_article='$id_article'";
+				SELECT *
+				FROM spip_articles
+				WHERE id_article='$id_article'";
 			$result_art = spip_query($query_art);
 			
 			if ($row_art = spip_fetch_array($result_art)) {
