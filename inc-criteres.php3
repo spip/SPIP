@@ -93,10 +93,6 @@ function critere_recherche_dist($idb, &$boucles, $param, $not) {
 
 	// et la recherche trouve
 	$boucle->where[] = '$rech_where';
-
-	// oui cette boucle est une boucle recherche, le noter dans la pile
-	// (certes, c'est un peu lourd comme ecriture)
-	$boucles[$idb]->hash = true;
 }
 
 // {inverse}
