@@ -40,9 +40,11 @@ function spip_query_db($query) {
 			echo _T('info_erreur_requete')." ".htmlentities($query)."<br>";
 			echo "&laquo; ".htmlentities($s)." &raquo;<p>";
 		}
-	spip_log($GLOBALS['REQUEST_METHOD'].' '.$GLOBALS['REQUEST_URI'], 'mysql');
-	spip_log("$s - $query", 'mysql');
+		spip_log($GLOBALS['REQUEST_METHOD'].' '.$GLOBALS['REQUEST_URI'], 'mysql');
+		spip_log("$s - $query", 'mysql');
 	}
+
+	# spip_log("$s - $query", 'mysql');
 
 	return $result;
 }
