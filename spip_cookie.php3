@@ -100,7 +100,7 @@ if ($essai_login == "oui") {
 		$md5next = $next_session_password_md5;
 	}
 	else if ($session_password) { // mot passe en clair
-		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
+		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='".addslashes($login)."' AND statut!='5poubelle'";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
 			$md5pass = md5($row['alea_actuel'] . $session_password);
