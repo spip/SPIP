@@ -50,7 +50,7 @@ $ifond = 1;
 arsort($traduits);
 
 while (list($trad_lang, $coef_traduits) = each($traduits)) {
-	$coef_conflits = $conflits['trad_lang'];
+	$coef_conflits = $conflits[$trad_lang];
 	$coef_traduits -= $coef_conflits;
 
 	if ($ifond==0) {
