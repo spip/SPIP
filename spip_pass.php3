@@ -78,46 +78,49 @@ if ($email_oubli) {
 		$erreur = "Cet email n'est pas valide !";
 }
 
-// debut presentation
-install_debut_html("Votre identifiant");
-echo "<p><br>";
+if ($erreur) {
+	install_debut_html("Erreur");
 
-if ($erreur)
-	echo "<font color='red' size='+1'><b>$erreur</b></font>";
+	echo "<b>$erreur</b>";
+}
 else {
-	if ($inscription_ecrire || forums_sur_abo()) {
-		echo "<font size=2>";
+	if ($oubli_pass == 'oui') {
+		// debut presentation
+		install_debut_html("Mot de passe oubli&eacute;");
+
+		echo "<p>";
+		echo propre("Indiquez ci-dessous l'adresse email sous laquelle vous
+			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
+			recevrez un email vous indiquant la marche &agrave; suivre pour
+			r&eacute;cup&eacute;rer votre acc&egrave;s.");
+
+		echo "<p>";
+		echo '<form action="spip_pass.php3" method="post">';
+		echo '<div align="right">';
+		echo '<input type="text" class="fondo" name="email_oubli" value="">';
+		echo '  <input type=submit class="fondl" name="oubli" value="Changer de mot de passe"></div></form>';
+	}
+
+	else if ($inscription_ecrire || forums_sur_abo()) {
+		// debut presentation
+		install_debut_html("Vous inscrire sur ce site");
+		echo "<p>";
+
 		if ($inscriptions_ecrire) {
 			echo propre ("L'espace priv&eacute; de ce site est ouvert aux visiteurs,
-			apr&egrave;s inscription. Votre identifiant vous permettra de consulter
+			apr&egrave;s inscription. Vos identifiants vous permettront de consulter
 			les articles en cours de r&eacute;daction, de proposer des articles et de
 			participer aux forums internes aussi bien qu'aux forums publics sur abonnement.");
 		} else {
-			echo propre("Certains forums publics de ce site sont r&eacute;serv&eacute;s aux
-			visiteurs enregistr&eacute;s.");
+			echo propre("Vous avez demand&eacute; &agrave; intervenir sur un forum
+			r&eacute;serv&eacute; aux visiteurs enregistr&eacute;s.");
 		}
-		echo "\n<p>".propre ("Pour obtenir votre identifiant personnel,
+		echo "\n<p>".propre ("Pour obtenir vos identifiants personnels,
 		indiquez ici votre nom et votre adresse email. Les codes vous
 		parviendront rapidement par courrier &eacute;lectronique.");
 
 		formulaire_inscription();
 	}
-
-	echo "<p><br>";
-
-	gros_titre("Mot de passe oubli&eacute;?");
-
-	echo "<p><div align='left'>".propre("Indiquez ci-dessous l'adresse email sous laquelle vous
-		vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
-		recevrez un email vous indiquant la marche &agrave; suivre pour
-		r&eacute;cup&eacute;rer votre acc&egrave;s.")."</div>";
-
-	echo '<form action="spip_pass.php3" method="post">';
-	echo '<div align="right">';
-	echo '<input type="text" name="email_oubli" value="">';
-	echo '  <input type=submit name="oubli" value="Vite !" class="spip_bouton"></div></form>';
-
-	echo "</font>";
 }
 
 echo "<p align='right'><script type='text/javascript'><!--

@@ -128,10 +128,6 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 		echo "fournis lors de votre inscription. ";
-		echo "Si vous n'en avez pas encore, ou si vous les avez oubli&eacute;s, vous pouvez".
-' <script language="JavaScript"><!--
-document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=740,height=580\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander de nouveaux identifiants</a>.';
 	} else {
 		echo ouvre_login ("$nom_site : identification");
 		if (!$message_login)
@@ -141,7 +137,6 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 
 		echo "<br>$message_login<br>\n";
 	}
-
 
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
@@ -182,6 +177,9 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
 		echo "</form>";
 
+		echo '[<script language="JavaScript"><!--
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>mot de passe oubli&eacute;</a>]';
 	}
 	else { // demander seulement le login
 
