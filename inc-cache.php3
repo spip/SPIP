@@ -1,420 +1,257 @@
 <?php
-# Ce fichier ne sera execute qu'une fois
+
+//
+// Ce fichier ne sera execute qu'une fois
 if (defined("_INC_CACHE")) return;
 define("_INC_CACHE", "1");
 
-include_local('inc-dir.php3');
 
-# Vérif de péremption d'une compil de squelette par rapport à son source
-# et les fonctions utilisateurs agissant sur le compilateur.
-# Ses fonctions internes sont supposées ne changer qu'à l'installation; 
-# sinon vider explicitement par l'interface privée.
+//
+// Calcul du nom du fichier cache
+//
 
-function squelette_obsolete($naissance, $source)
-{
-  $e = $GLOBALS['extension_squelette'];
-  $x = (($GLOBALS['recalcul'] == 'oui')
-	  OR ((filemtime($source . ".$e") > $naissance)
-	      OR (file_exists($source . '_fonctions.php3')
-		  AND (filemtime($source . '_fonctions.php3')> $naissance))
-	      OR (file_exists("ecrire/mes_options.php3")
-		  AND (filemtime("ecrire/mes_options.php3") > $naissance))
-	      OR (file_exists("mes_fonctions.php3")
-		  AND (filemtime("mes_fonctions.php3") > $naissance) ) ) );
-#  spip_log("squelette_obsolete $source " . ($x ? 'mauvais' : 'bon'));
-  return $x;
+function nettoyer_uri() {
+	$fichier_requete = $GLOBALS['REQUEST_URI'];
+	$fichier_requete = eregi_replace
+		('[?&](submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*',
+		'', $fichier_requete);
+	return $fichier_requete;
 }
 
-# Retourne la fonction principale d'un squelette compilé.
-# En lance la compilation s'il ne l'était pas.
+function generer_nom_fichier_cache($contexte='', $fond='') {
+	global $HTTP_POST_VARS;
 
-function ramener_squelette($squelette)
-{
-  $e = $GLOBALS['extension_squelette'];
-  $nom = $e . '_' . md5($squelette);
-  $sourcefile = $squelette . ".$e";
+	if (!$contexte) {
+		$fichier_requete = nettoyer_uri();
+	} else {
+		$fichier_requete = $fond;
+		foreach ($contexte as $var=>$val)
+			$fichier_requete .= "&$var=$val";
+	}
 
-  if (function_exists($nom))
-    {
-      spip_log("Squelette $squelette:\t($nom) déjà en mémoire (INCLURE répété)");
-      return $nom;
-    }
-# spip_log("demande verrou $squelette"); 
-  clearstatcache();
-  if (!$lock = fopen($sourcefile, 'rb'))
-      $r = '';
-  else
-    {
-#      spip_log("obtient verrou $squelette"); 
-# empecher un meme calcul par 2 processus différents en se réservant le source
-      while (!flock($lock, LOCK_EX));
-# remplacer la ligne ci-dessus par les 3 suivantes pour démonstration:
-#  while (!flock($lock, LOCK_EX + LOCK_NB))
-# {sleep(1);spip_log("Lock: $nom " . getmypid());}
-#  sleep(3);
-      $phpfile = subdir_skel() . $nom . '.php';
-      if (file_exists($phpfile))
-	{
-	  if (!squelette_obsolete(filemtime($phpfile), $squelette))
-	    {
-	      include($phpfile);
-	      if (function_exists($nom))
-		{
-		  spip_log("Squelette $squelette:\t($nom) chargé");
-		  flock($lock, LOCK_UN);
-		  fclose($lock);
-		  return $nom;
+	$md_cache = md5($fichier_requete);
+
+	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
+	$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
+	$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
+	$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
+	if (strlen($fichier_cache) > 24)
+		$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-',
+		'\1-', $fichier_cache), -22);
+
+	// Pour la page d'accueil
+	if (!$fichier_cache)
+		$fichier_cache = 'INDEX-';
+
+	// Cas des POST sur une meme adresse : ne pas melanger (desuet?)
+	if (!empty($HTTP_POST_VARS)) $fichier_cache .= '.'.@getmypid();
+	$fichier_cache .= '.'.substr($md_cache, 1, 8);
+
+	$subdir_cache = substr($md_cache, 0, 1);
+
+	if (creer_repertoire('CACHE', $subdir_cache))
+		$fichier_cache = "$subdir_cache/$fichier_cache";
+
+	return $fichier_cache;
+}
+
+
+//
+// Doit-on recalculer le cache ?
+//
+
+function utiliser_cache($chemin_cache, $delais) {
+	global $HTTP_SERVER_VARS, $HTTP_POST_VARS;
+	global $lastmodified;
+
+	// A priori cache
+	$ok_cache = true;
+
+	// Existence du fichier
+	$ok_cache = @file_exists($chemin_cache);
+
+	// Date de creation du fichier
+	if ($ok_cache) {
+		$t = filemtime($chemin_cache);
+		$age = time() - $t;
+		$age_ok = (($age < $delais) AND ($age >= 0));
+
+		// fichier cache trop vieux ?
+		if (!$age_ok)
+			$ok_cache = false;
+
+		// Inclusions multiples : derniere modification
+		if ($lastmodified < $t) $lastmodified = $t;
+	}
+
+	// recalcul obligatoire
+	$ok_cache &= ($GLOBALS['recalcul'] != 'oui');
+	$ok_cache &= empty($HTTP_POST_VARS);
+
+	// ne jamais recalculer pour les moteurs de recherche, proxies...
+	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
+		$ok_cache = true;
+
+	# spip_log (($ok_cache ? "cache":"calcul")." ($chemin_cache)". ($age ? " age: $age s (reste ".($delais-$age)." s)":''));
+	return $ok_cache;
+}
+
+
+function ecrire_fichier_cache ($fichier, $contenu) {
+	$fichier_tmp = $fichier.'_tmp';
+
+	// Essayer de poser un verrou pour proteger l'ecriture du fichier
+	if (!spip_get_lock($fichier_tmp, 1)) {
+		spip_log ("Echec du lock $fichier_tmp !");
+		return;
+	}
+
+	// Entrer les donnees et verifier qu'on est alle au bout
+	$f = fopen($fichier_tmp, "wb");
+	if (!$f) {
+		spip_log ("Echec d'ouverture de $fichier_tmp !");
+		return $fichier;
+	} else {
+		$r = fwrite($f, $contenu);
+		if ($r != strlen($contenu))
+			$bug = true;
+		if (!fclose($f))
+			$bug = true;
+	}
+
+	// Finaliser
+	if ($bug) {
+		spip_log ("Probleme avec le fichier $fichier_tmp - je meurs");
+		@unlink($fichier_tmp);
+	} else {
+		@rename($fichier_tmp, $fichier);
+	}
+	spip_release_lock($fichier_tmp);
+}
+
+
+//
+// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
+//
+
+function creer_repertoire($base, $subdir) {
+	if (@file_exists("$base/.plat")) return '';
+	$path = $base.'/'.$subdir;
+	if (@file_exists($path)) return "$subdir/";
+
+	@mkdir($path, 0777);
+	@chmod($path, 0777);
+	$ok = false;
+	if ($f = @fopen("$path/.test", "w")) {
+		@fputs($f, '<'.'?php $ok = true; ?'.'>');
+		@fclose($f);
+		include("$path/.test");
+	}
+	if (!$ok) {
+		$f = @fopen("$base/.plat", "w");
+		if ($f)
+			fclose($f);
+		else {
+			@header("Location: spip_test_dirs.php3");
+			exit;
 		}
-	    }
-	  # Cache obsolete ou erroné.
-	  @unlink($phpfile);
 	}
-      include_local("inc-calcul-squel.php3");
-      $timer_a = explode(" ", microtime());
-# si vous n'etes pas sous Windows, vous améliorerez les perfs en 
-# décommentant les 2 lignes suivantes (quant à Windows, il fait: $r =""; !)
-      $r = # function_exists('file_get_contents') ?
-	# file_get_contents($spipfile) : 
-	fread($lock, filesize($sourcefile));
-    }
-  if (!$r)
-    {
-      if ($lock) 
-	{ flock($lock, LOCK_UN); fclose($lock);}
-      include_ecrire ("inc_presentation.php3");
-      install_debut_html(_T('info_erreur_systeme'));
-      echo $sourcefile, _L(' squelette illisible');
-      install_fin_html();
-      exit;
-    }
-
-  $r = calculer_squelette($r, $nom, $e);
-  $timer_b = explode(" ", microtime());
-  $timer = ceil(1000*($timer_b[0] + $timer_b[1]-$timer_a[0]-$timer_a[1]));
-
-	if (file_exists($phpfile)) unlink($phpfile); // eviter tout probleme de duplication de contenu !!
-  $f=fopen($phpfile, "wb"); 
-  fwrite($f,"<?php # $squelette pid: " .  getmypid() ."\n");
-  fwrite($f,$r);
-  fwrite($f,'?'.'>');
-  fclose($f);
-  flock($lock, LOCK_UN);
-  fclose($lock);
-  spip_log("Squelette $squelette: ($nom)"  . strlen($r) . " octets, $timer ms");
-  eval($r); # + rapide qu'un include puisqu'on l'a
-  return $nom;
+	return ($ok? "$subdir/" : '');
 }
 
-# Teste si le squelette PHP ayant produit un cache est obsolete
 
-function generateur_obsolete($nom)
-{
-#  spip_log("Generateur de $nom");
-  $d = subdir_skel() . $nom . '.php';
-  if (file_exists($d))
-    {
-      $f = fopen($d, 'r');
-      if ($f)
-	{
-	  $l = fgets($f,1024);
-	  fclose($f);
-	  if (preg_match('/<.php #\s(\S*)\s/', $l, $m))
-	    return (squelette_obsolete(filemtime($d), $m[1]));
-	}
-    }
-  return true;
-}
+function purger_repertoire($dir, $age, $regexp = '') {
+	$handle = @opendir($dir);
+	if (!$handle) return;
 
-# Controle la validité d'un cache .
-# retourne False ou un tableau de 3 éléments:
-# - texte
-# - date de naissance
-# - présence de php à réexecuter
-# Si présent, on modifie $fraicheur (passé en référence)
-# pour qu'il indique la durée de vie restante
-
-function page_perenne($lock, $file, &$fraicheur, $passer_outre)
-{
-  $naissance = filemtime($file);
-  $t = time() - $naissance;
-  if (($t > $fraicheur) && $passer_outre) return false; 
-#  spip_log("Perenne: fraicheur ok");
-# la ligne 1 contient un commentaire comportant successivement
-# - la longévité du include le plus bref
-# - le  type (html ou php)
-# - le squelette ayant produit la page
-# - d'autres info pour debug seulement
-  $l = fgets($lock,1024);
-  if ((!preg_match("/^<!--\s(\d+)\s(\w+)\s(\S+)\s/", $l, $m)) && $passer_outre)
-# fichier non conforme, on ignore
-    return false; 
-#  spip_log("Perenne: contenu ok");
-  $t =  $m[1] - $t;
-  if (!$passer_outre) 
-    {
-      if ($t < 0) return false;
-#  spip_log("Perenne: include ok");
-      if (generateur_obsolete($m[3])) return false;
-    }
-#  spip_log("Perenne: generateur $m[3] ok");
-  $fraicheur = $t;
-  return array('texte' =>
-# si vous n'etes pas sous Windows, vous améliorerez les perfs en 
-# décommentant les 2 lignes suivantes (quant à Windows, il retourne "" !)
-#        function_exists('file_get_contents') ?
-#        substr(file_get_contents($file), strlen($l)) : 
-	       fread($lock, filesize($file)),
-	       'naissance' => $naissance,
-	       'process_ins' => $m[2]);
-}
-
-# Retourne une page, décrite par le tableau de 2 ou 3 éléments:
-# 'texte' => la page
-# 'process_ins' => 'html' ou 'php' si présence d'un '<?php'
-# 'naissance' => heure du calcul si déjà calculé (absent si nouveau)
-
-# Si elle n'est pas dans le cache ou que celui-ci est inemployable,
-# calcul de la page en appliquant la fonction $calcul sur $contexte
-# (tableau de valeurs, hack standard pour langage comme PHP qui
-# permettent toutes les horreurs mais pas les belles et utiles fermetures)
-# et ecriture dans le cache sous le répetoire $fraicheur.
-# Celle-ci est pasée par référence pour être changée
-# $calcul est soit cherche_page_incluse soit cherche_page_incluante
-# qui appelle toute deux cherche_page, qui construit le tableau a 2 éléments
-
-# Les accès concurrents sont gérés par un verrou général, 
-# remplacé rapidement par un verrou spécifique
-
-function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
-{
-  # pas de mise en cache si:
-  # - recherche (trop couteux de mémoriser une recherche précise)
-  # - valeurs hors URL (i.e. POST) sauf Forum qui les traite à part
-  
-  if ($GLOBALS['var_recherche']||
-      ($HTTP_POST_VARS && !$GLOBALS['ajout_forum']))
-      {
-	include_local('inc-calcul.php3');
-	return $calcul('', $contexte);
-      }
-# Bloquer/se faire bloquer par TOUS les créateurs de cache
-# Ce fichier sert de verrou (on est sur qu'il existe!).
-  if (!$lock = fopen('inc-cache.php3', 'rb'))
-    return(array('texte' => 'Cache en panne'));
-  while (!flock($lock, LOCK_EX));
-  $file = file_cache($cle, $fraicheur);
-  if (!file_exists($file))
-    {
-      fclose(fopen($file,'w'));
-      $obsolete = false;
-      $usefile = false;
-    }
-  else
-    {
-      $obsolete = true;
-      $usefile = ($GLOBALS['recalcul'] != 'oui');
-    }
-# Acquérir le verrou spécifique et libérer le précédent
-# pour permettre d'autres calculs (notamment d'éventuels include).
-# Ouvrir par r+ verrouillé pour forcer un 2e processus de même intention
-# à attendre le résulat du premier et s'en servir. 
-# Pour voir, décommenter le sleep ci-dessous,
-# lancer 2 demandes d'une page (surtout à inclusion) et regarder spip_log
-#  sleep(3);
-#  spip_log("demande de verrou pour $cle"); 
-  if (!$lock2 = fopen($file, 'r+b'))
-    {
-      flock($lock, LOCK_UN);
-      return(array('texte' => 'Cache en panne'));
-    }
-  if (!flock($lock2, LOCK_EX + LOCK_NB))
-    {
-# un autre processus s'occupe du bébé; 
-# on se bloque dessus après libération du verrou général
-      flock($lock, LOCK_UN);
-      $usefile = true;
-      while(!flock($lock2, LOCK_EX));
-    }
-  else
-    {
-    flock($lock, LOCK_UN);
-    }
-#  spip_log("obtient verrou $cle et libère le général"); 
-  $passer_outre =  !(timeout(false,false));
-  $r = ((!$usefile) && (!$passer_outre)) ? '' :
-    page_perenne($lock2, $file, $fraicheur, $passer_outre);
-  if ($r)
-    {
-#      spip_log("libère verrou $cle (page perenne)"); 
-      flock($lock2, LOCK_UN);
-      return $r;
-    }
-  if ($obsolete && (file_exists('inc-invalideur.php3')))
-    {
-      include_local('inc-invalideur.php3');
-      supprime_invalideurs_inclus("hache='$file'");
-    }
-  include_local('inc-calcul.php3');
-  if (!function_exists($calcul))
-      {
-	flock($lock2, LOCK_UN);
-#      spip_log("libère verrou $cle (Compilateur absent)");
-	return(array('texte' => 'Compilateur absent'));
-      }
-  $page = $calcul($file, $contexte);
-  $texte = $page['texte'];
-  $n = ($fraicheur ? strlen($texte) : 0);
-  if (!$n)
-    {
-      flock($lock2, LOCK_UN);
-#      spip_log("libère verrou $cle (Page vide)");
-      @unlink($file);
-    }
-  else
-    {
-      spip_log("libère verrou $cle ($n octets, $fraicheur sec de validité.)");
-      ftruncate($lock2,0);
-      fwrite($lock2, "<!-- $fraicheur\t" . 
-	     $page['process_ins'] .
-	     "\t" .
-	     $page['invalideurs']['squelette'] .
-	     "\t$cle  pid: " .  
-	     getmypid() .
-	     " -->\n");
-      fwrite($lock2,$texte);
-      flock($lock2, LOCK_UN);
-      fclose($lock2);
-      if (file_exists('inc-invalideur.php3'))
-	{
-	  include_local('inc-invalideur.php3');
-	  maj_invalideurs($file, $page['invalideurs']);
-	  if ($f = $contexte['cache_incluant'])
-	    insere_invalideur(array($file => true), 'inclure', $f);
-	}
-    }
-  return $page;
-}
-
-# retourne la date de naissance ou 0 si inexistant ou obsolete
-# attention: ne controle pas l'obsolescence des includes et du squelette.
-# Pas 100% fiable, donc, mais suffisant en pratique
-
-function cv_du_cache($cle, $fraicheur)
-{
-  $file = file_cache($cle, $fraicheur);
-  if (!file_exists($file))
-    return 0;
-  else
-    {
-      $naissance = filemtime($file);
-      $t = time() - $naissance;
-      return (($t > $fraicheur) ? 0 : $naissance);
-    }
-}
-
-# détruit tous les squelettes
-
-function retire_caches_squelette()
-{
-  $i= 0 ;
-  $dir = subdir_skel();
-  if ($handle = @opendir($dir))
-    {
-      while (($fichier = readdir($handle)) != '') {
-	if ($fichier[0] != '.') { @unlink("$dir$fichier"); $i++ ;}
-      }
-    }
-  spip_log("Destruction des $i squelette(s)");
-}
-
-# détruit toutes les pages cachées et leurs invalideurs
-function retire_caches_pages()
-{
-  $j = 0;
-  foreach (alldir_cache() as $dir)
-    { 
-      if ($handle = opendir($dir))
-	{
-	  while (($subdir = readdir($handle)) != '') {
-	    if (($subdir[0] != '.') && ($handle2 = opendir("$dir$subdir")))
-	      {
-		while (($fichier = readdir($handle2)) != '') {
-		  if ($fichier[0] != '.')
-		    { @unlink("$dir$subdir/$fichier"); $j++;}
+	$t = time();
+	while (($fichier = @readdir($handle)) != '') {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		$chemin = "$dir/$fichier";
+		if (is_file($chemin)) {
+			$d = $t - filemtime($chemin);
+			if ($d > $age OR (ereg('\.NEW$', $fichier) AND $d > 60)) {
+				@unlink($chemin);
+				$fichier = ereg_replace('\.NEW$', '', $fichier);
+				$query = "DELETE FROM spip_forum_cache WHERE fichier='$fichier'";
+				spip_query($query);
+			}
 		}
-		@rmdir("$dir$subdir");
-	      }
-	  }
+		else if (is_dir($chemin)) {
+			if ($fichier != 'CVS') purger_repertoire($chemin, $age);
+		}
 	}
-    }
-  spip_log("Destruction des $j cache(s)");
-  if (file_exists('inc-invalideur.php3'))
-    {
-      include_local('inc-invalideur.php3');
-      supprime_invalideurs();
-    }
+	closedir($handle);
 }
 
-# elimine les caches obsoletes figurant dans le même rep que la page indiquée
 
-function retire_vieux_caches($cle, $delais)
-{
-  $dir = dir_of_file_cache($cle, $delais);
-  $tous = trouve_caches('retire_cond_cache', $delais, $dir);
-  spip_log("nettoyage de $dir (" . count($tous) . " obsolète(s)");
-  if ($tous)
-    {
-      if (!file_exists('inc-invalideur.php3'))
-	retire_caches($tous);
-      else
-	{
-	  include_local('inc-invalideur.php3');
-	  applique_invalideur($tous);
+// Recuperer les meta donnees du fichier cache
+function meta_donnees_cache ($chemin_cache) {
+	// Lire le debut du fichier cache ; permet de savoir s'il n'a
+	// pas ete invalide par une modif sur une table
+	if ($f = fopen($chemin_cache, "r")) {
+		$l = fgets($f,1024);
+		if (!preg_match("/^<!-- ([^\n]*) -->\n/", $l, $match))
+			return false; // non conforme
+		$meta_donnees = unserialize($match[1]);
 	}
-    }
+	return $meta_donnees;
 }
 
-# trouve dans un répertoire les caches
-# vérifiant un prédicat binaire (donné avec son premier argument)
+// Determination du fichier cache (si besoin)
+function determiner_cache($delais, &$use_cache, &$chemin_cache) {
+	if ($delais == 0) {
+		$use_cache = false;
+		$chemin_cache = '';
+	} else {
+		// Le fichier cache est-il valide ?
+		$use_cache = utiliser_cache($chemin_cache, $delais);
 
-function trouve_caches($cond, $arg, $rep)
-{
-  if ($handle = opendir($dir))
-     {
-       while (($fichier = readdir($handle)) != '') {
-	 $path = "$dir/$fichier";
-	 if ($cond($arg, $path)) $tous[] = $path;
-       }
-     }
-   return $tous;
-}
+		if ($use_cache) {
+			$meta_donnees = meta_donnees_cache($chemin_cache);
+			if (!is_array($meta_donnees)) {
+				$use_cache = false;
+			} else {
+				// Remplir les globals pour les boutons d'admin
+				if (is_array($meta_donnees['contexte']))
+				foreach ($meta_donnees['contexte'] as $var=>$val)
+					$GLOBALS[$var] = $val;
+			}
+		}
 
-# Teste l'obsolescence d'un cache. 
-# Celle de son include le + bref (indiquée ligne 1) serait + juste
-# mais lors d'un balayage de répertoire, 
-# ouvrir chaque fichier serait couteux, et de gain faible
+		// S'il faut calculer, poser un lock (et tester MySQL)
+		if (!$use_cache) {
+			// Attendre 20 secondes maxi, que le copain ait
+			// calcule le meme fichier cache ou que
+			// l'invalideur ait fini de supprimer le fichier
+			$ok = spip_get_lock($chemin_cache, 20);
 
-function retire_cond_cache($arg,$path)
-{
-    return (filemtime($path) <  $arg);
-}
+			if (!$ok)
+				$use_cache = @file_exists($chemin_cache);
 
-# détruit les caches donnés en arguments.
-# En fait il faudrait poser un verrou sur chaque fichier
-# pour que ramener_cache ne puisse s'exécuter à ce moment-là
-# Trop cher pour une situation peu probable, mais à étudier.
+			// Toujours rien ? La base est morte :-(
+			if (!$use_cache AND !$GLOBALS['db_ok']) {
+				if (!$GLOBALS['flag_preserver']) {
+					include_ecrire('inc_presentation.php3');
+					install_debut_html(_T('info_travaux_titre'));
+					echo "<p>"._T('titre_probleme_technique')."</p>\n";
+					install_fin_html();
+					spip_log("Erreur base de donnees & ".
+					"impossible de creer $chemin_cache");
+				}
+				exit;
+			}
+		}
 
-function retire_caches($caches)
-{
-  if ($caches)
-    {
-      $dir = dir_var();
-      foreach ($caches as $path)
-	{ if (is_cache($path, $dir))
-	    @unlink($GLOBALS['flag_ecrire'] ? ('../' . $path) : $path);
-	  else die(_T('info_acces_refuse') . ": '$path'");
+		// On a le fichier cache et la date
+		if ($use_cache)
+			$lastmodified = filemtime($chemin_cache);
+			###  Si on utilise la fraicheur ce sera inutile
 	}
-    }
+
+	return $lastmodified;
 }
 
 ?>

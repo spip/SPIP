@@ -31,7 +31,8 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 		}
 	}
 	return "\n'<".
-		"?php\n\t\$contexte_inclus = array($criteres);\n" .
+		"?php\n\t\$contexte_inclus = array($criteres);\n\t".
+		"\$fichier_inclus = \'$fichier\';\n" .
 		(($dossier_squelettes) ?
 		("
 			if (@file_exists(\'$dossier_squelettes/$fichier\')){
@@ -39,8 +40,8 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 			} else {
 				include(\'$fichier\');
 			} " ) :
-		("include(\'$fichier\');")) .
-		"?" . ">'";
+		("\tinclude(\'$fichier\');")) .
+		"\n?'." . "'>'";
 }
 
 // Convertit un texte Spip en une EXPRESSION php 

@@ -154,6 +154,14 @@ $spip_server = array (
 // Produire du TeX ou de MathML ?
 $traiter_math = 'tex';
 
+/* ATTENTION CES VARIABLES NE FONCTIONNENT PAS ENCORE */
+// Extension du fichier du squelette 
+$extension_squelette = 'html';
+// Repertoire des images
+$dossier_images = 'IMG';
+/* / MERCI DE VOTRE ATTENTION */
+
+
 //
 // *** Fin du parametrage ***
 //
@@ -971,6 +979,21 @@ function verif_butineur() {
 	}
 
 	if (!$browser_name) $browser_name = "Mozilla";
+}
+
+//
+// spip_timer : on l'appelle deux fois et on a la difference, affichable
+//
+function spip_timer($t='rien') {
+	static $time;
+	$a=time(); $b=microtime();
+
+	if (isset($time[$t])) {
+		$p = $a + $b - $time[$t];
+		unset($time[$t]);
+		return sprintf("%.2fs", $p);
+	} else
+		$time[$t] = $a + $b;
 }
 
 ?>

@@ -6,8 +6,9 @@ if (defined("_ECRIRE_INC_CRON")) return;
 define("_ECRIRE_INC_CRON", "1");
 
 
-// ---------------------------------------------------------------------------------------------
+// --------------------------
 // Gestion des taches de fond
+// --------------------------
 
 
 //
@@ -55,7 +56,7 @@ function cron_archiver_stats($last_date) {
 //
 // La fonction de base qui distribue les taches
 //
-function spip_cron($use_cache) {
+function spip_cron() {
 	global $flag_ecrire, $dir_ecrire, $db_ok;
 
 	include_ecrire("inc_connect.php3");
@@ -154,10 +155,8 @@ function spip_cron($use_cache) {
 	//
 	// Gerer l'indexation
 	//
-
-	if ($use_cache  &&( lire_meta('activer_moteur') == 'oui')) {
+	if (lire_meta('activer_moteur') == 'oui') {
 		if (timeout('indexation')) {
-		  spip_log('effectuer_une_indexation');
 			include_ecrire("inc_index.php3");
 			effectuer_une_indexation();
 		}
@@ -167,7 +166,6 @@ function spip_cron($use_cache) {
 	//
 	// Mise a jour d'un (ou de zero) site syndique
 	//
-
 	if (lire_meta("activer_syndic") == "oui") {
 		if (timeout()) {
 			include_ecrire("inc_sites.php3");
@@ -183,7 +181,6 @@ function spip_cron($use_cache) {
 	//
 	// Effacement de la poubelle (documents supprimes)
 	//
-
 	if (@file_exists($fichier_poubelle = $dir_ecrire.'data/.poubelle')) {
 		if (timeout('poubelle')) {
 			if ($s = sizeof($suite = file($fichier_poubelle))) {
@@ -191,14 +188,16 @@ function spip_cron($use_cache) {
 				$s = trim($s);
 
 				// Verifier qu'on peut vraiment effacer le fichier...
-				$query = "SELECT id_document FROM spip_documents WHERE fichier='$s'";
+				$query = "SELECT id_document FROM spip_documents
+					WHERE fichier='$s'";
 				$result = spip_query($query);
-				if (spip_num_rows($result) OR !ereg('^IMG/', $s) OR strpos($s, '..')) {
+
+				if (spip_num_rows($result) OR !ereg('^IMG/', $s)
+				OR strpos($s, '..'))
 					spip_log("Tentative d'effacement interdit: $s");
-				}
-				else {
+				else
 					@unlink($s);
-				}
+
 				unset($suite[$n]);
 				$f = fopen($fichier_poubelle, 'wb');
 				fwrite($f, join("", $suite));

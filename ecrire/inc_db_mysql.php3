@@ -132,7 +132,9 @@ function spip_insert_id() {
 	return mysql_insert_id();
 }
 
+//
 // Poser un verrou local a un SPIP donne
+//
 function spip_get_lock($nom, $timeout = 0) {
 	global $spip_mysql_db, $table_prefix;
 	if ($table_prefix) $nom = "$table_prefix:$nom";
@@ -151,5 +153,22 @@ function spip_release_lock($nom) {
 	$nom = addslashes($nom);
 	spip_query("SELECT RELEASE_LOCK('$nom')");
 }
+
+
+//
+// IN (...) est limite a 255 elements, d'ou cette fonction assistante
+//
+function calcul_mysql_in($val, $valeurs, $not) {
+	$s = split(',', $valeurs, 255);
+	if (count($s) < 255) {
+		return ("($val $not IN ($valeurs))");
+	} else {
+		$valeurs = array_pop($s);
+		return ("($val $not IN (" . join(',',$s) . "))\n" .
+			($not ? "AND\t" : "OR\t") .
+			calcul_mysql_in($val, $valeurs, $not));
+    }
+}
+  
 
 ?>
