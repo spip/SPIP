@@ -58,14 +58,13 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
 		echo "<center><font size='2' FACE='Verdana,Arial,Sans,sans-serif'>";
-	
-		$logo_ok = get_image($logo);
-		$survol_ok = (!$logo_ok ? '' : get_image($survol));
-		afficher_logo($logo, $texteon, $logo_ok);
-	
-		if ($logo_ok OR $survol_ok) {
-			echo "<br><br>";
-			afficher_logo($survol, $texteoff, $survol_ok);
+		$desc = decrire_logo($logo);
+		afficher_logo($logo, $texteon, $desc);
+
+		if ($desc) {
+			echo "<br /><br />";
+			$desc = decrire_logo($survol);
+			afficher_logo($survol, $texteoff, $desc);   
 		}
 	
 		echo "</font></center>";
@@ -74,23 +73,30 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 	}
 }
 
+function decrire_logo($racine) {
+	$logo = get_image($racine);
+	if ($logo) {
+		$taille = $logo[1];
+		if ($taille) {
+			list($x, $y, $w, $h) =  $taille;
+			$logo[1] = "$x x $y "._T('info_pixels');
+			$taille = " width='$w' height='$h'";
+		}
+		$logo[2] = "<img src='" .
+			_DIR_IMG . $logo[0] . $logo[2] .
+			"'$taille alt='' />";
+	}
+	return $logo;
+}
+
 function afficher_logo($racine, $titre, $logo) {
 	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 
 	include_ecrire('inc_admin.php3');
-
+ 
 	$redirect = $clean_link->getUrl();
-	if ($logo) {
-		$fichier = $logo[0];
-		$taille = $logo[1];
-		$fid = $logo[2];
-		if ($taille) {
-			$taille_html = " WIDTH=$taille[2] HEIGHT=$taille[3] ";
-			$taille_txt = "$taille[0] x $taille[1] "._T('info_pixels');
-		}
-	}
 
 	echo "<b>";
 	echo bouton_block_invisible(md5($titre));
@@ -98,14 +104,14 @@ function afficher_logo($racine, $titre, $logo) {
 	echo "</b>";
 	echo "<font size=1>";
 
-	if ($fichier) {
+	if ($logo) {
+		list($fichier, $taille, $img) =  $logo;
 		$hash = calculer_action_auteur("supp_image $fichier");
 
-		echo "<p><center><img src='" . _DIR_IMG . "$fichier$fid' $taille_html alt='' />";
-
+		echo "<p><center>$img";
 		echo debut_block_invisible(md5($titre));
-		echo "$taille_txt\n";
-		echo "<br />[<A HREF='../spip_image.php3?";
+		echo $taille;
+		echo "\n<br />[<a href='../spip_image.php3?";
 		$elements = array('id_article', 'id_breve', 'id_syndic', 'coll', 'id_mot', 'id_auteur');
 		while (list(,$element) = each ($elements)) {
 			if ($$element) {
