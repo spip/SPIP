@@ -52,6 +52,12 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		"MIME-Version: 1.0\n".
 		"Content-Type: text/plain; charset=$charset\n".
 		"Content-Transfer-Encoding: 8bit\n$headers";
+
+	// terrible conversion pour le mail : les '&eacute;' doivent etre transformes en '\xe9'
+	// puis remis dans le charset du mail...  (experimental)
+	$texte = unicode2charset(iso_8859_1_to_unicode(filtrer_entites($texte)));
+	$sujet = unicode2charset(iso_8859_1_to_unicode(filtrer_entites($sujet)));
+
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
 	if ($os_serveur == 'windows') {
