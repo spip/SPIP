@@ -85,12 +85,12 @@ debut_droite();
 		echo "<div>&nbsp;</div>";
 		
 		echo "<div style='float: left; width: 200px;'>";
-			icone_horizontale (_T("calendrier_synchro_lien"), "$adresse_site/spip_cal.php3?type=public", "calendrier-24.gif");
+			icone_horizontale (_T("calendrier_synchro_lien"), "$adresse_site/ical.php3", "calendrier-24.gif");
 		echo "</div>";
 	
 		echo "<div style='float: right; width: 200px;'>";
 			$webcal = ereg_replace("http.?://", "webcal://", $adresse_site);
-			icone_horizontale (_T("calendrier_synchro_sync"), "$webcal/spip_cal.php3?type=public", "calendrier-24.gif");
+			icone_horizontale (_T("calendrier_synchro_sync"), "$webcal/ical.php3", "calendrier-24.gif");
 		echo "</div>";
 		echo fin_cadre_enfonce();
 
