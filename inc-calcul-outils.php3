@@ -337,17 +337,17 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 	$retour = spip_abstract_fetsel(
-			array('id_article'),
+			array('texte'),
 			array('petitions'),
 			array("id_article=".intval($id_article)),
 			'','','','',1, 
 			$table, $id_boucle, $serveur);
 
+	if (!$retour) return '';
 	# cette page est invalidee par toute petition
-	if ($retour AND $Cache)
-		$Cache['petition']['petition'] = 1;
-
-	return ($retour ? $id_article : '');
+	if ($Cache) $Cache['petition']['petition'] = 1;
+	# ne pas retourner '' car le texte sert aussi de présence
+	return ($retour['texte'] ? $retour['texte'] : ' ');
 }
 
 # retourne le chapeau d'un article, et seulement s'il est publie

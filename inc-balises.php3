@@ -432,9 +432,10 @@ function balise_LESAUTEURS_dist ($p) {
 }
 
 
-// #PETITION
-// Champ testant la presence d'une petition
-// non documente mais indispensable a FORMULAIRE_PETITION
+// #PETITION 
+// retourne '' si l'article courant n'a pas de petition 
+// le texte de celle-ci sinon (et ' ' si il est vide)
+// cf FORMULAIRE_PETITION
 
 function balise_PETITION_dist ($p) {
 	$nom = $p->id_boucle;
