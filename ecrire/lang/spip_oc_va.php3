@@ -62,8 +62,8 @@ la documentacion d\'SPIP</a>.',
 'avis_probleme_archive' => 'Probl&egrave;ma de lectura dau fichier @archive@',
 'avis_site_introuvable' => 'Sit introbable',
 'avis_site_syndique_probleme' => 'Atencion: la sindicacion d\'aqueu sit a rescontrat un probl&egrave;ma; lo sist&egrave;ma es doncas interromput tempor&agrave;riament. Verificatz l\'adrei&ccedil;a dau fichier de sindicacion d\'aqueu sit (<b>@url_syndic@</b>), e tornatz assajar de recuperar las informacions.',
-'avis_sites_probleme_syndication' => 'Aquelos sits an rescontrat un probl&egrave;ma de sindicacion',
-'avis_sites_syndiques_probleme' => 'Aquelos sits sindicats an pausat un probl&egrave;ma',
+'avis_sites_probleme_syndication' => 'Aqueles sits an rescontrat un probl&egrave;ma de sindicacion',
+'avis_sites_syndiques_probleme' => 'Aqueles sits sindicats an pausat un probl&egrave;ma',
 'avis_suppression_base' => 'ATENCION, suprimir las donaas es irreversible',
 'avis_version_mysql' => 'V&ograve;stra version de MySQL (@version_mysql@) permet pas l\'autoreparacion de las taulas de la basa.',
 
@@ -116,7 +116,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Afichar dins la tiera dels redactors connectats',
 'bouton_radio_articles_futurs' => 'als articles futurs solament (ges d\'accion sus la basa de donaas).',
 'bouton_radio_articles_tous' => 'als articles tots sens excepcion',
-'bouton_radio_articles_tous_sauf_forum_desactive' => 'a tots los articles, f&ograve;ra aquelos que lor forum es desactivat.',
+'bouton_radio_articles_tous_sauf_forum_desactive' => 'a tots los articles, f&ograve;ra aqueles que lor forum es desactivat.',
 'bouton_radio_desactiver_messagerie' => 'Desactivar la messatjari&aacute;',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_enregistrement_obligatoire' => 'Registrament obligat&ograve;ri (los
@@ -246,12 +246,12 @@ la documentacion d\'SPIP</a>.',
 'dirs_probleme_droits' => '<b>Probl&egrave;ma de dreches d\'acc&egrave;s</b>',
 'dirs_repertoires_absents' => '<B>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
   <P>Se p&ograve;t que vena d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
-  Verificatz que las minusculas e majusculas d\'aquelos repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
+  Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
   &ccedil;ai sobre; s\'es pas lo cas, tornatz nommar los repert&ograve;ris amb v&ograve;stre logiciau FTP en corregissent l\'error.
   <P>Un c&ograve;p qu\'auretz fach aqu&ograve;, poiretz ',
 'dirs_repertoires_suivants' => '<B>Los repert&ograve;ris seguents son pas accessibles en escritura: <ul>@bad_dirs@.</ul> </b>
   <P>Per adobar aqu&ograve;, utilizatz v&ograve;stre client FTP a fin de reglar los dreches d\'acc&egrave;s de chascun
-  d\'aquelos repert&ograve;ris. La guida d\'installacion explica en detalh coma chau procedir.
+  d\'aqueles repert&ograve;ris. La guida d\'installacion explica en detalh coma chau procedir.
   <P>Tre qu\'auretz facha aquela manipulacion, poiretz ',
 
 
@@ -367,7 +367,7 @@ Merc&eacute; per v&ograve;stra participacion
 'form_prop_non_enregistre' => 'V&ograve;stra proposicion es pas estaa registraa.',
 'form_prop_sujet' => 'Subj&egrave;cte',
 'form_prop_url_site' => 'Adrei&ccedil;a (URL) dau sit',
-'forum_acces_refuse' => 'Po&egrave;tz pas pus accedir v&egrave;rs aquelos forums.',
+'forum_acces_refuse' => 'Po&egrave;tz pas pus accedir v&egrave;rs aqueles forums.',
 'forum_attention_dix_caracteres' => '<b>Atencion!</b> v&ograve;stre messatge ten mens de d&egrave;tz caract&egrave;rs.',
 'forum_attention_trois_caracteres' => '<b>Atencion!</b> v&ograve;stre t&iacute;tol ten mens de tres caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat:',
@@ -712,7 +712,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_l_article' => 'l\'article',
 'info_la_breve' => 'la br&egrave;va',
 'info_la_rubrique' => 'la rubrica',
-'info_laisser_champs_vides' => 'laissar aquelos champs voides)',
+'info_laisser_champs_vides' => 'laissar aqueles champs voides)',
 'info_langue_defaut' => 'Lenga predefinia:',
 'info_langue_interface' => 'Lenga de l\'interf&agrave;cia',
 'info_langue_principale' => 'Lenga majorala dau sit',
@@ -768,7 +768,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_multi_herit' => 'Lenga predefinia',
 'info_multi_langues_choisies' => 'Vougatz seleccionar &ccedil;ai sos las lengas que son a posita dels redactors de v&ograve;stre sit.
   Las lengas ja emplejaas dins v&ograve;stre sit (afichaas primieras) se p&ograve;on pas desactivar.',
-'info_multi_langues_soulignees' => 'Las <u>lengas solinhaas</u> benef&iacute;cian d\'una reviraa de tots los t&egrave;xtes de l\'interf&agrave;cia. Se seleccionatz aquelas lengas, f&ograve;r&ccedil;a elements dau sit public (datas, formularis) se revirar&agrave;n automaticament. Per las lengas non solinhaas, aquelos elements apareisser&agrave;n dins la lenga principala dau sit.',
+'info_multi_langues_soulignees' => 'Las <u>lengas solinhaas</u> benef&iacute;cian d\'una reviraa de tots los t&egrave;xtes de l\'interf&agrave;cia. Se seleccionatz aquelas lengas, f&ograve;r&ccedil;a elements dau sit public (datas, formularis) se revirar&agrave;n automaticament. Per las lengas non solinhaas, aqueles elements apareisser&agrave;n dins la lenga principala dau sit.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per las rubricas?',
 'info_multi_secteurs' => '... mas que per las rubricas a la rai&ccedil; dau sit?',
 'info_multilinguisme' => 'Multiling&uuml;isme',
@@ -1063,7 +1063,7 @@ una color indica lor estat:',
 'item_non_autoriser_documents_joints' => 'Pas autorizar los documents dins los articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Pas autorizar los documents dins las rubricas',
 'item_non_bloquer_liens_syndiques' => 'Pas blocar los liams eissits de la sindicacion',
-'item_non_creer_fichiers_authent' => 'Pas crear aquelos fichiers',
+'item_non_creer_fichiers_authent' => 'Pas crear aqueles fichiers',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'annuari de sits web',
 'item_non_gerer_statistiques' => 'Pas gerir las estadisticas',
 'item_non_limiter_recherche' => 'Alarjar la rec&egrave;rcha au contengut dels sits referenciats',
@@ -1104,7 +1104,7 @@ una color indica lor estat:',
 'lien_forum_public' => 'Gerir lo forum public d\'aquel article',
 'lien_icones_interface' => 'Las ic&ograve;nas de l\'interf&agrave;cia son de <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'liberar',
-'lien_liberer_tous' => 'liberar aquelos articles',
+'lien_liberer_tous' => 'liberar aqueles articles',
 'lien_mise_a_jour_syndication' => 'Actualizar a&uuml;ra',
 'lien_modifer_date' => 'Modificar la data',
 'lien_nom_site' => 'NOM DAU SIT:',
@@ -1363,7 +1363,7 @@ Eissublietz pas tanpauc de recuperar l\'integralitat dau repert&ograve;ri <i>IMG
 'texte_article_virtuel_reference' => '<b>Article virtuau:</b> article referenciat dins v&ograve;stre sit SPIP, mas redirigit v&egrave;rs una autra URL. Per suprimir la redireccion, esfa&ccedil;atz l\'URL &ccedil;ai sobre.',
 'texte_aucun_resultat_auteur' => 'Ges de resultat per "@cherche_auteur@"',
 'texte_auteur_messagerie' => 'Aquest sit vos p&ograve;t indicar de contunha la tiera dels redactors connectats, &ccedil;&ograve; que vos permet d\'eschambiar de messatges en dir&egrave;cte (quora la messatjari&aacute; es desactivaa &ccedil;ai sobre, e mai la tiera dels redactors es desactivaa). Po&egrave;tz decidir de pas apar&eacute;isser dins aquela tiera (siatz "invisible/a" per los autres utilizaires).',
-'texte_auteur_messagerie_1' => 'Aqueu sit permet d\'eschambiar de messatges e de constituir de forums de discussion privats entre los participants dau sit. Po&egrave;tz decidir de pas participar a aquelos eschambis.',
+'texte_auteur_messagerie_1' => 'Aqueu sit permet d\'eschambiar de messatges e de constituir de forums de discussion privats entre los participants dau sit. Po&egrave;tz decidir de pas participar a aqueles eschambis.',
 'texte_auteurs' => 'LOS AUTORS',
 'texte_bilan_traductions' => 'Dins aqueu grafic, las barras verdas representan los articles revirats e actualizats, las barras rojas las reviraas que son d\'actualizar.',
 'texte_breves' => 'Las br&egrave;vas son de t&egrave;xtes corts e simples que permeton de metre en linha l&egrave;u d\'informacions concisas, de gerir
@@ -1408,7 +1408,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
  directament. Segon la compaginacion dau sit public,
  poir&agrave;n apar&eacute;isser sos forma de documents jonches.',
 'texte_documents_joints' => 'Po&egrave;tz autorizar que s\'apondan de documents (fichiers burotics, imatges,
- multim&egrave;dia, etc.) als articles e/o a las rubricas. Aquelos fichiers
+ multim&egrave;dia, etc.) als articles e/o a las rubricas. Aqueles fichiers
  p&ograve;on puei &egrave;sser referenciats dins
  l\'article, o apar&eacute;isser a despart.<p>',
 'texte_documents_joints_2' => 'Aqueu reglatge empacha pas d\'inserir d\'imatges directament dins los articles.',
@@ -1422,7 +1422,7 @@ qu\'apareis quand la rata passa sus lo t&iacute;tol.',
  encara dins los articles.',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri <tt>ecrire/data/</tt> ?</b><p>
-  Aquelos fichiers vos p&ograve;on servir per restr&eacute;nher l\'acc&egrave;s als autors
+  Aqueles fichiers vos p&ograve;on servir per restr&eacute;nher l\'acc&egrave;s als autors
   e administrators autra part dins v&ograve;stre sit
   (programa ext&egrave;rne d\'estadisticas, per exemple).<p>
  Se vos s&egrave;rv pas, po&egrave;tz laissar aquesta opcion
