@@ -16,12 +16,12 @@ if (!$spip_lang) $spip_lang = "fr";
 
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {
-	if (!@file_exists("inc_connect.php3")) {
+	if (!FILE_CONNECT) {
 		Header("Location: install.php3");
 		exit;
 	}
 
-	@copy("inc_connect.php3", "inc_connect_install.php3");
+	@copy(_FILE_CONNECT, _FILE_CONNECT_INS):
 
 	install_debut_html(_T('titre_page_upgrade'));
 	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";

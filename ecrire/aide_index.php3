@@ -12,7 +12,7 @@ include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 
 // Recuperer les infos de langue (preferences auteur), si possible
-if (@file_exists("inc_connect.php3")) {
+if (_FILE_CONNECT) {
 	include_ecrire ("inc_auth.php3");
 }
 include_ecrire ("inc_lang.php3");
@@ -74,8 +74,9 @@ function fichier_aide($lang_aide = '') {
 	else if ($help_server) {
 		// Aide internet, en cache ?
 		include_ecrire('inc_sites.php3');
-		if (@file_exists($fichier_aide = _DIR_SESSIONS . "aide-$lang_aide-aide.html"))
+		if (@file_exists($fichier_aide = _DIR_SESSIONS . "aide-$lang_aide-aide.html")) {
 			return array(file($fichier_aide), $lang_aide);
+		}
 		else {
 			// sinon aller la chercher sur le site d'aide
 			if (ecrire_fichier(_DIR_SESSIONS . 'aide-test', "test")

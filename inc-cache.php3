@@ -205,7 +205,7 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 
 	// Sinon, tester qu'on a la connexion a la base
 	if (!$use_cache) {
-		include_ecrire('inc_connect.php3');
+		include_local(_FILE_CONNECT);
 		if (!$GLOBALS['db_ok']) {
 			if ($chemin_cache AND @file_exists($chemin_cache)) {
 				$use_cache = true;

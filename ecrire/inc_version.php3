@@ -208,6 +208,10 @@ $extension_squelette = 'html';
 /* / MERCI DE VOTRE ATTENTION */
 
 
+// utilise seulement à l'installation pour l'instant
+
+define('_EXTENSION_PHP', '.php3');
+
 //
 // *** Fin du parametrage statique ***
 //
@@ -216,25 +220,32 @@ $flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
 
 # en fait flag_ecrire est une constante, equivalente a la nullite de:
 
-define('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
+define_once('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
+define('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
+define('_DIR_PREFIX2', _DIR_RESTREINT);
 
-if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
-	include(_DIR_RESTREINT . 'mes_options.php3');
+if (@file_exists(_DIR_PREFIX2 . 'mes_options.php3')) {
+	include(_DIR_PREFIX2 . 'mes_options.php3');
 }
 
-if (@file_exists(_DIR_RESTREINT . 'inc_plugins.php3')) {
-	include(_DIR_RESTREINT . 'inc_plugins.php3');
+if (@file_exists(_DIR_PREFIX2 . 'inc_plugins.php3')) {
+	include(_DIR_PREFIX2 . 'inc_plugins.php3');
 }
 
-
-define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
+define_once('_FILE_CONNECT_INS', (_DIR_PREFIX2 . "inc_connect"));
+define_once('_FILE_CONNECT',
+	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
+		(_FILE_CONNECT_INS . _EXTENSION_PHP)
+		 : ''));
 
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
-define_once('_DIR_IMG', (_DIR_RESTREINT ? "" : "../")."IMG/");
-define_once('_DIR_DOC', (_DIR_RESTREINT ? "" : "../")."IMG/");
-define_once('_DIR_CACHE', (_DIR_RESTREINT ? "" : "../")."CACHE/");
-define_once('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
+define_once('_DIR_IMG', _DIR_PREFIX1 ."IMG/");
+define_once('_DIR_DOC', _DIR_PREFIX1 ."IMG/");
+define_once('_DIR_CACHE', _DIR_PREFIX1 ."CACHE/");
+
+define_once('_DIR_SESSIONS', _DIR_PREFIX2 . "data/");
+define_once('_DIR_TRANSFERT', _DIR_PREFIX2 . "upload/");
 
 // exemples de redefinition possible, 
 // SOUS RESERVE QUE php.ini N'AIT PAS pas openbasedir=. !!!!!!
@@ -259,14 +270,17 @@ define_once('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
 define_once('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
 define_once('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
 
-define_once('_FILE_CONNECT', (@file_exists(_DIR_RESTREINT . "inc_connect.php3") ?
-			(_DIR_RESTREINT . "inc_connect.php3") : ''));
 
-// et qq sous-repertoires
+// sous-repertoires d'images accessible en ecriture
 
 define_once('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 define_once('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
 define_once('_DIR_TeX', _DIR_IMG . "TeX/");
+
+// pour ceux qui n'aiment pas nos icones, tout est prevu
+// (pas tout à fait)
+
+define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
 
 // qq chaines standard
 
@@ -468,7 +482,7 @@ function include_plug($file) {
 
 function spip_query($query) {
 	if (_FILE_CONNECT) {
-		include_ecrire("inc_connect.php3");
+		include_local(_FILE_CONNECT);
 		if (!$GLOBALS['db_ok'])
 			return;
 		if ($GLOBALS['spip_connect_version'] < 0.1) {
@@ -930,7 +944,7 @@ function timeout($lock=false, $action=true, $connect_mysql=true) {
 
 	// Base connectee ?
 	if ($connect_mysql) {
-		include_ecrire('inc_connect.php3');
+		include_local(_FILE_CONNECT);
 		if (!$db_ok)
 			return false;
 

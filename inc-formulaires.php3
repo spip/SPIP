@@ -50,7 +50,7 @@ function erreur($zetexte){
 
 function reponse_confirmation($id_article, $val_confirm) {
 
-	include_ecrire("inc_connect.php3");
+	include_local(_FILE_CONNECT);
 	
 	if ($GLOBALS['db_ok']) {
 		include_ecrire("inc_texte.php3");
@@ -146,7 +146,7 @@ function reponse_confirmation($id_article, $val_confirm) {
 function reponse_signature($id_article) {
 	global $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
 	spip_log("signature petition $id_article ($adresse_email)");
-	include_ecrire("inc_connect.php3");
+	include_local(_FILE_CONNECT);
 	
 	if ($GLOBALS['db_ok']) {
 		include_ecrire("inc_texte.php3");

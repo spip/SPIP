@@ -2,7 +2,6 @@
 
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session.php3");
-
 // determiner ou l'on veut retomber
 if ($url)
 	$cible = new Link($url);
@@ -84,6 +83,8 @@ if ($test_echec_cookie == 'oui') {
 
 // Tentative de login
 unset ($cookie_session);
+
+
 if ($essai_login == "oui") {
 	// Recuperer le login en champ hidden
 	if ($session_login_hidden AND !$session_login)
@@ -94,9 +95,8 @@ if ($essai_login == "oui") {
 
 	// Essayer differentes methodes d'authentification
 	$auths = array('spip');
-	include_ecrire('inc_connect.php3'); // pour savoir si ldap est present 
+	include_local(_FILE_CONNECT); // pour savoir si ldap est present 
 	if ($ldap_present) $auths[] = 'ldap';
-
 	$ok = false;
 	reset($auths);
 	while (list(, $nom_auth) = each($auths)) {
@@ -185,7 +185,7 @@ if ($var_lang_ecrire) {
 		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-		if (@file_exists('ecrire/inc_connect.php3')) {
+		if (_FILE_CONNECT) {
 			include_ecrire('inc_admin.php3');
 			if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
 				spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);

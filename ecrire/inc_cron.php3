@@ -61,7 +61,7 @@ function spip_cron() {
 
 	#echo "hum";	spip_log('hum');
 
-	include_ecrire("inc_connect.php3");
+	include(_FILE_CONNECT);
 	if (!$db_ok) {
 		@touch(_FILE_MYSQL_OUT);
 		spip_log('pas de connexion DB pour taches de fond (cron)');

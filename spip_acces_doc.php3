@@ -14,7 +14,7 @@ else
   {
     $refus = false;
     include ("ecrire/inc_version.php3");
-    include ("ecrire/inc_connect.php3");
+    include_local(_FILE_CONNECT);
     include ("ecrire/inc_meta.php3");
     include ("ecrire/inc_session.php3");
 
