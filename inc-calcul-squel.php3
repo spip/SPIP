@@ -1435,9 +1435,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			\$$nom_var = \"\n<a name='formulaire_recherche'></a>
 				<form action='$lien' method='get' name='form_rech'>
 				<input type='text' id='formulaire_recherche' name='recherche' value=\\\"\$rech\\\" size='20' class='formrecherche'\";
-			\$$nom_var .= \"
-				onFocus='if(!focus_r) { document.form_rech.recherche.value = \".chr(34).chr(34).\"; focus_r = 1; }'
-				onBlur='if (document.form_rech.recherche.value == \".chr(34).chr(34).\") { document.form_rech.recherche.value = \".chr(34).\"\"._T('info_rechercher').\"\".chr(34).\"; focus_r = 0; }'\";
 			\$$nom_var .= \"></form>\";
 		}
 		";
