@@ -16,6 +16,8 @@ include_ecrire("inc_lang.php3");
 utiliser_langue_visiteur();
 if ($var_lang) changer_langue($var_lang);
 
+include_ecrire("inc_layer.php3");
+
 ?>
 <HTML>
 <HEAD>
@@ -25,47 +27,114 @@ if ($var_lang) changer_langue($var_lang);
 	a {text-decoration: none; }
 	A:Hover {text-decoration: underline;}
 
+	.article-inactif {
+		float: <?php echo $spip_lang_left; ?>;
+		text-align: <?php echo $spip_lang_left; ?>;
+		width: 80%;
+		background: url(img_pack/triangle<?php echo $spip_lang_rtl; ?>.gif) <?php echo $spip_lang_left; ?> center no-repeat;
+		margin: 2px;
+		padding: 0px;
+		padding-<?php echo $spip_lang_left; ?>: 20px;
+		font-family: Arial, Sans, sans-serif;
+		font-size: 12px;
+	}
+	.article-actif {
+		float: <?php echo $spip_lang_right; ?>;
+		text-align: <?php echo $spip_lang_right; ?>;
+		width: 80%;
+		background: url(img_pack/triangle<?php echo $spip_lang_rtl; ?>.gif) <?php echo $spip_lang_right; ?> center no-repeat;
+		margin: 4px;
+		padding: 0px;
+		padding-<?php echo $spip_lang_right; ?>: 20px;
+		font-family: Arial, Sans, sans-serif;
+		font-size: 12px;
+		font-weight: bold;
+		color: black;
+	}
+	.article-actif:hover {
+		text-decoration: none;
+	}
+	.rubrique {
+		width: 90%;
+		margin: 0px;
+		margin-top: 6px;
+		margin-bottom: 4px;
+		padding: 4px;
+		font-family: Trebuchet MS, Arial, Sans, sans-serif;
+		font-size: 13px;
+		font-weight: bold;
+		color: black;
+		background-color: #EEEECC;
+		-moz-border-radius: 4px;
+	}
 -->
 </style>
+<script type='text/javascript'><!--
+var curr_article;
+function activer_article(id) {
+	if (curr_article)
+		document.getElementById(curr_article).className = 'article-inactif';
+	if (id) {
+		document.getElementById(id).className = 'article-actif';
+		curr_article = id;
+	}
+}
+//--></script>
+<?php afficher_script_layer(); ?>
 </HEAD>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"<?php
+<body bgcolor="#FFFFFF" text="#000000" link='#E86519' vlink='#6E003A' alink='#FF9900' TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"<?php
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 echo ">";
 
 function rubrique($titre, $statut = "redac") {
-	global $aide;
-	global $ligne;
 	global $ligne_rubrique;
+	global $block_rubrique;
+	global $titre_rubrique;
+	global $afficher_rubrique, $ouvrir_rubrique;
 	global $larubrique;
-	global $texte;
-	global $afficher;
-	global $aff_ligne;
-	global $rubrique;
-	global $les_rub;
 
 	global $aide_statut;
 
+	$afficher_rubrique = 0;
+
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$larubrique++;
-		$ligne++;
-		$ligne_rubrique = $ligne;
-		$ancre = "a$ligne_rubrique";
+		$titre_rubrique = $titre;
+		$ligne_rubrique = array();
+		$block_rubrique = "block$larubrique";
+		$afficher_rubrique = 1;
+		$ouvrir_rubrique = 0;
+	}
+}
 
-		$texte[$ligne]="<TR><TD><IMG SRC='img_pack/rien.gif' BORDER=0 WIDTH=10 HEIGHT=1></TD></TR>"
-			."<TD BGCOLOR='#044476' COLSPAN=2><A HREF='#LIEN'>#IMG</A> "
-			."<B><A HREF='#LIEN' NAME='$ancre'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'>$titre</FONT></A></B>"
-			."</TD></TR>";
-		$rubrique[$ligne]=$larubrique;
+function fin_rubrique() {
+	global $ligne_rubrique;
+	global $block_rubrique;
+	global $titre_rubrique;
+	global $afficher_rubrique, $ouvrir_rubrique;
+	global $texte;
 
-		if (ereg(",$larubrique,","$les_rub")){
-			$afficher[$larubrique]=1;
-		}else{
-			$afficher[$larubrique]=0;
+	if ($afficher_rubrique && count($ligne_rubrique)) {
+		echo "<div class='rubrique'>";
+		if ($ouvrir_rubrique)
+			echo bouton_block_visible($block_rubrique);
+		else 
+			echo bouton_block_invisible($block_rubrique);
+		echo $titre_rubrique;
+		echo "</div>\n";
+		if ($ouvrir_rubrique)
+			echo debut_block_visible($block_rubrique);
+		else
+			echo debut_block_invisible($block_rubrique);
+		echo "\n";
+		reset($ligne_rubrique);
+		while (list(, $ligne) = each($ligne_rubrique)) {
+			echo $texte[$ligne];
 		}
-
-		$aff_ligne[$ligne]=1;
+		echo fin_block();
+		echo "\n\n";
 	}
 }
 
@@ -73,45 +142,31 @@ function article($titre, $lien, $statut = "redac") {
 	global $aide;
 	global $ligne;
 	global $ligne_rubrique;
-	global $larubrique;
 	global $rubrique;
 	global $texte;
-	global $afficher;
-	global $les_rub;
+	global $afficher_rubrique, $ouvrir_rubrique;
 	global $aide_statut;
-	global $spip_lang, $spip_lang_rtl;
+	global $spip_lang;
 
-	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
-		$ligne++;
-		$ancre = "a$ligne_rubrique";
-		$url = "aide_index.php3?aide=$lien&les_rub=$les_rub&ancre=$ancre&var_lang=$spip_lang";
-
-		$rubrique[$ligne]=$larubrique;
-
-		if ($aide==$lien) {
-			$afficher[$larubrique]=1;
-			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2>"
-				."<FONT FACE='Arial,Sans,sans-serif' SIZE=2>$titre</font> "
-				."<IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0 ALIGN='middle'></TD></TR>";
+	if ($afficher_rubrique AND (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac"))) {
+		$ligne_rubrique[] = ++$ligne;
+		
+		$texte[$ligne] = '';
+		$id = "ligne$ligne";
+		$url = "aide_droite.php3?aide=$lien&var_lang=$spip_lang";
+		if ($aide == $lien) {
+			$ouvrir_rubrique = 1;
+			$class = "article-actif";
+			$texte[$ligne] .= "<script type='text/javascript'><!--\ncurr_article = '$id';\n// --></script>\n";
 		}
 		else {
-			$texte[$ligne]= "<TR><TD><A HREF='$url' TARGET='_top'><IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0></A></TD>"
-				."<TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Sans,sans-serif' SIZE=2><A HREF='$url' TARGET='_top'>$titre</A></font>"
-				."</TD></TR>";
+			$class = "article-inactif";
 		}
+		$texte[$ligne] .= "<a class='$class' id='$id' href='$url' target='droite' ".
+			"onClick=\"activer_article('$id');return true;\">$titre</a><br style='clear:both;'>\n";
 	}
 }
 
-
-
-?>
-
-<TABLE WIDTH="100%" BORDER=0 CELLPADDING=2 CELLSPACING=0>
-
-<?php
-
-if ($supp_rub) $les_rub=ereg_replace(",$supp_rub,","",$les_rub);
-if ($addrub) $les_rub.=",$addrub,";
 
 rubrique(_T('menu_aide_installation_spip'),"admin");
 article(_T('menu_aide_installation_reactuliser_droits'), "install0", "admin");
@@ -120,6 +175,7 @@ article(_T('menu_aide_installation_choix_base'), "install2", "admin");
 article(_T('menu_aide_installation_informations_personnelles'), "install5", "admin");
 article(_T('menu_aide_installation_ftp'), "ftp_auth", "admin");
 article(_T('menu_aide_installation_probleme_squelette'), "erreur_mysql", "admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_articles'));
 article(_T('menu_aide_articles_raccourcis_typo'),"raccourcis");
@@ -136,12 +192,13 @@ article(_T('menu_aide_articles_logos'),"logoart","admin");
 article(_T('menu_aide_articles_statut'),"artstatut");
 article(_T('menu_aide_articles_proposer'),"artprop");
 article(_T('menu_aide_articles_en_cours_modification'),"artmodif");
-
+fin_rubrique();
 
 rubrique(_T('menu_aide_rubriques'));
 article(_T('menu_aide_rubriques_structure'),"rubhier");
 article(_T('menu_aide_rubriques_choix'),"rubrub","admin");
 article(_T('menu_aide_rubriques_logo'),"rublogo","admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_breves'));
 article(_T('menu_aide_breves_breves'),"breves");
@@ -149,33 +206,37 @@ article(_T('menu_aide_breves_choix'),"brevesrub");
 article(_T('menu_aide_breves_lien'),"breveslien");
 article(_T('menu_aide_breves_statut'),"brevesstatut","admin");
 article(_T('menu_aide_breves_logo'),"breveslogo","admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_images_doc'));
 article(_T('menu_aide_images_doc_inserer'),"ins_img");
 article(_T('menu_aide_images_doc_joindre'),"ins_doc");
 article(_T('menu_aide_images_doc_ftp'),"ins_upload","admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_mots_cles'));
 article(_T('menu_aide_mots_cles_principe'),"mots");
 article(_T('menu_aide_mots_cles_mots_cles'),"artmots");
 article(_T('menu_aide_mots_cles_groupes'),"motsgroupes","admin");
-
+fin_rubrique();
 
 rubrique(_T('menu_aide_sites'));
 article(_T('menu_aide_sites_referencer'),"reference");
 article(_T('menu_aide_sites_syndiquer'),"rubsyn");
 article(_T('menu_aide_sites_articles_syndiques'),"artsyn");
 article(_T('menu_aide_sites_proxy'),"confhttpproxy","admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_messagerie'));
-article("<img src='img_pack/m_envoi$spip_lang_rtl.gif' align='left' border=0> "._T('menu_aide_messagerie_utilisateurs'),"messut");
-article("<img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' align='left' border=0> "._T('menu_aide_messagerie_pense_bete'),"messpense");
+article("<img src='img_pack/m_envoi$spip_lang_rtl.gif' border=0> "._T('menu_aide_messagerie_utilisateurs'),"messut");
+article("<img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' border=0> "._T('menu_aide_messagerie_pense_bete'),"messpense");
 article(_T('menu_aide_messagerie_calendrier'),"messcalen");
 article(_T('menu_aide_messagerie_configuration_perso'),"messconf");
-
+fin_rubrique();
 
 rubrique(_T('menu_aide_suivi_forum'),"admin");
 article(_T('menu_aide_suivi_forum_suivi'),"suiviforum","admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_suivi_forum_configuration'),"admin");
 article(_T('menu_aide_suivi_forum_nom_adresse'),"confnom","admin");
@@ -187,35 +248,13 @@ article(_T('menu_aide_suivi_forum_messagerie_interne'),"confmessagerie","admin")
 article(_T('menu_aide_suivi_forum_statistiques'),"confstat","admin");
 article(_T('menu_aide_suivi_forum_envoi_emails'),"confmails","admin");
 article(_T('menu_aide_suivi_forum_moteur_recherche'),"confmoteur","admin");
+fin_rubrique();
 
 rubrique(_T('menu_aide_interface_perso'));
 article(_T('menu_aide_interface_perso_simplifiee'),"intersimple");
 article(_T('menu_aide_interface_perso_cookie'),"cookie");
 article(_T('menu_aide_interface_perso_deconnecter'),"deconnect");
-
-for ($i=0; $i<=count($texte); $i++) {
-
-	$larubrique=$rubrique[$i];
-	$aff=$afficher[$larubrique];
-
-	if ($aff == 1 OR $aff_ligne[$i] == 1) {
-		if ($aff == 1) {
-			$supp_rub="$larubrique";
-
-			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
-			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&supp_rub=$supp_rub&aide=$aide&var_lang=$spip_lang#a$i",$texte[$i]);
-		}
-		else {
-			$ajouter_rub="$larubrique";
-			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='' width='14' height='14' border='0'>",$texte[$i]);
-			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide&var_lang=$spip_lang#a$i",$texte[$i]);
-
-		}
-		echo $texte[$i]."\n";
-	}
-}
-
-echo '</TABLE>';
+fin_rubrique();
 
 ?>
 </BODY>
