@@ -177,6 +177,12 @@ function parser_boucle($texte, $id_parent) {
 				$id_objet = "id_document";
 				break;
 
+			case 'types_documents':
+				$table = "types_documents";
+				$req_from[] = "spip_types_documents AS $table";
+				$id_objet = "id_type";
+				break;
+
 			case 'mots':
 				$table = "mots";
 				$req_from[] = "spip_mots AS $table";
@@ -739,6 +745,7 @@ function parser($texte) {
 	global $rows_syndication;
 	global $rows_syndic_articles;
 	global $rows_documents;
+	global $rows_types_documents;
 	global $rows_rubriques;
 	global $rows_forums;
 	global $rows_breves;
@@ -781,16 +788,16 @@ function parser($texte) {
 	//
 
 	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP',
-		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT',
+		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE', 
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE', 
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
 		'DATE', 'DATE_REDAC', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'URL_SITE', 'NOM', 'BIO', 'TYPE', 'PGP', 
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
-		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE',  'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
-		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT',
+		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
+		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 
 		'IP', 'VISITES', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
-		'FICHIER_DOCUMENT', 'LARGEUR_DOCUMENT', 'HAUTEUR_DOCUMENT', 'TAILLE_DOCUMENT'
+		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION', 
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -896,14 +903,19 @@ function parser($texte) {
 	);
 	$rows_documents = array(
 		'ID_DOCUMENT' => 'id_document',
-		'ID_ARTICLE' => 'id_article',
+		'ID_VIGNETTE' => 'id_vignette',
+		'ID_TYPE' => 'id_type',
 		'TITRE' => 'titre',
 		'DESCRIPTIF' => 'descriptif',
-		'TYPE' => 'type',
-		'FICHIER_DOCUMENT' => 'nom_fichier_doc',
-		'LARGEUR_DOCUMENT' => 'largeur_doc',
-		'HAUTEUR_DOCUMENT' => 'hauteur_doc',
-		'TAILLE_DOCUMENT' => 'taille_fichier_doc'
+		'LARGEUR' => 'largeur',
+		'HAUTEUR' => 'hauteur',
+		'TAILLE' => 'taille'
+	);
+	$rows_types_documents = array(
+		'ID_TYPE' => 'id_type',
+		'TITRE' => 'titre',
+		'DESCRIPTIF' => 'descriptif',
+		'EXTENSION' => 'extension'
 	);
 	$rows_mots = array(
 		'ID_MOT' => 'id_mot',
@@ -1224,6 +1236,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	case 'URL_MOT':
 		$code = "generer_url_mot(\$contexte['id_mot'])";
+		break;
+
+	case 'URL_DOCUMENT':
+		$code = "generer_url_document(\$contexte['id_document'])";
 		break;
 
 	case 'NOTES':
@@ -1756,12 +1772,19 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	case 'documents':
 		$texte .= '
 		$contexte["id_document"] = $row["id_document"];
-		$contexte["id_article"] = $row["id_article"];
-		$contexte["numero_document"] = $row["numero_document"];
+		$contexte["id_vignette"] = $row["id_vignette"];
+		$contexte["id_type"] = $row["id_type"];
 		if ($instance->doublons == "oui") $id_doublons["documents"] .= ",".$row["id_document"];
 		';
 		break;
-		
+
+	case 'types_documents':
+		$texte .= '
+		$contexte["id_type"] = $row["id_type"];
+		if ($instance->doublons == "oui") $id_doublons["documents"] .= ",".$row["id_document"];
+		';
+		break;
+
 	case 'syndic_articles':
 		$texte .= '
 		$contexte["id_syndic"] = $row["id_syndic"];

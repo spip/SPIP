@@ -35,11 +35,11 @@ function generer_url_auteur($id_auteur) {
 }
 
 function generer_url_document($id_document) {
-	if ($id_document > 0){
-		$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
+	if ($id_document > 0) {
+		$query = "SELECT fichier FROM spip_documents WHERE id_document = $id_document";
 		$result = mysql_query($query);
 		if ($row = mysql_fetch_array($result)) {
-			$url = $row['nom_fichier_doc'];
+			$url = $row['fichier'];
 		}
 	}
 	return $url;
