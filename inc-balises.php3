@@ -281,28 +281,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 }
 
 function balise_POINTS_dist($p) {
-	$n = 0;
-	$b = $p->id_boucle;
-	$p->code = '';
-	while ($b != '') {
-	if ($s = $p->boucles[$b]->param) {
-	  foreach($s as $v) {
-		if (strpos($v,'recherche') !== false) {
-		  $p->code = '$Pile[$SP' . (($n==0) ? "" : "-$n") .
-			'][points]';
-		  $b = '';
-		  break;
-		}
-	  }
-	}
-	$n++;
-	$b = $p->boucles[$b]->id_parent;
-	}
-	if (!$p->code) {
-		erreur_squelette(_L("Champ #POINTS hors d'une recherche"), $p->id_boucle);
-	}
-	$p->statut = 'php';
-	return $p;
+	return rindex_pile($p, 'points', 'recherche');
 }
 
 function balise_POPULARITE_ABSOLUE_dist($p) {
