@@ -1277,17 +1277,9 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
 	}
 
-	debut_cadre_relief("image-24.gif", false, "creer.gif");
+	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
+	debut_cadre_couleur("image-24.gif", false, "creer.gif", $titre_cadre);
 
-	echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";
-	echo bouton_block_invisible("ajouter_image");
-	echo "<b><font size='2'>"._T('bouton_ajouter_image').aide("ins_img")."</font></b>";
-	echo "</div>\n";
-
-	echo debut_block_invisible("ajouter_image");
-	echo "<font size='2'>";
-	echo _T('info_installer_images');
-	echo "</font>";
 
 	$link = $image_link;
 	$link->addVar('hash', calculer_action_auteur("ajout_doc"));
@@ -1297,10 +1289,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	$link->addVar('type', $type);
 
 	afficher_upload($link, $redirect_url, _T('info_telecharger'));
-	echo fin_block();
-
-	echo "</font>\n";
-	fin_cadre_relief();
+	fin_cadre_couleur();
 
 	//fin_cadre_relief();
 
@@ -1364,6 +1353,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	global $clean_link;
 	global $options;
 	global $id_doublons;
+	global $spip_lang_left, $spip_lang_right;
 
 
 	if ($GLOBALS['id_document'] > 0) {
@@ -1578,23 +1568,24 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	// Afficher une image inserable dans l'article
 	//
 	else if ($mode == 'vignette') {
-		//echo "<div style='border: 1px dashed #aaaaaa; padding: 4px; background-color: #f0f0f0;'>\n";
-		debut_cadre_relief("image-24.gif");
-
 		$block = "image $id_document";
-		echo "<div style='padding: 2px; background-color: #e4e4e4; text-align: center; color: black;'>";
+		$titre_cadre = typo($titre).typo($titre_fichier);
+	
+		//echo "<div style='border: 1px dashed #aaaaaa; padding: 4px; background-color: #f0f0f0;'>\n";
+		debut_cadre_relief("image-24.gif", false, "", $titre_cadre);
 
+
+		echo "<div style='float: $spip_lang_left;'>";
 		if ($flag_deplie) echo bouton_block_visible("$block");
 		else echo bouton_block_invisible("$block");
+		echo "</div>";
 
-		echo "<font size='3'>".typo($titre).typo($titre_fichier)."</font>";
-		echo "</div>\n";
 
 		//
 		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
 		//
 		if (!ereg(",$id_document,", $doublons)) {
-			$raccourci_doc = "<div><font size='2' color='#666666' face='arial,helvetica,sans-serif'>";
+			$raccourci_doc = "<div class='arial1'>";
 			if (strlen($descriptif) > 0 OR strlen($titre) > 0) {
 				$raccourci_doc .= "<div align='left'>&lt;doc$id_document|left&gt;</div>\n".
 					"<div align='center'>&lt;doc$id_document|center&gt;</div>\n".
@@ -1604,11 +1595,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 					"<div align='center'>&lt;img$id_document|center&gt;</div>\n".
 					"<div align='right'>&lt;img$id_document|right&gt;</div>\n";
 			}
-			$raccourci_doc .= "</font></div>\n";
+			$raccourci_doc .= "</div>\n";
 		} else {
-			$raccourci_doc = "<div><font size='2' color='#666666' face='arial,helvetica,sans-serif'>";
-			$raccourci_doc .= "<div align='center'>&lt;img$id_document&gt;</div>\n";
-			$raccourci_doc .= "</font></div>\n";
+			$raccourci_doc .= "<div class='arial1' align='center'>&lt;img$id_document&gt;</div>\n";
 		}
 
 		//
@@ -1630,7 +1619,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 		if (ereg(",$id_document,", $doublons)) echo $raccourci_doc;
 		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>",
-		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur_vignette, 'hauteur_vignette' => $hauteur_vignette)),
+		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur)),
 		  "<br /></font></div>\n";
 
 		$link = new Link($redirect_url);

@@ -486,24 +486,29 @@ function appliquer_fonction($lafonction, $entree) {
 
 	$sortie = $entree;
 	
-	foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
-		if (@function_exists($value)) $sortie = $value($sortie);
+	if (isset($GLOBALS["fonctions"]["$lafonction"]["avant"])) {
+		foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
+			if (@function_exists($value)) $sortie = $value($sortie);
+		}
 	}
 	
 	if (@function_exists($lafonction)) $sortie = $lafonction($sortie);
 
-	foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
-		if (@function_exists($value)) $sortie = $value($sortie);
-	}
-		
+	if (isset($GLOBALS["fonctions"]["$lafonction"]["apres"])) {
+		foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
+			if (@function_exists($value)) $sortie = $value($sortie);
+		}
+	}	
 	return $sortie;
 }
 
 function appliquer_fonction_avant($lafonction, $entree) {
 	$sortie = $entree;
 	
-	foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
-		if (@function_exists($value)) $sortie = $value($sortie);
+	if (isset($GLOBALS["fonctions"]["$lafonction"]["avant"])) {
+		foreach ($GLOBALS["fonctions"]["$lafonction"]["avant"] as $key => $value) {
+			if (@function_exists($value)) $sortie = $value($sortie);
+		}
 	}
 			
 	return $sortie;
@@ -513,9 +518,11 @@ function appliquer_fonction_apres($lafonction, $entree) {
 
 	$sortie = $entree;
 	
-	foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
-		if (@function_exists($value)) $sortie = $value($sortie);
-	}
+	if (isset($GLOBALS["fonctions"]["$lafonction"]["apres"])) {
+		foreach ($GLOBALS["fonctions"]["$lafonction"]["apres"] as $key => $value) {
+			if (@function_exists($value)) $sortie = $value($sortie);
+		}
+	}	
 		
 	return $sortie;
 }
