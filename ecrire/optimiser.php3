@@ -7,6 +7,7 @@ define("_ECRIRE_OPTIMISER", "1");
 
 
 function optimiser_base() {
+	spip_log ("optimisation de la base");
 
 	$mydate = date("YmdHis", time() - 24 * 3600);
 	
@@ -107,16 +108,19 @@ function optimiser_base() {
 		spip_query($query);
 	}
 	
-	$query = "SELECT id_auteur FROM spip_auteurs WHERE statut='5poubelle' AND maj < $mydate";
+	$query = "SELECT id_auteur,nom,email FROM spip_auteurs WHERE statut='5poubelle' AND maj < $mydate";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$id_auteur = $row['id_auteur'];
+		$nom = $row['nom'];
+		$email = $row['email'];
 	
 		$query2 = "SELECT * FROM spip_auteurs_articles WHERE id_auteur=$id_auteur";
 		$result2 = spip_query($query2);
 		if (!spip_num_rows($result2)) {
 			$query3 = "DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur";
 			$result3 = spip_query($query3);
+			spip_log ("suppression de l'auteur $id_auteur ($nom $email)");
 		}
 	}
 	
@@ -193,7 +197,7 @@ function optimiser_base() {
 		. "spip_index_dico, spip_index_articles, spip_index_rubriques, spip_index_breves, spip_index_auteurs, spip_index_mots, spip_index_syndic";
 	spip_query($query);
 	
-	echo "\n\n<!-- Optimisation ok. -->\n";
+	spip_log("optimisation ok");
 }
 
 optimiser_base();
