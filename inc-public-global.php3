@@ -112,7 +112,7 @@ if (!$use_cache) {
 		}
 		if (substr($chapo, 0, 1) == '=') {
 			$url = substr($chapo, 1);
-			$texte = "<?php @header (\"Location: $url\"); ?".">";
+			$texte = "<"."?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
 			if ($GLOBALS['flag_apc']) {
 				apc_rm($chemin_cache);

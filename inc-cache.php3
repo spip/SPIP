@@ -82,7 +82,7 @@ function creer_repertoire($base, $subdir) {
 	@chmod($path, 0777);
 	$ok = false;
 	if ($f = @fopen("$path/.test", "w")) {
-		@fputs($f, '<?php $ok = true; ?'.'>');
+		@fputs($f, '<'.'?php $ok = true; ?'.'>');
 		@fclose($f);
 		include("$path/.test");
 	}

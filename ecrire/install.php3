@@ -66,7 +66,7 @@ if ($etape6) {
 	fputs($myFile, $protec);
 	fclose($myFile);
 
-	$conn = "<?php\n";
+	$conn = "<"."?php\n";
 	$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
 	$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
 	$conn .= "\$GLOBALS['db_ok'] = true;\n";

@@ -1943,7 +1943,7 @@ function fin_page() {
 
 </td></tr></table>
 
-<?
+<?php
 debut_grand_cadre();
 ?>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
@@ -1956,7 +1956,7 @@ if (ereg("index\.php3", $GLOBALS['REQUEST_URI']) || !ereg("\.php3", $GLOBALS['RE
 }
 ?>
 </font></div>
-<?
+<?php
 fin_grand_cadre();
 ?>
 </center>

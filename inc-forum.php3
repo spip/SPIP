@@ -132,9 +132,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$retour = rawurlencode($lien);
 
 	if ($forums_publics == "abo")  // forums abo
-		$ret .= '<?php include("inc-forum.php3"); if (forum_abonnement($retour)) { ?'.'>';
+		$ret .= '<'.'?php include("inc-forum.php3"); if (forum_abonnement($retour)) { ?'.'>';
 	else
-		$ret .= '<?php { ?'.'>';
+		$ret .= '<'.'?php { ?'.'>';
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
 	$ret .= "\n<FORM ACTION='$lien' METHOD='post'>";
@@ -370,7 +370,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	
 	$ret .= "</FORM>";
 
-	$ret .= '<?php } ?'.'>';	// fin forums abo
+	$ret .= '<'.'?php } ?'.'>';	// fin forums abo
 	
 	return $ret;
 }

@@ -34,7 +34,7 @@ else {
 }
 $_fputs = ($gz) ? gzputs : fputs;
 
-if ($etape < 2) $_fputs($f, "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
+if ($etape < 2) $_fputs($f, "<"."?xml version=\"1.0\" encoding=\"ISO-8859-1\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
 
 $query = "SELECT * FROM spip_rubriques";
 export_objets($query, "rubrique", $f, $gz, $etape, 1, "Sauvegarder les rubriques");
