@@ -1345,7 +1345,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 	echo "<td background=''>";
 		if ($options == "avancees") {
-			icone_bandeau_principal ("Auteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal ("Auteurs", "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
 			icone_bandeau_principal ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
@@ -1426,14 +1426,14 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	else if ($rubrique == "redacteurs"){
 		if ($options == "avancees") {
-			icone_bandeau_secondaire ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
-			icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
-			icone_bandeau_secondaire ("Administrateurs", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
-			if ($connect_statut == "0minirezo"){
-				bandeau_barre_verticale();
-				icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
-			}
-			bandeau_barre_verticale();
+			icone_bandeau_secondaire ("Les auteurs", "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
+//			icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
+//			icone_bandeau_secondaire ("Administrateurs", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
+//			if ($connect_statut == "0minirezo"){
+//				bandeau_barre_verticale();
+//				icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
+//			}
+//			bandeau_barre_verticale();
 		}
 		icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 	}
