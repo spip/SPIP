@@ -156,7 +156,7 @@ while($row = spip_fetch_array($result_message)) {
 		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='red'><b>"._T('info_redaction_en_cours')."</b></font>";
 	}
 	else if ($rv != 'oui') {
-		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>".nom_jour($date_heure)." ".affdate($date_heure)." &Agrave; ".heures($date_heure)."H".minutes($date_heure)."</b></font>";
+		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>".nom_jour($date_heure)." ".affdate($date_heure)._T('info_a_grave').heures($date_heure)._T('info_lettre_heures').minutes($date_heure)."</b></font>";
 	}
 	echo "<p>";
 
