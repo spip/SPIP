@@ -80,8 +80,10 @@ function verifier_session($id_session) {
 		}
 	}
 
-	// Valider le brouteur
-	if ($ok) $ok = (hash_env() == $GLOBALS['auteur_session']['hash_env']);
+	// Valider le brouteur et l'IP si on est en mode parano
+	if ($ok AND $GLOBALS['prefs']['securite'] == 'strict')
+		$ok = (hash_env() == $GLOBALS['auteur_session']['hash_env']);
+
 	return $ok;
 }
 

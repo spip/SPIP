@@ -40,8 +40,9 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
-if ($securite == 'normal' || $securite == 'parano') {
+if ($securite == 'normal' || $securite == 'strict') {
 	$prefs['securite'] = $securite;
+	$secu = 'oui';
 	$prefs_mod = true;
 }
 
