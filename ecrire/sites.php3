@@ -386,7 +386,7 @@ if ($flag_editable AND $options == 'avancees') {
 }
 
 if ($flag_administrable) {
-	$link = new Link();
+	$link = $GLOBALS['clean_link'];
 	$link->delVar('new');
 	echo $link->getForm('GET');
 	debut_cadre_relief("racine-site-24.gif");

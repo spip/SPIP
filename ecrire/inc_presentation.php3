@@ -1780,11 +1780,11 @@ function debut_droite() {
 
 			echo "<p>";
 
-			$link = new Link();
+			$link = $GLOBALS['clean_link'];
 			$link->addVar('secu', 'oui');
 
 			if ($securite == 'strict') {
-				$link = new Link();
+				$link = $GLOBALS['clean_link'];
 				$link->addVar('securite', 'normal');
 
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;stricte&raquo;. ".
@@ -1808,7 +1808,7 @@ function debut_droite() {
 				echo "</form></div>\n";
 			}
 			else {
-				$link = new Link();
+				$link = $GLOBALS['clean_link'];
 				$link->addVar('securite', 'strict');
 
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;normale&raquo;. ".

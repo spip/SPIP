@@ -346,7 +346,7 @@ function formulaire_inscription() {
 		echo "</div>";
 	}
 	else {
-		$link = new Link();
+		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('GET');
 		echo  "<P><B>Votre nom ou pseudo</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"nom_inscription\" VALUE=\"\" SIZE=\"30\">";
@@ -400,7 +400,7 @@ function formulaire_site($la_rubrique) {
 		echo "</div>";
 	}
 	else {
-		$link = new Link();
+		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('POST');
 		echo  "<P><div class='spip_encadrer'><B>Nom du site</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"nom_site\" VALUE=\"\" SIZE=\"30\">";
@@ -437,7 +437,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 				$GLOBALS[texte_message_auteur] = wordwrap($GLOBALS[texte_message_auteur]);
 			echo "<pre>".entites_html($GLOBALS[texte_message_auteur])."</pre>";
 			$affiche_formulaire = false;
-			$link = new Link();
+			$link = $GLOBALS['clean_link'];
 			echo $link->getForm('POST');
 			echo "<input type='hidden' name='valide_message_auteur' value='oui'>";  // hash ?
 			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer l'envoi\">";
@@ -450,7 +450,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 
 	if ($affiche_formulaire) {
 		$retour = $GLOBALS['REQUEST_URI'];
-		$link = new Link();
+		$link = $GLOBALS['clean_link'];
 		echo $link->getForm('POST');
 		echo "<div class='spip_encadrer'><P><B>Votre adresse email</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur\" VALUE=\"".entites_html($GLOBALS[email_message_auteur])."\" SIZE=\"30\">\n";
