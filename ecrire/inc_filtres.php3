@@ -626,15 +626,17 @@ function reduire_image($img, $taille = 120, $taille_y=0) {
 	return reduire_image_logo($img, $taille, $taille_y);
 }
 
-function largeur_image($img) {
+function largeur($img) {
 	if (!$img) return;
 	include_ecrire('inc_logos.php3');
-	return taille_image($img, 'largeur');
+	list ($h,$l) = taille_image($img);
+	return $l;
 }
-function hauteur_image($img) {
+function hauteur($img) {
 	if (!$img) return;
 	include_ecrire('inc_logos.php3');
-	return taille_image($img, 'hauteur');
+	list ($h,$l) = taille_image($img);
+	return $h;
 }
 
 //

@@ -439,32 +439,28 @@ function inserer_vignette_base($image, $vignette) {
 
 //
 // Retourner taille d'une image
-// pour largeur_image et hauteur_image
-// $val = 'hauteur' ou 'largeur'
+// pour les filtres |largeur et |hauteur
+//
+function taille_image($img) {
 
-
-function taille_image($img, $val) {
-
-	if (eregi("width=['\"]([^'\"]+)['\"]", $img, $regs)) $srcWidth = $regs[1];
-	if (eregi("height=['\"]([^'\"]+)['\"]", $img, $regs)) $srcHeight = $regs[1];
+	if (eregi("width *= *['\"]?( *[0-9]+ *)", $img, $regs))
+		$srcWidth = intval(trim($regs[1]));
+	if (eregi("height *= *['\"]?( *[0-9]+ *)", $img, $regs))
+		$srcHeight = intval(trim($regs[1]));
 
 	// recuperer le nom du fichier
 	if (eregi("src='([^']+)'", $img, $regs)) $logo = $regs[1];
 	if (!$logo) $logo = $img;
 
-	if (!$srcWidth) {
-		if ($srcsize = @getimagesize($logo)) {
-			$srcWidth = $srcsize[0];
-		}
-	}
-	if (!$srcHeight) {
-		if ($srcsize = @getimagesize($logo)) {
-			$srcHeight = $srcsize[1];
-		}
-	}
-	
-	if ($val == 'hauteur') return $srcHeight;
-	else if ($val == 'largeur') return $srcWidth;
+	if (!$srcWidth
+	AND $srcsize = @getimagesize($logo))
+		$srcWidth = $srcsize[0];
+
+	if (!$srcHeight
+	AND $srcsize = @getimagesize($logo))
+		$srcHeight = $srcsize[1];
+
+	return array($srcHeight, $srcWidth);
 	
 }
 

@@ -239,13 +239,11 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	OR !$taille = @filesize($definitif))
 		return;
 
-	// Est-ce une image ?
+	// Si c'est une image, recuperer sa taille et son type (detecte aussi swf)
 	$size_image = @getimagesize($definitif);
+	$largeur = intval($size_image[0]);
+	$hauteur = intval($size_image[1]);
 	$type_image = decoder_type_image($size_image[2]);
-	if ($type_image) {
-		$largeur = $size_image[0];
-		$hauteur = $size_image[1];
-	}
 
 	// Si on veut uploader une vignette, il faut qu'elle ait ete bien lue
 	if ($mode == 'vignette' AND !($largeur * $hauteur)) {
