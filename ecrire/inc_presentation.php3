@@ -1431,12 +1431,12 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				icone_bandeau_principal (_T('icone_forum_interne'), "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
 		}
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques){
-	bandeau_barre_verticale();
+		bandeau_barre_verticale();
 		icone_bandeau_principal (_T('icone_admin_site'), "configuration.php3", "administration-48.gif", "administration", $rubrique);
 	}
 	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques and lire_meta("activer_statistiques") != 'non'){
-	bandeau_barre_verticale();
-		icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "administration-48.gif", "administration", $rubrique);
+		bandeau_barre_verticale();
+		icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-48.gif", "administration", $rubrique);
 	}
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
