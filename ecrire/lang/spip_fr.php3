@@ -17,6 +17,7 @@ $GLOBALS['i18n_fr'] = array(
 'avis_archive_incorrect' => 'le fichier archive n\'est pas un fichier SPIP',
 'avis_archive_invalide' => 'le fichier archive n\'est pas valide',
 'avis_article_modifie' => 'Attention, @nom_auteur_modif@ a travaill&eacute; sur cet article il y a @date_diff@ minutes',
+'avis_attention' => 'ATTENTION&nbsp;!',
 'avis_aucun_resultat' => 'Aucun r&eacute;sultat.',
 'avis_champ_incorrect_type_objet' => 'Nom de champ incorrect @name@ pour objet de type @type@',
 'avis_chemin_invalide_1' => 'Le chemin que vous avez choisi',
@@ -528,6 +529,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_langue_defaut' => 'Langue par d&eacute;faut&nbsp;:',
 'info_langues' => 'Langues du site',
 'info_langues_proposees' => 'Langues propos&eacute;es&nbsp;:',
+'info_langue_principale' => 'Langue principale du site',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_ldap_ok' => 'L\'authentification LDAP est install&eacute;e.',
 'info_les_auteurs_1' => 'par @les_auteurs@',
@@ -1030,6 +1032,9 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 
 
 // T
+'taille_octets' => '@taille@&nbsp;octets',
+'taille_ko' => '@taille@&nbsp;ko',
+'taille_mo' => '@taille@&nbsp;Mo',
 'text_article_propose_publication' => 'Article propos&eacute; pour la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).',
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
 'texte_actualite_site_1' => 'Cette page recense l\'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec l\'interface, vous pourrez cliquer sur &laquo;',
@@ -1228,6 +1233,11 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_sauvegarde' => 'Sauvegarder le contenu de la base',
 'texte_sauvegarde_base' => 'Sauvegarder la base',
 'texte_sauvegarde_compressee' => 'La sauvegarde sera faite dans le fichier non compress&eacute; <b>ecrire/data/dump.xml</b>.',
+'texte_selection_langue_principale' => 'Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
+	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
+	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
+	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
+	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>',
 'texte_signification' => 'Les barres rouges repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres vertes le nombre de visites pour chaque rubrique.',
 'texte_sous_titre' => 'Sous-titre',
 'texte_statistiques_visites' => '(barres fonc&eacute;es :  dimanche / courbe fonc&eacute;e : &eacute;volution de la moyenne)',

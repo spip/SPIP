@@ -202,20 +202,16 @@ $langues_prop = split(",",lire_meta("langues_proposees"));
 $langue_site = lire_meta('langue_site');
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._L('Langue principale du site')."</FONT></B> ".aide ()."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_langue_principale')."</FONT></B> ".aide ()."</TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
-echo _L('Vous pouvez s&eacute;lectionner ci-dessous la &laquo;&nbsp;langue principale&nbsp;&raquo; du site. Ce choix ne vous oblige - heureusement&nbsp;! - pas &agrave; &eacute;crire vos articles dans la langue s&eacute;lectionn&eacute;e, mais permet de d&eacute;terminer&nbsp;:
-	<ul><li> le format par d&eacute;faut des dates sur le site public&nbsp;;</li>
-	<li> la nature du moteur typographique que SPIP doit utiliser pour le rendu des textes&nbsp;;</li>
-	<li> la langue utilis&eacute;e dans les formulaires du site public&nbsp;;</li>
-	<li> la langue pr&eacute;sent&eacute;e par d&eacute;faut dans l\'espace priv&eacute;.</li></ul>');
+echo _T('texte_selection_langue_principale');
 echo "</TD></TR>";
 
 
 // langue du site
 echo "<TR><TD ALIGN='left' class='verdana2'>";
-echo _L('Langue principale du site&nbsp;:');
+echo _T('info_langue_principale')." - ";
 echo "\n<select name='changer_langue_site' class='fondl'>\n";
 echo "<option value='$langue_site' selected>".traduire_nom_langue($langue_site)."</option>\n";
 reset ($langues_prop);
