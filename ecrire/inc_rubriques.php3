@@ -158,6 +158,44 @@ function calculer_rubriques_publiques() {
 }
 
 
+// faire redescendre l'information de langue vers les sous-rubriques et les articles
+function calculer_langues_rubriques_etape() {
+	$s = spip_query ("SELECT fille.id_rubrique AS id_rubrique, mere.lang AS lang
+		FROM spip_rubriques AS fille, spip_rubriques AS mere
+		WHERE fille.id_parent = mere.id_rubrique
+		AND (fille.lang='' OR fille.lang LIKE '.%') AND mere.lang<>''
+		AND mere.lang<>fille.lang AND CONCAT('.',mere.lang)<>fille.lang");
+
+	while ($row = spip_fetch_array($s)) {
+		$lang = addslashes(lang_supprimer_point($row['lang']));
+		$id_rubrique = $row['id_rubrique'];
+		spip_log ("rubrique $id_rubrique = .$lang");
+		$t = spip_query ("UPDATE spip_rubriques SET lang='.$lang' WHERE id_rubrique=$id_rubrique");
+	}
+
+	return $t;
+}
+
+function calculer_langues_rubriques() {
+	// rubriques (recursivite)
+	while (calculer_langues_rubriques_etape());
+
+	// articles
+	$s = spip_query ("SELECT fils.id_article AS id_article, mere.lang AS lang
+		FROM spip_articles AS fils, spip_rubriques AS mere
+		WHERE fils.id_rubrique = mere.id_rubrique
+		AND (fils.lang='' OR fils.lang LIKE '.%') AND mere.lang<>''
+		AND mere.lang<>fils.lang AND CONCAT('.',mere.lang)<>fils.lang");
+	while ($row = spip_fetch_array($s)) {
+		$lang = addslashes(lang_supprimer_point($row['lang']));
+		$id_article = $row['id_article'];
+		spip_log ("article $id_article = .$lang");
+		spip_query ("UPDATE spip_articles SET lang='.$lang' WHERE id_article=$id_article");
+	}
+	
+}
+
+
 //
 // Recalculer l'ensemble des donnees associees a l'arborescence des rubriques
 // (cette fonction est a appeler a chaque modification sur les rubriques)

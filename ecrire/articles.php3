@@ -1273,8 +1273,10 @@ afficher_documents_non_inclus($id_article, "article", $flag_editable);
 // Langue de l'article
 //
 if ((lire_meta('multi_articles') <> 'non') AND ($connect_statut == '0minirezo')) {
-	if ($changer_lang)
+	if ($changer_lang) {
+		spip_log ("article $id_article = $changer_lang");
 		spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."' WHERE id_article=$id_article");
+	}
 
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
 	$langue_article = $row['lang'];
