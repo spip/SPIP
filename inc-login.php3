@@ -55,9 +55,15 @@ function ferme_login() {
 function login($cible = '', $prive = 'prive', $message_login='') {
 	$login = $GLOBALS['var_login'];
 	$erreur = $GLOBALS['var_erreur'];
-	$echec_cookie = $GLOBALS['var_echec_cookie'];
 	$essai_auth_http = $GLOBALS['var_essai_auth_http'];
 	$logout = $GLOBALS['var_logout'];
+
+	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
+	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
+	// s'il est la, c'est probablement un bookmark sur bonjour=oui,
+	// et pas un echec cookie.
+	if ($GLOBALS['var_echec_cookie'])
+		$echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
 
 	global $auteur_session;
 	global $spip_session, $PHP_AUTH_USER;
@@ -200,7 +206,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "de connexion (moins s&eacute;curis&eacute;e) est &agrave; votre disposition&nbsp;: \n";
 		echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 		$url = $cible->getUrl();
-		echo "<input type='hidden' name='var_url' value='$url'>\n";
+		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' name='submit' class='spip_bouton' value='Identification sans cookie'></div>\n";
 		echo "</fieldset></form>\n";
 	}

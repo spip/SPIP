@@ -359,11 +359,11 @@ if (count($log)>0){
 		echo "<b>total : $total_absolu</b>";
 		
 		if ($id_article) {
-			echo "<br>popularité&nbsp;: $val_popularite%";
+			echo "<br>popularit&eacute;&nbsp;: $val_popularite%";
 		} else {
 			echo "<font size=1>";
-			echo "<br>popularité du site&nbsp;: ";
-			echo round(max(1,lire_meta('popularite_total')));
+			echo "<br>popularit&eacute; du site&nbsp;: ";
+			echo ceil(lire_meta('popularite_total'));
 			echo "</font>";
 		}
 		

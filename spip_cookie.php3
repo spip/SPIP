@@ -56,6 +56,17 @@ if ($logout) {
 }
 
 
+// en cas de login sur bonjour=oui, on tente de poser un cookie
+// puis de passer a spip_login qui diagnostiquera l'echec de cookie
+// le cas echeant.
+if ($test_echec_cookie == 'oui') {
+	setcookie('spip_session', 'test_echec_cookie');
+	$link = new Link("spip_login.php3?var_echec_cookie=oui");
+	$link->addVar("var_url", $cible->getUrl());
+	@header("Location: ".$link->getUrl());
+	exit;
+}
+
 // tentative de login
 unset ($cookie_session);
 if ($essai_login == "oui") {
@@ -102,7 +113,6 @@ if ($essai_login == "oui") {
 		@spip_query($query);
 		if (ereg("ecrire/", $cible->getUrl())) {
 			$cible->addVar('bonjour','oui');
-			$cible->addVar('essai_cookie','oui');
 		}
 	}
 	else {

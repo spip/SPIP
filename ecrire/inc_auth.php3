@@ -114,10 +114,10 @@ function auth() {
 
 	// Tentative de login echec
 	else if ($GLOBALS['bonjour'] == 'oui') { 
-		if ($GLOBALS['essai_cookie'] == 'oui')
-			@header("Location: ../spip_login.php3?var_echec_cookie=oui");
-		else
-			@header("Location: ../spip_login.php3");
+		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
+		$clean_link->delVar('bonjour');
+		$link->addVar('url', 'ecrire/'.$clean_link->getUrl());
+		@header("Location: ".$link->getUrl());
 		exit;
 	}
 
