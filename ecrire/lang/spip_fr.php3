@@ -171,6 +171,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cache_mode_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode compress&eacute;.',
+'cache_mode_non_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
+'cache_modifiable_webmestre' => 'Ces param&egrave;tres sont modifiables par le webmestre du site.',
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 
 
@@ -857,6 +860,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_option_faire_suivre' => 'Faire suivre les messages des forums aux auteurs des articles',
 'info_option_ne_pas_faire_suivre' => 'Ne pas faire suivre les messages des forums',
 'info_options_avancees' => 'OPTIONS AVANC&Eacute;ES',
+'info_ortho_activer' => 'Activer le v&eacute;rificateur d\'orthographe',
+'info_ortho_desactiver' => 'D&eacute;sactiver le v&eacute;rificateur d\'orthographe',
 'info_ou' => 'ou...',
 'info_oui_suppression_mot_cle' => 'je veux supprimer d&eacute;finitivement ce mot-cl&eacute;.',
 'info_page_interdite' => 'Page interdite',
@@ -885,6 +890,10 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_pour' => 'pour',
 'info_premier_resultat' => '[@debut_limit@ premiers r&eacute;sultats sur @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premiers r&eacute;sultats sur @total@]',
+'info_preview_admin' => 'Seuls les administrateurs peuvent pr&eacute;visualiser le site',
+'info_preview_comite' => 'Tous les r&eacute;dacteurs peuvent pr&eacute;visualiser le site',
+'info_preview_desactive' => 'La pr&eacute;visualisation est totalement d&eacute;sactiv&eacute;e',
+'info_preview_texte' => 'Il est possible de pr&eacute;visualiser le site comme si tous les articles et les br&egrave;ves (ayant au moins le statut &laquo;&nbsp;propos&eacute;&nbsp;&raquo;) &eacute;taient publi&eacute;s. Cette possibilit&eacute; doit-elle &ecirc;tre ouverte aux administrateurs seulement, &agrave; tous les r&eacute;dacteurs, ou &agrave; personne&nbsp;?',
 'info_principaux_correspondants' => 'Vos principaux correspondants',
 'info_probleme_grave' => 'probl&egrave;me de',
 'info_procedez_par_etape' => 'proc&eacute;dez &eacute;tape par &eacute;tape',
@@ -1316,6 +1325,20 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'onglet_repartition_rubrique' => 'R&eacute;partition par rubriques',
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
+'ortho_ajouter_ce_mot' => 'Ajouter ce mot au dictionnaire',
+'ortho_aucune_suggestion' => 'Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.',
+'ortho_avis_privacy' => 'Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:',
+'ortho_avis_privacy2' => 'Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).',
+'ortho_ce_mot_connu' => 'Ce mot fait partie du dictionnaire du site.',
+'ortho_dico_absent' => 'Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue',
+'ortho_mode_demploi' => 'Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.',
+'ortho_mots_a_corriger' => 'mots &agrave; corriger',
+'ortho_orthographe' => 'Orthographe',
+'ortho_supprimer_ce_mot' => 'Enlever ce mot du dictionnaire',
+'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.',
+'ortho_trop_de_fautes2' => 'Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
+'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
+'ortho_verifier' => 'V&eacute;rifier l\'orthographe',
 
 
 // P
@@ -1359,6 +1382,7 @@ et vous reconnecter au site.
 'pass_retour_public' => 'Retour sur le site public',
 'pass_rien_a_faire_ici' => 'Rien &agrave; faire ici.',
 'pass_vousinscrire' => 'Vous inscrire sur ce site',
+'previsualiser' => 'Pr&eacute;visualiser',
 
 
 // S
@@ -1367,9 +1391,14 @@ et vous reconnecter au site.
 
 
 // T
+'taille_cache_infinie' => 'Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP essaie de limiter la taille du r&eacute;pertoire <code>CACHE/</code> de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
+'taille_cache_octets' => 'La taille du cache est actuellement de @octets@.',
+'taille_cache_vide' => 'Le cache est vide.',
 'taille_ko' => '@taille@&nbsp;ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
+'taille_repertoire_cache' => 'Taille du r&eacute;pertoire cache',
 'text_article_propose_publication' => 'Article propos&eacute; pour la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; cet article (en bas de page).',
 'texte_acces_ldap_anonyme_1' => 'Certains serveurs LDAP n\'acceptent aucun acc&egrave;s anonyme. Dans ce cas il faut sp&eacute;cifier un identifiant d\'acc&egrave;s initial afin de pouvoir ensuite rechercher des informations dans l\'annuaire. Dans la plupart des cas n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.',
 'texte_actualite_site_1' => 'Quand vous serez familiaris&eacute;(e) avec l\'interface, vous pourrez cliquer sur &laquo;',
@@ -1725,7 +1754,20 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_delier' => 'Ne plus lier cet article &agrave; ces traductions',
 'trad_lier' => 'Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
 'trad_new' => '&Eacute;crire une nouvelle traduction de cet article',
-'trad_reference' => '(article de r&eacute;f&eacute;rence)'
+'trad_reference' => '(article de r&eacute;f&eacute;rence)',
+
+
+// U
+'upload_fichier_zip' => 'Fichier ZIP',
+'upload_fichier_zip_texte' => 'Le fichier que vous proposez d\'installer est un fichier Zip.',
+'upload_fichier_zip_texte2' => 'Ce fichier peut &ecirc;tre&nbsp;:',
+'upload_limit' => 'Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
+'upload_zip_decompacter' => 'd&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
+'upload_zip_telquel' => 'install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
+
+
+// V
+'version_initiale' => 'Version initiale'
 
 );
 
