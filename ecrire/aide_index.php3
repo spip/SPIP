@@ -1,10 +1,10 @@
 <?php
 
-include ("ecrire/inc_version.php3");
+include ("inc_version.php3");
 include_ecrire ("inc_layer.php3");
 
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
-#$lastmodified = filemtime("spip_help.php3");
+#$lastmodified = filemtime("aide_index.php3");
 #$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
 #if ($headers_only) exit;
 
@@ -33,8 +33,8 @@ function help_frame ($aide) {
 	global $spip_lang;
 
 	echo "</head>\n";
-	$frame_menu = "<frame src=\"spip_help.php3?aide=$aide&var_lang=$spip_lang&frame=menu\" name=\"gauche\" scrolling=\"auto\" noresize>\n";
-	$frame_body = "<frame src=\"spip_help.php3?aide=$aide&var_lang=$spip_lang&frame=body\" name=\"droite\" scrolling=\"auto\" noresize>\n";
+	$frame_menu = "<frame src=\"aide_index.php3?aide=$aide&var_lang=$spip_lang&frame=menu\" name=\"gauche\" scrolling=\"auto\" noresize>\n";
+	$frame_body = "<frame src=\"aide_index.php3?aide=$aide&var_lang=$spip_lang&frame=body\" name=\"droite\" scrolling=\"auto\" noresize>\n";
 
 	if ($GLOBALS['spip_lang_rtl']) {
 		echo '<frameset cols="*,160" border="0" frameborder="0" framespacing="0">';
@@ -59,7 +59,7 @@ function fichier_aide($lang_aide = '') {
 
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 
-	if (@file_exists($fichier_aide = "ecrire/AIDE/$lang_aide-aide.html")) 
+	if (@file_exists($fichier_aide = "AIDE/$lang_aide/$lang_aide-aide.html")) 
 		return array(file($fichier_aide), $lang_aide);
 	else	// reduction ISO du code langue oc_prv_ni => oc_prv => oc
 		if (ereg("(.*)_", $lang_aide, $regs)
@@ -69,7 +69,7 @@ function fichier_aide($lang_aide = '') {
 	else {
 		// Aide internet, en cache ?
 		include_ecrire('inc_sites.php3');
-		if (@file_exists($fichier_aide = "CACHE/aide/$lang_aide-aide.html"))
+		if (@file_exists($fichier_aide = "data/aide-$lang_aide-aide.html"))
 			return array(file($fichier_aide), $lang_aide, "http://www.spip.net/aide_tmp/$lang_aide/", true);
 		else {
 			// sinon aller la chercher sur le site d'aide
@@ -87,38 +87,41 @@ function fichier_aide($lang_aide = '') {
 
 function help_body($aide) {
 
-	// Gerer le cache de l'aide
-	include_local('inc-cache.php3');
-	$rep = creer_repertoire('CACHE', 'aide');
-
 	if (!$aide) $aide = 'spip';
 
 	// Recuperation du contenu de l'aide demandee
 	list($html, $l, $url_aide, $ecrire_cache) = fichier_aide();
 	$html = analyse_aide($html, $aide);
 
-	// Localisation des images de l'aide (si disponibles)
+	// Recherche des images de l'aide
 	$suite = $html;
 	$html = "";
-	while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
+	while (ereg("(AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 		$f = $r[1];
-		if (@file_exists("AIDE/$l/$f")) $f = "AIDE/$l/$f";
-		else if (@file_exists("CACHE/aide/${l}-$f")) $f = "spip_help.php3?img=aide/${l}-$f";
-		else if ($url_aide) {
+
+		# Image installee a l'ancienne
+		if (@file_exists("AIDE/$l/$f"))
+			$f = "AIDE/$l/$f";
+		else
+		# Image telechargee
+		if (@file_exists("data/aide-${l}-$f")) $f = "aide_index.php3?img=aide/${l}-$f";
+		else
+		# Image a telecharger
+		if ($url_aide) {
 			if ($ecrire_cache AND $contenu =
 			recuperer_page("http://www.spip.net/aide_tmp/$l/$f")
-			AND ecrire_fichier ("CACHE/aide/${l}-$f", $contenu))
-				$f = "spip_help.php3?img=aide/${l}-$f";
+			AND ecrire_fichier ("data/aide-${l}-$f", $contenu))
+				$f = "aide_index.php3?img=aide-${l}-$f";
 			else
 				$f = "http://www.spip.net/aide_tmp/$l/$f"; # erreur
-		} else if (@file_exists("AIDE/fr/$f")) $f = "AIDE/fr/$f";
-		else if (@file_exists("AIDE/fr/$f")) $f = "AIDE/fr/$f";
+		}
+
 		$p = strpos($suite, $r[0]);
 		$html .= substr($suite, 0, $p) . $f;
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
-	$html .= $suite;
 
+	$html .= $suite;
 
 ?>
 <style type="text/css"><!--
@@ -188,7 +191,7 @@ table.spip td {
 <TD WIDTH=100% HEIGHT=60% ALIGN="center" VALIGN="middle">
 
 <CENTER>
-<img src="spip_help.php3?img=aide/-logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
+<img src="aide_index.php3?img=aide/-logo-spip.gif" alt="SPIP" width="300" height="170" border="0">
 </CENTER>
 </TD></TR></TABLE>';
 	}
@@ -217,14 +220,14 @@ table.spip td {
 function help_img($regs) {
 	list ($cache, $lang, $file, $ext) = $regs;
 	header("Content-Type: image/$ext");
-	if (file_exists('CACHE/'.$cache)) {
-		readfile('CACHE/'.$cache);
+	if (file_exists('data/'.$cache)) {
+		readfile('data/'.$cache);
 	} else {
 		include_ecrire('inc_sites.php3');
-		if (is_dir('CACHE/aide') AND $contenu =
+		if ($contenu =
 		recuperer_page("http://www.spip.net/aide_tmp/$lang/$file")) {
 			echo $contenu;
-			ecrire_fichier ('CACHE/'.$cache, $contenu);
+			ecrire_fichier ('data/'.$cache, $contenu);
 		} else
 			header ("Location: http://www.spip.net/aide_tmp/$lang/$file");
 	}
@@ -246,7 +249,7 @@ echo '<style type="text/css">
 		float: '.$spip_lang_left.';
 		text-align: '.$spip_lang_left.';
 		width: 80%;
-		background: url(ecrire/img_pack/triangle'.$spip_lang_rtl.'.gif) '
+		background: url(img_pack/triangle'.$spip_lang_rtl.'.gif) '
 	. $spip_lang_left.' center no-repeat;
 		margin: 2px;
 		padding: 0px;
@@ -258,7 +261,7 @@ echo '<style type="text/css">
 		float: '.$spip_lang_right.';
 		text-align: '.$spip_lang_right.';
 		width: 80%;
-		background: url(ecrire/img_pack/triangle'.$spip_lang_rtl.'.gif) '.$spip_lang_right.' center no-repeat;
+		background: url(img_pack/triangle'.$spip_lang_rtl.'.gif) '.$spip_lang_right.' center no-repeat;
 		margin: 4px;
 		padding: 0px;
 		padding-'.$spip_lang_right.': 20px;
@@ -390,7 +393,7 @@ function article($titre, $lien, $statut = "redac") {
 		
 		$texte[$ligne] = '';
 		$id = "ligne$ligne";
-		$url = "spip_help.php3?aide=$lien&frame=body&var_lang=$spip_lang";
+		$url = "aide_index.php3?aide=$lien&frame=body&var_lang=$spip_lang";
 		if ($aide == $lien) {
 			$ouvrir_rubrique = 1;
 			$class = "article-actif";
