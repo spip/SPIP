@@ -66,10 +66,10 @@ if ($type == "public") {
 	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'publie'");
 	while($row=spip_fetch_array($result_articles)){
 		$id_article=$row['id_article'];
-		$titre = filtrer_ical(_T('info_article_publie').": ".$row['titre']);
+		$titre = filtrer_ical($row['titre']." ("._T('info_article_publie').")");
 		$date_heure = $row['date'];
 		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:[$nom_site] $titre ");
+		ligne ("SUMMARY:$titre [$nom_site]");
 		ligne ("UID:article$id_article @ $adresse_site");
 				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
@@ -82,10 +82,10 @@ if ($type == "public") {
 	$result_articles = spip_query("SELECT id_breve, titre, date_heure FROM spip_breves WHERE statut = 'publie'");
 	while($row=spip_fetch_array($result_articles)){
 		$id_breve=$row['id_breve'];
-		$titre = filtrer_ical(_T('titre_breve_publiee').": ".$row['titre']);
+		$titre = filtrer_ical($row['titre']." ("._T('titre_breve_publiee').")");
 		$date_heure = $row['date_heure'];
 		ligne ("BEGIN:VEVENT");
-		ligne ("SUMMARY:[$nom_site] $titre");
+		ligne ("SUMMARY:$titre [$nom_site]");
 		ligne ("UID:breve$id_breve @ $adresse_site");
 				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
@@ -205,7 +205,7 @@ if ($id_utilisateur) {
 		$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'prop'");
 		while($row=spip_fetch_array($result_articles)){
 			$id_article=$row['id_article'];
-			$titre = filtrer_ical(_T('info_article_propose').": ".$row['titre']);
+			$titre = filtrer_ical($row['titre']." ("._T('info_article_propose').")");
 			$date_heure = $row['date'];
 			$nb_articles ++;
 			ligne ("BEGIN:VEVENT");
@@ -220,7 +220,7 @@ if ($id_utilisateur) {
 		$result_articles = spip_query("SELECT id_breve, titre, date_heure FROM spip_breves WHERE statut = 'prop'");
 		while($row=spip_fetch_array($result_articles)){
 			$id_breve=$row['id_breve'];
-			$titre = filtrer_ical(_T('item_breve_proposee').": ".$row['titre']);
+			$titre = filtrer_ical($row['titre']." ("._T('item_breve_proposee').")");
 			$date_heure = $row['date_heure'];
 			$nb_breves++;
 			ligne ("BEGIN:VEVENT");
@@ -317,7 +317,7 @@ if ($id_utilisateur) {
 				if ($email_auteur) $email_auteur = "<$email_auteur>";
 				
 				ligne ("BEGIN:VEVENT");
-				ligne ("SUMMARY:[$nom_site / ".filtrer_ical(_T('icone_forum_suivi'))."] $titre ");
+				ligne ("SUMMARY:[$nom_site] $titre ".filtrer_ical(_T('icone_forum_suivi')));
 				ligne ("DESCRIPTION:$texte\r$auteur $email_auteur");
 				ligne ("UID:forum$id_forum @ $adresse_site");
 				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
