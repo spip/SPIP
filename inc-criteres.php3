@@ -222,20 +222,32 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 	else if ($tri == 'type_mot'){
 		$boucle->order= "'mots.type'";
 	}
-	// par points
-	else if ($tri == 'points'){
-		$boucle->order= "'points'";
-	}
 	// par num champ(, suite)
 	else if (ereg("^num[[:space:]]+([^,]*)(,.*)?",$tri, $match2)) {
 		$boucle->select[] = "0+".$boucle->id_table.".".$match2[1]." AS num";
 		$boucle->order = "'num".texte_script($match2[2])."'";
 	}
-	// par champ
+	// par champ. Verifier qu'ils sont presents.
 	else if (ereg("^[a-z][a-z0-9]*$", $tri)) {
 		if ($tri == 'date')
-			$tri = $GLOBALS['table_date'][$boucle->type_requete];
-		$boucle->order = "'".$boucle->id_table.".".$tri."'";
+			$boucle->order = "'".$boucle->id_table.".".
+			  $GLOBALS['table_date'][$boucle->type_requete]
+			  ."'";
+		else {
+			global $table_des_tables, $tables_des_serveurs_sql;
+			$r = $boucle->type_requete;
+			$s = $boucles[$idb]->sql_serveur;
+			if (!$s) $s = 'localhost';
+			$t = $table_des_tables[$r];
+			if (!$t) $t = $r; // pour les tables non Spip
+			$desc = $tables_des_serveurs_sql[$s][$t];
+			if ($desc['field'][$tri])
+				$boucle->order = "'".$boucle->id_table.".".$tri."'";
+			else {
+			  // tri sur les champs synthetises (cf points)
+				$boucle->order = "'".$tri."'";
+			}
+		}
 	}
 	// tris par critere bizarre
 	// (formule composee, virgules, etc).

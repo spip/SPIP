@@ -50,7 +50,7 @@ function erreur($zetexte){
 
 function reponse_confirmation($id_article, $val_confirm) {
 
-	include_local(_FILE_CONNECT);
+	include(_FILE_CONNECT);
 	
 	if ($GLOBALS['db_ok']) {
 		include_ecrire("inc_texte.php3");
@@ -146,7 +146,7 @@ function reponse_confirmation($id_article, $val_confirm) {
 function reponse_signature($id_article) {
 	global $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
 	spip_log("signature petition $id_article ($adresse_email)");
-	include_local(_FILE_CONNECT);
+	include(_FILE_CONNECT);
 	
 	if ($GLOBALS['db_ok']) {
 		include_ecrire("inc_texte.php3");
@@ -336,97 +336,124 @@ function formulaire_signature($id_article,$petition_s) {
 }
 
 // inscrire les visiteurs dans l'espace public (statut 6forum) ou prive (statut nouveau->1comite)
+// on n'est plus tres loin de faire de cette fonction un squelette.
+
 function formulaire_inscription($type) {
-  include_ecrire("inc_mail.php3");
-  lang_select($GLOBALS['spip_lang']);
-
-  global $mail_inscription, $nom_inscription;
-
-	if ($type == 'redac') {
-		if (lire_meta("accepter_inscriptions") != "oui") return;
-		$statut = "nouveau";
-	}
-	else if ($type == 'forum') {
-		$statut = "6forum";
-	}
-	else {
-		return; // tentative de hack...?
-	}
-
-	if ($mail_inscription && $nom_inscription) {
-		$query = "SELECT * FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'";
-		$result = spip_query($query);
-
-		$res = "<div class='reponse_formulaire'>";
-
-		// l'abonne existe deja.
-	 	if ($row = spip_fetch_array($result)) {
-			$id_auteur = $row['id_auteur'];
-			$statut = $row['statut'];
-
-			unset ($continue);
-			if ($statut == '5poubelle')
-				$res .= "<b>"._T('form_forum_access_refuse')."</b>";
-			else if ($statut == 'nouveau') {
-				spip_query ("DELETE FROM spip_auteurs WHERE id_auteur=$id_auteur");
-				$continue = true;
-			} else
-				$res .= "<b>"._T('form_forum_email_deja_enregistre')."</b>";
-		} else
-			$continue = true;
-
-		// envoyer identifiants par mail
-		if ($continue) {
-			include_ecrire("inc_acces.php3");
-			$pass = creer_pass_aleatoire(8, $mail_inscription);
-			$login = test_login($mail_inscription);
-			$mdpass = md5($pass);
-			$htpass = generer_htpass($pass);
-			spip_query(
-"INSERT INTO spip_auteurs (nom, email, login, pass, statut, htpass) ".
-"VALUES ('".addslashes($nom_inscription)."', '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
-			ecrire_acces();
-
-			$nom_site_spip = lire_meta("nom_site");
-			$adresse_site = lire_meta("adresse_site");
-
-			$message = _T('form_forum_message_auto')."\n\n"._T('form_forum_bonjour')."\n\n";
-			if ($type == 'forum') {
-				$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
-			}
-			else {
-				$message .= _T('form_forum_voici2', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
-			}
-			$message .= "- "._T('form_forum_login')." $login\n";
-			$message .= "- "._T('form_forum_pass')." $pass\n\n";
-
-			if (envoyer_mail($mail_inscription, "[$nom_site_spip] "._T('form_forum_identifiants'), $message)) {
-			  $res .=  _T('form_forum_identifiant_mail');
-			}
-			else {
-				$res .= _T('form_forum_probleme_mail');
-			}
-		}
-		$res .= "</div>";
-	}
-	else {
-
-		$link = new Link;
-		$url = $link->getUrl();
-		$url = quote_amp($url);
-		$res = _T('form_forum_indiquer_nom_email') .
-		  "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n" .
-		  "<div><b>"._T('form_pet_votre_nom')."</b></div>" .
-		  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>" .
-		  "<div><b>"._T('form_pet_votre_email')."</b></div>" .
-		  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>" .
-		  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>" .
-		  "</form>";
+	lang_select($GLOBALS['spip_lang']);
+	switch (status_inscription($type)) {
+		case 1: $res = '';
+			break;
+		case 2: $res = '';
+			break;
+		case 3:
+			$res = "<div class='reponse_formulaire'><b>" .
+			  _T('form_forum_identifiant_mail') .
+			  "</b></div>";
+			break;
+		case 4:
+			$res = "<div class='reponse_formulaire'><b>" .
+			  _T('form_forum_probleme_mail') .
+			  "</b></div>";
+			break;
+		case 5:
+			$res = "<div class='reponse_formulaire'><b>" .
+			  _T('form_forum_access_refuse')."</b>" .
+			  "</b></div>";
+			break;
+		case 6:
+			$res = "<div class='reponse_formulaire'><b>" .
+			  _T('form_forum_email_deja_enregistre') .
+			  "</b></div>";
+			break;
+		case 7:
+		  {
+			$link = new Link;
+			$url = $link->getUrl();
+			$url = quote_amp($url);
+			$res =  _T('form_forum_indiquer_nom_email') .
+			  "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n" .
+			  "<div><b>"._T('form_pet_votre_nom')."</b></div>" .
+			  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>" .
+			  "<div><b>"._T('form_pet_votre_email')."</b></div>" .
+			  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>" .
+			  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>" .
+			  "</form>";
+			break;
+		  }
 	}
 	lang_dselect();
 	return $res;
 }
 
+function status_inscription($type) {
+
+	if ($type == 'redac') {
+		if (lire_meta("accepter_inscriptions") != "oui") return 1;
+		$statut = "nouveau";
+	}
+	else if ($type == 'forum') {
+		$statut = "6forum";
+	}
+	else return 2; // tentative de hack...?
+
+	global $mail_inscription, $nom_inscription;
+
+	if ($mail_inscription && $nom_inscription) {
+		include(_FILE_CONNECT);
+		// envoyer les identifiants si l'abonne n'existe pas déjà.
+		if (!$row = spip_fetch_array(spip_query("SELECT statut, id_auteur, login, pass FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."' LIMIT 1")))
+		  {
+			include_ecrire("inc_acces.php3");
+			$pass = creer_pass_aleatoire(8, $mail_inscription);
+			$login = test_login($mail_inscription);
+			$mdpass = md5($pass);
+			$htpass = generer_htpass($pass);
+			$r = spip_insert('spip_auteurs', 
+					 '(nom, email, login, pass, statut, htpass)',
+					 "('".addslashes($nom_inscription)."',  '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
+			ecrire_acces();
+			return envoyer_inscription($mail_inscription, $statut, $type, $login, $pass);
+		  } 
+
+		else {
+		  // existant mais encore muet, renvoyer les infos
+			if ($row['statut'] == 'nouveau') {
+			  return (envoyer_inscription($mail_inscription, $row['statut'], $type, $row['login'], $row['pass']));
+			} else {
+				if ($row['statut'] == '5poubelle')
+		  // dead
+				  return 5;
+				else  
+		  // deja inscrit
+				  return 6;
+			}
+		}
+	}
+	// demande du formulaire
+	else return 7;
+}
+
+	// envoyer identifiants par mail
+function envoyer_inscription($mail, $statut, $type, $pass, $login) {
+	$nom_site_spip = lire_meta("nom_site");
+	$adresse_site = lire_meta("adresse_site");
+	
+	$message = _T('form_forum_message_auto')."\n\n"._T('form_forum_bonjour')."\n\n";
+	if ($type == 'forum') {
+		$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
+	} else {
+		$message .= _T('form_forum_voici2', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
+	}
+	$message .= "- "._T('form_forum_login')." $login\n";
+	$message .= "- "._T('form_forum_pass')." $pass\n\n";
+
+	include_ecrire("inc_mail.php3");
+	if (envoyer_mail($mail, "[$nom_site_spip] "._T('form_forum_identifiants'), $message))
+	  return 3;
+	else
+	  return 4;
+}
+		
 
 function formulaire_site($la_rubrique) {
   include_ecrire("inc_mail.php3");
