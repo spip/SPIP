@@ -360,21 +360,22 @@ function parser_boucle($texte, $id_parent) {
 						}
 
 						// Cas particulier : selection des documents selon l'extension
-						else if ($type == 'documents' AND $col == 'extension') {
+						if ($type == 'documents' AND $col == 'extension') {
 							$col_table = 'types_d';
 						}
 						// Cas particulier : lier les articles syndiques au site correspondant
 						else if ($type == 'syndic_articles')
 							$col_table = 'source';
+
 						// Cas particulier : id_enfant => utiliser la colonne id_objet
-						else if ($col == 'id_enfant')
+						if ($col == 'id_enfant')
 							$col = $id_objet;
 						// Cas particulier : id_secteur = id_rubrique pour certaines tables
 						else if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
 							$col = 'id_rubrique';
 						// Cas particulier : expressions de date
 						else if ($col == 'date')
-							$col = $col_date;
+							$col = $table.$col_date;
 						else if ($col == 'mois') {
 							$col = "MONTH($table.$col_date)";
 							$col_table = '';
@@ -392,12 +393,12 @@ function parser_boucle($texte, $id_parent) {
 							$col_table = '';
 						}
 						else if ($col == 'age') {
-							$col = "(LEAST((TO_DAYS(now())-TO_DAYS($col_date)),(DAYOFMONTH(now())-DAYOFMONTH($col_date))+30.4368*(MONTH(now())-MONTH($col_date))+365.2422*(YEAR(now())-YEAR($col_date))))";
+							$col = "(LEAST((TO_DAYS(now())-TO_DAYS($table.$col_date)),(DAYOFMONTH(now())-DAYOFMONTH($table.$col_date))+30.4368*(MONTH(now())-MONTH($table.$col_date))+365.2422*(YEAR(now())-YEAR($table.$col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_relatif') {
 							$date_prec = "($"."date)";
-							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($col_date))+30.4368*(MONTH('$date_prec')-MONTH($col_date))+365.2422*(YEAR('$date_prec')-YEAR($col_date))))";
+							$col = "(LEAST((TO_DAYS('$date_prec')-TO_DAYS($table.$col_date)),(DAYOFMONTH('$date_prec')-DAYOFMONTH($col_date))+30.4368*(MONTH('$date_prec')-MONTH($table.$col_date))+365.2422*(YEAR('$date_prec')-YEAR($table.$col_date))))";
 							$col_table = '';
 						}
 						else if ($col == 'age_redac') {
