@@ -97,6 +97,7 @@ function traduire_nom_langue($lang) {
 	'ca' => "catal&#224;",
 	'co' => "Corsican",
 	'cpf' => "Kr&eacute;ol r&eacute;yon&eacute;",
+	'cpc' => "Krey&ograve;l",
 	'cs' => "&#269;e&#353;tina",
 	'cy' => "Welsh",
 	'da' => "dansk",
