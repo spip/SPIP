@@ -28,7 +28,7 @@ function generer_url_document($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
 	if ((lire_meta("creer_htpasswd")) == 'oui')
-		return "donne_l_ode.php3?id_document=$id_document";
+		return "spip_acces_doc.php3?id_document=$id_document";
 	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
 		return ($row['fichier']);
 	return '';

@@ -2245,7 +2245,7 @@ else {
 				if (lire_meta('forum_prive_admin') == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "privadm", $sous_rubrique);
 
 				icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "suivi-petition-24.gif", "suivi-petition", $sous_rubrique);
 
 			echo "</tr></table></div></div>";
 	
@@ -2381,12 +2381,14 @@ else {
 				$lien = new Link;
 				$lien->addVar('set_options', 'avancees');
 				$simple = "<b>"._T('icone_interface_simple')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
+				$icone = "interface-display-comp.png";
 			} else {
 				$lien = new Link;
 				$lien->addVar('set_options', 'basiques');
 				$simple = "<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
+				$icone = "interface-display.png";
 			}
-			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\"><img src='img_pack/interface-display.gif' alt='' width='26' height='20' border='0'></a>";
+			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\"><img src='img_pack/$icone' alt='' width='26' height='20' border='0'></a>";
 
 			echo "<img src='img_pack/rien.gif' width='10' height='1' alt='' />";
 			echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png' alt='abc' class='format_png' valign='middle' width='59' height='15' usemap='#map_layout' border='0' />";

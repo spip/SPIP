@@ -12,6 +12,7 @@ define("_ECRIRE_INC_MATH", "1");
 function image_math($tex) {
 	global $traiter_math;
 	switch ($traiter_math) {
+		// Attention: mathml desactiv'e pour l'instant
 		case 'mathml':
 			$ext = '.xhtml';
 			$server = $GLOBALS['mathml_server'];
