@@ -32,23 +32,53 @@ echo "<div>&nbsp;</div>";
 				$titre = typo($row['titre']);
 				$id_rubrique =$row['id_parent'];
 				
-				if ($j >= 0) $dest[$j] = $ze_rubrique;
+				$dest[$j] = $ze_rubrique;
 			}
 		}
 		
 		$dest[$j-1] = 0;
-
-
-
 		
 		while (!$dest[1]) {
 			for ($i = 0; $i < $nb_col; $i++) {
 				$dest[$i] = $dest[$i+1];
 			}
 		}
-		
 
-		if ($dest[0] > 0 AND $parent = $dest[$nb_col-2]) echo "<tr><td colspan='$nb_col' style='text-align: left;'><a href='brouteur.php3?id_rubrique=$parent'><img src='img_pack/fleche-left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></a></td></tr>";
+
+
+
+		if ($dest[0] > 0 AND $parent = $dest[$nb_col-2]) {
+			// Afficher la hierarchie pour "remonter"
+			echo "<tr><td colspan='$nb_col' style='text-align: $spip_lang_left;'>";
+			$la_rubrique = $dest[0];
+			
+			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique = $la_rubrique";
+			$result = spip_query($query);
+			while ($row = spip_fetch_array($result)) {
+				$la_rubrique =$row['id_parent'];
+			}
+			
+			while ($la_rubrique > 0) {
+				$query = "SELECT * FROM spip_rubriques WHERE id_rubrique = $la_rubrique";
+				$result = spip_query($query);
+				while ($row = spip_fetch_array($result)) {
+					$compteur = $compteur + 1;
+					$ze_rubrique = $row['id_rubrique'];
+					$titre = typo($row['titre']);
+					$la_rubrique =$row['id_parent'];
+					$lien = $dest[$nb_col-$compteur-1];
+					if ($la_rubrique == 0) $icone = "secteur-24.gif";
+					else $icone = "rubrique-24.gif";
+					$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+				}
+			}
+			$lien = $dest[$nb_col-$compteur-2];
+			$icone = "racine-site-24.gif";
+			$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+			echo $ret;
+			echo "</td></tr>";
+			
+		}
 	} else {
 		$id_rubrique = 0;
 		$dest[0] = "$id_rubrique";

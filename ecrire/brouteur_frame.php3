@@ -17,7 +17,6 @@ debut_html();
 	}
 	echo "<div class='arial2'>";
 
-
 	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique ORDER BY titre";
 	$result=spip_query($query);
 	if ($row=spip_fetch_array($result)){
@@ -48,11 +47,11 @@ debut_html();
 		$id_parent=$row['id_parent'];
 		
 		if ($id_parent == '0') 	{
-			echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-left: 28px; background: url(img_pack/secteur-24.gif) left center no-repeat;'><b class='verdana2'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></b></div>";
+			echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/secteur-24.gif) $spip_lang_left center no-repeat;'><b class='verdana2'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></b></div>";
 		}
 		else {
-			if ($frame+1 < $nb_col) echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-left: 28px; background: url(img_pack/rubrique-24.gif) left center no-repeat;'><b><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></b></div>";
-			else  echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-left: 28px; background: url(img_pack/rubrique-24.gif) left center no-repeat;'><b><a href='javascript:window.parent.location=\"brouteur.php3?id_rubrique=$ze_rubrique\"'>$titre</a></b></div>";
+			if ($frame+1 < $nb_col) echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/rubrique-24.gif) $spip_lang_left center no-repeat;'><b><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></b></div>";
+			else  echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/rubrique-24.gif) $spip_lang_left center no-repeat;'><b><a href='javascript:window.parent.location=\"brouteur.php3?id_rubrique=$ze_rubrique\"'>$titre</a></b></div>";
 		}
 	}
 
@@ -61,8 +60,8 @@ debut_html();
 		//if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
 		$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
 		$result=spip_query($query);
-		if (spip_fetch_row($result)>0) {
-			echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
+		if (spip_num_rows($result)>0) {
+			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
 			while($row=spip_fetch_array($result)){
 				$id_article=$row['id_article'];
 				$titre = typo($row['titre']);
@@ -85,13 +84,13 @@ debut_html();
 						break;
 				}
 				$puce = "puce-$puce.gif";
-				echo "<div style='margin:3px; padding-left: 20px; background: url(img_pack/$puce) left center no-repeat;'><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"'>$titre</a></div>";
+				echo "<div style='margin-$spip_lang_left:3px; margin-$spip_lang_right: 3px; padding-$spip_lang_left: 17px; background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div style='padding: 3px; background-color: #e0e0e0; border-top: 1px solid white; border-left: 1px solid white; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"'>$titre</a></div></div>";
 			}
 		}
 
 		$query = "SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT 0, 20";
 		$result=spip_query($query);
-		if (spip_fetch_row($result)>0) {
+		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
 			while($row=spip_fetch_array($result)){
 				$id_breve=$row['id_breve'];
@@ -114,8 +113,37 @@ debut_html();
 						$puce = 'poubelle';
 						break;
 				}
-				$puce = "puce-$puce.gif";
-				echo "<div style='margin:3px; padding-left: 20px; background: url(img_pack/$puce) left center no-repeat;'><a href='javascript:window.parent.location=\"breves_voir.php3?id_breve=$id_breve\"'>$titre</a></div>";
+				$puce = "puce-$puce-breve.gif";
+				echo "<div style='margin:3px; padding-top: 3px; padding-bottom= 3px; padding-$spip_lang_left: 12px;  background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><a href='javascript:window.parent.location=\"breves_voir.php3?id_breve=$id_breve\"' class='arial1'>$titre</a></div>";
+			}
+		}
+
+		$query = "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' ORDER BY nom_site";
+		$result=spip_query($query);
+		if (spip_num_rows($result)>0) {
+			echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
+			while($row=spip_fetch_array($result)){
+				$id_syndic=$row['id_syndic'];
+				$titre = typo($row['nom_site']);
+				$statut = $row['statut'];
+				switch ($statut) {
+					case 'publie':
+						$puce = 'verte';
+							break;
+					case 'prepa':
+						$puce = 'blanche';
+						break;
+					case 'prop':
+						$puce = 'orange';
+						break;
+					case 'refuse':
+						$puce = 'rouge';
+						break;
+					case 'poubelle':
+						$puce = 'poubelle';
+						break;
+				}
+				echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/site-24.gif) $spip_lang_left center no-repeat;'><b><a href='javascript:window.parent.location=\"sites.php3?id_syndic=$id_syndic\"'>$titre</a></b></div>";
 			}
 		}
 	}
