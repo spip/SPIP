@@ -333,7 +333,7 @@ function nom_mois($numdate) {
 // alignements
 //
 
-function justif($letexte,$justif) {
+function aligner($letexte,$justif) {
 	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
 	if ($letexte) {
 		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='$justif'>", $letexte);
@@ -342,19 +342,19 @@ function justif($letexte,$justif) {
 }
 
 function justifier($letexte) {
-	return justif($letexte,'justify');
+	return aligner($letexte,'justify');
 }
 
 function aligner_droite($letexte) {
-	return justif($letexte,'right');
+	return aligner($letexte,'right');
 }
 
 function aligner_gauche($letexte) {
-	return justif($letexte,'left');
+	return aligner($letexte,'left');
 }
 
 function centrer($letexte) {
-	return justif($letexte,'center');
+	return aligner($letexte,'center');
 }
 
 ?>
