@@ -37,7 +37,7 @@ stop-opacity:1"/>
 	
 	echo "<style type='text/css'>";
 	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
-	echo ".trait {stroke:#666666;stroke-width:1;}\n";
+	echo ".trait {stroke:black;stroke-width:1;}\n";
 	echo "</style>";
 
 
@@ -117,14 +117,14 @@ stop-opacity:1"/>
 		}
 
 
-		echo "<line x1='0' y1='75' x2='".($largeur*$nb_jours)."' y2='75' style='stroke:#999999;stroke-width:1'/>\n";
-		echo "<line x1='0' y1='150' x2='".($largeur*$nb_jours)."' y2='150' style='stroke:#999999;stroke-width:1'/>\n";
-		echo "<line x1='0' y1='225' x2='".($largeur*$nb_jours)."' y2='225' style='stroke:#999999;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='75' x2='".round($largeur*$nb_jours/$agreg)."' y2='75' style='stroke:#999999;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='150' x2='".round($largeur*$nb_jours/$agreg)."' y2='150' style='stroke:#999999;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='225' x2='".round($largeur*$nb_jours/$agreg)."' y2='225' style='stroke:#999999;stroke-width:1'/>\n";
 		
-		echo "<line x1='0' y1='37' x2='".($largeur*$nb_jours)."' y2='37' style='stroke:#eeeeee;stroke-width:1'/>\n";
-		echo "<line x1='0' y1='112' x2='".($largeur*$nb_jours)."' y2='112' style='stroke:#eeeeee;stroke-width:1'/>\n";
-		echo "<line x1='0' y1='187' x2='".($largeur*$nb_jours)."' y2='187' style='stroke:#eeeeee;stroke-width:1'/>\n";
-		echo "<line x1='0' y1='262' x2='".($largeur*$nb_jours)."' y2='262' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='37' x2='".round($largeur*$nb_jours/$agreg)."' y2='37' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='112' x2='".round($largeur*$nb_jours/$agreg)."' y2='112' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='187' x2='".round($largeur*$nb_jours/$agreg)."' y2='187' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='262' x2='".round($largeur*$nb_jours/$agreg)."' y2='262' style='stroke:#eeeeee;stroke-width:1'/>\n";
 
 
 		// Presentation graphique
@@ -205,7 +205,7 @@ stop-opacity:1"/>
 
 
 			if (date("w",$key) == "0") // Dimanche en couleur foncee
-							$fill = $couleur_foncee;
+				$fill = $couleur_foncee;
 			else 
 				$fill = "url(#claire)";
 
@@ -215,7 +215,7 @@ stop-opacity:1"/>
 			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='1' style='fill:$couleur_foncee;'/>\n";	
 
 			if (date("d", $key) == "1") 
-				echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur_moyenne)."' width='1' height='$hauteur_moyenne' style='fill:black;'/>\n";	
+				echo "<line x1='".(($n-1)*$largeur)."' y1='".(300-$hauteur_moyenne)."' x2='".(($n-1)*$largeur)."' y2='300' class='trait'/>\n";	
 			
 				
 			if ($hauteur_moyenne_prec > 0) {
@@ -234,21 +234,21 @@ stop-opacity:1"/>
 		}
 
 
-		echo "<rect x='0' y='0' width='".($largeur*$nb_jours)."' height='300' style='stroke-width: 1px; stroke: black; fill: blue; fill-opacity: 0; '/>\n";	
+		echo "<rect x='0' y='0' width='".round($largeur*$nb_jours/$agreg)."' height='300' style='stroke-width: 1px; stroke: black; fill: blue; fill-opacity: 0; '/>\n";	
 
-		echo " <text x='".(($largeur*$nb_jours)+3)."' y='300' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='300' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo "0";
 		echo "</text>\n";
-		echo " <text x='".(($largeur*$nb_jours)+3)."' y='228' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='228' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round($maxgraph/4);
 		echo "</text>\n";
-		echo " <text x='".(($largeur*$nb_jours)+3)."' y='153' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='153' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round($maxgraph/2);
 		echo "</text>\n";
-		echo " <text x='".(($largeur*$nb_jours)+3)."' y='78' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='78' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round(3*$maxgraph/4);
 		echo "</text>\n";
-		echo " <text x='".(($largeur*$nb_jours)+3)."' y='8' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
+		echo " <text x='".(round($largeur*$nb_jours/$agreg)+3)."' y='8' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round($maxgraph);
 		echo "</text>\n";
 

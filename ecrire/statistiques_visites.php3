@@ -539,7 +539,8 @@ if (!$origine) {
 		}
 		echo "</td></tr></table>";	
 	}		
-		
+	
+	/* Rendu moins interessant avec le zoom ci-dessus
 	if (count($log) > 60) {
 		echo "<p>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
@@ -648,6 +649,7 @@ if (!$origine) {
 			$jour_prec = $key;
 			$val_prec = $value;
 		}
+		
 		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
 		echo "</tr></table>";
 		echo "</td>";
@@ -687,7 +689,7 @@ if (!$origine) {
 		echo "</td></tr></table>";
 		echo "</div>";
 	}
-	
+	*/
 	/////
 		
 	fin_cadre_relief();
