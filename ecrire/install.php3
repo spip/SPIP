@@ -1,14 +1,15 @@
 <?php
 
+include ("inc_version.php3");
+include_local ("inc_presentation.php3");
+
 if (file_exists("inc_connect.php3")) {
 	install_debut_html();
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4><B>Espace interdit</B></FONT>";
+	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4><B>Espace interdit</B><p>SPIP est d&eacute;j&agrave; install&eacute;.</FONT>";
 	install_fin_html();
 	exit;
 }
 
-include ("inc_version.php3");
-include_local ("inc_presentation.php3");
 include_local ("inc_acces.php3");
 include_local ("inc_base.php3");
 
