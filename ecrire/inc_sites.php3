@@ -307,9 +307,10 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				else continue;
 
 				// Titre (obligatoire)
-				if (ereg("<title>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>",$item[$i],$match))
-					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[1])));
-				elseif (($syndic_version==0.3) AND (strlen($letitre)==0))
+				if
+(ereg("<title>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</title>",$item[$i],$match))
+					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[2])));
+				else if (($syndic_version==0.3) AND (strlen($letitre)==0))
 					if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',$link_match,$mat))
 						$le_titre=$mat[1]; 
 				else continue;
