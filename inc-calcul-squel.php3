@@ -1408,7 +1408,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'RECHERCHE':
-		$code = '$GLOBALS["recherche"]';
+		$code = 'htmlspecialchars($GLOBALS["recherche"])';
 		break;
 
 	case 'COMPTEUR_BOUCLE':
