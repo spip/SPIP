@@ -93,7 +93,7 @@ function bouton_block_invisible($nom_block) {
 			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\');";
 		}
 		$retour = "\n<script type='text/javascript'><!--\n";
-		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"".$dir_ecrire."img_pack/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n";
+		$retour .= "document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"".$dir_ecrire."img_pack/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n";
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
 
@@ -114,7 +114,7 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."', '$spip_lang_rtl')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='".$dir_ecrire."img_pack/deplierbas.gif' alt='' title='".addslashes(_T('info_deplier'))."' width='10' height='10' border='0'></a>";
+		return "<a class=\"triangle_block\" href=\"javascript:swap_couche('".$numero_block["$nom_block"]."', '$spip_lang_rtl')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='".$dir_ecrire."img_pack/deplierbas.gif' alt='' title='".addslashes(_T('info_deplier'))."' width='10' height='10' border='0'></a>";
 	}
 }
 
