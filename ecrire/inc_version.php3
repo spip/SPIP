@@ -13,7 +13,7 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 
 // version de la base
-$spip_version = 1.437;
+$spip_version = 1.438;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
@@ -67,6 +67,7 @@ function spip_query_debug($query) {
 }
 
 function spip_query($query) {
+	return spip_query_profile($query);
 	// return spip_query_debug($query); // a decommenter pour afficher toutes les erreurs
 	$suite = "";
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {

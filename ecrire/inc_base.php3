@@ -36,7 +36,9 @@ function creer_base() {
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		PRIMARY KEY (id_article),
-		KEY id_rubrique (id_rubrique))";
+		KEY id_rubrique (id_rubrique),
+		KEY id_secteur (id_secteur),
+		KEY statut (statut, date))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs (
@@ -57,7 +59,9 @@ function creer_base() {
 		messagerie VARCHAR(3) NOT NULL,
 		alea_actuel tinytext NOT NULL,
 		alea_futur tinytext NOT NULL,
-		PRIMARY KEY (id_auteur))";
+		PRIMARY KEY (id_auteur),
+		KEY login (login),
+		KEY statut (statut))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_breves (
@@ -862,6 +866,13 @@ function maj_base() {
 	if ($version_installee < 1.437) {
 		spip_query("ALTER TABLE spip_visites ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_visites_referers ADD maj TIMESTAMP");
+	}
+
+	if ($version_installee < 1.438) {
+		spip_query("ALTER TABLE spip_articles ADD INDEX id_secteur (id_secteur)");
+		spip_query("ALTER TABLE spip_articles ADD INDEX statut (statut, date)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX login (login)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX statut (statut)");
 	}
 
 
