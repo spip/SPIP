@@ -1365,6 +1365,15 @@ function maj_base() {
 		maj_version (1.722);
 	}
 
+	if ($version_installee < 1.723) {
+		if ($version_installee == 1.722) {
+			spip_query("ALTER TABLE spip_articles MODIFY url_site VARCHAR(255) NOT NULL");
+			spip_query("ALTER TABLE spip_articles DROP INDEX url_site;");
+			spip_query("ALTER TABLE spip_articles ADD INDEX url_site (url_site);");
+		}
+		maj_version (1.723);
+	}
+
 	return true;
 }
 
