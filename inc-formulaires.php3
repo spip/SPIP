@@ -51,7 +51,7 @@ function formulaire_signature($id_article) {
 	echo "<a name='sp$id_article'></a>\n";
 
 	if ($val_confirm) {
-		$query_sign = "SELECT * FROM spip_signatures WHERE statut='$val_confirm'";
+		$query_sign = "SELECT * FROM spip_signatures WHERE statut='".addslashes($val_confirm)."'";
 		$result_sign = spip_query($query_sign);
 		if (spip_num_rows($result_sign) > 0) {
 			while($row = spip_fetch_array($result_sign)) {
@@ -60,45 +60,45 @@ function formulaire_signature($id_article) {
 				$date_time = $row['date_time'];
 				$nom_email = $row['nom_email'];
 				$ad_email = $row['ad_email'];
-				$nom_site=$row['nom_site'];
-				$url_site=$row['url_site'];
-				$message=$row['message'];
-				$statut=$row['statut'];
+				$nom_site = $row['nom_site'];
+				$url_site = $row['url_site'];
+				$message = $row['message'];
+				$statut = $row['statut'];
 			}
 
-			$query_petition="SELECT * FROM spip_petitions WHERE id_article=$id_article";
-		 	$result_petition=spip_query($query_petition);
+			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
+		 	$result_petition = spip_query($query_petition);
 
-			while($row=spip_fetch_array($result_petition)) {
-				$id_article=$row['id_article'];
-				$email_unique=$row['email_unique'];
-				$site_obli=$row['site_obli'];
-				$site_unique=$row['site_unique'];
-				$message_petition=$row['message'];
-				$texte_petition=$row['texte'];
+			while($row = spip_fetch_array($result_petition)) {
+				$id_article = $row['id_article'];
+				$email_unique = $row['email_unique'];
+				$site_obli = $row['site_obli'];
+				$site_unique = $row['site_unique'];
+				$message_petition = $row['message'];
+				$texte_petition = $row['texte'];
 			}
 
-			if ($email_unique=="oui") {
-				$email=addslashes($adresse_email);
-				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
-				$result=spip_query($query);
-				if (spip_num_rows($result)>0){
+			if ($email_unique == "oui") {
+				$email = addslashes($adresse_email);
+				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
+				$result = spip_query($query);
+				if (spip_num_rows($result) > 0) {
 					$texte .= erreur(_T('form_pet_deja_signe'));
 					$refus = "oui";
 				}
 			}
 
-			if ($site_unique=="oui") {
-				$site=addslashes($url_site);
-				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
-				$result=spip_query($query);
-				if (spip_num_rows($result)>0){
+			if ($site_unique == "oui") {
+				$site = addslashes($url_site);
+				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
+				$result = spip_query($query);
+				if (spip_num_rows($result) > 0) {
 					$texte .= erreur(_T('form_pet_deja_enregistre'));
 					$refus = "oui";
 				}
 			}
 
-			if ($refus=="oui") {
+			if ($refus == "oui") {
 				$texte .= erreur(_T('form_deja_inscrit'));
 			}
 			else {
@@ -119,7 +119,7 @@ function formulaire_signature($id_article) {
 			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 		 	$result_petition = spip_query($query_petition);
 
-			while($row = spip_fetch_array($result_petition)) {
+			while ($row = spip_fetch_array($result_petition)) {
 				$id_article = $row['id_article'];
 				$email_unique = $row['email_unique'];
 				$site_obli = $row['site_obli'];
@@ -183,7 +183,7 @@ function formulaire_signature($id_article) {
 			else {
 				$query_site = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
 				$result_site = spip_query($query_site);
-				while($row = spip_fetch_array($result_site)) {
+				while ($row = spip_fetch_array($result_site)) {
 					$titre = $row['titre'];
 				}
 
@@ -193,17 +193,22 @@ function formulaire_signature($id_article) {
 
 				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
 
-				envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex);
+				if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
+					$reponse_signature .= "<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
 
-				$reponse_signature.="<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
+					$nom_email = addslashes($nom_email);
+					$adresse_email = addslashes($adresse_email);
+					$nom_site = addslashes($nom_site);
+					$url_site = addslashes($url_site);
+					$message = addslashes($message);
 
-				$nom_email = addslashes($nom_email);
-				$nom_site = addslashes($nom_site);
-				$message = addslashes($message);
-
-		 		$query = "INSERT INTO spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) ".
-		 			"VALUES ('$id_article', NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')";
-				$result = spip_query($query);
+					$query = "INSERT INTO spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) ".
+						"VALUES ('$id_article', NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')";
+					$result = spip_query($query);
+				}
+				else {
+					$reponse_signature = _T('form_pet_probleme_technique');
+				}
 			}
 		}
 		else {
@@ -285,7 +290,7 @@ function formulaire_inscription($type) {
 	}
 
 	if ($mail_inscription && $nom_inscription) {
-				$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
+		$query = "SELECT * FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'";
 		$result = spip_query($query);
 
 		echo "<div class='reponse_formulaire'>";
@@ -309,7 +314,7 @@ function formulaire_inscription($type) {
 		// envoyer identifiants par mail
 		if ($continue) {
 			include_ecrire("inc_acces.php3");
-			$pass = creer_pass_aleatoire(8,$mail_inscription);
+			$pass = creer_pass_aleatoire(8, $mail_inscription);
 			$login = test_login($mail_inscription);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
