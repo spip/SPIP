@@ -170,6 +170,11 @@ if ($cookie_session) {
 		spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
 	else
 		spip_setcookie('spip_session', $cookie_session);
+
+	$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
+	$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
+	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = ".$row_auteur['id_auteur']);
+
 }
 
 // Redirection
@@ -183,7 +188,7 @@ else {
 	echo "<html><head>";
 	echo "<meta http-equiv='Refresh' content='0; url=".$cible->getUrl()."'>";
 	echo "</head>\n";
-	echo "<body>Si votre navigateur n'est pas redirig&eacute;, <a href='".$cible->getUrl()."'>continuer</a>.</body></html>";
+	echo "<body><a href='".$cible->getUrl()."'>"._T('navigateur_pas_redirige')."</a></body></html>";
 }
 
 ?>

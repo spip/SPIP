@@ -117,6 +117,10 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 			$source_auteur = $row['source'];
 			$alea_actuel = $row['alea_actuel'];
 			$alea_futur = $row['alea_futur'];
+			if ($row['prefs']) {
+				$prefs = unserialize($row['prefs']);
+				$rester_checked = ($prefs['cnx'] == 'perma' ? ' checked':'');
+			}
 		} else if (!$flag_autres_sources) {
 			$erreur = _T('login_identifiant_inconnu', array('login' => htmlspecialchars($login)));
 			$login = '';
@@ -175,7 +179,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
 
-		echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'> ";
+		echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'$rester_checked> ";
 		echo "<label for='session_remember'>"._T('login_rester_identifie')."</label>";
 
 		$url = $cible->getUrl();

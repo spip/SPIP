@@ -1249,6 +1249,10 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'mois_non_connu' => 'non connu',
 
 
+// N
+'navigateur_pas_redirige' => 'Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
+
+
 // O
 'onglet_affacer_base' => 'Effacer la base',
 'onglet_agenda' => 'Agenda',
