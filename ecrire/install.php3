@@ -156,7 +156,7 @@ else if ($etape == 4) {
 	mysql_select_db("$sel_db");
 
 	// Test si SPIP deja installe
-	@spip_query_db("SELECT COUNT(*) FROM spip_meta");
+	spip_query_db("SELECT COUNT(*) FROM spip_meta");
 	$deja_installe = !spip_sql_errno();
 
 	creer_base();
