@@ -204,7 +204,16 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
 		return;
 
-	$destination = creer_repertoire_documents($destdir) . $destfile;
+	// normalement il a ete cree
+	creer_repertoire(_DIR_VIGNETTES, '');
+
+	if ($destdir) {
+	  if (!($destdir = creer_repertoire(_DIR_VIGNETTES, $destdir))) {
+		  return;
+		}
+	} 
+	$destination = _DIR_VIGNETTES . $destdir . $destfile;
+	spip_log("$dir $destination");
 	// chercher un cache
 	foreach (array('gif','jpg','png') as $fmt)
 		if (@file_exists($destination.'.'.$fmt)) {
