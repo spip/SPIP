@@ -117,7 +117,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	// eventuels fichiers inclus modifies depuis la date
 	// HTTP_IF_MODIFIED_SINCE du client)
 	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND !$var_mode
-	    AND $chemin_cache AND !$flag_dynamique) {
+	AND $chemin_cache AND !$flag_dynamique) {
 		$lastmodified = @filemtime($chemin_cache);
 		$headers_only = http_last_modified($lastmodified);
 	}
