@@ -221,7 +221,7 @@ function parser_boucle($texte, $id_parent) {
 			if ($table) {
 				if ($type == 'articles') {
 					$s = "$table.id_article,$table.id_rubrique,$table.id_secteur,".
-						"$table.surtitre,$table.titre,$table.soustitre,$table.date,$table.date_redac,".
+						"$table.surtitre,$table.titre,$table.soustitre,$table.date,$table.date_redac,$table.date_modif,".
 						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum";
 					if (ereg('\#(TEXTE|INTRODUCTION)', $milieu)) {
 						$s .= ",$table.texte";
@@ -806,7 +806,7 @@ function parser($texte) {
 		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE', 
 		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE', 
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
-		'DATE', 'DATE_REDAC', 'INCLUS',
+		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP', 
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
@@ -862,7 +862,7 @@ function parser($texte) {
 	}
 
 	// Dates : ajouter le vidage des dates egales a 00-00-0000
-	$c = array('DATE', 'DATE_REDAC');
+	$c = array('DATE', 'DATE_REDAC', 'DATE_MODIF');
 	reset($c);
 	while (list(, $val) = each($c)) {
 		$champs_traitement[$val][] = 'vider_date';
@@ -894,6 +894,7 @@ function parser($texte) {
 		'PS' => 'ps',
 		'DATE' => 'date',
 		'DATE_REDAC' => 'date_redac',
+		'DATE_MODIF' => 'date_modif',
 		'VISITES' => 'visites',
 		'POINTS' => 'points'
 	);
