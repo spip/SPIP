@@ -599,7 +599,7 @@ td.icone a img {
 	display: block;
 	padding: 2px;
 	margin-<?php echo $left; ?>: 2px;
-	padding-<?php echo $left; ?>: 20px;
+	padding-<?php echo $left; ?>: 18px;
 	background: <?php echo $ltr ? "1%" : "99%"; ?> no-repeat;
 	background-color: #e0e0e0;
 	border-top: 1px solid white;
