@@ -236,6 +236,10 @@ function tester_accesdistant() {
 if ($flag_obgz) {
 	$use_gz = true;
 
+	// si un buffer est deja ouvert, stop
+	if (ob_get_contents())
+		$use_gz = false;
+
 	// special bug de proxy
 	if (eregi("NetCache|Hasd_proxy", $HTTP_SERVER_VARS['HTTP_VIA'])) {
 		$use_gz = false;
@@ -248,7 +252,7 @@ if ($flag_obgz) {
 	if ($use_gz) {
 		@ob_start("ob_gzhandler");
 	}
-	header("Vary: Accept-Encoding");
+	@header("Vary: Accept-Encoding");
 }
 
 
