@@ -91,25 +91,23 @@ function afficher_upload($link, $intitule, $inclus = '') {
 // Afficher un document sous forme de ligne depliable
 //
 
-function afficher_document($id_document, $id_doc_actif=0) {
+function afficher_document($id_document, $id_doc_actif = 0) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
 	global $id_article;
 
-	$result = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_document");
-	if ($row = mysql_fetch_array($result)) {
-		$id_document = $row['id_document'];
-		$id_vignette = $row['id_vignette'];
-		$id_type = $row['id_type'];
-		$titre = $row['titre'];
-		$descriptif = $row['descriptif'];
-		$fichier = $row['fichier'];
-		$largeur = $row['largeur'];
-		$hauteur = $row['hauteur'];
-		$taille = $row['taille'];
-		$mode = $row['mode'];
-	}
+	$document = fetch_document($id_document);
+
+	$id_vignette = $document->get('id_vignette');
+	$id_type = $document->get('id_type');
+	$titre = $document->get('titre');
+	$descriptif = $document->get('descriptif');
+	$fichier = $document->get('fichier');
+	$largeur = $document->get('largeur');
+	$hauteur = $document->get('hauteur');
+	$taille = $document->get('taille');
+	$mode = $document->get('mode');
 
 	$result = mysql_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 	if ($type = @mysql_fetch_array($result))	{
@@ -134,8 +132,14 @@ function afficher_document($id_document, $id_doc_actif=0) {
 	echo "</font>\n";
 
 	echo "<font size='1'>";
-	$hash = calculer_action_auteur("supp_doc ".$id_document);
-	echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=".$id_document."'>supprimer le document</a>]\n";
+	$link = new Link('../spip_image.php3');
+	$link->addVar('redirect', $this_link->getUrl());
+	$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
+	$link->addVar('hash_id_auteur', $connect_id_auteur);
+	$link->addVar('id_article', $id_article);
+	$link->addVar('doc_supp', $id_document);
+
+	echo "[<a ".$link->getHref().">supprimer le document</a>]\n";
 	echo "</font>\n";
 
 	echo "</font>\n";
@@ -214,14 +218,13 @@ function afficher_document($id_document, $id_doc_actif=0) {
 	// Affichage de la vignette
 	//
 
-	$result_vignette = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
-	$row_vignette = @mysql_fetch_array($result_vignette);
+	if ($id_vignette) $vignette = fetch_document($id_vignette);
 
-	if ($row_vignette) {
-		$fichier_vignette = $row_vignette['fichier'];
-		$largeur_vignette = $row_vignette['largeur'];
-		$hauteur_vignette = $row_vignette['hauteur'];
-		$taille_vignette = $row_vignette['taille'];
+	if ($vignette) {
+		$fichier_vignette = $vignette->get('fichier');
+		$largeur_vignette = $vignette->get('largeur');
+		$hauteur_vignette = $vignette->get('hauteur');
+		$taille_vignette = $vignette->get('taille');
 	}
 
 	if ($type_inclus == 'image') 

@@ -8,7 +8,7 @@ define("_ECRIRE_INC_OBJET", "1");
 
 class _Abstract {
 	function abstract_error($str) {
-		die ("<h4>".$str."\n Veuillez contacter un developpeur.</h4>");
+		die ("<h4>".$str."<br>Veuillez contacter un developpeur.</h4>");
 	}
 	function abstract() {
 		$this->abstract_error("Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.");
@@ -178,7 +178,6 @@ class _ObjectFactory extends _Abstract {
 		$query = ereg_replace('#table', $this->sql_table, $query);
 		$query = ereg_replace('#id', $this->sql_table.'.'.$this->sql_id, $query);
 		$result = mysql_query($query);
-		echo " >>> $query\n";
 		// If multiple results expected, create a result array
 		if ($multiple) $r = array();
 		if ($result) while ($row = mysql_fetch_array($result)) {

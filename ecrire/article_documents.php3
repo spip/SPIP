@@ -36,51 +36,52 @@ if ($art = mysql_fetch_object($result)) {
 	$lien_art = '';
 }
 
-debut_html("Images et documents");
+debut_html("Images et documents li&eacute;s &agrave; l'article $titre_art");
 
 echo "<table width='100%' border='0' cellpadding='6' cellspacing='0'>\n";
 
-echo "<tr bgcolor='$couleur_foncee'>\n";
-echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#FFFFFF'>";
-echo "Documents li&eacute;s &agrave l'article".$lien_art;
-echo "</td></tr>\n";
+$query = "SELECT #cols FROM #table, spip_documents_articles AS l ".
+	"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".
+	"AND #table.mode='document' ORDER BY #table.titre";
 
-$docs_affiches = "";
-$id_doc_actif = $id_document;
+$documents_lies = fetch_document($query);
 
-$query = "SELECT lien.id_document, documents.id_vignette FROM spip_documents_articles AS lien, spip_documents AS documents ".
-	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".
-	"AND documents.mode='document' ORDER BY documents.titre";
-$result = mysql_query($query);
-while ($row = mysql_fetch_array($result)) {
-	$id_document = $row[0];
-	$docs_affiches[] = $row[1];
-
-	echo "<tr><td>\n";
-	afficher_document($id_document, $id_doc_actif);
+if ($documents_lies) {
+	echo "<tr bgcolor='$couleur_foncee'>\n";
+	echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
+	echo "Documents li&eacute;s &agrave l'article".$lien_art;
 	echo "</td></tr>\n";
+
+	reset($documents_lies);
+	while (list(, $id_document) = each($documents_lies)) {
+		echo "<tr><td>\n";
+		afficher_document($id_document, $id_doc_actif);
+		echo "</td></tr>\n";
+	}
+	echo "<tr><td height='10'>&nbsp;</td></tr>\n";
 }
 
 
-echo "<tr><td height='10'>&nbsp;</td></tr>\n";
+if ($documents_lies) $docs_exclus = "AND l.id_document NOT IN (".join(',', $documents_lies).") ";
+$query = "SELECT #cols FROM #table, spip_documents_articles AS l ".
+	"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".$docs_exclus.
+	"AND #table.mode='vignette' AND #table.titre!='' ORDER BY #table.titre";
 
-echo "<tr bgcolor='$couleur_foncee'>\n";
-echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#FFFFFF'>";
-echo "Images affichables dans l'article";
-echo "</td></tr>\n";
+$images_liees = fetch_document($query);
 
-if ($docs_affiches) $docs_affiches = "AND lien.id_document NOT IN (".join(',', $docs_affiches).") ";
-
-$query = "SELECT lien.id_document as id_document FROM spip_documents_articles AS lien, spip_documents AS documents ".
-	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".$docs_affiches.
-	"AND documents.mode='vignette' AND documents.titre!='' ORDER BY documents.titre";
-$result = mysql_query($query);
-while ($row = mysql_fetch_array($result)) {
-	$id_document = $row['id_document'];
-
-	echo "<tr><td>\n";
-	afficher_document($id_document, $id_doc_actif);
+if ($images_liees) {
+	echo "<tr bgcolor='$couleur_foncee'>\n";
+	echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
+	echo "Images affichables dans l'article";
 	echo "</td></tr>\n";
+
+	reset($images_liees);
+	while (list(, $id_document) = each($images_liees)) {
+		echo "<tr><td>\n";
+		afficher_document($id_document, $id_doc_actif);
+		echo "</td></tr>\n";
+	}
+	echo "<tr><td height='10'>&nbsp;</td></tr>\n";
 }
 
 
@@ -89,7 +90,7 @@ while ($row = mysql_fetch_array($result)) {
 //
 
 
-echo "<tr><td height='15'>&nbsp;</td></tr>\n";
+echo "<tr><td height='5'>&nbsp;</td></tr>\n";
 
 echo "<tr bgcolor='$couleur_foncee'>\n";
 echo "<td><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#FFFFFF'>";
