@@ -191,6 +191,31 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		}
 		break;
 
+	case 'forum':
+		$query = "SELECT * FROM spip_forum WHERE id_forum=$id_objet";
+		$result = spip_query($query);
+		while($row = spip_fetch_array($result)){
+			indexer_chaine($row['titre'], 3);
+			indexer_chaine($row['texte'], 1);
+			indexer_chaine($row['auteur'], 2);
+			indexer_chaine($row['email_auteur'], 2);
+			indexer_chaine($row['nom_site'], 2);
+			indexer_chaine($row['url_site'], 1);
+		}
+		break;
+
+	case 'signature':
+		$query = "SELECT * FROM spip_signatures WHERE id_signature=$id_objet";
+		$result = spip_query($query);
+		while($row = spip_fetch_array($result)){
+			indexer_chaine($row['nom_email'], 2);
+			indexer_chaine($row['ad_email'], 2);
+			indexer_chaine($row['nom_site'], 2);
+			indexer_chaine($row['url_site'], 1);
+			indexer_chaine($row['message'], 1);
+		}
+		break;
+
 	case 'syndic':
 		$query = "SELECT * FROM spip_syndic WHERE id_syndic=$id_objet";
 		$result = spip_query($query);
@@ -296,7 +321,12 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 				break;
 		}
 
-		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1') $critere LIMIT 0,$nombre_indexations");
+		if ($type == 'syndic')
+			$limit = 1;
+		else
+			$limit = $nombre_indexations;
+
+		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') $critere ORDER BY (idx='idx') LIMIT 0,$limit");
 		while ($t = spip_fetch_array($s)) {
 			$vu[$type] .= $t[0].", ";
 			indexer_objet($type, $t[0], $t[1]);
