@@ -361,7 +361,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 						else
 							$val3[] = "'$v'";
 					}
-					$val = join(',', $val3);
+					$val = join("','", $val3);
 				}
 			}
 			
@@ -518,14 +518,14 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$op = 'REGEXP';
 			else if (strtoupper($op) == 'IN') {
 				// traitement special des valeurs textuelles
-				$where = "$col IN ($val)";
+				$where = "$col IN ('$val')";
 				if ($match[4] == '!') {
 					$where = "NOT ($where)";
 				} else {
 					if (!$boucle->order) {
 						$boucle->order = 'rang';
 						$boucle->select[] =
-						"FIND_IN_SET($col, \\\"$val\\\") AS rang";
+						"FIND_IN_SET($col, \\\"'$val'\\\") AS rang";
 					}
 				}
 				$boucle->where[] = $where;
@@ -577,17 +577,12 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
-# Le caractere denotant un variable passee dans l'URL
-
-define("_REF_HTTP_GET_VAR", '%');
-
 //
 // Calculer les parametres
 //
 function calculer_param_dynamique($val, &$boucles, $idb) {
 #	if (ereg('^ *\((.*)) *$', $val, $m)) $val = $m[1]; # si on veut (#...)
 	if (ereg(NOM_DE_CHAMP . "(\{[^}]*\})?", $val, $regs)) {
-	  spip_log("dyn: '$val'" . join("','", $regs));
 	  	$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
@@ -600,7 +595,7 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 		return '" . addslashes(' . $champ . ') . "';
 
 	} else {
-	  if ($val[0]==_REF_HTTP_GET_VAR) {
+	  if ($val[0]== '%') {
 	    spip_log($val .
 		     " est obsolete; utiliser HTTP_VARS{" .  substr($val,1) . "}");
 		  return '" . addslashes($Pile[0][\''. substr($val,1)  ."']) . \"";
