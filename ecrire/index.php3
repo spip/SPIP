@@ -3,8 +3,6 @@
 include ("inc.php3");
 include_ecrire ("inc_calendrier.php");
 
-if ($HTTP_REFERER && !strpos($HTTP_REFERER, _DIR_RESTEINT_ABS)) $bonjour = 'oui';
-
 debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
 debut_gauche();
@@ -534,23 +532,6 @@ if (abs($t_jour - date('d')) > 2) {
 	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
 	ecrire_meta('alea_ephemere', $alea);
 	ecrire_metas();
-}
-
-
-//
-// Optimisation periodique de la base de donnees
-//
-if (!$bonjour) {
-	if ($optimiser == 'oui' || (time() - lire_meta('date_optimisation')) > 24 * 3600) {
-		if (!file_exists($lock = _DIR_SESSIONS.'optimisation.lock')
-		OR (time()-filemtime($lock) > 3600)) {
-			touch($lock);
-			ecrire_meta("date_optimisation", time());
-			ecrire_metas();
-			include ("optimiser.php3");
-			unlink($lock);
-		}
-	}
 }
 
 ?>

@@ -142,11 +142,7 @@ function corriger_caracteres($texte) {
 	}
 	$charset = lire_meta('charset');
 	if (!$trans[$charset]) return $texte;
-	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans[$charset]);
-	reset($trans[$charset]);
-	while (list($from, $to) = each($trans[$charset])) 
-		$texte = str_replace($from, $to, $texte);
-	return $texte;
+	return strtr($texte, $trans[$charset]);
 }
 
 // Transformer les sauts de paragraphe en simples passages a la ligne
@@ -229,7 +225,7 @@ function vider_url($url) {
 // Ajouter le &var_recherche=toto dans les boucles de recherche
 //
 function url_var_recherche($url) {
-	if ($GLOBALS['HTTP_GET_VARS']['recherche']
+	if ($GLOBALS['_GET']['recherche']
 	AND !ereg("var_recherche", $url)) {
 		$url .= strpos($url, '?') ? '&' : '?';
 		$url .= "var_recherche=".urlencode($GLOBALS['recherche']);

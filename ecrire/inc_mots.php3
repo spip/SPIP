@@ -7,8 +7,6 @@ define("_ECRIRE_INC_MOTS", "1");
 
 include_ecrire("inc_filtres.php3"); # pour http_script (normalement déjà fait)
 
-$GLOBALS['flag_mots_ressemblants'] = $GLOBALS['flag_levenshtein'];
-
 
 // ne pas faire d'erreur si les chaines sont > 254 caracteres
 function levenshtein255 ($a, $b) {
@@ -82,7 +80,6 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  */
 
 function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable) {
-	global $flag_mots_ressemblants;
 	global $connect_statut, $options;
 	global $spip_lang_rtl, $spip_lang_right;
 
@@ -431,7 +428,7 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 			$query .= "ORDER BY type, titre";
 			$result = spip_query($query);
 			if (spip_num_rows($result) > 0) {
-				if ((spip_num_rows($result) > 50 AND $flag_mots_ressemblants)) {
+				if ((spip_num_rows($result) > 50)) {
 					echo "\n<tr>";
 					echo $form_mot;
 					echo "\n<td>";

@@ -112,9 +112,9 @@ function changer_langue($lang) {
 // Regler la langue courante selon les infos envoyees par le brouteur
 //
 function regler_langue_navigateur() {
-	global $HTTP_SERVER_VARS, $HTTP_COOKIE_VARS;
+	global $_SERVER, $_COOKIE;
 
-	$accept_langs = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
+	$accept_langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 	if (is_array($accept_langs)) {
 		while(list(, $s) = each($accept_langs)) {
 			if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
@@ -493,13 +493,13 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 // si necessaire vers l'URL xxxx?lang=ll
 //
 function verifier_lang_url() {
-	global $HTTP_GET_VARS, $HTTP_COOKIE_VARS, $spip_lang, $clean_link;
+	global $_GET, $_COOKIE, $spip_lang, $clean_link;
 
 	// quelle langue est demandee ?
 	$lang_demandee = lire_meta('langue_site');
-	if ($HTTP_COOKIE_VARS['spip_lang_ecrire']) $lang_demandee = $HTTP_COOKIE_VARS['spip_lang_ecrire'];
-	if ($HTTP_COOKIE_VARS['spip_lang']) $lang_demandee = $HTTP_COOKIE_VARS['spip_lang'];
-	if ($HTTP_GET_VARS['lang']) $lang_demandee = $HTTP_GET_VARS['lang'];
+	if ($_COOKIE['spip_lang_ecrire']) $lang_demandee = $_COOKIE['spip_lang_ecrire'];
+	if ($_COOKIE['spip_lang']) $lang_demandee = $_COOKIE['spip_lang'];
+	if ($_GET['lang']) $lang_demandee = $_GET['lang'];
 
 	// Verifier que la langue demandee existe
 	include_ecrire('inc_lang.php3');
@@ -507,8 +507,8 @@ function verifier_lang_url() {
 	$lang_demandee = $spip_lang;
 
 	// Renvoyer si besoin
-	if (!($HTTP_GET_VARS['lang']<>'' AND $lang_demandee == $HTTP_GET_VARS['lang'])
-	AND !($HTTP_GET_VARS['lang']=='' AND $lang_demandee == lire_meta('langue_site')))
+	if (!($_GET['lang']<>'' AND $lang_demandee == $_GET['lang'])
+	AND !($_GET['lang']=='' AND $lang_demandee == lire_meta('langue_site')))
 	{
 		$destination = new Link;
 		$destination->addvar('lang', $lang_demandee);
@@ -520,7 +520,7 @@ function verifier_lang_url() {
 	// Subtilite : si la langue demandee par cookie est la bonne
 	// alors on fait comme si $lang etait passee dans l'URL
 	// (pour criteres {lang}).
-	$GLOBALS['lang'] = $GLOBALS['HTTP_GET_VARS']['lang'] = $spip_lang;
+	$GLOBALS['lang'] = $GLOBALS['_GET']['lang'] = $spip_lang;
 }
 
 
@@ -532,7 +532,7 @@ function utiliser_langue_site() {
 }
 
 function utiliser_langue_visiteur() {
-	global $HTTP_COOKIE_VARS;
+	global $_COOKIE;
 
 	if (!regler_langue_navigateur())
 		utiliser_langue_site();
@@ -541,9 +541,9 @@ function utiliser_langue_visiteur() {
 		changer_langue($GLOBALS['auteur_session']['lang']);
 
 	$cookie_lang = (_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire');
-	if (!empty($HTTP_COOKIE_VARS[$cookie_lang]))
+	if (!empty($_COOKIE[$cookie_lang]))
 
-		changer_langue($HTTP_COOKIE_VARS[$cookie_lang]);
+		changer_langue($_COOKIE[$cookie_lang]);
 }
 
 //

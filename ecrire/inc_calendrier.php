@@ -12,13 +12,13 @@ if ($GLOBALS['set_echelle'] > 0) {
 	spip_setcookie('spip_calendrier_echelle', floor($GLOBALS['set_echelle']), time() + 365 * 24 * 3600);
 	$GLOBALS['echelle'] = floor($GLOBALS['set_echelle']);
 } else 
-	$GLOBALS['echelle'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_calendrier_echelle'];
+	$GLOBALS['echelle'] = $GLOBALS['_COOKIE']['spip_calendrier_echelle'];
 
 if ($GLOBALS['set_partie_cal']) {
 	spip_setcookie('spip_partie_cal', $GLOBALS['set_partie_cal'], time() + 365 * 24 * 3600);
 	$GLOBALS['partie_cal'] = $GLOBALS['set_partie_cal'];
 } else 
-	$GLOBALS['partie_cal'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_partie_cal'];
+	$GLOBALS['partie_cal'] = $GLOBALS['_COOKIE']['spip_partie_cal'];
 
 
 # Typographie generale des calendriers de 3 type: jour/mois/annee

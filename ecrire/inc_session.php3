@@ -19,8 +19,8 @@ $GLOBALS['auteur_session'] = '';
 // On verifie l'IP et le nom du navigateur
 //
 function hash_env() {
-	global $HTTP_SERVER_VARS;
-	return md5($HTTP_SERVER_VARS['REMOTE_ADDR'] . $HTTP_SERVER_VARS['HTTP_USER_AGENT']);
+	global $_SERVER;
+	return md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
 }
 
 
@@ -133,10 +133,7 @@ function creer_uniqid() {
 
 	$s = mt_rand();
 	if (!$s) $s = rand();
-	if ($GLOBALS['flag_uniqid2'])
-		return uniqid($s, 1);
-	else
-		return uniqid($s);
+	return uniqid($s, 1);
 }
 
 
@@ -217,7 +214,7 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 // et charge ses valeurs dans $GLOBALS['auteur_session']
 //
 function verifier_visiteur() {
-	if (verifier_session($GLOBALS['HTTP_COOKIE_VARS']['spip_session']))
+	if (verifier_session($GLOBALS['_COOKIE']['spip_session']))
 		return true;
 	if (verifier_php_auth())
 		return true;

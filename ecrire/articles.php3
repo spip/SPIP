@@ -1175,7 +1175,7 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-		if (spip_num_rows($result) > 200 AND $flag_mots_ressemblants) {
+		if (spip_num_rows($result) > 200) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" CLASS='fondl' VALUE='' SIZE='20'>";
 			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";

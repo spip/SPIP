@@ -2054,11 +2054,7 @@ function html2unicode($texte) {
 		}
 	}
 
-	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans);
-
-	foreach($trans as $from => $to)
-		$texte = str_replace($from, $to, $texte);
-	return $texte;
+	return strtr($texte, $trans);
 }
 
 //
@@ -2074,13 +2070,7 @@ function mathml2unicode($texte) {
 			$trans["&$key;"] = $val;
 	}
 
-	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans);
-
-	reset($trans);
-	foreach ($trans as $from => $to)
-		$texte = str_replace($from, $to, $texte);
-
-	return $texte;
+	return strtr($texte, $trans);
 }
 
 
@@ -2141,15 +2131,10 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 				$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
 		}
-		if ($trans[$charset]) {
-			if ($GLOBALS['flag_strtr2'])
-				$texte = strtr($texte, $trans[$charset]);
-			else {
-				reset($trans[$charset]);
-				foreach ($trans[$charset] as $from => $to)
-					$texte = str_replace($from, $to, $texte);
-			}
-		}
+
+		if ($trans[$charset])
+			$texte = strtr($texte, $trans[$charset]);
+
 		return $texte;
 	}
 }
@@ -2391,13 +2376,8 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 		foreach ($CHARSET[$table_translit] as $key => $val)
 			$trans[$complexe][caractere_utf_8($key)] = $val;
 	}
-	if ($GLOBALS['flag_strtr2'])
-		$texte = strtr($texte, $trans[$complexe]);
-	else {
-		$tr = $trans[$complexe];
-		foreach ($tr as $from => $to)
-			$texte = str_replace($from, $to, $texte);
-	}
+
+	$texte = strtr($texte, $trans[$complexe]);
 
 /*
 	// Le probleme d'iconv c'est qu'il risque de nous renvoyer des ? alors qu'on
