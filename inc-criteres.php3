@@ -351,17 +351,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				}
 				else {
 				// traitement special des valeurs textuelles
-					ereg("^ *\(?(.*[^)])\)? *$",$match[6], $val2);
-					$val2 = split(" *, *", $val2[1]);
-					foreach ($val2 as $v) {
-						$v = calculer_param_dynamique($v, $boucles, $idb);
-						if (is_array($v)) erreur_squelette($v);
-						if (strpos('"0123456789',$v[0]) !== false)
-							$val3[] = $v;
-						else
-							$val3[] = "'$v'";
-					}
-					$val = join("','", $val3);
+				  $val = calculer_params_dynamiques($match[6], &$boucles, $idb);
 				}
 			}
 			
@@ -518,14 +508,14 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$op = 'REGEXP';
 			else if (strtoupper($op) == 'IN') {
 				// traitement special des valeurs textuelles
-				$where = "$col IN ('$val')";
+				$where = "$col IN ($val)";
 				if ($match[4] == '!') {
 					$where = "NOT ($where)";
 				} else {
 					if (!$boucle->order) {
 						$boucle->order = 'rang';
 						$boucle->select[] =
-						"FIND_IN_SET($col, \\\"'$val'\\\") AS rang";
+						"FIND_IN_SET($col, \\\"$val\\\") AS rang";
 					}
 				}
 				$boucle->where[] = $where;
@@ -605,5 +595,20 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 	}
 }
 
-
+function calculer_params_dynamiques($liste, &$boucles, $idb) {
+	ereg("^ *\(?(.*[^)])\)? *$",$liste, $reg);
+	$res = array();
+	foreach (split(" *, *", $reg[1]) as $v) {
+	  $v = calculer_param_dynamique($v, $boucles, $idb);
+	  if (is_array($v)) erreur_squelette($v);
+	  spip_log("'$v'");
+	  if (strpos('0123456789',$v[0]) !== false)
+	    $res[] = $v;
+	  else if ($v[0]=='"')
+	    $res[] = "'" . $v . "'";
+	  else
+	    $res[] = "'$v'";
+	}
+	return join(',', $res);
+}
 ?>
