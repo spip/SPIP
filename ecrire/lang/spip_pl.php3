@@ -867,8 +867,8 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_redirection' => 'Przekierowanie',
 'info_refuses' => 'Twoje odrzucone artyku&#322;y',
 'info_reglage_ldap' => 'Opcje : <B>Regulacja importu LDAP</B>',
-'info_remplacer_vignette' => 'Zamie&#324; domy&#347;ln&#261; miniaturk&#281; na spersonalizowane logo&nbsp;:',
-'info_remplacer_vignette_defaut' => 'Zast&#261;p domy&#347;ln&#261; miniaturk&#281; spersonalizowanym logiem&nbsp;:',
+'info_remplacer_vignette' => 'Zamie&#324; domy&#347;ln&#261; miniaturk&#281; na wybrane przez ciebie logo&nbsp;:',
+'info_remplacer_vignette_defaut' => 'Zast&#261;p domy&#347;ln&#261; miniaturk&#281; wybranym przez ciebie logo&nbsp;:',
 'info_renvoi_article' => '<B>Przekierowanie.</B> Ten artyku&#322; odsy&#322;a do strony:',
 'info_reserve_admin' => 'Tylko administratorzy mog&#261; zmieni&#263; ten adres.',
 'info_restauration_sauvegarde' => 'odtworzenie zapisanego pliku @archive@',
@@ -1156,7 +1156,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'logo_rubrique' => 'LOGO DZIA&#321;U',
 'logo_site' => 'LOGO STRONY',
 'logo_standard_rubrique' => 'STANDARDOWE LOGO DLA DZIA&#321;&Oacute;W',
-'logo_survol' => 'LOGO INTERAKTYWNE',
+'logo_survol' => 'LOGO ROLL-OVER',
 
 
 // M

@@ -79,7 +79,7 @@ la documentacion de SPIP</a>.',
 'barre_gras' => 'Metre en {{gras}}',
 'barre_guillemets' => 'Enrodar emb de &laquo; verguetas francesi &raquo;',
 'barre_guillemets_simples' => 'Enrodar emb de „verguetas“',
-'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
+'barre_intertitre' => 'Transformar en {{{intertitre}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
 'barre_lien_input' => 'Vorgatz indicar l\'adre&ccedil;a dau v&ograve;stre ligam (pod&egrave;tz indicar una adre&ccedil;a web sota la forma http://www.lomieusit.com &ograve; simplament indicar lo n&uacute;mero d\'un article d\'aqueu sit).',
@@ -245,9 +245,9 @@ Aqueli informacions vos devon poder &egrave;stre provesidi per l\'administrator 
 'entree_port_annuaire' => 'Lo n&uacute;mero de p&ograve;rt de l\'annuari',
 'entree_signature' => 'Signatura',
 'entree_texte_breve' => 'T&egrave;xt de la br&egrave;va',
-'entree_titre_document' => 'T&iacute;tol dau document:',
-'entree_titre_image' => 'T&iacute;tol de l\'imatge:',
-'entree_titre_obligatoire' => '<B>T&iacute;tol</B> [Obligat&ograve;ri]<BR>',
+'entree_titre_document' => 'Titre dau document:',
+'entree_titre_image' => 'Titre de l\'imatge:',
+'entree_titre_obligatoire' => '<B>Titre</B> [Obligat&ograve;ri]<BR>',
 'entree_url' => 'L\'adre&ccedil;a (URL) dau v&ograve;stre sit',
 
 
@@ -321,7 +321,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'form_prop_url_site' => 'Adre&ccedil;a (URL) dau sit',
 'forum_acces_refuse' => 'Pod&egrave;tz plus accedir a aquelu forums.',
 'forum_attention_dix_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo v&ograve;stre messatge ten mens de d&egrave;tz caract&egrave;rs.',
-'forum_attention_trois_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo v&ograve;stre t&iacute;tol ten mens de tres caract&egrave;rs.',
+'forum_attention_trois_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo v&ograve;stre titre ten mens de tres caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat&nbsp;:',
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aqu&iacute;</a> per continuar.',
 'forum_creer_paragraphes' => '(Per crear de paragrafs, laissatz simplament de linhas vueii)',
@@ -332,13 +332,13 @@ Merc&eacute; de la v&ograve;stra participacion
 'forum_message_trop_long' => 'Lo v&ograve;stre messatge es tr&ograve;up l&ograve;ng. La talha maximala es de 20000 caract&egrave;rs.',
 'forum_ne_repondez_pas' => 'Respondatz pas a aquel e-mail ma sus lo forum a l\'adre&ccedil;a seguenta: ',
 'forum_non_inscrit' => 'Si&egrave;tz pas inscrich(a), &ograve; l\'adre&ccedil;a &ograve; lo m&ograve;t de santa Clara son erron&egrave;us.',
-'forum_page_url' => '(se lo v&ograve;stre messatge si referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina que fornisse mai d\'informacions, vorgatz marcar &ccedil;ai sota lo t&iacute;tol de la p&agrave;gina e la sieua adre&ccedil;a URL.)',
+'forum_page_url' => '(se lo v&ograve;stre messatge si referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina que fornisse mai d\'informacions, vorgatz marcar &ccedil;ai sota lo titre de la p&agrave;gina e la sieua adre&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Messatge poste@parauteur@ a la seguida de lo v&ograve;stre article.',
 'forum_probleme_database' => 'Probl&egrave;ma de basa de donadas, lo v&ograve;stre messatge es pas estat registrat.',
 'forum_qui_etes_vous' => '<B>Cu si&egrave;tz ?</B> (opcionau)',
 'forum_texte' => 'T&egrave;xt dau v&ograve;stre messatge :',
-'forum_titre' => 'T&iacute;tol :',
+'forum_titre' => 'Titre :',
 'forum_titre_erreur' => 'Error...',
 'forum_url' => 'URL&nbsp;:',
 'forum_valider' => 'Validar aquesta chausida',
@@ -592,7 +592,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_email_envoi_txt' => 'Indicatz aqu&iacute; l\'adre&ccedil;a d\'utilisar per mandar lu e-mails (a fauta d\'aqu&ograve;, s\'utilisar&agrave; l\'adre&ccedil;a destinat&agrave;ria coma adre&ccedil;a de mandad&iacute;s):',
 'info_email_invalide' => 'Adre&ccedil;a e-mail invalida',
 'info_email_webmestre' => 'Adre&ccedil;a e-mail dau responsable dau sit (opcional)',
-'info_en_cours_validation' => 'V&ograve;stres articles en cors de redaccion',
+'info_en_cours_validation' => 'Lu v&ograve;stres articles en cors de redaccion',
 'info_en_ligne' => 'A&uuml;ra en linha:',
 'info_en_test_1' => '(a la prova)',
 'info_en_test_2' => '(a la prova)',
@@ -837,8 +837,8 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_rubriques_liees_mot' => 'Li rubricas ligadi a aqueu m&ograve;t clau',
 'info_rubriques_trouvees' => 'Rubricas trobadi',
 'info_rubriques_trouvees_dans_texte' => 'Rubricas trobadi (dins lo t&egrave;xt)',
-'info_sans_titre' => 'Sensa t&iacute;tol',
-'info_sans_titre_2' => 'sensa t&iacute;tol',
+'info_sans_titre' => 'Sensa titre',
+'info_sans_titre_2' => 'sensa titre',
 'info_sauvegarde' => 'Sauvagarda',
 'info_sauvegarde_articles' => 'Sauvagardar lu articles',
 'info_sauvegarde_articles_sites_ref' => 'Sauvagardar lu articles dei sits referen&ccedil;ats',
@@ -884,7 +884,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_sites_refuses' => 'Lu sits refudats',
 'info_sites_trouves' => 'Sits trobats',
 'info_sites_trouves_dans_texte' => 'Sits trobats (dins lo t&egrave;xt)',
-'info_sous_titre' => 'Jost&iacute;tol:',
+'info_sous_titre' => 'Jostitre:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'Estatut d\'aquel autor:',
 'info_statut_efface' => 'Esca&ccedil;at',
@@ -899,7 +899,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_supprimer_mot' => 'suprimir&nbsp;aqueu&nbsp;m&ograve;t',
 'info_supprimer_vignette' => 'suprimir la vinheta',
 'info_sur_site_public' => '[sus lo sit public]',
-'info_surtitre' => 'Sobret&iacute;tol:',
+'info_surtitre' => 'Sobretitre:',
 'info_symbole_bleu' => 'Lo simb&ograve;l <b>blu</b> marca una <b>n&ograve;ta de renembran&ccedil;a</b>: es a dire un messatge dau v&ograve;stre usatge personau.',
 'info_symbole_jaune' => 'Lo simb&ograve;l <b>jaune</b> marca una <b>anon&ccedil;a per toi lu redactors </b>: lu administrators la p&ograve;don modificar, cada redactor la p&ograve;ut veire.',
 'info_symbole_vert' => 'Lo simb&ograve;l <b>verd</b> marca lu <b>messatges escambiats emb d\'autres utilisaires</b> dau sit.',
@@ -915,8 +915,8 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_texte_long' => '(lo t&egrave;xt es l&ograve;ng: apareisse doncas en tr&ograve;&ccedil; distints que si tornar&agrave;n empegar un c&ograve;up validats.)',
 'info_texte_message' => 'T&egrave;xt dau v&ograve;stre messatge:',
 'info_texte_message_02' => 'T&egrave;xt dau messatge',
-'info_titre' => 'T&iacute;tol:',
-'info_titre_mot_cle' => 'Nom &ograve; t&iacute;tol dau m&ograve;t clau',
+'info_titre' => 'Titre:',
+'info_titre_mot_cle' => 'Nom &ograve; titre dau m&ograve;t clau',
 'info_total' => 'totau&nbsp;: ',
 'info_tous_articles_en_redaction' => 'Toi lu articles en cors de redaccion',
 'info_tous_articles_presents' => 'Toi lu articles publicats dins aquela rubrica',
@@ -1130,7 +1130,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'menu_aide_articles_redirection' => 'Redireccion d\'article',
 'menu_aide_articles_statut' => 'L\'estatut de l\'article',
 'menu_aide_articles_texte' => 'T&egrave;xt',
-'menu_aide_articles_titres' => 'T&iacute;tol, sobret&iacute;tol, sost&iacute;tol',
+'menu_aide_articles_titres' => 'Titre, sobretitre, sostitre',
 'menu_aide_breves' => 'Li br&egrave;vas',
 'menu_aide_breves_breves' => 'Li br&egrave;vas',
 'menu_aide_breves_choix' => 'Chausir la rubrica',
@@ -1306,7 +1306,7 @@ Oblidetz pas manco de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>
 dins lo classament per popularitat, es indicat dins lo marge; la popularitat de l\'article 
 (una estimacion dau nombre de visitas quotidiani que recebr&agrave; se lo ritme actuau de consultacion si manten) e lo nombre de visitas recebudi
 desp&iacute; lo comen&ccedil;ament s\'afichan dins la bofa
-qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
+qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_compresse_ou_non' => '(Aquesto p&ograve;ut &egrave;stre comprimit &ograve; non)',
 'texte_compte_element' => '@count@ element',
 'texte_compte_elements' => '@count@ elements',
@@ -1371,7 +1371,7 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
  lu t&egrave;xtes ja sasits se p&ograve;don afichar
  d\'una maniera incorrecta apr&egrave;s que s\'aga modificat lo reglatge. De tota fa&ccedil;on
  podretz tornar sensa damatge au reglatge precedent.',
-'texte_lien_hypertexte' => '(Se lo v&ograve;stre messatge se referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina fornissent mai d\'informacions, vorgatz indicar &ccedil;ai sota lo t&iacute;tol de la p&agrave;gina e la sieua adre&ccedil;a URL.)',
+'texte_lien_hypertexte' => '(Se lo v&ograve;stre messatge se referisse a un article publicat sus lo web, &ograve; a una p&agrave;gina fornissent mai d\'informacions, vorgatz indicar &ccedil;ai sota lo titre de la p&agrave;gina e la sieua adre&ccedil;a URL.)',
 'texte_liens_sites_syndiques' => 'Lu ligams eissits dei sits sindicats se p&ograve;don
    blocar a pri&ograve;ri; lo reglatge
   &ccedil;ai sota indica lo reglatge predefinit dei
@@ -1437,7 +1437,7 @@ tornar calcular solament una p&agrave;gina, passatz pusl&egrave;u per l\'espaci 
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recapitula la tiera dei documents qu\'av&egrave;tz pla&ccedil;ats dins li rubricas. Per modificar li informacions de cada document, seguiss&egrave;tz lo ligam vers la p&agrave;gina de la sieua rubrica.',
 'texte_recuperer_base' => 'Reparar la basa de donadas',
 'texte_reference_mais_redirige' => 'article referen&ccedil;at dins lo v&ograve;stre sit SPIP, ma redirigit vers una autra URL.',
-'texte_referencement_automatique' => '<b>Referen&ccedil;ament automatisat d\'un sit</b><br> Pod&egrave;tz referen&ccedil;ar l&egrave;u-l&egrave;u un sit web en indicant &ccedil;ai sota l\'adre&ccedil;a URL desirada, &ograve; l\'adre&ccedil;a dau sieu fichier backend. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu sit (t&iacute;tol, descripcion...).',
+'texte_referencement_automatique' => '<b>Referen&ccedil;ament automatisat d\'un sit</b><br> Pod&egrave;tz referen&ccedil;ar l&egrave;u-l&egrave;u un sit web en indicant &ccedil;ai sota l\'adre&ccedil;a URL desirada, &ograve; l\'adre&ccedil;a dau sieu fichier backend. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu sit (titre, descripcion...).',
 'texte_requetes_echouent' => '<b>Quora certani requistas MySQL s\'encalan
   sistematicament e sensa rason aparenta, si p&ograve;ut
   qu\'aqu&ograve; venga de la basa de donadas.  </b><p>
@@ -1463,7 +1463,7 @@ dins lo repert&ograve;ri <i>ecrire/data/</i>.
  <li> la lenga utilisada dins lu formularis dau sit public;</li>
  <li> la lenga presentada coma predefinida dins l\'espaci privat.</li></ul>',
 'texte_signification' => 'Li barras rogi representan li intradas cumuladi (totau dei sosrubricas), li barras verdi lo nombre de visitas per cada rubrica.',
-'texte_sous_titre' => 'Sost&iacute;tol',
+'texte_sous_titre' => 'Sostitre',
 'texte_statistiques_visites' => '(barras escuri&nbsp;:  dim&eacute;negue / corba escura: evolucion de la mejana)',
 'texte_statut_attente_validation' => 'en esp&egrave;ra de validacion',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
@@ -1476,7 +1476,7 @@ dins lo repert&ograve;ri <i>ecrire/data/</i>.
 'texte_suppression_fichiers' => 'Utilisatz aquela comanda per suprimir toi lu fichiers que si tr&ograve;ban
 dins l\'amagador SPIP. Aqu&ograve; permete per exemple de for&ccedil;ar un nov&egrave;u calcul de toti li p&agrave;ginas
 s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.',
-'texte_sur_titre' => 'Sobret&iacute;tol',
+'texte_sur_titre' => 'Sobretitre',
 'texte_syndication' => 'Si p&ograve;ut recuperar automaticament, quora un sit web lo permet, 
   la tiera dei sieus noveutats. Per far aqu&ograve;, vos cau activar la sindicacion. 
   <blockquote><i>Certans aubergadors activan pas aquela foncionalitat; 
@@ -1488,8 +1488,8 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'texte_tenter_reparation' => 'Provar de reparar la basa de donadas',
 'texte_test_proxy' => 'Per provar aqueu proxy, indicatz aqu&iacute; l\'adre&ccedil;a d\'un sit web
     que lo vorriatz testar.',
-'texte_titre_02' => 'T&iacute;tol:',
-'texte_titre_obligatoire' => '<b>T&iacute;tol</b> [Obligat&ograve;ri]',
+'texte_titre_02' => 'Titre:',
+'texte_titre_obligatoire' => '<b>Titre</b> [Obligat&ograve;ri]',
 'texte_travail_article' => '@nom_auteur_modif@ a travalhat sus aquel article fa @date_diff@ minutas',
 'texte_travail_collaboratif' => 'Quora es frequent que mai d\'un redactor 
   travalhe sus lo meme article, lo sistema
@@ -1504,8 +1504,8 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
     a SPIP, pod&egrave;tz far li recercas sus lu sits e
     articles sindicats de doi manieras
     diferenti. <br><img src=\'puce.gif\'> Lo mai
-    simple consiste da recercar sonque dins lu
-    t&iacute;tols e descriptius dei articles. <br><img src=\'puce.gif\'>
+    simple consiste da recercar ren que dins lu
+    titres e descriptius dei articles. <br><img src=\'puce.gif\'>
     La segonda maniera, ben mai potent, permete
     a SPIP de recercar tanben dins lo t&egrave;xt dei
     sits referen&ccedil;ats. 
