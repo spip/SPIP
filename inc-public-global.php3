@@ -215,7 +215,7 @@ if ($admin_ok AND !$flag_preserver AND !$flag_boutons_admin) {
 
 $majnouv = lire_meta('majnouv');
 if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta('jours_neuf')
-	AND $adresse_neuf = lire_meta('adresse_neuf') AND (time() - $majnouv) > 3600 * 24 * $jours_neuf) {
+	AND $adresse_neuf = lire_meta('adresse_neuf') AND (time() - $majnouv) > 3600 * 24 * $jours_neuf) { //lire_meta('date_envoi') ? lire_meta('date_envoi') : $majnouv
 	include_ecrire('inc_connect.php3');
 	if ($db_ok) {
 		// lock && indication du prochain envoi
@@ -229,22 +229,19 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 		ecrire_meta('majnouv', time());
 		ecrire_metas();
 
-		// preparation mail : date de reference au format MySQL pour l'age_relatif du squelette (grrr)
-		if ($majnouv)
-			$date = $majnouv;
-		else
-			$date = time() - 3600*24*$jours_neuf;
+		// preparation mail
 		unset ($mail_nouveautes);
 		unset ($sujet_nouveautes);
 		$fond = 'nouveautes';
 		$delais = 0;
-		$contexte_inclus['date'] = date('Y-m-d H:i:s', $date);
 		include(inclure_fichier($fond, $delais, $contexte_inclus));
 
 		// envoi
 		if ($mail_nouveautes) {
-			include_ecrire('inc_mail.php3');
+			ecrire_meta('date_envoi', lire_meta('majnouv'));
+			ecrire_metas();
 			spip_log("envoi mail nouveautes");
+			include_ecrire('inc_mail.php3');
 			envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
 		} else
 			spip_log("envoi mail nouveautes : pas de nouveautes");

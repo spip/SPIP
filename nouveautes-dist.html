@@ -21,7 +21,7 @@ $mail_nouveautes = '
           -----------------
 
 ';
-<BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,30}>
+<BOUCLE_nv1(ARTICLES){age_mail_nouv<=0}{par date}{inverse}{0,30}>
 	$mail_nouveautes .= '[** (#TITRE|textebrut|texte_script) **]';
 	$mail_nouveautes .= "\n";
 	$mail_nouveautes .= '[par (#LESAUTEURS|textebrut|texte_script)] ';
@@ -41,7 +41,7 @@ $mail_nouveautes .= '
           ----------------
 
 ';
-<BOUCLE_nv2(BREVES){age_relatif<=0}{par date}{inverse}{0,30}>
+<BOUCLE_nv2(BREVES){age_mail_nouv<=0}{par date}{inverse}{0,30}>
 	$mail_nouveautes .= '[* (#TITRE|textebrut|texte_script) *]';
 	$mail_nouveautes .= '[ - (#DATE|affdate|texte_script)]'."\n\n";
 	$mail_nouveautes .= '[(#INTRODUCTION|textebrut|texte_script)]'."\n\n";
