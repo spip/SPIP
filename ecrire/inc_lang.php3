@@ -318,6 +318,25 @@ function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 		return $droitier;
 }
 
+function lang_typo($lang) {
+	if (($lang == 'eo') OR ($lang == 'fr') OR ($lang == 'cpf'))
+		return 'fr';
+	else if ($lang)
+		return 'en';
+	else
+		return false;
+}
+
+// service pour que l'espace prive reflete la typo et la direction des objets affiches
+function changer_typo($lang = '') {
+	global $lang_typo, $lang_dir;
+
+	if (!$lang)
+		$lang = lire_meta('langue_site');
+
+	$lang_typo = lang_typo($lang);
+	$lang_dir = " dir='".lang_dir($lang)."'";
+}
 
 // selectionner une langue
 function lang_select ($lang='') {

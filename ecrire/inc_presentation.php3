@@ -1974,13 +1974,14 @@ function afficher_parents($id_rubrique) {
 	global $parents, $couleur_foncee;
 	$parents = ereg_replace("(~+)","\\1~",$parents);
 	if ($id_rubrique) {
-		$query = "SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
+		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
 		$result = spip_query($query);
 
 		while ($row = spip_fetch_array($result)) {
 			$id_rubrique = $row['id_rubrique'];
 			$id_parent = $row['id_parent'];
 			$titre = $row['titre'];
+			changer_typo($row['lang']);
 
 			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></a></FONT><BR>\n".$parents;
 			if (acces_restreint_rubrique($id_rubrique))

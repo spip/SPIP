@@ -329,11 +329,14 @@ function typo_en($letexte) {
 // Typographie generale : francaise si la langue est 'cpf', 'fr' ou 'eo',
 // sinon anglaise (minimaliste)
 function typo($letexte) {
-	global $spip_lang;
+	global $spip_lang, $lang_typo;
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if (($spip_lang == 'fr') OR ($spip_lang == 'eo') OR ($spip_lang == 'cpf'))
+	if (!$typo = $lang_typo)
+		$typo = lang_typo($spip_lang);
+
+	if ($typo == 'fr')
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
