@@ -357,6 +357,7 @@ function chercher_squelette_hierarchie($fond, $id_rubrique) {
 			install_debut_html("Erreur sur le site");
 			echo "<P>Aucun squelette <b>$fond</b> n'est disponible...</P>";
 			install_fin_html();
+			spip_log ("ERREUR: aucun squelette $fond n'est disponible...");
 			exit;
 		}
 	}
