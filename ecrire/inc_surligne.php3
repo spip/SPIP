@@ -16,13 +16,9 @@
 if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
-
 // Balises qui ne font rien en mode normal
 // mais  vont etre substitue'es en mode recherche
 // voir les champs SURLIGNE dans inc-index-squel
-
-define("MARQUEUR_SURLIGNE", 'span class="spip_surligneconditionnel">');
-define("MARQUEUR_FSURLIGNE", '/' . MARQUEUR_SURLIGNE);
 
 function surligner_sans_accents ($mot) {
 	$accents =

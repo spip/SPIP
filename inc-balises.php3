@@ -395,12 +395,12 @@ function balise_EMBED_DOCUMENT_dist($p) {
 
 function balise_DEBUT_SURLIGNE_dist($p) {
 	global $flag_pcre;
-	$p->code = ($flag_pcre ? ('\'<span class="spip_surligneconditionnel">\'') : "''");
+	$p->code = ($flag_pcre ? ("'<" . MARQUEUR_SURLIGNE . "'") : "''");
 	return $p;
 }
 function balise_FIN_SURLIGNE_dist($p) {
 	global $flag_pcre;
-	$p->code = ($flag_pcre ? ('\'</span class="spip_surligneconditionnel">\'') : "''");
+	$p->code = ($flag_pcre ? ("'<" . MARQUEUR_FSURLIGNE . "'") : "''");
 	return $p;
 }
 
