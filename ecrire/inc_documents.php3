@@ -430,7 +430,7 @@ function afficher_documents_non_inclus($id_article) {
 		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr>";
 		echo debut_block_invisible("ajouter_document");
-		echo "<td width='150' valign='top'>";
+		echo "<td width='200' valign='top'>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 		
 		echo "<font size=1><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
@@ -442,6 +442,20 @@ function afficher_documents_non_inclus($id_article) {
 			echo "$extension, ";
 		}
 		echo "<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>";
+		if (function_exists("imagejpeg")){
+			$creer_preview=lire_meta("creer_preview");
+			$taille_preview=lire_meta("taille_preview");
+			if ($taille_preview < 15) $taille_preview = 120;
+			
+			if ($creer_preview == 'oui'){
+					echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au format JPEG, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels. ";
+			}
+			else {
+				if ($connect_statut == "0minirezo"){
+					echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;Configuration pr&eacute;cise&raquo;). Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables).";
+				}
+			}
+		}
 		echo "</font>";
 		echo "</td><td width=20>&nbsp;</td>";
 		echo fin_block();
@@ -455,21 +469,6 @@ function afficher_documents_non_inclus($id_article) {
 		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true);
 		
 		
-		if (function_exists("imagejpeg")){
-			$creer_preview=lire_meta("creer_preview");
-			$taille_preview=lire_meta("taille_preview");
-			if ($taille_preview < 15) $taille_preview = 120;
-			
-			if ($creer_preview == 'oui'){
-				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au format JPEG, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels.";
-			}
-			else {
-				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;Configuration pr&eacute;cise&raquo;). ";
-			}
-			
-			echo "Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables.";
-		
-		}
 		
 		
 		echo "</font>\n";
