@@ -664,7 +664,7 @@ function gdRotate ($imagePath,$rtt){
 	if (!($size[0] * $size[1])) return false;
 
 	if (function_exists('imagerotate')) {
-		$dst_img = imagerotate($src_img, $rtt, 0);
+		$dst_img = imagerotate($src_img, -$rtt, 0);
 	} else {
 
 	// Creer l'image destination (hauteur x largeur) et la parcourir
