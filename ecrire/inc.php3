@@ -277,6 +277,7 @@ function changer_statut_forum($id_forum, $statut) {
 }
 
 if ($supp_forum) changer_statut_forum($supp_forum, 'off');
+if ($supp_forum_priv) changer_statut_forum($supp_forum_priv, 'privoff');
 if ($valid_forum) changer_statut_forum($valid_forum, 'publie');
 
 

@@ -69,11 +69,11 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 		echo "<p>";
 		//echo "<CENTER>";
 		for ($i = 0; $i < $total; $i = $i + 10){
-			$y = $i + 9;
+			if ($i > 0) echo " | ";
 			if ($i == $debut)
-				echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
+				echo "<FONT SIZE=3><B>$i</B></FONT>";
 			else
-				echo "[<A HREF='forum.php3?debut=$i'>$i-$y</A>] ";
+				echo "<A HREF='forum.php3?debut=$i'>$i</A>";
 		}
 		//echo "</CENTER>";
 	}

@@ -69,7 +69,7 @@ echo "<p>";
 $mots_cles_forums = lire_meta("mots_cles_forums");
 
 if ($connect_statut == "0minirezo") {
-	$query_forum = "SELECT * FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut!='redac' ORDER BY date_heure DESC";
+	$query_forum = "SELECT * FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut!= 'prive' AND statut!='privrac' AND statut!='privadm' AND statut!='privoff' AND statut!='redac' ORDER BY date_heure DESC";
 	$result_forum = spip_query($query_forum);
 	afficher_forum($result_forum, $forum_retour, 'oui');
 }
