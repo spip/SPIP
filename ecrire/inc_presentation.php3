@@ -696,6 +696,7 @@ function debut_html($titre = "") {
 <style><!--
 	.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
 	.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
+	.fondgris {background-color: #aaaaaa; background-position: center bottom; float: none; color: black; font-size: 10px; }
 	.fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
 	.fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
