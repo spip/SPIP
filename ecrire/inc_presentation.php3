@@ -1640,6 +1640,11 @@ function barre_onglets($rubrique, $onglet){
 
 	}
 
+	if ($rubrique == "stat_referers") {
+		onglet(_T('info_aujourdhui'), "statistiques_referers.php3", "jour", $onglet);
+		onglet(_T('info_hier'), "statistiques_referers.php3?jour=veille", "veille", $onglet);
+	}
+
 	if ($rubrique == "administration"){
 		onglet(_T('onglet_save_restaur_base'), "admin_tech.php3", "sauver", $onglet, "base-24.gif");
 		onglet(_T('onglet_affacer_base'), "admin_effacer.php3", "effacer", $onglet, "supprimer.gif");

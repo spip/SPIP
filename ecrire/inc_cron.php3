@@ -46,7 +46,8 @@ function cron_archiver_stats($last_date) {
 		calculer_visites($last_date);
 
 		// purger les referers du jour
-		spip_query("UPDATE spip_referers SET visites_jour=0");
+		// ils deviennent "les referers de la veille"
+		spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
 		// poser un message pour traiter les referers au prochain hit
 		ecrire_meta('calculer_referers_now','oui');
 		ecrire_metas();

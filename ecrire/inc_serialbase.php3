@@ -35,7 +35,7 @@ $spip_articles = array(
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
 		"nom_site"	=> "tinytext NOT NULL",
 		"url_site"	=> "VARCHAR(255) NOT NULL",
-		"url_propre VARCHAR(255) NOT NULL");
+		"url_propre" => "VARCHAR(255) NOT NULL");
 
 $spip_articles_key = array(
 		"PRIMARY KEY"		=> "id_article",
@@ -97,7 +97,7 @@ $spip_breves = array(
 		"maj"	=> "TIMESTAMP",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"extra"	=> "longblob NULL",
-		"url_propre VARCHAR(255) NOT NULL");
+		"url_propre" => "VARCHAR(255) NOT NULL");
 
 $spip_breves_key = array(
 		"PRIMARY KEY"	=> "id_breve",
@@ -130,7 +130,7 @@ $spip_mots = array(
 		"id_groupe"	=> "bigint(21) NOT NULL",
 		"extra"	=> "longblob NULL",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
-		"url_propre VARCHAR(255) NOT NULL",
+		"url_propre" => "VARCHAR(255) NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_mots_key = array(
@@ -172,7 +172,7 @@ $spip_rubriques = array(
 		"langue_choisie"	=> "VARCHAR(3) DEFAULT 'non'",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"extra"	=> "longblob NULL",
-		"url_propre VARCHAR(255) NOT NULL",
+		"url_propre" => "VARCHAR(255) NOT NULL",
 		"statut_tmp"	=> "VARCHAR(10) NOT NULL",
 		"date_tmp"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL"
 		);
