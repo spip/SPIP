@@ -273,15 +273,14 @@ function sinon ($texte, $sinon='') {
 }
 
 // |choixsivide{vide,pasvide} affiche pasvide si la chaine n'est pas vide...
-
-function choixsivide($a, $vide, $pasvide)
-{
-  spip_log("choix '$a'" . $a ? $pasvide : $vide);
-  return $a ? $pasvide : $vide;
+function choixsivide($a, $vide, $pasvide) {
+	return $a ? $pasvide : $vide;
 }
 
 // |choixsiegal{aquoi,oui,non} affiche oui si la chaine est egal a aquoi ...
-function choixsiegal($a1,$a2,$v,$f) {return ($a1 == $a2) ? $v : $f;}
+function choixsiegal($a1,$a2,$v,$f) {
+	return ($a1 == $a2) ? $v : $f;
+}
 
 
 //
@@ -297,10 +296,8 @@ function normaliser_date($date) {
 			$date = $regs[1]."-01-01".$regs[3];
 		else if (ereg("^([12][0-9]{3}[-/][01]?[0-9])([-/]00)?( [-0-9:]+)?$", $date, $regs))
 			$date = ereg_replace("/","-",$regs[1])."-01".$regs[3];
-		else if ($GLOBALS['flag_strtotime']) {
+		else
 			$date = date("Y-m-d H:i:s", strtotime($date));
-		}
-		else $date = ereg_replace('[^-0-9/: ]', '', $date);
 	}
 	return $date;
 }
@@ -377,6 +374,7 @@ function recup_date($numdate){
 
 function date_relative($date) {
 	
+	if (!$date) return;
 	$decal = date("U") - date("U", strtotime($date));
 	
 	if ($decal < 0) {
