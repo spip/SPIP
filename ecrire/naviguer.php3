@@ -281,9 +281,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'a
 //
 // Afficher les boutons de creation d'article et de breve
 //
-debut_cadre_enfonce();
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-echo "<b>RACCOURCIS :</b><p>";
+debut_raccourcis();
 
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
@@ -310,11 +308,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
 	icone_horizontale("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif","creer.gif");
 }
 
-
-echo "</font>";
-fin_cadre_enfonce();
-
-
+fin_raccourcis();
 
 
 

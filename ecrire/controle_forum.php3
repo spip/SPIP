@@ -37,14 +37,10 @@ fin_boite_info();
 // Afficher les boutons de creation d'article et de breve
 //
 if ($connect_statut == '0minirezo') {
-	debut_cadre_enfonce();
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<b>RACCOURCIS :</b><p>";
-	
+	debut_raccourcis();
 	
 	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
 	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
-		
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
 	$result_petition = spip_query($query_petition);
@@ -59,8 +55,7 @@ if ($connect_statut == '0minirezo') {
 	$activer_stats = lire_meta("activer_statistiques");
 	if ($activer_stats != "non") icone_horizontale("ƒvolution des visites", "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
 	
-	echo "</font>";
-	fin_cadre_enfonce();
+	fin_raccourcis();
 }
 
 

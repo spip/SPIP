@@ -603,9 +603,7 @@ if ($boite_ouverte) {
 //
 // Afficher les boutons de creation d'article et de breve
 //
-debut_cadre_enfonce();
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-echo "<b>RACCOURCIS :</b><p>";
+debut_raccourcis();
 
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
@@ -635,11 +633,7 @@ if ($connect_statut == '0minirezo') {
 }
 
 
-echo "</font>";
-fin_cadre_enfonce();
-
-
-
+fin_raccourcis();
 
 
 

@@ -155,10 +155,7 @@ if (mysql_num_rows($result) > 0){
 
 
 
-
-debut_cadre_enfonce();
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-echo "<b>RACCOURCIS :</b><p>";
+debut_raccourcis();
 
 
 //
@@ -206,9 +203,7 @@ if ($connect_statut == "0minirezo")	{
 	icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif","rien.gif");
 }
 
-echo "</font>";
-fin_cadre_enfonce();
-
+fin_raccourcis();
 
 
 debut_droite();
