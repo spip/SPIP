@@ -435,10 +435,10 @@ function parser_boucle($texte, $id_parent) {
 							$req_order = " ORDER BY alea";
 						}
 						else if ($match[1] == 'titre_mot'){
-							$req_order= " ORDER BY rel_mots.titre";
+							$req_order= " ORDER BY lien_mot.titre";
 						}
 						else if ($match[1] == 'type_mot'){
-							$req_order= " ORDER BY rel_mots.type";
+							$req_order= " ORDER BY lien_mot.type";
 						}
 						else if ($match[1] == 'points'){
 							$req_order= " ORDER BY points";
