@@ -1,176 +1,97 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<BOUCLE_site(SITES){id_syndic}>
+
 <html lang="#LANG">
 <head>
-<title><BOUCLE0(SITES){id_syndic}>#NOM_SITE</BOUCLE0>Pas de site<//B0></title>
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
+<title>[(#NOM_SITE|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="projection, screen, tv">
+<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
+<link rel="stylesheet" href="impression.css" type="text/css" media="print">
+
 </head>
 
-<body bgcolor="#FFFFFF" dir="#LANG_DIR">
-<center>
-<BOUCLE1(SITES){id_syndic}{unique}>
+<body bgcolor="white">
 
-<table width="750">
-<tr><td width="750" colspan="3">
-<font face="Arial,Helvetica" size="4">
+<div id="navigation">
 
+<h1 class="structure"><:navigation:></h1>
 
-[<br><font size="6"><b>(#NOM_SITE)</b></font>]
+<!-- Menu de navigation general -->
 
-<br><br>
-</font>
-</td></tr>
-<tr><td width="250" valign="top">
-
-
-
-<B12>
-	<table cellpadding="1" cellspacing="0" border="0"><tr><td bgcolor="#000000" width="250">
-	<table cellpadding="5" cellspacing="0" border="0" width="100%"><tr><td bgcolor="#444444" width="100%">
-	<font face="Arial,Helvetica" color="#FFFFFF">
-	<b><:autres_sites:></b>
-	</font>
-	</td></tr></table>
-
-	<table cellpadding="5" cellspacing="0" border="0" width="100%"><tr><td bgcolor="#EEEEEE" width="100%">
-	<font face="Arial,Helvetica" size="2">
-	<ul>
-	<BOUCLE12(SITES){par hasard}{doublons}{0,20}>
-		<li><a href="#URL_SITE">#NOM_SITE</a></li>
-	</BOUCLE12>
-	</ul>
-	</font>
-	</td></tr></table>
-	</td></tr></table>
-	</B12>
-
-<p>
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3"><:plan_site:></a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire/"><:espace_prive:></a>
+	</li>
+</ul>
+</div>
 
 
-</td><td width="10">&nbsp;</td>
-<td width="490" valign="top">
+<!-- Formulaire de recherche -->
+
+[(#FORMULAIRE_RECHERCHE)]
 
 
-<font face="Arial,Helvetica" size="3">
-[<b>(#DESCRIPTIF|justifier)</b>]
+<!-- Formulaire administrateur -->
 
-<p>
-<B4><b><:rubrique:>:</b>
-<ul>
-<BOUCLE4(RUBRIQUES){id_rubrique}>
-	<li><b><a href="#URL_RUBRIQUE">[(#TITRE|majuscules)]</a></b></li>
-</BOUCLE4>
-</ul></B4>
+[(#FORMULAIRE_ADMIN)]
+
+</div>
 
 
-<B_articles_syndic><b><:articles:>:</b>
-<ul>
-<BOUCLE_articles_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}>
-	<li><a href="#URL_ARTICLE">[(#TITRE*)]</a></li>
-</BOUCLE_articles_syndic>
-</ul></B_articles_syndic>
+<!-- Une : affichage du site -->
+
+<div class="contenu" id="principal">
+
+<div class="cartouche">
+[(#LOGO_SITE|left)]
+<h1 class="titre-texte"><a href="#URL_SITE">#NOM_SITE</a></h1>
+
+[<div class="chapo">(#DESCRIPTIF)</div>]
+[<div class="notes">(#NOTES)</div>]
+</div>
 
 
-	[<P align="right"><font size="3"><b><a href="forum.php3?(#PARAMETRES_FORUM)"><:commenter_site:></a></b></font>]
+<!-- Articles du site -->
 
+<h1 class="structure"><:articles:></h1>
 
-</font>
+<div class="liste-articles">
 
-</td></tr>
-</table>
+<BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {par date}{inverse}{0,10}>
+	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
+	<div class="detail">
+	[(#DATE|nom_jour)] [(#DATE|affdate)]
+	</div>
+	<br>
+</BOUCLE_articles>
 
+</div>
 
+</div>
 
-<B_forums_liens>
-
-
-<table width="100%" cellpadding="0" cellspacing="0" border="0">
-<tr width="100%">
-<td width="100%" background="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></td>
-</tr>
-</table>
-
-<table cellpadding="0" cellspacing="0" border="0" width="674">
-<tr width="674">
-<td width="200" align="left" valign="top">
-	<br><br>
-	<font face="arial,helvetica,sans-serif" size="2">
-	<a name="liens_forums">
-	<BOUCLE_forums_liens(FORUMS){id_syndic}{par date}{inverse}>
-		<a href="#forum#ID_FORUM"><img src="puce.gif" border="0">#TITRE</a>
-		<br>[(#DATE|affdate)][, <:par_auteur:> (#NOM)]
-		<br>
-	</BOUCLE_forums_liens>
-	</font>
-	<br><br>
-</td>
-
-<td width="12"><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></td>
-<td width="462" valign="top">
-
-	<br><br>
-
-	<BOUCLE_Forums(FORUMS){id_syndic}{par date}{inverse}>
-	<a name="forum#ID_FORUM">
-	<table cellpadding="5" cellspacing="1" border="0" width="462" bgcolor="#000000">
-	<tr><td bgcolor="#444444" width="100%">
-	<font face="Arial,Helvetica" SIZE="2">
-	<b>[<font color="#FFFFFF">(#TITRE)</font>]</b> 
-	</font>
-	</td></tr>
-	<tr><td bgcolor="#FFFFFF" width="100%">
-	<font face="Arial,Helvetica" SIZE="1">
-	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-	 &nbsp; [<A HREF="#liens_forums"><:retour_debut_forums:></A>]
-	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
-	</font>
-	</td></tr>
-	<tr><TD BGCOLOR="#EEEEEE" width="100%">
-	<font face="Arial,Helvetica" SIZE="2">
-	<P>#TEXTE
-	<P align="right">[<font size="1"><A HREF="forum.php3?#PARAMETRES_FORUM"><:repondre_message:></A></font>]</div>
-	</font>
-	</td></tr></table>
-
-
-	<B_fils>
-	<ul>
-		<font face="Arial,Helvetica" SIZE="2">
-		<BOUCLE_fils(FORUMS){id_parent}{par date}>
-		<p>
-		<a name="forum#ID_FORUM">
-		<b>[(#TITRE)]</b>
-		<br><font size="1">
-		[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]
-		 &nbsp; [<z href="#liens_forums"><:retour_debut_forums:></a>]
-		[<br><a href="#URL_SITE">(#NOM_SITE)</a>]
-		</font>
-		<hr noshade size="1">
-		#TEXTE
-		<p align="right">[<font size="1"><a href="forum.php3?#PARAMETRES_FORUM"><:repondre_message:></a></font>]
-			
-
-			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
-	
-		</BOUCLE_fils>
-		</font>
-	</ul>
-	</B_fils>
-
-
-
-	<p>
-
-	</BOUCLE_Forums>
-</td>
-</tr>
-</table>
-<p>
-</B_forums_liens>
-
-
-</BOUCLE1>
-<h2><:aucun_site:></h2>
-<//B1>
-</center>
 </body>
 </html>
+
+
+</BOUCLE_site>
+<:aucun_site:>
+<//B_site>
