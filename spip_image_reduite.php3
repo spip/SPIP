@@ -3,14 +3,13 @@
 //$img = "IMG/rubon0.png"; 
 $img = $_GET['img'];
 $logo = $img;
-
-if (!$taille_y)
-	$taille_y = $taille_x;
-	
 	
 include ("ecrire/inc_version.php3");
 include_local("inc-public-global.php3");
 include_ecrire("inc_admin.php3");
+
+if (!$taille_y)
+	$taille_y = $taille_x;
 
 if (ereg("^../",$logo))
 	$logo = substr($logo,3);
