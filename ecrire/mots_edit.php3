@@ -46,7 +46,7 @@ if ($connect_statut == '0minirezo') {
 		// recoller les champs du extra
 		if ($champs_extra) {
 			include_ecrire("inc_extra.php3");
-			$add_extra = ", extra = '".addslashes(extra_recup_saisie("mot"))."'";
+			$add_extra = ", extra = '".addslashes(extra_recup_saisie("mots"))."'";
 		} else
 			$add_extra = '';
 
@@ -269,7 +269,7 @@ if ($connect_statut =="0minirezo"){
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, 'mot', $id_groupe);
+		extra_saisie($extra, 'mots', $id_groupe);
 	}
 
 	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";

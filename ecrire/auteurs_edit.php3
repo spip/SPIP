@@ -128,7 +128,7 @@ if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR ($
 
 	if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
-		extra_affichage($extra, "auteur");
+		extra_affichage($extra, "auteurs");
 	}
 
 	echo "</FONT>";

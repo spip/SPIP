@@ -175,7 +175,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, 'breve', $id_secteur);
+		extra_saisie($extra, 'breves', $id_secteur);
 	}
 
 	if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique)) {

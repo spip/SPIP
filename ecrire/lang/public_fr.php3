@@ -87,7 +87,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // R
-'repondre_article' => 'RŽpondre ˆ cet article',
+'repondre_article' => 'R&eacute;pondre &agrave; cet article',
 'repondre_breve' => 'R&eacute;pondre &agrave; cette br&egrave;ve',
 'repondre_message' => 'R&eacute;pondre &agrave; ce message',
 'resultats_recherche' => 'R&eacute;sultats de la recherche',

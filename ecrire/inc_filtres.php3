@@ -72,10 +72,35 @@ function liens_ouvrants ($texte) {
 
 // Corrige les caracteres degoutants utilises par les Windozeries
 function corriger_caracteres($texte) {
-	if (lire_meta('charset') != 'iso-8859-1')
-		return $texte;
-	// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
-	return strtr($texte, chr(146).chr(180).chr(150).chr(151), "'".'"--');
+	static $trans;
+	if (!$trans) {
+		// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
+		$this->trans['iso-8859-1'] = array(
+			chr(146) => "'",
+			chr(180) => "'",
+			chr(147) => '"',
+			chr(148) => '"',
+			chr(150) => '-',
+			chr(151) => '-',
+			chr(133) => '...'
+		);
+		$this->trans['utf-8'] = array(
+			chr(194).chr(146) => "'",
+			chr(194).chr(180) => "'",
+			chr(194).chr(147) => '"',
+			chr(194).chr(148) => '"',
+			chr(194).chr(150) => '-',
+			chr(194).chr(151) => '-',
+			chr(194).chr(133) => '...'
+		);
+	}
+	$charset = lire_meta('charset');
+	if (!$trans[$charset]) return $texte;
+	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans[$charset]);
+	reset($trans[$charset]);
+	while (list($from, $to) = each($trans[$charset])) 
+		$texte = str_replace($from, $to, $texte);
+	return $texte;
 }
 
 // Transformer les sauts de paragraphe en simples passages a la ligne
@@ -414,7 +439,7 @@ function d_apostrophe($texte) {
 
 function aligner($letexte,$justif) {
 	$letexte = eregi_replace("<p([^>]*)", "<p\\1 align='$justif'", trim($letexte));
-    if($letexte<>"" AND !ereg("^[[:space:]]*<p", $letexte)) {
+	if ($letexte AND !ereg("^[[:space:]]*<p", $letexte)) {
 		$letexte = "<p class='spip' align='$justif'>" . $letexte . "</p>";
 	}
 	return $letexte;
@@ -440,9 +465,9 @@ function centrer($letexte) {
 // Recuperation de donnees dans le champ extra
 // Ce filtre n'a de sens qu'avec la balise #EXTRA
 //
-function extra ($letexte,$champ) {
+function extra($letexte, $champ) {
 	$champs = unserialize($letexte);
-	return interdire_scripts($champs[$champ]);
+	return $champs[$champ];
 }
 
 ?>

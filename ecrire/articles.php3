@@ -206,7 +206,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("article", $id_secteur))."'";
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
 	} else
 		$add_extra = '';
 
@@ -1493,7 +1493,7 @@ else {
 
 	if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
-		extra_affichage($extra, "article");
+		extra_affichage($extra, "articles");
 	}
 }
 

@@ -204,7 +204,7 @@ echo "</TEXTAREA>\n";
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, 'rubrique', $id_secteur);
+		extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
 echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";

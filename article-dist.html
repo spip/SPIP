@@ -197,6 +197,7 @@
 [<div class="ps">(#PS)</div>]
 [<div class="notes">(#NOTES)</div>]
 
+
 <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons} {"<br>"}>
 [(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
 </BOUCLE_documents_joints>
@@ -270,7 +271,7 @@
 	[(#DATE|affdate)][, <:par_auteur:> <A HREF="mailto:#EMAIL">(#NOM)</A>]
 	</div>
 	<div class="forum-item">
-	#TEXTE
+	[(#TEXTE*|traiter_raccourcis)]
 	[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
 	[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]
 	</div>
