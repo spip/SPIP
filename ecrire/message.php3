@@ -473,7 +473,7 @@ while($row = spip_fetch_array($result_message)) {
 			}
 			else {
 				echo "\n<p><center><table><tr><td>";
-				icone (_T('icone_envoyer_message'), newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.gif", "creer.gif");
+				icone (_T('icone_envoyer_message'), "message.php3?id_message=$id_message&change_statut=publie", "messagerie-24.gif", "creer.gif");
 				echo "</td></tr></table></center>";
 			}
 		}
@@ -489,7 +489,7 @@ while($row = spip_fetch_array($result_message)) {
 	echo "\n<table width='100%'><tr><td>";
 		if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 			echo "\n<table align='left'><tr><td>";
-			icone (_T('icone_supprimer_message'), newLinkUrl("messagerie.php3?detruire_message=$id_message"), "messagerie-24.gif", "supprimer.gif");
+			icone (_T('icone_supprimer_message'), "messagerie.php3?detruire_message=$id_message", "messagerie-24.gif", "supprimer.gif");
 			echo "</td></tr></table>";
 		}
 
@@ -502,7 +502,7 @@ while($row = spip_fetch_array($result_message)) {
 
 		if ($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 			echo "\n<table align='right'><tr><td>";
-			icone (_T('icone_modifier_message'), newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
+			icone (_T('icone_modifier_message'), "message_edit.php3?id_message=$id_message", "messagerie-24.gif", "edit.gif");
 			echo "</td></tr></table>";
 		}
 	echo "</td></tr></table>";

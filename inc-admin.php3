@@ -52,7 +52,7 @@ function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval(
 	if (!$var_preview) {
 
 		// Bouton Recalculer
-		$link = $GLOBALS['clean_link'];
+		$link = new Link;
 		$link->addVar('recalcul', 'oui');
 		$link->delVar('var_debug');
 		$link->delVar('debug_objet');
@@ -78,7 +78,7 @@ function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval(
 		OR $GLOBALS['bouton_admin_debug']
 		OR (!$GLOBALS['var_debug']
 		AND $GLOBALS['HTTP_COOKIE_VARS']['spip_debug'])) {
-			$link = $GLOBALS['clean_link'];
+			$link = new Link;
 			if ($GLOBALS['code_activation_debug'])
 				$code_activation = $GLOBALS['code_activation_debug'];
 			else if ($GLOBALS['auteur_session']['statut'] == '0minirezo')
@@ -280,7 +280,7 @@ function debug_dumpfile ($texte) {
 
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>".$sourcefile."</b>";
-		$link = $GLOBALS['clean_link'];
+		$link = new Link;
 		$link->addvar('debug_objet', $nom_skel);
 		$link->delvar('debug_affiche');
 		echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
@@ -295,7 +295,7 @@ function debug_dumpfile ($texte) {
 				if ($debug_objet == $nom)
 					$aff = "<b>$aff</b>";
 				echo $aff;
-				$link = $GLOBALS['clean_link'];
+				$link = new Link;
 				$link->addvar('debug_objet', $nom);
 				$link->delvar('debug_affiche');
 				echo " <a href='".$link->getUrl()."&debug_affiche=boucle' class='debug_link_boucle'>boucle</a>";

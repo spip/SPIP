@@ -395,15 +395,16 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = true, $forcer_document = false, $dossier_complet = false) {
+function afficher_upload($link, $redirect='', $intitule, $inclus = '', $afficher_texte_ftp = true, $forcer_document = false, $dossier_complet = false) {
 	global $clean_link, $connect_statut, $connect_toutes_rubriques, $options;
 	static $num_form = 0;
 
-	if (!$link->getVar('redirect'))
-		$link->addVar('redirect', $clean_link->getUrl());
+	if (!$redirect)
+		$redirect = $clean_link->getUrl();
+	$link->addVar('redirect', $redirect);
+
 	if ($forcer_document)
 		$link->addVar('forcer_document', 'oui');
-
 
 	echo $link->getForm('POST', 'docs', 'multipart/form-data');
 
@@ -533,7 +534,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$link->addVar('hash_id_auteur', $connect_id_auteur);
 					$link->addVar('doc_supp', $id_vignette);
 					echo "<div style='float: left;'>";		
-					echo "<a ".$link->getHref($ancre)." title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'><img src='img_pack/croix-rouge.gif' border='0' /></a>";	
+					echo "<a href='#$ancre' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'><img src='img_pack/croix-rouge.gif' border='0' /></a>";	
 					echo "</div>";
 					$vignette_perso = true;
 				
@@ -607,23 +608,19 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						echo debut_block_invisible("gerer_vignette$id_document");
 						echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px; text-align: left; background-color: white;'>";
 						$link = $image_link;
-						$link->addVar('redirect', $redirect_url);
 						$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 						$link->addVar('hash_id_auteur', $connect_id_auteur);
 						$link->addVar('ajout_doc', 'oui');
 						$link->addVar('id_document', $id_document);
 						$link->addVar('mode', 'vignette');	
-						afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
-						echo "</div>";		
-						echo fin_block();						
+						afficher_upload($link, $redirect_url, _T('info_remplacer_vignette'), 'image', false);
+						echo "</div>";
+						echo fin_block();
 				}
 				
-				echo "</div>";		
+				echo "</div>";
 			}
-			
-					
-						
-			
+
 			if ($flag_modif) {
 				if ($flag_deplier) $triangle = bouton_block_visible("port$id_document");
 				else $triangle =  bouton_block_invisible("port$id_document");
@@ -922,13 +919,12 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		
 		$link = $image_link;
-		$link->addVar('redirect', $redirect_url);
 		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('ajout_doc', 'oui');
 		$link->addVar('type', $type);
 
-		afficher_upload($link, "", '', true, true, true);
+		afficher_upload($link, $redirect_url, "", '', true, true, true);
 		
 		echo fin_cadre_relief();
 		
@@ -937,60 +933,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "</div>";
 	}
 
-	/*
-	if (lire_meta("documents_$type") != 'non' AND $flag_modif) {
-		/// Ajouter nouveau document/image
-
-		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
-		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: ".$GLOBALS['spip_lang_left']."; color: black;'>";
-		echo bouton_block_invisible("ajouter_document");
-		if ($type == "rubrique") echo "<b><font size=1>"._T('titre_publier_document')."</font></b>".aide("ins_doc");
-		else echo "<b><font size=1>"._T('titre_joindre_document')."</font></b>".aide("ins_doc");
-		echo "</div>\n";
-		echo debut_block_invisible("ajouter_document");
-
-		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr>";
-		echo "<td width='200' valign='top' class='verdana2'>";
-
-		if ($type == "article")
-			echo _T('info_joindre_document_article')."&nbsp;: ";
-		else if ($type == "rubrique")
-			echo _T('info_joindre_document_rubrique')."&nbsp;: ";
-		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
-		$result_types_docs = spip_query($query_types_docs);
-
-		$extension = '';
-		while ($row = spip_fetch_array($result_types_docs)) {
-			if ($extension) echo ", ";
-			$extension = $row['extension'];
-			echo $extension;
-		}
-		echo ".";
-
-		if (lire_meta("creer_preview") == 'oui') {
-			$taille_preview = lire_meta("taille_preview");
-			$formats_graphiques = lire_meta("formats_graphiques");
-			if ($taille_preview < 15) $taille_preview = 120;
-			echo "<p>"._T('texte_creation_automatique_vignette', array('gd_formats' => $formats_graphiques, 'taille_preview' => $taille_preview));
-		}
-		echo "</td><td width=20>&nbsp;</td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-		$link = $image_link;
-		$link->addVar('redirect', $redirect_url);
-		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('type', $type);
-
-		afficher_upload($link, _T('info_telecharger'), '', true, true, true);
-
-		echo "</font>\n";
-		echo "</td></tr></table>";
-		echo fin_block();
-		fin_cadre_enfonce();
-	}
-	*/
 }
 
 
@@ -1083,7 +1025,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<b>"._T('info_vignette_personnalisee')."</b>";
 		echo "<center>$largeur_vignette &#215; $hauteur_vignette "._T('info_pixels')."</center>";
 		if ($flag_modif)
-			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a ".$link->getHref($ancre).">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
+			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a href='#$ancre'>"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 		echo fin_block();
 		echo "</div>\n";
 	}
@@ -1102,7 +1044,6 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		$hash = calculer_action_auteur("ajout_doc");
 
 		$link = $image_link;
-		$link->addVar('redirect', $redirect_url);
 		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('ajout_doc', 'oui');
@@ -1119,7 +1060,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 				echo debut_block_invisible("doc_vignette_gerer $id_document");
 				echo "<font size='1'>";
-				afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
+				afficher_upload($link, $redirect_url, _T('info_remplacer_vignette'), 'image', false);
 				echo "</font>";
 				echo fin_block();
 			}
@@ -1292,14 +1233,13 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	echo "</font>";
 
 	$link = $image_link;
-	$link->addVar('redirect', $redirect_url);
 	$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 	$link->addVar('hash_id_auteur', $connect_id_auteur);
 	$link->addVar('ajout_doc', 'oui');
 	$link->addVar('mode', 'vignette');
 	$link->addVar('type', $type);
 
-	afficher_upload($link, _T('info_telecharger'));
+	afficher_upload($link, $redirect_url, _T('info_telecharger'));
 	echo fin_block();
 
 	echo "</font>\n";
@@ -1341,14 +1281,13 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			echo "</font>";
 
 			$link = $image_link;
-			$link->addVar('redirect', $redirect_url);
 			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('ajout_doc', 'oui');
 			$link->addVar('mode', 'document');
 			$link->addVar('type', $type);
 
-			afficher_upload($link, _T('info_telecharger_ordinateur'));
+			afficher_upload($link, $redirect_url, _T('info_telecharger_ordinateur'));
 			echo fin_block();
 
 			echo "</font>\n";
@@ -1447,7 +1386,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			else  echo debut_block_invisible("doc_vignette $id_document");
 			echo "<b>"._T('info_vignette_personnalisee')."</b>";
 			echo "<center>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur_vignette, 'hauteur_vignette' => $hauteur_vignette))."</center>";
-			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a ".$link->getHref().">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
+			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a href='".$link->getUrl()."'>"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 			echo fin_block();
 			echo "</div>\n";
 		}
@@ -1466,7 +1405,6 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			$hash = calculer_action_auteur("ajout_doc");
 
 			$link = $image_link;
-			$link->addVar('redirect', $redirect_url);
 			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('ajout_doc', 'oui');
@@ -1482,7 +1420,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 					
 				echo debut_block_invisible("doc_vignette_gerer $id_document");
 				echo "<font size='1'>";
-				afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
+				afficher_upload($link, $redirect_url, _T('info_remplacer_vignette'), 'image', false);
 				echo "</font>";
 				echo fin_block();
 				
