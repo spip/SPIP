@@ -2964,11 +2964,12 @@ document.img_session.src='../spip_cookie.php3?change_session=oui'");
 
 function info_copyright() {
 	global $spip_version_affichee;
-	$spip = "<b>SPIP $spip_version_affichee</b>";
 
-	$lien = "<a href='aide_index.php3?aide=licence&var_lang=".$GLOBALS['spip_lang']."' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">"
-	. _T('info_copyright_gpl')."</a>";
-	echo _T('info_copyright', array('spip' => $spip, 'lien_gpl' => $lien));
+	echo "<b>SPIP $spip_version_affichee</b> ",
+		_T('info_copyright', 
+			array('lien_gpl' => 
+				"<a href='aide_index.php3?aide=licence&var_lang=".$GLOBALS['spip_lang']."' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+
 }
 
 function fin_page($credits='') {
