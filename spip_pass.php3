@@ -51,7 +51,7 @@ if ($p = addslashes($p)) {
 				spip_query("UPDATE spip_auteurs SET cookie_oubli = '$cookie' WHERE email ='$email'");
 
 				if (envoyer_mail($email,
-						 "[$nom_site_spip] " ._T('pass_oubli_mot'),
+						 "[" . lire_meta("nom_site") .'] ' ._T('pass_oubli_mot'),
 						 _T('pass_mail_passcookie',
 						    array('nom_site_spip' => lire_meta("nom_site"),
 							  'adresse_site' => lire_meta("adresse_site"), 
