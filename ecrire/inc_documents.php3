@@ -405,6 +405,30 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 }		
 
 
+// Bloc d'edition de la taille du doc (pour embed)
+function afficher_formulaire_taille($document, $type_inclus='AUTO') {
+
+	// (on ne le propose pas pour les images qu'on sait
+	// lire, id_type<=3)
+	if ($document['id_type'] <= 3)
+		return '';
+
+	// Si on n'a pas le type_inclus, on va le chercher dans spip_types_documents
+	if ($type_inclus == 'AUTO'
+	AND $r = spip_query("SELECT * FROM spip_types_documents
+	WHERE id_type=".$document['id_type'])
+	AND $type = @spip_fetch_array($r))
+			$type_inclus = $type['inclus'];
+
+	if (($type_inclus == "embed"
+	OR $type_inclus == "image")) {
+		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
+		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5'>";
+		echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"".$document['hauteur']."\" size='5'> "._T('info_pixels');
+	}
+}
+
+
 //
 // Afficher un formulaire d'upload
 //
@@ -685,6 +709,10 @@ function afficher_portfolio (
 					echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 					echo entites_html($descriptif);
 					echo "</textarea>\n";
+
+					if ($options == "avancees")
+						afficher_formulaire_taille($document);
+
 				} else {
 					echo "<input type='hidden' name='descriptif_document' value=\"".entites_html($descriptif)."\" />\n";
 				}
@@ -1156,15 +1184,8 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			echo "</textarea>\n";
 		}
 
-		// Bloc d'edition de la taille du doc (pour embed)
-		// (on ne le propose pas pour les images qu'on sait lire, id_type<=3
-		if (($type_inclus == "embed" OR $type_inclus == "image")
-		AND $options == "avancees"
-		AND $id_type > 3) {
-			echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
-			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-			echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
-		}
+		if ($options == "avancees")
+			afficher_formulaire_taille($document, $type_inclus);
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
 		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
