@@ -302,7 +302,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	$p->code = '
 	// refus des forums ?
 	('.$_accepter_forum.'=="non" OR
-	(lire_meta("forums_publics") == "non" AND '.$_accepter_forum.'!="oui"))
+	(lire_meta("forums_publics") == "non" AND !ereg("^(pos|pri|abo)", '.$_accepter_forum.')))
 	? "" : // sinon:
 	';
 
