@@ -2179,7 +2179,7 @@ else {
 			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\"><img src='img_pack/interface-display.gif' alt='' width='26' height='20' border='0'></a>";
 
 			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
-			echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png' alt='abc' class='format_png' align='middle' width='59' height='15' usemap='#map_layout' border='0' />";
+			echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png' alt='abc' class='format_png' valign='middle' width='59' height='15' usemap='#map_layout' border='0' />";
 
 
 			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
