@@ -54,7 +54,13 @@ function cron_archiver_stats($last_date) {
 // La fonction de base qui distribue les taches
 //
 function spip_cron() {
-	global $flag_ecrire, $dir_ecrire, $use_cache;
+	global $flag_ecrire, $dir_ecrire, $use_cache, $db_ok;
+
+	include_ecrire("inc_connect.php3");
+	if (!$db_ok) {
+		spip_log('pas de connexion DB pour taches de fond (cron)');
+		return;
+	}
 
 	@touch($dir_ecrire.'data/cron.lock');
 
@@ -171,7 +177,7 @@ function spip_cron() {
 
 	if (lire_meta('activer_moteur') == 'oui') {
 		$fichier_index = $dir_ecrire.'data/.index';
-		if ($db_ok AND ($id_article OR $id_auteur OR $id_breve OR $id_mot OR $id_rubrique)) {
+		if ($id_article OR $id_auteur OR $id_breve OR $id_mot OR $id_rubrique) {
 			include_ecrire("inc_index.php3");
 			$s = '';
 			if ($id_article AND !deja_indexe('article', $id_article))
@@ -204,7 +210,7 @@ function spip_cron() {
 	// Mise a jour d'un (ou de zero) site syndique
 	//
 
-	if ($db_ok AND lire_meta("activer_syndic") == "oui") {
+	if (lire_meta("activer_syndic") == "oui") {
 		if (timeout()) {
 			include_ecrire("inc_sites.php3");
 			executer_une_syndication();
@@ -225,27 +231,24 @@ function spip_cron() {
 			if ($s = sizeof($suite = file($fichier_poubelle))) {
 				$s = $suite[$n = rand(0, $s)];
 				$s = trim($s);
-				include_ecrire("inc_connect.php3");
-				if ($db_ok) {
-					// Verifier qu'on peut vraiment effacer le fichier...
-					$query = "SELECT id_document FROM spip_documents WHERE fichier='$s'";
-					$result = spip_query($query);
-					if (spip_num_rows($result) OR !ereg('^IMG/', $s) OR strpos($s, '..')) {
-						spip_log("Tentative d'effacement interdit: $s");
-					}
-					else {
-						@unlink($s);
-					}
-					unset($suite[$n]);
-					$f = fopen($fichier_poubelle, 'wb');
-					fwrite($f, join("", $suite));
-					fclose($f);
-				}
-			}
-			else @unlink($fichier_poubelle);
-		}
-	}
 
+				// Verifier qu'on peut vraiment effacer le fichier...
+				$query = "SELECT id_document FROM spip_documents WHERE fichier='$s'";
+				$result = spip_query($query);
+				if (spip_num_rows($result) OR !ereg('^IMG/', $s) OR strpos($s, '..')) {
+					spip_log("Tentative d'effacement interdit: $s");
+				}
+				else {
+					@unlink($s);
+				}
+				unset($suite[$n]);
+				$f = fopen($fichier_poubelle, 'wb');
+				fwrite($f, join("", $suite));
+				fclose($f);
+			}
+		}
+		else @unlink($fichier_poubelle);
+	}
 }
 
 
