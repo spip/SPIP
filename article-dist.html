@@ -328,6 +328,11 @@
 <TD WIDTH=12><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></TD>
 <TD WIDTH=462 VALIGN="top">
 
+
+<BOUCLE_hop(FORUMS){id_article}{id_mot=46}>
+<li>#TITRE
+</BOUCLE_hop>
+
 	<BR><BR>
 
 	<BOUCLE_Forums(FORUMS){id_article}{par date}{inverse}>
@@ -348,6 +353,11 @@
 	<TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
 	<font face=Arial,Helvetica SIZE=2>
 	<P>#TEXTE
+
+	<BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
+		<li>#LOGO_MOT <b>#TYPE :</b> #TITRE
+	</BOUCLE_mots_forum>
+	
 	
 	
 	[<div align='right'><font size=1><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce message</A></font></div>]
@@ -370,7 +380,11 @@
 		<HR NOSHADE SIZE=1>
 		#TEXTE
 		[<div align="right"><font size=1><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce message</A></font></div>]
-			
+	
+		<BOUCLE_mots_fils(MOTS){id_forum}{par type, titre}>
+			<li>#LOGO_MOT <b>#TYPE :</b> #TITRE
+		</BOUCLE_mots_fils>
+		
 
 			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
 	
