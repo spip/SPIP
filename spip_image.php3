@@ -73,23 +73,25 @@ function tester_vignette ($test_vignette) {
 	else if ($test_vignette == "netpbm") {
 		$netpbm_formats= Array();
 
+		$jpegtopnm_command = ereg_replace("pnmscale", "jpegtopnm", $pnmscale_command);
+		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
+
 		$vignette = _DIR_IMG . "test.jpg";
 		$dest = _DIR_IMG . "test-jpg.jpg";
-		exec("$djpeg_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
+		exec("$jpegtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest");
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
-		}
-		ImageDestroy( $dest );
-	
+		}	
 		
 		$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
+		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
 		$vignette = _DIR_IMG . "test.gif";
 		$dest = _DIR_IMG . "test-gif.jpg";
-		exec("$giftopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
+		exec("$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest");
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "gif";
 		}
-		ImageDestroy( $dest );
+
 		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
 		$vignette = _DIR_IMG . "test.png";
 		$dest = _DIR_IMG . "test-gif.jpg";
@@ -97,7 +99,6 @@ function tester_vignette ($test_vignette) {
 		if ($taille = @getimagesize($dest)) {
 			if ($taille[1] == 10) $netpbm_formats[] = "png";
 		}
-		ImageDestroy( $dest );
 		
 
 		if ($netpbm_formats) $netpbm_formats = join(",", $netpbm_formats);

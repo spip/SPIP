@@ -201,9 +201,10 @@ $type_urls = 'standard';
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
 $convert_command = 'convert';
-// creation des vignettes avec djpeg/pnmscale/cjpeg
-$djpeg_command = 'djpeg';
-$cjpeg_command = 'cjpeg';
+
+// creation des vignettes avec pnmscale
+// Note: plus facile a installer par FTP,
+// voir http://gallery.menalto.com/modules.php?op=modload&name=GalleryFAQ&file=index&myfaq=yes&id_cat=2
 $pnmscale_command = 'pnmscale';
 
 // faut-il passer les connexions MySQL en mode debug ?
