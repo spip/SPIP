@@ -1,6 +1,10 @@
 <?php
 	include("inc_version.php3");
 
+	// parano XSS
+	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left-$right", $regs);
+	list (,$couleur_claire,$couleur_foncee,$left,$right) = $regs;
+
 	// En-tetes
 	$lastmodified = @filemtime("spip_style.php3");
 	$gmoddate = gmdate("D, d M Y H:i:s", $lastmodified);

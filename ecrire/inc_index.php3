@@ -258,6 +258,22 @@ function indexer_syndic($id_syndic) {
 	marquer_indexer('syndic', $id_syndic);
 }
 
+function effectuer_une_indexation() {
+ 	$fichier_index = 'ecrire/data/.index';
+	if ($s = @sizeof($suite = @file($fichier_index))) {
+		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_filtres.php3");
+		$s = $suite[$n = rand(0, $s)];
+		unset($suite[$n]);
+		$f = fopen($fichier_index, 'wb');
+		fwrite($f, join("", $suite));
+		fclose($f);
+		$s = explode(' ', trim($s));
+		indexer_objet($s[0], $s[1], $s[2]);
+	}
+	else @unlink($fichier_index);
+}
+
 function executer_une_indexation_syndic() {
 	$visiter_sites = lire_meta("visiter_sites");
 	if ($visiter_sites == "oui") {

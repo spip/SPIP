@@ -142,6 +142,9 @@ function analyser_site($url) {
 
 
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
+
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result))
@@ -156,7 +159,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	// Section critique : n'autoriser qu'une seule syndication simultanee pour un site donne
 	if (!spip_get_lock("syndication $url_syndic")) return;
 
-	include_ecrire("inc_filtres.php3");
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
 	$le_retour = transcoder_page(recuperer_page($url_syndic));
