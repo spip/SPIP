@@ -22,7 +22,7 @@ include_local("inc-calcul_html4.php");
 // Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
 // le repertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
 
-if (file_exists("mes_fonctions.php3")) 
+if (@file_exists("mes_fonctions.php3")) 
     include_local ("mes_fonctions.php3");
 
 
@@ -32,12 +32,13 @@ else { include_local ("inc-urls-dist.php3"); }
 
 
 // Le squelette compile est-il trop vieux ?
-function squelette_obsolete($skel) {
+function squelette_obsolete($skel, $squelette) {
 	return (
 		($GLOBALS['recalcul'] == 'oui')
 		OR !@file_exists($skel)
-		OR (@filemtime('mes_fonctions.php3') > @filemtime($skel))
-		OR (@filemtime('ecrire/mes_options.php3') > @filemtime($skel))
+		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
+		OR (@filemtime('mes_fonctions.php3') > $date)
+		OR (@filemtime('ecrire/mes_options.php3') > $date)
 	);
 }
 
@@ -56,7 +57,7 @@ function charger_squelette ($squelette) {
 		$phpfile = 'CACHE/skel_' . $nom . '.php';
 
 		// le squelette est-il deja compile, lisible, etc ?
-		if (!squelette_obsolete($sourcefile)
+		if (!squelette_obsolete($phpfile, $sourcefile)
 		AND lire_fichier ($phpfile, $contenu,
 		array('critique' => 'oui', 'phpcheck' => 'oui'))) {
 			eval('?'.'>'.$contenu);
@@ -72,8 +73,8 @@ function charger_squelette ($squelette) {
 			install_debut_html(_T('info_erreur_squelette'));
 			echo "<P>"._T('info_erreur_squelette2',
 			array('fichier'=>$squelette))."</P>";
+			spip_log ("ERREUR: aucun squelette '$squelette' n'est disponible...");
 			install_fin_html();
-			spip_log ("ERREUR: aucun squelette $squelette n'est disponible...");
 			exit;
 		}
 
@@ -236,9 +237,6 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 		if ($contexte_local[$val])
 			$signal['contexte'][$val] = intval($contexte_local[$val]);
 	}
-
-# ne marchera qu'avec les inclusions 'html' (versus 'php')
-#	$signal['fraicheur'] = $page['fraicheur'];
 
 	$page['signal'] = $signal;
 
