@@ -208,10 +208,11 @@ if (($redirect_ok == 'oui') AND ($redirect)) {
 //
 // Affichage
 //
+
 if ($connect_id_auteur == $id_auteur)
-	debut_page($auteur['nom'], "redacteurs", "perso");
+	debut_page($auteur['nom'], "asuivre", "perso");
 else
-	debut_page($auteur['nom'],"redacteurs","redacteurs");
+	debut_page($auteur['nom'],"documents","redacteurs");
 
 echo "<br><br><br>";
 gros_titre($auteur['nom']);
