@@ -805,6 +805,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_pour' => 'pour',
 'info_premier_resultat' => '[@debut_limit@ premiers r&eacute;sultats sur @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ premiers r&eacute;sultats sur @total@]',
+'info_principaux_correspondants' => 'Vos principaux correspondants',
 'info_probleme_grave' => 'probl&egrave;me de',
 'info_procedez_par_etape' => 'proc&eacute;dez &eacute;tape par &eacute;tape',
 'info_procedure_maj_version' => 'la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d\'adapter

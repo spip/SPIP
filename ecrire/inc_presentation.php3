@@ -1791,18 +1791,8 @@ function creer_colonne_droite($rubrique=""){
 				$nb_connectes = spip_num_rows($result_auteurs);
 			}
 
-			$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
+			$flag_cadre = ($nb_connectes > 0);
 			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-			if ($rubrique == "messagerie") {
-				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-				echo "<font color='#169249' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>\n";
-				echo "<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-				echo "<font color='#044476' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>\n";
-				if ($connect_statut == "0minirezo") {
-					echo "<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-					echo "<font color='#ff9900' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>\n";
-				}
-			}
 
 			if ($flag_cadre) {
 				echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
