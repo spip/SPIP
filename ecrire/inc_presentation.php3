@@ -1663,6 +1663,37 @@ function debut_gauche($rubrique = "asuivre") {
 
 function debut_droite() {
 	global $options;
+	global $connect_id_auteur, $clean_link;
+
+	// liste des articles bloques
+	$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
+	$result = spip_query($query);
+	$num_articles_ouverts = mysql_num_rows($result);
+	if ($num_articles_ouverts) {
+		echo "<p>";
+		debut_cadre_enfonce('warning-24.gif');
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+
+		if ($num_articles_ouverts == 1)
+			echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
+		else
+			echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
+		echo typo("avant une heure.").aide("artmodif");
+		while ($row = @mysql_fetch_array($result)) {
+			$ze_article = $row['id_article'];
+			$ze_titre = typo($row['titre']);
+			echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
+			// ne pas proposer de debloquer si c'est l'article en cours d'edition
+			if ($ze_article != $GLOBALS['id_article_bloque']) {
+				$lien = $clean_link;
+				$lien->addVar('debloquer_article', $ze_article);
+				echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
+			}
+			echo "</div>";
+		}
+
+		fin_cadre_enfonce();
+	}
 
 	echo '<br></font>&nbsp;</td><td width=50 rowspan=1>&nbsp;</td><td width=500 valign="top" rowspan=2><font face="Georgia,Garamond,Times,serif" size=3>';
 
@@ -1802,37 +1833,6 @@ function fin_html() {
 function fin_page() {
 	global $spip_version_affichee;
 	global $connect_id_auteur;
-	global $clean_link;
-
-	// liste des articles bloques
-	$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
-	$result = spip_query($query);
-	$num_articles_ouverts = mysql_num_rows($result);
-	if ($num_articles_ouverts) {
-		echo "<p>";
-		debut_cadre_enfonce('warning-24.gif');
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-
-		if ($num_articles_ouverts == 1)
-			echo typo("Vous avez r&eacute;cemment ouvert cet article; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas le modifier ");
-		else
-			echo typo("Vous avez r&eacute;cemment ouvert les articles suivants; les autres r&eacute;dacteurs sont invit&eacute;s &agrave; ne pas les modifier ");
-		echo typo("avant une heure.").aide("artmodif");
-		while ($row = @mysql_fetch_array($result)) {
-			$ze_article = $row['id_article'];
-			$ze_titre = typo($row['titre']);
-			echo "<div><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></b>";
-			// ne pas proposer de debloquer si c'est l'article en cours d'edition
-			if ($ze_article != $GLOBALS['id_article_bloque']) {
-				$lien = $clean_link;
-				$lien->addVar('debloquer_article', $ze_article);
-				echo " <font size=1>[<a href='". $lien->getUrl() ."'>lib&eacute;rer</a>]</font>";
-			}
-			echo "</div>";
-		}
-
-		fin_cadre_enfonce();
-	}
 
 	?>
 <p>&nbsp;</p>
