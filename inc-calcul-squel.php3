@@ -179,7 +179,7 @@ function parser_boucle($texte, $id_parent) {
 				$req_from[] = "spip_documents AS $table";
 				$req_from[] = "spip_types_documents AS types_d";
 				$req_where[] = "$table.id_type = types_d.id_type";
-				$req_group = " GROUP BY $table.id_document";
+				/* $req_group = " GROUP BY $table.id_document"; inutile... */
 				$id_objet = "id_document";
 				break;
 
