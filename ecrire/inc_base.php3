@@ -321,7 +321,6 @@ function creer_base() {
 	$query = "CREATE TABLE spip_referers_temp (
 		ip INTEGER UNSIGNED NOT NULL,
 		referer VARCHAR(255) NOT NULL,
-		domaine VARCHAR(255) NOT NULL,
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
 		id_objet INTEGER UNSIGNED NOT NULL,
@@ -333,7 +332,6 @@ function creer_base() {
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
-		domaine VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
 		visites_jour INTEGER UNSIGNED NOT NULL,
 		maj TIMESTAMP,
@@ -345,7 +343,6 @@ function creer_base() {
 		referer_md5 BIGINT UNSIGNED NOT NULL,
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
-		domaine VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
 		maj TIMESTAMP,
 		PRIMARY KEY (id_article, referer_md5),
@@ -1354,7 +1351,7 @@ function maj_base() {
 		maj_version (1.709);
 	}
 
-	/* le bloc qui suit procede par etapes, car il risque de partir de timeout */
+	/* 'domaine' : idee abandonnee
 	if ($version_installee < 1.710) {
 		@set_time_limit(0);
 		spip_query("ALTER TABLE spip_referers ADD domaine varchar(255)");
@@ -1388,11 +1385,20 @@ function maj_base() {
 		spip_query("UPDATE spip_referers_articles SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
 		maj_version (1.716);
 	}
+	*/
 
 	if ($version_installee < 1.717) {
 		spip_query("ALTER TABLE spip_articles ADD INDEX date_modif (date_modif)");
 		maj_version (1.717);
 	}
+
+	if ($version_installee < 1.718) {
+		spip_query("ALTER TABLE spip_referers DROP domaine");
+		spip_query("ALTER TABLE spip_referers_articles DROP domaine");
+		spip_query("ALTER TABLE spip_referers_temp DROP domaine");
+		maj_version (1.718);
+	}
+
 }
 
 ?>
