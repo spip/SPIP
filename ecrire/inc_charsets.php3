@@ -463,6 +463,16 @@ function unicode_to_utf_8($texte) {
 	return $texte;
 }
 
+// convertit les &#264; en \u0108
+function unicode_to_javascript($texte) {
+	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$regs[1]]) {
+		$num = $regs[1];
+		$vu[$num] = true;
+		$s = '\u'.sprintf("%04x", $num);
+		$texte = str_replace($regs[0], $s, $texte);
+	}
+	return $texte;
+}
 
 //
 // Translitteration charset => ascii (pour l'indexation)
