@@ -318,31 +318,31 @@ global $tables_principales;
 /// Attention: mes_fonctions peut avoir deja defini cette variable
 /// il faut donc rajouter, mais pas reinitialiser
 
-$tables_principales['articles'] =
+$tables_principales['spip_articles'] =
 	array('field' => &$spip_articles, 'key' => &$spip_articles_key);
-$tables_principales['auteurs']  =
+$tables_principales['spip_auteurs']  =
 	array('field' => &$spip_auteurs, 'key' => &$spip_auteurs_key);
-$tables_principales['breves']   =
+$tables_principales['spip_breves']   =
 	array('field' => &$spip_breves, 'key' => &$spip_breves_key);
-$tables_principales['messages'] =
+$tables_principales['spip_messages'] =
 	array('field' => &$spip_messages, 'key' => &$spip_messages_key);
-$tables_principales['mots']     =
+$tables_principales['spip_mots']     =
 	array('field' => &$spip_mots, 'key' => &$spip_mots_key);
-$tables_principales['groupes_mots'] =
+$tables_principales['spip_groupes_mots'] =
 	array('field' => &$spip_groupes_mots, 'key' => &$spip_groupes_mots_key);
-$tables_principales['rubriques'] =
+$tables_principales['spip_rubriques'] =
 	array('field' => &$spip_rubriques, 'key' => &$spip_rubriques_key);
-$tables_principales['documents'] =
+$tables_principales['spip_documents'] =
 	array('field' => &$spip_documents,  'key' => &$spip_documents_key);
-$tables_principales['types_documents']	=
+$tables_principales['spip_types_documents']	=
 	array('field' => &$spip_types_documents, 'key' => &$spip_types_documents_key);
-$tables_principales['syndic'] =
+$tables_principales['spip_syndic'] =
 	array('field' => &$spip_syndic, 'key' => &$spip_syndic_key);
-$tables_principales['syndic_articles']	=
+$tables_principales['spip_syndic_articles']	=
 	array('field' => &$spip_syndic_articles, 'key' => &$spip_syndic_articles_key);
-$tables_principales['forum'] =
+$tables_principales['spip_forum'] =
 	array('field' => &$spip_forum,	'key' => &$spip_forum_key);
-$tables_principales['signatures'] =
+$tables_principales['spip_signatures'] =
 	array('field' => &$spip_signatures, 'key' => &$spip_signatures_key);
 
 ?>

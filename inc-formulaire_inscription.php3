@@ -34,7 +34,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $mail_inscription, $nom_inscri
 			$login = test_login($mail_inscription);
 			$mdpass = md5($pass);
 			$htpass = generer_htpass($pass);
-			$r = spip_abstract_insert('auteurs', 
+			$r = spip_abstract_insert('spip_auteurs', 
 					 '(nom, email, login, pass, statut, htpass)',
 					 "('".addslashes($nom_inscription)."',  '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
 			ecrire_acces();

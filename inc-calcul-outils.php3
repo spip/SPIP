@@ -204,7 +204,7 @@ function table_from_primary($id) {
 function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = spip_abstract_select(array('id_rubrique'),
-				array('rubriques AS rubriques'),
+				array('spip_rubriques AS rubriques'),
 				array(calcul_mysql_in('id_parent', 
 					$generation,
 					'')),
@@ -230,13 +230,13 @@ function calcule_document($id_document, $doubdoc, &$doublons) {
 	if (!$id_document) return '';
 	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
 
-	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('documents AS documents'), array("id_document = $id_document"))))
+	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('spip_documents AS documents'), array("id_document = $id_document"))))
 // pas de document. Ne devrait pas arriver
 		return ''; 
 
 	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
 	if ($id_vignette) {
-		if ($res = spip_abstract_select(array('fichier'), array('documents AS documents'), array("id_document = $id_vignette"))) {
+		if ($res = spip_abstract_select(array('fichier'), array('spip_documents AS documents'), array("id_document = $id_vignette"))) {
 			list($vignette) = spip_abstract_fetch($res);
 			if (@file_exists($vignette))
 				return generer_url_document($id_vignette);
@@ -248,7 +248,7 @@ function calcule_document($id_document, $doubdoc, &$doublons) {
 
 // calcul de l'extension par tous les moyens
 	if ($id_type) {
-		list($ext) = spip_abstract_fetch(spip_abstract_select(array('extension'), array('types_documents AS documents'), array("id_type = " . intval($id_type))));
+		list($ext) = spip_abstract_fetch(spip_abstract_select(array('extension'), array('spip_types_documents AS documents'), array("id_type = " . intval($id_type))));
 	} else {
 		eregi('\.([a-z0-9]+)$', $fichier, $regs);
 		$ext = $regs[1];
@@ -298,14 +298,14 @@ function sql_profondeur($id) {
 
 function sql_parent($id_rubrique) {
 	$row = spip_abstract_fetsel(array(id_parent), 
-			array('rubriques'), 
+			array('spip_rubriques'), 
 			array("id_rubrique=" . intval($id_rubrique)));
 	return $row['id_parent'];
 }
 
 function sql_rubrique($id_article) {
 	$row = spip_abstract_fetsel(array('id_rubrique'),
-			array('articles'),
+			array('spip_articles'),
 			array("id_article=" . intval($id_article)));
 	return $row['id_rubrique'];
 }
@@ -314,8 +314,8 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 	$auteurs = "";
 	if ($id_article) {
 		$result_auteurs = spip_abstract_select(array('auteurs.nom', 'auteurs.email'),
-			array('auteurs AS auteurs',
-				'auteurs_articles AS lien'), 
+			array('spip_auteurs AS auteurs',
+				'spip_auteurs_articles AS lien'), 
 			array("lien.id_article=$id_article",
 				"auteurs.id_auteur=lien.id_auteur"),
 			'','','','',1, 
@@ -337,7 +337,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 	$retour = spip_abstract_fetsel(
 			array('texte'),
-			array('petitions'),
+			array('spip_petitions'),
 			array("id_article=".intval($id_article)),
 			'','','','',1, 
 			$table, $id_boucle, $serveur);
@@ -354,7 +354,7 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 function sql_chapo($id_article) {
 	if ($id_article)
 	return spip_abstract_fetsel(array('chapo'),
-		array('articles'),
+		array('spip_articles'),
 		array("id_article=".intval($id_article),
 		"statut='publie'"));
 }
@@ -367,7 +367,7 @@ function sql_accepter_forum($id_article) {
 
 	if (!isset($cache[$id_article]))
 		$cache[$id_article] = spip_abstract_fetsel(array('accepter_forum'),
-			array('articles'),
+			array('spip_articles'),
 			array("id_article=".intval($id_article)));
 
 	return $cache[$id_article];
@@ -381,7 +381,7 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
 		$row = spip_abstract_fetsel(array('lang'),
-					    array('rubriques'),
+					    array('spip_rubriques'),
 					    array("id_rubrique=$id"));
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -390,7 +390,7 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id  = intval($contexte['id_breve'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-			array('breves'), 
+			array('spip_breves'), 
 			array("id_breve=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
@@ -400,11 +400,11 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_syndic'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique'),
-			array('syndic'),
+			array('spip_syndic'),
 			array("id_syndic=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		$row = spip_abstract_fetsel(array('lang'),
-			array('rubriques'),
+			array('spip_rubriques'),
 			array("id_rubrique='$id_rubrique_fond'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -413,7 +413,7 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_article'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-			array('articles'),
+			array('spip_articles'),
 			array("id_article=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])

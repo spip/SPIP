@@ -41,10 +41,12 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
     // indirection (pour les rares cas ou le nom de la table!=type)
 		    $t = $table_des_tables[$r];
 		  }
-		if (!$t) $t = $r; // pour les tables non Spip
-		// $t est le nom PHP de cette table 
-#		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s");
-		$desc = $tables_des_serveurs_sql[$s][$t];
+		// pour les tables non Spip
+		if (!$t) {$nom_table = $t = $r; }
+		else $nom_table = 'spip_' . $t;
+
+		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
+		$desc = $tables_des_serveurs_sql[$s][$nom_table];
 		if (!$desc) {
 			erreur_squelette(_L("Table SQL \"$r\" inconnue"), "'$idb'");
 			# continuer pour chercher l'erreur suivante

@@ -32,7 +32,7 @@ if ($id_article==0) {
 
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
 
-		$id_article = spip_abstract_insert("articles",
+		$id_article = spip_abstract_insert("spip_articles",
 					     "(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
 					     "($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
 
@@ -946,7 +946,7 @@ debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide
 if ($creer_auteur AND $connect_statut=='0minirezo'){
 	$creer_auteur = addslashes($creer_auteur);
 
-	$nouv_auteur = spip_abstract_insert('auteurs', "(nom, statut)",
+	$nouv_auteur = spip_abstract_insert('spip_auteurs', "(nom, statut)",
 				      "(\"$creer_auteur\", '1comite')");
 	$ajout_auteur = true;
 }
