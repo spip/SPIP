@@ -89,9 +89,9 @@ switch ($prefs['couleur']) {
 		$couleur_lien_off="#FF5B00";
 		break;
 	case 3:
-		/// Vert-eau
-		$couleur_foncee="#299B9A";
-		$couleur_claire="#87DFDE";
+		/// Saumon
+		$couleur_foncee="#FFCC00";
+		$couleur_claire="#FFDDAA";
 		$couleur_lien="#5E0283";
 		$couleur_lien_off="#472854";
 		break;

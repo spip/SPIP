@@ -1139,13 +1139,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $mode;
 	global $connect_statut, $connect_toutes_rubriques;
 	
-	/*
-	if ($rubrique == "administration") {
-		$GLOBALS["couleur_claire"] = "#e3d3d5";
-		$GLOBALS["couleur_foncee"] = "#960014";
-	}
-	*/
-	
 	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
@@ -2002,7 +1995,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\"><img src='img_pack/interface-display.gif' alt='' width='26' height='20' border='0'></a>";
 
 			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
-			echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png' alt='abc' align='middle' width='59' height='15' usemap='#map_layout' border='0' />";
+			echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png' alt='abc' class='format_png' align='middle' width='59' height='15' usemap='#map_layout' border='0' />";
 
 
 			echo "<img src='img_pack/rien.gif' width='10' height='1' />";

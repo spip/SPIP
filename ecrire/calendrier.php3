@@ -72,7 +72,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	echo "<td width='20'>&nbsp;</td>";
 	
 	echo "<td width='$largeur_table' valign='top'>";
-	echo "<TABLE border=0 CELLSPACING=0 CELLPADDING=3 WIDTH='$largeur_table'>";
+	echo "<table border=0 cellspacing=0 cellpadding=0 width='$largeur_table'>";
 
 	$mois_suiv=$mois_today+1;
 	$annee_suiv=$annee_today;
@@ -184,41 +184,47 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 
-	echo "<TR><TD style='text-align:$spip_lang_left;'><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
-	echo "<TD style='text-align:center;' COLSPAN=5>";
+	echo "<TR><TD colspan='7' style='text-align:$spip_lang_left;'>";
+
+	echo "<div style='background-color: $couleur_foncee; padding: 2px; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;'>";
+
+	echo "<span style='vertical-align: middle;'>";
+	echo "&nbsp;<A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' class='format_png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A>";
+	echo "&nbsp;<FONT FACE='arial,helvetica,sans-serif' SIZE='4' style='color: white;'><B>".affdate_mois_annee("$annee_today-$mois_today-1")."</B></FONT>";
+	echo "&nbsp;<A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' class='format_png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A>";
+	echo "</span>";
+	echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 	
+
+
+		echo "<a href='calendrier_jour.php3?jour=$jour_today&mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='1' align='middle'></a>";
+		echo "&nbsp;";
+		echo "<a href='calendrier_semaine.php3?jour=$jour_today&mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='1'' align='middle'></a>";
+		echo "&nbsp;";
+		echo "<img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' align='middle' style='border:1px solid black;'>";
+		echo "&nbsp;";
+		echo "<a href='messagerie.php3'><img src='img_pack/cal-messagerie.gif' alt='messagerie' width='26' height='20' border='1'' align='middle'></a>";
+
 		if ($afficher_lien_aujourdhui) {
-			echo "<div style='float: $spip_lang_left; width: 150px; align: left;'>";
-			icone_horizontale(_T("info_aujourdhui")."<br>".affdate_mois_annee("$annee-$mois-1"), "calendrier.php3", "calendrier-24.gif", "", "left");
-			echo "</div>";
+			echo "&nbsp;&nbsp;&nbsp;<A HREF='calendrier.php3' title=\""._T("info_aujourdhui")."\"><img src='img_pack/cal-today.gif' alt='X' width='26' height='20' border='1' align='middle'></a>&nbsp;&nbsp;&nbsp;";
 		}
-
-
-	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-		echo "<div style='float: $spip_lang_right; width: 120px;'>";
-		echo "<a href='calendrier_jour.php3?jour=$jour_today&mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo "&nbsp;";
-		echo "<a href='calendrier_semaine.php3?jour=$jour_today&mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
-		echo "&nbsp;";
-		echo "<img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='border:1px solid black;'>";
+
 		echo aide ("messcalen");
-		echo "</div>";
-	}
 
-	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE='4'><B>".affdate_mois_annee("$annee_today-$mois_today-1")."</B></FONT>";
 
 	
-	echo "</TD>";
-	echo "<TD style='text-align:$spip_lang_right;'><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
+	echo "</div>";
+	echo "</td></tr>\n";
 
-	echo "<TR>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_3')."</B></TD>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_4')."</B></TD>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_5')."</B></TD>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_6')."</B></TD>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_7')."</B></TD>";
-	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_1')."</B></TD>";
+	echo "<TR style='background-color: $couleur_claire;'>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_3')."</B></TD>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_4')."</B></TD>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_5')."</B></TD>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_6')."</B></TD>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_7')."</B></TD>";
+	echo "<TD  style='text-align: center; padding: 2px;' width='$largeur_col'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_1')."</B></TD>";
 
 	echo "</TR><TR>";
 	
@@ -241,13 +247,13 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 			}
 			else {
 				$couleur_lien = "black";
-				$couleur_fond = "#e4e4e4";
+				$couleur_fond = "#eeeeee";
 			}
 		
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-				echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois_today&annee=$annee_today'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></a></font>";
+				echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='padding: 2px; border-top: 1px solid white; border-$spip_lang_left: 1px solid white;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois_today&annee=$annee_today'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></a></font>";
 			} else {
-				echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></font>";
+				echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='padding: 2px; border-top: 1px solid white; border-$spip_lang_left: 1px solid white;'><font face='arial,helvetica,sans-serif' SIZE=3 color='$couleur_lien'><b>$jour</b></font>";
 			}
 
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
