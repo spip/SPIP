@@ -44,7 +44,7 @@ function afficher_raccourci_stats($id_article) {
 		$visites = $row['visites'];
 		$referers = $row['referers'];
 		
-		if ($visites > 0) bouton_public("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
+		if ($visites > 0) bouton_admin("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 
 		$query = "SELECT * FROM spip_visites_temp WHERE type = 'article$id_article' GROUP BY ip";
 		$result = spip_query($query);
