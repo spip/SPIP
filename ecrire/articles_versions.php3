@@ -20,6 +20,7 @@ if ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row["id_rubrique"];
 	$date = $row["date"];
 	$statut_article = $row["statut"];
+	$titre = typo($row["titre"]);
 	$maj = $row["maj"];
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
@@ -78,7 +79,7 @@ foreach ($textes as $var => $t) $$var = $t;
 
 
 
-debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
+debut_page(_L('R&eacute;visions :')." &laquo; $titre &raquo;", "documents", "articles");
 
 debut_grand_cadre();
 

@@ -51,6 +51,7 @@ function init_config() {
 		'forum_prive_admin' => 'non',
 
 		'activer_moteur' => 'oui',
+		'articles_versions' => 'non',
 		'activer_statistiques' => 'oui',
 
 		'documents_article' => 'oui',
@@ -229,6 +230,7 @@ function appliquer_modifs_config() {
 		'forum_prive_admin',
 
 		'activer_moteur',
+		'articles_versions',
 		'activer_statistiques',
 
 		'documents_article',

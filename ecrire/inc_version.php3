@@ -233,7 +233,7 @@ $flag_iconv = function_exists("iconv");
 $flag_strtotime = function_exists("strtotime");
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
-
+$flag_revisions = $flag_pcre;	// a completer
 
 
 //

@@ -250,6 +250,43 @@ if ($options == "avancees") {
 }
 
 
+//
+// Gestion des revisions des articles
+//
+
+if ($options == "avancees") {
+	debut_cadre_relief("historique-24.gif");
+
+	$articles_versions = lire_meta("articles_versions");
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._L('Suivi des r&eacute;visions')."</FONT></B></TD></TR>";
+
+	echo "<TR><TD class='verdana2'>";
+	echo _L('Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.');
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='center' class='verdana2'>";
+	afficher_choix('articles_versions', $articles_versions,
+		array('oui' => _L('Activer le suivi des r&eacute;visions'),
+			'non' => _L('D&eacute;sactiver le suivi des r&eacute;visions')));
+	echo "</TD></TR>\n";
+
+	if (!$flag_revisions) {
+		echo "<TR><TD ALIGN='center' class='verdana2'>";
+		echo "<i>"._L('La configuration de votre serveur ne permet pas d\'activer le suivi des r&eacute;visions')."</i>";
+		echo "</TD></TR>\n";
+	}
+
+	echo "<TR><td style='text-align:$spip_lang_right;'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_relief();
+
+	echo "<p>";
+}
 
 
 

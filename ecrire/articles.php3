@@ -14,7 +14,7 @@ $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
 $articles_mots = lire_meta("articles_mots");
-$articles_versions = lire_meta("articles_versions");
+$articles_versions = (lire_meta("articles_versions")=='oui') && $flag_revisions;
 
 if ($id_article==0) {
 	if ($new=='oui') {
@@ -260,7 +260,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	
 	// -- Experimental --
 	// Stockage des versions
-	if ($articles_versions != 'non') {
+	if ($articles_versions) {
 		include_ecrire("inc_diff.php3");
 		ajouter_version($id_article, $champs_versions);
 	}
@@ -419,7 +419,7 @@ if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites 
 	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
 }
 
-if ($articles_versions != 'non' AND $connect_statut == "0minirezo" AND $id_version>1) {
+if ($articles_versions AND $id_version>1) {
 	icone_horizontale(_L('Afficher les r&eacute;visions...'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
