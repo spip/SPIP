@@ -472,11 +472,9 @@ debut_cadre_relief();
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
 	if ($http_proxy) {
 		echo "<p align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
-			. propre("Pour faire un essai de ce proxy, indiquez ici une adresse quelconque sur le Web, et
-			v&eacute;rifiez que vous y avez acc&egrave;s.<br>{{Attention:}} il faut
-			faire ce test sur un fichier au format texte brut. Nous vous
-			sugg&eacute;rons d'utiliser un des {backend} que vous souhaitez syndiquer,
-			par exemple celui du site uZine.");
+			. propre("Pour faire un essai de ce proxy, indiquez ici l'adresse d'un {backend}
+			que vous souhaitez syndiquer -~par exemple celui du site {uZine}~, et v&eacute;rifiez que vous y avez
+			acc&egrave;s.");
 		echo "</TD></TR>";
 
 		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
