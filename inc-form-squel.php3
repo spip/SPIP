@@ -9,6 +9,8 @@
 
 function calculer_champ_FORMULAIRE_ADMIN($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 {
+# Quand Fil sera convaincu:
+# return array("envoi_script('if (window.admin != null) admin()')",'');
   return array("'<!-- @@formulaire_admin@@45609871@@ -->'",'');
 }
 
