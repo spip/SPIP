@@ -628,7 +628,8 @@ function email_valide($adresse) {
 	$adresses = explode(',', $adresse);
 	if (is_array($adresses)) {
 		while (list(, $adresse) = each($adresses)) {
-			if (!eregi("^[-!#\$%&'*+\\./0-9=?a-z^_`{|}~]+(@([-0-9a-z]+\.)*[-0-9a-z]+)?$", trim($adresse)))
+			// RFC 822
+			if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)?$', trim($adresse)))
 				return false;
 		}
 		return true;

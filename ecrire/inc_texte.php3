@@ -408,8 +408,8 @@ function extraire_lien ($regs) {
 		// petites corrections d'URL
 		if (ereg("^www\.[^@]+$",$lien_url))
 			$lien_url = "http://".$lien_url;
-		else if (email_valide($lien_url))
-			$lien_url = "mailto:".trim($lien_url);
+		else if (strpos($lien_url, "@") && email_valide($lien_url))
+			$lien_url = "mailto:".$lien_url;
 	}
 
 	$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
@@ -475,7 +475,7 @@ function traiter_listes ($texte) {
 				$ajout .= "<li class=\"spip\">";
 				$pile_li[$profond] = "</li>";
 			}
-			else { 
+			else {
 				$ajout = "\n-";	// puce normale ou <hr>
 			}
 
@@ -624,7 +624,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			$lineEnd = strpos($textTable, "|\n");
 		}
 		$newTextTable .= "</table>\n<p>\n";
-		
+
 		$letexte = $textBegin . $newTextTable . $textEnd;
 
 		$tableBeginPos = strpos($letexte, "\n\n|");
@@ -642,7 +642,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	$letexte = trim($letexte);
 
-		
+
 	// les listes
 	if (ereg("\n-[*#]", "\n".$letexte))
 		$letexte = traiter_listes($letexte);
