@@ -80,7 +80,8 @@ function http_calendrier_ics($evenements, $amj = "")
 						"</span>";
 
 				} else {
-				  if ($desc) $sum .= " <span class='verdana1'>$desc</span>"; }
+				  if ($desc) $sum .= " <span class='verdana1'>$desc</span>"; 
+				}
 				if ($deb_h >0 OR $deb_m > 0) {
 					if ((($deb_h > 0) OR ($deb_m > 0)) AND $amj == $jour_debut)
 						{ $deb = '<b>' . $deb_h . ':' . $deb_m . '</b> ';}
@@ -887,7 +888,7 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 	if ($echelle==0) $echelle = DEFAUT_D_ECHELLE;
 
 
-list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin, $echelle);		$modif_decalage = round($largeur/8);
+	list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin, $echelle);		$modif_decalage = round($largeur/8);
 
 	$total = '';
 
@@ -1148,26 +1149,26 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	    "</b></div>";
 	}
 	else {
-	  if ($large == "large") 
-	    $entete = "<div align='center' style='padding: 5px;'>" .
-	      http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb",
-				   $bleu ._T("lien_nouvea_pense_bete"),
-				   '',
-				   'font-family: Arial, Sans, sans-serif; font-size: 10px; color: blue;') .
-	      " &nbsp; " .
-	      http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal",
-				   $vert ._T("lien_nouveau_message"),
-				   '',
-				   'font-family: Arial, Sans, sans-serif; font-size: 10px; color: green;') .
-	      (!($GLOBALS['connect_statut'] == "0minirezo") ? '' :
-	       (" &nbsp; " .
-		http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich",
-				   $jaune ._T("lien_nouvelle_annonce"),
-				   '',
-				     'font-family: Arial, Sans, sans-serif; font-size: 10px; color: #ff9900;'))) .
-	      "</div>\n";
-	  else
-	    $entete = '';
+		if ($large == "large") 
+			$entete = "<div align='center' style='padding: 5px;'>" .
+			http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb",
+				$bleu ._T("lien_nouvea_pense_bete"),
+				'',
+				'font-family: Arial, Sans, sans-serif; font-size: 10px; color: blue;') .
+			" &nbsp; " .
+			http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal",
+				$vert ._T("lien_nouveau_message"),
+				'',
+				'font-family: Arial, Sans, sans-serif; font-size: 10px; color: green;') .
+			(!($GLOBALS['connect_statut'] == "0minirezo") ? '' :
+				(" &nbsp; " .
+				http_calendrier_href("message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich",
+					$jaune ._T("lien_nouvelle_annonce"),
+					'',
+					'font-family: Arial, Sans, sans-serif; font-size: 10px; color: #ff9900;'))) .
+			"</div>\n";
+		else
+			$entete = '';
 	}
 
 	list($articles, $breves, $messages) =
@@ -1178,7 +1179,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	if ($large == "large") {
 		$largeur = 300;
 	} else if ($large == "col") {
-		$largeur = 120;
+		$largeur = 90;
 	} else {
 		$largeur = 50;
 	}
@@ -1188,17 +1189,16 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	// faute de fermeture en PHP...
 	$calendrier_message_fermeture = $le_message;
 
-	return
-	  $entete .
-    "\n<div style='position: relative; color: #666666; " .
-    "height: ${dimjour}px; " .
-    "font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;".
-	  ' border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;' .
-    "'>" .
+	return $entete .
+		"\n<div style='position: relative; color: #666666; " .
+		"height: ${dimjour}px; " .
+		"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;".
+		' border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;' .
+		"'>" .
 	  ((!($articles[$j] OR $breves[$j])) ? '' :
 	   http_calendrier_articles_et_breves($articles[$j], $breves[$j],
-				      "position: absolute; $spip_lang_left: "
-				      . ($largeur - $padding) .
+				      "position: absolute; z-index: 2; $spip_lang_left: "
+				      . ($largeur - $padding + 35) .
 				      "px; top: 0px;")) .
 	  http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 'http_calendrier_message',
 				   $echelle,
@@ -1433,6 +1433,7 @@ ORDER BY messages.date_heure
 		$date_fin=$row["date_fin"];
 		$type=$row["type"];
 		$id_message=$row['id_message'];
+
 		if ($type=="pb")
 		  $cat = 2;
 		else {
@@ -1458,6 +1459,7 @@ WHERE	(lien.id_message='$id_message'
 		  }
 		}
 
+
 		$jour_avant = substr($avant, 9,2);
 		$mois_avant = substr($avant, 6,2);
 		$annee_avant = substr($avant, 1,4);
@@ -1471,6 +1473,7 @@ WHERE	(lien.id_message='$id_message'
 		$amj = sql_calendrier_jour_ical("$annee_avant-$mois_avant-".sprintf("%02d", $j+($jour_avant)));
 
 		while ($amj <= $ical_apres) {
+		if (!($amj == sql_calendrier_jour_ical($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
 			$evenements[$amj][$id_message]=
 			  array(
 				'URL' => "message.php3?id_message=$id_message",
@@ -1480,6 +1483,7 @@ WHERE	(lien.id_message='$id_message'
 				'SUMMARY' => $row['titre'],
 				'CATEGORIES' => $cat,
 				'ATTENDEE' => (count($auteurs) == 0) ? '' : join($auteurs,", "));
+			
 			$j ++; 
 			$ladate = date("Y-m-d",mktime (1,1,1,$mois_avant, ($j + $jour_avant), $annee_avant));
 			
@@ -1554,8 +1558,9 @@ function sql_calendrier_agenda ($mois, $annee) {
 	return $rv;
 }
 
-function sql_calendrier_jour_ical($d) 
-{return  substr($d, 0, 4) . substr($d, 5, 2) .substr($d, 8, 2);}
+function sql_calendrier_jour_ical($d)  {
+	return  substr($d, 0, 4) . substr($d, 5, 2) .substr($d, 8, 2);
+}
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
 # et retourne un tableau compose

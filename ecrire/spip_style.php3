@@ -822,7 +822,7 @@ a.bouton_rotation:hover img {
 	-moz-opacity: 0.6; filter: alpha(opacity=60);
 }
 .dessus, .dessous.hover {
-	z-index : 2; 
+	z-index : 3; 
 	-moz-opacity: 1; filter: alpha(opacity=100);
 	cursor: pointer;
 }

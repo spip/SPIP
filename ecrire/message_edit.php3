@@ -70,62 +70,59 @@ function afficher_jour($jour, $attributs){
 
 function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
 {
-  afficher_jour(jour($date), "name='jour$suffixe' size='1' class='fondl'");
-  echo '<br />', afficher_mois(mois($date), "name='mois$suffixe' size='1' class='fondl'");
-  echo '<br />';
- afficher_annee(annee($date), "name='annee$suffixe' size='1' class='fondl'");
+  afficher_jour(jour($date), "name='jour$suffixe' size='1' class='fondl verdana1'");
+  echo afficher_mois(mois($date), "name='mois$suffixe' size='1' class='fondl verdana1'");
+//  echo '<br />';
+ afficher_annee(annee($date), "name='annee$suffixe' size='1' class='fondl verdana1'");
 
-  echo "<br /> <input type='text' class='fondl' name='heures' value=\"".$heures."\" size='3'/>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;",
-    "<input type='text' class='fondl' name='minutes' value=\"$minutes\" size='3'/>";
+  echo "&nbsp;  <input type='text' class='fondl verdana1' name='heures$suffixe' value=\"".$heures."\" size='3'/>&nbsp;".majuscules(_T('date_mot_heures'))."&nbsp;",
+    "<input type='text' class='fondl verdana1' name='minutes$suffixe' value=\"$minutes\" size='3'/>";
 }
 
 function afficher_si_rdv($date_heure, $date_fin, $choix)
 {
-  global $spip_lang_rtl;
+	global $spip_lang_rtl;
 
-  $heures_debut = heures($date_heure);
-  $minutes_debut = minutes($date_heure);
-  $heures_fin = heures($date_fin);
-  $minutes_fin = minutes($date_fin);
+	$heures_debut = heures($date_heure);
+	$minutes_debut = minutes($date_heure);
+	$heures_fin = heures($date_fin);
+	$minutes_fin = minutes($date_fin);
   
-  if ($date_fin == "0000-00-00 00:00:00") {
-    $date_fin = $date_heure;
-    $heures_fin = $heures_debut + 1;
-  }
+	if ($date_fin == "0000-00-00 00:00:00") {
+		$date_fin = $date_heure;
+		$heures_fin = $heures_debut + 1;
+	}
   
-  if ($heures_fin >=24){
-    $heures_fin = 23;
-    $minutes_fin = 59;
-  }
-		
-  $res = "<div><br /><input type='radio' name='rv' value='non' id='rv_off'" .
-	(!$choix ? "checked='checked' " : '') .
-	" onclick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\"/>" .
-	"<label for='rv_off'><b>".
-    #			  _T('item_non_afficher_calendrier').
-	_L('Ce message ne concerne pas un rendez-vous').
-	"</b></label>";
-  echo ($choix  ? $res : "<b>$res</b>") . "</div>";
+	if ($heures_fin >=24){
+		$heures_fin = 23;
+		$minutes_fin = 59;
+	}
+			
+	$res = "<div><input type='radio' name='rv' value='non' id='rv_off'" .
+		(!$choix ? "checked='checked' " : '') .
+		" onclick=\"changeVisible(this.checked, 'heure-rv', 'none', 'block');\"/>" .
+		"<label for='rv_off'>".
+		_T('item_non_afficher_calendrier').
+		"</label>";
+	echo ($choix  ? $res : "<b>$res</b>") . "</div>";
 
-  $res = "<br /><input type='radio' name='rv' value='oui' id='rv_on' " .
-    ($choix ? "checked='checked' " : '') .
-    "onclick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\"/>" . " <label for='rv_on'>".
-    #			  _T('item_afficher_calendrier').
-    _L('Ce message concerne le rendez-vous suivant').
-    "</label>";
-  echo '<p>' . (!$choix  ? $res : "<b>$res</b>") . '</p>';
-  echo "<div id='heure-rv' style='display: block; padding-top: 4px; padding-left: 24px;'>";
+	$res = "<input type='radio' name='rv' value='oui' id='rv_on' " .
+		($choix ? "checked='checked' " : '') .
+		"onclick=\"changeVisible(this.checked, 'heure-rv', 'block', 'none');\"/>" . 
+		"<label for='rv_on'>".
+		_T('item_afficher_calendrier').
+		"</label>";
+	echo '<div>' . (!$choix  ? $res : "<b>$res</b>") . '</div>';
+	
+	$display = ($choix ? "block" : "none");
+	
+	echo "<div id='heure-rv' style='display: $display; padding-top: 4px; padding-left: 24px;'>";
 
-  echo _L('Du '), '<br />';
-  afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut);
+	afficher_jour_mois_annee_h_m($date_heure, $heures_debut, $minutes_debut);
 
-#  echo " <br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ";
-  echo  '<br /><br />', _L('Au '), '<br />';
-  afficher_jour_mois_annee_h_m($date_fin,
-			       $heures_fin,
-			       $minutes_fin,
-			       '_fin');
-  echo "</div>";
+	echo " <br /><img src='puce$spip_lang_rtl.gif' alt=' '/> &nbsp; ";
+	afficher_jour_mois_annee_h_m($date_fin, $heures_fin, $minutes_fin, '_fin');
+	echo "</div>";
 }
 
 
@@ -188,16 +185,6 @@ if ($type == 'affich') {
 echo "<form action='message.php3?id_message=$id_message' method='post'>";
 
  debut_gauche();
-	//////////////////////////////////////////////////////
-	// Fixer rendez-vous?
-	//
-
-	if ($rv == "oui") $fonction = "rv.gif";	else $fonction = "";
-
-	debut_cadre_trait_couleur("$logo.gif", false, $fonction, 
-				  _T('titre_rendez_vous'));
-
-afficher_si_rdv($date_heure, $date_fin, ($rv != "oui")); 
 
 debut_droite();
 
@@ -221,7 +208,14 @@ debut_droite();
 
 	echo "<p />";
 
-		fin_cadre_trait_couleur();
+
+	//////////////////////////////////////////////////////
+	// Fixer rendez-vous?
+	//
+	if ($rv == "oui") $fonction = "rv.gif";	else $fonction = "";
+	debut_cadre_trait_couleur("$logo.gif", false, $fonction, _T('titre_rendez_vous'));
+	afficher_si_rdv($date_heure, $date_fin, ($rv == "oui")); 
+	fin_cadre_trait_couleur();
 
 	echo "<p><b>"._T('info_texte_message_02')."</b><br />";
 	echo "<textarea name='texte' rows='20' class='formo' cols='40'>";
