@@ -85,7 +85,7 @@ function deplacer_fichier_upload($source, $dest) {
 
 		if (($GLOBALS['_FILES']['size'] == 0) AND !$GLOBALS['action_zip']) {
 			echo _T('upload_limit',
-				array('max' => ini_get('upload_max_filesize'));
+				array('max' => ini_get('upload_max_filesize')));
 		}
 	}
 
