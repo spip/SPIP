@@ -44,6 +44,7 @@ $GLOBALS['i18n_vi'] = array(
 'avis_erreur' => 'C&Oacute; L&#7894;I: xem d&#432;&#7899;i &#273;&acirc;y',
 'avis_erreur_connexion' => 'C&oacute; L&#7895;i: kh&ocirc;ng n&#7889;i &#273;&#432;&#7907;c',
 'avis_erreur_connexion_mysql' => 'C&oacute; L&#7895;i-kh&ocirc;ng n&#7889;i v&#7899;i MySQL',
+'avis_erreur_cookie' => 'C&oacute; l&#7895;i cookie',
 'avis_erreur_fonction_contexte' => 'C&oacute; l&#7895;i programming. Function n&agrave;y kh&ocirc;ng n&ecirc;n d&ugrave;ng trong b&#7889;i c&#7843;nh n&agrave;y.',
 'avis_erreur_mysql' => 'C&oacute; L&#7895;i-MySQL',
 'avis_erreur_sauvegarde' => 'L&#7895;i trong backup (@type@ @id_objet@)!',
