@@ -466,7 +466,7 @@ function utiliser_langue_visiteur() {
 //
 function init_langues() {
 	global $all_langs, $flag_ecrire, $langue_site, $cache_lang, $cache_lang_modifs;
-	global $pile_langues, $lang_typo, $lang_dir;
+	global $pile_langues, $lang_typo, $lang_dir, $dir_ecrire;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
