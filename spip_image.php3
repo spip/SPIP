@@ -435,7 +435,7 @@ if ($ajout_doc == 'oui') {
 		}
 		$d = opendir("IMG/tmp_zip");
 		while ($f = readdir($d)) {
-			if (is_file("IMG/tmp/$f")) @unlink("IMG/tmp/$f");
+			if (is_file("IMG/tmp_zip/$f")) @unlink("IMG/tmp_zip/$f");
 		}
 	}
 }
