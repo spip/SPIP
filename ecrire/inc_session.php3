@@ -1,4 +1,9 @@
 <?php
+//
+// Ce fichier ne sera execute qu'une fois
+if (defined("_ECRIRE_INC_SESSION")) return;
+define("_ECRIRE_INC_SESSION", "1");
+
 
 /*
  * Gestion de l'authentification par sessions
@@ -7,11 +12,7 @@
  *
  */
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_SESSION")) return;
-define("_ECRIRE_INC_SESSION", "1");
-srand((double) microtime() * 1000000); // une fois et une seule par script
+$GLOBALS['auteur_session'] = '';
 
 
 // un truc le plus unique possible mais constant brouteur + numero ip
@@ -19,9 +20,112 @@ function md5_brouteur() {
 	return md5(getenv('HTTP_USER_AGENT'));
 }
 
+
+//
+// Calcule le nom du fichier session
+//
+function fichier_session($id_session, $alea) {
+	$fichier_session = 'session_'.md5($id_session.' '.$alea).'.php3';
+	$fichier_session = 'data/'.$fichier_session;
+	if (!$GLOBALS['flag_ecrire']) $fichier_session = 'ecrire/'.$fichier_session;
+	return $fichier_session;
+}
+
+//
+// Effacer toutes les sessions crees il y a plus de 48 heures
+// (de toute facon invalides car l'alea est expire)
+//
+function nettoyer_sessions() {
+	$dir = 'data';
+	if (!$GLOBALS['flag_ecrire']) $dir = 'ecrire/'.$dir;
+	$handle = opendir($dir);
+	$t = time();
+	while (($fichier = readdir($handle)) != '') {
+		if (!eregi("^session_[0-9a-f].php3?$", $fichier)) continue;
+		$chemin = "$dir/$fichier";
+		if (($t - filemtime($chemin)) > 48 * 3600) {
+			@unlink($chemin);
+		}
+	}
+	closedir($handle);
+}
+
+//
+// Ajouter une session pour l'auteur specifie
+//
+function ajouter_session($auteur, $id_session) {
+	nettoyer_sessions();
+	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'brouteur');
+
+	$texte = "<"."?php\n";
+	reset($vars);
+	while (list(, $var) = each($vars)) {
+		$texte .= "\$GLOBALS['auteur_session']['$var'] = '".addslashes($auteur[$var])."';\n";
+	}
+	$texte .= "?".">";
+	if ($f = fopen($fichier_session, "wb")) {
+		fputs($f, $texte);
+ 		fclose($f);
+	}
+}
+
+//
+// Verifier et inclure une session
+//
+function verifier_session($id_session) {
+	// Tester avec alea courant
+	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+	if (file_exists($fichier_session)) {
+		include($fichier_session);
+		return true;
+	}
+	// Sinon, tester avec alea precedent
+	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+	if (file_exists($fichier_session)) {
+		// Renouveler la session (avec l'alea courant)
+		include($fichier_session);
+		supprimer_session($id_session);
+		ajouter_session($GLOBALS['auteur_session'], $id_session);
+		return true;
+	}
+	return false;
+}
+
+//
+// Supprimer une session
+//
+function supprimer_session($id_session) {
+	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+	if (file_exists($fichier_session)) {
+		@unlink($fichier_session);
+	}
+	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+	if (file_exists($fichier_session)) {
+		@unlink($fichier_session);
+	}
+}
+
+//
+// Creer une session et retourne le cookie correspondant (a poser)
+//
+function creer_cookie_session($auteur) {
+	if ($id_auteur = $auteur['id_auteur']) {
+		$seed = (double) (microtime() + 1) * time();
+		if ($GLOBALS['flag_mt_rand']) mt_srand($seed);
+		srand($seed);
+		if ($flag_mt_rand) $s = mt_rand();
+		if (!$s) $s = rand();
+		$id_session = md5(uniqid($s));
+		ajouter_session($auteur, $id_session);
+		return $id_session;
+	}
+}
+
+
 // Ajoute une session dans le cache des sessions
 // ou supprimer toute session de cet auteur si $session == false
-function ajouter_session($auteur, $session) {
+/*function ajouter_session($auteur, $session) {
 
 	if (file_exists ('ecrire/inc_sessions_cache.php3')) {
 		include ('ecrire/inc_sessions_cache.php3');
@@ -59,28 +163,28 @@ function ajouter_session($auteur, $session) {
 		fputs($myFile, $texte);
  		fclose($myFile);
 	}
-}
+}*/
 
 // cree le cookie correspondant a l'auteur
 // attention aux trous de securite ;)
-function cree_cookie_session ($auteur) {
+/*function cree_cookie_session ($auteur) {
 	if ($auteur->id_auteur > 0) {
 		$session = md5(rand()); // numero de session
 		ajouter_session($auteur, $session);
 		$cookie = $auteur->id_auteur ."@". $auteur->login ."@". $session;
 		return $cookie;
 	}
-}
+}*/
 
 // cree le cookie admin correspondant a l'auteur
-function cree_cookie_admin ($auteur) {
+/*function cree_cookie_admin ($auteur) {
 	if ($auteur->id_auteur > 0) {
 		$cookie = $auteur->id_auteur ."@". $auteur->login ."@". $auteur->nom ."@". $auteur->email;
 		return $cookie;
 	}
-}
+}*/
 
-function verifie_cookie_session ($cookie) {
+/*function verifie_cookie_session ($cookie) {
 	if ((list(,$id,$login,$session) = decode_cookie_session ($cookie)) AND ($id > 0)) {
 		if (file_exists ('ecrire/inc_sessions_cache.php3')) {
 			include ('ecrire/inc_sessions_cache.php3');
@@ -108,8 +212,9 @@ function decode_cookie_session ($cookie) {
 	return $regs;
 	// list(,$id_auteur,$login,$session) = decode_cookie_session($cookie)
 }
+*/
 
-function pose_cookie_session ($cookie_session, $cookie_admin='') {
+/*function pose_cookie_session ($cookie_session, $cookie_admin='') {
 	global $redirect;
 	$cookie_pose = false;
 
@@ -152,7 +257,7 @@ function supprime_cookie_session () {
 	}
 	setcookie ('spip_session', '', time() - 24*3600);
 	setcookie ('spip_admin', '', time() - 24*3600);
-}
+}*/
 
 
 // $login est optionnel

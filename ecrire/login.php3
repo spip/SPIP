@@ -14,9 +14,9 @@
 	$url_site = lire_meta('adresse_site');
 
 	// deja connecte
-	if (($session = $GLOBALS['HTTP_COOKIE_VARS']['spip_session']) && $auteur = verifie_cookie_session($session)) {
+/*	if (($session = $GLOBALS['HTTP_COOKIE_VARS']['spip_session']) && $auteur = verifie_cookie_session($session)) {
 		$connecte = true;
-	}
+	}*/
 
 	install_debut_html("$nom_site : connexion &agrave; l'espace priv&eacute;");
 
