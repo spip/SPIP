@@ -36,7 +36,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$id_document = $row['id_document'];
 		$id_type = $row['id_type'];
 		$titre = propre($row ['titre']);
@@ -50,7 +50,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 		$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 		$result_type = spip_query($query_type);
-		if ($row_type = @mysql_fetch_array($result_type)) {
+		if ($row_type = @spip_fetch_array($result_type)) {
 			$type = $row_type['titre'];
 			$inclus = $row_type['inclus'];
 			$extension = $row_type['extension'];
@@ -147,7 +147,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 	
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$id_document = $row['id_document'];
 		$id_type = $row['id_type'];
 		$titre = typo($row['titre']);
@@ -164,7 +164,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 
 		// on construira le lien en fonction du type de doc
 		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
-		if ($type = @mysql_fetch_object($result_type)) {
+		if ($type = @spip_fetch_object($result_type)) {
 			$extension = $type->extension;
 		}
 
@@ -172,7 +172,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		if ($id_vignette) {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = spip_query($query_vignette);
-			if ($row_vignette = @mysql_fetch_array($result_vignette)) {
+			if ($row_vignette = @spip_fetch_array($result_vignette)) {
 				$fichier_vignette = $row_vignette['fichier'];
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
@@ -220,7 +220,7 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 		if ($affichage_detaille) {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 			$result_type = spip_query($query_type);
-			if ($row_type = @mysql_fetch_array($result_type)) {
+			if ($row_type = @spip_fetch_array($result_type)) {
 				$type = $row_type['titre'];
 			}
 			else $type = 'fichier';
@@ -260,7 +260,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
 				if ($inclus)
 					$req .= " AND inclus='$inclus'";
-				if (@mysql_fetch_array(spip_query($req)))
+				if (@spip_fetch_array(spip_query($req)))
 					$texte_upload .= "\n<option value=\"$entryName\">$entryName</option>";
 			}
 		}
@@ -434,7 +434,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 			$result_types_docs = spip_query($query_types_docs);
 			
-			while($row=mysql_fetch_array($result_types_docs)){
+			while($row=spip_fetch_array($result_types_docs)){
 				$extension=$row['extension'];
 				echo "$extension, ";
 			}
@@ -520,7 +520,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-	if ($type = @mysql_fetch_array($result))	{
+	if ($type = @spip_fetch_array($result))	{
 		$type_extension = $type['extension'];
 		$type_inclus = $type['inclus'];
 		$type_titre = $type['titre'];
@@ -723,7 +723,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 			$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
 				"WHERE id_document in (".join(',', $documents_lies).")");
-			while ($v = mysql_fetch_object($res))
+			while ($v = spip_fetch_object($res))
 				$vignettes[] = $v->id_vignette;
 		
 			$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
@@ -806,7 +806,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 				$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 				$result_types_docs = spip_query($query_types_docs);
 				
-				while($row=mysql_fetch_array($result_types_docs)){
+				while($row=spip_fetch_array($result_types_docs)){
 					$extension=$row['extension'];
 					echo "$extension, ";
 				}
@@ -872,7 +872,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-	if ($type = @mysql_fetch_array($result))	{
+	if ($type = @spip_fetch_array($result))	{
 		$type_extension = $type['extension'];
 		$type_inclus = $type['inclus'];
 		$type_titre = $type['titre'];

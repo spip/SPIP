@@ -87,7 +87,7 @@ function extrait_article($row) {
  	$query = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur";
 	$result_auteurs = spip_query($query);
 
-	while ($row = mysql_fetch_array($result_auteurs)) {
+	while ($row = spip_fetch_array($result_auteurs)) {
 		$nom_auteur = $row['nom'];
 
 		if ($les_auteurs) $les_auteurs .= ', ';
@@ -119,7 +119,7 @@ function envoyer_mail_publication($id_article) {
 		$query = "SELECT * FROM spip_articles WHERE id_article = $id_article";
 		$result = spip_query($query);
 
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = "[$nom_site_spip] PUBLIE : $titre";
@@ -141,7 +141,7 @@ function envoyer_mail_proposition($id_article) {
 		$query = "SELECT * FROM spip_articles WHERE id_article = $id_article";
 		$result = spip_query($query);
 
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = "[$nom_site_spip] Propose : $titre";
@@ -173,13 +173,13 @@ function envoyer_mail_nouveautes() {
 	$query = "SELECT * FROM spip_articles WHERE statut = 'publie' AND date > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY) $query_post_dates ORDER BY date DESC";
  	$result = spip_query($query);
 
-	if (mysql_num_rows($result) > 0) {
+	if (spip_num_rows($result) > 0) {
 		$contenu = "\n          -----------------\n          NOUVEAUX ARTICLES\n          -----------------\n\n";
 	}
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$contenu .= "\n".extrait_article($row);
 	}
-	mysql_free_result($result);
+	spip_free_result($result);
 
 	$activer_breves = lire_meta("activer_breves");
 
@@ -188,11 +188,11 @@ function envoyer_mail_nouveautes() {
 	   	$query = "SELECT * FROM spip_breves WHERE statut = 'publie' AND date_heure > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY) ORDER BY date_heure DESC";
 	 	$result = spip_query($query);
 
-		if (mysql_num_rows($result) > 0) {
+		if (spip_num_rows($result) > 0) {
 			$contenu .= "\n          -----------------\n             LES BREVES\n          -----------------\n\n";
 		}
 
-	 	while($row = mysql_fetch_array($result)) {
+	 	while($row = spip_fetch_array($result)) {
 			$id_breve = $row['id_breve'];
 			$date_heure = nom_jour($row['date_heure'])." ".affdate($row['date_heure'], 'CORRIGER_ENTITES');
 			$breve_titre = $row['titre'];
@@ -216,7 +216,7 @@ function envoyer_mail_quoi_de_neuf() {
 		$query = "SELECT * FROM spip_meta WHERE nom = 'majnouv' AND maj > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY)";
 		$result = spip_query($query);
 
-		if ($result AND mysql_num_rows($result) == 0 AND $GLOBALS['db_ok']) {
+		if ($result AND spip_num_rows($result) == 0 AND $GLOBALS['db_ok']) {
 			envoyer_mail_nouveautes();
 			ecrire_meta('majnouv', '');
 			ecrire_metas();

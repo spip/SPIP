@@ -13,7 +13,7 @@ function test_pass() {
 		$passw = creer_pass_aleatoire();
 		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";
 		$result = spip_query($query);
-		if (!mysql_num_rows($result)) break;
+		if (!spip_num_rows($result)) break;
 	}	
 	return $passw;
 }
@@ -31,7 +31,7 @@ function test_login($mail) {
 		else $login = $login_base;
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
-		if (!mysql_num_rows($result)) break;
+		if (!spip_num_rows($result)) break;
 	}
 
 	return $login;		
@@ -53,8 +53,8 @@ function formulaire_signature($id_article) {
 	if ($val_confirm) {
 		$query_sign = "SELECT * FROM spip_signatures WHERE statut='$val_confirm'";
 		$result_sign = spip_query($query_sign);
-		if (mysql_num_rows($result_sign) > 0) {
-			while($row = mysql_fetch_array($result_sign)) {
+		if (spip_num_rows($result_sign) > 0) {
+			while($row = spip_fetch_array($result_sign)) {
 				$id_signature = $row['id_signature'];
 				$id_article = $row['id_article'];
 				$date_time = $row['date_time'];
@@ -69,7 +69,7 @@ function formulaire_signature($id_article) {
 			$query_petition="SELECT * FROM spip_petitions WHERE id_article=$id_article";
 		 	$result_petition=spip_query($query_petition);
 
-			while($row=mysql_fetch_array($result_petition)) {
+			while($row=spip_fetch_array($result_petition)) {
 				$id_article=$row['id_article'];
 				$email_unique=$row['email_unique'];
 				$site_obli=$row['site_obli'];
@@ -82,7 +82,7 @@ function formulaire_signature($id_article) {
 				$email=addslashes($adresse_email);
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result=spip_query($query);
-				if (mysql_num_rows($result)>0){
+				if (spip_num_rows($result)>0){
 					$texte .= erreur("Vous avez d&eacute;j&agrave; sign&eacute; ce texte.");
 					$refus = "oui";
 				}
@@ -92,7 +92,7 @@ function formulaire_signature($id_article) {
 				$site=addslashes($url_site);
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
 				$result=spip_query($query);
-				if (mysql_num_rows($result)>0){
+				if (spip_num_rows($result)>0){
 					$texte .= erreur("Ce site est d&eacute;j&agrave; enregistr&eacute;");
 					$refus = "oui";
 				}
@@ -118,7 +118,7 @@ function formulaire_signature($id_article) {
 		 	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 		 	$result_petition = spip_query($query_petition);
 
-			while($row = mysql_fetch_array($result_petition)) {
+			while($row = spip_fetch_array($result_petition)) {
 				$id_article = $row['id_article'];
 				$email_unique = $row['email_unique'];
 				$site_obli = $row['site_obli'];
@@ -141,7 +141,7 @@ function formulaire_signature($id_article) {
 				$email = addslashes($adresse_email);
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
 				$result = spip_query($query);
-				if (mysql_num_rows($result) > 0) {
+				if (spip_num_rows($result) > 0) {
 					$reponse_signature .= erreur("Vous avez d&eacute;j&agrave; sign&eacute; ce texte.");
 					$refus = "oui";
 				}
@@ -168,7 +168,7 @@ function formulaire_signature($id_article) {
 				$site = addslashes($url_site);
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND (statut='publie' OR statut='poubelle')";
 				$result = spip_query($query);
-				if (mysql_num_rows($result) > 0) {
+				if (spip_num_rows($result) > 0) {
 					$reponse_signature .= erreur("Ce site est d&eacute;j&agrave; enregistr&eacute;");
 					$refus = "oui";
 				}
@@ -182,7 +182,7 @@ function formulaire_signature($id_article) {
 			else {
 				$query_site = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
 				$result_site = spip_query($query_site);
-				while($row = mysql_fetch_array($result_site)) {
+				while($row = spip_fetch_array($result_site)) {
 					$titre = $row['titre'];
 				}
 
@@ -227,7 +227,7 @@ function formulaire_signature($id_article) {
 		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
  		$result_petition = spip_query($query_petition);
 
-		if ($row_petition = mysql_fetch_array($result_petition)) {
+		if ($row_petition = spip_fetch_array($result_petition)) {
 			$id_article = $row_petition['id_article'];
 			$email_unique = $row_petition['email_unique'];
 			$site_obli = $row_petition['site_obli'];
@@ -302,7 +302,7 @@ function formulaire_inscription($type) {
 		echo "<div class='reponse_formulaire'>";
 		
 		// l'abonne existe deja.
-	 	if ($row = mysql_fetch_array($result)) {
+	 	if ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
 			$statut = $row['statut'];
 

@@ -28,7 +28,7 @@ if ($connect_statut == '0minirezo') {
 	if ($titre_mot) {
 		if ($new == 'oui' && $id_groupe) {
 			spip_query("INSERT INTO spip_mots (id_groupe) VALUES ($id_groupe)");
-			$id_mot = mysql_insert_id();
+			$id_mot = spip_insert_id();
 
 			// ajouter le mot a l'article
 			if (settype($ajouter_id_article, 'integer') AND ($ajouter_id_article>0))
@@ -40,7 +40,7 @@ if ($connect_statut == '0minirezo') {
 		$descriptif = addslashes($descriptif);
 		$type = addslashes(corriger_caracteres($type));
 		$result = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'");
-		if ($row = mysql_fetch_array($result))
+		if ($row = spip_fetch_array($result))
 			$type = addslashes(corriger_caracteres($row['titre']));
 
 		$query = "UPDATE spip_mots SET titre=\"$titre_mot\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe WHERE id_mot=$id_mot";
@@ -70,7 +70,7 @@ if ($redirect_ok == 'oui' && $redirect) {
 $query = "SELECT * FROM spip_mots WHERE id_mot='$id_mot'";
 $result = spip_query($query);
 
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_mot = $row['id_mot'];
 	$titre_mot = $row['titre'];
 	$descriptif = $row['descriptif'];
@@ -228,12 +228,12 @@ if ($connect_statut =="0minirezo"){
 	// dans le groupe...
 	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
 	$result = spip_query($query_groupes);
-	if (mysql_num_rows($result)>1) {
+	if (spip_num_rows($result)>1) {
 		debut_cadre_relief("groupe-mot-24.gif");
 		echo  "Dans le groupe :</label>\n";
 		echo aide ("motsgroupes");
 		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
-		while ($row_groupes = mysql_fetch_array($result)){
+		while ($row_groupes = spip_fetch_array($result)){
 			$groupe = $row_groupes['id_groupe'];
 			$titre_groupe = entites_html($row_groupes['titre']);
 			echo  "<OPTION".mySel($groupe, $id_groupe).">$titre_groupe</OPTION>\n";
@@ -241,11 +241,11 @@ if ($connect_statut =="0minirezo"){
 		echo  "</SELECT>";
 		fin_cadre_relief();
 	} else {
-		$row_groupes = mysql_fetch_array($result);
+		$row_groupes = spip_fetch_array($result);
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
 			spip_query("INSERT INTO spip_groupes_mots (titre) VALUES ('Mots sans groupe...')");
-			$row_groupes['id_groupe'] = mysql_insert_id();
+			$row_groupes['id_groupe'] = spip_insert_id();
 		}
 		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
 	}

@@ -19,7 +19,7 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 } else {
 	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'";
 	$result_groupes = spip_query($query_groupes);
-	while($row = mysql_fetch_array($result_groupes)) {
+	while($row = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row['id_groupe'];
 		$type = entites_html($row['titre']);
 		$ancien_type = $type;

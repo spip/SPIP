@@ -541,7 +541,7 @@ function maj_base() {
 	//
 	$version_installee = 0.0;
 	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
-	if ($result) if ($row = mysql_fetch_array($result)) $version_installee = (double) $row['valeur'];
+	if ($result) if ($row = spip_fetch_array($result)) $version_installee = (double) $row['valeur'];
 
 	//
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit d'une nouvelle installation
@@ -586,14 +586,14 @@ function maj_base() {
 	
 		$query = "SELECT DISTINCT id_article FROM spip_forum WHERE id_article!=0 AND id_parent=0";
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			unset($forums_article);
 			$id_article = $row['id_article'];
 			$query2 = "SELECT id_forum FROM spip_forum WHERE id_article=$id_article";
 			for (;;) {
 				$result2 = spip_query($query2);
 				unset($forums);
-				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_article[] = $forums;
@@ -606,14 +606,14 @@ function maj_base() {
 	
 		$query = "SELECT DISTINCT id_breve FROM spip_forum WHERE id_breve!=0 AND id_parent=0";
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			unset($forums_breve);
 			$id_breve = $row['id_breve'];
 			$query2 = "SELECT id_forum FROM spip_forum WHERE id_breve=$id_breve";
 			for (;;) {
 				$result2 = spip_query($query2);
 				unset($forums);
-				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_breve[] = $forums;
@@ -626,14 +626,14 @@ function maj_base() {
 	
 		$query = "SELECT DISTINCT id_rubrique FROM spip_forum WHERE id_rubrique!=0 AND id_parent=0";
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			unset($forums_rubrique);
 			$id_rubrique = $row['id_rubrique'];
 			$query2 = "SELECT id_forum FROM spip_forum WHERE id_rubrique=$id_rubrique";
 			for (;;) {
 				$result2 = spip_query($query2);
 				unset($forums);
-				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2['id_forum'];
+				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_rubrique[] = $forums;
@@ -655,7 +655,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_auteurs ADD htpass tinyblob NOT NULL");
 		$query = "SELECT id_auteur, pass FROM spip_auteurs WHERE pass!=''";
 		$result = spip_query($query);
-		while (list($id_auteur, $pass) = mysql_fetch_array($result)) {
+		while (list($id_auteur, $pass) = spip_fetch_array($result)) {
 			$htpass = generer_htpass($pass);
 			$pass = md5($pass);
 			spip_query("UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=$id_auteur");
@@ -714,7 +714,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_messages ADD id_auteur bigint(21) NOT NULL");
 		spip_query("ALTER TABLE spip_messages ADD INDEX id_auteur (id_auteur)");
 		$result = spip_query("SELECT id_auteur, id_message FROM spip_auteurs_messages WHERE statut='de'");
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
 			$id_message = $row['id_message'];
 			spip_query("UPDATE spip_messages SET id_auteur=$id_auteur WHERE id_message=$id_message");
@@ -791,7 +791,7 @@ function maj_base() {
 		spip_query("UPDATE spip_mots SET type='Mots sans groupe...' WHERE type=''");
 
 		$result = spip_query("SELECT * FROM spip_mots GROUP BY type");
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 				$type = addslashes($row['type']);
 				spip_query("INSERT INTO spip_groupes_mots 
 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
@@ -804,7 +804,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_mots ADD id_groupe bigint(21) NOT NULL");
 	
 		$result = spip_query("SELECT * FROM spip_groupes_mots");
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 				$id_groupe = addslashes($row['id_groupe']);
 				$type = addslashes($row['titre']);
 				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type=\"$type\"");
@@ -818,7 +818,7 @@ function maj_base() {
 
 		$types = array('jpg' => 1, 'png' => 2, 'gif' => 3);
 
-		while ($row = @mysql_fetch_array($result)) {
+		while ($row = @spip_fetch_array($result)) {
 			$id_article = $row['id_article'];
 			$images = $row['images'];
 			$images = explode(",", $images);
@@ -836,7 +836,7 @@ function maj_base() {
 				$taille = @filesize("../$fichier");
 				spip_query("INSERT INTO spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ".
 					"('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
-				$id_document = mysql_insert_id();
+				$id_document = spip_insert_id();
 				if ($id_document > 0) {
 					spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
 					$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
@@ -884,7 +884,7 @@ function maj_base() {
 	if ($version_installee < 1.418) {
 		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 0,1";
 		$result = spip_query($query);
-		if ($webmaster = mysql_fetch_object($result)) {
+		if ($webmaster = spip_fetch_object($result)) {
 			include_ecrire("inc_meta.php3");
 			ecrire_meta('email_webmaster', $webmaster->email);
 			ecrire_metas();
@@ -981,15 +981,15 @@ function maj_base() {
 
 	if ($version_installee < 1.459) {
 		$result = spip_query("SELECT type FROM spip_mots GROUP BY type");
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$type = addslashes($row['type']);
 			$res = spip_query("SELECT * FROM spip_groupes_mots
 				WHERE titre='$type'");
-			if (mysql_num_rows($res) == 0) {
+			if (spip_num_rows($res) == 0) {
 				spip_query("INSERT IGNORE INTO spip_groupes_mots 
 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
 					VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
-				if ($id_groupe = mysql_insert_id()) 
+				if ($id_groupe = spip_insert_id()) 
 					spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
 			}
 		}
@@ -1001,7 +1001,7 @@ function maj_base() {
 		// dans la precedente version du paragraphe de maj 1.459
 		// et supprimer ceux-ci
 		$result = spip_query("SELECT * FROM spip_groupes_mots ORDER BY id_groupe");
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$titre = addslashes($row['titre']);
 			if (! $vu[$titre] ) {
 				$vu[$titre] = true;
@@ -1026,7 +1026,7 @@ function maj_base() {
 	// l'upgrade < 1.462 ci-dessus etait fausse, d'ou correctif
 	if (($version_installee < 1.464) AND ($version_installee >= 1.462)) {
 		$res = spip_query("SELECT id_type, extension FROM spip_types_documents WHERE id_type NOT IN (1,2,3)");
-		while ($row = mysql_fetch_array($res)) {
+		while ($row = spip_fetch_array($res)) {
 			$extension = $row['extension'];
 			$id_type = $row['id_type'];
 			spip_query("UPDATE spip_documents SET id_type=$id_type

@@ -112,7 +112,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		$login = addslashes($login);
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
 		$result = spip_query($query);
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
 			$source_auteur = $row['source'];
 			$alea_actuel = $row['alea_actuel'];

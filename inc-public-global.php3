@@ -106,7 +106,7 @@ if (!$use_cache) {
 	if ($id_article) {
 		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			$chapo = $row['chapo'];
 		}
 		if (substr($chapo, 0, 1) == '=') {
@@ -261,7 +261,7 @@ if ($use_cache && file_exists('CACHE/.purge2')) {
 		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
 		$result = spip_query($query);
 		unset($fichiers);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
 			if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
 		}

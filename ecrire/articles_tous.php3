@@ -88,7 +88,7 @@ function enfants($id_parent, $decalage = 0) {
 	$query = "SELECT id_rubrique, titre, statut, date FROM spip_rubriques WHERE id_parent=$id_parent ORDER BY titre";
 	$result = spip_query($query);
 
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
 		$date = affdate($row['date']);
@@ -146,7 +146,7 @@ function enfants($id_parent, $decalage = 0) {
 		if (!$id_parent) echo "<P>";
 		echo "\n\n";
 	}
-	mysql_free_result($result);
+	spip_free_result($result);
 }
 
 

@@ -207,23 +207,23 @@ if (!$adresse_site) {
 
 function tester_rubrique_vide($id_rubrique) {
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 0,1";
-	list($n) = mysql_fetch_row(spip_query($query));
+	list($n) = spip_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 0,1";
-	list($n) = mysql_fetch_row(spip_query($query));
+	list($n) = spip_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0,1";
-	list($n) = mysql_fetch_row(spip_query($query));
+	list($n) = spip_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0,1";
-	list($n) = mysql_fetch_row(spip_query($query));
+	list($n) = spip_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='$id_rubrique' LIMIT 0,1";
-	list($n) = mysql_fetch_row(spip_query($query));
+	list($n) = spip_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	return true;
@@ -249,7 +249,7 @@ function changer_statut_forum($id_forum, $statut) {
 
 	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_forum";
 	$result = spip_query($query);
- 	if ($row = mysql_fetch_array($result)) {
+ 	if ($row = spip_fetch_array($result)) {
 		$id_parent = $row['id_parent'];
 		$id_rubrique = $row['id_rubrique'];
 		$id_article = $row['id_article'];
@@ -268,7 +268,7 @@ function changer_statut_forum($id_forum, $statut) {
 		$query = "SELECT fichier FROM spip_forum_cache WHERE ".join(' OR ', $where);
 		$result = spip_query($query);
 		unset($fichiers);
-		if ($result) while ($row = mysql_fetch_array($result)) {
+		if ($result) while ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
 			@unlink("../CACHE/$fichier");
 			$fichiers[] = $fichier;
@@ -296,7 +296,7 @@ function calculer_secteurs() {
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0";
 	$result = spip_query($query);
 
-	while ($row = mysql_fetch_array($result)) $secteurs[] = $row['id_rubrique'];
+	while ($row = spip_fetch_array($result)) $secteurs[] = $row['id_rubrique'];
 	if (!$secteurs) return;
 
 	while (list(, $id_secteur) = each($secteurs)) {
@@ -307,7 +307,7 @@ function calculer_secteurs() {
 			$result = spip_query($query);
 
 			unset($rubriques);
-			while ($row = mysql_fetch_array($result)) $rubriques[] = $row['id_rubrique'];
+			while ($row = spip_fetch_array($result)) $rubriques[] = $row['id_rubrique'];
 			if ($rubriques) {
 				$rubriques = join(',', $rubriques);
 				$rubriques_totales .= ",".$rubriques;
@@ -330,13 +330,13 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 	if ($id_rubrique) {
 		$query = "SELECT MAX(date_heure) as date_h FROM spip_breves WHERE id_rubrique=$id_rubrique AND statut='publie'";
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$date_breves = $row['date_h'];
 			if ($date_breves > $date_rubrique) $date_rubrique = $date_breves;
 		}
 		$query = "SELECT MAX(date) AS date_h FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut='publie'";
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$date_syndic = $row['date_h'];
 			if ($date_syndic > $date_rubrique) $date_rubrique = $date_syndic;
 		}
@@ -350,7 +350,7 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 				"WHERE id_rubrique=$id_rubrique AND statut = 'publie' AND date < NOW()";
 		}
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$date_article = $row['date_h'];
 			if ($date_article > $date_rubrique) $date_rubrique = $date_article;
 		}
@@ -358,7 +358,7 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_rubrique";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$date_rubrique = calculer_dates_rubriques($row['id_rubrique'], $date_rubrique);
 	}
 	if ($id_rubrique) {
@@ -379,22 +379,22 @@ function calculer_rubriques_publiques() {
 		$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut = 'publie' AND date < NOW()";
 	}
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 	$query = "SELECT DISTINCT id_rubrique FROM spip_breves WHERE statut = 'publie'";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 	$query = "SELECT DISTINCT id_rubrique FROM spip_syndic WHERE statut = 'publie'";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 	$query = "SELECT DISTINCT id_rubrique FROM spip_documents_rubriques";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 
@@ -405,7 +405,7 @@ function calculer_rubriques_publiques() {
 		$query = "SELECT DISTINCT id_parent FROM spip_rubriques WHERE (id_rubrique IN ($rubriques)) AND (id_parent NOT IN ($rubriques_publiques))";
 		$result = spip_query($query);
 		unset($rubriques);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			if ($row['id_parent']) $rubriques[] = $row['id_parent'];
 		}
 	}

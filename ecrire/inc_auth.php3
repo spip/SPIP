@@ -18,7 +18,7 @@ function recuperer_sous_rubriques($id_parent) {
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_parent";
  	$result = spip_query($query);
 
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 		$connect_id_rubrique[$id_rubrique] = $id_rubrique;
 		recuperer_sous_rubriques($id_rubrique);
@@ -57,7 +57,7 @@ function auth() {
 	//
 	if (!$GLOBALS['db_ok']) {
 		echo "<P><H4>Attention&nbsp;: un probl&egrave;me technique (serveur MySQL) emp&ecirc;che l'acc&egrave;s &agrave; cette partie du site.\nMerci de votre compr&eacute;hension.</H4><P><P>\n".
-		"<tt>".mysql_errno()." ".mysql_error()."</tt>";
+		"<tt>".spip_sql_errno()." ".spip_sql_error()."</tt>";
 		return false;
 	}
 
@@ -137,7 +137,7 @@ function auth() {
 	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
 	$result = @spip_query($query);
 	
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$connect_id_auteur = $row['id_auteur'];
 		$connect_nom = $row['nom'];
 		$connect_bio = $row['bio'];
@@ -180,14 +180,14 @@ function auth() {
 			$query_admin = "SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'";
 			$result_admin = spip_query($query_admin);
 			
-			$connect_toutes_rubriques = (@mysql_num_rows($result_admin) == 0);
+			$connect_toutes_rubriques = (@spip_num_rows($result_admin) == 0);
 			if ($connect_toutes_rubriques) {
 				$connect_id_rubrique = array();
 			}
 			else {
 				for (;;) {
 					$r = '';
-					while ($row_admin = mysql_fetch_array($result_admin)) {
+					while ($row_admin = spip_fetch_array($result_admin)) {
 						$id_rubrique = $row_admin['id_rubrique'];
 						$r[] = $id_rubrique;
 						$connect_id_rubrique[$id_rubrique] = $id_rubrique;

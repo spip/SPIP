@@ -17,7 +17,7 @@ if ($controle_sans == 'oui') {
 	gros_titre("Suivi des forums");
 	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte=''";
 	$result_forum = spip_query($query_forum);
-	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
+	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
 	if ($total > 0) barre_onglets("suivi_forum", "tous");
 }
 
@@ -46,7 +46,7 @@ if ($connect_statut == '0minirezo') {
 
 	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
 	$result_petition = spip_query($query_petition);
-	if ($row = mysql_fetch_array($result_petition)){
+	if ($row = spip_fetch_array($result_petition)){
 		$nombre_petition = $row['cnt'];
 	}
 	if ($nombre_petition > 0) {
@@ -72,7 +72,7 @@ function forum_parent($id_forum) {
 	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=\"$id_forum\" AND statut != 'redac'";
  	$result_forum = spip_query($query_forum);
 
- 	while($row=mysql_fetch_array($result_forum)){
+ 	while($row=spip_fetch_array($result_forum)){
 		$id_forum=$row['id_forum'];
 		$forum_id_parent=$row['id_parent'];
 		$forum_id_rubrique=$row['id_rubrique'];
@@ -94,7 +94,7 @@ function forum_parent($id_forum) {
 			$query = "SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_article'";
 		 	$result = spip_query($query);
 
-			while($row=mysql_fetch_array($result)) {
+			while($row=spip_fetch_array($result)) {
 				$id_article = $row['id_article'];
 				$titre = $row['titre'];
 				$statut = $row['statut'];
@@ -112,7 +112,7 @@ function forum_parent($id_forum) {
 			$query2 = "SELECT * FROM spip_rubriques WHERE id_rubrique=\"$forum_id_rubrique\"";
 			$result2 = spip_query($query2);
 
-			while($row = mysql_fetch_array($result2)){
+			while($row = spip_fetch_array($result2)){
 				$id_rubrique = $row['id_rubrique'];
 				$titre = $row['titre'];
 			}
@@ -122,7 +122,7 @@ function forum_parent($id_forum) {
 			$query2 = "SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\"";
 			$result2 = spip_query($query2);
 
-			while($row = mysql_fetch_array($result2)){
+			while($row = spip_fetch_array($result2)){
 				$id_syndic = $row['id_syndic'];
 				$titre = $row['nom_site'];
 				$statut = $row['statut'];
@@ -133,7 +133,7 @@ function forum_parent($id_forum) {
 			$query2 = "SELECT * FROM spip_breves WHERE id_breve=\"$forum_id_breve\"";
 		 	$result2 = spip_query($query2);
 
-		 	while($row = mysql_fetch_array($result2)){
+		 	while($row = spip_fetch_array($result2)){
 				$id_breve = $row['id_breve'];
 				$date_heure = $row['date_heure'];
 				$titre = $row['titre'];
@@ -175,9 +175,9 @@ function controle_forum($request,$adresse_retour) {
 	
 	$compteur_forum++; 
 
-	$nb_forum[$compteur_forum] = mysql_num_rows($request);
+	$nb_forum[$compteur_forum] = spip_num_rows($request);
 	$i[$compteur_forum] = 1;
- 	while($row=mysql_fetch_array($request)){
+ 	while($row=spip_fetch_array($request)){
 		$id_forum = $row['id_forum'];
 		$forum_id_parent = $row['id_parent'];
 		$forum_id_rubrique = $row['id_rubrique'];
@@ -260,7 +260,7 @@ function controle_forum($request,$adresse_retour) {
 			$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
 			$result_mots = spip_query($query_mots);
 			
-			while ($row_mots = mysql_fetch_array($result_mots)) {
+			while ($row_mots = spip_fetch_array($result_mots)) {
 				$id_mot = $row_mots['id_mot'];
 				$titre_mot = propre($row_mots['titre']);
 				$type_mot = propre($row_mots['type']);
@@ -298,7 +298,7 @@ if ($connect_statut == "0minirezo") {
 
 	$result_forum = spip_query($query_forum);
 	$total = 0;
-	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
+	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
 
 	if ($total > 10) {
 		echo "<p>";

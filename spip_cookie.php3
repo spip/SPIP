@@ -84,7 +84,7 @@ if ($essai_login == "oui") {
 	else if ($session_password) { // mot passe en clair
 		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
 		$result = spip_query($query);
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$md5pass = md5($row['alea_actuel'] . $session_password);
 			$md5next = md5($row['alea_futur'] . $session_password);
 		}
@@ -117,7 +117,7 @@ if ($essai_login == "oui") {
 
 		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."'";
 		$result = spip_query($query);
-		if ($row_auteur = mysql_fetch_array($result)) 
+		if ($row_auteur = spip_fetch_array($result)) 
 			$cookie_session = creer_cookie_session($row_auteur);
 
 		if (ereg("ecrire/", $cible->getUrl())) {

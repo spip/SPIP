@@ -12,7 +12,7 @@ function lire_metas() {
 	$meta_maj = '';
 	$query = 'SELECT * FROM spip_meta';
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$nom = $row['nom'];
 		$meta[$nom] = $row['valeur'];
 		$meta_maj[$nom] = $row['maj'];

@@ -20,7 +20,7 @@ function premiere_rubrique(){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 0,1";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 	}
 	return $my_rubrique;
@@ -40,7 +40,7 @@ function enfant($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
 		$statut_rubrique=$row['statut'];
@@ -80,7 +80,7 @@ $proposer_sites = lire_meta("proposer_sites");
 
 $query = "SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic'";
 $result = spip_query($query);
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_syndic = $row["id_syndic"];
 	$id_rubrique = $row["id_rubrique"];
 	$nom_site = stripslashes($row["nom_site"]);
@@ -186,7 +186,7 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 	else {
 		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 		$result=spip_query($query);
-		while($row=mysql_fetch_array($result)){
+		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}
 		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";

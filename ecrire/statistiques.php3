@@ -34,13 +34,13 @@ function enfants($id_parent){
 	$result = spip_query($query);
 	$nombre = 0;
 
-	while($row = mysql_fetch_array($result)) {
+	while($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
 		$query2 = "SELECT SUM(visites) AS cnt FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
 		$result2 = spip_query($query2);
 		$visites = 0;
-		if ($row2 = mysql_fetch_array($result2)) {
+		if ($row2 = spip_fetch_array($result2)) {
 			$visites = $row2['cnt'];
 		}
 		$nombre_abs[$id_rubrique] = $visites;
@@ -64,7 +64,7 @@ function enfants_aff($id_parent,$decalage) {
 	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=\"$id_parent\" ORDER BY titre";
 	$result=spip_query($query);
 
-	while($row = mysql_fetch_array($result)){
+	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];
 		$titre = typo($row['titre']);
 
@@ -117,17 +117,17 @@ function enfants_aff($id_parent,$decalage) {
 
 
 $query = "SELECT count(*) AS cnt FROM spip_articles where statut='publie'";
-$result = mysql_fetch_array(spip_query($query));
+$result = spip_fetch_array(spip_query($query));
 $nb_art = $result['cnt'];
 
 if ($nb_art){
 	$cesite = "<LI> $nb_art articles";
 	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='publie'";
-	$result = mysql_fetch_array(spip_query($query));
+	$result = spip_fetch_array(spip_query($query));
 	$nb_breves = $result['cnt'];
 	if ($nb_breves) $cesite .= "<LI> $nb_breves br&egrave;ves";
 	$query = "SELECT count(*) AS cnt FROM spip_forum where statut='publie'";
-	$result = mysql_fetch_array(spip_query($query));
+	$result = spip_fetch_array(spip_query($query));
 	$nb_forum = $result['cnt'];
 	if ($nb_forum) $cesite .= "<LI> $nb_forum contributions de forum";
 	echo "<P><B>Ce site contient:<UL> $cesite.</UL></B>";
@@ -142,7 +142,7 @@ $nombre_vis[0] = 0;
 $query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=\"0\"";
 $result = spip_query($query);
 
-while($row = mysql_fetch_array($result)) {
+while($row = spip_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
 	if ($nombre_vis[$id_rubrique]>$total_vis) $total_vis=$nombre_vis[$id_rubrique];
 }

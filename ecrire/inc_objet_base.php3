@@ -180,7 +180,7 @@ class _ObjectFactory extends _Abstract {
 		$result = spip_query($query);
 		// If multiple results expected, create a result array
 		if ($multiple) $r = array();
-		if ($result) while ($row = mysql_fetch_array($result)) {
+		if ($result) while ($row = spip_fetch_array($result)) {
 			$id = $row[$this->sql_id];
 			$g = $this->create_object_cache_instance($id);
 			// Read fast vars

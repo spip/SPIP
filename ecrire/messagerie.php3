@@ -61,9 +61,9 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 		echo $tranches;
 
 		$result_message = spip_query($query_message);
-		$num_rows = mysql_num_rows($result_message);
+		$num_rows = spip_num_rows($result_message);
 
-		while($row = mysql_fetch_array($result_message)) {
+		while($row = spip_fetch_array($result_message)) {
 			$vals = '';
 
 			$id_message = $row['id_message'];
@@ -109,7 +109,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				$query_auteurs = "SELECT auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur";
 				$result_auteurs = spip_query($query_auteurs);
 				$auteurs = '';
-				while ($row_auteurs = mysql_fetch_array($result_auteurs)) {
+				while ($row_auteurs = spip_fetch_array($result_auteurs)) {
 					$auteurs[] = typo($row_auteurs['nom']);
 				}
 
@@ -143,7 +143,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 		afficher_liste($largeurs, $table, $styles);
 
 		echo "</TABLE></TD></TR></TABLE>";
-		mysql_free_result($result_message);
+		spip_free_result($result_message);
 		if ($important) fin_cadre_relief();
 	}
 }

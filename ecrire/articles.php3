@@ -19,7 +19,7 @@ if ($id_article==0) {
 		if ($titre=='') $titre = "Sans titre";
 		$forums_publics = substr(lire_meta('forums_publics'),0,3);
 		spip_query("INSERT INTO spip_articles (id_rubrique, statut, date, accepter_forum) VALUES ($id_rubrique, 'prepa', NOW(), '$forums_publics')");
-		$id_article = mysql_insert_id();
+		$id_article = spip_insert_id();
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
 		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
 	} else {
@@ -41,7 +41,7 @@ $id_doublons['documents'] = "0";
 
 $query = "SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article";
 $result = spip_query($query);
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$statut_article = $row['statut'];
 	$titre_article = $row['titre'];
 	$rubrique_article = $row['id_rubrique'];
@@ -53,7 +53,7 @@ else {
 $query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 $result_auteur = spip_query($query);
 
-$flag_auteur = (mysql_num_rows($result_auteur) > 0);
+$flag_auteur = (spip_num_rows($result_auteur) > 0);
 $flag_editable = (acces_rubrique($rubrique_article)
 	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
@@ -147,7 +147,7 @@ if ($jour_redac && $flag_editable) {
 $query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
 $result = spip_query($query);
 
-while($row=mysql_fetch_array($result)){
+while($row=spip_fetch_array($result)){
 	$ze_doc[]=$row['id_document'];
 }
 
@@ -230,7 +230,7 @@ function get_forums_publics($id_article=0) {
 	if ($id_article) {
 		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
 		$res = spip_query($query);
-		if ($obj = mysql_fetch_object($res))
+		if ($obj = spip_fetch_object($res))
 			$forums_publics = $obj->accepter_forum;
 	} else { // dans ce contexte, inutile
 		$forums_publics = substr(lire_meta("forums_publics"),0,3);
@@ -250,7 +250,7 @@ function get_forums_publics($id_article=0) {
 $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
 
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
 	$surtitre = $row["surtitre"];
 	$titre = $row["titre"];
@@ -316,7 +316,7 @@ if ($statut_article == "publie") {
 	if ($post_dates == "non") {
 		$query = "SELECT id_article FROM spip_articles WHERE id_article=$id_article AND date<=NOW()";
 		$result = spip_query($query);
-		if (!mysql_num_rows($result)) {
+		if (!spip_num_rows($result)) {
 			$voir_en_ligne = false;
 		}
 	}
@@ -461,7 +461,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	
 	if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
 		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')";
-		if ($row = mysql_fetch_row(spip_query($req))) {
+		if ($row = spip_fetch_row(spip_query($req))) {
 			$nb_forums = $row[0];
 			if ($nb_forums) {
 				icone_horizontale("Suivi du forum public&nbsp;: $nb_forums&nbsp;contribution(s)", "articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
@@ -499,9 +499,9 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 
 	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
 	$result_petition = spip_query($query_petition);
-	$petition = (mysql_num_rows($result_petition) > 0);
+	$petition = (spip_num_rows($result_petition) > 0);
 
-	while ($row = mysql_fetch_array($result_petition)) {
+	while ($row = spip_fetch_array($result_petition)) {
 		$id_rubrique=$row["id_article"];
 		$email_unique=$row["email_unique"];
 		$site_obli=$row["site_obli"];
@@ -541,7 +541,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo "<input type='radio' name='change_petition' value='on' id='petitionon' checked>";
 		echo "<B><label for='petitionon'>P&eacute;tition activ&eacute;e</label></B>";
 		$query_signatures = "SELECT COUNT(*) AS nb FROM spip_signatures WHERE id_article=$id_article";
-		$result = mysql_fetch_array(spip_query($query_signatures));
+		$result = spip_fetch_array(spip_query($query_signatures));
 		if ($result['nb'] > 0) {
 			echo "<p><font size=1><a href='controle_petition.php3?id_article=$id_article'>".$result['nb']." signatures</a></font>\n";
 		}
@@ -788,7 +788,7 @@ if ($flag_editable) {
 	$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
 	$result = spip_query($query);
 	
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$auteur_modif = $row["auteur_modif"];
 		$modification = $row["modification"];
 		$maintenant = $row["maintenant"];
@@ -798,7 +798,7 @@ if ($flag_editable) {
 		if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
 			$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
 			$result_auteur = spip_query($query_auteur);
-			while ($row_auteur = mysql_fetch_array($result_auteur)) {
+			while ($row_auteur = spip_fetch_array($result_auteur)) {
 				$nom_auteur_modif = $row_auteur["nom"];
 			}
 			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
@@ -926,7 +926,7 @@ if ($creer_auteur AND $connect_statut=='0minirezo'){
 	$query_creer = "INSERT INTO spip_auteurs (nom, statut) VALUES (\"$creer_auteur\", '1comite')";
 	$result_creer = spip_query($query_creer);
 	
-	$nouv_auteur = mysql_insert_id();
+	$nouv_auteur = spip_insert_id();
 	$ajout_auteur = true;
 }
 
@@ -941,7 +941,7 @@ if ($cherche_auteur) {
 	$result = spip_query($query);
 	unset($table_auteurs);
 	unset($table_ids);
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$table_auteurs[] = $row["nom"];
 		$table_ids[] = $row["id_auteur"];
 	}
@@ -957,7 +957,7 @@ if ($cherche_auteur) {
 		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
 		$result = spip_query($query);
 		echo "<UL>";
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
 			$nom_auteur = $row['nom'];
 			$email_auteur = $row['email'];
@@ -978,7 +978,7 @@ if ($cherche_auteur) {
 			$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
 			$result = spip_query($query);
 			echo "<UL>";
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
@@ -1038,11 +1038,11 @@ $query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien "
 	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
 $result = spip_query($query);
 
-if (mysql_num_rows($result)) {
+if (spip_num_rows($result)) {
 	$ifond = 0;
 
 	echo "\n<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''>\n";
-	while ($row = mysql_fetch_array($result)) {
+	while ($row = spip_fetch_array($result)) {
 		$id_auteur = $row["id_auteur"];
 		$nom_auteur = $row["nom"];
 		$email_auteur = $row["email"];
@@ -1062,7 +1062,7 @@ if (mysql_num_rows($result)) {
 			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
 			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
 		$result2 = spip_query($query2);
-		if ($result2) list($nombre_articles) = mysql_fetch_row($result2);
+		if ($result2) list($nombre_articles) = spip_fetch_row($result2);
 		else $nombre_articles = 0;
 
 		$ifond = $ifond ^ 1;
@@ -1144,13 +1144,13 @@ if ($flag_editable AND $options == 'avancees') {
 	$query .= "statut<>'5poubelle' AND statut<>'nouveau' ORDER BY statut, nom";
 	$result = spip_query($query);
 
-	if (mysql_num_rows($result) > 0) {
+	if (spip_num_rows($result) > 0) {
 
 		echo "<FORM ACTION='articles.php3' METHOD='post'>";
 		echo "<DIV align=right><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>AJOUTER UN AUTEUR : &nbsp; </B></FONT>\n";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-		if (mysql_num_rows($result) > 80 AND $flag_mots_ressemblants) {
+		if (spip_num_rows($result) > 80 AND $flag_mots_ressemblants) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
 			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo'>";
 		}
@@ -1160,7 +1160,7 @@ if ($flag_editable AND $options == 'avancees') {
 			$group = false;
 			$group2 = false;
 	
-			while($row=mysql_fetch_array($result)) {
+			while($row=spip_fetch_array($result)) {
 				$id_auteur = $row["id_auteur"];
 				$nom = $row["nom"];
 				$email = $row["email"];
@@ -1341,7 +1341,7 @@ echo "\n\n<div align=right>";
 if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
 	$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
 	$result_auteur = spip_query($query_auteur);
-	while ($row_auteur = mysql_fetch_array($result_auteur)) {
+	while ($row_auteur = spip_fetch_array($result_auteur)) {
 		$nom_auteur_modif = $row_auteur["nom"];
 	}
 	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
@@ -1398,7 +1398,7 @@ echo "<P align='left'>";
 $query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";
 $result_forum = spip_query($query_forum);
 $total = 0;
-if ($row = mysql_fetch_array($result_forum)) $total = $row["cnt"];
+if ($row = spip_fetch_array($result_forum)) $total = $row["cnt"];
 
 if (!$debut) $debut = 0;
 $total_afficher = 8;

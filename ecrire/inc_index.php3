@@ -50,7 +50,7 @@ function deja_indexe($type, $id_objet) {
 	$table_index = 'spip_index_'.$type.'s';
 	$col_id = 'id_'.$type;
 	$query = "SELECT COUNT(*) FROM $table_index WHERE $col_id=$id_objet";
-	list($n) = @mysql_fetch_array(@spip_query($query));
+	list($n) = @spip_fetch_array(@spip_query($query));
 	return ($n > 0);
 }
 
@@ -74,7 +74,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	case 'article':
 		$query = "SELECT * FROM spip_articles WHERE id_article=$id_objet";
 		$result = spip_query($query);
-		while ($row = mysql_fetch_array($result)) {
+		while ($row = spip_fetch_array($result)) {
 			indexer_chaine($row['titre'], 8);
 			indexer_chaine($row['soustitre'], 5);
 			indexer_chaine($row['surtitre'], 5);
@@ -88,14 +88,14 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	
 		$query2 = "SELECT mots.* FROM spip_mots AS mots, spip_mots_articles AS lien WHERE lien.id_article=$id_objet AND mots.id_mot=lien.id_mot";
 		$result2 = spip_query($query2);
-		while ($row = mysql_fetch_array($result2)) {
+		while ($row = spip_fetch_array($result2)) {
 			indexer_chaine($row['titre'], 12);
 			indexer_chaine($row['descriptif'], 3);
 		}
 	
 		$query3 = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_objet AND auteurs.id_auteur=lien.id_auteur";
 		$result3 = spip_query($query3);
-		while ($row = mysql_fetch_array($result3)) {
+		while ($row = spip_fetch_array($result3)) {
 			indexer_chaine($row['nom'], 10);
 		}
 		break;
@@ -103,7 +103,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	case 'breve':
 		$query = "SELECT * FROM spip_breves WHERE id_breve=$id_objet";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			indexer_chaine($row['titre'], 8);
 			if ($full) {
 				indexer_chaine($row['texte'], 2);
@@ -114,7 +114,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	case 'rubrique':
 		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=$id_objet";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			indexer_chaine($row['titre'], 8);
 			indexer_chaine($row['descriptif'], 5);
 			if ($full) {
@@ -126,7 +126,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	case 'auteur':	
 		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_objet";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)){
+		while($row = spip_fetch_array($result)){
 			indexer_chaine($row['nom'], 5);
 			if ($full) {
 				indexer_chaine($row['bio'], 1);
@@ -137,7 +137,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	case 'mot':
 		$query = "SELECT * FROM spip_mots WHERE id_mot=$id_objet";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)){
+		while($row = spip_fetch_array($result)){
 			indexer_chaine($row['titre'], 8);
 			indexer_chaine($row['descriptif'], 5);
 			if ($full) {
@@ -149,7 +149,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	case 'syndic':
 		$query = "SELECT * FROM spip_syndic WHERE id_syndic=$id_objet";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			indexer_chaine($row['nom_site'], 50);
 			indexer_chaine($row['descriptif'], 30);
 
@@ -158,7 +158,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 				if ($row['syndication'] = "oui") {
 					$query_syndic = "SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet ORDER BY date DESC LIMIT 0,100";
 					$result_syndic = spip_query($query_syndic);
-					while ($row_syndic = mysql_fetch_array($result_syndic)) {
+					while ($row_syndic = spip_fetch_array($result_syndic)) {
 						indexer_chaine($row_syndic['titre'], 5);
 					}
 				}
@@ -217,7 +217,7 @@ function executer_une_indexation_syndic() {
 		$query = "SELECT id_syndic FROM spip_syndic WHERE statut='publie' ".
 			"AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 0,1";
 		if ($result = spip_query($query)) {
-			while ($row = mysql_fetch_array($result)) {
+			while ($row = spip_fetch_array($result)) {
 				$id_syndic = $row['id_syndic'];
 				indexer_syndic($id_syndic);
 				spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
@@ -247,7 +247,7 @@ function creer_liste_indexation() {
 		}
 
 		$res = spip_query("SELECT id_$element FROM $table $statut");
-		while ($row = mysql_fetch_array($res))
+		while ($row = spip_fetch_array($res))
 			$liste .= "$element ".$row["id_$element"]."\n";
 	}
 
@@ -287,7 +287,7 @@ function requete_hash ($rech) {
 	if ($dico) {
 		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 		$result2 = spip_query($query2);
-		while ($row2 = mysql_fetch_array($result2)) 
+		while ($row2 = spip_fetch_array($result2)) 
 			$h[] = "0x".$row2["hx"];
 	}
 	if ($h)

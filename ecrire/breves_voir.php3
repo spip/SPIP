@@ -59,7 +59,7 @@ function afficher_jour($jour){
 if (($id_breve == 0) AND ($new == "oui")) {
 	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut) VALUES ('Nouvelle breve', NOW(), '$id_rubrique', 'refuse')";
 	$result=spip_query($query);
-	$id_breve=mysql_insert_id();
+	$id_breve=spip_insert_id();
 }
 
 
@@ -92,7 +92,7 @@ if ($jour AND $connect_statut == '0minirezo') {
 $query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 $result = spip_query($query);
 
-while ($row = mysql_fetch_array($result)) {
+while ($row = spip_fetch_array($result)) {
 	$id_breve=$row['id_breve'];
 	$date_heure=$row['date_heure'];
 	$titre_breve=$row['titre'];
@@ -192,7 +192,7 @@ function enfant($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
-	while($row=mysql_fetch_array($result)){
+	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=$row['titre'];
 		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$titre\n";

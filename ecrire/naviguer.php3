@@ -15,7 +15,7 @@ function enfant($collection){
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
 	$result2 = spip_query($query2);
 	
-	while($row=mysql_fetch_array($result2)){
+	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
@@ -51,9 +51,9 @@ function sous_enfant($collection2){
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
 	$result3 = spip_query($query3);
 
-	if (mysql_num_rows($result3) > 0){
+	if (spip_num_rows($result3) > 0){
 		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1 face='arial,helvetica,sans-serif'><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
-		while($row=mysql_fetch_array($result3)){
+		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
@@ -128,13 +128,13 @@ if ($titre) {
 	if ($new == 'oui' AND !$coll) {
 		$query = "INSERT INTO spip_rubriques (titre, id_parent) VALUES ('Nouvelle rubrique', '$id_parent')";
 		$result = spip_query($query);
-		$coll = mysql_insert_id();
+		$coll = spip_insert_id();
 	}
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
 	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$coll\"";
-	$row = mysql_fetch_array(spip_query($query));
+	$row = spip_fetch_array(spip_query($query));
 	if (($row['cnt'] > 0) and !($confirme_deplace == 'oui')) {
 		$id_parent = 0;
 	}
@@ -169,7 +169,7 @@ if ($titre) {
 $query="SELECT * FROM spip_rubriques WHERE id_rubrique='$coll'";
 $result=spip_query($query);
 
-while($row=mysql_fetch_array($result)){
+while($row=spip_fetch_array($result)){
 	$id_rubrique=$row['id_rubrique'];
 	$id_parent=$row['id_parent'];
 	$titre=$row['titre'];
@@ -187,7 +187,7 @@ else
 if ($id_document) {
 	$query_doc = "SELECT * FROM spip_documents_rubriques WHERE id_document=$id_document AND id_rubrique=$coll";
 	$result_doc = spip_query($query_doc);
-	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
+	$flag_document_editable = (spip_num_rows($result_doc) > 0);
 } else {
 	$flag_document_editable = false;
 }
@@ -296,7 +296,7 @@ icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
 echo "<p>";
 
 
-if (mysql_num_rows($result) > 0) {
+if (spip_num_rows($result) > 0) {
 	if ($coll > 0)
 		icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
 

@@ -1271,7 +1271,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$query_auteurs = "SELECT auteurs.nom, auteurs.email FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$i AND auteurs.id_auteur=lien.id_auteur";
 			$result_auteurs = spip_query($query_auteurs);
 			$auteurs = "";
-			while($row_auteur = mysql_fetch_array($result_auteurs)) {
+			while($row_auteur = spip_fetch_array($result_auteurs)) {
 				$nom_auteur = typo($row_auteur["nom"]);
 				$email_auteur = $row_auteur["email"];
 				if ($email_auteur) {
@@ -1466,7 +1466,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$contexte[id_article]";
  		$result_petition = spip_query($query_petition);
 
-		if ($row_petition = mysql_fetch_array($result_petition)) {
+		if ($row_petition = spip_fetch_array($result_petition)) {
 			$'.$nom_var.' = "<"."?php include_local(\"inc-formulaires.php3\"); formulaire_signature($contexte[id_article]); ?".">";
 		}
 		else {
@@ -1505,7 +1505,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		$query_petition = "SELECT id_article FROM spip_petitions WHERE id_article=$contexte[id_article]";
 		$result_petition = spip_query($query_petition);
-		if (mysql_num_rows($result_petition) > 0) $'.$nom_var.' = " ";
+		if (spip_num_rows($result_petition) > 0) $'.$nom_var.' = " ";
 		else $'.$nom_var.' = "";
 		';
 		break;
@@ -1692,7 +1692,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				// sur output decimal 64 bits (a cause du unsigned ?)
 				$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 				$result2 = spip_query($query2);
-				while ($row2 = mysql_fetch_array($result2)) {
+				while ($row2 = spip_fetch_array($result2)) {
 					$h[] = "0x".$row2["hx"];
 				}
 			}
@@ -1777,7 +1777,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 			$query .= " ORDER BY _field LIMIT $deb_class, ".($fin_class - $deb_class);
 			$result = spip_query($query);
 
-			if ($result) while ($row = mysql_fetch_array($result)) {
+			if ($result) while ($row = spip_fetch_array($result)) {
 
 				$boucles[$id_boucle]->row = $row;
 				if ($retour) $retour .= $instance->separateur;
@@ -1842,7 +1842,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$retour .= "<tt><br><br><blink>&lt;BOUCLE'.$id_boucle.'&gt;</blink><br>\n".
 		"<b>Erreur dans la requ&ecirc;te envoy&eacute;e &agrave; MySQL :</b><br>\n".
 		htmlspecialchars($query)."<br>\n<font color=\'red\'><b>&gt; ".
-		mysql_error()."</b></font><br>\n".
+		spip_sql_error()."</b></font><br>\n".
 		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt>\n";
 		$retour .= "<" ."?php
 			if (\$GLOBALS[\'spip_admin\']) {
@@ -1851,7 +1851,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		} ?".">";
 		$retour .= "<br><br>\n"; // debugger les squelettes
 	}
-	$total_boucle = @mysql_num_rows($result);
+	$total_boucle = @spip_num_rows($result);
 	$pile_boucles[$id_instance]->num_rows = $total_boucle;
 	';
 
@@ -1880,7 +1880,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 
 	$texte .= '
-	while ($row = @mysql_fetch_array($result)) {
+	while ($row = @spip_fetch_array($result)) {
 	$compteur_boucle++;
 	';
 
@@ -2012,7 +2012,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$texte .= calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
 
 	//
-	// Fermeture de la boucle mysql_fetch_array et liberation des resultats
+	// Fermeture de la boucle spip_fetch_array et liberation des resultats
 	//
 	
 	if ($flag_parties) {
@@ -2022,7 +2022,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	}
 	$texte .= '
 	}
-	@mysql_free_result($result);
+	@spip_free_result($result);
 ';
 	$texte .= $code_fin;
 	return $texte;

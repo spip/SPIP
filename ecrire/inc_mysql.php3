@@ -52,5 +52,41 @@ function spip_query_debug($query) {
 	return $r;
 }
 
+function spip_fetch_array($r='') {
+	if ($r)
+		return mysql_fetch_array($r);
+}
+
+function spip_fetch_object($r='') {
+	if ($r)
+		return mysql_fetch_object($r);
+}
+
+function spip_fetch_row($r='') {
+	if ($r)
+		return mysql_fetch_row($r);
+}
+
+function spip_sql_error() {
+	return mysql_error();
+}
+
+function spip_sql_errno() {
+	return mysql_errno();
+}
+
+function spip_num_rows($r='') {
+	if ($r)
+		return mysql_num_rows($r);
+}
+
+function spip_free_result($r='') {
+	if ($r)
+		return mysql_free_result($r);
+}
+
+function spip_insert_id() {
+	return mysql_insert_id();
+}
 
 ?>

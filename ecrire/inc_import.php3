@@ -218,7 +218,7 @@ function import_objet_1_2($f, $gz=false) {
 	$table = $tables[$type];
 	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
 	if (! spip_query($query)) {
-		echo "--><br><font color='red'><b>Erreur MySQL ! </b></font>\n<font color='black'><tt>".mysql_error()."</tt></font>\n<!--";
+		echo "--><br><font color='red'><b>Erreur MySQL ! </b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
 

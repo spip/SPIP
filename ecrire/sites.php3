@@ -81,13 +81,13 @@ if ($new == 'oui' AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
 	$query = "INSERT INTO spip_syndic (nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation) ".
 		"VALUES ('Site introuvable', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')";
 	$result = spip_query($query);
-	$id_syndic = mysql_insert_id();
+	$id_syndic = spip_insert_id();
 }
 
 $query = "SELECT statut FROM spip_syndic WHERE id_syndic='$id_syndic'";
 $result = spip_query($query);
 
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$statut = $row["statut"];
 }
 if ($new == 'oui') $statut = 'prop';
@@ -197,7 +197,7 @@ if ($redirect AND $redirect_ok == 'oui') {
 //
 if ($recalcul ==  "oui") {
 	$result = spip_query ("SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic' AND syndication IN ('oui', 'sus', 'off')");
-	if ($result AND mysql_num_rows($result)>0)
+	if ($result AND spip_num_rows($result)>0)
 		$erreur_syndic = syndic_a_jour ($id_syndic);
 }
 
@@ -211,7 +211,7 @@ calculer_droits();
 $query = "SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic'";
 $result = spip_query($query);
 
-if ($row = mysql_fetch_array($result)) {
+if ($row = spip_fetch_array($result)) {
 	$id_syndic = $row["id_syndic"];
 	$id_rubrique = $row["id_rubrique"];
 	$nom_site = stripslashes($row["nom_site"]);

@@ -77,7 +77,7 @@ function cherche_image($id_objet, $type_objet) {
 function image_document($id_document){
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
+	if ($row = spip_fetch_array($result)) {
 		$id_document = $row['id_document'];
 		$id_type = $row['id_type'];
 		$titre = propre($row ['titre']);
@@ -93,7 +93,7 @@ function image_document($id_document){
 		if ($id_vignette) {
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = spip_query($query_vignette);
-			if ($row_vignette = @mysql_fetch_array($result_vignette)) {
+			if ($row_vignette = @spip_fetch_array($result_vignette)) {
 				$fichier_vignette = $row_vignette['fichier'];
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
@@ -108,7 +108,7 @@ function image_document($id_document){
 		if (!$fichier_vignette) {
 			// on construira le lien en fonction du type de doc
 			$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
-			if ($type = @mysql_fetch_object($result_type)) {
+			if ($type = @spip_fetch_object($result_type)) {
 				$extension = $type->extension;
 			}
 			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
@@ -154,7 +154,7 @@ function image_rubrique($id_rubrique) {
 		$image = cherche_image($id_rubrique, 'rub');
 		if ($image[0]) break;
 		$result = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			$id_rubrique = $row['id_parent'];
 		}
 	}
@@ -209,7 +209,7 @@ function construire_hierarchie($id_rubrique) {
 			"FROM spip_rubriques AS a LEFT JOIN spip_rubriques AS b ON (b.id_rubrique = a.id_parent) ".
 			"WHERE a.id_rubrique = $id_rubrique";
 		$result = spip_query($query);
-		if ($row = mysql_fetch_array($result)) {
+		if ($row = spip_fetch_array($result)) {
 			if ($id_parent = $row['ida']) $hierarchie = $id_parent."-".$hierarchie;
 			$id_grand_parent = $row['idb'];
 		}
@@ -227,7 +227,7 @@ function construire_hierarchie($id_rubrique) {
 function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($generation)"); 
-	while ($row = mysql_fetch_array($result))
+	while ($row = spip_fetch_array($result))
 		$lesfils[] = $row['id_rubrique'];
 	return join(",",$lesfils);
 }
@@ -345,7 +345,7 @@ function chercher_squelette_hierarchie($fond, $id_rubrique) {
 		} else {
 			$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 			$result = spip_query($query);
-			while($row = mysql_fetch_array($result)) {
+			while($row = spip_fetch_array($result)) {
 				$id_parent=$row['id_parent'];
 			}
 			return chercher_squelette_hierarchie($fond, $id_parent);
@@ -423,21 +423,21 @@ function calculer_page_globale($fond) {
 	else if ($id_breve  = $contexte['id_breve']) {
 		$query = "SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			$id_rubrique_fond = $row['id_rubrique'];
 		}
 	}
 	else if ($id_syndic = $contexte['id_syndic']) {
 		$query = "SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			$id_rubrique_fond = $row['id_rubrique'];
 		}
 	}
 	else if ($id_article = $contexte['id_article']) {
 		$query = "SELECT id_rubrique FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
+		while($row = spip_fetch_array($result)) {
 			$id_rubrique_fond = $row['id_rubrique'];
 		}
 	}

@@ -23,7 +23,7 @@ function enfant($leparent){
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
- 	while($row=mysql_fetch_array($result)){
+ 	while($row=spip_fetch_array($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
