@@ -157,7 +157,7 @@ if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND 
 
 $effacer_cache = !$delais; // $delais peut etre modifie par une inclusion de squelette...
 if (file_exists($chemin_cache)) {
-	if (!$effacer_cache && !$flag_dynamique) {
+	if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui') {
 		if ($lastmodified) {
 			@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastmodified)." GMT");
 			@Header ("Expires: ".gmdate("D, d M Y H:i:s", $lastmodified + $delais)." GMT");
