@@ -97,38 +97,20 @@ echo "Ajouter une image ou un document";
 echo "</td></tr>\n";
 echo debut_boite_info();
 
-$hash = calculer_action_auteur("ajout_doc");
+$link = new Link('../spip_image.php3');
+$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+$link->addVar('hash_id_auteur', $connect_id_auteur);
+$link->addVar('ajout_doc', 'oui');
+$link->addVar('id_article', $id_article);
 
-echo "<font face=\"verdana, arial, helvetica, sans-serif\" size='2'>\n";
-echo "<FORM ACTION='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>\n";
-echo "<INPUT NAME='redirect' TYPE=Hidden VALUE='article_documents.php3'>\n";
-echo "<INPUT NAME='id_article' TYPE=Hidden VALUE=$id_article>\n";
-echo "<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE=$connect_id_auteur>\n";
-echo "<INPUT NAME='hash' TYPE=Hidden VALUE=$hash>\n";
-echo "<INPUT NAME='ajout_doc' TYPE=Hidden VALUE='oui'>\n";
-// echo "Ajouter une image ou un document&nbsp;:";
-echo aide("artimg");
-if (tester_upload() AND ($connect_statut == '0minirezo')) {
-	$texte_upload = texte_upload("");
-	if ($texte_upload){
-		echo "\nS&eacute;lectionner un fichier&nbsp;:";
-		echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
-		echo $texte_upload;
-		echo "\n</SELECT>";
-		echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='Choisir' CLASS='fondo'>";
-	}
-	else {
-		echo "<br><small><INPUT NAME='image' TYPE=File CLASS='forml'></small>";
-		echo "   <INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'>";
-	}
-}
-echo "</FORM>";
-echo "</div>";
+afficher_upload($link, 'T&eacute;l&eacute;charger une image ou un document&nbsp;:');
+
 echo "</font>\n";
 
 echo fin_boite_info();
 
-echo "</table></body></html>\n";
-flush();
+echo "</td></tr></table>\n";
+
+fin_html();
 
 ?>
