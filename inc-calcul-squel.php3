@@ -1849,6 +1849,35 @@ function calculer_texte($texte)
 	$dossier = ($dossier_squelettes ? $dossier_squelettes.'/' : '');
 	$code = "";
 
+	$texte = ereg_replace("([\\\\'])", "\\\\1", $texte);
+
+	//
+	// Parties textuelles du squelette
+	//
+
+	// bloc multi
+	if (eregi('<multi>', $texte)) {
+		$ouvre_multi = 'extraire_multi(';
+		$ferme_multi = ')';
+	} else {
+		$ouvre_multi = $ferme_multi = '';
+	}
+
+
+	// Reperer les balises de traduction <:toto:>
+	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>", $texte, $match)) {
+		$chaine = strtolower($match[3]);
+		if (!($module = $match[2]))
+			$module = 'local/public/spip';	// ordre des modules a explorer
+		$remplace = "_T('$module:$chaine')";
+		if ($filtres = $match[4]) {
+			$filtres = explode('|',substr($filtres,1));
+			$remplace = applique_filtres($filtres, $remplace);
+		}
+		$texte = str_replace($match[0], "'$ferme_multi.$remplace.$ouvre_multi'", $texte);
+	}
+
+
 	//
 	// Reperer les directives d'inclusion de squelette <INCLURE>
 	//
@@ -1858,7 +1887,7 @@ function calculer_texte($texte)
 		$debut = substr($texte, 0, $p);
 		$texte = substr($texte, $p + strlen($s));
 		if ($debut)
-			$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $debut)."';\n";
+			$code .= "	\$retour .= $ouvre_multi'$debut'$ferme_multi;\n";
 
 		//
 		// Traiter la directive d'inclusion
@@ -1909,35 +1938,8 @@ function calculer_texte($texte)
 		$code .= "	\$retour .= 'lang_dselect(); ?".">';\n";
 	}
 
-	//
-	// Parties textuelles du squelette
-	//
-	if ($texte) {
-		// bloc multi
-		if (eregi('<multi>', $texte)) {
-			$ouvre_multi = 'extraire_multi(';
-			$ferme_multi = ')';
-		} else {
-			$ouvre_multi = $ferme_multi = '';
-		}
-
-		$texte = ereg_replace("([\\\\'])", "\\\\1", $texte);
-
-		// Reperer les balises de traduction <:toto:>
-		while (eregi("(<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>)", $texte, $match)) {
-			$chaine = strtolower($match[4]);
-			if (!($module = $match[3]))
-				$module = 'local/public/spip';	// ordre des modules a explorer
-			$remplace = "_T('$module:$chaine')";
-			if ($filtres = $match[5]) {
-				$filtres = explode('|',substr($filtres,1));
-				$remplace = applique_filtres($filtres, $remplace);
-			}
-			$texte = str_replace($match[1], "'$ferme_multi.$remplace.$ouvre_multi'", $texte);
-		}
-
+	if ($texte)
 		$code .= "	\$retour .= $ouvre_multi'$texte'$ferme_multi;\n";
-	}
 
 	return $code;
 }
