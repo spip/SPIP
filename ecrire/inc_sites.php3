@@ -248,7 +248,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				'author2'        => '(.*)',
 				'authorbis'      => '<author>([^<]*)</author>',
 				'description'    => ',<description[^>]*>(.*?)</description[^>]*>,ims',
-				'descriptionbis' =>     '<content[^>]*>(.*?)</content[^>]*>'
+				'descriptionbis' =>     ',<content[^>]*>(.*?)</content[^>]*>,ims'
 			);
 			break;
 		case "1.0" :
