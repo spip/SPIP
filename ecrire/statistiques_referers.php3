@@ -56,6 +56,7 @@ if ($aujourdhui == 'oui')
 	icone_horizontale(_T('titre_liens_entrants_total'), "statistiques_referers.php3", "statistiques-24.gif");
 else
 	icone_horizontale(_T('titre_liens_entrants'), "statistiques_referers.php3?aujourdhui=oui", "statistiques-24.gif");
+echo "</div>";
 
 
 //
@@ -73,6 +74,10 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 		$where = "visites_jour>0";
 		$vis = "visites_jour";
 		$table_ref = "spip_referers";
+	}
+	else {
+		$table_ref = "spip_referers";
+		$where = "1";
 	}
 
 	$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
