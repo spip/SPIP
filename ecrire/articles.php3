@@ -1266,6 +1266,9 @@ if ((lire_meta('multi_articles') == 'oui')
 				$lang_trad = $row["lang"];
 				$statut_trad = $row["statut"];
 
+				changer_typo($lang_trad);
+				$titre_trad = "<span $lang_dir>$titre_trad</span>";
+
 				if ($ifond == 1) {
 					$ifond = 0;
 					$bgcolor = "ffffff";
@@ -1309,6 +1312,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 				$ret .= "<td class='arial2'>".traduire_nom_langue($lang_trad)."</td>\n";
 			}
+			changer_typo($langue_article);
 
 			if ($ret) {
 				debut_cadre_enfonce("traductions-24.gif");
