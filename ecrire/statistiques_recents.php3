@@ -51,7 +51,7 @@ if ($critere == "referers"){
 "FROM spip_articles WHERE visites > 0 AND date>DATE_SUB('$date',INTERVAL 90 DAY) ORDER BY referers DESC LIMIT 0,100", true);
 }
 else if ($critere == "popularite"){
-	echo propre("La Çpopularit&eacute;È est calcul&eacute;e d'apr&egrave;s le nombre d'arriv&eacute;es directes sur un article, multipli&eacute; par le nombre de visites. Un article devient donc &laquo;populaire&raquo; lorsqu'il fait l'objet d'un r&eacute;f&eacute;rencement sur d'autres sites et lorsqu'il est tr&egrave;s visit&eacute;.")."<p>";
+	echo propre("La &laquo;popularit&eacute;&raquo; est calcul&eacute;e d'apr&egrave;s le nombre d'arriv&eacute;es directes sur un article, multipli&eacute; par le nombre de visites. Un article devient donc &laquo;populaire&raquo; lorsqu'il fait l'objet d'un r&eacute;f&eacute;rencement sur d'autres sites et lorsqu'il est tr&egrave;s visit&eacute;.")."<p>";
 	afficher_articles("Les articles r&eacute;cents (3 mois) les plus populaires",
 "SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 AND date>DATE_SUB('$date',INTERVAL 90 DAY) ORDER BY popularite DESC LIMIT 0,100", true);
