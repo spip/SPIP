@@ -1047,6 +1047,9 @@ requiring an FTP access to the Web site.',
 
 
 // T
+'taille_ko' => '@taille@&amp;nbsp;kb',
+'taille_mo' => '@taille@&amp;nbsp;Mb',
+'taille_octets' => '@taille@ bytes',
 'text_article_propose_publication' => 'Article submitted for publication. Do not hesitate to give your opinion through the forum attached to this article (at the bottom of the page).',
 'texte_acces_ldap_anonyme_1' => 'Some LDAP servers do not allow any anonymous access. In this case you must indicate an initial access identifier to be able to search for information in the directory afterwards. However, in most cases the following fields can be left empty.',
 'texte_actualite_site_1' => 'This page records the status of the site and allows you to follow up your contributions. You can find here your unfinished articles as well as the articles and news on which you are invited to give an opinion, and a reminder of your previous contributions.<p><hr><p>When you become familiar with the interface, click on the &laquo;',
