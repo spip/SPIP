@@ -4,14 +4,21 @@ include ("inc.php3");
 
 
 $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
-$titre_message = htmlspecialchars($titre_message);
-$nom = htmlspecialchars($connect_nom);
+$nom = htmlspecialchars(corriger_caracteres($connect_nom));
 $adresse_retour = rawurldecode($adresse_retour);
 
 if ($valider_forum) {
+	$titre_message = addslashes(corriger_caracteres($titre_message));
+	$texte = addslashes(corriger_caracteres($texte));
 	$query = "INSERT spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
 	"VALUES (\"$titre_message\", \"$texte\", NOW(), \"$nom_site\", \"$url_site\", \"$statut\", \"$connect_id_auteur\", \"$nom\", '$connect_email', '$id_rubrique', '$id_parent', '$id_article', '$id_breve', '$id_message', '$id_syndic')";
 	$result = spip_query($query);
+	
+	if ($id_message > 0) {
+		$query = "UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'";
+		$result = spip_query($query);
+	}
+	
 	@header("location:$adresse_retour");
 	die();
 }
@@ -60,6 +67,7 @@ echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><
 echo "<TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0>";
 echo "</TD><TD WIDTH=\"100%\">";
 echo "<B>Titre :</B><BR>";
+$titre_message = htmlspecialchars($titre_message);
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_message\" SIZE='40'><P>\n";
 echo "</TD></TR></TABLE>";
 
