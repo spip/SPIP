@@ -40,7 +40,7 @@ function parser_inclure($texte, $result) {
 		$debut = substr($texte, 0, $p);
 		$texte = substr($fin, strlen($s));
 
-		if ($debut) $result = parser_champs_etendus($debut, $result);
+		if ($debut) $result = parser_champs($debut, $result);
 
 		$champ = new Inclure;
 		$champ->fichier = $match[1];
@@ -57,7 +57,7 @@ function parser_inclure($texte, $result) {
 		$result[] = $champ;
 	}
 
-	return (!$texte ? $result : parser_champs_etendus($texte, $result));
+	return (!$texte ? $result : parser_champs($texte, $result));
 }
 
 function parser_champs($texte,$result) {
@@ -111,12 +111,12 @@ function parser_champs_etendus($texte, $result) {
 function parser_champs_exterieurs($debut, $sep, $nested) {
 	$res = array();
 	while (($p=strpos($debut, "%$sep"))!==false) {
-	    if ($p) $res = parser_champs(substr($debut,0,$p), $res);
+	    if ($p) $res = parser_inclure(substr($debut,0,$p), $res);
 	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
 	    $res[]= $nested[$m[1]];
 	    $debut = $m[2];
 	}
-	return (!$debut ?  $res : parser_champs($debut, $res));
+	return (!$debut ?  $res : parser_inclure($debut, $res));
 
 }
 
@@ -321,7 +321,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$result->cond_altern = parser($result->cond_altern,$id_parent,$boucles, $nom);
 		$result->milieu = parser($milieu, $id_boucle,$boucles, $nom);
 
-		$all_res = parser_inclure($debut, $all_res);
+		$all_res = parser_champs_etendus($debut, $all_res);
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
@@ -331,7 +331,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 			$boucles[$id_boucle] = $result;
 	}
 
-	return parser_inclure($texte, $all_res);
+	return parser_champs_etendus($texte, $all_res);
 }
 
 ?>
