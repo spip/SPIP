@@ -249,9 +249,13 @@ if ($cache_lang_modifs) {
 
 // Gestion des taches de fond ?  toutes les 30 secondes (sauf preemption par une image-cron)
 if (!@file_exists('ecrire/data/cron.lock')
-OR (time() - @filemtime('ecrire/data/cron.lock') > 30)) {
-	include_ecrire('inc_cron.php3');
-	spip_cron();
+	OR (time() - @filemtime('ecrire/data/cron.lock') > 30)) {
+	// Si MySQL est out, laisser souffler
+	if (!@file_exists('ecrire/data/mysql_out')
+		OR (time() - @filemtime('ecrire/data/mysql_out') > 300)) {
+		include_ecrire('inc_cron.php3');
+		spip_cron();
+	}
 }
 
 //
