@@ -13,23 +13,23 @@ if ($conf_mot>0) {
 		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
 		else $aff_articles="prop,publie";
 
-		$nb_articles = spip_fetch_row(spip_query(
+		$nb_articles = spip_fetch_array(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article
 			WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article
 			AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'"
 			));
 		$nb_articles = $nb_articles[0];
-		$nb_rubriques = spip_fetch_row(spip_query(
+		$nb_rubriques = spip_fetch_array(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
 			WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"
 			));
 		$nb_rubriques = $nb_rubriques[0];
-		$nb_breves = spip_fetch_row(spip_query(
+		$nb_breves = spip_fetch_array(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_breves AS lien, spip_breves AS breve
 			WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve
 			AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse'"));
 		$nb_breves = $nb_breves[0];
-		$nb_sites = spip_fetch_row(spip_query(
+		$nb_sites = spip_fetch_array(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_syndic AS lien, spip_syndic AS syndic
 			WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic
 			AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse'"));

@@ -407,9 +407,9 @@ function maj_base() {
 	if ($version_installee < 1.418) {
 		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 0,1";
 		$result = spip_query($query);
-		if ($webmaster = spip_fetch_object($result)) {
+		if ($webmaster = spip_fetch_array($result)) {
 			include_ecrire("inc_meta.php3");
-			ecrire_meta('email_webmaster', $webmaster->email);
+			ecrire_meta('email_webmaster', $webmaster['email']);
 			ecrire_metas();
 		}
 		maj_version (1.418);

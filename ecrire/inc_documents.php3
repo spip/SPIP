@@ -219,8 +219,8 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 
 		// on construira le lien en fonction du type de doc
 		$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
-		if ($type = @spip_fetch_object($result_type)) {
-			$extension = $type->extension;
+		if ($type = @spip_fetch_array($result_type)) {
+			$extension = $type['extension'];
 		}
 
 		// recuperer la vignette pour affichage inline
@@ -1263,8 +1263,8 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
 			"WHERE id_document in (".join(',', $documents_lies).")");
-		while ($v = spip_fetch_object($res))
-			$vignettes[] = $v->id_vignette;
+		while ($v = spip_fetch_array($res))
+			$vignettes[] = $v['id_vignette'];
 
 		$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
 

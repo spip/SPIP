@@ -23,7 +23,7 @@ function verifier_base() {
 	if (! $res1= spip_query("SHOW TABLES"))
 		return false;
 
-	while ($tab = spip_fetch_row($res1)) {
+	while ($tab = spip_fetch_array($res1)) {
 		echo "<p><b>".$tab[0]."</b> ";
 
 		if (!($result_repair = spip_query("REPAIR TABLE ".$tab[0])))
@@ -32,15 +32,15 @@ function verifier_base() {
 		if (!($result = spip_query("SELECT COUNT(*) FROM ".$tab[0])))
 			return false;
 
-		list($count) = spip_fetch_row($result);
+		list($count) = spip_fetch_array($result);
 		if ($count>1)
 			echo "("._T('texte_compte_elements', array('count' => $count)).")\n";
-		if ($count==1)
+		else if ($count==1)
 			echo "("._T('texte_compte_element', array('count' => $count)).")\n";
 		else
 			echo "("._T('texte_vide').")\n";
 
-		$row = spip_fetch_row($result_repair);
+		$row = spip_fetch_array($result_repair);
 		$ok = ($row[3] == 'OK');
 
 		if (!$ok)
@@ -57,7 +57,7 @@ function verifier_base() {
 if (! $res1= spip_query("SELECT version()"))
 	$message = _T('avis_erreur_connexion_mysql');
 else {
-	$tab = spip_fetch_row($res1);
+	$tab = spip_fetch_array($res1);
 	$version_mysql = $tab[0];
 	if ($version_mysql < '3.23.14')
 		$message = _T('avis_version_mysql', array('version_mysql' => $version_mysql));

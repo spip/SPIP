@@ -386,23 +386,23 @@ function liste_rv($query, $type) {
 		debut_cadre_enfonce("", false, "", $titre);
 
 		echo "<table width='100%' border='0' cellpadding='0' cellspacing='2'>";
-		while ($row = spip_fetch_object($result)) {
+		while ($row = spip_fetch_array($result)) {
 		
-			if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
+			if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
 				$url = $match[1];
 			else
-				$url = "message.php3?id_message=".$row->id_message;
-				$type=$row->type;
-				$rv = $row->rv;
-				$date = $row->date_heure;
-				$date_fin = $row -> date_fin;
+				$url = "message.php3?id_message=".$row['id_message'];
+				$type=$row['type'];
+				$rv = $row['rv'];
+				$date = $row['date_heure'];
+				$date_fin = $row['date_fin'];
 
 				if ($type=="normal") $bouton = "message";
 				elseif ($type=="pb") $bouton = "pense-bete";
 				elseif ($type=="affich") $bouton = "annonce";
 				else $bouton = "message";
 						
-			$titre = typo($row->titre);
+			$titre = typo($row['titre']);
 			
 			if ($rv == "oui") {
 				echo "<tr><td colspan='2'>";

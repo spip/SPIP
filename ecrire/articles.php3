@@ -277,8 +277,8 @@ function get_forums_publics($id_article=0) {
 	if ($id_article) {
 		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
 		$res = spip_query($query);
-		if ($obj = spip_fetch_object($res))
-			$forums_publics = $obj->accepter_forum;
+		if ($obj = spip_fetch_array($res))
+			$forums_publics = $obj['accepter_forum'];
 	} else { // dans ce contexte, inutile
 		$forums_publics = substr(lire_meta("forums_publics"),0,3);
 	}
@@ -1079,7 +1079,7 @@ if (spip_num_rows($result)) {
 			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
 			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
 		$result2 = spip_query($query2);
-		if ($result2) list($nombre_articles) = spip_fetch_row($result2);
+		if ($result2) list($nombre_articles) = spip_fetch_array($result2);
 		else $nombre_articles = 0;
 
 		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur";
