@@ -624,14 +624,16 @@ requiring an FTP access to the Web site.',
 'info_procedure_maj_version' => 'the upgrade procedure should be ran to adapt
 	the database to the new version of SPIP.',
 'info_propose_1' => '[@nom_site_spip@] Submits: @titre@',
-'info_propose_2' => 'Article submitted\\n-----------------',
+'info_propose_2' => 'Article submitted
+-----------------',
 'info_propose_3' => 'The article "@titre@" is submitted for publication.',
 'info_propose_4' => 'You are invited to review it and to give your opinion',
 'info_propose_5' => 'in the forum linked to it. It is available at the address:',
 'info_ps' => 'P.S.',
 'info_publie_01' => 'The article "@titre@" was validated by @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBLISHES: @titre@',
-'info_publie_2' => 'Article published\\n-----------------',
+'info_publie_2' => 'Article published
+-----------------',
 'info_publies' => 'Your articles published online',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
 'info_question_inscription_nouveaux_redacteurs' => 'Do you allow the registration of new editors from
@@ -1136,7 +1138,7 @@ the images used in the articles and sections.',
 'texte_en_cours_validation' => 'The following articles and briefs are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
 'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your copy by using "typographical shortcuts".',
 'texte_erreur_mise_niveau_base' => 'Database error during upgrade.
-						The image <B>@fichier@</B> could not be passed (article @id_article@).\\n\\n
+						The image <B>@fichier@</B> could not be passed (article @id_article@).<p>
 						Note carefully this reference, retry the upgrade procedure,
 						and finally make sure that the images still appear
 						in the articles.',
@@ -1233,7 +1235,7 @@ the images used in the articles and sections.',
 'texte_publication_articles_post_dates' => 'Which behaviour should SPIP adopt concerning articles which
 		publication have been set to
 		a future date&nbsp;?',
-'texte_rappel_selection_champs' => '[Remember to select this field correctly.]\\n',
+'texte_rappel_selection_champs' => '[Remember to select this field correctly.]',
 'texte_recalcul_page' => 'If you want
 to refresh only one page, you would rather do it from the public area and use the button &laquo; refresh &raquo;.',
 'texte_recapitiule_liste_documents' => 'This page sums up the list of documents that you have placed in the sections. To modify each document\'s information, follow the link to its section\'s page.',
@@ -1243,14 +1245,14 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_requetes_echouent' => '<B>When some MySQL queries fail
 		systematically and without any apparent reason, it is possible
 		that the database itself
-		is the culprit.</B>\\n\\n
-		MySQL has at its disposal a repair feature of its tables
+		is the culprit.</B>
+		<p>MySQL has at its disposal a repair feature of its tables
 		when they have been accidentally corrupted.
 		Here, you can try to execute this repair&nbsp;; in
 		case of failure, you should keep a copy of the display, which might contain
-		clues on what went wrong...\\n\\n
-		If the problem remains, contact your 
-		host.\\n',
+		clues on what went wrong...
+		<p>If the problem remains, contact your 
+		host.',
 'texte_restaurer_base' => 'Restore the content of the database backup',
 'texte_restaurer_sauvegarde' => ' This option allows you to restore a previous
 backup of the database. To achieve this, the file containing the backup should have been
@@ -1390,7 +1392,7 @@ entered important modifications on the graphics or the structure of the site. ',
 'titre_page_statistiques_referers' => 'Statistics (incoming links)',
 'titre_page_statistiques_visites' => 'Visits statistics',
 'titre_page_upgrade' => 'SPIP upgrade',
-'titre_probleme_technique' => 'Warning: a technical problem (MySQL server) prevents access to this part of the site.\\nThank you for your understanding.',
+'titre_probleme_technique' => 'Warning: a technical problem (MySQL server) prevents access to this part of the site.<p>Thank you for your understanding.',
 'titre_publication_articles_post_dates' => 'Publication of post dated articles',
 'titre_publier_document' => 'PUBLISH A DOCUMENT IN THIS SECTION',
 'titre_referencement_sites' => 'Sites referencing and syndication',
