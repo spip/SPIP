@@ -93,9 +93,10 @@ feed_post_files('HTTP_POST_FILES');
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 $table_prefix = "spip";
 
-// Prefixe des cookies
+// Prefixe et chemin des cookies
 // (a modifier pour installer des sites SPIP dans des sous-repertoires)
 $cookie_prefix = "spip";
+$cookie_path = "";
 
 // Dossier des squelettes
 // (a modifier si l'on veut passer rapidement d'un jeu de squelettes a un autre)
@@ -220,8 +221,9 @@ $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 //
 // Appliquer le prefixe cookie
 //
-function spip_setcookie ($name='', $value='', $expire=0, $path='', $domain='', $secure='') {
+function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
 	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
+	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
 
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);
