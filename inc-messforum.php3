@@ -123,7 +123,6 @@ function enregistre_forum() {
 	  $afficher_texte, $ajouter_mot, $alea, $hash,
 	  $auteur, $confirmer_forum, $email_auteur, $id_auteur,
 	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;
-	spip_log("	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;");
 	$retour_forum = rawurldecode($retour_forum);
 
 	// Recuperer les donnees postees du formulaire ou stocker '0'
