@@ -22,24 +22,61 @@ if (@file_exists("inc-urls.php3"))
 else
 	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
-
 /*******************************/
 /* GESTION DU FORMULAIRE FORUM */
 /*******************************/
 
-// fabrique un bouton de type $t de Name $n, de Value $v et autres attribut $a
-function boutonne($t, $n, $v, $a='') {
-  return "\n<input type='$t'" .
-    (!$n ? '' : " name='$n'") .
-    " value=\"$v\" $a />";
+global $forum_array;
+$forum_array = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
+
+function forum_stat($args, $filtres)
+{
+  list ($idr, $idf, $ida, $idb, $ids) = $args;
+
+  // recuperer les donnees du forum auquel on repond, false = forum interdit
+  if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
+    return '';
+  list($titre, $table, $forums_publics) = $r;
+  return 
+    array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids);
 }
 
-//
-// Le code dynamique appelee par les squelettes
-//
-function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $titre, $table, $forums_publics, $url, $retour) {
+function forum_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
+
+	// url de reference
+	if (!$url = rawurldecode($GLOBALS['url'])) 
+	    $url = $GLOBALS['REQUEST_URI'];
+	else {
+	// identifiants des parents
+	  $args = '';  
+	  if ($id_rubrique) $args .= "&id_rubrique=$id_rubrique";
+	  if ($id_forum) $args .= "&id_forum=$id_forum";
+	  if ($id_article) $args .= "&id_article=$id_article";
+	  if ($id_breve) $args .= "&id_breve=$id_breve";
+	  if ($id_syndic) $args .= "&id_syndic=$id_syndic";
+	  if ($args) $url .= (strpos($url,'?') ? $args : ('?' . substr($args,1)));
+	}
+	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
+	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
+	$url = ereg_replace("[?&]var_url=[^&]*", '', $url);
+
+	// verifier l'identite des posteurs pour les forums sur abo
+	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"]))
+	  {
+	    include_local('inc-login.php3');
+	    return login_pour_tous($url, false, true, $url, 'forum');
+	  }
+	// au premier appel (pas de http-var nommee "retour")
+	// memoriser l'URL courante pour y revenir apres envoi du message
+	// aux appels suivants, reconduire la valeur.
+	if ($retour = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
+	  $retour = ereg_replace('&var_mode=recalcul','',$retour);
+	else {
+	  if (!$retour = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
+	    $retour = $url;
+	}
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 
@@ -124,7 +161,6 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 	$forum_id_syndic = intval($id_syndic);
 	$hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea");
 
-	$titre = entites_html($titre);
 	// Faut-il ajouter des propositions de mots-cles
 	if ((lire_meta("mots_cles_forums") == "oui") && ($table != 'forum'))
 		$table = table_des_mots($table, $les_mots);
@@ -164,6 +200,12 @@ function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndi
 		     ));
 }
 
+// fabrique un bouton de type $t de Name $n, de Value $v et autres attribut $a
+function boutonne($t, $n, $v, $a='') {
+  return "\n<input type='$t'" .
+    (!$n ? '' : " name='$n'") .
+    " value=\"$v\" $a />";
+}
 
 // Mots-cles dans les forums :
 // Si la variable de personnalisation $afficher_groupe[] est definie
@@ -307,62 +349,6 @@ function calculer_balise_parametres($p) {
 /* FONCTIONS DE CALCUL DES DONNEES DU FORMULAIRE FORUM */
 /*******************************************************/
 
-global $forum_array;
-$forum_array = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
-
-function forum_stat($args, $filtres)
-{
-  list ($idr, $idf, $ida, $idb, $ids) = $args;
-
-  // recuperer les donnees du forum auquel on repond, false = forum interdit
-  if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
-    return '';
-  list($titre, $table, $accepter_forum) = $r;
-  return 
-    array($titre, $table, $accepter_forum, $idr, $idf, $ida, $idb, $ids);
-}
-
-function forum_dyn($titre, $table, $accepter_forum, $idr, $idf, $ida, $idb, $ids) {
-
-	// url de reference
-	if (!$url = rawurldecode($GLOBALS['url'])) 
-	    $url = $GLOBALS['REQUEST_URI'];
-	else {
-	// identifiants des parents
-	  $args = '';  
-	  if ($idr) $args .= "&id_rubrique=$idr";
-	  if ($idf) $args .= "&id_forum=$idf";
-	  if ($ida) $args .= "&id_article=$ida";
-	  if ($idb) $args .= "&id_breve=$idb";
-	  if ($ids) $args .= "&id_syndic=$ids";
-	  if ($args) $url .= (strpos($url,'?') ? $args : ('?' . substr($args,1)));
-	}
-	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
-	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
-	$url = ereg_replace("[?&]var_url=[^&]*", '', $url);
-
-	// verifier l'identite des posteurs pour les forums sur abo
-	if (($accepter_forum == "abo") && (!$GLOBALS["auteur_session"]))
-	  {
-	    include_local('inc-login.php3');
-	    return login_pour_tous($url, false, true, $url, 'forum');
-	  }
-	// au premier appel (pas de http-var nommee "retour")
-	// memoriser l'URL courante pour y revenir apres envoi du message
-	// aux appels suivants, reconduire la valeur.
-	if ($retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
-	  $retour_forum = ereg_replace('&var_mode=recalcul','',$retour_forum);
-	else {
-	  if (!$retour_forum = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
-	    $retour_forum = $url;
-	}
-	 return retour_forum($idr,$idf,$ida,$idb,$ids,
-			     ('> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre))),
-			     $table,
-			     $accepter_forum,
-			     $url,
-			     $retour_forum);
-}
 
 //
 // Chercher le titre et la configuration du forum de l'element auquel on repond
@@ -407,4 +393,9 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	return array ($titre, $table, $accepter_forum);
 }
 
+function supprimer_prefixe($texte, $prefixe)
+{
+  spip_log("'$prefixe' '$texte'" );
+  return ereg_replace("^[$prefixe" . '[:space:]]*', '', $texte);
+}
 ?>
