@@ -175,7 +175,17 @@ if ($descriptif OR $url_site OR $nom_site) {
 echo "</td>";
 
 echo "<td align='center'>";
-icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+
+// L'article est-il editable ?
+$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
+$result_auteur = spip_query($query);
+$flag_auteur = (spip_num_rows($result_auteur) > 0);
+$flag_editable = (acces_rubrique($rubrique_article)
+	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
+
+if ($flag_editable)
+	icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+
 echo "</td>";
 
 echo "</tr></table>";
