@@ -326,7 +326,7 @@ function couper($texte, $taille=50) {
 
 	// couper au mot precedent
 	$long = substr($texte, 0, max($taille-4,1));
-	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $long);
+	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*\n?$", "\\1", $long);
 	$points = '&nbsp;(...)';
 
 	// trop court ? ne pas faire de (...)
