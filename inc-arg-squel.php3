@@ -191,7 +191,7 @@ function calculer_params($type, $params, $idb, &$boucles)
 	  if ($regs[2]) {
 	    $date_orig = $id_table . ".date_redac";
 	    $date_compare = '\'" . normaliser_date(' .
-	      index_pile($boucle->id_parent, 'date_redac', $boucles) . ') . \'"';
+	      index_pile($boucle->id_parent, 'date_redac', $boucles) . ') . "\'';
 	  }
 	  else {
 	    $date_orig = "$id_table." . $table_date[$type];
