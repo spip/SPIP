@@ -73,7 +73,7 @@ if ($type == "public") {
 		ligne ("UID:article$id_article @ $adresse_site");
 				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+30,0,mois($date_heure),jour($date_heure),annee($date_heure))));
+				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:".filtrer_ical(_T('titre_breve_publiee')));
 		ligne("URL:$adresse_site/spip_redirect.php3?id_article=$id_article");
 		ligne("STATUS:CONFIRMED");
@@ -89,7 +89,7 @@ if ($type == "public") {
 		ligne ("UID:breve$id_breve @ $adresse_site");
 				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+30,0,mois($date_heure),jour($date_heure),annee($date_heure))));
+				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:".filtrer_ical(_T('titre_breve_publiee')));
 		ligne("URL:$adresse_site/spip_redirect.php3?id_breve=$id_breve");
 		ligne("STATUS:CONFIRMED");
@@ -322,7 +322,7 @@ if ($id_utilisateur) {
 				ligne ("UID:forum$id_forum @ $adresse_site");
 				ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 				ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
-				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+30,0,mois($date_heure),jour($date_heure),annee($date_heure))));
+				ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
 				ligne ("CATEGORIES:".filtrer_ical(_T('icone_forum_suivi')));
 				ligne("URL:$adresse_site/ecrire/controle_forum.php3");
 				ligne ("END:VEVENT");
