@@ -17,6 +17,7 @@ function test_layer(){
 	if (
 	(eregi("msie", $browser_name) AND $browser_version >= 5)
 	|| (eregi("mozilla", $browser_name) AND $browser_version >= 5)
+	|| (eregi("opera", $browser_name) AND $browser_version >= 7)
 	)
 		return true;
 }
