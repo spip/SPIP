@@ -280,6 +280,7 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 
 	if ($rv != "non") {
 	  creer_colonne_droite();	
+	  echo http_calendrier_entetecol('', $lejour,$lemois,$lannee);
 	  echo http_calendrier_jour($lejour,$lemois,$lannee, 90, $partie_cal, $echelle, $id_message);
 	}
 	debut_droite();
