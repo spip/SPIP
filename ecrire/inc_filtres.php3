@@ -642,7 +642,7 @@ function extraire_multi ($letexte) {
 
 	if (!strpos('-'.$letexte, '<multi>')) return $letexte; // perf
 	if ($flag_pcre AND preg_match_all("@<multi>(.*?)</multi>@s", $letexte, $regs, PREG_SET_ORDER)) {
-		foreach($regs as $reg) {
+		while (list(,$reg) = each ($regs)) {
 			$letexte = str_replace($reg[0], extraire_trad($GLOBALS['spip_lang'], $reg[1]), $letexte);
 		}
 	}
