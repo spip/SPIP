@@ -482,6 +482,22 @@ td.icone a img {
 }
 
 
+/*
+ * Dessus-dessous calendrier
+ */
+ 
+.dessous {
+	z-index : 1;
+	-moz-opacity: 0.7; filter: alpha(opacity=70);
+}
+.dessus, .dessous.hover {
+	z-index : 2; 
+	-moz-opacity: 1; filter: alpha(opacity=100);
+	cursor: pointer;
+}
+
+
+
 
 /*
  * Cadre blanc arrondi

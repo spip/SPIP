@@ -264,9 +264,10 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 		else $couleur_cadre = "#999999";
 		
 		
-		echo "<div style='position: absolute; $spip_lang_left: ".$decalage."px; top: ".$haut."px; height: ".$hauteur."px; width: ".$largeur."px;  border: 1px solid $la_couleur; padding: 3px; background-color: $couleur_fond; -moz-opacity: 0.7; -moz-border-radius: 5px; filter: alpha(opacity=70);'>";
+		echo "<div class='dessous'  style='position: absolute; $spip_lang_left: ".$decalage."px; top: ".$haut."px; height: ".($hauteur+8)."px; width: ".($largeur+8)."px; ' onClick=\"document.location='message.php3?id_message=$id_message'\" onMouseOver=\"changeclass(this, 'dessus');\" onMouseOut=\"changeclass(this, 'dessous');\">";
+		echo "<div style='position: absolute;  height: ".$hauteur."px; width: ".$largeur."px;  border: 1px solid $la_couleur; padding: 3px; background-color: $couleur_fond; -moz-border-radius: 5px;'>";
 		echo "</div>";
-		echo "<div style='position: absolute; overflow: hidden; $spip_lang_left: ".$decalage."px; top: ".$haut."px; height: ".$hauteur."px; width: ".$largeur."px;  border: 1px solid $couleur_cadre; padding: 3px; -moz-border-radius: 5px;'>";
+		echo "<div style='position: absolute; overflow: hidden; height: ".$hauteur."px; width: ".$largeur."px;  border: 1px solid $couleur_cadre; padding: 3px; -moz-border-radius: 5px;'>";
 		echo "<div><b><a href='message.php3?id_message=$id_message' class='verdana1' style='color: black;'>$titre</a></b></div>";
 		
 		if ($type == "normal") {
@@ -282,6 +283,7 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 		}
 		
 		if ($large) echo "<div><a href='message.php3?id_message=$id_message' class='arial1' style='color: #333333; text-decoration: none;'>$texte</a></div>";
+		echo "</div>";
 		echo "</div>";
 	}
 
