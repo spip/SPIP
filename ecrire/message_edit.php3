@@ -44,7 +44,7 @@ function afficher_jour($jour){
 }
 
 
-debut_page(_T('titre_page_message_edit'), "asuivre", "messagerie");
+debut_page(_T('titre_page_message_edit'), "redacteurs", "messagerie");
 debut_gauche();
 debut_droite();
 

@@ -3,11 +3,11 @@
 include ("inc.php3");
 
 
-debut_page(_T('titre_page_statistiques'), "administration", "statistiques");
+debut_page(_T('titre_page_statistiques'), "suivi", "repartition");
 
-echo "<br><br><br>";
+echo "<br><br>";
 gros_titre(_T('titre_statistiques'));
-barre_onglets("statistiques", "replang");
+barre_onglets("repartition", "langues");
 
 if ($GLOBALS["critere"] == "debut") {
 	$critere = "visites";

@@ -171,7 +171,6 @@ td {
 .cellule36, .cellule48 {
 	border: none;
 	padding: 0px;
-	margin: 0px;
 	text-align: center;
 	vertical-align: top;
 	font-family: Verdana, Arial, Sans, sans-serif;
@@ -180,9 +179,11 @@ td {
 	text-decoration: none;
 }
 .cellule36 {
+	margin: 0px;
 	font-size: 10px;
 }
 .cellule48 {
+	margin: 2px;
 	font-size: 12px;
 }
 .cellule36 a, .cellule36 a:hover, .cellule48 a, .cellule48 a:hover {

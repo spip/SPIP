@@ -25,7 +25,7 @@ if ($valider_forum AND ($statut!='')) {
 }
 
 if ($id_message) debut_page(_T('titre_page_forum_envoi'), "asuivre", "messagerie");
-else debut_page(_T('titre_page_forum_envoi'), "messagerie");
+else debut_page(_T('titre_page_forum_envoi'), "redacteurs");
 debut_gauche();
 debut_droite();
 

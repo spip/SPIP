@@ -15,11 +15,11 @@ function mySel($varaut,$variable){
 }
 
 
-debut_page(_T('titre_page_config_contenu'), "administration", "configuration");
+debut_page(_T('titre_page_config_contenu'), "administration", "langues");
 
 echo "<br><br><br>";
 gros_titre(_T('info_langues'));
-barre_onglets("configuration", "langues");
+//barre_onglets("configuration", "langues");
 
 
 debut_gauche();

@@ -232,7 +232,7 @@ if (!$mois){
 
 $nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 
-debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "asuivre", "calendrier"));
+debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee))), "asuivre", "calendrier");
 $activer_messagerie = lire_meta("activer_messagerie");
 $connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 

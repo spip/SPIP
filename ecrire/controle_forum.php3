@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-debut_page(_T('titre_page_forum_suivi'), "messagerie", "forum-controle");
+debut_page(_T('titre_page_forum_suivi'), "suivi", "forum-controle");
 
 $requete_base_controle = "statut!='perso' AND statut != 'redac'";
 

@@ -132,12 +132,7 @@ while($row = spip_fetch_array($result_message)) {
 	if ($type != "affich")
 		spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
 
-
-	
-	debut_page($titre, "asuivre", "calendrier");
-	barre_onglets("calendrier", "message");
-
-
+	debut_page($titre, "redacteurs", "messagerie");
 
 	debut_gauche();
 	
