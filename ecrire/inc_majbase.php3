@@ -26,6 +26,7 @@ function maj_base() {
 	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
 	if ($result) if ($row = spip_fetch_array($result)) $version_installee = (double) $row['valeur'];
 
+	echo "'$version_installee' '$spip_version'";
 	//
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit
 	// d'une nouvelle installation
@@ -33,8 +34,7 @@ function maj_base() {
 	//
 	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 	if (!$version_installee) {
-		$version_installee = $spip_version;
-		maj_version($version_installee);
+		spip_query_db("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$spip_version')");
 		return true;
 	}
 
