@@ -11,7 +11,7 @@ include_ecrire ("inc_presentation.php3");
 include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_texte.php3");
-
+include_local ("inc-formulaires.php3");
 
 // gerer l'auth http
 function auth_http($cible, $essai_auth_http) {
@@ -124,7 +124,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "Veuillez r&eacute;gler votre navigateur pour qu'il les accepte (au moins pour ce site).\n";
 	}
 	else if ($prive) {
-		echo ouvre_login ("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
+		echo ouvre_login ("$nom_site<br><small>acc&egrave;s &agrave; l'espace priv&eacute;</small>");
 		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 		echo "fournis lors de votre inscription. ";
@@ -192,10 +192,6 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "</form>";
 	}
 
-	echo '[<script language="JavaScript"><!--
-document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>mot de passe oubli&eacute;&nbsp;?</a>]';
-
 	// Gerer le focus
 	echo "<script type=\"text/javascript\"><!--\n" . $js_focus . "\n//--></script>\n";
 
@@ -211,7 +207,21 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=
 		echo "</fieldset></form>\n";
 	}
 
-	if ($prive) echo "[<a href='$url_site'>retour au site public</a>]";
+	echo "\n<center>"; // debut du pied de login
+
+	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
+	if ((!$prive AND forums_sur_abo()) OR ($prive AND $inscriptions_ecrire))
+		echo ' [<script language="JavaScript"><!--
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>s\'inscrire</a>]';
+
+	echo ' [<script language="JavaScript"><!--
+document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
+//--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>mot&nbsp;de&nbsp;passe&nbsp;oubli&eacute;&nbsp;?</a>]';
+
+	if ($prive) echo " [<a href='$url_site'>retour&nbsp;au&nbsp;site&nbsp;public</a>]";
+
+	echo "</center>\n";
 
 	echo ferme_login();
 }
