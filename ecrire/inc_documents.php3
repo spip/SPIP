@@ -522,6 +522,42 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$mode = $document->get('mode');
 			
 					
+			echo "<div style='text-align:center;'>";
+			if ($flag_modif) {
+				$process = lire_meta('image_process');
+				 // imagick (php4-imagemagick)
+				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
+					echo "<div class='verdana1' style='float: right; text-align:left;'>";		
+					$link_rot = $image_link;
+					$link_rot->addVar('redirect', $redirect_url);
+					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+					$link_rot->addVar('doc_rotate', $id_document);
+					$link_rot->addVar('vignette_aff', $id_document);
+					$link_rot->addVar('var_rot', -90);
+					echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-gauche.gif' border='0' /></a> ";
+					echo "<br />";
+					$link_rot = $image_link;
+					$link_rot->addVar('redirect', $redirect_url);
+					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+					$link_rot->addVar('doc_rotate', $id_document);
+					$link_rot->addVar('vignette_aff', $id_document);
+					$link_rot->addVar('var_rot', 90);
+					echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-droite.gif' border='0' /></a> ";
+					echo "<br />";
+	
+					$link_rot = $image_link;
+					$link_rot->addVar('redirect', $redirect_url);
+					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
+					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+					$link_rot->addVar('doc_rotate', $id_document);
+					$link_rot->addVar('vignette_aff', $id_document);
+					$link_rot->addVar('var_rot', 180);
+					echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-180.gif' border='0' /></a>";
+					echo "</div>";
+				}
+			}
 			//
 			// Recuperer la vignette
 			//
@@ -534,51 +570,16 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$hauteur_vignette = $vignette->get('hauteur');
 					$taille_vignette = $vignette->get('taille');
 			
-				echo "<div style='text-align:center;'>";
 				echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "../$fichier");
-				echo "</div>";
 				
 				}
 			}
 			else {
 				$fichier_vignette = "../spip_images.php3?vignette=$fichier";
-				echo "<div style='text-align: center;'><a href='../$fichier'><img src='$fichier_vignette' border='0'></a></div>";
+				echo "<a href='../$fichier'><img src='$fichier_vignette' border='0'></a>";
 			}
+				echo "</div>";
 						
-			if ($flag_modif) {
-				$process = lire_meta('image_process');
-				 // imagick (php4-imagemagick)
-				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
-					echo "<div class='verdana1' style='text-align:center'>";		
-					$link_rot = $image_link;
-					$link_rot->addVar('redirect', $redirect_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('vignette_aff', $id_document);
-					$link_rot->addVar('var_rot', -90);
-					echo "<a href='".$link_rot->getUrl("portfolio")."'>gauche</a> |";
-	
-					$link_rot = $image_link;
-					$link_rot->addVar('redirect', $redirect_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('vignette_aff', $id_document);
-					$link_rot->addVar('var_rot', 90);
-					echo "<a href='".$link_rot->getUrl("portfolio")."'>droite</a> |";
-	
-					$link_rot = $image_link;
-					$link_rot->addVar('redirect', $redirect_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('vignette_aff', $id_document);
-					$link_rot->addVar('var_rot', 180);
-					echo "<a href='".$link_rot->getUrl("portfolio")."'>180&deg;</a>";
-					echo "</div>";
-				}
-			}
 			
 			if ($flag_modif) {
 				if ($flag_deplier) $triangle = bouton_block_visible("port$id_document");
@@ -690,7 +691,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 
 
-	// Ne pas afficher vignettes en tant qu'images sans docs
 	//// Documents associes
 	$query = "SELECT * FROM #table AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
@@ -736,6 +736,16 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$taille = $document->get('taille');
 			$date = $document->get('date');
 			$mode = $document->get('mode');
+		
+			$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
+			if ($type = @spip_fetch_array($result))	{
+				$type_extension = $type['extension'];
+				$type_inclus = $type['inclus'];
+				$type_titre = $type['titre'];
+			}
+
+
+
 			//
 			// Recuperer la vignette
 			//
@@ -776,8 +786,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if (strlen($descriptif) > 0) {
 				echo "<div class='verdana1'>".propre($descriptif)."</div>";
 			}
-			echo "<div class='verdana1' style='text-align: center;'>$largeur x $hauteur pixels</div>";
-			
+			echo "<div class='verdana1' style='text-align: center;'>".taille_en_octets($taille)."</div>";
+			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>$largeur x $hauteur pixels</div>";
 			
 			
 			if ($flag_modif) {
@@ -816,18 +826,18 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						echo "<b>"._T('info_description')."</b><br />\n";
 						echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft'>";
 						echo entites_html($descriptif);
-						echo "</textarea>\n";
+						echo "</textarea><br />\n";
 					} else {
-						echo "<input type='hidden' name='descriptif_document' value='".entites_html($descriptif)."' />\n";
+						echo "<input type='hidden' name='descriptif_document' value='".entites_html($descriptif)."' /><br />\n";
 					}
-			
+
 					if ($type_inclus == "embed" OR $type_inclus == "image") {
-						echo "<br /><b>"._T('info_dimension')."</b><br />\n";
+						echo "<b>"._T('info_dimension')."</b><br />\n";
 						echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 						echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 					} else {
 						echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
-						echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" />\n";
+						echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" /><br >\n";
 					}
 			
 					echo "<div align='".$GLOBALS['spip_lang_right']."'>";
@@ -979,7 +989,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$taille = $document->get('taille');
 	$date = $document->get('date');
 	$mode = $document->get('mode');
-
+	
 	if ($mode != 'document') return;
 
 	if (!$titre) {
