@@ -422,21 +422,16 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 		// Caracteres ASCII non-alphanumeriques
 		$texte = preg_replace(",[^-a-zA-Z0-9\x80-\xFF']+,", ' ', $texte);
 	}
-
-	### ici j'ai un bug de sorcellerie si je laisse le \s du lab : un caractere
-	### accentue comme "a`" se fait decouper en deux : le second octet de sa
-	### representation utf-8 est mange par le preg_replace !! Or, je ne vois
-	### pas de difference entre spip-stable et spip-lab a ce niveau, et le bug
-	### n'est pas dans le lab.
 	$texte = preg_replace(', [-\']+,', ' ', $texte); // tirets de typo
 	$texte = preg_replace(',\' ,', ' ', $texte); // apostrophes utilisees comme guillemets
-	#$texte = preg_replace(', +,', ' ', $texte);	# inutile
+
+	//echo htmlspecialchars($texte)."<br>";
 
 	// Virer les mots contenant au moins un chiffre
 	$texte = preg_replace(', ([^ ]*\d[^ ]* )+,', ' ', $texte);
 
 	// Melanger les mots
-	$mots = preg_split(', +,u', $texte);
+	$mots = preg_split(', +,', $texte);
 	sort($mots);
 	$mots = array_unique($mots);
 
@@ -490,7 +485,7 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 			$ok = substr($ok, $p + strlen($r[0]));
 			$mot = $r[1];
 			if ($suggest = $r[3]) 
-				$s = preg_split('/[\s,]+/', $suggest);
+				$s = preg_split('/[ ,]+/', $suggest);
 			else 
 				$s = array();
 			// Hack ligatures
@@ -581,7 +576,7 @@ function panneau_ortho($ortho_result) {
 					echo "<li><i>(...)</i></li>\n";
 					break;
 				}
-				echo "<li>".afficher_ortho(typo($sug))."</li>\n";
+				echo "<li>".typo(afficher_ortho($sug))."</li>\n";
 			}
 			echo "</ul>\n";
 		}
@@ -654,12 +649,11 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 	$mauvais = $ortho_result['mauvais'];
 	$bons = $ortho_result['bons'];
 
-	$texte = " ".$texte." ";
+	// Neutraliser l'apostrophe unicode pour surligner correctement les fautes
+	$texte = " ".str_replace("\xE2\x80\x99", "'", $texte)." ";
 	// Chercher et remplacer les mots un par un
-	$t0 = explode(" ", microtime());
 	$delim = '[^-\''.pcre_lettres_unicode().']';
 	foreach ($mauvais as $mot => $suggest) {
-		$mot = unicode_to_utf_8(typo($mot));
 		$pattern = ",$delim".$mot."$delim,us";
 		// Recuperer les occurences du mot dans le texte
 		if (preg_match_all($pattern, $texte, $regs, PREG_SET_ORDER)) {
@@ -689,9 +683,6 @@ function souligner_ortho($texte, $lang, $ortho_result) {
 			}
 		}
 	}
-	$t1 = explode(" ", microtime());
-	$dt = floor(1000 * ($t1[0] + $t1[1] - $t0[0] - $t0[1])) / 1000;
-	//echo "<div style='font-weight: bold; color: red;'>$dt s.</div>";
 	
 	$texte = preg_replace(',(^ | $),', '', $texte);
 	return $texte;
