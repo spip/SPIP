@@ -92,7 +92,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "<td align='center'>";
 		$col++;
 		if ($spip_lang == "fr") {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "barre-guillemets.png", "Insérer des &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "barre-guillemets.png", "Ins&eacute;rer des &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "barre-oe-maj.png", "Ins&eacute;rer un E-dans-l-O majuscule", $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "barre-oe.png", "Ins&eacute;rer un E-dans-l-O", $formulaire, $texte);

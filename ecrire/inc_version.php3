@@ -830,7 +830,7 @@ function verif_butineur() {
 		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
 			$browser_rev = doubleval($match[1]);
 		// Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
-		else if (strpos($browser_description, "Gecko"))
+		else if (strpos($browser_description, "Gecko") and !strpos($browser_description, "KHTML"))
 			$browser_rev = 1.4;
 		// Machins quelconques => equivalents 1.0 par defaut (Konqueror, etc.)
 		else $browser_rev = 1.0;
