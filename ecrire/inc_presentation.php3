@@ -1011,7 +1011,7 @@ function barre_onglets($rubrique, $onglet){
 	
 	if ($rubrique == "statistiques"){
 		onglet("&Eacute;volution des visites", "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
-		onglet("Ventilation par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
+		onglet("R&eacute;partition par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
 //		onglet("Par articles", "statistiques_articles.php3", "recents", $onglet, "article-24.gif");
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 		if ($activer_statistiques_ref != "non")	onglet("Origine des visites", "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
