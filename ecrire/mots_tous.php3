@@ -4,12 +4,12 @@ include ("inc.php3");
 
 
 	$query = "DELETE FROM spip_mots WHERE titre=''";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 
 if ($conf_mot>0) {
 	$query = "SELECT * FROM spip_mots WHERE id_mot='$conf_mot'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
 		$id_mot = $row['id_mot'];
 		$titre_mot = typo($row['titre']);
@@ -19,23 +19,23 @@ if ($conf_mot>0) {
 		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
 		else $aff_articles="prop,publie";
 
-		$nb_articles = mysql_fetch_row(mysql_query(
+		$nb_articles = mysql_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article
 			WHERE lien.id_mot=$conf_mot AND article.id_article=lien.id_article
 			AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'"
 			));
 		$nb_articles = $nb_articles[0];
-		$nb_rubriques = mysql_fetch_row(mysql_query(
+		$nb_rubriques = mysql_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
 			WHERE lien.id_mot=$conf_mot AND rubrique.id_rubrique=lien.id_rubrique"
 			));
 		$nb_rubriques = $nb_rubriques[0];
-		$nb_breves = mysql_fetch_row(mysql_query(
+		$nb_breves = mysql_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_breves AS lien, spip_breves AS breve
 			WHERE lien.id_mot=$conf_mot AND breve.id_breve=lien.id_breve
 			AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse'"));
 		$nb_breves = $nb_breves[0];
-		$nb_sites = mysql_fetch_row(mysql_query(
+		$nb_sites = mysql_fetch_row(spip_query(
 			"SELECT COUNT(*) FROM spip_mots_syndic AS lien, spip_syndic AS syndic
 			WHERE lien.id_mot=$conf_mot AND syndic.id_syndic=lien.id_syndic
 			AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse'"));
@@ -55,19 +55,19 @@ if ($connect_statut == '0minirezo') {
 		$ancien_type = addslashes(corriger_caracteres($ancien_type));
 
 		$query = "UPDATE spip_mots SET type=\"$change_type\" WHERE id_groupe='$id_groupe'";
-		$result=mysql_query($query);
+		$result=spip_query($query);
 	
 		$query = "UPDATE spip_groupes_mots SET titre=\"$change_type\", unseul='$unseul', obligatoire='$obligatoire', 
 			articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic', 
 			0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'
 			WHERE id_groupe='$id_groupe'";
-		$result=mysql_query($query);
+		$result=spip_query($query);
 	}
 
 	if ($supp_group){
 		$type=addslashes($supp_group);
 		$query="DELETE FROM spip_groupes_mots WHERE id_groupe='$supp_group'";
-		$result=mysql_query($query);
+		$result=spip_query($query);
 	}
 }
 
@@ -87,7 +87,7 @@ if ($connect_statut =="0minirezo" AND !$conf_mot){
 	echo "<P align='right'>";
 	
 	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
-	$nb_groupes = mysql_num_rows(mysql_query($query_groupes));
+	$nb_groupes = mysql_num_rows(spip_query($query_groupes));
 
 	if ($nb_groupes > 0)
 		echo "<A HREF='mots_edit.php3?new=oui&redirect=mots_tous.php3' onMouseOver=\"creer_mot.src='IMG2/creer-mot-on.gif'\" onMouseOut=\"creer_mot.src='IMG2/creer-mot-off.gif'\"><img src='IMG2/creer-mot-off.gif' alt='Creer un nouveau mot-cle' width='86' height='56' border='0' name='creer_mot'></A>";
@@ -140,7 +140,7 @@ if ($conf_mot>0) {
 		if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
 		else $aff_articles="prop,publie";
 
-		$result_articles = mysql_query(
+		$result_articles = spip_query(
 			"SELECT COUNT(*), mots.id_mot FROM spip_mots_articles AS lien, spip_articles AS article, spip_mots AS mots
 			WHERE lien.id_mot=mots.id_mot AND article.id_article=lien.id_article
 			AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse' GROUP BY mots.id_mot"
@@ -152,7 +152,7 @@ if ($conf_mot>0) {
 		}
 			
 
-		$result_rubriques = mysql_query(
+		$result_rubriques = spip_query(
 			"SELECT COUNT(*), mots.id_mot FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique, spip_mots AS mots
 			WHERE lien.id_mot=mots.id_mot AND rubrique.id_rubrique=lien.id_rubrique GROUP BY mots.id_mot"
 			);
@@ -162,7 +162,7 @@ if ($conf_mot>0) {
 			$nb_rubriques[$id_mot] = $total_rubriques;
 		}
 			
-		$result_breves = mysql_query(
+		$result_breves = spip_query(
 			"SELECT COUNT(*), mots.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve, spip_mots AS mots
 			WHERE lien.id_mot=mots.id_mot AND breve.id_breve=lien.id_breve
 			AND FIND_IN_SET(breve.statut,'$aff_articles')>0 AND breve.statut!='refuse' GROUP BY mots.id_mot"
@@ -173,7 +173,7 @@ if ($conf_mot>0) {
 			$nb_breves[$id_mot] = $total_breves;
 		}
 			
-		$result_syndic = mysql_query(
+		$result_syndic = spip_query(
 			"SELECT COUNT(*), mots.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic, spip_mots AS mots
 			WHERE lien.id_mot=mots.id_mot AND syndic.id_syndic=lien.id_syndic
 			AND FIND_IN_SET(syndic.statut,'$aff_articles')>0 AND syndic.statut!='refuse' GROUP BY mots.id_mot"
@@ -189,7 +189,7 @@ if ($conf_mot>0) {
 
 //////
 $query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
-$result_groupes = mysql_query($query_groupes);
+$result_groupes = spip_query($query_groupes);
 
 
 
@@ -246,7 +246,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 
 
 	$query = "SELECT * FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY titre";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	if (mysql_num_rows($result) > 0) {
 
@@ -261,7 +261,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 			else $aff_articles="prop,publie";
 
 			$query2 = "SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$id_mot AND article.id_article=lien.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'";
-			$result2 = mysql_query($query2);
+			$result2 = spip_query($query2);
 			list($nombre_mots) = mysql_fetch_array($result2);
 
 

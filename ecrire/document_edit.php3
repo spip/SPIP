@@ -8,18 +8,18 @@ include ("inc.php3");
 //
 
 if ($new == "oui") {
-	mysql_query("INSERT spip_documents (id_vignette, titre) ".
+	spip_query("INSERT spip_documents (id_vignette, titre) ".
 		"VALUES ('$id_vignette', 'nouveau document')");
 	$id_document =  mysql_insert_id();
 
 	if ($id_article) {
-		mysql_query("INSERT spip_documents_articles (id_document, id_article) ".
+		spip_query("INSERT spip_documents_articles (id_document, id_article) ".
 			"VALUES ($id_document, $id_article)");
 	}
 }
 
 if (!$id_article) {
-	$result = mysql_query("SELECT * FROM spip_documents_articles WHERE id_document=$id_document");
+	$result = spip_query("SELECT * FROM spip_documents_articles WHERE id_document=$id_document");
 	if ($row = @mysql_fetch_array($result)) {
 		$id_article = $row['id_article'];
 	}
@@ -31,10 +31,10 @@ $flag_editable = true; // a affiner ;-))
 if ($modif_document == 'oui') {
 	$titre = addslashes(corriger_caracteres($titre));
 	$descriptif = addslashes(corriger_caracteres($descriptif));
-	mysql_query("UPDATE spip_documents SET titre=\"$titre\", descriptif=\"$descriptif\" WHERE id_document=$id_document");
+	spip_query("UPDATE spip_documents SET titre=\"$titre\", descriptif=\"$descriptif\" WHERE id_document=$id_document");
 }
 
-$result = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_document");
+$result = spip_query("SELECT * FROM spip_documents WHERE id_document=$id_document");
 while ($row = mysql_fetch_array($result)){
 	$id_document = $row['id_document'];
 	$id_vignette = $row['id_vignette'];
@@ -52,7 +52,7 @@ if ($mode == 'vignette') {
 	$row_vignette = $row;
 }
 else if ($id_vignette) {
-	$result_vignette = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
+	$result_vignette = spip_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
 	$row_vignette = @mysql_fetch_array($result_vignette);
 }
 
@@ -63,7 +63,7 @@ if ($row_vignette) {
 	$taille_vignette = $row_vignette['taille'];
 }
 
-$result = mysql_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
+$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 if ($row = @mysql_fetch_array($result))	{
 	$type_extension = $row['extension'];
 	$type_inclus = $row['inclus'];

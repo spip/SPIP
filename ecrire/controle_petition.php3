@@ -8,7 +8,7 @@ debut_page("Suivi des p&eacute;titions");
 debut_gauche();
 
 $query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
-$result_petition = mysql_query($query_petition);
+$result_petition = spip_query($query_petition);
 
 if ($row = mysql_fetch_array($result_petition)) {
 	$nombre_petition = $row[0];
@@ -92,7 +92,7 @@ function controle_forum($request,$adresse_retour) {
 		if (strlen($message)>0) echo "<P>$message";
 		
 		$query_article="SELECT * FROM spip_articles WHERE id_article=$id_article";
-		$result_article=mysql_query($query_article);
+		$result_article=spip_query($query_article);
  		while($row=mysql_fetch_array($result_article)){
 			$id_article = $row[0];
 			$titre = typo($row["titre"]);
@@ -115,18 +115,18 @@ if ($connect_statut == "0minirezo") {
 
 	if ($supp_petition){
 		$query_forum = "UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$supp_petition";
- 		$result_forum = mysql_query($query_forum);
+ 		$result_forum = spip_query($query_forum);
 	}
 
 	if ($add_petition){
 		$query_forum = "UPDATE spip_signatures SET statut='publie' WHERE id_signature=$add_petition";
- 		$result_forum = mysql_query($query_forum);
+ 		$result_forum = spip_query($query_forum);
 	}
 
 	if (!$debut) $debut = 0;
 
 	$query_forum = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') AND date_time>DATE_SUB(NOW(),INTERVAL 30 DAY)";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
  	$total = 0;
  	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
 
@@ -143,10 +143,10 @@ if ($connect_statut == "0minirezo") {
 	}
 
 	$query_forum = "DELETE FROM spip_signatures WHERE NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
 
 	$query_forum = "SELECT * FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') ORDER BY date_time DESC LIMIT $debut,10";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
 	controle_forum($result_forum, "forum.php3");
 }
 else {

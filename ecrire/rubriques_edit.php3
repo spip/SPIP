@@ -11,7 +11,7 @@ debut_droite();
 if ($new=="oui"){
 	if(!$id_parent){$id_parent=0;}
 	$query="INSERT INTO spip_rubriques (titre, id_parent) VALUES ('Nouvelle rubrique', '$id_parent')";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 	$id_rubrique=mysql_insert_id();
 }
 
@@ -34,7 +34,7 @@ function enfant($leparent){
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
@@ -60,7 +60,7 @@ function enfant($leparent){
 
 
 $query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
-$result=mysql_query($query);
+$result=spip_query($query);
 
 while($row=mysql_fetch_array($result)){
 	$id_rubrique=$row[0];
@@ -101,7 +101,7 @@ if ($options=="avancees"){
 
 	// si c'est une rubrique-secteur contenant des breves, ne pas proposer de deplacer
 	$query = "SELECT COUNT(*) FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
-	$row = mysql_fetch_array(mysql_query($query));
+	$row = mysql_fetch_array(spip_query($query));
 	$contient_breves = $row[0];
 	if ($contient_breves > 0) {
 		echo "<font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme_deplace'><label for='confirme_deplace'>&nbsp;<i>Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</i></font></label>\n";

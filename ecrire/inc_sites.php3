@@ -7,11 +7,11 @@ define("_INC_SITES", "1");
 
 
 if ($supprimer_lien = $GLOBALS["supprimer_lien"]) {
-	mysql_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
+	spip_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
 }
 
 if ($ajouter_lien = $GLOBALS["ajouter_lien"]) {
-	mysql_query("UPDATE spip_syndic_articles SET statut='publie' WHERE id_syndic_article='$ajouter_lien'");
+	spip_query("UPDATE spip_syndic_articles SET statut='publie' WHERE id_syndic_article='$ajouter_lien'");
 }
 
 
@@ -96,10 +96,10 @@ function analyser_site($url) {
 
 function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 
-	mysql_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
+	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 	
 	$query="SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		$la_query=$row["url_syndic"];
 	}
@@ -141,10 +141,10 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
 												
 				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
-				$result_deja=mysql_query($query_deja);
+				$result_deja=spip_query($query_deja);
 				if (mysql_num_rows($result_deja)==0){
 					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='publie', descriptif=\"$la_description\"";
-					$result_syndic=mysql_query($query_syndic);
+					$result_syndic=spip_query($query_syndic);
 					
 					// Indexation pour moteur
 					$id_syndic_article=mysql_insert_id();
@@ -154,7 +154,7 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 					
 				}
 			}
-			mysql_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
+			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
 			if ($affichage) {
 				echo "<center><b>La syndication de ce site a fonctionn&eacute; correctement.</b></center>";
 			}
@@ -182,10 +182,10 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
 												
 				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
-				$result_deja=mysql_query($query_deja);
+				$result_deja=spip_query($query_deja);
 				if (mysql_num_rows($result_deja)==0){
 					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='publie'";
-					$result_syndic=mysql_query($query_syndic);
+					$result_syndic=spip_query($query_syndic);
 					
 					// Indexation pour moteur
 					$id_syndic_article=mysql_insert_id();
@@ -195,7 +195,7 @@ function syndic_a_jour($now_id_syndic, $affichage=false, $statut = 'off'){
 					
 				}
 			}
-			mysql_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
+			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 			if ($affichage) {
 				echo "<center><b>La syndication de ce site a fonctionn&eacute; correctement.</b></center>";
 			}
@@ -225,7 +225,7 @@ function afficher_sites($titre_table, $requete) {
 
 		echo $tranches;
 
-	 	$result = mysql_query($requete);
+	 	$result = spip_query($requete);
 		$num_rows = mysql_num_rows($result);
 
 		$ifond = 0;
@@ -293,7 +293,7 @@ function afficher_sites($titre_table, $requete) {
 			echo "</td>";					
 			echo "<td class='arial1'>";
 			if ($syndication == "oui" OR $syndication == "off") {
-				$result_art = mysql_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
+				$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
 				list($total_art) = mysql_fetch_row($result_art);
 				echo " $total_art article(s)";
 			} else {
@@ -331,7 +331,7 @@ function afficher_syndic_articles($titre_table, $requete) {
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
 		
- 	$result = mysql_query($requete);
+ 	$result = spip_query($requete);
 	$num_rows = mysql_num_rows($result);
 
 	// Ne pas couper pour trop peu
@@ -447,7 +447,7 @@ function afficher_syndic_articles($titre_table, $requete) {
 function executer_une_syndication() {
 	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='sus' AND statut='publie' ".
 			"AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1";
-	if ($result_syndic = mysql_query($query_syndic)) {
+	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
 			$id_syndic = $row["id_syndic"];
 			syndic_a_jour($id_syndic);
@@ -455,7 +455,7 @@ function executer_une_syndication() {
 	}
 	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' ".
 			"AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 0,1";
-	if ($result_syndic = mysql_query($query_syndic)) {
+	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
 			$id_syndic = $row["id_syndic"];
 			syndic_a_jour($id_syndic, false, 'sus');

@@ -7,7 +7,7 @@ debut_page("Suivi des forums");
 debut_gauche();
 
 $query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE date_time>DATE_SUB(NOW(),INTERVAL 30 DAY) AND (statut='publie' OR statut='poubelle')";
-$result_petition = mysql_query($query_petition);
+$result_petition = spip_query($query_petition);
 
 if ($row = mysql_fetch_array($result_petition)){
 	$nombre_petition = $row[0];
@@ -40,7 +40,7 @@ debut_droite();
 function forum_parent($id_forum) {
 
 	$query_forum = "SELECT * FROM spip_forum WHERE id_forum=\"$id_forum\" AND statut != 'redac'";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
 
  	while($row=mysql_fetch_array($result_forum)){
 		$id_forum=$row[0];
@@ -62,7 +62,7 @@ function forum_parent($id_forum) {
 		if ($forum_id_article > 0) {
 	
 			$query = "SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_article'";
-		 	$result = mysql_query($query);
+		 	$result = spip_query($query);
 
 			while($row=mysql_fetch_array($result)) {
 				$id_article = $row[0];
@@ -80,7 +80,7 @@ function forum_parent($id_forum) {
 		}
 		else if ($forum_id_rubrique > 0) {
 			$query2 = "SELECT * FROM spip_rubriques WHERE id_rubrique=\"$forum_id_rubrique\"";
-			$result2 = mysql_query($query2);
+			$result2 = spip_query($query2);
 
 			while($row = mysql_fetch_array($result2)){
 				$id_rubrique = $row[0];
@@ -90,7 +90,7 @@ function forum_parent($id_forum) {
 		}
 		else if ($forum_id_syndic > 0) {
 			$query2 = "SELECT * FROM spip_syndic WHERE id_syndic=\"$forum_id_syndic\"";
-			$result2 = mysql_query($query2);
+			$result2 = spip_query($query2);
 
 			while($row = mysql_fetch_array($result2)){
 				$id_syndic = $row[0];
@@ -101,7 +101,7 @@ function forum_parent($id_forum) {
 		}
 		else if ($forum_id_breve > 0) {
 			$query2 = "SELECT * FROM spip_breves WHERE id_breve=\"$forum_id_breve\"";
-		 	$result2 = mysql_query($query2);
+		 	$result2 = spip_query($query2);
 
 		 	while($row = mysql_fetch_array($result2)){
 				$id_breve = $row[0];
@@ -227,7 +227,7 @@ function controle_forum($request,$adresse_retour) {
 		if ($mots_cles_forums == "oui"){
 			
 			$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
-			$result_mots = mysql_query($query_mots);
+			$result_mots = spip_query($query_mots);
 			
 			while ($row_mots = mysql_fetch_array($result_mots)) {
 				$id_mot = $row_mots['id_mot'];
@@ -257,7 +257,7 @@ if ($connect_statut == "0minirezo") {
 	if (!$debut) $debut = 0;
 
 	$query_forum = "SELECT COUNT(*) FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
  	$total = 0;
  	if ($row = mysql_fetch_array($result_forum)) $total = $row[0];
 
@@ -274,7 +274,7 @@ if ($connect_statut == "0minirezo") {
 	}
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' ORDER BY date_heure DESC LIMIT $debut,10";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
 	controle_forum($result_forum, "forum.php3");
 
 //	afficher_forum($result_forum, $forum_retour,'oui','non');

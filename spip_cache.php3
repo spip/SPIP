@@ -12,7 +12,7 @@ include_local("inc-cache.php3");
 if ($purger_cache == "oui") {
 	if (verifier_action_auteur("purger_cache", $hash, $id_auteur)) {
 		purger_repertoire("CACHE", 0);
-		mysql_query("DELETE FROM spip_forum_cache");
+		spip_query("DELETE FROM spip_forum_cache");
 	}
 }
 

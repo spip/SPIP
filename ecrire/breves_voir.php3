@@ -63,7 +63,7 @@ if ($titre AND $modifier_breve) {
 	$texte = addslashes($texte);
 	$lien_titre = addslashes($lien_titre);
 	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\" WHERE id_breve=$id_breve";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
 		indexer_breve($id_breve);
 	}
@@ -75,13 +75,13 @@ if ($jour AND $connect_statut == '0minirezo') {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_breves SET date_heure='$annee-$mois-$jour' WHERE id_breve=$id_breve";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	calculer_dates_rubriques();
 }
 
 
 $query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
 	$id_breve=$row[0];
@@ -162,7 +162,7 @@ function enfant($leparent){
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row[0];
@@ -281,7 +281,7 @@ echo "<P align='left'>";
 
 
 $query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
-$result_forum = mysql_query($query_forum);
+$result_forum = spip_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
 
 

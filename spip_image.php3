@@ -180,7 +180,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if ($mode == 'vignette')
 		$query .= " AND inclus='image'";
 
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	if ($row = @mysql_fetch_array($result)) {
 		$id_type = $row['id_type'];
 		$type_inclus = $row['inclus'];
@@ -194,17 +194,17 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if ($mode == 'vignette') {
 		$id_document_lie = $id_document;
 		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
-		mysql_query($query); // requete inutile a mon avis (Fil)...
+		spip_query($query); // requete inutile a mon avis (Fil)...
 		$id_document = 0;
 	}
 	if (!$id_document) {
 		$query = "INSERT spip_documents (id_type, titre) VALUES ($id_type, '')";
-		mysql_query($query);
+		spip_query($query);
 		$id_document = mysql_insert_id();
 		$nouveau = true;
 		if ($id_article) {
 			$query = "INSERT spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)";
-			mysql_query($query);
+			spip_query($query);
 		}
 	}
 	if (!$dest) {
@@ -234,10 +234,10 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$largeur_prev = $preview['width'];
 		$fichier_prev = $preview['fichier'];
 		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('1', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
-		mysql_query($query);
+		spip_query($query);
 		$id_preview = mysql_insert_id();
 		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
-		mysql_query($query);
+		spip_query($query);
 	}
 
 	//
@@ -262,17 +262,17 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 
 	$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
 		"WHERE id_document=$id_document";
-	mysql_query($query);
+	spip_query($query);
 
 	if ($id_document_lie) {
 		$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
-		mysql_query($query);
+		spip_query($query);
 		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 	}
 	
 	if ($doc_vignette){
 		$query = "UPDATE spip_documents SET id_vignette=$doc_vignette, titre='', descriptif='' WHERE id_document=$id_document";
-		mysql_query($query);
+		spip_query($query);
 	
 	}
 
@@ -307,7 +307,7 @@ if ($ajout_doc == 'oui') {
 					$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
 					if ($inclus)
 						$req .= " AND inclus='$inclus'";
-					if (@mysql_fetch_array(mysql_query($req)))
+					if (@mysql_fetch_array(spip_query($req)))
 						$id_document = ajout_doc('ecrire/upload/'.$entryName, 'ecrire/upload/'.$entryName, '', 'document', '');
 				}
 			}
@@ -361,12 +361,12 @@ if ($doc_supp) {
 		exit;
 	}
 	$query = "SELECT fichier FROM spip_documents WHERE id_document=$doc_supp";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
 		$fichier = $row['fichier'];
-		mysql_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
-		mysql_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
-		mysql_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents WHERE id_document=$doc_supp");
+		spip_query("UPDATE spip_documents SET id_vignette=0 WHERE id_vignette=$doc_supp");
+		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$doc_supp");
 		unlink($fichier);
 	}
 }

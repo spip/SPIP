@@ -41,14 +41,14 @@ function enfants($id_parent){
 	global $nombre_abs;
 
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=\"$id_parent\"";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$nombre = 0;
 
 	while($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
 		$query2 = "SELECT SUM(visites) FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
-		$result2 = mysql_query($query2);
+		$result2 = spip_query($query2);
 		$visites = 0;
 		if ($row2 = mysql_fetch_array($result2)) {
 			$visites = $row2[0];
@@ -72,7 +72,7 @@ function enfants_aff($id_parent,$decalage) {
 	global $couleur_claire;
 	global $abs_total;
 	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=\"$id_parent\" ORDER BY titre";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 
 	while($row = mysql_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];
@@ -127,17 +127,17 @@ function enfants_aff($id_parent,$decalage) {
 
 
 $query = "SELECT count(*) FROM spip_articles where statut='publie'";
-$result = mysql_fetch_array(mysql_query($query));
+$result = mysql_fetch_array(spip_query($query));
 $nb_art = $result[0];
 
 if ($nb_art){
 	$cesite = "<LI> $nb_art articles";
 	$query = "SELECT count(*) FROM spip_breves where statut='publie'";
-	$result = mysql_fetch_array(mysql_query($query));
+	$result = mysql_fetch_array(spip_query($query));
 	$nb_breves = $result[0];
 	if ($nb_breves) $cesite .= "<LI> $nb_breves br&egrave;ves";
 	$query = "SELECT count(*) FROM spip_forum where statut='publie'";
-	$result = mysql_fetch_array(mysql_query($query));
+	$result = mysql_fetch_array(spip_query($query));
 	$nb_forum = $result[0];
 	if ($nb_forum) $cesite .= "<LI> $nb_forum contributions de forum";
 	echo "<P><B>Ce site contient:<UL> $cesite.</UL></B>";
@@ -150,7 +150,7 @@ if ($abs_total<1) $abs_total=1;
 $nombre_vis[0] = 0;
 
 $query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=\"0\"";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 while($row = mysql_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
@@ -179,7 +179,7 @@ fin_cadre_relief();
 
 
 $query="SELECT MAX(date) FROM spip_articles WHERE statut='publie'";
-$result=mysql_query($query);
+$result=spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$date = $row[0];

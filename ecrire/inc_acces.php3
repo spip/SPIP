@@ -57,7 +57,7 @@ function ecrire_acces() {
 	global $htaccess, $htpasswd;
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	unset($logins);
 	while($row = mysql_fetch_array($result)) $logins[$row[0]] = $row[1];
@@ -72,7 +72,7 @@ function ecrire_acces() {
 	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	unset($logins);
 	while($row = mysql_fetch_array($result)) $logins[$row[0]] = $row[1];

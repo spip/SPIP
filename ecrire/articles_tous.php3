@@ -3,29 +3,6 @@
 include ("inc.php3");
 
 
-/*
-function collections_actives()
-{
-	global $coll_actives;
-	$coll_actives = "";
-	$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut='publie' OR statut='prepa' OR statut='prop'";
-	for (;;) {
-		$result = mysql_query($query);
-		unset($rubriques);
-		while ($row = mysql_fetch_array($result)) {
-			$rubriques[] = $row[0];
-		}
-		if (!$rubriques) break;
-		$rubriques = join(",", $rubriques);
-		if ($coll_actives) $coll_actives .= ",$rubriques";
-		else $coll_actives = $rubriques;
-		$query = "SELECT DISTINCT id_parent FROM spip_rubriques WHERE (id_rubrique IN ($rubriques)) AND (id_parent NOT IN ($coll_actives))";
-	}
-}
-
-collections_actives();
-*/
-
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';
 
@@ -110,7 +87,7 @@ function enfants($id_parent, $decalage = 0) {
 	global $couleur_foncee, $couleur_claire;
 
 	$query = "SELECT id_rubrique, titre, statut, date FROM spip_rubriques WHERE id_parent=$id_parent ORDER BY titre";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	while ($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];

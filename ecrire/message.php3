@@ -6,12 +6,12 @@ include_local ("inc_mots.php3");
 
 
 $query = "SELECT COUNT(*) FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message";
-$result = mysql_query($query);
+$result = spip_query($query);
 list($n) = mysql_fetch_array($result);
 if (!$n) {
 
 	$query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
-	$result_message = mysql_query($query_message);
+	$result_message = spip_query($query_message);
 	while($row = mysql_fetch_array($result_message)) {
 		$type = $row['type'];
 	}
@@ -68,30 +68,30 @@ function afficher_jour($jour){
 
 
 if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
-	mysql_query("UPDATE spip_auteurs_messages SET vu='non' WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_auteurs_messages SET vu='non' WHERE id_message='$id_message'");
 }
 
 if ($modifier_message == "oui") {
 	$titre = addslashes($titre);
 	$texte = addslashes($texte);
-	mysql_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");	
 }
 
 if ($changer_rv) {
-	mysql_query("UPDATE spip_messages SET rv='$rv' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET rv='$rv' WHERE id_message='$id_message'");	
 }
 
 if ($jour) {
-	mysql_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00' WHERE id_message='$id_message'");	
 }
 
 if ($change_statut) {
-	mysql_query("UPDATE spip_messages SET statut='$change_statut' WHERE id_message='$id_message'");	
-	mysql_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");	
+	spip_query("UPDATE spip_messages SET statut='$change_statut' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");	
 }
 
 if ($supp_dest) {
-	mysql_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
+	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
 }
 
 
@@ -100,7 +100,7 @@ if ($supp_dest) {
 //
 
 $query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
-$result_message = mysql_query($query_message);
+$result_message = spip_query($query_message);
 
 while($row = mysql_fetch_array($result_message)) {
 	$id_message = $row[0];
@@ -115,7 +115,7 @@ while($row = mysql_fetch_array($result_message)) {
 	
 	// Marquer le message vu pour le visiteur
 	if ($type != "affich")
-		mysql_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
+		spip_query("UPDATE spip_auteurs_messages SET vu='oui' WHERE id_message='$id_message' AND id_auteur='$connect_id_auteur'");
 
 
 	
@@ -169,7 +169,7 @@ while($row = mysql_fetch_array($result_message)) {
 		//
 		// Expediteur
 		//		
-		$result = mysql_query("SELECT * FROM spip_auteurs WHERE id_auteur=$expediteur");
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$expediteur");
 
 		if ($row = mysql_fetch_array($result)) {
 
@@ -223,7 +223,7 @@ while($row = mysql_fetch_array($result_message)) {
 		if ($cherche_auteur) {
 			echo "<P ALIGN='left'>";
 			$query = "SELECT id_auteur, nom FROM spip_auteurs WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur'";
-			$result = mysql_query($query);
+			$result = spip_query($query);
 			unset($table_auteurs);
 			unset($table_ids);
 			while ($row = mysql_fetch_array($result)) {
@@ -240,7 +240,7 @@ while($row = mysql_fetch_array($result_message)) {
 				list(, $nouv_auteur) = each($resultat);
 				echo "<B>Le participant suivant est ajout&eacute; :</B><BR>";
 				$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
-				$result = mysql_query($query);
+				$result = spip_query($query);
 				echo "<UL>";
 				while ($row = mysql_fetch_array($result)) {
 					$id_auteur = $row['id_auteur'];
@@ -261,7 +261,7 @@ while($row = mysql_fetch_array($result_message)) {
 					$les_auteurs = join(',', $les_auteurs);
 					echo "<B>Plusieurs r&eacute;dacteurs trouv&eacute;s pour \"$cherche_auteur\":</B><BR>";
 					$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
-					$result = mysql_query($query);
+					$result = spip_query($query);
 					echo "<UL>";
 					while ($row = mysql_fetch_array($result)) {
 						$id_auteur = $row['id_auteur'];
@@ -292,9 +292,9 @@ while($row = mysql_fetch_array($result_message)) {
 
 		if ($nouv_auteur > 0) {
 			$query = "DELETE FROM spip_auteurs_messages WHERE id_auteur='$nouv_auteur' AND id_message='$id_message'";
-			$result = mysql_query($query);
+			$result = spip_query($query);
 			$query = "INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$nouv_auteur','$id_message','non')";
-			$result = mysql_query($query);
+			$result = spip_query($query);
 		}
 
 
@@ -303,7 +303,7 @@ while($row = mysql_fetch_array($result_message)) {
 		//
 
 		$query_auteurs = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur";
-		$result_auteurs = mysql_query($query_auteurs);
+		$result_auteurs = spip_query($query_auteurs);
 		
 		$total_dest = mysql_num_rows($result_auteurs);
 		
@@ -377,7 +377,7 @@ while($row = mysql_fetch_array($result_message)) {
 				$query_ajout_auteurs = "SELECT * FROM spip_auteurs WHERE ";
 				if ($les_auteurs) $query_ajout_auteurs .= "id_auteur NOT IN ($ze_auteurs) AND ";
 				$query_ajout_auteurs .= " messagerie<>'non' AND statut<>'5poubelle' AND statut<>'nouveau' AND statut<>'6forum' AND nom<>'Nouvel auteur' ORDER BY statut, nom";
-				$result_ajout_auteurs = mysql_query($query_ajout_auteurs);
+				$result_ajout_auteurs = spip_query($query_ajout_auteurs);
 
 				if (mysql_num_rows($result_ajout_auteurs) > 0) {
 
@@ -555,7 +555,7 @@ while($row = mysql_fetch_array($result_message)) {
 	echo "<P align='left'>";
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";
-	$result_forum = mysql_query($query_forum);
+	$result_forum = spip_query($query_forum);
 	afficher_forum($result_forum, $forum_retour);
 }
 

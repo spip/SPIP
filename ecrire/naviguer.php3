@@ -19,7 +19,7 @@ function parent($collection){
 	$parents=ereg_replace("(~+)","\\1~",$parents);
 	if ($collection!=0){	
 		$query2="SELECT * FROM spip_rubriques WHERE id_rubrique=\"$collection\"";
-		$result2=mysql_query($query2);
+		$result2=spip_query($query2);
 
 		while($row=mysql_fetch_array($result2)){
 			$id_rubrique = $row[0];
@@ -45,7 +45,7 @@ function parent($collection){
 function enfant($collection){
 	global $les_enfants;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
-	$result2 = mysql_query($query2);
+	$result2 = spip_query($query2);
 	
 	while($row=mysql_fetch_array($result2)){
 		$id_rubrique=$row[0];
@@ -88,7 +88,7 @@ function enfant($collection){
 
 function sous_enfant($collection2){
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
-	$result3 = mysql_query($query3);
+	$result3 = spip_query($query3);
 
 	if (mysql_num_rows($result3) > 0){
 		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul>";
@@ -114,7 +114,7 @@ if ($titre){
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
 	$query = "SELECT COUNT(*) FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
-	$row = mysql_fetch_array(mysql_query($query));
+	$row = mysql_fetch_array(spip_query($query));
 	if (($row[0] > 0) and !($confirme_deplace == 'oui')) {
 		$id_parent = 0;
 	}
@@ -130,7 +130,7 @@ if ($titre){
 	$descriptif = addslashes($descriptif);
 	$texte = addslashes($texte);
 	$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$id_rubrique";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	
 	calculer_rubriques();
 
@@ -143,7 +143,7 @@ if ($titre){
 // infos sur cette rubrique
 //
 $query="SELECT * FROM spip_rubriques WHERE id_rubrique='$coll'";
-$result=mysql_query($query);
+$result=spip_query($query);
 
 while($row=mysql_fetch_array($result)){
 	$id_rubrique=$row[0];
@@ -313,14 +313,16 @@ echo "<DIV align='left'>";
 
 echo "<P>";
 afficher_articles("Vos articles en cours de r&eacute;daction",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles, spip_auteurs_articles AS lien WHERE spip_articles.id_article=lien.id_article AND id_rubrique='$coll' AND lien.id_auteur=\"$connect_id_auteur\" AND spip_articles.statut=\"prepa\" ORDER BY spip_articles.date DESC");
+	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article AND id_rubrique='$coll' AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
 
 
 //////////  Les articles a valider
 /////////////////////////
 
 afficher_articles("Les articles &agrave; valider",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE spip_articles.statut=\"prop\" AND id_rubrique='$coll' ORDER BY spip_articles.date DESC");
+	"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles WHERE statut=\"prop\" AND id_rubrique='$coll' ORDER BY date DESC");
 
 
 //////////  Les articles en cours de redaction
@@ -328,7 +330,8 @@ afficher_articles("Les articles &agrave; valider",
 
 if ($connect_statut == "0minirezo") {
 	afficher_articles("Tous les articles en cours de r&eacute;daction",
-	"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE spip_articles.statut=\"prepa\" AND id_rubrique='$coll' ORDER BY spip_articles.date DESC");
+	"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles WHERE statut=\"prepa\" AND id_rubrique='$coll' ORDER BY date DESC");
 }
 
 
@@ -336,9 +339,11 @@ if ($connect_statut == "0minirezo") {
 /////////////////////////
 
 afficher_articles("Tous les articles publi&eacute;s dans cette rubrique",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE spip_articles.statut=\"publie\" AND id_rubrique='$coll' ORDER BY spip_articles.date DESC");
+	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles AS articles WHERE articles.statut=\"publie\" AND id_rubrique='$coll' ORDER BY articles.date DESC");
 
-afficher_sites("Les sites contenus dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
+afficher_sites("Les sites contenus dans cette rubrique",
+	"SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
 
 
 ////// Supprimer cette rubrique (si vide)

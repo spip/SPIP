@@ -26,7 +26,7 @@ if ($etape6) {
 	if ($login) {
 		$nom = addslashes($nom);
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		unset($id_auteur);
 		while ($row = mysql_fetch_array($result)) $id_auteur = $row[0];
 		
@@ -39,7 +39,7 @@ if ($etape6) {
 		else {
 			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, statut) VALUES(\"$nom\",\"$email\",\"$login\",\"$mdpass\",\"$htpass\",\"0minirezo\")";
 		}
-		mysql_query($query);
+		spip_query($query);
 	}
 
 	// Si PHP est installe en module Apache, pas besoin de .htaccess
@@ -65,7 +65,7 @@ if ($etape6) {
 	$conn .= "\$GLOBALS['db_ok'] = true;\n";
 	$conn .= "@mysql_connect(\"$adresse_db\",\"$login_db\",\"$pass_db\");\n";
 	$conn .= "@mysql_select_db(\"$sel_db\");\n";
-	$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_num_rows(@mysql_query('SELECT COUNT(*) FROM spip_meta'));\n";
+	$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_num_rows(@spip_query('SELECT COUNT(*) FROM spip_meta'));\n";
 	$conn .= "?".">";
 	$myFile = fopen("inc_connect.php3", "wb");
 	fputs($myFile, $conn);
@@ -154,7 +154,7 @@ elseif ($etape4) {
 	maj_base();
 
 	$query = "SELECT COUNT(*) FROM spip_articles";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	$result_ok = (mysql_num_rows($result) > 0);
 
 	echo "-->";

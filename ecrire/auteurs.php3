@@ -84,7 +84,7 @@ $flag_editable = ($connect_statut == '0minirezo');
 
 function supp_auteur($id_auteur) {
 	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 }
 
 if ($supp && $flag_editable) {
@@ -291,7 +291,7 @@ else $aff_articles="prop,publie";
 
 
 	 	$query="SELECT auteurs.*, COUNT(articles.id_article) AS compteur FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article AND FIND_IN_SET(auteurs.statut,'$aff_art')>0 AND FIND_IN_SET(articles.statut,'$aff_articles') GROUP BY auteurs.id_auteur";
-		calculer_auteurs(mysql_query($query));
+		calculer_auteurs(spip_query($query));
 
 
 	if($nombre_auteurs<30) $liste_lettres="tout";
@@ -301,7 +301,7 @@ else $aff_articles="prop,publie";
 			$ze_auteurs=substr($les_auteurs,1,strlen($les_auteurs));
 
 			$query="SELECT *, 0 AS compteur FROM spip_auteurs WHERE FIND_IN_SET(id_auteur,'$ze_auteurs')=0 AND FIND_IN_SET(statut,'$aff_art')>0";
-			calculer_auteurs(mysql_query($query));
+			calculer_auteurs(spip_query($query));
 		}
 
 

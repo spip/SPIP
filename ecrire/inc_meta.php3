@@ -12,7 +12,7 @@ function lire_metas() {
 	$meta = '';
 	$meta_maj = '';
 	$query = 'SELECT * FROM spip_meta';
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		$nom = $row['nom'];
 		$meta[$nom] = $row['valeur'];
@@ -32,11 +32,11 @@ function lire_meta_maj($nom) {
 
 function ecrire_meta($nom, $valeur) {
 	$valeur = addslashes($valeur);
-	mysql_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', '$valeur')");
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', '$valeur')");
 }
 
 function effacer_meta($nom) {
-	mysql_query("DELETE FROM spip_meta WHERE nom='$nom'");
+	spip_query("DELETE FROM spip_meta WHERE nom='$nom'");
 }
 
 //

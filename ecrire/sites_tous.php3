@@ -5,7 +5,7 @@ include ("inc.php3");
 
 if ($connect_statut == '0minirezo' AND $supp_syndic) {
 	$query="DELETE FROM spip_syndic WHERE id_syndic=$supp_syndic";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 }
 
 

@@ -13,10 +13,10 @@ if ($new=="oui") {
 
 	$mydate = date("YmdHis", time() - 12 * 3600);
 	$query = "DELETE FROM spip_breves WHERE (statut = 'refuse') && (maj < $mydate)";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut) VALUES ('Nouvelle breve', NOW(), '$id_rubrique', 'refuse')";
-	$result=mysql_query($query);
+	$result=spip_query($query);
 	$id_breve=mysql_insert_id();
 }
 
@@ -35,7 +35,7 @@ function enfant($leparent) {
 	global $id_parent;
 	global $id_rubrique;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
- 	$result=mysql_query($query);
+ 	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row[0];
@@ -48,7 +48,7 @@ function enfant($leparent) {
 
 
 $query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
-$result = mysql_query($query);
+$result = spip_query($query);
 
 while($row=mysql_fetch_array($result)){
 	$id_breve=$row[0];
