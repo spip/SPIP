@@ -61,7 +61,6 @@ if ($set_options == 'basiques') {
 }
 
 if ($connect_statut == "0minirezo") $options = 'avancees';
-if (!isset($spip_couleur)) $spip_couleur = 6;
 
 switch ($spip_couleur) {
 	case 1:
@@ -91,12 +90,12 @@ switch ($spip_couleur) {
 		break;
 	case 6:
 		/// Bleu
-		$couleur_foncee="#2b539c";
+		$couleur_foncee="#3874B0";
 		$couleur_claire="#EDF3FE";
 		break;
 	case 7:
 		/// Bleu pastelle
-		$couleur_foncee="#4085CD";
+		$couleur_foncee="#4095CD";
 		$couleur_claire="#EDF3FE";
 		break;
 	case 8:
@@ -126,8 +125,8 @@ switch ($spip_couleur) {
 		break;
 	default:
 		/// Bleu
-		$couleur_foncee="#2378CF";
-		$couleur_claire="#E1EEFB";
+		$couleur_foncee="#3874B0";
+		$couleur_claire="#EDF3FE";
 }
 
 
