@@ -16,11 +16,11 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 
 	$nom = mktime(1,1,1,$mois_today,$jour_today,$annee_today);
 	$jour_semaine = date("w",$nom);
+	if ($jour_semaine==0) $jour_semaine=7;
 	
 	$debut = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+1, $annee_today));
 	$fin = date("Y-m-d",mktime (1,1,1,$mois_today, $jour_today-$jour_semaine+7, $annee_today));
 
-	if ($jour_semaine==0) $jour_semaine=7;
 	
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
