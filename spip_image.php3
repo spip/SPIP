@@ -228,7 +228,6 @@ function ajout_image($source, $dest) {
 
 function ajout_doc($orig, $source, $mode, $id_document) {
 	global $hash_id_auteur, $hash, $id_article, $type;
-
 	//
 	// Securite
 	//
@@ -252,7 +251,6 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 	if (!$dest_path) return;
 
 	// Preparation
-
 	if ($mode == 'vignette') {
 		$id_document_lie = $id_document;
 		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
@@ -270,7 +268,6 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 			spip_query($query);
 		}
 	}
-
 	//
 	// Mettre a jour les infos du document uploade
 	//
@@ -371,15 +368,16 @@ function gdRotate($imagePath,$rtt){
 // Normalement le test est vérifié donc on ne rend rien sinon
 
 function creer_fichier_vignette($vignette) {
-  spip_log("creer_fich $vignette " . lire_meta("creer_preview"));
+	spip_log("creer_fich $vignette " . lire_meta("creer_preview"));
 	if ($vignette && lire_meta("creer_preview") == 'oui') {
 		eregi('\.([a-z0-9]+)$', $vignette, $regs);
 		$ext = $regs[1];
 		$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
-		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, '', basename($vignette).'-s'))
+		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s'))
 		{
+		
 			inserer_vignette_base($vignette, $preview['fichier']);
 			return $preview['fichier'];
         }
@@ -552,8 +550,8 @@ function afficher_compactes($image_name) {
 
 if ($ajout_doc == 'oui') {
 
-// image_name n'est valide que par POST http, mais pas par la methode ftp/upload
-// par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
+	// image_name n'est valide que par POST http, mais pas par la methode ftp/upload
+	// par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
 	if (!$image_name AND $image2) {
 		$image = "ecrire/upload/".$image2;
 		$image_name = $image;

@@ -39,16 +39,15 @@ function vignette_par_defaut($type_extension, $size=true) {
 
 
 function vignette_previsu_ou_par_defaut($fichier, $extension) {
-  // si pas de vignette, utiliser la vignette par defaut
-  // ou essayer de creer une previsu si permis
-  global $flag_ecrire;
-  $formats = ','.lire_meta('formats_graphiques').',';
-  if ((strpos($formats, ",$extension,") === false) || 
-      (lire_meta("creer_preview") != 'oui')) {
-    return vignette_par_defaut($extension ? $extension : 'txt', true);
-  } else {
-    return array(($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode($fichier), 0, 0);
-  }
+	// si pas de vignette, utiliser la vignette par defaut
+	// ou essayer de creer une previsu si permis
+ 	 global $flag_ecrire;
+	$formats = ','.lire_meta('formats_graphiques').',';
+	if ((strpos($formats, ",$extension,") === false) || (lire_meta("creer_preview") != 'oui')) {
+		return vignette_par_defaut($extension ? $extension : 'txt', true);
+	} else {
+		return array(($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode($fichier), 0, 0);
+	}
 }
 
 function document_et_vignette($url, $document) 
@@ -381,8 +380,9 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 
 function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
+	global $connect_id_auteur;
 #  spip_log("texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document)");
-	if ($largeur_vignette > 120) {
+/*	if ($largeur_vignette > 120) {
 		$rapport = 120.0 / $largeur_vignette;
 		$largeur_vignette = 120;
 		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
@@ -392,15 +392,25 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 		$hauteur_vignette = 110;
 		$largeur_vignette = ceil($largeur_vignette * $rapport);
 	}
+*/
+	include_ecrire("inc_logos.php3");
+
+	$taille = image_ratio($largeur_vignette, $hauteur_vignette, 120, 110);
+	$w = $taille[0];
+	$h = $taille[1];
+	$hash = calculer_action_auteur ("reduire $w $h");
+	
+	$image = "<img src='../spip_image_reduite.php3?img=$fichier_vignette&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' />";
+	
 
 # ça ne marche pas toujours car fichier_vignette peut etre n'importe quoi
 #	$fid = "?date=".@filemtime($fichier_vignette);
 
 	if ($fichier_document)
-		return "<a href='$fichier_document'><img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' /></a>\n";
+		return "<a href='$fichier_document'>$image</a>\n";
 	else
-		return "<img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' />\n";
-}
+		return $image;
+}		
 
 
 //
@@ -540,7 +550,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			}
 						
 			if ($flag_modif) {
-			
 				if ($id_vignette == 0) {
 					echo "<div style='float: $spip_lang_left;'>";		
 					echo bouton_block_invisible("gerer_vignette$id_document");	
