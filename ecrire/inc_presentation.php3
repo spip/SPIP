@@ -899,46 +899,77 @@ afficher_script_layer();
 // Fonctions onglets
 
 function onglet_relief_inter(){
-	echo "<td background='img_pack/barre-noir.gif'><img src='img_pack/rien.gif' alt='o' width='1' height='40'></td>";
+	global $spip_display;
+	if ($spip_display != 1) {
+		echo "<td background='img_pack/barre-noir.gif'><img src='img_pack/rien.gif' alt='o' width='1' height='40'></td>";
+	}
 }
 
 function debut_onglet(){
-	echo "\n";
-	echo "<p><table cellpadding=0 cellspacing=0 border=0>";
-	echo "<tr><td>";
-	echo "<img src='img_pack/barre-g.gif' alt='<' width='16' height='40'>";
-	echo "</td>";
+	global $spip_display;
+	if ($spip_display == 1) {
+		echo "\n";
+		echo "<p><table cellpadding=0 cellspacing=3 border=0>";
+		echo "<tr>";
+	}
+	else {
+		echo "\n";
+		echo "<p><table cellpadding=0 cellspacing=0 border=0>";
+		echo "<tr><td>";
+		echo "<img src='img_pack/barre-g.gif' alt='<' width='16' height='40'>";
+		echo "</td>";
+	}
 }
 
 function fin_onglet(){
+	global $spip_display;
 	onglet_relief_inter();
-	echo "<td>";
-	echo "<img src='img_pack/barre-d.gif' alt='>' width='16' height='40'>";
-	echo "</td></tr>";
-	echo "</table>";
+	if ($spip_display == 1) {
+		echo "</tr>";
+		echo "</table>";
+	} else {
+		echo "<td>";
+		echo "<img src='img_pack/barre-d.gif' alt='>' width='16' height='40'>";
+		echo "</td></tr>";
+		echo "</table>";
+	}
 }
 
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
-
-	if ($onglet_ref == $onglet){
-		onglet_relief_inter();
-		if (strlen($icone)>3){
-		echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='top'>";
-			echo "&nbsp; <img src='img_pack/$icone' border=0>";
-		echo "</td>";
+	global $spip_display ;
+	if ($spip_display == 1) {
+		if ($onglet_ref == $onglet){
+			echo "\n<td  class='iconeon' valign='middle'>";
+			echo "<font face='verdana,arial,helvetica,sans-serif' size=2 color='black'><b>$texte</b></font>";
+			echo "</td>";
 		}
-		echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
-		echo "&nbsp; <font face='verdana,arial,helvetica,sans-serif' size=2 color='black'><b>$texte</b></font> &nbsp;";
-		echo "</td>";
+		else {
+			echo "\n<td class='iconeoff' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\" valign='middle'>";
+			echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a>";
+			echo "</td>";
+		}
 	}
 	else {
-		onglet_relief_inter();
-		echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
-		if (strlen($icone)>3){
-			echo "&nbsp; <img src='img_pack/$icone'  alt='o' border=0 align='middle'>";
+		if ($onglet_ref == $onglet){
+			onglet_relief_inter();
+			if (strlen($icone)>3){
+			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='top'>";
+				echo "&nbsp; <img src='img_pack/$icone' border=0>";
+			echo "</td>";
+			}
+			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
+			echo "&nbsp; <font face='verdana,arial,helvetica,sans-serif' size=2 color='black'><b>$texte</b></font> &nbsp;";
+			echo "</td>";
 		}
-		echo "&nbsp; <a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a> &nbsp;";
-		echo "</td>";
+		else {
+			onglet_relief_inter();
+			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" onClick=\"document.location='$lien'\" height=40 valign='middle'>";
+			if (strlen($icone)>3){
+				echo "&nbsp; <img src='img_pack/$icone'  alt='o' border=0 align='middle'>";
+			}
+			echo "&nbsp; <a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size=2 color='#666666'><b>$texte</b></font></a> &nbsp;";
+			echo "</td>";
+		}
 	}
 }
 
