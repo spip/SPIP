@@ -446,8 +446,7 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 					echo $message_ajouter_mot;
 					$message_ajouter_mot = "";
 					echo "</td>\n<td>";
-					echo "<script language='text/javascript'><!--\nvar antifocus_$id_groupe = false;\n// --></script>\n";
-					$jscript = "onfocus=\"if(!antifocus_$id_groupe){this.value='';antifocus_$id_groupe=true;}\"". " onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\"";
+					$jscript = "onfocus=\"setvisibility('valider_groupe_$id_groupe', 'visible'); if(!antifocus_mots[$id_groupe]){this.value='';antifocus_mots[$id_groupe]=true;}\"";
 
 					if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
 						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20' $jscript>";
