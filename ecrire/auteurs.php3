@@ -167,10 +167,10 @@ function afficher_auteurs($classement) {
 						echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
 						break;					
 					case "2redac":
-						echo "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur' width='23' height='12' border='0'>";
+						echo "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur hum' width='23' height='12' border='0'>";
 						break;					
 					case "1comite":
-						echo "<img src='img_pack/bonhomme-bleu.gif' alt='Comit&eacute;' width='23' height='12' border='0'>";
+						echo "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur' width='23' height='12' border='0'>";
 						break;					
 					case "5poubelle":
 						echo "<img src='img_pack/bonhomme-rouge.gif' alt='Effac&eacute;' width='23' height='12' border='0'>";
