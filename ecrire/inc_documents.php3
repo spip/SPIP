@@ -396,11 +396,13 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 		$hauteur_vignette = 110;
 		$largeur_vignette = ceil($largeur_vignette * $rapport);
 	}
+	
+	$fid = "?date=".@filemtime($fichier_vignette);
 
 	if ($fichier_document)
-		return "<a href='$fichier_document'><img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' /></a>\n";
+		return "<a href='$fichier_document'><img src='$fichier_vignette$fid' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' /></a>\n";
 	else
-		return "<img src='$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' />\n";
+		return "<img src='$fichier_vignette$fid' border='0' height='$hauteur_vignette' width='$largeur_vignette' align='top' alt='' />\n";
 }
 
 
@@ -543,7 +545,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if ($flag_modif) {
 			
 				if ($id_vignette == 0) {
-					echo "<div class='bouton_rotation' style='float: left;'>";		
+					echo "<div style='float: $spip_lang_left;'>";		
 					echo bouton_block_invisible("gerer_vignette$id_document");	
 					echo "</div>";
 					$vignette_perso = false;
@@ -554,8 +556,9 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 					$link->addVar('hash_id_auteur', $connect_id_auteur);
 					$link->addVar('doc_supp', $id_vignette);
-					echo "<div style='float: left;'>";		
-					echo "<a href='#$ancre' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'><img src='img_pack/croix-rouge.gif' border='0' /></a>";	
+					
+					echo "<div style='float: $spip_lang_left'>";		
+					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'><img src='img_pack/croix-rouge.gif' border='0' /></a>";	
 					echo "</div>";
 					$vignette_perso = true;
 				
@@ -568,7 +571,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				 // imagick (php4-imagemagick)
 				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
 					if (ereg($format, lire_meta('formats_graphiques'))) {
-						echo "<div class='verdana1' style='float: right; text-align:left;'>";		
+						echo "<div class='verdana1' style='float: right; text-align:$spip_lang_right;'>";		
 						$link_rot = $image_link;
 						$link_rot->addVar('redirect', $redirect_url);
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
@@ -576,7 +579,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('doc_rotate', $id_document);
 						$link_rot->addVar('vignette_aff', $id_document);
 						$link_rot->addVar('var_rot', -90);
-						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-gauche.gif' border='0' /></a> ";
+						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-gauche.gif' border='0' /></a>";
 						echo "<br />";
 						$link_rot = $image_link;
 						$link_rot->addVar('redirect', $redirect_url);
@@ -585,7 +588,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('doc_rotate', $id_document);
 						$link_rot->addVar('vignette_aff', $id_document);
 						$link_rot->addVar('var_rot', 90);
-						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-droite.gif' border='0' /></a> ";
+						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'><img src='img_pack/tourner-droite.gif' border='0' /></a>";
 						echo "<br />";
 		
 						$link_rot = $image_link;
@@ -603,7 +606,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			//
 			// Recuperer la vignette
 			//
-			
 			if ($id_vignette >0) {
 				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 				if ($vignette) {
@@ -649,6 +651,11 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "<div class='verdana2'><b>$triangle".propre($titre)."</b></div>";
 			} else {
 				$nom_fichier = basename($fichier);
+				
+				if (strlen($nom_fichier) > 20) {
+					$nom_fichier = substr($nom_fichier, 0, 10)."...".substr($nom_fichier, strlen($nom_fichier)-10, strlen($nom_fichier));
+				}
+				
 				echo "<div class='verdana1'>$triangle$nom_fichier</div>";
 			}
 			
@@ -792,8 +799,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				$type_titre = $type_doc['titre'];
 			}
 
-
-
 			//
 			// Recuperer la vignette
 			//
@@ -802,6 +807,16 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			
 		
 			if ($id_vignette > 0) {
+					$link = $image_link;
+					$link->addVar('redirect', $redirect_url);
+					$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
+					$link->addVar('hash_id_auteur', $connect_id_auteur);
+					$link->addVar('doc_supp', $id_vignette);
+					
+					echo "<div style='float: $spip_lang_left'>";		
+					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'><img src='img_pack/croix-rouge.gif' border='0' /></a>";	
+					echo "</div>";
+
 				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
 			
 				if ($vignette) {
@@ -815,9 +830,26 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</div>";
 			}
 			else {
+				echo "<div style='float: $spip_lang_left;'>".bouton_block_invisible("gerer_vignette$id_document")."</div>";
 				echo "<div style='text-align: center;'>",
-				  document_et_vignette($url, $fichier), 
-				  "</div>";
+				document_et_vignette($url, $fichier), 
+				"</div>";
+
+				if ($flag_modif) {
+							echo debut_block_invisible("gerer_vignette$id_document");
+							echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px; text-align: left; background-color: white;'>";
+							$link = $image_link;
+							$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+							$link->addVar('hash_id_auteur', $connect_id_auteur);
+							$link->addVar('ajout_doc', 'oui');
+							$link->addVar('id_document', $id_document);
+							$link->addVar('mode', 'vignette');	
+							afficher_upload($link, $redirect_url, _T('info_remplacer_vignette'), 'image', false);
+							echo "</div>";
+							echo fin_block();
+				}
+
+
 			}
 			
 			
