@@ -6,12 +6,6 @@ if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
 
-// Fonction bidon evitant que PHP optimise les ob_start() vides
-function callback_surligne($texte) {
-	return $texte;
-}
-
-
 // utilise avec ob_start() et ob_get_contents() pour
 // mettre en rouge les mots passes dans $var_recherche
 function surligner_mots($page, $mots) {
@@ -82,7 +76,7 @@ function debut_surligne($mots, $mode_surligne) {
 	switch ($mode_surligne) {
 		case 'auto' :	// on arrive du debut de la page, on ne touche pas au buffer
 			ob_end_flush();
-			ob_start('callback_surligne');
+			ob_start();
 			$mode_surligne = 'actif';
 			break;
 
@@ -90,12 +84,12 @@ function debut_surligne($mots, $mode_surligne) {
 			$la_page = surligner_mots(ob_get_contents(), $mots);
 			ob_end_clean();
 			echo $la_page;
-			ob_start('callback_surligne');
+			ob_start();
 			$mode_surligne = 'actif';
 			break;
 
 		case 'inactif' :	// il n'y a pas de buffer
-			ob_start('callback_surligne');
+			ob_start();
 			$mode_surligne = 'actif';
 			break;
 
@@ -112,7 +106,7 @@ function fin_surligne($mots, $mode_surligne) {
 			$la_page = surligner_mots(ob_get_contents(), $mots);
 			ob_end_clean();
 			echo $la_page;
-			ob_start('callback_surligne');
+			ob_start();
 			$mode_surligne = 'inactif';
 			break;
 
