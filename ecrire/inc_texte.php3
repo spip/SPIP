@@ -69,9 +69,9 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 //
 function vignette_par_defaut($type_extension, $align = '') {
 	if ($GLOBALS['flag_ecrire'])
-		$img = "../IMG";
+		$img = "../IMG/icones";
 	else
-		$img = "IMG";
+		$img = "IMG/icones";
 
 	$filename = "$img/type_$type_extension";
 
