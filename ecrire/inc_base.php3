@@ -299,6 +299,11 @@ function creer_base() {
 		KEY id_mot (id_mot), KEY id_syndic (id_syndic))";
 	$result = mysql_query($query);
 
+	$query = "CREATE TABLE spip_mots_forum (
+		id_mot bigint(21) DEFAULT '0' NOT NULL, id_forum bigint(21) DEFAULT '0' NOT NULL,
+		KEY id_mot (id_mot), KEY id_forum (id_forum))";
+	$result = mysql_query($query);
+
 
 	//
 	// Gestion du site
