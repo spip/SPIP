@@ -9,6 +9,13 @@ define("_ECRIRE_INC_MOTS", "1");
 $GLOBALS['flag_mots_ressemblants'] = $GLOBALS['flag_levenshtein'];
 
 
+// ne pas faire d'erreur si les chaines sont > 254 caracteres
+function levenshtein255 ($a, $b) {
+	$a = substr($a, 0, 254);
+	$b = substr($b, 0, 254);
+	return @levenshtein($a,$b);
+}
+
 function mots_ressemblants($mot, $table_mots, $table_ids='') {
 	$lim = 2;
 	$nb = 0;
@@ -31,8 +38,8 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 					$val2 = strtolower($val2);
 					$len2 = strlen($val2);
 					if (substr($val2, 0, $len) == $mot) $m = -1;
-					else if ($len2 > $len) $m = levenshtein($val2, $mot) + $len - $len2;
-					else $m = levenshtein($val2, $mot);
+					else if ($len2 > $len) $m = levenshtein255($val2, $mot) + $len - $len2;
+					else $m = levenshtein255($val2, $mot);
 					$distance[$id] = $m;
 				}
 				if ($m <= $lim) {
