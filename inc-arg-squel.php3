@@ -69,11 +69,11 @@ function calculer_params($type, $params, $idb, &$boucles)
 
       // Gerer les traductions
       else if ($param == 'traduction') {
-	$req_where[] = "$id_table.id_trad > 0 AND  $id_table.id_trad ='\"." .
+	$boucle->where[] = "$id_table.id_trad > 0 AND  $id_table.id_trad ='\"." .
 	  index_pile($boucles[$idb]->id_parent, 'id_trad', $boucles) . ".\"'";
       }
       else if ($param == 'origine_traduction') {
-	$req_where[] = "$id_table.id_trad = $id_table.id_article";
+	$boucle->where[] = "$id_table.id_trad = $id_table.id_article";
       }
       
       // Special rubriques
