@@ -198,13 +198,13 @@ function barre_forum($texte)
 	include_ecrire('inc_layer.php3');
 
 	if (!$GLOBALS['browser_barre'])
-		return "<textarea rows='12' class='forml' cols='40'>$texte</textarea>";
+		return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";
 	static $num_formulaire = 0;
 	$num_formulaire++;
 	include_ecrire('inc_barre.php3');
 	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true) .
 	  "
-<textarea rows='12' class='forml' cols='40'
+<textarea name='texte' rows='12' class='forml' cols='40'
 id='formulaire_$num_formulaire'
 onselect='storeCaret(this);'
 onclick='storeCaret(this);'
