@@ -23,8 +23,6 @@ include_ecrire ("inc_filtres.php3");
 	.fondl {background-color: #EDF3FE; background-position: center bottom; float: none; color: #000000}
 	.fondo {background-color: #044476; background-position: center bottom; float: none; color: #FFFFFF}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
-	.profondeur {border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid}
-	.hauteur {border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid}
 	label {cursor: pointer;}
 	.arial1 {font-family: Arial, Helvetica, sans-serif; font-size: 10px;}
 	.arial2 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;}

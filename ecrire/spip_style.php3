@@ -22,64 +22,241 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .fondl { background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000 }
 .fondo { background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF }
 .fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519 }
-.sanscadre { padding: 4px; margin: 0px; }
-.aveccadre { cursor: pointer; padding: 3px; margin: 0px; border-left: solid 1px <?php echo $couleur_claire; ?>; border-top: solid 1px <?php echo $couleur_claire; ?>; border-right: solid 1px #000000; border-bottom: solid 1px #000000; }
+
+
+/*
+ * Icones et bandeaux
+ */
+
+.bandeau-principal {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 6px;
+	background: url(img_pack/rayures-fines.gif);
+	border-bottom: 1px solid #333333;
+}
+.bandeau-secondaire {
+	display: block;
+	margin: 0px;
+	padding: 0px;
+	padding-top: 3px;
+	background-color: #f1f1f1;
+	border-bottom: 1px solid black;
+}
+.bandeau-icones {
+	display: block;
+	margin: auto;
+	padding: 2px;
+}
+.bandeau-icones .gauche {
+	float: left;
+}
+.bandeau-icones .droite {
+	float: right;
+}
+.bandeau-icones .milieu {
+	text-align: center;
+}
+.bandeau-icones .fin {
+	clear: both;
+}
+.bandeau-icones .separateur {
+	vertical-align: center;
+	height: 90%;
+	width: 2px;
+	padding: 0px;
+	margin: 2px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	background: url(img_pack/tirets-separation.gif);
+}
+
+/* Icones 48 * 48 et 24 * 24 */
+
+.cellule36, .cellule48 {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	vertical-align: top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+}
+.cellule36 {
+	font-size: 11px;
+}
+.cellule48 {
+	font-size: 12px;
+}
+.cellule36 a, .cellule36 a:hover, .cellule48 a, .cellule48 a:hover {
+	text-decoration: none;
+}
+.cellule36 a, .cellule48 a {
+	display: block; text-align: center; background: url(img_pack/rien.gif) no-repeat top center;
+}
+.cellule36 a.selection {
+	display: block; text-align: center; background: url(img_pack/pave-gris-36.png) no-repeat top center;
+}
+.cellule48 a.selection {
+	display: block; text-align: center; background: url(img_pack/pave-gris-48.png) no-repeat top center;
+}
+.cellule36 a:hover {
+	background: url(img_pack/pave-blanc-36.png) no-repeat top center;
+}
+.cellule48 a:hover {
+	background: url(img_pack/pave-blanc-48.png) no-repeat top center;
+}
+.cellule36 a img {
+	border: 0px; margin: 6px; display: inline;
+}
+.cellule48 a img {
+	border: 0px; margin: 3px; display: inline;
+}
+.cellule36 a span, .cellule48 a span {
+	color: #505050; display: block; margin: 2px;
+}
+.cellule36 a.selection span, .cellule48 a.selection span {
+	color: #000000; display: block; margin: 2px;
+}
+
+.cellule36 a.aide, .cellule36 a.aide:hover {
+	background: url(img_pack/rien.gif);
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+.cellule36 a.aide img {
+	margin: 0px;
+	padding: 0px;
+	display: inline;
+}
+
+/* Navigation texte */
+
+.cellule-texte {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	vertical-align: top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	text-align: center;
+	text-decoration: none;
+	font-size: 12px;
+}
+.cellule-texte a, .cellule-texte a:hover {
+	text-decoration: none;
+	display: block;
+}
+.cellule-texte a {
+	padding: 4px; margin: 1px; border: 0px;
+	color: #505050;
+}
+.cellule-texte a.selection {
+	padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;
+	-moz-border-radius: 5px;
+	color: #000000;
+}
+.cellule-texte a:hover {
+	padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;
+	-moz-border-radius: 5px;
+}
+.cellule-texte a.aide, .cellule-texte a.aide:hover {
+	border: none;
+	background: none;
+	display: inline;
+}
+.cellule-texte a.aide img {
+	margin: 0px;
+	display: inline;
+}
+
+/* Icones horizontales */
+
+a.cellule-h {
+	text-align: left;
+	display: block;
+	margin-top: 3px;
+	margin-bottom: 3px;
+}
+a.cellule-h {
+	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center left;
+}
+a.cellule-h:hover {
+	text-decoration: none; background: url(img_pack/pave-blanc-24.png) no-repeat center left;
+}
+.danger a.cellule-h {
+	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center left;
+}
+.danger a.cellule-h:hover {
+	text-decoration: none; background: url(img_pack/pave-rouge-24.png) no-repeat center left;
+}
+a.cellule-h table {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+}
+a.cellule-h td {
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #606060;
+}
+a.cellule-h img {
+	width: 24px;
+	height: 24px;
+	border: none;
+	margin: 1px;
+	margin-right: 6px;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+a.cellule-h a.aide img {
+	width: 12px; height: 12px;
+}
+
+
+a.cellule-h-texte {
+	display: block;
+	clear: both;
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 11px;
+	color: #606060;
+	padding: 4px;
+	margin: 3px;
+	border: 1px dashed #aaaaaa;
+	background-color: #f0f0f0;
+	width: 92%;
+}
+.danger a.cellule-h-texte {
+	border: 1px dashed black;
+	background: url(img_pack/rayures-sup.gif);
+}
+a.cellule-h-texte:hover {
+	text-decoration: none;
+	border-right: solid 1px white;
+	border-bottom: solid 1px white;
+	border-left: solid 1px #666666;
+	border-top: solid 1px #666666;
+	background-color: #eeeeee;
+}
+
+
 
 /*
  * Style des icones
  */
-.iconeimpoff { padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4 }
+
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
 .fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; }
 .fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white; }
-.bouton48gris {
-	display: block;
-	background:url(img_pack/pave-gris-48.png);
-	cursor: pointer;
-	padding: 3px;
-	margin: 4px;
-	width: 48px;
-	height: 48px;
-}
-.bouton48blanc {
-	display: block;
-	background:url(img_pack/pave-blanc-48.png);
-	cursor: pointer;
-	padding: 3px;
-	margin: 4px;
-	width: 48px;
-	height: 48px;
-}
-.bouton48off {
-	cursor: pointer;
-	padding: 3px;
-	margin: 4px;
-	width: 48px;
-	height: 48px;
-}
-.bouton24gris {
-	background:url(img_pack/pave-gris-24.png);
-	padding: 3px;
-	width: 24px;
-	height: 24px;
-}
-.bouton24blanc {
-	background:url(img_pack/pave-blanc-24.png);
-	padding: 3px;
-	width: 24px;
-	height: 24px;
-}
-.bouton24rouge {
-	background:url(img_pack/pave-rouge-24.png);
-	padding: 3px;
-	width: 24px;
-	height: 24px;
-}
-.bouton24off {
-	padding: 3px;
-	width: 24px;
-	height: 24px;
-}
 .bouton36gris {
 	background:url(img_pack/pave-gris-36.png);
 	padding: 6px;
@@ -114,11 +291,6 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .iconeoff { padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0 }
 .iconeon { cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee; }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif)}
-
-.profondeur { border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid }
-.hauteur { border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid }
-label { cursor: pointer; }
-.pointeur { cursor: pointer; }
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
 .arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
@@ -239,40 +411,6 @@ td.icone a img {
 .e-c {
 	background: #e0e0e0; padding: 2px;
 }
-
-
-/*
- * Icones horizontales
- * (on utilise deux styles distincts car IE ne gere pas le :hover)
- */
-
-.icone-h {
-	padding: 3px;
-	margin: 2px;
-	border: 1px dashed #aaaaaa;
-	background-color: #f0f0f0;
-	width: 100%;
-	color: #666666;
-}
-.icone-h-danger {
-	padding: 3px;
-	margin: 2px;
-	border: 1px dashed black;
-	background: url(img_pack/rayures-sup.gif);
-	width: 100%;
-}
-.icone-h-on {
-	cursor: pointer;
-	padding: 3px;
-	margin: 2px;
-	border-right: solid 1px white;
-	border-bottom: solid 1px white;
-	border-left: solid 1px #666666;
-	border-top: solid 1px #666666;
-	background-color: #eeeeee;
-	width: 100%;
-}
-
 
 
 /*
