@@ -1168,7 +1168,7 @@ the images used in the articles and sections.',
 
 	 the functioning of the site. You are advised not to deal with them unless you are
 
-	familiar with the functioning of the SPIP system. <P align=\\"justify\\"><B>More
+	familiar with the functioning of the SPIP system. <P align="justify"><B>More
 
 	generally, you are strongly advised
 
