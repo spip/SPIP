@@ -213,7 +213,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off'){
 			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 		}
 		else
-			return "La syndication a &eacute;chou&eacute; : impossible de d&eacute;chiffrer le backend de ce site.";
+			return "La syndication a &eacute;chou&eacute; : le backend indiqu&eacute; est ind&eacute;chiffrable ou ne propose aucun article.";
 	} else
 		return "La syndication a &eacute;chou&eacute; : impossible d'acc&eacute;der au backend de ce site.";
 }
