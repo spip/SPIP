@@ -25,45 +25,30 @@ if (!file_exists("inc_meta_cache.php3")) ecrire_metas();
 
 
 //
-// Cookies de presentation
+// Preferences de presentation
 //
 
-$options = $HTTP_COOKIE_VARS['spip_options'];
-$spip_display = $HTTP_COOKIE_VARS['spip_display'];
-
-if (!$HTTP_COOKIE_VARS['spip_display']) $spip_display = 2;
-
-
-if ($set_survol) {
-	setcookie('spip_survol', $set_survol, time()+(3600*24*365));
-	$spip_survol=$set_survol;
-}
-
 if ($set_couleur) {
-	$couleur= floor($set_couleur);
-	setcookie('spip_couleur', $couleur, time()+(3600*24*365));
-	$spip_couleur=$couleur;
+	$prefs['couleur'] = floor($set_couleur);
+	$prefs_mod = true;
 }
-
 if ($set_disp) {
-	$display= floor($set_disp);
-	setcookie('spip_display', $display, time()+(3600*24*365));
-	$spip_display=$display;
+	$prefs['display'] = floor($set_disp);
+	$prefs_mod = true;
+}
+if ($set_options == 'avancees' OR $set_options == 'basiques') {
+	$prefs['options'] = $set_options;
+	$prefs_mod = true;
+}
+if ($prefs_mod) {
+	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }
 
-if ($set_options == 'avancees') {
-	setcookie('spip_options', 'avancees', time()+(3600*24*365));
-	$options = 'avancees';
-}
-if ($set_options == 'basiques') {
-	setcookie('spip_options', 'basiques', time()+(3600*24*365));
-	$options = 'basiques';
-}
+// deux globales (compatibilite ascendante)
+$options      = $prefs['options'];
+$spip_display = $prefs['display'];
 
-
-if (!isset($spip_couleur)) $spip_couleur = 6;
-
-switch ($spip_couleur) {
+switch ($prefs['couleur']) {
 	case 1:
 		/// Vert
 		$couleur_foncee="#02531B";

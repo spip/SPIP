@@ -47,7 +47,7 @@ function auth() {
 	global $connect_activer_imessage, $connect_activer_messagerie;
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_rubrique;
 
-	global $auteur_session;
+	global $auteur_session, $prefs;
 
 	//
 	// Si pas MySQL, fini
@@ -165,6 +165,18 @@ function auth() {
 			$connect_activer_imessage = $GLOBALS['perso_activer_imessage'];
 		}
 	
+		// regler les preferences de l'auteur
+		$prefs = unserialize($row['prefs']);
+
+		if (! isset($prefs['display'])) { // recuperer les cookies ou creer defaut
+			if ($GLOBALS['set_disp'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_display']) {}
+			else $GLOBALS['set_disp'] = 2;
+			if ($GLOBALS['set_couleur'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_couleur']) {}
+			else $GLOBALS['set_couleur'] = 6;
+			if ($GLOBALS['set_options'] = $GLOBALS['HTTP_COOKIE_VARS']['spip_options']) {}
+			else $GLOBALS['set_options'] = 'basiques';
+		}
+
 		// Verifier si pass ok
 		if ($connect_pass == $auth_mdpass) $auth_pass_ok = true;
 	
