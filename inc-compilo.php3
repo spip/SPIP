@@ -529,15 +529,17 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	if ($boucles) {
 	  // une boucle documents est conditionnee par tout le reste!
-	  // une boucle avec critere de recheche doit etre signalee aux autres
+	  // une boucle avec critere de recheche conditionne tout le reste!
 	  // (a cause du cas #nom_de_boucle:URL_*)
 		foreach($boucles as $idb => $boucle)
 		  {
-			if (($boucle->type_requete == 'documents') && 
-				in_array('doublons',$boucle->param))
-			  { $descr['documents'] = true; break; }
-			if (in_array('recherche',$boucle->param))
-			  $boucles[$idb]->hash = true;
+			if ($boucle->param) {
+				if (($boucle->type_requete == 'documents') && 
+				    in_array('doublons',$boucle->param))
+				  { $descr['documents'] = true; break; }
+				if (in_array('recherche',$boucle->param))
+					$boucles[$idb]->hash = true;
+			}
 		  }
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
