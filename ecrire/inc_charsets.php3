@@ -2001,13 +2001,16 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 function init_mb_string() {
 	static $mb;
 
-	// verifier que tout est present et que le charset est connu de mb_string
+	// verifier que tout est present (fonctions mb_string pour php >= 4.0.6)
+	// et que le charset interne est connu de mb_string
 	if (!$mb) {
 		if (function_exists('mb_internal_encoding')
 		AND function_exists('mb_detect_order')
 		AND function_exists('mb_substr')
 		AND function_exists('mb_strlen')
 		AND function_exists('mb_encode_mimeheader')
+		AND function_exists('mb_encode_numericentity')
+		AND function_exists('mb_decode_numericentity')
 		AND mb_detect_order(lire_meta('charset'))
 		) {
 			mb_internal_encoding('utf-8');
@@ -2119,15 +2122,6 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 
 	switch ($charset) {
 	case 'utf-8':
-		// Le passage par utf-32 devrait etre plus rapide
-		// (traitements PHP reduits au minimum)
-
-		// mbstring presente ?
-		if (init_mb_string()) {
-			$s = @mb_convert_encoding($texte, 'utf-32le', 'utf-8');
-			if ($s && $s != $texte) return utf_32_to_unicode($s);
-		}
-		// sinon fonction maison
 		return utf_8_to_unicode($texte);
 
 	case 'iso-8859-1':
@@ -2149,8 +2143,12 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	default:
 		// mbstring presente ?
 		if (init_mb_string()) {
-			$s = mb_convert_encoding($texte, 'utf-32le', $charset);
-			if ($s && $s != $texte) return utf_32_to_unicode($s);
+			if ($order = mb_detect_order() # mb_string connait-il $charset?
+			AND mb_detect_order($charset)) {
+				$s = mb_convert_encoding($texte, 'utf-8', $charset);
+				if ($s && $s != $texte) return utf_8_to_unicode($s);
+			}
+			mb_detect_order($order); # remettre comme precedemment
 		}
 
 		// Sinon, peut-etre connaissons-nous ce charset ?
@@ -2231,6 +2229,14 @@ function importer_charset($texte, $charset = 'AUTO') {
 
 // UTF-8
 function utf_8_to_unicode($source) {
+
+	// mb_string : methode rapide
+	if (init_mb_string()) {
+		$convmap = array(0x7F, 0xFFFFFF, 0x0, 0xFFFFFF);
+		return mb_encode_numericentity($source, $convmap, 'UTF-8');
+	}
+
+	// Sinon methode pas a pas
 	static $decrement;
 	static $shift;
 
@@ -2309,33 +2315,34 @@ function utf_8_to_unicode($source) {
 	return $encodedString;
 }
 
-// UTF-32 : utilise en interne car plus rapide qu'UTF-8
+// UTF-32 ne sert plus que si on passe par iconv, c'est-a-dire quand
+// mb_string est absente ou ne connait pas notre charset
+// mais on l'optimise quand meme par mb_string
+// => tout ca sera osolete quand on sera surs d'avoir mb_string
 function utf_32_to_unicode($source) {
-	$chars = array();
-	$len = strlen($source);
-	$chunk_len = 16384;
-	$cherche = array();
 
-	// Extraire la liste des caracteres utilises
-	// (plusieurs iterations pour eviter l'explosion memoire)
-	for ($i = 0; $i <= $len; $i += $chunk_len) {
-		$chars = $chars + array_flip(unpack("V*",
-			substr($source, $i, $chunk_len)));
+	// mb_string : methode rapide
+	if (init_mb_string()) {
+		$convmap = array(0x7F, 0xFFFFFF, 0x0, 0xFFFFFF);
+		$source = mb_encode_numericentity($source, $convmap, 'UTF-32LE');
+		return str_replace(chr(0), '', $source);
 	}
 
-	foreach ($chars as $c => $v) {
-		$from = pack("V", $c);
-		if ($c < 128)
-			$cherche[$from] = chr($c);
-		else
-			$cherche[$from] =
-				// ignorer le BOM - http://www.unicode.org/faq/utf_bom.html
-				($c == 65279) ? '' :
-				"&#$c;";
+	// Sinon methode lente
+	$texte = '';
+	while ($source) {
+		$words = unpack("V*", substr($source, 0, 1024));
+		$source = substr($source, 1024);
+		foreach ($words as $word) {
+			if ($word < 128)
+				$texte .= chr($word);
+			// ignorer le BOM - http://www.unicode.org/faq/utf_bom.html
+			else if ($word != 65279)
+				$texte .= '&#'.$word.';';
+		}
 	}
+	return $texte;
 
-	krsort($cherche);
-	return str_replace(array_keys($cherche), $cherche, $source);
 }
 
 // Ce bloc provient de php.net, auteur Ronen
@@ -2413,6 +2420,34 @@ function translitteration_complexe($texte) {
 	return translitteration($texte,'AUTO','complexe');
 }
 
+// Transcode une page (probablement attrapee sur le web) en essayant
+// par tous les moyens de deviner son charset (y compris headers HTTP)
+function transcoder_page($texte, $headers='') {
+
+	// charset precise par le contenu (xml)
+	if (preg_match(',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
+		$charset = trim(strtolower($regs[1]));
+	// charset precise par le contenu (html)
+	else if (preg_match(',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
+		$charset = trim(strtolower($regs[2]));
+	// charset de la reponse http
+	else if (preg_match(',charset=([-_a-z0-9]+),i', $headers, $regs))
+		$charset = trim(strtolower($regs[1]));
+
+	// normaliser les noms du shif-jis japonais
+	if (preg_match(',^(x|shift)[_-]s?jis$,i', $charset))
+		$charset = 'shift-jis';
+
+	if ($charset) {
+		spip_log("charset source detecte : $charset");
+	} else {
+		// valeur par defaut
+		$charset = 'iso-8859-1';
+		spip_log("pas de charset detecte, on suppose : $charset");
+	}
+
+	return importer_charset($texte, $charset);
+}
 
 // Initialisation
 $GLOBALS['CHARSET'] = Array();
