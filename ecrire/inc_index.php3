@@ -60,7 +60,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	if (!$id_objet OR (!$forcer_reset AND deja_indexe($type, $id_objet))) return;
 
 	$index = '';
-	$mots = "INSERT DELAYED IGNORE INTO spip_index_dico (hash, dico) VALUES (0,'')";
+	$mots = "INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES (0,'')";
 
 	if ($type != 'syndic'){
 		$table_index = 'spip_index_'.$type.'s';
