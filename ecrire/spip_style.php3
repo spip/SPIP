@@ -59,15 +59,18 @@ a.icone:hover { text-decoration: none; }
  */
 
 a.spip_barre img {
-	border: 0px;
-	padding: 2px;
+	border-left: 1px solid #ffffff;
+	border-top: 1px solid #ffffff;
+	border-right: 1px solid #999999;
+	border-bottom: 1px solid #999999;
+	padding: 1px;
+	background-color: #cccccc;
 }
 a.spip_barre:hover img {
 	border: 1px solid #808080;
 	padding: 1px;
 	background-color: #f8f8f4;
 }
-
 
 td.icone table {
 }
