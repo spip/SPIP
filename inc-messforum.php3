@@ -47,19 +47,20 @@ function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre) {
 }
 
 
-function controler_forum($id_article, $retour)
-{
+function controler_forum($id_article, $retour) {
 	global $auteur_session;
+
+	// Reglage forums d'article
 	if ($id_article) {
-		$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
-		$r = spip_fetch_array($r);
-		if ($r)
+		$q = spip_query("SELECT accepter_forum FROM spip_articles
+			WHERE id_article=$id_article");
+		if ($r = spip_fetch_array($q))
 			$forums_publics = $r['accepter_forum'];
-		else
-			$forums_publics = lire_meta("forums_publics");
-	} else {
-		$forums_publics = substr(lire_meta("forums_publics"),0,3);
 	}
+
+	// Valeur par defaut
+	if (!$forums_publics)
+		$forums_publics = substr(lire_meta("forums_publics"),0,3);
 
 	if ($forums_publics == "abo") {
 		if ($auteur_session) {
@@ -74,9 +75,10 @@ function controler_forum($id_article, $retour)
 			ask_php_auth(_T('forum_non_inscrit'),
 				     _T('forum_cliquer_retour',
 					array('retour_forum' => $retour)));
-			exit;		  
+			exit;
 		}
 	}
+
 	return $forums_publics;
 }
 
@@ -107,7 +109,7 @@ function enregistre_forum()
 	if (!$id_auteur)
 	$id_auteur = intval($auteur_session['id_auteur']);
 
-	$statut == controler_forum($id_article, $retour_forum);
+	$statut = controler_forum($id_article, $retour_forum);
 
 // Ne pas autoriser de changement de nom si forum sur abonnement
 
