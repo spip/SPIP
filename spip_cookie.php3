@@ -15,6 +15,9 @@ else if ($essai_login == "oui") {
 	// verifie l'auteur
 	if ($session_password_md5) $md5pass = $session_password_md5;
 	else $md5pass = md5($session_password);
+/*	echo "session_password = ".$session_password."<p>";
+	echo "session_password_md5 = ".$session_password_md5."<p>";
+	exit;*/
 
 	$login = addslashes($session_login);
 	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass'";
