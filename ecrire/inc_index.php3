@@ -220,7 +220,7 @@ function marquer_indexer ($objet, $id_objet) {
 		$f = @fopen($fichier_index, 'a');
 	}
 	spip_log ("demande indexation $objet $id_objet");
-	fputs($f, "$objet $id_objet 1");	// 1 = forcer reindexation
+	fputs($f, "$objet $id_objet 1\n");	// 1 = forcer reindexation
 	fclose($f);
 }
 function indexer_article($id_article) {
