@@ -308,6 +308,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Titre de l\'image&nbsp;:',
 'entree_titre_obligatoire' => '<B>Titre</B> [Obligatoire]<BR>',
 'entree_url' => 'L\'adresse (URL) de votre site',
+'erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F
