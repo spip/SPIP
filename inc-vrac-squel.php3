@@ -152,7 +152,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		    {
 		      if (strpos($v,'recherche') !== false)
 			{
-			  $code = '$PileROW[$SP' . (($n==0) ? "" : "-$n") .
+			  $code = '$PileRow[$SP' . (($n==0) ? "" : "-$n") .
 			    '][points]';
 			  $b = '';
 			  break;
