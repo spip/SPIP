@@ -6,61 +6,6 @@ include_ecrire("inc_presentation.php3");
 
 utiliser_langue_visiteur();
 
-function bad_dirs($bad_dirs, $test_dir, $install) {
-	install_debut_html();
-
-	if ($install) {
-		$titre = _T('dirs_preliminaire');
-		$continuer = _T('dirs_commencer');
-	} else
-		$titre = _T('dirs_probleme_droits');
-
-	$bad_url = "spip_test_dirs.php3";
-	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
-
-	echo "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
-	echo "<div align='right'>". menu_langues('var_lang_ecrire')."</div><p>";
-
-	echo _T('dirs_repertoires_suivants', array('bad_dirs' => $bad_dirs));
-	echo "<B>". _T('login_recharger')." $continuer.";
-
-	if ($install)
-		echo aide ("install0");
-	echo "<p>";
-
-	echo "<FORM ACTION='$bad_urls' METHOD='GET'>\n";
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='". _T('login_recharger')."'></DIV>";
-	echo "</FORM>";
-
-	install_fin_html();
-}
-
-
-function absent_dirs($bad_dirs, $test_dir) {
-	install_debut_html();
-
-	$titre = _T('dirs_preliminaire');
-	$continuer = _T('dirs_commencer');
-
-	$bad_url = "spip_test_dirs.php3";
-	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
-
-	echo "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
-	echo "<div align='right'>". menu_langues('var_lang_ecrire')."</div><p>";
-
-	echo _T('dirs_repertoires_absents', array('bad_dirs' => $bad_dirs));
-	echo "<B>". _T('login_recharger')." $continuer.";
-
-	if ($install)
-		echo aide ("install0");
-	echo "<p>";
-
-	echo "<FORM ACTION='$bad_urls' METHOD='GET'>\n";
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='". _T('login_recharger')."'></DIV>";
-	echo "</FORM>";
-
-	install_fin_html();
-}
 
 //
 // Tente d'ecrire
@@ -109,15 +54,46 @@ while (list(, $my_dir) = each($test_dirs)) {
 	}
 }
 
-if ($bad_dirs) {
-	$bad_dirs = join(" ", $bad_dirs);
-	bad_dirs($bad_dirs, $test_dir, $install);
-}
-else if ($absent_dirs) {
-	$absent_dirs = join(" ", $absent_dirs);
-	absent_dirs($absent_dirs, $test_dir);
-}
-else {
+if ($bad_dirs OR $absent_dirs) {
+	install_debut_html();
+
+	if ($install) {
+		$titre = _T('dirs_preliminaire');
+		$continuer = ' '._T('dirs_commencer');
+	} else
+		$titre = _T('dirs_probleme_droits');
+
+	$bad_url = "spip_test_dirs.php3";
+	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
+
+	echo "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
+	echo "<div align='right'>". menu_langues('var_lang_ecrire')."</div>\n";
+
+	if ($bad_dirs) {
+		echo "<p>";
+		echo _T('dirs_repertoires_suivants',
+			array('bad_dirs' => join(" ", $bad_dirs)));
+		echo "<B>". _T('login_recharger')."</b>";
+	}
+
+	if ($absent_dirs) {
+		echo "<p>";
+		echo _T('dirs_repertoires_absents',
+			array('bad_dirs' => join(" ", $absent_dirs)));
+		echo "<B>". _T('login_recharger')."</b>";
+	}
+
+	echo $continuer.'. ';
+	echo aide ("install0");
+	echo "<p>";
+
+	echo "<FORM ACTION='$bad_urls' METHOD='GET'>\n";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='". _T('login_recharger')."'></DIV>";
+	echo "</FORM>";
+
+	install_fin_html();
+
+} else {
 	if ($install)
 		header("Location: ./ecrire/install.php3?etape=1");
 	else

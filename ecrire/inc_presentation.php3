@@ -13,14 +13,14 @@ include_ecrire ("inc_calendrier.php");
 // Aide
 //
 function aide($aide='') {
-	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $dir_ecrire;
+	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $flag_ecrire;
 
 	if (!$aide) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire."aide_index.php3?aide=$aide&var_lang=$spip_lang\" target=\"spip_aide\" ".
+	return "&nbsp;&nbsp;<a class='aide' href=\"".($flag_ecrire ? '../' : '')."spip_help.php3?aide=$aide&var_lang=$spip_lang\" target=\"spip_aide\" ".
 		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
 		"resizable=yes, width=740, height=580'); return false;\"><img ".
-		"src=\"img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
+		"src=\"".$dir_ecrire."img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
 		"title=\""._T('titre_image_aide')."\" width=\"12\" height=\"12\" border=\"0\" ".
 		"align=\"middle\"></a>";
 }
@@ -1993,7 +1993,7 @@ else {
 
 
 
-	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.png", "vide", "", "aide_index.php3?var_lang=$spip_lang", "aide-en-ligne", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('../spip_help.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.png", "vide", "", "../spip_help.php3?var_lang=$spip_lang", "aide-en-ligne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
 
 	echo "</tr></table>\n";
