@@ -2,10 +2,6 @@
 
 include ("inc_version.php3");
 
-$flag_ecrire = true;	// hack : on veut pouvoir eventuellement proposer
-						// l'aide en ligne depuis l'espace public via un
-						// RewriteRule (c'est le cas sur uZine)
-
 // Recuperer les infos de langue (preferences auteur), si possible
 if (file_exists("inc_connect.php3")) {
 	include_ecrire ("inc_auth.php3");
