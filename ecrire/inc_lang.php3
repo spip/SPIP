@@ -334,8 +334,13 @@ function lang_typo($lang) {
 }
 
 // service pour que l'espace prive reflete la typo et la direction des objets affiches
-function changer_typo($lang = '') {
+function changer_typo($lang = '', $source = '') {
 	global $lang_typo, $lang_dir, $dir_lang;
+
+	if (ereg("^(article|rubrique|breve|auteur)([0-9]+)", $source, $regs)) {
+		$r = spip_fetch_array(spip_query("SELECT lang FROM spip_".$regs[1]."s WHERE id_".$regs[1]."=".$regs[2]));
+		$lang = $r['lang'];
+	}
 
 	if (!$lang)
 		$lang = lire_meta('langue_site');
@@ -343,6 +348,8 @@ function changer_typo($lang = '') {
 	$lang_typo = lang_typo($lang);
 	$lang_dir = lang_dir($lang);
 	$dir_lang = " dir='$lang_dir'";
+
+	spip_debug("typo '$source' *$lang $lang_typo $lang_dir");
 }
 
 // selectionner une langue

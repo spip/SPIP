@@ -389,7 +389,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$date = $row['date'];
 			$statut = $row['statut'];
 			$visites = $row['visites'];
-			$lang = $row['lang'];
+			if ($lang = $row['lang']) changer_typo($lang);
 			$popularite = ceil(min(100,100 * $row['popularite'] / max(1, 0 + lire_meta('popularite_max'))));
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
@@ -528,7 +528,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$date_heure = $row['date_heure'];
 			$titre = $row['titre'];
 			$statut = $row['statut'];
-			$lang = $row['lang'];
+			if ($lang = $row['lang']) changer_typo($lang);
 			$id_rubrique = $row['id_rubrique'];
 			switch ($statut) {
 			case 'prop':
@@ -2030,7 +2030,8 @@ function fin_page($credits='') {
 // Afficher la hierarchie des rubriques
 //
 function afficher_parents($id_rubrique) {
-	global $parents, $couleur_foncee;
+	global $parents, $couleur_foncee, $lang_dir;
+
 	$parents = ereg_replace("(~+)","\\1~",$parents);
 	if ($id_rubrique) {
 		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
@@ -2042,7 +2043,7 @@ function afficher_parents($id_rubrique) {
 			$titre = $row['titre'];
 			changer_typo($row['lang']);
 
-			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></a></FONT><BR>\n".$parents;
+			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'><span dir='$lang_dir'>".typo($titre)."</span></font></a></FONT><BR>\n".$parents;
 			if (acces_restreint_rubrique($id_rubrique))
 				$parents = " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."'> ".$parents;
 			if (!$id_parent)
