@@ -296,8 +296,10 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 				$vignette .= " alt=\"$titre\" title=\"$titre\"";
 			if ($affichage_detaille)
 				$vignette .= ">";
-			else
-				$vignette .= " hspace='5' vspace='3'$align>";
+			else {
+				$vignette .= "hspace='5' vspace='3'$align>";
+				if ($align) $vignette = "<div$align>$vignette</div>";
+			}
 		}
 		else {
 			$vignette = vignette_par_defaut($extension);
