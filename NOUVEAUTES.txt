@@ -1024,3 +1024,8 @@ moins des fichiers connus de SPIP)
 * Syndication de fils au format RSS 1.0, RSS 2.0 et ATOM 0.3 (en plus de RSS
   0.91)
 
+* les vignettes sont creees en png si le fichier source est en png
+
+* le correcteur d'orthographe fonctionne avec le proxy si celui-ci est
+  defini
+
