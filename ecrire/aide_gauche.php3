@@ -3,10 +3,10 @@
 include ("inc_version.php3");
 
 if ($flag_ecrire AND file_exists("inc_connect.php3")) {
-	include_local ("inc_connect.php3");
-	include_local ("inc_auth.php3");
-	include_local ("inc_admin.php3");
-	include_local ("inc_acces.php3");
+	include_ecrire ("inc_connect.php3");
+	include_ecrire ("inc_auth.php3");
+	include_ecrire ("inc_admin.php3");
+	include_ecrire ("inc_acces.php3");
 	$aide_statut = ($connect_statut == "0minirezo") ? "admin" : "redac";
 }
 else $aide_statut = "admin";

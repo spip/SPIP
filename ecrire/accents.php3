@@ -1,8 +1,8 @@
 <?php
 
 include ("inc_connect.php3");
-include_local ("inc_auth.php3");
-include_local ("inc_admin.php3");
+include_ecrire ("inc_auth.php3");
+include_ecrire ("inc_admin.php3");
 
 
 debut_admin("accents");

@@ -1,10 +1,10 @@
 <?php
 
 include ("inc.php3");
-include_local ("inc_acces.php3");
-include_local ("inc_index.php3");
-include_local ("inc_logos.php3");
-include_local ("inc_session.php3");
+include_ecrire ("inc_acces.php3");
+include_ecrire ("inc_index.php3");
+include_ecrire ("inc_logos.php3");
+include_ecrire ("inc_session.php3");
 
 
 // securite

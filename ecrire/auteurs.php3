@@ -1,7 +1,7 @@
 <?php
 
 include ("inc.php3");
-include_local ("inc_acces.php3");
+include_ecrire ("inc_acces.php3");
 
 
 //

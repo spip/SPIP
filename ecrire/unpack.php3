@@ -2,10 +2,10 @@
 
 include ("inc_version.php3");
 
-include_local ("inc_connect.php3");
-include_local ("inc_auth.php3");
-include_local ("inc_meta.php3");
-include_local ("inc_admin.php3");
+include_ecrire ("inc_connect.php3");
+include_ecrire ("inc_auth.php3");
+include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_admin.php3");
 
 $action = "t&eacute;l&eacute;chargement de la derni&egrave;re version";
 

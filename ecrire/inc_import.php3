@@ -6,7 +6,7 @@ if (defined("_ECRIRE_INC_IMPORT")) return;
 define("_ECRIRE_INC_IMPORT", "1");
 
 
-include_local ("inc_acces.php3");
+include_ecrire ("inc_acces.php3");
 
 
 if ($GLOBALS['flag_strpos_3']) {

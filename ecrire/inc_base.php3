@@ -5,7 +5,7 @@
 if (defined("_ECRIRE_INC_BASE")) return;
 define("_ECRIRE_INC_BASE", "1");
 
-include_local ("inc_acces.php3");
+include_ecrire ("inc_acces.php3");
 
 
 function creer_base() {
@@ -808,7 +808,7 @@ function maj_base() {
 	if ($version_installee < 1.414) {
 		// Forum par defaut "en dur" dans les spip_articles
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
-		include_local ("inc_meta.php3");
+		include_ecrire ("inc_meta.php3");
 		$accepter_forum = substr(lire_meta("forums_publics"),0,3) ;
 		$query = "ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL";
 		$result = spip_query($query);
@@ -828,7 +828,7 @@ function maj_base() {
 		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 0,1";
 		$result = spip_query($query);
 		if ($webmaster = mysql_fetch_object($result)) {
-			include_local("inc_meta.php3");
+			include_ecrire("inc_meta.php3");
 			ecrire_meta('email_webmaster', $webmaster->email);
 			ecrire_metas();
 		}
