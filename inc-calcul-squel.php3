@@ -1445,7 +1445,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		else {
 			\$$nom_var = \"\n<a name='formulaire_recherche'></a>\n\";
 			\$$nom_var .= \"\n<form action='$lien' method='get'>\";
-			\$$nom_var .= \"\n<input type='text' name='recherche' value='Rechercher' size='20' class='formrecherche'>\";
+			\$$nom_var .= \"\n<label for='formulaire_recherche' style='display: none'>Rechercher dans le site&nbsp;: </label>\";
+			\$$nom_var .= \"\n<input type='text' id='formulaire_recherche' name='recherche' value='Rechercher' size='20' class='formrecherche'>\";
 			\$$nom_var .= \"\n</form>\";
 		}
 		";
