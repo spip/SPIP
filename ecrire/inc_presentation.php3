@@ -271,19 +271,23 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 // une autre boite
 //
-function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black") {
+function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black", $echo = true) {
 	global $spip_lang_left, $spip_display;
 	
+	$retour = '';
+
 	if (strlen($logo) > 0 AND $spip_display != 1 AND $spip_display != 4) {
-		echo "<div style='position: relative;'>";
-		echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'><img src='img_pack/$logo' alt='' /></div>";
-		echo "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
+		$retour .= "<div style='position: relative;'>";
+		$retour .= "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'><img src='img_pack/$logo' alt='' /></div>";
+		$retour .= "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
 	
-		echo "</div>";
+		$retour .= "</div>";
 	} else {
-		echo "<div style='background-color: $fond; color: $texte; padding: 3px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
+		$retour .= "<div style='background-color: $fond; color: $texte; padding: 3px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
 	}
 
+	if ($echo) echo $retour;
+	return $retour;
 }
 
 
@@ -1853,23 +1857,28 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		return $icone;
 }
 
-function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
+function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true) {
 	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
+
+	$retour = '';
 
 	if (!$fonction) $fonction = "rien.gif";
 	$danger = ($fonction == "supprimer.gif");
 
-	if ($danger) echo "<div class='danger'>";
+	if ($danger) $retour .= "<div class='danger'>";
 	if ($spip_display != 1) {
-		echo "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n";
-		echo "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\") center center no-repeat;' src='img_pack/$fonction' alt=''></div></a></td>\n";
-		echo "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
-		echo "</tr></table></a>\n";
+		$retour .= "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n";
+		$retour .= "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\") center center no-repeat;' src='img_pack/$fonction' alt=''></div></a></td>\n";
+		$retour .= "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
+		$retour .= "</tr></table></a>\n";
 	}
 	else {
-		echo "<a href='$lien' class='cellule-h-texte'><div>$texte</div></a>\n";
+		$retour .= "<a href='$lien' class='cellule-h-texte'><div>$texte</div></a>\n";
 	}
-	if ($danger) echo "</div>";
+	if ($danger) $retour .= "</div>";
+
+	if ($echo) echo $retour;
+	return $retour;
 }
 
 
@@ -2253,81 +2262,90 @@ else {
 	
 	echo "</tr></table>";
 	
-	echo "<table width='$largeur' cellpadding='0' cellspacing='0'' align='center'><tr><td>";
-	echo "<div style='position: relative; z-index: 1000;'>";
-	
-	
-		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
-		echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
-		
-		
-		afficher_menu_rubriques();
-		
-		
-		
-		echo "</div>";
-	
-	
-	
-	
-		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
 
-		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
-		else echo "<a href='brouteur.php3' class='lien_sous'>";
-		echo _T('icone_brouteur');
-		echo "</a>";
-		
+	//
+	// Barre des gadgets
+	//
+	function afficher_javascript ($html) {
+		return "<script type='text/javascript'><!--\ndocument.write(\""
+		.addslashes(str_replace("\n", " ", $html))
+		."\");\n// -->\n</script>\n";
+	}
+
+	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
+
+
+	// GADGET Menu rubriques
+	echo "<div style='position: relative; z-index: 1000;'>";
+	echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
+	echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
+	afficher_menu_rubriques();
+	echo "</div>";
+	// FIN GADGET Menu rubriques
+	
+	
+	
+	
+	// GADGET Navigation rapide
+	echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
+
+	if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
+	else echo "<a href='brouteur.php3' class='lien_sous'>";
+	echo _T('icone_brouteur');
+	echo "</a>";
+
+	$gadget = '';
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
 			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 0,5");
 		if (spip_num_rows($vos_articles) > 0) {
-			echo "<div>&nbsp;</div>";
-			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			bandeau_titre_boite2(_T('info_en_cours_validation'), "article-24.gif");
-			echo "\n<div class='plan-articles'>\n";
+			$gadget .= "<div>&nbsp;</div>";
+			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			$gadget .= bandeau_titre_boite2(_T('info_en_cours_validation'), "article-24.gif", '', '', false);
+			$gadget .= "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				echo "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>\n";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>\n";
 			}
-			echo "</div>";
-			echo "</div>";
+			$gadget .= "</div>";
+			$gadget .= "</div>";
 		}
 	
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut='prop' ".
 			" ORDER BY articles.date DESC LIMIT 0,5");
 		if (spip_num_rows($vos_articles) > 0) {
-			echo "<div>&nbsp;</div>";
-			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			bandeau_titre_boite2(_T('info_articles_proposes'), "article-24.gif");
-			echo "<div class='plan-articles'>";
+			$gadget .= "<div>&nbsp;</div>";
+			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			$gadget .= bandeau_titre_boite2(_T('info_articles_proposes'), "article-24.gif", '', '', false);
+			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
 	
-				echo "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
 			}
-			echo "</div>";
-			echo "</div>";
+			$gadget .= "</div>";
+			$gadget .= "</div>";
 		}
 			
 		$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ".
 			" ORDER BY date_heure DESC LIMIT 0,5");
 		if (spip_num_rows($vos_articles) > 0) {
-			echo "<div>&nbsp;</div>";
-			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			bandeau_titre_boite2(_T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white");
-			echo "<div class='plan-articles'>";
+			$gadget .= "<div>&nbsp;</div>";
+			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			$gadget .= bandeau_titre_boite2(_T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
+			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
 	
-				echo "<a class='$statut' style='font-size: 10px;' href='breves_voir.php3?id_breve=$id_breve'>$titre</a>";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href='breves_voir.php3?id_breve=$id_breve'>$titre</a>";
 			}
-			echo "</div>";
-			echo "</div>";
+			$gadget .= "</div>";
+			$gadget .= "</div>";
 		}
 
 
@@ -2335,44 +2353,46 @@ else {
 		$result = spip_query($query);
 		
 		if (spip_num_rows($result) > 0) {
-			echo "<div>&nbsp;</div>";
+			$gadget .= "<div>&nbsp;</div>";
 			$id_rubrique = $GLOBALS['id_rubrique'];
 			if ($id_rubrique > 0) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
 			}
 		
-			echo "<div style='width: 140px; float: $spip_lang_left;'>";
+			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 			if ($id_rubrique > 0)
-				icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif");
+				$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif", false);
 			else 
-				icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif");
-			echo "</div>";
+				$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
+			$gadget .= "</div>";
 			
-			echo "<div style='width: 140px; float: $spip_lang_left;'>";
-			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif");
-			echo "</div>";
+			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
+			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
+			$gadget .= "</div>";
 			
 			$activer_breves = lire_meta("activer_breves");
 			if ($activer_breves != "non") {
-				echo "<div style='width: 140px;  float: $spip_lang_left;'>";
-				icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif");
-				echo "</div>";
+				$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
+				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif", false);
+				$gadget .= "</div>";
 			}
 			
 			if (lire_meta("activer_sites") == 'oui') {
-				echo "<div style='width: 140px; float: $spip_lang_left;'>";
-				icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif");
-				echo "</div>";
+				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
+				$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif", false);
+				$gadget .= "</div>";
 			}
 			
 		}
 
+		$gadget .= "</div>";
+
+	echo afficher_javascript($gadget);
+	// FIN GADGET Navigation rapide
 
 
-
-		echo "</div>";
-	
+	// GADGET Recherche
 		echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 100px; $spip_lang_left: 60px;'>";
 		global $recherche;
 				$recherche_aff = _T('info_rechercher');
@@ -2381,9 +2401,11 @@ else {
 			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="formo" accesskey="r" '.$onfocus.'>';
 			echo "</form>";
 		echo "</div>";
-	
+	// FIN GADGET recherche
 
 
+	// GADGET Agenda
+	$gadget = '';
 		$today = getdate(time());
 		$jour_today = $today["mday"];
 		$mois_today = $today["mon"];
@@ -2394,7 +2416,6 @@ else {
 		$jour = jour($date);
 	
 		// Taches
-		
 		$result_pb = spip_query("SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
 		$result_rv = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 
@@ -2413,110 +2434,116 @@ else {
 
 		// Calendrier
 		if ($GLOBALS['afficher_bandeau_calendrier']) {
-			echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 0px;'>";
-			echo "<a href='calendrier_semaine.php3' class='lien_sous'>";
-			echo _T('icone_agenda');
-			echo "</a>";
+			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 0px;'>";
+			$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
+			$gadget .= _T('icone_agenda');
+			$gadget .= "</a>";
 			
 			$mois = $GLOBALS['mois'];
 			$jour = $GLOBALS['jour'];
-			$annee =$GLOBALS['annee'];			
+			$annee =$GLOBALS['annee'];
 
 			$annee_avant = $annee - 1;
 			$annee_apres = $annee + 1;
 
-
-
-			echo "<table cellpadding='0' cellspacing='10' border='0'>";
-			echo "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+			$gadget .= "<table cellpadding='0' cellspacing='10' border='0'>";
+			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 			for ($i=$mois; $i < 13; $i++) {
-				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
 					nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
 			}
 			for ($i=1; $i < $mois - 1; $i++) {
-				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
-			echo "</td>";
+			$gadget .= "</td>";
 
 				if ($afficher_cal) {
-					echo "<td valign='top' width='200' rowspan='3'>";
-					echo "<div>&nbsp;</div>";
-					echo "<div style='color: black;'>";
-					echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-					echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
-					echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-					echo "</div>";
-					echo "</td>";
+					$gadget .= "<td valign='top' width='200' rowspan='3'>";
+					$gadget .= "<div>&nbsp;</div>";
+					$gadget .= "<div style='color: black;'>";
+					$gadget .=  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+					$gadget .=  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
+					$gadget .=  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+					$gadget .= "</div>";
+					$gadget .= "</td>";
 				}
 		
-			echo "</tr>";
-			echo "<tr>";
-			echo "<td valign='top' width='180'>";
-			echo http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
-			echo "</td><td valign='top' width='180'>";
-			echo http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
-			echo "</td><td valign='top' width='180'>";
-			echo http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
-			echo "</td>";
-			echo "</tr>";
-			echo "<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
-			echo "<div>&nbsp;</div>";
+			$gadget .= "</tr>";
+			$gadget .= "<tr>";
+			$gadget .= "<td valign='top' width='180'>";
+			$gadget .= http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= "</td><td valign='top' width='180'>";
+			$gadget .= http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= "</td><td valign='top' width='180'>";
+			$gadget .= http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= "</td>";
+			$gadget .= "</tr>";
+			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
+			$gadget .= "<div>&nbsp;</div>";
 			for ($i=$mois+2; $i <= 12; $i++) {
-				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 			for ($i=1; $i < $mois+1; $i++) {
-				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
+				$gadget .= http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
 					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
 			}
-			echo "</td></tr>";
-			echo "</table>";
+			$gadget .= "</td></tr>";
+			$gadget .= "</table>";
 			
-			echo "</div>";
+			$gadget .= "</div>";
 		
 		} else {
-			echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
-			echo "<a href='calendrier_semaine.php3' class='lien_sous'>";
-			echo _T('icone_agenda');
-			echo "</a>";
+			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
+			$gadget .= "<a href='calendrier_semaine.php3' class='lien_sous'>";
+			$gadget .= _T('icone_agenda');
+			$gadget .= "</a>";
 			
-			echo "<table><tr>";
-			echo "<td valign='top' width='200'>";
-				echo "<div>";
-				echo http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
-				echo "</div>";
-				echo "</td>";
+			$gadget .= "<table><tr>";
+			$gadget .= "<td valign='top' width='200'>";
+				$gadget .= "<div>";
+				$gadget .= http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+				$gadget .= "</div>";
+				$gadget .= "</td>";
 				if ($afficher_cal) {
-					echo "<td valign='top' width='10'> &nbsp; </td>";
-					echo "<td valign='top' width='200'>";
-					echo "<div>&nbsp;</div>";
-					echo "<div style='color: black;'>";
-					echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-					echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
-					echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-					echo "</div>";
-					echo "</td>";
+					$gadget .= "<td valign='top' width='10'> &nbsp; </td>";
+					$gadget .= "<td valign='top' width='200'>";
+					$gadget .= "<div>&nbsp;</div>";
+					$gadget .= "<div style='color: black;'>";
+					$gadget .=  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+					$gadget .=  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
+					$gadget .=  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+					$gadget .= "</div>";
+					$gadget .= "</td>";
 				}
 			
-			echo "</tr></table>";
-			echo "</div>";
+			$gadget .= "</tr></table>";
+			$gadget .= "</div>";
 		}
-		
+	echo afficher_javascript($gadget);
+	// FIN GADGET Agenda
 
 
-		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
-		echo "<a href='messagerie.php3' class='lien_sous'>";
-		echo _T('icone_messagerie_personnelle');
-		echo "</a>";
+	// GADGET Messagerie
+	$gadget = '';
+		$gadget .= "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
+		$gadget .= "<a href='messagerie.php3' class='lien_sous'>";
+		$gadget .= _T('icone_messagerie_personnelle');
+		$gadget .= "</a>";
 		
-		echo "<div>&nbsp;</div>";
-		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
-		icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif");
+		$gadget .= "<div>&nbsp;</div>";
+		$gadget .= icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif", '', false);
+		$gadget .= icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif", '', false);
 		if ($connect_statut == "0minirezo") {
-			icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif");
+			$gadget .= icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif", '', false);
 		}
-		echo "</div>";
+		$gadget .= "</div>";
+
+	echo afficher_javascript($gadget);
+
+	// FIN GADGET Messagerie
+
 
 		// Suivi activite	
 		echo "<div id='bandeausynchro' class='bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
