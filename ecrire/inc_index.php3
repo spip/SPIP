@@ -60,7 +60,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	if (!$id_objet OR (!$forcer_reset AND deja_indexe($type, $id_objet))) return;
 
 	$index = '';
-	$mots = "INSERT DELAYED IGNORE spip_index_dico (hash, dico) VALUES (0,'')";
+	$mots = "INSERT DELAYED IGNORE INTO spip_index_dico (hash, dico) VALUES (0,'')";
 
 	if ($type != 'syndic'){
 		$table_index = 'spip_index_'.$type.'s';
@@ -180,7 +180,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 		reset($index);
 		unset($q);
 		while (list($hash, $points) = each($index)) $q[] = "(0x$hash,$points,$id_objet)";
-		spip_query("INSERT $table_index (hash, points, $col_id) VALUES ".join(',',$q));
+		spip_query("INSERT INTO $table_index (hash, points, $col_id) VALUES ".join(',',$q));
 	}
 }
 

@@ -15,8 +15,8 @@ if ($id_article){
 	$result = spip_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
-		$titre = propre($row['titre']);
-		$total_absolu = propre($row['visites']);
+		$titre = typo($row['titre']);
+		$total_absolu = $row['visites'];
 		gros_titre($titre);
 	}
 } 
@@ -57,7 +57,7 @@ if ($connect_statut == '0minirezo') {
 	echo "<p>";
 	echo "<div class='iconeoff' style='padding: 5px;'>";
 	echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
-	echo propre("Afficher les visites pour:");
+	echo typo("Afficher les visites pour:");
 	echo "<ul>";
 	if ($id_article>0) {
 		echo "<li><b><a href='statistiques_visites.php3'>Tout le site</a></b>";
@@ -69,15 +69,19 @@ if ($connect_statut == '0minirezo') {
 	$query = "SELECT id_article, titre FROM spip_articles WHERE statut='publie' AND visites > 0 ORDER BY date DESC LIMIT 0,20";
 	$result = spip_query($query);
 
-	while ($row = mysql_fetch_array($result)) {
-		$titre = propre($row['titre']);
-		$l_article = $row['id_article'];
-		if ($l_article == $id_article){
-			echo "\n<li><b>$titre</b>";
-		} else {
-			echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a>";
+	if (mysql_num_rows($result) > 0)
+		while ($row = mysql_fetch_array($result)) {
+			$titre = typo($row['titre']);
+			$l_article = $row['id_article'];
+			if ($l_article == $id_article){
+				echo "\n<li><b>$titre</b>";
+			} else {
+				echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a>";
+			}
 		}
-	}
+	else
+		echo "\n<i>(aucun article visit&eacute;)</i>";
+
 	echo "</font>";
 	echo "</ul>";
 	echo "</font>";
@@ -106,7 +110,7 @@ $result=spip_query($query);
 while ($row = mysql_fetch_array($result)) {
 	$date = $row['date_unix'];
 	$visites = $row['visites'];
-		
+
 	$log[$date] = $visites;
 	if ($i == 0) $date_debut = $date;
 	$i++;
@@ -135,16 +139,16 @@ if (count($log)>0){
 	if ($maxgraph < $max) $maxgraph.="0";	
 
 	if (0.8*$maxgraph > $max) $maxgraph = 0.8 * $maxgraph;
-		
+
 	$rapport = 200 / $maxgraph;
-	
+
 	if (count($log) < 420) $largeur = floor(420 / ($nb_jours+1));
 	if ($largeur < 1) $largeur = 1;
-	
+
 	debut_cadre_relief("statistiques-24.gif");
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
-	
+
 		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
 
 	// Presentation graphique
@@ -298,4 +302,3 @@ echo "</font>";
 fin_page();
 
 ?>
-

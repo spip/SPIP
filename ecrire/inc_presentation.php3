@@ -15,15 +15,19 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 //
 function aide ($aide) {
 	global $couleur_foncee;
+
+	if (!ereg("/ecrire/", $GLOBALS['REQUEST_URI']))
+		$dir_ecrire = 'ecrire/';
+
 	return " <script><!--\n".
-	'document.write("<a href=\"javascript:window.open(\'aide_index.php3?aide='.
+	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); ".
 	'void(0);\">");'.
 	"\n// --></script><noscript>".
-	'<a href="aide_index.php3?aide='.
+	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'"></noscript><img src=\'img_pack/aide.gif\' alt=\'AIDE\' width=\'12\' height=\'12\' border=\'0\' align=\'middle\'></a>';
+	'"></noscript><img src=\''.$dir_ecrire.'img_pack/aide.gif\' alt=\'AIDE\' width=\'12\' height=\'12\' border=\'0\' align=\'middle\'></a>';
 }
 
 

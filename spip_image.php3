@@ -248,12 +248,12 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$id_document = 0;
 	}
 	if (!$id_document) {
-		$query = "INSERT spip_documents (id_type, titre, date) VALUES ($id_type, '', NOW())";
+		$query = "INSERT INTO spip_documents (id_type, titre, date) VALUES ($id_type, '', NOW())";
 		spip_query($query);
 		$id_document = mysql_insert_id();
 		$nouveau = true;
 		if ($id_article) {
-			$query = "INSERT spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
+			$query = "INSERT INTO spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
 			spip_query($query);
 		}
 	}
@@ -292,7 +292,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		else if ($format_prev == "png") $format_prev = 2;
 		else if ($format_prev == "gif") $format_prev = 3;
 		
-		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier, date) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev', NOW())";
+		$query = "INSERT INTO spip_documents (id_type, titre, largeur, hauteur, fichier, date) VALUES ('$format_prev', '', '$largeur_prev', '$hauteur_prev', '$fichier_prev', NOW())";
 		spip_query($query);
 		$id_preview = mysql_insert_id();
 		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";

@@ -10,7 +10,7 @@ $adresse_retour = rawurldecode($adresse_retour);
 if ($valider_forum) {
 	$titre_message = addslashes(corriger_caracteres($titre_message));
 	$texte = addslashes(corriger_caracteres($texte));
-	$query = "INSERT spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
+	$query = "INSERT INTO spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
 	"VALUES (\"$titre_message\", \"$texte\", NOW(), \"$nom_site\", \"$url_site\", \"$statut\", \"$connect_id_auteur\", \"$nom\", '$connect_email', '$id_rubrique', '$id_parent', '$id_article', '$id_breve', '$id_message', '$id_syndic')";
 	$result = spip_query($query);
 	

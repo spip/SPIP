@@ -777,10 +777,10 @@ function maj_base() {
 				$num_img = $match[1];
 				$fichier = "IMG/$fichier";
 				$taille = @filesize("../$fichier");
-				spip_query("INSERT spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ".
+				spip_query("INSERT INTO spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ".
 					"('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
 				$id_document = mysql_insert_id();
-				spip_query("INSERT spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
+				spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
 				$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
 			}
 			$replace = "REPLACE($replace, '<IM_', '<IMG')";
