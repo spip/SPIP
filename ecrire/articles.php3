@@ -40,8 +40,8 @@ if ($id_article==0) {
 		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
 
 		// Modifier le lien de base pour qu'il prenne en compte le nouvel id
-		unset($GLOBALS['_POST']['id_rubrique']);
-		$GLOBALS['_POST']['id_article'] = $id_article;
+		unset($_POST['id_rubrique']);
+		$_POST['id_article'] = $id_article;
 		$clean_link = new Link();
 	} else {
 		redirige_par_entete("./index.php3");

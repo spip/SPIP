@@ -6,50 +6,79 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 // Formulaire de signature d'une petition
 //
 
-global $balise_FORMULAIRE_SIGNATURE_collecte;
-$balise_FORMULAIRE_SIGNATURE_collecte = array('petition', 'id_article', 'nom_email', 'adresse_email', 'message', 'signature_nom_site', 'signature_url_site', 'url_page', 'val_confirm');
 
-function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres)
-{
-  return ($args[0] ? $args : '');
+// Contexte necessaire lors de la compilation
+
+// Il *faut* demander petition, meme si on ne s'en sert pas dans l'affichage,
+// car on doit obtenir la jointure avec sql_petitions pour verifier si
+// une petition est attachee a l'article
+global $balise_FORMULAIRE_SIGNATURE_collecte;
+$balise_FORMULAIRE_SIGNATURE_collecte = array('id_article', 'petition');
+
+
+// Verification des arguments (contexte + filtres)
+function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
+
+	// pas d'id_article => erreur de squelette
+	if (!$args[0])
+		return erreur_squelette(
+			_T('zbug_champ_hors_motif',
+				array ('champ' => '#FORMULAIRE_SIGNATURE',
+					'motif' => 'ARTICLES')), '');
+
+	// article sans petition => pas de balise
+	else if (!$args[1])
+		return '';
+
+	else
+		return $args;
 }
 
-function balise_FORMULAIRE_SIGNATURE_dyn($texte, $id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page, $val_confirm) {
-
+// Executer la balise
+function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition) {
 	include_local(_FILE_CONNECT);
-	if ($val_confirm)
+
+	if (_request('var_confirm')) # _GET
 		return reponse_confirmation($id_article);
-	else if ($nom_email AND $adresse_email)
-		return  reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page, $val_confirm);
+
+	else if (_request('nom_email') AND _request('adresse_email')) # _POST
+		return  reponse_signature($id_article,
+			_request('nom_email'), _request('adresse_email'),
+			_request('message'), _request('nom_site'),
+			_request('url_site'), _request('url_page')
+		);
+
 	else {
-		$row = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article='$id_article'"));
-		return !$row ? '': array('formulaire_signature', 0, $row);
+		$s = spip_query("SELECT * FROM spip_petitions
+			WHERE id_article='$id_article'");
+		if ($row = spip_fetch_array($s))
+			return array('formulaire_signature', 0, $row);
 	}
 }
 
 
 // Retour a l'ecran du lien de confirmation d'une signature de petition.
-// Si val_confirm est non vide, c'est l'appel en debut de inc-public
+// Si var_confirm est non vide, c'est l'appel en debut de inc-public
 // pour vider le cache au demarrage afin que la nouvelle signature apparaisse.
 // Sinon, c'est l'execution du formulaire et on retourne le message 
 // de confirmation ou d'erreur construit lors de l'appel par inc-public.
 
-function reponse_confirmation($id_article, $val_confirm = '') {
+function reponse_confirmation($id_article, $var_confirm = '') {
 	static $confirm = '';
 
-	if (!$val_confirm) return $confirm;
+	if (!$var_confirm) return $confirm;
 	include_local(_FILE_CONNECT);
 	if ($GLOBALS['db_ok']) {
 		include_ecrire("inc_texte.php3");
 		include_ecrire("inc_filtres.php3");
 
 		// Eviter les doublons
-		$lock = "petition $id_article $val_confirm";
+		$lock = "petition $id_article $var_confirm";
 		if (!spip_get_lock($lock, 5)) {
 			$confirm= _T('form_pet_probleme_technique');
 		}
 		else {
-			$query_sign = "SELECT * FROM spip_signatures WHERE statut='".addslashes($val_confirm)."'";
+			$query_sign = "SELECT * FROM spip_signatures WHERE statut='".addslashes($var_confirm)."'";
 			$result_sign = spip_query($query_sign);
 			if (spip_num_rows($result_sign) > 0) {
 				while($row = spip_fetch_array($result_sign)) {
@@ -107,7 +136,7 @@ function reponse_confirmation($id_article, $val_confirm = '') {
 					// invalider les pages ayant des boucles signatures
 					include_ecrire('inc_invalideur.php3');
 					include_ecrire('inc_meta.php3');
-					suivre_invalideur("id='petition/petition'");
+					suivre_invalideur("id='varia/pet$id_article'");
 	
 					$confirm= (_T('form_pet_signature_validee'));
 				}
@@ -127,7 +156,7 @@ function reponse_confirmation($id_article, $val_confirm = '') {
 // Retour a l'ecran de la signature d'une petition
 //
 
-function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page, $val_confirm) {
+function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
 	if ($GLOBALS['db_ok']) {
 		include_ecrire("inc_texte.php3");
@@ -204,7 +233,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				}
 
 				$link = new Link($url_page);
-				$link->addVar('val_confirm', $passw);
+				$link->addVar('var_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
 	
 				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));

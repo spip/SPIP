@@ -185,11 +185,13 @@ function cherche_page ($cache, $contexte, $fond)  {
 // appelee avec la methode POST).
 //
 function calculer_contexte() {
-	foreach($GLOBALS['_GET'] as $var => $val) {
+	global $_GET, $_POST;
+
+	foreach($_GET as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
-	foreach($GLOBALS['_POST'] as $var => $val) {
+	foreach($_POST as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
 	}
@@ -237,6 +239,7 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 
 
 function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
+	global $_POST;
 
 	// Inclusion
 	if ($inclusion) {
@@ -276,7 +279,7 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 
 	// Enregistrer le fichier cache
 	if ($delais > 0 AND $GLOBALS['var_mode'] != 'debug'
-	AND empty($GLOBALS['_POST']))
+	AND !count($_POST))
 		ecrire_fichier($chemin_cache, $signal.$page['texte']);
 
 	return $page;

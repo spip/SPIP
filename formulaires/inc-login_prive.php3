@@ -11,7 +11,7 @@ $balise_LOGIN_PRIVE_collecte = array('url');
 # 1. l'url collectee ci-dessus (args0) ou donnee en filtre (filtre0)
 # 2. l'eventuel parametre de la balise (args1) fournie par
 #    calculer_balise_dynamique, en l'occurence le #LOGIN courant si l'on
-#    programme une <boucle(AUTEURS)>[(#LOGIN_PUBLIC{#LOGIN})]
+#    programme une <boucle(AUTEURS)>[(#LOGIN_PRIVE{#LOGIN})]
 
 function balise_LOGIN_PRIVE_stat ($args, $filtres) {
 
@@ -20,11 +20,12 @@ function balise_LOGIN_PRIVE_stat ($args, $filtres) {
 
 	$login = $args[1];
 
-	return array($cible, $login, $simple);
+	return array($cible, $login, $inscription);
 }
 
 function balise_LOGIN_PRIVE_dyn($cible, $login) {
-	return login_explicite($login, $cible, 'redac');
+	return
+		login_explicite($login, $cible, 'redac');
 }
 
 ?>

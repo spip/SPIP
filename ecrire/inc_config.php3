@@ -74,7 +74,6 @@ function init_config() {
 		'gerer_trad' => 'non',
 		'langues_multilingue' => $GLOBALS['all_langs']
 	);
-
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
 			ecrire_meta($nom, $valeur);
@@ -251,6 +250,15 @@ function appliquer_modifs_config() {
 		'gerer_trad',
 		'langues_multilingue'
 	);
+	// Modification du reglage accepter_inscriptions => vider le cache
+	// (pour repercuter la modif sur le panneau de login)
+	if (isset($GLOBALS['accepter_inscriptions'])
+	AND ($GLOBALS['accepter_inscriptions']
+	!= lire_meta('accepter_inscriptions'))) {
+		include_ecrire('inc_invalideur.php3');
+		suivre_invalideur("1"); # tout effacer
+	}
+
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
 
@@ -267,7 +275,6 @@ function appliquer_modifs_config() {
 
 	// modifs de secu (necessitent une authentification ftp)
 	$liste_meta = array(
-		// 'secu_avertissement',	// n'existe plus !
 			    'creer_htpasswd',
 			    'creer_htaccess'
 	);

@@ -8,8 +8,9 @@ define("_INC_PUBLIC_GLOBAL", "1");
 function calcule_header_et_page ($fond, $delais) {
 	  global $affiche_boutons_admin, $auteur_session, $flag_dynamique,
 	  $flag_ob, $flag_preserver, $forcer_lang, $ignore_auth_http,
-	  $lastmodified, $recherche, $use_cache, $val_confirm, $var_mode,
+	  $lastmodified, $recherche, $use_cache, $var_confirm, $var_mode,
 	  $var_recherche, $tableau_des_erreurs;
+	  global $_GET, $_POST;
 
 	// Regler le $delais par defaut
 	if (!isset($delais))
@@ -24,20 +25,20 @@ function calcule_header_et_page ($fond, $delais) {
 		verifier_visiteur();
 	}
 	// multilinguisme
-	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($GLOBALS['_POST'])) {
+	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
-	if ($GLOBALS['_GET']['lang']) {
+	if ($_GET['lang']) {
 		include_ecrire('inc_lang.php3');
-		lang_select($GLOBALS['_GET']['lang']);
+		lang_select($_GET['lang']);
 	}
 
 	// Si envoi pour un forum, enregistrer puis rediriger
 
-	if (strlen($GLOBALS['_POST']['confirmer_forum']) > 0
-	OR ($GLOBALS['_POST']['afficher_texte']=='non'
-		AND $GLOBALS['_POST']['ajouter_mot'])) {
+	if (strlen($_POST['confirmer_forum']) > 0
+	OR ($_POST['afficher_texte']=='non'
+		AND $_POST['ajouter_mot'])) {
 		include('inc-messforum.php3');
 		redirige_par_entete(enregistre_forum());
 	}
@@ -45,9 +46,9 @@ function calcule_header_et_page ($fond, $delais) {
 	// si signature de petition, l'enregistrer avant d'afficher la page
 	// afin que celle-ci contienne la signature
 
-	if ($GLOBALS['_GET']['val_confirm']) {
+	if ($_GET['var_confirm']) {
 		include_local(find_in_path('inc-formulaire_signature.php3'));
-		reponse_confirmation($GLOBALS['_GET']['id_article'], $val_confirm);
+		reponse_confirmation($_GET['id_article'], $var_confirm);
 	}
 
 	//  refus du debug si pas dans les options generales ni admin connecte
@@ -74,7 +75,7 @@ function calcule_header_et_page ($fond, $delais) {
 	// a condition d'etre sur de pouvoir le faire
 	//
 	if (!$flag_preserver
-	AND $flag_ob AND !strlen(@ob_get_contents())) {
+	AND $flag_ob AND !headers_sent()) {
 
 		// Si la page est vide, gerer l'erreur 404
 		if (preg_match('/^[[:space:]]*$/', $page['texte'])
@@ -319,13 +320,6 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		$lang_select = true; // pour lang_dselect en sortie
 	}
 	
-	// Si on est inclus en POST, il faut ajouter les variables _POST dans
-	// le contexte inclus, sinon les formulaires ne marchent pas...
-	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-		include_local('inc-calcul.php3');
-		$contexte_inclus = array_merge(calculer_contexte(), $contexte_inclus);
-	}
-
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
 	$use_cache, $fond, true);
 
@@ -335,38 +329,16 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	return $page;
 }
 
-// equivalente a texte_script dans inc_filtre.
-
-function securise_script($texte) {
-	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
-}
-
-# les balises dynamiques sont traitees comme des inclusions
-
-function synthetiser_balise_dynamique($nom, $args, $file, $lang) {
-	return
-		('<'.'?php 
-include_ecrire(\'inc_lang.php3\');
-lang_select("'.$lang.'");
-include_local("'
-		. $file
-		. '");
-inclure_balise_dynamique(balise_'
-		. $nom
-		. '_dyn(\''
-		. join("', '", array_map("securise_script", $args))
-		. '\'));
-	lang_dselect();
-?'
-		.">");
-}
 
 # Attention, un appel explicite a cette fonction suppose certains include
 # (voir l'exemple de spip_inscription et spip_pass)
-
-function inclure_balise_dynamique($r) {
+# $r = complexe (fond, delais, contexte) ; $echo = faut-il faire echo ou return
+function inclure_balise_dynamique($r, $echo=true) {
 	if (is_string($r))
-		echo $r;
+		if ($echo)
+			echo $r;
+		else
+			return $r;
 	else {
 		list($fond, $delais, $contexte_inclus) = $r;
 
@@ -377,14 +349,27 @@ function inclure_balise_dynamique($r) {
 
 		// Appeler la page
 		$page = inclure_page($fond, $delais, $contexte_inclus);
-		if ($page['process_ins'] == 'html')
-			echo $page['texte'];
-		else
-			eval('?' . '>' . $page['texte']);
+
+		if ($page['process_ins'] == 'html') {
+			if ($echo)
+				echo $page['texte'];
+			else
+				$texte = $page['texte'];
+		} else {
+			if ($echo)
+				eval('?' . '>' . $page['texte']);
+			else {
+				ob_start();
+				eval('?' . '>' . $page['texte']);
+				$texte = ob_get_contents();
+				ob_end_clean();
+			}
+		}
 
 		if ($page['lang_select'])
 			lang_dselect();
 
+		return $texte;
 	}
 }
 
@@ -404,6 +389,14 @@ function message_erreur_404 () {
 		$erreur = '';
 
 	return _T("public:".$erreur);
+}
+
+// Renvoie le _GET ou le _POST emis par l'utilisateur
+function _request($var) {
+	global $_GET, $_POST;
+	if (isset($_GET[$var])) return $_GET[$var];
+	if (isset($_POST[$var])) return $_POST[$var];
+	return NULL;
 }
 
 ?>
