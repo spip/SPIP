@@ -131,6 +131,59 @@ function calcul_mysql_in($val, $valeurs, $tobeornotobe)
     }
 }
   
+function calcul_exposer ($pile, $reference) {
+	static $hierarchie;
+
+	if (!$hierarchie) {
+		if ($id = $reference['id_article'])
+			$base = 'articles';
+		else if ($id = $reference['id_breve'])
+			$base = 'breves';
+		else if ($id = $reference['id_syndic'])
+			$base = 'syndic';
+		else if ($id = $reference['id_rubrique'])
+			$base = 'rubriques';
+		else if ($id = $reference['id_secteur'])
+			$base = 'rubriques';
+
+		if (!$base)
+			$hierarchie = '-';
+		else {
+			if ($base != 'rubriques') {
+				$hierarchie[$base][$id] = true;
+				$id_element = 'id_'.ereg_replace('s$', '', $base);
+				$s = spip_fetch_array(spip_query(
+				"SELECT id_rubrique FROM spip_$base WHERE $id_element=$id"));
+				$id = $s['id_rubrique'];
+			}
+
+			$hierarchie['rubriques'][$id] = true;
+
+			while (true) {
+				$s = spip_fetch_array(spip_query(
+				"SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id"));
+				if ($id = $s['id_parent'])
+					$hierarchie['rubriques'][$id] = true;
+				else
+					break;
+			}
+		}
+	}
+
+	if ($hierarchie == '-')
+		return false;
+	else if ($id = $pile['id_article'])
+		return $hierarchie['articles'][$id];
+	else if ($id = $pile['id_breve'])
+		return $hierarchie['breves'][$id];
+	else if ($id = $pile['id_syndic'])
+		return $hierarchie['syndic'][$id];
+	else if ($id = $pile['id_rubrique'])
+		return $hierarchie['rubriques'][$id];
+	else if ($id = $pile['id_secteur'])
+		return $hierarchie['rubriques'][$id];
+
+}
 
 function calcul_generation ($generation) {
 	$lesfils = array();
