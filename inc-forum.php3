@@ -236,7 +236,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	}	
 	
 	if ($forums_publics == "abo") {
-		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?>';
+		$ret.= '<? include("inc-forum.php3"); forum_abonnement(); ?'.'>';
 	}
 	*/
 	
@@ -500,8 +500,7 @@ function ajout_forum() {
 						$ok = true;
 						poser_cookie_forum($email_forum_abo, $row["id_auteur"]);
 						
-						$fich = $REQUEST_URI;
-						if ($p = strrpos($REQUEST_URI, '/')) $fich = substr($fich, $p + 1)."&id_message=$id_message";
+						$fich = substr($fich, strrpos($REQUEST_URI, '/') + 1)."&id_message=$id_message";
 						
 						@header("Location: $fich");
 						break;
