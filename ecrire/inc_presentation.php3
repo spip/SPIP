@@ -82,7 +82,7 @@ function hr($color, $retour = false) {
 //
 // Cadres
 //
-function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
+function debut_cadrex($style, $icone = "", $fonction = "", $titre = "") {
 	global $browser_name;
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
@@ -133,7 +133,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 }
 
 
-function fin_cadre($style="") {
+function fin_cadrex($style="") {
 	global $browser_name;
 	
 	// Fermture du hack MSIE	
@@ -147,6 +147,66 @@ function fin_cadre($style="") {
 }
 
 
+function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
+	global $browser_name;
+	global $spip_display, $spip_lang_left;
+	static $accesskey = 97; // a
+
+	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
+		$style_gauche = " padding-$spip_lang_left: 38px;";
+		$style_cadre = " style='margin-top: 14px;'";
+	}
+	
+	if ($style == "e") {
+		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
+	}
+	else {
+		$ret .= "<div class='cadre-$style'$style_cadre>";
+	}
+
+	//$ret = "<div class='cadre-$style' style='$style_haut'>";
+	$ret .= "<div style='position: relative;'>";
+
+	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
+		$ret .= "<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
+		if ($fonction) {
+			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px;'");
+			$ret .= http_img_pack($fonction, "alt=''");
+			$ret .= "</div>";
+		}
+		else $ret .=  http_img_pack("$icone", "alt=''");
+		$ret .= "</div>";
+
+		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px;'";
+	}
+
+
+	if (strlen($titre) > 0) {
+		if ($spip_display == 4) {
+			$ret .= "<h3 class='cadre-titre'>$titre</h3>";
+		} else {
+			$ret .= "<div class='cadre-titre' style='margin: 0px;$style_gauche'>$titre</div>";
+		}
+	}
+	
+	
+	$ret .= "</div>";
+	
+	$ret .= "<div class='cadre-padding'>";
+
+
+	return $ret;
+}
+
+function fin_cadre($style) {
+
+	$ret = "</div>";
+	$ret .= "</div>";
+	if ($style == "e") $ret .= "</div>";
+	if ($style != "forum" AND $style != "thread-forum") $ret .= "<div style='height: 5px;'></div>";
+
+	return $ret;
+}
 
 
 function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = ''){

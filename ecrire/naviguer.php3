@@ -54,9 +54,9 @@ function enfant($collection){
 				$fid = $logo[2];
 				$hash = calculer_action_auteur ("reduire $w $h");
 
-//				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' />";
-				$les_enfants.= "<div style='position: absolute; $spip_lang_right: 0px; top: 0px; width: ".$w."px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' /></div>";
-				$les_enfants.= "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$w' height='$h' align='$spip_lang_right' />";
+				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='right' style='margin-right: -6px; margin-top: -6px;' />";
+//				$les_enfants.= "<div style='position: absolute; $spip_lang_right: 0px; top: 0px; width: ".$w."px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' /></div>";
+//				$les_enfants.= "<img src='" . _DIR_IMG_PACK . "rien.gif' width='$w' height='$h' align='$spip_lang_right' />";
 				
 			}
 		}
