@@ -14,10 +14,14 @@
 	srand((double) microtime() * 1000000); // une fois et une seule par script
 
 
+	// un truc le plus unique possible mais constant brouteur + numero ip
+	function md5_brouteur() {
+		return md5 (getenv('REMOTE_ADDR') . getenv('HTTP_USER_AGENT') . getenv('HTTP_X_FORWARDED_FOR'));
+	}
+
 	// Ajoute une session dans le cache des sessions
 	// ou supprimer toute session de cet auteur si $session == false
 	function ajouter_session($auteur, $session) {
-		$vars = array ('nom', 'login', 'email', 'session', 'statut');
 
 		if (file_exists ('ecrire/inc_sessions_cache.php3')) {
 			include ('ecrire/inc_sessions_cache.php3');
@@ -31,19 +35,25 @@
 			$sessions[$id]['email'] = $auteur->email;
 			$sessions[$id]['statut'] = $auteur->statut;
 			$sessions[$id]['session'] = $session;
+			$sessions[$id]['creation'] = time();
+			$sessions[$id]['brouteur'] = md5_brouteur();
 		}
 
+		$vars = array ('nom', 'login', 'email', 'session', 'statut', 'creation', 'brouteur');
 		$liste_sessions = array_keys($sessions);
+		$t = time() - 48 * 3600; // expire la session apres 48 h
 		while (list(,$s) = each ($liste_sessions)) {
-			reset ($vars);
-			unset ($contenu);
-			while (list(, $var) = each($vars)) {
-				$contenu[] = "'$var' => '".addslashes($sessions[$s][$var])."'";
+			if ($sessions[$s]['creation'] > $t) {
+				reset ($vars);
+				unset ($contenu);
+				while (list(, $var) = each($vars)) {
+					$contenu[] = "'$var' => '".addslashes($sessions[$s][$var])."'";
+				}
+				$contenu = join (",\n", $contenu);
+				$texte[] = "$s => array ( $contenu )";
 			}
-			$contenu = join (",\n", $contenu);
-			$texte[] = "$s => array ( $contenu )";
 		}
-		
+
 		$texte = '<'.'?php $sessions = array ('."\n". join(",\n" ,$texte) . "\n); ?".'>';
 		if ($myFile = fopen("ecrire/inc_sessions_cache.php3", "wb")) {
 			fputs($myFile, $texte);
@@ -78,12 +88,16 @@
 				include ('inc_sessions_cache.php3');
 			}
 
-			if ($session == $sessions[$id]['session']) {
+			// verifier le cookie et la provenance
+			if (($session == $sessions[$id]['session']) AND ($sessions[$id]['brouteur'] == md5_brouteur())) {
 				$auteur->id_auteur = $id;
 				$auteur->login = $sessions[$id]['login'];
 				$auteur->nom = $sessions[$id]['nom'];
 				$auteur->email = $sessions[$id]['email'];
 				$auteur->statut = $sessions[$id]['statut'];
+				// raviver la session si > 48 h
+				if ($sessions[$id]['creation'] < time() - 48 * 3600)
+					ajouter_session($auteur, $session);
 				return ($auteur);
 			}
 		}
@@ -95,39 +109,33 @@
 		// list(,$id_auteur,$login,$session) = decode_cookie_session($cookie)
 	}
 
-	function pose_cookie_session ($cookie, $cookie_admin='') {
+	function pose_cookie_session ($cookie_session, $cookie_admin='') {
 		global $redirect;
 		$cookie_pose = false;
 
 		// est-ce qu'il faut poser le cookie ?
-		if ($GLOBALS['HTTP_COOKIE_VARS']['spip_session'] == $cookie)
+		if ($GLOBALS['HTTP_COOKIE_VARS']['spip_session'] == $cookie_session)
 			return true;
 
 		// est-ce qu'on peut le faire ?
-		if (headers_sent()) // OR $GLOBALS['pose_cookie'] == 'fini')
+		if (headers_sent() OR ereg("/ecrire/", $GLOBALS['REQUEST_URI']))
 			return false;
-
-		// est-ce qu'il faut popper vers la racine ?
-		$my_uri = $GLOBALS['REQUEST_URI'];
-		if (ereg("/ecrire/", $my_uri)) {
-			if (!$redirect)
-				$redirect = $my_uri;
-			@header("Location: ../spip_cookie.php3?cookie_session=$cookie&redirect=".rawurlencode($redirect));
-			return false;
-		}
 
 		// on pose
-		if ($cookie) {
+		if ($cookie_session) {
 			// un cookie spip_session d'authentification,
 			// qui meurt avec le navigateur
-			setcookie ('spip_session', $cookie);
-
-			// un cookie spip_admin qui n'authentifie pas
-			// mais conserve des infos deux semaines
-			setcookie ('spip_admin', $cookie, time() + 14*24*3600);
-
+			setcookie ('spip_session', $cookie_session);
 			$cookie_pose = true;
 		}
+
+		if ($cookie_admin) {
+			// un cookie spip_admin qui n'authentifie pas
+			// mais conserve des infos deux semaines
+			setcookie ('spip_admin', $cookie_admin, time() + 14*24*3600);
+			$cookie_pose = true;
+		}
+
 		return $cookie_pose;
 	}
 
