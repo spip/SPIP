@@ -19,6 +19,7 @@ $GLOBALS['i18n_es'] = array(
 'admin_modifier_mot' => 'Modificar esta palabra clave',
 'admin_modifier_rubrique' => 'Modificar esta secci&oacute;n',
 'admin_recalculer' => 'Actualizar esta p&aacute;gina',
+'aide_non_disponible' => 'Esta parte de la ayuda en l&iacute;nea no es a&uacute;n disponible en esta lengua.',
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_archive_incorrect' => 'El fichero archivado no es un fichero SPIP.',
 'avis_archive_invalide' => 'el fichero archivado no es v&aacute;lido',
