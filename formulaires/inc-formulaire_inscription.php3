@@ -48,7 +48,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 				'".addslashes($mail_inscription)."', '$login', '$statut')");
 			$pass = creer_pass_pour_auteur($id_auteur);
 			$message = envoyer_inscription($mail_inscription,
-				$statut, $mode, $login, $pass);
+				$statut, $mode, $login, $pass, $nom_inscription);
 		}
 
 		else {
@@ -58,7 +58,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 				$pass = creer_pass_pour_auteur($id_auteur);
 				$message = envoyer_inscription(
 					$mail_inscription, $row['statut'], $mode,
-					$row['login'], $pass);
+					$row['login'], $pass, $nom_inscription);
 			} else {
 				// dead
 				if ($row['statut'] == '5poubelle')
@@ -97,11 +97,12 @@ function test_mail_ins($mode, $mail) {
 
 
 // envoyer identifiants par mail
-function envoyer_inscription($mail, $statut, $type, $login, $pass) {
+function envoyer_inscription($mail, $statut, $type, $login, $pass, $nom) {
 	$nom_site_spip = lire_meta("nom_site");
 	$adresse_site = lire_meta("adresse_site");
 	
-	$message = _T('form_forum_message_auto')."\n\n"._T('form_forum_bonjour')."\n\n";
+	$message = _T('form_forum_message_auto')."\n\n"
+	._T('form_forum_bonjour', array('nom'=>$nom))."\n\n";
 	if ($type == 'forum') {
 		$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
 	} else {
