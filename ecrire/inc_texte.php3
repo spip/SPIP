@@ -131,30 +131,30 @@ function nettoyer_chapo($chapo){
 }
 
 // points d'entree de pre- et post-traitement pour propre() et typo()
-function spip_avant_propre ($letexte, $ref_echap) {
+function spip_avant_propre ($letexte) {
 	if (@function_exists('avant_propre'))
-		return avant_propre ($letexte, $ref_echap);
+		return avant_propre ($letexte);
 
 	return $letexte;
 }
 
-function spip_apres_propre ($letexte, $ref_echap) {
+function spip_apres_propre ($letexte) {
 	if (@function_exists('apres_propre'))
-		return apres_propre ($letexte, $ref_echap);
+		return apres_propre ($letexte);
 
 	return $letexte;
 }
 
-function spip_avant_typo ($letexte, $ref_echap) {
+function spip_avant_typo ($letexte) {
 	if (@function_exists('avant_typo'))
-		return avant_typo ($letexte, $ref_echap);
+		return avant_typo ($letexte);
 
 	return $letexte;
 }
 
-function spip_apres_typo ($letexte, $ref_echap) {
+function spip_apres_typo ($letexte) {
 	if (@function_exists('apres_typo'))
-		return apres_typo ($letexte, $ref_echap);
+		return apres_typo ($letexte);
 
 	// caracteres speciaux
 	$letexte = corriger_caracteres($letexte);
@@ -420,7 +420,7 @@ function typo($letexte) {
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
 	// Appeler la fonction de pre-traitement
-	$letexte = spip_avant_typo ($letexte, &$les_echap);
+	$letexte = spip_avant_typo ($letexte);
 
 	if (!$lang = $lang_typo) {
 		include_ecrire('inc_lang.php3');
@@ -433,7 +433,7 @@ function typo($letexte) {
 		$letexte = typo_en($letexte);
 
 	// Appeler la fonction de post-traitement
-	$letexte = spip_apres_typo ($letexte, &$les_echap);
+	$letexte = spip_apres_typo ($letexte);
 
 	// reintegrer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
@@ -659,7 +659,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 
 	// Appeler la fonction de pre_traitement
-	$letexte = spip_avant_propre ($letexte, &$les_echap);
+	$letexte = spip_avant_propre ($letexte);
 
 	// Puce
 	if (!$lang_dir) {
@@ -892,7 +892,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
 
 	// Appeler la fonction de post-traitement
-	$letexte = spip_apres_propre ($letexte, &$les_echap);
+	$letexte = spip_apres_propre ($letexte);
 
 	// Reinserer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCEPROPRE");
