@@ -56,7 +56,7 @@ function document_et_vignette($url, $document) {
 	eregi('\.([a-z0-9]+)$', $document, $regs);
 	list($fichier, $largeur, $hauteur) =
 		vignette_par_defaut($regs[1]);
-	$doc = "<a href='$url'><img src='$fichier' border='0' /></a>";
+	$doc = "<a href='$url'><img src='$fichier' style='border-width: 0px' /></a>";
 	return $doc;
 }
 
@@ -150,7 +150,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			$largeur_vignette = $largeur;
 			$hauteur_vignette = $hauteur;
 			if ($fichier_vignette) {
-				$vignette = "<img src='$fichier_vignette' border='0'";
+				$vignette = "<img src='$fichier_vignette' style='border-width: 0px'";
 				if ($largeur_vignette && $hauteur_vignette)
 					$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 				if ($titre) {
@@ -168,7 +168,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 			if ($largeur_vignette < 120) $largeur_vignette = 120;
 			$forcer_largeur = " width = '$largeur_vignette'";
 
-			$retour = "<table cellpadding='0' cellspacing='0' border='0' align='$align'>\n";
+			$retour = "<table cellpadding='0' cellspacing='0' style='border-width: 0px' align='$align'>\n";
 			$retour .= "<tr>";
 			if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
 			$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
@@ -254,7 +254,7 @@ function integre_image($id_document, $align, $type_aff) {
 			= vignette_par_defaut($extension);
 
 		if ($url_fichier_vignette) {
-			$vignette = "<img src='$url_fichier_vignette' border='0'";
+			$vignette = "<img src='$url_fichier_vignette' style='border-width: 0px'";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre) {
@@ -554,7 +554,7 @@ function afficher_portfolio (
 					$link_rot->addVar('redirect',
 						$redirect_url.'&show_docs='.$id_document);
 					$link_rot->addVar('ancre', $album);
-					echo http_href_img($link_rot->getUrl(), 'tourner-gauche.gif', "border='0'", _T('image_tourner_gauche'), '', 'bouton_rotation');
+					echo http_href_img($link_rot->getUrl(), 'tourner-gauche.gif', "style='border-width: 0px'", _T('image_tourner_gauche'), '', 'bouton_rotation');
 					echo "<br />";
 
 					// tourner a droite
@@ -567,7 +567,7 @@ function afficher_portfolio (
 						$redirect_url.'&show_docs='.$id_document);
 					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(),
-						'tourner-droite.gif', "border='0'",
+						'tourner-droite.gif', "style='border-width: 0px'",
 						_T('image_tourner_droite'), '', 'bouton_rotation');
 					echo "<br />";
 
@@ -581,7 +581,7 @@ function afficher_portfolio (
 						$redirect_url.'&show_docs='.$id_document);
 					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(),
-						'tourner-180.gif', "border='0'",
+						'tourner-180.gif', "style='border-width: 0px'",
 						_T('image_tourner_180'), '', 'bouton_rotation');
 				}
 				echo "</div>\n";
@@ -1080,7 +1080,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			list($icone, $largeur_icone, $hauteur_icone) =
 				vignette_par_defaut($type_extension);
 			if ($icone) {
-				echo "<a href='$url'><img src='$icone' border='0' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
+				echo "<a href='$url'><img src='$icone' style='border-width: 0px' width='$largeur_icone' align='top' height='$hauteur_icone' alt='' /></a>\n";
 			}
 			echo "</div>\n";
 		}

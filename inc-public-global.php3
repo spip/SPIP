@@ -225,6 +225,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 			retire_caches($chemin_cache);
 	}
 
+
 	// Peut-on utiliser un fichier cache ?
 	determiner_cache($delais, $use_cache, $chemin_cache);
 
@@ -283,6 +284,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		include_ecrire('inc_lang.php3');
 		include_ecrire('inc_filtres.php3');
 		lang_select($GLOBALS['auteur_session']['lang']);
+		$x = majuscules(_T('previsualisation'));
 		$page['texte'] .= '<div style="
 		display: block;
 		color: #eeeeee;
@@ -294,9 +296,9 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		top: 0px;
 		left: 0px;
 		position: absolute;
-		"><img src="' . _DIR_IMG_PACK
-		. 'naviguer-site.png" align="left" border="0" />&nbsp; '
-		. majuscules(_T('previsualisation')).'</div>';
+		">' 
+		  . http_img_pack('naviguer-site.png', $x, '')
+		  ."&nbsp;$x</div>";
 	}
 
 	return $page;

@@ -28,6 +28,7 @@ h3.spip {
 
 .spip_puce {
 	list-style-position: inside;
+	border-width: 0px;
 }
 
 .spip_documents{

@@ -270,7 +270,7 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 	debut_gauche();
 	
 	if ($rv != 'non')
-	  echo http_calendrier_agenda ($lemois, $lannee, $lejour, $lemois, $lannee);
+	  echo http_calendrier_agenda ($lemois, $lannee, $lejour, $lemois, $lannee,false, 'calendrier.php3');
 	
 	echo "<br />";
 	

@@ -169,7 +169,7 @@ if ($spip_display != 4) {
 		// rendez-vous personnels dans le mois
 		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) AND messages.statut='publie' LIMIT 0,1"))) {
 			echo "<p />";
-			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3');
 		}
 		// rendez-vous personnels dans le mois
 		if (spip_num_rows(spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
