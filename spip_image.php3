@@ -238,81 +238,79 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 	// Securite
 	//
 	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
-		return '';
-	if (ereg("\.([^.]+)$", $orig, $match)) {
-		$ext = corriger_extension(addslashes(strtolower($match[1])));
-	}
-	//
+		return;
+
+	// type de document inconnu ?
+
+	if (!ereg("\.([^.]+)$", $orig, $match)) return;
+
+	$ext = corriger_extension(addslashes(strtolower($match[1])));
+	$row = @spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'" . (($mode != 'vignette') ? '' : " AND inclus='image'")));
+
+	// type de document invalide ?
+
+	if (!$row) return;
+
 	// Recopier le fichier
-	//
+
 	$dest_path = copier_document($ext,$orig, $source);
-	if (!$dest_path) {
-	  return '';
-	}
+	if (!$dest_path) return;
 
-	$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
-
-	if ($mode == 'vignette') $query .= " AND inclus='image'";
-
-	if ($row = @spip_fetch_array(spip_query($query))) {
-			$id_type = $row['id_type'];
-			$type_inclus = $row['inclus'];
-
-	//
 	// Preparation
-	//
-			if ($mode == 'vignette') {
-				$id_document_lie = $id_document;
-				$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
-				spip_query($query); // requete inutile a mon avis (Fil)...
-				$id_document = 0;
-			}
-			if (!$id_document) {
-				$query = "INSERT INTO spip_documents (id_type, titre, date) VALUES ($id_type, '', NOW())";
-				spip_query($query);
-				$id_document = spip_insert_id();
-				$nouveau = true;
-				if ($id_article && isset($type)) {
-					$query = "INSERT INTO spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
-					spip_query($query);
-				}
-			}
+
+	if ($mode == 'vignette') {
+		$id_document_lie = $id_document;
+		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
+		spip_query($query); // requete inutile a mon avis (Fil)...
+		$id_document = 0;
+	}
+	if (!$id_document) {
+		$id_type = $row['id_type'];
+		$query = "INSERT INTO spip_documents (id_type, titre, date) VALUES ($id_type, '', NOW())";
+		spip_query($query);
+		$id_document = spip_insert_id();
+		$nouveau = true;
+		if ($id_article && isset($type)) {
+			$query = "INSERT INTO spip_documents_".$type."s (id_document, id_".$type.") VALUES ($id_document, $id_article)";
+			spip_query($query);
+		}
+	}
 
 	//
 	// Mettre a jour les infos du document uploade
 	//
-			$size_image = @getimagesize($dest_path);
-			$type_image = decoder_type_image($size_image[2]);
-			if ($type_image) {
-				$largeur = $size_image[0];
-				$hauteur = $size_image[1];
-			}
-			$taille = filesize($dest_path);
+	$size_image = @getimagesize($dest_path);
+	$type_image = decoder_type_image($size_image[2]);
+	if ($type_image) {
+		$largeur = $size_image[0];
+		$hauteur = $size_image[1];
+	}
+	$taille = filesize($dest_path);
 
-			if ($nouveau) {
-				if (!$mode) $mode = ($type_image AND $type_inclus == 'image') ? 'vignette' : 'document';
-				$update = "mode='$mode', ";
-			}
+	if ($nouveau) {
+		$type_inclus = $row['inclus'];
+		if (!$mode) $mode = ($type_image AND $type_inclus == 'image') ? 'vignette' : 'document';
+			$update = "mode='$mode', ";
+	}
 
-			$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
-		"WHERE id_document=$id_document";
-			spip_query($query);
+	spip_query("UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' WHERE id_document=$id_document");
 
-			if ($id_document_lie) {
-				$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
-				spip_query($query);
-				$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
-			}
+
+	if ($id_document_lie) {
+		$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
+		spip_query($query);
+		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
+	}
 	// Creer la vignette
-			if ($mode == 'document' AND lire_meta('creer_preview') == 'oui'
-			    AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
-				include_ecrire('inc_logos.php3');
-				$f = ereg_replace(".$ext$", '-s', basename($dest_path));
-				$d = lire_meta('taille_preview');
-				creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
-			}
-		}
+	if ($mode == 'document' AND lire_meta('creer_preview') == 'oui'
+	    AND ereg(",$ext,", ','.lire_meta('formats_graphiques').',')) {
+		include_ecrire('inc_logos.php3');
+		$f = ereg_replace(".$ext$", '-s', basename($dest_path));
+		$d = lire_meta('taille_preview');
+		creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
+	}
 }
+
 
 
 
