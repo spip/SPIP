@@ -16,10 +16,10 @@ $GLOBALS['auteur_session'] = '';
 
 
 //
-// Caracterisation du brouteur pour limiter le chourage de cookies
+// On verifie l'IP et le nom du navigateur
 //
 function hash_env() {
-	return md5(getenv('HTTP_USER_AGENT'));
+	return md5(getenv('REMOTE_ADDR') . getenv('HTTP_USER_AGENT'));
 }
 
 
@@ -131,10 +131,8 @@ function creer_uniqid() {
 
 
 //
-// sessions a zapper (login, zapper oui/non)
-//
 // Cette fonction regarde toutes les sessions appartenant a l'auteur,
-// et les efface (si demande, et a l'exception de la session courante)
+// et les efface (a l'exception de la session courante)
 //
 // On en profite pour effacer toutes les sessions creees il y a plus de 48 h
 //
@@ -158,14 +156,14 @@ function zap_sessions ($id_auteur, $zap) {
 
 			// sinon voir si c'est une session du meme auteur
 			else if ($regs[1] == $id_auteur.'_') {
+				$zap_num ++;
 				if ($zap)
 					@unlink($chemin);
-				else
-					$zap_num ++;
 			}
 
 		}
 	}
+
 	return $zap_num;
 }
 

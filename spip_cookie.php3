@@ -5,25 +5,10 @@ include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
-
-if (! strpos($redirect,'?')) $redirect .='?';
-
-// si demande auth_http
-if ($essai_auth_http == 'oui') {
-	include_ecrire('inc_session.php3');
-	if (! verifier_php_auth()) {
-		ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/'>Nouvelle tentative</a>] [<a href='./ecrire/'>espace priv&eacute</a>]");
-	} else {
-		@header("Location: $redirect&bonjour=oui");
-	}
-	exit;
-}
-// si demande logout auth_http
-else if ($essai_auth_http == 'logout') {
-	include_ecrire('inc_session.php3');
-	ask_php_auth("<b>D&eacute;connexion effectu&eacute;e.</b><p>(V&eacute;rifiez toutefois que votre navigateur n'a pas m&eacute;moris&eacute; votre mot de passe...)<p>[<a href='./'>Retour au site public</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/'>test navigateur/reconnexion</a>] [<a href='./ecrire/'>espace priv&eacute</a>]");
-	exit;
-}
+if ($url)
+	$cible = new Link(urldecode($url));
+else
+	$cible = new Link('ecrire/');
 
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
@@ -45,13 +30,10 @@ if ($change_session == 'oui') {
 
 
 // tentative de login
-if ($cookie_session == "non") {
-	supprimer_session($spip_session);
-	setcookie('spip_session', $spip_session, time() - 3600 * 24);
-}
-else if ($essai_login == "oui") {
+if ($essai_login == "oui") {
 	// recuperer le login passe en champ hidden
-	if ($session_login_hidden AND !$session_login) $session_login = $session_login_hidden;
+	if ($session_login_hidden AND !$session_login)
+		$session_login = $session_login_hidden;
 
 	// verifier l'auteur
 	$login = addslashes($session_login);
@@ -69,24 +51,22 @@ else if ($essai_login == "oui") {
 	}
 
 	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass' AND statut<>'5poubelle'";
+
 	$result = spip_query($query);
 
-	if ($row_auteur = mysql_fetch_array($result)) {
+	if ($row_auteur = mysql_fetch_array($result)) { // login reussi
 		if ($row_auteur['statut'] == 'nouveau') { // nouvel inscrit
 			spip_query ("UPDATE spip_auteurs SET statut='1comite' WHERE login='$login'");
 			$row_auteur['statut'] = '1comite';
 		}
 
-		if ($row_auteur['statut'] == '0minirezo') { // force le cookie pour les admins
+		if ($row_auteur['statut'] == '0minirezo') // force le cookie pour les admins
 			$cookie_admin = "@".$row_auteur['login'];
-			if ($spip_admin == $cookie_admin)
-				unset ($cookie_admin);
-		}
+
 		$cookie_session = creer_cookie_session($row_auteur);
 		setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
 	
-		// ici on fait tourner le codage du pass dans la base
-		// retournera une erreur si la base n'est pas mise a jour...
+		// fait tourner le codage du pass dans la base
 		$nouvel_alea_futur = creer_uniqid();
 		$query = "UPDATE spip_auteurs
 			SET alea_actuel = alea_futur,
@@ -94,13 +74,15 @@ else if ($essai_login == "oui") {
 				alea_futur = '$nouvel_alea_futur'
 			WHERE login='$login'";
 		@spip_query($query);
-		$redirect .= '&bonjour=oui';
+		$cible->addVar('bonjour','oui');
+
 	}
 	else {
+		$url = urlencode($cible->getUrl());
 		if ($session_password || $session_password_md5) 
-			@header("Location: login.php3?login=$login&erreur=pass");
+			@header("Location: login.php3?login=$login&erreur=pass&url=$url");
 		else
-			@header("Location: login.php3?login=$login");
+			@header("Location: login.php3?login=$login&url=$url");
 		exit;
 	}
 }
@@ -109,12 +91,11 @@ else if ($essai_login == "oui") {
 if ($cookie_admin == "non") {
 	setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 }
-else if ($cookie_admin) {
+else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
 }
 
 // redirection
-if (!$redirect) $redirect = './';
-@header("Location: $redirect");
+@header("Location: " . $cible->getUrl());
 
 ?>

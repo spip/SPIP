@@ -82,26 +82,21 @@ function auth() {
 
 	// Peut-etre sommes-nous en auth http?
 	else if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
-		if ($GLOBALS['logout'] == $PHP_AUTH_USER) {
-			@header("Location: ../spip_cookie.php3?essai_auth_http=logout");
-			exit;
+		include_ecrire ("inc_session.php3");
+		if (verifier_php_auth()) {
+			$auth_login = $PHP_AUTH_USER;
+			$auth_pass_ok = true;
+			$auth_can_disconnect = true;
 		} else {
-			include_ecrire ("inc_session.php3");
-			if (verifier_php_auth()) {
-				$auth_login = $PHP_AUTH_USER;
-				$auth_pass_ok = true;
-				$auth_can_disconnect = true;
-			} else {
-				// normalement on n'arrive pas la sauf changement de mot de passe dans la base
-				$auth_login = '';
-				echo "<p><b>Connexion refus&eacute;e</b></p>";
-				echo "[<a href='../spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/'>r&eacute;essayer</a>]";
-				exit;
-			}
-			$PHP_AUTH_PW = '';
-			$_SERVER['PHP_AUTH_PW'] = '';
-			$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
+			// normalement on n'arrive pas la sauf changement de mot de passe dans la base
+			$auth_login = '';
+			echo "<p><b>Connexion refus&eacute;e</b></p>";
+			echo "[<a href='../login.php3?essai_auth_http=oui'>r&eacute;essayer</a>]";
+			exit;
 		}
+		$PHP_AUTH_PW = '';
+		$_SERVER['PHP_AUTH_PW'] = '';
+		$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
 	}
 
 	// Authentification session
@@ -113,10 +108,6 @@ function auth() {
 				$auth_login = $auteur_session['login'];
 				$auth_pass_ok = true;
 				$auth_can_disconnect = true;
-				if ($GLOBALS['logout'] == $auth_login) {
-					@header("Location: ../spip_cookie.php3?cookie_session=non&redirect=login.php3");
-					exit;
-				}
 			}
 		}
 	}
@@ -127,7 +118,8 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		@header("Location: ../login.php3");
+		$url = urlencode($GLOBALS['REQUEST_URI']);
+		@header("Location: ../login.php3?url=$url");
 		exit;
 	}
 
