@@ -373,25 +373,24 @@ if ($doc_supp) {
 if ($vignette) {
 	// securite
 	$fichier_vignette = '';
-	if (!eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $vignette, $regs)) exit;
-	$source = $regs[0];
-	$format = $regs[3];
-	// $destination = $regs[2].'-s';	// adresse old style
+	if (eregi('^IMG/(.*/)?([^\./]+)\.([a-z0-9]+)$', $vignette, $regs)) {
+		$source = $regs[0];
+		$format = $regs[3];
+		include_local('inc-cache.php3');
+		$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';	// adresse new style
 
-	include_local('inc-cache.php3');
-	$destination = 'IMG/'.creer_repertoire('IMG','vignettes').$regs[2].'-s';	// adresse new style
-
-	if (lire_meta("creer_preview") == 'oui') {
-		$taille_preview = lire_meta("taille_preview");
-		if ($taille_preview < 10) $taille_preview = 120;
-		include_ecrire('inc_logos.php3');
-		if ($preview = creer_vignette($source, $taille_preview, $taille_preview, $format, $destination))
-			$fichier_vignette = $preview['fichier'];
+		if (lire_meta("creer_preview") == 'oui') {
+			$taille_preview = lire_meta("taille_preview");
+			if ($taille_preview < 10) $taille_preview = 120;
+			include_ecrire('inc_logos.php3');
+			if ($preview = creer_vignette($source, $taille_preview, $taille_preview, $format, $destination))
+				$fichier_vignette = $preview['fichier'];
+		}
 	}
 
 	if (!$fichier_vignette) {
 		include_ecrire('inc_documents.php3');
-		list($fichier_vignette) = vignette_par_defaut($extension);
+		list($fichier_vignette) = vignette_par_defaut($format);
 		if (!$fichier_vignette)
 			list($fichier_vignette) = vignette_par_defaut('txt');
 	}

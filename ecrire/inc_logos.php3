@@ -201,14 +201,15 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 		$process = lire_meta('image_process');
 
 	// liste des formats qu'on sait lire
-	$formats_lecture = array('jpg','png','gif');
+	$formats_graphiques = lire_meta('formats_graphiques');
+	$formats_sortie = array('jpg','png','gif');
 
 	// si le doc n'est pas une image, refuser
-	if (!eregi(",$format,", ",".join(',', $formats_lecture).","))
+	if (!eregi(",$format,", ",$formats_graphiques,"))
 		return;
 
 	// chercher un cache
-	while (list(,$fmt) = each ($formats_lecture))
+	while (list(,$fmt) = each ($formats_sortie))
 		if (@file_exists($destination.'.'.$fmt)) {
 			$vignette = $destination.'.'.$fmt;
 			if ($force) @unlink($vignette);
@@ -218,10 +219,18 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
 
 		$creation = true;
-		if (!$srcsize = @getimagesize($image)) return;
-		$srcWidth=$srcsize[0];
-		$srcHeight=$srcsize[1];
-		list ($destWidth,$destHeight) = image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
+
+		// calculer la taille
+		if ($srcsize = @getimagesize($image)) {
+			$srcWidth=$srcsize[0];
+			$srcHeight=$srcsize[1];
+			list ($destWidth,$destHeight) = image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
+		} else if ($process == 'convert' OR $process == 'imagick') {
+			$destWidth = $maxWidth;
+			$destHeight = $maxHeight;
+		} else {
+			return;
+		}
 
 		// imagemagick en ligne de commande
 		if ($process == 'convert') {
@@ -229,6 +238,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			$commande = "$convert_command -size ${destWidth}x${destHeight} $image -geometry ${destWidth}x${destHeight} +profile \"*\" ".escapeshellcmd($vignette);
 			spip_log($commande);
 			exec($commande);
+			if (!@file_exists($vignette))
+				return;	// echec commande
 		}
 		else
 		 // imagick (php4-imagemagick)
@@ -237,10 +248,12 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			$handle = imagick_readimage($image);
 			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_LANCZOS, 0.75);
 			imagick_write($handle, $vignette);
+			if (!@file_exists($vignette)) return;	// echec imagick
 		}
 		else
 		// gd ou gd2
 		if ($process == 'gd1' OR $process == 'gd2') {
+
 			// Recuperer l'image d'origine
 			if ($format == "jpg") {
 				$srcImage = @ImageCreateFromJPEG($image);
