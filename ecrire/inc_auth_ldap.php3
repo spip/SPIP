@@ -22,6 +22,9 @@ class Auth_ldap {
 	function verifier($login, $pass) {
 		global $ldap_link, $ldap_base;
 
+		// Securite, au cas ou le serveur LDAP est tres laxiste
+		if (!$login || !$pass) return false;
+
 		// Attributs testes pour egalite avec le login
 		$atts = array('uid', 'login', 'userid', 'cn', 'sn');
 		$login_search = ereg_replace("[^[:space:][:alnum:]]", "", $login); // securite
