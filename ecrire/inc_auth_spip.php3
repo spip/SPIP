@@ -12,8 +12,12 @@ class Auth_spip {
 		return true;
 	}
 
+	// Verification du mot passe crypte (javascript)
 	function verifier_challenge_md5($login, $mdpass_actuel, $mdpass_futur) {
-		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle' AND source='spip'";
+		// Interdire mot de passe vide
+		if ($mdpass_actuel == '') return false;
+
+		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle'";
 		$result = spip_query($query);
 
 		if ($row = spip_fetch_array($result)) {
@@ -28,7 +32,18 @@ class Auth_spip {
 		return false;
 	}
 
+	// Verification du mot passe en clair (sans javascript)
 	function verifier($login, $pass) {
+		// Interdire mot de passe vide
+		if ($pass == '') return false;
+
+		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='".addslashes($login)."'";
+		$result = spip_query($query);
+		if ($row = spip_fetch_array($result)) {
+			$md5pass = md5($row['alea_actuel'] . $session_password);
+			$md5next = md5($row['alea_futur'] . $session_password);
+			return verifier_challenge_md5($login, $md5pass, $md5next);
+		}
 		return false;
 	}
 

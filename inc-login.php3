@@ -108,21 +108,36 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 
 	$flag_autres_sources = $GLOBALS['ldap_present'];
 
-	// quels sont les aleas a passer ?
 	if ($login) {
+		$statut_login = 0; // statut inconnu
 		$login = addslashes($login);
-		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
+		$query = "SELECT * FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
 		if ($row = spip_fetch_array($result)) {
-			$id_auteur = $row['id_auteur'];
-			$source_auteur = $row['source'];
-			$alea_actuel = $row['alea_actuel'];
-			$alea_futur = $row['alea_futur'];
-			if ($row['prefs']) {
-				$prefs = unserialize($row['prefs']);
-				$rester_checked = ($prefs['cnx'] == 'perma' ? ' checked':'');
+			if ($row['statut'] == '5poubelle' OR $row['pass'] == '') {
+				$statut_login = -1; // refus
+			} else {
+
+				$statut_login = 1; // login connu
+
+				// Quels sont les aleas a passer pour le javascript ?
+				if ($row['source'] == 'spip') {
+					$id_auteur = $row['id_auteur'];
+					$source_auteur = $row['source'];
+					$alea_actuel = $row['alea_actuel'];
+					$alea_futur = $row['alea_futur'];
+				}
+
+				// Bouton duree de connexion
+				if ($row['prefs']) {
+					$prefs = unserialize($row['prefs']);
+					$rester_checked = ($prefs['cnx'] == 'perma' ? ' checked':'');
+				}
 			}
-		} else if (!$flag_autres_sources) {
+		}
+
+		// login inconnu (sauf LDAP) ou refuse
+		if ($statut_login == -1 OR ($statut_login == 0 AND !$flag_autres_sources)) {
 			$erreur = _T('login_identifiant_inconnu', array('login' => htmlspecialchars($login)));
 			$login = '';
 			@spip_setcookie("spip_admin", "", time() - 3600);
