@@ -1723,7 +1723,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$texte .= '
 		global $recherche, $hash_recherche;
 		if (!$hash_recherche) {
-			$s = nettoyer_chaine_indexation(urldecode($recherche));
+			$s = nettoyer_chaine_indexation(supprimer_tags(urldecode($recherche)));
 			$regs = separateurs_indexation()." ";
 			$s = split("[$regs]+", $s);
 
@@ -1732,6 +1732,8 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 			while (list(, $val) = each($s)) {
 				if (strlen($val) > 3) {
 					$dico[] = "dico LIKE \"$val%\"";
+				} else if (strlen($val) == 3) {
+					$dico[] = "dico = \"".$val."_\"";
 				}
 			}
 			if ($dico) {
