@@ -113,7 +113,7 @@ function afficher_raccourci_stats($id_article) {
 	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result)) {
 		$visites = intval($row['visites']);
-		$popularite = ceil(min(100,100 * $row['popularite'] / max(1,lire_meta('popularite_max'))));
+		$popularite = ceil(min(100,100 * $row['popularite'] / max(1,(double) lire_meta('popularite_max'))));
 
 		if ($visites > 0) bouton_admin("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 
