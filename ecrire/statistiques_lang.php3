@@ -69,71 +69,6 @@ function enfants($id_parent){
 }
 
 
-function enfants_aff($id_parent,$decalage) {
-	global $total_vis;
-	global $ifond;
-	global $niveau;
-	global $nombre_vis;
-	global $nombre_abs;
-	global $couleur_claire, $spip_lang_right;
-	global $abs_total;
-	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=\"$id_parent\" ORDER BY titre";
-	$result=spip_query($query);
-
-
-	while($row = spip_fetch_array($result)){
-		$id_rubrique = $row['id_rubrique'];
-		$titre = typo($row['titre']);
-
-		if ($nombre_vis[$id_rubrique]>0 OR $nombre_abs[$id_rubrique]>0){
-			$largeur_rouge = floor(($nombre_vis[$id_rubrique] - $nombre_abs[$id_rubrique]) * 100 / $total_vis);
-			$largeur_vert = floor($nombre_abs[$id_rubrique] * 100 / $total_vis);
-			
-			if ($largeur_rouge+$largeur_vert>0){
-				if ($ifond==0){
-					$ifond=1;
-					$couleur="#FFFFFF";
-				}else{
-					$ifond=0;
-					$couleur="$couleur_claire";
-				}
-				if ($niveau==0) {
-					$couleur='#DDDDCC';
-					$titre = majuscules($titre);
-				}
-
-				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif'><TD WIDTH=\"100%\">";
-				echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
-				echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=2>";	
-				echo "<A HREF='naviguer.php3?coll=$id_rubrique'>$titre</A>";
-				
-				if ($niveau==0){
-					$pourcent=round($nombre_vis[$id_rubrique]/$abs_total*100);
-					echo " &nbsp; $pourcent %";
-				}
-				
-				echo "</FONT>";
-				echo "</TD><TD ALIGN='right'>";
-				
-				
-				echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=".($decalage+1)." HEIGHT=8>";
-				echo "<TR><TD BACKGROUND='img_pack/jauge-fond.gif' ALIGN='right'>";
-				if ($largeur_vert>0) echo "<IMG SRC='img_pack/jauge-vert.gif' WIDTH=$largeur_vert HEIGHT=8 BORDER=0>";
-				if ($largeur_rouge>0) echo "<IMG SRC='img_pack/jauge-rouge.gif' WIDTH=$largeur_rouge HEIGHT=8 BORDER=0>";
-				echo "<IMG SRC='img_pack/rien.gif' HEIGHT=8 WIDTH=1 BORDER=0>";
-				
-				echo "</TD></TR></TABLE>\n";
-				echo "</TD></TR>";
-		}	
-		}	
-		$niveau++;
-		enfants_aff($id_rubrique,$largeur_rouge);
-		$niveau--;
-	}
-	
-}
-
-
 
 
 
@@ -175,7 +110,7 @@ debut_cadre_enfonce("langues-24.gif");
 	
 				echo "<tr bgcolor='$couleur'>";
 				$dir=lang_dir($lang,'',' dir=rtl');
-				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir>".traduire_nom_langue($lang)."<div style='float: $spip_lang_right;'>$visites%</div></span></td>";
+				echo "<td width='100%' style='border-bottom: 1px solid #cccccc;'><span class='verdana2'$dir><div style='float: $spip_lang_right;'>$visites%</div>".traduire_nom_langue($lang)."</span></td>";
 				
 				echo "<td style='border-bottom: 1px solid #cccccc;'>";
 					echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='100' HEIGHT=8>";
