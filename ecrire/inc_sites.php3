@@ -203,7 +203,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					else $la_date = strtotime($la_date);
 				}
 				if ($la_date < $now - 365 * 24 * 3600 OR $la_date > $now + 48 * 3600)
-					$la_date = $time;
+					$la_date = $now;
 				// Auteur
 				if (ereg("<author>([^<]*)</author>",$item[$i],$match))
 					$les_auteurs = addslashes(filtrer_entites($match[1]));
@@ -214,7 +214,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				if (ereg("<description[^>]*>(.*)</description>",$item[$i],$match))
 					$la_description = supprimer_tags(addslashes(filtrer_entites($match[1])));
 				else $la_description = "";
-
 				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
 				$result_deja = spip_query($query_deja);
 				if (spip_num_rows($result_deja) == 0 and !spip_sql_error()) {
