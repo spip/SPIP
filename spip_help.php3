@@ -106,11 +106,11 @@ function help_body($aide) {
 		else if (@file_exists("CACHE/aide/${l}-$f")) $f = "spip_help.php3?img=aide/${l}-$f";
 		else if ($url_aide) {
 			if ($ecrire_cache AND $contenu =
-			recuperer_page("http://www.spip.net/ecrire/AIDE/$l/$f")
+			recuperer_page("http://www.spip.net/aide_tmp/$l/$f")
 			AND ecrire_fichier ("CACHE/aide/${l}-$f", $contenu))
 				$f = "spip_help.php3?img=aide/${l}-$f";
 			else
-				$f = "http://www.spip.net/ecrire/AIDE/$l/$f"; # erreur
+				$f = "http://www.spip.net/aide_tmp/$l/$f"; # erreur
 		} else if (@file_exists("AIDE/fr/$f")) $f = "AIDE/fr/$f";
 		else if (@file_exists("AIDE/fr/$f")) $f = "AIDE/fr/$f";
 		$p = strpos($suite, $r[0]);
@@ -222,11 +222,11 @@ function help_img($regs) {
 	} else {
 		include_ecrire('inc_sites.php3');
 		if (is_dir('CACHE/aide') AND $contenu =
-		recuperer_page("http://www.spip.net/ecrire/AIDE/$lang/$file")) {
+		recuperer_page("http://www.spip.net/aide_tmp/$lang/$file")) {
 			echo $contenu;
 			ecrire_fichier ('CACHE/'.$cache, $contenu);
 		} else
-			header ("Location: http://www.spip.net/ecrire/AIDE/$lang/$file");
+			header ("Location: http://www.spip.net/aide_tmp/$lang/$file");
 	}
 	exit;
 }
