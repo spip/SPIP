@@ -52,6 +52,7 @@ function xhtml ($buffer) {
 		tidy_setopt('output-xhtml', true);
 		tidy_setopt('indent', 5);
 		tidy_setopt('show-body-only', false);
+		tidy_setopt('quote-nbsp', false);
 	
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();
@@ -87,6 +88,7 @@ function xhtml_nettoyer_chaine ($buffer) {
 		tidy_setopt('output-xhtml', true);
 		tidy_setopt('indent', 5);
 		tidy_setopt('show-body-only', true);
+		tidy_setopt('quote-nbsp', false);
 	
 		$html = tidy_parse_string($buffer);
 	    tidy_clean_repair();
