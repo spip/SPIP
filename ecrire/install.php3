@@ -164,12 +164,21 @@ else if ($etape == 4) {
 	}
 	mysql_select_db("$sel_db");
 
+	// Test si SPIP deja installe
+	@spip_query_db("SELECT COUNT(*) FROM spip_meta");
+	$deja_installe = !spip_sql_errno();
+
 	creer_base();
 	maj_base();
 
 	$query = "SELECT COUNT(*) FROM spip_articles";
 	$result = spip_query_db($query);
 	$result_ok = (spip_num_rows($result) > 0);
+	if (!$deja_installe) {
+		$query = "INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')";
+		spip_query_db($query);
+		$result_ok = !spip_sql_errno();
+	}
 
 	echo "-->";
 

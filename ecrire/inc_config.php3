@@ -15,7 +15,7 @@ include_ecrire ("inc_mail.php3");
 //
 function init_config() {
 	// langue par defaut du site = langue d'installation (cookie spip_lang) sinon francais
-	if (! $lang = $GLOBALS['spip_lang'])
+	if (!$lang = $GLOBALS['spip_lang'])
 		$lang = 'fr';
 
 	$liste_meta = array(
@@ -67,11 +67,19 @@ function init_config() {
 		'gerer_trad' => 'non',
 		'langues_multilingue' => $GLOBALS['all_langs']
 	);
+
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
 			ecrire_meta($nom, $valeur);
 			$modifs = true;
 		}
+	}
+
+	// Cas particulier : charset regle a utf-8 uniquement si nouvelle installation
+	if (lire_meta('nouvelle_install') == 'oui') {
+		ecrire_meta('charset', 'utf-8');
+		effacer_meta('nouvelle_install');
+		$modifs = true;
 	}
 
 	if ($modifs) ecrire_metas();
