@@ -330,7 +330,7 @@ function boite_documents_article($id_article) {
 	}
 
 	$a = "<a href=\"javascript:window.open('article_documents.php3?id_article=$id_article',
-		'docs_article', 'scrollbars=yes,resizable=yes,width=630,height=550'); void(0);\">";
+		'docs_article', 'scrollbars=yes,resizable=yes,toolbar=yes,width=630,height=550'); void(0);\">";
 
 	if ($nbdoc)
 		$icone = "documents-directory.png";
