@@ -6,9 +6,6 @@ if (defined("_ECRIRE_INC_ACCES")) return;
 define("_ECRIRE_INC_ACCES", "1");
 
 
-$GLOBALS['htaccess'] = $GLOBALS['dir_ecrire'].'.htaccess';
-$GLOBALS['htpasswd'] = $GLOBALS['dir_ecrire'].'data/.htpasswd';
-
 function creer_pass_aleatoire($longueur = 8, $sel = "") {
 	$seed = (double) (microtime() + 1) * time();
 	mt_srand($seed);
@@ -89,7 +86,8 @@ function ecrire_logins($fichier, $tableau_logins) {
 
 
 function ecrire_acces() {
-	global $htaccess, $htpasswd;
+	$htaccess = $GLOBALS['dir_ecrire'].'.htaccess';
+	$htpasswd = $GLOBALS['dir_ecrire'].'data/.htpasswd';
 
 	// si .htaccess existe, outrepasser spip_meta
 	if ((lire_meta('creer_htpasswd') == 'non') AND !@file_exists($htaccess)) {
