@@ -226,6 +226,7 @@ function init_codes_langues() {
 	'fi' => "suomi",
 	'fj' => "Fiji",
 	'fo' => "f&#248;royskt",
+	'fon' => "fongb&egrave;",
 	'fr' => "fran&#231;ais",
 	'fr_tu' => "fran&#231;ais copain",
 	'fy' => "Frisian",
