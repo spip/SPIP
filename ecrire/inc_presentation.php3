@@ -1342,6 +1342,13 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	echo "<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 
+	$adresse_site=lire_meta("adresse_site");
+	
+	echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' />";
+	$activer_breves=lire_meta("activer_breves");
+	if ($activer_breves != "non")
+		echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' />";
+
 	echo '<link rel="stylesheet" type="text/css" href="';
 	if (!$flag_ecrire) echo 'ecrire/';
 	$link = new Link('spip_style.php3');
@@ -1979,8 +1986,7 @@ function afficher_menu_rubriques() {
 	global $spip_lang_rtl;
 	$date_maj = lire_meta("date_calcul_rubriques");
 
-	echo "<script type='text/javascript'
-src='js_menu_rubriques.php?date=$date_maj&dir=$spip_lang_rtl'></script>";
+	echo "<script type='text/javascript' src='js_menu_rubriques.php?date=$date_maj&dir=$spip_lang_rtl'></script>";
 }
 
 
