@@ -77,7 +77,7 @@ function ecrire_stats() {
 		}
 
 		// Optimiser les referers
-		$date_refs = $meta['date_stats_referers'];
+		$date_refs = lire_meta('date_stats_referers');
 		if ((time() - $date_refs) > 24 * 3600) {
 			include_ecrire("inc_connect.php3");
 			if ($GLOBALS['db_ok']) {

@@ -48,7 +48,7 @@ function spip_query_profile($query) {
 	list($usec2, $sec2) = explode(" ", $m2);
 	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
-	echo "<small>".entites_html($query);
+	echo "<small>".htmlentities($query);
 	echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
 	return $result;
 }
@@ -62,8 +62,8 @@ function spip_query_debug($query) {
 	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
 	$r = mysql_query($query);
 	if ($GLOBALS['connect_statut'] == '0minirezo' AND $s = mysql_error()) {
-		echo "Erreur dans la requ&ecirc;te : ".entites_html($query)."<br>";
-		echo "&laquo; ".entites_html($s)." &raquo;<p>";
+		echo "Erreur dans la requ&ecirc;te : ".htmlentities($query)."<br>";
+		echo "&laquo; ".htmlentities($s)." &raquo;<p>";
 	}
 	return $r;
 }
