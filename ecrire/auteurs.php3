@@ -95,6 +95,13 @@ if ($type_requete == 'auteur') {
 	while ($row = mysql_fetch_array($result_auteurs)) {
 		$auteurs[$row['id_auteur']] = $row;
 		$nombre_auteurs ++;
+
+		$nom_auteur = $row['nom'];
+		$premiere_lettre = addslashes(strtoupper(substr($nom_auteur,0,1)));
+		if ($premiere_lettre != $lettre_prec) {
+			$lettre[$premiere_lettre] = $nombre_auteurs;
+		}
+		$lettre_prec = $premiere_lettre;
 	}
 
 	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur
@@ -132,7 +139,7 @@ if ($type_requete == 'auteur') {
 		$nombre_auteurs ++;
 	}
 
-	// si on est minirezo, ajouter tous les auteurs sans articles
+	// si on est admin, ajouter tous les auteurs sans articles
 	// sinon ajouter seulement les admins sans articles
 	if ($connect_statut == '0minirezo')
 		$sql_statut_auteurs_ajout = $sql_statut_auteurs;
@@ -203,8 +210,9 @@ echo "</td><td>";
 
 echo "</tr>\n";
 
-if ($nombre_auteurs > 50) {
-	echo "<tr bgcolor='#DBE1C5'><td colspan=5>";
+if ($nombre_auteurs > $max_par_page) {
+	echo "<tr bgcolor='white'><td colspan=5>";
+	echo "<font face='verdana,arial,helvetica,sans-serif' size=1>";
 	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 		if ($j > 0) echo " | ";
 
@@ -214,9 +222,42 @@ if ($nombre_auteurs > 50) {
 			echo "<a href=$myretour&debut=$j>$j</a>";
 		else
 			echo " <a href=$myretour>0</a>";
+			
+		if ($debut > $j  AND $debut < $j+$max_par_page){
+			echo " | <b>$debut</b>";
+		}	
+			
 	}
-	echo "&nbsp; &nbsp; <i>($nombre_auteurs auteurs au total)</i></td></tr>\n";
+	echo "</font>";
+	echo "</td></tr>\n";
+
+	if ($tri == 'nom' OR !$tri) {
+		// affichage des lettres
+		echo "<tr bgcolor='white'><td colspan=5>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		while (list($key,$val) = each($lettre)) {
+			if ($val == $debut)
+				echo "<b>$key</b> ";
+			else 
+				echo "<a href=$myretour&debut=$val>$key</a> ";
+		}
+		echo "</font>";
+		echo "</td></tr>\n";
+	}
+
+	
+	$debut_prec = max($debut - $max_par_page,0);
+	if ($debut > 0) {
+		echo "<tr bgcolor='white'><td colspan=5>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "<a href='$myretour&debut=$debut_prec'><<<</a>";
+		echo "</font>";
+		echo "</td></tr>\n";
+	}
 }
+
+
+
 
 while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 
@@ -288,7 +329,19 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	echo "</td></tr>\n";
 }
 
+$debut_suivant = $debut + $max_par_page;
+if ($debut_suivant < $nombre_auteurs) {
+		echo "<tr bgcolor='white'><td colspan=5>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+	echo "<div align='right'><a href='$myretour&debut=$debut_suivant'>>>></a></div>";
+		echo "</font>";
+		echo "</td></tr>\n";
+}
+
 echo "</TABLE>\n";
+
+
+
 fin_cadre_relief();
 
 
