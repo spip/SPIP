@@ -25,7 +25,7 @@ function balise_LOGIN_PUBLIC_dyn($cible, $login)
 		$clean_link->delVar('var_login');
 		$cible = $clean_link->getUrl();
 	}
-	return login_explicite($login, $cible,  'forum');
+	return login_explicite($login, $cible, 'forum');
 }
 
 function login_explicite($login, $cible, $mode) {
@@ -105,7 +105,7 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 				       'url' => $cible,
 				       'auth' => $auth,
 				       'echec_cookie' => ($echec_cookie ? ' ' : ''),
-				       'message' => ($message ? ' ' : ''),
+				       'message' => ($message ? ' ' : '')
 				       )
 				 )
 		     );
@@ -114,7 +114,7 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 
 // Bouton duree de connexion
 
-function filtre_rester_connecte($prefs) 
+function filtre_rester_connecte($prefs)
 {
 	$prefs = unserialize(stripslashes($prefs));
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
