@@ -241,13 +241,16 @@ function pave_documents($id_article) {
 			$nbdoc += $type->cnt;
 		}
 
-		if ($nbdoc == 0)
-			$txtdoc = "Cr&eacute;er un document li&eacute;";
+		if ($nbdoc == 0) {
+			$txtdoc = "<img src='IMG2/gnome-compressed.png' width='48' height='48' align='left'> ";
+			$txtdoc .= "Ajouter un document";
+		}
 		else {
+			$txtdoc = "<img src='IMG2/gnome-package.png' width='48' height='48' align='left'> ";
 			if ($nbdoc == 1)
-				$txtdoc = "Document li&eacute;</a></b>&nbsp;: \n";
+				$txtdoc .= "Document</a></b><br> \n";
 			else
-				$txtdoc = "$nbdoc documents li&eacute;s</a></b><br>\n";
+				$txtdoc .= "$nbdoc documents</a></b><br>\n";
 		}
 		debut_boite_info();
 		echo "<div align='center'><b><a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=620,height=500'); void(0);\">";
