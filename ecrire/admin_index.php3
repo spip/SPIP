@@ -74,7 +74,7 @@ debut_cadre_relief();
 
 function jauge($couleur,$pixels) {
 	if ($pixels)
-	  echo http_img_pack('jauge-$couleur.gif', "height='10' width='$pixels' alt='$couleur'");
+	  echo http_img_pack("jauge-$couleur.gif", "height='10' width='$pixels' alt='$couleur'");
 }
 
 echo "<table>";
