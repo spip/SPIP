@@ -93,7 +93,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 
 	$ret .= "<div style='position: relative; z-index: 1;'>";
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = " style='padding-$spip_lang_left: 38px;'";
+		$style_gauche = " padding-$spip_lang_left: 38px;";
 		$ret .= "<div style='position: absolute; top: 0px; $spip_lang_left: 10px; z-index: 2;'>";
 		if ($fonction) {
 			$ret .= "<div style='$bgright"."background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
@@ -114,7 +114,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	}
 	
 	if (strlen($titre) > 0) {
-		$ret .= "<h3 class='cadre-titre'$style_gauche>$titre</h3>";
+		$ret .= "<h3 class='cadre-titre' style='margin: 0px;$style_gauche'>$titre</h3>";
 	}
 	
 	
