@@ -1356,6 +1356,46 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		}
 		
 	}
+	
+	
+	function verifForm() {
+	
+	<?php
+		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
+		// meme principe que le behavior win_width.htc pour MSIE
+	
+		global $browser_name, $browser_version, $browser_rev;
+		if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7) {
+	?>
+	
+	
+		retrait = 16;
+		var obj=document.getElementsByTagName("input");
+		for(i=0;i<obj.length;i++) {
+			if(obj[i].className=="forml" || obj[i].className=="formo") {
+				element = obj[i];
+				if (element.offsetWidth) {
+					element.style.width = (element.offsetWidth - retrait) + "px";				
+				} else {
+					element.style.width = "95%";
+				}
+			}
+		}
+		var obj=document.getElementsByTagName("textarea");
+		for(i=0;i<obj.length;i++) {
+			if(obj[i].className=="forml" || obj[i].className=="formo") {
+				element = obj[i];
+				if (element.offsetWidth) {
+					element.style.width = (element.offsetWidth - retrait) + "px";				
+				} else {
+					element.style.width = "95%";
+				}
+			}
+		}
+	<?php
+		}
+	?>
+	}
 
 	
 	var antifocus=false; // effacement titre quand new=oui
@@ -1370,7 +1410,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
-	echo " onLoad=\"setActiveStyleSheet('invisible');$onLoad\"";
+	echo " onLoad=\"setActiveStyleSheet('invisible'); verifForm();$onLoad\"";
 	echo ">";
 }
 

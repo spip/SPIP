@@ -45,7 +45,7 @@ td {
  * Formulaires
  */
 .forml { 
-	width: 100%; 
+	width: 100%;
 	display: block;
 	padding: 3px; 
 	background-color: #e4e4e4; 
