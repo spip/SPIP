@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_en'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -84,6 +84,7 @@ $GLOBALS['i18n_spip_en'] = array(
 'barre_gras' => 'Put in {{bold type}}',
 'barre_guillemets' => 'Place between &laquo; French inverted commas &raquo;',
 'barre_guillemets_de' => 'Place between „German inverted commas“',
+'barre_guillemets_simples' => '<NEW> <NEW> Rodar amb de &#8220;vergetas&#8221;',
 'barre_intertitre' => 'Turn into a {{{subheading}}}',
 'barre_italic' => 'Put in {italics}',
 'barre_lien' => 'Turn into a [hyperlink->http://...]',

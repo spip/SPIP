@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_spip_eo'] = array(
+$GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // 0
@@ -82,6 +82,7 @@ $GLOBALS['i18n_spip_eo'] = array(
 'barre_eo_maj' => '<NEW> Ins&eacute;rer un Edans l\'O majuscule',
 'barre_gras' => '<NEW> Mettre en {{gras}}',
 'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_de' => '<NEW> Entourer de &bdquo;guillemets&ldquo;',
 'barre_guillemets_simples' => '<NEW> Entourer de &ldquo;guillemets&rdquo;',
 'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
 'barre_italic' => '<NEW> Mettre en {italique}',
