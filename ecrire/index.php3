@@ -305,7 +305,7 @@ $vos_articles = afficher_articles("Vos articles en cours de r&eacute;daction",
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur".
-	" AND (articles.statut='prepa' OR articles.statut='prop') ORDER BY articles.date DESC");
+	" AND articles.statut='prepa' ORDER BY articles.date DESC");
 
 if ($vos_articles) $vos_articles = ' AND id_article NOT IN ('.join($vos_articles,',').')';
 
