@@ -39,7 +39,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // E
-'edition_mode_texte' => '<NEW> &Eacute;dition en mode texte de',
+'edition_mode_texte' => 'Uitgave in tekstmodus van',
 'en_reponse' => 'Als antwoord op&nbsp;:',
 'en_resume' => 'Samengevat',
 'envoyer_message' => 'Een bericht sturen',
@@ -116,7 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'voir_en_ligne' => 'Online bekijken',
 
 
-// CONFLIT
+// PLUS_UTILISE
 'autres_groupes_de_mots_clefs' => 'Andere groepen trefwoorden',
 'dans_meme_rubrique' => 'In dezelfde rubriek',
 'derniers_messages_des_forums' => 'Meest recente bijdragen in de forums',

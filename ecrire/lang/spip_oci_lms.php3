@@ -1601,12 +1601,8 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas mai liar queste article a sas reviradas ',
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
 'trad_new' => 'Escriure una revirada novela de queste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
+'trad_reference' => '(article de refer&eacute;ncia)'
 
-
-// PLUS_UTILISE
-'info_donner_rendez_vous' => 'Queu boton vos permet de donar un rendetz-vos a un autre participant.',
-'info_nouveau_pense_bete' => 'Queu boton vos permet de crear una n&ograve;ta de remembran&ccedil;a personala.'
 
 );
 

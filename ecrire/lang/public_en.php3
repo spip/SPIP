@@ -16,6 +16,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'There is no news item at this address',
 'aucune_rubrique' => 'There is no section at this address',
 'autres_breves' => 'Other news',
+'autres_groupes_de_mots_clefs' => 'Other keyword groups',
 'autres_groupes_mots_clefs' => 'Other groups of key words',
 'autres_sites' => 'Other sites',
 
@@ -30,11 +31,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
+'dans_meme_rubrique' => 'In the same section',
 'date' => 'Date',
 'dernier_ajout' => 'Latest addition',
 'dernieres_breves' => 'Latest news',
 'derniers_articles' => 'Latest articles',
 'derniers_commentaires' => 'Latest comments',
+'derniers_messages_des_forums' => 'Latest forum messages',
 'derniers_messages_forum' => 'Lastest messages published in the forums',
 
 
@@ -43,6 +46,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_reponse' => 'Replying to:',
 'en_resume' => 'Summary',
 'envoyer_message' => 'To send a message',
+'envoyer_un_message' => 'Send a message',
 'espace_prive' => 'Private area',
 
 
@@ -81,9 +85,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'par_auteur' => 'by',
 'participer_site' => 'You can take an active part in this website and write your own articles by registering below. You will then receive immediately an email giving you an access code to the private area of the site.',
+'pas_d_article' => 'No article found at this address',
+'pas_d_auteur' => 'No author found at this address',
+'pas_de_breve' => 'No news item found at this address',
+'pas_de_rubrique' => 'No section found at this address',
+'pas_de_site' => 'No site found at this address',
+'plan_du_site' => 'Site map',
 'plan_site' => 'Site Map',
 'popularite' => 'Popularity',
 'poster_message' => 'To post a message',
+'poster_un_message' => 'Post a message',
 
 
 // R
@@ -113,21 +124,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'See online',
-
-
-// PLUS_UTILISE
-'autres_groupes_de_mots_clefs' => 'Other keyword groups',
-'dans_meme_rubrique' => 'In the same section',
-'derniers_messages_des_forums' => 'Latest forum messages',
-'envoyer_un_message' => 'Send a message',
-'pas_d_article' => 'No article found at this address',
-'pas_d_auteur' => 'No author found at this address',
-'pas_de_breve' => 'No news item found at this address',
-'pas_de_rubrique' => 'No section found at this address',
-'pas_de_site' => 'No site found at this address',
-'plan_du_site' => 'Site map',
-'poster_un_message' => 'Post a message'
+'voir_en_ligne' => 'See online'
 
 );
 

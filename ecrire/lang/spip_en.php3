@@ -364,13 +364,14 @@ Thank you for your participation
 'icone_admin_site' => 'Site administration',
 'icone_afficher_auteurs' => 'Show authors',
 'icone_afficher_visiteurs' => 'Show visitors',
+'icone_agenda' => 'Diary and messaging',
 'icone_aide_ligne' => 'Online help',
 'icone_arret_discussion' => 'Stop participating in this discussion',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Authors',
 'icone_breves' => 'News',
 'icone_calendrier' => 'Calendar',
-'icone_calendrier_messagerie' => '<NEW> Agenda',
+'icone_calendrier_messagerie' => 'Diary and messaging',
 'icone_configuration_site' => 'Site configuration',
 'icone_configurer_site' => 'Configure your site',
 'icone_creation_groupe_mots' => 'Create a new keywords group',
@@ -578,7 +579,6 @@ Thank you for your participation
 'info_dimension' => 'Size:',
 'info_discussion_cours' => 'Discussions in progress',
 'info_document' => 'Document',
-'info_donner_rendez_vous' => 'This button allows you to fix an appointment with another participant.',
 'info_echange_message' => 'SPIP allows the exchange of messages and the creation of private
 		discussion forums between participants to the site. You can enable or
 		disable this feature.',
@@ -752,7 +752,6 @@ requiring an FTP access to the Web site.',
 'info_notes' => 'Footnotes',
 'info_nouveau' => '(New)',
 'info_nouveau_message' => 'YOU HAVE A NEW MESSAGE',
-'info_nouveau_pense_bete' => 'This button allows you to create a new personal memo.',
 'info_nouveaux_message' => 'New messages',
 'info_nouveaux_messages' => 'YOU HAVE @total_messages@ NEW MESSAGES',
 'info_nouvel_article' => 'New article',
@@ -1205,7 +1204,9 @@ requiring an FTP access to the Web site.',
 
 // O
 'onglet_affacer_base' => 'Delete the database',
+'onglet_agenda' => 'Diary',
 'onglet_auteur' => 'The author',
+'onglet_calendrier' => 'Calendar',
 'onglet_contenu_site' => 'The site\'s content',
 'onglet_evolution_visite_mod' => 'Evolution',
 'onglet_fonctions_avances' => 'Advanced functions',
@@ -1213,6 +1214,7 @@ requiring an FTP access to the Web site.',
 'onglet_interactivite' => 'Interactivity',
 'onglet_langues' => 'Languages',
 'onglet_messagerie' => 'Messaging',
+'onglet_messagerie_personnelle' => 'Personal messaging',
 'onglet_messages_internes' => 'Internal messages',
 'onglet_messages_publics' => 'Public messages',
 'onglet_messages_vide' => 'Messages without text',
@@ -1629,6 +1631,7 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
 'trad_reference' => '(reference article)'
+
 
 );
 
