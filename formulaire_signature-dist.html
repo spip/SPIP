@@ -18,7 +18,8 @@
 	<br />
 	[<fieldset>
 		<p>
-			(#HTTP_VARS{site_obli}) <:form_pet_votre_site:><br />
+			(#HTTP_VARS{site_obli}|choixsiegal{oui,'', ' '})
+	    		<:form_pet_votre_site:><br />
 			<b><:form_pet_nom_site2:></b><br />
 			<input type="text" class="forml" name="nom_site" value="" size="20" />
 		</p>
@@ -27,7 +28,7 @@
 			<input type="text" class="forml" name="url_site" value="http://" size="20" />
 		</p>
 	</fieldset>][
-	(#HTTP_VARS{message})
+	(#HTTP_VARS{message}|choixsiegal{oui,' ', ''})
 	<br />
 		<fieldset>
 			<b><:form_pet_message_commentaire:></b><br />
