@@ -167,6 +167,7 @@ $connect_statut = '';
 $hash_recherche = '';
 $pile_langues = Array();
 $lang_typo = '';
+$lang_dir = '';
 
 
 //
