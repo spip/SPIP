@@ -484,12 +484,9 @@ function parser_boucle($texte, $id_parent) {
 				break;
 
 			case 'forums':
-/*				$forums_publics = lire_meta("forums_publics"); */
+				/* $forums_publics = lire_meta("forums_publics"); */
 				// Par defaut, selectionner uniquement les forums sans pere
 				if (!$plat) $req_where[] = "$table.id_parent=0";
-/*				if ($forums_publics == 'non') {
-					$req_where[] = "1=2";
-				} */
 				$req_where[] = "$table.statut='publie'";
 				break;
 
@@ -517,7 +514,7 @@ function parser_boucle($texte, $id_parent) {
 			case 'auteurs':
 				// Si pas de lien avec un article, selectionner
 				// uniquement les auteurs d'un article publie
-				if (!$flag_lien) {
+				if (!$tout AND !$flag_lien) {
 					$req_from[] = 'spip_auteurs_articles AS lien';
 					$req_from[] = 'spip_articles AS articles';
 					$req_where[] = "lien.id_auteur=$table.id_auteur";
