@@ -2049,9 +2049,12 @@ else {
 		}
 
 		if ($options == "avancees") {
-			if ($connect_statut == "0minirezo") $req_where = " AND spip_articles.statut IN ('prepa','prop','publie')"; 
-			else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
-			$nombre_versions = spip_num_rows(spip_query("SELECT spip_versions.*, spip_articles.statut, spip_articles.titre FROM spip_versions, spip_articles WHERE spip_versions.id_article = spip_articles.id_article AND spip_versions.id_version > 1$req_where LIMIT 0,1"));
+			if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
+			else $req_where = " AND articles.statut IN ('prop','publie')"; 
+			$nombre_versions = spip_num_rows(spip_query("
+SELECT versions.*, articles.statut, articles.titre
+FROM spip_versions AS versions, spip_articles AS articles 
+WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 0,1"));
 			if ($nombre_versions > 0 OR 1==1) {
 				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_versions.php", "historique-24.gif", "revisions", $sous_rubrique);
 			}
