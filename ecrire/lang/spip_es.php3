@@ -350,7 +350,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 
 // I
 'ical_info1' => 'En esta p&aacute;gina se presentan diferentes maneras de quedar en contacto con la vida del sitio.',
-'ical_info2' => 'Para mayor informaci&oacute;n acerca de estas diferentes t&eacute;cnicas, no dudes en consultar <a href="http://www.spip.net/fr_suivi">la documentaci&oacute;n de SPIP</a>.',
+'ical_info2' => 'Para mayor informaci&oacute;n sobre todas estas t&eacute;cnicas, no dudes en consultar <a href="http://www.spip.net/fr_suivi">la documentaci&oacute;n de SPIP</a>.',
 'ical_info_calendrier' => 'Tienes dos calendarios a tu disposici&oacute;n. El primero es un plano del sitio que anuncia todos los art&iacute;culos publicados. El segundo contiene los anuncios editoriales y tus &uacute;ltimos mensajes privados: s&oacute;lo t&uacute;lo v&eacute;s gracias a una clave personal, que podr&aacute;s modificar en cualquier momento modificando tu contrase&ntilde;a. ',
 'ical_methode_http' => 'Descargar',
 'ical_methode_webcal' => 'Sincronizaci&oacute;n (webcal://)',
