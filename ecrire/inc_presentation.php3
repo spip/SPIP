@@ -76,7 +76,7 @@ function debut_cadre_relief($icone='', $return = false, $fonction=''){
 		$retour_aff.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD BGCOLOR='#ffffff' WIDTH=\"100%\">";
 	}
 	else {
-		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'><div style='border: 1px solid #666666; padding: 5px;'>";
+		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'><div style='border: 1px solid #666666; padding: 5px; background-color: white;'>";
 	}
 	
 	if ($return) return $retour_aff;
