@@ -81,6 +81,11 @@ function deplacer_fichier_upload($source, $dest) {
 			@header ("Location: spip_test_dirs.php3?test_dir=".dirname($dest));
 			exit;
 		}
+		@unlink($dest);
+
+		if ($GLOBALS['_FILES']['size'] == 0) {
+			echo _L("Ce fichier est trop gros pour le serveur, upload limit&eacute; &agrave; ").ini_get('upload_max_filesize');
+		}
 	}
 
 	return $ok;
@@ -297,26 +302,25 @@ else {
 //
 
 if ($ajout_doc == 'oui') {
-	if (eregi(".zip$",$image_name) AND !$action_zip){
+	if (eregi("\.zip$",$image_name) AND !$action_zip){
 		// Pretraitement des fichiers ZIP
 		// Recopier le fichier
-
 		creer_repertoire('IMG', "tmp");
 		creer_repertoire('IMG', "tmp_zip");
 		
 		$dest = 'IMG/tmp_zip/';
 		$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($image_name)))));
 		$dest .= ".zip";
-		$n = 0;	
-		if (!deplacer_fichier_upload($image, $dest)) return false;
+		$n = 0;
+		if (!deplacer_fichier_upload($image, $dest)) 
+			exit;
+
 
 		$image_name = "$dest";
 
-		
 		require_once('ecrire/pclzip.lib.php');
-  		$zip = new PclZip($image_name);
-  		
-  		
+		$zip = new PclZip($image_name);
+
 		if (($list = $zip->listContent()) == 0) {
 			// pas possible de decompacter: installer comme fichier zip joint
 			$afficher_message_zip = false;
@@ -331,25 +335,29 @@ if ($ajout_doc == 'oui') {
 							$ext = addslashes(strtolower($match[1]));
 							$ext = corriger_extension($ext);
 
-							$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
-							$result = spip_query($query);
-							if ($row = @spip_fetch_array($result)) {
-								$afficher_message_zip = true;
-								$aff_fichiers .= "<li>".$list[$i][$key]."</li>";
+							// Regexp des fichiers a ignorer
+							if (!ereg("^(\.|.*/\.|.*__MACOSX/",
+							$list[$i][$key])) {
+								$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
+								$result = spip_query($query);
+								if ($row = @spip_fetch_array($result)) {
+									$afficher_message_zip = true;
+									$aff_fichiers .= "<li>".$list[$i][$key]."</li>";
+								}
 							}
 						}
 					}
 				}
 			}
 		}
-		
+
 		if ($afficher_message_zip) {
 			// presenter une interface pour choisir si fichier joint ou decompacter
 			include_ecrire ("inc_presentation.php3");
 			install_debut_html("Fichier ZIP");
 		
 			
-			echo "<p>Le fichier que vous proposez d'installer est un fichier Zip.</p><p> Ce fichier peut &ecirc;tre :</p>\n\n";
+			echo _L("<p>Le fichier que vous proposez d'installer est un fichier Zip.</p><p> Ce fichier peut &ecirc;tre :</p>\n\n");
 			
 		
 			if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
@@ -368,7 +376,7 @@ if ($ajout_doc == 'oui') {
 
 			echo $link->getForm('POST');
 			
-			echo "<div><input type='radio' checked name='action_zip' value='telquel'>install&eacute; tel quel, en tant qu'archive compress&eacute;e Zip,</div>";
+			echo _L('')."<div><input type='radio' checked name='action_zip' value='telquel'>install&eacute; tel quel, en tant qu'archive compress&eacute;e Zip,</div>";
 			echo "<div><input type='radio' name='action_zip' value='decompacter'>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:</div>";
 			
 			echo "<ul>$aff_fichiers</ul>";
@@ -379,14 +387,14 @@ if ($ajout_doc == 'oui') {
 			echo "</form>";
 			install_fin_html();
 				
-			die();
+			exit();
 		}
 		else {
 			$image = $image_name;
 			$supprimer_ecrire_upload = $image;
 		}
 	}
-	else if (eregi(".zip$",$image_name)) {
+	else if (eregi("\.zip$",$image_name)) {
 		if ($action_zip == "telquel") {
 			$effacer_tmp = true;
 			
@@ -403,9 +411,9 @@ if ($ajout_doc == 'oui') {
 	}
 
 
-	if (is_dir("$image_name")) {
+	if (is_dir($image_name)) {
 		include_ecrire('inc_documents.php3');
-		$fichiers = fichiers_upload("$image_name");
+		$fichiers = fichiers_upload($image_name);
 		while (list(,$f) = each($fichiers)) {
 			if (ereg("\.([^.]+)$", $f, $match)) {
 				$ext = strtolower($match[1]);
