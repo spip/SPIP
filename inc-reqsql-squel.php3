@@ -105,7 +105,7 @@ function calculer_requete(&$boucle) {
     $boucle->where[] = "$id_table.id_syndic=syndic.id_syndic";
     $boucle->where[] = "$id_table.statut='publie'";
     $boucle->where[] = "syndic.statut='publie'";
-    $boucle->select[]='syndic.nom_site AS nom_site'; # de'rogation zarbi
+    $boucle->select[]='syndic.nom_site AS nom_site'; # derogation zarbi
     $boucle->select[]='syndic.url_site AS url_site'; # idem
     break;
 
@@ -114,26 +114,26 @@ function calculer_requete(&$boucle) {
     $id_field = '*'; // utile a` TOTAL_BOUCLE seulement
   } // fin du switch
 
-# si pas de champ c'est un de'compte on prend la primary pour avoir qqch
-# (le marteau-pilon * est trop couteux, et le COUNT incompatible avec le cas
-# ge'ne'ral)
-    return ('spip_abstract_select(array("'. 
-	    ((!$boucle->select) ? $id_field :
-	     join('", "', array_unique($boucle->select))) .
-	    '"),
+	// En absence de champ c'est un decompte : on prend la primary pour
+	// avoir qqch (le marteau-pilon * est trop couteux, et le COUNT
+	// incompatible avec le cas general)
+	return 'spip_abstract_select(array("'. 
+		((!$boucle->select) ? $id_field :
+		join('", "', array_unique($boucle->select))) .
+		'"), # SELECT
 		array("' .
-	    join('","', array_unique($boucle->from)) .
-	    '"),
+		join('","', array_unique($boucle->from)) .
+		'"), # FROM
 		array(' .
-	    (!$boucle->where ? '' : ( '"' . join('","', $boucle->where) . '"')) .
-	    "),
-		$boucle->group,
-		$boucle->order,
-		\"$boucle->limit\",
- 		'$boucle->sous_requete', 
-		$boucle->compte_requete,
-		'$id_table',
-		'$boucle->id_boucle')") ;
+		(!$boucle->where ? '' : ( '"' . join('","', $boucle->where) . '"')) .
+		"), # WHERE
+		'".addslashes($boucle->group)."', # GROUP
+		'".addslashes($boucle->order)."', # ORDER
+		'".$boucle->limit."', # LIMIT
+		'".$boucle->sous_requete."', # sous
+		".$boucle->compte_requete.", # compte
+		'".$id_table."', # table
+		'".$boucle->id_boucle."'); # boucle";
 }
 
 ?>

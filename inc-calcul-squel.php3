@@ -155,7 +155,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	}
 
 	return  ($texte . '
-	$result = ' . calculer_requete($boucle) . ';
+	$result = ' . calculer_requete($boucle) . '
 	$t0 = "";
 	$SP++;' .
 		 (($flag_parties) ? 
