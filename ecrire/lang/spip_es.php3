@@ -819,17 +819,6 @@ $GLOBALS['i18n_es'] = array(
 
 
 // L
-'langue_ar' => '&aacute;rabe',
-'langue_de' => 'alem&aacute;n',
-'langue_en' => 'ingl&eacute;s',
-'langue_eo' => 'esperanto',
-'langue_es' => 'espa&ntilde;ol',
-'langue_fr' => 'franc&eacute;s',
-'langue_it' => 'italiano',
-'langue_ja' => 'japon&eacute;s',
-'langue_oc' => 'occitano',
-'langue_ro' => 'rumano',
-'langue_vi' => 'vietnamita',
 'lien_afficher_icones_seuls' => 'Affichar solo los iconos',
 'lien_afficher_texte_icones' => 'Mostrar iconos y texto',
 'lien_afficher_texte_seul' => 'Mostrar solo el texto',
