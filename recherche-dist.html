@@ -152,7 +152,7 @@
 <BOUCLE_articles(ARTICLES) {recherche} {par points} {inverse} {0,10}>
 	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
 	<div class="detail">
-	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
 	<B_auteurs_articles>par <BOUCLE_auteurs_articles(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_articles>
 	</div>
 	<br>
