@@ -56,7 +56,7 @@ function debut_cadre_relief($icone='', $return = false, $fonction=''){
 	if ($spip_display != 1){	
 
 		if (strlen($icone)<3) $icone = "rien.gif";
-			$retour.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
+			$retour_aff.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
 			$retour_aff.= "<tr>";
 			$retour_aff.= "<td width='5'><img src='img_pack/rond-hg-24.gif' alt='/' width='5' height='24'></td>";
 			$retour_aff.= "<td background='img_pack/rond-h-24.gif'>";
