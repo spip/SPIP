@@ -277,6 +277,7 @@ function init_codes_langues() {
 	'nn' => "norsk nynorsk",
 	'oc_lnc' => "&ograve;c lengadocian",
 	'oc_ni' => "&ograve;c ni&ccedil;ard",
+	'oc_ni_la' => "&ograve;c ni&ccedil;ard (larg)",
 	'oc_prv' => "&ograve;c proven&ccedil;au",
 	'oc_gsc' => "&ograve;c gascon",
 	'oc_lms' => "&ograve;c lemosin",
