@@ -30,7 +30,7 @@ function nettoyer_chaine_indexation($texte) {
 
 // Merci a Herve Lefebvre pour son apport sur cette fonction
 function separateurs_indexation() {
-	return "]_.,;`:*'\"?!\r\n\t\\/\~(){}[|&@<>$%#".
+	return "].,;`:*'\"?!\r\n\t\\/\~(){}[|&@<>$%#".
 		chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
 }
 
