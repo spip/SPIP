@@ -314,7 +314,7 @@ function init_langues() {
 	$langue_site = lire_meta('langue_site');
 
 	if (!$all_langs || !$langue_site || !$dir_ecrire) {
-		$d = opendir($dir_ecrire.'lang');
+		if (!$d = @opendir($dir_ecrire.'lang')) return;
 		while ($f = readdir($d)) {
 			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
 				$toutes_langs[] = $regs[1];
