@@ -71,12 +71,15 @@ echo "<div>&nbsp;</div>";
 					$lien = $dest[$nb_col-$compteur-1];
 					if ($la_rubrique == 0) $icone = "secteur-24.gif";
 					else $icone = "rubrique-24.gif";
-					$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+					$ret = "<div " .
+					  http_style_background($icone,
+								"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='brouteur.php3?id_rubrique=$lien'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 				}
 			}
 			$lien = $dest[$nb_col-$compteur-2];
-			$icone = "racine-site-24.gif";
-			$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+			$ret = "<div " .
+			  http_style_background("racine-site-24.gif",
+						"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='brouteur.php3?id_rubrique=$lien'>"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 			echo $ret;
 			
 			echo "</div>";

@@ -312,17 +312,17 @@ function enfant($leparent){
 			break;
 		}
 		if ($i==1) {
-			$style .= "background-image: url(img_pack/secteur-12.gif);";
+			$style .= "background-image: url(" . _DIR_IMG_PACK. "secteur-12.gif);";
 			$style .= "background-color: $couleur_claire;";
 			$style .= "font-weight: bold;";
 		}
 		else if ($i==2) {
-			//$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			//$style .= "background: url(" . _DIR_IMG_PACK. "rubrique-12.gif) $spip_lang_left no-repeat;";
 			$style .= "border-bottom: 1px solid $couleur_claire;";
 			$style .= "font-weight: bold;";
 		}
 		else {
-			//$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			//$style .= "background: url(" . _DIR_IMG_PACK. "rubrique-12.gif) $spip_lang_left no-repeat;";
 		}
 
 		if ($rubrique_acceptable) {
@@ -345,7 +345,7 @@ echo "<td>";
 	else icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
 
 echo "</td>";
-	echo "<td><img src='img_pack/rien.gif' alt='' width=10></td>\n";
+echo "<td>". http_img_pack('rien.gif', "alt='' width=10") . "</td>\n";
 echo "<td width='100%'>";
 echo _T('texte_modifier_article');
 gros_titre($titre);

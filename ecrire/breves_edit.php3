@@ -21,7 +21,7 @@ function enfant($leparent) {
 	
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent'";
  	$result=spip_query($query);
-	$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat; padding-$spip_lang_left: 16px;";
+	$style = http_style_background('secteur-12.gif',  "$spip_lang_left no-repeat; padding-$spip_lang_left: 16px");
 
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
@@ -31,7 +31,8 @@ function enfant($leparent) {
 		
 		$titre = couper(textebrut(typo($titre)), 50); // largeur maxi
 		if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style='$style'>".supprimer_tags($titre)."\n";
+		echo "<OPTION".mySel($my_rubrique,$id_rubrique). $style .'>' .
+		  supprimer_tags($titre)."\n";
 	}
 }
 
@@ -180,7 +181,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 		echo "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n";
 		
 		echo "<OPTION".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."\n";		
-		echo "<OPTION".mySel("refuse",$statut)." style='background:url(img_pack/rayures-sup.gif)'>"._T('item_breve_refusee')."\n";		
+		echo "<OPTION".mySel("refuse",$statut). http_style_background('rayures-sup.gif'). ">"._T('item_breve_refusee')."\n";		
 		echo "<OPTION".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."\n";		
 
 		echo "</SELECT>".aide ("brevesstatut")."<P>\n";

@@ -1159,7 +1159,7 @@ div.brouteur_rubrique {
 	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
 	border-left: 1px solid <?php echo $couleur_foncee; ?>;
 	border-right: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(<?php echo http_img_pack('triangle-droite'. $_rtl . 'gif'), ')', $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('triangle-droite'. $_rtl . '.gif'), ')', $right; ?> center no-repeat;
 	background-color: white;
 }
 
@@ -1171,7 +1171,7 @@ div.brouteur_rubrique_on {
 	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
 	border-left: 1px solid <?php echo $couleur_foncee; ?>;
 	border-right: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(<?php echo http_img_pack('triangle-droite' . $_rtl . 'gif'), ')', $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('triangle-droite' . $_rtl . '.gif'), ')', $right; ?> center no-repeat;
 	background-color: #e0e0e0;
 }
 

@@ -39,7 +39,6 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
 	);
 	$type = $table_logos[$type];
 	$nom = strtolower($onoff);
-	spip_log("$type, $onoff, $id, $id_rubrique, $lien, $align, $ff");
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
 	while (1) {
 		$on = cherche_image_nommee($type . $nom . intval($id));

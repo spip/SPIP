@@ -47,17 +47,15 @@ function enfant($leparent){
 			if ($i > 4) $style .= "font-style: italic;";
 			if ($i < 3) $style .= "font-weight:bold; ";
 			if ($i==1) {
-				$style .= "background-image: url(img_pack/secteur-12.gif);";
+				$style .= "background-image: url(" . _DIR_IMG_PACK . 'secteur-12.gif);';
 				$style .= "background-color: $couleur_claire;";
 				$style .= "font-weight: bold;";
 			}
 			else if ($i==2) {
-			//	$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 				$style .= "border-bottom: 1px solid $couleur_claire;";
 				$style .= "font-weight: bold;";
 			}
 			else {
-			//	$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 			}
 
 			if ($statut_rubrique!='publie') $titre = "($titre)";
@@ -169,7 +167,7 @@ debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').a
 //echo "<B>"._T('entree_interieur_rubrique')."</B> ".aide ("rubrub")."<BR>\n";
 echo "<SELECT NAME='id_parent' style='background-color:#ffffff; font-size:90%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' class='forml' SIZE='1'>\n";
 if ($connect_toutes_rubriques) {
-	echo "<OPTION".mySel("0",$id_parent)." style='background: url(img_pack/racine-site-12.gif) $spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white;'>"._T('info_racine_site')."\n";
+  echo "<OPTION".mySel("0",$id_parent). http_style_background('racine-site-12.gif',  "$spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white") .'>'._T('info_racine_site')."\n";
 } else {
 	echo "<OPTION".mySel("0",$id_parent).">"._T('info_non_deplacer')."\n";
 }

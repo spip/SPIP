@@ -120,20 +120,20 @@ function mySel($varaut,$variable) {
 			debut_cadre_formulaire();
 		
 			echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-			echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_messagerie_interne')."</FONT></B>".aide ("messconf")."</TD></TR>";
-			echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+			echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_messagerie_interne')."</FONT></B>".aide ("messconf")."</TD></TR>";
+			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
 			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>"._T('texte_auteur_messagerie_1')."</FONT>";
 			echo "</TD></TR>";
 
 			echo "<TR><TD>&nbsp;</TD></TR>";
-			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_messagerie_interne')."</FONT></B></TD></TR>";
+			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_messagerie_interne')."</FONT></B></TD></TR>";
 
-			echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
 			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>"._T('info_desactiver_messagerie_personnelle')."</FONT>";
 			echo "</TD></TR>";
 
 
-			echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+			echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='left'>";
 			echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>";
 			if ($messagerie=="non"){
 				echo "<INPUT TYPE='radio' NAME='perso_activer_messagerie' VALUE='oui' id='perso_activer_messagerie_on'>";
@@ -156,13 +156,13 @@ function mySel($varaut,$variable) {
 					/// Liste des redacteurs connectes
 
 					echo "<TR><TD>&nbsp;</TD></TR>";
-					echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_liste_redacteurs_connectes')."</FONT></B></TD></TR>";
+					echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_liste_redacteurs_connectes')."</FONT></B></TD></TR>";
 
-					echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+					echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif'>";
 					echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>"._T('texte_auteur_messagerie')."</FONT>";
 					echo "</TD></TR>";
 
-					echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
+					echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='left'>";
 					echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>";
 					if ($imessage=="non"){
 						echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on'>";

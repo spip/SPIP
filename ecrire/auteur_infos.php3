@@ -253,7 +253,7 @@ debut_droite();
 
 if ($echec){
 	debut_cadre_relief();
-	echo '<img src="img_pack/warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="left">';
+	echo http_img_pack("warning.gif", 'alt="'._T('info_avertissement').'" width="48" height="48" align="left">');
 	echo "<font color='red'>$echec <p>"._T('info_recommencer')."</font>";
 	fin_cadre_relief();
 	echo "<p>";
@@ -354,7 +354,7 @@ debut_cadre_relief("base-24.gif");
 // Avertissement en cas de modifs de ses propres donnees
 if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
 	debut_cadre_enfonce();
-	echo '<img src="img_pack/warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right">';
+	echo http_img_pack("warning.gif", 'alt="'._T('info_avertissement').'" width="48" height="48" align="right">');
 	echo "<b>"._T('texte_login_precaution')."</b>\n";
 	fin_cadre_enfonce();
 	echo "<p>";
@@ -435,7 +435,8 @@ if ($connect_statut == "0minirezo"
 
 	if (($statut == '6forum') OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo'))
 		echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
-	echo "<OPTION".mySel("5poubelle",$statut)." style='background:url(img_pack/rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
+	echo "<OPTION".mySel("5poubelle",$statut).
+	  " style='background:url(" . _DIR_RESTREINT . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
 
 	echo "</SELECT></center>\n";
 	fin_cadre_relief();
@@ -457,7 +458,7 @@ if ($statut == '0minirezo') {
 		echo _T('info_admin_gere_toutes_rubriques');
 	} else {
 		echo _T('info_admin_gere_rubriques')."\n";
-		echo "<ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
+		echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
 		while ($row_admin = spip_fetch_array($result_admin)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 			$titre = typo($row_admin["titre"]);

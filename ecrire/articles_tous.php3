@@ -141,7 +141,7 @@ if ($aff_statut["prepa"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='prepa' id='prepa'>";
 	}
-	echo " <label for='prepa'><img src='img_pack/puce-blanche-breve.gif' alt='' width='8' height='9' border='0'>";
+	echo " <label for='prepa'>". http_img_pack('puce-blanche-breve.gif', "alt='' width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_en_cours_redaction')."</label><BR>";
 }
 
@@ -153,7 +153,7 @@ if ($aff_statut["prop"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='prop' id='prop'>";
 	}
-	echo " <label for='prop'><img src='img_pack/puce-orange-breve.gif' alt='' width='8' height='9' border='0'>";
+	echo " <label for='prop'>". http_img_pack('puce-orange-breve.gif', "alt='' width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_attente_validation')."</label><BR>";
 }
 	
@@ -164,7 +164,7 @@ if ($aff_statut["publie"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='publie' id='publie'>";
 	}
-	echo " <label for='publie'><img src='img_pack/puce-verte-breve.gif' alt='' width='8' height='9' border='0'>";
+	echo " <label for='publie'>". http_img_pack('puce-verte-breve.gif', "alt='' width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_publies')."</label><BR>";
 }
 
@@ -175,7 +175,7 @@ if ($aff_statut["refuse"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='refuse' id='refuse'>";
 	}
-	echo " <label for='refuse'><img src='img_pack/puce-rouge-breve.gif' alt='' width='8' height='9' border='0'>";
+	echo " <label for='refuse'>" . http_img_pack('puce-rouge-breve.gif', "alt='' width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_refuses')."</label><BR>";
 }
 
@@ -186,7 +186,7 @@ if ($aff_statut["poubelle"]) {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='poubelle' id='poubelle'>";
 	}
-	echo " <label for='poubelle'><img src='img_pack/puce-poubelle-breve.gif' alt='' width='8' height='9' border='0'>";
+	echo " <label for='poubelle'>" . http_img_pack('puce-poubelle-breve.gif', "alt='' width='8' height='9' border='0'");
 	echo "  "._T('texte_statut_poubelle')."</label>";
 }
 
@@ -262,7 +262,7 @@ function afficher_rubriques_filles($id_parent) {
 				$bgcolor = "";
 			}
 			
-			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left center no-repeat;$bgcolor'>";
+			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(" . _DIR_IMG_PACK . "$icone) $spip_lang_left center no-repeat;$bgcolor'>";
 			
 			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
 			

@@ -43,7 +43,7 @@ echo _T('texte_effacer_base')."</FONT></B></TD></TR>";
 echo "<tr><td class='serif'>";
 
 echo "\n<p align='justify'>";
-echo '<img src="img_pack/warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right">';
+echo '<img src="' . _DIR_IMG_PACK . 'warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right">';
 echo _T('texte_admin_effacer_01');
 
 echo "<CENTER>";

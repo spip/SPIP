@@ -97,11 +97,12 @@ debut_html();
 			
 			echo "<div class='brouteur_rubrique' onMouseOver=\"changeclass(this, 'brouteur_rubrique_on');\" onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 			if ($id_parent == '0') 	{
-				echo "<div style='background-image: url(img_pack/secteur-24.gif);'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></div>";
+			  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "secteur-24.gif);'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></div>";
 			}
 			else {
-				if ($frame+1 < $nb_col) echo "<div style='background-image: url(img_pack/rubrique-24.gif);'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></div>";
-				else  echo "<div style='background-image: url(img_pack/rubrique-24.gif);'><a href='javascript:window.parent.location=\"brouteur.php3?id_rubrique=$ze_rubrique\"'>$titre</a></div>";
+				if ($frame+1 < $nb_col)
+				  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "rubrique-24.gif);'><a href='brouteur_frame.php3?id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>$titre</a></div>";
+				else  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "rubrique-24.gif);'><a href='javascript:window.parent.location=\"brouteur.php3?id_rubrique=$ze_rubrique\"'>$titre</a></div>";
 			}
 			echo "</div>\n";
 		}
@@ -185,7 +186,7 @@ debut_html();
 							$puce = 'poubelle';
 							break;
 					}
-					echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/site-24.gif) $spip_lang_left center no-repeat;'><b><a href='javascript:window.parent.location=\"sites.php3?id_syndic=$id_syndic\"'>$titre</a></b></div>";
+					echo "<div " . http_style_background('site-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><b><a href='javascript:window.parent.location=\"sites.php3?id_syndic=$id_syndic\"'>$titre</a></b></div>";
 				}
 			}
 		}
@@ -196,7 +197,7 @@ debut_html();
 			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
 			$result=spip_query($query);
 			if (spip_num_rows($result)>0) {
-				echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/article-24.gif) $spip_lang_left center no-repeat;'><b class='verdana2'><a href='brouteur_frame.php3?special=redac&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("info_cours_edition")."</a></b></div>";
+			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),"><b class='verdana2'><a href='brouteur_frame.php3?special=redac&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("info_cours_edition")."</a></b></div>";
 			}
 			
 			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC";
@@ -208,7 +209,8 @@ debut_html();
 			$total_breves = spip_num_rows($result);
 			
 			if ($total_articles + $total_breves > 0)
-				echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/article-24.gif) $spip_lang_left center no-repeat;'><b class='verdana2'><a href='brouteur_frame.php3?special=valider&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("info_articles_proposes")." / "._T("info_breves_valider")."</a></b></div>";
+			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
+					  "><b class='verdana2'><a href='brouteur_frame.php3?special=valider&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("info_articles_proposes")." / "._T("info_breves_valider")."</a></b></div>";
 			
 
 
