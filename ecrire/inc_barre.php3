@@ -90,6 +90,11 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$col++;
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", "Entourer de &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
+		}	
+		$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", "Entourer de &ldquo;guillemets&rdquo;", $formulaire, $texte);
+		$ret .= "&nbsp;&nbsp;&nbsp;";
+		$ret .= bouton_barre_racc ("javascript:barre_inserer('~',$champ)", "espace.png", "Ins&eacute;rer une espace~ins&eacute;cable", $formulaire, $texte);
+		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", "Ins&eacute;rer un A accent grave majuscule", $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", "Ins&eacute;rer un E accent aigu majuscule", $formulaire, $texte);
