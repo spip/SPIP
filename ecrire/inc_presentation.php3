@@ -320,8 +320,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $toujours_afficher = false, $afficher_cadre = true) {
 	global $connect_id_auteur;
 
-	$activer_messagerie = lire_meta("activer_messagerie");
-	$activer_statistiques = lire_meta("activer_statistiques");
+		$activer_messagerie = lire_meta("activer_messagerie");
+		$activer_statistiques = lire_meta("activer_statistiques");
 
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
 
@@ -753,6 +753,7 @@ function debut_html($titre = "") {
 	.reliefblanc {background-image: url(img_pack/barre-blanc.png)}
 	.reliefgris {background-image: url(img_pack/barre-gris.png)}
 	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #e4e4e4}
+	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
 	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #cccccc;}
 
 	a { text-decoration: none; }
@@ -1067,7 +1068,7 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 	echo "</table>";
 }
 
-function icone_horizontale($texte, $lien, $fond, $fonction=""){
+function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false){
 	global $spip_display, $couleur_claire, $couleur_foncee;
 		
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
@@ -1075,7 +1076,10 @@ function icone_horizontale($texte, $lien, $fond, $fonction=""){
 	$hauteur = 30;
 	$largeur = "100%";
 
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
+	if ($important)
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"iconeimpoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeimpoff');\" onClick=\"document.location='$lien'\">";
+	else
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
 	echo "<tr><td background='' align='left' valign='middle' width=$largeur height=$hauteur>";
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td background='' align='center'>";

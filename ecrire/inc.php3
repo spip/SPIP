@@ -142,7 +142,7 @@ if (!$activer_breves){
 	$articles_mots = lire_meta("articles_mots");
 }
 
-if ($activer_statistiques){
+if (!$activer_statistiques){
 	$activer_statistiques = lire_meta("activer_statistiques");
 }
 
