@@ -43,7 +43,7 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	$champhelp = "document.$formulaire.helpbox$texte";
 	return "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\" "
 		."onMouseOver=\"helpline('$help',$champhelp)\" onMouseOut=\"helpline('Utilisez les raccourcis typographiques pour enrichir votre mise en page', $champhelp)\">"
-		."<img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' align='middle'></a>";
+		."<img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16'></a>";
 }
 
 function afficher_barre($formulaire='',$texte='', $forum=false) {
@@ -86,7 +86,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</td>";
 
 		// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
-		$ret .= "<td align='right'>";
+		$ret .= "<td align='right' style='padding-top: 4px; padding-bottom: 2px;'>";
 		$col++;
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", "Entourer de &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
