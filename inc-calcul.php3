@@ -439,7 +439,7 @@ function calculer_page($fond, $contexte) {
 
 
 function calculer_page_globale($fond) {
-	global $contexte;
+	global $contexte, $contexte_inclus;
 	global $fichier_requete;
 	global $id_rubrique_fond;
 
@@ -459,19 +459,24 @@ function calculer_page_globale($fond) {
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
-	if (eregi("[a-z_]+",$GLOBALS['lang'], $regs) AND (substr(",".$regs[0].",", "-,".lire_meta('langues_utilisees').","))) {
-		$contexte['lang'] = $regs[0];
-		lang_select($regs[0]);
-	}
+	if ($GLOBALS['lang'])
+		$contexte['lang'] = $GLOBALS['lang'];
+
+	$contexte_inclus = $contexte; // Par souci d'homogeneite (utile pour #EXPOSER)
 
 	// Analyser les URLs personnalisees (inc-urls-...)
 	recuperer_parametres_url($fond, $fichier_requete);
 	$lang = lire_meta('langue_site');
 
-	// Calcul de la rubrique associee a la requete
-	// (selection de squelette specifique)
-
-	if ($id_rubrique = $contexte['id_rubrique']) {
+	//
+	// Affiner le choix du squelette :
+	// calcul de la rubrique associee a la requete
+	// + selection de la langue
+	//
+	if ($contexte['lang']) {
+		$lang = $contexte['lang'];	// l'URL peut fixer lang=xx, mais inc-urls peut aussi agir sur $contexte[lang]
+	}
+	else if ($id_rubrique = $contexte['id_rubrique']) {
 		$id_rubrique_fond = $id_rubrique;
 		if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique'")))
 			if ($row['lang']) $lang = $row['lang'];
@@ -499,14 +504,14 @@ function calculer_page_globale($fond) {
 	else {
 		$id_rubrique_fond = 0;
 	}
-	// selectionner la langue & affiner le squelette
-	if ($contexte['lang'])
-		$lang = $contexte['lang'];	// si inc-urls veut fixer la langue
 	lang_select($lang);
 
-	$fond = chercher_squelette($fond, $id_rubrique_fond, $lang);
+	$fond = chercher_squelette($fond, $id_rubrique_fond, $spip_lang);
 
+
+	//
 	// Special stats et boutons admin
+	//
 	reset($contexte_defaut);
 	while (list($key, $val) = each($contexte_defaut)) {
 		if ($contexte[$val]) {

@@ -17,35 +17,6 @@ if (!isset($delais))
 	$t0 = $t1;
 }*/
 
-//
-// Gestion de la langue du visiteur
-//
-function chercher_langue_squelette ($fichier_cache, $contexte='') {
-	global $lang, $multilang, $spip_lang;
-
-	// multilingue visiteur
-	if ($contexte['lang'])
-		$lang_squel = $contexte['lang'];
-	else if ($multilang) {
-		include_ecrire('inc_lang.php3');
-		utiliser_langue_visiteur();
-		$contexte['lang'] = $lang_squel = $spip_lang;
-	}
-	else if ($lang)
-		$contexte['lang'] = $lang_squel = $lang;
-
-	if ($lang_squel)
-		$fichier_cache .= "-$lang_squel";
-
-	return array($fichier_cache, $lang_squel, $contexte);
-}
-
-// securite
-if ($lang) {
-	if (!ereg("^[a-z_]+$", $lang)) unset($lang);
-	if (!ereg(",$lang,", ",".lire_meta('langues_utilisees').",")) unset($lang);
-}
-
 
 //
 // Inclusions de squelettes
@@ -60,9 +31,6 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 			$fichier_requete .= '&'.$key.'='.$val;
 	}
 	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
-
-	list($fichier_cache, $lang_squel, $contexte_inclus) = chercher_langue_squelette ($fichier_cache, $contexte_inclus);
-
 	$chemin_cache = "CACHE/$fichier_cache";
 	$use_cache = utiliser_cache($chemin_cache, $delais);
 
@@ -70,7 +38,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 		include_local("inc-calcul.php3");
 		$timer_a = explode(" ", microtime());
 
-		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique'], $lang_squel);
+		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique'], $contexte_inclus['lang']);
 		$page = calculer_page($fond, $contexte_inclus);
 		$timer_b = explode(" ", microtime());
 		if ($page) {
@@ -95,22 +63,28 @@ if ($HTTP_COOKIE_VARS['spip_session'] OR ($PHP_AUTH_USER AND !$ignore_auth_http)
 
 
 //
+// Gestion de la langue dans l'URL
+//
+if ($forcer_lang) {
+	include_ecrire('inc_lang.php3');
+	verifier_lang_url();
+}
+if ($lang = $HTTP_GET_VARS['lang']) {
+	include_ecrire('inc_lang.php3');
+	lang_select($lang);	
+}
+
+
+//
 // Gestion du cache et calcul de la page
 //
 
-// nom du fichier cache
+// Nom du fichier cache
 $fichier_requete = $REQUEST_URI;
 $fichier_requete = strtr($fichier_requete, '?', '&');
 $fichier_requete = eregi_replace('&(submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
 
 $fichier_cache = generer_nom_fichier_cache($fichier_requete);
-
-list ($fichier_cache, $lang_squel) = chercher_langue_squelette($fichier_cache, $contexte);
-
-if ($multilang AND !$lang) $lang = $lang_squel;
-if ($multilang) $spip_lang = $lang;
-$menu_lang = $spip_lang;
-
 $chemin_cache = "CACHE/$fichier_cache";
 
 $use_cache = utiliser_cache($chemin_cache, $delais);

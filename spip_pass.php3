@@ -14,6 +14,7 @@ include_ecrire ("inc_acces.php3");
 include_local("inc-formulaires.php3");
 
 utiliser_langue_site();
+utiliser_langue_visiteur();
 
 $inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
 unset($erreur);
