@@ -109,7 +109,16 @@
 	[(#TEXTE|justifier)]
 	[<HR><FONT SIZE=2><P>(#NOTES)</P></FONT>]
 
-
+	<P>
+	
+	<B_mots>
+	<font size=1>THEMES ASSOCIES</font>
+	<ul>
+	<BOUCLE_mots(MOTS){id_rubrique}>
+	<li><a href="#URL_MOT">#TITRE</a>
+	</BOUCLE_mots>
+	</ul>
+	</B_mots>
 
 
 	</FONT>
@@ -207,7 +216,6 @@
 		<A HREF="#URL_BREVE"><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
 	</BOUCLE_breves>
 
-	<P>
 
 
 </TD>
