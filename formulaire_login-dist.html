@@ -6,8 +6,8 @@
 (#HTTP_VARS{message})
 	<br />
 	 <:forum_vous_enregistrer:>
-	<a href='spip_pass.php3?[mode=(#HTTP_VARS{mode})]' target="spip_pass"
-onclick="javascript:window.open('spip_pass.php3?[mode=(#HTTP_VARS{mode})]', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;"><:forum_vous_inscrire:></a><p />
+	<a href='spip_inscription.php3?[mode=(#HTTP_VARS{mode})]' target="spip_pass"
+onclick="javascript:window.open(this.href, 'spip_inscription, 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;"><:forum_vous_inscrire:></a><p />
 ]<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">
 	<script type="text/javascript" src="ecrire/md5.js"></script>
 	<form	name="form_login"
@@ -21,7 +21,7 @@ onclick="javascript:window.open('spip_pass.php3?[mode=(#HTTP_VARS{mode})]', 'spi
 		<div class="spip_encadrer" style="text-align: [(#HTTP_VARS{spip_lang_left})]">[
 			<div class="reponse_formulaire">(#HTTP_VARS*{erreur})<br /><br /></div>
 ][
-			<label><b><:login_login2:></b><br /></label>(#HTTP_VARS{login}|vide)
+			<label><b><:login_login2:></b><br /></label>(#HTTP_VARS{login}|choixsivide{' ',''})
 			<input type="text" name="var_login" class="forml" value="" size="40" />
 ][
 <div>
@@ -68,9 +68,9 @@ document.form_login.(#HTTP_VARS{login}|choisir{session_password,var_login}).focu
 ]
 	<div align="center" style="font-size: 12px;" >[&#91;<a(#HTTP_VARS{sinscrire})
 		target="spip_pass"
-		href='spip_pass.php3?[mode=(#HTTP_VARS{mode})]'
-		onclick="javascript:window.open('spip_pass.php3?[mode=(#HTTP_VARS{mode})]', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;"><:login_sinscrire:></a>&#93;][&#91;<a 
-		href="(#HTTP_VARS{oubli})"
+		href='spip_inscription.php3?[mode=(#HTTP_VARS{mode})]'
+		onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;][&#91;<a (#HTTP_VARS{oubli})
+		href="spip_pass.php3"
 		target="spip_pass" 
 		onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;][&#91;<a 
 		href="(#HTTP_VARS{mode}|retoursite)"><:login_retoursitepublic:></a>&#93]

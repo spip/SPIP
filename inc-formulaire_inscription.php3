@@ -13,13 +13,11 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres)
 }
 
 function balise_FORMULAIRE_INSCRIPTION_dyn($type, $mail_inscription, $nom_inscription) {
-	if ($type == 'redac') {
+	if (($type == 'redac') AND (lire_meta("accepter_inscriptions") == "oui"))
 		$statut = "nouveau";
-	}
-	else if ($type == 'forum') {
+	else if (($type == 'forum') AND ((lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')))
 		$statut = "6forum";
-	}
-	else return ''; // tentative de hack...?
+	else return _T('pass_rien_a_faire_ici');
 
 	if (test_mail_ins($type, $mail_inscription) && $nom_inscription) {
 		include(_FILE_CONNECT);

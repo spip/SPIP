@@ -58,7 +58,7 @@ function champs_traitements ($p) {
 					 'typo_doublon($doublons,',
 					 $ps));
 	  }
-	// on supprime les <IMGnnn> tant qu'on ne rapatrie pas
+	// on supprime les < IMGnnn > tant qu'on ne rapatrie pas
 	// les documents distants joints..
 	// il faudrait aussi corriger les raccourcis d'URL locales
 	return str_replace('%s',
@@ -584,17 +584,17 @@ function calculer_balise_logo ($p) {
 		if ($flag_fichier)
 		  $p->code = "calcule_fichier_logo($code_logo)";
 		else
-		  $p->code = "affiche_logos($code_logo, '', $code_lien)";
+		  $p->code = "affiche_logos(array($code_logo, ''), $code_lien)";
 	}
 	else {
-	  $p->code = "calcule_logo('$type_objet', '" .
+	  $p->code = "affiche_logos(calcule_logo('$type_objet', '" .
 	    (($suite_logo == '_SURVOL') ? 'off' : 
 	     (($suite_logo == '_NORMAL') ? 'on' : 'ON')) .
 	    "', $_id_objet," .
 	    (($suite_logo == '_RUBRIQUE') ? 
 	     champ_sql("id_rubrique", $p) :
 	     (($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
-	    ", $code_lien, '$flag_fichier')";
+	    ",  '$flag_fichier'), $code_lien)";
 	}
 	$p->statut = 'php';
 	return $p;

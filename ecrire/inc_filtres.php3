@@ -244,6 +244,13 @@ function sinon ($texte, $sinon='') {
 		return $sinon;
 }
 
+// |choixsivide{vide,pasvide} affiche pasvide si la chaine n'est pas vide...
+
+function choixsivide($a, $vide, $pasvide) {return $a ? $pasvide : $vide;}
+
+// |choixsiegal{aquoi,oui,non} affiche oui si la chaine est egal a aquoi ...
+function choixsiegal($a1,$a2,$v,$f) {return ($a1 == $a2) ? $v : $f;}
+
 
 //
 // Date, heure, saisons
@@ -702,6 +709,22 @@ function extraire_attribut($balise, $attribut) {
   else if (preg_match("/<[^>]*\s+$attribut=\"([^\"]*)\"/i", $balise, $r))
      return $r[1];
   else return '';
+}
+
+// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
+function boutonne($t, $n, $v, $a='') {
+  return "\n<input type='$t'" .
+    (!$n ? '' : " name='$n'") .
+    " value=\"$v\" $a />";
+}
+
+function http_script($script, $src='', $noscript='') {
+	return '<script type="text/javascript"'
+		. ($src ? " src=\"$src\"" : '')
+		. ">"
+		. ($script ? "<!--\n$script\n//-->" : '')
+		. "</script>\n"
+		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
 
 ?>

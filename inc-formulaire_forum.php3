@@ -196,13 +196,6 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		     ));
 }
 
-// fabrique un bouton de type $t de Name $n, de Value $v et autres attribut $a
-function boutonne($t, $n, $v, $a='') {
-  return "\n<input type='$t'" .
-    (!$n ? '' : " name='$n'") .
-    " value=\"$v\" $a />";
-}
-
 // Mots-cles dans les forums :
 // Si la variable de personnalisation $afficher_groupe[] est definie
 // dans le fichier d'appel, et si la table de reference est OK, proposer
