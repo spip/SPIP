@@ -132,6 +132,9 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		}
 
 		if ($afficher_texte != 'non') {
+			$lien = ereg_replace("\&", "&amp;", $lien);
+
+			$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
 			$ret .= "<div class='spip_encadrer'>";
 			if ($afficher_texte != "non"){
 				$ret .= "<div style='font-size: 120%; font-weigth: bold;'>".typo($titre)."</div>";
@@ -144,23 +147,26 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			// Verifier mots associes au message
 			$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
 			$result_mots = spip_query($query_mots);
-			if (spip_num_rows($result_mots)>0) $ret .= "<p>"._T('forum_avez_selectionne');
-			while ($row = spip_fetch_array($result_mots)) {
-				$id_mot = $row['id_mot'];
-				$type_mot = $row['type'];
-				$titre_mot = $row['titre'];
-				$les_mots[$id_mot] = true;
-				$presence_mots = true;
-
-				$ret.= "<li class='font-size=80%'> $type_mot&nbsp;: <b>$titre_mot</b></li>";
+			if (spip_num_rows($result_mots)>0) {
+				$ret .= "<p>"._T('forum_avez_selectionne')."</p>";
+				$ret .= "<ul>";
+				while ($row = spip_fetch_array($result_mots)) {
+					$id_mot = $row['id_mot'];
+					$type_mot = $row['type'];
+					$titre_mot = $row['titre'];
+					$les_mots[$id_mot] = true;
+					$presence_mots = true;
+	
+					$ret.= "<li class='font-size=80%'> $type_mot&nbsp;: <b>$titre_mot</b></li>\n";
+				}
+				$ret .= "</ul>";
 			}
-
-			$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
+			
 			if (strlen($texte) < 10 AND !$presence_mots) {
-				$ret .= "<p align='right'><font color=red>"._T('forum_attention_dix_caracteres')."</font></p>\n";
+				$ret .= "<p align='right' style='color: red;'>"._T('forum_attention_dix_caracteres')."</p>\n";
 			}
 			else if (strlen($titre) < 3 AND $afficher_texte <> "non") {
-				$ret .= "<p align='right'><font color=red>"._T('forum_attention_trois_caracteres')."</font></p>\n";
+				$ret .= "<p align='right' style='color: red;'><font color=\"red\">"._T('forum_attention_trois_caracteres')."</p>\n";
 			}
 			else {
 				$ret .= "\n<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
@@ -197,6 +203,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
 		}
+		$lien = ereg_replace("\&", "&amp;", $lien);
 		$ret .= "\n<form action='$lien' name='formulaire' method='post'>";
 	}
 
@@ -226,22 +233,23 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	}
 	else {
 		$ret .= "\n<div class='spip_encadrer'><b>"._T('forum_titre')."</b><br />";
-		$ret .= "\n<input type='text' CLASS='forml' name='titre' value=\"$titre\" size='40'></div>";
+		$ret .= "\n<input type='text' class='forml' name='titre' value=\"$titre\" size='40' /></div>";
 	}
 
-	$ret .= "\n<input type='Hidden' name='id_message' value=\"$id_message\" />";
-	$ret .= "\n<input type='Hidden' name='ajout_forum' value=\"oui\" />";
-	$ret .= "\n<input type='Hidden' name='forum_id_rubrique' value=\"$id_rubrique\" />";
-	$ret .= "\n<input type='Hidden' name='forum_id_parent' value=\"$id_parent\" />";
-	$ret .= "\n<input type='Hidden' name='forum_id_article' value=\"$id_article\" />";
-	$ret .= "\n<input type='Hidden' name='forum_id_breve' value=\"$id_breve\" />";
-	$ret .= "\n<input type='Hidden' name='forum_id_syndic' value=\"$id_syndic\" />";
-	$ret .= "\n<input type='Hidden' name='alea' value=\"$alea\" />";
-	$ret .= "\n<input type='Hidden' name='hash' value=\"$hash\" />";
-	$ret .= "\n<input type='Hidden' name='retour_forum' value=\"$retour\" />";
+	$ret .= "\n<input type='hidden' name='id_message' value=\"$id_message\" />";
+	$ret .= "\n<input type='hidden' name='ajout_forum' value=\"oui\" />";
+	$ret .= "\n<input type='hidden' name='forum_id_rubrique' value=\"$id_rubrique\" />";
+	$ret .= "\n<input type='hidden' name='forum_id_parent' value=\"$id_parent\" />";
+	$ret .= "\n<input type='hidden' name='forum_id_article' value=\"$id_article\" />";
+	$ret .= "\n<input type='hidden' name='forum_id_breve' value=\"$id_breve\" />";
+	$ret .= "\n<input type='hidden' name='forum_id_syndic' value=\"$id_syndic\" />";
+	$ret .= "\n<input type='hidden' name='alea' value=\"$alea\" />";
+	$ret .= "\n<input type='hidden' name='hash' value=\"$hash\" />";
+	$retour = ereg_replace("\&", "&amp;", $retour);
+	$ret .= "\n<input type='hidden' name='retour_forum' value=\"$retour\" />";
 
-	if ($new != "oui" AND $redac != "oui") $ret .= "\n<input type='Hidden' name='new' value=\"oui\" />";
-	if ($new == "oui") $ret .= "\n<input type='Hidden' name='redac' value=\"oui\" />";
+	if ($new != "oui" AND $redac != "oui") $ret .= "\n<input type='hidden' name='new' value=\"oui\" />";
+	if ($new == "oui") $ret .= "\n<input type='hidden' name='redac' value=\"oui\" />";
 
 	if ($afficher_texte != "non"){
 		$ret .= "\n<br /><div class='spip_encadrer'><b>"._T('forum_texte')."</b><br />\n";
@@ -273,7 +281,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$result_groupe = spip_query($query_groupe);
 			while ($row_groupe = spip_fetch_array($result_groupe)) {
 				$id_groupe = $row_groupe['id_groupe'];
-				$titre_groupe = $row_groupe['titre'];
+				$titre_groupe = propre($row_groupe['titre']);
 				$unseul_groupe = $row_groupe['unseul'];
 
 				$query = "SELECT * FROM spip_mots WHERE id_groupe='$id_groupe'";
@@ -284,7 +292,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 					$ret .= "\n<p /><div class='spip_encadrer' style='font-size: 80%;'>";
 					$ret.= "<b>$titre_groupe&nbsp;:</b>";
 
-					$ret .= "<table cellpadding=0 cellspacing=0 border=0 width='100%'>\n";
+					$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n";
 					$ret .= "<tr><td width='47%' valign='top'>";
 					$i = 0;
 
@@ -292,30 +300,30 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 						$id_mot = $row['id_mot'];
 						$titre_mot = propre($row['titre']);
 						$type_mot = propre($row['type']);
-						$descriptif_mot = $row['descriptif'];
+						$descriptif_mot = propre($row['descriptif']);
 
 						if ($i >= ($total_rows/2) AND $i < $total_rows){
 							$i = $total_rows + 1;
-							$ret .= "</font></td><td width='6%'>&nbsp;</td><td width='47%' valign='top'>";
+							$ret .= "</td><td width='6%'>&nbsp;</td><td width='47%' valign='top'>";
 						}
 
-						if ($les_mots[$id_mot]) $checked = "checked";
+						if ($les_mots[$id_mot]) $checked = "checked='checked'";
 						else $checked = "";
 
 						if ($unseul_groupe == 'oui'){
-							$ret .= "<input type='radio' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot'> ";
+							$ret .= "<input type='radio' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot' /> ";
 						}
 						else {
-							$ret .= "<input type='checkbox' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot'> ";
+							$ret .= "<input type='checkbox' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot' /> ";
 						}
 
 						$ret .=  afficher_petits_logos_mots($id_mot);
-						$ret .= "<B><label for='mot$id_mot'>$titre_mot</label></B><br>";
-						if (strlen($descriptif_mot) > 0) $ret .= "$descriptif_mot<br>";
+						$ret .= "<b><label for='mot$id_mot'>$titre_mot</label></b><br />";
+						if (strlen($descriptif_mot) > 0) $ret .= "$descriptif_mot<br />";
 						$i++;
 					}
 
-					$ret .= "</font></td></tr></table>";
+					$ret .= "</td></tr></table>";
 
 					$ret .= "</div>";
 				}
@@ -328,7 +336,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "\n<br /><div class='spip_encadrer'>"._T('forum_lien_hyper')."<br />\n";
 		$ret .= _T('forum_page_url');
 		$ret .= "<br />\n"._T('forum_titre');
-		$ret .= "<br />\n<input type='text' class='forml' name='nom_site_forum' value=\"".entites_html($nom_site_forum)."\" size='40'><br />";
+		$ret .= "<br />\n<input type='text' class='forml' name='nom_site_forum' value=\"".entites_html($nom_site_forum)."\" size='40' /><br />";
 
 		if (!$url_site) $url_site = "http://";
 		$ret .= "\n"._T('forum_url');

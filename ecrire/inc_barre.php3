@@ -8,6 +8,9 @@ define("_INC_BARRE", "1");
 
 function test_barre() {
 	global $HTTP_UA_OS, $browser_name, $browser_version, $browser_description, $browser_rev;
+	global $xhtml;
+	
+	if ($xhtml) return false;
 
 	if ($browser_name == '') verif_butineur();
 
@@ -43,7 +46,7 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	$champhelp = "document.$formulaire.helpbox$texte";
 	$retour = "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\"";
 	if (!$flag_ecrire) $retour .= " onMouseOver=\"helpline('".addslashes(attribut_html($help))."',$champhelp)\" onMouseOut=\"helpline('".attribut_html(_T('barre_aide'))."', $champhelp)\"";
-	$retour .= "><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16' align='middle'></a>";
+	$retour .= "><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16' align='middle' /></a>\n";
 	return $retour;
 }
 
@@ -74,7 +77,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		}
 		if ($forum) {
 			$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n<quote>','</quote>\n\n',$champ)", "quote.png", _T('barre_quote'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('\n\n&lt;quote&gt;','&lt;/quote&gt;\n\n',$champ)", "quote.png", _T('barre_quote'), $formulaire, $texte);
 		}
 
 		if ($options == "avancees") {
@@ -83,10 +86,8 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= bouton_barre_racc ("javascript:barre_tableau($champ)", "barre-tableau.png", "Ins&eacute;rer un tableau", $formulaire, $texte);*/
 		}
-
-		$ret .= "</td>";
 		
-			$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
+		$ret .= "</td>&nbsp;&nbsp;&nbsp;";
 
 		// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
 		$ret .= "<td style='text-align:$spip_lang_left;' valign='middle'>";
@@ -114,7 +115,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $formulaire, $texte);
 		$ret .= "</td>";
 		
-			$ret .= "</td>&nbsp;&nbsp;&nbsp;<td>";
+		$ret .= "&nbsp;&nbsp;&nbsp;";
 
 		if ($flag_ecrire) {
 			$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
@@ -136,6 +137,6 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 }
 
 function afficher_claret() {
-	return "onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);' ondbclick='storeCaret(this);'";
+	if (test_barre()) return "onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);' ondbclick='storeCaret(this);'";
 }
 ?>
