@@ -20,7 +20,7 @@ www\.google\.(.*)
 web.toile.com
 
 [Voila]
-kw=
+(kw|rdata)=
 (search|moteur)(.*)\.voila\.(fr|com)
 
 [Yahoo!]
@@ -30,7 +30,6 @@ p=
 [AltaVista]
 q=
 (.*)altavista\.com
-
 
 [HotBot]
 query=
@@ -132,6 +131,12 @@ www\.overture\.com
 [moteur-recherche.net]
 keyword=
 www\.moteur-recherche\.net
+
+[Reacteur.com]
+kw=
+www\.reacteur\.com
+
+
 
 #
 # Services de mail
