@@ -240,9 +240,15 @@ if ($connect_statut =="0minirezo"){
 		}			
 		echo  "</SELECT>";
 		fin_cadre_relief();
-	} else
-		if ($row_groupes = mysql_fetch_array($result))
-			echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
+	} else {
+		$row_groupes = mysql_fetch_array($result);
+		if (!$row_groupes) {
+			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
+			spip_query("INSERT INTO spip_groupes_mots (titre) VALUES ('Mots sans groupe...')");
+			$row_groupes['id_groupe'] = mysql_insert_id();
+		}
+		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
+	}
 
 	if ($options == 'avancees' OR $descriptif) {
 		echo "<B>Descriptif rapide</B><BR>";
