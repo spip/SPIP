@@ -924,7 +924,7 @@ function barre_onglets($rubrique, $onglet){
 	
 	if ($rubrique == "administration"){
 		onglet("Sauvegarder/restaurer la base", "admin_tech.php3", "sauver", $onglet, "base-24.gif");
-		onglet("Vider le cache", "admin_vider.php3", "vider", $onglet);
+		onglet("Vider le cache", "admin_vider.php3", "vider", $onglet, "cache-24.gif");
 		onglet("Effacer la base", "admin_effacer.php3", "effacer", $onglet, "supprimer.gif");
 	}
 	
@@ -950,13 +950,9 @@ function barre_onglets($rubrique, $onglet){
 		onglet("Tous les messages", "controle_forum.php3", "tous", $onglet);
 		onglet("Messages sans texte", "controle_forum_sans.php3", "sans", $onglet);
 	}
-	
-	
-	
+
 	fin_onglet();
-
 }
-
 
 
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = ""){
