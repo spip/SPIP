@@ -177,7 +177,8 @@ $code_activation_debug = 'oui';
 $spip_server = array (
 	'tex' => 'http://math.spip.org/tex.php',
 	'mathml' => 'http://arno.rezo.net/tex2mathml/latex.php',
-	'ortho' => 'http://ortho.spip.net/ortho_serveur.php'
+	'ortho' => 'http://ortho.spip.net/ortho_serveur.php',	# pas utilise par les scripts d'ortho pour l'instant
+	'aide' => 'http://www.spip.net/aide'
 );
 
 // Produire du TeX ou du MathML ?
