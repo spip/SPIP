@@ -93,14 +93,14 @@ function charger_squelette ($squelette) {
 
 	if (!is_array($skel_code)) {
 // Parler au debugguer
+		$skel_php = "<"."?php\n" . $skel_code ."\n?".">";
 		if ($GLOBALS['var_debug'] AND 
 		    $GLOBALS['debug_objet'] == $nom AND 
 		    $GLOBALS['debug_affiche'] == 'code')
-			debug_dumpfile ($skel_code);
+			debug_dumpfile ($skel_php);
 		eval($skel_code);
 		if (function_exists($nom)) {
-		  ecrire_fichier ($phpfile, 
-				  "<"."?php\n" . $skel_code ."\n?".">");
+		  ecrire_fichier ($phpfile, $skel_php);		  
 		  return $nom;
 		}
 	}
