@@ -70,7 +70,7 @@ function lire_meta_maj($nom) {
 		while (list($key, $val) = each($meta)) {
 			$key = addslashes($key);
 			$val = addslashes($val);
-			$s .= "\$GLOBALS['meta']['$key'] = '$val';\n";
+			$s .= "\$GLOBALS['meta']['$key'] = \"$val\";\n";
 		}
 		$s .= "\n";
 	}

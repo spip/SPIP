@@ -793,7 +793,7 @@ afficher_script_layer();
 	}
 	?></td></tr>
 		<tr><td><?php global $activer_breves;
-		if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="fond.src='IMG2/breves-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
+		if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="fond.src='IMG2/breves-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?php }else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?php } ?></TD></TR>
 		</table></td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
@@ -875,7 +875,7 @@ afficher_script_layer();
 	}
 	?></td></tr>
 		<tr><td><?php global $activer_breves;
-		if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="breves.src='IMG2/breves-on.gif'; fond.src='IMG2/breves-texte.gif'" onMouseOut="breves.src='IMG2/breves-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
+		if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="breves.src='IMG2/breves-on.gif'; fond.src='IMG2/breves-texte.gif'" onMouseOut="breves.src='IMG2/breves-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?php }else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?php } ?></TD></TR>
 		</table></td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
@@ -1134,13 +1134,13 @@ function fin_page() {
 //
 function install_debut_html($titre="Installation du syst&egrave;me de publication...") {
 	?>
-<HTML>
-<HEAD>
-<TITLE><?php echo $titre; ?></TITLE>
-<META HTTP-EQUIV="Expires" CONTENT="0">
-<META HTTP-EQUIV="cache-control" CONTENT="no-cache,no-store">
-<META HTTP-EQUIV="pragma" CONTENT="no-cache">
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<html>
+<head>
+<title><?php echo $titre; ?></title>
+<meta http-equiv="Expires" content="0">
+<meta http-equiv="cache-control" content="no-cache,no-store">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
 <style>
 <!--
@@ -1153,29 +1153,29 @@ function install_debut_html($titre="Installation du syst&egrave;me de publicatio
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
 -->
 </style>
-</HEAD>
+</head>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
-<BR><BR><BR>
-<CENTER>
-<TABLE WIDTH=450>
-<TR><TD WIDTH=450>
-<FONT FACE="Verdana,Arial,Helvetica,sans-serif" SIZE=4 COLOR="#970038"><B><?php 
+<br><br><br>
+<center>
+<table width="450">
+<tr><td width="450">
+<font face="Verdana,Arial,Helvetica,sans-serif" size="4" color="#970038"><B><?php 
 	echo $titre; 
-?></B></FONT>
-<FONT FACE="Georgia,Garamond,Times,serif" SIZE=3>
+?></b></font>
+<font face="Georgia,Garamond,Times,serif" size="3">
 	<?php
 }
 
 function install_fin_html() {
 
 	echo '
-	</FONT>
-	</TD></TR></TABLE>
-	</CENTER>
-	</BODY>
-	</HTML>
+	</font>
+	</td></tr></table>
+	</center>
+	</body>
+	</html>
 	';
 }
 

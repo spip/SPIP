@@ -22,11 +22,10 @@ else {
 
 
 function generer_pass_forum($email = '') {
-	$passw = generer_htpass(md5($email.rand().$passw));
-	$passw = ereg_replace("[./]", "", $passw);
+	$passw = creer_pass_aleatoire(9, $email);
+	$passw = ereg_replace("[./]", "a", $passw);
 	$passw = ereg_replace("[I1l]", "L", $passw);
 	$passw = ereg_replace("[0O]", "o", $passw);
-	$passw = substr($passw, -8);
 	return $passw;
 }
 

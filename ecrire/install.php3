@@ -55,14 +55,14 @@ if (!file_exists("inc_connect.php3")) {
 		fputs($myFile, $protec);
 		fclose($myFile);
 
-		$conn = "<?\n";
+		$conn = "<?php\n";
 		$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
 		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
 		$conn .= "\$GLOBALS['db_ok'] = true;\n";
 		$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_connect(\"$adresse_db\",\"$login_db\",\"$pass_db\");\n";
 		$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_select_db(\"$sel_db\");\n";
 		$conn .= "?".">";
-		$myFile = fopen("inc_connect.php3", "w");
+		$myFile = fopen("inc_connect.php3", "wb");
 		fputs($myFile, $conn);
 		fclose($myFile);
 
@@ -331,7 +331,8 @@ if (!file_exists("inc_connect.php3")) {
 	else {
 		header("Location: ../spip_test_dirs.php3");
 	}
-}else{
+}
+else {
 	install_debut_html();
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4><B>Espace interdit</B></FONT>";
 	install_fin_html();
