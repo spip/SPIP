@@ -17,8 +17,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_auteur' => 'Modificar aquest autor',
 'admin_modifier_breve' => 'Modificar aquesta breu',
 'admin_modifier_mot' => 'Modificar aquesta paraula clau',
-'admin_modifier_rubrique' => 'Modificar aquesta signatura',
-'admin_recalculer' => 'Recalcular aquesta p&agrave;gina',
+'admin_modifier_rubrique' => 'Modificar aquesta secci&oacute;',
+'admin_recalculer' => 'Recarregar aquesta p&agrave;gina',
 'aide_non_disponible' => 'Aquesta part de l\'ajuda en l&iacute;nia no est&agrave; encara disponible en Catal&agrave;.',
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> L\'actualitzaci&oacute;  de la base de dades MySQL cap a  la versi&oacute; @version@ &eacute;s impossible, pot ser degut a un problema amb els drets de modificaci&oacute; de la base de dades. Si us plau contacteu amb el vostre prove&iuml;dor d\'hostatge.',
 'avis_acces_interdit' => 'Acc&egrave;s prohibit',
@@ -81,10 +81,10 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'barre_e_accent_aigu' => 'Inserir una E maj&uacute;scula amb accent agut',
 'barre_eo' => 'Inserir una E dins la O',
 'barre_eo_maj' => 'Inserir una E dins la O maj&uacute;scula',
-'barre_euro' => 'Introduir el simblo &euro;€',
+'barre_euro' => 'Inserir el simbol &euro;',
 'barre_gras' => 'Posar en {{negreta}}',
 'barre_guillemets' => 'Posar entre &laquo; cometes franceses &raquo; ',
-'barre_guillemets_simples' => 'Posar entre „cometes“',
+'barre_guillemets_simples' => 'Posar entre "cometes"',
 'barre_intertitre' => 'Transformar en {{{subt&iacute;tol}}}',
 'barre_italic' => 'Posar en {it&agrave;lica}',
 'barre_lien' => 'Transformar en [enlla&ccedil;->http://...]',
@@ -167,6 +167,11 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'bouton_valider' => 'Validar',
 'bouton_vider_cache' => 'Buidar la mem&ograve;ria cau',
 'bouton_voir_message' => 'Veure el missatge abans de ser validat ',
+
+
+// C
+'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), podeu sincronitzar-lo amb l\'actualitat d\'aquest lloc.',
+'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
 
 
 // D
@@ -252,7 +257,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'entree_nouveau_passe' => 'Una nova contrasenya',
 'entree_passe_ldap' => 'Contrasenya',
 'entree_port_annuaire' => 'N&uacute;mero de port del directori',
-'entree_signature' => 'Signatura',
+'entree_signature' => 'Secci&oacute;',
 'entree_texte_breve' => 'Text de la breu',
 'entree_titre_document' => 'T&iacute;tol del document:',
 'entree_titre_image' => 'T&iacute;tol de la imatge:',
@@ -432,7 +437,7 @@ Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat 
 'icone_supprimer_image' => 'Suprimir aquesta imatge',
 'icone_supprimer_message' => 'Suprimir aquest missatge',
 'icone_supprimer_rubrique' => 'Suprimir aquesta secci&oacute;',
-'icone_supprimer_signature' => 'Suprimir aquesta signatura',
+'icone_supprimer_signature' => 'Suprimir aquesta secci&oacute;',
 'icone_tous_articles' => 'Tots els vostres articles',
 'icone_tous_auteur' => 'Tots els autors',
 'icone_valider_message' => 'Validar aquest missatge',
@@ -1297,7 +1302,7 @@ d\'SPIP... Per m&eacute;s detalls consultar <a href="http://www.spip.net/fr_arti
 'texte_config_groupe_mots_cles' => 'Desitja activar la configuraci&oacute; avan&ccedil;ada de les paraules clau,
  indicant per exemple que es pot seleccionar un mot &uacute;nic
  per grup, quin grup &eacute;s important...?',
-'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre prove&iuml;dor d’hostatge: heu de trobar-hi, si el vostre prove&iuml;dor d&oacute;na suport MyQSL, els codis de connexi&oacute; al servidor MySQL.',
+'texte_connexion_mysql' => 'Consulteu les informacions aportades pel vostre prove&iuml;dor d\'hostatge: heu de trobar-hi, si el vostre prove&iuml;dor d&oacute;na suport MyQSL, els codis de connexi&oacute; al servidor MySQL.',
 'texte_contenu_article' => ' (Contingut de l\'article en poques paraules.)',
 'texte_contenu_articles' => 'Segons l\'esquelet triat per la vostra web, podeu decidir
  que certs elements dels articles  no siguen emprats.
@@ -1400,14 +1405,14 @@ En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la form
  es deixar&agrave; buida aquesta opci&oacute;.',
 'texte_publication_articles_post_dates' => 'Que ha de fer SPIP quan els articles tinguen una data de publicaci&oacute; posterior a l\'actual?',
 'texte_rappel_selection_champs' => ' [No oblide pas seleccionar correctament aquest camp.]',
-'texte_recalcul_page' => 'Si es vol recalcular una sola p&agrave;gina, cal passar abans per l\'espai p&uacute;blic i premer el bot&oacute; "recalcular".',
+'texte_recalcul_page' => 'Si es vol recarregar una sola p&agrave;gina, cal passar abans per l\'espai p&uacute;blic i premer el bot&oacute; "recarregar".',
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recull un llistat de documents que hi ha a cada secci&oacute; de la seua web. Per modificar la informaci&oacute; de cada document premer el enlla&ccedil; cap a la p&agrave;gina de la seua secci&oacute;.',
 'texte_recuperer_base' => 'Reparar la base de dades',
 'texte_reference_mais_redirige' => 'article referenciat a la web SPIP, pero redirigit cap a un altre URL.',
 'texte_referencement_automatique' => '<b>Referenciament automatitzat d\'un web</b><br> Es pot referenciar r&agrave;pidament un lloc Web nom&eacute;s indicant ac&iacute; baix l\'adre&ccedil;a URL desitjada, o l\'adre&ccedil;a del fitxer final. SPIP recuperar&agrave; autom&agrave;ticament les dades que referents a aquesta web (T&iacute;tol, descripci&oacute;...)',
 'texte_requetes_echouent' => '<b>Quan algunes peticions MySQL fracassen sistem&agrave;ticament i sense ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
-  Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d’hostatge.<p>',
+  Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
 'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguritat de la base',
 'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Perqu&egrave; aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat en el directori <i>ecrire/data/</i>.
 Sigueu prudents amb aquesta funcionalitat: <b>les modificacions o p&egrave;rdues eventuals s&oacute;n irreversibles.</b>',
@@ -1435,7 +1440,7 @@ a la cach&eacute; d\'SPIP. Aix&ograve; permet per exemple for&ccedil;ar un rec&a
 fet modificacions importants gr&agrave;ficament o estructurals del lloc web.',
 'texte_sur_titre' => 'Sobret&iacute;tol',
 'texte_syndication' => '&Eacute;s possible recuperar autom&agrave;ticament, quan el lloc Web ho permet, la llista de novetats. Per aix&ograve;, heu d\'activar la sindicaci&oacute;.
-<blockquote><i>Alguns prove&iuml;dors d’hostatge desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></blockquote>',
+<blockquote><i>Alguns prove&iuml;dors d\'hostatge desactiven aquesta funcionalitat; en aquest cas, no podreu utilitzar la sindicaci&oacute; de contingut des del vostre lloc.</i></blockquote>',
 'texte_table_ok' => ': aquesta taula est&agrave; OK.',
 'texte_tables_indexation_vides' => 'Les taules d\'indexaci&oacute; del motor estan buides.',
 'texte_tentative_recuperation' => 'Intent de reparaci&oacute;',

@@ -168,6 +168,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_voir_message' => 'Preview message before validating',
 
 
+// C
+'calendrier_synchro' => 'If you install a diary application compatible with <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), you can synchronise it with the site\'s events.',
+'calendrier_synchro_lien' => 'Retrieving the file <i>iCal</i>',
+
+
 // D
 'date_avant_jc' => 'B.C.',
 'date_fmt_heures_minutes' => '@h@h@m@min',

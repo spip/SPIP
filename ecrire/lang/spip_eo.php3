@@ -453,7 +453,7 @@ Dankon pro via partopreno
 'info_adresse_email' => 'RETPO&#348;TADRESO:',
 'info_adresse_non_indiquee' => 'Vi indikis neniun test-adreson!',
 'info_adresse_url' => 'Adreso (URL) de la publika teksejo',
-'info_afficher_visites' => 'Afi&#349;i vizitojn de:',
+'info_afficher_visites' => '<MODIF> Afi&#349;i vizitojn de:',
 'info_affichier_visites_articles_plus_visites' => 'Afi&#349;i la vizitojn de la <b>plej vizitataj artikoloj</b> ekde la komenco:',
 'info_aide' => 'HELPO:',
 'info_aide_en_ligne' => 'Konektita SPIP-helpo',

@@ -168,6 +168,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_voir_message' => 'Podgl&#261;d wiadomo&#347;ci przed zatwierdzeniem',
 
 
+// C
+'calendrier_synchro' => 'Je&#347;li u&#380;ywasz program&oacute;w - terminarzy kompatybinych z <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), mo&#380;ecie go zsynchronizowa&#263; z aktualno&#347;ciami tego serwisu.',
+'calendrier_synchro_lien' => 'Odtw&oacute;rz plik <i>iCal</i>',
+
+
 // D
 'date_avant_jc' => 'P.N.E.',
 'date_fmt_heures_minutes' => '@h@h@m@min',
@@ -1560,7 +1565,6 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_langue_trad_article' => 'J&#280;ZYK I T&#321;UMACZENIA ARTYKU&#321;U',
 'titre_les_articles' => 'ARTYKU&#321;Y',
 'titre_liens_entrants' => 'Dzisiejsze linki wej&#347;ciowe',
-'titre_liens_entrants_total' => 'Linki wchodz&#261;ce od pocz&#261;tku istnienia strony',
 'titre_mots_cles' => 'S&#321;OWA KLUCZOWE',
 'titre_mots_cles_dans_forum' => 'S&#322;owa kluczowe na forum na stronie publicznej',
 'titre_mots_tous' => 'S&#322;owa kluczowe',
@@ -1619,7 +1623,11 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem',
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
-'trad_reference' => '(artyku&#322; wzorcowy)'
+'trad_reference' => '(artyku&#322; wzorcowy)',
+
+
+// PLUS_UTILISE
+'titre_liens_entrants_total' => 'Linki wchodz&#261;ce od pocz&#261;tku istnienia strony'
 
 );
 
