@@ -1341,7 +1341,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	else if ($connect_statut == '0minirezo' and !$connect_toutes_rubriques and lire_meta("activer_statistiques") != 'non'){
 	bandeau_barre_verticale();
-		icone_bandeau_principal (_T('icone_stat_site'), "statistiques_visites.php3", "administration-48.gif", "administration", $rubrique);
+		icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "administration-48.gif", "administration", $rubrique);
 	}
 	echo "<td background='' width='100%'>   </td>";
 	echo "<td align='center'><font size=1>";
@@ -1426,7 +1426,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 			}
 			else {
-				icone_bandeau_secondaire (_T('icone_save_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 			}
 		}
 	}
