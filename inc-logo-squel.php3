@@ -28,8 +28,7 @@ function calculer_champ_EXTRA ($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
 function calculer_champ_LANG ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
  {
-#	$code = "lire_meta('langue_site')"; # 1.7
-   $code = "\$GLOBALS['spip_lang']";   # 1.7.2
+	$code = '(($x = '.index_pile($id_boucle,  "lang", $boucles).') ? $x : $GLOBALS[spip_lang])';
    return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
 }
 
