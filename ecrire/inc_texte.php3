@@ -348,7 +348,7 @@ function couper($texte, $taille=50) {
 	} else
 		$texte = $court;
 
-	if (strpos("\n", $texte))	// la fin est encore la : c'est qu'on n'a pas de texte de suite
+	if (strpos($texte, "\n"))	// la fin est encore la : c'est qu'on n'a pas de texte de suite
 		$points = '';
 
 	// remettre les paragraphes
