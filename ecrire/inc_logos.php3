@@ -52,11 +52,40 @@ function resize_logo($image) {
 }
 
 
-function afficher_boite_logo($racine, $titre) {
-	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur, $PHP_SELF;
-	global $couleur_foncee, $couleur_claire;
+function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
+	global $options;
 
-	$redirect = substr($PHP_SELF, strrpos($PHP_SELF, '/') + 1);
+	$logo_ok = get_image($logo);
+	if ($logo_ok) $survol_ok = get_image($survol);
+
+	echo "<p>";
+	debut_cadre_relief("image-24.gif");
+	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+	echo bouton_block_invisible(md5($texteon).",".md5($texteon).md5($texteoff).",".md5($texteoff));
+	echo $texteon;
+	echo "</b></center></font>";
+
+	if ($options == 'avancees' OR $logo_ok)
+		afficher_logo($logo, $texteon);
+
+	if (($options == 'avancees' AND $logo_ok) OR $survol_ok) {
+		echo debut_block_invisible(md5($texteon).md5($texteoff));
+		echo "<p align='center'><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><b>";
+		echo $texteoff;
+		echo "</b></font></p>";
+		echo fin_block();
+		afficher_logo($survol, $texteoff);
+	}
+
+	fin_cadre_relief();
+}
+
+function afficher_logo($racine, $titre) {
+	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
+	global $couleur_foncee, $couleur_claire;
+	global $clean_link;
+
+	$redirect = $clean_link->getUrl();
 	$logo = get_image($racine);
 	if ($logo) {
 		$fichier = $logo[0];
@@ -67,26 +96,15 @@ function afficher_boite_logo($racine, $titre) {
 		}
 	}
 
-/*	echo "<div style='border-left: 1px solid white; border-top: 1px solid white; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; '>";
-	echo "<div style='background-color: white; border:  1px solid $couleur_foncee; padding: 3px; text-align: center;'><b>";*/
-	debut_cadre_relief("image-24.gif");
-	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
-	echo bouton_block_invisible("$racine");
-	echo $titre;
-	echo "</b></center></font>";
-	fin_cadre_relief();
-
 	echo "<font size=2 FACE='Verdana,Arial,Helvetica,sans-serif'>";
 
-/*	echo "</b></div>";
-	echo "</div>";*/
 	if ($fichier) {
 		$hash = calculer_action_auteur("supp_image $fichier");
 
 		echo "<P><CENTER><IMG SRC='../IMG/$fichier' $taille_html>";
-		echo debut_block_invisible("$racine");
 
-		echo "<BR>$taille_txt\n";
+		echo debut_block_invisible(md5($titre));
+		echo "$taille_txt\n";
 		echo "<BR>[<A HREF='../spip_image.php3?";
 		$elements = array('id_article', 'id_breve', 'id_syndic', 'coll', 'id_mot', 'id_auteur');
 		while (list(,$element) = each ($elements)) {
@@ -94,13 +112,13 @@ function afficher_boite_logo($racine, $titre) {
 				echo $element.'='.$$element.'&';
 			}
 		}
-		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&id_auteur=$id_auteur&hash=$hash&redirect=$redirect'>Supprimer le logo</A>]";
+		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&id_auteur=$id_auteur&hash=$hash&redirect=$redirect'>supprimer</A>]";
 		echo fin_block();
 		echo "</CENTER>";
 	}
 	else {
 		$hash = calculer_action_auteur("ajout_image $racine");
-		echo debut_block_invisible("$racine");
+		echo debut_block_invisible(md5($titre));
 
 		echo "<FONT SIZE=1>";
 		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
@@ -142,9 +160,9 @@ function afficher_boite_logo($racine, $titre) {
 
 		}
 
+		echo fin_block();
 		echo "\n</FORM>\n\n";
 		echo "</FONT>";
-		echo fin_block();
 	}
 	echo "</font>";
 }

@@ -269,19 +269,9 @@ echo "</center>";
 
 $rubon = "siteon$id_syndic";
 $ruboff = "siteoff$id_syndic";
-$rubon_ok = get_image($rubon);
-if ($rubon_ok) $ruboff_ok = get_image($ruboff);
 
-if ($flag_administrable AND ($options == 'avancees' OR $rubon_ok)) {
-	debut_cadre_relief();
-	afficher_boite_logo($rubon, "LOGO DE CE SITE ".aide ("rublogo"));
-	if (($options == 'avancees' AND $rubon_ok) OR $ruboff_ok) {
-		echo "<P>";
-		afficher_boite_logo($ruboff, "LOGO POUR SURVOL");
-	}
-	fin_cadre_relief();
-}
-
+if ($id_syndic>0 AND $flag_administrable)
+	afficher_boite_logo($rubon, $ruboff, "LOGO DE CE SITE ".aide ("rublogo"), "LOGO POUR SURVOL");
 
 
 debut_droite();

@@ -99,19 +99,9 @@ fin_boite_info();
 
 $arton = "auton$id_auteur";
 $artoff = "autoff$id_auteur";
-$arton_ok = get_image($arton);
-if ($arton_ok) $artoff_ok = get_image($artoff);
 
-if (($connect_statut == '0minirezo' OR $connect_id_auteur == $id_auteur) AND ($options == 'avancees' OR $arton_ok)) {
-
-	debut_boite_info();
-	afficher_boite_logo($arton, "LOGO DE L'AUTEUR".aide ("logoart"));
-	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
-		echo "<P>";
-		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
-	}
-	fin_boite_info();
-}
+if ($id_auteur>0 AND (($connect_statut == '0minirezo') OR ($connect_id_auteur == $id_auteur)))
+	afficher_boite_logo($arton, $artoff, "LOGO DE L'AUTEUR".aide ("logoart"), "LOGO POUR SURVOL");
 
 
 debut_droite();
