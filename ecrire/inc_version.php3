@@ -643,7 +643,8 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 //
 if (file_exists(($flag_ecrire ? '' : 'ecrire/').'inc_meta_cache.php3')) {
 	include_ecrire('inc_meta_cache.php3');
-} else {
+}
+if (!defined("_ECRIRE_INC_META_CACHE")) {
 	function lire_meta($nom) {
 		global $meta;
 		return $meta[$nom];
