@@ -409,7 +409,7 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 
 	// calcul du total boucle final
 	$retour .= "\n	"
-		.'$Numrows[\''.$id_boucle.'\'] = $fin_boucle - $debut_boucle + 1;';
+		.'$Numrows[\''.$id_boucle.'\'] = max(0,$fin_boucle - $debut_boucle + 1);';
 
 	return $retour;
 }
