@@ -23,7 +23,7 @@ if (!$debut_limit) $debut_limit = 0;
 
 install_debut_html("Sauvegarde");
 
-if (!$etape) echo "Si la sauvegarde a &eacute;chou&eacute; (&laquo;Maximum execution time exceeded&raquo;), <a href='export_all.php3?etape=1&gz=$gz'>proc&eacute;dez &eacute;tape par &eacute;tape</a><p>.";
+if (!$etape) echo "<p><font size=2>Si la sauvegarde a &eacute;chou&eacute; (&laquo;Maximum execution time exceeded&raquo;), <a href='export_all.php3?etape=1&gz=$gz'>proc&eacute;dez &eacute;tape par &eacute;tape</a>.</font><p>";
 
 
 if ($etape < 2){
@@ -78,13 +78,19 @@ export_objets($query, "syndic", $f, $gz, $etape, 13, "Sauvegarder les sites r&ea
 $query = "SELECT * FROM spip_syndic_articles".$debug_limit;
 export_objets($query, "syndic_article", $f, $gz, $etape, 14, "Sauvegarder les articles des sites r&eacute;f&eacute;renc&eacute;s");
 
+$query = "SELECT * FROM spip_visites".$debug_limit;
+export_objets($query, "spip_visite", $f, $gz, $etape, 15, "Sauvegarder les visites");
+
+$query = "SELECT * FROM spip_visites_referers".$debug_limit;
+export_objets($query, "spip_referers", $f, $gz, $etape, 16, "Sauvegarder les referers");
+
 
 if (!$etape OR $etape == 14){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
 
 
 
-	echo "<p>La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/$archive</b>.\n";
+	echo "<p><b>Sauvegarde r&eacute;ussie.</b> La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/$archive</b>. Vous pouvez <a href='index.php3'>retourner &agrave; la gestion</a> de votre site.\n";
 }
 else {
 	$etape_suivante = $etape + 1;

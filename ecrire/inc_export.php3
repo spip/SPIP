@@ -126,6 +126,28 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 				}
 				mysql_free_result($res2);
 			}
+			else if ($type == 'breve') {
+				$query = 'SELECT id_document FROM spip_documents_breves WHERE id_breve='.$row[0];
+				$res2 = spip_query($query);
+				while($row2 = mysql_fetch_array($res2)) {
+					$string .= '<lien:document>' . $row2['id_document'] . '</lien:document>' . "\n";
+				}
+				mysql_free_result($res2);
+			}
+			else if ($type == 'rubrique') {
+				$query = 'SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='.$row[0];
+				$res2 = spip_query($query);
+				while($row2 = mysql_fetch_array($res2)) {
+					$string .= '<lien:document>' . $row2['id_document'] . '</lien:document>' . "\n";
+				}
+				mysql_free_result($res2);
+				$query = 'SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_rubrique='.$row[0];
+				$res2 = spip_query($query);
+				while($row2 = mysql_fetch_array($res2)) {
+					$string .= '<lien:auteur>' . $row2['id_auteur'] . '</lien:auteur>' . "\n";
+				}
+				mysql_free_result($res2);
+			}
 			else if ($type == 'auteur') {
 				$query = 'SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur='.$row[0];
 				$res2 = spip_query($query);
