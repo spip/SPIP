@@ -31,17 +31,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_chemin_invalide_1' => 'A ruta que elexiches',
 'avis_chemin_invalide_2' => 'non semella ser v&aacute;lida. Volta &aacute; p&aacute;xina anterior e verifica as informaci&oacute;ns introducidas.',
 'avis_colonne_inexistante' => 'A columna @col@ non existe',
-'avis_connexion_echec_1' => 'A conexi&oacute;n &oacute; servidor MySQL fallou.',
+'avis_connexion_echec_1' => 'A conexi&oacute;n ao servidor MySQL fallou.',
 'avis_connexion_echec_2' => 'Volta &aacute; p&aacute;xina anterior, e verifica as informaci&oacute;ns introducidas.',
 'avis_connexion_echec_3' => '<B>N.B.</B> En moitos servidores, tes que <B>pedir</B> a activaci&oacute;n do teu acceso &aacute; base MySQL antes de pode.la usar. Se non das conectado, verifica ter feito a solicitude e activado o acceso.',
-'avis_connexion_ldap_echec_1' => 'A conexi&oacute;n &oacute; servidor LDAP fallou.',
+'avis_connexion_ldap_echec_1' => 'A conexi&oacute;n ao servidor LDAP fallou.',
 'avis_connexion_ldap_echec_2' => 'Volta &aacute; p&aacute;xina anterior, e verifica as informaci&oacute;ns introducidas.',
-'avis_connexion_ldap_echec_3' => 'Como alternativa, podes non empregar o soporte LDAP para importar usuari@s.',
+'avis_connexion_ldap_echec_3' => 'Como alternativa, non empregue o sistema LDAP para importar redactores.',
 'avis_conseil_selection_mot_cle' => '<b>Grupo importante:</b>&eacute; moi aconsellable seleccionar unha palabra chave neste grupo.',
-'avis_deplacement_rubrique' => 'Atenci&oacute;n! Este tema cont&eacute;n @contient_breves@ breve@scb@: se a(s) queres desplazar, conf&iacute;rmao eiqu&iacute;.',
+'avis_deplacement_rubrique' => 'Atenci&oacute;n! Este tema cont&eacute;n @contient_breves@ breve@scb@: se a(s) quere desprazar, conf&iacute;rmeo aqu&iacute;.',
 'avis_destinataire_obligatoire' => 'Tes que indicar o destino antes de enviar esta mensaxe.',
 'avis_echec_syndication_01' => 'A afiliaci&oacute;n fallou: o &laquo;backend&raquo; indicado &eacute; indescifrable ou non leva a neng&uacute;n artigo.',
-'avis_echec_syndication_02' => 'A afiliaci&oacute;n fallou: foi imposible acceder &oacute; &laquo;backend&raquo; deste lugar.',
+'avis_echec_syndication_02' => 'A afiliaci&oacute;n fallou: foi imposible acceder ao &laquo;backend&raquo; deste web.',
 'avis_erreur' => 'Erro: ver abaixo',
 'avis_erreur_connexion' => 'Erro de conexi&oacute;n',
 'avis_erreur_connexion_mysql' => 'Erro de conexi&oacute;n MySQL',
@@ -50,11 +50,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
 'avis_erreur_version_archive' => '<B>Atenci&oacute;n! O ficheiro @arquivo@ corresponde a
-  outra versi&oacute;n de SPIP que non &eacute; a que tes instalada.</B>
-  Podes estar en graves problemas: risco de destrucci&oacute;n masiva
-  da t&uacute;a base de datos, fallos no funcionamento do lugar, etc.
-  Non valides esta petici&oacute;n de importaci&oacute;n.<p>Para m&aacute;is
-  informaci&oacute;ns, consulta <A HREF=\'http://www.spip.net/fr_article1489.html\'>
+  outra versi&oacute;n de SPIP que non &eacute; a que ten instalada.</B>
+  Pode estar en graves problemas: hai risco de destruci&oacute;n masiva
+  da s&uacute;a base de datos, fallos no funcionamento do web, etc.
+  Non valide esta petici&oacute;n de importaci&oacute;n.<p>Para m&aacute;is
+  informaci&oacute;ns, consulte <A HREF=\'http://www.spip.net/fr_article1489.html\'>
   a documentaci&oacute;n de SPIP</A>.',
 'avis_espace_interdit' => '<B>Espazo prohibido</B><p>SPIP xa est&aacute; instalado.',
 'avis_lecture_noms_bases_1' => 'O programa de instalaci&oacute;n non puido ler os nomes das bases de datos instaladas.',
@@ -64,10 +64,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_non_acces_page' => 'Non tes acceso a esta p&aacute;xina.',
 'avis_operation_echec' => 'Fallou a operaci&oacute;n.',
 'avis_probleme_archive' => 'Problema de leitura do ficheiro @archive@',
-'avis_site_introuvable' => 'Non se pode atopar o lugar',
-'avis_site_syndique_probleme' => 'Atenci&oacute;n: a afiliaci&oacute;n deste lugar atopou un problema; o sistema quedou temporalmente interrumpido. Verifica a ruta do ficheiro de afiliaci&oacute;n deste lugar (<b>@url_syndic@</b>), e tenta unha nova recuperaci&oacute;n das informaci&oacute;ns.',
-'avis_sites_probleme_syndication' => 'Estes lugares atoparon un problema de afiliaci&oacute;n',
-'avis_sites_syndiques_probleme' => 'Estes lugares afiliados remitiron un problema',
+'avis_site_introuvable' => 'Non se pode atopar o web',
+'avis_site_syndique_probleme' => 'Atenci&oacute;n: a afiliaci&oacute;n deste web atopou un problema; o sistema quedou temporalmente interrompido. Verifique a v&iacute;a do ficheiro de afiliaci&oacute;n deste web (<b>@url_syndic@</b>), e tente unha nova recuperaci&oacute;n da informaci&oacute;n.',
+'avis_sites_probleme_syndication' => 'Estes webs atoparon un problema de afiliaci&oacute;n',
+'avis_sites_syndiques_probleme' => 'Estes webs afiliados devolveron un problema',
 'avis_suppression_base' => 'ATENCI&Oacute;N, a supresi&oacute;n dos datos &eacute; irreversible',
 'avis_version_mysql' => 'A t&uacute;a versi&oacute;n de MySQL (@version_mysql@) non permite a auto-reparaci&oacute;n das t&aacute;boas da base.',
 
@@ -86,7 +86,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tulo}}}',
 'barre_italic' => 'Po&ntilde;er en {cursiva}',
 'barre_lien' => 'Transformar en [ligaz&oacute;n de hipertexto->http://...]',
-'barre_lien_input' => 'Indicar o enderezo de seu lugar (pode indicar un enderezo de web coa forma http://www.monsite/com ou simplemente indicar o n&uacute;mero dun artigo deste web.',
+'barre_lien_input' => 'Indicar o enderezo de seu web (pode indicar un enderezo de web coa forma http://www.monsite/com ou simplemente indicar o n&uacute;mero dun artigo deste web.',
 'barre_note' => 'Transformar en [[Nota a rodap&eacute;]]',
 'barre_quote' => '<quote>Citar unha mensaxe</quote>',
 'bouton_acces_ldap' => 'Engadir o acceso a LDAP >>',
@@ -118,7 +118,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_activer_petition' => 'Activar a petici&oacute;n',
 'bouton_radio_afficher' => 'Amosar',
 'bouton_radio_apparaitre_liste_redacteurs_connectes' => 'Aparecer na lista de persoas conectadas',
-'bouton_radio_articles_futurs' => 's&oacute; &oacute;s artigos futuros (non modificar nen facer nada na base de datos).',
+'bouton_radio_articles_futurs' => 's&oacute; aos artigos futuros (non modificar nin facer nada na base de datos).',
 'bouton_radio_articles_tous' => 'a todo.los artigos sen excepci&oacute;n.',
 'bouton_radio_articles_tous_sauf_forum_desactive' => 'a todo.los artigos, ag&aacute;s &oacute;s que te&ntilde;an o foro desactivado;.',
 'bouton_radio_desactiver_messagerie' => 'Desactivar a mensaxer&iacute;a',
@@ -127,7 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		tes que te rexistrar co teu enderezo de e-mail antes de
 		poder aportar contribuci&oacute;ns).',
 'bouton_radio_envoi_annonces' => 'Enviar os anuncios editori&aacute;is',
-'bouton_radio_envoi_annonces_adresse' => 'Enviar os anuncios &oacute; enderezo:',
+'bouton_radio_envoi_annonces_adresse' => 'Enviar os anuncios ao enderezo:',
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista de novidades',
 'bouton_radio_moderation_priori' => 'Moderado a priori (as
 		contribuci&oacute;ns ser&aacute;n publicadas tra.la aprobaci&oacute;n do grupo xestor).',
@@ -268,7 +268,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_adresse_fichier_syndication' => 'Enderezo do ficheiro &laquo;backend&raquo; para a afiliaci&oacute;n:',
 'entree_adresse_site' => '<b>Enderezo do lugar</b> [Obrigatorio]',
 'entree_base_donnee_1' => 'Enderezo da base de datos',
-'entree_base_donnee_2' => '(Moitas veces este enderezo corresponde &oacute; do teu lugar, &aacute;s veces corresp&oacute;ndese &aacute; menci&oacute;n &laquo;localhost&raquo;, e outras p&oacute;dese deixar valeiro.)',
+'entree_base_donnee_2' => '(Moitas veces este enderezo corresponde ao do teu lugar, &aacute;s veces corresp&oacute;ndese &aacute; menci&oacute;n &laquo;localhost&raquo;, e outras p&oacute;dese deixar baleiro.)',
 'entree_biographie' => 'Curta biograf&iacute;a en catro verbas.',
 'entree_breve_publiee' => 'Queres que se publique a breve?',
 'entree_chemin_acces' => '<B>Escrebe</B> a ruta de acceso:',
@@ -286,15 +286,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_login_connexion_1' => 'O login de conexi&oacute;n',
 'entree_login_connexion_2' => '(&aacute;s veces &eacute; o mesmo que tes para o acceso por FTP; outras veces p&oacute;dese deixar valeiro)',
 'entree_login_ldap' => 'Login LDAP inicial',
-'entree_mot_passe' => 'O teu contrasinal',
-'entree_mot_passe_1' => 'O contrasinal da conexi&oacute;n',
+'entree_mot_passe' => 'A s&uacute;a chave',
+'entree_mot_passe_1' => 'A chave da conexi&oacute;n',
 'entree_mot_passe_2' => '(&aacute;s veces &eacute; o mesmo que tes para o acceso por FTP; outras veces p&oacute;dese deixar valeiro)',
 'entree_nom_fichier' => 'Escrebe o nome do ficheiro @texte_compresse@:',
 'entree_nom_pseudo' => 'O teu nome ou o teu alcume',
 'entree_nom_pseudo_1' => '(O teu nome ou o teu alcume)',
 'entree_nom_site' => 'O nome do teu lugar',
-'entree_nouveau_passe' => 'Novo contrasinal',
-'entree_passe_ldap' => 'Contrasinal',
+'entree_nouveau_passe' => 'Nova chave',
+'entree_passe_ldap' => 'Chave',
 'entree_port_annuaire' => 'O n&uacute;mero de porto da gu&iacute;a',
 'entree_signature' => 'Sinatura',
 'entree_texte_breve' => 'Texto da breve',
@@ -314,13 +314,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_email_non_valide' => 'O teu enderezo de e-mail non &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Non tes acceso a este lugar.',
 'form_forum_bonjour' => '&Oacute;la,',
-'form_forum_email_deja_enregistre' => 'Este e-mail xa foi rexistrado, logo podes empregar o teu contrasinal de sempre.',
+'form_forum_email_deja_enregistre' => 'Este e-mail xa foi rexistrado, logo podes empregar a t&uacute;a chave de sempre.',
 'form_forum_identifiant_mail' => 'Enviouseche o teu novo identificador por correo electr&oacute;nico.',
-'form_forum_identifiants' => 'Identificadores perso&aacute;is',
-'form_forum_indiquer_nom_email' => 'Indica eiqu&iacute; o teu nome e o teu enderezo de e-mail. De seguida recibir&aacute;s o teu identificador persoal por correo electr&oacute;nico.',
+'form_forum_identifiants' => 'Identificadores persoais',
+'form_forum_indiquer_nom_email' => 'Indica aqu&iacute; o teu nome e o teu enderezo de e-mail. De seguida recibir&aacute;s o teu identificador persoal por correo electr&oacute;nico.',
 'form_forum_login' => 'login:',
 'form_forum_message_auto' => '(esta &eacute; unha mensaxe autom&aacute;tica)',
-'form_forum_pass' => 'contrasinal:',
+'form_forum_pass' => 'chave:',
 'form_forum_probleme_mail' => 'Problema de mail: non se puido enviar o identificador.',
 'form_forum_voici1' => 'Estes son os datos que precisas para participar nos foros
 de "@nom_site_spip@" (@adresse_site@/):',
@@ -355,15 +355,15 @@ sera rexeitada):
 Gracias pola t&uacute;a participaci&oacute;n
 ',
 'form_pet_message_commentaire' => 'Algunha mensaxe, un comentario?',
-'form_pet_nom_site2' => '<B>Nome do teu lugar Web',
+'form_pet_nom_site2' => '<B>Nome do seu Web',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, as sinaturas foron suspendidas temporalmente.',
 'form_pet_signature_pasprise' => 'A t&uacute;a sinatura non foi tida en conta.',
-'form_pet_signature_validee' => 'A t&uacute;a sinatura foi validada. Aparecer&aacute; na seguinte posta &oacute; d&iacute;a da p&aacute;xina. Graci&ntilde;as!',
+'form_pet_signature_validee' => 'A s&uacute;a sinatura foi validada. Aparecer&aacute; na seguinte actualizaci&oacute;n da p&aacute;xina. Deus llo pague!',
 'form_pet_site_deja_enregistre' => 'Este lugar xa foi rexistrado',
 'form_pet_url_invalide' => 'O URL que escribiches non &eacute; v&aacute;lido.',
 'form_pet_votre_email' => 'O teu enderezo de e-mail',
 'form_pet_votre_nom' => 'O teu nome ou alcume',
-'form_pet_votre_site' => 'Se tes unha p&aacute;xina web, pode.lo indicar eiqu&iacute; enbaixo',
+'form_pet_votre_site' => 'Se tes unha p&aacute;xina web, p&oacute;delo indicar aqu&iacute; embaixo',
 'form_prop_confirmer_envoi' => 'Confirmar o env&iacute;o',
 'form_prop_description' => 'Descripci&oacute;n/coment&aacute;rio',
 'form_prop_enregistre' => 'A t&uacute;a proposta foi rexistrada, estar&aacute; en li&ntilde;a en canto sexa
@@ -381,15 +381,15 @@ Gracias pola t&uacute;a participaci&oacute;n
 'forum_attention_dix_caracteres' => '<b>Atenci&oacute;n!</b> a mensaxe ten menos de dez caracteres.',
 'forum_attention_trois_caracteres' => '<b>Atenci&oacute;n!</b> o t&iacute;tulo ten menos de tres caracteres.',
 'forum_avez_selectionne' => 'Seleccionaches:',
-'forum_cliquer_retour' => 'Preme <a href=\'@retour_forum@\'>eiqu&iacute;</a> para seguir.',
+'forum_cliquer_retour' => 'Preme <a href=\'@retour_forum@\'>aqu&iacute;</a> para seguir.',
 'forum_creer_paragraphes' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as en branco.)',
 'forum_forum' => 'foro',
 'forum_info_modere' => 'Este foro &eacute; moderado a priori: a t&uacute;a contribuci&oacute;n non aparecer&aacute; namentras non sexa aprobada polo equipo de xesti&oacute;n do lugar.',
 'forum_lien_hyper' => '<B>Ligaz&oacute;n de hipertexto</B> (opcional)',
-'forum_message_definitif' => 'Mensaxe definitiva: envia.la &oacute; lugar',
+'forum_message_definitif' => 'Mensaxe definitiva: enviala ao lugar',
 'forum_message_trop_long' => 'A mensaxe &eacute; longa de m&aacute;is. O tama&ntilde;o m&aacute;ximo permitido &eacute; de 20000 caract&eacute;res.',
 'forum_ne_repondez_pas' => 'Resposta este correo no foro do enderezo seguinte:',
-'forum_non_inscrit' => 'A&iacute;nda non te rexistraches, ou o enderezo ou o contrasinal andan errados.',
+'forum_non_inscrit' => 'A&iacute;nda non se rexistrou, ou o enderezo ou a chave andan errados.',
 'forum_page_url' => '(Se a mensaxe se refire a un artigo publicado noutra web, ou hai unha p&aacute;xina con m&aacute;is informaci&oacute;ns sobre o tema, indica o t&iacute;tulo da p&aacute;xina e o seu enderezo URL.)',
 'forum_par_auteur' => 'por @auteur@',
 'forum_poste_par' => 'Mensaxe enviada @parauteur@ en resposta &oacute; teu artigo.',
@@ -403,9 +403,9 @@ Gracias pola t&uacute;a participaci&oacute;n
 'forum_voir_avant' => 'Ve.la mensaxe antes de envia.la',
 'forum_votre_email' => 'O teu enderezo de e-mail:',
 'forum_votre_nom' => 'O teu nome (ou alcume):',
-'forum_vous_enregistrer' => 'Para participar neste foro, tes que te rexistrar
-		na p&aacute;xina anterior. escrebe eiqu&iacute; enbaixo o identificador persoal
-		que recibiches. Se a&iacute;nda non te rexistraches, tes que',
+'forum_vous_enregistrer' => 'Para participar neste foro, ten que se rexistrar
+  na p&aacute;xina anterior. Escriba aqu&iacute; embaixo o identificador persoal
+  que recibiu. Se a&iacute;nda non se rexistrou, d&eacute;beo facer',
 'forum_vous_inscrire' => 'te rexistrar</a> na p&aacute;xina anterior.',
 
 
@@ -437,7 +437,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_auteurs' => 'Equipo de redacci&oacute;n',
 'icone_breves' => 'Breves',
 'icone_brouteur' => 'Navegaci&oacute;n r&aacute;pida',
-'icone_calendrier' => 'Calend&aacute;rio',
+'icone_calendrier' => 'Calendario',
 'icone_calendrier_messagerie' => 'Axenda e mensaxeria',
 'icone_configuration_site' => 'Configuraci&oacute;n do lugar',
 'icone_configurer_site' => 'Configurar o teu lugar',
@@ -449,7 +449,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_creer_rubrique' => 'Crear un tema',
 'icone_creer_rubrique_2' => 'Crear un novo tema',
 'icone_creer_sous_rubrique' => 'Crear un apartado',
-'icone_deconnecter' => 'Desligar',
+'icone_deconnecter' => 'Sa&iacute;r',
 'icone_discussions' => 'Discusi&oacute;ns',
 'icone_doc_rubrique' => 'Documento dos temas',
 'icone_ecrire_article' => 'Escreber un novo artigo',
@@ -488,7 +488,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_retour_article' => 'Voltar &oacute; artigo',
 'icone_rubriques' => 'Temas',
 'icone_sauver_site' => 'Copia de seguridade do lugar',
-'icone_site_entier' => 'Todo o lugar',
+'icone_site_entier' => 'Todo o web',
 'icone_sites_references' => 'Lugares referidos',
 'icone_statistiques' => 'Estat&iacute;sticas do lugar',
 'icone_statistiques_visites' => 'Estat&iacute;sticas das visitas',
@@ -578,7 +578,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_auteurs' => 'O equipo de redacci&oacute;n',
 'info_auteurs_nombre' => 'autor(as/es):',
 'info_auteurs_par_tri' => 'Autores @partri@',
-'info_auteurs_trouves' => 'Autores/as atopad@s',
+'info_auteurs_trouves' => 'Autores/as atopados',
 'info_authentification_externe' => 'Autentificaci&oacute;n externa',
 'info_authentification_ftp' => 'Autentificaci&oacute;n (por FTP).',
 'info_avertissement' => 'Aviso',
@@ -597,7 +597,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_chapeau' => 'Cabeceira',
 'info_chapeau_2' => 'Cabeceira:',
 'info_chemin_acces_1' => 'Opci&oacute;ns: <B>Ruta de acceso na gu&iacute;a</B>',
-'info_chemin_acces_2' => 'En adiante, ter&aacute;s que configurar a ruta de acceso &aacute;s informaci&oacute;ns na gu&iacute;a. Esta informaci&oacute;n &eacute; indispensable para ler os perf&iacute;s de usuari@s gardados na gu&iacute;a.',
+'info_chemin_acces_2' => 'En adiante, ter&aacute; que configurar a v&iacute;a de acceso &aacute;s informaci&oacute;ns na gu&iacute;a. Esta informaci&oacute;n &eacute; indispensable para ler os perf&iacute;s de redactores gardados na gu&iacute;a.',
 'info_chemin_acces_annuaire' => 'Opci&oacute;ns: <B>Ruta de acceso na gu&iacute;a',
 'info_choix_base' => 'Terceira etapa:',
 'info_classement_1' => '<sup>o</sup> en @liste@',
@@ -606,7 +606,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_comment_lire_tableau' => 'C&oacute;mo interpretar este cadro',
 'info_config_suivi' => 'Se este enderezo corresponde &aacute; unha lista de correo, vostede pode indicar aqu&iacute; abaixo o enderezo ao cal os participantes no web se poden inscribir. Este enderezo pode ser unha URL (por exemplo a p&aacute;xina de inscrici&oacute;n &aacute; lista via web), ou un enderezo de correo electr&oacute;nico dotado dun suxeito espec&iacute;fico (por exemplo: <tt>@adresse_suivi@?subject=subscribirse</tt>):',
 'info_config_suivi_explication' => 'Pode subscribirse &aacute; lista de correo deste web. Recibir&aacute; ent&oacute;n por corro os anuncios de artigos e de breves propostas para publicaci&oacute;n.',
-'info_confirmer_passe' => 'Confirmar o novo contrasinal:',
+'info_confirmer_passe' => 'Confirmar a nova chave:',
 'info_connexion_base' => 'Segunda etapa: <B>Intento de conexi&oacute;n &aacute; base</B>',
 'info_connexion_ldap_ok' => 'Conexi&oacute;n LDAP conquerida.</B><P> Podes pasar &aacute; etapa seguinte.',
 'info_connexion_mysql' => 'Primeira etapa: <B>A t&uacute;a conexi&oacute;n MySQL</B>',
@@ -620,7 +620,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_copyright' => '&eacute; un programa libre distribuido <a href=\'copyright_fr.html\'>baixo licencia GPL.</a>',
 'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vaia a <a href=\'http://www.spip.net/gl\'>http://www.spip.net/gl</a>.',
 'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n',
-'info_creation_mots_cles' => 'Crea e configura eiqu&iacute; as palabras chave do lugar',
+'info_creation_mots_cles' => 'Crea e configura aqu&iacute; as palabras chave do web',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as valeiras.)',
 'info_creation_rubrique' => 'Antes de poder escreber artigos,<BR> tes que crear, alomenos un tema.<BR>',
 'info_creation_tables' => 'Cuarta etapa: <B>Creaci&oacute;n das t&aacute;boas da base</B>',
@@ -692,17 +692,17 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_format_non_defini' => 'formato non definido',
 'info_forum_administrateur' => 'foro do equipo de xesti&oacute;n',
 'info_forum_interne' => 'foro interno',
-'info_forum_ouvert' => 'Dentro do espazo privado do lugar, hai un foro aberto
-		a toda a xente rexistrada. eiqu&iacute; abaixo podes activar un foro
-		suplementar, reservado para o equipo de xesti&oacute;n.',
+'info_forum_ouvert' => 'Dentro do espazo privado do web, hai un foro aberto
+  a toda a xente rexistrada. Aqu&iacute; abaixo pode activar un foro
+  suplementar, reservado para o equipo de xesti&oacute;n.',
 'info_forum_statistiques' => 'Estat&iacute;sticas das visitas',
 'info_gauche_admin_effacer' => '<B>Esta p&aacute;xina &eacute; &uacute;nicamente accessible para o equipo de xesti&oacute;n do lugar.</B><P> Da acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP &oacute; lugar.',
 'info_gauche_admin_tech' => '<B>Esta p&aacute;xina &eacute; &uacute;nicamente accessible para o equipo de xesti&oacute;n do lugar.</B><P> Da acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, o cal esixe ter un acceso por FTP &oacute; lugar.',
 'info_gauche_admin_vider' => '<B>Esta p&aacute;xina &eacute; unicamente accessible para o equipo de xesti&oacute;n do lugar.</B><P> Da acceso a diferentes funci&oacute;ns de mantemento t&eacute;cnico. Algunhas delas dan lugar a procesos de autenticaci&oacute;n espec&iacute;fica, que esixe ter un acceso por FTP &oacute; lugar.',
-'info_gauche_auteurs' => 'Eiqu&iacute; atopar&aacute;s toda a xente rexistrada no lugar.
-		A s&uacute;a categor&iacute;a ind&iacute;ca.se pola cor da s&uacute;a icona (redacci&oacute;n = verde; xesti&oacute;n = amarela).',
-'info_gauche_auteurs_exterieurs' => '@s forasteir@s, sen acceso &oacute; lugar, est&aacute;n indicadas por unha icona azul;
-		as persoas que foron eliminadas, por unha papeleira.',
+'info_gauche_auteurs' => 'Aqu&iacute; atopar&aacute;s toda a xente rexistrada no web.
+  A s&uacute;a categor&iacute;a ind&iacute;case pola cor da s&uacute;a icona (redacci&oacute;n = verde; xesti&oacute;n = amarela).',
+'info_gauche_auteurs_exterieurs' => 'Os colaboradores exteriores, sen acceso ao lugar, est&aacute;n indicados por unha icona azul;
+  as persoas que foron eliminadas, por unha papeleira.',
 'info_gauche_messagerie' => 'A mensaxer&iacute;a perm&iacute;teche intercambiar mensaxes entre o equipo de redacci&oacute;n, gardar notas (para o teu uso persoal) ou amosar os anuncios na p&aacute;xina de entrada do espazo privado (se est&aacute;s no equipo de xesti&oacute;n).',
 'info_gauche_numero_auteur' => 'AUTOR/A N&Uacute;MERO',
 'info_gauche_numero_breve' => 'BREVE N&Uacute;MERO',
@@ -711,8 +711,8 @@ Gracias pola t&uacute;a participaci&oacute;n
 		pois si, esta lista p&oacute;n.se a cero a cada 24 horas.',
 'info_gauche_suivi_forum' => 'A p&aacute;xina de <I>seguemento dos foros</I> &eacute; unha ferramenta de xesti&oacute;n do lugar (e non un espazo de discusi&oacute;n ou de redacci&oacute;n). Amosa toda.las contribuci&oacute;ns no foro p&uacute;blico deste artigo e perm&iacute;teche xestionar estas contribuci&oacute;ns.',
 'info_gauche_suivi_forum_2' => 'A p&aacute;xina de <I>seguemento dos foros</I>  &eacute; unha ferramenta de xesti&oacute;n do lugar (e non un espazo de discusi&oacute;n ou de redacci&oacute;n). Amosa todas as contribuci&oacute;ns nos foros do lugar, tanto as do espazo p&uacute;blico coma as do espazo privado e perm&iacute;teche xestionar estas contribuci&oacute;ns.',
-'info_gauche_visiteurs_enregistres' => 'eiqu&iacute; atopar&aacute;s as visitas rexistradas
-		no espazo p&uacute;blico do lugar (foros baixo rexistro).',
+'info_gauche_visiteurs_enregistres' => 'aqu&iacute; atopar&aacute;s as visitas rexistradas
+  no espazo p&uacute;blico do web (foros baixo rexistro).',
 'info_generation_miniatures_images' => 'Creaci&oacute;n de miniaturas das imaxes',
 'info_gerer_trad' => 'Crear as ligaz&oacute;ns de traduci&oacute;n ?',
 'info_grand_ecran' => 'Pantaia grande',
@@ -731,7 +731,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_inscription_automatique' => 'Rexistro autom&aacute;tico no equipo de redacci&oacute;n',
 'info_installation_systeme_publication' => 'Instalaci&oacute;n do sistema de publicaci&oacute;n...',
 'info_installer_documents' => 'Podes instalar autom&aacute;ticamente todo.los documentos contidos na pasta<i>upload</i>.',
-'info_installer_ftp' => 'Como administrador/a, podes instalar (por FTP) os ficheiros na pasta /ecrire/upload para pode.las seleccionar directamente eiqu&iacute;.',
+'info_installer_ftp' => 'Como administrador/a, podes instalar (por FTP) os ficheiros no directorio  /ecrire/upload para podelas seleccionar directamente aqu&iacute;.',
 'info_installer_images' => 'Podes instalar imaxes nos formatos PNG, JPEG e GIF.',
 'info_installer_images_dossier' => 'Instalar imaxes na pasta /ecrire/upload para poder selecciona.las.',
 'info_installer_tous_documents' => 'Instalar todo.los documentos',
@@ -809,7 +809,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_nexen_2' => 'A proteci&oacute;n do directorio <tt>ecrire/data/</tt> tense que facer a traverso de',
 'info_nexen_3' => 'o espazo de webmestras/es',
 'info_nexen_4' => 'Crea manualmente a protecci&oacute;n para este directorio
-		(&eacute; necesaria unha parella login/contrasinal).',
+  (&eacute; necesaria unha parella login/chave).',
 'info_nom' => 'Nome',
 'info_nom_destinataire' => 'Nome d@ destinatari@',
 'info_nom_non_utilisateurs_connectes' => 'O teu nome non aparece na lista de persoas conectadas.',
@@ -852,7 +852,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_par_nombre_article' => '(por n&uacute;mero de artigos)',
 'info_par_tri' => '(por @tri@)',
 'info_pas_de_forum' => 'non hai foro',
-'info_passe_trop_court' => 'Contrasinal moi curto.',
+'info_passe_trop_court' => 'Chave moi curta.',
 'info_passes_identiques' => 'Os dous contrasin&aacute;is non son id&eacute;nticos.',
 'info_pense_bete' => 'NOTA',
 'info_pense_bete_ancien' => 'Notas vellas',
@@ -904,7 +904,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_question_utilisation_moteur_recherche' => 'Queres empregar o motor de percura integrado en SPIP?
 		(desactiva.lo acelera o funcionamento do sistema.)',
 'info_qui_attribue_mot_cle' => 'As palabras deste grupo poden ser atribuidas a:',
-'info_racine_site' => 'Ra&iacute;z do lugar',
+'info_racine_site' => 'Ra&iacute;z do web',
 'info_recharger_page' => 'Recarga a p&aacute;xina nuns intres.',
 'info_recherche_auteur_a_affiner' => 'Resultados m&aacute;is que de abondo para "@cherche_auteur@"; por favor, afina a t&uacute;a percura.',
 'info_recherche_auteur_ok' => 'Atopou.se m&aacute;is dunha persoa para "@cherche_auteur@":',
@@ -939,7 +939,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_sauvegarde' => 'Copia de seguridade',
 'info_sauvegarde_articles' => 'Gardar os artigos',
 'info_sauvegarde_articles_sites_ref' => 'Gardar os artigos dos lugares referidos',
-'info_sauvegarde_auteurs' => 'Gardar @s autor@s',
+'info_sauvegarde_auteurs' => 'Gardar os autores',
 'info_sauvegarde_breves' => 'Gardar as breves',
 'info_sauvegarde_documents' => 'Gardar os documentos',
 'info_sauvegarde_echouee' => 'Se a copia de seguridade fallou (&laquo;Maximum execution time exceeded&raquo;),',
@@ -958,7 +958,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_sauvegarde_sites_references' => 'Gardar os lugares referidos',
 'info_sauvegarde_type_documents' => 'Gardar os tipos de documentos',
 'info_sauvegarde_visites' => 'Gardar as visitas',
-'info_selection_chemin_acces' => '<b>Selecciona</b> eiqu&iacute; a ruta de acceso &aacute; gu&iacute;a:',
+'info_selection_chemin_acces' => '<b>Selecciona</b> aqu&iacute; a v&iacute;a de acceso &aacute; gu&iacute;a:',
 'info_selection_un_seul_mot_cle' => 'Neste grupo p&oacute;dese seleccionar <b>s&oacute; unha palabra chave</b> &oacute; mesmo tempo.',
 'info_selectionner_fichier' => 'Podes seleccionar un ficheiro do directorio <i>upload</i>',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
@@ -972,7 +972,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_site_reference_2' => 'Lugar referido',
 'info_site_refuse' => 'Lugar web rexeitado',
 'info_site_syndique' => 'Este lugar est&aacute; afiliado...',
-'info_site_valider' => 'Lugares &aacute; validar',
+'info_site_valider' => 'Webs por validar',
 'info_site_web' => 'LUGAR WEB:',
 'info_sites' => 'lugares',
 'info_sites_lies_mot' => 'Os lugares referidos ligados a esta palabra chave',
@@ -990,7 +990,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_statut_site_2' => 'Publicado',
 'info_statut_site_3' => 'Proposto',
 'info_statut_site_4' => 'No lixo',
-'info_statut_utilisateurs_1' => 'Categor&iacute;a por defecto de usuari@s importad@s',
+'info_statut_utilisateurs_1' => 'Categor&iacute;a por defecto de redactores importados',
 'info_statut_utilisateurs_2' => 'Escolle a categor&iacute;a que han ter as persoas presentes na gu&iacute;a LDAP cando se conecten por primeira vez. M&aacute;is tarde poder&aacute;s trocar este valor caso por caso.',
 'info_suivi_activite' => 'Seguemento da actividade editorial',
 'info_supprimer_mot' => 'suprimir esta palabra',
@@ -1002,7 +1002,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_symbole_vert' => 'A icona <B>verde</B> indica as <B>mensaxes intercambiadas con outras persoas</B> do lugar.',
 'info_syndication' => 'afiliaci&oacute;n:',
 'info_syndication_articles' => 'artigo(s)',
-'info_taille_maximale_vignette' => 'Tama&ntilde;o m&aacute;ximo das vi&ntilde;etas xeradas po.lo sistema:',
+'info_taille_maximale_vignette' => 'Tama&ntilde;o m&aacute;ximo das vi&ntilde;etas xeradas polo sistema:',
 'info_telecharger' => 'Subir dende a t&uacute;a computadora:',
 'info_telecharger_nouveau_logo' => 'Subir un novo logo:',
 'info_telecharger_ordinateur' => 'Subir dende a t&uacute;a computadora:',
@@ -1017,12 +1017,12 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_total' => 'total:',
 'info_tous_articles_en_redaction' => 'Todo.los artigos en proceso de redacci&oacute;n',
 'info_tous_articles_presents' => 'Todo.los artigos publicados neste tema',
-'info_tous_les' => 'tod@s @s:',
+'info_tous_les' => 'todos os:',
 'info_tous_redacteur' => 'Anuncios a toda a redacci&oacute;n',
 'info_tous_redacteurs' => 'Anuncios a toda a redacci&oacute;n',
 'info_tous_resultats_enregistres' => '[todo.los resultados foron rexistrados]',
 'info_tout_afficher' => 'Amosar todo',
-'info_tout_site' => 'Todo o lugar',
+'info_tout_site' => 'Todo o web',
 'info_tout_site1' => 'Lingua do artigo.',
 'info_tout_site2' => 'O artigo non foi traducido nesta lingua.',
 'info_tout_site3' => 'O artigo foi traducido nesta lingua, pero as modificaci&oacute;ns foron aplicadas polo momento ao artigo de referencia. A traduci&oacute;n debe ser posta ao d&iacute;a.',
@@ -1150,7 +1150,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'lien_nouvelle_recuperation' => 'Tentar unha nova recuperaci&oacute;n dos datos',
 'lien_petitions' => 'PETICI&Oacute;N',
 'lien_popularite' => 'popularidade: @popularite@%',
-'lien_racine_site' => 'RA&Iacute;Z DO LUGAR',
+'lien_racine_site' => 'RA&Iacute;Z DO WEB',
 'lien_reessayer' => 'reintentar',
 'lien_rendez_vous' => 'UNHA CITA',
 'lien_rendez_vous_02' => '@total_messages@ CITA',
@@ -1183,20 +1183,20 @@ cunha cor que indica o seu estado&nbsp;:',
 'login_cookie_accepte' => 'Axusta o teu navegador para que as acepte (a.lo menos para este lugar).',
 'login_cookie_oblige' => 'Para indentificar.te dun xeito seguro neste lugar, tes que aceptar as cookies.',
 'login_deconnexion_ok' => 'Desconect&aacute;ches.te ben.',
-'login_erreur_pass' => 'Erro no contrasinal.',
+'login_erreur_pass' => 'Erro na chave.',
 'login_espace_prive' => 'Espazo privado',
 'login_identifiant_inconnu' => 'O identificador &laquo; @login@ &raquo; &eacute; desco&ntilde;ecido.',
 'login_identification' => 'Identificaci&oacute;n',
 'login_login' => 'Login:',
 'login_login2' => 'Login (identificador de conexi&oacute;n &oacute; lugar):',
-'login_login_pass_incorrect' => '(Login ou contrasinal incorrectos.)',
-'login_motpasseoublie' => 'esqueciches o contrasinal?',
+'login_login_pass_incorrect' => '(Login ou chave incorrectos.)',
+'login_motpasseoublie' => 'esqueceu a chave?',
 'login_non_securise' => 'Atenci&oacute;n, este formulario non &eacute; seguro.
   Se non quere que a s&uacute;a chave poida ser interceptada
   na rede, active o Javascript no seu navegador e',
 'login_nouvelle_tentative' => 'Nova tentativa',
-'login_par_ici' => 'Xa te rexistraches... por eiqu&iacute;...',
-'login_pass2' => 'Contrasinal:',
+'login_par_ici' => 'Xa se rexistrou... por aqu&iacute;...',
+'login_pass2' => 'Chave&nbsp;:',
 'login_preferez_refuser' => '<b>Se prefires non usar as cookies</b>, tes outro m&eacute;todo de conexi&oacute;n (menos seguro) &aacute; t&uacute;a disposici&oacute;n:',
 'login_recharger' => 'recargar a p&aacute;xina',
 'login_rester_identifie' => 'Gardar a identificaci&oacute;n alg&uacute;ns d&iacute;as',
@@ -1206,7 +1206,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'login_sans_cookiie' => 'Identificaci&oacute;n sen cookie',
 'login_sinscrire' => 'rexistrar.se',
 'login_test_navigateur' => 'proba navegador/reconexi&oacute;n',
-'login_verifiez_navigateur' => '(De todo.los xeitos, comproba que o teu navegador non memorizou o teu contrasinal...)',
+'login_verifiez_navigateur' => '(De todos os xeitos, comprobe que o seu navegador non memorizou a s&uacute;a chave...)',
 'logo_article' => 'LOGO DO ARTIGO',
 'logo_auteur' => 'LOGO DESTA PERSOA',
 'logo_breve' => 'LOGO DA BREVE',
@@ -1246,7 +1246,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'menu_aide_installation_choix_base' => 'Elixe a t&uacute;a base',
 'menu_aide_installation_connexion_mysql' => 'A t&uacute;a conexi&oacute;n MySQL',
 'menu_aide_installation_ftp' => 'V&eacute;rificaci&oacute;n por FTP',
-'menu_aide_installation_informations_personnelles' => 'Informaci&oacute;ns perso&aacute;is',
+'menu_aide_installation_informations_personnelles' => 'Informaci&oacute;n persoal',
 'menu_aide_installation_probleme_squelette' => 'Un problema do esquelete (artrose ;)?',
 'menu_aide_installation_reactuliser_droits' => 'Regular os direitos de acceso',
 'menu_aide_installation_spip' => 'Instalaci&oacute;n de SPIP',
@@ -1258,7 +1258,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'menu_aide_messagerie_calendrier' => 'O calendario',
 'menu_aide_messagerie_configuration_perso' => 'Configuraci&oacute;n persoal da mensaxer&iacute;a',
 'menu_aide_messagerie_pense_bete' => 'As notas',
-'menu_aide_messagerie_utilisateurs' => 'As mensaxes entre usuari@s',
+'menu_aide_messagerie_utilisateurs' => 'As mensaxes entre usuarios',
 'menu_aide_mots_cles' => 'As palabras chave',
 'menu_aide_mots_cles_groupes' => 'Os grupos de palabras',
 'menu_aide_mots_cles_mots_cles' => 'As palabras chave',
@@ -1271,7 +1271,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'menu_aide_sites_articles_syndiques' => 'Artigos afiliados',
 'menu_aide_sites_proxy' => 'Empregar un proxy',
 'menu_aide_sites_referencer' => 'Referir un lugar',
-'menu_aide_sites_syndiquer' => 'lugares afiliados',
+'menu_aide_sites_syndiquer' => 'webs afiliados',
 'menu_aide_suivi_forum' => 'Seguemento dos foros',
 'menu_aide_suivi_forum_articles_postes' => 'Artigos con data posterior',
 'menu_aide_suivi_forum_configuration' => 'Configuraci&oacute;n do web',
@@ -1325,7 +1325,7 @@ cunha cor que indica o seu estado&nbsp;:',
 
 
 // P
-'pass_choix_pass' => 'Elixe o teu novo contrasinal:',
+'pass_choix_pass' => 'Elixa s&uacute;a nova chave:',
 'pass_erreur' => 'Erro',
 'pass_erreur_acces_refuse' => '<b>Erro:</b> xa non tes acceso a este lugar.',
 'pass_erreur_code_inconnu' => '<b>Erro:</b> este c&oacute;digo non se corresponde con ningu&eacute;n con acceso a este lugar.',
@@ -1337,32 +1337,32 @@ cunha cor que indica o seu estado&nbsp;:',
 		poder&aacute;s consultar os artigos en proceso de redacci&oacute;n,
 		propor novos artigos e participar en todo.los foros.',
 'pass_forum_bla' => 'Solicitaches participar nun foro reservado as persoas rexistradas.',
-'pass_indiquez_cidessous' => 'Indica eiqu&iacute; enbaixo o enderezo do e-mail co que te
-		rexistraras. Recibir&aacute;s un correo indic&aacute;ndo.te os pasos a seguer para
-		recuperar o teu acceso.',
+'pass_indiquez_cidessous' => 'Indica aqu&iacute; embaixo o enderezo do e-mail co que se
+  rexistrara. Recibir&aacute; un correo indic&aacute;ndolle os pasos a seguir para
+  recuperar o seu acceso.',
 'pass_mail_passcookie' => '(esta &eacute; unha mensaxe autom&aacute;tica)
-Para recuperar o teu acceso &aacute;
+Para recuperar o seu acceso a
 @nom_site_spip@ (@adresse_site@)
 
-Dir&iacute;xete o seguinte enderezo:
+Dir&iacute;xase ao seguinte enderezo:
 
 
-		   @adresse_site@/spip_pass.php3?p=@cookie@
+     @adresse_site@/spip_pass.php3?p=@cookie@
 
-Daquela, poder&aacute;s elexir un novo contrasinal
-e reconectar co lugar.
+Daquela, poder&aacute; elixir unha nova chave
+e reconectar co web.
 
 ',
-'pass_mot_oublie' => 'Contrasinal esquencido',
-'pass_nouveau_enregistre' => 'O teu novo contrasinal foi rexistrado.',
-'pass_nouveau_pass' => 'Novo contrasinal',
+'pass_mot_oublie' => 'Chave esquecida',
+'pass_nouveau_enregistre' => 'A s&uacute;a nova chave foi rexistrada.',
+'pass_nouveau_pass' => 'Nova chave',
 'pass_ok' => 'ben',
-'pass_oubli_mot' => 'Contrasinal esquencido',
+'pass_oubli_mot' => 'Chave esquecida',
 'pass_quitter_fenetre' => 'Pechar esta xanela',
 'pass_rappel_login' => 'Lembra: o teu identificador (login) &eacute; &laquo; @login@ &laquo;.',
 'pass_recevoir_mail' => 'Recibir&aacute;s un correo indic&aacute;ndote os pasos a seguir para recuperar o teu acceso.',
 'pass_retour_public' => 'Volver &oacute; lugar p&uacute;blico',
-'pass_rien_a_faire_ici' => 'Non hai nada que facer eiqu&iacute;.',
+'pass_rien_a_faire_ici' => 'Non hai nada que facer aqu&iacute;.',
 'pass_vousinscrire' => 'Rex&iacute;stra.te neste lugar',
 
 
@@ -1375,7 +1375,7 @@ e reconectar co lugar.
 'taille_ko' => '@taille@ KB',
 'taille_mo' => '@taille@ MB',
 'taille_octets' => '@taille@ bytes',
-'text_article_propose_publication' => 'Artigo proposto para a publicaci&oacute;n. Non dubides en deixar un aviso no foro que leva engadido este artigo (enbaixo da p&aacute;xina).',
+'text_article_propose_publication' => 'Artigo proposto para a publicaci&oacute;n. Non dubides en deixar un aviso no foro que leva engadido este artigo (embaixo da p&aacute;xina).',
 'texte_acces_ldap_anonyme_1' => 'Alg&uacute;ns servidores LDAP non aceptan neng&uacute;n acceso an&oacute;nimo. En tal caso hai que especificar un identificador de acceso inicial para poder percurar informaci&oacute;ns na gu&iacute;a. Na meirande parte dos casos poder&aacute;s deixar os seguintes campos valeiros.',
 'texte_actualite_site_1' => 'Esta p&aacute;xina rem&iacute;te.se a actualidade do lugar e perm&iacute;teche seguir a t&uacute;a contribuci&oacute;n. Nela topar&aacute;s os teus artigos en proceso de redacci&oacute;n, os artigos e as breves nos que fuches invitad@ a &aacute;portar a t&uacute;a opini&oacute;n, am&aacute;is dun resumo das t&uacute;as contribuci&oacute;ns anteriores.<p><hr><p>Cando xa esteas familiarizad@ coa interface, poder&aacute;s clicar sobre &laquo;',
 'texte_actualite_site_2' => 'interface completa',
@@ -1395,14 +1395,14 @@ e reconectar co lugar.
 'texte_adresse_annuaire_1' => '(Se a t&uacute;a gu&iacute;a foi aloxada na mesma m&aacute;quina queste
 		lugar web, seguramente ser&aacute; &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => '@ seguinte autor/a foi engadid@ &oacute; artigo:',
-'texte_annuaire_ldap_1' => 'Se tes acceso a unha gu&iacute;a (LDAP), pode.la empregar para importar
-		autom&aacute;ticamente usu&aacute;ri@s no SPIP.',
+'texte_annuaire_ldap_1' => 'Se ten acceso a unha gu&iacute;a (LDAP), p&oacute;dea empregar para importar
+  automaticamente usuarios con SPIP.',
 'texte_article_statut' => 'Este artigo est&aacute;:',
 'texte_article_virtuel' => 'Artigo virtual',
-'texte_article_virtuel_reference' => '<b>Artigo virtual:</b> artigo referido no teu lugar SPIP,
-		mais redirixido cara a outra URL. Para eliminar a redirecci&oacute;n, elimina a URL eiqu&iacute;.',
+'texte_article_virtuel_reference' => '<b>Artigo virtual:</b> artigo referido no teu web SPIP,
+  mais redirixido cara a outro URL. Para eliminar a redirecci&oacute;n, elimina o URL aqu&iacute;.',
 'texte_aucun_resultat_auteur' => 'Neng&uacute;n resultado para "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Este lugar pode indicar permanentemente a lista dos redactores/as conectad@s, o que lle permite intercambiar mensaxes en directo (cando a mensaxer&iacute;a est&aacute; desactivada embaixo, a lista d@s redactoras/es estar&aacute; igualmente desactivada). Pode decidir non aparecer nesta lista (ser&aacute; &laquo;invisible&raquo; para @s dem&aacute;is).',
+'texte_auteur_messagerie' => 'Este lugar pode indicar permanentemente a lista dos redactores conectados, o que lle permite intercambiar mensaxes en directo (cando a mensaxer&iacute;a est&aacute; desactivada embaixo, a lista de redactoras estar&aacute; igualmente desactivada). Pode decidir non aparecer nesta lista (ser&aacute; &laquo;invisible&raquo; para os demais).',
 'texte_auteur_messagerie_1' => 'Este lugar permite o intercambio de mensaxes e a constituci&oacute;n de foros de discusi&oacute;n privados entre os participantes do lugar. Podes decidir non participar nestas lerias',
 'texte_auteurs' => 'A AUTOR&Iacute;A',
 'texte_bilan_traductions' => 'Nesta gr&aacute;fica, as barras verdes representan os artigos traducidos e actualizados, as barras vermellas as traduci&oacute;ns antes de seren actualizadas.',
@@ -1411,7 +1411,7 @@ e reconectar co lugar.
 		revista de prensa, un calendario de eventos...',
 'texte_choix_base_1' => 'Elixe a t&uacute;a base:',
 'texte_choix_base_2' => 'O servidor MySQL cont&eacute;n v&aacute;rias bases de datos.',
-'texte_choix_base_3' => '<B>Selecciona</B> eiqu&iacute; a que che dera o teu proveedor:',
+'texte_choix_base_3' => '<B>Selecciona</B> aqu&iacute; a que che dera o teu provedor:',
 'texte_choix_langue_defaut' => 'Escolle eiqu&iacute; enbaixo a lingua por defecto do teu lugar, as&iacute; como os idiomas que ser&aacute;n propostos para redactar.',
 'texte_commande_vider_tables_indexation' => 'emprega este comando para valeirar as t&aacute;boas
 		de indexado empregadas polo motor de percura integrado no Spip.
@@ -1447,12 +1447,12 @@ e reconectar co lugar.
 		mais non foron inseridos directamente. Dependendo do formato da p&aacute;xina no lugar p&uacute;blico,
 		poder&aacute;n aparecer en forma de documentos adxuntos.',
 'texte_documents_joints' => 'Podes autorizar o engadido de documentos (textos, imaxes,
-		multimedia, etc.) &oacute;s artigos e/ou &oacute;s temas. Estes ficheiros
-		poden aparecer referidos no artigo ou amosados por separado.<p>',
+  multimedia, etc.) aos artigos e/ou aos temas. Estes ficheiros
+  poden aparecer referidos no artigo ou amosados por separado.<p>',
 'texte_documents_joints_2' => 'Este axuste non impide a inserci&oacute;n de imaxes directamente nos artigos.',
 'texte_effacer_base' => 'Eliminar a base de datos SPIP',
 'texte_effacer_donnees_indexation' => 'Eliminar os datos de indexaci&oacute;n',
-'texte_en_cours_validation' => 'Estes artigos e as breves deiqu&iacute; enbaixo foron propostos para a s&uacute;a publicaci&oacute;n. Non dubides en deixar un aviso nos foros que levan engadidos.',
+'texte_en_cours_validation' => 'Estes artigos e as breves de aqu&iacute; embaixo foron propostos para a s&uacute;a publicaci&oacute;n. Non dubides en deixar un aviso nos foros que levan engadidos.',
 'texte_enrichir_mise_a_jour' => 'Podes millorar a presentaci&oacute;n do texto empregando os &laquo;atallos tipogr&aacute;ficos&raquo;.',
 'texte_erreur_mise_niveau_base' => 'Erro de base de datos tra.lo axuste.
 		A imaxe <B>@fichier@</B> non foi engadida &oacute; artigo @id_article@).
@@ -1488,15 +1488,15 @@ e reconectar co lugar.
   un xogo de caracteres axeitado. L&eacute;mbrese de adaptar
   o lugar p&uacute;blico en consecuencia (etiqueta <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Este axuste non ten efecto retroactivo. Daquela, os textos
-		existentes p&oacute;den.se presentar incorrectamente logo dunha modificaci&oacute;n eiqu&iacute;. En
-		calqueira caso, poder&aacute;s volver &aacute; configuraci&oacute;n anterior sen estragar nada.',
-'texte_lien_hypertexte' => '(Se a t&uacute;a mensaxe ref&iacute;re.se a un artigo publicado na web, ou a
-		unha p&aacute;xina con m&aacute;is informaci&oacute;ns, indica eiqu&iacute; o t&iacute;tulo da p&aacute;xina e o seu enderezo URL.)',
-'texte_liens_sites_syndiques' => 'As ligaz&oacute;ns procedentes dos lugares afiliados
-		poden ser bloquedas a priori; o axuste eiqu&iacute; en baixo indica a configuraci&oacute;n
-		por defecto dos lugares afiliados logo da sua creaci&oacute;n.
-		De todo.los xeitos despois &eacute; posible desbloquear cada ligaz&oacute;n individu&aacute;lmente,
-		ou escoller, lugar por lugar, o bloqueo das ligaz&oacute;ns futuras de tal ou cal lugar.',
+  existentes p&oacute;dense presentar incorrectamente logo dunha modificaci&oacute;n aqu&iacute;. En
+  calquera caso, poder&aacute;s volver &aacute; configuraci&oacute;n anterior sen estragar nada.',
+'texte_lien_hypertexte' => '(Se a s&uacute;a mensaxe se refire a un artigo publicado no web, ou a
+  unha p&aacute;xina con que forneza m&aacute;is informaci&oacute;n, indica aqu&iacute; o t&iacute;tulo da p&aacute;xina e o seu enderezo URL.)',
+'texte_liens_sites_syndiques' => 'As ligaz&oacute;ns procedentes dos webs afiliados
+  poden ser bloquedas a priori; o axuste aqu&iacute; embaixo indica a configuraci&oacute;n
+  por defecto dos lugares afiliados logo da s&uacute;a creaci&oacute;n.
+  De todos os xeitos despois &eacute; posible desbloquear cada ligaz&oacute;n individualmente,
+  ou escoller, web por webr, o bloqueo das ligaz&oacute;ns futuras de tal ou cal web.',
 'texte_liens_syndication' => 'As seguintes ligaz&oacute;ns que ve&ntilde;an deste lugar
 		ser&aacute;n amosadas inmediatamente no lugar p&uacute;blico.',
 'texte_login_ldap_1' => '(Deixar valeiro para un acceso an&oacute;nimo, ou po&ntilde;er a ruta completa,
@@ -1544,9 +1544,9 @@ e reconectar co lugar.
 'texte_port_annuaire' => '(En xeral, conv&eacute;n po&ntilde;er o valor indicado por defecto.)',
 'texte_proposer_publication' => 'Cando remates o teu artigo,<br>podes propor a s&uacute;a publicaci&oacute;n.',
 'texte_proxy' => 'Nalg&uacute;ns casos (intranet, redes protexidas...), pode ser necesario empregar
-		un <I>proxy HTTP</I> para chegar &oacute;s lugares afiliados. Nese caso, indica eiqu&iacute;
-		enbaixo o seu enderezo, no formato <tt><html>http://proxy:8080</html></tt>.
-		En xeral, deixar&aacute;s esta caixa valeira.',
+  un <I>proxy HTTP</I> para chegar aos lugares afiliados. Nese caso, indica aqu&iacute;
+  embaixo o seu enderezo, no formato <tt><html>http://proxy:8080</html></tt>.
+  En xeral, deixar&aacute;s esta caixa baleira.',
 'texte_publication_articles_post_dates' => 'Qu&eacute; comportamento debe adoptar o SPIP cos artigos nos
 		que a data de publicaci&oacute;n foi fixada no futuro?',
 'texte_rappel_selection_champs' => '[L&eacute;mbrate de seleccionar correctamente este campo.]',
@@ -1554,11 +1554,11 @@ e reconectar co lugar.
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;xina recolle a lista dos documentos introducidos nos temas. Para modificar as informaci&oacute;ns de cada documento, segue a ligaz&oacute;n que vai cara &aacute; p&aacute;xina do seu tema.',
 'texte_recuperer_base' => 'Reparar a base de datos',
 'texte_reference_mais_redirige' => 'artigo referido no teu lugar SPIP, mais redirixido cara a outra URL.',
-'texte_referencement_automatique' => '<b>Referencia automatizada dun lugar</b><br>Podes referir r&aacute;pidamente un lugar web indicando eiqu&iacute; enbaixo o enderezo URL desexado, ou o enderezo do seu ficheiro &laquo;backend&raquo;. SPIP recuperar&aacute; autom&aacute;ticamente as informaci&oacute;ns concernentes a este lugar (t&iacute;tulo, descripci&oacute;n...).',
-'texte_requetes_echouent' => '<b>Cando algunhas petici&oacute;ns MySQL fallan sistem&aacute;ticamente e sen raz&oacute;n aparente, &eacute; posible que a causa sexa a pr&oacute;pia base de datos.</b><p>
-		MySQL ten unha opci&oacute;n de reparaci&oacute;n das s&uacute;as t&aacute;boas cando estas foron danadas por accidente.
-		Eiqu&iacute; podes tentar esta reparaci&oacute;n; en caso de fallo, garda unha copia do resultado, que pode que conte&ntilde;a indicios do que non vai...<p>
-		Se o problema persiste, ponte en contacto co teu proveedor de aloxamento.<p>',
+'texte_referencement_automatique' => '<b>Referencia automatizada dun lugar</b><br>Podes referir r&aacute;pidamente un lugar web indicando aqu&iacute; embaixo o enderezo URL desexado, ou o enderezo do seu ficheiro &laquo;backend&raquo;. SPIP recuperar&aacute; autom&aacute;ticamente as informaci&oacute;ns concernintes a este lugar (t&iacute;tulo, descrici&oacute;n...).',
+'texte_requetes_echouent' => '<b>Cando algunhas petici&oacute;ns MySQL fallan sistem&aacute;ticamente e sen raz&oacute;n aparente, &eacute; posible que a causa sexa a propia base de datos.</b><p>
+  MySQL ten unha opci&oacute;n de reparaci&oacute;n das s&uacute;as t&aacute;boas cando estas foron danadas por accidente.
+  Aqu&iacute; podes tentar esta reparaci&oacute;n; en caso de fallo, garda unha copia do resultado, que pode que conte&ntilde;a indicios do que non vai...<p>
+  Se o problema persiste, ponte en contacto co teu provedor de aloxamento.<p>',
 'texte_restaurer_base' => 'Restaurar o contido dunha copia de seguridade da base',
 'texte_restaurer_sauvegarde' => 'Esta opci&oacute;n perm&iacute;teche restaurar unha copia de seguridade
 		da base feita con anterioridade. Para esto, o ficheiro da copia de seguridade ten que
@@ -1568,11 +1568,11 @@ e reconectar co lugar.
 'texte_sauvegarde' => 'Gardar o contido da base',
 'texte_sauvegarde_base' => 'Gardar a base',
 'texte_sauvegarde_compressee' => 'A copia de seguridade ser&aacute; feita no ficheiro sen comprimir <b>ecrire/data/dump.xml</b>.',
-'texte_selection_langue_principale' => 'Podes seleccionar eiqu&iacute; enbaixo a &laquo;lingua principal&raquo; do lugar. Esta elecci&oacute;n non che obriga (malo ser&iacute;a!) a escreber os teus artigos no idioma seleccionado, mais permite determinar:
-		<ul><li>o formato por defecto das datas no lugar p&uacute;blico;</li>
-		<li>a natureza do motor tipogr&aacute;fico que SPIP ten que empregar para a reproducci&oacute;n dos textos;</li>
-		<li>a lingua empregada nos formul&aacute;rios do lugar p&uacute;blico;</li>
-		<li>a lingua presentada por defecto no espazo privado.</li></ul>',
+'texte_selection_langue_principale' => 'Podes seleccionar aqu&iacute; embaixo a &laquo;lingua principal&raquo; do lugar. Esta elecci&oacute;n non che obriga (malo ser&iacute;a!) a escribir os teus artigos no idioma seleccionado, mais permite determinar:
+  <ul><li>o formato por defecto das datas no lugar p&uacute;blico;</li>
+  <li>a natureza do motor tipogr&aacute;fico que SPIP ten que empregar para a reproduci&oacute;n dos textos;</li>
+  <li>a lingua empregada nos formularios do lugar p&uacute;blico;</li>
+  <li>a lingua presentada por defecto no espazo privado.</li></ul>',
 'texte_signification' => 'As barras bermellas representan as entradas acumuladas (total dos apartados), as barras verdes o n&uacute;mero de visitas para cada tema.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(barras escuras:  domingo / curva escura: evoluci&oacute;n da media)',
@@ -1679,7 +1679,7 @@ e reconectar co lugar.
 'titre_page_admin_vider' => 'Mantemento t&eacute;cnico: xesti&oacute;n da cach&eacute;',
 'titre_page_articles_edit' => 'Modificar: @titre@',
 'titre_page_articles_page' => 'Os artigos',
-'titre_page_articles_tous' => 'Todo o lugar',
+'titre_page_articles_tous' => 'Todo o web',
 'titre_page_auteurs' => 'Visitantes',
 'titre_page_breves' => 'Breves',
 'titre_page_breves_edit' => 'Modificar a breve: &laquo; @titre@ &raquo;',
