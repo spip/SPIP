@@ -38,7 +38,7 @@ if ($p = addslashes($p)) {
 			echo "<input type='hidden' name='p' value='$p'>";
 			echo _T('pass_choix_pass')."<br>\n";
 			echo "<input type='password' name='pass' value=''>";
-			echo "</form>\n";
+			echo '  <input type=submit class="fondl" name="oubli" value="'._T('pass_ok').'"></div></form>';
 			install_fin_html();
 			exit;
 		}
