@@ -60,12 +60,12 @@ if ($new == "oui") {
 	if (($connect_statut=='0minirezo') AND acces_rubrique($id_parent)) {
 		$id_parent = intval($id_parent);
 		$id_rubrique = 0;
-		$titre = "Nouvelle rubrique";
+		$titre = _T('titre_nouvelle_rubrique');
 		$descriptif = "";
 		$texte = "";
 	}
 	else {
-		echo "Acc&egrave;s interdit.";
+		echo _T('avis_acces_interdit');
 		exit;
 	}
 }
@@ -81,7 +81,7 @@ else {
 	}
 }
 
-debut_page("Modifier : $titre", "documents", "rubriques");
+debut_page(_T('info_modifier_titre', array('titre' => $titre)), "documents", "rubriques");
 
 if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 else $ze_logo = "rubrique-24.gif";
@@ -102,7 +102,7 @@ else {
 debut_grand_cadre();
 
 afficher_parents($id_parent);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -125,12 +125,12 @@ echo "<tr width='100%'>";
 echo "<td>";
 
 if ($id_rubrique) icone("Retour", "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
-else icone("Retour", "naviguer.php3?coll=$id_parent", $ze_logo, "rien.gif");
+else icone(_T('icone_retour'), "naviguer.php3?coll=$id_parent", $ze_logo, "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
 echo "<td width='100%'>";
-echo "Modifier la rubrique :";
+echo _T('info_modifier_rubrique');
 gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
@@ -145,17 +145,17 @@ if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
 $titre = entites_html($titre);
 
-echo "<B>Titre</B> [Obligatoire]<BR>";
+echo _T('entree_titre_obligatoire');
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
 
 
 debut_cadre_relief("$logo_parent");
-echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
+echo "<B>"._T('entree_interieur_rubrique')."</B> ".aide ("rubrub")."<BR>\n";
 echo "<SELECT NAME='id_parent' style='background-color:#ffffff; font-size:90%; font-face:verdana,arial,helvetica,sans-serif;' class='forml' SIZE='1'>\n";
 if ($connect_toutes_rubriques) {
-	echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>Racine du site\n";
+	echo "<OPTION".mySel("0",$id_parent)." style='background-color:$couleur_foncee; font-weight:bold; color:white;'>"._T('info_racine_site')."\n";
 } else {
-	echo "<OPTION".mySel("0",$id_parent).">Ne pas d&eacute;placer...\n";
+	echo "<OPTION".mySel("0",$id_parent).">"._T('info_non_deplacer')."\n";
 }
 // si le parent ne fait pas partie des rubriques restreintes, modif impossible
 if (acces_rubrique($id_parent)) {
@@ -168,7 +168,8 @@ $query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubriq
 $row = spip_fetch_array(spip_query($query));
 $contient_breves = $row['cnt'];
 if ($contient_breves > 0) {
-	echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
+        $scb = ($contient_breves>1? 's':'');
+	echo "<br><font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme-deplace'><label for='confirme-deplace'>&nbsp;"._T('avis_deplacement_rubrique', array('contient_breves' => $contient_breves, 'scb' => $scb))."</font></label>\n";
 }
 fin_cadre_relief();
 
@@ -176,8 +177,8 @@ echo "<P>";
 
 
 if ($options == "avancees" OR $descriptif) {
-	echo "<B>Descriptif rapide</B><BR>";
-	echo "(Contenu de la rubrique en quelques mots.)<BR>";
+	echo "<B>"._T('texte_descriptif_rapide')."</B><BR>";
+	echo _T('entree_contenu_rubrique')."<BR>";
 	echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='7' COLS='40' wrap=soft>";
 	echo $descriptif;
 	echo "</TEXTAREA><P>\n";
@@ -186,13 +187,13 @@ else {
 	echo "<INPUT TYPE='Hidden' NAME='descriptif' VALUE=\"".entites_html($descriptif)."\">";
 }
 
-echo "<B>Texte explicatif</B>";
+echo "<B>"._T('info_texte_explicatif')."</B>";
 echo aide ("raccourcis");
 echo "<BR><TEXTAREA NAME='texte' ROWS='25' CLASS='forml' COLS='40' wrap=soft>";
 echo $texte;
 echo "</TEXTAREA>\n";
 
-echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</FORM>";
 fin_cadre_formulaire();
 

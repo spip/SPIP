@@ -86,7 +86,7 @@ debut_boite_info();
 
 echo "<CENTER>";
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>AUTEUR NUM&Eacute;RO&nbsp;:</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('info_gauche_numero_auteur')."&nbsp;:</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_auteur</B></FONT>";
 echo "</CENTER>";
 
@@ -123,16 +123,16 @@ function mySel($varaut,$variable) {
 			debut_cadre_formulaire();
 		
 			echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-			echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Messagerie interne</FONT></B>".aide ("messconf")."</TD></TR>";
+			echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_messagerie_interne')."</FONT></B>".aide ("messconf")."</TD></TR>";
 			echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>Ce site permet l'&eacute;change de messages et la constitution de forums de discussion priv&eacute;s entre les participants du site. Vous pouvez d&eacute;cider de ne pas participer &agrave; ces &eacute;changes.</FONT>";
+			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>"._T('texte_auteur_messagerie_1')."</FONT>";
 			echo "</TD></TR>";
 
 			echo "<TR><TD>&nbsp;</TD></TR>";
-			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Messagerie interne</FONT></B></TD></TR>";
+			echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_messagerie_interne')."</FONT></B></TD></TR>";
 
 			echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Vous pouvez activer ou d&eacute;sactiver votre messagerie personnelle sur ce site.</FONT>";
+			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"._T('info_desactiver_messagerie_personnelle')."</FONT>";
 			echo "</TD></TR>";
 
 
@@ -140,14 +140,14 @@ function mySel($varaut,$variable) {
 			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 			if ($messagerie=="non"){
 				echo "<INPUT TYPE='radio' NAME='perso_activer_messagerie' VALUE='oui' id='perso_activer_messagerie_on'>";
-				echo " <label for='perso_activer_messagerie_on'>Activer la messagerie interne</label> ";
+				echo " <label for='perso_activer_messagerie_on'>"._T('bouton_radio_activer_messagerie_interne')."</label> ";
 				echo "<BR><INPUT TYPE='radio' NAME='perso_activer_messagerie' VALUE='non' CHECKED id='perso_activer_messagerie_off'>";
-				echo " <B><label for='perso_activer_messagerie_off'>D&eacute;sactiver la messagerie</label></B> ";
+				echo " <B><label for='perso_activer_messagerie_off'>"._T('bouton_radio_desactiver_messagerie')."</label></B> ";
 			}else{
 				echo "<INPUT TYPE='radio' NAME='perso_activer_messagerie' VALUE='oui' id='perso_activer_messagerie_on' CHECKED>";
-				echo " <B><label for='perso_activer_messagerie_on'>Activer la messagerie interne</label></B> ";
+				echo " <B><label for='perso_activer_messagerie_on'>"._T('bouton_radio_activer_messagerie')."</label></B> ";
 				echo "<BR><INPUT TYPE='radio' NAME='perso_activer_messagerie' VALUE='non' id='perso_activer_messagerie_off'>";
-				echo " <label for='perso_activer_messagerie_off'>D&eacute;sactiver la messagerie</label> ";
+				echo " <label for='perso_activer_messagerie_off'>"._T('bouton_radio_desactiver_messagerie')."</label> ";
 			}
 
 			echo "</FONT>";
@@ -159,25 +159,25 @@ function mySel($varaut,$variable) {
 					/// Liste des redacteurs connectes
 
 					echo "<TR><TD>&nbsp;</TD></TR>";
-					echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Liste des r&eacute;dacteurs connect&eacute;s</FONT></B></TD></TR>";
+					echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_liste_redacteurs_connectes')."</FONT></B></TD></TR>";
 
 					echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>Ce site peut vous indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce qui vous permet d'&eacute;changer des messages en direct (lorsque la messagerie est d&eacute;sactiv&eacute;e ci-dessus, la liste des r&eacute;dacteurs est elle-m&ecirc;me d&eacute;sactiv&eacute;e). Vous pouvez d&eacute;cider de ne pas appara&icirc;tre dans cette liste (vous &ecirc;tes &laquo;invisible&raquo; pour les autres utilisateurs).</FONT>";
+					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"._T('texte_auteur_messagerie')."</FONT>";
 					echo "</TD></TR>";
 
 					echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
 					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 					if ($imessage=="non"){
 						echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on'>";
-						echo " <label for='perso_activer_imessage_on'>Appara&icirc;tre dans la liste des r&eacute;dacteurs connect&eacute;s</label> ";
+						echo " <label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label> ";
 						echo "<BR><INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' CHECKED id='perso_activer_imessage_off'>";
-						echo " <B><label for='perso_activer_imessage_off'>Ne pas appara&icirc;tre dans la liste des r&eacute;dacteurs</label></B> ";
+						echo " <B><label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label></B> ";
 					}else{
 						echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on' CHECKED>";
-						echo " <B><label for='perso_activer_imessage_on'>Appara&icirc;tre dans la liste des r&eacute;dacteurs connect&eacute;s</label></B> ";
+						echo " <B><label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label></B> ";
 
 						echo "<BR><INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' id='perso_activer_imessage_off'>";
-						echo " <label for='perso_activer_imessage_off'>Ne pas appara&icirc;tre dans la liste des r&eacute;dacteurs</label> ";
+						echo " <label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label> ";
 					}
 					echo "</FONT>";
 					echo "</TD></TR>\n";
@@ -186,7 +186,7 @@ function mySel($varaut,$variable) {
 			echo "</TABLE>\n";
 		}
 
-		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></DIV>";
+		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></DIV>";
 
 		fin_cadre_formulaire();
 

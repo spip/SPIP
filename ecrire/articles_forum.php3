@@ -22,7 +22,7 @@ debut_page($titre, "documents", "articles");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -39,7 +39,7 @@ debut_gauche();
 debut_boite_info();
 
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
-echo "<P align=left>".propre("La page de {suivi des forums} est un outil de gestion de votre site (et non un espace de discussion ou de r&eacute;daction). Elle affiche toutes les contributions du forum public de cet article et vous permet de g&eacute;rer ces contributions.");
+echo "<P align=left>"._T('info_gauche_suivi_forum');
 
 echo aide ("suiviforum");
 echo "</FONT>";
@@ -53,12 +53,12 @@ debut_droite();
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone("Retour", "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
+	icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
 echo "<td width='100%'>";
-echo "Messages publics de l'article :";
+echo _T('texte_messages_publics');
 gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";

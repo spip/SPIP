@@ -512,7 +512,7 @@ function recup_date($numdate){
 }
 
 
-function affdate_base($numdate, $vue) {
+function affdate_base($numdate, $vue) { 
 	global $lang;
 	$date_array = recup_date($numdate);
 	if ($date_array)
@@ -522,14 +522,14 @@ function affdate_base($numdate, $vue) {
 
 	if ($mois > 0){
 		$saison = "hiver";
-		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = "printemps";
-		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = unicode2charset("&#233;t&#233;");
-		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = "automne";
-		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = "hiver";
+		if (($mois == 3 AND $jour >= 21) OR $mois > 3) $saison = _T('item_printemps');
+		if (($mois == 6 AND $jour >= 21) OR $mois > 6) $saison = unicode2charset(_T('item_ete'));
+		if (($mois == 9 AND $jour >= 21) OR $mois > 9) $saison = _T('item_automne');
+		if (($mois == 12 AND $jour >= 21) OR $mois > 12) $saison = _T('item_hiver');
 	}
 	
 	if ($lang == "fr") {
-		if ($jour == '1') $jour = '1er';
+		if ($jour == '1') $jour = _T('item_premier');
 		$tab_mois = array('',
 			'janvier', "f&eacute;vrier", 'mars', 'avril', 'mai', 'juin',
 			'juillet', "ao&ucirc;t", 'septembre', 'octobre', 'novembre', "d&eacute;cembre");
@@ -596,7 +596,7 @@ function affdate_base($numdate, $vue) {
 		return "$mois $annee";
 	}
 
-	return '<blink>format non d&eacute;fini</blink>';
+	return "<blink>"._T('info_format_non_defini')."</blink>";
 }
 
 function nom_jour($numdate) {

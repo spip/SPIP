@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 
-debut_page("Les articles", "documents", "articles");
+debut_page(_T('titre_page_articles_page'), "documents", "articles");
 
 debut_gauche();
 
@@ -15,13 +15,13 @@ $result = spip_query($query);
 
 if (spip_num_rows($result) > 0) {
 	debut_raccourcis();
-	icone_horizontale ("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.gif", "creer.gif");
+	icone_horizontale (_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif", "creer.gif");
 	fin_raccourcis();
 }
 else {
 	if ($connect_statut == '0minirezo') {
-		echo "Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er une rubrique.";
-		icone_horizontale ("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav", "rubrique-24.gif", "creer.gif");
+		echo _T('texte_creer_rubrique');
+		icone_horizontale (_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "rubrique-24.gif", "creer.gif");
 	}
 }
 
@@ -35,7 +35,7 @@ debut_droite();
 //
 
 echo "<P align=left>";
-afficher_articles("Vos articles en cours de r&eacute;daction",
+afficher_articles(_T('info_en_cours_validation'),
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
@@ -48,7 +48,7 @@ afficher_articles("Vos articles en cours de r&eacute;daction",
 //
 
 echo "<p>";
-afficher_articles("Vos articles en attente de validation",
+afficher_articles(_T('info_attente_validation'),
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop' ORDER BY articles.date");
@@ -59,7 +59,7 @@ afficher_articles("Vos articles en attente de validation",
 //
 
 echo "<p>";
-afficher_articles("Vos articles publi&eacute;s en ligne",
+afficher_articles(_T('info_publies'),
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
@@ -69,7 +69,7 @@ afficher_articles("Vos articles publi&eacute;s en ligne",
 //
 
 echo "<p>";
-afficher_articles("Vos articles refus&eacute;s",
+afficher_articles(_T('info_refuses'),
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"refuse\" ORDER BY articles.date DESC");

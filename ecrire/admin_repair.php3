@@ -33,10 +33,12 @@ function verifier_base() {
 			return false;
 
 		list($count) = spip_fetch_row($result);
-		if ($count)
-			echo "($count &eacute;l&eacute;ment".($count>1 ? 's':'').")\n";
+		if ($count>1)
+			echo "("._T('texte_compte_elements', array('count' => $count)).")\n";
+		if ($count==1)
+			echo "("._T('texte_compte_element', array('count' => $count)).")\n";
 		else
-			echo "(vide)\n";
+			echo "("._T('texte_vide').")\n";
 
 		$row = spip_fetch_row($result_repair);
 		$ok = ($row[3] == 'OK');
@@ -44,7 +46,7 @@ function verifier_base() {
 		if (!$ok)
 			echo "<pre><font color='red'><b>".htmlentities(join("\n", $row))."</b></font></pre>\n";
 		else
-			echo " : cette table est OK.<br>\n";
+			echo _T('texte_table_ok')."<br>\n";
 
 	}
 
@@ -53,39 +55,29 @@ function verifier_base() {
 
 // verifier version MySQL
 if (! $res1= spip_query("SELECT version()"))
-	$message = "Erreur de connexion MySQL";
+	$message = _T('avis_erreur_connexion_mysql');
 else {
 	$tab = spip_fetch_row($res1);
 	$version_mysql = $tab[0];
 	if ($version_mysql < '3.23.14')
-		$message = "Votre version de MySQL ($version_mysql) ne permet pas l'auto-r&eacute;paration des tables de la base.";
+		$message = _T('avis_version_mysql', array('version_mysql' => $version_mysql));
 	else {
-		$message = "{{Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
-		syst&eacute;matiquement et sans raison apparente, il est possible
-		que ce soit &agrave; cause de la base de donn&eacute;es
-		elle-m&ecirc;me.}}\n\n
-		MySQL dispose d'une facult&eacute; de r&eacute;paration de ses
-		tables lorsqu'elles ont &eacute;t&eacute; endommag&eacute;es par
-		accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
-		cas d'&eacute;chec, conservez une copie de l'affichage, qui contient
-		peut-&ecirc;tre des indices de ce qui ne va pas...\n\n
-		Si le probl&egrave;me persiste, prenez contact avec votre
-		h&eacute;bergeur.\n";
+		$message = _T('texte_requetes_echouent');
 		$ok = true;
 	}
 }
 
-$action = "Tenter une r&eacute;paration de la base de donn&eacute;es";
+$action = _T('texte_tenter_reparation');
 
 if ($ok) {
 	debut_admin($action, $message);
 
-	install_debut_html("Tentative de r&eacute;paration");
+	install_debut_html(_T('texte_tentative_recuperation'));
 
 
 	debut_cadre_relief();
 	if (! verifier_base())
-		echo "<br><br><font color='red'><b><tt>Erreur MySQL ". spip_sql_errno().": ".spip_sql_error() ."</tt></b></font><br><br>\n";
+		echo "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql'). spip_sql_errno().": ".spip_sql_error() ."</tt></b></font><br><br>\n";
 	fin_cadre_relief();
 	echo "<br>";
 
@@ -94,7 +86,7 @@ if ($ok) {
 	fin_admin($action);
 }
 else {
-	install_debut_html("R&eacute;paration");
+	install_debut_html(_T('titre_reparation'));
 	echo "<p>$message";
 	install_fin_html();
 }

@@ -57,11 +57,11 @@ if ($id_article) {
 }
 else if ($new=='oui') {
 	$flag_editable = true;
-	$titre = 'Nouvel article';
+	$titre = _T('info_nouvel_article');
 }
 
 if (!$flag_editable) {
-	die ("<H3>Acc&egrave;s interdit</H3>");
+	die ("<H3>"._T('info_acces_interdit')."</H3>");
 }
 
 if ($id_article && $id_document) {
@@ -110,13 +110,13 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 }
 
 
-debut_page("Modifier : $titre", "documents", "articles");
+debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles");
 
 
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -165,18 +165,18 @@ function my_sel($num,$tex,$comp){
 }
 
 function afficher_mois($mois){
-	my_sel("01","janvier",$mois);
-	my_sel("02","f&eacute;vrier",$mois);
-	my_sel("03","mars",$mois);
-	my_sel("04","avril",$mois);
-	my_sel("05","mai",$mois);
-	my_sel("06","juin",$mois);
-	my_sel("07","juillet",$mois);
-	my_sel("08","ao&ucirc;t",$mois);
-	my_sel("09","septembre",$mois);
-	my_sel("10","octobre",$mois);
-	my_sel("11","novembre",$mois);
-	my_sel("12","d&eacute;cembre",$mois);
+	my_sel("01",_T('mois_janvier'),$mois);
+	my_sel("02",_T('mois_fevrier'),$mois);
+	my_sel("03",_T('mois_mars'),$mois);
+	my_sel("04",_T('mois_avril'),$mois);
+	my_sel("05",_T('mois_mai'),$mois);
+	my_sel("06",_T('mois_juin'),$mois);
+	my_sel("07",_T('mois_juillet'),$mois);
+	my_sel("08",_T('mois_aout'),$mois);
+	my_sel("09",_T('mois_septembre'),$mois);
+	my_sel("10",_T('mois_octobre'),$mois);
+	my_sel("11",_T('mois_novembre'),$mois);
+	my_sel("12",_T('mois_decembre'),$mois);
 }
 
 function afficher_jour($jour){
@@ -256,12 +256,12 @@ function enfant($leparent){
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone("Retour", "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
+	icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
 echo "<td width='100%'>";
-echo "Modifier l'article :";
+echo _T('texte_modifier_article');
 gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
@@ -287,7 +287,7 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
 
 	if (($articles_surtitre != "non") OR $surtitre) {
-		echo "<B>Sur-titre</B>";
+		echo "<B>"._T('texte_sur_titre')."</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
 	}
@@ -295,12 +295,12 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='hidden' NAME='surtitre' VALUE=\"$surtitre\" >";
 	}
 
-	echo "<B>Titre</B> [Obligatoire]";
+	echo _T('texte_titre_obligatoire');
 	echo aide ("arttitre");
 	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
 
 	if (($articles_soustitre != "non") OR $soustitre) {
-		echo "<B>Sous-titre</B>";
+		echo "<B>"._T('texte_sous_titre')."</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><br><br>";
 	}
@@ -323,18 +323,18 @@ echo "<P><HR><P>";
 	}
 
 	debut_cadre_relief("$logo_parent");
-	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
+	echo "<B>"._T('titre_cadre_interieur_rubrique')."&nbsp;:</B>\n";
 	echo aide ("artrub");
 	echo "<BR><SELECT NAME='id_rubrique' style='background-color: $couleur_claire; font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
 	enfant(0);
 	echo "</SELECT><BR>\n";
-	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
+	echo _T('texte_rappel_selection_champs');
 	fin_cadre_relief();
 
 	if (($options == "avancees" AND $articles_descriptif != "non") OR $descriptif) {
-		echo "<P><B>Descriptif rapide</B>";
+		echo "<P><B>"._T('texte_descriptif_rapide')."</B>";
 		echo aide ("artdesc");
-		echo "<BR>(Contenu de l'article en quelques mots.)<BR>";
+		echo "<BR>"._T('texte_contenu_article')."<BR>";
 		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
 		echo $descriptif;
 		echo "</TEXTAREA><P>\n";
@@ -353,7 +353,7 @@ echo "<P><HR><P>";
 		echo "<table width=100% cellspacing=0 cellpadding=0 border=0>";
 		echo "<tr><td valign='top'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		echo "<B><label for='confirme-virtuel'>Redirection&nbsp;:</label></B>";
+		echo "<B><label for='confirme-virtuel'>"._T('info_redirection')."&nbsp;:</label></B>";
 		echo aide ("artvirt");
 		echo "</font>";
 		echo "</td>";
@@ -364,7 +364,7 @@ echo "<P><HR><P>";
 		echo "<input type='hidden' name='changer_virtuel' value='oui'>";
 		echo "</td></tr></table>\n";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		echo "<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL. Pour supprimer la redirection, effacez l'URL ci-dessus.";
+		echo _T('texte_article_virtuel_reference');
 		echo "</font>";
 		echo "</div><p>\n";
 	}
@@ -375,9 +375,9 @@ echo "<P><HR><P>";
 		if (($articles_chapeau != "non") OR $chapo) {
 			if ($spip_ecran == "large") $rows = 8;
 			else $rows = 5;
-			echo "<B>Chapeau</B>";
+			echo "<B>"._T('info_chapeau')."</B>";
 			echo aide ("artchap");
-			echo "<BR>(Texte introductif de l'article.)<BR>";
+			echo "<BR>"._T('texte_introductif_article')."<BR>";
 			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
 			echo $chapo;
 			echo "</TEXTAREA><P>\n";
@@ -393,7 +393,7 @@ echo "<P><HR><P>";
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
 	{
-		$textes_supplement = "<br><font color='red'>(le texte est long&nbsp;: il appara&icirc;t donc en plusieurs parties qui seront recoll&eacute;es apr&egrave;s validation.)</font>\n";
+		$textes_supplement = "<br><font color='red'>"._T('info_texte_long')."</font>\n";
 		while (strlen($texte)>29*1024)
 		{
 			$nombre_textes ++;
@@ -404,9 +404,9 @@ echo "<P><HR><P>";
 				$texte1 . "</TEXTAREA><P>\n";
 		}
 	}
-	echo "<B>Texte</B>";
+	echo "<B>"._T('info_texte')."</B>";
 	echo aide ("arttexte");
-	echo "<br>Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.";
+	echo "<br>"._T('texte_enrichir_mise_a_jour');
 	echo aide("raccourcis");
 
 	echo $textes_supplement;
@@ -416,7 +416,7 @@ echo "<P><HR><P>";
 	echo "</TEXTAREA><P>\n";
 
 	if (($articles_ps != "non" AND $options == "avancees") OR $ps) {
-		echo "<B>Post-Scriptum</B><BR>";
+		echo "<B>"._T('info_post_scriptum')."</B><BR>";
 		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
 		echo $ps;
 		echo "</TEXTAREA><P>\n";
@@ -432,7 +432,7 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='Hidden' NAME='statut_nouv' VALUE=\"prepa\" SIZE='40'><P>";
 
 	echo "<DIV ALIGN='right'>";
-	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 	echo "</DIV></FORM>";
 
 fin_cadre_formulaire();

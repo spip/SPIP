@@ -201,8 +201,8 @@ function import_objet_1_2($f, $gz=false) {
 			if (($type == 'article') && ($col == 'images'))
 			{
 				if ($value) {		// ne pas afficher de message si on a un champ suppl mais vide
-					echo "--><br><font color='red'><b>Erreur dans la sauvegarde ($type $id_objet) ! </b></font>\n<font color='black'>La colonne $col n'existe pas";
-					if ($col == 'images') echo ", veuillez v&eacute;rifier que vos images ont &eacute;t&eacute; transf&eacute;r&eacute;es correctement.";
+					echo "--><br><font color='red'><b>"._T('avis_erreur_sauvegarde', array('type' => $type, 'id_objet' => $id_objet))."</b></font>\n<font color='black'>"._T('avis_colonne_inexistante', array('col' => $col));
+					if ($col == 'images') echo _T('info_verifier_image');
 					echo "</font>\n<!--";
 					$GLOBALS['erreur_restauration'] = true;
 				}
@@ -218,7 +218,7 @@ function import_objet_1_2($f, $gz=false) {
 	$table = $tables[$type];
 	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
 	if (! spip_query($query)) {
-		echo "--><br><font color='red'><b>Erreur MySQL ! </b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
+		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql_2')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
 
@@ -419,7 +419,7 @@ function import_all($f, $gz=false) {
 	if (!$my_pos) {
 		// Debut de l'importation
 		if (!($r = import_debut($f, $gz))) {
-			ecrire_meta("erreur", "le fichier archive n'est pas un fichier SPIP");
+			ecrire_meta("erreur", _T('avis_archive_incorrect'));
 			return false;
 		}
 		else {
@@ -448,7 +448,7 @@ function import_all($f, $gz=false) {
 		break;
 	}
 	if (!$import_ok) {
-		ecrire_meta("erreur", "le fichier archive n'est pas valide");
+		ecrire_meta("erreur", _T('avis_archive_invalide'));
 		return false;
 	}
 
@@ -500,9 +500,9 @@ function affiche_progression_javascript($abs_pos) {
 	if ($abs_pos == '100 %') {
 		$taille = $abs_pos;
 		if ($GLOBALS['erreur_restauration'])
-			echo "document.progression.recharge.value='Erreur: voir ci-dessous';\n";
+			echo "document.progression.recharge.value='"._T('avis_erreur')."\n";
 		else
-			echo "document.progression.recharge.value='C\'est fini !';\n";
+			echo "document.progression.recharge.value='"._T('info_fini')."\n";
 	}
 	else if (! $affiche_progression_pourcent)
 		$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));

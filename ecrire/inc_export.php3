@@ -63,10 +63,10 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 					$debut_limit = $debut_limit + 5000;
 					if ($debut_limit > $total) {
 						$debut_limit = 0;
-						echo " [tous les r&eacute;sultats sont enregistr&eacute;s]";
+						echo _T('info_tous_resultats_enregistres');
 					}
 					else {
-						echo " [$debut_limit premiers r&eacute;sultats sur $total]";
+						echo _T('info_premier_resultat', array('debut_limit' => $debut_limit, 'total' => $total));
 					}
 				} 
 				else {
@@ -80,10 +80,10 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 					$debut_limit = $debut_limit + 500;
 					if ($debut_limit > $total) {
 						$debut_limit = 0;
-						echo " [tous les r&eacute;sultats sont enregistr&eacute;s]";
+						echo _T('info_tous_resultats_enregistres');
 					}
 					else {
-						echo " [$debut_limit premiers r&eacute;sultats sur $total]";
+						echo _T('info_premier_resultat_sur', array('debut_limit' => $debut_limit, 'total' => $total));
 					}
 				} 
 				else {

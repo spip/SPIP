@@ -83,7 +83,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	}
 
 	$nom_url = strip_tags($kw_referer_host);
-	$title = "Aller &agrave; ".$kw_referer;
+	$title = _T('info_aller_a').$kw_referer;
 	if (strlen($nom_url) > 50) $nom_url = substr($nom_url, 0, 48) . "...";
 
 	$buffer = "&nbsp;<a title=\"$title\" href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
@@ -215,7 +215,7 @@ function calculer_n_referers($nb_referers) {
 
 
 function calculer_referers() {
-	spip_log("analyse referers");
+	spip_log(_T('info_analyse_referers'));
 	$encore = calculer_n_referers(100);
 	if ($encore) {
 		include_ecrire("inc_meta.php3");
@@ -234,7 +234,7 @@ function calculer_referers() {
 //
 
 function calculer_visites($date = "") {
-	spip_log("analyse visites");
+	spip_log(_T('info_analyse_visites'));
 
 	// calculer les popularites avant d'effacer les donnees
 	calculer_popularites();
@@ -292,7 +292,7 @@ function calculer_visites($date = "") {
 //
 
 function calculer_popularites() {
-	spip_log("analyse popularites");
+	spip_log(_T('info_analyse_popularites'));
 
 	$date = lire_meta('date_stats_popularite');
 	include_ecrire("inc_meta.php3");

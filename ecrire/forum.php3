@@ -4,11 +4,11 @@ include ("inc.php3");
 
 // cette page gere les deux types de forums ; forum_admin.php3 n'est qu'une coquille vide
 if ($admin=='oui') {
-	debut_page("Forum des administrateurs", "messagerie", "forum-admin");
+	debut_page(_T('titre_page_forum'), "messagerie", "forum-admin");
 	$statutforum = 'privadm';
 	$urlforum = 'forum_admin.php3';
 } else {
-	debut_page("Forum interne", "messagerie", "forum-interne");
+	debut_page(_T('titre_forum'), "messagerie", "forum-interne");
 	$statutforum = 'privrac';
 	$urlforum = 'forum.php3';
 }
@@ -29,12 +29,12 @@ debut_gauche();
 debut_droite();
 
 if ($admin=='oui')
-	gros_titre("Forum priv&eacute; des administrateurs");
+	gros_titre(_T('titre_cadre_forum_administrateur'));
 else
-	gros_titre("Forum interne");
+	gros_titre(_T('titre_cadre_forum_interne'));
 
 if ($admin == 'oui' AND $connect_statut != "0minirezo") {
-	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
+	echo _T('avis_non_acces_page');
 	exit;
 }
 
@@ -60,7 +60,7 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 
 
 	echo "<p><div align='center'>";
-	icone ("Poster un message", "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message="."Nouveau+message", "forum-interne-24.gif", "creer.gif");
+	icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message="."Nouveau+message", "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 
 

@@ -13,22 +13,22 @@ if ($reinstall == 'oui') {
 	@copy("inc_connect.php3", "inc_connect_install.php3");
 
 	include_ecrire("inc_presentation.php3");
-	install_debut_html("Mise &agrave; niveau de SPIP");
-	echo "<p><b>Vous avez install&eacute; une nouvelle version de SPIP.</b><p> ";
-	echo "Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus ";
-	echo "compl&egrave;te qu'&agrave; l'accoutum&eacute;e. ";
-	echo "Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier ";
-	echo "<tt>inc_connect.php3</tt> du r&eacute;pertoire <tt>ecrire</tt> ";
-	echo "et reprendre l'installation afin de mettre &agrave; jour vos ";
-	echo "param&egrave;tres de connexion &agrave; la base de donn&eacute;es.";
-	echo "<p>(NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres ";
-	echo "de connexion, jetez un oeil au fichier <tt>inc_connect.php3</tt> ";
-	echo "avant de le supprimer...)";
+	install_debut_html(_T('titre_page_upgrade'));
+	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
+	echo _T('texte_nouvelle_version_spip_2');
+	echo _T('texte_nouvelle_version_spip_3');
+	echo _T('texte_nouvelle_version_spip_4');
+	echo _T('texte_nouvelle_version_spip_5');
+	echo _T('texte_nouvelle_version_spip_6');
+	echo _T('texte_nouvelle_version_spip_7');
+	echo "<p>"._T('texte_nouvelle_version_spip_8');
+	echo _T('texte_nouvelle_version_spip_9');
+	echo _T('texte_nouvelle_version_spip_10');
 
 	$link = new Link();
 	echo "<p><div align='right'>";
 	echo $link->getForm('GET');
-	echo "<input type='submit' name='submit' value=\"Relancer l'installation\" class='fondl'>";
+	echo "<input type='submit' name='submit' value=\""._T('bouton_relancer_installation')."\" class='fondl'>";
 	echo "</form>\n";
 
 	install_fin_html();
@@ -44,20 +44,14 @@ include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 
-$upgrade_titre = "mise &agrave; niveau de votre base MySQL";
+$upgrade_titre = _T('info_mise_a_niveau_base');
 
 // Commentaire standard upgrade
-$commentaire = "Vous venez de mettre &agrave; jour les fichiers SPIP.
-	Il faut maintenant mettre &agrave; niveau la base de donn&eacute;es
-	du site.";
+$commentaire = _T('texte_mise_a_niveau_base_1');
 
 // Erreur downgrade (cas de double installation de fichiers SPIP sur une meme base)
 if ($spip_version < (double) lire_meta('version_installee'))
-	$commentaire = "{{Attention!}} Vous avez install&eacute; une version
-		des fichiers SPIP {ant&eacute;rieure} &agrave; celle qui se trouvait
-		auparavant sur ce site: votre base de donn&eacute;es risque d'&ecirc;tre
-		perdue et votre site ne fonctionnera plus.<br>{{R&eacute;installez les
-		fichiers de SPIP.}}";
+	$commentaire = _T('info_mise_a_niveau_base_2');
 
 // Qu'est-ce que tu fais ici?
 if ($spip_version == (double) lire_meta('version_installee')) {

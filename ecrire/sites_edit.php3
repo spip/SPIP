@@ -97,13 +97,13 @@ if (!$id_rubrique > 0) $id_rubrique = premiere_rubrique();
 
 
 
-debut_page("Site r&eacute;f&eacute;renc&eacute;", "documents", "sites");
+debut_page(_T('info_site_reference_2'), "documents", "sites");
 
 
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -123,12 +123,12 @@ echo "<tr width='100%'>";
 
 if ($new != 'oui') {
 	echo "<td>";
-	icone("Retour", "sites.php3?id_syndic=$id_syndic", 'site-24.gif', "rien.gif");
+	icone(_T('icone_retour'), "sites.php3?id_syndic=$id_syndic", 'site-24.gif', "rien.gif");
 	echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
 }
 echo "<td width='100%'>";
-echo "R&eacute;f&eacute;rencer le site :";
+echo _T('titre_referencer_site');
 gros_titre($nom_site);
 echo "</td></tr></table>";
 echo "<p>";
@@ -148,14 +148,14 @@ if ($new == 'oui'){
 		$link->addVar('analyser_site', 'oui');
 		echo $link->getForm();
 		
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2><b>R&eacute;f&eacute;rencement automatis&eacute; d'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l'adresse URL d&eacute;sir&eacute;e, ou l'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).</font>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>"._T('texte_referencement_automatique')."</font>";
 		echo "<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\">";
-		echo "<input type=\"submit\" name=\"submit\" value=\"Ajouter\" class='fondo'>";
+		echo "<input type=\"submit\" name=\"submit\" value=\""._T('bouton_ajouter')."\" class='fondo'>";
 		
 		fin_cadre_relief();
 		echo "</form>";
 		
-		echo "<p><b>Vous pouvez pr&eacute;f&eacute;rer ne pas utiliser cette fonction automatique, et indiquer vous-m&ecirc;me les &eacute;l&eacute;ments concernant ce site...</b>";
+		echo "<p><b>"._T('texte_non_fonction_referencement')."</b>";
 		$cadre_ouvert = true;
 		debut_cadre_enfonce("site-24.gif");
 		
@@ -174,10 +174,10 @@ $nom_site = entites_html($nom_site);
 $url_site = entites_html($url_site);
 $url_syndic = entites_html($url_syndic);
 
-echo "<b>Nom du site</b> [Obligatoire]<br>";
+echo _T('info_nom_site_2')."<br>";
 echo "<input type='text' class='formo' name='nom_site' value=\"$nom_site\" size='40'><p>";
 if (strlen($url_site)<8) $url_site="http://";
-echo "<b>Adresse du site</b> [Obligatoire]<br>";
+echo _T('entree_adresse_site')."<br>";
 echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size='40'><p>";
 
 
@@ -194,13 +194,13 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 	}
 
 	debut_cadre_relief("$logo_parent");
-	echo "<b>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</b><br>\n";
+	echo "<b>"._T('entree_interieur_rubrique')."</b><br>\n";
 	echo "<select name='id_rubrique' style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' size=1>\n";
 	enfant(0);
 	echo "</select><p>\n";
 	fin_cadre_relief();
 
-echo "<b>Description du site</b><br>";
+echo "<b>"._T('entree_description_site')."</b><br>";
 echo "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap=soft>";
 echo $descriptif;
 echo "</textarea>\n";
@@ -217,7 +217,7 @@ if ($activer_syndic != "non") {
 	else {
 		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='non' id='syndication_non'>";
 	}
-	echo " <b><label for='syndication_non'>Pas de syndication</label></b><p>";
+	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b><p>";
 
 	if ($syndication == "non") {
 		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui'>";
@@ -225,14 +225,14 @@ if ($activer_syndic != "non") {
 	else {
 		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui' CHECKED>";
 	}
-	echo " <b><label for='syndication_oui'>Syndication :</label></b>";
+	echo " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b>";
 	echo aide("rubsyn");
 
 
 	echo "<table cellpadding=0 cellspacing=0 border=0 width=100%><tr><td width=50>&nbsp;</td><td>";
 
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";
-	echo "Adresse du fichier &laquo;&nbsp;backend&nbsp;&raquo; pour la syndication&nbsp;:";
+	echo _T('entree_adresse_fichier_syndication');
 	echo "<br>";
 	echo "<INPUT TYPE='text' CLASS='formo' NAME='url_syndic' VALUE=\"$url_syndic\" SIZE='40'><P>";
 	echo "<INPUT TYPE='hidden' NAME='old_syndic' VALUE=\"$url_syndic\"";
@@ -245,7 +245,7 @@ else {
 	echo "<INPUT TYPE='hidden' NAME='url_syndic' VALUE=\"$url_syndic\"";
 }
 
-echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'></div>";
+echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 echo "</FORM>";
 
 if ($cadre_ouvert) fin_cadre_enfonce();

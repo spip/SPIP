@@ -5,7 +5,7 @@ include ("inc.php3");
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';
 
-debut_page("Tout le site", "asuivre", "tout-site");
+debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
 debut_gauche();
 
 
@@ -16,7 +16,7 @@ echo "<input type='hidden' name='aff_art[]' value='x'>";
 debut_boite_info();
 
 echo "<FONT FACE='arial,helvetica,sans-serif'>";
-echo "<B>Afficher les articles&nbsp;:</B><BR>";
+echo "<B>"._T('titre_cadre_afficher_article')."&nbsp;:</B><BR>";
 
 
 if ($connect_statut == "0minirezo") {
@@ -27,7 +27,7 @@ if ($connect_statut == "0minirezo") {
 		echo "<input type='checkbox' name='aff_art[]' value='prepa' id='prepa'>";
 	}
 	echo " <label for='prepa'><img src='img_pack/puce-blanche.gif' alt='' width='9' height='9' border='0'>";
-	echo "  en cours de r&eacute;daction</label><BR>";
+	echo "  "._T('texte_statut_en_cours_redaction')."</label><BR>";
 }
 
 
@@ -38,7 +38,7 @@ else {
 	echo "<input type='checkbox' name='aff_art[]' value='prop' id='prop'>";
 }
 echo " <label for='prop'><img src='img_pack/puce-orange.gif' alt='' width='9' height='9' border='0'>";
-echo "  en attente de validation</label><BR>";
+echo "  "._T('texte_statut_attente_validation')."</label><BR>";
 
 if (ereg('publie', $aff_art)) {
 	echo "<input type='checkbox' CHECKED name='aff_art[]' value='publie' id='publie'>";
@@ -47,7 +47,7 @@ else {
 	echo "<input type='checkbox' name='aff_art[]' value='publie' id='publie'>";
 }
 echo " <label for='publie'><img src='img_pack/puce-verte.gif' alt='' width='9' height='9' border='0'>";
-echo "  publi&eacute;s en ligne</label><BR>";
+echo "  "._T('texte_statut_publies')."</label><BR>";
 
 if ($connect_statut == "0minirezo") {
 	if (ereg("refuse",$aff_art)) {
@@ -57,7 +57,7 @@ if ($connect_statut == "0minirezo") {
 		echo "<input type='checkbox' name='aff_art[]' value='refuse' id='refuse'>";
 	}
 	echo " <label for='refuse'><img src='img_pack/puce-rouge.gif' alt='' width='9' height='9' border='0'>";
-	echo "  refus&eacute;s</label><BR>";
+	echo "  "._T('texte_statut_refuses')."</label><BR>";
 
 	if (ereg('poubelle',$aff_art)) {
 		echo "<input type='checkbox' CHECKED name='aff_art[]' value='poubelle' id='poubelle'>";
@@ -66,10 +66,10 @@ if ($connect_statut == "0minirezo") {
 		echo "<input type='checkbox' name='aff_art[]' value='poubelle' id='poubelle'>";
 	}
 	echo " <label for='poubelle'><img src='img_pack/puce-poubelle.gif' alt='' width='9' height='9' border='0'>";
-	echo "  &agrave; la poubelle</label>";
+	echo "  "._T('texte_statut_poubelle')."</label>";
 }
 
-echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'></div>";
+echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 echo "</FONT>";
 fin_boite_info();
 echo "</form>";
@@ -150,8 +150,8 @@ function enfants($id_parent, $decalage = 0) {
 }
 
 
-echo "<A HREF='articles_tous.php3?aff_art[]=$aff_art&deplier=oui'>Tout d&eacute;plier</A>";
-echo " | <A HREF='articles_tous.php3?aff_art[]=$aff_art'>Tout replier</A>";
+echo "<A HREF='articles_tous.php3?aff_art[]=$aff_art&deplier=oui'>"._T('lien_tout_deplier')."</A>";
+echo " | <A HREF='articles_tous.php3?aff_art[]=$aff_art'>"._T('lien_tout_replier')."</A>";
 echo "<P>";
 
 echo "<P>";

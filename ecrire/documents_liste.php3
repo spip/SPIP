@@ -5,13 +5,11 @@ include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
 
 
-
-
 //
 // Recupere les donnees
 //
 
-debut_page("Les documents des rubriques", "documents", "documents");
+debut_page(_T('titre_page_documents_liste'), "documents", "documents");
 debut_gauche();
 
 
@@ -21,7 +19,7 @@ debut_gauche();
 
 debut_boite_info();
 
-echo propre("Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute; dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.");
+echo propre(_T('texte_recapitiule_liste_documents'));
 
 fin_boite_info();
 
@@ -55,7 +53,7 @@ debut_droite();
 			else
 				echo "<p><tt>$fichier</tt>";
 
-			echo "<p>Dans la rubrique : <a href='naviguer.php3?coll=$id_rubrique'>$titre_rub</a>";
+			echo "<p>"._T('info_dans_rubrique')." <a href='naviguer.php3?coll=$id_rubrique'>$titre_rub</a>";
 			
 			fin_cadre_relief();
 	}

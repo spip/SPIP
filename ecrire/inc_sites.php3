@@ -241,9 +241,9 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 		}
 		else
-			return "La syndication a &eacute;chou&eacute; : le backend indiqu&eacute; est ind&eacute;chiffrable ou ne propose aucun article.";
+			return _T('avis_echec_syndication_01');
 	} else
-		return "La syndication a &eacute;chou&eacute; : impossible d'acc&eacute;der au backend de ce site.";
+		return _T('avis_echec_syndication_02');
 }
 
 
@@ -300,26 +300,26 @@ function afficher_sites($titre_table, $requete) {
 					$puce = 'puce-verte-anim.gif';
 				else
 					$puce='puce-verte.gif';
-				$title = "Site r&eacute;f&eacute;renc&eacute; en ligne";
+				$title = _T('info_site_reference');
 				break;
 			case 'prop':
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-blanche-anim.gif';
 				else
 					$puce='puce-blanche.gif';
-				$title = "Site Web en attente de validation";
+				$title = _T('info_site_attente');
 				break;
 			case 'refuse':
 				if (acces_restreint_rubrique($id_rubrique))
 					$puce = 'puce-poubelle-anim.gif';
 				else
 					$puce='puce-poubelle.gif';
-				$title = "Site Web refus&eacute;";
+				$title = _T('info_site_refuse');
 				break;
 			}
 			if ($syndication == "off") {
 				$puce = 'puce-orange-anim.gif';
-				$title = "Site syndiqu&eacute; en panne";
+				$title = _T('info_panne_site_syndique');
 			}
 
 			echo "<a href=\"".$link->getUrl()."\" title=\"$title\">";
@@ -329,15 +329,15 @@ function afficher_sites($titre_table, $requete) {
 			else
 				echo typo($nom_site);
 
-			echo "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>visiter ce site</a>]</font>";
+			echo "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
 			echo "</td>";
 
 			echo "<td class='arial1' align='right'> &nbsp;";
 			if ($syndication == "off") {
-				echo "<font color='red'>probl&egrave;me de </font>";
+				echo "<font color='red'>"._T('info_probleme_grave')." </font>";
 			}
 			if ($syndication == "oui" or $syndication == "off"){
-				echo "<font color='red'>syndication :</font>";
+				echo "<font color='red'>"._T('info_syndication')."</font>";
 			}
 			echo "</td>";					
 			echo "<td class='arial1'>";
@@ -462,8 +462,8 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 					echo "</A>";
 
-					if (strlen($lesauteurs)>0) echo "<br>auteur(s)&nbsp;: <font color='#336666'>$lesauteurs</font>";
-					if (strlen($descriptif)>0) echo "<br>descriptif(s)&nbsp;: <font color='#336666'>$descriptif</font>";
+					if (strlen($lesauteurs)>0) echo "<br>"._T('info_auteurs_nombre')." <font color='#336666'>$lesauteurs</font>";
+					if (strlen($descriptif)>0) echo "<br>"._T('info_descriptif_nombre')." <font color='#336666'>$descriptif</font>";
 					
 					echo "</td>";
 					
@@ -483,14 +483,14 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 					
 					if ($connect_statut == '0minirezo'){
 						if ($statut == "publie"){
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'><font color='black'>bloquer ce lien</font></a>]";
+							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
 						
 						}
 						else if ($statut == "refuse"){
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>r&eacute;tablir ce lien</a>]";
+							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_retablir_lien')."</a>]";
 						}
 						else if ($statut == "dispo") {
-							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>valider ce lien</a>]";
+							echo "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_valider_lien')."</a>]";
 						}
 					} else {
 						echo "&nbsp;";

@@ -16,10 +16,10 @@ if (!$n) {
 		$type = $row['type'];
 	}
 	if ($type != "affich"){
-		debut_page("Acc&egrave;s refus&eacute;");
+		debut_page(_T('info_acces_refuse'));
 		debut_gauche();
 		debut_droite();
-		echo "<b>Vous n'avez pas acc&egrave;s &agrave; ce message.</b><p>";
+		echo "<b>"._T('avis_non_acces_message')."</b><p>";
 		fin_page();
 		exit;
 	}
@@ -35,18 +35,18 @@ function my_sel($num, $tex, $comp) {
 }
 
 function afficher_mois($mois){
-	my_sel("01", "janvier", $mois);
-	my_sel("02", "f&eacute;vrier", $mois);
-	my_sel("03", "mars", $mois);
-	my_sel("04", "avril", $mois);
-	my_sel("05", "mai", $mois);
-	my_sel("06", "juin", $mois);
-	my_sel("07", "juillet", $mois);
-	my_sel("08", "ao&ucirc;t", $mois);
-	my_sel("09", "septembre", $mois);
-	my_sel("10", "octobre", $mois);
-	my_sel("11", "novembre", $mois);
-	my_sel("12", "d&eacute;cembre", $mois);
+	my_sel("01", _T('mois_janvier'), $mois);
+	my_sel("02", _T('mois_fevrier'), $mois);
+	my_sel("03", _T('mois_mars'), $mois);
+	my_sel("04", _T('mois_avril'), $mois);
+	my_sel("05", _T('mois_mai'), $mois);
+	my_sel("06", _T('mois_juin'), $mois);
+	my_sel("07", _T('mois_juillet'), $mois);
+	my_sel("08", _T('mois_aout'), $mois);
+	my_sel("09", _T('mois_septembre'), $mois);
+	my_sel("10", _T('mois_octobre'), $mois);
+	my_sel("11", _T('mois_novembre'), $mois);
+	my_sel("12", _T('mois_decembre'), $mois);
 }
 
 function afficher_annee($annee) {
@@ -126,7 +126,7 @@ while($row = spip_fetch_array($result_message)) {
 	if ($statut == 'publie' AND $type == 'normal' AND $type != 'affich') {
 
 		echo "<div align='center'>";
-		icone ("Ne plus participer &agrave; cette discussion", "messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur", "messagerie-24.gif", "supprimer.gif");
+		icone (_T('icone_arret_discussion'), "messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur", "messagerie-24.gif", "supprimer.gif");
 		echo "</div>";
 	}
 	
@@ -142,18 +142,18 @@ while($row = spip_fetch_array($result_message)) {
 		$la_couleur = "green";
 	}
 	else if ($type == 'pb') {
-		$le_type = "PENSE-B&Ecirc;TE".aide ("messpense");
+		$le_type = _T('info_pense_bete').aide ("messpense");
 		$la_couleur = "blue";	
 	}
 	else if ($type == 'affich') {
-		$le_type = "ANNONCE";
+		$le_type = _T('info_annonce');
 		$la_couleur = "red";	
 	}
 
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='$la_couleur'><b>$le_type</b></font><br>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=5><b>$titre</b></font>";
 	if ($statut == 'redac') {
-		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='red'><b>EN COURS DE R&Eacute;DACTION</b></font>";
+		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='red'><b>"._T('info_redaction_en_cours')."</b></font>";
 	}
 	else if ($rv != 'oui') {
 		echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>".nom_jour($date_heure)." ".affdate($date_heure)." &Agrave; ".heures($date_heure)."H".minutes($date_heure)."</b></font>";
@@ -176,7 +176,7 @@ while($row = spip_fetch_array($result_message)) {
 		if ($row = spip_fetch_array($result)) {
 
 			echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
-			echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>AUTEUR DU MESSAGE :</B></FONT>";
+			echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>"._T('info_auteur_message')."</B></FONT>";
 			echo "</td></tr>";
 
 			$nom_auteur = typo($row["nom"]);
@@ -219,12 +219,12 @@ while($row = spip_fetch_array($result_message)) {
 			$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 			debut_boite_info();
 			if (!$resultat) {
-				echo "<B>Aucun r&eacute;sultat pour \"$cherche_auteur\".</B><BR>";
+				echo _T('info_recherche_auteur_zero', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 			}
 			else if (count($resultat) == 1) {
 				$ajout_auteur = 'oui';
 				list(, $nouv_auteur) = each($resultat);
-				echo "<B>Le participant suivant est ajout&eacute; :</B><BR>";
+				echo "<B>"._T('info_ajout_participant')."</B><BR>";
 				$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
 				$result = spip_query($query);
 				echo "<UL>";
@@ -245,7 +245,7 @@ while($row = spip_fetch_array($result_message)) {
 				while (list(, $id_auteur) = each($resultat)) $les_auteurs[] = $id_auteur;
 				if ($les_auteurs) {
 					$les_auteurs = join(',', $les_auteurs);
-					echo "<B>Plusieurs r&eacute;dacteurs trouv&eacute;s pour \"$cherche_auteur\":</B><BR>";
+					echo "<B>"._T('info_recherche_auteur_ok', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 					$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
 					$result = spip_query($query);
 					echo "<UL>";
@@ -258,7 +258,7 @@ while($row = spip_fetch_array($result_message)) {
 						echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
 					
 						if ($email_auteur) echo " ($email_auteur)";
-						echo " | <A HREF=\"message.php3?id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur\">Ajouter ce destinataire</A>";
+						echo " | <A HREF=\"message.php3?id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur\">"._T('lien_ajout_destinataire')."</A>";
 					
 						if (trim($bio_auteur)) {
 							echo "<BR><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n";
@@ -269,7 +269,7 @@ while($row = spip_fetch_array($result_message)) {
 				}
 			}
 			else {
-				echo "<B>Trop de r&eacute;sultats pour \"$cherche_auteur\" ; veuillez affiner la recherche.</B><BR>";
+				echo "<B>"._T('info_recherche_auteur_a_affiner', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 			}
 			fin_boite_info();
 			echo "<P>";
@@ -295,7 +295,7 @@ while($row = spip_fetch_array($result_message)) {
 
 		if ($total_dest > 0) {
 			echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' colspan=2>";
-			echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>PARTICIPANTS A LA DISCUSSION :</B></FONT>";
+			echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>"._T('info_nombre_partcipants')."</B></FONT>";
 			echo "</td></tr>";
 
 			$ifond = 0;
@@ -321,7 +321,7 @@ while($row = spip_fetch_array($result_message)) {
 				
 				echo "<td background='' bgcolor='$couleur' align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 				if ($id_auteur != $connect_id_auteur) {
-					echo "[<a href='message.php3?id_message=$id_message&supp_dest=$id_auteur'>retirer ce participant</a>]";
+					echo "[<a href='message.php3?id_message=$id_message&supp_dest=$id_auteur'>"._T('lien_retrait_particpant')."</a>]";
 				}
 				else {
 					echo "&nbsp;";
@@ -355,7 +355,7 @@ while($row = spip_fetch_array($result_message)) {
 
 					if (spip_num_rows($result_ajout_auteurs) > 50 AND $flag_mots_ressemblants) {
 						echo "<INPUT TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
-						echo "<INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo'>";
+						echo "<INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
 					}
 					else {
 						echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='WIDTH=150' CLASS='fondl'>";
@@ -368,10 +368,10 @@ while($row = spip_fetch_array($result_message)) {
 							$email = $row['email'];
 							$statut_auteur = $row['statut'];
 
-							$statut_auteur=ereg_replace("0minirezo", "Administrateur", $statut_auteur);
-							$statut_auteur=ereg_replace("1comite", "R&eacute;dacteur", $statut_auteur);
-							$statut_auteur=ereg_replace("2redac", "R&eacute;dacteur", $statut_auteur);
-							$statut_auteur=ereg_replace("5poubelle", "Effac&eacute;", $statut_auteur);
+							$statut_auteur=ereg_replace("0minirezo", _T('info_statut_administrateur'), $statut_auteur);
+							$statut_auteur=ereg_replace("1comite", _T('info_statut_redacteur'), $statut_auteur);
+							$statut_auteur=ereg_replace("2redac", _T('info_statut_redacteur'), $statut_auteur);
+							$statut_auteur=ereg_replace("5poubelle", _T('info_statut_efface'), $statut_auteur);
 
 							$premiere = strtoupper(substr(trim($nom), 0, 1));
 
@@ -384,7 +384,7 @@ while($row = spip_fetch_array($result_message)) {
 								echo "\n<OPTION VALUE=\"x\"> $statut_auteur".'s';
 							}
 						
-							if ($premiere != $premiere_old AND ($statut_auteur != 'Administrateur' OR !$premiere_old)) {
+							if ($premiere != $premiere_old AND ($statut_auteur != _T('info_administrateur') OR !$premiere_old)) {
 								echo "\n<OPTION VALUE=\"x\">";
 							}
 				
@@ -395,13 +395,13 @@ while($row = spip_fetch_array($result_message)) {
 						}
 						
 						echo "</SELECT>";
-						echo "<INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'>";
+						echo "<INPUT TYPE='submit' NAME='Ajouter' VALUE='"._T('bouton_ajouter')."' CLASS='fondo'>";
 					}
 					echo "</div></FORM>";
 				}
 			}
 			else {
-				echo "<br><div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>Ajouter un participant</a></font></div>";
+				echo "<br><div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>"._T('lien_ajouter_participant')."</a></font></div>";
 			}
 		}
 		fin_cadre_enfonce();
@@ -421,19 +421,19 @@ while($row = spip_fetch_array($result_message)) {
 		echo "<form action='message.php3' method='post'>";
 		debut_boite_info();
 		echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#$couleur_foncee' colspan=2>";
-		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif' color='#FFFFFF'><B>RENDEZ-VOUS :</B></FONT>";
+		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif' color='#FFFFFF'><B>"._T('titre_rendez_vous')."</B></FONT>";
 		echo "</td></tr></table>";
 		echo "<input type='hidden' name='id_message' value='$id_message'>";
 		echo "<input type='hidden' name='changer_rv' value='$id_message'>";
 		if ($rv != "oui") {
 			echo "<INPUT TYPE='radio' NAME='rv' VALUE='oui' id='rv_on'>";
-			echo " <label for='rv_on'>Afficher dans le calendrier</label> ";
+			echo " <label for='rv_on'>"._T('item_afficher_calendrier')."</label> ";
 			echo " <br><INPUT TYPE='radio' NAME='rv' VALUE='non' CHECKED id='rv_off'>";
-			echo " <B><label for='rv_off'>Ne pas afficher dans le calendrier</label></B> ";
+			echo " <B><label for='rv_off'>"._T('item_non_afficher_calendrier')."</label></B> ";
 		}
 		else {
 			echo "<INPUT TYPE='radio' NAME='rv' VALUE='oui' CHECKED id='rv_on'>";
-			echo " <b><label for='rv_on'>Afficher dans le calendrier</label></b> ";
+			echo " <b><label for='rv_on'>"._T('item_afficher_calendrier')."</label></b> ";
 
 			echo "<center><SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 			afficher_jour(jour($date_heure));
@@ -451,17 +451,17 @@ while($row = spip_fetch_array($result_message)) {
 			echo "</center>";
 
 			echo " <p><INPUT TYPE='radio' NAME='rv' VALUE='non' id='rv_off'>";
-			echo " <label for='rv_off'>Ne pas afficher dans le calendrier</label> ";
+			echo " <label for='rv_off'>"._T('item_non_afficher_calendrier')."</label> ";
 		}
 
-		echo "<div align='right'><INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'></div>";
+		echo "<div align='right'><INPUT TYPE='submit' NAME='Ajouter' VALUE='"._T('bouton_ajouter')."' CLASS='fondo'></div>";
 
 		fin_boite_info();
 		echo "</form>";
 	}
 	else if ($rv == "oui") {
 		echo "<p><center><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>RENDEZ-VOUS : <font color='red'>".majuscules(nom_jour($date_heure))." ".majuscules(affdate($date_heure))." &Agrave; ".heures($date_heure)."H".minutes($date_heure)."</font></b></font></center>";
-		if ($type != "affich") echo "<div align='right'><font size=2><a href='message.php3?id_message=$id_message&forcer_rv=oui'>Modifier la date</a></font></div><p>";
+		if ($type != "affich") echo "<div align='right'><font size=2><a href='message.php3?id_message=$id_message&forcer_rv=oui'>"._T('lien_modifer_date')."</a></font></div><p>";
 	}
 
 
@@ -477,7 +477,7 @@ while($row = spip_fetch_array($result_message)) {
 	
 	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 		echo "\n<table align='right'><tr><td>";
-		icone ("Modifier ce message", newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
+		icone (_T('icone_modifier_message'), newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
 		echo "</td></tr></table>";
 	}
 
@@ -492,16 +492,16 @@ while($row = spip_fetch_array($result_message)) {
 
 		if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 			echo "\n<table align='left'><tr><td>";
-			icone ("Supprimer ce message", newLinkUrl("messagerie.php3?detruire_message=$id_message"), "messagerie-24.gif", "supprimer.gif");
+			icone (_T('icone_supprimer_message'), newLinkUrl("messagerie.php3?detruire_message=$id_message"), "messagerie-24.gif", "supprimer.gif");
 			echo "</td></tr></table>";
 		}
 		if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 			if ($type == 'normal' AND $total_dest < 2){
-				echo "<p align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>Vous devez indiquer un destinataire avant d'envoyer ce message.</b></font></p>";
+				echo "<p align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>"._T('avis_destinataire_obligatoire')."</b></font></p>";
 			}
 			else {
 				echo "\n<table align='right'><tr><td>";
-				icone ("Envoyer ce message", newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.gif", "creer.gif");
+				icone (_T('icone_envoyer_message'), newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.gif", "creer.gif");
 				echo "</td></tr></table>";
 			}
 		}
@@ -521,7 +521,7 @@ while($row = spip_fetch_array($result_message)) {
 
 
 	echo "\n<div align='center'>";
-		icone("Poster un message", "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
+		icone(_T('icone_poster_message'), "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 
 

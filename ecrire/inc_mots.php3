@@ -115,7 +115,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			else
 				echo bouton_block_invisible("lesmots");
 		}
-		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>MOTS-CL&Eacute;S</B></FONT>";
+		echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>"._T('titre_mots_cles')."</B></FONT>";
 		echo aide ("artmots");
 		echo "</TABLE>";
 
@@ -140,15 +140,15 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 			debut_boite_info();
 			if (!$resultat) {
-				echo "<B>Aucun r&eacute;sultat pour \"$cherche_mot\".</B><BR>";
+				echo "<B>"._T('info_non_resultat', array('cherche_mot' => $cherche_mot))."</B><BR>";
 			}
 			else if (count($resultat) == 1) {
 				list(, $nouv_mot) = each($resultat);
 				$nouveaux_mots[] = $nouv_mot;
-				echo "<B>Le mot-cl&eacute; suivant a &eacute;t&eacute; ajout&eacute; &agrave; ";
-				if ($table == 'articles') echo "l'article";
-				else if ($table == 'breves') echo "la br&egrave;ve";
-				else if ($table == 'rubriques') echo "la rubrique";
+				echo "<B>"._T('info_mot_cle_ajoute');
+				if ($table == 'articles') echo _T('info_l_article');
+				else if ($table == 'breves') echo _T('info_la_breve');
+				else if ($table == 'rubriques') echo _T('info_la_rubrique');
 				echo " : </B><BR>";
 				$query = "SELECT * FROM spip_mots WHERE id_mot=$nouv_mot";
 				$result = spip_query($query);
@@ -170,7 +170,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				while (list(, $id_mot) = each($resultat)) $les_mots[] = $id_mot;
 				if ($les_mots) {
 					$les_mots = join(',', $les_mots);
-					echo "<B>Plusieurs mots-cl&eacute;s trouv&eacute;s pour \"$cherche_mot\":</B><BR>";
+					echo "<B>"._T('info_plusieurs_mots_trouves', array('cherche_mot' => $cherche_mot))."</B><BR>";
 					$query = "SELECT * FROM spip_mots WHERE id_mot IN ($les_mots) ORDER BY titre";
 					$result = spip_query($query);
 					echo "<UL>";
@@ -183,7 +183,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 						echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
 					
 						if ($type_mot) echo " ($type_mot)";
-						echo " | <A HREF=\"$url_base&nouv_mot=$id_mot\">Ajouter ce mot</A>";
+						echo " | <A HREF=\"$url_base&nouv_mot=$id_mot\">"._T('info_ajouter_mot')."</A>";
 					
 						if (strlen($descriptif_mot) > 1) {
 							echo "<BR><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
@@ -194,7 +194,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				}
 			}
 			else {
-				echo "<B>Trop de r&eacute;sultats pour \"$cherche_mot\" ; veuillez affiner la recherche.<BR>";
+				echo "<B>"._T('info_trop_resultat', array('cherche_mot' => $cherche_mot))."<BR>";
 			}
 			fin_boite_info();
 			echo "<P>";
@@ -302,7 +302,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				}
 				echo "</select>";
 				echo "<INPUT TYPE='Hidden' NAME='supp_mot' VALUE='$id_mot'>";
-				echo "<INPUT TYPE='submit' NAME='Choisir' VALUE='Changer' CLASS='fondo' STYLE='font-size:10px'>";
+				echo "<INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_changer')."' CLASS='fondo' STYLE='font-size:10px'>";
 				echo "</form>";
 
 			}else {
@@ -321,7 +321,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$url = $url_base."&supp_mot=$id_mot";
 				
 				if ($flag_groupe)
-					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">Retirer ce mot</A></FONT>";
+					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">"._T('info_retirer_mot')."</A></FONT>";
 				else echo "&nbsp;";
 				echo "</TD>";
 			}
@@ -367,7 +367,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				
 			if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";				
 				
-			$message_ajouter_mot = "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>AJOUTER UN MOT-CL&Eacute; : &nbsp; </B></FONT>\n";
+			$message_ajouter_mot = "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('titre_ajouter_mot_cle')." &nbsp; </B></FONT>\n";
 			echo "<DIV align='right'>";
 			
 		//////
@@ -409,7 +409,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					
 							echo "<INPUT TYPE='hidden' NAME='select_groupe'  VALUE='$id_groupe'>";
 
-							echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo' STYLE='font-size:10px'>";
+							echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo' STYLE='font-size:10px'>";
 							echo "</FORM>";
 						}
 					}
@@ -438,7 +438,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 							echo $texte_option;
 						}
 						echo "</SELECT>";
-						echo " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='Choisir' CLASS='fondo' STYLE='font-size:10px'>";
+						echo " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_choisir')."' CLASS='fondo' STYLE='font-size:10px'>";
 						echo "</FORM>";
 					}
 				}
@@ -451,7 +451,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if ($nombre_mots_associes > 3) {
 			echo "<DIV ALIGN='right'>";
 			$url = $url_base."&supp_mot=-1";
-			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">Retirer tous les mots</A></FONT>";
+			echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">"._T('info_retirer_mots')."</A></FONT>";
 			echo "</DIV>";
 		}
 

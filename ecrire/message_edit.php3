@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-debut_page("R&eacute;diger un message", "asuivre", "messagerie");
+debut_page(_T('titre_page_message_edit'), "asuivre", "messagerie");
 debut_gauche();
 debut_droite();
 
@@ -16,7 +16,7 @@ if ($new == "oui") {
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
 
-	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('Nouveau message', NOW(), '$statut', '$type', $connect_id_auteur)";
+	$query = "INSERT INTO spip_messages (titre, date_heure, statut, type, id_auteur) VALUES ('"._T('texte_nouveau_message')."', NOW(), '$statut', '$type', $connect_id_auteur)";
 	$result = spip_query($query);
 	$id_message = spip_insert_id();
 	
@@ -51,33 +51,33 @@ if ($row = spip_fetch_array($result)) {
 
 
 	echo "<FORM ACTION='message.php3?id_message=$id_message' METHOD='post'>";
-	if ($type == 'normal') $le_type = "ENVOYER UN MESSAGE";
-	if ($type == 'pb') $le_type = "PENSE-B&Ecirc;TE &Agrave; USAGE PERSONNEL";
-	if ($type == 'affich') $le_type = "ANNONCE";
+	if ($type == 'normal') $le_type = _T('bouton_envoi_message_02');
+	if ($type == 'pb') $le_type = _T('bouton_pense_bete');
+	if ($type == 'affich') $le_type = _T('bouton_annonce');
 
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='green'><b>$le_type</b></font><p>";
 	
 	if ($type == "affich")
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>Attention&nbsp;: ce message peut &ecirc;tre modifi&eacute; par tous les administrateurs du site, et est visible par tous les r&eacute;dacteurs. N'utilisez les annonces que pour exposer des &eacute;v&eacute;nements importants de la vie du site.</font><p>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>"._T('texte_message_edit')."</font><p>";
 	
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_message' VALUE=\"oui\">";
 	echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
-	echo "<B>Titre</B> [Obligatoire]<BR>";
+	echo _T('texte_titre_obligatoire')."<BR>";
 	echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
 
 	if ($ajouter_auteur) {
-		echo "<B>Nom du destinataire</B><BR>";
+		echo "<B>"._T('info_nom_destinataire')."</B><BR>";
 		echo "<INPUT TYPE='text' CLASS='formo' NAME='cherche_auteur' VALUE='' SIZE='40'><P>";
 	}
 
-	echo "<B>Texte du message</B><BR>";
+	echo "<B>"._T('info_texte_message_02')."</B><BR>";
 	echo "<TEXTAREA NAME='texte' ROWS='20' CLASS='formo' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
-	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</FORM>";
 }
 

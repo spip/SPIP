@@ -5,7 +5,7 @@ include ("inc.php3");
 
 if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$id_groupe = '';
-	$type = entites_html("Nouveau groupe");
+	$type = entites_html(_T('titre_nouveau_groupe'));
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';
@@ -51,13 +51,13 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 
 	echo "<td  align='right' valign='top'>";
-	icone("Retour", "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
+	icone(_T('icone_retour'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 	echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 
 
 echo "<td width='100%' valign='top'>";
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>GROUPE DE MOTS :</b><br></font>";
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>"._T('titre_groupe_mots')."</b><br></font>";
 gros_titre($type);
 echo aide("motsgroupes");
 
@@ -69,9 +69,9 @@ if ($connect_statut =="0minirezo"){
 	echo "<INPUT TYPE='Hidden' NAME='id_groupe' VALUE=\"$id_groupe\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";
 	debut_cadre_formulaire();
-	echo "<b>Changer le nom de ce groupe :</b><br>\n";
+	echo "<b>"._T('info_changer_nom_groupe')."</b><br>\n";
 	echo "<INPUT TYPE='Text' SIZE=40 CLASS='formo' NAME='change_type' VALUE=\"$type\">\n";
-	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></div>";
+	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
 	fin_cadre_formulaire();
 }
 
@@ -86,26 +86,26 @@ if ($connect_statut =="0minirezo"){
 	echo "<p>";
 	debut_cadre_formulaire();
 	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
-		echo "<b>Les mots-cl&eacute;s de ce groupe peuvent &ecirc;tre associ&eacute;s&nbsp;:</b>";
+		echo "<b>"._T('info_mots_cles_association')."</b>";
 		echo "<ul>";
 		
 		if ($articles == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='articles' value='oui' $checked id='articles'> <label for='articles'>aux articles</label><br>";
+		echo "<input type='checkbox' name='articles' value='oui' $checked id='articles'> <label for='articles'>"._T('item_mots_cles_association_articles')."</label><br>";
 		$activer_breves = lire_meta("activer_breves");
 		if ($activer_breves != "non"){
 			if ($breves == "oui") $checked = "checked";
 			else $checked = "";
-			echo "<input type='checkbox' name='breves' value='oui' $checked id='breves'> <label for='breves'>aux br&egrave;ves</label><br>";
+			echo "<input type='checkbox' name='breves' value='oui' $checked id='breves'> <label for='breves'>"._T('item_mots_cles_association_breves')."</label><br>";
 		} else {
 			echo "<input type='hidden' name='breves' value='non'>";
 		}
 		if ($rubriques == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='rubriques' value='oui' $checked id='rubriques'> <label for='rubriques'>aux rubriques</label><br>";
+		echo "<input type='checkbox' name='rubriques' value='oui' $checked id='rubriques'> <label for='rubriques'>"._T('item_mots_cles_association_rubriques')."</label><br>";
 		if ($syndic == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='syndic' value='oui' $checked id='syndic'> <label for='syndic'>aux sites r&eacute;f&eacute;renc&eacute;s ou syndiqu&eacute;s.</label>";
+		echo "<input type='checkbox' name='syndic' value='oui' $checked id='syndic'> <label for='syndic'>"._T('item_mots_cles_association_sites')."</label>";
 		
 		echo "</ul>";
 	echo "</div>";
@@ -119,13 +119,13 @@ if ($connect_statut =="0minirezo"){
 			$checked = "checked";
 		else
 			$checked = "";
-		echo "<input type='checkbox' name='unseul' value='oui' $checked id='unseul'> <label for='unseul'>On ne peut s&eacute;lectionner qu'<b>un seul mot-cl&eacute; &agrave;</b> la fois dans ce groupe.</label>";
+		echo "<input type='checkbox' name='unseul' value='oui' $checked id='unseul'> <label for='unseul'>"._T('info_selection_un_seul_mot_cle')."</label>";
 		echo "<br>";
 
 		if ($obligatoire == "oui")
 			$checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='obligatoire' value='oui' $checked id='obligatoire'> <label for='obligatoire'><b>Groupe important&nbsp;:</b> il est fortement conseill&eacute; de s&eacute;lectionner un mot-cl&eacute; dans ce groupe.</label>";
+		echo "<input type='checkbox' name='obligatoire' value='oui' $checked id='obligatoire'> <label for='obligatoire'>"._T('avis_conseil_selection_mot_cle')."</label>";
 
 		echo "</div>";
 	} else {
@@ -137,15 +137,15 @@ if ($connect_statut =="0minirezo"){
 	
 	echo "<p>";
 	echo "<div style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #dddddd;'>";
-		echo "<b>Les mots de ce groupe peuvent &ecirc;tre attribu&eacute;s par&nbsp;:</b>";
+		echo "<b>"._T('info_qui_attribue_mot_cle')."</b>";
 		echo "<ul>";
 		
 		if ($acces_minirezo == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='acces_minirezo' value='oui' $checked id='administrateurs'> <label for='administrateurs'>les administrateurs du site</label><br>";
+		echo "<input type='checkbox' name='acces_minirezo' value='oui' $checked id='administrateurs'> <label for='administrateurs'>"._T('bouton_checkbox_qui_attribue_mot_cle_administrateurs')."</label><br>";
 		if ($acces_comite == "oui") $checked = "checked";
 		else $checked = "";
-		echo "<input type='checkbox' name='acces_comite' value='oui' $checked id='comite'> <label for='comite'>les r&eacute;dacteurs</label><br>";
+		echo "<input type='checkbox' name='acces_comite' value='oui' $checked id='comite'> <label for='comite'>"._T('bouton_checkbox_qui_attribue_mot_cle_redacteurs')."</label><br>";
 	
 		$mots_cles_forums = lire_meta("mots_cles_forums");
 		$forums_publics=lire_meta("forums_publics");
@@ -153,7 +153,7 @@ if ($connect_statut =="0minirezo"){
 		if (($mots_cles_forums == "oui" OR $acces_forum == "oui") AND $forums_publics != "non"){
 			if ($acces_forum == "oui") $checked = "checked";
 			else $checked = "";
-			echo "<input type='checkbox' name='acces_forum' value='oui' $checked id='forum'> <label for='forum'>les visiteurs du site public lorsqu'ils postent un message dans un forum.</label>";
+			echo "<input type='checkbox' name='acces_forum' value='oui' $checked id='forum'> <label for='forum'>"._T('bouton_checkbox_qui_attribue_mot_cle_visiteurs')."</label>";
 		} 
 		else {
 			echo "<input type='hidden' name='acces_forum' value='non'>";
@@ -165,7 +165,7 @@ if ($connect_statut =="0minirezo"){
 	
 	
 
-	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='Valider'></div>";
+	echo "<p><div align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
 	echo "</FORM><P>";
 	fin_cadre_formulaire();	
 	echo "</font>";
@@ -173,7 +173,7 @@ if ($connect_statut =="0minirezo"){
 
 }else{
 
-	echo "<H3>Vous n'avez pas acc&egrave;s &agrave; cette page.</H3>";
+	echo "<H3>"._T('avis_non_acces_page')."</H3>";
 
 }
 

@@ -14,16 +14,16 @@ $retour = "auteurs.php3?";
 if ($tri) {
 	$retour .= "tri=$tri";
 	if ($tri=='nom' OR $tri=='statut')
-		$partri = " (par $tri)";
+		$partri = _T('info_par_tri', array('tri' => $tri));
 	else if ($tri=='nombre')
-		$partri = " (par nombre d'articles)";
+		$partri = _T('info_par_nombre_article');
 }
 
 if ($visiteurs == "oui") {
-	debut_page("Visiteurs","redacteurs","redacteurs");
+	debut_page(_T('titre_page_auteurs'),"redacteurs","redacteurs");
 	$retour .= '&visiteurs=oui';
 } else
-	debut_page("Auteurs$partri","redacteurs","redacteurs");
+	debut_page(_T('info_auteurs_par_tri', array('partri' => $partri)),"redacteurs","redacteurs");
 
 debut_gauche();
 
@@ -31,15 +31,12 @@ debut_gauche();
 
 debut_boite_info();
 if ($visiteurs == "oui")
-	echo "<p class='arial1'>".propre("Vous trouverez ici les visiteurs enregistr&eacute;s
-	dans l'espace public du site (forums sur abonnement).");
+	echo "<p class='arial1'>"._T('info_gauche_visiteurs_enregistres');
 else {
-	echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
-	Leur statut est indiqu&eacute; par la couleur de leur icone (r&eacute;dacteur = vert; administrateur = jaune). ");
+	echo "<p class='arial1'>"._T('info_gauche_auteurs');
 
 	if ($connect_statut == '0minirezo')
-		echo '<br>'. propre ("Les auteurs ext&eacute;rieurs, sans acc&egrave;s au site, sont indiqu&eacute;s par une icone bleue&nbsp;;
-		les auteurs effac&eacute;s par une poubelle.");
+		echo '<br>'. _T('info_gauche_auteurs_exterieurs');
 }
 fin_boite_info();
 
@@ -50,12 +47,12 @@ if ($connect_statut == '0minirezo') {
 	$flag_visiteurs = spip_num_rows($result) > 0;
 
 	debut_raccourcis();
-	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
 	if ($flag_visiteurs) {
 		if ($visiteurs == "oui")
-			icone_horizontale ("Afficher les auteurs", "auteurs.php3", "redacteurs-24.gif", "");
+			icone_horizontale (_T('icone_afficher_auteurs'), "auteurs.php3", "redacteurs-24.gif", "");
 		else
-			icone_horizontale ("Afficher les visiteurs", "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
+			icone_horizontale (_T('icone_afficher_visiteurs'), "auteurs.php3?visiteurs=oui", "redacteurs-24.gif", "");
 	}
 	fin_raccourcis();
 }
@@ -191,9 +188,9 @@ if ($connect_statut == '0minirezo') { // recuperer les admins restreints
 
 echo "<br>";
 if ($visiteurs=='oui')
-	gros_titre("Visiteurs");
+	gros_titre(_T('info_visiteurs'));
 else
-	gros_titre("Les auteurs");
+	gros_titre(_T('info_auteurs'));
 echo "<p>";
 
 // reglage du debut
@@ -216,21 +213,21 @@ echo "<td width='20'>";
 	if ($tri=='statut')
 		echo $img;
 	else
-		echo "<a href='auteurs.php3?tri=statut' title='Trier par statut'>$img</a>";
+		echo "<a href='auteurs.php3?tri=statut' title='"._T('lien_trier_statut')."'>$img</a>";
 
 echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
-		echo '<b>Nom</b>';
+		echo '<b>'._T('info_nom').'</b>';
 	else
-		echo "<a href='auteurs.php3?tri=nom' title='Trier par nom'>Nom</a>";
+		echo "<a href='auteurs.php3?tri=nom' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>";
 
-if ($options == 'avancees') echo "</td><td colspan='2'>Contact";
+if ($options == 'avancees') echo "</td><td colspan='2'>"._T('info_contact');
 echo "</td><td>";
 	if ($visiteurs != 'oui') {
 		if ($tri=='nombre')
-			echo '<b>Articles</b>';
+			echo '<b>'._T('info_articles').'</b>';
 		else
-			echo "<a href='auteurs.php3?tri=nombre' title=\"Trier par nombre d'articles\">Articles</a>"; //'
+			echo "<a href='auteurs.php3?tri=nombre' title=\""._T('lien_trier_nombre_articles')."\">"._T('info_articles_2')."</a>"; //'
 	}
 echo "</td></tr>\n";
 
@@ -303,7 +300,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 				echo "&nbsp;";
 
 		if (strlen($row['url_site'])>3)
-			echo "</td><td><A HREF='".$row['url_site']."'>site</A>";
+			echo "</td><td><A HREF='".$row['url_site']."'>"._T('lien_site')."</A>";
 		else
 			echo "</td><td>&nbsp;";
 	}
@@ -311,9 +308,9 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	// nombre d'articles
 	echo '</td><td>';
 	if ($row['compteur'] > 1)
-		echo $row['compteur']."&nbsp;articles";
+		echo $row['compteur']."&nbsp;"._T('info_article_2');
 	else if($row['compteur'] == 1)
-		echo "1&nbsp;article";
+		echo "1&nbsp;"._T('info_article');
 	else
 		echo "&nbsp;";
 

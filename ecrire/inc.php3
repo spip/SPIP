@@ -1,5 +1,6 @@
 <?php
 
+
 if (!file_exists("inc_connect.php3")) {
 	@header("Location: install.php3");
 	exit;
@@ -176,10 +177,9 @@ switch ($prefs['couleur']) {
 $version_installee = (double) lire_meta("version_installee");
 if ($version_installee <> $spip_version) {
 	debut_page();
-	if (!$version_installee) $version_installee = "ant&eacute;rieure";
-	echo "<blockquote><blockquote><h4><font color='red'>Message technique :</font><br> la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d'adapter
-	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.</h4>
-	Si vous &ecirc;tes administrateur du site, veuillez <a href='upgrade.php3'>cliquer sur ce lien</a>.</blockquote></blockquote><p>";
+	if (!$version_installee) $version_installee = _T('info_anterieur');
+	echo "<blockquote><blockquote><h4><font color='red'>"._T('info_message_technique')."</font><br> "._T('info_procedure_maj_version')."</h4>
+	"._T('info_administrateur_site_01')."<a href='upgrade.php3'>"._T('info_administrateur_site_02')."</a></blockquote></blockquote><p>";
 	fin_page();
 	exit;
 }
@@ -203,7 +203,7 @@ if (!$activer_statistiques){
 }
 
 if (!$nom_site_spip) {
-	$nom_site_spip = "Mon site SPIP";
+	$nom_site_spip = _T('info_mon_site_spip');
 	ecrire_meta("nom_site", $nom_site_spip);
 	ecrire_metas();
 }

@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 
-debut_page("Votre espace priv&eacute;", "asuivre", "asuivre");
+debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
 debut_gauche();
 
@@ -31,7 +31,7 @@ function enfant($collection){
 			$les_enfants.= $bouton_layer;
 		}
 		if  (acces_restreint_rubrique($id_rubrique))
-			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique et ses sous-rubriques'> ";
+			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."'> ";
 		$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
 		if (strlen($descriptif)>1)
 			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
@@ -81,23 +81,23 @@ else echo debut_block_invisible("info_perso");
 
 if (lire_meta('activer_messagerie') != 'non') {
 	if ($connect_activer_messagerie != "non") {
-		echo "<br>Vous utilisez la messagerie interne de ce site. ";
+		echo "<br>"._T('info_utilisation_messagerie_interne');
 		if ($connect_activer_imessage != "non")
-			echo "Votre nom appara&icirc;t dans la liste des utilisateurs connect&eacute;s.";
+			echo _T('info_nom_utilisateurs_connectes');
 		else
-			echo "Votre nom n'appara&icirc;t pas dans la liste des utilisateurs connect&eacute;s.";
+			echo _T('info_nom_non_utilisateurs_connectes');
 	} else
-		echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
+		echo "<br>"._T('info_non_utilisation_messagerie');
 }
 
-icone_horizontale("Modifier vos informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
+icone_horizontale(_T('icone_modifier_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
 
 //
 // Supprimer le cookie, se deconnecter...
 //
 
 if ($connect_statut == "0minirezo" AND $cookie_admin) {
-	icone_horizontale("Supprimer le cookie de correspondance" . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
+	icone_horizontale(_T('icone_supprimer_cookie') . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 }
 
 echo fin_block();
@@ -114,7 +114,7 @@ if (spip_num_rows($result) > 0){
 	debut_cadre_enfonce("messagerie-24.gif");
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'>";
 	echo "<div style='background-color: yellow; padding: 3px;'>";
-	echo "<b>Annonces g&eacute;n&eacute;rales :</b>";
+	echo "<b>"._T('info_annonces_generales')."</b>";
 	echo "</div>";
 	while ($row = spip_fetch_object($result)) {
 		if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
@@ -141,21 +141,21 @@ $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
 if (spip_num_rows($result) > 0) {
-	icone_horizontale("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
+	icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
 
 	$activer_breves = lire_meta("activer_breves");
 	if ($activer_breves != "non") {
-		icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
 	}
 }
 else {
 	if ($connect_statut == '0minirezo') {
-		echo "<font size='2'>Avant de pouvoir &eacute;crire des articles, ";
-		echo "vous devez cr&eacute;er au moins une rubrique.</font><p>";
+		echo "<font size='2'>"._T('info_ecrire_article_1');
+		echo _T('info_ecrire_article_2')."</font><p>";
 	}
 }
 if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-	icone_horizontale("Cr&eacute;er une nouvelle rubrique", "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
+	icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 }
 
 
@@ -163,26 +163,26 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 if ($options == "avancees") {
 	echo "<p>";
 	if (lire_meta("activer_messagerie") == 'oui' AND $connect_activer_messagerie != 'non') {
-		icone_horizontale("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif");
+		icone_horizontale(_T('icone_messagerie_peronnelle'), "messagerie.php3", "messagerie-24.gif");
 	}
 
-	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif","rien.gif");
+	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
 
 	if ($connect_statut == "0minirezo") {
 		if (lire_meta('forum_prive_admin') == 'oui') {
-			icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif");
+			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
 			echo "<p>";
 		}
 		if (lire_meta("activer_statistiques") == 'oui')
-			icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif");
-		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif");
+			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
+		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
 		if ($connect_toutes_rubriques)
-			icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif");
+			icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
 	}
 }
 else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 	echo "<p>";
-	icone_horizontale("Configurer votre site", "configuration.php3", "administration-24.gif");
+	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
 }
 
 fin_raccourcis();
@@ -193,13 +193,8 @@ debut_droite();
 if ($options != 'avancees') {
 	debut_boite_info();
 	echo "<div class='verdana2'>";
-	echo "<p><center><b>&laquo;&nbsp;&Agrave; SUIVRE&nbsp;&raquo;</b></center>";
-	echo "<p>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. ".
-		"Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves ".
-		"pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos ".
-		"pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec ".
-		"l'interface, vous pourrez cliquer sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; ".
-		"pour ouvrir plus de possibilit&eacute;s.");
+	echo "<p><center><b>&laquo;&nbsp;"._T('info_a_suivre')."</b></center>";
+	echo "<p>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3');
 	echo "</div>";
 	fin_boite_info();
 }
@@ -231,12 +226,12 @@ if ($meta["debut_restauration"]) {
 			$affiche_progression_pourcent = filesize($archive);
 			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
 		}
-		$texte_boite = "La base est en cours de restauration.<p>
+		$texte_boite = _T('info_base_restauration')."<p>
 		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
-		<input type='text' class='forml' name='recharge' value='Veuillez recharger cette page dans quelques instants.'></center></form>";
+		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
 	}
 	else {
-		$texte_boite = "Erreur de restauration : fichier inexistant.";
+		$texte_boite = _T('info_erreur_restauration');
 	}
 	
 	debut_boite_alerte();
@@ -269,13 +264,13 @@ if ($connect_statut == "0minirezo") {
 	if (!$cookie_admin) {
 		echo "<table width=100%><tr width=100%>";
 		echo "<td width=100%>";
-		echo "Vous pouvez activer un <b>cookie de correspondance</b>, ce qui vous permettra de passer facilement du site public au site priv&eacute;.";
+		echo _T('info_activer_cookie_1')."</b>"._T('info_activer_cookie_2');
 		echo aide ("cookie");
 		echo "</td>";
 		echo "<td width=10><img src='img_pack/rien.gif' width=10>";
 		echo "</td>";
 		echo "<td width='250'>";
-		icone_horizontale("Activer le cookie de correspondance", "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
+		icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 		echo "</td></tr></table>";
 		echo "<p><hr><p>";
 	}
@@ -290,7 +285,7 @@ $post_dates = lire_meta("post_dates");
 
 if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
 	echo "<P align=left>";
-	afficher_articles("Les articles post-dat&eacute;s &agrave; para&icirc;tre",
+	afficher_articles(_T('info_article_a_paraitre'),
 		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 		"FROM spip_articles WHERE statut='publie' AND date>NOW() ORDER BY date");
 }
@@ -301,7 +296,7 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 //
 
 echo "<P align=left>";
-$vos_articles = afficher_articles("Vos articles en cours de r&eacute;daction",
+$vos_articles = afficher_articles(_T('info_en_cours_validation'),
 	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur".
@@ -343,12 +338,12 @@ if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0m
 if ($relief) {
 	echo "<p>";
 	debut_cadre_enfonce();
-	echo "<font color='$couleur_foncee' face='arial,helvetica,sans-serif'><b>Les articles et br&egrave;ves ci-dessous sont propos&eacute;s &agrave; la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.</b></font><p>";
+	echo "<font color='$couleur_foncee' face='arial,helvetica,sans-serif'><b>"._T('texte_en_cours_validation')."</b></font><p>";
 
 	//
 	// Les articles a valider
 	//
-	afficher_articles("Articles propos&eacute;s",
+	afficher_articles(_T('info_articles_proposes'),
 		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 		"FROM spip_articles WHERE statut='prop'$vos_articles ORDER BY date DESC");
 
@@ -356,14 +351,14 @@ if ($relief) {
 	// Les breves a valider
 	//
 	$query = "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC";
-	afficher_breves("Br&egrave;ves &agrave; valider", $query, true);
+	afficher_breves(_T('info_breves_valider'), $query, true);
 
 	//
 	// Les sites references a valider
 	//
 	if (lire_meta('activer_syndic') != 'non') {
 		include_ecrire("inc_sites.php3");
-		afficher_sites("Sites &agrave; valider", "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
+		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
 	}
 
 	//
@@ -371,7 +366,7 @@ if ($relief) {
 	//
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
-		afficher_sites("Ces sites syndiqu&eacute;s ont pos&eacute; un probl&egrave;me",
+		afficher_sites(_T('avis_sites_syndiques_probleme'),
 			"SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
 	}
 
@@ -379,19 +374,19 @@ if ($relief) {
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
-			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." liens syndiqu&eacute;s</a> sont en attente de validation.</small>";
+			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a>"._T('info_liens_syndiques_2')."</small>";
 	}
 
-	// Les forums en attente de moderation
+	// Les forums en attente de moderation 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
 		if (($row = spip_fetch_array($result)) AND $row['compte']) {
-			echo "<br><small><a href='controle_forum.php3'>".$row['compte']." forum";
+			echo "<br><small> <a href='controle_forum.php3'>".$row['compte']; 
 			if ($row['compte']>1)
-				echo "s</a> sont";
+				echo _T('info_liens_syndiques_3')."</a>"._T('info_liens_syndiques_4');  
 			else
-				echo " </a> est";
-			echo " en attente de validation</small>.";
+				echo _T('info_liens_syndiques_5')."</a>"._T('info_liens_syndiques_6');
+			echo _T('info_liens_syndiques_7')."</small>.";
 		}
 	}
 
@@ -425,7 +420,7 @@ if ($options == 'avancees') {
 	//
 
 	echo "<p>";
-	afficher_articles("Vos derniers articles publi&eacute;s en ligne",
+	afficher_articles(_T('info_derniers_articles_publies'),
 		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);

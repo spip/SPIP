@@ -3,10 +3,10 @@
 include ("inc.php3");
 
 
-debut_page("Statistiques par rubriques", "administration", "statistiques");
+debut_page(_T('titre_page_statistiques'), "administration", "statistiques");
 
 echo "<br><br><br>";
-gros_titre("Statistiques du site");
+gros_titre(_T('titre_statistiques'));
 barre_onglets("statistiques", "repartition");
 
 debut_gauche();
@@ -15,7 +15,7 @@ debut_gauche();
 debut_droite();
 
 if ($connect_statut != '0minirezo') {
-	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
+	echo _T('avis_non_acces_page');
 	fin_page();
 	exit;
 }
@@ -121,16 +121,16 @@ $result = spip_fetch_array(spip_query($query));
 $nb_art = $result['cnt'];
 
 if ($nb_art){
-	$cesite = "<LI> $nb_art articles";
+	$cesite = "<LI> $nb_art "._T('info_article_2');
 	$query = "SELECT count(*) AS cnt FROM spip_breves where statut='publie'";
 	$result = spip_fetch_array(spip_query($query));
 	$nb_breves = $result['cnt'];
-	if ($nb_breves) $cesite .= "<LI> $nb_breves br&egrave;ves";
+	if ($nb_breves) $cesite .= "<LI> $nb_breves "._T('info_breves_2');
 	$query = "SELECT count(*) AS cnt FROM spip_forum where statut='publie'";
 	$result = spip_fetch_array(spip_query($query));
 	$nb_forum = $result['cnt'];
-	if ($nb_forum) $cesite .= "<LI> $nb_forum contributions de forum";
-	echo "<P><B>Ce site contient&nbsp;:<UL> $cesite.</UL></B>";
+	if ($nb_forum) $cesite .= "<LI> $nb_forum "._T('info_contribution');
+	echo "<P><B>"._T('info_contenance')."<UL> $cesite.</UL></B>";
 }
 
 
@@ -157,7 +157,7 @@ echo "<TR><TD></TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0>
 
 echo "</TABLE>";
 
-echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Les barres rouges repr&eacute;sentent les entr&eacute;es cumul&eacute;es (total des sous-rubriques), les barres vertes le nombre de visites pour chaque rubrique.</FONT>";
+echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('texte_signification')."</FONT>";
 
 
 fin_cadre_relief();

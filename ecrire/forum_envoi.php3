@@ -23,8 +23,8 @@ if ($valider_forum AND ($statut!='')) {
 	die();
 }
 
-if ($id_message) debut_page("Envoyer un message", "asuivre", "messagerie");
-else debut_page("Envoyer un message", "messagerie");
+if ($id_message) debut_page(_T('titre_page_forum_envoi'), "asuivre", "messagerie");
+else debut_page(_T('titre_page_forum_envoi'), "messagerie");
 debut_gauche();
 debut_droite();
 
@@ -93,7 +93,7 @@ if ($modif_forum == "oui") {
 		echo "<p><a href='$url_site'>$nom_site</a>";
 	}
 
-	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='Message d&eacute;finitif : envoyer'></div>";
+	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='"._T('bouton_envoyer_message')."'></div>";
 
 	fin_cadre_relief();
 	if ($titre_parent) {
@@ -109,7 +109,7 @@ echo "<p></p>";
 debut_cadre_formulaire();
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
-	icone("Retour", $adresse_retour, "forum-interne-24.gif");
+	icone(_T('icone_retour'), $adresse_retour, "forum-interne-24.gif");
 echo "</TD>";
 
 echo "<TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
@@ -132,16 +132,16 @@ echo "<INPUT TYPE='Hidden' NAME='id_syndic' VALUE=\"$id_syndic\">\n";
 echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 
 
-echo "<p><B>Texte de votre message :</B><BR>";
-echo "(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)<BR>";
+echo "<p><B>"._T('info_texte_message')."</B><BR>";
+echo _T('info_creation_paragraphe')."<BR>";
 echo "<TEXTAREA NAME='texte' ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
 echo entites_html($texte);
 echo "</TEXTAREA><P>\n";
 
 if ($statut != 'perso' AND $options == "avancees") {
-	echo "<B>Lien hypertexte :</B><BR>";
-	echo "(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)<BR>";
-	echo "Titre :<BR>";
+	echo "<B>"._T('info_lien_hypertexte')."</B><BR>";
+	echo _T('texte_lien_hypertexte')."<BR>";
+	echo _T('texte_titre_02')."<BR>";
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='nom_site' VALUE=\"$nom_site\" SIZE='40'><BR>";
 
 	$lien_url="http://";
@@ -149,7 +149,7 @@ if ($statut != 'perso' AND $options == "avancees") {
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'><P>";
 }
 
-echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Voir ce message avant de le valider'></div>";
+echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_voir_message')."'></div>";
 echo "</FORM>";
 
 fin_page();

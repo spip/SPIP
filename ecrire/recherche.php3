@@ -4,7 +4,7 @@ include ("inc.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_sites.php3");
 
-debut_page("R&eacute;sultats de la recherche $recherche");
+debut_page(_T('titre_page_recherche', array('recherche' => $recherche)));
 
 debut_gauche();
 
@@ -12,7 +12,7 @@ debut_gauche();
 
 debut_droite();
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B>R&eacute;sultats de la recherche :</B><BR>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
 echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>".typo($recherche)."</B></FONT><p>";
 
 $query_articles = "SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE";
@@ -51,50 +51,50 @@ if (lire_meta('activer_moteur') == 'oui') {	// texte integral
 }
 
 if ($query_articles)
-	$nba = afficher_articles ("Articles trouv&eacute;s", $query_articles);
+	$nba = afficher_articles (_T('info_articles_trouves'), $query_articles);
 if ($query_articles_int) {
 	if ($nba) {
 		$doublons = join($nba, ",");
 		$query_articles_int = ereg_replace ("WHERE", "WHERE objet.id_article NOT IN ($doublons) AND", $query_articles_int);
 	}
-	$nba1 = afficher_articles ("Articles trouv&eacute;s (dans le texte)", $query_articles_int);
+	$nba1 = afficher_articles (_T('info_articles_trouves_dans_texte'), $query_articles_int);
 }
 
 if ($query_breves)
-	$nbb = afficher_breves ("Br&egrave;ves trouv&eacute;es", $query_breves);
+	$nbb = afficher_breves (_T('info_breves_touvees'), $query_breves);
 if ($query_breves_int) {
 	if ($nbb) {
 		$doublons = join($nbb, ",");
 		$query_breves_int = ereg_replace ("WHERE", "WHERE objet.id_breve NOT IN ($doublons) AND", $query_breves_int);
 	}
-	$nbb1 = afficher_breves ("Br&egrave;ves trouv&eacute;es (dans le texte)", $query_breves_int);
+	$nbb1 = afficher_breves (_T('info_breves_touvees_dans_texte'), $query_breves_int);
 }
 
 if ($query_rubriques)
-	$nbr = afficher_rubriques ("Rubriques trouv&eacute;es", $query_rubriques);
+	$nbr = afficher_rubriques (_T('info_rubriques_trouvees'), $query_rubriques);
 if ($query_rubriques_int) {
 	if ($nbr) {
 		$doublons = join($nbr, ",");
 		$query_rubriques_int = ereg_replace ("WHERE", "WHERE objet.id_rubrique NOT IN ($doublons) AND", $query_rubriques_int);
 	}
-	$nbr1 = afficher_rubriques ("Rubriques trouv&eacute;es (dans le texte)", $query_rubriques_int);
+	$nbr1 = afficher_rubriques (_T('info_rubriques_trouvees_dans_texte'), $query_rubriques_int);
 }
 
 if ($query_auteurs_int AND $connect_statut == '0minirezo')
-	$nbt = afficher_auteurs ("Auteurs trouv&eacute;s", $query_auteurs_int);
+	$nbt = afficher_auteurs (_T('info_auteurs_trouves'), $query_auteurs_int);
 
 if ($query_sites)
-	$nbs = afficher_sites ("Sites trouv&eacute;s", $query_sites);
+	$nbs = afficher_sites (_T('info_sites_trouves'), $query_sites);
 if ($query_sites_int) {
 	if ($nbs) {
 		$doublons = join($nbs, ",");	
 		$query_sites_int = ereg_replace ("WHERE", "WHERE objet.id_syndic NOT IN ($doublons) AND", $query_sites_int);
 	}
-	$nbs1 = afficher_sites ("Sites trouv&eacute;s (dans le texte)", $query_sites_int);
+	$nbs1 = afficher_sites (_T('info_sites_trouves_dans_texte'), $query_sites_int);
 }
 
 if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>Aucun r&eacute;sultat.</FONT><P>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
 }
 
 echo "<p>";

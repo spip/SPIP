@@ -24,12 +24,12 @@ else {
 }
 
 
-if($titre) $pourarticle = " pour &laquo; $titre &raquo;";
+if($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
-debut_page("Statistiques des visites".$pourarticle, "administration", "statistiques");
+debut_page(_T('titre_page_statistiques_visites').$pourarticle, "administration", "statistiques");
 
 echo "<br><br><br>";
-gros_titre("&Eacute;volution des visites<html>".aide("confstat")."</html>");
+gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
 barre_onglets("statistiques", "evolution");
 
 if ($titre) gros_titre($titre);
@@ -42,12 +42,12 @@ debut_gauche();
 
 	echo "<div class='iconeoff' style='padding: 5px;'>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-	echo typo("Afficher les visites pour:");
+	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
-		echo "<li><b><a href='statistiques_visites.php3'>Tout le site</a></b>";
+		echo "<li><b><a href='statistiques_visites.php3'>"._T('info_tout_site')."</a></b>";
 	} else {
-		echo "<li><b>Tout le site</b>";
+		echo "<li><b>"._T('titre_page_articles_tous')."</b>";
 	}
 
 		echo "</ul>";
@@ -73,7 +73,7 @@ debut_gauche();
 		echo "<p>";
 		echo "<div class='iconeoff' style='padding: 5px;'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		echo typo("Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publi&eacute;s&nbsp;:</b>");
+		echo typo(_T('info_visites_plus_populaires'));
 		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
 		while ($row = spip_fetch_array($result)) {
@@ -90,7 +90,7 @@ debut_gauche();
 				if ($l_article == $id_article){
 					echo "\n<li value='$liste'><b>$titre</b>";
 				} else {
-					echo "\n<li value='$liste'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a>";
+					echo "\n<li value='$liste'><a href='statistiques_visites.php3?id_article=$l_article' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a>";
 				}
 			}
 		}
@@ -112,20 +112,14 @@ debut_gauche();
 				if ($l_article == $id_article){
 					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a></li>";
+					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
 		}
 			
 		echo "</ol>";
 
-		echo "<b>Comment lire ce tableau</b><br>Le rang de l'article,
-		dans le classement par popularit&eacute;, est indiqu&eacute; dans la
-		marge&nbsp;; la popularit&eacute; de l'article (une estimation du
-		nombre de visites quotidiennes qu'il recevra si le rythme actuel de
-		consultation se maintient) et le nombre de visites re&ccedil;ues
-		depuis le d&eacute;but sont affich&eacute;es dans la bulle qui
-		appara&icirc;t lorsque la souris survole le titre.";
+		echo "<b>"._T('info_comment_lire_tableau')."</b><br>"._T('texte_comment_lire_tableau');
 
 		echo "</font>";
 		echo "</font>";
@@ -152,7 +146,7 @@ debut_gauche();
 
 		echo "<p></p><div class='iconeoff' style='padding: 5px;'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-		echo typo("Afficher les visites pour <b>les articles les plus visit&eacute;s depuis le d&eacute;but&nbsp;:</b>");
+		echo typo(_T('info_affichier_visites_articles_plus_visites'));
 		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
 
@@ -166,7 +160,7 @@ debut_gauche();
 				if ($l_article == $id_article){
 					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='popularit&eacute;&nbsp;:&nbsp;$popularite&nbsp;; visites&nbsp;:&nbsp;$visites'>$titre</a></li>";
+					echo "\n<li value='$numero'><a href='statistiques_visites.php3?id_article=$l_article' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";
@@ -186,9 +180,9 @@ if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
 	
 	if ($id_article > 0){
-	icone_horizontale("Retour &agrave; l'article", "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
+	icone_horizontale(_T('icone_retour_article'), "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
 	}
-	icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
+	icone_horizontale(_T('icone_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
 	
 	fin_raccourcis();
 }
@@ -198,7 +192,7 @@ if ($connect_statut == '0minirezo') {
 debut_droite();
 
 if ($connect_statut != '0minirezo') {
-	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
+	echo _T('avis_non_acces_page');
 	fin_page();
 	exit;
 }
@@ -415,30 +409,33 @@ if (count($log)>0){
 		echo "</table>";
 	echo "</font></td>";
 	echo "</td></tr></table>";
-		echo "<font face='arial,helvetica,sans-serif' size=1>(barres fonc&eacute;es :  dimanche / courbe fonc&eacute;e : &eacute;volution de la moyenne)</font>";
+		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
 		
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
-		echo "maximum&nbsp;: $max";
-		echo "<br>moyenne&nbsp;: ".round($moyenne);
+		echo _T('info_maximum').$max;
+		echo "<br>"._T('info_moyenne').round($moyenne);
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
-		echo "aujourd'hui&nbsp;: $visites_today";
-		if ($val_prec > 0) echo "<br>hier&nbsp;: $val_prec";
-		if ($id_article) echo "<br>popularit&eacute;&nbsp;: $val_popularite";
+		echo _T('info_aujourdhui').$visites_today;
+		if ($val_prec > 0) echo "<br>"._T('info_hier').$val_prec;
+		if ($id_article) echo "<br>"._T('info_popularite_5').$val_popularite;
 
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
-		echo "<b>total : $total_absolu</b>";
+		echo "<b>"._T('info_total')."$total_absolu</b>";
 		
 		if ($id_article) {
 			if ($classement[$id_article] > 0) {
-				$er = ($classement[$id_article] == 1) ? "er" : "e";
-				echo "<br>".$classement[$id_article]."<sup>$er</sup> sur $liste";
+				if ($classement[$id_article] == 1)
+				      $ch = _T('info_classement_1', array('liste' => $liste));
+				else
+				      $ch = _T('info_classement_2', array('liste' => $liste));
+				echo "<br>".$classement[$id_article].$ch;
 			}
 		} else {
 			echo "<font size=1>";
-			echo "<br>popularit&eacute; du site&nbsp;: ";
+			echo "<br>"._T('info_popularite_2');
 			echo ceil(lire_meta('popularite_total'));
 			echo "</font>";
 		}
@@ -466,8 +463,8 @@ if ($activer_statistiques_ref != "non"){
 	
 	
 		if ($visites > 5) echo "<font color='red'>$visites liens : </font>";
-		else if ($visites > 1) echo "$visites liens : ";
-		else echo "<font color='#999999'>$visites lien : </font>";
+		else if ($visites > 1) echo "$visites "._T('lnfo_liens');
+		else echo "<font color='#999999'>$visites "._T('info_lien')."</font>";
 	
 		echo stats_show_keywords($referer, $referer);
 	}

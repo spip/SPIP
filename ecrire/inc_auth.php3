@@ -43,7 +43,7 @@ function auth() {
 	// Si pas MySQL, fini
 	//
 	if (!$GLOBALS['db_ok']) {
-		echo "<P><H4>Attention&nbsp;: un probl&egrave;me technique (serveur MySQL) emp&ecirc;che l'acc&egrave;s &agrave; cette partie du site.\nMerci de votre compr&eacute;hension.</H4><P><P>\n".
+		echo "<P><H4>"._T('titre_probleme_technique')."</H4><P><P>\n".
 		"<tt>".spip_sql_errno()." ".spip_sql_error()."</tt>";
 		return false;
 	}
@@ -72,8 +72,8 @@ function auth() {
 		} else {
 			// normalement on n'arrive pas la sauf changement de mot de passe dans la base
 			$auth_login = '';
-			echo "<p><b>Connexion refus&eacute;e</b></p>";
-			echo "[<a href='../spip_cookie.php3?essai_auth_http=oui'>r&eacute;essayer</a>]";
+			echo "<p><b>"._T('info_connexion_refusee')."</b></p>";
+			echo "[<a href='../spip_cookie.php3?essai_auth_http=oui'>"._T('lien_reessayer')."</a>]";
 			exit;
 		}
 		$PHP_AUTH_PW = '';
@@ -200,11 +200,8 @@ function auth() {
 		include_ecrire('inc_presentation.php3');
 		include_ecrire('inc_texte.php3');
 		install_debut_html("Erreur de connexion");
-		echo "<br><br><p>".propre("Vous &ecirc;tes identifi&eacute; sous le
-		login {{$auth_login}}, mais celui-ci n'existe pas/plus dans la base.
-		Essayez de vous [reconnecter->../spip_cookie.php3?logout=$auth_login], apr&egrave;s
-		avoir &eacute;ventuellement quitt&eacute; puis
-		red&eacute;marr&eacute; votre navigateur.");
+		echo "<br><br><p>"._T('texte_inc_auth_1', array('auth_login' => $auth_login))."<A HREF='../spip_cookie.php3?logout=$auth_login'>".
+                _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');
 		install_fin_html();
 		exit;
 	}

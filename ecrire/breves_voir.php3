@@ -21,19 +21,19 @@ function my_sel($num,$tex,$comp){
 }
 
 function afficher_mois($mois){
-	my_sel("00","non connu",$mois);
-	my_sel("01","janvier",$mois);
-	my_sel("02","f&eacute;vrier",$mois);
-	my_sel("03","mars",$mois);
-	my_sel("04","avril",$mois);
-	my_sel("05","mai",$mois);
-	my_sel("06","juin",$mois);
-	my_sel("07","juillet",$mois);
-	my_sel("08","ao&ucirc;t",$mois);
-	my_sel("09","septembre",$mois);
-	my_sel("10","octobre",$mois);
-	my_sel("11","novembre",$mois);
-	my_sel("12","d&eacute;cembre",$mois);
+	my_sel("00",_T('mois_non_connu'),$mois);
+	my_sel("01",_T('mois_janvier'),$mois);
+	my_sel("02",_T('mois_fevrier'),$mois);
+	my_sel("03",_T('mois_mars'),$mois);
+	my_sel("04",_T('mois_avril'),$mois);
+	my_sel("05",_T('mois_mai'),$mois);
+	my_sel("06",_T('mois_juin'),$mois);
+	my_sel("07",_T('mois_juillet'),$mois);
+	my_sel("08",_T('mois_aout'),$mois);
+	my_sel("09",_T('mois_septembre'),$mois);
+	my_sel("10",_T('mois_octobre'),$mois);
+	my_sel("11",_T('mois_novembre'),$mois);
+	my_sel("12",_T('mois_decembre'),$mois);
 }
 
 function afficher_annee($annee){
@@ -57,7 +57,7 @@ function afficher_jour($jour){
 }
 
 if (($id_breve == 0) AND ($new == "oui")) {
-	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut) VALUES ('Nouvelle breve', NOW(), '$id_rubrique', 'refuse')";
+	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut) VALUES ('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse')";
 	$result=spip_query($query);
 	$id_breve=spip_insert_id();
 }
@@ -114,7 +114,7 @@ debut_page("&laquo; $titre_breve &raquo;", "documents", "breves");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -130,15 +130,14 @@ debut_gauche();
 debut_boite_info();
 
 echo "<CENTER>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>BR&Egrave;VE NUM&Eacute;RO&nbsp;:</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
 echo "</CENTER>";
 if ($statut == 'publie') {
-	icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
+	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
 }
 
 fin_boite_info();
-
 
 
 //////////////////////////////////////////////////////
@@ -149,10 +148,10 @@ $arton = "breveon$id_breve";
 $artoff = "breveoff$id_breve";
 
 if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
-	afficher_boite_logo($arton, $artoff, "LOGO DE LA BR&Egrave;VE".aide ("breveslogo"), "LOGO POUR SURVOL");
+	afficher_boite_logo($arton, $artoff, _T('logo_breve').aide ("breveslogo"), _T('logo_survol'));
 
 debut_raccourcis();
-icone_horizontale("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
 fin_raccourcis();
 
 debut_droite();
@@ -193,7 +192,7 @@ echo "</td>";
 if ($flag_editable) {
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Modifier cette breve", "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.gif", "edit.gif");
+	icone(_T('icone_modifier_breve'), "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -215,7 +214,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<INPUT TYPE='hidden' NAME='id_breve' VALUE='$id_breve'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='img_pack/rien.gif'>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
+		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>"._T('texte_date_publication_article');
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
 		echo "<TR><TD ALIGN='center'>";
@@ -230,7 +229,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "</SELECT>";
  		
 		echo "</TD><TD ALIGN='right'>";
-		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
+		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>";
 		echo "</TD></TR></TABLE>";
 		echo "</FORM>";
 		fin_cadre_enfonce();	
@@ -249,11 +248,11 @@ if ($flag_mots!='non' AND $flag_editable AND $options == 'avancees') {
 echo justifier(propre($texte))."\n";
 
 if (strlen($lien_url)>7 AND strlen($lien_titre)>2){
-	echo "<P><font size=1>VOIR EN LIGNE :</font> <A HREF='$lien_url'><B>".typo($lien_titre)."</B></A>\n";
+	echo "<P><font size=1>"._T('lien_voir_en_ligne')."</font> <A HREF='$lien_url'><B>".typo($lien_titre)."</B></A>\n";
 } else if (strlen($lien_titre)>2) {
-	echo "<P><font size=1>NOM DU SITE :</font> ".typo($lien_titre)."</B></A>\n";
+	echo "<P><font size=1>"._T('lien_nom_site')."</font> ".typo($lien_titre)."</B></A>\n";
 } else if (strlen($lien_url)>7) {
-	echo "<P><font size=1>URL DU SITE :</font> <tt>$lien_url</tt>\n";
+	echo "<P><font size=1>"._T('info_url_site')."</font> <tt>$lien_url</tt>\n";
 }
 
 if ($les_notes) {
@@ -266,12 +265,12 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	
 	echo "<table>";
 	echo "<td  align='right'>";
-	icone("Publier cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=publie", "breve-24.gif", "racine-24.gif");
+	icone(_T('icone_publier_breve'), "breves.php3?id_breve=$id_breve&statut=publie", "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Refuser cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.gif", "supprimer.gif");
+	icone(_T('icone_refuser_breve'), "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.gif", "supprimer.gif");
 	echo "</td>";
 	
 
@@ -295,7 +294,7 @@ $forum_retour = urlencode("breves_voir.php3?id_breve=$id_breve");
 
 
 echo "\n<div align='center'>";
-	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_breve=$id_breve&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
+	icone(_T('icone_poster_message'), "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_breve=$id_breve&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 

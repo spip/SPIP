@@ -52,7 +52,7 @@ if ($connect_statut == '0minirezo') {
 		}
 	}
 	else if ($new == 'oui') {
-		$titre_mot = 'Nouveau mot';
+		$titre_mot = _T('texte_nouveau_mot');
 	}
 }
 
@@ -89,11 +89,11 @@ debut_gauche();
 
 debut_boite_info();
 echo "<CENTER>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>MOT NUM&Eacute;RO :</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>"._T('titre_gauche_mots_edit')."</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
 echo "</CENTER>";
 
-	icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
+	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
 
 
 fin_boite_info();
@@ -114,7 +114,7 @@ $arton = "moton$id_mot";
 $artoff = "motoff$id_mot";
 
 if ($id_mot > 0 AND $connect_statut == '0minirezo')
-	afficher_boite_logo($arton, $artoff, "LOGO DU MOT-CL&Eacute;".aide("breveslogo"), "LOGO POUR SURVOL");
+	afficher_boite_logo($arton, $artoff, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'));
 
 
 //
@@ -122,10 +122,10 @@ if ($id_mot > 0 AND $connect_statut == '0minirezo')
 //
 debut_raccourcis();
 
-icone_horizontale("Voir tous les mots-cl&eacute;s", "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
+icone_horizontale(_T('icone_voir_tous_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 
 if ($connect_statut == '0minirezo')
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
+		icone_horizontale(_T('icone_creation_mots_cles'), "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
 
 fin_raccourcis();
 
@@ -144,7 +144,7 @@ gros_titre($titre_mot);
 if ($descriptif) {
 	echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
-	echo "<b>Descriptif :</b> ";
+	echo "<b>"._T('info_descriptif')."</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
 	echo "</font>";
@@ -170,19 +170,19 @@ if ($id_mot) {
 	else
 		$aff_articles = "prop,publie";
 
-	afficher_rubriques("Les rubriques li&eacute;es &agrave; ce mot-cl&eacute;",
+	afficher_rubriques(_T('info_rubriques_liees_mot'),
 	"SELECT rubrique.* FROM spip_rubriques AS rubrique, spip_mots_rubriques AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_rubrique=rubrique.id_rubrique ORDER BY rubrique.titre");
 
-	afficher_articles("Les articles li&eacute;s &agrave; ce mot-cl&eacute;",
+	afficher_articles(_T('info_articles_lies_mot'),
 	"SELECT article.* FROM spip_articles AS article, spip_mots_articles AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_article=article.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 ORDER BY article.date DESC");
 
-	afficher_breves("Les br&egrave;ves li&eacute;es &agrave; ce mot-cl&eacute;",
+	afficher_breves(_T('info_breves_liees_mot'),
 	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC LIMIT 0,10");
 
-	afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s li&eacute;es &agrave; ce mot-cl&eacute;",
+	afficher_sites(_T('info_sites_lies_mot'),
 	"SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC LIMIT 0,10");
 }
@@ -209,7 +209,7 @@ if ($connect_statut =="0minirezo"){
 	$descriptif = entites_html($descriptif);
 	$texte = entites_html($texte);
 
-	echo "<B>Nom ou titre du mot-cl&eacute;</B> [Obligatoire]";
+	echo "<B>"._T('info_titre_mot_cle')."</B> "._T('info_obligatoire_02');
 	echo aide ("mots");
 
 	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40'>";
@@ -219,7 +219,7 @@ if ($connect_statut =="0minirezo"){
 	$result = spip_query($query_groupes);
 	if (spip_num_rows($result)>1) {
 		debut_cadre_relief("groupe-mot-24.gif");
-		echo  "Dans le groupe :</label>\n";
+		echo  _T('info_dans_groupe')."</label>\n";
 		echo aide ("motsgroupes");
 		echo  " &nbsp; <SELECT NAME='id_groupe' class='fondl'>\n";
 		while ($row_groupes = spip_fetch_array($result)){
@@ -242,7 +242,7 @@ if ($connect_statut =="0minirezo"){
 	}
 
 	if ($options == 'avancees' OR $descriptif) {
-		echo "<B>Descriptif rapide</B><BR>";
+		echo "<B>"._T('texte_descriptif_rapide')."</B><BR>";
 		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 		echo $descriptif;
 		echo "</TEXTAREA><P>\n";
@@ -251,7 +251,7 @@ if ($connect_statut =="0minirezo"){
 		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
 
 	if ($options == 'avancees' OR $texte) {
-		echo "<B>Texte explicatif</B><BR>";
+		echo "<B>"._T('info_texte_explicatif')."</B><BR>";
 		echo "<TEXTAREA NAME='texte' ROWS='8' CLASS='forml' COLS='40' wrap=soft>";
 		echo $texte;
 		echo "</TEXTAREA><P>\n";
@@ -259,7 +259,7 @@ if ($connect_statut =="0minirezo"){
 	else
 		echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</FORM>";
 
 	fin_cadre_formulaire();

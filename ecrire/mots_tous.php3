@@ -74,47 +74,45 @@ if ($connect_statut == '0minirezo') {
 }
 
 
-debut_page("Mots-cl&eacute;s", "documents", "mots");
+debut_page(_T('titre_page_mots_tous'), "documents", "mots");
 debut_gauche();
 
 debut_droite();
 
-gros_titre("Les mots-cl&eacute;s");
-echo typo("Cr&eacute;ez et configurez ici les mots-cl&eacute;s du site") . aide ("mots") . "<br><br>";
+gros_titre(_T('titre_mots_tous'));
+echo typo(_T('info_creation_mots_cles')) . aide ("mots") . "<br><br>";
 
 /////
 
 if ($conf_mot>0) {
 	if ($nb_articles == 1) {
-		$texte_lie = "un article, ";
+		$texte_lie = _T('info_un_article');
 	} else if ($nb_articles > 1) {
 		$texte_lie = "$nb_articles articles, ";
 	} 
 	if ($nb_breves == 1) {
-		$texte_lie .= "une br&egrave;ve, ";
+		$texte_lie .= _T('info_une_breve');
 	} else if ($nb_breves > 1) {
-		$texte_lie .= "$nb_breves br&egrave;ves, ";
+		$texte_lie .= _T('info_nombre_breves', array('nb_breves' => $nb_breves));
 	} 
 	if ($nb_sites == 1) {
-		$texte_lie .= "un site, ";
+		$texte_lie .= _T('info_un_site');
 	} else if ($nb_sites > 1) {
-		$texte_lie .= "$nb_sites sites, ";
+		$texte_lie .= _T('info_nombre_sites', array('nb_sites' => $nb_sites));
 	}
 	if ($nb_rubriques == 1) {
-		$texte_lie .= "une rubrique, ";
+		$texte_lie .= _T('info_une_rubrique');
 	} else if ($nb_rubriques > 1) {
-		$texte_lie .= "$nb_rubriques rubriques, ";
+		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nb_rubriques));
 	}
 
 	debut_boite_info();
 	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
-	echo "Vous avez	demand&eacute; &agrave; supprimer le mot-cl&eacute;
-<B>$titre_mot</B> ($type_mot). Ce mot-cl&eacute; &eacute;tant li&eacute; &agrave;
-<b>$texte_lie</b> vous devez confirmer cette d&eacute;cision&nbsp;:";
+	echo _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie));
 	
 	echo "<UL>";
-	echo "<LI> <B><A HREF='mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3'>Oui</A>,</B> je veux supprimer d&eacute;finitivement ce mot-cl&eacute;.";
-	echo "<LI> <B><A HREF='mots_tous.php3'>Non</A>,</B> je ne veux pas supprimer ce mot-cl&eacute;.";
+	echo "<LI><B><A HREF='mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3'>"._T('item_oui')."</A>,</B>"._T('info_oui_suppression_mot_cle');
+	echo "<LI><B><A HREF='mots_tous.php3'>"._T('item_non')."</A>,</B>"._T('info_non_suppression_mot_cle');
 	echo "</UL>";
 	echo "</FONT>";
 	fin_boite_info();
@@ -204,23 +202,23 @@ while($row_groupes = spip_fetch_array($result_groupes)) {
 
 	
 	echo "<tr><td colspan=3><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-		if ($articles == "oui") echo "> Articles &nbsp;&nbsp;";
-		if ($breves == "oui") echo "> Br&egrave;ves &nbsp;&nbsp;";
-		if ($rubriques == "oui") echo "> Rubriques &nbsp;&nbsp;";
-		if ($syndic == "oui") echo "> Sites r&eacute;f&eacute;renc&eacute;s &nbsp;&nbsp;";
+		if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
+		if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
+		if ($rubriques == "oui") echo "> "._T('info_rubriques')." &nbsp;&nbsp;";
+		if ($syndic == "oui") echo "> "._T('icone_sites_references')." &nbsp;&nbsp;";
 		
 	
 	
 	if ($unseul == "oui" OR $obligatoire == "oui") echo "<br>";
-			if ($unseul == "oui") echo "> Un seul mot &agrave; la fois &nbsp;&nbsp;";
-			if ($obligatoire == "oui") echo "> Groupe important &nbsp;&nbsp;";
+			if ($unseul == "oui") echo "> "._T('info_un_mot')." &nbsp;&nbsp;";
+			if ($obligatoire == "oui") echo "> "._T('info_groupe_important')." &nbsp;&nbsp;";
 			
 
 
 	echo "<br>";
-		if ($acces_minirezo == "oui") echo "> Administrateurs &nbsp;&nbsp;";
-		if ($acces_comite == "oui") echo "> R&eacute;dacteurs &nbsp;&nbsp;";
-		if ($acces_forum == "oui") echo "> Visiteurs du site public &nbsp;&nbsp;";
+		if ($acces_minirezo == "oui") echo "> "._T('info_administrateurs')." &nbsp;&nbsp;";
+		if ($acces_comite == "oui") echo "> "._T('info_redacteurs')." &nbsp;&nbsp;";
+		if ($acces_forum == "oui") echo "> "._T('info_visiteurs_02')." &nbsp;&nbsp;";
 		
 	echo "</font></td></tr></table>";	
 	
@@ -279,28 +277,28 @@ while($row_groupes = spip_fetch_array($result_groupes)) {
 				if ($nb_articles[$id_mot] == 1)
 					$texte_lie[] = "1 article";
 				else if ($nb_articles[$id_mot] > 1)
-					$texte_lie[] = $nb_articles[$id_mot]." articles";
+					$texte_lie[] = $nb_articles[$id_mot]._T('info_articles_02');
 
 				if ($nb_breves[$id_mot] == 1)
 					$texte_lie[] = "1 br&egrave;ve";
 				else if ($nb_breves[$id_mot] > 1)
-					$texte_lie[] = $nb_breves[$id_mot]." br&egrave;ves";
+					$texte_lie[] = $nb_breves[$id_mot]._T('info_breves_03');
 
 				if ($nb_sites[$id_mot] == 1)
 					$texte_lie[] = "1 site";
 				else if ($nb_sites[$id_mot] > 1)
-					$texte_lie[] = $nb_sites[$id_mot]." sites";
+					$texte_lie[] = $nb_sites[$id_mot]._T('info_sites');
 
 				if ($nb_rubriques[$id_mot] == 1)
-					$texte_lie[] = "1 rubrique";
+					$texte_lie[] = _T('info_une_rubrique_02');
 				else if ($nb_rubriques[$id_mot] > 1)
-					$texte_lie[] = $nb_rubriques[$id_mot]." rubriques";
+					$texte_lie[] = $nb_rubriques[$id_mot]._T('info_rubriques_02');
 
 				echo $texte_lie = join($texte_lie,", ");
 				
 				if ($connect_statut=="0minirezo") {
 					echo " &nbsp;&nbsp;&nbsp;&nbsp; ";
-					echo "<FONT SIZE=1>[<A HREF='mots_tous.php3?conf_mot=$id_mot'>supprimer&nbsp;ce&nbsp;mot</A>]</FONT>";
+					echo "<FONT SIZE=1>[<A HREF='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."</A>]</FONT>";
 				} else
 					echo "&nbsp;";
 
@@ -323,16 +321,16 @@ while($row_groupes = spip_fetch_array($result_groupes)) {
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
 		echo "<tr>";
 		echo "<td>";
-		icone("Modifier ce groupe de mots", "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.gif", "edit.gif");
+		icone(_T('icone_modif_groupe_mots'), "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.gif", "edit.gif");
 		echo "</td>";
 		if ($supprimer_groupe) {
 			echo "<td>";
-			icone("Supprimer ce groupe", "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.gif", "supprimer.gif");
+			icone(_T('icone_supprimer_groupe_mots'), "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.gif", "supprimer.gif");
 			echo "</td>";
 			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
 		}
 		echo "<td align='right'>";
-		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
+		icone(_T('icone_creation_mots_cles'), "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
 		echo "</td></tr></table>";
 	}	
 
@@ -341,7 +339,7 @@ while($row_groupes = spip_fetch_array($result_groupes)) {
 
 if ($connect_statut =="0minirezo" AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
-	icone("Cr&eacute;er un nouveau groupe de mots", "mots_type.php3?new=oui", "groupe-mot-24.gif", "creer.gif");
+	icone(_T('icone_creation_groupe_mots'), "mots_type.php3?new=oui", "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";
 }
 

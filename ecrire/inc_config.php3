@@ -74,11 +74,10 @@ function avertissement_config() {
 
 	<P align="justify">
 	<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">
-	Les modifications effectu&eacute;es dans ces pages influent notablement sur le
-	fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n'&ecirc;tes pas
-	familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus
-	g&eacute;n&eacute;ralement, il est fortement conseill&eacute;
-	de laisser la charge de ces pages au webmestre principal de votre site.</B>
+<?
+
+	echo _T('texte_inc_config');
+?>
 	</FONT>
 
 	<?php
@@ -141,7 +140,7 @@ function appliquer_modifs_config() {
 	// Test du proxy : $tester_proxy est le bouton "submit"
 	if ($tester_proxy) {
 		if (!$test_proxy) {
-			echo "Vous n'avez pas indiqu&eacute; d'adresse &agrave; tester !";
+			echo _T('info_adresse_non_indiquee');
 			exit;
 		} else {
 			include_ecrire("inc_sites.php3");
@@ -149,7 +148,7 @@ function appliquer_modifs_config() {
 			if ($page)
 				echo "<pre>".entites_html($page)."</pre>";
 			else
-				echo propre("{{Erreur !}} Impossible de lire la page <tt><html>$test_proxy</html></tt> &agrave; travers le proxy <tt><html>$http_proxy</html></tt>.") . aide('confhttpproxy');
+				echo _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))."<html>$http_proxy</html></tt>.".aide('confhttpproxy');
 			exit;
 		}
 	}
@@ -224,7 +223,7 @@ function appliquer_modifs_config() {
 			$modif_secu=true;
 	if ($modif_secu) {
 		include_ecrire('inc_admin.php3');
-		$admin = "modifications des param&egrave;tres de s&eacute;curit&eacute;";
+		$admin = _T('info_modification_parametres_securite');
 		debut_admin($admin);
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))

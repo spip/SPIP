@@ -70,7 +70,7 @@ if ($flag_ecrire) {
 $spip_version = 1.473;
 
 // version de spip
-$spip_version_affichee = "1.5.1 CVS";
+$spip_version_affichee = "1.6a1 (tests i18n) CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
@@ -743,6 +743,13 @@ function email_valide($adresse) {
 }
 
 
+// internationalisation (i18n)
+function _T($text, $args=Array(), $lang='zg') {
+	include_ecrire('inc_gettext.php3');
+	return spip_gettext($text, $args, $lang);
+}
+
+
 // Enregistrement des evenements
 
 function spip_log($message) {
@@ -772,10 +779,12 @@ function spip_log($message) {
 	}
 }
 
+
 function spip_debug($message) {
 	if ($GLOBALS['debug'])
 		spip_log($message);
 }
+
 
 // En mode debug, logger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
 if ($debug)
