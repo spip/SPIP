@@ -42,7 +42,7 @@ $GLOBALS['i18n_es'] = array(
 'avis_erreur_version_archive' => '<B>Atenci&oacute;n! El fichero @archive@ corresponde a otra versi&oacute;n de SPIP diferente a la instalada.</B> Se arriesga a tener grandes problemas: riesgo de destrucci&oacute;n de su base de datos, disfuncionamientos varios del sitio, etc. No validar esta petici&oacute;n de importaci&oacute;n.<p>Para m&aacute;s informaci&oacute;n, ver <A HREF=\'http://www.uzine.net/article1489.html\'>la documentaci&oacute;n de SPIP</A>.',
 'avis_espace_interdit' => '<B>Espacio inaccesible</B><p>SPIP ya ha sido instalado.',
 'avis_lecture_noms_bases_1' => 'El programa de instalaci&oacute;n no ha logrado leer los nombres de las bases de datos instaladas.',
-'avis_lecture_noms_bases_2' => 'Dos posibilidades: o ninguna base es disponible o la funci&oacute;n de listado de las bases ha sido desactivada por razones de seguridad (caso frecuente en muchos servidores).',
+'avis_lecture_noms_bases_2' => 'Dos posibilidades: o no hay ninguna base disponible o la funci&oacute;n de listado de las bases ha sido desactivada por razones de seguridad (caso frecuente en muchos servidores).',
 'avis_lecture_noms_bases_3' => 'En el segundo caso, es probable que una base que tenga como nombre vuestro login sea utilizable:',
 'avis_non_acces_message' => 'No tienes acceso a ese mensaje',
 'avis_non_acces_page' => 'No tienes acceso a esa p&aacute;gina.',
@@ -201,7 +201,7 @@ $GLOBALS['i18n_es'] = array(
 
 
 // I
-'icone_a_suivre' => 'A seguir de cerca...',
+'icone_a_suivre' => 'A seguir de cerca',
 'icone_activer_cookie' => 'Activar la "cookie" de correspondencia',
 'icone_admin_site' => 'Administraci&oacute;n del sitio',
 'icone_afficher_auteurs' => 'Mostrar los autores',
@@ -284,7 +284,7 @@ $GLOBALS['i18n_es'] = array(
 'info_1_article' => '1 art&iacute;culo',
 'info_1_breve' => '1 breve',
 'info_1_site' => '1 sitio',
-'info_a_suivre' => 'A seguir de cerca',
+'info_a_suivre' => 'A SEGUIR DE CERCA &raquo;',
 'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acceso prohibido',
 'info_acces_refuse' => 'Acceso rechazado',
@@ -588,7 +588,7 @@ $GLOBALS['i18n_es'] = array(
 'info_premier_resultat' => '[@debut_limit@ primeros resultados sobre @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ primeros resultados sobre @total@]',
 'info_probleme_grave' => 'problema de',
-'info_procedez_par_etape' => 'preoceda etapa tras etapa',
+'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'la actulizaci&oacute;n debe ser realizada para adaptar la base de datos a esta nueva versi&oacute;n de SPIP.',
 'info_propose_1' => '[@nom_site_spip@] Propone: @titre@',
 'info_propose_2' => 'Art&iacute;culo propuesto
@@ -844,7 +844,7 @@ $GLOBALS['i18n_es'] = array(
 'lien_rendez_vous' => 'Una cita',
 'lien_rendez_vous_02' => '@total_messages@ citas',
 'lien_repondre_message' => 'Responder a este mensaje',
-'lien_reponse_article' => 'Responder a este art&iacute;culo',
+'lien_reponse_article' => 'Respuesta al art&iacute;culo',
 'lien_reponse_breve' => 'Respuesta a la breve',
 'lien_reponse_breve_2' => 'Respuesta a la breve',
 'lien_reponse_rubrique' => 'Respuesta a la secci&oacute;n',
@@ -970,9 +970,9 @@ $GLOBALS['i18n_es'] = array(
 // T
 'text_article_propose_publication' => 'Este art&iacute;culo ha sido propuesto para ser publicado.<br> No duc&eacute;is en dar vuestra opini&oacute;n en el foro que le concierne y que se encuentra m&aacute;s abajo en esta p&aacute;gina.',
 'texte_acces_ldap_anonyme_1' => 'Algunos servidores LDAP no aceptan accesos an&oacute;nimos. En ese caso deb&eacute;is especificar un identificador de acceso inicial para poder luego buscar informaciones en el anuario. En la mayor&iacute;a de los casos los campos siguientes pueden estar vac&iacute;os.',
-'texte_actualite_site_1' => 'Esta p&aacute;gina contiene la actualidad del sitio y te permite seguir de cerca tus art&iacute;culos en curso, los art&iacute;culos y breves que has comentado y la totalidad de sus contribuciones.<p><hr><p>Una vez que te hayas familiarizado con la interfaz, pulsa',
+'texte_actualite_site_1' => 'Esta p&aacute;gina contiene la actualidad del sitio y te permite seguir de cerca tus contribuciones. Encontrar&aacute;s tus art&iacute;culos en curso de redacci&oacute;n, los art&iacute;culos y las breves a las que est&aacute;s invitado a dar tu opini&oacute;n, m&aacute;s un recordatorio de tus anteriores contribuciones.<p><hr><p> Una vez que te hayas familiarizado con la interfaz, pulsa en &laquo;',
 'texte_actualite_site_2' => 'interfaz completa',
-'texte_actualite_site_3' => ', que tiene a&uacute;n m&aacute;s posibilidades.',
+'texte_actualite_site_3' => '&raquo; que tiene a&uacute;n m&aacute;s posibilidades.',
 'texte_admin_effacer_01' => 'Esta comando borra <i>TODO</i>  el contenido de la base de datos, redactores, administradores inclu&iacute;dos. Despu&eacute;s de ejecutarla deber&eacute;is reinstalar SPIP, creando una nueva base as&iacute; como tambi&eacute;n un primer acceso en tanto que administrador.',
 'texte_admin_tech_01' => 'Esta opci&oacute;n permite crear una copia de seguridad de la base  en un fichero que se guardar&aacute; en el directorio <i>ecrire/data/</i>.
 
