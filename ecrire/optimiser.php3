@@ -143,7 +143,7 @@ function optimiser_base() {
 		$query = "DELETE FROM spip_forum WHERE id_parent NOT IN (0,$forums)";
 		spip_query($query);
 
-		spip_query("DELETE FROM spip_forum WHERE statut='redac' AND  date_time<DATE_SUB(NOW(),INTERVAL 1 DAY)");
+		spip_query("DELETE FROM spip_forum WHERE statut='redac' AND  date_heure<DATE_SUB(NOW(),INTERVAL 1 DAY)");
 
 	}
 	
