@@ -15,7 +15,7 @@ function aide ($aide) {
 	if (!ereg("/ecrire/", $GLOBALS['REQUEST_URI']))
 		$dir_ecrire = 'ecrire/';
 
-	return " &nbsp;<script><!--\n".
+	return "&nbsp;&nbsp;<script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
 	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
@@ -1209,7 +1209,7 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 	echo "</table>";
 }
 
-function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false){
+function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $important=false) {
 	global $spip_display, $couleur_claire, $couleur_foncee;
 		
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
@@ -1228,9 +1228,9 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 	echo "<tr>";
 		
-	if ($spip_display != 1){	
+	if ($spip_display != 1 AND $fond != "") {
 		echo "<td background='' align='center'>";
-		if ($fonction != "rien.gif"){
+		if ($fonction != "rien.gif") {
 			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
 			echo "<a href='$lien'><img src='img_pack/$fonction' alt='o' $title width='24' height='24' border='0'></a>";
 			echo "</td></tr></table>\n";
@@ -1243,9 +1243,9 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 		echo "</td>";
 	}
 
-		echo "<td background=''>";
-		echo "<img src='img_pack/rien.gif' alt='o' width=5 height=1>";
-		echo "</td>";
+	echo "<td background=''>";
+	echo "<img src='img_pack/rien.gif' alt='o' width=5 height=1>";
+	echo "</td>";
 
 	echo "<td background='' align='left'>";
 	echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='#666666'><b>$texte</b></font></a>";
@@ -1329,7 +1329,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 	echo "<td background=''>";
 		if ($options == "avancees") {
-			icone_bandeau_principal ("Les auteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal ("Auteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
 			icone_bandeau_principal ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
@@ -1504,8 +1504,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
-		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <font color='white'><b>interface compl&egrave;te</b></font>";
-		else  echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+	if ($connect_statut != "0minirezo") {
+		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <b><span class='fondgrison2'><b>interface compl&egrave;te</b></span>";
+		else echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+	}
+	else echo "<b><span class='fondgrison2'>Interface compl&egrave;te</span></b>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";

@@ -29,19 +29,10 @@ if (!file_exists("inc_meta_cache.php3")) ecrire_metas();
 //
 
 $options = $HTTP_COOKIE_VARS['spip_options'];
-$graphisme = $HTTP_COOKIE_VARS['spip_graphisme'];
 $spip_display = $HTTP_COOKIE_VARS['spip_display'];
 
-if (!$graphisme) $graphisme="0";
 if (!$HTTP_COOKIE_VARS['spip_display']) $spip_display = 2;
 
-
-$fond = substr($graphisme,0,1);
-
-if ($set_fond) {
-	$fond = floor($set_fond);
-	setcookie('spip_graphisme', $fond, time()+(3600*24*365));
-}
 
 if ($set_survol) {
 	setcookie('spip_survol', $set_survol, time()+(3600*24*365));
@@ -68,6 +59,9 @@ if ($set_options == 'basiques') {
 	setcookie('spip_options', 'basiques', time()+(3600*24*365));
 	$options = 'basiques';
 }
+
+if ($connect_statut == "0minirezo") $options = 'avancees';
+if (!isset($spip_couleur)) $spip_couleur = 6;
 
 switch ($spip_couleur) {
 	case 1:
