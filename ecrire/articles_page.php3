@@ -41,16 +41,6 @@ afficher_articles("Vos articles en cours de r&eacute;daction",
 
 
 
-	//
-	// Les articles a valider
-	//
-	afficher_articles("Les articles propos&eacute;s &agrave; la publication",
-		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles WHERE statut='prop' ORDER BY date DESC");
-
-
-
-
 //
 // Vos articles soumis au vote
 //

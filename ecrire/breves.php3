@@ -130,12 +130,14 @@ function enfant($leparent){
 
 		debut_cadre_enfonce();
 
+		echo "<a href='naviguer.php3?coll=$id_rubrique'>";
 		if  (acces_restreint_rubrique($id_rubrique))
-			echo "<IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> ";
+			echo "<IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0>";
 		else
-			echo "<IMG SRC='img_pack/secteur-24.png' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'> ";
-
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
+			echo "<IMG SRC='img_pack/secteur-24.png' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'>";
+		echo "</a>";
+		
+		echo " <FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
 		echo "<B>$titre</B></FONT>\n";
 		echo aide ("breves");
 

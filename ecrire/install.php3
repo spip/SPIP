@@ -10,6 +10,7 @@ if (file_exists("inc_connect.php3")) {
 include ("inc_version.php3");
 include_local ("inc_presentation.php3");
 include_local ("inc_acces.php3");
+include_local ("inc_meta.php3");
 include_local ("inc_base.php3");
 
 if ($etape6) {
