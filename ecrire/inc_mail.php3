@@ -133,7 +133,7 @@ function envoyer_mail_publication($id_article) {
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
 			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $connect_nom))."\n\n\n";
-			$courr .= extrait_article($row);
+			$courr = filtrer_entites($courr) . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 		}
 	}
@@ -158,7 +158,7 @@ function envoyer_mail_proposition($id_article) {
 			$courr .= _T('info_propose_4')."\n";
 			$courr .= _T('info_propose_5')."\n";
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
-			$courr .= extrait_article($row);
+			$courr = filtrer_entites($courr) . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 		}
 	}
