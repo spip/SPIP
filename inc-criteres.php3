@@ -83,7 +83,7 @@ function critere_recherche_dist($idb, &$boucles, $param, $not) {
 	$boucle->from[] = "index_".$boucle->id_table." AS rec";
 	$boucle->select[] = 'SUM(rec.points + 100*(" .' . 
 		'calcul_mysql_in("rec.hash",
-		calcul_branche($hash_recherche_strict),"") . "))
+		$hash_recherche_strict,"") . "))
 		AS points';
 
 	// horrible hack du aux id_forum = spip_forum et id_article=spip_articleS
@@ -100,7 +100,7 @@ function critere_recherche_dist($idb, &$boucles, $param, $not) {
 
 	// et la recherche trouve
 	$boucle->where[] = '" .' . 'calcul_mysql_in("rec.hash",
-		calcul_branche($hash_recherche),"") . "';
+		$hash_recherche,"") . "';
 
 	// oui cette boucle est une boucle recherche, le noter dans la pile
 	// (certes, c'est un peu lourd comme ecriture)
