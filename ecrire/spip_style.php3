@@ -1072,7 +1072,7 @@ div.navigation-calendrier img {
 	margin: 1px;
 }
 
-div.navigation-calendrier img.navigation-bouton-desactive {
+.navigation-bouton-desactive {
 	-moz-opacity: 0.3;
 	filter: alpha(opacity=30);
 }

@@ -2250,13 +2250,7 @@ else {
 				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
 
-
-			// choix de la couleur
-			//echo "<img src='img_pack/rien.gif' width='10' height='1' />";
-			//echo "<img src='img_pack/barre-couleurs.gif' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' width='70' height='10' border='0' usemap='#map_couleur'>";
-
-
-			// Choix de la couleur: automatique en fonction de $couleur_spip
+			// Choix de la couleur: automatique en fonction de $couleurs_spip
 
 			// nettoyer le lien global
 			$clean_link->delVar('var_lang');
@@ -2289,7 +2283,7 @@ else {
 		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
 			if ($auth_can_disconnect) {	
-				echo "<a href='../spip_cookie.php3?logout=$connect_login' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\"><img src='img_pack/deconnecter-24$spip_lang_rtl.gif' border='0'></a>";
+				echo "<a href='../spip_cookie.php3?logout=$connect_login' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\"><img src='img_pack/deconnecter-24.gif' border='0'></a>";
 			}
 		echo "</td>";
 	
