@@ -291,12 +291,14 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 				$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
 		}
-		if ($GLOBALS['flag_strtr2'])
-			$texte = strtr($texte, $trans[$charset]);
-		else {
-			reset($trans[$charset]);
-			while (list($from, $to) = each($trans[$charset])) {
-				$texte = str_replace($from, $to, $texte);
+		if ($trans[$charset]) {
+			if ($GLOBALS['flag_strtr2'])
+				$texte = strtr($texte, $trans[$charset]);
+			else {
+				reset($trans[$charset]);
+				while (list($from, $to) = each($trans[$charset])) {
+					$texte = str_replace($from, $to, $texte);
+				}
 			}
 		}
 		return $texte;
