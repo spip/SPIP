@@ -739,7 +739,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 
 	// paragrapher
-	if ($letexte = trim($letexte))
+	if (ereg('<p class="spip">',$letexte))
 		$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
 
 	// intertitres & hr compliants
@@ -752,7 +752,10 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 
 	if ($mes_notes) {
 		$mes_notes = traiter_raccourcis($mes_notes, $les_echap, 'non');
-		$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+		if (ereg('<p class="spip">',$mes_notes))
+			$mes_notes = ereg_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
+		else
+			$mes_notes = '<p class="spip_note">'.$mes_notes."</p>\n";
 		$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
 		$les_notes .= interdire_scripts($mes_notes);
 	}

@@ -7,7 +7,8 @@ define("_ECRIRE_INC_CHARSETS", "1");
 
 
 /* charsets supportes :
-	iso-8859-1 ; utf-8 ;
+	utf-8 ;
+	iso-8859-1 ; iso-8859-15 ;
 	windows-1251  = CP1251 ;
 */
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
