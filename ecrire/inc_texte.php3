@@ -135,14 +135,16 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$regexp_echap_code = "<code>((.*?))<\/code>";
 		$regexp_echap_cadre = "<(cadre|frame)>((.*?))<\/(cadre|frame)>";
 		$regexp_echap_poesie = "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>";
-		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)/si";
+		$regexp_echap_math = "<math>((.*?))<\/math>";
+		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)|($regexp_echap_math)/si";
 	} else {
 		//echo creer_echappe_sans_pcre("cadre");
 		$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
 		$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
 		$regexp_echap_cadre = "(<[cf][ar][da][rm]e>(([^<]|<[^/]|</[^cf]|</[cf][^ar]|</[cf][ar][^da]|</[cf][ar][da][^rm]|</[cf][ar][da][rm][^e]|<\/[cf][ar][da][rm]e[^>])*)<\/[cf][ar][da][rm]e>)()"; // parentheses finales pour obtenir meme nombre de regs que pcre
 		$regexp_echap_poesie = "(<poe[st][ir][ey]>(([^<]|<[^/]|</[^p]|</p[^o]|</po[^e]|</poe[^st]|</poe[st][^ir]|</poe[st][ir][^[ey]]|<\/poe[st][ir][ey][^>])*)<\/poe[st][ir][ey]>)()";
-		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)";
+		$regexp_echap_math = "<math>(([^<]|<[^/]|</[^m]|</m[^a]|</ma[^t]|</mat[^h]|<\/math[^>])*)<\/math>";
+		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)|($regexp_echap_math)";
 	}
 
 	while (($flag_pcre && preg_match($regexp_echap, $letexte, $regs))
@@ -191,6 +193,10 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
 			
 			$les_echap[$num_echap] = "</p>".propre($lecode)."<p class=\"spip\">";
+		} else
+		if ($regs[17]) {
+			$lecode = $regs[19];
+			$les_echap[$num_echap] = image_math($lecode);
 		}
 
 		$pos = strpos($letexte, $regs[0]);
@@ -386,7 +392,7 @@ function typo_fr($letexte) {
 	$cherche1 = array(
 		/* 1		'/{([^}]+)}/',  */
 		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
-		/* 3 */		'/&#187;| -,|:([^0-9]|$)/',
+		/* 3 */		'/&#187;| --?,|:([^0-9]|$)/',
 		/* 4 */		'/([^<!?])([!?])/',
 		/* 5 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /'
 	);
@@ -401,10 +407,12 @@ function typo_fr($letexte) {
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
 	$cherche2 = array(
+		'/--/',
 		'/(http|https|ftp|mailto)~:/',
 		'/~/'
 	);
 	$remplace2 = array(
+		'&mdash;',
 		'\1:',
 		'&nbsp;'
 	);
@@ -413,20 +421,32 @@ function typo_fr($letexte) {
 	return $letexte;
 }
 
-// rien sauf les ~ {}
+// rien sauf les "~" et "-,"
 function typo_en($letexte) {
 
 	$cherche1 = array(
-		/* 1 */		'/{([^}]+)}/'
+		'/ --?,/'
 	);
 	$remplace1 = array(
-		/* 1 */		'<i class="spip">\1</i>'
+		'~\0'
 	);
-	// $letexte = ereg_remplace($cherche1, $remplace1, $letexte);
+	$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 
 	$letexte = str_replace("&nbsp;", "~", $letexte);
+	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
-	return ereg_replace(" *~+ *", "&nbsp;", $letexte);
+	$cherche2 = array(
+		'/--/',
+		'/~/'
+	);
+	$remplace2 = array(
+		'&mdash;',
+		'&nbsp;'
+	);
+
+	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
+
+	return $letexte;
 }
 
 // Typographie generale : francaise si la langue est 'cpf', 'fr' ou 'eo',
