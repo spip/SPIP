@@ -71,8 +71,8 @@ echo $gras."<label for='forums_non'>D&eacute;sactiver l'utilisation des forums
 echo "</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-echo "<i>Pour activer les forums publics, veuillez choisir leur mode
-	de mod&eacute;ration par d&eacute;faut :</i>";
+echo propre("{Pour activer les forums publics, veuillez choisir leur mode
+	de mod&eacute;ration par d&eacute;faut:}");
 echo "</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
