@@ -13,6 +13,12 @@ $GLOBALS['i18n_en'] = array(
 
 
 // A
+'admin_modifier_article' => 'Modify this article',
+'admin_modifier_auteur' => '<NEW> Modifier cet auteur',
+'admin_modifier_breve' => '<NEW> Modifier cette br&egrave;ve',
+'admin_modifier_mot' => '<NEW> Modifier ce mot-cl&eacute;',
+'admin_modifier_rubrique' => '<NEW> Modifier cette rubrique',
+'admin_recalculer' => '<NEW> Recalculer cette page',
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_archive_incorrect' => 'archive file is not a valid SPIP file',
 'avis_archive_invalide' => 'archive file is not valid',
