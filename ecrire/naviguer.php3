@@ -7,15 +7,15 @@ include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
 
-$coll = intval($coll);
+$id_rubrique = intval($id_rubrique);
 $flag_mots = lire_meta("articles_mots");
 
-function enfant($collection){
+function enfant($id_rubriqueection){
 	global $les_enfants, $couleur_foncee, $lang_dir;
 	global $spip_display, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 	
-	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY titre";
+	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubriqueection' ORDER BY titre";
 	$result2 = spip_query($query2);
 
 
@@ -68,7 +68,7 @@ function enfant($collection){
 		if (acces_restreint_rubrique($id_rubrique))
 			$les_enfants .= "<img src='" . _DIR_IMG_PACK . "admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
 
-		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
+		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?id_rubrique=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
 		if (strlen($descriptif)) {
 			$les_enfants .= "<div class='verdana1'>$descriptif</div>";
 		}
@@ -86,13 +86,13 @@ function enfant($collection){
 	
 }
 
-function sous_enfant($collection2){
+function sous_enfant($id_rubriqueection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
-	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY titre";
+	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubriqueection2' ORDER BY titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+		$retour = debut_block_invisible("enfants$id_rubriqueection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
 		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
@@ -100,7 +100,7 @@ function sous_enfant($collection2){
 			changer_typo($row['lang']);
 
 			$retour.="<div class='arial11' " .
-			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
+			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A HREF='naviguer.php3?id_rubrique=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
 		}
 		$retour .= "</ul>\n\n".fin_block()."\n\n";
 	}
@@ -160,8 +160,8 @@ function afficher_jour($jour){
 //
 
 $id_parent = intval($id_parent);
-$coll = intval($coll);
-$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($coll))); // id_parent necessaire en cas de creation de sous-rubrique
+$id_rubrique = intval($id_rubrique);
+$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
 
 if ($modifier_rubrique == "oui") {
 	calculer_rubriques();
@@ -169,17 +169,17 @@ if ($modifier_rubrique == "oui") {
 
 if ($titre) {
 	// creation, le cas echeant
-	if ($new == 'oui' AND $flag_editable AND !$coll) {
-		$coll = spip_abstract_insert("rubriques", 
+	if ($new == 'oui' AND $flag_editable AND !$id_rubrique) {
+		$id_rubrique = spip_abstract_insert("rubriques", 
 				    "(titre, id_parent)",
 				    "('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 		$result = spip_query($query);
-		$clean_link->AddVar('coll', $coll);
+		$clean_link->AddVar('id_rubrique', $id_rubrique);
 	}
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
-	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$coll'";
+	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique'";
 	$row = spip_fetch_array(spip_query($query));
 	if (($row['cnt'] > 0) and !($confirme_deplace == 'oui')) {
 		$id_parent = 0;
@@ -204,7 +204,7 @@ if ($titre) {
 		$add_extra = '';
 
 	if ($flag_editable) {
-		$query = "UPDATE spip_rubriques SET $change_parent titre='$titre', descriptif='$descriptif', texte='$texte' $add_extra WHERE id_rubrique=$coll";
+		$query = "UPDATE spip_rubriques SET $change_parent titre='$titre', descriptif='$descriptif', texte='$texte' $add_extra WHERE id_rubrique=$id_rubrique";
 		$result = spip_query($query);
 	}
 
@@ -214,20 +214,20 @@ if ($titre) {
 	// invalider et reindexer
 	if ($invalider_caches) {
 		include_ecrire ("inc_invalideur.php3");
-		suivre_invalideur("id='id_rubrique/$coll'");
+		suivre_invalideur("id='id_rubrique/$id_rubrique'");
 	}
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
-		indexer_rubrique($coll);
+		indexer_rubrique($id_rubrique);
 	}
 }
 
 //
 // Appliquer le changement de langue
 //
-if ($changer_lang AND $coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
+if ($changer_lang AND $id_rubrique>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
 	if ($changer_lang != "herit")
-		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$coll");
+		spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
 	else {
 		if ($id_parent == 0)
 			$langue_parent = lire_meta('langue_site');
@@ -235,7 +235,7 @@ if ($changer_lang AND $coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lir
 			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 			$langue_parent = $row['lang'];
 		}
-		spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$coll");
+		spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 	}
 	calculer_langues_rubriques();
 }
@@ -244,7 +244,7 @@ if ($changer_lang AND $coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lir
 // infos sur cette rubrique
 //
 
-$query="SELECT * FROM spip_rubriques WHERE id_rubrique='$coll'";
+$query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 $result=spip_query($query);
 
 while($row=spip_fetch_array($result)){
@@ -265,7 +265,7 @@ else
 
 
 if ($id_document) {
-	$query_doc = "SELECT * FROM spip_documents_rubriques WHERE id_document=$id_document AND id_rubrique=$coll";
+	$query_doc = "SELECT * FROM spip_documents_rubriques WHERE id_document=$id_document AND id_rubrique=$id_rubrique";
 	$result_doc = spip_query($query_doc);
 	$flag_document_editable = (spip_num_rows($result_doc) > 0);
 } else {
@@ -283,7 +283,7 @@ if ($modif_document == 'oui' AND $flag_document_editable) {
 	$query .= " WHERE id_document=$id_document";
 	spip_query($query);
 
-	if ($jour_doc AND $connect_statut == '0minirezo' AND acces_rubrique($coll)) {
+	if ($jour_doc AND $connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) {
 		if ($annee_doc == "0000") $mois_doc = "00";
 		if ($mois_doc == "00") $jour_doc = "00";
 		$query = "UPDATE spip_documents SET date='$annee_doc-$mois_doc-$jour_doc' WHERE id_document=$id_document";
@@ -303,26 +303,26 @@ debut_page($titre_page, "documents", "rubriques");
 
 debut_grand_cadre();
 
-if ($coll  > 0) {
+if ($id_rubrique  > 0) {
 	afficher_hierarchie($id_parent);
 }
 
 fin_grand_cadre();
 
-changer_typo('', 'rubrique'.$coll);
+changer_typo('', 'rubrique'.$id_rubrique);
 
 
 debut_gauche();
 
 if ($spip_display != 4) {
-	if ($coll > 0) {
+	if ($id_rubrique > 0) {
 		debut_boite_info();
 		echo "<CENTER>";
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_numero_rubrique')."</B></FONT>";
-		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$coll</B></FONT>";
+		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_rubrique</B></FONT>";
 		echo "</CENTER>";
 	
-		voir_en_ligne ('rubrique', $coll, $statut);
+		voir_en_ligne ('rubrique', $id_rubrique, $statut);
 	
 		fin_boite_info();
 	}
@@ -331,11 +331,11 @@ if ($spip_display != 4) {
 	// Logos de la rubrique
 	//
 	
-	$rubon = "rubon$coll";
-	$ruboff = "ruboff$coll";
+	$rubon = "rubon$id_rubrique";
+	$ruboff = "ruboff$id_rubrique";
 	
-	if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
-		if ($coll > 0)
+	if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) {
+		if ($id_rubrique > 0)
 			afficher_boite_logo($rubon, $ruboff, _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
 		else
 			afficher_boite_logo($rubon, $ruboff, _T('logo_standard_rubrique')." ".aide ("rublogo"), _T('logo_survol'));
@@ -353,12 +353,12 @@ if ($spip_display != 4) {
 	icone_horizontale(_T('icone_tous_articles'), "articles_page.php3", "article-24.gif");
 	
 	if (spip_num_rows($result) > 0) {
-		if ($coll > 0)
-			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
+		if ($id_rubrique > 0)
+			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif","creer.gif");
 	
 		$activer_breves = lire_meta("activer_breves");
-		if ($activer_breves != "non" AND $id_parent == "0" AND $coll != "0") {
-			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
+		if ($activer_breves != "non" AND $id_parent == "0" AND $id_rubrique != "0") {
+			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$id_rubrique&new=oui", "breve-24.gif","creer.gif");
 		}
 	}
 	else {
@@ -374,12 +374,12 @@ if ($spip_display != 4) {
 debut_droite();
 
 
-if ($coll == 0) {
+if ($id_rubrique == 0) {
 	$nom_site = lire_meta("nom_site");
 	$titre = _T('info_racine_site').": ".$nom_site;
 }
 
-if ($coll ==  0) $ze_logo = "racine-site-24.gif";
+if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";
 else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 else $ze_logo = "rubrique-24.gif";
 
@@ -393,7 +393,7 @@ if (acces_restreint_rubrique($id_rubrique))
 gros_titre($fleche.$titre);
 echo "</td>";
 
-if ($coll > 0 AND $flag_editable) {
+if ($id_rubrique > 0 AND $flag_editable) {
 	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=5></td>\n";
 	echo "<td  align='right' valign='top'>";
 	icone(_T('icone_modifier_rubrique'), "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
@@ -419,9 +419,9 @@ echo "</table>\n";
 
 
 /// Mots-cles
-if ($flag_mots!= 'non' AND $flag_editable AND $options == 'avancees' AND $coll > 0) {
+if ($flag_mots!= 'non' AND $flag_editable AND $options == 'avancees' AND $id_rubrique > 0) {
 	echo "\n<p>";
-	formulaire_mots('rubriques', $coll, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+	formulaire_mots('rubriques', $id_rubrique, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
 
 
@@ -435,9 +435,9 @@ if (strlen($texte) > 1) {
 //
 // Langue de la rubrique
 //
-if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
+if ($id_rubrique>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
 
-	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$coll"));
+	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_rubrique = $row['lang'];
 	$langue_choisie_rubrique = $row['langue_choisie'];
 	if ($id_parent) {
@@ -469,7 +469,7 @@ fin_cadre_relief();
 
 
 //echo "<div align='$spip_lang_left'>";
-enfant($coll);
+enfant($id_rubrique);
 
 
 $les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
@@ -492,8 +492,8 @@ echo "</td></tr>";
 
 echo "<tr><td style='text-align: right;' valign='bottom'><div align='right'>";
 if ($flag_editable) {
-	if ($coll == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
-	else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif", "creer.gif");
+	if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
+	else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.gif", "creer.gif");
 	echo "<p>";
 }
 echo "</div></td></tr>";
@@ -516,25 +516,25 @@ echo "<P>";
 $relief = false;
 
 if (!$relief) {
-	$query = "SELECT id_article FROM spip_articles AS articles WHERE id_rubrique='$coll' AND statut='prop'$vos_articles LIMIT 0,1";
+	$query = "SELECT id_article FROM spip_articles AS articles WHERE id_rubrique='$id_rubrique' AND statut='prop'$vos_articles LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief) {
-	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$coll' AND (statut='prepa' OR statut='prop') LIMIT 0,1";
+	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non') {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$coll' AND statut='prop' LIMIT 0,1";
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
 
 if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$coll' AND syndication='off' LIMIT 0,1";
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND syndication='off' LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
@@ -549,12 +549,12 @@ if ($relief) {
 	// Les articles a valider
 	//
 	afficher_articles(_T('info_articles_proposes'),
-		"WHERE id_rubrique='$coll' AND statut='prop'$vos_articles ORDER BY date DESC");
+		"WHERE id_rubrique='$id_rubrique' AND statut='prop'$vos_articles ORDER BY date DESC");
 
 	//
 	// Les breves a valider
 	//
-	$query = "SELECT * FROM spip_breves WHERE id_rubrique='$coll' AND (statut='prepa' OR statut='prop') ORDER BY date_heure DESC";
+	$query = "SELECT * FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') ORDER BY date_heure DESC";
 	afficher_breves(_T('info_breves_valider'), $query, true);
 
 	//
@@ -562,7 +562,7 @@ if ($relief) {
 	//
 	if (lire_meta('activer_syndic') != 'non') {
 		include_ecrire("inc_sites.php3");
-		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut='prop' ORDER BY nom_site");
+		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' ORDER BY nom_site");
 	}
 
 	//
@@ -571,11 +571,11 @@ if ($relief) {
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
 		afficher_sites(_T('avis_sites_syndiques_probleme'),
-			"SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND syndication='off' AND statut='publie' ORDER BY nom_site");
+			"SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND syndication='off' AND statut='publie' ORDER BY nom_site");
 	}
 
 	// Les articles syndiques en attente de validation
-	if ($coll == 0 AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if ($id_rubrique == 0 AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles AND statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
 			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a> "._T('info_liens_syndiques_2')."</small>";
@@ -592,7 +592,7 @@ if ($relief) {
 
 if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 	afficher_articles(_T('info_tous_articles_en_redaction'),
-		"WHERE statut=\"prepa\" AND id_rubrique='$coll' ORDER BY date DESC");
+		"WHERE statut=\"prepa\" AND id_rubrique='$id_rubrique' ORDER BY date DESC");
 }
 
 
@@ -600,23 +600,23 @@ if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 /////////////////////////
 
 afficher_articles(_T('info_tous_articles_presents'),
-	"WHERE statut=\"publie\" AND id_rubrique='$coll' ORDER BY date DESC", true);
+	"WHERE statut=\"publie\" AND id_rubrique='$id_rubrique' ORDER BY date DESC", true);
 
-if ($coll > 0){
+if ($id_rubrique > 0){
 	echo "<div align='right'>";
-	icone(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif", "creer.gif");
+	icone(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif", "creer.gif");
 	echo "</div><p>";
 }
 
 //// Les breves
 
-afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WHERE id_rubrique='$coll' AND statut != 'prop' AND statut != 'prepa' ORDER BY date_heure DESC");
+afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WHERE id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa' ORDER BY date_heure DESC");
 
 $activer_breves=lire_meta("activer_breves");
 
-if ($id_parent == "0" AND $coll != "0" AND $activer_breves!="non"){
+if ($id_parent == "0" AND $id_rubrique != "0" AND $activer_breves!="non"){
 	echo "<div align='right'>";
-	icone(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif", "creer.gif");
+	icone(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$id_rubrique&new=oui", "breve-24.gif", "creer.gif");
 	echo "</div><p>";
 }
 
@@ -626,12 +626,12 @@ if ($id_parent == "0" AND $coll != "0" AND $activer_breves!="non"){
 
 if (lire_meta("activer_sites") == 'oui') {
 	include_ecrire("inc_sites.php3");
-	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' AND statut != 'prop' AND syndication != 'off' ORDER BY nom_site");
+	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication != 'off' ORDER BY nom_site");
 
 	$proposer_sites=lire_meta("proposer_sites");
-	if ($coll > 0 AND ($flag_editable OR $proposer_sites > 0)) {
+	if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
 		$link = new Link('sites_edit.php3');
-		$link->addVar('id_rubrique', $coll);
+		$link->addVar('id_rubrique', $id_rubrique);
 		$link->addVar('target', 'sites.php3');
 		$link->addVar('redirect', $clean_link->getUrl());
 	
@@ -643,18 +643,18 @@ if (lire_meta("activer_sites") == 'oui') {
 
 /// Documents associes a la rubrique
 
-if ($coll>0)
-	 afficher_documents_non_inclus($coll, "rubrique", $flag_editable);
+if ($id_rubrique>0)
+	 afficher_documents_non_inclus($id_rubrique, "rubrique", $flag_editable);
 
 
 
 
 ////// Supprimer cette rubrique (si vide)
 
-if (($coll>0) AND tester_rubrique_vide($coll) AND $flag_editable) {
+if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
 	$link = new Link('naviguer.php3');
-	$link->addVar('coll', $id_parent);
-	$link->addVar('supp_rubrique', $coll);
+	$link->addVar('id_rubrique', $id_parent);
+	$link->addVar('supp_rubrique', $id_rubrique);
 
 	echo "<p><div align='center'>";
 	icone(_T('icone_supprimer_rubrique'), $link->getUrl(), "$ze_logo", "supprimer.gif");

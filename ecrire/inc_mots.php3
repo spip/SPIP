@@ -100,7 +100,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	else if ($table == 'rubriques') {
 		$id_table = 'id_rubrique';
 		$objet = 'rubrique';
-		$url_base = "naviguer.php3?coll=$id_objet";
+		$url_base = "naviguer.php3?id_rubrique=$id_objet";
 	}
 
 	else if ($table == 'syndic') {
@@ -312,7 +312,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			if ($unseul == "oui" AND $flag_groupe) {
 				$s = "<form action='$url_base#mots' method='post' style='margin:0px; padding: 0px'>";
 				$s .= "<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet'>";
-				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
+				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet'>";
 				$s .= "<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
 	
 				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre";
@@ -400,7 +400,7 @@ if (triangle) triangle.src = '" . _DIR_IMG_PACK . "deplierbas$spip_lang_rtl.gif'
 		$form_mot = "<FORM ACTION='$url_base#mots' METHOD='post' STYLE='margin:1px;'>"
 			."<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet'>";
 
-		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
+		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet'>";
 
 		$message_ajouter_mot = "<span class='verdana1'><B>"._T('titre_ajouter_mot_cle')."</B></span> &nbsp;\n";
 

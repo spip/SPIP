@@ -265,7 +265,7 @@ function afficher_rubriques_filles($id_parent) {
 			
 			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
 			
-			echo "<b class='verdana2'><a href='naviguer.php3?coll=$id_rubrique'>";
+			echo "<b class='verdana2'><a href='naviguer.php3?id_rubrique=$id_rubrique'>";
 			echo $rubrique[$id_rubrique];
 			echo "</b></a></div>\n";
 			

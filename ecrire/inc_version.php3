@@ -716,7 +716,7 @@ class Link {
 			if (count($GLOBALS['HTTP_POST_VARS'])) {
 				$vars = array();
 				foreach ($GLOBALS['HTTP_POST_VARS'] as $var => $val)
-					if (preg_match('/^(id_.*|coll)$/', $var))
+					if (preg_match('/^id_/', $var))
 						$vars[$var] = $val;
 			}
 		}

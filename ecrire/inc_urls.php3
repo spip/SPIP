@@ -21,7 +21,7 @@ function generer_url_rubrique($id_rubrique) {
 	))) AND ($row['statut'] == 'publie'))
 		return "../spip_redirect.php3?id_rubrique=$id_rubrique";
 	else
-		return "naviguer.php3?coll=$id_rubrique";
+		return "naviguer.php3?id_rubrique=$id_rubrique";
 }
 
 function generer_url_breve($id_breve) {

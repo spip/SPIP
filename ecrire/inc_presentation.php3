@@ -667,7 +667,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if (!ereg("^SELECT", $requete)) {
 		$select = "SELECT articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
 
-		if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
+		if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR lire_meta('multi_articles') == 'oui') {
 			$afficher_langue = true;
 			if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
 			else $langue_defaut = lire_meta('langue_site');
@@ -845,7 +845,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	
 
 
-	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
+	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR lire_meta('multi_articles') == 'oui') {
 		$afficher_langue = true;
 		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
 		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
@@ -922,7 +922,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($affrub) {
 				$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$id_rubrique = $rub['id_rubrique'];
-				$s .= "<a href='naviguer.php3?coll=$id_rubrique' style=\"display:block;\">".typo($rub['titre'])."</a>";
+				$s .= "<a href='naviguer.php3?id_rubrique=$id_rubrique' style=\"display:block;\">".typo($rub['titre'])."</a>";
 			} else if ($statut != "prop")
 				$s = affdate_jourcourt($date_heure);
 			else
@@ -993,7 +993,7 @@ function afficher_rubriques($titre_table, $requete) {
 			if ($id_parent == 0) $puce = "secteur-12.gif";
 			else $puce = "rubrique-12.gif";
 
-			$s = "<b><a href=\"naviguer.php3?coll=$id_rubrique\">";
+			$s = "<b><a href=\"naviguer.php3?id_rubrique=$id_rubrique\">";
 			$s .= http_img_pack($puce, "alt=\"- \" border=\"0\"");
 			$s .= typo($titre);
 			$s .= "</A></b>";
@@ -3226,7 +3226,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 
 			$parents = "<div class='verdana3' ". 
 			  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-			  "><a href='naviguer.php3?coll=$id_rubrique'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+			  "><a href='naviguer.php3?id_rubrique=$id_rubrique'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
 
 
 		}
@@ -3236,7 +3236,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 		$logo = "racine-site-12.gif";
 		$parents = "<div class='verdana3' " .
 		  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-		  "><a href='naviguer.php3?coll=$id_rubrique'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+		  "><a href='naviguer.php3?id_rubrique=$id_rubrique'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
 	
 		echo $parents;
 		

@@ -138,8 +138,8 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
 
-if ($id_rubrique) icone(_T('icone_retour'), "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
-else icone(_T('icone_retour'), "naviguer.php3?coll=$id_parent", $ze_logo, "rien.gif");
+if ($id_rubrique) icone(_T('icone_retour'), "naviguer.php3?id_rubrique=$id_rubrique", $ze_logo, "rien.gif");
+else icone(_T('icone_retour'), "naviguer.php3?id_rubrique=$id_parent", $ze_logo, "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' width=10></td>\n";
@@ -150,11 +150,11 @@ echo "</td></tr></table>";
 echo "<p>";
 
 if ($id_rubrique>0)
-	echo "<FORM ACTION='naviguer.php3?coll=$id_rubrique' METHOD='post'>";
+	echo "<FORM ACTION='naviguer.php3?id_rubrique=$id_rubrique' METHOD='post'>";
 else
 	echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
 
-echo "<INPUT TYPE='Hidden' NAME='coll' VALUE=\"$id_rubrique\">";
+echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
 if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
 $titre = entites_html($titre);

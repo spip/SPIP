@@ -104,7 +104,7 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 
 
 function afficher_logo($racine, $titre, $logo) {
-	global $id_article, $coll, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
+	global $id_article, $id_rubrique, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 
@@ -126,7 +126,7 @@ function afficher_logo($racine, $titre, $logo) {
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
-		$elements = array('id_article', 'id_breve', 'id_syndic', 'coll', 'id_mot', 'id_auteur');
+		$elements = array('id_article', 'id_breve', 'id_syndic', 'id_rubrique', 'id_mot', 'id_auteur');
 		while (list(,$element) = each ($elements)) {
 			if ($$element) {
 				echo $element.'='.$$element.'&';
@@ -147,7 +147,7 @@ function afficher_logo($racine, $titre, $logo) {
 		if ($id_breve > 0) echo "\n<INPUT NAME='id_breve' TYPE=Hidden VALUE='$id_breve'>";
 		if ($id_mot > 0) echo "\n<INPUT NAME='id_mot' TYPE=Hidden VALUE='$id_mot'>";
 		if ($id_syndic > 0) echo "\n<INPUT NAME='id_syndic' TYPE=Hidden VALUE='$id_syndic'>";
-		if ($coll > 0) echo "\n<INPUT NAME='coll' TYPE=Hidden VALUE='$coll'>";
+		if ($id_rubrique > 0) echo "\n<INPUT NAME='id_rubrique' TYPE=Hidden VALUE='$id_rubrique'>";
 		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur'>";
 		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash'>";
 		echo "\n<INPUT NAME='ajout_logo' TYPE=Hidden VALUE='oui'>";
