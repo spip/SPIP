@@ -276,7 +276,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 			echo "<TR WIDTH=\"100%\">";
 			echo "<TD BGCOLOR='$couleur'>";
-			echo "<A HREF='$url'><img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
+			echo "<A HREF='$url'><img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'></A>";
 			echo "</TD>";
 			echo "<TD BGCOLOR='$couleur' width='100%'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
 			

@@ -259,9 +259,9 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 				echo "<TR BGCOLOR='$couleur'>";
 				echo "<TD>";
 				if ($connect_statut == "0minirezo" OR $nombre_mots>0)
-					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'><img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
+					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'><img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'></A>";
 				else
-					echo "<img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'>";
+					echo "<img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'>";
 				echo "</TD>";
 				echo "<TD WIDTH=\"50%\">";
 				echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";

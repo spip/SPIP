@@ -1259,19 +1259,19 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo " \n";
 
 	if ($statut_article=='publie') {
-		echo "<img src='img_pack/puce-verte.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-verte.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article=='prepa') {
-		echo "<img src='img_pack/puce-blanche.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-blanche.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article=='prop') {
-		echo "<img src='img_pack/puce-orange.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-orange.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article == 'refuse') {
-		echo "<img src='img_pack/puce-rouge.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-rouge.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article == 'poubelle') {
-		echo "<img src='img_pack/puce-poubelle.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-poubelle.gif' alt='' width='13' height='14' border='0' NAME='statut'>";
 	}
 	echo " \n";
 

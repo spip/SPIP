@@ -111,11 +111,11 @@ function bouton_block_invisible($nom_block) {
 			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\');";
 		}
 		$retour = "\n<script language='JavaScript'><!--\n";
-		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle$num_triangle\" src=\"img_pack/deplierhaut.gif\" alt=\"D&eacute;plier\" title=\"D&eacute;plier\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";
+		$retour .= "document.write('<a href=\"javascript:$javasc\"><img name=\"triangle$num_triangle\" src=\"img_pack/deplierhaut.gif\" alt=\"\" title=\"D&eacute;plier\" width=\"16\" height=\"14\" border=\"0\"></a> ');\n";
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
 		
-		$retour .= "<noscript><img name='triangle$num_triangle' src='img_pack/deplierbas.gif' alt='*' width='16' height='14' border='0'></noscript>\n";
+		$retour .= "<noscript><img name='triangle$num_triangle' src='img_pack/deplierbas.gif' alt='' width='16' height='14' border='0'></noscript>\n";
 		return $retour;
 //		return "<a href=\"javascript:$javasc\"><img name='triangle$num_triangle' src='img_pack/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
@@ -131,7 +131,7 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='img_pack/deplierbas.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
+		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='img_pack/deplierbas.gif' alt='' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 

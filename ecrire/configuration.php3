@@ -126,7 +126,7 @@ debut_boite_info();
 <P align="center"><FONT COLOR='red'><B>ATTENTION !</B></FONT>
 
 <P align="justify">
-<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">
+<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">
 Les modifications effectu&eacute;es ci-dessous influent notablement sur le
 fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n'&ecirc;tes pas parfaitement
 familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus g&eacute;n&eacute;ralement, il est <I>fortement conseill&eacute;</I>
