@@ -293,9 +293,6 @@ else {
 		echo "<p>Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>";
 	}
 }
-if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
-	icone_horizontale("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif","creer.gif");
-}
 
 fin_raccourcis();
 
@@ -381,8 +378,8 @@ if (strpos($les_enfants2,"<P>")){
 	
 	echo "<tr><td align='right' valign='bottom'>";
 	if ($connect_statut == '0minirezo' AND acces_rubrique($coll)) {
-	if ($coll == "0") icone("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "secteur-24.gif", "creer.gif");
-	else  icone("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.gif", "creer.gif");
+	if ($coll == "0") icone("Cr&eacute;er une rubrique", "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
+	else  icone("Cr&eacute;er une sous-rubrique", "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif", "creer.gif");
 	echo "<p>";
 	}
 	echo "</td></tr>";

@@ -14,7 +14,9 @@ $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
 if (spip_num_rows($result) > 0) {
+	debut_raccourcis();
 	icone_horizontale ("&Eacute;crire un nouvel article", "articles_edit.php3?new=oui", "article-24.gif", "creer.gif");
+	fin_raccourcis();
 }
 else {
 	if ($connect_statut == '0minirezo') {

@@ -8,40 +8,13 @@ debut_gauche();
 
 
 //
-// Afficher les boutons de creation d'article et de breve
+// Raccourcis
 //
-if ($connect_statut == '0minirezo') {
+/*
 	debut_raccourcis();
-	
-	if (lire_meta('forum_prive_admin') == 'oui')
-		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
-
-	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
-	$result_petition = spip_query($query_petition);
-	if ($row = spip_fetch_array($result_petition)) {
-		$nombre_petition = $row['cnt'];
-	}
-	if ($nombre_petition > 0) {
-		echo "<p>";
-		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
-	}
-
-
-
-	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
-	$result_petition = spip_query($query_petition);
-	if ($row = spip_fetch_array($result_petition)){
-		$nombre_petition = $row['cnt'];
-	}
-	if ($nombre_petition > 0) {
-		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "petition-24.gif", "rien.gif");
-	}
-	
+	// rien
 	fin_raccourcis();
-}
-
-
-
+*/
 
 
 debut_droite();
