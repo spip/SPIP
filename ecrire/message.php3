@@ -431,11 +431,11 @@ while($row = mysql_fetch_array($result_message)) {
 						echo "</SELECT>";
 						echo "<INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'>";
 					}
-					echo "</FORM>";
+					echo "</div></FORM>";
 				}
 			}
 			else {
-				echo "<br><div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>Ajouter un participant</a></font>";
+				echo "<br><div align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2'><a href='message.php3?id_message=$id_message&forcer_dest=oui'>Ajouter un participant</a></font></div>";
 			}
 		}
 		fin_cadre_enfonce();
@@ -488,14 +488,14 @@ while($row = mysql_fetch_array($result_message)) {
 			echo " <label for='rv_off'>Ne pas afficher dans le calendrier</label> ";
 		}
 
-		echo "<div align='right'><INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'>";
+		echo "<div align='right'><INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'></div>";
 
 		fin_boite_info();
 		echo "</form>";
 	}
 	else if ($rv == "oui") {
 		echo "<p><center><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>RENDEZ-VOUS : <font color='red'>".majuscules(nom_jour($date_heure))." ".majuscules(affdate($date_heure))." &Agrave; ".heures($date_heure)."H".minutes($date_heure)."</font></b></font></center>";
-		if ($type != "affich") echo "<div align='right'><font size=2><a href='message.php3?id_message=$id_message&forcer_rv=oui'>Modifier la date</a></font><p>";
+		if ($type != "affich") echo "<div align='right'><font size=2><a href='message.php3?id_message=$id_message&forcer_rv=oui'>Modifier la date</a></font></div><p>";
 	}
 
 
@@ -542,7 +542,7 @@ while($row = mysql_fetch_array($result_message)) {
 		
 	}
 
-	echo "</td></tr></table>";
+	echo "</td></tr></table></div>";
 	fin_cadre_relief();
 	
 	//////////////////////////////////////////////////////
