@@ -58,7 +58,7 @@ function tester_vignette ($test_vignette) {
 		if (function_exists('ImageCreateFromGIF')) {
 			$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
 			if ($srcImage) {
-				$gd_formats[] = "gif";
+				//$gd_formats[] = "gif";
 				ImageDestroy( $srcImage );
 			}
 		}
@@ -76,13 +76,13 @@ function tester_vignette ($test_vignette) {
 	}
 	// verifier les formats netpbm
 	else if ($test_vignette == "netpbm") {
-		$gd_formats = Array();
+		$netpbm_formats= Array();
 
 		$vignette = _DIR_IMG . "test.jpg";
-		$dest = _DIR_IMG . "test-10.jpg";
+		$dest = _DIR_IMG . "test-jpg.jpg";
 		exec("$djpeg_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
 		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $gd_formats[] = "jpg";
+			if ($taille[1] == 10) $netpbm_formats[] = "jpg";
 		}
 		ImageDestroy( $dest );
 	
@@ -92,7 +92,7 @@ function tester_vignette ($test_vignette) {
 		$dest = _DIR_IMG . "test-gif.jpg";
 		exec("$giftopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
 		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $gd_formats[] = "gif";
+			if ($taille[1] == 10) $netpbm_formats[] = "gif";
 		}
 		ImageDestroy( $dest );
 		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
@@ -100,20 +100,20 @@ function tester_vignette ($test_vignette) {
 		$dest = _DIR_IMG . "test-gif.jpg";
 		exec("$pngtopnm_command $vignette | $pnmscale_command -width 10 | $cjpeg_command -outfile $dest");
 		if ($taille = @getimagesize($dest)) {
-			if ($taille[1] == 10) $gd_formats[] = "png";
+			if ($taille[1] == 10) $netpbm_formats[] = "png";
 		}
 		ImageDestroy( $dest );
 		
 
-		if ($gd_formats) $gd_formats = join(",", $gd_formats);
-		ecrire_meta("gd_formats", $gd_formats);
+		if ($netpbm_formats) $netpbm_formats = join(",", $netpbm_formats);
+		ecrire_meta("netpbm_formats", $netpbm_formats);
 		ecrire_metas();
 	}
 
 	// et maintenant envoyer la vignette de tests
 	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $test_vignette)) {
 		include_ecrire('inc_logos.php3');
-		$taille_preview = lire_meta("taille_preview");
+		//$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;
 		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
 
@@ -307,7 +307,8 @@ function ajout_doc($orig, $source, $mode, $id_document) {
 		include_ecrire('inc_logos.php3');
 		$f = ereg_replace(".$ext$", '-s', basename($dest_path));
 		$d = lire_meta('taille_preview');
-		creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
+		creer_fichier_vignette($dest_path);
+		//creer_vignette($dest_path, $d, $d, 'jpg', 'vignettes', $f, 'AUTO', true);
 	}
 }
 
@@ -384,8 +385,12 @@ function creer_fichier_vignette($vignette) {
 		if ($taille_preview < 10) $taille_preview = 120;
 		include_ecrire('inc_logos.php3');
 		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s'))
-		  return $preview['fichier'];
-                include_ecrire('inc_documents.php3');
+		{
+			inserer_vignette_base($vignette, $preview['fichier']);
+			return $preview['fichier'];
+        }
+        
+        include_ecrire('inc_documents.php3');
 		return vignette_par_defaut($ext ? $ext : 'txt', false);
 	}
 }
