@@ -97,8 +97,8 @@ switch ($prefs['couleur']) {
 		break;
 	case 4:
 		/// Bleu pastelle
-		$couleur_foncee="#31acd9";
-		$couleur_claire="#62d2e8";
+		$couleur_foncee="#5da7c5";
+		$couleur_claire="#97d2e1";
 		$couleur_lien="#869100";
 		$couleur_lien_off="#5B55A0";
 		break;

@@ -1376,7 +1376,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		global $browser_name, $browser_version, $browser_rev;
 		if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7) {
 	?>
-	
+		
 	
 		retrait = 16;
 		var obj=document.getElementsByTagName("input");
@@ -1384,23 +1384,36 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 			if(obj[i].className=="forml" || obj[i].className=="formo") {
 				element = obj[i];
 				if (element.offsetWidth) {
-					element.style.width = (element.offsetWidth - retrait) + "px";				
+					obj[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
 				} else {
-					element.style.width = "95%";
+					obj[i]["nouvelle-largeur"] = "95%";
 				}
 			}
 		}
-		var obj=document.getElementsByTagName("textarea");
-		for(i=0;i<obj.length;i++) {
-			if(obj[i].className=="forml" || obj[i].className=="formo") {
-				element = obj[i];
+		
+		var objx=document.getElementsByTagName("textarea");
+		for(i=0;i<objx.length;i++) {
+			if(objx[i].className=="forml" || objx[i].className=="formo") {
+				element = objx[i];
 				if (element.offsetWidth) {
-					element.style.width = (element.offsetWidth - retrait) + "px";				
+					objx[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
 				} else {
-					element.style.width = "95%";
+					objx[i]["nouvelle-largeur"] = "95%";
 				}
 			}
 		}
+		
+		// Appliquer les modifs apres les calculs, sinon des decalages peuvent apparaitre
+		for(i=0;i<obj.length;i++) {
+			if (obj[i]["nouvelle-largeur"]) obj[i].style.width = obj[i]["nouvelle-largeur"];
+		}
+	
+		for(i=0;i<objx.length;i++) {
+			if (objx[i]["nouvelle-largeur"]) objx[i].style.width = objx[i]["nouvelle-largeur"];
+		}
+	
+		
+		
 	<?php
 		}
 	?>
