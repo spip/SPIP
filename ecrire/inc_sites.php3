@@ -279,9 +279,6 @@ function afficher_sites($titre_table, $requete) {
 	global $couleur_claire, $couleur_foncee;
 	global $connect_id_auteur;
 
-	$activer_messagerie = lire_meta("activer_messagerie");
-	$activer_statistiques = lire_meta("activer_statistiques");
-
 	$tranches = afficher_tranches_requete($requete, 3);
 
 	if ($tranches) {
@@ -424,9 +421,6 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 	$nombre_aff = 10;
 
-	$activer_messagerie = lire_meta("activer_messagerie");
-	$activer_statistiques = lire_meta("activer_statistiques");
-		
  	$result = spip_query($requete);
 	$num_rows = spip_num_rows($result);
 

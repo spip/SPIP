@@ -36,81 +36,47 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
 function afficher_choix_vignette($process) {
-	global $taille_preview;
+	//global $taille_preview;
+	$taille_preview = 120;
 
 	if ($process == lire_meta('image_process'))
 		$border = 2;
 	else
 		$border=0;
 
-	echo "<td><div align='center' valign='bottom' width='".($taille_preview+5)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?test_vignette=$process' border='$border' /></a><br />";
+	echo "<td><div align='center' valign='bottom' width='".($taille_preview+4)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?test_vignette=$process' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";
 	echo "</div></td>\n";
 }
 
-if ($flag_gd OR $flag_imagick OR $convert_command) {
-	debut_cadre_relief("image-24.gif");
 
-	$formats_graphiques = lire_meta("formats_graphiques");
-	$creer_preview = lire_meta("creer_preview");
-	$taille_preview = lire_meta("taille_preview");
-	if ($taille_preview < 10) $taille_preview = 120;
+// Si Imagick est present, alors c'est imagick automatiquement
 
-	// application du choix de vignette
-	if ($image_process) {
-		ecrire_meta('image_process', $image_process);
+
+if ($flag_gd OR $flag_imagick OR $convert_command)
+	debut_cadre_trait_couleur("image-24.gif");
+
+if ($flag_imagick) {
+		$image_process = "imagick";
+		ecrire_meta('image_process', 'imagick');
+		$formats_graphiques = "gif,jpg,png";
+		ecrire_meta('formats_graphiques', 'gif,jpg,png');
 		ecrire_metas();
-	}
+}
+else {
+	if ($flag_gd OR $convert_command) {
+		$formats_graphiques = lire_meta("formats_graphiques");
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee'>";
-	echo "<B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='white'>"._T('info_generation_miniatures_images')."</FONT></B></TD></TR>";
-	echo "<TR><TD class='verdana2'>";
-	echo _T('info_ajout_image');
-	echo "</TD></TR>";
+		debut_cadre_relief("", false, "", _T("info_image_process_titre"));
 
-	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
-	if (($flag_gd AND $gd_formats) OR $flag_imagick OR $convert_command) {
-		afficher_choix('creer_preview', $creer_preview,
-			array('oui' => _T('item_choix_generation_miniature'),
-				'non' => _T('item_choix_non_generation_miniature')));
-		echo "<p>";
+		echo "<p class='verdana2'>";
+		echo _T('info_image_process');
+		echo "</p>";
 
-		if ($creer_preview == "oui") {
-			echo "<div style='border: 1px dashed #404040; margin: 6px; padding: 6px;'><table width='99%' align='center'><tr>";
-
-			// Tester les formats
-			if ($flag_gd) {
-				$nb_process ++;
-				afficher_choix_vignette($p = 'gd1');
-
-				if ($flag_ImageCreateTrueColor) {
-					afficher_choix_vignette($p = 'gd2');
-					$nb_process ++;
-				}
-			}
-
-			if ($flag_imagick) {
-				afficher_choix_vignette($p = 'imagick');
-				$nb_process ++;
-			}
-
-			if ($convert_command) {
-				afficher_choix_vignette($p = 'convert');
-				$nb_process ++;
-			}
-
-			echo "</tr></table>\n";
-
-			if ($nb_process>1) {
-				echo "<div>"._T('info_image_process');
-			} else if ($nb == 1 AND lire_meta('image_process') == '') {
-				ecrire_meta('image_process', $p);
-				ecrire_metas();
-			}
-
-
+		// application du choix de vignette
+		if ($image_process) {
+			ecrire_meta('image_process', $image_process);
 			// mettre a jour les formats graphiques lisibles
 			switch (lire_meta('image_process')) {
 				case 'gd1':
@@ -128,60 +94,112 @@ if ($flag_gd OR $flag_imagick OR $convert_command) {
 			}
 			ecrire_meta('formats_graphiques', $formats_graphiques);
 			ecrire_metas();
-
-
-			echo "<div>";
-
-			if ($formats_affiche = str_replace(',', ',&nbsp;', $formats_graphiques))
-				echo '<div>'._T('info_format_image', array('gd_formats' => $formats_affiche)).'</div>';
-
-			echo '<div>'._T('info_taille_maximale_vignette');
-			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-			echo " "._T('info_pixels').'</div>';
-
-			echo "</div>";
 		}
+
+			echo "<table width='100%' align='center'><tr>";
+
+			// Tester les formats
+			if ($flag_gd) {
+				$nb_process ++;
+				afficher_choix_vignette($p = 'gd1');
+
+				if ($flag_ImageCreateTrueColor) {
+					afficher_choix_vignette($p = 'gd2');
+					$nb_process ++;
+				}
+			}
+
+			if ($convert_command) {
+				afficher_choix_vignette($p = 'convert');
+				$nb_process ++;
+			}
+
+			echo "</tr></table>\n";
+	
+		echo "<p class='verdana2'>";
+		echo _T('info_image_process2');
+		echo "</p>";
+	
+	
+		fin_cadre_relief();
+	}
+}
+
+	//
+	// Une fois le process choisi, proposer vignettes
+	//
+	
+	$creer_preview = lire_meta("creer_preview");
+	$taille_preview = lire_meta("taille_preview");
+	if ($taille_preview < 10) $taille_preview = 120;
+
+	if (strlen($formats_graphiques) > 0) {
+		debut_cadre_trait_couleur("", false, "", _T('info_generation_miniatures_images'));
+		
+		echo "<p class='verdana2'>";
+		echo _T('info_ajout_image');
+		echo "</p>\n";
+		echo "<p class='verdana2'>";
+
+
+		$block = "'block', 'none'"; 
+		echo bouton_radio("creer_preview", "oui", _T('item_choix_generation_miniature'), $creer_preview == "oui", "changeVisible(this.checked, 'config-preview', $block);");
+
+		if ($creer_preview == "oui") $style = "display: block;";
+		else $style = "display: none;";
+	
+			echo "<div id='config-preview' class='verdana2' style='$style margin-$spip_lang_left: 40px;'>"._T('info_taille_maximale_vignette');
+			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+			echo " "._T('info_pixels').'<br /><br /></div>';
+			
+		$block= "'none', 'block'";
+		echo bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', $block);");
+	
+
+
+
+/*		afficher_choix('creer_preview', $creer_preview,
+			array('non' => _T('item_choix_non_generation_miniature'),
+				'oui' => _T('item_choix_generation_miniature')));
+		echo "</p>\n";
+		*/
+
+
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+		
+		fin_cadre_trait_couleur();
 	}
 
-	echo "</TD></TR>\n";
-	echo "<TR><TD style='text-align:$spip_lang_right;' COLSPAN=2>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
 
-	echo "</table>";
+if ($flag_gd OR $flag_imagick OR $convert_command)
+		fin_cadre_trait_couleur();
 
-	fin_cadre_relief();
-	echo "<p>";
-}
+echo "<p>";
+
+
 
 
 //
 // Indexation pour moteur de recherche
 //
 
-debut_cadre_relief("racine-site-24.gif");
+debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('info_moteur_recherche').aide ("confmoteur"));
+
 
 $activer_moteur = lire_meta("activer_moteur");
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_moteur_recherche')."</FONT></B> ".aide ("confmoteur")."</TD></TR>";
+	echo "<div class='verdana2'>";
+		echo _T('info_question_utilisation_moteur_recherche');
+	echo "</div>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-echo _T('info_question_utilisation_moteur_recherche');
-echo "</TD></TR>";
+	echo "<div class='verdana2'>";
+	afficher_choix('activer_moteur', $activer_moteur,
+		array('oui' => _T('item_utiliser_moteur_recherche'),
+			'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ');
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
-afficher_choix('activer_moteur', $activer_moteur,
-	array('oui' => _T('item_utiliser_moteur_recherche'),
-		'non' => _T('item_non_utiliser_moteur_recherche')), ' &nbsp; ');
-echo "</TD></TR>";
-
-echo "<TR><td style='text-align:$spip_lang_right;'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>";
-
-fin_cadre_relief();
+fin_cadre_trait_couleur();
 
 echo "<p>";
 
@@ -190,29 +208,22 @@ echo "<p>";
 // Activer les statistiques
 //
 
-debut_cadre_relief("statistiques-24.gif");
+debut_cadre_trait_couleur("statistiques-24.gif", false, "", _T('info_forum_statistiques').aide ("confstat"));
 
 $activer_statistiques = lire_meta("activer_statistiques");
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_forum_statistiques')."</FONT></B> ".aide ("confstat")."</TD></TR>";
+	echo "<div class='verdana2'>";
+	echo _T('info_question_gerer_statistiques');
+	echo "</div>";
 
-echo "<TR><TD class='verdana2'>";
-echo _T('info_question_gerer_statistiques');
-echo "</TD></TR>";
-
-echo "<TR><TD ALIGN='center' class='verdana2'>";
+	echo "<div class='verdana2'>";
 afficher_choix('activer_statistiques', $activer_statistiques,
 	array('oui' => _T('item_gerer_statistiques'),
 		'non' => _T('item_non_gerer_statistiques')), ' &nbsp; ');
-echo "</TD></TR>\n";
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
-echo "<TR><td style='text-align:$spip_lang_right;'>";
-echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-echo "</TD></TR>";
-echo "</TABLE>\n";
-
-fin_cadre_relief();
+fin_cadre_trait_couleur();
 
 echo "<p>";
 
@@ -222,31 +233,26 @@ echo "<p>";
 //
 
 if ($options == "avancees") {
-	debut_cadre_relief("article-24.gif");
 
+
+debut_cadre_trait_couleur("article-24.gif", false, "", _T('info_travail_colaboratif'));
 	$articles_modif = lire_meta("articles_modif");
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_travail_colaboratif')."</FONT></B></TD></TR>";
 
-	echo "<TR><TD class='verdana2'>";
+	echo "<div class='verdana2'>";
 	echo _T('texte_travail_collaboratif');
-	echo "</TD></TR>";
+	echo "</div>";
 
-	echo "<TR><TD ALIGN='center' class='verdana2'>";
+	echo "<div class='verdana2'>";
 	afficher_choix('articles_modif', $articles_modif,
 		array('oui' => _T('item_activer_messages_avertissement'),
 			'non' => _T('item_non_activer_messages_avertissement')));
-	echo "</TD></TR>\n";
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
+fin_cadre_trait_couleur();
 
-	fin_cadre_relief();
-
-	echo "<p>";
+echo "<p>";
 }
 
 
@@ -254,36 +260,25 @@ if ($options == "avancees") {
 // Gestion des revisions des articles
 //
 
-if ($options == "avancees") {
-	debut_cadre_relief("historique-24.gif");
+if ($flag_revisions AND $options == "avancees") {
 
+
+debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_titre'));
 	$articles_versions = lire_meta("articles_versions");
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._L('Suivi des r&eacute;visions')."</FONT></B></TD></TR>";
 
-	echo "<TR><TD class='verdana2'>";
-	echo _L('Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.');
-	echo "</TD></TR>";
+	echo "<div class='verdana2'>";
+	echo _T('info_historique_texte');
+	echo "</div>";
 
-	echo "<TR><TD ALIGN='center' class='verdana2'>";
+	echo "<div class='verdana2'>";
 	afficher_choix('articles_versions', $articles_versions,
-		array('oui' => _L('Activer le suivi des r&eacute;visions'),
-			'non' => _L('D&eacute;sactiver le suivi des r&eacute;visions')));
-	echo "</TD></TR>\n";
-
-	if (!$flag_revisions) {
-		echo "<TR><TD ALIGN='center' class='verdana2'>";
-		echo "<i>"._L('La configuration de votre serveur ne permet pas d\'activer le suivi des r&eacute;visions')."</i>";
-		echo "</TD></TR>\n";
-	}
-
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
-
-	fin_cadre_relief();
+		array('oui' => _T('info_historique_activer'),
+			'non' => _T('info_historique_desactiver')));
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+fin_cadre_trait_couleur();
 
 	echo "<p>";
 }
@@ -296,42 +291,37 @@ if ($options == "avancees") {
 //
 
 if ($options == 'avancees') {
-	debut_cadre_relief("base-24.gif");
 
+
+
+debut_cadre_trait_couleur("base-24.gif", false, "", _T('info_sites_proxy').aide ("confhttpproxy"));
 	$http_proxy=entites_html(lire_meta("http_proxy"));
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_sites_proxy')."</FONT></B> ".aide ("confhttpproxy")."</TD></TR>";
 
-	echo "<TR><TD class='verdana2'>";
-	echo _T('texte_proxy') . "</FONT>";
-	echo "</TD></TR>";
+	echo "<div class='verdana2'>";
+	echo _T('texte_proxy');
+	echo "</div>";
 
-	echo "<TR><TD ALIGN='center'>";
+	echo "<div class='verdana2'>";
 	echo "<INPUT TYPE='text' NAME='http_proxy' VALUE='$http_proxy' size='40' class='forml'>";
-	echo "</TD></TR>";
 
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	if ($http_proxy) {
 		echo "<p align='$spip_lang_left'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>"
 			. _T('texte_test_proxy');
-		echo "</TD></TR>";
+		echo "</p>";
 
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+		echo "<p>";
 		echo "<INPUT TYPE='text' NAME='test_proxy' VALUE='http://www.spip.net/' size='40' class='forml'>";
-		echo "</TD></TR>";
+		echo "</p>";
+		echo "<div style='text-align: $spip_lang_right;'><INPUT TYPE='submit' NAME='tester_proxy' VALUE='"._T('bouton_test_proxy')."' CLASS='fondo'></div>";
 
-		echo "<TR><td style='text-align:$spip_lang_right;'>";
-
-		echo "</font><div align='$spip_lang_right'><INPUT TYPE='submit' NAME='tester_proxy' VALUE='"._T('bouton_test_proxy')."' CLASS='fondo'></div>";
 	}
-	echo "</TD></TR>";
 
-	echo "</TABLE>";
 
-	fin_cadre_relief();
-
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+fin_cadre_trait_couleur();
 	echo "<p>";
 }
 
@@ -345,29 +335,24 @@ if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
-	debut_cadre_relief("cadenas-24.gif");
 
+
+debut_cadre_trait_couleur("cadenas-24.gif", false, "", _T('info_fichiers_authent'));
 	$creer_htpasswd = lire_meta("creer_htpasswd");
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_fichiers_authent')."</FONT></B></TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "<div class='verdana2'>";
 	echo _T('texte_fichier_authent');
-	echo "</TD></TR>";
+	echo "</div>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
+	echo "<div class='verdana2'>";
 	afficher_choix('creer_htpasswd', $creer_htpasswd,
 		array('oui' => _T('item_creer_fichiers_authent'),
 		'non' => _T('item_non_creer_fichiers_authent')), ' &nbsp; ');
-	echo "</TD></TR>";
-
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>";
-
-	fin_cadre_relief();
+	echo "</div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+fin_cadre_trait_couleur();
 
 	echo "<p>";
 }

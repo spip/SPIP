@@ -59,42 +59,31 @@ avertissement_config();
 
 echo "<form action='configuration.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
-debut_cadre_trait_couleur("racine-site-24.gif");
+debut_cadre_couleur("racine-site-24.gif");
 
 	$nom_site = entites_html(lire_meta("nom_site"));
 	$adresse_site = entites_html(lire_meta("adresse_site"));
 	$email_webmaster = entites_html(lire_meta("email_webmaster"));
 
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
-	echo _T('info_nom_site')."</FONT></B> ".aide ("confnom")."</TD></TR>";
+	debut_cadre_relief("", false, "", _T('info_nom_site').aide ("confnom"));
+	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' CLASS='forml'>";
+	fin_cadre_relief();
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "<input type='text' name='nom_site' value=\"$nom_site\" size='40' CLASS='formo'>";
-	echo "</TD></TR>";
-
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
-	echo _T('info_adresse_url')."</FONT></B></TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='formo'><p>&nbsp;";
-	echo "</TD></TR>";
+	debut_cadre_relief("", false, "", _T('info_adresse_url'));
+	echo "<input type='text' name='adresse_site' value=\"$adresse_site/\" size='40' CLASS='forml'>";
+	fin_cadre_relief();
 
 	if ($options == "avancees") {
-		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
-		echo _T('info_email_webmestre')."</FONT></B></TD></TR>";
-
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-		echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='forml'>";
-		echo "</TD></TR>";
+		echo "<div>&nbsp;</div>";
+	
+		debut_cadre_relief("", false, "", _T('info_email_webmestre'));
+		echo "<input type='text' name='email_webmaster' value=\"$email_webmaster\" size='40' CLASS='formo'>";
+		fin_cadre_relief();
 	}
 
-	echo "<TR><td style='text-align:$spip_lang_right;'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>";
+	echo "<div style='text-align:right;'><input type='submit' name='Valider' value='"._T('bouton_valider')."' CLASS='fondo'></div>";
 
-fin_cadre_trait_couleur();
+fin_cadre_couleur();
 
 echo "<p>&nbsp;<p>";
 

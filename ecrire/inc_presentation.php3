@@ -415,7 +415,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	global $spip_lang_left;
 
 
-	$activer_messagerie = lire_meta("activer_messagerie");
+	$activer_messagerie = "oui";
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
@@ -522,7 +522,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 						$auteur_messagerie = $row['messagerie'];
 						
 						$les_auteurs .= ", <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom_auteur</a>";
-						if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non" AND $activer_messagerie != "non") {
+						if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non") {
 							$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
 						}
 					}
@@ -1058,7 +1058,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 	global $mots_cles_forums;
 	global $spip_lang_rtl;
 
-	$activer_messagerie = lire_meta("activer_messagerie");
+	$activer_messagerie = "oui";
 
 	$compteur_forum++;
 
@@ -1126,7 +1126,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 				echo " ".typo($auteur);
 			}
 
-			if ($id_auteur AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non") {
+			if ($id_auteur AND $connect_activer_messagerie != "non") {
 				$bouton = bouton_imessage($id_auteur,$row_auteur);
 				if ($bouton) echo "&nbsp;".$bouton;
 			}
@@ -1626,13 +1626,8 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "auteur"){
-		$activer_messagerie = lire_meta("activer_messagerie");
-		$activer_imessage = lire_meta("activer_imessage");
-
 		onglet(_T('onglet_auteur'), "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
 		onglet(_T('onglet_informations_personnelles'), "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
-		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur)
-			onglet(_T('onglet_messagerie'), "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
 	}
 
 	if ($rubrique == "configuration"){
@@ -1944,7 +1939,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
-	$activer_messagerie = lire_meta("activer_messagerie");
+	$activer_messagerie = "oui";
 	global $clean_link;
 
 	if ($spip_ecran == "large") $largeur = 974;
@@ -2028,8 +2023,8 @@ else {
 	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
 	
 	// Icones secondaires
-	$activer_messagerie = lire_meta("activer_messagerie");
-	$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
+	$activer_messagerie = "oui";
+	$connect_activer_messagerie = "oui";
 	
 	if ($rubrique == "asuivre"){
 		$class = "visible_au_chargement";
@@ -2600,8 +2595,6 @@ else {
 	// Petite verif pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
 	echo "<center onMouseOver=\"if (findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
 
-
-		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
 			if ($total_messages == 1) {
@@ -2611,7 +2604,6 @@ else {
 				}
 			}
 			if ($total_messages > 1) echo "<div class='messages'><a href='messagerie.php3'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
-		}
 
 
 	// Afficher les auteurs recemment connectes
@@ -2623,8 +2615,8 @@ else {
 	global $connect_activer_imessage;
 
 		if ($changer_config!="oui"){
-			$activer_messagerie=lire_meta("activer_messagerie");
-			$activer_imessage=lire_meta("activer_imessage");
+			$activer_messagerie = "oui";
+			$activer_imessage = "oui";
 		}
 	
 			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {

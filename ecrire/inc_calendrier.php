@@ -154,10 +154,11 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		$largeur_table = 730;
 	}
 
-	$fclic = ((lire_meta("activer_messagerie") == "oui") AND 
+/*	$fclic = ((lire_meta("activer_messagerie") == "oui") AND 
 		($GLOBALS["connect_activer_messagerie"] != "non"))?
 		'http_calendrier_clics' : 
-		'http_calendrier_sans_clics';
+		'http_calendrier_sans_clics';*/
+	$fclic = 'http_calendrier_clics';
 	while (!(checkdate($mois,$dernier_jour,$annee))) $dernier_jour--;
 	$today=getdate(time());
 	$m=$today["mon"];
@@ -1080,9 +1081,7 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 			$breves["0"] .
 			$articles["0"] .
 			"</font></td></tr></table>")) .
-		((lire_meta("activer_messagerie") != "oui" OR
-			$GLOBALS["connect_activer_messagerie"] == "non") ? '' :
-			http_calendrier_aide_mess());
+			http_calendrier_aide_mess();
 }
 
 function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
