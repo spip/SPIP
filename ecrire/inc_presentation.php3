@@ -82,70 +82,6 @@ function hr($color, $retour = false) {
 //
 // Cadres
 //
-function debut_cadrex($style, $icone = "", $fonction = "", $titre = "") {
-	global $browser_name;
-	global $spip_display, $spip_lang_left;
-	static $accesskey = 97; // a
-
-	// accesskey pour accessibilite espace prive
-	$accesskey_c = chr($accesskey++);
-	$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
-
-
-	$ret .= "<div style='position: relative; z-index: 1;'>";
-
-	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
-		$style_gauche = " padding-$spip_lang_left: 38px;";
-		$ret .= "<div style='position: absolute; top: 0px; $spip_lang_left: 10px; z-index: 2;'>";
-		if ($fonction) {
-			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px;'");
-			$ret .= http_img_pack($fonction, "alt=''");
-			$ret .= "</div>";
-		}
-		else $ret .=  http_img_pack("$icone", "alt=''");
-		$ret .= "</div>";
-
-		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px; z-index: 1;'";
-	}
-
-	if ($style == "e") {
-		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
-	}
-	else {
-		$ret .= "<div class='cadre-$style'$style_cadre>";
-	}
-	
-	if (strlen($titre) > 0) {
-		if ($spip_display == 4) {
-			$ret .= "<h3 class='cadre-titre'>$titre</h3>";
-		} else {
-			$ret .= "<div class='cadre-titre' style='z-index: 1; margin: 0px;$style_gauche'>$titre</div>";
-		}
-	}
-	
-	
-	
-	$ret .= "<div class='cadre-padding'>";
-	// Gaffe: hack MSIE, sinon les floats disparaissent
-	if ($browser_name == "MSIE") $ret .= "<table width='100%' cellpadding='0' cellspacing='0'><tr><td>";
-
-	return $ret;
-}
-
-
-function fin_cadrex($style="") {
-	global $browser_name;
-	
-	// Fermture du hack MSIE	
-	if ($browser_name == "MSIE") $ret = "</td></tr></table>";
-
-	if ($style == "e") $ret .= "</div>";
-	$ret .= "</div></div></div>\n";
-	if ($style != "forum" AND $style != "thread-forum") $ret .= "<div style='height: 5px;'></div>";
-	
-	return $ret;
-}
-
 
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	global $browser_name;
@@ -157,6 +93,10 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		$style_cadre = " style='margin-top: 14px;'";
 	}
 	
+	// accesskey pour accessibilite espace prive
+	$accesskey_c = chr($accesskey++);
+	$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
+
 	if ($style == "e") {
 		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
 	}
