@@ -129,7 +129,12 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	filter: alpha(opacity=100);
 }
 .cellule36 a span, .cellule48 a span {
-	color: #505050; display: block; margin: 2px;
+	color: #666666; display: block; margin: 2px;
+	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
+	width: 100%
+}
+.cellule36 a:hover span, .cellule48 a:hover span {
+	color: #000000; display: block; margin: 2px;
 	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%
 }
@@ -170,7 +175,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 }
 .cellule-texte a {
 	padding: 4px; margin: 1px; border: 0px;
-	color: #505050;
+	color: #606060;
 }
 .cellule-texte a.selection {
 	padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4;
@@ -180,6 +185,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .cellule-texte a:hover {
 	padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;
 	-moz-border-radius: 5px;
+	color: #333333;
 }
 .cellule-texte a.aide, .cellule-texte a.aide:hover {
 	border: none;
@@ -232,6 +238,13 @@ a.cellule-h td {
 	font-weight: bold;
 	font-size: 10px;
 	color: #666666;
+}
+a.cellule-h:hover td {
+	text-align: <?php echo $left; ?>;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	color: #000000;
 }
 a.cellule-h img {
 	width: 24px;
