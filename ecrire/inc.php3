@@ -40,8 +40,8 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
-if ($zap == 'oui' || $zap == 'non') {
-	$prefs['zap'] = $zap;
+if ($securite == 'normal' || $securite == 'parano') {
+	$prefs['securite'] = $securite;
 	$prefs_mod = true;
 }
 

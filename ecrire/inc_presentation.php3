@@ -1695,15 +1695,86 @@ function debut_droite() {
 
 	// zap sessions si bonjour
 	if($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
-		$zap = ($GLOBALS['prefs']['zap'] == 'oui');
-		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $zap);
+		$securite = $GLOBALS['prefs']['securite'];
+		if ($securite == 'parano')
+			$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'parano');
 
-		if ($zappees || $GLOBALS['secu'] == 'oui') {
+		if ($zappees) {
 			debut_cadre_enfonce();
-			gros_titre("Connexions parall&egrave;les");
+			gros_titre("Avertissement de sécurité");
 			echo "<p>";
 
-			if ($zappees) $message = "Lorsque vous aurez termin&eacute; de travailler
+			$link = new Link();
+			$link->addVar('secu', 'oui');
+			echo propre("<img src='img_pack/warning.gif' height='48' width='48' align='left'>".
+				"Le système vient de détecter qu'une autre connexion à votre nom existait. ".
+				"Conformément à vos [réglages de sécurité->".$link->getURL()."], cette connexion ".
+				"a été automatiquement supprimée. A l'avenir, n'oubliez cependant pas de vous ".
+				"déconnecter à la fin de chaque passage sur l'espace privé en utilisant le bouton ".
+				"prévu à cet effet dans l'interface.").aide('deconnect');
+			echo "<p>".propre("Si vous ne voulez plus que le système effectue cette vérification, vous ".
+				"devez modifier vos réglages de sécurité.");
+			echo "<div align='right'>";
+			echo $link->getForm('POST');
+			echo "<input type='submit' class='fondo' name='submit' value='Modifier vos réglages de sécurité'>\n";
+			echo "</form></div>\n";
+
+			fin_cadre_enfonce();
+		}
+
+		else if ($GLOBALS['secu'] == 'oui') {
+			debut_cadre_enfonce();
+			if ($securite == 'parano') {
+				gros_titre("Type de connexion&nbsp;: sécurité avancée");
+			}
+			else
+				gros_titre("Type de connexion&nbsp;: sécurité normale");
+			echo "<p>";
+
+			if ($securite == 'parano') {
+				$link = new Link();
+				$link->addVar('securite', 'normal');
+
+				echo propre("<img src='img_pack/warning.gif' height='48' width='48' align='left'>".
+					"Vous &ecirc;tes en mode de sécurité &laquo;{avancée}&raquo;. ".
+					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n\n\n\n".
+					"- Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents ".
+					"sans être automatiquement déconnecté.\n".
+					"- Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes ".
+					"(utile en cas de d&eacute;monstration de SPIP, ou d'auteur collectif).\n\n\n".
+					"{{Grâce à ces limitations, la sécurité du système est renforcée.}} ".
+					"D'autre part, le système affichera un avertissement à chaque fois qu'une ".
+					"autre connexion que la vôtre est détectée (soit parce que vous ne vous êtes ".
+					"pas déconnecté la dernière fois, soit parce que quelqu'un a éventuellement ".
+					"réussi à se connecter à votre insu).\n\n\n\n".
+					"Notez que si vous désirez utiliser ".
+					"une des possibilités mentionnées ci-dessus, ".
+					"vous {{devez}} repasser à un mode de connexion normal.\n\n\n\n");
+				echo "<div align='right'>";
+				echo $link->getForm('POST');
+				echo "<input type='submit' class='fondo' name='submit' value='Repasser en sécurité normale'>\n";
+				echo "</form></div>\n";
+			}
+			else {
+				$link = new Link();
+				$link->addVar('securite', 'parano');
+
+				echo propre("Vous &ecirc;tes en mode de sécurité &laquo;{normal}&raquo;. ".
+					"Cela veut dire que vous pouvez faire les choses suivantes :\n\n\n\n".
+					"- Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents ".
+					"sans être automatiquement déconnecté.\n".
+					"- Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes ".
+					"(utile en cas de d&eacute;monstration de SPIP, ou d'auteur collectif).\n\n\n".
+					"En contrepartie, la sécurité du système n'est pas maximale. Si vous n'utilisez pas les ".
+					"possibilités mentionnées ci-dessus et que vous êtes extrêmement soucieux de votre sécurité, ".
+					"vous pouvez passer à un mode de connexion beaucoup plus strict.\n\n\n\n");
+				echo "<div align='right'>";
+				echo $link->getForm('POST');
+				echo "<input type='submit' class='fondo' name='submit' value='Passer en sécurité avancée'>\n";
+				echo "</form></div>\n";
+			}
+
+/*			if ($zappees) $message = "Lorsque vous aurez termin&eacute; de travailler
 				dans l'espace priv&eacute;, pensez &agrave; vous d&eacute;connecter,
 				soit en quittant votre navigateur, soit en cliquant sur le
 				bouton ci-dessus <img valign='bottom' src='img_pack/deconnecter-24.gif'>.\n\n";
@@ -1731,11 +1802,9 @@ function debut_droite() {
 					d&eacute;connecter depuis un ordinateur auquel vous
 					n'avez plus acc&egrave;s, <a href='$link'>cliquez
 					ici</a>.";
-			}
+			}*/
 
-
-			echo propre ($message) .
-				"<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
+			echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
 
 			fin_cadre_enfonce();
 		}
