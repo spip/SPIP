@@ -1,25 +1,25 @@
 <?php
 
 include ("inc_version.php3");
+
+if (!_FILE_CONNECT) {
+	Header("Location: install.php3");
+	exit;
+ }
+
 include_ecrire ("inc_presentation.php3");
 include_ecrire ("inc_auth.php3");
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_acces.php3");
-include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
-
 
 $spip_lang = lire_meta($langue_site);
 if (!$spip_lang) $spip_lang = "fr";
 
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {
-	if (!FILE_CONNECT) {
-		Header("Location: install.php3");
-		exit;
-	}
 
 	@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
 
