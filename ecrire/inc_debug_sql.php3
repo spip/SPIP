@@ -16,6 +16,29 @@
 if (defined("_INC_DEBUG_SQL")) return;
 define("_INC_DEBUG_SQL", "1");
 
+function afficher_debug_contexte($env) {
+	static $n;
+	$n++;
+
+	if (is_array($env_tab = @unserialize($env)))
+		$env = $env_tab;
+
+	$env_texte="<div id='spip-env'>"
+		. bouton_block_invisible("env$n")
+		. "<b>#ENV</b>\n"
+		. debut_block_invisible("env$n")
+		. "<table>\n";
+	foreach ($env as $nom => $valeur) {
+		$env_texte .= "<tr><td><strong>".nl2br(entites_html($nom))
+			. "</strong></td>";
+		$env_texte .= "<td>:&nbsp;".nl2br(entites_html($valeur))
+			. "</td></tr>\n";
+	}
+	$env_texte .= "\n</table>\n";
+	$env_texte .= fin_block()."</div>\n";
+	return $env_texte;
+}
+
 // Si le code php produit des erreurs, on les affiche en surimpression
 // sauf pour un visiteur non admin (lui ne voit rien de special)
 // ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
@@ -147,6 +170,11 @@ function squelette_debug_compile($nom, $sourcefile, $squelette) {
 	global $debug_objets;
 	$debug_objets['squelettes'][$nom] = $squelette;
 	$debug_objets['sourcefile'][$nom] = $sourcefile;
+
+	if (is_array($GLOBALS['contexte_inclus']))
+		$debug_objets['contexte'][$nom] = $GLOBALS['contexte_inclus'];
+	else
+		$debug_objets['contexte'][$nom] = $GLOBALS['contexte'];
 }
 
 // appelee a chaque analyse syntaxique de squelette (inc-parser)
@@ -182,10 +210,17 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  "</head>\n<body>",
 	  "<div id='spip-debug' style='position: absolute; top: 20px; z-index: 1000;'><ul>\n"; 
 
+	include_ecrire('inc_layer.php3');
+	echo $GLOBALS['browser_layer'];
+
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>",$sourcefile,"</b>";
 		echo " <a href='",$self, "&var_mode_objet=$nom_skel&var_mode_affiche=resultat'>"._T('zbug_resultat')."</a>";
 		echo " <a href='", $self, "&var_mode_objet=$nom_skel&var_mode_affiche=code'>"._T('zbug_code')."</a>";
+
+		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
+			echo afficher_debug_contexte($contexte);
+
 		echo "<table width='100%'>\n";
 		$i = 0;
 		$colors = array('#c0c0c0', '#c0cad4');
