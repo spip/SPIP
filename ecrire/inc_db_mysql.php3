@@ -49,14 +49,15 @@ function spip_query_db($query) {
 // Passage d'une requete standardisee
 //
 function traite_query($query) {
-	global $spip_mysql_db;
+	if ($db = $GLOBALS['spip_mysql_db'])
+		$db .= '.';
 
 	// changer les noms des tables ($table_prefix)
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
 		$suite = $regs[0];
 		$query = substr($query, 0, -strlen($suite));
 	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$spip_mysql_db.'.'.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	$query = ereg_replace('([[:space:],])spip_', '\1'.$db.$GLOBALS['table_prefix'].'_', $query) . $suite;
 
 	return $query;
 }
