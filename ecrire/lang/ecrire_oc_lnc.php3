@@ -449,7 +449,6 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_popularite_2' => 'popularitat del sit:',
 'info_popularite_3' => 'popularitat: @popularite@; vesitas: @visites@',
 'info_popularite_4' => 'popularitat: @popularite@; vesitas: @visites@',
-'info_popularite_5' => 'popularitat:',
 'info_post_scriptum' => 'Post-scriptum',
 'info_post_scriptum_2' => 'Post-scriptum:',
 'info_pour' => 'per',

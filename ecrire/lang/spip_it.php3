@@ -273,7 +273,7 @@ Grazie per la partecipazione',
 'forum_vous_enregistrer' => '&Egrave; necessario iscriversi
 per partecipare a questo forum.  Indica qui sotto l\'ID personale
 che ti &egrave; stato fornito.  Se non sei registrato, devi',
-'forum_vous_inscrire' => 'prima iscriverti</a>.',
+'forum_vous_inscrire' => 'prima iscriverti.',
 
 
 // I
@@ -364,8 +364,9 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_contact_developpeur' => 'Contatta un programmatore.',
 'info_contenance' => 'Questo sito contiene:',
 'info_contribution' => 'contributi dei forum',
-'info_copyright' => '&egrave; un software libero distribuito <a href=\'http://www.softwarelibero.it/gnudoc/gpl.it.txt\'>sotto licenza GPL.</a>',
+'info_copyright' => '@spip@ &egrave; un software libero distribuito @lien_gpl@.',
 'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito di <a href=\'http://www.spip.net/\'>SPIP</a>.',
+'info_copyright_gpl' => 'sotto licenza GPL',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>ecrire/data/</b>, poi:',

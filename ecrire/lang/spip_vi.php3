@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => '<NEW>Retour &agrave; l\'interface graphique compl&egrave;te',
 'access_mode_texte' => '<NEW>Afficher l\'interface textuelle simplifi&eacute;e',
+'admin_debug' => '<NEW>debug',
 'admin_modifier_article' => 'S&#7917;a &#273;&#7893;i b&agrave;i n&agrave;y',
 'admin_modifier_auteur' => 'S&#7917;a &#273;&#7893;i t&aacute;c gi&#7843; n&agrave;y',
 'admin_modifier_breve' => 'S&#7917;a &#273;&#7893;i tin ng&#7855;n n&agrave;y',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_jour_entier' => '<NEW>jour entier',
+'cal_matin' => '<NEW>matin',
+'cal_par_jour' => '<NEW>calendrier par jour',
+'cal_par_mois' => '<NEW>calendrier par mois',
+'cal_par_semaine' => '<NEW>calendrier par semaine',
 'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
@@ -318,6 +325,10 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'icone_valider_message' => 'Ch&#7845;p thu&#7853;n',
 'icone_visiter_site' => 'Tr&#7903; v&#7873; trang nh&agrave;',
 'icone_voir_en_ligne' => 'Xem online',
+'image_tourner_180' => '<NEW>Rotation 180&deg;',
+'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
+'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
+'img_indisponible' => '<NEW>image indisponible',
 'info_a_suivre' => 'N&#416;I B&#7854;T &#272;&#7846;U&raquo;',
 'info_a_valider' => '[ch&#7901; th&ocirc;ng qua]',
 'info_acces_interdit' => 'Kh&ocirc;ng v&agrave;o/d&ugrave;ng &#273;&#432;&#7907;c',
@@ -352,12 +363,14 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_cours_edition' => 'B&agrave;i c&#7911;a b&#7841;n &#273;ang so&#7841;n',
 'info_creer_repertoire' => 'Xin l&#7853;p ra m&#7897;t h&#7891; s&#417; hay m&#7897;t ng&#259;n mang t&#234;n:',
 'info_creer_repertoire_2' => 'trong ng&#259;n ph&#7909; <B>ecrire/data/</b>, k&#7871; &#273;&#243;',
+'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_deplier' => 'M&#7903; ra',
 'info_descriptif_nombre' => 'M&#244; t&#7843;:',
 'info_description' => 'T&oacute;m l&#432;&#7907;c:',
 'info_description_2' => 'T&oacute;m l&#432;&#7907;c:',
 'info_dimension' => 'Kh&#7893;:',
 'info_document' => 'T&#224;i li&#7879;u ',
+'info_documents' => '<NEW>Documents',
 'info_echange_message' => 'SPIP cho ph&eacute;p trao &#273;&#7893;i th&#432; t&iacute;n v&agrave; l&#7853;p ra nh&#7919;ng di&#7877;n &#273;&agrave;n trao &#273;&#7893;i ri&ecirc;ng gi&#7919;a c&aacute;c tham d&#7921; vi&ecirc;n. B&#7841;n c&oacute; th&#7875; t&#7855;t/m&#7903; &#273;&#7863;c &#273;i&#7875;m n&agrave;y.',
 'info_ecire_message_prive' => 'Vi&#7871;t th&#432; t&iacute;n ri&ecirc;ng',
 'info_email_invalide' => '&#272;&#7883;a ch&#7881; email kh&#244;ng &#273;&#250;ng.',
@@ -396,6 +409,9 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_langue_principale' => 'Ng&ocirc;n ng&#7919; c&#7911;a website',
 'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ ch&#7845;m',
 'info_les_auteurs_1' => 'c&#7911;a @les_auteurs@ ',
+'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
+'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
 'info_mail_fournisseur' => ' you@isp.com',
 'info_message_2' => 'TH&#431; T&Iacute;N',
 'info_message_supprime' => 'TH&#431; T&Iacute;N &#272;&#431;&#7906;C X&Oacute;A',
@@ -419,6 +435,8 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_petit_ecran' => 'Xem d&#7841;ng nh&#7887;',
 'info_pixels' => 'ch&#7845;m',
 'info_plusieurs_mots_trouves' => 'T&#236;m th&#7845;y m&#7897;t s&#7889; t&#7915; then ch&#7889;t cho "@cherche_mot@":',
+'info_popularite_5' => ' ph&#7893; th&#244;ng:',
+'info_portfolio' => '<NEW>Portfolio',
 'info_portfolio_automatique' => 'Portfolio t&#7921; &#273;&#7897;ng:',
 'info_premier_resultat' => '[@debut_limit@ k&#7871;t qu&#7843; &#273;&#7847;u ti&#234;n trong s&#7889; @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ k&#7871;t qu&#7843; &#273;&#7847;u ti&#234;n trong s&#7889; @total@]',
@@ -468,6 +486,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_visite' => 'th&#259;m vi&#7871;ng:',
 'info_visites' => ' th&#259;m vi&#7871;ng:',
 'info_vos_rendez_vous' => 'Nh&#7919;ng l&#7847;n h&#7865;n s&#7855;p t&#7899;i',
+'info_zoom' => '<NEW>zoom',
 'infos_vos_pense_bete' => 'B&#7843;n ghi nh&#7899; c&#7911;a b&#7841;n',
 'item_breve_proposee' => 'N&#7897;p v&agrave;o',
 
@@ -583,12 +602,14 @@ B&#7841;n cho v&agrave;o m&#7853;t m&atilde; m&#7899;i &#273;&#7875; v&agrave;o 
 'pass_retour_public' => 'Tr&#7903; l&#7841;i trang web',
 'pass_rien_a_faire_ici' => 'Kh&ocirc;ng c&oacute; g&igrave; &#7903; &#273;&acirc;y.',
 'pass_vousinscrire' => 'Ghi danh v&#7899;i website',
+'precedent' => '<NEW>pr&eacute;c&eacute;dent',
 'previsualisation' => '<NEW>Pr&eacute;visualisation',
 'previsualiser' => '<NEW>Pr&eacute;visualiser',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ l&#7847;n vi&#7871;ng; m&#7913;c ph&#7893; th&ocirc;ng: @popularite@',
+'suivant' => '<NEW>suivant',
 
 
 // T
@@ -629,7 +650,7 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 'titre_image_redacteur_02' => 'T&aacute;c gi&#7843;',
 'titre_image_visiteur' => 'Kh&aacute;ch',
 'titre_joindre_document' => '&#272;&Iacute;NH K&Egrave;M M&#7896;T H&#7890; S&#416;',
-'titre_liens_entrants' => '&#272;i&#7875;m n&#7889;i v&agrave;o c&#7911;a h&ocirc;m nay',
+'titre_liens_entrants' => '<MODIF>&#272;i&#7875;m n&#7889;i v&agrave;o c&#7911;a h&ocirc;m nay',
 'titre_mots_cles' => 'T&#7914; THEN CH&#7888;T',
 'titre_probleme_technique' => 'B&aacute;o &#273;&#7897;ng: tr&#7909;c tr&#7863;c k&#7929; thu&#7853;t (MySQL server) th&agrave;nh ra kh&ocirc;ng v&agrave;o &#273;&#432;&#7907;c ch&#7895; n&agrave;y c&#7911;a trang web.<P>Xin th&ocirc;ng c&#7843;m.',
 'titre_publier_document' => 'PH&Aacute;T H&Agrave;NH M&#7896;T T&Agrave;I LI&#7878;U TRONG &#272;&#7872; M&#7908;C N&Agrave;Y',
@@ -648,11 +669,27 @@ N&#7871;u b&#7841;n &#273;em v&agrave;o nh&#7919;ng h&igrave;nh &#7843;nh trong 
 
 
 // Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle' => '<NEW>boucle',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => '<NEW>code',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>externe interdit',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: Ch&#7881; &#273;&#432;&#7907;c d&ugrave;ng m&#7897;t l&#7847;n ',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: ch&#432;a d&#432;&#7907;c d&oacute;ng l&#7841;i ',
 'zbug_erreur_boucle_syntaxe' => 'C&aacute;ch vi&#7871;t v&ograve;ng (boucle) n&agrave;y kh&ocirc;ng &#273;&uacute;ng.',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'Sai l&#7847;m : B&#7841;n ch&#432;a x&aacute;c &#273;&#7883;nh b&#7897; l&#7885;c (filtre) <b>&laquo; @filtre@ &raquo;</b> n&#7847;y. ',
-'zbug_info_erreur_squelette' => 'C&oacute; l&#7895;i tr&ecirc;n Website'
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => 'C&oacute; l&#7895;i tr&ecirc;n Website',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => '<NEW>r&eacute;sultat',
+'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 

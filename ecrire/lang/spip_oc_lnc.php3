@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Tornar a l\'interf&agrave;cia grafica completa',
 'access_mode_texte' => 'Afichar l\'interf&agrave;cia textuala simplificada',
+'admin_debug' => 'desbugatge',
 'admin_modifier_article' => 'Modificar aquel article',
 'admin_modifier_auteur' => 'Modificar aquel autor',
 'admin_modifier_breve' => 'Modificar aquela br&egrave;va',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => 'tant&ograve;st',
+'cal_jour_entier' => 'jorn enti&egrave;r',
+'cal_matin' => 'matin',
+'cal_par_jour' => 'calendri&egrave;r per jorn',
+'cal_par_mois' => 'calendi&egrave;r per mes',
+'cal_par_semaine' => 'calendi&egrave;r per setmana',
 'calendrier_synchro_lien' => 'Recuperar lo fichi&egrave;r <i>iCal</i>',
 'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'us estrictament personal, vos informa de l\'activitat editoriala privada d\'aqueste sit (&ograve;bras e rend&egrave;tz-vos personals, articles e br&egrave;vas prepausats...).',
 'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent permet de seguir l\'activitat de l\'espaci public d\'aqueste sit (articles e br&egrave;vas publicats).',
@@ -301,6 +308,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_doc_rubrique' => 'Documents de las rubricas',
 'icone_ecrire_article' => 'Escriure un article n&ograve;u',
 'icone_edition_site' => 'Edicion',
+'icone_evolution_visites_2' => '<NEW><NEW><PLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dels administrators',
 'icone_forum_suivi' => 'Seguit dels forums',
 'icone_gestion_langues' => 'Gestion de las lengas',
@@ -333,6 +341,10 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_valider_message' => 'Validar aquel messatge',
 'icone_visiter_site' => 'Vesitar',
 'icone_voir_en_ligne' => 'Veire en linha',
+'image_tourner_180' => 'Rotacion 180&deg;',
+'image_tourner_droite' => 'Rotacion 90&deg; cap a drecha',
+'image_tourner_gauche' => 'Rotacion 90&deg; cap a esquerra',
+'img_indisponible' => 'imatge indisponible',
 'info_a_suivre' => 'DE SEGUIR&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
@@ -367,12 +379,14 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Volgatz crear un fichi&egrave;r o un repert&ograve;ri nommat',
 'info_creer_repertoire_2' => 'dintre lo sosrepert&ograve;ri   <b>ecrire/data/</b>, pu&egrave;i:',
+'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descriptiu(s)&nbsp;:',
 'info_description' => 'Descripcion&nbsp;:',
 'info_description_2' => 'Descripcion&nbsp;:',
 'info_dimension' => 'Dimensions&nbsp;:',
 'info_document' => 'Document ',
+'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet d\'escambiar de messatges e de constituir de forums privats de discussion entre los participants del sit. Pod&egrave;tz activar o desactivar aquela foncionalitat.',
 'info_ecire_message_prive' => 'Escriure un messatge privat',
 'info_email_invalide' => 'Adrei&ccedil;a e-mail invalida',
@@ -411,6 +425,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_langue_principale' => 'Lenga majorala del sit',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
+'info_logo_format_interdit' => 'Los l&ograve;gos de formats @formats@ son sols autorizats.',
+'info_logo_max_poids' => 'Los l&ograve;gos an de far mens de @maxi@ (aqueste fichi&egrave;r fa @actuel@).',
+'info_logo_max_taille' => 'Los l&ograve;gos an de far mens de @maxi@ (aqueste fichi&egrave;r fa @actuel@).',
 'info_mail_fournisseur' => 'vos@fornidor.com',
 'info_message_2' => 'MESSATGE',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -434,6 +451,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_petit_ecran' => 'Ecran pich&ograve;t ',
 'info_pixels' => 'pix&egrave;ls',
 'info_plusieurs_mots_trouves' => 'Mai d\'un mot clau trobat per "@cherche_mot@"&nbsp;:',
+'info_popularite_5' => 'popularitat:',
+'info_portfolio' => 'P&ograve;rtf&ograve;lio',
 'info_portfolio_automatique' => 'P&ograve;rtf&ograve;lio automatic:',
 'info_premier_resultat' => '[@debut_limit@ primi&egrave;rs resultats de @total@]',
 'info_premier_resultat_sur' => ' [@debut_limit@ primi&egrave;rs resultats de @total@]',
@@ -448,6 +467,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
+'info_question_referers' => '<NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Recercar',
 'info_rechercher_02' => 'Recercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalizat:',
@@ -483,8 +504,13 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_visite' => 'vesita:',
 'info_visites' => 'vesitas:',
 'info_vos_rendez_vous' => 'Los v&ograve;stres rend&egrave;tz-vos venents',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'V&ograve;stras n&ograve;tas de remembran&ccedil;a',
 'item_breve_proposee' => 'Br&egrave;va prepausada',
+'item_gerer_referers' => '<NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -609,12 +635,14 @@ e vos tornar connectar al sit.
 'pass_retour_public' => 'Tornar al sit public',
 'pass_rien_a_faire_ici' => 'Pas res a faire aic&iacute;.',
 'pass_vousinscrire' => 'S\'inscriure sus aqueste sit',
+'precedent' => 'precedent',
 'previsualisation' => 'Previsualizacion',
 'previsualiser' => 'Previsualizar',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ vesitas; popularitat: @popularite@',
+'suivant' => 'seguent',
 
 
 // T
@@ -686,11 +714,27 @@ e vos tornar connectar al sit.
 
 
 // Z
+'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
+'zbug_boucle' => 'bloca',
+'zbug_boucle_recursive_undef' => 'bloca recursiva non definida',
+'zbug_champ_hors_boucle' => 'Camp @champ@ f&ograve;ra bloca',
+'zbug_champ_hors_motif' => 'Camp @champ@ en def&ograve;ra d\'una blocla de motiu @motif@',
+'zbug_code' => 'c&ograve;de',
+'zbug_critere_inconnu' => 'crit&egrave;ri desconegut @critere@',
+'zbug_distant_interdit' => 'ext&egrave;rne enebit',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrador manca',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
+'zbug_erreur_execution_page' => 'error d\'execucion de la pagina',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
-'zbug_info_erreur_squelette' => 'Error subre lo sit'
+'zbug_erreur_meme_parent' => '{meme_parent} ne s\'aplica sonque a las blocas (FORUMS) o (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Error(s) dins l\'esqueleta',
+'zbug_info_erreur_squelette' => 'Error subre lo sit',
+'zbug_inversion_ordre_inexistant' => 'inversion d\'un &ograve;rdre inexistent',
+'zbug_parametres_inclus_incorrects' => 'Param&egrave;tres d\'inclusion incorr&egrave;ctes',
+'zbug_resultat' => 'resultat',
+'zbug_serveur_indefini' => 'servidor SQL indefinit',
+'zbug_table_inconnue' => 'Taula SQL &laquo; @table@ &raquo; desconeguda'
 
 );
 

@@ -433,7 +433,6 @@ D&eacute;i schons gebrauchten Sproochen (als &eacute;ischt ugewisen) k&euml;nnen
 'info_popularite_2' => 'Popularit&eacute;it vum Site:',
 'info_popularite_3' => 'Popularit&eacute;it:&nbsp;@popularite@; Visiten:&nbsp;@visites@',
 'info_popularite_4' => 'Popularit&eacute;it:&nbsp;@popularite@; Visiten:&nbsp;@visites@',
-'info_popularite_5' => 'Popularit&eacute;it:',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum:',
 'info_pour' => 'fir',
