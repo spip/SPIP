@@ -1421,13 +1421,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if ($rubrique == "asuivre"){
 		icone_bandeau_secondaire (_T('icone_a_suivre'), "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
-		if ($options != 'avancees') icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_site_entier'), "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
 		if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui' AND $options == 'avancees') {
 			icone_bandeau_secondaire (_T('icone_etat_traductions'), "plan_trad.php3", "langues-24.gif", "plan-trad", $sous_rubrique);
 		}
-		if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non")
-			icone_bandeau_secondaire (_T('icone_agenda'), "calendrier_jour.php3", "agenda-24.gif", "calendrier", $sous_rubrique);
 	}
 	else if ($rubrique == "documents"){
 		icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
@@ -1463,7 +1461,12 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
 		bandeau_barre_verticale();
 		icone_bandeau_secondaire (_T('icone_tous_auteur'), "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+		
+		if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") {
+			bandeau_barre_verticale();
+			icone_bandeau_secondaire (_T('icone_agenda'), "calendrier_jour.php3", "agenda-24.gif", "calendrier", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+		}
 	}
 	else if ($rubrique == "suivi") {
 		if ($connect_toutes_rubriques) {
@@ -1532,9 +1535,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				}
 			}
 			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a>";
-			echo "</b></font>";
+			echo "</b></font> &nbsp; ";
 		}
 
+	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") echo "<a href='calendrier_jour.php3' title='"._T('icone_agenda')."'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 	echo "</td>";
 	echo "<td>   </td>";
 	echo "<td>";

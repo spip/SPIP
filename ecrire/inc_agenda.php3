@@ -114,7 +114,9 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 	}
 
 	if (!$large) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate("$annee-$mois-$jour")."</a></b></div>";
+	else echo "<div align='center' style='padding: 5px;'><b class='verdana1'>&nbsp;</b></div>";
 
+	
 	echo "<div style='border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
 	echo "<div style='position: relative; width: 100%; height: 450px; background: url(img_pack/fond-calendrier.gif);'>";
 	
