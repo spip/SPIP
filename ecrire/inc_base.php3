@@ -482,7 +482,7 @@ function remplir_type_documents() {
 		"('psd', 'Photoshop', 'image'), ".
 		"('tif', 'TIFF', 'image')";
 	spip_query($query);
-	
+
 	$query = "INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ".
 		"('aiff', 'AIFF', 'embed'), ".
 		"('asf', 'Windows Media', 'embed'), ".
@@ -505,6 +505,8 @@ function remplir_type_documents() {
 		"('ram', 'RealAudio', 'embed'), ".
 		"('rm', 'RealAudio', 'embed'), ".
 		"('rtf', 'RTF', 'non'), ".
+		"('sdd', 'OpenOffice', 'non'), ".
+		"('sdw', 'OpenOffice Impress', 'non'), ".
 		"('sit', 'Stuffit', 'non'), ".
 		"('swf', 'Flash', 'embed'), ".
 		"('tgz', 'TGZ', 'non'), ".
