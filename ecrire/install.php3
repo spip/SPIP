@@ -31,7 +31,6 @@ if ($etape == 6) {
 	echo "<P>"._T('info_utilisation_spip');
 
 	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
-	spip_log(_FILE_CONNECT_INS);
 	include_ecrire ("inc_meta.php3");
 
 	if ($login) {
@@ -63,8 +62,8 @@ if ($etape == 6) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
-	unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
-	unlink(_DIR_SESSIONS . 'meta_cache.php3');
+	@unlink(_DIR_SESSIONS . 'inc_meta_cache.php3');
+	@unlink(_DIR_SESSIONS . 'meta_cache.php3');
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP,
 		    _FILE_CONNECT_INS . _EXTENSION_PHP)) {
 		copy(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, 
