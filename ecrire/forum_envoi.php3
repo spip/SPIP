@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-$titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
+if ($modif_forum != "oui") $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
 $nom = entites_html(corriger_caracteres($connect_nom));
 $adresse_retour = rawurldecode($adresse_retour);
 
@@ -19,7 +19,7 @@ if ($valider_forum AND ($statut!='')) {
 		$result = spip_query($query);
 	}
 
-	@header("location:$adresse_retour");
+	@header("Location: $adresse_retour");
 	die();
 }
 
@@ -39,16 +39,54 @@ if ($id_parent) {
 		$id_message = $row['id_message'];
 		$id_syndic = $row['id_syndic'];
 		$statut = $row['statut'];
+		$titre_parent = stripslashes($row['titre']);
+		$texte_parent = stripslashes($row['texte']);
+		$auteur_parent = stripslashes($row['auteur']);
+		$id_auteur_parent = $row['id_auteur'];
+		$date_heure_parent = $row['date_heure'];
+		$nom_site_parent = $row['nom_site'];
+		$url_site_parent = $row['url_site'];
 	}
 }
 
 
 echo "<FORM ACTION='forum_envoi.php3' METHOD='post'>";
 
-if ($modif_forum == "oui") {
+if ($titre_parent) {
 	debut_cadre_relief("forum-interne-24.gif");
-	echo "<b>".propre($titre_message)."</b>";
+	echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre_parent)."</b></font></td></tr>";
+	echo "<tr><td bgcolor='#EEEEEE'>";
+	echo "<font size='2' face='Georgia,Garamond,Times,serif'>";
+	echo "<font face='arial,helvetica'>$date_heure_parent</font>";
+	echo " $auteur_parent";
 
+	if ($id_auteur_parent AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non") {
+		$bouton = bouton_imessage($id_auteur_parent, $row);
+		if ($bouton) echo "&nbsp;".$bouton;
+	}
+
+	echo justifier(propre($texte_parent));
+
+	if (strlen($url_site_parent) > 10 AND $nom_site_parent) {
+		echo "<p align='left'><font face='Verdana,Arial,Helvetica,sans-serif'><b><a href='$url_site_parent'>$nom_site_parent</a></b></font>";
+	}
+
+	echo "</font>";
+	echo "</td></tr></table>";
+	fin_cadre_relief();
+
+	if ($modif_forum == "oui") {
+		echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
+		echo "<td width='10' height='13' valign='top' background='img_pack/forum-vert.gif'><img src='img_pack/rien.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "\n<td width=100% valign='top' rowspan='2'>";
+	}
+}
+
+
+if ($modif_forum == "oui") {
+	debut_cadre_relief();
+
+	echo "<b>".propre($titre_message)."</b>";
 	echo "<p>".propre($texte);
 
 	if (strlen($nom_site)>0) {
@@ -58,16 +96,23 @@ if ($modif_forum == "oui") {
 	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='Message d&eacute;finitif : envoyer'></div>";
 
 	fin_cadre_relief();
-	echo "<p></p>";
+	if ($titre_parent) {
+		echo "</td></tr><tr>";
+		echo "<td width=10 valign='top' background='img_pack/rien.gif'><img src='img_pack/forum-droite.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "</tr></table>";
+	}
 }
+
+echo "<p></p>";
 
 
 debut_cadre_formulaire();
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
 	icone("Retour", $adresse_retour, "forum-interne-24.gif");
-echo "</TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0>";
-echo "</TD><TD WIDTH=\"100%\">";
+echo "</TD>";
+
+echo "<TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
 echo "<B>Titre :</B><BR>";
 $titre_message = entites_html($titre_message);
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_message\" SIZE='40'><P>\n";
@@ -89,11 +134,11 @@ echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 
 echo "<p><B>Texte de votre message :</B><BR>";
 echo "(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)<BR>";
-echo "<TEXTAREA NAME='texte' ROWS='20' CLASS='forml' COLS='40' wrap=soft>";
+echo "<TEXTAREA NAME='texte' ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
 echo entites_html($texte);
 echo "</TEXTAREA><P>\n";
 
-if ($statut != 'perso') {
+if ($statut != 'perso' AND $options == "avancees") {
 	echo "<B>Lien hypertexte :</B><BR>";
 	echo "(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)<BR>";
 	echo "Titre :<BR>";
