@@ -43,8 +43,10 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 
 
 echo "<ul>";
-// Recuperer les donnees du log	
-$query = "SELECT referer, COUNT(DISTINCT ip) AS count FROM spip_referers_temp ".
+// Recuperer les donnees du log
+$date = date("Y-m-d");
+$query = "SELECT referer, COUNT(DISTINCT ip) AS count FROM spip_referers ".
+	"WHERE date='$date' ".
 	"GROUP BY referer_md5 ORDER BY count DESC, referer";
 $result = spip_query($query);
 
