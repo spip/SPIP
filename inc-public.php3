@@ -53,6 +53,11 @@ if (file_exists($chemin_cache)) {
 	$lastmodified = filemtime($chemin_cache);
 	$ledelais = time() - $lastmodified;
 	$use_cache &= ($ledelais < $delais AND $ledelais > 0);
+
+	// eviter de recalculer pour les moteurs de recherche
+	if ($REQUEST_METHOD == 'HEAD') {
+		$use_cache = true;
+	}
 }
 else {
 	$use_cache = false;
@@ -78,9 +83,8 @@ if ($use_cache) {
 else {
 	$lastmodified = time();
 	include_local ("ecrire/inc_meta.php3");
-	$t = time();
-	if (($t - lire_meta('date_purge_cache')) > 24 * 3600) {
-		ecrire_meta('date_purge_cache', $t);
+	if (($lastmodified - lire_meta('date_purge_cache')) > 24 * 3600) {
+		ecrire_meta('date_purge_cache', $lastmodified);
 		$f = fopen('CACHE/.purge', 'w');
 		fclose($f);
 	}
