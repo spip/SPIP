@@ -205,7 +205,64 @@ function get_forums_publics($id_article=0) {
 // Affichage de la colonne de gauche
 //
 
-debut_page("&laquo; $titre_article &raquo;");
+//
+// Lire l'article
+//
+
+$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
+$result = spip_query($query);
+
+if ($row = mysql_fetch_array($result)) {
+	$id_article = $row[0];
+	$surtitre = $row[1];
+	$titre = $row[2];
+	$soustitre = $row[3];
+	$id_rubrique = $row[4];
+	$descriptif = $row[5];
+	$chapo = $row[6];
+	$texte = $row[7];
+	$ps = $row[8];
+	$date = $row[9];
+	$statut_article = $row[10];
+	$maj = $row["maj"];
+	$date_redac = $row["date_redac"];
+	$visites = $row["visites"];
+}
+
+
+
+if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_redac, $regs)) {
+        $mois_redac = $regs[2];
+        $jour_redac = $regs[3];
+        $annee_redac = $regs[1];
+        if ($annee_redac > 4000) $annee_redac -= 9000;
+}
+
+if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
+        $mois = $regs[2];
+        $jour = $regs[3];
+        $annee = $regs[1];
+}
+
+
+
+debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+
+
+
 debut_gauche();
 
 debut_boite_info();
@@ -223,10 +280,6 @@ if ($statut_article == "publie") {
 		if (!mysql_num_rows($result)) {
 			$voir_en_ligne = false;
 		}
-	}
-	if ($voir_en_ligne) {
-		afficher_icone(newLinkUrl("../spip_redirect.php3?id_article=$id_article&recalcul=oui"),
-			"Voir en ligne", 'IMG2/voir.gif', 40, 28, 'right');
 	}
 }
 
@@ -494,38 +547,6 @@ if ($boite_ouverte) {
 
 debut_droite();
 
-//
-// Afficher la hierarchie (recurrence)
-//
-
-function parent($collection){
-	global $parents;
-	global $coll;
-	$parents=ereg_replace("(~+)","\\1~",$parents);
-	if ($collection!=0){	
-		$query2="SELECT * FROM spip_rubriques WHERE id_rubrique=\"$collection\"";
-		$result2=spip_query($query2);
-
-		while($row=mysql_fetch_array($result2)){
-			$id_rubrique=$row[0];
-			$id_parent=$row[1];
-			$titre=typo($row[2]);
-			
-			if ($id_rubrique==$coll){
-				if (acces_restreint_rubrique($id_rubrique))
-					$parents="~ <IMG SRC='IMG2/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=4 FACE='Verdana,Arial,Helvetica,sans-serif'><B>".majuscules($titre)."</B></FONT><BR>\n$parents";
-				else
-					$parents="~ <IMG SRC='IMG2/triangle.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=4 FACE='Verdana,Arial,Helvetica,sans-serif'><B>".majuscules($titre)."</B></FONT><BR>\n$parents";
-			}else{
-				if (acces_restreint_rubrique($id_rubrique))
-					$parents="~ <IMG SRC='IMG2/triangle-bas-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
-				else
-					$parents="~ <IMG SRC='IMG2/triangle-bas.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
-			}
-		}
-	parent($id_parent);
-	}
-}
 
 function mySel($varaut,$variable){
 	$retour= " VALUE=\"$varaut\"";
@@ -538,63 +559,6 @@ function mySel($varaut,$variable){
 
 
 
-//
-// Lire l'article
-//
-
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = spip_query($query);
-
-if ($row = mysql_fetch_array($result)) {
-	$id_article = $row[0];
-	$surtitre = $row[1];
-	$titre = $row[2];
-	$soustitre = $row[3];
-	$id_rubrique = $row[4];
-	$descriptif = $row[5];
-	$chapo = $row[6];
-	$texte = $row[7];
-	$ps = $row[8];
-	$date = $row[9];
-	$statut_article = $row[10];
-	$maj = $row["maj"];
-	$date_redac = $row["date_redac"];
-	$visites = $row["visites"];
-}
-
-
-
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_redac, $regs)) {
-        $mois_redac = $regs[2];
-        $jour_redac = $regs[3];
-        $annee_redac = $regs[1];
-        if ($annee_redac > 4000) $annee_redac -= 9000;
-}
-
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
-        $mois = $regs[2];
-        $jour = $regs[3];
-        $annee = $regs[1];
-}
-
-
-echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=\"100%\">";
-echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
-
-
-//
-// Afficher la hierarchie
-//
-
-parent($id_rubrique);
-$parents="~ <IMG SRC='IMG2/triangle-bas.gif' WIDTH=16 HEIGHT=14> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
-
-$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
-$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
-echo "$parents";
-echo "</TD></TR></TABLE>";
-
-echo "<P>";
 
 
 function my_sel($num,$tex,$comp){
@@ -644,7 +608,8 @@ function afficher_jour($jour){
 
 
 
-echo "<TABLE CELLPADDING=18 CELLSPACING=0 BORDER=1><TR><TD BGCOLOR='#FFFFFF' ALIGN='center'>";
+
+debut_cadre_enfonce("article-24.png");
 echo "<CENTER>";
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 echo "<TR>";
@@ -654,73 +619,84 @@ echo "<TR>";
 // Titre, surtitre, sous-titre
 //
 
-echo "<TD>";
-
-if ($statut_article=='publie') {
-	echo "<img src='IMG2/puce-verte.gif' alt='X' width='13' height='14' border='0' ALIGN='left'>";
-}
-else if ($statut_article=='prepa') {
-	echo "<img src='IMG2/puce-blanche.gif' alt='X' width='13' height='14' border='0' ALIGN='left'>";
-}
-else if ($statut_article=='prop') {
-	echo "<img src='IMG2/puce-orange.gif' alt='X' width='13' height='14' border='0' ALIGN='left'>";
-}
-else if ($statut_article == 'refuse') {
-	echo "<img src='IMG2/puce-rouge.gif' alt='X' width='13' height='14' border='0' ALIGN='left'>";
-}
-else if ($statut_article == 'poubelle') {
-	echo "<img src='IMG2/puce-poubelle.gif' alt='X' width='13' height='14' border='0' ALIGN='left'>";
-}
-
-echo "</TD><TD WIDTH=100% align='center'>";
+	if ($statut_article=='publie') {
+		$logo_statut = "puce-verte.gif";
+	}
+	else if ($statut_article=='prepa') {
+		$logo_statut = "puce-blanche.gif";
+	}
+	else if ($statut_article=='prop') {
+		$logo_statut = "puce-orange.gif";
+	}
+	else if ($statut_article == 'refuse') {
+		$logo_statut = "puce-rouge.gif";
+	}
+	else if ($statut_article == 'poubelle') {
+		$logo_statut = "puce-poubelle.gif";
+	}
 
 
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'><td width='100%' valign='top'>";
 if (strlen($surtitre) > 1) {
-	echo "<FONT FACE='arial,helvetica' SIZE=3><B>";
+	echo "<font face='arial,helvetica' size=3><b>";
 	echo typo($surtitre);
-	echo "</B></FONT><BR>\n";
+	echo "</b></font>\n";
 }
-
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4><B>";
-echo typo($titre);
-echo "</B></FONT><BR>\n";
-
+	gros_titre($titre, $logo_statut);
 if (strlen($soustitre) > 1) {
-	echo "<FONT FACE='arial,helvetica' SIZE=3><B>";
+	echo "<font face='arial,helvetica' size=3><b>";
 	echo typo($soustitre);
-	echo "</B></FONT><BR>\n";
+	echo "</b></font>\n";
 }
-echo "</TD>";
-
-
-//
-// Bouton 'modifier l'article'
-//
-
-echo "<TD align='right'>";
-if ($flag_editable) {
-	echo "<P align=right>";
-	echo "<A HREF='articles_edit.php3?id_article=$id_article' onMouseOver=\"modifier_article.src='IMG2/modifier-article-on.gif'\" onMouseOut=\"modifier_article.src='IMG2/modifier-article-off.gif'\"><img src='IMG2/modifier-article-off.gif' alt='Modifier cet article' width='51' height='53' border='0' name='modifier_article'></A>";
-}
-
-echo "</TD></TR></TABLE>";
-
-echo "<P align=left>";
-echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
 
 
 if (strlen($descriptif) > 1) {
-	echo "<DIV align='left'>";
-	debut_boite_info();
-
-	echo "<img src='IMG2/descriptif.gif' alt='DESCRIPTIF' width='59' height='12' border='0'><BR>";
-	echo "<FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
+	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<b>Descriptif :</b> ";
 	echo propre($descriptif);
 	echo "&nbsp; ";
-	echo "</FONT>";
-	fin_boite_info();
-	echo "<P>";
+	echo "</font>";
+	echo "</div>";
 }
+
+if ($statut_article == 'prop') {
+	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='red'><B>Article propos&eacute; pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; ce article (en bas de page).</B></FONT></P>";
+}
+
+
+
+echo "</td>";
+
+
+
+
+if ($voir_en_ligne) {
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right'>";
+	icone("Voir en ligne", "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.png", "rien.gif");
+	echo "</td>";
+}
+
+
+
+
+if ($flag_editable) {
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right'>";
+	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.png", "edit.gif");
+	echo "</td>";
+}
+echo "</tr></table>\n";
+
+
+
+
+
+
+echo "<P align=left>";
+echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
 
 
 //
@@ -734,7 +710,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
 	if ($statut_article == 'publie') {	
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='IMG2/rien.gif'>";
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		echo aide ("artdate");
 		echo "</B></FONT></TR>";
@@ -754,7 +730,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "</TD></TR></TABLE>";
 	}
 	else {
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='IMG2/rien.gif'>";
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE CREATION DE L'ARTICLE";
 		echo " :</B></FONT></TR>";
 
@@ -768,9 +744,13 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	
 	
 	if (($options == 'avancees' AND $articles_redac != "non") OR ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00")) {
-		echo "<P><TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='IMG2/rien.gif'>";
-		echo "<TR><TD BGCOLOR='#E4E4E4' COLSPAN=2><FONT SIZE=2 COLOR='#000000'><B>DATE DE PUBLICATION ANT&Eacute;RIEURE :</B></FONT></TR>";
-
+		echo "<P><TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
+		echo "<TR><TD BGCOLOR='#E4E4E4' COLSPAN=2><FONT SIZE=2 COLOR='#000000'>";
+		if ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00") $date_affichee = " : ".majuscules(affdate($date_redac));
+		echo bouton_block_invisible('dateredac');
+		echo "<B>DATE DE PUBLICATION ANT&Eacute;RIEURE$date_affichee</B></FONT></TR></table>";
+		echo debut_block_invisible('dateredac');
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD ALIGN='left' BGCOLOR='#FFFFFF'>";
 		if ("$annee_redac-$mois_redac-$jour_redac" == "0000-00-00") {
 			echo "<INPUT TYPE='radio' NAME='avec_redac' VALUE='non' id='on' checked>  <B><label for='on'>Ne pas afficher de date de publication ant&eacute;rieure.</label></B>";
@@ -796,8 +776,10 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		}
 		echo "</TD><TD ALIGN='right' BGCOLOR='#FFFFFF'>";
 		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
-		echo aide ("artdate_redac");
-		echo "</TD></TR></TABLE>";
+		echo aide ("artdate-redac");
+		echo "</TD></TR>";
+		echo fin_block();
+		echo "</TABLE>";
 	
 	}
 
@@ -812,19 +794,10 @@ if (!$flag_editable AND $statut_article == 'publie') {
 
 
 //
-// 'Article propose pour la publication'
-//
-
-if ($statut_article == 'prop') {
-	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='red'><B>Article propos&eacute; pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce au forum attach&eacute; &agrave; ce article (en bas de page).</B></FONT></P>";
-}
-
-
-//
 // Liste des auteurs de l'article
 //
 
-debut_cadre_relief();
+debut_cadre_relief("redacteur-24.png");
 
 echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 if ($flag_editable AND $options == 'avancees') {
@@ -981,14 +954,14 @@ if (mysql_num_rows($result)) {
 		echo "<A HREF=\"$url_auteur\">";
 		switch ($statut_auteur) {
 		case "0minirezo":
-			echo "<img src='IMG2/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
+			echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
 			break;					
 		case "2redac":
 		case "1comite":
-			echo "<img src='IMG2/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
+			echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
 			break;					
 		case "5poubelle":
-			echo "<img src='IMG2/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
+			echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
 			break;					
 		case "nouveau":
 			echo "&nbsp;";
@@ -1133,19 +1106,19 @@ function change_bouton(selObj){
 	var selection=selObj.options[selObj.selectedIndex].value;
 
 	if (selection=="publie"){
-		document.statut.src="IMG2/puce-verte.gif";
+		document.statut.src="img_pack/puce-verte.gif";
 	}
 	if (selection=="prepa"){
-		document.statut.src="IMG2/puce-blanche.gif";
+		document.statut.src="img_pack/puce-blanche.gif";
 	}
 	if (selection=="prop"){
-		document.statut.src="IMG2/puce-orange.gif";
+		document.statut.src="img_pack/puce-orange.gif";
 	}
 	if (selection=="refuse"){
-		document.statut.src="IMG2/puce-rouge.gif";
+		document.statut.src="img_pack/puce-rouge.gif";
 	}
 	if (selection=="poubelle"){
-		document.statut.src="IMG2/puce-poubelle.gif";
+		document.statut.src="img_pack/puce-poubelle.gif";
 	}
 }
 
@@ -1175,19 +1148,19 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo " \n";
 
 	if ($statut_article=='publie') {
-		echo "<img src='IMG2/puce-verte.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-verte.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article=='prepa') {
-		echo "<img src='IMG2/puce-blanche.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-blanche.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article=='prop') {
-		echo "<img src='IMG2/puce-orange.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-orange.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article == 'refuse') {
-		echo "<img src='IMG2/puce-rouge.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-rouge.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
 	}
 	else if ($statut_article == 'poubelle') {
-		echo "<img src='IMG2/puce-poubelle.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
+		echo "<img src='img_pack/puce-poubelle.gif' alt='X' width='13' height='14' border='0' NAME='statut'>";
 	}
 	echo " \n";
 
@@ -1225,16 +1198,16 @@ if ($les_notes) {
 	echo "</FONT>";
 }
 
-echo "\n\n<DIV align=right>";
 
 //
 // Bouton "modifier cet article"
 //
 
 if ($flag_editable) {
-	echo "<A HREF='articles_edit.php3?id_article=$id_article' onMouseOver=\"modifier_article2.src='IMG2/modifier-article-on.gif'\" onMouseOut=\"modifier_article2.src='IMG2/modifier-article-off.gif'\"><img src='IMG2/modifier-article-off.gif' alt='Modifier cet article' width='51' height='53' border='0' name='modifier_article2'></A>";
-}
+echo "\n\n<div align=right>";
+	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.png", "edit.gif");
 echo "</div>";
+}
 
 afficher_documents_non_inclus($id_article);
 
@@ -1245,14 +1218,18 @@ afficher_documents_non_inclus($id_article);
 if ($flag_auteur AND $statut_article == 'prepa') {
 	echo "<P>";
 	debut_cadre_relief();
-	echo "<B>Lorsque votre article est termin&eacute;, vous pouvez proposer sa publication.</B>";
+	echo "<center>";
+	echo "<B>Lorsque votre article est termin&eacute;,<br> vous pouvez proposer sa publication.</B>";
 	echo aide ("artprop");
 	bouton("Demander la publication de cet article", "articles.php3?id_article=$id_article&statut_nouv=prop");
+	echo "</center>";
 	fin_cadre_relief();
 }
 
-echo "</DIV></TD></TR></TABLE>";
+echo "</DIV>";
 
+
+fin_cadre_enfonce();
 
 //
 // Forums
@@ -1262,9 +1239,11 @@ echo "<BR><BR>";
 
 $forum_retour = urlencode("articles.php3?id_article=$id_article");
 
-echo "<P align='right'>";
-echo "<A HREF='forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_article=$id_article&titre_message=".urlencode($titre)."' onMouseOver=\"message.src='IMG2/message-on.gif'\" onMouseOut=\"message.src='IMG2/message-off.gif'\">";
-echo "<img src='IMG2/message-off.gif' alt='Poster un message' width='51' height='52' border='0' name='message'></A>";
+
+echo "\n<div align='center'>";
+	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_article=$id_article&titre_message=".urlencode($titre), "forum-interne-24.png", "creer.gif");
+echo "</div>";
+
 echo "<P align='left'>";
 
 

@@ -3,10 +3,33 @@
 include ("inc.php3");
 
 
+/*
+function collections_actives()
+{
+	global $coll_actives;
+	$coll_actives = "";
+	$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut='publie' OR statut='prepa' OR statut='prop'";
+	for (;;) {
+		$result = mysql_query($query);
+		unset($rubriques);
+		while ($row = mysql_fetch_array($result)) {
+			$rubriques[] = $row[0];
+		}
+		if (!$rubriques) break;
+		$rubriques = join(",", $rubriques);
+		if ($coll_actives) $coll_actives .= ",$rubriques";
+		else $coll_actives = $rubriques;
+		$query = "SELECT DISTINCT id_parent FROM spip_rubriques WHERE (id_rubrique IN ($rubriques)) AND (id_parent NOT IN ($coll_actives))";
+	}
+}
+
+collections_actives();
+*/
+
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';
 
-debut_page("Tout le site");
+debut_page("Tout le site", "asuivre", "tout-site");
 debut_gauche();
 
 
@@ -27,7 +50,7 @@ if ($connect_statut == "0minirezo") {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='prepa' id='prepa'>";
 	}
-	echo " <label for='prepa'><img src='IMG2/puce-blanche.gif' alt='X' width='9' height='9' border='0'>";
+	echo " <label for='prepa'><img src='img_pack/puce-blanche.gif' alt='X' width='9' height='9' border='0'>";
 	echo "  en cours de r&eacute;daction</label><BR>";
 }
 
@@ -38,7 +61,7 @@ if (ereg('prop', $aff_art)) {
 else {
 	echo "<input type='checkbox' name='aff_art[]' value='prop' id='prop'>";
 }
-echo " <label for='prop'><img src='IMG2/puce-orange.gif' alt='X' width='9' height='9' border='0'>";
+echo " <label for='prop'><img src='img_pack/puce-orange.gif' alt='X' width='9' height='9' border='0'>";
 echo "  en attente de validation</label><BR>";
 
 if (ereg('publie', $aff_art)) {
@@ -47,7 +70,7 @@ if (ereg('publie', $aff_art)) {
 else {
 	echo "<input type='checkbox' name='aff_art[]' value='publie' id='publie'>";
 }
-echo " <label for='publie'><img src='IMG2/puce-verte.gif' alt='X' width='9' height='9' border='0'>";
+echo " <label for='publie'><img src='img_pack/puce-verte.gif' alt='X' width='9' height='9' border='0'>";
 echo "  publi&eacute;s en ligne</label><BR>";
 
 if ($connect_statut == "0minirezo") {
@@ -57,7 +80,7 @@ if ($connect_statut == "0minirezo") {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='refuse' id='refuse'>";
 	}
-	echo " <label for='refuse'><img src='IMG2/puce-rouge.gif' alt='X' width='9' height='9' border='0'>";
+	echo " <label for='refuse'><img src='img_pack/puce-rouge.gif' alt='X' width='9' height='9' border='0'>";
 	echo "  refus&eacute;s</label><BR>";
 
 	if (ereg('poubelle',$aff_art)) {
@@ -66,7 +89,7 @@ if ($connect_statut == "0minirezo") {
 	else {
 		echo "<input type='checkbox' name='aff_art[]' value='poubelle' id='poubelle'>";
 	}
-	echo " <label for='poubelle'><img src='IMG2/puce-poubelle.gif' alt='X' width='9' height='9' border='0'>";
+	echo " <label for='poubelle'><img src='img_pack/puce-poubelle.gif' alt='X' width='9' height='9' border='0'>";
 	echo "  &agrave; la poubelle</label>";
 }
 
@@ -87,7 +110,7 @@ function enfants($id_parent, $decalage = 0) {
 	global $couleur_foncee, $couleur_claire;
 
 	$query = "SELECT id_rubrique, titre, statut, date FROM spip_rubriques WHERE id_parent=$id_parent ORDER BY titre";
-	$result = spip_query($query);
+	$result = mysql_query($query);
 
 	while ($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -118,13 +141,13 @@ function enfants($id_parent, $decalage = 0) {
 		if (($deplier == 'oui') ? !$flag_liste : $flag_liste) {
 			if ($decalage) {
 				echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0><TR>";
-				echo "<TD WIDTH=$decalage><IMG SRC='IMG2/rien.gif' BORDER=0 HEIGHT=1 WIDTH=$decalage></TD><TD WIDTH='100%'>";
+				echo "<TD WIDTH=$decalage><IMG SRC='img_pack/rien.gif' BORDER=0 HEIGHT=1 WIDTH=$decalage></TD><TD WIDTH='100%'>";
 			}
 			$bandeau = "<A HREF='$lien'>";
-			$bandeau .= "<img src='IMG2/triangle-bleu-bas.gif' alt='&gt;' width='14' height='14' border='0'></A>";
+			$bandeau .= "<img src='img_pack/triangle-bleu-bas.gif' alt='&gt;' width='14' height='14' border='0'></A>";
 			$bandeau .= " <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='white'>$titre</FONT></A> $sucrer";
 			$requete = "SELECT id_article, titre, id_rubrique, statut, date FROM spip_articles WHERE id_rubrique=$id_rubrique AND FIND_IN_SET(statut,'$aff_art') ORDER BY date DESC";
-			afficher_articles($bandeau, $requete, false, false, true);
+			afficher_articles($bandeau, $requete, false, false, true, false);
 			if ($decalage) {
 				echo "</TD></TR></TABLE>";
 			}
@@ -133,12 +156,12 @@ function enfants($id_parent, $decalage = 0) {
 		else {
 			if ($decalage) {
 				echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0><TR>";
-				echo "<TD WIDTH=$decalage><IMG SRC='IMG2/rien.gif' BORDER=0 HEIGHT=1 WIDTH=$decalage></TD><TD WIDTH='100%'>";
+				echo "<TD WIDTH=$decalage><IMG SRC='img_pack/rien.gif' BORDER=0 HEIGHT=1 WIDTH=$decalage></TD><TD WIDTH='100%'>";
 			}
 			echo "<TABLE CELLPADDING=3 CELLSPACING=1 BORDER=0 WIDTH=\"100%\">";
 			echo "<TR><TD BGCOLOR='$couleur_foncee' WIDTH=\"100%\"><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 
-			echo "<B><A HREF='$lien'><img src='IMG2/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'></A> <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='#FFFFFF'>$titre</FONT></A></B> $sucrer";
+			echo "<B><A HREF='$lien'><img src='img_pack/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'></A> <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='#FFFFFF'>$titre</FONT></A></B> $sucrer";
 			echo "</FONT></TD></TR></TABLE>";
 			if ($decalage) {
 				echo "</TD></TR></TABLE>";

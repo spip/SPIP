@@ -4,7 +4,7 @@ include ("inc.php3");
 
 
 
-debut_page("Suivi des p&eacute;titions");
+debut_page("Suivi des p&eacute;titions", "messagerie", "suivi-petition");
 debut_gauche();
 
 $query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
@@ -68,14 +68,10 @@ function controle_forum($request,$adresse_retour) {
 		echo "<FONT SIZE=3 FACE='Georgia,Garamond,Times,serif'>";
 				
 		if ($statut=="publie"){
-			echo "<A HREF='controle_petition.php3?supp_petition=$id_signature&debut=$debut' onMouseOver=\"message$id_signature.src='IMG2/supprimer-message-on.gif'\" onMouseOut=\"message$id_signature.src='IMG2/supprimer-message-off.gif'\"><IMG SRC='IMG2/supprimer-message-off.gif' WIDTH=64 HEIGHT=52 NAME='message$id_signature' ALIGN='right' BORDER=0></A>";
-		
-		
+			icone ("Supprimer cette signature", "controle_petition.php3?supp_petition=$id_signature&debut=$debut", "forum-interne-24.png", "supprimer.gif", "right");
 		}
 		if ($statut=="poubelle"){
-			echo "<A HREF='controle_petition.php3?add_petition=$id_signature&debut=$debut' onMouseOver=\"message$id_signature.src='IMG2/valider-message-on.gif'\" onMouseOut=\"message$id_signature.src='IMG2/valider-message-off.gif'\"><IMG SRC='IMG2/valider-message-off.gif' WIDTH=60 HEIGHT=52 NAME='message$id_signature' ALIGN='right' BORDER=0></A>";
-		
-		
+			icone ("Valider cette signature", "controle_petition.php3?add_petition=$id_signature&debut=$debut", "forum-interne-24.png", "creer.gif", "right");
 		}
 		
 		

@@ -99,22 +99,38 @@ $flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubriqu
 
 
 
-debut_page("&laquo; $titre_breve &raquo;");
+debut_page("&laquo; $titre_breve &raquo;", "documents", "breves");
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+
+
 debut_gauche();
 
 
 debut_boite_info();
 
 echo "<CENTER>";
-if ($statut == "publie") {
-	echo "<A HREF='../spip_redirect.php3?id_breve=$id_breve&recalcul=oui'><img src='IMG2/voirenligne.gif' alt='voir en ligne' width='48' height='48' border='0' align='right'></A>";
-}
-
 echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>BR&Egrave;VE NUM&Eacute;RO&nbsp;:</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
 echo "</CENTER>";
 
 fin_boite_info();
+
+
+echo "<p><center>";
+	icone ("Voir toutes les br&egrave;ves", "breves.php3", "breve-24.png","rien.gif");
+echo "</center>";
 
 
 //////////////////////////////////////////////////////
@@ -145,8 +161,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique) AND ($option
 
 debut_droite();
 
-echo "<TABLE CELLPADDING=18 CELLSPACING=0 BORDER=1 WIDTH=\"100%\"><TR><TD BGCOLOR='#FFFFFF' ALIGN='center' WIDTH=\"100%\">";
-echo "<CENTER>";
+debut_cadre_enfonce("breve-24.png");
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 echo "<TR><td>";
 
@@ -174,22 +189,24 @@ function enfant($leparent){
 }
 
 
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'><td width='100%' valign='top'>";
+gros_titre($titre);
+echo "</td>";
 
-
-echo "<P>";
-
-echo "<table width='100%'><tr width='100%'>";
-
-echo "<td><A HREF='breves.php3' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Retour aux Br&egrave;ves' width='49' height='46' border='0' name='retour' align='left'></A></td>";
-
-
-echo "<td align='center'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=5><B>".typo($titre)."</B></FONT></td>";
-
-if ($flag_editable){
-	echo "<td align='right'><A HREF='breves_edit.php3?id_breve=$id_breve' onMouseOver=\"modif_breve.src='IMG2/modifier-breve-on.gif'\" onMouseOut=\"modif_breve.src='IMG2/modifier-breve-off.gif'\"><img src='IMG2/modifier-breve-off.gif' alt='Modifier cette breve' width='58' height='50' border='0' align='right' name='modif_breve'></A></td>";
+if ($statut == 'publie') {
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right'>";
+	icone("Voir en ligne", "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.png", "rien.gif");
+	echo "</td>";
 }
-echo "</tr></table>";
-
+if ($flag_editable) {
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right'>";
+	icone("Modifier cette breve", "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.png", "edit.gif");
+	echo "</td>";
+}
+echo "</tr></table>\n";
 
 if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
@@ -207,7 +224,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<FORM ACTION='breves_voir.php3?id_breve=$id_breve' METHOD='GET'>";
 		echo "<INPUT TYPE='hidden' NAME='id_breve' VALUE='$id_breve'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='IMG2/rien.gif'>";
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='img_pack/rien.gif'>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
@@ -255,16 +272,27 @@ if ($les_notes) {
 
 
 if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut=="prop" OR $statut=="prepa")){
-	echo "<P align='right'>";
+	echo "<div align='right'>";
 	
+	echo "<table>";
+	echo "<td  align='right'>";
+	icone("Publier cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=publie", "breve-24.png", "racine-24.png");
+	echo "</td>";
 	
-	echo "<A HREF='breves.php3?id_breve=$id_breve&statut=publie' onMouseOver=\"publier_breve.src='IMG2/publier-breve-on.gif'\" onMouseOut=\"publier_breve.src='IMG2/publier-breve-off.gif'\"><img src='IMG2/publier-breve-off.gif' alt='OUI - publier cette breve' width='57' height='56' border='0'  name='publier_breve'></A>";
-	echo " &nbsp; <A HREF='breves.php3?id_breve=$id_breve&statut=refuse' onMouseOver=\"refuser_breve.src='IMG2/refuser-breve-on.gif'\" onMouseOut=\"refuser_breve.src='IMG2/refuser-breve-off.gif'\"><img src='IMG2/refuser-breve-off.gif' alt='OUI - refuser cette breve' width='57' height='56' border='0'  name='refuser_breve'></A>";
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right'>";
+	icone("Refuser cette brève", "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.png", "supprimer.gif");
+	echo "</td>";
 	
+
+	echo "</table>";	
+	echo "</div>";
 	
 }	
 
-echo "</TD></TR></TABLE></TD></TR></TABLE>";
+echo "</TD></TR></TABLE>";
+
+fin_cadre_enfonce();
 
 //////////////////////////////////////////////////////
 // Forums
@@ -274,9 +302,13 @@ echo "<BR><BR>";
 
 $forum_retour = urlencode("breves_voir.php3?id_breve=$id_breve");
 
-echo "<P align='right'>";
-echo "<A HREF='forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_breve=$id_breve&titre_message=".urlencode($titre)."' onMouseOver=\"message.src='IMG2/message-on.gif'\" onMouseOut=\"message.src='IMG2/message-off.gif'\">";
-echo "<img src='IMG2/message-off.gif' alt='Poster un message' width='51' height='52' border='0' name='message'></A>";
+
+
+echo "\n<div align='center'>";
+	icone("Poster un message", "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_breve=$id_breve&titre_message=".urlencode($titre), "forum-interne-24.png", "creer.gif");
+echo "</div>";
+
+
 echo "<P align='left'>";
 
 

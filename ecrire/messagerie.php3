@@ -13,7 +13,7 @@ if ($detruire_message) {
 }
 
 
-debut_page();
+debut_page("Votre messagerie", "messagerie", "messagerie");
 debut_gauche();
 
 
@@ -21,15 +21,15 @@ debut_boite_info();
 
 echo propre("La messagerie vous permet d'&eacute;changer des messages entre r&eacute;dacteurs, de conserver des pense-b&ecirc;tes (pour votre usage personnel) ou d'afficher des notes en marge de chaque page.");
 
-echo propre(" <br><br><IMG SRC='IMG2/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{vert}} indique les messages &eacute;chang&eacute;s entre utilisateurs du site.");
+echo propre(" <br><br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{vert}} indique les {{messages &eacute;chang&eacute;s entre utilisateurs}} du site.");
 
 echo aide ("messut");
 
-echo propre(" <br><br><IMG SRC='IMG2/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{bleu}} indique un pense-b&ecirc;te: c'est-&agrave;-dire un message &agrave; votre usage personnel.");
+echo propre(" <br><br><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{bleu}} indique un {{pense-b&ecirc;te}}: c'est-&agrave;-dire un message &agrave; votre usage personnel.");
 
 echo aide ("messpense");
 
-echo propre(" <br><br><IMG SRC='IMG2/m_envoi_affich.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{jaune}} indique une annonce&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.");
+echo propre(" <br><br><IMG SRC='img_pack/m_envoi_jaune.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Le symbole {{jaune}} indique une {{annonces &agrave; tous les r&eacute;dacteurs}}&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.");
 
 
 fin_boite_info();
@@ -90,7 +90,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				$puce = 'm_envoi_jaune.gif';
 				break;
 			case 'affich' :
-				$puce = 'm_envoi_affich.gif';
+				$puce = 'm_envoi_jaune.gif';
 				break;
 			case 'normal':
 			default:
@@ -98,7 +98,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				break;
 			}
 				
-			$s .= "<img src='IMG2/$puce' width='14' height='7' border='0'>";
+			$s .= "<img src='img_pack/$puce' width='14' height='7' border='0'>";
 			$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
 			$vals[] = $s;
 
@@ -178,7 +178,11 @@ afficher_messages("Vos anciens pense-b&ecirc;te", $query_message, false, false, 
 
 if ($connect_statut == '0minirezo') {
 	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
-	afficher_messages("Annonces <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='IMG2/m_envoi_affich.gif' width='14' height='7' border='0'>Ajouter</a></font>", $query_message, false, false, false, true);
+	afficher_messages("Annonces &agrave; tous les r&eacute;dacteurs <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' width='14' height='7' border='0'> Ajouter</a></font>", $query_message, false, false, false, true);
+}
+else {
+	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
+	afficher_messages("Annonces &agrave; tous les r&eacute;dacteurs", $query_message, false, false, false, true);
 }
 
 fin_page();

@@ -119,19 +119,21 @@ while($row = mysql_fetch_array($result_message)) {
 
 
 	
-	debut_page();
+	debut_page($titre, "messagerie", "messagerie");
 
 	debut_gauche();
 	
 	if ($statut == 'publie' AND $type == 'normal' AND $type != 'affich') {
-		echo "<p><center><a href='messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur'><font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='#666666'><img src='IMG2/message-efface.gif' border=0 width=32 height=32><br><b>Ne plus participer &agrave; cette discussion</b></font></a></center>";
+
+		echo "<div align='center'>";
+		icone ("Ne plus participer &agrave; cette discussion", "messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur", "messagerie-24.png", "supprimer.gif");
+		echo "</div>";
 	}
 	
 	
 	debut_droite();
 
-	echo "<TABLE CELLPADDING=15 CELLSPACING=0 BORDER=1 WIDTH='100%'><TR><TD BGCOLOR='#FFFFFF' ALIGN='center' WITH='100%'>";
-	echo "<CENTER>";
+	debut_cadre_enfonce("messagerie-24.png");
 	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 	echo "<TR><TD>";
 
@@ -194,14 +196,14 @@ while($row = mysql_fetch_array($result_message)) {
 
 			switch ($statut_auteur) {
 			case "0minirezo":
-				echo "<img src='IMG2/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
+				echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
 				break;					
 			case "2redac":
 			case "1comite":
-				echo "<img src='IMG2/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
+				echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
 				break;					
 			case "5poubelle":
-				echo "<img src='IMG2/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
+				echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
 				break;					
 			case "nouveau":
 			default:
@@ -332,14 +334,14 @@ while($row = mysql_fetch_array($result_message)) {
 
 				switch ($statut_auteur) {
 				case "0minirezo":
-					echo "<img src='IMG2/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
+					echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
 					break;					
 				case "2redac":
 				case "1comite":
-					echo "<img src='IMG2/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
+					echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
 					break;					
 				case "5poubelle":
-					echo "<img src='IMG2/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
+					echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
 					break;					
 				case "nouveau":
 					echo "&nbsp;";
@@ -508,8 +510,9 @@ while($row = mysql_fetch_array($result_message)) {
 	echo "<br><font face='Georgia,Garamond,Times,serif' size=3>";
 	
 	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
-		afficher_icone_texte(newLinkUrl("message_edit.php3?id_message=$id_message"),
-			"Modifier ce message", 'IMG2/message-modif.gif', 32, 32, 'right');
+		echo "\n<table align='right'><tr><td>";
+		icone ("Modifier ce message", newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.png", "edit.gif");
+		echo "</td></tr></table>";
 	}
 
 	echo "<p>$texte";
@@ -522,24 +525,25 @@ while($row = mysql_fetch_array($result_message)) {
 		echo "<hr noshade size=1>";
 
 		if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
-			afficher_icone_texte(newLinkUrl("messagerie.php3?detruire_message=$id_message"),
-				"Supprimer ce message", 'IMG2/message-efface.gif', 32, 32, 'left');
+			echo "\n<table align='left'><tr><td>";
+			icone ("Supprimer ce message", newLinkUrl("messagerie.php3?detruire_message=$id_message"), "messagerie-24.png", "supprimer.gif");
+			echo "</td></tr></table>";
 		}
 		if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 			if ($type == 'normal' AND $total_dest < 2){
 				echo "<p align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#666666'><b>Vous devez indiquer un destinataire avant d'envoyer ce message.</b></font></p>";
 			}
 			else {
-				afficher_icone_texte(newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"),
-					"Envoyer ce message", 'IMG2/message-valide.gif', 32, 32, 'right');
+				echo "\n<table align='right'><tr><td>";
+				icone ("Envoyer ce message", newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.png", "creer.gif");
+				echo "</td></tr></table>";
 			}
 		}
 		
 	}
 
 	echo "</td></tr></table>";
-	echo "</td></tr></table>";
-
+	fin_cadre_enfonce();
 	
 	//////////////////////////////////////////////////////
 	// Forums
@@ -549,9 +553,12 @@ while($row = mysql_fetch_array($result_message)) {
 
 	$forum_retour = urlencode("message.php3?id_message=$id_message");
 
-	echo "<P align='right'>";
-	echo "<A HREF='forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre)."' onMouseOver=\"message.src='IMG2/message-on.gif'\" onMouseOut=\"message.src='IMG2/message-off.gif'\">";
-	echo "<img src='IMG2/message-off.gif' alt='Poster un message' width='51' height='52' border='0' name='message'></A>";
+
+	echo "\n<div align='center'>";
+		icone("Poster un message", "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.png", "creer.gif");
+	echo "</div>";
+
+
 	echo "<P align='left'>";
 
 	$query_forum = "SELECT * FROM spip_forum WHERE statut='perso' AND id_message='$id_message' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";

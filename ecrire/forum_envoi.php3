@@ -2,7 +2,7 @@
 
 include ("inc.php3");
 
-debut_page();
+debut_page("Envoyer un message", "messagerie");
 debut_gauche();
 debut_droite();
 
@@ -25,12 +25,12 @@ if ($id_parent) {
 	}
 }
 
-
 echo "<FORM ACTION='$adresse_retour' METHOD='post'>";
+debut_cadre_formulaire();
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
-	echo "<A HREF='$adresse_retour' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Annuler le nouveau mot-cl&eacute;' width='49' height='46' border='0' name='retour' align='middle'></A>";
-echo "<TD><TD><IMG SRC='IMG2/rien.gif' WIDTH=10 BORDER=0>";
+	icone("Retour", $adresse_retour, "forum-interne-24.png");
+echo "<TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0>";
 echo "</TD><TD WIDTH=\"100%\">";
 echo "<B>Titre :</B><BR>";
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre_message\" SIZE='40'><P>\n";
@@ -46,7 +46,7 @@ echo "<INPUT TYPE='Hidden' NAME='ajout_forum' VALUE=\"ajout_forum\">\n";
 echo "<INPUT TYPE='Hidden' NAME='forum_statut' VALUE=\"$statut\">\n";
 
 
-echo "<B>Texte de votre message :</B><BR>";
+echo "<p><B>Texte de votre message :</B><BR>";
 echo "(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)<BR>";
 echo "<TEXTAREA NAME='texte' ROWS='25' CLASS='forml' COLS='40' wrap=soft>";
 echo $texte;
@@ -71,5 +71,6 @@ echo "</FORM>";
 
 
 fin_page();
+fin_cadre_formulaire();
 
 ?>

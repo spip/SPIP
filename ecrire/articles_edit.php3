@@ -114,7 +114,24 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 }
 
 
-debut_page();
+debut_page("Modifier : $titre", "documents", "articles");
+
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+
+
+
 debut_gauche();
 
 
@@ -128,6 +145,7 @@ if ($new != 'oui'){
 }
 
 debut_droite();
+debut_cadre_formulaire();
 
 
 function mySel($varaut,$variable) {
@@ -213,13 +231,20 @@ function enfant($leparent){
 }
 
 
-echo "<A HREF='articles.php3?id_article=$id_article' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt=\"Retour &agrave; l'article\" width='49' height='46' border='0' name='retour' align='left'></A>";
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'>";
+echo "<td>";
+	icone("Retour", "articles.php3?id_article=$id_article", "article-24.png", "rien.gif");
 
-echo "Modifier l'article :<BR><FONT SIZE=5 COLOR='$couleur_foncee' FACE='Verdana,Arial,Helvetica,sans-serif'><B>".typo($titre)."</B></FONT>";
+echo "</td>";
+	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+echo "<td width='100%'>";
+echo "Modifier l'article :";
+gros_titre($titre);
+echo "</td></tr></table>";
+echo "<p>";
 
-echo aide ("raccourcis");
 
-//bouton("Retour &agrave; l article","articles.php3?id_article=$id_article");
 
 
 echo "<P><HR><P>";
@@ -258,16 +283,33 @@ echo "<P><HR><P>";
 	}else{
 		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";	
 	}
+
+	
+	/// Dans la rubrique....
+
+	if ($id_rubrique == 0) $logo_parent = "racine-24.png";
+	else {
+		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
+		$result=spip_query($query);
+		while($row=mysql_fetch_array($result)){
+			$parent_parent=$row['id_parent'];
+		}
+		if ($parent_parent == 0) $logo_parent = "secteur-24.png";
+		else $logo_parent = "rubrique-24.png";
+	}
+
+	debut_cadre_relief("$logo_parent");
 	
 	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
 	echo aide ("artrub");
 	echo "<BR><SELECT NAME='id_rubrique' CLASS='formo' SIZE=1>\n";
 	enfant(0);
 	echo "</SELECT><BR>\n";
-	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]<P>\n";
+	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
+	fin_cadre_relief();
 
 	if (($options=="avancees" AND $articles_descriptif!="non") OR strlen($descriptif) > 0) {
-		echo "<B>Descriptif rapide</B>";
+		echo "<P><B>Descriptif rapide</B>";
 		echo aide ("artdesc");
 		echo "<BR>(Contenu de l'article en quelques mots.)<BR>";
 		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
@@ -339,6 +381,7 @@ if (($articles_ps!="non") OR strlen($ps) > 0) {
 	echo "<INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
 	echo "</FORM>";
 
+fin_cadre_formulaire();
 
 fin_page();
 

@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-debut_page("Suivi des forums");
+debut_page("Suivi des forums", "messagerie", "forum-controle");
 debut_gauche();
 
 $query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE date_time>DATE_SUB(NOW(),INTERVAL 30 DAY) AND (statut='publie' OR statut='poubelle')";
@@ -174,14 +174,14 @@ function controle_forum($request,$adresse_retour) {
 		
 		for ($count = 2; $count <= $compteur_forum AND $count < 11; $count++) {
 
-			$fond[$count] = 'IMG2/rien.gif';
+			$fond[$count] = 'img_pack/rien.gif';
 			if ($i[$count] != $nb_forum[$count]) {
-				$fond[$count] = 'IMG2/forum-vert.gif';
+				$fond[$count] = 'img_pack/forum-vert.gif';
 			}		
 		
-			$fleche='IMG2/rien.gif';
+			$fleche='img_pack/rien.gif';
 			if ($count == $compteur_forum) {
-				$fleche='IMG2/forum-droite.gif';
+				$fleche='img_pack/forum-droite.gif';
 			}		
 			echo "<TD WIDTH=10 VALIGN='top' BACKGROUND=$fond[$count]><IMG SRC=$fleche ALT='' WIDTH=10 HEIGHT=13 BORDER=0></TD>\n";
 		}
@@ -201,7 +201,7 @@ function controle_forum($request,$adresse_retour) {
 		}
 
 		if ($forum_stat <> "off") {
-			echo "<A HREF='controle_forum.php3?supp_forum=$id_forum&debut=$debut' onMouseOver=\"message$id_forum.src='IMG2/supprimer-message-on.gif'\" onMouseOut=\"message$id_forum.src='IMG2/supprimer-message-off.gif'\"><IMG SRC='IMG2/supprimer-message-off.gif' WIDTH=64 HEIGHT=52 NAME='message$id_forum' ALIGN='right' BORDER=0></A>";
+			icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut", "forum-interne-24.png", "supprimer.gif", "right");
 		}
 		else {
 			echo "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
@@ -213,7 +213,7 @@ function controle_forum($request,$adresse_retour) {
 		}
 
 		if ($forum_stat=="prop"){
-			echo "<A HREF='controle_forum.php3?valid_forum=$id_forum&debut=$debut' onMouseOver=\"valider_message$id_forum.src='IMG2/valider-message-on.gif'\" onMouseOut=\"valider_message$id_forum.src='IMG2/valider-message-off.gif'\"><IMG SRC='IMG2/valider-message-off.gif' WIDTH=60 HEIGHT=52 NAME='valider_message$id_forum' ALIGN='right' BORDER=0></A>";
+			icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut", "forum-interne-24.png", "creer.gif", "right");
 		}
 
 		echo "<BR>".forum_parent($id_forum);

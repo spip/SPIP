@@ -66,42 +66,6 @@ function afficher_jour($jour){
 
 
 
-
-
-//
-// Afficher la hierarchie des rubriques
-//
-
-function parent($collection){
-	global $parents;
-	global $coll;
-	$parents=ereg_replace("(~+)","\\1~",$parents);
-	if ($collection!=0){	
-		$query2="SELECT * FROM spip_rubriques WHERE id_rubrique=\"$collection\"";
-		$result2=spip_query($query2);
-
-		while($row=mysql_fetch_array($result2)){
-			$id_rubrique = $row[0];
-			$id_parent = $row[1];
-			$titre = $row[2];
-			
-			if ($id_rubrique==$coll){
-				if (acces_restreint_rubrique($id_rubrique))
-					$parents="~ <IMG SRC='IMG2/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=4 FACE='Verdana,Arial,Helvetica,sans-serif'><B>".majuscules($titre)."</B></FONT><BR>\n$parents";
-				else
-					$parents="~ <IMG SRC='IMG2/triangle.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=4 FACE='Verdana,Arial,Helvetica,sans-serif'><B>".majuscules($titre)."</B></FONT><BR>\n$parents";
-			}else{
-				if (acces_restreint_rubrique($id_rubrique))
-					$parents="~ <IMG SRC='IMG2/triangle-bas-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
-				else
-					$parents="~ <IMG SRC='IMG2/triangle-bas.gif' WIDTH=16 HEIGHT=14 BORDER=0> <FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'>$titre</a></FONT><BR>\n$parents";
-			}
-		}
-	parent($id_parent);
-	}
-}
-
-
 //
 // Creation d'un site
 //
@@ -254,18 +218,41 @@ if ($nom_site)
 else
 	$titre_page = "Site";
 
-debut_page($titre_page);
+
+
+debut_page("$titre_page","documents","sites");
+
+
+//////// parents
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <IMG SRC='img_pack/racine-24.png' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+
+
+
 debut_gauche();
 
 debut_boite_info();
-
-echo "<center>";
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>SITE NUM&Eacute;RO&nbsp;:</b></font>";
-echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=6><b>$id_syndic</b></font>";
-echo "</center>";
-
+	echo "<center>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>SITE NUM&Eacute;RO&nbsp;:</b></font>";
+	echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size=6><b>$id_syndic</b></font>";
+	echo "</center>";
 fin_boite_info();
 
+
+echo "<p><center>";
+	icone ("Voir les sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.png","rien.gif");
+echo "</center>";
 
 $rubon = "siteon$id_syndic";
 $ruboff = "siteoff$id_syndic";
@@ -287,80 +274,53 @@ if ($flag_administrable AND ($options == 'avancees' OR $rubon_ok)) {
 debut_droite();
 
 
-parent($id_rubrique);
-$parents = "~ <img src='IMG2/triangle-bas.gif' width=16 height=14> " .
-	"<a ".newLinkHref('naviguer.php3?coll=0')."><b>RACINE DU SITE</b></a> ".aide ("rubhier")."<br>".$parents;
 
-$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
-$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
-
-echo "$parents\n";
-
-echo "<p><table cellpadding=18 cellspacing=0 border=1 width='100%'>";
-echo "<tr width='100%'><td bgcolor='#ffffff' align='center' width='100%'>\n";
+debut_cadre_enfonce("site-24.png");
 echo "<center>";
-echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
-echo "<tr width='100%'>\n";
-
-
-//////////////////////////////////////////////////////
-// Titre, surtitre, sous-titre
-//
-echo "<td width='100%'>";
 
 if ($syndication == 'off') {
-	echo "<img src='IMG2/puce-orange-anim.gif' alt='X' width='13' height='14' border='0' align='left'>";
+	$logo_statut = "puce-orange-anim.gif";
 } 
 else if ($statut == 'publie') {
-	echo "<img src='IMG2/puce-verte.gif' alt='X' width='13' height='14' border='0' align='left'>";
+	$logo_statut = "puce-verte.gif";
 }
 else if ($statut == 'prop') {
-	echo "<img src='IMG2/puce-blanche.gif' alt='X' width='13' height='14' border='0' align='left'>";
+	$logo_statut = "puce-banche.gif";
 }
 else if ($statut == 'refuse') {
-	echo "<img src='IMG2/puce-rouge.gif' alt='X' width='13' height='14' border='0' align='left'>";
+	$logo_statut = "puce-rouge.gif";
 }
+
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'><td width='100%' valign='top'>";
+	gros_titre($nom_site, $logo_statut);
+
+if (strlen($url_site) > 40) $url_site = substr($url_site, 0, 30)."...";
+echo "<a href='$url_site'><b>$url_site</b></a>";
+
+if (strlen($descriptif) > 1) {
+	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
+	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
+	echo "<b>Descriptif :</b> ";
+	echo propre($descriptif);
+	echo "&nbsp; ";
+	echo "</font>";
+	echo "</div>";
+}
+echo "</td>";
 
 if ($flag_editable) {
 	$link = new Link('sites_edit.php3');
 	$link->addVar('id_syndic');
 	$link->addVar('target', $this_link->getUrl());
-	echo "<table cellpadding=0 cellspacing=0 border=0 align='right'><tr>";
-	echo "<td valign='bottom' align='center'>";
-	echo "<a ".$link->getHref()."
-		onMouseOver=\"modifier_site.src='IMG2/modifier-site-on.gif'\"
-		onMouseOut=\"modifier_site.src='IMG2/modifier-site-off.gif'\"
-		class='boutonlien'>";
-	echo "<img src='IMG2/modifier-site-off.gif' alt='Modifier ce site' width='58' height='34' border='0' name='modifier_site'>";
-	echo "<br>Modifier<br>ce site</A></td>";
-	echo "</tr></table>";
+	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td  align='right'>";
+	icone("Modifier ce site", $link->getUrl(), "site-24.png", "edit.gif");
+	echo "</td>";
 }
+echo "</tr></table>\n";
 
 
-echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size=4><b>";
-echo typo($nom_site);
-echo "</b></font></center><br>\n";
-if (strlen($url_site) > 40) $url_site = substr($url_site, 0, 30)."...";
-echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><font size=3>";
-echo "<a href='$url_site'><b>$url_site</b></a></font></font></center>";
-
-// Verifier si doublons...
-$query_meme = "SELECT * FROM spip_syndic WHERE statut = 'publie' ".
-	"AND id_syndic!='$id_syndic' AND (url_site='$url_site' OR (syndication='oui' AND url_syndic='$url_syndic'))";
-
-afficher_sites("Attention : vous avez d&eacute;j&agrave; r&eacute;f&eacute;renc&eacute; un site ayant la m&ecirc;me adresse", $query_meme);
-
-if (strlen($descriptif) > 1) {
-	echo "<p align='left'>";
-	debut_boite_info();
-
-	echo "<img src='IMG2/descriptif.gif' alt='DESCRIPTIF' width='59' height='12' border='0'><BR>";
-	echo "<FONT SIZE=3 FACE='Verdana,Arial,Helvetica,sans-serif'>";
-	echo propre($descriptif);
-	echo "&nbsp; ";
-	echo "</FONT>";
-	fin_boite_info();
-}
 
 
 
@@ -381,7 +341,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<FORM ACTION='sites.php3?id_syndic=$id_syndic' METHOD='GET'>";
 		echo "<INPUT TYPE='hidden' NAME='id_syndic' VALUE='$id_syndic'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='IMG2/rien.gif'>";
+		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND='img_pack/rien.gif'>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE R&Eacute;F&Eacute;RENCEMENT DE CE SITE&nbsp;:";
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
@@ -408,7 +368,6 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 }
 
 if ($flag_editable AND $options == 'avancees') {
-	echo "<p>";
 	formulaire_mots('syndic', $id_syndic, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 }
 
@@ -459,11 +418,7 @@ if ($syndication == "oui" OR $syndication == "off") {
 		"SELECT * FROM spip_syndic_articles WHERE id_syndic='$id_syndic' ORDER BY date DESC");
 }
 
-
-echo "</td>";
-
-echo "</tr></table>";
-echo "</td></tr></table>\n";
+fin_cadre_enfonce();
 
 
 
@@ -475,15 +430,17 @@ echo "<br><br>\n";
 
 $forum_retour = "sites.php3?id_syndic=$id_syndic";
 
-echo "<p align='right'>";
 $link = new Link('forum_envoi.php3');
 $link->addVar('statut', 'prive');
 $link->addVar('adresse_retour', $forum_retour);
 $link->addVar('id_syndic');
 $link->addVar('titre_message', $nom_site);
 
-echo "<a ".$link->getHref()." onMouseOver=\"message.src='IMG2/message-on.gif'\" onMouseOut=\"message.src='IMG2/message-off.gif'\">";
-echo "<img src='IMG2/message-off.gif' alt='Poster un message' width='51' height='52' border='0' name='message'></a>\n";
+
+echo "<div align='center'>";
+icone ("Poster un message", $link->getUrl(), "forum-interne-24.png", "creer.gif");
+echo "</div>";
+
 echo "<p align='left'>\n";
 
 $query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_syndic='$id_syndic' AND id_parent=0 ORDER BY date_heure DESC LIMIT 0,20";

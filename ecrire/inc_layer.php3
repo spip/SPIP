@@ -68,11 +68,11 @@ var vis = new Array();
 
 function swap_couche(couche){
 	if (vis[couche] == 'hide'){
-		MM_swapImage('triangle'+couche,'','IMG2/deplierbas.gif',1)
+		MM_swapImage('triangle'+couche,'','img_pack/deplierbas.gif',1)
 		MM_showHideLayers('Layer'+couche,'','show');
 		vis[couche] = 'show';
 	} else {
-		MM_swapImage('triangle'+couche,'','IMG2/deplierhaut.gif',1)
+		MM_swapImage('triangle'+couche,'','img_pack/deplierhaut.gif',1)
 		MM_showHideLayers('Layer'+couche,'','hide');
 		vis[couche] = 'hide';
 	}
@@ -162,7 +162,7 @@ function bouton_block_invisible($nom_block) {
 
 			$javasc .= "swap_couche('$compteur_block');";
 		}
-		return "<a href=\"javascript:$javasc\"><img name='triangle$num_triangle' src='IMG2/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
+		return "<a href=\"javascript:$javasc\"><img name='triangle$num_triangle' src='img_pack/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 
@@ -176,7 +176,7 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='IMG2/deplierbas.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
+		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='img_pack/deplierbas.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 

@@ -2,11 +2,6 @@
 
 include ("inc.php3");
 
-debut_page();
-debut_gauche();
-
-debut_droite();
-
 
 if ($new=="oui"){
 	if(!$id_parent){$id_parent=0;}
@@ -70,10 +65,58 @@ while($row=mysql_fetch_array($result)){
 	$texte = $row[4];
 }
 
+debut_page("Modifier : $titre_page", "documents", "rubriques");
+
+if ($id_parent == 0) $ze_logo = "secteur-24.png";
+else $ze_logo = "rubrique-24.png";
 
 
-echo "<A HREF='naviguer.php3?coll=$id_rubrique' onMouseOver=\"retour.src='IMG2/retour-on.gif'\" onMouseOut=\"retour.src='IMG2/retour-off.gif'\"><img src='IMG2/retour-off.gif' alt='Retour &agrave; la rubrique' width='49' height='46' border='0' name='retour' align='left'></A>";
-echo "Modifier la rubrique :<BR><FONT SIZE=5 COLOR='$couleur_foncee' FACE='Verdana,Arial,Helvetica,sans-serif'><B>".typo($titre)."</B></FONT><P><HR><P>";
+if ($id_parent == 0) $logo_parent = "racine-24.png";
+else {
+	$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_parent'";
+ 	$result=spip_query($query);
+	while($row=mysql_fetch_array($result)){
+		$parent_parent=$row['id_parent'];
+	}
+	if ($parent_parent == 0) $logo_parent = "secteur-24.png";
+	else $logo_parent = "rubrique-24.png";
+}
+
+
+
+debut_grand_cadre();
+
+afficher_parents($id_rubrique);
+$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+
+$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
+$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
+
+echo "$parents";
+
+fin_grand_cadre();
+
+debut_gauche();
+//////// parents
+
+
+
+debut_droite();
+
+debut_cadre_formulaire();
+
+echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr width='100%'>";
+echo "<td>";
+	icone("Retour", "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
+
+echo "</td>";
+	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+echo "<td width='100%'>";
+echo "Modifier la rubrique :";
+gros_titre($titre);
+echo "</td></tr></table>";
+echo "<p>";
 
 echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
 echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
@@ -86,6 +129,7 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><
 
 
 if ($options=="avancees"){
+	debut_cadre_relief("$logo_parent");
 	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
 	echo "<SELECT NAME='id_parent' CLASS='forml' SIZE=1>\n";
 	if ($connect_toutes_rubriques) {
@@ -104,8 +148,9 @@ if ($options=="avancees"){
 	$row = mysql_fetch_array(spip_query($query));
 	$contient_breves = $row[0];
 	if ($contient_breves > 0) {
-		echo "<font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme_deplace'><label for='confirme_deplace'>&nbsp;<i>Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</i></font></label>\n";
+		echo "<font size='2'><input type='checkbox' name='confirme_deplace' value='oui' id='confirme_deplace'><label for='confirme_deplace'>&nbsp;Attention&nbsp;! Cette rubrique contient $contient_breves br&egrave;ve".($contient_breves>1? 's':'')."&nbsp;: si vous la d&eacute;placez, veuillez cocher cette case de confirmation.</font></label>\n";
 	}
+	fin_cadre_relief();
 
 	echo "<P>";
 
@@ -131,7 +176,7 @@ echo "</TEXTAREA>\n";
 
 echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
 echo "</FORM>";
-
+fin_cadre_formulaire();
 
 fin_page();
 

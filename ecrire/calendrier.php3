@@ -57,8 +57,8 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 	// articles du jour
-	$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee_today-$mois_today-1' AND date < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date";
-	$result=spip_query($query);
+	$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee_today-$mois_today-0' AND date < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date";
+	$result=mysql_query($query);
 	while($row=mysql_fetch_array($result)){
 		$id_article=$row[0];
 		$titre=typo($row['titre']);
@@ -66,23 +66,23 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$lemois = mois($row['date']);		
 
 		$lejour=ereg_replace("1er","1",$lejour);
-		if ($lemois == $mois_today) $les_articles["$lejour"].="<BR><A HREF='articles.php3?id_article=$id_article'><img src='IMG2/puce-verte.gif' width='7' height='7' border='0'> $titre</A>";
+		if ($lemois == $mois_today) $les_articles["$lejour"].="<BR><A HREF='articles.php3?id_article=$id_article'><img src='img_pack/puce-verte.gif' width='7' height='7' border='0'> $titre</A>";
 	}
 
 	// breves du jour
-	$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee_today-$mois_today-1' AND date_heure < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date_heure";
-	$result=spip_query($query);
+	$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee_today-$mois_today-0' AND date_heure < DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) ORDER BY date_heure";
+	$result=mysql_query($query);
 	while($row=mysql_fetch_array($result)){
 		$id_breve=$row[0];
 		$titre=typo($row['titre']);
 		$lejour=jour($row['date_heure']);
 		$lemois = mois($row['date_heure']);		
 		$lejour=ereg_replace("1er","1",$lejour);
-		if ($lemois == $mois_today) $les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='IMG2/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
+		if ($lemois == $mois_today) $les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
 	}
 
 	// rendez-vous personnels ou annonces
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	$result_messages=mysql_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=mysql_fetch_array($result_messages)){
 		$id_message=$row[0];
 		$date_heure=$row["date_heure"];
@@ -100,9 +100,9 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 
-echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='IMG2/agauche.gif' width='13' height='14' border='0'></A></TD>";
+echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><<<</A></TD>";
 echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$nom_mois $annee_today ".aide ("messcalen")."</B></FONT></TD>";
-echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='IMG2/adroite.gif' width='13' height='14' border='0'></A></TD></TR>";
+echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'>>>></A></TD></TR>";
 
 	echo "<TR>";
 	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>lundi</B></TD>";
@@ -143,11 +143,11 @@ echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv
 			$activer_messagerie = lire_meta("activer_messagerie");
 			$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb'><IMG SRC='IMG2/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal'><IMG SRC='IMG2/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb'><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal'><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			}
 			if ($connect_statut == "0minirezo")
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich'><IMG SRC='IMG2/m_envoi_affich.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich'><IMG SRC='img_pack/m_envoi_jaune.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
 			
 			if (strlen($les_rv["$jour"])>0){
@@ -183,7 +183,7 @@ if (!$mois){
 
 $nom_mois = nom_mois('2000-'.chiffrespar2($mois).'-01');
 
-debut_page("Calendrier $nom_mois $annee");
+debut_page("Calendrier $nom_mois $annee", "asuivre", "calendrier");
 
 echo "<BR><BR><BR>";
 
@@ -209,8 +209,8 @@ afficher_mois($jour,chiffrespar2($mois),$annee,$nom_mois);
 		echo "<br><br><br><table width='700' background=''><tr width='700'><td><FONT FACE='arial,helvetica,sans-serif' SIZE=2>";
 		echo "<b>AIDE :</b>";
 	
-		echo "<br><IMG SRC='IMG2/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Ce bouton vous permet de cr&eacute;er un nouveau pense-b&ecirc;te personnel.\n";
-		echo "<br><IMG SRC='IMG2/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Ce bouton vous permet de donner un rendez-vous &agrave; un autre participant.\n";
+		echo "<br><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Ce bouton vous permet de cr&eacute;er un nouveau pense-b&ecirc;te personnel.\n";
+		echo "<br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> Ce bouton vous permet de donner un rendez-vous &agrave; un autre participant.\n";
 		
 		echo "</font></td></tr></table>";
 	
