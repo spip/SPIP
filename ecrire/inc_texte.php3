@@ -176,13 +176,16 @@ function echappe_html($letexte, $source, $no_transform=false) {
 	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
-		$regexp_echap_cadre = "<cadre>((.*?))<\/cadre>";
-		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)/si";
+		$regexp_echap_cadre = "<(cadre|frame)>((.*?))<\/(cadre|frame)>";
+		$regexp_echap_poesie = "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>";
+		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)/si";
 	} else {
+		//echo creer_echappe_sans_pcre("cadre");
 		$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
 		$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
-		$regexp_echap_cadre = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
-		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)";
+		$regexp_echap_cadre = "(<[cf][ar][da][rm]e>(([^<]|<[^/]|</[^cf]|</[cf][^ar]|</[cf][ar][^da]|</[cf][ar][da][^rm]|</[cf][ar][da][rm][^e]|<\/[cf][ar][da][rm]e[^>])*)<\/[cf][ar][da][rm]e>)()"; // parentheses finales pour obtenir meme nombre de regs que pcre
+		$regexp_echap_poesie = "(<poe[st][ir][ey]>(([^<]|<[^/]|</[^p]|</p[^o]|</po[^e]|</poe[^st]|</poe[st][^ir]|</poe[st][ir][^[ey]]|<\/poe[st][ir][ey][^>])*)<\/poe[st][ir][ey]>)()";
+		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)";
 	}
 
 	while (($flag_pcre && preg_match($regexp_echap, $letexte, $regs))
@@ -218,10 +221,19 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		else
 		if ($regs[7]) {
 			// Echapper les <cadre>...</cadre>
-			$lecode = trim(entites_html($regs[8]));
+			$lecode = trim(entites_html($regs[9]));
 			$total_lignes = count(explode("\n", $lecode));
 
 			$les_echap[$num_echap] = "<form><textarea readonly='readonly' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
+		}
+		else
+		if ($regs[12]) {
+			$lecode = $regs[14];
+			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
+			$lecode = ereg_replace("\r", "\n", $lecode);
+			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
+			
+			$les_echap[$num_echap] = propre($lecode);
 		}
 
 		$pos = strpos($letexte, $regs[0]);
