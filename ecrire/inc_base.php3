@@ -53,7 +53,6 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 }
 
 
-
 function creer_base() {
 	global $tables_principales, $tables_auxiliaires;
 
@@ -67,6 +66,20 @@ function creer_base() {
 	foreach($tables_auxiliaires as $k => $v)
 		spip_create_table($k, $v['field'], $v['key'], false);
 
+	remplir_table_type_documents();
+}
+
+function stripslashes_base($table, $champs) {
+	$modifs = '';
+	reset($champs);
+	while (list(, $champ) = each($champs)) {
+		$modifs[] = $champ . '=REPLACE(REPLACE(' .$champ. ',"\\\\\'", "\'"), \'\\\\"\', \'"\')';
+	}
+	$query = "UPDATE $table SET ".join(',', $modifs);
+	spip_query($query);
+}
+
+function remplir_table_type_documents() {
 	// Images reconnues par PHP
 	$query = "INSERT IGNORE spip_types_documents (id_type, extension, titre, inclus) VALUES ".
 		"(1, 'jpg', 'JPEG', 'image'), ".
@@ -106,6 +119,7 @@ function creer_base() {
 		"('ai', 'Adobe Illustrator', 'non'), ".
 		"('bz2', 'BZip', 'non'), ".
 		"('c', 'C source', 'non'), ".
+		"('css', 'Cascading Style Sheet', 'non'), ".
 		"('deb', 'Debian', 'non'), ".
 		"('doc', 'Word', 'non'), ".
 		"('djvu', 'DjVu', 'non'), ".
@@ -134,16 +148,75 @@ function creer_base() {
 		"('xml', 'XML', 'non'), ".
 		"('zip', 'Zip', 'non')";
 	spip_query_db($query);
-}
 
-function stripslashes_base($table, $champs) {
-	$modifs = '';
-	reset($champs);
-	while (list(, $champ) = each($champs)) {
-		$modifs[] = $champ . '=REPLACE(REPLACE(' .$champ. ',"\\\\\'", "\'"), \'\\\\"\', \'"\')';
-	}
-	$query = "UPDATE $table SET ".join(',', $modifs);
-	spip_query($query);
+
+	// Mettre a jour les types MIME
+	$types = array(
+		// Images reconnues par PHP
+		'jpg'=>'image/jpeg',
+		'png'=>'image/png',
+		'gif'=>'image/gif',
+
+		// Autres images (peuvent utiliser le tag <img>)
+		'bmp'=>'image/x-ms-bmp', // pas enregistre par IANA, variante: image/bmp
+		'psd'=>'image/x-photoshop',	// pas IANA
+		'tif'=>'image/tiff',
+
+		// Multimedia (peuvent utiliser le tag <embed>)
+		'aiff'=>'audio/x-aiff',
+		'asf'=>'video/x-ms-asf',
+		'avi'=>'video/x-msvideo',
+		'mid'=>'audio/midi',
+		'mng'=>'video/x-mng',
+		'mov'=>'video/quicktime',
+		'mp3'=>'audio/mpeg',
+		'mpg'=>'video/mpeg',
+		'ogg'=>'application/ogg',
+		'qt' =>'video/quicktime',
+		'ra' =>'audio/x-pn-realaudio',
+		'ram'=>'audio/x-pn-realaudio',
+		'rm' =>'audio/x-pn-realaudio',
+		'swf'=>'application/x-shockwave-flash',
+		'wav'=>'audio/x-wav',
+		'wmv'=>'video/x-ms-wmv',
+
+		// Documents varies
+		'ai' =>'application/illustrator',
+		'bz2'=>'application/x-bzip2',
+		'c'  =>'text/x-csrc',
+		'css'=>'text/css',
+		'deb'=>'application/x-debian-package',
+		'doc'=>'application/msword',
+		'djvu'=>'image/vnd.djvu',
+		'dvi'=>'application/x-dvi',
+		'eps'=>'application/postscript',
+		'gz' =>'application/x-gzip',
+		'h'  =>'text/x-chdr',
+		'html'=>'text/html',
+		'pas'=>'text/x-pascal',
+		'pdf'=>'application/pdf',
+		'ppt'=>'application/vnd.ms-powerpoint',
+		'ps' =>'application/postscript',
+		'rpm'=>'application/x-redhat-package-manager',
+		'rtf'=>'application/rtf',
+		'sdd'=>'application/vnd.stardivision.impress',
+		'sdw'=>'application/vnd.stardivision.writer',
+		'sit'=>'application/x-stuffit',
+		'sxc'=>'application/vnd.sun.xml.calc',
+		'sxi'=>'application/vnd.sun.xml.impress',
+		'sxw'=>'application/vnd.sun.xml.writer',
+		'tex'=>'text/x-tex',
+		'tgz'=>'application/x-gtar',
+		'txt'=>'text/plain',
+		'xcf'=>'application/x-xcf',
+		'xls'=>'application/vnd.ms-excel',
+		'xml'=>'application/xml',
+		'zip'=>'application/zip'
+	);
+
+	foreach ($types as $extension => $type_mime)
+		spip_query_db("UPDATE spip_types_documents
+		SET mime_type='$type_mime' WHERE extension='$extension'");
 }
 
 ?>
