@@ -88,7 +88,7 @@ $GLOBALS['codes_langues'] = array(
 	'na' => "Nauru",
 	'ne' => "Nepali",
 	'nl' => "Nederlands",
-	'no' => "norsk (nynorsk)",
+	'no' => "norsk",
 	'oc' => "Occitan",
 	'om' => "(Afan) Oromo",
 	'or' => "Oriya",
@@ -143,7 +143,7 @@ $GLOBALS['codes_langues'] = array(
 	'yi' => "Yiddish",
 	'yo' => "Yoruba",
 	'za' => "Zhuang",
-	'zh' => "&#20013;&#25991;(&#31616;&#20307;)",
+	'zh' => "&#20013;&#25991;",
 	'zu' => "Zulu");
 
 /*$GLOBALS['codes_langues'] = array (
