@@ -262,27 +262,25 @@ function interdire_scripts($source) {
 
 // Correction typographique francaise
 function typo_fr($letexte) {
-	global $flag_preg_replace;
-	global $flag_str_replace;
 
-	// les "blancs durs" et les guillemets
-	if ($flag_str_replace){
-		$letexte = str_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
-		$letexte = str_replace("&raquo;",chr(187),$letexte);
-		$letexte = str_replace("&#187;", chr(187),$letexte);
-		$letexte = str_replace("&laquo;",chr(171),$letexte);
-		$letexte = str_replace("&#171;", chr(171),$letexte);
+	// nettoyer 160 = nbsp ; 187 = raquo ; 171 = laquo ; 176 = deg
+	if (lire_meta('charset') == 'iso-8859-1') {
+		$letexte = strtr($letexte,chr(160),"~");
+		$chars = array (187,171,176);
+		while (list(,$c) = each($chars))
+			$letexte = ereg_replace(chr($c),"&#$c;",$letexte);
 	}
-	else {
-		$letexte = ereg_replace("&nbsp;","~",strtr($letexte,chr(160),"~"));
-		$letexte = ereg_replace("&(raquo|#187);",chr(187), $letexte);
-		$letexte = ereg_replace("&(laquo|#171);",chr(171), $letexte);
-	}
+
+	// unifier sur la representation unicode
+	$letexte = ereg_replace("&nbsp;","~",$letexte);
+	$letexte = ereg_replace("&raquo;","&#187;",$letexte);
+	$letexte = ereg_replace("&laquo;","&#171;",$letexte);
+	$letexte = ereg_replace("&deg;","&#176;",$letexte);
 
 	$cherche1 = array(
 		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
-		/* 3 */		'/([:!?'.chr(187).']| -,)/',
-		/* 4 */		'/('.chr(171).'|(M(M?\.|mes?|r\.?)|[MnN]'.chr(176).') )/'
+		/* 3 */		'/([:!?]|&#187;| -,)/',
+		/* 4 */		'/(&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) )/'
 	);
 	$remplace1 = array(
 		/* 2 */		'\1~;',
@@ -303,6 +301,13 @@ function typo_fr($letexte) {
 	);
 
 	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
+
+	// remettre le caractere simple ??
+	if (lire_meta('charset') == 'iso-8859-1') {
+		$chars = array (187,171,176);
+		while (list(,$c) = each($chars))
+			$letexte = ereg_replace("&#$c;",chr($c),$letexte);
+	}
 
 	return ($letexte);
 }

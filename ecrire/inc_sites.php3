@@ -73,21 +73,39 @@ function recuperer_page($url) {
 		}
 	}
 
-	if (!$f)
+	if (!$f) {
 		spip_log("ECHEC syndication $url$via_proxy");
-	else {
+		$result = '';
+	} else {
 		while (!feof($f))
 			$result .= fread($f, 16384);
 		fclose($f);
-		return $result;
 	}
+
+	// analyser cette page pour trouver un charset connu hors iso-8859-1,
+	// et convertir dans le charset local ; si la page n'a pas de charset,
+	// ne pas la decoder (on suppose qu'elle est iso-8859-1)... sauf si
+	// le charset local n'est pas iso-8859-1
+	if (eregi("<[^>]*charset.(utf-8)", $result, $regs)) {
+		$charset_page = $regs[1];
+		$result = unicode2charset(entites_unicode($result, $charset_page));
+	} else
+		if (lire_meta('charset' != 'iso-8859-1'))
+			$result = unicode2charset(entites_unicode($result, 'FORCE-iso-8859-1'));
+
+	// FORCE-iso-8859-1 passe le message suivant : on VEUT la conversion, meme
+	// si elle est desactivee dans entites_unicode pour maintenir (temporairement)
+	// la lisibilite de notre backend sur des SPIP v<1.5
+
+
+	return $result;
 }
 
 
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3");
 
-	$texte = unicode2charset(iso_8859_1_to_unicode(recuperer_page($url)));
+	$texte = recuperer_page($url);
 	if (!$texte) return false;
 	$result = '';
 	if (ereg('<channel[^>]*>(.*)</channel>', $texte, $regs)) {
@@ -146,7 +164,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	$le_retour = unicode2charset(iso_8859_1_to_unicode(recuperer_page($la_query)));
+	$le_retour = recuperer_page($la_query);
 
 	if (strlen($le_retour)>10){
 
