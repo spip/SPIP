@@ -574,7 +574,7 @@ function http_calendrier_clics_jour_semaine($annee, $mois, $jour, $clic)
 {
   global $REQUEST_URI;
   $req = ereg_replace("&jour=[0-9]*&mois=[0-9]*&annee=[0-9]*",'',$REQUEST_URI);
-  $req = ereg_replace("&type=[a-z]*", '', ereg_replace("&var_.*=[^&]*", '', $req));
+  $req = ereg_replace("&type=[a-z]*", '', ereg_replace("[?&]var_[^=]*=[^&]*", '', $req));
   $d = mktime(0,0,0,$mois, $jour, $annee);
   $mois = date("m", $d);
   $annee = date("Y", $d);
