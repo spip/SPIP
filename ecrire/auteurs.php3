@@ -284,7 +284,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['statut']=='0minirezo' AND $rub_restreinte[$row['id_auteur']])
-		echo " &nbsp;<small>(admin restreint)</small>";
+		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
 
 
 	// contact
