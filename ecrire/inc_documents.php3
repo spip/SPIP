@@ -367,12 +367,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 			
 			$ledossier_prec = $ledossier;
 			
-			
-			if ($ext == "zip") {
-				$texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier (en tant que fichier zip)</option>";				
-				$texte_upload .= "\n<option value=\"$f--unzip\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier (d&eacute;compacter et installer les documents s&eacute;par&eacute;s)</option>";
-			}
-			else if ($exts[$ext] == 'oui') $texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier</option>";
+			if ($exts[$ext] == 'oui') $texte_upload .= "\n<option value=\"$f\">&nbsp; &nbsp; &nbsp; &nbsp; $lefichier</option>";
 		}
 	}
 
