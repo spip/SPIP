@@ -328,7 +328,7 @@ debut_cadre_trait_couleur("ortho-24.gif", false, "", _T('ortho_orthographe'));
 // Previsualisation sur le site public
 //
 
-debut_cadre_trait_couleur("naviguer-site.gif", false, "", _T('previsualisation'));
+debut_cadre_trait_couleur("naviguer-site.png", false, "", _T('previsualisation'));
 	$preview = lire_meta("preview");
 	# non = personne n'est autorise a previsualiser (defaut)
 	# oui = les admins
