@@ -149,7 +149,7 @@ else {
 //
 
 if ($var_recherche) {
-	if ($flag_ob AND $flag_preg_replace AND !$flag_preserver) {
+	if ($flag_ob AND !$flag_preserver) {
 		include_ecrire("inc_filtres.php3");
 		ob_start();
 	}
