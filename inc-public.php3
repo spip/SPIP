@@ -113,16 +113,17 @@ include_ecrire("inc_meta.php3");
 		@Header("Content-Type: text/html; charset=".lire_meta('charset'));
      }
      $texte = admin_page($page['naissance'], $page['texte']);
-     if ($page['process_ins'] == 'php')
+     if ($page['process_ins'] == 'php') {
        eval('?' . '>' . $texte);
+  	 }
      else
        { 
 	 $n = strlen($texte);
-# L'envoi du content-Length ci-dessous permet d'envoyer d'autres réponses
+# L'envoi du content-Length ci-dessous permet d'envoyer d'autres reponses
 # dans le cadre des connexions persistantes de HTTP1
 # Elle doit s'accompagner du connection-close sinon
 # elle retarde l'affichage de certains navigateurs.
-# On l'a désactivé ici puisqu'il n'y a qu'une seule réponse, 
+# On l'a desactivée ici puisqu'il n'y a qu'une seule réponse, 
 # et que certains serveurs la calculent et maintiennent la connexion
 # header("Content-Length: " . $n);
 # header("Connection: close");
