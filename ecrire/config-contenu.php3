@@ -126,56 +126,6 @@ fin_cadre_trait_couleur();
 echo "<p>";
 
 
-//
-// Fonctionnement de la messagerie interne
-// devient forcement active
-
-// Activer forum admins
-
-if ($options == "avancees") {
-	
-	debut_cadre_trait_couleur("forum-admin-24.gif", false, "", _T('titre_cadre_forum_administrateur'));
-	
-	echo "<div class='verdana2'>";
-
-	echo _T('info_forum_ouvert');
-	echo "<br />";
-	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
-		array('oui' => _T('item_activer_forum_administrateur'),
-			'non' => _T('item_desactiver_forum_administrateur')));
-
-	echo "</div>";
-	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
-
-	fin_cadre_trait_couleur();
-	echo "<p />";
-
-
-/*	debut_cadre_trait_couleur("messagerie-24.gif");
-
-	$activer_messagerie = lire_meta("activer_messagerie");
-	$activer_imessage = lire_meta("activer_imessage");
-
-	echo _T('info_messagerie_interne')."</FONT></B> ".aide ("confmessagerie")." </TD></TR>";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo _T('info_echange_message');
-	echo "</TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	afficher_choix('activer_messagerie', $activer_messagerie,
-		array('oui' => _T('bouton_radio_activer_messagerie_interne'),
-			'non' => _T('bouton_radio_desactiver_messagerie_interne')));
-	echo "</TD></TR>\n";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo "<hr>\n";
-	echo "</TD></TR>";
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-
-	fin_cadre_trait_couleur();
-	echo "<p>";*/
-}
-
 
 //
 // Accepter les inscriptions de redacteurs depuis le site public
@@ -196,8 +146,41 @@ if ($options == "avancees") {
 	afficher_choix('accepter_inscriptions', $accepter_inscriptions,
 		array('oui' => _T('item_accepter_inscriptions'),
 			'non' => _T('item_non_accepter_inscriptions')), " &nbsp; ");
-	echo "</TD></TR>\n";
 
+	// Cas tres specifique : si on n'accepte pas les inscriptions,
+	// ET si on n'a pas de forums sur abonnement, on peut vouloir
+	// tout de meme ouvrir les inscriptions aux *visiteurs*
+	if ($accepter_inscriptions == 'non') {
+		$accepter_visiteurs = lire_meta('accepter_visiteurs');
+		echo "<br /><br />\n";
+		debut_cadre_relief("", false, "",
+		bouton_block_invisible("accepter_visiteurs") . ' ' .
+		_T('info_visiteurs'));
+		echo debut_block_invisible("accepter_visiteurs");
+		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+
+		if ($forums_publics<>'abo'
+		AND !spip_num_rows(spip_query("SELECT id_article
+		FROM spip_articles WHERE accepter_forum='abo'"))) {
+			echo _T('info_question_accepter_visiteurs');
+			echo "</TD></TR>";
+			echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
+			afficher_choix('accepter_visiteurs', $accepter_visiteurs,
+				array('oui' => _T('info_option_accepter_visiteurs'),
+					'non' => _T('info_option_ne_pas_accepter_visiteurs')));
+		} else {
+			echo _T('info_forums_abo_invites');
+		}
+
+		echo "</TD></TR></table>\n";
+		echo fin_block();
+		fin_cadre_relief();
+	} else {
+	
+	}
+
+	echo "</TD></TR>\n";
 	echo "<TR><td style='text-align:$spip_lang_right;'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</TD></TR>";
@@ -341,6 +324,29 @@ if (tester_mail()) {
 	echo "</TABLE>\n";
 
 	fin_cadre_trait_couleur();
+	echo "<p />";
+}
+
+// Activer forum admins
+
+if ($options == "avancees") {
+	
+	debut_cadre_trait_couleur("forum-admin-24.gif", false, "", _T('titre_cadre_forum_administrateur'));
+	
+	echo "<div class='verdana2'>";
+
+	echo _T('info_forum_ouvert');
+	echo "<br />";
+	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
+		array('oui' => _T('item_activer_forum_administrateur'),
+			'non' => _T('item_desactiver_forum_administrateur')));
+
+	echo "</div>";
+	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+
+	fin_cadre_trait_couleur();
+	echo "<p />";
+
 }
 
 
