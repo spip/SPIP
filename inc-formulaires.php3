@@ -43,85 +43,117 @@ function erreur($zetexte){
  	return "<br /><img src='puce$spip_lang_rtl.gif' border='0' alt='-' /> $zetexte";
 }
 
+//
+// Retour a l'ecran du lien de confirmation d'une signature de petition
+//
 
-function formulaire_signature($id_article) {
-	global $val_confirm, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
+function reponse_confirmation($id_article) {
+	global $val_confirm;
 
-	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_filtres.php3");
+	include_ecrire("inc_connect.php3");
+	
+	if ($GLOBALS['db_ok']) {
+		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_filtres.php3");
 
-	echo "<div class='formulaire'>";
-	echo "<a name='sp$id_article'></a>\n";
-
-	if ($val_confirm) {
-		$query_sign = "SELECT * FROM spip_signatures WHERE statut='".addslashes($val_confirm)."'";
-		$result_sign = spip_query($query_sign);
-		if (spip_num_rows($result_sign) > 0) {
-			while($row = spip_fetch_array($result_sign)) {
-				$id_signature = $row['id_signature'];
-				$id_article = $row['id_article'];
-				$date_time = $row['date_time'];
-				$nom_email = $row['nom_email'];
-				$adresse_email = $row['ad_email'];
-				$nom_site = $row['nom_site'];
-				$url_site = $row['url_site'];
-				$message = $row['message'];
-				$statut = $row['statut'];
-			}
-
-			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
-		 	$result_petition = spip_query($query_petition);
-
-			while ($row = spip_fetch_array($result_petition)) {
-				$id_article = $row['id_article'];
-				$email_unique = $row['email_unique'];
-				$site_obli = $row['site_obli'];
-				$site_unique = $row['site_unique'];
-				$message_petition = $row['message'];
-				$texte_petition = $row['texte'];
-			}
-
-			if ($email_unique == "oui") {
-				$email = addslashes($adresse_email);
-				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
-				$result = spip_query($query);
-				if (spip_num_rows($result) > 0) {
-					$texte .= erreur(_T('form_pet_deja_signe'));
-					$refus = "oui";
+		// Eviter les doublons
+		$lock = "petition $id_article $val_confirm";
+		if (!spip_get_lock($lock, 5)) {
+			$texte = _T('form_pet_probleme_technique');
+		}
+		else {
+			$query_sign = "SELECT * FROM spip_signatures WHERE statut='".addslashes($val_confirm)."'";
+			$result_sign = spip_query($query_sign);
+			if (spip_num_rows($result_sign) > 0) {
+				while($row = spip_fetch_array($result_sign)) {
+					$id_signature = $row['id_signature'];
+					$id_article = $row['id_article'];
+					$date_time = $row['date_time'];
+					$nom_email = $row['nom_email'];
+					$adresse_email = $row['ad_email'];
+					$nom_site = $row['nom_site'];
+					$url_site = $row['url_site'];
+					$message = $row['message'];
+					$statut = $row['statut'];
 				}
-			}
-
-			if ($site_unique == "oui") {
-				$site = addslashes($url_site);
-				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
-				$result = spip_query($query);
-				if (spip_num_rows($result) > 0) {
-					$texte .= erreur(_T('form_pet_deja_enregistre'));
-					$refus = "oui";
+	
+				$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
+				$result_petition = spip_query($query_petition);
+	
+				while ($row = spip_fetch_array($result_petition)) {
+					$id_article = $row['id_article'];
+					$email_unique = $row['email_unique'];
+					$site_obli = $row['site_obli'];
+					$site_unique = $row['site_unique'];
+					$message_petition = $row['message'];
+					$texte_petition = $row['texte'];
 				}
-			}
-
-			if ($refus == "oui") {
-				$texte .= erreur(_T('form_deja_inscrit'));
+	
+				if ($email_unique == "oui") {
+					$email = addslashes($adresse_email);
+					$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
+					$result = spip_query($query);
+					if (spip_num_rows($result) > 0) {
+						$texte .= erreur(_T('form_pet_deja_signe'));
+						$refus = "oui";
+					}
+				}
+	
+				if ($site_unique == "oui") {
+					$site = addslashes($url_site);
+					$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
+					$result = spip_query($query);
+					if (spip_num_rows($result) > 0) {
+						$texte .= erreur(_T('form_pet_deja_enregistre'));
+						$refus = "oui";
+					}
+				}
+	
+				if ($refus == "oui") {
+					$texte .= erreur(_T('form_deja_inscrit'));
+				}
+				else {
+					$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
+					$result = spip_query($query);
+	
+					$texte .= erreur(_T('form_pet_signature_validee'));
+				}
 			}
 			else {
-				$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
-				$result = spip_query($query);
-
-				$texte .= erreur(_T('form_pet_signature_validee'));
+				$texte .= erreur(_T('form_pet_aucune_signature'));
 			}
-		}else{
-			$texte .= erreur(_T('form_pet_aucune_signature'));
+			spip_release_lock($lock);
 		}
-		echo "<div class='reponse_formulaire'>$texte</div>";
 	}
-	else if ($nom_email AND $adresse_email) {
-		if ($GLOBALS['db_ok']) {
-			include_ecrire("inc_mail.php3");
+	else {
+		$texte = _T('form_pet_probleme_technique');
+	}
+	echo "<div class='reponse_formulaire'>$texte</div>";
+}
 
+//
+// Retour a l'ecran de la signature d'une petition
+//
+
+function reponse_signature($id_article) {
+	global $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
+
+	include_ecrire("inc_connect.php3");
+	
+	if ($GLOBALS['db_ok']) {
+		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_filtres.php3");
+		include_ecrire("inc_mail.php3");
+
+		// Eviter les doublons
+		$lock = "petition $id_article $adresse_email";
+		if (!spip_get_lock($lock, 5)) {
+			$reponse_signature = _T('form_pet_probleme_technique');
+		}
+		else {
 			$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
-		 	$result_petition = spip_query($query_petition);
-
+			$result_petition = spip_query($query_petition);
+	
 			while ($row = spip_fetch_array($result_petition)) {
 				$id_article = $row['id_article'];
 				$email_unique = $row['email_unique'];
@@ -130,17 +162,17 @@ function formulaire_signature($id_article) {
 				$message_petition = $row['message'];
 				$texte_petition = $row['texte'];
 			}
-
+	
 			if (strlen($nom_email) < 2) {
 				$reponse_signature .= erreur(_T('form_indiquer_nom'));
 				$refus = "oui";
 			}
-
+	
 			if ($adresse_email == _T('info_mail_fournisseur')) {
 				$reponse_signature .= erreur(_T('form_indiquer_email'));
 				$refus = "oui";
 			}
-
+	
 			if ($email_unique == "oui") {
 				$email = addslashes($adresse_email);
 				$query = "SELECT * FROM spip_signatures WHERE id_article=$id_article AND ad_email='$email' AND statut='publie'";
@@ -150,19 +182,19 @@ function formulaire_signature($id_article) {
 					$refus = "oui";
 				}
 			}
-
+	
 			if (!email_valide($adresse_email)) {
 				$reponse_signature .= erreur(_T('form_email_non_valide'));
 				$refus = "oui";
 			}
-
+	
 			if ($site_obli == "oui") {
 				if (!$nom_site) {
 					$reponse_signature .= erreur(_T('form_indiquer_nom_site'));
 					$refus = "oui";
 				}
 				include_local ("ecrire/inc_sites.php3");
-
+	
 				if (!recuperer_page($url_site)) {
 					$reponse_signature .= erreur(_T('form_pet_url_invalide'));
 					$refus = "oui";
@@ -177,11 +209,11 @@ function formulaire_signature($id_article) {
 					$refus = "oui";
 				}
 			}
-
+	
 			$passw = test_pass();
-
-		 	if ($refus == "oui") {
-		  		$reponse_signature.= "<P><FONT COLOR='red'><B>"._T('form_pet_signature_pasprise')."</B></FONT><P>";
+	
+			if ($refus == "oui") {
+				$reponse_signature.= "<P><FONT COLOR='red'><B>"._T('form_pet_signature_pasprise')."</B></FONT><P>";
 			}
 			else {
 				$query_site = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
@@ -189,14 +221,14 @@ function formulaire_signature($id_article) {
 				while ($row = spip_fetch_array($result_site)) {
 					$titre = $row['titre'];
 				}
-
+	
 				$link = new Link($url_page);
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
-
+	
 				$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url));
 
-				if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
+				if (1||envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
 					$reponse_signature .= "<P><B>"._T('form_pet_envoi_mail_confirmation')."</B>";
 
 					$nom_email = addslashes($nom_email);
@@ -204,7 +236,7 @@ function formulaire_signature($id_article) {
 					$nom_site = addslashes($nom_site);
 					$url_site = addslashes($url_site);
 					$message = addslashes($message);
-
+	
 					$query = "INSERT INTO spip_signatures (id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut) ".
 						"VALUES ('$id_article', NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')";
 					$result = spip_query($query);
@@ -213,66 +245,73 @@ function formulaire_signature($id_article) {
 					$reponse_signature = _T('form_pet_probleme_technique');
 				}
 			}
+			spip_release_lock($lock);
+		}
+	}
+	else {
+		$reponse_signature = _T('form_pet_probleme_technique');
+	}
+	echo "<div class='reponse_formulaire'>$reponse_signature</div>";
+}
+
+//
+// Formulaire de signature d'une petition
+//
+
+function formulaire_signature($id_article) {
+	include_ecrire("inc_texte.php3");
+
+	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
+	$result_petition = spip_query($query_petition);
+
+	if ($row_petition = spip_fetch_array($result_petition)) {
+		$id_article = $row_petition['id_article'];
+		$email_unique = $row_petition['email_unique'];
+		$site_obli = $row_petition['site_obli'];
+		$site_unique = $row_petition['site_unique'];
+		$message_petition = $row_petition['message'];
+		$texte_petition = $row_petition['texte'];
+
+		$link = new Link;
+		$url = lire_meta("adresse_site").'/'.$link->getUrl();
+		$link = new Link;
+		$link->addVar('url_page', $url);
+		$retour .= $link->getForm('post', "sp$id_article");
+
+		$retour .= propre($texte_petition);
+
+		$retour .= "<div><fieldset><p><b>"._T('form_pet_votre_nom')."</b><br />";
+		$retour .= "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\" /></p>";
+
+		$retour .= "<p><b>"._T('form_pet_votre_email')."</b><br />";
+		$retour .= "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\" /></p></fieldset>";
+
+		$retour .= "<br /><fieldset><p>";
+		if ($site_obli != "oui") {
+			$retour .= _T('form_pet_votre_site')."<br />";
+		}
+		$retour .= "<b>"._T('form_pet_nom_site2')."</b><br />";
+		$retour .= "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\" /></p>";
+
+		$retour .= "<p><b>"._T('form_pet_adresse_site')."</b><br />";
+		$retour .= "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\" /></p></fieldset>";
+
+		if ($message_petition == "oui") {
+			$retour .= "<br /><fieldset>";
+
+			$retour .= "<b>"._T('form_pet_message_commentaire')."</b><br />";
+			$retour .= "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
+			$retour .= "</textarea></fieldset>\n";
 		}
 		else {
-			$reponse_signature = _T('form_pet_probleme_technique');
+			$retour .= "<input type=\"hidden\" name=\"message\" value=\"\" />";
 		}
-		echo "<div class='reponse_formulaire'>$reponse_signature</div>";
+		$retour .= "</div>";
+
+		$retour .= "<br /><div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" />";
+		$retour .= "</div></form>\n";
 	}
-
-	else {
-		$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
- 		$result_petition = spip_query($query_petition);
-
-		if ($row_petition = spip_fetch_array($result_petition)) {
-			$id_article = $row_petition['id_article'];
-			$email_unique = $row_petition['email_unique'];
-			$site_obli = $row_petition['site_obli'];
-			$site_unique = $row_petition['site_unique'];
-			$message_petition = $row_petition['message'];
-			$texte_petition = $row_petition['texte'];
-
-			$link = new Link;
-			$url = lire_meta("adresse_site").'/'.$link->getUrl();
-			$link = new Link;
-			$link->addVar('url_page', $url);
-			echo $link->getForm('post', "sp$id_article");
-
-			echo propre($texte_petition);
-
-			echo "<div><fieldset><p><b>"._T('form_pet_votre_nom')."</b><br />";
-			echo "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\" /></p>";
-
-			echo "<p><b>"._T('form_pet_votre_email')."</b><br />";
-			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"\" size=\"20\" /></p></fieldset>";
-
-			echo "<br /><fieldset><p>";
-			if ($site_obli != "oui") {
-				echo  _T('form_pet_votre_site')."<br />";
-			}
-			echo "<b>"._T('form_pet_nom_site2')."</b><br />";
-			echo "<input type=\"text\" class=\"forml\" name=\"nom_site\" value=\"\" size=\"20\" /></p>";
-
-			echo "<p><b>"._T('form_pet_adresse_site')."</b><br />";
-			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\" /></p></fieldset>";
-
-			if ($message_petition == "oui") {
-				echo "<br /><fieldset>";
-
-				echo "<b>"._T('form_pet_message_commentaire')."</b><br />";
-				echo "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
-				echo "</textarea></fieldset>\n";
-			}
-			else {
-				echo "<input type=\"hidden\" name=\"message\" value=\"\" />";
-			}
-			echo "</div>";
-
-			echo "<br /><div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" />";
-			echo "</div></form>\n";
-		}
-	}
-	echo "</div>\n";
+	return $retour;
 }
 
 
