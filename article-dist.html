@@ -182,9 +182,23 @@
 	[(#TEXTE|justifier)]
 
 
-<BOUCLE_portfolio(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{inclus=non}{doublons}>
+<center><table cellpadding=0 cellspacing=10>
+<B_portfolio>
+<tr width=100%>
+<BOUCLE_portfolio(DOCUMENTS){id_article}{extension==jpg|png|gif}{mode=document}{doublons}{0,3}>
+<td width=33% valign="top" align="center">
 [(#LOGO_DOCUMENT|#URL_DOCUMENT)]
+<font face="verdana,arial,helvetica,sans-serif" size=2>
+[<br><b>(#TITRE)</b>]
+[<br>(#DESCRIPTIF)]
+</font>
+</td>
 </BOUCLE_portfolio>
+	<BOUCLE_port_rec(BOUCLE_portfolio)></BOUCLE_port_rec>
+</tr>
+</B_portfolio>
+<table></center>
+
 
 	[<FONT SIZE=2><P>(#PS|justifier)</P></FONT>]
 	[<HR><FONT SIZE=2><P>(#NOTES)</P></FONT>]
@@ -204,7 +218,7 @@
 
 <center>Documents li&eacute;s</center>
 <TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{inclus=non}{doublons}>
+<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{mode=document}{doublons}>
 	<tr>
 	<td align='center'>
 	[(#LOGO_DOCUMENT|#URL_DOCUMENT)]
