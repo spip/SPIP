@@ -439,8 +439,10 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 					  ') . "\'';
 				}
 
-				if ($col == 'date')
+				if ($col == 'date') {
 					$col = $date_orig;
+					$col_table = '';
+				}
 				else if ($col == 'mois') {
 					$col = "MONTH($date_orig)";
 					$col_table = '';
