@@ -442,7 +442,7 @@ function maj_base() {
 	//
 	$version_installee = 0.0;
 	$result = spip_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
-	if ($result) if ($row = mysql_fetch_array($result)) $version_installee = (double) $row[0];
+	if ($result) if ($row = mysql_fetch_array($result)) $version_installee = (double) $row['valeur'];
 
 	//
 	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit d'une nouvelle installation
@@ -489,12 +489,12 @@ function maj_base() {
 		$result = spip_query($query);
 		while ($row = mysql_fetch_array($result)) {
 			unset($forums_article);
-			$id_article = $row[0];
+			$id_article = $row['id_article'];
 			$query2 = "SELECT id_forum FROM spip_forum WHERE id_article=$id_article";
 			for (;;) {
 				$result2 = spip_query($query2);
 				unset($forums);
-				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2[0];
+				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_article[] = $forums;
@@ -509,12 +509,12 @@ function maj_base() {
 		$result = spip_query($query);
 		while ($row = mysql_fetch_array($result)) {
 			unset($forums_breve);
-			$id_breve = $row[0];
+			$id_breve = $row['id_breve'];
 			$query2 = "SELECT id_forum FROM spip_forum WHERE id_breve=$id_breve";
 			for (;;) {
 				$result2 = spip_query($query2);
 				unset($forums);
-				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2[0];
+				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_breve[] = $forums;
@@ -529,12 +529,12 @@ function maj_base() {
 		$result = spip_query($query);
 		while ($row = mysql_fetch_array($result)) {
 			unset($forums_rubrique);
-			$id_rubrique = $row[0];
+			$id_rubrique = $row['id_rubrique'];
 			$query2 = "SELECT id_forum FROM spip_forum WHERE id_rubrique=$id_rubrique";
 			for (;;) {
 				$result2 = spip_query($query2);
 				unset($forums);
-				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2[0];
+				while ($row2 = mysql_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_rubrique[] = $forums;
@@ -616,8 +616,8 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_messages ADD INDEX id_auteur (id_auteur)");
 		$result = spip_query("SELECT id_auteur, id_message FROM spip_auteurs_messages WHERE statut='de'");
 		while ($row = mysql_fetch_array($result)) {
-			$id_auteur = $row[0];
-			$id_message = $row[1];
+			$id_auteur = $row['id_auteur'];
+			$id_message = $row['id_message'];
 			spip_query("UPDATE spip_messages SET id_auteur=$id_auteur WHERE id_message=$id_message");
 		}
 

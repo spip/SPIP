@@ -86,7 +86,7 @@ function decoder_hash_forum($email, $hash) {
 	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
 	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
-		if (verifier_action_auteur("forum public $email", $hash, $row[0])) {
+		if (verifier_action_auteur("forum public $email", $hash, $row['spip_auteur'])) {
 			$ok = true;
 			break;
 		}
@@ -190,12 +190,12 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 	
 	while($row = mysql_fetch_array($result_forum)) {
-		$titre=$row[6];
-		$texte=$row[7];
-		$auteur=$row[8];
-		$email_auteur=$row[9];
-		$nom_site_forum=$row[10];
-		$url_site=$row[11];
+		$titre=$row['titre'];
+		$texte=$row['texte'];
+		$auteur=$row['auteur'];
+		$email_auteur=$row['email_auteur'];
+		$nom_site_forum=$row['nom_site_forum'];
+		$url_site=$row['url_site'];
 	}
 				
 	
@@ -429,7 +429,7 @@ function ajout_forum() {
 		$result = spip_query($query);
 		unset($fichiers);
 		while ($row = mysql_fetch_array($result)) {
-			$fichier = $row[0];
+			$fichier = $row["fichier"];
 			@unlink("CACHE/$fichier");
 			$fichiers[] = $fichier;
 		}
@@ -501,7 +501,7 @@ function ajout_forum() {
 				while ($row = mysql_fetch_array($result)) {
 					if ($mdpass == $row['pass']) {
 						$ok = true;
-						poser_cookie_forum($email_forum_abo, $row[0]);
+						poser_cookie_forum($email_forum_abo, $row["id_auteur"]);
 						
 						$fich = $REQUEST_URI;
 						if ($p = strrpos($REQUEST_URI, '/')) $fich = substr($fich, $p + 1)."&id_message=$id_message";
@@ -570,7 +570,7 @@ function ajout_forum() {
 				$result = spip_query($query);
 
 				while ($row = mysql_fetch_array($result)) {
-					$email_auteur = trim($row[3]);
+					$email_auteur = trim($row["email"]);
 					if (strlen($email_auteur) < 3) continue;
 					envoyer_mail($email_auteur, $sujet, $courr);
 				}

@@ -55,27 +55,27 @@ function formulaire_signature($id_article) {
 		$result_sign = spip_query($query_sign);
 		if (mysql_num_rows($result_sign) > 0) {
 			while($row = mysql_fetch_array($result_sign)) {
-				$id_signature = $row[0];
-				$id_article = $row[1];
-				$date_time = $row[2];
-				$nom_email = $row[3];
-				$ad_email = $row[4];
-				$nom_site=$row[5];
-				$url_site=$row[6];
-				$message=$row[7];
-				$statut=$row[8];
+				$id_signature = $row['id_signature'];
+				$id_article = $row['id_article'];
+				$date_time = $row['date_time'];
+				$nom_email = $row['nom_email'];
+				$ad_email = $row['ad_email'];
+				$nom_site=$row['nom_site'];
+				$url_site=$row['url_site'];
+				$message=$row['message'];
+				$statut=$row['statut'];
 			}
 
 			$query_petition="SELECT * FROM spip_petitions WHERE id_article=$id_article";
 		 	$result_petition=spip_query($query_petition);
 
 			while($row=mysql_fetch_array($result_petition)) {
-				$id_article=$row[0];
-				$email_unique=$row[1];
-				$site_obli=$row[2];
-				$site_unique=$row[3];
-				$message_petition=$row[4];
-				$texte_petition=$row[5];
+				$id_article=$row['id_article'];
+				$email_unique=$row['email_unique'];
+				$site_obli=$row['site_obli'];
+				$site_unique=$row['site_unique'];
+				$message_petition=$row['message'];
+				$texte_petition=$row['texte'];
 			}
 
 			if ($email_unique=="oui") {
@@ -119,12 +119,12 @@ function formulaire_signature($id_article) {
 		 	$result_petition = spip_query($query_petition);
 
 			while($row = mysql_fetch_array($result_petition)) {
-				$id_article = $row[0];
-				$email_unique = $row[1];
-				$site_obli = $row[2];
-				$site_unique = $row[3];
-				$message_petition = $row[4];
-				$texte_petition = $row[5];
+				$id_article = $row['id_article'];
+				$email_unique = $row['email_unique'];
+				$site_obli = $row['site_obli'];
+				$site_unique = $row['site_unique'];
+				$message_petition = $row['message'];
+				$texte_petition = $row['texte'];
 			}
 			
 			if (strlen($nom_email) < 2) {
@@ -183,7 +183,7 @@ function formulaire_signature($id_article) {
 				$query_site = "SELECT titre FROM spip_articles WHERE id_article=$id_article";
 				$result_site = spip_query($query_site);
 				while($row = mysql_fetch_array($result_site)) {
-					$titre = $row[0];
+					$titre = $row['titre'];
 				}
 
 				$link = new Link($url_page);
@@ -228,12 +228,12 @@ function formulaire_signature($id_article) {
  		$result_petition = spip_query($query_petition);
 
 		if ($row_petition = mysql_fetch_array($result_petition)) {
-			$id_article = $row_petition[0];
-			$email_unique = $row_petition[1];
-			$site_obli = $row_petition[2];
-			$site_unique = $row_petition[3];
-			$message_petition = $row_petition[4];
-			$texte_petition = $row_petition[5];
+			$id_article = $row_petition['id_article'];
+			$email_unique = $row_petition['email_unique'];
+			$site_obli = $row_petition['site_obli'];
+			$site_unique = $row_petition['site_unique'];
+			$message_petition = $row_petition['message'];
+			$texte_petition = $row_petition['texte'];
 
 			$link = new Link;
 			$url = lire_meta("adresse_site").'/'.$link->getUrl();
@@ -294,8 +294,8 @@ function formulaire_inscription() {
 		
 		if (mysql_num_rows($result) > 0) {
 		 	while($row = mysql_fetch_array($result)) {
-				$id_auteur = $row[0];
-				$statut = $row[8];
+				$id_auteur = $row['id_auteur'];
+				$statut = $row['statut'];
 			}
 			if ($statut == '5poubelle') {
 				echo "Vous n'avez plus acc&egrave;s &agrave; ce site.";

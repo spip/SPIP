@@ -27,7 +27,7 @@ if ($etape6) {
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
 		$result = spip_query($query);
 		unset($id_auteur);
-		while ($row = mysql_fetch_array($result)) $id_auteur = $row[0];
+		while ($row = mysql_fetch_array($result)) $id_auteur = $row['id_auteur'];
 		
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);

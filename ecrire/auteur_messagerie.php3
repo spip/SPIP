@@ -23,8 +23,8 @@ function afficher_auteur_rubriques($leparent){
  	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
-		$my_rubrique=$row[0];
-		$titre=typo($row[2]);
+		$my_rubrique=$row['id_rubrique'];
+		$titre=typo($row['titre']);
 	
 		if (!ereg(",$my_rubrique,","$toutes_rubriques")){
 			$espace="";
@@ -56,15 +56,15 @@ $result = spip_query($query);
 
 
 if ($row = mysql_fetch_array($result)) {
-	$id_auteur=$row[0];
-	$nom=$row[1];
-	$bio=$row[2];
-	$email=$row[3];
-	$nom_site_auteur=$row[4];
-	$url_site=$row[5];
-	$login=$row[6];
-	$pass=$row[7];
-	$statut=$row[8];
+	$id_auteur=$row['id_auteur'];
+	$nom=$row['nom'];
+	$bio=$row['bio'];
+	$email=$row['email'];
+	$nom_site_auteur=$row['nom_site'];
+	$url_site=$row['url_site'];
+	$login=$row['login'];
+	$pass=$row['pass'];
+	$statut=$row['statut'];
 	$pgp=$row["pgp"];
 	$messagerie=$row["messagerie"];
 	$imessage=$row["imessage"];

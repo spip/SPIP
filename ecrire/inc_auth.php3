@@ -115,15 +115,15 @@ function auth() {
 	}
 	
 	if ($row = mysql_fetch_array($result)) {
-		$connect_id_auteur = $row[0];
-		$connect_nom = $row[1];
-		$connect_bio = $row[2];
-		$connect_email = $row[3];
-		$connect_nom_site = $row[4];
-		$connect_url_site = $row[5];
-		$connect_login = $row[6];
-		$connect_pass = $row[7];
-		$connect_statut = $row[8];
+		$connect_id_auteur = $row['id_auteur'];
+		$connect_nom = $row['nom'];
+		$connect_bio = $row['bio'];
+		$connect_email = $row['email'];
+		$connect_nom_site = $row['nom_site'];
+		$connect_url_site = $row['url_site'];
+		$connect_login = $row['login'];
+		$connect_pass = $row['pass'];
+		$connect_statut = $row['statut'];
 		$connect_activer_messagerie = $row["messagerie"];
 		$connect_activer_imessage = $row["imessage"];
 	
@@ -156,7 +156,7 @@ function auth() {
 				for (;;) {
 					$r = '';
 					while ($row_admin = mysql_fetch_array($result_admin)) {
-						$id_rubrique = $row_admin[0];
+						$id_rubrique = $row_admin['id_rubrique'];
 						$r[] = $id_rubrique;
 						$connect_id_rubrique[$id_rubrique] = $id_rubrique;
 					}

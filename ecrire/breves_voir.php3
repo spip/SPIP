@@ -84,15 +84,15 @@ $query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 $result = spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {
-	$id_breve=$row[0];
-	$date_heure=$row[1];
-	$titre_breve=$row[2];
-	$titre=$row[2];
-	$texte=$row[3];
-	$lien_titre=$row[4];
-	$lien_url=$row[5];
-	$statut=$row[6];
-	$id_rubrique=$row[7];
+	$id_breve=$row['id_breve'];
+	$date_heure=$row['date_heure'];
+	$titre_breve=$row['titre'];
+	$titre=$row['titre'];
+	$texte=$row['texte'];
+	$lien_titre=$row['lien_titre'];
+	$lien_url=$row['lien_url'];
+	$statut=$row['statut'];
+	$id_rubrique=$row['id_rubrique'];
 }
 
 $flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
@@ -180,8 +180,8 @@ function enfant($leparent){
  	$result=spip_query($query);
 
 	while($row=mysql_fetch_array($result)){
-		$my_rubrique=$row[0];
-		$titre=$row[2];
+		$my_rubrique=$row['id_rubrique'];
+		$titre=$row['titre'];
 		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$titre\n";
 	}
 	$i=$i-1;

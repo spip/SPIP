@@ -103,7 +103,7 @@ $query_message = "SELECT * FROM spip_messages WHERE id_message=$id_message";
 $result_message = spip_query($query_message);
 
 while($row = mysql_fetch_array($result_message)) {
-	$id_message = $row[0];
+	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];
 	$titre = typo($row["titre"]);
 	$texte = propre($row["texte"]);
@@ -229,8 +229,8 @@ while($row = mysql_fetch_array($result_message)) {
 			unset($table_auteurs);
 			unset($table_ids);
 			while ($row = mysql_fetch_array($result)) {
-				$table_auteurs[] = $row[1];
-				$table_ids[] = $row[0];
+				$table_auteurs[] = $row['nom'];
+				$table_ids[] = $row['id_auteur'];
 			}
 			$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 			debut_boite_info();
@@ -397,10 +397,10 @@ while($row = mysql_fetch_array($result_message)) {
 						$group2 = false;
 				
 						while($row=mysql_fetch_array($result_ajout_auteurs)) {
-							$id_auteur = $row[0];
-							$nom = $row[1];
-							$email = $row[3];
-							$statut_auteur = $row[8];
+							$id_auteur = $row['id_auteur'];
+							$nom = $row['nom'];
+							$email = $row['email'];
+							$statut_auteur = $row['statut'];
 				
 							$statut_auteur=ereg_replace("0minirezo", "Administrateur", $statut_auteur);
 							$statut_auteur=ereg_replace("1comite", "R&eacute;dacteur", $statut_auteur);

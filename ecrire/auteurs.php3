@@ -60,11 +60,11 @@ function calculer_auteurs($result) {
 		
 	while ($row = mysql_fetch_array($result)) {
 		$nombre_auteurs++;
-		$id_auteur = $row[0];
-		$k_nom[$id_auteur] = ucfirst(trim($row[1]));
-		$k_email[$id_auteur] = $row[3];
-		$k_url_site[$id_auteur] = $row[5];
-		$k_statut[$id_auteur] = $row[8];
+		$id_auteur = $row["id_auteur"];
+		$k_nom[$id_auteur] = ucfirst(trim($row["nom"]));
+		$k_email[$id_auteur] = $row["email"];
+		$k_url_site[$id_auteur] = $row["url_site"];
+		$k_statut[$id_auteur] = $row["statut"];
 		$k_nombre_articles[$id_auteur]=$row["compteur"];
 		if (($row["messagerie"] == "non") OR ($row['login'] == ''))
 			$k_messagerie[$id_auteur]= "non";
