@@ -1320,6 +1320,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
 			hide_obj("bandeaudocuments");
 			hide_obj("bandeauredacteurs");
+			hide_obj("bandeauauteurs");
 			<?php if (lire_meta("activer_statistiques") != 'non') { ?> hide_obj("bandeausuivi"); <?php } ?>
 			hide_obj("bandeauadministration"); 
 		<?php } ?>
@@ -1341,6 +1342,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
 			decalerCouche('bandeaudocuments');
 			decalerCouche('bandeauredacteurs');
+			decalerCouche('bandeauauteurs');
 			<?php if (lire_meta("activer_statistiques") != 'non') ?> decalerCouche('bandeausuivi');
 			decalerCouche('bandeauadministration');
 		<?php } ?>
@@ -2096,7 +2098,14 @@ else {
 	
 	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_discussions'));
 	
+	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
+		echo "<div class='$class' id='bandeauauteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "xxx", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "redacteurs-24.gif", "xxx", $sous_rubrique);
 	
+		echo "</tr></table></div></div>";
+	}	
+
 	
 	
 	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_auteurs'));
@@ -2180,10 +2189,11 @@ else {
 		echo "<a href='synchro.php3' class='icone26' onMouseOver=\"changestyle('bandeausynchro','visibility','visible');\"><img src='img_pack/cal-suivi.gif' alt='' width='26' height='20' border='0'></a>";
 		
 
-
-		echo "<img src='img_pack/rien.gif' width='10' />";
-		echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\"><img src='img_pack/fiche-perso.gif' border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\">";
-		echo "</a>";
+		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
+			echo "<img src='img_pack/rien.gif' width='10' />";
+			echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\"><img src='img_pack/fiche-perso.gif' border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\">";
+			echo "</a>";
+		}
 		
 	echo "</td>";
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
