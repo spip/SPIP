@@ -316,7 +316,7 @@ function afficher_sites($titre_table, $requete) {
 }
 
 
-function afficher_syndic_articles($titre_table, $requete) {
+function afficher_syndic_articles($titre_table, $requete, $afficher_site = false) {
 	global $couleur_claire;
 	global $connect_statut;
 	global $REQUEST_URI;
@@ -358,7 +358,7 @@ function afficher_syndic_articles($titre_table, $requete) {
 			bandeau_titre_boite($titre_table, false);
 
 			if ($num_rows > $nombre_aff) {
-				echo "<tr><td background='' class='arial2' colspan=3>";
+				echo "<tr><td background='' class='arial2' colspan=4>";
 				for ($i = 0; $i < $num_rows; $i = $i + $nombre_aff){
 					$deb = $i + 1;
 					$fin = $i + $nombre_aff;
@@ -376,6 +376,7 @@ function afficher_syndic_articles($titre_table, $requete) {
 			$premier = true;
 			
 			$compteur_liste = 0;
+
 			while ($row = mysql_fetch_array($result)) {
 				if ($compteur_liste >= $debut_liste_sites[$n_liste_sites] AND $compteur_liste < $debut_liste_sites[$n_liste_sites] + $nombre_aff) {
 					$ifond = $ifond ^ 1;
@@ -389,7 +390,7 @@ function afficher_syndic_articles($titre_table, $requete) {
 					$lesauteurs=propre($row["lesauteurs"]);
 					$statut=$row["statut"];
 					$descriptif=$row["descriptif"];
-					
+
 					echo "<tr bgcolor='$couleur'>";
 					
 					echo "<td class='arial1'>";
@@ -422,6 +423,18 @@ function afficher_syndic_articles($titre_table, $requete) {
 					
 					echo "</td>";
 					
+					// $my_sites cache les resultats des requetes sur les sites
+					if ($afficher_site) {
+						if (!$my_sites[$id_syndic])
+							$my_sites[$id_syndic] = mysql_fetch_array(spip_query(
+								"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
+						echo "<td class='arial1' align='left'>";
+						if ($my_sites[$id_syndic]['moderation'] == 'oui') echo "<i>";
+						echo $my_sites[$id_syndic]['nom_site'];
+						if ($my_sites[$id_syndic]['moderation'] == 'oui') echo "</i>";
+						echo "</td>";
+					} else echo "<td></td>";
+
 					echo "<td class='arial1' align='right'>";
 					
 					if ($connect_statut == '0minirezo'){
