@@ -291,12 +291,12 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	//
 	// Creer une vignette automatiquement
 	//
-	$creer_preview=lire_meta("creer_preview");
-	$taille_preview=lire_meta("taille_preview");
+	$creer_preview = lire_meta("creer_preview");
+	$taille_preview = lire_meta("taille_preview");
 	$gd_formats = lire_meta("gd_formats");
+
 	$format_img = strtolower(substr($dest_path, strrpos($dest_path,".")+1, strlen($dest_path)));
 	if ($format_img == "jpeg") $format_img == "jpg";
-
 	if ($taille_preview < 10) $taille_preview = 120;
 
 	if ($mode == 'document' AND $format_img AND ereg($format_img, $gd_formats) AND $creer_preview == 'oui') {
