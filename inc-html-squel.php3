@@ -151,8 +151,9 @@ function parser_champs_interieurs($texte, $sep, $result) {
 }
 
 
-function parser_param($params, &$result, $idb) {
+function parser_param($params, &$result) {
 	$params2 = Array();
+	$type = $result->type_requete;
 	$i = 1;
 	while (ereg('^[[:space:]]*\{[[:space:]]*([^ }])([^"}]*)(["}])(.*)$', $params, $args)) {
 		if ($args[3] == "}") {
@@ -165,8 +166,11 @@ function parser_param($params, &$result, $idb) {
 			else if ($param == 'plat') {
 				$result->plat = true;
 			}
-			else
-				$params2[] = $param;
+// Boucle hierarchie, supprimer le critere id_article/id_rubrique/id_syndic
+// qui est superfetatoire (mais indique dans la doc)
+			else  if (($type != 'hierarchie') ||
+				  (!ereg('^id_(article|syndic|rubrique)$', $param))) {
+				 $params2[] = ($param == 'unique' ? 'doublons' : $param); }
 		}
 		else {
 			if ($args[1] == '"') {
@@ -192,7 +196,9 @@ function parser_param($params, &$result, $idb) {
 
 	if ($params) {
 		include_local("inc-admin.php3");
-		erreur_squelette(_L("Param&egrave;tre $i (ou suivants) incorrect"), $params);
+		erreur_squelette(($result->id_boucle .
+				  _L(": Param&egrave;tre $i (ou suivants) incorrect")),
+				 $params);
 	}
 
 	$result->param = $params2;
@@ -234,7 +240,6 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		  {
 		    $result->sql_serveur = substr($type,0,$p);
 		    $type = substr($type,$p+1);
-		    spip_log($type);
 		  }
 		$type = strtolower($type);
 		if ($type == 'sites') $type = 'syndication'; # alias
@@ -247,7 +252,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 			$result->param = substr($match[2], 6);
 		} else {
 			$result->type_requete = $type;
-			parser_param($match[3], $result, $id_boucle);
+			parser_param($match[3], $result);
 		}
 
 		//

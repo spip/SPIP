@@ -1,82 +1,12 @@
 <?php
 
-// Definition des classes Boucle, Texte, Inclure, Champ
-// et fonctions de recherche et de reservation
+
+// cfonctions de recherche et de reservation
 // dans l'arborescence des boucles
 
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_COMPILO_INDEX")) return;
 define("_INC_COMPILO_INDEX", "1");
-
-
-class Texte {
-	var $type = 'texte';
-	var $texte;
-}
-
-class Inclure {
-	var $type = 'include';
-	var $fichier;
-	var $params;
-}
-
-//
-// encodage d'une boucle SPIP en un objet PHP
-//
-class Boucle {
-	var $type = 'boucle';
-	var $id_boucle, $id_parent;
-	var $cond_avant, $milieu, $cond_apres, $cond_altern;
-	var $lang_select;
-	var $type_requete;
-	var $sql_serveur;
-	var $param;
-	var $separateur;
-	var $doublons;
-	var $partie, $total_parties,$mode_partie;
-	var $externe = ''; # appel a partir d'une autre boucle (recursion)
-	// champs pour la construction de la requete SQL
-	var $tout = false;
-	var $plat = false;
-	var $select;
-	var $from;
-	var $where;
-	var $limit;
-	var $group = '';
-	var $order = '';
-	var $date = 'date' ;
-	var $hash = false ;
-	var $lien = false;
-	var $sous_requete = false;
-	var $compte_requete = 1;
-	var $hierarchie = '';
-	// champs pour la construction du corps PHP
-	var $return;
-	var $numrows = false; 
-}
-
-class Champ {
-	var $type = 'champ';
-	var $nom_champ;
-	var $nom_boucle= false; // seulement si boucle explicite
-	var $cond_avant, $cond_apres; // tableaux d'objets
-	var $fonctions;  // filtre explicites
-	var $etoile;
-	// champs pour la production de code
-	var $id_boucle;
-	var $boucles;
-	var $type_requete;
-	var $code;	// code du calcul
-	var $statut;	// 'numerique, 'h'=texte (html) ou 'p'=script (php) ?
-			// -> definira les pre et post-traitements obligatoires
-	// champs pour la production de code dependant du contexte
-	var $id_mere;    // pour TOTAL_BOUCLE hors du corps
-	var $document;   // pour embed et <img dans les textes
-}
-
-global $tables_des_serveurs_sql, $tables_principales;
-
-$tables_des_serveurs_sql = array('localhost' => &$tables_principales);
 
 // index_pile retourne la position dans la pile du champ SQL $nom_champ 
 // en prenant la boucle la plus proche du sommet de pile (indique par $idb).
@@ -91,17 +21,19 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 	$i = 0;
 	
-	if ($explicite != '') {
+	if ($explicite !== false) {
 	// Recherche d'un champ dans un etage superieur
-		while (($idb != $explicite) && $idb) {
+	  while (($idb != $explicite) && ($idb !='')) {
+		spip_log("Cherchexpl: $nom_champ '$idb' '$i'");
 			$i++;
 			$idb = $boucles[$idb]->id_parent;
 		}
 	}
 
 	$c = strtolower($nom_champ);
-	// attention a la boucle nommee 0 ....
-	while ($idb!== '') {
+	// attention: entre la boucle nommee 0, "" et le tableau vide,
+	// il y a incohérences qu'il vaut mieux éviter
+	while ($boucles[$idb]) {
 #		spip_log("Cherche: $nom_champ '$idb' '$c'");
 		$r = $boucles[$idb]->type_requete;
 		$s = $boucles[$idb]->sql_serveur;
@@ -160,7 +92,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 // cette fonction sert d'API pour demander le champ '$champ' dans la pile
 function champ_sql($champ, $p) {
-	return index_pile($p->id_boucle, $champ, $p->boucles);
+	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle);
 }
 
 # calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
@@ -282,8 +214,8 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	// recursif ?
 	if ($boucles[$idb]->externe)
 		index_pile ($idb, $nom_champ, $boucles); // reserver chez soi-meme
-
 	// reserver chez le parent et renvoyer l'habituel $Pile[$SP]['nom_champ']
+	spip_log("boucles[$idb]->id_parent " . $boucles[$idb]->id_parent);
 	return index_pile ($boucles[$idb]->id_parent, $nom_champ, $boucles);
 }
 

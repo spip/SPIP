@@ -14,10 +14,12 @@ if (!strpos($url,'cookie_killed='))
 	   'cookie_killed=oui');
     exit;
     } 
-include("ecrire/inc_serialbase.php3");
-include("inc-compilo-index.php3");
-include("inc-balises.php3");
+
+include("inc-compilo-api.php3");
 include("inc-boucles.php3");
+include("inc-balises.php3");
+include("ecrire/inc_serialbase.php3");
+
 
 # décommenter au besoin, mais faire attention au double chargement.
 #if (file_exists("mes_fonctions.php3")) include("mes_fonctions.php3");
