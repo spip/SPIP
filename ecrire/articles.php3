@@ -231,7 +231,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		if ($langue_choisie_old != "oui") {
 			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_new = $row['lang'];
-			spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
+			if ($langue_new != $langue_old) spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
 		}
 	}
 
