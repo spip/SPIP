@@ -59,8 +59,6 @@ function aide ($aide) {
 
 
 
-
-
 //
 // affiche un bouton imessage
 //
@@ -163,7 +161,6 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 }
 
 
-
 //
 // Fonctions d'affichage
 //
@@ -260,7 +257,6 @@ function afficher_tranches_requete(&$query, $colspan) {
 //
 // Afficher tableau d'articles
 //
-
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $toujours_afficher = false) {
 	global $connect_id_auteur;
 
