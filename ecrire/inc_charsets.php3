@@ -482,12 +482,17 @@ function utf_8_to_unicode($source) {
 
 // UTF-32 : utilise en interne car plus rapide qu'UTF-8
 function utf_32_to_unicode($source) {
-	$words = unpack("V*", $source);
-	if (is_array($words)) {
-		reset($words);
-		while (list(, $word) = each($words)) {
-			if ($word < 128) $texte .= chr($word);
-			else if ($word != 65279) $texte .= '&#'.$word.';';
+	$texte = "";
+	// Plusieurs iterations pour eviter l'explosion memoire
+	while ($source) {
+		$words = unpack("V*", substr($source, 0, 1024));
+		$source = substr($source, 1024);
+		if (is_array($words)) {
+			reset($words);
+			while (list(, $word) = each($words)) {
+				if ($word < 128) $texte .= chr($word);
+				else if ($word != 65279) $texte .= '&#'.$word.';';
+			}
 		}
 	}
 	return $texte;
