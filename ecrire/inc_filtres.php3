@@ -588,7 +588,10 @@ function affdate_base($numdate, $vue) {
 
 	case 'entier':
 		if ($avjc) return $annee;
-		return _T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee));
+		if ($jour)
+			return _T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee));
+		else
+			return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 
 	case 'nom_mois':
 		return $nommois;
