@@ -239,7 +239,6 @@ function init_champs_squel() {
 		'ID_DOCUMENT' => 'id_document',
 		'ID_VIGNETTE' => 'id_vignette',
 		'ID_TYPE' => 'id_type',
-		'ID_ARTICLE' => 'id_article',
 		'TITRE' => 'titre',
 		'DESCRIPTIF' => 'descriptif',
 		'DATE' => 'date',
