@@ -91,7 +91,7 @@ function extrait_article($row) {
 
 	$extrait = "** $titre **\n";
 	if ($les_auteurs) $extrait .= "par $les_auteurs ";
-	if ($statut == 'publie') $extrait .= "le ".nom_jour($date)." ".affdate($date);
+	if ($statut == 'publie') $extrait .= "le ".nom_jour($date)." ".affdate($date, 'CORRIGER_ENTITES');
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') $extrait .= "-> ".$adresse_site."/spip_redirect.php3?id_article=$id_article\n\n";
 	return $extrait;
@@ -189,7 +189,7 @@ function envoyer_mail_nouveautes() {
 
 	 	while($row = mysql_fetch_array($result)) {
 			$id_breve = $row['id_breve'];
-			$date_heure = nom_jour($row['date_heure'])." ".affdate($row['date_heure']);
+			$date_heure = nom_jour($row['date_heure'])." ".affdate($row['date_heure'], 'CORRIGER_ENTITES');
 			$breve_titre = $row['titre'];
 			$breve_texte = $row['texte'];
 
