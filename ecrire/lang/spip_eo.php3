@@ -20,7 +20,7 @@ $GLOBALS['i18n_spip_eo'] = array(
 'admin_modifier_rubrique' => 'Modifu tiun &#265;i rubrikon',
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'aide_non_disponible' => 'Tiu parto de la konektita helpilo ankora&#365; ne estas disponebla en tiu lingvo.',
-'alerte_maj_impossible' => '<NEW> <b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de permissions.',
+'alerte_maj_impossible' => '<NEW> <b>Alerte&nbsp;!</b> La mise &agrave; jour de la base MySQL vers la version @version@ est impossible, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
 'avis_acces_interdit' => 'Malpermesita aliro.',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne estas valida',
@@ -74,6 +74,21 @@ $GLOBALS['i18n_spip_eo'] = array(
 
 
 // B
+'barre_a_accent_grave' => '<NEW> Ins&eacute;rer un A accent grave majuscule',
+'barre_aide' => '<NEW> Utilisez les raccourcis typographiques pour enrichir votre mise en page',
+'barre_aide_rac' => '<NEW> En savoir plus sur les raccourcis typographiques',
+'barre_e_accent_aigu' => '<NEW> Ins&eacute;rer un E accent aigu majuscule',
+'barre_eo' => '<NEW> Ins&eacute;rer un E dans l\'O',
+'barre_eo_maj' => '<NEW> Ins&eacute;rer un Edans l\'O majuscule',
+'barre_gras' => '<NEW> Mettre en {{gras}}',
+'barre_guillemets' => '<NEW> Entourer de &laquo; guillemets fran&ccedil;ais &raquo;',
+'barre_guillemets_simples' => '<NEW> Entourer de &ldquo;guillemets&rdquo;',
+'barre_intertitre' => '<NEW> Transformer en {{{intertitre}}}',
+'barre_italic' => '<NEW> Mettre en {italique}',
+'barre_lien' => '<NEW> Transformer en [lien hypertexte->http://...]',
+'barre_lien_input' => '<NEW> Veuillez indiquer l\'adresse de votre lien (vous pouvez indiquer une adresse Web sous la forme http://www.monsite/com ou simplement indiquer le num&eacute;ro d\'un article de ce site.',
+'barre_note' => '<NEW> Transformer en [[Note de bas de page]]',
+'barre_quote' => '<NEW> <quote>Citer un message</quote>',
 'bouton_acces_ldap' => 'Aldoni aliron al LDAP >>',
 'bouton_ajouter' => 'Aldoni',
 'bouton_ajouter_document' => 'ALDONI DOKUMENTON',
@@ -620,7 +635,7 @@ Dankon pro via partopreno
 'info_la_rubrique' => 'la rubriko',
 'info_laisser_champs_vides' => 'lasi tiujn kampojn malplenaj)',
 'info_langue_defaut' => 'Defa&#365;lta lingvo:',
-'info_langue_interface' => '<NEW> Langue de l\'interface',
+'info_langue_interface' => 'Lingvo de la interfaco',
 'info_langue_principale' => '&#264;efa lingvo de la teksejo',
 'info_langues' => 'Lingvoj de la teksejo',
 'info_langues_proposees' => 'Proponitaj lingvoj:',
@@ -666,7 +681,6 @@ Dankon pro via partopreno
 'info_moyenne' => 'meznombro:',
 'info_multi_articles' => '<NEW> Activer le menu de langue sur les articles&nbsp;?',
 'info_multi_cet_article' => '<NEW> Langue de cet article&nbsp;:',
-'info_multi_cette_rubrique' => '<NEW> Langue utilis&eacute;e dans cette rubrique&nbsp;:',
 'info_multi_herit' => '<NEW> Langue par d&eacute;faut',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
@@ -1049,10 +1063,10 @@ Dankon pro via partopreno
 'login_login2' => 'Salutnomo (identigilo por konekti al la teksejo)&nbsp;:',
 'login_login_pass_incorrect' => '(Salutnomo a&#365; pasvorto mal&#285;usta.)',
 'login_motpasseoublie' => '&#265;u vi forgesis la pasvorton?',
-'login_non_securise' => '<MODIF> Atentu, tiu formularo ne estas sekurigita;.
-			Se vi ne volas ke via pasvorto estu fra&#365;de
-			interkaptita en la teksa&#309;o, bonvolu aktivigi
-			Javascript-on en via krozilo',
+'login_non_securise' => 'Atentu, tiu formularo ne estas sekurigita;.
+   Se vi ne volas ke via pasvorto estu fra&#365;de
+   interkaptita en la reto, bonvolu aktivigi
+   Javascript-on en via krozilo',
 'login_nouvelle_tentative' => 'Nova provo',
 'login_par_ici' => 'Vi estas registrita... &#265;i tie...',
 'login_pass2' => 'Pasvorto&nbsp;:',
@@ -1150,13 +1164,11 @@ Dankon pro via partopreno
 'onglet_affacer_base' => 'Forigi la bazon',
 'onglet_auteur' => 'La a&#365;toro',
 'onglet_contenu_site' => 'Enhavo de la retpa&#285;o',
-'onglet_evolution_visite' => 'Evoluo de la vizitoj',
 'onglet_evolution_visite_mod' => '<NEW> &Eacute;volution',
 'onglet_fonctions_avances' => 'Pli detalaj funkcioj',
 'onglet_informations_personnelles' => 'Personaj informoj',
 'onglet_interactivite' => 'Interagado',
-'onglet_langue' => 'Lingvoj de la teksejo',
-'onglet_langues' => '<NEW> Langues',
+'onglet_langues' => 'Lingvoj',
 'onglet_messagerie' => 'Po&#349;to',
 'onglet_messages_internes' => 'Internaj mesa&#285;oj',
 'onglet_messages_publics' => 'Publikaj mesa&#285;oj',
