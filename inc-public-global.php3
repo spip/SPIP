@@ -9,7 +9,6 @@ define("_INC_PUBLIC_GLOBAL", "1");
 //
 function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $inclusion=false) {
 	global $lastmodified;
-
 	if (!$use_cache) {
 		include_local('inc-calcul.php3');
 
