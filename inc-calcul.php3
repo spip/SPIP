@@ -6,6 +6,10 @@ if (defined("_INC_CALCUL")) return;
 define("_INC_CALCUL", "1");
 
 
+if (file_exists("mes_fonctions.php3")) {
+	include_local ("mes_fonctions.php3");
+}
+
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
@@ -22,10 +26,6 @@ else {
 	include_local ("inc-urls-dist.php3");
 }
 
-
-if (file_exists("mes_fonctions.php3")) {
-	include ("mes_fonctions.php3");
-}
 
 
 function transformer_lien_logo($contexte, $lien) {
