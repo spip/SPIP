@@ -10,11 +10,14 @@ define("_ECRIRE_INC_CHARSETS", "1");
 	iso-8859-1 ; utf-8 ;
 	windows-1251  = CP1251 ;
 */
-function load_charset ($charset = 'AUTO') {
+function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 	if (is_array($GLOBALS['CHARSET'][$charset]))
 		return $charset;
+
+	if ($langue_site == 'AUTO')
+		$langue_site = lire_meta('langue_site');
 
 	switch($charset) {
 		case 'utf-8':
@@ -171,6 +174,33 @@ function load_charset ($charset = 'AUTO') {
 			1096=>'sh', 1097=>'sch',  1098=>'"', 1099=>'y', 1100=>'\'', 1101=>'`e',
 			1102=>'yu', 1103=>'ya'
 			);
+
+			// translitteration specifique du vietnamien
+			// (necessaire pour le moteur de recherche car les mots sont tous tres courts)
+			if ($langue_site == 'vi') {
+				$translit_vi = array (225=>"a'", 224=>"a`",7843=>"a?",227=>"a~",7841=>"a.",
+				226=>"a^",7845=>"a^'",7847=>"a^`",7849=>"a^?",7851=>"a^~",7853=>"a^.",259=>"a(",
+				7855=>"a('",7857=>"a(`",7859=>"a(?",7861=>"a(~",7863=>"a(.",193=>"A'",192=>"A`",
+				7842=>"A?",195=>"A~",7840=>"A.",194=>"A^",7844=>"A^'",7846=>"A^`",7848=>"A^?",
+				7850=>"A^~",7852=>"A^.",258=>"A(",7854=>"A('",7856=>"A(`",7858=>"A(?",7860=>"A(~",
+				7862=>"A(.",233=>"e'",232=>"e`",7867=>"e?",7869=>"e~",7865=>"e.",234=>"e^",
+				7871=>"e^'",7873=>"e^`",7875=>"e^?",7877=>"e^~",7879=>"e^.",201=>"E'",200=>"E`",
+				7866=>"E?",7868=>"E~",7864=>"E.",202=>"E^",7870=>"E^'",7872=>"E^`",7874=>"E^?",
+				7876=>"E^~",7878=>"E^.",237=>"i'",236=>"i`",7881=>"i?",297=>"i~",7883=>"i.",
+				205=>"I'",204=>"I`",7880=>"I?",296=>"I~",7882=>"I.",243=>"o'",242=>"o`",
+				7887=>"o?",245=>"o~",7885=>"o.",244=>"o^",7889=>"o^'",7891=>"o^`",7893=>"o^?",
+				7895=>"o^~",7897=>"o^.",417=>"o+",7899=>"o+'",7901=>"o+`",7903=>"o+?",7905=>"o+~",
+				7907=>"o+.",211=>"O'",210=>"O`",7886=>"O?",213=>"O~",7884=>"O.",212=>"O^",
+				7888=>"O^'",7890=>"O^`",7892=>"O^?",7894=>"O^~",7896=>"O^.",416=>"O+",7898=>"O+'",
+				7900=>"O+`",7902=>"O+?",7904=>"O+~",7906=>"O+.",250=>"u'",249=>"u`",7911=>"u?",
+				361=>"u~",7909=>"u.",432=>"u+",7913=>"u+'",7915=>"u+`",7917=>"u+?",7919=>"u+~",
+				7921=>"u+.",218=>"U'",217=>"U`",7910=>"U?",360=>"U~",7908=>"U.",431=>"U+",
+				7912=>"U+'",7914=>"U+`",7916=>"U+?",7918=>"U+~",7920=>"U+.",253=>"y'",7923=>"y`",
+				7927=>"y?",7929=>"y~",7925=>"y.",221=>"Y'",7922=>"Y`",7926=>"Y?",7928=>"Y~",
+				7924=>"Y.",273=>"d-",208=>"D-");
+				while (list($u,$t) = each($translit_vi))
+					$GLOBALS['CHARSET'][$charset][$u] = $t;
+			}
 			return $charset;
 
 		default:
@@ -378,16 +408,16 @@ function translitteration ($texte, $charset='AUTO') {
 	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$j = $regs[0]]) {
 		$vu[$j] = true;
 		if ($s = $GLOBALS['CHARSET'][$trans][$regs[1]])
-			$texte = ereg_replace($j, $s, $texte);
+			$texte = str_replace($j, $s, $texte);
 		// on va tenter de trouver la translitteration ailleurs
 		// - dans iconv par exemple
 		else if ($GLOBALS['flag_iconv'] AND ($iconv = @iconv('UTF-8', 'ASCII//TRANSLIT', unicode_to_utf_8($j))) AND !ereg('^\?+$',$iconv)) {
 			$GLOBALS['CHARSET']['translit'][$regs[1]] = $iconv;
-			$texte = ereg_replace($j, $iconv, $texte);
+			$texte = str_replace($j, $iconv, $texte);
 			spip_debug("translitteration $j => '$iconv'");
 		} // supprimer les caracteres inconnus
 		else
-			$texte = ereg_replace($j, '.', $texte);
+			$texte = str_replace($j, '.', $texte);
 	}
 	return $texte;
 }

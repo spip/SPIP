@@ -5,15 +5,21 @@
 if (defined("_ECRIRE_INC_INDEX")) return;
 define("_ECRIRE_INC_INDEX", "1");
 
-function nettoyer_chaine_indexation($texte) {
-	include_ecrire("inc_charsets.php3");
-	return eregi_replace("[^A-Z0-9_-]","",strtolower(translitteration($texte)));
-}
 
-// Merci a Herve Lefebvre pour son apport sur cette fonction
-function separateurs_indexation() {
-	return "].,`:*'\"?!\r\n\t\\/\~(){}[|@<>$%".
-		chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
+function separateurs_indexation($requete=false) {
+	// Merci a Herve Lefebvre pour son apport sur cette fonction
+	$liste = "],:*\"!\r\n\t\\/){}[|@<>$%";
+
+	// en vietnamien ne pas eliminer les accents de translitteration
+	if (! (lire_meta('langue_site') == 'vi' AND $requete))
+		$liste .= "'`?\~.^+(-";
+
+	// windowzeries iso-8859-1
+	$charset = lire_meta('charset');
+	if ($charset == 'iso-8859-1')
+		$liste .= chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
+
+	return $liste;
 }
 
 function spip_split($reg, $texte) {
@@ -26,7 +32,6 @@ function spip_split($reg, $texte) {
 
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
-	global $indexer_ogm;
 
 	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';	// supprimer_tags()
 	$regs = separateurs_indexation();
@@ -36,7 +41,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	while (list(, $mot) = each($table)) {
 		if ($mot2 = nettoyer_chaine_indexation($mot)) {
 			if ((strlen($mot2) > $min_long)
-			|| ($indexer_ogm && ereg("[A-Z][A-Z][A-Z]",$mot) && $mot2=strtolower($mot).'_'))
+			|| (ereg("[A-Z][A-Z][A-Z]",$mot) && $mot2=strtolower($mot).'_')) // indexer les mots comme 'OGM', 'CGI'...
 			{
 				$h = substr(md5($mot2), 0, 16);
 				$index[$h] += $val;
@@ -277,18 +282,56 @@ function requete_txt_integral($objet, $hash_recherche) {
 		LIMIT 0,10";
 }
 
+function nettoyer_chaine_indexation($texte) {
+	include_ecrire("inc_charsets.php3");
+	$texte = strtolower(translitteration($texte));
+
+	if (lire_meta('langue_site') == 'vi')
+		$texte = strtr($texte, "'`?~.^+(-","123456789");
+
+	return eregi_replace("[^A-Z0-9_-]","",$texte);
+}
+
+// rechercher un mot dans le dico
+function requete_dico ($val) {
+	$min_long = 3;
+
+	// cas particulier translitteration vietnamien
+	if (lire_meta('langue_site') == 'vi') {
+		// 1. recuperer des accents passes sous la forme a`
+		$val = strtr($val, "'`?~.^+(-","123456789");
+		// 2. translitterer les accents passes en unicode
+		$val = nettoyer_chaine_indexation($val);
+		// 3. composer la regexp pour les caracteres accentuables mais non accentues
+		while (ereg("([aeiouyd])([a-z])", $val.' ', $match))
+			$val = str_replace ($match[0], $match[1].'[-1-9]?[-1-9]?'.$match[2], $val);
+		return "dico REGEXP '^$val'";
+	}
+
+	// cas normal
+	$val = nettoyer_chaine_indexation($val);
+	if (strlen($val) > $min_long)
+		return "dico LIKE '$val%'"; 
+	else if (strlen($val) == $min_long) {
+		$dico[] = "dico = '".$val."_'";
+	}
+}
+
+
 // decode la chaine recherchee et la traduit en hash
 function requete_hash ($rech) {
-	$min_long = 3;
-	$s = nettoyer_chaine_indexation(urldecode($rech)); 
-	$regs = separateurs_indexation()." "; 
-	$s = split("[$regs]+", $s); 
+	// recupere les mots de la recherche
+	$regs = separateurs_indexation(true)." "; 
+	$s = split("[$regs]+", supprimer_tags($rech)); 
+	unset($dico);
+	unset($h);
+
+	// cherche les mots dans le dico
 	while (list(, $val) = each($s))
-		if (strlen($val) > $min_long)
-			$dico[] = "dico LIKE '$val%'"; 
-		else if (strlen($val) == $min_long) {
-			$dico[] = "dico = '".$val."_'";
-		}
+		if ($rq = requete_dico ($val))
+			$dico[] = $rq;
+
+	// compose la recherche dans l'index
 	if ($dico) {
 		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 		$result2 = spip_query($query2);

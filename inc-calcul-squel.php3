@@ -1722,32 +1722,10 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	if (strpos($boucle->requete, '$hash_recherche')) {
 		$texte .= '
 		global $recherche, $hash_recherche;
-		if (!$hash_recherche) {
-			$s = nettoyer_chaine_indexation(supprimer_tags(urldecode($recherche)));
-			$regs = separateurs_indexation()." ";
-			$s = split("[$regs]+", $s);
-
-			unset($dico);
-			unset($h);
-			while (list(, $val) = each($s)) {
-				if (strlen($val) > 3) {
-					$dico[] = "dico LIKE \"$val%\"";
-				} else if (strlen($val) == 3) {
-					$dico[] = "dico = \"".$val."_\"";
-				}
-			}
-			if ($dico) {
-				// le hex est indispensable : apparemment bug de mysql
-				// sur output decimal 64 bits (a cause du unsigned ?)
-				$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
-				$result2 = spip_query($query2);
-				while ($row2 = spip_fetch_array($result2)) {
-					$h[] = "0x".$row2["hx"];
-				}
-			}
-			if ($h) $hash_recherche = join(",", $h);
-			else $hash_recherche = "0";
-		}
+		if (!$hash_recherche)
+			$hash_recherche = requete_hash($recherche);
+		else
+			$hash_recherche = "0";
 		';
 	}
 
