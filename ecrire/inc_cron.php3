@@ -15,7 +15,7 @@ define("_ECRIRE_INC_CRON", "1");
 // Verifier la presence du .htaccess dans le CACHE et dans ecrire/data
 //
 function verifier_htaccess($rep) {
-	if (!file_exists("$rep/.htaccess")) {
+	if (!@file_exists("$rep/.htaccess")) {
 		spip_log("creation $rep/.htaccess");
 		if ($GLOBALS['hebergeur'] != 'nexenservices'){
 			$f = fopen("$rep/.htaccess", "w");

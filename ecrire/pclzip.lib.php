@@ -4186,7 +4186,7 @@
 
       // ----- Check the filename
 
-      if (!file_exists($p_filename))
+      if (!@file_exists($p_filename))
 
       {
 
@@ -6186,7 +6186,7 @@
 
     // ----- Look for specific actions while the file exist
 
-    if (file_exists($p_entry['filename']))
+    if (@file_exists($p_entry['filename']))
 
     {
 

@@ -23,7 +23,7 @@ function chercher_squelette($fond, $id_rubrique, $dossier, $lang) {
 		return $f;
 
 	while ($id_rubrique) {
-		if (file_exists("$d-$id_rubrique.$ext"))
+		if (@file_exists("$d-$id_rubrique.$ext"))
 			return "$d-$id_rubrique";
 		else
 			$id_rubrique = sql_parent($id_rubrique);
