@@ -4,14 +4,6 @@ include ("inc.php3");
 
 include_ecrire ("inc_config.php3");
 
-debut_page(_T('titre_page_config_fonctions'), "administration", "configuration");
-
-echo "<br><br><br>";
-gros_titre(_T('titre_config_fonctions'));
-barre_onglets("configuration", "fonctions");
-
-debut_gauche();
-debut_droite();
 
 if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 	echo _T('avis_non_acces_page');
@@ -23,6 +15,15 @@ if ($changer_config == 'oui') {
 	appliquer_modifs_config();
   
 }
+
+debut_page(_T('titre_page_config_fonctions'), "administration", "configuration");
+
+echo "<br><br><br>";
+gros_titre(_T('titre_config_fonctions'));
+barre_onglets("configuration", "fonctions");
+
+debut_gauche();
+debut_droite();
 
 lire_metas();
 
