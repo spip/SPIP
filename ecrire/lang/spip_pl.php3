@@ -302,6 +302,7 @@ Dzi&#281;kujemy za uczestnictwo
 'icone_doc_rubrique' => 'Za&#322;&#261;czniki',
 'icone_ecrire_article' => 'Napisz nowy artyku&#322;',
 'icone_edition_site' => 'Edycja',
+'icone_evolution_visites_2' => '<NEW><PLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum administrator&oacute;w',
 'icone_forum_suivi' => 'Kontynuacja forum',
 'icone_gestion_langues' => 'Zarz&#261;dzanie j&#281;zykami',
@@ -369,6 +370,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_contribution' => 'wpisy na forum',
 'info_copyright' => 'jest oprogramowaniem darmowym <a href=\'license.txt\'>na licencji GPL.</a>',
 'info_copyright_doc' => 'Wi&#281;cej informacji na stronie <a href=\'http://www.spip.net\'>http://www.spip.net</a>.',
+'info_copyright_gpl' => '<NEW>under the GPL license',
 'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
 'info_creer_repertoire' => 'Utw&oacute;rz plik lub katalog o nazwie:',
 'info_creer_repertoire_2' => 'w podkatalogu <b>ecrire/data/</b>, a nast&#281;pnie',
@@ -462,6 +464,8 @@ Dzi&#281;kujemy za uczestnictwo
 'info_publie_1' => '[@nom_site_spip@] PUBLIKUJE: @titre@',
 'info_publie_2' => 'Artyku&#322; opublikowany
 -----------------',
+'info_question_referers' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
+		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Szukaj',
 'info_rechercher_02' => 'Szukaj:',
 'info_remplacer_vignette' => 'Zamie&#324; domy&#347;ln&#261; miniaturk&#281; na wybrane przez ciebie logo&nbsp;:',
@@ -500,6 +504,10 @@ Dzi&#281;kujemy za uczestnictwo
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Twoje notatki',
 'item_breve_proposee' => 'Zaproponowany news',
+'item_gerer_referers' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
+'item_non_gerer_referers' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
+'item_utiliser_moteur_recherche_forum' => '<NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
@@ -704,7 +712,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'zbug_boucle' => 'p&#281;tla',
 'zbug_boucle_recursive_undef' => 'p&#281;tla rekursywna nie zosta&#322;a zdefiniowana',
 'zbug_champ_hors_boucle' => 'Pole @champ@ jest bez p&#281;tli',
-'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_champ_hors_motif' => '<NEW>Field @champ@ outside loop tagged @motif@',
 'zbug_code' => 'kod',
 'zbug_critere_inconnu' => 'nieznane kryterium @critere@',
 'zbug_distant_interdit' => 'operacja niedozwolona w zewn&#281;trznej bazie',
@@ -713,11 +721,11 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'zbug_erreur_boucle_syntaxe' => 'Sk&#322;adnia p&#281;tli (boucle) nieprawid&#322;owa',
 'zbug_erreur_execution_page' => 'b&#322;&#261;d w wykonaniu strony',
 'zbug_erreur_filtre' => 'B&#322;&#261;d : filtr <b>&laquo; @filtre@ &raquo;</b> nie zdefiniowany',
-'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} only applies to loops (FORUMS) and (RUBRIQUES)',
 'zbug_erreur_squelette' => 'B&#322;&#261;d (b&#322;&#281;dy) w szkielecie',
 'zbug_info_erreur_squelette' => 'B&#322;&#261;d na stronie',
-'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
-'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_inversion_ordre_inexistant' => '<NEW>reversal of nonexistent order',
+'zbug_parametres_inclus_incorrects' => '<NEW>Wrong inclusion parameters',
 'zbug_resultat' => 'wynik',
 'zbug_serveur_indefini' => 'serwer SQL niezdefiniowany',
 'zbug_table_inconnue' => 'Tabela SQL &laquo; @table@ &raquo; nieznana'
