@@ -42,21 +42,6 @@ if ($connect_statut == '0minirezo') {
 		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 
-
-	/*
-	$query_petition = "SELECT COUNT(*) FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')";
-	$result_petition = spip_query($query_petition);
-	if ($row = mysql_fetch_array($result_petition)){
-		$nombre_petition = $row[0];
-	}
-	if ($nombre_petition > 0) {
-		echo "<p>";
-		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "rien.gif");
-	}
-	*/
-	
-	
-	
 	echo "</font>";
 	fin_cadre_enfonce();
 }
@@ -117,12 +102,11 @@ function controle_forum($request,$adresse_retour) {
 		
 		$query_article="SELECT * FROM spip_articles WHERE id_article=$id_article";
 		$result_article=spip_query($query_article);
- 		while($row=mysql_fetch_array($result_article)){
+		while($row=mysql_fetch_array($result_article)){
 			$id_article = $row['id_article'];
 			$titre = typo($row["titre"]);
 		}
-		echo "<P align='right'><A HREF='../article.php3?id_article=$id_article'>$titre</A>";
-		
+		echo "<P align='right'><A HREF='../spip_redirect.php3?id_article=$id_article&recalcul=oui'>$titre</A>";
 
 		echo "</FONT></TD></TR></TABLE>";
 	if ($statut=="poubelle"){
@@ -150,10 +134,17 @@ if ($connect_statut == "0minirezo") {
 
 	if (!$debut) $debut = 0;
 
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
- 	$result_forum = spip_query($query_forum);
- 	$total = 0;
- 	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
+	if ($id_article) {
+		$signature_article = " AND id_article=$id_article";
+		$url_article = "&id_article=$id_article";
+	}
+	else
+		$signature_article = '';
+
+	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)$signature_article";
+	$result_forum = spip_query($query_forum);
+	$total = 0;
+	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
 
 	if ($total > 10) {
 		echo "<p>";
@@ -162,15 +153,15 @@ if ($connect_statut == "0minirezo") {
 			if ($i == $debut)
 				echo "<FONT SIZE=3><B>$i</B></FONT>";
 			else
-				echo "<A HREF='controle_petition.php3?debut=$i'>$i</A>";
+				echo "<A HREF='controle_petition.php3?debut=$i$url_article'>$i</A>";
 		}
 	}
 
 	$query_forum = "DELETE FROM spip_signatures WHERE NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)";
- 	$result_forum = spip_query($query_forum);
+	$result_forum = spip_query($query_forum);
 
-	$query_forum = "SELECT * FROM spip_signatures WHERE (statut='publie' OR statut='poubelle') ORDER BY date_time DESC LIMIT $debut,10";
- 	$result_forum = spip_query($query_forum);
+	$query_forum = "SELECT * FROM spip_signatures WHERE (statut='publie' OR statut='poubelle')$signature_article ORDER BY date_time DESC LIMIT $debut,10";
+	$result_forum = spip_query($query_forum);
 	controle_forum($result_forum, "forum.php3");
 }
 else {
