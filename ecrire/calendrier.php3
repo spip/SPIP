@@ -1,10 +1,12 @@
 <?php
 
-if ($HTTP_GET_VARS['type'] == 'semaine')
-  { include ("calendrier_semaine.php3");exit;}
- else if ($HTTP_GET_VARS['type'] == 'jour')
-   { include ("calendrier_jour.php3");exit;}
-
+if (isset($HTTP_GET_VARS['type']))
+{
+	if ($HTTP_GET_VARS['type'] == 'semaine')
+		{ include ("calendrier_semaine.php3");exit;}
+	else if ($HTTP_GET_VARS['type'] == 'jour')
+		{ include ("calendrier_jour.php3");exit;}
+}
 include ("inc.php3");
 include_ecrire ("inc_calendrier.php");
 
