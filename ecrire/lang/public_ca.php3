@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'No hi ha cap breu a aquesta adre&ccedil;a',
 'aucune_rubrique' => 'No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
 'autres_breves' => 'Altres breus',
-'autres_groupes_de_mots_clefs' => '<PLUS_UTILISE>Altres grups de paraules clau',
 'autres_groupes_mots_clefs' => 'Altres grups de paraules clau',
 'autres_sites' => 'Altres llocs webs',
 
@@ -33,13 +32,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => '<PLUS_UTILISE>en la mateixa secci&oacute;',
 'date' => ' Data',
 'dernier_ajout' => 'Darrer afegit',
 'dernieres_breves' => 'Darreres breus',
 'derniers_articles' => 'Darrers articles',
 'derniers_commentaires' => 'Darrers comentaris',
-'derniers_messages_des_forums' => '<PLUS_UTILISE>&Uacute;ltims missatges publicats als f&ograve;rums',
 'derniers_messages_forum' => 'Darrers missatges publicats als f&ograve;rums',
 
 
@@ -48,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_reponse' => 'En resposta a:',
 'en_resume' => 'En resum',
 'envoyer_message' => 'Enviar un missatge',
-'envoyer_un_message' => '<PLUS_UTILISE>Enviar un missatge',
 'espace_prive' => 'Espai privat',
 
 
@@ -89,16 +85,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_suivante' => 'p&agrave;gina seg&uuml;ent',
 'par_auteur' => 'per&nbsp;',
 'participer_site' => 'Podeu participar en la vida d\'aquest lloc web i proposar els vostres articles si ompliu la inscripci&oacute; que hi ha a continuaci&oacute;. Immediatament rebreu un correu electr&ograve;nic indicant-vos els codis d\'acc&eacute;s a l\'espai privat de la web.',
-'pas_d_article' => '<PLUS_UTILISE>No hi ha cap article a aquesta adre&ccedil;a',
-'pas_d_auteur' => '<PLUS_UTILISE>No hi ha cap autor a aquesta adre&ccedil;a',
-'pas_de_breve' => '<PLUS_UTILISE>No hi ha cap breu a aquesta adre&ccedil;a',
-'pas_de_rubrique' => '<PLUS_UTILISE>No hi ha cap secci&oacute; a aquesta adre&ccedil;a',
-'pas_de_site' => '<PLUS_UTILISE>No hi ha cap lloc a aquesta adre&ccedil;a',
-'plan_du_site' => '<PLUS_UTILISE>Mapa de la p&agrave;gina',
 'plan_site' => 'Mapa del lloc Web',
 'popularite' => 'Popularitat',
 'poster_message' => 'Escriure un missatge',
-'poster_un_message' => '<PLUS_UTILISE>Escriure un missatge',
+'proposer_site' => 'Pots proposar un lloc web per afegir-lo a aquesta secci&oacute;:',
 
 
 // R
@@ -123,8 +113,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'test' => '<PLUS_UTILISE>-buit-',
-'test2' => '<PLUS_UTILISE>-Buit-',
 'texte_lettre_information' => 'Veure la carta de presentaci&oacute; del lloc Web',
 'texte_lettre_information_2' => 'Aquesta carta recull i conta els articles i els breus publicades des de',
 
