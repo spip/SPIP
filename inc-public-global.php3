@@ -181,7 +181,7 @@ if (!$flag_preserver) {
 
 
 // Envoyer la page
-if (file_exists($chemin_cache)) {
+if (@file_exists($chemin_cache)) {
 	if (!$headers_only) include($chemin_cache);
 }
 else if (!$flag_preserver) {
@@ -208,7 +208,7 @@ while (list(, $chemin_cache_supprime) = each($cache_supprimes))
 // Verifier la presence du .htaccess dans le cache, sinon le generer
 //
 
-if (!file_exists("CACHE/.htaccess")) {
+if (!@file_exists("CACHE/.htaccess")) {
 	if ($hebergeur == 'nexenservices'){
 		echo "<font color=\"#FF0000\">IMPORTANT : </font>";
 		echo "Votre h&eacute;bergeur est Nexen Services.<br />";
@@ -292,7 +292,7 @@ if ((time()-lire_meta('calcul_rubriques') > 3600) AND timeout('calcul_rubriques'
 // Faire du menage dans le cache (effacer les fichiers tres anciens ou inutilises)
 // Se declenche une fois par heure quand le cache n'est pas recalcule
 //
-if ($use_cache AND file_exists('CACHE/.purge2')) {
+if ($use_cache AND @file_exists('CACHE/.purge2')) {
 	if (timeout('purge_cache')) {
 		unlink('CACHE/.purge2');
 		spip_log("purge cache niveau 2");
@@ -301,7 +301,7 @@ if ($use_cache AND file_exists('CACHE/.purge2')) {
 		unset($fichiers);
 		while ($row = spip_fetch_array($result)) {
 			$fichier = $row['fichier'];
-			if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
+			if (!@file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
 		}
 		if ($fichiers) {
 			$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
@@ -309,7 +309,7 @@ if ($use_cache AND file_exists('CACHE/.purge2')) {
 		}
 	}
 }
-if ($use_cache AND file_exists('CACHE/.purge')) {
+if ($use_cache AND @file_exists('CACHE/.purge')) {
 	if (timeout('purge_cache')) {
 		$dir = 'CACHE/'.dechex((time() / 3600) & 0xF);
 		unlink('CACHE/.purge');
@@ -366,7 +366,7 @@ if (lire_meta('activer_moteur') == 'oui') {
 			}
 		}
 	}
-	if ($use_cache AND file_exists($fichier_index)) {
+	if ($use_cache AND @file_exists($fichier_index)) {
 		if (timeout('indexation')) {
 			include_ecrire("inc_index.php3");
 			effectuer_une_indexation();
@@ -395,7 +395,7 @@ if ($db_ok AND lire_meta("activer_syndic") == "oui") {
 // Effacement de la poubelle (documents supprimes)
 //
 
-if (file_exists($fichier_poubelle = "ecrire/data/.poubelle")) {
+if (@file_exists($fichier_poubelle = "ecrire/data/.poubelle")) {
 	if (timeout('poubelle')) {
 		if ($s = sizeof($suite = file($fichier_poubelle))) {
 			$s = $suite[$n = rand(0, $s)];

@@ -3,7 +3,7 @@
 include ("inc_version.php3");
 
 // Recuperer les infos de langue (preferences auteur), si possible
-if (file_exists("inc_connect.php3")) {
+if (@file_exists("inc_connect.php3")) {
 	include_ecrire ("inc_auth.php3");
 }
 
@@ -45,8 +45,8 @@ else {
 	$html = "";
 	while (ereg("AIDE/([-_a-zA-Z0-9]+\.(gif|jpg))", $suite, $r)) {
 		$f = $r[1];
-		if (file_exists("AIDE/$l/$f")) $f = "$l/$f";
-		else if (file_exists("AIDE/fr/$f")) $f = "fr/$f";
+		if (@file_exists("AIDE/$l/$f")) $f = "$l/$f";
+		else if (@file_exists("AIDE/fr/$f")) $f = "fr/$f";
 		$p = strpos($suite, $r[0]);
 		$html .= substr($suite, 0, $p) . "AIDE/$f";
 		$suite = substr($suite, $p + strlen($r[0]));

@@ -66,14 +66,14 @@ function verifier_session($id_session) {
 	$ok = false;
 	if ($id_session) {
 		$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
-		if (file_exists($fichier_session)) {
+		if (@file_exists($fichier_session)) {
 			include($fichier_session);
 			$ok = true;
 		}
 		else {
 			// Sinon, tester avec alea precedent
 			$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
-			if (file_exists($fichier_session)) {
+			if (@file_exists($fichier_session)) {
 				// Renouveler la session (avec l'alea courant)
 				include($fichier_session);
 				supprimer_session($id_session);
@@ -97,11 +97,11 @@ function verifier_session($id_session) {
 //
 function supprimer_session($id_session) {
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
-	if (file_exists($fichier_session)) {
+	if (@file_exists($fichier_session)) {
 		@unlink($fichier_session);
 	}
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
-	if (file_exists($fichier_session)) {
+	if (@file_exists($fichier_session)) {
 		@unlink($fichier_session);
 	}
 }

@@ -263,7 +263,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$dest .= $ext.'/';
 	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
 	$n = 0;
-	while (file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
+	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
 	$dest_path = $newFile;
 
 	if (!deplacer_fichier_upload($source, $dest_path)) return false;

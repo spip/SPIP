@@ -13,7 +13,7 @@ function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
 	global $flag_gz;
 
-	$ok = file_exists("data/$archive");
+	$ok = @file_exists("data/$archive");
 	$gz = $flag_gz;
 	$_fopen = ($gz) ? gzopen : fopen;
 	$_fread = ($gz) ? gzread : fread;

@@ -6,7 +6,7 @@ if (defined("_INC_CALCUL")) return;
 define("_INC_CALCUL", "1");
 
 
-if (file_exists("mes_fonctions.php3")) {
+if (@file_exists("mes_fonctions.php3")) {
 	include_local ("mes_fonctions.php3");
 }
 
@@ -21,7 +21,7 @@ tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images in
 
 include_local("inc-forum.php3");
 
-if (file_exists("inc-urls.php3")) {
+if (@file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
 }
 else {
@@ -70,7 +70,7 @@ function url_var_recherche($url, $activer_url_recherche) {
 function cherche_image_nommee($nom) {
 	$formats = array ('gif', 'jpg', 'png');
 	while (list(, $format) = each($formats))
-		if (file_exists('IMG/'.$nom.'.'.$format))
+		if (@file_exists('IMG/'.$nom.'.'.$format))
 			return ($nom.'.'.$format);
 }
 
@@ -333,12 +333,12 @@ function executer_squelette($squelette, $contexte) {
 	if (!$fonctions_squelettes[$squelette]) {
 		$squelette_cache = 'CACHE/skel_'.rawurlencode($squelette).'.php3';
 		$use_cache = false;
-		if (file_exists($squelette_cache)) {
+		if (@file_exists($squelette_cache)) {
 			$t = filemtime($squelette_cache);
 			if (filemtime("$squelette.html") < $t
 			AND filemtime("inc-calcul-squel.php3") < $t
-			AND (!file_exists("mes_fonctions.php3") OR filemtime("mes_fonctions.php3") < $t)
-			AND (!file_exists("ecrire/mes_options.php3") OR filemtime("ecrire/mes_options.php3") < $t)) {
+			AND (!@file_exists("mes_fonctions.php3") OR filemtime("mes_fonctions.php3") < $t)
+			AND (!@file_exists("ecrire/mes_options.php3") OR filemtime("ecrire/mes_options.php3") < $t)) {
 				$use_cache = true;
 			}
 		}
@@ -405,7 +405,7 @@ function chercher_squelette_hierarchie($fond, $id_rubrique, $dossier='') {
 		}
 	}
 	else {
-		if (file_exists("$dossier$fond-$id_rubrique.html")) {
+		if (@file_exists("$dossier$fond-$id_rubrique.html")) {
 			return "$dossier$fond-$id_rubrique";
 		} else {
 			$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
@@ -426,7 +426,7 @@ function chercher_squelette($fond, $id_rubrique) {
 
 	// On selectionne, dans l'ordre :
 	// fond=10.html, fond-10.html, fond-<rubriques parentes>.html, fond.html puis fond-dist.html
-	if (($id_rubrique > 0) AND (file_exists("$dossier$fond=$id_rubrique.html"))) {
+	if (($id_rubrique > 0) AND (@file_exists("$dossier$fond=$id_rubrique.html"))) {
 		return "$dossier$fond=$id_rubrique";
 	}
 	else {

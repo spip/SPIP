@@ -16,7 +16,7 @@ if (!$spip_lang) $spip_lang = "fr";
 
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {
-	if (!file_exists("inc_connect.php3")) {
+	if (!@file_exists("inc_connect.php3")) {
 		Header("Location: install.php3");
 		exit;
 	}

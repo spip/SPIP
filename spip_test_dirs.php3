@@ -79,7 +79,7 @@ function test_ecrire($my_dir) {
 // teste les droits sur les repertoires
 //
 
-$install = !file_exists("ecrire/inc_connect.php3");
+$install = !@file_exists("ecrire/inc_connect.php3");
 
 if ($test_dir)
 	$test_dirs[] = $test_dir;

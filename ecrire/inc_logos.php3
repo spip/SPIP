@@ -10,13 +10,13 @@ include_ecrire ("inc_admin.php3");
 
 
 function get_image($racine) {
-	if (file_exists("../IMG/$racine.gif")) {
+	if (@file_exists("../IMG/$racine.gif")) {
 		$fichier = "$racine.gif";
 	}
-	else if (file_exists("../IMG/$racine.jpg")) {
+	else if (@file_exists("../IMG/$racine.jpg")) {
 		$fichier = "$racine.jpg";
 	}
-	else if (file_exists("../IMG/$racine.png")) {
+	else if (@file_exists("../IMG/$racine.png")) {
 		$fichier = "$racine.png";
 	}
 

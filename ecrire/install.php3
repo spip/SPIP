@@ -6,7 +6,7 @@ include_ecrire ("inc_presentation.php3");
 
 gerer_menu_langues();
 
-if (file_exists("inc_connect.php3")) {
+if (@file_exists("inc_connect.php3")) {
 	install_debut_html();
 	echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
 
@@ -329,7 +329,7 @@ else if ($etape == 1) {
 	$pass_db = '';
 
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)
-	if (file_exists("inc_connect_install.php3")) {
+	if (@file_exists("inc_connect_install.php3")) {
 		$s = @join('', @file("inc_connect_install.php3"));
 		if (ereg("mysql_connect\([\"'](.*)[\"'],[\"'](.*)[\"'],[\"'](.*)[\"']\)", $s, $regs)) {
 			$adresse_db = $regs[1];
@@ -578,7 +578,7 @@ else if ($etape == 'ldap1') {
 	$port_ldap = 389;
 
 	// Recuperer les anciennes donnees (si presentes)
-	if (file_exists("inc_connect_install.php3")) {
+	if (@file_exists("inc_connect_install.php3")) {
 		$s = @join('', @file("inc_connect_install.php3"));
 		if (ereg('ldap_connect\("(.*)","(.*)"\)', $s, $regs)) {
 			$adresse_ldap = $regs[1];

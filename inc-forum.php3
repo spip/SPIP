@@ -15,7 +15,7 @@ include_ecrire('inc_lang.php3');	// pour lang_select
 include_ecrire("inc_mail.php3");
 include_ecrire("inc_barre.php3");
 
-if (file_exists("inc-urls.php3")) {
+if (@file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
 }
 else {
@@ -38,11 +38,11 @@ function get_forums_publics($id_article=0) {
 
 function afficher_petits_logos_mots($id_mot) {
 	$racine = "IMG/moton$id_mot";
-	if (file_exists("$racine.gif")) {
+	if (@file_exists("$racine.gif")) {
 		$image = "$racine.gif";
-	} elseif (file_exists("$racine.jpg")) {
+	} elseif (@file_exists("$racine.jpg")) {
 		$image = "$racine.jpg";
-	} elseif (file_exists("$racine.png")) {
+	} elseif (@file_exists("$racine.png")) {
 		$image = "$racine.png";
 	}
 

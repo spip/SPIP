@@ -50,7 +50,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	global $dir_ecrire, $flag_ecrire;
 
 	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
-	$fichier_lang_exists = file_exists($dir_ecrire.$fichier_lang);
+	$fichier_lang_exists = @file_exists($dir_ecrire.$fichier_lang);
 
 	// chercher dans le fichier cache ?
 	if (!$flag_ecrire AND $fichier_lang_exists) {
@@ -71,7 +71,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		// le francais, qui *par definition* doit exister, et on copie le
 		// tableau 'fr' dans la var liee a la langue
 		$fichier_lang = 'lang/'.$module.'_fr.php3';
-		if (file_exists($dir_ecrire.$fichier_lang)) {
+		if (@file_exists($dir_ecrire.$fichier_lang)) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_fr';
 			include_ecrire ($fichier_lang);
 		}
