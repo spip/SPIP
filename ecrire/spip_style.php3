@@ -399,25 +399,31 @@ a.cellule-h-texte:hover {
 .fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; }
 .fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white; }
 .bouton36gris {
-	background:url(img_pack/pave-gris-36.png);
 	padding: 6px;
 	margin-top: 2px;
 	width: 24px;
 	height: 24px;
+	border: 1px solid #aaaaaa;
+	background-color: #e4e4e4;
+	-moz-border-radius: 5px;
 }
 .bouton36blanc {
-	background:url(img_pack/pave-blanc-36.png);
 	padding: 6px;
 	margin-top: 2px;
 	width: 24px;
 	height: 24px;
+	border: 1px solid #999999;
+	background-color: white;
+	-moz-border-radius: 5px;
 }
 .bouton36rouge {
-	background:url(img_pack/pave-rouge-36.png);
 	padding: 6px;
 	margin-top: 2px;
 	width: 24px;
 	height: 24px;
+	border: 1px solid red;
+	background-color: white;
+	-moz-border-radius: 5px;
 }
 .bouton36off {
 	padding: 6px;
@@ -453,19 +459,19 @@ a.icone:hover { text-decoration: none; }
  * Barre de raccourcis
  */
 
-a.spip_barre {
-	border: 0px solid #666666;
+a.spip_barre img {
 	padding: 4px;
-	margin-right: 1px;
-	margin-left: 1px;
-	background: url(img_pack/pave-gris-16.png);
+	margin: 1px;
+	border: 1px solid #aaaaaa;
+	background-color: #e4e4e4;
+	-moz-border-radius: 5px;
 }
-a.spip_barre:hover {
-	border: 0px solid #666666;
+a.spip_barre:hover img {
 	padding: 4px;
-	margin-right: 1px;
-	margin-left: 1px;
-	background: url(img_pack/pave-blanc-16.png);
+	margin: 1px;
+	border: 1px solid #999999;
+	background-color: white;
+	-moz-border-radius: 5px;
 }
 
 td.icone table {
@@ -608,6 +614,7 @@ td.icone a img {
 	border-bottom: 1px solid #aaaaaa;
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-size: 11px;
+	text-decoration: none;
 }
 .plan-articles a:hover {
 	background-color: white; 
@@ -615,6 +622,7 @@ td.icone a img {
 	border-right: 1px solid white; 
 	border-left: 1px solid #aaaaaa; 
 	border-top: 1px solid #aaaaaa;
+	text-decoration: none;
 }
 .plan-articles .publie {
 	background-image: url(img_pack/puce-verte-breve.gif);
@@ -631,6 +639,35 @@ td.icone a img {
 .plan-articles .poubelle {
 	background-image: url(img_pack/puce-rouge-breve.gif);
 }
+
+a.foncee, a.foncee:hover, a.claire, a.claire:hover, a.creer, a.creer:hover {
+	display: inline;
+	float: none;
+	padding: 2px;
+	margin: 0px;
+	margin-left: 1px;
+	margin-right: 1px;
+	border: 0px;
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-size: 9px;
+	text-decoration: none;
+
+}
+
+a.foncee, a.foncee:hover {
+	background-color: <? echo $couleur_foncee; ?>;
+	color: white;
+}
+a.claire, a.claire:hover {
+	background-color: <? echo $couleur_claire; ?>;
+	color: <? echo $couleur_foncee; ?>;
+}
+a.creer, a.creer:hover {
+	background-color: white;
+	color: black;
+	border: 1px solid black;
+}
+
 
 
 /*
