@@ -224,7 +224,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 		$creation = true;
 		// calculer la taille
-		if ($srcsize = getimagesize($image)) {
+		if ($srcsize = @getimagesize($image)) {
 			$srcWidth=$srcsize[0];
 			$srcHeight=$srcsize[1];
 			list ($destWidth,$destHeight) = image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
@@ -425,7 +425,7 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 				$height = $preview['height'];
 				return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
 			}
-			else if ($taille_origine = getimagesize($logo)) {
+			else if ($taille_origine = @getimagesize($logo)) {
 				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
 				return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
 			}
