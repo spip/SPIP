@@ -317,7 +317,7 @@ if ($options == 'avancees') {
 // Creer fichier .htpasswd ?
 //
 
-if ($options == 'avancees' AND ! @file_exists('.htaccess') AND ! $REMOTE_USER ) {
+if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();
 
@@ -326,10 +326,17 @@ if ($options == 'avancees' AND ! @file_exists('.htaccess') AND ! $REMOTE_USER ) 
 	$creer_htpasswd = lire_meta("creer_htpasswd");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Fichiers .htpasswd</FONT></B></TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Fichiers d'authentification &laquo;&nbsp;.htpasswd&nbsp;&raquo;</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
-	echo propre("{{SPIP doit-il cr&eacute;er les fichiers <code>.htpasswd</code> et <code>.htpasswd-admin</code> dans le r&eacute;pertoire <code>ecrire/data/</code>?}}\n\nVotre installation de SPIP ne semble pas n&eacute;cessiter ces fichiers pour l'authentification des utilisateurs dans l'espace priv&eacute;. Mais il peuvent servir, en d'autres endroits de votre site (module externe de statistiques ou de connexion &agrave; la base, par exemple), &agrave; restreindre l'acc&egrave;s aux auteurs SPIP ou aux seuls administrateurs.\n\nSi vous n'en avez pas l'usage, ne les cr&eacute;ez pas; cela &eacute;liminera tout risque qu'ils soient &eacute;ventuellement &laquo;craqu&eacute;s&raquo; par un pirate qui aurait r&eacute;ussi &agrave; les r&eacute;cup&eacute;rer sur ce serveur (et pas forc&eacute;ment &agrave; travers le r&eacute;seau!).");
+	echo "<b>SPIP doit-il cr&eacute;er les fichiers sp&eacute;ciaux <tt>.htpasswd</tt>
+		et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire <tt>ecrire/data/</tt> ?</b><p>
+		Ces fichiers peuvent vous servir &agrave; restreindre l'acc&egrave;s aux auteurs
+		et administrateurs en d'autres endroits de votre site
+		(programme externe de statistiques, par exemple).<p>
+		Si vous n'en avez pas utilité, vous pouvez laisser cette option
+		&agrave; sa valeur par d&eacute;faut (pas de cr&eacute;ation 
+		des fichiers).";
 	echo "</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center' class='verdana2'>";
