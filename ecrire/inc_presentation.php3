@@ -680,7 +680,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			$nom = $row['nom'];
 
 			$s = bonhomme_statut($row);
-			$s .= "<a href=\"auteur_edit.php3?id_auteur=$id_auteur\">";
+			$s .= "<a href=\"auteurs_edit.php3?id_auteur=$id_auteur\">";
 			$s .= typo($nom);
 			$s .= "</a>";
 			$vals[] = $s;
