@@ -371,7 +371,7 @@ function formulaire_inscription($type) {
 
 			$message = _T('form_forum_message_auto')."\n\n"._T('form_forum_bonjour')."\n\n";
 			if ($type == 'forum') {
-				$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site));
+				$message .= _T('form_forum_voici1', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
 			}
 			else {
 				$message .= _T('form_forum_voici2', array('nom_site_spip' => $nom_site_spip, 'adresse_site' => $adresse_site)) . "\n\n";
