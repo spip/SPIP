@@ -897,13 +897,6 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'htmlspecialchars';
 	}
 
-	// Adresses e-mail : anti-spam
-	$c = array('EMAIL', 'EMAIL_WEBMASTER');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'antispam';
-	}
-
 	//
 	// Construire un tableau associatif des champs de chaque type
 	// avec l'intitule de la colonne mysql correspondante
@@ -1313,7 +1306,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$auteurs = "";
 			while($row_auteur = spip_fetch_array($result_auteurs)) {
 				$nom_auteur = typo($row_auteur["nom"]);
-				$email_auteur = antispam($row_auteur["email"]);
+				$email_auteur = $row_auteur["email"];
 				if ($email_auteur) {
 					$auteurs[] = "<A HREF=\"mailto:$email_auteur\">$nom_auteur</A>";
 				}
