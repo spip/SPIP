@@ -154,6 +154,7 @@ function purger_repertoire($dir, $age, $regexp = '') {
 		if (is_file($chemin)) {
 			if (($t - filemtime($chemin)) > $age OR ereg('\.NEW$', $fichier)) {
 				@unlink($chemin);
+				$fichier = ereg_replace('\.NEW$', '', $fichier);
 				$query = "DELETE FROM spip_forum_cache WHERE fichier='$fichier'";
 				spip_query($query);
 			}

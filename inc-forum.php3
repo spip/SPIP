@@ -44,7 +44,7 @@ function afficher_petits_logos_mots($id_mot) {
 	} elseif (file_exists("$racine.png")) {
 		$image = "$racine.png";
 	}
-	
+
 	if ($image) {
 		$taille = getimagesize($image);
 		$largeur = $taille[0];
@@ -358,7 +358,7 @@ function ajout_forum() {
 	global $ajouter_mot, $new;
 	global $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
 	$afficher_texte = $GLOBALS['afficher_texte'];
-	
+
 	if (!$GLOBALS['db_ok']) {
 		die ("<h4>"._T('forum_probleme_database')."</h4>");
 	}
@@ -397,6 +397,7 @@ function ajout_forum() {
 		while ($row = spip_fetch_array($result)) {
 			$fichier = $row["fichier"];
 			@unlink("CACHE/$fichier");
+			@unlink("CACHE/$fichier.NEW");
 			$fichiers[] = "'".$fichier."'";
 		}
 		if ($fichiers) {
