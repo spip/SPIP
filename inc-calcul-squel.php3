@@ -347,7 +347,6 @@ function parser_boucle($texte, $id_parent) {
 							$req_where[] = "$col_lien.id_mot=$col_table.id_mot";
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
-							echo "HOP";
 						}
 						else if	($type == 'mots' AND ($col == 'id_syndic' OR $col == 'id_forum')) {
 							$col_table = 'spip_'.$type.'_'.substr($col, 3);
@@ -799,7 +798,7 @@ function parser($texte) {
 		'DATE', 'DATE_REDAC', 'INCLUS',
 		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'URL_SITE', 'NOM', 'BIO', 'TYPE', 'PGP', 
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
-		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
+		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 
 		'IP', 'VISITES', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
@@ -843,7 +842,7 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'traiter_raccourcis';
 	}
 
-	// Dates : ajouter le vidage des dates egales a 00-00-0000
+	// Dates : ajouter le vidage des dates egales ý 00-00-0000
 	$c = array('DATE', 'DATE_REDAC');
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -1064,8 +1063,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'LOGO_BREVE':
 	case 'LOGO_MOT':
 	case 'LOGO_RUBRIQUE':
-	case 'LOGO_RUBRIQUE_NORMAL':
-	case 'LOGO_RUBRIQUE_SURVOL':
 	case 'LOGO_DOCUMENT':
 		$milieu = '';
 		ereg("^LOGO_(([a-zA-Z]+).*)$", $nom_champ, $regs);
@@ -1099,20 +1096,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$image = image_rubrique($contexte["id_rubrique"]);
 			$logon = $image[0];
 			$logoff = $image[1];
-			';
-		}
-		else if ($type_logo == 'RUBRIQUE_NORMAL') {
-			$milieu .= '
-			$image = image_rubrique($contexte["id_rubrique"]);
-			$logon = $image[0];
-			$logoff = "";
-			';
-		}
-		if ($type_logo == 'RUBRIQUE_SURVOL') {
-			$milieu .= '
-			$image = image_rubrique($contexte["id_rubrique"]);
-			$logon = $image[1];
-			$logoff = "";
 			';
 		}
 		else if ($type_logo == 'DOCUMENT'){
