@@ -122,7 +122,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	      ';
 	$h0 = ""; 
 	for($n=-1;' .
-	      (!$limit ? '$hierarchie' : ('$n<' . $limit[2])) .
+	      (!$limit ? '$hierarchie' : ('$n<' . ($limit[1] + $limit[2]))) .
 	      ';$n++) {
 	';       
 	    $corps = '
