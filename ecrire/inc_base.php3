@@ -437,6 +437,12 @@ function maj_base() {
 	$version_installee = 0.0;
 	$result = mysql_query("SELECT valeur FROM spip_meta WHERE nom='version_installee'");
 	if ($result) if ($row = mysql_fetch_array($result)) $version_installee = (double) $row[0];
+
+	//
+	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit d'une nouvelle installation
+	//   => ne pas passer par le processus de mise a jour
+	//
+	if (!$version_installee) $version_installee = $spip_version;
 	
 	//
 	// Selection en fonction de la version
