@@ -171,6 +171,11 @@ $GLOBALS['i18n_spip_es'] = array(
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <B>Regular los derechos de acceso</B>',
 'dirs_probleme_droits' => '<b>Problema de derechos de acceso</b>',
+'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
+		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'dirs_repertoires_suivants' => '<B>Los siguientes directorios no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
 <P>Para solucionar el problema debes utilizar un cliente FTP con el objetivo de regular los derechos de acceso de cada uno
 de los directorios mencionados. El procedimiento se explica detalladamente en la gu&iacute;a de instalaci&oacute;n.

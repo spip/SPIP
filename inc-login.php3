@@ -176,8 +176,8 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
 
-		echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'> ";
-		echo "<label for='session_remember'>"._T('login_rester_identifie')."</label>";
+		// echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;<input type='checkbox' name='session_remember' value='oui' id='session_remember'> ";
+		// echo "<label for='session_remember'>"._T('login_rester_identifie')."</label>";
 
 		$url = $cible->getUrl();
 		echo "<input type='hidden' name='url' value='$url'>\n";
