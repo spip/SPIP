@@ -1248,7 +1248,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
 			hide_obj("bandeaudocuments");
 			hide_obj("bandeauredacteurs");
-			<?php if (lire_meta("activer_statistiques") != 'non') ?> hide_obj("bandeausuivi"); 
+			<?php if (lire_meta("activer_statistiques") != 'non') { ?> hide_obj("bandeausuivi"); <?php } ?>
 			hide_obj("bandeauadministration"); 
 		<?php } ?>
 		
@@ -2098,10 +2098,13 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		
 	echo "</td>";
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-	
+		// overflow pour masquer les noms tres longs (et eviter debords, notamment en ecran etroit)
+		if ($spip_ecran == "large") $largeur_nom = 300;
+		else $largeur_nom= 110;
+		echo "<div style='width: ".$largeur_nom."px; height: 14px; overflow: hidden;'>";
 		// Redacteur connecte
 		echo typo($GLOBALS["connect_nom"]);
-	
+		echo "</div>";
 	
 	echo "</td>";
 
