@@ -93,14 +93,16 @@ function calcule_header_et_page ($fond, $delais) {
 	AND $flag_ob AND !headers_sent()) {
 
 		// Si la page est vide, gerer l'erreur 404
-		if (preg_match('/^[[:space:]]*$/', $page['texte'])
+		if (trim($page['texte']) === ''
 		AND $var_mode != 'debug') {
 			header("HTTP/1.0 404");
 			header("Content-Type: text/html; charset=".lire_meta('charset'));
 			$contexte_inclus = array(
 				'erreur_aucun' => message_erreur_404()
 			);
+			$sauve_page = $page; # memoriser la page vide
 			include(find_in_path('404.php3'));
+			$page = $sauve_page; # pour la retablir ensuite
 		}
 		// Interdire au client de cacher un login, un admin ou un recalcul
 		else if ($flag_dynamique OR $var_mode
