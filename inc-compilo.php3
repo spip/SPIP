@@ -233,6 +233,13 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->mode_partie)
 		$corps .= "\n		}\n";
 
+	$texte = '';
+
+	// Gestion de la hierarchie (voir inc-boucles.php3)
+	if ($boucle->hierarchie)
+		$texte .= "\n	".$boucle->hierarchie;
+
+
 	// si le corps est une constante, ne pas appeler le serveur N fois!
 	if (ereg("^\(?'[^']*'\)?$",$corps)) {
 		// vide ?
@@ -246,19 +253,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 			$corps = "\n		".'for($x=$Numrows["'.$id_boucle.'"];$x>0;$x--)
 			$t0 .= ' . $corps .';';
 		}
-		$texte = '';
 	} else {
-
-	// Gestion de la hierarchie (voir inc-boucles.php3)
-	if ($boucle->hierarchie)
-		$texte .= "\n	".$boucle->hierarchie;
-
-	// Recherche : recuperer les hash a partir de la chaine de recherche
-	if ($boucle->hash) {
-		$texte .=  '
-	// RECHERCHE
-	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");';
-	}
 
 	$corps = '
 
@@ -278,20 +273,23 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	// Requete
 	//
-	$init = "\n\n	// REQUETE\n	";
 
 	// hack critere recherche : ignorer la requete en cas de hash vide
-	if ($boucle->hash)
-		$init .= "if (\$rech_select) ";
+	// Recherche : recuperer les hash a partir de la chaine de recherche
+	if ($boucle->hash) {
+		$init =  '
+	// RECHERCHE
+	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");
+	if ($rech_select) ';
+	}
 
-	$init .= "\$result = ";
+	else $init = '';
 
-
-	// En absence de champ c'est un decompte : 
-	// on prend la primary pour avoir qqch
-	// car le COUNT incompatible avec le cas general
-
-	$init .= "spip_abstract_select(\n\t\tarray(\"". 
+	$init .= "\n\n	// REQUETE
+	\$result = spip_abstract_select(\n\t\tarray(\"". 
+		# En absence de champ c'est un decompte : 
+	  	# prendre la primary pour avoir qqch
+	  	# (COUNT incompatible avec le cas general
 		(($boucle->select) ? 
 			join("\",\n\t\t\"", array_unique($boucle->select)) :
 			$id_field) .
