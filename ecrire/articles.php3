@@ -1092,9 +1092,11 @@ if ($flag_editable AND $options == 'avancees') {
 	
 				$premiere = strtoupper(substr(trim($nom), 0, 1));
 	
-				if ($connect_statut != '0minirezo') {
-					if ($p = strpos($email, '@')) $email = substr($email, 0, $p).'@...';
-				}
+				if ($connect_statut != '0minirezo')
+					if ($p = strpos($email, '@'))
+						$email = substr($email, 0, $p).'@...';
+				if ($email)
+					$email = " ($email)";
 	
 				if ($statut != $statut_old) {
 					echo "\n<OPTION VALUE=\"x\">";
@@ -1105,7 +1107,7 @@ if ($flag_editable AND $options == 'avancees') {
 					echo "\n<OPTION VALUE=\"x\">";
 				}
 	
-				$texte_option = couper("$nom ($email) ", 40);
+				$texte_option = couper("$nom$email", 40);
 				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
 				$statut_old = $statut;
 				$premiere_old = $premiere;
