@@ -954,10 +954,10 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 
 
 function barre_onglets($rubrique, $onglet){
-	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur;
+	global $id_auteur, $connect_id_auteur, $connect_statut, $statut_auteur, $options;
 
 	debut_onglet();
-	
+
 	if ($rubrique == "statistiques"){
 		onglet("&Eacute;volution des visites", "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
 		onglet("R&eacute;partition par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
@@ -985,7 +985,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet("Contenu du site", "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet("Interactivit&eacute;", "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet("Fonctions avanc&eacute;es", "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
-		onglet("S&eacute;curit&eacute;", "config-securite.php3", "securite", $onglet, "cadenas-24.gif");
+		if ($options == "avancees") onglet("S&eacute;curit&eacute;", "config-securite.php3", "securite", $onglet, "cadenas-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){
@@ -1293,9 +1293,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 		icone_bandeau_principal ("&Eacute;dition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 		if ($options == "avancees") {
-			icone_bandeau_principal (_T('Auteurs'), "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal ('Auteurs', "auteurs.php3", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
-			icone_bandeau_principal (_T('Informations personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal ('Informations personnelles', "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
 		if ($options == "avancees") {
 			if ($connect_statut == "0minirezo") 
@@ -1436,10 +1436,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>"._T('1 nouveau message')."</b></font></a>";
+					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>VOUS AVEZ UN NOUVEAU MESSAGE</b></font></a>";
 				}
 			}
-			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>"._T('@n@ nouveaux messages', array('n' => $total_messages))."</font></a>";
+			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>VOUS AVEZ $total_messages NOUVEAUX MESSAGES</font></a>";
 			$result_messages = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$connect_id_auteur' AND messages.statut='publie' AND lien.id_message=messages.id_message AND messages.rv='oui' AND messages.date_heure>DATE_SUB(NOW(),INTERVAL 1 DAY) GROUP BY messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
 			
@@ -1497,7 +1497,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 
 	// choix de la langue
-	if (strpos($GLOBALS['all_langs'], ',')) {
+	/*if (strpos($GLOBALS['all_langs'], ',')) {
 		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
 		$langues = explode(',', $GLOBALS['all_langs']);
 		while (list(,$langue) = each ($langues)) {
@@ -1506,7 +1506,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo " <a href='". $lien->getUrl() ."'><font color='#ffffff'>$langue</font></a>";
 		}
 		echo "</font></td>";
-	}
+	}*/
 
 	// choix de la couleur
 	echo "<td align='right'>";
