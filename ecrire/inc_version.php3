@@ -958,6 +958,9 @@ function calcule_fichier_logo($on) {
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	if (ereg("^../",$nom))	$nom = substr($nom,3);
 	if (ereg("^" . _DIR_IMG, $nom)) $nom = substr($nom,strlen(_DIR_IMG));
+	
+	reset($formats);
+	
 	while (list(, $format) = each($formats)) {
 		$d = _DIR_IMG . "$nom.$format";
 		if (@file_exists($d)) return array(_DIR_IMG, $nom, $format);
