@@ -847,6 +847,18 @@ echo "</TABLE>";
 // Gestion des auteurs
 //
 
+// Creer un nouvel auteur et l'ajouter
+
+if ($creer_auteur AND $connect_statut=='0minirezo'){
+	$creer_auteur = addslashes($creer_auteur);
+	$query_creer = "INSERT INTO spip_auteurs (nom, statut) VALUES (\"$creer_auteur\", '1comite')";
+	$result_creer = spip_query($query_creer);
+	
+	$nouv_auteur = mysql_insert_id();
+	$ajout_auteur = true;
+}
+
+
 //
 // Recherche d'auteur
 //
@@ -1062,14 +1074,13 @@ if ($flag_editable AND $options == 'avancees') {
 
 	if (mysql_num_rows($result) > 0) {
 
-		echo "<P>";
 		echo "<FORM ACTION='articles.php3' METHOD='post'>";
 		echo "<DIV align=right><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>AJOUTER UN AUTEUR : &nbsp; </B></FONT>\n";
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-		if (mysql_num_rows($result) > 50 AND $flag_mots_ressemblants) {
+		if (mysql_num_rows($result) > 80 AND $flag_mots_ressemblants) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
-			echo "<INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo'>";
+			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo'>";
 		}
 		else {
 			echo "<INPUT TYPE='Hidden' NAME='ajout_auteur' VALUE='oui'>";
@@ -1110,10 +1121,34 @@ if ($flag_editable AND $options == 'avancees') {
 			}
 			
 			echo "</SELECT>";
-			echo "<INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'>";
+			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE='Ajouter' CLASS='fondo'>";
 		}
 		echo "</div></FORM>";
 	}
+	
+	if ($connect_statut == "0minirezo"){
+		echo "<form action='articles.php3' method='post'>";
+		echo "<input type='Hidden' name='id_article' value='$id_article'>";
+		echo "<table cellpadding=0 cellspacing=0 border=0 width=100%>";
+		echo "<tr width=100%>";
+		echo "<td valign='top'>";
+		echo bouton_block_invisible("creer_auteur,creer_auteur2");
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1>Cr&eacute;er et ajouter un nouvel auteur&nbsp;:</font>";
+		echo "</td>";
+		echo "<td width=20>&nbsp;</td>";
+		echo "<td valign='top' width=150>";
+			echo debut_block_invisible("creer_auteur");
+			echo "<INPUT TYPE='text' NAME='creer_auteur' CLASS='forml' style='font-size:9px;' VALUE='' SIZE='20'>";
+			echo fin_block();
+		echo "</td><td>";
+			echo debut_block_invisible("creer_auteur2");
+			echo " <INPUT TYPE='submit' NAME='Cr&eacute;er' style='font-size:9px;' VALUE='Cr&eacute;er' CLASS='fondl'>";
+			echo fin_block();
+		echo "</td>";	
+		echo "</tr></table>";
+		echo "</form>";
+	}
+		
 	echo fin_block();
 }
 
