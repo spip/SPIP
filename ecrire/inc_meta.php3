@@ -71,6 +71,8 @@ define("_DATA_META_CACHE", "1");
 	}
 }
 
-lire_metas();
+// On force lire_metas() si le cache n'a pas ete utilise
+if (!isset($GLOBALS['meta']))
+	lire_metas();
 
 ?>
