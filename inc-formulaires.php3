@@ -247,7 +247,7 @@ function formulaire_signature($id_article) {
 			echo "<P><div class=\"spip_encadrer\"><B>Votre nom ou pseudo</B><BR>(your name or pseudo)<BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"nom_email\" value=\"\" size=\"20\">";
 
-			echo "<P><B>Votre adresse email</B><BR>(your email adress)<BR>";
+			echo "<P><B>Votre adresse email</B><BR>(your email address)<BR>";
 			echo "<input type=\"text\" class=\"forml\" name=\"adresse_email\" value=\"vous@fournisseur.com\" size=\"20\"></div>";
 
 			echo "<P><div class=\"spip_encadrer\">";
