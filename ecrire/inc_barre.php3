@@ -7,8 +7,7 @@ define("_INC_BARRE", "1");
 //include_ecrire ("inc_layers.php3"); // (pour memoire)
 
 function test_barre() {
-	global $HTTP_UA_OS, $browser_name, $browser_version, $browser_description, $browser_rev;
-	global $xhtml;
+	global $browser_name, $browser_version, $browser_rev;
 	
 	if ($browser_name == '') verif_butineur();
 
@@ -21,8 +20,7 @@ function test_barre() {
 
 
 function test_claret() {
-	global $HTTP_UA_OS, $browser_name, $browser_version, $browser_description, $browser_rev;
-
+	global $browser_name;
 	if ( test_barre() && (eregi("msie", $browser_name)) ) return true;
 }
 

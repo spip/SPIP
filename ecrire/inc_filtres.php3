@@ -708,13 +708,7 @@ function mathml_math($tex) {
 
 
 function image_math($tex) {
-	// Correction pour forcer la ligne de base
-	$tex = "\large\\setbox1=\\hbox{\$\\displaystyle ".$tex."\$}\n"
-		."\\newdimen\\haut\n\\newdimen\prof\n"
-		."\\haut=\\ht1\n\\prof=\\dp1\n"
-		."\\ifdim\\haut>\\prof\\prof=\\haut\\else\\haut=\\prof\\fi\n"
-		."\\advance\haut by .5em\n"
-		."\\color{white}\\vrule height \\haut depth \\prof width 0.1pt\\color{black}\\box1";
+spip_log($tex);
 
 	// Regarder dans le repertoire local des images TeX
 	$dir = ($GLOBALS['flag_ecrire'] ? '../' : '').'IMG/TeX';

@@ -838,12 +838,14 @@ function email_valide($adresse) {
 //
 function _T($text, $args = '') {
 	include_ecrire('inc_lang.php3');
-	$chaine = traduire_chaine($text, $args);
-	
-		include_ecrire("inc_charsets.php3");
-		$chaine = html2unicode($chaine);
+	$text = traduire_chaine($text, $args);
 
-	return $chaine;
+	if ($GLOBALS['xhtml']) {
+		include_ecrire("inc_charsets.php3");
+		$text = html2unicode($text);
+	}
+
+	return $text;
 }
 
 // chaines en cours de traduction
