@@ -243,22 +243,29 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 //
 
 function texte_upload_manuel($dir, $inclus = '') {
-	$myDir = opendir($dir);
-	while($entryName = readdir($myDir)) {
-		if (is_file("upload/".$entryName) AND !($entryName=='remove.txt')) {
-			if (ereg("\.([^.]+)$", $entryName, $match)) {
-				$ext = strtolower($match[1]);
-				if ($ext == 'jpeg')
-					$ext = 'jpg';
-				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
-				if ($inclus)
-					$req .= " AND inclus='$inclus'";
-				if (@spip_fetch_array(spip_query($req)))
-					$texte_upload .= "\n<option value=\"$entryName\">$entryName</option>";
-			}
+	$fichiers = array();
+	$d = opendir($dir);
+	while ($f = readdir($d)) {
+		if (is_file("upload/".$f) AND $f != 'remove.txt') {
+			$fichiers[] = $f;
 		}
 	}
-	closedir($myDir);
+	closedir($d);
+
+	sort($fichiers);
+	while (list(, $f) = each($fichiers)) {
+		if (ereg("\.([^.]+)$", $f, $match)) {
+			$ext = strtolower($match[1]);
+			if ($ext == 'jpeg')
+				$ext = 'jpg';
+			$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
+			if ($inclus)
+				$req .= " AND inclus='$inclus'";
+			if (@spip_fetch_array(spip_query($req)))
+				$texte_upload .= "\n<option value=\"$f\">$f</option>";
+		}
+	}
+
 	return $texte_upload;
 }
 
@@ -302,8 +309,8 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 
 	if (tester_upload()) {
 		echo "<br><b>$intitule</b>";
-		echo "<br><small><input name='image' type='File'  class='fondl' style='font-size: 9px; width: 100px;'>\n";
-		echo "<div align='right'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo' style='font-size: 9px;'></div></small>\n";
+		echo "<br><small><input name='image' type='File' class='fondl' style='width: 60px;'>\n";
+		echo "<div align='right'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div></small>\n";
 	}
 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $options == "avancees") {
@@ -311,17 +318,17 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 		if ($texte_upload) {
 			echo "<p><div style='border: 1px #303030 dashed; padding: 4px; color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
-			echo "\n"._T('info_selectionner_fichier')."&nbsp;:";
-			echo "\n<select name='image2' size='1' class='fondl' style='width:100%; font-size: 9px;'>";
+			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br>";
+			echo "\n<select name='image2' size='1' class='fondl'>";
 			echo $texte_upload;
 			echo "\n</select>";
-			echo "\n  <div align='right'><input name='ok' type='Submit' value='"._T('bouton_choisir')."' class='fondo' style='font-size: 9px;'></div>";
+			echo "\n  <div align='right'><input name='ok' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
 
 			if ($afficher_texte_ftp){
 				if ($dossier_complet){
 					echo "\n<p><b>"._T('info_portfolio_automatique')."</b>";
 					echo "\n<br>"._T('info_installer_documents');
-					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo' style='font-size:9px;'></div>";
+					echo "\n<div align='right'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo'></div>";
 				}
 			}
 			echo "</div>\n";
@@ -430,13 +437,13 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		}
 		echo ".";
 
-		if (function_exists("imagejpeg") AND function_exists("ImageCreateFromJPEG")){
+		if ($GLOBALS['flag_gd']) {
 			$creer_preview = lire_meta("creer_preview");
 			$taille_preview = lire_meta("taille_preview");
 			$gd_formats = lire_meta("gd_formats");
 			if ($taille_preview < 15) $taille_preview = 120;
 
-			if ($creer_preview == 'oui'){
+			if ($creer_preview == 'oui') {
 				echo "<p>"._T('texte_creation_automatique_vignette', array('gd_formats' => $gd_formats, 'taille_preview' => $taille_preview));
 			}
 		}

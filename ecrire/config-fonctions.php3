@@ -33,7 +33,7 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 //
 // Activer/desactiver la creation automatique de vignettes
 //
-if ($flag_function_exists AND @function_exists("imagejpeg")) {
+if ($flag_gd) {
 	debut_cadre_relief("image-24.gif");
 
 	$gd_formats = lire_meta("gd_formats");
