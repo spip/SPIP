@@ -88,6 +88,7 @@ echo "</div>\n";
 debut_gauche();
 
 
+agenda($mois-1, $annee, $jour, $mois, $annee);
 agenda($mois, $annee, $jour, $mois, $annee);
 agenda($mois+1, $annee, $jour, $mois, $annee);
 

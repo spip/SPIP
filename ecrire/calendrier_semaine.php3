@@ -51,6 +51,7 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 		echo "<div>&nbsp;</div>";
 		echo "<div>&nbsp;</div>";
 
+		agenda($mois_today-1, $annee_today, $jour_today, $mois_today, $annee_today, true);
 		agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today, true);
 		agenda($mois_today+1, $annee_today, $jour_today, $mois_today, $annee_today, true);
 	
