@@ -2,14 +2,14 @@
 
 include ("ecrire/inc_version.php3");
 
-include_ecrire ("inc_meta.php3");
-include_ecrire ("inc_presentation.php3");
-include_ecrire ("inc_session.php3");
-include_ecrire ("inc_filtres.php3");
-include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_meta.php3");
-include_ecrire ("inc_mail.php3");
-include_ecrire ("inc_acces.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_session.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_mail.php3");
+include_ecrire("inc_acces.php3");
 
 include_local("inc-formulaires.php3");
 
@@ -114,12 +114,11 @@ else {
 	echo "<p>"._T('pass_rien_a_faire_ici');
 }
 
-echo "<p align='right'><script type='text/javascript'><!--
-	if (window.opener) document.write(\"<a href='javascript:close();'>\");
+echo "<p align='right'>",
+  http_script("if (window.opener) document.write(\"<a href='javascript:close();'>\");
 	else document.write(\"<a href='./'>\");
-	document.write(\""._T('pass_quitter_fenetre')."</a>\");
-	//--></script>
-<noscript>[<a href='./'>"._T('pass_retour_public')."</a>]</noscript>
+	document.write(\""._T('pass_quitter_fenetre')."</a>\");"),
+  "<noscript>[<a href='./'>"._T('pass_retour_public')."</a>]</noscript>
 </p>";
 
 install_fin_html();
