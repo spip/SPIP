@@ -78,7 +78,7 @@ if ($etape6) {
 
 	@unlink("inc_meta_cache.php3");
 
-	echo "<FORM ACTION='index.php3' METHOD='get'>";
+	echo "<FORM ACTION='index.php3' METHOD='post'>";
 	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 	echo "</FORM>";
 
@@ -95,7 +95,7 @@ if ($etape6) {
 	echo "<p>(Note : s'il s'agit d'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez ";
 	echo "laisser ces champs vides)";
 
-	echo "<FORM ACTION='install.php3' METHOD='get'>";
+	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape6' VALUE='oui'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -168,7 +168,7 @@ elseif ($etape4) {
 	if ($result_ok) {
 		echo "<B>La structure de votre base de donn&eacute;es est install&eacute;e.</B><P>Vous pouvez passer &agrave; l'&eacute;tape suivante.";
 
-		echo "<FORM ACTION='install.php3' METHOD='get'>";
+		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape5' VALUE='oui'>";
 		echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -195,7 +195,7 @@ elseif ($etape3) {
 	echo aide ("install2");
 	echo "<P>";
 
-	echo "<FORM ACTION='install.php3' METHOD='get'>";
+	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape4' VALUE='oui'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -270,7 +270,7 @@ elseif($etape2) {
 	if (($db_connect=="0") && $link){
 		echo "<B>La connexion a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l'&eacute;tape suivante.";
 
-		echo "<FORM ACTION='install.php3' METHOD='get'>";
+		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape3' VALUE='oui'>";
 		echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -298,7 +298,7 @@ elseif ($etape1) {
 	echo aide ("install1");
 
 
-	echo "<FORM ACTION='install.php3' METHOD='get'>";
+	echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape2' VALUE='oui'>";
 	echo "<fieldset><label><B>Adresse de la base de donn&eacute;es</B><BR></label>";
 	echo "(Souvent cette adresse correspond &agrave; celle de votre site, parfois elle correspond &agrave; la mention &laquo;localhost&raquo;, parfois elle est laiss&eacute;e totalement vide.)<BR>";
