@@ -1099,6 +1099,16 @@ function debut_gauche() {
 //
 
 function debut_droite() {
+	global $id_article;
+
+
+	//
+	// Pave "documents associes a l'article"
+	//
+	if (defined("_ECRIRE_INC_DOCUMENTS"))
+		echo pave_documents($id_article);
+
+
 	//
 	// Boite de recherche
 	//

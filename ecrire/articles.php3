@@ -5,7 +5,7 @@ include ("inc.php3");
 include_local ("inc_logos.php3");
 include_local ("inc_index.php3");
 include_local ("inc_mots.php3");
-
+include_local ("inc_documents.php3");
 
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
@@ -1135,13 +1135,6 @@ if ($flag_editable) {
 }
 
 
-echo "<DIV ALIGN=left>";
-
-
-echo "$puce <b><a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=620,height=500'); void(0);\">\n";
-echo "Documents li&eacute;s &agrave; l'article</a></b>\n";
-
-
 //////////////////////////////////////////////////////
 // "Demander la publication"
 //
@@ -1155,7 +1148,7 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 	fin_cadre_relief();
 }
 
-echo "</TD></TR></TABLE>";
+echo "</DIV></TD></TR></TABLE>";
 
 
 //////////////////////////////////////////////////////
