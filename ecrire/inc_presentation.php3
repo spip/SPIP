@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="12" height="12" border="0" align="middle"></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="middle"></a>';
 }
 
 
@@ -1296,24 +1296,24 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	debut_html($titre);
 	
 		echo "\n<map name='map_couleur'>";
-		echo "\n<area shape='rect' href='$lien&set_couleur=6' alt='X' coords='0,0,10,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=1' alt='X' coords='12,0,22,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=2' alt='X' coords='24,0,34,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=3' alt='X' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=4' alt='X' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=5' alt='X' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=7' alt='X' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=8' alt='X' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=9' alt='X' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=10' alt='X' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=11' alt='X' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
-		echo "\n<area shape='rect' href='$lien&set_couleur=12' alt='X' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=6' coords='0,0,10,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=1' coords='12,0,22,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=2' coords='24,0,34,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=3' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=4' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=5' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=7' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=8' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=9' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=10' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=11' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=12' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
-		echo "\n<area shape='rect' href='$lien&set_disp=1' alt='o' coords='0,0,20,15' title=\"Afficher uniquement le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=2' alt='o' coords='19,0,40,15' title=\"Afficher les icones et le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=3' alt='o' coords='41,0,59,15' title=\"Afficher uniquement les icones\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=1' coords='0,0,20,15' title=\"Afficher uniquement le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=2' coords='19,0,40,15' title=\"Afficher les icones et le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=3' coords='41,0,59,15' title=\"Afficher uniquement les icones\">";
 		echo "\n</map>";
 	
 	// Icones principales
@@ -1323,20 +1323,23 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Contenu du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
+		icone_bandeau_principal ("Edition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
 	echo "</td>";
 	echo "<td background=''>";
 		if ($options == "avancees") {
-			icone_bandeau_principal ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
+			icone_bandeau_principal ("Les auteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
 		} else {
 			icone_bandeau_principal ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
 		}
 	echo "</td>";
 	echo "<td background=''>";
-		if ($options == "avancees" OR $rubrique == "messagerie") {
-			icone_bandeau_principal ("Forums et messagerie", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
+		if ($options == "avancees") {
+			if ($connect_statut == "0minirezo") 
+				icone_bandeau_principal ("Forums et p&eacute;titions", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
+			else
+				icone_bandeau_principal ("Forum interne", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
 		}
 	echo "</td>";
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques){
@@ -1371,79 +1374,80 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<table cellpadding='0' bgcolor='white' style='border-bottom: solid 1px black; border-top: solid 1px #333333;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 
 	echo "<table cellpadding='0' background='' width='750'><tr width='750'>";
-		if ($rubrique == "asuivre"){
-			icone_bandeau_secondaire ("&Agrave; suivre", "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
-			icone_bandeau_secondaire ("Tout le site", "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
+
+	if ($rubrique == "asuivre"){
+		icone_bandeau_secondaire ("&Agrave; suivre", "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
+		icone_bandeau_secondaire ("Tout le site", "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
+		if ($options == "avancees")
 			icone_bandeau_secondaire ("Calendrier", "calendrier.php3", "calendrier-24.gif", "calendrier", $sous_rubrique);
+	}
+	else if ($rubrique == "documents"){
+		icone_bandeau_secondaire ("Rubriques", "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
+		
+		$nombre_articles = mysql_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article"));
+		if ($nombre_articles > 0) {
+			icone_bandeau_secondaire ("Articles", "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
 		}
-		else if ($rubrique == "documents"){
-			icone_bandeau_secondaire ("Rubriques", "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
-			
-			$nombre_articles = mysql_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article"));
-			if ($nombre_articles > 0) {
-				icone_bandeau_secondaire ("$nombre_articles articles personnels", "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
-			}
 
-			$activer_breves=lire_meta("activer_breves");
-			if ($activer_breves != "non"){
-				icone_bandeau_secondaire ("Br&egrave;ves", "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
+		$activer_breves=lire_meta("activer_breves");
+		if ($activer_breves != "non"){
+			icone_bandeau_secondaire ("Br&egrave;ves", "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
+		}
+
+		if ($options == "avancees"){
+			$articles_mots = lire_meta('articles_mots');
+			if ($articles_mots != "non") {
+				icone_bandeau_secondaire ("Mots-cl&eacute;s", "mots_tous.php3", "mot-cle-24.gif", "mots", $sous_rubrique);
 			}
-			
-			if ($options == "avancees"){
-				$articles_mots = lire_meta('articles_mots');
-				if ($articles_mots != "non") {
-					icone_bandeau_secondaire ("Mots-cl&eacute;s", "mots_tous.php3", "mot-cle-24.gif", "mots", $sous_rubrique);
-				}
-				icone_bandeau_secondaire ("Sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
-				if (@mysql_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 0,1")) > 0) {
-					icone_bandeau_secondaire ("Documents", "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
-				}
+			icone_bandeau_secondaire ("Sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
+			if (@mysql_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 0,1")) > 0) {
+				icone_bandeau_secondaire ("Documents", "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
 			}
 		}
-		else if ($rubrique == "redacteurs"){
-			if ($options == "avancees") {
-				icone_bandeau_secondaire ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
-				icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
-				icone_bandeau_secondaire ("Administrateurs", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
-				if ($connect_statut == "0minirezo"){
-					bandeau_barre_verticale();
-					icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
-				}
-				bandeau_barre_verticale();
-			}
-			icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
-		}
-		else if ($rubrique == "messagerie"){
-			icone_bandeau_secondaire ("Forum interne", "forum.php3", "forum-interne-24.gif", "forum-interne", $sous_rubrique);
+	}
+	else if ($rubrique == "redacteurs"){
+		if ($options == "avancees") {
+			icone_bandeau_secondaire ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
+			icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
+			icone_bandeau_secondaire ("Administrateurs", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
 			if ($connect_statut == "0minirezo"){
-				icone_bandeau_secondaire ("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
 				bandeau_barre_verticale();
-				icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-				icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "suivi-petition", $sous_rubrique);
+				icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
 			}
-			if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
-				bandeau_barre_verticale();
-				icone_bandeau_secondaire ("Messagerie interne", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
-			}
+			bandeau_barre_verticale();
 		}
-		else if ($rubrique == "administration"){
-			if ($connect_toutes_rubriques) {
-				icone_bandeau_secondaire ("Configuration du site", "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
-			}
-			icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
-			if ($connect_toutes_rubriques) {
-				icone_bandeau_secondaire ("Gestion de la base", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
-			}
+		icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
+	}
+	else if ($rubrique == "messagerie"){
+		icone_bandeau_secondaire ("Forum interne", "forum.php3", "forum-interne-24.gif", "forum-interne", $sous_rubrique);
+		if ($connect_statut == "0minirezo"){
+			icone_bandeau_secondaire ("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
+			bandeau_barre_verticale();
+			icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
+			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "suivi-petition", $sous_rubrique);
 		}
-
-
+/*		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+			bandeau_barre_verticale();
+			icone_bandeau_secondaire ("Messagerie interne", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+		}*/
+	}
+	else if ($rubrique == "administration"){
+		if ($connect_toutes_rubriques) {
+			icone_bandeau_secondaire ("Configuration du site", "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
+		}
+		icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
+		if ($connect_toutes_rubriques && $options == "avancees") {
+			icone_bandeau_secondaire ("Maintenance du site", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+		}
+	}
 
 	if ($options == "avancees") {
-		global $recherche;
+/*		global $recherche;
 		if (strlen($recherche) == 0) {
 			if ($spip_display == 2) $recherche = "Titre ou num&eacute;ro";
 			else $recherche = "Rechercher";
 		}
+		bandeau_barre_verticale();
 		echo "<td width='10'><img src='img_pack/rien.gif' width=10></td>";
 		echo "<td>";
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
@@ -1452,13 +1456,15 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="spip_recherche">';
 		echo "</form>";
-		echo "</td>";
+		echo "</td>";*/
 	}
 
 	echo "<td width='100%'>   </td>";
 
-
-	if ($auth_can_disconnect) {
+	if ($options == "avancees" AND $activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+		icone_bandeau_secondaire ("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+	}
+	if ($auth_can_disconnect AND $options == "avancees") {
 		echo "<td width='5'>&nbsp;</td>";
 		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
 	}
@@ -1614,19 +1620,35 @@ function debut_gauche() {
 			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
 		}
 		
-			if ($nb_connectes > 0) {
-				echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
-				echo "<p><b>Actuellement en ligne&nbsp;:</b>";
-			
-				while($row = mysql_fetch_array($result_auteurs)){
-					$id_auteur = $row["id_auteur"];
-					$nom_auteur = typo($row["nom"]);
-					echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-				}	
-				echo "</font>";
-			}
+		if ($nb_connectes > 0) {
+			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+			echo "<p><b>Actuellement en ligne&nbsp;:</b>";
+		
+			while($row = mysql_fetch_array($result_auteurs)){
+				$id_auteur = $row["id_auteur"];
+				$nom_auteur = typo($row["nom"]);
+				echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+			}	
+			echo "</font>";
+		}
 		if ($options == "avancees" OR $nb_connectes > 0) fin_cadre_relief();
 	}	
+
+	if ($options == "avancees") {
+		debut_cadre_enfonce();
+		global $recherche, $spip_display;
+		if (strlen($recherche) == 0) {
+			if ($spip_display != "3") $recherche = "Titre ou num&eacute;ro";
+			else $recherche = "Rechercher";
+		}
+		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
+		if ($spip_display != "3") {
+			echo "<font face='verdana,arial,helvetica,san-serif' size=2><b>Rechercher&nbsp;:</b></font><br>";
+		}
+		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="formo">';
+		echo "</form>";
+		fin_cadre_enfonce();
+	}
 }
 
 

@@ -144,7 +144,7 @@ if ($login) {
 		echo "<b>Options de s&eacute;curit&eacute;</b><p>";
 		echo "<font size='2' face='verdana,arial,helvetica,sans-serif'>";
 		if ($zap_sessions) {
-			$redirect = './ecrire/login.php3?secu=oui';
+			$redirect = "./ecrire/login.php3?secu=oui&login=$login";
 			echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
 			echo "<form action='../spip_cookie.php3' method='post'";
 			echo " onSubmit='if (this.session_password.value) {
@@ -215,8 +215,11 @@ if ($echec_cookie == "oui" AND $php_module) {
 }
 
 
+$link = new Link;
+$link->addVar('secu', 'oui');
+
 echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
-echo "[<a href='login.php3?secu=oui'>options de s&eacute;curit&eacute;</a>";
+echo "[<a href='".$link->getUrl()."'>options de s&eacute;curit&eacute;</a>";
 if ($url_site) {
 	echo " | <a href='$url_site'>retour au site public</a>";
 }
