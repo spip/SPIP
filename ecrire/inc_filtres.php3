@@ -75,7 +75,7 @@ function corriger_caracteres($texte) {
 	static $trans;
 	if (!$trans) {
 		// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
-		$this->trans['iso-8859-1'] = array(
+		$trans['iso-8859-1'] = array(
 			chr(146) => "'",
 			chr(180) => "'",
 			chr(147) => '"',
@@ -84,7 +84,7 @@ function corriger_caracteres($texte) {
 			chr(151) => '-',
 			chr(133) => '...'
 		);
-		$this->trans['utf-8'] = array(
+		$trans['utf-8'] = array(
 			chr(194).chr(146) => "'",
 			chr(194).chr(180) => "'",
 			chr(194).chr(147) => '"',
