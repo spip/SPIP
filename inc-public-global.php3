@@ -61,7 +61,7 @@ $use_cache = utiliser_cache($chemin_cache, $delais);
 if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
 	include_ecrire("inc_meta_cache.php3");
 }
-else {
+if (! defined("_ECRIRE_INC_META_CACHE")) {
 	include_ecrire("inc_meta.php3");
 }
 
