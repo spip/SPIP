@@ -1,6 +1,14 @@
 <?php
 
 include ("inc_version.php3");
+include_ecrire ("inc_presentation.php3");
+include_ecrire ("inc_auth.php3");
+include_ecrire ("inc_admin.php3");
+include_ecrire ("inc_acces.php3");
+include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_config.php3");
+include_ecrire ("inc_texte.php3");
+include_ecrire ("inc_filtres.php3");
 
 
 // Si reinstallation necessaire, message ad hoc
@@ -12,7 +20,6 @@ if ($reinstall == 'oui') {
 
 	@copy("inc_connect.php3", "inc_connect_install.php3");
 
-	include_ecrire("inc_presentation.php3");
 	install_debut_html(_T('titre_page_upgrade'));
 	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
 	echo _T('texte_nouvelle_version_spip_2');
@@ -27,14 +34,6 @@ if ($reinstall == 'oui') {
 	exit;
 }
 
-
-include_ecrire ("inc_auth.php3");
-include_ecrire ("inc_admin.php3");
-include_ecrire ("inc_acces.php3");
-include_ecrire ("inc_meta.php3");
-include_ecrire ("inc_config.php3");
-include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_filtres.php3");
 
 $upgrade_titre = _T('info_mise_a_niveau_base');
 
