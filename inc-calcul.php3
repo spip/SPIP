@@ -291,7 +291,7 @@ function executer_squelette($squelette, $contexte) {
 
 	// Si squelette pas deja inclus, l'inclure
 	if (!$fonctions_squelettes[$squelette]) {
-		$squelette_cache = $GLOBALS['dossier_cache'].'/skel_'.rawurlencode($squelette).'.php3';
+		$squelette_cache = 'CACHE/skel_'.rawurlencode($squelette).'.php3';
 		$use_cache = false;
 		if (file_exists($squelette_cache)) {
 			$t = filemtime($squelette_cache);
