@@ -1,12 +1,15 @@
 <?php
 
 include ("inc_version.php3");
-include_ecrire ("inc_layer.php3");
 
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
 #$lastmodified = filemtime("aide_index.php3");
 #$headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
 #if ($headers_only) exit;
+
+include_ecrire ("inc_layer.php3");
+include_ecrire ("inc_texte.php3");
+include_ecrire ("inc_filtres.php3");
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (@file_exists("inc_connect.php3")) {
@@ -78,7 +81,13 @@ function fichier_aide($lang_aide = '') {
 				$ecrire_cache = ecrire_fichier ($fichier_aide, $contenu);
 				return array($contenu, $lang_aide, $help_server, $ecrire_cache);
 			} else
-				define ('erreur_langue', _L('Impossible de t&eacute;l&eacute;charger l\'aide en ligne pour cette langue. Erreur de r&eacute;seau, ou aide non traduite. Si vous utilisez ce site en-dehors d\'une connexion Internet, vous pouvez installer l\'aide en local.'));
+				define ('erreur_langue',
+					'<p>'
+					._L('L\'aide en ligne, pour cette langue, n\'est pas install&eacute;e. Et une erreur de connexion s\'est produite lors de la tentative de t&eacute;l&eacute;chargement.')
+					.propre('- ')._L('Si vous utilisez ce site en-dehors d\'une connexion Internet, vous pouvez installer l\'aide en local, dans le r&eacute;pertoire <tt>ecrire/AIDE/</tt>.')
+					.propre('- ')._L('Vous pouvez aussi tenter une nouvelle connexion en rechargeant cette page.')
+					.propre('- ')._L('Ou encore, choisir l\'aide dans une autre langue.')
+				);
 		}
 	}
 
@@ -180,9 +189,6 @@ table.spip td {
 </head>
 <?php
 
-	include_ecrire ("inc_texte.php3");
-	include_ecrire ("inc_filtres.php3");
-
 	echo '<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24"';
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
@@ -202,17 +208,17 @@ table.spip td {
 	// Il faut que la langue de typo() soit celle de l'aide en ligne
 	changer_typo($lang_aide);
 
-	$html = justifier(propre($html)."<p>");
+	$html = justifier($html."<p>");
 	// Remplacer les liens externes par des liens ouvrants (a cause des frames)
 	$html = ereg_replace('<a href="(http://[^"]+)"([^>]*)>', '<a href="\\1"\\2 target="_blank">', $html);
 
 	echo $html;
 
-	if (defined('erreur_langue'))
+	if (defined('erreur_langue')) {
+		include_ecrire('inc_presentation.php3');
+		install_debut_html(_T('forum_titre_erreur'));
 		echo "<div>".erreur_langue."</div>";
-
-	echo "<font size=2>$les_notes</font><p>";
-	echo "</body></html>";
+	}
 
 }
 
