@@ -178,6 +178,11 @@ $GLOBALS['i18n_spip_eo'] = array(
 'dirs_commencer' => 'por vere komenci la instaladon',
 'dirs_preliminaire' => 'Anta&#365;e: <B>&#284;ustigu la alirrajtojn</B>',
 'dirs_probleme_droits' => '<b>Problemo de alirrajtoj</b>',
+'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
+		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
+		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
 'dirs_repertoires_suivants' => '<b>La jenaj dosierujoj ne estas alireblaj skribe : 
 <ul>@bad_dirs@.</ul><p>Por solvi tion, utiligu vian FTP-klienton por reguligi la alirrajtojn de &#265;iu el tiuj dosierujoj. La procedon oni detale klarigis en la instalgvidlibro.<p>Post tiu manovro, vi povos',
 
@@ -657,9 +662,9 @@ Dankon pro via partopreno
 'info_mots_cles_association' => 'Eblas ligi la &#349;losilvortojn de tiu grupo kun:',
 'info_moyenne' => 'meznombro:',
 'info_multi_articles' => '<NEW> Activer le menu de langue sur les articles&nbsp;?',
-'info_multi_cet_article' => '<NEW> Langue utilis&eacute;e dans cet article&nbsp;:',
+'info_multi_cet_article' => '<NEW> Langue de cet article&nbsp;:',
 'info_multi_cette_rubrique' => '<NEW> Langue utilis&eacute;e dans cette rubrique&nbsp;:',
-'info_multi_herit' => '<NEW> langue de la rubrique sup&eacute;rieure',
+'info_multi_herit' => '<NEW> Langue par d&eacute;faut',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => '<NEW> Activer le menu de langue sur les rubriques&nbsp;?',
