@@ -104,7 +104,7 @@ else if ($new=='oui') {
 			}
 			else if (lire_meta('multi_rubriques') == 'oui') {
 				// Chercher la rubrique la plus adaptee pour accueillir l'article
-				if (lire_meta('multi_secteurs' == 'oui')) 
+				if (lire_meta('multi_secteurs') == 'oui') 
 					$id_parent = 0;
 				else {
 					$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
