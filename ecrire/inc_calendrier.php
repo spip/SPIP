@@ -396,9 +396,9 @@ function http_calendrier_les_jours($intitul, $claire, $foncee)
 
 function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dernier_jour,$evenements,$fclic)
 {
-	global $couleur_claire;
+	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	
-	$class_dispose = "border-bottom: 1px solid $couleur_claire; border-right: 1px solid $couleur_claire;"; 
+	$class_dispose = "border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;"; 
   
 	// affichage du debut de semaine hors periode
 	$jour_semaine = date("w",mktime(1,1,1,$mois_today,$premier_jour,$annee_today));
@@ -438,7 +438,7 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 			"</span>");
 
 		if ($premier) {
-			$border_left = " border-left: 1px solid $couleur_claire;";
+			$border_left = " border-$spip_lang_left: 1px solid $couleur_claire;";
 			$premier = false;
 		}
 		else $border_left = "";
@@ -513,86 +513,87 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
 # dispose les evenements d'une semaine
 
 function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
-			      $debut, $fin, $echelle,
-			      $articles, $breves, $evenements, 
-			      $script, $nav)
+	$debut, $fin, $echelle,
+	$articles, $breves, $evenements, 
+	$script, $nav)
 {
-  global $couleur_claire, $couleur_foncee, $spip_ecran;
+	global $couleur_claire, $couleur_foncee, $spip_ecran, $spip_lang_left;
 
 	if ($spip_ecran == "large") $largeur = 90;
 	else $largeur = 60;
 
-  $jour_semaine = date("w",mktime(1,1,1,$mois_today,$jour_today,$annee_today));
-  if ($jour_semaine==0) $jour_semaine=7;
-  $intitul = array();
-  $liens = array();
-  for ($j=0; $j<7;$j++){
-    $nom = mktime(0,0,0,$mois_today,$jour_today-$jour_semaine+$j+1,$annee_today);
-    $date = date("Y-m-d", $nom);
-    $v = array('date' => date("Ymd", $nom),
-	       'nom' => nom_jour($date),
-	       'jour' => journum($date),
-	       'mois' => mois($date),
-	       'annee' => annee($date),
-	       'index' => date("w", $nom));
-    $intitul[$j] = $v;
-    $liens[$j] = 
-      http_calendrier_href(($script .
-		    (strpos($script,'?') ? '&' : '?') .
-		    "type=jour&jour=" .
-		    $v['jour'] .
-		    "&mois=" .
-		    $v['mois'] .
-		    "&annee=" .
-		    $v['annee'] .
-		    $nav),
-		   ($v['nom'] .
-		    " " .
-		    $v['jour'] .
-		    (($v['jour'] ==1) ? 'er' : '') .
-		    ($nav  ? ('/' . (0+$v['mois'])) : '')),
-		   '',
-		   'color:black;');
-  }
+	$jour_semaine = date("w",mktime(1,1,1,$mois_today,$jour_today,$annee_today));
+	if ($jour_semaine==0) $jour_semaine=7;
+	$intitul = array();
+	$liens = array();
+	for ($j=0; $j<7;$j++){
+		$nom = mktime(0,0,0,$mois_today,$jour_today-$jour_semaine+$j+1,$annee_today);
+		$date = date("Y-m-d", $nom);
+		$v = array('date' => date("Ymd", $nom),
+			'nom' => nom_jour($date),
+			'jour' => journum($date),
+			'mois' => mois($date),
+			'annee' => annee($date),
+			'index' => date("w", $nom));
+		$intitul[$j] = $v;
+		$liens[$j] = 
+		http_calendrier_href(($script .
+			(strpos($script,'?') ? '&' : '?') .
+			"type=jour&jour=" .
+			$v['jour'] .
+			"&mois=" .
+			$v['mois'] .
+			"&annee=" .
+			$v['annee'] .
+			$nav),
+			($v['nom'] .
+				" " .
+				$v['jour'] .
+				(($v['jour'] ==1) ? 'er' : '') .
+				($nav  ? ('/' . (0+$v['mois'])) : '')),
+				'',
+				'color:black;');
+	}
 
-  list($dimheure, $dimjour, $fontsize, $padding) =
-    calendrier_echelle($debut, $fin, $echelle);
-  $today=getdate(time());
-  $jour_t = $today["mday"];
-  $mois_t = $today["mon"];
-  $annee_t = $today["year"];
-  $total = '';
-  foreach($intitul as $k => $v) {
-    $d = $v['date'];
-    $jarticles = $articles[$d];
-    $jbreves = $breves[$d];
-    $total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
-	<div style='background-color: " . 
-      (($v['index'] == 0) ? $couleur_claire :
-       (($v['jour'] == $jour_t AND 
-	 $v['mois'] == $mois_t AND
-	 $v['annee'] == $annee_t) ? "white" :
-	"#eeeeee")) .
-      "'>" .
-    "\n<div style='position: relative; color: #666666; width: 100%; " .
-    "height: ${dimjour}px; " .
-    "font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;'>" .
-
-      http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $evenements[$d], $d) . '
-	</div></div>' .
-      (!($jarticles OR $jbreves) ? '' :
-       http_calendrier_articles_et_breves($jarticles, $jbreves,'padding: 5px;')) .
-      "\n</td>";
-  }
-  return "<table border='0' cellspacing='0' cellpadding='0' width='100%'>" .
-    http_calendrier_navigation_semaine($jour_today,$mois_today,$annee_today,
-			       $echelle,
-			       $jour_semaine,
-			       $script,
-			       $nav) .
-    http_calendrier_les_jours($liens, $couleur_claire, $couleur_foncee) .
-    "\n<tr>$total</tr>" .
-    "</table>";
+	list($dimheure, $dimjour, $fontsize, $padding) =
+	calendrier_echelle($debut, $fin, $echelle);
+	$today=getdate(time());
+	$jour_t = $today["mday"];
+	$mois_t = $today["mon"];
+	$annee_t = $today["year"];
+	$total = '';
+	foreach($intitul as $k => $v) {
+		$d = $v['date'];
+		$jarticles = $articles[$d];
+		$jbreves = $breves[$d];
+		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
+			<div style='background-color: " . 
+			(($v['index'] == 0) ? $couleur_claire :
+			(($v['jour'] == $jour_t AND 
+			$v['mois'] == $mois_t AND
+			$v['annee'] == $annee_t) ? "white;" :
+			"#eeeeee;")) .
+			"'>" .
+			"\n<div style='position: relative; color: #999999; width: 100%; " .
+			"border-$spip_lang_left: 1px solid $couleur_claire; " .
+			"border-bottom: 1px solid $couleur_claire; " .
+			"height: ${dimjour}px; " .
+			"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;'>" .
+			http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $evenements[$d], $d) . 
+			'</div></div>' .
+			(!($jarticles OR $jbreves) ? '' :
+				http_calendrier_articles_et_breves($jarticles, $jbreves,'padding: 5px;')) .
+			"\n</td>";
+	}
+	return "<table border='0' cellspacing='0' cellpadding='0' width='100%'>" .
+	http_calendrier_navigation_semaine($jour_today,$mois_today,$annee_today,
+		$echelle,
+		$jour_semaine,
+		$script,
+		$nav) .
+	http_calendrier_les_jours($liens, $couleur_claire, $couleur_foncee) .
+	"\n<tr>$total</tr>" .
+	"</table>";
 }
 
 
@@ -758,7 +759,7 @@ function http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize)
 			if ($j == 0) $gras = " font-weight: bold;";
 			else $gras = "";
 			
-			$total .= "\n<div style='position: absolute; width: 100%; $spip_lang_left: 0px; top: ".
+			$total .= "\n<div style='position: absolute; $spip_lang_left: 0px; top: ".
 				http_cal_top ("$i:".sprintf("%02d",floor(($j*60)/$slice)), $debut, $fin, $dimheure, $dimjour, $fontsize) .
 				"px; border-top: 1px solid #cccccc;$gras'>
 				<div style='margin-$spip_lang_left: 2px'>$i:" . 
@@ -767,7 +768,7 @@ function http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize)
 		}
 	}
 	
-	$total .= "\n<div style='position: absolute; width: 100%; top: ".
+	$total .= "\n<div style='position: absolute; top: ".
 		http_cal_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize).
 		"px; border-top: 1px solid #cccccc; font-weight: bold;'>
 		<div style='margin-$spip_lang_left: 2px'>$fin:00" . 
@@ -923,7 +924,7 @@ list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin
 				"px; height: " .
 				$hauteur .
 				"px; width: ".
-				($largeur - 2 * (padding+1)) .
+				($largeur - 2 * ($padding+1)) .
 				"px; font-size: ".
 				floor($fontsize * 1.3) .
 				"px; padding: " .
@@ -996,7 +997,8 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 
 function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 {
-	global $spip_ecran,$largeur_table;	
+	global $spip_ecran, $spip_lang_left, $couleur_claire;	
+	
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
 		$largeur_gauche = 170;
