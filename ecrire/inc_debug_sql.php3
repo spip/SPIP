@@ -24,7 +24,7 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 	$GLOBALS['bouton_admin_debug'] = true;
 	$res = '';
 	foreach ($tableau_des_erreurs as $err) {
-		$res .= "<li>" .$err[0] . ",. <small>".$err[1]."</small><br /></li>\n";
+		$res .= "<li>" .$err[0] . ", <small>".$err[1]."</small><br /></li>\n";
 	}
 	return "<div id='spip-debug' style='"
 	. "position: absolute; top: 20px; left: 20px; z-index: 1000;"
