@@ -50,7 +50,7 @@ function creer_base() {
 		KEY id_trad (id_trad),
 		KEY lang (lang),
 		KEY statut (statut, date),
-		KEY url_ref (url_ref),
+		KEY url_ref (url_ref (25)),
 		KEY date_modif (date_modif))";
 	$result = spip_query($query);
 
@@ -1417,8 +1417,12 @@ function maj_base() {
 
 	if ($version_installee < 1.720) {
 		spip_query("ALTER TABLE spip_articles ADD url_ref text NOT NULL");
-		spip_query("ALTER TABLE spip_articles ADD INDEX url_ref (url_ref)");
 		maj_version (1.720);
+	}
+
+	if ($version_installee < 1.721) {
+		spip_query("ALTER TABLE spip_articles ADD INDEX url_ref (url_ref (25))");
+		maj_version (1.721);
 	}
 
 	return true;
