@@ -316,8 +316,6 @@ function afficher_sites($titre_table, $requete) {
 
 			//echo "<td class='arial2'>";
 			$link = new Link("sites.php3?id_syndic=$id_syndic");
-			$redirect = new Link;
-			$link->addVar('redirect', $redirect->getUrl());
 			switch ($statut) {
 			case 'publie':
 				if (acces_restreint_rubrique($id_rubrique))
