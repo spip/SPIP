@@ -100,20 +100,19 @@ function creer_vignette($image, $newWidth, $newHeight, $format) {
 		$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 
 	// Sauvegarde de l'image destination
-	$destination = ereg_replace('\.(.*)$','-s',$image);
+	$destination = ereg_replace('\.(.*)$','-s',$image).'.'.$destFormat;
 	if ($destFormat == "jpg") {
-		ImageJPEG($destImage, "$destination.jpg", 60);
+		ImageJPEG($destImage, $destination, 70);
 	}
 	else if ($destFormat == "gif") {
-		ImageGIF($destImage, "$destination.gif");
+		ImageGIF($destImage, $destination);
 	}
 	else if ($destFormat == "png") {
-		ImagePNG($destImage, "$destination.png");
+		ImagePNG($destImage, $destination);
 	}
 	ImageDestroy($srcImage);
 	ImageDestroy($destImage);
 
-	//exit;
 	$retour['width'] = $destWidth;
 	$retour['height'] = $destHeight;
 	$retour['fichier'] = $destination;
