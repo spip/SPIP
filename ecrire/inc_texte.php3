@@ -328,10 +328,10 @@ function couper($texte, $taille=50) {
 	$texte = ereg_replace("[{}]", "", $texte);
 
 	// supprimer les tableaux
-	$texte = ereg_replace("(^|\n)\|.*\|\n", "", $texte);
+	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
 
 	// supprimer les traits, lignes etc
-	$texte = ereg_replace("(^|\n)-[-#\*]*", "", $texte);
+	$texte = ereg_replace("(^|\r)-[-#\*]*", "\r", $texte);
 
 	// couper au mot precedent
 	$long = substr($texte, 0, max($taille-4,1));
