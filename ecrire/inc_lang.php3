@@ -314,18 +314,11 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
-	else if ($default == '--') {
-		$parenthese_o = '(';
-		$parenthese_f = ')';
-		$default = lire_meta('langue_site');
-	}
 
-	if ($nom_select == 'var_lang') {
+	if ($nom_select == 'var_lang')
 		$langues = explode(',', $GLOBALS['all_langs']);
-	}
-	else {
+	else
 		$langues = explode(',', lire_meta('langues_multilingue'));
-	}
 
 	if (count($langues) <= 1) return;
 
@@ -343,22 +336,19 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
 	$ret .= $premier_option;
 
-	if (lire_meta('multi_rubriques') == "oui") {
-		if ($herit) {
+	if ((lire_meta('multi_rubriques') == 'oui') AND ($nom_select == 'changer_lang')) {
+		if ($herit)
 			$ret .= "<option value='herit' selected>"._T('info_multi_herit')." ($default)</option>\n";
-		} else if ($nom_select == 'changer_lang') {
+		else
 			$ret .= "<option value='herit'>"._T('info_multi_herit')." ($default)</option>\n";
-		}
 		$default = '';
 	}
 
 	while (list(,$l) = each ($langues)) {
-		if ($l == $default) {
+		if ($l == $default)
 			$ret .= "<option value='$l' selected>$parenthese_o".traduire_nom_langue($l)."$parenthese_f</option>\n";
-		}
-		else {
+		else
 			$ret .= "<option value='$l'>".traduire_nom_langue($l)."</option>\n";
-		}
 	}
 	$ret .= "</select>\n";
 	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
