@@ -368,6 +368,19 @@ if ($relief) {
 			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." liens syndiqu&eacute;s</a> sont en attente de validation.</small>";
 	}
 
+	// Les forums en attente de moderation
+	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
+		if (($row = mysql_fetch_array($result)) AND $row['compte']) {
+			echo "<br><small><a href='controle_forum.php3'>".$row['compte']." forum";
+			if ($row['compte']>1)
+				echo "s</a> sont";
+			else
+				echo " </a> est";
+			echo " en attente de validation</small>.";
+		}
+	}
+
 	fin_cadre_enfonce();	
 }	
 
