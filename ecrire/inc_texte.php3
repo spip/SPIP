@@ -135,6 +135,9 @@ function nettoyer_chapo($chapo){
 function echappe_html($letexte,$source) {
 	global $flag_pcre;
 
+
+
+
 	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
@@ -181,16 +184,39 @@ function echappe_html($letexte,$source) {
 
 		}
 
+
+
 		$pos = strpos($letexte, $regs[0]);
 		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
 	}
 
+
+	//
+	// Insertion d'images et de documents utilisateur
+	//
+	while (eregi("<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
+		include_ecrire("inc_documents.php3");
+		$num_echap++;
+
+		$letout = quotemeta($match[0]);
+		$letout = ereg_replace("\|", "\|", $letout);
+		$id_document = $match[2];
+		$align = $match[4];
+		if (eregi("emb", $match[1]))
+			$rempl = embed_document($id_document, $align);
+		else
+			$rempl = integre_image($id_document, $align, $match[1]);
+		$letexte = ereg_replace($letout, $rempl, $letexte);
+		$les_echap[$num_echap] = $rempl;
+	}
+
+
 	//
 	// Echapper les <a href>
 	//
-	$regexp_echap = "<a[[:space:]][^>]+>";
-	// $regexp_echap = "<[^>]+>"; // Echappement tout HTML
+	//$regexp_echap = "<a[[:space:]][^>]+>";
+	 $regexp_echap = "<[^>]+>"; // Echappement tout HTML
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
 		$les_echap[$num_echap] = $regs[0];
@@ -655,6 +681,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		}
 	}
 
+
 	//
 	// Raccourcis liens (cf. fonction extraire_lien ci-dessus)
 	//
@@ -668,22 +695,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$texte_a_voir = substr($texte_a_voir, $pos + strlen($regs[0]));
 	}
 	$letexte = $texte_vu.typo($texte_a_voir); // typo de la queue du texte
-
-	//
-	// Insertion d'images et de documents utilisateur
-	//
-	while (eregi("<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
-		include_ecrire("inc_documents.php3");
-		$letout = quotemeta($match[0]);
-		$letout = ereg_replace("\|", "\|", $letout);
-		$id_document = $match[2];
-		$align = $match[4];
-		if (eregi("emb", $match[1]))
-			$rempl = embed_document($id_document, $align);
-		else
-			$rempl = integre_image($id_document, $align, $match[1]);
-		$letexte = ereg_replace($letout, $rempl, $letexte);
-	}
 
 	//
 	// Tableaux
