@@ -19,12 +19,32 @@ if ($headers_only) exit;
 
 
 function bandeau_menu() {
+	global $spip_ecran;
 		$result_racine = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY titre");
 		$i = spip_num_rows($result_racine);
+		
+		$total_lignes = $i;
+		if ($spip_ecran == "large") $max_lignes = 20;
+		else $max_lignes = 15;
+		
+		$nb_col = ceil($total_lignes / $max_lignes);
+		if ($nb_col < 1) $nb_col = 1;
+		$max_lignes = ceil($total_lignes / $nb_col);
+		
+		
+		$count_lignes = 0;
+		
 		if ($i > 0) {
 			$ret = "<div>&nbsp;</div>";
 			$ret .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
 			while ($row = spip_fetch_array($result_racine)) {
+
+				if ($count_lignes == $max_lignes) {			
+					$count_lignes = 0;
+					$ret .= "</div></td><td valign='top' width='200'><div>&nbsp;</div><div class='bandeau_rubriques' style='z-index: 1;'>";
+				}
+				$count_lignes ++;
+
 				$id_rubrique = $row["id_rubrique"];
 				$titre_rubrique = supprimer_numero(typo($row["titre"]));
 				
@@ -84,7 +104,9 @@ function bandeau_rubrique ($id_rubrique, $titre_rubrique, $z = 1) {
 }
 
 echo "document.write(\"";
+echo "<table><tr><td valign='top' width='200'>";
 echo bandeau_menu();
+echo "</td></tr></table>";
 echo "\");\n";
 
 ?>
