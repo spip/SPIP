@@ -154,6 +154,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	if ($nouveau) {
 		if (!$mode) $mode = $type_image ? 'vignette' : 'document';
 		$titre = ereg_replace("\..*$", "", $orig);
+		$titre = ereg_replace("ecrire/|upload/", "", $titre);
 		$titre = strtr($titre, "_", " ");
 		$update = "mode='$mode', titre='".addslashes($titre)."', ";
 	}
