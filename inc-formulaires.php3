@@ -147,7 +147,7 @@ function formulaire_signature($id_article) {
 				}
 			}
 			
-			if (!ereg(".*\@[^\.]*\..*", $adresse_email)) {
+			if (! email_valide($adresse_email)) {
 				$reponse_signature .= erreur("Votre adresse email n'est pas valide.");
 				$refus = "oui";
 			}
@@ -275,7 +275,6 @@ function formulaire_signature($id_article) {
 		}
 	}
 
-	echo "</a>";
 }
 
 
@@ -422,8 +421,8 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 	if ($GLOBALS[texte_message_auteur]) {
 		if ($GLOBALS[sujet_message_auteur] == "")
 			$erreur .= erreur("Veuillez indiquer un sujet");
-		else if (!ereg(".@.", $GLOBALS[email_message_auteur]))
-			$erreur .= erreur("Veuillez indiquer votre email");
+		else if (! email_valide($GLOBALS[email_message_auteur]) )
+			$erreur .= erreur("Veuillez indiquer une adresse email valide");
 		else if ($GLOBALS[valide_message_auteur]) {  // verifier hash ?
 			include_local("ecrire/inc_mail.php3");
 			$GLOBALS[texte_message_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site').") --\n";
