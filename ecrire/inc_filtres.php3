@@ -79,10 +79,7 @@ function supprimer_numero($texte) {
 
 // Suppression basique et brutale de tous les <...>
 function supprimer_tags($texte, $rempl = "") {
-	// super gavant : la regexp ci-dessous plante sous php3, genre boucle infinie !
-	// $texte = ereg_replace("<([^>\"']*|\"[^\"]*\"|'[^']*')*>", $rempl, $texte);
-	$texte = ereg_replace("<[^>]*>", $rempl, $texte);
-	return $texte;
+	return preg_replace(",<([^>\"']*|\"[^>\"]*\"|'[^>']*')*>,", $rempl, $texte);
 }
 
 // Convertit les <...> en la version lisible en HTML
@@ -93,13 +90,13 @@ function echapper_tags($texte, $rempl = "") {
 
 // Convertit un texte HTML en texte brut
 function textebrut($texte) {
-	$texte = ereg_replace("[\n\r]+", " ", $texte);
-	$texte = eregi_replace("<(p|br)([[:space:]][^>]*)?".">", "\n\n", $texte);
-	$texte = ereg_replace("^\n+", "", $texte);
-	$texte = ereg_replace("\n+$", "", $texte);
-	$texte = ereg_replace("\n +", "\n", $texte);
+	$texte = preg_replace("/[[:space:]]+/", " ", $texte);
+	$texte = preg_replace("/<(p|br)( [^>]*)?".">/i", "\n\n", $texte);
+	$texte = preg_replace("/^\n+/", "", $texte);
+	$texte = preg_replace("/\n+$/", "", $texte);
+	$texte = preg_replace("/\n +/", "\n", $texte);
 	$texte = supprimer_tags($texte);
-	$texte = ereg_replace("(&nbsp;| )+", " ", $texte);
+	$texte = preg_replace("/(&nbsp;| )+/", " ", $texte);
 	// nettoyer l'apostrophe curly qui pose probleme a certains rss-readers, lecteurs de mail...
 	$texte = str_replace("&#8217;","'",$texte);
 	return $texte;
