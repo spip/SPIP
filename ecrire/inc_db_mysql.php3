@@ -161,6 +161,8 @@ function spip_release_lock($nom) {
 // IN (...) est limite a 255 elements, d'ou cette fonction assistante
 //
 function calcul_mysql_in($val, $valeurs, $not) {
+  spip_log("IN: ". count($valeurs));
+	if (!$valeurs) return 'TRUE';
 	$s = split(',', $valeurs, 255);
 	if (count($s) < 255) {
 		return ("($val $not IN ($valeurs))");

@@ -147,10 +147,13 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
 			';
   }
   else if ($type_logo == 'DOCUMENT'){
-    $milieu .= '
-			$logon = integre_image(' .
-      index_pile($id_boucle,  "id_document", $boucles) . ',"","fichier_vignette");
-			$logoff = "";
+    $milieu .= ' 
+		$logoff = ' .
+      index_pile($id_boucle,  "id_document", $boucles) . 
+      '; 
+		$doublons["documents"] = ", $logoff"; 
+		$logon = integre_image($logoff,"","fichier_vignette");
+		$logoff = "";
 			';
   }
   else if ($type_logo == 'AUTEUR') {

@@ -190,10 +190,13 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 	// Inserer directement un document dans le squelette
 	//
 	case 'EMBED_DOCUMENT':
-		$milieu = "\ninclude_ecrire('inc_documents.php3');";
-		$code = "embed_document(" .
-			index_pile($id_boucle,  'id_document', $boucles) . ", '" .
-			($fonctions) ? join($fonctions, "|") : "" .
+		$milieu = '
+		$lacible = ' .
+			index_pile($id_boucle, 'id_document', $boucles) .
+      '; 
+		if ($lacible) $doublons["documents"] = "," . intval($lacible); ';
+		$code = 'embed_document($lacible, \'' .
+		  ($fonctions ? join($fonctions, "|") : "") .
 			"', false)";
 		$fonctions = "";
 		break;
