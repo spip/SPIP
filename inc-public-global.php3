@@ -193,6 +193,8 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$url = $GLOBALS['clean_link'];
 		$url->delvar('var_preview');
 		$url = $url->geturl();
+		include_ecrire('inc_lang.php3');
+		lang_select($GLOBALS['auteur_session']['lang']);
 		$page['texte'] .= '<div style="
 		display: block;
 		color: #eeeeee;
