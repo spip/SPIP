@@ -376,14 +376,14 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 
 function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
-	if ($largeur_vignette > 120) {
-		$rapport = 120.0 / $largeur_vignette;
-		$largeur_vignette = 120;
+	if ($largeur_vignette > 110) {
+		$rapport = 110.0 / $largeur_vignette;
+		$largeur_vignette = 110;
 		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
 	}
-	if ($hauteur_vignette > 130) {
-		$rapport = 130.0 / $hauteur_vignette;
-		$hauteur_vignette = 130;
+	if ($hauteur_vignette > 110) {
+		$rapport = 110.0 / $hauteur_vignette;
+		$hauteur_vignette = 110;
 		$largeur_vignette = ceil($largeur_vignette * $rapport);
 	}
 
@@ -408,18 +408,17 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 		$link->addVar('forcer_document', 'oui');
 
 
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>\n";
 	echo $link->getForm('POST', 'docs', 'multipart/form-data');
 
 	if (tester_upload()) {
-		echo "<div><b>$intitule</b></div>";
-		echo "<div><input name='image' type='File' class='forml' size='15'></div>\n";
+		echo "<div>$intitule</div>";
+		echo "<div><input name='image' type='File' style='font-size: 10px;' class='forml' size='15'></div>\n";
 		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div>\n";
 	}
 
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $options == "avancees") {
 		$texte_upload = texte_upload_manuel("upload", $inclus);
-		if ($texte_upload) {
+		if ($texte_upload AND $afficher_texte_ftp) {
 			echo "<p><div style='color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
 			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br />";
@@ -446,7 +445,6 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 		}
 	}
 	echo "</form>\n";
-	echo "</font>\n";
 }
 
 
@@ -524,6 +522,29 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					
 			echo "<div style='text-align:center;'>";
 			if ($flag_modif) {
+			
+				if ($id_vignette == 0) {
+					echo "<div class='bouton_rotation' style='float: left;'>";		
+					echo bouton_block_invisible("gerer_vignette$id_document");	
+					echo "</div>";
+					$vignette_perso = false;
+
+				} else {
+					$link = $image_link;
+					$link->addVar('redirect', $redirect_url);
+					$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
+					$link->addVar('hash_id_auteur', $connect_id_auteur);
+					$link->addVar('doc_supp', $id_vignette);
+					echo "<div style='float: left;'>";		
+					echo "<a ".$link->getHref($ancre)." title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'><img src='img_pack/croix-rouge.gif' border='0' /></a>";	
+					echo "</div>";
+					$vignette_perso = true;
+				
+				}
+				
+			
+			
+			
 				$process = lire_meta('image_process');
 				 // imagick (php4-imagemagick)
 				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
@@ -570,8 +591,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$hauteur_vignette = $vignette->get('hauteur');
 					$taille_vignette = $vignette->get('taille');
 			
-				echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "../$fichier");
-				
+			
+					echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "../$fichier");
 				}
 			}
 			else {
@@ -579,6 +600,31 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "<a href='../$fichier'><img src='$fichier_vignette' border='0'></a>";
 			}
 				echo "</div>";
+					
+					
+			if ($flag_modif) {
+					
+				if ($vignette_perso) {
+				}
+				else {
+						echo debut_block_invisible("gerer_vignette$id_document");
+						echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px; text-align: left; background-color: white;'>";
+						$link = $image_link;
+						$link->addVar('redirect', $redirect_url);
+						$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+						$link->addVar('hash_id_auteur', $connect_id_auteur);
+						$link->addVar('ajout_doc', 'oui');
+						$link->addVar('id_document', $id_document);
+						$link->addVar('mode', 'vignette');	
+						afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
+						echo "</div>";		
+						echo fin_block();						
+				}
+				
+				echo "</div>";		
+			}
+			
+					
 						
 			
 			if ($flag_modif) {
@@ -611,7 +657,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					echo $link->getForm('POST', $ancre);
 			
 					echo "<b>"._T('titre_titre_document')."</b><br />\n";
-					echo "<input type='text' name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
+					echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 			
 					if ($GLOBALS['coll'] > 0 AND $options == "avancees") {
 						if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
@@ -620,36 +666,27 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 							$annee = $regs[1];
 						}
 						echo "<b>"._T('info_mise_en_ligne')."</b><br />\n";
-						echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+						echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						afficher_jour($jour);
 						echo "</SELECT>";
-						echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+						echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						afficher_mois($mois);
 						echo "</SELECT>";
-						echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+						echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						afficher_annee($annee);
 						echo "</SELECT><br />";
 					}
 			
 					if ($options == "avancees") {
 						echo "<b>"._T('info_description')."</b><br />\n";
-						echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft'>";
+						echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						echo entites_html($descriptif);
 						echo "</textarea>\n";
 					} else {
 						echo "<input type='hidden' name='descriptif_document' value='".entites_html($descriptif)."' />\n";
 					}
-			
-					if ($type_inclus == "embed" OR $type_inclus == "image") {
-						echo "<br /><b>"._T('info_dimension')."</b><br />\n";
-						echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-						echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
-					} else {
-						echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
-						echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" />\n";
-					}
-			
-					echo "<div align='".$GLOBALS['spip_lang_right']."'>";
+								
+					echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
 					echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 					echo "</div>";
 					echo "</form>";
@@ -802,7 +839,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					echo $link->getForm('POST', $ancre);
 			
 					echo "<b>"._T('titre_titre_document')."</b><br />\n";
-					echo "<input type='text' name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
+					echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />";
 			
 					if ($GLOBALS['coll'] > 0 AND $options == "avancees") {
 						if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
@@ -811,20 +848,20 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 							$annee = $regs[1];
 						}
 						echo "<b>"._T('info_mise_en_ligne')."</b><br />\n";
-						echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+						echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						afficher_jour($jour);
 						echo "</SELECT>";
-						echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+						echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						afficher_mois($mois);
 						echo "</SELECT>";
-						echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+						echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;' onChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
 						afficher_annee($annee);
 						echo "</SELECT><br />";
 					}
 			
 					if ($options == "avancees") {
 						echo "<b>"._T('info_description')."</b><br />\n";
-						echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft'>";
+						echo "<textarea onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft'>";
 						echo entites_html($descriptif);
 						echo "</textarea><br />\n";
 					} else {
@@ -833,14 +870,14 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 					if ($type_inclus == "embed" OR $type_inclus == "image") {
 						echo "<b>"._T('info_dimension')."</b><br />\n";
-						echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-						echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
+						echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
+						echo " x <input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 					} else {
 						echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
 						echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" /><br >\n";
 					}
 			
-					echo "<div align='".$GLOBALS['spip_lang_right']."'>";
+					echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
 					echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'>";
 					echo "</div>";
 					echo "</form>";
