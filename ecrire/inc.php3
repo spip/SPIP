@@ -11,7 +11,10 @@
 \***************************************************************************/
 
 
-include ("inc_version.php3");
+if (!defined('_ECRIRE_INC_VERSION')) {
+	include ("inc_version.php3");
+}
+
 include_ecrire("inc_auth.php3");
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_calendrier.php");
