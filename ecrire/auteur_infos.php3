@@ -80,6 +80,10 @@ if ($connect_statut == "0minirezo" OR $connect_id_auteur == $id_auteur) {
 				$echec .= "<P>Mot de passe trop court, veuillez recommencer.<P>";
 				$ok = false;
 			}
+			else if ($email!='' AND ! email_valide($email)) {
+				$echec .= "<P>Adresse email invalide, veuillez recommencer.<P>";
+				$ok = false;
+			}
 			else {
 				$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND id_auteur!=$id_auteur AND statut!='5poubelle'";
 				$result = spip_query($query);
@@ -106,8 +110,10 @@ if ($connect_statut == "0minirezo" OR $connect_id_auteur == $id_auteur) {
 				}
 				if ($new_pass) {
 					$htpass = generer_htpass($new_pass);
-					$pass = md5($new_pass);
-					$query = "UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=$id_auteur";
+					$alea_actuel = creer_uniqid();
+					$alea_futur = creer_uniqid();
+					$pass = md5($alea_actuel.$new_pass);
+					$query = "UPDATE spip_auteurs SET pass='$pass', htpass='$htpass', alea_actuel='$alea_actuel', alea_futur='$alea_futur' WHERE id_auteur=$id_auteur";
 					$result = spip_query($query);
 				}
 				if (lire_meta('activer_moteur') == 'oui') {
@@ -199,28 +205,6 @@ echo "</CENTER>";
 
 fin_boite_info();
 
-
-
-
-//////////////////////////////////////////////////////
-// Logos de l'auteur
-//
-
-$arton = "auton$id_auteur";
-$artoff = "autoff$id_auteur";
-$arton_ok = get_image($arton);
-if ($arton_ok) $artoff_ok = get_image($artoff);
-
-if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
-
-	debut_boite_info();
-	afficher_boite_logo($arton, "LOGO DE L'AUTEUR".aide ("logoart"));
-	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
-		echo "<P>";
-		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
-	}
-	fin_boite_info();
-}
 
 
 debut_droite();
@@ -321,7 +305,7 @@ function mySel($varaut,$variable) {
 				debut_cadre_enfonce();	
 				echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">';
 				echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
-				<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un responsable Žditorial pourra vous en attribuer un nouveau).</font></b>\n";
+				<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un responsable &eacute;ditorial pourra vous en attribuer un nouveau).</font></b>\n";
 				fin_cadre_enfonce();	
 				echo "<p>";
 			}
@@ -377,7 +361,7 @@ function mySel($varaut,$variable) {
 				echo "Ce responsable &eacute;ditorial g&egrave;re <b>toutes les rubriques</b>.";
 			}
 			else {
-				echo "Cet responsable &eacute;ditorial g&egrave;re les rubriques suivantes :\n";
+				echo "Ce responsable &eacute;ditorial g&egrave;re les rubriques suivantes :\n";
 				echo "<ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
 				while ($row_admin = mysql_fetch_array($result_admin)) {
 					$id_rubrique = $row_admin["id_rubrique"];

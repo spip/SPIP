@@ -544,8 +544,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			// petites corrections d'URL
 			if (ereg("^www\.[^@]+$",$lien_url))
 				$lien_url = "http://".$lien_url;
-			else if (ereg("^[[:alnum:]\.]+@[[:alnum:]\.]+$",$lien_url))
-				$lien_url = "mailto:".$lien_url;
+			else if (email_valide($lien_url))
+				$lien_url = "mailto:".trim($lien_url);
 		}
 
 		$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\">".typo($lien_texte)."</a>";
@@ -619,7 +619,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		while (is_integer($pos = strpos($letexte, "\n*"))) {
 			
 			if ($pos > ($prev_pos+1) && $prev_pos != -2 && $depth > 0){//nouveau bloc
-				//il faut donc fermer la liste précédente
+				//il faut donc fermer la liste precedente
 				$close_ul = "";
 				for ($i = 0; $i < $depth; $i++) {
 					$close_ul .= "</li></ul>";

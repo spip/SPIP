@@ -115,7 +115,6 @@ icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?i
 //
 
 if ($connect_statut == "0minirezo" AND $cookie_admin) {
-	echo "<hr>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	echo "<img src='img_pack/triangle.gif' width=16 height=14 border=0>";
 	echo " <a href='../spip_cookie.php3?cookie_admin=non&redirect=".rawurlencode("./ecrire/index.php3")."'><B>SUPPRIMER LE COOKIE</B></A>";
@@ -123,13 +122,6 @@ if ($connect_statut == "0minirezo" AND $cookie_admin) {
 	echo "</font>";
 }
 
-if ($auth_can_disconnect) {
-	echo "<hr>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	echo "<img src='img_pack/triangle.gif' width=16 height=14 border=0>";
-	echo " <a href='?logout=$connect_login'><b>SE D&Eacute;CONNECTER</b></a>";
-	echo "</font>";
-}
 
 echo fin_block();
 
@@ -189,7 +181,7 @@ else {
 		echo "<p>Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>";
 	}
 }
-if ($connect_statut == '0minirezo') {
+if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 	icone_horizontale("Cr&eacute;er une nouvelle rubrique", "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 }
 

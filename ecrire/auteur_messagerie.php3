@@ -100,29 +100,6 @@ echo "</CENTER>";
 fin_boite_info();
 
 
-
-
-//////////////////////////////////////////////////////
-// Logos de l'auteur
-//
-
-$arton = "auton$id_auteur";
-$artoff = "autoff$id_auteur";
-$arton_ok = get_image($arton);
-if ($arton_ok) $artoff_ok = get_image($artoff);
-
-if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
-
-	debut_boite_info();
-	afficher_boite_logo($arton, "LOGO DE L'AUTEUR".aide ("logoart"));
-	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
-		echo "<P>";
-		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
-	}
-	fin_boite_info();
-}
-
-
 debut_droite();
 
 function mySel($varaut,$variable) {

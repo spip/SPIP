@@ -5,13 +5,6 @@
 if (defined("_ECRIRE_INC_AUTH")) return;
 define("_ECRIRE_INC_AUTH", "1");
 
-function ask_php_auth($text_failure) {
-	@Header("WWW-Authenticate: Basic realm=\"administrateur\"");
-	@Header("HTTP/1.0 401 Unauthorized");
-	echo $text_failure;
-	exit;
-}
-
 
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
@@ -64,10 +57,6 @@ function auth() {
 		return false;
 	}
 
-	$auth_text_failure = "<HTML><HEAD><TITLE>Echec de l'identification</TITLE></HEAD>
-	<BODY><H3>L'identification a &eacute;chou&eacute;.</H3><P>
-	Vous pouvez <a href=\"./\">r&eacute;essayer</a> ou <a href=\"../\">retourner au sommaire</a><P>
-	</BODY></HTML>";
 
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -90,23 +79,31 @@ function auth() {
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
 	}
+
 	// Peut-etre sommes-nous en auth http?
 	else if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
-		if ($GLOBALS['logout'] == $PHP_AUTH_USER)
-			ask_php_auth($auth_text_failure);
-		else {
-			$auth_login = $PHP_AUTH_USER;
-			$auth_mdpass = md5($PHP_AUTH_PW);
-			$check_mdpass = " AND pass='$auth_mdpass'";
-			$auth_can_disconnect = true;
+		if ($GLOBALS['logout'] == $PHP_AUTH_USER) {
+			@header("Location: ../spip_cookie.php3?essai_auth_http=logout");
+			exit;
+		} else {
+			include_local ("inc_session.php3");
+			if (verifier_php_auth()) {
+				$auth_login = $PHP_AUTH_USER;
+				$auth_pass_ok = true;
+				$auth_can_disconnect = true;
+			} else {
+				// normalement on n'arrive pas la sauf changement de mot de passe dans la base
+				$auth_login = '';
+				echo "<p><b>Connexion refus&eacute;e</b></p>";
+				echo "[<a href='../spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/'>r&eacute;essayer</a>]";
+				exit;
+			}
 			$PHP_AUTH_PW = '';
 			$_SERVER['PHP_AUTH_PW'] = '';
 			$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
 		}
 	}
-	else if ($GLOBALS['essai_auth_http'] == 'oui') {
-		ask_php_auth($auth_text_failure);
-	}
+
 	// Authentification session
 	else if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 		include_local ("inc_meta.php3");
@@ -139,11 +136,12 @@ function auth() {
 	//
 	
 	$auth_login = addslashes($auth_login);
-	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'$check_mdpass";
+	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
 	$result = @spip_query($query);
 	
 	if (!@mysql_num_rows($result)) {
-		ask_php_auth($auth_text_failure);
+		@header("Location: ../spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/");
+		exit;
 	}
 	
 	if ($row = mysql_fetch_array($result)) {
@@ -212,7 +210,10 @@ function auth() {
 	// Securite, ne pas garder la valeur en memoire
 	$auth_mdpass = '';
 	
-	if (!$auth_pass_ok) ask_php_auth($auth_text_failure);
+	if (!$auth_pass_ok) {
+		@header("Location: ./login.php3?erreur=pass");
+		exit;
+	}
 	
 	if ($connect_statut == 'nouveau') {
 		$query = "UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$connect_id_auteur";

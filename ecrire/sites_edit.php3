@@ -95,7 +95,7 @@ if (!$id_rubrique > 0) $id_rubrique = premiere_rubrique();
 
 
 
-debut_page("Site r&eacute;f&eacute;r&eacute;nc&eacute;", "documents", "sites");
+debut_page("Site r&eacute;f&eacute;renc&eacute;", "documents", "sites");
 
 
 debut_grand_cadre();

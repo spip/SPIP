@@ -167,9 +167,9 @@ article("Envoi automatique de mails","confmails","admin");
 article("Moteur de recherche int&eacute;gr&eacute;","confmoteur","admin");
 
 rubrique("Configuration de l'interface personnelle");
-article("Modifier l'interface","intermodif");
 article("Interface simplifi&eacute;e / compl&egrave;te","intersimple");
 article("Le cookie de correspondance","cookie");
+article("Se d&eacute;connecter","deconnect");
 
 for ($i=0; $i<=count($texte); $i++) {
 	

@@ -3,6 +3,7 @@
 include ("inc.php3");
 
 
+	// C'est pas comme ca qu'on fait proprement...
 	$query = "DELETE FROM spip_mots WHERE titre=''";
 	$result = spip_query($query);
 
@@ -50,18 +51,25 @@ if ($conf_mot>0) {
 
 
 if ($connect_statut == '0minirezo') {
-	if ($modifier_groupe == "oui" AND strlen($ancien_type)>0) {
+	if ($modifier_groupe == "oui") {
 		$change_type = addslashes(corriger_caracteres($change_type));
 		$ancien_type = addslashes(corriger_caracteres($ancien_type));
 
-		$query = "UPDATE spip_mots SET type=\"$change_type\" WHERE id_groupe='$id_groupe'";
-		$result=spip_query($query);
+		if ($ancien_type) {	// modif groupe
+			$query = "UPDATE spip_mots SET type=\"$change_type\" WHERE id_groupe='$id_groupe'";
+			spip_query($query);
 	
-		$query = "UPDATE spip_groupes_mots SET titre=\"$change_type\", unseul='$unseul', obligatoire='$obligatoire', 
-			articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic', 
-			0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'
-			WHERE id_groupe='$id_groupe'";
-		$result=spip_query($query);
+			$query = "UPDATE spip_groupes_mots SET titre=\"$change_type\", unseul='$unseul', obligatoire='$obligatoire', 
+				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic', 
+				0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'
+				WHERE id_groupe='$id_groupe'";
+			spip_query($query);
+		} else {	// creation groupe
+			$query = "INSERT INTO spip_groupes_mots SET titre=\"$change_type\", unseul='$unseul', obligatoire='$obligatoire', 
+				articles='$articles', breves='$breves', rubriques='$rubriques', syndic='$syndic', 
+				0minirezo='$acces_minirezo', 1comite='$acces_comite', 6forum='$acces_forum'";
+			spip_query($query);
+		}
 	}
 
 	if ($supp_group){
