@@ -1251,7 +1251,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 'texte_admin_tech_01' => 'This option allows you to save 
 the content of the database in a file stored in the directory <i>ecrire/data/</i>.
 Also remember to retrieve the whole <i>IMG/</i>, directory, which contains
-the images used in the articles and sections.',
+the images and the documents used in the articles and sections.',
 'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored
 	in a site installed under the same version of SPIP. It is a common mistake
 	to backup the database before upgrading
