@@ -12,7 +12,6 @@ include_ecrire("inc_filtres.php3");
 // (on peut les modifier globalement dans mes_fonctions.php3,
 //  OU individuellement pour chaque type de page dans article.php3,
 //  rubrique.php3, etc. cf doc...)
-// Par securite ne pas accepter les variables passees par l'utilisateur
 //
 function tester_variable($nom_var, $val){
 	if (!isset($GLOBALS[$nom_var])) {
@@ -178,9 +177,8 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	while (eregi(__regexp_img_echappe, $letexte, $match)) {
 		$num_echap++;
 
-		$letout = quotemeta($match[0]);
-		$letout = ereg_replace("\|", "\|", $letout);
-		$letexte = ereg_replace($letout, "@@SPIP_$source$num_echap@@", $letexte);
+		$letexte = str_replace($match[0],
+			"@@SPIP_$source$num_echap@@", $letexte);
 		$les_echap[$num_echap] = $match;
 	}
 
