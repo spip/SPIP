@@ -136,12 +136,11 @@ if (defined("_INC_PUBLIC")) { // inclusion différée
 			// mais permet d'afficher du MathML directement dans le texte
 			// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
 			include_ecrire("inc_tidy.php");
-			verif_butineur();
 			if (version_tidy() > 0) {		
-				if ($browser_name == "MSIE")
-					@header("Content-Type: text/html; charset=".lire_meta('charset'));
-				else 
+				if (ereg("application/xhtml\+xml", $HTTP_ACCEPT)) 
 					@header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+				else 
+					@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	
 				echo '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
 			} else {
