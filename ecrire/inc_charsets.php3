@@ -1089,7 +1089,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		'nltrie' => '&#x22EC;',
 		'nLtv' => '&#xE2CB;',
 		'nmid' => '&#x2224;',
-		'Nopf' => '&#xE4BB;',
+		'Nopf' => '&#x2115;',
 		'Not' => '&#xE3AC;',
 		'not' => '&#x00AC;',
 		'NotCongruent' => '&#x2262;',
