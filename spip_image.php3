@@ -548,6 +548,7 @@ if ($doc_rotate) {
 		$image = $row['fichier'];
 
 		$process = lire_meta('image_process');
+
 		 // imagick (php4-imagemagick)
 		 if ($process == 'imagick') {
 			$handle = imagick_readimage($image);
@@ -564,7 +565,9 @@ if ($doc_rotate) {
 			}
 		}
 		else if ($process = "convert") {
-			$commande = "$convert_command -rotate $var_rot $image $image";
+			$commande = "$convert_command -rotate $var_rot ./"
+				. escapeshellcmd($image).' ./'.escapeshellcmd($image);
+			spip_log($commande);
 			exec($commande);
 		}
 
