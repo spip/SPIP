@@ -90,8 +90,8 @@ function transcoder_page($texte) {
 	include_ecrire('inc_charsets.php3');
 	// Si le backend precise son charset et que celui-ci est connu de SPIP,
 	// decoder puis recoder
-	if (eregi('<\\?xml[[:space:]][^>]*(utf-8)', $texte, $regs)) {
-		$charset_page = strtolower($regs[1]);
+	if (ereg('<\\?xml[[:space:]]([^>]*[[:space:]])?encoding[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9]+)[\'"]', $texte, $regs)) {
+		$charset_page = strtolower($regs[2]);
 		$texte = unicode2charset(charset2unicode($texte, $charset_page));
 	}
 	// Si le backend ne precise pas, on considere qu'il est iso-8859-1 : il faut
@@ -186,10 +186,15 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				else continue;
 				if (ereg("<link>([^<]*)</link>",$item[$i],$match))
 					$le_lien = addslashes(filtrer_entites($match[1]));
+				else if (ereg("<guid>([^<]*)</guid>",$item[$i],$match))
+					$le_lien = addslashes(filtrer_entites($match[1]));
 				else continue;
+				$la_date = "";
 				if (ereg("<([[:alpha:]]+:)?date>([^<]*)</([[:alpha:]]+:)?date>",$item[$i],$match))
-					$la_date = addslashes(filtrer_entites($match[2]));
-				else $la_date = date("Y-m-j H:i:00");
+					$la_date = strtotime($match[2]);
+				else if (ereg("<pubDate>([^<]*)</pubDate>",$item[$i],$match))
+					$la_date = strtotime($match[1]);
+				if (!$la_date) $la_date = time();
 				if (ereg("<author>([^<]*)</author>",$item[$i],$match))
 					$les_auteurs = addslashes(filtrer_entites($match[1]));
 				else $les_auteurs = "";
@@ -201,7 +206,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				$result_deja = spip_query($query_deja);
 				if ($result_deja AND (spip_num_rows($result_deja)==0)){
 					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
-						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', '$la_date', '$les_auteurs', '$moderation', '$la_description')";
+						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', FROM_UNIXTIME($la_date), '$les_auteurs', '$moderation', '$la_description')";
 					$result_syndic=spip_query($query_syndic);
 				}
 			}
