@@ -851,7 +851,7 @@ if ($flag_editable AND $options == 'avancees') {
 	}
 	else {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Sans,sans-serif'><b>"._T('texte_date_creation_article')." : ";
+		echo "<TR><TD BGCOLOR='$couleur_foncee'><FONT SIZE=1 COLOR='#FFFFFF' face='Verdana,Arial,Sans,sans-serif'><b>"._T('texte_date_creation_article');
 		echo majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
 	}
@@ -962,7 +962,7 @@ if ($cherche_auteur) {
 			$email_auteur = $row['email'];
 			$bio_auteur = $row['bio'];
 
-			echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
+			echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($nom_auteur)."</FONT></B>";
 			echo "</FONT>\n";
 		}
 		echo "</UL>";
@@ -983,13 +983,13 @@ if ($cherche_auteur) {
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
 
-				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$nom_auteur</FONT></B>";
+				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($nom_auteur)."</FONT></B>";
 
 				if ($email_auteur) echo " ($email_auteur)";
 				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</A>";
 
 				if (trim($bio_auteur)) {
-					echo "<BR><FONT SIZE=1>".propre(couper($bio_auteur, 100))."</FONT>\n";
+					echo "<BR><FONT SIZE=1>".couper(propre($bio_auteur), 100)."</FONT>\n";
 				}
 				echo "</FONT><p>\n";
 			}
