@@ -998,7 +998,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'item_non_utiliser_moteur_recherche' => 'No utilizar el motor',
 'item_non_utiliser_mots_cles' => 'No utilizar las palabras clave',
 'item_non_utiliser_syndication' => 'No utilizar la sindicaci&oacute;n autom&aacute;tica',
-'item_nouvel_auteur' => 'Nueva autorq o autor',
+'item_nouvel_auteur' => 'Nueva autora o autor',
 'item_nouvelle_breve' => 'Nueva breve',
 'item_nouvelle_rubrique' => 'Nueva secci&oacute;n',
 'item_oui' => 'S&iacute;',
