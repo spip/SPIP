@@ -1,0 +1,123 @@
+<HTML>
+<HEAD>
+<TITLE><BOUCLE0(MOTS){id_mot}>#TITRE</BOUCLE0>Pas de mot-cl&eacute;<//B0></TITLE>
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY BGCOLOR="#FFFFFF">
+
+
+<CENTER>
+<BOUCLE1(MOTS){id_mot}{unique}>
+
+
+
+
+<TABLE WIDTH=750>
+<TR><TD WIDTH=750 COLSPAN=3>
+<font face=Arial,Helvetica SIZE=4>
+
+
+
+
+[<BR><FONT SIZE=6><B>(#TITRE)</B></FONT>]
+
+[<BR>((#TYPE))]
+
+
+
+<BR><BR>
+</FONT>
+</TD></TR>
+<TR><TD WIDTH=250 VALIGN="top">
+
+
+
+<B12>
+<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR="#000000" WIDTH=250>
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#444444' WIDTH="100%">
+<font face=Arial,Helvetica COLOR="#FFFFFF">
+<B>D'autres mots-clés</B>
+</font>
+</TD></TR></TABLE>
+
+<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
+<font face=Arial,Helvetica SIZE=2><UL>
+<BOUCLE12(MOTS){type}{par hasard}{doublons}{0,20}>
+<LI><A HREF="#URL_MOT">#TITRE</A>
+</BOUCLE12>
+</UL>
+</font>
+</TD></TR></TABLE>
+</TD></TR></TABLE>
+</B12>
+
+<P>
+
+
+
+
+
+
+
+</TD><TD WIDTH=10>&nbsp;</TD>
+<TD WIDTH=490 VALIGN="top">
+
+
+<font face=Arial,Helvetica SIZE=3>
+[<B>(#DESCRIPTIF|justifier)</B>]
+
+
+<P>
+[(#TEXTE|justifier)]
+
+<P>
+<B4><B>Articles :</B>
+<ul>
+<BOUCLE4(ARTICLES){id_mot}{par date}{inverse}>
+
+<li>
+<B><A HREF="#URL_ARTICLE">[(#SURTITRE)<BR>][(#TITRE|majuscules)][<BR>(#SOUSTITRE)]</A></B>
+<FONT SIZE=2><B>[<BR>(#DATE_REDAC|affdate)][, par (#LESAUTEURS)]</B>
+[<BR>(#DESCRIPTIF)]</FONT>
+</BOUCLE4>
+</ul></B4>
+
+
+<B_breves><b>Br&egrave;ves :</b>
+<ul>
+<BOUCLE_breves(BREVES){id_mot}{par date}{inverse}>
+<li>
+<B><a href="#URL_BREVE">[(#TITRE)]</a></b>
+[<BR><FONT SIZE=2>(#DESCRIPTIF)</FONT>]
+</BOUCLE_breves>
+</ul></B_breves>
+
+
+<B_sites><b>Sur le Web :</b>
+<ul>
+<BOUCLE_sites(SITES){id_mot}{unique}{par nom_site}>
+<li>
+<B><a href="#URL_SITE">[(#NOM_SITE)]</a></b>
+[<BR><FONT SIZE=2>(#DESCRIPTIF)</FONT>]
+</BOUCLE_sites>
+</ul></B_sites>
+
+
+
+
+
+
+</FONT>
+
+</TD></TR>
+</TABLE>
+
+
+
+
+
+</BOUCLE1>
+<H2>Il n'y a pas de mot-clé à cette adresse</H2><//B1>
+</CENTER>
+</BODY>
+</HTML>

@@ -1,0 +1,47 @@
+<? echo '<?xml version="1.0" encoding="iso-8859-1"?>'; ?>
+
+<!DOCTYPE rss PUBLIC "-//Netscape Communications//DTD RSS 0.91//EN"
+            "http://my.netscape.com/publish/formats/rss-0.91.dtd">
+
+<rss version="0.91">
+
+  <channel>
+ 
+  
+    <title>#NOM_SITE_SPIP</title>
+    <link>#URL_SITE_SPIP</link>
+    <description></description>
+    <language>fr-fr</language>
+
+    <image>
+      <title>#NOM_SITE_SPIP</title>
+      <url>#URL_SITE_SPIP/IMG/ruboff0.gif</url>
+      <link>#URL_SITE_SPIP</link>
+      <description></description>
+    </image>
+   
+<BOUCLE_rub(RUBRIQUES){id_rubrique}>    
+	<BOUCLE1(articles){id_secteur}{par date}{inverse}{0,10}>
+	    <item>
+	      <title>#TITRE</title>
+	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+	      <description>#DESCRIPTIF</description>
+	      <author><BOUCLE23(auteurs){id_article}{", "}>#NOM</BOUCLE23></author>
+	    </item>
+	</BOUCLE1>
+</BOUCLE_rub>
+ 
+	<BOUCLE2(articles){tout}{par date}{inverse}{0,10}>
+	    <item>
+	      <title>#TITRE</title>
+	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
+	      <description>#DESCRIPTIF</description>
+	      <author><BOUCLE_aut2(auteurs){id_article}{", "}>#NOM</BOUCLE_aut2></author>
+	    </item>
+	</BOUCLE2>
+<//B_rub>
+ 
+  </channel>
+  
+</rss>
+

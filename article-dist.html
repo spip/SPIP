@@ -1,0 +1,417 @@
+<HTML>
+<HEAD>
+<title>#NOM_SITE_SPIP</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+<BOUCLE_principale(ARTICLES){id_article}{doublons}>
+
+<BOUCLE_off(RUBRIQUES){id_rubrique}{doublons}>
+</BOUCLE_off>
+
+
+<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
+	<TR BGCOLOR="#000000" WIDTH=100%>
+	<TD ALIGN="center">
+	<A HREF="#URL_SITE_SPIP"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
+	</TD>	
+	<BOUCLE_hier1(HIERARCHIE){0,1}{doublons}>
+		<TD ALIGN="center" BGCOLOR="#FFFFFF">
+		<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></B></A>
+		</TD>	
+		
+		<BOUCLE_rub_hier(RUBRIQUES){meme_parent}{exclus}{par hasard}{0,4}>
+		<TD ALIGN="center">
+		<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR='#FFFFFF'>#TITRE</FONT></B></A>
+		</TD>	
+		</BOUCLE_rub_hier>
+	</BOUCLE_hier1>
+		<TD ALIGN="center" BGCOLOR="#FFFFFF">
+		&nbsp;
+		</TD>	
+		<TD COLSPAN=4> &nbsp; </TD>
+	<//B_hier1>
+	
+	</TR>
+<BOUCLE_hier2(HIERARCHIE){1,100}{doublons}>
+	<TR BGCOLOR="#000000">
+	<TD ALIGN="center">
+	&nbsp;
+	</TD>	
+	<TD ALIGN="center" BGCOLOR="#FFFFFF">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_rub_hier2(RUBRIQUES){meme_parent}{exclus}{par hasard}{0,4}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR="#FFFFFF">#TITRE</FONT></B></A>
+	</TD>	
+	
+	</BOUCLE_rub_hier2>
+	
+	</TR>
+</BOUCLE_hier2>
+<BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+	<TR BGCOLOR="#FFFFFF">
+	<TD ALIGN="center">
+	<BOUCLE_rub_hier3(RUBRIQUES){meme_parent}{exclus}{doublons}{par hasard}{0,1}>
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR="#000000">#TITRE</FONT></B></A>
+	</BOUCLE_rub_hier3>&nbsp;<//B_rub_hier3>
+	</TD>	
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_rub_hier4(RUBRIQUES){meme_parent}{exclus}{doublons}{par hasard}{0,4}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><B><FONT FACE="arial,helvetica,sans-serif" SIZE=2 COLOR="#000000">#TITRE</FONT></B></A>
+	</TD>	
+	</BOUCLE_rub_hier4>
+	<TD COLSPAN=4> &nbsp; </TD>
+	
+	</TR>
+</BOUCLE_rubrique>
+
+</TABLE>
+
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BGCOLOR="#000000"><img src="NAVPICS/rien.gif" alt="" width="1" height="1" border="0"></TD>
+</TR>
+</TABLE>
+
+
+
+
+<CENTER>
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR>
+<TD WIDTH=200 ALIGN="center" VALIGN="middle">
+	<BR><BR>
+
+	[(#LOGO_ARTICLE)]
+
+	<BR><BR>
+</TD>
+
+<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=4><img src="NAVPICS/rien.gif" alt="" width="4" height="8" border="0"></TD>
+<TD WIDTH=462 VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
+	<BR><BR>
+
+	[(#SURTITRE|majuscules)]
+	[<BR><FONT SIZE=6><B>(#TITRE)</B></FONT>]
+	[<BR>(#SOUSTITRE|majuscules)]
+
+	<P>[Premi&egrave;re publication : (#DATE_REDAC|affdate), mise en ligne: ] [(#DATE|nom_jour)] [(#DATE|affdate)][, <B>par (#LESAUTEURS)</B>]
+	</FONT>
+	<BR><BR><BR>
+</TD></TR></TABLE>
+
+
+
+
+
+
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR>
+<TD WIDTH=200 ALIGN="left" VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+
+
+
+	<B_meme_rubrique>
+	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	<B>DANS LA MEME RUBRIQUE :</B>
+	<BOUCLE_meme_rubrique(ARTICLES){id_rubrique}{doublons}{0,10}{par hasard}>
+	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
+	</BOUCLE_meme_rubrique>
+	</FONT>
+	</B_meme_rubrique>
+
+
+	<B_Mots_Cles>
+	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	<B>THEMES ABORDES :</B>
+	<BOUCLE_Mots_Cles(MOTS){id_article}{par titre}>
+		<P>[(#LOGO_MOT)<BR>]
+		<B>#TITRE</B>
+		<BOUCLE_meme_mot(ARTICLES){id_mot}{doublons}{0,10}{par hasard}>
+		<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
+		</BOUCLE_meme_mot>
+		<BOUCLE_meme_mot_breves(BREVES){id_mot}{doublons}{0,10}{par hasard}>
+		<BR><IMG SRC="puce.gif"> <I><A HREF="#URL_BREVE">#TITRE</A></I>
+		</BOUCLE_meme_mot_breves>
+	</BOUCLE_Mots_Cles>
+
+
+	<B_syndic>
+	<P><FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	<B>SUR LE WEB :</B>
+	<BOUCLE_syndic(SYNDIC_ARTICLES){id_rubrique}{par date}{inverse}{0,8}>
+	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE">#TITRE</A>
+	</BOUCLE_syndic>
+	</FONT>
+	</B_syndic>
+
+
+
+
+
+
+
+	</FONT>
+	<BR><BR>
+</TD>
+
+<TD WIDTH=8 ROWSPAN=2><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=8 ROWSPAN=2 BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=8 ROWSPAN=2><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=450 ROWSPAN=2 VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
+
+
+	[<B>(#CHAPO|justifier)<P></B>]
+
+
+	[(#TEXTE|justifier)]
+	[<FONT SIZE=2><P>(#PS|justifier)</P></FONT>]
+	[<HR><FONT SIZE=2><P>(#NOTES)</P></FONT>]
+
+
+
+<B_signatures><br><br><p>
+<font face="verdana, helvetica,arial,sans-serif" size=4><b>Les signataires</b></font><p>
+<table width="450" cellpadding="0" cellspacing="0" border="0">
+<tr><td width="147" valign="top">
+<BOUCLE_signatures(SIGNATURES){id_article}{par date}{inverse}{1/3}{0,200}>
+<font face="helvetica,arial,sans-serif" size=2>
+[<b><a href="#URL_SITE">(#NOM_SITE)</a><br></b>]
+[(#NOM)<br>]
+[(#MESSAGE)]<p>
+</font>
+</BOUCLE_signatures>
+</td>
+<td width="5">&nbsp;</td>
+<td width="147" valign="top">
+<BOUCLE_signatures2(SIGNATURES){id_article}{par date}{inverse}{2/3}{0,200}>
+<font face="helvetica,arial,sans-serif" size=2>
+[<b><a href="#URL_SITE">(#NOM_SITE)</a><br></b>]
+[(#NOM)<br>]
+[(#MESSAGE)]<p>
+</font>
+</BOUCLE_signatures2>
+</td>
+<td width="4">&nbsp;</td>
+<td width="147" valign="top">
+<BOUCLE_signatures3(SIGNATURES){id_article}{par date}{inverse}{3/3}{0,200}>
+<font face="helvetica,arial,sans-serif" size=2>
+[<b><a href="#URL_SITE">(#NOM_SITE)</a><br></b>]
+[(#NOM)<br>]
+[(#MESSAGE)]<p>
+</font>
+</BOUCLE_signatures3>
+</td>
+</tr></table>
+<br><br>
+</B_signatures>
+
+
+[<P align="right"><font size=3><B><A HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet article</A></B></font>]
+
+
+<B_documents>
+<ul>
+<p align="left">
+<BOUCLE_documents(DOCUMENTS){id_article}{par titre}{inclus=non}>
+<li><font size=1>[(#LOGO_DOCUMENT|#URL_DOCUMENT)]<a href="IMG/#FICHIER_DOCUMENT">DOCUMENT [(#TYPE|majuscules)]</a></font> <b>#TITRE,</b> [(#TAILLE_DOCUMENT|taille_en_octets)]
+[<br>(#DESCRIPTIF)]
+</BOUCLE_documents>
+</ul>
+</B_documents>
+
+
+	</FONT>
+	<BR><BR>
+
+</TD>
+</TR>
+
+<TR>
+<TD WIDTH=200 ALIGN="left" VALIGN="bottom">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
+
+	<BOUCLE_auteurs(AUTEURS){id_article}>
+	<P>
+	[(#LOGO_AUTEUR|mailto:#EMAIL)<BR>]
+	<B>[<A HREF="mailto:(#EMAIL)">]#NOM</A></B><BR>
+	[<A HREF="(#URL_SITE)">][<IMG SRC="puce.gif" BORDER=0>(#NOM_SITE)<BR>]</A>
+	[<IMG SRC="puce.gif">(#BIO)]
+	</P>
+	</BOUCLE_auteurs>
+
+	[<BR><BR><HR><SMALL>(#FORMULAIRE_SIGNATURE)</SMALL>]
+
+
+	</FONT>
+	<BR><BR>
+
+
+</TD>
+</TR>
+
+
+
+</TABLE>
+
+
+
+<B_forums_liens>
+
+
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR>
+</TABLE>
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=674>
+<TR WIDTH=674>
+<TD WIDTH=200 ALIGN="left" VALIGN="top">
+	<BR><BR>
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+	<A NAME='liens_forums'>
+	<BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
+	[Il y a (#TOTAL_BOUCLE) contribution(s) au forum.]
+	<//B_forums_decompte>
+
+	<BR><BR>
+	<BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}>
+		<A HREF="#forum#ID_FORUM"><IMG SRC="puce.gif" BORDER=0>#TITRE</A>
+		<BR>(#COMPTEUR_BOUCLE/#TOTAL_BOUCLE) [(#DATE|affdate)][, par (#NOM)]
+		<BR>
+	</BOUCLE_forums_liens>
+	</FONT>
+	<BR><BR>
+</TD>
+
+<TD WIDTH=12><img src="NAVPICS/rien.gif" alt="" width="12" height="8" border="0"></TD>
+<TD WIDTH=462 VALIGN="top">
+
+	<BR><BR>
+
+	<BOUCLE_Forums(FORUMS){id_article}{par date}{inverse}>
+	<A NAME="forum#ID_FORUM">
+	<TABLE CELLPADDING=5 CELLSPACING=1 BORDER=0 WIDTH=462 BGCOLOR="#000000">
+	<TR><TD BGCOLOR='#444444' WIDTH="100%">
+	<font face=Arial,Helvetica SIZE=2>
+	<B>[<FONT COLOR="#FFFFFF">(#TITRE)</FONT>]</B> 
+	</font>
+	</TD></TR>
+	<TR><TD BGCOLOR='#FFFFFF' WIDTH=100%>
+	<font face=Arial,Helvetica SIZE=1>
+	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+	 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
+	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
+	</font>
+	</TD></TR>
+	<TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
+	<font face=Arial,Helvetica SIZE=2>
+	<P>#TEXTE
+	
+	
+	<BOUCLE_mots_forum(MOTS){id_forum}{par type, titre}>
+		<li><b>#TYPE :</b> #TITRE
+	</BOUCLE_mots_forum>
+	
+	
+	<P align='right'>[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
+	</font>
+	</TD></TR></TABLE>
+
+
+	<B_fils>
+	<UL>
+		<font face=Arial,Helvetica SIZE=2>
+		<BOUCLE_fils(FORUMS){id_parent}{par date}>
+		<P>
+		<A NAME="forum#ID_FORUM">
+		<LI><B>[(#TITRE)]</B>
+		<BR><font SIZE=1>
+		[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+		 &nbsp; [<A HREF='#liens_forums'>retour au d&eacute;but des forums</A>]
+		[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
+		</font>
+		<HR NOSHADE SIZE=1>
+		#TEXTE
+		<B_mots_message><ul>
+		<BOUCLE_mots_message(MOTS){id_forum}{par type, titre}>
+			<li><b>#TYPE :</b> #TITRE
+		</BOUCLE_mots_message>
+		</ul>
+		</B_mots_message>
+		<P align="right">[<font size=1><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]
+			
+
+			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
+	
+		</BOUCLE_fils>
+		</font>
+	</UL>
+	</B_fils>
+
+
+
+	<P>
+
+	</BOUCLE_Forums>
+</TD>
+</TR>
+</TABLE>
+<P>
+</B_forums_liens>
+
+
+</CENTER>
+
+
+
+
+
+
+
+</BOUCLE_principale>
+
+<CENTER>
+
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR></TABLE>
+<TABLE WIDTH=95% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR>
+<TD ALIGN="right">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	[<A HREF="#URL_SITE_SPIP">(#NOM_SITE_SPIP|majuscules)</A>]
+	| <A HREF="plan.php3">PLAN DU SITE</A>
+	| <A HREF="ecrire/">ADMIN</A>
+	 &nbsp; 
+	</FONT>
+
+</TD>
+</TR>
+</TABLE>
+</CENTER>
+
+
+<BR><BR><BR>
+
+</BODY>
+</HTML>
+
+

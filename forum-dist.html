@@ -1,0 +1,137 @@
+<HTML>
+<HEAD>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
+<B_haut>
+	<TR BGCOLOR="#000000">
+	<TD ALIGN="center">
+	<A HREF="#URL_SITE_SPIP"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_haut(RUBRIQUES){id_parent=0}{par titre}{0,5}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut>
+	</TR>
+</B_haut>
+<B_haut2>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut2(RUBRIQUES){id_parent=0}{par titre}{5,6}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut2>
+	</TR>
+</B_haut2>
+<B_haut3>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut3(RUBRIQUES){id_parent=0}{par titre}{11,6}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut3>
+	</TR>
+</B_haut3>
+<B_haut4>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut4(RUBRIQUES){id_parent=0}{par titre}{17,5}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut4>
+	</TR>
+</B_haut4>
+</TABLE>
+
+<CENTER>
+
+
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR>
+<TD WIDTH=330 ALIGN="left" VALIGN="top">
+	<BR><BR>
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+
+
+	<BOUCLE_article(ARTICLES){id_article}>
+	<FONT SIZE=1>EN REPONSE A L'ARTICLE :</FONT>
+	<BR><FONT SIZE=3><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_ARTICLE">#TITRE</A></FONT>
+	<P>
+	</BOUCLE_article>
+
+	<BOUCLE_breve(BREVES){id_breve}>
+	<FONT SIZE=1>EN REPONSE A LA BREVE :</FONT>
+	<BR><FONT SIZE=3><IMG SRC="puce.gif" BORDER=0> <A HREF="#URL_BREVE">#TITRE</A></FONT>
+	<P>
+	</BOUCLE_breve>
+
+
+	<BOUCLE_rep_forum(FORUMS){id_forum}>
+	<FONT SIZE=1>EN REPONSE AU MESSAGE :</FONT>
+	<BR><FONT SIZE=3><IMG SRC="puce.gif" BORDER=0> #TITRE</FONT>
+	<P><FONT SIZE=1>#TEXTE</FONT>
+	<P>
+	</BOUCLE_rep_forum>
+
+
+
+
+
+
+
+	</FONT>
+	<BR><BR>
+</TD>
+
+<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=4><img src="NAVPICS/rien.gif" alt="" width="4" height="8" border="0"></TD>
+<TD WIDTH=332 VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
+	<BR><BR>
+
+	#FORMULAIRE_FORUM
+
+
+
+	</FONT>
+	<BR><BR>
+</TD></TR></TABLE>
+
+
+
+
+
+
+
+
+
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR></TABLE>
+<TABLE WIDTH=95% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR>
+<TD ALIGN="right">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	[<A HREF="#URL_SITE_SPIP">(#NOM_SITE_SPIP|majuscules)</A>]
+	| <A HREF="plan.php3">PLAN DU SITE</A>
+	| <A HREF="ecrire/">ADMIN</A>
+	</FONT>
+
+</TD>
+</TR>
+</TABLE>
+<BR><BR><BR>
+</CENTER>
+
+</BODY>
+</HTML>
+
+

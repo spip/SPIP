@@ -1,0 +1,82 @@
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	color:#FF9900;
+	text-decoration: underline;
+}
+
+a.spip_url  { }
+a.spip_in   { } 
+a.spip_out  { } 
+
+.spip_code { }
+
+p.spip_note { }
+
+h3.spip {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	font-size: 120%;
+	text-align: center;
+}
+
+.spip_documents{
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size : 70%;
+}
+
+
+table.spip {
+}
+
+table.spip tr.row_first {
+	background-color: #FCF4D0;
+}
+
+table.spip tr.row_odd {
+	background-color: #C0C0C0;
+}
+
+table.spip tr.row_even {
+	background-color: #F0F0F0;
+}
+
+table.spip td {
+	padding: 1px;
+	text-align: left;
+	vertical-align: center;
+}
+
+hr.spip { }
+
+b.spip { }
+i.spip { }
+
+.forml { width: 100% ; background-color: #FFDDAA;}
+
+.spip_encadrer { 
+	width : 100%;
+	background-color: #FFFFFF; 
+	padding: 5px; 
+	border: 1px #666666 solid; 
+}
+
+.spip_cadre { 
+	width : 100%;
+	background-color: #FFFFFF; 
+	padding: 5px; 
+}
+
+
+.spip_bouton { background-color: #FFCC00;}
+
+.formrecherche { width: 100% ; background-color: #FFDDAA;}
+
+.reponse_formulaire {
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-weight: bold;
+	font-size: 110%;
+	color: red;
+}
