@@ -7,21 +7,6 @@ include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
-if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
-else $vars = $HTTP_GET_VARS;
-$redirect_url = "./ecrire/" . $vars["redirect"];
-$first = true;
-reset($vars);
-while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*)$", $key)) {
-		if ($first) $redirect_url .= "?";
-		else $redirect_url .= "&";
-		$first = false;
-		$val = rawurlencode($val);
-		$redirect_url .= "$key=$val";
-	}
-}
-
 
 //
 // Deplacer un fichier uploade
@@ -188,7 +173,6 @@ if (!$image_name AND $image2) {
 //
 if ($ajout_doc == 'oui') {
 	$ok = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
-	// if ($ok AND $effacer_si_ok) @unlink($image); // vraiment souhaitable ?
 }
 
 
@@ -232,7 +216,21 @@ if ($doc_supp) {
 	}
 }
 
-@header ("Location: $redirect_url");
+
+
+if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
+else $vars = $HTTP_GET_VARS;
+$redirect_url = "ecrire/" . $vars["redirect"];
+$link = new Link($redirect_url);
+reset($vars);
+while (list ($key, $val) = each ($vars)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*)$", $key)) {
+		$link->addVar($key, $val);
+	}
+}
+
+
+@header ("Location: ".$link->getUrl());
 
 exit;
 ?>
