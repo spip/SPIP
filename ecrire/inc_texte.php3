@@ -344,13 +344,6 @@ function extraire_lien ($regs) {
 
 	$lien_texte = $regs[1];
 
-	/* lien de type->>nouvelle fenetre ?
-	$ouvrant = ($regs[2] == '>');
-	il est resolu de ne rien faire de cette notation, que l'on traite comme lien normal...
-	if ($ouvrant AND $GLOBALS['flag_ecrire'])
-		$signaler_lien_externe = "<img src='img_pack/ouvrir_fenetre.gif' alt='' width='8' height='8' border='0'>";
-	*/
-
 	$lien_url = trim($regs[3]);
 	$compt_liens++;
 	$lien_interne = false;
