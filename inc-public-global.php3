@@ -235,11 +235,13 @@ function masquer_les_bugs ($bugs) {
 }
 
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
-	global $delais;
 
 	$contexte_inclus['fond'] = $fond;
 
 	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache($contexte_inclus, $fond);
+
+	// Peut-on utiliser un fichier cache ?
+	determiner_cache($delais_inclus, $use_cache, $chemin_cache);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
@@ -251,7 +253,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		$lang_select = true; // pour lang_dselect en sortie
 	}
 
-	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais,
+	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
 	$use_cache, $fond, true);
 
 	$page['lang_select'] = $lang_select;
