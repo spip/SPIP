@@ -200,19 +200,18 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 	// liste des formats qu'on sait lire
 	$formats_graphiques = lire_meta('formats_graphiques');
+
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
 		return;
-
 	// normalement il a ete cree
-	creer_repertoire(_DIR_VIGNETTES, '');
-
+	creer_repertoire(_DIR_IMG, '');
 	if ($destdir) {
-	  if (!($destdir = creer_repertoire(_DIR_VIGNETTES, $destdir))) {
+	  if (!($destdir = creer_repertoire(_DIR_IMG, $destdir))) {
 		  return;
 		}
 	} 
-	$destination = _DIR_VIGNETTES . $destdir . $destfile;
+	$destination = _DIR_IMG . $destdir . $destfile;
 	spip_log("$dir $destination");
 	// chercher un cache
 	foreach (array('gif','jpg','png') as $fmt)
@@ -452,10 +451,9 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
-			list(,$nom,) = $i;
+			list(,$nom,$format) = $i;
 			$suffixe = '-'.$taille.'x'.$taille_y;
 			$preview = creer_vignette($logo, $taille, $taille_y, $format, ('cache'.$suffixe), $nom.$suffixe);
-
 			if ($preview) {
 				$vignette = $preview['fichier'];
 				$width = $preview['width'];
