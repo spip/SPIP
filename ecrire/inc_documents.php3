@@ -513,6 +513,9 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		$documents_lies = fetch_document($query);
 
 		if ($documents_lies){
+			global $descriptif, $texte, $chapo;
+			$pour_documents_doublons = propre("$descriptif$texte$chapo");
+
 			$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
 				"WHERE id_document in (".join(',', $documents_lies).")");
 			while ($v = mysql_fetch_object($res))
@@ -739,7 +742,6 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "</div>\n";
 		}
 		echo "</div>";
-			
 			
 		if (!ereg(",$id_document,", "$doublons")) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
