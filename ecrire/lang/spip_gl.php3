@@ -53,7 +53,7 @@ $GLOBALS['i18n_spip_gl'] = array(
 		Podes estar en graves problemas: risco de destrucci&oacute;n masiva
 		da t&uacute;a base de datos, fallos no funcionamento do lugar, etc.
 		Non valides esta petici&oacute;n de importaci&oacute;n.<p>Para m&aacute;is
-		informaci&oacute;ns, consulta <A HREF=\'http://www.uzine.net/article1489.html\'>
+		informaci&oacute;ns, consulta <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 		a documentaci&oacute;n de SPIP</A>.',
 'avis_espace_interdit' => '<B>Espazo prohibido</B><p>SPIP xa est&aacute; instalado.',
 'avis_lecture_noms_bases_1' => 'O programa de instalaci&oacute;n non puido ler os nomes das bases de datos instaladas.',
@@ -519,7 +519,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_contenu_articles' => 'Contido dos artigos',
 'info_contribution' => 'contribuci&oacute;ns no foro',
 'info_copyright' => '&eacute; un programa libre distribuido <a href=\'copyright_fr.html\'>baixo licencia GPL.</a>',
-'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.uzine.net/spip-gl\'>http://www.uzine.net/spip-gl</a>.',
+'info_copyright_doc' => 'Para m&aacute;is informaci&oacute;n, vai a <a href=\'http://www.spip.net/gl_\'>http://www.spip.net/gl_</a>.',
 'info_cours_edition' => 'Os teus artigos en proceso de edici&oacute;n',
 'info_creation_mots_cles' => 'Crea e configura eiqu&iacute; as palabras chave do lugar',
 'info_creation_paragraphe' => '(Para crear par&aacute;grafos, simplemente deixa li&ntilde;as valeiras.)',
@@ -1253,7 +1253,7 @@ e reconectar co lugar.
 'texte_admin_tech_02' => 'Atenci&oacute;n: esta copia de seguridade s&oacute; poder&aacute; ser restaurada
 		nun lugar que te&ntilde;a instalada a mesma versi&oacute;n de SPIP. O erro de facer unha c&oacute;pia de
 		seguridade antes de po&ntilde;er &oacute; d&iacute;a o SPIP &eacute; habitual... Para m&aacute;is detalles, consulta
-		<a href="http://www.uzine.net/article1489.html">a documentaci&oacute;n de SPIP</a>.',
+		<a href="http://www.spip.net/fr_article1489.html">a documentaci&oacute;n de SPIP</a>.',
 'texte_admin_tech_03' => 'Podes escoller gardar o ficheiro en formato, para optimizar
 		a transferencia, e aforrar espazo no disco.',
 'texte_adresse_annuaire_1' => '(Se a t&uacute;a gu&iacute;a foi aloxada na mesma m&aacute;quina queste

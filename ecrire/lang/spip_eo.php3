@@ -54,7 +54,7 @@ $GLOBALS['i18n_spip_eo'] = array(
 				risko de detruo de via datenbazo,
 				diversaj misfunkcioj de la retpa&#285;o, ktp.
 				Ne validigu tiun importado-peton.<p>Por pli
-				da informoj, vidu <A HREF=\'http://www.uzine.net/article1489.html\'>
+				da informoj, vidu <A HREF=\'http://www.spip.net/fr_article1489.html\'>
                                 la dokumentaron de SPIP</A>.',
 'avis_espace_interdit' => '<B>Malpermesita aliro</b><p>SPIP jam instalita.',
 'avis_lecture_noms_bases_1' => 'Instalprogramo ne sukcesis legi la nomojn de instalita datenbazo.',
@@ -504,7 +504,7 @@ Dankon pro via partopreno
 'info_contenu_articles' => 'Enhavo de la artikoloj',
 'info_contribution' => 'kontribua&#309;oj por la forumo',
 'info_copyright' => 'estas libera programo distribuata <a href=\'copyright_fr.html\'>sub GPL licenco.</a>',
-'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.uzine.net/spip-eo\'>http://www.uzine.net/spip-eo</a>.',
+'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo_\'>http://www.spip.net/eo_</a>.',
 'info_cours_edition' => 'Viaj nun eldonataj artikoloj',
 'info_creation_mots_cles' => '&#264;i tie, bonvolu starigi kaj konfiguri la &#349;losilvortojn de la teksejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
@@ -1229,7 +1229,7 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 'texte_admin_tech_02' => 'Atentu: tiu konserva&#309;o povas esti resta&#365;rata
 	NUR en pa&#285;o instalita sub la sama versio de SPIP. Oftas
 	la eraro fari konservadon anta&#365; ol &#285;isdatigi
-	SPIP-on... Por pliaj detaloj konsultu <a href="http://www.uzine.net/article1489.html">la dokumenta&#309;on de SPIP</a>.',
+	SPIP-on... Por pliaj detaloj konsultu <a href="http://www.spip.net/fr_article1489.html">la dokumenta&#309;on de SPIP</a>.',
 'texte_admin_tech_03' => 'Vi povas elekti konservi la dosieron en densigita formo, por
 	rapidigi &#285;ian transigon al vi a&#365; al konservo-servilo, kaj por &#349;pari diskospacon.',
 'texte_adresse_annuaire_1' => 'Se via adresaro estas instalita sur la sama ma&#349;ino kiel la teksejo, temas ver&#349;ajne pri &laquo;localhost&raquo;.)',

@@ -53,7 +53,7 @@ una versione di SPIP diversa da quella installata.</b>
 Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito, etc.
 Non confermare questa richiesta d\'importazione!
-Per ulteriori informazioni, vedere <A HREF=\'http://www.uzine.net/article1489.html\'>
+Per ulteriori informazioni, vedere <A HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentazione di SPIP</a>.',
 'avis_espace_interdit' => '<B>Area vietata</B><p>SPIP &egrave; gi&agrave; installato.</p>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
@@ -517,7 +517,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_contenu_articles' => 'Contentuto degli articoli',
 'info_contribution' => 'contributi dei forum',
 'info_copyright' => '&egrave; un software libero distribuito <a href=\'http://www.softwarelibero.it/gnudoc/gpl.it.txt\'>sotto licenza GPL.</a>',
-'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito di <a href=\'http://www.uzine.net/rubrique91.html\'>SPIP</a>.',
+'info_copyright_doc' => 'Per maggiori informazioni, vedi il sito di <a href=\'http://www.spip.net/it_\'>SPIP</a>.',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creation_mots_cles' => 'In questa pagina &egrave; possibile creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
@@ -1239,7 +1239,7 @@ In fase di backup non dimenticare di recuperare integralmente anche la cartella 
 'texte_admin_tech_02' => 'Attenzione: questo salvaggio potr&agrave; essere ripristinato SOLO in un sito installato con la stessa versione di SPIP.
 Con l\'intenzione di aggiornare la versione di SPIP, si commette spesso l\'errore di salvare il database,
 pensando di doverlo cancellare per poi ripristinarlo ad aggiornamento effettuato...
-Per maggiori informazioni consulta <a href="http://www.uzine.net/article1489.html">la documentazione di SPIP</a>.',
+Per maggiori informazioni consulta <a href="http://www.spip.net/fr_article1489.html">la documentazione di SPIP</a>.',
 'texte_admin_tech_03' => 'Puoi scegliere di salvare il file in forma compressa, al fine di ridurre
 i tempi di trasferimento in rete e di risparmiare dello spazio su disco.',
 'texte_adresse_annuaire_1' => '(Se la rubrica &egrave; installata nella stessa macchina di questo sito, dovrai probabilmente inserire "localhost".)',
