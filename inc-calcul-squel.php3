@@ -173,7 +173,13 @@ function parser_boucle($texte, $id_parent) {
 
 			case 'documents':
 				$table = "documents";
+				$req_select[] = "$table.*";
+				$req_select[] = "types_d.titre AS type_document";
+				$req_select[] = "types_d.extension AS extension_document";
 				$req_from[] = "spip_documents AS $table";
+				$req_from[] = "spip_types_documents AS types_d";
+				$req_where[] = "$table.id_type = types_d.id_type";
+				$req_group = "GROUP BY $table.id_document";
 				$id_objet = "id_document";
 				break;
 
@@ -798,7 +804,7 @@ function parser($texte) {
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 
 		'IP', 'VISITES', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
-		'DEBUT_SURLIGNE', 'FIN_SURLIGNE'
+		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -910,7 +916,9 @@ function parser($texte) {
 		'DESCRIPTIF' => 'descriptif',
 		'LARGEUR' => 'largeur',
 		'HAUTEUR' => 'hauteur',
-		'TAILLE' => 'taille'
+		'TAILLE' => 'taille',
+		'TYPE_DOCUMENT' => 'type_document',
+		'EXTENSION_DOCUMENT' => 'extension_document'
 	);
 	$rows_types_documents = array(
 		'ID_TYPE' => 'id_type',
