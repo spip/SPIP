@@ -49,7 +49,6 @@ function ecrire_metas() {
 
 	lire_metas();
 
-	$f = fopen("inc_meta_cache.php3", "wb");
 	$s = '<?php
 
 if (defined("_ECRIRE_INC_META")) return;
@@ -66,28 +65,27 @@ function lire_meta_maj($nom) {
 }
 
 ';
-
-	fputs($f, $s);
 	if ($meta) {
 		reset($meta);
 		while (list($key, $val) = each($meta)) {
 			$key = addslashes($key);
 			$val = addslashes($val);
-			$s = "\$GLOBALS['meta']['$key'] = '$val';\n";
-			fputs($f, $s);
+			$s .= "\$GLOBALS['meta']['$key'] = '$val';\n";
 		}
-		fputs($f, "\n");
+		$s .= "\n";
 	}
 	if ($meta_maj) {
 		reset($meta_maj);
 		while (list($key, $val) = each($meta_maj)) {
 			$key = addslashes($key);
-			$s = "\$GLOBALS['meta_maj']['$key'] = '$val';\n";
-			fputs($f, $s);
+			$s .= "\$GLOBALS['meta_maj']['$key'] = '$val';\n";
 		}
-		fputs($f, "\n");
+		$s .= "\n";
 	}
-	fputs($f, '?>');
+	$s .= '?'.'>';
+
+	$f = fopen("inc_meta_cache.php3", "wb");
+	fputs($f, $s);
 	fclose($f);
 }
 
