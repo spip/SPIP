@@ -1021,8 +1021,11 @@ function barre_onglets($rubrique, $onglet){
 	debut_onglet();
 
 	if ($rubrique == "statistiques"){
-		onglet(_T('onglet_evolution_visite'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
+		onglet(_T('onglet_evolution_visite_mod'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
 		onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
+		
+		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "replang", $onglet, "langues-24.gif");
+		
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 		if ($activer_statistiques_ref != "non")	onglet(_T('onglet_origine_visites'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
