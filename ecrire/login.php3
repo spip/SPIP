@@ -102,25 +102,34 @@ if ($login) {
 	else if (file_exists("../IMG/auton$id_auteur.jpg")) $logo = "../IMG/auton$id_auteur.jpg";
 	else if (file_exists("../IMG/auton$id_auteur.png")) $logo = "../IMG/auton$id_auteur.png";
 
-	if ($logo) echo "<img src='$logo' align='right'>";
 
-
+	echo "<table cellpadding=0 cellspacing=0 border=0 width=100%>";
+	echo "<tr width=100%>";
+	echo "<td width=100%>";
 	// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 	echo "<script type=\"text/javascript\"><!--
-			document.write('<b>$login</b> <br><font size=\\'2\\'>[<a href=\\'../spip_cookie.php3?cookie_admin=non&redirect=./ecrire/login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
+			document.write('Login : <b>$login</b> <br><font size=\\'2\\'>[<a href=\\'../spip_cookie.php3?cookie_admin=non&redirect=./ecrire/login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
 		//--></script>\n";
 	echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
 	// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
 	echo "<noscript><input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>";
 
-	echo "<p>\n<label><b>Mot de passe</b><br></label>";
+	echo "<p>\n<label><b>Mot de passe :</b><br></label>";
 	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
 	echo "<input type='hidden' name='essai_login' value='oui'>\n";
 	echo "<input type='hidden' name='redirect' value='$redirect'>\n";
 	echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
 	echo "<input type='hidden' name='session_password_md5' value=''>\n";
 	echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
+	echo "</td>";
+	if ($logo) {
+		echo "<td width=10><img src='img_pack/rien.gif' width=10></td>";
+		echo "<td valign='top'>";
+		echo "<img src='$logo'>";
+		echo "</td>";
+	}
+	echo "</tr></table>";
 	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
 	//echo "</div>\n";
 	fin_cadre_relief();
@@ -156,7 +165,7 @@ if ($login) {
 			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
 			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
-			echo "<noscript><label><b>Login (identifiant de connexion au site)</b><br></label>\n";
+			echo "<noscript><label><b>Login (identifiant de connexion au site) :</b><br></label>\n";
 			echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>";
 
 			echo "<p>\n<label><b>Mot de passe</b><br></label>";
@@ -183,7 +192,7 @@ if ($login) {
 else {
 	// demander seulement le login
 	echo "<form action='./login.php3' method='get'>\n";
-	debut_cadre_enfonce();
+	debut_cadre_enfonce("redacteurs-24.gif");
 	//echo "<div style='border: 1px dashed #999999; padding: 10px;'>\n";
 	if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 	echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";

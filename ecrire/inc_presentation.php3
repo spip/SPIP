@@ -23,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="top"></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="12" height="12" border="0" align="middle"></a>';
 }
 
 
@@ -238,13 +238,14 @@ function debut_raccourcis() {
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	echo "<b>RACCOURCIS :</b><p>";
 
-	echo "<form method='get' action='recherche.php3'>";
+	/*echo "<form method='get' action='recherche.php3'>";
 	echo "<div class='iconeon' style='padding:5px;'>";
 	echo "<input type='Hidden' name='id_article' value='$id_article'>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>Rechercher</b> un article, une rubrique, une br&egrave;ve&nbsp;:</font>";
 	echo '<input type="text" class="forml" size="*" value="" name="recherche" class="spip_recherche">';
 	echo "</div>";
 	echo "</form>";
+	*/
 }
 
 function fin_raccourcis() {
@@ -1278,7 +1279,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $REQUEST_URI;
 	global $requete_fichier;
 	global $auth_can_disconnect, $connect_login;
-	global $options;
+	global $options, $spip_display;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	
 	if (!$requete_fichier) {
@@ -1437,16 +1438,26 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 
 
+	if ($options == "avancees") {
+		global $recherche;
+		if (strlen($recherche) == 0) {
+			if ($spip_display == 2) $recherche = "Titre ou num&eacute;ro";
+			else $recherche = "Rechercher";
+		}
+		echo "<td width='10'><img src='img_pack/rien.gif' width=10></td>";
+		echo "<td>";
+		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
+		if ($spip_display == "2") {
+			echo "<font face='verdana,arial,helvetica,san-serif' size=2><b>Rechercher&nbsp;:</b></font><br>";
+		}
+		echo '<input type="text" size="18" value="'.$recherche.'" name="recherche" class="spip_recherche">';
+		echo "</form>";
+		echo "</td>";
+	}
 
 	echo "<td width='100%'>   </td>";
 
-/*
-	echo "<td>";
-	echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
-	echo '<input type="text" size="18" value="Chercher" name="recherche" class="spip_recherche">';
-	echo "</form>";
-	echo "</td>";
-*/
+
 	if ($auth_can_disconnect) {
 		echo "<td width='5'>&nbsp;</td>";
 		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
