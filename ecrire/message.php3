@@ -224,12 +224,12 @@ while($row = spip_fetch_array($result_message)) {
 			$resultat = mots_ressemblants($cherche_auteur, $table_auteurs, $table_ids);
 			debut_boite_info();
 			if (!$resultat) {
-				echo _T('info_recherche_auteur_zero', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
+				echo '<b>'._T('info_recherche_auteur_zero', array('cherche_auteur' => $cherche_auteur))."</b><br />";
 			}
 			else if (count($resultat) == 1) {
 				$ajout_auteur = 'oui';
 				list(, $nouv_auteur) = each($resultat);
-				echo "<B>"._T('info_ajout_participant')."</B><BR>";
+				echo "<b>"._T('info_ajout_participant')."</b><br />";
 				$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
 				$result = spip_query($query);
 				echo "<UL>";
