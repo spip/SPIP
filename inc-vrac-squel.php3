@@ -278,7 +278,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
 	default:
 		// champ inconnu. Il s'autodenote.
-		$code = "'<blink>#$nom_champ</blink>'";
+		$code = "'#$nom_champ'";
 		break;
 	} // switch
 
