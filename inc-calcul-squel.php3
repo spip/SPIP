@@ -329,7 +329,6 @@ function parser_boucle($texte, $id_parent) {
 						// Traitement general des relations externes
 						if ($s = $tables_relations[$type][$col]) {
 							$col_table = "rel_$type";
-							//$col_table = $s;
 							$req_from[] = "$s AS $col_table";
 							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
 							$req_group = " GROUP BY $table.$id_objet";
@@ -349,13 +348,6 @@ function parser_boucle($texte, $id_parent) {
 							$req_group = " GROUP BY $table.$id_objet";
 							$flag_lien = true;
 						}
-/*						else if	($type == 'mots' AND ($col == 'id_syndic' OR $col == 'id_forum')) {
-							$col_table = 'spip_'.$type.'_'.substr($col, 3);
-							$req_from[] = $col_table;
-							$req_where[] = "$table.$id_objet=$col_table.$id_objet";
-							$req_group = " GROUP BY $table.$id_objet";
-							$flag_lien = true;
-						}*/
 
 						// Cas particulier : selection des documents selon l'extension
 						else if ($type == 'documents' AND $col == 'extension') {
@@ -428,10 +420,10 @@ function parser_boucle($texte, $id_parent) {
 							$req_order = " ORDER BY alea";
 						}
 						else if ($match[1] == 'titre_mot'){
-							$req_order= " ORDER BY spip_mots.titre";
+							$req_order= " ORDER BY rel_mots.titre";
 						}
 						else if ($match[1] == 'type_mot'){
-							$req_order= " ORDER BY spip_mots.type";
+							$req_order= " ORDER BY rel_mots.type";
 						}
 						else if ($match[1] == 'points'){
 							$req_order= " ORDER BY points";
@@ -485,7 +477,6 @@ function parser_boucle($texte, $id_parent) {
 				break;
 
 			case 'forums':
-				/* $forums_publics = lire_meta("forums_publics"); */
 				// Par defaut, selectionner uniquement les forums sans pere
 				if (!$plat) $req_where[] = "$table.id_parent=0";
 				$req_where[] = "$table.statut='publie'";
