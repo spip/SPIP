@@ -172,11 +172,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 		   
 	}
 
-	# e'quivalent $clean_link->getUrl() si celui-ci n'e'tait bugge'...
-	$p = strpos($GLOBALS[REQUEST_URI], '?');
-	$action = 
-	  substr($GLOBALS[PHP_SELF], strrpos($GLOBALS[PHP_SELF], '/')+1) . 
-	  ($p ? substr($GLOBALS[REQUEST_URI], $p) : '');
+	$action = $clean_link->getUrl();
 
 	if ($login) {
 		// Affiche formulaire de login en incluant le javascript MD5
