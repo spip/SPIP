@@ -846,16 +846,18 @@ if ($flag_editable AND $options == 'avancees') {
 
 		echo debut_block_invisible("datepub");
 		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
-		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
+		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl' onChange=\"setvisibility('valider_date', 'visible')\">";
 		afficher_jour($jour);
 		echo "</SELECT> ";
-		echo "<SELECT NAME='mois' SIZE=1 CLASS='fondl'>";
+		echo "<SELECT NAME='mois' SIZE=1 CLASS='fondl' onChange=\"setvisibility('valider_date', 'visible')\">";
 		afficher_mois($mois);
 		echo "</SELECT> ";
-		echo "<SELECT NAME='annee' SIZE=1 CLASS='fondl'>";
+		echo "<SELECT NAME='annee' SIZE=1 CLASS='fondl' onChange=\"setvisibility('valider_date', 'visible')\">";
 		afficher_annee($annee);
 		echo "</SELECT>";
+		echo "<span class='visible_au_chargement' id='valider_date'>";
 		echo " &nbsp; <INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>";
+		echo "</span>";
 		echo "</div>";
 		echo fin_block();
 	}
@@ -879,21 +881,25 @@ if ($flag_editable AND $options == 'avancees') {
 		echo '<tr><td align="left">';
 		echo '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac == '0000-00-00') echo ' checked="checked"';
+		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
 		echo ' /> <label for="avec_redac_on">'._T('texte_date_publication_anterieure_nonaffichee').'</label>';
 		echo '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') echo ' checked="checked"';
+		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
 		echo ' /> <label for="avec_redac_off">'._T('bouton_radio_afficher').' :</label> ';
 
-		echo '<select name="jour_redac" class="fondl">';
+		echo "<select name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\">";
 		afficher_jour($jour_redac);
 		echo '</select> &nbsp;';
-		echo '<select name="mois_redac" class="fondl">';
+		echo "<select name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\">";
 		afficher_mois($mois_redac);
 		echo '</select> &nbsp;';
-		echo '<input type="text" name="annee_redac" class="fondl" value="'.$annee_redac.'" size="5" maxlength="4" />';
+		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";
 
 		echo '</td><td align="right">';
+		echo "<span class='visible_au_chargement' id='valider_date_prec'>";
 		echo '<input type="submit" name="Changer" class="fondo" value="'._T('bouton_changer').'" />';
+		echo "</span>";
 		echo '</td></tr>';
 		echo '</table>';
 		echo "</div>";
@@ -1148,6 +1154,7 @@ if ($flag_editable AND $options == 'avancees') {
 		$retour = urlencode($clean_link->getUrl());
 		icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
 		echo "</td>";
+		echo "<td width='20'>&nbsp;</td>";
 	}
 	
 	echo "<td>";
@@ -1159,12 +1166,14 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
 		if (spip_num_rows($result) > 80 AND $flag_mots_ressemblants) {
-			echo "<INPUT TYPE='text' NAME='cherche_auteur' CLASS='fondl' VALUE='' SIZE='20'>";
+			echo "<INPUT TYPE='text' NAME='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" CLASS='fondl' VALUE='' SIZE='20'>";
+			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
+			echo "</span>";
 		}
 		else {
 			echo "<INPUT TYPE='Hidden' NAME='ajout_auteur' VALUE='oui'>";
-			echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='WIDTH=150' CLASS='fondl'>";
+			echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='width:150px;' CLASS='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
 			$group = false;
 			$group2 = false;
 
@@ -1202,7 +1211,9 @@ if ($flag_editable AND $options == 'avancees') {
 			}
 
 			echo "</SELECT>";
+			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE="._T('bouton_ajouter')." CLASS='fondo'>";
+			echo "</span>";
 		}
 		echo "</div></FORM>";
 	}
@@ -1463,7 +1474,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 
 	// $statut_url_javascript="\"articles.php3?id_article=$id_article&methode=image&alea=\"+Math.random()+\"&statut_nouv=\"+options[selectedIndex].value";
 	$statut_url_javascript="puce_statut(options[selectedIndex].value);";
-	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange='document.statut.src=$statut_url_javascript;'>";
+	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange=\"document.statut.src=$statut_url_javascript; setvisibility('valider_statut', 'visible');\">";
 	echo "<OPTION" . mySel("prepa", $statut_article) ." style='background-color: white'>"._T('texte_statut_en_cours_redaction')."\n";
 	echo "<OPTION" . mySel("prop", $statut_article) . " style='background-color: #FFF1C6'>"._T('texte_statut_propose_evaluation')."\n";
 	echo "<OPTION" . mySel("publie", $statut_article) . " style='background-color: #B4E8C5'>"._T('texte_statut_publie')."\n";
@@ -1471,10 +1482,12 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 	echo "<OPTION" . mySel("refuse", $statut_article) . " style='background-color: #FFA4A4'>"._T('texte_statut_refuse')."\n";
 	echo "</SELECT>";
 
-	echo "<img src='img_pack/puce-".puce_statut($statut_article).".gif' alt='' width='13' height='14' border='0' NAME='statut'>";
+	echo " &nbsp; <img src='img_pack/puce-".puce_statut($statut_article).".gif' alt='' border='0' NAME='statut'>  &nbsp; ";
 
 	// echo "<noscript><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'></noscript>";
+	echo "<span class='visible_au_chargement' id='valider_statut'>";
 	echo "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
+	echo "</span>";
 	echo aide ("artstatut");
 	echo "</CENTER>";
 	fin_cadre_relief();
