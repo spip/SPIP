@@ -1396,7 +1396,7 @@ Sed prudentes con  esta funcionalidad: <b>las modificaciones o p&eacute;rdidas e
 'titre_nouveau_groupe' => 'Nuevo grupo',
 'titre_nouvelle_breve' => 'Nueva breve',
 'titre_nouvelle_rubrique' => 'Nueva secci&oacute;n',
-'titre_numero_rubrique' => 'RUBRICA NUMERO:',
+'titre_numero_rubrique' => 'SECCI&Oacute;N N&Uacute;MERO:',
 'titre_page_admin_effacer' => 'Mantenimiento t&eacute;cnico: borrar la base',
 'titre_page_admin_vider' => 'Mantenimiento t&eacute;cnico: gesti&oacute;n de la cach&eacute;',
 'titre_page_articles_edit' => 'Modificar: @titre@',
