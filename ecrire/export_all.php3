@@ -24,13 +24,16 @@ install_debut_html(_T('info_sauvegarde'));
 
 if (!$etape) echo "<p><blockquote><font size=2>"._T('info_sauvegarde_echouee')." <a href='export_all.php3?etape=1&gz=$gz'>"._T('info_procedez_par_etape')."</a></font></blockquote><p>";
 
+if ($etape < 2)
+	$f = ($gz) ? gzopen("data/$archive", "wb") : fopen("data/$archive", "wb");
+else
+	$f = ($gz) ? gzopen("data/$archive", "ab") : fopen("data/$archive", "ab");
 
-if ($etape < 2){
-	$f = ($gz) ? @gzopen("data/$archive", "wb") : fopen("data/$archive", "wb");
+if (!$f) {
+	echo _T('avis_erreur_sauvegarde');
+	exit;
 }
-else {
-	$f = ($gz) ? @gzopen("data/$archive", "ab") : fopen("data/$archive", "ab");
-}
+
 $_fputs = ($gz) ? gzputs : fputs;
 
 if ($etape < 2)
