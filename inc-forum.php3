@@ -13,6 +13,7 @@ include_ecrire('inc_filtres.php3');
 include_ecrire('inc_lang.php3');
 include_ecrire('inc_mail.php3');
 include_ecrire('inc_barre.php3');
+include_ecrire('inc_forum.php3');
 
 if (@file_exists("inc-urls.php3")) {
 	include_local ("inc-urls.php3");
