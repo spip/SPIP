@@ -54,7 +54,7 @@ if ($bad_dirs) {
 	install_fin_html();
 } else {
 	if ($install)
-		header("Location: ./ecrire/install.php3?etape1=oui");
+		header("Location: ./ecrire/install.php3?etape=1");
 	else
 		header("Location: ./ecrire/");
 }

@@ -67,21 +67,23 @@ if ($test_echec_cookie == 'oui') {
 	exit;
 }
 
-// tentative de login
+// Tentative de login
 unset ($cookie_session);
 if ($essai_login == "oui") {
-	// recuperer le login passe en champ hidden
+	// Recuperer le login en champ hidden
 	if ($session_login_hidden AND !$session_login)
 		$session_login = $session_login_hidden;
 
-	// verifier l'auteur
-	$login = addslashes($session_login);
+	$login = $session_login;
+	$pass = $session_password;
+
+	// Recuperer le mot de passe en champ hidden
 	if ($session_password_md5) { // mot passe en md5
 		$md5pass = $session_password_md5;
 		$md5next = $next_session_password_md5;
 	}
-	else { // mot passe en clair
-		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
+	else if ($session_password) { // mot passe en clair
+		$query = "SELECT alea_actuel, alea_futur FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
 		$result = spip_query($query);
 		if ($row = mysql_fetch_array($result)) {
 			$md5pass = md5($row['alea_actuel'] . $session_password);
@@ -89,28 +91,36 @@ if ($essai_login == "oui") {
 		}
 	}
 
-	$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND pass='$md5pass' AND statut<>'5poubelle'";
-	$result = spip_query($query);
+	// Essayer differentes methodes d'authentification
+	$auths = array('spip');
+	if ($ldap_present) $auths[] = 'ldap';
 
-	if ($row_auteur = mysql_fetch_array($result)) { // login reussi
-		if ($row_auteur['statut'] == 'nouveau') { // nouvel inscrit
-			spip_query ("UPDATE spip_auteurs SET statut='1comite' WHERE login='$login'");
-			$row_auteur['statut'] = '1comite';
+	$ok = false;
+	reset($auths);
+	while (list(, $nom_auth) = each($auths)) {
+		include_ecrire("inc_auth_".$nom_auth.".php3");
+		$classe_auth = "Auth_".$nom_auth;
+		$auth = new $classe_auth;
+		if ($auth->init()) {
+			$ok = $auth->verifier_challenge_md5($login, $md5pass, $md5next);
+			if (!$ok && $session_password) $ok = $auth->verifier($login, $session_password);
 		}
+		if ($ok) break;
+	}
 
-		if ($row_auteur['statut'] == '0minirezo') // force le cookie pour les admins
-			$cookie_admin = "@".$row_auteur['login'];
+	if ($ok) $ok = $auth->lire();
 
-		$cookie_session = creer_cookie_session($row_auteur);
-	
-		// fait tourner le codage du pass dans la base
-		$nouvel_alea_futur = creer_uniqid();
-		$query = "UPDATE spip_auteurs
-			SET alea_actuel = alea_futur,
-				pass = '$md5next',
-				alea_futur = '$nouvel_alea_futur'
-			WHERE login='$login'";
-		@spip_query($query);
+	if ($ok) {
+		$auth->activer();
+
+		if ($auth->login AND $auth->statut == '0minirezo') // force le cookie pour les admins
+			$cookie_admin = "@".$auth->login;
+
+		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."'";
+		$result = spip_query($query);
+		if ($row_auteur = mysql_fetch_array($result)) 
+			$cookie_session = creer_cookie_session($row_auteur);
+
 		if (ereg("ecrire/", $cible->getUrl())) {
 			$cible->addVar('bonjour','oui');
 		}

@@ -12,7 +12,7 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 
 // version de la base
-$spip_version = 1.465;
+$spip_version = 1.466;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
@@ -112,6 +112,7 @@ if ($flag_function_exists) {
 	$flag_apc = function_exists("apc_rm");
 	$flag_sapi_name = function_exists("php_sapi_name");
 	$flag_utf8_decode = function_exists("utf8_decode");
+	$flag_ldap = function_exists("ldap_connect");
 }
 else {
 	$flag_ini_get = false;
@@ -123,6 +124,8 @@ else {
 	$flag_wordwrap = false;
 	$flag_apc = false;
 	$flag_sapi_name = false;
+	$flag_utf8_decode = false;
+	$flag_ldap = false;
 }
 
 

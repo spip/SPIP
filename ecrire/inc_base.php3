@@ -63,6 +63,7 @@ function creer_base() {
 		alea_futur tinytext NOT NULL,
 		prefs tinytext NOT NULL,
 		cookie_oubli tinytext NOT NULL,
+		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut))";
@@ -1031,6 +1032,10 @@ function maj_base() {
 
 	if ($version_installee < 1.465) {
 		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE NOT NULL");
+	}
+
+	if ($version_installee < 1.466) {
+		spip_query("ALTER TABLE spip_auteurs ADD source VARCHAR(10) DEFAULT 'spip' NOT NULL");
 	}
 
 	//
