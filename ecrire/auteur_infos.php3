@@ -156,7 +156,8 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("auteur"))."'";
+		$extra = extra_recup_saisie("auteur");
+		$add_extra = ", extra = '".addslashes($extra)."'";
 	} else
 		$add_extra = '';
 
@@ -281,7 +282,7 @@ echo "</TEXTAREA>\n";
 
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		extra_saisie($extra, 'auteur', $id_secteur);
+		extra_saisie($extra, 'auteur', $auteur['statut']);
 	}
 
 fin_cadre_relief();
