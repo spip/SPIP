@@ -142,7 +142,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Do not send any editorial announcements',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Do not send latest news list',
 'bouton_radio_non_syndication' => 'No syndication',
-'bouton_radio_occidental' => 'Western alphabet (<tt>iso-8859-1</tt>): supported by all browsers, but only displays West European languages (English, French, German...).',
+'bouton_radio_occidental' => 'Western alphabet (<tt>iso-8859-1</tt>): displays mainly
+ West-european languages (English, French, German...);
+ However, SPIP manages quite well other languages.',
 'bouton_radio_pas_petition' => 'No petition',
 'bouton_radio_personnalise' => 'Custom character set: choose this option if you want to use a specific character set',
 'bouton_radio_petition_activee' => 'Petition activated',
@@ -153,8 +155,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'save as uncompressed in <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Delete the petition',
 'bouton_radio_syndication' => 'Syndication:',
-'bouton_radio_universel' => 'Universal alphabet (<tt>utf-8</tt>): displays all the languages but not supported
-		by all browsers at the time being.',
+'bouton_radio_universel' => 'Universal alphabet (<tt>utf-8</tt>): displays all the languages but could create
+  compatibility problems with the software you use to modify your templates and some e-mail
+ clients.',
 'bouton_recharger_page' => 'reload this page',
 'bouton_redirection' => 'REDIRECT',
 'bouton_relancer_installation' => 'Re-launch installation',
@@ -169,7 +172,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => '<MODIF> If you install a diary application compatible with <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), you can synchronize it with the site\'s editorial activity.',
+'calendrier_synchro' => 'If you use a diary application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
 
 
 // D
@@ -443,7 +446,7 @@ Thank you for your participation
 'icone_sites_references' => 'Referenced sites',
 'icone_statistiques' => 'Site statistics',
 'icone_statistiques_visites' => 'Visits statistics',
-'icone_suivi_activite' => '<MODIF> Follow-up of editorial activity',
+'icone_suivi_activite' => 'Follow-up of the site\'s activity',
 'icone_suivi_actualite' => 'Site\'s evolution',
 'icone_suivi_forum' => 'Follow-up of public forum: @nb_forums@ contribution(s)',
 'icone_suivi_forums' => 'Follow-up/manage forums',
@@ -557,7 +560,7 @@ Thank you for your participation
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_comment_lire_tableau' => 'How to read this graphic',
 'info_config_suivi' => 'If this address corresponds to amailing-list, you can indicate below the address where the site participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address endowed with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => '<MODIF> You can receive, by automated electronic mail, the announcements concerning the editorial activity of this site by subscribing to the following mailing list:',
+'info_config_suivi_explication' => 'You can subscribe to the mailing-list of this site. You will receive then, by automated electronic mail, the announcements concerning articles and news items submitted for publication.',
 'info_confirmer_passe' => 'Confirm new password:',
 'info_connexion_base' => 'Second step: <B>Attempting to connect to database</B>',
 'info_connexion_ldap_ok' => '<B>Your LDAP connection succeeded.</B><P> You can go to the next step.',
@@ -571,7 +574,7 @@ Thank you for your participation
 'info_contribution' => 'forum contributions',
 'info_copyright' => 'is a free software distributed <a href=\'license.txt\'>under GPL license.</a>',
 'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.spip.net/en\'>http://www.spip.net/en</a>.',
-'info_cours_edition' => '<MODIF> In progress',
+'info_cours_edition' => 'Your articles in progress',
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
 'info_creation_paragraphe' => '(To create paragraphs, you simply leave blank lines.)',
 'info_creation_rubrique' => 'Before being able to write articles,<BR> you must create at least one section.<BR>',
@@ -782,6 +785,7 @@ requiring an FTP access to the Web site.',
 'info_nouveaux_message' => 'New messages',
 'info_nouveaux_messages' => 'YOU HAVE @total_messages@ NEW MESSAGES',
 'info_nouvel_article' => 'New article',
+'info_nouvelle_traduction' => 'New translation:',
 'info_numero_article' => 'ARTICLE NUMBER:',
 'info_obligatoire_02' => '[Compulsory]',
 'info_option_email' => 'When a site visitor posts a message to the forum
@@ -1217,7 +1221,7 @@ requiring an FTP access to the Web site.',
 'menu_aide_sites_syndiquer' => 'Syndicated sites',
 'menu_aide_suivi_forum' => 'Forums follow-up',
 'menu_aide_suivi_forum_articles_postes' => 'Post-dated articles',
-'menu_aide_suivi_forum_configuration' => '<MODIF> Precise configuration',
+'menu_aide_suivi_forum_configuration' => 'The site configuration',
 'menu_aide_suivi_forum_contenu_articles' => 'Articles content',
 'menu_aide_suivi_forum_envoi_emails' => 'Automated e-mailing',
 'menu_aide_suivi_forum_fonctionnement' => 'Operating the forums',
@@ -1232,7 +1236,7 @@ requiring an FTP access to the Web site.',
 'module_raccourci' => 'Shortcut',
 'module_texte_affiche' => 'Displayed text',
 'module_texte_explicatif' => 'You can insert the following shortcuts in you site\'s templates. They will be automatically translated in the various languages for which there is a language file.',
-'module_texte_traduction' => '<MODIF> This language file is available in:',
+'module_texte_traduction' => 'The language file &laquo;&nbsp;@module@&nbsp;&raquo; is available in:',
 'mois_non_connu' => 'unknown',
 
 
@@ -1339,7 +1343,7 @@ the images and the documents used in the articles and sections.',
 'texte_article_virtuel' => 'Virtual article',
 'texte_article_virtuel_reference' => '<b>Virtual article:</b> referenced article in your SPIP site, but redirected to another URL. To remove redirection, delete the above URL.',
 'texte_aucun_resultat_auteur' => 'No results for "@cherche_auteur@".',
-'texte_auteur_messagerie' => '<MODIF> This site can continuously monitor the list of connected editors, which allows you to exchange messages in real time (if messaging is disabled above, the list of connected editors is itself disabled). You can decide not to appear in this list (you are then, &laquo;invisible&raquo; for the other users).',
+'texte_auteur_messagerie' => 'This site can continuously monitor the list of connected editors, which allows you to exchange messages in real time (if messaging is disabled above, the list of connected editors is itself disabled). You can decide not to appear in this list (you are then, &laquo;invisible&raquo; for the other users).',
 'texte_auteur_messagerie_1' => 'This site allows the exchange of messages and the creation of private discussion forums between participants to the site. You can decide not to participate to this exchange.',
 'texte_auteurs' => 'THE AUTHORS',
 'texte_bilan_traductions' => 'In this graph, green bars show translated and updated articles and red bars show translations which require updating. ',
@@ -1428,10 +1432,11 @@ the images and the documents used in the articles and sections.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can',
 'texte_introductif_article' => '(Introductory Text to the article.)',
 'texte_jeu_caractere' => 'This option is useful if your site displays alphabets
-	different from the roman alphabet (that is &laquo;western&raquo;) and its derivatives.
-	In this case, the default setting must be changed in order to use
-	a suitable character set. Also, remember to adapt
-	the site accordingly (<tt>#CHARSET</tt> tag).',
+ different from the roman alphabet (that is &laquo;western&raquo;) and its derivatives.
+ In this case, the default setting must be changed in order to use
+ a suitable character set; anyway, we advise you to try different sets
+ in order to find the right solution. If you modify this parameter, do not forget either, to adapt
+ the public site accordingly (<tt>#CHARSET</tt> tag).',
 'texte_jeu_caractere_2' => 'This setting is not retroactive.
 	Consequently, text already entered might be wrongly
 	displayed after modifying the setting. Anyway,

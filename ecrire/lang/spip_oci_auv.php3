@@ -166,6 +166,10 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => '<MODIF> S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronizar amb l\'actualitat dau sit.',
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fich&egrave;ir <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo chalend&egrave;ir seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aquel sit (pr&egrave;tzfaits et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo chalend&egrave;ir seguent vos permet de s&egrave;gre l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fich&egrave;ir <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -757,6 +761,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_nouveaux_message' => 'Messatges nu&ograve;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES NU&Ograve;US',
 'info_nouvel_article' => 'Article nu&ograve;u',
+'info_nouvelle_traduction' => 'Revirada nu&ograve;va:',
 'info_numero_article' => 'ARTICLE NUM&Egrave;RO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quand un vesitaire dau sit manda un messatge nu&ograve;u au forum
@@ -1651,14 +1656,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas mai liar aqueste article a sas reviradas ',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fich&egrave;ir <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo chalend&egrave;ir seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aquel sit (pr&egrave;tzfaits et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo chalend&egrave;ir seguent vos permet de s&egrave;gre l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fich&egrave;ir <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

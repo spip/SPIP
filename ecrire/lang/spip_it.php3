@@ -772,6 +772,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br>{{Rei
 'info_nouveaux_message' => 'Nuovi messaggi',
 'info_nouveaux_messages' => 'HAI @total_messages@ NUOVI MESSAGGI',
 'info_nouvel_article' => 'Nuovo articolo',
+'info_nouvelle_traduction' => '<NEW> Nouvelle traduction&nbsp;:',
 'info_numero_article' => 'ARTICOLO NUMERO:',
 'info_obligatoire_02' => '[Obbligatorio]',
 'info_option_email' => 'Quando un visitatore del sito inserisce un nuovo messaggio nel forum

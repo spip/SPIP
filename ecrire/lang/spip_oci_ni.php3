@@ -750,6 +750,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_nouveaux_message' => 'Messatges nov&egrave;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_nouvel_article' => 'Article n&ograve;u',
+'info_nouvelle_traduction' => 'Nov&egrave;la revirada&nbsp;:',
 'info_numero_article' => 'ARTICLE N&Uacute;MERO',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quora un visitaire dau sit p&ograve;sta un messatge nov&egrave;u dins lo forum, associat a un article, lu autors de l\'article p&ograve;don &egrave;stre avertits d\'aqueu messatge per corrier electronic. Desiratz d\'utilisar aquela opcion&nbsp;?',
