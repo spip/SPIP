@@ -85,46 +85,6 @@ if ($flag_function_exists AND @function_exists("imagejpeg")) {
 }
 
 
-
-//
-// Notification de modification des articles
-//
-
-if ($options == "avancees") {
-	debut_cadre_relief("article-24.gif");
-
-	$articles_modif = lire_meta("articles_modif");
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Travail collaboratif sur les articles</FONT></B></TD></TR>";
-
-	echo "<TR><TD class='verdana2'>";
-	echo "S'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
-		travaillent sur le m&ecirc;me article, le syst&egrave;me
-		peut afficher les articles r&eacute;cemment &laquo;&nbsp;ouverts&nbsp;&raquo;
-		afin d'&eacute;viter les modifications simultan&eacute;es.
-		Cette option est d&eacute;sactiv&eacute;e par d&eacute;faut
-		afin d'&eacute;viter d'afficher des messages d'avertissement
-		intempestifs.";
-	echo "</TD></TR>";
-
-	echo "<TR><TD ALIGN='center' class='verdana2'>";
-	afficher_choix('articles_modif', $articles_modif,
-		array('oui' => "Activer les messages d'avertissement",
-			'non' => "Pas de messages d'avertissement"));
-	echo "</TD></TR>\n";
-
-	echo "<TR><TD ALIGN='right'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-	echo "</TD></TR>";
-	echo "</TABLE>\n";
-
-	fin_cadre_relief();
-
-	echo "<p>";
-}
-
-
 //
 // Indexation pour moteur de recherche
 //
@@ -201,6 +161,45 @@ echo "</TABLE>\n";
 fin_cadre_relief();
 
 echo "<p>";
+
+
+//
+// Notification de modification des articles
+//
+
+if ($options == "avancees") {
+	debut_cadre_relief("article-24.gif");
+
+	$articles_modif = lire_meta("articles_modif");
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Travail collaboratif sur les articles</FONT></B></TD></TR>";
+
+	echo "<TR><TD class='verdana2'>";
+	echo "S'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
+		travaillent sur le m&ecirc;me article, le syst&egrave;me
+		peut afficher les articles r&eacute;cemment &laquo;&nbsp;ouverts&nbsp;&raquo;
+		afin d'&eacute;viter les modifications simultan&eacute;es.
+		Cette option est d&eacute;sactiv&eacute;e par d&eacute;faut
+		afin d'&eacute;viter d'afficher des messages d'avertissement
+		intempestifs.";
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='center' class='verdana2'>";
+	afficher_choix('articles_modif', $articles_modif,
+		array('oui' => "Activer les messages d'avertissement",
+			'non' => "Pas de messages d'avertissement"));
+	echo "</TD></TR>\n";
+
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>\n";
+
+	fin_cadre_relief();
+
+	echo "<p>";
+}
 
 
 //
