@@ -31,7 +31,7 @@ function creer_base() {
 		date_redac datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		visites INTEGER DEFAULT '0' NOT NULL,
 		referers BLOB NOT NULL,
-		accepter_forum VARCHAR(3) NOT NULL,
+		accepter_forum CHAR(3) NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique))";
 	$result = mysql_query($query);
@@ -735,11 +735,13 @@ function maj_base() {
 		mysql_query("ALTER TABLE spip_articles DROP images");
 	}
 
-	if ($version_installee < 1.413) {
+	if ($version_installee < 1.414) {
 		// Forum par defaut "en dur" dans les spip_articles
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
 		$accepter_forum = substr(lire_meta("forums_publics"),0,3) ;
-		$query = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE NOT (accepter_forum='non') OR accepter_forum is null";
+		$query = "ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL";
+		$result = mysql_query($query);
+		$query = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
 		$result = mysql_query($query);
 	}
 
