@@ -40,7 +40,7 @@ function site_dyn($id_rubrique, $nom_site, $url_site, $description_site) {
 		spip_query("INSERT INTO spip_syndic (nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication) VALUES ('$nom_site', '$url_site', $id_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')");
 		$res =  _T('form_prop_enregistre');
 	} else {
-		$res .= "<p> "._T('form_prop_non_enregistre') . "</p>";
+		$res .= _T('form_prop_non_enregistre');
 	}
 		
 	return "<div class='reponse_formulaire'>$res</div>";

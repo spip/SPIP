@@ -1,4 +1,3 @@
-
 <?php
 
 //
@@ -50,7 +49,8 @@ function champs_traitements ($p) {
 		'URL_RUBRIQUE' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SITE_SPIP' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
-		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))'
+		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))',
+		'HTTP_VARS' => 'htmlspecialchars(%s)'
 	);
 	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
@@ -423,13 +423,13 @@ function balise_LOGIN_PUBLIC_dist($p) {
 
 function balise_URL_LOGOUT_dist($p) {
 	if ($p->fonctions) {
-	$url = "&url=".$p->fonctions[0];
+	$url = "'" . $p->fonctions[0] . "'";
 	$p->fonctions = array();
 	} else {
-	$url = '&url=\'.urlencode(\$clean_link->getUrl()).\'';
+	$url = '\$clean_link->getUrl()';
 	}
 	$p->code = '("<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
-{ echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'' . $url . '\'; } ?".">")';
+    { echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'&amp;var_url=\' .urlencode(' . $url . '); } ?".">")';
 	$p->statut = 'php';
 	return $p;
 }
