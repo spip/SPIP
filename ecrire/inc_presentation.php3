@@ -1588,7 +1588,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	$link->addVar('couleur_claire', $couleur_claire);
 	$link->addVar('couleur_foncee', $couleur_foncee);
 	$link->addVar('left', $GLOBALS['spip_lang_left']);
-	$link->addVar('right', $GLOBALS['spip_lang_right']);
 	echo $link->getUrl()."\">\n";
 
 	if ($code) echo $code."\n";
@@ -2066,15 +2065,16 @@ if ($spip_display == "4") {
 	echo "</ul>";
 }
 else {
-	// Icones principales
-	
+
+	// iframe permettant de passer les changements de statut rapides
 	echo "<iframe id='iframe_action' name='iframe_action' width='1' height='1' style='position: absolute; visibility: hidden;'></iframe>";
-	
-	
-	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
+
+	// Lien oo
+	echo "<div class='invisible_au_chargement' style='position: absolute; height: 0px; visibility: hidden;'><a href='oo'>"._T("access_mode_texte")."</a></div>";
 	
 	echo "<div id='haut-page'>";
 
+	// Icones principales
 	echo "<div class='bandeau-principal' align='center'>\n";
 	echo "<div class='bandeau-icones'>\n";
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";

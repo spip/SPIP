@@ -392,7 +392,7 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 	$h = $taille[1];
 	$hash = calculer_action_auteur ("reduire $w $h");
 	
-	$image = "<img src='../spip_image_reduite.php3?img=$fichier_vignette&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' />";
+	$image = "<img src='../spip_image_reduite.php3?img=$fichier_vignette&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' style='border-width: 0px' />";
 	
 
 # Ca ne marche pas toujours car fichier_vignette peut etre n'importe quoi
@@ -519,8 +519,8 @@ function afficher_portfolio (
 		if ($case == 0) {
 			echo "<tr style='border-top: 1px solid black;'>";
 		}
-		$style = "border-left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
-		if ($case == $bord_droit) $style .= " border-right: 1px solid $couleur;";
+		$style = "border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
+		if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
 		echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
 
 			// bloc vignette + rotation
@@ -731,7 +731,7 @@ function afficher_portfolio (
 
 		// fermer la derniere ligne
 		if ($case > 0) {
-			echo "<td style='border-left: 1px solid $couleur;'>&nbsp;</td>";
+			echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
 			echo "</tr>";
 		}
 

@@ -512,7 +512,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		echo "<label for='accepterforumnon'> "._T('info_pas_de_forum')."</label>";
 	}
 
-	echo "<div align='right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' STYLE='font-size:10px'></div>\n";
+	echo "<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' STYLE='font-size:10px'></div>\n";
 	echo "</form>";
 
 	echo "<br>";
@@ -604,7 +604,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		echo "<label for='petitionoff'>"._T('bouton_radio_supprimer_petition')."</label>";
 	}
 
-	echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'>";
+	echo "<P align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'>";
 	echo "</FORM>";
 
 	echo "</font>";
@@ -641,7 +641,7 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 	echo "(<b>"._T('texte_article_virtuel')."&nbsp;:</b> "._T('texte_reference_mais_redirige').")";
 	echo "</font>";
-	echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'></div>";
+	echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'></div>";
 	echo "</form>";
 	echo fin_block();
 
@@ -880,7 +880,7 @@ if ($flag_editable AND $options == 'avancees') {
 		echo '</select> &nbsp;';
 		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";
 
-		echo '</td><td align="right">';
+		echo '</td><td align="$spip_lang_right">';
 		echo "<span class='visible_au_chargement' id='valider_date_prec'>";
 		echo '<input type="submit" name="Changer" class="fondo" value="'._T('bouton_changer').'" />';
 		echo "</span>";
@@ -1415,7 +1415,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 			echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
-			echo "<div align='right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
+			echo "<div align='$spip_lang_right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
 			echo "</form>";
 			echo "</td>\n";
 			echo "<td background='' width='10'> &nbsp; </td>";
@@ -1559,7 +1559,7 @@ else {
 //
 
 if ($flag_editable) {
-	echo "\n\n<div align=right><br>";
+	echo "\n\n<div align='$spip_lang_right'><br>";
 	
 	if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
 		$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
