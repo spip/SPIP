@@ -48,12 +48,12 @@ $GLOBALS['i18n_it'] = array(
 'avis_erreur_mysql' => 'Errore MySQL ',
 'avis_erreur_sauvegarde' => 'Errore nel salvataggio (@type@ @id_objet@)! ',
 'avis_erreur_version_archive' => '<B>Attenzione! Il file @archive@ corrisponde ad
-una versione di SPIP diversa da quella installata.</B>
+una versione di SPIP diversa da quella installata.</b>
 Potranno sorgere dei problemi:
 rischio di distruzione del database, malfunzionamenti diversi del sito, etc.
 Non confermare questa richiesta d\'importazione!
 Per ulteriori informazioni, vedere <A HREF=\'http://www.uzine.net/article1489.html\'>
-la documentazione di SPIP</A>.',
+la documentazione di SPIP</a>.',
 'avis_espace_interdit' => '<B>Area vietata</B><p>SPIP &egrave; gi&agrave; installato.</p>',
 'avis_lecture_noms_bases_1' => 'Il programma di installazione non ha potuto leggere i nomi dei database installati nel server.',
 'avis_lecture_noms_bases_2' => 'Nessun database &egrave; disponibile, o la funzione che permette di accedere alla lista database &egrave;
@@ -65,8 +65,6 @@ disattivata per motivi sicurezza (verifica con l\'amministratore di sistema).',
 'avis_probleme_archive' => 'Problema di lettura del file @archive@',
 'avis_site_introuvable' => 'Sito introvabile',
 'avis_site_syndique_probleme' => 'Attenzione: si &egrave; verificato un errore nella syndication del sito; il sistema &egrave; temporaneamente fuori uso.
-
-
 Verifica l\'indirizzo del file per la syndication di (<b>@url_syndic@</b>) e prova nuovamente a recuperare le informazioni remote.',
 'avis_sites_probleme_syndication' => 'Si sono verificati problemi nella syndication di questi siti',
 'avis_sites_syndiques_probleme' => 'Si sono verificati problemi nella syndication di questi siti',
@@ -186,9 +184,9 @@ non &egrave; riconosciuto da tutti i browser.',
 'date_saison_3' => 'estate',
 'date_saison_4' => 'autunno',
 'dirs_commencer' => ' per iniziare realmente l\'installazione',
-'dirs_preliminaire' => 'Prima di iniziare: <B>impostare i diritti di accesso</B>',
+'dirs_preliminaire' => 'Prima di iniziare: <B>impostare i diritti di accesso</b>',
 'dirs_probleme_droits' => '<b>Problema nei diritti di accesso</b>',
-'dirs_repertoires_suivants' => '<B>Le seguenti cartelle non sono accessibili in scrittura: <ul>@bad_dirs@.</ul></B>
+'dirs_repertoires_suivants' => '<B>Le seguenti cartelle non sono accessibili in scrittura: <ul>@bad_dirs@.</ul></b>
 <P>Utilizza un client FTP o un comando di shell [chmod] per impostare i diritti di accesso
 di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nella guida di installazione.
 <P>Una volta attribuiti i permessi, potrai ',
@@ -205,7 +203,7 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell\'intero sito, qualche volta corrisponde a "localhost", altre volte invece non &egrave; necessario specificarlo.)',
 'entree_biographie' => 'La tua biografia in breve.',
 'entree_breve_publiee' => 'Questa breve deve essere pubblicata?',
-'entree_chemin_acces' => '<B>Inserire</B> il percorso d\'accesso:',
+'entree_chemin_acces' => '<B>Inserire</b> il percorso d\'accesso:',
 'entree_cle_pgp' => 'Chiave PGP',
 'entree_contenu_rubrique' => '(Contenuto della rubrica in qualche parola)',
 'entree_description_site' => 'Descrizione del sito',
@@ -425,7 +423,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_activer_cookie' => 'Se vuoi puoi attivare un <b>cookie di corrispondenza</b>, che ti permetter&agrave;
 di passare facilmente dal sito pubblico all\'interfaccia privata.',
 'info_activer_forum_public' => '<I>Per attivare i forum pubblici, scegli il tipo
-di moderazione predefinito:</I>',
+di moderazione predefinito:</i>',
 'info_admin_gere_rubriques' => 'Questo amministratore gestisce le seguenti rubriche:',
 'info_admin_gere_toutes_rubriques' => 'Questo amministratore gestisce <b>tutte le rubriche</b>.',
 'info_administrateur' => 'Amministratore',
@@ -497,7 +495,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_changer_nom_groupe' => 'Cambiare il nome di questo gruppo:',
 'info_chapeau' => 'Introduzione',
 'info_chapeau_2' => 'Introduzione:',
-'info_chemin_acces_1' => 'Opzioni: <B>Percorso d\'accesso ai dati nell\'elenco</B>',
+'info_chemin_acces_1' => 'Opzioni: <B>Percorso d\'accesso ai dati nell\'elenco</b>',
 'info_chemin_acces_2' => '&Egrave; necessario specificare il  percorso per accedere ai dati nell\'elenco. Questa informazione &egrave; indispensabile al fine di leggere i profili utente in esso contenuti.',
 'info_chemin_acces_annuaire' => 'Opzioni: <B>Percorso d\'accesso ai dati nell\'elenco',
 'info_choix_base' => 'Terza fase: ',
@@ -506,9 +504,9 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_code_acces' => 'Non dimenticare i tuoi codici d\'accesso!',
 'info_comment_lire_tableau' => 'Come leggere questa tabella',
 'info_confirmer_passe' => 'Conferma la nuova password:',
-'info_connexion_base' => 'Seconda fase: <B>Prova di connessione al database</B>',
+'info_connexion_base' => 'Seconda fase: <B>Prova di connessione al database</b>',
 'info_connexion_ldap_ok' => 'La connessione LDAP &egrave; riuscita.</B><P> Potete passare alla fase successiva.',
-'info_connexion_mysql' => 'Prima fase: <B>La connessione a MySQL</B>',
+'info_connexion_mysql' => 'Prima fase: <B>La connessione a MySQL</b>',
 'info_connexion_ok' => 'La connessione &egrave; riuscita.',
 'info_connexion_refusee' => 'Connessione rifiutata',
 'info_contact' => 'Contatti',
@@ -522,8 +520,8 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_creation_mots_cles' => 'Qui puoi creare e configurare le parole chiave del sito',
 'info_creation_paragraphe' => '(Per creare dei paragrafi indipendenti, lasciare fra loro delle righe vuote.)',
 'info_creation_rubrique' => 'Prima di poter scrivere degli articoli,<BR>devi creare almeno una rubrica.<BR>',
-'info_creation_tables' => 'Quarta fase: <B>Creazione delle tabelle nel database</B>',
-'info_creer_base' => '<B>Creare</B> un nuovo database:',
+'info_creation_tables' => 'Quarta fase: <B>Creazione delle tabelle nel database</b>',
+'info_creer_base' => '<B>Creare</b> un nuovo database:',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>ecrire/data/</b>, poi:',
 'info_dans_espace_prive' => '[nell\'area riservata]',
@@ -533,7 +531,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_date_referencement' => 'DATA DI INSERIMENTO IN REPERTORIO DI QUESTO SITO:',
 'info_delet_mots_cles' => 'Hai chiesto
 di eliminare la parola chiave
-<B>@titre_mot@</B> (@type_mot@). Essendo quest\'ultima collegata a
+<B>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
 <b>@texte_lie@</b>, &egrave; necessario confermare la decisione:',
 'info_demander_blocage_priori' => 'Richiedi una censura preventiva',
 'info_deplier' => 'Sfoglia',
@@ -598,7 +596,7 @@ richiede un accesso FTP al sito Web',
 'info_gauche_messagerie' => 'La messaggeria permette di scambiare dei messaggi tra redattori, di conservare dei memo (ad uso personale) o di pubblicare degli annunci sulla home page nello spazio privato (se sei amministratore).',
 'info_gauche_numero_auteur' => 'AUTORE NUMERO',
 'info_gauche_numero_breve' => 'BREVE NUMERO',
-'info_gauche_statistiques_referers' => 'Questa pagina presenta l\'elenco dei <I>referer</I>, cio&egrave; dei siti  che contengono dei link  verso il proprio sito, solo per oggi: in effetti, quest\'elenco &egrave; azzerato ogni 24 ore.',
+'info_gauche_statistiques_referers' => 'Questa pagina presenta l\'elenco dei <I>referer</i>, cio&egrave; dei siti  che contengono dei link  verso il proprio sito, solo per oggi: in effetti, quest\'elenco &egrave; azzerato ogni 24 ore.',
 'info_gauche_suivi_forum' => 'La pagina di <I>seguito dei forum</I> &egrave; uno strumento di gestione  del sito (e non uno spazio di discussione o di redazione). Pubblica tutti i contributi del forum pubblico di quest\'articolo e vi permette di gestire questi contributi.',
 'info_gauche_suivi_forum_2' => 'La pagina di <I>seguito dei forum</I> &egrave; uno strumento di gestione di vostro sito (e non uno spazio di discussione o di redazione). Pubblica tutti i contributi dei forum del sito, che siano quelli del sito pubblico o dello spazio privato, e vi permette di gestire questi contributi.',
 'info_gauche_visiteurs_enregistres' => 'Trovi qui i visitatori registrati nello spazio pubblico del sito (forum su abbonamento).',
@@ -613,7 +611,7 @@ richiede un accesso FTP al sito Web',
 'info_impossible_lire_page' => '<B>Errore!</B> Impossibile  leggere la pagina <tt><html>@test_proxy@</html></tt> a traverso il proxy <tt>',
 'info_inclusion_directe' => 'Inclusion diretta:',
 'info_inclusion_vignette' => 'Inclusion dell\'etichetta:',
-'info_informations_personnelles' => 'Quinto punto: <B>informazioni personali</B>',
+'info_informations_personnelles' => 'Quinto punto: <B>informazioni personali</b>',
 'info_inscription_automatique' => 'Iscrizione automatica di nuovi redattori',
 'info_installation_systeme_publication' => 'Installazione del sistema di pubblicazione...',
 'info_installer_documents' => 'Potete installare automaticamente tutti i documenti contenuti nella cartella  <i>upload</i>.',
@@ -662,8 +660,8 @@ richiede un accesso FTP al sito Web',
 'info_messagerie_interne' => 'Messaggeria interna',
 'info_mise_a_niveau_base' => 'Aggiornamento della vostra base MySQL',
 'info_mise_a_niveau_base_2' => '{{Attenzione!}} Potete installare una versione
-		dei file SPIP {anteriore} a quella che si trovava prima su questo sito: vostro database rischia di essere
-		perso e il vostro sito non funzioner&agrave; pi&ugrave;.<br>{{Installare di nuovo i file di SPIP.}}',
+dei file SPIP {anteriore} a quella che si trovava prima su questo sito: vostro database rischia di essere
+perso e il vostro sito non funzioner&agrave; pi&ugrave;.<br>{{Installare di nuovo i file di SPIP.}}',
 'info_mise_en_ligne' => 'Data di messa in linea:',
 'info_mode_fonctionnement_defaut_forum_public' => 'Modo di funzionamento predefinito dei forum pubblici',
 'info_modification_parametres_securite' => 'modifiche dei parametri di sicurezza',
@@ -761,13 +759,13 @@ richiede un accesso FTP al sito Web',
 'info_publies' => 'Gli articoli pubblicati',
 'info_question_gerer_statistiques' => 'Vostro sito deve gestire le statistiche delle visite?',
 'info_question_inscription_nouveaux_redacteurs' => 'Accettate gli inscrizioni di nuovi redattori a
-		partire del sito pubblico? Se accettate, i visitatori potranno  iscrirsi
-		a partire da un modulo automatizzato e accedere allo spazio privato per proporre
-		i propri articoli. <blockquote><i>Durante il punto d\'iscrizione,
-		gli utenti ricevono una posta elettronica automatica
-		che fornisce loro i codici d\'accesso al sito privato. Alcuni
-		domini disattivano l\'invio di mail dal proprio server: in questo caso, l\'iscrizione automatica &egrave;
-		impossibile.',
+partire del sito pubblico? Se accettate, i visitatori potranno  iscrirsi
+a partire da un modulo automatizzato e accedere allo spazio privato per proporre
+i propri articoli. <blockquote><i>Durante il punto d\'iscrizione,
+gli utenti ricevono una posta elettronica automatica
+che fornisce loro i codici d\'accesso al sito privato. Alcuni
+domini disattivano l\'invio di mail dal proprio server: in questo caso, l\'iscrizione automatica &egrave;
+impossibile.',
 'info_question_mots_cles' => 'Vuoi utilizzare le parole chiave sul sito?',
 'info_question_proposer_site' => 'Chi pu&ograve; proporre i siti in syndication?',
 'info_question_referers' => 'Vostro sito deve conservare i <i>referers</i>
@@ -789,10 +787,10 @@ richiede un accesso FTP al sito Web',
 'info_redaction_en_cours' => 'IN CORSO DI REDAZIONE',
 'info_redirection' => 'Ridirezione',
 'info_refuses' => 'Vostri articoli rifiutati',
-'info_reglage_ldap' => 'Opzioni: <B>Regole per l\'importazione LDAP</B>',
+'info_reglage_ldap' => 'Opzioni: <B>Regole per l\'importazione LDAP</b>',
 'info_remplacer_vignette' => 'Sostituire l\'etichetta predefinita da un logo personalizzato:',
 'info_remplacer_vignette_defaut' => 'Sostituire l\'etichetta predefinita da un logo personalizzato:',
-'info_renvoi_article' => '<B>Ridirezione.</B> Quest\'articolo rimanda alla pagina: ',
+'info_renvoi_article' => '<B>Ridirezione.</b> Quest\'articolo rimanda alla pagina: ',
 'info_reserve_admin' => 'Solo gli amministratori possono modificare quest\'indirizzo.',
 'info_restauration_sauvegarde' => 'restauro della salvaguardia @archive@',
 'info_restreindre_rubrique' => 'Limita la gestione alla sezione:',
@@ -868,8 +866,8 @@ richiede un accesso FTP al sito Web',
 'info_supprimer_vignette' => 'Cancellare l\'etichetta',
 'info_sur_site_public' => '[sul sito pubblico]',
 'info_surtitre' => 'Surtitre:',
-'info_symbole_bleu' => 'Il simbolo <B>blu</B> indica un <B>memo</B>: cio&egrave; un messaggio ad uso personale.',
-'info_symbole_jaune' => 'Il simbolo <B>giallo</B> indica un <B>annuncio a tutti i redattori </B>: modificabile da tutti gli amministratori, e visibile da tutti i redattori.',
+'info_symbole_bleu' => 'Il simbolo <B>blu</b> indica un <B>memo</b>: cio&egrave; un messaggio ad uso personale.',
+'info_symbole_jaune' => 'Il simbolo <B>giallo</b> indica un <B>annuncio a tutti i redattori </b>: modificabile da tutti gli amministratori, e visibile da tutti i redattori.',
 'info_symbole_vert' => 'Il simbolo <B>verde</B> indica i <B>messaggi scambiati con altri utenti  </B> del sito.',
 'info_syndication' => 'syndication:',
 'info_taille_maximale_vignette' => 'Taglia massima delle etichette create dal sistema:',
@@ -1231,7 +1229,7 @@ In fase di backup non dimenticare di recuperare integralmente anche la cartella 
 	una rivista, un calendario di eventi...',
 'texte_choix_base_1' => 'Scegliere vostra base:',
 'texte_choix_base_2' => 'Il server MySQL contiene molti database.',
-'texte_choix_base_3' => ' <B>Selezionare</B> di seguito quello che vi &egrave; stato attribuito dal vostro dominio:',
+'texte_choix_base_3' => ' <B>Selezionare</b> di seguito quello che vi &egrave; stato attribuito dal vostro dominio:',
 'texte_choix_langue_defaut' => 'Scegli qui sotto la lingua predefinita del sito e le lingue che saranno proposte ai redattori.',
 'texte_commande_vider_tables_indexation' => ' Utilizzare questo commando al fine di vuotare le tavole d\'incidizzazione utilizzate
 			dal motore di ricerca integrato a SPIP. Questo vi permette
@@ -1315,9 +1313,9 @@ Occhio a quello che fai...',
 	Bisogna adesso aggiornare il database del sito.',
 'texte_modifier_article' => 'Modifica l\'articolo:',
 'texte_moteur_recherche_active' => '<b>Il motore di ricerca &egrave; attivato.</b> Utilizzare questo commando 
-		se volete procedere a una reindicizzazione rapida (dopo restauro
-		della salvaguardia per esempio). Notare che i documenti modificati in un modo normale (dall\'interfaccia SPIP) sono automaticamente
-		indicizzati: questo commando, quindi, &egrave; utile solo eccezionalmente',
+se volete procedere a una reindicizzazione rapida (dopo restauro
+della salvaguardia per esempio). Notare che i documenti modificati in un modo normale (dall\'interfaccia SPIP) sono automaticamente
+indicizzati: questo commando, quindi, &egrave; utile solo eccezionalmente',
 'texte_moteur_recherche_non_active' => 'Il motore di ricerca non &egrave; attivato.',
 'texte_mots_cles' => 'Le parole chiave permettono di creare dei link tematici tra gli articoli indipendentemente dal posto che occupano nella sezione di contenuto. 
 Si pu&ograve; quindi arricchire la navigazione del sito, o utilizzare queste propriet&agrave; per personalizzare la presentazione degli articoli nei vostri modelli di layout.',
@@ -1333,7 +1331,7 @@ Si pu&ograve; quindi arricchire la navigazione del sito, o utilizzare queste pro
 'texte_plusieurs_articles' => 'Numerosi autori trovati per "@cherche_auteur@":',
 'texte_port_annuaire' => '(Il valore indicato predefinitoconviene generalmente.)',
 'texte_proposer_publication' => 'Quando il vostro articolo &egrave; finito,<br> potete proporre la sua pubblicazione.',
-'texte_proxy' => 'In alcuni casi (intranet, reti protette...), pu&ograve; essere necessario utilizzare un <I>proxy HTTP</I> per raggiungere i siti in syndication.
+'texte_proxy' => 'In alcuni casi (intranet, reti protette...), pu&ograve; essere necessario utilizzare un <I>proxy HTTP</i> per raggiungere i siti in syndication.
 In caso contrario indicare qui l\'indirizzo nella forma <tt><html>http://proxy:8080</html></tt>. Altrimenti questa casella va lasciata vuota.',
 'texte_publication_articles_post_dates' => 'Come si deve comportare SPIP quando gli articoli hanno una data di pubblicazione fissata nel futuro?',
 'texte_rappel_selection_champs' => '[Non dimenticare di impostare correttamente questo campo].',
@@ -1362,10 +1360,10 @@ irreversibili.</b>',
 'texte_sauvegarde_base' => 'Salvaguardare la base',
 'texte_sauvegarde_compressee' => 'La salvaguardia sar&agrave; fatta nel file non compresso <b>ecrire/data/dump.xml</b>.',
 'texte_selection_langue_principale' => 'Puoi selezionare qui sotto la  &laquo;&nbsp;lingua predefinita&nbsp;&raquo; del sito. Questa scelta non obbliga - fortunatamente! - a scrivere gli articoli nella stessa lingua, ma permette di determinare:
-	<ul><li> il formato di default della data sul sito pubblico;</li>
-	<li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo</li>
-	<li> la lingua utilizzata nei moduli del sito pubblico;</li>
-	<li> la lingua di default nello spazio privato di amministrazione.</li></ul>',
+<ul><li> il formato di default della data sul sito pubblico;</li>
+<li> la tipologia di motore tipografico che SPIP deve utilizzare per la resa del testo</li>
+<li> la lingua utilizzata nei moduli del sito pubblico;</li>
+<li> la lingua di default nello spazio privato di amministrazione.</li></ul>',
 'texte_signification' => 'Le barre rosse rappresentano le entrate accumulate (totale delle sottosezioni), le barre verde il numero di visite per ogni sezione.',
 'texte_sous_titre' => 'Sottotitolo',
 'texte_statistiques_visites' => '(barre scure:  domenica / curve scure: evoluzione della media)',
@@ -1423,7 +1421,7 @@ Questa opzione &egrave; disattivata di default per evitare di generare messaggi 
 'titre_config_fonctions' => 'Configurazione del sito',
 'titre_config_groupe_mots_cles' => 'Configurazione dei gruppi di parole chiave',
 'titre_configuration' => 'Configurazione del sito',
-'titre_connexion_ldap' => 'Opzioni: <B>La tua connessione LDAP</B>',
+'titre_connexion_ldap' => 'Opzioni: <B>La tua connessione LDAP</b>',
 'titre_dernier_article_syndique' => 'Ultimi articoli in syndication',
 'titre_documents_joints' => 'Documenti allegati',
 'titre_evolution_visite' => 'Evoluzione delle visite',
@@ -1449,7 +1447,7 @@ Questa opzione &egrave; disattivata di default per evitare di generare messaggi 
 'titre_nouvelle_breve' => 'Nuova breve',
 'titre_nouvelle_rubrique' => 'Nuova sezione',
 'titre_numero_rubrique' => 'SEZIONE NUMERO:',
-'titre_page_admin_effacer' => 'Manutenzione tecnica: cancellare la base',
+'titre_page_admin_effacer' => 'Manutenzione tecnica: cancella il database',
 'titre_page_admin_vider' => 'Manutenzione tecnica: gestione della cache',
 'titre_page_articles_edit' => 'Modificare: @titre@',
 'titre_page_articles_page' => 'Gli articoli',
@@ -1477,7 +1475,7 @@ Questa opzione &egrave; disattivata di default per evitare di generare messaggi 
 'titre_page_statistiques_referers' => 'Statistiche (link entrando)',
 'titre_page_statistiques_visites' => 'Statistiche delle visite',
 'titre_page_upgrade' => 'Aggiornamento di SPIP',
-'titre_probleme_technique' => 'Attenzione: un problema technico (server MySQL) impedire l\'accesso a questa parte del sito. Grazie della vostra comprensione.',
+'titre_probleme_technique' => 'Attenzione: un problema tecnico (server MySQL) impedisce l\'accesso a questa parte del sito. Grazie per la comprensione.',
 'titre_publication_articles_post_dates' => 'Pubblicazione di articoli post-datati',
 'titre_publier_document' => 'PUBBLICA UN DOCUMENTO IN QUESTA SEZIONE',
 'titre_referencement_sites' => 'R&eacute;f&eacute;rencement di siti e syndication',
