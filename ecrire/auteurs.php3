@@ -10,23 +10,19 @@ include_ecrire ("inc_acces.php3");
 if ($supp && ($connect_statut == '0minirezo'))
 	spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$supp");
 
-$myretour = "auteurs.php3?";
+$retour = "auteurs.php3?";
 if ($tri) {
-	$myretour .= "&tri=$tri";
+	$retour .= "tri=$tri";
 	if ($tri=='nom' OR $tri=='statut')
 		$partri = " (par $tri)";
 	else if ($tri=='nombre')
 		$partri = " (par nombre d'articles)";
 }
-if ($debut)
-	$retour = $myretour."&debut=$debut";
-else
-	$retour = $myretour;
-$retour = urlencode($retour);
 
-if ($visiteurs == "oui")
+if ($visiteurs == "oui") {
 	debut_page("Visiteurs","redacteurs","redacteurs");
-else
+	$retour .= '&visiteurs=oui';
+} else
 	debut_page("Auteurs$partri","redacteurs","redacteurs");
 
 debut_gauche();
@@ -247,9 +243,9 @@ if ($nombre_auteurs > $max_par_page) {
 		if ($j == $debut)
 			echo "<b>$j</b>";
 		else if ($j > 0)
-			echo "<a href=$myretour&debut=$j>$j</a>";
+			echo "<a href=$retour&debut=$j>$j</a>";
 		else
-			echo " <a href=$myretour>0</a>";
+			echo " <a href=$retour>0</a>";
 
 		if ($debut > $j  AND $debut < $j+$max_par_page){
 			echo " | <b>$debut</b>";
@@ -267,7 +263,7 @@ if ($nombre_auteurs > $max_par_page) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
 			else
-				echo "<a href=$myretour&debut=$val>$key</a> ";
+				echo "<a href=$retour&debut=$val>$key</a> ";
 		}
 		echo "</font>";
 		echo "</td></tr>\n";
@@ -288,7 +284,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 
 	// nom
 	echo '</td><td>';
-	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."&redirect=$retour'>".typo($row['nom']).'</a>';
+	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."'>".typo($row['nom']).'</a>';
 
 	if ($connect_statut == '0minirezo' AND $row['statut']=='0minirezo' AND $rub_restreinte[$row['id_auteur']])
 		echo " &nbsp;<small>(admin restreint)</small>";
@@ -341,7 +337,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		echo $link->getForm('GET');
 		echo "<input type='submit' name='submit' value='&lt;&lt;&lt;' class='fondo'>";
 		echo "</form>";
-		//echo "<a href='$myretour&debut=$debut_prec'>&lt;&lt;&lt;</a>";
+		//echo "<a href='$retour&debut=$debut_prec'>&lt;&lt;&lt;</a>";
 	}
 	echo "</td><td align='right'>";
 	if ($debut_suivant < $nombre_auteurs) {
@@ -350,7 +346,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 		echo $link->getForm('GET');
 		echo "<input type='submit' name='submit' value='&gt;&gt;&gt;' class='fondo'>";
 		echo "</form>";
-		//echo "<a href='$myretour&debut=$debut_suivant'>&gt;&gt;&gt;</a>";
+		//echo "<a href='$retour&debut=$debut_suivant'>&gt;&gt;&gt;</a>";
 	}
 	echo "</td></tr>\n";
 }
