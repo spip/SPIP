@@ -233,7 +233,7 @@ if ($connect_statut =="0minirezo"){
 		$row_groupes = spip_fetch_array($result);
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
-			spip_query("INSERT INTO spip_groupes_mots SET titre='(Mots sans groupe...)', unseul='non', obligatoire='non',
+			spip_query("INSERT INTO spip_groupes_mots SET titre='".addslashes(_T('info_mot_sans_groupe'))."', unseul='non', obligatoire='non',
                 articles='oui', breves='oui', rubriques='non', syndic='oui',
                 0minirezo='oui', 1comite='non', 6forum='non'");
 			$row_groupes['id_groupe'] = spip_insert_id();
