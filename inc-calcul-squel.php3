@@ -1120,7 +1120,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'PUCE':
-		$code = "propre('- ')";
+		$code = '$GLOBALS["puce"]';
 		break;
 
 	case 'DATE':
