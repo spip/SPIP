@@ -7,21 +7,6 @@ define("_INC_CACHE", "1");
 
 
 //
-// Inclure un fichier cache
-//
-
-/* mauvaise idee on perd les globales... a moins qu'il faille faire
-   un include () normal pour les squelettes normaux, et un include_cache()
-   pour les squelettes inclus.... ??? */
-
-/* function include_cache($chemin_cache) {
-	include_local($chemin_cache);
-	if ($GLOBALS['flag_apc']) {
-		apc_rm($chemin_cache);
-	}
-} */
-
-//
 // Calcul du nom du fichier cache
 //
 
