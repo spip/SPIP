@@ -428,26 +428,42 @@ function tester_vignette ($test_vignette) {
 	global $djpeg_command, $cjpeg_command, $pnmscale_command;
 	// verifier les formats acceptes par GD
 	if ($test_vignette == "gd1") {
-		$gd_formats = Array();
-		if (function_exists('ImageCreateFromJPEG')) {
-			$srcImage = @ImageCreateFromJPEG(_DIR_IMG . "test.jpg");
-			if ($srcImage) {
-				$gd_formats[] = "jpg";
-				ImageDestroy( $srcImage );
-			}
-		}
-		if (function_exists('ImageCreateFromGIF')) {
-			$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
-			if ($srcImage) {
+		// Si GD est installe et php >= 4.0.2
+		if (function_exists('imagetypes')) {
+			if (imagetypes() & IMG_GIF)
 				$gd_formats[] = "gif";
-				ImageDestroy( $srcImage );
-			}
-		}
-		if (function_exists('ImageCreateFromPNG')) {
-			$srcImage = @ImageCreateFromPNG(_DIR_IMG . "test.png");
-			if ($srcImage) {
+			if (imagetypes() & IMG_JPG)
+				$gd_formats[] = "jpg";
+			if (imagetypes() & IMG_PNG)
 				$gd_formats[] = "png";
-				ImageDestroy( $srcImage );
+		}
+
+		else {	# ancienne methode de detection des formats, qui en plus
+				# est bugguee car elle teste les formats en lecture
+				# alors que la valeur deduite sert a identifier
+				# les formats disponibles en ecriture... (cf. inc_logos.php3)
+		
+			$gd_formats = Array();
+			if (function_exists('ImageCreateFromJPEG')) {
+				$srcImage = @ImageCreateFromJPEG(_DIR_IMG . "test.jpg");
+				if ($srcImage) {
+					$gd_formats[] = "jpg";
+					ImageDestroy( $srcImage );
+				}
+			}
+			if (function_exists('ImageCreateFromGIF')) {
+				$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
+				if ($srcImage) {
+					$gd_formats[] = "gif";
+					ImageDestroy( $srcImage );
+				}
+			}
+			if (function_exists('ImageCreateFromPNG')) {
+				$srcImage = @ImageCreateFromPNG(_DIR_IMG . "test.png");
+				if ($srcImage) {
+					$gd_formats[] = "png";
+					ImageDestroy( $srcImage );
+				}
 			}
 		}
 
@@ -503,7 +519,7 @@ function tester_vignette ($test_vignette) {
 	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $test_vignette)) {
 		include_ecrire('inc_logos.php3');
 		//$taille_preview = lire_meta("taille_preview");
-		if ($taille_preview < 10) $taille_preview = 120;
+		if ($taille_preview < 10) $taille_preview = 150;
 		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
 
 			return ($preview['fichier']);

@@ -8,7 +8,7 @@
 	<li><a href='ecrire/mots_edit.php3?id_mot=(#ENV{id_mot})' class='spip-admin-boutons'><:admin_modifier_mot:> ([(#ENV{id_mot})])</a></li>][
 	<li><a href='ecrire/auteurs_edit.php3?id_auteur=(#ENV{id_auteur})' class='spip-admin-boutons'><:admin_modifier_auteur:> ([(#ENV{id_auteur})])</a></li>]
 	<li><a href='[(#ENV{action})]var_mode=recalcul' class='spip-admin-boutons'><:admin_recalculer:>[(#ENV{use_cache})]</a></li>[
-	<li><a href='ecrire/(#ENV{statistiques})[id_article=(#ENV{id_article})]' class='spip-admin-boutons'><:info_visites:>&nbsp;[(#ENV{visites})];&nbsp;<:info_popularite_5:>&nbsp;[(#ENV{popularite})]</a></li>][
+	<li><a href='ecrire/(#ENV{statistiques})[id_article=(#ENV{id_article})]' class='spip-admin-boutons'>[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a></li>][
 	<li><a href='[(#ENV{action})]var_mode=(#ENV{debug})' class='spip-admin-boutons'><:admin_debug:></a></li>]
 	</ul>
 </div>
