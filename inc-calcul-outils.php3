@@ -38,15 +38,16 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
 	'SITE' => 'site'
 	);
 	$type = $table_logos[$type];
-
+	$nom = strtolower($onoff);
+	spip_log("$type, $onoff, $id, $id_rubrique, $lien, $align, $ff");
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
 	while (1) {
-		$on = cherche_image_nommee($type . $onoff . intval($id));
+		$on = cherche_image_nommee($type . $nom . intval($id));
 		if ($on) {
 			if ($ff)
 				return  ("$on[1].$on[2]");
 			else {
-				$off = ($onoff == 'off') ? '' :
+				$off = ($onoff != 'ON') ? '' :
 					cherche_image_nommee($type . 'off' . $id);
 				return affiche_logos(("$on[0]$on[1].$on[2]"),
 					($off ? ("$off[0]$off[1].$off[2]") : ''),

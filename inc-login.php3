@@ -45,7 +45,7 @@ function login($cible, $prive = 'prive') {
 	$clean_link->delVar('var_erreur');
 
 	if (!$cible)
-	  $cible = $clean_link;
+	  $cible = $prive ? _DIR_RESTREINT : $clean_link->getUrl();
 	else
 	  $cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
 
