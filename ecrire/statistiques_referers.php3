@@ -70,7 +70,7 @@ while ($row = @spip_fetch_array($result)) {
 			$buff = stats_show_keywords($referer, $referer);
 			echo "<li>";
 			if (strlen($buff["keywords"]) > 0) {
-				echo "<a href='$referer'>critères</a> : ".$buff["keywords"];
+				echo "<a href='$referer'>&laquo;&nbsp;".$buff["keywords"]."&nbsp;&raquo;</a>";
 			} else {
 				$aff = $buff["path"];
 				if (strlen($buff["query"]) > 0) $aff .= "?".$buff['query'];
