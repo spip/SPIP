@@ -283,8 +283,6 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 
 
 function calculer_critere_parties($idb, &$boucles, $param, $not, $match) {
-  global $tables_relations, $table_date, $tables_des_serveurs_sql;
-
 	$boucle = &$boucles[$idb];
 	list(,$a1,$op,$a2) = $match;
 	list($a11,$a12) = calculer_critere_parties_aux($idb, $boucles, $a1);
@@ -293,10 +291,10 @@ function calculer_critere_parties($idb, &$boucles, $param, $not, $match) {
 	if (($op== ',')&&(is_numeric($a11) && (is_numeric($a21))))
 		$boucle->limit = $a11 .',' . $a21;
 	else {
-	  $boucle->partie =	($a11 != 'n') ? $a11 : $a12;
+		$boucle->partie = ($a11 != 'n') ? $a11 : $a12;
 		$boucle->total_parties =  ($a21 != 'n') ? $a21 : $a22;
 		$boucle->mode_partie = (($op == '/') ? '/' :
-				(($a1=='n')?'-':'+').(($a2=='n')?'-':'+'));
+			(($a11=='n')?'-':'+').(($a21=='n')?'-':'+'));
 	}
 }
 
@@ -351,7 +349,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 	$primary = $boucle->primary;
 	$id_field = $id_table . '.' . $primary; 
 
-	if (ereg('^([0-9a-zA-Z#_\{\}]+)([,/])([0-9a-zA-Z#_\{\}]+)$', $param, $match))
+	if (ereg('^([0-9a-zA-Z#_\{\}-]+)([,/])([0-9a-zA-Z#_\{\}-]+)$', $param, $match))
 	  calculer_critere_parties($idb, $boucles, $param, $not, $match);
 
 		// Restriction de valeurs (implicite ou explicite)

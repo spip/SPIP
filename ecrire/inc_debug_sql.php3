@@ -207,6 +207,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 // - ca fait 2 headers !
 	ob_end_clean();
 
+	@header('Content-Type: text/html; charset='.lire_meta('charset'));
+
 	echo debut_entete('Spip ' . _T('admin_debug')), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
 	  "</head>\n<body style='margin:0 10px;'>",

@@ -23,7 +23,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 	static $dejafait = false;
 
-	if ($GLOBALS['flag_preserver'] || !$GLOBALS['spip_admin'])
+	if (!$GLOBALS['spip_admin'])
 		return '';
 
 	if (!is_array($debug)) {
