@@ -7,7 +7,8 @@
 	if (!isset($couleur_foncee))
 		$couleur_foncee = "#3874B0";
 ?>
-.forml {width: 100%; padding: 2px; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
+.forml {width: 100%; padding: 2px; background-color: #E4E4E4; 
+background-position: center bottom; float: none; color: #000000}
 .formo {width: 100%; padding: 2px; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
 .fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
 .fondo {background-color: <?php echo $couleur_foncee; ?>; background-position: center bottom; float: none; color: #FFFFFF}
@@ -25,6 +26,8 @@
 label {cursor: pointer;}
 .arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
 .arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
+.verdana1 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; }
+.verdana2 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; }
 
 .reliefblanc {background-image: url(img_pack/barre-blanc.gif)}
 .reliefgris {background-image: url(img_pack/barre-noir.gif)}

@@ -948,21 +948,20 @@ function barre_onglets($rubrique, $onglet){
 	if ($rubrique == "statistiques"){
 		onglet("&Eacute;volution des visites", "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
 		onglet("R&eacute;partition par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
-//		onglet("Par articles", "statistiques_articles.php3", "recents", $onglet, "article-24.gif");
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 		if ($activer_statistiques_ref != "non")	onglet("Origine des visites", "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
-	
+
 	if ($rubrique == "administration"){
 		onglet("Sauvegarder/restaurer la base", "admin_tech.php3", "sauver", $onglet, "base-24.gif");
 		onglet("Vider le cache", "admin_vider.php3", "vider", $onglet, "cache-24.gif");
 		onglet("Effacer la base", "admin_effacer.php3", "effacer", $onglet, "supprimer.gif");
 	}
-	
+
 	if ($rubrique == "auteur"){
 		$activer_messagerie = lire_meta("activer_messagerie");
 		$activer_imessage = lire_meta("activer_imessage");
-		
+
 		onglet("L'auteur", "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
 		onglet("Informations personnelles", "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
 		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur){
@@ -973,15 +972,14 @@ function barre_onglets($rubrique, $onglet){
 			if ($nb_liste>0)
 				onglet("Liste" . (($nb_liste>1)?"s":"") ." de diffusion", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
 		}
-		//onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
 	}
 
 	if ($rubrique == "configuration"){
-		onglet("Caract&eacute;ristiques principales", "configuration.php3", "config", $onglet, "racine-site-24.gif");
-		onglet("Contenu de votre site", "config-contenu.php3", "contenu", $onglet, "secteur-24.gif");
-		onglet("Fonctionnalit&eacute;s de SPIP", "config-fonctions.php3", "fonctions", $onglet, "statistiques-24.gif");
+		onglet("Contenu du site", "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
+		onglet("Interactivit&eacute;", "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
+		onglet("Fonctions avanc&eacute;es", "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
 	}
-	
+
 	if ($rubrique == "suivi_forum"){
 		onglet("Tous les messages", "controle_forum.php3", "tous", $onglet);
 		onglet("Messages sans texte", "controle_forum.php3?controle_sans=oui", "sans", $onglet);
@@ -993,7 +991,7 @@ function barre_onglets($rubrique, $onglet){
 
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
 	global $spip_display, $spip_ecran ;
-	
+
 	if ($spip_display == 1){
 		$hauteur = 20;
 		$largeur = 80;

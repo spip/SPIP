@@ -37,6 +37,7 @@ include_ecrire ("inc_auth.php3");
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
 include_ecrire ("inc_filtres.php3");
 
@@ -68,6 +69,8 @@ include_ecrire ("inc_base.php3");
 creer_base();
 maj_base();
 ecrire_acces();
+
+init_config();
 
 $hash = calculer_action_auteur("purger_cache");
 $redirect = rawurlencode("index.php3");

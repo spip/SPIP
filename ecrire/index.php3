@@ -1,19 +1,10 @@
-<?php 
+<?php
 
 include ("inc.php3");
 
 debut_page("Votre espace priv&eacute;", "asuivre", "asuivre");
 
 debut_gauche();
-
-
-
-if($options != 'avancees') {
-	debut_boite_info();
-	echo "<p align=center><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>&Agrave; SUIVRE</B></FONT></p>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec l'interface, cliquez sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; pour ouvrir plus de possibilit&eacute;s.")."</FONT>";
-	fin_boite_info();
-}
 
 
 
@@ -66,12 +57,12 @@ function sous_enfant($collection2){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
-			
+
 			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'>$titre2</A>\n";
 		}
 		$retour .= "</FONT></ul>\n\n".fin_block()."\n\n";
 	}
-	
+
 	return $retour;
 }
 
@@ -165,7 +156,8 @@ if (spip_num_rows($result) > 0) {
 }
 else {
 	if ($connect_statut == '0minirezo') {
-		echo "<p>Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>";
+		echo "<font size='2'>Avant de pouvoir &eacute;crire des articles, ";
+		echo "vous devez cr&eacute;er au moins une rubrique.</font><p>";
 	}
 }
 if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
@@ -177,23 +169,40 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 if ($options == "avancees") {
 	echo "<p>";
 	$activer_messagerie = lire_meta("activer_messagerie");
-	
+
 	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif","rien.gif");
-	
+
 	if ($connect_statut == "0minirezo") {
-		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
+		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif");
 		echo "<p>";
 		if (lire_meta("activer_statistiques") == 'oui')
-			icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
-		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif","rien.gif");
-		icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif","rien.gif");
+			icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif");
+		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif");
+		icone_horizontale("Vider le cache", "admin_vider.php3", "cache-24.gif");
 	}
+}
+else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+	echo "<p>";
+	icone_horizontale("Configurer votre site", "configuration.php3", "administration-24.gif");
 }
 
 fin_raccourcis();
 
 
 debut_droite();
+
+if ($options != 'avancees') {
+	debut_boite_info();
+	echo "<div class='verdana2'>";
+	echo "<p><center><b>&Agrave; SUIVRE</b></center>";
+	echo "<p>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. ".
+		"Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves ".
+		"pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos ".
+		"pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec ".
+		"l'interface, cliquez sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; pour ouvrir plus de possibilit&eacute;s.");
+	echo "</div>";
+	fin_boite_info();
+}
 
 
 //
