@@ -3,6 +3,16 @@
 include ("inc.php3");
 include ("inc_statistiques.php3");
 
+$query = "SELECT * FROM spip_visites_temp WHERE date <= DATE_SUB(NOW(),INTERVAL 24 HOUR)";
+$result = spip_query($query);
+
+if (mysql_num_rows($result) > 0) {
+	ecrire_meta("date_stats_process", "$date");
+	ecrire_metas();
+	calculer_visites();
+}
+
+
 
 debut_page("Statistiques", "administration", "statistiques");
 
