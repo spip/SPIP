@@ -581,8 +581,8 @@ class Link {
 				// items supprimes
 				if (!preg_match('/^('.
 				($GLOBALS['flag_ecrire'] ?
-					'lang|set_options|set_couleur|set_disp|set_ecran':
-					'submit|recalcul')
+					'|lang|set_options|set_couleur|set_disp|set_ecran':
+					'|submit|recalcul')
 				. ')$/i', $name)) {
 					if (is_array($value))
 						$this->arrays[$name] = $value;
