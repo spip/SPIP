@@ -24,12 +24,14 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 
 	if (!$use_cache) {
 		include_local("inc-calcul.php3");
+		$timer_a = explode(" ", microtime());
 		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
-		$timer_a = time(); $timer_b = microtime();
 		$page = calculer_page($fond, $contexte_inclus);
+		$timer_b = explode(" ", microtime());
 		if ($page) {
-			$timer = ceil(1000*(time()-$timer_a + microtime() - $timer_b));
-			spip_log("inclus ${timer}ms: $chemin_cache (${delais}s)");
+			$timer = ceil(1000 * ($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
+			$taille = ceil(strlen($page) / 1024);
+			spip_log("inclus ($timer ms): $chemin_cache ($taille ko, delai: $delais s)");
 			ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
@@ -114,11 +116,13 @@ if (!$use_cache) {
 
 	if ($calculer_cache) {
 		include_local ("inc-calcul.php3");
-		$timer_a = time(); $timer_b = microtime();
+		$timer_a = explode(" ", microtime());
 		$page = calculer_page_globale($fond);
+		$timer_b = explode(" ", microtime());
 		if ($page) {
-			$timer = ceil(1000*(time()-$timer_a + microtime() - $timer_b));
-			spip_log("calcul ${timer}ms: $chemin_cache (${delais}s)");
+			$timer = ceil(1000 * ($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
+			$taille = ceil(strlen($page) / 1024);
+			spip_log("calcul ($timer ms): $chemin_cache ($taille ko, delai: $delais s)");
 			ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
@@ -173,7 +177,7 @@ if ($var_recherche) {
 
 // nettoie
 if ($effacer_cache) @unlink($chemin_cache);
-while (list(,$chemin_cache_supprime) = each ($cache_supprimes))
+while (list(, $chemin_cache_supprime) = each($cache_supprimes))
 	@unlink($chemin_cache_supprime);
 
 //
