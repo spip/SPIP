@@ -26,6 +26,23 @@ function texte_upload($inclus){
 	return ($texte_upload);
 }
 
+function vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette) {
+
+		if ($largeur_vignette > 140) {
+			$rapport = 140.0 / $largeur_vignette;
+			$largeur_vignette = 140;
+			$hauteur_vignette = ceil($hauteur_vignette * $rapport);
+		}
+
+		if ($hauteur_vignette > 150) {
+			$rapport = 150.0 / $hauteur_vignette;
+			$hauteur_vignette = 150;
+			$largeur_vignette = ceil($largeur_vignette * $rapport);
+		}
+
+		return "<a href='../$fichier_vignette'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'></a>\n";
+}
+
 function afficher_document($id_document, $id_doc_actif=0) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
@@ -46,25 +63,11 @@ function afficher_document($id_document, $id_doc_actif=0) {
 		$mode = $row['mode'];
 	}
 
-	if ($mode == 'vignette') {
-		$row_vignette = $row;
-	}
-	else if ($id_vignette) {
-		$result_vignette = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
-		$row_vignette = @mysql_fetch_array($result_vignette);
-	}
-	if ($row_vignette) {
-		$fichier_vignette = $row_vignette['fichier'];
-		$largeur_vignette = $row_vignette['largeur'];
-		$hauteur_vignette = $row_vignette['hauteur'];
-		$taille_vignette = $row_vignette['taille'];
-	}
-
 	$result = mysql_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-	if ($row = @mysql_fetch_array($result))	{
-		$type_extension = $row['extension'];
-		$type_inclus = $row['inclus'];
-		$type_titre = $row['titre'];
+	if ($type = @mysql_fetch_array($result))	{
+		$type_extension = $type['extension'];
+		$type_inclus = $type['inclus'];
+		$type_titre = $type['titre'];
 	}
 
 	$block = "document $id_document";
@@ -78,7 +81,6 @@ function afficher_document($id_document, $id_doc_actif=0) {
 	if ($taille > 0) {
 		if ($type_titre) echo propre($type_titre);
 		else echo "fichier &laquo;&nbsp;.$type_extension&nbsp;&raquo;";
-		if ($largeur && $hauteur) echo " - $largeur x $hauteur pixels";
 		echo " - ".taille_en_octets($taille);
 	}
 	echo "</font>\n";
@@ -97,52 +99,63 @@ function afficher_document($id_document, $id_doc_actif=0) {
 	echo debut_boite_info();
 
 	echo "<table width='100%' border='0' cellspacing='0' cellpadding='8'><tr>\n";
+
+	//
+	// preparer le raccourci a afficher sous la vignette ou sous l'apercu
+	//
+	$raccourci_img =  "<font size='1'>\n".
+		"<div align='left'>&lt;img$id_document|left&gt;</div>\n".
+		"<div align='center'>&lt;img$id_document|center&gt;</div>\n".
+		"<div align='right'>&lt;img$id_document|right&gt;</div>\n".
+		"</font>\n";
+	$raccourci_doc =  "<font size='1'>\n".
+		"<div align='left'>&lt;doc$id_document|left&gt;</div>\n".
+		"<div align='center'>&lt;doc$id_document|center&gt;</div>\n".
+		"<div align='right'>&lt;doc$id_document|right&gt;</div>\n".
+		"</font>\n". "<br>".$raccourci_img;
+
+	//
+	// Affichage de la vignette
+	//
+
+	$result_vignette = mysql_query("SELECT * FROM spip_documents WHERE id_document=$id_vignette");
+	$row_vignette = @mysql_fetch_array($result_vignette);
+
+	if ($row_vignette) {
+		$fichier_vignette = $row_vignette['fichier'];
+		$largeur_vignette = $row_vignette['largeur'];
+		$hauteur_vignette = $row_vignette['hauteur'];
+		$taille_vignette = $row_vignette['taille'];
+	}
+
 	echo "<td width='150' align='center' valign='top'>\n";
-
-	//
-	// Affichage de la vignette ou de l'apercu
-	//
-
-	if ($mode == 'document') {
-		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
-		echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
-	}
-	else {
-		echo "<div style='border: 1px solid #808080; padding: 4px; background-color: #e0f080;'>\n";
-		echo "<font size='2'><b>APER&Ccedil;U</b></font><br>";
-	}
-
+	echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
+	echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
 
 	if ($fichier_vignette) {
-		if ($largeur_vignette > 140) {
-			$rapport = 140.0 / $largeur_vignette;
-			$largeur_vignette = 140;
-			$hauteur_vignette = floor($hauteur_vignette * $rapport);
-		}
-		if ($hauteur_vignette > 150) {
-			$rapport = 150.0 / $hauteur_vignette;
-			$hauteur_vignette = 150;
-			$largeur_vignette = floor($largeur_vignette * $rapport);
-		}
-		echo "<a href='../$fichier_vignette'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'></a>\n";
+		echo vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
+		echo "<font size='2'>\n";
+		$hash = calculer_action_auteur("supp_doc ".$id_vignette);
+		echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
+		echo "supprimer la vignette";
+		echo "</a>]</font><br>\n";
 
-		if ($mode == 'document') {
-			$hash = calculer_action_auteur("supp_doc ".$id_vignette);
-			echo "<font size='2'>\n";
-			echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
-			echo "supprimer la vignette</a>]</font><br>\n";
-		}
-
-		echo "<font size='1'>\n";
-		echo "<div align='left'>&lt;img$id_document|left&gt;</div>\n";
-		echo "<div align='center'>&lt;img$id_document|center&gt;</div>\n";
-		echo "<div align='right'>&lt;img$id_document|right&gt;</div>\n";
-		echo "</font>\n";
+		echo $raccourci_doc; $raccourci_img='';
 	}
 	else {
-		echo "<font face='verdana, arial, helvetica, sans-serif' size='2'>\n";
-		echo "<div align='left'>Si vous voulez ins&eacute;rer un lien graphique vers ce document, installez ici une vignette de pr&eacute;visualisation.<p>";
 
+		//
+		// joli icone a la main
+		//
+		echo "<table cellpadding=0 cellspacing=0 border=0 width=35 height=32 align='left' valign='bottom'>\n";
+		echo "<tr width=35 height=32>\n";
+		echo "<td width=35 height=32 background='IMG2/document-vierge.gif' align='left'>\n";
+		echo "<table bgcolor='#666666' style='border: solid 1px black; margin-top: 10px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px;' cellspacing=0 border=0>\n";
+		echo "<tr><td><font face='verdana,arial,helvetica,sans-serif' color='white' size='1'>$type_extension</font></td></tr></table>\n";
+		echo "</td></tr></table>\n&nbsp;&nbsp;&nbsp;";
+
+		// retour aux choses serieuses
+		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'>\n";
 		$hash = calculer_action_auteur("ajout_doc");
 		echo "<form action='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
 		echo "<input name='redirect' type='Hidden' VALUE='article_documents.php3'>";
@@ -154,7 +167,7 @@ function afficher_document($id_document, $id_doc_actif=0) {
 		echo "<input name='hash' type='Hidden' VALUE='$hash'>";
 
 		if (tester_upload()) {
-			echo "<B>T&eacute;l&eacute;charger une nouvelle image&nbsp;:</B>";
+			echo "<small><b>T&eacute;l&eacute;charger une nouvelle image&nbsp;:</b></small>";
 			echo aide ("artimg");
 			echo "<small><br><INPUT NAME='image' TYPE='File'>\n";
 			echo " <INPUT NAME='ok' TYPE=Submit VALUE='T&eacute;l&eacute;charger' CLASS='fondo'></small>\n";
@@ -179,24 +192,29 @@ function afficher_document($id_document, $id_doc_actif=0) {
 	}
 
 	echo "</div>\n";
-
 	echo "</td>\n";
+
+	//
+	// Afficher un apercu (pour les images)
+	//
+	if ($type_inclus == 'image') {
+		echo "<td width='150' align='center' valign='top'>\n";
+		echo "<div style='border: 1px solid #808080; padding: 4px; background-color: #e0f080;'>\n";
+		echo "<font size='2'><b>IMAGE</b></font><br>";
+
+		$fichier_vignette = $row['fichier'];
+		$largeur_vignette = $row['largeur'];
+		$hauteur_vignette = $row['hauteur'];
+		echo vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
+		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'><br>$largeur x $hauteur pixels<br><br></font>";
+		echo $raccourci_img;
+	}
 
 	//
 	// Afficher le document en tant que tel
 	//
 
 	echo "<td width='100%' align='left' valign='top'>\n";
-
-	// Si quelqu'un trouve un endroit ou caser la jolie icone en HTML fait main d'Arno ;-))
-/*	if ($fichier) {
-		echo "<table cellpadding=0 cellspacing=0 border=0 width=35 height=32 align='left' valign='bottom'>\n";
-		echo "<tr width=35 height=32>\n";
-		echo "<td width=35 height=32 background='IMG2/document-vierge.gif' align='left'>\n";
-		echo "<table bgcolor='#666666' style='border: solid 1px black; margin-top: 10px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px;' cellspacing=0 border=0>\n";
-		echo "<tr><td><font face='verdana,arial,helvetica,sans-serif' color='white' size='1'>$type_extension</font></td></tr></table>\n";
-		echo "</td></tr></table>\n&nbsp;&nbsp;&nbsp;";
-	}*/
 
 	if ($descriptif) {
 		echo debut_cadre_relief();
