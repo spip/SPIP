@@ -326,8 +326,6 @@ function afficher_sites($titre_table, $requete) {
 			echo "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
 			if ($moderation == 'oui')
 				echo "<i>".typo($nom_site)."</i>";
-			else
-				echo typo($nom_site);
 
 			echo "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
 			echo "</td>";
@@ -473,9 +471,11 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 							$my_sites[$id_syndic] = spip_fetch_array(spip_query(
 								"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
 						echo "<td class='arial1' align='left'>";
-						if ($my_sites[$id_syndic]['moderation'] == 'oui') echo "<i>";
-						echo $my_sites[$id_syndic]['nom_site'];
-						if ($my_sites[$id_syndic]['moderation'] == 'oui') echo "</i>";
+						$aff = $my_sites[$id_syndic]['nom_site'];
+						if ($my_sites[$id_syndic]['moderation'] == 'oui')
+							echo "<i>$aff</i>";
+						else
+							echo $aff;
 						echo "</td>";
 					} else echo "<td></td>";
 

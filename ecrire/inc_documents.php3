@@ -410,8 +410,13 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if (lire_meta("documents_$type") != 'non' AND $flag_modif) {
 		/// Ajouter nouveau document/image
 
+		if ($GLOBALS['spip_lang_rtl'])
+			$texalign = 'right';
+		else
+			$texalign = 'left';
+	
 		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
-		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: left; color: black;'>";
+		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: $texalign; color: black;'>";
 		echo bouton_block_invisible("ajouter_document");
 		if ($type == "rubrique") echo "<b><font size=1>"._T('titre_publier_document')."</font></b>".aide("ins_doc");
 		else echo "<b><font size=1>"._T('titre_joindre_document')."</font></b>".aide("ins_doc");
@@ -847,7 +852,8 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	$taille = $document->get('taille');
 	$mode = $document->get('mode');
 	if (!$titre) {
-		$titre_fichier = "<i>"._T('info_sans_titre_2')."</i> <small>(".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier).")</small>";
+		$titre_fichier = _T('info_sans_titre_2');
+		$titre_fichier .= " <small>(".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier).")</small>";
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");

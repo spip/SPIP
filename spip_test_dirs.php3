@@ -15,12 +15,22 @@ function bad_dirs($bad_dirs, $test_dir, $install) {
 	} else
 		$titre = _T('dirs_probleme_droits');
 
+	$bad_url = "spip_test_dirs.php3";
+	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
+
 	echo "<BR><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
 
 	echo _T('dirs_repertoires_suivants', array('bad_dirs' => $bad_dirs));
-	echo "<B><A HREF='spip_test_dirs.php3";
-	if ($test_dir) echo '?test_dir='.$test_dir;
-	echo "'>" . _T('login_recharger')."</A>$continuer.";
+	echo " <B><A HREF='$bad_url'> ". _T('login_recharger')."</A> $continuer.";
+
+	if ($install)
+		echo aide ("install0");
+
+	echo "<br><div align='center'>". menu_langues()."</div>";
+
+	echo "<FORM ACTION='$bad_urls' METHOD='GET'>\n";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='". _T('login_recharger')."'></DIV>";
+	echo "</FORM>";	
 }
 
 //
@@ -50,11 +60,6 @@ if ($bad_dirs) {
 	$bad_dirs = join(" ", $bad_dirs);
 	install_debut_html();
 	bad_dirs($bad_dirs, $test_dir, $install);
-
-	if ($install)
-		echo aide ("install0");
-
-	echo "<p><div align='right'>".menu_langues()."</div>";
 
 	install_fin_html();
 } else {

@@ -79,7 +79,8 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$lejour=jour($row['date_heure']);
 		$lemois = mois($row['date_heure']);		
 		$lejour=ereg_replace("1er","1",$lejour);
-		if ($lemois == $mois_today) $les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
+		if ($lemois == $mois_today)
+			$les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
 	}
 
 	// annonces

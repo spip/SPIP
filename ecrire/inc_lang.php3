@@ -24,6 +24,14 @@ function changer_langue($lang) {
 			$spip_lang_rtl = '_rtl';
 		else
 			$spip_lang_rtl = '';
+
+		if ($spip_lang_rtl) {
+			$spip_lang_left = 'right';
+			$spip_lang_right = 'left';
+		} else {
+			$spip_lang_left = 'left';	
+			$spip_lang_right = 'right';
+		}
 		return true;
 	}
 	return false;
@@ -232,6 +240,9 @@ function traduire_nom_langue($lang) {
 function menu_langues() {
 	global $couleur_foncee;
 
+	if(!$couleur_foncee)
+		$couleur_foncee = '#044476';
+
 	$lien = $GLOBALS['clean_link'];
 	$lien->delVar('var_lang');
 	$lien = $lien->getUrl();
@@ -283,18 +294,23 @@ function utiliser_langue_site() {
 // Initialisation
 //
 function init_langues() {
-	if (defined("_ECRIRE_INC_META") && ($GLOBALS['flag_ecrire'] || !lire_meta('langues_proposees'))) {
-		$d = opendir($GLOBALS['flag_ecrire'] ? "lang" : "ecrire/lang");
+	global $all_langs, $flag_ecrire;
+
+	$all_langs = lire_meta('langues_proposees');
+
+	if (!$all_langs || $flag_ecrire) {
+		$d = opendir($flag_ecrire ? "lang" : "ecrire/lang");
 		while ($f = readdir($d)) {
 			if (ereg('^spip_([a-z]{2,3})\.php3?$', $f, $regs))
-				$all_langs[] = $regs[1];
+				$toutes_langs[] = $regs[1];
 		}
 		closedir($d);
-		sort($all_langs);
-		$GLOBALS['all_langs'] = join(',', $all_langs);
-		ecrire_meta('langues_proposees', $GLOBALS['all_langs']);
-	} else
-		$GLOBALS['all_langs'] = lire_meta('langues_proposees');
+		sort($toutes_langs);
+		$all_langs = join(',', $toutes_langs);
+
+		if (defined("_ECRIRE_INC_META"))
+			ecrire_meta('langues_proposees', $all_langs);
+	}
 }
 
 init_langues();
