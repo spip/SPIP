@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://www.spip.net/\\2_',
 '0_langue' => 'Deutsch [de]',
 '0_liste' => 'spip-trad@rezo.net',
-'0_mainteneur' => '<MODIF> Klaus at spip.de',
+'0_mainteneur' => 'klaus@spip.de',
 
 
 // A
@@ -49,7 +49,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Programmfehler. Diese Funktion darf nicht in diesem Zusammenhang aufgerufen werden.',
 'avis_erreur_mysql' => 'MySQL-Fehler',
 'avis_erreur_sauvegarde' => 'Fehler in der Sicherung (@type@ @id_objet@) ! ',
-'avis_erreur_version_archive' => '<MODIF> <B>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen instalierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls das Funktionieren Ihrer Website zu beeintr&auml;chtigen oder socgar die Datenbank zu zerst&ouml;ren.<p> Mehr dazu finden Sie in der <A HREF="http://www.spip.net/fr_article1489.html"> franz&ouml;sischen SPIP-Dokumentation</a>.',
+'avis_erreur_version_archive' => '<B>Achtung! Die Datei @archive@ entspricht nicht der von Ihnen instalierten Version von SPIP.</b> Bitte brechen Sie den Import jetzt ab. Sie riskieren anderenfalls das Funktionieren Ihrer Website zu beeintr&auml;chtigen oder sogar die Datenbank zu zerst&ouml;ren.<p> Mehr dazu finden Sie in der <A HREF="http://www.spip.net/fr_article1489.html"> franz&ouml;sischen SPIP-Dokumentation</a>.',
 'avis_espace_interdit' => '<B>Gesperrter Bereich</b><p>SPIP ist bereits installiert.',
 'avis_lecture_noms_bases_1' => 'Das Installationsprogram konnte die Namen der vorhandenen Datenbanken nicht lesen.',
 'avis_lecture_noms_bases_2' => 'Entweder ist keine Datenbank vorhanden oder die Funktion zum Auflisten der Datenbanken ist abgeschaltet (Das ist bei vielen Webhostern der Fall).',
@@ -507,7 +507,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_contenu_articles' => 'Inhalt der Artikel',
 'info_contribution' => 'Forumsbeitr&auml;ge',
 'info_copyright' => 'ist freie Software im Sinne der <a href=\'copyright_fr.html\'>GNU Public License.</a>',
-'info_copyright_doc' => '<MODIF> Weitere Informationen finden Sie unter <a href=\'http://www.spip.net/de\'>http://www.spip.net/de</a>.',
+'info_copyright_doc' => 'Weitere Informationen finden Sie unter <a href=\'http://www.spip.net/de\'>http://www.spip.net/de</a>.',
 'info_cours_edition' => 'Ihre Artikel in Bearbeitung',
 'info_creation_mots_cles' => 'Hier verwalten Sie die Schlagworte der Website',
 'info_creation_paragraphe' => '(Um einen Absatz einzuf&uuml;gen, lassen Sie einfach eine Zeile frei.)',
@@ -657,7 +657,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_mots_cles_association' => 'Schlagworte dieser Kategorie k&ouml;nnen zugeordnet werden:',
 'info_moyenne' => 'Durchschnitt: ',
 'info_multi_articles' => 'Sprachauswahl f&uuml;r Artikel aktivieren?',
-'info_multi_cet_article' => '<MODIF> Dieser Artikel ist auf:',
+'info_multi_cet_article' => 'Dieser Artikel ist auf:&nbsp;',
 'info_multi_herit' => 'Standardsprache',
 'info_multi_langues_choisies' => 'Bitte w&auml;hlen Sie hier die Sprachen aus, die den Redakteuren Ihrer Website zur Verf&uuml;gung stehen sollen.
   Die Sprachen, welche bereits in Ihrer Website verwendet werden (oben auf der Liste), k&ouml;nnen nicht abgeschaltet werden.',
@@ -1031,7 +1031,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'login_login2' => 'Login-Name (zur Anmeldung bei der Website):',
 'login_login_pass_incorrect' => '(Login-Name oder Passwort falsch.)',
 'login_motpasseoublie' => 'Passwort&nbsp;vergessen?',
-'login_non_securise' => '<MODIF> Achtung, dieses Formular ist nicht abgesichert. Wenn Sie sicher stellen wollen, dass Ihr Passwort nicht im Netzwerk mitgeh&ouml;rt werden kann, aktivieren Sie bitte Javascript und',
+'login_non_securise' => 'Achtung, dieses Formular ist nicht abgesichert. Wenn Sie sicher stellen wollen, dass Ihr Passwort nicht im Netzwerk mitgeh&ouml;rt werden kann, aktivieren Sie bitte Javascript und',
 'login_nouvelle_tentative' => 'Erneut versuchen',
 'login_par_ici' => 'Sie sind angemeldet... hier...',
 'login_pass2' => 'Passwort:',
@@ -1197,7 +1197,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'texte_actualite_site_3' => 'um zus&auml;tzliche Funktionen zu nutzen.',
 'texte_admin_effacer_01' => 'Dieser Befehl l&ouml;scht den <i>gesamten</i> Inhalt der Datenbank mit <i>allen</i> Redakteuren und Administratoren. Nach der Ausf&uuml;hrung dieses Befehls m&uuml;ssen Sie SPIP neu installieren und einen ersten Administrator anlegen.',
 'texte_admin_tech_01' => 'Diese Option erm&ouml;glicht es, den Inhalt der Datenbank in das Verzeichnis <i>ecrire/data/</i> zu sichern. Vergessen Sie bitte nicht, ebenfalls den Inhalt des Verzeichnisses <i>IMG/</i> zu sichern, denn es enth&auml;lt s&auml;mtliche Bilder und Grafiken, die f&uuml;r Rubriken und Artikel verwendet werden.',
-'texte_admin_tech_02' => '<MODIF> Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="http://www.spip.net/fr_article1489.html">die SPIP Dokumentation</a>.
+'texte_admin_tech_02' => 'Achtung: Diese Sicherungskopie kann AUSSCHLIESSLICH in eine Website wieder eingespielt werden, die unter der gleichen Version von SPIP l&auml;uft. Bitte verwenden Sie keine Sicherungskopie, um den Inhalt einer Website nach einem Update wieder einzuspielen. Mehr dazu steht in der <a href="http://www.spip.net/fr_article1489.html">die SPIP Dokumentation</a>.
 
 
 

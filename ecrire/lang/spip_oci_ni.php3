@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-oci',
 '0_langue' => 'Ni&ccedil;ard [oci_ni]',
 '0_liste' => 'spip-oci@rezo.net',
-'0_mainteneur' => 'Bastian&nbsp;:&nbsp;cagablea@identitanissarda.com',
+'0_mainteneur' => 'S&eacute;bastien Donato&nbsp;: seb@planetenice.com',
 
 
 // A
