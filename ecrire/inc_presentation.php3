@@ -1071,10 +1071,10 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$java_lien = substr($lien, 11, strlen($lien));
 		$onClick = " onClick=\"$java_lien\"";
 		$a_href = '<script language="JavaScript"><!--' . "\n"
-			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\"");\n//--></script>'
+			. 'document.write("<a href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
-		$a_href = '<script language="JavaScript"><!--' . "\n"
-			. 'document.write("<a href=\\"'.addslashes($java_lien).'\\" class=\\"icone\\""); //--></script>'
+		$a_href_icone = '<script language="JavaScript"><!--' . "\n"
+			. 'document.write("<a href=\\"javascript:'.addslashes($java_lien).'\\" class=\\"icone\\"");'."\n".'//--></script>'
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
