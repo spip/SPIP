@@ -403,7 +403,7 @@ function calculer_page_globale($fond) {
 
 	$contexte = '';
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
-		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_mot', 'id_document');
+		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_mot', 'id_groupe', 'id_document');
 	reset($contexte_defaut);
 	while (list(, $val) = each($contexte_defaut)) {
 		if ($GLOBALS[$val]) {
