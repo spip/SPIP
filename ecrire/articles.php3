@@ -101,10 +101,12 @@ if ($statut_nouv) {
 		calculer_rubriques();
 
 		if ($statut_nouv == 'publie' AND $statut_article != $statut_nouv) {
+			include_ecrire("inc_mail.php3");
 			envoyer_mail_publication($id_article);
 		}
 	
 		if ($statut_nouv == "prop" AND $statut_article != $statut_nouv AND $statut_article != 'publie') {
+			include_ecrire("inc_mail.php3");
 			envoyer_mail_proposition($id_article);
 		}
 		$statut_article = $statut_nouv;
