@@ -81,7 +81,7 @@ function cherche_page_incluse($cache, $contexte)
 		      $contexte_inclus['id_rubrique']);
 }
 
-function calculer_page_globale($cache, $fond, $recherche)
+function calculer_page_globale($cache, $fond, $var_recherche)
  {
    global $spip_lang;
    $contexte = $GLOBALS['HTTP_GET_VARS'];
@@ -107,10 +107,10 @@ function calculer_page_globale($cache, $fond, $recherche)
   $page = cherche_page($fond, $cache, $contexte, $id_rubrique_fond, $spip_lang);
   $texte = $page['texte'];
 
-  if ($recherche)
+  if ($var_recherche)
     {
       include_ecrire("inc_surligne.php3");
-      $texte = surligner_mots($texte, $recherche);
+      $texte = surligner_mots($texte, $var_recherche);
     } 
 
   return array('texte' => 
@@ -142,7 +142,7 @@ function cherche_page_incluante($cache, $contexte)
   }
   return calculer_page_globale($cache,
 			       $contexte['fond'],
-			       $contexte['recherche']);
+			       $contexte['var_recherche']);
 }
 
 # Fonctions appelées par les squelettes (insertion dans le code trop lourde)

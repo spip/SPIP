@@ -1,6 +1,6 @@
 <?php
 
-if (defined("_INC_PUBLIC")) { // inclusion diffe're'e
+if (defined("_INC_PUBLIC")) { // inclusion différée
   $page = inclure_page($fond, $delais, $contexte_inclus);
   if ($page['process_ins'])
     { eval('?' . '>' .  $page['texte']); }
@@ -12,9 +12,9 @@ if (defined("_INC_PUBLIC")) { // inclusion diffe're'e
   define("_INC_PUBLIC", "1");
 
 # Variable indiquant l'extension du fichier du squelette 
-# (peut etre change' dans mes_option via inc_version; en 'xml' pour + tard)
+# (peut etre changé dans mes_option via inc_version; en 'xml' pour + tard)
   $GLOBALS['extension_squelette'] = 'html';
-# Variable indiquant le re'pertoires des images
+# Variable indiquant le répertoires des images
   $GLOBALS['dossier_images'] = 'IMG';
 
   include ("ecrire/inc_version.php3");
@@ -35,11 +35,11 @@ if (defined("_INC_PUBLIC")) { // inclusion diffe're'e
 
 include_ecrire("inc_meta.php3");
 
-// ajout_forum est une HTTP_GET_VAR installe'e par retour_forum dans inc-forum.
+// ajout_forum est une HTTP_GET_VAR installée par retour_forum dans inc-forum.
 // Il s'agit de pirater les HTTP_POST_VARS, afin de mettre en base
-// les valeurs transmises, avant re'affichage du formulaire avec celles-ci.
-// En cas de validation finale c~a redirige vers l'URL ayant provoque' l'appel
-// au lieu de laisser l'URL appele'e resynthe'tiser le formulaire.
+// les valeurs transmises, avant réaffichage du formulaire avec celles-ci.
+// En cas de validation finale ça redirige vers l'URL ayant provoqué l'appel
+// au lieu de laisser l'URL appelée resynthétiser le formulaire.
 
   if ($ajout_forum) {
     $redirect = '';
@@ -55,7 +55,7 @@ include_ecrire("inc_meta.php3");
 
   spip_log($HTTP_SERVER_VARS['REQUEST_METHOD'] . " $HTTP_IF_MODIFIED_SINCE $GLOBALS[PHP_SELF]");
 
-  // Code inope'rant si le serveur HTTP traite ce champ en amont.
+  // Code inopérant si le serveur HTTP traite ce champ en amont.
   if ($HTTP_IF_MODIFIED_SINCE)
     {
       $headers_only = (trim(str_replace('GMT', '', ereg_replace(';.*$', '', $HTTP_IF_MODIFIED_SINCE))) == $gmoddate);
@@ -74,7 +74,7 @@ include_ecrire("inc_meta.php3");
      $page = ramener_cache($cle,
 			   'cherche_page_incluante', 
 			   array('fond' => $fond,
-				 'recherche' => $HTTP_GET_VARS['recherche']),
+				 'var_recherche' => $HTTP_GET_VARS['var_recherche']),
 			   &$delais);
      # si la page est neuve, recalculer ces 2 valeurs
      if (!$page['naissance'])
@@ -118,11 +118,11 @@ include_ecrire("inc_meta.php3");
      else
        { 
 	 $n = strlen($texte);
-# L'envoi du content-Length ci-dessous permet d'envoyer d'autres re'ponses
+# L'envoi du content-Length ci-dessous permet d'envoyer d'autres réponses
 # dans le cadre des connexions persistantes de HTTP1
 # Elle doit s'accompagner du connection-close sinon
 # elle retarde l'affichage de certains navigateurs.
-# On l'a de'sactive' ici puisqu'il n'y a qu'une seule re'ponse, 
+# On l'a désactivé ici puisqu'il n'y a qu'une seule réponse, 
 # et que certains serveurs la calculent et maintiennent la connexion
 # header("Content-Length: " . $n);
 # header("Connection: close");
@@ -131,8 +131,8 @@ include_ecrire("inc_meta.php3");
        }
    }
 
-# Toutes les heures, menage d'un cache si le processus n'a rien recalcule'.
-# On nettoie celui de la page retourne'e car le syste`me vient d'y acce'der:
+# Toutes les heures, menage d'un cache si le processus n'a rien recalculé.
+# On nettoie celui de la page retournée car le système vient d'y accéder:
 # il y a de bonnes chances qu'il l'ait toujours dans son cache.
 
   if ($page['naissance'] && (time() - lire_meta('date_purge_cache') > 3600))
