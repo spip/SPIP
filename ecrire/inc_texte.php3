@@ -5,6 +5,7 @@
 if (defined("_ECRIRE_INC_TEXTE")) return;
 define("_ECRIRE_INC_TEXTE", "1");
 
+include_local("inc_filtres.php3");
 
 function tester_variable($nom_var, $val){
 	if ($_GET[$nom_var] OR $GLOBALS['HTTP_GET_VARS'][$nom_var]) {
