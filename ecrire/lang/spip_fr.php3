@@ -1218,6 +1218,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'onglet_auteur' => 'L\'auteur',
 'onglet_calendrier' => 'Calendrier',
 'onglet_contenu_site' => 'Contenu du site',
+'onglet_bilan_traductions' => 'Bilan des traductions',
+'onglet_detail_traductions' => 'Les articles &agrave; traduire',
 'onglet_evolution_visite_mod' => '&Eacute;volution',
 'onglet_fonctions_avances' => 'Fonctions avanc&eacute;es',
 'onglet_informations_personnelles' => 'Informations personnelles',
@@ -1314,6 +1316,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_auteur_messagerie' => 'Ce site peut vous indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce qui vous permet d\'&eacute;changer des messages en direct (lorsque la messagerie est d&eacute;sactiv&eacute;e ci-dessus, la liste des r&eacute;dacteurs est elle-m&ecirc;me d&eacute;sactiv&eacute;e). Vous pouvez d&eacute;cider de ne pas appara&icirc;tre dans cette liste (vous &ecirc;tes &laquo;invisible&raquo; pour les autres utilisateurs).',
 'texte_auteur_messagerie_1' => 'Ce site permet l\'&eacute;change de messages et la constitution de forums de discussion priv&eacute;s entre les participants du site. Vous pouvez d&eacute;cider de ne pas participer &agrave; ces &eacute;changes.',
 'texte_auteurs' => 'LES AUTEURS',
+'texte_bilan_traductions' => 'Dans ce graphique, les barres vertes repr&eacute;sentent les articles traduits et &agrave; jour, les barres rouges les traductions devant &ecirc;tre mises &agrave; jour.',
 'texte_breves' => 'Les br&egrave;ves sont des textes courts et simples permettant de
 	mettre en ligne rapidement des informations concises, de g&eacute;rer
 	une revue de presse, un calendrier d\'&eacute;v&eacute;nements...',
