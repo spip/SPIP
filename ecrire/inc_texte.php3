@@ -245,7 +245,7 @@ function couper_intro($texte, $long) {
 		$intro = couper($texte, $long);
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
-	$intro = ereg_replace("^=http://[^[:space:]]+","",$intro);
+	$intro = ereg_replace("^=[^[:space:]]+","",$intro);
 
 	return $intro;
 }
