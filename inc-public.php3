@@ -58,6 +58,7 @@ $fichier_requete = $REQUEST_URI;
 $fichier_requete = strtr($fichier_requete, '?', '&');
 $fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
 
+
 $fichier_cache = generer_nom_fichier_cache($fichier_requete);
 $chemin_cache = "CACHE/".$fichier_cache;
 
@@ -77,9 +78,9 @@ else {
 // Authentification, le cas echeant
 //
 $auteur_session = '';
-if ($cookie = $HTTP_COOKIE_VARS['spip_session']) {
+if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
 	include_ecrire ("inc_session.php3");
-	verifier_session($cookie);
+	verifier_visiteur();
 }
 
 
@@ -331,7 +332,9 @@ if ($spip_session) {
 if ($id_article AND lire_meta("activer_statistiques") != "non" AND !$flag_preserver) {
 	include_ecrire("inc_connect.php3");
 	include_local ("inc-stats.php3");
-	if ($db_ok) ecrire_stats();
+	if ($db_ok) $stats = ecrire_stats();
+	
+	if ($admin_ok) echo $stats;
 }
 
 
