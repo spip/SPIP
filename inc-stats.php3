@@ -80,7 +80,7 @@ function ecrire_stats() {
 
 	// popularite, mise a jour dix minutes
 	$date_popularite = lire_meta('date_stats_popularite');
-	if ((time() - $date_popularite) > 0) {
+	if ((time() - $date_popularite) > 600) {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			include_ecrire("inc_statistiques.php3");
