@@ -1514,6 +1514,50 @@ function debut_gauche($rubrique = "asuivre") {
 	global $activer_imessage;
 	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
+
+
+	// zap sessions si bonjour
+	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
+		$securite = $GLOBALS['prefs']['securite'];
+		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
+
+		if ($zappees && $GLOBALS['bonjour'] == "oui" && ($securite == 'strict' || $options == 'avancees')) {
+			debut_cadre_enfonce("warning-24.gif");
+			echo "<font size=2 face='verdana,arial,helvetica,sans-serif'>";
+			echo propre("<b>Avertissement de s&eacute;curit&eacute;</b>");
+
+			if ($securite == 'strict') {
+				if ($zappees > 1)
+					echo "<p>Il y avait " . ($zappees) ." connexion(s) parall&egrave;le(s) &agrave; votre nom. "
+						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
+						. " le syst&egrave;me a supprim&eacute; ces connexions.\n";
+				else
+					echo "<p>Il y avait une connexion parall&egrave;le &agrave; votre nom. "
+						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
+						. " le syst&egrave;me a supprim&eacute; cette connexion.\n";
+			}
+			else
+				echo "<p>Il y a actuellement " . ($zappees + 1) ." connexions simultan&eacute;es &agrave; votre nom.\n";
+
+			echo "<p>";
+			echo propre("<img align='right' src='img_pack/deconnecter-24.gif'>" .
+				"Pour &eacute;viter d'afficher ce message et de rendre votre connexion ".
+				"vuln&eacute;rable, pensez, lorsque vous aurez " .
+				"fini de travailler dans l'espace priv&eacute;, " .
+				"&agrave; vous d&eacute;connecter en cliquant sur le bouton ".
+				"ci-dessus.");
+			echo "\n<p>";
+
+			echo propre("Pour plus d'informations, vous pouvez afficher les informations de s&eacute;curit&eacute;.");
+			echo "<p>";
+
+			icone_horizontale("Afficher les r&eacute;glages de s&eacute;curit&eacute;", "index.php3?secu=oui", "base-24.gif", "");
+			fin_cadre_enfonce();
+		}
+	}
+
+
+
 	
 	if ($changer_config!="oui"){
 		$activer_messagerie=lire_meta("activer_messagerie");
@@ -1605,6 +1649,7 @@ function debut_droite() {
 		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
 
 		if ($zappees && $GLOBALS['bonjour'] == "oui" && ($securite == 'strict' || $options == 'avancees')) {
+			/*
 			debut_cadre_enfonce();
 			gros_titre("Avertissement de s&eacute;curit&eacute;");
 
@@ -1638,13 +1683,10 @@ function debut_droite() {
 
 			echo "<div align='right'>";
 			echo "<a href='index.php3?secu=oui'><b>Afficher les informations de s&eacute;curit&eacute;</b></a>";
-			/*$link = new Link('index.php3?secu=oui');
-			echo $link->getForm('GET');
-			echo "<input type='submit' class='fondo' name='submit' value='Afficher les informations de s&eacute;curit&eacute;'>\n";
-			echo "</form>"; */
 			echo "</div>\n";
 
 			fin_cadre_enfonce();
+			*/
 		}
 		else if ($GLOBALS['secu'] == 'oui') {
 			debut_cadre_enfonce();
@@ -1664,12 +1706,12 @@ function debut_droite() {
 
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;stricte&raquo;. ".
 					"Les connexions multiples y sont interdites. ".
-					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n\n".
-					"- {Vous connecter depuis plusieurs machines ou plusieurs navigateurs} diff&eacute;rents ".
-					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;.\n".
-					"- {Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
-					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif).\n".
-					"- {Vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
+					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n".
+					"- {vous connecter depuis plusieurs machines ou plusieurs navigateurs} diff&eacute;rents ".
+					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;;\n".
+					"- {utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
+					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif);\n".
+					"- {vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
 					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
 					"ordinateur de fa&ccedil;on unique).\n\n\n".
 					"Pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus, ".
@@ -1679,7 +1721,7 @@ function debut_droite() {
 
 				echo "<p><div align='right'>";
 				echo $link->getForm('POST');
-				echo "<input type='submit' class='fondo' name='submit' value='Repasser en s&eacute;curit&eacute; normale'>\n";
+				echo "<input type='submit' class='fondo' name='submit' value='Passer en s&eacute;curit&eacute; normale'>\n";
 				echo "</form></div>\n";
 			}
 			else {
@@ -1688,12 +1730,12 @@ function debut_droite() {
 
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;normale&raquo;. ".
 					"Cela veut dire que les connexions multiples sont autoris&eacute;es. ".
-					"Ainsi, vous pouvez faire les choses suivantes :\n\n\n\n".
-					"- {Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents} ".
-					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;.\n".
-					"- {Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
-					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif).\n".
-					"- {Vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
+					"Ainsi, vous pouvez faire les choses suivantes :\n".
+					"- {vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents} ".
+					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;;\n".
+					"- {utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
+					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif);\n".
+					"- {vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
 					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
 					"ordinateur de fa&ccedil;on unique).\n\n\n".
 					"En contrepartie, la s&eacute;curit&eacute; du syst&egrave;me n'est pas maximale. ".
