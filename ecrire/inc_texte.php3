@@ -487,7 +487,7 @@ function extraire_lien ($regs) {
 	$lien_url = trim($regs[3]);
 	$compt_liens++;
 	$lien_interne = false;
-	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)[[:space:]]*$', $lien_url, $match)) {
+	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
 		// Traitement des liens internes
 		if (@file_exists('inc-urls.php3')) {
 			include_local('inc-urls.php3');
