@@ -1355,7 +1355,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$'.$nom_var.' = "<"."?php include_local(\'inc-forum.php3\'); lang_select(\'$spip_lang\'); ";
 		$'.$nom_var.' .= "';
 		switch ($boucles[$id_boucle]->type_requete) {
-		default:
 		case "articles":
 			$milieu .= 'echo retour_forum(0, 0, $contexte[id_article], 0, 0); ';
 			break;
