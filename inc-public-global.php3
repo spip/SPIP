@@ -4,6 +4,139 @@
 if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
 
+// fonction principale declenchant tout le service
+
+function calcule_header_et_page($fond, $delais) 
+	{
+	  global $affiche_boutons_admin, $auteur_session, $flag_dynamique, $flag_ob, $flag_preserver, $forcer_lang, $id_article, $ignore_auth_http, $lastmodified, $recherche, $use_cache, $val_confirm, $var_mode, $var_mode_affiche, $var_mode_objet, $var_recherche, $tableau_des_erreurs;
+
+	// Regler le $delais par defaut
+
+	if (!isset($delais))
+		$delais = 1 * 3600;
+	if ($recherche)
+		$delais = 0;
+
+	// authentification du visiteur
+	if ($GLOBALS['_COOKIE']['spip_session'] OR
+	($GLOBALS['_PHP_AUTH_USER']  AND !$ignore_auth_http)) {
+		include_ecrire ("inc_session.php3");
+		verifier_visiteur();
+	}
+	// multilinguisme
+	if ($forcer_lang AND ($forcer_lang!=='non') AND empty($GLOBALS['_POST'])) {
+		include_ecrire('inc_lang.php3');
+		verifier_lang_url();
+	}
+	if ($GLOBALS['_GET']['lang']) {
+		include_ecrire('inc_lang.php3');
+		lang_select($GLOBALS['_GET']['lang']);
+	}
+
+	// Si envoi pour un forum, enregistrer puis rediriger
+
+	if (strlen($GLOBALS['_POST']['confirmer_forum']) > 0
+	OR ($GLOBALS['_POST']['afficher_texte']=='non'
+		AND $GLOBALS['_POST']['ajouter_mot'])) {
+		include('inc-messforum.php3');
+		redirige_par_entete(enregistre_forum());
+	}
+
+	// si signature de petition, l'enregistrer avant d'afficher la page
+	// afin que celle-ci contienne la signature
+
+	if ($GLOBALS['_GET']['val_confirm']) {
+		include_local(find_in_path('inc-formulaire_signature.php3'));
+		reponse_confirmation($id_article, $val_confirm);
+	}
+
+	//  refus du debug si pas dans les options generales ni admin connecte
+	if ($var_mode=='debug') {
+		if (($GLOBALS['code_activation_debug'] == 'oui')
+		OR $auteur_session['statut'] == '0minirezo')
+			spip_log('debug !');
+		else
+			$var_mode = false; 
+	}
+
+	// est-on admin ?
+	if ($affiche_boutons_admin = (!$flag_preserver
+	AND ($GLOBALS['_COOKIE']['spip_admin']
+	     OR $GLOBALS['_COOKIE']['spip_debug'])))
+		include_local(find_in_path('inc-formulaire_admin.php3'));
+
+	$tableau_des_erreurs = array();
+	$header404 = false;
+	$page = afficher_page_globale ($fond, $delais, $use_cache);
+
+	if (!$flag_preserver) {
+
+// si la page est vide, envoi d'un 404
+		if (preg_match('/^[[:space:]]*$/', $page['texte'])) {
+			$header404 = true;
+			header("HTTP/1.0 404");
+			header("Content-Type: text/html; charset=".lire_meta('charset'));
+		} else {
+// Interdire au client de cacher un login, un admin ou un recalcul
+			if ($flag_dynamique OR $var_mode
+			    OR $GLOBALS['_COOKIE']['spip_admin']) {
+				header("Cache-Control: no-cache,must-revalidate");
+				header("Pragma: no-cache");
+// Pour les autres donner l'heure de modif
+			} else if ($lastmodified)
+				header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+				header("Content-Type: text/html; charset=".lire_meta('charset'));
+		}
+// Inserer au besoin les boutons admins
+		if ($affiche_boutons_admin) {
+			include_local("inc-admin.php3");
+			$page['process_ins'] = 'php';
+			$page['texte'] = affiche_boutons_admin($page['texte']);
+		}
+	}
+
+	if ($page['process_ins'] == 'html')
+	// Cas d'une page contenant uniquement du HTML :
+		$page = $page['texte'];
+	else {
+	  // Cas d'une page contenant du PHP :
+		if (!($flag_ob AND ($var_mode == 'debug' OR $var_recherche OR $affiche_boutons_admin))) {
+			eval('?' . '>' . $page['texte']);
+			$page = '';
+		} else {
+			ob_start(); 
+			$res = eval('?' . '>' . $page['texte']);
+			$page = ob_get_contents(); 
+			ob_end_clean();
+
+			// en cas d'erreur lors du eval,
+			// la memoriser dans le tableau des erreurs
+			// On ne revient pas ici si le nb d'erreurs > 4
+			if ($res === false AND $affiche_boutons_admin
+			AND $auteur_session['statut'] == '0minirezo') {
+				include_ecrire('inc_debug_sql.php3');
+				erreur_squelette(_T('zbug_erreur_execution_page'));
+			}
+		}
+	}
+
+	// Passer la main au debuggueur le cas echeant 
+	if ($var_mode == 'debug') {
+		include_ecrire("inc_debug_sql.php3");
+		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
+	} 
+	if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
+	  $page = affiche_erreurs_page($tableau_des_erreurs) . $page;
+
+	// Traiter var_recherche pour surligner les mots
+	if ($var_recherche) {
+		include_ecrire("inc_surligne.php3");
+		$page = surligner_mots($page, $var_recherche);
+	}
+
+	return array($header404, $page);
+	}
+
 //
 // Aller chercher la page dans le cache ou pas
 //
@@ -138,6 +271,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		// Obtenir la page
 		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
 		$fond, false);
+
 		if (!$flag_preserver) {
 		// Entete content-type: xml ou html ; charset
 			if ($xhtml) {
@@ -228,7 +362,32 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	return $page;
 }
 
+// equivalente a texte_script dans inc_filtre.
+
+function securise_script($texte) {
+	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
+}
+
 # les balises dynamiques sont traitees comme des inclusions
+
+function synthetiser_balise_dynamique($nom, $args, $file, $lang) {
+  return
+		('<'.'?php 
+include_ecrire(\'inc_lang.php3\');
+lang_select("'.$lang.'");
+include_local("'
+		. $file
+		. '");
+inclure_balise_dynamique(balise_'
+		. $nom
+		. '_dyn(\''
+		. join("', '", array_map("securise_script", $args))
+		. '\'));
+	lang_dselect();
+?'
+		.">");
+}
+
 # Attention, un appel explicite a cette fonction suppose certains include
 # (voir l'exemple de spip_inscription et spip_pass)
 

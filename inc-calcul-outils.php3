@@ -133,25 +133,7 @@ function executer_balise_dynamique($nom, $args, $filtres, $lang) {
 
 	$f = 'balise_' . $nom . '_stat';
 	$r = $f($args, $filtres);
-	if (!is_array($r))
-		return $r;
-	else { 
-		return
-		('<'.'?php 
-include_ecrire(\'inc_lang.php3\');
-lang_select("'.$lang.'");
-include_local("'
-		. $file
-		. '");
-inclure_balise_dynamique(balise_'
-		. $nom
-		. '_dyn(\''
-		. join("', '", array_map("texte_script", $r))
-		. '\'));
-	lang_dselect();
-?'
-		.">");
-	}
+	return (!is_array($r)) ? $r : synthetiser_balise_dynamique($nom, $r, $file, $lang);
 }
 
 //

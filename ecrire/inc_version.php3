@@ -424,7 +424,7 @@ $flag_ini_get = (function_exists("ini_get")
 $flag_gz = function_exists("gzencode"); #php 4.0.4
 $flag_ob = ($flag_ini_get
 	&& !ereg("ob_", ini_get('disable_functions'))
-	&& function_exists("ob_start"));
+	&& function_exists("ob_start")); 
 $flag_pcre = function_exists("preg_replace");
 $flag_crypt = function_exists("crypt");
 $flag_wordwrap = function_exists("wordwrap");
@@ -635,6 +635,7 @@ function http_status($status) {
 		403 => '403 Forbidden',
 		404 => '404 Not Found'
 	);
+
 	if ($php_cgi) Header("Status: $status");
 	else Header("HTTP/1.0 ".$status_string[$status]);
 }
@@ -918,10 +919,9 @@ function email_valide($adresse) {
 //
 // Traduction des textes de SPIP
 //
-function _T($text, $args = '') {
+function _T($texte, $args = '') {
 	include_ecrire('inc_lang.php3');
-	$text = traduire_chaine($text, $args);
-
+	$text = traduire_chaine($texte, $args);
 	if (!empty($GLOBALS['xhtml'])) {
 		include_ecrire("inc_charsets.php3");
 		$text = html2unicode($text);
