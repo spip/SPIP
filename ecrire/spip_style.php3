@@ -918,7 +918,7 @@ a.bouton_rotation:hover img {
 	-moz-border-radius-topright: 8px;
 }
 .cadre-forum div.cadre-titre {
-	background: #cccccc;
+	background: <? echo $couleur_claire; ?>;
 	border-bottom: 1px solid #aaaaaa;
 	color: black;	
 }
@@ -926,11 +926,11 @@ a.bouton_rotation:hover img {
 
 .cadre-thread-forum {
 	background-color: #eeeeee;
-	border: 1px solid #aaaaaa;
+	border: 1px solid #cccccc;
 	border-top: 0px;
 }
 .cadre-thread-forum div.cadre-titre {
-	background: #dddddd;
+	background: #cccccc;
 	color: black;	
 }
 
