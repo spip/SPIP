@@ -1598,9 +1598,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'LOGIN_PRIVE':
 		$milieu = '
 			$'.$nom_var.' = "<"."?php include_local (\'inc-login.php3\');
-				if (\$GLOBALS[\'var_url\']) \$cible = new Link(\$GLOBALS[\'var_url\']);
-				else \$cible = new Link(\'ecrire/\');
-				login (\$cible, \'prive\'); ?".">";
+				login (\'\', \'prive\'); ?".">";
 			';
 		break;
 

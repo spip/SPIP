@@ -157,7 +157,14 @@ if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND 
 
 $effacer_cache = !$delais; // $delais peut etre modifie par une inclusion de squelette...
 if (file_exists($chemin_cache)) {
-	if ($lastmodified) @Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
+	if (!$effacer_cache) {
+		if ($lastmodified) @Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
+	}
+	else {
+		@Header("Expires: 0");
+		@Header("Cache-Control: no-cache,no-store");
+		@Header("Pragma: no-cache");
+	}
 	include ($chemin_cache);
 }
 
