@@ -17,14 +17,17 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 }
 
 function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
-	if (($mode == 'redac')
-	AND (lire_meta("accepter_inscriptions") == "oui"))
-		$statut = "nouveau";
-	else if (($mode == 'forum')
-	AND ((lire_meta('accepter_visiteurs') == 'oui')
-		OR (lire_meta('forums_publics') == 'abo'))
-	)
-		$statut = "6forum";
+
+	// Si une inscription est autorisee, on enregistre le demandeur
+	// comme 'nouveau' et on lui envoie ses codes par email ; lors de
+	// sa premiere connexion il obtiendra son statut final (auth->activer())
+	if (($mode == 'redac' AND lire_meta('accepter_inscriptions') == 'oui')
+	OR ($mode == 'forum' AND (
+		lire_meta('accepter_visiteurs') == 'oui'
+		OR lire_meta('forums_publics') == 'abo'
+		)
+	))
+		$statut = 'nouveau';
 	else
 		return _T('pass_rien_a_faire_ici');
 

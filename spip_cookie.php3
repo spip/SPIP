@@ -135,6 +135,8 @@ if ($essai_login == "oui") {
 	}
 
 	if ($ok) {
+		// Nouveau redacteur ou visiteur inscrit par mail :
+		// 'nouveau' -> '1comite' ou  '6forum'
 		$auth->activer();
 
 		if ($auth->login AND $auth->statut == '0minirezo') // force le cookie pour les admins

@@ -221,16 +221,18 @@ function auth() {
 	}
 
 	if (!$auth_pass_ok) {
-		redirige_par_entete("../spip_login.php3?var_erreur=pass&inscription=" .
-			     ((lire_meta("accepter_inscriptions") == "oui")?
-			      ('spip_inscription.php3') : ''));
+		redirige_par_entete("../spip_login.php3?var_erreur=pass");
 	}
 
+	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'
+	// (code presque mort, utilise peut-etre encore sous .htpasswd ?)
 	if ($connect_statut == 'nouveau') {
-		$query = "UPDATE spip_auteurs SET statut='1comite' WHERE id_auteur=$connect_id_auteur";
-		$result = spip_query($query);
-		$connect_statut = '1comite';
+		$connect_statut =
+		(lire_meta('accepter_inscriptions') == 'oui') ? '1comite' : '6forum';
+		spip_query("UPDATE spip_auteurs SET statut='$connect_statut'
+			WHERE id_auteur=$connect_id_auteur");
 	}
+
 	return true;
 }
 
