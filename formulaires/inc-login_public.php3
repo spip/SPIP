@@ -132,7 +132,8 @@ function login_pour_tous($login, $cible, $action, $mode) {
 		) ? 'spip_inscription.php3' : '';
 
 	return array('formulaire_login', 0, 
-		array_merge(array_map('texte_script', $row),
+		array_merge(
+				array_map('texte_script', $row),
 				array(
 					'action2' => ($login ? 'spip_cookie.php3' : $action),
 					'erreur' => $erreur,
@@ -140,7 +141,8 @@ function login_pour_tous($login, $cible, $action, $mode) {
 					'url' => $cible,
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
-					'inscription'  => $inscription
+					'inscription'  => $inscription,
+					'login' => $login
 					)
 				)
 			);

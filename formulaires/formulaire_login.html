@@ -26,10 +26,10 @@
 document.write("<:login_login:>&nbsp;<b>[(#ENV{login})]<" + "/b><br />&#91;<a href='spip_cookie.php3?cookie_admin=non[&amp;url=(#ENV{url})][&amp;retour=(#SELF|urlencode)]'><font size='2'><:login_autre_identifiant:><" + "/font><" + "/a>&#93;")
 //--></script>
 <noscript>
-	<font face="Georgia, Garamond, Times, serif" size="3">
+	<p><font face="Georgia, Garamond, Times, serif" size="3">
 		<:login_non_securise:>
-		<a href="[(#ENV{action})]"><:login_recharger:></a>
-	</font>
+		<a href="[(#ENV{action})]"><:login_recharger:></a>.
+	</font></p>
 	<label><b><:login_login2:></b><br /></label>
 	<input type='text' name='session_login' class='forml' [value="(#ENV{login})" ]size='40' />
 </noscript>
