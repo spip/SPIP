@@ -288,7 +288,7 @@ function appliquer_modifs_config() {
 	if ($purger_skel) {
 		redirige_par_entete("../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=" .
 				    calculer_action_auteur("purger_squelettes") .
-				    "&redirect=".
+				    "&redirect=".  _DIR_RESTREINT_ABS .
 				    urlencode($clean_link->getUrl()));
 	}
 }
