@@ -3,6 +3,8 @@ CACHE/skel_*
 ecrire/data/.htaccess
 ecrire/data/.htpasswd
 ecrire/data/.htpasswd-admin
+ecrire/data/inc_meta_cache.php3
 ecrire/data/session_*
+ecrire/data/spip.log*
 ecrire/inc_connect.php3
 ecrire/inc_meta_cache.php3
