@@ -137,6 +137,11 @@ function envoyer_mail_publication($id_article) {
 		$result = spip_query($query);
 
 		if ($row = spip_fetch_array($result)) {
+
+			// selectionne langue du site
+			$lang_utilisateur = $GLOBALS['spip_lang'];
+			changer_langue($GLOBALS['langue_site']);
+
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
@@ -144,6 +149,9 @@ function envoyer_mail_publication($id_article) {
 			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $connect_nom))."\n\n\n";
 			$courr = filtrer_entites($courr) . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
+
+			// reinstalle la langue utilisateur (au cas ou)
+			changer_langue($lang_utilisateur);
 		}
 	}
 }
@@ -159,6 +167,9 @@ function envoyer_mail_proposition($id_article) {
 		$result = spip_query($query);
 
 		if ($row = spip_fetch_array($result)) {
+			$lang_utilisateur = $GLOBALS['spip_lang'];
+			changer_langue($GLOBALS['langue_site']);
+
 			$titre = nettoyer_titre_email($row['titre']);
 
 			$sujet = _T('info_propose_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
@@ -169,6 +180,8 @@ function envoyer_mail_proposition($id_article) {
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
 			$courr = filtrer_entites($courr) . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
+
+			changer_langue($lang_utilisateur);
 		}
 	}
 }
