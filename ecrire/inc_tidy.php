@@ -98,11 +98,30 @@ function xhtml ($buffer) {
 		return $tidy;
 	}
 	else if (version_tidy() == "2") {
-		$config = array('indent' => TRUE,
-			'output-xhtml' => TRUE,
-			'wrap' => 200);
-		$tidy = tidy_parse_string($buffer, $config, 'UTF8');
+		include_ecrire("inc_texte.php3");
+	
+		$retour_echap = echappe_xhtml ($buffer);
+		$buffer = $retour_echap[0];
+		$les_echap = $retour_echap[1];
+
+		// Options selon: http://tidy.sourceforge.net/docs/quickref.html
+		$charset = lire_meta('charset');
+		if ($charset == "iso-8859-1") $enc_char = "latin1";
+		else if ($charset == "utf-8") $enc_char = "utf8";
+		else return echappe_retour($buffer, $les_echap, "xhtml");
+
+		$config = array(
+			'wrap' => 0,
+			'indent-spaces' => 4,
+			'output-xhtml' => true,
+			'add-xml-decl' => false,
+			'indent' => 5,
+			'show-body-only' => false,
+			'quote-nbsp' => false
+			);
+		$tidy = tidy_parse_string($buffer, $config, $enc_char);
 		tidy_clean_repair($tidy);
+		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
 		return $tidy;
 	}
 	else
