@@ -2,7 +2,6 @@
 
 include ("inc_version.php3");
 
-//include_ecrire ("inc_db_mysql.php3");
 include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
@@ -55,18 +54,17 @@ if ($etape == 6) {
 		ecrire_metas();
 	}
 
-	ecrire_acces();
-
 	include_ecrire("inc_config.php3");
 	init_config();
 
-	if ($hebergeur == 'nexenservices'){
+	if ($hebergeur == 'nexenservices') {
 		echo "<p><B>Votre h&eacute;bergeur est Nexen Services.</B><br />";
 		echo "<p>La protection du r&eacute;pertoire <tt>ecrire/data/</tt> doit se faire par l'interm&eacute;diaire de ";
 		echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">l'espace webmestres</a>.";
 		echo "<p>Veuillez cr&eacute;er manuellement la protection pour ce r&eacute;pertoire (un couple login/mot de passe est n&eacute;cessaire).";
 	}
-	else{
+	else {
+		ecrire_acces();
 		$protec = "deny from all\n";
 		$myFile = fopen("data/.htaccess", "w");
 		fputs($myFile, $protec);
