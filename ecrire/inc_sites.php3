@@ -86,11 +86,11 @@ function recuperer_page($url) {
 	// et convertir dans le charset local ; si la page n'a pas de charset,
 	// ne pas la decoder (on suppose qu'elle est iso-8859-1)... sauf si
 	// le charset local n'est pas iso-8859-1
-	if (eregi("<[^>]*charset.(utf-8)", $result, $regs)) {
+	if (eregi("<[^>]*charset.[^>]*(utf-8)", $result, $regs)) {
 		$charset_page = $regs[1];
 		$result = unicode2charset(entites_unicode($result, $charset_page));
 	} else
-		if (lire_meta('charset' != 'iso-8859-1'))
+		if (lire_meta('charset') != 'iso-8859-1')
 			$result = unicode2charset(entites_unicode($result, 'FORCE-iso-8859-1'));
 
 	// FORCE-iso-8859-1 passe le message suivant : on VEUT la conversion, meme
