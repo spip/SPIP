@@ -2310,13 +2310,12 @@ else {
 			echo "<div>&nbsp;</div>";
 			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
 			bandeau_titre_boite2(_T('info_en_cours_validation'), "article-24.gif");
-			echo "<div class='plan-articles'>";
+			echo "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-	
-				echo "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
+				echo "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>\n";
 			}
 			echo "</div>";
 			echo "</div>";
@@ -2469,8 +2468,8 @@ else {
 		
 		// En interface simplifiee, afficher un permanence l'indication de l'interface
 		if ($options != "avancees") {
-			echo "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right; visibility: visible; background-color: #EDEBE3; color: #999999; z-index: -1000;'>";
-				echo $simple;
+			echo "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
+				echo "<b>"._T('icone_interface_simple')."</b>";
 			echo "</div>";
 		}
 	
@@ -2492,6 +2491,8 @@ else {
 	
 	echo "</div>";
 	echo "</div>";
+
+	if ($options != "avancees") echo "<div style='height: 18px;'>&nbsp;</div>";
 	
 }
 
@@ -2531,7 +2532,7 @@ else {
 				$result_auteurs = spip_query($query2);
 				$nb_connectes = spip_num_rows($result_auteurs);
 			}
-	
+				
 			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
 			if ($flag_cadre) echo "<div class='messages' style='color: #666666;'>";
 
