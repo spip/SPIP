@@ -30,11 +30,6 @@ function init_config() {
 		'taille_preview' => 150,
 		'articles_modif' => 'oui',
 		
-		'lien_ouvrant_in' => 'non',
-		'lien_ouvrant_out' => 'non',
-		'lien_ouvrant_doc' => 'non',
-		'lien_ouvrant_manuel' => 'non',
-
 		'activer_sites' => 'oui',
 		'proposer_sites' => 0,
 		'activer_syndic' => 'oui',
@@ -188,11 +183,6 @@ function appliquer_modifs_config() {
 		'taille_preview',
 		'articles_modif',
 		
-		'lien_ouvrant_in',
-		'lien_ouvrant_out',
-		'lien_ouvrant_doc',
-		'lien_ouvrant_manuel',
-
 		'activer_sites',
 		'proposer_sites',
 		'activer_syndic',
