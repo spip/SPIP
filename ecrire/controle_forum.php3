@@ -137,7 +137,6 @@ function forum_parent($id_forum) {
 }
 
 
-
 function controle_forum($row, $new) {
 	global $couleur_foncee;
 	global $mots_cles_forums;
@@ -163,9 +162,9 @@ function controle_forum($row, $new) {
 	$forum_id_auteur = $row["id_auteur"];
 
 	if ($forum_stat=="off" OR $forum_stat == "privoff")
-		$controle .= "<div style='border: 1px #ff0000 solid'>";
-	else if($forum_stat=="prop")
-			$controle .= "<div style='border: 1px yellow solid'>";
+		$controle .= "<div style='border: 2px #ff0000 dashed; background-color: white;'>";
+	else if ($forum_stat=="prop")
+		$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
 	else {
 		$controle .= "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>";
 		$controle .= "<div style='border: 1px #999999 dashed; background-color: white;'>";
@@ -177,21 +176,13 @@ function controle_forum($row, $new) {
 	$controle .= "<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>".typo($forum_titre)."</B></FONT></TD></TR>";
 	$controle .= "<TR><TD>";
 	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	/*if ($forum_stat=="publie" OR $forum_stat == "off") {
-		$controle .= "<img src='img_pack/racine-site-24.gif' border=0 align='left'>";
-		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>"._T('info_sur_site_public')."</FONT> ";
-	}
-	else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm" OR $forum_stat == "privoff"){
-		$controle .= "<img src='img_pack/cadenas-24.gif' border=0 align='left'>";
-		$controle .= "<FONT FACE='arial,helvetica' COLOR='#$couleur_foncee'>"._T('info_dans_espace_prive')."</FONT> ";
-	}*/
 
 	if ($new)
 		$new = " &nbsp; <i>"._T('info_nouveau')."</i>";
 
 	$controle .= "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure).", ".heures($forum_date_heure)."h".minutes($forum_date_heure)."$new</FONT>";
-	if (strlen($forum_auteur) > 2) {
-		if (strlen($forum_email_auteur) > 3)
+	if ($forum_auteur) {
+		if ($forum_email_auteur)
 			$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
 		$controle .= "<FONT FACE='arial,helvetica'> / <B>$forum_auteur</B></FONT>";
 	}
@@ -242,27 +233,19 @@ function controle_forum($row, $new) {
 			$titre_reponse = "&titre_message=$forum_titre";
 			$retour = '&adresse_retour=controle_forum.php3?page=interne';
 			break;
-	
+
 		case 'publie':
-			$url_reponse = '../forum.php3';
-			$retour = "&retour=ecrire%2Fcontrole_forum.php3";
-			break;
-		
 		default:
 			$url_reponse = '';
 	}
-	if($url_reponse) {
+	if ($url_reponse) {
 		$url_reponse .= "?id_parent=$id_forum" .
 			($forum_id_rubrique ? "&id_rubrique=$forum_id_rubrique" :
 			($forum_id_article ? "&id_article=$forum_id_article" :
 			($forum_id_breve ? "&id_rubrique=$forum_id_breve" : "")))
 			. $retour . $titre_reponse;
-	
-	
 		$controle .= "<div align='right' style='font-face: arial,helvetica,sans-serif; font-size: 10;'>[<a href='$url_reponse'>"._L('R&eacute;pondre')."</a>]</div>";
-	
 	}
-
 
 	$controle .= "</TD></TR></TABLE>\n";
 
