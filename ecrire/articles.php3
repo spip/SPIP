@@ -302,7 +302,7 @@ if ($statut_article == "publie") {
 	}
 }
 
-echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>"._T('info_numero_article')."&nbsp;:</b></font>\n";
+echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>"._T('info_numero_article')."</b></font>\n";
 echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
 
 if ($voir_en_ligne) {

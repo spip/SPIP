@@ -740,7 +740,7 @@ la finn d&egrave;t publy&eacute;).',
 'info_nouveaux_message' => 'Bann nouvo mod&eacute;kri',
 'info_nouveaux_messages' => 'OU N&Egrave;NA @total_messages@ BANN MOD&Eacute;KRI',
 'info_nouvel_article' => 'Nouvo lartik',
-'info_numero_article' => 'LARTIK NIM&Eacute;RO',
+'info_numero_article' => 'LARTIK NIM&Eacute;RO&nbsp;:',
 'info_obligatoire_02' => '[Obligatwar]',
 'info_option_email' => 'Kank inn vizit&egrave;r i m&egrave;t inn mod&eacute;kri dann forom sou inn lartik
 bann lot&egrave;r i p&eacute; kon&egrave;t a li

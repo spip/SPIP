@@ -721,7 +721,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_nouveaux_message' => 'Novas mensaxes',
 'info_nouveaux_messages' => 'TES @total_messages@ NOVAS MENSAXES',
 'info_nouvel_article' => 'Novo artigo',
-'info_numero_article' => 'ARTIGO N&Uacute;MERO',
+'info_numero_article' => 'ARTIGO N&Uacute;MERO:',
 'info_obligatoire_02' => '[Obrigatorio]',
 'info_option_email' => 'Cando unha visita env&iacute;a unha nova mensaxe no foro
 		vencellado a un artigo, a persoa responsable do artigo pode receber

@@ -714,7 +714,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_nouveaux_message' => 'Nuevos mensajes',
 'info_nouveaux_messages' => 'Tienes @total_messages@ mensajes nuevos ',
 'info_nouvel_article' => 'Nuevo art&iacute;culo',
-'info_numero_article' => 'Art&iacute;culo',
+'info_numero_article' => 'Art&iacute;culo:',
 'info_obligatoire_02' => '[Obligatorio]',
 'info_option_email' => 'Cuando un/una visitante env&iacute;a un nuevo mensaje en un foro asociado a un art&iacute;culo, el autor/a puede ser notificado por correo electr&oacute;nico. &iquest;Deseas utilizar esta opci&oacute;n?',
 'info_option_faire_suivre' => 'Enviar los mensajes de los foros de art&iacute;culos a los autores/as',
@@ -765,14 +765,23 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_publies' => 'Tus art&iacute;culos publicados',
 'info_question_gerer_statistiques' => '&iquest;Deseas que tu sitio gestione las estad&iacute;sticas de las visitas?',
 'info_question_inscription_nouveaux_redacteurs' => '&iquest;Aceptas las inscripciones de nuevos redactores a
+
 partir del sitio p&uacute;blico? Si aceptas, los visitantes podr&aacute;n inscribirse
+
 desde un formulario automatizado y acceder&aacute;n entonces al espacio privado para
+
 proponer sus propios art&iacute;culos. <blockquote><i>Durante la fase de inscripci&oacute;n,
+
  los usuarios reciben un correo electr&oacute;nico autom&aacute;tico
+
 que les indica sus c&oacute;digos de acceso al sitio privado. Algunos
+
  proveedores de hospedaje desactivan el env&iacute;o de correos electr&oacute;nicos desde sus 
+
 servidores: en ese caso, la inscripci&oacute;n autom&aacute;tica es 
+
 imposible. 
+
 ',
 'info_question_mots_cles' => '&iquest;Deseas utilizar las palabras clave en tu sitio?',
 'info_question_proposer_site' => '&iquest;Qui&eacute;n puede proponer los sitios referenciados?',

@@ -709,7 +709,7 @@ le informazioni contenute nel database sono probabilmente andate perse.<br>{{Rei
 'info_nouveaux_message' => 'Nuovi messaggi',
 'info_nouveaux_messages' => 'HAI @total_messages@ NUOVI MESSAGGI',
 'info_nouvel_article' => 'Nuovo articolo',
-'info_numero_article' => 'ARTICOLO NUMERO',
+'info_numero_article' => 'ARTICOLO NUMERO:',
 'info_obligatoire_02' => '[Obbligatorio]',
 'info_option_email' => 'Quando un visitatore del sito inserisce un nuovo messaggio nel forum
 associato a un articolo, gli autori di quest\'ultimo possono essere
@@ -755,6 +755,7 @@ il database alla nuova versione di SPIP.',
 'info_propose_3' => 'L\'articolo "@titre@" &egrave; proposto per la pubblicazione',
 'info_propose_4' => 'Sei invitato a consultare e a dare la tua opinione ',
 'info_propose_5' => 'nel forum annesso.
+
 &Egrave; disponibile all\'indirizzo:',
 'info_ps' => 'P.S.',
 'info_publie_01' => 'L\'articolo "@titre@" &egrave; stato convalidato da @connect_nom@.',
@@ -1408,6 +1409,7 @@ cache di SPIP. Ci&ograve; permette ad esempio di forzare la rigenerazione di tut
 'texte_sur_titre' => 'Occhiello',
 'texte_syndication' => 'Quando un sito Web lo permette, &egrave; possibile recuperarne automaticamente
 la lista delle novit&agrave;. A tal fine &egrave; necessario attivare la syndication.
+
 <blockquote><i>Alcuni webmaster disattivano questa funzionalit&agrave;; 
 in questo caso, non potrai utilizzare la content syndication
 a partire dal tuo sito.</i></blockquote>',
