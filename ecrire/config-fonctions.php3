@@ -191,6 +191,59 @@ if ($options == "avancees") {
 
 
 //
+// Configuration i18n
+//
+
+debut_cadre_relief("statistiques-24.gif");
+
+$langues_proposees = split(",",lire_meta("langues_proposees"));
+$langue_site = lire_meta('langue_site');
+
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._L('Langues du site')."</FONT></B> ".aide ()."</TD></TR>";
+
+echo "<TR><TD class='verdana2'>";
+echo _L('Veuillez choisir ci-dessous la langue par d&eacute;faut de votre site, ainsi que les langues qui seront propos&eacute;es aux r&eacute;dacteurs.
+<p>Les langues support&eacute;es par SPIP sont class&eacute;es en deux groupes&nbsp;: les premi&egrave;res sont compl&egrave;tes et v&eacute;rifi&eacute;es&nbsp;; les secondes sont incompl&egrave;tes ou en cours de tests.');
+echo "</TD></TR>";
+
+
+// langue par defaut
+echo "<TR><TD ALIGN='center' class='verdana2'>";
+echo _L('Langue par d&eacute;faut&nbsp;: ');
+echo "<select name='langue_site' class='formo'>\n";
+echo "<option value='fr'>fr</option>\n";
+echo "</select><br> ";
+
+afficher_choix('activer_statistiques', $activer_statistiques,
+	array('oui' => _T('item_gerer_statistiques'),
+		'non' => _T('item_non_gerer_statistiques')), ' &nbsp; ');
+echo "</TD></TR>\n";
+
+if ($activer_statistiques != "non" AND $options == "avancees") {
+	echo "<TR><TD class='verdana2'>";
+	echo _T('info_question_referers');
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='center' class='verdana2'>";
+	afficher_choix('activer_statistiques_ref', $activer_statistiques_ref,
+		array('oui' => _T('item_gerer_referers'),
+			'non' => _T('item_non_gerer_referers')), ' &nbsp; ');
+	echo "</TD></TR>\n";
+}
+
+
+echo "<TR><TD ALIGN='right'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+echo "</TD></TR>";
+echo "</TABLE>\n";
+
+fin_cadre_relief();
+
+echo "<p>";
+
+
+//
 // Configuration du charset
 //
 
