@@ -30,10 +30,10 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 		$link->delVar('var_login');
 		$url = $link->getUrl();
 	}
-	return login_explicite($login, $url, 'forum');
+	return login_explicite($login, $url);
 }
 
-function login_explicite($login, $cible, $mode) {
+function login_explicite($login, $cible) {
 	global $auteur_session;
 
 	$link = new Link();
@@ -60,10 +60,10 @@ function login_explicite($login, $cible, $mode) {
 			redirige_par_entete($cible);
 		return http_href($cible, _T('login_par_ici'));
 	}
-	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action, $mode);
+	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
-function login_pour_tous($login, $cible, $action, $mode) {
+function login_pour_tous($login, $cible, $action) {
 	global $ignore_auth_http, $php_module, $_SERVER, $_COOKIE;
 
 	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
@@ -127,13 +127,6 @@ function login_pour_tous($login, $cible, $action, $mode) {
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
 
-	// url des inscriptions
-	$inscription = ((lire_meta("accepter_inscriptions") == "oui")
-		OR (($mode == 'forum')
-			AND (lire_meta("accepter_visiteurs") == "oui"
-				OR lire_meta('forums_publics') == 'abo'))
-		) ? 'spip_inscription.php3' : '';
-
 	return array('formulaire_login', 0, 
 		array_merge(
 				array_map('texte_script', $row),
@@ -144,7 +137,6 @@ function login_pour_tous($login, $cible, $action, $mode) {
 					'url' => $cible,
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
-					'inscription'  => $inscription,
 					'login' => $login,
 					'login_alt' => ($login_alt ? $login_alt : $login)
 					)
