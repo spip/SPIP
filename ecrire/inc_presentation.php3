@@ -1537,16 +1537,17 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			$lien = $clean_link;
 			$lien->addVar('changer_var', 'oui'); // Bidon, pour forcer point d'interrogation
 
-			echo "<form style='margin:0px; padding:0px;'>";
-			echo "\n<select name='langue_site' class='verdana1' style='background-color: $couleur_claire;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
+			echo "<form action='".$lien->getUrl()."' method='get' style='margin:0px; padding:0px;'>";
+			echo "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
 			$langues = explode(',', lire_meta('langues_proposees'));
 			while (list(,$l) = each ($langues)) {
 				if ($l == $GLOBALS['spip_lang']) $selected = "selected";
 				else $selected = "";
 
-				echo "<option value='$l' $selected style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 3px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
+				echo "<option value='$l' $selected style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 1px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
 			}
 			echo "</select>\n";
+			echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
 			echo "</form>";
 		
 		echo "</td>";
