@@ -211,7 +211,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	  $destdir = creer_repertoire(_DIR_IMG, $destdir);
 	} 
 	$destination = _DIR_IMG . $destdir . $destfile;
-	spip_log("$dir $destination");
+#	spip_log("$dir $destination");
 	// chercher un cache
 	foreach (array('gif','jpg','png') as $fmt)
 		if (@file_exists($destination.'.'.$fmt)) {

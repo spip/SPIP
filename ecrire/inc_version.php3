@@ -1170,32 +1170,11 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	}
 }
 
-function taches_de_fond() {
-	if (!@file_exists(_FILE_CRON_LOCK)
-	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 30)) {
-		@touch(_FILE_CRON_LOCK);
-		// Si MySQL est out, laisser souffler
-		if (!@file_exists(_FILE_MYSQL_OUT)
-		OR (time() - @filemtime(_FILE_MYSQL_OUT) > 300)) {
-			include(_FILE_CONNECT);
-			if (!$GLOBALS['db_ok']) {
-				@touch(_FILE_MYSQL_OUT);
-				spip_log('pas de connexion DB pour taches de fond (cron)');
-			} else {
-			include_ecrire('inc_cron.php3');
-			spip_cron();
-			}
-		}
-	}
-}
-
 function redirige_par_entete($url)
 {
-#	$base=lire_meta("adresse_site");
-#	if ($base) $url = "$base/$url"; # + tard
-#	spip_log("red $url");
 	header("Location: $url");
-	taches_de_fond();
+	include_ecrire('inc_cron.php3');
+	spip_cron();
 	exit;
 }
 
