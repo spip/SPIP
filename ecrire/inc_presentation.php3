@@ -1214,8 +1214,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 		echo "\n<map name='map_layout'>";
 		echo "\n<area shape='rect' href='$lien&set_disp=1' alt='o' coords='0,0,20,15' title=\"Afficher uniquement le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=2' alt='o' coords='19,0,40,15' title=\"Afficher les logos et le texte\">";
-		echo "\n<area shape='rect' href='$lien&set_disp=3' alt='o' coords='41,0,59,15' title=\"Afficher uniquement les logos\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=2' alt='o' coords='19,0,40,15' title=\"Afficher les icones et le texte\">";
+		echo "\n<area shape='rect' href='$lien&set_disp=3' alt='o' coords='41,0,59,15' title=\"Afficher uniquement les icones\">";
 		echo "\n</map>";
 	
 	// Icones principales

@@ -350,7 +350,7 @@ function mySel($varaut,$variable) {
 				$statut = '1comite';
 			}
 			debut_cadre_relief();
-			echo "<center><B>Statut du r&eacute;dacteur : </B> ";
+			echo "<center><B>Statut de cet auteur : </B> ";
 			echo " <SELECT NAME='statut' SIZE=1 CLASS='fondl'>";
 			if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques)
 				echo "<OPTION".mySel("0minirezo",$statut).">administrateur";
