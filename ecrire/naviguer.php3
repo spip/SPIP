@@ -46,7 +46,7 @@ function enfant($collection){
 				$fid = $logo[2];
 				$hash = calculer_action_auteur ("reduire $w $h");
 
-				$les_enfants.= "<div style='float: $spip_lang_right; margin-top: -6px;  margin-$spip_lang_right: -6px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>";
+				$les_enfants.= "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>";
 				
 			}
 		}
@@ -71,6 +71,7 @@ function enfant($collection){
 		//$les_enfants.= "</FONT>";
 
 		$les_enfants .= $les_sous_enfants;
+		$les_enfants .= "<div style='clear:both;'></div>";
 		$les_enfants .= fin_cadre_relief(true);
 		$les_enfants .= "</div>";
 	}
