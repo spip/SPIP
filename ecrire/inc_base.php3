@@ -33,7 +33,7 @@ function creer_base() {
 		date_redac datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		visites INTEGER DEFAULT '0' NOT NULL,
 		referers INTEGER DEFAULT '0' NOT NULL,
-		popularite DOUBLE UNSIGNED DEFAULT '0' NOT NULL,
+		popularite DOUBLE DEFAULT '0' NOT NULL,
 		accepter_forum CHAR(3) NOT NULL,
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -1004,7 +1004,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.463) {
-		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE UNSIGNED");
+		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE");
 		spip_query("ALTER TABLE spip_visites_temp ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_referers_temp ADD maj TIMESTAMP");
 	}
