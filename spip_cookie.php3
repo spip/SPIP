@@ -121,6 +121,7 @@ if ($essai_login == "oui") {
 if ($cookie_admin == "non") {
 	setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$cible->delVar('var_login');
+	$cible->addVar('var_login', '-1');
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);

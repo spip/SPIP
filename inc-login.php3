@@ -92,9 +92,11 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	if ($erreur=='pass') $erreur = "Erreur de mot de passe.";
 
 	// Le login est memorise dans le cookie d'admin eventuel
-	if (!$login)
+	if (!$login) {
 		if (ereg("^@(.*)$", $spip_admin, $regs))
 			$login = $regs[1];
+	} else if ($login == '-1')
+		$login = '';
 
 	// quels sont les aleas a passer ?
 	if ($login) {
