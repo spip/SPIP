@@ -1,133 +1,190 @@
-<HTML>
-<HEAD>
-<TITLE><BOUCLE0(MOTS){id_mot}>#TITRE</BOUCLE0>Pas de mot-cl&eacute;<//B0></TITLE>
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY BGCOLOR="#FFFFFF">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<BOUCLE_mot_principal(MOTS) {id_mot} {doublons}>
+
+<html lang="fr">
+<head>
+<title>[(#TITRE|textebrut)]</title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="projection, screen, tv">
+<!-- media="print" permet d'utiliser cette feuille de style quand vous imprimez depuis votre navigateur -->
+<link rel="stylesheet" href="impression.css" type="text/css" media="print">
+
+</head>
+
+<body bgcolor="white">
+
+<div id="navigation">
+
+<h1 class="structure">Navigation</h1>
+
+<!-- Menu de navigation general -->
+
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	</li>
+</ul>
+</div>
 
 
-<CENTER>
-<BOUCLE1(MOTS){id_mot}{unique}>
+<!-- Formulaire de recherche -->
+
+[(#FORMULAIRE_RECHERCHE)]
 
 
+<!-- Menu de navigation mots-cles : les autres mots cles du meme groupe-->
+
+<B_mots_freres>
+<h2 class="structure">Mots-cl&eacute;s dans le m&ecirc;me groupe</h2>
+
+<div class="menu">
+<div class="divers">
+<div class="menu-titre"><BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}>#TITRE</BOUCLE_groupe></div>
+	<ul class="menu-liste">
+<BOUCLE_mots_freres(MOTS) {type} {doublons} {par titre}>
+	<li class="menu-item"><a href="#URL_MOT" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
+</BOUCLE_mots_freres>
+	</ul>
+</div>
+</div>
+</B_mots_freres>
 
 
-<TABLE WIDTH=750>
-<TR><TD WIDTH=750 COLSPAN=3>
-<font face=Arial,Helvetica SIZE=4>
+<!-- Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe -->
 
+<B_groupes_freres>
+<h2 class="structure">Autres groupes de mots-cl&eacute;s</h2>
 
-
-
-[<BR><FONT SIZE=6><B>(#TITRE)</B></FONT>]
-
-[<BR>((#TYPE))]
-
-
-
-<BR><BR>
-</FONT>
-</TD></TR>
-<TR><TD WIDTH=250 VALIGN="top">
-
-
-
-<B12>
-<TABLE CELLPADDING=1 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR="#000000" WIDTH=250>
-<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#444444' WIDTH="100%">
-<font face=Arial,Helvetica COLOR="#FFFFFF">
-<B>D'autres mots-clés</B>
-</font>
-</TD></TR></TABLE>
-
-<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100%><TR><TD BGCOLOR='#EEEEEE' WIDTH=100%>
-<font face=Arial,Helvetica SIZE=2><UL>
-<BOUCLE12(MOTS){type}{par hasard}{doublons}{0,20}>
-<LI><A HREF="#URL_MOT">#TITRE</A>
-</BOUCLE12>
-</UL>
-</font>
-</TD></TR></TABLE>
-</TD></TR></TABLE>
-</B12>
-
-<P>
-
-
-
-
-
-
-
-</TD><TD WIDTH=10>&nbsp;</TD>
-<TD WIDTH=490 VALIGN="top">
-
-
-<font face=Arial,Helvetica SIZE=3>
-[<B>(#DESCRIPTIF|justifier)</B>]
-
-
-<P>
-[(#TEXTE|justifier)]
-
-<P>
-<B4><B>Articles :</B>
-<ul>
-<BOUCLE4(ARTICLES){id_mot}{par date}{inverse}>
-
-<li>
-<B><A HREF="#URL_ARTICLE">[(#SURTITRE)<BR>][(#TITRE|majuscules)][<BR>(#SOUSTITRE)]</A></B>
-<FONT SIZE=2><B>[<BR>(#DATE_REDAC|affdate)][, par (#LESAUTEURS)]</B>
-[<BR>(#DESCRIPTIF)]</FONT>
-</BOUCLE4>
-</ul></B4>
-
-
-<B_breves><b>Br&egrave;ves :</b>
-<ul>
-<BOUCLE_breves(BREVES){id_mot}{par date}{inverse}>
-<li>
-<B><a href="#URL_BREVE">[(#TITRE)]</a></b>
-[<BR><FONT SIZE=2>(#DESCRIPTIF)</FONT>]
-</BOUCLE_breves>
-</ul></B_breves>
-
-
-<B_rubs><b>Rubriques :</b>
-<ul>
-<BOUCLE_rubs(RUBRIQUES){id_mot}{unique}{par titre}>
-<li>
-<B><a href="#URL_RUBRIQUE">[(#TITRE)]</a></b>
-[<BR><FONT SIZE=2>(#DESCRIPTIF)</FONT>]
-</BOUCLE_rubs>
-</ul></B_rubs>
-
-
-<B_sites><b>Sur le Web :</b>
-<ul>
-<BOUCLE_sites(SITES){id_mot}{unique}{par nom_site}>
-<li>
-<B><a href="#URL_SITE">[(#NOM_SITE)]</a></b>
-[<BR><FONT SIZE=2>(#DESCRIPTIF)</FONT>]
-</BOUCLE_sites>
-</ul></B_sites>
+<div class="menu">
+<div class="divers">
+<div class="menu-titre">Autres groupes de mots-cl&eacute;s</div>
+	<ul class="menu-liste">
+<BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
+<BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
+	<li class="menu-item"><a href="#URL_MOT">#TYPE</a></li>
+</BOUCLE_mot_cousin>
+</BOUCLE_groupes_freres>
+	</ul>
+</div>
+</div>
+</B_groupes_freres>
 
 
 
+<!-- Formulaire administrateur -->
+[(#FORMULAIRE_ADMIN)]
+
+</div>
 
 
+<!-- Une : contenu du mot-cle -->
 
-</FONT>
+<div class="contenu" id="principal">
 
-</TD></TR>
-</TABLE>
+<div clas="cartouche">
+[(#LOGO_MOT|left)]
+<h1 class="titre-texte">#TITRE</h1>
+</div>
+
+	<div class="encart">
+
+	<!-- Rubriques liees au mot-cle -->
+
+	<B_rubriques>
+	<h2 class="structure">Rubriques li&eacute;es au mot-cl&eacute;</h2>
+
+	<div class="menu">
+	<div class="rubriques">
+	<div class="menu-titre">Rubriques</div>
+		<ul class="menu-liste">
+	<BOUCLE_rubriques(RUBRIQUES) {id_mot} {par titre}>
+		<li class="menu-item"><a href="#URL_RUBRIQUE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></li>
+	</BOUCLE_rubriques>
+		</ul>
+	</div>
+	</div>
+	</B_rubriques>
+
+	<!-- Breves liees au mot-cle -->
+
+	<B_breves>
+	<h2 class="structure">Br&egrave;ves li&eacute;es au mot-cl&eacute;</h2>
+
+	<div class="menu">
+	<div class="breves">
+	<div class="menu-titre">Br&egrave;ves</div>
+		<ul class="menu-liste">
+	<BOUCLE_breves(BREVES) {id_mot} {par titre}>
+		<li class="menu-item"><a href="#URL_BREVE">#TITRE</a></li>
+	</BOUCLE_breves>
+		</ul>
+	</div>
+	</div>
+	</B_breves>
+
+	<!-- Sites Web lies au mot-cle -->
+
+	<B_sites>
+	<h2 class="structure">Sites Web li&eacute;s au mot-cl&eacute;</h2>
+
+	<div class="menu">
+	<div class="breves">
+	<div class="menu-titre">Sur le Web...</div>
+		<ul class="menu-liste">
+	<BOUCLE_sites(SITES) {id_mot} {par nom_site}>
+		<li class="menu-item"><a href="#URL_SITE">#TITRE</a></li>
+	</BOUCLE_sites>
+		</ul>
+	</div>
+	</div>
+	</B_sites>
+
+	</div>
+
+[<div class="chapo">(#TEXTE)</div>]
+[<div class="notes">(#NOTES)</div>]
 
 
+<!-- Articles lies au mot-cle -->
+
+<h1 class="structure">Articles li&eacute;s au mot-cl&eacute;</h1>
+
+<div class="liste-articles">
+
+<BOUCLE_articles(ARTICLES) {id_mot} {par titre}>
+	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
+	<div class="detail">
+	[Le (#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	<B_auteurs>par <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs>
+	</div>
+	<br>
+</BOUCLE_articles>
+
+</div>
+
+</div>
+
+</BOUCLE_mot_principal>
+
+</body>
+</html>
 
 
-
-</BOUCLE1>
-<H2>Il n'y a pas de mot-clé à cette adresse</H2><//B1>
-</CENTER>
-</BODY>
-</HTML>
