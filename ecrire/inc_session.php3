@@ -150,9 +150,8 @@ function creer_uniqid() {
 
 //
 // sessions a zapper (login, zapper oui/non)
-// (un peu crado car lecture obligatoire de toutes les sessions... pour simplifier
-//  il faudrait renommer les sessions en session_login_alea.php3 ? Noter aussi que
-//  en attendant le login est lu directement sur la ligne 3 du fichier de session)
+// Un peu crado car lecture obligatoire de toutes les sessions...
+// Noter que le login est lu directement sur la ligne 3 du fichier de session
 function zap_sessions ($login, $zap) {
 	if ($GLOBALS['flag_ecrire']) {
 		$dirname = "data/";

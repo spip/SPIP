@@ -1,20 +1,12 @@
 <?php
 
 include ("inc_version.php3");
-include_local ("inc_connect.php3");
-include_local ("inc_meta.php3");
-include_local ("inc_presentation.php3");
-include_local ("inc_session.php3");
-include_local ("inc_filtres.php3");
-include_local ("inc_texte.php3");
-
-// si la session existe, sauter dans ecrire/index.php3
-if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
-	if (verifier_session($cookie_session)) {
-		@header("Location: ./index.php3?bonjour=oui");
-		exit;
-	}
-}
+include_ecrire ("inc_connect.php3");
+include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_presentation.php3");
+include_ecrire ("inc_session.php3");
+include_ecrire ("inc_filtres.php3");
+include_ecrire ("inc_texte.php3");
 
 // initialisations
 $nom_site = lire_meta('nom_site');
@@ -40,6 +32,7 @@ if ($login) {
 	} else {
 		$erreur = "L'identifiant ".chr(171)." $login ".chr(187)." est inconnu.";
 		$login = '';
+		// ici penser a supprimer le cookie d'admin s'il existe (sinon blocage possible)
 	}
 }
 
@@ -161,9 +154,6 @@ if ($echec_cookie == "oui" AND $php_module) {
 	echo "</fieldset></form>\n";
 }
 
-
-$link = new Link;
-$link->addVar('secu', 'oui');
 
 echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
 echo "[<a href='$url_site'>retour au site public</a>]</font>";
