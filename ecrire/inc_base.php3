@@ -611,10 +611,17 @@ function stripslashes_base($table, $champs) {
 }
 
 
-function maj_version ($version) {
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
-	spip_log("mise a jour de la base vers $version");
+function maj_version ($version, $test = true) {
+	if ($test) {
+		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
+		spip_log("mise a jour de la base vers $version");
+	} else {
+		include_ecrire ('inc_lang.php3');
+		echo _T('alerte_maj_impossible', array('version' => $version));
+		exit;
+	}
 }
+
 
 function maj_base() {
 
@@ -1272,7 +1279,7 @@ function maj_base() {
 				prefs='".addslashes(serialize($prefs))."'
 				WHERE id_auteur=".$row['id_auteur']);
 		}
-		maj_version (1.604);
+		maj_version (1.604, spip_query("SELECT lang FROM spip_auteurs"));
 	}
 
 	if ($version_installee < 1.702) {
@@ -1295,7 +1302,13 @@ function maj_base() {
 			spip_query ("UPDATE spip_mots SET extra = supplement");
 			spip_query ("ALTER TABLE spip_mots DROP supplement");
 		}
-		maj_version (1.702);
+		maj_version (1.702,
+			spip_query("SELECT extra FROM spip_articles")
+			OR spip_query("SELECT extra FROM spip_auteurs")
+			OR spip_query("SELECT extra FROM spip_breves")
+			OR spip_query("SELECT extra FROM spip_rubriques")
+			OR spip_query("SELECT extra FROM spip_mots")
+			);
 	}
 
 	if ($version_installee < 1.703) {
