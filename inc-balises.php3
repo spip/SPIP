@@ -61,47 +61,46 @@ function champs_traitements ($nom_champ) {
 //
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "lire_meta('nom_site')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_EMAIL_WEBMASTER_dist($p) {
 	$p->code = "lire_meta('email_webmaster')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_CHARSET_dist($p) {
 	$p->code = "lire_meta('charset')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 
 function balise_LANG_LEFT_dist($p) {
 	$p->code = "lang_dir(\$spip_lang,'left','right')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LANG_RIGHT_dist($p) {
 	$p->code = "lang_dir(\$spip_lang,'right','left')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LANG_DIR_dist($p) {
 	$p->code = "lang_dir(\$spip_lang,'ltr','rtl')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_PUCE_dist($p) {
 	$p->code = "propre('- ')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
-
 
 // #DATE
 // Cette fonction sait aller chercher dans le contexte general
@@ -110,8 +109,7 @@ function balise_PUCE_dist($p) {
 function balise_DATE_dist ($p) {
 	$_date = champ_sql('date', $p);
 	$p->code = "$_date";
-	$p->process = 'vider_date(%s)';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -120,8 +118,7 @@ function balise_DATE_dist ($p) {
 function balise_DATE_REDAC_dist ($p) {
 	$_date = champ_sql('date_redac', $p);
 	$p->code = "$_date";
-	$p->process = 'vider_date(%s)';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -130,8 +127,7 @@ function balise_DATE_REDAC_dist ($p) {
 function balise_DATE_MODIF_dist ($p) {
 	$_date = champ_sql('date_modif', $p);
 	$p->code = "$_date";
-	$p->process = 'vider_date(%s)';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -139,14 +135,13 @@ function balise_DATE_MODIF_dist ($p) {
 // http://www.spip.net/fr_article1971.html
 function balise_DATE_NOUVEAUTES_dist($p) {
 	$p->code = "((lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv')) ? normaliser_date(lire_meta('majnouv')) : \"'0000-00-00'\")";
-	$p->process = 'vider_date(%s)';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "lire_meta('adresse_site')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -168,7 +163,7 @@ function balise_URL_ARTICLE_dist($p) {
 			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -179,7 +174,7 @@ function balise_URL_RUBRIQUE_dist($p) {
 	if ($p->boucles[$p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -190,7 +185,7 @@ function balise_URL_BREVE_dist($p) {
 	if ($p->boucles[$p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -200,7 +195,7 @@ function balise_URL_MOT_dist($p) {
 	")";
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -208,7 +203,7 @@ function balise_URL_FORUM_dist($p) {
 	$p->code = "generer_url_forum(" .
 	champ_sql('id_forum',$p) .")";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -216,7 +211,7 @@ function balise_URL_DOCUMENT_dist($p) {
 	$p->code = "generer_url_document(" .
 	champ_sql('id_document',$p) . ")";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -226,38 +221,38 @@ function balise_URL_AUTEUR_dist($p) {
 	if ($p->boucles[$p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_NOTES_dist($p) {
 	// Recuperer les notes
 	$p->code = 'calculer_notes()';
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_RECHERCHE_dist($p) {
 	$p->code = 'htmlspecialchars($GLOBALS["recherche"])';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	$p->code = '$compteur_boucle';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_TOTAL_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
 		include_local("inc-admin.php3");
-		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $p->id_boucle);
+		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), $p->id_boucle);
 		$p->code = "''";
 	} else {
 		$p->code = "\$Numrows['$p->id_mere']";
 		$p->boucles[$p->id_mere]->numrows = true;
-		$p->type = 'php';
+		$p->statut = 'php';
 	}
 	return $p;
 }
@@ -282,9 +277,9 @@ function balise_POINTS_dist($p) {
 	}
 	if (!$p->code) {
 		include_local("inc-admin.php3");
-		erreur_squelette(_L("Champ #POINTS hors d'une recherche"), '', $p->id_boucle);
+		erreur_squelette(_L("Champ #POINTS hors d'une recherche"), $p->id_boucle);
 	}
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -292,19 +287,19 @@ function balise_POPULARITE_ABSOLUE_dist($p) {
 	$p->code = 'ceil(' .
 	champ_sql('popularite', $p) .
 	')';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_POPULARITE_SITE_dist($p) {
 	$p->code = 'ceil(lire_meta(\'popularite_total\'))';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
 function balise_POPULARITE_MAX_dist($p) {
 	$p->code = 'ceil(lire_meta(\'popularite_max\'))';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -333,7 +328,7 @@ function balise_EXPOSER_dist($p) {
 	$p->code = '(calcul_exposer('
 	.champ_sql($primary_key, $p)
 	.', "'.$primary_key.'", $Pile[0]) ?'." '$on': '$off')";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -343,11 +338,11 @@ function balise_EXPOSER_dist($p) {
 //
 function balise_EMBED_DOCUMENT_dist($p) {
 	$_id_document = champ_sql('id_document',$p);
-	$p->code = "embed_document($_id_document, '" .
+	$p->code = "calcule_embed_document(intval($_id_document), '" .
 	texte_script($p->fonctions ? join($p->fonctions, "|") : "") .
-	"', false)";
+	  "', \$doublons, '" . $p->documents . "')";
 	unset ($p->fonctions);
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -374,7 +369,7 @@ function balise_MENU_LANG_dist($p) {
 include_ecrire(\"inc_lang.php3\");
 echo menu_langues(\"var_lang\", \$menu_lang);
 ?".">"';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -384,7 +379,7 @@ function balise_MENU_LANG_ECRIRE_dist($p) {
 include_ecrire(\"inc_lang.php3\");
 echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 ?".">"';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -393,7 +388,7 @@ echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 //
 function balise_LOGIN_PRIVE_dist($p) {
 	$p->code = '"<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">"'; 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -404,7 +399,7 @@ function balise_LOGIN_PUBLIC_dist($p) {
 	$lacible = '\$GLOBALS[\'clean_link\']';
 	$p->code = '"<"."?php include(\'inc-login.php3\'); login(' . $lacible . ', false); ?".">"';
 	$p->fonctions = array();
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -417,7 +412,7 @@ function balise_URL_LOGOUT_dist($p) {
 	}
 	$p->code = '"<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
 { echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'' . $url . '\'; } ?".">"';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -428,7 +423,7 @@ function balise_INTRODUCTION_dist ($p) {
 	$_descriptif = champ_sql('descriptif', $p);
 	$p->code = "calcul_introduction('$_type', $_texte, $_chapo, $_descriptif)";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -438,7 +433,7 @@ function balise_INTRODUCTION_dist ($p) {
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "($_lang ? $_lang : \$GLOBALS['spip_lang'])";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -464,7 +459,7 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "sql_auteurs($_id_article)";
 	}
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -475,7 +470,7 @@ function balise_LESAUTEURS_dist ($p) {
 function balise_PETITION_dist ($p) {
 	$_id_article = champ_sql('id_article', $p);
 	$p->code = 'sql_petitions($_id_article)';
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -486,7 +481,7 @@ function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "ceil(min(100, 100 * $_popularite
 	/ max(1 , 0 + lire_meta('popularite_max'))))";
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -549,7 +544,12 @@ function calcul_balise_logo ($p) {
 	else if ($lien) {
 		$code_lien = "'".texte_script(trim($lien))."'";
 		while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $code_lien, $match)) {
-			$c = calculer_champ(array(), $match[2], $p->id_boucle, $p->boucles, $p->id_mere);
+			$c = new Champ();
+			$c->nom_champ = $match[2];
+			$c->id_boucle = $p->id_boucle;
+			$c->boucles = &$p->boucles;
+			$c->id_mere = $p->id_mere;
+			$c = calculer_champ($c);
 			$code_lien = str_replace('#'.$match[2], "'.".$c.".'", $code_lien);
 		}
 		// supprimer les '' disgracieux
@@ -588,7 +588,7 @@ function calcul_balise_logo ($p) {
 
 	$p->code = "affiche_logos($code_logo, $code_lien, '$align', $flag_fichier)";
 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -618,7 +618,7 @@ function balise_EXTRA_dist ($p) {
 		}
 	}
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -651,7 +651,7 @@ function balise_FORMULAIRE_RECHERCHE_dist($p) {
 	$p->code = "((lire_meta('activer_moteur') != 'oui') ? '' :
 	$formulaire_recherche)";
 
-	$p->type = 'html';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -664,7 +664,7 @@ function balise_FORMULAIRE_INSCRIPTION_dist($p) {
 	$p->code = '(lire_meta("accepter_inscriptions") != "oui") ? "" :
 		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">")';
 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -681,7 +681,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 		formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\');
 		lang_dselect(); ?'.'>")';
 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -691,14 +691,14 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 function balise_FORMULAIRE_SIGNATURE_dist($p) {
 	$_id_article = champ_sql('id_article', $p);
 
-	$p->code = '!($petition = sql_petitions('.$_id_article.')) ? "" :
+	$p->code = '(!($petition = sql_petitions('.$_id_article.')) ? "" :
 		("<"."?php include_local(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\');
 		echo formulaire_signature(".'.$_id_article.'.",
 			\'".texte_script(serialize($petition))."\');
-		lang_dselect(); ?".">")';
+		lang_dselect(); ?".">"))';
 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -712,7 +712,7 @@ function balise_FORMULAIRE_SITE_dist($p) {
 		formulaire_site(".'.$_id_rubrique.'.");
 		lang_dselect(); ?".">"';
 
-	$p->type = 'php';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -723,7 +723,7 @@ function balise_FORMULAIRE_SITE_dist($p) {
 //
 function balise_FORMULAIRE_ADMIN_dist($p) {
 	$p->code = "'<!-- @@formulaire_admin@@45609871@@ -->'";
-	$p->type = "php";
+	$p->statut = "php";
 	return $p;
 }
 

@@ -233,7 +233,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 //
 // Erreur au parsing des squelettes : afficher le code fautif
 //
-function erreur_squelette($message, $fautif, $lieu) {
+function erreur_squelette($message, $lieu) {
 	global $auteur_session, $debug_messages;
 	static $runs;
 	
@@ -242,7 +242,7 @@ function erreur_squelette($message, $fautif, $lieu) {
 	# En fait, a partir du moment ou l'erreur est dans le squelette,
 	# ca ne change rien et autant cacher quand meme !
 
-	spip_log("Erreur squelette: $message | $fautif $lieu ("
+	spip_log("Erreur squelette: $message | $lieu ("
 	.$GLOBALS['fond'].".html)");
 	$GLOBALS['bouton_admin_debug'] = true;
 
@@ -252,9 +252,6 @@ function erreur_squelette($message, $fautif, $lieu) {
 	if ($HTTP_COOKIE_VARS['spip_admin'] OR $auteur_session
 	OR $GLOBALS['var_debug']) {
 		$message = "<h2>"._T('info_erreur_squelette')."</h2><p>$message</p>";
-		if ($fautif)
-			$message .= ' (<FONT color="#FF000">'
-			. entites_html($fautif) . '</FONT>)';
 		$message .= '<br /><FONT color="#FF000">' . $lieu . '</FONT>'; 
 
 		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
@@ -305,8 +302,8 @@ function debug_page($no_exit = false) {
 
 	@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	echo afficher_boutons_admin();
+	if (!$GLOBALS['debug_objets']['sourcefile']) return;
 	echo "<h3>Structure de la page</h3>\n";
-
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>".$sourcefile."</b>";
 		$link = $GLOBALS['clean_link'];
@@ -356,6 +353,7 @@ function debug_dumpfile ($texte) {
 
 	debug_page('no exit');
 
+	if (!$texte) exit;
 	$tableau = explode("\n", $texte);
 	$format = "%0".strlen(count($tableau))."d";
 	$texte = '';

@@ -48,8 +48,7 @@ function parser_texte($texte) {
 		else {
 			if (!(ereg('^\\{(.*)\\}$', $p, $params))) {
 				include_local("inc-admin.php3");
-				erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"),
-					$p, $champ->fichier);
+				erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"), $s);
 			}
 			else
 				$champ->params = split("\}[[:space:]]*\{", $params[1]);
@@ -78,10 +77,7 @@ function parser_champs($texte) {
 
 		$champ = new Champ;
 		$champ->nom_champ = $regs[1];
-
-		// traiter #CHAMP*
-		if ($regs[4])
-			$champ->etoile = true;
+		$champ->etoile = $regs[4];
 
 		$result[] = $champ;
 	}
@@ -105,10 +101,11 @@ function parser_champs_exterieurs($debut, $sep, $nested) {
 	foreach (split("%$sep",$debut) as $v) {
 		if (!ereg("^([0-9]+)@(.*)$", $v, $m))
 			$res = array_merge($res, parser_champs($v));
-		else if ($m[2] == 'Object') {
+		else  if ($m[2] == 'Object') {
 			$res[]= $nested[$m[1]];
-		} else
-			$res = array_merge($res, parser_champs($m[2]));
+		} else	{
+		  $res = array_merge($res, parser_champs($m[2]));
+		}
 	}
 	return $res;
 }
@@ -120,12 +117,13 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 
 	$i = 0;
 	while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
-		$nom_champ = $regs[4];
 		$fonctions = $regs[6];
 		$champ = new Champ;
 		$champ->nom_champ = $regs[2];
-		if ($regs[5])
-			$champ->etoile = true;
+
+		// installer les processeurs standards (cf inc-balises.php3)
+
+		$champ->etoile = $regs[5];
 
 		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
 		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
@@ -139,8 +137,7 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 		if ($p)
 			$result[$i++] = substr($texte, 0, $p);
 
-		$result[$i] = $champ;
-		$i++;
+		$result[$i++] = $champ;
 		$texte = $regs[8];
 	}
 	if ($texte)
@@ -148,7 +145,7 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 
 	$x ='';
 	$j=0;
-	while($j < $i)
+	while($j <= $i)
 		$x .= "%#$sep$j@" . $result[$j++];
 
 	if (ereg(CHAMP_ETENDU, $x)) 
@@ -207,8 +204,7 @@ function parser_param($params, &$result, $idb) {
 
 	if ($params) {
 		include_local("inc-admin.php3");
-		erreur_squelette(_L("Param&egrave;tre $i (ou suivants) incorrect"),
-			$params, $idb);
+		erreur_squelette(_L("Param&egrave;tre $i (ou suivants) incorrect"), $params);
 	}
 
 	$result->param = $params2;
@@ -229,7 +225,7 @@ function parser($texte, $id_parent, &$boucles) {
 		$milieu = substr($texte, $p);
 		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
 			include_local("inc-admin.php3");
-			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu,'');
+			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu);
 		}
 		$id_boucle = $match[1];
 
@@ -263,7 +259,7 @@ function parser($texte, $id_parent, &$boucles) {
 		$milieu = substr($milieu, strlen($match[0]));
 		if (strpos($milieu, $s)) {
 			include_local("inc-admin.php3");
-			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
+			erreur_squelette(_T('erreur_boucle_syntaxe'),
 				$id_boucle . 
 				_L('&nbsp;: balise B en aval'));
 		}
@@ -275,9 +271,9 @@ function parser($texte, $id_parent, &$boucles) {
 		$p = strpos($milieu, $s);
 		if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) {
 			include_local("inc-admin.php3");
-			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
-				_T('erreur_boucle_fermant',
-				array('id'=>$id_boucle)));
+			erreur_squelette(_T('erreur_boucle_syntaxe'),
+					 _T('erreur_boucle_fermant',
+						array('id'=>$id_boucle)));
 		}
 		$texte = substr($milieu, $p + strlen($s));
 		$milieu = substr($milieu, 0, $p);
@@ -311,9 +307,9 @@ function parser($texte, $id_parent, &$boucles) {
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
 			include_local("inc-admin.php3");
-			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
-				_T('erreur_boucle_double',
-				array('id'=>$id_boucle)));
+			erreur_squelette(_T('erreur_boucle_syntaxe'),
+					 _T('erreur_boucle_double',
+					 	array('id'=>$id_boucle)));
 		} else
 			$boucles[$id_boucle] = $result;
 	}

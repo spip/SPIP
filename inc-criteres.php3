@@ -15,7 +15,7 @@ function critere_racine_dist($param, $not, &$boucle, $infos) {
 	global $table_des_tables;
 
 	if ($param != 'racine' OR $not)
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 
 	$boucle->where[] = $infos['id_table'].".id_parent='0'";
 
@@ -26,7 +26,7 @@ function critere_racine_dist($param, $not, &$boucle, $infos) {
 function critere_exclus_dist($param, $not, &$boucle, $infos) {
 
 	if ($param != 'exclus' OR $not)
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 
 	$boucle->where[] = $infos['id_field']."!='\"."
 	. calculer_argument_precedent($infos['idb'],
@@ -40,7 +40,7 @@ function critere_doublons_dist($param, $not, &$boucle, $infos) {
 
 	if (!preg_match("/(doublons|unique)[[:space:]]*([a-z_0-9]*)/i",
 	$param, $match))
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 
 	$boucle->doublons = $infos['type'].$match[2];
 	$boucle->where[] = '" .' .
@@ -58,7 +58,7 @@ function critere_lang_select_dist($param, $not, &$boucle, $infos) {
 			$lang_select = ($lang_select=='oui')?'non':'oui';
 		$boucle->lang_select = $lang_select;
 	}
-	else return "erreur";
+	else return array(_T('info_erreur_squelette'), $param);
 }
 
 // {debut_xxx}
@@ -69,7 +69,7 @@ function critere_debut_dist($param, $not, &$boucle, $infos) {
 		$boucle->limit =
 			'intval($GLOBALS["'.$debut_lim.'"]).",'.$match[2] .'"' ;
 	}
-	else return "erreur";
+	else return array(_T('info_erreur_squelette'), $param);
 }
 
 // {recherche}
@@ -109,9 +109,10 @@ function critere_inverse_dist($param, $not, &$boucle, $infos) {
 		if ($boucle->order)
 			$boucle->order .= ".' DESC'";
 		else 
-			return _L("&nbsp: inversion d'un ordre inexistant");
+			return array(_L("inversion d'un ordre inexistant"), 
+				     "BOUCLE" . $infos['idb']);
 	} else
-		return 'erreur';
+		return array(_T('info_erreur_squelette'), $param);
 }
 
 // {traduction}
@@ -125,7 +126,7 @@ function critere_traduction_dist($param, $not, &$boucle, $infos) {
 		. ".\"'";
 
 	} else
-		return 'erreur';
+		return array(_T('info_erreur_squelette'), $param);
 }
 
 // {origine_traduction}
@@ -135,7 +136,7 @@ function critere_origine_traduction_dist($param, $not, &$boucle, $infos) {
 		$boucle->where[] = $infos['id_table'].".id_trad = "
 		. $infos['id_field'];
 	else
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 }
 
 
@@ -143,7 +144,7 @@ function critere_origine_traduction_dist($param, $not, &$boucle, $infos) {
 // http://www.spip.net/@meme_parent
 function critere_meme_parent_dist($param, $not, &$boucle, $infos) {
 	if ($param != 'meme_parent')
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 	else {
 		if ($infos['type'] == 'rubriques') {
 			$boucle->where[] = $infos['id_table'].".id_parent='\"."
@@ -158,8 +159,7 @@ function critere_meme_parent_dist($param, $not, &$boucle, $infos) {
 			$boucle->where[] = $infos['id_table'].".id_parent > 0";
 			$boucle->plat = true;
 		} else
-			return _L("erreur {meme_parent} ne s'applique pas &agrave;
-			d'autres boucles que (FORUMS) ou (RUBRIQUES)");
+			return array(_L("{meme_parent} ne s'applique qu'aux boucles (FORUMS) ou (RUBRIQUES)"), "BOUCLE" . $infos['idb']);
 	}
 }
 
@@ -182,14 +182,14 @@ function critere_branche_dist($param, $not, &$boucle, $infos) {
 		else
 			$boucle->where[] = "$where";
 	} else
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 }
 
 // Tri : {par xxxx}
 // http://www.spip.net/@par
 function critere_par_dist($param, $not, &$boucle, $infos) {
 	if ($not)
-		return "erreur";
+		return array(_T('info_erreur_squelette'), $param);
 
 	preg_match('/par[[:space:]]*(.*)/ims', $param, $regs);
 	$tri = trim($regs[1]);
@@ -221,7 +221,7 @@ function critere_par_dist($param, $not, &$boucle, $infos) {
 		$boucle->order = "'num".texte_script($match2[2])."'";
 	}
 	// par champ
-	else if (ereg("^[a-z0-9]+$", $tri)) {
+	else if (ereg("^[a-z][a-z0-9]*$", $tri)) {
 		if ($tri == 'date')
 			$tri = $GLOBALS['table_date'][$infos['type']];
 		$boucle->order = "'".$infos['id_table'].".".$tri."'";
@@ -354,12 +354,8 @@ function calculer_criteres ($idb, &$boucles) {
 
 		// fonction critere standard ?
 		if (function_exists($f)) {
-			if ($erreur = $f($param, $not, $boucle, $infos)) {
-				include_local('inc-admin.php3');
-				erreur_squelette(_T('info_erreur_squelette'),
-				_L("&nbsp: erreur dans le critere {$param} : $erreur"),
-				$idb);
-			}
+			$res = $f($param, $not, $boucle, $infos);
+			if (is_array($res)) return $res; # erreur
 		}
 		
 		# Criteres a passer en fonction critere_xxx_dist
@@ -389,8 +385,12 @@ function calculer_criteres ($idb, &$boucles) {
 			$col = $match[1];
 			$col_table = $id_table;
 			// Valeur de comparaison
-			if ($match[3])
+			if ($match[3]) {
 				$val = calculer_param_dynamique($match[6], $boucles, $idb);
+				// erreur
+				if (is_array($val)) return $val;
+			}
+			
 			else {
 				$val = $match[1];
 				// Si id_parent, comparer l'id_parent avec l'id_objet
@@ -660,13 +660,16 @@ function calculer_param_date($date_compare, $date_orig) {
 //
 function calculer_param_dynamique($val, &$boucles, $idb) {
 	if (ereg("^#([A-Za-z0-9_-]+)$", $val, $m)) {
-		$c = calculer_champ('',$m[1], $idb, $boucles,$idb);
-		if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $c, $v))
+	  	$p = new Champ;
+		$p->nom_champ = $m[1];
+		$p->id_boucle = $idb;
+		$p->boucles = &$boucles;
+		$p->id_mere = $idb;
+		$p = calculer_champ($p, $idb, $boucles,$idb);
+		if (ereg("[$]Pile[[][^]]+[]][[]'[^]]*'[]]", $p, $v))
 			return $v[0];
-		else {
-			# erreur
-			include_local("inc-admin.php3");
-			erreur_squelette(_L("parametre dynamique inexistant ?"), '', $idb);
+		else { return array(L("parametre dynamique inexistant ?"), 
+				    $val);
 		}
 	} else {
 		if (ereg('^\$(.*)$',$val,$m))

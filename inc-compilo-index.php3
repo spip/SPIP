@@ -1,12 +1,24 @@
 <?php
 
-// Definition des classes Boucle, Texte, Inclure, etc.,
+// Definition des classes Boucle, Texte, Inclure, Champ
 // et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
 
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_COMPILO_INDEX")) return;
 define("_INC_COMPILO_INDEX", "1");
+
+
+class Texte {
+	var $type = 'texte';
+	var $texte;
+}
+
+class Inclure {
+	var $type = 'include';
+	var $fichier;
+	var $params;
+}
 
 //
 // encodage d'une boucle SPIP en un objet PHP
@@ -42,58 +54,24 @@ class Boucle {
 	var $numrows = false; 
 }
 
-class Texte {
-	var $type = 'texte';
-	var $texte;
-}
-
-class Inclure {
-	var $type = 'include';
-	var $fichier;
-	var $params;
-}
-
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
 	var $cond_avant, $cond_apres; // tableaux d'objets
-	var $fonctions;
-}
-
-//
-// Structure de donnees pour parler aux fonctions calcul_champ_TOTO
-//
-class ParamChamp {
-	var $fonctions;
-	var $nom_champ;
+	var $fonctions;  // filtre explicites
+	var $etoile;
+	// champs pour la production de code
+	var $process; 	// processeurs standards, exemple 'propre(%s)'
 	var $id_boucle;
 	var $boucles;
-	var $id_mere;
 	var $type_requete;
-	var $code;			// code du calcul
-	var $process;		// processeurs standards, exemple 'propre(%s)'
-	var $etoile;		// le champ a ete appele avec une etoile (booleen)
-	var $type;			// 'num'erique, 'h'=texte (html) ou 'p'=script (php) ?
-						// -> definira les pre et post-traitements obligatoires
-
-	function retour() {
-		// Annuler les traitements si le champ est etoile
-		if ($this->etoile) unset($this->process);
-
-		$code_filtre = applique_filtres(
-			$this->fonctions,
-			$this->code,
-			$this->id_boucle,
-			$this->boucles,
-			$this->id_mere,
-			$this->type,
-			$this->process
-		);
-		return $code_filtre;
-	}
+	var $code;	// code du calcul
+	var $statut;	// 'numerique, 'h'=texte (html) ou 'p'=script (php) ?
+			// -> definira les pre et post-traitements obligatoires
+	// champs pour des balises speciales
+	var $id_mere;    // pour TOTAL_BOUCLE hors du corps
+	var $document;   // pour embed et <img dans les textes
 }
-
-
 
 // index_pile retourne la position dans la pile du champ SQL $nom_champ 
 // en prenant la boucle la plus proche du sommet de pile (indique par $idb).
@@ -133,7 +111,7 @@ function index_pile($idb, $nom_champ, &$boucles) {
 		$desc = $tables_principales[$t];
 		if (!$desc) {
 			include_local("inc-admin.php3");
-			erreur_squelette(_L("Table SQL absente de \$tables_principales dans inc_serialbase"), $r, "'$idb'");
+			erreur_squelette(_L("Table SQL $r absente de \$tables_principales dans inc_serialbase"), "'$idb'");
 		}
 		$excep = $exceptions_des_tables[$r][$c];
 		if ($excep) {
@@ -182,67 +160,57 @@ function champ_sql($champ, $p) {
 
 # calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
 # Retourne une EXPRESSION php 
-function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere, $etoile = false) {
-	// Preparer les parametres
-	$p = new ParamChamp;
-	$p->fonctions = $fonctions;
-	$p->nom_champ = $nom_champ;
-	$p->id_boucle = $id_boucle;
-	$p->boucles = &$boucles;
-	$p->id_mere = $id_mere;
-	$p->type = 'html';
-	$p->process = '';
-	$p->type_requete = $boucles[$id_boucle]->type_requete;
+function calculer_champ($p) {
 
 	// regarder s'il existe une fonction personnalisee balise_NOM()
-	$f = 'balise_' . $nom_champ;
+	$f = 'balise_' . $p->nom_champ;
 	if (function_exists($f))
 		$p = $f($p);
 
 	else {
 	// regarder s'il existe une fonction standard balise_NOM_dist()
-	$f = 'balise_' . $nom_champ . '_dist';
+	$f = 'balise_' . $p->nom_champ . '_dist';
 	if (function_exists($f))
 		$p = $f($p);
 
 	else {
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $nom_champ))
+	if (ereg('^LOGO_', $p->nom_champ))
 		$p = calcul_balise_logo($p);
 
 	else {
 	// On regarde ensuite s'il y a un champ SQL homonyme,
 	// et on definit le type et les traitements
-	$p->code = champ_sql($nom_champ, $p);
-	if (($p->code) && ($p->code != '$Pile[0][\''.$nom_champ.'\']')) {
+	$p->code = champ_sql($p->nom_champ, $p);
+	if (($p->code) && ($p->code != '$Pile[0][\''.$p->nom_champ.'\']')) {
 
 		// Par defaut basculer en numerique pour les #ID_xxx
-		if (substr($nom_champ,0,3) == 'ID_') $p->type = 'num';
+		if (substr($p->nom_champ,0,3) == 'ID_') $p->statut = 'num';
 	}
 
 	else {
 	// si index_pile a ramene le choix par defaut, 
 	// ca doit plutot etre un champ SPIP non SQL,
 	// ou ni l'un ni l'autre => on le renvoie sous la forme brute '#TOTO'
-	$p->code = "'#$nom_champ'";
-	$p->type = 'php';	// pas de traitement
+	$p->code = "'#" . $p->nom_champ . "'";
+	$p->statut = 'php';	// pas de traitement
 	
 	}}}}
-	
-	// Aller chercher les processeurs standards definis dans inc-balises.php3
-	if (!$etoile)
-		$p->process = champs_traitements($nom_champ);
 
 	// Retourner l'expression php correspondant au champ + ses filtres
-	return $p->retour();
+	return applique_filtres($p);
 }
 
 
 // Genere l'application d'une liste de filtres
-function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $type ='html', $process='') {
+function applique_filtres($p) {
+	$code = $p->code;
+	$statut = $p->statut;
+	$fonctions = $p->fonctions;
+	$p->fonctions = ''; # pour réutiliser la structure si récursion
 
 	// pretraitements standards
-	switch ($type) {
+	switch ($statut) {
 		case 'num':
 			$code = "intval($code)";
 			break;
@@ -254,10 +222,10 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $t
 			break;
 	}
 
-	// traitements standards
-	if (strpos($process, '%s') !== false)
-		$code = str_replace('%s', $code, $process);
-
+//  processeurs standards (cf inc-balises.php3)
+	$ps = champs_traitements($p->nom_champ);
+	if ($ps && (!$p->etoile))
+	  $code = str_replace('%s', $code, $ps);
 	// Appliquer les filtres perso
 	if ($fonctions) {
 		foreach($fonctions as $fonc) {
@@ -271,8 +239,8 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $t
 						$arg = trim($regs[1]);
 						if ($arg) {
 							if ($arg[0] =='#')
-								$arg = calculer_champ(array(), substr($arg,1),
-									$id_boucle, $boucles, $id_mere);
+							  { $p->nom_champ = substr($arg,1);
+							    $arg = calculer_champ($p);}
 							else if ($arg[0] =='$')
 								$arg = '$Pile[0][\'' . substr($arg,1) . "']";
 							$arglist .= ','.$arg;
@@ -290,9 +258,8 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $t
 	}
 
 	// post-traitement securite
-	if ($type == 'html')
+	if ($statut == 'html')
 		$code = "interdire_scripts($code)";
-
 	return $code;
 }
 

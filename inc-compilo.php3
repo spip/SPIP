@@ -112,13 +112,13 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
 		if (!($module = $match[2]))
 			// ordre standard des modules a explorer
 			$module = 'local/public/spip';
-		$c = applique_filtres(explode('|',
-			substr($match[4],1)),
-			"_T('$module:$chaine')",
-			$id_boucle, 
-			$boucles,
-			$id_mere,
-			'php');	// ne pas manger les espaces avec trim()
+		$c = new Champ;
+		$c->code = "_T('$module:$chaine')";
+		$c->fonctions = explode('|', substr($match[4],1));
+		$c->id_boucle = $id_boucle;
+		$c->boucles = &$boucles;
+		$c->statut = 'php'; // ne pas manger les espaces avec trim()
+		$c = applique_filtres($c);
 		$code = str_replace($match[0], "'$ferme_multi.$c.$ouvre_multi'", $code);
 	}
 
@@ -419,24 +419,21 @@ function nom_de_fonction($nom)
 
 // Production du code PHP a partir de la sequence livree par le phraseur
 // $boucles est passe par reference pour affectation par index_pile.
-// Retourne un tableau de 2 elements: 
-// 1. 'code' = une expression PHP,
-// 2. 'entete' = une suite d'instructions PHP a executer
-// avant d'evaluer l'expression (a rendre obsolete tant que possible).
+// Retourne une expression PHP,
 
-function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere) {
+function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 	if (!$tableau) return "''";
         $codes = array();
-	$t = '$t' . ($niv+1);
+	$t = '$t' . $niv;
 
 	for ($i=0; $i<=$niv; $i++) $tab .= "\t";
 
-	foreach ($tableau as $objet) {
+	foreach ($tableau as $p) {
 
-		switch($objet->type) {
+		switch($p->type) {
 		// texte seul
 		case 'texte':
-			$code = calculer_texte($objet->texte, $id_boucle, $boucles, $id_mere);
+			$code = calculer_texte($p->texte, $id_boucle, $boucles, $descr['id_mere']);
 			$commentaire='';
 			$avant='';
 			$apres='';
@@ -445,11 +442,11 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 
 		// inclure
 		case 'include':
-			$code= calculer_inclure($objet->fichier,
-						$objet->params,
+			$code= calculer_inclure($p->fichier,
+						$p->params,
 						$id_boucle,
 						$boucles);
-			$commentaire = "<INCLURE($objet->fichier)>";
+			$commentaire = "<INCLURE($p->fichier)>";
 			$avant='';
 			$apres='';
 			$altern = "''";
@@ -457,29 +454,34 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 
 		// boucle
 		case 'boucle':
-			$nom = $objet->id_boucle;
-
+			$nom = $p->id_boucle;
+			$newdescr = $descr;
+			$newdescr['id_mere'] = $nom;
 			$code = 'BOUCLE' .
-			  ereg_replace("-","_", $nom) . $prefix .
+			  ereg_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire='';
-			$avant = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2, $boucles, $nom);
-			$apres = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2, $boucles, $nom);
-			$altern = calculer_liste($objet->cond_altern, $prefix, $id_boucle, $niv+1,$boucles, $nom);
+			$avant = calculer_liste($p->cond_avant, $newdescr, $boucles, $nom, $niv+2);
+			$apres = calculer_liste($p->cond_apres, $newdescr, $boucles, $nom, $niv+2);
+			$altern = calculer_liste($p->cond_altern, $newdescr, $boucles, $nom, $niv+1);
 			break;
 
 		// balise SPIP
 		default: 
 
-			$code = calculer_champ($objet->fonctions, 
-					       $objet->nom_champ,
-					       $id_boucle,
-					       $boucles,
-					       $id_mere,
-					       $objet->etoile);
-			$commentaire = "#$objet->nom_champ".($objet->etoile?'*':'');
-			$avant = calculer_liste($objet->cond_avant, $prefix, $id_boucle, $niv+2,$boucles, $id_mere);
-			$apres = calculer_liste($objet->cond_apres, $prefix, $id_boucle, $niv+2,$boucles, $id_mere);
+	// cette structure pourrait etre completee dès le phrasé (a faire)
+
+			$p->id_boucle = $id_boucle;
+			$p->boucles = &$boucles;
+			$p->id_mere = $descr['id_mere'];
+			$p->documents = $descr['documents'];
+			$p->statut = 'html';
+			$p->type_requete = $boucles[$id_boucle]->type_requete;
+
+			$code = calculer_champ($p);
+			$commentaire = '#' . $p->nom_champ . $p->etoile;
+			$avant = calculer_liste($p->cond_avant, $descr, $boucles, $id_boucle, $niv+1);
+			$apres = calculer_liste($p->cond_apres, $descr, $boucles, $id_boucle, $niv+1);
 			$altern = "''";
 			break;
 
@@ -494,13 +496,14 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 		      (!$apres ? "" : " . $apres");
 
 		    if (($res != $t) || ($altern != "''"))
-		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab$altern)";
+		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
 		  }
-		$codes[]= (!$commentaire ? $code : 
-			   ("/"."* $commentaire *"."/ " . $code));
+		// if ($code) # c'est toujours etre ainsi
+		  $codes[]= (!$commentaire ? $code : 
+			     ("/"."* $commentaire *"."/ " . $code));
 	} // foreach
 
-	return join ("\n$tab. ", $codes);
+	return "(" . join ("\n$tab. ", $codes) . ")";
 }
 
 // Prend en argument le source d'un squelette, sa grammaire et un nom.
@@ -524,48 +527,59 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	spip_timer('calcul_skel');
 	include_local("inc-$gram-squel.php3");
 	$racine = parser($squelette, '',$boucles);
-	// include_local('inc-debug.php3');
-	// afftable($racine);
-	// affboucles($boucles);
+#	include_local('inc-compilo-debug.php3');
+#	 afftable($racine);
+#	 affboucles($boucles);
  
-	// Commencer par reperer les boucles appelees explicitement par d'autres
-	// car elles indexent leurs arguments de maniere derogatoire
+	// tableau des informations sur le squelette
+	$descr = array('nom' => $nom, 'documents' => false);
 
-	if ($boucles) foreach($boucles as $id => $boucle) {
-		if ($boucle->type_requete == 'boucle') {
+	if ($boucles) {
+	  // une boucle documents est conditionnee par tout le reste!
+		foreach($boucles as $boucle)
+		  {
+			if (($boucle->type_requete == 'documents') && 
+				in_array('doublons',$boucle->param))
+			  { $descr['documents'] = true; break; }
+		  }
+	// Commencer par reperer les boucles appelees explicitement 
+	// car elles indexent les arguments de maniere derogatoire
+		foreach($boucles as $id => $boucle) { 
+		    if ($boucle->type_requete == 'boucle') {
 			$rec = &$boucles[$boucle->param];
 			if (!$rec) {
-				include_local('inc-admin.php3');
-				erreur_squelette(_T('info_erreur_squelette'),
-				_L($boucle->param.'&nbsp: boucle recursive non definie'), $id);
-			} else {
-				$rec->externe = $id;
-				$boucles[$id]->return =
-					calculer_liste(array($rec),
-						$nom,
-						$boucle->param,
-						1,
-						$boucles,
-						$id);
-			}
-		}
-	} 
-
-	if ($boucles) foreach($boucles as $id => $boucle) { 
-		if ($boucle->type_requete != 'boucle') {
-			calculer_criteres($id, $boucles);
-			$boucles[$id]->return = calculer_liste($boucle->milieu,
-				$nom,
-				$id,
-				1,
-				$boucles,
-				$id);
-		}
+			  return array(_T('info_erreur_squelette'),
+				       ($boucle->param . 
+					_L(' boucle récursive non définie')));
+			} 
+			$rec->externe = $id;
+			$descr['id_mere'] = $id;
+			$boucles[$id]->return =
+			  calculer_liste(array($rec),
+					 $descr,
+					 $boucles,
+					 $boucle->param);
+		    }
+		} 
+		foreach($boucles as $id => $boucle)
+		  { 
+		    if ($boucle->type_requete != 'boucle') 
+		      {
+			$descr['id_mere'] = $id;
+			$res = calculer_criteres($id, $boucles, $descr);
+			if (is_array($res)) return $res; # erreur
+			$boucles[$id]->return =
+			  calculer_liste($boucle->milieu,
+					 $descr,
+					 $boucles,
+					 $id);
+		      }
+		  }
 	}
 
 	// idem pour la racine
-	$return = calculer_liste($racine, $nom, '',0, $boucles, '');
-
+	$descr['id_mere'] = '';
+	$corps = calculer_liste($racine, $descr, $boucles);
 
 	// Corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
@@ -633,8 +647,7 @@ $code
 // Fonction principale du squelette $sourcefile
 //
 function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
-$corps
-\$t0 = $return;
+\$t0 = $corps;
 
 	return array(
 		'texte' => \$t0,

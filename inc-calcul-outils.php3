@@ -226,9 +226,18 @@ function calcul_branche ($generation) {
 	}
 }
 
+
+# fonction appelée par la balise #EMBED
+
+function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc){
+  // a finaliser
+  //  if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
+  return embed_document($id_document, $filtres, false);
+}
+
 # fonction appelée par la balise #NOTES
 
-function calcule_notes()
+function calculer_notes()
 {
   $r = $GLOBALS["les_notes"];
   $GLOBALS["les_notes"] = "";
