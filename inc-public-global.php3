@@ -41,7 +41,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 
 $fichier_requete = $REQUEST_URI;
 $fichier_requete = strtr($fichier_requete, '?', '&');
-$fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
+$fichier_requete = eregi_replace('&(submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
 
 $fichier_cache = generer_nom_fichier_cache($fichier_requete);
 $chemin_cache = "CACHE/$fichier_cache";
