@@ -31,8 +31,8 @@ define('BALISE_INCLURE',"<INCLU[DR]E[[:space:]]*\(" .
 define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
 
-function parser_inclure($texte) {
-  while (($p=strpos($texte, '<INCLU')) !== false) {
+function parser_inclure($texte, $result) {
+	while (($p=strpos($texte, '<INCLU')) !== false) {
 		$fin = substr($texte, $p);
 
 		if (!ereg('^' . BALISE_INCLURE, $fin, $match)) break;
@@ -40,10 +40,8 @@ function parser_inclure($texte) {
 		$debut = substr($texte, 0, $p);
 		$texte = substr($fin, strlen($s));
 
-		if ($debut) {
-		  $result =  array_merge($result,
-					 parser_champs_etendus($debut));
-		}
+		if ($debut) $result = parser_champs_etendus($debut, $result);
+
 		$champ = new Inclure;
 		$champ->fichier = $match[1];
 		$champ->params = array();
@@ -59,13 +57,10 @@ function parser_inclure($texte) {
 		$result[] = $champ;
 	}
 
-	if ($texte) 
-		return array_merge($result, parser_champs_etendus($texte));
-	else	return $result;
+	return (!$texte ? $result : parser_champs_etendus($texte, $result));
 }
 
-function parser_champs($texte) {
-	$result = array();
+function parser_champs($texte,$result) {
 	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
 	  $p = strpos($texte, $regs[0]);
 
@@ -96,7 +91,7 @@ function parser_champs($texte) {
 		$champ->texte = $texte;
 		$result[] = $champ;
 	}
-		return $result;
+	return $result;
 }
 
 // Gestion des imbrications:
@@ -104,31 +99,28 @@ function parser_champs($texte) {
 // %###N@ où N indexe un tableau comportant le résultat de leur phrasé
 // on recommence tant qu'il y a des [...] en substituant à l'appel suivant
 
-function parser_champs_etendus($debut) {
+function parser_champs_etendus($texte, $result) {
+	if (!$texte) return $result;
 	$sep = '##';
-	while (strpos($debut,$sep)!== false)
+	while (strpos($texte,$sep)!== false)
 		$sep .= '#';
-	return parser_champs_interieurs($debut, $sep, array());
+	return array_merge($result, parser_champs_interieurs($texte, $sep, array()));
 }
 
 
 function parser_champs_exterieurs($debut, $sep, $nested) {
 	$res = array();
 	while (($p=strpos($debut, "%$sep"))!==false) {
-	    if ($p) $res = array_merge($res, 
-					parser_champs(substr($debut,0,$p)));
+	    if ($p) $res = parser_champs(substr($debut,0,$p), $res);
 	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
 	    $res[]= $nested[$m[1]];
 	    $debut = $m[2];
 	}
-	if ($debut) $res = array_merge($res,parser_champs($debut));
-	return $res;
+	return (!$debut ?  $res : parser_champs($debut, $res));
+
 }
 
 function parser_champs_interieurs($texte, $sep, $result) {
-	if (!$texte)
-		return $result;
-
 	$i = 1;
 	while (true) {	  $j=$i;
 	  while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
@@ -163,7 +155,7 @@ function parser_champs_interieurs($texte, $sep, $result) {
 
 
 function parser_param($params, &$result) {
-	$params2 = Array();
+	$params2 = array();
 	$type = $result->type_requete;
 	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', trim($params), $m)) {
 		$params = $m[3];
@@ -329,7 +321,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$result->cond_altern = parser($result->cond_altern,$id_parent,$boucles, $nom);
 		$result->milieu = parser($milieu, $id_boucle,$boucles, $nom);
 
-		$all_res = array_merge($all_res, parser_inclure($debut));
+		$all_res = parser_inclure($debut, $all_res);
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
@@ -339,7 +331,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 			$boucles[$id_boucle] = $result;
 	}
 
-	return array_merge($all_res, parser_inclure($texte));
+	return parser_inclure($texte, $all_res);
 }
 
 ?>
