@@ -3,6 +3,7 @@
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session.php3");
 
+
 // gerer l'auth http
 function auth_http($url, $essai_auth_http) {
 	global $_SERVER;
@@ -48,7 +49,6 @@ if ($change_session == 'oui') {
 		exit;
 	}
 }
-#spip_log("cookie: $url");
 
 if ($url)  $url = urldecode($url);
 
@@ -82,7 +82,10 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 
-	redirige_par_entete($url ? $url : "spip_login.php3");
+	redirige_par_entete($url ? $url :
+			    ("spip_login.php3?url=$url&inscription=" .
+			     ((lire_meta("accepter_inscriptions") == "oui")?
+			      'spip_inscription.php3' : '')));
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
@@ -91,7 +94,10 @@ if ($logout) {
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
 	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&url=" .
-			    ($url ? $url : _DIR_RESTREINT_ABS));
+			    ($url ? $url : _DIR_RESTREINT_ABS) .
+			    "&inscription=" .
+			     ((lire_meta("accepter_inscriptions") == "oui")?
+			      'spip_inscription.php3' : ''));
 }
 
 // Tentative de login
@@ -141,7 +147,9 @@ if ($essai_login == "oui") {
 	}
 	else {
 		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
-			$redirect = "spip_login.php3";
+			$redirect = "spip_login.php3?inscription=" .
+			     ((lire_meta("accepter_inscriptions") == "oui")?
+			      'spip_inscription.php3' : '');
 		}
 		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=$login";
 		if ($session_password || $session_password_md5)
@@ -152,7 +160,11 @@ if ($essai_login == "oui") {
 
 // cookie d'admin ?
 if ($cookie_admin == "non") {
-	if (!$retour) $retour = 'spip_login.php3?var_url='.urlencode($url);
+	if (!$retour)
+	  $retour = 'spip_login.php3?var_url='.urlencode($url) .
+	     "&inscription="  .
+	    ((lire_meta("accepter_inscriptions") == "oui")? 'spip_inscription.php3' : '');
+
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$redirect = ereg_replace("[?&]var_login=[^&]*", '', $retour);
 	$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=-1";

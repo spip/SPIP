@@ -741,14 +741,4 @@ function http_script($script, $src='', $noscript='') {
 		. "</script>\n"
 		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
-
-// retourne l'URL du site si les inscriptions sont autorisees... bof
-function inscriptionok($site, $mode) {
-	return ((lire_meta("accepter_inscriptions") == "oui") OR
-		(($mode == 'forum')
-		AND (lire_meta("accepter_visiteurs") == "oui"
-		OR lire_meta('forums_publics') == 'abo'))) ? $site : '';
-}
-
-
 ?>
