@@ -86,7 +86,8 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	if ($auteur_session AND !$logout AND
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
 		$url = $cible->getUrl();
-		@Header("Location: $url");
+		if ($url != $GLOBALS['clean_link']->getUrl())
+			@Header("Location: $url");
 		echo "<a href='$url'>Vous &ecirc;tes enregistr&eacute;... par ici...</a>\n";
 		return;
 	}
