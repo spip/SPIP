@@ -92,7 +92,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
 
 
-	$ret .= "<div>";
+	$ret .= "<div style='position: relative;'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = " padding-$spip_lang_left: 32px;";
@@ -105,7 +105,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		else $logo .= "<img src='img_pack/$icone' alt='' />";
 		$logo .= "</div>";
 
-		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px; z-index: 1;'";
+		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px;'";
 	}
 
 	if ($style == "e") {
@@ -1312,7 +1312,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 					$fid = $logo_auteur[2];
 					$hash = calculer_action_auteur ("reduire $w $h");
 	
-					$titre_boite = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-spip_lang_right: 1px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".typo($titre_boite);
+					$titre_boite = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".typo($titre_boite);
 					
 				}
 			}
