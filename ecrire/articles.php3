@@ -163,7 +163,7 @@ $texte = $texte_ajout . $texte;
 
 if ($changer_virtuel && $flag_editable) {
 	$virtuel = eregi_replace("^http://$", "", trim($virtuel));
-	if ($virtuel) $chapo = addslashes("=$virtuel");
+	if ($virtuel) $chapo = addslashes(corriger_caracteres("=$virtuel"));
 	else $chapo = "";
 	$query = "UPDATE spip_articles SET chapo='$chapo' WHERE id_article=$id_article";
 	$result = spip_query($query);
