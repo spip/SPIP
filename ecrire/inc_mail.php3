@@ -156,7 +156,7 @@ function envoyer_mail_proposition($id_article) {
 	}
 }
 
-function envoyer_mail_nouveautes() {
+function envoyer_mail_nouveautes($majnouv) {
 	$jours_neuf = lire_meta("jours_neuf");
 	$adresse_site = lire_meta("adresse_site");
 	$adresse_neuf = lire_meta("adresse_neuf");
@@ -170,7 +170,13 @@ function envoyer_mail_nouveautes() {
 	if ($post_dates == 'non')
 		$query_post_dates = 'AND date < NOW()';
 
-	$query = "SELECT * FROM spip_articles WHERE statut = 'publie' AND date > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY) $query_post_dates ORDER BY date DESC";
+	// intervalle de reference
+	if ($majnouv>0)	// depuis le dernier envoi
+		$intervalle = time()-$majnouv;
+	else			// mise a jour du site ou 'envoyer maintenant'
+		$intervalle = 3600*24*$jours_neuf;
+
+	$query = "SELECT * FROM spip_articles WHERE statut = 'publie' AND date > DATE_SUB(NOW(), INTERVAL $intervalle SECOND) $query_post_dates ORDER BY date DESC";
  	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
@@ -185,7 +191,7 @@ function envoyer_mail_nouveautes() {
 
 	if ($activer_breves != "non") {
 
-	   	$query = "SELECT * FROM spip_breves WHERE statut = 'publie' AND date_heure > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY) ORDER BY date_heure DESC";
+	   	$query = "SELECT * FROM spip_breves WHERE statut = 'publie' AND date_heure > DATE_SUB(NOW(), INTERVAL $intervalle SECOND) ORDER BY date_heure DESC";
 	 	$result = spip_query($query);
 
 		if (spip_num_rows($result) > 0) {
@@ -208,20 +214,14 @@ function envoyer_mail_nouveautes() {
 		envoyer_mail($adresse_neuf, "[$nom_site_spip] Les nouveautes", $courr.$contenu);
 }
 
-function envoyer_mail_quoi_de_neuf() {
-	$quoi_de_neuf = lire_meta("quoi_de_neuf");
-	$adresse_neuf = lire_meta("adresse_neuf");
-	$jours_neuf = lire_meta("jours_neuf");
-	if ($quoi_de_neuf == 'oui' AND strlen($adresse_neuf) > 5 AND $jours_neuf > 0) {
-		$query = "SELECT * FROM spip_meta WHERE nom = 'majnouv' AND maj > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY)";
-		$result = spip_query($query);
-
-		if ($result AND spip_num_rows($result) == 0 AND $GLOBALS['db_ok']) {
-			envoyer_mail_nouveautes();
-			ecrire_meta('majnouv', '');
-			ecrire_metas();
-		}
-	}
+function envoyer_mail_quoi_de_neuf($force=false) {
+	if (!$force)
+		$majnouv = lire_meta('majnouv');
+	else
+		$majnouv = 0;
+	ecrire_meta('majnouv', time());
+	ecrire_metas();
+	envoyer_mail_nouveautes($majnouv);
 }
 
 ?>

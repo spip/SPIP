@@ -340,10 +340,8 @@ if (tester_mail()) {
 	$adresse_neuf=lire_meta("adresse_neuf");
 	$jours_neuf=lire_meta("jours_neuf");
 
-	if ($envoi_now) {
-		effacer_meta('majnouv');
-		envoyer_mail_quoi_de_neuf();
-	}
+	if ($envoi_now)
+		envoyer_mail_quoi_de_neuf('force');
 	
 	echo "<TR><TD>&nbsp;</TD></TR>";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Annonce des nouveaut&eacute;s</FONT></B></TD></TR>";
