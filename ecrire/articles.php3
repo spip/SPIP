@@ -118,7 +118,10 @@ if ($jour && $flag_editable) {
 	if ($mois == "00") $jour = "00";
 	$query = "UPDATE spip_articles SET date='$annee-$mois-$jour' WHERE id_article=$id_article";
 	$result = spip_query($query);
-	calculer_dates_rubriques();
+	if (lire_meta("post_dates") == 'non')
+		calculer_rubriques();
+	else
+		calculer_dates_rubriques();
 }
 
 if ($jour_redac && $flag_editable) {
@@ -126,7 +129,6 @@ if ($jour_redac && $flag_editable) {
 
 	if ($mois_redac == "00") $jour_redac = "00";
 
-	
 	if ($avec_redac=="non"){
 		$annee_redac = '0000';
 		$mois_redac = '00';
