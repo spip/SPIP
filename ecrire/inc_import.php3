@@ -22,7 +22,7 @@ function xml_fetch_tag($f, &$before, $gz=false) {
 		if (!$q AND substr($buf, $p, 1) != '<') {
 			if ($_feof($f)) return false;
 			$before .= substr($buf, $p);
-			$abs_pos = $_ftell($f);
+//			$abs_pos = $_ftell($f);
 			$buf = $_fread($f, $buf_len);
 			$q = 0;
 			continue;
@@ -30,7 +30,7 @@ function xml_fetch_tag($f, &$before, $gz=false) {
 		$before .= substr($buf, $p, $q - $p);
 		if (++$q >= strlen($buf)) {
 			if ($_feof($f)) return false;
-			$abs_pos = $_ftell($f);
+//			$abs_pos = $_ftell($f);
 			$buf = $_fread($f, $buf_len);
 			$q = 0;
 		}
@@ -44,7 +44,7 @@ function xml_fetch_tag($f, &$before, $gz=false) {
 		if (!$q AND substr($buf, $p, 1) != '>') {
 			if ($_feof($f)) return false;
 			$tag .= substr($buf, $p);
-			$abs_pos = $_ftell($f);
+//			$abs_pos = $_ftell($f);
 			$buf = $_fread($f, $buf_len);
 			$q = 0;
 			continue;
@@ -52,6 +52,7 @@ function xml_fetch_tag($f, &$before, $gz=false) {
 		$pos = $q + 1;
 		$tag .= substr($buf, $p, $q - $p);
 		$before = str_replace('&amp;', '&', str_replace('&lt;', '<', $before));
+		$abs_pos = $_ftell($f) - strlen($buf);
 		return $tag;
 	}
 }
@@ -73,6 +74,8 @@ function import_debut($f, $gz=false) {
 	$b = "";
 	while ($t = xml_fetch_tag($f, $b, $gz)) {
 		$r = xml_parse_tag($t);
+		if ($r[0] == '?xml' AND $r[1]['encoding'])
+			ecrire_meta('charset_restauration', strtolower($r[1]['encoding']));
 		if ($r[0] == "SPIP") return $r;
 		$b = "";
 	}
@@ -86,7 +89,6 @@ function import_debut($f, $gz=false) {
 //
 // importe un objet depuis le fichier, retourne true si ok, false si erreur ou fin de fichier
 //
-
 
 function import_objet_1_2($f, $gz=false) {
 	global $import_ok, $pos, $abs_pos;
@@ -156,7 +158,7 @@ function import_objet_1_2($f, $gz=false) {
 
 	$table = $tables[$type];
 	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
-	if (! spip_query($query)) {
+	if (!spip_query($query)) {
 		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
@@ -326,6 +328,9 @@ function import_fin() {
 	$query = "DELETE FROM spip_auteurs WHERE id_auteur=0";
 	spip_query($query);
 
+	if ($charset = lire_meta('charset_restauration'))
+		ecrire_meta('charset', $charset);
+	effacer_meta("charset_restauration");
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
 	effacer_meta("date_optimisation");
@@ -336,6 +341,7 @@ function import_fin() {
 function import_abandon() {
 	// Probleme pour restaurer l'ancien acces admin : il conserve un id_auteur = 0
 
+	effacer_meta("charset_restauration");
 	effacer_meta("status_restauration");
 	effacer_meta("debut_restauration");
 	effacer_meta("date_optimisation");
@@ -357,6 +363,7 @@ function import_all($f, $gz=false) {
 
 	if (!$my_pos) {
 		// Debut de l'importation
+		ecrire_meta('charset_restauration', 'iso-8859-1');
 		if (!($r = import_debut($f, $gz))) {
 			ecrire_meta("erreur", _T('avis_archive_incorrect'));
 			return false;
@@ -434,7 +441,7 @@ function affiche_progression_javascript($abs_pos) {
 	global $affiche_progression_pourcent;
 	include_ecrire('inc_charsets.php3');
 	flush();
-	echo " --><script type='text/javascript'><!--\n";
+	echo " -->\n<script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
 		$taille = $abs_pos;
@@ -449,7 +456,7 @@ function affiche_progression_javascript($abs_pos) {
 		$taille = floor(100 * $abs_pos / $affiche_progression_pourcent)." %";
 
 	echo "document.progression.taille.value='$taille';\n";
-	echo "//--></script><!--\n";
+	echo "//--></script>\n<!--\n";
 	flush();
 }
 

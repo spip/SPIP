@@ -18,7 +18,7 @@ function enfant($collection){
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
 		$descriptif=propre($row['descriptif']);
-	
+
 		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
 		$les_sous_enfants = sous_enfant($id_rubrique);
 
@@ -231,7 +231,7 @@ if ($meta["debut_restauration"]) {
 	else {
 		$texte_boite = _T('info_erreur_restauration');
 	}
-	
+
 	debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
