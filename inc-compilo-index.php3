@@ -172,10 +172,10 @@ function applique_filtres($p) {
 				        $arglist = filtres_arglist($regs[2],$p);
 				}
 				if (!function_exists($fonc))
-					$code = "spip_error_handler(1,'".
+					$code = "erreur_squelette('".
 					  texte_script(
 						_T('erreur_filtre', array('filtre' => $fonc))
-					)."','','','')";
+					)."','" . $p->id_boucle . "')";
 				else $code = "$fonc($code$arglist)";
 			}
 		}
