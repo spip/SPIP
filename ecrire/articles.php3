@@ -1064,9 +1064,9 @@ if ($flag_editable AND $options == 'avancees') {
 				$email = $row["email"];
 				$statut = $row["statut"];
 	
-				$statut=ereg_replace("0minirezo", _T('item_administrateur'), $statut);
-				$statut=ereg_replace("1comite", _T('item_redacteur'), $statut);
-				$statut=ereg_replace("2redac", _T('item_redacteur'), $statut);
+				$statut=ereg_replace("0minirezo", _T('info_administrateurs'), $statut);
+				$statut=ereg_replace("1comite", _T('info_redacteurs'), $statut);
+				$statut=ereg_replace("2redac", _T('info_redacteurs'), $statut);
 				$statut=ereg_replace("5poubelle", _T('item_efface'), $statut);
 	
 				$premiere = strtoupper(substr(trim($nom), 0, 1));
@@ -1079,7 +1079,7 @@ if ($flag_editable AND $options == 'avancees') {
 	
 				if ($statut != $statut_old) {
 					echo "\n<OPTION VALUE=\"x\">";
-					echo "\n<OPTION VALUE=\"x\"> $statut".'s';
+					echo "\n<OPTION VALUE=\"x\"> $statut";
 				}
 			
 				if ($premiere != $premiere_old AND ($statut != _T('item_administrateur') OR !$premiere_old)) {
