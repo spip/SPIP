@@ -53,6 +53,24 @@ function decoder_type_image($type, $strict = false) {
 
 
 //
+// Corrige l'extension du fichier dans quelques cas particuliers
+//
+
+function corriger_extension($ext) {
+	switch ($ext) {
+	case 'htm':
+		return 'html';
+	case 'jpeg':
+		return 'jpg';
+	case 'tiff':
+		return 'tif';
+	default:
+		return $ext;
+	}
+}
+
+
+//
 // Ajouter une image (logo)
 //
 
@@ -99,8 +117,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 
 	if (ereg("\.([^.]+)$", $orig, $match)) {
 		$ext = addslashes(strtolower($match[1]));
-		if ($ext == 'jpeg')
-			$ext = 'jpg';
+		$ext = corriger_extension($ext);
 	}
 	$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
 

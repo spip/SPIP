@@ -382,28 +382,35 @@ function creer_base() {
 	mysql_query($query);
 
 	$query = "INSERT IGNORE spip_types_documents (extension, titre) VALUES ".
-		"('txt', 'Document texte'), ".
-		"('htm', 'Fichier HTML'), ".
+		"('aiff', 'Fichier sonore AIFF'), ".
+		"('asf', 'Video Windows'), ".
+		"('avi', 'Video Windows'), ".
+		"('bz2', 'Archive BZip'), ".
+		"('doc', 'Document Word'), ".
+		"('eps', 'Document PostScript encapsul".chr(233)."'), ".
+		"('gz', 'Archive GZ'), ".
 		"('html', 'Fichier HTML'), ".
-		"('pdf', 'Document PDF'), ".
-		"('mp3', 'Fichier sonore MP3'), ".
-		"('wav', 'Fichier sonore WAV'), ".
 		"('mid', 'Musique au format Midi'), ".
+		"('mov', 'Video QuickTime'), ".
+		"('mp3', 'Fichier sonore MP3'), ".
 		"('mpg', 'Video MPEG'), ".
+		"('ogg', 'Fichier sonore Ogg Vorbis'), ".
+		"('pdf', 'Document PDF'), ".
+		"('ppt', 'Document PowerPoint'), ".
+		"('ps', 'Document PostScript'), ".
+		"('qt', 'Video QuickTime'), ".
 		"('ra', 'Fichier RealAudio'), ".
 		"('ram', 'Fichier RealAudio'), ".
 		"('rm', 'Fichier RealAudio'), ".
-		"('mov', 'Video QuickTime'), ".
-		"('qt', 'Video QuickTime'), ".
-		"('asf', 'Video Windows'), ".
-		"('avi', 'Video Windows'), ".
-		"('doc', 'Document Word'), ".
-		"('xls', 'Document Excel'), ".
-		"('ppt', 'Document PowerPoint'), ".
-		"('zip', 'Archive Zip'), ".
-		"('gz', 'Archive GZ'), ".
+		"('rtf', 'Document RTF'), ".
+		"('sit', 'Archive Stuffit'), ".
+		"('swf', 'Animation Flash'), ".
 		"('tgz', 'Archive TGZ'), ".
-		"('swf', 'Animation Flash')";
+		"('txt', 'Document texte'), ".
+		"('wav', 'Fichier sonore WAV'), ".
+		"('xls', 'Document Excel'), ".
+		"('xml', 'Fichier XML'), ".
+		"('zip', 'Archive Zip')";
 	mysql_query($query);
 
 }
