@@ -1634,40 +1634,6 @@ function debut_gauche($rubrique = "asuivre") {
 	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
 
-
-	// zap sessions si bonjour
-	if (
-		($GLOBALS['bonjour'] == "oui" AND $GLOBALS['prefs']['securite'] == 'strict') // reglage perso
-		|| ($GLOBALS['bonjour'] == "oui" AND lire_meta('secu_avertissement') != 'non') // reglage global
-		|| $GLOBALS['secu'] == 'oui'	// demande specifique
-	) {
-		$securite = $GLOBALS['prefs']['securite'];
-		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
-
-		if ($zappees && $GLOBALS['bonjour'] == "oui" && ($securite == 'strict' || $options == 'avancees')) {
-			debut_cadre_enfonce("warning-24.gif");
-			echo "<font size=2 face='verdana,arial,helvetica,sans-serif'>";
-			echo propre("<b>Avertissement de s&eacute;curit&eacute;</b>");
-
-			echo "<p>";
-			echo propre("<img align='right' src='img_pack/deconnecter-24.gif'>" .
-				"Lorsque vous aurez fini de travailler dans l'espace priv&eacute;, " .
-				"pensez &agrave; vous d&eacute;connecter en cliquant sur le bouton ".
-				"ci-dessus.");
-			echo "\n<p>";
-
-			echo propre("Pour plus d'informations, vous pouvez afficher les informations de s&eacute;curit&eacute;.");
-			echo "<p>";
-
-
-			if ($securite == 'strict') $niveau = "(s&eacute;curit&eacute; stricte)";
-			else $niveau = " (s&eacute;curit&eacute; normale)";
-			icone_horizontale("Afficher les r&eacute;glages de s&eacute;curit&eacute; $niveau", "index.php3?secu=oui", "base-24.gif", "");
-			fin_cadre_enfonce();
-		}
-	}
-
-
 	if (!$flag_3_colonnes) {
 		if ($changer_config!="oui"){
 			$activer_messagerie=lire_meta("activer_messagerie");
@@ -1855,68 +1821,6 @@ function debut_droite($rubrique="") {
 
 	echo '<td width="'.$largeur.'" valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
-	// zap sessions si bonjour
-	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
-		$securite = $GLOBALS['prefs']['securite'];
-		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
-
-		if ($zappees && $GLOBALS['bonjour'] == "oui" && ($securite == 'strict' || $options == 'avancees')) {
-		}
-		else if ($GLOBALS['secu'] == 'oui') {
-			debut_cadre_enfonce();
-			if ($securite == 'strict')
-				gros_titre("Type de connexion&nbsp;: s&eacute;curit&eacute; stricte");
-			else
-				gros_titre("Type de connexion&nbsp;: s&eacute;curit&eacute; normale");
-
-			echo "<p>";
-
-			$link = $GLOBALS['clean_link'];
-			$link->addVar('secu', 'oui');
-
-			if ($securite == 'strict') {
-				$link = $GLOBALS['clean_link'];
-				$link->addVar('securite', 'normal');
-
-				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;stricte&raquo;. ".
-					"Les connexions multiples y sont interdites. ".
-					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n".
-					"- {vous connecter avec plusieurs navigateurs diff&eacute;rents en m&ecirc;me temps} (ou depuis plusieurs machines diff&eacute;rentes);\n".
-					"- {utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
-					"(utile en cas d'auteur collectif).\n\n\n".
-					"Pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus, ".
-					"vous devez repasser en mode de s&eacute;curit&eacute; normal.".
-					"\n\nSi vos connexions sont fr&eacute;quemment interrompues sans raison apparente, repassez en mode normal.");
-				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne.".aide('deconnect');
-
-				echo "<p><div align='right'>";
-				echo $link->getForm('POST');
-				echo "<input type='submit' class='fondo' name='submit' value='Passer en s&eacute;curit&eacute; normale'>\n";
-				echo "</form></div>\n";
-			}
-			else {
-				$link = $GLOBALS['clean_link'];
-				$link->addVar('securite', 'strict');
-
-				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;normale&raquo;. ".
-					"{{Vous pouvez faire les choses suivantes :}}\n".
-					"- {vous connecter avec plusieurs navigateurs diff&eacute;rents en m&ecirc;me temps} (ou depuis plusieurs machines diff&eacute;rentes);\n".
-					"- {utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
-					"(utile en cas d'auteur collectif).\n\n\n".
-					"En contrepartie, {{la s&eacute;curit&eacute; n'est pas maximale.}} ".
-					"Si vous n'utilisez pas les possibilit&eacute;s mentionn&eacute;es ci-dessus et ".
-					"que vous &ecirc;tes soucieux de votre s&eacute;curit&eacute;, ".
-					"vous pouvez passer &agrave; un mode de connexion plus strict.\n\n\n\n");
-
-				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
-				echo "<p><div align='right'>";
-				echo $link->getForm('POST');
-				echo "<input type='submit' class='fondo' name='submit' value='Passer en s&eacute;curit&eacute; stricte'>\n";
-				echo "</form></div>\n";
-			}
-			fin_cadre_enfonce();
-		}
-	}
 }
 
 
@@ -1928,8 +1832,8 @@ function fin_html() {
 
 	echo "</font>";
 
-	// rejouer le cookie de session en mode parano
-	if ($GLOBALS['spip_session'] && $GLOBALS['prefs']['securite'] == 'strict') {
+	// rejouer le cookie de session si l'IP a change
+	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
 		echo "<img name='img_session' src='img_pack/rien.gif' width='0' height='0'>\n";
 		echo "<script type='text/javascript'><!-- \n";
 		echo "document.img_session.src='../spip_cookie.php3?change_session=oui';\n";

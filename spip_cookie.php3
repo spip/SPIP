@@ -13,9 +13,15 @@ else
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
 	if (verifier_session($spip_session)) {
-		$cookie = creer_cookie_session($auteur_session);
-		supprimer_session($spip_session);
-		setcookie('spip_session', $cookie);
+		// Attention : seul celui qui a le bon IP a le droit de rejouer,
+		// ainsi un eventuel voleur de cookie ne pourrait pas deconnecter
+		// sa victime, mais se ferait deconnecter par elle.
+		if ($auteur_session['hash_env'] == hash_env()) {
+			$auteur_session['ip_change'] = false;
+			$cookie = creer_cookie_session($auteur_session);
+			supprimer_session($spip_session);
+			setcookie('spip_session', $cookie);
+		}
 		@header('Content-Type: image/gif');
 		@header('Expires: 0');
 		@header("Cache-Control: no-store, no-cache, must-revalidate");
@@ -41,7 +47,7 @@ if ($logout) {
 	if ($auteur_session['login'] == $logout) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
-			supprimer_session($spip_session);
+			zap_sessions($auteur_session['id_auteur'], true);
 			setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
 		if ($PHP_AUTH_USER) {

@@ -100,10 +100,6 @@ if ($connect_statut == "0minirezo" AND $cookie_admin) {
 	icone_horizontale("Supprimer le cookie de correspondance" . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 }
 
-if ($options == "avancees") {
-       icone_horizontale("Afficher les r&eacute;glages de s&eacute;curit&eacute;", "index.php3?secu=oui", "base-24.gif", "");
-}
-
 echo fin_block();
 fin_cadre_relief();
 
