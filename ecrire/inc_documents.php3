@@ -427,9 +427,9 @@ function afficher_documents_non_inclus($id_article) {
 		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
 		echo "</div>\n";
 
+		echo debut_block_invisible("ajouter_document");
 		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr>";
-		echo debut_block_invisible("ajouter_document");
 		echo "<td width='200' valign='top'>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 		
@@ -458,7 +458,6 @@ function afficher_documents_non_inclus($id_article) {
 		}
 		echo "</font>";
 		echo "</td><td width=20>&nbsp;</td>";
-		echo fin_block();
 		echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
 		$link = $image_link;
 		$link->addVar('redirect', $redirect_url);
@@ -468,12 +467,10 @@ function afficher_documents_non_inclus($id_article) {
 		
 		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true);
 		
-		
-		
-		
 		echo "</font>\n";
 		echo "</td></tr></table>";
-		
+
+		echo fin_block();
 		echo "</div>";
 
 	}
