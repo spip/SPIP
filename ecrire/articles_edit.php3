@@ -1,3 +1,5 @@
+
+
 <?php
 
 include ("inc.php3");
@@ -22,8 +24,6 @@ unset ($flag_editable);
 // Creation de l'objet article
 //
 
-unset ($row);
-
 if ($id_article) {
 	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 	$id_article_bloque = $id_article;	// message pour inc_presentation
@@ -34,13 +34,32 @@ if ($id_article) {
 
 	if ($row = spip_fetch_array($result)) {
 		$id_article = $row["id_article"];
+		$surtitre = $row["surtitre"];
 		$titre = $row["titre"];
-		$statut = $row["statut"];
+		$soustitre = $row["soustitre"];
+		$id_rubrique = $row["id_rubrique"];
+		$id_secteur = $row['id_secteur'];
+		$descriptif = $row["descriptif"];
+		$nom_site = $row["nom_site"];
+		$url_site = $row["url_site"];
+		$chapo = $row["chapo"];
+		$texte = $row["texte"];
+		$ps = $row["ps"];
+		$date = $row["date"];
+		$statut = $row['statut'];
+		$date_redac = $row['date_redac'];
+	    	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$date_redac,$regs)){
+		        $mois_redac = $regs[2];
+		        $jour_redac = $regs[3];
+		        $annee_redac = $regs[1];
+		        if ($annee_redac > 4000) $annee_redac -= 9000;
+		}
+		$extra=$row["extra"];
 
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
 		$flag_auteur = (spip_num_rows($result_auteur) > 0);
-				
+
 		$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
 	}
 }
@@ -49,37 +68,6 @@ else if ($new=='oui') {
 	$titre = filtrer_entites(_T('info_nouvel_article'));
 	$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$id_secteur = $row_rub['id_secteur'];
-
-	// creation d'une traduction : recuperer les elements du texte original si on a les droits
-	if ($lier_trad = intval($lier_trad)) {
-		$row_tmp = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article=$lier_trad"));
-		if (($connect_statut == '0minirezo' AND acces_rubrique($row_tmp['id_rubrique']))
-		OR ($row_tmp['statut'] == 'publie') OR ($row_tmp['statut'] == 'prop'))
-			$row = $row_tmp;
-	}
-}
-
-if ($row) {
-	$surtitre = $row["surtitre"];
-	$soustitre = $row["soustitre"];
-	$id_rubrique = $row["id_rubrique"];
-	$id_secteur = $row['id_secteur'];
-	$descriptif = $row["descriptif"];
-	$nom_site = $row["nom_site"];
-	$url_site = $row["url_site"];
-	$chapo = $row["chapo"];
-	$texte = $row["texte"];
-	$ps = $row["ps"];
-	$date = $row["date"];
-	$statut = $row['statut'];
-	$date_redac = $row['date_redac'];
-    	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$date_redac,$regs)){
-	        $mois_redac = $regs[2];
-	        $jour_redac = $regs[3];
-	        $annee_redac = $regs[1];
-	        if ($annee_redac > 4000) $annee_redac -= 9000;
-	}
-	$extra=$row["extra"];
 }
 
 if (!$flag_editable) {
