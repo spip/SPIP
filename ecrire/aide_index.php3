@@ -441,7 +441,8 @@ else {
 			install_fin_html();
 		}
 	} else {
-		echo debut_entete(_T('info_aide_en_ligne')); 
+		echo debut_entete(_T('info_aide_en_ligne'),
+				  "Content-Type: text/html; charset=utf-8");
 		if ($frame == 'menu')
 			help_menu($aide, $html);
 		else if ($frame == 'body')
