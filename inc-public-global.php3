@@ -384,9 +384,29 @@ if (lire_meta("activer_statistiques") != "non") {
 //
 if ($db_ok) {
 	$majnouv = lire_meta('majnouv');
-	if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide(lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
-		include_ecrire('inc_mail.php3');
-		envoyer_mail_quoi_de_neuf();
+	if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf')) AND (email_valide($adresse_neuf = lire_meta('adresse_neuf'))) AND ((time() - $majnouv) > 3600*24*$jours_neuf)) {
+
+		// lock && indication du prochain envoi
+		ecrire_meta('majnouv', time());
+		ecrire_metas();
+
+		// preparation mail : date de reference au format MySQL pour l'age_relatif du squelette (grrr)
+		if ($majnouv)
+			$date = $majnouv;
+		else
+			$date = time() - 3600*24*$jours_neuf;
+		unset ($mail_nouveautes);
+		$fond = 'nouveautes';
+		$delais = 0;
+		$contexte_inclus['date'] = date('Y-m-d H:i:s', $date);
+		include(inclure_fichier($fond, $delais, $contexte_inclus));
+
+		// envoi
+		if ($mail_nouveautes) {
+			include_ecrire('inc_mail.php3');
+			$nom_site_spip = lire_meta('nom_site_spip');
+			envoyer_mail($adresse_neuf, "[$nom_site_spip] Les nouveautes", $mail_nouveautes);
+		}
 	}
 }
 

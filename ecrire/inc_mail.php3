@@ -156,6 +156,7 @@ function envoyer_mail_proposition($id_article) {
 	}
 }
 
+/*
 function envoyer_mail_nouveautes($majnouv) {
 	$jours_neuf = lire_meta("jours_neuf");
 	$adresse_site = lire_meta("adresse_site");
@@ -222,6 +223,6 @@ function envoyer_mail_quoi_de_neuf($force=false) {
 	ecrire_meta('majnouv', time());
 	ecrire_metas();
 	envoyer_mail_nouveautes($majnouv);
-}
+} */
 
 ?>

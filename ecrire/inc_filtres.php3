@@ -22,6 +22,12 @@ function entites_html($texte) {
 }
 
 
+function entites_date($date) {	// specifique : pour envoyer une date par mail
+	$date = ereg_replace("&ucirc;", "\xfb", $date);
+	$date = ereg_replace("&eacute;", "\xe9", $date);
+	return $date;
+}
+
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+", "", $texte);
@@ -379,13 +385,8 @@ function saison($numdate) {
 	return affdate_base($numdate, 'saison');
 }
 
-function affdate($numdate, $corriger_entites = false) {
-	$date = affdate_base($numdate, 'entier');
-	if ($corriger_entites) {	// special pour le mail...
-		$date = ereg_replace("&ucirc;", "\xfb", $date);
-		$date = ereg_replace("&eacute;", "\xe9", $date);
-	}
-	return $date;
+function affdate($numdate) {
+	return affdate_base($numdate, 'entier');
 }
 
 function affdate_court($numdate) {
