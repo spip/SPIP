@@ -1335,7 +1335,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		$'.$nom_var.' = "<"."?php
 			include_ecrire(\"inc_lang.php3\");
-			echo menu_langues(\"changer_lang\", \$menu_lang);
+			echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 			?".">";
 		';
 

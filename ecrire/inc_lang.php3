@@ -392,15 +392,18 @@ function lang_dselect ($rien='') {
 
 
 //
-// Afficher un menu de selection de langue / var_lang = langue interface privee, var_multi = langue de l'article
-//
-function menu_langues($nom_select = 'changer_lang', $default = '', $texte = '', $herit = '') {
+// Afficher un menu de selection de langue
+// - 'var_lang_ecrire' = langue interface privee,
+// - 'var_lang' = langue de l'article, espace public
+// - 'changer_lang' = langue de l'article, espace prive
+// 
+function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
 	global $couleur_foncee, $couleur_claire, $flag_ecrire;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
 
-	if ($nom_select == 'changer_lang')
+	if ($nom_select == 'var_lang_ecrire')
 		$langues = explode(',', $GLOBALS['all_langs']);
 	else
 		$langues = explode(',', lire_meta('langues_multilingue'));
@@ -410,26 +413,39 @@ function menu_langues($nom_select = 'changer_lang', $default = '', $texte = '', 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
 	$lien = $GLOBALS['clean_link'];
-	if ($flag_ecrire) {
-		$lien = rawurlencode('ecrire/'.$lien->getUrl());
-		$dir = '../';
+
+	if ($nom_select == 'changer_lang') {
+		$lien->delvar('changer_lang');
+		$lien->delvar('url');
+		$post = $lien->getUrl();
+		$cible = '';
 	} else {
-		$lien = rawurlencode($lien->getUrl());
-		$dir = '';
+		if ($flag_ecrire) {
+			$cible = 'ecrire/'.$lien->getUrl();
+			$post = '../spip_cookie.php3';
+		} else {
+			$cible = $lien->getUrl();
+			$post = 'spip_cookie.php3';
+		}
 	}
 
-	$ret = "<form action='${dir}spip_cookie.php3' method='post' style='margin:0px; padding:0px;'>";
-	$ret .= "<input type='hidden' name='url' value='$lien'>";
-	$ret .= $texte;
+	$ret = "<form action='$post' method='post' style='margin:0px; padding:0px;'>";
+	if ($cible)
+		$ret .= "<input type='hidden' name='url' value='$cible'>";
+	if ($texte)
+		$ret .= $texte;
 
 	if (!$flag_ecrire)
 		$style = "class='forml' style='vertical-align: top; margin-bottom: 5px; width: 120px;'";
-	else if ($nom_select == 'changer_lang') 
+	else if ($nom_select == 'var_lang_ecrire') 
 		$style = "class='verdana1' style='background-color: $couleur_claire; color: black;'";
 	else
 		$style = "class='fondl'";
 
-	$ret .= "\n<select name='$nom_select' $style onChange=\"document.location.href='${dir}spip_cookie.php3?url=$lien&$nom_select='+this.options[this.selectedIndex].value\">\n";
+	$postcomplet = new Link($post);
+	if ($cible) $postcomplet->addvar('url', $cible);
+
+	$ret .= "\n<select name='$nom_select' $style onChange=\"document.location.href='".$postcomplet->geturl()."&$nom_select='+this.options[this.selectedIndex].value\">\n";
 
 	sort($langues);
 	while (list(, $l) = each ($langues)) {
@@ -451,15 +467,6 @@ function menu_langues($nom_select = 'changer_lang', $default = '', $texte = '', 
 	return $ret;
 }
 
-// menu dans l'espace public
-function gerer_menu_langues() {
-	global $var_lang;
-	if ($var_lang) {
-		if (changer_langue($var_lang)) {
-			spip_setcookie('spip_lang_public', $var_lang, time() + 24 * 3600);
-		}
-	}
-}
 
 //
 // Selection de langue haut niveau
@@ -477,7 +484,7 @@ function utiliser_langue_visiteur() {
 	if ($GLOBALS['auteur_session']['lang'])
 		changer_langue($GLOBALS['auteur_session']['lang']);
 
-	if (!$flag_ecrire AND $cookie_lang = $HTTP_COOKIE_VARS['spip_lang'])
+	if ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang'])
 		changer_langue($cookie_lang);
 
 }

@@ -1,8 +1,6 @@
 <?php
 
 include ("ecrire/inc_version.php3");
-
-include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
 // determiner ou l'on veut retomber
@@ -186,18 +184,18 @@ if ($var_lang) {
 }
 
 // changer de langue espace prive (ou login)
-if ($changer_lang) {
+if ($var_lang_ecrire) {
 	include_ecrire('inc_lang.php3');
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 
-	if (changer_langue($changer_lang)) {
-		spip_setcookie('spip_lang_ecrire', $changer_lang, time() + 365 * 24 * 3600);
-		spip_setcookie('spip_lang', $changer_lang, time() + 365 * 24 * 3600);
+	if (changer_langue($var_lang_ecrire)) {
+		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
+		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-		if ($changer_lang AND $auteur_session) {
-			spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($changer_lang)."' WHERE id_auteur = ".$auteur_session['id_auteur']);
-			$auteur_session['lang'] = $changer_lang;
+		if ($var_lang_ecrire AND $auteur_session) {
+			spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$auteur_session['id_auteur']);
+			$auteur_session['lang'] = $var_lang_ecrire;
 			ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
 		}
 	}
