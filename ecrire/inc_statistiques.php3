@@ -135,7 +135,7 @@ function supprimer_referers($type = "") {
 		$visites_min = $row['visites'];
 	}
 
-	$query = "DELETE FROM $table WHERE (date < DATE_SUB(NOW(),INTERVAL 7 DAY) AND visites <= $visites_min) OR (date < DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$query = "DELETE FROM $table WHERE (date < DATE_SUB(NOW(),INTERVAL 7 DAY) AND visites <= $visites_min) OR (date < DATE_SUB(NOW(),INTERVAL 30 DAY))";
 	$result = spip_query($query);
 }
 
@@ -235,7 +235,9 @@ function calculer_referers() {
 		ecrire_metas();
 	} else {
 		// Supprimer les referers trop vieux
+		spip_debug("supprimer referers site");
 		supprimer_referers();
+		spip_debug("supprimer referers articles");
 		supprimer_referers("article");
 	}
 }

@@ -808,6 +808,6 @@ function spip_debug($message) {
 
 // En mode debug, logger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
 if ($debug)
-	spip_debug("$REQUEST_METHOD: ".($flag_ecrire ? "/ecrire/" : "/").$clean_link->getUrl());
+	spip_debug("$REQUEST_METHOD: ".$GLOBALS['REQUEST_URI']);
 
 ?>
