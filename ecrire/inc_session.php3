@@ -53,6 +53,9 @@ function ajouter_session($auteur, $id_session) {
 	if ($f = fopen($fichier_session, "wb")) {
 		fputs($f, $texte);
  		fclose($f);
+	} else {
+		$dir = $GLOBALS['flag_ecrire'] ? '../' : '';
+		@Header($dir."spip_test_dirs.php3");
 	}
 }
 
