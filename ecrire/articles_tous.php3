@@ -187,27 +187,37 @@ if ($aff_statut["poubelle"]) {
 
 echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 
-if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
 
-	
+// bloc legende
+if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
+	$lf = lire_meta('langue_site');
+	echo "<hr /><div class='verdana2'>";
+	echo _T('info_tout_site6');
+	echo "<div><span class='lang_base'>$lf</span> ". _T('info_tout_site5') ." </div>";
+	echo "<div><span class='creer'>$lf</span> ". _T('info_tout_site2') ." </div>";
+	echo "<div><a class='claire'>$lf</a> ". _T('info_tout_site3'). " </div>";
+	echo "<div><a class='foncee'>$lf</a> ". _T('info_tout_site4'). " </div>";
+	echo "</div>\n";
+}
+
+
+// bloc choix de langue
+if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
 	$langues = explode(',', lire_meta('langues_multilingue'));
-		
 	if (count($langues) > 1) {
 		sort($langues);
-		echo "<B>"._T('titre_cadre_afficher_traductions')."&nbsp;:</B><BR>";
-		
+		echo "<hr /><B>"._T('titre_cadre_afficher_traductions')."&nbsp;:</B><BR>";
 		while (list(, $l) = each ($langues)) {
-		
-			if ($sel_lang[$l]) {
+			if ($sel_lang[$l])
 				echo "<div><input type='checkbox' name='sel_lang[$l]' value='$l' CHECKED> <span class='lang_base'$direction_generale>$l</span> ".traduire_nom_langue($l)." </div>\n"; 
-			} else {
+			else
 				echo "<div><input type='checkbox' name='sel_lang[$l]' value='$l'> <span class='lang_base'$direction_generale>$l</span> ".traduire_nom_langue($l)." </div>\n"; 
-			}
-		
 		}
 		echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 	}
 }
+
+
 
 
 fin_boite_info();
@@ -217,22 +227,6 @@ echo "</form>";
 
 
 debut_droite();
-
-
-if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui') {
-?>
-<div class='verdana2'>
-<div><span class="lang_base">fr</span> <? echo _T("info_tout_site1"); ?> </div>
-<div><span class="creer">fr</span> <? echo _T("info_tout_site2"); ?> </div>
-<div><a class="claire">fr</a> <? echo _T("info_tout_site3"); ?></div>
-<div><a class="foncee">fr</a> <? echo _T("info_tout_site4"); ?></div>
-</div>
-
-
-<?
-
-}
-
 
 
 
@@ -262,7 +256,7 @@ function afficher_rubriques_filles($id_parent) {
 			
 			echo "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left center no-repeat;$bgcolor'>";
 			
-			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_visible("rubrique$id_rubrique");
+			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
 			
 			echo "<b class='verdana2'><a href='naviguer.php3?coll=$id_rubrique'>";
 			echo $rubrique[$id_rubrique];
@@ -270,7 +264,7 @@ function afficher_rubriques_filles($id_parent) {
 			
 
 			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) {
-				echo debut_block_visible("rubrique$id_rubrique");			
+				echo debut_block_invisible("rubrique$id_rubrique");			
 
 				echo "<div class='plan-rubrique'>";
 				if ($article[$id_rubrique]) {
