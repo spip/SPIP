@@ -701,26 +701,21 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 
 //
-// Effectuer la syndication d'un unique site
+// Effectuer la syndication d'un unique site, retourne 0 si aucun a faire.
 //
 
 function executer_une_syndication() {
-	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='sus' AND statut='publie' ".
-			"AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1";
-	if ($result_syndic = spip_query($query_syndic)) {
-		while ($row = spip_fetch_array($result_syndic)) {
-			$id_syndic = $row["id_syndic"];
-			syndic_a_jour($id_syndic);
-		}
+	$id_syndic = 0;
+	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='sus' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
+		$id_syndic = $row["id_syndic"];
+		syndic_a_jour($id_syndic);
 	}
-	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' ".
-			"AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 0,1";
-	if ($result_syndic = spip_query($query_syndic)) {
-		while ($row = spip_fetch_array($result_syndic)) {
-			$id_syndic = $row["id_syndic"];
-			syndic_a_jour($id_syndic, 'sus');
-		}
+
+	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
+		$id_syndic = $row["id_syndic"];
+		syndic_a_jour($id_syndic, 'sus');
 	}
+	return $id_syndic;
 }
 
 ?>
