@@ -411,8 +411,8 @@ if (!$origine) {
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo _T('info_aujourdhui').' '.$visites_today;
-		if ($val_prec > 0) echo "<br>"._T('info_hier').$val_prec;
-		if ($id_article) echo "<br>"._T('info_popularite_5').$val_popularite;
+		if ($val_prec > 0) echo "<br>"._T('info_hier').' '.$val_prec;
+		if ($id_article) echo "<br>"._T('info_popularite_5').' '.$val_popularite;
 
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
