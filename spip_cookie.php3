@@ -8,7 +8,7 @@ include_ecrire ("inc_session.php3");
 if ($url)
 	$cible = new Link($url);
 else
-	$cible = new Link('ecrire/');
+	$cible = new Link('ecrire/index.php3');
 
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
@@ -100,11 +100,11 @@ if ($essai_login == "oui") {
 				alea_futur = '$nouvel_alea_futur'
 			WHERE login='$login'";
 		@spip_query($query);
-		if (ereg("ecrire", $cible->getUrl()))
+		if (ereg("ecrire/", $cible->getUrl()))
 			$cible->addVar('bonjour','oui');
 	}
 	else {
-		if (ereg("ecrire", $cible->getUrl())) {
+		if (ereg("ecrire/", $cible->getUrl())) {
 			$cible = new Link("./spip_login.php3");
 		}
 		$cible->addVar('var_login', $login);
