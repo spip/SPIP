@@ -189,8 +189,8 @@ function echappe_html($letexte,$source) {
 	//
 	// Echapper les <a href>
 	//
-	//$regexp_echap = "<a[[:space:]][^>]+>";
-	$regexp_echap = "<[^>]+>"; // Echappement tout HTML
+	$regexp_echap = "<a[[:space:]][^>]+>";
+	// $regexp_echap = "<[^>]+>"; // Echappement tout HTML
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
 		$les_echap[$num_echap] = $regs[0];
