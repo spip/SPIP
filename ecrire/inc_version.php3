@@ -152,7 +152,7 @@ if ($flag_ecrire) {
 $spip_version = 1.716;
 
 // version de spip
-$spip_version_affichee = "1.7a6 CVS";
+$spip_version_affichee = "1.7a7 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
@@ -735,6 +735,7 @@ if (!defined("_ECRIRE_INC_META_CACHE")) {
 		global $meta_maj;
 		return $meta_maj[$nom];
 	}
+	define("_ECRIRE_INC_META_CACHE", "1");
 }
 
 
