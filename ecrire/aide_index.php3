@@ -1,5 +1,15 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 define('_ECRIRE_AIDE', 1);
 include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
@@ -17,7 +27,8 @@ include_ecrire ("inc_texte.php3");
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (_FILE_CONNECT) {
-	include_ecrire ("inc_auth.php3");
+	include_ecrire ("inc_session.php3");
+	verifier_visiteur();
 }
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
@@ -59,13 +70,15 @@ function fichier_aide($lang_aide = '') {
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 
 	// fichier local ?
-	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide.html")) 
-		return array(file($fichier_aide), $lang_aide);
+	if (@file_exists($fichier_aide = "../AIDE/aide-$lang_aide-aide.html")) {
+		echo "oui";
+		return array(spip_file_get_contents($fichier_aide), $lang_aide);
+	}
 
 	// fichier local ? si reduction ISO du code langue oc_prv_ni => oc
 	else if (ereg("(.*)_", $lang_aide, $regs)
-		AND (@file_exists($fichier_aide = "AIDE/".$regs[1]."/aide.html")))
-			return array(file($fichier_aide), $regs[1]);
+		AND (@file_exists($fichier_aide = "../AIDE/aide-".$regs[1]."-aide.html")))
+			return array(spip_file_get_contents($fichier_aide), $regs[1]);
 
 	// Aide internet
 	else {
@@ -106,13 +119,7 @@ function help_body($aide, $html) {
 
 		$image = $r[3];
 		$image_plat = str_replace('/', '-', $image);
-
-		# Image installee a l'ancienne
-		if (@file_exists($image))
-			$f = $image;
-		else
-		# Image telechargee ou a telecharger
-			$f = "aide_index.php3?img=$image_plat";
+		$f = "aide_index.php3?img=$image_plat";
 
 		$p = strpos($suite, $r[0]);
 		$html .= substr($suite, 0, $p) . $r[1].$f;
@@ -212,9 +219,11 @@ function help_img($regs) {
 	list ($cache, $rep, $lang, $file, $ext) = $regs;
 
 	header("Content-Type: image/$ext");
-	if (@file_exists(_DIR_CACHE . 'aide-'.$cache)) {
-		readfile(_DIR_CACHE . 'aide-'.$cache);
-	} else {
+	if (@file_exists($img = _DIR_CACHE . 'aide-'.$cache)) {
+		readfile($img);
+	} else if (@file_exists($img = '../AIDE/aide-'.$cache)) {
+		readfile($img);
+	} else if ($help_server) {
 		include_ecrire('inc_sites.php3');
 		if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 		AND ($contenu =
