@@ -95,12 +95,11 @@ function deplacer_fichier_upload($source, $dest) {
 		exit;
 	}
 
-	umask('0000');
 	$ok = @copy($source, $dest);
 	if (!$ok) $ok = @move_uploaded_file($source, $dest);
 	if ($ok)
 		@chmod($dest, '0666');
-	else {
+/*	else {
 		$f = @fopen($dest,'w');
 		if ($f)
 			fclose ($f);
@@ -108,7 +107,7 @@ function deplacer_fichier_upload($source, $dest) {
 			@header ("Location: spip_test_dirs.php3?test_dir=".dirname($dest));
 			exit;
 		}
-	}
+	}*/
 
 	return $ok;
 }
@@ -339,7 +338,6 @@ if ($ajout_doc == 'oui') {
 // joindre un document
 if ($joindre_doc == 'oui'){
 	$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document, $doc_vignette, $titre_vignette, $descriptif_vignette);
-	
 }
 
 
@@ -385,8 +383,8 @@ if ($doc_supp) {
 
 
 // supprimer le fichier original si pris dans ecrire/upload
-if ($supprimer_ecrire_upload)
-	@unlink ($supprimer_ecrire_upload);
+/*if ($supprimer_ecrire_upload)
+	@unlink ($supprimer_ecrire_upload);*/
 
 //
 // redirection
