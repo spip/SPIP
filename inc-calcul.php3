@@ -86,7 +86,7 @@ function charger_squelette ($squelette) {
 	$f = $squelette . '_fonctions.php3';
 	if (@file_exists($f)) include($f);
 
-	// A quoi sert ce test ???
+
 	if (function_exists($nom)) return $nom;
 
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);

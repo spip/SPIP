@@ -357,9 +357,10 @@ function maj_base() {
 				$fichier = _DIR_IMG . $fichier;
 				$taille = @filesize($fichier);
 				$fichier = substr('../', '', $fichier);
-				spip_query("INSERT INTO spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ".
-					"('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
-				$id_document = spip_insert_id();
+				$id_document = spip_insert("spip_documents", 
+							   "(titre, id_type, fichier, mode, largeur, hauteur, taille)",
+							   "('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
+
 				if ($id_document > 0) {
 					spip_query("INSERT INTO spip_documents_articles (id_document, id_article) VALUES ($id_document, $id_article)");
 					$replace = "REPLACE($replace, '<IMG$num_img|', '<IM_$id_document|')";
@@ -527,10 +528,10 @@ function maj_base() {
 			$res = spip_query("SELECT * FROM spip_groupes_mots
 				WHERE titre='$type'");
 			if (spip_num_rows($res) == 0) {
-				spip_query("INSERT IGNORE INTO spip_groupes_mots 
-					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
-					VALUES ('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
-				if ($id_groupe = spip_insert_id()) 
+			  if ($id_groupe = spip_insert("spip_groupes_mots", 
+						       "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)",
+						       "('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')"))
+
 					spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type='$type'");
 			}
 		}

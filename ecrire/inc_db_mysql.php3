@@ -166,6 +166,12 @@ function spip_free_result($r) {
 		return mysql_free_result($r);
 }
 
+function spip_insert($table, $champs, $valeurs) {
+  spip_log("insert: $champs $valeurs");
+	spip_query("INSERT INTO $table $champs VALUES $valeurs");
+	return  mysql_insert_id();
+}
+
 function spip_insert_id() {
 	return mysql_insert_id();
 }

@@ -183,8 +183,8 @@ if ($statut) { // si on poste un statut, c'est qu'on modifie une fiche auteur
 	// l'entrer dans la base
 	if (!$echec) {
 		if (!$auteur['id_auteur']) { // creation si pas d'id
-			spip_query("INSERT INTO spip_auteurs (nom) VALUES ('temp')");
-			$auteur['id_auteur'] = spip_insert_id();
+		  $auteur['id_auteur'] = spip_insert("spip_auteurs", "(nom)", "('temp')");
+
 			$id_auteur = $auteur['id_auteur'];
 
 			if (settype($ajouter_id_article,'integer') AND ($ajouter_id_article>0))

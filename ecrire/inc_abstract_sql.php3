@@ -85,6 +85,13 @@ function spip_abstract_free($res, $serveur='')
   return $f($res);
 }
 
+function spip_abstract_insert($res, $serveur='')
+{
+  if (!$serveur) return spip_insert($res);
+  $f = spip_abstract_serveur('spip_' . $serveur . '_insert', $serveur);
+  return $f($res);
+}
+
 # une composition tellement frequente...
 function spip_abstract_fetsel(
 	$select = array(), $from = array(), $where = '',

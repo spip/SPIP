@@ -66,9 +66,8 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	if (!$langue_new) $langue_new = lire_meta('langue_site');
 	$langue_choisie_new = 'non';
 
-	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut, lang, langue_choisie) VALUES ('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')";
-	$result=spip_query($query);
-	$id_breve=spip_insert_id();
+	$id_breve=spip_insert("spip_breves", "(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
+			      "('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')");
 }
 
 
