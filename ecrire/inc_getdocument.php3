@@ -55,6 +55,8 @@ function copier_document($ext, $orig, $source) {
 	$n = 0;
 	while (@file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
 
+	$newFile = preg_replace('/[.]+/', '.', $newFile);
+
 	if ($r = deplacer_fichier_upload($source, $newFile))
 		return $newFile;
 }
