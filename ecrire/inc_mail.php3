@@ -33,12 +33,8 @@ if ($HTTP_X_HOST == 'membres.lycos.fr') {
 else if (ereg('altern\.com$', $SERVER_NAME)) {
 	$hebergeur = 'altern';
 }
-// Free
-else if (ereg('^/([^/]*)\.free.fr/', $REQUEST_URI, $regs)) {
-	$hebergeur = 'free';
-}
 // NexenServices
-else if ($SERVER_ADMIN == 'www@nexenservices.com') {
+else if ($_SERVER['SERVER_ADMIN'] == 'www@nexenservices.com') {
 	if (!function_exists('email'))
 		include ('mail.inc');
 	$hebergeur = 'nexenservices';
@@ -72,10 +68,11 @@ if ($GLOBALS['hebergeur'] == 'lycos') {
 	register_shutdown_function(envoyer_queue_mails);
 }
 
+// Apparemment free etait le dernier hebergeur connu a ne pas offrir de mail
+// cette fonction va donc pouvoir disparaitre
 function tester_mail() {
 	global $hebergeur;
 	$test_mail = true;
-	if ($hebergeur == 'free') $test_mail = false;
 	return $test_mail;
 }
 
