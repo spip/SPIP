@@ -9,7 +9,7 @@ function recherche_stat($args, $filtres)
 }
  
 function recherche_dyn($lien) {
-	return array('formulaire_recherche', 0, 
+	return array('formulaire_recherche', 3600, 
 		     array('lien' => ($lien ? $lien : 'recherche.php3'),
 			   'recherche' => ($GLOBALS['recherche'] ? $GLOBALS['recherche'] : _T('info_rechercher'))));
 }

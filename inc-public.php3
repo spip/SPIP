@@ -60,32 +60,27 @@ else {
 	}
 
 	include_local ('inc-public-global.php3');
+	include_local('inc-admin.php3');
 
-	// demande de debug ?
-	if ($var_debug AND ($code_activation_debug == $var_debug
-		OR $auteur_session['statut'] == '0minirezo'
-			    ))
- {
-		$recalcul = 'oui';
-		$var_debug = true;
-		spip_log('debug !');
-			} else
-			   $var_debug = false; 
+	//  refus du debug si pas dans les options generales ni admin connecte
+	if ($var_debug=='oui') {
+	  if (($code_activation_debug == $var_debug)
+	      OR $auteur_session['statut'] == '0minirezo')
+	    spip_log('debug !');
+	  else
+	    $var_debug = false; 
+	}
 
-
-	// Faut-il preparer les boutons d'admin ?
+	// est-on admin ?
 	$affiche_boutons_admin = (!$flag_preserver
 		AND ($HTTP_COOKIE_VARS['spip_admin']
 			OR $HTTP_COOKIE_VARS['spip_debug']));
-
-	if ($affiche_boutons_admin)
-		include_local('inc-admin.php3');
 
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
 	// Interdire au client de cacher un login, un admin ou un recalcul
-	if ($flag_dynamique OR ($recalcul == 'oui')
+	if ($flag_dynamique OR $var_debug 
 			OR $HTTP_COOKIE_VARS['spip_admin']) {
 			@header("Cache-Control: no-cache,must-revalidate");
 			@header("Pragma: no-cache");
@@ -100,7 +95,7 @@ else {
 		// Faudra-t-il post-traiter la page ?
 
 	define('spip_active_ob', $flag_ob AND
-		($var_debug OR $var_recherche OR $affiche_boutons_admin));
+		($var_debug == 'oui' OR $var_recherche OR $affiche_boutons_admin));
 
 		// Cas d'une page contenant uniquement du HTML :
 
@@ -129,17 +124,19 @@ else {
 				// en cas d'erreur lors du eval, afficher un message
 				// et forcer les boutons de debug
 				if ($res === false AND $affiche_boutons_admin
-				AND $auteur_session['statut'] == '0minirezo')
+				    AND $auteur_session['statut'] == '0minirezo') {
+					include_ecrire('inc_debug_sql.php3');
 					erreur_squelette(_L('erreur d\'execution de la page'));
+				}
 			}
 
 
 		}
 
 		// Passer la main au debuggueur le cas echeant 
-		if ($var_debug) {
+		if ($var_debug == 'oui') {
 			include_ecrire("inc_debug_sql.php3");
-			debug_dumpfile('');
+			debug_dumpfile('',$var_debug_objet,$var_debug_affiche);
 			exit;
 		} else if (count($tableau_des_erreurs) > 0
 		AND $affiche_boutons_admin)
@@ -151,13 +148,14 @@ else {
 			$contenu = surligner_mots($contenu, $var_recherche);
 		}
 
-		// Ajouter les boutons admins (les normaux)
-		if ($affiche_boutons_admin)
-			$contenu = calcul_admin_page($use_cache, $contenu);
-
 		echo $contenu;
 
-		terminer_public_global($use_cache, $page['cache']);
+		// Ajouter les boutons admins (les normaux) si absents
+		// (ce sera apres la balise /html mais tant pis)
+		if ($affiche_boutons_admin) {
+			echo inclure_formulaire(admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur));
+		  } 
+		terminer_public_global();
 }
 
 ?>

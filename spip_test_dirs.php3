@@ -89,7 +89,7 @@ if ($bad_dirs OR $absent_dirs) {
 	echo "<p>";
 
 	echo "<FORM ACTION='$bad_urls' METHOD='GET'>\n";
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='". _T('login_recharger')."'></DIV>";
+	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' VALUE='". _T('login_recharger')."'></DIV>";
 	echo "</FORM>";
 
 	install_fin_html();

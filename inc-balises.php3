@@ -392,14 +392,14 @@ echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 //
 function balise_LOGIN_PRIVE_dist($p) {
 	balise_distante_interdite($p);
-	$p->code = '("<"."?php include(\'inc-login.php3\'); login((\$GLOBALS[\'var_url\'] ? \$GLOBALS[\'var_url\'] : \'' . _DIR_RESTREINT_ABS . '\'), \'prive\'); ?".">")'; 
+	$p->code = '("<"."?php include(\'inc-login.php3\'); echo login((\$GLOBALS[\'var_url\'] ? \$GLOBALS[\'var_url\'] : \'' . _DIR_RESTREINT_ABS . '\'), \'prive\'); ?".">")'; 
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LOGIN_PUBLIC_dist($p) {
 	balise_distante_interdite($p);
-	$p->code = '("<"."?php include(\'inc-login.php3\'); login(\'' . 
+	$p->code = '("<"."?php include(\'inc-login.php3\'); echo login(\'' . 
 	    $p->fonctions[0]  .
 	    '\', false); ?".">")';
 	$p->fonctions = array();
@@ -660,7 +660,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 
 function calculer_balise_formulaire($p) {
 	balise_distante_interdite($p);
-	$nom = strtolower(substr($p->nom_champ, strlen('FORMULAIRE_')));
+	$nom = strtolower(substr($p->nom_champ, strpos($p->nom_champ,'_')+1));
 	$filtres = $p->fonctions;
 	$file = 'inc-' . $nom . _EXTENSION_PHP;
 	include_local($file);
@@ -692,15 +692,6 @@ function balise_distante_interdite($p) {
 	if ($p->boucles[$nom]->sql_serveur) {
 		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
 	}
-}
-
-//
-// Boutons d'administration: 
-//
-function balise_FORMULAIRE_ADMIN_dist($p) {
-	$p->code = "'<!-- @@formulaire_admin@@45609871@@ -->'";
-	$p->statut = "php";
-	return $p;
 }
 
 // reference a l'URL de la page courante

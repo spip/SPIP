@@ -17,7 +17,7 @@ utiliser_langue_visiteur();
 unset($erreur);
 
 $mode = $GLOBALS['mode'];
-spip_log("mode $mode");
+
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
 	$mode = 'oubli_pass';
@@ -34,12 +34,12 @@ if ($p = addslashes($p)) {
 			"<p>"._T('pass_rappel_login', array('login' => $login));
 		} else {
 			install_debut_html(_T('pass_nouveau_pass'));
-			echo "<p><br>";
-			echo "<form action='spip_pass.php3' method='post'>";
-			echo "<input type='hidden' name='p' value='".htmlspecialchars($p)."'>";
-			echo _T('pass_choix_pass')."<br>\n";
-			echo "<input type='password' name='pass' value=''>";
-			echo '  <input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
+			echo "<p><br>",
+			"<form action='spip_pass.php3' method='post'>",
+			"<input type='hidden' name='p' value='".htmlspecialchars($p)."'>",
+			_T('pass_choix_pass')."<br>\n",
+			"<input type='password' name='pass' value=''>",
+			'<input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
 			install_fin_html();
 			exit;
 		}
@@ -85,46 +85,38 @@ if ($mode == 'oubli_pass') {
 	if ($erreur)
 		echo $erreur;
 	else {
-		echo _T('pass_indiquez_cidessous');
-
-		echo "<p>";
-		echo '<form action="spip_pass.php3" method="post">';
-		echo '<div align="right">';
-		echo '<input type="text" class="fondo" name="email_oubli" value="">';
-		echo '<input type="hidden" name="mode" value="oubli_pass">';
-		echo '  <input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
+		echo _T('pass_indiquez_cidessous'),
+			"<p>",
+			'<form action="spip_pass.php3" method="post">',
+			'<div align="right">',
+			'<input type="text" class="fondo" name="email_oubli" value="">',
+			'<input type="hidden" name="mode" value="oubli_pass">',
+			'<input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
 	}
 }
 else {
-	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
+	$inscriptions = (lire_meta("accepter_inscriptions") == "oui");
 
-	if ($inscriptions_ecrire AND ! $mode)
-		$mode = 'redac';
-
-	if ($inscriptions_ecrire OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
+	if ($inscriptions OR (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
 
 		if (!$mode)
-			$mode = 'forum';
-
-		install_debut_html(_T('pass_vousinscrire'));
-		echo "<p>";
-
-		if ($mode != 'forum')
-			echo _T('pass_espace_prive_bla');
-		else
-			echo _T('pass_forum_bla');
-		echo "\n</p>";
+		  $mode = $inscriptions ? 'redac' : 'forum';
 
 		include_local("inc-inscription.php3");
 		include_local("inc-public-global.php3"); 
-		echo inclure_formulaire(inscription_dyn($mode,
+		install_debut_html(_T('pass_vousinscrire'));
+		echo "<p>",
+		  (($mode != 'forum') ? _T('pass_espace_prive_bla') :
+		   _T('pass_forum_bla')),
+		  "\n</p>",
+		  inclure_formulaire(inscription_dyn($mode,
 							$GLOBALS['mail_inscription'],
 							$GLOBALS['nom_inscription']));
 	}
 	else {
 		install_debut_html(_T('pass_erreur'));
-		echo "<p>"._T('pass_rien_a_faire_ici');
+		echo "<p>",_T('pass_rien_a_faire_ici'), '</p>';
 	}
 }
 
