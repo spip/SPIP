@@ -712,20 +712,18 @@ Dzi&#281;kujemy za uczestnictwo
 'info_forum_statistiques' => 'Odwied&#378; statystyki',
 'info_forums_abo_invites' => 'Twoja strona zawiera formu dost&#281;pne po zalogowaniu, zatem odwiedzaj&#261;cy powinni si&#281; zarejestrowa&#263; na stronie publicznej.',
 'info_gauche_admin_effacer' => '<b>Ta strona jest dost&#281;pna jedynie dla administrator&oacute;w.<b><p> Daje ona dost&#281;p do funkcji technicznych serwisu. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; wymagaj&#261; po&#322;&#261;czenia   z serwerem przez FTP.',
-'info_gauche_admin_tech' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
-funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
+'info_gauche_admin_tech' => '<b>Ta strona jest dost&#281;pna jedynie dla jej w&#322;a&#347;cicieli.</b><p> Daje dost&#281;p do fukcji typowo technicznych. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
 , kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
-'info_gauche_admin_vider' => '<MODIF><B>Ta strona jest dost&#281;pna jedynie dla w&#322;a&#347;cicieli strony.</B><P> Daje ona dost&#281;p do r&oacute;&#380;nych
-funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
+'info_gauche_admin_vider' => '<b>Ta strona jest dost&#281;pna jedynie dla g&#322;&oacute;wnych administrator&oacute;w.</b><p> Daje dost&#281;p do funkcji typowo technicznych. Niekt&oacute;re spo&#347;r&oacute;d nich wymagaj&#261; specjalnego uwierzytelnienia
 , kt&oacute;re mo&#380;na uzyska&#263; jedynie poprzez FTP.',
-'info_gauche_auteurs' => '<MODIF>Znajdziecie tutaj informacje o wszystkich autorach serwisu.
- Ich status jest zaznaczony przez kolor ikony (redaktor = zielony; administrator = &#380;&oacute;&#322;ty).',
+'info_gauche_auteurs' => 'Znajdziesz tutaj informacje o wszystkich autorach serwisu.
+ Ich kompetencje s&#261; zaznaczone kolorem ikony (redaktor = zielonym; administrator = &#380;&oacute;&#322;tym).',
 'info_gauche_auteurs_exterieurs' => 'Autorzy zewn&#281;trzni, bez dost&#281;pu do strefy publicznej s&#261; zaznaczeni ikon&#261; niebiesk&#261;&nbsp;;
   autorzy skasowani.',
 'info_gauche_messagerie' => 'Poczta wewn&#281;trzna pozwala Ci wymienia&#263; wiadomo&#347;ci z innymi redaktorami, i zapisywa&#263; notki (prywatne) lub publikowa&#263; og&#322;oszenia na stronie g&#322;&oacute;wnej strefy prywatnej (je&#347;li jeste&#347; administratorem).',
 'info_gauche_numero_auteur' => 'AUTOR NUMER',
 'info_gauche_numero_breve' => 'NEWS NUMER',
-'info_gauche_statistiques_referers' => '<MODIF>Ta strona wy&#347;wietla list&#281; <i>odno&#347;nik&oacute;w</i>, to znaczy stron kt&oacute;re zawieraj&#261; &#322;&#261;cza do Twojej strony z dzisiejszego dnia&nbsp;: ta strona jest zerowana co 24 godziny.',
+'info_gauche_statistiques_referers' => 'Ta strona wy&#347;wietla list&#281; <i>odno&#347;nik&oacute;w</i>, to znaczy stron kt&oacute;re zawieraj&#261; &#322;&#261;cza prowadz&#261;ce do Twojej strony, kt&oacute;re kto&#347; u&#380;y&#322; wczoraj lub dzisiaj&nbsp;: lista jest zerowana co 24 godziny.',
 'info_gauche_suivi_forum' => 'Strona <I>obserwacji forum</I> jest narz&#281;dziem zarz&#261;dzania stron&#261; (nie, miejscem dyskusji czy redakcji). Wy&#347;wiela ona wszystkie komentarze na forum publicznym do danego artyku&#322;u i pozwala edytowa&#263; owe komentarze.',
 'info_gauche_suivi_forum_2' => 'Strona  <I>archiwum forum</I> jest narz&#281;dziem administracji stron&#261; (a nie miejscem dyskusji czy redagowania). Wy&#347;wietla ona wszystkie komentarze forum z ca&#322;ego serwisu, zar&oacute;wno te ze stron publicznych i strefy prywatnej i pozwala na zarz&#261;dzanie tymi komentarzami.',
 'info_gauche_visiteurs_enregistres' => 'Znajdziesz tu go&#347;ci zarejestrowanych
@@ -738,19 +736,19 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
   emaili za po&#347;rednictwem ich serwer&oacute;w. W tym przypadku te funkcje
   SPIP nie b&#281;d&#261; dzia&#322;a&#322;y.',
 'info_hier' => 'wczoraj:',
-'info_historique' => '<NEW>R&eacute;visions&nbsp;:',
-'info_historique_activer' => '<NEW>Activer le suivi des r&eacute;visions',
-'info_historique_affiche' => '<NEW>Afficher cette version',
-'info_historique_comparaison' => '<NEW>comparaison',
-'info_historique_desactiver' => '<NEW>D&eacute;sactiver le suivi des r&eacute;visions',
-'info_historique_lien' => '<NEW>Afficher l\'historique des modifications',
-'info_historique_texte' => '<NEW>Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.',
-'info_historique_titre' => '<NEW>Suivi des r&eacute;visions',
+'info_historique' => 'Poprawki&nbsp;:',
+'info_historique_activer' => 'W&#322;&#261;czy&#263; zarz&#261;dzanie poprawkami',
+'info_historique_affiche' => 'Wy&#347;wietl t&#281; wersj&#281;',
+'info_historique_comparaison' => 'por&oacute;wnanie',
+'info_historique_desactiver' => 'Wy&#322;&#261;czy&#263; zarz&#261;dzanie poprawkami',
+'info_historique_lien' => 'Wy&#347;wietl histori&#281; zmian',
+'info_historique_texte' => 'Zarz&#261;dzanie poprawkami artyku&#322;u pozwala zachowa&#263; histori&#281; wszystkich zmian dokonanych w tre&#347;ci artyku&#322;u i wy&#347;wietli&#263; r&oacute;&#380;nice pomi&#281;dzy kolejnymi wersjami.',
+'info_historique_titre' => 'Zarz&#261;dzanie poprawkami',
 'info_identification_publique' => 'Twoja nazwa publiczna',
 'info_image_aide' => 'POMOC',
 'info_image_process' => 'Wybierz najlepsza metode przygotowania miniaturek kilkaj&#261;c na odpowiednim obrazku.',
-'info_image_process2' => '<NEW><b>N.B.</b> <i>Si aucune image n\'appara&icirc;t, alors le serveur qui h&eacute;berge votre site n\'a pas &eacute;t&eacute; configur&eacute; pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
-'info_image_process_titre' => '<NEW>M&eacute;thode de fabrication des vignettes',
+'info_image_process2' => '<b>N.B.</b> <i>Je&#347;li nie wy&#347;wietli&#322; si&#281; &#380;aden obrazek, Tw&oacute;j serwer nie zosta&#322; skonfugurowany tak, aby skorzysta&#263; z tego narz&#281;dzia. Je&#347;li jednak chcesz skorzysta&#263; z tych funkcji, skontaktuj si&#281; z osob&#261; odpowiedzialn&#261; za sprawy techniczne Twojego serwisu i popro&#347; o w&#322;&#261;czenie rozszerze&#324; "GD" lub "Imagick".</i>',
+'info_image_process_titre' => 'Spos&oacute;b generowania miniaturek',
 'info_impossible_lire_page' => '<B>B&#322;&#261;d !</B> Nie mo&#380;na odczyta&#263; strony<tt><html>@test_proxy@</html></tt> za po&#347;rednictwem proxy<tt>',
 'info_inclusion_directe' => 'Bezpo&#347;rednie do&#322;&#261;czenie&nbsp;:',
 'info_inclusion_vignette' => 'Do&#322;&#261;czenie miniaturki&nbsp;:',
@@ -775,7 +773,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_laisser_champs_vides' => 'pozostaw te pola puste)',
 'info_langue_principale' => 'J&#281;zyk g&#322;&oacute;wnej strony',
 'info_langues' => 'J&#281;zyki stron',
-'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ pikseli',
+'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pikseli',
 'info_ldap_ok' => 'Uwierzytelnianie LDAP jest w&#322;&#261;czone.',
 'info_les_auteurs_1' => 'wg @les_auteurs@',
 'info_lien_hypertexte' => 'Hiper&#322;&#261;cze:',
@@ -857,16 +855,16 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'ARTYKU&#321; NUMER&nbsp;:',
 'info_obligatoire_02' => '[Obowi&#261;zkowo]',
-'info_option_accepter_visiteurs' => '<NEW>Accepter l\'inscription de visiteurs du site public',
+'info_option_accepter_visiteurs' => 'Zaakceptuj zapisy czytelnik&oacute;w Twojej strony',
 'info_option_email' => 'Kiedy odwiedzaj&#261;cy stron&#281; zostawi&#261; na forum wiadomo&#347;&#263;
   zwi&#261;zan&#261; z artyku&#322;em, autorzy artyku&#322;u mog&#261; zosta&#263;
   poinformowani o tym przez e-mail. Czy chcesz zastosowa&#263; t&#281; opcj&#281;?',
 'info_option_faire_suivre' => 'Przes&#322;a&#263; wiadomo&#347;ci tego forum do autor&oacute;w artyku&#322;&oacute;w',
-'info_option_ne_pas_accepter_visiteurs' => '<NEW>Refuser l\'inscription des visiteurs',
+'info_option_ne_pas_accepter_visiteurs' => 'Wy&#322;&#261;cz zapisy czytelnik&oacute;w serwisu',
 'info_option_ne_pas_faire_suivre' => 'Nie przesy&#322;a&#263; wiadomo&#347;ci tego forum',
 'info_options_avancees' => 'OPCJE ZAAWANSOWANE',
-'info_ortho_activer' => '<NEW>Activer le v&eacute;rificateur d\'orthographe',
-'info_ortho_desactiver' => '<NEW>D&eacute;sactiver le v&eacute;rificateur d\'orthographe',
+'info_ortho_activer' => 'W&#322;&#261;cz korektor ortografii',
+'info_ortho_desactiver' => 'Wy&#322;&#261;cz korektor ortografii',
 'info_ou' => 'lub...',
 'info_oui_suppression_mot_cle' => 'chc&#281; definitywni usun&#261;&#263; to s&#322;owo kluczowe.',
 'info_page_interdite' => 'Strona zabroniona',
@@ -895,10 +893,10 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_pour' => 'dla',
 'info_premier_resultat' => '[@debut_limit@ pierwsze wyniki z @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ pierwsze wyniki z @total@]',
-'info_preview_admin' => '<NEW>Seuls les administrateurs peuvent pr&eacute;visualiser le site',
-'info_preview_comite' => '<NEW>Tous les r&eacute;dacteurs peuvent pr&eacute;visualiser le site',
-'info_preview_desactive' => '<NEW>La pr&eacute;visualisation est totalement d&eacute;sactiv&eacute;e',
-'info_preview_texte' => '<NEW>Il est possible de pr&eacute;visualiser le site comme si tous les articles et les br&egrave;ves (ayant au moins le statut &laquo;&nbsp;propos&eacute;&nbsp;&raquo;) &eacute;taient publi&eacute;s. Cette possibilit&eacute; doit-elle &ecirc;tre ouverte aux administrateurs seulement, &agrave; tous les r&eacute;dacteurs, ou &agrave; personne&nbsp;?',
+'info_preview_admin' => 'Jedynie administratorzy mog&#261; w&#322;&#261;czy&#263; podgl&#261;d artyku&#322;u',
+'info_preview_comite' => 'Wszyscy redaktorzy mog&#261; w&#322;&#261;czy&#263; podgl&#261;d artyku&#322;u',
+'info_preview_desactive' => 'Podgl&#261;d artyku&#322;&oacute;w jest ca&#322;kiem wy&#322;&#261;czony',
+'info_preview_texte' => 'Istnieje mo&#380;liwo&#347;&#263; w&#322;&#261;czania podgl&#261;du nieopublikowanych artyku&#322;&oacute;w i news&oacute;w (musz&#261; by&#263; "zaproponowane do oceny"). Czy chcesz, &#380;eby ta funkcja by&#322;a dost&#281;pna dla administrator&oacute;w, redaktor&oacute;w czy dla nikogo ? ',
 'info_principaux_correspondants' => 'Wasi g&#322;&oacute;wni korespondenci',
 'info_probleme_grave' => 'b&#322;&#261;d',
 'info_procedez_par_etape' => 'etap za etapem',
@@ -916,7 +914,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_publie_2' => 'Artyku&#322; opublikowany
 -----------------',
 'info_publies' => 'Twoje artyku&#322;y opublikowane online',
-'info_question_accepter_visiteurs' => '<NEW>Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
+'info_question_accepter_visiteurs' => 'Je&#347;li szkielety Twojego serwisu przewiduj&#261; dla odwiedzaj&#261;cych zapisy bez dost&#281;pu do panelu administracyjnego, w&#322;&#261;cz poni&#380;sz&#261; opcj&#281;:',
 'info_question_gerer_statistiques' => 'Czy Twoja strona ma prowadzi&#263; statystyk&#281; odwiedzin?',
 'info_question_inscription_nouveaux_redacteurs' => 'Czy akceptujesz mo&#380;liwo&#347;&#263; dodawania nowych redaktor&oacute;w
   za po&#347;rednictwem stron publicznych&nbsp;? Je&#347;li tak, odwiedz&#261;cy b&#281;d&#281; mogli si&#281; zapisa&#263;
@@ -936,7 +934,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_recharger_page' => 'Prosz&#281; za chwil&#281; ponownie za&#322;adowa&#263; t&#281; stron&#281;.',
 'info_recherche_auteur_a_affiner' => 'Zbyt du&#380;o rezultat&oacute;w w "@cherche_auteur@" ; spr&oacute;buj sprecyzowa&#263; poszukiwania.',
 'info_recherche_auteur_ok' => 'Kilkunastu redaktor&oacute;w zosta&#322;o znalezionych dla "@cherche_auteur@":',
-'info_recherche_auteur_zero' => '<MODIF><B>&#379;adnych wynik&oacute;w dla "@cherche_auteur@".',
+'info_recherche_auteur_zero' => '<b>&#379;adnych wynik&oacute;w dla "&nbsp;@cherche_auteur@&nbsp;".',
 'info_rechercher' => 'Szukaj',
 'info_rechercher_02' => 'Szukaj:',
 'info_recommencer' => 'Prosz&#281; spr&oacute;bowa&#263; ponownie.',
@@ -1026,7 +1024,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_symbole_bleu' => 'Symbol <B>niebieski</B> oznacza  <B>notatk&#281;</B>: n.p. wiadomo&#347;&#263; do prywatnego u&#380;ytku.',
 'info_symbole_jaune' => 'Symbol <B>&#380;&oacute;&#322;ty</B> oznacza <B>zawiadomienie dla wszystkich redaktor&oacute;w</B>: mo&#380;e by&#263; opublikowana przez wszystkich administrator&oacute;w, i jest widoczna dla wszystkich redaktor&oacute;w.',
 'info_symbole_vert' => 'Symbol <B>zielony</B> oznacza <B>wiadomo&#347;ci wymieniane z innymi u&#380;ytkownikami</B> strony.',
-'info_syndication' => '<MODIF>syndykacja :',
+'info_syndication' => 'syndykacja&nbsp;:',
 'info_syndication_articles' => 'artyku&#322;(y)',
 'info_taille_maximale_vignette' => 'Maksymalny rozmiar minitaurek, generowanych przez system&nbsp;:',
 'info_telecharger' => 'Za&#322;aduj ze swojego komputera:',
@@ -1260,24 +1258,24 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 'onglet_origine_visites' => 'Wizyty z URL-i',
 'onglet_repartition_actuelle' => 'teraz',
 'onglet_repartition_debut' => 'od pocz&#261;tku',
-'onglet_repartition_lang' => '<MODIF>przez j&#281;zyki',
+'onglet_repartition_lang' => 'Porz&#261;dkowanie wg j&#281;zyk&oacute;w',
 'onglet_repartition_rubrique' => 'Roz&#322;o&#380;enie dzia&#322;&oacute;w',
 'onglet_save_restaur_base' => 'Backup/zapisywanie bazy danych',
 'onglet_vider_cache' => 'Opr&oacute;&#380;nij cache',
-'ortho_ajouter_ce_mot' => '<NEW>Ajouter ce mot au dictionnaire',
-'ortho_aucune_suggestion' => '<NEW>Aucune suggestion n\'a &eacute;t&eacute; trouv&eacute;e pour ce mot.',
-'ortho_avis_privacy' => '<NEW>Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:',
-'ortho_avis_privacy2' => '<NEW>Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).',
-'ortho_ce_mot_connu' => '<NEW>Ce mot fait partie du dictionnaire du site.',
-'ortho_dico_absent' => '<NEW>Aucun dictionnaire n\'a &eacute;t&eacute; trouv&eacute; pour cette langue',
-'ortho_mode_demploi' => '<NEW>Les mots non reconnus sont surlign&eacute;s en rouge. Vous pouvez cliquer sur chaque mot pour afficher des suggestions de correction.',
-'ortho_mots_a_corriger' => '<NEW>mots &agrave; corriger',
-'ortho_orthographe' => '<NEW>Orthographe',
-'ortho_supprimer_ce_mot' => '<NEW>Enlever ce mot du dictionnaire',
-'ortho_trop_de_fautes' => '<NEW>Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.',
-'ortho_trop_de_fautes2' => '<NEW>Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.',
-'ortho_verif_impossible' => '<NEW>Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
-'ortho_verifier' => '<NEW>V&eacute;rifier l\'orthographe',
+'ortho_ajouter_ce_mot' => 'Dodaj to s&#322;owo do s&#322;ownika',
+'ortho_aucune_suggestion' => 'Nie znaleziono &#380;adnej podpowiedzi dla tego s&#322;owa.',
+'ortho_avis_privacy' => 'SPIP posiada zintegrowany korektor ortografii. Jednak zanim go w&#322;&#261;czysz, przeczytaj uwa&#380;nie nast&#281;pny paragraf&nbsp;:',
+'ortho_avis_privacy2' => 'Aby sprawdzi&#263; ortografi&#281; tekstu system wy&#347;le list&#281; s&#322;&oacute;w do sprawdzenia na jeden z "serwer&oacute;w ortograficznych" oddanych do dyspozycji przez cz&#322;onk&oacute;w spo&#322;eczno&#347;ci SPIP. S&#322;owa s&#261; wysy&#322;ane jako nieuporz&#261;dkowana lista s&#322;&oacute;w aby zagwarantowa&#263; poufno&#347;&#263;. Je&#347;li masz obawy o poufno&#347;&#263; danych nie w&#322;&#261;czaj tej opcji (i usu&#324; informacje z internetu).  ',
+'ortho_ce_mot_connu' => 'S&#322;owo jest w s&#322;owniku stronu.',
+'ortho_dico_absent' => 'Dle tego j&#281;zyka nie zosta&#322; znaleziony &#380;aden s&#322;ownik',
+'ortho_mode_demploi' => 'Nierozpoznane s&#322;owa s&#261; podkre&#347;lone na czerwono. Kliknij na ka&#380;dym s&#322;owie aby wy&#347;wietli&#263; podpowiedzi korekt.',
+'ortho_mots_a_corriger' => 's&#322;owa do poprawienia',
+'ortho_orthographe' => 'Ortografia',
+'ortho_supprimer_ce_mot' => 'Usu&#324; s&#322;owo ze s&#322;ownika',
+'ortho_trop_de_fautes' => 'Uwaga&nbsp;: tw&oacute;j tekst zawiera za du&#380;o b&#322;&#281;d&oacute;w. &#379;adne korekty nie b&#281;d&#261; sugerowane aby nie przeci&#261;&#380;a&#263; systemu.',
+'ortho_trop_de_fautes2' => 'Zacznij od usuni&#281;cia najbardziej oczywistych b&#322;&#281;d&oacute;w i spr&oacute;buj powt&oacute;rnie.',
+'ortho_verif_impossible' => 'System nie mo&#380;e sprawdzi&#263; ortografii w tym tek&#347;cie.',
+'ortho_verifier' => 'Sprawd&#378; ortografi&#281;',
 
 
 // P
@@ -1320,8 +1318,8 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 'pass_retour_public' => 'Powr&oacute;t do strony publicznej',
 'pass_rien_a_faire_ici' => 'Nie ma tu nic do zrobienia.',
 'pass_vousinscrire' => 'Zapisa&#347; si&#281; w tym serwisie',
-'previsualisation' => '<NEW>Pr&eacute;visualisation',
-'previsualiser' => '<NEW>Pr&eacute;visualiser',
+'previsualisation' => 'Podgl&#261;d',
+'previsualiser' => 'W&#322;&#261;cz podgl&#261;d',
 
 
 // S
@@ -1330,17 +1328,17 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 
 
 // T
-'taille_cache_infinie' => '<NEW>Ce site ne pr&eacute;voit pas de limitation de taille du r&eacute;pertoire <code>CACHE/</code>.',
-'taille_cache_maxi' => '<NEW>SPIP essaie de limiter la taille du r&eacute;pertoire <code>CACHE/</code> de ce site &agrave; environ <b>@octets@</b> de donn&eacute;es.',
-'taille_cache_octets' => '<NEW>La taille du cache est actuellement de @octets@.',
-'taille_cache_vide' => '<NEW>Le cache est vide.',
+'taille_cache_infinie' => 'Serwis nie ma w&#322;&#261;czonego ograniczenia dla wielko&#347;ci katalogu <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP pr&oacute;buje ograniczy&#263; wielko&#347;&#263; katalogu   <code>CACHE/</code> tej strony do oko&#322;o <b>@octets@</b> danych.',
+'taille_cache_octets' => 'W tym momencie wielko&#347;&#263; cache to: @octets@.',
+'taille_cache_vide' => 'Cache jest pusty.',
 'taille_ko' => '@taille@&nbsp;kb',
 'taille_mo' => '@taille@&nbsp;Mb',
 'taille_octets' => '@taille@&nbsp;bytes',
-'taille_repertoire_cache' => '<NEW>Taille du r&eacute;pertoire cache',
+'taille_repertoire_cache' => 'Wielko&#347;&#263; katalogu cache',
 'text_article_propose_publication' => 'Artyku&#322; zatwierdzony do publikacji. Nie wahaj si&#281; wyrazi&#263; swoj&#261; opini&#281; przez forum dotycz&#261;ce tego artyku&#322;u (na dole strony).',
 'texte_acces_ldap_anonyme_1' => 'Niekt&oacute;re serwery LDAP nie akceptuj&#261; dost&#281;pu anonimowego. W tym przypadku nale&#380;y poda&#263; indentyfikator dost&#281;pu, aby m&oacute;c przeszukiwa&#263; katalog. Niemniej, w wi&#281;kszo&#347;ci przypadk&oacute;w poni&#380;sze pola powinny pozosta&#263; puste.',
-'texte_actualite_site_1' => '<MODIF>Ta strona grupuje aktualno&#347;ci strony i pozwala Ci &#347;ledzi&#263; Tw&oacute;j wk&#322;ad w stron&#281;. Znajdziezs tu artyku&#322;y, kt&oacute;re s&#261; w&#322;a&#347;nie redagowane, artyku&#322;y i nowo&#347;ci, na kt&oacute;rych temat mo&#380;esz si&#281; wypowiedzie&#263;, oraz przypomnienie Twojego wk&#322;adu w stron&#281;.<p><hr><p>Kiedy zaznajomisz si&#281; z interfejsem, mo&#380;esz klikn&#261;&#263; na &laquo; ',
+'texte_actualite_site_1' => 'Kiedy poznasz interfejs, kliknij na &laquo;',
 'texte_actualite_site_2' => 'kompletny interfejs',
 'texte_actualite_site_3' => '&raquo; aby uruchomi&#263; wi&#281;cej mo&#380;liwo&#347;ci.',
 'texte_admin_effacer_01' => 'Ta komenda usuwa <i>ca&#322;&#261;</i> zawarto&#347;&#263; bazy danych,
@@ -1358,7 +1356,7 @@ zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierw
 'texte_article_virtuel' => 'Wirtualny artyku&#322;',
 'texte_article_virtuel_reference' => '<b>Artyku&#322; wirtualny&nbsp;:</b> artyku&#322; zlinkowany w Twoim serwisie SPIP ale przekierowuj&#261;cy do innego URL-a. Aby usun&#261;&#263; to przekierowanie, wyma&#380; URL powy&#380;ej.',
 'texte_aucun_resultat_auteur' => '&#379;adnych wynik&oacute;w dla "@cherche_auteur@".',
-'texte_auteur_messagerie' => '<MODIF>Na tej stronie mo&#380;e wy&#347;wietla&#263; si&#281; bez przerwy lista zalogowanych redaktor&oacute;w, co pozwoli Ci bezpo&#347;rednio wymienia&#263; wiadomo&#347;ci (je&#347;li wewn&#281;trzna poczta jest wy&#322;&#261;czona, lista redaktor&oacute;w tak&#380;e). Mo&#380;esz tak&#380;e zdecydowa&#263; o nie pojawianiu si&#281; na tej li&#347;cie (jeste&#347; w&oacute;wczas "niewidzialny" dla innych u&#380;ytkownik&oacute;w)',
+'texte_auteur_messagerie' => 'Na tej stronie mo&#380;e wy&#347;wietla&#263; si&#281; bez przerwy lista zalogowanych redaktor&oacute;w, co pozwoli Ci bezpo&#347;rednio wymienia&#263; z nimi wiadomo&#347;ci. Mo&#380;esz tak&#380;e zdecydowa&#263; o nie pojawianiu si&#281; na tej li&#347;cie (jeste&#347; w&oacute;wczas "niewidzialny" dla innych u&#380;ytkownik&oacute;w)',
 'texte_auteur_messagerie_1' => 'Na tej stronie mo&#380;esz wymienia&#263; wiadomo&#347;ci i tworzy&#263; prywatne fora dyskusyjne pomi&#281;dzy u&#380;ytkownikami strony. Mo&#380;esz nie bra&#263; udzia&#322;u w tych wymianach.',
 'texte_auteurs' => 'AUTORZY',
 'texte_breves' => 'Newsy s&#261; kr&oacute;tkimi tekstami, kt&oacute;re pozwalaj&#261;
@@ -1402,8 +1400,8 @@ z tej strony, zostan&#261; automatycznie zablokowane.',
     ale nie zosta&#322;y bezpo&#347;rednio do niego
     do&#322;&#261;czone. Zale&#380;nie od uk&#322;adu stron publicznych,
     b&#281;d&#281; mog&#322;y pojawi&#263; si&#281; na nich jako za&#322;&#261;czniki.',
-'texte_documents_joints' => '<MODIF>Mo&#380;esz autoryzowa&#263; dodawanie dokument&oacute;w tekstowych, obrazk&oacute;w,
-multimedi&oacute;we, itd.) do artyku&#322;&oacute;w b&#261;d&#378; rubryk. Te pliki
+'texte_documents_joints' => 'Mo&#380;esz autoryzowa&#263; dodawanie dokument&oacute;w tekstowych, obrazk&oacute;w,
+multimedi&oacute;w, itd.) do artyku&#322;&oacute;w b&#261;d&#378; dzia&#322;&oacute;w. Te pliki
  mog&#261; zosta&#263; do&#322;&#261;czone do artyku&#322;u
  lub mog&#261; by&#263; u&#380;yte niezale&#380;nie.<p>',
 'texte_documents_joints_2' => 'Te ustawienia nie przeszkadzaj&#261; we wstawianiu obrazk&oacute;w bezpo&#347;rednio do artyku&#322;&oacute;w.',
@@ -1415,8 +1413,8 @@ multimedi&oacute;we, itd.) do artyku&#322;&oacute;w b&#261;d&#378; rubryk. Te pl
   Obrazek <B>@fichier@</B> nie przeszed&#322; (artyku&#322; @id_article@).
   Zapisz te dane, i spr&oacute;buj ponownego uaktualnienia,
 a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyku&#322;ach.',
-'texte_fichier_authent' => '<MODIF><b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
-  i <tt>.htpasswd-admin</tt> w katalogu <tt>ecrire/data/</tt> ?</b><p>
+'texte_fichier_authent' => '<b>Czy SPIP ma stworzy&#263; specjalne pliki <tt>.htpasswd</tt>
+  i <tt>.htpasswd-admin</tt> w katalogu <tt>ecrire/data/</tt> ?</b><p />
   Te pliki mog&#261; s&#322;u&#380;y&#263; jako ograniczenie dost&#281;pu dla autor&oacute;w
   i administrator&oacute;w do innych cz&#281;&#347;ci Twojego serwisu
   (np. zewn&#281;trznych statystyk).<p>
@@ -1432,9 +1430,9 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
  funkcjonowanie Twojego serwisu. Radzimy nie zatwierdza&#263; tych zmian do momentu, w kt&oacute;rym nie b&#281;dziecie
  dobrze obeznani z funkcjonowaniem systemu SPIP. <P align="justify"><B>Najbardziej
  zalecamy, poproszenie o dokonanie zmian g&#322;&oacute;wnego adminsitratora serwisu.</B>',
-'texte_inc_meta_1' => '<MODIF>Jako administrator strony, prosz&#281;',
-'texte_inc_meta_2' => '<MODIF>zweryfikuj pisemne pozwolenia',
-'texte_inc_meta_3' => '<MODIF>w katalogu ecrire/',
+'texte_inc_meta_1' => 'System nie mo&#380;e zapisa&#263; plik&oacute;w <code>ecrire/data/meta_cache.php3</code>. Jako administrator strony,',
+'texte_inc_meta_2' => 'sprawd&#378; pozwolenia zapisu',
+'texte_inc_meta_3' => 'dla katalogu <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
 'texte_informations_personnelles_2' => '(Informacja: je&#347;li jest to reinstalacja, a Tw&oacute;j dost&#281;p wci&#261;&#380; dzia&#322;a, mo&#380;esz',
 'texte_introductif_article' => '(Tekst wprowadzaj&#261;cy do artyku&#322;u.)',
@@ -1481,7 +1479,7 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'texte_nouveau_message' => 'Nowa wiadomo&#347;&#263;',
 'texte_nouveau_mot' => 'Nowe s&#322;owo kluczowe',
 'texte_nouvelle_version_spip_1' => 'Nowa wersja SPIP zosta&#322;a zainstalowana.',
-'texte_nouvelle_version_spip_2' => '<MODIF>Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik <tt>inc_connect.php3</tt> z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku <tt>inc_connect.php3</tt> zanim go skasujesz...)',
+'texte_nouvelle_version_spip_2' => 'Nowa wersja wymaga bardziej kompletnego dostosowania ni&#380; zwykle. Je&#347;li jeste&#347; administratorem strony wykasuj plik <tt>inc_connect.php3</tt> z katalogu <tt>ecrire</tt> i powt&oacute;rz instalacj&#281; w celu uaktualnienia Twoich parametr&oacute;w po&#322;&#261;czenia z baz&#261; danych .<p> (NB.&nbsp;: je&#347;li zapomnia&#322;e&#347; parametry po&#322;&#261;czenia, rzu&#263; okiem do pliku <tt>inc_connect.php3</tt> zanim go skasujesz...)',
 'texte_operation_echec' => 'Powr&oacute;&#263; do poprzedniej strony, wybierz inn&#261; baz&#281; danych lub stw&oacute;rz now&#261;. Sprawd&#378; informacje podane przez tw&oacute;j serwis hostingowy.',
 'texte_plus_trois_car' => 'wi&#281;cej ni&#380; 3 znaki',
 'texte_plusieurs_articles' => 'Kilku autor&oacute;w zosta&#322;o znalezionych dla "@cherche_auteur@":',
@@ -1498,11 +1496,11 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'texte_rappel_selection_champs' => '[Nie zapomnij wybra&#263; poprawnych p&oacute;l.]',
 'texte_recalcul_page' => 'Je&#347;li chcesz 
 od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru publicznego, u&#380;ywaj&#261;c przycisku &laquo; od&#347;wie&#380; &raquo;.',
-'texte_recapitiule_liste_documents' => '<MODIF>Ta strona podsumowuje w postaci listy dokumenty kt&oacute;re umie&#347;ci&#322;e&#347; w dzia&#322;ach. Aby zmodyfikowa&#263; informacje o danym dokumencie, kliknij na &#322;&#261;cze prowadz&#261;ce do strony danego dzia&#322;u.',
+'texte_recapitiule_liste_documents' => 'Ta strona wy&#347;wietla w postaci listy dokumenty kt&oacute;re umie&#347;ci&#322;e&#347; w dzia&#322;ach. Aby zmieni&#263; informacje o danym dokumencie, kliknij na &#322;&#261;cze prowadz&#261;ce do strony danego dzia&#322;u.',
 'texte_recuperer_base' => 'Napraw baz&#281; danych',
 'texte_reference_mais_redirige' => 'linki z artyku&#322;&oacute;w w twoim serwisie SPIP, przekierowuj&#261;ce do innych URL-i.',
 'texte_referencement_automatique' => '<b>Zautomatyzowane dodawanie link&oacute;w</b><br>Mo&#380;esz szybko doda&#263; link do jakiej&#347; strony internetowej, wpisuj&#261;c poni&#380;ej jej adres, oraz adres jej pliku backend. SPIP automatycznie dopisze informacje, dotycz&#261;ce tej strony (tytu&#322;, opis...).',
-'texte_requetes_echouent' => '<MODIF><b>Je&#347;li pewne zapytania MySQL nie udaj&#261; si&#281;
+'texte_requetes_echouent' => '<b>Je&#347;li pewne zapytania MySQL nie udaj&#261; si&#281;
   regularnie i bez widocznego powodu, mo&#380;liwe jest
   &#380;e powodem tego jest baza danych</b><p>
   MySQL ma mo&#380;liwo&#347;&#263; naprawy poszczeg&oacute;lnych tabel
@@ -1524,7 +1522,7 @@ od&#347;wie&#380;y&#263; tylko jedn&#261; stron&#281;, zr&oacute;b to z obszaru 
  <li> rodzaj kodowania tekstu, kt&oacute;ry ma u&#380;ywa&#263; SPIP&nbsp;;</li>
  <li> j&#281;zyk u&#380;ywany wa formularzach stron publicznych&nbsp;;</li>
  <li> oraz j&#281;zyk u&#380;ywany domy&#347;lnie w strefie prywatnej.</li></ul>',
-'texte_signification' => '<MODIF>Czerwone paski oznaczaj&#261; podsumowanie odwiedzin (ca&#322;kowitych w poddzia&#322;ach), paski zielone liczb&#281; wizyt w danych dzia&#322;ach.',
+'texte_signification' => 'Ciemne paski oznaczaj&#261; podsumowanie wszystkich odwiedzin w poddzia&#322;ach, paski jasne liczb&#281; wizyt dla poszczeg&oacute;lnych dzia&#322;&oacute;w.',
 'texte_sous_titre' => 'Podtytu&#322;',
 'texte_statistiques_visites' => '(ciemny pasek : niedziela / ciemna krzywa : rozw&oacute;j &#347;redniej)',
 'texte_statut_attente_validation' => 'w trakcie zatwierdzania',
@@ -1596,7 +1594,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_config_fonctions' => 'Konfiguracja strony',
 'titre_config_groupe_mots_cles' => 'Konfiguracja grup s&#322;&oacute;w kluczowych',
 'titre_configuration' => 'Konfiguracja strony',
-'titre_connexion_ldap' => '<MODIF>Opcje: <B>Twoje po&#322;&#261;czenie LDAP</b>',
+'titre_connexion_ldap' => 'Opcje: <B>Twoje po&#322;&#261;czenie LDAP</b>',
 'titre_dernier_article_syndique' => 'Ostatnio syndykowane artyku&#322;y',
 'titre_documents_joints' => 'Za&#322;&#261;czniki',
 'titre_evolution_visite' => 'Ewolucja odwiedzin',
@@ -1617,7 +1615,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_langue_rubrique' => 'J&#280;ZYK DZIA&#321;U',
 'titre_langue_trad_article' => 'J&#280;ZYK I T&#321;UMACZENIA ARTYKU&#321;U',
 'titre_les_articles' => 'ARTYKU&#321;Y',
-'titre_liens_entrants' => '<MODIF>Dzisiejsze linki wej&#347;ciowe',
+'titre_liens_entrants' => 'Linki wej&#347;ciowe',
 'titre_mots_cles' => 'S&#321;OWA KLUCZOWE',
 'titre_mots_cles_dans_forum' => 'S&#322;owa kluczowe na forum na stronie publicznej',
 'titre_mots_tous' => 'S&#322;owa kluczowe',
@@ -1679,16 +1677,16 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 
 
 // U
-'upload_fichier_zip' => '<NEW>Fichier ZIP',
-'upload_fichier_zip_texte' => '<NEW>Le fichier que vous proposez d\'installer est un fichier Zip.',
-'upload_fichier_zip_texte2' => '<NEW>Ce fichier peut &ecirc;tre&nbsp;:',
-'upload_limit' => '<NEW>Ce fichier est trop gros pour le serveur&nbsp;; la taille maximum autoris&eacute;e en <i>upload</i> est de @max@.',
-'upload_zip_decompacter' => '<NEW>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu\'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:',
-'upload_zip_telquel' => '<NEW>install&eacute; tel quel, en tant qu\'archive compress&eacute;e Zip&nbsp;;',
+'upload_fichier_zip' => 'Plik ZIP',
+'upload_fichier_zip_texte' => 'Plik, kt&oacute;ry chcesz zainstalowa&#263; jest plikiem ZIP.',
+'upload_fichier_zip_texte2' => 'Ten plik mo&#380;e by&#263;&nbsp;:',
+'upload_limit' => 'Ten plik jest zbyt du&#380;y dla serwera&nbsp;;maksymalny rozmiar pliku zapisywanego na serwerze to @max@.',
+'upload_zip_decompacter' => 'zdekompresowany i ka&#380;dy jego element zostanie zainstalowany w serwisie. Pliki, kt&oacute;re zostan&#261; zainstalowane w serwisie to:',
+'upload_zip_telquel' => 'zostan&#261; zainstalowane jako archiwum Zip;',
 
 
 // V
-'version_initiale' => '<NEW>Version initiale'
+'version_initiale' => 'Wersja pocz&#261;tkowa'
 
 );
 
