@@ -501,6 +501,7 @@ function remplir_type_documents() {
 		"('avi', 'Windows Media', 'embed'), ".
 		"('bz2', 'BZip', 'non'), ".
 		"('doc', 'Word', 'non'), ".
+		"('djvu', 'DjVu', 'non'), ".
 		"('eps', 'PostScript', 'non'), ".
 		"('gz', 'GZ', 'non'), ".
 		"('html', 'HTML', 'non'), ".
