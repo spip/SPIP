@@ -229,9 +229,9 @@ function http_calendrier_init_mois($date, $echelle, $partie_cal, $script)
 			    $r : array_merge($messages[$d], $r); }
 
 	$total = "<div>&nbsp;</div>" .
-		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'>" .
+		"<table cellpadding='0' cellspacing='0' border='0' width='$largeur_table'>" .
 		"\n<tr><td width='$largeur_table' valign='top'>" .
-	  http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $messages, $fclic);
+	  http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $partie_cal, $echelle, $messages, $fclic) .
 		"</td></tr>\n</table>";
 
 	# messages sans date ?
@@ -350,7 +350,7 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 	if ($type == 'mois') $condition = ($annee == $annee_today && $mois == $mois_today);
 	else $condition = ($annee == $annee_today && $mois == $mois_today && $jour == $jour_today);
 	
-	$id = 'nav_agenda' .ereg_replace('[^A-Za-z0-9]', '', $ancre);
+	$id = 'nav-agenda' .ereg_replace('[^A-Za-z0-9]', '', $ancre);
 	$retour .= "<span onmouseover=\"montrer('$id');\">";
 	$retour .= http_href_img($script . "type=$type&echelle=$echelle&$arguments",
 				 "cal-today.gif",
@@ -741,21 +741,13 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 	$mois_t = $today["mon"];
 	$annee_t = $today["year"];
 	$total = '';
+	$style = (!_DIR_RESTREINT ? 'padding: 5px;' :
+		  ("position: absolute; z-index: 2; top: 10px; left: "
+		   . round($largeur/2) . 'px'));
 	foreach($intitul as $k => $v) {
 		$d = $v['date'];
-		$jarticles = $articles[$d];
-		$jbreves = $breves[$d];
-		$jevenements = $evenements[$d];
-		if ((_DIR_RESTREINT) && is_array($jarticles)) {
-		  $i = 7;
-		  foreach ($jarticles as $k2 => $v2) {
-		    $jarticles[$k2]['DTSTART'] = $d . sprintf("%02d0000",$i);
-		    $jarticles[$k2]['DTEND'] = $d . sprintf("%02d0000",$i+2);
-		    $i+=2;
-		  }
-		  $jevenements = $jarticles;
-		  $jarticles = '';
-		} 
+		$arbrev = (!($articles[$d] OR $breves[$d]) ? '' :
+			   http_calendrier_articles_et_breves($articles[$d], $breves[$d], $style));
 		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
 			<div style='background-color: " . 
 			(($v['index'] == 0) ? $couleur_claire :
@@ -769,11 +761,9 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 			"border-bottom: 1px solid $couleur_claire; " .
 			"height: ${dimjour}px; " .
 			"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;'>" .
-			http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $jevenements, $d) . 
-			'</div></div>' .
-			(!($jarticles OR $jbreves) ? '' :
-				http_calendrier_articles_et_breves($jarticles, $jbreves,'padding: 5px;')) .
-			"\n</td>";
+			http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $evenements[$d], $d) . 
+						 (!_DIR_RESTREINT ? "</div></div>$arbrev" : "$arbrev</div></div>") .
+  			"\n</td>";
 	}
 	return 
 	"<table border='0' cellspacing='0' cellpadding='0' width='100%'>" .
@@ -1028,7 +1018,8 @@ function http_calendrier_jour_ics($debut, $fin, $largeur, $detcolor, $echelle, $
 	if ($echelle==0) $echelle = DEFAUT_D_ECHELLE;
 
 
-	list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin, $echelle);		$modif_decalage = round($largeur/8);
+	list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin, $echelle);
+	$modif_decalage = round($largeur/8);
 
 	$total = '';
 
@@ -1176,7 +1167,7 @@ function http_calendrier_init_jour($date, $echelle,  $partie_cal, $script){
 		$largeur_centre = $largeur_table - ($largeur_gauche + 20);
 	}
 		
-	$retour = "<div>&nbsp;</div><table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>";
+	$retour = "<div>&nbsp;</div><table cellpadding='0' cellspacing='0' border='0' width='$largeur_table'><tr>";
 	
 	if ($spip_ecran == "large") {
 		$retour .= "<td width='$largeur_gauche' class='verdana1' valign='top'>" .
@@ -1232,7 +1223,7 @@ function http_calendrier_init_semaine($date, $echelle, $partie_cal, $script)
 		sql_calendrier_interval_semaine($annee_today,$mois_today,$jour_today);
 	return 
 		"<div>&nbsp;</div>" .
-		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>" .
+		"<table cellpadding='0' cellspacing='0' border='0' width='$largeur_table'><tr>" .
 		"<td width='$largeur_table' valign='top'>" .
 	  http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, $articles, $breves, $messages, $partie_cal, $echelle, $script, '') .
 		"</td></tr></table>" .
@@ -1483,11 +1474,14 @@ function sql_calendrier_interval_mois($annee,$mois,$jour) {
 # 3 fonctions retournant les evenements d'une periode
 # le tableau retourne est indexe par les balises du format ics
 # afin qu'il soit facile de produire de tels documents.
+# Pour les articles post-dates vus de l'espace public,
+# on regarde si c'est une redirection pour avoir une url interessante
+# sinon on prend " ", c'est-a-dire la page d'appel du calendrier
 
 function sql_calendrier_interval_articles($avant, $apres) {
 	$evenements= array();
 	$result=spip_query("
-SELECT	id_article, titre, date, descriptif
+SELECT	id_article, titre, date, descriptif, chapo
 FROM	spip_articles
 WHERE	statut='publie'
  AND	date >= $avant
@@ -1503,14 +1497,26 @@ ORDER BY date
 	  }
 	while($row=spip_fetch_array($result)){
 		$amj = sql_calendrier_jour_ical($row['date']);
+		if ((!_DIR_RESTREINT) || ($now >= $amj))
+			$url = $script . $row['id_article'];
+		else {
+			if (substr($row['chapo'], 0, 1) != '=')
+				$url = " ";
+			else {
+				list(,$url) = extraire_lien(array('','','',
+					substr($row['chapo'], 1)));
+				if ($url)
+					$url = texte_script(str_replace('&amp;', '&', $url));
+				else $url = " ";
+			}
+		}
+
 		$evenements[$amj][]=
 		    array(
 			'CATEGORIES' => 'a',
 			'DESCRIPTION' => $row['descriptif'],
 			'SUMMARY' => $row['titre'],
-			'URL' => 
-			(((!_DIR_RESTREINT) || ($now >= $amj)) ?
-			 ($script . $row['id_article']) : ' '));
+			'URL' =>  $url);
 	}
 	return $evenements;
 }
