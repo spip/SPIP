@@ -5,7 +5,7 @@
 if (defined("_ECRIRE_INC_AUTH")) return;
 define("_ECRIRE_INC_AUTH", "1");
 
-include_ecrire ("inc_meta.php3");
+include_ecrire ("inc_meta.php3"); // amorce la connexion MySQL
 include_ecrire ("inc_session.php3");
 
 //

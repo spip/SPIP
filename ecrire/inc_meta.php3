@@ -19,17 +19,6 @@ function lire_metas() {
 	}
 }
 
-if (!defined("_ECRIRE_INC_META_CACHE")) {
-	function lire_meta($nom) {
-		global $meta;
-		return $meta[$nom];
-	}
-	function lire_meta_maj($nom) {
-		global $meta_maj;
-		return $meta_maj[$nom];
-	}
-}
-
 function ecrire_meta($nom, $valeur) {
 	$valeur = addslashes($valeur);
 	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('$nom', '$valeur')");
@@ -95,6 +84,6 @@ function lire_meta_maj($nom) {
 }
 
 
-if (!$GLOBALS['meta']) lire_metas();
+lire_metas();
 
 ?>

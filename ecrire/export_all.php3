@@ -23,7 +23,7 @@ if (!$debut_limit) $debut_limit = 0;
 
 install_debut_html("Sauvegarde");
 
-if (!$etape) echo "<p><font size=2>Si la sauvegarde a &eacute;chou&eacute; (&laquo;Maximum execution time exceeded&raquo;), <a href='export_all.php3?etape=1&gz=$gz'>proc&eacute;dez &eacute;tape par &eacute;tape</a>.</font><p>";
+if (!$etape) echo "<p><blockquote><font size=2>Si la sauvegarde a &eacute;chou&eacute; (&laquo;Maximum execution time exceeded&raquo;), <a href='export_all.php3?etape=1&gz=$gz'>proc&eacute;dez &eacute;tape par &eacute;tape</a>.</font></blockquote><p>";
 
 
 if ($etape < 2){
@@ -90,7 +90,7 @@ if (!$etape OR $etape == 13){
 
 
 
-	echo "<p><b>Sauvegarde r&eacute;ussie.</b> La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/$archive</b>. Vous pouvez <a href='index.php3'>retourner &agrave; la gestion</a> de votre site.\n";
+	echo "<p><b>Sauvegarde r&eacute;ussie.</b><p>La base a &eacute;t&eacute; sauvegard&eacute;e dans <b>ecrire/data/$archive</b>. Vous pouvez <a href='index.php3'>retourner &agrave; la gestion</a> de votre site.\n";
 }
 else {
 	$etape_suivante = $etape + 1;

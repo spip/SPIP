@@ -46,11 +46,7 @@ $chemin_cache = "CACHE/".$fichier_cache;
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
 
-
-if ($use_cache AND file_exists("ecrire/inc_meta_cache.php3")) {
-	include_ecrire("inc_meta_cache.php3");
-}
-if (!defined("_ECRIRE_INC_META_CACHE")) {
+if (!$use_cache OR !defined("_ECRIRE_INC_META_CACHE")) {
 	include_ecrire("inc_meta.php3");
 }
 
@@ -286,6 +282,7 @@ if ($admin_ok AND !$flag_preserver AND !$flag_boutons_admin) {
 //
 
 if ($db_ok AND lire_meta("activer_syndic") != "non") {
+	flush();
 	include_ecrire("inc_texte.php3");
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_sites.php3");

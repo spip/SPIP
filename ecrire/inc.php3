@@ -7,7 +7,6 @@ if (!file_exists("inc_connect.php3")) {
 
 include ("inc_version.php3");
 
-include_ecrire("inc_meta.php3");
 include_ecrire("inc_auth.php3");
 
 include_ecrire("inc_presentation.php3");
