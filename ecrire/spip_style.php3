@@ -102,17 +102,31 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .cellule48 a.selection {
 	display: block; text-align: center; background: url(img_pack/pave-gris-48.png) no-repeat top center;
 }
-.cellule36 a:hover {
+/*.cellule36 a:hover {
 	background: url(img_pack/pave-blanc-36.png) no-repeat top center;
 }
 .cellule48 a:hover {
 	background: url(img_pack/pave-blanc-48.png) no-repeat top center;
-}
+}*/
 .cellule36 a img {
 	border: 0px; margin: 6px; display: inline;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.cellule36 a.selection img, .cellule36 a:hover img {
+	border: 0px; margin: 6px; display: inline;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
 }
 .cellule48 a img {
 	border: 0px; margin: 3px; display: inline;
+	-moz-opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+.cellule48 a.selection img, .cellule48 a:hover img {
+	border: 0px; margin: 3px; display: inline;
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
 }
 .cellule36 a span, .cellule48 a span {
 	color: #505050; display: block; margin: 2px;
@@ -185,8 +199,16 @@ a.cellule-h {
 a.cellule-h {
 	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
 }
-a.cellule-h:hover {
+/*a.cellule-h:hover {
 	text-decoration: none; background: url(img_pack/pave-blanc-24.png) no-repeat center <?php echo $left; ?>;
+}*/
+a.cellule-h img {
+	-moz-opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+a.cellule-h:hover img {
+	-moz-opacity: 1;
+	filter: alpha(opacity=100);
 }
 .danger a.cellule-h {
 	text-decoration: none; background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
