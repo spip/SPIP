@@ -310,7 +310,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 	echo $link->getForm('POST', '', 'multipart/form-data');
 
 	if (tester_upload()) {
-		echo "<br><b>$intitule</b>";
+		echo "<b>$intitule</b>";
 		echo "<br><small><input name='image' type='File' class='fondl' size='15'>\n";
 		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div></small>\n";
 	}
@@ -583,12 +583,15 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				if ($flag_deplie) echo debut_block_visible($block);
 				else  echo debut_block_invisible($block);
 			
-				echo "<b>"._T('info_vignette_defaut')."</b>";
-
 				if ($flag_modif) {
-					echo "<p></p><div><font size=1>";
+					echo bouton_block_invisible("doc_vignette_gerer $id_document");
+					echo "<b>"._T('info_vignette_defaut')."</b>";
+					
+					echo debut_block_invisible("doc_vignette_gerer $id_document");
+					echo "<font size=1>";
 					afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
-					echo "</font></div>";
+					echo "</font>";
+					echo fin_block();
 				}
 				echo fin_block();
 			}
@@ -933,12 +936,18 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if ($options == 'avancees'){
 				if ($flag_deplie) echo debut_block_visible("doc_vignette $id_document");
 				else  echo debut_block_invisible("doc_vignette $id_document");
-				echo "<b>"._T('info_vignette_defaut')."</b>";
 
-				echo "<p></p><div><font size=1>";
-				afficher_upload($link, _T('info_remplacer_vignette_defaut'), 'image', false);
-				echo "</font></div>";
+				echo bouton_block_invisible("doc_vignette_gerer $id_document");
+				echo "<b>"._T('info_vignette_defaut')."</b>";
+					
+				echo debut_block_invisible("doc_vignette_gerer $id_document");
+				echo "<font size=1>";
+				afficher_upload($link, _T('info_remplacer_vignette'), 'image', false);
+				echo "</font>";
 				echo fin_block();
+				
+				echo fin_block();
+
 			}
 			echo "</div></font>\n";
 		}
@@ -1024,8 +1033,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "<p></p><div align='center'>";
 		icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 		echo "</div>";
-		echo fin_block();
-
+	
 		//echo "</div>\n";
 		fin_cadre_enfonce();
 	}
