@@ -82,23 +82,39 @@ function xhtml ($buffer) {
 		else if ($charset == "utf-8") $enc_char = "utf8";
 		else return echappe_retour($buffer, $les_echap, "xhtml");
 
-		$nomfich = _DIR_CACHE."bidouille".rand();
-		$f = fopen($nomfich, 'wb');
-		fputs($f, $buffer);
-		fclose($f);
-		
-		exec("$tidy_command --tidy-mark false --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $nomfich");
-		
-		$tidy = join(file($nomfich),"");
-		@unlink($nomfich);
-		
-		$tidy = echappe_retour($tidy, $les_echap, "xhtml");
-		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
-		//$tidy = ereg_replace ("\/\*\<\!\[CDATA\[\*\/\n*", "", $tidy);
-		//$tidy = ereg_replace ("\/\*\]\]>\*\/", "", $tidy);
-		
-		return $tidy;
+		$cache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'tidy');
+		$nomfich = $cache.'tidy'.md5($buffer);
+		if (!file_exists($nomfich)) {
+			$tmp = "$nomfich.".@getmypid().".tmp";
+			ecrire_fichier($tmp, $buffer);
 
+			$c = "$tidy_command --tidy-mark false --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $tmp"; #." 2>$nomfich.err";
+			spip_log ($c);
+
+			exec("$tidy_command --tidy-mark false --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $tmp");
+			rename($tmp,$nomfich);
+		}
+
+		if (lire_fichier($nomfich, $tidy)
+		AND strlen(trim($tidy)) > 0) {
+			// purger le petit cache toutes les 5 minutes
+			spip_touch($nomfich); # rester vivant
+			if (spip_touch($cache.'purger_tidy', 300, true)) {
+				if ($h = @opendir($cache)) {
+					while (($f = readdir($h)) !== false) {
+						if (substr($f, 0, 4) == 'tidy'
+						AND time() - filemtime("$cache$f") > 300) {
+							@unlink("$cache$f");
+						}
+					}
+				}
+			}
+
+			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
+			$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
+			return $tidy;
+		} else
+			return $buffer; # echec de tidy
 	}
 	else if (version_tidy() == "1") {
 		include_ecrire("inc_texte.php3");

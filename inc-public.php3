@@ -45,7 +45,8 @@ if (defined("_INC_PUBLIC")) {
 	
 		// Une page "normale" va s'afficher ici
 		if (!($flag_ob AND ($var_mode == 'debug'
-		OR $var_recherche OR $affiche_boutons_admin))) {
+		OR $var_recherche OR $affiche_boutons_admin
+		OR $xhtml_page))) {
 			eval('?' . '>' . $page['texte']);
 			$page = '';
 		}
@@ -86,6 +87,12 @@ if (defined("_INC_PUBLIC")) {
 	if ($affiche_boutons_admin) {
 		include_local("inc-admin.php3");
 		$page = affiche_boutons_admin($page);
+	}
+
+	// Appliquer tidy au besoin
+	if (trim($page) AND $GLOBALS['xhtml_page']) {
+		include_ecrire('inc_tidy.php');
+		$page = xhtml($page);
 	}
 
 	// Affichage final s'il en reste
