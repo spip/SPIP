@@ -67,7 +67,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	      {$id_table = $table_des_tables[$type_boucle]; 
 		$boucle->select[] = "$id_table.$primary_key";
 		$invalide = '
-		$Cache["' . $primary_key . '"][$PileRow[$SP]["'  .
+		$Cache["' . $primary_key . '"][$Pile[$SP]["'  .
 		  $primary_key . '"]]=1;';
 	      }
 	  }
@@ -77,7 +77,7 @@ function calculer_boucle($id_boucle, &$boucles)
 		if	($compteur_boucle >= $debut_boucle AND 
 			 $compteur_boucle <= $fin_boucle) {') .
 	  (((!$lang_select)||($return == "''")) ? "" : ('
-		if ($x = $PileRow[$SP]["lang"]) $GLOBALS["spip_lang"] = $x;')) .
+		if ($x = $Pile[$SP]["lang"]) $GLOBALS["spip_lang"] = $x;')) .
 	  $invalide .
 	  ((!$boucle->doublons) ? "" : 
 	   ("\n\t\t\$doublons['$type_boucle'] .= ','. " .
@@ -106,10 +106,10 @@ function calculer_boucle($id_boucle, &$boucles)
 	$hierarchie = ' . ($boucle->tout ?  $boucle->tout : 
 			   // sinon,  parame`tre passe' par include.
 			   // me^me code, mais a` inexe'cutable a` la compilation:
-			   '(($PileRow[0]["id_article"] ||
-	      $PileRow[0]["id_syndic"]) ?
-	    $PileRow[0]["id_rubrique"] :
-	    $PileRow[0]["id_parent"])') .
+			   '(($Pile[0]["id_article"] ||
+	      $Pile[0]["id_syndic"]) ?
+	    $Pile[0]["id_rubrique"] :
+	    $Pile[0]["id_parent"])') .
 	      ';
 	$h0 = "";
 	while ($hierarchie) {';
@@ -134,9 +134,9 @@ function calculer_boucle($id_boucle, &$boucles)
 		  (
 		   ((!$lang_select) ? "" : '
 	$old_lang = $GLOBALS[\'spip_lang\'];') . '
-	while ($PileRow[$SP] = @spip_fetch_array($result)) {' .
+	while ($Pile[$SP] = @spip_fetch_array($result)) {' .
 		((!$flag_h) ? "" : '
-		 $hierarchie = $PileRow[$SP][id_parent];') .
+		 $hierarchie = $Pile[$SP][id_parent];') .
 		$corps .
 		"\n\t}" .
 		((!$lang_select) ? "" : '
@@ -237,7 +237,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 	      
 	      $c = $prefix .
 		ereg_replace("-","_", $nom) .
-		'($Cache, $PileRow, $doublons, $Numrows, $SP)';
+		'($Cache, $Pile, $doublons, $Numrows, $SP)';
 	      $m = "";
 	    } else {
 	      list($c,$m) = 
@@ -323,7 +323,8 @@ function calculer_squelette($squelette, $nom, $gram) {
   $boucles = '';
   include_local("inc-$gram-squel.php3");
   $racine = parser($squelette, '',$boucles);
-
+#  include_local('inc-debug.php3');
+#  affboucles($boucles);
   // Traduction des se'quences syntaxique des boucles 
 
   if ($boucles)
@@ -389,13 +390,13 @@ function calculer_squelette($squelette, $nom, $gram) {
       foreach($boucles as $id => $boucle) 
 	{
 	  $code .= "\n\nfunction $nom" . ereg_replace("-","_",$id) .
-		'(&$Cache, &$PileRow, &$doublons, &$Numrows, $SP) {' .
+		'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 	    $boucle->return .
 	    "\n}\n";
 	}
     }
   return $code . '
-function ' . $nom . '($Cache, $PileRow, $doublons, $Numrows="", $SP=0)
+function ' . $nom . '($Cache, $Pile, $doublons, $Numrows="", $SP=0)
  {
 ' .
     $corps . "\n \$t0 = " . $return . ';

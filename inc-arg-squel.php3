@@ -187,13 +187,16 @@ function calculer_params($type, $params, $idb, &$boucles)
 	if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
 	  $col = $regs[1];
 	  if ($regs[2]) {
-	    $date_orig = $id_table . ".'.'." . '$PileRow[0][date_redac]';
-	    $date_compare = '\'" . $PileRow[0][date_redac] . "\'';
+	    $date_orig = $id_table . ".date_redac";
+	    $date_compare = '\'" . normaliser_date(' .
+	      index_pile($boucle->id_parent, 'date_redac', $boucles) . ') . \'"';
 	  }
 	  else {
 	    $date_orig = "$id_table." . $table_date[$type];
-	    $date_compare = '\'" . $PileRow[0][date] . "\'';
+	    $date_compare = '\'" . normaliser_date(' .
+	      index_pile($boucle->id_parent, 'date', $boucles) . ') . "\'';
 	  }
+
 	  if ($col == 'date')
 	    $col = $date_orig;
 	  else if ($col == 'mois') {
@@ -205,7 +208,7 @@ function calculer_params($type, $params, $idb, &$boucles)
 	    $col_table = '';
 	  }
 	  else if ($col == 'age') {
-	    $col = calculer_param_date('now()', $date_orig);
+	    $col = calculer_param_date("now()", $date_orig);
 	    $col_table = '';
 	  }
 	  else if ($col == 'age_relatif') {
@@ -334,7 +337,7 @@ function calculer_param_dynamique($val, &$boucles, $idb)
     return index_pile($boucles[$idb]->id_parent, $m[1], $boucles) ;
   else
     {if (ereg('^\$(.*)$',$val,$m))
-	return '$PileRow[0][\''. $m[1] ."']";
+	return '$Pile[0][\''. $m[1] ."']";
       else return $val;
     }
 }

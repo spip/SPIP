@@ -34,8 +34,8 @@ function calculer_champ_LANG ($fonctions, $nom_champ, $id_boucle, &$boucles, $id
 
 function calculer_champ_LESAUTEURS ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 {
-  $code = index_pile($id_boucle,  "lesauteurs", $boucles);
-  if ((!$code) || ($code == '$PileRow[0][lesauteurs]'))
+  $code = index_pile($id_boucle, 'lesauteurs', $boucles);
+  if ((!$code) || ($code == '$Pile[0][lesauteurs]'))
     $code = 'query_auteurs(' .
       index_pile($id_boucle,  "id_article", $boucles) .
       ')';    

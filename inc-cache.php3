@@ -412,7 +412,7 @@ function retire_caches($caches)
       foreach ($caches as $path)
 	{ if (is_cache($path, $dir))
 	    @unlink($GLOBALS['flag_ecrire'] ? ('../' . $path) : $path);
-	  else die(_T('info_acces_refuse') . ": $path");
+	  else die(_T('info_acces_refuse') . ": '$path'");
 	}
     }
 }
