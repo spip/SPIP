@@ -11,7 +11,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
 
-
 // A
 'admin_modifier_article' => 'Modifier cet article',
 'admin_modifier_auteur' => 'Modifier cet auteur',
@@ -45,7 +44,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Erreur: voir ci-dessous',
 'avis_erreur_connexion' => 'Erreur de connexion',
 'avis_erreur_connexion_mysql' => 'Erreur de connexion MySQL',
-'avis_erreur_cookie' => 'probl&egrave;me de cookie',
 'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
@@ -73,11 +71,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_suppression_base' => 'ATTENTION, la suppression des donn&eacute;es est irr&eacute;versible',
 'avis_version_mysql' => 'Votre version de MySQL (@version_mysql@) ne permet pas l\'auto-r&eacute;paration des tables de la base.',
 
-
 // B
 'barre_a_accent_grave' => 'Ins&eacute;rer un A accent grave majuscule',
 'barre_aide' => 'Utilisez les raccourcis typographiques pour enrichir votre mise en page',
-'barre_aide_rac' => 'En savoir plus sur les raccourcis typographiques',
 'barre_e_accent_aigu' => 'Ins&eacute;rer un E accent aigu majuscule',
 'barre_eo' => 'Ins&eacute;rer un E dans l\'O',
 'barre_eo_maj' => 'Ins&eacute;rer un Edans l\'O majuscule',
@@ -171,10 +167,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_vider_cache' => 'Vider le cache',
 'bouton_voir_message' => 'Voir ce message avant de le valider',
 
-
 // C
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
-
 
 // D
 'date_avant_jc' => 'av. J.C.',
@@ -255,7 +249,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_preliminaire' => 'Pr&eacute;liminaire : <B>R&eacute;gler les droits d\'acc&egrave;s</B>',
 'dirs_probleme_droits' => '<b>Probl&egrave;me de droits d\'acc&egrave;s</b>',
 'dirs_repertoires_absents' => '<B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
-		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
+		<P>Il est probable que cela soit d&ucirc; &agrave; un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
 		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
 		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
 		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
@@ -263,7 +257,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		<P>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
 		de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.
 		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
-
 
 // E
 'email' => 'email',
@@ -313,7 +306,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'erreur_boucle_syntaxe' => 'Syntaxe boucle incorrecte',
 'erreur_boucle_syntaxe2' => 'La boucle @milieu@ est incorrecte.',
 'erreur_filtre' => 'Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
-
 
 // F
 'form_deja_inscrit' => 'Vous &ecirc;tes d&eacute;j&agrave; inscrit.',
@@ -415,7 +407,6 @@ Merci de votre participation
 		&eacute;t&eacute; fourni. Si vous n\'&ecirc;tes pas enregistr&eacute;, vous devez',
 'forum_vous_inscrire' => 'vous inscrire </a> au pr&eacute;alable.',
 
-
 // I
 'ical_info1' => 'Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
 'ical_info2' => 'Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
@@ -445,7 +436,6 @@ Merci de votre participation
 'icone_breves' => 'Br&egrave;ves',
 'icone_brouteur' => 'Navigation rapide',
 'icone_calendrier' => 'Calendrier',
-'icone_calendrier_messagerie' => 'Agenda et messagerie',
 'icone_configuration_site' => 'Configuration du site',
 'icone_configurer_site' => 'Configurer votre site',
 'icone_creation_groupe_mots' => 'Cr&eacute;er un nouveau groupe de mots',
@@ -463,12 +453,9 @@ Merci de votre participation
 'icone_ecrire_nouvel_article' => 'Les br&egrave;ves contenues dans cette rubrique',
 'icone_edition_site' => '&Eacute;dition du&nbsp;site',
 'icone_envoyer_message' => 'Envoyer ce message',
-'icone_etat_traductions' => '&Eacute;tat des traductions',
 'icone_evolution_visites' => '&Eacute;volution des visites<br>@visites@ visites',
 'icone_forum_administrateur' => 'Forum des administrateurs',
-'icone_forum_interne' => 'Forum interne',
 'icone_forum_suivi' => 'Suivi des forums',
-'icone_forums_petitions' => 'Forums et p&eacute;titions',
 'icone_gestion_langues' => 'Gestion des langues',
 'icone_informations_personnelles' => 'Informations personnelles',
 'icone_interface_complet' => 'interface compl&egrave;te',
@@ -478,7 +465,6 @@ Merci de votre participation
 'icone_modif_groupe_mots' => 'Modifier ce groupe de mots',
 'icone_modifier_article' => 'Modifier cet article',
 'icone_modifier_breve' => 'Modifier cette br&egrave;ve',
-'icone_modifier_informations_personnelles' => 'Modifier vos informations personnelles',
 'icone_modifier_message' => 'Modifier ce message',
 'icone_modifier_rubrique' => 'Modifier cette rubrique',
 'icone_modifier_site' => 'Modifier ce site',
@@ -636,7 +622,6 @@ Merci de votre participation
 'info_creer_base' => '<B>Cr&eacute;er</B> une nouvelle base de donn&eacute;es&nbsp;:',
 'info_creer_repertoire' => 'Veuillez cr&eacute;er un fichier ou un r&eacute;pertoire nomm&eacute;&nbsp;:',
 'info_creer_repertoire_2' => '&agrave; l\'int&eacute;rieur du sous-r&eacute;pertoire <b>ecrire/data/</b>, puis&nbsp;:',
-'info_dans_espace_prive' => '[dans l\'espace priv&eacute;]',
 'info_dans_groupe' => 'Dans le groupe :',
 'info_dans_rubrique' => 'Dans la rubrique :',
 'info_date_publication_anterieure' => 'Date de publication ant&eacute;rieure :',
@@ -672,8 +657,6 @@ Merci de votre participation
 'info_email_webmestre' => 'Adresse e-mail du webmestre (optionnel)',
 'info_en_cours_validation' => 'Vos articles en cours de r&eacute;daction',
 'info_en_ligne' => 'Actuellement en ligne&nbsp;:',
-'info_en_test_1' => '&nbsp;(en&nbsp;test)',
-'info_en_test_2' => '(en test)',
 'info_entrer_code_alphabet' => 'Entrez le code de l\'alphabet &agrave; utiliser&nbsp;:',
 'info_envoi_email_automatique' => 'Envoi de mails automatique',
 'info_envoi_forum' => 'Envoi des forums aux auteurs des articles',
@@ -758,16 +741,11 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_la_breve' => 'la br&egrave;ve',
 'info_la_rubrique' => 'la rubrique',
 'info_laisser_champs_vides' => 'laisser ces champs vides)',
-'info_langue_defaut' => 'Langue par d&eacute;faut&nbsp;:',
-'info_langue_interface' => 'Langue de l\'interface',
 'info_langue_principale' => 'Langue principale du site',
 'info_langues' => 'Langues du site',
-'info_langues_proposees' => 'Langues propos&eacute;es&nbsp;:',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_ldap_ok' => 'L\'authentification LDAP est install&eacute;e.',
 'info_les_auteurs_1' => 'par @les_auteurs@',
-'info_lettre_heures' => 'H',
-'info_lien' => 'lien :',
 'info_lien_hypertexte' => 'Lien hypertexte :',
 'info_liens_syndiques_1' => 'liens syndiqu&eacute;s',
 'info_liens_syndiques_2' => 'sont en attente de validation.',
@@ -842,7 +820,6 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_non_suppression_mot_cle' => 'je ne veux pas supprimer ce mot-cl&eacute;.',
 'info_non_utilisation_messagerie' => 'Vous n\'utilisez pas la messagerie interne de ce site.',
 'info_notes' => 'Notes',
-'info_nouveau' => '(Nouveau)',
 'info_nouveau_message' => 'VOUS AVEZ UN NOUVEAU MESSAGE',
 'info_nouveaux_message' => 'Nouveaux messages',
 'info_nouveaux_messages' => 'VOUS AVEZ @total_messages@ NOUVEAUX MESSAGES',
@@ -932,7 +909,6 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_refuses' => 'Vos articles refus&eacute;s',
 'info_reglage_ldap' => 'Options : <B>R&eacute;glage de l\'importation LDAP</B>',
 'info_remplacer_vignette' => 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:',
-'info_remplacer_vignette_defaut' => 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:',
 'info_renvoi_article' => '<B>Redirection.</B> Cet article renvoie &agrave; la page:',
 'info_reserve_admin' => 'Seuls les administrateurs peuvent modifier cette adresse.',
 'info_restauration_sauvegarde' => 'restauration de la sauvegarde @archive@',
@@ -1007,7 +983,6 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_suivi_activite' => 'Suivi de l\'activit&eacute; &eacute;ditoriale',
 'info_supprimer_mot' => 'supprimer&nbsp;ce&nbsp;mot',
 'info_supprimer_vignette' => 'supprimer la vignette',
-'info_sur_site_public' => '[sur le site public]',
 'info_surtitre' => 'Surtitre :',
 'info_symbole_bleu' => 'Le symbole <B>bleu</B> indique un <B>pense-b&ecirc;te</B>: c\'est-&agrave;-dire un message &agrave; votre usage personnel.',
 'info_symbole_jaune' => 'Le symbole <B>jaune</B> indique une <B>annonce &agrave; tous les r&eacute;dacteurs</B>&nbsp;: modifiable par tous les administrateurs, et visible par tous les r&eacute;dacteurs.',
@@ -1030,12 +1005,10 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_tous_articles_en_redaction' => 'Tous les articles en cours de r&eacute;daction',
 'info_tous_articles_presents' => 'Tous les articles publi&eacute;s dans cette rubrique',
 'info_tous_les' => 'tous les :',
-'info_tous_redacteur' => 'Annonces &agrave; tous les r&eacute;dacteurs',
 'info_tous_redacteurs' => 'Annonces &agrave; tous les r&eacute;dacteurs',
 'info_tous_resultats_enregistres' => '[tous les r&eacute;sultats sont enregistr&eacute;s]',
 'info_tout_afficher' => 'Tout afficher',
 'info_tout_site' => 'Tout le site',
-'info_tout_site1' => 'Langue de l\'article.',
 'info_tout_site2' => 'L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
 'info_tout_site3' => 'L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
 'info_tout_site4' => 'L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
@@ -1077,7 +1050,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_accepter_inscriptions' => 'Accepter les inscriptions',
 'item_activer_forum_administrateur' => 'Activer le forum des administrateurs',
 'item_activer_messages_avertissement' => 'Activer les messages d\'avertissement',
-'item_administrateur' => 'Administrateur',
 'item_administrateur_2' => 'administrateur',
 'item_afficher_calendrier' => 'Afficher dans le calendrier',
 'item_ajout_mots_cles' => 'Autoriser l\'ajout de mots-cl&eacute;s aux forums',
@@ -1094,7 +1066,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_choix_visiteurs' => 'les visiteurs du site public',
 'item_creer_fichiers_authent' => 'Cr&eacute;er les fichiers .htpasswd',
 'item_desactiver_forum_administrateur' => 'D&eacute;sactiver le forum des administrateurs',
-'item_efface' => 'Effac&eacute;',
 'item_gerer_annuaire_site_web' => 'G&eacute;rer un annuaire de sites Web',
 'item_gerer_statistiques' => 'G&eacute;rer les statistiques',
 'item_limiter_recherche' => 'Limiter la recherche aux informations contenues dans votre site',
@@ -1125,9 +1096,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_nouvelle_breve' => 'Nouvelle br&egrave;ve',
 'item_nouvelle_rubrique' => 'Nouvelle rubrique',
 'item_oui' => 'Oui',
-'item_premier' => '1er',
 'item_publier_articles' => 'Publier les articles, quelle que soit leur date de publication.',
-'item_redacteur' => 'R&eacute;dacteur',
 'item_reponse_article' => 'R&eacute;ponse &agrave; l\'article',
 'item_utiliser_breves' => 'Utiliser les br&egrave;ves',
 'item_utiliser_config_groupe_mots_cles' => 'Utiliser la configuration avanc&eacute;e des groupes de mots-cl&eacute;s',
@@ -1136,10 +1105,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_utiliser_syndication' => 'Utiliser la syndication automatique',
 'item_visiteur' => 'visiteur',
 
-
 // J
 'jour_non_connu_nc' => 'n.c.',
-
 
 // L
 'lien_afficher_icones_seuls' => 'Afficher uniquement les icones',
@@ -1154,7 +1121,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'lien_liberer' => 'lib&eacute;rer',
 'lien_liberer_tous' => 'lib&eacute;rer ces articles',
 'lien_mise_a_jour_syndication' => 'Mettre &agrave; jour maintenant',
-'lien_modifer_date' => 'Modifier la date',
 'lien_nom_site' => 'NOM DU SITE :',
 'lien_nouvea_pense_bete' => 'NOUVEAU PENSE-B&Ecirc;TE',
 'lien_nouveau_message' => 'NOUVEAU MESSAGE',
@@ -1164,8 +1130,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'lien_popularite' => 'popularit&eacute;&nbsp;: @popularite@%',
 'lien_racine_site' => 'RACINE DU SITE',
 'lien_reessayer' => 'r&eacute;essayer',
-'lien_rendez_vous' => 'UN RENDEZ-VOUS',
-'lien_rendez_vous_02' => '@total_messages@ RENDEZ-VOUS',
 'lien_repondre_message' => 'R&eacute;pondre &agrave; ce message',
 'lien_reponse_article' => 'R&eacute;ponse &agrave; l\'article',
 'lien_reponse_breve' => 'R&eacute;ponse &agrave; la br&egrave;ve',
@@ -1177,7 +1141,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'lien_site' => 'site',
 'lien_supprimer' => 'supprimer',
 'lien_supprimer_rubrique' => 'supprimer cette rubrique',
-'lien_test_format_image' => 'Tester les formats d\'image que ce site peut utiliser pour cr&eacute;er des vignettes',
 'lien_tout_afficher' => 'Tout afficher',
 'lien_tout_deplier' => 'Tout d&eacute;plier',
 'lien_tout_replier' => 'Tout replier',
@@ -1188,7 +1151,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'lien_visites' => '@visites@&nbsp;visites',
 'lien_voir_auteur' => 'Voir cet auteur',
 'lien_voir_en_ligne' => 'VOIR EN LIGNE :',
-'lnfo_liens' => 'liens :',
 'login_acces_prive' => 'acc&egrave;s &agrave; l\'espace priv&eacute;',
 'login_autre_identifiant' => 'se connecter sous un autre identifiant',
 'login_connexion_refusee' => 'Connexion refus&eacute;e.',
@@ -1198,7 +1160,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'login_erreur_pass' => 'Erreur de mot de passe.',
 'login_espace_prive' => 'espace priv&eacute;',
 'login_identifiant_inconnu' => 'L\'identifiant &laquo; @login@ &raquo; est inconnu.',
-'login_identification' => 'identification',
 'login_login' => 'Login :',
 'login_login2' => 'Login (identifiant de connexion au site)&nbsp;:',
 'login_login_pass_incorrect' => '(Login ou mot de passe incorrect.)',
@@ -1228,7 +1189,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'logo_site' => 'LOGO DE CE SITE',
 'logo_standard_rubrique' => 'LOGO STANDARD DES RUBRIQUES',
 'logo_survol' => 'LOGO POUR SURVOL',
-
 
 // M
 'menu_aide_articles' => 'Les articles',
@@ -1305,26 +1265,18 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'module_texte_traduction' => 'Le fichier de langue &laquo;&nbsp;@module@&nbsp;&raquo; est disponible en&nbsp;:',
 'mois_non_connu' => 'non connu',
 
-
 // N
 'navigateur_pas_redirige' => 'Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
 
-
 // O
 'onglet_affacer_base' => 'Effacer la base',
-'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'auteur',
-'onglet_bilan_traductions' => 'Bilan des traductions',
-'onglet_calendrier' => 'Calendrier',
 'onglet_contenu_site' => 'Contenu du site',
-'onglet_detail_traductions' => 'Les articles &agrave; traduire',
 'onglet_evolution_visite_mod' => '&Eacute;volution',
 'onglet_fonctions_avances' => 'Fonctions avanc&eacute;es',
 'onglet_informations_personnelles' => 'Informations personnelles',
 'onglet_interactivite' => 'Interactivit&eacute;',
-'onglet_langues' => 'Langues',
 'onglet_messagerie' => 'Messagerie',
-'onglet_messagerie_personnelle' => 'Messagerie personnelle',
 'onglet_messages_internes' => 'Messages internes',
 'onglet_messages_publics' => 'Messages publics',
 'onglet_messages_vide' => 'Messages sans texte',
@@ -1335,7 +1287,6 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'onglet_repartition_rubrique' => 'R&eacute;partition par rubriques',
 'onglet_save_restaur_base' => 'Sauvegarder/restaurer la base',
 'onglet_vider_cache' => 'Vider le cache',
-
 
 // P
 'pass_choix_pass' => 'Veuillez choisir votre nouveau mot de passe :',
@@ -1379,11 +1330,9 @@ et vous reconnecter au site.
 'pass_rien_a_faire_ici' => 'Rien &agrave; faire ici.',
 'pass_vousinscrire' => 'Vous inscrire sur ce site',
 
-
 // S
 'stats_visites_et_popularite' => '@visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
 'statut_admin_restreint' => '(admin restreint)',
-
 
 // T
 'taille_ko' => '@taille@&nbsp;ko',
@@ -1411,14 +1360,12 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_auteur_messagerie' => 'Ce site peut vous indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce qui vous permet d\'&eacute;changer des messages en direct (lorsque la messagerie est d&eacute;sactiv&eacute;e ci-dessus, la liste des r&eacute;dacteurs est elle-m&ecirc;me d&eacute;sactiv&eacute;e). Vous pouvez d&eacute;cider de ne pas appara&icirc;tre dans cette liste (vous &ecirc;tes &laquo;&nbsp;invisible&nbsp;&raquo; pour les autres utilisateurs).',
 'texte_auteur_messagerie_1' => 'Ce site permet l\'&eacute;change de messages et la constitution de forums de discussion priv&eacute;s entre les participants du site. Vous pouvez d&eacute;cider de ne pas participer &agrave; ces &eacute;changes.',
 'texte_auteurs' => 'LES AUTEURS',
-'texte_bilan_traductions' => 'Dans ce graphique, les barres vertes repr&eacute;sentent les articles traduits et &agrave; jour, les barres rouges les traductions devant &ecirc;tre mises &agrave; jour.',
 'texte_breves' => 'Les br&egrave;ves sont des textes courts et simples permettant de
 	mettre en ligne rapidement des informations concises, de g&eacute;rer
 	une revue de presse, un calendrier d\'&eacute;v&eacute;nements...',
 'texte_choix_base_1' => 'Choisissez votre base :',
 'texte_choix_base_2' => 'Le serveur MySQL contient plusieurs bases de donn&eacute;es.',
 'texte_choix_base_3' => '<B>S&eacute;lectionnez</B> ci-apr&egrave;s celle qui vous a &eacute;t&eacute; attribu&eacute;e par votre h&eacute;bergeur:',
-'texte_choix_langue_defaut' => 'Veuillez choisir ci-dessous la langue par d&eacute;faut de votre site, ainsi que les langues qui seront propos&eacute;es aux r&eacute;dacteurs.',
 'texte_commande_vider_tables_indexation' => 'Utilisez cette commande afin de vider les tables d\'indexation utilis&eacute;es
 			par le moteur de recherche int&eacute;gr&eacute; &agrave; SPIP. Cela vous permettra
 			de gagner de l\'espace disque.',
@@ -1546,16 +1493,6 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_nouvelle_version_spip_1' => 'Vous avez install&eacute; une nouvelle version de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier <tt>inc_connect.php3</tt> du r&eacute;pertoire <tt>ecrire</tt> et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un oeil au fichier <tt>inc_connect.php3</tt> avant de le supprimer...)',
 'texte_operation_echec' => 'Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.',
-'texte_plan_trad' => 'Cette page vous permet de visualiser l\'&eacute;tat des traductions pour la langue choisie. 
-		La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave jour, 
-		ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
-'texte_plan_trad_en_cours' => 'Ce symbole indique qu\'un article est en cours de traduction&nbsp;: cela veut dire qu\'une traduction 
-		a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
-		&agrave; la traduction. ',
-'texte_plan_trad_modif' => 'Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave 
-		un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
-		traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
-'texte_plan_trad_note' => 'Note&nbsp;: seuls les articles publi&eacute;s sont affich&eacute;s dans cette page.',
 'texte_plus_trois_car' => 'plus de 3 caract&egrave;res',
 'texte_plusieurs_articles' => 'Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)',
@@ -1659,9 +1596,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_admin_tech' => 'Maintenance technique',
 'titre_admin_vider' => 'Maintenance technique',
 'titre_ajouter_mot_cle' => 'AJOUTER UN MOT-CL&Eacute; :',
-'titre_articles_populaires' => 'Articles les plus populaires',
 'titre_articles_syndiques' => 'Articles syndiqu&eacute;s tir&eacute;s de ce site',
-'titre_articles_visites' => 'Articles les plus visit&eacute;s',
 'titre_breve_proposee' => 'Br&egrave;ve propos&eacute;e',
 'titre_breve_publiee' => 'Br&egrave;ve publi&eacute;e',
 'titre_breve_refusee' => 'Br&egrave;ve refus&eacute;e',
@@ -1710,7 +1645,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_nouvelle_rubrique' => 'Nouvelle rubrique',
 'titre_numero_rubrique' => 'RUBRIQUE NUM&Eacute;RO&nbsp;:',
 'titre_page_admin_effacer' => 'Maintenance technique : effacer la base',
-'titre_page_admin_vider' => 'Maintenance technique : gestion du cache',
 'titre_page_articles_edit' => 'Modifier : @titre@',
 'titre_page_articles_page' => 'Les articles',
 'titre_page_articles_tous' => 'Tout le site',
@@ -1724,7 +1658,6 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_page_controle_petition' => 'Suivi des p&eacute;titions',
 'titre_page_delete_all' => 'suppression totale et irr&eacute;versible',
 'titre_page_documents_liste' => 'Les documents des rubriques',
-'titre_page_etat_traductions' => '&Eacute;tat des traductions',
 'titre_page_forum' => 'Forum des administrateurs',
 'titre_page_forum_envoi' => 'Envoyer un message',
 'titre_page_forum_suivi' => 'Suivi des forums',
