@@ -312,7 +312,7 @@ function bouton_admin($titre, $lien) {
 }
 
 
-if (($admin_ok OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
+if ($admin_ok AND !$flag_preserver) {
 	include_ecrire("inc_filtres.php3");
 
 	if ($id_article) {
