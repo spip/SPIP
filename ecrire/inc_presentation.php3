@@ -751,7 +751,7 @@ function debut_html($titre = "") {
 
 
 	.reliefblanc {background-image: url(img_pack/barre-blanc.gif)}
-	.reliefgris {background-image: url(img_pack/barre-gris.gif)}
+	.reliefgris {background-image: url(img_pack/barre-noir.gif)}
 	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #e4e4e4}
 	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
 	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #cccccc;}
@@ -835,7 +835,7 @@ afficher_script_layer();
 // Fonctions onglets
 
 function onglet_relief_inter(){
-	echo "<td background='img_pack/barre-gris.gif'><img src='img_pack/rien.gif' alt='' width='1' height='40'></td>";
+	echo "<td background='img_pack/barre-noir.gif'><img src='img_pack/rien.gif' alt='' width='1' height='40'></td>";
 }
 
 function debut_onglet(){
@@ -900,12 +900,12 @@ function barre_onglets($rubrique, $onglet){
 		$activer_messagerie=lire_meta("activer_messagerie");
 		$activer_imessage=lire_meta("activer_imessage");
 		
-		onglet("L'auteur", "auteur_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
+		onglet("L'auteur", "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
 		onglet("Informations personnelles", "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
 		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur){
 			onglet("Messagerie", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
 		}
-		onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
+		//onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
 	}
 
 	if ($rubrique == "configuration"){

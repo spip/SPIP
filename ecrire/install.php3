@@ -22,7 +22,6 @@ if ($etape6) {
 
 	$link = mysql_connect($adresse_db, $login_db, $pass_db);
 	mysql_select_db($sel_db);
-
 	if ($login) {
 		$nom = addslashes($nom);
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";

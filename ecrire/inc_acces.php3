@@ -58,7 +58,6 @@ function ecrire_acces() {
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
 	$result = spip_query($query);
-
 	unset($logins);
 	while($row = mysql_fetch_array($result)) $logins[$row[0]] = $row[1];
 
