@@ -16,7 +16,7 @@ function magic_unquote($table) {
 	        reset($GLOBALS[$table]);
 	        while (list($key, $val) = each($GLOBALS[$table])) {
 	        	if (is_string($val))
-		                $GLOBALS[$key] = $GLOBALS[$table][$key] = stripslashes($val);
+				$GLOBALS[$table][$key] = stripslashes($val);
 	        }
 	}
 }
@@ -36,11 +36,14 @@ if ($unquote_gpc) {
 // A remplacer par une gestion propre des variables admissibles ;-)
 //
 
+$INSECURE = array();
+
 function feed_globals($table) {
+	global $INSECURE;
 	if (is_array($GLOBALS[$table])) {
 	        reset($GLOBALS[$table]);
 	        while (list($key, $val) = each($GLOBALS[$table])) {
-	                $GLOBALS[$key] = $val;
+			$GLOBALS[$key] = $INSECURE[$key] = $val;
 	        }
 	}
 }
@@ -58,11 +61,12 @@ feed_globals('HTTP_SERVER_VARS');
 //
 
 function feed_post_files($table) {
+	global $INSECURE;
 	if (is_array($GLOBALS[$table])) {
 	        reset($GLOBALS[$table]);
 	        while (list($key, $val) = each($GLOBALS[$table])) {
-	                $GLOBALS[$key] = $val['tmp_name'];
-	                $GLOBALS[$key.'_name'] = $val['name'];
+	                $GLOBALS[$key] = $INSECURE[$key] = $val['tmp_name'];
+	                $GLOBALS[$key.'_name'] = $INSECURE[$key.'_name'] = $val['name'];
 	        }
 	}
 }

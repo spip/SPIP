@@ -4,6 +4,8 @@ include ("ecrire/inc_version.php3");
 $dir_ecrire = 'ecrire/';
 include_local ("inc-cache.php3");
 
+if ($INSECURE['fond'] || $INSECURE['delais']) exit;
+
 
 //
 // Inclusions de squelettes
