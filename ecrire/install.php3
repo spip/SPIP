@@ -1,6 +1,7 @@
 <?php
 
 include ("inc_version.php3");
+include_ecrire ("inc_mysql.php3");
 include_ecrire ("inc_presentation.php3");
 
 if (file_exists("inc_connect.php3")) {
@@ -31,7 +32,7 @@ if ($etape == 6) {
 	if ($login) {
 		$nom = addslashes($nom);
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
-		$result = spip_query($query);
+		$result = spip_query_db($query);
 		unset($id_auteur);
 		while ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
 		
@@ -149,7 +150,7 @@ else if ($etape == 4) {
 	maj_base();
 
 	$query = "SELECT COUNT(*) FROM spip_articles";
-	$result = spip_query($query);
+	$result = spip_query_db($query);
 	$result_ok = (spip_num_rows($result) > 0);
 
 	echo "-->";
@@ -262,7 +263,7 @@ else if ($etape == 2) {
 
 	echo "<!--";
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
-	$db_connect = spip_sql_errno();
+	$db_connect = mysql_errno();
 	echo "-->";
 	
 	echo "<P>";
