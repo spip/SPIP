@@ -300,14 +300,21 @@ function relations_externes ($type, $col) {
 // comme {1,4}, etc.
 //
 function calculer_criteres ($idb, &$boucles) {
-	global $tables_relations, $table_primary, $table_des_tables, $table_date;
+  global $tables_relations, $table_primary, $table_des_tables, $table_date, $tables_des_serveurs_sql;
 	$boucle = &$boucles[$idb];				# nom de la boucle
-	$type = $boucle->type_requete;			# articles
 	$params = $boucle->param;
-	$id_table = $table_des_tables[$type];	# articles ->   'table'
-	$primary = $table_primary[$type];		# id_article -> 'id'
-	$id_field = $id_table . "." . $primary; # articles.id_article -> 'table_id'
+	if (!is_array($params)) return;	// rien a faire
 
+	$type = $boucle->type_requete;			# articles
+	$serveur = $boucle->sql_serveur;
+	$id_table = $table_des_tables[$type];	# articles ->   'table';
+	if ($id_table) {
+		$primary = $table_primary[$type];		# id_article -> 'id'
+	} else { // table non Spip. Pas mal l'indexation, hein ?
+		$id_table = $type;
+		$primary = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key']["PRIMARY KEY"]; 
+	}
+	$id_field = $id_table . "." . $primary; # articles.id_article -> 'table_id'
 	// les infos complementaires a passer aux fonctions critere_xxx
 	$infos = array(
 		'type' => $type,			# (articles)
@@ -318,8 +325,6 @@ function calculer_criteres ($idb, &$boucles) {
 		'idb' => $idb				# 'nom_boucle'
 	);
 
-
-	if (!is_array($params)) return;	// rien a faire
 
 	// Boucle hierarchie, supprimer le critere id_article/id_rubrique/id_syndic
 	// qui est superfetatoire (mais indique dans la doc)
@@ -418,7 +423,7 @@ function calculer_criteres ($idb, &$boucles) {
 				// Si id_parent, comparer l'id_parent avec l'id_objet
 				// de la boucle superieure
 				if ($val == 'id_parent')
-					$val = $table_primary[$type];
+					$val = $primary;
 				// Si id_enfant, comparer l'id_objet avec l'id_parent
 				// de la boucle superieure
 				else if ($val == 'id_enfant')
@@ -435,7 +440,7 @@ function calculer_criteres ($idb, &$boucles) {
 			if ($s = relations_externes($type, $col)) {
 				$col_table = $s;
 				$boucle->from[] = "$col_table AS $col_table";
-				$boucle->where[] = "$id_field=$col_table." . $table_primary[$type];
+				$boucle->where[] = "$id_field=$col_table." . $primary;
 				$boucle->group = $id_field;
 				$boucle->lien = true;
 			}
@@ -451,7 +456,7 @@ function calculer_criteres ($idb, &$boucles) {
 					$col_lien = $type;
 				$boucle->from[] = "mots_$col_lien AS lien_mot";
 				$boucle->from[] = 'mots AS mots';
-				$boucle->where[] = "$id_field=lien_mot." . $table_primary[$type];
+				$boucle->where[] = "$id_field=lien_mot." . $primary;
 				$boucle->where[] = 'lien_mot.id_mot=mots.id_mot';
 				$boucle->group = $id_field;
 				$col_table = 'mots';
@@ -481,7 +486,7 @@ function calculer_criteres ($idb, &$boucles) {
 
 			// Cas particulier : id_enfant => utiliser la colonne id_objet
 			if ($col == 'id_enfant')
-				$col = $table_primary[$type];
+				$col = $primary;
 			// Cas particulier : id_secteur = id_rubrique pour certaines tables
 			if (($type == 'breves' OR $type == 'forums') AND $col == 'id_secteur')
 				$col = 'id_rubrique';

@@ -112,7 +112,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		  }
 		if (!$t) $t = $r; // pour les tables non Spip
 		// $t est le nom PHP de cette table 
-		#spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ'");
+#		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s");
 		$desc = $tables_des_serveurs_sql[$s][$t];
 		if (!$desc) {
 			include_local("inc-admin.php3");

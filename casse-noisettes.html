@@ -38,6 +38,7 @@
 <tr><td>&#35;PETITION</td><td> #PETITION</td></tr>
 <tr><td>&#35;POPULARITE</td><td> #POPULARITE</td></tr>
 <tr><td>&#35;EXTRA</td><td> #EXTRA</td></tr>
+<tr><td>&#35;PARAMETRES_FORUM</td><td> #PARAMETRES_FORUM</td></tr>
 </table>
 <hr /> 
 <table border='1' width='100%'>
@@ -46,7 +47,7 @@
 <tr><td>&#35;TOTAL_BOUCLE</td><td><BOUCLE_TOTAL_BOUCLE(AUTEURS)> #TOTAL_BOUCLE</BOUCLE_TOTAL_BOUCLE></td></tr>
 <tr><td>&#35;COMPTEUR_BOUCLE</td><td><BOUCLE_COMPTEUR_BOUCLE(AUTEURS)> #COMPTEUR_BOUCLE</BOUCLE_COMPTEUR_BOUCLE></td></tr>
 <tr><td>&#35;EXPOSER</td><td><BOUCLE_EXPOSER(ARTICLES){1,1}> #EXPOSER</BOUCLE_EXPOSER></td></tr>
-<tr><td>&#35;LESAUTEURS</td><td><BOUCLE_LESAUTEURS(pgsql:ARTICLES){1,1}> #LESAUTEURS</BOUCLE_LESAUTEURS></td></tr>
+<tr><td>&#35;LESAUTEURS</td><td><BOUCLE_LESAUTEURS(ARTICLES){1,1}> #LESAUTEURS</BOUCLE_LESAUTEURS></td></tr>
 <tr><td>{titre=&#35;NOM_SITE_SPIP}</td><td><BOUCLE_TITRE2(ARTICLES){id_rubrique}{id_article=#NOM_SITE_SPIP}{"<br />"}>#ID_ARTICLE #TITRE #NOM_SITE_SPIP</BOUCLE_TITRE2></td></tr>
 <tr><td>{id_article=&#35;ID_RUBRIQUE}</td><td><BOUCLE1(RUBRIQUES){par id_rubrique}><BOUCLE_TITRE1(ARTICLES){id_rubrique}{id_article=#ID_RUBRIQUE}{"<br />"}>#ID_RUBRIQUE #ID_ARTICLE </BOUCLE_TITRE1><br />#TOTAL_BOUCLE</B_TITRE1> </BOUCLE1></td></tr>
 <tr><td>{titre=&#35;TITRE*}</td><td><BOUCLE3(RUBRIQUES){par id_rubrique}><BOUCLE_TITRE3(ARTICLES){id_rubrique}{id_article=#TITRE*}{"<br />"}>#ID_RUBRIQUE #TITRE #ID_ARTICLE </BOUCLE_TITRE3></B_TITRE3> </BOUCLE3></td></tr>
@@ -122,5 +123,13 @@
 <tr><td>[[g1 (&#35;TITRE) d1 [[g3 (&#35;TITRE) d3] (&#35;TITRE|strtoupper) [g4 (&#35;TITRE) d4]]] (&#35;TITRE|strtoupper) [g5 (&#35;TITRE) d5]][g6 (&#35;TITRE) d7]</td><td><BOUCLE_a(ARTICLES){1,1}>
 [[g1 (#TITRE)d1 [[g3 (#TITRE) d3] (#TITRE|strtoupper) [g4 (#TITRE) d4]]] (#TITRE|strtoupper) [g5 (#TITRE) d5]][g6 (#TITRE) d7]</td></tr></BOUCLE_a>
 </table>
+<hr /> 
+<table border='1' width='100%'>
+<tr><td colspan=2 align=center>Criteres de feu</td></tr> 
+<tr><td>{exclus}</td><td><BOUCLE_exclus(ARTICLES){1,1}{exclus}>#TITRE</td></tr></BOUCLE_exclus>
+<tr><td>{doublons}</td><td><BOUCLE_doublons(ARTICLES){1,1}{doublons}>#TITRE</td></tr></BOUCLE_doublons>
+<tr><td>{par}</td><td><BOUCLE_par(ARTICLES){1,1}{par titre}>#TITRE</td></tr></BOUCLE_par>
+</table>
+
 
 
