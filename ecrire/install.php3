@@ -155,8 +155,8 @@ elseif ($etape4) {
 	}
 	mysql_select_db("$sel_db");
 
-	maj_base();
 	creer_base();
+	maj_base();
 
 	$query = "SELECT COUNT(*) FROM spip_articles";
 	$result = spip_query($query);
