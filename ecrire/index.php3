@@ -173,8 +173,10 @@ if ($options == "avancees") {
 	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif","rien.gif");
 
 	if ($connect_statut == "0minirezo") {
-		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif");
-		echo "<p>";
+		if (lire_meta('forum_prive_admin') == 'oui') {
+			icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif");
+			echo "<p>";
+		}
 		if (lire_meta("activer_statistiques") == 'oui')
 			icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif");
 		icone_horizontale("Suivi des forums", "controle_forum.php3", "suivi-forum-24.gif");
