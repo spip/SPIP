@@ -86,7 +86,7 @@ function surligner_mots($page, $mots) {
 		$mots_surligne = join('|', $mots_surligne);
 
 	// ne pas traiter tout ce qui est avant </head> ou <body>
-	$regexp = '/<\/head>|<body[^>]*>/i'.$u;
+	$regexp = '/<\/head>|<body[^>]*>/i';
 	if (preg_match($regexp, $page, $exp)) {
 		$debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
 		$page = substr($page, strlen($debut));
