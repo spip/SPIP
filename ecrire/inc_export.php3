@@ -31,15 +31,8 @@ function build_end_tag($tag) {
 }
 
 // Conversion texte -> xml (ajout d'entites)
-if ($flag_str_replace) {
-	function text_to_xml($string) {
-		return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
-	}
-}
-else {
-	function text_to_xml($string) {
-		return ereg_replace('<', '&lt;', ereg_replace('&', '&amp;', $string));
-	}
+function text_to_xml($string) {
+	return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
 }
 
 
@@ -47,7 +40,7 @@ else {
 // Exportation generique d'objets (fichier ou retour de fonction)
 //
 function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours="", $etape_actuelle="", $nom_etape="") {
-	global $debut_limit;	
+	global $debut_limit;
 	if ($etape_en_cours < 1 OR $etape_en_cours == $etape_actuelle){
 		if ($etape_en_cours > 0) {
 			echo "<li><b>$nom_etape</b>";

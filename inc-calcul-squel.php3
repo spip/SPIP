@@ -1054,8 +1054,6 @@ function parser($texte) {
 // appliquer les filtres a un champ
 //
 function applique_filtres ($fonctions, $code) {
-	global $flag_function_exists;
-
 	if ($fonctions) {
 		while (list(, $fonc) = each($fonctions)) {
 			if ($fonc) {
@@ -1065,7 +1063,7 @@ function applique_filtres ($fonctions, $code) {
 					if (trim($regs[2]))
 						$arglist = ','.$regs[2];
 				}
-				if ((!$flag_function_exists) OR function_exists($fonc))
+				if (function_exists($fonc))
 					$code = "$fonc($code$arglist)";
 				else
 					$code = "'Erreur : filtre <b>&laquo; $fonc &raquo;</b> non d&eacute;fini'";

@@ -537,7 +537,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $ferme_ref;
 	global $ouvre_note;
 	global $ferme_note;
-	global $flag_strpos_3, $flag_pcre, $flag_str_replace;
+	global $flag_pcre;
 
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
@@ -666,7 +666,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	// en forme (paragraphes, raccourcis...)
 	//
 	// ATTENTION : si vous modifiez cette partie, modifiez les DEUX
-	// branches de l'alternative (if (flag_str_replace).../else).
+	// branches de l'alternative (if (!flag_pcre).../else).
 	//
 
 	$letexte = trim($letexte);
@@ -677,7 +677,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = traiter_listes($letexte);
 
 	// autres raccourcis
-	if ($flag_str_replace && !$flag_pcre) {
+	if (!$flag_pcre) {
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
 		$letexte = ereg_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);

@@ -9,12 +9,8 @@ define("_ECRIRE_INC_IMPORT", "1");
 include_ecrire ("inc_acces.php3");
 
 
-if ($GLOBALS['flag_strpos_3']) {
-
-function xml_fetch_tag($f, &$before, $gz=false)
-{
+function xml_fetch_tag($f, &$before, $gz=false) {
 	global $buf, $pos, $abs_pos;
-	global $flag_str_replace;
 	$_fread = ($gz) ? gzread : fread;
 	$_feof = ($gz) ? gzeof : feof;
 	$_ftell = ($gz) ? gztell : ftell;
@@ -55,67 +51,10 @@ function xml_fetch_tag($f, &$before, $gz=false)
 		}
 		$pos = $q + 1;
 		$tag .= substr($buf, $p, $q - $p);
-		if ($flag_str_replace)
-			$before = str_replace('&amp;', '&', str_replace('&lt;', '<', $before));
-		else
-			$before = ereg_replace('&amp;', '&', ereg_replace('&lt;', '<', $before));
+		$before = str_replace('&amp;', '&', str_replace('&lt;', '<', $before));
 		return $tag;
 	}
 }
-
-} else {
-
-function xml_fetch_tag($f, &$before, $gz=false)
-{
-	global $buf, $pos, $abs_pos;
-	$_fread = ($gz) ? gzread : fread;
-	$_feof = ($gz) ? gzeof : feof;
-	$_ftell = ($gz) ? gztell : ftell;
-	$buf_len = 512;
-	$q = $pos;
-	for (;;) {
-		$p = $q;
-		$q = strpos($b = substr($buf, $p), '<');
-		if (!$q AND substr($b, 0, 1) != '<') {
-			if ($_feof($f)) return false;
-			$before .= $b;
-			$abs_pos = $_ftell($f);
-			$buf = $_fread($f, $buf_len);
-			$q = 0;
-			continue;
-		}
-		$before .= substr($buf, $p, $q);
-		$q += $p + 1;
-		if ($q >= strlen($buf)) {
-			if ($_feof($f)) return false;
-			$abs_pos = $_ftell($f);
-			$buf = $_fread($f, $buf_len);
-			$q = 0;
-		}
-		break;
-	}
-
-	$tag = '';
-	for (;;) {
-		$p = $q;
-		$q = strpos($b = substr($buf, $p), '>');
-		if (!$q AND substr($b, 0, 1) != '>') {
-			if ($_feof($f)) return false;
-			$tag .= $b;
-			$abs_pos = $_ftell($f);
-			$buf = $_fread($f, $buf_len);
-			$q = 0;
-			continue;
-		}
-		$tag .= substr($buf, $p, $q);
-		$pos = $q + $p + 1;
-		$before = ereg_replace('&amp;', '&', ereg_replace('&lt;', '<', $before));
-		return $tag;
-	}
-}
-
-}
-
 
 function xml_parse_tag($texte) {
 	list($tag, $atts) = split('[[:space:]]+', $texte, 2);
