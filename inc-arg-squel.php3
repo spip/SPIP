@@ -19,41 +19,17 @@ function calculer_params($idb, &$boucles) {
 		if (!$boucle->order)
 			$boucle->order = 'rang';
 
-		// Extraire le parametre id_article/id_rubrique/id_syndic
+		// Supprimer le parametre id_article/id_rubrique/id_syndic
 		$params2 = array();
-		foreach($params as $param) {
-			switch($param) {
-				case 'id_article':
-				case 'id_syndic':
-				case 'id_rubrique':
-					$h_feuille = $param;
-					break;
-				default:
-					$params2[]=$param;
-					break;
-			}
-		}
+		foreach($params as $param)
+			if (!ereg('^id_(article|syndic|rubrique)$', $param))
+				$params2[]=$param;
 		$params = $params2;
 
-		/*
-		## Pas grave : ca fonctionne meme sans ce critere (Fil)
-		if (!$h_feuille) {
-			include_local("inc-debug-squel.php3");
-			erreur_squelette(_L("Critere id_rubrique ou id_article absent"), $type, $idb);
-		}
-		*/
-
-		if (($h_feuille<>'id_rubrique') OR $boucle->tout)
-			$boucle->hierarchie = '
-			$hierarchie = calculer_hierarchie('
-			.calculer_argument_precedent($idb, 'id_rubrique', $boucles)
-			.", false);\n";
-		else
-			$boucle->hierarchie = '
-			$hierarchie = calculer_hierarchie('
-			.calculer_argument_precedent($idb, 'id_rubrique', $boucles)
-			.", true);\n";
-
+		$boucle->hierarchie = '
+		$hierarchie = calculer_hierarchie('
+		.calculer_argument_precedent($idb, 'id_rubrique', $boucles)
+		.", false);\n";
 	}
 
 
