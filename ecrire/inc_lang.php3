@@ -271,6 +271,8 @@ function init_codes_langues() {
 	'ne' => "Nepali",
 	'nl' => "Nederlands",
 	'no' => "norsk",
+	'nb' => "norsk bokm&aring;l",
+	'nn' => "Nynorsk",
 	'oc_lnc' => "&ograve;c lengadocian",
 	'oc_ni' => "&ograve;c ni&ccedil;ard",
 	'oc_prv' => "&ograve;c proven&ccedil;au",
