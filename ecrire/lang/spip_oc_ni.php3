@@ -159,10 +159,6 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 
 // C
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
-'calendrier_synchro_lien' => '-vide-',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -596,7 +592,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_email_envoi_txt' => 'Indicatz aqu&iacute; l\'adre&ccedil;a d\'utilisar per mandar lu e-mails (a fauta d\'aqu&ograve;, s\'utilisar&agrave; l\'adre&ccedil;a destinat&agrave;ria coma adre&ccedil;a de mandad&iacute;s):',
 'info_email_invalide' => 'Adre&ccedil;a e-mail invalida',
 'info_email_webmestre' => 'Adre&ccedil;a e-mail dau responsable dau sit (opcional)',
-'info_en_cours_validation' => 'V&egrave;ostres articles en cors de redaccion',
+'info_en_cours_validation' => 'V&ograve;stres articles en cors de redaccion',
 'info_en_ligne' => 'A&uuml;ra en linha:',
 'info_en_test_1' => '(a la prova)',
 'info_en_test_2' => '(a la prova)',

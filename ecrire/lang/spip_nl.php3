@@ -82,8 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',
 'barre_euro' => '&euro; teken invoegen',
 'barre_gras' => 'In het {{vet}} zetten',
-'barre_guillemets' => '<MODIF> Met &laquo; Franse haakjes &raquo; omringen',
-'barre_guillemets_simples' => '<MODIF> Van „haakjes“ voorzien',
+'barre_guillemets' => 'Van &laquo; haakjes &raquo; voorzien',
+'barre_guillemets_simples' => 'Van „haakjes van het tweede niveau“ voorzien',
 'barre_intertitre' => 'Omzetten naar {{{tussentitel}}}',
 'barre_italic' => '{cursief} zetten',
 'barre_lien' => 'Omzetten naar [hypertekst verwijzing->http://...]',
@@ -139,8 +139,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Geen editoriale aankondigingen versturen',
 'bouton_radio_non_envoi_liste_nouveautes' => 'De lijst met nieuwe bijdragen niet versturen',
 'bouton_radio_non_syndication' => 'Geen syndicatie',
-'bouton_radio_occidental' => '<MODIF> Westers alfabet&nbsp; (<tt>iso-8859-1</tt>): ondersteund door alle browsers, maar geeft enkel 
-  de West-Europese talen weer (Engels, Frans, Duits, Nederlands ...).',
+'bouton_radio_occidental' => 'Westers alfabet&nbsp; (<tt>iso-8859-1</tt>): maakt de weergave van vooral West-Europese talen mogelijk (Engels, Frans, Duits, Nederlands ...);
+ SPIP laat ook toe andere talen te beheren.',
 'bouton_radio_pas_petition' => 'Geen petitie',
 'bouton_radio_personnalise' => 'Gepersonaliseerde tekenset: kies deze optie als je een specifieke tekenset
  wil gebruiken.',
@@ -152,7 +152,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'niet-gecomprimeerde opslag onder  <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'De petitie verwijderen',
 'bouton_radio_syndication' => 'Syndicatie :',
-'bouton_radio_universel' => '<MODIF> Universeel alfabet&nbsp; (<tt>utf-8</tt>): toont alle talen maar wordt helaas nog niet door alle bladerprogramma\'s herkend.',
+'bouton_radio_universel' => 'Universeel alfabet&nbsp; (<tt>utf-8</tt>): kan alle talen weergeven maar is niet altijd compatibel met de programma\'s voor het maken van webpagina\'s en e-mailprogramma\'s.',
 'bouton_recharger_page' => 'pagina vernieuwen',
 'bouton_redirection' => 'OMLEIDING',
 'bouton_relancer_installation' => 'Installatie herbeginnen',
@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => '<MODIF> Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), kan je deze synchroniseren met de actuele artikels van deze site.',
+'calendrier_synchro' => 'Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt, kan je deze synchroniseren met informatie van deze site.',
 
 
 // D
@@ -378,7 +378,7 @@ Bedankt voor je deelname
 'icone_admin_site' => 'Beheer van de site',
 'icone_afficher_auteurs' => 'Auteurs tonen',
 'icone_afficher_visiteurs' => 'Bezoekers tonen',
-'icone_agenda' => '<MODIF> Agenda en berichtensysteem',
+'icone_agenda' => 'Agenda',
 'icone_aide_ligne' => 'Online help',
 'icone_arret_discussion' => 'Niet langer deelnemen aan deze discussie',
 'icone_articles' => 'Artikels',
@@ -402,7 +402,7 @@ Bedankt voor je deelname
 'icone_doc_rubrique' => 'Bijlagen van de rubrieken',
 'icone_ecrire_article' => 'Een nieuw artikel schrijven',
 'icone_ecrire_nouvel_article' => 'De berichten van deze rubriek',
-'icone_edition_site' => '<MODIF> Redactie van de site',
+'icone_edition_site' => 'Redactie van de site',
 'icone_envoyer_message' => 'Bericht verzenden',
 'icone_etat_traductions' => 'Status van de vertalingen ',
 'icone_evolution_visites' => 'Evolutie van de bezoeken<br>@visites@ bezoeken@aff_ref@',
@@ -488,7 +488,7 @@ Bedankt voor je deelname
 'info_adresse_email' => 'E-MAIL ADRES:',
 'info_adresse_non_indiquee' => 'Je hebt geen adres opgegeven om te testen!',
 'info_adresse_url' => 'Adres (URL) van de website',
-'info_afficher_visites' => '<MODIF> Toon de bezoeken voor:',
+'info_afficher_visites' => 'Toon het aantal bezoeken voor:',
 'info_affichier_visites_articles_plus_visites' => 'Bezoekers tonen voor <b>de meest bezochte artikels sinds het begin:</b>',
 'info_aide' => 'HELP:',
 'info_aide_en_ligne' => 'ONLINE HELP VAN SPIP',
@@ -555,7 +555,7 @@ Bedankt voor je deelname
 'info_classement_2' => '<sup>e</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
-'info_config_suivi' => '<NEW> Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi' => 'Wanneer dit adres van een rondzendlijst is, kan je hieronder het adres opgeven waarlangs deelnemers van de site zich kunnen inschrijven. Dit adres kan een URL zijn (bvb. het webadres voor het inschrijving op de mailinglist), of een e-mailadres met een onderwerp (bvb. <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Je kan je op de mailinglijst van deze site inschrijven. Je zal dan via e-mail een aankondiging ontvangen van artikels en nieuwsberichten die voor publicatie werden voorgesteld.',
 'info_confirmer_passe' => 'Bevestig het nieuwe paswoord :',
 'info_connexion_base' => 'Tweede stap : <B>Poging tot verbinding met de gegevensbank</b>',
@@ -570,7 +570,7 @@ Bedankt voor je deelname
 'info_contribution' => 'Bijdragen aan het forum',
 'info_copyright' => 'is vrije software verdeeld <a href=\'copyright_fr.html\'>onder GPL-licentie.</a>',
 'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl\'>http://www.spip.net/nl</a>.',
-'info_cours_edition' => '<MODIF> Je artikels in redactie',
+'info_cours_edition' => 'Je artikels in redactie',
 'info_creation_mots_cles' => 'Cre&euml;er en configureer hier de trefwoorden van de site',
 'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)',
 'info_creation_rubrique' => 'Om artikels te kunnen schrijven,<BR> dien je minstens &eacute;&eacute;n rubriek aan te maken.<BR>',
@@ -744,7 +744,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_multi_langues_choisies' => 'Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
   Talen die al worden gebruikt (vooraan in de lijst getoond) kunnen niet geschrapt worden.
 ',
-'info_multi_langues_soulignees' => '<NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
+'info_multi_langues_soulignees' => 'Van de <u>onderlijnde talen</u> zijn alle teksten van de interface vertaald.  Als je een van deze talen kiest, worden automatisch heel wat gegevens (data, formulieren) van de publieke site vertaald. Voor de niet-onderlijnde talen zullen deze gegevens in de hoofdtaal van de site verschijnen.',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken?',
 'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap?',
 'info_multilinguisme' => 'Meertaligheid',
@@ -1217,7 +1217,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'menu_aide_sites_syndiquer' => 'Gesyndiceerde sites',
 'menu_aide_suivi_forum' => 'Opvolging van de forums',
 'menu_aide_suivi_forum_articles_postes' => 'Postgedateerde artikels',
-'menu_aide_suivi_forum_configuration' => '<MODIF> Configuratie',
+'menu_aide_suivi_forum_configuration' => 'Configuratie van de site',
 'menu_aide_suivi_forum_contenu_articles' => 'Inhoud artikel',
 'menu_aide_suivi_forum_envoi_emails' => 'Automatische e-post',
 'menu_aide_suivi_forum_fonctionnement' => 'Werking van forums',
@@ -1225,13 +1225,13 @@ De publieke forums kunnen per artikel toegestaan worden
 'menu_aide_suivi_forum_moteur_recherche' => 'Ge&iuml;ntegreerde zoekmachine',
 'menu_aide_suivi_forum_nom_adresse' => 'Naam en URL van deze website',
 'menu_aide_suivi_forum_statistiques' => 'Statistieken van de bezoeken',
-'menu_aide_suivi_forum_suivi' => 'Follow-up van de forums',
+'menu_aide_suivi_forum_suivi' => 'Opvolgen van de forums',
 'menu_aide_suivi_forum_systeme_breves' => 'Het nieuwssysteem',
 'module_fichier_langue' => 'Taalbestand',
 'module_fichiers_langues' => 'Taalbestanden',
 'module_raccourci' => 'Snelkoppeling',
 'module_texte_affiche' => 'Weergegeven tekst',
-'module_texte_explicatif' => '<NEW> Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
+'module_texte_explicatif' => 'Je kan de volgende snelkoppelingen invoegen in de sjablonen van je publieke site. Ze worden automatisch vertaald in de verschillende talen waarvoor een taalbestand is aangemaakt.',
 'module_texte_traduction' => 'Het taalbestand &laquo;&nbsp;@module@&nbsp;&raquo; is beschikbaar in het&nbsp;:',
 'mois_non_connu' => 'Onbekend',
 
@@ -1332,7 +1332,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_article_virtuel' => 'Virtual artikel',
 'texte_article_virtuel_reference' => '<b>Virtueel artikel:</b> gekoppeld artikel in je SPIP site maar doorgestuurd naar een andere URL. Verwijder de URL om de doorverwijzing te stoppen.',
 'texte_aucun_resultat_auteur' => 'Geen resultaat voor "@cherche_auteur@"',
-'texte_auteur_messagerie' => '<MODIF> Deze site kan de lijst met auteurs die op dit moment aangelogd zijn, bijhouden. Dit laat je toe meteen en in realtime berichten uit te wisselen met deze auteurs. (als het berichtensysteem niet geactiveerd is, zal de lijst met verbonden auteurs zich ook automatisch desactiveren). Je kan kiezen om al dan niet in de lijst te verschijnen (je wordt dan &laquo;onzichtbaar&raquo; voor de andere gebruikers).',
+'texte_auteur_messagerie' => 'De site kan een lijst met auteurs die op dat moment aangelogd zijn, tonen. Dit laat je toe meteen berichten uit te wisselen met deze auteurs. (Als het berichtensysteem niet geactiveerd is, zal de lijst met aangelogde auteurs zich ook automatisch desactiveren). Je kan verkiezen om niet in de lijst te verschijnen (je wordt dan &laquo;onzichtbaar&raquo; voor de andere gebruikers).',
 'texte_auteur_messagerie_1' => 'Deze site biedt de mogelijkheid om berichten uit te wisselen en forums op te starten voor private discussies tussen de deelnemers van de site. Je kan kiezen om niet deel te nemen aan deze uitwisseling van informatie.',
 'texte_auteurs' => 'DE AUTEURS',
 'texte_bilan_traductions' => 'In deze grafiek tonen de groene staafjes de artikels die vertaald en up-to-date zijn; de rode staafjes geven de vertalingen aan die nog aangepast moeten worden.',
@@ -1421,8 +1421,11 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_informations_personnelles_1' => 'Nu zal het systeem een persoonlijke toegang tot de site voor u cre&euml;ren.',
 'texte_informations_personnelles_2' => '(Nota : als het herinstallatie betreft,  en je toegangscode blijkt nog steeds te werken, kan je',
 'texte_introductif_article' => '(Inleidende tekst op het artikel.)',
-'texte_jeu_caractere' => '<MODIF> Deze optie is nuttig wanneer je site een ander alfabet dan het Romeinse (of &laquo;westerse&raquo;) of zijn afgeleiden, dient weer te geven.
-In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen. Vergeet ook niet je publieke site hieraan te passen (balise <tt>#CHARSET</tt>).',
+'texte_jeu_caractere' => 'Deze optie is nuttig wanneer je site een ander alfabet dan het Romeinse 
+ (of &laquo;Westerse&raquo;) of een afgeleide hiervan, dient weer te geven.
+ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te 
+ wijzigen. We raden je aan dit in elk geval uitgebreid te testen. 
+ Als je deze instelling wijzigt, vergeet dan ook niet je publieke site hieraan te passen (balise <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Deze instelling heeft geen terugwerkend effect. Teksten
  die reeds werden ingevoerd, zullen mogelijk foutief
  getoond worden door het wijzigen van deze instelling.
@@ -1462,15 +1465,15 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
 'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP ge&iuml;nstalleerd.',
 'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een meer grondige update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand <tt>inc_connect.php3</tt> in de map <tt>ecrire</tt>. Herneem nu de installatie van SPIP om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand <tt>inc_connect.php3</tt> alvorens het te verwijderen...)',
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
-'texte_plan_trad' => '<NEW> Cette page vous permet de visualiser l\'&eacute;tat des traductions pour la langue choisie. 
-		La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave jour, 
-		ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
-'texte_plan_trad_en_cours' => '<NEW> Ce symbole indique qu\'un article est en cours de traduction&nbsp;: cela veut dire qu\'une traduction 
-		a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
-		&agrave; la traduction. ',
-'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave 
-		un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
-		traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
+'texte_plan_trad' => 'Via deze pagina kan je de status van de vertaling opvragen voor de gekozen taal. 
+ De pagina toont de artikels waarvan de vertaling begonnen is, de artikels met een vertaling die hernieuwd moet worden, 
+ en de artikels die nog niet werden vertaald.',
+'texte_plan_trad_en_cours' => 'Dit symbool geeft aan dat een artikel in vertaling is&nbsp;: dit betekent dat aan de vertaling 
+ is begonnen maar dat deze nog niet is gepubliceerd. Klik op het symbool om de vertaling 
+ te bekijken. ',
+'texte_plan_trad_modif' => 'Dit symbool geeft aan dat wijzigingen werden aangebracht 
+ aan een reeds vertaald artikel. Het is in dat geval aan te raden de vertaalde 
+ tekst bij te werken in functie van de wijzigingen.',
 'texte_plan_trad_note' => 'Noot&nbsp;: alleen gepubliceerde artikels worden op deze pagina getoond.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',
