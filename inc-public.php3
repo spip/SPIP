@@ -10,18 +10,11 @@ else {
 	include_local('inc-public-global.php3');
 
 	list($http_status, $page) = calcule_header_et_page($fond, $delai);
+	echo $page;
 
 	// Si le 404 a ete renvoye (page vide), donner un message approprie
-	// Page n'est plus necessairement vide a cause des boutons admin
+	if ($http_status == 404) include(find_in_path('404.php3'));
 
-	if ($http_status == 404) {
-		$qcq = _T('public:aucun_' . $fond);
-		if (!$qcq) $qcq = _T('public:aucune_' . $fond);
-		if (!$qcq) $qcq = _T('public:texte_vide');
-		$page .= $qcq;
-	}
-
-	echo $page;
 	terminer_public_global();
 }
 
