@@ -619,7 +619,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_hier' => 'i&egrave;r:',
 'info_identification_publique' => 'V&ograve;stra identitat publica...',
 'info_image_aide' => 'AJUDA',
-'info_impossible_lire_page' => '<B>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs lo proxy <tt>',
+'info_impossible_lire_page' => '<B>Error!</b> Impossible de legir la pagina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs del proxy <tt>',
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_informations_personnelles' => 'Cinquena estapa: <B>Informacions personalas</b>',
