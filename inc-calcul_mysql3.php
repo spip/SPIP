@@ -41,7 +41,6 @@ function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id)
 	 "\nFROM\t(" . join(",\n\t", $s) . " ,\n\tCOUNT(" . $sous .
 	 ") AS compteur $q)\n AS S_$table\nWHERE compteur= " . 
 	 $cpt));
-  spip_log("$id: $q");
 # if (!($result = @mysql_query($q)))
   if (!($result = @spip_query($q)))
     {
@@ -49,7 +48,8 @@ function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id)
       echo erreur_requete_boucle($q, $id, $table);
       exit;
     }
-  else return $result;
+#  spip_log("$id: $q\n" . spip_num_rows($result));
+  return $result;
 }
 
 # toutes les fonctions avec requete SQL, necessaires aux squelettes.
@@ -124,10 +124,10 @@ function calcul_mysql_in($val, $valeurs, $tobeornotobe)
 function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = spip_abstract_select(array('id_rubrique'),
-				       array('spip_rubriques'),
-				       calcul_mysql_in('id_parent', 
-						       $generation,
-						       ''),
+				       array('spip_rubriques AS rubriques'),
+				       array(calcul_mysql_in('id_parent', 
+							     $generation,
+							     '')),
 				       '','','','','','','');
 	while ($row = spip_fetch_array($result))
 	  $lesfils[] = $row['id_rubrique'];
