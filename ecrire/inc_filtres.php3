@@ -405,7 +405,7 @@ function affdate_heure($numdate) {
 
 function aligner($letexte,$justif) {
 	$letexte = eregi_replace("<p([^>]*)", "<p\\1 align='$justif'", trim($letexte));
-    if(!ereg("^[[:space:]]*<p", $letexte)) {
+    if($letexte<>"" AND !ereg("^[[:space:]]*<p", $letexte)) {
 		$letexte = "<p class='spip' align='$justif'>" . $letexte . "</p>";
 	}
 	return $letexte;
