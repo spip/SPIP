@@ -128,7 +128,6 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 function executer_balise_dynamique($nom, $args, $filtres) {
 	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
 	include_local($file);
-
 	$f = 'balise_' . $nom . '_stat';
 	$r = $f($args, $filtres);
 	if (!is_array($r))
@@ -144,7 +143,7 @@ include_local("'
 inclure_balise_dynamique(balise_'
 		. $nom
 		. '_dyn(\''
-		. join("', '", array_map("addslashes", $r))
+		. join("', '", array_map("texte_script", $r))
 		. '\'));
 	lang_dselect();
 ?'
