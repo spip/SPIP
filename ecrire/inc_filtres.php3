@@ -829,5 +829,14 @@ function tester_config($ignore, $quoi) {
 			return '';
 	}
 }
+function calendrier($date='', $type='mois', $echelle='', $partie_cal='', $script='')
+{
+   include_ecrire("inc_calendrier.php");
+   include_ecrire("inc_layer.php3");
+   return
+     $GLOBALS['browser_layer'] .
+     http_script('',_DIR_RESTREINT . 'presentation.js') .
+     http_calendrier_init($date, $type, $echelle, $partie_cal, $script);
+}
 
 ?>

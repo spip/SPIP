@@ -46,7 +46,7 @@ if (http_last_modified(@filemtime("spip_style.php3"), time() + 24 * 3600))
 
 	function http_img_pack($f) { return _DIR_IMG_PACK . $f; }
 ?>
-
+@import "calendrier.css";
 /*
  * Police par defaut (bof...)
  */
@@ -857,21 +857,6 @@ a.bouton_rotation:hover img {
 
 
 /*
- * Dessus-dessous calendrier
- */
- 
-.dessous {
-	z-index : 1;
-	-moz-opacity: 0.6; filter: alpha(opacity=60);
-}
-.dessus, .dessous.hover {
-	z-index : 3; 
-	-moz-opacity: 1; filter: alpha(opacity=100);
-	cursor: pointer;
-}
-
-
-/*
 * Cadre couleur foncee
 */
 
@@ -1232,47 +1217,6 @@ div.brouteur_rubrique_on div a {
 	border: 0px;
 	z-index: 1;
 }
-
-/*
- * Styles du calendrier
- */
- 
-div.navigation-calendrier {
-	background-color: <?php echo $couleur_foncee; ?>;
-	color: white;
-	font-family: verdana, arial, sans,sans-serif;
-	font-size: 14px;
-	padding: 2px;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
-}
-
-div.navigation-calendrier img {
-	border: 0px;
-	vertical-align: middle;
-	margin: 1px;
-}
-
-.navigation-bouton-desactive {
-	-moz-opacity: 0.3;
-	filter: alpha(opacity=30);
-}
-
-a.calendrier-annee {
-	background-color: #aaaaaa;
-	padding: 3px;
-	margin: 1px;
-	font-family: verdana, arial, sans,sans-serif;
-	font-size: 10px;
-	font-weight: bold;
-	color: white;
-	-moz-border-radius: 5px;
-}
-a.calendrier-annee:hover {
-	color: black;
-	background-color: white;
-}
-
 
 /*
  * Styles generes par les raccourcis de mis en page
