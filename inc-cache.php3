@@ -22,7 +22,7 @@ function purger_repertoire($dir, $age, $regexp = '') {
 			}
 		}
 		else if (is_dir($chemin)) {
-			if ($chemin != 'CVS') purger_repertoire($chemin, $age);
+			if ($fichier != 'CVS') purger_repertoire($chemin, $age);
 		}
 	}
 	closedir($handle);
