@@ -23,7 +23,7 @@ function cron_referers($t) {
 
 // poursuivre le calcul
 function cron_referers_suite() {
-	if (timeout('archiver_stats')) {
+	if (timeout('calculer_referers')) {
 		include_ecrire("inc_statistiques.php3");
 		ecrire_meta('calculer_referers_now', 'non');
 		ecrire_metas();
@@ -110,6 +110,31 @@ function spip_cron() {
 	}
 
 	//
+	// Mise a jour d'un (ou de zero) site syndique
+	//
+	if (lire_meta("activer_syndic") == "oui") {
+		if (timeout('syndication')) {
+		  spip_log("activer_syndic");
+			include_ecrire("inc_sites.php3");
+			executer_une_syndication();
+			if (lire_meta('activer_moteur') == 'oui') {
+				include_ecrire("inc_index.php3");
+				executer_une_indexation_syndic();
+			}
+		}
+	}
+
+	//
+	// Gerer l'indexation quand on appelle de l'espace prive
+	//
+	if (!_DIR_RESTREINT && lire_meta('activer_moteur') == 'oui') {
+		if (timeout('indexation')) {
+			include_ecrire("inc_index.php3");
+			effectuer_une_indexation();
+		}
+	}
+
+	//
 	// Statistiques
 	//
 	if (lire_meta("activer_statistiques") != "non") {
@@ -175,30 +200,6 @@ function spip_cron() {
 		ecrire_metas();
 		include_ecrire('inc_invalideur.php3');
 		retire_vieux_caches();
-	}
-
-	//
-	// Mise a jour d'un (ou de zero) site syndique
-	//
-	if (lire_meta("activer_syndic") == "oui") {
-		if (timeout('syndication')) {
-			include_ecrire("inc_sites.php3");
-			executer_une_syndication();
-			if (lire_meta('activer_moteur') == 'oui') {
-				include_ecrire("inc_index.php3");
-				executer_une_indexation_syndic();
-			}
-		}
-	}
-
-	//
-	// Gerer l'indexation quand on appelle de l'espace prive
-	//
-	if (!_DIR_RESTREINT && lire_meta('activer_moteur') == 'oui') {
-		if (timeout('indexation')) {
-			include_ecrire("inc_index.php3");
-			effectuer_une_indexation();
-		}
 	}
 
 
