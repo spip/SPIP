@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Ritorna all\'interfaccia grafica completa',
 'access_mode_texte' => 'Visualizza l\'interfaccia testuale semplificata',
+'admin_debug' => 'debug',
 'admin_modifier_article' => 'Modifica l\'articolo',
 'admin_modifier_auteur' => 'Modifica l\'autore',
 'admin_modifier_breve' => 'Modifica la breve',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => 'pomeriggio',
+'cal_jour_entier' => 'giorno intero',
+'cal_matin' => 'mattina',
+'cal_par_jour' => 'calendario giornaliero',
+'cal_par_mois' => 'calendario mensile',
+'cal_par_semaine' => 'calendario settimanale',
 'confirm_changer_statut' => 'Attenzione, &egrave; stato chiesto di modificare lo status di questo elemento. Continuare?',
 
 
@@ -324,6 +331,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'icone_valider_message' => 'Convalida il messaggio',
 'icone_visiter_site' => 'Visita il sito',
 'icone_voir_en_ligne' => 'Vedi on line',
+'img_indisponible' => 'immagine non disponibile',
 'info_a_suivre' => 'PANNELLO DI CONTROLLO&nbsp;&raquo;',
 'info_a_valider' => '[da convalidare]',
 'info_acces_interdit' => 'Accesso vietato',
@@ -358,6 +366,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
 'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>ecrire/data/</b>, poi:',
+'info_creer_vignette' => 'creazione automatica dell\'anteprima',
 'info_deplier' => 'Espandi',
 'info_descriptif_nombre' => 'descrizione(i):',
 'info_description' => 'Descrizione:',
@@ -403,6 +412,9 @@ o contatta il tuo hoster.</font><br></b>',
 'info_langue_principale' => 'Lingua predefinita del sito',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixel',
 'info_les_auteurs_1' => 'di @les_auteurs@ ',
+'info_logo_format_interdit' => 'Solo i logo in formato @formats@ sono permessi.',
+'info_logo_max_poids' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file &egrave; di @actuel@).',
+'info_logo_max_taille' => 'I logo devono obbligatoriamente avere una dimensione inferiore a @maxi@ (questo file &egrave; di @actuel@).',
 'info_mail_fournisseur' => 'tuo@provider.com',
 'info_message_2' => 'MESSAGGIO',
 'info_message_supprime' => 'MESSAGGIO ELIMINATO',
@@ -477,6 +489,7 @@ o contatta il tuo hoster.</font><br></b>',
 'info_visite' => 'visita:',
 'info_visites' => 'visite:',
 'info_vos_rendez_vous' => 'I tuoi prossimi appuntamenti',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'I tuoi memo',
 'item_breve_proposee' => 'Breve proposta',
 
@@ -597,12 +610,14 @@ Potrai quindi inserire una nuova password e riconnetterti all\'area riservata.',
 'pass_retour_public' => 'Torna al sito pubblico',
 'pass_rien_a_faire_ici' => 'Vicolo cieco...',
 'pass_vousinscrire' => 'Registrati al sito',
+'precedent' => 'precedente',
 'previsualisation' => 'Anteprima',
 'previsualiser' => 'Visualizzare l\'anteprima',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ visite; popolarit&agrave;: @popularite@',
+'suivant' => 'successivo',
 
 
 // T
@@ -672,11 +687,27 @@ funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccani
 
 
 // Z
+'zbug_balise_b_aval' => '&nbsp;: ciclo B a monte',
+'zbug_boucle' => 'ciclo',
+'zbug_boucle_recursive_undef' => 'ciclo ricorsivo non definito',
+'zbug_champ_hors_boucle' => 'Campo @champ@ fuori dal ciclo',
+'zbug_champ_hors_motif' => 'Campo @champ@ fuori da un ciclo di motivo @motif@',
+'zbug_code' => 'codice',
+'zbug_critere_inconnu' => 'criterio sconosciuto @critere@',
+'zbug_distant_interdit' => 'esterno non accessibile',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: doppia definizione',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: chiusura tag mancante',
 'zbug_erreur_boucle_syntaxe' => 'Sintassi del ciclo errata',
+'zbug_erreur_execution_page' => 'errore di esecuzione della pagina',
 'zbug_erreur_filtre' => 'Errore : filtro <b>&laquo; @filtre@ &raquo;</b> non esistente',
-'zbug_info_erreur_squelette' => 'Errore sul sito'
+'zbug_erreur_meme_parent' => '{meme_parent} si applica unicamente ai cicli (FORUMS) o (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Errore/i nel modello di layout',
+'zbug_info_erreur_squelette' => 'Errore sul sito',
+'zbug_inversion_ordre_inexistant' => 'inversione di un ordine non esistente',
+'zbug_parametres_inclus_incorrects' => 'Parametri di inclusione non corretti',
+'zbug_resultat' => 'risultato',
+'zbug_serveur_indefini' => 'server SQL non definito',
+'zbug_table_inconnue' => 'Tabella SQL &laquo; @table@ &raquo; sconosciuta'
 
 );
 

@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Voltar &aacute; interface gr&aacute;fica completa',
 'access_mode_texte' => 'Amosar a interface simplificada en modo texto',
+'admin_debug' => 'debug',
 'admin_modifier_article' => 'Modificar este artigo',
 'admin_modifier_auteur' => 'Modificar este autor',
 'admin_modifier_breve' => 'Modificar esta breve',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => 'mediod&iacute;a',
+'cal_jour_entier' => 'd&iacute;a enteiro',
+'cal_matin' => 'ma&ntilde;&aacute;',
+'cal_par_jour' => 'calendario por d&iacute;a',
+'cal_par_mois' => 'calendario por mes',
+'cal_par_semaine' => 'calendario por semana',
 'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
 'calendrier_synchro_prive' => '<NEW><NEW><PLUS_UTILISE><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
 'calendrier_synchro_public' => '<NEW><NEW><PLUS_UTILISE><NEW>El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
@@ -334,6 +341,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'icone_valider_message' => 'Validar a mensaxe',
 'icone_visiter_site' => 'Ver o web',
 'icone_voir_en_ligne' => 'Ver en li&ntilde;a',
+'img_indisponible' => 'imaxe non dispo&ntilde;&iacute;bel',
 'info_a_suivre' => 'PANEL DE CONTROL &raquo;',
 'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acceso prohibido',
@@ -368,6 +376,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_cours_edition' => 'Os seus artigos en proceso de edici&oacute;n',
 'info_creer_repertoire' => 'Crea un ficheiro ou cartafol chamado:',
 'info_creer_repertoire_2' => 'dentro do subcartafol <b>ecrire/data/</b>, e logo:',
+'info_creer_vignette' => 'creaci&oacute;n autom&aacute;tica da vi&ntilde;eta',
 'info_deplier' => 'Despregar',
 'info_descriptif_nombre' => 'descrici&oacute;n(s):',
 'info_description' => 'Descrici&oacute;n:',
@@ -488,6 +497,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_visite' => 'visita:',
 'info_visites' => 'visitas:',
 'info_vos_rendez_vous' => 'As t&uacute;as citas pendentes',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'As t&uacute;as notas',
 'item_breve_proposee' => 'Breve proposta',
 'item_gerer_referers' => '<NEW><PLUS_UTILISE><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
@@ -616,12 +626,14 @@ e reconectar co web.
 'pass_retour_public' => 'Volver ao web p&uacute;blico',
 'pass_rien_a_faire_ici' => 'Non hai nada que facer aqu&iacute;.',
 'pass_vousinscrire' => 'Rex&iacute;stra.te neste lugar',
+'precedent' => 'anterior',
 'previsualisation' => 'Previsualizaci&oacute;n',
 'previsualiser' => 'Previsualizar',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ visitas; popularidade: @popularite@',
+'suivant' => 'seguinte',
 
 
 // T
@@ -692,11 +704,28 @@ e reconectar co web.
 
 
 // Z
+'zbug_balise_b_aval' => '&nbsp;: baliza B en aval',
+'zbug_boucle' => 'bucle',
+'zbug_boucle_recursive_undef' => 'bucle recursivo non definido',
+'zbug_champ_argument_manquant' => 'campo @champ@&nbsp;: falta o argumento',
+'zbug_champ_hors_boucle' => 'Campo @champ@ f&oacute;ra de bucle',
+'zbug_champ_hors_motif' => 'Campo @champ@ f&oacute;ra dun bucle de motivo @motif@',
+'zbug_code' => 'c&oacute;digo',
+'zbug_critere_inconnu' => 'criterio desco&ntilde;ecido @critere@',
+'zbug_distant_interdit' => 'servizo externo prohibido',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dobre definici&oacute;n',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: tag de cerre ausente',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxe de bucle incorrecta',
+'zbug_erreur_execution_page' => 'erro de execuci&oacute;n da p&aacute;xina',
 'zbug_erreur_filtre' => 'Erro : filtro <b>&laquo; @filtre@ &raquo;</b> non definido',
-'zbug_info_erreur_squelette' => 'Erro no web'
+'zbug_erreur_meme_parent' => '{meme_parent} non &eacute; aplic&aacute;bel m&aacute;is que aos bucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Erro(s) no esqueleto',
+'zbug_info_erreur_squelette' => 'Erro no web',
+'zbug_inversion_ordre_inexistant' => 'inversi&oacute;n dunha orde inexistente',
+'zbug_parametres_inclus_incorrects' => 'Par&aacute;metros de inclusi&oacute;n incorrectos',
+'zbug_resultat' => 'resultado',
+'zbug_serveur_indefini' => 'servidor SQL indefinido',
+'zbug_table_inconnue' => 'T&aacute;boa SQL &laquo; @table@ &raquo; desco&ntilde;ecida'
 
 );
 
