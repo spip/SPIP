@@ -5,13 +5,16 @@ include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
+
+if (! strpos($redirect,'?')) $redirect .='?';
+
 // si demande auth_http
 if ($essai_auth_http == 'oui') {
 	include_ecrire('inc_session.php3');
 	if (! verifier_php_auth()) {
 		ask_php_auth("<b>Connexion refus&eacute;e.</b><p>(Login ou mot de passe incorrect.)<p>[<a href='./'>Retour au site public</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&redirect=./ecrire/'>Nouvelle tentative</a>] [<a href='./ecrire/'>espace priv&eacute</a>]");
 	} else {
-		@header("Location: $redirect");
+		@header("Location: $redirect&bonjour=oui");
 	}
 	exit;
 }
@@ -23,7 +26,7 @@ else if ($essai_auth_http == 'logout') {
 }
 
 // rejoue le cookie pour renouveler spip_session
-if ($change_session == "oui" || zap_session == 'oui') {
+if ($change_session == "oui") {
 	if (verifier_session($spip_session)) {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
@@ -38,6 +41,11 @@ if ($change_session == "oui" || zap_session == 'oui') {
 		@readfile('ecrire/img_pack/rien.gif');
 		exit;
 	}
+}
+
+// zapper les mauvaises sessions
+if ($zap_session && verifier_session($spip_session)){
+	zap_sessions($auteur_session['login'], true);
 }
 
 // tentative de login
@@ -87,9 +95,10 @@ else if ($essai_login == "oui") {
 				alea_futur = '$nouvel_alea_futur'
 			WHERE login='$login'";
 		@spip_query($query);
+		$redirect .= '&bonjour=oui';
 	}
-	else if ($redirect_echec) {
-		@header("Location: $redirect_echec?login=$login&erreur=pass");
+	else if ($redirect) {
+		@header("Location: $redirect&login=$login&erreur=pass");
 		exit;
 	}
 }
@@ -103,7 +112,7 @@ else if ($cookie_admin) {
 }
 
 // redirection
-if (!$redirect) $redirect = './index.php3';
+if (!$redirect) $redirect = './';
 
 @header("Location: $redirect");
 
