@@ -172,7 +172,7 @@ Ni kons&egrave;y aou kofirm pa ladomann linportasyon-la<p> Si ou n&eacute;na bez
 'bouton_radio_non_envoi_annonces_editoriales' => 'Anp&egrave;s anvway&eacute; bann zanons l&eacute;ditoryal',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Anp&egrave;s anvway&eacute; lalist bann nouv&egrave;lt&eacute;',
 'bouton_radio_non_syndication' => 'Anp&egrave;s lasindikasyon',
-'bouton_radio_occidental' => 'Alfab&eacute; oksidantal&nbsp; (<tt>iso-8859-1</tt>): tout bann navigat&egrave;r i gagn suport ali. Pangar li afis s&egrave;lman bann lang sak desertin i ap&egrave;l lang w&egrave;st-oksidantal akoz i kon&eacute; pa kr&eacute;ol o br&eacute;zilyin...(s&egrave;lman angl&eacute;,frans&eacute;, alman...)',
+'bouton_radio_occidental' => '<MODIF> Alfab&eacute; oksidantal&nbsp; (<tt>iso-8859-1</tt>): tout bann navigat&egrave;r i gagn suport ali. Pangar li afis s&egrave;lman bann lang sak desertin i ap&egrave;l lang w&egrave;st-oksidantal akoz i kon&eacute; pa kr&eacute;ol o br&eacute;zilyin...(s&egrave;lman angl&eacute;,frans&eacute;, alman...)',
 'bouton_radio_pas_petition' => 'Anp&egrave;s n&eacute;na filsinyatir',
 'bouton_radio_personnalise' => 'F&eacute; zw&eacute; inn lansanm bann karakt&egrave;r personaliz&eacute;&nbsp;: swazi posibilit&eacute;-la  si ou v&eacute;
 
@@ -184,7 +184,7 @@ ans&egrave;rv out prop lansanm bann karakt&egrave;r-linprimri',
 'bouton_radio_sauvegarde_non_compressee' => 'sovgard l&eacute; pa kopr&eacute;s&eacute; &egrave;k <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'D&eacute;gr&egrave;n filsinyatir',
 'bouton_radio_syndication' => 'Lasindikasyon :',
-'bouton_radio_universel' => 'Lalfab&eacute; inivers&egrave;l&nbsp; (<tt>utf-8</tt>): i p&eacute; afis tout bann lang lat&egrave;r, somansa n&eacute;na k&egrave;k navigat&egrave;r
+'bouton_radio_universel' => '<MODIF> Lalfab&eacute; inivers&egrave;l&nbsp; (<tt>utf-8</tt>): i p&eacute; afis tout bann lang lat&egrave;r, somansa n&eacute;na k&egrave;k navigat&egrave;r
 
 
 l&eacute; pa kav rokon&egrave;t ali.',
@@ -203,7 +203,6 @@ l&eacute; pa kav rokon&egrave;t ali.',
 
 // C
 'calendrier_synchro' => '<MODIF> Si ou ans&egrave;rv in lozisy&egrave;l pou in lajinda i mars &egrave;k <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...),ou p&eacute; m&egrave;t ali si lo ritm bann arnouv&egrave;lman laktyalit&eacute; lo sit-la.',
-'calendrier_synchro_lien' => 'Po r&eacute;kip&egrave;r&eacute; lo fisy&eacute; <i>iCal</i>',
 
 
 // D
@@ -407,10 +406,10 @@ Mersi aou m&egrave;t ansanm isi
 'ical_texte_js' => 'In liny "javascript" (zavaskrip) i perm&eacute; afis&eacute; tout bann zartik sat la finn d&egrave;t pibliy&eacute; an liny si lo sit-la. L&eacute; tr&eacute; sinp. Ou i p&eacute; afis&eacute; zot-la  si tout bann sit aou.',
 'ical_texte_prive' => 'Kalandry&eacute;-la l&eacute; s&egrave;lman disponib pou ou-minm. I di aou kosa i l&eacute; laktivit&eacute; &eacute;ditoryal lo sitw&egrave;b (kosa ou dwa f&eacute;, kank i l&eacute; out bann rand&eacute;vou, kank bann zartik &egrave;k bann tite-nouv&egrave;l la finn d&egrave;t propoz&eacute;...).',
 'ical_texte_public' => 'Kalandry&eacute;-la i di aou kosa i l&eacute; laktivit&eacute; pibli si lo sitw&egrave;b (i rapp&egrave;l tout bann zartik &egrave;k tite-nouv&egrave;l sat la finn d&egrave;t pibliy&eacute;).',
-'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
-'ical_titre_js' => '<NEW> Javascript',
-'ical_titre_mailing' => '<NEW> Mailing-list',
-'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
+'ical_texte_rss' => 'Ou p&eacute; sindik&eacute; bann nouv&egrave;lt&eacute; lo sit-la, kiswa i l&eacute; out l&eacute;kt&egrave;r bann fisy&eacute; andan lo forma  XML/RSS (Rich Site Summary). Forma-la i rann a SPIP kav lir bann nouv&egrave;lt&eacute; dot bann sitw&egrave;b, tout sat i ans&egrave;rv in forma l&eacute;sanz konpatib y p&eacute; aparey&eacute; v&egrave;k bann zot-la.',
+'ical_titre_js' => 'Javascript (Zavaskrip)',
+'ical_titre_mailing' => 'L&egrave;tlim&egrave;l',
+'ical_titre_rss' => 'Fisy&eacute; &laquo; backend &raquo;',
 'icone_a_suivre' => 'Pou swiv',
 'icone_activer_cookie' => 'F&eacute; zw&eacute; lo gatomakro d rokon&eacute;sans ',
 'icone_admin_site' => 'Kolonaz lo sitw&egrave;b',
@@ -422,7 +421,7 @@ Mersi aou m&egrave;t ansanm isi
 'icone_articles' => 'Bann zartik',
 'icone_auteurs' => 'Bann lot&egrave;r',
 'icone_breves' => 'Bann tit-nouv&egrave;l',
-'icone_brouteur' => '<NEW> Navigation rapide',
+'icone_brouteur' => 'Bat-kar&eacute; d&eacute;gaz&eacute;',
 'icone_calendrier' => 'Kalandriy&eacute;',
 'icone_calendrier_messagerie' => 'Lajinda &egrave;k kazmod&eacute;kri',
 'icone_configuration_site' => 'Konfigir lo sitw&egrave;b',
@@ -436,13 +435,13 @@ Mersi aou m&egrave;t ansanm isi
 'icone_creer_rubrique_2' => 'Kr&eacute; inn nouv&egrave;l rubrik',
 'icone_creer_sous_rubrique' => 'Kr&eacute; inn sourubrik ',
 'icone_deconnecter' => 'D&eacute;falk',
-'icone_discussions' => '<NEW> Discussions',
+'icone_discussions' => 'Bann kozman',
 'icone_doc_rubrique' => 'Bann dokiman dann bann rubrik',
 'icone_ecrire_article' => '&Eacute;kri inn nouvo lartik',
 'icone_ecrire_nouvel_article' => 'Bann tit-nouv&egrave;l dann rubrik-la',
 'icone_edition_site' => '<MODIF> L&eacute;disyon lo sitw&egrave;b',
 'icone_envoyer_message' => 'Anvwa mod&eacute;kri-la',
-'icone_etat_traductions' => '<NEW> &Eacute;tat des traductions',
+'icone_etat_traductions' => 'Koman nou la tradwi',
 'icone_evolution_visites' => 'L&eacute;volisyon do bann vizit<br>@visites@ visites@aff_ref@',
 'icone_evolution_visites_2' => 'L&eacute;volisyon do bann vizit',
 'icone_forum_administrateur' => 'Forom kozman bann komand&egrave;r',
@@ -450,7 +449,7 @@ Mersi aou m&egrave;t ansanm isi
 'icone_forum_suivi' => 'Swivi bann forom',
 'icone_forums_petitions' => 'Forom / filsinyatir',
 'icone_gestion_langues' => '<NEW> Gestion des langues',
-'icone_informations_personnelles' => 'Bann zinformasyon si lot&egrave;r',
+'icone_informations_personnelles' => 'Ladi Laf&eacute;',
 'icone_interface_complet' => 'Lint&egrave;rfas konpl&eacute;',
 'icone_interface_simple' => 'Lint&egrave;rfas sinp',
 'icone_maintenance_site' => 'Lantrotyen lo sitw&egrave;b',
@@ -804,6 +803,7 @@ la finn d&egrave;t publy&eacute;).',
 'info_nouveaux_message' => 'Bann nouvo mod&eacute;kri',
 'info_nouveaux_messages' => 'OU N&Egrave;NA @total_messages@ BANN MOD&Eacute;KRI',
 'info_nouvel_article' => 'Nouvo lartik',
+'info_nouvelle_traduction' => '<NEW> Nouvelle traduction&nbsp;:',
 'info_numero_article' => 'LARTIK NIM&Eacute;RO&nbsp;:',
 'info_obligatoire_02' => '[Obligatwar]',
 'info_option_email' => 'Kank inn vizit&egrave;r i m&egrave;t inn mod&eacute;kri dann forom sou inn lartik
@@ -1422,7 +1422,7 @@ aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prins
 'texte_informations_personnelles_1' => 'Ast&egrave;r lo sist&egrave;m i sra pou kr&eacute; aou inn laks&eacute; personaliz&eacute; si lo sitw&egrave;b.',
 'texte_informations_personnelles_2' => '(G&egrave;t byin tousa : si n&eacute;na inn nouv&egrave;l linstalasyon &eacute; si laks&eacute; i mars touzour, i p&eacute; ',
 'texte_introductif_article' => '(T&egrave;ks pour anb&egrave;k lartik.)',
-'texte_jeu_caractere' => 'Lopsyon-la l&eacute; itil si out sitw&egrave;b na bezwind afis&eacute; plisy&egrave;r zot lalfab&eacute;
+'texte_jeu_caractere' => '<MODIF> Lopsyon-la l&eacute; itil si out sitw&egrave;b na bezwind afis&eacute; plisy&egrave;r zot lalfab&eacute;
 an d&eacute;or lalfab&eacute; rominn (&laquo;&nbsp;oksidantal&nbsp;&raquo;) ou tout bann d&eacute;riv&eacute;.
 Dann ka-la, ou dwa sanz lo r&eacute;glaz otomatik pou anserv 
 lansanm bann karakt&egrave;r-limprimri sak l&eacute; n&eacute;s&eacute;s&egrave;r. Oubli pa sanz baliz (<tt>#CHARSET</tt>)dan kod bann paz lo sit, pou perm&egrave;t la l&eacute;ktir bann karakt&egrave;rsa-minm si lo navigat&egrave;r. ',
@@ -1641,7 +1641,11 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon',
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
 'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
-'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)'
+'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Po r&eacute;kip&egrave;r&eacute; lo fisy&eacute; <i>iCal</i>'
 
 );
 

@@ -757,6 +757,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_nouveaux_message' => 'Messatges nu&ograve;us',
 'info_nouveaux_messages' => 'AVETZ @total_messages@ MESSATGES NU&Ograve;US',
 'info_nouvel_article' => 'Article nu&ograve;u',
+'info_nouvelle_traduction' => 'Revirada nu&ograve;va:',
 'info_numero_article' => 'ARTICLE NUMERO:',
 'info_obligatoire_02' => '[Obligat&ograve;ri]',
 'info_option_email' => 'Quand un vesitaire dau sit manda un messatge nu&ograve;u au forum
@@ -1652,7 +1653,6 @@ s\'avetz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_lier' => 'Queste article es una revirada de l\'article numero:',
 'trad_new' => 'Escriure una revirada novela de queste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
-
 
 );
 
