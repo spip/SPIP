@@ -1907,7 +1907,7 @@ function creer_colonne_droite($rubrique=""){
 function debut_droite($rubrique="") {
 	global $options, $spip_ecran, $deja_colonne_droite;
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques, $clean_link;
-	global $flag_3_colonnes, $flag_centre_large;
+	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
 
 	if ($options == "avancees") {
 		// liste des articles bloques
@@ -1917,30 +1917,44 @@ function debut_droite($rubrique="") {
 			$num_articles_ouverts = spip_num_rows($result);
 			if ($num_articles_ouverts) {
 				echo "<p>";
-				debut_cadre_formulaire('racine-24.gif');
-				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-
-				echo _T('info_cours_edition')."&nbsp;:".aide('artmodif')."<br>";
+				debut_cadre_enfonce('article-24.gif');
+				//echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+				echo "<div class='verdana2' style='padding: 2px; background-color:$couleur_foncee; color: white; font-weight: bold;'>";
+					echo _T('info_cours_edition')."&nbsp;:".aide('artmodif');
+				echo "</div>";
 				while ($row = @spip_fetch_array($result)) {
 					$ze_article = $row['id_article'];
 					$ze_titre = typo($row['titre']);
-					echo "<br />";
+					
+					
+					if ($ifond == 1) {
+						$couleur = $couleur_claire;
+						$ifond = 0;
+					} else {
+						$couleur = "#eeeeee";
+						$ifond = 1;
+					}
+					
+					echo "<div style='padding: 3px; background-color: $couleur;'>";
+					echo "<div class='verdana1'><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></div></b>";
+					
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
 						$nb_liberer ++;
 						$lien = $clean_link;
 						$lien->addVar('debloquer_article', $ze_article);
-						echo "<a href='". $lien->getUrl() ."' title='"._T('lien_liberer')."'><img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='top'></a>&nbsp;";
+						echo "<div class='arial1' style='text-align:right;'><a href='". $lien->getUrl() ."' title='"._T('lien_liberer')."'>"._T('lien_liberer')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a></div>";
 					}
-					echo "<a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
+				
+					echo "</div>";
 				}
 				if ($nb_liberer >= 4) {
 					$lien = $clean_link;
 					$lien->addVar('debloquer_article', 'tous');
-					echo "<br /><br /><a href='". $lien->getUrl() ."'><img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='top'><img src='img_pack/croix-rouge.gif' alt='' width='7' height='7' border='0' align='top'>&nbsp;["._T('lien_liberer_tous')."]</a>";
+					echo "<div class='arial2' style='text-align:right; padding:2px; border-top: 1px solid $couleur_foncee;'><a href='". $lien->getUrl() ."'>"._T('lien_liberer_tous')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='' width='7' height='7' border='0' align='middle'></a></div>";
 				}
-				echo "</font>";
-				fin_cadre_formulaire();
+				//echo "</font>";
+				fin_cadre_enfonce();
 			}
 		}
 		
