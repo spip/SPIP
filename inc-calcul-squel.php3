@@ -1383,6 +1383,10 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$code = "lire_meta('charset')";
 		break;
 
+	case 'LANG':
+		$code = "lire_meta('langue_site')";
+		break;
+
 	case 'LANG_LEFT':
 		$code = "lang_dir(\$GLOBALS['spip_lang'],'left','right')";
 		break;
