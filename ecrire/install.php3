@@ -5,7 +5,7 @@ define("_ECRIRE_INSTALL", "1");
 include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
 
-utiliser_langue_visiteur();
+# utiliser_langue_visiteur(); # fait dans inc_presentation
 
 if (_FILE_CONNECT) {
 	install_debut_html();
