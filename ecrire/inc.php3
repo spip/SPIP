@@ -117,14 +117,14 @@ switch ($prefs['couleur']) {
 		/// Rouge vif
 		$couleur_foncee="#FF0000";
 		$couleur_claire="#FFEDED";
-		$couleur_lien="#0018FC";
+		$couleur_lien="#D302CE";
 		$couleur_lien_off="#D40202";
 		break;
 	case 10:
 		/// Orange
 		$couleur_foncee="#E95503";
 		$couleur_claire="#FFF2EB";
-		$couleur_lien="#73A104";
+		$couleur_lien="#81A0C1";
 		$couleur_lien_off="#FF5B00";
 		break;
 	case 11:
