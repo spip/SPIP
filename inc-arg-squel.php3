@@ -185,12 +185,12 @@ function calculer_params($type, $params, $idb, &$boucles)
 	if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
 	  $col = $regs[1];
 	  if ($regs[2]) {
-	    $date_orig = "date_redac";
-	    $date_compare = 'date_redac';
+	    $date_orig = "PileRow[0][date_redac]";
+	    $date_compare = 'PileRow[0][date_redac]';
 	  }
 	  else {
 	    $date_orig = $table_date[$type];
-	    $date_compare = 'date';
+	    $date_compare = 'PileRow[0][date]';
 	  }
 	  $date_orig = "$id_table.$date_orig"; 
 
