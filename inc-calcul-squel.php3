@@ -902,6 +902,13 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'vider_url';
 	}
 
+	// URL_xxx des objets SPIP indexables : gerer le var_recherche
+	$c = array('URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_MOT');
+	reset($c);
+	while (list(, $val) = each($c)) {
+		$champs_traitement[$val][] = 'url_var_recherche';
+	}
+
 	// URLs : remplacer les & par &amp;
 	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'PARAMETRES_FORUM',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT');
