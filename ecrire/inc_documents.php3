@@ -26,7 +26,7 @@ function texte_upload($inclus){
 	return ($texte_upload);
 }
 
-function afficher_document($id_document) {
+function afficher_document($id_document, $id_doc_actif=0) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
@@ -68,7 +68,10 @@ function afficher_document($id_document) {
 	}
 
 	$block = "document $id_document";
-	echo bouton_block_invisible($block);
+	if ($id_document == $id_doc_actif)
+		echo bouton_block_visible($block);
+	else
+		echo bouton_block_invisible($block);
 	echo "<font face='Verdana, Arial, Helvetica, sans-serif'>\n";
 	echo "<font size='4' color='#444444'><b>$titre</b></font> ";
 	echo "<font size='2'>";
@@ -82,12 +85,15 @@ function afficher_document($id_document) {
 
 	echo "<font size='1'>";
 	$hash = calculer_action_auteur("supp_doc ".$id_document);
-	echo "[<b><a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=".$id_document."'>SUPPRIMER&nbsp;CE&nbsp;DOCUMENT</a></b>]\n";
+	echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=".$id_document."'>supprimer le document</a>]\n";
 	echo "</font>\n";
 
 	echo "</font>\n";
 
-	echo debut_block_invisible($block);
+	if ($id_document == $id_doc_actif)
+		echo debut_block_visible($block);
+	else
+		echo debut_block_invisible($block);
 	echo debut_boite_info();
 
 	echo "<table width='100%' border='0' cellspacing='0' cellpadding='8'><tr>\n";
@@ -206,18 +212,17 @@ function afficher_document($id_document) {
 	echo "<input type='hidden' name='id_document' value='$id_document'>";
 	echo "<input type='hidden' name='modif_document' value='oui'>";
 
-	$titre = htmlspecialchars($titre);
 	echo "<b>Titre&nbsp;:</b><br>\n";
 	echo "<INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"".htmlspecialchars($titre)."\" SIZE='40'><br>";
 
 	echo "<b>Description&nbsp;:</b><br>\n";
-	echo "<textarea name='descriptif' CLASS='forml' ROWS='3' COLS='*' wrap='soft'>";
+	echo "<textarea name='descriptif' CLASS='forml' ROWS='5' COLS='*' wrap='soft'>";
 	echo htmlspecialchars($descriptif);
 	echo "</textarea>\n";
 
-	echo "<div align='right'>";
-	echo "<input clasS='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
-	echo "</div>";
+	echo "<p align='right'>";
+	echo "<input class='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
+	echo "</p>";
 	echo "</form>";
 	echo "</font>";
 
