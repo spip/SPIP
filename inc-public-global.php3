@@ -24,9 +24,14 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 				'contexte' => $contexte),
 			$delais,
 			$inclusion);
-		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
-		.spip_timer('calculer_page')."): $chemin_cache");
+
 		$lastmodified = time();
+
+		// log
+		if (!$log = $chemin_cache) $log = "($fond, delais=$delais, "
+		. $GLOBALS['HTTP_SERVER_VARS']['REQUEST_METHOD'].")";
+		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
+		.spip_timer('calculer_page')."): $log");
 
 		// on vient d'ecrire le cache : creer un .NEW fantome qui indique
 		// qu'il faut changer d'invalideur a la prochaine lecture et donner
