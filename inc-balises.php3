@@ -459,7 +459,7 @@ function balise_LESAUTEURS_dist ($p) {
 	// construction speciale sql_auteurs(id_article) ;
 	// dans le cas contraire on prend le champ 'les_auteurs' (cas de
 	// spip_syndic_articles)
-	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][lesauteurs]') {
+	if ($_lesauteurs AND $_lesauteurs != '$Pile[0][\'lesauteurs\']') {
 		$p->code = $_lesauteurs;
 	} else {
 		$_id_article = champ_sql('id_article', $p);
