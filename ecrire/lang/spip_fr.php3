@@ -1223,6 +1223,12 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'menu_aide_suivi_forum_statistiques' => 'Statistiques des visites',
 'menu_aide_suivi_forum_suivi' => 'Suivi des forums',
 'menu_aide_suivi_forum_systeme_breves' => 'Syst&egrave;me de br&egrave;ves',
+'module_fichier_langue' => 'Fichier de langue',
+'module_fichiers_langues' => 'Fichiers de langues',
+'module_texte_explicatif' => 'Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
+'module_texte_traduction' => 'Ce fichier de langue est disponible en&nbsp;:',
+'module_raccourci' => 'Raccourci',
+'module_texte_affiche' => 'Texte affich&eacute;',
 'mois_non_connu' => 'non connu',
 
 
