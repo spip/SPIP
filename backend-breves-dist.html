@@ -15,8 +15,7 @@
 		<description></description>
 	</image>
 
-<BOUCLE_rub(RUBRIQUES){id_rubrique}>
-	<BOUCLE1(BREVES){id_rubrique}{par date}{inverse}{0,10}>
+	<BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{par date}{inverse}{0,10}>
 	<item>
 		<title>[(#TITRE|texte_backend)]</title>
 		<link>#URL_SITE_SPIP/#URL_BREVE</link>
@@ -26,21 +25,7 @@
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
 	</item>
-	</BOUCLE1>
-</BOUCLE_rub>
-
-	<BOUCLE2(BREVES){tout}{par date}{inverse}{0,10}>
-	<item>
-		<title>[(#TITRE|texte_backend)]</title>
-		<link>#URL_SITE_SPIP/#URL_BREVE</link>
-		<date>#DATE</date>
-		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_BREVE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#TEXTE|texte_backend)]</description>
-		<dc:date>[(#DATE|date_iso)]</dc:date>
-		<dc:format>text/html</dc:format>
-		<dc:language>#LANG</dc:language>
-	</item>
-	</BOUCLE2>
-<//B_rub>
+	</BOUCLE_breves>
 
 </channel>
 
