@@ -129,22 +129,21 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 		}
 	}
 
-	if ($echec_cookie == "oui") {
-	  $res = "<div><h3 class='spip'>" .
-	    (_T('erreur_probleme_cookie')) .
-	    '</h3><div style="font-family: Verdana, arial,helvetica,sans-serif; font-size: 12px;"><p /><b>' .
-	    _T('login_cookie_oblige')."</b> " .
-	    _T('login_cookie_accepte')."\n";
+	if ($echec_cookie) {
+		$res = "<div><h3 class='spip'>" .
+		(_T('erreur_probleme_cookie')) .
+		'</h3><div style="font-family: Verdana, arial,helvetica,sans-serif; font-size: 12px;"><p /><b>' .
+		_T('login_cookie_oblige')."</b> " .
+		_T('login_cookie_accepte')."\n";
 	}
 	else {
 		$res = '<div><div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">' .
-		  (!$message ? '' :
-		   ("<br />" . 
-		    _T("forum_vous_enregistrer") . 
-		    " <a $pass_popup>" .
-		    _T("forum_vous_inscrire") .
-		    "</a><p />\n")) ;
-		   
+		(!$message ? '' :
+			("<br />" . 
+			_T("forum_vous_enregistrer") . 
+			" <a $pass_popup>" .
+			_T("forum_vous_inscrire") .
+			"</a><p />\n")) ;
 	}
 
 # Affichage du formulaire de login avec un challenge MD5 en javascript
@@ -210,7 +209,7 @@ function login_pour_tous($cible, $prive, $message, $action, $mode) {
 			 'document.form_login.session_password.focus();' :
 			 'document.form_login.var_login.focus();');
 
-	if ($echec_cookie == "oui" AND $php_module AND !$ignore_auth_http) {
+	if ($echec_cookie AND $php_module AND !$ignore_auth_http) {
 		$res .= "<form action='spip_cookie.php3' method='get'>";
 		$res .= "<fieldset>\n<p>";
 		$res .= _T('login_preferez_refuser')." \n";
