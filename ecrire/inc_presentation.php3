@@ -1691,56 +1691,64 @@ function debut_gauche($rubrique = "asuivre") {
 //
 
 function debut_droite() {
-	echo '<br></font>&nbsp;</td>
-		<td width=50 rowspan=1>&nbsp;</td>
-		<td width=500 valign="top" rowspan=2>
-		<font face="Georgia,Garamond,Times,serif" size=3>';
+	global $options;
+
+	echo '<br></font>&nbsp;</td><td width=50 rowspan=1>&nbsp;</td><td width=500 valign="top" rowspan=2><font face="Georgia,Garamond,Times,serif" size=3>';
 
 	// zap sessions si bonjour
-	if($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
+	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
 		$securite = $GLOBALS['prefs']['securite'];
 		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
 
-		if ($zappees) {
+		if ($zappees && $GLOBALS['bonjour'] == "oui" && ($securite == 'strict' || $options == 'avancees')) {
 			debut_cadre_enfonce();
 			gros_titre("Avertissement de s&eacute;curit&eacute;");
 
-			if ($securite == 'strict')
-				echo "<p>Il y avait " . ($zappees + 1) ." connexions parall&egrave;les &agrave; votre nom,"
-					. " Conform&eacute;mement &agrave; vos r&eacute;glages, "
-					. " le syst&egrave;me a supprim&eacute; celle"
-					. ($zappees > 1 ? 's' : '') 
-					. " que vous n'utilisez pas actuellement.\n";
+			if ($securite == 'strict') {
+				if ($zappees > 1)
+					echo "<p>Il y avait " . ($zappees) ." connexion(s) parall&egrave;le(s) &agrave; votre nom. "
+						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
+						. " le syst&egrave;me a supprim&eacute; ces connexions.\n";
+				else
+					echo "<p>Il y avait une connexion parall&egrave;le &agrave; votre nom. "
+						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
+						. " le syst&egrave;me a supprim&eacute; cette connexion.\n";
+			}
 			else
-				echo "<p>Il y a actuellement " . ($zappees+1) ." connexions parall&egrave;les &agrave; votre nom.\n";
+				echo "<p>Il y a actuellement " . ($zappees + 1) ." connexions simultan&eacute;es &agrave; votre nom.\n";
 
-			echo "<p>" . propre( "<img align='right'
-				src='img_pack/deconnecter-24.gif'>Lorsque vous aurez
-				termin&eacute; de travailler dans l'espace priv&eacute;,
-				pensez &agrave; vous d&eacute;connecter, soit en quittant
-				votre navigateur, soit en cliquant sur le bouton
-				ci-dessus.")
-				."\n<p>";;
+			echo "<p>";
+			echo propre("<img align='right' src='img_pack/deconnecter-24.gif'>" .
+				"Pour &eacute;viter d'afficher ce message et de rendre votre connexion ".
+				"vuln&eacute;rable, pensez, lorsque vous aurez " .
+				"fini de travailler dans l'espace priv&eacute;, " .
+				"&agrave; vous d&eacute;connecter en cliquant sur le bouton ".
+				"ci-dessus. Il se peut aussi que vous ayez plusieurs connexions ".
+				"ouvertes depuis d'autres machines ou d'autres navigateurs, ".
+				"ou que quelqu'un d'autre utilise votre identifiant (si vous ".
+				"l'y avez autoris&eacute;).");
+			echo "\n<p>";
 
-			echo bouton_block_invisible("secu") . "<b>En savoir plus...</b>";
-			echo debut_block_invisible("secu");
+			echo propre("Pour plus d'informations, vous pouvez afficher les informations de s&eacute;curit&eacute;.");
+			echo "<p>";
 
+			echo "<div align='right'>";
+			$link = new Link('index.php3?secu=oui');
+			echo $link->getForm('GET');
+			echo "<input type='submit' class='fondo' name='submit' value='Afficher les informations de s&eacute;curit&eacute;'>\n";
+			echo "</form></div>\n";
+
+			fin_cadre_enfonce();
 		}
 		else if ($GLOBALS['secu'] == 'oui') {
 			debut_cadre_enfonce();
-			if ($securite == 'strict') {
+			if ($securite == 'strict')
 				gros_titre("Type de connexion&nbsp;: s&eacute;curit&eacute; stricte");
-			}
 			else
 				gros_titre("Type de connexion&nbsp;: s&eacute;curit&eacute; normale");
+
 			echo "<p>";
 
-			echo bouton_block_visible("secu") . "<b>En savoir plus...</b>";
-			echo debut_block_visible("secu");
-
-		}
-
-		if ($zappees || $GLOBALS['secu'] == 'oui') {
 			$link = new Link();
 			$link->addVar('secu', 'oui');
 
@@ -1749,21 +1757,20 @@ function debut_droite() {
 				$link->addVar('securite', 'normal');
 
 				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;stricte&raquo;. ".
-					"Cela veut dire que vous ne pouvez pas faire les choses suivantes:\n\n".
-					"- Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents ".
+					"Les connexions multiples y sont interdites. ".
+					"Cela veut dire que {{vous ne pouvez pas faire les choses suivantes}}:\n\n".
+					"- {Vous connecter depuis plusieurs machines ou plusieurs navigateurs} diff&eacute;rents ".
 					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;.\n".
-					"- Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes.\n".
-					"- Vous connecter depuis des liaisons Internet qui changent r&eacute;guli&egrave;rement d'adresse IP.\n\n".
-					"Ces limitations renforcent la s&eacute;curit&eacute; du syst&egrave;me.\n\n".
-					"D'autre part, un avertissement s'affichera &agrave; chaque fois qu'une ".
-					"autre connexion que la v&ocirc;tre est d&eacute;tect&eacute;e (soit parce que vous ne vous &ecirc;tes ".
-					"pas d&eacute;connect&eacute; la derni&egrave;re fois, soit parce que quelqu'un a &eacute;ventuellement ".
-					"r&eacute;ussi &agrave; se connecter &agrave; votre insu).\n\n".
-					"Pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus,".
-					" vous pouvez passer &agrave; un mode de s&eacute;curit&eacute; moins strict.");
+					"- {Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
+					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif).\n".
+					"- {Vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
+					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
+					"ordinateur de fa&ccedil;on unique).\n\n\n".
+					"Notez que pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus, ".
+					"vous devez repasser en mode de s&eacute;curit&eacute; normal.");
 				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
 
-				echo "<div align='right'>";
+				echo "<p><div align='right'>";
 				echo $link->getForm('POST');
 				echo "<input type='submit' class='fondo' name='submit' value='Repasser en s&eacute;curit&eacute; normale'>\n";
 				echo "</form></div>\n";
@@ -1772,23 +1779,27 @@ function debut_droite() {
 				$link = new Link();
 				$link->addVar('securite', 'strict');
 
-					echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;normale&raquo;. ".
-					"Cela veut dire que les connexions parall&egrave;les sont autoris&eacute;es: ainsi, vous pouvez faire les choses suivantes :\n\n\n\n".
-					"- Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents ".
+				echo propre("Vous &ecirc;tes en mode de s&eacute;curit&eacute; &laquo;normale&raquo;. ".
+					"Cela veut dire que les connexions multiples sont autoris&eacute;es. ".
+					"Ainsi, vous pouvez faire les choses suivantes :\n\n\n\n".
+					"- {Vous connecter depuis plusieurs machines ou plusieurs navigateurs diff&eacute;rents} ".
 					"sans &ecirc;tre automatiquement d&eacute;connect&eacute;.\n".
-					"- Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes.\n".
-					"- Vous connecter depuis des liaisons Internet qui changent r&eacute;guli&egrave;rement d'adresse IP.\n\n".
-					"En contrepartie, la s&eacute;curit&eacute; du syst&egrave;me n'est pas maximale. Si vous n'utilisez pas les ".
-					"possibilit&eacute;s mentionn&eacute;es ci-dessus et que vous &ecirc;tes soucieux de votre s&eacute;curit&eacute;, ".
+					"- {Utiliser le m&ecirc;me identifiant pour plusieurs personnes diff&eacute;rentes} ".
+					"(utile en cas de d&eacute;monstration du syst&egrave;me, ou d'auteur collectif).\n".
+					"- {Vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
+					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
+					"ordinateur de fa&ccedil;on unique).\n\n\n".
+					"En contrepartie, la s&eacute;curit&eacute; du syst&egrave;me n'est pas maximale. ".
+					"Si vous n'utilisez pas les possibilit&eacute;s mentionn&eacute;es ci-dessus et ".
+					"que vous &ecirc;tes tr&egrave;s soucieux de votre s&eacute;curit&eacute;, ".
 					"vous pouvez passer &agrave; un mode de connexion plus strict.\n\n\n\n");
+
 				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
-				echo "<div align='right'>";
+				echo "<p><div align='right'>";
 				echo $link->getForm('POST');
 				echo "<input type='submit' class='fondo' name='submit' value='Passer en s&eacute;curit&eacute; stricte'>\n";
 				echo "</form></div>\n";
-
 			}
-			echo fin_block();
 			fin_cadre_enfonce();
 		}
 	}
