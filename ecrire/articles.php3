@@ -1010,7 +1010,7 @@ if (spip_num_rows($result)) {
 		echo "</TD>\n";
 
 		echo "<TD CLASS='arial2' ALIGN='right'>";
-		if ($nombre_articles > 1) echo "$nombre_articles articles";
+		if ($nombre_articles > 1) echo $nombre_articles.' '._T('info_article_2');
 		else if ($nombre_articles == 1) echo _T('info_1_article');
 		else echo "&nbsp;";
 		echo "</TD>\n";
