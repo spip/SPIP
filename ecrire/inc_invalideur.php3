@@ -97,6 +97,9 @@ function retire_caches($chemin_prioritaire = '') {
 	if (count($supprimes) < $max) {
 		effacer_meta('invalider');
 		ecrire_metas();
+	} else {
+		ecrire_meta('invalider', 'oui');
+		ecrire_metas();
 	}
 }
 
