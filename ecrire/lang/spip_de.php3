@@ -1135,7 +1135,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 
 // S
 'stats_visites_et_popularite' => '@visites@ Besuche; Beliebtheit: @popularite@',
-'statut_admin_restreint' => '<NEW> (admin restreint)',
+'statut_admin_restreint' => '(Rubrik-Admin)',
 
 
 // T
