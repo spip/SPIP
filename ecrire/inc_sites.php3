@@ -181,20 +181,20 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		}
 		if (is_array($item)) {
 			for ($i = 0 ; $i < count($item) ; $i++) {
-				if (ereg("<title>(.*)</title>",$item[$i],$match))
-					$le_titre = filtrer_entites(addslashes($match[1]));
+				if (ereg("<title>([^<]*)</title>",$item[$i],$match))
+					$le_titre = addslashes(filtrer_entites($match[1]));
 				else continue;
-				if (ereg("<link>(.*)</link>",$item[$i],$match))
-					$le_lien = filtrer_entites(addslashes($match[1]));
+				if (ereg("<link>([^<]*)</link>",$item[$i],$match))
+					$le_lien = addslashes(filtrer_entites($match[1]));
 				else continue;
-				if (ereg("<date>(.*)</date>",$item[$i],$match))
-					$la_date = filtrer_entites(addslashes($match[1]));
+				if (ereg("<([[:alpha:]]+:)?date>([^<]*)</([[:alpha:]]+:)?date>",$item[$i],$match))
+					$la_date = addslashes(filtrer_entites($match[2]));
 				else $la_date = date("Y-m-j H:i:00");
-				if (ereg("<author>(.*)</author>",$item[$i],$match))
-					$les_auteurs = filtrer_entites(addslashes($match[1]));
+				if (ereg("<author>([^<]*)</author>",$item[$i],$match))
+					$les_auteurs = addslashes(filtrer_entites($match[1]));
 				else $les_auteurs = "";
 				if (ereg("<description[^>]*>([^<]*)</description>",$item[$i],$match))
-					$la_description = filtrer_entites(addslashes($match[1]));
+					$la_description = addslashes(filtrer_entites($match[1]));
 				else $la_description = "";
 
 				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
