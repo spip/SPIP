@@ -24,6 +24,7 @@ function filtrer_ical ($texte) {
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, $charset, 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
+	//$texte = ereg_replace("\r", " ", $texte);
 	$texte = ereg_replace(",", "\,", $texte);
 
 	return $texte;
@@ -56,7 +57,6 @@ if (!$id_utilisateur) {
 
 
 @header ("content-type:text/calendar");
-//@header("Content-Disposition: attachment; filename=spipcal-$id_utilisateur.ics");
 
 ligne ("BEGIN:VCALENDAR");
 ligne ("CALSCALE:GREGORIAN");
@@ -135,6 +135,7 @@ ligne ("VERSION:2.0");
 
 
 
+
 	// Articles et breves proposes
 	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'prop'");
 	while($row=spip_fetch_array($result_articles)){
@@ -164,7 +165,7 @@ ligne ("VERSION:2.0");
 		ligne("URL:$adresse_site/ecrire/breves_voir.php3?id_breve=$id_breve");
 		ligne ("END:VTODO");
 	}
-	
+
 
 
 
