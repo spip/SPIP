@@ -1330,6 +1330,19 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 
 	//
+	// Formulaire de changement de langue / page de login
+	case 'FORMULAIRE_LANG_ECRIRE':
+		$milieu = '
+		$'.$nom_var.' = "<"."?php
+			include_ecrire(\"inc_lang.php3\");
+			echo menu_langues(\"changer_lang\", \$menu_lang);
+			?".">";
+		';
+
+		break;
+
+
+	//
 	// Formulaire pour ecrire a l'auteur
 	//
 	case 'FORMULAIRE_ECRIRE_AUTEUR':

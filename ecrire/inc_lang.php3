@@ -91,10 +91,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang, $flag_ecrire;
 
-	if ($flag_ecrire)
-		$liste_langues = $all_langs;
-	else
-		$liste_langues = lire_meta('langues_multilingue');
+	$liste_langues = $all_langs.','.lire_meta('langues_multilingue');
 
  	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
 		$GLOBALS['spip_lang'] = $lang;
@@ -395,39 +392,44 @@ function lang_dselect ($rien='') {
 
 
 //
-// Afficher un menu de selection de langue
+// Afficher un menu de selection de langue / var_lang = langue interface privee, var_multi = langue de l'article
 //
-function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
+function menu_langues($nom_select = 'changer_lang', $default = '', $texte = '', $herit = '') {
 	global $couleur_foncee, $couleur_claire, $flag_ecrire;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
 
-	if ($flag_ecrire) {
-		if ($nom_select == 'var_lang')	// interface
-			$langues = explode(',', $GLOBALS['all_langs']);
-		else	// menu "langue de larticle"
-			$langues = explode(',', lire_meta('langues_multilingue'));
-	} else {
-		// site public : les langues proposees
+	if ($nom_select == 'changer_lang')
+		$langues = explode(',', $GLOBALS['all_langs']);
+	else
 		$langues = explode(',', lire_meta('langues_multilingue'));
-	}
 
 	if (count($langues) <= 1) return;
 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
 	$lien = $GLOBALS['clean_link'];
-	$lien->delVar($nom_select);
-	$lien = $lien->getUrl();
+	if ($flag_ecrire) {
+		$lien = rawurlencode('ecrire/'.$lien->getUrl());
+		$dir = '../';
+	} else {
+		$lien = rawurlencode($lien->getUrl());
+		$dir = '';
+	}
 
-	$amp = (strpos(' '.$lien,'?') ? '&' : '?');
-
-	$ret = "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
+	$ret = "<form action='${dir}spip_cookie.php3' method='post' style='margin:0px; padding:0px;'>";
+	$ret .= "<input type='hidden' name='url' value='$lien'>";
 	$ret .= $texte;
-	if (!$flag_ecrire) $ret .= "\n<select name='$nom_select' class='forml' style='vertical-align: top; margin-bottom: 5px; width: 120px;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
-	else if ($nom_select == 'var_lang') $ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_claire; color: black;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
-	else $ret .= "\n<select name='$nom_select' class='fondl'>\n";
+
+	if (!$flag_ecrire)
+		$style = "class='forml' style='vertical-align: top; margin-bottom: 5px; width: 120px;'";
+	else if ($nom_select == 'changer_lang') 
+		$style = "class='verdana1' style='background-color: $couleur_claire; color: black;'";
+	else
+		$style = "class='fondl'";
+
+	$ret .= "\n<select name='$nom_select' $style onChange=\"document.location.href='${dir}spip_cookie.php3?url=$lien&$nom_select='+this.options[this.selectedIndex].value\">\n";
 
 	sort($langues);
 	while (list(, $l) = each ($langues)) {
@@ -444,9 +446,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
-	if (!$flag_ecrire)  $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='&gt;&gt;' class='spip_bouton' style='vertical-align: top;'></noscript>";
-	else if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
-	else $ret .= "<INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondo'>";
+	$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='&gt;&gt;' class='spip_bouton' $style></noscript>";
 	$ret .= "</form>";
 	return $ret;
 }
@@ -469,7 +469,7 @@ function utiliser_langue_site() {
 }
 
 function utiliser_langue_visiteur() {
-	global $var_lang, $HTTP_COOKIE_VARS, $flag_ecrire;
+	global $HTTP_COOKIE_VARS, $flag_ecrire;
 
 	if (!regler_langue_navigateur())
 		utiliser_langue_site();
@@ -477,11 +477,9 @@ function utiliser_langue_visiteur() {
 	if ($GLOBALS['auteur_session']['lang'])
 		changer_langue($GLOBALS['auteur_session']['lang']);
 
-	if (!$flag_ecrire AND $cookie_lang = $HTTP_COOKIE_VARS['spip_lang_public'])
+	if (!$flag_ecrire AND $cookie_lang = $HTTP_COOKIE_VARS['spip_lang'])
 		changer_langue($cookie_lang);
 
-	if ($var_lang)
-		changer_langue($var_lang);
 }
 
 //

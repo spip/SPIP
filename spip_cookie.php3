@@ -177,6 +177,32 @@ if ($cookie_session) {
 
 }
 
+// changement de langue espace public
+if ($var_lang) {
+	include_ecrire('inc_lang.php3');
+
+	if (changer_langue($var_lang))
+		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
+}
+
+// changer de langue espace prive (ou login)
+if ($changer_lang) {
+	include_ecrire('inc_lang.php3');
+	include_ecrire("inc_session.php3");
+	verifier_visiteur();
+
+	if (changer_langue($changer_lang)) {
+		spip_setcookie('spip_lang_ecrire', $changer_lang, time() + 365 * 24 * 3600);
+		spip_setcookie('spip_lang', $changer_lang, time() + 365 * 24 * 3600);
+
+		if ($changer_lang AND $auteur_session) {
+			spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($changer_lang)."' WHERE id_auteur = ".$auteur_session['id_auteur']);
+			$auteur_session['lang'] = $changer_lang;
+			ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
+		}
+	}
+}
+
 // Redirection
 // Sous Apache, les cookies avec une redirection fonctionnent
 // Sinon, on fait un refresh HTTP

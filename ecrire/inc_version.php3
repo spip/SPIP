@@ -657,6 +657,7 @@ class Link {
 
 	function getUrl($anchor = '') {
 		$url = $this->file;
+		if (!$url) $url = './';
 		$query = '';
 		$vars = $this->getAllVars();
 		if (is_array($vars)) {
@@ -755,7 +756,8 @@ function getTmpVar($name) {
 $this_link = new Link();
 
 $clean_link = $this_link;
-
+$clean_link->delVar('submit');
+$clean_link->delVar('recalcul');
 if (count($GLOBALS['HTTP_POST_VARS'])) {
 	$clean_link->clearVars();
 	$vars = array('id_article', 'coll', 'id_breve', 'id_rubrique', 'id_syndic', 'id_mot', 'id_auteur', 'var_login'); // il en manque probablement ?
@@ -766,6 +768,7 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 		}
 	}
 }
+
 
 //
 // Lire les meta cachees
