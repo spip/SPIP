@@ -6,7 +6,7 @@ if (!@file_exists("inc_connect.php3")) {
 	exit;
 }
 
-include ("inc_version.php3");
+if (!defined('_ECRIRE_INC_VERSION')) { include ("inc_version.php3"); }
 
 include_ecrire("inc_auth.php3");
 
