@@ -796,6 +796,7 @@ function parser($texte) {
 
 	$tables_relations['documents']['id_article'] = 'spip_documents_articles';
 	$tables_relations['documents']['id_rubrique'] = 'spip_documents_rubriques';
+	$tables_relations['documents']['id_breve'] = 'spip_documents_breves';
 
 	$tables_relations['mots']['id_article'] = 'spip_mots_articles';
 	$tables_relations['mots']['id_breve'] = 'spip_mots_breves';
