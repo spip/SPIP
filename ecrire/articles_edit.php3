@@ -376,26 +376,30 @@ echo "<P><HR><P>";
 		echo "<td width=10>&nbsp;</td>";
 		echo "<td valign='top' width='50%'>";
 		if (strlen($virtuel) == 0) $virtuel = "http://";
-		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><P>";
+		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'>";
 		echo "</td></tr></table>\n";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo "<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL. Pour supprimer la redirection, effacez l'URL ci-dessus.";
 		echo "</font>";
 		echo "</div><p>\n";
 	}
-
-	echo "<HR>";
-
-	if (($articles_chapeau != "non") OR strlen($chapo) > 0) {
-		echo "<B>Chapeau</B>";
-		echo aide ("artchap");
-		echo "<BR>(Texte introductif de l'article.)<BR>";
-		echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
-		echo $chapo;
-		echo "</TEXTAREA><P>\n";
-	}
+	
 	else {
-		echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
+
+		echo "<HR>";
+	
+		if (($articles_chapeau != "non") OR strlen($chapo) > 0) {
+			echo "<B>Chapeau</B>";
+			echo aide ("artchap");
+			echo "<BR>(Texte introductif de l'article.)<BR>";
+			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
+			echo $chapo;
+			echo "</TEXTAREA><P>\n";
+		}
+		else {
+			echo "<INPUT TYPE='hidden' NAME='chapo' VALUE=\"$chapo\">";
+		}
+	
 	}
 
 

@@ -297,17 +297,6 @@ if ($statut_article == "publie") {
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>ARTICLE NUM&Eacute;RO&nbsp;:</b></font>\n";
 echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
 
-if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
-	$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND FIND_IN_SET(statut,'publie,off,prop')";
-	if ($row = mysql_fetch_row(spip_query($req))) {
-		$nb_forums = $row[0];
-		if ($nb_forums) {
-			echo "<br><a ".newLinkHref("articles_forum.php3?id_article=$id_article").">\n";
-			echo "<b>Forum public&nbsp;: $nb_forums&nbsp;contribution(s)</b></a>\n";
-		}
-	}
-}
-
 
 
 
@@ -437,6 +426,18 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	echo "</form>";
 
 	echo fin_block();
+	
+	if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
+		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND FIND_IN_SET(statut,'publie,off,prop')";
+		if ($row = mysql_fetch_row(spip_query($req))) {
+			$nb_forums = $row[0];
+			if ($nb_forums) {
+				icone_horizontale("Suivi du forum public&nbsp;: $nb_forums&nbsp;contribution(s)", "articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
+			}
+		}
+	}
+
+
 
 	echo "<br>\n";
 
@@ -565,6 +566,11 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 
 
 	if ($connect_statut=="0minirezo" AND $options=="avancees"){
+		
+		if (substr($chapo, 0, 1) == '=') {
+			$virtuel = substr($chapo, 1, strlen($chapo));
+		}
+		
 		echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
 		echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
@@ -576,9 +582,15 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 		echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 
+		if (strlen($virtuel) != 0) { 
+			echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
+		}
+
 		echo debut_block_invisible("virtuel");
-		if (strlen($virtuel) == 0) $virtuel = "http://";
-		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><P>";
+		if (strlen($virtuel) == 0) { 
+			$virtuel = "http://";
+			echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
+		}
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
 		echo "</font>";
