@@ -41,6 +41,9 @@ function texte_backend($texte) {
 	// supprimer tags et sauts de ligne
 	//$texte = str_replace("\n"," ",textebrut($texte));
 
+	// Ajout Yann pour accents encodés 
+ 	$texte = html_entity_decode($texte);
+
 	// " -> &quot; et tout ce genre de choses
 	$texte = entites_html($texte);
 	$texte = str_replace("&amp;", "&", $texte);
@@ -537,11 +540,14 @@ function reduire_image($img, $taille = 120, $taille_y=0) {
 	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
 	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
 
+	if (!$logo)
+		$logo = 'IMG/'.ereg_replace('(../|IMG/)', '', $img); // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
+
 	if (@file_exists($logo) AND eregi("(IMG/.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		$nom = $regs[1];
 		$format = $regs[2];
-		$destination = $logo.'-'.$taille.'x'.$taille_y;
-		if ($preview = creer_vignette($nom, $taille, $taille_y, $format, $destination)) {
+		$destination = $nom.'-'.$taille.'x'.$taille_y;
+		if ($preview = creer_vignette($logo, $taille, $taille_y, $format, $destination)) {
 			$vignette = $preview['fichier'];
 			$width = $preview['width'];
 			$height = $preview['height'];
