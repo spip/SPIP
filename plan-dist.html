@@ -1,0 +1,169 @@
+<HTML>
+<HEAD>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</HEAD>
+<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+
+
+
+<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
+<B_haut>
+	<TR BGCOLOR="#000000">
+	<TD ALIGN="center">
+	<A HREF="#URL_SITE_SPIP"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
+	</TD>	
+	
+	<BOUCLE_haut(RUBRIQUES){id_parent=0}{par titre}{0,5}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut>
+	</TR>
+</B_haut>
+<B_haut2>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut2(RUBRIQUES){id_parent=0}{par titre}{5,6}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut2>
+	</TR>
+</B_haut2>
+<B_haut3>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut3(RUBRIQUES){id_parent=0}{par titre}{11,6}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut3>
+	</TR>
+</B_haut3>
+<B_haut4>
+	<TR BGCOLOR="#000000">
+	<BOUCLE_haut4(RUBRIQUES){id_parent=0}{par titre}{17,5}>
+	<TD ALIGN="center">
+	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
+	</TD>
+	</BOUCLE_haut4>
+	</TR>
+</B_haut4>
+</TABLE>
+
+<CENTER>
+
+
+<P>
+
+<BOUCLE_secteurs(RUBRIQUES){id_parent=0}{par titre}>
+
+
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR></TABLE>
+
+	<A HREF="#URL_RUBRIQUE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]><FONT FACE="arial,helvetica,sans-serif" SIZE=5 COLOR="#000000">#TITRE</FONT></A>
+	
+<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
+<TR WIDTH=100%>
+<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+</TR></TABLE>
+
+
+
+<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=632>
+<TR>
+<TD WIDTH=400 ALIGN="left" VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
+	<BR><BR>
+
+	<BOUCLE_les_articles(ARTICLES){id_rubrique}>
+	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A>
+	</BOUCLE_les_articles>
+
+
+	<BOUCLE_sous_rub(RUBRIQUES){id_parent}{par titre}>
+	<P>	<A HREF="#URL_RUBRIQUE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]><FONT FACE="arial,helvetica,sans-serif" COLOR="#000000">[(#TITRE|majuscules)]</FONT></A>
+
+	<FONT SIZE=1>
+
+	<B_syndic>
+	<BR><B>SUR LE WEB : 
+	<BOUCLE_syndic(SYNDICATION){id_rubrique}{par nom_site}{", "}>
+	[<A HREF="#URL_SITE">(#NOM_SITE|majuscules)</A>]
+	</BOUCLE_syndic>
+	</B>
+	</B_syndic>
+
+	<BOUCLE_meme_rubrique(ARTICLES){id_rubrique}>
+	<BR><IMG SRC="puce.gif"> <A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A>
+	</BOUCLE_meme_rubrique>
+
+
+
+	<UL>
+		<BOUCLE_enfants(BOUCLE_sous_rub)></BOUCLE_enfants>
+	</UL>
+
+
+	</FONT>
+	</BOUCLE_sous_rub>
+
+
+	</FONT>
+	<BR><BR>
+</TD>
+
+<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=8 BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
+<TD WIDTH=200 VALIGN="top">
+	<FONT FACE="arial,helvetica,sans-serif" SIZE=1>
+	<BR><BR>
+
+	[(#LOGO_RUBRIQUE|#URL_RUBRIQUE)]
+
+	<B_breves>
+	<P><B>LES BREVES :</B>
+	<BOUCLE_breves(BREVES){id_rubrique}{par date}{inverse}{0,10}>
+		<BR><IMG SRC="puce.gif" BORDER=0>
+		[(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)]
+		<BR>
+		<A HREF="#URL_BREVE"><FONT SIZE=2>#TITRE</FONT></A>
+	</BOUCLE_breves>
+
+
+	<BOUCLE_syndic2(SYNDICATION){id_rubrique}{par nom_site}>
+	<P>
+	<HR NOSHADE SIZE=1>
+	<P>
+	<B>SUR LE WEB :  [<A HREF="#URL_SITE"><font face=Arial,Helvetica COLOR="#000000">(#NOM_SITE|majuscules)</FONT></A>]</B>
+	
+		<BOUCLE_items(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}{0,10}>
+		<BR><IMG SRC="puce.gif" BORDER=0><A HREF="#URL_ARTICLE">#TITRE</A>
+		</BOUCLE_items>
+
+	</BOUCLE_syndic2>
+
+
+
+
+	<BR><BR>
+
+</TD>
+</TR>
+</TABLE>
+
+</BOUCLE_secteurs>
+
+
+<INCLURE(pied.php3)>
+
+</CENTER>
+
+</BODY>
+</HTML>
+
+
