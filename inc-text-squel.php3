@@ -1,11 +1,5 @@
 <?php
 
-# Standard: on ge'ne`re une se'quence PHP qui sera re'interpre'te'e a` chaque fois.
-# Avec le compilateur e'tant re'entrant, on peut inclure imme'diatement
-# en cas de script standard (i.e. les 2 affectations de fond et delais).
-# Teste' & valide', mais mettre c~a en option car l'incidence sur des squelettes
-# avec de'lais configure's pour l'ancienne version peuvent en souffir (????)
-
 function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 	global $dossier_squelettes;
 
@@ -13,33 +7,28 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 	if ($params) {
 		reset($params);
 		foreach($params as $param) {
-			if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
-				$var = $args[1];
-				$val = $args[3];
+			$var = $args[1];
+			$val = $args[3];
 
 				// Cas de la langue : passer $spip_lang
 				// et non table.lang (car depend de {lang_select})
-				if ($var =='lang') {
-					$critere_langue = "";
-					if ($val)
-						$l[] = "'\'lang\' => " . addslashes($val) . "'";
-					else
-						$l[] = "'\'lang\' => \''.\$GLOBALS[spip_lang].'\''";
-				}
-
+			if ($var =='lang') {
+				$critere_langue = "";
+				if ($val)
+					$l[] = "'\'lang\' => " . addslashes($val) . "'";
 				else
+					$l[] = "'\'lang\' => \''.\$GLOBALS[spip_lang].'\''";
+			}
+
+			else
 				if ($val)
 					$l[] = "'\'$var\' => " . addslashes($val) . "'";
 				else {
 					$l[] = "'\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\''";
 				}
 			}
-		}
+		$criteres = ("' ." . join(".', '.\n",$l) . ". '");
 	}
-
-	if ($l)
-		$criteres = join(".', '.\n",$l);
-
 	return "\n'<".
 		"?php
 		\$contexte_inclus = array('.$criteres.');" .
