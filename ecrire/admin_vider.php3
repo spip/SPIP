@@ -71,7 +71,7 @@ echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
 echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "'>";
 echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
 echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='" . _DIR_RESTREINT_ABS . "admin_vider.php3'>";
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\""._T('bouton_vider_cache')."\"></FORM></DIV>";
+echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
 echo "</TD></TR>";
 echo "</TABLE>";
 
