@@ -1531,12 +1531,15 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	// choix de la langue
 	//
 	if (strpos(lire_meta('langues_proposees'), ',')) {
-		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
+		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.png' align='center'>";
 		$langues = explode(',', lire_meta('langues_proposees'));
 		while (list(,$langue) = each ($langues)) {
 			$lien = $clean_link;
 			$lien->addVar('set_lang', $langue);
-			echo " <a href='". $lien->getUrl() ."'><font color='#ffffff'>$langue</font></a>";
+			if ($langue <> $GLOBALS['spip_lang'])
+				echo " <a href='". $lien->getUrl() ."' title='"._T("langue_$langue")."'><font color='#ffffff'>$langue</font></a>";
+			else
+				echo " <font color='#ffffff'>[$langue]</font>";
 		}
 		echo "</font></td>";
 	}

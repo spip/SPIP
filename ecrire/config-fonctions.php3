@@ -194,7 +194,7 @@ if ($options == "avancees") {
 // Configuration i18n
 //
 
-debut_cadre_relief("statistiques-24.gif");
+debut_cadre_relief("langues-24.png");
 
 $langues_prop = split(",",lire_meta("langues_proposees"));
 $langue_site = lire_meta('langue_site');
