@@ -41,9 +41,8 @@ function parser_inclure($texte) {
 		$texte = substr($fin, strlen($s));
 
 		if ($debut) {
-			$champ = new Texte;
-			$champ->texte = $debut;
-			$result[] = $champ;
+		  $result =  array_merge($result,
+					 parser_champs_etendus($debut));
 		}
 		$champ = new Inclure;
 		$champ->fichier = $match[1];
