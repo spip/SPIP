@@ -144,7 +144,7 @@ function mySel($varaut,$variable) {
 	fin_cadre_relief();
 
 
-echo "<P>";
+echo "<div>&nbsp;</div>";
 if ($connect_statut == "0minirezo") $aff_art = "'prepa','prop','publie','refuse'";
 else if ($connect_id_auteur == $id_auteur) $aff_art = "'prepa','prop','publie'";
 else $aff_art = "'prop','publie'";
@@ -157,15 +157,21 @@ afficher_articles(_T('info_articles_auteur'),
 
 
 
+echo "<div>&nbsp;</div>";
+debut_cadre_couleur();
+
 $query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 ".
 	"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
 afficher_messages(_T('info_discussion_cours'), $query_message, false, false);
 
 $query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 ".
-	"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message  AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+	"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND date_fin > NOW() AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
 afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
 
+		icone_horizontale(_T('info_envoyer_message_prive'),"message_edit.php3?new=oui&type=normal&dest=$id_auteur", "message.gif");
 
+
+	fin_cadre_couleur();
 
 fin_page();
 

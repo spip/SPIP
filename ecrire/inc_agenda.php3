@@ -401,9 +401,7 @@ function liste_rv($query, $type) {
 				elseif ($type=="pb") $bouton = "pense-bete";
 				elseif ($type=="affich") $bouton = "annonce";
 				else $bouton = "message";
-			
-				//if ($rv == "oui") $bouton .= "-rv";
-			
+						
 			$titre = typo($row->titre);
 			
 			if ($rv == "oui") {
@@ -423,7 +421,11 @@ function liste_rv($query, $type) {
 			
 			echo "<td valign='middle'>";
 				if ($rv == "oui") {
-					echo "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat;'>".heures($date).":".minutes($date)."<br />".heures($date_fin).":".minutes($date_fin)."</div>";
+					if (affdate($date) == affdate($date_fin)) 
+						echo "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat;'>".heures($date).":".minutes($date)."<br />".heures($date_fin).":".minutes($date_fin)."</div>";
+					else {
+						echo "<div class='arial0' style='float: $spip_lang_left; line-height: 12px; color: #666666; margin-$spip_lang_right: 3px; padding-$spip_lang_right: 4px; background: url(img_pack/fond-agenda.gif) $spip_lang_right center no-repeat; text-align: center;'>".heures($date).":".minutes($date)."<br />...</div>";
+					}
 				}
 			
 				echo "<div><b><a href='$url' class='arial1' style='color: #333333;'>$titre</a></b></div>";
@@ -449,7 +451,7 @@ function afficher_taches () {
 	$query = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'";
 	liste_rv($query, "pb");
 
-	$query = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure";
+	$query = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH)) OR (messages.date_heure < NOW() AND messages.date_fin > NOW() ))  AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure";
 	liste_rv($query, "rv");
 }
 

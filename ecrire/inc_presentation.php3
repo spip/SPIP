@@ -946,7 +946,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			// Titre
 			//
 
-			$s = "<A HREF='message.php3?id_message=$id_message'>";
+			$s = "<A HREF='message.php3?id_message=$id_message' style='display: block;'>";
 
 			switch ($type) {
 			case 'pb' :
@@ -990,6 +990,17 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			}
 			
 			//
+			// Messages de forums
+			
+			$query_forum = "SELECT * FROM spip_forum WHERE id_message = $id_message";
+			$total_forum = spip_num_rows(spip_query($query_forum));
+			
+			if ($total_forum > 0) $vals[] = "($total_forum)";
+			else $vals[] = "";
+			
+		
+			
+			//
 			// Date
 			//
 			
@@ -1000,7 +1011,10 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				$annee=annee($date);
 				
 				$heure = heures($date).":".minutes($date);
-				$heure_fin = heures($date_fin).":".minutes($date_fin);
+				if (affdate($date) == affdate($date_fin))
+					$heure_fin = heures($date_fin).":".minutes($date_fin);
+				else 
+					$heure_fin = "...";
 
 				$s = "<div style='background: url(img_pack/rv-12.gif) $spip_lang_left center no-repeat; padding-$spip_lang_left: 15px;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
 			} else {
@@ -1013,12 +1027,12 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 		}
 
 		if ($afficher_auteurs) {
-			$largeurs = array('', 130, 120);
-			$styles = array('arial2', 'arial1', 'arial1');
+			$largeurs = array('', 130, 20, 120);
+			$styles = array('arial2', 'arial1', 'arial1', 'arial1');
 		}
 		else {
-			$largeurs = array('', 120);
-			$styles = array('arial2', 'arial1');
+			$largeurs = array('', 20, 120);
+			$styles = array('arial2', 'arial1', 'arial1');
 		}
 		afficher_liste($largeurs, $table, $styles);
 
