@@ -183,14 +183,6 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 	}
 
 
-	// Mettre ˆ jour affichage forums...
-	
-	$nombre_admins = spip_num_rows(spip_query("SELECT * FROM spip_auteurs WHERE login!='' AND statut='0minirezo'"));
-	if ($nombre_admins > 1) ecrire_meta('forum_prive_admin', "oui");
-	else ecrire_meta('forum_prive_admin', "non");
-	
-	
-
 	// Mettre a jour les fichiers .htpasswd et .htpasswd-admin
 	ecrire_acces();
 }
