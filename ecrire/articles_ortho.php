@@ -112,13 +112,11 @@ $result_ortho = corriger_ortho($ortho, $lang_article);
 if (is_array($result_ortho)) {
 	$mots = $result_ortho['mauvais'];
 	if ($erreur = $result_ortho['erreur']) {
-		echo "<b>Attention&nbsp;: votre texte contient trop de fautes, aucune correction n'est sugg&eacute;r&eacute;e ".
-			"afin de ne pas surcharger le syst&egrave;me.</b><p>\n";
-		echo "<b>Commencez par corriger les fautes les plus &eacute;videntes et r&eacute;essayez ensuite.</b><p>";
+		echo "<b>"._T('ortho_trop_de_fautes')."</b><p>\n";
+		echo "<b>"._T('ortho_trop_de_fautes_2')."</b><p>";
 	}
 	else {
-		echo "<b>Les mots mal orthographi&eacute;s sont surlign&eacute;s en rouge. Vous pouvez cliquer ".
-			"sur chaque mot pour afficher des suggestions de correction.</b><p>\n";
+		echo "<b>"._T('ortho_mode_demploi')."</b><p>\n";
 	}
 
 	panneau_ortho($result_ortho);
@@ -131,10 +129,10 @@ if (is_array($result_ortho)) {
 }
 else {
 	$erreur = $result_ortho;
-	echo "<b>Aucun dictionnaire n'a &eacute;t&eacute; trouv&eacute; pour cette langue (";
+	echo "<b>"._T('ortho_dico_absent')." (";
 	echo traduire_nom_langue($lang_article);
 	echo "). ";
-	echo "Le syst&egrave;me ne peut pas v&eacute;rifier l'orthographe de ce texte.</b>";
+	echo _T('ortho_verif_impossible')."</b>";
 	foreach ($champs as $champ) {
 		$$champ = afficher_ortho($$champ);
 	}

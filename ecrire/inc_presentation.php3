@@ -3047,7 +3047,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 		)
 			$message = '';
 		else
-			$message = _L('Pr&eacute;visualiser');
+			$message = _T('previsualiser');
 	}
 
 	if ($message)

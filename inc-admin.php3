@@ -310,7 +310,9 @@ function debug_page($no_exit = false) {
 	@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	echo afficher_boutons_admin();
 	if (!$GLOBALS['debug_objets']['sourcefile']) return;
-	echo "<h3>Structure de la page</h3>\n";
+    echo "\n<body>\n<div id='spip_debug'>";
+	echo "\n<h1>Structure de la page</h1>\n";
+    echo "<ul>\n";
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>".$sourcefile."</b>";
 		$link = $GLOBALS['clean_link'];
@@ -318,7 +320,7 @@ function debug_page($no_exit = false) {
 		$link->delvar('debug_affiche');
 		echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
 		echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
-		echo "</li>\n<ul>\n";
+		echo "<ul>\n";
 
 		if (is_array($debug_objets['pretty']))
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
@@ -328,29 +330,32 @@ function debug_page($no_exit = false) {
 				$link = $GLOBALS['clean_link'];
 				$link->addvar('debug_objet', $nom);
 				$link->delvar('debug_affiche');
-			echo " <a href='".$link->getUrl()."&debug_affiche=boucle'>boucle</a>";
-				echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
-				echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
+				echo " <a href='".$link->getUrl()."&debug_affiche=boucle' class='debug_link_boucle'>boucle</a>";
+				echo " <a href='".$link->getUrl()."&debug_affiche=code' class='debug_link_code'>code</a>";
+				echo " <a href='".$link->getUrl()."&debug_affiche=resultat' class='debug_link_resultat'>resultat</a>";
 				echo "</li>\n";
 			}
-		echo "</ul>\n";
+		echo "</ul>\n</li>\n";
 	}
+    echo "</ul>\n";
 
 	if ($debug_objet AND $debug_affiche == 'resultat' AND ($res = $debug_objets['resultats'][$debug_objet])) {
-		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
-		echo "les premiers appels &agrave; cette boucle ont donn&eacute; les r&eacute;sultats ci-dessous:<br />";
+		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
+		echo "<p>les premiers appels &agrave; cette boucle ont donn&eacute; les r&eacute;sultats ci-dessous:</p>";
 		foreach ($res as $view) {
-			echo "<hr>".interdire_scripts($view);
+			echo "<ul>".interdire_scripts($view)."</ul></fieldset></div>";
 		}
 	} else if ($debug_objet AND $debug_affiche == 'code' AND $res = $debug_objets['code'][$debug_objet]) {
-		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
+		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
 		highlight_string("<"."?php\n".$res."\n?".">");
+		echo "</fieldset></div>";
 	} else if ($debug_objet AND $debug_affiche == 'boucle' AND $res = $debug_objets['boucle'][$debug_objet]) {
-		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
+		echo "<div id=\"debug_boucle\"><fieldset><legend>".$debug_objets['pretty'][$debug_objet]."</legend>";
 		highlight_string($res);
+		echo "</fieldset></div>";
 	}
 
-
+	echo "\n</div></body>";
 	if (!$no_exit) exit;
 }
 
@@ -370,7 +375,9 @@ function debug_dumpfile ($texte) {
 	$texte = '';
 	foreach ($tableau as $ligne)
 		$texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
+    echo "<div id=\"debug_boucle\"><fieldset><legend>".$GLOBALS['debug_affiche']."</legend>";
 	highlight_string($texte);
+	echo "</fieldset></div>";
 
 	exit;
 }

@@ -286,23 +286,23 @@ debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_ti
 // Correcteur d'orthographe
 //
 
-debut_cadre_trait_couleur("ortho-24.gif", false, "", _L('Orthographe'));
+debut_cadre_trait_couleur("ortho-24.gif", false, "", _T('ortho_orthographe'));
 	$articles_ortho = lire_meta("articles_ortho");
 
 	echo "<div class='verdana2'>";
-	echo _L('Un v&eacute;rificateur d\'orthographe est int&eacute;gr&eacute; &agrave; SPIP. Toutefois, avant d\'activer cette fonctionnalit&eacute;, veuillez lire avec attention le paragraphe suivant&nbsp;:');
+	echo _T('ortho_avis_privacy');
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
 	echo "<blockquote class='spip'>";
-	echo _L('Pour v&eacute;rifier l\'orthographe d\'un texte, le site va envoyer la liste des mots &agrave; contr&ocirc;ler vers l\'un des &laquo;&nbsp;serveurs d\'orthographe&nbsp;&raquo; externes mis &agrave; votre disposition par diff&eacute;rents membres de la communaut&eacute; SPIP. Les mots sont envoy&eacute;s dans le d&eacute;sordre afin d\'assurer un minimum de confidentialit&eacute;. Si vous avez des craintes pour vos donn&eacute;es, n\'activez pas cette option (et retirez tout de suite vos informations du Web).');
+	echo _T('ortho_avis_privacy2');
 	echo "</blockquote>\n";
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
 	afficher_choix('articles_ortho', $articles_ortho,
-		array('oui' => _L('Activer le v&eacute;rificateur d\'orthographe'),
-			'non' => _L('D&eacute;sactiver le v&eacute;rificateur d\'orthographe')));
+		array('oui' => _T('info_ortho_activer'),
+			'non' => _T('info_ortho_desactiver')));
 	echo "</div>";
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 	
@@ -315,21 +315,21 @@ debut_cadre_trait_couleur("ortho-24.gif", false, "", _L('Orthographe'));
 // Previsualisation sur le site public
 //
 
-debut_cadre_trait_couleur("naviguer-site.gif", false, "", _L('Pr&eacute;visualisation'));
+debut_cadre_trait_couleur("naviguer-site.gif", false, "", _T('previsualisation'));
 	$preview = lire_meta("preview");
 	# non = personne n'est autorise a previsualiser (defaut)
 	# oui = les admins
 	# 1comite = admins et redacteurs
 
 	echo "<div class='verdana2'>";
-	echo _L('Il est possible de pr&eacute;visualiser le site comme si tous les articles et les br&egrave;ves (ayant au moins le statut &laquo;&nbsp;propos&eacute;&nbsp;&raquo;) &eacute;taient publi&eacute;s. Cette possibilit&eacute; doit-elle &ecirc;tre ouverte aux administrateurs seulement, &agrave; tous les r&eacute;dacteurs, ou &agrave; personne&nbsp;?');
+	echo _T('info_preview_texte');
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
 	afficher_choix('preview', $preview,
-		array('oui' => _L('Seuls les administrateurs peuvent pr&eacute;visualiser le site'),
-			'1comite' => _L('Tous les r&eacute;dacteurs peuvent pr&eacute;visualiser le site'),
-			'non' => _L('La pr&eacute;visualisation est totalement d&eacute;sactiv&eacute;e')
+		array('oui' => _T('info_preview_admin'),
+			'1comite' => _T('info_preview_comite'),
+			'non' => _T('info_preview_desactive')
 		)
 	);
 	echo "</div>";

@@ -544,7 +544,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			if (!$rec) {
 			  return array(_T('info_erreur_squelette'),
 				       ($boucle->param . 
-					_L(' boucle récursive non définie')));
+					_L(' boucle recursive non definie')));
 			} 
 			$rec->externe = $id;
 			$descr['id_mere'] = $id;

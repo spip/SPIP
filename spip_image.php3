@@ -84,7 +84,8 @@ function deplacer_fichier_upload($source, $dest) {
 		@unlink($dest);
 
 		if (($GLOBALS['_FILES']['size'] == 0) AND !$GLOBALS['action_zip']) {
-			echo _L("Ce fichier est trop gros pour le serveur, upload limit&eacute; &agrave; ").ini_get('upload_max_filesize');
+			echo _T('upload_limit',
+				array('max' => ini_get('upload_max_filesize'));
 		}
 	}
 
@@ -354,10 +355,11 @@ if ($ajout_doc == 'oui') {
 		if ($afficher_message_zip) {
 			// presenter une interface pour choisir si fichier joint ou decompacter
 			include_ecrire ("inc_presentation.php3");
-			install_debut_html(_L("Fichier ZIP"));
+			install_debut_html(_T('upload_fichier_zip'));
 		
 			
-			echo _L("<p>Le fichier que vous proposez d'installer est un fichier Zip.</p><p> Ce fichier peut &ecirc;tre :</p>\n\n");
+			echo "<p>"._T('upload_fichier_zip_texte')."</p>";
+			echo "<p>"._T('upload_fichier_zip_texte2')."</p>";
 			
 		
 			if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
@@ -370,8 +372,8 @@ if ($ajout_doc == 'oui') {
 
 			echo $link->getForm('POST');
 			
-			echo _L('')."<div><input type='radio' checked name='action_zip' value='telquel'>install&eacute; tel quel, en tant qu'archive compress&eacute;e Zip,</div>";
-			echo "<div><input type='radio' name='action_zip' value='decompacter'>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:</div>";
+			echo _L('')."<div><input type='radio' checked name='action_zip' value='telquel'>"._T('upload_zip_telquel')."</div>";
+			echo "<div><input type='radio' name='action_zip' value='decompacter'>"._T('upload_zip_decompacter')."</div>";
 			
 			echo "<ul>$aff_fichiers</ul>";
 			

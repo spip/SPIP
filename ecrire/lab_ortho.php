@@ -494,7 +494,7 @@ function panneau_ortho($ortho_result) {
 
 	echo "<form class='form-ortho verdana2' action='' method='get'>\n";
 	echo "<select name='select_ortho' id='select_ortho' onChange='suggest(this.selectedIndex);'>\n";
-	echo "<option value='0'>"._L("... mots &agrave; corriger ...")."</option>\n";
+	echo "<option value='0'>... "._T('ortho_mots_a_corriger')." ...</option>\n";
 	foreach ($mauvais as $mot => $suggest) {
 		$id = $id_suggest[$mot] = "$i";
 		$i++;
@@ -528,13 +528,13 @@ function panneau_ortho($ortho_result) {
 			echo "</ul>\n";
 		}
 		else {
-			echo "<i>Aucune suggestion n'a &eacute;t&eacute; trouv&eacute;e pour ce mot.</i>";
+			echo "<i>"._T('ortho_aucune_suggestion')."</i>";
 		}
 		echo "<br />";
 		$link = new Link;
 		$link->delVar('supp_ortho');
 		$link->addVar('ajout_ortho', $mot);
-		icone_horizontale(_L("Ajouter ce mot au dictionnaire"), $link->getUrl(), "ortho-24.gif", "creer.gif");
+		icone_horizontale(_T('ortho_ajouter_ce_mot'), $link->getUrl(), "ortho-24.gif", "creer.gif");
 		echo "</div>\n";
 		echo "</div>\n\n";
 	}
@@ -546,12 +546,12 @@ function panneau_ortho($ortho_result) {
 		echo "<div class='suggest-inactif' id='suggest$id'>";
 		echo "<span class='ortho-dico'>$mot_html</span>";
 		echo "<div class='detail'>\n";
-		echo "<i>"._L("Ce mot fait partie du dictionnaire du site.")."</i>";
+		echo "<i>"._T('ortho_ce_mot_connu')."</i>";
 		echo "<br />";
 		$link = new Link;
 		$link->delVar('ajout_ortho');
 		$link->addVar('supp_ortho', $mot);
-		icone_horizontale(_L("Enlever ce mot du dictionnaire"), $link->getUrl(), "ortho-24.gif", "supprimer.gif");
+		icone_horizontale(_T('ortho_supprimer_ce_mot'), $link->getUrl(), "ortho-24.gif", "supprimer.gif");
 		echo "</div>\n";
 		echo "</div>\n";
 	}

@@ -815,25 +815,25 @@ function traiter_raccourcis_generale($letexte) {
 	//
 	$regexp = "|\[#?([^][]*)<-\]|";
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
-		foreach ($matches as $regs)
-			$letexte = str_replace($regs[0],
-			'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
+	foreach ($matches as $regs)
+		$letexte = str_replace($regs[0],
+		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
 
 
 	//
 	// Raccourcis liens [xxx->url] (cf. fonction extraire_lien ci-dessus)
 	// Note : complique car c'est ici qu'on applique la typo() !
 	//
-	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|";
-	$texte_a_voir = $letexte;
+	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
 	$texte_vu = '';
-	while (preg_match($regexp, $texte_a_voir, $regs)) {
+	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs) {
 		list($insert, $lien) = extraire_lien($regs);
-		$pos = strpos($texte_a_voir, $regs[0]);
-		$texte_vu .= typo(substr($texte_a_voir, 0, $pos)) . $insert;
-		$texte_a_voir = substr($texte_a_voir, $pos + strlen($regs[0]));
+		$pos = strpos($letexte, $regs[0]);
+		$texte_vu .= typo(substr($letexte, 0, $pos)) . $insert;
+		$letexte = substr($letexte, $pos + strlen($regs[0]));
 	}
-	$letexte = $texte_vu.typo($texte_a_voir); // typo de la queue du texte
+	$letexte = $texte_vu.typo($letexte); // typo de la queue du texte
 
 
 
