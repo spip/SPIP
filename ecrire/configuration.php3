@@ -466,6 +466,44 @@ fin_cadre_enfonce();
 echo "<p>";
 
 
+//
+// Gestion des documents joints
+//
+
+debut_cadre_relief("doc-24.gif");
+
+$documents_rubrique = lire_meta("documents_rubrique");
+$documents_article = lire_meta("documents_article");
+
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Documents joints</FONT></B> </TD></TR>";
+
+echo "<TR><TD class='verdana2'>";
+echo propre("Vous pouvez autoriser l'ajout de documents joints aux articles et/ou aux rubriques, &agrave; condition de pr&eacute;voir les boucles correspondantes dans les squelettes des pages articles/rubriques (les squelettes propos&eacute;s par d&eacute;faut contiennent ces boucles).");
+echo "</TD></TR>";
+
+echo "<TR>";
+echo "<TD align='left' class='verdana2'>";
+afficher_choix('documents_article', $documents_article,
+	array('oui' => 'Autoriser les documents joints dans les articles',
+		'non' => 'Ne pas autoriser les documents dans les articles'), "<br>");
+echo "<br><br>\n";
+afficher_choix('documents_rubrique', $documents_rubrique,
+	array('oui' => 'Autoriser les documents dans les rubriques',
+		'non' => 'Ne pas autoriser les documents dans les rubriques'), "<br>");
+echo "</FONT>";
+echo "</TD></TR>";
+
+echo "<TR><TD ALIGN='right'>";
+echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+echo "</TD></TR>";
+echo "</TABLE>\n";
+
+fin_cadre_relief();
+
+echo "<p>";
+
+
 
 
 echo "</form>";

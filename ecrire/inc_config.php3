@@ -47,6 +47,8 @@ function init_config() {
 		'activer_statistiques' => 'oui',
 		'activer_statistiques_ref' => 'non',
 		
+		'documents_article' => 'oui',
+		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
@@ -193,6 +195,8 @@ $test_proxy, $activer_moteur;
 		'activer_statistiques',
 		'activer_statistiques_ref',
 		
+		'documents_article',
+		'documents_rubrique',
 		'charset'
 	);
 	while (list(,$i) = each($liste_meta))

@@ -383,10 +383,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			face='Verdana,Arial,Helvetica,sans-serif'>Les documents suivants
 			sont associ&eacute;s &agrave; votre article, mais ils n'y ont
 			pas &eacute;t&eacute; directement ins&eacute;r&eacute;s. Ils
-			appara&icirc;tront donc sous forme de &laquo;documents
-			joints&raquo; (remarque: il se peut que ce site n'ait pas
-			&eacute;t&eacute; programm&eacute; pour afficher les documents
-			joints - dans ce cas ils n'appara&icirc;tront pas du tout).</font>");
+			appara&icirc;tront donc sous forme de documents
+			joints.</font>");
 
 			$case = "gauche";
 			echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
@@ -413,7 +411,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		}
 
 	
-		if ($options == "avancees"){
+		if ($options == "avancees" AND lire_meta("documents_$type") != 'non'){
 			/// Ajouter nouveau document/image
 			
 			echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
@@ -791,7 +789,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			}
 	
 		
-			if ($options == "avancees"){
+			if ($options == "avancees" AND lire_meta("documents_$type") != 'non'){
 				/// Ajouter nouveau document
 					
 				debut_cadre_enfonce("doc-24.gif", false, "creer.gif");
