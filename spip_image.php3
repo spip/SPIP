@@ -8,6 +8,84 @@ include_ecrire("inc_admin.php3");
 include_local("inc-cache.php3");
 
 
+
+/* ResizeGif with (height % width) */
+function RatioResizeImg( $image, $newWidth, $newHeight){ 
+
+	if (function_exists("imagejpeg")){
+
+		//Open the jpg file to resize 
+		$srcImage = @ImageCreateFromJPEG( $image );		 
+		
+		//obtain the original image Height and Width 
+		$srcWidth = ImageSX( $srcImage ); 
+		$srcHeight = ImageSY( $srcImage ); 
+		
+		
+		
+		// the follwing portion of code checks to see if 
+		// the width > height or if width < height 
+		// if so it adjust accordingly to make sure the image 
+		// stays smaller then the $newWidth and $newHeight 
+		
+		$ratioWidth = $srcWidth/$newWidth;
+		$ratioHeight = $srcHeight/$newHeight;
+		
+		if( $ratioWidth < $ratioHeight){ 
+			$destWidth = $srcWidth/$ratioHeight;
+			$destHeight = $newHeight; 
+		}else{ 
+			$destWidth = $newWidth; 
+			$destHeight = $srcHeight/$ratioWidth; 
+		} 
+		
+		
+		// creating the destination image with the new Width and Height 
+		$destImage = imagecreate( $destWidth, $destHeight); 
+		
+		//copy the srcImage to the destImage 
+		ImageCopyResized( $destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight ); 
+		
+		$destination = ereg_replace('\.(.*)$','-s.\1',$image);
+		//Header("Content-type: image/jpeg");
+		ImageJPEG($destImage, "$destination", 40);
+	
+		/*
+		//create the gif 
+		//ImageGif( $destImage ); 
+		  if (function_exists("imagegif")) {
+			Header("Content-type: image/gif");
+			$fonction = ImageGIF($destImage);
+		  }
+		  elseif (function_exists("imagejpeg")) {
+			Header("Content-type: image/jpeg");
+			ImageJPEG($srcImage, "", 0.5);
+		  }
+		  elseif (function_exists("imagepng")) {
+			Header("Content-type: image/png");
+			ImagePNG($destImage);
+		  }
+		  */
+		
+		
+		//fre the memory used for the images 
+		ImageDestroy( $srcImage ); 
+		ImageDestroy( $destImage ); 
+	
+		$retour['width'] = $destWidth;
+		$retour['height'] = $destHeight;
+		$retour['fichier'] = $destination;
+		return $retour;
+	}
+
+}
+
+
+//write $resizedImage to Database, file , echo to browser whatever you need to do with it
+
+
+
+
 //
 // Deplacer un fichier uploade
 //
@@ -165,6 +243,24 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$dest_path = "IMG/$dest";
 
 	if (!deplacer_fichier_upload($source, $dest_path)) return false;
+
+	// Creer une vignette automatiquement
+	$creer_preview=lire_meta("creer_preview");
+	$taille_preview=lire_meta("taille_preview");
+	if ($taille_preview < 15) $taille_preview = 120;
+
+	if ($mode == 'document' AND ereg("\.jpg$",$dest_path) AND $creer_preview == 'oui') {
+
+		$preview = RatioResizeImg($dest_path, $taille_preview, $taille_preview);
+		$hauteur_prev = $preview['height'];
+		$largeur_prev = $preview['width'];
+		$fichier_prev = $preview['fichier'];
+		$query = "INSERT spip_documents (id_type, titre, largeur, hauteur, fichier) VALUES ('1', 'vignette', '$largeur_prev', '$hauteur_prev', '$fichier_prev')";
+		mysql_query($query);
+		$id_preview = mysql_insert_id();
+		$query = "UPDATE spip_documents SET id_vignette = '$id_preview' WHERE id_document = $id_document";
+		mysql_query($query);
+	}
 
 	//
 	// Recopier le fichier
