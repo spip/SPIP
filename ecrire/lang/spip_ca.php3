@@ -359,7 +359,7 @@ Gr&agrave;cies per la seva participaci&oacute;
 'forum_votre_email' => 'La seva adre&ccedil;a electr&ograve;nica:',
 'forum_votre_nom' => 'El vostre nom (o pseud&ograve;nim):',
 'forum_vous_enregistrer' => 'Per participar al f&ograve;rum, us heu de registrar pr&egrave;viament.
-Gr&agrave;cies per indicar a continuaci&oacute; l\'identifcador que us ha estat proporcionat. Si encara no us heu registrat, heu de',
+Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat proporcionat. Si encara no ho heu fet, heu d\'',
 'forum_vous_inscrire' => 'inscriure-us</a> pr&egrave;viament.',
 
 
