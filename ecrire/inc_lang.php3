@@ -314,7 +314,7 @@ function init_langues() {
 		if (!$langue_site) {
 			// Initialisation : le francais par defaut, sinon la premiere langue trouvee
 			if (ereg(',fr,', ',$all_langs,')) $langue_site = 'fr';
-			else list(, $langue_site) = each(explode(',', $all_langs));
+			else list(, $langue_site) = each($toutes_langs);
 			if (defined("_ECRIRE_INC_META"))
 				ecrire_meta('langue_site', $langue_site);
 		}
