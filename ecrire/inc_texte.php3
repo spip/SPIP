@@ -58,7 +58,9 @@ function supprimer_numero($texte) {
 }
 
 function supprimer_tags($texte, $rempl = "") {
-	$texte = ereg_replace("<([^>\"']*|\"[^\"]*\"|'[^']*')*>", $rempl, $texte);
+	// super gavant : la regexp ci-dessous plante sous php3, genre boucle infinie !
+	// $texte = ereg_replace("<([^>\"']*|\"[^\"]*\"|'[^']*')*>", $rempl, $texte);
+	$texte = ereg_replace("<[^>]*>", $rempl, $texte);
 	return $texte;
 }
 
