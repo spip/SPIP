@@ -293,14 +293,14 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 // Fonctions OK
 //
 
-function calculer_balise_INTRODUCTION($params) {
-	$params->code = 'calcul_introduction(\'' .
-		$params->boucles[$params->id_boucle]->type_requete . "',\n" .
-		index_pile($params->id_boucle, "texte", $params->boucles) . ",\n" .
-		index_pile($params->id_boucle, "chapo", $params->boucles) . ",\n" .
-		index_pile($params->id_boucle, "descriptif", $params->boucles) . ")\n"; 
+function balise_INTRODUCTION_dist ($p) {
+	$_type = $p->boucles[$p->id_boucle]->type_requete;
+	$_texte = champ_sql('texte', $p);
+	$_chapo = champ_sql('chapo', $p);
+	$_descriptif = champ_sql('descriptif', $p);
+	$p->code = "calcul_introduction('$_type', $_texte, $_chapo, $_descriptif)";
 
-	return $params->retour();
+	return $p;
 }
 
 ?>

@@ -89,7 +89,6 @@ function calculer_requete(&$boucle) {
     
   case 'hierarchie':
     $boucle->from[] =  "rubriques AS $id_table";
-#    $boucle->select[] = "rubriques.id_parent";
     break;
     
   case 'syndication':
@@ -115,9 +114,9 @@ function calculer_requete(&$boucle) {
 	// En absence de champ c'est un decompte : on prend la primary pour
 	// avoir qqch (le marteau-pilon * est trop couteux, et le COUNT
 	// incompatible avec le cas general)
-	return 'spip_abstract_select(array("'. 
+	return "spip_abstract_select(\n\t\tarray(\"". 
 		((!$boucle->select) ? $id_field :
-		join('", "', array_unique($boucle->select))) .
+		join("\",\n\t\t\"", array_unique($boucle->select))) .
 		'"), # SELECT
 		array("' .
 		join('","', array_unique($boucle->from)) .
