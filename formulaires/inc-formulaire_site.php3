@@ -19,7 +19,7 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 	return ((lire_meta("proposer_sites") != 2) ? '' : $args);
 }
 
-function balise_FORMULAIRE_SITE_dyn($id_rubrique, $nom_site, $url_site, $description_site) {
+function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
 	if (!_request('nom_site')) return array('formulaire_site', 0);
 
