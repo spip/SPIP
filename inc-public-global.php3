@@ -160,7 +160,7 @@ else {
 $effacer_cache = !$delais;
 $effacer_cache |= $ecraser_cache;	// ecraser le cache de l'article x s'il n'est pas publie
 
-// envoyer les entetes
+// Envoyer les entetes
 $headers_only = ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD');
 if (!$effacer_cache && !$flag_dynamique && $recalcul != 'oui') {
 	if ($lastmodified) {
@@ -179,12 +179,16 @@ else {
 	@Header("Cache-Control: no-cache,must-revalidate");
 	@Header("Pragma: no-cache");
 }
+if (!$flag_preserver) {
+	@Header("Content-Type: text/html; charset=".lire_meta('charset'));
+}
 
-// envoyer la page
+
+// Envoyer la page
 if (file_exists($chemin_cache) && !$headers_only) {
 	include($chemin_cache);
 } else if (!$flag_preserver) {
-	// message d'erreur base de donnees
+	// Message d'erreur base de donnees
 	include_ecrire('inc_presentation.php3');
 	install_debut_html(_T('info_travaux_titre'));
 	echo "<p>"._T('titre_probleme_technique')."</p>\n";
