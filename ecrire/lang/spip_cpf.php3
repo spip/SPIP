@@ -6,9 +6,9 @@ $GLOBALS['i18n_cpf'] = array(
 
 
 // 0
-'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-'0_langue' => 'Kr&eacute;ol r&eacute;nyon&eacute; [kr]',
-'0_liste' => 'spip-dev@rezo.net',
+'0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-cpf',
+'0_langue' => 'Kr&eacute;ol r&eacute;nyon&eacute; [cpf]',
+'0_liste' => 'spip-cpf@rezo.net',
 '0_mainteneur' => 'pascale@rezo.net',
 
 
@@ -587,7 +587,7 @@ Zot bann zartik sak i esp&egrave;r lakonfirmasyon',
 'info_contenu_articles' => 'Kosa bann zartik i kontyin ',
 'info_contribution' => 'Bann kontribusyon dann forom',
 'info_copyright' => 'l&eacute; &egrave;n lozisyel lib sak l&eacute; don&eacute; <a href=\'copyright_fr.html\'>sou lisans GPL.</a>',
-'info_copyright_doc' => 'Pou zot y gagn plis bann zinformasyon va vwar lo sit <a href=\'http://www.uzine.net/spip\'>http://www.uzine.net/spip</a>.',
+'info_copyright_doc' => 'Pou zot y gagn plis bann zinformasyon va vwar lo sit <a href=\'http://www.uzine.net/spip-cpf\'>http://www.uzine.net/spip-cpf</a>.',
 'info_cours_edition' => 'Bann zartik azot l&eacute; apr&eacute; l&eacute;disyon',
 'info_creation_mots_cles' => 'Kr&eacute; &egrave;k konfigir t&egrave;rla bann molakl&eacute; lo sit',
 'info_creation_paragraphe' => '(Pou zot kr&eacute; bann paragraf,l&egrave;s sinpman trwakat liyn vid.)',
