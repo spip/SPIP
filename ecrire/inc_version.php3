@@ -407,13 +407,16 @@ if ($auto_compress && $flag_obgz) {
 		$use_gz = false;
 
 	// special bug de proxy
-	if (eregi("NetCache|Hasd_proxy", $HTTP_VIA)) {
+	if (eregi("NetCache|Hasd_proxy", $HTTP_VIA))
 		$use_gz = false;
-	}
+
 	// special bug Netscape Win 4.0x
-	if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT)) {
+	if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_USER_AGENT))
 		$use_gz = false;
-	}
+
+	// special bug Apache2x + php4.2.x (versions a preciser eventuellement si on retrouve)
+	if (eregi("Apache/2", $SERVER_SOFTWARE))
+		$use_gz = false;
 
 	if ($use_gz) {
 		@ob_start("ob_gzhandler");
