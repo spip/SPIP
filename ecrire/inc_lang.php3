@@ -334,6 +334,7 @@ function lang_dselect ($rien='') {
 
 
 // traduire un machin : [(#LANG|traduire{"module:code"}|sinon{"texte non traduit"})]
+// mais aussi notation <<module:code>> ou juste <<code>>
 function traduire($lang, $code) {
 	lang_select($lang);
 	$texte = _T($code);

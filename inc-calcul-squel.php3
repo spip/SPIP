@@ -2197,7 +2197,9 @@ function calculer_texte($texte)
 	$dossier = ($dossier_squelettes ? $dossier_squelettes.'/' : '');
 	$code = "";
 
-	// Reperer les directives d'inclusion de squelette
+	//
+	// Reperer les directives d'inclusion de squelette et les balises de traduction <<toto>>
+	//
 	while (ereg("(<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>)|(<<(([a-z_]+):)?([a-z_]+)>>)", $texte, $match)) {
 		$s = $match[0];
 		$p = strpos($texte, $s);
@@ -2206,7 +2208,9 @@ function calculer_texte($texte)
 		if ($debut)
 			$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $debut)."';\n";
 
+		//
 		// Traiter la directive d'inclusion
+		//
 		if ($match[1]) {
 			$fichier = $match[2];
 			ereg('^\\{(.*)\\}$', trim($match[3]), $params);
@@ -2243,11 +2247,13 @@ function calculer_texte($texte)
 
 			$code .= "	\$retour .= 'lang_dselect(); ?".">';\n";
 		}
-		else // traiter la balise de traduction multilingue
-		{
+
+		//
+		// Traiter la balise de traduction multilingue
+		//
+		if ($chaine = $match[8]) {
 			if (!$module = $match[7])
 				$module = 'local';
-			$chaine = $match[8];
 			$code .= "	\$retour .= traduire(\$GLOBALS['spip_lang'],'$module:$chaine');\n";
 		}
 	}
