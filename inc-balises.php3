@@ -255,7 +255,6 @@ function balise_RECHERCHE_dist($p) {
 
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
-		include_local("inc-admin.php3");
 		erreur_squelette(_L("Champ #COMPTEUR_BOUCLE hors boucle"), $p->id_boucle);
 		$p->code = "''";
 	} else {
@@ -267,7 +266,6 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 
 function balise_TOTAL_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
-		include_local("inc-admin.php3");
 		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), $p->id_boucle);
 		$p->code = "''";
 	} else {
@@ -297,7 +295,6 @@ function balise_POINTS_dist($p) {
 	$b = $p->boucles[$b]->id_parent;
 	}
 	if (!$p->code) {
-		include_local("inc-admin.php3");
 		erreur_squelette(_L("Champ #POINTS hors d'une recherche"), $p->id_boucle);
 	}
 	$p->statut = 'php';
@@ -329,7 +326,6 @@ function balise_EXPOSER_dist($p) {
 	$type_boucle = $p->type_requete;
 	$primary_key = $table_primary[$type_boucle];
 	if (!$primary_key) {
-		include_local("inc-admin.php3");
 		erreur_squelette(_L("Champ #EXPOSER hors boucle"), $p->id_boucle);
 	}
 	$on = 'on';
@@ -774,7 +770,6 @@ function balise_FORMULAIRE_SITE_dist($p) {
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 	if ($p->boucles[$nom]->sql_serveur) {
-		include_local("inc-admin.php3");
 		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
 	}
 }

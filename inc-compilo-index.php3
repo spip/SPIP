@@ -46,7 +46,6 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 #		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s");
 		$desc = $tables_des_serveurs_sql[$s][$t];
 		if (!$desc) {
-			include_local("inc-admin.php3");
 			erreur_squelette(_L("Table SQL \"$r\" inconnue"), "'$idb'");
 			# continuer pour chercher l'erreur suivante
 			return  "'#" . $r . ':' . $nom_champ . "'";
