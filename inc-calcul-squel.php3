@@ -902,13 +902,6 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'vider_url';
 	}
 
-	// URL_xxx des objets SPIP indexables : gerer le var_recherche
-	$c = array('URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_MOT');
-	reset($c);
-	while (list(, $val) = each($c)) {
-		$champs_traitement[$val][] = 'url_var_recherche';
-	}
-
 	// URLs : remplacer les & par &amp;
 	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'PARAMETRES_FORUM',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT');
@@ -1374,15 +1367,15 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'URL_ARTICLE':
-		$code = "generer_url_article(\$contexte['id_article'])";
+		$code = "url_var_recherche(generer_url_article(\$contexte['id_article']), \$contexte['activer_url_recherche'])";
 		break;
 
 	case 'URL_RUBRIQUE':
-		$code = "generer_url_rubrique(\$contexte['id_rubrique'])";
+		$code = "url_var_recherche(generer_url_rubrique(\$contexte['id_rubrique']), \$contexte['activer_url_recherche'])";
 		break;
 
 	case 'URL_BREVE':
-		$code = "generer_url_breve(\$contexte['id_breve'])";
+		$code = "url_var_recherche(generer_url_breve(\$contexte['id_breve']), \$contexte['activer_url_recherche'])";
 		break;
 
 	case 'URL_FORUM':
@@ -1390,7 +1383,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'URL_MOT':
-		$code = "generer_url_mot(\$contexte['id_mot'])";
+		$code = "url_var_recherche(generer_url_mot(\$contexte['id_mot']), \$contexte['activer_url_recherche'])";
 		break;
 
 	case 'URL_DOCUMENT':
@@ -1752,13 +1745,13 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	if (strpos($boucle->requete, '$hash_recherche')) {
 		$texte .= '
 		global $recherche, $hash_recherche;
-		$GLOBALS[\'activer_url_recherche\'] = true;
+		$contexte[\'activer_url_recherche\'] = true;
 		if (!$hash_recherche)
 			$hash_recherche = requete_hash($recherche);
 		';
 	} else
 		$texte .= '
-		$GLOBALS[\'activer_url_recherche\'] = false;
+		$contexte[\'activer_url_recherche\'] = false;
 		';
 
 	//
