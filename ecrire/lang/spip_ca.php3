@@ -13,6 +13,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'access_interface_graphique' => 'Retorn a la interf&iacute;cie gr&agrave;fica completa',
+'access_mode_texte' => 'Invidents: mostrar la interf&iacute;cie en mode text',
 'admin_modifier_article' => 'Modificar aquest article',
 'admin_modifier_auteur' => 'Modificar aquest autor',
 'admin_modifier_breve' => 'Modificar aquesta breu',
@@ -175,7 +177,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 
 // D
+'date_aujourdhui' => 'avui',
 'date_avant_jc' => 'aC',
+'date_dans' => 'en @delai@',
 'date_de_mois_1' => '@j@ de gener',
 'date_de_mois_10' => '@j@ d\'octubre',
 'date_de_mois_11' => '@j@ de novembre',
@@ -188,12 +192,16 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'date_de_mois_7' => '@j@ de juliol',
 'date_de_mois_8' => '@j@ d\'agost',
 'date_de_mois_9' => '@j@ de setembre',
+'date_demain' => 'dem&agrave;',
 'date_fmt_heures_minutes' => '@h@h@m@min',
 'date_fmt_jour_heure' => '@jour@ a les @heure@',
 'date_fmt_jour_mois' => '@jourmois@',
 'date_fmt_jour_mois_annee' => '@jourmois@ de @annee@',
 'date_fmt_mois_annee' => '@nommois@ de @annee@',
 'date_fmt_nomjour_date' => 'el @nomjour@ @date@',
+'date_heures' => 'hores',
+'date_hier' => 'ahir',
+'date_il_y_a' => 'fa @delai@',
 'date_jnum1' => '1',
 'date_jnum10' => '10',
 'date_jnum11' => '11',
@@ -232,6 +240,9 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'date_jour_5' => 'dijous',
 'date_jour_6' => 'divendres',
 'date_jour_7' => 'dissabte',
+'date_jours' => 'dies',
+'date_minutes' => 'minuts',
+'date_mois' => 'mes',
 'date_mois_1' => 'gener',
 'date_mois_10' => 'octubre',
 'date_mois_11' => 'novembre',
@@ -249,6 +260,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'estiu',
 'date_saison_4' => 'tardor',
+'date_semaines' => 'setmanes',
 'diff_para_ajoute' => 'Par&agrave;graf afegit',
 'diff_para_deplace' => 'Par&agrave;graf despla&ccedil;at',
 'diff_para_supprime' => 'Par&agrave;graf suprimit',

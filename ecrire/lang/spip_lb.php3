@@ -245,12 +245,12 @@ der Dokumentatioun vu SPIP</a>.',
 'dirs_commencer' => ' fir d\'Installatioun richteg unzef&auml;nken',
 'dirs_preliminaire' => 'Fir d\'&eacute;ischt: <b>R&eacute;gl&eacute;iert d\'Zougangs-Rechter</b>',
 'dirs_probleme_droits' => '<b>Problem mat den Zougangs-Rechter</b>',
-'dirs_repertoires_absents' => '<b>Des R&eacute;pertoiren konnten n&euml;t fonnt gin: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<b>D&euml;s Dossier\'en konnten n&euml;t fonnt gin: <ul>@bad_dirs@.</ul> </b>
 <p />&Euml;t ass m&eacute;iglech dass dat e Problem vu Grouss- oder Kleng-Schreiwen ass.
-Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat deem wat hei ugewisen g&euml;t iwerteneenst&euml;mmen; wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun de R&eacute;pertoiren mat &auml;rer FTP-Sofware fir de Fehler ze verbesseren.
+Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat deem wat hei ugewisen g&euml;t iwerteneenst&euml;mmen; wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml;rer FTP-Sofware fir de Fehler ze verbesseren.
 <p />Wann dat gemaach ass, da k&euml;nnt der ',
-'dirs_repertoires_suivants' => '<b>D&eacute;i hei R&eacute;pertoiren k&euml;nnen n&euml;t beschriwen gin: <ul>@bad_dirs@.</ul> </b>
-<p />Fir dat ze &auml;nneren, benotzt &auml;r FTP-Software fir d\'Zougangsrechter vun jidfer R&eacute;pertoire ze r&eacute;gl&eacute;ieren. D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwen.
+'dirs_repertoires_suivants' => '<b>D&euml;s Dossier\'en k&euml;nnen n&euml;t beschriwen gin: <ul>@bad_dirs@.</ul> </b>
+<p />Fir dat ze &auml;nneren, benotzt &auml;r FTP-Software fir d\'Zougangsrechter vun jidfer Dossier ze r&eacute;gl&eacute;ieren. D&euml;s Prozedur ass am Detail am Installatiouns-Guide beschriwen.
 <p />Wann dat gemaach ass, da k&euml;nnt der ',
 
 
@@ -606,8 +606,8 @@ Merci fir &auml;r Participatioun
 'info_creation_rubrique' => 'Ier d&euml;r k&euml;nnt en Artikel schreiwen musst d&euml;r op manst eng Rubrik derb&auml;i ginn.',
 'info_creation_tables' => 'V&eacute;ierte Schr&euml;tt: <b>Tabellen an d\'Datebank schreiwen</b>',
 'info_creer_base' => 'Eng nei Datebank <b>derb&auml;i ginn</b>:',
-'info_creer_repertoire' => 'Maacht e Fichier oder Repertoire mat d&euml;sem Numm derb&auml;i:',
-'info_creer_repertoire_2' => 'am Sous-Repertoire <b>ecrire/data</b>, dann:',
+'info_creer_repertoire' => 'Maacht e Fichier oder Dossier mat d&euml;sem Numm derb&auml;i:',
+'info_creer_repertoire_2' => 'am Dossier <b>ecrire/data</b>, dann:',
 'info_dans_groupe' => 'Am Grupp:',
 'info_dans_rubrique' => 'An der Rubrik:',
 'info_date_publication_anterieure' => '&Eacute;ischten Publikatiounsdatum:',
@@ -1188,7 +1188,7 @@ Wann dir n&euml;t w&euml;llt dat &auml;rt Passwuert ka um Internet ofgefaangen g
 'onglet_origine_visites' => 'Origine vun de Visiten',
 'onglet_repartition_actuelle' => 'elo',
 'onglet_repartition_debut' => 'z&euml;nter Ufank',
-'onglet_repartition_lang' => 'no Sprooch',
+'onglet_repartition_lang' => 'Verdeelung no Sprooch',
 'onglet_repartition_rubrique' => 'Verdeelung no Rubrik',
 'onglet_save_restaur_base' => 'Datebank sp&auml;icheren/restaur&eacute;ieren',
 'onglet_vider_cache' => 'Cache l&auml;schen',
@@ -1250,21 +1250,21 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 
 
 // T
-'taille_cache_infinie' => 'D&euml;se Site huet keng Limite fir d\'Gr&eacute;isst vum R&eacute;pertoire <code>CACHE/</code>.',
-'taille_cache_maxi' => 'SPIP prob&eacute;iert d\'Gr&eacute;isst vum R&eacute;pertoire <code>CACHE/</code> vun d&euml;sem Site op ongef&eacute;ier <b>@octets@</b> ze limit&eacute;ieren.',
+'taille_cache_infinie' => 'D&euml;se Site huet keng Limite fir d\'Gr&eacute;isst vum Dossier <code>CACHE/</code>.',
+'taille_cache_maxi' => 'SPIP prob&eacute;iert d\'Gr&eacute;isst vum Dossier <code>CACHE/</code> vun d&euml;sem Site op ongef&eacute;ier <b>@octets@</b> ze limit&eacute;ieren.',
 'taille_cache_octets' => 'D\'Gr&eacute;isst vum Cache ass elo @octets@.',
 'taille_cache_vide' => 'De Cache ass eidel.',
 'taille_ko' => '@taille@&nbsp;kB',
 'taille_mo' => '@taille@&nbsp;MB',
 'taille_octets' => '@taille@&nbsp;Byte',
-'taille_repertoire_cache' => 'Gr&eacute;isst vum Cache-R&eacute;pertoire',
+'taille_repertoire_cache' => 'Gr&eacute;isst vum Cache-Dossier',
 'text_article_propose_publication' => 'Fir d\'Publikatioun propos&eacute;ierten Artikel. Gidd &auml;ren Avis iwer de Forum vun d&euml;sem Artikel (&euml;nnen op der S&auml;it).',
 'texte_acces_ldap_anonyme_1' => 'Verschidden LDAP-Serveren erlaben keen anonymen Zougang. An deem Fall musst dir en initialen Zougang uginn fir Informatiounen am Annuaire k&euml;nnen ze sichen. An deenen meeschten F&auml;ll k&euml;nnt d&euml;r d&euml;s Felder eidel loossen.',
 'texte_actualite_site_1' => 'Wann dir mam Interface familiaris&eacute;iert sidd, da k&euml;nnt der klicken op "',
 'texte_actualite_site_2' => 'kompletten Interface',
 'texte_actualite_site_3' => '" fir m&eacute;i M&eacute;iglechkeeten ze weisen.',
 'texte_admin_effacer_01' => 'D&euml;s Prozedur l&auml;scht <i>alles</i> aus der Datebank, och <i>all</i> Zoug&auml;ng vun de Redaktoren an Administrateuren. Duerno musst dir SPIP nei install&eacute;ieren fir eng nei Datebank an den &eacute;ischten Administrateur-Zougang derb&auml;i ze ginn.',
-'texte_admin_tech_01' => 'D&euml;s Optioun erlaabt den Inhalt vun der Datebank am Repertoire <i>ecrire/data/</i> ze sp&auml;icheren. Vergiesst n&euml;t och de ganzen Inhalt vum Repertoire <i>IMG/</i> erofzelueden, do sinn all d\'Biller an d\'Dokumenter d&eacute;i an den Artikelen an an de Rubriken gebraucht ginn.',
+'texte_admin_tech_01' => 'D&euml;s Optioun erlaabt den Inhalt vun der Datebank am Dossier <i>ecrire/data/</i> ze sp&auml;icheren. Vergiesst n&euml;t och de ganzen Inhalt vum Dossier <i>IMG/</i> erofzelueden, do sinn all d\'Biller an d\'Dokumenter d&eacute;i an den Artikelen an an de Rubriken gebraucht ginn.',
 'texte_admin_tech_02' => 'Opgepasst: d&euml;se Backup kann n&euml;mmen op e Site mat ders&euml;lwechter SPIP-Versioun restaur&eacute;iert gin. Versicht also nie "&nbsp;Datebank eidel maachen&nbsp;" an der Hoffnung dir kinnt se nei no engem Update install&eacute;ieren... Kuckt <a href="http://www.spip.net/fr_article1489.html">an der SPIP-Dokumentatioun</a>.',
 'texte_admin_tech_03' => 'Dir k&euml;nnt de Fichier komprim&eacute;iert sp&auml;icheren fir m&eacute;i e s&eacute;ieren Downlued oder Transfert op e Backup-Server, a fir Disk-Plaz ze spueren.',
 'texte_adresse_annuaire_1' => '(Wann &auml;ren Annuaire op ders&euml;lwechter Maschinn install&eacute;iert ass, dann as et hei warscheinl&euml;ch "localhost".)',
@@ -1311,7 +1311,7 @@ Benotzt d\'L&euml;scht hei dr&euml;nner fir unzegin w&eacute;i eng Elementer e k
 'texte_erreur_mise_niveau_base' => 'Datebank-Fehler beim Update.
 D\'Bild <B>@fichier@</B> huet n&euml;t fonktionn&eacute;iert (Artikel @id_article@).
 Not&eacute;iert d&euml;s Referenz, prob&eacute;iert nach eng K&eacute;ier, a kontroll&eacute;iert op d\'Biller an den Artikelen gewisen ginn.',
-'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Repertoire <tt>ecrire/data/</tt> maachen?</b><p />
+'texte_fichier_authent' => '<b>Soll SPIP d&eacute;i speziell Fichier\'en <tt>.htpasswd</tt> an <tt>.htpasswd-admin</tt> am Dossier <tt>ecrire/data/</tt> maachen?</b><p />
 D&euml;s Fichier\'en k&euml;nnen den Zougang vun den Auteuren an den Administrateuren op verschidden Deeler vum Site kontroll&eacute;ieren (externen Statistik-Programm z.B.).<p />
 Wann dir dat n&euml;t braucht, da loosst d&euml;s Optioun op senger Default-Valeur (Fichier\'en n&euml;t maachen).',
 'texte_inc_auth_1' => 'Dir sidd identifi&eacute;iert als <B>@auth_login@</B>, awer de Login g&euml;t &euml;t n&euml;t m&eacute;i an der Datebank.
@@ -1321,7 +1321,7 @@ Versicht',
 'texte_inc_config' => 'D\'&Auml;nnerungen op d&euml;se S&auml;iten beaflossen de Fonktionnement vun &auml;rem Site stark. Maacht n&auml;ischt ier d&euml;r de SPIP-System richteg kennt.<P align="justify"><B>Generell ass ungeroden, d&euml;s S&auml;iten dem Webmaster vun &auml;rem Site ze iwerloossen.</B>',
 'texte_inc_meta_1' => 'De System huet e Fehler fonnt beim Schreiwen vum Fichier <code>ecrire/data/meta_cache.php3</code>. Als Administrateur vum Site,',
 'texte_inc_meta_2' => 'kontroll&eacute;iert d\'Schreiw-Rechter',
-'texte_inc_meta_3' => 'um R&eacute;pertoire <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'am Dossier <code>ecrire/data/</code>.',
 'texte_informations_personnelles_1' => 'De System g&euml;t Iech elo e personnalis&eacute;ierten Zougang zum Site.',
 'texte_informations_personnelles_2' => '(N.B.: wann &euml;t eng Re-Installatioun ass, a wann &auml;ren Zougang nach fonktionn&eacute;iert,',
 'texte_introductif_article' => '(Aleedung vum Artikel.)',
@@ -1350,7 +1350,7 @@ Elo muss d\'Datebank vum Site ugepasst ginn.',
 'texte_nouveau_message' => 'Neien Message',
 'texte_nouveau_mot' => 'Neit Wuert',
 'texte_nouvelle_version_spip_1' => 'Dir hut eng nei Versioun vu SPIP install&eacute;iert.',
-'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier <tt>inc_connect.php3</tt> vum Repertoire <tt>ecrire</tt> a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p />(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier <tt>inc_connect.php3</tt> ier d&euml;r e l&auml;scht...)',
+'texte_nouvelle_version_spip_2' => 'D&euml;s nei Versioun verlaangt e m&eacute;i kompletten Update w&eacute;i normalerweis. Wann dir de Webmaster vum Site sidd, l&auml;scht de Fichier <tt>inc_connect.php3</tt> vum Dossier <tt>ecrire</tt> a fuert mat der Installatioun weider fir &auml;r Zougangsparameteren un d\'Datebank unzepassen.<p />(N.B.: wann dir &auml;r Parameteren vergiess hutt, kuckt am Fichier <tt>inc_connect.php3</tt> ier d&euml;r e l&auml;scht...)',
 'texte_operation_echec' => 'Gidd op d&eacute;i l&auml;scht S&auml;it zer&euml;ck, wielt eng aner Datebank oder gidd eng derb&auml;i. Kontroll&eacute;iert d\'Informatiounen vun &auml;rem Provider.',
 'texte_plus_trois_car' => 'm&eacute;i w&eacute;i 3 Buchstawen',
 'texte_plusieurs_articles' => 'E puer Artikelen fonnt vum "@cherche_auteur@":',
@@ -1370,7 +1370,7 @@ An deem Fall, gidd hei seng Adress un, &euml;nner der Form
 MySQL kann seng Tabellen fl&eacute;cken wann se futti sinn. Dir k&euml;nnt hei eng Reparatur prob&eacute;ieren; wann &euml;t n&euml;t geet, kop&eacute;iert den Affichage, do sinn vill&auml;icht Hinweiser op dat wat n&euml;t fonktionn&eacute;iert...<p />
 Wann de Problem weider besteet, kontakt&eacute;iert &auml;ren Provider.<p />',
 'texte_restaurer_base' => 'E Backup restaur&eacute;ieren',
-'texte_restaurer_sauvegarde' => 'D&euml;s Fonktioun erlaabt d\'Restauratioun vun engem Backup vun der Datebank. Duerfir muss de Backup-Fichier am R&eacute;pertoire <i>ecrire/data/</i> sinn.
+'texte_restaurer_sauvegarde' => 'D&euml;s Fonktioun erlaabt d\'Restauratioun vun engem Backup vun der Datebank. Duerfir muss de Backup-Fichier am Dossier <i>ecrire/data/</i> sinn.
 Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&euml;ckg&auml;ngeg gemaach ginn.</b>',
 'texte_sauvegarde' => 'E Backup vun der Datebank maachen',
 'texte_sauvegarde_base' => 'Backup vun der Datebank maachen',
@@ -1380,7 +1380,7 @@ Passt op mat d&euml;ser Prozedur: <b>d\'&Auml;nnerungen k&euml;nnen n&euml;t r&e
 <li>s&auml;tzt den typographesche Motor deen SPIP benotzen soll fir Texter ze weisen;</li>
 <li>s&auml;tzt d\'Sprooch d&eacute;i an den &ouml;ffentl&euml;chen Formulairen benotzt g&euml;t;</li>
 <li>s&auml;tzt d\'Default-Sprooch am privaten Deel vum Site.</li></ul>',
-'texte_signification' => 'Roud g&euml;t d&eacute;i kumul&eacute;iert Donn&eacute;en (Total vun den &Euml;nner-Rubriken), gr&eacute;ng d\'Zuel vun de Visiten fir all Rubrik.',
+'texte_signification' => 'D&eacute;i kumul&eacute;iert Donn&eacute;en sinn donkel (Total vun den &Euml;nner-Rubriken), d\'Zuel vun de Visiten fir all Rubrik sinn hell.',
 'texte_sous_titre' => '&Euml;nnertitel',
 'texte_statistiques_visites' => '(donkel:  Sonndeg / Kurv: Evolutioun vun der Moyenne)',
 'texte_statut_attente_validation' => 'waart op d\'Validatioun',
