@@ -343,7 +343,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$nb_groupes = mysql_num_rows(spip_query($query_groupes));
 
 		if ($flag_editable) {
-			if ($nouv_mot.$cherche_mot.$supp_mot)
+			if ($nouveaux_mots.$cherche_mot.$supp_mot)
 				echo debut_block_visible("lesmots");
 			else if ($nb_groupes > 0) {
 				echo debut_block_visible("lesmots"); 
