@@ -293,7 +293,7 @@ echo "<P><HR><P>";
 	else {
 		echo "<INPUT TYPE='hidden' NAME='surtitre' VALUE=\"$surtitre\" >";
 	}
-	
+
 	echo "<B>Titre</B> [Obligatoire]";
 	echo aide ("arttitre");
 	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40'><P>";
@@ -304,7 +304,7 @@ echo "<P><HR><P>";
 		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><br><br>";
 	}
 	else {
-		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";	
+		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";
 	}
 
 	
