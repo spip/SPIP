@@ -38,18 +38,27 @@ if ($unquote_gpc) {
 
 $INSECURE = array();
 
-function feed_globals($table, $insecure = true) {
+function feed_globals($table, $insecure = true, $ignore_variables_contexte = false) {
 	global $INSECURE;
+
+	// ignorer des cookies qui contiendraient du contexte 
+	$is_contexte = array('id_parent'=>1, 'id_rubrique'=>1, 'id_article'=>1, 'id_auteur'=>1,
+		'id_breve'=>1, 'id_forum'=>1, 'id_secteur'=>1, 'id_syndic'=>1, 'id_syndic_article'=>1,
+		'id_mot'=>1, 'id_groupe'=>1, 'id_document'=>1, 'date'=>1, 'lang'=>1);
+
 	if (is_array($GLOBALS[$table])) {
-	        reset($GLOBALS[$table]);
-	        while (list($key, $val) = each($GLOBALS[$table])) {
-			$GLOBALS[$key] = $val;
+        reset($GLOBALS[$table]);
+        while (list($key, $val) = each($GLOBALS[$table])) {
+			if ($ignore_variables_contexte AND $is_contexte[$key])
+				unset ($GLOBALS[$key]);
+			else
+				$GLOBALS[$key] = $val;
 			if ($insecure) $INSECURE[$key] = $val;
-	        }
+        }
 	}
 }
 
-feed_globals('HTTP_COOKIE_VARS');
+feed_globals('HTTP_COOKIE_VARS', true, true);
 feed_globals('HTTP_GET_VARS');
 feed_globals('HTTP_POST_VARS');
 feed_globals('HTTP_SERVER_VARS', false);
