@@ -292,7 +292,7 @@ function parser_boucle($texte, $id_parent) {
 					else if ($param == 'recherche') {
 						if ($type == 'syndication') $req_from[] = "spip_index_syndic AS idx";
 						else $req_from[] = "spip_index_$type AS idx";
-						$req_select[] = "SUM(idx.points) AS points";
+						$req_select[] = "SUM(idx.points + 100*(idx.hash IN (\$hash_recherche_strict))) AS points";
 						$req_where[] = "idx.$id_objet=$table.$id_objet";
 						$req_group = " GROUP BY $table.$id_objet";
 						$req_where[] = "idx.hash IN (\$hash_recherche)";
@@ -1558,10 +1558,10 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 	if (strpos($boucle->requete, '$hash_recherche')) {
 		$texte .= '
-		global $recherche, $hash_recherche;
+		global $recherche, $hash_recherche, $hash_recherche_strict;
 		$contexte[\'activer_url_recherche\'] = true;
 		if (!$hash_recherche)
-			$hash_recherche = requete_hash($recherche);
+			list($hash_recherche, $hash_recherche_strict) = requete_hash($recherche);
 		';
 	} else
 		$texte .= '

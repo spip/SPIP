@@ -47,7 +47,7 @@ $query_sites  = ereg_replace("titre LIKE", "nom_site LIKE", $query_sites);
 $activer_moteur = (lire_meta('activer_moteur') == 'oui');
 if ($activer_moteur) {	// texte integral
 	include_ecrire ('inc_index.php3');
-	$hash_recherche = requete_hash ($recherche);
+	list($hash_recherche,) = requete_hash ($recherche);
 	$query_articles_int = requete_txt_integral('article', $hash_recherche);
 	$query_breves_int = requete_txt_integral('breve', $hash_recherche);
 	$query_rubriques_int = requete_txt_integral('rubrique', $hash_recherche);

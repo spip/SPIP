@@ -350,6 +350,7 @@ function requete_txt_integral($objet, $hash_recherche) {
 }
 
 // rechercher un mot dans le dico
+// retourne deux methodes : lache puis strict
 function requete_dico($val) {
 	$min_long = 3;
 
@@ -362,13 +363,14 @@ function requete_dico($val) {
 		// 3. composer la regexp pour les caracteres accentuables mais non accentues
 		while (ereg("([aeiouyd])([a-z])", $val.' ', $match))
 			$val = str_replace ($match[0], $match[1].'[-1-9]?[-1-9]?'.$match[2], $val);
-		return "dico REGEXP '^$val'";
+		return array("dico REGEXP '^$val'", "dico REGEXP '^$val$'");
 	}
 
 	// cas normal
-	if (strlen($val) > $min_long)
-		return "dico LIKE '$val%'";
-	else return "dico = '".$val."___'";
+	if (strlen($val) > $min_long) {
+		return array("dico LIKE '$val%'", "dico = '$val'");
+	} else
+		return array("dico = '".$val."___'", "dico = '".$val."___'");
 }
 
 
@@ -383,23 +385,38 @@ function requete_hash ($rech) {
 	unset($h);
 
 	// cherche les mots dans le dico
-	while (list(, $val) = each($s))
-		if ($rq = requete_dico ($val))
+	while (list(, $val) = each($s)) {
+		list($rq, $rq_strict) = requete_dico ($val);
+		if ($rq)
 			$dico[] = $rq;
+		if ($rq_strict)
+			$dico_strict[] = $rq_strict;
+	}
 
 	// compose la recherche dans l'index
+	if ($dico_strict) {
+		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico_strict);
+		$result2 = spip_query($query2);
+		while ($row2 = spip_fetch_array($result2))
+			$h_strict[] = "0x".$row2["hx"];
+	}
 	if ($dico) {
 		$query2 = "SELECT HEX(hash) AS hx FROM spip_index_dico WHERE ".join(" OR ", $dico);
 		$result2 = spip_query($query2);
 		while ($row2 = spip_fetch_array($result2))
 			$h[] = "0x".$row2["hx"];
 	}
+	if ($h_strict)
+		$hash_recherche_strict = join(",", $h_strict);
+	else
+		$hash_recherche_strict = "0";
+
 	if ($h)
 		$hash_recherche = join(",", $h);
 	else
 		$hash_recherche = "0";
 
-	return $hash_recherche;
+	return array($hash_recherche, $hash_recherche_strict);
 }
 
 ?>

@@ -171,6 +171,7 @@ error_reporting(E_ALL ^ E_NOTICE);
 $auteur_session = '';
 $connect_statut = '';
 $hash_recherche = '';
+$hash_recherche_strict = '';
 
 
 //
