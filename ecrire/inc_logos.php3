@@ -191,7 +191,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		$destWidth = $maxWidth;
 		$destHeight = $srcHeight/$ratioWidth;
 	}
-	return array ($destWidth, $destHeight);
+	return array (ceil($destWidth), ceil($destHeight));
 }
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
