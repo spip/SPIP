@@ -241,8 +241,9 @@ if (@file_exists(_DIR_PREFIX2 . 'mes_options.php3')) {
 	include(_DIR_PREFIX2 . 'mes_options.php3');
 }
 
-if (@file_exists(_DIR_PREFIX2 . 'inc_plugins.php3')) {
-	include(_DIR_PREFIX2 . 'inc_plugins.php3');
+## c'est tres bete de charger ce fichier a chaque hit sur le serveur !
+if (@file_exists(_DIR_PREFIX2 . 'data/inc_plugins.php3')) {
+	include(_DIR_PREFIX2 . 'data/inc_plugins.php3');
 }
 
 define_once('_FILE_CONNECT_INS', (_DIR_PREFIX2 . "inc_connect"));
