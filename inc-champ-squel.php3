@@ -139,7 +139,7 @@ $table_des_tables = array(
 	'groupes_mots' => 'groupes_mots',
 	'rubriques' => 'rubriques',
 	'syndication' => 'syndic',
-	'syndic_articles' => 'articles',
+	'syndic_articles' => 'syndic_articles',
 	'hierarchie' => 'rubriques'
 );
 
@@ -165,8 +165,8 @@ $exceptions_des_tables = array(
 		'extension_document' => array('types_documents', 'extension')
 	),
 	'syndic_articles' => array(
-		'url_article' => 'url',
-		'lesauteurs' => 'lesauteurs',
+		'url_article' => 'url',			# ne sert pas ? cf balise_URL_ARTICLE
+		'lesauteurs' => 'lesauteurs',	# ne sert pas ? cf balise_LESAUTEURS
 		'url_site' => array('syndic', 'url_site'),
 		'nom_site' => array('syndic', 'nom_site')
 	)
