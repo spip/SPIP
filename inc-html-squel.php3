@@ -314,7 +314,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		//
 		// 2. Recuperer la partie alternative
 		//
-		echo $s = "<//B$id_boucle>";
+		$s = "<//B$id_boucle>";
 		$p = strpos($texte, $s);
 		if ($p !== false) {
 			$result->cond_altern = substr($texte, 0, $p);
