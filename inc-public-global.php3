@@ -213,7 +213,9 @@ function admin_page($cached, $texte) {
 
 // Si l'admin a demande un affichage
 function afficher_page_si_demande_admin ($type, $texte, $fichier){
-	if ($GLOBALS['var_afficher_debug'] == $type
+	if (
+	$GLOBALS['bouton_admin_debug']
+	AND $GLOBALS['var_afficher_debug'] == $type
 	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
 		include_local('inc-admin.php3');
 		@header('Content-Type: text/html; charset='.lire_meta('charset'));
