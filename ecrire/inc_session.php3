@@ -41,7 +41,7 @@ function fichier_session($id_session, $alea) {
 //
 function ajouter_session($auteur, $id_session) {
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
-	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'ip_change', 'hash_env');
+	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env');
 
 	$texte = "<"."?php\n";
 	reset($vars);

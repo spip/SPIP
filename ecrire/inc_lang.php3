@@ -69,10 +69,6 @@ function traduire_chaine($code, $args) {
 	if (!$GLOBALS[$var]) charger_langue($spip_lang);
 	$text = $GLOBALS[$var][$code];
 
-	/*if (!$text) {
-		charger_langue('fr');
-		$text = $GLOBALS['i18n_fr'][$code];
-	}*/
 	if (!is_array($args)) return $text;
 
 	while (list($name, $value) = each($args))
@@ -274,8 +270,8 @@ function gerer_menu_langues() {
 function utiliser_langue_visiteur() {
 	if (!regler_langue_navigateur())
 		changer_langue($GLOBALS['langue_site']);
-	if ($GLOBALS['prefs']['spip_lang'])
-		changer_langue($GLOBALS['prefs']['spip_lang']);
+	if ($GLOBALS['auteur_session']['lang'])
+		changer_langue($GLOBALS['auteur_session']['lang']);
 }
 
 function utiliser_langue_site() {
