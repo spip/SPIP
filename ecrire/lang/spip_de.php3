@@ -161,6 +161,7 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'cache_mode_non_compresse' => 'Cache-Dateien werden unkomprimiert gespeichert.',
 'cache_modifiable_webmestre' => 'Diese Parameter k&ouml;nnen vom Webmaster eingestellt werden.',
 'calendrier_synchro' => 'Wenn Sie eine mit <b>iCal</b> kompatibles PIM-Programm verwenden, k&ouml;nne Sie es mit den Eintr&auml;gen dieser Website synchronisieren.',
+'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
 // D

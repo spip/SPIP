@@ -174,6 +174,7 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 'cache_mode_non_compresse' => 'Els fitxers de la mem&ograve;ria cau s&oacute;n desats en mode no comprimit.',
 'cache_modifiable_webmestre' => 'Aquests par&agrave;metres s&oacute;n modificables pel webmestre del lloc web.',
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
+'confirm_changer_statut' => 'Atenci&oacute;, heu demanat canviar l\'estat d\'aquest element. Voleu continuar? ',
 
 
 // D
@@ -638,7 +639,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_creation_tables' => 'Quart pas: <B>Creaci&oacute; de les taules de la base</B>',
 'info_creer_base' => '<B>Crear</B> una nova base de dades:',
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
-'info_creer_repertoire_2' => 'a l\'interior dels subdirectori <b>escriure/data/</b>, despr&eacute;s:',
+'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>ecrire/data/</b>, despr&eacute;s:',
 'info_dans_groupe' => 'Dins el grup:',
 'info_dans_rubrique' => 'Dins la secci&oacute;:',
 'info_date_publication_anterieure' => 'Data de publicaci&oacute; anterior:',
@@ -704,9 +705,9 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
   reservat nom&eacute;s als adminsitradors. ',
 'info_forum_statistiques' => 'Estad&iacute;stiques de les visites',
 'info_forums_abo_invites' => 'El seu lloc Web proporciona f&ograve;rums pels abonats; en el lloc p&uacute;blic els visitants s&oacute;n convidats a enregistrar-se.',
-'info_gauche_admin_effacer' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
-'info_gauche_admin_tech' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
-'info_gauche_admin_vider' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_effacer' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_tech' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
+'info_gauche_admin_vider' => '<B>Nom&eacute;s els responsables del site tenen acc&eacute;s a aquesta p&agrave;gina.</B><P> D&oacute;na acc&eacute;s a les diferents funcions de manteniment t&egrave;cnic. Algunes d\'aquestes necessiten un proc&eacute;s d\'autenticaci&oacute; espec&iacute;fic que requereix disposar d\'un acc&eacute;s FTP al lloc Web.',
 'info_gauche_auteurs' => 'Aqu&iacute; hi trobareu tots els autors del lloc.
  El seu estat s\'indica pel color de la seva icona (administrador = verd; redactor = groc).',
 'info_gauche_auteurs_exterieurs' => 'Els autors externs, sense acc&eacute;s al lloc, estan indicats amb una icona blava;
@@ -1312,7 +1313,7 @@ i tornar-vos a connectar al lloc.
 la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&eacute;s d\'haver-la executat, haureu de reinstal.lar l\'SPIP per refer una nova base i un primer acc&eacute;s per l\'administrador.',
 'texte_admin_tech_01' => 'Aquesta opci&oacute; permet desar el contigut de la base a un fitxer que ser&agrave; guardat al directori <i>ecrire/data/</i>. No oblide igualment recuperar integrament el directori <i>IMG/</i>, que cont&eacute; les imatges i els documents utilitzats als articles i les seccions.',
 'texte_admin_tech_02' => 'Atenci&oacute;: aquesta c&ograve;pia de seguretat NOM&Eacute;S podr&agrave; ser restaurada en un lloc Web que estigui instal&middot;lat en la mateixa versi&oacute; d\'SPIP. Per tant, cal sobretot no &laquo;&nbsp;buidar la base&nbsp;&raquo; esperant reinstal&middot;lar la c&ograve;pia de seguretat despr&eacute;s de l\'actualitzaci&oacute;... Consulteu per m&eacute;s detalls <a href="http://www.spip.net/fr_article1489.html">la documentaci&oacute; d\'SPIP</a>.',
-'texte_admin_tech_03' => 'Es pot triar guardar el fitxer comprimit per retallar temps de transferencia fins a casa seva o guardar-lo en un servidor per a c&ograve;pies de seguritat, i estalviar l\'espai de disc.',
+'texte_admin_tech_03' => 'Es pot triar guardar el fitxer comprimit per retallar temps de transfer&egrave;ncia fins a casa seva o guardar-lo en un servidor per a c&ograve;pies de seguretat, i estalviar l\'espai de disc.',
 'texte_adresse_annuaire_1' => '(Si el vostre anuari est&agrave; instal.lat a la mateixa maquina que aquesta web, es tracta probablement de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seg&uuml;ent ha estat afegit a l\'article:',
 'texte_annuaire_ldap_1' => 'Si se disposa d\'un acc&eacute;s a un anuari (LDAP), es pot utilitzar per a importar autom&agrave;ticament els/les usuaris/es baix SPIP.',
@@ -1445,12 +1446,12 @@ En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la form
 'texte_requetes_echouent' => '<b>Quan algunes peticions MySQL fracassen sistem&agrave;ticament i sense ra&oacute; aparent, &eacute;s possible que sigui per culpa de la pr&ograve;pia base de dades.</b><p>
   MySQL disposa d\'una facultat de reparaci&oacute; de les seves taules quan aquestes han estat deteriorades per accident. Aqu&iacute; podeu provar aquesta reparaci&oacute;; en cas de frac&agrave;s, conserveu una c&ograve;pia del resultat, que possiblement cont&eacute; indicis de quines coses no funcionen...<p>
   Si el problema persisteix, poseu-vos en contacte amb el vostre prove&iuml;dor d\'hostatge.<p>',
-'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguritat de la base',
+'texte_restaurer_base' => 'Restaurar el contingut d\'una c&ograve;pia de seguretat de la base',
 'texte_restaurer_sauvegarde' => 'Aquesta opci&oacute; permet restaurar una c&ograve;pia de seguretat de la base de dades realitzada anteriorment. Perqu&egrave; aix&iacute; sigui, el fitxer que cont&eacute; la c&ograve;pia de seguretat s\'ha d\'haver situat en el directori <i>ecrire/data/</i>.
 Sigueu prudents amb aquesta funcionalitat: <b>les modificacions o p&egrave;rdues eventuals s&oacute;n irreversibles.</b>',
 'texte_sauvegarde' => 'Desar el contigut de la base',
 'texte_sauvegarde_base' => 'Desar la base',
-'texte_sauvegarde_compressee' => 'La c&ograve;pia de seguritat ser&agrave; feta a l\'arxiu no comprimit <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'La c&ograve;pia de seguretat ser&agrave; feta a l\'arxiu no comprimit <b>ecrire/data/dump.xml</b>.',
 'texte_selection_langue_principale' => 'A continuaci&oacute; podeu seleccionar la &laquo;llengua principal&raquo; del lloc. Aquesta selecci&oacute; no us obliga - afortunadament! - a escriure els vostres articles en la llengua escollida, per&ograve; permet determinar:
 <ul><li> el format per defecte de les dates en el lloc p&uacute;blic;</li>
 <li> la naturalesa del motor tipogr&agrave;fic que l\'SPIP ha d\'utilitzar per la reproducci&oacute; dels textos;</li>

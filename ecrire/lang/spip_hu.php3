@@ -13,7 +13,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'access_interface_graphique' => '<NEW>Retour &agrave; l\'interface graphique compl&egrave;te',
+'access_interface_graphique' => 'Vissza a teljes grafikus fel&uuml;letre',
 'access_mode_texte' => '<NEW>Afficher l\'interface textuelle simplifi&eacute;e',
 'admin_modifier_article' => 'Cikk m&oacute;dos&iacute;t&aacute;sa',
 'admin_modifier_auteur' => 'Szerz&#337; m&oacute;dos&iacute;t&aacute;sa',
@@ -170,6 +170,7 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'cache_mode_non_compresse' => 'A "cache" f&aacute;jlai nem t&ouml;m&ouml;r&iacute;tett form&aacute;ban vannak felv&eacute;ve.',
 'cache_modifiable_webmestre' => '<NEW>Ces param&egrave;tres sont modifiables par le webmestre du site.',
 'calendrier_synchro' => 'Amennyiben egy <b>iCal</b>-val kompatibilis szoftvert haszn&aacute;l, lehet szinkroniz&aacute;lni e honlap inform&aacute;ci&oacute;ival.',
+'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
 // D
@@ -405,7 +406,7 @@ K&ouml;sz&ouml;nj&uuml;k a r&eacute;szv&eacute;tel&eacute;t
 'forum_message_trop_long' => 'Az &Ouml;n &uuml;zenete t&uacute;l hossz&uacute;. A m&aacute;xim&aacute;lis m&eacute;ret 20 000 karakter.',
 'forum_ne_repondez_pas' => 'Ne v&aacute;lasszon erre az emailre, hanem a f&oacute;rumon a k&ouml;vetkez&#337; c&iacute;men:',
 'forum_non_inscrit' => 'Nincs be&iacute;ratkozva, vagy a c&iacute;m, vagy a jelsz&oacute; &eacute;rv&eacute;nytelen.',
-'forum_page_url' => '(Amennyiben az &Ouml;n &uuml;zenete egy Weben publik&aacute;lt, vagy egy t&ouml;bb inform&aacute;ci&oacute;t tartalmaz&oacute; oldra vonatkozik, akkor jelezze az oldal nev&eacute;t, illetve URL c&iacute;m&eacute;t.)',
+'forum_page_url' => '<MODIF>(Amennyiben az &Ouml;n &uuml;zenete egy Weben publik&aacute;lt, vagy egy t&ouml;bb inform&aacute;ci&oacute;t tartalmaz&oacute; oldra vonatkozik, akkor jelezze az oldal nev&eacute;t, illetve URL c&iacute;m&eacute;t.)',
 'forum_par_auteur' => '&iacute;rta @auteur@',
 'forum_poste_par' => '@parauteur@ k&uuml;ldte, a cikk&eacute;re hivatkozva.',
 'forum_probleme_database' => 'Adatb&aacute;zis hiba, az &Ouml;n &uuml;zenete nem lett felv&eacute;ve.',
@@ -758,7 +759,7 @@ a t&ouml;r&ouml;lt szerz&#337;k pedig kuk&aacute;val vannak jel&ouml;lve.',
 'info_laisser_champs_vides' => 'hagyja &uuml;resen ezeket a mez&#337;ket)',
 'info_langue_principale' => 'A honlap alapnyelve',
 'info_langues' => 'A honlap nyelvei',
-'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixel',
+'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ pixel',
 'info_ldap_ok' => 'Az LDAP azonos&iacute;t&aacute;s telep&iacute;tve van.',
 'info_les_auteurs_1' => '&iacute;rta @les_auteurs@',
 'info_lien_hypertexte' => 'Hiperhivatkoz&aacute;s :',

@@ -161,6 +161,7 @@ der Dokumentatioun vu SPIP</a>.',
 'cache_mode_non_compresse' => 'D\'Fichier\'en am Cache si n&euml;t komprim&eacute;iert gesp&auml;ichert.',
 'cache_modifiable_webmestre' => 'D\'Parameteren vum Cache k&euml;nnen vum Webmaster vum Site ge&auml;nnert gin.',
 'calendrier_synchro' => 'Wann dir en <b>iCal</b>-kompatiblen Agenda benotzt, da k&euml;nnt der d\'Informatiounen mat d&euml;sem Site synchronis&eacute;ieren.',
+'confirm_changer_statut' => 'Opgepasst, dir w&euml;llt de Status vun d&euml;sem Element &auml;nneren. W&euml;llt dir weiderfueren?',
 
 
 // D
