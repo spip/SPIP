@@ -635,5 +635,33 @@ function email_valide($adresse) {
 		trim($adresse)));
 }
 
+//
+// log des evenements
+//
+
+function logrotate() {
+	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
+	@rename($logfile.'.2',$logfile.'.3'); 
+	@rename($logfile.'.1',$logfile.'.2'); 
+	@rename($logfile,$logfile.'.1'); 
+}
+
+function spip_log($message) {
+	global $flag_ecrire;
+
+	$pid = @getmypid();
+	$uid = @get_current_user();
+	$message = date("M d H:i:s")." spip $uid"."[$pid]: "
+	.ereg_replace("\n*$", "\n", $message);
+
+	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
+	$f = @fopen($logfile, "ab");
+	if ($f) {
+		fputs($f, $message);
+		fclose($f);
+		if (filesize($logfile) > 10*1024)
+			logrotate();
+	}
+}
 
 ?>
