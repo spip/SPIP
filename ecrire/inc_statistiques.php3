@@ -262,13 +262,15 @@ function calculer_popularites() {
 	ecrire_metas();	// il faut le marquer de suite pour eviter les acces concurrents
 
 	$duree = time() - $date;
-	// duree de demi-vie d'une visite dans le calcul de la popularite
-	$demivie = 1 * 24 * 3600;
+	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
+	$demivie = 1;
 	// $a est le coefficient d'amortissement depuis la derniere mesure
-	$a = pow(2, - $duree / $demivie);
-	// $b est la constante multiplicative permettant d'avoir
+	$a = pow(2, - $duree / ($demivie * 24 * 3600));
+	// $b est la constante additive permettant d'avoir
 	// une visite par jour = un point de popularite (en regime stationnaire)
-	$b = 1 - pow(2, - 24 * 3600 / $demivie);
+	// or, magie des maths, ca vaut log(2) * duree journee/demi-vie
+	// si la demi-vie n'est pas trop proche de la seconde ;)
+	$b = log(2) / $demivie;
 
 	// oublier un peu le passe
 	spip_query("UPDATE spip_articles SET popularite = popularite * $a");
