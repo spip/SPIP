@@ -127,6 +127,25 @@ function helpline(help, champ) {
 }
 
 
+function setCaretToEnd (input) {
+  setSelectionRange(input, input.value.length, input.value.length);
+}
+
+
+function setSelectionRange(input, selectionStart, selectionEnd) {
+  if (input.setSelectionRange) {
+    input.focus();
+    input.setSelectionRange(selectionStart, selectionEnd);
+  }
+  else if (input.createTextRange) {
+    var range = input.createTextRange();
+    range.collapse(true);
+    range.moveEnd('character', selectionEnd);
+    range.moveStart('character', selectionStart);
+    range.select();
+  }
+}
+
 // From http://www.massless.org/mozedit/
 function mozWrap(txtarea, open, close)
 {
@@ -149,9 +168,12 @@ function mozWrap(txtarea, open, close)
 	if ((txtarea.value).substring(selStart-1,selStart) == '{' && open.substring(0,1) == "{") open = " " + open;
 	if ((txtarea.value).substring(selStart,selStart+1) == '{' && open.substring(0,1) == "{") open = open + " ";
 
-
-
 	txtarea.value = s1 + open + s2 + close + s3;
+	selDeb = selStart + open.length;
+	selFin = selEnd + close.length;
+	window.setSelectionRange(txtarea, selDeb, selFin);
+	txtarea.focus();
+	
 	return;
 }
 
