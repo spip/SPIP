@@ -103,7 +103,7 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		else $ret .= "<img src='img_pack/$icone' alt='' />";
 		$ret .= "</div>";
 
-		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 15px; z-index: 1;'";
+		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 14px; z-index: 1;'";
 	}
 
 	if ($style == "e") {
@@ -1265,7 +1265,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 		if ($afficher) {
 			echo "<a id='$id_forum'></a>";
-			if ($spip_display != 4) echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
+			if ($spip_display != 4) echo "<table width='100%' cellpadding='0' cellspacing='0' border='0'><tr>";
 			for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
 				$fond[$count]='img_pack/rien.gif';
 				if ($i[$count]!=$nb_forum[$count]){
