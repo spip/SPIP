@@ -445,13 +445,14 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	debut_cadre_relief("forum-interne-24.gif");
 	$visible = $change_accepter_forum || $change_petition;
 
-	echo "<font size='2' FACE='Verdana,Arial,Sans,sans-serif'><center><b>";
+
+	echo "<div class='verdana1' style='text-align: center;'><b>";
 	if ($visible)
 		echo bouton_block_visible("forumpetition");
 	else
 		echo bouton_block_invisible("forumpetition");
 	echo _T('bouton_forum_petition');
-	echo "</b></center></font>";
+	echo "</b></div>";
 	if ($visible)
 		echo debut_block_visible("forumpetition");
 	else
@@ -612,21 +613,20 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 
 	fin_cadre_relief();
 
-	echo "<br>";
 
 
 	// Redirection (article virtuel)
 	debut_cadre_relief("site-24.gif");
 	$visible = ($changer_virtuel || $virtuel);
 
-	echo "<font size='2' FACE='Verdana,Arial,Sans,sans-serif'><center><b>";
+	echo "<div class='verdana1' style='text-align: center;'><b>";
 	if ($visible)
 		echo bouton_block_visible("redirection");
 	else
 		echo bouton_block_invisible("redirection");
 	echo _T('bouton_redirection');
 	echo aide ("artvirt");
-	echo "</b></center></font>";
+	echo "</b></div>";
 	if ($visible)
 		echo debut_block_visible("redirection");
 	else
