@@ -280,15 +280,16 @@ function http_calendrier_retire_args($script, $args)
 function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle, $nom,
 			    $script, $args_pred, $args_suiv, $type, $ancre)
 {
-	global $spip_lang_right, $spip_lang_left;
+  global $spip_lang_right, $spip_lang_left, $couleur_foncee;
 
+  if (!isset($couleur_foncee)) $couleur_foncee = '#aaaaaa';
 	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
 	$script = http_calendrier_retire_args($script, array('echelle'));
 	if (!ereg('[?&]$', $script))
 		$script .= (strpos($script,'?') ? '&' : '?');
 	$args = "jour=$jour&mois=$mois&annee=$annee$ancre";
 	  
-  	$retour = "<div class='navigation-calendrier'>";
+  	$retour = "<div class='navigation-calendrier' style='background-color: $couleur_foncee'>";
 
    	if ($type != "mois") {
 		if ($partie_cal == "tout") $img_att = " class='navigation-bouton-desactive'";
