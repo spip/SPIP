@@ -383,10 +383,9 @@ function translitteration ($texte, $charset='AUTO') {
 	} else if ($charset == 'windows-1251') {
 		$texte = translit_windows_1251($texte);
 	} else if ($GLOBALS['flag_iconv']
-		AND ($iconv = @iconv(strtoupper($charset), 'ASCII//TRANSLIT', $texte))
-		AND !ereg('^\?+$',$iconv))
-			$texte = $iconv;
-	}
+	AND ($iconv = @iconv(strtoupper($charset), 'ASCII//TRANSLIT', $texte))
+	AND !ereg('^\?+$',$iconv))
+		$texte = $iconv;
 	return $texte;
 }
 
