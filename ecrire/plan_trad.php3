@@ -141,14 +141,15 @@ function afficher_rubrique($id_parent, $marge = 0, $cond = '', $afficher = true)
 		}
 	}
 	
-	if (!$vide)
+	if (!$vide) {
 		echo $cond['apres'];
+	}
 
 	//
 	// Parcourir les sous-rubriques
 	//
 
-	if ($vide OR $afficher) {
+	if ($afficher OR $vide) {
 		$query_parent = "SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=$id_parent ORDER BY titre";
 		$result_parent = spip_query($query_parent);
 	
@@ -161,6 +162,7 @@ function afficher_rubrique($id_parent, $marge = 0, $cond = '', $afficher = true)
 			else if ($deplier == 'non')
 				$afficher_fils = $liste_rubs[$id_rubrique];
 			else $afficher_fils = ($total_articles < 30) || $liste_rubs[$id_rubrique];
+			$afficher_fils &= $afficher;
 
 			$rubs = $liste_rubs;
 			if ($rubs[$id_rubrique])
@@ -183,9 +185,12 @@ function afficher_rubrique($id_parent, $marge = 0, $cond = '', $afficher = true)
 			if ($vide) {
 				$cond_fils['avant'] = $cond['avant'].$cond['apres'].$cond_fils['avant'];
 			}
-			afficher_rubrique($id_rubrique, $marge + 20, $cond_fils, $afficher_fils);
+			
+			if (afficher_rubrique($id_rubrique, $marge + 20, $cond_fils, $afficher_fils)) $vide = false;
+			if (!$afficher AND !$vide) break;
 		}
 	}
+	return !$vide;
 }
 
 
