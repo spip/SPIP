@@ -797,7 +797,8 @@ function parser($texte) {
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 
 		'IP', 'VISITES', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
-		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION'
+		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
+		'DEBUT_SURLIGNE', 'FIN_SURLIGNE'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -996,6 +997,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	global $les_notes;
 	global $boucles;
 	global $champs;
+	global $flag_ob;
+	global $flag_preg_replace;
 
 	$idb = $id_boucle;
 
@@ -1470,7 +1473,23 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		';
 		break;
-
+	
+	// debut et fin de surlignage auto des mots de la recherche
+	//
+	case 'DEBUT_SURLIGNE':
+		if ($flag_ob AND $flag_preg_replace) {
+			$milieu = '
+				$'.$nom_var.' = "<"."?php if (\$var_recherche) { \$mode_surligne = debut_surligne(\$var_recherche, \$mode_surligne); } ?".">";
+			';
+		}
+		break;
+	case 'FIN_SURLIGNE':
+		if ($flag_ob AND $flag_preg_replace) {
+			$milieu = '
+				$'.$nom_var.' = "<"."?php if (\$var_recherche) { \$mode_surligne = fin_surligne(\$var_recherche, \$mode_surligne); } ?".">";
+			';
+		}
+		break;
 
 	} // switch
 
@@ -1990,13 +2009,12 @@ function calculer_squelette($squelette, $fichier) {
 	$texte .= "}\n\n";
 
 	// Fin du fichier
-	$texte .= "?>";
+	$texte .= '?'.'>';
 
 	$f = fopen($fichier, "wb");
 	fwrite($f, $texte);
 	fclose($f);
 }
-
 
 
 ?>
