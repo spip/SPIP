@@ -15,7 +15,7 @@ function ecrire_cache_lang($lang, $module) {
 	if ($t = @fopen('CACHE/lang_'.$fichier_lang.'_'.@getmypid(), "wb")) {
 		@fwrite($t, "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n");
 		if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
-			@fwrite($t, "\$GLOBALS['i18n_".$module."_$lang'] = array(\n");
+			@fwrite($t, "\$GLOBALS[\$GLOBALS['lang_var']] = array(\n");
 			$texte = '';
 			ksort($cache);
 			reset($cache);
@@ -51,14 +51,17 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	// chercher dans le fichier cache ?
 	if (!$flag_ecrire) {
 		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')
-		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3')))
+		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))) {
+			$GLOBALS['lang_var'] = 'i18n_'.$module.'_'.$lang;
 			return include_local('CACHE/lang_'.$module.'_'.$lang.'.php3');
+		}
 		else $GLOBALS['cache_lang_modifs'][$lang] = true;
 	}
 
 	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
 
 	if (file_exists($dir_ecrire.$fichier_lang)) {
+		$GLOBALS['lang_var']='i18n_'.$module.'_'.$lang;
 		include_ecrire ($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
@@ -66,6 +69,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		// tableau 'fr' dans la var liee a la langue
 		$fichier_lang = 'lang/'.$module.'_fr.php3';
 		if (file_exists($dir_ecrire.$fichier_lang)) {
+			$GLOBALS['lang_var']='i18n_'.$module.'_fr';
 			include_ecrire ($fichier_lang);
 		}
 		$GLOBALS['i18n_'.$module.'_'.$lang] = $GLOBALS['i18n_'.$module.'_fr'];
