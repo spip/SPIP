@@ -5,6 +5,8 @@ include ("inc.php3");
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';
 
+$statut_art = "'".join("','", explode(",", $aff_art))."'";
+
 debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
 debut_gauche();
 
@@ -82,7 +84,7 @@ function enfants($id_parent, $decalage = 0) {
 	global $deplier;
 	global $liste_coll;
 	global $coll_actives;
-	global $aff_art;
+	global $aff_art, $statut_art;
 	global $couleur_foncee, $couleur_claire;
 
 	$query = "SELECT id_rubrique, titre, statut, date FROM spip_rubriques WHERE id_parent=$id_parent ORDER BY titre";
@@ -94,8 +96,8 @@ function enfants($id_parent, $decalage = 0) {
 		$date = affdate($row['date']);
 		$sucrer = '';
 		$lien = '';
-		
-		
+
+
 
 		//$flag_active = ereg("(^|,)$id_rubrique(\$|,)", $coll_actives);
 		if (tester_rubrique_vide("$id_rubrique") ==  true) {
@@ -122,7 +124,8 @@ function enfants($id_parent, $decalage = 0) {
 			$bandeau = "<A HREF='$lien'>";
 			$bandeau .= "<img src='img_pack/triangle-bleu-bas.gif' alt='' width='14' height='14' border='0'></A>";
 			$bandeau .= " <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='white'>$titre</FONT></A> $sucrer";
-			$requete = "SELECT id_article, titre, id_rubrique, statut, date FROM spip_articles WHERE id_rubrique=$id_rubrique AND FIND_IN_SET(statut,'$aff_art') ORDER BY date DESC";
+			$requete = "SELECT id_article, titre, id_rubrique, statut, date FROM spip_articles ".
+				"WHERE id_rubrique=$id_rubrique AND statut IN ($statut_art) ORDER BY date DESC";
 			afficher_articles($bandeau, $requete, false, false, true, false);
 			if ($decalage) {
 				echo "</TD></TR></TABLE>";

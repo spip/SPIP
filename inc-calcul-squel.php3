@@ -2200,7 +2200,7 @@ function calculer_texte($texte)
 	//
 	// Reperer les directives d'inclusion de squelette et les balises de traduction <<toto>>
 	//
-	while (ereg("(<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>)|(<<(([a-z_]+):)?([a-z_]+)>>)", $texte, $match)) {
+	while (ereg("(<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>)", $texte, $match)) {
 		$s = $match[0];
 		$p = strpos($texte, $s);
 		$debut = substr($texte, 0, $p);
@@ -2211,55 +2211,56 @@ function calculer_texte($texte)
 		//
 		// Traiter la directive d'inclusion
 		//
-		if ($match[1]) {
-			$fichier = $match[2];
-			ereg('^\\{(.*)\\}$', trim($match[3]), $params);
-			$code .= "	\$retour .= '<"."?php ';\n";
-			$code .= "	\$retour .= 'include_ecrire(\'inc_lang.php3\'); lang_select(lire_meta(\'langue_site\'));';\n";
-			$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
+		$fichier = $match[2];
+		ereg('^\\{(.*)\\}$', trim($match[3]), $params);
+		$code .= "	\$retour .= '<"."?php ';\n";
+		$code .= "	\$retour .= 'include_ecrire(\'inc_lang.php3\'); lang_select(lire_meta(\'langue_site\'));';\n";
+		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
 
-			if ($params) {
-				// Traiter chaque parametre de contexte
-				$params = split("\}[[:space:]]*\{", $params[1]);
-				reset($params);
-				while (list(, $param) = each($params)) {
-					if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
-						$var = $args[1];
-						$val = $args[3];
-						if ($val)
-							$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
-						else
-							$code .= "	\$retour .= '\$contexte_inclus[$var] = \''.addslashes(\$contexte[$var]).'\'; ';\n";
-					}
+		if ($params) {
+			// Traiter chaque parametre de contexte
+			$params = split("\}[[:space:]]*\{", $params[1]);
+			reset($params);
+			while (list(, $param) = each($params)) {
+				if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
+					$var = $args[1];
+					$val = $args[3];
+					if ($val)
+						$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
+					else
+						$code .= "	\$retour .= '\$contexte_inclus[$var] = \''.addslashes(\$contexte[$var]).'\'; ';\n";
 				}
 			}
-
-			// inclure en priorite dans le dossier_squelettes
-			if ($dossier_squelettes) {
-				$code .= "	\$retour .= '
-				if (@file_exists(\'$dossier_squelettes/$fichier\')){
-					include(\'$dossier_squelettes/$fichier\');
-				} else {
-					include(\'$fichier\');
-				}';\n";
-			} else
-				$code .= "	\$retour .= 'include(\'$fichier\');';\n";
-
-			$code .= "	\$retour .= 'lang_dselect(); ?".">';\n";
 		}
 
+		// inclure en priorite dans le dossier_squelettes
+		if ($dossier_squelettes) {
+			$code .= "	\$retour .= '
+			if (@file_exists(\'$dossier_squelettes/$fichier\')){
+				include(\'$dossier_squelettes/$fichier\');
+			} else {
+				include(\'$fichier\');
+			}';\n";
+		} else
+			$code .= "	\$retour .= 'include(\'$fichier\');';\n";
+
+		$code .= "	\$retour .= 'lang_dselect(); ?".">';\n";
+	}
+	if ($texte)
+		$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $texte)."';\n";
+
+	//
+	// Reperer les balises de traduction <<toto>>
+	//
+	while (ereg("(<<(([a-z_]+):)?([a-z_]+)>>)", $code, $match)) {
 		//
 		// Traiter la balise de traduction multilingue
 		//
-		if ($chaine = $match[8]) {
-			if (!$module = $match[7])
-				$module = 'local';
-			$code .= "	\$retour .= traduire(\$GLOBALS['spip_lang'],'$module:$chaine');\n";
-		}
+		$chaine = $match[4];
+		if (!($module = $match[3]))
+			$module = 'public';
+		$code = str_replace($match[1], "'._T('$module:$chaine').'", $code);
 	}
-
-	if ($texte)
-		$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $texte)."';\n";
 
 	return $code;
 }
