@@ -10,7 +10,7 @@ define("_INC_HTML_SQUEL", "1");
 # pour permettre differentes syntaxes en entree
 
 define(NOM_DE_BOUCLE, "[0-9]+|[-_][-_.a-zA-Z0-9]*");
-define(NOM_DE_CHAMP, "#((" . NOM_DE_BOUCLE . ":)?([A-Z_]+))(\*?)");
+define(NOM_DE_CHAMP, "#(((" . NOM_DE_BOUCLE . "):)?([A-Z_]+))(\*?)");
 define(CHAMP_ETENDU, '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^]\[)]*)\)([^]\[]*)\]');
 define(PARAM_DE_BOUCLE,'\{[^}]*\}');
 define(TYPE_DE_BOUCLE, "[^)]*");
@@ -71,13 +71,13 @@ function parser_champs($texte) {
 		$p = strpos($texte, $regs[0]);
 		if ($p) {
 			$result = array_merge($result,
-			parser_texte(substr($texte, 0, $p)));
+					      parser_texte(substr($texte, 0, $p)));
 		}
-		$texte = $regs[5];
+		$texte = $regs[6];
 
 		$champ = new Champ;
 		$champ->nom_champ = $regs[1];
-		$champ->etoile = $regs[4];
+		$champ->etoile = $regs[5];
 
 		$result[] = $champ;
 	}
@@ -123,16 +123,16 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 
 	$i = 0;
 	while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
-		$fonctions = $regs[6];
+		$fonctions = $regs[7];
 		$champ = new Champ;
 		$champ->nom_champ = $regs[2];
 
 		// installer les processeurs standards (cf inc-balises.php3)
 
-		$champ->etoile = $regs[5];
+		$champ->etoile = $regs[6];
 
 		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$nested);
-		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$nested);
+		$champ->cond_apres = parser_champs_exterieurs($regs[8],$sep,$nested);
 
 		if ($fonctions) {
 			$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
@@ -153,7 +153,7 @@ function parser_champs_interieurs($texte, $sep, $nested) {
 		    }  
 		  }
 		$result[$i++] = $champ;
-		$texte = $regs[8];
+		$texte = $regs[9];
 		
 	}
 	if ($texte) { $result[$i++] = $texte;}
