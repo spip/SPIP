@@ -178,7 +178,9 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 	if ($arton) {
 		//$imgsize = @getimagesize("$arton");
 		//$taille_image = ereg_replace("\"","'",$imgsize[3]);
-		$milieu = "<img src='$arton' align='$align' ".
+		if ($align) $align="align='$align' ";
+
+		$milieu = "<img src='$arton' $align".
 			" name='image$num_survol' ".$taille_image." border='0' ALT=''".
 			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos'>";
 
