@@ -632,7 +632,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 11 */	"/(<br>){2,}/",
 			/* 12 */	"/<p>([\n]*)(<br>)+/",
 			/* 13 */	"/<p>/",
-			/* 14 */	"\n"
+			/* 14 */	"[\n]"
 		);
 		$remplace1 = array(
 			/* 1 */ 	"\n<hr class=\"spip\">\n",
