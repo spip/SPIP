@@ -613,7 +613,11 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$regexp = "\[\?+([^][<>]+)\]";
 		while (ereg($regexp, $letexte, $regs)) {
 			$terme = trim($regs[1]);
-			$url = $url_glossaire_externe.urlencode(ereg_replace('[[:space:]]+', '_', $terme));
+			$terme_underscore = urlencode(ereg_replace('[[:space:]]+', '_', $terme));
+			if (strstr($url_glossaire_externe,"%s"))
+				$url = str_replace("%s",$terme_underscore,$url_glossaire_externe);
+			else
+				$url = $url_glossaire_externe.$terme_underscore;
 			$code = "[$terme->?$url]";
 			$letexte = str_replace($regs[0], $code, $letexte);
 		}
