@@ -101,7 +101,7 @@ if ($flag_function_exists) {
 	$flag_ini_get = function_exists("ini_get");
 	$flag_gz = function_exists("gzopen");
 	$flag_ob = ($flag_ini_get
-		&& !ereg("ob_", ini_get('disable_functions'))
+		&& !ereg("ob_", @ini_get('disable_functions'))
 		&& function_exists("ob_start"));
 	$flag_obgz = ($flag_ob && function_exists("ob_gzhandler"));
 	$flag_preg_replace = function_exists("preg_replace");
