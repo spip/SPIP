@@ -395,7 +395,7 @@ if ($statut == '0minirezo') {
 		echo _T('info_admin_gere_toutes_rubriques');
 	} else {
 		echo _T('info_admin_gere_rubriques')."\n";
-		echo "<ul style='list-style-image: url(img_pack/rubrique-12.png)'>";
+		echo "<ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
 		while ($row_admin = spip_fetch_array($result_admin)) {
 			$id_rubrique = $row_admin["id_rubrique"];
 			$titre = typo($row_admin["titre"]);
