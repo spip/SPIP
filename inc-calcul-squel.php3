@@ -1909,7 +1909,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 				$contexte["id_secteur"] = $row["id_secteur"];
 				$contexte["date"] = normaliser_date($row["date"]);
 				$contexte["date_redac"] = normaliser_date($row["date_redac"]);
-	
+				if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
 				if ($doublons == "oui") {
 					$id_doublons["rubriques"] .= ",".$row["id_rubrique"];
 				}
@@ -1917,6 +1917,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		';
 		$texte .= calculer_liste($boucle->milieu, $prefix_boucle, $id_boucle);
 		$texte .= '
+ 					if ($lang_dselect) lang_dselect();
 				} // if
 //			} // for
 		} // if
