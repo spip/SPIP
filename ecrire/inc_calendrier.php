@@ -1,5 +1,4 @@
 <?php
-
 //
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_CALENDRIER")) return;
@@ -667,14 +666,37 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 // Calcule un agenda mensuel et l'affiche
 
 function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false) {
-  return http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, 
+  return 
+    "<div style='text-align: center; padding: 5px;'>" .
+    http_calendrier_href("calendrier.php3?mois=$mois&annee=$annee",
+		       "<b class='verdana1'>" .
+		       affdate_mois_annee("$annee-$mois-1").
+		       "</b>",
+		       '',
+		       'color: black;') .
+    "<table width='100%' cellspacing='0' cellpadding='0'>" .
+    http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, 
 				    $semaine, 
-				    sql_calendrier_agenda($mois, $annee));
+				    sql_calendrier_agenda($mois, $annee),
+				    'http_calendrier_agenda_href') .
+    "</table>" .
+    "</div>";
 }
 
-// Afficher un mois sous forme de petit tableau
+function http_calendrier_agenda_href($type, $jour, $mois, $annee, $color)
+{
+	static $scripts = array('jour' => "calendrier_jour.php3?",
+			        'semaine' => "calendrier_semaine.php3?");
 
-function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine, $les_rv, $liens='') {
+	return http_calendrier_href($scripts[$type] . "jour=$jour&mois=$mois&annee=$annee", 
+				    "<b>$jour</b>",
+				    '',
+				    "color: $color");
+}
+
+// typographie un mois sous forme d'un tableau de 7 colonnes
+
+function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine, $les_rv, $liens) {
 	global $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
@@ -683,20 +705,14 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 	$mois = mois($date_test);
 	$annee = annee($date_test);
 
-	
-	if (!$liens)
-		$liens = array('semaine' => "calendrier_semaine.php3?", 
-			'jour' => "calendrier_jour.php3?",
-			'mois' => "calendrier.php3?");
-
 	if ($semaine) 
 	{
-		$jour_valide = mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved);
-		$jour_semaine_valide = date("w",$jour_valide);
+		$jour_semaine_valide = date("w",mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved));
 		if ($jour_semaine_valide==0) $jour_semaine_valide=7;
 		$debut = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+1,$annee_ved);
 		$fin = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+7,$annee_ved);
-	}
+	} else { $debut = $fin = '';}
+		  
 	
 	$today=getdate(time());
 	$jour_today = $today["mday"];
@@ -716,11 +732,9 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		if ($jour_semaine==0) $jour_semaine=7;
 
 		if (checkdate($mois,$j,$annee)){
-		  $href = $liens[$semaine ? 'semaine' : 'jour'] .
-		    "jour=$j&mois=$mois&annee=$annee";
 		  if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
 		    $ligne .= "\n\t<td class='arial2' style='margin: 1px; padding: 2px; background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 5px;'>" .
-		      http_calendrier_href($liens['jour'] . "jour=$j&mois=$mois&annee=$annee", "<b>$j</b>", '','color: black') .
+		      $liens('jour', $j, $mois, $annee, 'black') .
 		      "</td>";
 		  } else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
 		    $ligne .= "\n\t<td class='arial2' style='margin: 0px; padding: 3px; background-color: white; text-align: center; " .
@@ -729,27 +743,27 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		       (($jour_semaine==7) ?
 			$style7 : '')) .
 		      "'>" .
-		      http_calendrier_href($href, "<b>$j</b>", '','color: black') .
+		      $liens(($semaine ? 'semaine' : 'jour'), $j, $mois, $annee, 'black') .
 		      "</td>";
 		  } else {
 		    if ($j == $jour_today AND $mois == $mois_today AND $annee == $annee_today) {
-		      $couleur_fond = $couleur_foncee;
-		      $couleur = "white";
+			$couleur_fond = $couleur_foncee;
+			$couleur = "white";
 		    } else {
-		      if ($jour_semaine == 7) {
-			$couleur_fond = "#aaaaaa";
-			$couleur = 'white';
-		      } else {
-			$couleur_fond = "#ffffff";
-			$couleur = "#aaaaaa";
-		      }
-		      if ($les_rv[$j] > 0) {
-			$couleur = "black";
-		      }
+			if ($jour_semaine == 7) {
+				$couleur_fond = "#aaaaaa";
+				$couleur = 'white';
+			} else {
+				$couleur_fond = "#ffffff";
+				$couleur = "#aaaaaa";
+			}
+			if ($les_rv[$j] > 0) {
+				$couleur = "black";
+			}
 		    }
 		    $ligne .= "\n\t<td><div class='arial2' style='margin-left: 1px; margin-top: 1px; padding: 2px; background-color: $couleur_fond; text-align: center; -moz-border-radius: 5px;'>" .
-		      http_calendrier_href($href, "<b>$j</b>", '',"color: $couleur") .
-		      "</div></td>";
+			$liens(($semaine ? 'semaine' : 'jour'), $j, $mois, $annee, $couleur) .
+		    "</div></td>";
 		  }
 		  if ($jour_semaine==7) 
 		    {
@@ -758,18 +772,8 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		    }
 		}
 	}
-	return "<div style='text-align: center; padding: 5px;'>" .
-	  http_calendrier_href($liens['mois'] . "mois=$mois&annee=$annee",
-		       "<b class='verdana1'>" .
-		       affdate_mois_annee("$annee-$mois-1").
-		       "</b>",
-		       '',
-		       'color: black;') .
-	  "</div>" .
-	  "<table width='100%' cellspacing='0' cellpadding='0'>" .
-	  $total .
-	  (!$ligne ? '' : "\n<tr>$ligne\n</tr>") .
-	  "</table>";
+	return $total . (!$ligne ? '' : "\n<tr>$ligne\n</tr>");
+
 }
 
 function http_calendrier_image_et_typo($evenements)
