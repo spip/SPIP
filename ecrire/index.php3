@@ -1,6 +1,9 @@
 <?php
 
 include ("inc.php3");
+include_ecrire ("Include/PHP4/calendrier.php");
+include_ecrire ("Include/MySQL3/calendrier.php");
+include_ecrire ("Include/HTML4/calendrier.php");
 
 if ($HTTP_REFERER && !strpos($HTTP_REFERER, '/ecrire/')) $bonjour = 'oui';
 
@@ -53,9 +56,10 @@ if ($spip_display != 4) {
 	//
 	// Annonces
 	//
-	include_ecrire("inc_agenda.php3");
-	afficher_annonces();
-	
+echo    http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+echo    http_calendrier_rv(sql_calendrier_taches_pb(),"pb") ;
+echo    http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+
 	
 	//
 	// Afficher le calendrier du mois s'il y a des rendez-vous
@@ -78,7 +82,7 @@ if ($spip_display != 4) {
 				"AND messages.statut='publie' LIMIT 0,1");
 		if (spip_num_rows($result_messages)) {
 			echo "<p />";
-			agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+			echo http_calendrier_agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
 		}
 		// rendez-vous personnels dans le mois
 		$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
@@ -87,10 +91,9 @@ if ($spip_display != 4) {
 				"AND messages.statut='publie' LIMIT 0,1");
 		if (spip_num_rows($result_messages)) {
 			echo "<p />";
-			calendrier_jour($jour_today,$mois_today,$annee_today, "col");
+		echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col");
 		}
 	}
-	
 }
 
 //
@@ -127,7 +130,6 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 
 if ($options == "avancees") {
 	echo "<p>";
-
 	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
 
 	if ($connect_statut == "0minirezo") {

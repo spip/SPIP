@@ -2,8 +2,9 @@
 
 include ("inc.php3");
 include_ecrire ("inc_acces.php3");
-include_ecrire ("inc_agenda.php3");
-
+include_ecrire ("Include/PHP4/calendrier.php");
+include_ecrire ("Include/MySQL3/calendrier.php");
+include_ecrire ("Include/HTML4/calendrier.php");
 if ($supp_dest) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
 }
@@ -55,7 +56,7 @@ fin_cadre_relief();
 
 
 
-afficher_ical($connect_id_auteur);
+echo	http_calendrier_ical($connect_id_auteur);
 
 
 debut_droite("messagerie");
