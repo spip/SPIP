@@ -77,23 +77,28 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	global $flag_mots_ressemblants;
 	global $connect_statut, $options;
 	global $spip_lang_rtl, $spip_lang_right;
+
 	$select_groupe = $GLOBALS['select_groupe'];
 
 	if ($table == 'articles') {
 		$id_table = 'id_article';
+		$objet = 'article';
 		$url_base = "articles.php3?id_article=$id_objet";
 	}
 	else if ($table == 'breves') {
 		$id_table = 'id_breve';
+		$objet = 'breve';
 		$url_base = "breves_voir.php3?id_breve=$id_objet";
 	}
 	else if ($table == 'rubriques') {
 		$id_table = 'id_rubrique';
+		$objet = 'rubrique';
 		$url_base = "naviguer.php3?coll=$id_objet";
 	}
 
 	else if ($table == 'syndic') {
 		$id_table = 'id_syndic';
+		$objet = 'syndic';
 		$url_base = "sites.php3?id_syndic=$id_objet";
 	}
 
@@ -151,7 +156,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			while ($row = spip_fetch_array($result)) {
 				$id_mot = $row['id_mot'];
 				$titre_mot = $row['titre'];
-				$type_mot = $row['type'];
+				$type_mot = typo($row['type']);
 				$descriptif_mot = $row['descriptif'];
 
 				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
@@ -172,7 +177,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				while ($row = spip_fetch_array($result)) {
 					$id_mot = $row['id_mot'];
 					$titre_mot = $row['titre'];
-					$type_mot = $row['type'];
+					$type_mot = typo($row['type']);
 					$descriptif_mot = $row['descriptif'];
 
 					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
@@ -210,6 +215,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$result = spip_query($query);
 			}
 		}
+		$reindexer = true;
 	}
 
 	if ($supp_mot && $flag_editable) {
@@ -219,8 +225,14 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$mots_supp = " AND id_mot=$supp_mot";
 		$query = "DELETE FROM spip_mots_$table WHERE $id_table=$id_objet $mots_supp";
 		$result = spip_query($query);
+		$reindexer = true;
 	}
 
+
+	if ($reindexer AND lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
+		marquer_indexer($objet, $id_objet);
+	}
 
 	//
 	// Afficher les mots-cles
@@ -247,7 +259,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-			$type_mot = $row['type'];
+			$type_mot = typo($row['type']);
 			$descriptif_mot = $row['descriptif'];
 			$id_groupe = $row['id_groupe'];
 	
