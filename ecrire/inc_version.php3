@@ -18,7 +18,7 @@ $table_prefix = "spip";
 $debug = false;
 
 // faut-il passer les connexions MySQL en mode debug ?
-$mysql_debug = true;
+$mysql_debug = false;
 
 // faut-il chronometrer les requetes MySQL ?
 $mysql_profile = false;
