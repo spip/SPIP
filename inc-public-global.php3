@@ -43,45 +43,22 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
     return $page;
   }
 
-# Le bouton des administrateurs est affiche' par une fonction JavaScript
-# non mise en cache car de'pendant de l'utilisateur (pas d'affichage parfois)
-# Elle est appele'e par le code d'un squelette utilisant FORMULAIRE_ADMIN
-# mais par compatibilité avec l'époque où cette balise n'existait pas
-# la fonction est toujours appelée à la fin. C'est pourquoi elle se neutralise
-# au premier appel.
+//
+// Le bouton des administrateurs
+//
+function admin_page($cached, $texte) {
+	if (!$GLOBALS['flag_preserver'] && ($admin = $GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
+		include_local('inc-admin.php3');
+		$a = afficher_boutons_admin($cached ? ' *' : '');
 
-function admin_page($cached, $texte)
-{
-  if  ($GLOBALS['flag_preserver'] ||
-       !($admin = $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']))
-    $a = envoi_script('function admin(){}');
-  else
-    {
-      include_local('inc-admin.php3');
-      $a = str_replace("/", '\/', addslashes(strtr(afficher_boutons_admin($cached ? ' *' : ''), "\n", ' ')));
-      $a = "var bouton_admin = \"$a\";function admin() {
- document.write(bouton_admin); document.close(); bouton_admin='';}";
-      $a = envoi_script($a);
-      $force = envoi_script('admin()');
-   }
-  
-  if (eregi("^[[:space:]]*(<!DOCTYPE[^>]*>[[:space:]]*<html[^>]*>[[:space:]]<head[^>]*>)(.*)$", $texte, $m))
-    { $debut = $m[1]; $texte = $m[2];}
-  else
-    {
-      $debut = '';
-    }
-  if  (eregi('(.*)(</body>[[:space:]]</html>[[:space:]]*)$',$texte,$m))
-    return $debut . $a . $m[1] . $force . $m[2];
-  else return $debut . $a . $texte . $force;
-}
-
-function envoi_script($code)
-{
-  return
-  "<script type='text/javascript'><!--
-  $code
---></script>\n";
+		// La constante doit etre definie a l'identique dans inc-form-squel
+		// balise #FORMULAIRE_ADMIN ? sinon ajouter en fin de page
+		if (!(strpos($texte, '<!-- @@formulaire_admin@@45609871@@ -->') === false))
+			$texte = str_replace('<!-- @@formulaire_admin@@45609871@@ -->', $a, $texte);
+		else
+			$texte .= $a;
+	}
+	return $texte;
 }
 
 function cherche_image_nommee($nom, $dossier) {

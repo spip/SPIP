@@ -9,7 +9,7 @@
 
 function calculer_champ_FORMULAIRE_ADMIN($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 {
-  return array("envoi_script('admin()')",'');
+  return array("'<!-- @@formulaire_admin@@45609871@@ -->'",'');
 }
 
 function calculer_champ_FORMULAIRE_RECHERCHE($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
