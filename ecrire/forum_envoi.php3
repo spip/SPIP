@@ -75,7 +75,7 @@ if ($titre_parent) {
 
 	if ($modif_forum == "oui") {
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
-		echo "<td width='10' height='13' valign='top' background='img_pack/forum-vert.gif'><img src='img_pack/rien.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "<td width='10' height='13' valign='top' background='" . _DIR_IMG_PACK . "forum-vert.gif'><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=10 height=13 border=0></td>\n";
 		echo "\n<td width=100% valign='top' rowspan='2'>";
 	}
 }
@@ -96,7 +96,7 @@ if ($modif_forum == "oui") {
 	fin_cadre_thread_forum();
 	if ($titre_parent) {
 		echo "</td></tr><tr>";
-		echo "<td width=10 valign='top' background='img_pack/rien.gif'><img src='img_pack/forum-droite$spip_lang_rtl.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "<td width=10 valign='top' background='" . _DIR_IMG_PACK . "rien.gif'><img src='" . _DIR_IMG_PACK . "forum-droite$spip_lang_rtl.gif' alt='' width=10 height=13 border=0></td>\n";
 		echo "</tr></table>";
 	}
 }
@@ -113,7 +113,7 @@ echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><
 	icone(_T('icone_retour'), $adresse_retour, "forum-interne-24.gif");
 echo "</TD>";
 
-echo "<TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
+echo "<TD><IMG SRC='" . _DIR_IMG_PACK . "rien.gif' WIDTH=10 BORDER=0></td><TD WIDTH=\"100%\">";
 echo "<B>"._T('info_titre')."</B><BR>";
 $titre_message = entites_html($titre_message);
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_message\" SIZE='40'><P>\n";

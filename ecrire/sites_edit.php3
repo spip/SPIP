@@ -157,7 +157,7 @@ if ($new != 'oui') {
 	echo "<td>";
 	icone(_T('icone_retour'), "sites.php3?id_syndic=$id_syndic", 'site-24.gif', "rien.gif");
 	echo "</td>";
-	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
+	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' width=10></td>\n";
 }
 echo "<td width='100%'>";
 echo _T('titre_referencer_site');

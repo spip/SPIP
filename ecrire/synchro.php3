@@ -112,7 +112,7 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 			$id_rubrique=$row['id_rubrique'];
 			$titre_rubrique = typo($row['titre']);
 			
-			echo "<li><a href='$adresse_site/backend.php3?id_rubrique=$id_rubrique'><img src='img_pack/xml.gif' border='0' align='middle'> &nbsp; $titre_rubrique</a>\n";
+			echo "<li><a href='$adresse_site/backend.php3?id_rubrique=$id_rubrique'><img src='" . _DIR_IMG_PACK . "xml.gif' border='0' align='middle'> &nbsp; $titre_rubrique</a>\n";
 		}
 		echo "</ul>";
 	}

@@ -55,7 +55,7 @@ echo "<tr width='100%'>";
 	echo "<td  align='right' valign='top'>";
 	icone(_T('icone_retour'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 	echo "</td>";
-	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
+	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' width=5></td>\n";
 
 
 echo "<td width='100%' valign='top'>";

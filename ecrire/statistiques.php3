@@ -116,14 +116,14 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 					$couleur="white";
 				}
 				echo "<TABLE CELLPADDING=2 CELLSPACING=0 BORDER=0 width='100%'>";
-				echo "<TR BGCOLOR='$couleur' BACKGROUND='img_pack/rien.gif' width='100%'>";
+				echo "<TR BGCOLOR='$couleur' BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' width='100%'>";
 				echo "<TD style='border-bottom: 1px solid #aaaaaa; padding-$spip_lang_left: ".($niveau*20+5)."px;'>";
 				if ($niveau==0 OR 1==1){
 					$pourcent = round($nombre_vis[$id_rubrique]/$abs_total*100);
 					echo "<div class='verdana1' style='float: $spip_lang_right;'>$pourcent%</div>";
 				}
 
-				//echo "<IMG SRC='img_pack/rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
+				//echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' WIDTH='".($niveau*20+1)."' HEIGHT=8 BORDER=0>";
 				
 			
 				if ( $largeur_rouge > 2) echo bouton_block_invisible("stats$id_rubrique");
@@ -140,9 +140,9 @@ function enfants_aff($id_parent,$decalage, $gauche=0) {
 				echo "<TR>";
 				if ($gauche > 0) echo "<td width='".$gauche."'></td>";
 				echo "<TD style='background-color: #eeeeee; border: 1px solid #999999; white-space: nowrap;'>";
-				if ($visites_abs > 0) echo "<img src='img_pack/rien.gif' width='".$visites_abs."' height=8 border=0>";
-				if ($largeur_rouge>0) echo "<IMG SRC='img_pack/rien.gif' style='background-color: $couleur_foncee;' WIDTH=$largeur_rouge HEIGHT=8 BORDER=0>";
-				if ($largeur_vert>0) echo "<IMG SRC='img_pack/rien.gif' style='background-color: $couleur_claire;' WIDTH=$largeur_vert HEIGHT=8 BORDER=0>";
+				if ($visites_abs > 0) echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width='".$visites_abs."' height=8 border=0>";
+				if ($largeur_rouge>0) echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_foncee;' WIDTH=$largeur_rouge HEIGHT=8 BORDER=0>";
+				if ($largeur_vert>0) echo "<IMG SRC='" . _DIR_IMG_PACK . "rien.gif' style='background-color: $couleur_claire;' WIDTH=$largeur_vert HEIGHT=8 BORDER=0>";
 				
 				echo "</TD></TR></TABLE>\n";
 				echo "</TD></TR></table>";

@@ -186,10 +186,10 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 
 
 					if ($difference > 0) {	
-						//echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
-						//echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
+						//echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width=$largeur height=1 style='background-color:#333333;' title=$tagtitle>";
+						//echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width=$largeur height=$hauteur_moyenne title=$tagtitle>";
 					}
-					//echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
+					//echo "<img src='" . _DIR_IMG_PACK . "rien.gif' width=$largeur height=1 style='background-color:black;' title=$tagtitle>";
 					//echo "</td>";
 					$n++;
 				}

@@ -27,15 +27,15 @@ debut_boite_info();
 
 echo _T('info_gauche_messagerie');
 
-echo "<p>"."<IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_vert');
+echo "<p>"."<IMG SRC='" . _DIR_IMG_PACK . "m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_vert');
 
 echo aide ("messut");
 
-echo "<p>"."<IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_bleu');
+echo "<p>"."<IMG SRC='" . _DIR_IMG_PACK . "m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_bleu');
 
 echo aide ("messpense");
 
-echo "<p>"."<IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_jaune');
+echo "<p>"."<IMG SRC='" . _DIR_IMG_PACK . "m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T('info_symbole_jaune');
 
 
 
@@ -115,7 +115,7 @@ if (spip_num_rows($result) > 0) {
 		$id_auteur = $row['id_auteur'];
 		$nom = typo($row["nom"]);
 		$total = $row["total"];
-		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='img_pack/redac-12.gif' border='0'> <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom</a> ($total)</div></div>";
+		echo "<div class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\" style=' padding: 2px; padding-left: 10px; border-bottom: 1px solid #cccccc;'><div class='verdana1'><img src='" . _DIR_IMG_PACK . "redac-12.gif' border='0'> <a href='auteurs_edit.php3?id_auteur=$id_auteur'>$nom</a> ($total)</div></div>";
 		if ($count == ceil(spip_num_rows($result)/2)) echo "</td><td valign='top' width='50%' style='background-color: #eeeeee;'>";
 	}
 	echo "</td></tr></table>";

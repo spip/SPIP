@@ -197,7 +197,7 @@ function controle_forum($row, $rappel) {
 				       rawurlencode($appelant) . 
 				       "&retour=" .
 				       rawurlencode(_DIR_RESTREINT_ABS . "controle_forum.php3?$rappel&#$id_forum"), 
-				       "../img_pack/messagerie-24.gif",
+				       _DIR_IMG_PACK . "messagerie-24.gif",
 				       "creer.gif");
 	  }
 	$controle .= "<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
