@@ -1150,7 +1150,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 
 	case 'URL_FORUM':
-		$code = "url_var_recherche(generer_url_mot(\$contexte['id_forum']), \$contexte['activer_url_recherche'])";
+		$code = "url_var_recherche(generer_url_forum(\$contexte['id_forum']), \$contexte['activer_url_recherche'])";
 		break;
 
 	case 'URL_MOT':
