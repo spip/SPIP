@@ -60,10 +60,18 @@ if ($etape == 6) {
 	include_ecrire("inc_config.php3");
 	init_config();
 
-	$protec = "deny from all\n";
-	$myFile = fopen("data/.htaccess", "w");
-	fputs($myFile, $protec);
-	fclose($myFile);
+	if ($hebergeur == 'nexenservices'){
+		echo "<p><B>Votre h&eacute;bergeur est Nexen Services.</B><br />";
+		echo "<p>La protection du r&eacute;pertoire <tt>ecrire/data/</tt> doit se faire par l'interm&eacute;diaire de ";
+		echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">l'espace webmestres</a>.";
+		echo "<p>Veuillez cr&eacute;er manuellement la protection pour ce r&eacute;pertoire (un couple login/mot de passe est n&eacute;cessaire).";
+	}
+	else{
+		$protec = "deny from all\n";
+		$myFile = fopen("data/.htaccess", "w");
+		fputs($myFile, $protec);
+		fclose($myFile);
+	}
 
 	@unlink("inc_meta_cache.php3");
 	if (!@rename("inc_connect_install.php3", "inc_connect.php3")) {

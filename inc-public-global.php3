@@ -175,9 +175,18 @@ if ($effacer_cache) @unlink($chemin_cache);
 //
 
 if (!file_exists("CACHE/.htaccess")) {
-	$f = fopen("CACHE/.htaccess", "w");
-	fputs($f, "deny from all\n");
-	fclose($f);
+	if ($hebergeur == 'nexenservices'){
+		echo "<font color=\"#FF0000\">IMPORTANT : </font>";
+		echo "Votre h&eacute;bergeur est Nexen Services.<br />";
+		echo "La protection du r&eacute;pertoire <i>CACHE/</i> doit se faire par l'interm&eacute;diaire de ";
+		echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">l'espace webmestres</a>.";
+		echo "Veuillez cr&eacute;er manuellement la protection pour ce r&eacute;pertoire (un couple login/mot de passe est n&eacute;cessaire).<br />";
+	}
+	else{
+		$f = fopen("CACHE/.htaccess", "w");
+		fputs($f, "deny from all\n");
+		fclose($f);
+	}
 }
 
 
