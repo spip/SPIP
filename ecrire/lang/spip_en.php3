@@ -384,7 +384,7 @@ $GLOBALS['i18n_en'] = array(
 'info_contenance' => 'This site contains:',
 'info_contenu_articles' => 'Articles content',
 'info_contribution' => 'forum contributions',
-'info_copyright' => 'is a free software distributed <a href=\'copyright_en.html\'>under GPL license.</a>',
+'info_copyright' => 'is a free software distributed <a href=\'license.txt\'>under GPL license.</a>',
 'info_cours_edition' => 'In progress',
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
 'info_creation_paragraphe' => '(To create paragraphs, you simply leave blank lines.)',
