@@ -254,12 +254,14 @@ echo "<B>Signature</B> [Obligatoire]<BR>";
 echo "(Votre nom ou votre pseudo)<BR>";
 echo "<INPUT TYPE='text' NAME='nom' CLASS='formo' VALUE=\"".entites_html($auteur['nom'])."\" SIZE='40'><P>";
 
-echo "<B>Votre adresse email</B> <BR>";
+echo "<B>Votre adresse email</B>";
 if ($connect_statut == "0minirezo") {
-	echo "<INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
+	echo "<br><INPUT TYPE='text' NAME='email' CLASS='formo' VALUE=\"".entites_html($auteur['email'])."\" SIZE='40'><P>\n";
 }
 else {
-	echo "<B>".$auteur['email']."</B><P>";
+	echo "&nbsp;: <tt>".$auteur['email']."</tt>";
+	echo "<br>(Seuls les administrateurs peuvent modifier cette adresse.)\n";
+	echo "<P>";
 }
 
 echo "<B>Qui &ecirc;tes-vous ?</B><BR>";
@@ -322,7 +324,7 @@ if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
 	debut_cadre_enfonce();
 	echo '<img src="img_pack/warning.gif" alt="Avertissement" width="48" height="48" align="right">';
 	echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
-	Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</b>\n";
+	Utilisez ce formulaire avec pr&eacute;caution...</b>\n";
 	fin_cadre_enfonce();
 	echo "<p>";
 }
