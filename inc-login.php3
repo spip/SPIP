@@ -69,12 +69,19 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	global $spip_admin;
 	global $php_module;
 	global $clean_link;
+	global $var_lang;
 
 	if (!$cible) {
 		if ($GLOBALS['var_url']) $cible = new Link($GLOBALS['var_url']);
 		else if ($prive) $cible = new Link('ecrire/');
 		else $cible = $clean_link;
 	}
+
+	// Si on change la langue pendant le login,
+	// on va la forcer a l'arrivee dans l'espace prive
+	if ($prive AND $var_lang)
+		$cible->addVar('var_lang');
+
 	$cible->delVar('var_erreur');
 	$cible->delVar('var_url');
 	$clean_link->delVar('var_erreur');
