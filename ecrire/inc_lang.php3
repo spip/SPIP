@@ -5,7 +5,7 @@ if (defined("_ECRIRE_INC_LANG")) return;
 define("_ECRIRE_INC_LANG", "1");
 
 function nommer_cache_lang($lang, $module) {
-	return _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.txt';
+	return _DIR_SESSIONS . 'lang_'.$module.'_'.$lang.'.txt';
 }
 
 //
@@ -14,15 +14,13 @@ function nommer_cache_lang($lang, $module) {
 
 function lire_cache_lang($lang, $module, $fichier_cache) {
 	$t = &$GLOBALS['i18n_'.$module.'_'.$lang];
-	$c = &$GLOBALS['cache_lang'];
+	$c = &$GLOBALS['cache_lang'][$lang];
 	$i = 1;
 	foreach(file($fichier_cache) as $ligne) {
 		if ($i)
-		  $index = $ligne;
+		  $index = rtrim($ligne);
 		else {
-		  	$c[$index] = 1;
-		  	$t[$index] = $ligne;
-			spip_log("$index = $ligne");
+		  $GLOBALS['cache_lang'][$lang][$index] = $GLOBALS['i18n_'.$module.'_'.$lang][$index] = rtrim($ligne,"\n\r");
 		}
 		$i = !$i;
 	}
@@ -32,13 +30,12 @@ function lire_cache_lang($lang, $module, $fichier_cache) {
 // Ecrire un fichier cache langue
 //
 function ecrire_cache_lang($lang, $module) {
-
 	if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
 		reset($cache);
-		$codes = $GLOBALS['i18n_'.$module.'_'.$lang];
-		$texte = '';
-		while (list($code, ) = each($cache)) {
-		  $texte .= "$code\n" . str_replace("\n",' ',$codes[$code]) . "\n";
+                $codes = $GLOBALS['i18n_'.$module.'_'.$lang];
+                $texte = '';
+                while (list($code, $val) = each($cache)) {
+			if (isset($codes[$code])) $texte .= "$code\n$val\n";
 		}
 		if ($texte)
 			ecrire_fichier(nommer_cache_lang($module, $lang), $texte);
@@ -62,21 +59,20 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	$fichier_lang = $modulang . _EXTENSION_PHP;
 	$perso_lang = 'perso' . _EXTENSION_PHP;
 
-	if (@is_readable(_DIR_LANG . $fichier_lang)) {
-		if (_DIR_RESTREINT AND _FILE_CONNECT) {
-			$fichier_cache = nommer_cache_lang($module, $lang);
-			$fichier_cache_time = @is_readable($fichier_cache) ? @filemtime($fichier_cache) : false;
+	if (_FILE_CONNECT && @is_readable(_DIR_LANG . $fichier_lang)) {
+		$fichier_cache = nommer_cache_lang($module, $lang);
+		$time_cache = @is_readable($fichier_cache) ? @filemtime($fichier_cache) : false;
 
-			if (!$forcer AND $fichier_cache_time
-			    AND ($fichier_cache_time > @filemtime(_DIR_LANG .$fichier_lang))
-			    AND ($fichier_cache_time > @filemtime(_DIR_LANG . $perso_lang))) {
-			 	lire_cache_lang($module, $lang, $fichier_cache);
-				return;
-			}
-			else $GLOBALS['cache_lang_modifs'][$module][$lang] = true;
+		if (!$forcer
+		AND $time_cache
+		AND ($time_cache > @filemtime(_DIR_LANG .$fichier_lang))
+		AND ($time_cache > @filemtime(_DIR_LANG . $perso_lang))) {
+		 	lire_cache_lang($lang, $module, $fichier_cache);
+			return;
 		}
-	  $GLOBALS['idx_lang']='i18n_'.$modulang;
-	  include_lang($fichier_lang);
+		$GLOBALS['cache_lang_modifs'][$module][$lang] = true;
+		$GLOBALS['idx_lang']='i18n_'.$modulang;
+		include_lang($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// le francais, qui *par definition* doit exister, et on copie le
@@ -136,48 +132,49 @@ function regler_langue_navigateur() {
 	return false;
 }
 
-
 //
 // Traduire une chaine internationalisee
 //
-function traduire_chaine($code, $args) {
-	global $spip_lang;
+function traduire_chaine($code, $args, $lang) {
 	global $cache_lang;
 
-	// liste des modules a parcourir
-	$modules = array('spip');
-	if (strpos($code, ':')) {
-		if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
-			$modules = explode("/",$regs[1]);
-			$code = $regs[2];
+	// boulot si ce n'est pas dans le cache mémoire 
+	if (!isset($cache_lang[$lang][$code])) {
+		// modules a parcourir
+		$modules = array('spip');
+		if (strpos($code, ':')) {
+			if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
+				$modules = explode("/",$regs[1]);
+				$code = $regs[2];
+			}
 		}
-	}
 
-	$text = '';
-	// parcourir tous les modules jusqu'a ce qu'on trouve
-	while (!$text AND (list(,$module) = each ($modules))) {
-		$var = "i18n_".$module."_".$spip_lang;
-		spip_log("$var :" . empty($GLOBALS[$var]));
-		if (empty($GLOBALS[$var])) charger_langue($spip_lang, $module);
-
-		spip_log("$code :" . $GLOBALS[$var][$code]);
-		if (_DIR_RESTREINT) {
+		// parcourir tous les modules jusqu'a ce qu'on trouve
+		while (list(,$module) = each ($modules)) {
+			$var = "i18n_".$module."_".$lang;
+			// chercher dans le cache disque
+			if (empty($GLOBALS[$var]))
+				charger_langue($lang, $module);
+			// chercher dans le source
 			if (!isset($GLOBALS[$var][$code]))
-				charger_langue($spip_lang, $module, $code);
-			if (isset($GLOBALS[$var][$code]))
-				$cache_lang[$spip_lang][$code] = 1;
+				charger_langue($lang, $module, $code);
+			// recopier la valeur en supprimant \n 
+			// (indispensable pour ecrire_cache_langue)
+			if (isset($GLOBALS[$var][$code])) {
+				$cache_lang[$lang][$code] = str_replace("\n",' ',$GLOBALS[$var][$code]);
+				break;
+			}
+#			unset($var);
 		}
-		$text = $GLOBALS[$var][$code];
 	}
+
+	$text = $cache_lang[$lang][$code]; // peut etre indefini
 
 	// langues pas finies ou en retard (eh oui, c'est moche...)
-	if ($spip_lang<>'fr') {
+	if ($lang<>'fr') {
 		$text = ereg_replace("^<(NEW|MODIF)>","",$text);
 		if (!$text) {
-			$spip_lang_temp = $spip_lang;
-			$spip_lang = 'fr';
-			$text = traduire_chaine($code, $args);
-			$spip_lang = $spip_lang_temp;
+			  $text = traduire_chaine($code, $args, 'fr');
 		}
 	}
 
@@ -558,6 +555,10 @@ function utiliser_langue_visiteur() {
 function init_langues() {
 	global $all_langs, $langue_site, $cache_lang, $cache_lang_modifs;
 	global $pile_langues, $lang_typo, $lang_dir;
+	// en attendant de rationaliser son chargement
+	static $premier_appel = true;
+	if (!$premier_appel) return;
+	$premier_appel = false;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
