@@ -39,6 +39,20 @@ $mysql_rappel_connexion = false;
 // 	*** Fin du parametrage ***
 //
 
+$flag_ecrire = !file_exists('ecrire/inc_version.php3');
+
+// on peut eventuellement stocker le parametrage dans ecrire/options.php3
+// pour eviter tout ecrasement
+if($flag_ecrire) {
+	if (file_exists('options.php3')) {
+		include('options.php3');
+	}
+} else {
+	if (file_exists('ecrire/options.php3')) {
+		include('ecrire/options.php3');
+	}
+}
+
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -50,7 +64,7 @@ $spip_version = 1.473;
 // version de spip
 $spip_version_affichee = "1.5.1pr2 CVS";
 
-// version de spip / tag
+// version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 
 
@@ -58,11 +72,13 @@ if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 error_reporting(E_ALL ^ E_NOTICE);
 
 // ** Securite **
-// - le dossier des squelettes a preciser dans mes_fonctions.php3, sous
-//   la forme d'une ligne : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
-$dossier_squelettes = '';
 $auteur_session = '';
 $connect_statut = '';
+
+// - le dossier des squelettes, a preciser dans mes_fonctions.php3, sous
+//   la forme : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
+$dossier_squelettes = '';
+
 
 //
 // Infos de version PHP
@@ -287,8 +303,6 @@ if (!$PATH_TRANSLATED) {
 //
 
 $included_files = '';
-$flag_ecrire = ereg('^[^?]*/ecrire/[^/]*', $REQUEST_URI)
-	|| ereg('/ecrire/[^/]*', $SCRIPT_URL);
 
 function include_local($file) {
 	if ($GLOBALS['included_files'][$file]) return;
