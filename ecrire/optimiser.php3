@@ -171,7 +171,22 @@ function optimiser_base() {
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) $mots[] = $row['id_mot'];
 
-	
+	if ($mots) {
+		$mots = join(",", $mots);
+
+		$query = "DELETE FROM spip_mots_articles WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_breves WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_forum WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_rubriques WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+		$query = "DELETE FROM spip_mots_syndic WHERE id_mot NOT IN ($mots)";
+		spip_query($query);
+	}
+
+
 	// 
 	// Documents
 	//
