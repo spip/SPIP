@@ -263,7 +263,7 @@ function effectuer_une_indexation() {
 	if ($s = @sizeof($suite = @file($fichier_index))) {
 		include_ecrire("inc_texte.php3");
 		include_ecrire("inc_filtres.php3");
-		$s = $suite[$n = rand(0, $s)];
+		$s = $suite[$n = rand(0, $s-1)];
 		unset($suite[$n]);
 		$f = fopen($fichier_index, 'wb');
 		fwrite($f, join("", $suite));
