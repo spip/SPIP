@@ -82,8 +82,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_eo_maj' => 'Hoofdletter O gekoppeld aan E (ligatuur) toevoegen',
 'barre_euro' => '&euro; teken invoegen',
 'barre_gras' => 'In het {{vet}} zetten',
-'barre_guillemets' => 'Met &laquo; Franse haakjes &raquo; omringen',
-'barre_guillemets_simples' => 'Van „haakjes“ voorzien',
+'barre_guillemets' => '<MODIF> Met &laquo; Franse haakjes &raquo; omringen',
+'barre_guillemets_simples' => '<MODIF> Van „haakjes“ voorzien',
 'barre_intertitre' => 'Omzetten naar {{{tussentitel}}}',
 'barre_italic' => '{cursief} zetten',
 'barre_lien' => 'Omzetten naar [hypertekst verwijzing->http://...]',
@@ -164,6 +164,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_valider' => 'Goedkeuren',
 'bouton_vider_cache' => 'De buffer (cache) leegmaken',
 'bouton_voir_message' => 'Dit bericht bekijken alvorens het goed te keuren',
+
+
+// C
+'calendrier_synchro' => 'Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), kan je deze synchroniseren met de actuele artikels van deze site.',
+'calendrier_synchro_lien' => 'Het bestand <i>iCal</i> ophalen',
 
 
 // D
@@ -386,6 +391,7 @@ Bedankt voor je deelname
 'icone_ecrire_nouvel_article' => 'De berichten van deze rubriek',
 'icone_edition_site' => 'Redactie van de site',
 'icone_envoyer_message' => 'Bericht verzenden',
+'icone_etat_traductions' => 'Status van de vertalingen ',
 'icone_evolution_visites' => 'Evolutie van de bezoeken<br>@visites@ bezoeken@aff_ref@',
 'icone_evolution_visites_2' => 'Evolutie van de bezoeken',
 'icone_forum_administrateur' => 'Forum van de beheerders',
@@ -465,7 +471,7 @@ Bedankt voor je deelname
 'info_adresse_email' => 'E-MAIL ADRES:',
 'info_adresse_non_indiquee' => 'Je hebt geen adres opgegeven om te testen!',
 'info_adresse_url' => 'Adres (URL) van de website',
-'info_afficher_visites' => 'Toon de bezoeken voor:',
+'info_afficher_visites' => '<MODIF> Toon de bezoeken voor:',
 'info_affichier_visites_articles_plus_visites' => 'Bezoekers tonen voor <b>de meest bezochte artikels sinds het begin:</b>',
 'info_aide' => 'HELP:',
 'info_aide_en_ligne' => 'ONLINE HELP VAN SPIP',
@@ -1205,8 +1211,10 @@ De publieke forums kunnen per artikel toegestaan worden
 'onglet_affacer_base' => 'Database verwijderen',
 'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'Auteur',
+'onglet_bilan_traductions' => 'Resultaat van de vertalingen',
 'onglet_calendrier' => 'Kalender',
 'onglet_contenu_site' => 'Inhoud van de site',
+'onglet_detail_traductions' => 'Te vertalen artikels',
 'onglet_evolution_visite_mod' => 'Evolutie',
 'onglet_fonctions_avances' => 'Geavanceerde functies',
 'onglet_informations_personnelles' => 'Persoonlijke informatie',
@@ -1298,6 +1306,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_auteur_messagerie' => 'Deze site kan de lijst met auteurs die op dit moment aangelogd zijn, bijhouden. Dit laat je toe meteen en in realtime berichten uit te wisselen met deze auteurs. (als het berichtensysteem niet geactiveerd is, zal de lijst met verbonden auteurs zich ook automatisch desactiveren). Je kan kiezen om al dan niet in de lijst te verschijnen (je wordt dan &laquo;onzichtbaar&raquo; voor de andere gebruikers).',
 'texte_auteur_messagerie_1' => 'Deze site biedt de mogelijkheid om berichten uit te wisselen en forums op te starten voor private discussies tussen de deelnemers van de site. Je kan kiezen om niet deel te nemen aan deze uitwisseling van informatie.',
 'texte_auteurs' => 'DE AUTEURS',
+'texte_bilan_traductions' => 'In deze grafiek tonen de groene staafjes de artikels die vertaald en up-to-date zijn; de rode staafjes geven de vertalingen aan die nog aangepast moeten worden.',
 'texte_breves' => 'Berichten zijn korte en eenvoudige teksten die je toelaten nieuws snel online te brengen, een persbericht op te stellen, een evenementenkalender te maken, ...',
 'texte_choix_base_1' => 'Kies je databank :',
 'texte_choix_base_2' => 'De MySQL server bevat meerdere databanken.',
@@ -1424,6 +1433,16 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
 'texte_nouvelle_version_spip_1' => 'Je hebt een nieuwe versie van SPIP ge&iuml;nstalleerd.',
 'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een meer grondige update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand <tt>inc_connect.php3</tt> in de map <tt>ecrire</tt>. Herneem nu de installatie van SPIP om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand <tt>inc_connect.php3</tt> alvorens het te verwijderen...)',
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
+'texte_plan_trad' => '<NEW> Cette page vous permet de visualiser l\'&eacute;tat des traductions pour la langue choisie. 
+  La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave; jour, 
+  ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
+'texte_plan_trad_en_cours' => '<NEW> Ce symbole indique qu\'un article est en cours de traduction&nbsp;: cela veut dire qu\'une traduction 
+  a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
+  &agrave; la traduction. ',
+'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave; 
+  un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
+  traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
+'texte_plan_trad_note' => 'Noot&nbsp;: alleen gepubliceerde artikels worden op deze pagina getoond.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',
 'texte_port_annuaire' => '(De opgegeven standaardwaarde is meestal de juiste.)',
@@ -1526,12 +1545,15 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_admin_tech' => 'Technisch onderhoud',
 'titre_admin_vider' => 'Technisch onderhoud',
 'titre_ajouter_mot_cle' => 'TREFWOORD TOEVOEGEN :',
+'titre_articles_populaires' => 'Meest populaire artikels',
 'titre_articles_syndiques' => 'Gesyndiceerde artikels komende van deze site',
+'titre_articles_visites' => 'Meest bezochte artikels',
 'titre_breve_proposee' => 'Voorgesteld bericht',
 'titre_breve_publiee' => 'Gepubliceerd bericht',
 'titre_breve_refusee' => 'Geweigerd bericht',
 'titre_breves' => 'Berichten',
 'titre_cadre_afficher_article' => 'Artikels tonen',
+'titre_cadre_afficher_traductions' => 'Status van de vertalingen voor deze taal tonen',
 'titre_cadre_ajouter_auteur' => 'EEN AUTEUR TOEVOEGEN :',
 'titre_cadre_forum_administrateur' => 'Priv&eacute;-forum voor de beheerders',
 'titre_cadre_forum_interne' => 'Intern forum',
@@ -1588,6 +1610,7 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'titre_page_controle_petition' => 'Vervolg van de petities',
 'titre_page_delete_all' => 'Volledige en onomkeerbare verwijdering',
 'titre_page_documents_liste' => 'Documenten van de rubrieken',
+'titre_page_etat_traductions' => 'Status van de vertalingen',
 'titre_page_forum' => 'Forum van de beheerders',
 'titre_page_forum_envoi' => 'Een bericht versturen',
 'titre_page_forum_suivi' => 'Vervolg van de forums',
@@ -1624,7 +1647,6 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'trad_lier' => 'Dit artikel is een vertaling van artikelnummer:',
 'trad_new' => 'Een nieuwe vertaling maken van dit artikel',
 'trad_reference' => '(referentie-artikel)'
-
 
 );
 

@@ -164,6 +164,11 @@ la documentacion d\'SPIP</a>.',
 'bouton_voir_message' => 'V&eacute;der aqueth messatge abans de\'u validar',
 
 
+// C
+'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), que\'u podetz sincronizar dab l\'actualitat deu sit.',
+'calendrier_synchro_lien' => 'Anar cu&eacute;lher lo fichi&egrave;r <i>iCal</i>',
+
+
 // D
 'date_avant_jc' => 'abans lo Crist',
 'date_fmt_heures_minutes' => '@h@h@m@min',
@@ -385,6 +390,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_ecrire_nouvel_article' => 'Las br&egrave;vas contengudas dens aquera rubrica',
 'icone_edition_site' => 'Edicion deu sit',
 'icone_envoyer_message' => 'Mandar aqueth messatge',
+'icone_etat_traductions' => 'On ne son las arreviradas',
 'icone_evolution_visites' => 'Evolucion de las vesitas<br>@visites@ vesitas@aff_ref@',
 'icone_evolution_visites_2' => 'Evolucion de las vesitas',
 'icone_forum_administrateur' => 'Forum deus administrators',
@@ -1177,8 +1183,10 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'onglet_affacer_base' => 'Esfa&ccedil;ar la basa',
 'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'autor',
+'onglet_bilan_traductions' => 'Bilan&ccedil; de las arreviradas',
 'onglet_calendrier' => 'Calend&egrave;r',
 'onglet_contenu_site' => 'Contengut deu sit',
+'onglet_detail_traductions' => 'Los articles d\'arrevirar',
 'onglet_evolution_visite_mod' => 'Evolucion',
 'onglet_fonctions_avances' => 'Foncions avan&ccedil;adas',
 'onglet_informations_personnelles' => 'Informacions personaus',
@@ -1274,6 +1282,7 @@ N\'oblidetz pas tanp&ograve;c de recuperar l\'integralitat deu repert&ograve;ri 
 'texte_auteur_messagerie' => 'Aqueth sit que\'vs p&ograve;t indicar tostemps la t&egrave;ra deus redactors connectats, &ccedil;&ograve; qui\'vs permet d\'escambiar messatges en dir&egrave;cte (quora la messatgeria ei desactivada &ccedil;a devath, la quita t&egrave;ra deus redactors qu\'ei desactivada). Que podetz decidir de n\'apar&eacute;isher pas dens aquera t&egrave;ra (qu\'&egrave;tz "invisible/a" taus autes utilizaires).',
 'texte_auteur_messagerie_1' => 'Aqueth sit que permet d\'escambiar messatges e de constituir forums de discussion privats entre los participants deu sit. Que podetz decidir de non participar pas a aqueths escambis.',
 'texte_auteurs' => 'LOS AUTORS',
+'texte_bilan_traductions' => 'En aqueth grafic, las barras verdas que representan los articles arrevirats e actualizats, las barras rojas las arreviradas qui son d\'actualizar.',
 'texte_breves' => 'Las br&egrave;vas que son t&egrave;xtes corts e simples qui permeten de hicar en linha l&egrave;u informacions concisas, de gerir
  ua revista de premsa, un calend&egrave;r d\'eveniments...',
 'texte_choix_base_1' => 'Causitz la v&ograve;sta basa:',
@@ -1401,6 +1410,15 @@ qu\'apareish quan la murga e passa suu t&iacute;tol.',
 'texte_nouvelle_version_spip_1' => 'Qu\'avetz installada ua version nav&egrave;ra d\'SPIP.',
 'texte_nouvelle_version_spip_2' => 'Aquesta version nav&egrave;ra que demanda ua actualizacion mei completa que de costuma. S\'&egrave;tz webm&egrave;stre/webm&egrave;stra deu sit, volhatz esfa&ccedil;ar lo fichi&egrave;r <tt>inc_connect.php3</tt> deu repert&ograve;ri <tt>ecrire</tt> e tornar pr&eacute;ner l\'installacion ent&agrave; actualizar los v&ograve;stes param&egrave;tres de connexion a la basa de dadas.<p> (NB: s\'avetz desmembrat los v&ograve;stes param&egrave;tres de connexion, espiatz lo fichi&egrave;r  <tt>inc_connect.php3</tt> abans de suprim&iacute;\'u...)',
 'texte_operation_echec' => 'Tornatz a la pagina precedenta, causitz ua auta basa o creatz-ne ua nav&egrave;ra. Verificatz las informacions que lo v&ograve;ste aubergader a hornidas.',
+'texte_plan_trad' => 'Aquera pagina que\'vs permet de visualizar l\'estat de las arreviradas ent&agrave; la lenga causida. 
+  La pagina qu\'aficha los articles qui son a arrevir&agrave;\'s, los articles que cau actualizar la lor arrevirada 
+  e los articles qui non son pas enq&uuml;&egrave;ra arrevirats. ',
+'texte_plan_trad_en_cours' => 'Aqueth simb&egrave;u qu\'indica qu\'un article ei en cors d\'arrevirada: aqu&ograve; que v&ograve;u d&iacute;ser qu\'an comen&ccedil;ada
+  ua arrevirada mes non l\'an pas enq&uuml;&egrave;ra publicada. Clicatz suu simb&egrave;u t&agrave; accedir
+  a l\'arrevirada. ',
+'texte_plan_trad_modif' => 'Aqueth simb&egrave;u qu\'indica qu\'an modificat un article ja arrevirat. En aqueth cas, que\'s conselha d\'actualizar
+  l\'arrevirada en foncion de las modificacions portadas a l\'article originau. ',
+'texte_plan_trad_note' => 'N&ograve;ta: aquera pagina n\'aficha sonque los articles arrevirats.',
 'texte_plus_trois_car' => 'mei de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mei d\'un autor trobat ent&agrave; "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor indicada com predefinida que convien en generau.)',
@@ -1511,6 +1529,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'titre_breve_refusee' => 'Br&egrave;va arrefusada',
 'titre_breves' => 'Las br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar los articles',
+'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las arreviradas t&agrave; aquera lenga',
 'titre_cadre_ajouter_auteur' => 'AJUSTAR UN AUTOR:',
 'titre_cadre_forum_administrateur' => 'Forum privat deus administrators',
 'titre_cadre_forum_interne' => 'Forum int&egrave;rne',
@@ -1544,7 +1563,6 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'titre_langue_trad_article' => 'LENGA E ARREVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
 'titre_liens_entrants' => 'Los ligams entrants uei lo dia',
-'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_mots_cles_dans_forum' => 'Mots claus dens los forums deu sit public',
 'titre_mots_tous' => 'Los mots claus',
@@ -1568,6 +1586,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'titre_page_controle_petition' => 'Seguit de las peticions',
 'titre_page_delete_all' => 'supression totau e irreversibla',
 'titre_page_documents_liste' => 'Los documents de las rubricas',
+'titre_page_etat_traductions' => 'Estat de las arreviradas',
 'titre_page_forum' => 'Forum entaus administrators',
 'titre_page_forum_envoi' => 'Mandar un messatge',
 'titre_page_forum_suivi' => 'Seguit deus forums',
@@ -1603,7 +1622,11 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_delier' => 'Non ligar plus aqueste article a las soas arreviradas ',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
+
+
+// PLUS_UTILISE
+'titre_liens_entrants_total' => '<NEW> <NEW> Les liens entrants depuis le d&eacute;but'
 
 );
 

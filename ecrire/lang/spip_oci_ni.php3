@@ -156,6 +156,11 @@ acceptat per toi lu navigadors, ma permete unicament que de faire veire li lenga
 'bouton_voir_message' => 'Veire aqueu messatge denant de lo validar',
 
 
+// C
+'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronisar emb l\'actualitat dau sit.',
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
+
+
 // D
 'date_avant_jc' => 'avans lo Crist',
 'date_fmt_heures_minutes' => '@h@h@m@min',
@@ -377,6 +382,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_ecrire_nouvel_article' => 'Li br&egrave;vas contengudi dins aquela rubrica',
 'icone_edition_site' => 'Edicion dau sit',
 'icone_envoyer_message' => 'Mandar aqueu messatge',
+'icone_etat_traductions' => 'Estat dei reviradas',
 'icone_evolution_visites' => 'Evolucion dei visitas<br>@visites@ visitas@aff_ref@',
 'icone_evolution_visites_2' => 'Evolucion dei visitas',
 'icone_forum_administrateur' => 'Forum dei administrators',
@@ -454,7 +460,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_adresse_email' => 'ADRE&Ccedil;A E-MAIL:',
 'info_adresse_non_indiquee' => 'Av&egrave;tz pas indicat l\'adre&ccedil;a de testar&nbsp;!',
 'info_adresse_url' => 'Adre&ccedil;a (URL) dau sit public',
-'info_afficher_visites' => '<MODIF> Afichar li visitas per&nbsp;:',
+'info_afficher_visites' => 'Afichar li visitas per&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'Afichar li visitas per lu <b>articles mai visitats desp&iacute; lo principi&nbsp;:</b>',
 'info_aide' => 'AJUDA:',
 'info_aide_en_ligne' => 'Ajuda en linha SPIP',
@@ -1159,8 +1165,10 @@ I son d\'aubergadors que desactivon lo mandad&iacute;s d\'e-mails desp&iacute; l
 'onglet_affacer_base' => 'Esca&ccedil;ar la basa',
 'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'autor',
+'onglet_bilan_traductions' => 'Bilan dei reviradas',
 'onglet_calendrier' => 'Calendier',
 'onglet_contenu_site' => 'Contengut dau sit',
+'onglet_detail_traductions' => 'Lu articles de revirar',
 'onglet_evolution_visite_mod' => 'Evolucion',
 'onglet_fonctions_avances' => 'Foncions avan&ccedil;adas',
 'onglet_informations_personnelles' => 'Informacions personali',
@@ -1256,6 +1264,7 @@ Oblidetz pas manco de recuperar l\'integralitat dau repert&ograve;ri <i>IMG/</i>
 'texte_auteur_messagerie' => 'Aqueu sit vos p&ograve;ut indicar de contunha la ti&egrave;ra dei redactors connectats, &ccedil;&ograve; que vos permete d\'escambiar de messatges en dir&egrave;cte (quora la messatgeria es desactivada &ccedil;ai sobre, la ti&egrave;ra dei redactors es desactivada). Pod&egrave;tz decidir de pas apar&eacute;isser dins aquela ti&egrave;ra (si&egrave;tz "invisible/a" per lu autres utilisaires).',
 'texte_auteur_messagerie_1' => 'Aqueu sit permete d\'escambiar de messatges e de constituir de forums de discussion privats entre lu participants dau sit. Pod&egrave;tz decidir de pas participar a aquelu escambis.',
 'texte_auteurs' => 'LU AUTORS',
+'texte_bilan_traductions' => 'Dins aqu&egrave;u grafic, li barras verdi representon lu articles revirats e actualisats, li barras roje li reviradas que son d\'actualisar.',
 'texte_breves' => 'Li br&egrave;vas son de testos corts e simples que permeton de metre en linha l&egrave;u d\'informacions concisi, de gerir
  una revista de premsa, un calendier d\'aveniments...',
 'texte_choix_base_1' => 'Chausiss&egrave;tz la v&ograve;stra basa:',
@@ -1371,6 +1380,15 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
 'texte_nouvelle_version_spip_1' => 'Av&egrave;tz instalat una nov&egrave;la version de SPIP.',
 'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualisacion mai completa que de costuma. Se si&egrave;tz webm&egrave;stre/webm&egrave;stressa dau sit, vorgatz esca&ccedil;ar lo fichier <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar prene l\'instalacion per fin d\'actualisar lu v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p> (NB: s\'av&egrave;tz denembrat lu v&ograve;stres param&egrave;tres de connexion, regarjatz lo fichier  <tt>inc_connect.php3</tt> denant de lo suprimir...)',
 'texte_operation_echec' => 'Tornatz a la p&agrave;gina precedenta, chausiss&egrave;tz una autra basa &ograve; creatz-ne una nov&egrave;la. Verificatz li informacions que lo v&ograve;stre aubergador a fornidi.',
+'texte_plan_trad' => 'Aquela p&agrave;gina vos permete de visualisar l\'estat dei reviradas per la lenga chausida.
+  La p&agrave;gina aficha lu articles que son a revirar, lu articles que cau actualisar la sieua revirada 
+  e lu articles que son pas encara revirats. ',
+'texte_plan_trad_en_cours' => 'Aqu&egrave;u simb&egrave;l indica qu\'un article es en cors de revirada: aqu&ograve; v&ograve;u dire qu\'an comen&ccedil;ada
+  una revirada mas que l\'an pas encara publicada. Clicatz sus lo simb&egrave;l per accedir
+  a la revirada. ',
+'texte_plan_trad_modif' => 'Aqu&egrave;u simb&egrave;l indica qu\'an modificat un article j&agrave; revirat. En aqu&egrave;u cas, se conselha d\'actualisar la
+  revirada en foncion dei modificacions portadi a l\'article originau. ',
+'texte_plan_trad_note' => 'N&ograve;ta: aqu&egrave;la p&agrave;gina aficha solament lu articles revirats.',
 'texte_plus_trois_car' => 'mai de 3 caract&egrave;rs',
 'texte_plusieurs_articles' => 'Mantun autor trobat per "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valor predefinida conven generalament.)',
@@ -1481,6 +1499,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_breve_refusee' => 'Br&egrave;va refudada',
 'titre_breves' => 'Li br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar lu articles',
+'titre_cadre_afficher_traductions' => 'Afichar l\'estat dei reviradas per aqu&egrave;la lenga',
 'titre_cadre_ajouter_auteur' => 'AJUSTAR UN AUTOR :',
 'titre_cadre_forum_administrateur' => 'Forum privat dei administrators',
 'titre_cadre_forum_interne' => 'Forum int&egrave;rne',
@@ -1514,7 +1533,6 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_langue_trad_article' => 'LENGA E REVIRADAS DE L\'ARTICLE',
 'titre_les_articles' => 'LU ARTICLES',
 'titre_liens_entrants' => 'Lu estacs intrants dau jorn',
-'titre_liens_entrants_total' => 'Lu ligams entrants desp&iacute; lo principi',
 'titre_mots_cles' => 'M&Ograve;TS CLAUS',
 'titre_mots_cles_dans_forum' => 'M&ograve;ts claus dins lu forums dau sit public',
 'titre_mots_tous' => 'Lu m&ograve;ts claus',
@@ -1538,6 +1556,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_page_controle_petition' => 'Seguit dei peticions',
 'titre_page_delete_all' => 'supression totala e irreversibla',
 'titre_page_documents_liste' => 'Lu documents dei rubricas',
+'titre_page_etat_traductions' => 'Estat dei reviradas',
 'titre_page_forum' => 'Forum per lu administrators',
 'titre_page_forum_envoi' => 'Mandar un messatge',
 'titre_page_forum_suivi' => 'Seguit dei forums',
@@ -1573,7 +1592,11 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_delier' => 'Ligar plus aquest article ai sieuas reviradas ',
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
 'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
-'trad_reference' => '(article de referen&ccedil;a)'
+'trad_reference' => '(article de referen&ccedil;a)',
+
+
+// PLUS_UTILISE
+'titre_liens_entrants_total' => 'Lu ligams entrants desp&iacute; lo principi'
 
 );
 
