@@ -60,7 +60,7 @@ if ($etape == 6) {
 	if ($hebergeur == 'nexenservices') {
 		echo "<p><B>"._T('info_nexen_1')."</B><br />";
 		echo "<p>"._T('info_nexen_2');
-		echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">"._T('info_nexen_3')."</a>.";
+		echo " <a href=\"http://www.nexenservices.com/webmestres/htlocal.php\" target=\"_blank\">"._T('info_nexen_3')."</a>.";
 		echo "<p>"._T('info_nexen_4');
 	}
 	else {
@@ -96,7 +96,7 @@ else if ($etape == 5) {
 
 	echo "<b>"._T('texte_informations_personnelles_1')."</b>";
 	echo aide ("install5");
-	echo "<p>"._T('texte_informations_personnelles_2');
+	echo "<p>"._T('texte_informations_personnelles_2')." ";
 	echo _T('info_laisser_champs_vides');
 
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
@@ -127,7 +127,6 @@ else if ($etape == 5) {
 		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
 		echo "<b>"._T('info_authentification_externe')."</b>";
 		echo "<p>"._T('texte_annuaire_ldap_1');
-		echo _T('texte_annuaire_ldap_2');
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1'>";
 		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE=\""._T('bouton_acces_ldap')."\">";
@@ -222,7 +221,7 @@ else if ($etape == 3) {
 	echo "<fieldset><label><B>"._T('texte_choix_base_1')."</B><BR></label>";
 
 	if ($result AND (($n = @mysql_num_rows($result)) > 0)) {
-		echo "<B>"._T('texte_choix_base_2')."</B><P>"._T('texte_choix_base_3');
+		echo "<B>"._T('texte_choix_base_2')."</B><P> "._T('texte_choix_base_3');
 		echo "<UL>";
 		$bases = "";
 		for ($i = 0; $i < $n; $i++) {
@@ -238,7 +237,7 @@ else if ($etape == 3) {
 			}
 		}
 		echo $bases."</UL>";
-		echo _T('info_ou');
+		echo _T('info_ou')." ";
 	}
 	else {
 		echo "<B>"._T('avis_lecture_noms_bases_1')."</B>
@@ -249,7 +248,7 @@ else if ($etape == 3) {
 			echo "<INPUT NAME=\"choix_db\" VALUE=\"".$login_db."\" TYPE=Radio id='stand' CHECKED>";
 			echo "<label for='stand'>".$login_db."</label><BR>\n";
 			echo "</UL>";
-			echo _T('info_ou');
+			echo _T('info_ou')." ";
 			$checked = true;
 		}
 	}
@@ -421,9 +420,7 @@ else if ($etape == 'ldap4') {
 		echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
 		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR>";
-		echo _T('info_statut_utilisateurs_2');
-		echo _T('info_statut_utilisateurs_3');
-		echo _T('info_statut_utilisateurs_4');
+		echo _T('info_statut_utilisateurs_2')." ";
 		echo "<p>";
 		echo "<INPUT TYPE='Radio' NAME='statut_ldap' VALUE=\"6forum\" id='visit'>";
 		echo "<label for='visit'><b>"._T('info_visiteur_1')."</b></label> "._T('info_visiteur_2')."<br>";
@@ -484,7 +481,7 @@ else if ($etape == 'ldap3') {
 			}
 		}
 		echo "</UL>";
-		echo _T('info_ou');
+		echo _T('info_ou')." ";
 	}
 	echo "<INPUT NAME=\"base_ldap\" VALUE=\"\" TYPE='Radio' id='manuel'";
 	if (!$checked) {
@@ -557,8 +554,7 @@ else if ($etape == 'ldap1') {
 	echo "<p><FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
 	echo "<fieldset><label><B>"._T('entree_adresse_annuaire')."</B><BR></label>";
-	echo _T('texte_adresse_annuaire_1');
-	echo _T('texte_adresse_annuaire_2')."<BR>";
+	echo _T('texte_adresse_annuaire_1')."<BR>";
 	echo "<INPUT TYPE='text' NAME='adresse_ldap' CLASS='formo' VALUE=\"$adresse_ldap\" SIZE='20'><P>";
 
 	echo "<label><B>"._T('entree_port_annuaire')."</B><BR></label>";
@@ -566,13 +562,9 @@ else if ($etape == 'ldap1') {
 	echo "<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"$port_ldap\" SIZE='20'><P></fieldset>";
 
 	echo "<p><fieldset>";
-	echo _T('texte_acces_ldap_anonyme_1');
-	echo _T('texte_acces_ldap_anonyme_2');
-	echo _T('texte_acces_ldap_anonyme_3');
-	echo _T('texte_acces_ldap_anonyme_4')."<p>";
+	echo _T('texte_acces_ldap_anonyme_1')." ";
 	echo "<label><B>"._T('entree_login_ldap')."</B><BR></label>";
-	echo _T('texte_login_ldap_1');
-	echo _T('texte_login_ldap_2')."<br>";
+	echo _T('texte_login_ldap_1')."<br>";
 	echo "<INPUT TYPE='text' NAME='login_ldap' CLASS='formo' VALUE=\"\" SIZE='40'><P>";
 
 	echo "<label><B>"._T('entree_passe_ldap')."</B><BR></label>";

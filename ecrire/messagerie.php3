@@ -178,7 +178,7 @@ afficher_messages(_T('info_pense_bete_ancien'), $query_message, false, false, fa
 
 if ($connect_statut == '0minirezo') {
 	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
-	afficher_messages(_T('info_tous_redacteur')."<font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' width='14' height='7' border='0'> "._T('bouton_ajouter')."</a></font>", $query_message, false, false, false, true);
+	afficher_messages(_T('info_tous_redacteur')." <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' width='14' height='7' border='0'> "._T('bouton_ajouter')."</a></font>", $query_message, false, false, false, true);
 }
 else {
 	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";

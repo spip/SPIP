@@ -122,7 +122,7 @@ else $logo = "redacteurs-24.gif";
 		debut_cadre_relief("$logo");
 		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
 		if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
-		if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')."<B><A HREF='$url_site'>$nom_site_auteur</A></B>";
+		if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
 		echo "<P>".propre($bio);
 		echo "</FONT>";
 		fin_cadre_relief();

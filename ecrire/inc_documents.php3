@@ -783,7 +783,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 			echo debut_block_invisible("ajouter_document");
 			echo "<font size='2'>";
-			echo _T('info_joindre_documents_article');
+			echo _T('info_joindre_documents_article')."&nbsp;";
 			$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
 			$result_types_docs = spip_query($query_types_docs);
 

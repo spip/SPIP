@@ -86,24 +86,24 @@ echo typo(_T('info_creation_mots_cles')) . aide ("mots") . "<br><br>";
 
 if ($conf_mot>0) {
 	if ($nb_articles == 1) {
-		$texte_lie = _T('info_un_article');
+		$texte_lie = _T('info_un_article')." ";
 	} else if ($nb_articles > 1) {
-		$texte_lie = "$nb_articles articles, ";
+		$texte_lie = $nb_articles articles.", ";
 	} 
 	if ($nb_breves == 1) {
-		$texte_lie .= _T('info_une_breve');
+		$texte_lie .= _T('info_une_breve')." ";
 	} else if ($nb_breves > 1) {
-		$texte_lie .= _T('info_nombre_breves', array('nb_breves' => $nb_breves));
+		$texte_lie .= _T('info_nombre_breves', array('nb_breves' => $nb_breves))." ";
 	} 
 	if ($nb_sites == 1) {
-		$texte_lie .= _T('info_un_site');
+		$texte_lie .= _T('info_un_site')." ";
 	} else if ($nb_sites > 1) {
-		$texte_lie .= _T('info_nombre_sites', array('nb_sites' => $nb_sites));
+		$texte_lie .= _T('info_nombre_sites', array('nb_sites' => $nb_sites))." ";
 	}
 	if ($nb_rubriques == 1) {
-		$texte_lie .= _T('info_une_rubrique');
+		$texte_lie .= _T('info_une_rubrique')." ";
 	} else if ($nb_rubriques > 1) {
-		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nb_rubriques));
+		$texte_lie .= _T('info_nombre_rubriques', array('nb_rubriques' => $nb_rubriques))." ";
 	}
 
 	debut_boite_info();
@@ -111,8 +111,8 @@ if ($conf_mot>0) {
 	echo _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie));
 	
 	echo "<UL>";
-	echo "<LI><B><A HREF='mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3'>"._T('item_oui')."</A>,</B>"._T('info_oui_suppression_mot_cle');
-	echo "<LI><B><A HREF='mots_tous.php3'>"._T('item_non')."</A>,</B>"._T('info_non_suppression_mot_cle');
+	echo "<LI><B><A HREF='mots_edit.php3?supp_mot=$id_mot&redirect_ok=oui&redirect=mots_tous.php3'>"._T('item_oui')."</A>,</B> "._T('info_oui_suppression_mot_cle');
+	echo "<LI><B><A HREF='mots_tous.php3'>"._T('item_non')."</A>,</B> "._T('info_non_suppression_mot_cle');
 	echo "</UL>";
 	echo "</FONT>";
 	fin_boite_info();
@@ -277,22 +277,22 @@ while($row_groupes = spip_fetch_array($result_groupes)) {
 				if ($nb_articles[$id_mot] == 1)
 					$texte_lie[] = _T('info_1_article');
 				else if ($nb_articles[$id_mot] > 1)
-					$texte_lie[] = $nb_articles[$id_mot]._T('info_articles_02');
+					$texte_lie[] = $nb_articles[$id_mot]." "._T('info_articles_02');
 
 				if ($nb_breves[$id_mot] == 1)
 					$texte_lie[] = _T('info_1_breve');
 				else if ($nb_breves[$id_mot] > 1)
-					$texte_lie[] = $nb_breves[$id_mot]._T('info_breves_03');
+					$texte_lie[] = $nb_breves[$id_mot]." "._T('info_breves_03');
 
 				if ($nb_sites[$id_mot] == 1)
 					$texte_lie[] = _T('info_1_site');
 				else if ($nb_sites[$id_mot] > 1)
-					$texte_lie[] = $nb_sites[$id_mot]._T('info_sites');
+					$texte_lie[] = $nb_sites[$id_mot]." "._T('info_sites');
 
 				if ($nb_rubriques[$id_mot] == 1)
 					$texte_lie[] = _T('info_une_rubrique_02');
 				else if ($nb_rubriques[$id_mot] > 1)
-					$texte_lie[] = $nb_rubriques[$id_mot]._T('info_rubriques_02');
+					$texte_lie[] = $nb_rubriques[$id_mot]." "._T('info_rubriques_02');
 
 				echo $texte_lie = join($texte_lie,", ");
 				

@@ -105,7 +105,7 @@ function extrait_article($row) {
 
 	$extrait = "** $titre **\n";
 	if ($les_auteurs) $extrait .= _T('info_les_auteurs_1', array('les_auteurs' => $les_auteurs));
-	if ($statut == 'publie') $extrait .= _T('info_les_auteurs_2').nom_jour($date)." ".filtrer_entites(affdate($date));
+	if ($statut == 'publie') $extrait .= " "._T('info_les_auteurs_2')." ".nom_jour($date)." ".filtrer_entites(affdate($date));
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') $extrait .= "-> ".$adresse_site."/spip_redirect.php3?id_article=$id_article\n\n";
 	return $extrait;

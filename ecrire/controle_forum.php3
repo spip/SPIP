@@ -76,7 +76,7 @@ function forum_parent($id_forum) {
 			}
 
 			if ($forum_stat == "prive" OR $forum_stat == "privoff") {
-				return $retour."<B>"._T('item_reponse_article')."<A HREF='articles.php3?id_article=$id_article'>$titre</A></B>";
+				return $retour."<B>"._T('item_reponse_article')." <A HREF='articles.php3?id_article=$id_article'>$titre</A></B>";
 			}
 			else {
 				$retour .= "<a href='articles_forum.php3?id_article=$id_article'><font color='red'>"._T('lien_forum_public')."</font></a><br>";
@@ -124,13 +124,13 @@ function forum_parent($id_forum) {
 			$retour = forum_parent($forum_id_parent);
 			
 			if (strlen($retour)>0) return $retour;
-			else return "<B>"._T('info_message')."<A HREF='forum_admin.php3'>"._T('info_forum_administrateur')."</A></B>";
+			else return "<B>"._T('info_message')." <A HREF='forum_admin.php3'>"._T('info_forum_administrateur')."</A></B>";
 		}
 		else {
 			$retour = forum_parent($forum_id_parent);
 
 			if (strlen($retour)>0) return $retour;
-			else return "<B>"._T('info_message')."<A HREF='forum.php3'>"._T('info_forum_interne')."</A></B>";
+			else return "<B>"._T('info_message')." <A HREF='forum.php3'>"._T('info_forum_interne')."</A></B>";
 		}
 	}
 
