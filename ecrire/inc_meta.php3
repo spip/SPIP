@@ -49,7 +49,7 @@ function ecrire_metas() {
 
 	lire_metas();
 
-	$f = fopen("inc_meta_cache.php3", "w");
+	$f = fopen("inc_meta_cache.php3", "wb");
 	$s = '<?php
 
 if (defined("_ECRIRE_INC_META")) return;
@@ -92,6 +92,6 @@ function lire_meta_maj($nom) {
 }
 
 
-if (!$meta) lire_metas();
+if (!$GLOBALS['meta']) lire_metas();
 
 ?>
