@@ -266,7 +266,7 @@ function optimiser_referers() {
 
 	// Mise a jour des valeurs de referers et popularite
 	if (is_array($popularite_update)) {
-		// Normalisation avant (limiter l'influence des derniers arrivees)
+		// Normalisation avant (limiter l'influence des visites recentes)
 		if ($max < 100) $max = 100;
 
 		while (list($popularite, $articles) = each($popularite_update)) {

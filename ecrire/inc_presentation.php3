@@ -1947,14 +1947,11 @@ function fin_page() {
 <p>&nbsp;</p>
 <div align='right'><font face="Verdana,Arial,Helvetica,sans-serif" size='2'>
 <a href='http://www.uzine.net/spip'>SPIP <?php echo $spip_version_affichee; ?></a>
-est un logiciel libre distribu&eacute; <a href='licence.php3'>sous licence GPL.</a>
+est un logiciel libre distribu&eacute; <a href='copyright_fr.html'>sous licence GPL.</a>
 
 <?php
-if (ereg("index.php3$", $GLOBALS['REQUEST_URI'])) {
+if (ereg("index\.php3", $GLOBALS['REQUEST_URI']) || !ereg("\.php3", $GLOBALS['REQUEST_URI'])) {
 	echo "<br>Les icones de l'interface sont de <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>.";
-}
-if (ereg("statistiques(.*)\.php3$", $GLOBALS['REQUEST_URI'])) {
-	echo "<br>L'affichage des requ&ecirc;tes des moteurs de recherche est r&eacute;alis&eacute;<br>&agrave; partir d'un extrait du code de <a href='http://www.phpinfo.net/'>Visiteurs</a>, par Jean-Pierre D&eacute;z&eacute;lus.";
 }
 ?>
 </font></div>
