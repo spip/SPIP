@@ -156,9 +156,15 @@ function filtre_rester_connecte($prefs) {
 	return $prefs['cnx'] == 'perma' ? ' ' : '';
 }
 
-function silogoauteur($id_auteur) {
-	$f = _DIR_IMG . 'auton' . $id_auteur . '.jpg';
-	return (@file_exists($f) ? $f : '');
+// made in cherche_image_nommee. A partager.
+
+function silogoauteur($id_auteur, $formats = array ('gif', 'jpg', 'png')) {
+	reset($formats);
+	while (list(, $format) = each($formats)) {
+		$d = _DIR_IMG . "auton$id_auteur.$format";
+		if (@file_exists($d)) return $d;
+	}
+	return  '';
 }
 
 ?>
