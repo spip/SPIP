@@ -168,9 +168,11 @@ $exceptions_des_tables = array(
 				   ),
 	      'syndic_articles' => array(
 					 'url_article' => 'url',
-					 'lesauteurs' => 'lesauteurs'
+					 'lesauteurs' => 'lesauteurs',
+					 'url_site' => array('syndic', 'url_site'),
+					 'nom_site' => array('syndic', 'nom_site')
 					 )
-);
+	      );
 
 $table_date = array (
 	'articles' => "date",
