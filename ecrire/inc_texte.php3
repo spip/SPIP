@@ -540,6 +540,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			// texte vide ?
 			if ((!$lien_texte) and (!$lien_interne)) {
 				$lien_texte = ereg_replace('"', '', $lien_url);
+				if (strlen($lien_texte)>40)
+					$lien_texte = substr($lien_texte,0,35).'...';
 				$class_lien = "url";
 			}
 			// petites corrections d'URL

@@ -1307,14 +1307,9 @@ echo "\n\n<DIV align=justify>";
 
 if (substr($chapo, 0, 1) == '=') {
 	$adresse = substr($chapo, 1, strlen($chapo));
-	if (strlen($adresse)>60)
-		$chapo = substr($chapo, 1, 60)."...";
-	else
-		$chapo = $adresse;
 	debut_boite_info();
-	echo "<B>Redirection.</b> ";
-	echo "Cet article correspond &agrave; l'adresse&nbsp;:";
-	echo "<center><a href='$adresse' class='spip_out'>$chapo</a></center>";
+	echo propre("{{Redirection.}} Cet article correspond &agrave;
+	la page: <center>[->$adresse]</center>");
 	fin_boite_info();
 }
 else {
