@@ -128,8 +128,9 @@ $mysql_debug = false;
 $mysql_profile = false;
 
 // faut-il faire des connexions completes rappelant le nom du serveur et de
-// la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL)
-$mysql_rappel_connexion = false;
+// la base MySQL ? (utile si vos squelettes appellent d'autres bases MySQL ;
+// a desactiver en cas de soucis de connexion chez certains hebergeurs [??])
+$mysql_rappel_connexion = true;
 
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
