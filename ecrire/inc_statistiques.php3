@@ -164,6 +164,10 @@ function calculer_referers($date) {
 
 
 function calculer_visites($date = "") {
+
+	// calculer les popularites avant d'effacer les donnees
+	calculer_popularites();
+
 	// Date par defaut = hier
 	if (!$date) $date = date("Y-m-d", time() - 24 * 3600);
 
@@ -217,7 +221,7 @@ function calculer_visites($date = "") {
 
 
 //
-// Optimiser les informations liees aux referers (popularite...)
+// Optimiser les informations liees aux referers
 //
 
 function supprimer_referers($type = "") {
@@ -246,6 +250,7 @@ function supprimer_referers($type = "") {
 }
 
 
+/*
 function optimiser_referers($type = "") {
 	$popularite_update = "";
 	$diff = 7;
@@ -319,15 +324,70 @@ function optimiser_referers($type = "") {
 				$articles = join(",",$articles);
 				$query = "UPDATE spip_articles SET popularite = $popularite ".
 					"WHERE id_article IN ($articles)";
-
-if ($GLOBALS['populogarithme'] != 'oui') {
 				$result = spip_query($query);
-}
 			}
 		}		
 	}
 	supprimer_referers();
 	supprimer_referers("article");
+}
+*/
+
+
+//
+// Popularite, modele logarithmique
+//
+function calculer_popularites() {
+	$date = lire_meta('date_stats_popularite');
+	$duree = time() - $date;
+	$demivie = 3 * 24 * 60;	// en minutes
+	$a = 1-exp(log(0.5)/$demivie);
+	$b = $a * 60 * 24;
+
+	// oublier un peu le passe
+	spip_query("UPDATE spip_articles SET popularite = popularite*POW(1-$a,$duree/60)");
+
+
+	// ajouter les points visites
+	$count_article = Array();
+	$query = "SELECT COUNT(*) as count,id_objet FROM spip_visites_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
+	$res = spip_query($query);
+	while ($row = mysql_fetch_array($res)) {
+		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count visites
+	}
+
+	reset ($count_article);
+	while (list($count,$articles) = each($count_article)) {
+		$query = "UPDATE spip_articles
+			SET popularite = popularite + $b
+			WHERE id_article IN (0$articles)";
+		spip_query($query);
+	}
+
+	// ajouter les points referers
+	$count_article = Array();
+	$query = "SELECT COUNT(*) as count,id_objet FROM spip_referers_temp WHERE maj > DATE_SUB(NOW(), INTERVAL $duree SECOND) AND type='article' GROUP BY id_objet";
+	$res = spip_query($query);
+	while ($row = mysql_fetch_array($res)) {
+		$count_article[$row['count']] .= ','.$row['id_objet'];	// l'objet a count referers
+	}
+
+	reset ($count_article);
+	while (list($count,$articles) = each($count_article)) {
+		$query = "UPDATE spip_articles
+			SET popularite = popularite + $b
+			WHERE id_article IN (0$articles)";
+		spip_query($query);
+	}
+
+	// et enregistrer les metas...
+	include_ecrire("inc_meta.php3");
+	list($maxpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite) FROM spip_articles"));
+	list($totalpop) = mysql_fetch_array(spip_query("SELECT SUM(popularite) FROM spip_articles"));
+	ecrire_meta("popularite_max", $maxpop);
+	ecrire_meta("popularite_total", $totalpop);
+	ecrire_meta("date_stats_popularite", time());
+	ecrire_metas();
 }
 
 ?>

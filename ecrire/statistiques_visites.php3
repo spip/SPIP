@@ -99,7 +99,7 @@ debut_gauche();
 		while ($row = mysql_fetch_array($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
-			$popularite = $row['popularite'];
+			$popularite = ceil(min(100,100 * $row['popularite'] / max(1,lire_meta('popularite_max'))));
 			if ($l_article == $id_article){
 				echo "\n<li><b>$titre</b></li>";
 			} else {

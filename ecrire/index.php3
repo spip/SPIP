@@ -467,25 +467,6 @@ if (($date - $date_opt) > 24 * 3600) {
 	include ("optimiser.php3");
 }
 
-/*
-// Traitement des statistiques
-$date_stats = $meta['date_stats_process'];
-if (($date - $date_stats) > 24 * 3600) {
-	ecrire_meta("date_stats_process", "$date");
-	ecrire_metas();
-	include ("inc_statistiques.php3");
-	calculer_visites();
-}
-
-// Optimiser les referers
-$date_refs = $meta['date_stats_referers'];
-if (($date - $date_refs) > 24 * 3600) {
-	ecrire_meta("date_stats_referers", "$date");
-	ecrire_metas();
-	include ("inc_statistiques.php3");
-	optimiser_referers();
-}
-*/
 
 include_ecrire ("inc_mail.php3");
 include_ecrire ("inc_sites.php3");
