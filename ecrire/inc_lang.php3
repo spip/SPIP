@@ -20,7 +20,7 @@ function charger_langue($lang, $module='spip') {
 		// le francais, qui *par definition* doit exister, et on copie le
 		// tableau 'fr' dans la var liee a la langue
 		include_ecrire ("lang/${module}_fr.php3");
-		$GLOBALS["i18n__".$module.'_'.$lang] = $GLOBALS["i18n__".$module.'_'.'fr'];
+		$GLOBALS["i18n_".$module.'_'.$lang] = $GLOBALS["i18n_".$module.'_'.'fr'];
 	}
 
 	// surcharge perso
@@ -85,12 +85,12 @@ function traduire_chaine($code, $args) {
 	if (ereg("^([a-z]+):(.*)$", $code, $regs)) {
 		$module = $regs[1];
 		$code = $regs[2];
-		$var = "i18n__".$module."_".$spip_lang;
-	} else {
+	} else
 		$module = 'spip';
-		$var = "i18n_".$spip_lang;
-	}
+
+	$var = "i18n_".$module."_".$spip_lang;
 	if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
+
 	$text = $GLOBALS[$var][$code];
 
 	if (!is_array($args)) return $text;

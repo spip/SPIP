@@ -2,7 +2,7 @@
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
 
-$GLOBALS['i18n_ar'] = array(
+$GLOBALS['i18n_spip_ar'] = array(
 
 
 // 0
