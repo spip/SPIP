@@ -152,6 +152,8 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 $texte = $texte_ajout . $texte;
 
 if ($titre && !$ajout_forum && $flag_editable) {
+	if (strlen($virtuel) > 0 AND $confirme_virtuel == "oui") $chapo = "=$virtuel";
+
 	$surtitre = addslashes(corriger_caracteres($surtitre));
 	$titre = addslashes(corriger_caracteres($titre));
 	$soustitre = addslashes(corriger_caracteres($soustitre));
@@ -1217,7 +1219,7 @@ echo "\n\n<DIV align=justify>";
 if (substr($chapo, 0, 1) == '=') {
 	$chapo = substr($chapo, 1, strlen($chapo));
 	debut_boite_info();
-	echo "<B>Article virtuel.</b> ";
+	echo "<B>Redirection.</b> ";
 	echo "Cet article correspond &agrave; l'adresse&nbsp;:";
 	echo "<center>$chapo</center>";
 	fin_boite_info();

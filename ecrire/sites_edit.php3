@@ -25,11 +25,14 @@ function premiere_rubrique(){
 
 }
 
-function enfant($leparent) {
+function enfant($leparent){
 	global $id_parent;
 	global $id_rubrique;
 	global $i;
 	global $statut;
+	global $connect_toutes_rubriques;
+	global $connect_id_rubriques;
+	global $couleur_claire;
 	
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
@@ -38,6 +41,8 @@ function enfant($leparent) {
 	while($row=mysql_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
+		$statut_rubrique=$row['statut'];
+		$style = "";
 
 		// si l'article est publie il faut etre admin pour avoir le menu
 		// sinon le menu est present en entier (proposer un article)
@@ -48,18 +53,26 @@ function enfant($leparent) {
 		}
 
 		$espace="";
-		for ($count=0;$count<$i;$count++){$espace.="&nbsp;&nbsp;";}
-		$espace .= "|";
-		if ($i==1)
-			$espace = "*";
+		for ($count=1;$count<$i;$count++){
+			$espace.="&nbsp;&nbsp;&nbsp; ";
+		}
+		if ($i > 3) $style .= "color: #666666;";
+		if ($i > 4) $style .= "font-style: italic;";
+		if ($i < 3) $style .= "font-weight:bold; ";
+		if ($i==1) {
+			$espace= "";
+			$style .= "background-color: $couleur_claire;";
+		}
+		if ($statut_rubrique!='publie') $titre = "($titre)";
 
 		if ($rubrique_acceptable) {
-			echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$espace $titre\n";
+			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
 		}
 		enfant($my_rubrique);
 	}
 	$i=$i-1;
 }
+
 
 $proposer_sites = lire_meta("proposer_sites");
 
@@ -180,7 +193,7 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 
 	debut_cadre_relief("$logo_parent");
 	echo "<b>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</b><br>\n";
-	echo "<select name='id_rubrique' class='forml' size=1>\n";
+	echo "<select name='id_rubrique' style='background-color:#ffffff; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' size=1>\n";
 	enfant(0);
 	echo "</select><p>\n";
 	fin_cadre_relief();
