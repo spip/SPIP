@@ -732,6 +732,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   permet de gagner un peu de temps chez les hergeurs nazes */
 		$letexte = ereg_replace("(^|\n)(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
+		$letexte = ereg_replace("\n-- *", "\n<br />&mdash&nbsp;",$letexte);
 		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
 		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
@@ -751,6 +752,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$cherche1 = array(
 			/* 0 */ 	"/(^|\n)(----+|____+)/",
 			/* 1 */ 	"/^- */",
+			/* 1bis */ 	"/\n-- */",
 			/* 2 */ 	"/\n- */",
 			/* 3 */ 	"/\n_ +/",
 			/* 4 */ 	"/(( *)\n){2,}/",
@@ -770,6 +772,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$remplace1 = array(
 			/* 0 */ 	"@@SPIP_ligne_horizontale@@",
 			/* 1 */ 	"$puce&nbsp;",
+			/* 1bis */ 	"\n<br />&mdash;&nbsp;",
 			/* 2 */ 	"\n<br />$puce&nbsp;",
 			/* 3 */ 	"\n<br />",
 			/* 4 */ 	"\n<p>",
