@@ -239,7 +239,7 @@ $flag_strtr2 = ($php_version_maj > 3);
 
 $flag_ini_get = (function_exists("ini_get")
 	&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
-$flag_gz = function_exists("gzopen");
+$flag_gz = function_exists("gzencode"); #php 4.0.4
 $flag_ob = ($flag_ini_get
 	&& !ereg("ob_", ini_get('disable_functions'))
 	&& function_exists("ob_start"));
