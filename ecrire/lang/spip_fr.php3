@@ -1044,7 +1044,7 @@ les images utilis&eacute;es dans les articles et les rubriques.',
 'texte_admin_tech_02' => 'Attention: cette sauvegarde ne pourra &ecirc;tre restaur&eacute;e
 	QUE dans un site install&eacute; sous la m&ecirc;me version de SPIP. L\'erreur
 	consistant &agrave; faire une sauvegarde avant de faire une mise &agrave; jour
-	de SPIP est courante... Pour plus de d&eacute;tails consultez [la documentation de SPIP->http://www.uzine.net/article1489.html].',
+	de SPIP est courante... Pour plus de d&eacute;tails consultez <a href="http://www.uzine.net/article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d\'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d\'&eacute;conomiser de l\'espace disque.',
 'texte_adresse_annuaire_1' => '(Si votre annuaire est install&eacute; sur la m&ecirc;me machine que ce site Web, il s\'agit ',
