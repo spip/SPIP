@@ -1149,7 +1149,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 	global $couleur_foncee;
 	global $connect_id_auteur, $connect_activer_messagerie;
 	global $mots_cles_forums;
-	global $spip_lang_rtl;
+	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 
 	$activer_messagerie = "oui";
 
@@ -1204,6 +1204,24 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 			echo "\n<td width=100% valign='top'>";
 
+		if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+			include_ecrire("inc_logos.php3");
+			$logo = get_image("auton$id_auteur");
+			if ($logo) {
+				$fichier = $logo[0];
+				$taille = $logo[1];
+				$taille_x = $taille[0];
+				$taille_y = $taille[1];
+				$taille = image_ratio($taille_x, $taille_y, 48, 48);
+				$w = $taille[0];
+				$h = $taille[1];
+				$fid = $logo[2];
+				$hash = calculer_action_auteur ("reduire $w $h");
+
+				$titre = "<div style='float: $spip_lang_right; margin: 0px; margin-$spip_lang_left: 3px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".$titre;
+				
+			}
+		}
 
 			if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre));
 			else echo debut_cadre_thread_forum("", false, "", typo($titre));
@@ -1216,6 +1234,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			else if ($statut=="prop") {
 				echo "<div style='border: 1px solid yellow; padding: 5px;'>";
 			}
+		
+		
 		
 		echo "<span class='arial2'>";
 		//	echo affdate_court($date_heure);
