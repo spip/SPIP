@@ -249,11 +249,16 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 			}
 		}
 	}
-	// tris par critere bizarre
+	// tris specifies par l'URL
 	// (formule composee, virgules, etc).
-	// autoriser le hack {par $GLOBALS["tri"]}
-	else
-		$boucle->order = "\"$tri\"";
+	//  hack {par $GLOBALS["tri"]} obsolete; utiliser #HTTP_VARS{tri}
+	elseif ($tri[0] == '$') 
+		$boucle->order = $tri;
+	else {
+		$a = calculer_param_dynamique($tri, $boucles, $idb);
+		if (ereg('" \. *addslashes(.*)\. "', $a, $m)) $a = $m[1];
+		$boucle->order = $a;
+	}
 }
 
 
