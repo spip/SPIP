@@ -1440,7 +1440,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire ("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
 			bandeau_barre_verticale();
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "suivi-petition", $sous_rubrique);
+			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
 		}
 	}
 	else if ($rubrique == "administration"){
