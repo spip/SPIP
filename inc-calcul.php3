@@ -9,6 +9,7 @@ define("_INC_CALCUL", "1");
 // Ce fichier calcule une page en executant un squelette.
 //
 
+include_ecrire("inc_meta.php3");
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");

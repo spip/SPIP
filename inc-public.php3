@@ -29,9 +29,6 @@ else {
 	if ($recherche)
 		$delais = 0;
 
-	// les meta
-	include_ecrire("inc_meta.php3");
-
 	// authentification du visiteur
 	if ($HTTP_COOKIE_VARS['spip_session'] OR
 	($PHP_AUTH_USER AND !$ignore_auth_http)) {
