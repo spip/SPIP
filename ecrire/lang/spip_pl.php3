@@ -367,6 +367,7 @@ Dzi&#281;kujemy za uczestnictwo
 'icone_auteurs' => 'Autorzy',
 'icone_breves' => 'Newsy',
 'icone_calendrier' => 'Kalendarz',
+'icone_calendrier_messagerie' => 'Kalendarz',
 'icone_configuration_site' => 'Konfiguracja strony',
 'icone_configurer_site' => 'Konfiguruj swoj&#261; stron&#281;',
 'icone_creation_groupe_mots' => 'Utw&oacute;rz now&#261; grup&#281; s&#322;&oacute;w kluczowych',
@@ -575,7 +576,6 @@ Dzi&#281;kujemy za uczestnictwo
 'info_dimension' => 'Rozmiar:',
 'info_discussion_cours' => 'Dyskusja w toku',
 'info_document' => 'Dokument',
-'info_donner_rendez_vous' => 'Ten przycisk pozwala Tobie um&oacute;wi&#263; spotkanie z innym uczestnikiem.',
 'info_echange_message' => 'SPIP pozwala na wymian&#281; wiadomo&#347;ci i utworzenie Forum dyskusyjnego
   prywatnie pomi&#281;dzy u&#380;ytkownikami tej strony. Mo&#380;esz w&#322;&#261;czy&#263; lub wy&#322;&#261;czy&#263;
   t&#281; funkcj&#281;.',
@@ -750,7 +750,6 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_notes' => 'Notatki',
 'info_nouveau' => '(Nowy)',
 'info_nouveau_message' => 'MASZ NOW&#260; WIADOMO&#346;&#262;',
-'info_nouveau_pense_bete' => 'Ten przycisk pozwala Ci utworzy&#263; now&#261; notatk&#281; osobist&#261;.',
 'info_nouveaux_message' => 'Nowe wiadomo&#347;ci',
 'info_nouveaux_messages' => 'MASZ @total_messages@ NOWYCH WIADOMO&#346;CI',
 'info_nouvel_article' => 'Nowy artyku&#322;',

@@ -367,6 +367,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Br&egrave;vas',
 'icone_calendrier' => 'Calendi&egrave;r',
+'icone_calendrier_messagerie' => 'Agenda',
 'icone_configuration_site' => 'Configuracion del sit',
 'icone_configurer_site' => 'Configurar v&ograve;stre sit',
 'icone_creation_groupe_mots' => 'Crear un nov&egrave;l grop de mots',
@@ -564,7 +565,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_dimension' => 'Dimensions&nbsp;:',
 'info_discussion_cours' => 'Discussions en cors',
 'info_document' => 'Document ',
-'info_donner_rendez_vous' => 'Aquel boton vos permet de donar un rend&egrave;tz-vos a un autre participant.',
 'info_echange_message' => 'SPIP permet d\'escambiar de messatges e de constituir de forums privats de discussion entre los participants del sit. Pod&egrave;tz activar o desactivar aquela foncionalitat.',
 'info_ecire_message_prive' => 'Escriure un messatge privat',
 'info_ecrire_article' => 'Abans de poder escriure d\'articles, vos cal crear almens una rubrica.',
@@ -726,7 +726,6 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_notes' => 'N&ograve;tas',
 'info_nouveau' => '(N&ograve;u)',
 'info_nouveau_message' => 'AV&Egrave;TZ UN MESSATGE N&Ograve;U',
-'info_nouveau_pense_bete' => 'Aquel boton vos permet de crear una n&ograve;ta de remembran&ccedil;a personala.',
 'info_nouveaux_message' => 'Messatges n&ograve;us',
 'info_nouveaux_messages' => 'AV&Egrave;TZ @total_messages@ MESSATGES N&Ograve;US',
 'info_nouvel_article' => 'Article n&ograve;u',
@@ -1599,6 +1598,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
+
 
 );
 

@@ -367,6 +367,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Br&egrave;vas',
 'icone_calendrier' => 'Calend&egrave;r',
+'icone_calendrier_messagerie' => 'Agenda',
 'icone_configuration_site' => 'Configuracion deu sit',
 'icone_configurer_site' => 'Configurar lo v&ograve;ste sit',
 'icone_creation_groupe_mots' => 'Crear un nav&egrave;th grop de mots',
@@ -564,7 +565,6 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_dimension' => 'Dimensions:',
 'info_discussion_cours' => 'Discussions en cors',
 'info_document' => 'Document ',
-'info_donner_rendez_vous' => 'Aqueth boton que\'vs permet de dar un rendetz-vse a un aute participant.',
 'info_echange_message' => 'SPIP que permet d\'escambiar messatges e de constituir forums privats de discussion entre los participants deu sit. Que podetz activar o desactivar aquera foncionalitat.',
 'info_ecire_message_prive' => 'Escr&iacute;ver un messatge privat',
 'info_ecrire_article' => 'Abans de poder escr&iacute;ver articles, que\'vs cau crear aumensh ua rubrica.',
@@ -726,7 +726,6 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_notes' => 'N&ograve;tas',
 'info_nouveau' => '(Nau)',
 'info_nouveau_message' => 'QU\'AVETZ UN MESSATGE NAU',
-'info_nouveau_pense_bete' => 'Aqueth boton que\'vs permet de crear ua n&ograve;ta de remembran&ccedil;a personau.',
 'info_nouveaux_message' => 'Messatges naus',
 'info_nouveaux_messages' => 'QU\'AVETZ @total_messages@ MESSATGES NAUS',
 'info_nouvel_article' => 'Article nau',
@@ -1598,6 +1597,7 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
+
 
 );
 

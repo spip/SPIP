@@ -10,8 +10,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles' => 'Art&iacute;culos',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s populares',
 'articles_recents' => 'Los art&iacute;culos m&aacute;s recientes',
+'aucun_article' => '<NEW> Il n\'y a pas d\'article &agrave; cette adresse',
+'aucun_auteur' => '<NEW> Il n\'y a pas d\'auteur &agrave; cette adresse',
+'aucun_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
+'aucune_breve' => '<NEW> Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
+'aucune_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
 'autres_breves' => 'Otros breves',
 'autres_groupes_de_mots_clefs' => 'Otros grupos de palabras claves',
+'autres_groupes_mots_clefs' => '<NEW> Autres groupes de mots-cl&eacute;s',
 'autres_sites' => 'Otros sitios',
 
 
@@ -32,12 +38,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'derniers_articles' => '&Uacute;ltimos art&iacute;culos',
 'derniers_commentaires' => '&Uacute;ltimos comentarios',
 'derniers_messages_des_forums' => '&Uacute;ltimos mensajes publicados en los foros',
+'derniers_messages_forum' => '<NEW> Derniers messages publi&eacute;s dans les forums',
 
 
 // E
 'edition_mode_texte' => 'Edici&oacute;n en modo texto de',
 'en_reponse' => '<NEW> En r&eacute;ponse &agrave;&nbsp;:',
 'en_resume' => '<NEW> En r&eacute;sum&eacute;',
+'envoyer_message' => '<NEW> Envoyer un message',
 'envoyer_un_message' => '<NEW> Envoyer un message',
 'espace_prive' => '<NEW> Espace priv&eacute;',
 
@@ -56,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // M
 'meme_auteur' => '<NEW> Du m&ecirc;me auteur',
+'meme_rubrique' => '<NEW> Dans la m&ecirc;me rubrique',
 'memes_auteurs' => '<NEW> Des m&ecirc;mes auteurs',
 'message' => '<NEW> Message',
 'messages_forum' => '<NEW> Messages de forum',
@@ -82,7 +91,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
 'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
 'plan_du_site' => 'Plan del sitio',
+'plan_site' => '<NEW> Plan du site',
 'popularite' => '<NEW> Popularit&eacute;',
+'poster_message' => '<NEW> Poster un message',
 'poster_un_message' => '<NEW> Poster un message',
 
 
@@ -108,17 +119,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
+'test' => 'nada',
+'test2' => 'vaciiiio',
 'texte_lettre_information' => '<NEW> Voici la lettre d\'information du site',
 'texte_lettre_information_2' => '<NEW> Cette lettre recense les articles et les br&egrave;ves publi&eacute;s depuis',
 
 
 // V
-'voir_en_ligne' => '<NEW> Voir en ligne',
-
-
-// CONFLIT
-'test' => 'nada',
-'test2' => 'vaciiiio'
+'voir_en_ligne' => '<NEW> Voir en ligne'
 
 );
 
