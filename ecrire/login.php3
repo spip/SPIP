@@ -20,14 +20,24 @@ function ask_php_auth($text_failure) {
 if (ereg("^@(.*)$", $spip_admin, $regs)) $login = $regs[1];
 else $login = "";
 
-// si le cookie n'est pas la, c'est qu'ils ne sont pas actives
-if ($essai_cookie == "oui") {
-	if (! verifier_session($spip_session)) { // tente une auth http
-		if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
-			@header("Location: ./index.php3");
-			exit;
-		} else
-			ask_php_auth("Connexion refus&eacute;e...");
+
+// tentative de connexion en auth http
+if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
+	@header("Location: ./index.php3");
+	exit;
+}
+else if ($essai_auth_http == "oui") {
+	ask_php_auth("Connexion refus&eacute;e...");
+	exit;
+}
+else if ($essai_cookie == "oui") {
+	if (! verifier_session($spip_session)) {
+		install_debut_html("$nom_site : probl&egrave;me de cookie");
+		echo "<p>La m&eacute;thode pr&eacute;f&eacute;r&eacute;e de spip pour l'authentification implique
+			que vous acceptiez les cookies. Vous pouvez r&eacute;gler votre navigateur
+			pour qu'il les accepte (au moins pour ce site).
+			<a href='./login.php3?essai_auth_http=oui'>Sinon cliquez ici pour tenter
+			une autre m&eacute;thode de connexion (par http).</a>";
 	} else {
 		@header("Location: ./index.php3");   // connecte
 		exit;
