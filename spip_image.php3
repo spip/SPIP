@@ -294,7 +294,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	$gd_formats = lire_meta("gd_formats");
 	$format_img = strtolower(substr($dest_path, strrpos($dest_path,".")+1, strlen($dest_path)));
 	if ($format_img == "jpeg") $format_img == "jpg";
-	
+
 	if ($taille_preview < 10) $taille_preview = 120;
 
 	if ($mode == 'document' AND $format_img AND ereg($format_img, $gd_formats) AND $creer_preview == 'oui') {
@@ -345,11 +345,11 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		spip_query($query);
 		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 	}
-	
+
 	if ($doc_vignette){
 		$query = "UPDATE spip_documents SET id_vignette=$doc_vignette, titre='', descriptif='' WHERE id_document=$id_document";
 		spip_query($query);
-	
+
 	}
 
 
