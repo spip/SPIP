@@ -253,7 +253,13 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 function inclure_formulaire($r) {
 	if (is_string($r))
 	echo $r;
-	else { list($fond, $delais, $contexte_inclus) = $r; include('inc-public.php3'); }
+	else {
+		list($fond, $delais, $contexte_inclus) = $r;
+		if ((!$contexte_inclus['lang']) AND
+		    ($GLOBALS['spip_lang'] != lire_meta('langue_site')))
+			$contexte_inclus['lang'] = $GLOBALS['spip_lang']; 
+		include('inc-public.php3');
+	}
 }
 
 //
