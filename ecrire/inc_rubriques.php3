@@ -44,7 +44,7 @@ function calculer_rubriques() {
 	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
 	FROM spip_rubriques AS rub, spip_articles AS fille
 	WHERE rub.id_rubrique = fille.id_rubrique AND fille.statut='publie'
-	$postdates GROUP BY fille.id_rubrique");
+	$postdates GROUP BY rub.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
 		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
@@ -56,7 +56,7 @@ function calculer_rubriques() {
 	FROM spip_rubriques AS rub, spip_breves AS fille
 	WHERE rub.id_rubrique = fille.id_rubrique
 	AND rub.date_tmp <= fille.date_heure AND fille.statut='publie'
-	GROUP BY fille.id_rubrique");
+	GROUP BY rub.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
 		SET statut_tmp='publie', date_tmp='".$row['date']."'
@@ -66,7 +66,8 @@ function calculer_rubriques() {
 	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
 	FROM spip_rubriques AS rub, spip_syndic AS fille
 	WHERE rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date
-	AND fille.statut='publie' GROUP BY fille.id_rubrique");
+	AND fille.statut='publie'
+	GROUP BY rub.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
 		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
@@ -78,7 +79,7 @@ function calculer_rubriques() {
 	spip_documents_rubriques AS lien
 	WHERE rub.id_rubrique = lien.id_rubrique
 	AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date
-	GROUP BY lien.id_rubrique");
+	GROUP BY rub.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
 		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
@@ -95,7 +96,7 @@ function calculer_rubriques() {
 		WHERE rub.id_rubrique = fille.id_parent
 		AND (rub.date_tmp < fille.date_tmp OR rub.statut_tmp<>'publie')
 		AND fille.statut_tmp='publie'
-		GROUP BY fille.id_parent");
+		GROUP BY rub.id_rubrique");
 		while ($row = spip_fetch_array($r)) {
 			spip_query("UPDATE spip_rubriques
 			SET statut_tmp='publie', date_tmp='".$row['date_h']."'
