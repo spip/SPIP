@@ -52,85 +52,116 @@ function bouton_imessage($destinataire, $row = '') {
 // un cadre en relief
 //
 function debut_cadre_relief($icone='', $return = false, $fonction=''){
-	if (strlen($icone)<3) $icone = "rien.gif";
-		$retour.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
-		$retour.= "<tr>";
-		$retour.= "<td width='5'><img src='img_pack/rond-hg-24.gif' alt='/' width='5' height='24'></td>";
-		$retour.= "<td background='img_pack/rond-h-24.gif'>";
-		if (strlen($fonction)>3) {
-			$retour.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='\' width='24' height='24'></td></tr></table>";
-		}
-		else {
-			$retour.= "<img src='img_pack/$icone' alt='\' width='24' height='24'>";
-		}
-		$retour.= "</td>";
-		$retour.= "<td width='5'><img src='img_pack/rond-hd-24.gif' alt='/' width='5' height='24'></td>";
-		$retour.= "</tr>";
+	global $spip_display;
+	if ($spip_display != 1){	
 
-	$retour.= "<TR>";
-	$retour.= "<td background='img_pack/rond-g.gif' width='5'><img src='img_pack/rien.gif' alt='/' width='5' height='5'></td>";
-	$retour.= "<TD WIDTH=\"100%\">";
-	$retour.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD BGCOLOR='#ffffff' WIDTH=\"100%\">";
-
-	if ($return) return $retour;
-	else echo $retour;
+		if (strlen($icone)<3) $icone = "rien.gif";
+			$retour.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
+			$retour_aff.= "<tr>";
+			$retour_aff.= "<td width='5'><img src='img_pack/rond-hg-24.gif' alt='/' width='5' height='24'></td>";
+			$retour_aff.= "<td background='img_pack/rond-h-24.gif'>";
+			if (strlen($fonction)>3) {
+				$retour_aff.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='\' width='24' height='24'></td></tr></table>";
+			}
+			else {
+				$retour_aff.= "<img src='img_pack/$icone' alt='\' width='24' height='24'>";
+			}
+			$retour_aff.= "</td>";
+			$retour_aff.= "<td width='5'><img src='img_pack/rond-hd-24.gif' alt='/' width='5' height='24'></td>";
+			$retour_aff.= "</tr>";
+	
+		$retour_aff.= "<TR>";
+		$retour_aff.= "<td background='img_pack/rond-g.gif' width='5'><img src='img_pack/rien.gif' alt='/' width='5' height='5'></td>";
+		$retour_aff.= "<TD WIDTH=\"100%\">";
+		$retour_aff.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD BGCOLOR='#ffffff' WIDTH=\"100%\">";
+	}
+	else {
+		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'><div style='border: 1px solid #666666; padding: 5px;'>";
+	}
+	
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+		
 }
 
 function fin_cadre_relief($return = false){
-	$retour.= "</TD></TR></TABLE>";
-	$retour.= "</TD>";
-	$retour.= "<td background='img_pack/rond-d.gif' width='5'><img src='img_pack/rien.gif' alt='\' width='5' height='5'></td>";
-	$retour.= "<tr>";
-	$retour.= "<td width='5'><img src='img_pack/rond-bg.gif' alt='\' width='5' height='5'></td>";
-	$retour.= "<td background='img_pack/rond-b.gif'><img src='img_pack/rien.gif' alt='-' width='5' height='5'></td>";
-	$retour.= "<td width='5'><img src='img_pack/rond-bd.gif' alt='/' width='5' height='5'></td>";
-	$retour.= "</tr>";
-	$retour.= "<tr><td></td><td bgcolor='#bbbbbb'><img src='img_pack/rien.gif' alt='\' width='5' height='1'></td></tr>";
-	$retour.= "<tr><td><img src='img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
-	$retour.= "</table>";
-	if ($return) return $retour;
-	else echo $retour;
+	global $spip_display;
+	if ($spip_display != 1){	
+
+		$retour_aff.= "</TD></TR></TABLE>";
+		$retour_aff.= "</TD>";
+		$retour_aff.= "<td background='img_pack/rond-d.gif' width='5'><img src='img_pack/rien.gif' alt='\' width='5' height='5'></td>";
+		$retour_aff.= "<tr>";
+		$retour_aff.= "<td width='5'><img src='img_pack/rond-bg.gif' alt='\' width='5' height='5'></td>";
+		$retour_aff.= "<td background='img_pack/rond-b.gif'><img src='img_pack/rien.gif' alt='-' width='5' height='5'></td>";
+		$retour_aff.= "<td width='5'><img src='img_pack/rond-bd.gif' alt='/' width='5' height='5'></td>";
+		$retour_aff.= "</tr>";
+		$retour_aff.= "<tr><td></td><td bgcolor='#bbbbbb'><img src='img_pack/rien.gif' alt='\' width='5' height='1'></td></tr>";
+		$retour_aff.= "<tr><td><img src='img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
+		$retour_aff.= "</table>";
+
+	}
+	else {
+		$retour_aff = "</div></div></p>\n";
+	}
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
 }
 
 
 function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
-	if (strlen($icone)<3) $icone = "rien.gif";
-		$retour.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
-		$retour.= "<tr>";
-		$retour.= "<td width='5'><img src='img_pack/cadre-hg.gif' alt='/' width='5' height='24'></td>";
-		$retour.= "<td background='img_pack/cadre-h.gif'>";
-		if (strlen($fonction)>3) {
-			$retour.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='' width='24' height='24'></td></tr></table>";
-		}
-		else {
-			$retour.= "<img src='img_pack/$icone' alt='' width='24' height='24'>";
-		}
-		$retour.= "</td>";
-		$retour.= "<td width='5'><img src='img_pack/cadre-hd.gif' alt='\' width='5' height='24'></td>";
-		$retour.= "</tr>";
+	global $spip_display;
 
-	$retour.= "<TR>";
-	$retour.= "<td background='img_pack/cadre-g.gif' width='5'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
-	$retour.= "<TD WIDTH=\"100%\" bgcolor='#e0e0e0' background=''>";
-	$retour.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD WIDTH=\"100%\">";
-
-	if ($return) return $retour;
-	else echo $retour;
+	if ($spip_display != 1){	
+		if (strlen($icone)<3) $icone = "rien.gif";
+			$retour_aff.= "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=\"100%\">";
+			$retour_aff.= "<tr>";
+			$retour_aff.= "<td width='5'><img src='img_pack/cadre-hg.gif' alt='/' width='5' height='24'></td>";
+			$retour_aff.= "<td background='img_pack/cadre-h.gif'>";
+			if (strlen($fonction)>3) {
+				$retour_aff.= "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$icone'><img src='img_pack/$fonction' alt='' width='24' height='24'></td></tr></table>";
+			}
+			else {
+				$retour_aff.= "<img src='img_pack/$icone' alt='' width='24' height='24'>";
+			}
+			$retour_aff.= "</td>";
+			$retour_aff.= "<td width='5'><img src='img_pack/cadre-hd.gif' alt='\' width='5' height='24'></td>";
+			$retour_aff.= "</tr>";
+	
+		$retour_aff.= "<TR>";
+		$retour_aff.= "<td background='img_pack/cadre-g.gif' width='5'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
+		$retour_aff.= "<TD WIDTH=\"100%\" bgcolor='#e0e0e0' background=''>";
+		$retour_aff.= "<TABLE CELLPADDING=3 CELLSPACING=0 BORDER=0 WIDTH=\"100%\"><TR><TD WIDTH=\"100%\">";
+	}
+	else {
+		$retour_aff = "<p><div style=\"border: 1px solid #333333; background-color: #e0e0e0;\"><div style=\"padding: 5px; left-right: 1px solid #999999; border-top: 1px solid #999999;\">";
+	}
+	
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
 }
 
 function fin_cadre_enfonce($return = false){
-	$retour.= "</TD></TR></TABLE>";
-	$retour.= "</TD>";
-	$retour.= "<td background='img_pack/cadre-d.gif' width='5'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
-	$retour.= "<tr>";
-	$retour.= "<td width='5'><img src='img_pack/cadre-bg.gif' alt='\' width='5' height='5'></td>";
-	$retour.= "<td background='img_pack/cadre-b.gif'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
-	$retour.= "<td width='5'><img src='img_pack/cadre-bd.gif' alt='/' width='5' height='5'></td>";
-	$retour.= "</tr>";
-	$retour.= "<tr><td><img src='img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
-	$retour.= "</table>";
-	if ($return) return $retour;
-	else echo $retour;
+	global $spip_display;
+	if ($spip_display != 1){	
+		$retour_aff.= "</TD></TR></TABLE>";
+		$retour_aff.= "</TD>";
+		$retour_aff.= "<td background='img_pack/cadre-d.gif' width='5'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
+		$retour_aff.= "<tr>";
+		$retour_aff.= "<td width='5'><img src='img_pack/cadre-bg.gif' alt='\' width='5' height='5'></td>";
+		$retour_aff.= "<td background='img_pack/cadre-b.gif'><img src='img_pack/rien.gif' alt='' width='5' height='5'></td>";
+		$retour_aff.= "<td width='5'><img src='img_pack/cadre-bd.gif' alt='/' width='5' height='5'></td>";
+		$retour_aff.= "</tr>";
+		$retour_aff.= "<tr><td><img src='img_pack/rien.gif' alt='' width='5' height='4'></td></tr>";
+		$retour_aff.= "</table>";
+	}
+	else {
+		$retour_aff = "</div></div></p>\n";
+	}
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
 }
 
 
@@ -939,8 +970,16 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$largeur = 80;
 	}
 
+	if (eregi("^javascript:",$lien)){
+		$java_lien = substr($lien, 11, strlen($lien));
+		$onClick = " onClick=\"$java_lien\"";
+	}
+	else {
+		$onClick = " onClick=\"document.location='$lien'\"";
+	}
+
 	if ($rubrique_icone == $rubrique){
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\" onClick=\"document.location='$lien'\">";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgrison\" $onClick>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -954,7 +993,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr></table>";
 	} 
 	else {
-		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"document.location='$lien'\">";
+		echo "\n<table cellpadding=0 cellspacing=0 border=0 class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
 		echo "<tr><td background=''>";
 		echo "<img src='img_pack/rien.gif' alt='' width=$largeur height=1>";
 		echo "</td></tr>";
@@ -1087,9 +1126,15 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"iconeimpoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeimpoff');\" onClick=\"document.location='$lien'\">";
 	else
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
-	echo "<tr><td background='' align='left' valign='middle' width=$largeur height=$hauteur>";
+
+	echo "<tr>";
+	
+	echo "<td background='' align='left' valign='middle' width=$largeur height=$hauteur>";
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr><td background='' align='center'>";
+	echo "<tr>";
+		
+	if ($spip_display != 1){	
+		echo "<td background='' align='center'>";
 		if ($fonction != "rien.gif"){
 			echo "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
 			echo "<a href='$lien'><img src='img_pack/$fonction' alt='' $title width='24' height='24' border='0'></a>";
@@ -1101,14 +1146,15 @@ function icone_horizontale($texte, $lien, $fond, $fonction="", $important=false)
 			echo "</td></tr></table>\n";
 		}
 		echo "</td>";
+	}
 
 		echo "<td background=''>";
 		echo "<img src='img_pack/rien.gif' alt='' width=5 height=1>";
 		echo "</td>";
 
-		echo "<td background='' align='left'>";
-		echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='#666666'><b>$texte</b></font></a>";
-		echo "</td></tr>";
+	echo "<td background='' align='left'>";
+	echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='#666666'><b>$texte</b></font></a>";
+	echo "</td></tr>";
 
 	echo "</table>";
 	echo "</td></tr>";
@@ -1203,8 +1249,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</font></td>";
 	//bandeau_barre_verticale();
 	echo "<td background=''>";
-		//icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);", "aide-48.gif");
-		echo "<table cellpadding=0 cellspacing=0 border=0 class='fondgris' onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\"><tr><td background=''><img src='img_pack/rien.gif' width=52 height=1></td></tr><tr><td background='' align='center' width='52' height='50'><a href=\"javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\"><img src='img_pack/aide-48.gif' alt='Aide en ligne'  title =\"Aide en ligne\"  border='0'></a><br></td></tr></table>";
+		icone_bandeau_principal ("Aide en ligne", "javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);", "aide-48.gif");
+		//echo "<table cellpadding=0 cellspacing=0 border=0 class='fondgris' onMouseOver=\"changeclass(this,'fondgrison');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\"><tr><td background=''><img src='img_pack/rien.gif' width=52 height=1></td></tr><tr><td background='' align='center' width='52' height='50'><a href=\"javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\"><img src='img_pack/aide-48.gif' alt='Aide en ligne'  title =\"Aide en ligne\"  border='0'></a><br></td></tr></table>";
 
 
 	echo "</td>";
