@@ -165,6 +165,12 @@ else {
 // envoyer la page
 if (file_exists($chemin_cache) && ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'HEAD')) {
 	include($chemin_cache);
+} else {
+	// message d'erreur base de donnees
+	include_ecrire('inc_presentation.php3');
+	install_debut_html(_T('info_travaux_titre'));
+	echo "<p>"._T('titre_probleme_technique')."</p>\n";
+	install_fin_html();
 }
 
 
