@@ -1191,7 +1191,7 @@ function debut_entete($title)
 	  "<head>\n" .
 #	  "<base href='$base' />\n" . # + tard
 	  "<title>$title</title>\n" .
-	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset'>\n";
+	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
 
 ?>

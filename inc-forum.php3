@@ -381,8 +381,9 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	$lacible = "
 	include_local('inc-forum.php3');
 	lang_select(\$GLOBALS['spip_lang']);
-	echo retour_forum('$idr','$idf','$ida','$idb','$ids','".texte_script($titre)."',
-	'".$table."', '".$accepter_forum."', '".$url."', \"
+	echo retour_forum('$idr','$idf','$ida','$idb','$ids','".
+	  texte_script($titre).
+	  "','".$table."', '".$accepter_forum."', '".$url."', \"
 	<input type='hidden' name='retour' value='".$retour_forum."' />
 	<input type='hidden' name='ajout_forum' value='oui' />
 	";
@@ -396,7 +397,7 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 		if (\$GLOBALS[\"auteur_session\"]) {\n$lacible
 		} else {
 			include_local('inc-login.php3'); 
-			login('$url', false, true, '$url');
+			login_pour_tous('$url', false, true, '$url');
 		}";
 
 	return "<" . "?php" . $lacible . "?" . ">";
