@@ -170,7 +170,7 @@ if ($modifier_rubrique == "oui") {
 if ($titre) {
 	// creation, le cas echeant
 	if ($new == 'oui' AND $flag_editable AND !$coll) {
-		$coll = spip_abstract_insert("spip_rubriques", 
+		$coll = spip_abstract_insert("rubriques", 
 				    "(titre, id_parent)",
 				    "('"._T('item_nouvelle_rubrique')."', '$id_parent')");
 		$result = spip_query($query);

@@ -135,7 +135,7 @@ if ($new == "oui") {
 	if ($type == 'pb') $statut = 'publie';
 	else $statut = 'redac';
 
-	$id_message = spip_abstract_insert("spip_messages",
+	$id_message = spip_abstract_insert("messages",
 				  "(titre, date_heure, statut, type, id_auteur)", 
 				  "('".addslashes(filtrer_entites(_T('texte_nouveau_message')))."', NOW(), '$statut', '$type', $connect_id_auteur)");
 	

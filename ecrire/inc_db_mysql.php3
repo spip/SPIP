@@ -170,7 +170,7 @@ function spip_free_result($r) {
 }
 
 function spip_insert($table, $champs, $valeurs) {
-	spip_query("INSERT INTO $table $champs VALUES $valeurs");
+	spip_query("INSERT INTO spip_$table $champs VALUES $valeurs");
 	return  mysql_insert_id();
 }
 
