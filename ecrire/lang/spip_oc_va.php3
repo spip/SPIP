@@ -323,7 +323,7 @@ Merc&eacute; per v&ograve;stra participacion
 'icone_maintenance_site' => 'Mantenen&ccedil;a dau sit',
 'icone_messagerie_personnelle' => 'Messatjari&aacute; personala',
 'icone_modifier_informations_personnelles' => 'Modificar v&ograve;stras informacions personalas',
-'icone_mots_cles' => 'Mots claus',
+'icone_mots_cles' => 'Mots clau',
 'icone_nouvelle_breve' => 'Escriure una br&egrave;va n&ograve;va',
 'icone_repartition_actuelle' => 'Afichar la reparticion actuala',
 'icone_repartition_debut' => 'Afichar la reparticion dempuei lo comen&ccedil;ament',
@@ -477,14 +477,14 @@ Merc&eacute; per v&ograve;stra participacion
 'info_propose_2' => 'Article prepausat
 ---------------',
 'info_propose_3' => 'L\'article "@titre@" es prepausat a la publicacion.',
-'info_propose_4' => 'Vos conviam a lo venir consultar e a balhar v&ograve;stre av&iacute;s',
+'info_propose_4' => 'Vos conviam a lo venir consultar e a bailar v&ograve;stre av&iacute;s',
 'info_propose_5' => 'dins lo forum que li es estachat. Es disponible a l\'adrei&ccedil;a:',
 'info_publie_01' => 'L\'article "@titre@" es estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 --------------',
-'info_rechercher' => 'Recerchar',
-'info_rechercher_02' => 'Recerchar:',
+'info_rechercher' => 'Cerchar',
+'info_rechercher_02' => 'Cerchar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinia per un l&ograve;go personalizat:',
 'info_remplacer_vignette_defaut' => 'Rempla&ccedil;ar la vinheta predefinia per un l&ograve;go personalizat:',
 'info_retablir_lien' => 'Restablir aqueu liam',
@@ -639,8 +639,8 @@ Merc&eacute; per v&ograve;stra participacion
 'pass_forum_bla' => 'Av&egrave;tz demandat d\'intervenir dins un forum
   reservat als vesitaires registrats.',
 'pass_indiquez_cidessous' => 'Marcatz &ccedil;ai sos l\'adrei&ccedil;a e-mail ont
- vos registreriatz lo c&ograve;p passat. 
-   Recebretz un e-mail que vos balhar&agrave; la maniera de 
+ vos registr&egrave;retz lo c&ograve;p passat. 
+   Recebretz un e-mail que vos bailar&agrave; la maniera de 
     tornar trobar v&ograve;stre acc&egrave;s.',
 'pass_mail_passcookie' => '(aqu&ograve;\'s un messatge automatic)
 Per tornar trobar v&ograve;stre acc&egrave;s au sit
@@ -679,7 +679,7 @@ e vos tornar connectar au sit.
 'taille_ko' => '@taille@&nbsp;Ko',
 'taille_mo' => '@taille@&nbsp;Mo',
 'taille_octets' => '@taille@&nbsp;octets',
-'texte_actualite_site_1' => 'Quand vos seretz familiarizat/aa amb l\'interf&agrave;cia, poiretz clicar sobre &laquo;',
+'texte_actualite_site_1' => 'Quand vos seretz familharizat/aa amb l\'interf&agrave;cia, poiretz clicar sobre &laquo;',
 'texte_actualite_site_2' => 'Interf&agrave;cia completa',
 'texte_actualite_site_3' => '" per durbir mai de possibilitats.',
 'texte_bilan_traductions' => 'Dins aqueu grafic, las barras verdas representan los articles revirats e actualizats, las barras rojas las reviraas que son d\'actualizar.',
@@ -739,7 +739,7 @@ e vos tornar connectar au sit.
 'titre_image_visiteur' => 'Vesitaire',
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
 'titre_liens_entrants' => 'Liams entrants ',
-'titre_mots_cles' => 'MOTS CLAUS',
+'titre_mots_cles' => 'MOTS CLAU',
 'titre_page_admin_vider' => 'Mantenen&ccedil;a tecnica: gestion de l\'escondeor',
 'titre_page_etat_traductions' => 'Estat de las reviraas',
 'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servior MySQL) empacha d\'accedir a aquela part dau sit. Merc&eacute; de v&ograve;stra indulg&eacute;ncia.',

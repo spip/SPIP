@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_rubrique' => 'N\'i a pas nada rubrica a aquera adre&ccedil;a ',
 'autres_breves' => 'Autas br&egrave;vas',
 'autres_groupes_de_mots_clefs' => '<NEW>-vide-',
-'autres_groupes_mots_clefs' => 'Autes grops de mots claus',
+'autres_groupes_mots_clefs' => 'Autes grops de mots clau',
 'autres_sites' => 'Autes sits',
 
 
@@ -71,8 +71,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Messatge',
 'messages_forum' => 'Messatges de forum',
 'messages_recents' => 'Los messatges de forums mei recents',
-'mots_clefs' => 'Mots claus',
-'mots_clefs_meme_groupe' => 'Mots claus dens lo medish grop',
+'mots_clefs' => 'Mots clau',
+'mots_clefs_meme_groupe' => 'Mots clau dens lo medish grop',
 
 
 // N
@@ -106,7 +106,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'repondre_article' => 'Arresp&oacute;ner a aqueth article',
 'repondre_breve' => 'Arresp&oacute;ner a aquera br&egrave;va',
 'repondre_message' => 'Arresp&oacute;ner a aqueth messatge',
-'resultats_recherche' => 'Resultats deu rec&egrave;rc',
+'resultats_recherche' => 'Resultats de la c&egrave;rca',
 'retour_debut_forums' => 'Retorn au comen&ccedil;ament deus forums',
 'rubrique' => 'Rubrica',
 'rubriques' => 'Rubricas',
