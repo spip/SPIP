@@ -562,7 +562,7 @@ function post_autobr($texte, $delim="\n_ ") {
 		$debut .= substr($suite, 0, $t-1);
 		$suite = substr($suite, $t);
 		$car = substr($suite, 0, 1);
-		if (($car<>'-') AND ($car<>'_') AND ($car<>"\n"))
+		if (($car<>'-') AND ($car<>'_') AND ($car<>"\n") AND ($car<>"|"))
 			$debut .= $delim;
 		else
 			$debut .= "\n";
