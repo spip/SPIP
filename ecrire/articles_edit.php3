@@ -322,7 +322,7 @@ echo "<P><HR><P>";
 		else $logo_parent = "rubrique-24.gif";
 	}
 
-	if ($options == "avancees") {
+	if (($options == "avancees") OR ($id_rubrique == 0)) {
 		debut_cadre_relief("$logo_parent");
 		
 		echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
@@ -333,9 +333,9 @@ echo "<P><HR><P>";
 		echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
 		fin_cadre_relief();
 	}
-	else {
+	else
 		echo "<INPUT TYPE='hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";	
-	}
+
 
 	if (($options == "avancees" AND $articles_descriptif != "non") OR strlen($descriptif) > 0) {
 		echo "<P><B>Descriptif rapide</B>";

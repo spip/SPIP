@@ -5,6 +5,8 @@ include ("inc.php3");
 
 debut_page("Suivi des forums", "messagerie", "forum-controle");
 
+$requete_base_controle =  "statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+
 echo "<br><br><br>";
 if ($controle_sans == 'oui') {
 	$controle_sans = '&controle_sans=oui';
@@ -13,7 +15,7 @@ if ($controle_sans == 'oui') {
 } else {
 	$controle_sans = '';
 	gros_titre("Suivi des forums");
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte=''";
 	$result_forum = spip_query($query_forum);
 	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
 	if ($total > 0) barre_onglets("suivi_forum", "tous");
@@ -288,9 +290,9 @@ if ($connect_statut == "0minirezo") {
 	if (!$debut) $debut = 0;
 
 	if ($controle_sans)
-		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte=''";
 	else
-		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+		$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE $requete_base_controle AND texte!=''";
 
 	$result_forum = spip_query($query_forum);
 	$total = 0;
@@ -308,9 +310,9 @@ if ($connect_statut == "0minirezo") {
 	}
 
 	if ($controle_sans)
-		$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte='' ORDER BY date_heure DESC LIMIT $debut,10";
+		$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND texte='' ORDER BY date_heure DESC LIMIT $debut,10";
 	else
-		$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' ORDER BY date_heure DESC LIMIT $debut,10";
+		$query_forum = "SELECT * FROM spip_forum WHERE $requete_base_controle AND texte!='' ORDER BY date_heure DESC LIMIT $debut,10";
 
 	$result_forum = spip_query($query_forum);
 	controle_forum($result_forum, "forum.php3");
