@@ -209,7 +209,6 @@ function parser_boucle($texte, $id_parent) {
 				$table = "mots";
 				$req_from[] = "spip_mots AS $table";
 				$id_objet = "id_mot";
-				$req_where[] = "$table.titre<>'kawax'";
 				break;
 
 			case 'rubriques':
