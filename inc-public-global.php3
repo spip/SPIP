@@ -201,6 +201,7 @@ function admin_page($cached, $texte) {
 		include_local('inc-admin.php3');
 		return calcul_admin_page($cached, $texte);
 	}
+	return $texte;
 }
 
 // Si l'admin a demande un affichage
