@@ -57,8 +57,8 @@ debut_html();
 
 
 	if ($id_rubrique > 0) {
-		//if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
-		$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
+		if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
+		else $query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
 		$result=spip_query($query);
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
@@ -83,8 +83,8 @@ debut_html();
 						$puce = 'poubelle';
 						break;
 				}
-				$puce = "puce-$puce.gif";
-				echo "<div style='margin-$spip_lang_left:3px; margin-$spip_lang_right: 3px; padding-$spip_lang_left: 17px; background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div style='padding: 3px; background-color: #e0e0e0; border-top: 1px solid white; border-left: 1px solid white; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"'>$titre</a></div></div>";
+				$puce = "puce-$puce-breve.gif";
+				echo "<div class='puce-article' style='background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"' class='verdana1'>$titre</a></div></div>";
 			}
 		}
 

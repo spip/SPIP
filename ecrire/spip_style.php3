@@ -594,6 +594,14 @@ div.puce-article div {
 	border-right: 1px solid #aaaaaa; 
 	border-bottom: 1px solid #aaaaaa;
 }
+div.puce-article div:hover {
+	padding: 2px; 
+	background-color: white; 
+	border-bottom: 1px solid white; 
+	border-right: 1px solid white; 
+	border-left: 1px solid #aaaaaa; 
+	border-top: 1px solid #aaaaaa;
+}
 
 /*
  * Styles generes par les raccourcis de mis en page
