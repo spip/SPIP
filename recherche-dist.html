@@ -147,6 +147,25 @@
 	</div>
 	</B_sites>
 
+	<!-- Messages trouves -->
+
+	<B_messages>
+	<div class="menu">
+	<div class="divers" title="<:messages_forum:>">
+		<div class="menu-titre">
+		<:messages_forum:>
+		</div>
+		<ul>
+	<BOUCLE_messages(FORUMS) {recherche} {par points} {inverse} {0,8}>
+		<li class="menu-item">
+		<a href="#URL_FORUM">#TITRE</a>
+		</li>
+	</BOUCLE_messages>
+		</ul>
+	</div>
+	</div>
+	</B_messages>
+
 	</div>
 
 

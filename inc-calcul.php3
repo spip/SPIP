@@ -58,8 +58,14 @@ function transformer_lien_logo($contexte, $lien) {
 function url_var_recherche($url, $activer_url_recherche) {
 	include_ecrire('inc_surligne.php3');
 	if ($activer_url_recherche && $GLOBALS['HTTP_GET_VARS']['recherche'] && !ereg("var_recherche", $url)) {
+		if (ereg("^([^#]*)(#.*)$", $url, $regs)) {
+			$url = $regs[1];
+			$ancre = $regs[2];
+		} else
+			$ancre = '';
 		$url .= strpos($url, '?') ? '&' : '?';
 		$url .= "var_recherche=".urlencode(surligner_sans_accents($GLOBALS['recherche']));
+		$url .= $ancre;
 	}
 	return $url;
 }
