@@ -197,7 +197,7 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(<?php echo http_img_pack('triangle-droite' . $_rtl .' gif'), ')', $right; ?> center no-repeat;
+	background: url(<?php echo http_img_pack('triangle-droite' . $_rtl .'.gif'), ')', $right; ?> center no-repeat;
 }
 div.pos_r {
 	position: relative;
