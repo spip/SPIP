@@ -267,63 +267,10 @@ if ($use_cache && file_exists('CACHE/.purge')) {
 $cookie_admin = $HTTP_COOKIE_VARS['spip_admin'];
 $admin_ok = ($cookie_admin != '');
 
-//
-// Afficher un bouton admin
-//
-
-function bouton_admin($titre, $lien) {
-	$lapage=substr($lien, 0, strpos($lien,"?"));
-	$lesvars=substr($lien, strpos($lien,"?") + 1, strlen($lien));
-
-	echo "\n<FORM ACTION='$lapage' METHOD='get'>\n";
-	$lesvars=explode("&",$lesvars);
-
-	for($i=0;$i<count($lesvars);$i++){
-		$var_loc=explode("=",$lesvars[$i]);
-		if ($var_loc[0] != "submit")
-			echo "<INPUT TYPE='Hidden' NAME='$var_loc[0]' VALUE='$var_loc[1]'>\n";
-	}
-	echo "<INPUT TYPE='submit' NAME='submit' VALUE='$titre' CLASS='spip_bouton'>\n";
-	echo "</FORM>";
+if ($admin_ok AND !$flag_preserver AND !$flag_boutons_admin) {
+	include_local("inc-admin.php3");
+	afficher_boutons_admin();
 }
-
-
-if ($admin_ok AND !$flag_preserver) {
-	echo '<div class="spip-admin">';
-
-	if ($id_article) {
-		bouton_admin("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
-	}
-	else if ($id_breve) {
-		bouton_admin("Modifier cette br&egrave;ve ($id_breve)", "./ecrire/breves_voir.php3?id_breve=$id_breve");
-	}
-	else if ($id_rubrique) {
-		bouton_admin("Modifier cette rubrique ($id_rubrique)", "./ecrire/naviguer.php3?coll=$id_rubrique");
-	}
-	else if ($id_mot) {
-		bouton_admin("Modifier ce mot-cl&eacute; ($id_mot)", "./ecrire/mots_edit.php3?id_mot=$id_mot");
-	}
-	else if ($id_auteur) {
-		bouton_admin("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
-	}
-
-	$link = $GLOBALS['clean_link'];
-	$link->addVar('recalcul', 'oui');
-	$link->delVar('submit');
-	echo $link->getForm('GET');
-	if ($use_cache) $pop = " *";
-	else $pop = "";
-	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page$pop'>";
-	echo "</form>\n";
-
-	if (lire_meta("activer_statistiques") != "non" AND $id_article) {
-		include_local ("inc-stats.php3");
-		afficher_raccourci_stats($id_article);
-	}
-
-	echo "</div>";
-}
-
 
 //
 // Mise a jour d'un (ou de zero) site syndique

@@ -817,18 +817,18 @@ function parser($texte) {
 	//
 
 	$c = array('NOM_SITE_SPIP', 'URL_SITE_SPIP', 'EMAIL_WEBMASTER', 'CHARSET',
-		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE', 
-		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE', 
+		'ID_ARTICLE', 'ID_RUBRIQUE', 'ID_BREVE', 'ID_FORUM', 'ID_PARENT', 'ID_SECTEUR', 'ID_DOCUMENT', 'ID_TYPE',
+		'ID_AUTEUR', 'ID_MOT', 'ID_SYNDIC_ARTICLE', 'ID_SYNDIC', 'ID_SIGNATURE', 'ID_GROUPE',
 		'TITRE', 'SURTITRE', 'SOUSTITRE', 'DESCRIPTIF', 'CHAPO', 'TEXTE', 'PS', 'NOTES', 'INTRODUCTION', 'MESSAGE',
 		'DATE', 'DATE_REDAC', 'DATE_MODIF', 'INCLUS',
-		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP', 
+		'LESAUTEURS', 'EMAIL', 'NOM_SITE', 'LIEN_TITRE', 'URL_SITE', 'LIEN_URL', 'NOM', 'BIO', 'TYPE', 'PGP',
 		'FORMULAIRE_ECRIRE_AUTEUR', 'FORMULAIRE_FORUM', 'FORMULAIRE_SITE', 'PARAMETRES_FORUM', 'FORMULAIRE_RECHERCHE', 'FORMULAIRE_INSCRIPTION', 'FORMULAIRE_SIGNATURE',
 		'LOGO_MOT', 'LOGO_RUBRIQUE', 'LOGO_RUBRIQUE_NORMAL', 'LOGO_RUBRIQUE_SURVOL', 'LOGO_AUTEUR', 'LOGO_SITE',  'LOGO_BREVE', 'LOGO_BREVE_RUBRIQUE',  'LOGO_DOCUMENT', 'LOGO_ARTICLE', 'LOGO_ARTICLE_RUBRIQUE', 'LOGO_ARTICLE_NORMAL', 'LOGO_ARTICLE_SURVOL',
 		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT', 'EMBED_DOCUMENT',
 		'IP', 'VISITES', 'POPULARITE', 'POPULARITE_ABSOLUE', 'POPULARITE_MAX', 'POPULARITE_SITE', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
 		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT',
-		'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'PUCE'
+		'FORMULAIRE_ADMIN', 'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'PUCE'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -1104,7 +1104,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	if ($id_row) {
 		$fonctions = $champs[$id_champ]->fonctions;
-		
+
 		if ($offset_boucle) $code = "\$pile_boucles[\$id_instance-$offset_boucle]->row[$id_row]";
 		else $code = "\$row[$id_row]";
 
@@ -1127,7 +1127,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Les logos (rubriques, articles...)
 	//
-	
+
 	case 'LOGO_ARTICLE':
 	case 'LOGO_ARTICLE_NORMAL':
 	case 'LOGO_ARTICLE_RUBRIQUE':
@@ -1415,7 +1415,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Inserer directement un document dans le squelette
 	//
-	
 	case 'EMBED_DOCUMENT':
 		if ($fonctions) $fonctions = join($fonctions, "|");
 		$milieu = "
@@ -1429,7 +1428,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Formulaire de recherche sur le site
 	//
-
 	case 'FORMULAIRE_RECHERCHE':
 		if ($fonctions) {
 			list(, $lien) = each($fonctions);	// le premier est un url
@@ -1456,7 +1454,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Formulaire d'inscription comme redacteur
 	// (dans inc-formulaires.php3)
-
 	case 'FORMULAIRE_INSCRIPTION':
 		$milieu = '
 		$request_uri = $GLOBALS["REQUEST_URI"];
@@ -1469,7 +1466,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$'.$nom_var.' = "";
 		}
 		';
-		
+
 		break;
 
 	//
@@ -1491,7 +1488,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Formulaire de signature d'une petition
 	//
-
 	case 'FORMULAIRE_SIGNATURE':
 
 		$milieu = '
@@ -1508,13 +1504,12 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$'.$nom_var.' = "";
 		}
 		';
-		
+
 		break;
 
 	//
 	// Formulaire de referencement d'un site
 	//
-
 	case 'FORMULAIRE_SITE':
 
 		$milieu = '
@@ -1528,14 +1523,12 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			$'.$nom_var.' = "";
 		}
 		';
-		
-		break;
 
+		break;
 
 	//
 	// Champ testant la presence d'une petition
 	//
-
 	case 'PETITION':
 		$milieu = '
 		$query_petition = "SELECT id_article FROM spip_petitions WHERE id_article=$contexte[id_article]";
@@ -1548,7 +1541,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Formulaire de reponse a un forum
 	//
-
 	case 'FORMULAIRE_FORUM':
 		$milieu = '
 		switch ($pile_boucles[$id_instance]->type_requete) {
@@ -1582,7 +1574,6 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 	// Parametres d'appel du formulaire de reponse a un forum
 	//
-
 	case 'PARAMETRES_FORUM':
 		$milieu = '
 		$request_uri = $GLOBALS["REQUEST_URI"];
@@ -1629,8 +1620,9 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		';
 		break;
-	
-	// debut et fin de surlignage auto des mots de la recherche
+
+	//
+	// Debut et fin de surlignage auto des mots de la recherche
 	//
 	case 'DEBUT_SURLIGNE':
 		if ($flag_ob AND $flag_preg_replace) {
@@ -1647,7 +1639,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		break;
 
-	// formulaires de login
+	//
+	// Formulaires de login
 	//
 	case 'LOGIN_PRIVE':
 		$milieu = '
@@ -1669,6 +1662,15 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 				\$cible = ' . $lacible . ';
 				login (\$cible, false); ?".">";
 			';
+		break;
+
+	//
+	// Boutons d'administration
+	//
+	case 'FORMULAIRE_ADMIN':
+		$milieu = '
+			$'.$nom_var.' = "<"."?php \$GLOBALS[\"flag_boutons_admin\"] = true; include_local(\"inc-admin.php3\"); afficher_boutons_admin(); ?".">";
+		';
 		break;
 
 	} // switch
