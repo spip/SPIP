@@ -1598,9 +1598,9 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'LOGIN_PRIVE':
 		$milieu = '
 			$'.$nom_var.' = "<"."?php include_local (\'inc-login.php3\');
-				if (\$GLOBALS[\'url\']) \$cible = new Link(\$GLOBALS[\'url\']);
+				if (\$GLOBALS[\'var_url\']) \$cible = new Link(\$GLOBALS[\'var_url\']);
 				else \$cible = new Link(\'ecrire/\');
-				login (\$cible, \$GLOBALS[\'clean_link\']->getUrl(), \'prive\'); ?".">";
+				login (\$cible, \'prive\'); ?".">";
 			';
 		break;
 
@@ -1609,7 +1609,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		if ($fonctions) {
 			$filtres = array();
 			while (list(, $nom) = each($fonctions)) {
-				if (ereg("cible=(.*)", $nom, $regs))
+				if (ereg("url=(.*)", $nom, $regs))
 					$lacible = "new Link('".$regs[1]."')";
 				else
 					$filtres[] = $nom;
@@ -1619,7 +1619,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 			$'.$nom_var.' = "<"."?php include_local (\'inc-login.php3\');
 				\$cible = ' . $lacible . ';
-				login (\$cible, \$GLOBALS[\'clean_link\']->getUrl(), false); ?".">";
+				login (\$cible, false); ?".">";
 			';
 		break;
 

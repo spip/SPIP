@@ -30,8 +30,8 @@ if ($change_session == 'oui') {
 
 // tentative de connexion en auth_http
 if ($essai_auth_http) {
-	include_local("inc-login.php3");
-	auth_http($cible, 'spip_login.php3', $essai_auth_http);
+	include_local ("inc-login.php3");
+	auth_http($cible, $essai_auth_http);
 	exit;
 }
 
@@ -47,12 +47,15 @@ if ($logout) {
 			setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
 		if ($PHP_AUTH_USER) {
-			include_local("inc-login.php3");
-			auth_http($cible, 'spip_login.php3', 'logout');
+			include_local ("inc-login.php3");
+			auth_http($cible, 'logout');
 		}
 		unset ($auteur_session);
 	}
-	@Header("Location: spip_login.php3");
+	if ($url)
+		@Header("Location: ".urldecode($url));
+	else
+		@Header("Location: ./");
 	exit;
 }
 
@@ -66,11 +69,11 @@ if ($essai_login == "oui") {
 
 	// verifier l'auteur
 	$login = addslashes($session_login);
-	if ($session_password_md5) {
+	if ($session_password_md5) { // mot passe en md5
 		$md5pass = $session_password_md5;
 		$md5next = $next_session_password_md5;
 	}
-	else {
+	else { // mot passe en clair
 		$query = "SELECT * FROM spip_auteurs WHERE login='$login' AND statut!='5poubelle'";
 		$result = spip_query($query);
 		if ($row = mysql_fetch_array($result)) {
@@ -102,15 +105,13 @@ if ($essai_login == "oui") {
 				alea_futur = '$nouvel_alea_futur'
 			WHERE login='$login'";
 		@spip_query($query);
-		$cible->addVar('bonjour','oui');
+		if (ereg("ecrire/", $cible->getUrl()))
+			$cible->addVar('bonjour','oui');
 	}
 	else {
-		$url = urlencode($cible->getUrl());
-		if ($session_password || $session_password_md5) 
-			@header("Location: spip_login.php3?login=$login&erreur=pass&url=$url");
-		else
-			@header("Location: spip_login.php3?login=$login&url=$url");
-		exit;
+		$cible->addVar('var_login', $login);
+		if ($session_password || $session_password_md5)
+			$cible->addVar('var_erreur', 'pass');
 	}
 }
 
@@ -118,6 +119,7 @@ if ($essai_login == "oui") {
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
+	$cible->delVar('var_login');
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);

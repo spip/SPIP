@@ -1,16 +1,16 @@
-<?php
-	if (!$url)
-		$cible = new Link('ecrire/');
-	else
-		$cible = new Link(urldecode($url));
+<html>
+<head>
+<title>
+Acc&egrave;s &agrve; l'espace priv&eacute;
+</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" href="spip_style.css" type="text/css" />
+</head>
+<body bgcolor="#ffffff" text="#000000" link="#e86519" vlink="#6e003a" alink="#ff9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
-	// que faire si on est connecte
-	if ($auteur_session) {
-		@Header("Location: ".$cible->getUrl());
-		echo "Vous &ecirc;tes connect&eacute;...";
-		exit;
-	}
-?>
+<center><table><tr><td width=400>
 #LOGIN_PRIVE
+</td></tr></table></center>
 
-
+</body>
+</html>
