@@ -1842,7 +1842,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		include_ecrire("inc_presentation.php3");
 		$retour .= "<tt><br><br><blink>&lt;BOUCLE'.$id_boucle.'&gt;</blink><br>\n".
 		"<b>Erreur dans la requ&ecirc;te envoy&eacute;e &agrave; MySQL :</b><br>\n".
-		"$query<br>\n<font color=\'red\'><b>&gt; ".
+		htmlspecialchars($query)."<br>\n<font color=\'red\'><b>&gt; ".
 		mysql_error()."</b></font><br>\n".
 		"<blink>&lt;/BOUCLE'.$id_boucle.'&gt;</blink></tt>\n";
 		$retour .= "<" ."?php
