@@ -214,9 +214,14 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 
 	// par hasard
 	if ($tri == 'hasard') {
-		// on pourrait peut-etre passer a "RAND() AS alea" ?
-		$boucle->select[] = "MOD(".$boucle->id_table . '.' . $boucle->primary." * UNIX_TIMESTAMP(),
-		32767) & UNIX_TIMESTAMP() AS alea";
+		// tester si cette version de MySQL accepte la commande RAND()
+		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
+		if (spip_query("SELECT RAND()"))
+			$boucle->select[] = "RAND() AS alea";
+		else
+			$boucle->select[] = "MOD(".$boucle->id_table.'.'.$boucle->primary
+			." * UNIX_TIMESTAMP(),32767) & UNIX_TIMESTAMP() AS alea";
+
 		$boucle->order = "'alea'";
 	}
 
