@@ -45,7 +45,7 @@ if ($activer_statistiques_ref == "oui"){
 if ($critere == "referers"){
 	echo propre("Les &laquo;acc&egrave;s directs sur la page&raquo; sont le nombre de visiteurs arriv&eacute;s directement {&agrave; l'int&eacute;rieur} du site depuis un lien ext&eacute;rieur, sans passer par la page d'accueil. Plus une page de votre site est r&eacute;f&eacute;renc&eacute;e sur des sites &agrave; fort traffic, plus le nombre d'arriv&eacute;es directes sur cette page sera important.")."<p>";
 	afficher_articles("Les articles r&eacute;cents (3 mois) les plus r&eacute;f&eacute;renc&eacute;s",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, popularite, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 AND date>DATE_SUB('$date',INTERVAL 90 DAY) ORDER BY referers DESC LIMIT 0,100", true);
 }
 else if ($critere == "popularite"){
@@ -54,18 +54,18 @@ else if ($critere == "popularite"){
 		"Un article devient donc &laquo;populaire&raquo; lorsqu'il fait l'objet d'un r&eacute;f&eacute;rencement ".
 		"sur d'autres sites et lorsqu'il est derni&egrave;rement tr&egrave;s visit&eacute;.")."<p>";
 	afficher_articles("Les articles r&eacute;cents (3 mois) les plus populaires",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, popularite, id_rubrique, statut ".
 "FROM spip_articles WHERE popularite > 0 AND date>DATE_SUB('$date',INTERVAL 90 DAY) ORDER BY popularite DESC LIMIT 0,100", true);
 	afficher_articles("Les articles les plus populaires depuis le d&eacute;but",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, popularite, id_rubrique, statut ".
 "FROM spip_articles WHERE popularite > 0 ORDER BY popularite DESC LIMIT 0,100", true);
 }
 else{
 	afficher_articles("Les articles r&eacute;cents (3 mois) les plus visit&eacute;s",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, popularite, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 AND date>DATE_SUB('$date',INTERVAL 90 DAY) ORDER BY visites DESC LIMIT 0,100", true);
 	afficher_articles("Les articles les plus visit&eacute;s depuis le d&eacute;but",
-"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, popularite, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 ORDER BY visites DESC LIMIT 0,100", true);
 }
 
