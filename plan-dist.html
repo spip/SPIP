@@ -79,7 +79,18 @@
 
 <h2 class="structure">Articles</h2>
 
+<B_articles_racine>
+<ul class="plan-articles">
+
+<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+<li class="plan-article"><a href="#URL_ARTICLE">#TITRE</a></li>
+</BOUCLE_articles_racine>
+
+</ul>
+</B_articles_racine>
+
 <B_rubriques>
+
 <ul class="plan-rubriques">
 
 <BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
