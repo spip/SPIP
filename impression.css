@@ -99,3 +99,16 @@ a:after {
 	padding-left: 0px;
 	margin-right: 0.8em;
 }
+
+
+/*
+ * Forums
+ */
+
+.forum-repondre {
+	display: none;
+}
+.forum-repondre-message {
+	display: none;
+}
+
