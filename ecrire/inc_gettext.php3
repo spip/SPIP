@@ -18,8 +18,7 @@ function text_merge($text, $args) {
 }
 
 //
-// i18n : merge ("My name is @name@", array('name'=>'Bob'))
-//        into "My name is Bob"
+// i18n : our own small gettext
 //
 function spip_gettext($text, $args, $lang) {
 	global $i18n;
