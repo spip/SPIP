@@ -208,7 +208,7 @@ function auth() {
 	}
 
 	if (!$auth_pass_ok) {
-		@header("Location: ../spip_login.php3?erreur=pass");
+		@header("Location: ../spip_login.php3?var_erreur=pass");
 		exit;
 	}
 	
