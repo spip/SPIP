@@ -226,7 +226,7 @@ function executer_une_indexation_syndic() {
 }
 
 function creer_liste_indexation() {
-	$fichier_index = 'data/indexation.txt';
+	$fichier_index = 'data/.index';
 	$elements = array('article', 'breve', 'mot', 'auteur', 'rubrique', 'syndic');
 
 	while (list(,$element) = each ($elements)) {

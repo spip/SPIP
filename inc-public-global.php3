@@ -149,7 +149,7 @@ if (!file_exists("CACHE/.htaccess")) {
 //
 
 if (lire_meta('activer_moteur') == 'oui') {
-	$fichier_index = 'ecrire/data/indexation.txt';
+	$fichier_index = 'ecrire/data/.index';
 	if ($db_ok) {
 		include_ecrire("inc_texte.php3");
 		include_ecrire("inc_filtres.php3");
