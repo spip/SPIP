@@ -228,7 +228,7 @@ function traduire_nom_langue($lang) {
 	'za' => "Zhuang",
 	'zh' => "&#20013;&#25991;",
 	'zu' => "Zulu");
-	
+
 	$r = $codes_langues[$lang];
 	if (!$r) $r = $lang;
 	return $r;
@@ -240,6 +240,9 @@ function traduire_nom_langue($lang) {
 function menu_langues() {
 	global $couleur_foncee;
 
+	$langues = explode(',', $GLOBALS['all_langs']);
+	if (count($langues) <= 1) return;
+
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
 	$lien = $GLOBALS['clean_link'];
@@ -250,7 +253,6 @@ function menu_langues() {
 
 	$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
 	$ret .= "\n<select name='var_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."var_lang='+this.options[this.selectedIndex].value\">\n";
-	$langues = explode(',', $GLOBALS['all_langs']);
 	while (list(,$l) = each ($langues)) {
 		if ($l == $GLOBALS['spip_lang']) $selected = " selected";
 		else $selected = "";
@@ -291,7 +293,7 @@ function utiliser_langue_site() {
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $flag_ecrire, $langue_defaut, $langue_site;
+	global $all_langs, $flag_ecrire, $langue_site;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
