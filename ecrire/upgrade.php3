@@ -21,7 +21,7 @@ if ($reinstall == 'oui') {
 		exit;
 	}
 
-	@copy(_FILE_CONNECT, _FILE_CONNECT_INS):
+	@copy(_FILE_CONNECT, _FILE_CONNECT_INS);
 
 	install_debut_html(_T('titre_page_upgrade'));
 	echo "<p><b>"._T('texte_nouvelle_version_spip_1')."</b><p> ";
