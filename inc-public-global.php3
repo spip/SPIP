@@ -199,16 +199,8 @@ function admin_page($cached, $texte) {
 	if (!$GLOBALS['flag_preserver']
 	&& ($admin = $GLOBALS['HTTP_COOKIE_VARS']['spip_admin'])) {
 		include_local('inc-admin.php3');
-		$a = '<'.'?php echo afficher_boutons_admin("'. ($cached ? ' *' : '').'"); ?'.'>';
-
-		// La constante doit etre definie a l'identique dans inc-form-squel
-		// balise #FORMULAIRE_ADMIN ? sinon ajouter en fin de page
-		if (!(strpos($texte, '<!-- @@formulaire_admin@@45609871@@ -->') === false))
-			$texte = str_replace('<!-- @@formulaire_admin@@45609871@@ -->', $a, $texte);
-		else
-			$texte .= $a;
+		return calcul_admin_page($cached, $texte);
 	}
-	return $texte;
 }
 
 // Si l'admin a demande un affichage
