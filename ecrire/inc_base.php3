@@ -41,10 +41,12 @@ function creer_base() {
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		langue_choisie VARCHAR(3) DEFAULT 'non',
+		id_trad bigint(21) DEFAULT '0' NOT NULL,
 		extra longblob NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
+		KEY id_trad (id_trad),
 		KEY lang (lang),
 		KEY statut (statut, date))";
 	$result = spip_query($query);
@@ -1327,6 +1329,12 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_breves ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		spip_query("ALTER TABLE spip_breves ADD langue_choisie VARCHAR(3) DEFAULT 'non'");
 		maj_version (1.708);
+	}
+
+	if ($version_installee < 1.709) {
+		spip_query("ALTER TABLE spip_articles ADD id_trad bigint(21) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD INDEX id_trad (id_trad)");
+		maj_version (1.709);
 	}
 
 }

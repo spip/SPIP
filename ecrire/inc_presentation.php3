@@ -1247,8 +1247,11 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$hauteur = 70;
 		$largeur = 70;
 	}
+	
+	$style = 'iconeoff';
+	if ($fonction == "supprimer.gif") $style = 'iconedanger';
 
-	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
+	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
 	$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
 	$icone .= "\n<table cellpadding=0 cellspacing=0 border=0>";
 	if ($spip_display != 1){	
@@ -1291,7 +1294,10 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	$hauteur = 30;
 	$largeur = "100%";
 
-	echo "\n<table class=\"icone-h\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'icone-h');\" onClick=\"document.location='$lien'\">";
+	$style = "icone-h";
+	if ($fonction == "supprimer.gif") $style = "icone-h-danger";
+
+	echo "\n<table class=\"$style\" onMouseOver=\"changeclass(this,'icone-h-on');\" onMouseOut=\"changeclass(this,'$style');\" onClick=\"document.location='$lien'\">";
 	echo "<tr>";
 	
 	if ($spip_display != 1 AND $fond != "") {

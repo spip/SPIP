@@ -28,6 +28,8 @@ function enfant($leparent){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
 		$statut_rubrique = $row['statut'];
+		$lang_rub = $row['lang'];
+		$langue_choisie_rub = $row['langue_choisie'];
 
 		if ($my_rubrique != $id_rubrique){
 
@@ -44,9 +46,11 @@ function enfant($leparent){
 			}
 
 			if ($statut_rubrique!='publie') $titre = "($titre)";
+			if (lire_meta('multi_rubriques') == 'oui' AND $langue_choisie_rub == "oui") $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
+
 
 			if (acces_rubrique($my_rubrique)) {
-				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">$espace$titre\n";
+				echo "<OPTION".mySel($my_rubrique,$id_parent)." style=\"$style\">&nbsp;&nbsp;&nbsp; $espace$titre\n";
 			}
 			enfant($my_rubrique);
 		}
@@ -158,6 +162,9 @@ if ($connect_toutes_rubriques) {
 } else {
 	echo "<OPTION".mySel("0",$id_parent).">"._T('info_non_deplacer')."\n";
 }
+
+if (lire_meta('multi_rubriques') == 'oui') echo " [".traduire_nom_langue(lire_meta('langue_site'))."]";
+
 // si le parent ne fait pas partie des rubriques restreintes, modif impossible
 if (acces_rubrique($id_parent)) {
 	enfant(0);

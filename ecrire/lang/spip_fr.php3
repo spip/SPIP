@@ -1598,8 +1598,13 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'titre_statistiques' => 'Statistiques du site',
 'titre_suivi_petition' => 'Suivi des p&eacute;titions',
 'titre_syndication' => 'Syndication de sites',
-'titre_titre_document' => 'Titre du document&nbsp;:'
-
+'titre_titre_document' => 'Titre du document&nbsp;:',
+'trad_article_inexistant' => 'Il n\'y a pas d\'article portant ce num&eacute;ro.',
+'trad_article_traduction' => 'Cet article est une traduction de&nbsp;:',
+'trad_deja_traduit' => 'Cet article est d&eacute;j&agrave; une traduction du pr&eacute;sent article.',
+'trad_delier' => 'Ne plus lier cet article &agrave; ces traductions',
+'trad_lier' => 'Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
+'trad_new' => "&Eacute;crire une nouvelle traduction de cet article"
 );
 
 

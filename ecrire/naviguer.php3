@@ -164,6 +164,7 @@ if ($titre) {
 	}
 
 	calculer_rubriques();
+	calculer_langues_rubriques();
 
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");

@@ -280,6 +280,7 @@ if ($row = spip_fetch_array($result)) {
 	$visites = $row["visites"];
 	$referers = $row["referers"];
 	$extra = $row["extra"];
+	$id_trad = $row["id_trad"];
 }
 
 // pour l'affichage du virtuel
@@ -1155,7 +1156,7 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 //
 if ((lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')) {
 
-	debut_cadre_enfonce("langues-24.gif");
+	debut_cadre_enfonce();
 	
 	// Choix langue article
 	if (lire_meta('multi_articles') == 'oui' AND ($flag_editable)) {
@@ -1180,11 +1181,148 @@ if ((lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'ou
 		if ($langue_choisie_article == 'oui') $herit = false;
 		else $herit = true;
 	
+			debut_cadre_enfonce("langues-24.gif");
 			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 			echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $herit);
 			echo "</font></center>\n";
+			fin_cadre_enfonce();
 	}
-	// Liste des articles traduits
+
+
+	// Gerer les groupes de traductions
+
+	if ($flag_editable AND $supp_trad == 'oui') { // Ne plus lier a un groupe de trad
+		spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_article = $id_article");	
+		$id_trad = 0;
+	}
+	
+	if ($flag_editable AND $lier_trad > 0) { // Lier a un groupe de trad
+		$query_lier = "SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad";
+		$result_lier = spip_query($query_lier);
+		if ($row = spip_fetch_array($result_lier)) {
+			$id_lier = $row['id_trad'];
+			
+			if ($id_lier == 0) { // Si l'article vise n'a pas deja de traduction, creer nouveau id_trad
+				$max_trad = spip_fetch_array(spip_query("SELECT MAX(id_trad) AS max_trad FROM spip_articles"));
+				$nouveau_trad = $max_trad['max_trad']+1;
+			}
+			else {
+				if ($id_lier == $id_trad) $err = "<div>"._T('trad_deja_traduit')."</div>";
+				$nouveau_trad = $id_lier;
+			}
+			
+			spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $lier_trad");	
+			if ($id_lier > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_lier");	
+			spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_article = $id_article");	
+			if ($id_trad > 0) spip_query("UPDATE spip_articles SET id_trad = $nouveau_trad WHERE id_trad = $id_trad");	
+			
+			
+			$id_trad = $nouveau_trad;
+		}
+		else {
+			$err .= "<div>"._T('trad_article_inexistant')."</div>";
+		}
+		
+		if ($err) echo "<font color='red' size=2' face='verdana,arial,helvetica,sans-serif'>$err</font>";
+	}
+	
+	
+	if ($id_trad != 0) { // Afficher la liste des traductions
+		$query_trad = "SELECT id_article, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad AND id_article!=$id_article";
+		$result_trad = spip_query($query_trad);
+		
+		
+		while ($row = spip_fetch_array($result_trad)) {
+			$id_article_trad = $row["id_article"];
+			$titre_trad = $row["titre"];
+			$lang_trad = $row["lang"];
+			$statut_trad = $row["statut"];
+			
+			
+			if ($ifond == 1) {
+				$ifond = 0;
+				$bgcolor = "ffffff";
+			} else {
+				$ifond = 1;
+				$bgcolor = $couleur_claire;
+			}
+			
+			
+			$ret .= "<tr bgcolor='$bgcolor'>";
+			$ret .= "<td>";
+			if ($statut_trad=='publie') {
+				$ret .= "<img src='img_pack/puce-verte.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+			}
+			else if ($statut_trad=='prepa') {
+				$ret .= "<img src='img_pack/puce-blanche.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+			}
+			else if ($statut_trad=='prop') {
+				$ret .= "<img src='img_pack/puce-orange.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+			}
+			else if ($statut_trad == 'refuse') {
+				$ret .= "<img src='img_pack/puce-rouge.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+			}
+			else if ($statut_trad == 'poubelle') {
+				$ret .= "<img src='img_pack/puce-poubelle.gif' alt='' width='7' height='7' border='0' NAME='statut'>";
+			}
+			$ret .= "</td>";
+			$ret .= "<td class='arial2'><a href='articles.php3?id_article=$id_article_trad'>$titre_trad</a></td>";
+			$ret .= "<td class='arial2'>".traduire_nom_langue($lang_trad)."</td>\n";
+		}
+		
+		if ($ret) {
+			debut_cadre_enfonce("traductions-24.gif");
+			echo "<table width='100%' cellspacing='0' border='0' cellpadding='3'>";
+			echo "<tr bgcolor='#eeeecc'><td colspan=3><font size=2 face='Georgia,Garamond,Times,serif'>".bouton_block_invisible("ne_plus_lier")."<b>"._T('trad_article_traduction')."</b></font></td></tr>";
+			echo $ret;
+			echo "<tr><td><img src='img_pack/rien.gif' height='3'></td></tr>";
+			echo "</table>";
+			
+			
+			echo debut_block_invisible("ne_plus_lier");
+			if ($flag_editable) {
+				$lien = $GLOBALS['clean_link'];
+				$lien->delVar($nom_select);
+				$lien = $lien->getUrl();
+				
+				echo "<div align='right'>";
+				echo "<table width='180' cellpadding='0' cellspacing='0' border='0'><tr><td>";
+				icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
+				echo "</td></tr></table>";
+				echo "</div>";
+			}
+			echo fin_block();
+			
+			fin_cadre_enfonce();
+		}
+	}
+	
+	echo "<table width='100%'><tr>";
+	echo "<td valign='top' width='50%' class='arial2'>";
+	if ($flag_editable AND $options == "avancees") { // Formulaire pour lier a un article
+	
+		$lien = $GLOBALS['clean_link'];
+		$lien->delVar($nom_select);
+		$lien = $lien->getUrl();
+	
+		echo "<form action='$lien' method='post' style='margin:0px; padding:0px;'>";
+		echo _T('trad_lier');
+		echo " <input type='text' class='fondl' name='lier_trad' size='10'>";
+		echo "<div align='right'><INPUT TYPE='submit' NAME='Modifier' VALUE='"._T('bouton_modifier')."' CLASS='fondl'></div>";
+		echo "</form>";
+	
+	}
+	echo "  </td>";
+	
+	echo "<td><img src='img_pack/rien.gif' width=10></td>";
+	echo "<td valign='top' width='50%'>";
+		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
+	echo "</td>";	
+	
+	
+	echo "</tr></table>";
+	
+	
 	fin_cadre_enfonce();
 }
 

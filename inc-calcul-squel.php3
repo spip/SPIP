@@ -228,7 +228,7 @@ function parser_boucle($texte, $id_parent) {
 				if ($type == 'articles') {
 					$s = "$table.id_article,$table.id_rubrique,$table.id_secteur,".
 						"$table.surtitre,$table.titre,$table.soustitre,$table.date,$table.date_redac,$table.date_modif,".
-						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang";
+						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang,$table.id_trad";
 					if (ereg('\#(TEXTE|INTRODUCTION)', $milieu)) {
 						$s .= ",$table.texte";
 					}
@@ -306,6 +306,10 @@ function parser_boucle($texte, $id_parent) {
 					// Classement par ordre inverse
 					if ($param == 'inverse') {
 						if ($req_order) $req_order .= ' DESC';
+					}
+					
+					else if ($param == 'traduction') {
+						$req_where[] = "$table.id_trad > 0 AND $table.id_trad = \$id_trad";
 					}
 
 					// Special rubriques
@@ -960,6 +964,7 @@ function parser($texte) {
 		'DATE' => 'date_heure',
 		'TITRE' => 'titre',
 		'TEXTE' => 'texte',
+		'LANG' => 'lang',
 		'NOM_SITE' => 'lien_titre',
 		'URL_SITE' => 'lien_url',
 		'LIEN_TITRE' => 'lien_titre',
@@ -2016,6 +2021,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_secteur"] = $row["id_secteur"];
 		$contexte["date"] = normaliser_date($row["date"]);
 		$contexte["date_redac"] = normaliser_date($row["date_redac"]);
+		$contexte["id_trad"] = $row["id_trad"];
 		$contexte["accepter_forum"] = $row["accepter_forum"];
 		if ($instance->doublons == "oui") $id_doublons["articles"] .= ",".$row["id_article"];
 		';

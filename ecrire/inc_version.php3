@@ -149,7 +149,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.708;
+$spip_version = 1.709;
 
 // version de spip
 $spip_version_affichee = "1.7a4 CVS";
