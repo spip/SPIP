@@ -158,7 +158,7 @@ function bouton_block_invisible($nom_block) {
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' SRC='IMG2/deplierhaut.gif?".$numero_block["$nom_block"]."' WIDTH=16 HEIGHT=14 border=0></a> ";
+		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' SRC='IMG2/deplierhaut.gif' WIDTH=16 HEIGHT=14 border=0></a> ";
 	}
 }
 
@@ -172,7 +172,7 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' SRC='IMG2/deplierbas.gif?".$numero_block["$nom_block"]."' WIDTH=16 HEIGHT=14 border=0></a> ";
+		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' SRC='IMG2/deplierbas.gif' WIDTH=16 HEIGHT=14 border=0></a> ";
 	}
 }
 

@@ -39,9 +39,9 @@ function texte_vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette)
 		$largeur_vignette = 140;
 		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
 	}
-	if ($hauteur_vignette > 150) {
-		$rapport = 150.0 / $hauteur_vignette;
-		$hauteur_vignette = 150;
+	if ($hauteur_vignette > 130) {
+		$rapport = 130.0 / $hauteur_vignette;
+		$hauteur_vignette = 130;
 		$largeur_vignette = ceil($largeur_vignette * $rapport);
 	}
 	return "<a href='../$fichier_vignette'><img src='../$fichier_vignette' border='0' height='$hauteur_vignette' width='$largeur_vignette'></a>\n";
@@ -61,24 +61,26 @@ function afficher_upload($link, $intitule, $inclus = '') {
 	echo "<font face='verdana, arial, helvetica, sans-serif' size='2'>\n";
 	echo $link->getForm('POST', '', 'multipart/form-data');
 
-	echo "<b>$intitule</b>";
-	echo aide ("artimg");
-	echo "<br><small><input name='image' type='File'>\n";
-	echo " &nbsp;&nbsp;<input name='ok' type='Submit' VALUE='T&eacute;l&eacute;charger' CLASS='fondo'></small>\n";
+	if (tester_upload()) {
+		echo "<b>$intitule</b>";
+		echo aide ("artimg");
+		echo "<br><small><input name='image' type='File'>\n";
+		echo " &nbsp;&nbsp;<input name='ok' type='Submit' VALUE='T&eacute;l&eacute;charger' CLASS='fondo'></small>\n";
+	}
 
 	if ($connect_statut == '0minirezo') {
 		echo "<p><div style='border: 1px #303030 dashed; padding: 2px;'>";
 		$texte_upload = texte_upload_manuel("upload", $inclus);
 		echo "<font color='#505050'>";
 		if ($texte_upload) {
-			echo "\nS&eacute;lectionner un fichier du dossier ecrire/upload&nbsp;:";
+			echo "\nUn fichier du dossier ecrire/upload&nbsp;:";
 			echo "\n<select name='image2' size='1'>";
 			echo $texte_upload;
 			echo "\n</select>";
 			echo "\n  <input name='ok' type='Submit' value='Choisir' class='fondo'>";
 		}
 		else {
-			echo "En tant qu'administrateur, vous pouvez aussi installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.";
+			echo "En tant qu'administrateur, vous pouvez installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.";
 		}
 		echo "</font></div>\n";
 	}
@@ -139,7 +141,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	$link->addVar('id_article', $id_article);
 	$link->addVar('doc_supp', $id_document);
 
-	echo "[<a ".$link->getHref().">supprimer le document</a>]\n";
+	echo "[<a ".$link->getHref()."><b>SUPPRIMER</b>]\n";
 	echo "</font>\n";
 
 	echo "</font>\n";
@@ -187,7 +189,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 
 	if ($descriptif) {
 		echo debut_cadre_relief();
-		echo "<font face='Georgia, Garamond, Times, sans-serif' size='2'>\n";
+		echo "<font face='Georgia, Garamond, Times, sans-serif' size='3'>\n";
 		echo propre($descriptif);
 		echo "</font>";
 		echo fin_cadre_relief();
@@ -203,16 +205,16 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	echo "<input type='text' name='titre' class='formo' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
 
 	echo "<b>Description&nbsp;:</b><br>\n";
-	echo "<textarea name='descriptif' rows='5' class='formo' cols='*' wrap='soft'>";
+	echo "<textarea name='descriptif' rows='6' class='formo' cols='*' wrap='soft'>";
 	echo htmlspecialchars($descriptif);
 	echo "</textarea>\n";
 
 	echo "<p align='right'>";
 	echo "<input class='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
 	echo "</p>";
+
 	echo "</form>";
 	echo "</font>";
-
 
 	//
 	// Affichage de la vignette (pour les documents)
@@ -231,7 +233,9 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
 
 		if ($fichier_vignette) {
-			echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
+			echo "<div align='center' style='border: 0px; padding: 2px; background-color: #f0e8e4'>\n";
+			echo "<font size='2'>VIGNETTE DE PR&Eacute;VISUALISATION</font>";
+			echo "</div>\n";
 			echo texte_vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
 			echo "<font size='2'>\n";
 			$hash = calculer_action_auteur("supp_doc ".$id_vignette);
@@ -246,7 +250,9 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			echo "<div align='center' style='border: 0px; padding: 2px; background-color: #f0e8e4'>\n";
 			echo vignette_par_defaut ($type_extension, 'right');
 			echo "<font size='2'>VIGNETTE PAR D&Eacute;FAUT</font>";
-			echo "</div><br>\n";
+			echo "</div>\n";
+
+			echo "<p>".$raccourci_doc;
 
 			echo "<div align='left'>\n";
 			$hash = calculer_action_auteur("ajout_doc");
@@ -262,6 +268,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			afficher_upload($link, 'Charger une vignette spécifique&nbsp;:', 'image');
 			echo "</div>\n";
 		}
+
 		echo "</div>\n";
 		echo "</td>\n";
 	}

@@ -208,11 +208,11 @@ function include_ecrire($file) {
 $php_module = ($flag_sapi_name AND @php_sapi_name() == 'apache') OR
 	(ereg("^Apache", $SERVER_SOFTWARE) AND ereg(" PHP", $SERVER_SOFTWARE));
 
+$flag_upload = get_cfg_var('upload_max_filesize') > 0;
+
+
 function tester_upload() {
-	global $hebergeur;
-	$test_upload = true;
-	if ($hebergeur == 'lycos') $test_upload = false;
-	return $test_upload;
+	return $GLOBALS['flag_upload'];
 }
 
 function tester_accesdistant() {
