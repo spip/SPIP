@@ -133,10 +133,10 @@ if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
 //
 debut_raccourcis();
 
-icone_horizontale("Voir tous les mots-cl&eacute;s", $adresse_retour, "mot-cle-24.gif", "rien.gif");
+icone_horizontale("Voir tous les mots-cl&eacute;s", "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 
 if ($connect_statut == '0minirezo')
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.gif", "creer.gif");
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
 
 fin_raccourcis();
 
