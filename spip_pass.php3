@@ -63,7 +63,7 @@ if ($email_oubli) {
 				$message .= "Pour retrouver votre acc\xe8s au site\n";
 				$message .= "$nom_site_spip ($adresse_site)\n\n";
 				$message .= "Veuillez vous rendre \xe0 l'adresse suivante :\n\n";
-				$message .= "   <$adresse_site/spip_pass.php3?p=$cookie>\n\n";
+				$message .= "   $adresse_site/spip_pass.php3?p=$cookie\n\n";
 				$message .= "Vous pourrez alors entrer un nouveau mot de passe\n";
 				$message .= "et vous reconnecter au site.\n";
 
