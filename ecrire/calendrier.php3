@@ -25,40 +25,7 @@ if (!_DIR_RESTREINT)
 	include_ecrire("inc_layer.php3");
  }
 
-// sans arguments => mois courant
-if (!$mois){
-  $today=getdate(time());
-  $jour = $today["mday"];
-  $mois = $today["mon"];
-  $annee = $today["year"];
- } else {if (!isset($jour)) {$jour = 1; $type= 'mois';}}
-
-$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
-
-if (!isset($type)) $type = 'mois';
-
 $afficher_bandeau_calendrier = true;
-
-if ($type == 'semaine') {
-	$afficher_bandeau_calendrier_semaine = true;
-
-	$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-	  }
-elseif ($type == 'jour') {
-	$titre = nom_jour($date)." ". affdate_jourcourt($date);
- }
- else {
-	$type = 'mois';
-	$titre = _T('titre_page_calendrier',
-		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
-	  }
-
-if (!_DIR_RESTREINT) 
-  debut_page($titre,  "redacteurs", "calendrier");
- else debut_html($titre);
-
-echo http_calendrier_init($date, $type);
-
-if (!_DIR_RESTREINT) fin_page(); else 	echo "</body></html>\n";
+echo http_calendrier_init('', $type);
+if (!_DIR_RESTREINT) fin_page();
 ?>

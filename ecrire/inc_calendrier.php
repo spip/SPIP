@@ -42,16 +42,53 @@ $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', "width='14' height=
 $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', "width='14' height='7' border='0'");
 $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "width='14' height='7' border='0'");
 
-function http_calendrier_init($date='', $type='semaine', $echelle='', $partie_cal='', $script='')
+function http_calendrier_init($date='', $ltype='semaine', $lechelle='', $lpartie_cal='', $script='')
 {
-	if (!$date) $date = date("Y-m-d");
+	global $mois, $annee, $jour, $type, $echelle, $partie_cal;
+
+	if (!isset($type)) $type = $ltype;
+	if (!isset($echelle)) $echelle = $lechelle;
+	if (!isset($lpartie_cal)) $partie_cal = $lpartie_cal;
+	if (!$date) {
+	  // sans arguments => mois courant
+	  if (!$mois){
+	    $today=getdate(time());
+	    $jour = $today["mday"];
+	    $mois = $today["mon"];
+	    $annee = $today["year"];
+	  } else {if (!isset($jour)) {$jour = 1; $type= 'mois';}}
+	}
+	$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
 	if (!$script) $script = $GLOBALS['REQUEST_URI']; 
 	$script = http_calendrier_retire_args($script,
 					      array('echelle','jour','mois','annee', 'type'));
 
+	if (!_DIR_RESTREINT) http_calendrier_titre($date, $type);
 	$f = 'http_calendrier_init_' . $type;
 	return $f($date, $echelle, $partie_cal, $script);
 }
+
+function http_calendrier_titre($date, $type)
+{
+
+if ($type == 'semaine') {
+
+	$GLOBALS['afficher_bandeau_calendrier_semaine'] = true;
+
+	$titre = _T('titre_page_calendrier',
+		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
+	  }
+elseif ($type == 'jour') {
+	$titre = nom_jour($date)." ". affdate_jourcourt($date);
+ }
+ else {
+	$titre = _T('titre_page_calendrier',
+		    array('nom_mois' => nom_mois($date), 'annee' => annee($date)));
+	  }
+
+  debut_page($titre,  "redacteurs", "calendrier");
+}
+
 
 // Conversion en HTML d'un tableau de champ ics
 // Le champ URL devient une balise A 
