@@ -171,6 +171,20 @@ function fin_cadre_enfonce($return = false){
 }
 
 
+function debut_cadre_sous_rub($icone='', $return = false, $fonction='', $titre = ''){
+	$retour_aff = debut_cadre('sous_rub', $icone, $fonction, $titre);
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+function fin_cadre_sous_rub($return = false){
+	$retour_aff = fin_cadre('sous_rub');
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+
+
 function debut_cadre_forum($icone='', $return = false, $fonction='', $titre = ''){
 	$retour_aff = debut_cadre('forum', $icone, $fonction, $titre);
 

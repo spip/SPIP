@@ -38,7 +38,7 @@ function enfant($collection){
 		if ($id_parent == "0") $logo_rub = "secteur-24.gif";
 		else $logo_rub = "rubrique-24.gif";
 		
-		$les_enfants .= debut_cadre_relief($logo_rub, true);
+		$les_enfants .= debut_cadre_sous_rub($logo_rub, true);
 		
 		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
 			include_ecrire("inc_logos.php3");
@@ -77,7 +77,7 @@ function enfant($collection){
 		$les_enfants .= "<div style='clear:both;'></div>";
 
 
-		$les_enfants .= fin_cadre_relief(true);
+		$les_enfants .= fin_cadre_sous_rub(true);
 		$les_enfants .= "</div>";
 		if ($spip_display == 4) $les_enfants .= "</li>";
 	}
