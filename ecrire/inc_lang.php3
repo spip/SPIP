@@ -221,6 +221,7 @@ function init_codes_langues() {
 	'fj' => "Fiji",
 	'fo' => "f&#248;royskt",
 	'fr' => "fran&#231;ais",
+	'fr_tu' => "fran&#231;ais copain",
 	'fy' => "Frisian",
 	'ga' => "Irish",
 	'gd' => "Scots Gaelic",
@@ -348,7 +349,7 @@ function lang_dir($lang, $droitier='ltr', $gaucher='rtl') {
 }
 
 function lang_typo($lang) {
-	if (($lang == 'eo') OR ($lang == 'fr') OR ($lang == 'cpf'))
+	if ($lang == 'eo' OR $lang == 'fr' OR substr($lang, 0, 3) == 'fr_' OR $lang == 'cpf')
 		return 'fr';
 	else if ($lang)
 		return 'en';
