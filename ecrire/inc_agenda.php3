@@ -39,6 +39,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 	$nom = mktime(1,1,1,$mois,1,$annee);
 	$jour_semaine = date("w",$nom);
 	$nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
+	if ($jour_semaine==0) $jour_semaine=7;
 	
 	if ($semaine) {
 		$jour_valide = mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved);
@@ -61,6 +62,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 		$jour_j = sprintf("%02d", $j);
 		$nom = mktime(1,1,1,$mois,$jour_j,$annee);
 		$jour_semaine = date("w",$nom);
+		if ($jour_semaine==0) $jour_semaine=7;
 		
 		if (checkdate($mois,$j,$annee)){
 
@@ -74,7 +76,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 				if ($jour_semaine==1) {
 					$style = "-moz-border-radius-top$spip_lang_left: 10px; -moz-border-radius-bottom$spip_lang_left: 10px;";
 				}
-				else if ($jour_semaine==0) {
+				else if ($jour_semaine==7) {
 					$style = "-moz-border-radius-top$spip_lang_right: 10px; -moz-border-radius-bottom$spip_lang_right: 10px;";
 				}
 				else {
@@ -89,7 +91,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 					$couleur = "white";
 				}
 				else {
-					if ($jour_semaine == 0) {
+					if ($jour_semaine == 7) {
 						$couleur_fond = $couleur_claire;
 						$couleur = "#aaaaaa";
 					} else {
@@ -108,7 +110,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = fal
 				echo "</td>";
 			}			
 			
-			if ($jour_semaine==0) echo "</tr>\n<tr>";
+			if ($jour_semaine==7) echo "</tr>\n<tr>";
 
 		}	
 	

@@ -1435,9 +1435,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_secondaire (_T('icone_a_suivre'), "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_site_entier'), "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
-		if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui' AND $options == 'avancees') {
+		/*if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui' AND $options == 'avancees') {
 			icone_bandeau_secondaire (_T('icone_etat_traductions'), "plan_trad.php3", "langues-24.gif", "plan-trad", $sous_rubrique);
-		}
+		}*/
 		if ($options == "avancees"){
 			icone_bandeau_secondaire (_T('icone_suivi_activite'), "synchro.php3", "synchro-24.gif", "synchro", $sous_rubrique);
 		}

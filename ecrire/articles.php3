@@ -233,10 +233,10 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	
 	// -- Experimental --
 	// Stockage des versions
-	if ($articles_versions != 'non') {
+	/*if ($articles_versions != 'non') {
 		include_ecrire("inc_diff.php3");
 		ajouter_version($id_article, stripslashes($chapo), stripslashes($texte), stripslashes($ps), '');
-	}
+	}*/
 
 	// Changer la langue heritee
 	if ($id_rubrique != $id_rubrique_old) {
