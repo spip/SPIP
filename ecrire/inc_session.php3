@@ -183,6 +183,7 @@ function verifier_php_auth() {
 	global $PHP_AUTH_USER, $PHP_AUTH_PW;
 	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
 		include_ecrire("inc_connect.php3"); // uniquement si appel depuis espace public
+		if (!$GLOBALS['db_ok']) return;
 		$login = addslashes($PHP_AUTH_USER);
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='$login'");
 		$row = mysql_fetch_array($result);
