@@ -6,8 +6,8 @@ define("_INC_HTML_SQUEL", "1");
 
 # Ce fichier doit IMPERATIVEMENT contenir la fonction "parser"
 # qui transforme un squelette en un tableau d'objets de classe Boucle
-# il est charge' par un include calcule' dans inc-calcul-squel
-# pour permettre diffe'rentes syntaxes en entre'e
+# il est chargé par un include calculé dans inc-calcul-squel
+# pour permettre différentes syntaxes en entrée
 
 define(NOM_DE_BOUCLE, "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define(NOM_DE_CHAMP, "#((" . NOM_DE_BOUCLE . ":)?([A-Z_]+))(\*?)");
@@ -237,6 +237,7 @@ function parser_param($params, &$result, $idb) {
 
 function parser($texte, $id_parent, &$boucles) {
 
+  $all_res = array();
   while (($p = strpos($texte, '<BOUCLE')) ||
 	 (substr($texte, 0, strlen('<BOUCLE')) == '<BOUCLE'))
     {
@@ -256,7 +257,7 @@ function parser($texte, $id_parent, &$boucles) {
 
       $type = strtolower($match[2]);
       if (substr($type, 0, 6) == 'boucle') {
-	// Re'cursion: pas de parame`tre, donc presque rien a` faire  
+	// Récursion: pas de paramètre, donc presque rien à faire  
 	$result->type_requete = 'boucle';
 	$result->param = substr($match[2], 6);
       } else {
