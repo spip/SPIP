@@ -274,8 +274,8 @@ function spip_query($query) {
 			@Header("Location: upgrade.php3?reinstall=oui");
 			exit;
 		}
-		return spip_query_db($query);
 	}
+	return spip_query_db($query);
 }
 
 
