@@ -10,7 +10,7 @@ define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
 
 function decrire_logo($racine) {
 	global $connect_id_auteur;
-	
+		
 	if ($img = cherche_image_nommee($racine)) {
 		list($dir, $racine, $fmt) = $img;
 		$fid = $dir . "$racine.".$fmt; 
@@ -191,7 +191,6 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
 	global $convert_command, $djpeg_command, $cjpeg_command, $pnmscale_command;
-
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
 	if ($format == 'png')
@@ -204,7 +203,6 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 
 	// liste des formats qu'on sait lire
 	$formats_graphiques = lire_meta('formats_graphiques');
-
 	// si le doc n'est pas une image, refuser
 	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
 		return;

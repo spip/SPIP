@@ -77,6 +77,7 @@ else {
 		// application du choix de vignette
 		if ($image_process) {
 			ecrire_meta('image_process', $image_process);
+			ecrire_metas(); // Puisque le switch se fait par lire_meta.
 			// mettre a jour les formats graphiques lisibles
 			switch (lire_meta('image_process')) {
 				case 'gd1':
