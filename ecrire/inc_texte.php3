@@ -411,12 +411,13 @@ function extraire_lien ($regs) {
 					$row = @spip_fetch_array(@spip_query($req));
 					$lien_texte = $row['titre'];
 
-					// supprimer les numeros des titres d'articles
-					include_ecrire("inc_filtres.php3");
-					$lien_texte = supprimer_numero($lien_texte);
 				}
 				break;
 		}
+
+		// supprimer les numeros des titres
+		include_ecrire("inc_filtres.php3");
+		$lien_texte = supprimer_numero($lien_texte);
 	} else {	// lien non automatique
 		$class_lien = "out";
 		// texte vide ?
