@@ -76,11 +76,6 @@ function calcule_header_et_page ($fond, $delais) {
 	AND ($GLOBALS['_COOKIE']['spip_admin']
 	OR $GLOBALS['_COOKIE']['spip_debug'])))
 		include_local(find_in_path('inc-formulaire_admin.php3'));
-		# attention, cet include ne considere pas forcement le
-		# $dossier_squelettes defini dans mes_fonctions.php3, mais si
-		# on incluait mes_fonctions.php3 on masquerait au webmestre l'erreur,
-		# courante, qui est de croire que ce fichier est toujours inclus.
-
 
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
