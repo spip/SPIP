@@ -455,6 +455,7 @@ function lang_select ($lang='') {
 	include_ecrire('inc_lang.php3');
 	php3_array_push($pile_langues, $spip_lang);
 	changer_langue(lang_supprimer_point($lang));
+echo $lang;
 }
 
 // revenir a la langue precedente

@@ -34,6 +34,7 @@ class Boucle {
 	var $type_requete;
 	var $separateur;
 	var $doublons;
+	var $lang_select;
 	var $partie, $total_parties;
 }
 
@@ -268,6 +269,9 @@ function parser_boucle($texte, $id_parent) {
 					else if ($param == 'unique' OR $param == 'doublons') {
 						$doublons = 'oui';
 						$req_where[] = "$table.$id_objet NOT IN (\$id_doublons[$type])";
+					}
+					else if (ereg('^lang_select(=(oui|non))?$', $param, $match)) {
+						if (!$lang_select = $match[2]) $lang_select = 'oui';
 					}
 					else if (ereg('^ *"([^"]*)" *$', $param, $match)) {
 						$separateur = ereg_replace("'","\'",$match[1]);
@@ -580,6 +584,7 @@ function parser_boucle($texte, $id_parent) {
 		$result->type_requete = $type;
 		$result->requete = $requete;
 		$result->doublons = $doublons;
+		$result->lang_select = $lang_select;
 		$result->separateur = $separateur;
 	}
 
@@ -1838,6 +1843,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$instance->type_requete = \''.$boucle->type_requete.'\';
 	$instance->separateur = \''.$boucle->separateur.'\';
 	$instance->doublons = \''.$boucle->doublons.'\';
+	$instance->lang_select = \''.$boucle->lang_select.'\';
 	$instance->partie = \''.$boucle->partie.'\';
 	$instance->total_parties = \''.$boucle->total_parties.'\';
 
@@ -2025,6 +2031,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["date"] = normaliser_date($row["date"]);
 		$contexte["date_redac"] = normaliser_date($row["date_redac"]);
 		$contexte["id_trad"] = $row["id_trad"];
+		if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
 		$contexte["accepter_forum"] = $row["accepter_forum"];
 		if ($instance->doublons == "oui") $id_doublons["articles"] .= ",".$row["id_article"];
 		';
@@ -2036,6 +2043,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_secteur"] = $row["id_rubrique"];
 		$contexte["date"] = normaliser_date($row["date_heure"]);
+		if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
 		if ($instance->doublons == "oui") $id_doublons["breves"] .= ",".$row["id_breve"];
 		';
 		break;
@@ -2082,6 +2090,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_parent"] = $row["id_parent"];
 		$contexte["id_secteur"] = $row["id_secteur"];
 		$contexte["date"] = normaliser_date($row["date"]);
+		if ($lang_dselect = ($instance->lang_select != "non")) lang_select($row["lang"]);
 		if ($instance->doublons == "oui") $id_doublons["rubriques"] .= ",".$row["id_rubrique"];
 		$syn_rubrique .= ",".$row["id_rubrique"].",";
 		';
@@ -2102,6 +2111,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	case 'auteurs':
 		$texte .= '
 		$contexte["id_auteur"] = $row["id_auteur"];
+		if ($lang_dselect = ($instance->lang_select == "oui")) lang_select($row["lang"]);
 		if ($instance->doublons == "oui") $id_doublons["auteurs"] .= ",".$row["id_auteur"];
 		';
 		break;
@@ -2139,7 +2149,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 	// Fermeture de la boucle spip_fetch_array et liberation des resultats
 	//
-
+	$texte .= "if (\$lang_dselect) lang_dselect();\n";
 	if ($flag_parties) {
 		$texte .= '
 		}

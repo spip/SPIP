@@ -323,15 +323,14 @@ function typo_en($letexte) {
 	return ereg_replace(" *~+ *", "&nbsp;", $letexte);
 }
 
-// Typographie generale : francaise si la langue principale du site est
-// 'cpf', 'fr' ou 'eo',
+// Typographie generale : francaise si la langue est 'cpf', 'fr' ou 'eo',
 // sinon anglaise (minimaliste)
 function typo($letexte) {
-	global $langue_site;
+	global $spip_lang;
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if (($langue_site == 'fr') OR ($langue_site == 'eo') OR ($langue_site == 'cpf'))
+	if (($spip_lang == 'fr') OR ($spip_lang == 'eo') OR ($spip_lang == 'cpf'))
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
