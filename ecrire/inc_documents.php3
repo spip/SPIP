@@ -8,9 +8,8 @@ define("_ECRIRE_INC_DOCUMENTS", "1");
 global $flag_ecrire;
 define('_DIR_IMG_ICONES', ($flag_ecrire ? "../" : "")."IMG/icones/");
 
-include_ecrire ("inc_objet.php3");
-include_ecrire ("inc_admin.php3");
 
+include_ecrire ("inc_admin.php3");
 
 //
 // Vignette pour les documents lies
@@ -490,9 +489,9 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (0".$id_doublons['documents'].") ";
 	$query .= " ORDER BY docs.id_document";
 
-	$images_liees = fetch_document($query);
+	$images_liees = @spip_query($query);
 
-	if ($images_liees) {
+	if (spip_num_rows($images_liees) > 0) {
 
 		$case = "0";
 		echo "<a name='portfolio'></a>";
@@ -500,10 +499,24 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "<div style='background-color: $couleur_claire; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>PORTFOLIO</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='3'>";
 		reset($images_liees);
-		while (list(, $id_document) = each($images_liees)) {
-			
+		while ($document = spip_fetch_array($images_liees)) {
+
+			$id_document = $document['id_document'];
+			$id_vignette = $document['id_vignette'];
+			$id_type = $document['id_type'];
+			$titre = $document['titre'];
+			$descriptif = $document['descriptif'];
+			$fichier = generer_url_document($id_document);
+
+			$fichier = substr($fichier, 3, strlen($fichier));
+			$largeur = $document['largeur'];
+			$hauteur = $document['hauteur'];
+			$taille = $document['taille'];
+			$date = $document['date'];
+			$mode = $document['mode'];
+
 			$flag_deplier = ($id_document_deplie == $id_document);
-			
+
 			if ($case == 0) {
 				echo "<tr style='border-top: 1px solid black;'>";
 			}
@@ -513,22 +526,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
 			//afficher_horizontal_document($id_document, $image_link, $redirect_url, $flag_modif);
 			
-			
-			$document = fetch_document($id_document);
-		
-			$id_vignette = $document->get('id_vignette');
-			$id_type = $document->get('id_type');
-			$titre = $document->get('titre');
-			$descriptif = $document->get('descriptif');
-			$fichier = generer_url_document($id_document);
-
-			$fichier = substr($fichier, 3, strlen($fichier));
-			$largeur = $document->get('largeur');
-			$hauteur = $document->get('hauteur');
-			$taille = $document->get('taille');
-			$date = $document->get('date');
-			$mode = $document->get('mode');
-
 			echo "<div style='text-align:center;'>";
 			if ($flag_modif) {
 			
@@ -645,8 +642,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			echo "<div class='verdana1' style='text-align: center;'>"
 			._T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur))."</div>";
 			
-			
-			
 			if ($flag_modif) {
 				if ($flag_deplier) echo debut_block_visible("port$id_document");
 				else echo debut_block_invisible("port$id_document");
@@ -730,25 +725,36 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 
 	//// Documents associes
-	$query = "SELECT * FROM #table AS docs, spip_documents_".$type."s AS l ".
+	$query = "SELECT * FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'";
 
 	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (0".$id_doublons['documents'].") ";
 	$query .= " ORDER BY docs.id_document";
 
-	$documents_lies = fetch_document($query);
+	$documents_lies = spip_query($query);
 
-
-	if ($documents_lies) {
+	if (spip_num_rows($documents_lies) > 0) {
 
 		$case = "0";
 		echo "<a name='docs'></a>";
 		echo "<div>&nbsp;</div>";
 		echo "<div style='background-color: #aaaaaa; padding: 4px; color: black; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px;' class='verdana2'><b>DOCUMENTS</b></div>";
 		echo "<table width='100%' cellspacing='0' cellpadding='5'>";
-		reset($documents_lies);
-		while (list(, $id_document) = each($documents_lies)) {
+
+		while ($document = spip_fetch_array($documents_lies)) {
+			$id_document = $document['id_document'];
+			$id_vignette = $document['id_vignette'];
+			$id_type = $document['id_type'];
+			$titre = $document['titre'];
+			$descriptif = $document['descriptif'];
+			$fichier = generer_url_document($id_document);
+			$fichier = substr($fichier, 3, strlen($fichier));
+			$largeur = $document['largeur'];
+			$hauteur = $document['hauteur'];
+			$taille = $document['taille'];
+			$date = $document['date'];
+			$mode = $document['mode'];
 			
 			$flag_deplier = ($id_document_deplie == $id_document);
 			
@@ -762,18 +768,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			//afficher_horizontal_document($id_document, $image_link, $redirect_url, $flag_modif);
 			
 			
-			$document = fetch_document($id_document);
-			$id_vignette = $document->get('id_vignette');
-			$id_type = $document->get('id_type');
-			$titre = $document->get('titre');
-			$descriptif = $document->get('descriptif');
-			$fichier = generer_url_document($id_document);
-			$fichier = substr($fichier, 3, strlen($fichier));
-			$largeur = $document->get('largeur');
-			$hauteur = $document->get('hauteur');
-			$taille = $document->get('taille');
-			$date = $document->get('date');
-			$mode = $document->get('mode');
 		
 			$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 			if ($type_doc = @spip_fetch_array($result))	{
@@ -827,7 +821,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			}
 			echo "<div class='verdana1' style='text-align: center;'>".taille_en_octets($taille)."</div>";
 			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur))."</div>";
-			
 			
 			if ($flag_modif) {
 				if ($flag_deplier) echo debut_block_visible("port$id_document");
@@ -961,18 +954,18 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 	$ancre = 'doc'.$id_document;
 
-	$document = fetch_document($id_document);
+	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_document"));
 
-	$id_vignette = $document->get('id_vignette');
-	$id_type = $document->get('id_type');
-	$titre = $document->get('titre');
-	$descriptif = $document->get('descriptif');
+	$id_vignette = $document['id_vignette'];
+	$id_type = $document['id_type'];
+	$titre = $document['titre'];
+	$descriptif = $document['descriptif'];
 	$fichier = generer_url_document($id_document);
-	$largeur = $document->get('largeur');
-	$hauteur = $document->get('hauteur');
-	$taille = $document->get('taille');
-	$date = $document->get('date');
-	$mode = $document->get('mode');
+	$largeur = $document['largeur'];
+	$hauteur = $document['hauteur'];
+	$taille = $document['taille'];
+	$date = $document['date'];
+	$mode = $document['mode'];
 
 	if ($mode != 'document') return;
 
@@ -1188,14 +1181,20 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 	// Ne pas afficher vignettes en tant qu'images sans docs
 	//// Documents associes
-	$query = "SELECT * FROM #table AS docs, spip_documents_".$type."s AS l ".
+	$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_".$type."=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document' ORDER BY docs.id_document";
 
-	$documents_lies = fetch_document($query);
+	$res = spip_query($query);
+	$documents_lies = array();
+	while ($row = spip_fetch_array($res))
+		$documents_lies[]= $row['id_document'];
 
 	if ($documents_lies){
 		global $descriptif, $texte, $chapo;
+
+# HACK!!! simule une mise en page pour affecter la globale id_doublons
+# referencee dans affiche_cas_document appelee plus loin
 		$pour_documents_doublons = propre("$descriptif$texte$chapo");
 
 		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
@@ -1210,23 +1209,19 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	}
 
 	//// Images sans documents
-	$query = "SELECT * FROM #table AS docs, spip_documents_".$type."s AS l ".
+	$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
 			"WHERE l.id_".$type."=$id_article AND l.id_document=docs.id_document ".$docs_exclus.
 			"AND docs.mode='vignette' ORDER BY docs.id_document";
 
-	$images_liees = fetch_document($query);
+	$images_liees = spip_query($query);
 
 	/// Ajouter nouvelle image
 	echo "\n<p>";
 	//debut_cadre_relief("image-24.gif");
-	if ($images_liees) {
-		reset($images_liees);
-		while (list(, $id_document) = each($images_liees)) {
-			afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
-			//echo "<p>\n";
-		}
+	while ($document = spip_fetch_array($images_liees)) {
+		$id_document = $document['id_document'];
+		afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
 	}
-
 
 	debut_cadre_relief("image-24.gif", false, "creer.gif");
 
@@ -1327,17 +1322,17 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
-	$document = fetch_document($id_document);
+	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_document"));
 
-	$id_vignette = $document->get('id_vignette');
-	$id_type = $document->get('id_type');
-	$titre = $document->get('titre');
-	$descriptif = $document->get('descriptif');
+	$id_vignette = $document['id_vignette'];
+	$id_type = $document['id_type'];
+	$titre = $document['titre'];
+	$descriptif = $document['descriptif'];
 	$fichier = generer_url_document($id_document);
-	$largeur = $document->get('largeur');
-	$hauteur = $document->get('hauteur');
-	$taille = $document->get('taille');
-	$mode = $document->get('mode');
+	$largeur = $document['largeur'];
+	$hauteur = $document['hauteur'];
+	$taille = $document['taille'];
+	$mode = $document['mode'];
 	if (!$titre) {
 		$titre_fichier = _T('info_sans_titre_2');
 		$titre_fichier .= " <small>(".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier).")</small>";
