@@ -27,14 +27,22 @@ else $uniq_auteur = true;
 if ($connect_statut == "0minirezo") $req_where = " AND spip_articles.statut IN ('prepa','prop','publie')"; 
 else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
 
+echo "<p>";
 
-echo "<div class='arial1'>";
+echo "<div class='arial11'>";
+echo "<p>";
 
-if (!$uniq_auteur AND $id_secteur < 1) echo "<li><b>tout afficher</b>";
-else echo "<li><a href='suivi_versions.php'>tout afficher</a>";
+if (!$uniq_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
+else echo "<li><a href='suivi_versions.php'>"._T('info_tout_site')."</a>";
 
-if ($uniq_auteur) echo "<li><b>mes modifications</b>";
-else echo "<li><a href='suivi_versions.php?uniq_auteur=true'>mes modifications</a>";
+echo "<p>";
+
+$nom_auteur = $GLOBALS['auteur_session']['nom'];
+
+if ($uniq_auteur) echo "<li><b>$nom_auteur</b>";
+else echo "<li><a href='suivi_versions.php?uniq_auteur=true'>$nom_auteur</a>";
+
+echo "<p>";
 
 $query = "SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY titre";
 $result = spip_query($query);
@@ -49,6 +57,23 @@ while ($row = mysql_fetch_array($result)) {
 	if ($id_rubrique == $id_secteur)  echo "<li><b>$titre</b>";
 	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='suivi_versions.php?id_secteur=$id_rubrique'>$titre</a>";
 }
+
+if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == 'oui')) {
+	echo "<p>";
+	$langues = explode(',', lire_meta('langues_multilingue'));
+	
+	foreach ($langues as $lang) {
+		$titre = traduire_nom_langue($lang);
+	
+		$query_lang = "SELECT spip_versions.* FROM spip_versions, spip_articles WHERE spip_versions.id_article = spip_articles.id_article AND spip_versions.id_version > 1 AND spip_articles.lang='$lang'$req_where LIMIT 0,1";
+		$result_lang = spip_query($query_lang);
+		
+		if ($lang == $lang_choisie)  echo "<li><b>$titre</b>";
+		else if (spip_num_rows($result_lang) > 0) echo "<li><a href='suivi_versions.php?lang_choisie=$lang'>$titre</a>";
+	}
+}
+
+
 echo "</div>";
 
 
@@ -59,7 +84,7 @@ echo "</div>";
 
 debut_droite();
 
-afficher_suivi_versions ($debut, $id_secteur, $uniq_auteur);
+afficher_suivi_versions ($debut, $id_secteur, $uniq_auteur, $lang_choisie);
 
 fin_page();
 

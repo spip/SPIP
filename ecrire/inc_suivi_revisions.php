@@ -19,7 +19,7 @@ function afficher_para_modifies ($texte) {
 	return $texte;
 }
 
-function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false) {
+function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "") {
 	global $connect_id_auteur, $connect_statut, $dir_lang;
 	
 	$nb_aff = 10;
@@ -29,6 +29,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
 	
 	if ($uniq_auteur) $req_where = " AND spip_versions.id_auteur = $connect_id_auteur";
+
+	if (strlen($lang) > 0) $req_where .= " AND spip_articles.lang='$lang'";
 
 	if ($id_secteur > 0) $req_where .= " AND spip_articles.id_secteur = $id_secteur";
 
@@ -53,7 +55,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			for ($i = 0; $i < $nb_tranches; $i++) {
 				if ($i > 0) echo " | ";
 				if ($i*$nb_aff == $debut) echo "<b>";
-				else echo "<a href='suivi_versions.php?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur'>";
+				else echo "<a href='suivi_versions.php?debut=".($i * $nb_aff)."&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang'>";
 				echo (($i * $nb_aff) + 1);
 				if ($i*$nb_aff == $debut) echo "</b>";
 				else echo "</a>";
