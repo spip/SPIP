@@ -180,16 +180,11 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$ps = addslashes(corriger_caracteres($ps));
 
 	// recoller les champs du extra
-	if (function_exists('champs_extra')) {
-		$champs_suppl=champs_extra("article", $id_article, $id_rubrique);
+	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$extra=extra_recup_saisie($champs_suppl);
-		$ser_extra = addslashes(serialize($extra));
-	} else {
-		$extra=array();
-		$ser_extra = "";
-	}
-
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("article", $id_secteur))."'";
+	} else
+		$add_extra = '';
 
 	// Verifier qu'on envoie bien dans une rubrique autorisee
 	if ($flag_auteur OR acces_rubrique($id_rubrique)) {
@@ -198,7 +193,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", extra=\"$ser_extra\" WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\" $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') $reindexer = true;
@@ -255,7 +250,7 @@ if ($row = spip_fetch_array($result)) {
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
 	$referers = $row["referers"];
-	$extra = unserialize($row["extra"]);
+	$extra = $row["extra"];
 }
 
 // pour l'affichage du virtuel
@@ -1239,10 +1234,9 @@ else {
 		echo fin_cadre_relief();
 	}
 
-	if ($extra && function_exists(champs_extra)) {
-		$champs_suppl=champs_extra("article", $id_article, $id_rubrique);
+	if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
-		extra_affichage($extra, $champs_suppl);
+		extra_affichage($extra, "article");
 	}
 }
 

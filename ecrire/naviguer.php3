@@ -152,16 +152,14 @@ if ($titre) {
 	$descriptif = addslashes($descriptif);
 	$texte = addslashes($texte);
 
-	// recoller les champs du extra
-	if (function_exists('champs_extra')) {
-		$champs_suppl=champs_extra("rubrique", $coll, $id_parent);
+	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
-		$extra = serialize(extra_recup_saisie($champs_suppl));
+		$add_extra = ", extra = '".addslashes(extra_recup_saisie("rubrique"))."'";
 	} else
-		$extra='';
+		$add_extra = '';
 
 	if ($flag_editable) {
-		$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\", extra=\"".addslashes($extra)."\" WHERE id_rubrique=$coll";
+		$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" $add_extra WHERE id_rubrique=$coll";
 		$result = spip_query($query);
 	}
 
@@ -188,7 +186,7 @@ while($row=spip_fetch_array($result)){
 	$descriptif=$row['descriptif'];
 	$texte=$row['texte'];
 	$statut = $row['statut'];
-	$extra = unserialize($row["extra"]);
+	$extra = $row["extra"];
 }
 
 if ($titre)
@@ -353,11 +351,10 @@ if (strlen($descriptif) > 1) {
 
 echo "</table>\n";
 
-if ($extra && function_exists(champs_extra)) {
-	$champs_suppl=champs_extra("rubrique", $id_rubrique, $id_parent);
-	include_ecrire("inc_extra.php3");
-	extra_affichage($extra, $champs_suppl);
-}
+	if ($champs_extra AND $extra) {
+		include_ecrire("inc_extra.php3");
+		extra_affichage($extra, "rubrique");
+	}
 
 
 /// Mots-cles
