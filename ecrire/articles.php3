@@ -797,7 +797,7 @@ if ($flag_editable) {
 				$query_auteur = "SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
 				$result_auteur = spip_query($query_auteur);
 				if ($row_auteur = spip_fetch_array($result_auteur)) {
-					$nom_auteur_modif = $row_auteur["nom"];
+					$nom_auteur_modif = typo($row_auteur["nom"]);
 				}
 			}
 		}
