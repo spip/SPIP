@@ -454,7 +454,7 @@ function tester_upload() {
 // si un buffer est deja ouvert, stop
 if ($flag_ob AND !strlen(@ob_get_contents())) {
 	@header("Vary: Cookie, Accept-Encoding");
-	@ob_start("spip_ob_function");
+	@ob_start("spip_ob_handler");
 } else {
 	$flag_ob = false;
 	@header("Vary: Cookie");
@@ -463,8 +463,14 @@ if ($flag_ob AND !strlen(@ob_get_contents())) {
 //
 // La fonction elle-meme
 //
-function spip_ob_function ($page) {
+function spip_ob_handler ($page) {
 	global $var_recherche, $flag_pcre, $flag_preserver, $flag_ecrire;
+	static $buffer_continuation = false;
+
+	// buffer de continuation ?
+	global $ob_send;
+	if ($ob_send)
+		$buffer_continuation = true;
 
 	// Surligner les mots sur le site public
 	if ($var_recherche AND $flag_pcre AND !$flag_preserver AND !$flag_ecrire) {
@@ -475,6 +481,8 @@ function spip_ob_function ($page) {
 
 	// Tests compression
 	$use_gz = $GLOBALS['auto_compress'] && $GLOBALS['flag_obgz']
+	// pas de continuation detectee
+	&& !$buffer_continuation
 	// special bug de proxy
 	&& !eregi("NetCache|Hasd_proxy", $HTTP_VIA)
 	// special bug Netscape Win 4.0x
@@ -488,11 +496,24 @@ function spip_ob_function ($page) {
 	if ($use_gz AND ($page_gz = @ob_gzhandler($page,5)) !== false)
 		$page = $page_gz;
 
-	# spip_log('Content-Length: '.strlen($page).($page_gz? ', compression':''));
-	@header('Content-Length: '.strlen($page));
-	@header('Connection: close');
+	# spip_log('Content-Length: '.strlen($page).($page_gz? ', compression':'').($buffer_continuation ? ", portion":""));
+	if (!$buffer_continuation) {
+		@header('Content-Length: '.strlen($page));
+		@header('Connection: close');
+	}
+
 	return $page;
 }
+
+// La fonction ci-dessous permet a un script de flusher ses resultats partiels
+// (en contrepartie cela desactive la compression)
+function spip_ob_flush() {
+	$GLOBALS['ob_send'] = true;
+	ob_end_flush();
+	ob_start('spip_ob_handler');
+}
+
+
 
 class Link {
 	var $file;
