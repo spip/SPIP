@@ -876,6 +876,7 @@ siti esterni che puntano con un link al tuo (<i>referrer</i>)?',
 'info_symbole_jaune' => 'Il simbolo <B>giallo</b> indica un <B>annuncio a tutti i redattori </b>: modificabile da tutti gli amministratori e visibile da tutti i redattori.',
 'info_symbole_vert' => 'Il simbolo <B>verde</B> indica i <B>messaggi scambiati con altri utenti  </B> del sito.',
 'info_syndication' => 'syndication:',
+'info_syndication_articles' => 'articolo/i',
 'info_taille_maximale_vignette' => 'Taglia massima delle immagini create dal sistema:',
 'info_telecharger' => 'Upload dal tuo computer:',
 'info_telecharger_nouveau_logo' => 'Upload di un nuovo logo:',
@@ -988,6 +989,10 @@ siti esterni che puntano con un link al tuo (<i>referrer</i>)?',
 'item_utiliser_mots_cles' => 'Utilizza le parole chiave',
 'item_utiliser_syndication' => 'Attiva la syndication automatica',
 'item_visiteur' => 'visitatore',
+
+
+// J
+'jour_non_connu_nc' => 'n.c.',
 
 
 // L

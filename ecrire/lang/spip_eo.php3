@@ -846,6 +846,7 @@ Dankon pro via partopreno
 'info_symbole_jaune' => 'La <B>flava</B> simbolo indikas <B>anoncon al &#265;iuj redaktistoj</B>&nbsp;: modifebla de &#265;iuj administrantoj, kaj videbla por &#265;iuj redaktistoj.',
 'info_symbole_vert' => 'La <B>verda</B> simbolo indikas la <B>mesa&#285;ojn inter&#349;an&#285;itajn kun aliaj uzantoj</B> de la teksejo.',
 'info_syndication' => 'kunligo :',
+'info_syndication_articles' => 'artikolo(j)',
 'info_taille_maximale_vignette' => 'Maksimuma grandeco de la vinjetoj generataj de la sistemo&nbsp;:',
 'info_telecharger' => 'Al&#349;uti ekde via komputilo&nbsp;:',
 'info_telecharger_nouveau_logo' => '&#348;argi novan vinjeton:',
@@ -958,6 +959,10 @@ Dankon pro via partopreno
 'item_utiliser_mots_cles' => 'Uzi la &#349;losilvortojn',
 'item_utiliser_syndication' => 'Uzi la a&#365;tomatan kunligadon',
 'item_visiteur' => 'vizitanto',
+
+
+// J
+'jour_non_connu_nc' => 'n.c.',
 
 
 // L
