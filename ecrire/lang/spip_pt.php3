@@ -306,6 +306,11 @@ ou da rede',
 'entree_titre_image' => 'T&iacute;tulo da imagem&nbsp;:',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obrigat&oacute;rio]<BR>',
 'entree_url' => 'O endere&ccedil;o (URL) do seu s&iacute;tio',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F

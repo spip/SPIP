@@ -302,6 +302,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'T&iacute;tulo da imaxe:',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obrigatorio]<BR>',
 'entree_url' => 'O enderezo (URL) do teu lugar',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F

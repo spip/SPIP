@@ -289,6 +289,11 @@ de los directorios mencionados. El procedimiento se explica detalladamente en la
 'entree_titre_image' => 'T&iacute;tulo de la imagen',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obligatorio]<BR>',
 'entree_url' => 'La direcci&oacute;n (URL) de tu sitio',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F

@@ -288,6 +288,11 @@ Es kann Kompatibilit&auml;tsprobleme bei Webeditoren und manchen Mailprogrammen 
 'entree_titre_image' => 'Titel des Bilds:',
 'entree_titre_obligatoire' => '<B>Titel</b> [Pflichtfeld]<BR>',
 'entree_url' => 'Adresse (URL) Ihrer Website',
+'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
+'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
 
 
 // F
