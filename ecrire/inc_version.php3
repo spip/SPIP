@@ -551,6 +551,7 @@ class Link {
 	//
 
 	function getForm($method = 'GET', $anchor = '', $enctype = '') {
+		include_ecrire("inc_filtres.php3");
 		if ($anchor) $anchor = '#'.$anchor;
 		$form = "<form method='$method' action='".$this->file.$anchor."'";
 		if ($enctype) $form .= " enctype='$enctype'";
