@@ -68,12 +68,7 @@ function charger_squelette ($squelette) {
 		}
 
 		// sinon le compiler
-		if ($GLOBALS['tradition']) {
-			include_local("inc-calcul-squel.php3");
-		}
-		else {
-			include_local("inc-compilo.php3");
-		}
+		include_local("inc-compilo.php3");
 		if (!lire_fichier ($sourcefile, $skel)) { 
 			// erreur webmaster : $fond ne correspond a rien
 			include_ecrire ("inc_presentation.php3");
@@ -136,7 +131,7 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	if (file_exists($dir)) {
 		include($dir);
 	} else { */
-		include_local("inc-chercher.php3");
+		include_local("inc-chercher.php3"); # a renommer
 	/* }
 	*/
 
@@ -157,22 +152,7 @@ function cherche_page ($cache, $contexte, $fond, $id_rubrique, $lang='')  {
 	$fonc = charger_squelette($skel);
 
 	// Calculer la page a partir du main() du skel compile
-	$page =  $fonc(array('cache' =>$cache),
-		array($contexte),
-		/* obsolete avec les doublons de inc-compilo */
-		array(
-			'articles' => '0',
-			'rubriques' => '0',
-			'breves' => '0',
-			'auteurs' => '0',
-			'forums' => '0',
-			'signatures' => '0',
-			'mots' => '0',
-			'groupes_mots' => '0',
-			'syndication' => '0',
-			'documents' => '0'
-		)
-	);
+	$page =  $fonc(array('cache' => $cache), array($contexte));
 
 	// Memoriser le nom du squelette utilise (pour le debuggueur)
 	$page['squelette'] = $skel;

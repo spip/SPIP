@@ -623,7 +623,7 @@ $code
 //
 // Fonction principale du squelette $sourcefile
 //
-function $nom (\$Cache, \$Pile, \$ignore_les_doublons_inc_calcul_php3, \$Numrows='', \$SP=0) {
+function $nom (\$Cache, \$Pile) {
 $corps
 \$t0 = $return;
 
