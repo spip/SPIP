@@ -30,7 +30,7 @@ function enfant($leparent) {
 		
 		$titre = couper($titre." ", 50); // largeur maxi
 		if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">$titre\n";		
+		echo "<OPTION".mySel($my_rubrique,$id_rubrique).">".supprimer_tags($titre)."\n";		
 	}
 }
 

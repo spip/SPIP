@@ -295,7 +295,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$result_autres_mots = spip_query($query_autres_mots);
 			while ($row_autres = spip_fetch_array($result_autres_mots)) {
 				$le_mot = $row_autres['id_mot'];
-				$le_titre_mot = $row_autres['titre'];
+				$le_titre_mot = supprimer_tags($row_autres['titre']);
 
 				if ($le_mot == $id_mot) $selected = "SELECTED";
 				else $selected = "";

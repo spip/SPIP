@@ -387,7 +387,7 @@ while($row = spip_fetch_array($result_message)) {
 								echo "\n<OPTION VALUE=\"x\">";
 							}
 				
-							$texte_option = couper("$nom ($email) ", 40);
+							$texte_option = supprimer_tags(couper("$nom ($email) ", 40));
 							echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
 							$statut_old = $statut_auteur;
 							$premiere_old = $premiere;
