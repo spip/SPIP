@@ -57,6 +57,12 @@ if (defined("_INC_PUBLIC")) {
 		}
 	}
 
+	// Inserer au besoin les boutons admins
+	if ($affiche_boutons_admin) {
+		include_local("inc-admin.php3");
+		$page = affiche_boutons_admin($page);
+	}
+
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
 		include_ecrire("inc_debug_sql.php3");
