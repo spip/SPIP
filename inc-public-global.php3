@@ -21,8 +21,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		spip_timer();
 		$page = calculer_page($chemin_cache,
 			array('fond' => $fond,
-				'contexte' => $contexte,
-				'var_recherche' => $HTTP_GET_VARS['var_recherche']),
+				'contexte' => $contexte),
 			$delais,
 			$inclusion);
 		if ($chemin_cache)
@@ -126,6 +125,12 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		if ($page_boutons_admin = admin_page($use_cache, $page['texte'])) {
 			$page['texte'] = $page_boutons_admin;
 			$page['process_ins'] = 'php';
+		}
+
+		// Surligne
+		if ($GLOBALS['var_recherche']) {
+			include_ecrire("inc_surligne.php3");
+			$page['texte'] = surligner_mots($page['texte'], $GLOBALS['var_recherche']);
 		}
 	}
 

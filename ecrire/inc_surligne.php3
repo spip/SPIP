@@ -90,9 +90,9 @@ function surligner_mots($page, $mots) {
 
 	if (!$mots_surligne) return $page;
 
-	$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)((' .
-	  join('|', $mots_surligne).
-	  ')[[:alnum:]_]*?)/Uis';
+	$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('
+	. join('|', $mots_surligne)
+	. ')[[:alnum:]_]*?)/Uis';
 
 	// en cas de surlignement limite' (champs #SURLIGNE), 
 	// le compilateur a inse're' les balises de surlignement
@@ -100,41 +100,39 @@ function surligner_mots($page, $mots) {
 	// On boucle pour le cas ou` il y a plusieurs zones
 
 	$p = strpos($page, MARQUEUR_SURLIGNE);
-	if ($p) 
-	  {
-	    $debut = '';
-	    while ($p) {
-	      $debut .= substr($page, 0, $p-1);
-	      $page = substr($page, $p+strlen(MARQUEUR_SURLIGNE));
-	      $q = strpos($page,MARQUEUR_FSURLIGNE);
-	      $debut .= trouve_surligne(substr($page, 0, $q-1), $regexp);
-	      $page = substr($page, $q+strlen(MARQUEUR_SURLIGNE)+1);
-	      $p = strpos($page,MARQUEUR_SURLIGNE);
-	    }
-	    return $debut . $page;
-	  } else {
-
-	// pour toute la page: ignorer ce qui est avant </head> ou <body>
-	$re = '/<\/head>|<body[^>]*>/i';
-	if (preg_match($re, $page, $exp)) {
-	  $debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
-	  $page = substr($page, strlen($debut));
-	} else
-	  $debut = '';
-	return $debut . trouve_surligne($page, $regexp);
-	  }
+	if ($p) {
+		$debut = '';
+		while ($p) {
+			$debut .= substr($page, 0, $p-1);
+			$page = substr($page, $p+strlen(MARQUEUR_SURLIGNE));
+			$q = strpos($page,MARQUEUR_FSURLIGNE);
+			$debut .= trouve_surligne(substr($page, 0, $q-1), $regexp);
+			$page = substr($page, $q+strlen(MARQUEUR_SURLIGNE)+1);
+			$p = strpos($page,MARQUEUR_SURLIGNE);
+		}
+		return $debut . $page;
+	} else {
+		// pour toute la page: ignorer ce qui est avant </head> ou <body>
+		$re = '/<\/head>|<body[^>]*>/i';
+		if (preg_match($re, $page, $exp)) {
+			$debut = substr($page, 0, strpos($page, $exp[0])+strlen($exp[0]));
+			$page = substr($page, strlen($debut));
+		} else
+			$debut = '';
+		return $debut . trouve_surligne($page, $regexp);
+	}
 }
 
 function trouve_surligne($page, $regexp) {
-  // Remplacer une occurrence de mot maxi par espace inter-tag
-  // (max 1 par paragraphe, sauf italiques etc.)
-  // se limiter a 4 remplacements pour ne pas bouffer le CPU ;
-  // traiter <textarea...>....</textarea> comme un tag.
-  global $nombre_surligne;
-  $page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
-  $page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
-  $page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
-  return $page ;
+	// Remplacer une occurrence de mot maxi par espace inter-tag
+	// (max 1 par paragraphe, sauf italiques etc.)
+	// se limiter a 4 remplacements pour ne pas bouffer le CPU ;
+	// traiter <textarea...>....</textarea> comme un tag.
+	global $nombre_surligne;
+	$page = preg_replace('/(<textarea[^>]*>)([^<>]*)(<\/textarea>)/Uis', '\1<<SPIP\2>>\3', $page);
+	$page = preg_replace($regexp, '\1<span class="spip_surligne">\4</span>', $page, $nombre_surligne);
+	$page = preg_replace('/(<textarea[^>]*>)<<SPIP([^<>]*)>>(<\/textarea>)/Uis', '\1\2\3', $page);
+	return $page ;
 }
 
 ?>
