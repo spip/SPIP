@@ -164,7 +164,7 @@ function calculer_visites($date = "") {
 	if (!$date) $date = date("Y-m-d", time() - 24 * 3600);
 
 	// Sur tout le site, nombre de visiteurs uniques pendant la journee
-	$query = "SELECT COUNT(DISTINCT ip) AS total_visites FROM spip_visites_temp GROUP BY ip";
+	$query = "SELECT COUNT(DISTINCT ip) AS total_visites FROM spip_visites_temp";
 	$result = spip_query($query);
 	if ($row = @mysql_fetch_array($result))
 		$total_visites = $row['total_visites'];
