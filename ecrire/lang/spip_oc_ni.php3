@@ -49,10 +49,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cau pas apelar aquela foncion dins aqueu cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@) ! ',
-'avis_erreur_version_archive' => '<b>D&agrave;ida&nbsp;! Lo fichier @archive@ corresp&ograve;nde a una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de dificultats grandassi&nbsp;: risca de destruccion de la v&ograve;stra basa de donadas, disfoncionaments div&egrave;rs dau sit etc. Non validetz aquela demanda d\'importacion.<p> Per mai d\'informacions, vegu&egrave;tz
+'avis_erreur_version_archive' => '<b>D&agrave;ida&nbsp;! Lo fichier @archive@ corresp&ograve;nde a una autra version de SPIP qu\'aquela qu\'av&egrave;tz installada.</b> Anatz v&egrave;rs de dificultats grandassi&nbsp;: risca de destruccion de la v&ograve;stra basa de donadas, disfoncionaments div&egrave;rs dau sit etc. Non validetz aquela demanda d\'importacion.<p /> Per mai d\'informacions, vegu&egrave;tz
 <a HREF=\'http://www.spip.net/fr_article1489.html\'>
 la documentacion de SPIP</a>.',
-'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p>SPIP es ja installat.',
+'avis_espace_interdit' => '<b>Espaci pro&iuml;bit</b><p />SPIP es ja installat.',
 'avis_lecture_noms_bases_1' => 'Lo programa d\'installacion a pas poscut li&egrave;ger lu noms dei basas de donadas installadi.',
 'avis_lecture_noms_bases_2' => 'Sia minga de basa es pas disponibla, sia la foncion que permete d\'entierar li basas es estada desactivada per de rasons de seguretat (cen qu\'es lo cas de plusors aubergadors).',
 'avis_lecture_noms_bases_3' => 'Dins la segonda alternativa, es probable qu\'una basa que p&ograve;rta lo v&ograve;stre nom de connexion sigue utilisabla&nbsp;:',
@@ -236,6 +236,12 @@ toi lu navigadors lo sup&ograve;rtan, mas permete pas
 'date_saison_2' => 'prima',
 'date_saison_3' => 'estiu',
 'date_saison_4' => 'auton',
+'diff_para_ajoute' => 'Paragraf ajustat',
+'diff_para_deplace' => 'Paragraf despla&ccedil;at',
+'diff_para_supprime' => 'Paragraf suprimit',
+'diff_texte_ajoute' => 'T&egrave;xt ajustat',
+'diff_texte_deplace' => 'T&egrave;xt despla&ccedil;at',
+'diff_texte_supprime' => 'T&egrave;xt suprimit',
 'dirs_commencer' => 'per comen&ccedil;ar vertadierament l\'installacion',
 'dirs_preliminaire' => 'Preliminari : <b>Reglar lu drechs d\'acc&egrave;s</b>',
 'dirs_probleme_droits' => '<b>Probl&egrave;ma de drechs d\'acc&egrave;s</b>',
@@ -372,7 +378,6 @@ Merc&eacute; de la v&ograve;stra participacion
 'forum_attention_trois_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo v&ograve;stre titre ten mens de tres caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat&nbsp;:',
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aqu&iacute;</a> per continuar.',
-'forum_creer_paragraphes' => '(Per crear de paragrafs, laissatz simplament de linhas vueii)',
 'forum_forum' => 'forum',
 'forum_info_modere' => 'Aqueu forum es moderat a pri&ograve;ri&nbsp;: la v&ograve;stra contribucion apareisser&agrave; apr&egrave;s &egrave;stre estada validada per un administrator dau sit.',
 'forum_lien_hyper' => '<b>Ligam ipert&egrave;xt</b> (opcionau)',
@@ -595,7 +600,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_config_suivi_explication' => 'Vos pod&egrave;tz abonar a la mailing-list d\'aqueu sit. Receber&egrave;tz per corri&egrave;r electonic li anon&ccedil;as dei articles e br&egrave;vas prepauats a la publication.',
 'info_confirmer_passe' => 'Confirmar aqueu nov&egrave;u m&ograve;t de santa Clara:',
 'info_connexion_base' => 'Segonda estapa&nbsp;: <B>Pr&ograve;va de connexion a la basa</B>',
-'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</B><P> Pod&egrave;tz passar a l\'estapa seguenta.',
+'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><p> Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_connexion_mysql' => 'Promi&egrave;ra estapa:<B>la v&ograve;stra connexion MySQL</B>',
 'info_connexion_ok' => 'La connexion a capitat.',
 'info_connexion_refusee' => 'Connexion refusada',
@@ -673,9 +678,10 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_forum_interne' => 'forum interne',
 'info_forum_ouvert' => 'Dins l\'espaci privat dau sit, un forum es dub&egrave;rt a toi lu redactors registrats. Pod&egrave;tz, &ccedil;ai sota, activar un forum suplementari, reservat ai solets administrators.',
 'info_forum_statistiques' => 'Estadisticas de li visitas',
-'info_gauche_admin_effacer' => '<B>A aquela p&agrave;gina, son que lu responsables dau sit que p&ograve;don accedir.</B><P> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implican un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.',
-'info_gauche_admin_tech' => '<B>A aquela p&agrave;gina, son que lu responsables dau sit que i p&ograve;don accedir.</B><P> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implican un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.',
-'info_gauche_admin_vider' => '<B>A aquela p&agrave;gina, son que lu responsables dau sit que i p&ograve;don accedir.</B><P> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implican un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.',
+'info_gauche_admin_effacer' => '<b>A aquela p&agrave;gina, son que lu responsables dau sit que p&ograve;don accedir.</b><p /> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implican un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.',
+'info_gauche_admin_tech' => '<b>A aquela p&agrave;gina, son que lu responsables dau sit que i p&ograve;don accedir.</b><p /> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implican un proc&egrave;ssus d\'autentificacion especific, que
+ necessita d\'aver un acc&egrave;s FTP au sit web.',
+'info_gauche_admin_vider' => '<b>A aquela p&agrave;gina, son que lu responsables dau sit que i p&ograve;don accedir.</b><p /> Dona acc&egrave;s ai diferenti foncions de mantenen&ccedil;a tecnica. D\'unas d\'entre eli implican un proc&egrave;ssus d\'autentificacion especific, que necessita d\'aver un acc&egrave;s FTP au sit web.',
 'info_gauche_auteurs' => 'Trobaretz aqu&iacute; toi lu autors dau sit. Lo sieu estatut es indicat per la color dei ic&ograve;nas sieui (redactor&nbsp;: verd; administrator&nbsp;: jaune).',
 'info_gauche_auteurs_exterieurs' => 'Lu autors exteriors, sensa acc&egrave;s au sit, son indicats per una ic&ograve;na blu; lu autors escafats per una bordilhier.',
 'info_gauche_messagerie' => 'La messatgeria vos permete d\'escambiar de messatges entre redactors, de conservar de n&ograve;tas de renembran&ccedil;a (per lo v&ograve;stre usatge personau) &ograve; d\'afichar d\'anon&ccedil;as sus la p&agrave;gina d\'acu&egrave;lh de l\'espaci privat (se si&egrave;tz administrator).',
@@ -691,9 +697,19 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_groupe_important' => 'Grop important',
 'info_hebergeur_desactiver_envoi_email' => 'I son d\'aubergadors que desactivan lo mandad&iacute;s automatic d\'e-mails despi lu sieus servidors. En aqueu cas, li foncionalitats seguenti de SPIP foncionar&agrave;n pas.',
 'info_hier' => 'i&egrave;r&nbsp;:',
+'info_historique' => '<NEW>R&eacute;visions&nbsp;:',
+'info_historique_activer' => '<NEW>Activer le suivi des r&eacute;visions',
+'info_historique_affiche' => '<NEW>Afficher cette version',
+'info_historique_comparaison' => '<NEW>comparaison',
+'info_historique_desactiver' => '<NEW>D&eacute;sactiver le suivi des r&eacute;visions',
+'info_historique_lien' => '<NEW>Afficher l\'historique',
+'info_historique_texte' => '<NEW>Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.',
+'info_historique_titre' => '<NEW>Suivi des r&eacute;visions',
 'info_identification_publique' => 'La v&ograve;stra identitat publica...',
 'info_image_aide' => 'AJUDA',
 'info_image_process' => 'Vorgatz seleccionar lo melhor met&ograve;de de fabricacion dei vinhetas en clicar sus l\'imatge correspondent.',
+'info_image_process2' => '<NEW><b>N.B.</b> <i>Si aucune image n\'appara&icirc;t, alors le serveur qui h&eacute;berge votre site n\'a pas &eacute;t&eacute; configur&eacute; pour utiliser de tels outils. Si vous souhaitez utiliser ces fonctions, contactez le responsable technique et demandez les extensions &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_image_process_titre' => '<NEW>M&eacute;thode de fabrication des vignettes',
 'info_impossible_lire_page' => '<B>Error !</B> Impossible de li&egrave;ger la p&agrave;gina <tt><html>@test_proxy@</html></tt> a trav&egrave;rs lo proxy <tt>',
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta&nbsp;:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
@@ -1394,7 +1410,9 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_documents_associes' => 'Li documents seguents son associats a l\'article, ma son pas estats drech inserits. Segon la compaginacion dau sit public, podran apar&eacute;isser sota forma de documents jonchs.',
-'texte_documents_joints' => 'Pod&egrave;tz autorisar l\'apondon de documents (fichiers burotics, imatges multim&egrave;dia, etc.) ai articles e/&ograve; ai rubricas. Aquelu fichiers p&ograve;don pi &egrave;stre referen&ccedil;ats dins l\'article, &ograve; apar&eacute;isser a despart.<p>',
+'texte_documents_joints' => 'Pod&egrave;tz autorisar l\'ajust de documents (fichiers burotics, imatges,
+ multim&egrave;dia, etc.) ai articles e/&ograve; ai rubricas. Aquelu fichiers
+ p&ograve;don pi &egrave;stre referen&ccedil;ats dins l\'article, &ograve; apar&eacute;isser a despart.<p />',
 'texte_documents_joints_2' => 'Aqueu reglatge empedisse pas l\'insercion d\'imatges directament dins lu articles.',
 'texte_effacer_base' => 'Esca&ccedil;ar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esca&ccedil;ar li donadas d\'indexacion',
@@ -1403,10 +1421,10 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_erreur_mise_niveau_base' => 'Error de basa de donadas pendent la mesa a niv&egrave;u. L\'imatge <b>@fichier@</b> es pas passat (article @id_article@).
   Notatz ben aquela referen&ccedil;a, tornatz ensajar la mesa a niv&egrave;u, e verificatz pi que lu imatges apar&eacute;isson encara dins lu articles.',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus <tt>.htpasswd</tt>
-  e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri <tt>ecrire/data/</tt>&nbsp;?</b><p>
+  e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri <tt>ecrire/data/</tt>&nbsp;?</b><p />
   Aquelu fichiers vos p&ograve;don servir per restr&eacute;nher l\'acc&egrave;s ai autors
   e administrators en d\'autres lu&egrave;cs dau v&ograve;stre sit
-  (programa ext&egrave;rne d\'estadisticas, per exemple).<p>
+  (programa ext&egrave;rne d\'estadisticas, per exemple).<p />
  Se vos s&egrave;rve pas, pod&egrave;tz laissar aquesta opcion
   a sa valor predefinida (minga de creacion
   dei fichiers).',
@@ -1473,7 +1491,7 @@ qu\'apareisse quora la rateta passa sus lo titre.',
 'texte_nouveau_message' => 'Messatge nov&egrave;u',
 'texte_nouveau_mot' => 'Nov&egrave;u m&ograve;t',
 'texte_nouvelle_version_spip_1' => 'Av&egrave;tz installat una nov&egrave;la version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualisacion mai completa que de costuma. Se si&egrave;tz webm&egrave;stre/webm&egrave;stressa dau sit, vorgatz esca&ccedil;ar lo fichier <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar prene l\'installacion per fin d\'actualisar lu v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p> (NB: s\'av&egrave;tz denembrat lu v&ograve;stres param&egrave;tres de connexion, regarjatz lo fichier  <tt>inc_connect.php3</tt> denant de lo suprimir...)',
+'texte_nouvelle_version_spip_2' => 'Aquesta version nov&egrave;la demanda una actualisacion mai completa que de costuma. Se si&egrave;tz webm&egrave;stre/webm&egrave;stressa dau sit, vorgatz esca&ccedil;ar lo fichier <tt>inc_connect.php3</tt> dau repert&ograve;ri <tt>ecrire</tt> e tornar prene l\'installacion per fin d\'actualisar lu v&ograve;stres param&egrave;tres de connexion a la basa de donadas.<p /> (NB: s\'av&egrave;tz denembrat lu v&ograve;stres param&egrave;tres de connexion, regarjatz lo fichier  <tt>inc_connect.php3</tt> denant de lo suprimir...)',
 'texte_operation_echec' => 'Tornatz a la p&agrave;gina precedenta, chausiss&egrave;tz una autra basa &ograve; creatz-ne una nov&egrave;la. Verificatz li informacions que lo v&ograve;stre aubergador a fornidi.',
 'texte_plan_trad' => 'Aquela p&agrave;gina vos permete de visualisar l\'estat dei reviradas per la lenga chausida.
   La p&agrave;gina aficha lu articles que son a revirar, lu articles que cau actualisar la sieua revirada 
@@ -1505,14 +1523,14 @@ tornar calcular solament una p&agrave;gina, passatz pusl&egrave;u per l\'espaci 
 'texte_referencement_automatique' => '<b>Referen&ccedil;ament automatisat d\'un sit</b><br> Pod&egrave;tz referen&ccedil;ar l&egrave;u-l&egrave;u un sit web en indicant &ccedil;ai sota l\'adre&ccedil;a URL desirada, &ograve; l\'adre&ccedil;a dau sieu fichier backend. SPIP agantar&agrave; automaticament li informacions que concernisson aqueu sit (titre, descripcion...).',
 'texte_requetes_echouent' => '<b>Quora certani requistas MySQL s\'encalan
   sistematicament e sensa rason aparenta, si p&ograve;ut
-  qu\'aqu&ograve; venga de la basa de donadas.  </b><p>
+  qu\'aqu&ograve; venga de la basa de donadas.  </b><p />
   MySQL ten la facultat de reparar li sieui
   taulas quora un accident li
  a esquintadas. Aqu&iacute; pod&egrave;tz ensajar aquela reparacion; se 
   capita pas, servatz una c&ograve;pia de l\'afichatge, que magara conten
- d\'indicis de cen que va pas...<p>
+ d\'indicis de cen que va pas...<p />
   Se lo problema persistisse, contactatz lo v&ograve;stre
-  aubergador.<p>',
+  aubergador.<p />',
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permete de restaurar una sauvagarda
  de la basa qu\'aviatz facha avans. Per aqu&ograve; faire, cau aver pla&ccedil;at lo fichier que conten la sauvagarda 

@@ -7,7 +7,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // 0
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-dev',
-'0_langue' => 'francais [fr]',
+'0_langue' => 'Fran&ccedil;ais [fr]',
 '0_liste' => 'spip-dev@rezo.net',
 '0_mainteneur' => 'spip-dev@rezo.net',
 
@@ -735,7 +735,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_historique_desactiver' => 'D&eacute;sactiver le suivi des r&eacute;visions',
 'info_historique_lien' => 'Afficher l\'historique',
 'info_historique_texte' => 'Le suivi des r&eacute;visions permet de conserver un historique de toutes les modifications apport&eacute;es au contenu d\'un article, et d\'afficher les diff&eacute;rences entre les versions successives.',
-'info_historique_titre' => 'Suivi des r&eacute;visions (versions) d\'articles',
+'info_historique_titre' => 'Suivi des r&eacute;visions',
 'info_identification_publique' => 'Votre identit&eacute; publique...',
 'info_image_aide' => 'AIDE',
 'info_image_process' => 'Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
