@@ -51,11 +51,14 @@ switch ($spip_couleur){
 }
 
 //
-// aide
+// Aide
 //
 function aide ($aide) {
-	return " <FONT SIZE=1>[<B><A HREF='#' onMouseDown=\"window.open('aide_index.php3?aide=$aide','myWindow','scrollbars=yes,resizable=yes,width=550')\">AIDE</A></B>]</FONT>";
+	return " <font size='1'>[<b><a href=\"javascript:window.open('aide_index.php3?aide=$aide', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);\">AIDE</a></b>]</font>";
 }
+
+
+
 
 
 //

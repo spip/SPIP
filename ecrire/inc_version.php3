@@ -26,6 +26,41 @@ $spip_version_affichee = "1.4 alpha 7"; // version de SPIP
 
 
 //
+// Infos de version PHP
+//
+
+$php_version = explode('.', phpversion());
+$php_version_maj = (int) $php_version[0];
+$php_version_med = (int) $php_version[1];
+if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
+
+$flag_function_exists = ($php_version_maj > 3 OR $php_version_min >= 7);
+$flag_ignore_user_abort = ($php_version_maj > 3 OR $php_version_min >= 7);
+$flag_levenshtein = ($php_version_maj >= 4);
+$flag_mt_rand = ($php_version_maj > 3 OR $php_version_min >= 6);
+$flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
+$flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
+
+if ($flag_function_exists) {
+	$gz_exists = function_exists("gzopen");
+	$ob_exists = function_exists("ob_gzhandler");
+	$flag_preg_replace = function_exists("preg_replace");
+	$flag_crypt = function_exists("crypt");
+	$flag_wordwrap = function_exists("wordwrap");
+	$flag_apc = function_exists("apc_rm");
+}
+else {
+	$gz_exists = false;
+	$ob_exists = false;
+	$flag_preg_replace = false;
+	$flag_crypt = true; // la non-existence de crypt est une exception
+	$flag_wordwrap = false;
+	$flag_apc = false;
+}
+
+
+
+//
 // Magic quotes : on n'en veut pas sur la base,
 // et on nettoie les GET/POST/COOKIE le cas echeant
 //
@@ -149,40 +184,6 @@ if (!$REQUEST_URI) {
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
 	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
-}
-
-
-//
-// Infos de version PHP
-//
-
-$php_version = explode('.', phpversion());
-$php_version_maj = (int) $php_version[0];
-$php_version_med = (int) $php_version[1];
-if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
-
-$flag_function_exists = ($php_version_maj > 3 OR $php_version_min >= 7);
-$flag_ignore_user_abort = ($php_version_maj > 3 OR $php_version_min >= 7);
-$flag_levenshtein = ($php_version_maj >= 4);
-$flag_mt_rand = ($php_version_maj > 3 OR $php_version_min >= 6);
-$flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
-$flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
-
-if ($flag_function_exists) {
-	$gz_exists = function_exists("gzopen");
-	$ob_exists = function_exists("ob_gzhandler");
-	$flag_preg_replace = function_exists("preg_replace");
-	$flag_crypt = function_exists("crypt");
-	$flag_wordwrap = function_exists("wordwrap");
-	$flag_apc = function_exists("apc_rm");
-}
-else {
-	$gz_exists = false;
-	$ob_exists = false;
-	$flag_preg_replace = false;
-	$flag_crypt = true; // la non-existence de crypt est une exception
-	$flag_wordwrap = false;
-	$flag_apc = false;
 }
 
 

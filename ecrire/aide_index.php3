@@ -1,3 +1,9 @@
+<?php
+
+include ("inc_version.php3");
+
+?>
+
 <HTML>
 <HEAD>
 <TITLE>Aide en ligne SPIP</TITLE>

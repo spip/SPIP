@@ -49,14 +49,14 @@ table.spip td {
 
 --></style>
 </head>
-<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="15" LEFTMARGIN="15" MARGINWIDTH="15" MARGINHEIGHT="15">
+<body bgcolor="#FFFFFF" text="#000000" TOPMARGIN="24" LEFTMARGIN="24" MARGINWIDTH="24" MARGINHEIGHT="24">
 
 
 <FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>
 
 <?php
 
-if (strlen($aide)<2) $aide = "spip";
+if (strlen($aide) < 2) $aide = "spip";
 
 $fichier_aide = "AIDE/aide";
 
