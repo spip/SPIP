@@ -5,10 +5,6 @@
 if (defined("_INC_ADMIN")) return;
 define("_INC_ADMIN", "1");
 
-
-$debug_messages = '';
-
-
 //
 // Afficher un bouton admin
 //
@@ -92,10 +88,6 @@ function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval(
 				$ret .= bouton_admin(_L('Debug'), $link->getUrl());
 			}
 		}
-
-		// Messages de debug
-		global $debug_messages;
-		$ret .= $debug_messages;
 	}
 
 	$ret .= "</ul></div></div>\n";
@@ -139,7 +131,7 @@ function calcul_admin_page($cached, $texte) {
 }
 
 //
-// Leve un drapeau si le squelette donne une page generant de graves erreurs php
+// Appelee si le squelette donne une page generant des erreurs 
 //
 function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
 	global $tableau_des_erreurs, $page;
@@ -169,6 +161,8 @@ function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
 	}
 }
 
+// affiche qq lignes de source autour de l'erreur
+
 function affiche_contexte_erreur($texte) {
 	$tableau = explode("\n", $texte);
 	$format = "%0".strlen(count($tableau))."d";
@@ -182,23 +176,25 @@ function affiche_contexte_erreur($texte) {
 
 //
 // Si le code php produit des erreurs, on les affiche en surimpression
-//
+// sauf pour un visiteur non admin, ou on lui dit que c'est en travaux
+// ajouter &var_debug=oui pour voir les erreurs et en parler sur spip@rezo.net
+
 function affiche_erreurs_execution_page() {
-  global $tableau_des_erreurs, $page_principale, $affiche_boutons_admin;
-	echo "<div style='height: 100%; width: 100%; position: absolute; z-index: 1000; background-color: pink;'>";
+  global $tableau_des_erreurs, $affiche_boutons_admin;
+	echo "<div style='height: 100%; width: 100%; position: absolute; top: 10px; z-index: 1000; background-color: pink;'>";
 	if (!$affiche_boutons_admin)
 	  echo "<h2>",(_T('info_travaux_titre')), "</h2>";
 	else {
 	  echo "<h2>",
-	    _L("Erreur lors de l'ex&eacute;cution du squelette"),
+	    _L("Squelette invalide"),
 	    "</h2>",
 	    "<p>",
-	    _L("php a rencontr&eacute; les erreurs suivantes :"),
+	    _L("PHP a rencontr&eacute; les erreurs suivantes :"),
 	    "<code><ul>";
 	  foreach ($tableau_des_erreurs as $err) {
-		echo "<li>$err[2] $err[3]  $err[1] ($err[0])";
-		echo "<small>$err[4]</small>";
-		echo "</li>\n";
+	    echo "<li>$err[2] $err[3]  $err[1]",
+	      "<small>$err[4]</small><br><br>",
+	      "</li>\n";
 	  }
 	  echo "</ul></code>";
 	  $GLOBALS['bouton_admin_debug'] = true;
@@ -213,9 +209,6 @@ function affiche_erreurs_execution_page() {
 function erreur_requete_boucle($query, $id_boucle, $type) {
 	global $auteur_session, $HTTP_COOKIE_VARS, $dir_ecrire;
 	include_ecrire("inc_presentation.php3");
-
-	// Drapeau pour interdire d'ecrire les fichiers dans le cache
-	define('spip_erreur_fatale', 'requete_boucle');
 
 	// Calmer le jeu avec MySQL (si jamais on est en saturation)
 	@touch($dir_ecrire.'data/mysql_out');	// pour spip_cron
@@ -255,41 +248,30 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 		spip_log("Erreur MySQL BOUCLE$id_boucle (".$GLOBALS['fond'].".html)");
 	}
 
-	  spip_error_handler(1,$retour,'','','?');
+	  spip_error_handler(1,$retour,'','','');
 }
 
 
 //
-// Erreur au parsing des squelettes : afficher le code fautif
+// Erreur de syntaxe des squelettes : afficher le code fautif
 //
 function erreur_squelette($message, $lieu) {
-	global $auteur_session, $debug_messages;
+	global $auteur_session;
 	static $runs;
 	
-	// Drapeau pour interdire d'ecrire les fichiers dans le cache
-	# define('spip_erreur_fatale', 'erreur_squelette');
-	# En fait, a partir du moment ou l'erreur est dans le squelette,
-	# ca ne change rien et autant cacher quand meme !
-
 	spip_log("Erreur squelette: $message | $lieu ("
 		. $GLOBALS['fond'].".html)");
 	$GLOBALS['bouton_admin_debug'] = true;
-
-	// Pour un visiteur normal, ne rien afficher, si SPIP peut s'en sortir
-	// tant mieux, sinon l'erreur se verra de toutes facons :-(
-	// ajouter &var_debug=oui pour discuter sur spip@rezo.net
-	if ($HTTP_COOKIE_VARS['spip_admin'] OR $auteur_session
-	OR $GLOBALS['var_debug']) {
-		$message_long = "<h2>"._T('info_erreur_squelette')."</h2><p>$message</p>";
-		$message_long .= '<br /><FONT color="#FF000">' . $lieu . '</FONT>'; 
-
-		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
-		z-index: 10000; background-color: pink;'>$message_long</div>";
-	}
-
-	// Eviter les boucles infernales
-	if (++$runs > 4) die ($debug_messages);
 	spip_error_handler(1," $message $lieu ", '','','?');
+	// Eviter les boucles infernales
+	if (++$runs > 4) {
+		if (!$HTTP_COOKIE_VARS['spip_admin'] AND
+		    !$auteur_session AND
+		    !$GLOBALS['var_debug'])
+		  $messages =  "<h2>".(_T('info_travaux_titre')). "</h2>";
+		die ("<div style='position: fixed; top: 10px; left: 10px;
+		z-index: 10000; background-color: pink;'>$message</div>");
+	}
 }
 
 //
@@ -331,10 +313,9 @@ function boucle_debug ($id, $nom, $boucle) {
 // l'environnement graphique du debuggueur 
 function debug_dumpfile ($texte) {
 
-	global $flag_ob;
 	global $debug_objets, $debug_objet, $debug_affiche;
-
-	@header("Content-Type: text/html; charset=".lire_meta('charset'));
+	if (!headers_sent())
+	  header("Content-Type: text/html; charset=".lire_meta('charset'));
 	if (!$GLOBALS['debug_objets']['sourcefile']) return;
 	spip_setcookie('spip_debug', 'oui', time()+12*3600);
         $page = "<html><head><title>Debug</title></head>\n<body>";
@@ -400,32 +381,5 @@ function debug_dumpfile ($texte) {
 	echo "\n</div></body>";
 	if ($texte) exit;
 }
-
-
-/*
-function verifie_cookie_debug() {
-	global $code_activation_debug;
-
-	if ($GLOBALS['HTTP_COOKIE_VARS']['spip_debug']
-	!= $code_activation_debug) {
-		spip_setcookie('spip_debug', $code_activation_debug, time()+3600);
-		include_ecrire('inc_presentation.php3');
-		install_debut_html(_L('Bienvenue dans le debuggueur de SPIP'));
-		echo "<P>"._L("Cet outil vous permet d'analyser les pages produites par
-		SPIP. Il est parfois de lecture difficile, mais il offre en contrepartie
-		une grande capacit&eacute; de recherche des erreurs, et une meilleure
-		compr&eacute;hension du fonctionnement des boucles et balises du
-		syst&egrave;me.</p>");
-		echo "<P>"._L("Pour entrer, il vous suffit de recharger cette page,
-		apr&egrave;s avoir accept&eacute; un cookie (ce dernier permet
-		d'&eacute;carter les moteurs de recherche, et installe un bouton
-		d'administration suppl&eacute;mentaire &laquo;debug&raquo; sur
-		votre &eacute;cran, pendant une heure).</p>");
-		install_fin_html();
-		exit;
-	} else
-		return true;
-}
-*/
 
 ?>

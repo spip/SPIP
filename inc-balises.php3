@@ -776,7 +776,6 @@ function balise_distante_interdite($p) {
 	if ($p->boucles[$nom]->sql_serveur) {
 		include_local("inc-admin.php3");
 		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
-		exit;
 	}
 }
 

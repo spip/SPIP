@@ -37,15 +37,10 @@ function chercher_squelette($fond, $id_rubrique, $dossier, $lang) {
 		return "$fond-dist";
 	} else {
 		// erreur webmaster : $fond ne correspond a rien
-		include_ecrire ("inc_presentation.php3");
-		install_debut_html(_T('info_erreur_squelette'));
-		echo "<p>",
-			_T('info_erreur_squelette2',
-			   array('fichier'=>$fond)),
-			"</p>";
-		spip_log("ERREUR: squelette '$fond' indisponible");
-		install_fin_html();
-		exit;
+		erreur_squelette(_T('info_erreur_squelette2',
+				    array('fichier'=>$fond)),
+				 $dossier);
+		return '';
 	}
 }
 

@@ -48,6 +48,8 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		if (!$desc) {
 			include_local("inc-admin.php3");
 			erreur_squelette(_L("Table SQL \"$r\" inconnue"), "'$idb'");
+			# continuer pour chercher l'erreur suivante
+			return  "'#" . $r . ':' . $nom_champ . "'";
 		}
 		$excep = $exceptions_des_tables[$r][$c];
 		if ($excep) {
