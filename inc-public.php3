@@ -18,8 +18,8 @@ if ($ajout_forum) {
 //
 
 $fichier_requete = $REQUEST_URI;
-$fichier_requete = eregi_replace('([&?])(submit|valider|(var_[^=&]*)|recalcul)=[^&]*&?', '\\1', $fichier_requete);
-$fichier_requete = ereg_replace('&$', '', $fichier_requete);
+$fichier_requete = strtr($fichier_requete, '?', '&');
+$fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
 
 $fichier_cache = substr(rawurlencode($fichier_requete), 0, 128);
 $sousrep_cache = substr(md5($fichier_cache), 0, 1);
