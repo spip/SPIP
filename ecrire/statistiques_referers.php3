@@ -46,8 +46,8 @@ echo "<ul>";
 // Recuperer les donnees du log
 $date = date("Y-m-d");
 $query = "SELECT referer, visites_jour FROM spip_referers ".
-	"WHERE date='$date' ".
-	"GROUP BY referer_md5 ORDER BY visites_jour DESC, referer";
+	"WHERE visites_jour > 0 ".
+	"GROUP BY referer_md5 ORDER BY visites_jour DESC, referer LIMIT 0,800";
 $result = spip_query($query);
 
 while ($row = @spip_fetch_array($result)) {
