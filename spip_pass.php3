@@ -15,6 +15,7 @@ utiliser_langue_site();
 utiliser_langue_visiteur();
 
 unset($erreur);
+$mode = $GLOBALS['mode'];
 
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
@@ -94,9 +95,7 @@ if ($mode == 'oubli_pass') {
 	}
 }
  else {
-	if ($inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui"))
-		$mode = 'redac';
-
+	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
 	if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
 
