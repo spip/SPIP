@@ -32,69 +32,78 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 .fondgrison { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; }
 .fondgrison2 { cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white; }
 .bouton48gris {
-	background:url(img_pack/pave-gris-48.png); 
-	padding: 3px; 
-	margin-bottom: 2px; 
-	width: 48px; 
+	display: block;
+	background:url(img_pack/pave-gris-48.png);
+	cursor: pointer;
+	padding: 3px;
+	margin: 4px;
+	width: 48px;
 	height: 48px;
 }
 .bouton48blanc {
-	background:url(img_pack/pave-blanc-48.png); 
-	padding: 3px; 
-	margin-bottom: 2px; 
-	width: 48px; 
+	display: block;
+	background:url(img_pack/pave-blanc-48.png);
+	cursor: pointer;
+	padding: 3px;
+	margin: 4px;
+	width: 48px;
 	height: 48px;
 }
 .bouton48off {
-	padding: 3px; 
-	margin-bottom: 2px; 
-	width: 48px; 
+	cursor: pointer;
+	padding: 3px;
+	margin: 4px;
+	width: 48px;
 	height: 48px;
 }
 .bouton24gris {
-	background:url(img_pack/pave-gris-24.png); 
-	padding: 3px; 
-	width: 24px; 
+	background:url(img_pack/pave-gris-24.png);
+	padding: 3px;
+	width: 24px;
 	height: 24px;
 }
 .bouton24blanc {
-	background:url(img_pack/pave-blanc-24.png); 
-	padding: 3px; 
-	width: 24px; 
+	background:url(img_pack/pave-blanc-24.png);
+	padding: 3px;
+	width: 24px;
 	height: 24px;
 }
 .bouton24rouge {
-	background:url(img_pack/pave-rouge-24.png); 
-	padding: 3px; 
-	width: 24px; 
+	background:url(img_pack/pave-rouge-24.png);
+	padding: 3px;
+	width: 24px;
 	height: 24px;
 }
 .bouton24off {
-	padding: 3px; 
-	width: 24px; 
+	padding: 3px;
+	width: 24px;
 	height: 24px;
 }
 .bouton36gris {
-	background:url(img_pack/pave-gris-36.png); 
-	padding: 6px; 
-	width: 24px; 
+	background:url(img_pack/pave-gris-36.png);
+	padding: 6px;
+	margin-top: 2px;
+	width: 24px;
 	height: 24px;
 }
 .bouton36blanc {
-	background:url(img_pack/pave-blanc-36.png); 
-	padding: 6px; 
-	width: 24px; 
+	background:url(img_pack/pave-blanc-36.png);
+	padding: 6px;
+	margin-top: 2px;
+	width: 24px;
 	height: 24px;
 }
 .bouton36rouge {
-	background:url(img_pack/pave-rouge-36.png); 
-	padding: 6px; 
-	width: 24px; 
+	background:url(img_pack/pave-rouge-36.png);
+	padding: 6px;
+	margin-top: 2px;
+	width: 24px;
 	height: 24px;
 }
 .bouton36off {
-	padding: 6px; 
-	width: 24px; 
+	padding: 6px;
+	margin-top: 2px;
+	width: 24px;
 	height: 24px;
 }
 
@@ -272,7 +281,7 @@ a.spip_out {}
 a.spip_url {}
 a.spip_glossaire:hover {text-decoration: underline overline;}
 
-.spip_recherche {padding: 2px; width : 100px; font-size: 9px;}
+.spip_recherche {padding: 2px; width : 100px; font-size: 10px;}
 .spip_cadre {
 	width : 100%;
 	background-color: #FFFFFF;
