@@ -348,7 +348,7 @@ function typo_fr($letexte) {
 		'/(http|https|ftp|mailto)~:/',
 		'/~/'
 	);
-	if ($GLOBALS['flag_ecrire'])
+	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
 		$remplace2 = array(
 			'\1:',
 			'<font color=grey>~</font>'
