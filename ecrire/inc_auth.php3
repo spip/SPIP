@@ -133,7 +133,7 @@ function auth() {
 	//
 	
 	$auth_login = addslashes($auth_login);
-	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'$checkmdpass";
+	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'$check_mdpass";
 	$result = @spip_query($query);
 	
 	if (!@mysql_num_rows($result)) {
