@@ -97,7 +97,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 
 	spip_log("indexation $type $id_objet");
 	$index = '';
-	$mots = "INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES (0,'')";
+	$mots = '';
 
 	switch($type) {
 	case 'article':
@@ -248,7 +248,10 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 	$result = spip_query($query);
 
 	if ($index) {
-		spip_query($mots);
+		if ($mots) {
+			$mots = "INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES ".substr($mots,1);	// supprimer la virgule du debut
+			spip_query($mots);
+		}
 		reset($index);
 		unset($q);
 		while (list($hash, $points) = each($index)) $q[] = "(0x$hash,$points,$id_objet)";
@@ -297,7 +300,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 	// chercher un objet a indexer dans chacune des tables d'objets
 	$vu = array();
-	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
+	$types = array('article','auteur','breve','mot','rubrique','forum','signature','syndic');
 	while (list(,$type) = each($types)) {
 		$table_objet = 'spip_'.table_objet($type);
 		$table_index = 'spip_index_'.table_objet($type);
