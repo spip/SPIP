@@ -134,7 +134,7 @@ function calculer_requete(&$boucle) {
 		"', $boucle->where) . '"')) .
 		"), # WHERE
 		'".addslashes($boucle->group)."', # GROUP
-		'".addslashes($boucle->order)."', # ORDER
+		" . ($boucle->order ? $boucle->order : "''") .", # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
 			"'$boucle->limit'" :
 			$boucle->limit). ", # LIMIT

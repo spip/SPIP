@@ -208,6 +208,19 @@ function vider_url($url) {
 	return $url;
 }
 
+//
+// Ajouter le &var_recherche=toto dans les boucles de recherche
+//
+function url_var_recherche($url) {
+	if ($GLOBALS['HTTP_GET_VARS']['recherche']
+	AND !ereg("var_recherche", $url)) {
+		$url .= strpos($url, '?') ? '&' : '?';
+		$url .= "var_recherche=".urlencode($GLOBALS['recherche']);
+	}
+	return $url;
+}
+
+
 // Extraire une date de n'importe quel champ (a completer...)
 function extraire_date($texte) {
 	// format = 2001-08

@@ -1099,7 +1099,14 @@ function spip_log($message, $logname='spip') {
 		@rename($logfile.'.2',$logfile.'.3');
 		@rename($logfile.'.1',$logfile.'.2');
 		@rename($logfile,$logfile.'.1');
+		#if (function_exists('logrotate'))
+		#	logrotate($logfile);
 	}
+
+	// recopier les spip_log mysql (ce sont uniquement des erreurs)
+	// dans le spip_log general
+	if ($logname == 'mysql')
+		spip_log($message);
 }
 
 //

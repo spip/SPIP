@@ -265,7 +265,8 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 //
 function erreur_squelette($message, $fautif, $lieu) {
 	global $auteur_session, $debug_messages;
-
+	static $runs;
+	
 	// Drapeau pour interdire d'ecrire les fichiers dans le cache
 	# define('spip_erreur_fatale', 'erreur_squelette');
 	# En fait, a partir du moment ou l'erreur est dans le squelette,
@@ -289,6 +290,9 @@ function erreur_squelette($message, $fautif, $lieu) {
 		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
 		z-index: 10000; background-color: pink;'>$message</div>";
 	}
+
+	// Eviter les boucles infernales
+	if (++$runs > 4) die ($debug_messages);
 }
 
 ?>

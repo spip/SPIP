@@ -1,27 +1,140 @@
 <?php
 
+//
+// Fichier principal du compilateur de squelettes
+//
+
 // Ce fichier ne sera execute qu'une fois
-if (defined("_INC_CALCUL_SQUEL")) return;
-define("_INC_CALCUL_SQUEL", "1");
+if (defined("_INC_COMPILO")) return;
+define("_INC_COMPILO", "1");
 
-// Fichier principal du compilateur de squelettes, incluant tous les autres.
 
-include_local("inc-bcl-squel.php3");
-include_local("inc-arg-squel.php3");
-include_local("inc-reqsql-squel.php3");
-include_local("inc-champ-squel.php3");
-include_local("inc-logo-squel.php3");
-include_local("inc-form-squel.php3");
-include_local("inc-vrac-squel.php3");
-include_local("inc-index-squel.php3");
-include_local("inc-text-squel.php3");
-include_local("inc-debug.php3");
+// Definition de la structure $p, et fonctions de recherche et de reservation
+// dans l'arborescence des boucles
+include_local("inc-compilo-index.php3");  # index ? structure ? pile ?
+#include_local("inc-bcl-squel.php3");	# (anciens noms des fichiers)
+#include_local("inc-index-squel.php3");
+
+// definition des balises
+include_local("inc-balises.php3");
+#include_local("inc-logo-squel.php3");
+#include_local("inc-vrac-squel.php3");
+#include_local("inc-form-squel.php3");
+
+// definition des criteres
+include_local("inc-criteres.php3");
+#include_local("inc-arg-squel.php3");
+
+
+// gestion des balises de forums
 include_local("inc-forum.php3");
 
-// Produit le corps PHP d'une boucle Spip,
+
+// a traiter (essentiellement, ce sont des definitions standard de spip:
+// inc-compilo-standard/spip/redac ?
+include_local("inc-reqsql-squel.php3");
+include_local("inc-champ-squel.php3");
+
+
+
+// outils pour debugguer le compilateur
+#include_local("inc-compilo-debug.php3"); # desactive
+
+
+//
+// Calculer un <INCLURE()>
+//
+function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
+	global $dossier_squelettes;
+
+	$criteres = '';
+	if ($params) {
+		foreach($params as $param) {
+			if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
+				$var = $args[1];
+				$val = ereg_replace('^["\'](.*)["\']$', "\\1", trim($args[3]));
+				$val = addslashes(addslashes($val));
+
+				// Cas de la langue : passer $spip_lang
+				// et non table.lang (car depend de {lang_select})
+				if ($var =='lang') {
+					if ($val)
+						$l[] = "\'lang\' => \'$val\'";
+					else
+						$l[] = "\'lang\' => \''.\$GLOBALS[spip_lang].'\'";
+				}
+
+				// Cas normal {var=val}
+				else
+				if ($val)
+					$l[] = "\'$var\' => \'$val\'";
+				else
+					$l[] = "\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\'";
+		    }
+		$criteres = join(", ",$l);
+		}
+	}
+	return "\n'<".
+		"?php\n\t\$contexte_inclus = array($criteres);\n\t".
+		"\$fichier_inclus = \'$fichier\';\n" .
+		(($dossier_squelettes) ?
+		("
+			if (@file_exists(\'$dossier_squelettes/$fichier\')){
+				include(\'$dossier_squelettes/$fichier\');
+			} else {
+				include(\'$fichier\');
+			} " ) :
+		("\tinclude(\'$fichier\');")) .
+		"\n?'." . "'>'";
+}
+
+
+//
+// Traite une partie "texte" d'un squelette (c'est-a-dire tout element
+// qui ne contient ni balise, ni boucle, ni <INCLURE()> ; le transforme
+// en une EXPRESSION php (qui peut etre l'argument d'un Return ou la
+// partie droite d'une affectation). Ici sont analyses les elements
+// multilingues des squelettes : <:xxx:> et <multi>[fr]coucou</multi>
+//
+function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
+	$code = "'".ereg_replace("([\\\\'])", "\\\\1", $texte)."'";
+
+	// bloc multi
+	if (eregi('<multi>', $texte)) {
+		$ouvre_multi = 'extraire_multi(';
+		$ferme_multi = ')';
+	} else {
+		$ouvre_multi = $ferme_multi = '';
+	}
+
+	// Reperer les balises de traduction <:toto:>
+	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>", $code, $match)) {
+		//
+		// Traiter la balise de traduction multilingue
+		//
+		$chaine = strtolower($match[3]);
+		if (!($module = $match[2]))
+			// ordre standard des modules a explorer
+			$module = 'local/public/spip';
+		$c = applique_filtres(explode('|',
+			substr($match[4],1)),
+			"_T('$module:$chaine')",
+			$id_boucle, 
+			$boucles,
+			$id_mere,
+			'php');	// ne pas manger les espaces avec trim()
+		$code = str_replace($match[0], "'$ferme_multi.$c.$ouvre_multi'", $code);
+	}
+
+	return $ouvre_multi . $code . $ferme_multi;
+}
+
+
+//
+// calculer_boucle() produit le corps PHP d'une boucle Spip,
 // essentiellement une boucle while (ou une double en cas de hierarchie)
 // remplissant une variable $t0 retourne'e en valeur
-
+//
 function calculer_boucle($id_boucle, &$boucles) {
 	global $table_primary, $table_des_tables; 
 
@@ -92,13 +205,14 @@ function calculer_boucle($id_boucle, &$boucles) {
 	
 	if ($lang_select AND !$constant)
 		$debut .= '
-			if ($x = $Pile[$SP]["lang"]) $spip_lang = $x; // langue';
+			if ($x = $Pile[$SP]["lang"]) $spip_lang = $x; // lang_select';
 
 	$debut .= $invalide;
 
 	if ($boucle->doublons)
-		$debut .= "\n			\$doublons['$type_boucle'] .= ','. " .
-		index_pile($id_boucle, $primary_key, $boucles) . "; // doublons";
+		$debut .= "\n			\$doublons['".$boucle->doublons."'] .= ','. " .
+		index_pile($id_boucle, $primary_key, $boucles)
+		. "; // doublons";
 
 
 	//
@@ -205,6 +319,10 @@ function calculer_boucle($id_boucle, &$boucles) {
 }
 
 
+//
+// fonction traitant les criteres {1,n} (analyses dans inc-criteres)
+//
+## a deplacer dans inc-criteres ??
 function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 
 	// Notes :
@@ -442,7 +560,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	if ($boucles) foreach($boucles as $id => $boucle) { 
 		if ($boucle->type_requete != 'boucle') {
-			$res = calculer_params($id, $boucles);
+			calculer_criteres($id, $boucles);
 			$boucles[$id]->return = calculer_liste($boucle->milieu,
 				$nom,
 				$id,
@@ -505,7 +623,7 @@ $code
 //
 // Fonction principale du squelette $sourcefile
 //
-function $nom (\$Cache, \$Pile, \$doublons, \$Numrows='', \$SP=0) {
+function $nom (\$Cache, \$Pile, \$ignore_les_doublons_inc_calcul_php3, \$Numrows='', \$SP=0) {
 $corps
 \$t0 = $return;
 
