@@ -36,7 +36,7 @@ barre_onglets("statistiques", "referers");
 
 debut_gauche();
 debut_boite_info();
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
 echo "<P align=left>"._T('info_gauche_statistiques_referers')."</P></FONT>";
 fin_boite_info();
 
@@ -66,7 +66,7 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 
 	$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
 
-	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 	echo aff_referers ($query, $limit);
 	echo "</font></p>";	
 }

@@ -233,7 +233,7 @@ echo "</td></tr>\n";
 
 if ($nombre_auteurs > $max_par_page) {
 	echo "<tr bgcolor='white'><td colspan='".($options == 'avancees' ? 5 : 3)."'>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 	for ($j=0; $j < $nombre_auteurs; $j+=$max_par_page) {
 		if ($j > 0) echo " | ";
 
@@ -255,7 +255,7 @@ if ($nombre_auteurs > $max_par_page) {
 	if (($tri == 'nom' OR !$tri) AND $options == 'avancees') {
 		// affichage des lettres
 		echo "<tr bgcolor='white'><td colspan='5'>";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		while (list($key,$val) = each($lettre)) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";

@@ -45,7 +45,7 @@ function controle_forum($request,$adresse_retour) {
 	if ($statut=="poubelle"){
 		echo "<TABLE WIDTH=100% CELLPADDING=2 CELLSPACING=0 BORDER=0><TR><TD BGCOLOR='#FF0000'>";
 	}
-		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>$nom_site / $nom_email</B></FONT></TD></TR>";
+		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0><TR><TD BGCOLOR='$couleur_foncee'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#FFFFFF'><B>$nom_site / $nom_email</B></FONT></TD></TR>";
 		echo "<TR><TD BGCOLOR='#FFFFFF'>";
 		echo "<FONT SIZE=3 FACE='Georgia,Garamond,Times,serif'>";
 				

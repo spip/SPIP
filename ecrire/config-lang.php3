@@ -55,7 +55,7 @@ $langues_prop = split(",",lire_meta("langues_proposees"));
 $langue_site = lire_meta('langue_site');
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_langue_principale')."</FONT></B> ".aide ()."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_langue_principale')."</FONT></B> ".aide ()."</TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('texte_selection_langue_principale');
@@ -96,7 +96,7 @@ if ($options == 'avancees') {
 	$charset = lire_meta("charset");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_jeu_caractere')."</FONT></B></TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_jeu_caractere')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo _T('texte_jeu_caractere')."<p>";
@@ -136,7 +136,7 @@ if ($options == 'avancees') {
 
 debut_cadre_enfonce();
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>"._T('info_multilinguisme')."</FONT></B>" /* .aide ("confart") */ ."</TD></TR>";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='black'>"._T('info_multilinguisme')."</FONT></B>" /* .aide ("confart") */ ."</TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'>";
 	echo _T('texte_multilinguisme');
@@ -233,7 +233,7 @@ debut_cadre_enfonce();
 			$langues_bloquees[$row['lang']] = 1;
 		}
 
-		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top'><font size='2' face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top'><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 
 		ksort($langues_bloquees);
 		while (list($code_langue, ) = each($langues_bloquees)) {
@@ -246,7 +246,7 @@ debut_cadre_enfonce();
 			echo  " $nom_langue &nbsp; &nbsp;<font color='#777777'>[$code_langue]</font>";
 			echo "</div>\n";
 
-			if ($i == $cesure) echo "</font></td><td width='50%' align='top'><font size='2' face='Verdana,Arial,Helvetica,sans-serif'>";
+			if ($i == $cesure) echo "</font></td><td width='50%' align='top'><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 		}
 
 		echo "<div>&nbsp;</div>";
@@ -267,7 +267,7 @@ debut_cadre_enfonce();
 
 			echo "</div>\n";
 
-			if ($i == $cesure) echo "</font></td><td width='50%' align='top'><font size='2' face='Verdana,Arial,Helvetica,sans-serif'>";
+			if ($i == $cesure) echo "</font></td><td width='50%' align='top'><font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 		}
 
 		echo "</font></td></tr>";

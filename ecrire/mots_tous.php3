@@ -192,13 +192,13 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	// Afficher le titre du groupe
 	debut_cadre_enfonce("groupe-mot-24.gif");
 	echo "<p><table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
-	echo "<tr><td bgcolor='$couleur_foncee' colspan=2><font face='Verdana,Arial,Helvetica,sans-serif' size=3 color='#ffffff'><b>$titre_groupe</b>";
+	echo "<tr><td bgcolor='$couleur_foncee' colspan=2><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#ffffff'><b>$titre_groupe</b>";
 	echo "</font></td>";
-	echo "<td bgcolor='$couleur_foncee' align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<td bgcolor='$couleur_foncee' align='right'><font face='Verdana,Arial,Sans,sans-serif' size=1>";
 	echo "</font></td></tr>";
 
 	// Affichage des options du groupe (types d'éléments, permissions...)
-	echo "<tr><td colspan=3><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
+	echo "<tr><td colspan=3><font face='Verdana,Arial,Sans,sans-serif' size=1>";
 	if ($articles == "oui") echo "> "._T('info_articles_2')." &nbsp;&nbsp;";
 	if ($breves == "oui") echo "> "._T('info_breves_02')." &nbsp;&nbsp;";
 	if ($rubriques == "oui") echo "> "._T('info_rubriques')." &nbsp;&nbsp;";
@@ -254,7 +254,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 					echo "$titre_mot";
 				echo "</FONT></TD>";
 				echo "<TD ALIGN='right'>";
-				echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+				echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
 
 				$texte_lie = array();
 

@@ -12,7 +12,7 @@ debut_gauche();
 
 debut_droite();
 
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
 echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>".typo($recherche)."</B></FONT><p>";
 
 $recherche = addslashes($recherche);
@@ -99,7 +99,7 @@ if ($activer_moteur) {
 }
 
 if (!$nba AND !$nba1 AND !$nbb AND !$nbb1 AND !$nbr AND !$nbr1 AND !$nbt AND !$nbs AND !$nbs1) {
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>"._T('avis_aucun_resultat')."</FONT><P>";
 }
 
 echo "<p>";

@@ -159,7 +159,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$type_mot = $row['type'];
 				$descriptif_mot = $row['descriptif'];
 
-				echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
+				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
 				echo "</FONT>\n";
 			}
 			echo "</UL>";
@@ -180,7 +180,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					$type_mot = $row['type'];
 					$descriptif_mot = $row['descriptif'];
 
-					echo "<LI><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
+					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>$titre_mot</FONT></B>";
 
 					if ($type_mot) echo " ($type_mot)";
 					echo " | <A HREF=\"$url_base&nouv_mot=$id_mot#mots\">"._T('info_ajouter_mot')."</A>";
@@ -369,7 +369,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
 
-		$message_ajouter_mot = "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('titre_ajouter_mot_cle')."</B></FONT> &nbsp;\n";
+		$message_ajouter_mot = "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B>"._T('titre_ajouter_mot_cle')."</B></FONT> &nbsp;\n";
 		echo "<table border='0' align='right' style='white-space: nowrap'>";
 
 		$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui' AND $connect_statut = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY titre";

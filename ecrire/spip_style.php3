@@ -26,7 +26,7 @@
 /*
  * Police par defaut (bof...)
  */
-body { font-family: Verdana,Arial,Helvetica,sans-serif; }
+body { font-family: Verdana,Arial,Sans,sans-serif; }
 
 /*
  * Formulaires
@@ -93,7 +93,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	margin: 0px;
 	text-align: center;
 	vertical-align: top;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -169,7 +169,7 @@ body { font-family: Verdana,Arial,Helvetica,sans-serif; }
 	margin: 0px;
 	text-align: center;
 	vertical-align: top;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	text-align: center;
 	text-decoration: none;
@@ -211,7 +211,7 @@ a.cellule-h {
 	display: block;
 }
 a.cellule-h {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	text-align: <?php echo $left; ?>;
@@ -219,7 +219,7 @@ a.cellule-h {
 	color: #666666;
 }
 a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
 	text-align: <?php echo $left; ?>;
@@ -260,7 +260,7 @@ a.cellule-h-texte {
 	display: block;
 	clear: both;
 	text-align: <?php echo $left; ?>;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 11px;
 	color: #606060;
@@ -330,11 +330,11 @@ a.cellule-h-texte:hover {
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black; background: url(img_pack/rayures-sup.gif);}
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
-.arial0 { font-family: Arial, Helvetica, sans-serif; font-size: 9px; }
-.arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
-.arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
-.verdana1 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10px; }
-.verdana2 { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; }
+.arial0 { font-family: Arial, Sans, sans-serif; font-size: 9px; }
+.arial1 { font-family: Arial, Sans, sans-serif; font-size: 10px; }
+.arial2 { font-family: Arial, Sans, sans-serif; font-size: 12px; }
+.verdana1 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px; }
+.verdana2 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; }
 
 /* Liens hypertexte */
 a { text-decoration: none; }
@@ -366,7 +366,7 @@ td.icone table {
 td.icone a {
 	color: black;
 	text-decoration: none;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: Verdana,Arial,Sans,sans-serif;
 	font-size: 10px;
 	font-weight: bold;
 }
@@ -480,7 +480,7 @@ blockquote.spip {
 }
 
 .boutonlien {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
 	font-size: 9px;
 }
@@ -490,13 +490,13 @@ a.boutonlien {color:#808080; text-decoration: none;}
 h3.spip {
 	margin-top : 40px;
 	margin-bottom : 40px;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
 	font-size: 115%;
 	text-align: center;
 }
 .spip_documents{
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: Verdana,Arial,Sans,sans-serif;
 	font-size : 70%;
 }
 table.spip {

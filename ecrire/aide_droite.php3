@@ -24,8 +24,8 @@ include_ecrire ("inc_filtres.php3");
 	.fondo {background-color: #044476; background-position: center bottom; float: none; color: #FFFFFF}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
 	label {cursor: pointer;}
-	.arial1 {font-family: Arial, Helvetica, sans-serif; font-size: 10px;}
-	.arial2 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;}
+	.arial1 {font-family: Arial, Sans, sans-serif; font-size: 10px;}
+	.arial2 {font-family: Arial, Sans, sans-serif; font-size: 12px;}
 	.spip_cadre {
 		width : 100%;
 		background-color: #FFFFFF;
@@ -44,7 +44,7 @@ include_ecrire ("inc_filtres.php3");
 	a:hover {color:#FF9900; text-decoration: underline;}
 
 h3.spip {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
 	font-size: 115%;
 	text-align: center;

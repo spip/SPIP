@@ -341,7 +341,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 		$link->addVar('forcer_document', 'oui');
 
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>\n";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>\n";
 	echo $link->getForm('POST', 'docs', 'multipart/form-data');
 
 	if (tester_upload()) {
@@ -412,7 +412,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	echo "<p>";
 	if ($documents_lies) {
 		if ($type == "article")
-			echo "<font size='2' face='Verdana,Arial,Helvetica,sans-serif'>
+			echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>
 				"._T('texte_documents_associes')."</font>";
 
 		$case = "gauche";
@@ -481,7 +481,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			}
 		}
 		echo "</td><td width=20>&nbsp;</td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		$link = $image_link;
 		$link->addVar('redirect', $redirect_url);
 		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
@@ -588,7 +588,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<b>"._T('info_vignette_personnalisee')."</b>";
 		echo "<center>$largeur_vignette x $hauteur_vignette "._T('info_pixels')."</center>";
 		if ($flag_modif)
-			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref($ancre).">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
+			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a ".$link->getHref($ancre).">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 		echo fin_block();
 		echo "</div>\n";
 	}
@@ -945,7 +945,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			else  echo debut_block_invisible("doc_vignette $id_document");
 			echo "<b>"._T('info_vignette_personnalisee')."</b>";
 			echo "<center>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur_vignette, 'hauteur_vignette' => $hauteur_vignette))."</center>";
-			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
+			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a ".$link->getHref().">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 			echo fin_block();
 			echo "</div>\n";
 		}
@@ -1121,7 +1121,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo "<div style='text-align: center; padding: 2px;'>\n";
 			echo texte_vignette_document($largeur, $hauteur, $fichier, $fichier);
 			echo "</div>\n";
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+			echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 			if (strlen($descriptif)>0)
 				echo propre($descriptif);
 
@@ -1132,7 +1132,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		else  echo debut_block_invisible($block);
 
 		if (ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
-		echo "\n<div align='center'><font face='Verdana,Arial,Helvetica,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br /></font></div>\n";
+		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br /></font></div>\n";
 
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');

@@ -34,7 +34,7 @@ if ($origine) {
 
 	debut_gauche();
 	debut_boite_info();
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
 	echo "<P align=left>"._T('info_gauche_statistiques_referers')."</P></FONT>";
 	fin_boite_info();
 	
@@ -52,7 +52,7 @@ if ($origine) {
 	echo "<p>";
 
 	echo "<div class='iconeoff' style='padding: 5px;'>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
@@ -83,7 +83,7 @@ if ($origine) {
 	if ($nombre_articles > 0) {
 		echo "<p>";
 		echo "<div class='iconeoff' style='padding: 5px;'>";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo typo(_T('info_visites_plus_populaires'));
 		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
@@ -146,7 +146,7 @@ if ($origine) {
 		creer_colonne_droite();
 
 		echo "<p></p><div class='iconeoff' style='padding: 5px;'>";
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
 		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
@@ -359,7 +359,7 @@ if (!$origine) {
 		echo "</td>";
 		echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
 		echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo "<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td height=15 valign='top'>";		
 		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
@@ -396,17 +396,17 @@ if (!$origine) {
 
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo _T('info_maximum').$max;
 		echo "<br>"._T('info_moyenne')." ".round($moyenne);
 		echo "</td>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo _T('info_aujourdhui').' '.$visites_today;
 		if ($val_prec > 0) echo "<br>"._T('info_hier').$val_prec;
 		if ($id_article) echo "<br>"._T('info_popularite_5').$val_popularite;
 
 		echo "</td>";
-		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo "<b>"._T('info_total')." ".$total_absolu."</b>";
 		
 		if ($id_article) {
@@ -534,7 +534,7 @@ if (!$origine) {
 		echo "</td>";
 		echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
 		echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo "<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td height=15 valign='top'>";		
 		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
@@ -601,7 +601,7 @@ if (lire_meta("activer_statistiques_ref") != "non"){
 	echo "<br><br><br>";
 	gros_titre(_T("onglet_origine_visites"));
 	
-	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
 	echo aff_referers ($query, $limit);
 	echo "</font></p>";	
 }

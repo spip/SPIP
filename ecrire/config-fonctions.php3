@@ -42,7 +42,7 @@ if ($flag_gd) {
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee'>";
-	echo "<B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='white'>"._T('info_generation_miniatures_images')."</FONT></B></TD></TR>";
+	echo "<B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='white'>"._T('info_generation_miniatures_images')."</FONT></B></TD></TR>";
 	echo "<TR><TD class='verdana2'>";
 	echo _T('info_ajout_image');
 	echo "</TD></TR>";
@@ -90,7 +90,7 @@ debut_cadre_relief("racine-site-24.gif");
 $activer_moteur = lire_meta("activer_moteur");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_moteur_recherche')."</FONT></B> ".aide ("confmoteur")."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_moteur_recherche')."</FONT></B> ".aide ("confmoteur")."</TD></TR>";
 
 echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 echo _T('info_question_utilisation_moteur_recherche');
@@ -122,7 +122,7 @@ $activer_statistiques = lire_meta("activer_statistiques");
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_forum_statistiques')."</FONT></B> ".aide ("confstat")."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_forum_statistiques')."</FONT></B> ".aide ("confstat")."</TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('info_question_gerer_statistiques');
@@ -167,7 +167,7 @@ if ($options == "avancees") {
 	$articles_modif = lire_meta("articles_modif");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_travail_colaboratif')."</FONT></B></TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_travail_colaboratif')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_travail_collaboratif');
@@ -204,7 +204,7 @@ if ($options == 'avancees') {
 	$http_proxy=entites_html(lire_meta("http_proxy"));
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_sites_proxy')."</FONT></B> ".aide ("confhttpproxy")."</TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_sites_proxy')."</FONT></B> ".aide ("confhttpproxy")."</TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
 	echo _T('texte_proxy') . "</FONT>";
@@ -217,7 +217,7 @@ if ($options == 'avancees') {
 	echo "<TR><TD ALIGN='$spip_lang_right'>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	if ($http_proxy) {
-		echo "<p align='$spip_lang_left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
+		echo "<p align='$spip_lang_left'><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='#000000'>"
 			. _T('texte_test_proxy');
 		echo "</TD></TR>";
 
@@ -253,7 +253,7 @@ if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
 	$creer_htpasswd = lire_meta("creer_htpasswd");
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_fichiers_authent')."</FONT></B></TD></TR>";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_fichiers_authent')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
 	echo _T('texte_fichier_authent');

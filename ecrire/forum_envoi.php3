@@ -54,7 +54,7 @@ if ($id_parent) {
 
 if ($titre_parent) {
 	debut_cadre_relief("forum-interne-24.gif");
-	echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre_parent)."</b></font></td></tr>";
+	echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Sans,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre_parent)."</b></font></td></tr>";
 	echo "<tr><td bgcolor='#EEEEEE'>";
 	echo "<div style='padding:5px;'>";
 	echo "<font size='2' face='Georgia,Garamond,Times,serif'>";
@@ -69,7 +69,7 @@ if ($titre_parent) {
 	echo justifier(propre($texte_parent));
 
 	if (strlen($url_site_parent) > 10 AND $nom_site_parent) {
-		echo "<p align='left'><font face='Verdana,Arial,Helvetica,sans-serif'><b><a href='$url_site_parent'>$nom_site_parent</a></b></font>";
+		echo "<p align='left'><font face='Verdana,Arial,Sans,sans-serif'><b><a href='$url_site_parent'>$nom_site_parent</a></b></font>";
 	}
 
 	echo "</font>";

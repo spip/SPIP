@@ -97,10 +97,10 @@ if ($row = spip_fetch_array($result)) {
 	if ($type == 'pb') $le_type = _T('bouton_pense_bete');
 	if ($type == 'affich') $le_type = _T('bouton_annonce');
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='green'><b>$le_type</b></font><p>";
+	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2 color='green'><b>$le_type</b></font><p>";
 	
 	if ($type == "affich")
-		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1 color='red'>"._T('texte_message_edit')."</font><p>";
+		echo "<font face='Verdana,Arial,Sans,sans-serif' size=1 color='red'>"._T('texte_message_edit')."</font><p>";
 	
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_message' VALUE=\"oui\">";

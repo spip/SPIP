@@ -8,7 +8,7 @@ gerer_menu_langues();
 
 if (file_exists("inc_connect.php3")) {
 	install_debut_html();
-	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
+	echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
 
 	install_fin_html();
 	exit;
@@ -24,7 +24,7 @@ include_ecrire ("inc_base.php3");
 if ($etape == 6) {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT>";
 	echo "<P>";
 	echo "<B>"._T('info_code_acces')."</B>";
 	echo "<P>"._T('info_utilisation_spip');
@@ -94,7 +94,7 @@ else if ($etape == 5) {
 
 	include_ecrire ("inc_connect_install.php3");
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>";
 	echo "<P>";
 
 	echo "<b>"._T('texte_informations_personnelles_1')."</b>";
@@ -147,7 +147,7 @@ else if ($etape == 4) {
 	// Necessaire pour appeler les fonctions SQL wrappees
 	include_ecrire("inc_db_mysql.php3");
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_creation_tables')."</FONT>";
 	echo "<P>";
 
 	$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
@@ -219,7 +219,7 @@ else if ($etape == 3) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
 
 	echo aide ("install2");
 	echo "<P>";
@@ -285,7 +285,7 @@ else if ($etape == 2) {
 
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_connexion_base')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_base')."</FONT>";
 
 	echo "<!--";
 	$link = mysql_connect("$adresse_db","$login_db","$pass_db");
@@ -318,7 +318,7 @@ else if ($etape == 2) {
 else if ($etape == 1) {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
 
 	echo "<P>"._T('texte_connexion_mysql');
 
@@ -425,14 +425,14 @@ else if ($etape == 'ldap4') {
 	$fail = (ldap_errno($ldap_link) == 32);
 
 	if ($fail) {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</B></FONT>";
+		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_annuaire')."</B></FONT>";
 		echo "<P>";
 
 		echo "<B>"._T('avis_operation_echec')."</B> "._T('avis_chemin_invalide_1')." (<tt>".htmlspecialchars($base_ldap);
 		echo "</tt>) "._T('avis_chemin_invalide_2');
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
+		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_reglage_ldap')."</FONT>";
 		echo "<P>";
 
 		$conn = join('', file("inc_connect_install.php3"));
@@ -475,7 +475,7 @@ else if ($etape == 'ldap4') {
 else if ($etape == 'ldap3') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
 
 	echo "<P>"._T('info_chemin_acces_2');
 
@@ -537,7 +537,7 @@ else if ($etape == 'ldap3') {
 else if ($etape == 'ldap2') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
 	echo "<P>";
 
@@ -570,7 +570,7 @@ else if ($etape == 'ldap2') {
 else if ($etape == 'ldap1') {
 	install_debut_html();
 
-	echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
+	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
 	echo "<P>"._T('entree_informations_connexion_ldap');
 

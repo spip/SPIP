@@ -136,7 +136,7 @@ function enfants($id_parent, $decalage = 0) {
 				echo "<TD WIDTH=$decalage><IMG SRC='img_pack/rien.gif' BORDER=0 HEIGHT=1 WIDTH=$decalage></TD><TD WIDTH='100%'>";
 			}
 			echo "<TABLE CELLPADDING=3 CELLSPACING=1 BORDER=0 WIDTH=\"100%\">";
-			echo "<TR><TD BGCOLOR='$couleur_foncee' WIDTH=\"100%\"><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+			echo "<TR><TD BGCOLOR='$couleur_foncee' WIDTH=\"100%\"><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 
 			echo "<B><A HREF='$lien'><img src='img_pack/triangle-bleu.gif' alt='' width='14' height='14' border='0'></A> <A HREF='naviguer.php3?coll=$id_rubrique'><FONT COLOR='#FFFFFF'>$titre</FONT></A></B> $sucrer";
 			echo "</FONT></TD></TR></TABLE>";
