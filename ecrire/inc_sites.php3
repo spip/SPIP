@@ -20,12 +20,9 @@ function recuperer_page($url) {
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
 
-	if ($http_proxy)
-		$f = @fopen($http_proxy, "rb");
-	else
-		$f = @fopen($url, "rb");
+	$f = ($http_proxy) ? 0 : @fopen($url, "rb");
 
-	if (!$f) { // (pas d'erreur)
+	if (!$f) {
 		for (;;) {
 			$t = @parse_url($url);
 			$host = $t['host'];
@@ -36,7 +33,7 @@ function recuperer_page($url) {
 			if ($http_proxy) {
 				$t2 =  @parse_url($http_proxy);
 				$proxy_host = $t2['host'];
-				if (!($proxy_port = $t['proxy_port'])) $proxy_port = 80;
+				if (!($proxy_port = $t2['proxy_port'])) $proxy_port = 80;
 				$f = @fsockopen($proxy_host, $proxy_port);
 			} else
 				$f = @fsockopen($host, $port);
@@ -44,7 +41,7 @@ function recuperer_page($url) {
 			if (!$f) return;
 
 			if ($http_proxy)
-				fputs($f, "GET http://$host:$port/$path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
+				fputs($f, "GET http://$host:$port$path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
 			else
 				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
 
