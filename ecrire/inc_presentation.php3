@@ -240,15 +240,6 @@ function debut_raccourcis() {
 	debut_cadre_enfonce();
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	echo "<b>RACCOURCIS :</b><p>";
-
-	/*echo "<form method='get' action='recherche.php3'>";
-	echo "<div class='iconeon' style='padding:5px;'>";
-	echo "<input type='Hidden' name='id_article' value='$id_article'>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>Rechercher</b> un article, une rubrique, une br&egrave;ve&nbsp;:</font>";
-	echo '<input type="text" class="forml" size="*" value="" name="recherche" class="spip_recherche">';
-	echo "</div>";
-	echo "</form>";
-	*/
 }
 
 function fin_raccourcis() {
@@ -1022,15 +1013,15 @@ function barre_onglets($rubrique, $onglet){
 	}
 	
 	if ($rubrique == "auteur"){
-		$activer_messagerie=lire_meta("activer_messagerie");
-		$activer_imessage=lire_meta("activer_imessage");
+		$activer_messagerie = lire_meta("activer_messagerie");
+		$activer_imessage = lire_meta("activer_imessage");
 		
 		onglet("L'auteur", "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
 		onglet("Informations personnelles", "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
 		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur){
 			onglet("Messagerie", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
 		}
-		//onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
+		onglet("Donn&eacute;es de connexion", "auteur_connexion.php3?id_auteur=$id_auteur", "connexion", $onglet, "base-24.gif");
 	}
 
 	if ($rubrique == "configuration"){
@@ -1700,7 +1691,7 @@ function debut_droite() {
 	<?php
 
 	// proposer un zap_session le cas echeant lors d'un login reussi
-	if ($GLOBALS['spip_session'] && $GLOBALS['bonjour']=='oui') {
+	if ($GLOBALS['spip_session'] && ($GLOBALS['bonjour'] == 'oui' || $GLOBALS['secu'] == 'oui')) {
 		if (zap_sessions($GLOBALS['auteur_session']['login'], false)) {
 			debut_cadre_enfonce();
 			gros_titre("Informations de s&eacute;curit&eacute;");
@@ -1709,17 +1700,22 @@ function debut_droite() {
 				echo '<img src="img_pack/warning.gif" align="right" hspace="5" vspace="5"> ';
 				echo propre("{{Le syst&egrave;me de ce site a rep&eacute;r&eacute; une autre autorisation de connexion &agrave; votre nom.}}\n\n- Si vous utilisez actuellement un autre butineur (client Web, navigateur, {browser}) pour acc&eacute;der &agrave; ce site, cela est normal. Le syst&egrave;me a simplement remarqu&eacute; que vous utilisiez deux logiciels diff&eacute;rents pour naviguer sur le site.\n\n- Sinon, cela signifie que vous n'avez pas quitt&eacute; le syst&egrave;me en utilisant le bouton {{Se d&eacute;connecter}} lors de votre derni&egrave;re visite. Si vous &ecirc;tes la seule personne &agrave; acc&eacute;der &agrave; votre ordinateur, cela n'est pas grave; en revanche, si vous utilisez une machine accessible &agrave; d'autres utilisateurs, cela peut poser des probl&egrave;mes de s&eacute;curit&eacute;; dans ce cas, prenez l'habitude de  quitter le site en utilisant le bouton {{Se d&eacute;connecter}} ci-dessus, afin que personne ne puisse utiliser votre ordinateur pour se connecter en votre nom.\n\nSi vous n'utilisez pas actuellement un autre butineur pour acc&eacute;der &agrave; ce site, vous pouvez supprimer les anciennes connexions &agrave; votre nom en utilisant le bouton ci-dessous; cela permettra de &laquo;faire le m&eacute;nage&raquo; et d'assurer une meilleure s&eacute;curit&eacute; du syst&egrave;me.");
 				
-				
 				echo "<input type='hidden' name='zap_session' value='oui'>";
-				echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?bonjour=oui'>";
+				echo "<input type='hidden' name='redirect' value='./ecrire/index.php3?secu=oui'>";
 				echo "<div align='right'>";
 				echo "<input type='submit' class='fondo' name='submit' value='Supprimer les autres connexions'>";
 				echo "</form>\n";
-			/*else {
-				echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><br>";
-				echo "D'autre part, si vous voulez que votre connexion actuelle soit supprim&eacute;e de la ";
-				echo "m&eacute;moire de SPIP, il suffit de vous d&eacute;connecter en utilisant l'icone d&eacute;di&eacute;e.";
-			}*/
+			fin_cadre_enfonce();
+		}
+		else if ($GLOBALS['secu'] == 'oui') {
+			debut_cadre_enfonce();
+			gros_titre("Informations de s&eacute;curit&eacute;");
+			echo "<p>";
+
+			echo "<b>Aucune autre connexion &agrave; l'espace priv&eacute; n'est en cours &agrave; votre nom.</b><br>";
+			echo "D'autre part, si vous voulez que votre connexion actuelle soit supprim&eacute;e de la ";
+			echo "m&eacute;moire de SPIP, il suffit de vous d&eacute;connecter en utilisant l'icone d&eacute;di&eacute;e.";
+
 			fin_cadre_enfonce();
 		}
 	}
