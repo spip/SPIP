@@ -5,7 +5,6 @@ include ("ecrire/inc_version.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_session.php3");
-include_ecrire("inc_filtres.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_mail.php3");
@@ -75,5 +74,6 @@ utiliser_langue_site();
 utiliser_langue_visiteur();
 install_debut_html(_T('pass_mot_oublie'));
 inclure_balise_dynamique(formulaire_oubli_dyn($p, $oubli));
+echo http_script_window_close();
 install_fin_html();
 ?>
