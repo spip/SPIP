@@ -53,12 +53,33 @@ if (_FILE_CONNECT) {
 include_ecrire ("inc_base.php3");
 define('_FILE_TMP', '_install');
 
+
+// Sur tous les formulaires on peut cliquer "return" pour passer a la suite
+define ('_VALIDE_CLAVIER', '');
+/*
+define ('_VALIDE_CLAVIER', "<script><!--
+	window.onkeypress = enterSubmit;
+	function enterSubmit(){
+		// si on appuie sur enter ou return
+		if ((event.keyCode==13) || (event.keyCode==3)) {
+			// a l'etape 1 ne pas valider formulaire var_lang
+			a = 0;
+			if ((document.forms(0).action != 'install.php3')
+			&& (document.forms(0).action != 'index.php3'))
+				a = 1;
+			document.forms(a).submit();
+		}
+	}
+// --></script>\n");
+*/
+
 //
 // Etapes de l'installation standard
 //
 
 if ($etape == 6) {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_derniere_etape')."</B></FONT>";
 	echo "<P>";
@@ -119,6 +140,7 @@ if ($etape == 6) {
 
 else if ($etape == 5) {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 
@@ -171,6 +193,7 @@ else if ($etape == 5) {
 else if ($etape == 4) {
 
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	// Necessaire pour appeler les fonctions SQL wrappees
 	include_ecrire("inc_db_mysql.php3");
@@ -249,6 +272,7 @@ else if ($etape == 4) {
 else if ($etape == 3) {
 
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_choix_base')." <B>"._T('menu_aide_installation_choix_base')."</B></FONT>";
 
@@ -289,13 +313,24 @@ else if ($etape == 3) {
 		echo "<B>"._T('avis_lecture_noms_bases_1')."</B>
 		"._T('avis_lecture_noms_bases_2')."<P>";
 		if ($login_db) {
-			echo _T('avis_lecture_noms_bases_3');
-			echo "<UL>";
-			echo "<INPUT NAME=\"choix_db\" VALUE=\"".$login_db."\" TYPE=Radio id='stand' CHECKED>";
-			echo "<label for='stand'>".$login_db."</label><BR />\n";
-			echo "</UL>";
-			echo _T('info_ou')." ";
-			$checked = true;
+			// Si un login comporte un point, le nom de la base est plus
+			// probablement le login sans le point -- testons pour savoir
+			$test_base = $login_db;
+			$ok = @mysql_select_db($test_base);
+			if (!$ok) {
+				$test_base = str_replace('.', '_', $test_base);
+				$ok = @mysql_select_db($test_base);
+			}
+			
+			if ($ok) {
+				echo _T('avis_lecture_noms_bases_3');
+				echo "<UL>";
+				echo "<INPUT NAME=\"choix_db\" VALUE=\"".$test_base."\" TYPE=Radio id='stand' CHECKED>";
+				echo "<label for='stand'>".$test_base."</label><BR />\n";
+				echo "</UL>";
+				echo _T('info_ou')." ";
+				$checked = true;
+			}
 		}
 	}
 	echo "<INPUT NAME=\"choix_db\" VALUE=\"new_spip\" TYPE=Radio id='nou'";
@@ -315,6 +350,9 @@ else if ($etape == 3) {
 else if ($etape == 2) {
 
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
+
+
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_base')."</FONT>";
 
@@ -348,6 +386,7 @@ else if ($etape == 2) {
 }
 else if ($etape == 1) {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_connexion_mysql')."</FONT>";
 
@@ -405,6 +444,7 @@ else if (!$etape) {
 		header("Location: ../spip_test_dirs.php3");
 	else {
 		install_debut_html();
+		echo _VALIDE_CLAVIER;
 
 		echo "<p align='center'><img src='" . _DIR_IMG_PACK . "logo-spip.gif'></p>";
 		
@@ -431,6 +471,7 @@ else if (!$etape) {
 
 else if ($etape == 'ldap5') {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	include_local(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 	include_ecrire('inc_meta.php3');
@@ -450,6 +491,7 @@ else if ($etape == 'ldap5') {
 
 else if ($etape == 'ldap4') {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	if (!$base_ldap) $base_ldap = $base_ldap_text;
 
@@ -510,6 +552,7 @@ else if ($etape == 'ldap4') {
 
 else if ($etape == 'ldap3') {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_chemin_acces_1')."</FONT>";
 
@@ -572,6 +615,7 @@ else if ($etape == 'ldap3') {
 
 else if ($etape == 'ldap2') {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
@@ -605,6 +649,7 @@ else if ($etape == 'ldap2') {
 
 else if ($etape == 'ldap1') {
 	install_debut_html();
+	echo _VALIDE_CLAVIER;
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('titre_connexion_ldap')."</FONT>";
 
