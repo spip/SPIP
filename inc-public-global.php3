@@ -69,7 +69,6 @@ else {
 //
 // Authentification
 //
-$auteur_session = '';
 if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
 	include_ecrire ("inc_session.php3");
 	verifier_visiteur();
