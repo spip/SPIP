@@ -1370,5 +1370,5 @@ table.spip td {
 	vertical-align: center;
  }
 <?php }
-taches_de_fond();
+if (_FILE_CONNECT) taches_de_fond();
 ?>

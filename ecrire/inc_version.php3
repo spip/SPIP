@@ -5,15 +5,18 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
+function define_once ($constant, $valeur) {
+	if (!defined($constant)) define($constant, $valeur);
+}
+
 // 7 constantes incontournables et prioritaires
 
 define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
-define('_DIR_INCLUDE', _DIR_RESTREINT);
 define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
 define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
-define_once('_FILE_CONNECT',
+define('_FILE_CONNECT',
 	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
 		(_FILE_CONNECT_INS . _EXTENSION_PHP)
 	 : false));
@@ -31,6 +34,8 @@ function include_local($file) {
 }
 
 function include_ecrire($file) {
+# Hack pour etre compatible avec les mes_options qui appellent cette fonction
+	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$file = _DIR_INCLUDE . $file;
 	if (!empty($GLOBALS['included_files'][$file])) return;
 	$GLOBALS['included_files'][$file] = 1;
@@ -60,19 +65,18 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
     }
   else
     {
-
+      # on ne peut pas deviner ces repertoires avant l'installation !
+		define('_DIR_INCLUDE', _DIR_RESTREINT);
 		define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 		define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
-		$db_ok = 0;
+		$db_ok = false;
 		include_ecrire ("inc_presentation.php3");
 		install_debut_html(_T('info_travaux_titre'));
 		echo "<p>"._T('info_travaux_texte')."</p>";
 		install_fin_html();
-		exit;
 	}
+  exit;
 }
-
-
 
 // *********** traiter les variables ************
 // Magic quotes : on n'en veut pas sur la base,
@@ -275,14 +279,11 @@ $extension_squelette = 'html';
 // Définition des repertoires standards, _FILE_OPTIONS ayant priorite
 //
 
-function define_once ($constant, $valeur) {
-	if (!defined($constant)) define($constant, $valeur);
-}
-
 if (@file_exists(_FILE_OPTIONS)) {
   include(_FILE_OPTIONS);
  }
 
+define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
 define_once('_DIR_PREFIX2', _DIR_RESTREINT);
 
@@ -332,7 +333,6 @@ define_once('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
 define_once('_DIR_TeX', _DIR_IMG . "TeX/");
 
 // pour ceux qui n'aiment pas nos icones et notre vocabulaire, tout est prevu
-// (pas tout à fait)
 
 define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
@@ -578,21 +578,14 @@ if (!$PATH_TRANSLATED) {
 	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
 }
 
-
-
 function spip_query($query) {
-	if (_FILE_CONNECT) {
-		include_local(_FILE_CONNECT);
-		if (!$GLOBALS['db_ok'])
-			return;
-		if ($GLOBALS['spip_connect_version'] < 0.1) {
-			if (!_DIR_RESTREINT) {
-				$GLOBALS['db_ok'] = false;
-				return;
-			}
-			@Header("Location: upgrade.php3?reinstall=oui");
-			exit;
-		}
+	if (!_FILE_CONNECT)  {$GLOBALS['db_ok'] = false; return;}
+	include_local(_FILE_CONNECT);
+	if (!$GLOBALS['db_ok'])	return;
+	if ($GLOBALS['spip_connect_version'] < 0.1) {
+		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
+		@Header("Location: upgrade.php3?reinstall=oui");
+		exit;
 	}
 	return spip_query_db($query);
 }

@@ -80,7 +80,7 @@ function bandeau_rubrique ($id_rubrique, $titre_rubrique, $z = 1) {
 	//else $image = "rubrique-12.gif";
 	else $image = '';
 	
-	if (strlen($image) > 1) $image = " style='background-image:url(img_pack/$image);'";
+	if (strlen($image) > 1) $image = " style='background-image:url(" . _DIR_IMG_PACK . $image .");'";
 	
 	$result_rub = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=$id_rubrique ORDER BY titre");
 
