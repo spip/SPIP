@@ -97,7 +97,7 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
       index_pile($id_boucle,  'id_breve', $boucles) .
       ", '', " .
       index_pile($id_boucle,  'titre', $boucles) .
-      ", '$type', substr(lire_meta('forums_publics'),0,3)), &\$Cache)";
+      ", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
     break;
     
   case 'rubriques':
@@ -106,7 +106,7 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
       index_pile($id_boucle,  'id_rubrique', $boucles) .
       ", '', '', '', ''," .
       index_pile($id_boucle,  'titre', $boucles) .
-      ", '$type', substr(lire_meta('forums_publics'),0,3)), &\$Cache)";
+      ", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
     break;
     
   case 'syndication':
@@ -115,7 +115,7 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
       index_pile($id_boucle, 'id_rubrique', $boucles) .
       ", " .
       index_pile($id_boucle,  'nom_site', $boucles) .
-      ", '$type', substr(lire_meta('forums_publics'),0,3)), &\$Cache)";
+      ", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
     break;
     
   case 'articles': 
@@ -126,7 +126,7 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
       index_pile($id_boucle,  'nom_site', $boucles) .
       "'$type', " .
       index_pile($id_boucle,  'accepter_forum', $boucles) .
-      ', &$Cache)';
+      ', $Cache)';
     break;
     
   case 'forums':
@@ -139,7 +139,7 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
       index_pile($id_boucle, 'id_breve', $boucles) . ', ' .
       index_pile($id_boucle, 'id_syndic', $boucles) . ', ' .
       index_pile($id_boucle, 'titre', $boucles) .
-      ", '$type', '', &\$Cache)";
+      ", '$type', '', \$Cache)";
     break;
   }
   list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);

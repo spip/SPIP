@@ -220,12 +220,10 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 		list($oc,$om) = calculer_liste($objet->cond_altern, $prefix,
 					       $objet->id_boucle, $niv+1,$rec, $boucles, $id_mere);
 
-	      // on transmet avec & pour e'viter la recopie
-	      // et re'cupe'rer les affectations (Total_boucles & Cache)
 	      
 	      $c = $prefix .
 		ereg_replace("-","_", $nom) .
-		'(&$Cache, &$PileRow, &$PileNum, $SP' .
+		'($Cache, $PileRow, $PileNum, $SP' .
 		(!($rec || ( $objet->type_requete ==  'boucle')) ? ", true" : ', $inidoublon') . ')';
 	      $m = "";
 	    } else {
@@ -358,8 +356,8 @@ function calculer_squelette($squelette, $nom, $gram) {
   // Corps de toutes les fonctions PHP,
   // en particulier les requetes SQL et TOTAL_BOUCLE
   // de'terminables seulement maintenant
-  // Les 3 premiers parame`tres sont passe's par re'fe'rences
-  // (sorte d'environnement a` la Lisp 1.5)
+  // Les 3 premiers parame`tres sont passe's par re'fe'rence
+  // (sorte d'environnements a` la Lisp 1.5)
   // sauf pour la fonction principale qui recoit les initialisations
 
   $code = '';
