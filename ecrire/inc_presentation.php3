@@ -1331,8 +1331,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_secondaire ("Tout le site", "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
 		if ($options == "avancees") {
 			bandeau_barre_verticale();
-			if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non')
-				icone_bandeau_secondaire ("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
 			icone_bandeau_secondaire ("Calendrier", "calendrier.php3", "calendrier-24.gif", "calendrier", $sous_rubrique);
 		}
 	}
@@ -1371,6 +1369,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 	}
 	else if ($rubrique == "messagerie"){
+		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non')
+			icone_bandeau_secondaire ("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
+
 		icone_bandeau_secondaire ("Forum interne", "forum.php3", "forum-interne-24.gif", "forum-interne", $sous_rubrique);
 
 		if ($connect_statut == "0minirezo"){

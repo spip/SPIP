@@ -166,7 +166,9 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 
 if ($options == "avancees") {
 	echo "<p>";
-	$activer_messagerie = lire_meta("activer_messagerie");
+	if (lire_meta("activer_messagerie") == 'oui' AND $connect_activer_messagerie != 'non') {
+		icone_horizontale("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif");
+	}
 
 	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif","rien.gif");
 
