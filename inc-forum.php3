@@ -80,10 +80,9 @@ function forum_abonnement($retour) {
 	else {
 		include_local("inc-login.php3");
 
-		$message_login = _T('forum_vous_enregistrer').
-' <script type="text/javascript"><!--
-document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
-//--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>'._T('forum_vous_inscrire').'<br>';
+		$message_login = _T('forum_vous_enregistrer').'<a href="spip_pass.php3" target="spip_pass" onclick="'
+			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\">"
+			._T('forum_vous_inscrire')."<br>\n";
 		login('', false, $message_login);
 		return false;
 	}

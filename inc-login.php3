@@ -223,14 +223,14 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
 	if ((!$prive AND (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) OR ($prive AND $inscriptions_ecrire)) {
 		echo '[<a href="spip_pass.php3" target="spip_pass" onclick="'
-			."javascript:window.open('spip_pass.php3', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\">"
+			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=450'); return false;\">"
 			._T('login_sinscrire').'</a>]';
 	}
 	// Bouton oubli de mot de passe
 	include_ecrire ("inc_mail.php3");
 	if (tester_mail()) {
 		echo ' [<a href="spip_pass.php3?oubli_pass=oui" target="spip_pass" onclick="'
-			."javascript:window.open('spip_pass.php3?oubli_pass=oui', 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;\">"
+			."javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;\">"
 			._T('login_motpasseoublie').'</a>]';
 	}
 	// Bouton retour au site public
