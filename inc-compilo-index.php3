@@ -150,9 +150,14 @@ function calculer_balise($nom, $p) {
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 
 	// Compatibilite ascendante avec les couleurs html (#FEFEFE) :
-	// si le champ SQL n'est pas trouve ET que la balise a une forme de
-	// couleur, retourner la couleur.
-	if (ereg("^[\$]Pile[[]0[]][[]'([A-F]{1,6})'[]]$", $p->code, $match)) {
+	// SI le champ SQL n'est pas trouve
+	// ET si la balise a une forme de couleur
+	// ET s'il n'y a ni filtre ni etoile
+	// ALORS retourner la couleur.
+	// Ca permet si l'on veut vraiment de recuperer [(#ACCEDE*)]
+	if (ereg("^[\$]Pile[[]0[]][[]'([A-F]{1,6})'[]]$", $p->code, $match)
+	AND !$p->etoile
+	AND !$p->fonctions) {
 		$p->code = "'#". $match[1]."'";
 		$p->statut = 'php';
 	}
