@@ -138,52 +138,72 @@ function calcul_admin_page($cached, $texte) {
 	return $texte;
 }
 
-
 //
 // Leve un drapeau si le squelette donne une page generant de graves erreurs php
 //
 function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
 	global $tableau_des_erreurs, $page;
 
-	// On ne veut intercepter que les erreurs des $page['texte'], pas
-	// celles qui peuvent se trouver dans SPIP: $filename = inc-public + eval
-	if (($errno & (E_ERROR | E_WARNING | E_PARSE))
-	AND strpos($filename, 'inc-public.php3(')) {
-		$tableau = explode("\n", $page['texte']);
-		$format = "%0".strlen(count($tableau))."d";
-		for($i=max(1,$linenum-3); $i<=min(count($tableau),$linenum+3); $i++) {
-			$l = propre("<code>".sprintf($format, $i).'. '.$tableau[$i-1]."</code>");
-			if ($i == $linenum) $l = "<b><font color='red'>$l</font></b>";
-			$contexte .= "<br />".$l;
-		}
+	// On ne veut intercepter que les erreurs des $page['texte'],
+	// si le code avait ete développé proprement dès le départ
+	// ce serait moins approximatif que ci-dessous
 
+	if (($errno & (E_ERROR | E_WARNING | E_PARSE)) &&
+	    (!strpos($filename, 'ecrire/')))
+	  {
+
+# si $filename = inc-public + eval, dénoncer le squelette,
+# sinon c'est un appel du handler explicitement par le compilateur 
+# qui donne les bons arguments tout de suite, mais avec linenum = ''
 		$tableau_des_erreurs[]
-		= array($errno, $errmsg, $linenum, $page['squelette'], $contexte);
+		  = array($errno,
+			  $errmsg,
+			  ($linenum ? "ligne $linenum" : ''),
+			  ((!strpos($filename, 'inc-public.php3(')) ? 
+			   $filename :
+			   (($page_principale['squelette']!=$page['squelette'])?
+			    (", fichier inclus " . $page['squelette']) :
+			    '')),
+			  (!$linenum ? '' :
+			   affiche_contexte_erreur($page['texte'])));
 	}
 }
 
+function affiche_contexte_erreur($texte) {
+	$tableau = explode("\n", $texte);
+	$format = "%0".strlen(count($tableau))."d";
+	for($i=max(1,$linenum-3); $i<=min(count($tableau),$linenum+3); $i++) {
+		$l = propre("<code>".sprintf($format, $i).'. '.$tableau[$i-1]."</code>");
+		if ($i == $linenum) $l = "<b><font color='red'>$l</font></b>";
+		$contexte .= "<br />".$l;
+	}
+}
+
+
 //
-// Si le code php produit des erreurs, on peut les afficher
+// Si le code php produit des erreurs, on les affiche en surimpression
 //
 function affiche_erreurs_execution_page() {
-	global $tableau_des_erreurs, $page_principale, $s;
-	echo "<div style='position: absolute; z-index: 1000;
-	background-color: pink;'><h2>".
-	_L("Erreur lors de l'ex&eacute;cution du squelette")."</h2>";
-	echo "<p>"._L("php a rencontr&eacute; les
-	erreurs suivantes :")."<code><ul>";
-	foreach ($tableau_des_erreurs as $err) {
-		$fichier_inclus = ($err[3] <> $page_principale['squelette'])
-		? ", fichier inclus $err[3].html" : '';
-		echo "<li>ligne $err[2]$fichier_inclus: $err[1]
-		($err[0])";
+  global $tableau_des_erreurs, $page_principale, $affiche_boutons_admin;
+	echo "<div style='height: 100%; width: 100%; position: absolute; z-index: 1000; background-color: pink;'>";
+	if (!$affiche_boutons_admin)
+	  echo "<h2>",(_T('info_travaux_titre')), "</h2>";
+	else {
+	  echo "<h2>",
+	    _L("Erreur lors de l'ex&eacute;cution du squelette"),
+	    "</h2>",
+	    "<p>",
+	    _L("php a rencontr&eacute; les erreurs suivantes :"),
+	    "<code><ul>";
+	  foreach ($tableau_des_erreurs as $err) {
+		echo "<li>$err[2] $err[3]  $err[1] ($err[0])";
 		echo "<small>$err[4]</small>";
 		echo "</li>\n";
+	  }
+	  echo "</ul></code>";
+	  $GLOBALS['bouton_admin_debug'] = true;
 	}
-	if ($s === false)
-		echo "<li>Erreur de compilation</li>\n";
-	echo "</ul></code></div>";
-	$GLOBALS['bouton_admin_debug'] = true;
+	echo "</div>";
 }
 
 //
@@ -235,14 +255,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 		spip_log("Erreur MySQL BOUCLE$id_boucle (".$GLOBALS['fond'].".html)");
 	}
 
-	// Pour un visiteur normal, afficher juste le fait qu'il y a une erreur
-	// ajouter &afficher_erreurs=1 pour discuter sur spip@rezo.net
-	if (!$HTTP_COOKIE_VARS['spip_admin'] AND !$auteur_session
-	AND !$GLOBALS['afficher_erreurs'])
-		return "<br />\n<b>"._T('info_erreur_squelette')."</b><br />\n";
-	else
-		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
-		z-index: 10000; background-color: pink;'>$retour</div>";
+	  spip_error_handler(1,$retour,'','','?');
 }
 
 
@@ -259,7 +272,7 @@ function erreur_squelette($message, $lieu) {
 	# ca ne change rien et autant cacher quand meme !
 
 	spip_log("Erreur squelette: $message | $lieu ("
-	.$GLOBALS['fond'].".html)");
+		. $GLOBALS['fond'].".html)");
 	$GLOBALS['bouton_admin_debug'] = true;
 
 	// Pour un visiteur normal, ne rien afficher, si SPIP peut s'en sortir
@@ -267,15 +280,16 @@ function erreur_squelette($message, $lieu) {
 	// ajouter &var_debug=oui pour discuter sur spip@rezo.net
 	if ($HTTP_COOKIE_VARS['spip_admin'] OR $auteur_session
 	OR $GLOBALS['var_debug']) {
-		$message = "<h2>"._T('info_erreur_squelette')."</h2><p>$message</p>";
-		$message .= '<br /><FONT color="#FF000">' . $lieu . '</FONT>'; 
+		$message_long = "<h2>"._T('info_erreur_squelette')."</h2><p>$message</p>";
+		$message_long .= '<br /><FONT color="#FF000">' . $lieu . '</FONT>'; 
 
 		$debug_messages .= "<div style='position: fixed; top: 10px; left: 10px;
-		z-index: 10000; background-color: pink;'>$message</div>";
+		z-index: 10000; background-color: pink;'>$message_long</div>";
 	}
 
 	// Eviter les boucles infernales
 	if (++$runs > 4) die ($debug_messages);
+	spip_error_handler(1," $message $lieu ", '','','?');
 }
 
 //
@@ -315,23 +329,18 @@ function boucle_debug ($id, $nom, $boucle) {
 }
 
 // l'environnement graphique du debuggueur 
-function debug_page($no_exit = false) {
+function debug_dumpfile ($texte) {
+
 	global $flag_ob;
 	global $debug_objets, $debug_objet, $debug_affiche;
-
-	if ($flag_ob)
-		ob_end_clean();
-
 
 	@header("Content-Type: text/html; charset=".lire_meta('charset'));
 	if (!$GLOBALS['debug_objets']['sourcefile']) return;
 	spip_setcookie('spip_debug', 'oui', time()+12*3600);
+        $page = "<html><head><title>Debug</title></head>\n<body>";
+        echo calcul_admin_page('', $page),
+	  "<div id='spip-debug' style='position: absolute; top: 20; z-index: 1000;'><ul>\n"; 
 
-	$page = "<html><head><title>Debug</title></head>\n";
-	$page .= "<body>\n<div id='spip-debug'>";
-	echo calcul_admin_page('', $page);
-
-	echo "<ul>\n";
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<li><b>".$sourcefile."</b>";
 		$link = $GLOBALS['clean_link'];
@@ -378,31 +387,18 @@ function debug_page($no_exit = false) {
 		echo "</fieldset></div>";
 	}
 
+	if ($texte) {
+	  $tableau = explode("\n", $texte);
+	  $format = "%0".strlen(count($tableau))."d";
+	  $texte = '';
+	  foreach ($tableau as $ligne)
+	    $texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
+	  echo "<div id=\"debug_boucle\"><fieldset><legend>".$GLOBALS['debug_affiche']."</legend>";
+	  highlight_string($texte);
+	  echo "</fieldset></div>";
+	}
 	echo "\n</div></body>";
-	if (!$no_exit) exit;
-}
-
-function debug_dumpfile ($texte) {
-	global $flag_ob;
-
-	# un peu violent : si on est un fichier inclus,
-	# il faut d'abord vider le ob_
-	if ($flag_ob)
-		ob_end_clean();
-
-	debug_page('no exit');
-
-	if (!$texte) exit;
-	$tableau = explode("\n", $texte);
-	$format = "%0".strlen(count($tableau))."d";
-	$texte = '';
-	foreach ($tableau as $ligne)
-		$texte .= "\n".sprintf($format, ++$i).'. '.$ligne;
-    echo "<div id=\"debug_boucle\"><fieldset><legend>".$GLOBALS['debug_affiche']."</legend>";
-	highlight_string($texte);
-	echo "</fieldset></div>";
-
-	exit;
+	if ($texte) exit;
 }
 
 

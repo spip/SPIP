@@ -292,22 +292,6 @@ function cherche_image_nommee($nom) {
 	}
 }
 
-// La fonction ci-dessous permet a un script de flusher ses resultats partiels
-function spip_ob_flush() {
-	if (!$GLOBALS['flag_ob']
-	OR !strlen($contenu = ob_get_contents())) return false;
-
-	ob_end_clean();
-	echo $contenu;
-	ob_start();
-
-	// Messages pour inc-public :
-	// 1. les boutons ont ete affiches par @@START@@
-	$GLOBALS['affiche_boutons_admin'] = false;
-	// 2. Pour memoire : ne pas envoyer d'entetes; @header() suffit
-}
-
-
 // Gestion des taches de fond ?  toutes les 5 secondes
 // (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
