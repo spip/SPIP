@@ -52,13 +52,14 @@ function champs_traitements ($p) {
 		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))'
 	);
-	$ps = $traitements[$p->$nom_champ];
+	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
+
 	if ($p->documents)
 	  {$ps = str_replace('traite_raccourcis(', 
 			     'traite_raccourcis_doublon($doublons,',
 			     str_replace('typo(', 
-					 'ttypo_doublon($doublons,',
+					 'typo_doublon($doublons,',
 					 $ps));
 	  }
 	return str_replace('%s', $p->code, $ps);				
