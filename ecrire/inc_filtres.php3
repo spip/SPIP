@@ -135,6 +135,16 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 
 	if (lire_meta('charset') == 'iso-8859-1')	// recuperer les caracteres iso-latin
 		$texte = strtr2 ($texte, $trans_iso);
+	else {
+		// 1. recuperer les caracteres binaires en &#1234;
+		$texte = entites_unicode($texte);
+		// 2. les &eacute; en iso-8859-1
+		$texte = strtr2 ($texte, $trans_iso);
+		// 3. les iso en &#233;
+		$texte = iso_8859_1_to_unicode($texte);
+		// 4. le tout dans le charset cible
+		$texte = unicode2charset($texte);
+	}
 
 	return $texte;
 }

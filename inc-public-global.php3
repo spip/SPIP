@@ -253,8 +253,6 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 		// envoi
 		if ($mail_nouveautes) {
 			include_ecrire('inc_mail.php3');
-			$sujet_nouveautes = filtrer_entites($sujet_nouveautes);
-			$mail_nouveautes = filtrer_entites($mail_nouveautes);
 			spip_log("envoi mail nouveautes");
 			envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
 		} else

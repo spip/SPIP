@@ -206,6 +206,7 @@ if ($flag_function_exists) {
 	$flag_ImageGif = function_exists("ImageGif");
 	$flag_ImageJpeg = function_exists("ImageJpeg");
 	$flag_ImagePng = function_exists("ImagePng");
+	$flag_multibyte = function_exists("mb_encode_mimeheader");
 }
 else {
 	$flag_ini_get = false;
@@ -225,6 +226,7 @@ else {
 	$flag_ImageGif = false;
 	$flag_ImageJpeg = false;
 	$flag_ImagePng = false;
+	$flag_multibyte = false;
 }
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;

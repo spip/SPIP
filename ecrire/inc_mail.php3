@@ -1,4 +1,4 @@
-<?php
+$<?php
 
 //
 // Ce fichier ne sera execute qu'une fois
@@ -36,7 +36,6 @@ function tester_mail() {
 	return $test_mail;
 }
 
-
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap, $os_serveur;
 
@@ -53,10 +52,14 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		"Content-Type: text/plain; charset=$charset\n".
 		"Content-Transfer-Encoding: 8bit\n$headers";
 
-	// terrible conversion pour le mail : les '&eacute;' doivent etre transformes en '\xe9'
-	// puis remis dans le charset du mail...  (experimental)
-	$texte = unicode2charset(iso_8859_1_to_unicode(filtrer_entites($texte)));
-	$sujet = unicode2charset(iso_8859_1_to_unicode(filtrer_entites($sujet)));
+	$texte = filtrer_entites($texte);
+	$sujet = filtrer_entites($sujet);
+
+	// encoder le sujet si possible selon la RFC
+	if($GLOBALS['flag_multibyte']) {
+		mb_internal_encoding($charset);
+		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q');
+	}
 
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
