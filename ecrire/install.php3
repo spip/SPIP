@@ -54,11 +54,11 @@ if ($etape == 6) {
 
 		// inserer email comme email webmaster principal
 		ecrire_meta('email_webmaster', $email);
-		ecrire_metas();
 	}
 
 	include_ecrire("inc_config.php3");
 	init_config();
+	init_langues();
 
 	if ($hebergeur == 'nexenservices') {
 		echo "<p><B>"._T('info_nexen_1')."</B><br />";
@@ -85,8 +85,9 @@ if ($etape == 6) {
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
-	install_fin_html();
+	ecrire_metas();
 
+	install_fin_html();
 }
 
 else if ($etape == 5) {
