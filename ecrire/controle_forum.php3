@@ -123,21 +123,30 @@ function controle_forum($row, $rappel) {
 	$type = $r['type'];
 	$valeur = $r['valeur'];
 	$pref = $r['pref'];
-
+	
+	$cadre = "";
+	
 	$controle = "\n<br /><br /><a id='$id_forum'></a>";
+	
+//	$controle.=  "[$forum_stat]";
+	if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
+	else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
+	else if ($forum_stat == "privrac") $logo = "forum-admin-24.gif";
+	else $logo = "forum-public-24.gif";
 
-	if ($forum_stat=="off" OR $forum_stat == "privoff")
-		$controle .= "<div style='border: 2px #ff0000 dashed; background-color: white;'>";
-	else if ($forum_stat=="prop")
-		$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
-	else {
-		$controle .= "<div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'>"  .
-		  "<div style='border: 1px #999999 dashed; background-color: white;'>";
+	$controle .= debut_cadre_thread_forum("", true, "", typo($forum_titre));
+
+	if ($forum_stat=="off" OR $forum_stat == "privoff") {
+		$controle .= "<div style='border: 2px #ff0000 dashed;'>";
 	}
-
-	$controle .= "<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% valign='top'><table width=100% cellpadding=5 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='verdana,arial,sans,sans-serif' size=2 color='#ffffff'><b>" .
-	  typo($forum_titre).
-	  "</b></font></td></tr><tr><td class='serif'><span class='arial2'>" .
+	else if ($forum_stat=="prop") {
+		$controle .= "<div style='border: 2px yellow solid; background-color: white;'>";
+	}
+	else {
+		$controle .= "<div>";
+	}
+	
+	$controle .= "<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% valign='top'><table width=100% cellpadding=5 cellspacing=0><tr><td class='serif'><span class='arial2'>" .
 	  affdate_heure($forum_date_heure) .
 	  "</span>";
 	if ($forum_auteur) {
@@ -153,7 +162,7 @@ function controle_forum($row, $rappel) {
 				       $id_forum,
 				       _T('icone_supprimer_message'), 
 				       "controle_forum.php3?$rappel#$id_forum",
-				       "forum-interne-24.gif",
+				       $logo,
 				       "supprimer.gif");
 		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
 			$controle .= 
@@ -161,7 +170,7 @@ function controle_forum($row, $rappel) {
 				       $id_forum,
 				       _T('icone_supprimer_message'), 
 				       "controle_forum.php3?$rappel#$id_forum",
-				       "forum-interne-24.gif",
+				       $logo,
 				       "supprimer.gif");
 		    }
 	else {
@@ -178,7 +187,7 @@ function controle_forum($row, $rappel) {
 				       $id_forum,
 				       _T('icone_valider_message'), 
 				       "controle_forum.php3?$rappel&#$id_forum",
-				       "forum-interne-24.gif",
+				       $logo,
 				       "creer.gif") .
 		  controle_cache_forum('valid_forum',
 				       $id_forum,
@@ -210,9 +219,8 @@ function controle_forum($row, $rappel) {
 
 	$controle .= "</TD></TR></TABLE>";
 	$controle .= "</TD></TR></TABLE>\n";
-	if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop'))
-		$controle .= "</div>";
-	$controle .= "</div>";
+
+	$controle .= "</div>".fin_cadre_thread_forum(true);
 	return $controle;
 }
 

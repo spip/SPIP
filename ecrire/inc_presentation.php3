@@ -1142,6 +1142,12 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 		$statut=$row['statut'];
 		$ip=$row["ip"];
 		$id_auteur=$row["id_auteur"];
+	
+		$forum_stat = $statut;
+		if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
+		else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
+		else if ($forum_stat == "privrac") $logo = "forum-admin-24.gif";
+		else $logo = "forum-public-24.gif";
 
 		if ($compteur_forum==1) echo "\n<br /><br />";
 		$afficher = ($controle_id_article) ? ($statut!="perso") :
@@ -1165,19 +1171,20 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 
 			echo "\n<td width=100% valign='top'>";
 
+
+			if ($compteur_forum == 1) echo debut_cadre_forum($logo, false, "", typo($titre));
+			else echo debut_cadre_thread_forum("", false, "", typo($titre));
+			
 			// Si refuse, cadre rouge
 			if ($statut=="off") {
-				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td>";
+				echo "<div style='border: 2px dashed red; padding: 5px;'>";
 			}
 			// Si propose, cadre jaune
 			else if ($statut=="prop") {
-				echo "<table width=100% cellpadding=2 cellspacing=0 border=0><tr><td>";
+				echo "<div style='border: 1px solid yellow; padding: 5px;'>";
 			}
-
-			if ($compteur_forum == 1) echo debut_cadre_forum("forum-interne-24.gif", false, "", typo($titre));
-			else echo debut_cadre_thread_forum("", false, "", typo($titre));
-			
-			echo "<span class='arial2'>";
+		
+		echo "<span class='arial2'>";
 			echo affdate_court($date_heure);
 			echo ", ";
 			echo heures($date_heure).":".minutes($date_heure);
@@ -1201,7 +1208,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 						$id_forum,
 						_T('icone_supprimer_message'), 
 						"articles_forum.php3?id_article=$controle_id_article&debut=$debut#$id_forum",
-						"forum-interne-24.gif",
+						$logo,
 						"supprimer.gif");
 				}
 				else {
@@ -1216,7 +1223,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 						$id_forum,
 						_T('icone_valider_message'),
 						"articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
-						"forum-interne-24.gif",
+						$logo,
 						"creer.gif");
 				}
 			}
@@ -1246,13 +1253,13 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 				}
 
 			}
+	
+			if ($statut == "off" OR $statut == "prop") echo "</div>";
 
 			if ($compteur_forum == 1) echo fin_cadre_forum();
 			else echo fin_cadre_thread_forum();
 		
-		if ($statut == "off" OR $statut == "prop") {
-				echo "</td></tr></table>";
-			}
+
 			echo "</td></tr></table>\n";
 
 			afficher_thread_forum($id_forum,$adresse_retour,$controle_id_article);
@@ -1728,7 +1735,7 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "suivi_forum"){
-		onglet(_T('onglet_messages_publics'), "controle_forum.php3?page=public", "public", $onglet, "racine-site-24.gif");
+		onglet(_T('onglet_messages_publics'), "controle_forum.php3?page=public", "public", $onglet, "forum-public-24.gif");
 		onglet(_T('onglet_messages_internes'), "controle_forum.php3?page=interne", "interne", $onglet, "forum-interne-24.gif");
 
 		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 0,1";

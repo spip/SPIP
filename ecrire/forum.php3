@@ -6,10 +6,12 @@ include ("inc.php3");
 if ($admin=='oui') {
 	debut_page(_T('titre_page_forum'), "redacteurs", "forum-admin");
 	$statutforum = 'privadm';
+	$logo = "forum-admin-24.gif";
 	$urlforum = 'forum_admin.php3';
 } else {
 	debut_page(_T('titre_forum'), "redacteurs", "forum-interne");
 	$statutforum = 'privrac';
+	$logo = "forum-interne-24.gif";
 	$urlforum = 'forum.php3';
 }
 
@@ -61,7 +63,7 @@ if ($total > 10) {
 
 
 echo "<p><div align='center'>";
-icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message=".urlencode(filtrer_entites(_T('texte_nouveau_message'))), "forum-interne-24.gif", "creer.gif");
+icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message=".urlencode(filtrer_entites(_T('texte_nouveau_message'))), $logo, "creer.gif");
 echo "</div>";
 
 

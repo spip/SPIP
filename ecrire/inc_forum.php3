@@ -45,7 +45,7 @@ function changer_statut_forum($id_forum, $statut) {
 }
 
 // Installer un bouton de moderation (securise) dans l'espace prive
-function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc) {
+function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonction) {
 	$link = $GLOBALS['clean_link'];
 	$link->addvar('controle_forum', $action);
 	$link->addvar('id_controle_forum', $id);
