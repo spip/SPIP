@@ -262,14 +262,14 @@ function interdire_scripts($source) {
 
 // Integration (embed) multimedia
 
-function embed_document($id_document, $parametres="", $afficher_titre=true) {
+function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
 	global $id_doublons;
 
 	$id_doublons['documents'] .= ",$id_document";
 
 
-	if ($parametres) {
-		$parametres = explode("|",$parametres);
+	if ($les_parametres) {
+		$parametres = explode("|",$les_parametres);
 		
 		for ($i = 0; $i < count($parametres); $i++) {
 			$parametre = $parametres[$i];
@@ -302,6 +302,7 @@ function embed_document($id_document, $parametres="", $afficher_titre=true) {
 		if ($row_type = @mysql_fetch_array($result_type)) {
 			$type = $row_type['titre'];
 			$inclus = $row_type['inclus'];
+			$extension = $row_type['extension'];
 		}
 		else $type = 'fichier';
 
@@ -309,24 +310,43 @@ function embed_document($id_document, $parametres="", $afficher_titre=true) {
 		if ($GLOBALS['flag_ecrire']) {
 			if ($fichier) $fichier = "../$fichier";
 		}
+		// Pour RealVideo
+		if ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension))) {
+			$real = true;
+		}
 
-
-		if ($inclus == "embed") {
-			$vignette = "<object width='$largeur' height='$hauteur'>";
-			$vignette .= "<param name='movie' value='$fichier'>";
-			$vignette .= "<param name='src' value='$fichier'>";
-	
-			for ($i = 0; $i < count($params); $i++) {
-				if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
-					$nom = $vals[1];
-					$valeur = $vals[2];
-					$vignette .= "<param name='$nom' value='$valeur'>";
-					$param_emb .= " $nom='$valeur'";
+		if ($inclus == "embed" AND !$real) {
+		
+				for ($i = 0; $i < count($params); $i++) {
+					if (ereg("([^\=]*)\=([^\=]*)", $params[$i], $vals)){
+						$nom = $vals[1];
+						$valeur = $vals[2];
+						$inserer_vignette .= "<param name='$nom' value='$valeur'>";
+						$param_emb .= " $nom='$valeur'";
+						if ($valeur == "PlayButton") { 
+							$largeur = 30;
+							$hauteur = 25;
+						}
+						if ($valeur == "PositionSlider") { 
+							$largeur = $largeur-30;
+							$hauteur = 25;
+						}
+					}
 				}
-			}
-			
-			//$vignette .= "<param name='quality' value='high'>";
-			$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>";
+				
+				$vignette = "<object width='$largeur' height='$hauteur'>";
+				$vignette .= "<param name='movie' value='$fichier'>";
+				$vignette .= "<param name='src' value='$fichier'>";
+				$vignette .= $inserer_vignette;
+		
+				$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>";
+		
+		}
+		else if ($inclus == "embed" AND $real) {
+			$vignette .= embed_document ($id_document, "controls=ImageWindow|console=Console$id_document", false);
+			$vignette .= "<br>";
+			$vignette .= embed_document ($id_document, "controls=PlayButton|console=Console$id_document", false);
+			$vignette .= embed_document ($id_document, "controls=PositionSlider|console=Console$id_document", false);
 		}
 		else if ($inclus == "image") {
 			$fichier_vignette = $fichier;
