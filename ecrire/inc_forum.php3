@@ -60,11 +60,10 @@ function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc) {
 
 // Index d'invalidation des forums
 function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
-	return
-	($id_article ? 'a'.$id_article : '') .
-	($id_breve ? 'b'.$id_breve : '') .
-	($id_rubrique ? 'r'.$id_rubrique : '') . 
-	($id_syndic ? 's'.$id_syndic : '');
+	if ($id_article) return 'a'.$id_article; 
+	if ($id_breve) return 'b'.$id_breve;
+	if ($id_rubrique) return 'r'.$id_rubrique;
+	if ($id_syndic) return 's'.$id_syndic;
 }
 
  

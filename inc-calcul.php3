@@ -307,7 +307,7 @@ tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images in
 // Retrouver le logo d'un objet (et son survol)
 //
 
-function cherche_image($id_objet, $type_objet, $flag_fichier) {
+function cherche_image($id_objet, $type_objet) {
 	// cherche l'image liee a l'objet
 	$on = cherche_image_nommee($type_objet.'on'.$id_objet);
 
@@ -315,42 +315,69 @@ function cherche_image($id_objet, $type_objet, $flag_fichier) {
 	$off =(!$on ? '' :
 	cherche_image_nommee($type_objet.'off'.$id_objet));
 
-	return (!$flag_fichier ? 
-		array($on, $off) :
-		array(ereg_replace("^[^\/]+/", '', $on),
-		      ereg_replace("^[^\/]+/", '', $off)));
+	if (!$on)
+		return false;
+
+	return array($on, $off);
 }
 
-function image_article($id_article, $dossier){
-	return cherche_image($id_article,'art', $dossier);
+function cherche_logo_objet ($type, $id_objet, $on = false, $off = false, $flag_fichier=false) {
+
+spip_log("cherche logo $type $id_objet $on $off $flag_fichier");
+	switch($type) {
+		case 'ARTICLE':
+			$logo = cherche_image($id_objet, 'art');
+			break;
+		case 'AUTEUR':
+			$logo = cherche_image($id_objet, 'aut');
+			break;
+		case 'BREVE':
+			$logo = cherche_image($id_objet, 'breve');
+			break;
+		case 'SITE':
+			$logo = cherche_image($id_objet, 'site');
+			break;
+		case 'MOT':
+			$logo = cherche_image($id_objet, 'mot');
+			break;
+		// recursivite
+		case 'RUBRIQUE':
+			if (!($logo = cherche_image ($id_objet, 'rub'))
+			AND $id_objet > 0)
+				$logo = cherche_logo_objet('RUBRIQUE',
+				sql_parent($id_objet), true, true);
+			break;
+		default:
+			spip_log("cherche_logo_objet: type '$type' inconnu");
+	}
+
+	// Quelles images sont demandees ?
+	if (!$on) unset($logo[0]);
+	if (!$off) unset($logo[1]);
+
+	if ($logo[0] OR $logo[1])
+		return $logo;
 }
 
-function image_auteur($id_auteur, $dossier){
-	return cherche_image($id_auteur,'aut', $dossier);
-}
 
-function image_breve($id_breve, $dossier){
-	return cherche_image($id_breve,'breve', $dossier);
-}
-
-function image_site($id_syndic, $dossier){
-	return cherche_image($id_syndic,'site', $dossier);
-}
-
-function image_mot($id_mot, $dossier){
-	return cherche_image($id_mot,'mot', $dossier);
-}
-
-function image_rubrique($id_rubrique, $dossier) {
-	// Recherche recursive vers les rubriques parentes (y compris racine)
-	while (true) {
-		$image = cherche_image($id_rubrique, 'rub', $dossier);
-		if ($image[0])
-			return $image;
-		else if ($id_rubrique)
-			$id_rubrique = sql_parent($id_rubrique);
-		else
-			return '';
+// Fonction appelee par le skel pour assembler les balises
+function _f($action, $texte='') {
+	static $pile_f = array();
+	switch ($action) {
+		// push
+		case 0:
+			array_push($pile_f, $texte);
+			return ($texte <> '');
+			break;
+		// pop
+		case 1:
+			return array_pop($pile_f);
+			break;
+		// pop & ignore
+		case -1:
+			array_pop($pile_f);
+			return false;
+			break;
 	}
 }
 

@@ -94,180 +94,94 @@ function balise_POPULARITE_dist ($p) {
 
 # Fonction commune aux logos (rubriques, articles...)
 
-function calculer_champ_LOGO($p)
-{
-  ereg("^LOGO_(([a-zA-Z]+).*)$", $p->nom_champ, $regs);
-  $type_logo = $regs[1];
-  $type_objet = strtolower($regs[2]);
-  $flag_fichier = 0;  // compatibilite ascendante
-  $filtres = '';
-  if (is_array($p->fonctions)) {
-    foreach($p->fonctions as $nom) {
-      if (ereg('^(left|right|center|top|bottom)$', $nom))
-	$align = $nom;
-      else if ($nom == 'lien') {
-	$flag_lien_auto = 'oui';
-	$flag_stop = true;
-      }
-      else if ($nom == 'fichier') {
-	$flag_fichier = 1;
-	$flag_stop = true;
-      }
-      else if ($nom == '')	// double || signifie "on passe aux filtres"
-	$flag_stop = true;
-      else if (!$flag_stop) {
-	$lien = $nom;
-	$flag_stop = true;
-      }
-      else // apres un URL ou || ou |fichier ce sont des filtres (sauf left...lien...fichier)
-	{
-	$filtres[] = $nom;
-	}
-    }
-    // recuperer les filtres s'il y en a
-    $p->fonctions = $filtres;
-  }
-  if ($flag_lien_auto && !$lien) {
-    $p->entete .= "\n\t\$lien = generer_url_$type_objet(" .
-      champ_sql("id_$type_objet", $p) .
-      ");\n";
-  }
-  else
-    {
-      $p->entete .= "\n\t\$lien = ";
-      $a = $lien;
-      while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $a, $match))
-	{
-	  list($c,$m) = calculer_champ(array(), $match[2], $p->id_boucle, $p->boucles, $p->id_mere);
-	  // $m est nul dans les cas pre'vus
-	  $p->entete .= ((!$match[1]) ? "" :"'$match[1]' .") . " $c .";
-	  $a = $match[3];
-	}
-      if ($a) $p->entete .= "'$lien';"; 
-      else 
-	{
-	  if ($lien) $p->entete = substr($p->entete,1,-1) .";";
-	  else $p->entete .= "'';";
-	}
-    }
-  
-  if ($type_logo == 'RUBRIQUE') {
-    $p->entete .= '
-			list($logon, $logoff) = image_rubrique(' .
-      champ_sql('id_rubrique', $p) . ", $flag_fichier);
-			";
-  }
-  else if ($type_logo == 'RUBRIQUE_NORMAL') {
-    $p->entete .= '
-			list($logon,) = image_rubrique(' .
-      champ_sql('id_rubrique', $p) . ", $flag_fichier); ". '
-			$logoff = "";
-			';
-  }
-  else if ($type_logo == 'RUBRIQUE_SURVOL') {
-    $p->entete .= '
-			list(,$logon) = image_rubrique(' .
-      champ_sql('id_rubrique', $p) . ", $flag_fichier); ". '
-			$logoff = "";
-			';
-  }
-  else if ($type_logo == 'DOCUMENT'){
-    // Recours a une globale pour compatibilite avec l'ancien code. 
-    // Il faudra reprendre inc_documents entierement (tu parles !)
-    $p->entete .= ' 
-		$logoff = ' .
-      champ_sql('id_document', $p) . 
-      '; 
-		$logon = integre_image($logoff,"","fichier_vignette");
-		$logoff = "";
-			';
-  }
-  else if ($type_logo == 'AUTEUR') {
-    $p->entete .= '
-			list($logon, $logoff) = image_auteur(' .
-      champ_sql('id_auteur', $p) . ", $flag_fichier);
-			";
-  }
-  else if ($type_logo == 'AUTEUR_NORMAL') {
-    $p->entete .= '
-			list($logon,) = image_auteur(' .
-      champ_sql('id_auteur', $p) . ", $flag_fichier);".'
-			$logoff = "";
-			';
-  }
-  else if ($type_logo == 'AUTEUR_SURVOL') {
-    $p->entete .= '
-			list(,$logon) = image_auteur(' .
-      champ_sql('id_auteur', $p) . ", $flag_fichier);".'
-			$logoff = "";
-			';
-  }
-  else if ($type_logo == 'BREVE') {
-    $p->entete .= '
-			list($logon, $logoff) = image_breve(' .
-      champ_sql('id_breve', $p) . ", $flag_fichier);
-			";
-  }
-  else if ($type_logo == 'BREVE_RUBRIQUE') {
-    $p->entete .= '
-			list($logon, $logoff) = image_breve(' .
-      champ_sql('id_breve', $p) . ", $flag_fichier);".'
-			if (!$logon)
-				list($logon, $logoff) = image_rubrique(' .
-      champ_sql('id_rubrique', $p) . ", $flag_fichier);
-		  ";
-  }
-  else if ($type_logo == 'SITE') {
-    $p->entete .= '
-			list($logon, $logoff) = image_site(' .
-      champ_sql('id_syndic', $p) . ", $flag_fichier);
-			";
-  }
-  else if ($type_logo == 'MOT') {
-    $p->entete .= '
-			list($logon, $logoff) = image_mot(' .
-      champ_sql('id_mot', $p) . ", $flag_fichier);
-			";
-  }
-  else if ($type_logo == 'ARTICLE') {
-    $p->entete .= '
-			list($logon, $logoff) = image_article(' .
-      champ_sql('id_article', $p) . ", $flag_fichier);
-			";
-  }
-  else if ($type_logo == 'ARTICLE_NORMAL') {
-    $p->entete .= '
-			list($logon,) = image_article(' .
-      champ_sql('id_article', $p) . ", $flag_fichier);".'
-			$logoff = "";
-			';
-  }
-  else if ($type_logo == 'ARTICLE_SURVOL') {
-    $p->entete .= '
-			list(,$logon) = image_article(' .
-      champ_sql('id_article', $p) . ", $flag_fichier);".'
-			$logoff = "";
-			';
-  }
-  else if ($type_logo == 'ARTICLE_RUBRIQUE') {
-    $p->entete .= '
-			list($logon, $logoff) = image_article(' .
-      champ_sql('id_article', $p) . ", $flag_fichier);".'
-			if (!$logon)
-				list($logon, $logoff) = image_rubrique(' .
-      champ_sql('id_rubrique', $p) . ", $flag_fichier);
-			";
-  }
+function calculer_champ_LOGO($p) {
 
-	// Pour les documents comme pour les logos, le filtre |fichier donne
-	// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
-	// remarquable, mais a conserver pour compatibilite ascendante.
-	// -> http://www.spip.net/fr_article901.html
-	if ($flag_fichier)
-		$p->code = 'ereg_replace("^IMG/","",$logon)';
+	// analyser la balise LOGO_xxx
+	eregi("^LOGO_(([A-Z]+)(_.*)?)", $p->nom_champ, $regs);
+	$type_logo = $regs[1];	// ARTICLE_RUBRIQUE
+	$type_objet = $regs[2];	// ARTICLE
+	$suite_logo = $regs[3];	// _RUBRIQUE
+	$_id_objet = champ_sql("id_$type_objet", $p);
+
+	// analyser les filtres
+	$flag_fichier = 'false';
+	$filtres = '';
+	if (is_array($p->fonctions)) {
+		foreach($p->fonctions as $nom) {
+			if (ereg('^(left|right|center|top|bottom)$', $nom))
+				$align = $nom;
+			else if ($nom == 'lien') {
+				$flag_lien_auto = 'oui';
+				$flag_stop = true;
+			}
+			else if ($nom == 'fichier') {
+				$flag_fichier = 'true';
+				$flag_stop = true;
+			}
+			// double || signifie "on passe aux filtres"
+			else if ($nom == '')
+				$flag_stop = true;
+			else if (!$flag_stop) {
+				$lien = $nom;
+				$flag_stop = true;
+			}
+			// apres un URL ou || ou |fichier ce sont
+			// des filtres (sauf left...lien...fichier)
+			else
+				$filtres[] = $nom;
+		}
+		// recuperer les autres filtres s'il y en a
+		$p->fonctions = $filtres;
+	}
+
+	//
+	// Preparer le code du lien
+	//
+	// 1. filtre |lien
+	if ($flag_lien_auto AND !$lien)
+		$code_lien = '($lien = generer_url_'.$type_objet.'('.$_id_objet.')) ? $lien : ""';
+	// 2. lien indique en clair (avec des balises : imprimer#ID_ARTICLE.html)
+	else if ($lien) {
+		$code_lien = "'".texte_script(trim($lien))."'";
+		while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $code_lien, $match)) {
+			list($c,$m) = calculer_champ(array(), $match[2], $p->id_boucle, $p->boucles, $p->id_mere);
+			$code_lien = str_replace('#'.$match[2], "'.".$c.".'", $code_lien);
+		}
+		// supprimer les '' disgracieux
+		$code_lien = ereg_replace("^''\.|\.''$", "", $code_lien);
+	}
+	if (!$code_lien)
+		$code_lien = "''";
+
+	switch ($suite_logo) {
+		case '_NORMAL':
+			$onoff = 'true, false';
+			break;
+		case '_SURVOL':
+			$onoff = 'false, true';
+			break;
+		case '':
+		default:
+			$onoff = 'true, true';
+			break;
+	}
+
+	// cas des documents
+	if ($type_objet == 'DOCUMENT')
+		$code_logo =
+			"array(integre_image($_id_objet,'','fichier_vignette'), '')";
 	else
-		$p->code = "affiche_logos(\$logon, \$logoff, \$lien, '".
-		addslashes($align) . "')";
+		$code_logo = "cherche_logo_objet('$type_objet',
+			$_id_objet, $onoff)";
+
+	// cas des logo #BREVE_RUBRIQUE et #ARTICLE_RUBRIQUE
+	if ($suite_logo == '_RUBRIQUE') {
+		$_id_rubrique = champ_sql("id_rubrique", $p);
+		$code_logo = "(\$logo = $code_logo) ? \$logo : ".
+		"cherche_logo_objet('RUBRIQUE', $_id_rubrique, $onoff)";
+	}
+
+	$p->code = "affiche_logos($code_logo, $code_lien, '$align', $flag_fichier)";
 
 	$p->type = 'php';
 	return $p;

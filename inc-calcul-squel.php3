@@ -72,7 +72,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$invalide .= ' // invalideurs';
 	}
 
-
 	// Cas {1/3} {1,4} {n-2,1}...
 	$flag_parties = ($boucle->partie AND $boucle->total_parties);
 	$flag_cpt = $flag_parties || // pas '$compteur' a cause du cas 0
@@ -92,7 +91,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	
 	if ($lang_select AND !$constant)
 		$debut .= '
-			if ($x = $Pile[$SP]["lang"]) $GLOBALS["spip_lang"] = $x; // langue';
+			if ($x = $Pile[$SP]["lang"]) $spip_lang = $x; // langue';
 
 	$debut .= $invalide;
 
@@ -133,8 +132,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// ete vus par integre_image() ou autre fournisseur officiel de
 	// doublons : on les transfere alors vers la vraie variable
 	$texte .= '
-	$doublons[\'documents\'] .= $GLOBALS[\'doublons_documents\'];
-	unset($GLOBALS[\'doublons_documents\']);';
+	global $spip_lang, $doublons_documents;
+	$doublons[\'documents\'].=$doublons_documents; $doublons_documents="";';
 
 	// Recherche : recuperer les hash a partir de la chaine de recherche
 	if ($boucle->hash) {
@@ -166,8 +165,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 		// Memoriser la langue avant la boucle pour la restituer apres
 		if ($lang_select) {
-			$texte .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
-			$corps .= "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
+			$texte .= "\n	\$old_lang = \$spip_lang;";
+			$corps .= "\n	\$spip_lang = \$old_lang;";
 		}
 	}
 
@@ -261,154 +260,135 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 }
 
 
-// Production du code PHP a` partir de la se'quence livre'e par le phraseur
-// $boucles est passe' par re'fe'rence pour affectation par index_pile.
-// Retourne un tableau de 2 e'le'ments: 
-// 1. une expression PHP,
-// 2. une suite d'instructions PHP a` exe'cuter avant d'e'valuer l'expression.
-// si cette suite est vide, on fusionne les se'quences d'expressions
-// ce qui doit re'duire la me'moire ne'cessaire au processus
-// En de'coule une combinatoire laborieuse mais sans difficulte'
+
+// Production du code PHP a partir de la sequence livree par le phraseur
+// $boucles est passe par reference pour affectation par index_pile.
+// Retourne un tableau de 2 elements: 
+// 1. 'code' = une expression PHP,
+// 2. 'entete' = une suite d'instructions PHP a executer
+// avant d'evaluer l'expression (a rendre obsolete tant que possible).
 
 function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere) {
-	if ((!$tableau)) return array("''",'');
-	$texte = '';
-	$exp = "";
-	$process_ins = false;
-	$firstset = true;
+	if ((!$tableau))
+		return array("''",'');
 	$t = '$t' . ($niv+1);
 
+	for ($i=0; $i<=$niv; $i++) $tab .= "\t";
+
 	foreach ($tableau as $objet) {
+
+		// c = 'code' ; m = 'entete'
+		// rendu[0] = (code, entete) du principal
+		// rendu[1] = (code, entete) du "avant"
+		// rendu[2] = (code, entete) du "apres"
+		// rendu[3] = (code, entete) du "alternatif"
+		unset($rendu);
+		unset($commentaire);
 
 		switch($objet->type) {
 		// texte seul
 		case 'texte':
-			$c = calculer_texte($objet->texte,$id_boucle, $boucles, $id_mere);
-			if (!$exp)
-				$exp = $c;
-			else {
-				if ((substr($exp,-1)=="'") && (substr($c,1,1)=="'")) 
-					$exp = substr($exp,0,-1) . substr($c,2);
-				else
-					$exp .= (!$exp ? $c :  (" .\n		$c"));
-			}
-			if (!(strpos($c,'<'.'?') === false))
-				$pi = true;
-			$traitement_champ = false;
+			$rendu[0][0] = calculer_texte($objet->texte, $id_boucle, $boucles, $id_mere);
 			break;
 
 		// inclure
 		case 'include':
-			$c = calculer_inclure($objet->fichier,
+			$rendu[0][0] = calculer_inclure($objet->fichier,
 				$objet->params,
 				$id_boucle,
 				$boucles);
-			$exp .= (!$exp ? $c : (" .\n		$c"));
-			$traitement_champ = false;
+			$commentaire = "<INCLURE($objet->fichier)>";
 			break;
 
 		// boucle
 		case 'boucle':
 			$nom = $objet->id_boucle;
-			list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix,
+			// avant
+			$rendu[1] = calculer_liste($objet->cond_avant, $prefix,
 				$id_boucle, $niv+2, $boucles, $nom);
-			list($ac,$am) = calculer_liste($objet->cond_apres, $prefix,
+			// apres
+			$rendu[2] = calculer_liste($objet->cond_apres, $prefix,
 				$id_boucle, $niv+2, $boucles, $nom);
-			list($oc,$om) = calculer_liste($objet->cond_altern, $prefix,
+			// alternatif
+			$rendu[3] = calculer_liste($objet->cond_altern, $prefix,
 				$id_boucle, $niv+1,$boucles, $nom);
-			$c = $prefix . ereg_replace("-","_", $nom)
+			$rendu[0][0] = $prefix . ereg_replace("-","_", $nom)
 			. '($Cache, $Pile, $doublons, $Numrows, $SP)';
-			$m = "";
-			$traitement_champ = true;
-			$commentaire = "/* BOUCLE$nom */";
+			$commentaire = "BOUCLE$nom";
 			break;
 
 		// balise SPIP
 		default: 
-			list($c,$m) = calculer_champ($objet->fonctions, 
+			$rendu[0] = calculer_champ($objet->fonctions, 
 				$objet->nom_champ,
 				$id_boucle,
 				$boucles,
 				$id_mere,
 				$objet->etoile);
-			$commentaire = "/* #$objet->nom_champ".($objet->etoile?'*':'')." */";
-			list($bc,$bm) = calculer_liste($objet->cond_avant, $prefix,
+			$commentaire = "#$objet->nom_champ".($objet->etoile?'*':'');
+			// avant
+			$rendu[1] = calculer_liste($objet->cond_avant, $prefix,
 				$id_boucle, $niv+2,$boucles, $id_mere); 
-			list($ac,$am) = calculer_liste($objet->cond_apres, $prefix,
+			// apres
+			$rendu[2] = calculer_liste($objet->cond_apres, $prefix,
 				$id_boucle, $niv+2,$boucles, $id_mere);
-			$oc = "''";
-			$om = "";
-			$traitement_champ = true;
 			break;
 
 		} // switch
 
-
-		// traitement commun des champs et boucles.
-		// Produit:
-		// m ; if (Tniv+1 = v)
-		// { bm; Tniv+1 = $bc . Tniv+1; am; Tniv+1 .= $ac }
-		// else { om; $Tniv+1 = $oc }
-		// Tniv .= Tniv+1
-		// Optimisations si une au moins des 4 se'quences $*m  est vide
-
-		if ($traitement_champ) {
-			if ($m) {
-				// il faut achever le traitement de l'exp pre'ce'dente
-				if ($exp) {
-					$texte .= "\n		\$t$niv " .
-					(($firstset) ? "=" : ".=") . $exp.';';
-					$firstset = false;
-					$exp = "";
-				}
-				$texte .= "\n$commentaire\n$m//\n";
-			}
-
-			# alternative a la branche ci-dessus ?
-			# if ($m) $c = "eval('".texte_script($m)."').$c";
-			# if ($m) $c = "{$m}.$c"; ne marche pas
-
-			// 3 sequences vides: 'if' inutile
-			if (!($bm || $am || $om)) {
-				if ($exp)
-					$exp .= ' . ';
-				$a = (($bc == "''") ?  "" : "$bc .") .
-				$t .
-				(($ac == "''") ?  "" : " . $ac");
-				// s'il y a un avant ou un apre`s ou un alternant, il faut '?'
-				if (($a != $t) || ($oc != "''"))
-					$exp .= "(($t = $c$commentaire) ?\n	($a) : ($oc))";
-				else
-					$exp .= "$c$commentaire";
+		// Assembler les elements en simplifiant si possible
+		// le resultat (lisibilite et rapidite)
+		$utiliser_f = false;
+		for ($i = 0; $i<=3; $i++) {
+			if ($rendu[$i][0] == '' OR $rendu[$i][0] == "''") {
+				$rendu[$i][0] = "''";
 			} else {
-				// il faut achever le traitement de l'exp pre'ce'dente
-				if ($exp) {
-					$texte .= "\n		\$t$niv " .
-					(($firstset) ? "=" : ".=") .
-					"$exp;";
-					$firstset = false;
-				}
-				$exp = (($bc == "''") ? $t : "($bc . $t)");
-				$texte .= "\n		if ($t = $c)\n{" . $bm;
-				if ($am) {
-					$texte .= "$t = $exp;\n	$am";
-					$exp = $t;
-				}
-				if ($ac != "''")
-					$exp = "($exp . $ac)";
-				$texte .= (($exp == $t) ? '' : ("$t = $exp;")) . ";}";
-				if ($om || ($oc != "''"))
-					$texte .= " else { $om$t = ($oc);}";
-				$exp = $t;
+				// Ajouter l'entete eventuel
+				if ($rendu[$i][1])
+					$rendu[$i][0] =
+					"eval('".texte_script($rendu[$i][1])."')."
+					."/"."* entete *"."/"
+					."\n$tab".$rendu[$i][0];
+				// Noter le recours eventuel ˆ _f
+				if ($i>0)
+					$utiliser_f = true;
 			}
 		}
+		if ($commentaire)
+			$rendu[0][0] = "/"."* $commentaire *"."/ ".$rendu[0][0];
+
+		//
+		// (_f(0,principal) ? avant._f(1).apres : _f(-1).alternatif)
+		// _f() fonctionne avec une pile ; cette structure logique permet
+		// de n'evaluer que ce qui doit l'etre (ne pas evaluer avant/apres
+		// si on veut utiliser sinon, et vice-versa)
+		if ($utiliser_f)
+			$code = "(_f(0,".$rendu[0][0].") ? "
+			. (($rendu[1][0]=="''") ? "" :
+				"\n$tab\t/"."* << *"."/".$rendu[1][0]." .")
+			. "_f(1)"
+			. (($rendu[2][0]=="''") ? "" :
+				". ".$rendu[2][0]."/"."* >> *"."/")
+			. " : _f(-1)"
+			. (($rendu[3][0]=="''") ? "" :
+				" /"."* sinon: *"."/.".$rendu[3][0])
+			.")";
+		else
+		// eviter les conditionnelles qui forkent le resultat
+		// si le code est '$a ? $b : $c', le parenthesage est obligatoire
+		// quand on est lie a d'autres chaines par des . tout nus
+		// NB/astuce: s'il y a un entete, la formule eval('...').$a ? $b : $c
+		// fonctionne a l'identique de $a ? $b : $c
+		if (strpos($rendu[0][0], '?'))
+			$code = "(".$rendu[0][0].")";
+		else
+			$code = $rendu[0][0];
+
+		$codes[] = $code;
+
 	} // foreach
 
-	if (!$exp)
-		$exp ="''";
-
-	return  (!$texte ? array ($exp, "") : 
-	array(($firstset ? $exp : ('$t'.$niv. ". $exp")),$texte));
+	return array(join ("\n$tab. ", $codes), '');
 }
 
 // Prend en argument le source d'un squelette, sa grammaire et un nom.
@@ -462,7 +442,8 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		if ($boucle->type_requete != 'boucle') {
 			$res = calculer_params($id, $boucles);
 
-			// C'est quoi ca ???
+			// C'est quoi ca : remettre la gestion d'erreur
+			// au niveau de l'erreur (cf. inc-arg-squel)
 			if (is_array($res))
 				return $res;
 
@@ -532,10 +513,12 @@ function $nom (\$Cache, \$Pile, \$doublons, \$Numrows='', \$SP=0) {
 $corps
 \$t0 = $return;
 
-	return array('texte' => \$t0,
-	'squelette' => '$nom',
-	'process_ins' => ((strpos(\$t0,'<'.'?')=== false) ? 'html' : 'php'),
-	'invalideurs' => \$Cache);
+	return array(
+		'texte' => \$t0,
+		'squelette' => '$nom',
+		'process_ins' => ((strpos(\$t0,'<'.'?')=== false) ? 'html' : 'php'),
+		'invalideurs' => \$Cache
+	);
 }
 ";
 
