@@ -37,7 +37,7 @@ function boutonne($t, $n, $v, $a='') {
 //
 // Le code dynamique appelee par les squelettes
 //
-function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic, $titre, $table, $forums_publics, $url, $hidden) {
+function retour_forum($id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $titre, $table, $forums_publics, $url, $hidden) {
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
@@ -114,11 +114,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$alea = @mt_rand();
 	if (!$alea) {srand($seed);$alea = rand();}
 	$forum_id_rubrique = intval($id_rubrique);
-	$forum_id_parent = intval($id_parent);
+	$forum_id_forum = intval($id_forum);
 	$forum_id_article = intval($id_article);
 	$forum_id_breve = intval($id_breve);
 	$forum_id_syndic = intval($id_syndic);
-	$hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_parent $forum_id_article $forum_id_breve $forum_id_syndic $alea");
+	$hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea");
 	$titre = entites_html($titre);
 	if (!$url_site) $url_site = "http://";
 	if ($forums_publics == "abo") $disabled = " disabled='disabled'";
@@ -135,6 +135,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		boutonne('hidden', 'id_message', $id_message) .
 		boutonne('hidden', 'alea', $alea) .
 		boutonne('hidden', 'hash', $hash) .
+"ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea" .
 		(($afficher_texte == "non") ?
 		 (boutonne('hidden', 'titre', $titre) .
 		  $table .
@@ -355,14 +356,26 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	$titre = '> '.supprimer_numero(ereg_replace('^[>[:space:]]*', '',$titre));
 
 	// url de reference
-	if (!$url = $GLOBALS['HTTP_GET_VARS']['url']) 
-	  $url = $GLOBALS['REQUEST_URI'];
+	if (!$url = rawurldecode($GLOBALS['url'])) 
+	    $url = $GLOBALS['REQUEST_URI'];
+	else {
+	// identifiants des parents
+	  $args = '';  
+	  if ($idr) $args .= "&id_rubrique=$idr";
+	  if ($idf) $args .= "&id_forum=$idf";
+	  if ($ida) $args .= "&id_article=$ida";
+	  if ($idb) $args .= "&id_breve=$idb";
+	  if ($ids) $args .= "&id_syndic=$ids";
+	  if ($args) $url .= (strpos($url,'?') ? $args : ('?' . substr($args,1)));
+	}
+	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
+	$url = ereg_replace("[?&]var_login[^&]*", '', $url);
+	$url = ereg_replace("[?&]var_url[^&]*", '', $url);
 	// url de retour du forum
-	$retour_forum = $GLOBALS['retour'];
+	$retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']);
 	if (!$retour_forum)
-		$retour_forum = rawurlencode($url);
+	  $retour_forum = $url;
 	else $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
-		$retour_forum = quote_amp($retour_forum);
 
 	// debut formulaire forum
 	$lacible = "
@@ -373,14 +386,6 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	<input type='hidden' name='retour' value='".$retour_forum."' />
 	<input type='hidden' name='ajout_forum' value='oui' />
 	";
-
-	// identifiants des parents
-	if($idr) $lacible .= "<input type='hidden' name='forum_id_rubrique' value='$idr' />\n";
-	if($idf) $lacible .= "<input type='hidden' name='forum_id_parent' value='$idf' />\n";
-	if($ida) $lacible .= "<input type='hidden' name='forum_id_article' value='$ida' />\n";
-	if($idb) $lacible .= "<input type='hidden' name='forum_id_breve' value='$idb' />\n";
-	if($ids) $lacible .= "<input type='hidden' name='forum_id_syndic' value='$ids' />\n";
-
 	// message de moderation
 	$lacible .= (($accepter_forum != 'pri') ? '' :
 	((_T('forum_info_modere'). '<p>'))) . "\"); lang_dselect();";
@@ -388,11 +393,11 @@ function code_de_forum_spip ($idr, $idf, $ida, $idb, $ids) {
 	// verifier l'identite des posteurs pour les forums sur abo
 	if ($accepter_forum == "abo")
 		$lacible = "
-		if (\$GLOBALS[\"auteur_session\"]) {\n".$lacible.'
+		if (\$GLOBALS[\"auteur_session\"]) {\n$lacible
 		} else {
-			include_local("inc-login.php3"); 
-			login(new Link("' . $url . '"), false, true);
-		}';
+			include_local('inc-login.php3'); 
+			login('$url', false, true, '$url');
+		}";
 
 	return "<" . "?php" . $lacible . "?" . ">";
 }

@@ -563,7 +563,7 @@ if ($ajout_doc == 'oui') {
 		// anormal, on se tire
 		if (!$image_name) exit;
 		// renvoyer un formulaire demandant si on deballe ou pas
-		require_once('ecrire/pclzip.lib.php');
+		require_once(_DIR_RESTREINT_ABS . 'pclzip.lib.php');
 		if (afficher_compactes($image_name)) exit;
 		// pas possible de deballer, on continue
 		$forcer_document = 'oui';
@@ -575,7 +575,7 @@ if ($ajout_doc == 'oui') {
 			$forcer_document = 'oui';
 			
 		} else {
-			require_once('ecrire/pclzip.lib.php');
+			require_once(_DIR_RESTREINT_ABS . 'pclzip.lib.php');
   			$archive = new PclZip($image_name);
 			$tmp_dir = creer_repertoire_documents($hash);
 			$archive->extract(PCLZIP_OPT_PATH, $tmp_dir, PCLZIP_OPT_REMOVE_ALL_PATH);
@@ -631,7 +631,7 @@ if (!$redirect) {
 	if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 	else $vars = $HTTP_GET_VARS;
 
-	$link = new Link("ecrire/" . $vars["redirect"]);
+	$link = new Link(_DIR_RESTREINT_ABS . $vars["redirect"]);
 	reset($vars);
 	while (list ($key, $val) = each ($vars)) {
 	  if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip)$", $key)) {

@@ -9,6 +9,7 @@ define("_INC_PUBLIC_GLOBAL", "1");
 //
 function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $inclusion=false) {
 	global $lastmodified;
+
 	if (!$use_cache) {
 		include_local('inc-calcul.php3');
 
@@ -159,7 +160,6 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		// Obtenir la page
 		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
 		$fond, false);
-
 		// Entete content-type: xml ou html ; charset
 		if ($xhtml) {
 			// Si Mozilla et tidy actif, passer en "application/xhtml+xml"

@@ -217,11 +217,13 @@ define('_EXTENSION_PHP', '.php3');
 // *** Fin du parametrage statique ***
 //
 
-$flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
+define_once('_DIR_RESTREINT_ABS', 'ecrire/');
+
+$flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
 
 # en fait flag_ecrire est une constante, equivalente a la nullite de:
 
-define_once('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
+define_once('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 
 /* bientot 
 
@@ -241,11 +243,6 @@ if (@file_exists(_DIR_PREFIX2 . 'mes_options.php3')) {
 	include(_DIR_PREFIX2 . 'mes_options.php3');
 }
 
-## c'est tres bete de charger ce fichier a chaque hit sur le serveur !
-if (@file_exists(_DIR_PREFIX2 . 'data/inc_plugins.php3')) {
-	include(_DIR_PREFIX2 . 'data/inc_plugins.php3');
-}
-
 define_once('_FILE_CONNECT_INS', (_DIR_PREFIX2 . "inc_connect"));
 define_once('_FILE_CONNECT',
 	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
@@ -260,6 +257,12 @@ define_once('_DIR_CACHE', _DIR_PREFIX1 ."CACHE/");
 
 define_once('_DIR_SESSIONS', _DIR_PREFIX2 . "data/");
 define_once('_DIR_TRANSFERT', _DIR_PREFIX2 . "upload/");
+
+
+## c'est tres bete de charger ce fichier a chaque hit sur le serveur !
+if (@file_exists(_DIR_SESSIONS . 'inc_plugins.php3')) {
+	include(_DIR_SESSIONS . 'inc_plugins.php3');
+}
 
 // exemples de redefinition possible, 
 // SOUS RESERVE QUE php.ini N'AIT PAS pas openbasedir=. !!!!!!
@@ -294,7 +297,7 @@ define_once('_DIR_TeX', _DIR_IMG . "TeX/");
 // pour ceux qui n'aiment pas nos icones, tout est prevu
 // (pas tout à fait)
 
-define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
+define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 
 // qq chaines standard
 
@@ -972,7 +975,7 @@ function table_objet($type) {
 //
 function timeout($lock=false, $action=true, $connect_mysql=true) {
 	static $ok = true;
-	global $db_ok, $dir_ecrire;
+	global $db_ok;
 
 	// Fichier lock hebergeur ?  (age maxi, 10 minutes)
 
