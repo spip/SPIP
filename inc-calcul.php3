@@ -3,7 +3,7 @@
 if (defined("_INC_CALCUL")) return;
 define("_INC_CALCUL", "1");
 
-// ce fichier exe'cute un squelette.
+// ce fichier exécute un squelette.
 
 
 include_ecrire("inc_index.php3");
@@ -18,28 +18,28 @@ else {
 	include_local ("inc-urls-dist.php3");
 }
 
-include("inc-calcul_mysql3.php");
+include_local("inc-calcul_mysql3.php");
 include("inc-calcul_html4.php");
 
 # Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
-# le re'pertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
+# le répertoire du source des squelettes (les pseudo-html avec <BOUCLE...)
 
 if (file_exists("mes_fonctions.php3")) 
     include_local ("mes_fonctions.php3");
 
-# Provoque la recherche du squelette $fond d'une $lang donne'e,
+# Provoque la recherche du squelette $fond d'une $lang donnée,
 # et l'applique sur un $contexte pour un certain $cache.
-# Retourne un tableau de 3 e'le'ments:
-# 'texte' => la page calcule'e
-# 'process_ins' => 'html' ou 'php' si pre'sence d'un '<?php'
+# Retourne un tableau de 3 éléments:
+# 'texte' => la page calculée
+# 'process_ins' => 'html' ou 'php' si présence d'un '<?php'
 # 'invalideurs' => les invalideurs (cf inc-calcul-squel)
 
-# La recherche est assure'e par la fonction cherche_squelette
-# de'finie dans inc-chercher, fichier non charge' s'il existe un fichier
+# La recherche est assurée par la fonction cherche_squelette
+# définie dans inc-chercher, fichier non chargé s'il existe un fichier
 # mon-chercher dans $dossier_squelettes ou dans le rep principal de Spip,
-# pour charger une autre de'finition de cette fonction.
+# pour charger une autre définition de cette fonction.
 
-# L'exe'cution est pre'ce'de'e du chargement e'ventuel d'un fichier homonyme
+# L'exécution est précédée du chargement éventuel d'un fichier homonyme
 # de celui du squelette mais d'extension .php  pouvant contenir:
 # - des filtres
 # - des fonctions de traduction de balise (cf inc-index-squel)
@@ -49,7 +49,7 @@ function cherche_page($fond, $cache, $contexte, $id_rubrique, $lang='')
   global $dossier_squelettes;
 
   $dir = "$dossier_squelettes/mon-chercher.php3";
-  include((file_exists($dir) ? $dir : "inc-chercher.php3"));
+  if (file_exists($dir)) include($dir); else include_local("inc-chercher.php3");
 
   $skel = chercher_squelette($fond,
 			     $id_rubrique,
@@ -145,7 +145,7 @@ function cherche_page_incluante($cache, $contexte)
 			       $contexte['recherche']);
 }
 
-# Fonctions appele'es par les squelettes (insertion dans le code trop lourde)
+# Fonctions appelées par les squelettes (insertion dans le code trop lourde)
 
 tester_variable('espace_logos',3);  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
 tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images integrees

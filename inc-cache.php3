@@ -3,12 +3,12 @@
 if (defined("_INC_CACHE")) return;
 define("_INC_CACHE", "1");
 
-include('inc-dir.php3');
+include_local('inc-dir.php3');
 
-# Ve'rif de pe'remption d'une compil de squelette par rapport a` son source
+# Vérif de péremption d'une compil de squelette par rapport à son source
 # et les fonctions utilisateurs agissant sur le compilateur.
-# Ses fonctions internes sont suppose'es ne changer qu'a` l'installation; 
-# sinon vider explicitement par l'interface prive'e.
+# Ses fonctions internes sont supposées ne changer qu'à l'installation; 
+# sinon vider explicitement par l'interface privée.
 
 function squelette_obsolete($naissance, $source)
 {
@@ -25,8 +25,8 @@ function squelette_obsolete($naissance, $source)
   return $x;
 }
 
-# Retourne la fonction principale d'un squelette compile'.
-# En lance la compilation s'il ne l'e'tait pas.
+# Retourne la fonction principale d'un squelette compilé.
+# En lance la compilation s'il ne l'était pas.
 
 function ramener_squelette($squelette)
 {
@@ -36,18 +36,19 @@ function ramener_squelette($squelette)
 
   if (function_exists($nom))
     {
-      spip_log("Squelette $squelette:\t($nom) de'ja` en me'moire (INCLURE re'pe'te')");
+      spip_log("Squelette $squelette:\t($nom) déjà en mémoire (INCLURE répété)");
       return $nom;
     }
 # spip_log("demande verrou $squelette"); 
+  clearstatcache();
   if (!$lock = fopen($sourcefile, 'rb'))
       $r = '';
   else
     {
 #      spip_log("obtient verrou $squelette"); 
-# empecher un meme calcul par 2 processus diffe'rents en se re'servant le source
+# empecher un meme calcul par 2 processus différents en se réservant le source
       while (!flock($lock, LOCK_EX));
-# remplacer la ligne ci-dessus par les 3 suivantes pour de'monstration:
+# remplacer la ligne ci-dessus par les 3 suivantes pour démonstration:
 #  while (!flock($lock, LOCK_EX + LOCK_NB))
 # {sleep(1);spip_log("Lock: $nom " . getmypid());}
 #  sleep(3);
@@ -59,18 +60,18 @@ function ramener_squelette($squelette)
 	      include($phpfile);
 	      if (function_exists($nom))
 		{
-		  spip_log("Squelette $squelette:\t($nom) charge'");
+		  spip_log("Squelette $squelette:\t($nom) chargé");
 		  flock($lock, LOCK_UN);
 		  return $nom;
 		}
 	    }
-	  # Cache obsolete ou errone'.
+	  # Cache obsolete ou erroné.
 	  @unlink($phpfile);
 	}
       include_local("inc-calcul-squel.php3");
       $timer_a = explode(" ", microtime());
-# si vous n'etes pas sous Windows, vous ame'liorerez les perfs en 
-# de'commentant les 2 lignes suivantes (quant a` Windows, il fait: $r =""; !)
+# si vous n'etes pas sous Windows, vous améliorerez les perfs en 
+# décommentant les 2 lignes suivantes (quant à Windows, il fait: $r =""; !)
       $r = # function_exists('file_get_contents') ?
 	# file_get_contents($spipfile) : 
 	fread($lock, filesize($sourcefile));
@@ -119,13 +120,13 @@ function generateur_obsolete($nom)
   return true;
 }
 
-# Controle la validite' d'un cache .
-# retourne False ou un tableau de 3 e'le'ments:
+# Controle la validité d'un cache .
+# retourne False ou un tableau de 3 éléments:
 # - texte
 # - date de naissance
-# - pre'sence de php a` re'executer
-# Si pre'sent, on modifie $fraicheur (passe' en re'fe'rence)
-# pour qu'il indique la dure'e de vie restante
+# - présence de php à réexecuter
+# Si présent, on modifie $fraicheur (passé en référence)
+# pour qu'il indique la durée de vie restante
 
 function page_perenne($lock, $file, &$fraicheur)
 {
@@ -134,7 +135,7 @@ function page_perenne($lock, $file, &$fraicheur)
   if ($t > $fraicheur) return false; 
 #  spip_log("Perenne: fraicheur ok");
 # la ligne 1 contient un commentaire comportant successivement
-# - la longe'vite' du include le plus bref
+# - la longévité du include le plus bref
 # - le  type (html ou php)
 # - le squelette ayant produit la page
 # - d'autres info pour debug seulement
@@ -150,8 +151,8 @@ function page_perenne($lock, $file, &$fraicheur)
 #  spip_log("Perenne: generateur $m[3] ok");
   $fraicheur = $t;
   return array('texte' =>
-# si vous n'etes pas sous Windows, vous ame'liorerez les perfs en 
-# de'commentant les 2 lignes suivantes (quant a` Windows, il retourne "" !)
+# si vous n'etes pas sous Windows, vous améliorerez les perfs en 
+# décommentant les 2 lignes suivantes (quant à Windows, il retourne "" !)
 #        function_exists('file_get_contents') ?
 #        substr(file_get_contents($file), strlen($l)) : 
 	       fread($lock, filesize($file)),
@@ -159,36 +160,36 @@ function page_perenne($lock, $file, &$fraicheur)
 	       'process_ins' => $m[2]);
 }
 
-# Retourne une page, de'crite par le tableau de 2 ou 3 e'le'ments:
+# Retourne une page, décrite par le tableau de 2 ou 3 éléments:
 # 'texte' => la page
-# 'process_ins' => 'html' ou 'php' si pre'sence d'un '<?php'
-# 'naissance' => heure du calcul si de'ja` calcule' (absent si nouveau)
+# 'process_ins' => 'html' ou 'php' si présence d'un '<?php'
+# 'naissance' => heure du calcul si déjà calculé (absent si nouveau)
 
 # Si elle n'est pas dans le cache ou que celui-ci est inemployable,
 # calcul de la page en appliquant la fonction $calcul sur $contexte
 # (tableau de valeurs, hack standard pour langage comme PHP qui
 # permettent toutes les horreurs mais pas les belles et utiles fermetures)
-# et ecriture dans le cache sous le re'petoire $fraicheur.
-# Celle-ci est pase'e par re'fe'rence pour e^tre change'e
+# et ecriture dans le cache sous le répetoire $fraicheur.
+# Celle-ci est pasée par référence pour être changée
 # $calcul est soit cherche_page_incluse soit cherche_page_incluante
-# qui appelle toute deux cherche_page, qui construit le tableau a 2 e'le'ments
+# qui appelle toute deux cherche_page, qui construit le tableau a 2 éléments
 
-# Les acce`s concurrents sont ge're's par un verrou ge'ne'ral, 
-# remplace' rapidement par un verrou spe'cifique
+# Les accès concurrents sont gérés par un verrou général, 
+# remplacé rapidement par un verrou spécifique
 
 function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
 {
   # pas de mise en cache si:
-  # - recherche (trop couteux de me'moriser une recherche pre'cise)
-  # - valeurs hors URL (i.e. POST) sauf Forum qui les traite a` part
+  # - recherche (trop couteux de mémoriser une recherche précise)
+  # - valeurs hors URL (i.e. POST) sauf Forum qui les traite à part
   
   if ($GLOBALS['var_recherche']||
       ($HTTP_POST_VARS && !$GLOBALS['ajout_forum']))
       {
-	include('inc-calcul.php3');
+	include_local('inc-calcul.php3');
 	return $calcul('', $contexte);
       }
-# Bloquer/se faire bloquer par TOUS les cre'ateurs de cache
+# Bloquer/se faire bloquer par TOUS les créateurs de cache
 # Ce fichier sert de verrou (on est sur qu'il existe!).
   if (!$lock = fopen('inc-cache.php3', 'rb'))
     return(array('texte' => 'Cache en panne'));
@@ -205,12 +206,12 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
       $obsolete = true;
       $usefile = ($GLOBALS['recalcul'] != 'oui');
     }
-# Acque'rir le verrou spe'cifique et libe'rer le pre'ce'dent
-# pour permettre d'autres calculs (notamment d'e'ventuels include).
-# Ouvrir par r+ verrouille' pour forcer un 2e processus de me^me intention
-# a` attendre le re'sulat du premier et s'en servir. 
-# Pour voir, de'commenter le sleep ci-dessous,
-# lancer 2 demandes d'une page (surtout a` inclusion) et regarder spip_log
+# Acquérir le verrou spécifique et libérer le précédent
+# pour permettre d'autres calculs (notamment d'éventuels include).
+# Ouvrir par r+ verrouillé pour forcer un 2e processus de même intention
+# à attendre le résulat du premier et s'en servir. 
+# Pour voir, décommenter le sleep ci-dessous,
+# lancer 2 demandes d'une page (surtout à inclusion) et regarder spip_log
 #  sleep(3);
 #  spip_log("demande de verrou pour $cle"); 
   if (!$lock2 = fopen($file, 'r+b'))
@@ -220,28 +221,28 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
     }
   if (!flock($lock2, LOCK_EX + LOCK_NB))
     {
-# un autre processus s'occupe du be'be'; 
-# on se bloque dessus apre`s libe'ration du verrou ge'ne'ral
+# un autre processus s'occupe du bébé; 
+# on se bloque dessus après libération du verrou général
       flock($lock, LOCK_UN);
       $usefile = true;
       while(!flock($lock2, LOCK_EX));
     }
   else
     flock($lock, LOCK_UN);
-#  spip_log("obtient verrou $cle et libe`re le ge'ne'ral"); 
+#  spip_log("obtient verrou $cle et libère le général"); 
   if ((!timeout(false,false)) OR
       ($usefile && ($r = page_perenne($lock2, $file, &$fraicheur))))
     {
-#      spip_log("libe`re verrou $cle (page perenne)"); 
+#      spip_log("libère verrou $cle (page perenne)"); 
       flock($lock2, LOCK_UN);
       return $r;
     }
   if ($obsolete && (file_exists('inc-invalideur.php3')))
     {
-      include('inc-invalideur.php3');
+      include_local('inc-invalideur.php3');
       supprime_invalideurs_inclus("hache='$file'");
     }
-  include('inc-calcul.php3');
+  include_local('inc-calcul.php3');
   if (!function_exists($calcul))
       {
 	flock($lock2, LOCK_UN);
@@ -257,7 +258,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
     }
   else
     {
-      spip_log("Ecriture ($cle): $n octets (validite': $fraicheur sec.)");
+      spip_log("Ecriture ($cle): $n octets (validité: $fraicheur sec.)");
       fseek($lock2,0);
       fwrite($lock2, "<!-- $fraicheur\t" . 
 	     $page['process_ins'] .
@@ -271,7 +272,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
       fclose($lock2);
       if (file_exists('inc-invalideur.php3'))
 	{
-	  include('inc-invalideur.php3');
+	  include_local('inc-invalideur.php3');
 	  maj_invalideurs($file, $page['invalideurs']);
 	  if ($f = $contexte['cache_incluant'])
 	    insere_invalideur(array($file => true), 'inclure', $f);
@@ -297,7 +298,7 @@ function cv_du_cache($cle, $fraicheur)
     }
 }
 
-# de'truit tous les squelettes
+# détruit tous les squelettes
 
 function retire_caches_squelette()
 {
@@ -312,7 +313,7 @@ function retire_caches_squelette()
   spip_log("Destruction des $i squelette(s)");
 }
 
-# de'truit toutes les pages cache'es et leurs invalideurs
+# détruit toutes les pages cachées et leurs invalideurs
 function retire_caches_pages()
 {
   $j = 0;
@@ -335,32 +336,32 @@ function retire_caches_pages()
   spip_log("Destruction des $j cache(s)");
   if (file_exists('inc-invalideur.php3'))
     {
-      include('inc-invalideur.php3');
+      include_local('inc-invalideur.php3');
       supprime_invalideurs();
     }
 }
 
-# elimine les caches obsoletes figurant dans le me^me rep que la page indique'e
+# elimine les caches obsoletes figurant dans le même rep que la page indiquée
 
 function retire_vieux_caches($cle, $delais)
 {
   $dir = dir_of_file_cache($cle, $delais);
   $tous = trouve_caches('retire_cond_cache', $delais, $dir);
-  spip_log("nettoyage de $dir (" . count($tous) . " obsole`te(s)");
+  spip_log("nettoyage de $dir (" . count($tous) . " obsolète(s)");
   if ($tous)
     {
       if (!file_exists('inc-invalideur.php3'))
 	retire_caches($tous);
       else
 	{
-	  include('inc-invalideur.php3');
+	  include_local('inc-invalideur.php3');
 	  applique_invalideur($tous);
 	}
     }
 }
 
-# trouve dans un re'pertoire les caches
-# ve'rifiant un pre'dicat binaire (donne' avec son premier argument)
+# trouve dans un répertoire les caches
+# vérifiant un prédicat binaire (donné avec son premier argument)
 
 function trouve_caches($cond, $arg, $rep)
 {
@@ -375,8 +376,8 @@ function trouve_caches($cond, $arg, $rep)
 }
 
 # Teste l'obsolescence d'un cache. 
-# Celle de son include le + bref (indique'e ligne 1) serait + juste
-# mais lors d'un balayage de re'pertoire, 
+# Celle de son include le + bref (indiquée ligne 1) serait + juste
+# mais lors d'un balayage de répertoire, 
 # ouvrir chaque fichier serait couteux, et de gain faible
 
 function retire_cond_cache($arg,$path)
@@ -384,10 +385,10 @@ function retire_cond_cache($arg,$path)
     return (filemtime($path) <  $arg);
 }
 
-# de'truit les caches donne's en arguments.
+# détruit les caches donnés en arguments.
 # En fait il faudrait poser un verrou sur chaque fichier
-# pour que ramener_cache ne puisse s'exe'cuter a` ce moment-la`
-# Trop cher pour une situation peu probable, mais a` e'tudier.
+# pour que ramener_cache ne puisse s'exécuter à ce moment-là
+# Trop cher pour une situation peu probable, mais à étudier.
 
 function retire_caches($caches)
 {
