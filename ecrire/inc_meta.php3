@@ -68,8 +68,8 @@ function lire_meta_maj($nom) {
 		reset($meta);
 		while (list($key, $val) = each($meta)) {
 			$key = addslashes($key);
-			$val = addslashes($val);
-			$s .= "\$GLOBALS['meta']['$key'] = \"$val\";\n";
+			$val = ereg_replace("([\\\\'])", "\\\\1", $val);
+			$s .= "\$GLOBALS['meta']['$key'] = '$val';\n";
 		}
 		$s .= "\n";
 	}
