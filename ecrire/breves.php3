@@ -26,7 +26,7 @@ function enfant($leparent){
  	while($row=spip_fetch_array($result)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
-		$titre=$row['titre'];
+		$titre=typo($row['titre']);
 		$descriptif=$row['descriptif'];
 		$texte=$row['texte'];
 

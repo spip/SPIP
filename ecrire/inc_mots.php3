@@ -387,7 +387,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		while ($row_groupes = spip_fetch_array($result_groupes)) {
 			$id_groupe = $row_groupes['id_groupe'];
-			$titre_groupe = entites_html($row_groupes['titre']);
+			$titre_groupe = entites_html(textebrut(typo($row_groupes['titre'])));
 			$unseul = $row_groupes['unseul'];
 			$obligatoire = $row_groupes['obligatoire'];
 			$articles = $row_groupes['articles'];
@@ -410,13 +410,15 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo $message_ajouter_mot;
 					$message_ajouter_mot = "";
 					echo "</td>\n<td>";
+					echo "<script language='text/javascript'><!--\nvar antifocus_$id_groupe = false;\n// --></script>\n";
+					$jscript = "onfocus=\"if(!antifocus_$id_groupe){this.value='';antifocus_$id_groupe=true;}\"". " onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\"";
 
 					if ($obligatoire == "oui" AND !$groupes_vus[$id_groupe])
-						echo "<INPUT TYPE='text' NAME='cherche_mot' onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='width: 180px; background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#E86519;' VALUE=\"$titre_groupe\" SIZE='20' $jscript>";
 					else if ($unseul == "oui")
-						echo "<INPUT TYPE='text' NAME='cherche_mot' onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='width: 180px; background-color:#cccccc;' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot' CLASS='fondl' STYLE='width: 180px; background-color:#cccccc;' VALUE=\"$titre_groupe\" SIZE='20' $jscript>";
 					else
-						echo "<INPUT TYPE='text' NAME='cherche_mot' onClick=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='width: 180px; ' VALUE=\"$titre_groupe\" SIZE='20'>";
+						echo "<INPUT TYPE='text' NAME='cherche_mot'  CLASS='fondl' STYLE='width: 180px; ' VALUE=\"$titre_groupe\" SIZE='20' $jscript>";
 
 					echo "</td>\n<td>";
 					echo "<INPUT TYPE='hidden' NAME='select_groupe'  VALUE='$id_groupe'>";
@@ -447,7 +449,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					while($row = spip_fetch_array($result)) {
 						$id_mot = $row['id_mot'];
 						$titre_mot = $row['titre'];
-						$texte_option = entites_html(supprimer_tags(typo($titre_mot)));
+						$texte_option = entites_html(textebrut(typo($titre_mot)));
 						echo "\n<OPTION VALUE=\"$id_mot\">";
 						echo "&nbsp;&nbsp;&nbsp;";
 						echo $texte_option;
