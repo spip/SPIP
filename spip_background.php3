@@ -17,7 +17,6 @@ flush();
 
 include('ecrire/inc_version.php3');
 
-cron(1);	// toutes les 1 seconde (gourmand)
-
+cron(1); // acces gourmand (on veut bosser, nous, pas comme inc-public.php3 !)
 
 ?>

@@ -963,26 +963,47 @@ function spip_timer($t='rien') {
 }
 
 
-//
-// cron : verifie qu'il s'est ecoule $delai sec au moins et lance le cron
-// Note : ici on met 2 secondes par defaut entre les hits, mais
-// spip_background.php3 est plus gourmand (1 sec)... chiffres a optimiser
-// si on utilise spip_background.php3 de maniere plus complete
-//
-function cron($delai = 2) {
-	if (!$_REQUEST['forcer']) {
-		$touch = _DIR_SESSIONS.'.background';
-		if (!($exists = @file_exists($touch))
-		OR (@filemtime($touch) < time() - $delai)) {
-			if (!@touch($touch)) { @unlink($touch); @touch($touch); };
-			if (!$exists) chmod($touch, 0666);
+// spip_touch : verifie si un fichier existe et n'est pas vieux (duree en s)
+// et le cas echeant le touch() ; renvoie true si la condition est verifiee
+// et fait touch() sauf si ca n'est pas souhaite
+// (regle aussi le probleme des droits sur les fichiers touch())
+function spip_touch($fichier, $duree=0, $touch=true) {
+	if (!($exists = @file_exists($fichier))
+	|| ($duree == 0)
+	|| (@filemtime($fichier) < time() - $duree)) {
+		if ($touch) {
+			if (!@touch($fichier)) { @unlink($fichier); @touch($fichier); };
+			if (!$exists) @chmod($fichier, 0666);
+		}
+		return true;
+	}
+	return false;
+}
 
-		include_ecrire('inc_cron.php3');
-		spip_cron();
+//
+// cron() : execution des taches de fond
+// quand il est appele par spip_background.php3, il est gourmand ;
+// quand il est appele par inc-public il n'est pas gourmand
+//
+function cron($gourmand = false) {
+	$touch = _DIR_SESSIONS.'.background';
+	$touch_gourmand = $touch.'-gourmand';
+
+	// Si on est gourmand, ou si le fichier gourmand n'existe pas
+	// (ou est trop vieux), on va voir si un cron est necessaire.
+	// Au passage si on est gourmand on le dit aux autres
+	if (spip_touch($touch_gourmand, 60, $gourmand)
+	OR $gourmand) {
+
+		// Faut-il travailler ? Pas tous en meme temps svp
+		// Au passage si on travaille on bloque les autres
+		if (spip_touch($touch, 1)) {
+			include_ecrire('inc_cron.php3');
+			spip_cron();
+		}
 	}
 }
 
-}
 
 //
 // qq  fonctions service pour les 2 niveaux

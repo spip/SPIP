@@ -394,7 +394,7 @@ else if ($vignette) {
 		$redirect = '';
 	}
 	else
-		$redirect = creer_fichier_vignette($vignette, true);
+		$redirect = creer_fichier_vignette($vignette, true); # methode obsolete
 }
 else {
 	$retour = $redirect;

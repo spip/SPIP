@@ -166,8 +166,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 				# astuce : mt_rand pour autoriser les hits simultanes
 				$alea = time() + @mt_rand()
 				AND @file_exists($f = _DIR_SESSIONS."forum_$alea.lck")) {};
-			@touch ($f);
-			@chmod ($f,0666);
+			spip_touch ($f);
 		}
 
 		# et maintenant on purge les locks de forums ouverts depuis > 4 h
