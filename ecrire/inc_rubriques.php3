@@ -178,6 +178,11 @@ function calculer_langues_rubriques_etape() {
 
 function calculer_langues_rubriques() {
 	// rubriques (recursivite)
+	
+	$langue_site = addslashes(lire_meta('langue_site'));
+	spip_query ("UPDATE spip_rubriques SET lang='$langue_site' WHERE id_parent='0' AND langue_choisie = 'non'");
+	
+	
 	while (calculer_langues_rubriques_etape());
 
 	// articles
@@ -206,6 +211,15 @@ function calculer_langues_rubriques() {
 		spip_query ("UPDATE spip_breves SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
 	}
 	
+	if (lire_meta('multi_rubriques') == 'oui') {
+		// Ecrire meta liste langues utilisees dans rubriques
+		$s = spip_query ("SELECT lang FROM spip_rubriques WHERE lang != '' GROUP BY lang");
+		while ($row = spip_fetch_array($s)) {
+			$lang_utilisees[] = $row['lang'];
+		}
+		$lang_utilisees = join (',', $lang_utilisees);
+		ecrire_meta('langues_utilisees', $lang_utilisees);
+	}
 }
 
 
