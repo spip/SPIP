@@ -429,7 +429,6 @@ Ihr Status wird durch die Farbe ihres Symbols angezeigt (Redakteur = gr&uuml;n; 
 'info_popularite_2' => 'Beliebtheit der Website: ',
 'info_popularite_3' => 'Beliebtheit: @popularite@ ; Besuche: @visites@',
 'info_popularite_4' => 'Beliebtheit: @popularite@ ; Besuche: @visites@',
-'info_popularite_5' => 'Beliebtheit:',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum:',
 'info_pour' => 'f&uuml;r',

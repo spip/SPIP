@@ -110,11 +110,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cache_mode_compresse' => '<NEW>The cache files are saved in compressed mode.',
+'cache_mode_non_compresse' => '<NEW>The cache files are written in uncompressed mode.',
+'cache_modifiable_webmestre' => '<NEW>These parameters can be modified by the webmaster.',
 'calendrier_synchro' => 'Hvis du benytter en kalenderapplikation, der er kompatibel med <b>iCal</b>, kan du synkronisere med information p&aring; dette websted.',
 
 
 // D
 'date_mot_heures' => 'timer',
+'diff_para_ajoute' => '<NEW>Added paragraph',
+'diff_para_deplace' => '<NEW>Moved paragraph',
+'diff_para_supprime' => '<NEW>Deleted paragraph',
+'diff_texte_ajoute' => '<NEW>Added text',
+'diff_texte_deplace' => '<NEW>Moved text',
+'diff_texte_supprime' => '<NEW>Deleted text',
 
 
 // E
@@ -318,6 +327,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_forum_interne' => 'internt forum',
 'info_forum_ouvert' => 'I det private afsnit af webstedet er der et forum &aring;bent for alle registrerede redakt&oslash;rer. Nedenfor kan du &aring;bne et ekstra forum alene for administratorer.',
 'info_forum_statistiques' => 'Bes&oslash;gsstatistik',
+'info_forums_abo_invites' => '<NEW>Your site contains forums by subscription; visitors may register for them on the public site.',
 'info_gauche_admin_effacer' => '<B>Kun administratorer har adgang til denne side.</B><P> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
 'info_gauche_admin_tech' => '<B>Kun administratorer har adgang til denne side.</B><P> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
 'info_gauche_admin_vider' => '<B>Kun administratorer har adgang til denne side.</B><P> Den giver adgang til forskellige tekniske vedligeholdelsesopgaver. Nogle af dem giver anledning til en s&aelig;rlig adgangskontrol, der kr&aelig;ver FTP-adgang til siden.',
@@ -336,8 +346,17 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_groupe_important' => 'vigtig gruppe',
 'info_hebergeur_desactiver_envoi_email' => 'Nogle webhoteller tillader ikke automatisk udsendelse af e-mails. I s&aring; fald kan f&oslash;lgende funktioner i SPIP ikke benyttes.',
 'info_hier' => 'i g&aring;r:',
+'info_historique' => '<NEW>Revisions:',
+'info_historique_activer' => '<NEW>Enable revisions follow-up',
+'info_historique_affiche' => '<NEW>Display this version',
+'info_historique_comparaison' => '<NEW>compare',
+'info_historique_desactiver' => '<NEW>Disable revisions follow-up',
+'info_historique_lien' => '<NEW>Display list of versions',
+'info_historique_texte' => '<NEW>Revisions follow-up allows you to keep track of every modifications added to an article and displays the differences between successive versions.',
+'info_historique_titre' => '<NEW>Revisions follow-up',
 'info_identification_publique' => 'Din offentlige identitet...',
 'info_image_process' => 'V&aelig;lg den bedste metode til at skabe miniaturebilleder ved at klikke p&aring; det korresponderende billede.',
+'info_image_process2' => '<NEW><b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the &laquo;GD&raquo; or &laquo;Imagick&raquo; extensions to be installed.</i>',
 'info_informations_personnelles' => 'Femte trin: <B>Personlig information</B>',
 'info_inscription_automatique' => 'Automatisk registrering af nye redakt&oslash;rer',
 'info_jeu_caractere' => 'Webstedets tegns&aelig;t',
@@ -357,6 +376,7 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_login_existant' => 'Dette login findes allerede.',
 'info_login_trop_court' => 'Login for kort.',
 'info_maximum' => 'maksimum:',
+'info_meme_rubrique' => '<NEW>In the same section',
 'info_message' => 'Meddelelse fra',
 'info_message_efface' => 'MEDDELELSE SLETTET',
 'info_message_en_redaction' => 'Dine meddelelser under redaktion',
@@ -402,10 +422,14 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_nouvelle_traduction' => 'Ny overs&aelig;ttelse:',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Skal udfyldes]',
+'info_option_accepter_visiteurs' => '<NEW>Allow visitors registration from the public site',
 'info_option_email' => 'N&aring;r en bes&oslash;gende p&aring; webstedet sender en meddelelse til forummet, som drejer sig om denne artikel, kan artiklens forfatter f&aring; underretning om meddelelsen via e-mail. &Oslash;nsker du at bruge denne mulighed?',
 'info_option_faire_suivre' => 'Videresend meddelelser i forummer til artiklernes forfattere',
+'info_option_ne_pas_accepter_visiteurs' => '<NEW>Refuse visitor registration',
 'info_option_ne_pas_faire_suivre' => 'Videresend ikke meddelelser i forummer',
 'info_options_avancees' => 'AVANCEREDE INDSTILLINGER',
+'info_ortho_activer' => '<NEW>Enable the spell checker.',
+'info_ortho_desactiver' => '<NEW>Disable the spell checker.',
 'info_ou' => 'eller...',
 'info_oui_suppression_mot_cle' => 'Jeg &oslash;nsker at slette dette n&oslash;gleord permanent.',
 'info_page_interdite' => 'Forbudt side',
@@ -422,15 +446,19 @@ De vil v&aelig;re lukkede i forhold til afsnit, meddelelser osv..',
 'info_popularite_2' => 'webstedets polularitet:',
 'info_popularite_3' => 'polularitet:&nbsp;@popularite@; bes&oslash;g:&nbsp;@visites@',
 'info_popularite_4' => 'polularitet:&nbsp;@popularite@; bes&oslash;g:&nbsp;@visites@',
-'info_popularite_5' => 'polularitet:',
 'info_post_scriptum' => 'Efterskrift',
 'info_post_scriptum_2' => 'Efterskrift:',
 'info_pour' => 'til',
+'info_preview_admin' => '<NEW>Only administrators have access to the preview mode',
+'info_preview_comite' => '<NEW>All authors have access to the preview mode',
+'info_preview_desactive' => '<NEW>Preview mode is disabled',
+'info_preview_texte' => '<NEW>It is possible to preview the site as if all articles and news items (which have at least the status "submitted") were already published. Should this preview mode be restricted to administrators, open to all authors, or disabled completely?',
 'info_principaux_correspondants' => 'Dine hovedbidragydere',
 'info_procedez_par_etape' => 'g&aring; frem skridt for skridt',
 'info_procedure_maj_version' => 'opgraderingsprocdeduren b&oslash;r f&oslash;lges for at tilpasse databasen til den nye version af SPIP.',
 'info_ps' => 'P.S.',
 'info_publies' => 'Dine offentliggjorte artikler',
+'info_question_accepter_visiteurs' => '<NEW>If your site\'s templates allow visitors to register without entering the private area, please activate the following option:',
 'info_question_gerer_statistiques' => 'Skal dit websted danne bes&oslash;gsstatistik?',
 'info_question_inscription_nouveaux_redacteurs' => 'Vil du tillade, at nye redakt&oslash;rer tilmelder sig
 		p&aring; det offentligt tilg&aelig;ngelige websted? Ja betyder, at bes&oslash;gende kan tilmelde sig p&aring; en automatisk dannet formular,
@@ -669,6 +697,19 @@ i en farve, der angiver deres status:',
 
 // O
 'onglet_repartition_actuelle' => 'nu',
+'ortho_ajouter_ce_mot' => '<NEW>Add this word to the dictionary',
+'ortho_aucune_suggestion' => '<NEW>No suggestion was found for this word.',
+'ortho_avis_privacy' => '<NEW>Spip contains a spell checker. However, before enabling it, please read the following paragraph carefully:',
+'ortho_avis_privacy2' => '<NEW>In order to check spelling  a text, the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some level of confidentiality. If you are concerned about your data, do not activate this option (and withdraw all your information from the web at once).',
+'ortho_ce_mot_connu' => '<NEW>This word is in the site\'s dictionary.',
+'ortho_dico_absent' => '<NEW>No dictionary was found for this language',
+'ortho_mode_demploi' => '<NEW>Urecognised words have been highlighted in red. Click on these words to see suggested corrections.',
+'ortho_mots_a_corriger' => '<NEW>words to correct',
+'ortho_orthographe' => '<NEW>Spelling',
+'ortho_supprimer_ce_mot' => '<NEW>Remove this word from the dictionary',
+'ortho_trop_de_fautes' => '<NEW>Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
+'ortho_verif_impossible' => '<NEW>The system cannot check the spelling of this text.',
+'ortho_verifier' => '<NEW>Spell check',
 
 
 // S
@@ -676,6 +717,11 @@ i en farve, der angiver deres status:',
 
 
 // T
+'taille_cache_infinie' => '<NEW>This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.',
+'taille_cache_maxi' => '<NEW>SPIP will try to limit the size of the <code>CACHE/</code> directory to approximately <b>@octets@</b> of data.',
+'taille_cache_octets' => '<NEW>The size of the cache is currently @octets@.',
+'taille_cache_vide' => '<NEW>The cache is empty.',
+'taille_repertoire_cache' => '<NEW>Current size of the cache',
 'text_article_propose_publication' => 'Artiklen er sendt til offentligg&oslash;relse. Hold dig ikke tilbage fra at give din mening til kende gennem det forum, der er tilknyttet artiklen (nederst p&aring; siden).',
 'texte_acces_ldap_anonyme_1' => 'Nogle LDAP-servere tillader ikke anonym adgang. I s&aring; fald m&aring; du angive en brugeridentifikation for senere at kunne s&oslash;ge efter information i kataloget. Men i de fleste tilf&aelig;lde kan du lade de f&oslash;lgende felter st&aring; tomme.',
 'texte_admin_effacer_01' => 'Denne kommando sletter <i>hele</i> indholdet i databasen,
@@ -933,7 +979,11 @@ i en farve, der angiver deres status:',
 'trad_deja_traduit' => 'Denne artikel er allerede en overs&aelig;ttelse af den aktuelle artikel.',
 'trad_delier' => 'Afbryd forbindelsen mellem denne artikel og overs&aelig;ttelserne',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
-'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel'
+'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
+
+
+// V
+'version_initiale' => '<NEW>Initial version'
 
 );
 

@@ -454,7 +454,6 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_popularite_2' => 'popularitat del lloc:',
 'info_popularite_3' => 'popularitat:&nbsp;@popularite@&nbsp;; visites:&nbsp;@visites@',
 'info_popularite_4' => 'popularitat:&nbsp;@popularite@&nbsp;; visites:&nbsp;@visites@',
-'info_popularite_5' => 'popularitat:',
 'info_post_scriptum' => 'Postdata',
 'info_post_scriptum_2' => 'Postdata:',
 'info_pour' => 'per',
