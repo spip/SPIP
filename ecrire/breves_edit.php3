@@ -61,8 +61,8 @@ if ($id_document) {
 
 $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_document_editable) {
-	$titre = addslashes(corriger_caracteres($titre));
-	$descriptif = addslashes(corriger_caracteres($descriptif));
+	$titre_document = addslashes(corriger_caracteres($titre_document));
+	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
 	spip_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
  }
 

@@ -108,10 +108,10 @@ function texte_vignette_non_inclus($largeur_vignette, $hauteur_vignette, $fichie
 //
 
 function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = true, $forcer_document = false, $dossier_complet = false) {
-	global $this_link, $connect_statut;
+	global $clean_link, $connect_statut;
 
 	if (!$link->getVar('redirect')) {
-		$link->addVar('redirect', $this_link->getUrl());
+		$link->addVar('redirect', $clean_link->getUrl());
 	}
 
 	if ($forcer_document)
@@ -167,7 +167,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
-	global $this_link;
+	global $clean_link;
 	global $id_doublons, $options;
 
 	if ($flag_modif){
@@ -297,13 +297,11 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 function afficher_horizontal_document($id_document, $image_link, $redirect_url = "", $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
-	global $this_link;
+	global $clean_link;
 	global $options;
 
 
-
-
-	if (!$redirect_url) $redirect_url = $this_link->getUrl();
+	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
 	$document = fetch_document($id_document);
 
@@ -495,7 +493,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 function afficher_documents_colonne($id_article, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire, $options;
-	global $this_link;
+	global $clean_link;
 	
 	if ($flag_modif){
 		$image_link = new Link('../spip_image.php3');
@@ -635,13 +633,13 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 function afficher_case_document($id_document, $image_link, $redirect_url = "", $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
-	global $this_link;
+	global $clean_link;
 	global $options;
 	global $id_doublons;
 	
  	$doublons = $id_doublons['documents'].",";
 
-	if (!$redirect_url) $redirect_url = $this_link->getUrl();
+	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
 	$document = fetch_document($id_document);
 
