@@ -23,7 +23,8 @@ if ($valider_forum AND ($statut!='')) {
 	die();
 }
 
-debut_page("Envoyer un message", "messagerie");
+if ($id_message) debut_page("Envoyer un message", "asuivre", "messagerie");
+else debut_page("Envoyer un message", "messagerie");
 debut_gauche();
 debut_droite();
 
