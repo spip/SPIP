@@ -11,8 +11,6 @@ include ("inc_version.php3");
 include_ecrire("inc_auth.php3");
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_lang.php3");
-utiliser_langue_visiteur();
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_urls.php3");
