@@ -143,7 +143,6 @@ td {
 	font-weight: bold;
 	font-size: 10px;
 	color: red; display: block; margin: 2px;
-	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%
 }
 .icone36 a span {
@@ -151,7 +150,6 @@ td {
 	font-weight: bold;
 	font-size: 10px;
 	color: #666666; display: block; margin: 2px;
-	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%
 }
 .icone36 a:hover span {
@@ -159,7 +157,6 @@ td {
 	font-weight: bold;
 	font-size: 10px;
 	color: #000000; display: block; margin: 2px;
-	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%;
 }
 
@@ -217,17 +214,14 @@ td {
 }
 .cellule36 a span, .cellule48 a span {
 	color: #666666; display: block; margin: 1px;
-	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%;
 }
 .cellule36 a:hover span, .cellule48 a:hover span {
 	color: #000000; display: block; margin: 1px;
-	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%;
 }
 .cellule36 a.selection span, .cellule48 a.selection span {
 	color: #000000; display: block; margin: 1px;
-	filter: DropShadow(Color=white, OffX=-1, OffY=-1, Positive=1) DropShadow(Color=#cccccc, OffX=1, OffY=1, Positive=1);
 	width: 100%;
 }
 
@@ -329,9 +323,6 @@ a.cellule-h table {
 	margin: 0px;
 }
 
-a.cellule-h td.cellule-h-lien {
-	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
-}
 a.cellule-h img {
 	width: 24px;
 	height: 24px;
@@ -393,17 +384,13 @@ a.cellule-h-texte:hover {
 .bouton36gris {
 	padding: 6px;
 	margin-top: 2px;
-	width: 24px;
-	height: 24px;
 	border: 1px solid #aaaaaa;
-	background-color: #e4e4e4;
+	background-color: #eeeeee;
 	-moz-border-radius: 5px;
 }
 .bouton36blanc {
 	padding: 6px;
 	margin-top: 2px;
-	width: 24px;
-	height: 24px;
 	border: 1px solid #999999;
 	background-color: white;
 	-moz-border-radius: 5px;
@@ -411,8 +398,6 @@ a.cellule-h-texte:hover {
 .bouton36rouge {
 	padding: 6px;
 	margin-top: 2px;
-	width: 24px;
-	height: 24px;
 	border: 1px solid red;
 	background-color: white;
 	-moz-border-radius: 5px;
