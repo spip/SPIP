@@ -319,12 +319,11 @@ function calculer_criteres ($idb, &$boucles) {
 # Criteres numeriques et de comparaison
 
 function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
-	global $tables_relations, $table_des_tables, $table_date;
-	global $tables_des_serveurs_sql;
+	global $table_des_tables, $table_date, $tables_des_serveurs_sql;
 
-	$boucle = &$boucles[$idb];				# nom de la boucle
-	$type = $boucle->type_requete;			# articles
-	$id_table = $boucle->id_table;	# articles ->   'table';
+	$boucle = &$boucles[$idb];
+	$type = $boucle->type_requete;
+	$id_table = $boucle->id_table;
 	$primary = $boucle->primary;
 	$id_field = $id_table . '.' . $primary; 
 
@@ -333,9 +332,10 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 
 		// Restriction de valeurs (implicite ou explicite)
 	else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
-			$op = $match[5];
+	  		$op = $match[5] ? $match[5] : '=';
 			// Variable comparee
 			$col = $match[1];
+			// fonction SQL
 			$fct = '';
 			if (ereg("([a-z_]+)\(([a-z_]+)\)", $col,$match3)) {
 				$col = $match3[2];
@@ -379,15 +379,9 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 
 			}
 
-			// Traitement general des relations externes
-			if ($s = $tables_relations[$type][$col]) {
+			if ($s = calculer_critere_externe($boucle, $id_field,$col, $type))
 				$col_table = $s;
-				$boucle->from[] = "$col_table AS $col_table";
-				$boucle->where[] = "$id_field=$col_table." . $primary;
-				$boucle->group = $id_field;
-				$boucle->select[] = $id_field; # pour postgres, neuneu ici (???)
-				$boucle->lien = true;
-			}
+
 			// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
 			else if ($type != 'mots'
 			AND ($col == 'type_mot' OR $col == 'titre_mot'
@@ -502,11 +496,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			if ($col_table)
 				$col = "$col_table.$col";
 
-			if (!$op)
-				$op = '=';
-			else if ($op == '==')
-				$op = 'REGEXP';
-			else if (strtoupper($op) == 'IN') {
+			if (strtoupper($op) == 'IN') {
 				// traitement special des valeurs textuelles
 				$where = "$col IN ($val)";
 				if ($match[4] == '!') {
@@ -518,11 +508,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 						"FIND_IN_SET($col, \\\"$val\\\") AS rang";
 					}
 				}
-				$boucle->where[] = $where;
-				$op = '';
-			}
-
-			if ($op) {
+			} else {
+				if ($op == '==') $op = 'REGEXP';
 				if ($fct) $col = "$fct($col)";
 				if ($match[4] == '!')
 					$where = "NOT ($col $op '$val')";
@@ -535,10 +522,32 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 					$where = "\".($champ ? \"$where\" : 1).\"";
 				}
 
-				$boucle->where[] = $where;
 			}
+			$boucle->where[] = $where;
+	} // fin du if sur les restrictions de valeurs
+	else erreur_squelette(_L("critere inconnu $param"));
+}
 
-		} // fin du if sur les restrictions de valeurs
+// traitement des relations externes par une jointure.
+// tant qu'a faire eviter de dupliquer sa declaration,
+// mais c'est une goutte d'eau dans la mer
+
+function calculer_critere_externe(&$boucle, $id_field, $col, $type)
+{
+	global $tables_relations;
+	if ($col_table =  $tables_relations[$type][$col]) {
+		$externe = "$id_field=$col_table." . $boucle->primary;
+		if (!$boucle->where || (!in_array($externe, $boucle->where))) {
+
+			$boucle->lien = true;
+			$boucle->from[] = "$col_table AS $col_table";
+			$boucle->where[] = $externe;
+			$boucle->group = $id_field;
+		// postgres exige que le champ pour GROUP soit dans le SELECT
+			$boucle->select[] = $id_field;
+		}
+	}
+	return $col_table;
 }
 
 
