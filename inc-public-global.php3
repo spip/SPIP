@@ -36,7 +36,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 			$bedtime = time() + 3600;
 			$taille = @filesize($chemin_cache);
 			spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille)
-			VALUES ('$fichier','$bedtime','t',$taille)");
+			VALUES ('$fichier','$bedtime','t','$taille')");
 			@touch($chemin_cache.'.NEW');
 		}
 
