@@ -49,9 +49,10 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	// morceau de md5
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
-	// sous-repertoires
+	// Sous-repertoires 0...9a..f/
 	$subdir = creer_repertoire('CACHE', substr($md_cache, 0, 1));
-	$subdir2 = creer_repertoire("CACHE/$subdir", $delais);
+	// Sous-sous-repertoires delais/ (inutile avec l'invalidation par 't')
+	# $subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
 	return $subdir.$subdir2.$fichier_cache;
 }
