@@ -1329,7 +1329,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 				if ($flag_editable) {
 					echo debut_block_invisible('ne_plus_lier');
-					echo "<div style='width: 100%; padding-top: 1px; padding-bottom: 3px; padding-right: 3px; text-align=right;'>";
+					echo "<div style='width: 100%; padding-top: 1px; padding-bottom: 3px; padding-right: 3px; text-align: $spip_lang_right;'>";
 					$lien = $GLOBALS['clean_link'];
 					$lien->delVar($nom_select);
 					$lien = $lien->getUrl();
@@ -1347,7 +1347,7 @@ if ((lire_meta('multi_articles') == 'oui')
 
 		echo "<table width='100%'><tr>";
 		echo "<td valign='top' class='arial2'>";
-		if ($flag_editable AND $options == "avancees") { // Formulaire pour lier a un article
+		if ($flag_editable AND (!$ret OR $connect_statut == "0minirezo") AND $options == "avancees") { // Formulaire pour lier a un article
 
 			$lien = $GLOBALS['clean_link'];
 			$lien->delVar($nom_select);
