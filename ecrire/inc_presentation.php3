@@ -512,6 +512,101 @@ function afficher_liste_fin_tableau() {
 }
 
 
+function puce_statut_article($id_article, $statut) {
+	global $spip_lang_left, $dir_lang, $connect_statut, $options, $browser_name;
+	
+	switch ($statut) {
+	case 'publie':
+		$clip = 2;
+		$puce = 'verte';
+		$title = _T('info_article_publie');
+		break;
+	case 'prepa':
+		$clip = 0;
+		$puce = 'blanche';
+		$title = _T('info_article_redaction');
+		break;
+	case 'prop':
+		$clip = 1;
+		$puce = 'orange';
+		$title = _T('info_article_propose');
+		break;
+	case 'refuse':
+		$clip = 3;
+		$puce = 'rouge';
+		$title = _T('info_article_refuse');
+		break;
+	case 'poubelle':
+		$clip = 4;
+		$puce = 'poubelle';
+		$title = _T('info_article_supprime');
+		break;
+	}
+	$puce = "puce-$puce.gif";
+	
+	if ($connect_statut == '0minirezo' AND $options == 'avancees') {
+	
+		if ($browser_name == "MSIE") $alt = "alt";
+		else $alt = "title";
+	
+		$inser_puce = "<div class='puce_article' id='statut$id_article'$dir_lang>"
+			. "<div class='puce_article_fixe' onmouseover=\"montrer('statutdecal$id_article');\"><img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'></div>"
+			. "<div class='puce_article_popup' id='statutdecal$id_article' onmouseout=\"cacher('statutdecal$id_article');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
+			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 0, 'prepa');\"><img src='img_pack/puce-blanche.gif' $alt=\""._T('texte_statut_en_cours_redaction')."\"></a>"
+			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 1, 'prop');\"><img src='img_pack/puce-orange.gif' $alt=\""._T('texte_statut_propose_evaluation')."\"></a>"
+			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 2, 'publie');\"><img src='img_pack/puce-verte.gif' $alt=\""._T('texte_statut_publie')."\"></a>"
+			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 3, 'refuse');\"><img src='img_pack/puce-rouge.gif' $alt=\""._T('texte_statut_refuse')."\"></a>"
+			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 4, 'poubelle');\"><img src='img_pack/puce-poubelle.gif' $alt=\""._T('texte_statut_poubelle')."\"></a>"
+			. "</div></div>";
+	} else {
+		$inser_puce = "<img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'>";
+	}
+	return $inser_puce;
+}
+
+function puce_statut_breve($id_breve, $statut) {
+	global $spip_lang_left, $dir_lang, $connect_statut, $options, $browser_name;
+	
+			switch ($statut) {
+			case 'prop':
+				$clip = 0;
+				$puce = "orange";
+				$title = _T('titre_breve_proposee');
+				break;
+			case 'publie':
+				$clip = 1;
+				$puce = "verte";
+				$title = _T('titre_breve_publiee');
+				break;
+			case 'refuse':
+				$clip = 2;
+				$puce = "rouge";
+				$title = _T('titre_breve_refusee');
+				break;
+			}
+
+
+	$puce = "puce-$puce-breve.gif";
+	
+	if ($connect_statut == '0minirezo' AND $options == 'avancees') {
+	
+		if ($browser_name == "MSIE") $alt = "alt";
+		else $alt = "title";
+	
+		$inser_puce = "<div class='puce_breve' id='statutbreve$id_breve'$dir_lang>"
+			. "<div class='puce_breve_fixe' onmouseover=\"montrer('statutdecalbreve$id_breve');\"><img src='img_pack/$puce' id='imgstatutbreve$id_breve' border='0' style='margin: 1px;'></div>"
+			. "<div class='puce_breve_popup' id='statutdecalbreve$id_breve' onmouseout=\"cacher('statutdecalbreve$id_breve');\" style=' margin-left: -".((9*$clip)+1)."px;'>"
+			. "<a onmouseover=\"montrer('statutdecalbreve$id_breve');\" href=\"javascript:selec_statut_breve($id_breve, 0, 'prop');\"><img src='img_pack/puce-orange-breve.gif' $alt=\""._T('texte_statut_propose_evaluation')."\"></a>"
+			. "<a onmouseover=\"montrer('statutdecalbreve$id_breve');\" href=\"javascript:selec_statut_breve($id_breve, 1, 'publie');\"><img src='img_pack/puce-verte-breve.gif' $alt=\""._T('texte_statut_publie')."\"></a>"
+			. "<a onmouseover=\"montrer('statutdecalbreve$id_breve');\" href=\"javascript:selec_statut_breve($id_breve, 2, 'refuse');\"><img src='img_pack/puce-rouge-breve.gif' $alt=\""._T('texte_statut_refuse')."\"></a>"
+			. "</div></div>";
+	} else {
+		$inser_puce = "<img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'>";
+	}
+	return $inser_puce;
+}
+
+
 //
 // Afficher tableau d'articles
 //
@@ -606,50 +701,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			
 			$les_auteurs = "$les_auteurs";
 
-			switch ($statut) {
-			case 'publie':
-				$clip = 2;
-				$puce = 'verte';
-				$title = _T('info_article_publie');
-				break;
-			case 'prepa':
-				$clip = 0;
-				$puce = 'blanche';
-				$title = _T('info_article_redaction');
-				break;
-			case 'prop':
-				$clip = 1;
-				$puce = 'orange';
-				$title = _T('info_article_propose');
-				break;
-			case 'refuse':
-				$clip = 3;
-				$puce = 'rouge';
-				$title = _T('info_article_refuse');
-				break;
-			case 'poubelle':
-				$clip = 4;
-				$puce = 'poubelle';
-				$title = _T('info_article_supprime');
-				break;
-			}
-			$puce = "puce-$puce.gif";
-			
-			if ($connect_statut == '0minirezo') {
-			
-				$inser_puce = "<div id='statut$id_article' style='position: relative; height: 11px;'>"
-					. "<div style='position: absolute;' onmouseover=\"montrer('statutdecal$id_article');\"><img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'></div>"
-					. "<div id='statutdecal$id_article' onmouseout=\"cacher('statutdecal$id_article');\" style='position: absolute; visibility: hidden; margin-$spip_lang_left: -".((11*$clip)+1)."px; margin-top: -1px; top: 0px; border: 1px solid #666666; width: 55px; background-color: #cccccc; z-index: 10; -moz-border-radius: 2px;'>"
-					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 0, 'prepa');\"><img src='img_pack/puce-blanche.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_en_cours_redaction')."\"></a>"
-					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 1, 'prop');\"><img src='img_pack/puce-orange.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_propose_evaluation')."\"></a>"
-					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 2, 'publie');\"><img src='img_pack/puce-verte.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_publie')."\"></a>"
-					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 3, 'refuse');\"><img src='img_pack/puce-rouge.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_refuse')."\"></a>"
-					. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 4, 'poubelle');\"><img src='img_pack/puce-poubelle.gif' border='0' style='padding: 1px;' alt=\""._T('texte_statut_poubelle')."\"></a>"
-					. "</div></div>";
-			} else {
-				$inser_puce = "<img src='img_pack/$puce' id='imgstatut$id_article' border='0' style='margin: 1px;'>";
-			}
-			$vals[] = $inser_puce;
+	
+			$vals[] = puce_statut_article($id_article, $statut);
+	
 	
 			$s = "<div>";
 				
@@ -756,8 +810,8 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		else $langue_defaut = lire_meta('langue_site');
 	}
 	
-	if ($options == "avancees") $tranches = afficher_tranches_requete($requete, 3);
-	else  $tranches = afficher_tranches_requete($requete, 2);
+	if ($options == "avancees") $tranches = afficher_tranches_requete($requete, 4);
+	else  $tranches = afficher_tranches_requete($requete, 3);
 
 	if (strlen($tranches)) {
 
@@ -787,22 +841,11 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$statut = $row['statut'];
 			if ($lang = $row['lang']) changer_typo($lang);
 			$id_rubrique = $row['id_rubrique'];
-			switch ($statut) {
-			case 'prop':
-				$puce = "puce-orange-breve";
-				$title = _T('titre_breve_proposee');
-				break;
-			case 'publie':
-				$puce = "puce-verte-breve";
-				$title = _T('titre_breve_publiee');
-				break;
-			case 'refuse':
-				$puce = "puce-rouge-breve";
-				$title = _T('titre_breve_refusee');
-				break;
-			}
+			
+			$vals[] = puce_statut_breve($id_breve, $statut);
+			
 
-			$s = "<div style='background: url(img_pack/$puce.gif) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 12px;'>";
+			$s = "<div>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
 			$s .= typo($titre);
 			if ($afficher_langue AND $lang != $langue_defaut)
@@ -832,13 +875,13 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		spip_free_result($result);
 
 		if ($options == "avancees") {
-			if ($affrub) $largeurs = array('', '170', '30');
-			else  $largeurs = array('', '100', '30');
-			$styles = array('arial11', 'arial1', 'arial1');
+			if ($affrub) $largeurs = array('7', '', '170', '30');
+			else  $largeurs = array('7','', '100', '30');
+			$styles = array('', 'arial11', 'arial1', 'arial1');
 		} else {
-			if ($affrub) $largeurs = array('', '170');
-			else  $largeurs = array('', '100');
-			$styles = array('arial11', 'arial1');
+			if ($affrub) $largeurs = array('7','', '170');
+			else  $largeurs = array('7','', '100');
+			$styles = array('','arial11', 'arial1');
 		}
 
 		afficher_liste($largeurs, $table, $styles);
@@ -1520,7 +1563,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		
 	}	
 	
-	
 	function selec_statut_art(id_article, clip, statut) {
 		decal = -1 * ((clip*11) + 1);
 		changestyle ('statutdecal'+id_article, 'marginLeft', decal+'px');
@@ -1535,8 +1577,20 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		findObj('imgstatut'+id_article).src= 'img_pack/puce-'+puce +'.gif';
 		
 		frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_article&id_article='+id_article+'&statut='+statut;
-	
-	}iframe_action
+	}
+	function selec_statut_breve(id_breve, clip, statut) {
+		decal = -1 * ((clip*9) + 1);
+		changestyle ('statutdecalbreve'+id_breve, 'marginLeft', decal+'px');
+		cacher ('statutdecalbreve'+id_breve);
+
+		if (clip == 0) puce = 'orange';
+		else if (clip == 1) puce = 'verte';
+		else if (clip == 2) puce = 'rouge';
+
+		findObj('imgstatutbreve'+id_breve).src= 'img_pack/puce-'+puce +'-breve.gif';
+		
+		frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_breve&id_breve='+id_breve+'&statut='+statut;
+	}
 	
 	function changeclass(objet, myClass)
 	{
