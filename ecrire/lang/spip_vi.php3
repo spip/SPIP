@@ -157,11 +157,7 @@ H&#7891; s&#417; SPIP</a>.',
 
 
 // C
-'calendrier_synchro' => 'N&#7871;u b&#7841;n c&oacute; thi&#7871;t tr&iacute; nhu li&#7879;u nh&#7853;t k&yacute; t&#432;&#417;ng &#7913;ng v&#7899;i <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), b&#7841;n c&oacute; th&#7875; &#273;&#7891;ng b&#7897; h&oacute;a n&oacute; v&#7899;i trang web.',
-'calendrier_synchro_lien' => 'Truy t&igrave;m h&#7891; s&#417; <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'L&#7883;ch ghi sau &#273;&acirc;y cho b&#7841;n s&#7917; d&#7909;ng ri&ecirc;ng m&agrave; th&ocirc;i. L&#7883;ch tr&igrave;nh b&aacute;o cho b&#7841;n bi&#7871;t nh&#7919;ng s&#7921; vi&#7879;c x&#7843;y ra tr&ecirc;n trang web n&agrave;y (vi&#7879;c l&agrave;m, h&#7865;n c&aacute; nh&acirc;n, b&agrave;i v&#7903; v&agrave; tin ng&#7855;n n&#7897;p v&agrave;o ...).',
-'calendrier_synchro_public' => 'L&#7883;ch tr&igrave;nh sau &#273;&acirc;y cho ph&eacute;p b&#7841;n theo d&otilde;i nh&#7919;ng s&#7921; vi&#7879;c c&ocirc;ng c&#7897;ng c&#7911;a trang web (b&agrave;i v&#7903; v&agrave; tin ng&#7855;n ph&aacute;t h&agrave;nh).',
-'calendrier_synchro_sync' => '&#272;&#7891;ng b&#7897; h&oacute;a h&#7891; s&#417; <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro' => 'N&#7871;u b&#7841;n c&oacute; thi&#7871;t tr&iacute; nhu li&#7879;u nh&#7853;t k&yacute; t&#432;&#417;ng &#7913;ng v&#7899;i <b>iCal</b>, b&#7841;n c&oacute; th&#7875; &#273;&#7891;ng b&#7897; h&oacute;a n&oacute; v&#7899;i trang web.',
 
 
 // D
@@ -354,7 +350,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'icone_articles' => 'B&agrave;i',
 'icone_auteurs' => 'Ban bi&ecirc;n t&#7853;p',
 'icone_breves' => 'Tin ng&#7855;n',
-'icone_brouteur' => '<NEW> Navigation rapide',
+'icone_brouteur' => 'Xem l&#7865;',
 'icone_calendrier' => 'L&#7883;ch',
 'icone_calendrier_messagerie' => 'Ch&#432;&#417;ng tr&igrave;nh ngh&#7883; s&#7921; v&agrave; th&#432; t&iacute;n',
 'icone_configuration_site' => 'C&#7845;u h&igrave;nh',
@@ -520,7 +516,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_code_acces' => '&#272;&#7915;ng qu&#234;n m&#227; s&#7889; &#273;&#7875; v&#224;o c&#7911;a b&#7841;n!',
 'info_comment_lire_tableau' => 'C&#225;ch &#273;&#7885;c &#273;&#7891; th&#7883; n&#224;y',
 'info_config_suivi' => 'N&#7871;u &#273;&#7883;a ch&#7881; n&agrave;y l&agrave; c&#7911;a m&#7897;t mailing list,  b&#7841;n cho bi&#7871;t &#273;&#7883;a ch&#7881; &#273;&#7875; ghi danh. &#272;&#7883;a ch&#7881; ghi danh c&oacute; th&#7875; l&agrave; URL (th&iacute; d&#7909; trang ghi danh qua web), hay &#273;&#7883;a ch&#7881; email c&oacute; ghi r&otilde; t&#7921;a &#273;&#7873; (subject). Th&iacute; d&#7909;: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => 'N&#7871;u mu&#7889;n nh&#7853;n th&ocirc;ng tin c&#7853;p nh&#7853;t c&#7911;a trang web n&agrave;y, b&#7841;n h&atilde;y ghi danh v&agrave;o mailing list d&#432;&#7899;i &#273;&acirc;y:',
+'info_config_suivi_explication' => 'B&#7841;n c&oacute; th&#7875; ghi danh v&agrave;o mailing list d&#432;&#7899;i &#273;&acirc;y, n&#7871;u b&#7841;n mu&#7889;n nh&#7853;n th&ocirc;ng tin c&aacute;c b&agrave;i &#273;&#432;&#7907;c n&#7897;p v&agrave;o trang web n&agrave;y.',
 'info_confirmer_passe' => 'X&#225;c nh&#7853;n l&#7841;i m&#7853;t m&#227; m&#7899;i:',
 'info_connexion_base' => 'B&#432;&#7899;c th&#7913; nh&igrave;: <b>th&#7917; n&#7889;i v&agrave;o database</b>',
 'info_connexion_ldap_ok' => '<B>N&#7889;i v&agrave;o LDAP t&#7889;t &#273;&#7865;p.</b><p> B&#7841;n c&oacute; th&#7875; qua b&#432;&#7899;c k&#7871; ti&#7871;p.',
@@ -534,7 +530,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_contribution' => 'th&#432; t&iacute;n c&#7911;a di&#7877;n &#273;&agrave;n',
 'info_copyright' => 'l&#224; nhu li&#7879;u mi&#7877;n ph&#237; ph&#7893; bi&#7871;n <a href=\'license.txt\'>theo gi&#7845;y ph&#233;p GPL.</a>',
 'info_copyright_doc' => '&#272;&#7875; bi&#7871;t th&ecirc;m, xin v&agrave;o xem trang <a href=\'http://www.spip.net/vi\'>http://www.spip.net/vi</a>.',
-'info_cours_edition' => '<MODIF> &#272;ang so&#7841;n',
+'info_cours_edition' => 'B&agrave;i c&#7911;a b&#7841;n &#273;ang so&#7841;n',
 'info_creation_mots_cles' => 'Th&ecirc;m b&#7899;t, s&#7917;a &#273;&#7893;i, s&#7855;p x&#7871;p c&aacute;c t&#7915; then ch&#7889;t c&#7911;a website',
 'info_creation_paragraphe' => '(&#272;&#7875; b&#7855;t &#273;&#7847;u &#273;o&#7841;n v&#259;n m&#7899;i, b&#7841;n ch&#7881; c&#7847;n ch&#7915;a h&#224;ng tr&#7889;ng)',
 'info_creation_rubrique' => 'Tr&#432;&#7899;c khi &#273;&#432;&#7907;c ph&#233;p vi&#7871;t m&#7897;t b&#224;i m&#7899;i, b&#7841;n ph&#7843;i l&#7853;p ra &#237;t nh&#7845;t m&#7897;t &#273;&#7873; m&#7909;c.',
@@ -1153,12 +1149,12 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'menu_aide_suivi_forum_statistiques' => 'Th&#7889;ng k&#234; th&#259;m vi&#7871;ng',
 'menu_aide_suivi_forum_suivi' => 'N&#7889;i ti&#7871;p c&#7911;a di&#7877;n &#273;&#224;n',
 'menu_aide_suivi_forum_systeme_breves' => 'H&#7879; th&#7889;ng tin',
-'module_fichier_langue' => '<NEW> Fichier de langue',
-'module_fichiers_langues' => '<NEW> Fichiers de langue',
-'module_raccourci' => '<NEW> Raccourci',
-'module_texte_affiche' => '<NEW> Texte affich&eacute;',
-'module_texte_explicatif' => '<NEW> Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
-'module_texte_traduction' => '<NEW> Ce fichier de langue est disponible en&nbsp;:',
+'module_fichier_langue' => 'H&#7891; s&#417; ng&ocirc;n ng&#7919;',
+'module_fichiers_langues' => 'H&#7891; s&#417; ng&ocirc;n ng&#7919;',
+'module_raccourci' => 'L&#7889;i t&#7855;t',
+'module_texte_affiche' => 'V&#259;n b&#7843;n hi&#7875;n th&#7883;',
+'module_texte_explicatif' => 'B&#7841;n c&oacute; th&#7875; th&ecirc;m c&aacute;c l&#7889;i t&#7855;t sau &#273;&acirc;y v&agrave;o m&#7851;u c&#7911;a trang web. Ch&uacute;ng s&#7869; &#273;&#432;&#7907;c t&#7921; &#273;&#7897;ng d&#7883;ch qua c&aacute;c ng&ocirc;n ng&#7919; kh&aacute;c (n&#7871;u c&oacute; h&#7891; s&#417; ng&ocirc;n ng&#7919; &#273;&oacute;).',
+'module_texte_traduction' => 'H&#7891; s&#417; ng&ocirc;n ng&#7919; &laquo;&nbsp;@module@&nbsp;&raquo; n&agrave;y c&oacute; b&#7857;ng ti&#7871;ng:',
 'mois_non_connu' => 'kh&ocirc;ng nh&#7853;n ra th&aacute;ng n&agrave;y &#273;&#432;&#7907;c',
 
 
@@ -1499,7 +1495,15 @@ B&#7841;n c&oacute; th&#7875; cho ph&eacute;p c&#7843;nh b&aacute;o hay kh&ocirc
 'trad_delier' => '&#272;&#7915;ng n&#7889;i b&agrave;i n&agrave;y qua b&#7843;n d&#7883;ch',
 'trad_lier' => 'B&agrave;i n&agrave;y l&agrave; b&#7843;n d&#7883;ch c&#7911;a b&agrave;i s&#7889;',
 'trad_new' => 'D&#7883;ch b&agrave;i n&agrave;y',
-'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)'
+'trad_reference' => '(b&agrave;i n&#7889;i k&#7871;t)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Truy t&igrave;m h&#7891; s&#417; <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'L&#7883;ch ghi sau &#273;&acirc;y cho b&#7841;n s&#7917; d&#7909;ng ri&ecirc;ng m&agrave; th&ocirc;i. L&#7883;ch tr&igrave;nh b&aacute;o cho b&#7841;n bi&#7871;t nh&#7919;ng s&#7921; vi&#7879;c x&#7843;y ra tr&ecirc;n trang web n&agrave;y (vi&#7879;c l&agrave;m, h&#7865;n c&aacute; nh&acirc;n, b&agrave;i v&#7903; v&agrave; tin ng&#7855;n n&#7897;p v&agrave;o ...).',
+'calendrier_synchro_public' => 'L&#7883;ch tr&igrave;nh sau &#273;&acirc;y cho ph&eacute;p b&#7841;n theo d&otilde;i nh&#7919;ng s&#7921; vi&#7879;c c&ocirc;ng c&#7897;ng c&#7911;a trang web (b&agrave;i v&#7903; v&agrave; tin ng&#7855;n ph&aacute;t h&agrave;nh).',
+'calendrier_synchro_sync' => '&#272;&#7891;ng b&#7897; h&oacute;a h&#7891; s&#417; <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );
 

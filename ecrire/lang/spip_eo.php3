@@ -161,7 +161,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => '<NEW> Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), vous pouvez le synchroniser avec l\'actualit&eacute; &eacute;Žditoriale de ce site.',
+'calendrier_synchro' => '<NEW> Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
 'calendrier_synchro_lien' => '<NEW> R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
 'calendrier_synchro_prive' => '<NEW> Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
 'calendrier_synchro_public' => '<NEW> Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
@@ -423,7 +423,7 @@ Dankon pro via partopreno
 'icone_sites_references' => 'Referencitaj teksejoj',
 'icone_statistiques' => 'Statistikoj de la teksejo',
 'icone_statistiques_visites' => 'Statistikoj de la vizitoj',
-'icone_suivi_activite' => '<NEW> Suivre l\'activit&eacute; &eacute;ditoriale',
+'icone_suivi_activite' => '<NEW> Suivre la vie du site',
 'icone_suivi_actualite' => '<NEW> &Eacute;volution du&nbsp;site',
 'icone_suivi_forum' => 'Supervido de la publica forumo: @nb_forums@ kontribua&#309;o(j)',
 'icone_suivi_forums' => 'Supervidi/administri la forumojn',
@@ -532,7 +532,7 @@ Dankon pro via partopreno
 'info_code_acces' => 'Ne forgesu viajn proprajn alir-kodojn&nbsp;!',
 'info_comment_lire_tableau' => 'Kiel legi tiun tabelon',
 'info_config_suivi' => '<NEW> Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => '<NEW> Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
+'info_config_suivi_explication' => '<NEW> Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Konfirmi tiun novan pasvorton:',
 'info_connexion_base' => 'Dua etapo: <b>Konekt-provo al la datenbazo</b>',
 'info_connexion_ldap_ok' => 'La konekto al LDAP sukcesis.</b><P> Vi povas iri al la sekvanta etapo',

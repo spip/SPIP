@@ -157,11 +157,7 @@ acceptat per toi lu navigadors, ma permete unicament que de faire veire li lenga
 
 
 // C
-'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronisar emb l\'actualitat editoriala d\'aqueu sit.',
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i><br />(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
 
 
 // D
@@ -424,7 +420,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_sites_references' => 'Sits referen&ccedil;ats',
 'icone_statistiques' => 'Estadisticas dau sit',
 'icone_statistiques_visites' => 'Estadisticas dei visitas',
-'icone_suivi_activite' => 'Seguir l\'activitat editoriala',
+'icone_suivi_activite' => 'Vida dau sit',
 'icone_suivi_actualite' => 'Evolucion dau&nbsp;sit',
 'icone_suivi_forum' => 'Seguit dau forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Seguir/gerar lu forums',
@@ -533,7 +529,7 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_code_acces' => 'Oblidetz pas lu v&ograve;stres c&ograve;des d\'acc&egrave;s personalisats!',
 'info_comment_lire_tableau' => 'Coma li&egrave;ger aqueu tabl&egrave;u',
 'info_config_suivi' => 'S\'aquela adre&ccedil;a corresponde a una mailing-list, pod&egrave;tz indicar &ccedil;ai sota l\'adre&ccedil;a dont lu participants au sit si p&ograve;don inscriure. Aquela adre&ccedil;a p&ograve;ut &egrave;stre una URL (per exemple la p&agrave;gina d\'inscripcion a la lista per lo web), &ograve; una adre&ccedil;a e-mail tenent un subjecte especific (per exemple&nbsp;: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => 'Pod&egrave;tz recebre automaticament, per e-mail, li anon&ccedil;as que tocan l\'activitat editoriala d\'aqueu sit. Per aqu&ograve; faire, vos pod&egrave;tz abonar a la mailing-list seguenta:',
+'info_config_suivi_explication' => 'Abonatz-vos, se vol&egrave;tz, a la mailing-list d\'aqueu sit:',
 'info_confirmer_passe' => 'Confirmar aqueu nov&egrave;u m&ograve;t de santa Clara:',
 'info_connexion_base' => 'Segonda estapa&nbsp;: <B>Pr&ograve;va de connexion a la basa</B>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</B><P> Pod&egrave;tz passar a l\'estapa seguenta.',
@@ -1177,7 +1173,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'module_raccourci' => 'Escorcha',
 'module_texte_affiche' => 'T&egrave;xt afichat',
 'module_texte_explicatif' => 'Pod&egrave;tz inserir li acorchas seguenti dins li esqueletas dau v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins li diferenti lengas per las qualas exist&iacute;s un fichi&egrave;r de lenga.',
-'module_texte_traduction' => '<MODIF> Aquest fichier de lenga es disponible en&nbsp;:',
+'module_texte_traduction' => 'Aquest fichier de lenga &laquo;&nbsp;@module@&nbsp;&raquo; es disponible en&nbsp;:',
 'mois_non_connu' => 'non conoissut',
 
 
@@ -1612,7 +1608,14 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_delier' => 'Ligar plus aquest article ai reviradas sieui',
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
 'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
-'trad_reference' => '(article de referen&ccedil;a)'
+'trad_reference' => '(article de referen&ccedil;a)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i><br />(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)'
 
 );
 

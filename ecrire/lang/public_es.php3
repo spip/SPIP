@@ -6,8 +6,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => 'Portada del sitio',
-'articles' => 'Art&iacute;culos',
+'accueil_site' => 'Inicio del sitio',
+'articles' => 'Art&amp;iacute;culos',
 'articles_auteur' => 'Art&iacute;culos de este/a autor/a',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s populares',
 'articles_recents' => 'Los art&iacute;culos m&aacute;s recientes',
@@ -68,54 +68,54 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'messages_forum' => 'Mensajes del f&oacute;rum',
 'messages_recents' => 'Mensajes recientes del f&oacute;rum',
 'mots_clefs' => 'Palabras-clave',
-'mots_clefs_meme_groupe' => '<NEW> Mots-cl&eacute;s dans le m&ecirc;me groupe',
+'mots_clefs_meme_groupe' => 'Palabras claves en el mismo grupo',
 
 
 // N
 'navigation' => 'Navegaci&oacute;n',
-'nom' => '<NEW> Nom',
-'nouveautes' => '<NEW> Les nouveaut&eacute;s',
-'nouveautes_web' => '<NEW> Nouveaut&eacute;s sur le Web',
-'nouveaux_articles' => '<NEW> Nouveaux articles',
-'nouvelles_breves' => '<NEW> Nouvelles br&egrave;ves',
+'nom' => 'Nombre',
+'nouveautes' => 'Las novedades',
+'nouveautes_web' => 'Novedades en la web',
+'nouveaux_articles' => 'Nuevos art&amp;iacute;culos',
+'nouvelles_breves' => 'Nuevas notas',
 
 
 // P
-'par_auteur' => '<NEW> par ',
-'participer_site' => '<NEW> Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
-'plan_site' => '<NEW> Plan du site',
-'popularite' => '<NEW> Popularit&eacute;',
-'poster_message' => '<NEW> Poster un message',
+'par_auteur' => 'por',
+'participer_site' => 'Usted puede participar en la vida de este sitio y proponer sus art&iacute;culos inscribi&amp;eacuet;ndoese . De inmediato recibir&amp;aacute; un correo electr&oacute;nico que les indicar&aacute; sus c&oacute;digos de acceso al espacio privado del sitio.',
+'plan_site' => 'Mapa del sitio',
+'popularite' => 'Popularidad',
+'poster_message' => 'Publicar un mensaje',
 
 
 // R
-'repondre_article' => '<NEW> R&eacute;pondre &agrave; cet article',
-'repondre_breve' => '<NEW> R&eacute;pondre &agrave; cette br&egrave;ve',
-'repondre_message' => '<NEW> R&eacute;pondre &agrave; ce message',
-'resultats_recherche' => '<NEW> R&eacute;sultats de la recherche',
-'retour_debut_forums' => '<NEW> Retour au d&eacute;but des forums',
-'rubrique' => '<NEW> Rubrique',
-'rubriques' => '<NEW> Rubriques',
+'repondre_article' => 'Comentar este art&amp;iacute;culo',
+'repondre_breve' => 'Comentar esta nota',
+'repondre_message' => 'Responder este mensaje',
+'resultats_recherche' => 'Resultados de la b&amp;uacute;squeda',
+'retour_debut_forums' => 'Volver al comienzo del foro',
+'rubrique' => 'Secci&amp;ocuate;n',
+'rubriques' => 'Secciones',
 
 
 // S
-'signatures_petition' => '<NEW> Signatures',
-'site_realise_avec_spip' => '<NEW> Site r&eacute;alis&eacute; avec SPIP',
-'sites_web' => '<NEW> Sites Web',
-'sous_rubriques' => '<NEW> Sous-rubriques',
-'suite' => '<NEW> suite',
-'sur_web' => '<NEW> Sur le Web',
-'syndiquer_rubrique' => '<NEW> Syndiquer cette rubrique',
-'syndiquer_site' => '<NEW> Syndiquer tout le site',
+'signatures_petition' => 'Firmas',
+'site_realise_avec_spip' => 'Sitio desarrollado con SPIP',
+'sites_web' => 'Sitios Web',
+'sous_rubriques' => 'Subsecci&amp;oacute;n',
+'suite' => 'continuar',
+'sur_web' => 'Del web',
+'syndiquer_rubrique' => 'Sindicar esta secci&amp;oacute;n',
+'syndiquer_site' => 'Sindicar el sitio completo',
 
 
 // T
-'texte_lettre_information' => '<NEW> Voici la lettre d\'information du site',
-'texte_lettre_information_2' => '<NEW> Cette lettre recense les articles et les br&egrave;ves publi&eacute;s depuis',
+'texte_lettre_information' => 'Este es el bolet&amp;iacute; de informaci&oacute;n del sitio',
+'texte_lettre_information_2' => 'Este bolet&amp;iacute;n rese&amp;ntilde;a los art&iacute;culos y notas publicados desde ',
 
 
 // V
-'voir_en_ligne' => '<NEW> Voir en ligne'
+'voir_en_ligne' => 'Ver en l&amp;iacute;nea'
 
 );
 
