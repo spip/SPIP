@@ -111,12 +111,12 @@ function supprimer_fichier($fichier) {
 	else
 		return;
 
-	// supprimer
-	@unlink($fichier);
-
 	// liberer le verrou
 	@flock($fp, LOCK_UN);
 	@fclose($fp);
+
+	// supprimer
+	@unlink($fichier);
 }
 
 ?>
