@@ -391,7 +391,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if ($case == "gauche") echo "<tr><td><img src='img_pack/rien.gif' height=5></td></tr><tr><td width=50% valign='top'>";
 			else echo "</td><td><img src='img_pack/rien.gif' width=5></td><td width=50% valign='top'>";
 			echo "\n";
-			afficher_horizontal_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
+			afficher_horizontal_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document, $flag_modif);
 			if ($case == "gauche") {
 				echo "</td>";
 				$case = "droite";
@@ -473,7 +473,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 // Afficher un document sous forme de ligne horizontale
 //
 
-function afficher_horizontal_document($id_document, $image_link, $redirect_url = "", $deplier = false) {
+function afficher_horizontal_document($id_document, $image_link, $redirect_url = "", $deplier = false, $flag_modif) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
@@ -546,12 +546,14 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('doc_supp', $id_vignette);
+
 			if ($flag_deplie) echo debut_block_visible($block);
 			else echo debut_block_invisible($block);
 
 			echo "<b>Vignette personnalis&eacute;e</b>";
 			echo "<center>$largeur_vignette x $hauteur_vignette pixels</center>";
-			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
+			if ($flag_modif)
+				echo "<center><font face='Verdana,Arial,Helvetica,sans-serif'><b>[<a ".$link->getHref().">supprimer la vignette</a>]</b></font></center>\n";
 			echo fin_block();
 			echo "</div>\n";
 		}
@@ -583,10 +585,11 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			
 				echo "<b>Vignette par d&eacute;faut</b>";
 
-				
-				echo "<p></p><div><font size=1>";
-				afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
-				echo "</font></div>";
+				if ($flag_modif) {
+					echo "<p></p><div><font size=1>";
+					afficher_upload($link, 'Remplacer la vignette par d&eacute;faut par un logo personnalis&eacute;&nbsp;:', 'image', false);
+					echo "</font></div>";
+				}
 				echo fin_block();
 			}
 			echo "</div>\n";
@@ -612,45 +615,46 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
 		$link->addVar('id_document', $id_document);
-		echo $link->getForm('POST');
+		if ($flag_modif) {
+			echo $link->getForm('POST');
 
-		echo "<b>Titre du document&nbsp;:</b><br>\n";
-		echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
+			echo "<b>Titre du document&nbsp;:</b><br>\n";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
 
-		if ($GLOBALS['coll'] > 0){
-			if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
-				$mois = $regs[2];
-				$jour = $regs[3];
-				$annee = $regs[1];
+			if ($GLOBALS['coll'] > 0){
+				if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
+					$mois = $regs[2];
+					$jour = $regs[3];
+					$annee = $regs[1];
+				}
+				echo "<b>Date de mise en ligne&nbsp;:</b><br>\n";
+				echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+				afficher_jour($jour);
+				echo "</SELECT> ";
+				echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+				afficher_mois($mois);
+				echo "</SELECT> ";
+				echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+				afficher_annee($annee);
+				echo "</SELECT><br>";
 			}
-			echo "<b>Date de mise en ligne&nbsp;:</b><br>\n";
-			echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
-			afficher_jour($jour);
-			echo "</SELECT> ";
-			echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
-			afficher_mois($mois);
-			echo "</SELECT> ";
-			echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
-			afficher_annee($annee);
-			echo "</SELECT><br>";
+
+			echo "<b>Description&nbsp;:</b><br>\n";
+			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
+			echo entites_html($descriptif);
+			echo "</textarea>\n";
+
+			if ($type_inclus == "embed" OR $type_inclus == "image") {
+				echo "<br><b>Dimensions&nbsp;:</b><br>\n";
+				echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
+				echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
+			}
+
+			echo "<div align='right'>";
+			echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
+			echo "</div>";
+			echo "</form>";
 		}
-		
-		echo "<b>Description&nbsp;:</b><br>\n";
-		echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
-		echo entites_html($descriptif);
-		echo "</textarea>\n";
-
-		if ($type_inclus == "embed" OR $type_inclus == "image") {
-			echo "<br><b>Dimensions&nbsp;:</b><br>\n";
-			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> pixels";
-		}
-
-		echo "<div align='right'>";
-		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='Valider'>";
-		echo "</div>";
-		echo "</form>";
-
 
 		$link_supp = $image_link;
 		$link_supp->addVar('redirect', $redirect_url);
@@ -662,9 +666,11 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "</div>";
 		echo "</div>";
 
-		echo "<p></p><div align='center'>";
-		icone_horizontale("Supprimer ce document", $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
-		echo "</div>";
+		if ($flag_modif) {
+			echo "<p></p><div align='center'>";
+			icone_horizontale("Supprimer ce document", $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
+			echo "</div>";
+		}
 		echo fin_block();
 
 		fin_cadre_enfonce();
