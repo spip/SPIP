@@ -1895,7 +1895,7 @@ function afficher_menu_rubriques() {
 	global $spip_lang_rtl;
 	$date_maj = lire_meta("date_calcul_rubriques");
 
-	echo '<script type="text/javascript" src="js_menu_rubriques.php?'.$date_maj.'&dir='.$spip_lang_rtl.'"></script>';
+	echo '<script type="text/javascript" src="js_menu_rubriques.php?date='.$date_maj.'&dir='.$spip_lang_rtl.'"></script>';
 }
 
 

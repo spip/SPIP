@@ -2,6 +2,19 @@
 
 include ("inc.php3");
 
+$expire = $date + 3600*24;
+
+$date = gmdate("D, d M Y H:i:s", $date);
+$expire = gmdate("D, d M Y H:i:s", $expire);
+
+
+	@Header ("Last-Modified: ".$date." GMT");
+	@Header ("Expires: ".$expire." GMT");
+
+	@Header ("Content-Type: text/javascript");
+
+
+
 
 function bandeau_menu() {
 		$result_racine = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY titre");
