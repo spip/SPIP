@@ -3,18 +3,6 @@
 include ("inc.php3");
 
 
-if ($new=="oui"){
-	if(!$id_parent){$id_parent=0;}
-	$query="INSERT INTO spip_rubriques (titre, id_parent) VALUES ('Nouvelle rubrique', '$id_parent')";
-	$result=spip_query($query);
-	$id_rubrique=mysql_insert_id();
-	
-	// Effacer une eventuelle rubrique creee en double
-	$query_eff = "DELETE FROM spip_rubriques WHERE titre='Nouvelle rubrique' AND id_rubrique != $id_rubrique AND statut=''";
-	$result_eff = spip_query($query_eff);
-}
-
-
 function mySel($varaut,$variable){
 	$retour= " VALUE=\"$varaut\"";
 
@@ -58,22 +46,29 @@ function enfant($leparent){
 }
 
 
-$query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
-$result=spip_query($query);
-
-while($row=mysql_fetch_array($result)){
-	$id_rubrique=$row['id_rubrique'];
-	$id_parent=$row['id_parent'];
-	$titre = $row['titre'];
-	$descriptif = $row['descriptif'];
-	$texte = $row['texte'];
+if ($new == "oui") {
+	$id_parent = intval($id_parent);
+	$id_rubrique = 0;
+	$titre = "Nouvelle rubrique";
+	$descriptif = "";
+	$texte = "";
+}
+else {
+	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY titre";
+	$result = spip_query($query);
+	while ($row = mysql_fetch_array($result)) {
+		$id_rubrique = $row['id_rubrique'];
+		$id_parent = $row['id_parent'];
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$texte = $row['texte'];
+	}
 }
 
 debut_page("Modifier : $titre_page", "documents", "rubriques");
 
 if ($id_parent == 0) $ze_logo = "secteur-24.gif";
 else $ze_logo = "rubrique-24.gif";
-
 
 if ($id_parent == 0) $logo_parent = "racine-site-24.gif";
 else {
@@ -112,7 +107,9 @@ debut_cadre_formulaire();
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone("Retour", "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
+
+if ($id_rubrique) icone("Retour", "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
+else icone("Retour", "naviguer.php3?coll=$id_parent", $ze_logo, "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
@@ -123,8 +120,8 @@ echo "</td></tr></table>";
 echo "<p>";
 
 echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
-echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
 echo "<INPUT TYPE='Hidden' NAME='coll' VALUE=\"$id_rubrique\">";
+if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
 $titre = htmlspecialchars($titre);
 
@@ -132,7 +129,7 @@ echo "<B>Titre</B> [Obligatoire]<BR>";
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";
 
 
-if ($options=="avancees"){
+if ($options=="avancees") {
 	debut_cadre_relief("$logo_parent");
 	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B> ".aide ("rubrub")."<BR>\n";
 	echo "<SELECT NAME='id_parent' CLASS='forml' SIZE=1>\n";
@@ -162,13 +159,14 @@ if ($options=="avancees"){
 	echo "<INPUT TYPE='Hidden' NAME='id_parent' VALUE=\"$id_parent\">";
 }
 
-if ($options=="avancees" OR strlen($descriptif)>0){
+if ($options == "avancees" OR $descriptif) {
 	echo "<B>Descriptif rapide</B><BR>";
 	echo "(Contenu de la rubrique en quelques mots.)<BR>";
 	echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 	echo $descriptif;
 	echo "</TEXTAREA><P>\n";
-}else{
+}
+else {
 	echo "<INPUT TYPE='Hidden' NAME='descriptif' VALUE=\"$descriptif\">";
 }
 
