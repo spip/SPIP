@@ -355,6 +355,18 @@ Dankon pro via partopreno
 
 
 // I
+'ical_info1' => '<NEW> Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
+'ical_info2' => '<NEW> Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => '<NEW> Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
+'ical_methode_http' => '<NEW> T&eacute;l&eacute;chargement',
+'ical_methode_webcal' => '<NEW> Synchronisation (webcal://)',
+'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
+'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
+'ical_titre_js' => '<NEW> Javascript',
+'ical_titre_mailing' => '<NEW> Mailing-list',
+'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
 'icone_a_suivre' => 'Da&#365;rigota',
 'icone_activer_cookie' => 'Aktivigi la korespond-kuketon',
 'icone_admin_site' => 'Teksej- administrado',

@@ -168,7 +168,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'calendrier_synchro' => '<MODIF> Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), kan je deze synchroniseren met de actuele artikels van deze site.',
-'calendrier_synchro_lien' => 'Het bestand <i>iCal</i> ophalen',
 
 
 // D
@@ -385,7 +384,7 @@ Bedankt voor je deelname
 'icone_articles' => 'Artikels',
 'icone_auteurs' => 'Auteurs',
 'icone_breves' => 'Berichten',
-'icone_brouteur' => '<NEW> Navigation rapide',
+'icone_brouteur' => '<NEW> Snelle navigatie',
 'icone_calendrier' => 'Kalender',
 'icone_calendrier_messagerie' => 'Agenda en berichtensysteem',
 'icone_configuration_site' => 'Configuratie van de site',
@@ -399,7 +398,7 @@ Bedankt voor je deelname
 'icone_creer_rubrique_2' => 'Een nieuwe rubriek aanmaken',
 'icone_creer_sous_rubrique' => 'Een subrubriek aanmaken',
 'icone_deconnecter' => 'Uitloggen',
-'icone_discussions' => '<NEW> Discussions',
+'icone_discussions' => '<NEW> Discussies',
 'icone_doc_rubrique' => 'Bijlagen van de rubrieken',
 'icone_ecrire_article' => 'Een nieuw artikel schrijven',
 'icone_ecrire_nouvel_article' => 'De berichten van deze rubriek',
@@ -412,7 +411,7 @@ Bedankt voor je deelname
 'icone_forum_interne' => 'Intern forum',
 'icone_forum_suivi' => 'Opvolging van de forums',
 'icone_forums_petitions' => 'Forums en petities',
-'icone_gestion_langues' => '<NEW> Gestion des langues',
+'icone_gestion_langues' => '<NEW> Talenbeheer',
 'icone_informations_personnelles' => 'Persoonlijke gegevens',
 'icone_interface_complet' => 'Volledige interface',
 'icone_interface_simple' => 'Eenvoudige interface',
@@ -433,7 +432,7 @@ Bedankt voor je deelname
 'icone_refuser_breve' => 'Dit nieuwsbericht weigeren',
 'icone_repartition_actuelle' => 'De huidige verdeling tonen',
 'icone_repartition_debut' => 'De verdeling sinds het begin tonen',
-'icone_repartition_visites' => '<NEW> R&eacute;partition des visites',
+'icone_repartition_visites' => '<NEW> Bezoekenverspreiding',
 'icone_retour' => 'Terug',
 'icone_retour_article' => 'Terug naar artikel',
 'icone_rubriques' => 'Rubrieken',
@@ -442,8 +441,8 @@ Bedankt voor je deelname
 'icone_sites_references' => 'Gekoppelde sites',
 'icone_statistiques' => 'Statistieken van de site',
 'icone_statistiques_visites' => 'Statistieken aantal bezoeken',
-'icone_suivi_activite' => '<NEW> Suivre la vie du site',
-'icone_suivi_actualite' => '<NEW> &Eacute;volution du&nbsp;site',
+'icone_suivi_activite' => '<NEW> Opvolging van het leven van de site',
+'icone_suivi_actualite' => '<NEW> Site evolutie',
 'icone_suivi_forum' => 'Opvolging van het publieke forum: @nb_forums@&nbsp;bijdrage(n)',
 'icone_suivi_forums' => 'Forums opvolgen/beheren',
 'icone_suivi_pettions' => 'Petities opvolgen/beheren',
@@ -1675,7 +1674,11 @@ Dit kan handig zijn als je veel pagina\'s hebt gewijzigd, de layout of de struct
 'trad_delier' => 'Dit artikel niet meer koppelen aan zijn vertalingen',
 'trad_lier' => 'Dit artikel is een vertaling van artikelnummer:',
 'trad_new' => 'Een nieuwe vertaling maken van dit artikel',
-'trad_reference' => '(referentie-artikel)'
+'trad_reference' => '(referentie-artikel)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Het bestand <i>iCal</i> ophalen'
 
 );
 
