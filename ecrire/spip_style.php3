@@ -77,6 +77,11 @@ td {
 }
 .fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; 
 }
+
+
+select.fondl {
+	padding: 0px;
+}
 .maj-debut:first-letter { text-transform: uppercase; }
 
 
@@ -883,6 +888,8 @@ a.bouton_rotation:hover img {
 	-moz-border-radius: 8px;
 }
 .cadre-couleur div.cadre-titre {
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
 	background: <?php echo $couleur_foncee; ?>;
 	border-bottom: 2px solid <?php echo $couleur_foncee; ?>;
 	color: white;	

@@ -732,7 +732,6 @@ function afficher_jour($jour){
 }
 
 
-
 debut_cadre_relief();
 
 //
@@ -1604,9 +1603,9 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 	fin_cadre_relief();
 }
 
-echo "</DIV>";
+echo "</div>";
 
-
+echo "</div>";
 fin_cadre_relief();
 
 //
