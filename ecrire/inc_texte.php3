@@ -210,9 +210,9 @@ function echappe_html($letexte,$source) {
 	//
 	// Echapper les tags html contenant des caracteres sensibles a la typo
 	//
-	$regexp_echap = "<[^>!':;\?]*[!':;\?][^>]*>";
+	$regexp_echap = "<[^<>!':;\?]*[!':;\?][^>]*>";
 	if ($flag_pcre)
-		if (preg_match_all("/$regexp_echap/", $letexte, $regs)) while (list(,$reg) = each($regs)) {
+		if (preg_match_all("/$regexp_echap/", $letexte, $regs, PREG_SET_ORDER)) while (list(,$reg) = each($regs)) {
 			$num_echap++;
 			$les_echap[$num_echap] = $reg[0];
 			$pos = strpos($letexte, $les_echap[$num_echap]);
