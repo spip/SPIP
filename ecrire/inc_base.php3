@@ -19,7 +19,8 @@ function creer_base() {
 	$query = "CREATE TABLE spip_articles (
 		id_article bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		surtitre text NOT NULL,
-		titre text NOT NULL, soustitre text NOT NULL,
+		titre text NOT NULL,
+		soustitre text NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
 		descriptif text NOT NULL,
 		chapo mediumtext NOT NULL,
@@ -28,7 +29,7 @@ function creer_base() {
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		statut varchar(10) DEFAULT '0' NOT NULL,
 		id_secteur bigint(21) DEFAULT '0' NOT NULL,
-		maj TIMESTAMP, 
+		maj TIMESTAMP,
 		export VARCHAR(10) DEFAULT 'oui',
 		date_redac datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		visites INTEGER DEFAULT '0' NOT NULL,
@@ -62,8 +63,6 @@ function creer_base() {
 		alea_actuel tinytext NOT NULL,
 		alea_futur tinytext NOT NULL,
 		prefs tinytext NOT NULL,
-		abonne text NOT NULL,
-		abonne_pass tinytext NOT NULL,
 		cookie_oubli tinytext NOT NULL,
 		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
 		PRIMARY KEY (id_auteur),
@@ -182,13 +181,13 @@ function creer_base() {
 		id_syndic bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
 		id_secteur bigint(21) DEFAULT '0' NOT NULL,
-		nom_site blob NOT NULL, 
+		nom_site blob NOT NULL,
 		url_site blob NOT NULL,
 		url_syndic blob NOT NULL,
 		descriptif blob NOT NULL,
 		maj TIMESTAMP,
 		syndication VARCHAR(3) NOT NULL,
-		statut VARCHAR(10) NOT NULL, 
+		statut VARCHAR(10) NOT NULL,
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		date_syndic datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		date_index datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
@@ -220,7 +219,7 @@ function creer_base() {
 	//
 
 	$query = "CREATE TABLE spip_forum (
-		id_forum bigint(21) DEFAULT '0' NOT NULL auto_increment, 
+		id_forum bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		id_parent bigint(21) DEFAULT '0' NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
 		id_article bigint(21) DEFAULT '0' NOT NULL,
@@ -274,17 +273,6 @@ function creer_base() {
 		KEY statut(statut))";
 	$result = spip_query($query);
 
-	$query = "CREATE TABLE spip_listes (
-		id_liste bigint(21) DEFAULT '0' NOT NULL auto_increment,
-		titre text NOT NULL,
-		statut VARCHAR(10) NOT NULL,
-		descriptif blob NOT NULL,
-		droits text NOT NULL,
-		maj TIMESTAMP,
-		KEY id_liste (id_liste)
-		)";
-	$result = spip_query($query);
-
 	$query = "CREATE TABLE spip_visites_temp (
 		ip INTEGER UNSIGNED NOT NULL,
 		type ENUM('article', 'rubrique', 'breve', 'autre') NOT NULL,
@@ -323,7 +311,7 @@ function creer_base() {
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
-		maj TIMESTAMP, 
+		maj TIMESTAMP,
 		PRIMARY KEY (referer_md5))";
 	$result = spip_query($query);
 
@@ -333,7 +321,7 @@ function creer_base() {
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
-		maj TIMESTAMP, 
+		maj TIMESTAMP,
 		PRIMARY KEY (id_article, referer_md5),
 		KEY referer_md5 (referer_md5))";
 	$result = spip_query($query);
@@ -344,59 +332,93 @@ function creer_base() {
 	//
 
 	$query = "CREATE TABLE spip_auteurs_articles (
-		id_auteur bigint(21) DEFAULT '0' NOT NULL, id_article bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_auteur (id_auteur), KEY id_article (id_article))";
+		id_auteur bigint(21) DEFAULT '0' NOT NULL,
+		id_article bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_auteur (id_auteur),
+		KEY id_article (id_article))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs_rubriques (
-		id_auteur bigint(21) DEFAULT '0' NOT NULL, id_rubrique bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_auteur (id_auteur), KEY id_rubrique (id_rubrique))";
+		id_auteur bigint(21) DEFAULT '0' NOT NULL,
+		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_auteur (id_auteur),
+		KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs_messages (
-		id_auteur bigint(21) DEFAULT '0' NOT NULL, id_message bigint(21) DEFAULT '0' NOT NULL, vu CHAR(3) NOT NULL,
-		KEY id_auteur (id_auteur), KEY id_message (id_message))";
+		id_auteur bigint(21) DEFAULT '0' NOT NULL,
+		id_message bigint(21) DEFAULT '0' NOT NULL,
+		vu CHAR(3) NOT NULL,
+		maj TIMESTAMP,
+		KEY id_auteur (id_auteur),
+		KEY id_message (id_message))";
 	$result = spip_query($query);
 
 
 	$query = "CREATE TABLE spip_documents_articles (
-		id_document bigint(21) DEFAULT '0' NOT NULL, id_article bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_document (id_document), KEY id_article (id_article))";
+		id_document bigint(21) DEFAULT '0' NOT NULL,
+		id_article bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_document (id_document),
+		KEY id_article (id_article))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_documents_rubriques (
-		id_document bigint(21) DEFAULT '0' NOT NULL, id_rubrique bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_document (id_document), KEY id_rubrique (id_rubrique))";
+		id_document bigint(21) DEFAULT '0' NOT NULL,
+		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_document (id_document),
+		KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_documents_breves (
-		id_document bigint(21) DEFAULT '0' NOT NULL, id_breve bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_document (id_document), KEY id_breve (id_breve))";
+		id_document bigint(21) DEFAULT '0' NOT NULL,
+		id_breve bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_document (id_document),
+		KEY id_breve (id_breve))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots_articles (
-		id_mot bigint(21) DEFAULT '0' NOT NULL, id_article bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_mot (id_mot), KEY id_article (id_article))";
+		id_mot bigint(21) DEFAULT '0' NOT NULL,
+		id_article bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_mot (id_mot),
+		KEY id_article (id_article))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots_breves (
-		id_mot bigint(21) DEFAULT '0' NOT NULL, id_breve bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_mot (id_mot), KEY id_breve (id_breve))";
+		id_mot bigint(21) DEFAULT '0' NOT NULL,
+		id_breve bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_mot (id_mot),
+		KEY id_breve (id_breve))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots_rubriques (
-		id_mot bigint(21) DEFAULT '0' NOT NULL, id_rubrique bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_mot (id_mot), KEY id_rubrique (id_rubrique))";
+		id_mot bigint(21) DEFAULT '0' NOT NULL,
+		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_mot (id_mot),
+		KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots_syndic (
-		id_mot bigint(21) DEFAULT '0' NOT NULL, id_syndic bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_mot (id_mot), KEY id_syndic (id_syndic))";
+		id_mot bigint(21) DEFAULT '0' NOT NULL,
+		id_syndic bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_mot (id_mot),
+		KEY id_syndic (id_syndic))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_mots_forum (
-		id_mot bigint(21) DEFAULT '0' NOT NULL, id_forum bigint(21) DEFAULT '0' NOT NULL,
-		KEY id_mot (id_mot), KEY id_forum (id_forum))";
+		id_mot bigint(21) DEFAULT '0' NOT NULL,
+		id_forum bigint(21) DEFAULT '0' NOT NULL,
+		maj TIMESTAMP,
+		KEY id_mot (id_mot),
+		KEY id_forum (id_forum))";
 	$result = spip_query($query);
 
 
@@ -421,7 +443,9 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_meta (
-		nom VARCHAR(255) NOT NULL, valeur VARCHAR(255) DEFAULT '', maj TIMESTAMP,
+		nom VARCHAR(255) NOT NULL,
+		valeur VARCHAR(255) DEFAULT '',
+		maj TIMESTAMP,
 		PRIMARY KEY (nom))";
 	$result = spip_query($query);
 
@@ -431,37 +455,55 @@ function creer_base() {
 	//
 
 	$query = "CREATE TABLE spip_index_articles (
-		hash bigint unsigned NOT NULL, points int unsigned DEFAULT '0' NOT NULL, id_article int unsigned NOT NULL,
-		KEY hash (hash), KEY id_article (id_article))";
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_article int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_article (id_article))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_auteurs (
-		hash bigint unsigned NOT NULL, points int unsigned DEFAULT '0' NOT NULL, id_auteur int unsigned NOT NULL,
-		KEY hash (hash), KEY id_auteur (id_auteur))";
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_auteur int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_auteur (id_auteur))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_breves (
-		hash bigint unsigned NOT NULL, points int unsigned DEFAULT '0' NOT NULL, id_breve int unsigned NOT NULL,
-		KEY hash (hash), KEY id_breve (id_breve))";
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_breve int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_breve (id_breve))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_mots (
-		hash bigint unsigned NOT NULL, points int unsigned DEFAULT '0' NOT NULL, id_mot int unsigned NOT NULL,
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_mot int unsigned NOT NULL,
 		KEY hash (hash), KEY id_mot (id_mot))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_rubriques (
-		hash bigint unsigned NOT NULL, points int unsigned DEFAULT '0' NOT NULL, id_rubrique int unsigned NOT NULL,
-		KEY hash (hash), KEY id_rubrique (id_rubrique))";
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_rubrique int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_syndic (
-		hash bigint unsigned NOT NULL, points int unsigned DEFAULT '0' NOT NULL, id_syndic int unsigned NOT NULL,
-		KEY hash (hash), KEY id_syndic (id_syndic))";
+		hash bigint unsigned NOT NULL,
+		points int unsigned DEFAULT '0' NOT NULL,
+		id_syndic int unsigned NOT NULL,
+		KEY hash (hash),
+		KEY id_syndic (id_syndic))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_index_dico (
-		hash bigint unsigned NOT NULL, dico VARCHAR(30) NOT NULL,
+		hash bigint unsigned NOT NULL,
+		dico VARCHAR(30) NOT NULL,
 		PRIMARY KEY (dico))";
 	$result = spip_query($query);
 
@@ -547,6 +589,10 @@ function stripslashes_base($table, $champs) {
 }
 
 
+function maj_version ($version) {
+	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
+}
+
 function maj_base() {
 
 	global $spip_version;
@@ -595,6 +641,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_forum ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_forum DROP INDEX id_forum");
 		spip_query("ALTER TABLE spip_forum ADD INDEX id_parent (id_parent), ADD INDEX id_rubrique (id_rubrique), ADD INDEX id_article(id_article), ADD INDEX id_breve(id_breve)");
+		maj_version (0.98);
 	}
 	
 	if ($version_installee < 0.99) {
@@ -658,10 +705,12 @@ function maj_base() {
 			$query3 = "UPDATE spip_forum SET id_rubrique=$id_rubrique WHERE id_forum IN ($forums_rubrique)";
 			spip_query($query3);
 		}
+		maj_version (0.99);
 	}
 
 	if ($version_installee < 0.997) {
 		spip_query("DROP TABLE spip_index");
+		maj_version (0.997);
 	}
 
 	if ($version_installee < 0.999) {
@@ -675,32 +724,39 @@ function maj_base() {
 			$pass = md5($pass);
 			spip_query("UPDATE spip_auteurs SET pass='$pass', htpass='$htpass' WHERE id_auteur=$id_auteur");
 		}
+		maj_version (0.999);
 	}
 	
 	if ($version_installee < 1.01) {
 		spip_query("UPDATE spip_forum SET statut='publie' WHERE statut=''");
+		maj_version (1.01);
 	}
 	
 	if ($version_installee < 1.02) {
 		spip_query("ALTER TABLE spip_forum ADD id_auteur BIGINT DEFAULT '0' NOT NULL");
+		maj_version (1.02);
 	}
 
 	if ($version_installee < 1.03) {
 		spip_query("DROP TABLE spip_maj");
+		maj_version (1.03);
 	}
 
 	if ($version_installee < 1.04) {
 		spip_query("ALTER TABLE spip_articles ADD accepter_forum VARCHAR(3)");
+		maj_version (1.04);
 	}
 
 	if ($version_installee < 1.05) {
 		spip_query("DROP TABLE spip_petition");
 		spip_query("DROP TABLE spip_signatures_petition");
+		maj_version (1.05);
 	}
 
 	if ($version_installee < 1.1) {
 		spip_query("DROP TABLE spip_petition");
 		spip_query("DROP TABLE spip_signatures_petition");
+		maj_version (1.1);
 	}
 
 	// Correction de l'oubli des modifs creations depuis 1.04
@@ -711,6 +767,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_auteurs ADD en_ligne datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD imessage VARCHAR(3) not null");
 		spip_query("ALTER TABLE spip_auteurs ADD messagerie VARCHAR(3) not null");
+		maj_version (1.204);
 	}
 
 	if ($version_installee < 1.207) {
@@ -719,6 +776,7 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_rubriques ADD statut VARCHAR(10) NOT NULL");
 		// Declencher le calcul des rubriques publiques
 		spip_query("REPLACE spip_meta (nom, valeur) VALUES ('calculer_rubriques', 'oui')");
+		maj_version (1.207);
 	}
 
 	if ($version_installee < 1.208) {
@@ -736,12 +794,14 @@ function maj_base() {
 		}
 
 		spip_query("ALTER TABLE spip_auteurs_messages DROP statut");
+		maj_version (1.208);
 	}
 
 	if ($version_installee < 1.209) {
 		spip_query("ALTER TABLE spip_syndic ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_syndic_articles ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_messages ADD maj TIMESTAMP");
+		maj_version (1.209);
 	}
 
 	if ($version_installee < 1.210) {
@@ -758,6 +818,7 @@ function maj_base() {
 		stripslashes_base('spip_signatures', array('nom_email', 'nom_site', 'message'));
 		stripslashes_base('spip_syndic', array('nom_site', 'descriptif'));
 		stripslashes_base('spip_syndic_articles', array('titre', 'lesauteurs'));
+		maj_version (1.210);
 	}
 
 	if ($version_installee < 1.3) {
@@ -770,10 +831,12 @@ function maj_base() {
 		// Statut pour articles syndication, pour pouvoir desactiver un article
 		spip_query("ALTER TABLE spip_syndic_articles ADD statut VARCHAR(10) NOT NULL");
 		spip_query("UPDATE spip_syndic_articles SET statut='publie'");
+		maj_version (1.3);
 	}
 
 	if ($version_installee < 1.301) {
 		spip_query("ALTER TABLE spip_forum ADD id_syndic bigint(21) DEFAULT '0' NOT NULL");
+		maj_version (1.301);
 	}
 
 	if ($version_installee < 1.302) {
@@ -781,25 +844,26 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_forum_cache DROP INDEX fichier");
 		spip_query("ALTER TABLE spip_forum_cache ADD PRIMARY KEY (fichier, id_forum, id_article, id_rubrique, id_breve, id_syndic)");
 		spip_query("ALTER TABLE spip_forum ADD INDEX id_syndic (id_syndic)");
+		maj_version (1.302);
 	}
 
 	if ($version_installee < 1.303) {
 		spip_query("ALTER TABLE spip_rubriques ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		spip_query("ALTER TABLE spip_syndic ADD date_syndic datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		spip_query("UPDATE spip_syndic SET date_syndic=date");
-	}
-
-	if ($version_installee < 1.305) {
+		maj_version (1.303);
 	}
 
 	if ($version_installee < 1.306) {
 		spip_query("DROP TABLE spip_index_syndic_articles");
 		spip_query("ALTER TABLE spip_syndic ADD date_index datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		spip_query("ALTER TABLE spip_syndic ADD INDEX date_index (date_index)");
+		maj_version (1.306);
 	}
 
 	if ($version_installee < 1.307) {
 		spip_query("ALTER TABLE spip_syndic_articles ADD descriptif blob NOT NULL");
+		maj_version (1.307);
 	}
 
 	if ($version_installee < 1.404) {
@@ -813,6 +877,7 @@ function maj_base() {
 					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 		}
 		spip_query("DELETE FROM spip_mots WHERE titre='kawax'");
+		maj_version (1.404);
 	}
 
 	if ($version_installee < 1.405) {
@@ -824,6 +889,7 @@ function maj_base() {
 				$type = addslashes($row['titre']);
 				spip_query("UPDATE spip_mots SET id_groupe = '$id_groupe' WHERE type=\"$type\"");
 		}
+		maj_version (1.405);
 	}
 
 	if ($version_installee < 1.408) {
@@ -875,6 +941,7 @@ function maj_base() {
 			spip_query($query);
 		}
 		spip_query("ALTER TABLE spip_articles DROP images");
+		maj_version (1.408);
 	}
 
 	if ($version_installee < 1.414) {
@@ -886,14 +953,17 @@ function maj_base() {
 		$result = spip_query($query);
 		$query = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
 		$result = spip_query($query);
+		maj_version (1.414);
 	}
 
 	if ($version_installee == 1.415) {
 		spip_query("ALTER TABLE spip_documents DROP inclus");
+		maj_version (1.415);
 	}
 
 	if ($version_installee < 1.417) {
 		spip_query("ALTER TABLE spip_syndic_articles DROP date_index");
+		maj_version (1.417);
 	}
 
 	if ($version_installee < 1.418) {
@@ -904,6 +974,7 @@ function maj_base() {
 			ecrire_meta('email_webmaster', $webmaster->email);
 			ecrire_metas();
 		}
+		maj_version (1.418);
 	}
 
 	if ($version_installee < 1.419) {
@@ -913,11 +984,13 @@ function maj_base() {
 		spip_query($query);
 		$query = "UPDATE spip_auteurs SET alea_futur = FLOOR(32000*RAND())";
 		spip_query($query);
+		maj_version (1.419);
 	}
 
 	if ($version_installee < 1.420) {
 		$query = "UPDATE spip_auteurs SET alea_actuel='' WHERE statut='nouveau'";
 		spip_query($query);
+		maj_version (1.420);
 	}
 	
 	if ($version_installee < 1.421) {
@@ -925,6 +998,7 @@ function maj_base() {
 		spip_query($query);
 		$query = "ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 		spip_query($query);
+		maj_version (1.421);
 	}
 
 	if ($version_installee < 1.432) {
@@ -933,21 +1007,25 @@ function maj_base() {
 		spip_query($query);
 		$query = "ALTER TABLE spip_articles ADD popularite INTEGER DEFAULT '0' NOT NULL";
 		spip_query($query);
+		maj_version (1.432);
 	}
 
 	if ($version_installee < 1.436) {
 		$query = "ALTER TABLE spip_documents ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
 		spip_query($query);
+		maj_version (1.436);
 	}
 
 	if ($version_installee < 1.437) {
 		spip_query("ALTER TABLE spip_visites ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_visites_referers ADD maj TIMESTAMP");
+		maj_version (1.437);
 	}
 
 	if ($version_installee < 1.438) {
 		spip_query("ALTER TABLE spip_articles ADD INDEX id_secteur (id_secteur)");
 		spip_query("ALTER TABLE spip_articles ADD INDEX statut (statut, date)");
+		maj_version (1.438);
 	}
 
 	if ($version_installee < 1.439) {
@@ -955,21 +1033,25 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_syndic_articles ADD INDEX statut (statut)");
 		spip_query("ALTER TABLE spip_syndic_articles CHANGE url url VARCHAR(255) NOT NULL");
 		spip_query("ALTER TABLE spip_syndic_articles ADD INDEX url (url)");
+		maj_version (1.439);
 	}
 
 	if ($version_installee < 1.440) {
 		spip_query("ALTER TABLE spip_visites_temp CHANGE ip ip INTEGER UNSIGNED NOT NULL");
+		maj_version (1.440);
 	}
 
 	if ($version_installee < 1.441) {
 		spip_query("ALTER TABLE spip_visites_temp CHANGE date date DATE NOT NULL");
 		spip_query("ALTER TABLE spip_visites CHANGE date date DATE NOT NULL");
 		spip_query("ALTER TABLE spip_visites_referers CHANGE date date DATE NOT NULL");
+		maj_version (1.441);
 	}
 
 	if ($version_installee < 1.442) {
 		$query = "ALTER TABLE spip_auteurs ADD prefs TINYTEXT NOT NULL";
 		spip_query($query);
+		maj_version (1.442);
 	}
 
 	if ($version_installee < 1.443) {
@@ -977,10 +1059,12 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_auteurs CHANGE statut statut VARCHAR(255) NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX login (login)");
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX statut (statut)");
+		maj_version (1.443);
 	}
 
 	if ($version_installee < 1.444) {
 		spip_query("ALTER TABLE spip_syndic ADD moderation VARCHAR(3) NOT NULL");
+		maj_version (1.444);
 	}
 
 	if ($version_installee < 1.457) {
@@ -988,10 +1072,12 @@ function maj_base() {
 		spip_query("DROP TABLE spip_visites_temp");
 		spip_query("DROP TABLE spip_visites_referers");
 		creer_base(); // crade, a ameliorer :-((
+		maj_version (1.457);
 	}
 
 	if ($version_installee < 1.458) {
 		spip_query("ALTER TABLE spip_auteurs ADD cookie_oubli TINYTEXT NOT NULL");
+		maj_version (1.458);
 	}
 
 	if ($version_installee < 1.459) {
@@ -1009,6 +1095,7 @@ function maj_base() {
 			}
 		}
 		spip_query("UPDATE spip_articles SET popularite=0");
+		maj_version (1.459);
 	}
 
 	if ($version_installee < 1.460) {
@@ -1025,17 +1112,20 @@ function maj_base() {
 				spip_query ("DELETE FROM spip_groupes_mots WHERE titre='$titre' AND id_groupe<>$id_groupe");
 			}
 		}
+		maj_version (1.460);
 	}
 
 	if ($version_installee < 1.462) {
 		spip_query("UPDATE spip_types_documents SET inclus='embed' WHERE inclus!='non' AND extension IN ".
 			"('aiff', 'asf', 'avi', 'mid', 'mov', 'mp3', 'mpg', 'ogg', 'qt', 'ra', 'ram', 'rm', 'swf', 'wav', 'wmv')");
+		maj_version (1.462);
 	}
 
 	if ($version_installee < 1.463) {
 		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE");
 		spip_query("ALTER TABLE spip_visites_temp ADD maj TIMESTAMP");
 		spip_query("ALTER TABLE spip_referers_temp ADD maj TIMESTAMP");
+		maj_version (1.463);
 	}
 
 	// l'upgrade < 1.462 ci-dessus etait fausse, d'ou correctif
@@ -1047,31 +1137,55 @@ function maj_base() {
 			spip_query("UPDATE spip_documents SET id_type=$id_type
 				WHERE fichier like '%.$extension'");
 		}
+		maj_version (1.464);
 	}
 
 	if ($version_installee < 1.465) {
 		spip_query("ALTER TABLE spip_articles CHANGE popularite popularite DOUBLE NOT NULL");
+		maj_version (1.465);
 	}
 
 	if ($version_installee < 1.466) {
 		spip_query("ALTER TABLE spip_auteurs ADD source VARCHAR(10) DEFAULT 'spip' NOT NULL");
+		maj_version (1.466);
 	}
 
+	/* ANNULE
 	if ($version_installee < 1.467) {
 		// gestion de listes de diff
 		spip_query("ALTER TABLE spip_auteurs ADD abonne TEXT NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD abonne_pass TINYTEXT NOT NULL");
+		maj_version (1.467);
 	}
+	*/
 
 	if ($version_installee < 1.468) {
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX en_ligne (en_ligne)");
 		spip_query("ALTER TABLE spip_forum ADD INDEX statut (statut, date_heure)");
+		maj_version (1.468);
 	}
 
-	//
-	// Mettre a jour le numero de version installee
-	//
-	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$spip_version')");
+	if ($version_installee < 1.470) {
+		spip_query("ALTER TABLE spip_auteurs_articles ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_auteurs_rubriques ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_auteurs_messages ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_documents_articles ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_documents_rubriques ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_documents_breves ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_mots_articles ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_mots_breves ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_mots_rubriques ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_mots_syndic ADD maj TIMESTAMP");
+		spip_query("ALTER TABLE spip_mots_forum ADD maj TIMESTAMP");
+
+		if ($version_installee >= 1.467) {	// annule les "listes de diff"
+			spip_query("DROP TABLE spip_listes");
+			spip_query("ALTER TABLE spip_auteurs DROP abonne");
+			spip_query("ALTER TABLE spip_auteurs DROP abonne_pass");
+		}
+		maj_version (1.470);
+	}
+
 }
 
 ?>

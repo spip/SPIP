@@ -971,14 +971,8 @@ function barre_onglets($rubrique, $onglet){
 
 		onglet("L'auteur", "auteurs_edit.php3?id_auteur=$id_auteur", "auteur", $onglet, "redacteurs-24.gif");
 		onglet("Informations personnelles", "auteur_infos.php3?id_auteur=$id_auteur", "infos", $onglet, "fiche-perso-24.gif");
-		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur){
+		if ($activer_messagerie!="non" AND $connect_id_auteur == $id_auteur)
 			onglet("Messagerie", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
-		} else if ($connect_statut == '0minirezo') { // voir s'il y a des listes
-			$res = get_listes ($statut_auteur);
-			$nb_liste = mysql_num_rows($res);
-			if ($nb_liste>0)
-				onglet("Liste" . (($nb_liste>1)?"s":"") ." de diffusion", "auteur_messagerie.php3?id_auteur=$id_auteur", "messagerie", $onglet, "messagerie-24.gif");
-		}
 	}
 
 	if ($rubrique == "configuration"){
