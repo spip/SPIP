@@ -194,7 +194,7 @@ function afficher_document($id_document) {
 	echo "<b>Titre&nbsp;:</b><br>\n";
 	echo "<INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"".htmlspecialchars($titre)."\" SIZE='40'><br>";
 
-	echo "<b>Description&nbsp;:</b<<br>\n";
+	echo "<b>Description&nbsp;:</b><br>\n";
 	echo "<textarea name='descriptif' CLASS='forml' ROWS='3' COLS='*' wrap='soft'>";
 	echo htmlspecialchars($descriptif);
 	echo "</textarea>\n";
@@ -251,7 +251,7 @@ echo "</td></tr>\n";
 $docs_affiches = "";
 
 $query = "SELECT lien.id_document, documents.id_vignette FROM spip_documents_articles AS lien, spip_documents AS documents ".
-	"WHERE id_article=$id_article AND lien.id_document=documents.id_document ".
+	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".
 	"AND documents.mode='document' AND documents.titre!='' ORDER BY documents.titre";
 $result = mysql_query($query);
 while ($row = mysql_fetch_array($result)) {
@@ -274,7 +274,7 @@ echo "</td></tr>\n";
 if ($docs_affiches) $docs_affiches = "AND lien.id_document NOT IN (".join(',', $docs_affiches).") ";
 
 $query = "SELECT lien.id_document FROM spip_documents_articles AS lien, spip_documents AS documents ".
-	"WHERE id_article=$id_article AND lien.id_document=documents.id_document ".$docs_affiches.
+	"WHERE lien.id_article=$id_article AND lien.id_document=documents.id_document ".$docs_affiches.
 	"AND documents.mode='vignette' AND documents.titre!='' ORDER BY documents.titre";
 $result = mysql_query($query);
 while ($row = mysql_fetch_array($result)) {
