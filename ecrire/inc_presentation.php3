@@ -196,6 +196,21 @@ function fin_cadre_couleur($return = false){
 	else echo $retour_aff;
 }
 
+
+function debut_cadre_couleur_foncee($icone='', $return = false, $fonction='', $titre=''){
+	$retour_aff = debut_cadre('couleur-foncee', $icone, $fonction, $titre);
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+function fin_cadre_couleur_foncee($return = false){
+	$retour_aff = fin_cadre('couleur-foncee');
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
 function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre=''){
 	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre);
 
@@ -2033,11 +2048,13 @@ else {
 			icone_bandeau_secondaire (_T('icone_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
 		}
 
-		if ($connect_statut == "0minirezo") $req_where = " AND spip_articles.statut IN ('prepa','prop','publie')"; 
-		else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
-		$nombre_versions = spip_num_rows(spip_query("SELECT spip_versions.*, spip_articles.statut, spip_articles.titre FROM spip_versions, spip_articles WHERE spip_versions.id_article = spip_articles.id_article AND spip_versions.id_version > 1$req_where LIMIT 0,1"));
-		if ($nombre_versions > 0 OR 1==1) {
-			icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_versions.php", "historique-24.gif", "revisions", $sous_rubrique);
+		if ($options == "avancees") {
+			if ($connect_statut == "0minirezo") $req_where = " AND spip_articles.statut IN ('prepa','prop','publie')"; 
+			else $req_where = " AND spip_articles.statut IN ('prop','publie')"; 
+			$nombre_versions = spip_num_rows(spip_query("SELECT spip_versions.*, spip_articles.statut, spip_articles.titre FROM spip_versions, spip_articles WHERE spip_versions.id_article = spip_articles.id_article AND spip_versions.id_version > 1$req_where LIMIT 0,1"));
+			if ($nombre_versions > 0 OR 1==1) {
+				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_versions.php", "historique-24.gif", "revisions", $sous_rubrique);
+			}
 		}
 
 		$activer_breves=lire_meta("activer_breves");

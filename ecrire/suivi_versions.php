@@ -29,7 +29,7 @@ else $req_where = " AND spip_articles.statut IN ('prop','publie')";
 
 echo "<p>";
 
-echo "<div class='arial11'>";
+echo "<div class='arial11'><ul>";
 echo "<p>";
 
 if (!$uniq_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
@@ -74,7 +74,7 @@ if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == '
 }
 
 
-echo "</div>";
+echo "</ul></div>";
 
 
 //////////////////////////////////////////////////////
