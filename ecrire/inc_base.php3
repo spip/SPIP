@@ -1304,10 +1304,10 @@ function maj_base() {
 		}
 		maj_version (1.702,
 			spip_query("SELECT extra FROM spip_articles")
-			OR spip_query("SELECT extra FROM spip_auteurs")
-			OR spip_query("SELECT extra FROM spip_breves")
-			OR spip_query("SELECT extra FROM spip_rubriques")
-			OR spip_query("SELECT extra FROM spip_mots")
+			&& spip_query("SELECT extra FROM spip_auteurs")
+			&& spip_query("SELECT extra FROM spip_breves")
+			&& spip_query("SELECT extra FROM spip_rubriques")
+			&& spip_query("SELECT extra FROM spip_mots")
 			);
 	}
 
