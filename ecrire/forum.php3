@@ -16,7 +16,7 @@ if ($connect_statut == '0minirezo') {
 	//icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
 	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
 
-	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$query_petition = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
 	$result_petition = spip_query($query_petition);
 	if ($row = mysql_fetch_array($result_petition)) {
 		$nombre_petition = $row['cnt'];
