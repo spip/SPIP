@@ -509,10 +509,11 @@ function extraire_lien ($regs) {
 		// Traitement des liens internes
 		if ($flag_ecrire)
 			include_ecrire('inc_urls.php3');
-		else if (@file_exists('inc-urls.php3'))
-			include_local('inc-urls.php3');
-		else if (@file_exists('inc-urls-dist.php3'))
-			include_local('inc-urls-dist.php3');
+		else
+		if (@file_exists("inc-urls.php3"))
+			include_local("inc-urls.php3");
+		else
+			include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
 		$id_lien = $match[8];
 		$ancre = $match[9];
@@ -907,8 +908,8 @@ function traiter_raccourcis_generale($letexte) {
 		/* 4 */ 	"<p>",
 		/* 5 */ 	"@@SPIP_debut_intertitre@@",
 		/* 6 */ 	"@@SPIP_fin_intertitre@@",
-		/* 7 */ 	"<b class=\"spip\">",
-		/* 8 */ 	"</b>",
+		/* 7 */ 	"<strong class=\"spip\">",
+		/* 8 */ 	"</strong>",
 		/* 9 */ 	"<i class=\"spip\">",
 		/* 10 */	"</i>",
 		/* 11 */	"<p class=\"spip\">",

@@ -116,6 +116,12 @@ $auto_compress = true;
 // attention : apres toute modification de ce reglage il faut vider le cache
 $compresser_cache = true;
 
+// Type d'URLs
+// 'standard': article.php3?id_article=123
+// 'html': article123.html
+// 'propres': Titre-de-l-article.html <http://lab.spip.net/spikini/UrlsPropres>
+$type_urls = 'standard';
+
 // creation des vignettes avec image magick en ligne de commande : mettre
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
@@ -208,7 +214,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.806;
+$spip_version = 1.807;
 
 // version de spip
 $spip_version_affichee = "1.8 beta 1 CVS";

@@ -29,8 +29,10 @@ if (@file_exists("mes_fonctions.php3"))
 
 
 // Gestionnaire d'URLs
-if (@file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
-else { include_local ("inc-urls-dist.php3"); }
+if (@file_exists("inc-urls.php3"))
+	include_local("inc-urls.php3");
+else
+	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
 
 // Le squelette compile est-il trop vieux ?

@@ -1,0 +1,36 @@
+###########################################################
+# Fichier .htaccess pour les URLs propres ; a installer   #
+# si vous reglez $type_urls='propre'                      #
+# dans ecrire/mes_options.php3 ou dans mes_fonctions.php3 #
+# (fichier associe : inc-urls-propres.php3)               #
+###########################################################
+
+RewriteEngine On
+
+### si votre site est en sous-domaine, preciser ci-dessous
+# RewriteBase /sous/domaine/
+
+# Rediriger les mots et breves sans le "+" final
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(\+[^/\.\+]+)$ /$1+ [QSA,R]
+
+# Les mots-cles
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^\+-[^/\.]+-\+$ mot.php3 [QSA,E=url_propre:$0]
+
+# Les breves
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^\+[^/\.]+\+$ breve.php3 [QSA,E=url_propre:$0]
+
+# Les rubriques
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^-[^/\.]+-$ rubrique.php3 [QSA,E=url_propre:$0]
+
+# Les articles
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^[^/\.]+$ article.php3 [QSA,E=url_propre:$0]

@@ -4,12 +4,11 @@
 
 include ("ecrire/inc_version.php3");
 
-if (@file_exists("inc-urls.php3")) {
-	include_local ("inc-urls.php3");
-}
-else {
-	include_local ("inc-urls-dist.php3");
-}
+// Gestionnaire d'URLs
+if (@file_exists("inc-urls.php3"))
+	include_local("inc-urls.php3");
+else
+	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
 if ($id_article) {
 	$url = generer_url_article($id_article);

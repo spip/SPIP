@@ -206,7 +206,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		top: 0px;
 		left: 0px;
 		position: absolute;
-		"><a href="'.$url.'"><img src="ecrire/img_pack/naviguer-site.gif" align="left" border="0" /></a>
+		"><a href="'.$url.'"><img src="ecrire/img_pack/naviguer-site.png" align="left" border="0" /></a>
 &nbsp; '.majuscules(_T('previsualisation')).'</div>';
 	}
 
