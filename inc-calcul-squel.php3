@@ -2025,7 +2025,7 @@ function calculer_texte($texte)
 
 		// Traiter la directive d'inclusion
 		$fichier = $match[1];
-		ereg("^\{(.*)\}$", trim($match[2]), $params);
+		ereg('^\\{(.*)\\}$', trim($match[2]), $params);
 		$code .= "	\$retour .= '<"."?php ';\n";
 		$code .= "	\$retour .= '\$contexte_inclus = \'\'; ';\n";
 
