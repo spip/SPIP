@@ -509,16 +509,6 @@ function creer_base() {
 	spip_log(_T('log_tables_remplissage_base'));
 	remplir_type_documents();
 
-	//
-	// reglages par defaut
-	//
-
-	include_ecrire("inc_meta.php3");
-
-	if (! lire_meta('post_dates'))
-		ecrire_meta('post_dates', 'non');	// ne pas publier les post-dates
-
-	ecrire_metas();
 }
 
 
