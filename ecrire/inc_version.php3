@@ -233,10 +233,6 @@ $dossier_squelettes = "";
 // navigateur l'accepte (valable pour apache >= 1.3 seulement) ?
 $auto_compress = true;
 
-// compresser les fichiers du repertoire CACHE/ avec gzip ?
-// attention : apres toute modification de ce reglage il faut vider le cache
-$compresser_cache = true;
-
 // Type d'URLs
 // 'standard': article.php3?id_article=123
 // 'html': article123.html

@@ -106,7 +106,7 @@ if ($quota_cache) {
 }
 
 	echo "\n";
-	echo $compresser_cache? _T('cache_mode_compresse') :
+	echo $flag_gz ? _T('cache_mode_compresse') :
 		_T('cache_mode_non_compresse');
 	echo ' ('._T('cache_modifiable_webmestre').')</p>';
 
