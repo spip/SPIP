@@ -1380,38 +1380,27 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$milieu = '
 		switch ($pile_boucles[$id_instance]->type_requete) {
 		case "articles":
-			$titre = "> ".$pile_boucles[$id_instance]->row["titre"];
-			$'.$nom_var.' = retour_forum(0, 0, $contexte["id_article"], 0, 0, $titre);
+			$'.$nom_var.' = retour_forum(0, 0, $contexte["id_article"], 0, 0);
 			break;
 
 		case "breves":
-			$titre = "> ".$pile_boucles[$id_instance]->row["titre"];
-			$'.$nom_var.' = retour_forum(0, 0, 0, $contexte["id_breve"], 0, $titre);
+			$'.$nom_var.' = retour_forum(0, 0, 0, $contexte["id_breve"], 0);
 			break;
 
 		case "forums":
-			$titre = "> ".$pile_boucles[$id_instance]->row["titre"];
-			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], $contexte["id_forum"], $contexte["id_article"], $contexte["id_breve"], $contexte["id_syndic"], $titre);
+			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], $contexte["id_forum"], $contexte["id_article"], $contexte["id_breve"], $contexte["id_syndic"]);
 			break;
 
 		case "rubriques":
-			$titre = "> ".$pile_boucles[$id_instance]->row["titre"];
-			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], 0, 0, 0, 0, $titre);
+			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], 0, 0, 0, 0);
 			break;
 
 		case "syndication":
-			$titre = "> ".$pile_boucles[$id_instance]->row["nom_site"];
-			$'.$nom_var.' = retour_forum(0, 0, 0, 0, $contexte["id_syndic"], $titre);
+			$'.$nom_var.' = retour_forum(0, 0, 0, 0, $contexte["id_syndic"]);
 			break;
 
 		default:
-			if ($http_get_vars["titre"]) {
-				$titre = "> ".rawurldecode($http_get_vars["titre"]);
-			}
-			else {
-				$titre = "";
-			}
-			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], $contexte["id_forum"], $contexte["id_article"], $contexte["id_breve"], $contexte["id_syndic"], $titre);
+			$'.$nom_var.' = retour_forum($contexte["id_rubrique"], $contexte["id_forum"], $contexte["id_article"], $contexte["id_breve"], $contexte["id_syndic"]);
 			break;
 		}
 		';
@@ -1429,44 +1418,37 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		if ($forums_publics != "non" AND $contexte["accepter_forum"] != "non") {
 			$lien = substr($request_uri, strrpos($request_uri, "/") + 1);
 			if (!$lien_retour = $http_get_vars["retour"])
-				$lien_retour = rawurlencode($lien);
+				$lien_retour = $lien;
+			$lien_retour = rawurlencode($lien_retour);
 
 			switch ($pile_boucles[$id_instance]->type_requete) {
 			case "articles":
-				$titre = $pile_boucles[$id_instance]->row["titre"];
 				$'.$nom_var.' = "id_article=$contexte[id_article]";
 				break;
 
 			case "breves":
-				$titre = $pile_boucles[$id_instance]->row["titre"];
 				$'.$nom_var.' = "id_breve=$contexte[id_breve]";
 				break;
 
-			case "forums":
-				$titre = $pile_boucles[$id_instance]->row["titre"];
-				$'.$nom_var.' = "id_article=$contexte[id_article]&id_breve=$contexte[id_breve]&id_rubrique=$contexte[id_rubrique]&id_syndic=$contexte[id_syndic]&id_forum=$contexte[id_forum]";
-				break;
-
 			case "rubriques":
-				$titre = $pile_boucles[$id_instance]->row["titre"];
 				$'.$nom_var.' = "id_rubrique=$contexte[id_rubrique]";
 				break;
 
 			case "syndication":
-				$titre = $pile_boucles[$id_instance]->row["nom_site"];
 				$'.$nom_var.' = "id_syndic=$contexte[id_syndic]";
 				break;
 
-
+			case "forums":
 			default:
-				$titre = "";
-				$'.$nom_var.' = "id_article=$contexte[id_article]&id_breve=$contexte[id_breve]&id_rubrique=$contexte[id_rubrique]&id_syndic=$contexte[id_syndic]&id_forum=$contexte[id_forum]";
+				$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
+				while (list(,$champ) = each ($liste_champs)) {
+					if ($contexte[$champ]) $element[] = "$champ=$contexte[$champ]";
+				}
+				$'.$nom_var.' = join("&",$element);
 				break;
+
 			}
-			if ($http_get_vars["titre"]) {
-				$titre = "> ".rawurldecode($http_get_vars["titre"]);
-			}
-			$'.$nom_var.' .= "&titre=".rawurlencode(substr($titre, 0, 25))."&retour=$lien_retour";
+			$'.$nom_var.' .= "&retour=$lien_retour";
 		}
 		else {
 			$'.$nom_var.' = "";
