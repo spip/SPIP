@@ -217,7 +217,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
 
 		$traiter_math = "image";
-		$traiter_math = "mathml";
+		//$traiter_math = "mathml";
 		
 		if ($traiter_math == "image") {
 			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {

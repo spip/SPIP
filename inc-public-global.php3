@@ -106,11 +106,6 @@ if ($ajout_forum) {
 	ajout_forum();
 }
 
-if ($xhtml){
-	include_ecrire('inc_tidy.php');
-	if (version_tidy() > 0) ob_start("xhtml");
-}
-
 if (!$use_cache) {
 	$lastmodified = time();
 	if (($lastmodified - lire_meta('date_purge_cache')) > 3600) {
@@ -155,6 +150,10 @@ if (!$use_cache) {
 		$page = calculer_page_globale($fond);
 		$timer_b = explode(" ", microtime());
 		if ($page) {
+			if ($xhtml) {
+				include_ecrire("inc_tidy.php");
+				$page = xhtml($page);
+			}
 			$timer = ceil(1000 * ($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
 			$taille = ceil(strlen($page) / 1024);
 			spip_log("calcul ($timer ms): $chemin_cache ($taille ko, delai: $delais s)");
@@ -202,11 +201,22 @@ else {
 $flag_preserver |= $headers_only;	// ne pas se fatiguer a envoyer des donnees
 if (!$flag_preserver) {
 	if ($xhtml) {
+		// Si Mozilla et tidy actif, passer en "application/xhtml+xml"
+		// extremement risque: Mozilla passe en mode debugueur strict
+		// mais permet d'afficher du MathML directement dans le texte
+		// (et sauf erreur, c'est la bonne facon de declarer du xhtml)
+		include_ecrire("inc_tidy.php");
 		verif_butineur();
-		if ($browser_name == "MSIE")
+		if (version_tidy() > 0) {		
+			if ($browser_name == "MSIE")
+				@Header("Content-Type: text/html; charset=".lire_meta('charset'));
+			else 
+				@Header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+
+			echo '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
+		} else {
 			@Header("Content-Type: text/html; charset=".lire_meta('charset'));
-		else 
-			@Header("Content-Type: application/xhtml+xml; charset=".lire_meta('charset'));
+		}
 	} else {
 		@Header("Content-Type: text/html; charset=".lire_meta('charset'));
 	}
@@ -228,12 +238,6 @@ else if (!$flag_preserver) {
 // suite et fin mots en rouge
 if ($var_recherche)
 	fin_surligne($var_recherche, $mode_surligne);
-
-
-if ($xhtml) {
-	include_ecrire('inc_tidy.php');
-	if (version_tidy() > 0)	ob_end_flush();
-}
 
 
 // nettoie
