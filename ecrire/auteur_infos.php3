@@ -73,6 +73,7 @@ unset($auteur);
 
 if ($id_auteur) {
 	$auteur = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur"));
+	$new = false;	// eviter hack
 } else if ($new == 'oui') {	// creation
 	$auteur['nom'] = 'Nouvel auteur';
 	$auteur['statut'] = '1comite';
@@ -288,9 +289,22 @@ fin_cadre_relief();
 // accessibles seulement aux admins non restreints et l'auteur lui-meme
 //
 
-$edit_login = ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND $auteur['source'] == 'spip');
-$edit_pass = ((($connect_statut == "0minirezo" AND $connect_toutes_rubriques) OR $connect_id_auteur == $id_auteur)
-	AND $auteur['source'] == 'spip');
+if (!$new AND ($auteur['source'] != 'spip')) {
+	$edit_login = false;
+	$edit_pass = false;
+}
+else if (($connect_statut == "0minirezo") AND $connect_toutes_rubriques) {
+	$edit_login = true;
+	$edit_pass = true;
+}
+else if ($connect_id_auteur == $id_auteur) {
+	$edit_login = false;
+	$edit_pass = true;
+}
+else {
+	$edit_login = false;
+	$edit_pass = false;
+}
 
 debut_cadre_relief("base-24.gif");
 
