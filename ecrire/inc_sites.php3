@@ -87,6 +87,7 @@ function recuperer_page($url) {
 
 
 function transcoder_page($texte) {
+	include_ecrire('inc_charsets.php3');
 	// Si le backend precise son charset et que celui-ci est connu de SPIP,
 	// decoder puis recoder
 	if (eregi('<\\?xml[[:space:]][^>]*(utf-8)', $texte, $regs)) {
