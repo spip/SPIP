@@ -11,7 +11,7 @@ if ($connect_statut != '0minirezo') {
 
 
 header("Content-type: image/svg+xml");
-echo "<?xml version=\"1.0\" standalone=\"no\"?>";
+echo "<?xml version=\"1.0\" standalone=\"no\"?>\n";
 
 ?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" 
@@ -28,12 +28,17 @@ stop-opacity:1"/>
 </linearGradient>
 </defs>
 <?php
-	echo "<defs>";
-	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">';
-	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>';
-	echo '<stop offset="100%" style="stop-color:'.$couleur_foncee.'; stop-opacity:1"/>';
-	echo '</linearGradient>';
-	echo '</defs>';
+	echo "<defs>\n";
+	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">\n';
+	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>\n';
+	echo '<stop offset="100%" style="stop-color:'.$couleur_foncee.'; stop-opacity:1"/>\n';
+	echo '</linearGradient>\n';
+	echo '</defs>\n';
+	
+	echo "<style type='text/css'>";
+	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
+	echo ".trait {stroke:#666666;stroke-width:1;}\n";
+	echo "</style>";
 
 
 
@@ -112,14 +117,14 @@ stop-opacity:1"/>
 		}
 
 
-		echo "<line x1='0' y1='75' x2='".($largeur*$nb_jours)."' y2='75' style='stroke:#999999;stroke-width:1'/>";
-		echo "<line x1='0' y1='150' x2='".($largeur*$nb_jours)."' y2='150' style='stroke:#999999;stroke-width:1'/>";
-		echo "<line x1='0' y1='225' x2='".($largeur*$nb_jours)."' y2='225' style='stroke:#999999;stroke-width:1'/>";
+		echo "<line x1='0' y1='75' x2='".($largeur*$nb_jours)."' y2='75' style='stroke:#999999;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='150' x2='".($largeur*$nb_jours)."' y2='150' style='stroke:#999999;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='225' x2='".($largeur*$nb_jours)."' y2='225' style='stroke:#999999;stroke-width:1'/>\n";
 		
-		echo "<line x1='0' y1='37' x2='".($largeur*$nb_jours)."' y2='37' style='stroke:#eeeeee;stroke-width:1'/>";
-		echo "<line x1='0' y1='112' x2='".($largeur*$nb_jours)."' y2='112' style='stroke:#eeeeee;stroke-width:1'/>";
-		echo "<line x1='0' y1='187' x2='".($largeur*$nb_jours)."' y2='187' style='stroke:#eeeeee;stroke-width:1'/>";
-		echo "<line x1='0' y1='262' x2='".($largeur*$nb_jours)."' y2='262' style='stroke:#eeeeee;stroke-width:1'/>";
+		echo "<line x1='0' y1='37' x2='".($largeur*$nb_jours)."' y2='37' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='112' x2='".($largeur*$nb_jours)."' y2='112' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='187' x2='".($largeur*$nb_jours)."' y2='187' style='stroke:#eeeeee;stroke-width:1'/>\n";
+		echo "<line x1='0' y1='262' x2='".($largeur*$nb_jours)."' y2='262' style='stroke:#eeeeee;stroke-width:1'/>\n";
 
 
 		// Presentation graphique
@@ -161,8 +166,8 @@ stop-opacity:1"/>
 
 
 					if ($hauteur_moyenne_prec > 0) {
-						echo "<polygon points = '".(($n-2)*$largeur+round($largeur/2)).",300 ".(($n-2)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne_prec)." ".(($n-1)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne)."  ".(($n-1)*$largeur+round($largeur/2)).",300' style='fill: #aaaaaa; fill-opacity: 0.2;' />";
-						echo "<line x1='".(($n-2)*$largeur+round($largeur/2))."' y1='".(300-$hauteur_moyenne_prec)."' x2='".(($n-1)*$largeur+round($largeur/2))."' y2='".(300-$hauteur_moyenne)."' style='stroke:#666666;stroke-width:1'/>";
+						echo "<polygon points = '".(($n-2)*$largeur+round($largeur/2)).",300 ".(($n-2)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne_prec)." ".(($n-1)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne)."  ".(($n-1)*$largeur+round($largeur/2)).",300' class='gris' />\n";
+						echo "<line x1='".(($n-2)*$largeur+round($largeur/2))."' y1='".(300-$hauteur_moyenne_prec)."' x2='".(($n-1)*$largeur+round($largeur/2))."' y2='".(300-$hauteur_moyenne)."' class='trait' />\n";
 					}
 
 					$hauteur_moyenne_prec = $hauteur_moyenne;
@@ -206,19 +211,19 @@ stop-opacity:1"/>
 
 
 
-			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='$hauteur' style='fill:$fill'/>	";	
-			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='1' style='fill:$couleur_foncee;'/>	";	
+			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='$hauteur' style='fill:$fill'/>\n";	
+			echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur)."' width='$largeur' height='1' style='fill:$couleur_foncee;'/>\n";	
 
 			if (date("d", $key) == "1") 
-				echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur_moyenne)."' width='1' height='$hauteur_moyenne' style='fill:black;'/>	";	
+				echo "<rect x='".(($n-1)*$largeur)."' y='".(300-$hauteur_moyenne)."' width='1' height='$hauteur_moyenne' style='fill:black;'/>\n";	
 			
 				
 			if ($hauteur_moyenne_prec > 0) {
-				echo "<polygon points = '".(($n-2)*$largeur+round($largeur/2)).",300 ".(($n-2)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne_prec)." ".(($n-1)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne)."  ".(($n-1)*$largeur+round($largeur/2)).",300' style='fill: #aaaaaa; fill-opacity: 0.2;' />";
-				echo "<line x1='".(($n-2)*$largeur+round($largeur/2))."' y1='".(300-$hauteur_moyenne_prec)."' x2='".(($n-1)*$largeur+round($largeur/2))."' y2='".(300-$hauteur_moyenne)."' style='stroke:#666666;stroke-width:1'/>";
+				echo "<polygon points = '".(($n-2)*$largeur+round($largeur/2)).",300 ".(($n-2)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne_prec)." ".(($n-1)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne)."  ".(($n-1)*$largeur+round($largeur/2)).",300' class='gris' />\n";
+				echo "<line x1='".(($n-2)*$largeur+round($largeur/2))."' y1='".(300-$hauteur_moyenne_prec)."' x2='".(($n-1)*$largeur+round($largeur/2))."' y2='".(300-$hauteur_moyenne)."' class='trait' />\n";
 			} else {
-				echo "<polygon points = '0,300 0,".(300-$hauteur_moyenne)." ".(($n-1)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne)."  ".(($n-1)*$largeur+round($largeur/2)).",300' style='fill: #aaaaaa; fill-opacity: 0.2;' />";				
-				echo "<line x1='0' y1='".(300-$hauteur_moyenne)."' x2='".(($n-1)*$largeur+round($largeur/2))."' y2='".(300-$hauteur_moyenne)."' style='stroke:#666666;stroke-width:1'/>";
+				echo "<polygon points = '0,300 0,".(300-$hauteur_moyenne)." ".(($n-1)*$largeur+round($largeur/2)).",".(300-$hauteur_moyenne)."  ".(($n-1)*$largeur+round($largeur/2)).",300' class='gris' />\n";
+				echo "<line x1='0' y1='".(300-$hauteur_moyenne)."' x2='".(($n-1)*$largeur+round($largeur/2))."' y2='".(300-$hauteur_moyenne)."' class='trait' />\n";
 			}
 	
 			$hauteur_moyenne_prec = $hauteur_moyenne;
@@ -229,23 +234,23 @@ stop-opacity:1"/>
 		}
 
 
-		echo "<rect x='0' y='0' width='".($largeur*$nb_jours)."' height='300' style='stroke-width: 1px; stroke: black; fill: blue; fill-opacity: 0; '/>	";	
+		echo "<rect x='0' y='0' width='".($largeur*$nb_jours)."' height='300' style='stroke-width: 1px; stroke: black; fill: blue; fill-opacity: 0; '/>\n";	
 
 		echo " <text x='".(($largeur*$nb_jours)+3)."' y='300' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo "0";
-		echo "</text>";
+		echo "</text>\n";
 		echo " <text x='".(($largeur*$nb_jours)+3)."' y='228' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round($maxgraph/4);
-		echo "</text>";
+		echo "</text>\n";
 		echo " <text x='".(($largeur*$nb_jours)+3)."' y='153' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round($maxgraph/2);
-		echo "</text>";
+		echo "</text>\n";
 		echo " <text x='".(($largeur*$nb_jours)+3)."' y='78' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round(3*$maxgraph/4);
-		echo "</text>";
+		echo "</text>\n";
 		echo " <text x='".(($largeur*$nb_jours)+3)."' y='8' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 		echo round($maxgraph);
-		echo "</text>";
+		echo "</text>\n";
 
 		$gauche_prec = -50;
 		for ($jour = $date_debut; $jour <= $date_today; $jour = $jour + (24*3600)) {
@@ -261,10 +266,10 @@ stop-opacity:1"/>
 				if ($gauche - $gauche_prec >= 40 OR date("m", $jour) == 1) {									
 					//echo "<div class='arial0' style='border-$spip_lang_left: 1px solid black; padding-$spip_lang_left: 2px; padding-top: 3px; position: absolute; $spip_lang_left: ".$gauche."px; top: -1px;'>".$afficher."</div>";
 
-					echo "<rect x='$gauche' y='300' width='1' height='10' style='fill: black;'/>";
+					echo "<rect x='$gauche' y='300' width='1' height='10' style='fill: black;'/>\n";
 					echo " <text x='".($gauche+3)."' y='308' font-family='Verdana, helvetica, sans-serif, sans' font-size='8' fill='black' >";
 					echo filtrer_ical($afficher);
-					echo "</text>";
+					echo "</text>\n";
 
 
 					$gauche_prec = $gauche;
