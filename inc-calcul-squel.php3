@@ -1085,7 +1085,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	global $boucles;
 	global $champs;
 	global $flag_ob;
-	global $flag_preg_replace;
+	global $flag_pcre;
 
 	$idb = $id_boucle;
 
@@ -1611,14 +1611,14 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	// Debut et fin de surlignage auto des mots de la recherche
 	//
 	case 'DEBUT_SURLIGNE':
-		if ($flag_ob AND $flag_preg_replace) {
+		if ($flag_ob AND $flag_pcre) {
 			$milieu = '
 				$'.$nom_var.' = "<"."?php if (\$var_recherche) { \$mode_surligne = debut_surligne(\$var_recherche, \$mode_surligne); } ?".">";
 			';
 		}
 		break;
 	case 'FIN_SURLIGNE':
-		if ($flag_ob AND $flag_preg_replace) {
+		if ($flag_ob AND $flag_pcre) {
 			$milieu = '
 				$'.$nom_var.' = "<"."?php if (\$var_recherche) { \$mode_surligne = fin_surligne(\$var_recherche, \$mode_surligne); } ?".">";
 			';

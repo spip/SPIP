@@ -111,9 +111,9 @@ function vignette_par_defaut($type_extension) {
 
 // ereg_ ou preg_ ?
 function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
-	global $flag_preg_replace;
+	global $flag_pcre;
 
-	if ($flag_preg_replace) return preg_replace($cherche_tableau, $remplace_tableau, $texte);
+	if ($flag_pcre) return preg_replace($cherche_tableau, $remplace_tableau, $texte);
 
 	$n = count($cherche_tableau);
 
@@ -134,9 +134,9 @@ function nettoyer_chapo($chapo){
 
 // Mise de cote des echappements
 function echappe_html($letexte,$source) {
-	global $flag_preg_replace;
+	global $flag_pcre;
 
-	if ($flag_preg_replace) {	// beaucoup plus rapide si on a pcre
+	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
 		$regexp_echap_cadre = "<cadre>((.*?))<\/cadre>";
@@ -148,8 +148,8 @@ function echappe_html($letexte,$source) {
 		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)";
 	}
 
-	while (($flag_preg_replace && preg_match($regexp_echap, $letexte, $regs))
-		|| (!$flag_preg_replace && eregi($regexp_echap, $letexte, $regs))) {
+	while (($flag_pcre && preg_match($regexp_echap, $letexte, $regs))
+		|| (!$flag_pcre && eregi($regexp_echap, $letexte, $regs))) {
 		$num_echap++;
 
 		if ($regs[1]) {
@@ -537,7 +537,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	global $ferme_ref;
 	global $ouvre_note;
 	global $ferme_note;
-	global $flag_strpos_3, $flag_preg_replace, $flag_str_replace;
+	global $flag_strpos_3, $flag_pcre, $flag_str_replace;
 
 	// Harmoniser les retours chariot
 	$letexte = ereg_replace ("\r\n?", "\n",$letexte);
@@ -675,7 +675,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = traiter_listes($letexte);
 
 	// autres raccourcis
-	if ($flag_str_replace && !$flag_preg_replace) {
+	if ($flag_str_replace && !$flag_pcre) {
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
 		$letexte = ereg_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
