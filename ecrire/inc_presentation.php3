@@ -773,7 +773,6 @@ afficher_script_layer();
 	if ($spip_survol=="off"){
 
 	?>	
-		
 		<table cellpadding=0 cellspacing=0 border=0>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
@@ -785,19 +784,16 @@ afficher_script_layer();
 		</td>
 		<td valign="top">
 		<table cellpadding="0" cellspacing="0" border="0">
-		<tr><td>
-		<?php
+		<tr><td><?php
 		global $articles_mots;
 		if ($articles_mots != "non"){
-		?>
-		<a href="mots_tous.php3" onMouseOver="fond.src='IMG2/cles-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/cles-off.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"></A>
-		<?php
+		?><a href="mots_tous.php3" onMouseOver="fond.src='IMG2/cles-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/cles-off.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"></A><?php
 	}else{
 	?><img src="IMG2/cles-non.gif" name="cles" alt="Les mots-cl&eacute;s" width="78" height="58" border="0"><?php
 	}
 	?></td></tr>
 		<tr><td><?php global $activer_breves;
-		 if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="fond.src='IMG2/breves-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
+		if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="fond.src='IMG2/breves-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
 		</table></td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
@@ -822,12 +818,11 @@ afficher_script_layer();
 	?><A HREF="configuration.php3" onMouseOver="fond.src='IMG2/config-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/config-off.gif" name="config" alt="Configurer" width="44" height="58" border="0"></A><A HREF="admin_tech.php3" onMouseOver="fond.src='IMG2/sauvegarde-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/sauvegarde-off.gif" name="sauvegarde" alt="Sauvegarde de la base" width="53" height="58" border="0"></A><?php
 	}else{
 		echo "<img src='IMG2/haut-vide.gif' alt='' width='97' height='58' border='0'>";
-	}?>
-	<?php
+	}?><?php
 		}else{
 		?><img src="IMG2/haut-vide.gif" alt="" width="198" height="58" border="0"><?php
 		}
-		?><a href="forum.php3" onMouseOver="fond.src='IMG2/forum-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/forum-off.gif" name="forum" alt="Forum interne" width="57" height="58" border="0"></A><A HREF="#" onMouseDown="window.open('aide_index.php3','myWindow','scrollbars=yes,resizable=yes,width=550')" onMouseOver="fond.src='IMG2/aide-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/aide-off.gif" name="aide" alt="A l'aide" width="50" height="58" border="0"></A></TD></TR>
+		?><a href="forum.php3" onMouseOver="fond.src='IMG2/forum-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/forum-off.gif" name="forum" alt="Forum interne" width="57" height="58" border="0"></a><a href="javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);" onMouseOver="fond.src='IMG2/aide-texte.gif'" onMouseOut="fond.src='IMG2/rien.gif'"><img src="IMG2/aide-off.gif" name="aide" alt="A l'aide" width="50" height="58" border="0"></a></td></tr>
 		<tr><?php
 		if ($options != 'avancees'){
 			echo "<td background='IMG2/rond-vert-simp.gif'>";
@@ -880,7 +875,7 @@ afficher_script_layer();
 	}
 	?></td></tr>
 		<tr><td><?php global $activer_breves;
-		 if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="breves.src='IMG2/breves-on.gif'; fond.src='IMG2/breves-texte.gif'" onMouseOut="breves.src='IMG2/breves-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
+		if ($activer_breves!="non"){ ?><A HREF="breves.php3" onMouseOver="breves.src='IMG2/breves-on.gif'; fond.src='IMG2/breves-texte.gif'" onMouseOut="breves.src='IMG2/breves-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/breves-off.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"></A><?}else{ ?><img src="IMG2/breves-non.gif" name="breves" alt="Les br&egrave;ves" width="78" height="45" border="0"><?} ?></TD></TR>
 		</table></td>
 		<td valign="top">
 		<table cellpadding=0 cellspacing=0 border=0>
@@ -905,14 +900,12 @@ afficher_script_layer();
 	?><a href="configuration.php3" onMouseOver="config.src='IMG2/config-on.gif'; fond.src='IMG2/config-texte.gif'" onMouseOut="config.src='IMG2/config-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/config-off.gif" name="config" alt="Configurer" width="44" height="58" border="0"></A><A HREF="admin_tech.php3" onMouseOver="sauvegarde.src='IMG2/sauvegarde-on.gif'; fond.src='IMG2/sauvegarde-texte.gif'" onMouseOut="sauvegarde.src='IMG2/sauvegarde-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/sauvegarde-off.gif" name="sauvegarde" alt="Sauvegarde de la base" width="53" height="58" border="0"></A><?php
 	}else{
 		echo "<img src='IMG2/haut-vide.gif' alt='' width='97' height='58' border='0'>";
-	}
-	
-	?><?php
+	}?><?php
 		}else{
 		?><img src="IMG2/haut-vide.gif" alt="" width="198" height="58" border="0"><?php
 		}
-		?><a href="forum.php3" onMouseOver="forum.src='IMG2/forum-on.gif'; fond.src='IMG2/forum-texte.gif'" onMouseOut="forum.src='IMG2/forum-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/forum-off.gif" name="forum" alt="Forum interne" width="57" height="58" border="0"></A><A HREF="#" onMouseDown="window.open('aide_index.php3','myWindow','scrollbars=yes,resizable=yes,width=550')" onMouseOver="aide.src='IMG2/aide-on.gif'; fond.src='IMG2/aide-texte.gif'" onMouseOut="aide.src='IMG2/aide-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/aide-off.gif" name="aide" alt="A l'aide" width="50" height="58" border="0"></A></TD></TR>
-		<TR><?php
+		?><a href="forum.php3" onMouseOver="forum.src='IMG2/forum-on.gif'; fond.src='IMG2/forum-texte.gif'" onMouseOut="forum.src='IMG2/forum-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/forum-off.gif" name="forum" alt="Forum interne" width="57" height="58" border="0"></a><a href="javascript:window.open('aide_index.php3', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); void(0);" onMouseOver="aide.src='IMG2/aide-on.gif'; fond.src='IMG2/aide-texte.gif'" onMouseOut="aide.src='IMG2/aide-off.gif'; fond.src='IMG2/rien.gif'"><img src="IMG2/aide-off.gif" name="aide" alt="A l'aide" width="50" height="58" border="0"></a></td></tr>
+		<tr><?php
 		if ($options != 'avancees'){
 			echo "<td background='IMG2/rond-vert-simp.gif'>";
 		}else{
