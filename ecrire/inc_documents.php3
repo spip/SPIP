@@ -563,7 +563,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$link->addVar('doc_supp', $id_vignette);
 					
 					echo "<div style='float: $spip_lang_left'>";		
-					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'>" . http_img_pack('croix-rouge.gif', "border='0'") ."</a>";	
+					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'>" . http_img_pack('croix-rouge.gif', "", "border='0'") ."</a>";	
 					echo "</div>";
 					$vignette_perso = true;
 				
@@ -584,7 +584,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('doc_rotate', $id_document);
 						$link_rot->addVar('vignette_aff', $id_document);
 						$link_rot->addVar('var_rot', -90);
-						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'>" . http_img_pack('tourner-gauche.gif', "border='0'") ."</a>";
+						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-gauche.gif', "border='0'", "tourner-gauche", '', 'bouton_rotation');
 						echo "<br />";
 						$link_rot = $image_link;
 						$link_rot->addVar('redirect', $redirect_url);
@@ -593,7 +593,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('doc_rotate', $id_document);
 						$link_rot->addVar('vignette_aff', $id_document);
 						$link_rot->addVar('var_rot', 90);
-						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'>" . http_img_pack('tourner-droite.gif', "border='0'") ."</a>";
+						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-droite.gif', "border='0'", "tourner-droite", '', 'bouton_rotation');
 						echo "<br />";
 		
 						$link_rot = $image_link;
@@ -603,7 +603,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('doc_rotate', $id_document);
 						$link_rot->addVar('vignette_aff', $id_document);
 						$link_rot->addVar('var_rot', 180);
-						echo "<a href='".$link_rot->getUrl("portfolio")."' class='bouton_rotation'>" . http_img_pack('tourner-180.gif', "border='0'") ."</a>";
+						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-180.gif', "border='0'", "tourner-180", '', 'bouton_rotation');
 						echo "</div>";
 					}
 				}
@@ -818,7 +818,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$link->addVar('doc_supp', $id_vignette);
 					
 					echo "<div style='float: $spip_lang_left'>";		
-					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'>" . http_img_pack('croix-rouge.gif', "border='0'") ."</a>";	
+					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'>" . http_img_pack('croix-rouge.gif', "", "border='0'") ."</a>";	
 					echo "</div>";
 
 				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;

@@ -49,8 +49,7 @@ echo "<tr><td class='serif'>";
 echo "\n<FORM ACTION='export_all.php3' METHOD='get'>";
 
 echo "\n<p align='justify'>";
-
-echo http_img_pack('warning.gif', 'alt="'._T('info_avertissement').'" width="48" height="48" align="right"');
+echo http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
 echo _T('texte_admin_tech_01');
 
 echo "<p>"._T('texte_admin_tech_02');

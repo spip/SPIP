@@ -251,7 +251,7 @@ debut_droite();
 
 if ($echec){
 	debut_cadre_relief();
-	echo http_img_pack("warning.gif", 'alt="'._T('info_avertissement').'" width="48" height="48" align="left"');
+	echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='left'");
 	echo "<font color='red'>$echec <p>"._T('info_recommencer')."</font>";
 	fin_cadre_relief();
 	echo "<p>";
@@ -352,7 +352,7 @@ debut_cadre_relief("base-24.gif");
 // Avertissement en cas de modifs de ses propres donnees
 if (($edit_login OR $edit_pass) AND $connect_id_auteur == $id_auteur) {
 	debut_cadre_enfonce();
-	echo http_img_pack("warning.gif", 'alt="'._T('info_avertissement').'" width="48" height="48" align="right"');
+	echo http_img_pack("warning.gif", _T('info_avertissement'), "width='48' height='48' align='right'");
 	echo "<b>"._T('texte_login_precaution')."</b>\n";
 	fin_cadre_enfonce();
 	echo "<p>";

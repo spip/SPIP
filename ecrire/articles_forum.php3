@@ -50,7 +50,7 @@ echo "<td>";
 	icone(_T('icone_retour'), "articles.php3?id_article=$id_article", "article-24.gif", "rien.gif");
 
 echo "</td>";
-echo "<td>" . http_img_pack('rien.gif', "width=10") ."</td>\n";
+echo "<td>" . http_img_pack('rien.gif', "", "width='10'") ."</td>\n";
 echo "<td width='100%'>";
 echo _T('texte_messages_publics');
 gros_titre($titre);
