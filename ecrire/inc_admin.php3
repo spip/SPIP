@@ -12,13 +12,10 @@ function fichier_admin($action) {
 }
 
 function debut_admin($action, $commentaire='') {
-	global $REQUEST_URI;
+	global $clean_link;
 	global $connect_statut;
 
-	if (!$requete_fichier) {
-		$requete_fichier = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
-	}
-	$lien = $requete_fichier;
+	$lien = $clean_link->getUrl();
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_ecrire ("inc_presentation.php3");

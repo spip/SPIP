@@ -142,7 +142,7 @@ if ($new == 'oui'){
 		$link = new Link('sites.php3');
 		$link->addVar('id_rubrique', $id_rubrique);
 		$link->addVar('new', 'oui');
-		$link->addVar('redirect', $this_link->getUrl());
+		$link->addVar('redirect', $clean_link->getUrl());
 		$link->addVar('analyser_site', 'oui');
 		echo $link->getForm();
 		

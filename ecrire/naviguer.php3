@@ -488,7 +488,7 @@ if ($options == "avancees"){
 		$link = new Link('sites_edit.php3');
 		$link->addVar('id_rubrique', $coll);
 		$link->addVar('target', 'sites.php3');
-		$link->addVar('redirect', $this_link->getUrl());
+		$link->addVar('redirect', $clean_link->getUrl());
 	
 		echo "<div align='right'>";
 		icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.gif", "creer.gif");

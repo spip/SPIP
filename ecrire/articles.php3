@@ -23,7 +23,8 @@ if ($id_article==0 AND $new=='oui') {
 	spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
 }
 
-$requete_fichier = "articles.php3?id_article=$id_article";
+$clean_link = new Link("articles.php3?id_article=$id_article");
+
 // Initialiser doublons pour documents (completes par "propre($texte)")
 $id_doublons['documents'] = "0";
 
@@ -1056,7 +1057,7 @@ if (mysql_num_rows($result)) {
 		$ifond = $ifond ^ 1;
 		$couleur = ($ifond) ? '#FFFFFF' : $couleur_claire;
 
-		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur&redirect=".rawurlencode("articles.php3?id_article=$id_article");
+		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur";
 
 		echo "<TR BGCOLOR='$couleur' WIDTH=\"100%\">";
 		echo "<TD WIDTH=23>";

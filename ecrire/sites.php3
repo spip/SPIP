@@ -324,7 +324,7 @@ echo "</td>";
 if ($flag_editable) {
 	$link = new Link('sites_edit.php3');
 	$link->addVar('id_syndic');
-	$link->addVar('target', $this_link->getUrl());
+	$link->addVar('target', $clean_link->getUrl());
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
 	icone("Modifier ce site", $link->getUrl(), "site-24.gif", "edit.gif");

@@ -35,7 +35,7 @@ if ($connect_statut == '0minirezo' OR $proposer_sites > 0) {
 	echo "<div align='right'>";
 	$link = new Link('sites_edit.php3');
 	$link->addVar('target', 'sites.php3');
-	$link->addVar('redirect', $this_link->getUrl());
+	$link->addVar('redirect', $clean_link->getUrl());
 	icone("R&eacute;f&eacute;rencer un nouveau site", $link->getUrl(), "site-24.gif", "creer.gif");
 	echo "</div>";
 }

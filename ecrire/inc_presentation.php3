@@ -1312,7 +1312,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_statut;
 	global $connect_activer_messagerie;
 	global $connect_toutes_rubriques;
-	global $REQUEST_URI;
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display, $spip_ecran;
 	$activer_messagerie = lire_meta("activer_messagerie");
@@ -1613,9 +1612,7 @@ function fin_cadre_formulaire(){
 
 function debut_gauche($rubrique = "asuivre") {
 	global $connect_statut, $cookie_admin;
-	global $REQUEST_URI;
 	global $options;
-	global $requete_fichier;
 	global $connect_id_auteur;
 	global $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
@@ -1628,7 +1625,7 @@ function debut_gauche($rubrique = "asuivre") {
 		$largeur_ecran = 974;
 		
 		// Si edition de texte, formulaires larges
-		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $REQUEST_URI)) {
+		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $GLOBALS['REQUEST_URI'])) {
 			$flag_centre_large = true;
 		}
 		
@@ -1740,9 +1737,7 @@ function creer_colonne_droite(){
 	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
 	global $connect_statut, $cookie_admin;
-	global $REQUEST_URI;
 	global $options;
-	global $requete_fichier;
 	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
 
@@ -1954,7 +1949,7 @@ function fin_html() {
 }
 
 
-function fin_page() {
+function fin_page($credits='') {
 	global $spip_version_affichee;
 	global $connect_id_auteur;
 
@@ -1970,9 +1965,8 @@ debut_grand_cadre();
 est un logiciel libre distribu&eacute; <a href='copyright_fr.html'>sous licence GPL.</a>
 
 <?php
-if (ereg("index\.php3", $GLOBALS['REQUEST_URI']) || !ereg("\.php3", $GLOBALS['REQUEST_URI'])) {
+if (ereg("jimmac", $credits))
 	echo "<br>Les icones de l'interface sont de <a href='http://jimmac.musichall.cz/'>Jakub 'Jimmac' Steiner</a>.";
-}
 ?>
 <p>
 </font></div>

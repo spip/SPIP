@@ -230,7 +230,7 @@ if ($meta["debut_restauration"]) {
 	debut_boite_alerte();
 	echo "<font FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 	fin_boite_alerte();
-	fin_page();
+	fin_page("jimmac");
 	echo "</HTML><font color='white'>\n<!--";
 	@flush();
 	$gz = $flag_gz;
@@ -421,7 +421,7 @@ if ($options == 'avancees') {
 }
 
 
-fin_page();
+fin_page("jimmac");
 
 
 //
