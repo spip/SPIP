@@ -7,7 +7,9 @@ include_local ("inc_presentation.php3");
 include_local ("inc_session.php3");
 
 $nom_site = lire_meta('nom_site');
+if (!$nom_site) $nom_site = 'spip';
 $url_site = lire_meta('adresse_site');
+if (!$url_site) $url_site = '../index.php3';
 
 function ask_php_auth($text_failure) {
 	@Header("WWW-Authenticate: Basic realm=\"administrateur\"");
