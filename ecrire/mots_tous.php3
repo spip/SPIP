@@ -2,12 +2,6 @@
 
 include ("inc.php3");
 
-
-	// C'est pas comme ca qu'on fait proprement...
-	$query = "DELETE FROM spip_mots WHERE titre=''";
-	$result = spip_query($query);
-
-
 if ($conf_mot>0) {
 	$query = "SELECT * FROM spip_mots WHERE id_mot='$conf_mot'";
 	$result = spip_query($query);
@@ -83,11 +77,10 @@ if ($connect_statut == '0minirezo') {
 debut_page("Mots-cl&eacute;s", "documents", "mots");
 debut_gauche();
 
-echo aide ("mots");
-
 debut_droite();
 
-
+gros_titre("Les mots-cl&eacute;s");
+echo typo("Cr&eacute;ez et configurez ici les mots-cl&eacute;s du site") . aide ("mots") . "<br><br>";
 
 /////
 
