@@ -1214,7 +1214,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		else $largeur = 70;
 		$alt = " alt=\" \"";
 	}
-	if (strlen($aide) > 0) $largeur += 50;
+	if ($aide) $largeur += 50;
 	if ($largeur) $width = "width='$largeur'";
 
 	if (!$menu_accesskey) $menu_accesskey = 1;
@@ -1228,7 +1228,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
-	if (!eregi("^javascript:",$lien)) {
+	if (!eregi("^javascript:",$lien) && !$aide) {
 		$onClick = "onClick=\"document.location='$lien'\"";
 	}
 
