@@ -855,10 +855,12 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_numero_article' => 'ARTICLE NUM&Eacute;RO&nbsp;:',
 'info_obligatoire_02' => '[Obligatoire]',
+'info_option_accepter_visiteurs' => 'Accepter l\'inscription de visiteurs du site public',
 'info_option_email' => 'Lorsqu\'un visiteur du site poste un nouveau message dans le forum
 		associ&eacute; &agrave; un article, les auteurs de l\'article peuvent &ecirc;tre
 		pr&eacute;venus de ce message par e-mail. Souhaitez-vous utiliser cette option&nbsp;?',
 'info_option_faire_suivre' => 'Faire suivre les messages des forums aux auteurs des articles',
+'info_option_ne_pas_accepter_visiteurs' => 'Refuser l\'inscription des visiteurs',
 'info_option_ne_pas_faire_suivre' => 'Ne pas faire suivre les messages des forums',
 'info_options_avancees' => 'OPTIONS AVANC&Eacute;ES',
 'info_ortho_activer' => 'Activer le v&eacute;rificateur d\'orthographe',
@@ -912,6 +914,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_publie_2' => 'Article publi&eacute;
 --------------',
 'info_publies' => 'Vos articles publi&eacute;s en ligne',
+'info_question_accepter_visiteurs' => 'Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
 'info_question_gerer_statistiques' => 'Votre site doit-il g&eacute;rer les statistiques des visites&nbsp;?',
 'info_question_inscription_nouveaux_redacteurs' => 'Acceptez-vous les inscriptions de nouveaux r&eacute;dacteurs &agrave;
 		partir du site public&nbsp;? Si vous acceptez, les visiteurs pourront s\'inscrire
@@ -1769,7 +1772,8 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 
 
 // V
-'version_initiale' => 'Version initiale'
+'version_initiale' => 'Version initiale',
+'visiteur' => ''
 
 );
 
