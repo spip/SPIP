@@ -2,6 +2,7 @@
 
 include ("ecrire/inc_version.php3");
 
+include_ecrire("inc_filtres.php3");
 include_ecrire("inc_index.php3");
 include_ecrire("inc_meta.php3");
 include_ecrire("inc_admin.php3");
