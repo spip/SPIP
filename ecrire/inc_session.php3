@@ -178,8 +178,8 @@ function zap_sessions ($id_auteur, $zap) {
 // reconnaitre un utilisateur authentifie en php_auth
 //
 function verifier_php_auth() {
-	global $PHP_AUTH_USER, $PHP_AUTH_PW;
-	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
+	global $PHP_AUTH_USER, $PHP_AUTH_PW, $ignore_auth_http;
+	if ($PHP_AUTH_USER && $PHP_AUTH_PW && !$ignore_auth_http) {
 		$login = addslashes($PHP_AUTH_USER);
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='$login'");
 		$row = spip_fetch_array($result);

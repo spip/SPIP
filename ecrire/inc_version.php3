@@ -125,9 +125,15 @@ $test_i18n = false;
 $champs_extra = false;
 $champs_extra_proposes = false;
 
+// faut-il ignorer l'authentification par auth http/remote_user ?
+// cela permet d'avoir un SPIP sous .htaccess (ignore_remote_user),
+// mais aussi de fonctionner sur des serveurs debiles se
+// bloquant sur PHP_AUTH_USER=root (ignore_auth_http)
+$ignore_auth_http = false;
+$ignore_remote_user = false;
 
 //
-// 	*** Fin du parametrage ***
+// *** Fin du parametrage ***
 //
 
 

@@ -65,7 +65,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		$echec_cookie = ($GLOBALS['spip_session'] != 'test_echec_cookie');
 
 	global $auteur_session;
-	global $spip_session, $PHP_AUTH_USER;
+	global $spip_session, $PHP_AUTH_USER, $ignore_auth_http;
 	global $spip_admin;
 	global $php_module;
 	global $clean_link;
@@ -206,7 +206,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	// Gerer le focus
 	echo "<script type=\"text/javascript\"><!--\n" . $js_focus . "\n//--></script>\n";
 
-	if ($echec_cookie == "oui" AND $php_module) {
+	if ($echec_cookie == "oui" AND $php_module AND !$ignore_auth_http) {
 		echo "<form action='spip_cookie.php3' method='get'>";
 		echo "<fieldset>\n<p>";
 		echo _T('login_preferez_refuser')." \n";
