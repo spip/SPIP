@@ -372,7 +372,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$id_auteur = $row['id_auteur'];
 					$nom_auteur = typo($row['nom']);
 					$auteur_messagerie = $row['messagerie'];
-					
+
 					$les_auteurs .= ", $nom_auteur";
 					if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non" AND $activer_messagerie != "non") {
 						$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
@@ -387,17 +387,19 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			else if ($statut == 'prop') $puce = 'orange';
 			else if ($statut == 'refuse') $puce = 'rouge';
 			else if ($statut == 'poubelle') $puce = 'poubelle';
-			if (acces_restreint_rubrique($id_rubrique))
+			/*if (acces_restreint_rubrique($id_rubrique))
 				$puce = "puce-$puce-anim.gif";
-			else
+			else*/
 				$puce = "puce-$puce.gif";
 
 			$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
+			if (acces_restreint_rubrique($id_rubrique))
+				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cet article'>&nbsp;";
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif>".typo($titre)."</a>";
 			if ($petition) $s .= " <Font size=1 color='red'>P&Eacute;TITION</font>";
 
 			$vals[] = $s;
-		
+
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
 			$s = affdate($date);
@@ -420,7 +422,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$styles = array('arial2', 'arial1');
 		}
 		afficher_liste($largeurs, $table, $styles);
-		
+
 		echo "</table></td></tr></table>";
 		if ($afficher_cadre) fin_cadre_relief();
 
@@ -1485,7 +1487,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	// grand ecran
 	echo "<td align='center'>";
 	$lien = $clean_link;
-			
+
 	if ($spip_ecran == "large") {
 		$lien->addVar('set_ecran', 'etroit');
 		echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Petit &eacute;cran' alt='Petit &eacute;cran' width='23' height='19' border='0'></a>";

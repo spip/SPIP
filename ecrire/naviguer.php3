@@ -20,7 +20,7 @@ function enfant($collection){
 		$id_parent=$row['id_parent'];
 		$titre=$row['titre'];
 		$descriptif=propre($row['descriptif']);
-	
+
 		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
 		$les_sous_enfants = sous_enfant($id_rubrique);
 
@@ -32,11 +32,10 @@ function enfant($collection){
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants.= $bouton_layer;
 		}
-		if  (acces_restreint_rubrique($id_rubrique)){
-			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='red'>".typo($titre)."</font></A></B>";
-		}else{
-			$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
-		}
+		if  (acces_restreint_rubrique($id_rubrique))
+			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique et ses sous-rubriques'> ";
+		
+		$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
 		if (strlen($descriptif)>1)
 			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
 

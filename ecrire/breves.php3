@@ -33,12 +33,11 @@ function enfant($leparent){
 		debut_cadre_enfonce();
 
 		echo "<a href='naviguer.php3?coll=$id_rubrique'>";
-		if  (acces_restreint_rubrique($id_rubrique))
-			echo "<IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0>";
-		else
-			echo "<IMG SRC='img_pack/secteur-24.gif' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'>";
+		echo "<IMG SRC='img_pack/secteur-24.gif' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'>";
 		echo "</a>";
-		
+		if (acces_restreint_rubrique($id_rubrique))
+			echo " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='Vous pouvez administrer cette rubrique et ses sous-rubriques' border='0' align='middle'>";
+
 		echo " <FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
 		echo "<B>$titre</B></FONT>\n";
 		echo aide ("breves");
@@ -54,8 +53,8 @@ function enfant($leparent){
 		echo "<div align='right'>";
 		icone("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.gif", "creer.gif");
 		echo "</div>";
-	
-		fin_cadre_enfonce();	
+
+		fin_cadre_enfonce();
 
 	}
 }
