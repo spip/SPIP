@@ -44,7 +44,7 @@ function ecrire_stats() {
 		$url_site_spip = lire_meta('adresse_site');
 		$url_site_spip = eregi_replace("^((https?|ftp)://)?(www\.)?", "", $url_site_spip);
 		$log_referer = $GLOBALS['HTTP_REFERER'];
-		if (strpos('-'.strtolower($log_referer), strtolower($url_site_spip)) AND !$GLOBALS['var_recherche']) $log_referer = "";
+		if (($url_site_spip<>'') AND strpos('-'.strtolower($log_referer), strtolower($url_site_spip)) AND !$GLOBALS['var_recherche']) $log_referer = "";
 		if ($log_referer) {
 			$referer_md5 = '0x'.substr(md5($log_referer), 0, 16);
 			ereg ("/(www\.)?([^/]+)/", $log_referer, $match);
