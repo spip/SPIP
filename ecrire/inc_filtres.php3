@@ -370,7 +370,8 @@ function PtoBR($texte){
 // Majuscules y compris accents, en HTML
 function majuscules($texte) {
 	if (lire_meta('charset') != 'iso-8859-1')
-		return $texte;
+		return "<div style='text-transform: uppercase'>$texte</div>";
+
 	$suite = htmlentities($texte);
 	$suite = ereg_replace('&amp;', '&', $suite);
 	$suite = ereg_replace('&lt;', '<', $suite);
