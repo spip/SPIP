@@ -239,9 +239,9 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	if ($articles_versions) {
 		include("lab_revisions.php");
 		if  ($new != 'oui') {
-			spip_log("version initiale de l'article $id_article");
 			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0,1";
 			if (!spip_num_rows(spip_query($query))) {
+				spip_log("version initiale de l'article $id_article");
 				$select = join(", ", $champs);
 				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
 				$champs_originaux = spip_fetch_array(spip_query($query));
