@@ -274,7 +274,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 // API pour l'espace prive
 function marquer_indexer ($objet, $id_objet) {
 	spip_log ("demande indexation $objet $id_objet");
-	$table = 'spip_index_'.table_objet($objet);
+	$table = 'spip_'.table_objet($objet);
 	spip_query ("UPDATE $table SET idx='1' WHERE id_$objet=$id_objet");
 }
 function indexer_article($id_article) {
