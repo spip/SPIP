@@ -68,6 +68,60 @@ if ($debloquer_article) {
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];
 
+
+// Vert
+if (!$couleurs_spip[1]) $couleurs_spip[1] = array (
+		"couleur_foncee" => "#9DBA00",
+		"couleur_claire" => "#C5E41C",
+		"couleur_lien" => "#657701",
+		"couleur_lien_off" => "#A6C113"
+);
+// Violet clair
+if (!$couleurs_spip[2]) $couleurs_spip[2] = array (
+		"couleur_foncee" => "#eb68b3",
+		"couleur_claire" => "#ffa9e6",
+		"couleur_lien" => "#E95503",
+		"couleur_lien_off" => "#8F004D"
+);
+// Orange
+if (!$couleurs_spip[3]) $couleurs_spip[3] = array (
+		"couleur_foncee" => "#fa9a00",
+		"couleur_claire" => "#ffc000",
+		"couleur_lien" => "#81A0C1",
+		"couleur_lien_off" => "#FF5B00"
+);
+// Saumon
+if (!$couleurs_spip[4]) $couleurs_spip[4] = array (
+		"couleur_foncee" => "#CDA261",
+		"couleur_claire" => "#FFDDAA",
+		"couleur_lien" => "#5E0283",
+		"couleur_lien_off" => "#472854"
+);
+//  Bleu pastelle
+if (!$couleurs_spip[5]) $couleurs_spip[5] = array (
+		"couleur_foncee" => "#5da7c5",
+		"couleur_claire" => "#97d2e1",
+		"couleur_lien" => "#869100",
+		"couleur_lien_off" => "#5B55A0"
+);
+//  Gris
+if (!$couleurs_spip[6]) $couleurs_spip[6] = array (
+		"couleur_foncee" => "#727D87",
+		"couleur_claire" => "#C0CAD4",
+		"couleur_lien" => "#854270",
+		"couleur_lien_off" => "#666666"
+);
+
+
+$choix_couleur = $prefs['couleur'];
+if (strlen($couleurs_spip[$choix_couleur]['couleur_foncee']) < 7) $choix_couleur = 1;
+
+$couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
+$couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
+$couleur_lien = $couleurs_spip[$choix_couleur]['couleur_lien'];
+$couleur_lien_off = $couleurs_spip[$choix_couleur]['couleur_lien_off'];
+
+/*
 switch ($prefs['couleur']) {
 	case 6:
 		/// Jaune
@@ -118,6 +172,7 @@ switch ($prefs['couleur']) {
 		$couleur_lien="#657701";
 		$couleur_lien_off="#A6C113";
 }
+*/
 
 
 //

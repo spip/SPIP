@@ -1936,6 +1936,7 @@ function bandeau_rubrique ($id_rubrique, $titre_rubrique, $z = 1) {
 }
 
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
+	global $couleurs_spip;
 	global $couleur_foncee;
 	global $couleur_claire;
 	global $adresse_site;
@@ -2251,9 +2252,28 @@ else {
 
 
 			// choix de la couleur
-			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
-			echo "<img src='img_pack/barre-couleurs.gif' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' width='70' height='10' border='0' usemap='#map_couleur'>";
+			//echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			//echo "<img src='img_pack/barre-couleurs.gif' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' width='70' height='10' border='0' usemap='#map_couleur'>";
 
+
+			// Choix de la couleur: automatique en fonction de $couleur_spip
+
+			// nettoyer le lien global
+			$clean_link->delVar('var_lang');
+			$clean_link->delVar('set_options');
+			$clean_link->delVar('set_couleur');
+			$clean_link->delVar('set_disp');
+			$clean_link->delVar('set_ecran');
+						
+			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			while (list($key,$val) = each($couleurs_spip)) {
+					$clean_link->delVar('set_couleur');
+					$clean_link->addVar('set_couleur', $key);
+					
+					echo "<a href=\"".$clean_link->getUrl()."\"><img src='img_pack/rien.gif' width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" /></a>";
+
+			}
+			
 			// echo "<img src='img_pack/rien.gif' width='10' height='1' />";
 		echo "</td>";
 	//
@@ -2562,8 +2582,38 @@ else {
 		echo _T('icone_informations_personnelles');
 		echo "</a>";
 		echo "</div>";
+
+		
+		//
+		// -------- Affichage de droite ----------
 	
-		echo "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right;'>";
+		// Deconnection
+		echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
+		echo "<a href='../spip_cookie.php3?logout=$connect_login' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
+		echo "</div>";
+	
+		$decal = 0;
+		$decal = $decal + 150;
+
+		echo "<div id='bandeauinterface' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+			echo _T('titre_changer_couleur_interface');
+		echo "</div>";
+		
+		$decal = $decal + count($couleurs_spip) * 10 + 10;
+		
+		echo "<div id='bandeauecran' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
+			echo $ecran;
+		echo "</div>";
+		
+		$decal = $decal + 100;
+		
+		// En interface simplifiee, afficher un permanence l'indication de l'interface
+		if ($options != "avancees") {
+			echo "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
+				echo "<b>"._T('icone_interface_simple')."</b>";
+			echo "</div>";
+		}
+		echo "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: ".$decal."px; text-align: $spip_lang_right;'>";
 			echo $simple;
 
 			if ($options != "avancees") {		
@@ -2571,26 +2621,7 @@ else {
 			}
 
 		echo "</div>";
-		
-		// En interface simplifiee, afficher un permanence l'indication de l'interface
-		if ($options != "avancees") {
-			echo "<div id='displayfond' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right; visibility: visible; background-color: white; color: $couleur_foncee; z-index: -1000; border: 1px solid $couleur_claire; border-top: 0px;'>";
-				echo "<b>"._T('icone_interface_simple')."</b>";
-			echo "</div>";
-		}
 	
-		echo "<div id='bandeauecran' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_right: 237px; text-align: $spip_lang_right;'>";
-			echo $ecran;
-		echo "</div>";
-	
-		echo "<div id='bandeauinterface' class='bandeau_couleur_sous' style='$spip_lang_right: 150px; text-align: $spip_lang_right;'>";
-			echo _T('titre_changer_couleur_interface');
-		echo "</div>";
-
-		// Deconnection
-		echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
-		echo "<a href='../spip_cookie.php3?logout=$connect_login' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
-		echo "</div>";
 	
 	echo "</div>";
 	echo "</td></tr></table>";
