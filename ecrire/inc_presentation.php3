@@ -829,7 +829,7 @@ function debut_html($titre = "") {
 	$titre = textebrut(typo($titre));
 
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
-	if (!$charset = lire_meta('charset')) $charset = 'iso-8859-1';
+	$charset = lire_meta('charset');
 
 	@Header("Expires: 0");
 	@Header("Cache-Control: no-cache,no-store");
