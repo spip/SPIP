@@ -67,8 +67,13 @@ function calcule_header_et_page ($fond, $delais) {
 		if (($GLOBALS['code_activation_debug'] == 'oui')
 		OR $auteur_session['statut'] == '0minirezo')
 			spip_log('debug !');
-		else
-			$var_mode = false; 
+		else {
+			$link = new Link();
+			$link->addvar('var_mode', 'debug');
+			redirige_par_entete('spip_login.php3?url='
+				.urlencode($link->getUrl()));
+			exit;
+		}
 	}
 
 	// est-on admin ?
