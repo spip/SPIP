@@ -124,7 +124,7 @@ echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
 
-if ($id_rubrique) icone("Retour", "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
+if ($id_rubrique) icone(_T('icone_retour'), "naviguer.php3?coll=$id_rubrique", $ze_logo, "rien.gif");
 else icone(_T('icone_retour'), "naviguer.php3?coll=$id_parent", $ze_logo, "rien.gif");
 
 echo "</td>";
