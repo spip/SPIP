@@ -86,18 +86,18 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 # regarder s'il existe une fonction spe'cifique a` ce nom
   $f = 'calculer_champ_' . $nom_champ;
   if (function_exists($f)) 
-    return $f($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere);
+    return $f($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
   else
     {
     # on regarde ensuite s'il y a un champ SQL homonyme,
-      $code = index_pile($id_boucle, $nom_champ, &$boucles);
+      $code = index_pile($id_boucle, $nom_champ, $boucles);
       if (($code) && ($code != '$PileRow[0]['.$nom_champ.']'))
 	  return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
       else
 	{
 # si index_pile a ramene' le choix par de'faut, 
 # c~a doit plutot e^tre un champ SPIP non SQL, ou ni l'un ni l'autre
-	  return calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere);
+	  return calculer_champ_divers($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
 	}
     }
 }
@@ -122,7 +122,7 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere)
 	      {
 		if ($arg[0] =='#')
 		  {
-		    list($arg,$m) = calculer_champ(array(),substr($arg,1),$id_boucle, &$boucles, $id_mere);
+		    list($arg,$m) = calculer_champ(array(),substr($arg,1),$id_boucle, $boucles, $id_mere);
 		    $milieu .= $m;
 		  }
 		else {if ($arg[0] =='$')

@@ -231,7 +231,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
     flock($lock, LOCK_UN);
 #  spip_log("obtient verrou $cle et libère le général"); 
   if ((!timeout(false,false)) OR
-      ($usefile && ($r = page_perenne($lock2, $file, &$fraicheur))))
+      ($usefile && ($r = page_perenne($lock2, $file, $fraicheur))))
     {
 #      spip_log("libère verrou $cle (page perenne)"); 
       flock($lock2, LOCK_UN);

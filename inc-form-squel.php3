@@ -45,9 +45,9 @@ function calculer_champ_FORMULAIRE_ECRIRE_AUTEUR($fonctions, $nom_champ, $id_bou
   $milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];
 		$mailauteur = ' .
-    index_pile($id_boucle,  'email', &$boucles) . ';
+    index_pile($id_boucle,  'email', $boucles) . ';
 		$nomauteur = ' .
-    index_pile($id_boucle,  'id_auteur', &$boucles) . ';';
+    index_pile($id_boucle,  'id_auteur', $boucles) . ';';
   $code = '(!email_valide($mailauteur) ? "" :
 			("<'.'?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_ecrire_auteur(\"$nomauteur\", trim(\"$mailauteur\")); lang_dselect();
 			?'.'>"))';
@@ -59,7 +59,7 @@ function calculer_champ_FORMULAIRE_SIGNATURE($fonctions, $nom_champ, $id_boucle,
 {
   $milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];
-		$lacible = ' . 	index_pile($id_boucle, 'id_article', &$boucles) . ";";
+		$lacible = ' . 	index_pile($id_boucle, 'id_article', $boucles) . ";";
    $code = '(!query_petitions($lacible) ? "" :
  			 ("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_signature($lacible); lang_dselect();
 				?".">"))';
@@ -75,7 +75,7 @@ function calculer_champ_FORMULAIRE_SITE($fonctions, $nom_champ, $id_boucle, &$bo
   $milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];
 		$lacible = ' .
-    index_pile($id_boucle,  'id_rubrique', &$boucles) . ';';
+    index_pile($id_boucle,  'id_rubrique', $boucles) . ';';
   $code = '(lire_meta("proposer_sites") != "2") ? "" :
 			("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_site($lacible); lang_dselect();
 				?".">")';
@@ -94,38 +94,38 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
   case 'breves':
     $code = "
 			boutons_de_forum('', '', ''," .
-      index_pile($id_boucle,  'id_breve', &$boucles) .
+      index_pile($id_boucle,  'id_breve', $boucles) .
       ", '', " .
-      index_pile($id_boucle,  'titre', &$boucles) .
+      index_pile($id_boucle,  'titre', $boucles) .
       ", '$type', substr(lire_meta('forums_publics'),0,3)), &\$Cache)";
     break;
     
   case 'rubriques':
     $code = '
 			boutons_de_forum(' .
-      index_pile($id_boucle,  'id_rubrique', &$boucles) .
+      index_pile($id_boucle,  'id_rubrique', $boucles) .
       ", '', '', '', ''," .
-      index_pile($id_boucle,  'titre', &$boucles) .
+      index_pile($id_boucle,  'titre', $boucles) .
       ", '$type', substr(lire_meta('forums_publics'),0,3)), &\$Cache)";
     break;
     
   case 'syndication':
     $code = "
 			boutons_de_forum('', '', '','', " .
-      index_pile($id_boucle, 'id_rubrique', &$boucles) .
+      index_pile($id_boucle, 'id_rubrique', $boucles) .
       ", " .
-      index_pile($id_boucle,  'nom_site', &$boucles) .
+      index_pile($id_boucle,  'nom_site', $boucles) .
       ", '$type', substr(lire_meta('forums_publics'),0,3)), &\$Cache)";
     break;
     
   case 'articles': 
     $code = "
 			boutons_de_forum('', '', " .
-      index_pile($id_boucle, 'id_article', &$boucles) .
+      index_pile($id_boucle, 'id_article', $boucles) .
       ", '','', " .
-      index_pile($id_boucle,  'nom_site', &$boucles) .
+      index_pile($id_boucle,  'nom_site', $boucles) .
       "'$type', " .
-      index_pile($id_boucle,  'accepter_forum', &$boucles) .
+      index_pile($id_boucle,  'accepter_forum', $boucles) .
       ', &$Cache)';
     break;
     
@@ -133,12 +133,12 @@ function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$b
   default:
     $code = "
 		boutons_de_forum(" .
-      index_pile($id_boucle, 'id_rubrique', &$boucles) . ', ' .
-      index_pile($id_boucle, 'id_forum', &$boucles) . ', ' .
-      index_pile($id_boucle, 'id_article', &$boucles) . ', ' .
-      index_pile($id_boucle, 'id_breve', &$boucles) . ', ' .
-      index_pile($id_boucle, 'id_syndic', &$boucles) . ', ' .
-      index_pile($id_boucle, 'titre', &$boucles) .
+      index_pile($id_boucle, 'id_rubrique', $boucles) . ', ' .
+      index_pile($id_boucle, 'id_forum', $boucles) . ', ' .
+      index_pile($id_boucle, 'id_article', $boucles) . ', ' .
+      index_pile($id_boucle, 'id_breve', $boucles) . ', ' .
+      index_pile($id_boucle, 'id_syndic', $boucles) . ', ' .
+      index_pile($id_boucle, 'titre', $boucles) .
       ", '$type', '', &\$Cache)";
     break;
   }
@@ -150,12 +150,12 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 {
   $milieu = '
 		$forums_publics = ((' .
-    index_pile($id_boucle,  "accepter_forum", &$boucles) . ' == ""
+    index_pile($id_boucle,  "accepter_forum", $boucles) . ' == ""
 				AND lire_meta("forums_publics") != "non")
 			OR (' .
-    index_pile($id_boucle,  "accepter_forum", &$boucles) . ' != ""
+    index_pile($id_boucle,  "accepter_forum", $boucles) . ' != ""
 				AND ' .
-    index_pile($id_boucle,  "accepter_forum", &$boucles) . ' != "non"));
+    index_pile($id_boucle,  "accepter_forum", $boucles) . ' != "non"));
 		if ($forums_publics) {
 			if (!($lien = $GLOBALS["HTTP_GET_VARS"]["retour"])) {
 				$lien = $GLOBALS["REQUEST_URI"];
@@ -164,26 +164,26 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
   switch ($boucles[$id_boucle]->type_requete) {
   case 'articles':
     $c = '"id_article=".' .
-      index_pile($id_boucle,  id_article, &$boucles);
+      index_pile($id_boucle,  id_article, $boucles);
     break;
   case 'breves':
     $c = '"id_breve=".' .
-      index_pile($id_boucle,  id_breve, &$boucles);
+      index_pile($id_boucle,  id_breve, $boucles);
     break;
   case 'rubriques':
     $c = '"id_rubrique=".' .
-      index_pile($id_boucle,  id_rubrique, &$boucles);
+      index_pile($id_boucle,  id_rubrique, $boucles);
     break;
   case 'syndication':
     $c = '"id_syndic=".' .
-      index_pile($id_boucle,  id_syndic, &$boucles);
+      index_pile($id_boucle,  id_syndic, $boucles);
     break;
   case 'forums':
   default:
     $liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
     $c="";$s="";
     while (list(,$champ) = each ($liste_champs)) {
-      $x = index_pile($id_boucle,  $champ, &$boucles);
+      $x = index_pile($id_boucle,  $champ, $boucles);
       $c .= (($c) ? ".\n" : "") . 
 		        "((!$x) ? '' : ('$s$champ='.$x))";
       $s="&";}

@@ -75,7 +75,7 @@ include_ecrire("inc_meta.php3");
 			   'cherche_page_incluante', 
 			   array('fond' => $fond,
 				 'var_recherche' => $HTTP_GET_VARS['var_recherche']),
-			   &$delais);
+			   $delais);
      # si la page est neuve, recalculer ces 2 valeurs
      if (!$page['naissance'])
        {
