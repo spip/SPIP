@@ -21,32 +21,22 @@ if ($ajout_forum) {
 $fichier_requete = $REQUEST_URI;
 $fichier_requete = strtr($fichier_requete, '?', '&');
 $fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
+$fichier_requete = ereg_replace('^/+', '', $fichier_requete);
 
-$fichier_cache = substr(rawurlencode($fichier_requete), 0, 128);
-$sousrep_cache = substr(md5($fichier_cache), 0, 1);
+$md_cache = md5($fichier_requete);
 
-if (creer_repertoire("CACHE", $sousrep_cache))
-	$fichier_cache = "$sousrep_cache/$fichier_cache";
+$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_requete);
+$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
+$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
+if (strlen($fichier_cache) > 24)
+	$fichier_cache = substr(ereg_replace('([a-zA-Z]{0,3})[^-]*-', '\1-', $fichier_cache), -24);
+$fichier_cache .= '.'.substr($md_cache, 1, 6);
 
-/*if (!file_exists("CACHE/.plat") AND !file_exists("CACHE/$sousrep_cache")) {
-	@mkdir("CACHE/$sousrep_cache", 0777);
-	@chmod("CACHE/$sousrep_cache", 0777);
-	$ok = false;
-	if ($f = @fopen("CACHE/$sousrep_cache/.test", "w")) {
-		@fputs($f, '<?php $ok = true; ?'.'>');
-		@fclose($f);
-		include("CACHE/$sousrep_cache/.test");
-	}
-	if (!$ok) {
-		$f = fopen("CACHE/.plat", "w");
-		fclose($f);
-	}
-}
+$subdir_cache = substr($md_cache, 0, 1);
 
-if (!file_exists("CACHE/.plat")) {
-	$fichier_cache = "$sousrep_cache/$fichier_cache";
-}
-*/
+if (creer_repertoire("CACHE", $subdir_cache))
+	$fichier_cache = "$subdir_cache/$fichier_cache";
+
 $chemin_cache = "CACHE/$fichier_cache";
 
 
