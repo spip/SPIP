@@ -918,6 +918,7 @@ function parser($texte) {
 	$rows_breves = array(
 		'ID_BREVE' => 'id_breve',
 		'ID_RUBRIQUE' => 'id_rubrique',
+		'ID_SECTEUR' => 'id_rubrique',
 		'DATE' => 'date_heure',
 		'TITRE' => 'titre',
 		'TEXTE' => 'texte',
@@ -1918,7 +1919,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$texte .= '
 		$contexte["id_breve"] = $row["id_breve"];
 		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_secteur"] = $row["id_secteur"];
+		$contexte["id_secteur"] = $row["id_rubrique"];
 		$contexte["date"] = $row["date"];
 		if ($instance->doublons == "oui") $id_doublons["breves"] .= ",".$row["id_breve"];
 		';
