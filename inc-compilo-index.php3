@@ -57,7 +57,7 @@ class Boucle {
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
-	var $nom_boucle; // seulement si boucle explicite
+	var $nom_boucle= false; // seulement si boucle explicite
 	var $cond_avant, $cond_apres; // tableaux d'objets
 	var $fonctions;  // filtre explicites
 	var $etoile;
@@ -85,7 +85,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	global $exceptions_des_tables, $table_des_tables, $tables_principales;
 
 	$i = 0;
-	if ($$explicite) {
+	if ($explicite === false) {
 	// Recherche d'un champ dans un etage superieur
 		while (($idb != $explicite) && $idb) {
 			$i++;
