@@ -52,7 +52,7 @@ function critere_doublons_dist($param, $not, &$boucle, $infos) {
 // http://www.spip.net/@lang_select
 function critere_lang_select_dist($param, $not, &$boucle, $infos) {
 	if (preg_match('/lang_select(=(oui|non))?$/i', $param, $match)) {
-		if (!$lang_select = $match[3])
+		if (!$lang_select = $match[2])
 			$lang_select = 'oui';
 		if ($not)
 			$lang_select = ($lang_select=='oui')?'non':'oui';
