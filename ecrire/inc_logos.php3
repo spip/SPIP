@@ -16,7 +16,7 @@ function get_image($racine) {
 
 			// contrer le cache du navigateur
 			if ($fid = @filesize($fid) . @filemtime($fid))
-				$fid = "?".md5($fid);
+				$fid = "&".md5($fid);
 			return array($fichier, 
 				     (!$limage ? '' : resize_logo($limage)),
 				     $fid);
@@ -57,7 +57,7 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 	
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
-		echo "<center><font size='2' FACE='Verdana,Arial,Sans,sans-serif'>";
+		echo "<div class='verdana1' style='text-align: center;'>";
 		$desc = decrire_logo($logo);
 		afficher_logo($logo, $texteon, $desc);
 
@@ -67,13 +67,14 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 			afficher_logo($survol, $texteoff, $desc);   
 		}
 	
-		echo "</font></center>";
+		echo "</div>";
 		fin_cadre_relief();
 		echo "</p>";
 	}
 }
 
 function decrire_logo($racine) {
+	global $connect_id_auteur;
 	$logo = get_image($racine);
 	if ($logo) {
 		$taille = $logo[1];
@@ -82,9 +83,18 @@ function decrire_logo($racine) {
 			$logo[1] = "$x x $y "._T('info_pixels');
 			$taille = " width='$w' height='$h'";
 		}
-		$logo[2] = "<img src='" .
+		
+		$hash = calculer_action_auteur ("reduire $w $h");
+		
+		$logo[2] = "<img src='../spip_image_reduite.php3?img=" .
+			_DIR_IMG . $logo[0]. "&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur" . $logo[2] .
+			"'$taille alt='' />";
+			
+/*		$logo[2] = "<img src='" .
 			_DIR_IMG . $logo[0] . $logo[2] .
 			"'$taille alt='' />";
+			
+*/
 	}
 	return $logo;
 }

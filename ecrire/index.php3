@@ -53,8 +53,9 @@ if ($spip_display != 4) {
 	
 		$logo = decrire_logo("rubon0");
 		if ($logo) {
-			$fid = $logo[2];
-			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'>$fid</a></div>";
+			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'>";
+			echo $logo[2];
+			echo "</a></div>";
 		}
 	}
 	echo "<div class='verdana1'>";

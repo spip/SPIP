@@ -1185,9 +1185,12 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			}
 		
 		echo "<span class='arial2'>";
-			echo affdate_court($date_heure);
-			echo ", ";
-			echo heures($date_heure).":".minutes($date_heure);
+		//	echo affdate_court($date_heure);
+		//	echo ", ";
+		//	echo heures($date_heure).":".minutes($date_heure);
+			
+			echo date_relative($date_heure);
+			
 			echo "</span>";
 
 			if ($email_auteur) {

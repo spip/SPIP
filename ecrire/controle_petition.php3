@@ -54,7 +54,7 @@ function controle_forum($request,$adresse_retour) {
 		}
 		
 		
-		echo "<FONT SIZE=2>".affdate($date_time)."</FONT><BR>";
+		echo "<FONT SIZE=2>".date_relative($date_time)."</FONT><BR>";
 		if ($statut=="poubelle"){
 			echo "<FONT SIZE=1 COLOR='red'>"._T('info_message_efface')."</FONT><BR>";
 		}
