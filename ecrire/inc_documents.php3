@@ -450,6 +450,24 @@ function afficher_documents_non_inclus($id_article) {
 		
 		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true);
 		
+		
+		if (function_exists("imagejpeg")){
+			$creer_preview=lire_meta("creer_preview");
+			$taille_preview=lire_meta("taille_preview");
+			if ($taille_preview < 15) $taille_preview = 120;
+			
+			if ($creer_preview == 'oui'){
+				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au format JPEG, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels.";
+			}
+			else {
+				echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est désactiv&eacute;e sur ce site. ";
+			}
+			
+			echo "Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables.";
+		
+		}
+		
+		
 		echo "</font>\n";
 		echo "</td></tr></table>";
 		
