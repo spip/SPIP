@@ -177,7 +177,13 @@ function traduire_chaine($code, $args) {
 
 
 function traduire_nom_langue($lang) {
-	$codes_langues = array(
+	$r = $GLOBALS['codes_langues'][$lang];
+	if (!$r) $r = $lang;
+	return $r;
+}
+
+function init_codes_langues() {
+	$GLOBALS['codes_langues'] = array(
 	'aa' => "Afar",
 	'ab' => "Abkhazian",
 	'af' => "Afrikaans",
@@ -326,13 +332,7 @@ function traduire_nom_langue($lang) {
 	'za' => "Zhuang",
 	'zh' => "&#20013;&#25991;",
 	'zu' => "Zulu");
-	$GLOBALS['codes_langues'] = $codes_langues;
-
-	$r = $codes_langues[$lang];
-	if (!$r) $r = $lang;
-	return $r;
 }
-
 
 //
 // Filtres de langue
@@ -503,6 +503,7 @@ function init_langues() {
 			}
 		}
 	}
+	init_codes_langues();
 }
 
 init_langues();
