@@ -194,7 +194,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$texte=$row['texte'];
 		$auteur=$row['auteur'];
 		$email_auteur=$row['email_auteur'];
-		$nom_site_forum=$row['nom_site_forum'];
+		$nom_site_forum=$row['nom_site'];
 		$url_site=$row['url_site'];
 	}
 				
