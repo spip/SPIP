@@ -163,7 +163,7 @@ function echappe_html($letexte,$source) {
 
 			// ne pas mettre le <div...> s'il n'y a qu'une ligne
 			if (is_int(strpos($lecode,"\n")))
-				$lecode = nl2br("<div align='left' class='spip_code'>".trim($lecode)."</div>");
+				$lecode = nl2br("<div align='left' class='spip_code'>".$lecode."</div>");
 
 			$lecode = ereg_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
 			$lecode = ereg_replace("  ", " &nbsp;", $lecode);

@@ -218,8 +218,7 @@ function test_iconv() {
 	if (!$iconv_ok) {
 		if (!$GLOBALS['flag_iconv']) $iconv_ok = -1;
 		else {
-			$s = 'chaine de test';
-			if (utf_32_to_unicode(iconv('utf-8', 'utf-32', $s)) == 'chaine de test')
+			if (utf_32_to_unicode(@iconv('utf-8', 'utf-32', 'chaine de test')) == 'chaine de test')
 				$iconv_ok = 1;
 			else
 				$iconv_ok = -1;

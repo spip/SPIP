@@ -219,7 +219,7 @@ if ($modif_document == 'oui' AND $flag_document_editable) {
 		if ($mois_doc == "00") $jour_doc = "00";
 		$query = "UPDATE spip_documents SET date='$annee_doc-$mois_doc-$jour_doc' WHERE id_document=$id_document";
 		$result = spip_query($query);
-		calculer_dates_rubriques();
+		calculer_rubriques();
 	}
 
 }
