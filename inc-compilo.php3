@@ -531,13 +531,13 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	  // une boucle documents est conditionnee par tout le reste!
 	  // une boucle avec critere de recheche doit etre signalee aux autres
 	  // (a cause du cas #nom_de_boucle:URL_*)
-		foreach($boucles as $nom => $boucle)
+		foreach($boucles as $idb => $boucle)
 		  {
 			if (($boucle->type_requete == 'documents') && 
 				in_array('doublons',$boucle->param))
 			  { $descr['documents'] = true; break; }
 			if (in_array('recherche',$boucle->param))
-			  $boucles[$nom]->hash = true;
+			  $boucles[$idb]->hash = true;
 		  }
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
