@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Vissza a teljes grafikus fel&uuml;letre',
 'access_mode_texte' => '<NEW>Afficher l\'interface textuelle simplifi&eacute;e',
+'admin_debug' => '<NEW>debug',
 'admin_modifier_article' => 'Cikk m&oacute;dos&iacute;t&aacute;sa',
 'admin_modifier_auteur' => 'Szerz&#337; m&oacute;dos&iacute;t&aacute;sa',
 'admin_modifier_breve' => 'A h&iacute;r szerkeszt&eacute;se',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_jour_entier' => '<NEW>jour entier',
+'cal_matin' => '<NEW>matin',
+'cal_par_jour' => '<NEW>calendrier par jour',
+'cal_par_mois' => '<NEW>calendrier par mois',
+'cal_par_semaine' => '<NEW>calendrier par semaine',
 'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
@@ -179,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_deja_inscrit' => 'Megvan m&aacute;r be&iacute;ratkozva.',
 'form_email_non_valide' => 'Az email c&iacute;me nem &eacute;rv&eacute;nyes.',
 'form_forum_access_refuse' => 'M&aacute;r nincs hozz&aacute;f&eacute;r&eacute;se arra a honlapra.',
-'form_forum_bonjour' => 'J&oacute; napot,',
+'form_forum_bonjour' => '<MODIF>J&oacute; napot,',
 'form_forum_email_deja_enregistre' => 'Ez az email c&iacute;m fel van m&aacute;r v&eacute;ve, teh&aacute;t nyugodtan haszn&aacute;lhatja a szok&aacute;sos jelszav&aacute;t.',
 'form_forum_identifiant_mail' => 'Az &uacute;j azonos&iacute;t&oacute;j&aacute;t &eacute;ppen elk&uuml;ldt&uuml;k email-ben.',
 'form_forum_identifiants' => 'Szem&eacute;leyes azonos&iacute;t&oacute;k',
@@ -270,7 +277,7 @@ K&ouml;sz&ouml;nj&uuml;k a r&eacute;szv&eacute;tel&eacute;t
   legyen sz&iacute;ves el&#337;sz&ouml;r be&iacute;ratkozni. Lejjebb jelezze
   a szem&eacute;lyes azonos&iacute;t&oacute;t,
 amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
-'forum_vous_inscrire' => 'be&iacute;ratkozni</a> el&#337;sz&ouml;r.',
+'forum_vous_inscrire' => '<MODIF>be&iacute;ratkozni</a> el&#337;sz&ouml;r.',
 
 
 // I
@@ -328,6 +335,10 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'icone_valider_message' => 'Az &uuml;zenet &eacute;rv&eacute;nyes&iacute;t&eacute;se',
 'icone_visiter_site' => 'L&aacute;togat&aacute;s',
 'icone_voir_en_ligne' => 'N&eacute;zni &eacute;l&#337;ben',
+'image_tourner_180' => '<NEW>Rotation 180&deg;',
+'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
+'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
+'img_indisponible' => '<NEW>image indisponible',
 'info_a_suivre' => 'FOLYTATNI&nbsp;&raquo;',
 'info_a_valider' => '[&eacute;rv&eacute;nyes&iacute;tend&#337;]',
 'info_acces_interdit' => 'Hozz&aacute;f&eacute;r&eacute;s tilos',
@@ -357,17 +368,20 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_contact_developpeur' => 'Keressen egy fejleszt&#337;t.',
 'info_contenance' => 'A honlap tartalmazza&nbsp;:',
 'info_contribution' => 'F&oacute;rumi hozz&aacute;sz&oacute;l&aacute;sok',
-'info_copyright' => 'egy szabad szoftver, ami <a href=\'copyright_en.html\'>GPL licenz alatt</a> van.',
+'info_copyright' => '<MODIF>egy szabad szoftver, ami <a href=\'copyright_en.html\'>GPL licenz alatt</a> van.',
 'info_copyright_doc' => 'B&#337;vebb inform&aacute;ci&oacute;kra, l&aacute;sd a honlapot <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
+'info_copyright_gpl' => '<NEW>sous licence GPL',
 'info_cours_edition' => 'Az &Ouml;n szerkeszt&eacute;s alatti cikkei',
 'info_creer_repertoire' => 'Hozzon l&eacute;tre f&aacute;jlt, vagy mapp&aacute;t, melynek a neve&nbsp;:',
 'info_creer_repertoire_2' => 'az almapp&aacute;n <b>ecrire/data/</b> bel&uuml;l, ez&uacute;t&aacute;n&nbsp;:',
+'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_deplier' => 'Kibont&aacute;s',
 'info_descriptif_nombre' => 'R&ouml;vid ismertet&#337;(k)&nbsp;:',
 'info_description' => 'Le&iacute;r&aacute;s&nbsp;:',
 'info_description_2' => 'Le&iacute;r&aacute;s&nbsp;:',
 'info_dimension' => 'M&eacute;retek&nbsp;:',
 'info_document' => 'Dokumentum',
+'info_documents' => '<NEW>Documents',
 'info_echange_message' => 'SPIP engedi a mag&aacute;n &uuml;zenetcser&eacute;t &eacute;s vitaf&oacute;rumok alak&iacute;t&aacute;s&aacute;t
   a honlap r&eacute;sztvev&#337;i k&ouml;z&ouml;tt. Ezt a lehet&#337;s&eacute;get lehet aktiv&aacute;lni, vagy inaktiv&aacute;lni.',
 'info_ecire_message_prive' => 'Mag&aacute;n &uuml;zenet &iacute;r&aacute;sa',
@@ -407,6 +421,9 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_langue_principale' => 'A honlap alapnyelve',
 'info_largeur_vignette' => '<MODIF>@largeur_vignette@ x @hauteur_vignette@ pixel',
 'info_les_auteurs_1' => '&iacute;rta @les_auteurs@',
+'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
+'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
 'info_mail_fournisseur' => '&ouml;nmaga@szolgaltato.com',
 'info_message_2' => '&Uuml;ZENET',
 'info_message_supprime' => '&Uuml;ZENET T&Ouml;R&Ouml;LVE',
@@ -430,6 +447,8 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_petit_ecran' => 'Kisebb k&eacute;perny?',
 'info_pixels' => 'pixelek',
 'info_plusieurs_mots_trouves' => 'N&eacute;hany kulcssz&oacute; tal&aacute;lt azzal "@cherche_mot@":',
+'info_popularite_5' => 'n&eacute;pszer&#369;s&eacute;g&nbsp;:',
+'info_portfolio' => '<NEW>Portfolio',
 'info_portfolio_automatique' => 'Automatikus portfolio&nbsp;:',
 'info_premier_resultat' => '[@debut_limit@ els&#337; eredm&eacute;nyek, @total@ &ouml;sszesen]',
 'info_premier_resultat_sur' => '[@debut_limit@ eredm&eacute;ny, &ouml;sszesen @total@]',
@@ -479,6 +498,7 @@ amit kapott. Amennyiben nincs be&iacute;ratkozva  akkor &Ouml;nnek kell',
 'info_visite' => 'l&aacute;togat&aacute;s :',
 'info_visites' => 'l&aacute;t&oacute;gat&aacute;s :',
 'info_vos_rendez_vous' => 'A leend&#337; tal&aacute;lkoz&oacute;i',
+'info_zoom' => '<NEW>zoom',
 'infos_vos_pense_bete' => 'Az &Ouml;n eml&eacute;keztet&#337;i',
 'item_breve_proposee' => 'Javasolt h&iacute;r',
 
@@ -600,12 +620,14 @@ Akkor &uacute;jabb jelsz&oacute;t tud be&iacute;rni
 'pass_retour_public' => 'Vissza a nyilv&aacute;nos honlapra',
 'pass_rien_a_faire_ici' => 'Nincs keresnival&oacute;ja itt.',
 'pass_vousinscrire' => 'Be&iacute;ratkoz&aacute;s ezen a honlapon',
+'precedent' => '<NEW>pr&eacute;c&eacute;dent',
 'previsualisation' => '<NEW>Pr&eacute;visualisation',
 'previsualiser' => '<NEW>Pr&eacute;visualiser',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ l&aacute;togat&aacute;s&nbsp;; n&eacute;pszer&#369;s&eacute;g&nbsp;: @popularite@',
+'suivant' => '<NEW>suivant',
 
 
 // T
@@ -656,7 +678,7 @@ Pr&oacute;b&aacute;ljon',
 'titre_image_redacteur_02' => 'Szerz&#337;',
 'titre_image_visiteur' => 'Vend&eacute;g',
 'titre_joindre_document' => 'DOKUMENTUM CSATOL&Aacute;SA',
-'titre_liens_entrants' => 'Aznapi bej&ouml;v&#337; linkek',
+'titre_liens_entrants' => '<MODIF>Aznapi bej&ouml;v&#337; linkek',
 'titre_mots_cles' => 'KULCSSZAVAK',
 'titre_probleme_technique' => 'Vigy&aacute;zat&nbsp;: m&#369;szaki hiba (MySQL szerver) miatt nincs hozz&aacute;f&eacute;r&eacute;s erre a r&eacute;szre. Meg&eacute;rt&eacute;s&eacute;t k&ouml;sz&ouml;nj&uuml;k.',
 'titre_publier_document' => 'DOKUMENTUM PUBLIK&Aacute;L&Aacute;SA ABBAN A ROVATBAN',
@@ -675,11 +697,27 @@ Pr&oacute;b&aacute;ljon',
 
 
 // Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle' => '<NEW>boucle',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => '<NEW>code',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>externe interdit',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dupla definici&oacute;',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: z&aacute;r&oacute; tag hi&aacute;nyzik',
 'zbug_erreur_boucle_syntaxe' => 'Folyamat szint&aacute;xisa nem korrekt',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'Hiba : sz&#369;r&#337; <b>&laquo; @filtre@ &raquo;</b> nincs meghat&aacute;rozva',
-'zbug_info_erreur_squelette' => 'Hiba a honlapon'
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => 'Hiba a honlapon',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => '<NEW>r&eacute;sultat',
+'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 

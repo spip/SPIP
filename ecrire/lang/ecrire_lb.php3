@@ -908,6 +908,7 @@ D&euml;s Optioun ass par d&eacute;faut ausgeschalt fir n&euml;t andauernd Warnun
 'titre_sites_tous' => 'D&eacute;i referenz&eacute;iert Siten',
 'titre_suivi_petition' => 'Suivi vun de Petitiounen',
 'titre_syndication' => 'Syndicatioun vun de Siten',
+'tout_dossier_upload' => 'De ganzen Dossier @upload@',
 'trad_article_inexistant' => '&Euml;t g&euml;t keen Artikel mat d&auml;r Nummer.',
 'trad_article_traduction' => 'All d\'Versiounen vun d&euml;sem Artikel:',
 'trad_deja_traduit' => 'D&euml;sen Artikel ass schon eng Iwwersetzung vun dem Artikel.',

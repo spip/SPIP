@@ -906,6 +906,7 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'titre_sites_tous' => 'Verlinkte Websites',
 'titre_suivi_petition' => 'Petitionen verwalten',
 'titre_syndication' => 'Website Syndikation',
+'tout_dossier_upload' => 'Das ganze Verzeichnis @upload@',
 'trad_article_inexistant' => 'Es gibt keinen Artikel mit dieser Nummer.',
 'trad_article_traduction' => 'Alle Fassungen dieses Artikels:',
 'trad_deja_traduit' => 'Dieser Artikel ist bereits eine &Uuml;bersetzung des aktuellen Artikels.',

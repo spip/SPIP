@@ -1017,6 +1017,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_sites_tous' => 'La referencitaj teksejoj',
 'titre_suivi_petition' => 'Kontrolo de la subskriblistoj',
 'titre_syndication' => 'Kunligado de teksejoj',
+'tout_dossier_upload' => 'Tuta dosierujo @upload@',
 'trad_article_inexistant' => 'Neniu artikolo kun tiu numero.',
 'trad_article_traduction' => '&#264;iuj versioj de tiu artikolo&nbsp;:',
 'trad_deja_traduit' => 'Tiu artikolo jam estas traduko de la kuranta artikolo.',
