@@ -220,9 +220,13 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=450\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>s\'inscrire</a>]';
 
-	echo ' [<script language="JavaScript"><!--
+	// bouton oubli de mot de passe
+	include_ecrire ("inc_mail.php3");
+	if (tester_mail()) {
+		echo ' [<script language="JavaScript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3?oubli_pass=oui\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=480,height=280\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3?oubli_pass=oui\' target=\'_blank\'></noscript>mot&nbsp;de&nbsp;passe&nbsp;oubli&eacute;&nbsp;?</a>]';
+	}
 
 	if ($prive) echo " [<a href='$url_site'>retour&nbsp;au&nbsp;site&nbsp;public</a>]";
 
