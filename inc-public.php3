@@ -65,7 +65,7 @@ else {
 		include_local('inc-calcul.php3');
 		calculer_contexte();
 		include_local('inc-formulaires.php3');
-		reponse_confirmation($id_article);
+		reponse_confirmation($id_article, $val_confirm);
 	}
 
 
