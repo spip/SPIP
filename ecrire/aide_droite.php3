@@ -71,8 +71,13 @@ if (strlen($aide) < 2) $aide = "spip";
 $lang_aide = $GLOBALS['spip_lang'];
 
 if (!file_exists($fichier_aide = "AIDE/$lang_aide/aide")) {
-	$fichier_aide = "AIDE/fr/aide";
-	$lang_aide = 'fr';
+	if (file_exists($fichier_aide = "AIDE/en/aide")) {
+		$lang_aide = "en";
+	}
+	else {
+		$fichier_aide = "AIDE/fr/aide";
+		$lang_aide = 'fr';
+	}
 }
 
 $html = join('', file($fichier_aide));
