@@ -36,7 +36,7 @@ if (!$mois){
   $jour=$jour_today;
   $mois=$mois_today;
   $annee=$annee_today;
-}
+ } else {if (!isset($jour)) $jour = 1;}
 
 $date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
 $jour = journum($date);
