@@ -178,7 +178,7 @@ function balise_URL_ARTICLE_dist($p) {
 		$_id_article = champ_sql('id_article', $p);
 		$p->code = "generer_url_article($_id_article)";
 
-		if ($p->boucles[$p->id_boucle]->hash)
+		if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
@@ -190,7 +190,7 @@ function balise_URL_RUBRIQUE_dist($p) {
 	$p->code = "generer_url_rubrique(" . 
 	champ_sql('id_rubrique',$p) . 
 	")" ;
-	if ($p->boucles[$p->id_boucle]->hash)
+	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->statut = 'html';
@@ -201,7 +201,7 @@ function balise_URL_BREVE_dist($p) {
 	$p->code = "generer_url_breve(" .
 	champ_sql('id_breve',$p) . 
 	")";
-	if ($p->boucles[$p->id_boucle]->hash)
+	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->statut = 'html';
@@ -237,7 +237,7 @@ function balise_URL_DOCUMENT_dist($p) {
 function balise_URL_AUTEUR_dist($p) {
 	$p->code = "generer_url_auteur(" .
 	champ_sql('id_auteur',$p) .")";
-	if ($p->boucles[$p->id_boucle]->hash)
+	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->statut = 'html';
