@@ -886,6 +886,10 @@ function maj_base() {
 		maj_version(1.805);
 	}
 
+	// tables d'orthographe
+	if ($version_installee < 1.806)
+		maj_version(1.806);
+
 	return true;
 }
 

@@ -51,7 +51,7 @@ function lcs($s, $t) {
 
 	// Insertion des points
 	foreach ($t as $y => $c) $t_pos[trim($c)][] = $y;
-	
+
 	foreach ($s as $x => $c) {
 		$c = trim($c);
 		if (!$t_pos[$c]) continue;
@@ -60,20 +60,29 @@ function lcs($s, $t) {
 			for ($len = $max_len; $len > 0; $len--) {
 				if ($paths_ymin[$len] < $y) {
 					$paths_ymin[$len + 1] = $y;
-					$paths[$len + 1] = $paths[$len];
-					$paths[$len + 1][0][$x] = $y;
-					$paths[$len + 1][1][$y] = $x;
+					// On construit le resultat sous forme de chaine d'abord,
+					// car les tableaux de PHP sont dispendieux en taille memoire
+					$paths[$len + 1] = $paths[$len]." $x,$y";
 					break;
 				}
 			}
 			if ($len + 1 > $max_len) $max_len = $len + 1;
 			if ($len == 0) {
 				$paths_ymin[1] = $y;
-				$paths[1] = array(0 => array($x => $y), 1 => array($y => $x));
+				$paths[1] = "$x,$y";
 			}
 		}
 	}
-	if ($paths[$max_len]) return $paths[$max_len];
+	if ($paths[$max_len]) {
+		$path = explode(" ", $paths[$max_len]);
+		$u = $v = array();
+		foreach ($path as $p) {
+			list($x, $y) = explode(",", $p);
+			$u[$x] = $y;
+			$v[$y] = $x;
+		}
+		return array($u, $v);
+	}
 	return array(0 => array(), 1 => array());
 }
 

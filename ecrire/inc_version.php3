@@ -174,6 +174,9 @@ $spip_server = array (
 // Produire du TeX ou de MathML ?
 $traiter_math = 'tex';
 
+// Masquer les warning
+error_reporting(E_ALL ^ E_NOTICE);
+
 /* ATTENTION CES VARIABLES NE FONCTIONNENT PAS ENCORE */
 // Extension du fichier du squelette 
 $extension_squelette = 'html';
@@ -202,7 +205,7 @@ if ($flag_ecrire) {
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.805;
+$spip_version = 1.806;
 
 // version de spip
 $spip_version_affichee = "1.8 alpha 6 CVS";
@@ -210,9 +213,6 @@ $spip_version_affichee = "1.8 alpha 6 CVS";
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 
-
-// Pas de warnings idiots
-error_reporting(E_ALL ^ E_NOTICE);
 
 // ** Securite **
 $auteur_session = '';
@@ -820,7 +820,7 @@ if (LOCK_UN!=3) {
 }
 function test_flock ($fichier, $fp=false) {
 	static $flock = array();
-	global $flag_flock;
+	global $flag_flock, $os_serveur;
 	if (!$flag_flock
 	OR $os_serveur == 'windows') // sous win rename() plante avec fopen()
 		return false;
@@ -864,6 +864,8 @@ function spip_flock($filehandle, $mode, $fichier) {
 }
 
 function spip_file_get_contents ($fichier) {
+	global $os_serveur;
+
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
 		AND $os_serveur !='windows') # windows retourne ''

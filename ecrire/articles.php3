@@ -400,6 +400,10 @@ if ($articles_versions AND $id_version>1 AND $options == "avancees") {
 	icone_horizontale(_T('info_historique_lien'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
+	// Correction orthographique
+	$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
+	icone_horizontale(_L("V&eacute;rifier l'orthographe"), "articles_ortho.php?id_article=$id_article", "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
+
 echo "</div>\n";
 
 fin_boite_info();

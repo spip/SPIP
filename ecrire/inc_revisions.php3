@@ -5,6 +5,7 @@
 if (defined("_ECRIRE_INC_REVISIONS")) return;
 define("_ECRIRE_INC_REVISIONS", "1");
 
+$GLOBALS['agregation_versions'] = 10;
 
 function separer_paras($texte, $paras = "") {
 	if (!$paras) $paras = array();
@@ -17,11 +18,45 @@ function separer_paras($texte, $paras = "") {
 	return $paras;
 }
 
+function replace_fragment($id_article, $version_min, $version_max, $id_fragment, $fragment) {
+	global $flag_gz;
+
+	$fragment = serialize($fragment);
+	$compress = 0;
+	if ($flag_gz) {
+		$s = gzcompress($fragment);
+		if (strlen($s) < strlen($fragment)) {
+			//echo "gain gz: ".(100 - 100 * strlen($s) / strlen($fragment))."%<br />";
+			$compress = 1;
+			$fragment = $s;
+		}
+	}
+	// Attention a bien echapper le $fragment qui est en binaire
+	return "($id_article, $version_min, $version_max, $id_fragment, $compress, '"
+		.mysql_escape_string($fragment)."')";
+}
+
+function exec_replace_fragments($replaces) {
+	if (count($replaces)) {
+		$query = "REPLACE spip_versions_fragments (id_article, version_min, version_max, id_fragment, compress, fragment) ".
+			"VALUES ".join(", ", $replaces);
+		spip_query($query);
+	}
+}
+function exec_delete_fragments($id_article, $deletes) {
+	if (count($deletes)) {
+		$query = "DELETE FROM spip_versions_fragments WHERE id_article=$id_article AND ((".
+			join(") OR (", $deletes)."))";
+		spip_query($query);
+	}
+}
+
+
 //
 // Ajouter les fragments de la derniere version (tableau associatif id_fragment => texte)
 //
 function ajouter_fragments($id_article, $id_version, $fragments) {
-	global $flag_gz;
+	global $flag_gz, $agregation_versions;
 
 	$replaces = array();
 	foreach ($fragments as $id_fragment => $texte) {
@@ -39,7 +74,8 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 			if (is_array($fragment)) {
 				unset($fragment[$id_version]);
 				// Si le fragment n'est pas trop gros, prolonger celui-ci
-				$nouveau = count($fragment) > 8 && strlen($row['fragment']) > 1000;
+				$nouveau = count($fragment) >= $agregation_versions
+					&& strlen($row['fragment']) > 1000;
 			}
 		}
 		if ($nouveau) {
@@ -59,27 +95,132 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 		}
 		
 		// Preparer l'enregistrement du fragment
-		$fragment = serialize($fragment);
-		$compress = 0;
-		$version_max = $id_version;
-		if ($flag_gz) {
-			$s = gzcompress($fragment);
-			if (strlen($s) < strlen($fragment)) {
-				//echo "gain gz: ".(100 - 100 * strlen($s) / strlen($fragment))."%<br />";
-				$compress = 1;
-				$fragment = $s;
-			}
-		}
-		// (attention a bien echapper le $fragment qui est en binaire)
-		$replaces[] = "($id_article, $version_min, $version_max, $id_fragment, $compress, '"
-			.mysql_escape_string($fragment)."')";
+		$replaces[] = replace_fragment($id_article, $version_min, $id_version, $id_fragment, $fragment);
 	}
 
-	if (count($replaces)) {
-		$query = "REPLACE spip_versions_fragments (id_article, version_min, version_max, id_fragment, compress, fragment) ".
-			"VALUES ".join(", ", $replaces);
-		spip_query($query);
+	exec_replace_fragments($replaces);
+}
+
+//
+// Supprimer tous les fragments d'un article lies a un intervalle de versions
+// (essaie d'eviter une trop grande fragmentation)
+//
+function supprimer_fragments($id_article, $version_debut, $version_fin) {
+	global $flag_gz, $agregation_versions;
+
+	$replaces = array();
+	$deletes = array();
+
+	// D'abord, vider les fragments inutiles
+	$query = "DELETE FROM spip_versions_fragments WHERE id_article=$id_article ".
+		"AND version_min>=$version_debut AND version_max<=$version_fin";
+	spip_query($query);
+
+	// Fragments chevauchant l'ensemble de l'intervalle, s'ils existent
+	$query = "SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments ".
+		"WHERE id_article=$id_article AND version_min<$version_debut AND version_max>$version_fin";
+	$result = spip_query($query);
+
+	while ($row = spip_fetch_array($result)) {
+		$id_fragment = $row['id_fragment'];
+		$fragment = $row['fragment'];
+		if ($row['compress'] > 0) $fragment = gzuncompress($fragment);
+		$fragment = unserialize($fragment);
+		for ($i = $version_fin; $i >= $version_debut; $i--) {
+			if (isset($fragment[$i])) {
+				// Recopier le dernier fragment si implicite
+				if (!isset($fragment[$version_fin + 1]))
+					$fragment[$version_fin + 1] = $fragment[$i];
+				unset($fragment[$i]);
+			}
+		}
+
+		$replaces[] = replace_fragment($id_article,
+			$row['version_min'], $row['version_max'], $id_fragment, $fragment);
 	}
+
+	// Fragments chevauchant le debut de l'intervalle, s'ils existent
+	$query = "SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments ".
+		"WHERE id_article=$id_article AND version_min<$version_debut ".
+		"AND version_max>=$version_debut AND version_max<=$version_fin";
+	$result = spip_query($query);
+
+	$deb_fragment = array();
+	while ($row = spip_fetch_array($result)) {
+		$id_fragment = $row['id_fragment'];
+		$fragment = $row['fragment'];
+		$version_min = $row['version_min'];
+		$version_max = $row['version_max'];
+		if ($row['compress'] > 0) $fragment = gzuncompress($fragment);
+		$fragment = unserialize($fragment);
+		for ($i = $version_debut; $i <= $version_max; $i++) {
+			if (isset($fragment[$i])) unset($fragment[$i]);
+		}
+
+		// Stocker temporairement le fragment pour agregation
+		$deb_fragment[$id_fragment] = $fragment;
+		// Ajuster l'intervalle des versions
+		$deb_version_min[$id_fragment] = $version_min;
+		$deb_version_max[$id_fragment] = $version_debut - 1;
+	}
+
+	// Fragments chevauchant la fin de l'intervalle, s'ils existent
+	$query = "SELECT id_fragment, compress, fragment, version_min, version_max FROM spip_versions_fragments ".
+		"WHERE id_article=$id_article AND version_max>$version_fin ".
+		"AND version_min>=$version_debut AND version_min<=$version_fin";
+	$result = spip_query($query);
+
+	while ($row = spip_fetch_array($result)) {
+		$id_fragment = $row['id_fragment'];
+		$fragment = $row['fragment'];
+		$version_min = $row['version_min'];
+		$version_max = $row['version_max'];
+		if ($row['compress'] > 0) $fragment = gzuncompress($fragment);
+		$fragment = unserialize($fragment);
+		for ($i = $version_fin; $i >= $version_min; $i--) {
+			if (isset($fragment[$i])) {
+				// Recopier le dernier fragment si implicite
+				if (!isset($fragment[$version_fin + 1]))
+					$fragment[$version_fin + 1] = $fragment[$i];
+				unset($fragment[$i]);
+			}
+		}
+
+		// Virer l'ancien enregistrement (la cle primaire va changer)
+		$deletes[] = "id_fragment=$id_fragment AND version_min=$version_min";
+		// Essayer l'agregation
+		$agreger = false;
+		if (isset($deb_fragment[$id_fragment])) {
+			$agreger = (count($deb_fragment[$id_fragment]) + count($fragment) <= $agregation_versions);
+			if ($agreger) {
+				$fragment = $deb_fragment[$id_fragment] + $fragment;
+				$version_min = $deb_version_min[$id_fragment];
+			}
+			else {
+				$replaces[] = replace_fragment($id_article,
+					$deb_version_min[$id_fragment], $deb_version_max[$id_fragment],
+					$id_fragment, $deb_fragment[$id_fragment]);
+			}
+			unset($deb_fragment[$id_fragment]);
+		}
+		if (!$agreger) {
+			// Ajuster l'intervalle des versions
+			$version_min = $version_fin + 1;
+		}
+		$replaces[] = replace_fragment($id_article, $version_min, $version_max, $id_fragment, $fragment);
+	}
+
+	// Ajouter fragments restants
+	if (is_array($deb_fragment) && count($deb_fragment) > 0) {
+		foreach ($deb_fragment as $id_fragment => $fragment) {
+			$replaces[] = replace_fragment($id_article,
+				$deb_version_min[$id_fragment], $deb_version_max[$id_fragment],
+				$id_fragment, $deb_fragment[$id_fragment]);
+		}
+	}
+	
+	exec_replace_fragments($replaces);
+	exec_delete_fragments($id_article, $deletes);
 }
 
 //
@@ -87,7 +228,6 @@ function ajouter_fragments($id_article, $id_version, $fragments) {
 // renvoie un tableau associatif (id_fragment => texte)
 //
 function recuperer_fragments($id_article, $id_version) {
-	$id_version = intval($id_version);
 	$fragments = array();
 
 	$query = "SELECT id_fragment, version_min, compress, fragment FROM spip_versions_fragments ".
@@ -187,12 +327,10 @@ function apparier_paras($src, $dest, $flou = true) {
 	return array($src_dest, $dest_src);
 }
 
-
 //
 // Recuperer les champs d'une version donnee
 //
 function recuperer_version($id_article, $id_version) {
-	if (!$id_version) $id_version = '0';
 	$query = "SELECT champs FROM spip_versions ".
 		"WHERE id_article=$id_article AND id_version=$id_version";
 	$result = spip_query($query);
@@ -212,10 +350,17 @@ function recuperer_version($id_article, $id_version) {
 	return $textes;
 }
 
+function supprimer_versions($id_article, $version_min, $version_max) {
+	$query = "DELETE FROM spip_versions WHERE id_article=$id_article ".
+		"AND id_version>=$version_min AND id_version<=$version_max";
+	spip_query($query);
+	supprimer_fragments($id_article, $version_min, $version_max);
+}
+
 //
 // Ajouter une version a un article
 //
-function ajouter_version($id_article, $champs) {
+function ajouter_version($id_article, $champs, $titre_version = "") {
 	global $connect_id_auteur;
 
 	// Eviter les validations entremelees
@@ -280,13 +425,16 @@ function ajouter_version($id_article, $champs) {
 	ajouter_fragments($id_article, $id_version_new, $fragments);
 	if (!$codes) $codes = array();
 	$codes = addslashes(serialize($codes));
+	$permanent = empty($titre_version) ? 'non' : 'oui';
+	$titre_version = addslashes($titre_version);
 	if ($nouveau) {
-		$query = "INSERT spip_versions (id_article, id_version, permanent, date, id_auteur, champs) ".
-			"VALUES ($id_article, $id_version_new, 'non', NOW(), '$connect_id_auteur', '$codes')";
+		$query = "INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) ".
+			"VALUES ($id_article, $id_version_new, '$titre_version', '$permanent', NOW(), '$connect_id_auteur', '$codes')";
 		spip_query($query);
 	}
 	else {
-		$query = "UPDATE spip_versions SET date=NOW(), id_auteur=$connect_id_auteur, champs='$codes' ".
+		$query = "UPDATE spip_versions SET date=NOW(), id_auteur=$connect_id_auteur, champs='$codes', ".
+			"permanent='$permanent', titre_version='$titre_version' ".
 		 	"WHERE id_article=$id_article AND id_version=$id_version";
 		spip_query($query);
 	}
@@ -297,6 +445,5 @@ function ajouter_version($id_article, $champs) {
 
 	return $id_version_new;
 }
-
 
 ?>

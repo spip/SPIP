@@ -629,18 +629,41 @@ a.icone:hover { text-decoration: none; }
 /*
  * Correction orthographique
  */
- 
+
 .ortho {
 	background: #ffe0e0;
-	border: 2px transparent;
+	margin: 0px;
+	margin-bottom: -2px;
 	border-bottom: 2px dashed red;
 	color: inherit;
 	text-decoration: none;
 }
 a.ortho:hover {
+	margin: -2px;
 	border: 2px dashed red;
 	color: inherit;
 	text-decoration: none;
+}
+.ortho-dico {
+	background: #e0f4d0;
+	margin: 0px;
+	margin-bottom: -2px;
+	border-bottom: 2px dashed #a0b890;
+	color: inherit;
+	text-decoration: none;
+}
+a.ortho-dico:hover {
+	margin: -2px;
+	border: 2px dashed #a0b890;
+	color: inherit;
+	text-decoration: none;
+}
+
+#ortho-fixed {
+	position: fixed; top: 0px; right: 0px; width: 25%; padding: 15px; margin: 0px;
+}
+.ortho-content {
+	position: absolute; top: 0px; width: 70%; padding: 15px; margin: 0px;
 }
 .suggest-actif, .suggest-inactif {
 	font-family: "Trebuchet Sans MS", Verdana, Arial, sans-serif;
@@ -660,12 +683,23 @@ a.ortho:hover {
 	font-weight: normal;
 	z-index: 0;
 }
-.suggest-actif .detail {
+.suggest-actif .detail ul, .suggest-inactif .detail ul {
+	list-style-image: url(img_pack/puce.gif);
+	background: #f3f2f3;
+	margin: 0px;
+	padding: 0px;
+	padding-left: 25px;
+}
+.suggest-actif {
 	display: block;
 }
-.suggest-inactif .detail {
+.suggest-inactif {
 	display: none;
 }
+.form-ortho select {
+	background: #ffe0e0;
+}
+
 
 /*
  * Comparaison d'articles
