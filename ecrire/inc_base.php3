@@ -186,21 +186,24 @@ function creer_base() {
 		date_index datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		PRIMARY KEY (id_syndic),
 		KEY id_rubrique (id_rubrique),
-		KEY id_secteur (id_secteur))";
+		KEY id_secteur (id_secteur),
+		KEY statut (statut, date_syndic))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_syndic_articles (
 		id_syndic_article bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		id_syndic bigint(21) DEFAULT '0' NOT NULL,
 		titre text NOT NULL,
-		url text NOT NULL,
+		url VARCHAR(255) NOT NULL,
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		lesauteurs text NOT NULL,
 		maj TIMESTAMP,
 		statut VARCHAR(10) NOT NULL,
 		descriptif blob NOT NULL,
 		PRIMARY KEY (id_syndic_article),
-		KEY id_syndic (id_syndic))";
+		KEY id_syndic (id_syndic),
+		KEY statut (statut),
+		KEY url (url))";
 	$result = spip_query($query);
 
 
@@ -263,14 +266,15 @@ function creer_base() {
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites_temp (
-		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		ip varchar(16) NOT NULL,
+		date DATE '0000-00-00 00:00:00' NOT NULL,
+		ip INTEGER UNSIGNED NOT NULL,
 		type varchar(16) NOT NULL,
-		referer text NOT NULL)";
+		referer text NOT NULL,
+		KEY ip (ip))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_visites (
-		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		date DATE NOT NULL,
 		type varchar(16) NOT NULL,
 		visites bigint(21) DEFAULT '0' NOT NULL,
 		maj TIMESTAMP)";
@@ -278,7 +282,7 @@ function creer_base() {
 
 	$query = "CREATE TABLE spip_visites_referers (
 		id_referer bigint(21) DEFAULT '0' NOT NULL auto_increment,
-		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		date DATE NOT NULL,
 		referer text,
 		referer_md5 varchar(16) NOT NULL,
 		type varchar(16) NOT NULL,
@@ -875,6 +879,22 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX statut (statut)");
 	}
 
+	if ($version_installee < 1.439) {
+		spip_query("ALTER TABLE spip_syndic ADD INDEX statut (statut, date_syndic)");
+		spip_query("ALTER TABLE spip_syndic_articles ADD INDEX statut (statut)");
+		spip_query("ALTER TABLE spip_syndic_articles CHANGE url url VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles ADD INDEX url (url)");
+	}
+
+	if ($version_installee < 1.440) {
+		spip_query("ALTER TABLE spip_visites_temp CHANGE ip ip INTEGER UNSIGNED NOT NULL");
+	}
+
+	if ($version_installee < 1.441) {
+		spip_query("ALTER TABLE spip_visites_temp CHANGE date date DATE NOT NULL");
+		spip_query("ALTER TABLE spip_visites CHANGE date date DATE NOT NULL");
+		spip_query("ALTER TABLE spip_visites_referers CHANGE date date DATE NOT NULL");
+	}
 
 	//
 	// Mettre a jour le numero de version installee

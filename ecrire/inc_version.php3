@@ -13,7 +13,7 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 
 // version de la base
-$spip_version = 1.438;
+$spip_version = 1.441;
 
 // version de spip
 // (mettre a jour a la main et conserver la mention "CVS")
