@@ -363,7 +363,7 @@ rebutjada) :
 Gr&agrave;cies per la seva participaci&oacute;
 ',
 'form_pet_message_commentaire' => 'Un missatge, un commentari?',
-'form_pet_nom_site2' => '<B>Nom del vostre lloc Web',
+'form_pet_nom_site2' => 'Nom del vostre lloc Web',
 'form_pet_probleme_technique' => 'Problema t&egrave;cnic, les signatures estan temporalment suspeses.',
 'form_pet_signature_pasprise' => 'La seva signatura no s\'ha tingut en compte.',
 'form_pet_signature_validee' => 'La seva signatura ha estat validada. Apareixer&agrave; a la propera actualitzaci&oacute; del lloc. Gr&agrave;cies!',
