@@ -57,7 +57,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					calcul_branche($hash_recherche_strict),"") . "))
 					AS points';
 				$boucle->where[] = "rec.". $table_primary[$type] . "=$id_field";
-				$boucle->group = "'$id_field'";
+				$boucle->group = $id_field;
 				$boucle->where[] = '" .' . 'calcul_mysql_in("rec.hash",
 					calcul_branche($hash_recherche),"") . "';
 				$boucles[$idb]->hash = true;
@@ -142,7 +142,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					$col_table = $s;
 					$boucle->from[] = "$col_table AS $col_table";
 					$boucle->where[] = "$id_field=$col_table." . $table_primary[$type];
-					$boucle->group = "'$id_field'";
+					$boucle->group = $id_field;
 					$boucle->lien = true;
 				}
 				// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
@@ -159,7 +159,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					$boucle->from[] = 'mots AS mots';
 					$boucle->where[] = "$id_field=lien_mot." . $table_primary[$type];
 					$boucle->where[] = 'lien_mot.id_mot=mots.id_mot';
-					$boucle->group = "'$id_field'";
+					$boucle->group = $id_field;
 					$col_table = 'mots';
 
 					$boucle->lien = true;

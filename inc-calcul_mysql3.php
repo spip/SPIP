@@ -133,10 +133,10 @@ function calcul_mysql_in($val, $valeurs, $tobeornotobe)
   
 function calcul_exposer ($pile, $reference) {
 	static $hierarchie;
+	static $ref_precedente;
 
-	$md5 = md5(serialize($reference));
-
-	if (!$hierarchie[$md5]) {
+	if ($reference<>$ref_precedente) {
+		$ref_precedente = $reference;
 		if ($id = $reference['id_article'])
 			$base = 'articles';
 		else if ($id = $reference['id_breve'])
@@ -148,42 +148,39 @@ function calcul_exposer ($pile, $reference) {
 		else if ($id = $reference['id_secteur'])
 			$base = 'rubriques';
 
-		if (!$base)
-			$hierarchie[$md5] = '-';
-		else {
+		unset ($hierarchie);
+		if ($base) {
 			if ($base != 'rubriques') {
-				$hierarchie[$md5][$base][$id] = true;
+				$hierarchie[$base][$id] = true;
 				$id_element = 'id_'.ereg_replace('s$', '', $base);
 				$s = spip_fetch_array(spip_query(
 				"SELECT id_rubrique FROM spip_$base WHERE $id_element=$id"));
 				$id = $s['id_rubrique'];
 			}
 
-			$hierarchie[$md5]['rubriques'][$id] = true;
+			$hierarchie['rubriques'][$id] = true;
 
 			while (true) {
 				$s = spip_fetch_array(spip_query(
 				"SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id"));
 				if ($id = $s['id_parent'])
-					$hierarchie[$md5]['rubriques'][$id] = true;
+					$hierarchie['rubriques'][$id] = true;
 				else
 					break;
 			}
 		}
 	}
 
-	if ($hierarchie[$md5] == '-')
-		return false;
-	else if ($id = $pile['id_article'])
-		return $hierarchie[$md5]['articles'][$id];
+	if ($id = $pile['id_article'])
+		return $hierarchie['articles'][$id];
 	else if ($id = $pile['id_breve'])
-		return $hierarchie[$md5]['breves'][$id];
+		return $hierarchie['breves'][$id];
 	else if ($id = $pile['id_syndic'])
-		return $hierarchie[$md5]['syndic'][$id];
+		return $hierarchie['syndic'][$id];
 	else if ($id = $pile['id_rubrique'])
-		return $hierarchie[$md5]['rubriques'][$id];
+		return $hierarchie['rubriques'][$id];
 	else if ($id = $pile['id_secteur'])
-		return $hierarchie[$md5]['rubriques'][$id];
+		return $hierarchie['rubriques'][$id];
 
 }
 
