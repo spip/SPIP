@@ -429,8 +429,9 @@ a.spip_glossaire:hover {text-decoration: underline overline;}
 	background-color: #FFFFFF;
 	padding: 5px;
 }
-.spip_quote {
-	margin-left : 40px;
+blockquote.spip {
+	margin-<?php echo $left; ?>: 40px;
+	margin-<?php echo $right; ?>: 0px;
 	margin-top : 10px;
 	margin-bottom : 10px;
 	border : solid 1px #aaaaaa;
