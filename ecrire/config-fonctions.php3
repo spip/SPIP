@@ -196,25 +196,24 @@ if ($options == "avancees") {
 
 debut_cadre_relief("statistiques-24.gif");
 
-$langues_proposees = split(",",lire_meta("langues_proposees"));
+$langues_prop = split(",",lire_meta("langues_proposees"));
 $langue_site = lire_meta('langue_site');
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._L('Langues du site')."</FONT></B> ".aide ()."</TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
-echo _L('Veuillez choisir ci-dessous la langue par d&eacute;faut de votre site, ainsi que les langues qui seront propos&eacute;es aux r&eacute;dacteurs.
-<p>Les langues support&eacute;es par SPIP sont class&eacute;es en deux groupes&nbsp;: les premi&egrave;res sont compl&egrave;tes et v&eacute;rifi&eacute;es&nbsp;; les secondes sont incompl&egrave;tes ou en cours de tests.');
+echo _L('Veuillez choisir ci-dessous la langue par d&eacute;faut de votre site, ainsi que les langues qui seront propos&eacute;es aux r&eacute;dacteurs.');
 echo "</TD></TR>";
 
 
 // langue par defaut
-echo "<TR><TD ALIGN='center' class='verdana2'>";
+echo "<TR><TD ALIGN='left' class='verdana2'>";
 echo _L('Langue par d&eacute;faut&nbsp;: ');
-echo "\n<select name='langue_site' class='formo'>\n";
-echo "<option value='$langue_site'>"._T("langue_".$langue_site)."</option>\n";
-reset ($langues_proposees);
-while (list(,$l) = each ($langues_proposees)) {
+echo "\n<select name='langue_site' class='fondl'>\n";
+echo "<option value='$langue_site' selected>"._T("langue_".$langue_site)."</option>\n";
+reset ($langues_prop);
+while (list(,$l) = each ($langues_prop)) {
 	if ($l <> $langue_site)
 		echo "<option value='$l'>"._T("langue_".$l)."</option>\n";
 }
@@ -223,16 +222,21 @@ echo "</TD></TR>";
 
 
 // langues proposees
-echo "<TR><TD ALIGN='center' class='verdana2'>";
+echo "<TR><TD ALIGN='left' class='verdana2'>";
 echo _L('Langues propos&eacute;es&nbsp;: ');
-echo "\n<select name='langue_site' class='formo'>\n";
-echo "<option value='$langue_site'>"._T("langue_".$langue_site)."</option>\n";
-reset ($langues_proposees);
-while (list(,$l) = each ($langues_proposees)) {
-	if ($l <> $langue_site)
-		echo "<option value='$l'>"._T("langue_".$l)."</option>\n";
+$langues_toutes = split(',',$all_langs);
+$langues_proposees = lire_meta('langues_proposees');
+$test = (ereg(",$langue_site,", ",$langues_tests,")) ? "&nbsp;(en&nbsp;test)" : "";
+echo "<input type='checkbox' name='langues_prop[]' value='$langue_site' checked id='lang_$langue_site'><label for='lang_$langue_site'>&nbsp;<b>"._T("langue_".$langue_site).'</b>'.$test."</label>\n";
+while (list(,$l) = each ($langues_toutes)) {
+	if ($l AND ($l <> $langue_site)) {
+		$test = (ereg(",$l,", ",$langues_tests,")) ? " (en test)" : "";
+		if (ereg(",$l,", ",$langues_proposees,"))
+			echo "&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' checked id='lang_$l'><label for='lang_$l'>&nbsp;<b>"._T("langue_".$l).'</b>'._L($test).'</label>';
+		else
+			echo "&nbsp; <input type='checkbox' name='langues_prop[]' value='$l' id='lang_$l'> <label for='lang_$l'>"._T("langue_".$l)._L($test).'</label>';
+	}
 }
-echo "</select><br>\n";
 echo "</TD></TR>";
 
 
