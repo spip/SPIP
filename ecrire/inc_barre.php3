@@ -31,7 +31,7 @@ function afficher_script_barre(){
 	
 	if ($flag_script_deja_affiche != 1) {
 		$flag_script_deja_affiche = 1;
-		$ret = '<script type="text/javascript" src="'.($flag_ecrire ? "" : "ecrire/").'spip_barre.js">';
+		$ret = '<script type="text/javascript" src="'.($flag_ecrire ? "../" : "").'spip_barre.js">';
 		$ret .= "</script>\n";
 		return $ret;	
 	}
@@ -40,8 +40,8 @@ function afficher_script_barre(){
 function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	global $flag_ecrire;
 	$champ = "document.$formulaire.$texte";
-	$champhelp = "document.$formulaire.helpbox";
-	return "<a href=\"".$action."\" onMouseOver=\"helpline('$help')\"><img src='".($flag_ecrire ? "" : "ecrire/")."img_pack/".$img."' border='0' height='16' title='$help'></a>";
+	$champhelp = "document.$formulaire.helpbox$texte";
+	return "<a href=\"".$action."\" onMouseOver=\"helpline('$help',$champhelp)\"><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' title='$help' align='middle'></a>";
 }
 
 function afficher_barre($formulaire='',$texte='', $forum=false) {
@@ -50,9 +50,10 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 	if (test_barre()) {	
 		$ret = afficher_script_barre();
 		$champ = "document.$formulaire.$texte";
-		$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
+		$ret .= "<table cellpadding='0' style='padding-top:2px;' cellspacing='0' border='0' width='100%'>";
 		$ret .= "<tr width='100%'>";
 		$ret .= "<td align='left'>";
+		$col++;
 		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{{','}}',$champ)", "barre-bold.png", "Mettre en {{gras}}", $formulaire, $texte);
 		$ret .= bouton_barre_racc ("javascript:barre_raccourci('{','}',$champ)", "barre-italic.png", "Mettre en {italique}", $formulaire, $texte);
 		if (!$forum) {	
@@ -70,7 +71,8 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		}
 		$ret .= "</td>";
 		
-		$ret .= "<td align='right'>";
+		$ret .= "<td align='center'>";
+		$col++;
 		if ($spip_lang == "fr") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "barre-guillemets.png", "Insérer des &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
 			//$ret .= "<a href=\"javascript:barre_raccourci('&laquo;','&raquo;',$champ, 'Insérer des &laquo; guillemets fran&ccedil;ais &raquo;')\"><img src='".($flag_ecrire ? "" : "ecrire/")."img_pack/barre-guillemets.png' border='0' width='24' height='24' title='Placer entre guillemets'></a>";
@@ -87,8 +89,16 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "barre-euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
 		}
 		$ret .= "</td>";
+		
+		if ($flag_ecrire) {
+			$ret .= "<td align='right' onMouseOver=\"helpline('En savoir plus sur les raccourcis typographiques',helpbox$texte)\">";
+			$col++;
+			$ret .= aide("raccourcis");
+			$ret .= "</td>";
+		}
+		
 		$ret .= "</tr>";
-		$ret .= "<tr><td colspan='2'><input type='text' name='helpbox' size='45' maxlength='100' style='width:100%; font-size:10px; background-color: #eeeeee; border: 0px solid #eeeeee;' value='Utilisez les raccourcis de SPIP pour enrichir votre mise en pages' /></td></tr>";
+		$ret .= "<tr><td colspan='$col'><input type='text' name='helpbox".$texte."' size='45' maxlength='100' style='width:100%; font-size:10px; background-color: #eeeeee; border: 0px solid #eeeeee;' value='Utilisez les raccourcis de SPIP pour enrichir votre mise en pages' /></td></tr>";
 		$ret .= "</table>";
 	}
 	return $ret;
