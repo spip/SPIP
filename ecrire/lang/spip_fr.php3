@@ -704,7 +704,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_multi_cette_rubrique' => 'Langue utilis&eacute;e dans cette rubrique&nbsp;:',
 'info_multi_herit' => 'langue de la rubrique sup&eacute;rieure',
 'info_multi_langues_choisies' => 'Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
+		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.
+		Attention&nbsp;: seules les langues affich&eacute;es en gras sont int&eacute;gralement g&eacute;r&eacute;es par le syst&egrave;me de publication.',
 'info_multi_rubriques' => 'Activer le menu de langue sur les rubriques&nbsp;?',
 'info_multi_secteurs' => '... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_nexen_1' => 'Votre h&eacute;bergeur est Nexen Services.',
