@@ -500,7 +500,7 @@ function ajout_forum() {
 						$ok = true;
 						poser_cookie_forum($email_forum_abo, $row["id_auteur"]);
 						
-						$fich = substr($fich, strrpos($REQUEST_URI, '/') + 1)."&id_message=$id_message";
+						$fich = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1)."&id_message=$id_message";
 						
 						@header("Location: $fich");
 						break;
