@@ -1047,6 +1047,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet(_T('onglet_interactivite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
+		onglet(_T('onglet_langues'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){
@@ -1594,7 +1595,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<td>   </td>";
 
 		echo "<td align='center'>";
-		echo menu_langues();
+		echo menu_langues('var_lang','','',true);
 		echo "</td>";
 
 	}
