@@ -91,10 +91,10 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "<td align='center'>";
 		$col++;
 		if ($spip_lang == "fr") {
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "Agrave.png", "Ins&eacute;rer un A accent grave majuscule", $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "Eacute.png", "Ins&eacute;rer un E accent aigu majuscule", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "agrave-maj.png", "Ins&eacute;rer un A accent grave majuscule", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "eacute-maj.png", "Ins&eacute;rer un E accent aigu majuscule", $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "oelig.png", "Ins&eacute;rer un E-dans-l-O", $formulaire, $texte);
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "OElig.png", "Ins&eacute;rer un E-dans-l-O majuscule", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "oelig-maj.png", "Ins&eacute;rer un E-dans-l-O majuscule", $formulaire, $texte);
 		}
 		//$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
 		$ret .= "</td>";
