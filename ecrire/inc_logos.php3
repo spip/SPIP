@@ -36,14 +36,14 @@ function resize_logo($image) {
 	$limagelarge = $limage[0];
 	$limagehaut = $limage[1];
 
-	if ($limagelarge > 200){
-		$limagehaut = $limagehaut * 200 / $limagelarge;
-		$limagelarge = 200;
+	if ($limagelarge > 190){
+		$limagehaut = $limagehaut * 190 / $limagelarge;
+		$limagelarge = 190;
 	}
 
-	if ($limagehaut > 200){
-		$limagelarge = $limagelarge * 200 / $limagehaut;
-		$limagehaut = 200;
+	if ($limagehaut > 190){
+		$limagelarge = $limagelarge * 190 / $limagehaut;
+		$limagehaut = 190;
 	}
 
 	// arrondir a l'entier superieur

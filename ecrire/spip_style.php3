@@ -868,7 +868,6 @@ a.bouton_rotation:hover img {
 	background-color: white;
 	border: 2px solid <? echo $couleur_foncee; ?>;
 	-moz-border-radius: 8px;
-	margin-bottom: 5px;
 }
 .cadre-trait-couleur div.cadre-titre {
 	background: <? echo $couleur_foncee; ?>;
@@ -879,7 +878,6 @@ a.bouton_rotation:hover img {
 .cadre-r {
 	background-color: white;
 	border: 1px solid #666666;
-	margin-bottom: 5px;
 	-moz-border-radius: 8px;
 }
 
@@ -908,7 +906,6 @@ a.bouton_rotation:hover img {
 .cadre-e-noir {
 	border: 1px solid #666666;
 	-moz-border-radius: 8px;
-	margin-bottom: 5px;
 }
 
 .cadre-forum {
@@ -939,7 +936,6 @@ a.bouton_rotation:hover img {
 	border: 2px solid <?php echo $couleur_foncee; ?>;
 	padding: 5px;
 	-moz-border-radius: 8px;
-	margin-bottom: 5px;
 }
 
 
@@ -949,7 +945,6 @@ a.bouton_rotation:hover img {
 	color: #444444;
 	font-family: verdana, arial, helvetica, sans;
 	font-size: 11px;
-	margin-bottom: 5px;
 }
 
 
