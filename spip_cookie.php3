@@ -64,7 +64,7 @@ if ($essai_login == "oui") {
 			$cookie_admin = "@".$row_auteur['login'];
 
 		$cookie_session = creer_cookie_session($row_auteur);
-		setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 7);
+		setcookie('spip_session', $cookie_session);
 	
 		// fait tourner le codage du pass dans la base
 		$nouvel_alea_futur = creer_uniqid();
@@ -75,7 +75,6 @@ if ($essai_login == "oui") {
 			WHERE login='$login'";
 		@spip_query($query);
 		$cible->addVar('bonjour','oui');
-
 	}
 	else {
 		$url = urlencode($cible->getUrl());
