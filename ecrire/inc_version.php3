@@ -607,8 +607,23 @@ function getTmpVar($name) {
 	return $GLOBALS['this_link']->getTmpVar($name);
 }
 
+//
+// Lien vers la page demandee et lien nettoye ne contenant que des id_objet
+//
 $this_link = new Link();
 
+$clean_link = $this_link;
+
+if (count($GLOBALS['HTTP_POST_VARS'])) {
+	$clean_link->clearVars();
+	$vars = array('id_article', 'coll', 'id_breve', 'id_rubrique', 'id_syndic', 'id_mot', 'id_auteur'); // il en manque probablement ?
+	while (list(,$var) = each($vars)) {
+		if (isset($$var)) {
+			$clean_link->addVar($var, $$var);
+			break;
+		}
+	}
+}
 
 //
 // Verifier la conformite d'une adresse email
