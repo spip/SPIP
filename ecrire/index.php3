@@ -176,7 +176,7 @@ if ($spip_display != 4) {
 				"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
 					     "AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-$jour_today' AND messages.date_heure < DATE_ADD('$annee_today-$mois_today-$jour_today', INTERVAL 1 DAY) AND messages.statut='publie' LIMIT 0,1"))) {
 			echo "<p />";
-			echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col");
+			echo http_calendrier_jour($jour_today,$mois_today,$annee_today, "col", $partie_cal, $echelle);
 		}
 }
 
