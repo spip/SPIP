@@ -359,3 +359,4 @@ function centrer($letexte) {
 	return $letexte;
 }
 
+?>
