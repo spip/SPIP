@@ -292,7 +292,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article";
 		if ($row = mysql_fetch_row(mysql_query($req))) {
 			$nbforums = '<br>V&eacute;rifier '.$row[0].' contribution(s).';
-			echo "<a href='articles_forum.php3?id_article=$id_article'>$nbforums</a>\n";
+			if ($row[0]>0) echo "<a href='articles_forum.php3?id_article=$id_article'>$nbforums</a>\n";
 		}
 	}
 
