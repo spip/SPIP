@@ -473,6 +473,26 @@ function centrer($letexte) {
 }
 
 //
+// Export iCal
+//
+
+function filtrer_ical ($texte) {
+	global $charset;
+	$texte = html2unicode($texte);
+	$texte = unicode2charset(charset2unicode($texte, $charset, 1), 'utf-8');
+	$texte = ereg_replace("\n", " ", $texte);
+	$texte = ereg_replace(",", "\,", $texte);
+
+	return $texte;
+}
+
+function date_ical ($date_heure, $minutes = 0) {
+	return date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+$minutes,0,mois($date_heure),jour($date_heure),annee($date_heure)));
+}
+
+
+
+//
 // Recuperation de donnees dans le champ extra
 // Ce filtre n'a de sens qu'avec la balise #EXTRA
 //
