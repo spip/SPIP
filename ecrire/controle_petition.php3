@@ -72,7 +72,7 @@ function controle_forum($request,$adresse_retour) {
 			$id_article = $row['id_article'];
 			$titre = typo($row["titre"]);
 		}
-		echo "<P align='right'><A HREF='../spip_redirect.php3?id_article=$id_article&recalcul=oui'>$titre</A>";
+		echo "<P align='right'><A HREF='../spip_redirect.php3?id_article=$id_article'>$titre</A>";
 	
 		echo "</TD></TR></TABLE>";
 		
