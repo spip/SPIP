@@ -1195,7 +1195,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'onglet_origine_visites' => 'Origen de las visitas',
 'onglet_repartition_actuelle' => 'actualmente',
 'onglet_repartition_debut' => 'desde el principio',
-'onglet_repartition_lang' => 'por idiomas',
+'onglet_repartition_lang' => 'Distribuci&oacute;n por idiomas',
 'onglet_repartition_rubrique' => 'Reparto por secciones',
 'onglet_save_restaur_base' => 'Crear copia de seguridad y restaurar la base',
 'onglet_vider_cache' => 'Vaciar la cach&eacute;',
@@ -1389,7 +1389,7 @@ Se prudente con  esta funcionalidad: <b>las modificaciones o p&eacute;rdidas eve
 <li> la naturaleza del motor tipogr&aacute;fico que SPIP debe utilizar para reproducir los textos;</li>
 <li> el idioma utilizado en los formularios del sitio p&uacute;blico;</li>
 <li> el idioma mostrado por defecto en el espacio privado.</li></ul>',
-'texte_signification' => 'Las barras rojas representan las entradas acumuladas (total de las subsecciones), las barras verdes el n&uacute;mero de visitas de cada secci&oacute;n.',
+'texte_signification' => 'Las barras oscuras representan las entradas acumuladas (total de las subsecciones), las barras claras el n&uacute;mero de visitas de cada secci&oacute;n.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(Barras oscuras: domingo / curva oscura: evoluci&oacute;n del promedio)',
 'texte_statut_attente_validation' => 'En espera de validaci&oacute;n',
