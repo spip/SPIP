@@ -328,7 +328,6 @@ $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 
 if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non"){
 	echo "<p>";
-//	if ($activer_statistiques_ref == "oui" AND $referers > 0) $aff_ref = "<br>$referers entr&eacute;es directes";
 	icone_horizontale("&Eacute;volution des visites<br>$visites visites$aff_ref", "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
 }
 

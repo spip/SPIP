@@ -214,7 +214,7 @@ function calculer_visites($date = "") {
 		}
 	}
 
-	if (lire_meta('activer_statistiques_ref') == 'oui') {
+	if (lire_meta('activer_statistiques_ref') != 'non') {
 		calculer_referers($date);
 	}
 }

@@ -440,7 +440,7 @@ if (count($log)>0){
 }
 
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-if ($activer_statistiques_ref == "oui"){
+if ($activer_statistiques_ref != "non"){
 	// Affichage des referers
 
 	$query = "SELECT * FROM $table_ref WHERE $where ORDER BY visites DESC LIMIT 0,100";
