@@ -1336,7 +1336,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	}
 	else if ($rubrique == "documents"){
 		icone_bandeau_secondaire ("Rubriques", "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
-		
+
 		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article"));
 		if ($nombre_articles > 0) {
 			icone_bandeau_secondaire ("Articles", "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
@@ -1383,8 +1383,13 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 		if (lire_meta("activer_statistiques") != 'non')
 			icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
-		if ($connect_toutes_rubriques && $options == "avancees") {
-			icone_bandeau_secondaire ("Maintenance du site", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+		if ($connect_toutes_rubriques) {
+			if ($options == "avancees") {
+				icone_bandeau_secondaire ("Maintenance du site", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+			}
+			else {
+				icone_bandeau_secondaire ("Sauvegarde du site", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+			}
 		}
 	}
 
