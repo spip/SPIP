@@ -56,10 +56,12 @@ function ecrire_logins($fichier, $tableau_logins) {
 function ecrire_acces() {
 	global $htaccess, $htpasswd;
 
-	// ne pas creer ce fichier s'il n'existe pas deja
-	// sauf si .htaccess existe !
-	if (!file_exists($htpasswd) and !file_exists($htaccess))
+	// si .htaccess existe, outrepasser spip_meta
+	if ((lire_meta('creer_htpasswd') == 'non') AND !file_exists($htaccess)) {
+		@unlink($htpasswd);
+		@unlink($htpasswd."-admin");
 		return;
+	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
 	$result = spip_query($query);

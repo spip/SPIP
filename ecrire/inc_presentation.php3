@@ -979,6 +979,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet("Contenu du site", "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet("Interactivit&eacute;", "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet("Fonctions avanc&eacute;es", "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
+		onglet("S&eacute;curit&eacute;", "config-securite.php3", "securite", $onglet, "cadenas-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){

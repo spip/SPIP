@@ -50,7 +50,10 @@ function init_config() {
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
-		'charset' => 'iso-8859-1'
+		'charset' => 'iso-8859-1',
+		
+		'secu_stricte' => 'non',
+		'creer_htpasswd' => 'oui'
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
 		if (!lire_meta($nom)) {
@@ -204,7 +207,10 @@ function appliquer_modifs_config() {
 
 		'documents_article',
 		'documents_rubrique',
-		'charset'
+		'charset',
+
+		'secu_stricte',
+		'creer_htpasswd'
 	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
