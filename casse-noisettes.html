@@ -1,4 +1,3 @@
-<html>
 <table border='1' width='100%'>
 <tr><td colspan=2 align=center>Balise hors boucle </td></tr>
 <tr><td>NOM_SITE_SPIP</td><td> #NOM_SITE_SPIP</td></tr>
@@ -51,64 +50,61 @@
 <hr />
 <table border='1' width='100%'>
 <tr><td colspan=2 align=center>Balises visibles selon les configurations </td></tr>
-<tr><td>FORMULAIRE_SITE</td><td><BOUCLE_FORMULAIRE_SITE(RUBRIQUES){1,1}> #FORMULAIRE_SITE</BOUCLE_FORMULAIRE_SITE></td></tr>
-<tr><td>FORMULAIRE_ECRIRE_AUTEUR</td><td><BOUCLE_FORMULAIRE_ECRIRE_AUTEUR(AUTEURS){1,1}> #FORMULAIRE_ECRIRE_AUTEUR</BOUCLE_FORMULAIRE_ECRIRE_AUTEUR></td></tr>
+<tr><td>FORMULAIRE_SITE</td><td><BOUCLE_FORMULAIRE_SITE(RUBRIQUES){0,1}> #FORMULAIRE_SITE</BOUCLE_FORMULAIRE_SITE></td></tr>
+<tr><td>FORMULAIRE_ECRIRE_AUTEUR</td><td><BOUCLE_FORMULAIRE_ECRIRE_AUTEUR(AUTEURS){0,1}> #FORMULAIRE_ECRIRE_AUTEUR</BOUCLE_FORMULAIRE_ECRIRE_AUTEUR></td></tr>
 <tr><td>FORMULAIRE_SIGNATURE</td><td>
 <?php <BOUCLE_FORMULAIRE_SIGNATURE(ARTICLES)>if ("[(#FORMULAIRE_SIGNATURE|strlen)]")  $x='#ID_ARTICLE';</BOUCLE_FORMULAIRE_SIGNATURE><BOUCLE_FORMULAIRE_SIGNATURE2(ARTICLES)> if ($x == "#ID_ARTICLE") {?> #FORMULAIRE_SIGNATURE <?}</BOUCLE_FORMULAIRE_SIGNATURE2>  ?></td></tr>
 </table>
 <hr />
 <table border='1' width='100%'>
 <tr><td colspan=2 align=center>Balise de logos (cherche le 1er par PHP)</td></tr> 
-<tr><td>LOGO_ARTICLE</td><td><?php <BOUCLE_LOGO_ARTICLE(ARTICLES)>if ("[(#LOGO_ARTICLE|fichier)]")  $x='#ID_ARTICLE';</BOUCLE_LOGO_ARTICLE><BOUCLE_LOGO_ARTICLE2(ARTICLES)> if ($x == "#ID_ARTICLE") echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_ARTICLE2>  ?></td></tr>
 
-<tr><td>LOGO_ARTICLE_RUBRIQUE</td><td><?php <BOUCLE_LOGO_ARTICLE_RUBRIQUE(ARTICLES)>if ("[(#LOGO_ARTICLE_RUBRIQUE|fichier)]")  $x='#ID_ARTICLE';</BOUCLE_LOGO_ARTICLE_RUBRIQUE><BOUCLE_LOGO_ARTICLE_RUBRIQUE2(ARTICLES)> if ($x == "#ID_ARTICLE") echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_ARTICLE_RUBRIQUE2>  ?></td></tr>
+<tr><td>LOGO_ARTICLE</td><td><?php $vu=false; <BOUCLE_LOGO_ARTICLE(ARTICLES)>if ("[(#LOGO_ARTICLE|fichier)]" && !$vu) {$vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_ARTICLE>  ?></td></tr>
 
-<tr><td>LOGO_ARTICLE_NORMAL</td><td><?php <BOUCLE_LOGO_ARTICLE_NORMAL(ARTICLES)>if ("[(#LOGO_ARTICLE_NORMAL|fichier)]")  $x='#ID_ARTICLE';</BOUCLE_LOGO_ARTICLE_NORMAL><BOUCLE_LOGO_ARTICLE_NORMAL2(ARTICLES)> if ($x == "#ID_ARTICLE") echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_NORMAL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_ARTICLE_NORMAL2>  ?></td></tr>
+<tr><td>LOGO_ARTICLE_RUBRIQUE</td><td><?php $vu=false; <BOUCLE_LOGO_ARTICLE_RUBRIQUE(ARTICLES)>if ("[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" && !$vu) {$vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_ARTICLE_RUBRIQUE>  ?></td></tr>
 
-<tr><td>LOGO_ARTICLE_SURVOL</td><td><?php <BOUCLE_LOGO_ARTICLE_SURVOL(ARTICLES)>if ("[(#LOGO_ARTICLE_SURVOL|fichier)]")  $x='#ID_ARTICLE';</BOUCLE_LOGO_ARTICLE_SURVOL><BOUCLE_LOGO_ARTICLE_SURVOL2(ARTICLES)> if ($x == "#ID_ARTICLE") echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_SURVOL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_ARTICLE_SURVOL2>  ?></td></tr>
+<tr><td>LOGO_ARTICLE_NORMAL</td><td><?php $vu=false; <BOUCLE_LOGO_ARTICLE_NORMAL(ARTICLES)>if ("[(#LOGO_ARTICLE_NORMAL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_NORMAL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_ARTICLE_NORMAL>  ?></td></tr>
+
+<tr><td>LOGO_ARTICLE_SURVOL</td><td><?php $vu=false; <BOUCLE_LOGO_ARTICLE_SURVOL(ARTICLES)>if ("[(#LOGO_ARTICLE_SURVOL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_SURVOL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_ARTICLE_SURVOL>  ?></td></tr>
+
+<tr><td>LOGO_AUTEUR</td><td><?php $vu=false; <BOUCLE_LOGO_AUTEUR(AUTEURS)>if ("[(#LOGO_AUTEUR|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_AUTEUR>  ?></td></tr>
+
+<tr><td>LOGO_AUTEUR_RUBRIQUE</td><td><?php $vu=false; <BOUCLE_LOGO_AUTEUR_RUBRIQUE(AUTEURS)>if ("[(#LOGO_AUTEUR_RUBRIQUE|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_AUTEUR_RUBRIQUE>  ?></td></tr>
+
+<tr><td>LOGO_AUTEUR_NORMAL</td><td><?php $vu=false; <BOUCLE_LOGO_AUTEUR_NORMAL(AUTEURS)>if ("[(#LOGO_AUTEUR_NORMAL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR_NORMAL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_AUTEUR_NORMAL>  ?></td></tr>
+
+<tr><td>LOGO_AUTEUR_SURVOL</td><td><?php $vu=false; <BOUCLE_LOGO_AUTEUR_SURVOL(AUTEURS)>if ("[(#LOGO_AUTEUR_SURVOL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR_SURVOL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_AUTEUR_SURVOL>  ?></td></tr>
 
 
-
-<tr><td>LOGO_AUTEUR</td><td><?php <BOUCLE_LOGO_AUTEUR(AUTEURS)>if ("[(#LOGO_AUTEUR|fichier)]")  $x='#ID_AUTEUR';</BOUCLE_LOGO_AUTEUR><BOUCLE_LOGO_AUTEUR2(AUTEURS)> if ($x == "#ID_AUTEUR") echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_AUTEUR2>  ?></td></tr>
-
-<tr><td>LOGO_AUTEUR_RUBRIQUE</td><td><?php <BOUCLE_LOGO_ARTICLE_RUBRIQUE(ARTICLES)>if ("[(#LOGO_ARTICLE_RUBRIQUE|fichier)]")  $x='#ID_ARTICLE';</BOUCLE_LOGO_ARTICLE_RUBRIQUE><BOUCLE_LOGO_ARTICLE_RUBRIQUE2(ARTICLES)> if ($x == "#ID_ARTICLE") echo '<img class="vignette" src="IMG/[(#LOGO_ARTICLE_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_ARTICLE_RUBRIQUE2>  ?></td></tr>
-
-<tr><td>LOGO_AUTEUR_NORMAL</td><td><?php <BOUCLE_LOGO_AUTEUR_NORMAL(AUTEURS)>if ("[(#LOGO_AUTEUR_NORMAL|fichier)]")  $x='#ID_AUTEUR';</BOUCLE_LOGO_AUTEUR_NORMAL><BOUCLE_LOGO_AUTEUR_NORMAL2(AUTEURS)> if ($x == "#ID_AUTEUR") echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR_NORMAL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_AUTEUR_NORMAL2>  ?></td></tr>
-
-<tr><td>LOGO_AUTEUR_SURVOL</td><td><?php <BOUCLE_LOGO_AUTEUR_SURVOL(AUTEURS)>if ("[(#LOGO_AUTEUR_SURVOL|fichier)]")  $x='#ID_AUTEUR';</BOUCLE_LOGO_AUTEUR_SURVOL><BOUCLE_LOGO_AUTEUR_SURVOL2(AUTEURS)> if ($x == "#ID_AUTEUR") echo '<img class="vignette" src="IMG/[(#LOGO_AUTEUR_SURVOL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_AUTEUR_SURVOL2>  ?></td></tr>
-
-
-<tr><td>LOGO_BREVE</td><td><?php <BOUCLE_LOGO_BREVE(BREVES)>if ("[(#LOGO_BREVE|fichier)]")  $x='#ID_BREVE';</BOUCLE_LOGO_BREVE><BOUCLE_LOGO_BREVE2(BREVES)> if ($x == "#ID_BREVE") echo '<img class="vignette" src="IMG/[(#LOGO_BREVE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_BREVE2>  ?></td></tr>
+<tr><td>LOGO_BREVE</td><td><?php $vu=false; <BOUCLE_LOGO_BREVE(BREVES)>if ("[(#LOGO_BREVE|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_BREVE|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_BREVE>  ?></td></tr>
 <tr><td>LOGO_BREVE_RUBRIQUE</td><td><?php <BOUCLE_LOGO_BREVE_RUBRIQUE(BREVES)>if ("[(#LOGO_BREVE_RUBRIQUE|fichier)]")  $x='#ID_BREVE';</BOUCLE_LOGO_BREVE_RUBRIQUE><BOUCLE_LOGO_BREVE_RUBRIQUE2(BREVES)> if ($x == "#ID_BREVE") echo '<img class="vignette" src="IMG/[(#LOGO_BREVE_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_BREVE_RUBRIQUE2>  ?></td></tr>
 
-<tr><td>LOGO_BREVE_NORMAL</td><td><?php <BOUCLE_LOGO_BREVE_NORMAL(BREVES)>if ("[(#LOGO_BREVE_NORMAL|fichier)]")  $x='#ID_BREVE';</BOUCLE_LOGO_BREVE_NORMAL><BOUCLE_LOGO_BREVE_NORMAL2(BREVES)> if ($x == "#ID_BREVE") echo '<img class="vignette" src="IMG/[(#LOGO_BREVE_NORMAL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_BREVE_NORMAL2>  ?></td></tr>
+<tr><td>LOGO_BREVE_NORMAL</td><td><?php $vu=false; <BOUCLE_LOGO_BREVE_NORMAL(BREVES)>if ("[(#LOGO_BREVE_NORMAL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_BREVE_NORMAL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_BREVE_NORMAL>  ?></td></tr>
 
-<tr><td>LOGO_BREVE_SURVOL</td><td><?php <BOUCLE_LOGO_BREVE_SURVOL(BREVES)>if ("[(#LOGO_BREVE_SURVOL|fichier)]")  $x='#ID_BREVE';</BOUCLE_LOGO_BREVE_SURVOL><BOUCLE_LOGO_BREVE_SURVOL2(BREVES)> if ($x == "#ID_BREVE") echo '<img class="vignette" src="IMG/[(#LOGO_BREVE_SURVOL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_BREVE_SURVOL2>  ?></td></tr>
+<tr><td>LOGO_BREVE_SURVOL</td><td><?php $vu=false; <BOUCLE_LOGO_BREVE_SURVOL(BREVES)>if ("[(#LOGO_BREVE_SURVOL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_BREVE_SURVOL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_BREVE_SURVOL>  ?></td></tr>
 
 
-<tr><td>LOGO_MOT</td><td><?php <BOUCLE_LOGO_MOT(MOTS)>if ("[(#LOGO_MOT|fichier)]")  $x='#ID_MOT';</BOUCLE_LOGO_MOT><BOUCLE_LOGO_MOT2(MOTS)> if ($x == "#ID_MOT") echo '<img class="vignette" src="IMG/[(#LOGO_MOT|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_MOT2>  ?></td></tr>
+<tr><td>LOGO_MOT</td><td><?php $vu=false; <BOUCLE_LOGO_MOT(MOTS)>if ("[(#LOGO_MOT|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_MOT|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_MOT>  ?></td></tr>
 <tr><td>LOGO_MOT_RUBRIQUE</td><td><?php <BOUCLE_LOGO_MOT_RUBRIQUE(MOTS)>if ("[(#LOGO_MOT_RUBRIQUE|fichier)]")  $x='#ID_MOT';</BOUCLE_LOGO_MOT_RUBRIQUE><BOUCLE_LOGO_MOT_RUBRIQUE2(MOTS)> if ($x == "#ID_MOT") echo '<img class="vignette" src="IMG/[(#LOGO_MOT_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_MOT_RUBRIQUE2>  ?></td></tr>
 
-<tr><td>LOGO_MOT_NORMAL</td><td><?php <BOUCLE_LOGO_MOT_NORMAL(MOTS)>if ("[(#LOGO_MOT_NORMAL|fichier)]")  $x='#ID_MOT';</BOUCLE_LOGO_MOT_NORMAL><BOUCLE_LOGO_MOT_NORMAL2(MOTS)> if ($x == "#ID_MOT") echo '<img class="vignette" src="IMG/[(#LOGO_MOT_NORMAL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_MOT_NORMAL2>  ?></td></tr>
+<tr><td>LOGO_MOT_NORMAL</td><td><?php $vu=false; <BOUCLE_LOGO_MOT_NORMAL(MOTS)>if ("[(#LOGO_MOT_NORMAL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_MOT_NORMAL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_MOT_NORMAL>  ?></td></tr>
 
-<tr><td>LOGO_MOT_SURVOL</td><td><?php <BOUCLE_LOGO_MOT_SURVOL(MOTS)>if ("[(#LOGO_MOT_SURVOL|fichier)]")  $x='#ID_MOT';</BOUCLE_LOGO_MOT_SURVOL><BOUCLE_LOGO_MOT_SURVOL2(MOTS)> if ($x == "#ID_MOT") echo '<img class="vignette" src="IMG/[(#LOGO_MOT_SURVOL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_MOT_SURVOL2>  ?></td></tr>
+<tr><td>LOGO_MOT_SURVOL</td><td><?php $vu=false; <BOUCLE_LOGO_MOT_SURVOL(MOTS)>if ("[(#LOGO_MOT_SURVOL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_MOT_SURVOL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_MOT_SURVOL>  ?></td></tr>
 
 
-<tr><td>LOGO_SITE</td><td><?php <BOUCLE_LOGO_SITE(SITES)>if ("[(#LOGO_SITE|fichier)]")  $x='#ID_SITE';</BOUCLE_LOGO_SITE><BOUCLE_LOGO_SITE2(SITES)> if ($x == "#ID_SITE") echo '<img class="vignette" src="IMG/[(#LOGO_SITE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_SITE2>  ?></td></tr>
+<tr><td>LOGO_SITE</td><td><?php $vu=false; <BOUCLE_LOGO_SITE(SITES)>if ("[(#LOGO_SITE|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_SITE|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_SITE>  ?></td></tr>
 <tr><td>LOGO_SITE_RUBRIQUE</td><td><?php <BOUCLE_LOGO_SITE_RUBRIQUE(SITES)>if ("[(#LOGO_SITE_RUBRIQUE|fichier)]")  $x='#ID_SITE';</BOUCLE_LOGO_SITE_RUBRIQUE><BOUCLE_LOGO_SITE_RUBRIQUE2(SITES)> if ($x == "#ID_SITE") echo '<img class="vignette" src="IMG/[(#LOGO_SITE_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_SITE_RUBRIQUE2>  ?></td></tr>
 
-<tr><td>LOGO_SITE_NORMAL</td><td><?php <BOUCLE_LOGO_SITE_NORMAL(SITES)>if ("[(#LOGO_SITE_NORMAL|fichier)]")  $x='#ID_SITE';</BOUCLE_LOGO_SITE_NORMAL><BOUCLE_LOGO_SITE_NORMAL2(SITES)> if ($x == "#ID_SITE") echo '<img class="vignette" src="IMG/[(#LOGO_SITE_NORMAL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_SITE_NORMAL2>  ?></td></tr>
+<tr><td>LOGO_SITE_NORMAL</td><td><?php $vu=false; <BOUCLE_LOGO_SITE_NORMAL(SITES)>if ("[(#LOGO_SITE_NORMAL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_SITE_NORMAL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_SITE_NORMAL>  ?></td></tr>
 
-<tr><td>LOGO_SITE_SURVOL</td><td><?php <BOUCLE_LOGO_SITE_SURVOL(SITES)>if ("[(#LOGO_SITE_SURVOL|fichier)]")  $x='#ID_SITE';</BOUCLE_LOGO_SITE_SURVOL><BOUCLE_LOGO_SITE_SURVOL2(SITES)> if ($x == "#ID_SITE") echo '<img class="vignette" src="IMG/[(#LOGO_SITE_SURVOL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_SITE_SURVOL2>  ?></td></tr>
+<tr><td>LOGO_SITE_SURVOL</td><td><?php $vu=false; <BOUCLE_LOGO_SITE_SURVOL(SITES)>if ("[(#LOGO_SITE_SURVOL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_SITE_SURVOL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_SITE_SURVOL>  ?></td></tr>
 
 
-<tr><td>LOGO_RUBRIQUE</td><td><?php <BOUCLE_LOGO_RUBRIQUE(RUBRIQUES)>if ("[(#LOGO_RUBRIQUE|fichier)]")  $x='#ID_RUBRIQUE';</BOUCLE_LOGO_RUBRIQUE><BOUCLE_LOGO_RUBRIQUE2(RUBRIQUES)> if ($x == "#ID_RUBRIQUE") echo '<img class="vignette" src="IMG/[(#LOGO_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_RUBRIQUE2>  ?></td></tr>
+<tr><td>LOGO_RUBRIQUE</td><td><?php $vu=false; <BOUCLE_LOGO_RUBRIQUE(RUBRIQUES)>if ("[(#LOGO_RUBRIQUE|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_RUBRIQUE|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_RUBRIQUE>  ?></td></tr>
 <tr><td>LOGO_RUBRIQUE_NORMAL</td><td><?php <BOUCLE_LOGO_RUBRIQUE_NORMAL(RUBRIQUES)>if ("[(#LOGO_RUBRIQUE_NORMAL|fichier)]")  $x='#ID_RUBRIQUE';</BOUCLE_LOGO_RUBRIQUE_NORMAL><BOUCLE_LOGO_RUBRIQUE_NORMAL2(RUBRIQUES)> if ($x == "#ID_RUBRIQUE") echo '<img class="vignette" src="IMG/[(#LOGO_RUBRIQUE_NORMAL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_RUBRIQUE_NORMAL2>  ?></td></tr>
 
-<tr><td>LOGO_RUBRIQUE_SURVOL</td><td><?php <BOUCLE_LOGO_RUBRIQUE_SURVOL(RUBRIQUES)>if ("[(#LOGO_RUBRIQUE_SURVOL|fichier)]")  $x='#ID_RUBRIQUE';</BOUCLE_LOGO_RUBRIQUE_SURVOL><BOUCLE_LOGO_RUBRIQUE_SURVOL2(RUBRIQUES)> if ($x == "#ID_RUBRIQUE") echo '<img class="vignette" src="IMG/[(#LOGO_RUBRIQUE_SURVOL|fichier)]" width="100" height="80" alt="" />';</BOUCLE_LOGO_RUBRIQUE_SURVOL2>  ?></td></tr>
-</table>
+<tr><td>LOGO_RUBRIQUE_SURVOL</td><td><?php $vu=false; <BOUCLE_LOGO_RUBRIQUE_SURVOL(RUBRIQUES)>if ("[(#LOGO_RUBRIQUE_SURVOL|fichier)]" && !$vu) { $vu=true; echo '<img class="vignette" src="IMG/[(#LOGO_RUBRIQUE_SURVOL|fichier)]" width="100" height="80" alt="" />';}</BOUCLE_LOGO_RUBRIQUE_SURVOL>  ?></td></tr>
 
 <tr><td>LOGO_DOCUMENT</td><td><BOUCLE_LOGO_DOCUMENT(DOCUMENTS){doublons}{1,1}>#ID_DOCUMENT : <img class="vignette" src="IMG/[(#LOGO_DOCUMENT|fichier)]" width="100" height="80" alt="" /></BOUCLE_LOGO_DOCUMENT></td></tr>
 </table>
 <hr /> 
-</html>
