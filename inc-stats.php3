@@ -98,18 +98,22 @@ if ($GLOBALS['populogarithme'] == 'oui') {
 
 	// 2. toutes les heures, update general pour faire decroitre les articles sans aucune visite
 	$date_popularite = lire_meta('date_stats_popularite');
-	if ((time() - $date_popularite) > 3600) {
+	if ((time() - $date_popularite) > 600) {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			$query = "UPDATE spip_articles
 				SET popularite = popularite*POW(1-$a,(NOW()-maj)/60)";
 			spip_query($query);
+			list($maxpop) = mysql_fetch_array(spip_query("SELECT MAX(popularite) FROM spip_articles"));
+
 			include_ecrire("inc_meta.php3");
+			ecrire_meta("max_popularite", $maxpop);
 			ecrire_meta("date_stats_popularite", time());
 			ecrire_metas();
 		}
 	}
-}
+} // fin flag ($GLOBALS['populogarithme']
+
 	// Optimiser les referers
 	$date_refs = lire_meta('date_stats_referers');
 	if ((time() - $date_refs) > 24 * 3600) {
