@@ -462,7 +462,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_propose_2' => 'Article prepausat
 ---------------',
 'info_propose_3' => 'L\'article "@titre@" z-es prepausat a la publicacion.',
-'info_propose_4' => 'Vos convidam a lo venir consultar e a balhar v&ograve;stre vejaire',
+'info_propose_4' => 'Vos convidam a lo venir consultar e a bailar v&ograve;stre vejaire',
 'info_propose_5' => 'dins lo forum que li es estachat. Z-es disponible a l\'adrei&ccedil;a:',
 'info_publie_01' => 'L\'article "@titre@" z-es estat validat per @connect_nom@.',
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
@@ -611,7 +611,7 @@ Merc&eacute;s per v&ograve;stra participacion
   reservat aus vesitaires registrats.',
 'pass_indiquez_cidessous' => 'Marcatz &ccedil;ai sos l\'adrei&ccedil;a e-mail ont
  vos registr&egrave;retz lo c&ograve;p passat. 
-   Recebretz un e-mail que vos balhar&aacute; la man&egrave;ira de 
+   Recebretz un e-mail que vos bailar&aacute; la man&egrave;ira de 
     tornar trobar v&ograve;stre acc&egrave;s.',
 'pass_mail_passcookie' => '(quo es un messatge automatic)
 Per tornar trobar v&ograve;stre acc&egrave;s au sit

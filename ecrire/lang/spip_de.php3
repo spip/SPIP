@@ -637,7 +637,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'titre_breve_refusee' => 'abgelehnte Meldung',
 'titre_cadre_raccourcis' => 'SCHNELLZUGANG:',
 'titre_changer_couleur_interface' => 'Farbe der Oberfl&auml;che &auml;ndern',
-'titre_forum' => 'Internes Forum',
+'titre_forum' => 'Forum',
 'titre_image_admin_article' => 'Sie k&ouml;nnen diesen Artikel verwalten',
 'titre_image_administrateur' => 'Administrator',
 'titre_image_aide' => 'Hilfe zu diesem Element',

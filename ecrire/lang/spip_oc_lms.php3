@@ -718,7 +718,7 @@ e vos tornar connectar au sit.
 
 
 // Z
-'zbug_balise_b_aval' => '&nbsp;: balisa B en aval',
+'zbug_balise_b_aval' => '&nbsp;: balisa B en avau',
 'zbug_boucle' => 'bloca',
 'zbug_boucle_recursive_undef' => 'bloca recursiva non definida',
 'zbug_champ_hors_boucle' => 'Champ @champ@ f&ograve;ra bloca',

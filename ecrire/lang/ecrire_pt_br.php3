@@ -918,6 +918,7 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 'titre_sites_tous' => 'Os sites referenciados',
 'titre_suivi_petition' => 'Acompanhamento das peti&ccedil;&otilde;es',
 'titre_syndication' => 'Sindica&ccedil;&atilde;o de sites',
+'tout_dossier_upload' => 'Todo o diret&oacute;rio @upload@',
 'trad_article_inexistant' => 'N&atilde;o h&aacute; nenhuma mat&eacute;ria com este n&uacute;mero.',
 'trad_article_traduction' => 'Todas as vers&otilde;es desta mat&eacute;ria:',
 'trad_deja_traduit' => 'Esta mat&eacute;ria j&aacute; &eacute; uma tradu&ccedil;&atilde;o da mat&eacute;ria atual.',
