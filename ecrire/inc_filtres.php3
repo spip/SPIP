@@ -96,6 +96,12 @@ function chainephp ($texte) {
 }
 
 
+// rend une chaine utilisable sans dommage comme attribut HTML
+function attribut_html ($texte) {
+	$texte = ereg_replace('"', '&quot;', $texte);
+	return $texte;
+}
+
 // extraire une date de n'importe quel champ (a completer...)
 function extraire_date($texte) {
 	// format = 2001-08
