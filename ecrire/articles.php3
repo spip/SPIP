@@ -5,6 +5,7 @@ include ("inc.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_documents.php3");
+include_ecrire ("inc_abstract_sql.php3");
 
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
@@ -77,7 +78,7 @@ $modif_document = $GLOBALS['modif_document'];
 if ($modif_document == 'oui' AND $flag_editable) {
 	$titre_document = addslashes(corriger_caracteres($titre_document));
 	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
-	$query = "UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\"";
+	$query = "UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document'";
 	if ($largeur_document AND $hauteur_document) $query .= ", largeur='$largeur_document', hauteur='$hauteur_document'";
 	$query .= " WHERE id_document=$id_document";
 	spip_query($query);
@@ -246,7 +247,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		}
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_site=\"$url_site\", nom_site=\"$nom_site\" $add_extra WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre='$surtitre', titre='$titre', soustitre='$soustitre', $change_rubrique descriptif='$descriptif', chapo='$chapo', texte='$texte', ps='$ps', url_site='$url_site', nom_site='$nom_site' $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 

@@ -35,7 +35,8 @@ if ($etape == 6) {
 
 	if ($login) {
 		$nom = addslashes($nom);
-		$query = "SELECT id_auteur FROM spip_auteurs WHERE login=\"$login\"";
+		$login = addslashes($login);
+		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query_db($query);
 		unset($id_auteur);
 		while ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
@@ -44,10 +45,10 @@ if ($etape == 6) {
 		$htpass = generer_htpass($pass);
 
 		if ($id_auteur) {
-			$query = "UPDATE spip_auteurs SET nom=\"$nom\", email=\"$email\", login=\"$login\", pass=\"$mdpass\", alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass=\"$htpass\", statut=\"0minirezo\" WHERE id_auteur=$id_auteur";
+			$query = "UPDATE spip_auteurs SET nom='$nom', email='$email', login='$login', pass='$mdpass', alea_actuel='', alea_futur=FLOOR(32000*RAND()), htpass='$htpass', statut='0minirezo' WHERE id_auteur=$id_auteur";
 		}
 		else {
-			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES(\"$nom\",\"$email\",\"$login\",\"$mdpass\",\"$htpass\",FLOOR(32000*RAND()),\"0minirezo\")";
+			$query = "INSERT INTO spip_auteurs (nom, email, login, pass, htpass, alea_futur, statut) VALUES('$nom','$email','$login','$mdpass','$htpass',FLOOR(32000*RAND()),'0minirezo')";
 		}
 		spip_query_db($query);
 

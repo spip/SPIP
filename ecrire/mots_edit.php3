@@ -3,6 +3,7 @@
 include ("inc.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_sites.php3");
+include_ecrire ("inc_abstract_sql.php3");
 
 function mySel($varaut, $variable) {
 	$retour = " VALUE=\"$varaut\"";
@@ -50,7 +51,7 @@ if ($connect_statut == '0minirezo') {
 		} else
 			$add_extra = '';
 
-		$query = "UPDATE spip_mots SET titre=\"$titre_mot\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe $add_extra WHERE id_mot=$id_mot";
+		$query = "UPDATE spip_mots SET titre='$titre_mot', texte='$texte', descriptif='$descriptif', type='$type', id_groupe=$id_groupe $add_extra WHERE id_mot=$id_mot";
 		$result = spip_query($query);
 
 		if (lire_meta('activer_moteur') == 'oui') {

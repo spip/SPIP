@@ -3,6 +3,7 @@
 include ("inc.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
+include_ecrire ("inc_abstract_sql.php3");
 
 if (!$id_breve) $id_breve=0;
 
@@ -86,7 +87,7 @@ if ($titre AND $modifier_breve) {
 	} else
 		$add_extra = '';
 
-	$query = "UPDATE spip_breves SET titre=\"$titre\", texte=\"$texte\", lien_titre=\"$lien_titre\", lien_url=\"$lien_url\", statut=\"$statut\", id_rubrique=\"$id_rubrique\" $add_extra WHERE id_breve=$id_breve";
+	$query = "UPDATE spip_breves SET titre='$titre', texte='$texte', lien_titre='$lien_titre', lien_url='$lien_url', statut='$statut', id_rubrique='$id_rubrique' $add_extra WHERE id_breve=$id_breve";
 	$result = spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");

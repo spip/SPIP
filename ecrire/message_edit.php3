@@ -1,6 +1,7 @@
 <?php
 
 include ("inc.php3");
+include_ecrire ("inc_abstract_sql.php3");
 
 // Droits
 if ($new=='oui') {

@@ -4,6 +4,7 @@ include ("inc.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_sites.php3");
+include_ecrire ("inc_abstract_sql.php3");
 
 $proposer_sites = lire_meta("proposer_sites");
 

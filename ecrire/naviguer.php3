@@ -4,6 +4,7 @@ include ("inc.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_documents.php3");
+include_ecrire ("inc_abstract_sql.php3");
 
 
 $coll = intval($coll);
@@ -14,7 +15,7 @@ function enfant($collection){
 	global $spip_display, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 	
-	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
+	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY titre";
 	$result2 = spip_query($query2);
 
 
@@ -87,7 +88,7 @@ function enfant($collection){
 
 function sous_enfant($collection2){
 	global $lang_dir, $spip_lang_dir, $spip_lang_left;
-	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
+	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
@@ -177,7 +178,7 @@ if ($titre) {
 
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
-	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$coll\"";
+	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$coll'";
 	$row = spip_fetch_array(spip_query($query));
 	if (($row['cnt'] > 0) and !($confirme_deplace == 'oui')) {
 		$id_parent = 0;
@@ -202,7 +203,7 @@ if ($titre) {
 		$add_extra = '';
 
 	if ($flag_editable) {
-		$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" $add_extra WHERE id_rubrique=$coll";
+		$query = "UPDATE spip_rubriques SET $change_parent titre='$titre', descriptif='$descriptif', texte='$texte' $add_extra WHERE id_rubrique=$coll";
 		$result = spip_query($query);
 	}
 
@@ -271,7 +272,7 @@ if ($modif_document == 'oui' AND $flag_document_editable) {
 	$titre_document = addslashes(corriger_caracteres($titre_document));
 	$descriptif_document = addslashes(corriger_caracteres($descriptif_document));
 
-	$query = "UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\"";
+	$query = "UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document'";
 	if ($largeur_document AND $hauteur_document) $query .= ", largeur='$largeur_document', hauteur='$hauteur_document'";
 	$query .= " WHERE id_document=$id_document";
 	spip_query($query);
