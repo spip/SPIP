@@ -1245,13 +1245,8 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			echo date_relative($date_heure);
 			
 			echo "</span>";
-
-			if ($email_auteur) {
-				echo " <a href=\"mailto:$email_auteur?subject=".rawurlencode($titre)."\">".typo($auteur)."</a>";
-			}
-			else {
-				echo " ".typo($auteur);
-			}
+			
+			echo " <a href='auteurs_edit.php3?id_auteur=$id_auteur'>".typo($auteur)."</a>";
 
 			if ($id_auteur AND $connect_activer_messagerie != "non") {
 				$bouton = bouton_imessage($id_auteur,$row_auteur);
