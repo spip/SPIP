@@ -1660,7 +1660,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	if ($danger) echo "<div class='danger'>";
 	if ($spip_display != 1) {
 		echo "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n";
-		echo "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\"); background-repeat: no-repeat; background-position: center center;' src='img_pack/$fonction' alt=''></div></a></td>\n";
+		echo "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\") center center no-repeat;' src='img_pack/$fonction' alt=''></div></a></td>\n";
 		echo "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
 		echo "</tr></table></a>\n";
 	}
@@ -2221,11 +2221,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 		echo "</div>";
 
-		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
+		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
 		echo _T('icone_messagerie_personnelle');
 
 		echo "<div>&nbsp;</div>";
-		debut_cadre_relief();
+		//debut_cadre_relief();
 
 		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
 		icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif");
@@ -2234,7 +2234,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif");
 		}
 
-		fin_cadre_relief();
+		//fin_cadre_relief();
 
 		echo "</div>";
 	
