@@ -49,6 +49,43 @@ function spip_query_db($query) {
 	return $result;
 }
 
+// fonction appelant la precedente 
+// specifiquement pour les select des squelettes
+// c'est une instance de spip_abstract_select, voir ses specs dans inc_calcul
+// a noter qu'on pourrait y réaliser traite_query à moindre cout
+
+function spip_mysql_select($select, $from, $where,
+			   $groupby, $orderby, $limit,
+			   $sousrequete, $cpt,
+			   $table, $id, $serveur) {
+
+	$DB = 'spip_';
+	$q = " FROM $DB" . join(", $DB", $from)
+	. ($where ? ' WHERE ' . join(' AND ', $where) : '')
+	. ($groupby ? " GROUP BY $groupby" : '')
+	. ($orderby ? "\nORDER BY $orderby" : '')
+	. ($limit ? "\nLIMIT $limit" : '');
+
+	if (!$sousrequete)
+		$q = " SELECT ". join(", ", $select) . $q;
+	else
+		$q = " SELECT S_" . join(", S_", $select)
+		. " FROM (" . join(", ", $select)
+		. ", COUNT(".$sousrequete.") AS compteur " . $q
+		.") AS S_$table WHERE compteur=" . $cpt;
+
+	// Erreur ? C'est du debug, ou une erreur du serveur
+	// il faudrait mettre ici le déclenchement du message MySQL
+	// actuellement dans erreur_requete_boucle
+	if (!($res = @spip_query($q))) {
+		include_local('inc-admin.php3');
+		echo erreur_requete_boucle($q, $id, $table);
+	}
+
+	//
+#	 spip_log($serveur . spip_num_rows($result) . $q);
+	return $res;
+}
 
 //
 // Passage d'une requete standardisee
