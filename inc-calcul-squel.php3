@@ -1431,10 +1431,22 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			\$$nom_var = '';
 		}
 		else {
-			\$$nom_var = \"\n<a name='formulaire_recherche'></a>\n\";
-			\$$nom_var .= \"\n<form action='$lien' method='get'>\";
-			\$$nom_var .= \"\n<input type='text' id='formulaire_recherche' name='recherche' value='\"._T('info_rechercher').\"' size='20' class='formrecherche'>\";
-			\$$nom_var .= \"\n</form>\";
+			if (!\$rech = attribut_html(interdire_scripts(\$GLOBALS['recherche']))) {
+				\$rech = _T('info_rechercher');
+				\$hidden = 'true';
+			} else
+				\$hidden = '';
+			\$$nom_var = \"\n<a name='formulaire_recherche'></a>
+			<form action='$lien' method='get' name='form_rech'>
+			<input type='hidden' name='focus' value='\$hidden'>
+			<input type='text' id='formulaire_recherche' name='recherche' value=\\\"\$rech\\\" size='20' class='formrecherche'
+			onFocus='if (document.form_rech.focus.value == \".chr(34).\"true\".chr(34).\") {
+				document.form_rech.recherche.value = \".chr(34).chr(34).\";
+				document.form_rech.focus.value = \".chr(34).chr(34).\"; }'
+			onBlur='if (document.form_rech.recherche.value == \".chr(34).chr(34).\") {
+				document.form_rech.recherche.value = \".chr(34).\"\"._T('info_rechercher').\"\".chr(34).\";
+				document.form_rech.focus.value = \".chr(34).\"true\".chr(34).\"; }'>
+			</form>\";
 		}
 		";
 		break;

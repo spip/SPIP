@@ -44,6 +44,7 @@ $GLOBALS['i18n_fr'] = array(
 'avis_erreur' => 'Erreur: voir ci-dessous',
 'avis_erreur_connexion' => 'Erreur de connexion',
 'avis_erreur_connexion_mysql' => 'Erreur de connexion MySQL',
+'avis_erreur_cookie' => 'probl&egrave;me de cookie',
 'avis_erreur_fonction_contexte' => 'Erreur de programmation. Cette fonction ne doit pas etre appelee dans ce contexte.',
 'avis_erreur_mysql' => 'Erreur MySQL',
 'avis_erreur_sauvegarde' => 'Erreur dans la sauvegarde (@type@ @id_objet@) !',
