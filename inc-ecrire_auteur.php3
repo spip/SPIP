@@ -33,7 +33,7 @@ function ecrire_auteur_dyn($id_auteur, $mail, $sujet, $texte, $adres) {
 		else if ($GLOBALS['valide_message_auteur']) {  // verifier hash ?
 			$texte .= "\n\n-- "._T('envoi_via_le_site')." ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
 			include_ecrire("inc_mail.php3");
-			envoyer_mail(texte_script($email_auteur),
+			envoyer_mail($mail,
 				     $sujet, $texte, $adres,
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);
 			return $puce_ligne . _T('form_prop_message_envoye');
