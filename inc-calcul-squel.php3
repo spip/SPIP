@@ -1701,7 +1701,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$doublons = $boucle->doublons;
 	$partie = $boucle->partie;
 	$total_parties = $boucle->total_parties;
-	$lang_select = ($boucle->lang_select != "non") &&
+	$lang_select = (!$GLOBALS['forcer_lang'] && $boucle->lang_select != "non") &&
 		($type_boucle == 'articles' OR $type_boucle == 'rubriques'
 		OR $type_boucle == 'hierarchie' OR $type_boucle == 'breves');
 

@@ -477,7 +477,9 @@ function calculer_page_globale($fond) {
 		$lang = $contexte['lang'];	// l'URL peut fixer lang=xx, mais inc-urls peut aussi agir sur $contexte[lang]
 	}
 
-	if ($id_rubrique = $contexte['id_rubrique']) {
+	if ($GLOBALS['forcer_lang']) {
+		// on ne touche plus
+	} else if ($id_rubrique = $contexte['id_rubrique']) {
 		$id_rubrique_fond = $id_rubrique;
 		if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique'")))
 			if ($row['lang']) $lang = $row['lang'];
