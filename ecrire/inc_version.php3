@@ -9,7 +9,7 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 // 	*** Parametrage par defaut de SPIP ***
 //
-// Ces parametres d'ordre technique doivent etre modifies
+// Ces parametres d'ordre technique peuvent etre modifies
 // dans ecrire/mes_options.php3. Les valeurs specifiees
 // dans ce dernier fichier remplaceront automatiquement
 // les valeurs ci-dessous.
