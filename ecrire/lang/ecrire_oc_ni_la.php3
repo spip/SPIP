@@ -176,7 +176,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'ical_methode_webcal' => 'Sincronizacion (webcal://)',
 'ical_texte_js' => 'Lu articles publicats en aqueu sit si p&ograve;don afichar aisat, dins toi lu sits v&ograve;stres, en fent servir una linha javascript. ',
 'ical_texte_prive' => 'Aqueu calendier, d\'us estrictament personau, v\'informa de l\'activitat editoriala privada d\'aqueu sit (&ograve;bras e rend&egrave;tz-vos personaus, articles e br&egrave;vas prepauats...).',
-'ical_texte_public' => 'Aqueu calendier vos permet de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'ical_texte_public' => 'Aqueu calendier vos permete de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
 'ical_texte_rss' => 'Pod&egrave;tz sindicar li novetats d\'aquest sit dins quin legidor de fichiers que sia en format XML/RSS (Rich Site Summary). Es finda lo format que permete a SPIP de legir li novetats publicadi dins d\'autres sits en utilizant un format d\'escambi compatible (sits sindicats). ',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de corrier',
@@ -212,7 +212,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'icone_supprimer_signature' => 'Suprimir aquela signatura',
 'icone_valider_signature' => 'Validar aquela signatura',
 'icone_voir_sites_references' => 'Veire lu sits referenciats',
-'icone_voir_tous_mots_cles' => 'Veire toi lu mots claus ',
+'icone_voir_tous_mots_cles' => 'Veire toi lu mots clau ',
 'image_administrer_rubrique' => 'Pod&egrave;tz administrar aquela rubrica',
 'info_1_article' => '1 article',
 'info_1_breve' => '1 br&egrave;va',
@@ -394,7 +394,7 @@ L\'administrator dau sist&egrave;ma &ograve; de la ret vos deu poder fornir
 'info_modifier_titre' => 'Modificar: @titre@',
 'info_mon_site_spip' => 'Lo mieu sit SPIP',
 'info_mot_sans_groupe' => '(Mots f&ograve;ra grop...)',
-'info_moteur_recherche' => 'Motor de rec&egrave;rca integrat',
+'info_moteur_recherche' => 'Cercador integrat',
 'info_mots_cles' => 'Lu mots clau',
 'info_mots_cles_association' => 'Lu mots clau d\'aqueu grop si p&ograve;don associar:',
 'info_moyenne' => 'mejana:',
@@ -475,11 +475,11 @@ D\'unu aubergadors non autorizan lo mandad&iacute;s d\'e-mails desp&iacute; lu s
  impossibla.',
 'info_question_mots_cles' => 'Desiratz d\'utilizar lu mots clau sus lo v&ograve;stre sit?',
 'info_question_proposer_site' => 'Cu p&ograve;u prepausar de sits referenciats?',
-'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo motor de rec&egrave;rca integrat a SPIP? (lo desactivar abriva lo foncionament dau sist&egrave;ma.)',
+'info_question_utilisation_moteur_recherche' => 'Desiratz d\'utilizar lo cercador integrat a SPIP? (lo desactivar abriva lo foncionament dau sist&egrave;ma.)',
 'info_qui_attribue_mot_cle' => 'Lu mots d\'aqueu grop p&ograve;don &egrave;stre atribuits per:',
 'info_racine_site' => 'Rai&ccedil; dau sit',
 'info_recharger_page' => 'Vorgatz tornar cargar aquela p&agrave;gina dins un momenton.',
-'info_recherche_auteur_a_affiner' => 'Tr&ograve;up de resultats per "@cherche_auteur@"; vorgatz afinar la rec&egrave;rca.',
+'info_recherche_auteur_a_affiner' => 'Tr&ograve;up de resultats per "@cherche_auteur@"; vorgatz afinar la c&egrave;rca.',
 'info_recherche_auteur_ok' => 'Plusors redactors trobats per "@cherche_auteur@":',
 'info_recherche_auteur_zero' => '<B>Minga de resultat trobat per "@cherche_auteur@".',
 'info_recommencer' => 'Vorgatz tornar comen&ccedil;ar.',
@@ -494,7 +494,7 @@ D\'unu aubergadors non autorizan lo mandad&iacute;s d\'e-mails desp&iacute; lu s
 'info_reserve_admin' => 'Basta lu administrators p&ograve;don modificar aquela adrei&ccedil;a.',
 'info_restauration_sauvegarde' => 'restauracion de la sauvagarda @archive@',
 'info_restreindre_rubrique' => 'Restr&eacute;nher la gestion a la rubrica:',
-'info_resultat_recherche' => 'Resultats de la rec&egrave;rca:',
+'info_resultat_recherche' => 'Resultats de la c&egrave;rca:',
 'info_rubriques' => 'Rubricas',
 'info_rubriques_02' => 'rubricas',
 'info_rubriques_liees_mot' => 'Li rubricas ligadas a aqueu mot clau',
@@ -600,7 +600,7 @@ un color indica lo sieu estat:',
 'item_activer_messages_avertissement' => 'Activar lu messatges d\'avertiment',
 'item_administrateur_2' => 'administrator',
 'item_afficher_calendrier' => 'Afichar dins lo calendier',
-'item_ajout_mots_cles' => 'Autorizar que s\'aponda de mots claus ai forums',
+'item_ajout_mots_cles' => 'Autorizar que s\'aponda de mots clau ai forums',
 'item_autoriser_documents_joints' => 'Autorizar que si jonga de documents ai articles',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar lu documents dins li rubricas',
 'item_bloquer_liens_syndiques' => 'Blocar lu ligams sindicats per validacion',
@@ -615,7 +615,7 @@ un color indica lo sieu estat:',
 'item_desactiver_forum_administrateur' => 'Desactivar lo forum dei administrators',
 'item_gerer_annuaire_site_web' => 'Gerir un annuari de sits web',
 'item_gerer_statistiques' => 'Gerir li estadisticas',
-'item_limiter_recherche' => 'Limitar la rec&egrave;rca ai informacions contengudi dins lo v&ograve;stre sit',
+'item_limiter_recherche' => 'Limitar la c&egrave;rca ai informacions contengudi dins lo v&ograve;stre sit',
 'item_login' => 'Login',
 'item_mots_cles_association_articles' => 'ai articles',
 'item_mots_cles_association_breves' => 'ai br&egrave;vas',
@@ -632,7 +632,7 @@ un color indica lo sieu estat:',
 'item_non_creer_fichiers_authent' => 'Non crear aquelu fichiers',
 'item_non_gerer_annuaire_site_web' => 'Desactivar l\'annuari de sits web',
 'item_non_gerer_statistiques' => 'Non gerir li estadisticas',
-'item_non_limiter_recherche' => 'Alargar la rec&egrave;rca au contengut dei sits referenciats',
+'item_non_limiter_recherche' => 'Alargar la c&egrave;rca au contengut dei sits referenciats',
 'item_non_publier_articles' => 'Non publicar lu articles avans la data de publicacion prevista.',
 'item_non_utiliser_breves' => 'Non utilizar li br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Non utilizar la configuracion avan&ccedil;ada dei grops de mots clau',
@@ -729,7 +729,7 @@ un color indica lo sieu estat:',
 'taille_cache_vide' => 'L\'escondedor es vuei.',
 'taille_repertoire_cache' => 'Talha dau repert&ograve;ri escondedor',
 'text_article_propose_publication' => 'Article prepauat per la publicacion. Non esitetz de donar lo v&ograve;stre vejaire gaug au forum estacat a aquel article (en bas de p&agrave;gina).',
-'texte_acces_ldap_anonyme_1' => 'D\'unu servidors LDAP acc&egrave;ptan minga d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder pi recercar d\'informacions dins l\'annuari. Totun, lu camps seguents si porr&agrave;n laissar vueis dins la m&agrave;ger part dei cas.',
+'texte_acces_ldap_anonyme_1' => 'D\'unu servidors LDAP acc&egrave;ptan minga d\'acc&egrave;s anonim. En aqueu cas, cau especificar un identificant d\'acc&egrave;s iniciau per poder pi cercar d\'informacions dins l\'annuari. Totun, lu camps seguents si porr&agrave;n laissar vueis dins la m&agrave;ger part dei cas.',
 'texte_admin_effacer_01' => 'Aquela comanda esfa&ccedil;a <i>tot</i> lo contengut de la basa de donadas,
  incl&uacute;s <i>toi</i> lu acc&egrave;s redactors e administrators. Un c&ograve;up que l\'auretz executada, auretz de tornar lan&ccedil;ar l\'installacion d\'SPIP per tornar crear una basa nov&egrave;la e finda un primier acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquela opcion vos permete de sauvagardar lo contengut de la basa dins un fichier que ser&agrave; servat dins lo repert&ograve;ri <i>ecrire/data/</i>.
@@ -789,7 +789,7 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
 'texte_documents_joints_2' => 'Aqueu reglatge non empedisse d\'inserir d\'imatges directament dins lu articles.',
 'texte_effacer_base' => 'Esfa&ccedil;ar la basa de donadas SPIP',
 'texte_effacer_donnees_indexation' => 'Esfa&ccedil;ar li donadas d\'indexacion',
-'texte_en_cours_validation' => 'Se prepaua de publicar lu articles e br&egrave;vas &ccedil;ai sota. Non esitetz de donar lo v&ograve;stre vejaire gaug ai forums que i son estacats.',
+'texte_en_cours_validation' => 'Si prepaua de publicar lu articles e br&egrave;vas &ccedil;ai sota. Non esitetz de donar lo v&ograve;stre vejaire gaug ai forums que i son estacats.',
 'texte_enrichir_mise_a_jour' => 'Pod&egrave;tz enriquir la compaginacion dau v&ograve;stre t&egrave;xt en utilizant d\'"acorchas tipografiqui".',
 'texte_fichier_authent' => '<b>Deu crear, SPIP, de fichiers especiaus  <tt>.htpasswd</tt>
   e <tt>.htpasswd-admin</tt> dins lo repert&ograve;ri <tt>ecrire/data/</tt>?</b><p>
@@ -924,19 +924,19 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
   Aquela opcion es desactivada de maniera predefinida
   per fin d\'evitar d\'afichar de messatges d\'avertiment
   intempestius.',
-'texte_trop_resultats_auteurs' => 'Tr&ograve;up de resultats per "@cherche_auteur@" ; vorgatz afinar la rec&egrave;rca.',
+'texte_trop_resultats_auteurs' => 'Tr&ograve;up de resultats per "@cherche_auteur@" ; vorgatz afinar la c&egrave;rca.',
 'texte_unpack' => 'telecargament de la darriera version',
 'texte_utilisation_moteur_syndiques' => 'Quora utilizatz lo cercador integrat 
-    a SPIP, pod&egrave;tz far li rec&egrave;rcas sobre lu sits e
+    a SPIP, pod&egrave;tz far li c&egrave;rcas sobre lu sits e
     articles sindicats de doi biais
     diferents. <br><img src=\'puce.gif\'> Lo mai
-    simple consistisse a recercar basta dins lu
+    simple consistisse a cercar basta dins lu
     t&iacute;tols e descriptius dei articles. <br><img src=\'puce.gif\'>
     Lo segond biais, ben mai potent, permete
-    a SPIP de recercar finda dins lo t&egrave;xt dei
+    a SPIP de cercar finda dins lo t&egrave;xt dei
     sits referenciats. 
    Se referenciatz un sit, alora SPIP far&agrave; la
-    rec&egrave;rca dins lo t&egrave;xt dau sit meteis.',
+    c&egrave;rca dins lo t&egrave;xt dau sit meteis.',
 'texte_utilisation_moteur_syndiques_2' => 'Aqueu met&ograve;de obliga SPIP de vesitar
     regularament lu sits referenciats,
     aqu&ograve; p&ograve;u alentir un chico lo v&ograve;stre

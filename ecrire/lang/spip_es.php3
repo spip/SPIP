@@ -74,10 +74,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_jour' => 'calendario por d&iacute;a',
 'cal_par_mois' => 'calendario por mes',
 'cal_par_semaine' => 'calendario por semana',
-'calendrier_synchro_lien' => '<NEW><PLUS_UTILISE><NEW>R&eacute;cuperar el archivo <i>iCal</i>',
-'calendrier_synchro_prive' => '<NEW><PLUS_UTILISE><NEW>El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
-'calendrier_synchro_public' => '<NEW><PLUS_UTILISE><NEW>El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => '<NEW><PLUS_UTILISE><NEW>Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
 
 

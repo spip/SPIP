@@ -305,7 +305,6 @@ Merc&eacute; de la v&ograve;stra participacion
 'icone_doc_rubrique' => 'Documents dei rubricas',
 'icone_ecrire_article' => 'Escriure un nov&egrave;l article',
 'icone_edition_site' => 'Edicion',
-'icone_evolution_visites_2' => '<NEW><NEW><NEW><PLUS_UTILISE>',
 'icone_forum_administrateur' => 'Forum dei administrators',
 'icone_forum_suivi' => 'Seguit dei forums',
 'icone_gestion_langues' => 'Gestion dei lengas',
@@ -465,8 +464,6 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_publie_1' => '[@nom_site_spip@] PUBLICA: @titre@',
 'info_publie_2' => 'Article publicat
 ----------------',
-'info_question_referers' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Votre site doit-il conserver les <i>referers</i>
-		(adresses des liens externes menant &agrave; votre site)&nbsp;?',
 'info_rechercher' => 'Recercar',
 'info_rechercher_02' => 'Recercar:',
 'info_remplacer_vignette' => 'Rempla&ccedil;ar la vinheta predefinida per un l&ograve;go personalisat&nbsp;:',
@@ -505,10 +502,6 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Li v&ograve;stri n&ograve;tas de renembran&ccedil;a ',
 'item_breve_proposee' => 'Br&egrave;va prepauada',
-'item_gerer_referers' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>G&eacute;rer les referers',
-'item_non_gerer_referers' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas g&eacute;rer les referers',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Ne pas indexer les forums',
-'item_utiliser_moteur_recherche_forum' => '<NEW><NEW><NEW><PLUS_UTILISE><NEW><NEW><NEW><NEW>Indexer les forums',
 
 
 // L
