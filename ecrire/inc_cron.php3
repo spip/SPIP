@@ -149,6 +149,30 @@ function spip_cron() {
 		calculer_rubriques();
 	}
 
+	//
+	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
+	//
+	global $quota_cache;
+	if ($quota_cache > 0)
+	if ($t - lire_meta('quota_cache_vider') > 3600) {
+		ecrire_meta('quota_cache_vider', $t);
+		ecrire_metas();
+		if ($q = spip_query("SELECT SUM(taille) FROM spip_caches WHERE type='t'"))
+			list ($total_cache) = spip_fetch_array($q);
+
+		$total_cache -= $quota_cache*1024*1024;
+		if ($total_cache > 0) {
+			$q = spip_query("SELECT id, taille FROM spip_caches ORDER BY id");
+			while ($r = spip_fetch_array($q)
+			AND ($total_cache > $taille_supprimee)) {
+				$date_limite = $r['id'];
+				$taille_supprimee += $r['taille'];
+			}
+			spip_log ("Quota cache: efface $taille_supprimee octets");
+			include_ecrire('inc_invalideur.php3');
+			suivre_invalideur("id <= $date_limite AND type='t'");
+		}
+	}
 
 	//
 	// Gerer l'indexation
