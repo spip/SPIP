@@ -126,7 +126,7 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 // Ne pas afficher le chapo si article virtuel
 function nettoyer_chapo($chapo){
 	if (substr($chapo,0,1) == "="){
-		$chapo = "";	
+		$chapo = "";
 	}
 	return $chapo;
 }
@@ -319,7 +319,7 @@ function typo_fr($letexte) {
 	);
 	$letexte = ereg_remplace($cherche2, $remplace2, $letexte);
 
-	return ($letexte);
+	return $letexte;
 }
 
 // rien sauf les ~
@@ -573,11 +573,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	//
 	// Notes de bas de page
 	//
+	$texte_a_voir = $letexte;
+	$texte_vu = '';
 	$regexp = "\[\[(([^]]|[^]]\][^]])*)\]\]";
 	/* signifie : deux crochets ouvrants, puis pas-crochet-fermant ou
 		crochet-fermant entoure de pas-crochets-fermants (c'est-a-dire
 		tout sauf deux crochets fermants), puis deux fermants */
-	while (ereg($regexp, $letexte, $regs)){
+	while (ereg($regexp, $texte_a_voir, $regs)) {
 		$note_texte = $regs[1];
 		$num_note = false;
 
@@ -609,8 +611,11 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		}
 
 		// dans le texte, mettre l'appel de note a la place de la note
-		$letexte = implode($insert, split($regexp, $letexte, 2));
+		$pos = strpos($texte_a_voir, $regs[0]);
+		$texte_vu .= substr($texte_a_voir, 0, $pos) . $insert;
+		$texte_a_voir = substr($texte_a_voir, $pos + strlen($regs[0]));
 	}
+	$letexte = $texte_vu . $texte_a_voir;
 
 	//
 	// Raccourcis automatiques vers un glossaire
@@ -637,13 +642,11 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	$regexp = "\[([^][]*)->(>?)([^]]*)\]";
 	$texte_a_voir = $letexte;
 	$texte_vu = '';
-	while (ereg($regexp, $texte_a_voir, $regs)){
+	while (ereg($regexp, $texte_a_voir, $regs)) {
 		list($insert, $lien) = extraire_lien($regs);
-		$zetexte = split($regexp,$texte_a_voir,2);
-
-		// typo en-dehors des notes
-		$texte_vu .= typo($zetexte[0]).$insert;
-		$texte_a_voir = $zetexte[1];
+		$pos = strpos($texte_a_voir, $regs[0]);
+		$texte_vu .= typo(substr($texte_a_voir, 0, $pos)) . $insert;
+		$texte_a_voir = substr($texte_a_voir, $pos + strlen($regs[0]));
 	}
 	$letexte = $texte_vu.typo($texte_a_voir); // typo de la queue du texte
 
@@ -675,7 +678,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$textBegin = substr($letexte, 0, $tableBeginPos);
 		$textTable = substr($letexte, $tableBeginPos + 2, $tableEndPos - $tableBeginPos);
 		$textEnd = substr($letexte, $tableEndPos + 3);
-		
+
 		$newTextTable = "\n<p><table class=\"spip\">";
 		$rowId = 0;
 		$lineEnd = strpos($textTable, "|\n");
@@ -782,8 +785,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 
 	// paragrapher
-	if (ereg('<p class="spip">',$letexte))
-		$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
+	if (strpos(' '.$letexte, '<p class="spip">'))
+		$letexte = '<p class="spip">'.str_replace('<p class="spip">', "</p>\n".'<p class="spip">', $letexte).'</p>';
 
 	// intertitres & hr compliants
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);

@@ -5,6 +5,15 @@ include_local ("inc-cache.php3");
 
 if ($INSECURE['fond'] || $INSECURE['delais']) exit;
 
+/*function t($s = '') {
+	global $t0, $t1;
+	$t1 = explode(" ", microtime());
+	$dt = floor(1000 * ($t1[0] + $t1[1] - $t0[0] - $t0[1])) / 1000;
+	echo "<p>";
+	if ($s) echo "<b>$s :</b> ";
+	echo "$dt secondes</p>\n";
+	$t0 = $t1;
+}*/
 
 //
 // Inclusions de squelettes
@@ -50,6 +59,7 @@ $fichier_cache = generer_nom_fichier_cache($fichier_requete);
 $chemin_cache = "CACHE/$fichier_cache";
 
 $use_cache = utiliser_cache($chemin_cache, $delais);
+
 $ecraser_cache = false;
 $cache_supprimes = Array();
 
@@ -66,6 +76,7 @@ if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
 	include_ecrire ("inc_session.php3");
 	verifier_visiteur();
 }
+
 
 //
 // Ajouter un forum
@@ -193,6 +204,7 @@ if ($effacer_cache) @unlink($chemin_cache);
 while (list(, $chemin_cache_supprime) = each($cache_supprimes))
 	@unlink($chemin_cache_supprime);
 
+
 //
 // Verifier la presence du .htaccess dans le cache, sinon le generer
 //
@@ -211,7 +223,6 @@ if (!file_exists("CACHE/.htaccess")) {
 		fclose($f);
 	}
 }
-
 
 
 //
@@ -287,6 +298,7 @@ if (!$timeout AND $db_ok AND (time()-lire_meta('calcul_rubriques') > 3600)) {
 	include_ecrire('inc_rubriques.php3');
 	calculer_rubriques();
 }
+
 
 //
 // Faire du menage dans le cache (effacer les fichiers tres anciens ou inutilises)
