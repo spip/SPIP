@@ -41,6 +41,7 @@ function texte_backend($texte) {
 
 	// " -> &quot; et tout ce genre de choses
 	$texte = str_replace("&nbsp;", " ", $texte);
+	$texte = preg_replace("/[[:space:]][[:space:]]+/", " ", $texte);
 	$texte = entites_html($texte);
 
 	// verifier le charset
