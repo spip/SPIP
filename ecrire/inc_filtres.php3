@@ -304,7 +304,7 @@ function unicode_to_utf_8($chaine) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		if($num<128) $s = chr($num);	// Ce bloc provient de php.net, auteur Ronen
-		else if($num<1024) $s = chr(($num>>6)+192).chr(($num&63)+128);
+		else if($num<2048) $s = chr(($num>>6)+192).chr(($num&63)+128);
 		else if($num<32768) $s = chr(($num>>12)+224).chr((($num>>6)&63)+128).chr(($num&63)+128);
 		else if($num<2097152) $s = chr($num>>18+240).chr((($num>>12)&63)+128).chr(($num>>6)&63+128). chr($num&63+128);
 		else $s = '';
