@@ -194,7 +194,7 @@ if ($flag_ecrire) {
 $spip_version = 1.802;
 
 // version de spip
-$spip_version_affichee = "1.8 alpha 4 CVS";
+$spip_version_affichee = "1.8 alpha 5 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
@@ -488,6 +488,7 @@ function spip_ob_function ($page) {
 	if ($use_gz AND ($page_gz = @ob_gzhandler($page,5)) !== false)
 		$page = $page_gz;
 
+	# spip_log('Content-Length: '.strlen($page).($page_gz? ', compression':''));
 	@header('Content-Length: '.strlen($page));
 	@header('Connection: close');
 	return $page;
