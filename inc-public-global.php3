@@ -352,4 +352,9 @@ function creer_repertoire($base, $subdir) {
 	return ($ok? "$subdir/" : '');
 }
 
+function creer_repertoire_documents($ext) {
+# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
+	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
+}
+
 ?>

@@ -375,30 +375,25 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	if (!$taille_y)
 		$taille_y = $taille;
 
-	// recuperer le nom du fichier
+	// recuperer le nom du fichier (est-ce encore utilise ?)
 	if (eregi("src=\'([^']+)\'", $img, $regs)) $logo = $regs[1];
 	if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
 	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
 	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
-
+	spip_log($img);
 	if (!$logo)
 		$logo = $img; // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
 
-
-	if (ereg("^../",$logo))
-		$logo = substr($logo,3);
-
-	if (ereg("^" . _DIR_IMG, $logo))
-		$img = substr($logo,strlen(_DIR_IMG));
-	else { $img = $logo; $logo = _DIR_IMG . $logo;}
+	if (ereg("^../",$logo))	$logo = substr($logo,3);
+	if (!ereg("^" . _DIR_IMG, $logo)) $logo = _DIR_IMG . $logo;
 
 	if (@file_exists($logo) AND
-	eregi("^(.*)\.(jpg|gif|png)$", $img, $regs)) {
+	eregi("\.(jpg|gif|png)$", $logo, $regs)) {
 		include_local('inc-public-global.php3');
 		$nom = $regs[1];
 		$format = $regs[2];
 		$suffixe = '-'.$taille.'x'.$taille_y;
-		$cache_folder=  _DIR_IMG . creer_repertoire(_DIR_IMG, 'cache'.$suffixe);
+		$cache_folder= creer_repertoire_documents('cache'.$suffixe);
 		$preview = creer_vignette($logo, $taille, $taille_y, $format, $cache_folder.$nom.$suffixe);
 
 		if ($preview) {
