@@ -6,8 +6,8 @@
 // ecrire/mes_options.php3 un tableau definissant les champs en question,
 // pour chaque type d'objet (article, rubrique, breve, auteur ou mot) que
 // l'on veut ainsi etendre ; utiliser dans l'espace public avec
-// [(#EXTRA|extra{"nom_du_champ"})]
-
+// [(#EXTRA|nom_du_champ)]
+// Exemples :
 
 /*
 
@@ -17,40 +17,55 @@
 
 $GLOBALS['champs_extra'] = Array (
 	'auteurs' => Array (
-			"sexe" => "ligne|brut",
+			"alim" => "radio|brut|Pr&eacute;f&eacute;rences alimentaires|Veggie,Viande",
+			"habitation" => "liste|brut|Lieu|Kuala Lumpur,Cape Town,Uppsala",
+			"ml" => "case|propre|Je souhaite m'abonner &agrave; la mailinglist",
 			"age" => "ligne|propre|&Acirc;ge du capitaine",
 			"biblio" => "bloc|propre|Bibliographie"
 		),
 
 	'articles' => Array (
-			"isbn" => "ligne|typo|ISBN"
+			"isbn" => "ligne|typo|ISBN",
+			 "options" => "multiple|brut|Options de cet article|1,2,3,plus"
+
+			 
 		)
 	);
+
+// Note : pour les listes et les radios on peut preciser les valeurs des labels 
+//  Exemples
+//  "habitation" => "liste|brut|Lieu|San Diego,Suresnes|diego,suresnes",
+
+
 */
 
 
 /*
 
-// On peut optionnellement vouloir affiner les extras :
+// On peut optionnellement vouloir restreindre la portee des extras :
 // - pour les articles/rubriques/breves en fonction du secteur ;
 // - pour les auteurs en fonction du statut
 // - pour les mots-cles en fonction du groupe de mots
+// Exemples :
 
 $GLOBALS['champs_extra_proposes'] = Array (
 	'auteurs' => Array (
 		// tous : par defaut
-		'tous' =>  'age|sexe',
-		// une biblio pour les admin (statut='0minirezo')
-		'0minirezo' => 'age|sexe|biblio'
+		'tous' =>  'age|alim|ml',
+		// les admins (statut='0minirezo') ont plus de champs que les auteurs 
+		'0minirezo' => 'age|alim|ml|biblio|habitation'
 		),
 
 	'articles' => Array (
-		// tous : par defaut
+		// tous : par defaut aucun champs extra sur les articles
 		'tous' => '',
-		// 1 : id_secteur=1;
-		1 => 'isbn'
+		// seul le champs extra "isbn" est proposé dans le secteur 1)
+		'1' => 'isbn',
+		// Dans le secteur 2 le champs "options" est proposé)
+		'2' => 'options'
 		)
 	);
+
 
 */
 
@@ -100,18 +115,102 @@ function extra_saisie($extra, $type, $ensemble='') {
 	reset($champs_proposes);
 	while (list(, $champ) = each($champs_proposes)) {
 		$desc = $champs[$champ];
-		list($form, $filtre, $prettyname) = explode("|", $desc);
+		list($form, $filtre, $prettyname, $choix, $valeurs) = explode("|", $desc);
 
 		if (!$prettyname) $prettyname = ucfirst($champ);
 		$affiche .= "<b>$prettyname&nbsp;:</b><br />";
+
 		switch($form) {
+
+			case "case":
+			case "checkbox":
+				$affiche = ereg_replace("<br />$", "&nbsp;", $affiche);
+				$affiche .= "<INPUT TYPE='checkbox' NAME='suppl_$champ'";
+				if ($extra[$champ] == 'true')
+					$affiche .= " CHECKED ";
+				break;
+
+			case "list":
+			case "liste":
+			case "select":
+				$choix = explode(",",$choix);
+				if (!is_array($choix)) {
+					$affiche .= "Pas de choix d&eacute;finis.\n";
+					break;
+				}
+
+				// prendre en compte les valeurs des champs
+				// si elles sont renseignees
+				$valeurs = explode(",",$valeurs);
+				if($valeurs == explode(",",""))
+					$valeurs = $choix ;
+
+				$affiche .= "<SELECT NAME='suppl_$champ' ";
+				$affiche .= "CLASS='forml'>\n";
+				$i = 0 ;
+				while (list(, $choix_) = each($choix)) {
+					$val = $valeurs[$i] ;
+					$affiche .= "<OPTION VALUE=\"$val\"";
+					if ($val == entites_html($extra[$champ]))
+						$affiche .= " SELECTED";
+					$affiche .= ">$choix_</OPTION>\n";
+					$i++;
+				}
+				$affiche .= "</SELECT>";
+				break;
+
+			case "radio":
+				$choix = explode(",",$choix);
+				if (!is_array($choix)) {
+					$affiche .= "Pas de choix d&eacute;finis.\n";
+					break;
+				}
+				$valeurs = explode(",",$valeurs);
+				if($valeurs == explode(",",""))
+					$valeurs = $choix ;
+
+				$i=0;
+				while (list(, $choix_) = each($choix)) {
+					$affiche .= "<INPUT TYPE='radio' NAME='suppl_$champ' ";
+					$val = $valeurs[$i] ;
+					if (entites_html($extra["$champ"])== $val)
+						$affiche .= " CHECKED";
+
+					// premiere valeur par defaut
+					if (!$extra["$champ"] AND $i == 0)
+						$affiche .= " CHECKED";
+
+					$affiche .= " VALUE='$val'>$choix_</INPUT>\n";
+					$i++;
+				}
+				break;
+
+			// A refaire car on a pas besoin de renvoyer comme pour checkbox
+			// les cases non cochees
+			case "multiple":
+				$choix = explode(",",$choix);
+				if (!is_array($choix)) {
+					$affiche .= "Pas de choix d&eacute;finis.\n";
+					break; }
+				for ($i=0; $i < count($choix); $i++) {
+					$affiche .= "<INPUT TYPE='checkbox' NAME='suppl_$champ$i'";
+					if (entites_html($extra["$champ"][$i])=="on")
+						$affiche .= " CHECKED";
+					$affiche .= ">\n";
+					$affiche .= $choix[$i];
+					$affiche .= "</INPUT>\n";
+				}
+				break;
+
 			case "bloc":
 			case "block":
 				$affiche .= "<TEXTAREA NAME='suppl_$champ' CLASS='forml' ROWS='5' COLS='40'>".entites_html($extra[$champ])."</TEXTAREA>\n";
 				break;
+
 			case "masque":
 				$affiche .= "<font color='#555555'>".interdire_scripts($extra[$champ])."</font>\n";
 				break;
+
 			case "ligne":
 			case "line":
 			default:
@@ -135,8 +234,36 @@ function extra_recup_saisie($type) {
 	$champs = $GLOBALS['champs_extra'][$type];
 	if (is_array($champs)) {
 		$extra = Array();
-		while(list($champ,)=each($champs))
-			$extra[$champ]=$GLOBALS["suppl_$champ"];
+		while(list($champ,)=each($champs)) {
+			list($style, $filtre, , $choix,) = explode("|", $GLOBALS['champs_extra'][$type][$champ]);
+			list(, $filtre) = explode(",", $filtre);
+			switch ($style) {
+			case "multiple":
+				$choix =  explode(",", $choix);
+				$extra["$champ"] = array();
+				for ($i=0; $i < count($choix); $i++) {
+					if ($filtre && function_exists($filtre))
+						 $extra["$champ"][$i] =
+						 	$filtre($GLOBALS["suppl_$champ$i"]);
+					else
+						$extra["$champ"][$i] = $GLOBALS["suppl_$champ$i"];
+				}
+				break;
+
+			case 'case':
+			case 'checkbox':
+				if ($GLOBALS["suppl_$champ"] == 'on')
+					$GLOBALS["suppl_$champ"] = 'true';
+				else
+					$GLOBALS["suppl_$champ"] = 'false';
+
+			default:
+				if ($filtre && function_exists($filtre))
+				$extra["$champ"]=$filtre($GLOBALS["suppl_$champ"]);
+				else $extra["$champ"]=$GLOBALS["suppl_$champ"];
+				break;
+			}
+		}
 		return serialize($extra);
 	} else
 		return '';
@@ -145,8 +272,21 @@ function extra_recup_saisie($type) {
 // Retourne la liste des filtres a appliquer pour un champ extra particulier
 function extra_filtres($type, $nom_champ) {
 	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
-	if (!$champ) return array();;
+	if (!$champ) return array();
 	list(, $filtre, ) = explode("|", $champ);
+	list($filtre, ) = explode(",", $filtre);
+	if ($filtre && $filtre != 'brut' && function_exists($filtre))
+		return array($filtre);
+	return array();
+}
+
+// Retourne la liste des filtres a appliquer a la recuperation
+// d'un champ extra particulier
+function extra_filtres_recup($type, $nom_champ) {
+	$champ = $GLOBALS['champs_extra'][$type][$nom_champ];
+	if (!$champ) return array();
+	list(, $filtre, ) = explode("|", $champ);
+	list(,$filtre) = explode(",", $filtre);
 	if ($filtre && $filtre != 'brut' && function_exists($filtre))
 		return array($filtre);
 	return array();
@@ -163,13 +303,37 @@ function extra_affichage($extra, $type) {
 	$champs = $GLOBALS['champs_extra'][$type];
 
 	while (list($nom,$contenu) = each($extra)) {
-		list($type, $filtre, $prettyname) = explode("|", $champs[$nom]);
+		list ($style, $filtre, $prettyname, $choix, $valeurs) =
+			explode("|", $champs[$nom]);
+		list($filtre, ) = explode(",", $filtre);
+		switch ($style) {
+			case "checkbox":
+			case "case":
+				if ($contenu=="true") $contenu = _T('item_oui');
+				elseif ($contenu=="false") $contenu = _T('item_non');
+				break;
+
+			case "multiple":
+				$contenu_ = "";
+				$choix = explode (",", $choix);
+				if (is_array($contenu) AND is_array($choix)
+				AND count($choix)==count($contenu))
+					for ($i=0; $i < count($contenu); $i++)
+						if ($contenu[$i] == "on")
+							$contenu_ .= "$choix[$i], ";
+						else if ($contenu[$i] <> '')
+							$contenu_ = "Choix incoh&eacute;rents, "
+							."v&eacute;rifiez la configuration... ";
+				$contenu = ereg_replace(", $", "", $contenu_);
+				break;
+		}
 		if ($filtre != 'brut' AND function_exists($filtre))
 			$contenu = $filtre($contenu);
 		if (!$prettyname)
 			$prettyname = ucfirst($nom);
 		if ($contenu)
-			$affiche .= "<div><b>$prettyname&nbsp;:</b> ".interdire_scripts($contenu)."<br /></div>\n";
+			$affiche .= "<div><b>$prettyname&nbsp;:</b> "
+			.interdire_scripts($contenu)."<br /></div>\n";
 	}
 
 	if ($affiche) {
