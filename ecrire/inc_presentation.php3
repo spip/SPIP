@@ -2175,7 +2175,7 @@ else {
 
 		echo"<img src='img_pack/rien.gif' width='10' />";
 
-		echo "<a href='calendrier.php3' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\"><img src='img_pack/cal-rv.gif' alt='' width='26' height='20' border='0'></a>";
+		echo "<a href='calendrier_semaine.php3' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\"><img src='img_pack/cal-rv.gif' alt='' width='26' height='20' border='0'></a>";
 		echo "<a href='messagerie.php3' class='icone26' onMouseOver=\"changestyle('bandeaumessagerie','visibility','visible');\"><img src='img_pack/cal-messagerie.gif' alt='' width='26' height='20' border='0'></a>";
 		echo "<a href='synchro.php3' class='icone26' onMouseOver=\"changestyle('bandeausynchro','visibility','visible');\"><img src='img_pack/cal-suivi.gif' alt='' width='26' height='20' border='0'></a>";
 		
@@ -2207,11 +2207,11 @@ else {
 			if ($options != "avancees") {
 				$lien = $clean_link;
 				$lien->addVar('set_options', 'avancees');
-				$simple = "<b>"._T('icone_interface_simple')."</b>/"._T('icone_interface_complet');
+				$simple = "<b>"._T('icone_interface_simple')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
 			} else {
 				$lien = $clean_link;
 				$lien->addVar('set_options', 'basiques');
-				$simple = _T('icone_interface_simple')."/<b>"._T('icone_interface_complet')."</b>";
+				$simple = "<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
 			}
 			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\"><img src='img_pack/interface-display.gif' alt='' width='26' height='20' border='0'></a>";
 
@@ -2225,12 +2225,12 @@ else {
 			if ($spip_ecran == "large") {
 				$lien->addVar('set_ecran', 'etroit');
 				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\""._T('info_petit_ecran')."\"><img src='img_pack/set-ecran-etroit.gif' alt=\""._T('info_petit_ecran')."\" width='26' height='20' border='0'></a>";
-				$ecran = "<div>"._T('info_petit_ecran')."/<b>"._T('info_grand_ecran')."</b></div>";
+				$ecran = "<div><a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 			}
 			else {
 				$lien->addVar('set_ecran', 'large');
 				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\""._T('info_grand_ecran')."\"><img src='img_pack/set-ecran.gif' alt=\""._T('info_grand_ecran')."\" width='26' height='20' border='0'></a>";
-				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/"._T('info_grand_ecran')."</div>";
+				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
 
 
@@ -2264,7 +2264,7 @@ else {
 	
 	
 		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
-		echo _T('icone_site_entier');
+		echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
 		
 
 		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
@@ -2323,8 +2323,11 @@ else {
 	
 	
 		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
-		echo _T('icone_brouteur');
 
+		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
+		else echo "<a href='brouteur.php3' class='lien_sous'>";
+		echo _T('icone_brouteur');
+		echo "</a>";
 		
 
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
@@ -2423,11 +2426,13 @@ else {
 
 
 
-
+		// Calendrier
 		if ($GLOBALS['afficher_bandeau_calendrier']) {
 			echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 0px;'>";
+			echo "<a href='calendrier_semaine.php3' class='lien_sous'>";
 			echo _T('icone_agenda');
-
+			echo "</a>";
+			
 			$mois = $GLOBALS['mois'];
 			$jour = $GLOBALS['jour'];
 			$annee =$GLOBALS['annee'];			
@@ -2482,16 +2487,14 @@ else {
 			}
 			echo "</td></tr>";
 			echo "</table>";
-
-
-
-			
 			
 			echo "</div>";
 		
 		} else {
 			echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
+			echo "<a href='calendrier_semaine.php3' class='lien_sous'>";
 			echo _T('icone_agenda');
+			echo "</a>";
 			
 			echo "<table><tr>";
 			echo "<td valign='top' width='200'>";
@@ -2518,31 +2521,30 @@ else {
 
 
 		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
+		echo "<a href='messagerie.php3' class='lien_sous'>";
 		echo _T('icone_messagerie_personnelle');
-
+		echo "</a>";
+		
 		echo "<div>&nbsp;</div>";
-		//debut_cadre_relief();
-
 		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
 		icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif");
-		
 		if ($connect_statut == "0minirezo") {
 			icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif");
 		}
-
-		//fin_cadre_relief();
-
 		echo "</div>";
-	
+
+		// Suivi activite	
 		echo "<div id='bandeausynchro' class='bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
+		echo "<a href='synchro.php3' class='lien_sous'>";
 		echo _T('icone_suivi_activite');
+		echo "</a>";
 		echo "</div>";
 	
+		// Infos perso
 		echo "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_left: 200px;'>";
+		echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='lien_sous'>";
 		echo _T('icone_informations_personnelles');
-
-
-
+		echo "</a>";
 		echo "</div>";
 	
 		echo "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right;'>";
@@ -2569,9 +2571,9 @@ else {
 			echo _T('titre_changer_couleur_interface');
 		echo "</div>";
 
-	
+		// Deconnection
 		echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
-		echo _T('icone_deconnecter').aide("deconnect");
+		echo "<a href='../spip_cookie.php3?logout=$connect_login' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
 		echo "</div>";
 	
 	echo "</div>";

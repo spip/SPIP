@@ -146,6 +146,13 @@ td {
 	-moz-border-radius-bottomright: 5px;
 }
 
+a.lien_sous {
+	color: #666666;
+}
+a.lien_sous:hover {
+	color: black;
+}
+
 
 div.bandeau_rubriques {
 	background-color: #eeeeee; 
