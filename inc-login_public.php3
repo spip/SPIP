@@ -47,7 +47,7 @@ function login_explicite($login, $cible, $mode) {
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
 		if (($cible != $action) &&  !headers_sent())
 			redirige_par_entete($cible);
-		return "<a href='$cible'>"._T('login_par_ici')."</a>\n";
+		return http_href($cible, _T('login_par_ici'));
 	}
 	return login_pour_tous($login ? $login : $GLOBALS['var_login'], $cible, '', $action, $mode);
 }
