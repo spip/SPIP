@@ -518,7 +518,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$boucles = '';
 	spip_timer('calcul_skel');
 	include_local("inc-$gram-squel.php3");
-	$racine = parser($squelette, '',$boucles);
+	$racine = parser($squelette, '',$boucles, $nom);
 #	include_local('inc-compilo-debug.php3');
 #	 afftable($racine);
 #	 affboucles($boucles);

@@ -279,7 +279,7 @@ function boucle_debug_resultat ($nom, $resultat) {
 function boucle_debug_compile ($id, $nom, $pretty, $sourcefile, $code) {
 	global $debug_objets;
 
-	$debug_objets['boucles'][$nom.$id] = $code;
+	$debug_objets['code'][$nom.$id] = $code;
 	$debug_objets['pretty'][$nom.$id] = $pretty;
 }
 
@@ -289,6 +289,13 @@ function squelette_debug_compile($nom, $sourcefile, $squelette) {
 
 	$debug_objets['squelettes'][$nom] = $squelette;
 	$debug_objets['sourcefile'][$nom] = $sourcefile;
+}
+
+// appelee a chaque parsing de squelette (inc-parser)
+function boucle_debug ($id, $nom, $boucle) {
+	global $debug_objets;
+
+	$debug_objets['boucle'][$nom.$id] = $boucle;
 }
 
 // l'environnement graphique du debuggueur 
@@ -309,8 +316,8 @@ function debug_page($no_exit = false) {
 		$link = $GLOBALS['clean_link'];
 		$link->addvar('debug_objet', $nom_skel);
 		$link->delvar('debug_affiche');
-		echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
 		echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
+		echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
 		echo "</li>\n<ul>\n";
 
 		if (is_array($debug_objets['pretty']))
@@ -321,6 +328,7 @@ function debug_page($no_exit = false) {
 				$link = $GLOBALS['clean_link'];
 				$link->addvar('debug_objet', $nom);
 				$link->delvar('debug_affiche');
+			echo " <a href='".$link->getUrl()."&debug_affiche=boucle'>boucle</a>";
 				echo " <a href='".$link->getUrl()."&debug_affiche=code'>code</a>";
 				echo " <a href='".$link->getUrl()."&debug_affiche=resultat'>resultat</a>";
 				echo "</li>\n";
@@ -334,9 +342,12 @@ function debug_page($no_exit = false) {
 		foreach ($res as $view) {
 			echo "<hr>".interdire_scripts($view);
 		}
-	} else if ($debug_objet AND $debug_affiche == 'code' AND $res = $debug_objets['boucles'][$debug_objet]) {
+	} else if ($debug_objet AND $debug_affiche == 'code' AND $res = $debug_objets['code'][$debug_objet]) {
 		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
 		highlight_string("<"."?php\n".$res."\n?".">");
+	} else if ($debug_objet AND $debug_affiche == 'boucle' AND $res = $debug_objets['boucle'][$debug_objet]) {
+		echo "<b>".$debug_objets['pretty'][$debug_objet]."</b><br />";
+		highlight_string($res);
 	}
 
 

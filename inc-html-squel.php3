@@ -225,13 +225,21 @@ function parser_param($params, &$result, $idb) {
 	$result->param = $params2;
 }
 
-function parser($texte, $id_parent, &$boucles) {
+function parser($texte, $id_parent, &$boucles, $nom) {
 
 	$all_res = array();
 
 	while (preg_match(DEBUT_DE_BOUCLE, $texte, $regs)) {
 		$nom_boucle = $regs[1].$regs[2];
 		$p = strpos($texte, '<BOUCLE'.$nom_boucle);
+
+		// envoyer la boucle au debugueur
+		if ($GLOBALS['var_debug']) {
+			$preg = "@<B($nom_boucle|OUCLE${nom_boucle}[^-_.a-zA-Z0-9][^>]*)>"
+				. ".*</(BOUCLE|/?B)$nom_boucle>@ms";
+			preg_match($preg, $texte, $match);
+			boucle_debug ($nom_boucle, $nom, $match[0]);
+		}
 
 		//
 		// Recuperer la partie principale de la boucle
@@ -313,10 +321,10 @@ function parser($texte, $id_parent, &$boucles) {
 			$texte = substr($texte, $p + strlen($s));
 		}
 
-		$result->cond_avant = parser($result->cond_avant, $id_parent,$boucles);
-		$result->cond_apres = parser($result->cond_fin, $id_parent,$boucles);
-		$result->cond_altern = parser($result->cond_altern,$id_parent,$boucles);
-		$result->milieu = parser($milieu, $id_boucle,$boucles);
+		$result->cond_avant = parser($result->cond_avant, $id_parent,$boucles, $nom);
+		$result->cond_apres = parser($result->cond_fin, $id_parent,$boucles, $nom);
+		$result->cond_altern = parser($result->cond_altern,$id_parent,$boucles, $nom);
+		$result->milieu = parser($milieu, $id_boucle,$boucles, $nom);
 
 		$all_res = array_merge($all_res, parser_champs_etendus($debut));
 		$all_res[] = $result;
