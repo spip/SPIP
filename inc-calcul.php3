@@ -71,7 +71,7 @@ function charger_squelette ($squelette) {
 			include_ecrire ("inc_presentation.php3");
 			install_debut_html(_T('info_erreur_squelette'));
 			echo "<P>"._T('info_erreur_squelette2',
-			array('fichier'=>$GLOBALS['fond']))."</P>";
+			array('fichier'=>$squelette))."</P>";
 			install_fin_html();
 			spip_log ("ERREUR: aucun squelette $squelette n'est disponible...");
 			exit;

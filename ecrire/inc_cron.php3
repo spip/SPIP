@@ -77,42 +77,39 @@ function spip_cron() {
 	
 	$adresse_neuf = lire_meta('adresse_neuf');
 	$jours_neuf = lire_meta('jours_neuf');
-	if (!$flag_ecrire AND 
-	    $adresse_neuf AND 
-	    $jours_neuf AND
-	    (lire_meta('quoi_de_neuf') == 'oui') AND 
-	    (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
-
-	  if (timeout('quoide_neuf')) { 
+	if (!$flag_ecrire
+	AND $adresse_neuf
+	AND $jours_neuf
+	AND (lire_meta('quoi_de_neuf') == 'oui') AND
+	(time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
+		if (timeout('quoide_neuf')) { 
 			ecrire_meta('majnouv', time());
 			ecrire_metas();
 
 			include_local("inc-calcul.php3");
-			$page= cherche_page('nouveautes',
-					    '',
-					    array('date' => date('Y-m-d H:i:s', $majnouv)),
-					    '',
-					    '');
+			$page= cherche_page('',
+				array('date' => date('Y-m-d H:i:s', $majnouv)),
+				'nouveautes',
+				'',
+				lire_meta('langue_site'));
 			$page = $page['texte'];
-			if (substr($page,0,5) == '<?php')
-			  {
+			if (substr($page,0,5) == '<'.'?php') {
 # ancienne version: squelette en PHP avec affections. 1 passe de +
-			    unset ($mail_nouveautes);
-			    unset ($sujet_nouveautes);
-			    eval ('?' . '>' . $page);
-			  }
-			else 
-			  { 
+				unset ($mail_nouveautes);
+				unset ($sujet_nouveautes);
+				eval ('?' . '>' . $page);
+			} else {
 # nouvelle version: squelette en mode texte, 1ere ligne = sujet
 # il faudrait ge'ne'raliser en produisant les Headers standars SMTP
 # a` passer en 4e argument de mail. Surtout utile pour le charset.
-			    $page = stripslashes($page);
-			    $p = strpos($page,"\n");
-			    $sujet_nouveautes = substr($page,0,$p);
-			    $mail_nouveautes = ereg_replace('\$jours_neuf',
-							    "$jours_neuf",
-							    substr($page,$p+1));
-			  }
+				$page = stripslashes($page);
+				$p = strpos($page,"\n");
+				$sujet_nouveautes = substr($page,0,$p);
+				$mail_nouveautes = ereg_replace('\$jours_neuf',
+					"$jours_neuf",
+					substr($page,$p+1));
+			}
+
 			// envoi
 			if ($mail_nouveautes) {
 				spip_log("envoi mail nouveautes");
@@ -120,8 +117,8 @@ function spip_cron() {
 				envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
 			} else
 				spip_log("envoi mail nouveautes : pas de nouveautes");
-					}
-	  	}
+		}
+	}
 
 	//
 	// Statistiques
@@ -144,7 +141,8 @@ function spip_cron() {
 	}
 
 	// recalcul des rubriques publiques (cas de la publication post-datee)
-	if (($t - lire_meta('calcul_rubriques') > 3600) AND timeout('calcul_rubriques')) {
+	if (($t - lire_meta('calcul_rubriques') > 3600)
+	AND timeout('calcul_rubriques')) {
 		ecrire_meta('calcul_rubriques', $t);
 		ecrire_metas();
 		include_ecrire('inc_rubriques.php3');
