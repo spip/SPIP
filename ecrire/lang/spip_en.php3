@@ -186,11 +186,11 @@ $GLOBALS['i18n_spip_en'] = array(
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <B>Setting up access permissions</b>',
 'dirs_probleme_droits' => '<b>Problem in access permissions</b>',
-'dirs_repertoires_absents' => '<NEW> <B>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </B>
-		<P>Il est probable que cela soit d&ucirc; à un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
-		V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
-		ci-dessus ; si ce n\'est pas le cas, renommez les r&eacute;pertoires avec votre logiciel FTP de fa&ccedil;on &agrave; corriger l\'erreur.
-		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+'dirs_repertoires_absents' => '<B>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
+  <P>It probably caused by a bad lower or upper case handling.
+  Please make sure that the lower and upper case letters of these directories match what is displayed
+  above; if they don\'t, rename the directories using your FTP client in order to correct the error.
+  <P>Once this is done, you can',
 'dirs_repertoires_suivants' => '<b>The following directories do not have write permission: <ul>@bad_dirs@.</ul> </b>
 
 		<P>To change this, use your FTP client in order to set access permissions for each
@@ -617,7 +617,7 @@ requiring an FTP access to the Web site.',
 'info_gauche_visiteurs_enregistres' => 'You will find here the visitors registered
 	in the public area of the site (forums by subscription).',
 'info_generation_miniatures_images' => 'Generating images thumbnails',
-'info_gerer_trad' => '<NEW> G&eacute;rer les liens de traduction ?',
+'info_gerer_trad' => 'Managing translation links?',
 'info_grand_ecran' => 'Large display',
 'info_groupe_important' => 'Important group',
 'info_hebergeur_desactiver_envoi_email' => 'Some hosts disable automated mail sending
@@ -701,10 +701,10 @@ requiring an FTP access to the Web site.',
 'info_multi_cet_article' => '<MODIF> This article is in:',
 'info_multi_cette_rubrique' => '<MODIF> This section is in:',
 'info_multi_herit' => '<MODIF> parent\'s language',
-'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
+'info_multi_langues_choisies' => 'Please select below the languages to be available to the editors of your site.
+  Languages already used by your site (on top of the list) cannot be disabled.',
 'info_multi_rubriques' => 'Enable the language menu for the sections?',
-'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
+'info_multi_secteurs' => '... only for the sections located at the root?',
 'info_multilinguisme' => 'Multilingual',
 'info_nexen_1' => 'Your host is Nexen Services.',
 'info_nexen_2' => 'Protection of the directory <tt>ecrire/data/</tt> should be applied through',
@@ -1097,7 +1097,7 @@ requiring an FTP access to the Web site.',
 'login_pass2' => 'Password:',
 'login_preferez_refuser' => '<b>If you prefer to refuse the cookies</b>, there is another connection method (less secure) at your disposal:',
 'login_recharger' => 'reload this page',
-'login_rester_identifie' => '<NEW> Rester identifi&eacute; quelques jours',
+'login_rester_identifie' => 'Remain logged for a few days',
 'login_retour_public' => 'Back to the public site',
 'login_retour_site' => 'Back to the public site',
 'login_retoursitepublic' => 'back to the public site',
@@ -1411,7 +1411,7 @@ the images and the documents used in the articles and sections.',
 		to customise the articles in your templates.',
 'texte_mots_cles_dans_forum' => 'Do you wish to allow the use of keywords that could be selected by visitors, in the public site forums? (Warning: this option is rather intricate to use properly.)',
 'texte_multilinguisme' => 'If you wish to manage articles in several languages, with a complicated navigation, you can add a language selection menu to the articles and/ot the sections, according to the organisation of your site.',
-'texte_multilinguisme_trad' => '<NEW> Vous pouvez &eacute;galement activer un syst&egrave;me de gestion de liens entre les diff&eacute;rentes traductions d\'un article.',
+'texte_multilinguisme_trad' => 'Also, you can enable a link management system amongst the different translations of an article.',
 'texte_non_compresse' => '<i>uncompressed</i> (your server does not support this feature)',
 'texte_non_fonction_referencement' => 'You can choose not to use this automated feature, and enter the elements concerning that site manually...',
 'texte_nouveau_message' => 'New message',
@@ -1546,9 +1546,9 @@ entered important modifications on the graphics or the structure of the site.',
 'titre_image_redacteur_02' => 'Editor',
 'titre_image_visiteur' => 'Visitor',
 'titre_joindre_document' => 'ATTACH A DOCUMENT',
-'titre_langue_article' => '<NEW> LANGUE DE L\'ARTICLE',
-'titre_langue_breve' => '<NEW> LANGUE DE LA BR&Egrave;VE',
-'titre_langue_trad_article' => '<NEW> LANGUE ET TRADUCTIONS DE L\'ARTICLE',
+'titre_langue_article' => 'ARTICLE LANGUAGE',
+'titre_langue_breve' => 'NEWS ITEM LANGUAGE',
+'titre_langue_trad_article' => 'ARTICLE LANGUAGE AND TRANSLATIONS',
 'titre_les_articles' => 'ARTICLES',
 'titre_liens_entrants' => 'Incoming links of the day',
 'titre_mots_cles' => 'KEYWORDS',
