@@ -605,13 +605,14 @@ function balise_EXTRA_dist ($p) {
 
 function balise_PARAMETRES_FORUM_dist($p) {
 	include_local('inc-formulaire_forum.php3');
-	$_accepter_forum = champ_sql('accepter_forum', $p);
+	$_id_article = champ_sql('id_article', $p);
 	$p->code = '
-	// refus des forums ?
-	('.$_accepter_forum.'=="non" OR
-	(lire_meta("forums_publics") == "non" AND !ereg("^(pos|pri|abo)", '.$_accepter_forum.')))
-	? "" : // sinon:
-	';
+		// refus des forums ?
+		(sql_accepter_forum('.$_id_article.')=="non" OR
+		(lire_meta("forums_publics") == "non"
+		AND sql_accepter_forum('.$_id_article.') == ""))
+		? "" : // sinon:
+		';
 
 	switch ($p->type_requete) {
 		case 'articles':

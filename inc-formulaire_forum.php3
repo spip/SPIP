@@ -21,21 +21,21 @@ else
 /* GESTION DU FORMULAIRE FORUM */
 /*******************************/
 global $balise_FORMULAIRE_FORUM_collecte;
-$balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic');
+$balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'alea', 'hash');
 
-function balise_FORMULAIRE_FORUM_stat($args, $filtres)
-{
-  list ($idr, $idf, $ida, $idb, $ids) = $args;
+function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
+	list ($idr, $idf, $ida, $idb, $ids, $alea, $hash) = $args;
 
-  // recuperer les donnees du forum auquel on repond, false = forum interdit
-  if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
-    return '';
-  list($titre, $table, $forums_publics) = $r;
-  return 
-    array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids);
+	// recuperer les donnees du forum auquel on repond, false = forum interdit
+	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
+		return '';
+
+	list($titre, $table, $forums_publics) = $r;
+	return
+		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids, $alea, $hash);
 }
 
-function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic) {
+function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $alea, $hash) {
 
 	global $REMOTE_ADDR, $id_message, $afficher_texte, $spip_forum_user;
 
@@ -146,17 +146,39 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		}
 	}
 
-	// Generation d'une valeur de securite pour validation
-	$seed = (double) (microtime() + 1) * time() * 1000000;
-	@mt_srand($seed);
-	$alea = @mt_rand();
-	if (!$alea) {srand($seed);$alea = rand();}
-	$forum_id_rubrique = intval($id_rubrique);
-	$forum_id_forum = intval($id_forum);
-	$forum_id_article = intval($id_article);
-	$forum_id_breve = intval($id_breve);
-	$forum_id_syndic = intval($id_syndic);
-	$hash = calculer_action_auteur("ajout_forum $forum_id_rubrique $forum_id_forum $forum_id_article $forum_id_breve $forum_id_syndic $alea");
+	$id_rubrique = intval($id_rubrique);
+	$id_forum = intval($id_forum);
+	$id_article = intval($id_article);
+	$id_breve = intval($id_breve);
+	$id_syndic = intval($id_syndic);
+
+	// Une securite qui nous protege contre :
+	// - les doubles validations de forums (derapages humains ou des brouteurs)
+	// - les abus visant ˆ mettre des forums malgre nous sur un article (??)
+	// On installe un fichier temporaire dans _DIR_SESSIONS (et pas _DIR_CACHE
+	// afin de ne pas bugguer quand on vide le cache)
+	// Le lock est leve au moment de l'insertion en base (inc-messforum.php3)
+	if ($GLOBALS['HTTP_POST_VARS']['ajout_forum']) {
+
+		$alea = preg_replace('/[^0-9]/', '', $alea);
+		if(!$alea OR !@file_exists(_DIR_SESSIONS."forum_$alea.lck")) {
+			while (
+				# astuce : mt_rand pour autoriser les hits simultanes
+				$alea = time() + @mt_rand()
+				AND @file_exists($f = _DIR_SESSIONS."forum_$alea.lck")) {};
+			@touch ($f);
+			@chmod ($f,0666);
+		}
+
+		# et maintenant on purge les locks de forums ouverts depuis > 4 h
+		if ($dh = @opendir(_DIR_SESSIONS))
+			while (($file = @readdir($dh)) !== false)
+				if (preg_match('/^forum_([0-9]+)\.lck$/', $file)
+				AND (time()-@filemtime(_DIR_SESSIONS.$file) > 4*3600))
+					@unlink(_DIR_SESSIONS.$file);
+
+		$hash = calculer_action_auteur("ajout_forum $id_rubrique $id_forum $id_article $id_breve $id_syndic $alea");
+	}
 
 	// Faut-il ajouter des propositions de mots-cles
 	if ((lire_meta("mots_cles_forums") == "oui") && ($table != 'forum'))

@@ -353,11 +353,27 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 function sql_chapo($id_article) {
+	if ($id_article)
 	return spip_abstract_fetsel(array('chapo'),
 		array('articles'),
 		array("id_article=".intval($id_article),
 		"statut='publie'"));
 }
+
+# retourne le champ 'accepter_forum' d'un article
+function sql_accepter_forum($id_article) {
+	static $cache = array();
+
+	if (!$id_article) return;
+
+	if (!isset($cache[$id_article]))
+		$cache[$id_article] = spip_abstract_fetsel(array('accepter_forum'),
+			array('articles'),
+			array("id_article=".intval($id_article)));
+
+	return $cache[$id_article];
+}
+
 
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique par id_rubrique & lang)

@@ -108,32 +108,38 @@ if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_sit
 if (strlen($confirmer) > 0
 OR ($afficher_texte=='non' AND $ajouter_mot)) {
 
-	// verifier droit (pour interdire de hack-poster sur des forums fermes ?)
+	// prevoir le redirect
+	$redirect = $retour_forum;
+
+	// Verifier hash securite
 	include_ecrire("inc_admin.php3");
-	if (!(verifier_action_auteur("ajout_forum $id_rubrique".
+	if (!verifier_action_auteur("ajout_forum $id_rubrique".
 	" $id_forum $id_article $id_breve".
-	" $id_syndic $alea", $hash))) {
-		header("Status: 404");
-		exit;
-	}
+	" $id_syndic $alea", $hash))
+		return; 	# echec silencieux du POST
+
+	// verifier fichier lock
+	$alea = preg_replace('/[^0-9]/', '', $alea);
+	if (!file_exists($f = _DIR_SESSIONS."forum_$alea.lck"))
+		return; # echec silencieux du POST
+	unlink($f);
 
 	// Entrer le message dans la base
-	$id_message = spip_abstract_insert('forum', 
-	"(date_heure)",
-	"(NOW())");
+	$id_message = spip_abstract_insert('forum', '(date_heure)', '(NOW())');
 
 	$statut =
 		($forums_publics == 'non') ? 'off' :
 		(($forums_publics == 'pri') ? 'prop' :
 		'publie');
 
-	if ($id_forum > 0)
-		$id_thread = $id_forum;
+	if ($id_forum)
+		list($id_thread) = spip_fetch_array(spip_query(
+		"SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 
 	spip_query("UPDATE spip_forum SET id_parent = $id_forum,
-	id_rubrique =$id_rubrique,
+	id_rubrique = $id_rubrique,
 	id_article = $id_article,
 	id_breve = $id_breve,
 	id_syndic = $id_syndic,
@@ -182,8 +188,6 @@ OR ($afficher_texte=='non' AND $ajouter_mot)) {
 				$id_rubrique,
 				$id_syndic) . "'");
 	}
-
-	$redirect = $retour_forum;
 
 }
 
