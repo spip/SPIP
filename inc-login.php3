@@ -36,11 +36,11 @@ function auth_http($cible, $essai_auth_http) {
 
 function ouvre_login($titre='') {
 
-	$retour .= "<div>";
+	$retour = "<div>";
 
 	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
 
-	$retour .= '<div style="font-family: Verdana,arial,helvetica,sans-serif: font-size: 2">';
+	$retour .= '<div style="font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;">';
 	return $retour;
 }
 
@@ -246,7 +246,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 		echo "</fieldset></form>\n";
 	}
 
-	echo "\n<center>"; // debut du pied de login
+	echo "\n<div align='center' style='font-size: 12px;' >"; // debut du pied de login
 
 	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
 	if ((!$prive AND (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) OR ($prive AND $inscriptions_ecrire)) 
@@ -263,7 +263,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 
 	if ($prive) echo " [<a href='$url_site'>"._T('login_retoursitepublic')."</a>]";
 
-	echo "</center>\n";
+	echo "</div>\n";
 
 	echo ferme_login();
 }
