@@ -93,7 +93,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 
 		if ($type=="normal") $la_couleur="red";
 		elseif ($type=="pb") $la_couleur="blue";
-		elseif ($type=="affich") $la_couleur="yellow";
+		elseif ($type=="affich") $la_couleur="#ff6600";
 		else $la_couleur="black";
 
 		$les_rv["$lejour"].="<br><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message'>$titre</a>";
