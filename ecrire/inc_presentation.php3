@@ -711,7 +711,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 	global $couleur_foncee;
 	global $connect_id_auteur, $connect_activer_messagerie;
 	global $mots_cles_forums;
-
+	global $spip_lang_rtl;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 
@@ -753,7 +753,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 				}
 				$fleche='img_pack/rien.gif';
 				if ($count==$compteur_forum){
-					$fleche='img_pack/forum-droite.gif';
+					$fleche="img_pack/forum-droite$spip_lang_rtl.gif";
 				}
 				echo "<td width=10 valign='top' background=$fond[$count]><img src='$fleche' alt='' width=10 height=13 border=0></td>\n";
 			}

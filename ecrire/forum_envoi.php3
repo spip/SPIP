@@ -98,7 +98,7 @@ if ($modif_forum == "oui") {
 	fin_cadre_relief();
 	if ($titre_parent) {
 		echo "</td></tr><tr>";
-		echo "<td width=10 valign='top' background='img_pack/rien.gif'><img src='img_pack/forum-droite.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "<td width=10 valign='top' background='img_pack/rien.gif'><img src='img_pack/forum-droite$spip_lang_rtl.gif' alt='' width=10 height=13 border=0></td>\n";
 		echo "</tr></table>";
 	}
 }
