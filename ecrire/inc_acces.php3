@@ -62,9 +62,14 @@ function ecrire_acces() {
 	unset($logins);
 	while($row = mysql_fetch_array($result)) $logins[$row[0]] = $row[1];
 
-	$fichier = fopen($htpasswd, "w");
-	ecrire_logins($fichier, $logins);
-	fclose($fichier);
+	$fichier = @fopen($htpasswd, "w");
+	if ($fichier) {
+		ecrire_logins($fichier, $logins);
+		fclose($fichier);
+	} else {
+		@header ("Location: ../spip_test_dirs.php3");
+		exit;
+	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'";
 	$result = mysql_query($query);

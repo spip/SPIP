@@ -24,8 +24,11 @@ function creer_repertoire($base, $subdir) {
 		include("$path/.test");
 	}
 	if (!$ok) {
-		$f = fopen("$base/.plat", "w");
-		fclose($f);
+		$f = @fopen("$base/.plat", "w");
+		if ($f)
+			fclose($f);
+		else
+			@header("Location: spip_test_dirs.php3");
 	}
 	return $ok;
 }

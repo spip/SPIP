@@ -22,7 +22,12 @@ cette page</A> afin de commencer r&eacute;ellement l'installation.";
 // teste les droits sur les repertoires
 //
 if (!file_exists("inc_connect.php3")){
-	$test_dirs = array("CACHE", "IMG", "ecrire", "ecrire/data", "ecrire/upload");
+
+	if ($test_dir)
+		$test_dirs[] = $test_dir;
+	else
+		$test_dirs = array("CACHE", "IMG", "ecrire", "ecrire/data", "ecrire/upload");
+
 	unset($bad_dirs);
 	while (list(, $my_dir) = each($test_dirs)) {
 		$ok = true;
