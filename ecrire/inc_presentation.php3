@@ -1047,7 +1047,6 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 }
 
 
-
 //
 // Afficher les forums
 //
@@ -1087,13 +1086,13 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 		$ip=$row["ip"];
 		$id_auteur=$row["id_auteur"];
 
-		if ($compteur_forum==1){echo "<BR><BR>\n";}
-
+		if ($compteur_forum==1) echo "\n<br /><br />";
 		$afficher = ($controle=="oui") ? ($statut!="perso") :
 			(($statut=="prive" OR $statut=="privrac" OR $statut=="privadm" OR $statut=="perso")
 			OR ($statut=="publie" AND $id_parent > 0));
 
 		if ($afficher) {
+			echo "<a id='$id_forum'></a>";
 			echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
 			for ($count=2;$count<=$compteur_forum AND $count<20;$count++){
 				$fond[$count]='img_pack/rien.gif';
@@ -1137,7 +1136,12 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 
 			if ($controle == "oui") {
 				if ($statut != "off") {
-					icone (_T('icone_supprimer_message'), "articles_forum.php3?id_article=$id_article&supp_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
+				  echo controle_cache_forum('supp_forum',
+						       $id_forum,
+						       _T('icone_supprimer_message'), 
+						       "articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
+						       "forum-interne-24.gif",
+						       "supprimer.gif");
 				}
 				else {
 					echo "<br><font color='red'><b>"._T('info_message_supprime')." $ip</b></font>";
@@ -1146,7 +1150,23 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 					}
 				}
 				if ($statut == "prop" OR $statut == "off") {
-					icone (_T('icone_valider_message'), "articles_forum.php3?id_article=$id_article&valid_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "creer.gif", "right");
+		$appelant= "forum.php3?$type=$valeur&id_forum=$id_forum";
+		  echo controle_cache_forum('valid_forum',
+					    $id_forum,
+					    _T('icone_valider_message'), 
+       "articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
+					    "forum-interne-24.gif",
+					    "creer.gif"),
+		    controle_cache_forum('valid_forum',
+				       $id_forum,
+				       _T('icone_valider_message') . " &amp; " .
+				       _T('lien_repondre_message'),
+				       "../$appelant&url=" .
+				       rawurlencode($appelant) . 
+				       "&retour=" .
+       rawurlencode("ecrire/controle_forum.php3?$rappel&#$id_forum"), 
+				       "../img_pack/messagerie-24.gif",
+				       "creer.gif");
 				}
 			}
 			echo justifier(propre($texte));
@@ -2930,5 +2950,19 @@ function install_fin_html() {
 	';
 }
 
+// Cette fonction permet de detruire des caches (publics)
+// a partir de l'espace des redacteurs (prive) 
+// utilisee aussi par controle_forum
+
+function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonc)
+{
+  return icone($texte,
+	       "../spip_cache?$action=$id&amp;redirect=" .
+	       rawurlencode($lien),
+	       $fond,
+	       $fonction,
+	       "right",
+	       'non');
+}
 
 ?>
