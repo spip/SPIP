@@ -2306,7 +2306,7 @@ else {
 		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
 			echo http_img_pack("rien.gif", "", "width='10'");
 			echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
-			  http_img_pack("fiche-perso.png", "", "border='0' onMouseOver=\")changestyle('bandeauvide','visibility', 'visible';\"");
+			  http_img_pack("fiche-perso.png", "", "border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 			echo "</a>";
 		}
 		
