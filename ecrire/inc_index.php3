@@ -69,29 +69,35 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 }
 
 function deja_indexe($type, $id_objet) {
-	$table_index = 'spip_index_'.$type.'s';
+	$table_index = 'spip_index_'.table_objet($type);
 	$col_id = 'id_'.$type;
 	$query = "SELECT $col_id FROM $table_index WHERE $col_id=$id_objet LIMIT 0,1";
 	$n = @spip_num_rows(@spip_query($query));
 	return ($n > 0);
 }
 
-function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
+function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* full : inutilise ? */) {
 	global $index, $mots;
 
-	if (!$id_objet OR (!$forcer_reset AND deja_indexe($type, $id_objet))) return;
+	$table = 'spip_'.table_objet($type);
+	$table_index = 'spip_index_'.table_objet($type);
+	$col_id = 'id_'.$type;
+
+	if (!$id_objet) return;
+	if (!$forcer_reset AND deja_indexe($type, $id_objet)) {
+		spip_log ("$type $id_objet deja indexe");
+		spip_query("UPDATE $table SET idx='oui' WHERE $col_id=$id_objet");
+		return;
+	}
+	// marquer "en cours d'indexation"
+	spip_query("UPDATE $table SET idx='idx' WHERE $col_id=$id_objet");
+
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
 
 	spip_log("indexation $type $id_objet");
 	$index = '';
 	$mots = "INSERT IGNORE INTO spip_index_dico (hash, dico) VALUES (0,'')";
-
-	if ($type != 'syndic'){
-		$table_index = 'spip_index_'.$type.'s';
-	} else {
-		$table_index = "spip_index_".$type;
-	}
-	$col_id = 'id_'.$type;
-
 
 	switch($type) {
 	case 'article':
@@ -223,21 +229,25 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 		while (list($hash, $points) = each($index)) $q[] = "(0x$hash,$points,$id_objet)";
 		spip_query("INSERT INTO $table_index (hash, points, $col_id) VALUES ".join(',',$q));
 	}
+
+	// marquer "indexe"
+	spip_query("UPDATE $table SET idx='oui' WHERE $col_id=$id_objet");
 }
 
+/*
+	Valeurs du champ 'idx' de la table spip_objet(s)
+	'' ne sait pas
+	'1' ˆ (re)indexer
+	'oui' deja indexe
+	'idx' en cours
+	'non' ne jamais indexer
+*/
 
 // API pour l'espace prive
 function marquer_indexer ($objet, $id_objet) {
-	global $dir_ecrire;
-	$fichier_index = $dir_ecrire.'data/.index';
-	if (!$f = @fopen($fichier_index, 'a')) {
-		spip_log ("impossible d'ecrire dans $fichier_index !");
-		@unlink ($fichier_index);	// on essaie de forcer
-		$f = @fopen($fichier_index, 'a');
-	}
 	spip_log ("demande indexation $objet $id_objet");
-	fputs($f, "$objet $id_objet 1\n");	// 1 = forcer reindexation
-	fclose($f);
+	$table = 'spip_index_'.table_objet($objet);
+	spip_query ("UPDATE $table SET idx='1' WHERE id_$objet=$id_objet");
 }
 function indexer_article($id_article) {
 	marquer_indexer('article', $id_article);
@@ -259,19 +269,37 @@ function indexer_syndic($id_syndic) {
 }
 
 function effectuer_une_indexation() {
- 	$fichier_index = 'ecrire/data/.index';
-	if ($s = @sizeof($suite = @file($fichier_index))) {
-		include_ecrire("inc_texte.php3");
-		include_ecrire("inc_filtres.php3");
-		$s = $suite[$n = @rand(0, $s-1)];
-		unset($suite[$n]);
-		$f = fopen($fichier_index, 'wb');
-		fwrite($f, join("", $suite));
-		fclose($f);
-		$s = explode(' ', trim($s));
-		indexer_objet($s[0], $s[1], $s[2]);
+	$nombre_indexations = 1;	// on peut etre plus gourmand si on est presse
+
+	// chercher un objet a indexer dans une des tables d'objets
+	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
+	$type = $types[rand(0,sizeof($types)-1)];
+	$table_objet = 'spip_'.table_objet($type);
+	$table_index = 'spip_index_'.table_objet($type);
+
+	// limiter aux objets publies
+	switch ($type) {
+		case 'article':
+		case 'breve':
+		case 'rubrique':
+		case 'syndic':
+		case 'forum':
+		case 'signature':
+			$critere = "AND statut='publie'";
+			break;
+		case 'auteur':
+			$critere = "AND statut IN ('0minirezo', '1comite')";
+			break;
+		case 'mot':
+		default:
+			$critere = '';
+			break;
 	}
-	else @unlink($fichier_index);
+
+	$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1') $critere LIMIT 0,$nombre_indexations");
+	while ($t = spip_fetch_array($s)) {
+		indexer_objet($type, $t[0], $t[1]);
+	}
 }
 
 function executer_une_indexation_syndic() {
@@ -290,33 +318,10 @@ function executer_une_indexation_syndic() {
 }
 
 function creer_liste_indexation() {
-	$fichier_index = 'data/.index';
-	$elements = array('article', 'breve', 'mot', 'auteur', 'rubrique', 'syndic');
-
-	while (list(,$element) = each ($elements)) {
-		$table = "spip_".$element."s";
-		if ($element == 'syndic') $table = 'spip_syndic';
-		switch($element) {
-			case 'article':
-			case 'breve':
-			case 'syndic':
-				$statut = "WHERE statut='publie'";
-				break;
-			case 'auteur':
-				$statut = "WHERE statut IN ('0minirezo', '1comite')";
-				break;
-			default:
-				$statut = '';
-		}
-
-		$res = spip_query("SELECT id_$element FROM $table $statut");
-		while ($row = spip_fetch_array($res))
-			$liste .= "$element ".$row["id_$element"]."\n";
-	}
-
-	if ($f = @fopen("$fichier_index", "w")) {
-		@fputs($f, $liste);
-		@fclose($f);
+	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
+	while (list(,$type) = each($types)) {
+		$table = table_objet($type);
+		spip_query("UPDATE $table SET idx='1'");
 	}
 }
 
@@ -327,23 +332,20 @@ function purger_index() {
 		spip_query("DELETE FROM spip_index_mots");
 		spip_query("DELETE FROM spip_index_rubriques");
 		spip_query("DELETE FROM spip_index_syndic");
+		spip_query("DELETE FROM spip_index_forum");
+		spip_query("DELETE FROM spip_index_signatures");
 		spip_query("DELETE FROM spip_index_dico");
 }
 
 // cree la requete pour une recherche en txt integral
 function requete_txt_integral($objet, $hash_recherche) {
-	if ($objet == 'syndic') {
-		$table = "spip_".$objet;
-		$index_table = "spip_index_".$objet;
-	} else {
-		$table = "spip_".$objet."s";
-		$index_table = "spip_index_".$objet."s";
-	}
+	$table = "spip_".table_objet($objet);
+	$index_table = "spip_index_".table_objet($objet);
 	$id_objet = "id_".$objet;
-	return "SELECT objet.*, SUM(idx.points) AS points
-		FROM $table AS objet, $index_table AS idx
-		WHERE objet.$id_objet = idx.$id_objet
-		AND idx.hash IN ($hash_recherche)
+	return "SELECT objet.*, SUM(rec.points) AS points
+		FROM $table AS objet, $index_table AS rec
+		WHERE objet.$id_objet = rec.$id_objet
+		AND rec.hash IN ($hash_recherche)
 		GROUP BY objet.$id_objet
 		ORDER BY points DESC
 		LIMIT 0,10";
