@@ -252,6 +252,7 @@ function afficher_sites($titre_table, $requete) {
 			$syndication=$row["syndication"];
 			$statut=$row["statut"];
 			$date=$row["date"];
+			$moderation=$row['moderation'];
 
 			echo "<tr bgcolor='$couleur'>";
 
@@ -284,10 +285,13 @@ function afficher_sites($titre_table, $requete) {
 					$puce = 'puce-orange-anim.gif';
 			}
 
-			echo "<img src='img_pack/$puce' width='7' height='7' border='0'>";
-			echo "&nbsp;&nbsp;".typo($nom_site)."</A>";
+			echo "<img src='img_pack/$puce' width='7' height='7' border='0'>&nbsp;&nbsp;";
+			if ($moderation == 'oui')
+				echo "<i>".typo($nom_site)."</i>";
+			else
+				echo typo($nom_site);
 
-			echo " &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>visiter ce site</a>]</font>";
+			echo "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>visiter ce site</a>]</font>";
 			echo "</td>";
 			
 			echo "<td class='arial1' align='right'> &nbsp;";
