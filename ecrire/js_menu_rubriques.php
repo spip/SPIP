@@ -29,7 +29,7 @@ function extraire_article($id_p) {
 function gen_liste_rubriques() {
 	$q = "SELECT id_rubrique, id_parent, titre 
 		FROM spip_rubriques 
-		ORDER BY id_parent, titre";
+		ORDER BY id_parent,0+titre,titre";
 
 	$res = spip_query($q);
 

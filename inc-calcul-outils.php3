@@ -47,7 +47,7 @@ function affiche_logos($logos, $lien, $align) {
 	$num_survol++;
 	$milieu = "<img src='$arton'\nalt='image$num_survol'"
 		. ($align ? " align='$align'" : '') 
-		. " style='border: 0px;' class='spip_logos' />";
+		. " style='border-width: 0px;' class='spip_logos' />";
 
 	if (!$artoff) return ($lien ? http_href($lien, $milieu) : $milieu);
 
