@@ -298,7 +298,7 @@ function formulaire_inscription() {
 
 	include_ecrire("inc_connect.php3");
 	include_ecrire("inc_meta.php3");
-	$inscriptions_ecrire = (lire_meta("autoriser_inscriptions") == "oui");
+	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui");
 
 	if ($inscriptions_ecrire) {
 		$ecrire = "ecrire/";
