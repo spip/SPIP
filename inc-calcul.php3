@@ -353,7 +353,7 @@ function chercher_squelette_hierarchie($fond, $id_rubrique) {
 			return "$fond-dist";
 		} else {
 			// erreur webmaster : $fond ne correspond a rien
-			include_local ("ecrire/inc_presentation.php3");
+			include_ecrire ("inc_presentation.php3");
 			install_debut_html("Erreur sur le site");
 			echo "<P>Aucun squelette <b>$fond</b> n'est disponible...</P>";
 			install_fin_html();

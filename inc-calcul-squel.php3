@@ -60,7 +60,7 @@ function parser_boucle($texte, $id_parent) {
 	$milieu = substr($texte, $p);
 
 	if (!ereg("^(<BOUCLE([0-9]+|[-_][-_.a-zA-Z0-9]*)[[:space:]]*(\([^)]*\)([[:space:]]*\{[^}]*\})*)[[:space:]]*>)", $milieu, $match)) {
-		include_local ("ecrire/inc_presentation.php3");
+		include_ecrire ("inc_presentation.php3");
 		install_debut_html("Syntaxe boucle incorrecte");
 		echo '<p>La boucle ' . entites_html($milieu) . ' est incorrecte.';
 		install_fin_html();
