@@ -101,12 +101,16 @@ function applique_invalideur($depart) {
 		spip_query("UPDATE spip_caches SET type='x'"
 		. ' WHERE ' . calcul_mysql_in('fichier', $tous));
 
-		// Si on est dans ecrire, demander a inc-public.php3
-		// de retirer les caches invalide's ; sinon le faire soi-meme
-		// ce qui evite des chevauchements dans la validation des forums
-		// [ A valide un forum, B obtient de purger les invalides, et A
-		//   trouve son cache avant que B n'ait eu le temps de le purger ]
-		ecrire_meta('invalider', 'oui');
+		// Demander a inc-public.php3 de retirer les caches
+		// invalides ;
+		// - le signal (meta='invalider') indique
+		// qu'il faut faire attention ;
+		// - le signal (meta='invalider_caches') indique qu'on
+		// peut effacer 100 caches invalides
+		// (Signaux differents pour eviter de la concurrence entre
+		// les processus d'invalidation)
+		ecrire_meta('invalider', 'oui'); // se verifier soi-meme
+		ecrire_meta('invalider_caches', 'oui'); // supprimer les autres
 		ecrire_metas();
 		if (_DIR_RESTREINT) {
 			include_local('inc-cache.php3');

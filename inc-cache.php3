@@ -100,10 +100,6 @@ function retire_cache($cache) {
 function retire_caches($chemin = '') {
 	if (!_DIR_RESTREINT) return;
 
-	// signaler
-	effacer_meta('invalider');
-	ecrire_metas();
-
 	// recuperer la liste des caches voues a la suppression
 	$suppr = array();
 
@@ -116,10 +112,17 @@ function retire_caches($chemin = '') {
 	}
 
 	// Et puis une centaine d'autres
-	$q = spip_query("SELECT fichier FROM spip_caches
-	WHERE type='x' LIMIT 0,100");
-	while ($r = spip_fetch_array($q))
-		$suppr[$r['fichier']] = true;
+	if (lire_meta('invalider_caches')) {
+		$on_efface = true;
+		effacer_meta('invalider_caches'); # concurrence
+		ecrire_metas();
+
+		$q = spip_query("SELECT fichier FROM spip_caches
+		WHERE type='x' LIMIT 0,100");
+		while ($r = spip_fetch_array($q))
+			$suppr[$r['fichier']] = true;
+	}
+
 
 	if ($n = count($suppr)) {
 		spip_log ("Retire $n caches");
@@ -127,12 +130,15 @@ function retire_caches($chemin = '') {
 			retire_cache($cache);
 		spip_query("DELETE FROM spip_caches WHERE "
 		.calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
+	}
 
-		// signaler aux suivants
-		if ($n>99) {
-			ecrire_meta('invalider', 'oui');
-			ecrire_metas();
-		}
+	// signaler aux suivants
+	if ($on_efface) {
+		if ($n>99)
+			ecrire_meta('invalider_caches', 'oui');
+		else
+			effacer_meta('invalider');
+		ecrire_metas();
 	}
 }
 
