@@ -896,17 +896,22 @@ a.liste-mot {
 .tr_liste {
 	background-color: #eeeeee;
 }
-.tr_liste_over {
+.tr_liste_over, .tr_liste:hover {
 	background-color: white;
 }
 
-.tr_liste td, .tr_liste_over td {
+.tr_liste td, .tr_liste:hover td, .tr_liste_over td {
 	border-bottom: 1px solid #cccccc;
 }
 
 .tr_liste td div.liste_clip {
 	height: 12px;
 	overflow: hidden;
+}
+
+.tr_liste:hover td div.liste_clip {
+	overflow: visible;
+	height: 100%;
 }
 
 
