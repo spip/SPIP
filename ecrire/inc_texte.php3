@@ -297,7 +297,7 @@ function typo_fr($letexte) {
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
 	$cherche2 = array(
-		'/(http|ftp|mailto)~:/',
+		'/(http|https|ftp|mailto)~:/',
 		'/~/'
 	);
 	$remplace2 = array(
@@ -731,6 +731,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$letexte = eregi_replace("(<br[[:space:]]*/?".">)+(<p>|<br[[:space:]]*/?".">)", "\n<p class=\"spip\">", $letexte);
 		$letexte = str_replace("<p>", "<p class=\"spip\">", $letexte);
 		$letexte = str_replace("\n", " ", $letexte);
+		$letexte = str_replace("<quote>", "<div class='spip_quote'>", $letexte);
+		$letexte = str_replace("<\/quote>", "</div'>", $letexte);
 	}
 	else {
 		$cherche1 = array(
@@ -748,7 +750,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
 			/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
 			/* 13 */	"/<p>/",
-			/* 14 */	"/\n/"
+			/* 14 */	"/\n/",
+			/* 16 */	"/<quote>/",
+			/* 16 */	"/<\/quote>/"
 		);
 		$remplace1 = array(
 			/* 0 */ 	"___SPIP_ligne_horizontale___",
@@ -765,7 +769,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			/* 11 */	"\n<p class=\"spip\">",
 			/* 12 */	"\n<p class=\"spip\">",
 			/* 13 */	"<p class=\"spip\">",
-			/* 14 */	" "
+			/* 14 */	" ",
+			/* 15 */	"<div class=\"spip_quote\">",
+			/* 16 */	"</div>"
 		);
 		$letexte = ereg_remplace($cherche1, $remplace1, $letexte);
 	}

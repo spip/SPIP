@@ -1,6 +1,7 @@
 <?php
 
 include ("inc.php3");
+include_ecrire ("inc_barre.php3");
 
 
 if ($modif_forum != "oui") $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
@@ -50,7 +51,7 @@ if ($id_parent) {
 }
 
 
-echo "<FORM ACTION='forum_envoi.php3' METHOD='post'>";
+echo "<FORM ACTION='forum_envoi.php3' name='formulaire' METHOD='post'>";
 
 if ($titre_parent) {
 	debut_cadre_relief("forum-interne-24.gif");
@@ -134,7 +135,8 @@ echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 
 echo "<p><B>"._T('info_texte_message')."</B><BR>";
 echo _T('info_creation_paragraphe')."<BR>";
-echo "<TEXTAREA NAME='texte' ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
+echo afficher_barre('formulaire', 'texte', true);
+echo "<TEXTAREA NAME='texte' ".afficher_claret()." ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
 echo entites_html($texte);
 echo "</TEXTAREA><P>\n";
 

@@ -239,6 +239,14 @@ a.spip_glossaire:hover {text-decoration: underline overline;}
 	background-color: #FFFFFF;
 	padding: 5px;
 }
+.spip_quote {
+	margin-left : 40px;
+	margin-top : 10px;
+	margin-bottom : 10px;
+	border : solid 1px #aaaaaa;
+	background-color: #ffffff;
+	padding: 5px;
+}
 
 .boutonlien {
 	font-family: Verdana,Arial,Helvetica,sans-serif;
