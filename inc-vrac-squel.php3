@@ -174,7 +174,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
                         }
                         $fonctions = $filtres;
                 }
-                $id_on_off = $table_primary[$boucles[$id_boucle]->type_requete];
+                $id_on_off = $doublons[$boucles[$id_boucle]->type_requete];
                 if ($id_on_off) 
                         $code = "(\$PileRow[0]['$id_on_off'] == \$PileRow[\$SP]['$id_on_off']) ?
  '$on' : '$off'";

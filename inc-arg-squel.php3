@@ -18,7 +18,7 @@ function calculer_params($type, $params, $idb, &$boucles)
 	  ".\"'";  }
       else if ($param == 'unique' OR $param == 'doublons') {
 	$boucle->doublons = true;
-	$boucle->where[] = "$id_field NOT IN (\$doublons)";
+	$boucle->where[] = "$id_field NOT IN (\" . \$doublons['$type'] . \")";
       }
       else if (ereg('^(!)? *lang_select(=(oui|non))?$', $param, $match)) {
 	if (!$lang_select = $match[3]) $lang_select = 'oui';

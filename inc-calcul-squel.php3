@@ -69,7 +69,7 @@ function calculer_boucle($id_boucle, &$boucles)
 		if ($x = $PileRow[$SP]["lang"]) $GLOBALS["spip_lang"] = $x;')) .
 	  $invalide .
 	  ((!$boucle->doublons) ? "" : 
-	   ("\n\t\t\$doublons .= ','. \$PileRow[\$SP]['" .
+	   ("\n\t\t\$doublons['$type_boucle'] .= ','. \$PileRow[\$SP]['" .
 	    $primary_key . "'];")).
 	  $corps .
 	  (($return == "''") ? "" :
@@ -224,8 +224,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, $rec, &$boucles, $i
 	      
 	      $c = $prefix .
 		ereg_replace("-","_", $nom) .
-		'($Cache, $PileRow, $PileNum, $SP' .
-		(!($rec || ( $objet->type_requete ==  'boucle')) ? ", true" : ', $inidoublon') . ')';
+		'($Cache, $PileRow, $doublons, $PileNum, $SP)';
 	      $m = "";
 	    } else {
 		list($c,$m) = 
@@ -381,16 +380,13 @@ function calculer_squelette($squelette, $nom, $gram) {
       foreach($boucles as $id => $boucle) 
 	{
 	  $code .= "\n\nfunction $nom" . ereg_replace("-","_",$id) .
-		'(&$Cache, &$PileRow, &$PileNum, $SP, $inidoublon="") {' .
-	    (!$boucle->doublons ? '' : '
-		static $doublons; 
-		if ($inidoublon) $doublons = "0";') . 
+		'(&$Cache, &$PileRow, &$doublons, &$PileNum, $SP) {' .
 	    $boucle->return .
 	    "\n}\n";
 	}
     }
   return $code . '
-function ' . $nom . '($Cache, $PileRow, $PileNum="", $SP=0, $inidoublon="")
+function ' . $nom . '($Cache, $PileRow, $doublons, $PileNum="", $SP=0)
  {
 ' .
     $corps . "\n \$t0 = " . $return . ';
