@@ -129,10 +129,10 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 echo "<b>RACCOURCIS :</b><p>";
 
 
-icone_horizontale("Voir tous les mots-cl&eacute;s", $adresse_retour, "mot-cle-24.png", "rien.gif");
+icone_horizontale("Voir tous les mots-cl&eacute;s", $adresse_retour, "mot-cle-24.gif", "rien.gif");
 
 if ($connect_statut == '0minirezo')
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.png", "creer.gif");
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.gif", "creer.gif");
 
 
 
@@ -146,7 +146,7 @@ fin_cadre_enfonce();
 
 debut_droite();
 
-debut_cadre_relief("mot-cle-24.png");
+debut_cadre_relief("mot-cle-24.gif");
 
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
@@ -168,7 +168,7 @@ echo "</td>";
 
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right' valign='top'>";
-	icone("Voir en ligne", "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.png", "rien.gif");
+	icone("Voir en ligne", "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
 	echo "</td>";
 
 echo "</tr></table>\n";
@@ -243,7 +243,7 @@ if ($connect_statut =="0minirezo"){
 		echo "<BR><INPUT TYPE='text' NAME='titre' CLASS='formo' VALUE=\"$titre\" SIZE='40'>";
 
 
-		debut_cadre_relief("groupe-mot-24.png");
+		debut_cadre_relief("groupe-mot-24.gif");
 		echo  "Dans le groupe :</label>\n";
 		echo aide ("motsgroupes");
 		echo  " &nbsp; <SELECT NAME='id_type' class='fondl'>\n";

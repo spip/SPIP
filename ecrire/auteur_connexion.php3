@@ -216,7 +216,7 @@ function mySel($varaut,$variable) {
 		if ($echec){
 			
 			debut_cadre_relief();	
-			echo '<img src="img_pack/warning.png" alt="warning.png" width="48" height="48" align="left">';
+			echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="left">';
 			echo "<font color='red'>$echec</font>";
 			fin_cadre_relief();	
 			echo "<p>";
@@ -236,7 +236,7 @@ function mySel($varaut,$variable) {
 
 		if ($connect_id_auteur == $id_auteur) {
 			debut_cadre_relief();	
-			echo '<img src="img_pack/warning.png" alt="warning.png" width="48" height="48" align="left">';
+			echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="left">';
 			echo "<b>Attention&nbsp;! Ceci est le login sous lequel vous &ecirc;tes connect&eacute; actuellement.
 			<font color=\"red\">Utilisez ce formulaire avec pr&eacute;caution&nbsp;: si vous oubliez votre mot de passe, il sera impossible de le retrouver (seul un administrateur pourra vous en attribuer un nouveau).</font></b>\n";
 			fin_cadre_relief();	
@@ -291,7 +291,7 @@ function mySel($varaut,$variable) {
 		// Gestion restreinte des rubriques
 		//
 		if ($statut == '0minirezo') {
-			debut_cadre_enfonce("secteur-24.png");
+			debut_cadre_enfonce("secteur-24.gif");
 			
 			$query_admin = "SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique";
 			$result_admin = spip_query($query_admin);

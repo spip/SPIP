@@ -63,7 +63,7 @@ echo "<TR><TD BACKGROUND=''>";
 echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 
 echo "\n<p align='justify'>";
-echo '<img src="img_pack/warning.png" alt="warning.png" width="48" height="48" align="right">';
+echo '<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">';
 echo "Cette commande efface <i>tout</i> le contenu de la base de donn&eacute;es,
 y compris <i>tous</i> les acc&egrave;s r&eacute;dacteurs et administrateurs. Apr&egrave;s l'avoir ex&eacute;cut&eacute;e, vous devrez lancer la
 r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu'un premier acc&egrave;s administrateur.";

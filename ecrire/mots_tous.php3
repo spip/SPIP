@@ -195,7 +195,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	$ifond=0;
 	
 	// Afficher le titre du groupe
-	debut_cadre_enfonce("groupe-mot-24.png");
+	debut_cadre_enfonce("groupe-mot-24.gif");
 	echo "<p><table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 	echo "<tr><td bgcolor='$couleur_foncee' colspan=2><font face='verdana,arial,helvetica,sans-serif' size=3 color='#ffffff'><b>$titre_groupe</b>";
 	echo "</font></td>";
@@ -237,7 +237,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	$result = spip_query($query);
 
 	if (mysql_num_rows($result) > 0) {
-		debut_cadre_relief("mot-cle-24.png");
+		debut_cadre_relief("mot-cle-24.gif");
 		echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 		// Afficher les mots-cles
 		while($row = mysql_fetch_array($result)) {
@@ -356,16 +356,16 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
 		echo "<tr>";
 		echo "<td>";
-		icone("Modifier ce groupe de mots", "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.png", "edit.gif");
+		icone("Modifier ce groupe de mots", "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.gif", "edit.gif");
 		echo "</td>";
 		if ($supprimer_groupe){
 			echo "<td>";
-			icone("Supprimer ce groupe", "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.png", "supprimer.gif");
+			icone("Supprimer ce groupe", "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.gif", "supprimer.gif");
 			echo "</td>";
 			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
 		}
 		echo "<td align='right'>";
-		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.png", "creer.gif");
+		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.gif", "creer.gif");
 		echo "</td></tr></table>";
 	}	
 	fin_cadre_enfonce();
@@ -376,7 +376,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 
 if ($connect_statut =="0minirezo" AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
-	icone("Cr&eacute;er un nouveau groupe de mots", "mots_type.php3?new=oui", "groupe-mot-24.png", "creer.gif");
+	icone("Cr&eacute;er un nouveau groupe de mots", "mots_type.php3?new=oui", "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";
 }
 

@@ -26,8 +26,8 @@ if ($connect_statut == '0minirezo') {
 	echo "<b>RACCOURCIS :</b><p>";
 	
 	
-	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.png", "rien.gif");
-	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.png", "rien.gif");
+	icone_horizontale("Forum interne", "forum.php3", "forum-interne-24.gif", "rien.gif");
+	icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif", "rien.gif");
 		
 	/*
 	$query_petition = "SELECT COUNT(*) FROM spip_forum WHERE date_heure > DATE_SUB(NOW(),INTERVAL 30 DAY)";
@@ -37,7 +37,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
-		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.png", "rien.gif");
+		icone_horizontale("$nombre_petition messages de forums", "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 	*/
 
@@ -49,7 +49,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	if ($nombre_petition > 0) {
 		echo "<p>";
-		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.png", "rien.gif");
+		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "suivi-forum-24.gif", "rien.gif");
 	}
 	
 	
@@ -230,7 +230,7 @@ function controle_forum($request,$adresse_retour) {
 		}
 
 		if ($forum_stat <> "off") {
-			icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut", "forum-interne-24.png", "supprimer.gif", "right");
+			icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "supprimer.gif", "right");
 		}
 		else {
 			echo "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
@@ -242,7 +242,7 @@ function controle_forum($request,$adresse_retour) {
 		}
 
 		if ($forum_stat=="prop"){
-			icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut", "forum-interne-24.png", "creer.gif", "right");
+			icone("Valider ce message", "controle_forum.php3?valid_forum=$id_forum&debut=$debut", "forum-interne-24.gif", "creer.gif", "right");
 		}
 
 		echo "<BR>".forum_parent($id_forum);

@@ -190,7 +190,7 @@ function mySel($varaut,$variable) {
 		$nom_site_auteur = htmlspecialchars($nom_site_auteur);
 
 		
-		debut_cadre_relief("fiche-perso-24.png");
+		debut_cadre_relief("fiche-perso-24.gif");
 
 		echo "<B>Signature</B> [Obligatoire]<BR>";
 		echo "(Votre nom ou votre pseudo)<BR>";
@@ -221,7 +221,7 @@ function mySel($varaut,$variable) {
 		echo "</TEXTAREA>\n";
 		fin_cadre_relief();
 		
-		debut_cadre_relief("site-24.png");
+		debut_cadre_relief("site-24.gif");
 		
 		echo "<B>Le nom de votre site</B><BR>";
 		echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"$nom_site_auteur\" SIZE='40'><P>\n";

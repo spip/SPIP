@@ -126,14 +126,14 @@ while($row = mysql_fetch_array($result_message)) {
 	if ($statut == 'publie' AND $type == 'normal' AND $type != 'affich') {
 
 		echo "<div align='center'>";
-		icone ("Ne plus participer &agrave; cette discussion", "messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur", "messagerie-24.png", "supprimer.gif");
+		icone ("Ne plus participer &agrave; cette discussion", "messagerie.php3?id_message=$id_message&supp_dest=$connect_id_auteur", "messagerie-24.gif", "supprimer.gif");
 		echo "</div>";
 	}
 	
 	
 	debut_droite();
 
-	debut_cadre_relief("messagerie-24.png");
+	debut_cadre_relief("messagerie-24.gif");
 	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 	echo "<TR><TD>";
 
@@ -166,7 +166,7 @@ while($row = mysql_fetch_array($result_message)) {
 	//
 	
 	if ($type == 'normal') {
-		debut_cadre_enfonce("redacteurs-24.png");
+		debut_cadre_enfonce("redacteurs-24.gif");
 
 		//
 		// Expediteur
@@ -511,7 +511,7 @@ while($row = mysql_fetch_array($result_message)) {
 	
 	if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 		echo "\n<table align='right'><tr><td>";
-		icone ("Modifier ce message", newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.png", "edit.gif");
+		icone ("Modifier ce message", newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
 		echo "</td></tr></table>";
 	}
 
@@ -526,7 +526,7 @@ while($row = mysql_fetch_array($result_message)) {
 
 		if ($expediteur == $connect_id_auteur AND ($statut == 'redac' OR $type == 'pb') OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 			echo "\n<table align='left'><tr><td>";
-			icone ("Supprimer ce message", newLinkUrl("messagerie.php3?detruire_message=$id_message"), "messagerie-24.png", "supprimer.gif");
+			icone ("Supprimer ce message", newLinkUrl("messagerie.php3?detruire_message=$id_message"), "messagerie-24.gif", "supprimer.gif");
 			echo "</td></tr></table>";
 		}
 		if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
@@ -535,7 +535,7 @@ while($row = mysql_fetch_array($result_message)) {
 			}
 			else {
 				echo "\n<table align='right'><tr><td>";
-				icone ("Envoyer ce message", newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.png", "creer.gif");
+				icone ("Envoyer ce message", newLinkUrl("message.php3?id_message=$id_message&change_statut=publie"), "messagerie-24.gif", "creer.gif");
 				echo "</td></tr></table>";
 			}
 		}
@@ -555,7 +555,7 @@ while($row = mysql_fetch_array($result_message)) {
 
 
 	echo "\n<div align='center'>";
-		icone("Poster un message", "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.png", "creer.gif");
+		icone("Poster un message", "forum_envoi.php3?statut=perso&adresse_retour=".$forum_retour."&id_message=$id_message&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
 	echo "</div>";
 
 

@@ -66,7 +66,7 @@ debut_page("Modifier la br&egrave;ve : &laquo; $titre_breve &raquo;", "documents
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -82,7 +82,7 @@ debut_cadre_formulaire();
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone("Retour", "breve_voir.php3?id_breve=$id_breve", "breve-24.png", "rien.gif");
+	icone("Retour", "breve_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
@@ -112,15 +112,15 @@ if ($connect_statut=="0minirezo" OR $statut=="prop") {
 
 	/// Dans la rubrique....
 
-	if ($id_rubrique == 0) $logo_parent = "racine-site-24.png";
+	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
 		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
 		$result=spip_query($query);
 		while($row=mysql_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}
-		if ($parent_parent == 0) $logo_parent = "secteur-24.png";
-		else $logo_parent = "rubrique-24.png";
+		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
+		else $logo_parent = "rubrique-24.gif";
 	}
 
 	debut_cadre_relief("$logo_parent");

@@ -263,7 +263,7 @@ else $aff_articles="prop,publie";
 
 $ifond=0;
 
-debut_cadre_relief("redacteurs-24.png");
+debut_cadre_relief("redacteurs-24.gif");
 echo "<TABLE BORDER=0 CELLPADDING=3 CELLSPACING=0 WIDTH=\"100%\">";
 echo "<TR>";
 if ($class=="statut"){
@@ -301,7 +301,7 @@ fin_cadre_relief();
 
 if ($connect_statut =="0minirezo"){
 	echo "<div align='right'>";
-	icone ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.png", "creer.gif");
+	icone ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.gif", "creer.gif");
 	echo "</div>";
 }
 

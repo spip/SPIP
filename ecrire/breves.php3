@@ -134,7 +134,7 @@ function enfant($leparent){
 		if  (acces_restreint_rubrique($id_rubrique))
 			echo "<IMG SRC='img_pack/triangle-anim.gif' WIDTH=16 HEIGHT=14 BORDER=0>";
 		else
-			echo "<IMG SRC='img_pack/secteur-24.png' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'>";
+			echo "<IMG SRC='img_pack/secteur-24.gif' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'>";
 		echo "</a>";
 		
 		echo " <FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>";
@@ -150,7 +150,7 @@ function enfant($leparent){
 			"WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC";
 		afficher_breves('', $query);
 		echo "<div align='right'>";
-		icone("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.png", "creer.gif");
+		icone("&Eacute;crire une nouvelle br&egrave;ve", "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.gif", "creer.gif");
 		echo "</div>";
 	
 		fin_cadre_enfonce();	

@@ -78,7 +78,7 @@ lire_metas();
 
 echo "<form action='configuration.php3' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
-debut_cadre_relief("racine-24.png");
+debut_cadre_relief("racine-24.gif");
 
 	$nom_site = htmlspecialchars(lire_meta("nom_site"));
 	$adresse_site = htmlspecialchars(lire_meta("adresse_site"));
@@ -113,7 +113,7 @@ debut_boite_info();
 <P align="center"><FONT COLOR='red'><B>ATTENTION !</B></FONT>
 
 <P align="justify">
-<img src="img_pack/warning.png" alt="warning.png" width="48" height="48" align="right">
+<img src="img_pack/warning.gif" alt="warning.gif" width="48" height="48" align="right">
 Les modifications effectu&eacute;es ci-dessous influent notablement sur le
 fonctionnement de votre site. Nous vous recommandons de ne pas y intervenir tant que vous n'&ecirc;tes pas parfaitement
 familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus g&eacute;n&eacute;ralement, il est <I>fortement conseill&eacute;</I>
@@ -128,7 +128,7 @@ echo "<P>";
 
 
 //// Accepter les inscriptions de redacteurs depuis le site public
-debut_cadre_relief("redacteurs-24.png");
+debut_cadre_relief("redacteurs-24.gif");
 
 	$accepter_inscriptions=lire_meta("accepter_inscriptions");
 
@@ -172,7 +172,7 @@ fin_cadre_relief();
 
 
 //// Mode de fonctionnement des forums publics
-debut_cadre_relief("forum-interne-24.png");
+debut_cadre_relief("forum-interne-24.gif");
 
 	$forums_publics=lire_meta("forums_publics");
 

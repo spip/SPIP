@@ -29,7 +29,7 @@ echo "<FORM ACTION='$adresse_retour' METHOD='post'>";
 debut_cadre_formulaire();
 
 echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><TR><TD>";
-	icone("Retour", $adresse_retour, "forum-interne-24.png");
+	icone("Retour", $adresse_retour, "forum-interne-24.gif");
 echo "<TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0>";
 echo "</TD><TD WIDTH=\"100%\">";
 echo "<B>Titre :</B><BR>";

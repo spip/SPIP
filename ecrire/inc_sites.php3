@@ -219,7 +219,7 @@ function afficher_sites($titre_table, $requete) {
 
 	if ($tranches) {
 		//echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
-		debut_cadre_relief("site-24.png");
+		debut_cadre_relief("site-24.gif");
 
 		echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
 		bandeau_titre_boite($titre_table, true);
