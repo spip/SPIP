@@ -460,7 +460,7 @@ while($row = spip_fetch_array($result_message)) {
 		echo "</form>";
 	}
 	else if ($rv == "oui") {
-		echo "<p><center><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>"._L('RENDEZ-VOUS :')." <font color='red'>".majuscules(nom_jour($date_heure))." ".majuscules(affdate_heure($date_heure))."</font></b></font></center>";
+		echo "<p><center><font face='Verdana,Arial,Helvetica,sans-serif' size=2 color='#666666'><b>"._T('titre_rendez_vous')." <font color='red'>".majuscules(nom_jour($date_heure))." ".majuscules(affdate_heure($date_heure))."</font></b></font></center>";
 		if ($type != "affich") echo "<div align='right'><font size=2><a href='message.php3?id_message=$id_message&forcer_rv=oui'>"._T('lien_modifer_date')."</a></font></div><p>";
 	}
 

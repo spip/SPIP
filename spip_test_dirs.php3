@@ -8,20 +8,17 @@ gerer_menu_langues();
 
 function bad_dirs($bad_dirs, $test_dir, $install) {
 	if ($install) {
-		$titre = _L("Pr&eacute;liminaire : <B>R&eacute;gler les droits d'acc&egrave;s</B>");
-		$continuer = _L(" afin de commencer r&eacute;ellement l'installation");
+		$titre = _T('dirs_preliminaire');
+		$continuer = _T('dirs_commencer');
 	} else
-		$titre = _L("<b>Probl&egrave;me de droits d'acc&egrave;s</b>");
+		$titre = _T('dirs_probleme_droits');
 
 	echo "<BR><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
 
-	echo _L("<B>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>$bad_dirs.</ul> </B>
-		<P>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d'acc&egrave;s de chacun
-		de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d'installation.
-		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ");
+	echo _T('dirs_repertoires_suivants', array('bad_dirs' => $bad_dirs));
 	echo "<B><A HREF='spip_test_dirs.php3";
 	if ($test_dir) echo '?test_dir='.$test_dir;
-	echo "'>" . _L("recharger cette page")."</A>$continuer.";
+	echo "'>" . _T('login_recharger')."</A>$continuer.";
 }
 
 //
