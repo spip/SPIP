@@ -190,21 +190,37 @@ echo "<div align='center'>\n";
 
 if ($statut_article == "publie") {
 	$post_dates = lire_meta("post_dates");
-	
+
+	$voir_en_ligne = true;
+
 	if ($post_dates == "non") {
 		$query = "SELECT id_article FROM spip_articles WHERE id_article=$id_article AND date<=NOW()";
 		$result = mysql_query($query);
-		if (mysql_num_rows($result) > 0) {
-			echo "<a href='../spip_redirect.php3?id_article=$id_article&recalcul=oui'><img src='IMG2/voirenligne.gif' alt='voir en ligne' width='48' height='48' border='0' align='right'></a>\n";
+		if (!mysql_num_rows($result)) {
+			$voir_en_ligne = false;
 		}
 	}
-	else {
-		echo "<a href='../spip_redirect.php3?id_article=$id_article&recalcul=oui'><img src='IMG2/voirenligne.gif' alt='voir en ligne' width='48' height='48' border='0' align='right'></a>\n";
+	if ($voir_en_ligne) {
+		afficher_icone(newLinkUrl("../spip_redirect.php3?id_article=$id_article&recalcul=oui"),
+			"Voir en ligne", 'IMG2/voir.gif', 40, 28, 'right');
 	}
 }
 
+
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>ARTICLE NUM&Eacute;RO&nbsp;:</b></font>\n";
 echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
+
+if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
+	$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article";
+	if ($row = mysql_fetch_row(mysql_query($req))) {
+		$nb_forums = $row[0];
+		if ($nb_forums) {
+			echo "<br><a ".newLinkHref("articles_forum.php3?id_article=$id_article").">\n";
+			echo "<b>Forum public&nbsp;: $nb_forums&nbsp;contribution(s)</b></a>\n";
+		}
+	}
+}
+
 
 echo "</div>\n";
 
@@ -263,7 +279,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	}
 
 	// boite active ?
-	if ($change_accepter_forum || $petition) $visible = true;
+	if ($change_accepter_forum) $visible = true;
 
 	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
 	echo "<tr><td width='100%' align='center' bgcolor='#FFCC66'>\n";
@@ -272,7 +288,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo bouton_block_visible("forumarticle");
 	else
 		echo bouton_block_invisible("forumarticle");
-	echo "FORUM & P&Eacute;TITION";
+	echo "CONFIGURER LE FORUM";
 	echo "</b></font></td></tr></table></center>";
 
 	if ($visible)
@@ -281,18 +297,9 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo debut_block_invisible("forumarticle");
 
 	echo "\n<form action='articles.php3' method='get'>";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><u><b>FORUM PUBLIC</b></u><br>";
-
-	if ($statut_article == 'publie') {
-		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article";
-		if ($row = mysql_fetch_row(mysql_query($req))) {
-			$nbforums = '<br>V&eacute;rifier '.$row[0].' contribution(s).';
-			if ($row[0]>0) echo "<a href='articles_forum.php3?id_article=$id_article'>$nbforums</a>\n";
-		}
-	}
 
 	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
-	echo "<i>Mode de mod&eacute;ration&nbsp;:</i>\n";
+	echo "<br>Mode de mod&eacute;ration du forum&nbsp;:\n";
 	if ($forums_publics == "pos") {
 		echo "<br><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos' checked>";
 		echo "<B><label for='accepterforumpos'> mod&eacute;r&eacute; &agrave; posteriori</label></B>";
@@ -316,16 +323,21 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	}
 	if ($forums_publics == "non") {
 		echo "<br><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon' checked>";
-		echo "<B><label for='accepterforumnon'>pas de forum</label></B>";
+		echo "<B><label for='accepterforumnon'> pas de forum</label></B>";
 	} else {
 		echo "<br><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon'>";
-		echo "<label for='accepterforumnon'>pas de forum</label>";
+		echo "<label for='accepterforumnon'> pas de forum</label>";
 	}
 
 	echo "<p align='right'><input type='submit' name='Changer' class='fondo' value='Changer' STYLE='font-size:10px'></p>\n";
 	echo "</form>";
 
-	////////////////////////////////////////////////
+	echo fin_block();
+
+	echo "<br>\n";
+
+
+	//
 	// Petitions
 	//
 
@@ -355,7 +367,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	$result_petition = mysql_query($query_petition);
 	$petition = (mysql_num_rows($result_petition) > 0);
 
-	while ($row=mysql_fetch_array($result_petition)) {
+	while ($row = mysql_fetch_array($result_petition)) {
 		$id_rubrique=$row[0];
 		$email_unique=$row[1];
 		$site_obli=$row[2];
@@ -364,13 +376,33 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$texte_petition=$row[5];
 	}
 
+	if ($petition) $visible = true;
+
+	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
+	echo "<tr><td width='100%' align='center' bgcolor='#FFCC66'>\n";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
+	if ($visible)
+		echo bouton_block_visible("petition");
+	else
+		echo bouton_block_invisible("petition");
+
+	if ($petition)
+		echo "CONFIGURER LA PETITION";
+	else
+		echo "AJOUTER UNE PETITION";
+	echo "</b></font></td></tr></table></center>";
+
+	if ($visible)
+		echo debut_block_visible("petition");
+	else
+		echo debut_block_invisible("petition");
+
+
 	echo "\n<FORM ACTION='articles.php3' METHOD='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><u><b>P&Eacute;TITION</b></u></font><br>\n";
-	
 	if ($petition){
-		echo "<br><input type='radio' name='petition' value='on' id='petitionon' checked>";
+		echo "<input type='radio' name='petition' value='on' id='petitionon' checked>";
 		echo "<B><label for='petitionon'>Cet article est une p&eacute;tition</label></B>";
 
 		echo "<FONT SIZE=1>";
@@ -402,8 +434,9 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 
 		echo "</FONT>";
 
-	}else{
-		echo "<br><input type='radio' name='petition' value='on' id='petitionon'>";
+	}
+	else {
+		echo "<input type='radio' name='petition' value='on' id='petitionon'>";
 		echo "<label for='petitionon'>Ajouter une p&eacute;tition</label>";
 	}
 	if (!$petition){

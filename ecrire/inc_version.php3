@@ -525,6 +525,11 @@ function newLinkHref($url) {
 	return $link->getHref();
 }
 
+function newLinkUrl($url) {
+	$link = new Link($url);
+	return $link->getUrl();
+}
+
 //
 // Recuperer la valeur d'une variable de session sur la page courante
 //

@@ -110,12 +110,6 @@ function debut_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 		
-		/*$retour = "\n<script language='JavaScript'>\n";
-		$retour .= "<!--\n";
-		$retour .= "vis['".$numero_block["$nom_block"]."'] = 'show';\n";
-		$retour .= "//-->\n";
-		$retour .= "</script>\n";
-		*/
 		$retour .= "<div id='Layer".$numero_block["$nom_block"]."' style='display: block'>";
 	}
 	return $retour;
@@ -158,7 +152,7 @@ function bouton_block_invisible($nom_block) {
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' SRC='IMG2/deplierhaut.gif' WIDTH=16 HEIGHT=14 border=0></a> ";
+		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><img name='triangle".$numero_block["$nom_block"]."' src='IMG2/deplierhaut.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 
@@ -172,7 +166,7 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' SRC='IMG2/deplierbas.gif' WIDTH=16 HEIGHT=14 border=0></a> ";
+		return "<a href=\"javascript:swap_couche('".$numero_block["$nom_block"]."')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='IMG2/deplierbas.gif' alt='D&eacute;plier' title='D&eacute;plier' width='16' height='14' border='0'></a> ";
 	}
 }
 

@@ -162,6 +162,37 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 
 
 //
+// Une icone avec lien et legende (texte en-dessous)
+//
+
+function afficher_icone_texte($url, $texte, $image, $largeur, $hauteur, $align = "") {
+	echo "<table";
+	if ($align) echo " align='$align'";
+	echo " cellspacing='0' cellpadding='10'>";
+	echo "<tr><td width='".floor($largeur * 2.0)."' align='center'>\n";
+	echo "\t<a class='icone' href=\"$url\"><font face='Verdana, Arial, Helvetica, sans-serif' size='1'>\n";
+	echo "\t<img src='$image' border='0' width='$largeur' height='$hauteur'><br>\n";
+	echo "\t<b>$texte</b></font></a>\n";
+	echo "\t</td></tr></table>\n";
+}
+
+
+//
+// Une icone avec lien et info-bulle (pas de texte en-dessous)
+//
+
+function afficher_icone($url, $texte, $image, $largeur, $hauteur, $align = "") {
+	echo "<a class='icone' href=\"$url\">\n";
+	$texte = attribut_html($texte);
+	echo "\t<img src='$image' border='0' width='$largeur' height='$hauteur' alt=\"$texte\" title=\"$texte\"";
+	if ($align) echo " align='$align'";
+	echo "></a>\n";
+}
+
+
+
+
+//
 // Fonctions d'affichage
 //
 
@@ -671,11 +702,14 @@ function debut_html($titre = "") {
 	.profondeur {border-right-color:white; border-top-color:#666666; border-left-color:#666666; border-bottom-color:white; border-style:solid}
 	.hauteur {border-right-color:#666666; border-top-color:white; border-left-color:white; border-bottom-color:#666666; border-style:solid}
 	label {cursor: pointer;}
-	.arial1 {font-family: Arial, Helvetica, sans-serif; font-size: 10px;}
-	.arial2 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;}
+	.arial1 { font-family: Arial, Helvetica, sans-serif; font-size: 10px; }
+	.arial2 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
 
-	a {text-decoration: none;}
-	a:hover {color:#FF9900; text-decoration: underline;}
+	a { text-decoration: none; }
+	a:hover { color:#FF9900; text-decoration: underline; }
+	a.icone { color:#808080; text-decoration: none; border: 1px #707070; }
+	a.icone:hover { color:#404040; }
+
 	a.spip_in  {background-color:#eeeeee;}
 	a.spip_out {}
 	a.spip_note {}
