@@ -227,6 +227,10 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	}
 
 
+	//
+	// Afficher les mots-cles
+	//
+
 	$query = "SELECT DISTINCT type FROM spip_mots";
 	$result = spip_query($query);
 	$plusieurs_types = (spip_num_rows($result) > 1);
@@ -277,12 +281,12 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		echo "<TD BGCOLOR='$couleur'>";
 		echo "<A HREF='$url'><img src='img_pack/petite-cle.gif' alt='' width='23' height='12' border='0'></A>";
 		echo "</TD>";
-		echo "<TD BGCOLOR='$couleur' width='100%'><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+		echo "<TD BGCOLOR='$couleur' width='100%' CLASS='arial2'>";
 
 
 		// Changer
 		if ($unseul == "oui" AND $flag_groupe) {
-			echo "<form action='$url_base' method='get' style='margin:0px; padding: 0px'>";
+			echo "<form action='$url_base#mots' method='post' style='margin:0px; padding: 0px'>";
 			echo "<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet'>";
 			if ($table == 'rubriques') echo "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
 			echo "<select name='nouv_mot' CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
@@ -305,20 +309,16 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		} else {
 			echo "<A HREF='$url'>$titre_mot</A>";
 		}
-		echo "</FONT></TD>";
+		echo "</TD>";
 
-		echo "<TD ALIGN='right' BGCOLOR='$couleur' ALIGN='right'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
+		echo "<TD ALIGN='right' BGCOLOR='$couleur' ALIGN='right' CLASS='arial2'>";
 		echo "$type_mot";
-		echo "</FONT>";
 		echo "</TD>";
 
 		if ($flag_editable){
-			echo "<TD BGCOLOR='$couleur' ALIGN='right'>";
-			$url = $url_base."&supp_mot=$id_mot";
-
+			echo "<TD BGCOLOR='$couleur' ALIGN='right' CLASS='arial1'>";
 			if ($flag_groupe)
-				echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url#mots\">"._T('info_retirer_mot')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A></FONT>";
+				echo "<A HREF=\"$url_base&supp_mot=$id_mot#mots\">"._T('info_retirer_mot')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A>";
 			else echo "&nbsp;";
 			echo "</TD>";
 		}
@@ -358,10 +358,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		else
 			echo debut_block_invisible("lesmots");
 
-		if ($table == 'articles') $url = 'articles.php3';
-		else if ($table == 'breves') $url = 'breves_voir.php3';
-		else if ($table == 'rubriques') $url = 'naviguer.php3';
-		$form_mot = "<FORM ACTION='$url' METHOD='get' STYLE='margin:1px;'>"
+		$form_mot = "<FORM ACTION='$url_base#mots' METHOD='post' STYLE='margin:1px;'>"
 			."<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet'>";
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='coll' VALUE='$id_objet'>";
@@ -453,8 +450,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	if ($nombre_mots_associes > 3) {
 		echo "<DIV ALIGN='right'>";
-		$url = $url_base."&supp_mot=-1#mots";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">"._T('info_retirer_mots')."</A></FONT>";
+		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url_base&supp_mot=-1#mots\">"._T('info_retirer_mots')."</A></FONT>";
 		echo "</DIV>";
 	}
 
