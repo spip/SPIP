@@ -65,7 +65,7 @@ if ($new == "oui") {
 		$id_parent = intval($id_parent);
 		$id_rubrique = 0;
 		$titre = filtrer_entites(_T('titre_nouvelle_rubrique'));
-		$onfocus = " onfocus=\"this.value='';\"";
+		$onfocus = " onfocus=\"if(!done){this.value='';done=true;}\"";
 		$descriptif = "";
 		$texte = "";
 	}

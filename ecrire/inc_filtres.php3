@@ -521,10 +521,12 @@ function exposer ($id, $identique='on', $different='') {
 
 //
 // Reduire la taille d'un logo
+// [(#LOGO_ARTICLE||reduire_image{100,60})]
 //
 
 function reduire_image($img, $taille = 120, $taille_y=0) {
 	include_ecrire('inc_logos.php3');
+	include_local('inc-cache.php3');
 
 	if (!$taille_y)
 		$taille_y = $taille;
@@ -538,42 +540,25 @@ function reduire_image($img, $taille = 120, $taille_y=0) {
 	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
 
 	if (!$logo)
-		$logo = 'IMG/'.ereg_replace('(../|IMG/)', '', $img); // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
+		$logo = $img; // [(#LOGO_ARTICLE|fichier|reduire_image{100})]
 
-	if (@file_exists($logo) AND eregi("(IMG/.*)\.(jpg|gif|png)$", $logo, $regs)) {
+	$logo = 'IMG/'.ereg_replace('(../|IMG/)', '', $logo);
+
+	if (@file_exists($logo) AND eregi("IMG/(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		$nom = $regs[1];
 		$format = $regs[2];
-		$destination = $nom.'-'.$taille.'x'.$taille_y;
+		$cache_folder= 'IMG/'.creer_repertoire('IMG', 'cache-'.$taille.'x'.$taille_y);
+		$destination = $cache_folder.$nom.'-'.$taille.'x'.$taille_y;
+
 		if ($preview = creer_vignette($logo, $taille, $taille_y, $format, $destination)) {
 			$vignette = $preview['fichier'];
 			$width = $preview['width'];
 			$height = $preview['height'];
 			return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
-		} else {
-			$taille_origine = @getimagesize("IMG/$logo");
-			if ($taille_origine) {
-				// Calculer le ratio
-				$srcWidth = $taille_origine[0];
-				$srcHeight = $taille_origine[1];
-			
-				if ($srcWidth > $taille OR $srcHeight > $taille) {
-					$ratioWidth = $srcWidth/$taille;
-					$ratioHeight = $srcHeight/$taille;
-				
-					if ($ratioWidth < $ratioHeight) {
-						$destWidth = floor($srcWidth/$ratioHeight);
-						$destHeight = $taille;
-					}
-					else {
-						$destWidth = $taille;
-						$destHeight = floor($srcHeight/$ratioWidth);
-					}
-				} else {
-					$destWidth = $srcWidth;
-					$destHeight = $srcHeight;
-				}
-				return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
-			}
+		}
+		else if ($taille_origine = @getimagesize("IMG/$logo")) {
+			list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
+			return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
 		}
 	}
 }

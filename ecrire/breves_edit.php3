@@ -54,7 +54,7 @@ if ($new != "oui") {
 }
 else {
 	$titre = filtrer_entites(_T('titre_nouvelle_breve'));
-	$onfocus = " onfocus=\"this.value='';\"";
+	$onfocus = " onfocus=\"if(!done){this.value='';done=true;}\"";
 	$statut = "prop";
 }
 

@@ -75,7 +75,7 @@ if ($id_auteur) {
 	$new = false;	// eviter hack
 } else {
 	$auteur['nom'] = filtrer_entites(_T('item_nouvel_auteur'));
-	$onfocus = " onfocus=\"this.value='';\"";
+	$onfocus = " onfocus=\"if(!done){this.value='';done=true;}\"";
 	$auteur['statut'] = '1comite';
 	$auteur['source'] = 'spip';
 }
