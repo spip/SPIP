@@ -56,7 +56,11 @@ if ($logout) {
 		}
 		unset ($auteur_session);
 	}
-	@Header("Location: ./spip_login.php3");
+
+	if ($url)
+		@Header("Location: $url");
+	else // plus rapide
+		@Header("Location: ./spip_login.php3");
 	exit;
 }
 
