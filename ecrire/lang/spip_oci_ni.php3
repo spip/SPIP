@@ -132,7 +132,7 @@ la documentacion de SPIP</a>.',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'anon&ccedil;as editoriali',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Mandar pas la tiera dei noveutats',
 'bouton_radio_non_syndication' => 'Minga de sindicacion',
-'bouton_radio_occidental' => 'Alfabet occidentau&nbsp;(<tt>iso-8859-1</tt>)&nbsp;:
+'bouton_radio_occidental' => '<MODIF> Alfabet occidentau&nbsp;(<tt>iso-8859-1</tt>)&nbsp;:
 acceptat per toi lu navigadors, ma permete unicament que de faire veire li lengas o&egrave;st-europ&egrave;&iuml; (occitan, catalan, ingl&eacute;s, alemand...).',
 'bouton_radio_pas_petition' => 'Minga de peticion',
 'bouton_radio_personnalise' => 'Juec de caract&egrave;rs pr&ograve;pi: chausiss&egrave;tz aquela opcion se vol&egrave;tz utilisar un juec especific de carat&egrave;rs',
@@ -142,7 +142,7 @@ acceptat per toi lu navigadors, ma permete unicament que de faire veire li lenga
 'bouton_radio_sauvegarde_non_compressee' => 'Sauvagarda non comprimida sota <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir la peticion',
 'bouton_radio_syndication' => 'Sindicacion:',
-'bouton_radio_universel' => 'Alfabet universau (<tt>utf-8</tt>): permete de faire veire toti li lengas, ma es pas encara acceptat per toi lu navigadors.',
+'bouton_radio_universel' => '<MODIF> Alfabet universau (<tt>utf-8</tt>): permete de faire veire toti li lengas, ma es pas encara acceptat per toi lu navigadors.',
 'bouton_recharger_page' => 'tornar cargar aquela p&agrave;gina',
 'bouton_redirection' => 'TORNAR DIRIGIR',
 'bouton_relancer_installation' => 'Tornar lan&ccedil;ar l\'installacion',
@@ -158,6 +158,10 @@ acceptat per toi lu navigadors, ma permete unicament que de faire veire li lenga
 
 // C
 'calendrier_synchro' => 'S\'utilisatz un logiciau d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronisar emb li informacions d\'aqueu sit.',
+'calendrier_synchro_lien' => '-vide-',
+'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
+'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -1360,7 +1364,7 @@ qu\'apareisse quora la rateta passa sus lo t&iacute;tol.',
 'texte_informations_personnelles_1' => 'A&uuml;ra lo sistema vos va crear un acc&egrave;s personalisat au sit.',
 'texte_informations_personnelles_2' => '(N&ograve;ta: se s\'agisse d\'una re&iuml;nstalacion, e se lo v&ograve;stre acc&egrave;s fonciona encara, pod&egrave;tz',
 'texte_introductif_article' => '(T&egrave;xt introductiu de l\'article.)',
-'texte_jeu_caractere' => 'Aquesta opcion es utila se lo v&ograve;stre sit deu afichar d\'alfabets
+'texte_jeu_caractere' => '<MODIF> Aquesta opcion es utila se lo v&ograve;stre sit deu afichar d\'alfabets
  diferents de l\'alfabet latin (&ograve; "occidentau") e lu sieus derivats.
  Dins aqueu cas, cau cambiar lo reglatge predefinit per utilisar
  un juec de caract&egrave;rs apropriat. Oblidetz pas d\'adaptar
@@ -1620,14 +1624,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'trad_delier' => 'Ligar plus aquest article ai reviradas sieui',
 'trad_lier' => 'Aquel article es una revirada de l\'article n&uacute;mero&nbsp;:',
 'trad_new' => 'Escriure una nov&egrave;la revirada d\'aquel article',
-'trad_reference' => '(article de referen&ccedil;a)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i><br />(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'Lo calendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privada d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepauats...).',
-'calendrier_synchro_public' => 'Lo calendier seguent vos permete de seguir l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br/> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(article de referen&ccedil;a)'
 
 );
 

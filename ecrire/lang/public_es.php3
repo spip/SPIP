@@ -7,8 +7,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'accueil_site' => 'Inicio del sitio',
-'articles' => 'Art&amp;iacute;culos',
-'articles_auteur' => 'Art&iacute;culos de este/a autor/a',
+'articles' => 'Art&iacute;culos',
+'articles_auteur' => 'Art&iacute;culos de esta autora o autor',
 'articles_populaires' => 'Los art&iacute;culos m&aacute;s populares',
 'articles_recents' => 'Los art&iacute;culos m&aacute;s recientes',
 'articles_rubrique' => 'Art&iacute;culos de esta secci&oacute;n',
@@ -82,7 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // P
 'par_auteur' => 'por',
-'participer_site' => 'Usted puede participar en la vida de este sitio y proponer sus art&iacute;culos inscribi&amp;eacuet;ndoese . De inmediato recibir&amp;aacute; un correo electr&oacute;nico que les indicar&aacute; sus c&oacute;digos de acceso al espacio privado del sitio.',
+'participer_site' => 'Puedes participar en la vida de este sitio y proponer art&iacute;culos inscribi&eacute;ndote. De inmediato recibir&aacute;s un correo electr&oacute;nico que les indicar&aacute; tus claves de acceso al espacio privado del sitio.',
 'plan_site' => 'Mapa del sitio',
 'popularite' => 'Popularidad',
 'poster_message' => 'Publicar un mensaje',

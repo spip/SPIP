@@ -83,8 +83,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_eo_maj' => 'Wstaw du&#380;&#261; ligatur&#281; EO',
 'barre_euro' => 'Umie&#347;&#263; symbol &euro;€',
 'barre_gras' => 'Wstaw w {{boldzie}}',
-'barre_guillemets' => '<MODIF> Umie&#347;&#263; w cudzys&#322;owie &laquo; francuskim &raquo;',
-'barre_guillemets_simples' => '<MODIF> Umie&#347;&#263; w cudzys&#322;owie &#8222;niemieckim&#8220;',
+'barre_guillemets' => 'Umie&#347;&#263; w "cudzys&#322;owie"',
+'barre_guillemets_simples' => 'Umie&#347;&#263; w innym “cudzys&#322;owie”',
 'barre_intertitre' => 'Przekszta&#322;&#263; w {{{&#347;r&oacute;dtytu&#322;}}}',
 'barre_italic' => 'Wstaw w {italiku}',
 'barre_lien' => 'Zmie&#324; w [hiper&#322;&#261;cze->http://...]',
@@ -169,11 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => '<MODIF> Je&#347;li u&#380;ywasz program&oacute;w - terminarzy kompatybinych z <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), mo&#380;ecie go zsynchronizowa&#263; z aktualno&#347;ciami tego serwisu.',
-'calendrier_synchro_lien' => '<MODIF> Odtw&oacute;rz plik <i>iCal</i>',
-'calendrier_synchro_prive' => 'Ten kalendarz, do u&#380;ytku osobistego informuje was o aktywno&#347;ciach wydawniczych w strefie prywatnej tego serwisu (zadania i spotkania osobiste, proponowane artyku&#322;y i newsy...).',
-'calendrier_synchro_public' => 'Ten kalendarz pozwala &#347;ledzi&#263; aktywno&#347;&#263; publiczn&#261; tego serwisu (opublikowane artyku&#322;y i newsy).',
-'calendrier_synchro_sync' => 'Zsynchronizuj pliki <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'calendrier_synchro' => 'Je&#347;li u&#380;ywasz program&oacute;w - terminarzy kompatybinych z <b>iCal</b>, mo&#380;esz go zsynchronizowa&#263; z informacjami tego serwisu.',
 
 
 // D
@@ -364,19 +360,32 @@ Dzi&#281;kujemy za uczestnictwo
 
 
 // I
+'ical_info1' => 'Na tej stronie prezentujemy r&oacute;&#380;ne metody pozostanie w kontakcie z dzia&#322;alno&#347;ci&#261; serwisu.',
+'ical_info2' => 'Aby przeczyta&#263; wi&#281;cej na ten temat, id&#378; na stron&#281;<a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => 'Do Twojej dyspozycji s&#261; dwa kalendarze. Jeden pokazuje map&#281; strony wraz ze wszystkimi opublikowanymi artyku&#322;ami. Drugi zawiera og&#322;oszenia redakcyjne oraz Twoje ostatni wiadomo&#347;ci prywatne&nbsp;: tylko Ty masz do niego dost&#281;p za has&#322;em.',
+'ical_methode_http' => '&#346;ci&#261;gnij',
+'ical_methode_webcal' => 'Synchronizacja (webcal://)',
+'ical_texte_js' => 'Jedna linia javascript pozwala w bardzo prosty spos&oacute;b, w ka&#380;dym nale&#380;&#261;cym do Ciebie serwisie pokaza&#263; ostatnio opublikowane w tym serwisie artyku&#322;y.',
+'ical_texte_prive' => 'Ten kalendarz, wy&#322;&#261;cznie do u&#380;ytku osobistego, informuje Ci&#281; o dzia&#322;alno&#347;ci redakcyjnej w strefie prywatnej (zadania, spotkania, proponowane artyku&#322;y i newsy).',
+'ical_texte_public' => 'Ten kalendarz pozawala &#347;ledzi&#263; aktywno&#347;&#263; redakcyjn&#261; serwisu (opublikowane artyku&#322;y i newsy).',
+'ical_texte_rss' => 'Mo&#380;esz syndykowa&#263; nowo&#347;ci z tego serwisu w jakimkolwiek czytniku plik&oacute;w formatu XML/RSS (Rich Site Summary). Ten format pozwala SPIP odczytywa&#263; nowo&#347;ci opublikowane w innych serwisach.',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Lista Mailowa',
+'ical_titre_rss' => 'Plik &laquo; backend &raquo;',
 'icone_a_suivre' => 'Aktualno&#347;ci',
 'icone_activer_cookie' => 'Aktywuj cookies korespondencji',
 'icone_admin_site' => 'Administracja strony',
 'icone_afficher_auteurs' => 'Poka&#380; autor&oacute;w',
 'icone_afficher_visiteurs' => 'Poka&#380; odwiedzaj&#261;cych',
-'icone_agenda' => '<MODIF> Kalendarz i poczta wewn&#281;trzna',
+'icone_agenda' => 'Kalendarz',
 'icone_aide_ligne' => 'Pomoc online',
 'icone_arret_discussion' => 'Zaprzesta&#324; udzia&#322;u w tej dyskusji',
 'icone_articles' => 'Artyku&#322;y',
 'icone_auteurs' => 'Autorzy',
 'icone_breves' => 'Newsy',
+'icone_brouteur' => 'Menu podr&#281;czne',
 'icone_calendrier' => 'Kalendarz',
-'icone_calendrier_messagerie' => '<MODIF> Kalendarz',
+'icone_calendrier_messagerie' => 'Kalendarz i poczta',
 'icone_configuration_site' => 'Konfiguracja strony',
 'icone_configurer_site' => 'Konfiguruj swoj&#261; stron&#281;',
 'icone_creation_groupe_mots' => 'Utw&oacute;rz now&#261; grup&#281; s&#322;&oacute;w kluczowych',
@@ -392,7 +401,7 @@ Dzi&#281;kujemy za uczestnictwo
 'icone_doc_rubrique' => 'Za&#322;&#261;czniki',
 'icone_ecrire_article' => 'Napisz nowy artyku&#322;',
 'icone_ecrire_nouvel_article' => 'Newsy w tym dziale',
-'icone_edition_site' => '<MODIF> Edycja strony',
+'icone_edition_site' => 'Edycja serwisu',
 'icone_envoyer_message' => 'Wy&#347;lij t&#281; wiadomo&#347;&#263;',
 'icone_etat_traductions' => 'Bilans przek&#322;ad&oacute;w',
 'icone_evolution_visites' => 'Rozw&oacute;j wizyt<br>@visites@ visits@aff_ref@',
@@ -478,7 +487,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_adresse_email' => 'ADRES E-MAIL:',
 'info_adresse_non_indiquee' => 'Nie poda&#322;e&#347; adresu testowego!',
 'info_adresse_url' => 'URL Twojej publicznej strony',
-'info_afficher_visites' => '<MODIF> Poka&#380; odwiedziny dla:',
+'info_afficher_visites' => 'Poka&#380; odwiedziny dla&nbsp;:',
 'info_affichier_visites_articles_plus_visites' => 'Poka&#380; odwiedziny dla <b>najcz&#281;&#347;ciej odwiedzanych artyku&#322;&oacute;w od pocz&#261;tku:</b>',
 'info_aide' => 'POMOC:',
 'info_aide_en_ligne' => 'SPIP Pomoc Online',
@@ -546,7 +555,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_code_acces' => 'Zapami&#281;taj swoje kody dost&#281;pu!',
 'info_comment_lire_tableau' => 'Jak odczytywac t&#261; tabel&#281;',
 'info_config_suivi' => 'Je&#347;li ten adres odpowiada li&#347;cie subskrypcyjnej, mo&#380;ecie wpisa&#263; poni&#380;ej adres, za kt&oacute;ego pomoc&#261; uczestnicy serwisu mog&#261; si&#281; zapisa&#263;. Adres ten mo&#380;e by&#263; URL-em (np. stron&#261; s&#322;u&#380;&#261;c&#261; do zapisywania si&#281; na list&#281; przez internet), albo adresem e-mail opatrzonym stosownym tematem (np.: <tt>@dany_adres@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => 'Mo&#380;ecie automatycznie, za pomoc&#261; poczty elektronicznej otrzymywa&#263; og&#322;oszenia dotycz&#261;ce aktywno&#347;ci redakcyjnej tego serwisu. W tym celu powinni&#347;cie si&#281; zapisa&#263; na nast&#281;puj&#261;c&#261; list&#281; mailow&#261;&nbsp;:',
+'info_config_suivi_explication' => 'Mo&#380;esz automatycznie, za pomoc&#261; poczty elektronicznej otrzymywa&#263; og&#322;oszenia dotycz&#261;ce aktywno&#347;ci redakcyjnej tego serwisu. W tym celu powinniene&#347; si&#281; zapisa&#263; na list&#281; mailow&#261;.',
 'info_confirmer_passe' => 'Potwierd&#378; nowe has&#322;o:',
 'info_connexion_base' => 'Drugi krok: <B>Pr&oacute;ba po&#322;&#261;czenia z baz&#261; danych</B>',
 'info_connexion_ldap_ok' => '<B>Po&#322;&#261;czenie z LDAP powiod&#322;o si&#281;.B><P> Id&#378; do nast&#281;pnego kroku',
@@ -560,7 +569,7 @@ Dzi&#281;kujemy za uczestnictwo
 'info_contribution' => 'wpisy na forum',
 'info_copyright' => 'jest oprogramowaniem darmowym <a href=\'license.txt\'>na licencji GPL.</a>',
 'info_copyright_doc' => 'Wi&#281;cej informacji na stronie <a href=\'http://www.spip.net\'>http://www.spip.net</a>.',
-'info_cours_edition' => 'W toku',
+'info_cours_edition' => 'Twoje artyku&#322;y w trakcie redagowania',
 'info_creation_mots_cles' => 'Utw&oacute;rz i konfiguruj tu s&#322;owa kluczowe strony',
 'info_creation_paragraphe' => '(By utworzy&#263; akapity, po prostu zostaw puste linijki.)',
 'info_creation_rubrique' => 'Aby m&oacute;c pisa&#263; artyku&#322;y,<BR> musisz utworzy&#263; przynajmniej jeden dzia&#322;.<BR>',
@@ -1206,7 +1215,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'menu_aide_sites_syndiquer' => 'Serwisy syndykowane',
 'menu_aide_suivi_forum' => 'Archiwum forum',
 'menu_aide_suivi_forum_articles_postes' => 'Artyku&#322;y post-datowane',
-'menu_aide_suivi_forum_configuration' => '<MODIF> Okre&#347;l konfiguracj&#281;',
+'menu_aide_suivi_forum_configuration' => 'Konfiguracja serwisu',
 'menu_aide_suivi_forum_contenu_articles' => 'Zawarto&#347;&#263; artyku&#322;&oacute;w',
 'menu_aide_suivi_forum_envoi_emails' => 'Automatyczne e-mailowanie',
 'menu_aide_suivi_forum_fonctionnement' => 'Funkcjonowanie Forum',
@@ -1216,6 +1225,12 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'menu_aide_suivi_forum_statistiques' => 'Statystyka odwiedzin',
 'menu_aide_suivi_forum_suivi' => 'Archiwum forum',
 'menu_aide_suivi_forum_systeme_breves' => 'System news&oacute;w',
+'module_fichier_langue' => 'Plik j&#281;zykowy',
+'module_fichiers_langues' => 'Pliki j&#281;zykowe',
+'module_raccourci' => 'Skr&oacute;t',
+'module_texte_affiche' => 'Wy&#347;wietlany tekst',
+'module_texte_explicatif' => 'Mo&#380;esz umie&#347;ci&#263; nast&#281;puj&#261;ce skr&oacute;ty w szkielecie Twojej strony publicznej. Zostan&#261; automatycznie przet&#322;umaczone na r&oacute;zne j&#281;zyki, kt&oacute;rych pliki j&#281;zykowe istniej&#261;.',
+'module_texte_traduction' => 'Plik j&#281;zykowy &laquo;&nbsp;@module@&nbsp;&raquo; jest dost&#281;pny w&nbsp;:',
 'mois_non_connu' => 'nieznany',
 
 
@@ -1319,7 +1334,7 @@ zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierw
 'texte_article_virtuel' => 'Wirtualny artyku&#322;',
 'texte_article_virtuel_reference' => '<b>Artyku&#322; wirtualny&nbsp;:</b> artyku&#322; zlinkowany w Twoim serwisie SPIP ale przekierowuj&#261;cy do innego URL-a. Aby usun&#261;&#263; to przekierowanie, wyma&#380; URL powy&#380;ej.',
 'texte_aucun_resultat_auteur' => '&#379;adnych wynik&oacute;w dla "@cherche_auteur@".',
-'texte_auteur_messagerie' => '<MODIF> Na tej stronie mo&#380;e wy&#347;wietla&#263; si&#281; bez przerwy lista zalogowanych redaktor&oacute;w, co pozwoli Ci bezpo&#347;rednio wymienia&#263; wiadomo&#347;ci (je&#347;li wewn&#281;trzna poczta jest wy&#322;&#261;czona, lista redaktor&oacute;w tak&#380;e). Mo&#380;esz tak&#380;e zdecydowa&#263; o nie pojawianiu si&#281; na tej li&#347;cie (jeste&#347; w&oacute;wczas "niewidzialny" dla innych u&#380;ytkownik&oacute;w)',
+'texte_auteur_messagerie' => 'Na tej stronie mo&#380;e wy&#347;wietla&#263; si&#281; bez przerwy lista zalogowanych redaktor&oacute;w, co pozwoli Ci bezpo&#347;rednio wymienia&#263; wiadomo&#347;ci (je&#347;li wewn&#281;trzna poczta jest wy&#322;&#261;czona, lista redaktor&oacute;w tak&#380;e). Mo&#380;esz tak&#380;e zdecydowa&#263; o nie pojawianiu si&#281; na tej li&#347;cie (jeste&#347; w&oacute;wczas "niewidzialny" dla innych u&#380;ytkownik&oacute;w)',
 'texte_auteur_messagerie_1' => 'Na tej stronie mo&#380;esz wymienia&#263; wiadomo&#347;ci i tworzy&#263; prywatne fora dyskusyjne pomi&#281;dzy u&#380;ytkownikami strony. Mo&#380;esz nie bra&#263; udzia&#322;u w tych wymianach.',
 'texte_auteurs' => 'AUTORZY',
 'texte_bilan_traductions' => 'W tym schemacie, kropki zielone przedstawiaj&#261; artyku&#322;y przet&#322;umaczone i aktualne, czerwone za&#347; przek&#322;ady b&#281;d&#261;ce przed aktualizacj&#261;.',
@@ -1647,7 +1662,14 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem',
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
-'trad_reference' => '(artyku&#322; wzorcowy)'
+'trad_reference' => '(artyku&#322; wzorcowy)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => '',
+'calendrier_synchro_prive' => '',
+'calendrier_synchro_public' => '',
+'calendrier_synchro_sync' => ''
 
 );
 
