@@ -18,7 +18,7 @@ $action = "exportation de la base vers $archive";
 debut_admin($action);
 
 $debug_limit = '';
-//$debug_limit = ' LIMIT 0,30';
+//$debug_limit = ' LIMIT 0,100';
 
 $f = ($gz) ? @gzopen("data/$archive", "wb") : fopen("data/$archive", "wb");
 $_fputs = ($gz) ? gzputs : fputs;
@@ -34,8 +34,17 @@ export_objets(mysql_query($query), "auteur", $f, $gz);
 $query = "SELECT * FROM spip_articles".$debug_limit;
 export_objets(mysql_query($query), "article", $f, $gz);
 
+$query = "SELECT * FROM spip_types_documents";
+export_objets(mysql_query($query), "type_document", $f, $gz);
+
+$query = "SELECT * FROM spip_documents";
+export_objets(mysql_query($query), "document", $f, $gz);
+
 $query = "SELECT * FROM spip_mots";
 export_objets(mysql_query($query), "mot", $f, $gz);
+
+$query = "SELECT * FROM spip_groupes_mots";
+export_objets(mysql_query($query), "groupe_mots", $f, $gz);
 
 $query = "SELECT * FROM spip_breves".$debug_limit;
 export_objets(mysql_query($query), "breve", $f, $gz);
