@@ -62,7 +62,7 @@ function enfant($leparent){
 			if (lire_meta('multi_rubriques') == 'oui' AND $langue_choisie_rub == "oui") $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 
 			$selec_rub = "selec_rub";
-			if ($browser_name == "MSIE" AND $browser_version == "5.0b1") $selec_rub = ""; // Bug de MSIE MacOs 9.0
+			if ($browser_name == "MSIE" AND floor($browser_version) == "5") $selec_rub = ""; // Bug de MSIE MacOs 9.0
 
 			if (acces_rubrique($my_rubrique)) {
 				echo "<option".mySel($my_rubrique,$id_parent)." class='$selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."\n";
