@@ -35,6 +35,12 @@ if ($new == "oui") {
 	$result = spip_query($query);
 }
 
+// Indication de modif en cours
+$query = "UPDATE spip_articles SET date_modif=NOW(), auteur_modif='$connect_id_auteur'  WHERE id_article='$id_article'";
+$result = spip_query($query);
+
+
+// Recuperer les donnees de l'article
 $query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
 $result = spip_query($query);
 
@@ -142,7 +148,7 @@ debut_gauche();
 //
 
 if ($new != 'oui'){
-	afficher_documents_colonne($id_article,"articles_edit.php3?id_article=$id_article");
+	afficher_documents_colonne($id_article,"article");
 }
 
 debut_droite();
