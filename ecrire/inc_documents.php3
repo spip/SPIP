@@ -581,6 +581,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$link_rot->addVar('vignette_aff', $id_document);
 					$link_rot->addVar('var_rot', 180);
 					echo "<a href='".$link_rot->getUrl("portfolio")."'>180&deg;</a>";
+					echo "</div>";
 				}
 			}
 			
