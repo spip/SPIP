@@ -1,5 +1,47 @@
 <?php
 
+
+////////////////////////////////////////////////////////////////////////////////////
+// Pour utiliser les champs "supplementaires", il faut installer dans le fichier
+// ecrire/mes_options.php3 une fonction definissant les champs en question,
+// pour chaque type d'objet (article, rubrique, breve, auteur ou mot) que l'on
+// veut ainsi etendre
+
+/*	Arguments :
+ *		$type = "article", "rubrique", "auteur" ...
+ *		$id_objet = id de l'article, de la rubrique ...
+ *		$ensemble = id de la rubrique de l'article, le parent de la rubrique,
+ *		le statut de l'auteur, type du mot...
+ *	Retour : un tableau au format (champ => description, champ => desc ...)
+ * 	ou la description est au format "type|filtre[|pretty name]"
+ *		type = ligne, bloc, texte
+ *		filtre = brut, typo, propre (a appliquer dans l'espace prive)
+ *		prettyname (optionnel) = nom du champ tel qu'on l'affiche dans l'esp. prive
+ */
+
+/*
+function champs_supplement($type, $id_objet, $ensemble) {
+	if ($type == "auteur") {
+		return Array (
+			"sexe" => "ligne|brut",
+			"age" => "ligne|propre|&Acirc;ge du capitaine"
+			"biblio" => "bloc|propre|Bibliographie",
+		);
+	}
+
+	if ($type == "article" && $ensemble == 7) {
+		return array(
+			"isbn" => "ligne|typo",
+		);
+	}
+
+	// par defaut, aucun champ supplementaire.
+	return array();
+}
+*/
+
+////////////////////////////////////////////////////////////////////////////////////
+
 //
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_SUPPLEMENT")) return;
