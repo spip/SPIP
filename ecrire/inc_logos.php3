@@ -55,31 +55,34 @@ function resize_logo($image) {
 
 
 function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
-	global $options;
+	global $options, $spip_display;
 
-	$logo_ok = get_image($logo);
-	if ($logo_ok) $survol_ok = get_image($survol);
 
-	echo "<p>";
-	debut_cadre_relief("image-24.gif");
-	echo "<center><font size='2' FACE='Verdana,Arial,Sans,sans-serif'>";
-	echo "<b>";
-	echo bouton_block_invisible(md5($texteon));
-	echo $texteon;
-	echo "</b>";
-
-	afficher_logo($logo, $texteon);
-
-	if ($logo_ok OR $survol_ok) {
-		echo "<br><br><b>";
-		echo bouton_block_invisible(md5($texteoff));
-		echo $texteoff;
+	if ($spip_display != 4) {
+		$logo_ok = get_image($logo);
+		if ($logo_ok) $survol_ok = get_image($survol);
+	
+		echo "<p>";
+		debut_cadre_relief("image-24.gif");
+		echo "<center><font size='2' FACE='Verdana,Arial,Sans,sans-serif'>";
+		echo "<b>";
+		echo bouton_block_invisible(md5($texteon));
+		echo $texteon;
 		echo "</b>";
-		afficher_logo($survol, $texteoff);
+	
+		afficher_logo($logo, $texteon);
+	
+		if ($logo_ok OR $survol_ok) {
+			echo "<br><br><b>";
+			echo bouton_block_invisible(md5($texteoff));
+			echo $texteoff;
+			echo "</b>";
+			afficher_logo($survol, $texteoff);
+		}
+	
+		echo "</font></center>";
+		fin_cadre_relief();
 	}
-
-	echo "</font></center>";
-	fin_cadre_relief();
 }
 
 function afficher_logo($racine, $titre) {
