@@ -469,6 +469,14 @@ function lang_supprimer_point ($langue) {
 	return ereg_replace('^\.', '', $langue);
 }
 
+// traduire un machin : [(#LANG|traduire{"module:code"}|sinon{"texte non traduit"})]
+function traduire($lang, $code) {
+	include_ecrire('inc_lang.php3');
+	lang_select($lang);
+	$texte = _T($code);
+	lang_dselect();
+	return $texte;
+}
 
 //
 // array_push et array_pop pour php3 (a virer si on n'a pas besoin de la compatibilite php3
