@@ -183,7 +183,7 @@ function http_calendrier_tout($mois, $annee, $premier_jour, $dernier_jour)
 		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'>" .
 		"\n<tr><td width='$largeur_table' valign='top'>" .
 		http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, 
-			$GLOBALS['echelle'], $messages, $fclic);
+				     $GLOBALS['echelle'], $messages, $fclic, $GLOBALS['PHP_SELF']);
 		"</td></tr>\n</table>";
 
 	# messages sans date ?
@@ -243,16 +243,18 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	  
   	$retour = "<div class='navigation-calendrier'>";
   
-	$retour .= http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
-			     http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='format_png'  width='12' height='12'"),
-			     _L('pr&eacute;c&eacute;dent'));
+	if ($args_pred)
+		$retour .= http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
+				     http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='format_png'  width='12' height='12'"),
+				     _L('pr&eacute;c&eacute;dent'));
 	$retour .= "&nbsp;";
  
  	$retour .= "<b>$nom</b>";
  	$retour .= "&nbsp;";
-	$retour .= http_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
-			     http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='format_png' width='12' height='12'"),
-			     _L('suivant'));
+	if ($args_suiv)
+		$retour .= http_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
+				     http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='format_png' width='12' height='12'"),
+				     _L('suivant'));
 
  	$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
   
@@ -336,22 +338,22 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 			$gadget .= "<table cellpadding='0' cellspacing='5' border='0' width='100%'>";
 			$gadget .= "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
 			for ($i=$mois; $i < 13; $i++) {
-				$gadget .= http_href("calendrier.php3?mois=$i&annee=$annee_avant",
+				$gadget .= http_href($script . "mois=$i&annee=$annee_avant",
 					nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
 			}
 			for ($i=1; $i < $mois - 1; $i++) {
-				$gadget .= http_href("calendrier.php3?mois=$i&annee=$annee",
+				$gadget .= http_href($script . "mois=$i&annee=$annee",
 					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
 			}
 			$gadget .= "</td>";
 			$gadget .= "</tr>";
 			$gadget .= "\n<tr>";
 			$gadget .= "<td valign='top' width='33%'>";
-			$gadget .= http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine'], $script) ;
 			$gadget .= "</td><td valign='top' width='33%'>";
-			$gadget .= http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine'], $script) ;
 			$gadget .= "</td><td valign='top' width='33%'>";
-			$gadget .= http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			$gadget .= http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine'], $script) ;
 			$gadget .= "</td>";
 			$gadget .= "</tr>";
 			$gadget .= "\n<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
@@ -427,38 +429,43 @@ function http_calendrier_navigation_semaine($jour_today,$mois_today,$annee_today
 # et on place les boutons de navigations vers les autres mois et connexe;
 # sinon on considere que c'est un planning ferme et il n'y a pas de navigation
 
-function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $echelle, $evenements, $fclic)
+function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $echelle, $evenements, $fclic, $script)
 {
   global $couleur_claire, $couleur_foncee;
 
       $today=getdate(time());
       $j=$today["mday"];
-      $m=$today["mon"];
-      $a=$today["year"];
-      $mois_suiv=$mois+1;
-      $annee_suiv=$annee;
-      $mois_prec=$mois-1;
-      $annee_prec=$annee;
-      if ($mois==1){
-	$mois_prec=12;
-	$annee_prec=$annee-1;
+      if ($dernier_jour > 31) {
+	$suite = $prec = $suiv = '';
+	$periode = affdate_mois_annee(date("Y-m-d", mktime(1,1,1,$mois,$premier_jour,$annee))) . ' - '. affdate_mois_annee(date("Y-m-d", mktime(1,1,1,$mois,$dernier_jour,$annee)));
+      } else {
+	$suite = ('&' . http_calendrier_retire_args($GLOBALS['QUERY_STRING'], 
+						    array('echelle','jour','mois','annee', 'type')));
+	$mois_suiv=$mois+1;
+	$annee_suiv=$annee;
+	$mois_prec=$mois-1;
+	$annee_prec=$annee;
+	if ($mois==1){
+	  $mois_prec=12;
+	  $annee_prec=$annee-1;
 	}
-      else if ($mois==12){$mois_suiv=1;	$annee_suiv=$annee+1;}
+	else if ($mois==12){$mois_suiv=1;	$annee_suiv=$annee+1;}
+	$prec = "mois=$mois_prec&annee=$annee_prec";
+	$suiv = "mois=$mois_suiv&annee=$annee_suiv";
+	$periode = affdate_mois_annee("$annee-$mois-1");
+      }
+      spip_log($dernier_jour);
       $nav = http_calendrier_navigation($j,
 					$mois,
 					$annee,
 					$echelle,
-					affdate_mois_annee("$annee-$mois-1"),
-					$GLOBALS['PHP_SELF'],
-					"mois=$mois_prec&annee=$annee_prec",
-					"mois=$mois_suiv&annee=$annee_suiv",
+					$periode,
+					$script,
+					$prec,
+					$suiv,
 					'mois',
-					(($dernier_jour <= 31) ? '' : ('&' .
-					 http_calendrier_retire_args($GLOBALS['QUERY_STRING'], 
-								     array('echelle','jour','mois','annee', 'type')))));
- 
-					 
-    
+					$suite);
+     
       return "<table border='0' cellspacing='0' cellpadding='0' width='100%' >" .
 	"\n<tr><td colspan='7'>$nav</td></tr>".
 	http_calendrier_les_jours(array(_T('date_jour_2'),
@@ -712,10 +719,13 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 
 // Calcule un agenda mensuel et l'affiche
 
-function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false) {
+function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false,  $script='calendrier.php3?') {
+
+  if (!$mois) {$mois = 12; $annee--;}
+  elseif ($mois==13) {$mois = 1; $annee++;}
   return 
     "<div style='text-align: center; padding: 5px;'>" .
-    http_href("calendrier.php3?mois=$mois&annee=$annee",
+    http_href($script . "mois=$mois&annee=$annee",
 		       "<b class='verdana1'>" .
 		       affdate_mois_annee("$annee-$mois-1").
 		       "</b>",
@@ -723,27 +733,16 @@ function http_calendrier_agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved
 		       'color: black;') .
     "<table width='100%' cellspacing='0' cellpadding='0'>" .
     http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, 
-				    $semaine, 
-				    sql_calendrier_agenda($mois, $annee),
-				    'http_calendrier_agenda_href') .
+			       $semaine, 
+			       sql_calendrier_agenda($mois, $annee),
+			       $script) .
     "</table>" .
     "</div>";
 }
 
-function http_calendrier_agenda_href($type, $jour, $mois, $annee, $color)
-{
-	static $scripts = array('jour' => "calendrier_jour.php3?",
-			        'semaine' => "calendrier_semaine.php3?");
-
-	return http_href($scripts[$type] . "jour=$jour&mois=$mois&annee=$annee", 
-				    "<b>$jour</b>",
-				    '',
-				    "color: $color");
-}
-
 // typographie un mois sous forme d'un tableau de 7 colonnes
 
-function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine, $les_rv, $liens) {
+function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine, $les_rv, $script) {
 	global $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
@@ -781,7 +780,10 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		if (checkdate($mois,$j,$annee)){
 		  if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
 		    $ligne .= "\n\t<td class='arial2' style='margin: 1px; padding: 2px; background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 5px;'>" .
-		      $liens('jour', $j, $mois, $annee, 'black') .
+		      http_href($script . "type=jour&jour=$j&mois=$mois&annee=$annee", 
+				"<b>$j</b>",
+				'',
+				"color: black") .
 		      "</td>";
 		  } else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
 		    $ligne .= "\n\t<td class='arial2' style='margin: 0px; padding: 3px; background-color: white; text-align: center; " .
@@ -790,7 +792,10 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 		       (($jour_semaine==7) ?
 			$style7 : '')) .
 		      "'>" .
-		      $liens(($semaine ? 'semaine' : 'jour'), $j, $mois, $annee, 'black') .
+		      http_href($script . "type=" . ($semaine ? 'semaine' : 'jour') . "&jour=$j&mois=$mois&annee=$annee", 
+				"<b>$j</b>",
+				'',
+				"color: black") .
 		      "</td>";
 		  } else {
 		    if ($j == $jour_today AND $mois == $mois_today AND $annee == $annee_today) {
@@ -809,8 +814,11 @@ function http_calendrier_agenda_rv ($mois, $annee, $jour_ved, $mois_ved, $annee_
 			}
 		    }
 		    $ligne .= "\n\t<td><div class='arial2' style='margin-left: 1px; margin-top: 1px; padding: 2px; background-color: $couleur_fond; text-align: center; -moz-border-radius: 5px;'>" .
-			$liens(($semaine ? 'semaine' : 'jour'), $j, $mois, $annee, $couleur) .
-		    "</div></td>";
+		      http_href($script . "type=" . ($semaine ? 'semaine' : 'jour') . "&jour=$j&mois=$mois&annee=$annee", 
+				"<b>$j</b>",
+				'',
+				"color: $couleur") .
+		      "</div></td>";
 		  }
 		  if ($jour_semaine==7) 
 		    {
