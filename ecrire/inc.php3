@@ -85,8 +85,6 @@ if ($set_options == 'basiques') {
 	$options = 'basiques';
 }
 
-global $couleur_foncee, $couleur_claire;
-
 switch ($spip_couleur) {
 	case 1:
 		/// Vert
