@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => 'vorige pagina',
+'page_suivante' => 'volgende pagina',
 'par_auteur' => 'door ',
 'participer_site' => 'Je kan bijdragen tot deze site door je eigen artikels voor te stellen als je je hieronder inschrijft. Je krijgt meteen een e-mail met daarin de toegangscode voor de priv&eacute;-deel van de site.',
 'plan_site' => 'Overzicht van de site',
