@@ -1680,8 +1680,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		$milieu = '
 			$'.$nom_var.' = "<"."?php
-				if (\$auteur_session[\'login\']) {
-					echo \'spip_cookie.php3?logout_public=\'.\$auteur_session[\'login\'].\'' . $url . '\';
+				if (\$GLOBALS[\'auteur_session\'][\'login\']) {
+					echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'' . $url . '\';
 				} ?".">";
 			';
 		break;
