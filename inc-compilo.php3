@@ -51,7 +51,7 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 			}
 			else {
 			// Cas de la langue : passer $spip_lang
-			  // et non table.lang (car depend de {lang_select})
+			// et non table.lang (car depend de {lang_select})
 				if ($var =='lang')
 					$l[] = "\'lang\' => \''.\$GLOBALS[\"spip_lang\"].'\'";
 				else
@@ -62,8 +62,12 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 
 	if ($path = find_in_path($fichier))
 		$path = "\\'$path\\'";
-	else
-		$path = "find_in_path(\\'$fichier\\')";	# pathologique ??
+	else {
+		spip_log("ERREUR: <INCLURE($fichier)> impossible");
+		erreur_squelette(_T('zbug_info_erreur_squelette'),
+			"&lt;INCLURE($fichier)&gt;");
+		return "'&lt;INCLURE(".texte_script($fichier).")&gt;'";
+	}
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
