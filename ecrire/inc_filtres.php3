@@ -619,10 +619,25 @@ function date_iso($date_heure) {
 	return gmdate("Y-m-d\TH:i:s\Z", $time);
 }
 
+//
+// Fonctions graphiques
+//
+
 function reduire_image($img, $taille = 120, $taille_y=0) {
 	if (!$img) return;
 	include_ecrire('inc_logos.php3');
 	return reduire_image_logo($img, $taille, $taille_y);
+}
+
+function largeur_image($img) {
+	if (!$img) return;
+	include_ecrire('inc_logos.php3');
+	return taille_image($img, 'largeur');
+}
+function hauteur_image($img) {
+	if (!$img) return;
+	include_ecrire('inc_logos.php3');
+	return taille_image($img, 'hauteur');
 }
 
 //

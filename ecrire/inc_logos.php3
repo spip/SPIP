@@ -438,6 +438,40 @@ function inserer_vignette_base($image, $vignette) {
 
 
 //
+// Retourner taille d'une image
+// pour largeur_image et hauteur_image
+// $val = 'hauteur' ou 'largeur'
+
+
+function taille_image($img, $val) {
+
+	if (eregi("width=['\"]([^'\"]+)['\"]", $img, $regs)) $srcWidth = $regs[1];
+	if (eregi("height=['\"]([^'\"]+)['\"]", $img, $regs)) $srcHeight = $regs[1];
+
+	// recuperer le nom du fichier
+	if (eregi("src='([^']+)'", $img, $regs)) $logo = $regs[1];
+	if (!$logo) $logo = $img;
+
+	if (!$srcWidth) {
+		if ($srcsize = @getimagesize($logo)) {
+			$srcWidth = $srcsize[0];
+		}
+	}
+	if (!$srcHeight) {
+		if ($srcsize = @getimagesize($logo)) {
+			$srcHeight = $srcsize[1];
+		}
+	}
+	
+	if ($val == 'hauteur') return $srcHeight;
+	else if ($val == 'largeur') return $srcWidth;
+	
+}
+
+
+
+
+//
 // Reduire la taille d'un logo
 // [(#LOGO_ARTICLE||reduire_image{100,60})]
 //
