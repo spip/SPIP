@@ -1029,7 +1029,7 @@ function debut_entete($title, $entete='') {
 		if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 		$entete = "Content-Type: text/html; charset=$charset";
 	}
-	@header($entete);
+	if (!$flag_preserver) @header($entete);
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
 	  "<head>\n" .
