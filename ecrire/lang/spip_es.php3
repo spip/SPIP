@@ -158,13 +158,14 @@ $GLOBALS['i18n_es'] = array(
 'date_saison_2' => 'primavera',
 'date_saison_3' => 'verano',
 'date_saison_4' => 'oto&ntilde;o',
-'dirs_commencer' => '<NEW>  afin de commencer r&eacute;ellement l\'installation',
-'dirs_preliminaire' => '<NEW> Pr&eacute;liminaire : <B>R&eacute;gler les droits d\'acc&egrave;s</B>',
-'dirs_probleme_droits' => '<NEW> <b>Probl&egrave;me de droits d\'acc&egrave;s</b>',
-'dirs_repertoires_suivants' => '<NEW> <B>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>@bad_dirs@.</ul> </B>
-		<P>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d\'acc&egrave;s de chacun
-		de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d\'installation.
-		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ',
+'dirs_commencer' => ' con el fin de empezar realmente la instalaci&oacute;n',
+'dirs_preliminaire' => 'Preliminar: <B>Regular los derechos de acceso</B>',
+'dirs_probleme_droits' => '<b>Problema de derechos de acceso</b>',
+'dirs_repertoires_suivants' => '<B>Los directorios siguientes no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </B>
+		<P>Para solucionarlo, utilizad vuestro cliente FTP con el fin de regular los derechos de acceso de cada uno
+		de esos directorios. El procedimiento est&aacute; explicado detalladamente en la gu&iacute;a de instalaci&oacute;n.
+		<P>Una vez terminado este proceso, pod&eacute;is 
+',
 
 
 // E
@@ -211,104 +212,105 @@ $GLOBALS['i18n_es'] = array(
 
 
 // F
-'form_deja_inscrit' => '<NEW> Vous &ecirc;tes d&eacute;j&agrave; inscrit.',
-'form_email_non_valide' => '<NEW> Votre adresse email n\'est pas valide.',
-'form_forum_access_refuse' => '<NEW> Vous n\'avez plus acc&egrave;s &agrave; ce site.',
-'form_forum_bonjour' => '<NEW> Bonjour,',
-'form_forum_email_deja_enregistre' => '<NEW> Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e, vous pouvez donc utiliser votre mot de passe habituel.',
-'form_forum_identifiant_mail' => '<NEW> Votre nouvel identifiant vient de vous &ecirc;tre envoy&eacute; par email.',
-'form_forum_identifiants' => '<NEW> Identifiants personnels',
-'form_forum_indiquer_nom_email' => '<NEW> Indiquez ici votre nom et votre adresse email. Votre identifiant personnel vous parviendra rapidement, par courrier &eacute;lectronique.',
-'form_forum_login' => '<NEW> login :',
-'form_forum_message_auto' => '<NEW> (ceci est un message automatique)',
-'form_forum_pass' => '<NEW> mot de passe :',
-'form_forum_probleme_mail' => '<NEW> Probl&egrave;me de mail&nbsp;: l\'identifiant ne peut pas &ecirc;tre envoy&eacute;.',
-'form_forum_voici1' => '<NEW> Voici vos identifiants pour pouvoir participer aux forums
-du site \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"@nom_site_spip@\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" (@adresse_site@/) :',
-'form_forum_voici2' => '<NEW> Voici vos identifiants pour proposer des articles sur
-le site \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\"@nom_site_spip@\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\" (@adresse_site@/ecrire/) :',
-'form_indiquer_email' => '<NEW> Veuillez indiquer votre adresse email.',
-'form_indiquer_nom' => '<NEW> Veuillez indiquer votre nom.',
-'form_indiquer_nom_site' => '<NEW> Veuillez indiquer le nom de votre site.',
-'form_pet_adresse_site' => '<NEW> Adresse de votre site',
-'form_pet_aucune_signature' => '<NEW> Aucune signature ne correspond &agrave; ce code...',
-'form_pet_confirmation' => '<NEW> Veuillez confirmer votre signature :',
-'form_pet_deja_enregistre' => '<NEW> Ce site est d&eacute;j&agrave; enregistr&eacute;',
-'form_pet_deja_signe' => '<NEW> Vous avez d&eacute;j&agrave; sign&eacute; ce texte.',
-'form_pet_envoi_mail_confirmation' => '<NEW> Un courrier &eacute;lectronique de confirmation vient de vous &ecirc;tre envoy&eacute;. Vous devrez visiter l\'adresse Web mentionn&eacute;e dans ce courrier pour valider votre signature.',
-'form_pet_mail_confirmation' => '<NEW> Bonjour,
+'form_deja_inscrit' => 'Ya est&aacute;s inscrito.',
+'form_email_non_valide' => 'La direcci&oacute;n de correo electr&oacute;nico no es v&aacute;lida.',
+'form_forum_access_refuse' => 'Ya no ten&eacute;is acceso a este sitio.',
+'form_forum_bonjour' => 'Hola,',
+'form_forum_email_deja_enregistre' => 'Esta direcci&oacute;n de correo electr&oacute;nico ya est&aacute; registrada, por lo que puedes utilizar tu contrase&ntilde;a habitual.',
+'form_forum_identifiant_mail' => 'Hemos enviado tu nuevo identificador por correo electr&oacute;nico.',
+'form_forum_identifiants' => 'Identificadores personales',
+'form_forum_indiquer_nom_email' => 'Indicad aqu&iacute; vuestro nombre y direcci&oacute;n de correo electr&oacute;nico. Vuestro identificador personal os llegar&aacute; r&aacute;pidamente, por correo electr&oacute;nico.',
+'form_forum_login' => 'usuario:',
+'form_forum_message_auto' => '(esto es un mensaje autom&aacute;tico)',
+'form_forum_pass' => 'contrase&ntilde;a:',
+'form_forum_probleme_mail' => 'Problema de correo electr&oacute;nico: no se puede enviar el identificador.',
+'form_forum_voici1' => 'He aqu&iacute; vuestros identificadores para poder participar
+en los foros del sitio "@nom_site_spip@" (@adresse_site@/):',
+'form_forum_voici2' => 'He aqu&iacute; vuestros identificadores para proponer art&iacute;culos
+en el sitio "@nom_site_spip@" (@adresse_site@/ecrire/):',
+'form_indiquer_email' => 'Indicad vuestra direcci&oacute;n de correo electr&oacute;nico.',
+'form_indiquer_nom' => 'Indicad vuestro nombre.',
+'form_indiquer_nom_site' => 'Indicad el nombre de vuestro sitio Web.',
+'form_pet_adresse_site' => 'Direcci&oacute;n de vuestro sitio',
+'form_pet_aucune_signature' => 'Ninguna firma corresponde a este c&oacute;digo...',
+'form_pet_confirmation' => 'Confirmad vuestra firma:',
+'form_pet_deja_enregistre' => 'Este sitio ya est&aacute; registrado',
+'form_pet_deja_signe' => 'Ya hab&eacute;is firmado este texto.',
+'form_pet_envoi_mail_confirmation' => 'Acabamos de enviar un correo electr&oacute;nico de confirmaci&oacute;n. Ten&eacute;is que visitar la direcci&oacute;n Web mencionada en este mensaje para validar vuestra firma.',
+'form_pet_mail_confirmation' => 'Hola,
 
-Vous avez demand&eacute; &agrave; signer la p&eacute;tition :
+Hab&eacute;is pedido firmar la petici&oacute;n:
 @titre@.
 
-Vous avez fourni les informations suivantes :
-    Nom: @nom_email@
-    Site: @nom_site@ - @url_site@
+Hab&eacute;is facilitado las informaciones siguientes:
+
+    Nombre: @nom_email@
+    Sitio: @nom_site@ - @url_site@
 
 
-IMPORTANT...
-Pour valider votre signature, il suffit de vous connecter &agrave;
-l\'adresse ci-dessous (dans le cas contraire, votre demande
-sera rejet&eacute;e) :
+IMPORTANTE...
+
+Para validar vuestra firma, basta con conectaros a
+la direcci&oacute;n indicada a continuaci&oacute;n (en caso contrario, vuestra demanda
+ser&aacute; rechazada):
 
     @url@
 
+Gracias por vuestra participaci&oacute;n
 
-Merci de votre participation
 ',
-'form_pet_message_commentaire' => '<NEW> Un message, un commentaire&nbsp;?',
-'form_pet_nom_site2' => '<NEW> <B>Nom de votre site Web',
-'form_pet_probleme_technique' => '<NEW> Probl&egrave;me technique, les signatures sont temporairement suspendues.',
-'form_pet_signature_pasprise' => '<NEW> Votre signature n\'est pas prise en compte.',
-'form_pet_signature_validee' => '<NEW> Votre signature est valid&eacute;e. Elle appara&icirc;tra lors de la prochaine mise &agrave; jour du site. Merci&nbsp;!',
-'form_pet_site_deja_enregistre' => '<NEW> Ce site est d&eacute;j&agrave; enregistr&eacute;',
-'form_pet_url_invalide' => '<NEW> L\'URL que vous avez indiqu&eacute;e n\'est pas valide.',
-'form_pet_votre_email' => '<NEW> Votre adresse email',
-'form_pet_votre_nom' => '<NEW> Votre nom ou pseudo',
-'form_pet_votre_site' => '<NEW> Si vous avez un site Web, vous pouvez l\'indiquer ci-dessous',
-'form_prop_confirmer_envoi' => '<NEW> Confirmer l\'envoi',
-'form_prop_description' => '<NEW> Description/commentaire',
-'form_prop_enregistre' => '<NEW> Votre proposition est enregistr&eacute;e, elle appara&icirc;tra en ligne apr&egrave;s validation par les responsables de ce site.',
-'form_prop_envoyer' => '<NEW> Envoyer un message',
-'form_prop_indiquer_email' => '<NEW> Veuillez indiquer une adresse email valide',
-'form_prop_indiquer_nom_site' => '<NEW> Veuillez indiquer le nom du site.',
-'form_prop_indiquer_sujet' => '<NEW> Veuillez indiquer un sujet',
-'form_prop_message_envoye' => '<NEW> Message envoy&eacute;',
-'form_prop_nom_site' => '<NEW> Nom du site',
-'form_prop_non_enregistre' => '<NEW> Votre proposition n\'a pas &eacute;t&eacute; enregistr&eacute;e.',
-'form_prop_sujet' => '<NEW> Sujet',
-'form_prop_url_site' => '<NEW> Adresse (URL) du site',
-'forum_acces_refuse' => '<NEW> Vous n\'avez plus acc&egrave;s &agrave; ces forums.',
-'forum_attention_dix_caracteres' => '<NEW> <b>Attention&nbsp;!</b> votre message fait moins de dix caract&egrave;res.',
-'forum_attention_trois_caracteres' => '<NEW> <b>Attention&nbsp;!</b> votre titre fait moins de trois caract&egrave;res.',
-'forum_avez_selectionne' => '<NEW> Vous avez s&eacute;lectionn&eacute;&nbsp;:',
-'forum_cliquer_retour' => '<NEW> Cliquez <a href=\'@retour_forum@\'>ici</a> pour continuer.',
-'forum_creer_paragraphes' => '<NEW> (Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)',
-'forum_forum' => '<NEW> forum',
-'forum_info_modere' => '<NEW> Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n\'appara&icirc;tra qu\'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.',
-'forum_lien_hyper' => '<NEW> <B>Lien hypertexte</B> (optionnel)',
-'forum_message_definitif' => '<NEW> Message d&eacute;finitif : envoyer au site',
-'forum_message_trop_long' => '<NEW> Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.',
-'forum_ne_repondez_pas' => '<NEW> Ne repondez pas a ce mail mais sur le forum a l\'adresse suivante :',
-'forum_non_inscrit' => '<NEW> Vous n\'&ecirc;tes pas inscrit, ou l\'adresse ou le mot de passe sont erron&eacute;s.',
-'forum_page_url' => '<NEW> (Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
-'forum_par_auteur' => '<NEW> par @auteur@',
-'forum_poste_par' => '<NEW> Message poste@parauteur@ a la suite de votre article.',
-'forum_probleme_database' => '<NEW> Probl&egrave;me de base de donn&eacute;es, votre message n\'a pas &eacute;t&eacute; enregistr&eacute;.',
-'forum_qui_etes_vous' => '<NEW> <B>Qui &ecirc;tes-vous ?</B> (optionnel)',
-'forum_texte' => '<NEW> Texte de votre message :',
-'forum_titre' => '<NEW> Titre :',
-'forum_titre_erreur' => '<NEW> Erreur...',
-'forum_url' => '<NEW> URL :',
-'forum_valider' => '<NEW> Valider ce choix',
-'forum_voir_avant' => '<NEW> Voir ce message avant de le poster',
-'forum_votre_email' => '<NEW> Votre adresse email :',
-'forum_votre_nom' => '<NEW> Votre nom (ou pseudonyme) :',
-'forum_vous_enregistrer' => '<NEW> Pour participer &agrave;
-		ce forum, vous devez vous enregistrer au pr&eacute;alable. Merci
-		d\'indiquer ci-dessous l\'identifiant personnel qui vous a
-		&eacute;t&eacute; fourni. Si vous n\'&ecirc;tes pas enregistr&eacute;, vous devez',
-'forum_vous_inscrire' => '<NEW> vous inscrire </a> au pr&eacute;alable.',
+'form_pet_message_commentaire' => '&iquest;Un mensaje, un comentario?',
+'form_pet_nom_site2' => '<B>Nombre de vuestro sitio Web',
+'form_pet_probleme_technique' => 'Problema t&eacute;cnico, las firmas est&aacute;n temporalmente suspendidas.',
+'form_pet_signature_pasprise' => 'Vuestra firma no ha sido tomada en cuenta.',
+'form_pet_signature_validee' => 'Vuestra firma est&aacute; validada. Aparecer&aacute; durante la pr&oacute;xima actualizaci&oacute;n del sitio. &iexcl;Gracias!',
+'form_pet_site_deja_enregistre' => 'Este sitio ya est&aacute; registrado',
+'form_pet_url_invalide' => 'La URL que hab&eacute;is indicado no es v&aacute;lida.',
+'form_pet_votre_email' => 'Vuestra direcci&oacute;n de correo electr&oacute;nico',
+'form_pet_votre_nom' => 'Vuestro nombre o seud&oacute;nimo',
+'form_pet_votre_site' => 'si ten&eacute;is un sitio Web, pod&eacute;is indicarlo a continuaci&oacute;n',
+'form_prop_confirmer_envoi' => 'Confirmar el env&iacute;o',
+'form_prop_description' => 'Descripci&oacute;n/comentario',
+'form_prop_enregistre' => 'Vuestra proposici&oacute;n est&aacute; registrada, aparecer&aacute; en l&iacute;nea despu&eacute;s de la validaci&oacute;n por los responsables de este sitio.',
+'form_prop_envoyer' => 'Enviar un mensaje',
+'form_prop_indiquer_email' => 'Indicar una direcci&oacute;n de correo electr&oacute;nico v&aacute;lida',
+'form_prop_indiquer_nom_site' => 'Indicar el nombre del sitio.',
+'form_prop_indiquer_sujet' => 'Indicar un tema',
+'form_prop_message_envoye' => 'Mensaje enviado',
+'form_prop_nom_site' => 'Nombre del sitio',
+'form_prop_non_enregistre' => 'Vuestra proposici&oacute;n no ha sido registrada.',
+'form_prop_sujet' => 'Asunto',
+'form_prop_url_site' => 'Direcci&oacute;n (URL) del sitio',
+'forum_acces_refuse' => 'Ya no ten&eacute;is acceso a estos foros.',
+'forum_attention_dix_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> vuestro mensaje tiene menos de diez caracteres.',
+'forum_attention_trois_caracteres' => '<b>&iexcl;Atenci&oacute;n!</b> vuestro t&iacute;tulo tiene menos de tres caracteres.',
+'forum_avez_selectionne' => 'Hab&eacute;is seleccionado:',
+'forum_cliquer_retour' => 'Pulsar <a href=\\\'@retour_forum@\\\'>aqu&iacute;</a> para continuar.',
+'forum_creer_paragraphes' => '(Para crear p&aacute;rrafos, simplemente dejad l&iacute;neas vac&iacute;as.)',
+'forum_forum' => 'foro',
+'forum_info_modere' => 'Este foro est&aacute; moderado a priori: vuestra contribuci&oacute;n no aparecer&aacute; hasta haber sido validada por un administrador del sitio.',
+'forum_lien_hyper' => '<B>Enlace hipertexto</B> (opcional)',
+'forum_message_definitif' => 'Mensaje definitivo: enviar al sitio',
+'forum_message_trop_long' => 'Vuestro mensaje es demasiado largo. La talla m&aacute;xima es de 20.000 caracteres.',
+'forum_ne_repondez_pas' => 'No respond&aacute;is a este correo electr&oacute;nico, si no en el foro en la siguiente direcci&oacute;n:',
+'forum_non_inscrit' => 'No est&aacute;is inscritos, o la direcci&oacute;n o la contrase&ntilde;a son err&oacute;neas.',
+'forum_page_url' => '(Si vuestro mensaje se refiere a un art&iacute;culo publicado en Internet, o a una p&aacute;gina que contiene m&aacute;s informaciones, indicad a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
+'forum_par_auteur' => 'por @auteur@',
+'forum_poste_par' => 'Mensaje enviado @parauteur@ a continuaci&oacute;n de vuestro art&iacute;culo.',
+'forum_probleme_database' => 'Problema de la base de datos, vuestro mensaje no ha sido registrado.',
+'forum_qui_etes_vous' => '<B>&iquest;Quienes sois?</B> (opcional)',
+'forum_texte' => 'Texto de vuestro mensaje:',
+'forum_titre' => 'T&iacute;tulo:',
+'forum_titre_erreur' => 'Error...',
+'forum_url' => 'URL:',
+'forum_valider' => 'Validar la elecci&oacute;n',
+'forum_voir_avant' => 'Ver este mensaje antes de enviarlo',
+'forum_votre_email' => 'Vuestra direcci&oacute;n de correo electr&oacute;nico:',
+'forum_votre_nom' => 'Vuestro nombre (o seud&oacute;nimo):',
+'forum_vous_enregistrer' => 'Para participar en este foro, previamente ten&eacute;is que registraros.
+Gracias por indicar a continuaci&oacute;n el identificador personal que os ha
+sido suministrado. Si no est&aacute;is inscritos, ten&eacute;is que',
+'forum_vous_inscrire' => 'inscribiros</a> previamente.',
 
 
 // I
@@ -866,7 +868,7 @@ Merci de votre participation
 'info_visiteurs_02' => 'Visitantes del sitio p&uacute;blico',
 'info_vos_rendez_vous' => 'Vuestras citas',
 'infos_vos_pense_bete' => 'Vuestros  recordatorios',
-'install_select_langue' => '<NEW> S&eacute;lectionnez une langue puis cliquez sur le bouton &laquo;&nbsp;suivant&nbsp;&raquo; pour lancer la proc&eacute;dure d\'installation.',
+'install_select_langue' => 'Seleccionad un idioma y despu&eacute;s pulsar en el bot&oacute;n &laquo;siguiente&raquo; para iniciar el proceso de instalaci&oacute;n.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Aceptar las inscripciones',
 'item_activer_forum_administrateur' => 'Activar el foro administradores',
@@ -980,36 +982,33 @@ Merci de votre participation
 'lien_voir_auteur' => 'Ver este autor',
 'lien_voir_en_ligne' => 'Ver en l&iacute;nea...',
 'lnfo_liens' => 'enlaces:',
-'login_acces_prive' => '<NEW> acceso a l\'espacio privado',
-'login_autre_identifiant' => '<NEW> se connecter sous un autre identifiant',
-'login_connexion_refusee' => '<NEW> Connexion refus&eacute;e.',
-'login_cookie_accepte' => '<NEW> Veuillez r&eacute;gler votre navigateur pour qu\'il les accepte (au moins pour ce site).',
-'login_cookie_oblige' => '<NEW> Pour vous identifier de fa&ccedil;on s&ucirc;re sur ce site, vous devez accepter les cookies.',
-'login_deconnexion_ok' => '<NEW> D&eacute;connexion effectu&eacute;e.',
-'login_erreur_pass' => '<NEW> Erreur de mot de passe.',
-'login_espace_prive' => '<NEW> espace priv&eacute;',
-'login_identifiant_inconnu' => '<NEW> L\'identifiant &laquo; @login@ &raquo; est inconnu.',
-'login_identification' => '<NEW> identification',
-'login_login' => '<NEW> Login :',
-'login_login2' => '<NEW> Login (identifiant de connexion au site)&nbsp;:',
-'login_login_pass_incorrect' => '<NEW> (Login ou mot de passe incorrect.)',
-'login_motpasseoublie' => '<NEW> mot&nbsp;de&nbsp;passe&nbsp;oubli&eacute;&nbsp;?',
-'login_non_securise' => '<NEW> Attention, ce formulaire n\'est pas s&eacute;curis&eacute;.
-			Si vous ne voulez pas que votre mot de passe puisse &ecirc;tre
-			intercept&eacute; sur le r&eacute;seau, veuillez activer Javascript 
-			dans votre navigateur et',
-'login_nouvelle_tentative' => '<NEW> Nouvelle tentative',
-'login_par_ici' => '<NEW> Vous &ecirc;tes enregistr&eacute;... par ici...',
-'login_pass2' => '<NEW> Mot de passe&nbsp;:',
-'login_preferez_refuser' => '<NEW> <b>Si vous pr&eacute;f&eacute;rez refuser les cookies</b>, une autre m&eacute;thode de connexion (moins s&eacute;curis&eacute;e) est &agrave; votre disposition&nbsp;:',
-'login_recharger' => '<NEW> recharger cette page',
-'login_retour_public' => '<NEW> Retour au site public',
-'login_retour_site' => '<NEW> Retour au site public',
-'login_retoursitepublic' => '<NEW> retour&nbsp;au&nbsp;site&nbsp;public',
-'login_sans_cookiie' => '<NEW> Identification sans cookie',
-'login_sinscrire' => '<NEW> s\'inscrire',
-'login_test_navigateur' => '<NEW> test navigateur/reconnexion',
-'login_verifiez_navigateur' => '<NEW> (V&eacute;rifiez toutefois que votre navigateur n\'a pas m&eacute;moris&eacute; votre mot de passe...)',
+'login_acces_prive' => 'acceso al espacio privado',
+'login_autre_identifiant' => 'conectarse bajo otro nombre de usuario',
+'login_connexion_refusee' => 'Conexi&oacute;n rechazada.',
+'login_cookie_accepte' => 'Configurad vuestro navegador para que las acepte (al menos para este sitio).',
+'login_cookie_oblige' => 'Para identificaros de manera segura en este sitio, ten&eacute;is que aceptar las "cookies".',
+'login_deconnexion_ok' => 'Desconexi&oacute;n efectuada.',
+'login_erreur_pass' => 'Error de contrase&ntilde;a.',
+'login_espace_prive' => 'espacio privado',
+'login_identifiant_inconnu' => 'El usuario &laquo;@login@&raquo; es desconocido.',
+'login_identification' => 'identificaci&oacute;n',
+'login_login' => 'Usuario:',
+'login_login2' => 'Usuario (identificador de conexi&oacute;n al sitio):',
+'login_login_pass_incorrect' => '(Usuario o contrase&ntilde;a incorrecto.)',
+'login_motpasseoublie' => '&iquest;contrase&ntilde;a&nbsp;olvidada?',
+'login_non_securise' => 'Atenci&oacute;n, este formulario no est&aacute; asegurado. Si no quer&eacute;is que vuestra contrase&ntilde;a sea interceptada en la red, activad JavaScript en vuestro navegador y',
+'login_nouvelle_tentative' => 'Nuevo intento',
+'login_par_ici' => 'Est&aacute;is registrados... por aqu&iacute;...',
+'login_pass2' => 'Contrase&ntilde;a:',
+'login_preferez_refuser' => '<b>Si prefer&iacute;s rechazar las "cookies"</b>, otro m&eacute;todo de conexi&oacute;n (menos seguro) est&aacute; a vuestra disposici&oacute;n:',
+'login_recharger' => 'recargar esta p&aacute;gina',
+'login_retour_public' => 'Volver al sitio p&uacute;blico',
+'login_retour_site' => 'Volver al sitio p&uacute;blico',
+'login_retoursitepublic' => 'volver&nbsp;al&nbsp;sitio&nbsp;p&uacute;blico',
+'login_sans_cookiie' => 'Identificaci&oacute;n sin "cookie"',
+'login_sinscrire' => 'inscribirse',
+'login_test_navigateur' => 'prueba de navegador/reconexi&oacute;n',
+'login_verifiez_navigateur' => '(No obstante, comprobad que vuestro navegador no ha memorizado vuestra contrase&ntilde;a...)',
 'logo_article' => 'Logotipo del art&iacute;culo...',
 'logo_auteur' => 'Logotipo del autor...',
 'logo_breve' => 'Logotipo de la breve...',
@@ -1112,50 +1111,42 @@ Merci de votre participation
 
 
 // P
-'pass_choix_pass' => '<NEW> Veuillez choisir votre nouveau mot de passe :',
-'pass_erreur' => '<NEW> Erreur',
-'pass_erreur_acces_refuse' => '<NEW> <b>Erreur :</b> vous n\'avez plus acc&egrave;s &agrave; ce site.',
-'pass_erreur_code_inconnu' => '<NEW> <b>Erreur :</b> ce code ne correspond &agrave; aucun des visiteurs ayant acc&egrave;s &agrave; ce site.',
-'pass_erreur_non_enregistre' => '<NEW> <b>Erreur :</b> l\'adresse <tt>@email_oubli@</tt> n\'est pas enregistr&eacute;e sur ce site.',
-'pass_erreur_non_valide' => '<NEW> <b>Erreur :</b> cet email <tt>@email_oubli@</tt> n\'est pas valide !',
-'pass_erreur_probleme_technique' => '<NEW> <b>Erreur :</b> &agrave; cause d\'un probl&egrave;me technique, l\'email ne peut pas &ecirc;tre envoy&eacute;.',
-'pass_espace_prive_bla' => '<NEW> L\'espace priv&eacute; de ce site est ouvert aux
-		visiteurs, apr&egrave;s inscription. Une fois enregistr&eacute;,
-		vous pourrez consulter les articles en cours de r&eacute;daction,
-		proposer des articles et participer &agrave; tous les forums.',
-'pass_forum_bla' => '<NEW> Vous avez demand&eacute; &agrave; intervenir sur un forum
-		r&eacute;serv&eacute; aux visiteurs enregistr&eacute;s.',
-'pass_indiquez_cidessous' => '<NEW> Indiquez ci-dessous l\'adresse email sous laquelle vous
-			vous &ecirc;tes pr&eacute;c&eacute;demment enregistr&eacute;. Vous
-			recevrez un email vous indiquant la marche &agrave; suivre pour
-			r&eacute;cup&eacute;rer votre acc&egrave;s.',
-'pass_mail_passcookie' => '<NEW> (ceci est un message automatique)
-Pour retrouver votre acc&egrave;s au site
+'pass_choix_pass' => 'Escoged la nueva contrase&ntilde;a:',
+'pass_erreur' => 'Error',
+'pass_erreur_acces_refuse' => '<b>Error:</b> ya no ten&eacute;is acceso a este sitio.',
+'pass_erreur_code_inconnu' => '<b>Error:</b> este c&oacute;digo no corresponde con ninguno de los visitantes que tienen acceso a este sitio.',
+'pass_erreur_non_enregistre' => '<b>Error:</b> la direcci&oacute;n <tt>@email_oubli@</tt> no est&aacute; registrada en este sitio.',
+'pass_erreur_non_valide' => '<b>Error:</b> esta direcci&oacute;n <tt>@email_oubli@</tt> no es v&aacute;lida.',
+'pass_erreur_probleme_technique' => '<b>Error:</b> por un problema t&eacute;cnico, el mensaje no ha podido ser enviado.',
+'pass_espace_prive_bla' => 'El espacio privado de este sitio est&aacute; abierto a los visitantes, despu&eacute;s de la inscripci&oacute;n. Una vez registrados, podr&eacute;is consultar los art&iacute;culos en curso de redacci&oacute;n, proponer art&iacute;culos y participar en todos los foros.',
+'pass_forum_bla' => 'Hab&eacute;is pedido intervenir en un foro reservado a los visitantes registrados.',
+'pass_indiquez_cidessous' => 'Indicad a continuaci&oacute;n la direcci&oacute;n de correo electr&oacute;nico bajo la cual os hab&eacute;is registrado anteriormente. Recibir&eacute;is un mensaje indicando el proceso a seguir para recuperar vuestro acceso.',
+'pass_mail_passcookie' => '(esto es un mensaje autom&aacute;tico)
+
+Para recuperar vuestro acceso al sitio
 @nom_site_spip@ (@adresse_site@)
 
-Veuillez vous rendre &agrave; l\'adresse suivante :
+Ir a la siguiente direcci&oacute;n:
 
     @adresse_site@/spip_pass.php3?p=@cookie@
 
-Vous pourrez alors entrer un nouveau mot de passe
-et vous reconnecter au site.
-
+Entonces podr&eacute;is poner una nueva contrase&ntilde;a y volver a conectaros al sitio.
 ',
-'pass_mot_oublie' => '<NEW> Mot de passe oubli&eacute;',
-'pass_nouveau_enregistre' => '<NEW> Votre nouveau mot de passe a &eacute;t&eacute; enregistr&eacute;.',
-'pass_nouveau_pass' => '<NEW> Nouveau mot de passe',
-'pass_ok' => '<NEW> OK',
-'pass_oubli_mot' => '<NEW> Oubli du mot de passe',
-'pass_quitter_fenetre' => '<NEW> Quitter cette fen&ecirc;tre',
-'pass_rappel_login' => '<NEW> Rappel : votre identifiant (login) est &laquo; @login@ &raquo;.',
-'pass_recevoir_mail' => '<NEW> Vous allez recevoir un email vous indiquant comment retrouver votre acc&egrave;s au site.',
-'pass_retour_public' => '<NEW> Retour sur le site public',
-'pass_rien_a_faire_ici' => '<NEW> Rien &agrave; faire ici.',
-'pass_vousinscrire' => '<NEW> Vous inscrire sur ce site',
+'pass_mot_oublie' => 'Contrase&ntilde;a olvidada',
+'pass_nouveau_enregistre' => 'Vuestra nueva contrase&ntilde;a ha sido registrada.',
+'pass_nouveau_pass' => 'Nueva contrase&ntilde;a',
+'pass_ok' => 'OK',
+'pass_oubli_mot' => 'Contrase&ntilde;a olvidada',
+'pass_quitter_fenetre' => 'Abandonar esta ventana',
+'pass_rappel_login' => 'Recordad: vuestro identificador (nombre de usuario) es &laquo;@login@&raquo;.',
+'pass_recevoir_mail' => 'Recibir&eacute;is un mensaje de correo electr&oacute;nico indicando como recuperar vuestro acceso al sitio.',
+'pass_retour_public' => 'Volver al sitio p&uacute;blico',
+'pass_rien_a_faire_ici' => 'Nada que hacer aqu&iacute;.',
+'pass_vousinscrire' => 'Inscribirse en este sitio',
 
 
 // S
-'stats_visites_et_popularite' => '<NEW> @visites@ visites&nbsp;; popularit&eacute;&nbsp;: @popularite@',
+'stats_visites_et_popularite' => '@visites@ visitas; popularidad: @popularite@',
 
 
 // T
