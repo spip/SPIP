@@ -104,7 +104,7 @@ if ($statut_nouv) {
 			include_ecrire("inc_mail.php3");
 			envoyer_mail_publication($id_article);
 		}
-	
+
 		if ($statut_nouv == "prop" AND $statut_article != $statut_nouv AND $statut_article != 'publie') {
 			include_ecrire("inc_mail.php3");
 			envoyer_mail_proposition($id_article);
@@ -175,15 +175,15 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 $texte = $texte_ajout . $texte;
 
 
-if ($changer_virtuel OR $virtuel) {
-	if (strlen($virtuel) > 0) $chapo = "=$virtuel";
+if ($changer_virtuel) {
+	if (!ereg("^(https?|ftp|mailto)://.+", trim($virtuel))) $virtuel = "";
+	if ($virtuel) $chapo = "=$virtuel";
 	else $chapo = "";
 	$query = "UPDATE spip_articles SET chapo=\"$chapo\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 }
 
 if ($titre && !$ajout_forum && $flag_editable) {
-
 	$surtitre = addslashes(corriger_caracteres($surtitre));
 	$titre = addslashes(corriger_caracteres($titre));
 	$soustitre = addslashes(corriger_caracteres($soustitre));
@@ -208,7 +208,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 			indexer_article($id_article);
 		}
 	}
-	
+
 	// afficher le nouveau titre dans la barre de fenetre
 	$titre_article = stripslashes($titre);
 
@@ -238,10 +238,6 @@ function get_forums_publics($id_article=0) {
 	return $forums_publics;
 }
 
-
-//////////////////////////////////////////////////////
-// Affichage de la colonne de gauche
-//
 
 //
 // Lire l'article
@@ -287,20 +283,21 @@ if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
 
 debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
 
-
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
 $parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
-
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
-
 echo "$parents";
 
 fin_grand_cadre();
 
 
+
+//////////////////////////////////////////////////////
+// Affichage de la colonne de gauche
+//
 
 debut_gauche();
 
@@ -310,9 +307,7 @@ echo "<div align='center'>\n";
 
 if ($statut_article == "publie") {
 	$post_dates = lire_meta("post_dates");
-
 	$voir_en_ligne = true;
-
 	if ($post_dates == "non") {
 		$query = "SELECT id_article FROM spip_articles WHERE id_article=$id_article AND date<=NOW()";
 		$result = spip_query($query);
@@ -322,75 +317,105 @@ if ($statut_article == "publie") {
 	}
 }
 
-
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='1'><b>ARTICLE NUM&Eacute;RO&nbsp;:</b></font>\n";
 echo "<br><font face='Verdana,Arial,Helvetica,sans-serif' size='6'><b>$id_article</b></font>\n";
-
-
-
 
 if ($voir_en_ligne) {
 	icone_horizontale("Voir en ligne", "../spip_redirect.php3?id_article=$id_article&recalcul=oui", "racine-24.gif", "rien.gif");
 }
 
+if ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
+	$query = "SELECT count(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')";
+	if ($row = spip_fetch_array(spip_query($query))) {
+		$nb_forums = $row['count'];
+		if ($nb_forums) {
+			icone_horizontale("Suivi du forum public&nbsp;: $nb_forums&nbsp;contribution(s)",
+				"articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
+		}
+	}
+}
 
+
+$activer_statistiques = lire_meta("activer_statistiques");
+$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+
+if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non" AND $options == "avancees"){
+	icone_horizontale("&Eacute;volution des visites<br>$visites visites$aff_ref", "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
+}
 
 echo "</div>\n";
 
 fin_boite_info();
 
-$activer_statistiques = lire_meta("activer_statistiques");
-$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 
-if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non"){
-	echo "<p>";
-	icone_horizontale("&Eacute;volution des visites<br>$visites visites$aff_ref", "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
+//
+// Afficher les raccourcis
+//
+
+debut_raccourcis();
+
+icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
+if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
+	$retour = urlencode($clean_link->getUrl());
+	icone_horizontale("Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+	$articles_mots = lire_meta('articles_mots');
+	if ($articles_mots != "non")
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
 }
+
+fin_raccourcis();
+
 
 
 //
 // Boites de configuration avancee
 //
 
-$boite_ouverte = false;
+if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
+
+	echo "<p>";
+
+	debut_cadre_relief("administration-24.gif");
+
+	$visible = $change_accepter_forum || $change_petition || $changer_virtuel;
+
+	if ($visible)
+		echo bouton_block_visible("config_avancee");
+	else
+		echo bouton_block_invisible("config_avancee");
+	echo "<font face='Verdana, Arial, Helvetica, sans-serif' size='1' color='black'><b>OPTIONS AVANCE&Eacute;S</b></font>";
+	if ($visible)
+		echo debut_block_visible("config_avancee");
+	else
+		echo debut_block_invisible("config_avancee");
 
 
-//
-// Logos de l'article
-//
+	// Logos de l'article
 
-$arton = "arton$id_article";
-$artoff = "artoff$id_article";
-$arton_ok = get_image($arton);
-if ($arton_ok) $artoff_ok = get_image($artoff);
+	$arton = "arton$id_article";
+	$artoff = "artoff$id_article";
+	$arton_ok = get_image($arton);
+	if ($arton_ok) $artoff_ok = get_image($artoff);
 
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND ($options == 'avancees' OR $arton_ok)) {
+	if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $arton_ok) {
 		echo "<p>";
-		debut_cadre_relief();
-
-	afficher_boite_logo($arton, "LOGO DE L'ARTICLE".aide ("logoart"));
-	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
-		echo "<p>";
+		afficher_boite_logo($arton, "LOGO DE L'ARTICLE".aide ("logoart"));
+		echo "<br>";
 		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
 	}
-	
-	fin_cadre_relief();
-	
-}
+
+	echo "<br>";
 
 
-//
-// Accepter forums...
-//
+	// Forums et petitions
 
+	$forums_publics = get_forums_publics($id_article);
 
-$forums_publics = get_forums_publics($id_article);
-
-if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == 'avancees') {
+	debut_cadre_enfonce("forum-interne-24.gif");
 
 	if ($change_accepter_forum) {
-		$query_pet="UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";
-		$result_pet=spip_query($query_pet);
+		$query_forum = "UPDATE spip_articles SET accepter_forum='$change_accepter_forum' WHERE id_article='$id_article'";
+		$result_forum = spip_query($query_forum);
 		$forums_publics = $change_accepter_forum;
 		if ($change_accepter_forum == 'abo') {
 			ecrire_meta('accepter_visiteurs', 'oui');
@@ -398,28 +423,9 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		}
 	}
 
-	if (!$boite_ouverte) {
-		debut_boite_info();
-		$boite_ouverte = true;
-	}
-
-	// boite active ?
-	if ($change_accepter_forum) $visible = true;
-
-	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
-	echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
-	if ($visible)
-		echo bouton_block_visible("forumarticle");
-	else
-		echo bouton_block_invisible("forumarticle");
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><center><b>\n";
 	echo "FORUM PUBLIC";
-	echo "</b></font></td></tr></table></center>";
-
-	if ($visible)
-		echo debut_block_visible("forumarticle");
-	else
-		echo debut_block_invisible("forumarticle");
+	echo "</b></center></font>";
 
 	echo "\n<form action='articles.php3' method='get'>";
 
@@ -454,39 +460,23 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo "<label for='accepterforumnon'> pas de forum</label>";
 	}
 
-	echo "<p align='right'><input type='submit' name='Changer' class='fondo' value='Changer' STYLE='font-size:10px'></p>\n";
+	echo "<div align='right'><input type='submit' name='Changer' class='fondo' value='Changer' STYLE='font-size:10px'></div>\n";
 	echo "</form>";
 
-	echo fin_block();
+	echo "<br>";
+
 	
-	if ($statut_article == 'publie' AND $connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
-		$req = "SELECT count(*) FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')";
-		if ($row = spip_fetch_row(spip_query($req))) {
-			$nb_forums = $row[0];
-			if ($nb_forums) {
-				icone_horizontale("Suivi du forum public&nbsp;: $nb_forums&nbsp;contribution(s)", "articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
-			}
-		}
-	}
-
-	echo "<br>\n";
-
-	//
 	// Petitions
-	//
 
-	//
-	// Resultat formulaire
-	//
 	if ($change_petition) {
 		if ($change_petition == "on") {
 			if (!$email_unique) $email_unique = "non";
 			if (!$site_obli) $site_obli = "non";
 			if (!$site_unique) $site_unique = "non";
 			if (!$message) $message = "non";
-	
+
 			$texte_petition = addslashes($texte_petition);
-	
+
 			$query_pet = "REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) ".
 				"VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')";
 			$result_pet = spip_query($query_pet);
@@ -510,29 +500,10 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		$texte_petition=$row["texte"];
 	}
 
-	// boite petition ouverte ? si changement ou si petition activee :
-	// du coup pas besoin de changer le titre de la boite petition
-	if ($change_petition || $petition)
-		$visible = true;
-	else
-		$visible = false;
-
-	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
-	echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
-	if ($visible)
-		echo bouton_block_visible("petition");
-	else
-		echo bouton_block_invisible("petition");
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><center><b>\n";
 
 	echo "P&Eacute;TITION";
-	echo "</b></font></td></tr></table></center>";
-
-	if ($visible)
-		echo debut_block_visible("petition");
-	else
-		echo debut_block_invisible("petition");
-
+	echo "</b></center></font>";
 
 	echo "\n<FORM ACTION='articles.php3' METHOD='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
@@ -546,7 +517,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 			echo "<p><font size=1><a href='controle_petition.php3?id_article=$id_article'>".$result['nb']." signatures</a></font>\n";
 		}
 
-		echo "<P><FONT SIZE=1>";
+		echo "<p>";
 		if ($email_unique=="oui")
 			echo "<input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
 		else
@@ -567,11 +538,11 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		else
 			echo "<input type='checkbox' name='message' value='oui' id='message'>";
 		echo " <label for='message'>possibilit&eacute; d'envoyer un message</label>";
-		
+
 		echo "<P>Descriptif de la p&eacute;tition&nbsp;:<BR>";
 		echo "<TEXTAREA NAME='texte_petition' CLASS='forml' ROWS='4' COLS='10' wrap=soft>";
 		echo $texte_petition;
-		echo "</TEXTAREA></FONT><P>\n";
+		echo "</TEXTAREA><P>\n";
 
 	}
 	else {
@@ -585,80 +556,54 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 		echo "<br><input type='radio' name='change_petition' value='off' id='petitionoff'>";
 		echo "<label for='petitionoff'>Supprimer la p&eacute;tition</label>";
 	}
-	
+
 	echo "<P align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'>";
 	echo "</FORM>";
-	echo fin_block();
-	echo "<br>\n";
-}
+
+	fin_cadre_enfonce();
+
+	echo "<br>";
 
 
-if ($connect_statut=="0minirezo" AND $options=="avancees"){
-	
+	// Redirection (article virtuel)
+
+	debut_cadre_enfonce("site-24.gif");
+
 	if (substr($chapo, 0, 1) == '=') {
 		$virtuel = substr($chapo, 1, strlen($chapo));
 	}
-	
-	echo "<center><table width='100%' cellpadding='2' border='1' class='hauteur'>\n";
-	echo "<tr><td width='100%' align='left' bgcolor='#FFCC66'>\n";
-	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='#333333'><b>\n";
-	echo bouton_block_invisible("virtuel");
+
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'><center><b>\n";
 	echo "REDIRECTION";
 	echo aide ("artvirt");
-	echo "</b></font></td></tr></table></center>";
-	echo debut_block_invisible("virtuel");
+	echo "</b></center></font>";
 	echo "<form action='articles.php3' method='post'>";
 	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 
-	if (strlen($virtuel) != 0) { 
-		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
-	}
-
-	if (strlen($virtuel) == 0) { 
+	if (!$virtuel) {
 		$virtuel = "http://";
-		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
 	}
+	echo "<INPUT TYPE='text' NAME='virtuel' CLASS='formo' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><br>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 	echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
 	echo "</font>";
 	echo "<div align='right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer' STYLE='font-size:10px'></div>";
 	echo "</form>";
+
+	fin_cadre_enfonce();
+
 	echo fin_block();
-}
-
-
-if ($boite_ouverte) {
-	fin_boite_info();
+	fin_cadre_relief();
 }
 
 
 
+//////////////////////////////////////////////////////
+// Affichage de la colonne de droite
 //
-// Afficher les boutons de creation d'article et de breve
-//
-debut_raccourcis();
-
-icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
-
-if ($connect_statut == '0minirezo') {
-	$retour = urlencode($clean_link->getUrl());
-
-	icone_horizontale("Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
-
-	$articles_mots = lire_meta('articles_mots');
-	if ($articles_mots != "non")
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; et le lier &agrave; cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
-}
-
-
-fin_raccourcis();
-
-
-
 
 debut_droite();
-
 
 
 // qu'est-ce que c'est que ces choses ??
@@ -700,7 +645,7 @@ function afficher_mois($mois){
 
 function afficher_annee($annee){
 	// Cette ligne permettrait de faire des articles sans date de publication
-	// my_sel("0000","n.c.",$annee); 
+	// my_sel("0000","n.c.",$annee);
 
 	if($annee<1996 AND $annee <> 0){
 		echo "<OPTION VALUE='$annee' SELECTED>$annee\n";
@@ -720,12 +665,8 @@ function afficher_jour($jour){
 
 
 
-
-debut_cadre_relief("article-24.gif");
+debut_cadre_relief();
 echo "<CENTER>";
-/*echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
-echo "<TR><td width='100%'>";*/
-
 
 //
 // Titre, surtitre, sous-titre
@@ -825,13 +766,13 @@ echo "<FONT FACE='Georgia,Garamond,Times,serif'>";
 // Affichage date redac et date publi
 //
 
-if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) {
+if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_enfonce();
 
 	echo "<FORM ACTION='articles.php3' METHOD='GET'>";
 	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
-	if ($statut_article == 'publie') {	
+	if ($statut_article == 'publie') {
 		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=1 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		echo aide ("artdate");
@@ -846,7 +787,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "<SELECT NAME='annee' SIZE=1 CLASS='fondl'>";
 		afficher_annee($annee);
 		echo "</SELECT>";
- 		
+
 		echo "</TD><TD ALIGN='right'>";
 		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
 		echo "</TD></TR></TABLE>";
@@ -857,7 +798,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo majuscules(affdate($date))."</font></B></FONT>".aide('artdate')."</TD></TR>";
 		echo "</TABLE>";
 	}
-	
+
 	if (($options == 'avancees' AND $articles_redac != 'non') OR ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00')) {
 		echo '<p><table cellpadding="5" cellspacing="0" border="0" width="100%">';
 		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="1" color="#000000" face="Verdana,Arial,Helvetica,sans-serif">';
@@ -894,7 +835,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 	fin_cadre_enfonce();
 }
 
-if (!$flag_editable AND $statut_article == 'publie') {
+else if ($statut_article == 'publie') {
 	echo "<CENTER>".affdate($date)."</CENTER><P>";
 }
 
