@@ -37,7 +37,7 @@ if ($GLOBALS['set_partie_cal']) {
 # avec des suffixes identiques pour les memes fonctionnalites des 3 types
 
 global $bleu, $vert, $jaune;
-$style = "style='width: 14px; height: 7px; border: 0px'";
+$style = "class='calendrier-icone'";
 $bleu = http_img_pack("m_envoi_bleu$spip_lang_rtl.gif", 'B', $style);
 $vert = http_img_pack("m_envoi$spip_lang_rtl.gif", 'V', $style);
 $jaune= http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', $style);
@@ -709,31 +709,21 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 	$mois_t = $today["mon"];
 	$annee_t = $today["year"];
 	$total = '';
-	$style =  (!_DIR_RESTREINT ? 'padding: 5px;' :
-		   ("position: absolute; z-index: 2; top: 10px; left: "
-		    . round($largeur/2) . "px"));
 	foreach($intitul as $k => $v) {
 		$d = $v['date'];
-		$arbrev = (!($articles[$d] OR $breves[$d]) ? '' :
-			   ("<div style='$style'>" .
-			    http_calendrier_articles_et_breves($articles[$d], $breves[$d]) .
-			    "</div>"));
-		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>
-			<div style='background-color: " . 
-			(($v['index'] == 0) ? $couleur_claire :
-			(($v['jour'] == $jour_t AND 
-			$v['mois'] == $mois_t AND
-			$v['annee'] == $annee_t) ? "white;" :
-			"#eeeeee;")) .
-			"'>" .
-			"\n<div style='position: relative; color: #999999; width: 100%; " .
-			"border-$spip_lang_left: 1px solid $couleur_claire; " .
-			"border-bottom: 1px solid $couleur_claire; " .
-			"height: ${dimjour}px; " .
-			"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;'>" .
-			http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $evenements[$d], $d) . 
-						 (!_DIR_RESTREINT ? "</div></div>$arbrev" : "$arbrev</div></div>") .
-  			"\n</td>";
+		$total .= "\n<td style='width: 14%; height: 100px;  vertical-align: top'>" .
+		  http_calendrier_jour_trois(http_calendrier_jour_ics($debut,$fin,$largeur, 'calendrier_div_style', $echelle, $evenements[$d], $d), 
+					     $articles[$d], $breves[$d], 0,
+					     (($v['index'] == 0) ? 
+					      $couleur_claire :
+					      (($v['jour'] == $jour_t AND 
+						$v['mois'] == $mois_t AND
+						$v['annee'] == $annee_t) ? 
+					       "white;" :
+					       "#eeeeee;")),
+					     $dimjour, $fontsize, $couleur_claire) 
+ . 
+			"\n</td>";
 	}
 	return 
 	"<table border='0' cellspacing='0' cellpadding='0' width='100%'>" .
@@ -885,21 +875,35 @@ function http_calendrier_image_et_typo($evenements)
   return $res;
 }
 
-# liste les articles & les breves
+# une colonne de rdv, d'articles et de breves
+# si la largeur le permet, les deux derniers se placent a cote des rdv, sinon en dessous
 
-function http_calendrier_articles_et_breves($articles, $breves)
+function http_calendrier_jour_trois($rdv, $articles, $breves, $style, $couleur, $dimjour, $fontsize, $border)
 {
-  if ($articles)
-    {
-      $res1 = "<div><b class='calendrier-verdana10'>"._T('info_articles')."</b></div>" .
-	http_calendrier_ics(http_calendrier_image_et_typo($articles));
+	global $spip_lang_left,  $couleur_claire; 
+
+	if ($articles OR $breves) {
+	  $pos = ((_DIR_RESTREINT || $style) ? 0 : $dimjour);
+	  $res = "<div style='position: relative; z-index: 2; top: ${pos}px; $spip_lang_left: " . ($style + (3*$fontsize)) . "px'>" .
+	    (!$articles ? '' :
+	     ("<div  style='font-weight: bold'>"._T('info_articles')."</div>" .
+	      http_calendrier_ics(http_calendrier_image_et_typo($articles)))) .
+	    (!$breves ?  '' :
+	     ("<div style='font-weight: bold'>"._T('info_breves_02')."</div>" .
+	      http_calendrier_ics(http_calendrier_image_et_typo($breves)))) .
+	    "</div>";
 	}
-  if ($breves)
-    {
-      $res2 = "<div><b class='calendrier-verdana10'>"._T('info_breves_02')."</b></div>" .
-	http_calendrier_ics(http_calendrier_image_et_typo($breves));
-    }
-  return "$res1$res2";
+	return  "<div class='calendrier-verdana10'
+style='background-color: $couleur;
+position: relative; color: #999999; 
+height: ${dimjour}px;
+font-size: ${fontsize}px;" .
+ (!$border ? 
+"border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa;
+border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;" :
+  "border-$spip_lang_left: 1px solid $border; border-bottom: 1px solid $border;") . 
+"'>$rdv$res
+</div>" ;
 }
 
 # Affiche une grille horaire 
@@ -1240,23 +1244,8 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $partie_cal, 
 
 	return  (_DIR_RESTREINT ? '' : 
 		 http_calendrier_entete($script,$large,$jour,$mois,$annee)) .
-		"\n<div style='position: relative; color: #666666; " .
-		"height: ${dimjour}px; " .
-		"font-family: Arial, Sans, sans-serif; font-size: ${fontsize}px;".
-		' border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;' .
-		"'>"
-	  . http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 
-				     'http_calendrier_message',
-				     $echelle,
-				     $messages[$j],
-				     $j) .
-	  ((!($articles[$j] OR $breves[$j])) ? '' :
-	   ("<div style='position: absolute; z-index: 2; $spip_lang_left: "
-	    . ($largeur - $padding + 35)
-	    . "px; top: 0px;'>"
-	    . http_calendrier_articles_et_breves($articles[$j], $breves[$j])
-	    . '</div>')) .
-	  "\n</div>";
+	  http_calendrier_jour_trois(http_calendrier_jour_ics($debut_cal,$fin_cal,$largeur, 'http_calendrier_message', $echelle, $messages[$j], $j), $articles[$j], $breves[$j],
+	  ($largeur + $fontsize), 'white', $dimjour, $fontsize, '');
 }
 
 
