@@ -1,3 +1,3 @@
 <?  // test cvs version auto 
-	echo "$Id$";
+	echo ereg_replace('$Name$]+)$', '\1', '$Name$');
 ?>
