@@ -4,7 +4,7 @@
       <input type='hidden' name='alea' value="[(#HTTP_VARS{alea})]" />
       <input type='hidden' name='hash' value="[(#HTTP_VARS{hash})]" />
       <input type='hidden' name='retour' value="[(#HTTP_VARS{retour})]" />
-      [(#HTTP_VARS{modere})<p>]
+      [(#HTTP_VARS*{modere})<p>]
       [(#HTTP_VARS*{afficher_non})]
       [(#HTTP_VARS*{previsu})
       <fieldset class='spip_encadrer'>
