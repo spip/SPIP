@@ -85,7 +85,7 @@ function calculer_boucle($id_boucle, &$boucles)
 	   ("\n\t\t\$doublons['$type_boucle'] .= ','. " .
 	    index_pile($id_boucle, $primary_key, $boucles) .
 	    ";")) ;
-	  $corps = $debut .
+	  $corps = $debut . $corps .
 	  ((!$boucle->separateur) ? 
 	   (($constant && !$debut) ? $return : ("\n\t\t" . '$t0 .= ' . $return . ";")) :
 	   ("\n\t\t" . '$t1 = ' . $return . ";\n\t\t" .
