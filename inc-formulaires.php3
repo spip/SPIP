@@ -37,7 +37,7 @@ function test_login($mail) {
 
 function erreur($zetexte){
 	global $spip_lang_rtl;
- 	return "<BR><IMG SRC='puce$spip_lang_rtl.gif' BORDER=0> $zetexte";
+ 	return "<br /><img src='puce$spip_lang_rtl.gif' border='0' alt='-' /> $zetexte";
 }
 
 
@@ -233,7 +233,7 @@ function formulaire_signature($id_article) {
 			$url = lire_meta("adresse_site").'/'.$link->getUrl();
 			$link = new Link;
 			$link->addVar('url_page', $url);
-			echo $link->getForm('POST', "sp$id_article");
+			echo $link->getForm('post', "sp$id_article");
 
 			echo propre($texte_petition);
 
@@ -436,7 +436,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 			$erreur .= erreur(_T('form_prop_message_envoye'));
 			$affiche_formulaire = false;
 		} else { //preview
-			echo "<p><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
+			echo "<br /><div class='spip_encadrer'>Sujet : <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
 			if ($flag_wordwrap)
 				$GLOBALS['texte_message_auteur'.$id_auteur] = wordwrap($GLOBALS['texte_message_auteur'.$id_auteur]);
 			echo "<pre>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</pre>";
@@ -446,26 +446,26 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 			$link->addVar('sujet_message_auteur'.$id_auteur, $GLOBALS['sujet_message_auteur'.$id_auteur]);
 			$link->addVar('texte_message_auteur'.$id_auteur, $GLOBALS['texte_message_auteur'.$id_auteur]);
 			$link->addVar('valide_message_auteur'.$id_auteur, 'oui');
-			echo $link->getForm('POST');
-			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\""._T('form_prop_confirmer_envoi')."\">";
-			echo "</DIV></FORM>";
+			echo $link->getForm('post');
+			echo "<div align=\"right\"><input type=\"submit\" name=\"Confirmer\" class=\"spip_bouton\" value=\""._T('form_prop_confirmer_envoi')."\" />";
+			echo "</div></form>";
 		}
 	}
 
 	if ($erreur)
-		echo "<P><div class='spip_encadrer'><B>$erreur<BR>&nbsp;</B></div></P>\n";
+		echo "<div class='spip_encadrer'><b>$erreur<br />&nbsp;</b></div>\n";
 
 	if ($affiche_formulaire) {
 		$retour = $GLOBALS['REQUEST_URI'];
 		$link = $GLOBALS['clean_link'];
-		echo $link->getForm('POST');
-		echo "<div class='spip_encadrer'><P><B>"._T('form_pet_votre_email')."</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur$id_auteur\" VALUE=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\">\n";
-		echo  "<P><B>"._T('form_prop_sujet')."</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur$id_auteur\" VALUE=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\">\n";
-		echo  "<P><TEXTAREA NAME='texte_message_auteur$id_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></div>\n";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\""._T('form_prop_envoyer')."\">";
-		echo  "</DIV></FORM>";
+		echo $link->getForm('post');
+		echo "<div class='spip_encadrer'><b>"._T('form_pet_votre_email')."</b><br />";
+		echo  "<input type=\"text\" class=\"forml\" name=\"email_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['email_message_auteur'.$id_auteur])."\" SIZE=\"30\" />\n";
+		echo  "<p><b>"._t('form_prop_sujet')."</b><br />";
+		echo  "<input type=\"text\" class=\"forml\" name=\"sujet_message_auteur$id_auteur\" value=\"".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."\" SIZE=\"30\" /></p>\n";
+		echo  "<p><textarea name='texte_message_auteur$id_auteur' rows='10' class='forml' cols='40' wrap=soft>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</textarea></div>\n";
+		echo  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('form_prop_envoyer')."\" />";
+		echo  "</div></form>";
 	}
 }
 

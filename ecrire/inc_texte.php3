@@ -41,7 +41,7 @@ tester_variable('url_glossaire_externe', "http://".lire_meta('langue_site').".wi
 
 if (file_exists("puce$spip_lang_rtl.gif")) {
 	$imgsize = getimagesize("puce$spip_lang_rtl.gif");
-	tester_variable('puce', "<img src='puce$spip_lang_rtl.gif' align='top' alt='- ' ".$imgsize[3]." border='0'>");
+	tester_variable('puce', "<img src='puce$spip_lang_rtl.gif' align='top' alt='- ' ".$imgsize[3]." border='0' />");
 }
 else {
 	tester_variable('puce', "-");
