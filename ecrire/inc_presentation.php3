@@ -809,8 +809,7 @@ function bouton($titre,$lien) {
 //
 
 function debut_html($titre = "") {
-	global $couleur_foncee;
-	global $couleur_claire;
+	global $couleur_foncee, $couleur_claire, $couleur_lien;
 	$nom_site_spip = htmlspecialchars(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
@@ -848,7 +847,7 @@ function debut_html($titre = "") {
 	.iconeimpoff {padding: 3px; margin: 1px; border: 1px dashed <? echo $couleur_foncee; ?>; background-color: #e4e4e4}
 	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;}
 
-	a { text-decoration: none; }
+	a { color:<?php echo $couleur_lien; ?> text-decoration: none; }
 	a:hover { color:#FF9900; text-decoration: underline; }
 	a.icone { text-decoration: none; }
 	a.icone:hover { text-decoration: none; }
@@ -917,7 +916,7 @@ afficher_script_layer();
 //-->
 </script>
 </head>
-<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="#E86519" vlink="#6E003A" alink="#FF9900"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="<?php echo $couleur_lien; ?>" vlink="<?php echo $couleur_foncee; ?>" alink="<?php echo $couleur_lien ?>"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
 <?php
 
@@ -1303,7 +1302,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		$requete_fichier = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
 	}
 	$lien = ereg_replace("\&set_options=(basiques|avancees)", "", $requete_fichier);
-	$lien = ereg_replace("\&set_couleur=[0-9]", "", $lien);
+	$lien = ereg_replace("\&set_couleur=[0-9]+", "", $lien);
 	$lien = ereg_replace("\&set_disp=[0-9]", "", $lien);
 	if (!ereg('\?', $lien)) $lien .= '?';
 
