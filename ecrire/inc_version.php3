@@ -218,6 +218,12 @@ feed_post_files('HTTP_POST_FILES');
 function spip_setcookie ($name='', $value='', $expire='', $path='', $domain='', $secure='') {
 	$name = ereg_replace ('^spip', $GLOBALS['cookie_prefix'], $name);
 	
+	// patch safari beta 51
+    if (!$path AND eregi("Safari", $GLOBALS['HTTP_USER_AGENT'])) {  
+        $path = "/";
+        $expire = time()+36000;
+    }
+
 	if ($secure)
 		@setcookie ($name, $value, $expire, $path, $domain, $secure);
 	else if ($domain)

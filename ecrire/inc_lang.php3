@@ -69,7 +69,7 @@ function traduire_chaine($text, $args) {
 // Initialisation
 //
 $GLOBALS['langues_ok'] = 'fr';
-$GLOBALS['langues_tests'] = 'zg,ar';
+$GLOBALS['langues_tests'] = 'ro,en,eo,es,ar,br';
 $GLOBALS['all_langs'] = $GLOBALS['langues_ok'].",".$GLOBALS['langues_tests'];
 
 $GLOBALS['spip_lang'] = 'zg';
