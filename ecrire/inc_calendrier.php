@@ -5,6 +5,7 @@
 if (defined("_ECRIRE_INC_CALENDRIER")) return;
 define("_ECRIRE_INC_CALENDRIER", "1");
 
+define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
 
 // Ecrire cookies
 
@@ -71,14 +72,15 @@ function http_calendrier_ics($evenements, $amj = "")
 				$fin_m = substr($evenement['DTEND'],-4,2);
 
 				$desc = propre($evenement['DESCRIPTION']);
-				if ($desc) $desc = ("<span class='verdana1'>$desc</span>");
 				$sum = $evenement['SUMMARY'];
 				if (($sum) && ($sum[0] != '<'))
 				{
 					$sum = "<span style='color: black'>" .
 						ereg_replace(' +','&nbsp;', typo($sum)) .
 						"</span>";
-				}
+
+				} else {
+				  if ($desc) $sum .= " <span class='verdana1'>$desc</span>"; }
 				if ($deb_h >0 OR $deb_m > 0) {
 					if ((($deb_h > 0) OR ($deb_m > 0)) AND $amj == $jour_debut)
 						{ $deb = '<b>' . $deb_h . ':' . $deb_m . '</b> ';}
@@ -119,7 +121,7 @@ function http_calendrier_ics($evenements, $amj = "")
 				$res .=
 					"\n<div style='$c'>" .
 					$date_affichee .
-					(!$url ? "$sum $desc" : http_calendrier_href($url, "$sum $desc")) .
+				  (!$url ? "$sum $desc" : http_calendrier_href($url, $sum, $desc)) .
 					"\n</div>\n"; 
 			}
 		}
@@ -559,12 +561,24 @@ function http_calendrier_clics($annee, $mois, $jour, $clic)
 # dispose les evenements d'une semaine
 
 function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
-	$debut, $fin, $echelle,
 	$articles, $breves, $evenements, 
 	$script, $nav)
 {
-	global $couleur_claire, $couleur_foncee, $spip_ecran, $spip_lang_left;
+  global $couleur_claire, $couleur_foncee, $spip_ecran, $spip_lang_left,$partie_cal;
 
+  $echelle = $GLOBALS['echelle'];
+	
+	if ($partie_cal == "soir") {
+		$debut = 12;
+		$fin = 23;
+	} else if ($partie_cal == "matin") {
+		$debut = 4;
+		$fin = 15;
+	} else {
+		$debut = 7;
+		$fin =20;
+	}
+	
 	if ($spip_ecran == "large") $largeur = 90;
 	else $largeur = 60;
 
@@ -603,6 +617,7 @@ function http_calendrier_suite_heures($jour_today,$mois_today,$annee_today,
 
 	list($dimheure, $dimjour, $fontsize, $padding) =
 	calendrier_echelle($debut, $fin, $echelle);
+
 	$today=getdate(time());
 	$jour_t = $today["mday"];
 	$mois_t = $today["mon"];
@@ -946,12 +961,16 @@ list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin
 			if ($bas > $bas_prec) $bas_prec = $bas;
 			$url = $evenement['URL']; 
 			$desc = propre($evenement['DESCRIPTION']);
-			if ($desc) $desc = ("<span style='color: black'>$desc</span>");
 			$sum = ereg_replace(' +','&nbsp;', typo($evenement['SUMMARY']));
+			if (!$sum) { $sum = $desc; $desc = '';}
 			if ($sum)
-				$sum = "<span style='font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;'><b>$sum</b></span>".
-				($desc ? "<br />" : '');
-			$contenu = "$sum $desc";
+			  $sum = "<span style='font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;'><b>$sum</b></span>";
+			if ($largeur > 90) {
+			  if ($desc)
+			    $sum .=  "<br /><span style='color: black'>$desc</span>" . (!$evenement['ATTENDEE'] ? '' : ("<br />" . $evenement['ATTENDEE']));
+			}
+			else 
+			  $desc .= " " . $evenement['ATTENDEE'];
 			$colors = $detcolor($evenement);
 			if ($colors)
 			{
@@ -983,17 +1002,15 @@ list($dimheure, $dimjour, $fontsize, $padding) = calendrier_echelle($debut, $fin
 				"; $bordure $fcolor;'
 				onmouseover=\"this.style.zIndex=" . $tous . "\"
 				onmouseout=\"this.style.zIndex=" . $i . "\">" .
-				((!$url) ? 
-					$contenu :
-					http_calendrier_href($url, $contenu, '',"color: $fcolor")) . 
-					((!$evenement['LOCATION']) ? '' : 
-						("<br />" . $evenement['LOCATION'])) .
-						((!$evenement['ATTENDEE']) ? '' : 
-							("<br />" . $evenement['ATTENDEE'])) .
+			  ((!$url) ? 
+					$sum :
+				 http_calendrier_href($url, $sum, $desc,"color: $fcolor")) . 
+			  ((!$evenement['LOCATION']) ? '' : 
+			   ("<br />" . $evenement['LOCATION'])) .
 				"</div>";
 			}
 		}
-		}
+    }
 	return
 		http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize) .
 			$total ;
@@ -1045,19 +1062,6 @@ function http_calendrier_journee($jour_today,$mois_today,$annee_today, $date){
 function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 {
 	global $spip_ecran, $spip_lang_left, $couleur_claire;	
-	global $partie_cal;
-	
-	if ($partie_cal == "soir") {
-		$debut_cal = 12;
-		$fin_cal = 23;
-	} else if ($partie_cal == "matin") {
-		$debut_cal = 4;
-		$fin_cal = 15;
-	} else {
-		$debut_cal = 7;
-		$fin_cal =20;
-	}
-	
 	
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
@@ -1085,9 +1089,7 @@ function http_calendrier_semaine($jour_today,$mois_today,$annee_today)
 		"<div>&nbsp;</div>" .
 		"<table cellpadding=0 cellspacing=0 border=0 width='$largeur_table'><tr>" .
 		"<td width='$largeur_table' valign='top'>" .
-		http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, $debut_cal,$fin_cal,
-			$GLOBALS['echelle'],
-			$articles, $breves, $messages,
+		http_calendrier_suite_heures($jour_today,$mois_today,$annee_today, 			$articles, $breves, $messages,
 			'calendrier.php3',
 			'') .
 		"</td></tr></table>" .
@@ -1115,8 +1117,6 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 		$debut_cal = 7;
 		$fin_cal =20;
 	}
-	
-	
 
 	$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
 	$jour = journum($date);
@@ -1187,6 +1187,7 @@ function http_calendrier_jour($jour,$mois,$annee,$large = "large", $le_message =
 	  calendrier_echelle($debut_cal, $fin_cal, $echelle);
 	// faute de fermeture en PHP...
 	$calendrier_message_fermeture = $le_message;
+
 	return
 	  $entete .
     "\n<div style='position: relative; color: #666666; " .
@@ -1320,11 +1321,15 @@ function http_calendrier_href($href, $clic, $title='', $style='', $class='') {
 		str_replace('&', '&amp;', $href) .
 		'"' . # class="forum-repondre-message"' .
 		(!$style ? '' : (" style=\"" . $style . "\"")) .
-		(!$title ? '' : (" title=\"" . $title . "\"")) .
+		(!$title ? '' : (" title=\"" . supprimer_tags($title)."\"")) .
 		(!$class ? '' : (" class=\"" . $class . "\"")) .
 		'>' .
 		$clic .
 		'</a>';
+}
+
+function http_calendrier_title($echelle, $href, $clic, $title='', $style='', $class='') {
+  if ($echelle);
 }
 
 
@@ -1551,10 +1556,6 @@ function sql_calendrier_agenda ($mois, $annee) {
 
 function sql_calendrier_jour_ical($d) 
 {return  substr($d, 0, 4) . substr($d, 5, 2) .substr($d, 8, 2);}
-
-
-
-define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
 # et retourne un tableau compose
