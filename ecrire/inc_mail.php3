@@ -142,7 +142,7 @@ function envoyer_mail_proposition($id_article) {
 			$sujet = "[$nom_site_spip] Propose : $titre";
 			$courr = "Article propos".chr(233)."\n---------------\n\n";
 			$courr .= "L'article \"$titre\" est propos".chr(233)." ".chr(224)." la publication.\n";
-			$courr .= "Vous êtes invit".chr(233)." ".chr(224)." venir le consulter et ".chr(224)." donner votre opinion\n";
+			$courr .= "Vous ".chr(234)."tes invit".chr(233)." ".chr(224)." venir le consulter et ".chr(224)." donner votre opinion\n";
 			$courr .= "dans le forum qui lui est attach".chr(233).". Il est disponible ".chr(224)." l'adresse :\n";
 			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
 			$courr .= extrait_article($row);

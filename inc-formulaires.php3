@@ -197,7 +197,7 @@ function formulaire_signature($id_article) {
 				$messagex .= "    Site: $nom_site - $url_site\n\nIMPORTANT...\n";
 				$messagex .= "Pour valider votre signature, il suffit de vous connecter &agrave;\n";
 				$messagex .= "l'adresse ci-dessous ; dans le cas contraire, votre demande\n";
-				$messagex .= "sera rejetée :\n";
+				$messagex .= "sera rejet&eacute;e :\n";
 				$messagex .= "  (To confirm your signature, please follow this link, or\n";
 				$messagex .= "  your request will be discarded)\n\n";
 				$messagex .= "    $url\n\nMerci de votre participation\n  (Thank you!)\n\n";
