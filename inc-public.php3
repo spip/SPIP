@@ -129,9 +129,12 @@ else {
 	}
 	if ($calculer_cache) {
 		include_local ("inc-calcul.php3");
-		$file = fopen($chemin_cache, "wb");
-		fwrite($file, calculer_page($fond));
-		fclose($file);
+		$page = calculer_page($fond);
+		if ($page) {
+			$file = fopen($chemin_cache, "wb");
+			fwrite($file, $page);
+			fclose($file);
+		}
 	}
 }
 
