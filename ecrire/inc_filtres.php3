@@ -127,7 +127,21 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 		'&gt;' => ">"
 	);
 
-	return strtr($texte,$trans); 
+	return strtr2 ($texte, $trans);
+}
+
+// strtr (string $texte, array $trans) = emuler le php4
+function strtr2 ($texte, $trans) {
+	global $flag_strtr2;
+
+	if ($flag_strtr2)
+		return strtr($texte,$trans); 
+	else {
+		reset ($trans);
+		while (list($entite, $remplace) = each ($trans))
+			$texte = ereg_replace($entite, $remplace, $texte);
+		return $texte;
+	}
 } 
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")

@@ -8,7 +8,7 @@
 
 unset($mail_nouveautes);
 
-$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]]'." Les nouveaut\xe9s";
+$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] Les nouveaut&eacute;s';
 
 //
 // Articles
@@ -37,7 +37,7 @@ $mail_nouveautes = '
 $mail_nouveautes .= '
 
           ----------------
-          NOUVELLES BREVES
+          NOUVELLES BR&Egrave;VES
           ----------------
 
 ';
@@ -56,9 +56,9 @@ if ($mail_nouveautes) {
 		$mail_nouveautes = 'Bonjour,
 
 voici la lettre d\'information du site "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP),
-qui recense les articles et'." les br\xe8ves publi\xe9s depuis $jours_neuf jours.
+qui recense les articles et les br&agrave;ves publi&eacute;s depuis '.$jours_neuf.' jours.
 
-" . $mail_nouveautes;
+' . $mail_nouveautes;
 	}
 
 ?>

@@ -1,0 +1,107 @@
+<html lang="fr">
+<!--
+// ACCESSIBILITE
+// la page /oo offre une lecture en mode "texte seul"
+// des 3 articles les plus recents.
+-->
+<head>
+	<title>
+		#NOM_SITE_SPIP
+	</title>
+	<META http-equiv="Content-Type" content="text/html; charset=iso8859-1">
+	<META http-equiv="AUTHOR" content="#NOM_SITE_SPIP">
+	<META http-equiv="DESCRIPTION" content="Edition en mode texte de la une de #NOM_SITE_SPIP, destinee a faciliter la lecture avec un navigateur en mode texte.">
+</head>
+<body>
+	<hr>
+	&Eacute;dition en mode texte de <a href="#URL_SITE_SPIP">{#NOM_SITE_SPIP}</A><BR>
+	<a href="#about">&Aacute; propos de cette page</a>
+	<hr>
+	<b><u>Sommaire de la page :</u></b>
+
+	<B_sarticles>
+	<h2>Articles</h2>
+	<ul>
+		<BOUCLE_sarticles(ARTICLES){0,3}{par date}{inverse}>
+			<li><a href="#ar#ID_ARTICLE">#TITRE</A>
+		</BOUCLE_sarticles>
+	</ul>
+	</B_sarticles>
+
+	<B_sbreves>
+	<h2>Br&egrave;ves</h2>
+	<ul>
+		<BOUCLE_sbreves(BREVES){0,5}{par date}{inverse}>
+			<li><a href="#br#ID_BREVE">#TITRE</A>
+		</BOUCLE_sbreves>
+	</ul>
+	</B_sbreves>
+
+
+	<B_articles>
+	<H1>Articles r&eacute;cents</H1>
+
+	<BOUCLE_articles(ARTICLES){0,3}{par date}{inverse}>
+		<a name="ar#ID_ARTICLE">
+		<BOUCLE_RUB_AR(RUBRIQUES){ID_RUBRIQUE}>
+			Rubrique : <A href="#URL_RUBRIQUE">{#TITRE}</A>
+		</BOUCLE_RUB_AR>
+
+		[<H2>(#SURTITRE|majuscules)</H2>]
+		<H2>#TITRE</H2>
+		<H3>#SOUSTITRE</H3>
+		[Le (#DATE|nom_jour) ] [(#DATE|affdate)]
+		[par (#LESAUTEURS)]
+		<P>
+		[(#CHAPO)]
+		<p>
+		[(#TEXTE)]
+
+		
+		<P><a href="#URL_ARTICLE">{Consulter}</A> l'article avec son forum. 
+
+		
+		<HR>
+	</BOUCLE_articles>
+
+	<B_breves>
+	<H1>Derni&egrave;res br&egrave;ves</H1>
+
+	<BOUCLE_breves(BREVES){0,5}{par date}{inverse}>
+		<a name="br#ID_BREVE">
+		<BOUCLE_RUB_BR(RUBRIQUES){ID_RUBRIQUE}>
+			Rubrique : <A href="#URL_RUBRIQUE">{#TITRE}</A>
+		</BOUCLE_RUB_BR>
+		<H2>#TITRE</H2>
+		[Le (#DATE|nom_jour) ] [(#DATE|affdate)]
+		<p>
+		[(#TEXTE)]
+		[<P>Voir en ligne : <A HREF="(#URL_SITE)">#NOM_SITE</A>]
+		<P><a href="#URL_BREVE">{Consulter}</A> la br&egrave;ve avec son forum. 
+	<HR>
+	</BOUCLE_breves>
+	[<H1>NOTES :</H1>
+	<p class="spip_note">(#NOTES)]
+	
+	<HR>
+	<A name="about">
+	<H1>
+		#NOM_SITE_SPIP, &agrave; propos de la page /oo/ ...
+	</H1>
+	&Eacute;dition en mode texte de <a href="#URL_SITE_SPIP">{#NOM_SITE_SPIP}</A><BR>
+
+	<P>Cette page vise &agrave; am&eacute;liorer le confort de lecture des internautes qui ne disposent que d'un terminal en mode texte (VT, tablette braille, synth&eacute;tiseur vocal...) ou d'une connexion &agrave; tr&egrave;s bas d&eacute;bit.
+
+	<P>Vous trouverez en permanence sur #URL_SITE_SPIP/oo/ le texte int&eacute;gral des trois derniers articles publi&eacute;s, ainsi que les cinq derni&egrave;res br&egrave;ves.
+
+	<P>Les liens de cette page qui figurent entre {accolades} renvoient vers des pages du site principal, utilisant une maquette graphique et non pas uniquement texte. 
+
+	[<p>Rechercher sur ce site : (#FORMULAIRE_RECHERCHE|recherche.php3)</p>]
+	<table><tr>
+		<td><A href="http://www.uzine.net/spip">{Site r&eacute;alis&eacute; avec le logiciel SPIP}</td>
+		[<td><A href="#URL_SITE_SPIP">{(#NOM_SITE_SPIP|majuscules)}</A></td>]
+		<td><a href="#URL_SITE_SPIP/plan.html">{PLAN DU SITE}</A></td>
+	</tr></table>
+
+</body>
+</html>

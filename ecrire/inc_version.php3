@@ -60,6 +60,7 @@ $flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
 $flag_uniqid2 = ($php_version_maj > 3 OR $php_version_min >= 13);
 $flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
 $flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
+$flag_strtr2 = ($php_version_maj > 3);
 
 if ($flag_function_exists) {
 	$flag_ini_get = (function_exists("ini_get")
