@@ -168,9 +168,9 @@ function spip_cron() {
 	}
 
 	//
-	// Gerer l'indexation
+	// Gerer l'indexation quand on appelle de l'espace public
 	//
-	if (lire_meta('activer_moteur') == 'oui') {
+	if (_DIR_RESTREINT && lire_meta('activer_moteur') == 'oui') {
 		if (timeout('indexation')) {
 			include_ecrire("inc_index.php3");
 			effectuer_une_indexation();
