@@ -226,6 +226,16 @@ function calcul_branche ($generation) {
 	}
 }
 
+# fonction appelée par la balise #NOTES
+
+function calcule_notes()
+{
+  $r = $GLOBALS["les_notes"];
+  $GLOBALS["les_notes"] = "";
+  $GLOBALS["compt_note"] = 0;
+  $GLOBALS["marqueur_notes"] ++;
+  return $r;
+}
 
 # retourne la profondeur d'une rubrique
 
