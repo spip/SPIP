@@ -226,6 +226,11 @@ function calcul_branche ($generation) {
 	}
 }
 
+function calcule_document($id_document, $doubdoc, &$doublons){
+  if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
+  return (array(integre_image($id_document, '', 'fichier_vignette'), ''));
+}
+
 
 # fonction appelée par la balise #EMBED
 
