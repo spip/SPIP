@@ -21,15 +21,15 @@ debut_boite_info();
 
 echo _T('info_gauche_messagerie');
 
-echo "<p>"."<IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_vert');
+echo "<p>"."<IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_vert');
 
 echo aide ("messut");
 
-echo "<p>"."<IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_bleu');
+echo "<p>"."<IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_bleu');
 
 echo aide ("messpense");
 
-echo "<p>"."<IMG SRC='img_pack/m_envoi_jaune.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_jaune');
+echo "<p>"."<IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_symbole_jaune');
 
 
 fin_boite_info();
@@ -41,6 +41,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 	global $messages_vus;
 	global $connect_id_auteur;
 	global $couleur_claire;
+	global $spip_lang_rtl;
 
 	// Interdire l'affichage de message en double
 	if ($messages_vus) {
@@ -84,17 +85,17 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 			switch ($type) {
 			case 'pb' :
-				$puce = 'm_envoi_bleu.gif';
+				$puce = 'm_envoi_bleu$spip_lang_rtl.gif';
 				break;
 			case 'memo' :
-				$puce = 'm_envoi_jaune.gif';
+				$puce = 'm_envoi_jaune$spip_lang_rtl.gif';
 				break;
 			case 'affich' :
-				$puce = 'm_envoi_jaune.gif';
+				$puce = 'm_envoi_jaune$spip_lang_rtl.gif';
 				break;
 			case 'normal':
 			default:
-				$puce = 'm_envoi.gif';
+				$puce = 'm_envoi$spip_lang_rtl.gif';
 				break;
 			}
 				
@@ -178,7 +179,7 @@ afficher_messages(_T('info_pense_bete_ancien'), $query_message, false, false, fa
 
 if ($connect_statut == '0minirezo') {
 	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";
-	afficher_messages(_T('info_tous_redacteur')." <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' width='14' height='7' border='0'> "._T('bouton_ajouter')."</a></font>", $query_message, false, false, false, true);
+	afficher_messages(_T('info_tous_redacteur')." <font size=1>&nbsp;&nbsp;&nbsp;<a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' width='14' height='7' border='0'> "._T('bouton_ajouter')."</a></font>", $query_message, false, false, false, true);
 }
 else {
 	$query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich'";

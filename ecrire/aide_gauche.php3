@@ -23,10 +23,10 @@ utiliser_langue_visiteur();
 </style>
 </HEAD>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
-
-
-<?php
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0"<?php
+	if ($spip_lang_rtl)
+		echo " dir='rtl'";
+echo ">";
 
 function rubrique($titre, $statut = "redac") {
 	global $aide;
@@ -66,7 +66,7 @@ function article($titre, $lien, $statut = "redac") {
 	global $afficher;
 	global $les_rub;
 	global $aide_statut;
-
+	global $spip_lang_rtl;
 
 	if (($statut == "admin" AND $aide_statut == "admin") OR ($statut == "redac")) {
 		$ligne++;
@@ -75,10 +75,10 @@ function article($titre, $lien, $statut = "redac") {
 		
 		if ($aide==$lien) {
 			$afficher[$larubrique]=1;
-			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> <IMG SRC='img_pack/triangle.gif' BORDER=0 ALIGN='middle'></TD></TR>";
+			$texte[$ligne]= "<TR><TD BGCOLOR='#DDDDDD' ALIGN='right' COLSPAN=2><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2>$titre</font> <IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0 ALIGN='middle'></TD></TR>";
 		}
 		else {
-			$texte[$ligne]= "<TR><TD><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><B><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'><IMG SRC='img_pack/triangle.gif' BORDER=0></A></B></font></TD><TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'>$titre</A></font></TD></TR>";
+			$texte[$ligne]= "<TR><TD><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><B><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'><IMG SRC='img_pack/triangle$spip_lang_rtl.gif' BORDER=0></A></B></font></TD><TD BGCOLOR='#FFFFFF'><FONT FACE='Arial,Helvetica,sans-serif' SIZE=2><A HREF='aide_index.php3?aide=$lien&les_rub=$les_rub' TARGET='_top'>$titre</A></font></TD></TR>";
 		}
 	}
 }
@@ -87,7 +87,7 @@ function article($titre, $lien, $statut = "redac") {
 
 ?>
 
-<TABLE WIDTH=100% BORDER=0 CELLPADDING=2 CELLSPACING=0>
+<TABLE WIDTH="100%" BORDER=0 CELLPADDING=2 CELLSPACING=0>
 
 <?php
 

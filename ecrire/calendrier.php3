@@ -30,7 +30,8 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	global $connect_id_auteur, $connect_statut;
 	global $les_articles;
 	global $les_breves;
-	
+	global $spip_lang_rtl;
+
 	// calculer de nouveau la date du jour pour affichage en blanc
 	$ce_jour=date("Y-m-d");
 
@@ -118,9 +119,9 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 
-echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><<<</A></TD>";
-echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$nom_mois $annee_today ".aide ("messcalen")."</B></FONT></TD>";
-echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'>>>></A></TD></TR>";
+	echo "<TR><TD><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><<<</A></TD>";
+	echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>$nom_mois $annee_today ".aide ("messcalen")."</B></FONT></TD>";
+	echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'>>>></A></TD></TR>";
 
 	echo "<TR>";
 	echo "<TD ALIGN='center' BGCOLOR='#044476'><FONT FACE='arial,helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
@@ -141,15 +142,8 @@ echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv
 
 	for ($jour=1; $jour<32;$jour++){
 
-		//$jdc=GregorianToJD($mois_today,$jour,$annee_today);
-		
-		//$jour_semaine=jddayofweek($jdc,0);
-
 		$nom = mktime(1,1,1,$mois_today,$jour,$annee_today);
 		$jour_semaine = numero_jour_semaine(date("D",$nom));
-
-
-
 
 		if (checkdate($mois_today,$jour,$annee_today)){
 			if ("$annee_today-$mois_today-".chiffrespar2($jour)==$ce_jour){
@@ -161,11 +155,11 @@ echo "<TD ALIGN=right><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv
 			$activer_messagerie = lire_meta("activer_messagerie");
 			$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb'><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal'><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=pb'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=normal'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			}
 			if ($connect_statut == "0minirezo")
-				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich'><IMG SRC='img_pack/m_envoi_jaune.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
+				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
 			
 			if (strlen($les_rv["$jour"])>0){
@@ -212,30 +206,24 @@ echo "<BR><BR><BR>";
 
 afficher_mois($jour,chiffrespar2($mois),$annee,$nom_mois);
 
-	if (strlen($les_breves["0"]) > 0 OR $les_articles["0"] > 0){
-			echo "<table width=200 background=''><tr width=200><td><FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
-			echo "<b>"._T('info_mois_courant')."</b>";
-			echo $les_breves["0"];
-			echo $les_articles["0"];
-			
-			echo "</font></td></tr></table>";
-	}
+if (strlen($les_breves["0"]) > 0 OR $les_articles["0"] > 0){
+	echo "<table width=200 background=''><tr width=200><td><FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
+	echo "<b>"._T('info_mois_courant')."</b>";
+	echo $les_breves["0"];
+	echo $les_articles["0"];
+	echo "</font></td></tr></table>";
+}
 	
-	$activer_messagerie = lire_meta("activer_messagerie");
-	$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
-	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
-		echo "<br><br><br><table width='700' background=''><tr width='700'><td><FONT FACE='arial,helvetica,sans-serif' SIZE=2>";
-		echo "<b>"._T('info_aide')."</b>";
-	
-		echo "<br><IMG SRC='img_pack/m_envoi_bleu.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_nouveau_pense_bete')."\n";
-		echo "<br><IMG SRC='img_pack/m_envoi.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_donner_rendez_vous')."\n";
-		
-		echo "</font></td></tr></table>";
-	
-	}
+$activer_messagerie = lire_meta("activer_messagerie");
+$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
+if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
+	echo "<br><br><br><table width='700' background=''><tr width='700'><td><FONT FACE='arial,helvetica,sans-serif' SIZE=2>";
+	echo "<b>"._T('info_aide')."</b>";
 
-	
-
+	echo "<br><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_nouveau_pense_bete')."\n";
+	echo "<br><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T('info_donner_rendez_vous')."\n";
+	echo "</font></td></tr></table>";
+}
 
 // fin_page();
 

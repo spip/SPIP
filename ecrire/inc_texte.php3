@@ -35,9 +35,9 @@ tester_variable('les_notes', '');
 tester_variable('compt_note', 0);
 tester_variable('nombre_surligne', 4);
 
-if (file_exists("puce.gif")) {
-	$imgsize = getimagesize('puce.gif');
-	tester_variable('puce', "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'>");
+if (file_exists("puce$spip_lang_rtl.gif")) {
+	$imgsize = getimagesize("puce$spip_lang_rtl.gif");
+	tester_variable('puce', "<img src='puce$spip_lang_rtl.gif' align='top' alt='- ' ".$imgsize[3]." border='0'>");
 }
 else {
 	tester_variable('puce', "-");
