@@ -8,8 +8,6 @@ include_local ("inc_session.php3");
 include_local ("inc_filtres.php3");
 include_local ("inc_texte.php3");
 
-global $login, $erreur;
-
 // si la session existe, sauter dans ecrire/index.php3
 if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 	if (verifier_session($cookie_session)) {
