@@ -488,7 +488,7 @@ td.icone a img {
  
 .dessous {
 	z-index : 1;
-	-moz-opacity: 0.7; filter: alpha(opacity=70);
+	-moz-opacity: 0.6; filter: alpha(opacity=60);
 }
 .dessus, .dessous.hover {
 	z-index : 2; 

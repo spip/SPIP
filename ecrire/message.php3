@@ -149,13 +149,13 @@ while($row = spip_fetch_array($result_message)) {
 
 	if ($type == 'normal') {
 		$le_type = _T('info_message_2').aide ("messut");
-		$la_couleur = "#0A9C60";
-		$couleur_fond = "#BDF0DB";
+		$la_couleur = "#02531B";
+		$couleur_fond = "#CFFEDE";
 	}
 	else if ($type == 'pb') {
 		$le_type = _T('info_pense_bete').aide ("messpense");
-		$la_couleur = "#0000ff";
-		$couleur_fond = "#ddddff";
+		$la_couleur = "#3874B0";
+		$couleur_fond = "#EDF3FE";
 	}
 	else if ($type == 'affich') {
 		$le_type = _T('info_annonce');

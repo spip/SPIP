@@ -32,7 +32,6 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	$largeur_col = round($largeur_table/7);
 	
 	
-	
 	echo "<table cellpadding=0 cellspacing=0 border=0 width='".($largeur_table+10+$largeur_gauche)."'><tr>";
 	
 	echo "<td width='$largeur_gauche' class='verdana1' valign='top'>";
@@ -124,12 +123,12 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$lejour=journum($row['date_heure']);
 
 		if ($type=="normal") {
-			$la_couleur = "#0A9C60";
-			$couleur_fond = "#BDF0DB";
+			$la_couleur = "#02531B";
+			$couleur_fond = "#CFFEDE";
 		}
 		elseif ($type=="pb") {
-			$la_couleur = "#0000ff";
-			$couleur_fond = "#ccccff";
+			$la_couleur = "#3874B0";
+			$couleur_fond = "#EDF3FE";
 		}
 		elseif ($type=="affich") {
 			$la_couleur = "#ccaa00";
