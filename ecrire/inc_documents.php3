@@ -1247,7 +1247,6 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 			"WHERE id_document in (".join(',', $documents_lies).")");
 		while ($v = spip_fetch_array($res))
 			$vignettes[]= $v['id_vignette'];
-
 		$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
 
 		if ($docs_exclus)
@@ -1606,10 +1605,9 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		//
 		// Afficher un apercu (pour les images)
 		//
-
 		if ($type_inclus == 'image') {
 			echo "<div style='text-align: center; padding: 2px;'>\n";
-			echo texte_vignette_document($largeur, $hauteur, $fichier, $url);
+	echo texte_vignette_document($largeur, $hauteur, $url, $url);
 			echo "</div>\n";
 			echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 			if (strlen($descriptif)>0)
