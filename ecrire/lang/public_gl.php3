@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Mapa do web',
 'popularite' => 'Popularidade',
 'poster_message' => 'Enviar unha mensaxe',
+'proposer_site' => 'Pode propo&ntilde;er un web para engadir a esta secci&oacute;n&nbsp;:',
 
 
 // R

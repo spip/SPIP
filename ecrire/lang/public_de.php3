@@ -85,10 +85,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_suivante' => 'nachfolgende Seite',
 'par_auteur' => 'von ',
 'participer_site' => 'Sie k&ouml;nnen bei dieser Website mitmachen, wenn Sie sich anmelden. Sie erhalten sofort eine E-Mail mit den Zugangsdaten zum Redaktionssystem.',
-'plan_du_site' => 'Sitemap',
 'plan_site' => 'Sitemap',
 'popularite' => 'Beliebtheit',
 'poster_message' => 'Nachricht senden',
+'proposer_site' => '<NEW>You can suggest a site to be added to this section:',
 
 
 // R
