@@ -44,7 +44,7 @@ function calculer_rubriques() {
 	max(fille.date_heure) AS date_h
 	FROM spip_rubriques AS rub, spip_breves AS fille
 	WHERE rub.id_rubrique = fille.id_rubrique
-	AND rub.date_tmp < fille.date_heure AND fille.statut='publie'
+	AND rub.date_tmp <= fille.date_heure AND fille.statut='publie'
 	GROUP BY fille.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
@@ -54,7 +54,7 @@ function calculer_rubriques() {
 	// Publier et dater les rubriques qui ont un site publie
 	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
 	FROM spip_rubriques AS rub, spip_syndic AS fille
-	WHERE rub.id_rubrique = fille.id_rubrique AND rub.date_tmp < fille.date
+	WHERE rub.id_rubrique = fille.id_rubrique AND rub.date_tmp <= fille.date
 	AND fille.statut='publie' GROUP BY fille.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
@@ -66,7 +66,7 @@ function calculer_rubriques() {
 	FROM spip_rubriques AS rub, spip_documents AS fille,
 	spip_documents_rubriques AS lien
 	WHERE rub.id_rubrique = lien.id_rubrique
-	AND lien.id_document=fille.id_document AND rub.date_tmp < fille.date
+	AND lien.id_document=fille.id_document AND rub.date_tmp <= fille.date
 	GROUP BY lien.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
@@ -82,7 +82,8 @@ function calculer_rubriques() {
 		max(fille.date_tmp) AS date_h
 		FROM spip_rubriques AS rub, spip_rubriques AS fille
 		WHERE rub.id_rubrique = fille.id_parent
-		AND rub.date_tmp < fille.date_tmp AND fille.statut='publie'
+		AND (rub.date_tmp < fille.date_tmp OR rub.statut_tmp<>'publie')
+		AND fille.statut_tmp='publie'
 		GROUP BY fille.id_parent");
 		while ($row = spip_fetch_array($r)) {
 			spip_query("UPDATE spip_rubriques
