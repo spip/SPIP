@@ -1008,10 +1008,8 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.462) {
-		// nettoyer la table spip_types_documents pour retablir les embed
-		spip_query("DELETE FROM spip_types_documents WHERE extension IN (
-			'jpg','png','gif','bmp','psd','tif','aiff','asf','avi','bz2','doc','eps','gz','html','mid','mov','mp3','mpg','ogg','pdf','ppt','ps','qt','ra','ram','rm','rtf','sit','swf','tgz','txt','wav','xls','xml','wmv','zip')");
-		remplir_type_documents();
+		spip_query("UPDATE spip_types_documents SET inclus='embed' WHERE inclus!='non' AND extension IN ".
+			"('aiff', 'asf', 'avi', 'mid', 'mov', 'mp3', 'mpg', 'ogg', 'qt', 'ra', 'ram', 'rm', 'swf', 'wav', 'wmv')");
 	}
 
 	if ($version_installee < 1.463) {

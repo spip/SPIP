@@ -106,7 +106,6 @@ else {
 
 icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
 
-
 //
 // Supprimer le cookie, se deconnecter...
 //
