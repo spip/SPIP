@@ -327,11 +327,6 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 							$largeur = $largeur;
 							$hauteur = 100;
 						}
-					/*	if ($valeur == "PositionSlider") { 
-							$largeur = $largeur-30;
-							$hauteur = 25;
-						}
-					*/
 					}
 				}
 				
