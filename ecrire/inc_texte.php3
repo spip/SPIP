@@ -385,7 +385,7 @@ function couper($texte, $taille=50) {
 	$texte = ereg_replace("\r+", "\n\n", $texte);
 
 	// supprimer l'eventuelle entite finale mal coupee
-	$texte = preg_replace('/&#?[a-z0-9]*;?$/', '', $texte);
+	$texte = preg_replace('/&#?[a-z0-9]*$/', '', $texte);
 
 	return trim($texte).$points;
 }
