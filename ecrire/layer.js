@@ -8,15 +8,15 @@ function MM_findObj(n, d) { //v4.0
   if(!x && document.getElementById) x=document.getElementById(n); return x;
 }
 
-function swap_couche(couche){
+function swap_couche(couche, rtl) {
 	triangle = MM_findObj('triangle' + couche);
 	if (!(layer = MM_findObj('Layer' + couche))) return;
 	if (vis[couche] == 'hide'){
-		if (triangle) triangle.src = 'img_pack/deplierbas.gif';
+		if (triangle) triangle.src = 'img_pack/deplierbas' + rtl + '.gif';
 		layer.style.display = 'block';
 		vis[couche] = 'show';
 	} else {
-		if (triangle) triangle.src = 'img_pack/deplierhaut.gif';
+		if (triangle) triangle.src = 'img_pack/deplierhaut' + rtl + '.gif';
 		layer.style.display = 'none';
 		vis[couche] = 'hide';
 	}
