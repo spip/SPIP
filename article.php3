@@ -1,5 +1,7 @@
 <?php
 
+// test
+
 $fond = "article";
 $delais = 24 * 3600;
 
