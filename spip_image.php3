@@ -280,6 +280,12 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 }
 
 
+function ftp_recuperer($chemin) {
+	
+	die ($chemin);
+
+}
+
 
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
 // par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
@@ -287,7 +293,29 @@ if (!$image_name AND $image2) {
 	$image = "ecrire/upload/".$image2;
 	$image_name = $image;
 	$supprimer_ecrire_upload = $image;
-} else {
+} else if (!$image_name AND $image_ftp) {
+	$ftp_adresse = lire_meta("ftp_adresse");
+	$ftp_log = lire_meta("ftp_log");
+	$ftp_pass = lire_meta("ftp_pass");
+
+	$dir = "$ftp_adresse$image_ftp";
+	$dir_abs = eregi_replace("^ftp://", "", $dir);
+	if (($premier_slash = strpos($dir_abs, "/")) > 0) {
+		$serveur = substr($dir_abs, 0, $premier_slash);
+		$chemin = substr($dir_abs, $premier_slash, strlen($dir_abs));
+	} else {
+		$serveur = $dir_abs;
+		$chemin = "/";
+	}
+
+	$ftpc = ftp_connect($serveur);
+	$ftpr = ftp_login($ftpc,$ftp_log,$ftp_pass);
+
+	ftp_recuperer($chemin);
+
+	ftp_close($ftpc);
+}
+else {
 	$supprimer_ecrire_upload = '';
 }
 

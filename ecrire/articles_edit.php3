@@ -321,6 +321,12 @@ function enfant($leparent){
 		if ($i==1) {
 			$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat;";
 			$style .= "background-color: $couleur_claire;";
+			$style .= "font-weight: bold;";
+		}
+		else if ($i==2) {
+			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			$style .= "border-bottom: 1px solid $couleur_claire;";
+			$style .= "font-weight: bold;";
 		}
 		else {
 			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
