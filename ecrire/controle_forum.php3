@@ -160,7 +160,7 @@ function controle_forum($row, $rappel) {
 		$controle .= "<span class='arial2'> / <B>$forum_auteur</B></span>";
 	}
 
-	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur");
+	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
 
 	$controle .= "<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
 	  "<P align='justify'>".propre($forum_texte);

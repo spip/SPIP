@@ -75,7 +75,7 @@ function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect=
 }
 
 // tous les boutons de controle d'un forum
-function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref) {
+function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
 	$controle = '';
 
 	// selection du logo et des boutons correspondant a l'etat du forum
