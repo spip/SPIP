@@ -210,30 +210,37 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 }
 
 
-function indexer_article($id_article, $forcer_reset = true, $full = true) {
-	return indexer_objet('article', $id_article, $forcer_reset, $full);
+// API pour l'espace prive
+function marquer_indexer ($objet, $id_objet) {
+	global $dir_ecrire;
+	$fichier_index = $dir_ecrire.'data/.index';
+	if (!$f = @fopen($fichier_index, 'a')) {
+		spip_log ("impossible d'ecrire dans $fichier_index !");
+		@unlink ($fichier_index);	// on essaie de forcer
+		$f = @fopen($fichier_index, 'a');
+	}
+	spip_log ("demande indexation $objet $id_objet");
+	fputs($f, "$objet $id_objet 1");	// 1 = forcer reindexation
+	fclose($f);
 }
-
-function indexer_auteur($id_auteur, $forcer_reset = true, $full = true) {
-	return indexer_objet('auteur', $id_auteur, $forcer_reset, $full);
+function indexer_article($id_article) {
+	marquer_indexer('article', $id_article);
 }
-
-function indexer_breve($id_breve, $forcer_reset = true, $full = true) {
-	return indexer_objet('breve', $id_breve, $forcer_reset, $full);
+function indexer_auteur($id_auteur) {
+	marquer_indexer('auteur', $id_auteur);
 }
-
-function indexer_mot($id_mot, $forcer_reset = true, $full = true) {
-	return indexer_objet('mot', $id_mot, $forcer_reset, $full);
+function indexer_breve($id_breve) {
+	marquer_indexer('breve', $id_breve);
 }
-
-function indexer_rubrique($id_rubrique, $forcer_reset = true, $full = true) {
-	return indexer_objet('rubrique', $id_rubrique, $forcer_reset, $full);
+function indexer_mot($id_mot) {
+	marquer_indexer('mot', $id_mot);
 }
-
-function indexer_syndic($id_syndic, $forcer_reset = true, $full = true) {
-	return indexer_objet('syndic', $id_syndic, $forcer_reset, $full);
+function indexer_rubrique($id_rubrique) {
+	marquer_indexer('rubrique', $id_rubrique);
 }
-
+function indexer_syndic($id_syndic) {
+	marquer_indexer('syndic', $id_syndic);
+}
 
 function executer_une_indexation_syndic() {
 	$visiter_sites = lire_meta("visiter_sites");

@@ -148,6 +148,7 @@ if (!$use_cache) {
 if ($var_recherche AND $flag_ob AND $flag_pcre AND !$flag_preserver AND !$mode_surligne) {
 	include_ecrire("inc_surligne.php3");
 	$mode_surligne = 'auto';
+	timeout(false, true, false);	// no lock, action, no mysql
 	ob_start();
 }
 else {
@@ -200,10 +201,8 @@ if (file_exists($chemin_cache) && !$headers_only) {
 
 
 // suite et fin mots en rouge
-if ($var_recherche) {
+if ($var_recherche)
 	fin_surligne($var_recherche, $mode_surligne);
-	$timeout = true; // risque timeout
-}
 
 
 // nettoie
@@ -252,39 +251,29 @@ if ($HTTP_COOKIE_VARS['spip_admin'] AND !$flag_preserver AND !$flag_boutons_admi
 //
 // Envoi du mail quoi de neuf
 //
-if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta('jours_neuf')
-	AND $adresse_neuf = lire_meta('adresse_neuf') AND (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
+if ((lire_meta('quoi_de_neuf') == 'oui') AND ($jours_neuf = lire_meta('jours_neuf'))
+	AND ($adresse_neuf = lire_meta('adresse_neuf')) AND (time() - ($majnouv = lire_meta('majnouv'))) > 3600 * 24 * $jours_neuf) {
 
-	include_ecrire('inc_connect.php3');
-	if ($db_ok) {
-		// lock && indication du prochain envoi
-		include_ecrire('inc_meta.php3');
-		lire_metas();	// on force la relecture dans la base pour eviter des acces concurrence
-		if ($majnouv != lire_meta('majnouv')) {
-			spip_log("envoi mail nouveautes: acces concurrent");
-		} else {
+	if (timeout('quoide_neuf')) {
+		ecrire_meta('majnouv', time());
+		ecrire_metas();
 
-			ecrire_meta('majnouv', time());
-			ecrire_metas();
+		// preparation mail
+		unset ($mail_nouveautes);
+		unset ($sujet_nouveautes);
+		$fond = 'nouveautes';
+		$delais = 0;
+		$contexte_inclus = array('date' => date('Y-m-d H:i:s', $majnouv));
+		include(inclure_fichier($fond, $delais, $contexte_inclus));
 
-			// preparation mail
-			unset ($mail_nouveautes);
-			unset ($sujet_nouveautes);
-			$fond = 'nouveautes';
-			$delais = 0;
-			$contexte_inclus = array('date' => date('Y-m-d H:i:s', $majnouv));
-			include(inclure_fichier($fond, $delais, $contexte_inclus));
-
-			// envoi
-			if ($mail_nouveautes) {
-				spip_log("envoi mail nouveautes");
-				include_ecrire('inc_mail.php3');
-				envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
-			} else
-				spip_log("envoi mail nouveautes : pas de nouveautes");
-		}
+		// envoi
+		if ($mail_nouveautes) {
+			spip_log("envoi mail nouveautes");
+			include_ecrire('inc_mail.php3');
+			envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
+		} else
+			spip_log("envoi mail nouveautes : pas de nouveautes");
 	}
-	$timeout = true;
 }
 
 
@@ -296,7 +285,7 @@ if ($cache_lang_modifs) {
 
 
 // recalcul des rubriques publiques (cas de la publication post-datee)
-if (!$timeout AND $db_ok AND (time()-lire_meta('calcul_rubriques') > 3600)) {
+if ((time()-lire_meta('calcul_rubriques') > 3600) AND timeout('calcul_rubriques')) {
 	include_ecrire('inc_meta.php3');
 	ecrire_meta('calcul_rubriques', time());
 	ecrire_metas();
@@ -309,9 +298,8 @@ if (!$timeout AND $db_ok AND (time()-lire_meta('calcul_rubriques') > 3600)) {
 // Faire du menage dans le cache (effacer les fichiers tres anciens ou inutilises)
 // Se declenche une fois par heure quand le cache n'est pas recalcule
 //
-if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2')) {
-	include_ecrire('inc_connect.php3');
-	if ($db_ok) {
+if ($use_cache AND file_exists('CACHE/.purge2')) {
+	if (timeout('purge_cache')) {
 		unlink('CACHE/.purge2');
 		spip_log("purge cache niveau 2");
 		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
@@ -325,12 +313,10 @@ if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2')) {
 			$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
 			spip_query($query);
 		}
-		$timeout = true;
 	}
 }
-if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
-	include_ecrire('inc_connect.php3');
-	if ($db_ok) {
+if ($use_cache AND file_exists('CACHE/.purge')) {
+	if (timeout('purge_cache')) {
 		$dir = 'CACHE/'.dechex((time() / 3600) & 0xF);
 		unlink('CACHE/.purge');
 		spip_log("purge cache niveau 1: $dir");
@@ -338,7 +324,6 @@ if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
 		fclose($f);
 		include_local ("inc-cache.php3");
 		purger_repertoire($dir, 14 * 24 * 3600);
-		$timeout = true;
 	}
 }
 
@@ -347,9 +332,17 @@ if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
 // Archivage des statistiques du site public
 //
 
-if (!$timeout AND lire_meta("activer_statistiques") != "non") {
-	include_local ("inc-stats.php3");
-	archiver_stats();
+if (lire_meta("activer_statistiques") != "non") {
+	if (timeout(false, false))	// no lock, no action
+	{
+		// Conditions declanchant un eventuel calcul des stats
+		if ((lire_meta('calculer_referers_now') == 'oui')
+		OR (date("Y-m-d") <> lire_meta("date_statistiques"))
+		OR (time() - lire_meta('date_stats_popularite') > 1800)) {
+			include_local ("inc-stats.php3");
+			archiver_stats();
+		}
+	}
 }
 
 
@@ -373,14 +366,14 @@ if (lire_meta('activer_moteur') == 'oui') {
 		if ($id_rubrique AND !deja_indexe('rubrique', $id_rubrique))
 			$s .= "rubrique $id_rubrique\n";
 		if ($s) {
-			$f = fopen($fichier_index, 'a');
-			fputs($f, $s);
-			fclose($f);
+			if ($f = @fopen($fichier_index, 'a')) {
+				fputs($f, $s);
+				fclose($f);
+			}
 		}
 	}
-	if (!$timeout AND $use_cache AND file_exists($fichier_index) AND filesize($fichier_index)) {
-		include_ecrire("inc_connect.php3");
-		if ($db_ok) {
+	if ($use_cache AND file_exists($fichier_index) AND filesize($fichier_index)) {
+		if (timeout()) {
 			include_ecrire("inc_texte.php3");
 			include_ecrire("inc_filtres.php3");
 			include_ecrire("inc_index.php3");
@@ -394,8 +387,7 @@ if (lire_meta('activer_moteur') == 'oui') {
 			fclose($f);
 			@rename($fichier_index.".tmp-$pid",$fichier_index);
 			$s = explode(' ', trim($s));
-			indexer_objet($s[0], $s[1], false);
-			$timeout = true;
+			indexer_objet($s[0], $s[1], $s[2]);
 		}
 	}
 }
@@ -412,10 +404,8 @@ if ($db_ok AND lire_meta("activer_syndic") != "non") {
 	include_ecrire("inc_index.php3");
 
 	executer_une_syndication();
-	if (lire_meta('activer_moteur') == 'oui' AND !$timeout) {
+	if (lire_meta('activer_moteur') == 'oui' AND timeout())
 		executer_une_indexation_syndic();
-		$timeout = true;
-	}
 }
 
 

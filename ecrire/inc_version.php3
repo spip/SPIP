@@ -806,6 +806,50 @@ function spip_log($message) {
 }
 
 //
+// Savoir si on peut lancer de gros calculs, et eventuellement poser un lock
+// Resultat : true=vas-y ; false=stop
+//
+function timeout ($lock=false, $action=true, $connect_mysql=true) {
+	static $ok = true;
+	global $db_ok, $dir_ecrire;
+
+	// Fichier lock hebergeur ?  (age maxi, 10 minutes)
+	$timeoutfile = $dir_ecrire.'data/surcharge-mysql';
+	if (@file_exists($timeoutfile)
+	AND ((time() - @filemtime($timeoutfile)) < 600)) {
+		spip_debug ("lock hebergeur $timeoutfile");
+		return $ok = false;
+	}
+
+	// Ne rien faire ?
+	if (!$action)
+		return $ok;
+
+	// Base connectee ?
+	if ($connect_mysql) {
+		include_ecrire('inc_connect.php3');
+		if (!$db_ok)
+			return $ok = false;
+
+		// Lock SQL ?  (10 secondes)
+		if ($lock) {
+			if (spip_get_lock($lock, 10)) {
+				// C'est bon
+				$ok = false;
+				return true;
+			} else {
+				spip_debug ("lock mysql $lock");
+				return $ok = false;
+			}
+		}
+	}
+
+	// C'est bon
+	$ok = false;
+	return true;
+}
+
+//
 // Tests sur le nom du butineur
 //
 function verif_butineur() {
