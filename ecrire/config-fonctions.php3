@@ -202,7 +202,7 @@ $langues_prop = split(",",lire_meta("langues_proposees"));
 $langue_site = lire_meta('langue_site');
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_langue_principale')."</FONT></B> ".aide ()."</TD></TR>";
+echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_langues')."</FONT></B> ".aide ()."</TD></TR>";
 
 echo "<TR><TD class='verdana2'>";
 echo _T('texte_selection_langue_principale');
@@ -226,6 +226,39 @@ echo "<TR><TD ALIGN='$spip_lang_right'>";
 echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 echo "</TD></TR>";
 echo "</TABLE>\n";
+
+debut_cadre_enfonce();
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif' COLSPAN=2><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='black'>"._T('info_multilinguisme')."</FONT></B>" /* .aide ("confart") */ ."</TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' COLSPAN='2' class='verdana2'>";
+	echo _T('texte_multilinguisme');
+	echo "</TD></TR>";
+
+	echo "<TR>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo _T('info_multi_articles');
+	echo "</TD>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	afficher_choix('multi_articles', lire_meta('multi_articles'),
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
+	echo "</TD></TR>\n";
+
+	echo "<TR>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	echo _T('info_multi_rubriques');
+	echo "</TD>";
+	echo "<TD ALIGN='$spip_lang_left' class='verdana2'>";
+	afficher_choix('multi_rubriques', lire_meta('multi_rubriques'),
+		array('oui' => _T('item_oui'), 'non' => _T('item_non')), " &nbsp; ");
+	echo "</TD></TR>\n";
+
+	echo "<TR><TD ALIGN='$spip_lang_right' COLSPAN=2>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+	echo "</TD></TR>";
+	echo "</TABLE>";
+
+fin_cadre_enfonce();
 
 
 fin_cadre_relief();

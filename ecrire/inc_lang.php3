@@ -253,8 +253,14 @@ function traduire_nom_langue($lang) {
 //
 // Afficher un menu de selection de langue
 //
-function menu_langues() {
+function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 	global $couleur_foncee;
+
+	if ($default == '')
+		$default = $GLOBALS['spip_lang'];
+	else if ($default == '--') {
+		$premier_option = "<option value='--'>--</option>\n";
+	}
 
 	$langues = explode(',', $GLOBALS['all_langs']);
 	if (count($langues) <= 1) return;
@@ -262,15 +268,17 @@ function menu_langues() {
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
 	$lien = $GLOBALS['clean_link'];
-	$lien->delVar('var_lang');
+	$lien->delVar($nom_select);
 	$lien = $lien->getUrl();
 
 	$amp = (strpos(' '.$lien,'?') ? '&' : '?');
 
 	$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
-	$ret .= "\n<select name='var_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."var_lang='+this.options[this.selectedIndex].value\">\n";
+	$ret .= $texte;
+	$ret .= "\n<select name='$nom_select' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."$nom_select='+this.options[this.selectedIndex].value\">\n";
+	$ret .= $premier_option;
 	while (list(,$l) = each ($langues)) {
-		if ($l == $GLOBALS['spip_lang']) $selected = " selected";
+		if ($l == $default) $selected = " selected";
 		else $selected = "";
 		$ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}

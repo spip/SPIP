@@ -39,6 +39,7 @@ function creer_base() {
 		accepter_forum CHAR(3) NOT NULL,
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		extra longblob NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
@@ -145,6 +146,7 @@ function creer_base() {
 		id_import BIGINT DEFAULT '0',
 		statut VARCHAR(10) NOT NULL,
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		lang VARCHAR(10) DEFAULT '' NOT NULL,
 		extra longblob NULL,
 		PRIMARY KEY (id_rubrique),
 		KEY id_parent (id_parent))";
@@ -1285,6 +1287,12 @@ function maj_base() {
 			spip_query ("ALTER TABLE spip_mots DROP supplement");
 		}
 		maj_version (1.702);
+	}
+
+	if ($version_installee < 1.703) {
+		spip_query("ALTER TABLE spip_articles ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
+		maj_version (1.703);
 	}
 
 }
