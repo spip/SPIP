@@ -11,7 +11,6 @@ define("_INC_ADMIN", "1");
 //
 
 function bouton_admin($titre, $lien) {
-	include_ecrire("inc_filtres.php3");
 	$link = new Link($lien);
 	$link->delVar('submit');
 	echo $link->getForm('GET');
@@ -21,6 +20,7 @@ function bouton_admin($titre, $lien) {
 
 function afficher_boutons_admin() {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
+	include_ecrire("inc_filtres.php3");
 
 	echo '<div class="spip-admin">';
 	if ($id_article) {
