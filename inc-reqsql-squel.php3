@@ -17,12 +17,11 @@ function calculer_requete(&$boucle) {
   switch($type) {
   case 'articles':
     $boucle->from[] =  "articles AS $id_table";
-    if (lire_meta("post_dates") == 'non') {
-      $boucle->where[] = "$id_table.date < NOW()";}
-
-	if (!$GLOBALS['var_preview'])
+	if (!$GLOBALS['var_preview']) {
 		$boucle->where[] = "$id_table.statut='publie'";
-	else
+		if (lire_meta("post_dates") == 'non')
+			$boucle->where[] = "$id_table.date < NOW()";
+	} else
 		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
     break;
 
