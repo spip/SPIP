@@ -52,13 +52,10 @@ function utiliser_cache($chemin_cache, $delais) {
 		if (file_exists($chemin_cache.'.NEW')) {
 			// Deuxieme acces : le fichier est marque comme utilise
 			@rename($chemin_cache.'.NEW', $chemin_cache);
-			clearstatcache();
 		}
-		else {
-			// Double verification (cas renommage entre les deux file_exists)
-			clearstatcache();
-			$use_cache = file_exists($chemin_cache);
-		}
+		// Double verification (cas renommage/suppression entre les deux file_exists)
+		clearstatcache();
+		$use_cache = file_exists($chemin_cache);
 	}
 
 	// Date de creation du fichier
@@ -67,7 +64,7 @@ function utiliser_cache($chemin_cache, $delais) {
 		$age = time() - $t;
 		$age_ok = (($age < $delais) AND ($age >= 0));
 		if (!$age_ok) {		// fichier cache trop vieux
-			if (timeout())	// sauf lock hebergeur ou probleme base
+			if (timeout(false, false))	// sauf lock hebergeur ou probleme base
 				$use_cache = false;
 		}
 		// Inclusions multiples : derniere modification

@@ -372,22 +372,21 @@ if (lire_meta('activer_moteur') == 'oui') {
 			}
 		}
 	}
-	if ($use_cache AND file_exists($fichier_index) AND filesize($fichier_index)) {
-		if (timeout()) {
-			include_ecrire("inc_texte.php3");
-			include_ecrire("inc_filtres.php3");
-			include_ecrire("inc_index.php3");
-			if ($s = sizeof($suite = file($fichier_index)))
-				$s = $suite[rand(0,$s)];
-			$pid = @getmypid();
-			$f = fopen($fichier_index.".tmp-$pid", 'w');
-			while (list(,$ligne) = each($suite))
-				if ($ligne <> $s)
-					fwrite($f, $ligne);
-			fclose($f);
-			@rename($fichier_index.".tmp-$pid",$fichier_index);
-			$s = explode(' ', trim($s));
-			indexer_objet($s[0], $s[1], $s[2]);
+	if ($use_cache AND file_exists($fichier_index)) {
+		if (timeout('indexation')) {
+			if ($s = sizeof($suite = file($fichier_index))) {
+				include_ecrire("inc_texte.php3");
+				include_ecrire("inc_filtres.php3");
+				include_ecrire("inc_index.php3");
+				$s = $suite[$n = rand(0, $s)];
+				unset($suite[$n]);
+				$f = fopen($fichier_index, 'wb');
+				fwrite($f, join("", $suite));
+				fclose($f);
+				$s = explode(' ', trim($s));
+				indexer_objet($s[0], $s[1], $s[2]);
+			}
+			else @unlink($fichier_index);
 		}
 	}
 }
@@ -398,14 +397,16 @@ if (lire_meta('activer_moteur') == 'oui') {
 //
 
 if ($db_ok AND lire_meta("activer_syndic") != "non") {
-	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_filtres.php3");
-	include_ecrire("inc_sites.php3");
-	include_ecrire("inc_index.php3");
+	if (timeout()) {
+		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_filtres.php3");
+		include_ecrire("inc_sites.php3");
+		include_ecrire("inc_index.php3");
 
-	executer_une_syndication();
-	if (lire_meta('activer_moteur') == 'oui' AND timeout())
-		executer_une_indexation_syndic();
+		executer_une_syndication();
+		if (lire_meta('activer_moteur') == 'oui' AND timeout())
+			executer_une_indexation_syndic();
+	}
 }
 
 

@@ -170,7 +170,7 @@ function appliquer_modifs_config() {
 	}
 
 	// Activer le moteur : dresser la liste des choses a indexer
-	if ($activer_moteur == 'oui') {
+	if ($activer_moteur == 'oui' AND ($activer_moteur != lire_meta("activer_moteur"))) {
 		include_ecrire('inc_index.php3');
 		creer_liste_indexation();
 	}
@@ -203,7 +203,7 @@ function appliquer_modifs_config() {
 		'creer_preview',
 		'taille_preview',
 		'articles_modif',
-		
+
 		'activer_sites',
 		'proposer_sites',
 		'activer_syndic',
@@ -269,7 +269,6 @@ function appliquer_modifs_config() {
 		ecrire_metas();
 		fin_admin($admin);
 	}
-
 
 	if ($purger_skel) {
 		$hash = calculer_action_auteur("purger_squelettes");

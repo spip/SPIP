@@ -455,11 +455,13 @@ if (abs($t_jour - date('d')) > 2) {
 //
 // Optimisation periodique de la base de donnees
 //
-if (!$bonjour AND timeout('optimisation')) {
+if (!$bonjour) {
 	if ($optimiser == 'oui' || (time() - lire_meta('date_optimisation')) > 24 * 3600) {
-		ecrire_meta("date_optimisation", time());
-		ecrire_metas();
-		include ("optimiser.php3");
+		if (timeout('optimisation')) {
+			ecrire_meta("date_optimisation", time());
+			ecrire_metas();
+			include ("optimiser.php3");
+		}
 	}
 }
 
