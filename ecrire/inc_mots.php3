@@ -343,8 +343,17 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$nb_groupes = mysql_num_rows(spip_query($query_groupes));
 
 		if ($flag_editable) {
-			if ($nouv_mot.$cherche_mot.$supp_mot OR $nb_groupes > 0)
+			if ($nouv_mot.$cherche_mot.$supp_mot)
 				echo debut_block_visible("lesmots");
+			else if ($nb_groupes > 0) {
+				echo debut_block_visible("lesmots"); 
+				// vilain hack pour redresser un triangle
+				$couche_a_redresser = $GLOBALS['numero_block']['lesmots'];
+				if (test_layer()) echo "<script type='text/javascript'><!--
+				triangle = MM_findObj('triangle' + $couche_a_redresser);
+				if (triangle) triangle.src = 'img_pack/deplierbas.gif';
+				//--></script>";
+			}
 			else
 				echo debut_block_invisible("lesmots");
 
