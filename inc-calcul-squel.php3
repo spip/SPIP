@@ -358,18 +358,18 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 			$rendu[0][0] = "/"."* $commentaire *"."/ ".$rendu[0][0];
 
 		//
-		// (_f(0,principal) ? avant._f(1).apres : _f(-1).alternatif)
+		// (_f(1,principal) ? avant._f().apres : _f().alternatif)
 		// _f() fonctionne avec une pile ; cette structure logique permet
 		// de n'evaluer que ce qui doit l'etre (ne pas evaluer avant/apres
 		// si on veut utiliser sinon, et vice-versa)
 		if ($utiliser_f)
-			$code = "(_f(0,".$rendu[0][0].") ? "
+			$code = "(_f(1,".$rendu[0][0].") ? "
 			. (($rendu[1][0]=="''") ? "" :
 				"\n$tab\t/"."* << *"."/".$rendu[1][0]." .")
-			. "_f(1)"
+			. "_f()"
 			. (($rendu[2][0]=="''") ? "" :
 				". ".$rendu[2][0]."/"."* >> *"."/")
-			. " : _f(-1)"
+			. " : _f()"
 			. (($rendu[3][0]=="''") ? "" :
 				" /"."* sinon: *"."/.".$rendu[3][0])
 			.")";
@@ -423,30 +423,25 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		if ($boucle->type_requete == 'boucle') {
 			$rec = &$boucles[$boucle->param];
 			if (!$rec) {
-				return array(_T('info_erreur_squelette'),
-				($boucle->param . _L('&nbsp: boucle recursive non definie')));
-			} 
-
-			$rec->externe = $id;
-			$boucles[$id]->return =
-				calculer_liste(array($rec),
-					$nom,
-					$boucle->param,
-					1,
-					$boucles,
-					$id);
+				include_local('inc-admin.php3');
+				erreur_squelette(_T('info_erreur_squelette'),
+				_L($boucle->param.'&nbsp: boucle recursive non definie'), $id);
+			} else {
+				$rec->externe = $id;
+				$boucles[$id]->return =
+					calculer_liste(array($rec),
+						$nom,
+						$boucle->param,
+						1,
+						$boucles,
+						$id);
+			}
 		}
 	} 
 
 	if ($boucles) foreach($boucles as $id => $boucle) { 
 		if ($boucle->type_requete != 'boucle') {
 			$res = calculer_params($id, $boucles);
-
-			// C'est quoi ca : remettre la gestion d'erreur
-			// au niveau de l'erreur (cf. inc-arg-squel)
-			if (is_array($res))
-				return $res;
-
 			$boucles[$id]->return = calculer_liste($boucle->milieu,
 				$nom,
 				$id,
@@ -457,7 +452,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	}
 
 	// idem pour la racine
-	list($return,$corps) = calculer_liste($racine, $nom, '',0, $boucles, '');
+	list ($return,$corps) = calculer_liste($racine, $nom, '',0, $boucles, '');
 
 
 	// Corps de toutes les fonctions PHP,

@@ -3,10 +3,11 @@
 include_ecrire('inc_texte.php3');
 include_ecrire('inc_filtres.php3');
 include_ecrire('inc_mail.php3');
+include_ecrire('inc_forum.php3');
+include_local('inc-forum.php3');
 
 if (file_exists("inc-urls.php3")) { include_local ("inc-urls.php3"); }
 else {include_local ("inc-urls-dist.php3"); }
-
 
 // Ce fichier inclus par inc-public a un comportement special
 // Voir commentaires dans celui-ci et dans inc-forum
@@ -25,7 +26,7 @@ $id_message = intval($id_message);
 
 // Nature du forum
 if (!$id_auteur)
-	$id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
 
 if ($forum_id_article) {
 	if ($s = spip_query("SELECT accepter_forum FROM spip_articles
@@ -85,12 +86,13 @@ $validation_finale = (strlen($confirmer) > 0 OR
 $statut = ((!$validation_finale) ? 'redac' : 
 	(($forums_publics == 'non') ? 'off' :
 	(($forums_publics == 'pri') ? 'prop' : 'publie')));
+
 spip_query("UPDATE spip_forum SET id_parent = $forum_id_parent,
 	id_rubrique =$forum_id_rubrique,
 	id_article = $forum_id_article,
 	id_breve = $forum_id_breve,
-	id_syndic = \"$forum_id_syndic\",
-	id_auteur = \"$id_auteur\",
+	id_syndic = $forum_id_syndic,
+	id_auteur = $id_auteur,
 	date_heure = NOW(),
 	titre = \"$slash_titre\",
 	texte = \"$slash_texte\",
@@ -102,6 +104,9 @@ spip_query("UPDATE spip_forum SET id_parent = $forum_id_parent,
 	statut = \"$statut\"
 	WHERE id_forum = '$id_message'
 ");
+
+calculer_threads();
+
 
 if ($validation_finale) {
 	include_ecrire("inc_admin.php3");
@@ -119,7 +124,6 @@ if ($validation_finale) {
 		// INVALIDATION DES CACHES LIES AUX FORUMS
 		//
 		include_ecrire('inc_invalideur.php3');
-		include_ecrire('inc_forum.php3');
 		if ($statut == 'publie') {
 			suivre_invalideur ("id='id_forum/" .
 				calcul_index_forum($forum_id_article,

@@ -200,7 +200,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 
 function balise_TOTAL_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
-		include_local("inc-debug-squel.php3");
+		include_local("inc-admin.php3");
 		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $p->id_boucle);
 	}
 	$p->code = "\$Numrows['$p->id_mere']";
@@ -228,8 +228,8 @@ function balise_POINTS_dist($p) {
 	$b = $p->boucles[$b]->id_parent;
 	}
 	if (!$p->code) {
-	include_local("inc-debug-squel.php3");
-	erreur_squelette(_L("Champ #POINTS hors d'une recherche"), '', $p->id_boucle);
+		include_local("inc-admin.php3");
+		erreur_squelette(_L("Champ #POINTS hors d'une recherche"), '', $p->id_boucle);
 	}
 	$p->type = 'php';
 	return $p;

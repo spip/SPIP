@@ -78,11 +78,13 @@ echo _L('Taille du r&eacute;pertoire cache')."</FONT></B></TD></TR>";
 
 echo "<TR><TD class='serif'>";
 
-$row = spip_fetch_array(spip_query("SELECT SUM(taille) FROM spip_caches"));
-if ($row[0]>0)
+list ($taille) = spip_fetch_array(spip_query(
+"SELECT SUM(taille) FROM spip_caches WHERE type='t'"));
+
+if ($taille>0) {
 	$info = _L("La taille du cache est actuellement de "
-	.taille_en_octets($row[0]).".");
-else
+	.taille_en_octets($taille).".");
+} else
 	$info = _L('Le cache est vide.');
 
 echo "<p align='justify'><b>$info</b></p>\n";

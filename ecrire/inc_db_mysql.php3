@@ -175,6 +175,5 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 			calcul_mysql_in($val, $valeurs, $not));
     }
 }
-  
 
 ?>

@@ -37,7 +37,7 @@ function index_pile($idb, $nom_champ, &$boucles) {
 		#spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ'");
 		$desc = $tables_principales[$t];
 		if (!$desc) {
-			include_local("inc-debug-squel.php3");
+			include_local("inc-admin.php3");
 			erreur_squelette(_L("Table SQL absente de \$tables_principales dans inc_serialbase"), $r, "'$idb'");
 		}
 		$excep = $exceptions_des_tables[$r][$c];

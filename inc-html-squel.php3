@@ -47,7 +47,7 @@ function parser_texte($texte) {
 			$champ->params = '';
 		else {
 			if (!(ereg('^\\{(.*)\\}$', $p, $params))) {
-				include_local("inc-debug-squel.php3");
+				include_local("inc-admin.php3");
 				erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"),
 					$p, $champ->fichier);
 			}
@@ -211,7 +211,7 @@ function parser_param($params, &$result, $idb) {
 	}
 
 	if ($params) {
-		include_local("inc-debug-squel.php3");
+		include_local("inc-admin.php3");
 		erreur_squelette(_L("Param&egrave;tre $i (ou suivants) incorrect"),
 			$params, $idb);
 	}
@@ -233,7 +233,7 @@ function parser($texte, $id_parent, &$boucles) {
 		$debut = substr($texte, 0, $p);
 		$milieu = substr($texte, $p);
 		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
-			include_local("inc-debug-squel.php3");
+			include_local("inc-admin.php3");
 			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu,'');
 		}
 		$id_boucle = $match[1];
@@ -267,7 +267,7 @@ function parser($texte, $id_parent, &$boucles) {
 		}
 		$milieu = substr($milieu, strlen($match[0]));
 		if (strpos($milieu, $s)) {
-			include_local("inc-debug-squel.php3");
+			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
 				$id_boucle . 
 				_L('&nbsp;: balise B en aval'));
@@ -280,7 +280,7 @@ function parser($texte, $id_parent, &$boucles) {
 		$s = "</BOUCLE$id_boucle>";
 		$p = strpos($milieu, $s);
 		if ((!$p) && (substr($milieu, 0, strlen($s)) != $s)) {
-			include_local("inc-debug-squel.php3");
+			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
 				_T('erreur_boucle_fermant',
 				array('id'=>$id_boucle)));
@@ -317,13 +317,12 @@ function parser($texte, $id_parent, &$boucles) {
 		$all_res = array_merge($all_res, parser_champs_etendus($debut));
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
-			include_local("inc-debug-squel.php3");
+			include_local("inc-admin.php3");
 			erreur_squelette(_T('erreur_boucle_syntaxe'), '',
 				_T('erreur_boucle_double',
 				array('id'=>$id_boucle)));
-			exit;
-		}
-		$boucles[$id_boucle] = $result;
+		} else
+			$boucles[$id_boucle] = $result;
 	}
 
 	return array_merge($all_res, parser_champs_etendus($texte));

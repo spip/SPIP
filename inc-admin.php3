@@ -9,7 +9,6 @@ define("_INC_ADMIN", "1");
 //
 // Afficher un bouton admin
 //
-
 function bouton_admin($titre, $lien) {
 	return "<li><a href='$lien' class='spip-admin-boutons'>$titre</a></li>\n";
 }
@@ -170,6 +169,9 @@ function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
 	}
 }
 
+//
+// Si le code php produit des erreurs, on peut les afficher
+//
 function affiche_erreurs_execution_page() {
 	global $tableau_des_erreurs, $page_principale, $s;
 	echo "<div style='position: absolute; z-index: 1000;
@@ -189,6 +191,95 @@ function affiche_erreurs_execution_page() {
 		echo "<li>Erreur de compilation</li>\n";
 	echo "</ul></code></div>";
 	$GLOBALS['bouton_admin_debug'] = true;
+}
+
+//
+// Si une boucle cree des soucis, on peut afficher la requete fautive
+// avec son code d'erreur
+//
+function erreur_requete_boucle($query, $id_boucle, $type) {
+	global $auteur_session, $HTTP_COOKIE_VARS, $dir_ecrire;
+	include_ecrire("inc_presentation.php3");
+
+	// Drapeau pour interdire d'ecrire les fichiers dans le cache
+	define('spip_erreur_fatale', 'requete_boucle');
+
+	// Calmer le jeu avec MySQL (si jamais on est en saturation)
+	@touch($dir_ecrire.'data/mysql_out');	// pour spip_cron
+	@touch($dir_ecrire.'data/lock');		// lock hebergeur
+	spip_log('Erreur MySQL: on limite les acces quelques minutes');
+	$GLOBALS['bouton_admin_debug'] = true;
+
+	$erreur = spip_sql_error();
+	$errno = spip_sql_errno();
+	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
+		$errsys = $regs[2];
+	else if (($errno == 1030 OR $errno <= 1026)
+	AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
+		$errsys = $regs[1];
+
+	// Erreur systeme
+	if ($errsys > 0 AND $errsys < 200) {
+		$retour .= "<tt><br><br><blink>"
+		. _T('info_erreur_systeme', array('errsys'=>$errsys))
+		. "</blink><br>\n"
+		. _T('info_erreur_systeme2');
+		spip_log("Erreur systeme $errsys");
+	}
+	// Requete erronee
+	else {
+		$retour .= "<tt><blink>&lt;BOUCLE".$id_boucle."&gt;("
+		. $type . ")</blink><br>\n"
+		. "<b>"._T('avis_erreur_mysql')."</b><br>\n"
+		. htmlspecialchars($query)
+		. "<br><font color='red'><b>".htmlspecialchars($erreur)
+		. "</b></font><br>"
+		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
+
+		include_ecrire('inc_lang.php3');
+		utiliser_langue_visiteur();
+		$retour .= aide('erreur_mysql');
+		spip_log("Erreur MySQL BOUCLE$id_boucle (".$GLOBALS['fond'].".html)");
+	}
+
+	// Pour un visiteur normal, afficher juste le fait qu'il y a une erreur
+	// ajouter &afficher_erreurs=1 pour discuter sur spip@rezo.net
+	if (!$HTTP_COOKIE_VARS['spip_admin'] AND !$auteur_session
+	AND !$GLOBALS['afficher_erreurs'])
+		return "<br />\n<b>"._T('info_erreur_squelette')."</b><br />\n";
+	else
+		return "<div style='position: fixed; top: 10px; left: 10px;
+		z-index: 10000; background-color: pink;'>$retour</div>";
+}
+
+
+//
+// Erreur au parsing des squelettes : afficher le code fautif
+//
+function erreur_squelette($message, $fautif, $lieu) {
+	global $auteur_session;
+
+	// Drapeau pour interdire d'ecrire les fichiers dans le cache
+	define('spip_erreur_fatale', 'erreur_squelette');
+
+	spip_log("Erreur squelette: $message | $fautif $lieu ("
+	.$GLOBALS['fond'].".html)");
+	$GLOBALS['bouton_admin_debug'] = true;
+
+	// Pour un visiteur normal, ne rien afficher, si SPIP peut s'en sortir
+	// tant mieux, sinon l'erreur se verra de toutes facons :-(
+	// ajouter &afficher_erreurs=1 pour discuter sur spip@rezo.net
+	if ($HTTP_COOKIE_VARS['spip_admin'] OR $auteur_session
+	OR $GLOBALS['afficher_erreurs']) {
+		$message = "<h2>"._T('info_erreur_squelette')."</h2><p>$message</p>";
+		if ($fautif)
+			$message .= ' (<FONT color="#FF000">'
+			. entites_html($fautif) . '</FONT>)';
+		$message .= '<br /><FONT color="#FF000">' . $lieu . '</FONT>'; 
+
+		echo "<div style='position: fixed; top: 10px; left: 10px;
+		z-index: 10000; background-color: pink;'>$message</div>";
+	}
 }
 
 ?>

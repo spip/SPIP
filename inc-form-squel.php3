@@ -76,119 +76,20 @@ function balise_FORMULAIRE_SITE_dist($p) {
 	return $p;
 }
 
-
+//
+// Formulaires de gestion de forums : les balises sont definies
+// dans le fichier inc-forum.php3 qui centralise toute la gestion des forums
+//
 // Formulaire de reponse a un forum
-function balise_FORMULAIRE_FORUM_dist($p) {
-	$type = $p->type_requete;
-	switch ($type) {
-		case 'breves':
-			$p->code = "boutons_de_forum('', '', ''," .
-				champ_sql('id_breve', $p) .
-				", '', " .
-				champ_sql('titre', $p) .
-				", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
-		break;
-
-		case 'rubriques':
-			$p->code = 'boutons_de_forum(' .
-			champ_sql('id_rubrique', $p) .
-			", '', '', '', ''," .
-			champ_sql('titre', $p) .
-			", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
-			break;
-
-		case 'syndication':
-			$p->code = "boutons_de_forum('', '', '','', " .
-			champ_sql('id_rubrique', $p) . ", " .
-			champ_sql('nom_site', $p) .
-			", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
-			break;
-    
-		case 'articles': 
-			$p->code = "boutons_de_forum('', '', " .
-			champ_sql('id_article', $p) .
-			", '','', " .
-			champ_sql('nom_site', $p) .
-			"'$type', " .
-			champ_sql('accepter_forum', $p) .
-			', $Cache)';
-			break;
-
-		case 'forums':
-		default:
-			$p->code = "boutons_de_forum(" .
-			champ_sql('id_rubrique', $p) . ', ' .
-			champ_sql('id_forum', $p) . ', ' .
-			champ_sql('id_article', $p) . ', ' .
-			champ_sql('id_breve', $p) . ', ' .
-			champ_sql('id_syndic', $p) . ', ' .
-			champ_sql('titre', $p) .
-			", '$type', '', \$Cache)";
-			break;
-	}
-
-	$p->type = 'php';
-	return $p;
-}
-
+#	function balise_FORMULAIRE_FORUM_dist($p) {}
 // Parametres de reponse a un forum
-function balise_PARAMETRES_FORUM_dist($p) {
-	$_accepter_forum = champ_sql('accepter_forum', $p);
-	$p->code = '
-	// refus des forums ?
-	('.$_accepter_forum.'=="non" OR
-	(lire_meta("forums_publics") == "non" AND '.$_accepter_forum.'!="oui"))
-	? "" : // sinon:
-	';
+#	function balise_PARAMETRES_FORUM_dist($p) {}
+include_local('inc-forum.php3');
 
 
-	switch ($p->type_requete) {
-		case 'articles':
-			$c = '"id_article=".' . champ_sql('id_article', $p);
-			break;
-		case 'breves':
-			$c = '"id_breve=".' . champ_sql('id_breve', $p);
-			break;
-		case 'rubriques':
-			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
-			break;
-		case 'syndication':
-			$c = '"id_syndic=".' . champ_sql('id_syndic', $p);
-			break;
-		case 'forums':
-		default:
-			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
-			foreach ($liste_champs as $champ) {
-				$x = champ_sql( $champ, $p);
-				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
-			}
-			$c = "substr($c,1)";
-			break;
-	}
-
-	$c .= '.
-	"&retour=".rawurlencode($lien=$GLOBALS["HTTP_GET_VARS"]["retour"] ? $lien : nettoyer_uri())';
-
-	// Noter l'invalideur de la page contenant ces parametres,
-	// en cas de premier post sur le forum (a mettre dans ecrire/inc_forum et
-	// a repliquer sur les autres balises FORUM)
-	$invalide = '
-	// invalideur forums
-	(!($Cache[\'id_forum\'][calcul_index_forum(' . 
-				// Retournera 4 [$SP] mais force la demande du champ a MySQL
-				champ_sql('id_article', $p) . ',' .
-				champ_sql('id_breve', $p) .  ',' .
-				champ_sql('id_rubrique', $p) .',' .
-				champ_sql('id_syndic', $p) .  ")]=1)?'':\n";
-	$p->code .= $invalide."(".$c."))";
-
-	$p->type = 'html';
-	return $p;
-}
-
-/*
-# Boutons d'administration: 
-*/
+//
+// Boutons d'administration: 
+//
 function balise_FORMULAIRE_ADMIN_dist($p) {
 	$p->code = "'<!-- @@formulaire_admin@@45609871@@ -->'";
 	$p->type = "php";

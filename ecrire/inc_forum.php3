@@ -66,5 +66,38 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic) {
 	if ($id_syndic) return 's'.$id_syndic;
 }
 
- 
+//
+// Recalculer tous les threads
+//
+function calculer_threads() {
+	// fixer les id_thread des debuts de discussion
+	spip_query("UPDATE spip_forum SET id_thread=id_forum
+	WHERE id_parent=0");
+
+	// reparer les messages qui n'ont pas l'id_secteur de leur parent
+	do {
+		$discussion = "0";
+		$precedent = 0;
+		$r = spip_query("SELECT fille.id_forum AS id,
+		maman.id_thread AS thread
+		FROM spip_forum AS fille, spip_forum AS maman
+		WHERE fille.id_parent = maman.id_forum
+		AND fille.id_thread <> maman.id_thread
+		ORDER BY thread");
+		while (list($id, $thread) = spip_fetch_array($r)) {
+			if ($thread == $precedent)
+				$discussion .= ",$id";
+			else {
+				if ($precedent)
+					spip_query("UPDATE spip_forum SET id_thread=$precedent
+					WHERE id_forum IN ($discussion)");
+				$precedent = $thread;
+				$discussion = "$id";
+			}
+		}
+		spip_query("UPDATE spip_forum SET id_thread=$precedent
+		WHERE id_forum IN ($discussion)");
+	} while ($discussion != "0");
+}
+
 ?>

@@ -33,12 +33,19 @@ else {
 	// les meta
 	include_ecrire("inc_meta.php3");
 
-	// multilinguisme
+	// authentification du visiteur
 	if ($HTTP_COOKIE_VARS['spip_session'] OR
 	($PHP_AUTH_USER AND !$ignore_auth_http)) {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
+	// Faut-il preparer les boutons d'admin ?
+	if ($affiche_boutons_admin = (!$flag_preserver
+	AND $HTTP_COOKIE_VARS['spip_admin'])) {
+		include_local('inc-admin.php3');
+	}
+
+	// multilinguisme
 	if ($forcer_lang) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
@@ -67,26 +74,9 @@ else {
 		reponse_confirmation($id_article);
 	}
 
-
-	// Faut-il effacer des pages invalidees ?
-	if (lire_meta('invalider')) {
-		include_ecrire('inc_invalideur.php3');
-		include_ecrire('inc_meta.php3');
-		lire_metas();
-		if (lire_meta('invalider'))
-			retire_caches();
-	}
-
 	include_local ("inc-public-global.php3");
 
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
-
-
-	// Faut-il preparer les boutons d'admin ?
-	if ($affiche_boutons_admin = (!$flag_preserver
-	AND $HTTP_COOKIE_VARS['spip_admin'])) {
-		include_local('inc-admin.php3');
-	}
 
 	// Afficher la page ; le cas PHP est assez rigolo avec le traitement
 	// d'erreurs

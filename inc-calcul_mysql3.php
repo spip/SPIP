@@ -20,90 +20,44 @@
 # - le nom de la table
 # - le nom de la boucle (pour le message d'erreur e'ventuel)
 
-# En commentaire, le court-circuit de spip_query,
-# avec traitement de table_prefix sans restriction sur son nom
+## NB : le traitement des SQL de forums est defini dans inc-forum.php3
 
-function spip_abstract_select($s, $f, $w='', $g='', $o='', $l='', $sous='', $cpt='', $table='', $id='') {
-# if ($GLOBALS["mysql_rappel_connexion"] AND $DB = $GLOBALS["spip_mysql_db"])
-#        $DB = "`$DB`";
-# $DB .= $GLOBALS["table_prefix"] . '_';
-  $DB = 'spip_';
- $q = "\nFROM\t$DB".
-    join(",\n\t$DB", $f) .
-    ((!$w) ? "" : ("\nWHERE\t".join("\n AND\t", $w))) .
-    ($g ? "\nGROUP BY $g" : '') .
-    ($o ? "\nORDER BY $o" : '') .
-    ($l ? "\nLIMIT $l" : '');
-  $q = (!$sous ? 
-	("\nSELECT\t". join(",\n\t", $s) . $q) :
-	("\nSELECT\tS_" . join(",\n\tS_", $s) .
-	 "\nFROM\t(" . join(",\n\t", $s) . " ,\n\tCOUNT(" . $sous .
-	 ") AS compteur $q)\n AS S_$table\nWHERE compteur= " . 
-	 $cpt));
-# spip_log("$id: $q\n");
-# if (!($result = @mysql_query($q)))
-  if (!($result = @spip_query($q)))
-    {
-      include_local("inc-debug-squel.php3");
-      echo erreur_requete_boucle($q, $id, $table);
-      exit;
-    }
-#  spip_log(spip_num_rows($result));
-  return $result;
+function spip_abstract_select (
+	$select = array(), $from = array(), $where = '',
+	$groupby = '', $orderby = '', $limit = '',
+	$sousrequete = '', $cpt = '',
+	$table = '', $id = '') {
+
+	$DB = 'spip_';
+	$q = " FROM $DB" . join(", $DB", $from)
+	. (is_array($where) ? ' WHERE ' . join(' AND ', $where) : '')
+	. ($groupby ? " GROUP BY $groupby" : '')
+	. ($orderby ? "\nORDER BY $orderby" : '')
+	. ($limit ? "\nLIMIT $limit" : '');
+
+	if (!$sousrequete)
+		$q = " SELECT ". join(", ", $select) . $q;
+	else
+		$q = " SELECT S_" . join(", S_", $select)
+		. " FROM (" . join(", ", $select)
+		. ", COUNT(".$sousrequete.") AS compteur " . $q
+		.") AS S_$table WHERE compteur=" . $cpt;
+
+	//
+	// Erreur ? C'est du debug, ou une erreur du serveur
+	//
+	if (!($result = @spip_query($q))) {
+		include_local('inc-admin.php3');
+		echo erreur_requete_boucle($q, $id, $table);
+	}
+
+	#  spip_log(spip_num_rows($result));
+	return $result;
 }
+
 
 # toutes les fonctions avec requete SQL, necessaires aux squelettes.
 
-function boutons_de_forum_table($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum)
-{
-  if (($table == 'forums') || !$table)
-    {
-      $forum = spip_fetch_array(spip_query("
-SELECT	accepter_forum
-FROM	spip_articles
-WHERE	id_article='" . ($ida ? $ida : substr(lire_meta("forums_publics"),0,3)) . "'
-")); 
-      $forum = ($forum ? $forum['accepter_forum'] : substr(lire_meta("forums_publics"),0,3));
-    }
-  if ($forum=="non") return '';
-  // si FORMULAIRE_FORUM a e'te' employe' hors d'une boucle,
-  // on n'a pas pu de'terminer titre et table a` la compil
-  if (!$table)
-    {
-      if ($idf)
-	{
-	  $r = "SELECT titre FROM spip_forum WHERE id_forum = $idf";
-	  $table = "forum";
-	}
-      else if ($idr)
-	{
-	  $r = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $idr";
-	  $table = "rubriques";
-	}
-      else if ($ida)
-	{
-	  $r = "SELECT titre FROM spip_articles WHERE id_article = $ida";
-	  $table = "articles";
-	}
-      else if ($idb)
-	{
-	  $r = "SELECT titre FROM spip_breves WHERE id_breve = $idb";
-	  $table = "breves";
-	}
-      else if ($ids)
-	{
-	  $table = "syndic";
-	  $r = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $ids";
-	}
-      else
-	{
-	  $r = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";
-	}
-      $r = spip_fetch_array(spip_query($r));
-      $titre = $r['titre'];
-    }
-  return array($titre, $table, $forum);
-}
 
 function calcul_exposer ($id, $type, $reference) {
 	static $exposer;
@@ -236,44 +190,46 @@ WHERE	id_article='$id_article' AND statut='publie'
 }
 
 // Calcul de la rubrique associee a la requete
-// (selection de squelette specifique)
+// (selection de squelette specifique par id_rubrique & lang)
 
-function sql_rubrique_fond($contexte, $lang)
-{
-  if ($id = $contexte['id_rubrique']) {
-    if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id'")))
-      if ($row['lang']) $lang = $row['lang'];
-    return array($id, $lang);
-  }
-  if ($id  = $contexte['id_breve']) {
-    if ($row = spip_fetch_array(spip_query("
-SELECT id_rubrique FROM spip_breves WHERE id_breve='$id'"))) {
-      $id_rubrique_fond = $row['id_rubrique'];
-      if ($row = spip_fetch_array(spip_query("
-SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique_fond'")))
-	if ($row['lang']) $lang = $row['lang'];
-    }
-    return array($id_rubrique_fond, $lang);
-  }
-  if ($id = $contexte['id_syndic']) {
-    if ($row = spip_fetch_array(spip_query("
-SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id'"))) {
-      $id_rubrique_fond = $row['id_rubrique'];
-      if ($row = spip_fetch_array(spip_query("
-SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique_fond'")))
-	if ($row['lang']) $lang = $row['lang'];
-    }
-    return array($id_rubrique_fond, $lang);
-  }
-  if ($id = $contexte['id_article']) {
-    if ($row = spip_fetch_array(spip_query("
-SELECT id_rubrique,lang FROM spip_articles WHERE id_article='$id'"))) {
-      $id_rubrique_fond = $row['id_rubrique'];
-      if ($row['lang']) $lang = $row['lang'];
-    }
-    return array($id_rubrique_fond, $lang);
-  }
-  return '';
+function sql_rubrique_fond($contexte, $lang) {
+
+	if ($id = intval($contexte['id_rubrique'])) {
+		$row = spip_fetch_array(spip_query(
+		"SELECT lang FROM spip_rubriques WHERE id_rubrique='$id'"));
+		if ($row['lang'])
+			$lang = $row['lang'];
+		return array ($id, $lang);
+	}
+
+	if ($id  = intval($contexte['id_breve'])) {
+		$row = spip_fetch_array(spip_query(
+		"SELECT id_rubrique, lang FROM spip_breves WHERE id_breve='$id'"));
+		$id_rubrique_fond = $row['id_rubrique'];
+		if ($row['lang'])
+			$lang = $row['lang'];
+		return array($id_rubrique_fond, $lang);
+	}
+
+	if ($id = intval($contexte['id_syndic'])) {
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique
+		FROM spip_syndic WHERE id_syndic='$id'"));
+		$id_rubrique_fond = $row['id_rubrique'];
+		$row = spip_fetch_array(spip_query("SELECT lang
+		FROM spip_rubriques WHERE id_rubrique='$id_rubrique_fond'"));
+		if ($row['lang'])
+			$lang = $row['lang'];
+		return array($id_rubrique_fond, $lang);
+	}
+
+	if ($id = intval($contexte['id_article'])) {
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique,lang
+		FROM spip_articles WHERE id_article='$id'"));
+		$id_rubrique_fond = $row['id_rubrique'];
+		if ($row['lang'])
+			$lang = $row['lang'];
+		return array($id_rubrique_fond, $lang);
+	}
 }
 
 
