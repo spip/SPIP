@@ -645,6 +645,34 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 
 
 //
+// Articles dans la meme rubrique
+//
+
+		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.id_rubrique='$id_rubrique' AND (articles.statut = 'publie' OR articles.statut = 'prop') AND articles.id_article != '$id_article' ".
+			" ORDER BY articles.date DESC LIMIT 0,30");
+		if (spip_num_rows($vos_articles) > 0) {
+			echo "<div>&nbsp;</div>";
+			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			bandeau_titre_boite2(_T('info_meme_rubrique'), "article-24.gif");
+			echo "<div class='plan-articles'>";
+			while($row = spip_fetch_array($vos_articles)) {
+				$ze_article = $row['id_article'];
+				$ze_titre = typo($row['titre']);
+				$ze_statut = $row['statut'];
+				
+				if ($options == "avancees") {
+					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_article</b></div>";
+				}
+				echo "<a class='$ze_statut' style='font-size: 10px;' href='articles.php3?id_article=$ze_article'>$numero$ze_titre</a>";
+			}
+			echo "</div>";
+			echo "</div>";
+		}
+
+
+
+
+//
 // Afficher les raccourcis
 //
 
