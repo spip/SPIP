@@ -1,138 +1,145 @@
-<HTML>
-<HEAD>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="fr">
+<head>
 <title>[#NOM_SITE_SPIP] </title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
-<link rel="stylesheet" href="spip_style.css" type="text/css" />
-</HEAD>
-<BODY bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="0" LEFTMARGIN="0" MARGINWIDTH="0" MARGINHEIGHT="0">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+
+</head>
+
+<body bgcolor="white">
+
+<div id="navigation">
+
+<h1 class="structure">Navigation</h1>
+
+<!-- Menu de navigation general -->
+
+<div class="menu">
+<ul class="general">
+	<li class="menu-titre">
+	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	</li>
+	<li class="menu-item">
+	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	</li>
+	<li class="menu-item">
+	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	</li>
+	<li class="menu-item">
+	<a href="ecrire" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">Administration</a>
+	</li>
+</ul>
+</div>
 
 
-<TABLE WIDTH=100% CELLPADDING=5 CELLSPACING=0 BORDER=0 BGCOLOR="#000000">
-<B_haut>
-	<TR BGCOLOR="#000000">
-	<TD ALIGN="center">
-	<A HREF="#URL_SITE_SPIP/"><B><FONT COLOR="#E86519" FACE="arial,helvetica,sans-serif" SIZE=2>#NOM_SITE_SPIP</FONT></B></A>
-	</TD>	
-	
-	<BOUCLE_haut(RUBRIQUES){id_parent=0}{par titre}{0,5}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut>
-	</TR>
-</B_haut>
-<B_haut2>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut2(RUBRIQUES){id_parent=0}{par titre}{5,6}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut2>
-	</TR>
-</B_haut2>
-<B_haut3>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut3(RUBRIQUES){id_parent=0}{par titre}{11,6}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut3>
-	</TR>
-</B_haut3>
-<B_haut4>
-	<TR BGCOLOR="#000000">
-	<BOUCLE_haut4(RUBRIQUES){id_parent=0}{par titre}{17,5}>
-	<TD ALIGN="center">
-	<A HREF="#URL_RUBRIQUE"><FONT COLOR="#FFFFFF" FACE="arial,helvetica,sans-serif" SIZE=2>#TITRE</FONT></A>
-	</TD>
-	</BOUCLE_haut4>
-	</TR>
-</B_haut4>
-</TABLE>
+<!-- Formulaire de recherche -->
 
-<CENTER>
+[(#FORMULAIRE_RECHERCHE)]
 
-<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH=632>
-<TR>
-<TD WIDTH=300 ALIGN="left" VALIGN="top">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=3>
-	<p align='right'><font size='4'><b>Les articles les plus populaires</b></font>
-
-	<BOUCLE_articles(ARTICLES){tout}{par popularite}{popularite > 0}{inverse}{0,10}> 
-		<P align="right">
-		<FONT SIZE=2>
-		[(#SURTITRE)<BR>]
-		<FONT SIZE=3><A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A></FONT>
-		[<BR>(#SOUSTITRE)]
-		<B_AUTEUR2><BR><B>par 
-		<BOUCLE_AUTEUR2(AUTEURS){id_article}{", "}{par nom}>#NOM</BOUCLE_AUTEUR2>
-		</B></B_AUTEUR2>
-		</FONT>
-		[<BR><small>Popularit&eacute;: (#POPULARITE)%</small>]
-	</BOUCLE_articles>
-	<BOUCLE_articles_visites(ARTICLES){tout}{par visites}{visites > 0}{inverse}{0,7}> 
-		<P align="right">
-		<FONT SIZE=2>
-		[(#SURTITRE)<BR>]
-		<FONT SIZE=3><A HREF="#URL_ARTICLE"[ TITLE="(#DESCRIPTIF|textebrut|attribut_html)"]>#TITRE</A></FONT>
-		[<BR>(#SOUSTITRE)]
-		<B_auteurs_visites><BR><B>par 
-		<BOUCLE_auteurs_visites(AUTEURS){id_article}{", "}{par nom}>#NOM</BOUCLE_auteurs_visites>
-		</B></B_auteurs_visites>
-		</FONT>
-		[<BR><small>(#VISITES) visites</small>]
-	</BOUCLE_articles_visites>
-	<//B_articles>
-
-	[
-	<P>
-	<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>
-	<TR WIDTH=100%>
-	<TD WIDTH=100% BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-	</TR>
-	</TABLE>
-	<P>
-	<DIV ALIGN="right">
-	<FONT SIZE="2">
-	<B>Rechercher</B> dans ce site : (#FORMULAIRE_RECHERCHE|recherche.php3)
-	</FONT>
-	</DIV>
-	]
-
-	</FONT>
-	<BR>
-</TD>
-
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=8 BACKGROUND="NAVPICS/point.gif"><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=8><img src="NAVPICS/rien.gif" alt="" width="8" height="8" border="0"></TD>
-<TD WIDTH=300 VALIGN="top">
-	<FONT FACE="arial,helvetica,sans-serif" SIZE=2>
-	<p align='left'><font size='4'><b>Les derniers commentaires</b></font>
-
-	<BOUCLE_Forums(FORUMS){plat}{par date}{inverse}{0,12}>
-	<p>
+<!-- Liens des forums -->
+<B_forums_liens>
+<div class="menu" title="Les derniers messages publi&eacute;s dans les forums du site">
+	<h1 class="structure">Messages de forums les plus r&eacute;cents</h1>
+	<div class="forums">
+	<div class="menu-titre">
+	Derniers commentaires
+	</div>
+	<ul>
+<BOUCLE_forums_liens(FORUMS){plat}{par date}{inverse}{0,15}>
+	<li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
 	<BOUCLE_ArticleForum(ARTICLES){id_article}><a href="#URL_ARTICLE#forum#ID_FORUM"></BOUCLE_ArticleForum>
 	<BOUCLE_BreveForum(BREVES){id_breve}><a href="#URL_BREVE#forum#ID_FORUM"></BOUCLE_BreveForum>
 	<BOUCLE_RubriqueForum(RUBRIQUES){id_rubrique}><a href="#URL_RUBRIQUE#forum#ID_FORUM"></BOUCLE_RubriqueForum>
 	<//B_RubriqueForum><//B_BreveForum><//B_ArticleForum>
-	#TITRE
-	</a>
+
+	#TITRE</a>
+	</li>
+</BOUCLE_forums_liens>
+	</ul>
+	</div>
+</div>
+</B_forums_liens>
+
+
+</div>
+
+
+<!-- Une : articles les plus populaires -->
+
+<div id="principal" class="contenu">
+
+<h1 class="structure">Les articles les plus populaires</h1>
+
+<BOUCLE_article_un(ARTICLES) {par popularite} {inverse} {0,2}>
+	[(#LOGO_ARTICLE_RUBRIQUE|right|#URL_ARTICLE)]
+	[<div class="surtitre">(#SURTITRE)</div>]
+	<h2 class="titre-extrait"><a href="#URL_ARTICLE">#TITRE</a></h2>
+	[<div class="surtitre">(#SOUSTITRE)</div>]
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	<B_auteurs_un>par <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un><br>
+	Popularit&eacute;&nbsp;: <span class="important">#POPULARITE</span> %
+	</div>
+	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
 	<br>
-	Le [(#DATE|nom_jour)] [(#DATE|affdate)][, par <b>(#NOM)</b>]
-	</BOUCLE_Forums>
+</BOUCLE_article_un>
 
-	</font>
 
-</TD>
-</TR>
-</TABLE>
+	<div class="encart">
 
-<INCLURE(pied.php3)>
+	<!-- Sur le Web -->
 
-</CENTER>
+	<h1 class="structure">Nouveaut&eacute;s du Web...</h1>
 
-</BODY>
-</HTML>
+	<B_syndic>
+	<div class="menu">
+	<div class="divers">
+		<div class="menu-titre">
+		Sur le Web
+		</div>
+		<ul>
+	<BOUCLE_syndic(SYNDIC_ARTICLES) {par date} {inverse} {0,15}>
+		<li class="menu-item">
+		[<i>(#DATE|affdate_court)</i>:]
+		<a href="#URL_ARTICLE">#TITRE</a>
+		</li>
+	</BOUCLE_syndic>
+		</ul>
+	</div>
+	</div>
+	</B_syndic>
+
+	</div>
+
+
+<h1 class="structure">Autres articles populaires</h1>
+
+<!-- Articles les plus populaires (suite) -->
+
+<BOUCLE_articles_populaires(ARTICLES) {par popularite} {inverse} {2,8}>
+	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></h2>
+	<div class="detail">
+	Le [(#DATE|nom_jour)] [(#DATE|jour)] [(#DATE|nom_mois)] [(#DATE|annee)]
+	<B_auteurs_recents>par <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_recents><br>
+	Popularit&eacute;&nbsp;: <span class="important">#POPULARITE</span> %
+	</div>
+	<br>
+</BOUCLE_articles_populaires>
+
+
+</div>
+
+
+</body>
+</html>
 
 
