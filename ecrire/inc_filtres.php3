@@ -333,30 +333,27 @@ function nom_mois($numdate) {
 // alignements
 //
 
-function justifier($letexte) {
+function justif($letexte,$justif) {
+	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
 	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='justify'>", $letexte);
-	return $letexte;
+		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='$justif'>", $letexte);
+	return "<p class='spip' align='$justif'>".$letexte;
+}
+
+function justifier($letexte) {
+	return justif($letexte,'justify');
 }
 
 function aligner_droite($letexte) {
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='right'>",$letexte);
-	return $letexte;
+	return justif($letexte,'right');
 }
 
 function aligner_gauche($letexte) {
-	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='left'>",$letexte);
-	return $letexte;
+	return justif($letexte,'left');
 }
 
 function centrer($letexte) {
-	$letexte = eregi_replace("^<p([[:space:]][^>]*)?".">", "", trim($letexte));
-	if ($letexte)
-		$letexte = eregi_replace("<p([[:space:]][^>]*)?".">", "<p\\1 align='center'>",$letexte);
-	return $letexte;
+	return justif($letexte,'center');
 }
 
 ?>
