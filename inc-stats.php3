@@ -46,9 +46,11 @@ function afficher_raccourci_stats($id_article) {
 		
 		if ($visites > 0) bouton_admin("Evolution des visites", "./ecrire/statistiques_visites.php3?id_article=$id_article");
 
-		$query = "SELECT * FROM spip_visites_temp WHERE type = 'article$id_article' GROUP BY ip";
+		$query = "SELECT COUNT(DISTINCT ip) AS c FROM spip_visites_temp WHERE type = 'article$id_article'";
 		$result = spip_query($query);
-		$visites = $visites + mysql_num_rows($result);
+		if ($row = mysql_fetch_array($result)) {
+			$visites = $visites + $row['c'];
+		}
 		echo "[$visites visites / $referers entr&eacute;es directes]";
 	}
 }
