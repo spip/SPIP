@@ -97,7 +97,7 @@ function retire_cache($cache) {
 }
 
 // Supprimer les caches marques "x"
-function retire_caches() {
+function retire_caches($chemin = '') {
 	if (!_DIR_RESTREINT) return;
 
 	// signaler
@@ -106,7 +106,18 @@ function retire_caches() {
 
 	// recuperer la liste des caches voues a la suppression
 	$suppr = array();
-	$q = spip_query("SELECT fichier FROM spip_caches WHERE type='x'");
+
+	// En priorite le cache qu'on appelle maintenant
+	if ($chemin) {
+		$q = spip_query("SELECT fichier FROM spip_caches
+		WHERE fichier = '".addslashes($chemin)."' AND type='x' LIMIT 0,1");
+		if ($r = spip_fetch_array($q))
+			$suppr[$r['fichier']] = true;
+	}
+
+	// Et puis une centaine d'autres
+	$q = spip_query("SELECT fichier FROM spip_caches
+	WHERE type='x' LIMIT 0,100");
 	while ($r = spip_fetch_array($q))
 		$suppr[$r['fichier']] = true;
 
@@ -116,6 +127,12 @@ function retire_caches() {
 			retire_cache($cache);
 		spip_query("DELETE FROM spip_caches WHERE "
 		.calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
+
+		// signaler aux suivants
+		if ($n>99) {
+			ecrire_meta('invalider', 'oui');
+			ecrire_metas();
+		}
 	}
 }
 

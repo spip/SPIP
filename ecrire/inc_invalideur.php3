@@ -106,10 +106,9 @@ function applique_invalideur($depart) {
 		// ce qui evite des chevauchements dans la validation des forums
 		// [ A valide un forum, B obtient de purger les invalides, et A
 		//   trouve son cache avant que B n'ait eu le temps de le purger ]
-		if (!_DIR_RESTREINT) {
-			ecrire_meta('invalider', 'oui');
-			ecrire_metas();
-		} else {
+		ecrire_meta('invalider', 'oui');
+		ecrire_metas();
+		if (_DIR_RESTREINT) {
 			include_local('inc-cache.php3');
 			retire_caches();
 		}

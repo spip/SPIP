@@ -226,15 +226,21 @@ function spip_release_lock($nom) {
 //
 function calcul_mysql_in($val, $valeurs, $not='') {
 	if (!$valeurs) return '0=0';
-	$s = split(',', $valeurs, 255);
-	if (count($s) < 255) {
-		return ("($val $not IN ($valeurs))");
-	} else {
-		$valeurs = array_pop($s);
-		return ("($val $not IN (" . join(',',$s) . "))\n" .
-			($not ? "AND\t" : "OR\t") .
-			calcul_mysql_in($val, $valeurs, $not));
-    }
+
+	$n = $i = 0;
+	$chunk = array();
+	while ($n = strpos($valeurs, ',', $n+1)) {
+		if ((++$i) >= 255) {
+			$chunk = substr($valeurs, 0, $n);
+			$in_sql .= "($val $not IN (" . $chunk . "))\n" .
+				($not ? "AND\t" : "OR\t");
+			$valeurs = substr($valeurs, $n+1);
+			$i = $n = 0;
+		}
+	}
+	$in_sql .= "($val $not IN ($valeurs))";
+
+	return $in_sql;
 }
 
 ?>

@@ -150,7 +150,7 @@ function enregistre_forum() {
 	// verifier fichier lock
 	$alea = preg_replace('/[^0-9]/', '', $alea);
 	if (!file_exists($hash = _DIR_SESSIONS."forum_$alea.lck"))
-		exit; # echec silencieux du POST
+		return $retour_forum; # echec silencieux du POST
 	unlink($hash);
 
 	// Entrer le message dans la base
