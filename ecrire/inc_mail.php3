@@ -38,6 +38,7 @@ function tester_mail() {
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap, $os_serveur;
+	include_ecrire("inc_filtres.php3");
 
 	if (!$from) $from = $email;
 	if (!email_valide($email)) return false;
