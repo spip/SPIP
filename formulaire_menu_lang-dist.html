@@ -1,0 +1,14 @@
+<form	action='[(#HTTP_VARS{url})]'
+	method='post'
+	style='margin:0px; padding:0px;'>[
+	<input type='hidden' name='url' value='(#HTTP_VARS{cible})' />
+]	<select	name='[(#HTTP_VARS{nom})]' 
+		class='forml'
+		style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'
+		onchange="document.location.href='[(#HTTP_VARS{retour})]&amp;[(#HTTP_VARS{nom})]='+this.options[this.selectedIndex].value">
+		[(#HTTP_VARS*{langues})]
+      </select>
+      <noscript>
+	<input type='submit' value='&gt;&gt;' class='spip_bouton' />
+      </noscript>
+</form>

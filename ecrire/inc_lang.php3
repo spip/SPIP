@@ -415,15 +415,9 @@ function lang_dselect ($rien='') {
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
 	global $couleur_foncee, $couleur_claire, $connect_id_auteur;
 
-	if ($default == '')
-		$default = $GLOBALS['spip_lang'];
+	$ret = liste_options_langues($nom_select, $default, $herit);
 
-	if ($nom_select == 'var_lang_ecrire')
-		$langues = explode(',', $GLOBALS['all_langs']);
-	else
-		$langues = explode(',', lire_meta('langues_multilingue'));
-
-	if (count($langues) <= 1) return;
+	if (!$ret) return '';
 
 	if (!$couleur_foncee) $couleur_foncee = '#044476';
 
@@ -450,16 +444,6 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	$postcomplet = new Link($post);
 	if ($cible) $postcomplet->addvar('url', $cible);
 
-	$ret = '';
-	sort($langues);
-	while (list(, $l) = each ($langues)) {
-		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
-		if ($l == $herit) {
-			$ret .= "<option class='maj-debut' style='font-weight: bold;' value='herit'$selected>"
-				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
-		}
-		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
-	}
 	return "<form action='"
 	  . $post
 	  . "' method='post' style='margin:0px; padding:0px;'>"
@@ -481,7 +465,27 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  . "</form>";
 }
 
+function liste_options_langues($nom_select, $default='', $herit='') {
 
+	if ($default == '') $default = $GLOBALS['spip_lang'];
+	if ($nom_select == 'var_lang_ecrire')
+		$langues = explode(',', $GLOBALS['all_langs']);
+	else
+		$langues = explode(',', lire_meta('langues_multilingue'));
+
+	if (count($langues) <= 1) return '';
+	$ret = '';
+	sort($langues);
+	while (list(, $l) = each ($langues)) {
+		$selected = ($l == $default) ? ' selected=\'selected\'' : '';
+		if ($l == $herit) {
+			$ret .= "<option class='maj-debut' style='font-weight: bold;' value='herit'$selected>"
+				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
+		}
+		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+	}
+	return $ret;
+}
 
 //
 // Cette fonction est appelee depuis inc-public-global si on a installe

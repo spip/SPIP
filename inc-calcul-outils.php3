@@ -33,32 +33,23 @@ function affiche_logos($logos, $lien, $align) {
 	static $num_survol=0;
 	global $espace_logos;
 	list ($arton, $artoff) = $logos;
-	$num_survol++;
+
 	if (!$arton) return $artoff;
+
+	$num_survol++;
 	$milieu = "<img src='$arton'"
 		. ($align ? " align='$align' " : '') 
 		. " name='image$num_survol' border='0' "
 		. "alt='image$num_survol'"
 		. " hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
 
-	if ($artoff) {
-			if ($lien) {
-				$afflien = "<a href='$lien'";
-				$afflien2 = "a>";
-			}
-			else {
-				$afflien = "<div";
-				$afflien2 = "div>";
-			}
-			$milieu = "$afflien onmouseover=\"image$num_survol.src=".
-				"'$artoff'\" onmouseout=\"image$num_survol.src=".
-				"'$arton'\">$milieu</$afflien2";
-	}
-		else if ($lien) {
-			$milieu = "<a href='$lien'>$milieu</a>";
-		}
+	if (!$artoff) return ($lien ? http_href($lien, $milieu) : $milieu);
 
-	return $milieu;
+	$att =	"onmouseover=\"image$num_survol.src='$artoff'\" 
+		onmouseout=\"image$num_survol.src='$arton'\"";
+
+	return ($lien ? "<a href='$lien' $att>$milieu</a>" : "<div $att>$milieu</div>");
+
 }
 
 //

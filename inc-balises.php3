@@ -376,39 +376,6 @@ function balise_FIN_SURLIGNE_dist($p) {
 	return $p;
 }
 
-// Formulaire de changement de langue
-function balise_MENU_LANG_dist($p) {
-	$p->code = '("<"."?php
-include_ecrire(\"inc_lang.php3\");
-echo menu_langues(\"var_lang\", \$menu_lang);
-?".">")';
-	$p->statut = 'php';
-	return $p;
-}
-
-// Formulaire de changement de langue / page de login
-function balise_MENU_LANG_ECRIRE_dist($p) {
-	$p->code = '("<"."?php
-include_ecrire(\"inc_lang.php3\");
-echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
-?".">")';
-	$p->statut = 'php';
-	return $p;
-}
-
-function balise_URL_LOGOUT_dist($p) {
-	if ($p->fonctions) {
-	$url = "'" . $p->fonctions[0] . "'";
-	$p->fonctions = array();
-	} else {
-	$url = '\$clean_link->getUrl()';
-	}
-	$p->code = '("<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
-    { echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'&amp;url=\' .urlencode(' . $url . '); } ?".">")';
-	$p->statut = 'php';
-	return $p;
-}
-
 function balise_INTRODUCTION_dist ($p) {
 	$_type = $p->type_requete;
 	$_texte = champ_sql('texte', $p);
