@@ -471,7 +471,7 @@ function calculer_page_globale($fond) {
 	reset($contexte_defaut);
 	while (list(, $val) = each($contexte_defaut)) {
 		if ($GLOBALS[$val]) {
-			$contexte[$val] = (int) $GLOBALS[$val];
+			$contexte[$val] = intval($GLOBALS[$val]);
 		}
 	}
 	if ($GLOBALS['date'])
@@ -479,31 +479,39 @@ function calculer_page_globale($fond) {
 	else
 		$contexte['date'] = $contexte['date_redac'] = date("Y-m-d H:i:s");
 
+
+	// Analyser les URLs personnalisees (inc-urls-...)
+	recuperer_parametres_url($fond, $fichier_requete);
+	$lang = lire_meta('langue_site');
+	if ($contexte['lang'])
+		$lang = $contexte['lang'];	// si inc-urls veut fixer la langue
+
 	// Calcul de la rubrique associee a la requete
 	// (selection de squelette specifique)
 
 	if ($id_rubrique = $contexte['id_rubrique']) {
 		$id_rubrique_fond = $id_rubrique;
+		if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique'")))
+			if ($row['lang']) $lang = $row['lang'];
 	}
 	else if ($id_breve  = $contexte['id_breve']) {
-		$query = "SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
+		if ($row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'"))) {
 			$id_rubrique_fond = $row['id_rubrique'];
+			if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique_fond'")))
+				if ($row['lang']) $lang = $row['lang'];
 		}
 	}
 	else if ($id_syndic = $contexte['id_syndic']) {
-		$query = "SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
+		if ($row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'"))) {
 			$id_rubrique_fond = $row['id_rubrique'];
+			if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id_rubrique_fond'")))
+				if ($row['lang']) $lang = $row['lang'];
 		}
 	}
 	else if ($id_article = $contexte['id_article']) {
-		$query = "SELECT id_rubrique FROM spip_articles WHERE id_article='$id_article'";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
+		if ($row = spip_fetch_array(spip_query("SELECT id_rubrique,lang FROM spip_articles WHERE id_article='$id_article'"))) {
 			$id_rubrique_fond = $row['id_rubrique'];
+			if ($row['lang']) $lang = $row['lang'];
 		}
 	}
 	else {
@@ -512,16 +520,21 @@ function calculer_page_globale($fond) {
 
 	$fond = chercher_squelette($fond, $id_rubrique_fond);
 
-	recuperer_parametres_url($fond, $fichier_requete);
+	// selectionner la langue & affiner le squelette
+	lang_select($lang);
+	$lang = ereg_replace('^\.', '', $lang);
+	if (@file_exists("$fond.$lang.html"))
+		$fond = "$fond.$lang";
 
 	// Special stats et boutons admin
 	reset($contexte_defaut);
 	while (list($key, $val) = each($contexte_defaut)) {
 		if ($contexte[$val]) {
 			$GLOBALS[$val] = $contexte[$val];
-			$signale_globals .= '<'.'?php $GLOBALS[\''.$val.'\'] = '.(int) $contexte[$val]."; ?".">\n";
+			$signale_globals .= "\n".'$GLOBALS[\''.$val.'\'] = '.intval($contexte[$val]).";";
 		}
 	}
+	$signale_globals = '<'."?php$signale_globals\n?".'>';
 
 	return $signale_globals.calculer_page($fond, $contexte);
 }

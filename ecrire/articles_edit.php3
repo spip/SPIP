@@ -13,7 +13,7 @@ $articles_mots = lire_meta("articles_mots");
 $articles_modif = lire_meta("articles_modif");
 
 // securite
-$id_article = (int) $id_article;
+$id_article = intval($id_article);
 unset ($flag_editable);
 
 //
