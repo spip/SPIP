@@ -164,6 +164,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 				}
 				// Aller chercher la page d'accueil
 				if (lire_meta("visiter_sites") == "oui") {
+					include_ecrire ("inc_sites.php3");
 					indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site']), 0, 50000)), 1);
 				}
 			}
