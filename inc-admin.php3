@@ -330,12 +330,15 @@ function debug_dumpfile ($texte) {
 	  highlight_string($texte);
 	  $s = ob_get_contents();
 	  ob_end_clean();
+	  if (substr($s,0,6) == '<code>') { $s=substr($s,6); echo '<code>';}
 	  $tableau = explode("<br />", $s);
-	  $format = "<br>\n<span style='color: black'>%0".
+	  $format = "<br />\n<span style='color: black'>%0".
 	    strlen(count($tableau)).
 	    "d </span>";
-	  $i=0;
-	  foreach ($tableau as $ligne) echo $ligne, sprintf($format, ++$i);
+	  $format10=str_replace('black','pink',$format);
+	  $i=1;
+	  foreach ($tableau as $ligne)
+	    echo sprintf(($i%10) ? $format :$format10, $i++), $ligne ;
 
 
 	  echo "</fieldset></div>";
