@@ -16,7 +16,7 @@ function creer_base() {
 	// Elements redactionnels
 	//
 
-	spip_log(_T('log_creation_table'));
+	spip_log("creation des tables d'objets");
 	$query = "CREATE TABLE spip_articles (
 		id_article bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		surtitre text NOT NULL,
@@ -220,7 +220,7 @@ function creer_base() {
 	// Elements interactifs
 	//
 
-	spip_log(_T('log_creation_table_interactions'));
+	spip_log("creation des tables interactions");
 	$query = "CREATE TABLE spip_forum (
 		id_forum bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		id_parent bigint(21) DEFAULT '0' NOT NULL,
@@ -335,7 +335,7 @@ function creer_base() {
 	// Relations
 	//
 
-	spip_log(_T('log_tables_relations'));
+	spip_log("creation des tables relations");
 	$query = "CREATE TABLE spip_auteurs_articles (
 		id_auteur bigint(21) DEFAULT '0' NOT NULL,
 		id_article bigint(21) DEFAULT '0' NOT NULL,
@@ -420,7 +420,7 @@ function creer_base() {
 	// Gestion du site
 	//
 
-	spip_log(_T('log_tables_gestion_site'));
+	spip_log("creation des tables gestion du site");
 	$query = "CREATE TABLE spip_forum_cache (
 		id_forum bigint(21) DEFAULT '0' NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
@@ -506,7 +506,7 @@ function creer_base() {
 	//
 	// Pre-remplissage de la base
 	//
-	spip_log(_T('log_tables_remplissage_base'));
+	spip_log("pre-remplissage de la base");
 	remplir_type_documents();
 
 }
@@ -577,7 +577,7 @@ function stripslashes_base($table, $champs) {
 
 function maj_version ($version) {
 	spip_query("REPLACE spip_meta (nom, valeur) VALUES ('version_installee', '$version')");
-	spip_log(_T('log_tables_mise_a_jour_base', array('version' => $version)));
+	spip_log("mise a jour de la base vers $version");
 }
 
 function maj_base() {

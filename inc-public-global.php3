@@ -165,7 +165,6 @@ if ($var_recherche) {
 // nettoie
 //
 
-@flush();
 if ($effacer_cache) @unlink($chemin_cache);
 
 
@@ -189,90 +188,8 @@ if (!file_exists("CACHE/.htaccess")) {
 }
 
 
-//
-// Gerer l'indexation automatique
-//
 
-if (lire_meta('activer_moteur') == 'oui') {
-	$fichier_index = 'ecrire/data/.index';
-	if ($db_ok) {
-		// include_ecrire("inc_texte.php3");
-		// include_ecrire("inc_filtres.php3");
-		include_ecrire("inc_index.php3");
-		$s = '';
-		if ($id_article AND !deja_indexe('article', $id_article))
-			$s .= "article $id_article\n";
-		if ($id_auteur AND !deja_indexe('auteur', $id_auteur))
-			$s .= "auteur $id_auteur\n";
-		if ($id_breve AND !deja_indexe('breve', $id_breve))
-			$s .= "breve $id_breve\n";
-		if ($id_mot AND !deja_indexe('mot', $id_mot))
-			$s .= "mot $id_mot\n";
-		if ($id_rubrique AND !deja_indexe('rubrique', $id_rubrique))
-			$s .= "rubrique $id_rubrique\n";
-		if ($s) {
-			$f = fopen($fichier_index, 'a');
-			fputs($f, $s);
-			fclose($f);
-		}
-	}
-	if ($use_cache AND file_exists($fichier_index) AND $size = filesize($fichier_index)) {
-		include_ecrire("inc_connect.php3");
-		if (!$timeout AND $db_ok) {
-			include_ecrire("inc_texte.php3");
-			include_ecrire("inc_filtres.php3");
-			include_ecrire("inc_index.php3");
-			$f = fopen($fichier_index, 'r');
-			$s = fgets($f, 100);
-			$suite = fread($f, $size);
-			fclose($f);
-			$f = fopen($fichier_index, 'w');
-			fwrite($f, $suite);
-			fclose($f);
-			$s = explode(' ', trim($s));
-			spip_log("indexation $s[0] $s[1]");
-			indexer_objet($s[0], $s[1], false);
-			$timeout = true;
-		}
-	}
-}
-
-
-//
-// Faire du menage dans le cache
-// (effacer les fichiers tres anciens)
-// Se declenche une fois par jour quand le cache n'est pas recalcule
-//
-
-if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2') AND $db_ok) {
-	unlink('CACHE/.purge2');
-	spip_log("purge cache niveau 2");
-	$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
-	$result = spip_query($query);
-	unset($fichiers);
-	while ($row = spip_fetch_array($result)) {
-		$fichier = $row['fichier'];
-		if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
-	}
-	if ($fichiers) {
-		$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
-		spip_query($query);
-	}
-	$timeout = true;
-}
-
-if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
-	unlink('CACHE/.purge');
-	spip_log("purge cache niveau 1");
-	$f = fopen('CACHE/.purge2', 'w');
-	fclose($f);
-	include_local ("inc-cache.php3");
-	purger_repertoire('CACHE', 14 * 24 * 3600);
-	$timeout = true;
-}
-
-
-// ---------------------------------------------------------------------------------------
+///////////////////////////////////////////////////////////// taches de fond
 
 //
 // Fonctionnalites administrateur (declenchees par le cookie admin, authentifie ou non)
@@ -280,26 +197,15 @@ if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
 
 $cookie_admin = $HTTP_COOKIE_VARS['spip_admin'];
 $admin_ok = ($cookie_admin != '');
-
 if ($admin_ok AND !$flag_preserver AND !$flag_boutons_admin) {
 	include_local("inc-admin.php3");
 	afficher_boutons_admin();
 }
 
-//
-// Mise a jour d'un (ou de zero) site syndique
-//
 
-if (!$timeout AND $db_ok AND lire_meta("activer_syndic") != "non") {
-	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_filtres.php3");
-	include_ecrire("inc_sites.php3");
-	include_ecrire("inc_index.php3");
+// envoyer la page si possible
+@flush();
 
-	executer_une_syndication();
-	executer_une_indexation_syndic();
-	$timeout = true;
-}
 
 //
 // Gestion des statistiques du site public
@@ -309,6 +215,7 @@ if (lire_meta("activer_statistiques") != "non") {
 	include_local ("inc-stats.php3");
 	ecrire_stats();
 }
+
 
 
 //
@@ -354,6 +261,109 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 			spip_log("envoi mail nouveautes : pas de nouveautes");
 	}
 	$timeout = true;
+}
+
+
+//
+// Faire du menage dans le cache (effacer les fichiers tres anciens)
+// Se declenche une fois par jour quand le cache n'est pas recalcule
+//
+if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2')) {
+	include_ecrire('inc_connect.php3');
+	if ($db_ok) {
+		unlink('CACHE/.purge2');
+		spip_log("purge cache niveau 2");
+		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
+		$result = spip_query($query);
+		unset($fichiers);
+		while ($row = spip_fetch_array($result)) {
+			$fichier = $row['fichier'];
+			if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
+		}
+		if ($fichiers) {
+			$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
+			spip_query($query);
+		}
+		$timeout = true;
+	}
+}
+if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
+	include_ecrire('inc_connect.php3');
+	if ($db_ok) {
+		unlink('CACHE/.purge');
+		spip_log("purge cache niveau 1");
+		$f = fopen('CACHE/.purge2', 'w');
+		fclose($f);
+		include_local ("inc-cache.php3");
+		purger_repertoire('CACHE', 14 * 24 * 3600);
+		$timeout = true;
+	}
+}
+
+
+//
+// Gerer l'indexation automatique
+//
+
+if (lire_meta('activer_moteur') == 'oui') {
+	$fichier_index = 'ecrire/data/.index';
+	if ($db_ok) {
+		include_ecrire("inc_index.php3");
+		$s = '';
+		if ($id_article AND !deja_indexe('article', $id_article))
+			$s .= "article $id_article\n";
+		if ($id_auteur AND !deja_indexe('auteur', $id_auteur))
+			$s .= "auteur $id_auteur\n";
+		if ($id_breve AND !deja_indexe('breve', $id_breve))
+			$s .= "breve $id_breve\n";
+		if ($id_mot AND !deja_indexe('mot', $id_mot))
+			$s .= "mot $id_mot\n";
+		if ($id_rubrique AND !deja_indexe('rubrique', $id_rubrique))
+			$s .= "rubrique $id_rubrique\n";
+		if ($s) {
+			$f = fopen($fichier_index, 'a');
+			fputs($f, $s);
+			fclose($f);
+		}
+	}
+	if (!$timeout AND $use_cache AND file_exists($fichier_index) AND filesize($fichier_index)) {
+		include_ecrire("inc_connect.php3");
+		if ($db_ok) {
+			include_ecrire("inc_texte.php3");
+			include_ecrire("inc_filtres.php3");
+			include_ecrire("inc_index.php3");
+			$suite = file($fichier_index);
+			$s = $suite[0];
+			$f = fopen($fichier_index, 'w');
+			while (list(,$ligne) = each($suite))
+				if ($ligne <> $s)
+					fwrite($f, $ligne);
+			fclose($f);
+			$s = explode(' ', trim($s));
+			spip_log("indexation $s[0] $s[1]");
+			indexer_objet($s[0], $s[1], false);
+			$timeout = true;
+		}
+	}
+}
+
+
+//
+// Mise a jour d'un (ou de zero) site syndique
+//
+
+if (!$timeout AND lire_meta("activer_syndic") != "non") {
+	include_ecrire("inc_connect.php3");
+	if ($db_ok) {
+		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_filtres.php3");
+		include_ecrire("inc_sites.php3");
+		include_ecrire("inc_index.php3");
+
+		executer_une_syndication();
+		executer_une_indexation_syndic();
+		$timeout = true;
+	}
 }
 
 ?>

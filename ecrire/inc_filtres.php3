@@ -346,7 +346,6 @@ function textebrut($texte) {
 }
 
 // Remplace les liens SPIP en liens ouvrant dans une nouvelle fenetre (target=blank)
-// On preferera, a partir de SPIP 1.5, utiliser la notation lien->>URL
 function liens_ouvrants ($texte) {
 	return ereg_replace("<a ([^>]*http://[^>]*class=\"spip_(out|url)\")>",
 		"<a \\1 target=\"_blank\">", $texte);
