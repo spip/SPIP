@@ -100,6 +100,7 @@ feed_globals('HTTP_POST_VARS');
 feed_globals('HTTP_COOKIE_VARS');
 feed_globals('HTTP_SERVER_VARS');
 
+
 //
 // Avec register_globals a Off sous PHP4, il faut utiliser
 // la nouvelle variable HTTP_POST_FILES pour les fichiers uploades
@@ -127,15 +128,15 @@ $hebergeur = '';
 $login_hebergeur = '';
 $os_serveur = '';
 
-// Multimania
-if (ereg('^(.*)\.multimania\.(com|net|fr)$', $HTTP_X_HOST, $regs)) {
-	$hebergeur = 'multimania';
-	if ($regs[1] == 'www')
-		ereg('^/([^/]*)/', $REQUEST_URI, $regs);
-	$login_hebergeur = $regs[1].'_db';
+
+// Lycos (ex-Multimachin)
+if ($HTTP_X_HOST == 'membres.lycos.fr') {
+	$hebergeur = 'lycos';
+	ereg('^/([^/]*)', $REQUEST_URI, $regs);
+	$login_hebergeur = $regs[1];
 }
 // Altern
-else if (ereg('altern\.com$', $SERVER_NAME)) {
+if (ereg('altern\.com$', $SERVER_NAME)) {
 	$hebergeur = 'altern';
 	ereg('([^.]*\.[^.]*)$', $HTTP_HOST, $regs);
 	$login_hebergeur = ereg_replace('[^a-zA-Z0-9]', '_', $regs[1]);
@@ -166,16 +167,17 @@ if (eregi('\(Win', $HTTP_SERVER_VARS['SERVER_SOFTWARE']))
 // Infos sur le fichier courant
 //
 
-// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-if (!$REQUEST_URI) {
+// Compatibilite avec serveurs ne fournissant pas, ou mal $REQUEST_URI
+if (!$REQUEST_URI)
 	$REQUEST_URI = $PHP_SELF;
-	if ($QUERY_STRING) $REQUEST_URI .= '?'.$QUERY_STRING;
-}
+if (!strpos($REQUEST_URI, '?') && $QUERY_STRING)
+	$REQUEST_URI .= '?'.$QUERY_STRING;
 
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
 	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
 }
+
 
 
 //
@@ -209,14 +211,13 @@ $php_module = ($flag_sapi_name AND @php_sapi_name() == 'apache') OR
 function tester_upload() {
 	global $hebergeur;
 	$test_upload = true;
-	if ($hebergeur == 'multimania') $test_upload = false;
+	if ($hebergeur == 'lycos') $test_upload = false;
 	return $test_upload;
 }
 
 function tester_accesdistant() {
 	global $hebergeur;
 	$test_acces = true;
-//	if ($hebergeur == 'multimania') $test_acces = false;
 	return $test_acces;
 }
 
