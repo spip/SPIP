@@ -229,21 +229,23 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	}
 
 	// Stockage des versions : creer une premier version si non-existante
-	if ($articles_versions AND $new != 'oui') {
+	if ($articles_versions) {
 		include("lab_revisions.php");
-		spip_log("version initiale de l'article $id_article");
-		$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0,1";
-		if (!spip_num_rows(spip_query($query))) {
-			$select = join(", ", $champs);
-			$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
-			$champs_originaux = spip_fetch_array(spip_query($query));
-			$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'));
+		if  ($new != 'oui') {
+			spip_log("version initiale de l'article $id_article");
+			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0,1";
+			if (!spip_num_rows(spip_query($query))) {
+				$select = join(", ", $champs);
+				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
+				$champs_originaux = spip_fetch_array(spip_query($query));
+				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'));
 
-			// Remettre une date un peu ancienne pour la version initiale 
-			if ($id_version == 1) // test inutile ?
-			spip_query("UPDATE spip_versions
-			SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
-			WHERE id_article=$id_article AND id_version=1");
+				// Remettre une date un peu ancienne pour la version initiale 
+				if ($id_version == 1) // test inutile ?
+				spip_query("UPDATE spip_versions
+				SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
+				WHERE id_article=$id_article AND id_version=1");
+			}
 		}
 	}
 
@@ -265,7 +267,6 @@ if ($titre && !$ajout_forum && $flag_editable) {
 
 	// Stockage des versions
 	if ($articles_versions) {
-		include("lab_revisions.php");
 		ajouter_version($id_article, $champs_versions);
 	}
 
