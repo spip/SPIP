@@ -274,13 +274,13 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	}
 
 	// chercher un auteur dans le fil au cas ou les entry n'en auraient pas
-	list($channel_head,$drop) = split($syndic_regexp['item'], $le_retour, 2);
-	if (ereg($syndic_regexp['author1'],$channel_head,$mat)) {
-		if (ereg($syndic_regexp['author2'],$mat[1],$match))
-			$les_auteurs_du_site = addslashes(filtrer_entites($match[1]));
-	}
 
 	if ($le_retour) {
+		list($channel_head,$drop) = split($syndic_regexp['item'], $le_retour, 2);
+		if (ereg($syndic_regexp['author1'],$channel_head,$mat)) {
+			if (ereg($syndic_regexp['author2'],$mat[1],$match))
+				$les_auteurs_du_site = addslashes(filtrer_entites($match[1]));
+	}
 		$i = 0;
 		while (ereg($syndic_regexp['item'],$le_retour,$regs)) {
 			$debut_item=strpos($le_retour,$regs[0]);
