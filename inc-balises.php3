@@ -76,7 +76,7 @@ function champs_traitements ($p) {
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
 	if ($p->boucles[$nom]->sql_serveur) {
-		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
+		erreur_squelette($p->nom_champ .' '._T('zbug_distant_interdit'), $nom);
 	}
 }
 
@@ -267,7 +267,10 @@ function balise_RECHERCHE_dist($p) {
 
 function balise_COMPTEUR_BOUCLE_dist($p) {
 	if ($p->id_mere === '') {
-		erreur_squelette(_L("Champ #COMPTEUR_BOUCLE hors boucle"), $p->id_boucle);
+		erreur_squelette(
+			_T('zbug_champ_hors_boucle',
+				array('champ' => '#COMPTEUR_BOUCLE')
+			), $p->id_boucle);
 		$p->code = "''";
 	} else {
 		$p->code = '$compteur_boucle';
@@ -279,7 +282,10 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_mere;
 	if ($b === '') {
-		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), $p->id_boucle);
+		erreur_squelette(
+			_T('zbug_champ_hors_boucle',
+				array('champ' => '#TOTAL_BOUCLE')
+			), $p->id_boucle);
 		$p->code = "''";
 	} else {
 		$p->code = "\$Numrows['$b']";
@@ -318,7 +324,10 @@ function balise_EXPOSER_dist($p) {
 	$type_boucle = $p->type_requete;
 	$primary_key = $table_primary[$type_boucle];
 	if (!$primary_key) {
-		erreur_squelette(_L("Champ #EXPOSER hors boucle"), $p->id_boucle);
+		erreur_squelette(_T('zbug_champ_hors_boucle',
+				array('champ' => '#EXPOSER')
+			), $p->id_boucle);
+
 	}
 	$on = 'on';
 	$off= '';
@@ -675,8 +684,10 @@ function balise_SELF_dist($p) {
 function balise_HTTP_VARS_dist($p) {
 	$nom = param_balise($p);
 	if (!$nom)
-		erreur_squelette(_L("Champ #HTTP_VARS argument manquant"),
-				$p->id_boucle);
+		erreur_squelette(
+			_T('zbug_champ_argument_manquant',
+				array('champ' => '#HTTP_VARS')
+			), $p->id_boucle);
 	else {
 		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
 		$p->statut = 'php';

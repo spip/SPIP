@@ -48,7 +48,8 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t");
 		$desc = $tables_des_serveurs_sql[$s][$nom_table];
 		if (!$desc) {
-			erreur_squelette(_L("Table SQL \"$r\" inconnue"), "'$idb'");
+			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
+				"'$idb'");
 			# continuer pour chercher l'erreur suivante
 			return  "'#" . $r . ':' . $nom_champ . "'";
 		}
@@ -250,7 +251,7 @@ function applique_filtres($p) {
 				else 
 				  $code = "erreur_squelette('".
 					  texte_script(
-						_T('erreur_filtre', array('filtre' => $fonc))
+						_T('zbug_erreur_filtre', array('filtre' => $fonc))
 					)."','" . $p->id_boucle . "')";
 			}
 		}
@@ -321,7 +322,10 @@ function rindex_pile($p, $champ, $motif)
 	$b = $p->boucles[$b]->id_parent;
 	}
 	if (!$p->code) {
-	  erreur_squelette(_L("Champ #" . strtoupper($champ) . " hors d'une boucle de motif $motif"), $p->id_boucle);
+		erreur_squelette(_T('zbug_champ_hors_motif',
+			array('champ' => '#' . strtoupper($champ),
+				'motif' => $motif)
+		), $p->id_boucle);
 	}
 	$p->statut = 'php';
 	return $p;

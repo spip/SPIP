@@ -140,7 +140,7 @@ function verifier_htaccess($rep) {
 		if ($GLOBALS['hebergeur'] != 'nexenservices'){
 			if (!$f = fopen($htaccess, "w"))
 				echo "<b>" .
-				  _L("ECHEC DE LA CREATION DE $htaccess") .
+				  "ECHEC DE LA CREATION DE $htaccess" . # ne pas traduire
 				  "</b>";
 			else
 			  {

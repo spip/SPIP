@@ -650,7 +650,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link->addVar('hash',
 						calculer_action_auteur("vign ".$document['fichier']));
 						$link->addVar('hash_id_auteur', $connect_id_auteur);
-						echo "<a href='".$link->getUrl("portfolio")."'>"._L('cr&eacute;ation automatique de la vignette')."</a>\n<hr />\n";
+						echo "<a href='".$link->getUrl("portfolio")."'>"._T('info_creer_vignette')."</a>\n<hr />\n";
 					}
 
 						// lien "upload vignette"

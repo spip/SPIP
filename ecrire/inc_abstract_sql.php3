@@ -54,7 +54,7 @@ function spip_abstract_serveur($f, $serveur) {
 	if (function_exists($f))
 		return $f;
 
-	erreur_squelette(_L(' serveur SQL indefini'), $serveur);
+	erreur_squelette(' '._T('zbug_serveur_indefini'), $serveur);
 
 	// hack pour continuer la chasse aux erreurs
 	return 'array';

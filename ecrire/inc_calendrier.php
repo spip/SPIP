@@ -235,7 +235,7 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 		else $img_att = "";
 		$retour .= "<span$img_att>"
 		  .http_href_img(($script . "type=$type&set_partie_cal=tout&$args"),
-				 "heures-tout.png", "width='13' height='13' class='format_png'",  _L('jour entier')) . "</span>";
+				 "heures-tout.png", "width='13' height='13' class='format_png'",  _T('cal_jour_entier')) . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "matin") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
@@ -243,7 +243,7 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 		  .http_href_img(($script . "type=$type&set_partie_cal=matin&$args"),
 				 "heures-am.png",
 				 "width='13' height='13' class='format_png'",
-				 _L('matin'))
+				 _T('cal_matin'))
 		  . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "soir") $img_att = " class='navigation-bouton-desactive'";
@@ -252,30 +252,30 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 		  .http_href_img(($script . "type=$type&set_partie_cal=soir&$args"),
 				 "heures-pm.png", 
 				 "width='13' height='13' class='format_png'",
-				 _L('apr&egrave;s-midi'))
+				 _T('cal_apresmidi'))
 		  . "</span>";
 		$retour .= "&nbsp;";
 		$retour .= http_href_img(($script . "type=$type&set_echelle=" .
 					  floor($echelle * 1.5) . "&$args"),
 					 "loupe-moins.gif",
 					 '',
-					 _L('zoom'). '-');
+					 _T('info_zoom'). '-');
 		$retour .= http_href_img(($script . "type=$type&set_echelle=" .
 					  floor($echelle / 1.5) . "&$args"), 
 					 "loupe-plus.gif",
 					 '', 
-					 _L('zoom'). '+');
+					 _T('info_zoom'). '+');
  		$retour .= "&nbsp;";
 
 
  	}
 
         $img_att = ($type == 'jour') ? " class='navigation-bouton-desactive'" : '';
-	$retour .= http_href_img(($script . "type=jour&echelle=$echelle&$args"),"cal-jour.gif", $img_att, _L('calendrier par jour')) . "&nbsp;";
+	$retour .= http_href_img(($script . "type=jour&echelle=$echelle&$args"),"cal-jour.gif", $img_att, _T('cal_par_jour')) . "&nbsp;";
 	$img_att = ($type == 'semaine') ?  " class='navigation-bouton-desactive'" : "" ;
-	$retour .= http_href_img($script . "type=semaine&echelle=$echelle&$args", "cal-semaine.gif", $img_att, _L('calendrier par semaine'))  . "&nbsp;";;
+	$retour .= http_href_img($script . "type=semaine&echelle=$echelle&$args", "cal-semaine.gif", $img_att, _T('cal_par_semaine'))  . "&nbsp;";;
 	$img_att = ($type == 'mois') ? " class='navigation-bouton-desactive'" : "" ;
-	$retour .= http_href_img($script . "type=mois&echelle=$echelle&$args","cal-mois.gif", $img_att, _L('calendrier par mois'));
+	$retour .= http_href_img($script . "type=mois&echelle=$echelle&$args","cal-mois.gif", $img_att, _T('cal_par_mois'));
 	
   	$retour .= "&nbsp;&nbsp;";
 
@@ -299,11 +299,11 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	if ($args_pred)
 		$retour .= http_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
 				     http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='format_png'  width='12' height='12'"),
-				     _L('pr&eacute;c&eacute;dent'));
+				     _T('precedent'));
 	if ($args_suiv)
 		$retour .= http_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
 				     http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='format_png' width='12' height='12'"),
-				     _L('suivant'));
+				     _T('suivant'));
   	$retour .= "&nbsp;&nbsp;";
  	$retour .= "<span style='font-weight: bold'>$nom</span>";
 	return $retour .

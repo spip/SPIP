@@ -12,7 +12,7 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 
 	echo "<div id='spip-debug' style='position: absolute; top: 20;",
 	" z-index: 1000;'><ul><li>",
-	_L("Erreur(s) dans le squelette"),
+	_T('zbug_erreur_squelette'),
 
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),

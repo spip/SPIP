@@ -312,12 +312,12 @@ if (!$origine) {
 		  echo http_href_img("statistiques_visites.php3?aff_jours=$aff_jours_plus$pour_article",
 				     'loupe-moins.gif',
 				     "border='0' valign='center'",
-				     _L('zoom'). '-'), "&nbsp;";
+				     _T('info_zoom'). '-'), "&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
 		  echo http_href_img("statistiques_visites.php3?aff_jours=$aff_jours_moins$pour_article", 
 				     'loupe-plus.gif',
 				     "border='0' valign='center'",
-				     _L('zoom'). '+'), "&nbsp;";
+				     _T('info_zoom'). '+'), "&nbsp;";
 	
 		/*
 		if ($spip_svg_plugin == 'oui') {
