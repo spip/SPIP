@@ -135,7 +135,7 @@ $annee = annee($date);
 
 
 
-debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee))), "redacteurs", "calendrier");
+debut_page(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee)), "redacteurs", "calendrier");
 $activer_messagerie = lire_meta("activer_messagerie");
 $connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
 

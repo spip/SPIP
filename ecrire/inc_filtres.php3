@@ -320,31 +320,18 @@ function affdate_base($numdate, $vue) {
 
 	// 1er, 21st, etc.
 	$journum = $jour;
-	switch ($spip_lang) {
-		case 'en':
-			switch($jour) {
-			case 0: $jour = ''; break;
-			case 1: $jour = '1st'; break;
-			case 2: $jour = '2nd'; break;
-			case 3: $jour = '3rd'; break;
-			case 21: $jour = '21st'; break;
-			case 22: $jour = '22nd'; break;
-			case 23: $jour = '23rd'; break;
-			case 31: $jour = '31st'; break;
-			default: $jour .= 'th';
-			}
-		case 'fr':
-			if ($jour == '1') $jour = '1er';
-	}
 
 	if ($jour == 0)
 		$jour = '';
+	else if ($jourth = _T('date_jnum'.$jour))
+			$jour = $jourth;
 
 	$mois = intval($mois);
-	if ($mois > 0 AND $mois < 13)
+	if ($mois > 0 AND $mois < 13) {
 		$nommois = _T('date_mois_'.$mois);
-	else
-		$nommois = '';
+		if ($jour)
+			$jourmois = _T('date_de_mois_'.$mois, array('j'=>$jour, 'nommois'=>$nommois));
+	}
 
 	if ($annee < 0) {
 		$annee = -$annee." "._T('date_avant_jc');
@@ -367,22 +354,22 @@ function affdate_base($numdate, $vue) {
 		if ($avjc) return $annee;
 		$a = date('Y');
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>ucfirst($nommois), 'annee'=>$annee)));
-		return  d_apostrophe(_T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
+		if ($annee != $a) return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>ucfirst($nommois), 'annee'=>$annee));
+		return _T('date_fmt_jour_mois', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 
 	case 'jourcourt':
 		if ($avjc) return $annee;
 		$a = date('Y');
 		if ($annee < ($a - 100) OR $annee > ($a + 100)) return $annee;
-		if ($annee != $a) return d_apostrophe(_T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
-		return  d_apostrophe(_T('date_fmt_jour_mois', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
+		if ($annee != $a) return _T('date_fmt_jour_mois_annee', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
+		return _T('date_fmt_jour_mois', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 
 	case 'entier':
 		if ($avjc) return $annee;
 		if ($jour)
-			return d_apostrophe(_T('date_fmt_jour_mois_annee', array ('jour'=>$jour, 'nommois'=>$nommois, 'mois'=>$mois, 'annee'=>$annee)));
+			return _T('date_fmt_jour_mois_annee', array ('jourmois'=>$jourmois, 'jour'=>$jour, 'mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 		else
-			return d_apostrophe(_T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
+			return _T('date_fmt_mois_annee', array ('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee));
 
 	case 'nom_mois':
 		return $nommois;
@@ -404,7 +391,7 @@ function affdate_base($numdate, $vue) {
 
 	case 'mois_annee':
 		if ($avjc) return $annee;
-		return trim(d_apostrophe(_T('date_fmt_mois_annee', array('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee))));
+		return trim(_T('date_fmt_mois_annee', array('mois'=>$mois, 'nommois'=>$nommois, 'annee'=>$annee)));
 
 	case 'annee':
 		return $annee;
@@ -459,15 +446,6 @@ function affdate_mois_annee($numdate) {
 
 function affdate_heure($numdate) {
 	return _T('date_fmt_jour_heure', array('jour' => affdate($numdate), 'heure' => heures_minutes($numdate)));
-}
-
-// renvoie "d'octobre" (ocitan) ou "de octubre" (espagnol)
-function d_apostrophe($texte) {
-	global $spip_lang;
-	if (ereg("^(oc_.+|fr|ca)$",$spip_lang))
-		return ereg_replace("^(.+ )?de ([aeiou])", "\\1d'\\2", $texte);
-	else
-		return $texte;
 }
 
 
