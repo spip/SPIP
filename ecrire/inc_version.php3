@@ -920,7 +920,7 @@ function email_valide($adresse) {
 			// "Marie Toto <Marie@toto.com>"
 			$adresse = eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $adresse);
 			// RFC 822
-			if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)?$', trim($adresse)))
+			if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', trim($adresse)))
 				return false;
 		}
 		return true;
