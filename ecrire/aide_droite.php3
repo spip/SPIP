@@ -28,6 +28,19 @@ include_ecrire ("inc_filtres.php3");
 	label {cursor: pointer;}
 	.arial1 {font-family: Arial, Helvetica, sans-serif; font-size: 10px;}
 	.arial2 {font-family: Arial, Helvetica, sans-serif; font-size: 12px;}
+	.spip_cadre {
+		width : 100%;
+		background-color: #FFFFFF;
+		padding: 5px;
+	}
+	.spip_quote {
+		margin-left : 40px;
+		margin-top : 10px;
+		margin-bottom : 10px;
+		border : solid 1px #aaaaaa;
+		background-color: #dddddd;
+		padding: 5px;
+	}
 
 	a {text-decoration: none;}
 	a:hover {color:#FF9900; text-decoration: underline;}
