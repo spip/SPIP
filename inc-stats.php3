@@ -7,7 +7,6 @@ define("_INC_STATS", "1");
 
 function ecrire_stats() {
 	global $id_article, $id_breve, $id_rubrique, $admin_ok;
-	include_ecrire("inc_db_mysql.php3");	// necessaire si on tombe dans le cache
 	include_ecrire("inc_connect.php3");
 	if (!$GLOBALS['db_ok'])
 		return;
