@@ -1221,7 +1221,33 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 			}
 		}
 		break;
-	
+
+	case 'EXPOSER':
+		$on = 'on';
+		$off='';
+		if ($fonctions) {
+			// Gerer la notation [(#EXPOSER|on,off)]
+			reset($fonctions);
+			list(, $onoff) = each($fonctions);
+			ereg("([^,]*)(,(.*))?", $onoff, $regs);
+			$on = addslashes($regs[1]);
+			$off = addslashes($regs[3]);
+
+			// autres filtres
+			$filtres=Array();
+			while (list(, $nom) = each($fonctions)) {
+				$filtres[] = $nom;
+			}
+			$fonctions = $filtres;
+		}
+		$id_on_off = $GLOBALS['tables_doublons'][$boucles[$id_boucle]->type_requete];
+		if ($id_on_off) 
+			$code = "(\$GLOBALS['$id_on_off'] == \$contexte['$id_on_off']) ? '$on' : '$off'";
+		else 
+			$code = "'$off'";
+		break;
+
+	// conservation temporaire pour compatibilite, a supprimer comme |exposer apres referendum
 	case 'ON_OFF':
 		$id_on_off = $GLOBALS['tables_doublons'][$boucles[$id_boucle]->type_requete];
 		if ($id_on_off) 

@@ -502,9 +502,7 @@ function date_iso($date_heure) {
 	return gmdate("Y-m-d\TH:i:s\Z", $time);
 }
 
-// [(#ID_ARTICLE|exposer)] affiche 'on' si on est sur l'objet (article,
-// breve, rubrique, mot, auteur) correspondant a la page visualisee ;
-// Utiliser |exposer{on,off} pour modifier les valeurs de retour
+// A supprimer apres referendum, remplace' par #EXPOSER et [(#EXPOSER|on,off)]
 function exposer ($id, $identique='on', $different='') {
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur;
 

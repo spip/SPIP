@@ -2040,7 +2040,7 @@ function install_debut_html($titre = 'AUTO') {
 	<center>
 	<table width='450'>
 	<tr><td width='450' class='serif'>
-	<font face='Verdana,Arial,Sans,sans-serif' size='4' color='#970038'><B>$titre</b></font>";
+	<font face='Verdana,Arial,Sans,sans-serif' size='4' color='#970038'><B>$titre</b></font>\n<p>";
 }
 
 function install_fin_html() {
