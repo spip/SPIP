@@ -323,6 +323,101 @@ function typo($letexte) {
 }
 
 
+// cette fonction est tordue : on lui passe un tableau correspondant au match
+// de la regexp ci-dessous, et elle retourne le texte a inserer a la place
+// et le lien "brut" a usage eventuel de redirection...
+function extraire_lien ($regs) {
+	if (file_exists('inc-urls.php3')) {
+		include_local('inc-urls.php3');
+	} elseif (file_exists('inc-urls-dist.php3')) {
+		include_local('inc-urls-dist.php3');
+	} else {
+		include_ecrire('inc_urls.php3');
+	} 
+
+	$lien_texte = $regs[1];
+	$ouvrant = ($regs[2] == '>');
+	$lien_url = trim($regs[3]);
+	$compt_liens++;
+	$lien_interne = false;
+	if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site)? *([[:digit:]]+)$', $lien_url, $match)) {
+		// Traitement des liens internes
+		$id_lien = $match[6];
+		$type_lien = $match[1];
+		$lien_interne=true;
+		$class_lien = "in";
+		switch (substr($type_lien, 0, 2)) {
+			case 'ru':
+				$lien_url = generer_url_rubrique($id_lien);
+				if (!$lien_texte) {
+					$req = "select titre from spip_rubriques where id_rubrique=$id_lien";
+					$row = @mysql_fetch_array(@spip_query($req));
+					$lien_texte = $row['titre'];
+				}
+				break;
+			case 'br':
+				$lien_url = generer_url_breve($id_lien);
+				if (!$lien_texte) {
+					$req = "select titre from spip_breves where id_breve=$id_lien";
+					$row = @mysql_fetch_array(@spip_query($req));
+					$lien_texte = $row['titre'];
+				}
+				break;
+			case 'au':
+				$lien_url = generer_url_auteur($id_lien);
+				if (!$lien_texte) {
+					$req = "select nom from spip_auteurs where id_auteur = $id_lien";
+					$row = @mysql_fetch_array(@spip_query($req));
+					$lien_texte = $row['nom'];
+				}
+				break;
+			case 'mo':
+				$lien_url = generer_url_mot($id_lien);
+				if (!$lien_texte) {
+					$req = "select titre from spip_mots where id_mot=$id_lien";
+					$row = @mysql_fetch_array(@spip_query($req));
+					$lien_texte = $row['titre'];
+				}
+				break;
+			case 'si':
+				$row = @mysql_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
+				if ($row) {
+					$lien_url = $row['url_site'];
+					if (!$lien_texte)
+						$lien_texte = typo($row['nom_site']);
+				}
+				break;
+			default:
+				$lien_url = generer_url_article($id_lien);
+				if (!$lien_texte) {
+					$req = "select titre from spip_articles where id_article=$id_lien";
+					$row = @mysql_fetch_array(@spip_query($req));
+					$lien_texte = $row['titre'];
+				}
+				break;
+		}
+	} else {	// lien non automatique
+		$class_lien = "out";
+		// texte vide ?
+		if ((!$lien_texte) and (!$lien_interne)) {
+			$lien_texte = ereg_replace('"', '', $lien_url);
+			if (strlen($lien_texte)>40)
+				$lien_texte = substr($lien_texte,0,35).'...';
+			$class_lien = "url";
+		}
+		// petites corrections d'URL
+		if (ereg("^www\.[^@]+$",$lien_url))
+			$lien_url = "http://".$lien_url;
+		else if (email_valide($lien_url))
+			$lien_url = "mailto:".trim($lien_url);
+	}
+
+	$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
+		.($ouvrant ? " target='_blank'" : '')
+		.">".typo($lien_texte)."</a>";
+
+	return array($insert, $lien_url);
+}
 
 //
 // Traitement des listes (merci a Michael Parienti)
@@ -468,92 +563,13 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 
 	//
-	// Raccourcis liens
+	// Raccourcis liens (cf. fonction extraire_lien ci-dessus)
 	//
 	$regexp = "\[([^][]*)->(>?)([^]]*)\]";
 	$texte_a_voir = $letexte;
 	$texte_vu = '';
 	while (ereg($regexp, $texte_a_voir, $regs)){
-		$lien_texte = $regs[1];
-		$ouvrant = ($regs[2] == '>');
-		$lien_url = trim($regs[3]);
-		$compt_liens++;
-		$lien_interne = false;
-		if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site)? *([[:digit:]]+)$', $lien_url, $match)) {
-			// Traitement des liens internes
-			$id_lien = $match[6];
-			$type_lien = $match[1];
-			$lien_interne=true;
-			$class_lien = "in";
-			switch (substr($type_lien, 0, 2)) {
-				case 'ru':
-					$lien_url = generer_url_rubrique($id_lien);
-					if (!$lien_texte) {
-						$req = "select titre from spip_rubriques where id_rubrique=$id_lien";
-						$row = @mysql_fetch_array(@spip_query($req));
-						$lien_texte = $row['titre'];
-					}
-					break;
-				case 'br':
-					$lien_url = generer_url_breve($id_lien);
-					if (!$lien_texte) {
-						$req = "select titre from spip_breves where id_breve=$id_lien";
-						$row = @mysql_fetch_array(@spip_query($req));
-						$lien_texte = $row['titre'];
-					}
-					break;
-				case 'au':
-					$lien_url = generer_url_auteur($id_lien);
-					if (!$lien_texte) {
-						$req = "select nom from spip_auteurs where id_auteur = $id_lien";
-						$row = @mysql_fetch_array(@spip_query($req));
-						$lien_texte = $row['nom'];
-					}
-					break;
-				case 'mo':
-					$lien_url = generer_url_mot($id_lien);
-					if (!$lien_texte) {
-						$req = "select titre from spip_mots where id_mot=$id_lien";
-						$row = @mysql_fetch_array(@spip_query($req));
-						$lien_texte = $row['titre'];
-					}
-					break;
-				case 'si':
-					$row = @mysql_fetch_array(@spip_query("SELECT nom_site,url_site FROM spip_syndic WHERE id_syndic=$id_lien"));
-					if ($row) {
-						$lien_url = $row['url_site'];
-						if (!$lien_texte)
-							$lien_texte = typo($row['nom_site']);
-					}
-					break;
-				default:
-					$lien_url = generer_url_article($id_lien);
-					if (!$lien_texte) {
-						$req = "select titre from spip_articles where id_article=$id_lien";
-						$row = @mysql_fetch_array(@spip_query($req));
-						$lien_texte = $row['titre'];
-					}
-					break;
-			}
-		} else {	// lien non automatique
-			$class_lien = "out";
-			// texte vide ?
-			if ((!$lien_texte) and (!$lien_interne)) {
-				$lien_texte = ereg_replace('"', '', $lien_url);
-				if (strlen($lien_texte)>40)
-					$lien_texte = substr($lien_texte,0,35).'...';
-				$class_lien = "url";
-			}
-			// petites corrections d'URL
-			if (ereg("^www\.[^@]+$",$lien_url))
-				$lien_url = "http://".$lien_url;
-			else if (email_valide($lien_url))
-				$lien_url = "mailto:".trim($lien_url);
-		}
-
-		$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
-			.($ouvrant ? " target='_blank'" : '')
-			.">".typo($lien_texte)."</a>";
+		list($insert, $lien) = extraire_lien($regs);
 		$zetexte = split($regexp,$texte_a_voir,2);
 
 		// typo en-dehors des notes

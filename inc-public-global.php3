@@ -104,6 +104,7 @@ if (!$use_cache) {
 
 	$calculer_cache = true;
 
+	// redirection d'article via le chapo =http...
 	if ($id_article) {
 		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
@@ -111,7 +112,11 @@ if (!$use_cache) {
 			$chapo = $row['chapo'];
 		}
 		if (substr($chapo, 0, 1) == '=') {
-			$url = substr($chapo, 1);
+			include_ecrire('inc_texte.php3');
+
+			$regs = array('','','',substr($chapo, 1));
+			list(,$url) = extraire_lien($regs);
+
 			$texte = "<"."?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
 			if ($GLOBALS['flag_apc']) {
