@@ -1,11 +1,9 @@
 <?php
 
 // This is a SPIP language file  --  Ceci est un fichier langue de SPIP
-// Este e un ficheiro de linguaxe para SPIP (popular unoficial galician)
-// se non estas dacordo coa escrita, pois nos tampouco. Reclamacions a
-// joshe@hacklab.casaencantada.org e a cristasol@hacklab.casaencantada.org
 
 $GLOBALS['i18n_gl'] = array(
+
 
 // 0
 '0_URL' => '',
@@ -417,7 +415,6 @@ Gracias pola t&uacute;a participaci&oacute;n
 'icone_voir_en_ligne' => 'Ver en li&ntilde;a',
 'icone_voir_sites_references' => 'Ver os lugares referidos',
 'icone_voir_tous_mots_cles' => 'Ver todas as palabras chave',
-
 'image_administrer_rubrique' => 'Podes administrar este tema',
 'info_1_article' => '1 artigo',
 'info_1_breve' => '1 breve',
@@ -491,7 +488,6 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_base_installee' => 'A estructura da base de datos foi instalada.',
 'info_base_restauration' => 'A base est&aacute; en proceso de restauraci&oacute;n.',
 'info_bloquer_lien' => 'Bloquear esta ligaz&oacute;n',
-
 'info_breves' => 'O teu lugar empregar&aacute; o sistema de breves?',
 'info_breves_02' => 'Breves',
 'info_breves_03' => 'breves',
@@ -637,6 +633,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_joindre_document_article' => 'Podes engadir a este artigo documentos do tipo',
 'info_joindre_document_rubrique' => 'Podes engadir neste tema documentos do tipo',
 'info_joindre_documents_article' => 'Podes engadir &oacute; teu artigo documentos do tipo:',
+'info_jours' => '<NEW> jours',
 'info_l_article' => 'o artigo',
 'info_la_breve' => 'a breve',
 'info_la_rubrique' => 'o tema',
@@ -860,7 +857,6 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_site_valider' => 'Lugares &aacute; validar',
 'info_site_web' => 'LUGAR WEB:',
 'info_sites' => 'lugares',
-
 'info_sites_lies_mot' => 'Os lugares referidos ligados a esta palabra chave',
 'info_sites_proxy' => 'Empregar un proxy',
 'info_sites_referencer' => 'Referir un lugar',
@@ -910,6 +906,8 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_tout_afficher' => 'Amosar todo',
 'info_tout_site' => 'Todo o lugar',
 'info_travail_colaboratif' => 'Traballo de colaboraci&oacute;n nos artigos',
+'info_travaux_texte' => '<NEW> Ce site n\'est pas encore configur&eacute;. Revenez plus tard...',
+'info_travaux_titre' => '<NEW> Site en travaux',
 'info_trop_resultat' => 'Resultados abondo de m&aacute;is para "@cherche_mot@" ; por favor, afina a t&uacute;a percura.',
 'info_un_article' => 'un artigo,',
 'info_un_mot' => 'Unha palabra a cada vez',
@@ -1048,7 +1046,6 @@ Gracias pola t&uacute;a participaci&oacute;n
 'lien_trier_nom' => 'Ordear por nome',
 'lien_trier_nombre_articles' => 'Ordear por n&uacute;mero de artigos',
 'lien_trier_statut' => 'Ordear por categor&iacute;a',
-
 'lien_visite_site' => 'visitar este lugar',
 'lien_visites' => '@visites@ visitas',
 'lien_voir_auteur' => 'Ver est@ autor/a',
@@ -1071,8 +1068,6 @@ Gracias pola t&uacute;a participaci&oacute;n
 'login_non_securise' => 'Atenci&oacute;n, este formul&aacute;rio non &eacute; seguro.
 		Se non queres que o teu contrasinal poda ser interceptado
 		na rede, activa o Xavascript no teu navegador e',
-
-
 'login_nouvelle_tentative' => 'Nova tentativa',
 'login_par_ici' => 'Xa te rexistraches... por eiqu&iacute;...',
 'login_pass2' => 'Contrasinal:',
@@ -1172,7 +1167,6 @@ Gracias pola t&uacute;a participaci&oacute;n
 'onglet_evolution_visite' => 'Evoluci&oacute;n das visitas',
 'onglet_fonctions_avances' => 'Funci&oacute;ns avanzadas',
 'onglet_informations_personnelles' => 'Informaci&oacute;ns perso&aacute;is',
-
 'onglet_interactivite' => 'Interactividade',
 'onglet_langue' => 'Idiomas do lugar',
 'onglet_messagerie' => 'Mensaxer&iacute;a',
@@ -1273,7 +1267,6 @@ e reconectar co lugar.
 'texte_breves' => 'As breves son textos curtos e simples que permeten
 		publicar r&aacute;pidamente informaci&oacute;ns concisas, xestionar unha
 		revista de prensa, un calendario de eventos...',
-
 'texte_choix_base_1' => 'Elixe a t&uacute;a base:',
 'texte_choix_base_2' => 'O servidor MySQL cont&eacute;n v&aacute;rias bases de datos.',
 'texte_choix_base_3' => '<B>Selecciona</B> eiqu&iacute; a que che dera o teu proveedor:',
@@ -1433,7 +1426,6 @@ e reconectar co lugar.
 'texte_statut_attente_validation' => 'agardando po.la validaci&oacute;n',
 'texte_statut_en_cours_redaction' => 'en proceso de redacci&oacute;n',
 'texte_statut_poubelle' => 'no lixo',
-
 'texte_statut_propose_evaluation' => 'proposto para evaluaci&oacute;n',
 'texte_statut_publie' => 'publicado en li&ntilde;a',
 'texte_statut_publies' => 'publicados en li&ntilde;a',
@@ -1569,5 +1561,6 @@ e reconectar co lugar.
 'titre_titre_document' => 'T&iacute;tulo do documento:'
 
 );
+
 
 ?>
