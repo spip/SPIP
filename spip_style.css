@@ -26,6 +26,10 @@ h3.spip {
 	padding: 0em;
 }
 
+.spip_puce {
+	list-style-position: inside;
+}
+
 .spip_documents{
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-size : 70%;
