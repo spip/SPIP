@@ -11,10 +11,11 @@ define("_INC_ADMIN", "1");
 //
 
 function bouton_admin($titre, $lien) {
+	include_ecrire("inc_filtres.php3");
 	$link = new Link($lien);
 	$link->delVar('submit');
 	echo $link->getForm('GET');
-	echo "<INPUT TYPE='submit' NAME='submit' VALUE='$titre' CLASS='spip_bouton'>\n";
+	echo "<INPUT TYPE='submit' NAME='submit' VALUE=\"".attribut_html($titre)."\" CLASS='spip_bouton'>\n";
 	echo "</FORM>";
 }
 
@@ -43,7 +44,7 @@ function afficher_boutons_admin() {
 	echo $link->getForm('GET');
 	if ($GLOBALS['use_cache']) $pop = " *";
 	else $pop = "";
-	echo "<input type='submit' class='spip_bouton' name='submit' value='".addslashes(_T('admin_recalculer')).$pop."'>";
+	echo "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\">";
 	echo "</form>\n";
 
 	if (lire_meta("activer_statistiques") != "non" AND $id_article) {
