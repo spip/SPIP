@@ -146,9 +146,9 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	}
 
 
-	echo "<TR><TD align='$spip_lang_left'><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
-	echo "<TD ALIGN='center' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>".affdate_mois_annee("$annee_today-$mois_today-1")." ".aide ("messcalen")."</B></FONT></TD>";
-	echo "<TD align='$spip_lang_right'><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
+	echo "<TR><TD style='text-align:$spip_lang_left;'><A HREF='calendrier.php3?mois=$mois_prec&annee=$annee_prec'><img src='img_pack/fleche-$spip_lang_left.png' alt='&lt;&lt;&lt;' width='12' height='12' border='0'></A></TD>";
+	echo "<TD style='text-align:center;' COLSPAN=5><FONT FACE='arial,helvetica,sans-serif' SIZE=3><B>".affdate_mois_annee("$annee_today-$mois_today-1")." ".aide ("messcalen")."</B></FONT></TD>";
+	echo "<TD style='text-align:$spip_lang_right;'><A HREF='calendrier.php3?mois=$mois_suiv&annee=$annee_suiv'><img src='img_pack/fleche-$spip_lang_right.png' alt='&gt;&gt;&gt;' width='12' height='12' border='0'></A></TD></TR>";
 
 	echo "<TR>";
 	echo "<TD ALIGN='center' width='$largeur_col' style='border-bottom: 1px solid black; border-right: 1px solid black; border-left: 1px solid $couleur_claire; border-top: 1px solid $couleur_claire;'  BGCOLOR='$couleur_foncee'><font class='verdana2' color='#FFFFFF'><B>"._T('date_jour_2')."</B></TD>";
