@@ -30,6 +30,9 @@ $fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
 $fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
 if (strlen($fichier_cache) > 24)
 	$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-', '\1-', $fichier_cache), -24);
+
+if (!$fichier_cache)
+	$fichier_cache = 'sommaire-';
 $fichier_cache .= '.'.substr($md_cache, 1, 6);
 
 $subdir_cache = substr($md_cache, 0, 1);
