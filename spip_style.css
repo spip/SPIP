@@ -7,9 +7,9 @@ a:hover {
 	text-decoration: underline;
 }
 
-a.spip_url  { }
-a.spip_in   { } 
-a.spip_out  { } 
+a.spip_url { }
+a.spip_in { }
+a.spip_out { }
 
 .spip_code { }
 
@@ -56,17 +56,17 @@ i.spip { }
 
 .forml { width: 100% ; background-color: #FFDDAA;}
 
-.spip_encadrer { 
+.spip_encadrer {
 	width : 100%;
-	background-color: #FFFFFF; 
-	padding: 5px; 
-	border: 1px #666666 solid; 
+	background-color: #FFFFFF;
+	padding: 5px;
+	border: 1px #666666 solid;
 }
 
-.spip_cadre { 
+.spip_cadre {
 	width : 100%;
-	background-color: #FFFFFF; 
-	padding: 5px; 
+	background-color: #FFFFFF;
+	padding: 5px;
 }
 
 
@@ -80,3 +80,5 @@ i.spip { }
 	font-size: 110%;
 	color: red;
 }
+
+.spip_surligne { background-color: #FFFF66; }

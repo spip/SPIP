@@ -160,7 +160,7 @@ if ($meta["debut_restauration"]) {
 	fin_page();
 	echo "</HTML><font color='white'>\n<!--";
 	@flush();
-	$gz = $gz_exists;
+	$gz = $flag_gz;
 	$_fopen = ($gz) ? gzopen : fopen;
 
 	if ($ok) {

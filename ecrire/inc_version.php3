@@ -33,8 +33,9 @@ $flag_str_replace = ($php_version_maj > 3 OR $php_version_min >= 8);
 $flag_strpos_3 = (@strpos('baba', 'a', 2) == 3);
 
 if ($flag_function_exists) {
-	$gz_exists = function_exists("gzopen");
-	$ob_exists = function_exists("ob_gzhandler");
+	$flag_gz = function_exists("gzopen");
+	$flag_obgz = function_exists("ob_gzhandler");
+	$flag_ob = function_exists("ob_start");
 	$flag_preg_replace = function_exists("preg_replace");
 	$flag_crypt = function_exists("crypt");
 	$flag_wordwrap = function_exists("wordwrap");
@@ -42,8 +43,9 @@ if ($flag_function_exists) {
 	$flag_sapi_name = function_exists("php_sapi_name");
 }
 else {
-	$gz_exists = false;
-	$ob_exists = false;
+	$flag_gz = false;
+	$flag_obgz = false;
+	$flag_ob = false;
 	$flag_preg_replace = false;
 	$flag_crypt = true; // la non-existence de crypt est une exception
 	$flag_wordwrap = false;
@@ -227,7 +229,7 @@ function tester_accesdistant() {
 // compressee pour economiser de la bande passante
 //
 
-if ($ob_exists) {
+if ($flag_obgz) {
 	$use_gz = true;
 
 	// special bug de proxy

@@ -144,6 +144,19 @@ else {
 
 
 //
+// si $var_s est positionnee, on met en rouge les mots cherches (php4 uniquement)
+//
+
+if ($var_s) {
+	if ($flag_ob AND $flag_preg_replace AND $var_s AND !$flag_preserver) {
+		include_ecrire("inc_filtres.php3");
+		ob_start();
+	} else
+		$var_s = false;
+}
+
+
+//
 // Inclusion du cache pour envoyer la page au client
 //
 
@@ -154,6 +167,23 @@ if (file_exists($chemin_cache)) {
 		apc_rm($chemin_cache);
 	}
 }
+
+
+//
+// suite et fin mots en rouge
+//
+
+if ($var_s) {
+	$la_page = ob_get_contents();
+	ob_end_clean();
+	echo mots_surligne($la_page);
+}
+
+
+//
+// nettoie
+//
+
 @flush();
 if (!$delais) @unlink($chemin_cache);
 

@@ -57,7 +57,7 @@ le contenu de la base dans un fichier qui sera stock&eacute; dans le r&eacute;pe
 N'oubliez pas &eacute;galement de r&eacute;cup&eacute;rer l'int&eacute;gralit&eacute; du r&eacute;pertoire <i>IMG/</i>, qui contient
 les images utilis&eacute;es dans les articles et les rubriques.";
 
-if ($gz_exists) {
+if ($flag_gz) {
 	echo "\n<p align='justify'>Vous pouvez choisir de sauvegarder le fichier sous forme compress&eacute;e, afin
 	d'&eacute;courter son transfert chez vous ou sur un serveur de sauvegardes, et d'&eacute;conomiser de l'espace disque.<p>";
 	echo "\n<INPUT TYPE='radio' NAME='gz' VALUE='1' id='gz_on' CHECKED><label for='gz_on'> sauvegarde compress&eacute;e sous <b>ecrire/data/dump.xml.gz</b> </label><BR>\n";
@@ -96,7 +96,7 @@ Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pert
 irr&eacute;versibles.</b>";
 
 
-if ($gz_exists) {
+if ($flag_gz) {
 	$fichier_defaut = 'dump.xml.gz';
 	$texte_compresse = "(celui-ci peut &ecirc;tre compress&eacute; ou non)&nbsp;";
 }
