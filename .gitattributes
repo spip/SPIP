@@ -1,11 +1,14 @@
 * text=auto !eol
+IMG/icones/ai-dist.png -text
 IMG/icones/aiff-dist.png -text
 IMG/icones/asf-dist.png -text
 IMG/icones/avi-dist.png -text
 IMG/icones/bmp-dist.png -text
 IMG/icones/bz2-dist.png -text
+IMG/icones/deb-dist.png -text
 IMG/icones/defaut-dist.png -text
 IMG/icones/doc-dist.png -text
+IMG/icones/dvi-dist.png -text
 IMG/icones/eps-dist.png -text
 IMG/icones/gif-dist.png -text
 IMG/icones/gz-dist.png -text
@@ -25,16 +28,20 @@ IMG/icones/qt-dist.png -text
 IMG/icones/ra-dist.png -text
 IMG/icones/ram-dist.png -text
 IMG/icones/rm-dist.png -text
+IMG/icones/rpm-dist.png -text
 IMG/icones/rtf-dist.png -text
 IMG/icones/sdd-dist.png -text
 IMG/icones/sdw-dist.png -text
 IMG/icones/sit-dist.png -text
+IMG/icones/sxc-dist.png -text
 IMG/icones/sxi-dist.png -text
 IMG/icones/sxw-dist.png -text
+IMG/icones/tex-dist.png -text
 IMG/icones/tgz-dist.png -text
 IMG/icones/tif-dist.png -text
 IMG/icones/txt-dist.png -text
 IMG/icones/wav-dist.png -text
+IMG/icones/xcf-dist.png -text
 IMG/icones/xls-dist.png -text
 IMG/icones/xml-dist.png -text
 IMG/icones/zip-dist.png -text

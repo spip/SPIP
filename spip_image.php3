@@ -238,7 +238,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur)) {
 		exit;
 	}
-	
 
 	if (ereg("\.([^.]+)$", $orig, $match)) {
 		$ext = addslashes(strtolower($match[1]));
@@ -257,9 +256,21 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	else return false;
 
 	//
+	// Recopier le fichier
+	//
+	$dest = 'IMG/';
+	if (creer_repertoire('IMG', $ext))
+		$dest .= $ext.'/';
+	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
+	$n = 0;
+	while (file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
+	$dest_path = $newFile;
+
+	if (!deplacer_fichier_upload($source, $dest_path)) return false;
+
+	//
 	// Preparation
 	//
-
 	if ($mode == 'vignette') {
 		$id_document_lie = $id_document;
 		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
@@ -277,17 +288,9 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		}
 	}
 
-	$dest = 'IMG/';
-	if (creer_repertoire('IMG', $ext))
-		$dest .= $ext.'/';
-	$dest .= ereg_replace("[^.a-zA-Z0-9_=-]+", "_", translitteration(ereg_replace("\.([^.]+)$", "", supprimer_tags(basename($orig)))));
-	$n = 0;
-	while (file_exists($newFile = $dest.($n++ ? '-'.$n : '').'.'.$ext));
-	$dest_path = $newFile;
-
-	if (!deplacer_fichier_upload($source, $dest_path)) return false;
-
+	//
 	// Creer une vignette automatiquement
+	//
 	$creer_preview=lire_meta("creer_preview");
 	$taille_preview=lire_meta("taille_preview");
 	$gd_formats = lire_meta("gd_formats");
@@ -314,9 +317,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	}
 
 	//
-	// Recopier le fichier
+	// Mettre a jour les infos du document uploade
 	//
-
 	$size_image = getimagesize($dest_path);
 	$type_image = decoder_type_image($size_image[2]);
 	if ($type_image) {
@@ -350,7 +352,6 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		spip_query($query);
 
 	}
-
 
 	return $id_document;
 }
