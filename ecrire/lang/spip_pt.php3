@@ -252,11 +252,11 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'dirs_commencer' => 'afim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => ' Preliminar : <B>Resolver os problemas de acesso</B>',
 'dirs_probleme_droits' => '<b>Problema de direitos de acesso</b>',
-'dirs_repertoires_absents' => '<MODIF>  <B>Os seguintes repert&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
-  <P>&Ecirc; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
+'dirs_repertoires_absents' => '<B>Os seguintes repert&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
+  <P>&Eacute; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes repert&oacute;rios concordam com o que est&aacute; exibido
- acima; se n&atilde;o for o caso, renomear os repert&oacute;rios com o seu software FTP de modo a corrigir o erro.
-  <P>Uma vez efectuada essa manipula&ccedil;&atilde;o, poder&aacute;',
+ acima; se n&atilde;o for o caso, renomeie os repert&oacute;rios com o seu software FTP de modo a corrigir o erro.
+  <P>Terminada esta opera&ccedil;&atilde;o, poder&aacute;',
 'dirs_repertoires_suivants' => '<B>Os seguintes repert&oacute;rios n&atilde;o s&atilde;o acess&iacute;veis em escrita&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Para remediar, utilize o seu cliente FTP para resolver os direitos de acesso de cada um
   desses repert&oacute;rios. O procedimento est&aacute; explicado em pormenor no manual de instala&ccedil;&atilde;o.
@@ -306,11 +306,11 @@ ou da rede',
 'entree_titre_image' => 'T&iacute;tulo da imagem&nbsp;:',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obrigat&oacute;rio]<BR>',
 'entree_url' => 'O endere&ccedil;o (URL) do seu s&iacute;tio',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: Dupla Defini&ccedil;&atilde;o ',
+'erreur_boucle_fermant' => 'BOUCLE@id@: tag final em falta   ',
+'erreur_boucle_syntaxe' => 'Loop com sintaxe incorrecto',
+'erreur_boucle_syntaxe2' => 'O Loop @milieu@ est&aacute; incorrecto.',
+'erreur_filtre' => 'Erro : filtro <b>&laquo; @filtre@ &raquo;</b> indefinido',
 
 
 // F
@@ -359,7 +359,7 @@ Para validar a sua assinatura, basta conectar-se ao
 Obrigado pela sua participa&ccedil;&atilde;o
 ',
 'form_pet_message_commentaire' => 'Uma mensagem,um coment&aacute;rio&nbsp;?',
-'form_pet_nom_site2' => '<B>Nome do seu s&iacute;tio Web',
+'form_pet_nom_site2' => 'Nome do seu s&iacute;tio Web',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, as assinaturas est&atilde;o temporariamente suspensas.',
 'form_pet_signature_pasprise' => 'A sua assinatura n&atilde;o est&aacute; tomada em conta.',
 'form_pet_signature_validee' => 'A sua assinatura est&aacute; validada.Aparecer&aacute; na pr&oacute;xima actualiza&ccedil;&atilde;o do s&iacute;tio. Obrigado&nbsp;!',
@@ -422,13 +422,13 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'ical_texte_js' => 'Uma linha de javascript permite-lhe exibir, muito simplesmente, em qualquer s&iacute;tio que lhe perten&ccedil;a, os artigos recentes publicados neste s&iacute;tio.',
 'ical_texte_prive' => 'Este calend&aacute;rio, de uso estritamente pessoal, informa sobre a actividade editorial privada deste s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostos...).',
 'ical_texte_public' => 'Este calend&aacute;rio permite acompanhar a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicados).',
-'ical_texte_rss' => '<MODIF> Pode vincular as novidades deste s&iacute;tio em qualquer leitor de ficheiros de formato XML/RSS (Rich Site Summary). &Eacute; tamb&eacute;m o formato que permite a SPIP ler as novidades publicadas em outros s&iacute;tios que utilizam um formato de troca compat&iacute;vel.',
-'ical_texte_rss_articles' => '<NEW> Le fichier &laquo;backend&raquo; des articles de ce site se trouve &agrave; l\'adresse:',
-'ical_texte_rss_articles2' => '<NEW> Vous pouvez &eacute;galement obtenir des fichiers &laquo;backend&raquo; pour les articles de chaque rubrique du site:',
-'ical_texte_rss_breves' => '<NEW> Il existe de plus un fichier contenant les br&egrave;ves du site. En pr&eacute;cisant un num&eacute;ro de rubrique, vous obtiendrez uniquement les br&egrave;ves de cette rubrique.',
+'ical_texte_rss' => 'Pode vincular as novidades deste s&iacute;tio em qualquer leitor de ficheiros de formato XML/RSS (Rich Site Summary). &Eacute; tamb&eacute;m o formato que permite a SPIP ler as novidades publicadas em outros s&iacute;tios que utilizam um formato de troca compat&iacute;vel.',
+'ical_texte_rss_articles' => 'O ficheiro &laquo;backend&raquo; dos artigos deste s&iacute;tio n&atilde;o se encontram neste endere&ccedil;o:',
+'ical_texte_rss_articles2' => 'Pode igualmente obter os ficheiros &laquo;backend&raquo; para os artigos de cada rubrica do s&iacute;tio:',
+'ical_texte_rss_breves' => 'Existe tamb&eacute;m um ficheiro contendo not&iacute;cias do s&iacute;tio. Especificando um n&uacute;mero de rubrica, obter&aacute; unicamente as not&iacute;cias dessa rubrica.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => ' Mailing-list',
-'ical_titre_rss' => '<MODIF> Ficheiro &laquo; backend &raquo;',
+'ical_titre_rss' => 'Ficheiros &laquo; backend &raquo;',
 'icone_a_suivre' => 'A continuar',
 'icone_activer_cookie' => 'Activar o cookie de correspond&ecirc;ncia',
 'icone_admin_site' => 'Administra&ccedil;&atilde;o do s&iacute;tio',
@@ -678,12 +678,12 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_envoyer_message_prive' => 'Enviar uma mensagem privada a este autor',
 'info_erreur_requete' => 'Erro no pedido :',
 'info_erreur_restauration' => 'Erro de restaura&ccedil;&atilde;o : ficheiro inexistente',
-'info_erreur_squelette' => '<NEW> Erreur sur le site',
-'info_erreur_squelette2' => '<NEW> Aucun squelette <b>@fichier@</b> n\'est disponible...',
-'info_erreur_systeme' => '<NEW> Erreur syst&egrave;me (errno @errsys@)',
-'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
-	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
-	ou contactez votre h&eacute;bergeur.</font><br></b>',
+'info_erreur_squelette' => 'Erro no s&iacute;tio',
+'info_erreur_squelette2' => 'Template <b>@fichier@</b> n&atilde;o dispon&iacute;vel...',
+'info_erreur_systeme' => 'Erro de Sistema (errno @errsys@)',
+'info_erreur_systeme2' => '<b>O disco r&iacute;gido poder&aacute; estar cheio, ou a base de dados danificada. <br>
+ <font color=\'red\'>Tente <a href=\'ecrire/admin_repair.php3\'>reparar a base</a>,
+ ou contacte o seu fornecedor de internet.</font><br></b>',
 'info_etape_suivante' => 'Passar para a seguinte etapa',
 'info_etape_suivante_1' => 'Pode passar para a seguinte etapa',
 'info_etape_suivante_2' => 'Pode passar para a  seguinte etapa ',
@@ -732,7 +732,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_hier' => 'ontem&nbsp;:',
 'info_identification_publique' => 'A sua identidade p&uacute;blica...',
 'info_image_aide' => 'AJUDA',
-'info_image_process' => '<NEW> Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
+'info_image_process' => 'Seleccione o melhor m&eacute;todo de fabricar as vinhetas clicando sobre a imagem correspondente.',
 'info_impossible_lire_page' => '<B>Erro !</B> Imposs&iacute;vel ler a p&aacute;gina<tt><html>@test_proxy@</html></tt> atrav&eacute;s do proxy <tt>',
 'info_inclusion_directe' => 'Inclus&atilde;o directa&nbsp;:',
 'info_inclusion_vignette' => 'Inclus&atilde;o da vinheta&nbsp;:',
@@ -1032,14 +1032,14 @@ hospedeiros desactivam o envio de mails desde os seus
 'info_tous_resultats_enregistres' => '[todos os  r&eacute;sultados est&atilde;o registados]',
 'info_tout_afficher' => 'Exibir tudo',
 'info_tout_site' => 'Todo o s&iacute;tio',
-'info_tout_site1' => '<NEW> Langue de l\'article.',
-'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
-'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
-'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
-'info_tout_site5' => '<NEW> Article original.',
-'info_tout_site6' => '<NEW> <b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
-Les traductions sont associ&eacute;es &agrave; l\'original,
-dans une couleur qui indique leur &eacute;tat&nbsp;:',
+'info_tout_site1' => '<NEW>Langue de l\'article.',
+'info_tout_site2' => 'O artigo n&atilde;o est&aacute; traduzido nesta l&iacute;ngua.',
+'info_tout_site3' => 'O artigo foi traduzido nesta l&iacute;ngua, mas modifica&ccedil;&otilde;es foram feitas ao artigo original. A tradu&ccedil;&atilde;o necessita ser actualizada.',
+'info_tout_site4' => 'O artigo foi traduzido nesta l&iacute;ngua e a tradu&ccedil;&atilde;o est&aacute; actual.',
+'info_tout_site5' => 'Artigo original.',
+'info_tout_site6' => '<b>Aten&ccedil;&atilde;o:</b> somente os artigos originais est&atilde;o mostrados.
+As tradu&ccedil;&otilde;es est&atilde;o associadas ao original,
+numa cor que indica o seu estado:',
 'info_travail_colaboratif' => 'Trabalho colaborativo sobre os artigos',
 'info_travaux_texte' => 'Este s&iacute;tio n&atilde;o est&aacute; configurado. Volte mais tarde...',
 'info_travaux_titre' => 'S&iacute;tio em obras',
@@ -1304,7 +1304,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 
 // N
-'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
+'navigateur_pas_redirige' => 'Se o seu browser n&atilde;o est&aacute; redireccionado, clique aqui para continuar.',
 
 
 // O
@@ -1393,10 +1393,8 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
 inclusive <i>todos</i> os acessos redactores e administradores. Depois de o ter executado, dever&aacute; lan&ccedil;ar a
 reinstala&ccedil;&atilde;o de SPIP para recriar uma nova base assim como um primeiro acesso administrador.',
 'texte_admin_tech_01' => 'Esta op&ccedil;&atilde;o permite-lhe salvaguardar o conte&uacute;do da base num ficheiro que ser&aacute; armazenado nbo repert&oacute;rio <i>ecrire/data/</i>.N&atilde;o esquecer tamb&eacute;m recuperar a totalidade do repert&oacute;rio <i>IMG/</i>, que contem as imagens e os documentos utlizados nos artigos e rubricas.',
-'texte_admin_tech_02' => '<MODIF> Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
- num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. O erro
-que consiste em fazer uma salvaguarda antes de fazer uma actualiza&ccedil;&atilde;o
-de SPIP &eacute; frequente... Para mais pormenores, consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o de SPIP</a>.',
+'texte_admin_tech_02' => 'Aten&ccedil;&atilde;o: esta salvaguarda s&oacute; poder&aacute; ser restaurada
+ num s&iacute;tio instalado sob a mesma vers&atilde;o de SPIP. Nunca apague a sua base de dados esperando que esta seja reinstalada ap&oacute;s a actualiza&ccedil;&atilde;o. Consulte <a href="http://www.spip.net/fr_article1489.html">a documenta&ccedil;&atilde;o de SPIP</a>.',
 'texte_admin_tech_03' => 'Pode escolher a salvaguarda do ficheiro sob a forma compressada, para
 encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de salvaguarda e poupar o espa&ccedil;o do disco.',
 'texte_adresse_annuaire_1' => '(Se o seu anu&aacute;rio est&aacute; instalado na mesma m&aacute;quina que este s&iacute;tio Web, trata-se de &laquo;localhost&raquo;.)',
@@ -1441,7 +1439,7 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
  autom&aacute;tica.',
 'texte_creation_automatique_vignette' => 'A cria&ccedil;&atilde;o autom&aacute;tica de vinhetas de previsualiza&ccedil;&atilde;o est&aacute; activada neste s&iacute;tio. Se instalar a partir deste formul&aacute;rio imagens de formato(s) @gd_formats@, ser&atilde;o acompanhadas de uma vinheta de um tamanho m&aacute;ximo de @taille_preview@&nbsp;pixels.',
 'texte_creer_rubrique' => 'Antes de poder escrever artigos, <BR> deve criar uma rubrica.',
-'texte_date_creation_article' => '<MODIF> DATA DE CRIA&Ccedil;&Atilde;O DO ARTIGO',
+'texte_date_creation_article' => 'DATA DE CRIA&Ccedil;&Atilde;O DO ARTIGO:',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ANTERIOR',
 'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir data de publica&ccedil;&atilde;o anterior',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O EM LINHA :',
@@ -1653,7 +1651,7 @@ a SPIP pesquisar igualmente no texto dos
 'titre_breve_refusee' => 'Not&iacute;cia recusada',
 'titre_breves' => 'As not&iacute;cias',
 'titre_cadre_afficher_article' => 'Exibir os artigos',
-'titre_cadre_afficher_traductions' => '<MODIF> Exibir o estado das tradu&ccedil;&otilde;es para esta l&iacute;ngua',
+'titre_cadre_afficher_traductions' => 'Exibir o estado das tradu&ccedil;&otilde;es para estas l&iacute;nguas:',
 'titre_cadre_ajouter_auteur' => 'ACRESCENTAR UM AUTOR :',
 'titre_cadre_forum_administrateur' => 'Forum privado dos administradores',
 'titre_cadre_forum_interne' => 'F&oacute;rum interno',
