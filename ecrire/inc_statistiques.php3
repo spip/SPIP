@@ -255,7 +255,7 @@ function supprimer_referers($type = "") {
 	while ($row = mysql_fetch_array($result)) {
 		$id_article = $row['id_article'];
 		$visites = $row['visites'] - $valeurs[$id_article]['visites'];
-		$age = intval($row['age']) + $diff;
+		$age = intval(2 * ($row['age'] + $diff) / 3);
 		$periode = $age - $age_max;
 		
 		if ($periode < 1) $periode = 1;
