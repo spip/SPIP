@@ -110,7 +110,7 @@ if ($titre) {
 	calculer_rubriques();
 
 	if (lire_meta('activer_moteur') == 'oui') {
-		indexer_rubrique($id_rubrique);
+		indexer_rubrique($coll);
 	}
 }
 
