@@ -32,7 +32,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 			$timer = ceil(1000 * ($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
 			$taille = ceil(strlen($page) / 1024);
 			spip_log("inclus ($timer ms): $chemin_cache ($taille ko, delai: $delais s)");
-			ecrire_fichier_cache($chemin_cache, $page);
+			$chemin_cache = ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
 	return $chemin_cache;
@@ -79,7 +79,7 @@ if ($ajout_forum) {
 
 if (!$use_cache) {
 	$lastmodified = time();
-	if (($lastmodified - lire_meta('date_purge_cache')) > 24 * 3600) {
+	if (($lastmodified - lire_meta('date_purge_cache')) > 3600) {
 		ecrire_meta('date_purge_cache', $lastmodified);
 		$f = fopen('CACHE/.purge', 'w');
 		fclose($f);
@@ -110,7 +110,7 @@ if (!$use_cache) {
 			$texte = "<"."?php @header (\"Location: $url\"); ?".">";
 			$calculer_cache = false;
 			spip_log("redirection: $url");
-			ecrire_fichier_cache($chemin_cache, $texte);
+			$chemin_cache = ecrire_fichier_cache($chemin_cache, $texte);
 		}
 	}
 
@@ -123,7 +123,7 @@ if (!$use_cache) {
 			$timer = ceil(1000 * ($timer_b[0] + $timer_b[1] - $timer_a[0] - $timer_a[1]));
 			$taille = ceil(strlen($page) / 1024);
 			spip_log("calcul ($timer ms): $chemin_cache ($taille ko, delai: $delais s)");
-			ecrire_fichier_cache($chemin_cache, $page);
+			$chemin_cache = ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
 }
@@ -164,7 +164,7 @@ else {
 
 // envoyer la page
 if (file_exists($chemin_cache) && ($HTTP_SERVER_VARS['REQUEST_METHOD'] != 'HEAD')) {
-	include ($chemin_cache);
+	include($chemin_cache);
 }
 
 
@@ -261,8 +261,8 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 
 
 //
-// Faire du menage dans le cache (effacer les fichiers tres anciens)
-// Se declenche une fois par jour quand le cache n'est pas recalcule
+// Faire du menage dans le cache (effacer les fichiers tres anciens ou inutilises)
+// Se declenche une fois par heure quand le cache n'est pas recalcule
 //
 if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2')) {
 	include_ecrire('inc_connect.php3');
@@ -286,12 +286,13 @@ if (!$timeout AND $use_cache AND file_exists('CACHE/.purge2')) {
 if (!$timeout AND $use_cache AND file_exists('CACHE/.purge')) {
 	include_ecrire('inc_connect.php3');
 	if ($db_ok) {
+		$dir = 'CACHE/'.dechex((time() / 3600) & 0xF);
 		unlink('CACHE/.purge');
-		spip_log("purge cache niveau 1");
+		spip_log("purge cache niveau 1: $dir");
 		$f = fopen('CACHE/.purge2', 'w');
 		fclose($f);
 		include_local ("inc-cache.php3");
-		purger_repertoire('CACHE', 14 * 24 * 3600);
+		purger_repertoire($dir, 14 * 24 * 3600);
 		$timeout = true;
 	}
 }

@@ -41,18 +41,32 @@ function utiliser_cache($chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS, $HTTP_POST_VARS;
 	global $lastmodified;
 
-	// a priori cache
+	// A priori cache
 	$use_cache = true;
 
-	// si le cache existe, verifier sa date
-	if (file_exists($chemin_cache)) {
+	// Existence du fichier
+	if (!file_exists($chemin_cache)) {
+		if (file_exists($chemin_cache.'.NEW')) {
+			// Deuxieme acces : le fichier est marque comme utilise
+			@rename($chemin_cache.'.NEW', $chemin_cache);
+			clearstatcache();
+		}
+		else {
+			// Double verification (cas renommage entre les deux file_exists)
+			clearstatcache();
+			$use_cache = file_exists($chemin_cache);
+		}
+	}
+
+	// Date de creation du fichier
+	if ($use_cache) {
 		$t = filemtime($chemin_cache);
 		$ledelais = time() - $t;
 		$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
+		if (!$use_cache) @unlink($chemin_cache);
 		// Inclusions multiples : derniere modification
 		if ($lastmodified < $t) $lastmodified = $t;
-	} else
-		$use_cache = false;
+	}
 
 	// recalcul obligatoire
 	$use_cache &= ($GLOBALS['recalcul'] != 'oui');
@@ -76,6 +90,7 @@ function ecrire_fichier_cache($fichier, $contenu) {
 	global $flag_flock;
 
 	$fichier_tmp = $fichier.'_tmp';
+	$fichier = $fichier.'.NEW';
 	$f = fopen($fichier_tmp, "wb");
 	if (!$f) return;
 
@@ -92,6 +107,7 @@ function ecrire_fichier_cache($fichier, $contenu) {
 	@unlink($fichier);
 	rename($fichier_tmp, $fichier);
 	if ($GLOBALS['flag_apc']) apc_rm($fichier);
+	return $fichier;
 }
 
 
@@ -134,7 +150,7 @@ function purger_repertoire($dir, $age, $regexp = '') {
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
 		$chemin = "$dir/$fichier";
 		if (is_file($chemin)) {
-			if (($t - filemtime($chemin)) > $age) {
+			if (($t - filemtime($chemin)) > $age OR ereg('\.NEW$', $fichier)) {
 				@unlink($chemin);
 				$query = "DELETE FROM spip_forum_cache WHERE fichier='$fichier'";
 				spip_query($query);
