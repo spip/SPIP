@@ -593,7 +593,7 @@ function traiter_listes ($texte) {
 
 				/// puis les identites (y compris en fin de descente)
 				if ($niveau == $profond && !$change_type) {
-					$ajout .= "</li>";
+					$ajout .= $pile_li[$niveau];
 				}
 
 				// puis les montees (y compris apres une descente un cran trop bas)
