@@ -1068,7 +1068,8 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0' align='middle'></a>";
+			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
 		echo "<tr><td background=''>";
@@ -1085,7 +1086,8 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0'></a>";
+			echo "<a href='$lien'><img src='img_pack/$fond' alt='o' $title width='24' height='24' border='0' align='middle'></a>";
+			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
 		echo "<tr><td background=''>";
@@ -1094,7 +1096,6 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</table>";
 		if ($spip_display != 3){
 			echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
-			if (strlen($aide)>0) echo "<br>".aide($aide);
 		}
 		echo "</td>";
 	}	
@@ -1532,7 +1533,6 @@ function debut_gauche() {
 	global $activer_imessage;
 	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
-	global $options;
 	
 	if ($changer_config!="oui"){
 		$activer_messagerie=lire_meta("activer_messagerie");
