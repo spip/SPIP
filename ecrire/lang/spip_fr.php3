@@ -171,8 +171,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), vous pouvez le synchroniser avec l\'actualit&eacute; de ce site.',
+'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), vous pouvez le synchroniser avec l\'actualit&eacute; Žditoriale de ce site.',
 'calendrier_synchro_lien' => 'R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'calendrier_synchro_public' => 'Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
 'calendrier_synchro_sync' => 'Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 // D
 'date_avant_jc' => 'av. J.C.',
@@ -710,6 +712,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_mail_fournisseur' => 'vous@fournisseur.com',
 'info_maximum' => 'maximum&nbsp;:',
 'info_message' => 'Message du',
+'info_message_2' => 'MESSAGE',
 'info_message_efface' => 'MESSAGE EFFAC&Eacute;',
 'info_message_en_redaction' => 'Vos messages en cours de r&eacute;daction',
 'info_message_supprime' => 'MESSAGE SUPPRIM&Eacute;',
