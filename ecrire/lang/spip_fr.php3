@@ -369,7 +369,7 @@ Merci de votre participation
 'form_pet_nom_site2' => 'Nom de votre site Web',
 'form_pet_probleme_technique' => 'Probl&egrave;me technique, les signatures sont temporairement suspendues.',
 'form_pet_signature_pasprise' => 'Votre signature n\'est pas prise en compte.',
-'form_pet_signature_validee' => 'Votre signature est valid&eacute;e. Elle appara&icirc;tra lors de la prochaine mise &agrave; jour du site. Merci&nbsp;!',
+'form_pet_signature_validee' => 'Votre signature est valid&eacute;e. Merci&nbsp;!',
 'form_pet_site_deja_enregistre' => 'Ce site est d&eacute;j&agrave; enregistr&eacute;',
 'form_pet_url_invalide' => 'L\'URL que vous avez indiqu&eacute;e n\'est pas valide.',
 'form_pet_votre_email' => 'Votre adresse email',
@@ -1389,7 +1389,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_article_virtuel' => 'Article virtuel',
 'texte_article_virtuel_reference' => '<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL. Pour supprimer la redirection, effacez l\'URL ci-dessus.',
 'texte_aucun_resultat_auteur' => 'Aucun r&eacute;sultat pour "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Ce site peut vous indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce qui vous permet d\'&eacute;changer des messages en direct (lorsque la messagerie est d&eacute;sactiv&eacute;e ci-dessus, la liste des r&eacute;dacteurs est elle-m&ecirc;me d&eacute;sactiv&eacute;e). Vous pouvez d&eacute;cider de ne pas appara&icirc;tre dans cette liste (vous &ecirc;tes &laquo;&nbsp;invisible&nbsp;&raquo; pour les autres utilisateurs).',
+'texte_auteur_messagerie' => 'Ce site peut vous indiquer en permanence la liste des r&eacute;dacteurs connect&eacute;s, ce qui vous permet d\'&eacute;changer des messages en direct. Vous pouvez d&eacute;cider de ne pas appara&icirc;tre dans cette liste (vous &ecirc;tes &laquo;&nbsp;invisible&nbsp;&raquo; pour les autres utilisateurs).',
 'texte_auteur_messagerie_1' => 'Ce site permet l\'&eacute;change de messages et la constitution de forums de discussion priv&eacute;s entre les participants du site. Vous pouvez d&eacute;cider de ne pas participer &agrave; ces &eacute;changes.',
 'texte_auteurs' => 'LES AUTEURS',
 'texte_breves' => 'Les br&egrave;ves sont des textes courts et simples permettant de
@@ -1540,7 +1540,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_rappel_selection_champs' => '[N\'oubliez pas de s&eacute;lectionner correctement ce champ.]',
 'texte_recalcul_page' => 'Si vous voulez
 recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-y le bouton &laquo; recalculer &raquo;.',
-'texte_recapitiule_liste_documents' => 'Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute; dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
+'texte_recapitiule_liste_documents' => 'Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute;s dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
 'texte_recuperer_base' => 'R&eacute;parer la base de donn&eacute;es',
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
 'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
