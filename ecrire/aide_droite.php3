@@ -1,6 +1,7 @@
 <?php
 include ("inc_version.php3");
 include_local ("inc_texte.php3");
+include_local ("inc_filtres.php3");
 ?>
 <HTML>
 <head>

@@ -91,6 +91,7 @@ include_local ("inc_connect.php3");
 include_local ("inc_meta.php3");
 include_local ("inc_auth.php3");
 include_local ("inc_texte.php3");
+include_local ("inc_filtres.php3");
 include_local ("inc_urls.php3");
 include_local ("inc_mail.php3");
 include_local ("inc_admin.php3");

@@ -92,6 +92,7 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 
 include_local("ecrire/inc_index.php3");
 include_local("ecrire/inc_texte.php3");
+include_local ("ecrire/inc_filtres.php3");
 
 include_local("inc-forum.php3");
 

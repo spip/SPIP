@@ -52,6 +52,7 @@ function formulaire_signature($id_article) {
 
 	include_local ("ecrire/inc_connect.php3");
 	include_local ("ecrire/inc_texte.php3");
+	include_local ("ecrire/inc_filtres.php3");
 
 	echo "<a name='sp$id_article'>";
 
