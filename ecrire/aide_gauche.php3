@@ -99,7 +99,7 @@ if ($addrub) $les_rub.=",$addrub,";
 
 rubrique("Installation de SPIP","admin");
 article("R&eacute;gler les droits d'acc&egrave;s", "install0", "admin");
-article("1. Votre connexion mySQL", "install1", "admin");
+article("1. Votre connexion MySQL", "install1", "admin");
 article("3. Choix de votre base", "install2", "admin");
 article("5. Informations personnelles", "install5", "admin");
 article("V&eacute;rification par FTP", "ftp_auth", "admin");
