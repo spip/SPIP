@@ -299,7 +299,7 @@ debut_cadre_relief();
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-	if ($post_dates!="oui"){
+	if ($post_dates == "non"){
 		echo "<INPUT TYPE='radio' NAME='post_dates' VALUE='oui' id='post_dates_on'>";
 		echo " <label for='post_dates_on'>Publier les articles, quelle que soit leur date de publication.</label> ";
 		echo "<BR><INPUT TYPE='radio' NAME='post_dates' VALUE='non' CHECKED id='post_dates_off'>";
