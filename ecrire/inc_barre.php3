@@ -43,7 +43,7 @@ function bouton_barre_racc($action, $img, $help, $formulaire, $texte) {
 	$champhelp = "document.$formulaire.helpbox$texte";
 	$retour = "<a href=\"".$action."\" class='spip_barre' tabindex='1000' title=\"".attribut_html($help)."\"";
 	if (!$flag_ecrire) $retour .= " onMouseOver=\"helpline('".addslashes(attribut_html($help))."',$champhelp)\" onMouseOut=\"helpline('".attribut_html(_T('barre_aide'))."', $champhelp)\"";
-	$retour .= "><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16'></a>";
+	$retour .= "><img src='".($flag_ecrire ? "../" : "")."IMG/icones_barre/".$img."' border='0' height='16' width='16' align='middle'></a>";
 	return $retour;
 }
 
@@ -55,7 +55,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$champ = "document.$formulaire.$texte";
 		$ret .= "<table cellpadding='0' cellspacing='0' border='0' width='100%'>";
 		$ret .= "<tr width='100%'>";
-		$ret .= "<td align='$spip_lang_left' style='padding-top: 4px; padding-bottom: 2px;'>";
+		$ret .= "<td style='text-align: $spip_lang_left;' valign='middle'>";
 		$col++;
 
 		// Italique, gras, intertitres
@@ -87,9 +87,9 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</td>";
 
 		// Insertion de caracteres difficiles a taper au clavier (guillemets, majuscules accentuees...)
-		$ret .= "<td align='$spip_lang_right' style='padding-top: 4px; padding-bottom: 2px;'>";
+		$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
 		$col++;
-		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar") {
+		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar" OR $spip_lang == "es") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $formulaire, $texte);
 		}
@@ -115,7 +115,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</td>";
 
 		if ($flag_ecrire) {
-			$ret .= "<td align='$spip_lang_right'>";
+			$ret .= "<td style='text-align:$spip_lang_right;' valign='middle'>";
 			$col++;
 			$ret .= "&nbsp;&nbsp;&nbsp;";
 			$ret .= aide("raccourcis");
@@ -124,8 +124,9 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$ret .= "</tr>";
 
 		// Sur les forums publics, petite barre d'aide en survol des icones
-		if ($forum)
+		if (!$flag_ecrire)
 			$ret .= "<tr><td colspan='$col'><input disabled='disabled' type='text' name='helpbox".$texte."' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;' value=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
+
 		$ret .= "</table>";
 	}
 	return $ret;
