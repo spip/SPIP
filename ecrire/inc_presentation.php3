@@ -1574,7 +1574,6 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	echo $link->getUrl()."\">\n";
 
 	if ($code) echo $code."\n";
-	echo '<link rel="stylesheet" href="', _DIR_RESTREINT, 'calendrier.css" type="text/css" title="calendrier">', "\n";
 
 	// Supprime pour l'instant: pas de creation mathml
 	// < script type="text/javascript" src="../mathmlinHTML.js"></script>
@@ -1583,15 +1582,26 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 	debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, (lire_meta("activer_statistiques") != 'non'));
 
+	// CSS calendrier
+	echo '<link rel="stylesheet" href="', _DIR_RESTREINT, 'calendrier.css" type="text/css">', "\n";
+
+	// CSS imprimante (masque des trucs, a completer)
+	echo '<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_print.css" type="text/css" media="print">', "\n";
+
+	// CSS "visible au chargement", hack necessaire pour garder un depliement
+	// sympathique meme sans javascript (on exagere ?)
+	// Pour l'explication voir http://www.alistapart.com/articles/alternate/
 	echo '<link rel="alternate stylesheet" href="', _DIR_RESTREINT, 'spip_style_invisible.css" type="text/css" title="invisible" />', "\n",
-		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n",
-		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_print.css" type="text/css" media="print">', "\n",
-		"</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
+		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n";
+	$onLoadInvisible = " onLoad=\"setActiveStyleSheet('invisible'); ";
+
+	// Fin des entetes
+	echo "</head>\n<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
 
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
-	echo " onLoad=\"setActiveStyleSheet('invisible'); ";
+	echo $onLoadInvisible;
 
 	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
 	// meme principe que le behavior win_width.htc pour MSIE
@@ -2195,7 +2205,7 @@ else {
 	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_auteurs'));
 
 	// decalage pour barre verticale
-	//$decal = $decal + 11;
+	// $decal = $decal + 11;
 
 	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
 		if ($rubrique == "suivi") {
