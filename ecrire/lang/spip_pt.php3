@@ -411,7 +411,6 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_envoyer_message' => 'Enviar esta mensagem',
 'icone_etat_traductions' => 'Situa&ccedil;&atilde;o das tradu&ccedil;&otilde;es',
 'icone_evolution_visites' => 'Evolu&ccedil;&atilde;o das visitas <br>@visites@ visitas@aff_ref@',
-'icone_evolution_visites_2' => 'Evolu&ccedil;&atilde;o das visitas',
 'icone_forum_administrateur' => 'F&oacute;rum dos administradores',
 'icone_forum_interne' => 'F&oacute;rum interno',
 'icone_forum_suivi' => 'Seguimento dos f&oacute;runs',
@@ -853,8 +852,6 @@ hospedeiros desactivam o envio de mails desde os seus
  imposs&iacute;vel.',
 'info_question_mots_cles' => 'Deseja utilizar as palavras-chave no seu s&iacute;tio&nbsp;?',
 'info_question_proposer_site' => 'Quem pode propor s&iacute;tios referenciados&nbsp;?',
-'info_question_referers' => 'O seu s&iacute;tio deve conservar os <i>referers</i>
-  (endere&ccedil;os dos la&ccedil;os externos que levam ao seu s&iacute;tio)&nbsp;?',
 'info_question_utilisation_moteur_recherche' => 'Desja utilizar o motor integrado de pesquisa a SPIP&nbsp;?
 (desactiv&aacute;-lo acelera o funcionamento do sistema)',
 'info_qui_attribue_mot_cle' => 'As palavras deste grupo podem ser atribuidas por&nbsp;:',
@@ -1030,7 +1027,6 @@ hospedeiros desactivam o envio de mails desde os seus
 'item_desactiver_forum_administrateur' => 'Desactivar o f&oacute;rum dos administradores',
 'item_efface' => 'Apagado',
 'item_gerer_annuaire_site_web' => 'Gerir um anu&aacute;rio de s&iacute;tios Web',
-'item_gerer_referers' => 'Gerir os referers',
 'item_gerer_statistiques' => 'Gerir as estat&iacute;sticas',
 'item_limiter_recherche' => 'Limitar a pesquisa &agrave;s informa&ccedil;&otilde;es contidas no seu s&iacute;tio',
 'item_login' => 'Login',
@@ -1048,7 +1044,6 @@ hospedeiros desactivam o envio de mails desde os seus
 'item_non_bloquer_liens_syndiques' => 'N&atilde;o impedir os la&ccedil;os resultantes da vincula&ccedil;&atilde;o',
 'item_non_creer_fichiers_authent' => 'N&atilde;o criar estes ficheiros',
 'item_non_gerer_annuaire_site_web' => 'Desactivar o anu&aacute;rio de s&iacute;tios Web',
-'item_non_gerer_referers' => 'N&atilde;o gerir os referers',
 'item_non_gerer_statistiques' => 'N&atilde;o gerir as estat&iacute;sticas',
 'item_non_limiter_recherche' => 'Alargar a pesquisa ao conte&uacute;do dos s&iacute;tios referenciados',
 'item_non_publier_articles' => 'N&atilde;o publicar os artigos antes da data de publica&ccedil;&atilde;o fixada.',

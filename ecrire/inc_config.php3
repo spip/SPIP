@@ -51,9 +51,7 @@ function init_config() {
 		'forum_prive_admin' => 'non',
 
 		'activer_moteur' => 'oui',
-		'activer_moteur_forum' => 'non',
 		'activer_statistiques' => 'oui',
-		'activer_statistiques_ref' => 'oui',
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
@@ -228,9 +226,7 @@ function appliquer_modifs_config() {
 		'forum_prive_admin',
 
 		'activer_moteur',
-		'activer_moteur_forum',
 		'activer_statistiques',
-		'activer_statistiques_ref',
 
 		'documents_article',
 		'documents_rubrique',
@@ -280,6 +276,5 @@ function appliquer_modifs_config() {
 		@header ("Location:../spip_cache.php3?purger_squelettes=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($clean_link->getUrl()));
 	}
 }
-
 
 ?>

@@ -53,23 +53,23 @@ if ($connect_statut != '0minirezo') {
 //
 // Affichage des referers
 //
-if (lire_meta("activer_statistiques_ref") != "non"){
-	// nombre de referers a afficher
-	$limit = intval($limit);	//secu
-	if ($limit == 0)
-		$limit = 100;
 
-	// afficher quels referers ?
-	$where = "visites_jour>0";
-	$vis = "visites_jour";
-	$table_ref = "spip_referers";
+// nombre de referers a afficher
+$limit = intval($limit);	//secu
+if ($limit == 0)
+	$limit = 100;
 
-	$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
+// afficher quels referers ?
+$where = "visites_jour>0";
+$vis = "visites_jour";
+$table_ref = "spip_referers";
 
-	echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-	echo aff_referers ($query, $limit);
-	echo "</font></p>";	
-}
+$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
+
+echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
+echo aff_referers ($query, $limit);
+echo "</font></p>";	
+
 echo "</font>";
 
 fin_page();
