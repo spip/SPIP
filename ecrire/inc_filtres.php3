@@ -523,52 +523,35 @@ function exposer ($id, $identique='on', $different='') {
 // Reduire la taille d'un logo
 //
 
-function reduire_image($img, $taille = 120) {
+function reduire_image($img, $taille = 120, $taille_y=0) {
+	include_ecrire('inc_logos.php3');
 
-	if (strlen($img) > 0) {
-		// recuperer le nom du fichier
-		if (eregi("src=\'([^']+)\'", $img, $regs)) $logo = $regs[1];
-		if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
-		if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
-		if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
+	if (!$taille_y)
+		$taille_y = $taille;
 
-		if (file_exists($logo)) {
-			$logo = substr($logo, 4, strlen($logo));
-			// recuperer nom de l'image et sa terminaison
-			$nom = substr($logo, 0, strpos($logo, "."));
-			$format = substr($logo, strlen($logo)-3, strlen($logo));
-		
-			// test de recalcul en fonction des dates des fichiers
-			// pour verifier si mise a jour plus recente du logo
-			if (file_exists("IMG/$taille-$nom.$format")) {
-				if (filemtime("IMG/$taille-$nom.$format") > filemtime("IMG/$logo")) {
-					return "<img src='IMG/$taille-$nom.$format' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
-					$recalculer = false;
-				}
-				else {
-					$recalculer = true;
-				}
-			} else {
-				$recalculer = true;
-			}
-		
-			$gd_formats = lire_meta("gd_formats");
-			if ($recalculer AND ereg($format, $gd_formats)) {
-				// Recuperer l'image d'origine
-				if ($format == "jpg") {
-					$srcImage = ImageCreateFromJPEG("IMG/$logo");
-				}
-				else if ($format == "gif"){
-					$srcImage = ImageCreateFromGIF("IMG/$logo");
-				}
-				else if ($format == "png"){
-					$srcImage = ImageCreateFromPNG("IMG/$logo");
-				}
-				if (!$srcImage) return;
+	if (!$img) return;
 
+	// recuperer le nom du fichier
+	if (eregi("src=\'([^']+)\'", $img, $regs)) $logo = $regs[1];
+	if (eregi("align=\'([^']+)\'", $img, $regs)) $align = $regs[1];
+	if (eregi("name=\'([^']+)\'", $img, $regs)) $name = $regs[1];
+	if (eregi("hspace=\'([^']+)\'", $img, $regs)) $espace = $regs[1];
+
+	if (@file_exists($logo) AND eregi("(IMG/.*)\.(jpg|gif|png)$", $logo, $regs)) {
+		$nom = $regs[1];
+		$format = $regs[2];
+		$destination = $logo.'-'.$taille.'x'.$taille_y;
+		if ($preview = creer_vignette($nom, $taille, $taille_y, $format, $destination)) {
+			$vignette = $preview['fichier'];
+			$width = $preview['width'];
+			$height = $preview['height'];
+			return "<img src='$vignette' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' width='$width' height='$height' class='spip_logos' />";
+		} else {
+			$taille_origine = @getimagesize("IMG/$logo");
+			if ($taille_origine) {
 				// Calculer le ratio
-				$srcWidth = ImageSX($srcImage);
-				$srcHeight = ImageSY($srcImage);
+				$srcWidth = $taille_origine[0];
+				$srcHeight = $taille_origine[1];
 			
 				if ($srcWidth > $taille OR $srcHeight > $taille) {
 					$ratioWidth = $srcWidth/$taille;
@@ -586,59 +569,7 @@ function reduire_image($img, $taille = 120) {
 					$destWidth = $srcWidth;
 					$destHeight = $srcHeight;
 				}
-				
-				// Initialisation de l'image destination
-				if ($GLOBALS['flag_ImageCreateTrueColor'] AND $destFormat != "gif")
-					$destImage = ImageCreateTrueColor($destWidth, $destHeight);
-				if (!$destImage)
-					$destImage = ImageCreate($destWidth, $destHeight);
-				// Recopie de l'image d'origine avec adaptation de la taille
-				$ok = false;
-				if ($GLOBALS['flag_ImageCopyResampled'])
-					$ok = ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
-				if (!$ok)
-					$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
-			
-				// Sauvegarde de l'image destination
-				$destination = "IMG/$taille-$nom.$format";
-				if ($format == "jpg") {
-					ImageJPEG($destImage, $destination, 70);
-				}
-				else if ($format == "gif") {
-					ImageGIF($destImage, $destination);
-				}
-				else if ($format == "png") {
-					ImagePNG($destImage, $destination);
-				}
-				ImageDestroy($srcImage);
-				ImageDestroy($destImage);
-
-				return "<img src='$destination' name='$name' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
-			} else {
-				$taille_origine = @getimagesize("IMG/$logo");
-				if ($taille_origine) {
-					// Calculer le ratio
-					$srcWidth = $taille_origine[0];
-					$srcHeight = $taille_origine[1];
-				
-					if ($srcWidth > $taille OR $srcHeight > $taille) {
-						$ratioWidth = $srcWidth/$taille;
-						$ratioHeight = $srcHeight/$taille;
-					
-						if ($ratioWidth < $ratioHeight) {
-							$destWidth = floor($srcWidth/$ratioHeight);
-							$destHeight = $taille;
-						}
-						else {
-							$destWidth = $taille;
-							$destHeight = floor($srcHeight/$ratioWidth);
-						}
-					} else {
-						$destWidth = $srcWidth;
-						$destHeight = $srcHeight;
-					}
-					return "<img src='IMG/$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
-				}
+				return "<img src='$logo' name='$name' width='$destWidth' height='$destHeight' border='0' align='$align' alt='' hspace='$espace' vspace='$espace' class='spip_logos' />";
 			}
 		}
 	}

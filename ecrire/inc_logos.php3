@@ -6,9 +6,6 @@ if (defined("_ECRIRE_INC_LOGOS")) return;
 define("_ECRIRE_INC_LOGOS", "1");
 
 
-include_ecrire ("inc_admin.php3");
-
-
 function get_image($racine) {
 	if (@file_exists("../IMG/$racine.gif")) {
 		$fichier = "$racine.gif";
@@ -171,5 +168,134 @@ function afficher_logo($racine, $titre) {
 	echo "</font>";
 }
 
+
+//
+// Creation automatique d'une vignette
+//
+
+function creer_vignette($image, $newWidth, $newHeight, $format, $destination, $process='AUTO', $force=false) {
+	global $convert_command;
+
+	if ($process == 'AUTO')
+		$process = lire_meta('image_process');
+
+	// liste des formats qu'on sait lire
+	$formats_lecture = array('jpg','png','gif');
+
+	// si le doc n'est pas une image, refuser
+	if (!eregi(",$format,", ",".join(',', $formats_lecture).","))
+		return;
+
+	// chercher un cache
+	while (list(,$fmt) = each ($formats_lecture))
+		if (@file_exists($destination.'.'.$fmt)) {
+			$vignette = $destination.'.'.$fmt;
+			@unlink($vignette);
+		}
+
+	// utiliser le cache ?
+	if ($force OR !$vignette OR (@filemtime($vignette) < @filemtime($image))) {
+
+		// Calculer le ratio
+		if (!$srcsize = @getimagesize($image)) return;
+		$srcWidth = $srcsize[0];
+		$srcHeight = $srcsize[1];
+		$ratioWidth = $srcWidth/$newWidth;
+		$ratioHeight = $srcHeight/$newHeight;
+
+		if ($ratioWidth < $ratioHeight) {
+			$destWidth = $srcWidth/$ratioHeight;
+			$destHeight = $newHeight;
+		}
+		else {
+			$destWidth = $newWidth;
+			$destHeight = $srcHeight/$ratioWidth;
+		}
+
+		// imagemagick en ligne de commande
+		if ($process == 'convert') {
+			$vignette = $destination.".jpg";
+			$commande = "$convert_command -size ${newWidth}x${newHeight} $image -geometry ${newWidth}x${newHeight} +profile \"*\" $vignette";
+			shell_exec($commande);
+		}
+		else
+		 // imagick (php4-imagemagick)
+		 if ($process == 'imagick') {
+			$vignette = "$destination.jpg";
+
+			$handle = imagick_create();
+			$handle AND imagick_read($handle, $srcImage)
+			AND imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_UNKNOWN, 0)
+			AND $ok = imagick_write($handle, $vignette);
+
+			if (!$ok) {
+				echo imagick_failedreason( $handle ) ;
+				echo imagick_faileddescription( $handle ) ;
+				return;
+			}
+		} else
+		// gd ou gd2
+		if ($process == 'gd1' OR $process == 'gd2') {
+
+			// Recuperer l'image d'origine
+			if ($format == "jpg") {
+				$srcImage = @ImageCreateFromJPEG($image);
+			}
+			else if ($format == "gif"){
+				$srcImage = @ImageCreateFromGIF($image);
+			}
+			else if ($format == "png"){
+				$srcImage = @ImageCreateFromPNG($image);
+			}
+			if (!$srcImage) return;
+
+			// Choisir le format destination
+			// - on sauve de preference en JPEG (meilleure compression)
+			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
+			$gd_formats = lire_meta("gd_formats");
+			if (ereg("jpg", $gd_formats))
+				$destFormat = "jpg";
+			else if ($format == "gif" AND ereg("gif", $gd_formats) AND $GLOBALS['flag_ImageGif'])
+				$destFormat = "gif";
+			else if (ereg("png", $gd_formats))
+				$destFormat = "png";
+			if (!$destFormat) return;
+
+			// Initialisation de l'image destination
+			if ($process == 'gd2' AND $destFormat != "gif")
+				$destImage = ImageCreateTrueColor($destWidth, $destHeight);
+			if (!$destImage)
+				$destImage = ImageCreate($destWidth, $destHeight);
+
+			// Recopie de l'image d'origine avec adaptation de la taille
+			$ok = false;
+			if (($process == 'gd2') AND function_exists('flag_ImageCopyResampled'))
+				$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			if (!$ok)
+				$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+
+			// Sauvegarde de l'image destination
+			$vignette = "$destination.$destFormat";
+			$format = $destFormat;
+			if ($destFormat == "jpg")
+				ImageJPEG($destImage, $vignette, 70);
+			else if ($destFormat == "gif")
+				ImageGIF($destImage, $vignette);
+			else if ($destFormat == "png")
+				ImagePNG($destImage, $vignette);
+
+			ImageDestroy($srcImage);
+			ImageDestroy($destImage);
+		}
+	}
+
+	$size = @getimagesize($vignette);
+	$retour['width'] = $size[0];
+	$retour['height'] = $size[1];
+	$retour['fichier'] = $vignette;
+	$retour['format'] = $format;
+
+	return $retour;
+}
 
 ?>

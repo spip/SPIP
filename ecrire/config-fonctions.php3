@@ -19,7 +19,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 }
 
 init_config();
-if ($changer_config == 'oui') {
+if ($changer_config == 'oui' OR $image_process) {
 	appliquer_modifs_config();
 }
 
@@ -32,12 +32,30 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 //
 // Activer/desactiver la creation automatique de vignettes
 //
-if ($flag_gd) {
+
+
+
+function afficher_choix_vignette($process) {
+	global $taille_preview;
+
+	if ($process == lire_meta('image_process'))
+		$border = 2;
+	else
+		$border=0;
+
+	echo "<td><div align='center' valign='bottom' width='".($taille_preview+5)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?test_vignette=$process' border='$border' /></a><br />";
+	if ($border) echo "<b>$process</b>";
+	else echo "$process";
+	echo "</div></td>\n";
+}
+
+if ($flag_gd OR $flag_imagick OR $convert_command) {
 	debut_cadre_relief("image-24.gif");
 
 	$gd_formats = lire_meta("gd_formats");
 	$creer_preview = lire_meta("creer_preview");
 	$taille_preview = lire_meta("taille_preview");
+	if ($taille_preview < 10) $taille_preview = 120;
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee'>";
@@ -47,25 +65,56 @@ if ($flag_gd) {
 	echo "</TD></TR>";
 
 	echo "<TR><TD ALIGN='$spip_lang_left' class='verdana2'>";
-	if ($gd_formats) {
+	if (($flag_gd AND $gd_formats) OR $flag_imagick OR $convert_command) {
 		afficher_choix('creer_preview', $creer_preview,
 			array('oui' => _T('item_choix_generation_miniature'),
 				'non' => _T('item_choix_non_generation_miniature')));
 		echo "<p>";
-	}
 
-	echo "<div style='border: 1px dashed #404040; margin: 6px; padding: 6px;'>";
-	if ($gd_formats)
-		echo _T('info_format_image', array('gd_formats' => $gd_formats))."<p>";
+		if ($creer_preview == "oui") {
+			echo "<div style='border: 1px dashed #404040; margin: 6px; padding: 6px;'><table width='99%' align='center'><tr>";
 
-	// Tester les formats acceptes par GD
-	echo "<a href='../spip_image.php3?test_formats=oui&redirect=config-fonctions.php3'>"._T('lien_test_format_image')."</a>";
-	echo "</div>";
+			// Tester les formats
+			if ($flag_gd) {
+				$nb_process ++;
+				afficher_choix_vignette($p = 'gd1');
 
-	if ($creer_preview == "oui") {
-		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"._T('info_taille_maximale_vignette');
-		echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
-		echo " "._T('info_pixels');
+				if ($flag_ImageCreateTrueColor) {
+					afficher_choix_vignette($p = 'gd2');
+					$nb_process ++;
+				}
+			}
+
+			if ($flag_imagick) {
+				afficher_choix_vignette($p = 'imagick');
+				$nb_process ++;
+			}
+
+			if ($convert_command) {
+				afficher_choix_vignette($p = 'convert');
+				$nb_process ++;
+			}
+
+			echo "</tr></table>\n";
+
+			if ($nb_process>1) {
+				echo "<div>"._L("Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l'image correspondante");
+			} else if ($nb == 1 AND $process == '') {
+				ecrire_meta('image_process', $p);
+				ecrire_metas();
+			}
+
+			echo "<div>";
+
+			if ($gd_formats AND (lire_meta('image_process')=='gd1' OR lire_meta('image_process')=='gd2'))
+				echo '<div>'._T('info_format_image', array('gd_formats' => $gd_formats)).'</div>';
+
+			echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"._T('info_taille_maximale_vignette');
+			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+			echo " "._T('info_pixels');
+
+			echo "</div>";
+		}
 	}
 
 	echo "</TD></TR>\n";
