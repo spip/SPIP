@@ -1251,7 +1251,7 @@ if ((lire_meta('multi_articles') == 'oui')
 	else
 		$titre_barre = _T('titre_langue_article');
 
-	$titre_barre .= "&nbsp; (".majuscules(traduire_nom_langue($langue_article)).")";
+	$titre_barre .= "&nbsp; (".traduire_nom_langue($langue_article).")";
 
 	debut_cadre_enfonce('langues-24.gif', false, "", bouton_block_invisible('languesarticle,ne_plus_lier,lier_traductions').$titre_barre);
 
