@@ -27,6 +27,7 @@ function enfant($leparent){
 	while($row=spip_fetch_array($result)){
 		$my_rubrique=$row['id_rubrique'];
 		$titre=typo($row['titre']);
+		$statut_rubrique = $row['statut'];
 
 		if ($my_rubrique != $id_rubrique){
 
