@@ -99,7 +99,9 @@ if ($titre_parent) {
 
 	if ($modif_forum == "oui") {
 		echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr>";
-		echo "<td width='10' height='13' valign='top' background='" . _DIR_IMG_PACK . "forum-vert.gif'><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "<td width='10' height='13' valign='top' background='" . _DIR_IMG_PACK . "forum-vert.gif'>",
+		  http_img_pack('rien.gif', ' ', "width='10' height='13' border='0'"),
+		  "</td>\n";
 		echo "\n<td width=100% valign='top' rowspan='2'>";
 	}
 }
@@ -120,7 +122,10 @@ if ($modif_forum == "oui") {
 	fin_cadre_thread_forum();
 	if ($titre_parent) {
 		echo "</td></tr><tr>";
-		echo "<td width=10 valign='top' background='" . _DIR_IMG_PACK . "rien.gif'><img src='" . _DIR_IMG_PACK . "forum-droite$spip_lang_rtl.gif' alt='' width=10 height=13 border=0></td>\n";
+		echo "<td width=10 valign='top' background='" . _DIR_IMG_PACK . "rien.gif'>",
+		  http_img_pack("forum-droite$spip_lang_rtl.gif",
+				addslashes($titre_parent),
+				"width='10' height='13' border='0'"), "</td>\n";
 		echo "</tr></table>";
 	}
 }

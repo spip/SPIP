@@ -74,7 +74,7 @@ function enfant($collection){
 		}
 
 		if (acces_restreint_rubrique($id_rubrique))
-			$les_enfants .= "<img src='" . _DIR_IMG_PACK . "admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
+		  $les_enfants .= http_img_pack("admin-12.gif", '', "width='12' height='12'", _T('image_administrer_rubrique'));
 
 		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?id_rubrique=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
 		if (strlen($descriptif)) {
@@ -370,12 +370,11 @@ debut_cadre_relief($ze_logo);
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
 if (acces_restreint_rubrique($id_rubrique))
-	$fleche = "<img src='" . _DIR_IMG_PACK . "admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubrique')."'> ";
-gros_titre($fleche.$titre);
+	gros_titre(http_img_pack("admin-12.gif",'', "width='12' height='12'", _T('info_administrer_rubrique')).$titre);
 echo "</td>";
 
 if ($id_rubrique > 0 AND $flag_editable) {
-	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=5></td>\n";
+	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='$spip_lang_right' valign='top'>";
 	icone(_T('icone_modifier_rubrique'), "rubriques_edit.php3?id_rubrique=$id_rubrique&retour=nav", $ze_logo, "edit.gif");
 	echo "</td>";
@@ -466,8 +465,8 @@ if (strpos($les_enfants2,"<div class='enfants'>")){
 // Afficher les sous-rubriques
 echo "<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
-echo "<td width=20 rowspan=2><img src='" . _DIR_IMG_PACK . "rien.gif' alt='' width=20></td>";
-echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
+echo "<td width='20' rowspan='2'>", http_img_pack("rien.gif", ' ', "width='20'") ."</td>\n";
+echo "<td valign='top' width='50%'>$les_enfants2 &nbsp;";
 if (strlen($les_enfants2) > 0) echo "<p>";
 echo "</td></tr>";
 

@@ -347,11 +347,11 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 	echo "<B>$titre</B></FONT></TD>";
 	if ($afficher_auteurs){
 		echo "<TD WIDTH='100'>";
-		echo http_img_pack("rien.gif", "", "width='100' height='12' border='0'");
+		echo http_img_pack("rien.gif", " ", "width='100' height='12' border='0'");
 		echo "</TD>";
 	}
 	echo "<TD WIDTH='90'>";
-	echo http_img_pack("rien.gif", "", "width='90' height='12' border='0'");
+	echo http_img_pack("rien.gif", " ", "width='90' height='12' border='0'");
 	echo "</TD>";
 	echo "</TR>";
 }
@@ -828,7 +828,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 					$hash = calculer_action_auteur ("reduire $w $h");
 
 					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>
-<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='' width='$w' height='$h' border='0'></div>";
+<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
 					
 				}
 			}
@@ -959,7 +959,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 					$hash = calculer_action_auteur ("reduire $w $h");
 
 					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>
-<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='' width='$w' height='$h' border='0'></div>";
+<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
 					
 				}
 			}
@@ -1389,7 +1389,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 					$fleche="forum-droite$spip_lang_rtl.gif";
 				}
 				if ($spip_display != 4) echo "<td width='10' valign='top' background=$fond[$count]>" .
-				  http_img_pack($fleche, "", "width='10' height='13' border='0'"). "</td>\n";
+				  http_img_pack($fleche, " ", "width='10' height='13' border='0'"). "</td>\n";
 			}
 
 			if ($spip_display != 4) echo "\n<td width=100% valign='top'>";
@@ -2286,7 +2286,7 @@ else {
 		echo "<a href='recherche.php3' class='icone26' onMouseOver=\"changestyle('bandeaurecherche','visibility','visible');\" >" .
 		  http_img_pack("loupe.png", "", "width='26' height='20' border='0'") ."</a>";
 
-		echo http_img_pack("rien.gif", "", "width='10'");
+		echo http_img_pack("rien.gif", " ", "width='10'");
 
 		echo "<a href='calendrier_semaine.php3' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\">" .
 		  http_img_pack("cal-rv.png", "", "width='26' height='20' border='0'") ."</a>";
@@ -2297,7 +2297,7 @@ else {
 		
 
 		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
-			echo http_img_pack("rien.gif", "", "width='10'");
+			echo http_img_pack("rien.gif", " ", "width='10'");
 			echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
 			  http_img_pack("fiche-perso.png", "", "border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 			echo "</a>";
@@ -2336,11 +2336,11 @@ else {
 			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\">" .
 			  http_img_pack("$icone", "", "width='26' height='20' border='0'")."</a>";
 
-			echo http_img_pack("rien.gif", "", "width='10' height='1'");
+			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
 			echo http_img_pack("choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png", "abc", "class='format_png' valign='middle' width='59' height='15' usemap='#map_layout' border='0'");
 
 
-			echo http_img_pack("rien.gif", "", "width='10' height='1'");
+			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
 			// grand ecran
 			$lien = new Link;
 			if ($spip_ecran == "large") {
@@ -2357,7 +2357,7 @@ else {
 				  http_img_pack("set-ecran.png", $i, "width='26' height='20' border='0'") ."</a>";
 				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
-//			echo "<img src=_DIR_IMG_PACK . 'rien.gif' width='10' height='1' alt='' />";
+
 		echo "</td>";
 		
 		echo "<td class='bandeau_couleur' style='width: 60px; text-align:$spip_lang_left;' valign='middle'>";
@@ -2371,10 +2371,9 @@ else {
 					$link->addVar('set_couleur', $key);
 					
 					echo "<a href=\"".$link->getUrl()."\">" .
-					  http_img_pack("rien.gif", "", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
+					  http_img_pack("rien.gif", " ", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$couleurs_spip[$key]['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
 			  }
 			}
-			// echo "<img src=_DIR_IMG_PACK . 'rien.gif' width='10' height='1' />";
 		echo "</td>";
 	//
 	// choix de la langue
@@ -2950,7 +2949,7 @@ function fin_html() {
 	// rejouer le cookie de session si l'IP a change
 	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
 		echo 
-		  http_img_pack('rien.gif', "", "name='img_session' width='0' height='0'"),
+		  http_img_pack('rien.gif', " ", "name='img_session' width='0' height='0'"),
 		  http_script("
 document.img_session.src='../spip_cookie.php3?change_session=oui'");
 	}

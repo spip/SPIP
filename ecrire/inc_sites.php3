@@ -527,13 +527,13 @@ function afficher_sites($titre_table, $requete) {
 					$fid = $logo[2];
 					$hash = calculer_action_auteur ("reduire $w $h");
 
-					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='' width='$w' height='$h' border='0'></div>";
+					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
 					
 				}
 			}
 
 
-			$s .= http_img_pack($puce, "", "width='7' height='7' border='0'") ."&nbsp;&nbsp;";
+			$s .= http_img_pack($puce, $statut, "width='7' height='7' border='0'") ."&nbsp;&nbsp;";
 			
 			$s .= typo($nom_site);
 			/*if ($moderation == 'oui')
@@ -655,7 +655,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 					$puce = 'puce-rouge-anim.gif';
 			}
 
-			$s = http_img_pack($puce, "", "width='7' height='7' border='0'");
+			$s = http_img_pack($puce, $statut, "width='7' height='7' border='0'");
 			$vals[] = $s;
 
 			$s = "<a href='$url'>$titre</a>";

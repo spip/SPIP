@@ -88,7 +88,7 @@ if ($new != "oui") {
 		icone(_T('icone_retour'), "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
 	
 	echo "</td>";
-		echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' width=10></td>\n";
+	echo "<td>", http_img_pack("rien.gif", ' ', "width='10'"), "</td>\n";
 	echo "<td width='100%'>";
 	echo _T('info_modifier_breve');
 	gros_titre($titre);

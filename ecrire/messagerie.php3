@@ -71,7 +71,7 @@ echo
     "<div class='verdana1'>"._T("calendrier_synchro") .
     "<a href='synchro.php3' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
     "<td><a href='synchro.php3'><div class='cell-i'>"
-    . http_img_pack("rien.gif", '', http_style_background('synchro-24.gif', "; background-repeat: no-repeat; background-position: center center;"))
+    . http_img_pack("rien.gif", ' ', http_style_background('synchro-24.gif', "; background-repeat: no-repeat; background-position: center center;"))
     . "</div></a></td>\n"
     . "<td class='cellule-h-lien'><a href='synchro.php3' class='cellule-h'>" 
     . _T("icone_suivi_activite")

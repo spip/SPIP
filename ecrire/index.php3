@@ -328,17 +328,18 @@ if ($spip_display == 4) {
 
 if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 	if (!$cookie_admin) {
-		$gadget .= "<div>&nbsp;</div>";
-		$gadget .= "<table width=95%><tr>";
-		$gadget .= "<td width=100%>";
-		$gadget .= _T('info_activer_cookie');
-		$gadget .= aide ("cookie");
-		$gadget .= "</td>";
-		$gadget .= "<td width=10><img src='" . _DIR_IMG_PACK . "rien.gif' width=10 alt='' />";
-		$gadget .= "</td>";
-		$gadget .= "<td width='250'>";
-		$gadget .= icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "", false);
-		$gadget .= "</td></tr></table>";
+		$gadget .= "<div>&nbsp;</div>".
+			"<table width=95%><tr>".
+			"<td width=100%>".
+			_T('info_activer_cookie').
+			aide ("cookie").
+			"</td>".
+			"<td width=10>".
+			http_img_pack("rien.gif", ' ', "width='10'") .
+			"</td>".
+			"<td width='250'>".
+			icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "", false).
+			"</td></tr></table>";
 	}
 }
 
