@@ -384,16 +384,16 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 	if (ereg("^" . _DIR_IMG, $logo))
 		$img = substr($logo,strlen(_DIR_IMG));
 	else { $img = $logo; $logo = _DIR_IMG . $logo;}
-	spip_log("$img, $logo" . file_exists($logo));
+
 	if (@file_exists($logo) AND
 	    eregi("^(.*)\.(jpg|gif|png)$", $img, $regs)) {
-		include_local('inc-cache.php3');
+		include_local('inc-public-global.php3');
 		$nom = $regs[1];
 		$format = $regs[2];
 		$suffixe = '-'.$taille.'x'.$taille_y;
 		$cache_folder=  _DIR_IMG . creer_repertoire(_DIR_IMG, 'cache'.$suffixe);
 		$preview = creer_vignette($logo, $taille, $taille_y, $format, $cache_folder.$nom.$suffixe);
-		spip_log($preview['fichier'] . $cache_folder);
+
 		if ($preview) {
 			$vignette = $preview['fichier'];
 			$width = $preview['width'];

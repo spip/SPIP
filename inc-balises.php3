@@ -622,7 +622,6 @@ function calcul_balise_logo ($p) {
 	     "''") .
 	    ", $code_lien, '$flag_fichier')";
 	}
-	  spip_log($p->nom_champ . $type_objet . "'$flag_fichier'" . $p->code);
 	$p->statut = 'php';
 	return $p;
 }
