@@ -61,12 +61,11 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 	$link->delVar('var_mode');
 	$link->delVar('var_mode_objet');
 	$link->delVar('var_mode_affiche');
-# pour avoir toujours un "?" dans la balise 
 	$action = $link->getUrl();
 	if (!$action ||($action == './'))
 		$action = lire_meta('adresse_site');
 	$action = quote_amp($action . ((strpos($action, '?') === false) ? '?' : '&'));
-	spip_log($action);
+
   // en preview pas de stat ni de debug
 	if (!$var_preview) {
 		// Bouton statistiques

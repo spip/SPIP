@@ -109,7 +109,6 @@ else {
 
 		// Cas d'une page contenant du PHP :
 	else {
-
 			// Evaluer la page
 
 			if (!spip_active_ob) {
@@ -129,9 +128,9 @@ else {
 					erreur_squelette(_L('erreur d\'execution de la page'));
 				}
 			}
-
-
 		}
+
+		if ($affiche_boutons_admin) $contenu = perso_admin($contenu);
 
 		// Passer la main au debuggueur le cas echeant 
 		if ($var_mode == 'debug') {
