@@ -288,7 +288,7 @@ if (spip_num_rows($result) > 0) {
 		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$coll&new=oui", "article-24.gif","creer.gif");
 
 	$activer_breves = lire_meta("activer_breves");
-	if ($activer_breves != "non" AND $id_parent == "0") {
+	if ($activer_breves != "non" AND $id_parent == "0" AND $coll != "0") {
 		icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif","creer.gif");
 	}
 }
@@ -305,7 +305,10 @@ fin_raccourcis();
 debut_droite();
 
 
-if ($coll == 0) $titre = _T('info_racine_site');
+if ($coll == 0) {
+	$nom_site = lire_meta("nom_site");
+	$titre = _T('info_racine_site').": ".$nom_site;
+}
 
 if ($coll ==  0) $ze_logo = "racine-site-24.gif";
 else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
@@ -372,7 +375,7 @@ if (strpos($les_enfants2,"<P>")){
 
 
 // Afficher les sous-rubriques
-	echo "<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+	echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 	echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
 	echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' width=20></td>";
 	echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
@@ -440,7 +443,7 @@ afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WH
 
 $activer_breves=lire_meta("activer_breves");
 
-if ($id_parent == "0" AND $activer_breves!="non"){
+if ($id_parent == "0" AND $coll != "0" AND $activer_breves!="non"){
 	echo "<div align='right'>";
 	icone(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$coll&new=oui", "breve-24.gif", "creer.gif");
 	echo "</div><p>";

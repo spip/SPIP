@@ -9,7 +9,22 @@ echo "<br><br><br>";
 gros_titre(_T('titre_statistiques'));
 barre_onglets("statistiques", "repartition");
 
+if ($GLOBALS["critere"] == "debut") {
+	$critere = "visites";
+	gros_titre(_T('onglet_repartition_debut'));	
+}
+else {
+	$critere = "popularite";
+	gros_titre(_T('onglet_repartition_actuelle'));	
+}
+
+
+
 debut_gauche();
+
+if ($critere == "popularite") icone_horizontale(_T('icone_repartition_debut'), "statistiques.php3?critere=debut", "rubrique-24.gif","");
+else icone_horizontale(_T('icone_repartition_actuelle'), "statistiques.php3", "rubrique-24.gif","");
+
 
 
 debut_droite();
@@ -29,6 +44,7 @@ function enfants($id_parent){
 	global $nombre_vis;
 	global $total_vis;
 	global $nombre_abs;
+	global $critere;
 
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=\"$id_parent\"";
 	$result = spip_query($query);
@@ -37,7 +53,7 @@ function enfants($id_parent){
 	while($row = spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
 
-		$query2 = "SELECT SUM(visites) AS cnt FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
+		$query2 = "SELECT SUM(".$critere.") AS cnt FROM spip_articles WHERE id_rubrique=\"$id_rubrique\"";
 		$result2 = spip_query($query2);
 		$visites = 0;
 		if ($row2 = spip_fetch_array($result2)) {
@@ -63,6 +79,7 @@ function enfants_aff($id_parent,$decalage) {
 	global $abs_total;
 	$query="SELECT id_rubrique, titre FROM spip_rubriques WHERE id_parent=\"$id_parent\" ORDER BY titre";
 	$result=spip_query($query);
+
 
 	while($row = spip_fetch_array($result)){
 		$id_rubrique = $row['id_rubrique'];
@@ -113,6 +130,7 @@ function enfants_aff($id_parent,$decalage) {
 		enfants_aff($id_rubrique,$largeur_rouge);
 		$niveau--;
 	}
+	
 }
 
 

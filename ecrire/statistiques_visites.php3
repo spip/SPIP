@@ -215,6 +215,7 @@ else {
 
 
 
+
 $query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
 	"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 89 DAY) ORDER BY date";
 $result=spip_query($query);
@@ -262,6 +263,7 @@ if (count($log)>0){
 
 	if (count($log) < 420) $largeur = floor(450 / ($nb_jours+1));
 	if ($largeur < 1) $largeur = 1;
+	if ($largeur > 50) $largeur = 50;
 
 	debut_cadre_relief("statistiques-24.gif");
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
@@ -409,8 +411,8 @@ if (count($log)>0){
 		echo "</table>";
 	echo "</font></td>";
 	echo "</td></tr></table>";
+
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
-		
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo _T('info_maximum').$max;
@@ -439,9 +441,162 @@ if (count($log)>0){
 			echo ceil(lire_meta('popularite_total'));
 			echo "</font>";
 		}
+		echo "</td></tr></table>";	
 		
 		
-		echo "</td></tr></table>";		
+	if (count($log) > 80) {
+	
+		echo "<p>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
+
+		echo "<div align='left'>";
+		///////// Affichage par mois
+		$query="SELECT FROM_UNIXTIME(UNIX_TIMESTAMP(date),'%Y-%m') AS date_unix, SUM(visites) AS total_visites  FROM $table ".
+			"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 2700 DAY) GROUP BY date_unix ORDER BY date";
+		$result=spip_query($query);
+		
+		$i = 0;
+		while ($row = spip_fetch_array($result)) {
+			$date = $row['date_unix'];
+			$visites = $row['total_visites'];
+			$i++;
+			$entrees["$date"] = $visites;
+		}
+		
+		if (count($entrees)>0){
+		
+			$max = max($entrees);
+			$maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
+			
+			if ($maxgraph < 10) $maxgraph = 10;
+			if (1.1 * $maxgraph < $max) $maxgraph.="0";	
+			if (0.8*$maxgraph > $max) $maxgraph = 0.8 * $maxgraph;
+			$rapport = 200 / $maxgraph;
+	
+			$largeur = floor(420 / (count($entrees)));
+			if ($largeur < 1) $largeur = 1;
+			if ($largeur > 50) $largeur = 50;
+		}
+		
+		echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
+		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
+	
+			echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
+	
+		// Presentation graphique
+		$n = 0;
+		$decal = 0;
+		$tab_moyenne = "";
+			
+		while (list($key, $value) = each($entrees)) {
+			$n++;
+			
+			if ($decal == 30) $decal = 0;
+			$decal ++;
+			$tab_moyenne[$decal] = $value;
+			
+			$total_loc = $total_loc + $value;
+			reset($tab_moyenne);
+	
+			$moyenne = 0;
+			while (list(,$val_tab) = each($tab_moyenne))
+				$moyenne += $val_tab;
+			$moyenne = $moyenne / count($tab_moyenne);
+			
+			$hauteur_moyenne = round($moyenne * $rapport) - 1;
+			$hauteur = round($value * $rapport)	- 1;
+			echo "<td valign='bottom' width=$largeur>";
+			
+			if ($hauteur > 0){
+				if ($hauteur_moyenne > $hauteur) {
+					$difference = ($hauteur_moyenne - $hauteur) -1;
+					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;'>";
+					echo "<img src='img_pack/rien.gif' width=$largeur height=$difference>";
+					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+					if (ereg("-01",$key)){ // janvier en couleur foncee
+						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;'>";
+					} 
+					else {
+						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;'>";
+					}
+				}
+				else if ($hauteur_moyenne < $hauteur) {
+					$difference = ($hauteur - $hauteur_moyenne) -1;
+					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+					if (ereg("-01",$key)){ // janvier en couleur foncee
+						$couleur =  $couleur_foncee;
+					} 
+					else {
+						$couleur = $couleur_claire;
+					}
+					echo "<img src='img_pack/rien.gif' width=$largeur height=$difference style='background-color:$couleur;'>";
+					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:#333333;'>";
+					echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur_moyenne style='background-color:$couleur;'>";
+				}
+				else {
+					echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:$couleur_foncee;'>";
+					if (ereg("-01",$key)){ // janvier en couleur foncee
+						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_foncee;'>";
+					} 
+					else {
+						echo "<img src='img_pack/rien.gif' width=$largeur height=$hauteur style='background-color:$couleur_claire;'>";
+					}
+				}
+			}
+			echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
+			echo "</td>\n";
+			
+			$jour_prec = $key;
+			$val_prec = $value;
+		}
+		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
+		echo "</tr></table>";
+		echo "</td>";
+		echo "<td background='img_pack/fond-stats.gif' valign='bottom'><img src='img_pack/rien.gif' style='background-color:black;' width=3 height=1></td>";
+		echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
+		echo "<td valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+			echo "<table cellpadding=0 cellspacing=0 border=0>";
+			echo "<tr><td height=15 valign='top'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(7*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1>".round(3*($maxgraph/4))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(5*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph/2)."</b></font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(3*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1>".round($maxgraph/4)."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=25 valign='middle'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1 color='#999999'>".round(1*($maxgraph/8))."</font>";
+			echo "</td></tr>";
+			echo "<tr><td height=10 valign='bottom'>";		
+			echo "<font face='arial,helvetica,sans-serif' size=1><b>0</b></font>";
+			echo "</td>";
+			
+			
+			echo "</tr></table>";
+		echo "</td></tr></table>";
+		echo "</div>";
+
+	}
+	
+	/////
+		
+		
+		
+		
+			
 	
 	fin_cadre_relief();
 
