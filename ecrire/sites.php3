@@ -115,7 +115,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 		$syndication = $v[syndic] ? 'oui' : 'non';
 		$query = "UPDATE spip_syndic ".
 			"SET nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' ".
-			"WHERE id_syndic=$id_syndic";
+			"WHERE id_syndic=".intval($id_syndic);
 		$result = spip_query($query);
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 		$link = new Link('sites.php3');
@@ -133,11 +133,11 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 
 if ($nouveau_statut AND $flag_administrable) {
 	$statut = $nouveau_statut;
-	$query = "UPDATE spip_syndic SET statut='$statut' WHERE id_syndic='$id_syndic'";
+	$query = "UPDATE spip_syndic SET statut='$statut' WHERE id_syndic=".intval($id_syndic);
 	$result = spip_query($query);
 	//if ($statut == 'refuse') $redirect_ok = 'oui';
 	if ($statut == 'publie') {
-		$query = "UPDATE spip_syndic SET date=NOW() WHERE id_syndic='$id_syndic'";
+		$query = "UPDATE spip_syndic SET date=NOW() WHERE id_syndic=".intval(id_syndic);
 		$result = spip_query($query);
 	}
 	calculer_rubriques();
@@ -156,7 +156,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	if (strlen($url_syndic) < 8) $syndication = "non";
 	$url_syndic = addslashes($url_syndic);
 
-	$query = "UPDATE spip_syndic SET id_rubrique='$id_rubrique', nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' WHERE id_syndic='$id_syndic'";
+	$query = "UPDATE spip_syndic SET id_rubrique='$id_rubrique', nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' WHERE id_syndic=".intval($id_syndic);
 	$result = spip_query($query);
 
 	if ($syndication_old != $syndication OR $url_syndic != $old_syndic) {
@@ -183,7 +183,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 if ($jour AND $connect_statut == '0minirezo') {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
-	$query = "UPDATE spip_syndic SET date='$annee-$mois-$jour' WHERE id_syndic=$id_syndic";
+	$query = "UPDATE spip_syndic SET date='$annee-$mois-$jour' WHERE id_syndic=".intval($id_syndic);
 	$result = spip_query($query);
 	calculer_dates_rubriques();
 }
@@ -428,7 +428,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	// modifier la moderation
 	if ($flag_administrable && $options=='avancees') {
 		if ($moderation == 'oui' OR $moderation == 'non')
-			spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=$id_syndic");
+			spip_query("UPDATE spip_syndic SET moderation='$moderation' WHERE id_syndic=".intval($id_syndic));
 		else
 			$moderation = $mod;
 

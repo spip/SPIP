@@ -11,6 +11,7 @@ include_local("inc-cache.php3");
 // verifier les formats acceptes par GD
 
 if (($test_formats == "oui") AND $flag_function_exists) {
+	$gd_formats = Array();
 	if (function_exists('ImageCreateFromJPEG')) {
 		$srcImage = @ImageCreateFromJPEG("IMG/test.jpg");
 		if ($srcImage) {
