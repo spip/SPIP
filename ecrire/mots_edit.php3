@@ -43,16 +43,16 @@ if ($connect_statut == '0minirezo') {
 		if ($row = spip_fetch_array($result))
 			$type = addslashes(corriger_caracteres($row['titre']));
 
-		// recoller les champs du supplement
-		if (function_exists('champs_supplement')) {
-			$champs_suppl=champs_supplement("mot", $id_mot, $type);
-			include_ecrire("inc_supplement.php3");
-			$supplement = serialize(supplement_recup_saisie($champs_suppl));
+		// recoller les champs du extra
+		if (function_exists('champs_extra')) {
+			$champs_suppl=champs_extra("mot", $id_mot, $type);
+			include_ecrire("inc_extra.php3");
+			$extra = serialize(extra_recup_saisie($champs_suppl));
 		} else
-			$supplement = '';
+			$extra = '';
 
 
-		$query = "UPDATE spip_mots SET titre=\"$titre_mot\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe, supplement=\"".addslashes($supplement)."\" WHERE id_mot=$id_mot";
+		$query = "UPDATE spip_mots SET titre=\"$titre_mot\", texte=\"$texte\", descriptif=\"$descriptif\", type=\"$type\", id_groupe=$id_groupe, extra=\"".addslashes($extra)."\" WHERE id_mot=$id_mot";
 		$result = spip_query($query);
 
 		if (lire_meta('activer_moteur') == 'oui') {
@@ -85,7 +85,7 @@ if ($row = spip_fetch_array($result)) {
 	$descriptif = $row['descriptif'];
 	$texte = $row['texte'];
 	$type = $row['type'];
-	$supplement = $row['supplement'];
+	$extra = $row['extra'];
 	$id_groupe = $row['id_groupe'];
 }
 
@@ -269,10 +269,10 @@ if ($connect_statut =="0minirezo"){
 	else
 		echo "<INPUT TYPE='hidden' NAME='texte' VALUE=\"$texte\">";
 
-	if (function_exists(champs_supplement)) {
-		$champs_suppl=champs_supplement("mot", $id_mot, $type);
-		include_ecrire("inc_supplement.php3");
-		supplement_saisie(unserialize($supplement), $champs_suppl);
+	if (function_exists(champs_extra)) {
+		$champs_suppl=champs_extra("mot", $id_mot, $type);
+		include_ecrire("inc_extra.php3");
+		extra_saisie(unserialize($extra), $champs_suppl);
 	}
 
 	echo "<DIV align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";

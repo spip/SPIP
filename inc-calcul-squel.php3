@@ -241,8 +241,8 @@ function parser_boucle($texte, $id_parent) {
 					if (ereg('\#(PS)', $milieu)) {
 						$s .= ",$table.ps";
 					}
-					if (ereg('\#(SUPPLEMENT)', $milieu)) {
-						$s .= ",$table.supplement";
+					if (ereg('\#(EXTRA)', $milieu)) {
+						$s .= ",$table.extra";
 					}
 
 					$req_select[] = $s;
@@ -706,7 +706,7 @@ function parser_champs_etendus($texte) {
 				}
 
 				if ($fonctions) {
-					$fonctions = explode('|', substr($fonctions, 1));
+					$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
 					reset($fonctions);
 					while (list(, $f) = each($fonctions)) $champ->fonctions[] = $f;
 				}
@@ -846,7 +846,7 @@ function parser($texte) {
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
 		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT',
 		'FORMULAIRE_ADMIN', 'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'URL_LOGOUT', 'PUCE',
-		'SUPPLEMENT'
+		'EXTRA'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -1435,14 +1435,25 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$code = 'ceil(lire_meta(\'popularite_max\'))';
 		break;
 
-	case 'SUPPLEMENT':
+	case 'EXTRA':
 		// cas particulier : on ne peut pas appliquer interdire_scripts directement
 		// sur la balise, sinon on casse le unserialize(). Donc on ne l'applique qu'en
-		// absence de filtres (et aussi dans le filtre |champ{"xxx"})
+		// absence de filtres (et aussi dans le filtre extra{"xxx"})
 		if (!$fonctions) {
 			$fonctions[] = 'interdire_scripts';
-		}
-		$code = 'trim($pile_boucles[$id_instance]->row[\'supplement\'])';
+		} /* else {
+			// gerer la notation [(#EXTRA{toto})]
+			$filtres = Array();
+			reset ($fonctions);
+			while (list(,$filtre) = each($fonctions)) {
+				if (ereg("^{(.*)\}$", trim($filtre), $regs))
+					$filtres[] = 'extra{"'.$regs[1].'"}';
+				else
+					$filtres[] = $filtre;
+			}
+			$fonctions = $filtres;
+		} */
+		$code = 'trim($pile_boucles[$id_instance]->row[\'extra\'])';
 		break;
 
 	//

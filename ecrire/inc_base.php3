@@ -39,7 +39,7 @@ function creer_base() {
 		accepter_forum CHAR(3) NOT NULL,
 		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
 		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		supplement longblob NULL,
+		extra longblob NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
@@ -68,7 +68,7 @@ function creer_base() {
 		cookie_oubli tinytext NOT NULL,
 		source VARCHAR(10) DEFAULT 'spip' NOT NULL,
 		lang VARCHAR(10) DEFAULT '' NOT NULL,
-		supplement longblob NULL,
+		extra longblob NULL,
 		PRIMARY KEY (id_auteur),
 		KEY login (login),
 		KEY statut (statut),
@@ -85,7 +85,7 @@ function creer_base() {
 		statut varchar(6) NOT NULL,
 		id_rubrique bigint(21) DEFAULT '0' NOT NULL,
 		maj TIMESTAMP,
-		supplement longblob NULL,
+		extra longblob NULL,
 		PRIMARY KEY (id_breve),
 		KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
@@ -111,7 +111,7 @@ function creer_base() {
 		descriptif text NOT NULL,
 		texte longblob NOT NULL,
 		id_groupe bigint(21) NOT NULL,
-		supplement longblob NULL,
+		extra longblob NULL,
 		maj TIMESTAMP,
 		PRIMARY KEY (id_mot),
 		KEY type(type))";
@@ -145,7 +145,7 @@ function creer_base() {
 		id_import BIGINT DEFAULT '0',
 		statut VARCHAR(10) NOT NULL,
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
-		supplement longblob NULL,
+		extra longblob NULL,
 		PRIMARY KEY (id_rubrique),
 		KEY id_parent (id_parent))";
 	$result = spip_query($query);
@@ -1264,13 +1264,27 @@ function maj_base() {
 		maj_version (1.604);
 	}
 
-	if ($version_installee < 1.701) {
-		spip_query("ALTER TABLE spip_articles ADD supplement longblob NULL");
-		spip_query("ALTER TABLE spip_auteurs ADD supplement longblob NULL");
-		spip_query("ALTER TABLE spip_breves ADD supplement longblob NULL");
-		spip_query("ALTER TABLE spip_rubriques ADD supplement longblob NULL");
-		spip_query("ALTER TABLE spip_mots ADD supplement longblob NULL");
-		maj_version (1.701);
+	if ($version_installee < 1.702) {
+		spip_query("ALTER TABLE spip_articles ADD extra longblob NULL");
+		spip_query("ALTER TABLE spip_auteurs ADD extra longblob NULL");
+		spip_query("ALTER TABLE spip_breves ADD extra longblob NULL");
+		spip_query("ALTER TABLE spip_rubriques ADD extra longblob NULL");
+		spip_query("ALTER TABLE spip_mots ADD extra longblob NULL");
+
+		// recuperer les eventuels 'supplement' installes en 1.701
+		if ($version_installee == 1.701) {
+			spip_query ("UPDATE spip_articles SET extra = supplement");
+			spip_query ("ALTER TABLE spip_articles DROP supplement");
+			spip_query ("UPDATE spip_auteurs SET extra = supplement");
+			spip_query ("ALTER TABLE spip_auteurs DROP supplement");
+			spip_query ("UPDATE spip_breves SET extra = supplement");
+			spip_query ("ALTER TABLE spip_breves DROP supplement");
+			spip_query ("UPDATE spip_rubriques SET extra = supplement");
+			spip_query ("ALTER TABLE spip_rubriques DROP supplement");
+			spip_query ("UPDATE spip_mots SET extra = supplement");
+			spip_query ("ALTER TABLE spip_mots DROP supplement");
+		}
+		maj_version (1.702);
 	}
 
 }

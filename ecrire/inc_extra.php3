@@ -2,10 +2,11 @@
 
 
 ////////////////////////////////////////////////////////////////////////////////////
-// Pour utiliser les champs "supplementaires", il faut installer dans le fichier
+// Pour utiliser les champs "extra", il faut installer dans le fichier
 // ecrire/mes_options.php3 une fonction definissant les champs en question,
-// pour chaque type d'objet (article, rubrique, breve, auteur ou mot) que l'on
-// veut ainsi etendre
+// pour chaque type d'objet (article, rubrique, breve, auteur ou mot) que
+// l'on veut ainsi etendre ; utiliser dans l'espace public avec
+// [(#EXTRA{nom_du_champ})]
 
 /*	Arguments :
  *		$type = "article", "rubrique", "auteur" ...
@@ -20,7 +21,7 @@
  */
 
 /*
-function champs_supplement($type, $id_objet, $ensemble) {
+function champs_extra($type, $id_objet, $ensemble) {
 	if ($type == "auteur") {
 		return Array (
 			"sexe" => "ligne|brut",
@@ -30,13 +31,13 @@ function champs_supplement($type, $id_objet, $ensemble) {
 	}
 
 	if ($type == "article" && $ensemble == 7) {
-		return array(
+		return Array (
 			"isbn" => "ligne|typo"
 		);
 	}
 
-	// par defaut, aucun champ supplementaire.
-	return array();
+	// par defaut, aucun champ extraaire.
+	return Array ();
 }
 */
 
@@ -44,11 +45,11 @@ function champs_supplement($type, $id_objet, $ensemble) {
 
 //
 // Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_SUPPLEMENT")) return;
-define("_ECRIRE_INC_SUPPLEMENT", "1");
+if (defined("_ECRIRE_INC_EXTRA")) return;
+define("_ECRIRE_INC_EXTRA", "1");
 
 // a partir de la liste des champs, generer la liste des input
-function supplement_saisie($supplement, $champs) {
+function extra_saisie($extra, $champs) {
 	if (! sizeof($champs)) return;
 
 	debut_cadre_enfonce();
@@ -56,19 +57,19 @@ function supplement_saisie($supplement, $champs) {
 		list($type, $filtre, $prettyname)=explode("|", $desc);
 
 		if (!$prettyname)
-			$prettyname = $champ;
+			$prettyname = ucfirst($champ);
 		echo "<div><b>$prettyname&nbsp;:</b><br />";
 
 		switch($type) {
 			case "bloc":
 			case "block":
-				echo "<TEXTAREA NAME='suppl_$champ' CLASS='forml' style='font-size:9px;' ROWS='5' COLS='40'>".entites_html($supplement[$champ])."</TEXTAREA>\n";
+				echo "<TEXTAREA NAME='suppl_$champ' CLASS='forml' style='font-size:9px;' ROWS='5' COLS='40'>".entites_html($extra[$champ])."</TEXTAREA>\n";
 				break;
 			case "ligne":
 			case "line":
 			default:
 				echo "<INPUT TYPE='text' NAME='suppl_$champ' CLASS='forml' style='font-size:9px;'\n";
-				echo " VALUE=\"".entites_html($supplement[$champ])."\" SIZE='40'>\n";
+				echo " VALUE=\"".entites_html($extra[$champ])."\" SIZE='40'>\n";
 				break;
 		}
 
@@ -77,20 +78,20 @@ function supplement_saisie($supplement, $champs) {
 	fin_cadre_enfonce();
 }
 
-// recupere les valeurs postees pour reconstituer le supplement
-function supplement_recup_saisie($champs) {
-	$supplement=array();
+// recupere les valeurs postees pour reconstituer le extra
+function extra_recup_saisie($champs) {
+	$extra=array();
 	while(list($champ,)=each($champs)) {
-		$supplement[$champ]=$GLOBALS["suppl_$champ"];
+		$extra[$champ]=$GLOBALS["suppl_$champ"];
 	}
-	return $supplement;
+	return $extra;
 }
 
 // a partir de la liste des champs, generer l'affichage
-function supplement_affichage($supplement, $champs) {
+function extra_affichage($extra, $champs) {
 	while (list($champ,$desc) = each($champs)) {
 		list($type, $filtre, $prettyname) = explode("|", $desc);
-		$contenu = $supplement[$champ];
+		$contenu = $extra[$champ];
 		switch($filtre) {
 			case "typo":
 				$contenu = typo($contenu);
