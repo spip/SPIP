@@ -1007,7 +1007,7 @@ function barre_onglets($rubrique, $onglet){
 
 	if ($rubrique == "configuration"){
 		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
-		onglet(_T('onglet_intercativite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
+		onglet(_T('onglet_interactivite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
 		onglet(_T('onglet_langue'), "config-lang.php3", "lang", $onglet, "langues-24.gif");
 	}
