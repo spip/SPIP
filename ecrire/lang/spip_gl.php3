@@ -251,8 +251,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_probleme_droits' => '<b>Problema de permisos de acceso</b>',
 'dirs_repertoires_absents' => '<B>Os directorios seguintes non foron encontrados&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>&Eacute; probable que iso se deba a un problema de mal formato de mai&uacute;sculas ou min&uacute;sculas.
-  Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que est&aacute; fixado
- aqu&iacute; abaixo; se non &eacute; este o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.
+  Verifique que as min&uacute;sculas e mai&uacute;sculas destes directorios concorden ben co que se amosa
+ aqu&iacute; abaixo; se non &eacute; ese o caso, renomee os directorios co seu programa de FTP de xeito que se corrixa o erro.
   <P>Logo de facer este cambio, poder&aacute; ',
 'dirs_repertoires_suivants' => '<B>Non se pode escribir nos directorios seguintes: <ul>@bad_dirs@.</ul></B>
   <P>Para arranxalo, empregue o seu cliente de FTP e cambia os permisos de acceso de cada un
@@ -723,6 +723,7 @@ Gracias pola t&uacute;a participaci&oacute;n
 'info_hier' => 'onte:',
 'info_identification_publique' => 'A t&uacute;a identidade p&uacute;blica...',
 'info_image_aide' => 'AXUDA',
+'info_image_process' => 'Probe a seleccionar o mellor m&eacute;todo de fabricaci&oacute;n de vi&ntilde;etas premendo sobre a imaxe correspondente.',
 'info_impossible_lire_page' => '<B>Erro!</B> Foi imposible ler a p&aacute;xina <tt><html>@test_proxy@</html></tt> a trav&eacute;s do proxy <tt>',
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n da vi&ntilde;eta:',

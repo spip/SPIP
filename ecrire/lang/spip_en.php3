@@ -251,7 +251,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <B>Setting up access permissions</b>',
 'dirs_probleme_droits' => '<b>Problem in access permissions</b>',
-'dirs_repertoires_absents' => '<MODIF> <B>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
+'dirs_repertoires_absents' => '<B>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
   <P>It probably caused by a bad lower or upper case handling.
   Please make sure that the lower and upper case letters of these directories match what is displayed
   above; if they don\'t, rename the directories using your FTP client in order to correct the error.
@@ -357,7 +357,7 @@ will be rejected):
 Thank you for your participation
 ',
 'form_pet_message_commentaire' => 'Any message or comment?',
-'form_pet_nom_site2' => '<B>Name of your web site',
+'form_pet_nom_site2' => 'Name of your web site',
 'form_pet_probleme_technique' => 'Technical problem, signatures are interrupted momentarily.',
 'form_pet_signature_pasprise' => 'Your signature has been ignored.',
 'form_pet_signature_validee' => 'Your signature is valid. It will appear when the site will be updated. Thank you!',
@@ -720,7 +720,7 @@ requiring an FTP access to the Web site.',
 'info_hier' => 'yesterday:',
 'info_identification_publique' => 'Your public identity...',
 'info_image_aide' => 'HELP',
-'info_image_process' => '<NEW> Veuillez s&eacute;lectionner la meilleure m&eacute;thode de fabrication des vignettes en cliquant sur l\'image correspondante.',
+'info_image_process' => 'Select the best method to create miniatures by clicking on the corresponding picture.',
 'info_impossible_lire_page' => '<B>Error!</b> The page could not be read <tt><html>@test_proxy@</html></tt> through the proxy <tt>',
 'info_inclusion_directe' => 'Direct inclusion:',
 'info_inclusion_vignette' => 'Include vignette:',

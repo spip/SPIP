@@ -283,7 +283,7 @@ l&eacute; pa kav rokon&egrave;t ali (banna pou sanz&eacute; bann lesk&eacute;l&e
 'dirs_probleme_droits' => '<b>Ast&egrave;r, n&eacute;na inn larlik &egrave;k out bann drwa-laks&eacute;</b>',
 'dirs_repertoires_absents' => '<B>L&eacute; pa posib gany bann r&eacute;p&egrave;rtwar-la&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Ni pans n&eacute;na inn larlik &egrave;k l&eacute;kritir bann l&egrave;t sanm maziskil o miniskil
-  Gad byin n&eacute;na okinn diskord ant bann l&egrave;t maziskil o miniskil bann r&eacute;p&egrave;rtwar &eacute; sak l&eacute; afis&eacute;
+  Rogad byin n&eacute;na okinn diskord ant bann l&egrave;t maziskil o miniskil bann r&eacute;p&egrave;rtwar &eacute; sak l&eacute; afis&eacute;
   anl&egrave;r ; si ou trouv i l&eacute; pa par&egrave;y, ardon inn ot non bann r&eacute;p&egrave;rtwar-la sanm out lozisy&egrave;l FTP. Komsa lo larlik i sra pou aranz&eacute;.
   <P>Kank ou lora fini ou sra kav ',
 'dirs_repertoires_suivants' => '<B>Bann r&eacute;pertwar-la l&eacute; pa ouv&egrave;r pou l&eacute;ktritir&nbsp;: <ul>@bad_dirs@.</ul> </b>
@@ -342,11 +342,11 @@ Bann zinformasyon-la, s&eacute; komand&egrave;r-sist&egrave;m ou komand&egrave;r
 'entree_titre_image' => 'Lo nond limaz&nbsp;:',
 'entree_titre_obligatoire' => '<B>Titr</b> [N&eacute;s&eacute;s&egrave;r]<BR>',
 'entree_url' => 'Ladr&egrave;s (URL) out sitw&egrave;b',
-'erreur_boucle_double' => '<NEW> BOUCLE@id@: double d&eacute;finition',
-'erreur_boucle_fermant' => '<NEW> BOUCLE@id@: tag fermant manquant',
-'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
-'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
-'erreur_filtre' => '<NEW> Erreur : filtre <b>&laquo; @filtre@ &raquo;</b> non d&eacute;fini',
+'erreur_boucle_double' => 'BOUCLE@id@: n&eacute;na d&eacute; d&eacute;finisyon',
+'erreur_boucle_fermant' => 'BOUCLE@id@: n&eacute;na in "tag" sat i mank po tak in boukl.',
+'erreur_boucle_syntaxe' => 'Sintask lo boukl-l&agrave; l&eacute; pa kor&egrave;k',
+'erreur_boucle_syntaxe2' => 'Lo boukl @milieu@ li l&eacute; pa kor&egrave;k.',
+'erreur_filtre' => 'N&eacute;na in kanar andan lo filt <b>&laquo; @filtre@ &raquo;</b> sat l&eacute; pa d&eacute;fini',
 
 
 // F
@@ -702,6 +702,12 @@ domann d&eacute;gr&egrave;n molakl&eacute;-la
 'info_envoyer_message_prive' => 'Anvwa inn mod&eacute;kri priv&eacute; pou lot&egrave;r-la',
 'info_erreur_requete' => 'Kanard dann rok&egrave;t-la :',
 'info_erreur_restauration' => 'Kanard dann rotour-sovgard labaz : lo fisy&eacute;-la i &eacute;kzist pa.',
+'info_erreur_squelette' => 'Kanar sir lo sit',
+'info_erreur_squelette2' => 'N&eacute;na pa okin l&eacute;sk&eacute;l&egrave;t <b>@fichier@</b> sat l&eacute; disponib...',
+'info_erreur_systeme' => 'Kanar sist&egrave;m (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Lo diksodir li sr&eacute; byin po &egrave;t kompl&egrave;tman ragoul&eacute; o labazdodn&eacute; l&eacute; gat&eacute;<br>
+ <font color=\'red\'>Anon esay&eacute; <a href=\'ecrire/admin_repair.php3\'>aranz&eacute; labaz</a>,
+ ou kontakt&eacute; out l&eacute;b&egrave;rz&egrave;r.</font><br></b>',
 'info_etape_suivante' => 'Pas l&eacute;tap answit',
 'info_etape_suivante_1' => 'I p&eacute; pas l&eacute;tap answit.',
 'info_etape_suivante_2' => 'I p&eacute; pas l&eacute;tap answit.',
@@ -739,6 +745,7 @@ SPIP anba-la, i sava pa mars&eacute;.',
 'info_hier' => 'Y&egrave;r&nbsp;:',
 'info_identification_publique' => 'Out lidantit&eacute; piblik...',
 'info_image_aide' => 'KOUDMIN',
+'info_image_process' => 'Mersi swazi lo m&eacute;y&egrave;r manyir pou fabrik out bann viny&egrave;t sam apiy&eacute; si limaz i korespon.',
 'info_impossible_lire_page' => '<B>Kanard !</b> L&eacute; inposib lir pazw&egrave;b-la <tt><html>@test_proxy@</html></tt> &egrave;k lo proksi <tt>',
 'info_inclusion_directe' => 'Linklizyon dir&egrave;k&nbsp;:',
 'info_inclusion_vignette' => 'Linklizyon limaz-minyatir&nbsp;:',
@@ -1398,9 +1405,7 @@ la bazdodn&eacute;. Pou sa minm, oubli pa m&egrave;t ali andann  fisy&eacute; pr
 Oubli pa r&eacute;kup&egrave;r osi tout sak nana dann r&eacute;pertwar <i>IMG/</i>, s&eacute; dir
 tout bann zimaz &egrave;k tout bann dokiman kn&eacute;na dann bann zartik &egrave;k bann rubrik.',
 'texte_admin_tech_02' => 'Tansyon pangar : sovgard-la li sra posib r&eacute;stor&eacute; 
-S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Souvandfwa
- nana d-moun sak i tronp azot : moun-la i f&eacute; inn sovgard labaz avan
- larnouv&egrave;lman lo versyon SPIP. Pour plid d&eacute;tay anon vwar isi lapaz <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
+S&Egrave;LMAN sir inn sitw&egrave;b ki n&eacute;na inn minm versyon do SPIP. Pangar sirtou pa  &laquo;&nbsp;d&eacute;gren&eacute; labaz-la&nbsp;&raquo;  &egrave;k lid&eacute; install in in sovgar apr&eacute; larnouv&egrave;lman.Pour plid d&eacute;tay anon vwar isi lapaz <a href="http://www.spip.net/fr_article1489.html">la documentation de SPIP</a>.',
 'texte_admin_tech_03' => 'Ou p&eacute; swazi sovgard lo fisy&eacute; dann manyir-konpers&eacute;. Manyir-la i perm&eacute; rand pli takini lo transf&egrave;r d-fisy&eacute; sir out lordinat&egrave;r oubyin sa lo serv&egrave;r pou bann sovgard. L&eacute; itil aou pour kons&egrave;rv out l&eacute;spas-diks.',
 'texte_adresse_annuaire_1' => '(Si out karn&eacute; l&eacute; instal&eacute; sir lamasin par&eacute;y minm sitw&egrave;b-la, n&eacute;na grannsans i sra pour &egrave;t &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Lot&egrave;r answit la fin d&egrave;t azout&eacute; pou lartik-la :',
@@ -1437,7 +1442,7 @@ Anserv lalist anba-la pou kadr byin sak l&eacute; disponib.',
  d&eacute;gr&eacute;n&eacute;, &eacute;s&eacute;y aranz ali otomatikman.',
 'texte_creation_automatique_vignette' => 'Lakr&eacute;asyon otomatik pou bann viny&egrave;t avwar-avan, l&eacute; an mars si lo sit-la. Si ou linstal bann zimaz dann (bann) tay  @gd_formats@, dopwi formul&egrave;r-la, zimaz-la i sra pr&eacute;zant&eacute; &egrave;k inn viny&egrave;t pa pli grank @taille_preview@&nbsp; bann piks&egrave;l oplis.',
 'texte_creer_rubrique' => 'L&eacute; n&eacute;s&eacute;s&egrave;r ou kr&eacute; innn rubrik avand ou<BR> p&eacute; &eacute;kri inn lartik. ',
-'texte_date_creation_article' => 'LADAT LAKR&Eacute;ASYON LARTIK',
+'texte_date_creation_article' => ' LADAT LAKR&Eacute;ASYON LARTIK&nbsp;:',
 'texte_date_publication_anterieure' => 'DAT LAPIBLIKASYON DAVAN',
 'texte_date_publication_anterieure_nonaffichee' => 'Afis pa okinn dat pou lapiblikasyon davan.',
 'texte_date_publication_article' => 'LADAT LAPIBLIKASYON AN LIYN :',

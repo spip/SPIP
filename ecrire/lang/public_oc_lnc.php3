@@ -81,8 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
-'page_precedente' => '<NEW> page pr&eacute;c&eacute;dente',
-'page_suivante' => '<NEW> page suivante',
+'page_precedente' => 'pagina precedenta',
+'page_suivante' => 'pagina seguenta',
 'par_auteur' => 'per&nbsp;',
 'participer_site' => 'Pod&egrave;tz participar a la vida d\'aquel sit e prepausar los articles v&ograve;stres en vos inscriure &ccedil;ai jos. Recebretz c&ograve;p sec un e-mail que vos indicar&agrave; v&ograve;stres c&ograve;des per accedir a l\'espaci privat del sit.',
 'plan_site' => 'Plan del sit',
@@ -117,6 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
+'ver_imprimer' => 'Version d\'estampar',
 'voir_en_ligne' => 'Vejatz en linha'
 
 );

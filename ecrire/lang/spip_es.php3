@@ -237,9 +237,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <B>Regular los derechos de acceso</B>',
 'dirs_probleme_droits' => '<b>Problema de derechos de acceso</b>',
-'dirs_repertoires_absents' => '<B>No se pudireron encontrar las carpetas siguientes&nbsp;: <ul>@bad_dirs@.</ul> </b>
-  <P>Es probable que sea debido a un error entre may&uacute;sculas y min&uacute;sculas.
-  Verifica que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo que precede; si tal no es el caso c&aacute;mbiale el nombre a las carpetas con tu software de FTP.
+'dirs_repertoires_absents' => '<B>No se pudieron encontrar las carpetas siguientes&nbsp;: <ul>@bad_dirs@.</ul> </b>
+<P>Es probable que se deba a un problema de errores entre may&uacute;sculas y min&uacute;sculas.
+  Verifica que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si tal no es el caso c&aacute;mbiale el nombre a las carpetas con tu software de FTP, de manera a corregir los errores.
   <P>Cuando hayas hecho esta manipulaci&oacute;n podr&aacute;s  ',
 'dirs_repertoires_suivants' => '<B>Los siguientes directorios no est&aacute;n accesibles en escritura: <ul>@bad_dirs@.</ul> </b>
 <P>Para solucionar el problema debes utilizar un cliente FTP con el objetivo de regular los derechos de acceso de cada uno
@@ -343,7 +343,7 @@ ser&aacute; rechazada):
 Gracias por tu participaci&oacute;n
 ',
 'form_pet_message_commentaire' => '&iquest;Un mensaje, un comentario?',
-'form_pet_nom_site2' => '<B>Nombre de tu sitio Web',
+'form_pet_nom_site2' => 'Nombre de tu sitio Web',
 'form_pet_probleme_technique' => 'Problema t&eacute;cnico, las firmas est&aacute;n temporalmente suspendidas.',
 'form_pet_signature_pasprise' => 'Tu firma no ha sido tomada en cuenta.',
 'form_pet_signature_validee' => 'Tu firma est&aacute; validada. Aparecer&aacute; en la pr&oacute;xima actualizaci&oacute;n del sitio. &iexcl;Gracias!',
@@ -690,6 +690,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_hier' => 'ayer:',
 'info_identification_publique' => 'Tu identidad p&uacute;blica...',
 'info_image_aide' => 'Ayuda',
+'info_image_process' => 'Por favor selecciona el mejor m&eacute;todo de fabricaci&oacute;n de vi&ntilde;etas pinchando en la im&aacute;gen correspondiente. ',
 'info_impossible_lire_page' => '<B>Error !</B> Imposible leer la p&aacute;gina <tt><html>@test_proxy@</html></tt> a trav&eacute;s del "proxy" <tt>',
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n del icono',
@@ -1353,7 +1354,7 @@ No olvides igualmente recuperar la totalidad del directorio <i>IMG/</i>, que con
 'texte_crash_base' => 'Si la base tiene un problema, se puede intentar aqu&iacute; de repararla.',
 'texte_creation_automatique_vignette' => 'Este sitio permite la creaci&oacute;n autom&aacute;tica de iconos en los siguientes formatos: @gd_formats@. Las im&aacute;genes que instales con este formulario tendr&aacute;n iconos de @taille_preview@ p&iacute;xeles.',
 'texte_creer_rubrique' => 'Antes de escribir un art&iacute;culo, debes crear una secci&oacute;n.',
-'texte_date_creation_article' => '<MODIF> Fecha de creaci&oacute;n del art&iacute;culo',
+'texte_date_creation_article' => 'FECHA DE CREACI&Oacute;N DEL ART&Iacute;CULO:',
 'texte_date_publication_anterieure' => 'FECHA DE PUBLICACION ANTERIOR',
 'texte_date_publication_anterieure_nonaffichee' => 'No mostrar fecha de publicaci&oacute;n anterior.',
 'texte_date_publication_article' => 'FECHA DE PUBLICACION EN LINEA:',
