@@ -45,16 +45,18 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 
 	// id du formulaire (pour en avoir plusieurs sur une meme page)
 	$id = ($id_auteur ? '_'.$id_auteur : '_ar'.$id_article);
-
+spip_log("id formulaire = $id, "._request("valide".$id));
 	$sujet = _request('sujet_message_auteur'.$id);
 	$texte = _request('texte_message_auteur'.$id);
 	$adres = _request('email_message_auteur'.$id);
 
 	$mailko = $texte && !email_valide($adres);
+
 	$validable = $texte && $sujet && (!$mailko);
 
+	// doit-on envoyer le mail ?
 	if ($validable
-	AND (_request('valide'.$id) == _T('form_prop_confirmer_envoi'))) { 
+	AND $id == _request('id_formulaire_ecrire_auteur')) { 
 		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
 		include_ecrire("inc_mail.php3");
 		envoyer_mail($mail, $sujet, $texte, $adres,
@@ -66,7 +68,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	$link->delVar('sujet_message_auteur'.$id);
 	$link->delVar('texte_message_auteur'.$id);
 	$link->delVar('email_message_auteur'.$id);
-	$link->delVar('id_auteur');
+	$link->delVar('id_formulaire_ecrire_auteur');
 
 	return 
 		array('formulaire_ecrire_auteur', 0,
@@ -78,7 +80,8 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 			'sujetko' => ($texte && !$sujet) ? $puce : '',
 			'sujet' => $sujet,
 			'texte' => $texte,
-			'valide' => ($validable ?
+			'valide' => ($validable ? $id : ''),
+			'bouton' => ($validable ?
 				_T('form_prop_confirmer_envoi') :
 				_T('form_prop_envoyer'))
 			)
