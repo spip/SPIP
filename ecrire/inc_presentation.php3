@@ -1650,11 +1650,6 @@ function barre_onglets($rubrique, $onglet){
 			onglet(_T('module_fichiers_langues'), "lang_raccourcis.php3", "fichiers", $onglet, "traductions-24.gif");
 		}
 	}
-	
-	if ($rubrique == "forums") {
-		onglet(_T('titre_forum'), "forum.php3", "privrac", $onglet, "forum-interne-24.gif");
-		onglet(_T('icone_forum_administrateur'), "forum_admin.php3", "privadm", $onglet, "forum-admin-24.gif");
-	}
 
 	if ($rubrique == "suivi_forum"){
 		onglet(_T('onglet_messages_publics'), "controle_forum.php3?page=public", "public", $onglet, "racine-site-24.gif");
@@ -2056,10 +2051,11 @@ else {
 		}
 
 			echo "<div class='$class' id='bandeauredacteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			if ($connect_toutes_rubriques) {
+				if (lire_meta('forum_prive_admin') == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "privadm", $sous_rubrique);
+
 				icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
-			}
+
 			echo "</tr></table></div></div>";
 	
 	}
@@ -2261,7 +2257,28 @@ else {
 		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 200px;'>";
 		echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
 		
-/*
+		
+		afficher_menu_rubriques();
+		
+		
+		
+		echo "</div>";
+	
+	
+	
+	
+		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 460px;'>";
+
+		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
+		else echo "<a href='brouteur.php3' class='lien_sous'>";
+		echo _T('icone_brouteur');
+		echo "</a>";
+		
+
+		echo "<table><tr>";
+		
+		echo "<td width='150' valign='top'>";
+
 		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 		$result = spip_query($query);
 		
@@ -2291,44 +2308,11 @@ else {
 			}
 			
 		}
-		*/
+		
+		echo "</td>\n";
+		echo "<td width='10'>&nbsp;</td>";
+		echo "<td width='290' valign='top'>";
 
-
-		// Mettre en attente l'affichage du menu de navigation (trop lourd)
-		
-		afficher_menu_rubriques();
-		
-		/*
-		$result_racine = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY titre");
-		$i = spip_num_rows($result_racine);
-		if ($i > 0) {
-			echo "<div>&nbsp;</div>";
-			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			while ($row = spip_fetch_array($result_racine)) {
-				$id_rubrique = $row["id_rubrique"];
-				$titre_rubrique = supprimer_numero(typo($row["titre"]));
-				
-				bandeau_rubrique ($id_rubrique, $titre_rubrique, $i);
-				
-				$i = $i - 1;
-			}
-			echo "</div>";
-		}
-		*/
-		
-		
-		echo "</div>";
-	
-	
-	
-	
-		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
-
-		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
-		else echo "<a href='brouteur.php3' class='lien_sous'>";
-		echo _T('icone_brouteur');
-		echo "</a>";
-		
 
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
 			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 0,5");
@@ -2382,6 +2366,7 @@ else {
 			echo "</div>";
 			echo "</div>";
 		}
+		echo "</td></tr></table>";
 	
 
 

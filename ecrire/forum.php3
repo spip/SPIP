@@ -13,9 +13,6 @@ if ($admin=='oui') {
 	$urlforum = 'forum.php3';
 }
 
-// Afficher onglet si admin et forum_admin actif
-if ($connect_statut == "0minirezo" AND lire_meta('forum_prive_admin') == 'oui') barre_onglets("forums", $statutforum);
-
 debut_gauche();
 
 
