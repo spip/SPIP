@@ -552,7 +552,7 @@ function typo($letexte) {
 
 
 //
-// Traitement des listes
+// Traitement des listes (merci a Michael Parienti)
 //
 function traiter_listes ($texte) {
 	$parags = split ("\n[[:space:]]*\n", $texte);
@@ -582,21 +582,27 @@ function traiter_listes ($texte) {
 				$change_type = ($type AND ($type <> $nouv_type)) ? 1 : 0;
 				$type = $nouv_type;
 
-				if ($niveau == $profond && !$change_type) {
-					$ajout = "</li>";
-				}
+				// d'abord traiter les descentes
 				while ($niveau > $profond - $change_type) {
 					$ajout .= $pile_li[$niveau];
 					$ajout .= $pile_type[$niveau];
-					$niveau --;
 					if (!$change_type)
 						unset ($pile_li[$niveau]);
+					$niveau --;
 				}
+
+				/// puis les identites (y compris en fin de descente)
+				if ($niveau == $profond && !$change_type) {
+					$ajout .= "</li>";
+				}
+
+				// puis les montees (y compris apres une descente un cran trop bas)
 				while ($niveau < $profond) {
 					$niveau ++;
 					$ajout .= "<$type class=\"spip\">";
 					$pile_type[$niveau] = "</$type>";
 				}
+
 				$ajout .= "<li class=\"spip\">";
 				$pile_li[$profond] = "</li>";
 			}
