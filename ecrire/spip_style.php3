@@ -169,14 +169,14 @@ a.bandeau_rub {
 	text-decoration: none;
 	border-bottom: 1px solid #cccccc;
 	background-repeat: no-repeat;
-	background-position: <?php echo $ltr ? "1%" : "99%"; ?>;
+	background-position: <?php echo $ltr ? "1%" : "99%"; ?> center;
 }
 a.bandeau_rub:hover {
 	background-color: white;
 	text-decoration: none;
 	color: #333333;
 	background-repeat: no-repeat;
-	background-position: <?php echo $ltr ? "1%" : "99%"; ?>;
+	background-position: <?php echo $ltr ? "1%" : "99%"; ?> center;
 }
 div.bandeau_rub {
 	position: absolute;
