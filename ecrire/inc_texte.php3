@@ -36,10 +36,10 @@ tester_variable('compt_note', 0);
 
 if (file_exists("puce.gif")) {
 	$imgsize = getimagesize('puce.gif');
-	tester_variable('puce', "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'> ");
+	tester_variable('puce', "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'>");
 }
 else {
-	tester_variable('puce', "- ");
+	tester_variable('puce', "-");
 }
 
 
@@ -801,9 +801,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	// autres raccourcis
 	if ($flag_str_replace && !$flag_preg_replace) {
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
-		$letexte = ereg_replace("^- ", "$puce ", $letexte);
-		$letexte = str_replace("\n- ", "\n<br>$puce ",$letexte);
-		$letexte = str_replace("\n_ ", "\n<br>",$letexte);
+		$letexte = ereg_replace("^- +", "$puce&nbsp;", $letexte);
+		$letexte = str_replace("\n- +", "\n<br>$puce&nbsp;",$letexte);
+		$letexte = str_replace("\n_ +", "\n<br>",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
 		$letexte = str_replace("{{{", $debut_intertitre, $letexte);
 		$letexte = str_replace("}}}", $fin_intertitre, $letexte);
@@ -818,9 +818,9 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	else {
 		$cherche1 = array(
 			/* 0 */ 	"/\n(----+|____+)/",
-			/* 1 */ 	"/^- /",
-			/* 2 */ 	"/\n- /",
-			/* 3 */ 	"/\n_ /",
+			/* 1 */ 	"/^- +/",
+			/* 2 */ 	"/\n- +/",
+			/* 3 */ 	"/\n_ +/",
 			/* 4 */ 	"/(( *)\n){2,}/",
 			/* 5 */ 	"/\{\{\{/",
 			/* 6 */ 	"/\}\}\}/",
@@ -835,8 +835,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		);
 		$remplace1 = array(
 			/* 0 */ 	"\n<hr class=\"spip\">\n",
-			/* 1 */ 	"$puce ",
-			/* 2 */ 	"\n<br>$puce ",
+			/* 1 */ 	"$puce&nbsp;",
+			/* 2 */ 	"\n<br>$puce&nbsp;",
 			/* 3 */ 	"\n<br>",
 			/* 4 */ 	"\n<p>",
 			/* 5 */ 	"$debut_intertitre",
@@ -872,7 +872,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 			$fin_notes = '</p>';
 		}
 
-		// "paragrapher les nouvelles notes
+		// "paragrapher" les nouvelles notes
 		$mes_notes = traiter_raccourcis($mes_notes, $les_echap, 'non');
 		if (ereg('<p class="spip">', $mes_notes)) {
 			$mes_notes = ereg_replace('^<p class="spip">', '', $mes_notes);
