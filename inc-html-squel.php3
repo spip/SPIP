@@ -97,9 +97,9 @@ function parser_champs($texte,$result) {
 }
 
 // Gestion des imbrications:
-// on cherches les [..] les plus internes et on les remplace par une  chaine
-// %###N@ où N indexe un tableau comportant le résultat de leur phrasé
-// on recommence tant qu'il y a des [...] en substituant à l'appel suivant
+// on cherche les [..] les plus internes et on les remplace par une chaine
+// %###N@ ou N indexe un tableau comportant le resultat de leur phrase
+// on recommence tant qu'il y a des [...] en substituant a l'appel suivant
 
 function parser_champs_etendus($texte, $result) {
 	if (!$texte) return $result;
