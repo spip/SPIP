@@ -107,6 +107,11 @@ fin_grand_cadre();
 debut_gauche();
 
 
+debut_raccourcis();
+icone_horizontale(_T('icone_retour_article'), "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
+icone_horizontale(_T('icone_suivi_revisions'), "suivi_revisions.php3", "historique-24.gif","rien.gif");
+fin_raccourcis();
+
 
 //////////////////////////////////////////////////////
 // Affichage de la colonne de droite
@@ -170,7 +175,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 echo "</td>";
 
 echo "<td align='center'>";
-icone(_T('icone_retour_article'), "articles.php3?id_article=$id_article", "", "article-24.gif");
+icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
 echo "</td>";
 
 echo "</tr></table>";

@@ -18,9 +18,6 @@ define("_ECRIRE_INC_SUIVI_REVISIONS", "1");
 
 include_ecrire("inc_lab.php");
 include_spip("ecrire.php");
-include_spip("revisions.php");
-include_spip("diff.php");
-
 
 function afficher_para_modifies ($texte, $court = false) {
 	// Limiter la taille de l'affichage
@@ -29,7 +26,7 @@ function afficher_para_modifies ($texte, $court = false) {
 	
 	$paras = explode ("\n",$texte);
 	for ($i = 0; $i < count($paras) AND strlen($texte_ret) < $max; $i++) {
-		if (ereg("diff-", $paras[$i])) $texte_ret .= $paras[$i]."\n\n";
+		if (strpos($paras[$i], '"diff-')) $texte_ret .= $paras[$i]."\n\n";
 	}
 	$texte = $texte_ret;
 	return $texte;
@@ -160,18 +157,18 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 					}		
 					$textes = array();			
 					foreach ($champs as $champ) {
-						if (!$new[$champ] && !$old[$champ]) continue;			
+						if (!$new[$champ] && !$old[$champ]) continue;
 						$diff = new Diff(new DiffTexte);
 						$textes[$champ] = afficher_para_modifies(afficher_diff($diff->comparer(preparer_diff($new[$champ]), preparer_diff($old[$champ]))), $court);
 					}
-				}	
+				}
 				
 				echo debut_block_invisible("$id_version-$id_article-$id_auteur");
 				if (is_array($textes))
 				foreach ($textes as $var => $t) {
 					if (strlen($t) > 0) {
-						echo "<blockquote class='spip serif1'>";
-						echo propre($t)."";
+						echo "<blockquote class='serif1'>";
+						echo propre($t);
 						echo "</blockquote>";
 					}		
 				}		
