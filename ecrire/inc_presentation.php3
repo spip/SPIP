@@ -18,7 +18,7 @@ function aide($aide='') {
 	if (!$aide) return;
 
 	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire
-	."aide_index.php3?aide=$aide&var_lang=$spip_lang\" target=\"spip_aide\" ".
+	."aide_index.php3?aide=$aide&amp;var_lang=$spip_lang\" target=\"spip_aide\" ".
 		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
 		"resizable=yes, width=740, height=580'); return false;\"><img ".
 		"src=\"".$dir_ecrire."img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
