@@ -1426,6 +1426,35 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	afficher_script_layer();
 ?>
 <script type="text/javascript" src="../mathmlinHTML.js"></script>
+
+<script language="JavaScript">
+// Boolean variable to keep track of user's SVG support
+var hasSVGSupport = false;
+
+// Boolean to determine if we need to use VB Script method or not to find SVG support
+var useVBMethod = false;
+
+/* Internet Explorer returns 0 as the number of MIME types,
+   so this code will not be executed by it. This is our indication
+  to use VBScript to detect SVG support.  */ 
+if (navigator.mimeTypes != null && navigator.mimeTypes.length > 0) {
+        if (navigator.mimeTypes["image/svg-xml"] != null)
+                hasSVGSupport = true;
+}else{
+        useVBMethod = true;
+}
+</script>
+
+<script language="VBScript">
+' VB Script method to detect SVG viewer in IE
+' this will not be run by browsers with no support for VB Script
+On Error Resume Next
+If useVBMethod = true Then
+        hasSVGSupport = IsObject(CreateObject("Adobe.SVGCtl"))
+End If
+</script>
+
+
 <script type='text/javascript'><!--
 	var init_gauche = true;
 	var memo_obj = new Array();
@@ -1616,6 +1645,10 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	
 	
 	function verifForm() {
+		<?php	
+		if (!$_COOKIE["spip_svg_support"]) { ?>
+			document.cookie = "spip_svg_support="+hasSVGSupport;
+		<?php } ?>
 	
 	convert2math();
 	<?php
