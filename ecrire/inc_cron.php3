@@ -187,7 +187,7 @@ function cron_visites($t) {
 	// il vaut mieux le lancer peu apres minuit, 
 	// donc on retourne "aujourd'hui a 0h 0m 1s 
 	// pour etre appele demain a cette heure
-	return 0 - strtotime(date("d F Y", time())+1);
+	return 0 - (strtotime(date("d F Y", time()))+60);
 }
 
 function cron_mail($t) {
