@@ -15,6 +15,15 @@ debut_page("Auteurs","redacteurs","redacteurs");
 
 debut_gauche();
 
+$myretour = "auteurs.php3?";
+if ($tri)
+	$myretour .= "&tri=$tri";
+if ($debut)
+	$retour = $myretour."&debut=$debut";
+else
+	$retour = $myretour;
+$retour = urlencode($retour);
+
 if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
 	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui&redirect=$retour", "redacteurs-24.gif", "creer.gif");
@@ -38,11 +47,12 @@ debut_droite();
 //
 
 // limiter les statuts affiches
-unset($sql_statut_articles);
-unset($sql_statut_articles);
 if ($connect_statut != '0minirezo') {
 	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite')";
 	$sql_statut_articles = " AND FIND_IN_SET(articles.statut,'prop,publie')";
+} else {
+	$sql_statut_auteurs = " AND FIND_IN_SET(auteurs.statut,'0minirezo,1comite,5poubelle')";
+	$sql_statut_articles = "";
 }
 
 // tri
@@ -82,13 +92,12 @@ if ($type_requete == 'auteur') {
 		$nombre_auteurs ++;
 	}
 
-	$query = "SELECT auteurs.id_auteur, COUNT(articles.id_article) AS compteur
+	$result_nombres = spip_query("SELECT auteurs.id_auteur, COUNT(articles.id_article) AS compteur
 		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
 		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
 		$sql_statut_auteurs $sql_statut_articles
 		GROUP BY auteurs.id_auteur
-		$sql_order";
-	$result_nombres = spip_query($query);
+		$sql_order");
 	while ($row = mysql_fetch_array($result_nombres))
 		$auteurs[$row['id_auteur']]['compteur'] = $row['compteur'];
 
@@ -96,14 +105,14 @@ if ($type_requete == 'auteur') {
 	if ($connect_statut != '0minirezo') {
 		reset($auteurs);
 		while (list(,$auteur) = each ($auteurs)) {
-			if (! $auteurs[$row['id_auteur']]['compteur']) {
+			if (! $auteur['compteur']) {
 				unset($auteurs[$auteur['id_auteur']]);
 				$nombre_auteurs --;
 			}
 		}
 	}
 
-} else {
+} else { // tri par nombre
 	$result_nombres = spip_query("SELECT auteurs.*, COUNT(articles.id_article) AS compteur
 		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
 		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
@@ -145,16 +154,6 @@ if ($connect_statut == '0minirezo') { // recuperer les admins restreints
 echo "<p>";
 gros_titre("Les auteurs");
 echo "<p>";
-
-$myretour = "auteurs.php3?";
-if ($tri)
-	$myretour .= "&tri=$tri";
-if ($debut)
-	$retour = $myretour."&debut=$debut";
-else
-	$retour = $myretour;
-$retour = urlencode($retour);
-
 
 // reglage du debut
 $max_par_page = 50;
@@ -244,7 +243,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 	if ($row['nom'] && $connect_statut=="0minirezo")
 		echo "<A HREF='auteurs_edit.php3?id_auteur=".$row['id_auteur']."&redirect=$retour'>".typo($row['nom']).'</a>';
 	else
-		echo typo($nom);
+		echo typo($row['nom']);
 
 	if ($connect_statut == '0minirezo' AND $rub_restreinte[$row['id_auteur']])
 		echo " &nbsp;<small>(admin restreint)</small>";
