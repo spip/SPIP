@@ -181,11 +181,11 @@ else {
 	// Afficher les boutons de creation d'article et de breve
 	//
 	if ($connect_statut == '0minirezo') {
-		debut_raccourcis();
-		if ($id_article > 0)
+		if ($id_article > 0) {
+			debut_raccourcis();
 			icone_horizontale(_T('icone_retour_article'), "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
-		icone_horizontale(_T('icone_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif", "rien.gif");
-		fin_raccourcis();
+			fin_raccourcis();
+		}
 	}
 
 

@@ -1079,7 +1079,7 @@ function barre_onglets($rubrique, $onglet){
 
 	if ($rubrique == "administration"){
 		onglet(_T('onglet_save_restaur_base'), "admin_tech.php3", "sauver", $onglet, "base-24.gif");
-		onglet(_T('onglet_vider_cache'), "admin_vider.php3", "vider", $onglet, "cache-24.gif");
+//		onglet(_T('onglet_vider_cache'), "admin_vider.php3", "vider", $onglet, "cache-24.gif");
 		onglet(_T('onglet_affacer_base'), "admin_effacer.php3", "effacer", $onglet, "supprimer.gif");
 	}
 
@@ -1486,6 +1486,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		bandeau_barre_verticale();
 		if ($options == "avancees") {
 			icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+			icone_bandeau_secondaire (_T('onglet_vider_cache'), "admin_vider.php3", "cache-24.gif", "cache", $sous_rubrique);
 		}
 		else {
 			icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);

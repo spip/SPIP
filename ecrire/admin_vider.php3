@@ -4,12 +4,12 @@ include ("inc.php3");
 
 include_ecrire ("inc_admin.php3");
 
-debut_page(_T('titre_page_admin_vider'), "administration", "base");
+debut_page(_T('onglet_vider_cache'), "administration", "cache");
 
 
 echo "<br><br><br>";
 gros_titre(_T('titre_admin_vider'));
-barre_onglets("administration", "vider");
+// barre_onglets("administration", "vider");
 
 
 debut_gauche();

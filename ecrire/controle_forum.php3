@@ -30,12 +30,6 @@ fin_boite_info();
 //
 // Raccourcis
 //
-$activer_stats = lire_meta("activer_statistiques");
-if (($activer_stats != "non") AND ($connect_statut == '0minirezo')) {
-	debut_raccourcis();
-	icone_horizontale(_T('icone_evolution_visites_2'), "statistiques_visites.php3", "statistiques-24.gif", "rien.gif");
-	fin_raccourcis();
-}
 
 
 debut_droite();

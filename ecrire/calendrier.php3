@@ -160,13 +160,15 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		if (!$afficher_lien_aujourdhui) echo "<a href='calendrier_jour.php3'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		else  echo "<a href='calendrier_jour.php3?jour=1&mois=$mois&annee=$annee'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo "&nbsp;";
-		echo "<img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'>";
-		echo "&nbsp;";
+//		par semaine c'est joli mais ca ne fait rien...
+//		echo "<img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'>";
+//		echo "&nbsp;";
 		echo "<img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='border:1px solid black;'>";
+		echo aide ("messcalen");
 		echo "</div>";
 	}
 
-	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE='4'><B>".affdate_mois_annee("$annee_today-$mois_today-1")." ".aide ("messcalen")."</B></FONT>";
+	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE='4'><B>".affdate_mois_annee("$annee_today-$mois_today-1")."</B></FONT>";
 
 	
 	echo "</TD>";
