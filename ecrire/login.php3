@@ -49,8 +49,6 @@ if ($login)
 else
 	$focus = 'document.forms[0].elements[0].focus();';
 
-// y a-t-il d'anciennes sessions pour ce login ? Si oui proposer de les zapper
-$zap_sessions = zap_sessions($login, false);
 
 if ($echec_cookie == "oui") {
 	install_debut_html("$nom_site : probl&egrave;me de cookie", $focus);
@@ -91,7 +89,6 @@ if ($login) {
 			this.session_password.value = \"\";
 		}'";
 	echo ">\n";
-	//echo "<div style='border: 1px dashed #999999; padding: 10px;'>\n";
 	// statut
 	if ($row['statut'] == '0minirezo') {
 		$icone = "redacteurs-admin-24.gif";
@@ -100,7 +97,6 @@ if ($login) {
 	}
 	debut_cadre_relief($icone);
 	if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
-	//echo "<label><b>Login (identifiant de connexion au site)</b><br></label>\n";
 
 	if (file_exists("../IMG/auton$id_auteur.gif")) $logo = "../IMG/auton$id_auteur.gif";
 	else if (file_exists("../IMG/auton$id_auteur.jpg")) $logo = "../IMG/auton$id_auteur.jpg";
@@ -111,7 +107,7 @@ if ($login) {
 
 	// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 	echo "<script type=\"text/javascript\"><!--
-			document.write('<b>$login</b> <br><font size=1>[<a href=\\'../spip_cookie.php3?cookie_admin=non&redirect=./ecrire/login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
+			document.write('<b>$login</b> <br><font size=\\'2\\'>[<a href=\\'../spip_cookie.php3?cookie_admin=non&redirect=./ecrire/login.php3\\'>se connecter sous un autre identifiant</a>]</font>');
 		//--></script>\n";
 	echo "<input type='hidden' name='session_login_hidden' value='$login'>";
 
@@ -125,19 +121,67 @@ if ($login) {
 	echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
 	echo "<input type='hidden' name='session_password_md5' value=''>\n";
 	echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
-	if ($zap_sessions) {
-		echo "<font size='2' face='verdana,arial,helvetica'>";
-		echo propre("Une autre connexion &agrave; l'espace priv&eacute;e utilisant cet identifiant est en cours. Si vous &ecirc;tes en train d'utiliser un autre logiciel pour acc&eacute;der &agrave; l'espace priv&eacute;, cela est parfaitement normal, et vous pouvez d&eacute;cocher la case ci-dessous. Si vous n'utilisez aucun autre logiciel de navigation <i>en ce moment</i>, laissez cette case coch&eacute;e, cela renforcera la s&eacute;curit&eacute; du syst&egrave;me.");
-		echo "<br><input type='checkbox' name='zap_sessions' checked id='zap_sessions'>";
-		echo "<label for='zap_sessions'>&nbsp;<b>Connexion unique</b> (s&eacute;curit&eacute;)</font></label>\n";
-	}
 	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
 	//echo "</div>\n";
 	fin_cadre_relief();
 	echo "</form>";
+
+	if ($secu == 'oui') {
+		// y a-t-il d'anciennes sessions pour ce login ? Si oui proposer de les zapper
+
+		debut_cadre_relief();
+
+		$zap_sessions = zap_sessions($login, false);
+		echo "<b>Options de s&eacute;curit&eacute;</b><p>";
+		echo "<font size='2' face='verdana,arial,helvetica,sans-serif'>";
+		if ($zap_sessions) {
+			$redirect = './ecrire/login.php3?secu=oui';
+			echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
+			echo "<form action='../spip_cookie.php3' method='post'";
+			echo " onSubmit='if (this.session_password.value) {
+					this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
+					this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
+					this.session_password.value = \"\";
+				}'";
+			echo ">\n";
+
+			echo "<b>Une connexion &agrave; l'espace priv&eacute; utilisant cet identifiant est en cours.</b>\n";
+			echo "Si vous &ecirc;tes en train d'utiliser un autre navigateur ou un autre ordinateur pour acc&eacute;der &agrave; ";
+			echo "l'espace priv&eacute;, cela est parfaitement normal. Si vous n'utilisez aucun autre logiciel de navigation <b>en ce moment</b>, ";
+			echo "vous pouvez tuer toutes les connexions en entrant votre mot de passe, cela renforcera la s&eacute;curit&eacute; du syst&egrave;me.";
+
+			echo "<p>\n";
+
+			// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
+			echo "<input type='hidden' name='session_login_hidden' value='$login'>";
+
+			// si jaja inactif, le login est modifiable (puisque le challenge n'est pas utilise)
+			echo "<noscript><label><b>Login (identifiant de connexion au site)</b><br></label>\n";
+			echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>";
+
+			echo "<p>\n<label><b>Mot de passe</b><br></label>";
+			echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
+			echo "<input type='hidden' name='session_password_md5' value=''>\n";
+			echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
+
+			echo "<input type='hidden' name='essai_login' value='oui'>\n";
+			echo "<input type='hidden' name='redirect' value='$redirect'>\n";
+			echo "<input type='hidden' name='zap_sessions' value='oui'>\n";
+
+			echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Terminer toutes les connexions'></div>\n";
+			echo "</form>\n";
+		}
+		else {
+			echo ("Aucune connexion à l'espace priv&eacute; n'utilise actuellement cet identifiant.");
+		}
+		echo "</font>\n";
+
+		fin_cadre_relief();
+	}
 }
-	else
-{	// demander seulement le login
+
+else {
+	// demander seulement le login
 	echo "<form action='./login.php3' method='get'>\n";
 	debut_cadre_enfonce();
 	//echo "<div style='border: 1px dashed #999999; padding: 10px;'>\n";
@@ -162,10 +206,12 @@ if ($echec_cookie == "oui" AND $php_module) {
 }
 
 
+echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
+echo "[<a href='login.php3?secu=oui'>options de s&eacute;curit&eacute;</a>";
 if ($url_site) {
-	echo "<p><font size='2' face='Verdana, Arial, Helvetica, sans-serif'>";
-	echo "[<a href='$url_site'>retour au site public</a>]</font>";
+	echo " | <a href='$url_site'>retour au site public</a>";
 }
+echo "]</font>";
 
 install_fin_html();
 
