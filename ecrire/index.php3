@@ -225,8 +225,8 @@ if ($meta["debut_restauration"]) {
 			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
 		}
 		$texte_boite = "La base est en cours de restauration.<p>
-		<form name='progression'><input type='text' name='taille' value='$taille'>
-		<input type='text' name='recharge' value='Veuillez recharger cette page dans quelques instants.'></form>";
+		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
+		<input type='text' class='forml' name='recharge' value='Veuillez recharger cette page dans quelques instants.'></center></form>";
 	}
 	else {
 		$texte_boite = "Erreur de restauration : fichier inexistant.";
