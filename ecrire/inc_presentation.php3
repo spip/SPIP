@@ -1190,10 +1190,10 @@ function install_debut_html($titre="Installation du syst&egrave;me de publicatio
 <!--
 	a {text-decoration: none; }
 	A:Hover {color:#FF9900; text-decoration: underline;}
-	.forml {width: 100%; background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
-	.formo {width: 100%; background-color: #FFF0E0; background-position: center bottom; weight: bold; float: none; color: #000000}
-	.fondl {background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
-	.fondo {background-color: #FFF0E0; background-position: center bottom; float: none; color: #000000}
+	.forml {width: 100%; background-color: #FFF0E0; background-position: center bottom; float: none; color: #000000}
+	.formo {width: 100%; background-color: #FFCC66; background-position: center bottom; weight: bold; float: none; color: #000000}
+	.fondl {background-color: #FFF0E0; background-position: center bottom; float: none; color: #000000}
+	.fondo {background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
 -->
 </style>
