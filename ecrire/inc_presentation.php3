@@ -1574,6 +1574,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	echo $link->getUrl()."\">\n";
 
 	if ($code) echo $code."\n";
+	echo '<link rel="stylesheet" href="', _DIR_RESTREINT, 'calendrier.css" type="text/css" title="calendrier">', "\n";
 
 	// Supprime pour l'instant: pas de creation mathml
 	// < script type="text/javascript" src="../mathmlinHTML.js"></script>
