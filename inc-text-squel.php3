@@ -66,22 +66,18 @@ function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
 		//
 		$chaine = strtolower($match[3]);
 		if (!($module = $match[2]))
-		  // ordre des modules a explorer
-		  $module = 'local/public/spip';
-		// il faudrait traiter un $m non vide
-		list ($c,$m) = applique_filtres(explode('|',
-							substr($match[4],1)),
-						"_T('$module:$chaine')",
-						$id_boucle, 
-						$boucles,
-						$id_mere);
-		$code = str_replace($match[0], 
-				    "'$ferme_multi.$c.$ouvre_multi'",
-				    $code);
+			// ordre standard des modules a explorer
+			$module = 'local/public/spip';
+		$c = applique_filtres(explode('|',
+			substr($match[4],1)),
+			"_T('$module:$chaine')",
+			$id_boucle, 
+			$boucles,
+			$id_mere);
+		$code = str_replace($match[0], "'$ferme_multi.$c.$ouvre_multi'", $code);
 	}
 
-	$code = "$ouvre_multi$code$ferme_multi";
-	return ($code);
+	return $ouvre_multi . $code . $ferme_multi;
 }
 
 ?>

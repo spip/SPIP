@@ -6,122 +6,135 @@
 
 
 // Formulaire de recherche
-function calculer_champ_FORMULAIRE_RECHERCHE($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	if ($fonctions) {
-		list(, $lien) = each($fonctions);	// le premier est un url
-		while (list(, $filtre) = each($fonctions))
+function balise_FORMULAIRE_RECHERCHE_dist($p) {
+	if ($p->fonctions) {
+		list(, $lien) = each($p->fonctions);	// le premier est un url
+		while (list(, $filtre) = each($p->fonctions))
 			$filtres[] = $filtre;	// les suivants sont des filtres
-		$fonctions = $filtres;
+		$p->fonctions = $filtres;
 	}
 	if (!$lien) $lien = 'recherche.php3';
-	$code = "((lire_meta('activer_moteur') != 'oui') ? '' : calcul_form_rech('$lien'))";
-	return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
+
+	$p->code = "((lire_meta('activer_moteur') != 'oui') ? '' : calcul_form_rech('$lien'))";
+
+	$p->type = 'html';
+	return $p;
 }
 
 
 // Formulaire d'inscription comme redacteur (dans inc-formulaires.php3)
-function calculer_champ_FORMULAIRE_INSCRIPTION($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	$code = '(lire_meta("accepter_inscriptions") != "oui") ? "" :
+function balise_FORMULAIRE_INSCRIPTION_dist($p) {
+
+	$p->code = '(lire_meta("accepter_inscriptions") != "oui") ? "" :
 		("<"."?php include(\'inc-formulaires.php3\'); lang_select(\"$spip_lang\"); formulaire_inscription(\"redac\"); lang_dselect(); ?".">")';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
-	return array($c,$m);
+
+	$p->type = 'php';
+	return $p;
 }
 
-// Formulaire ecrire auteur (OK)
-function calculer_champ_FORMULAIRE_ECRIRE_AUTEUR($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	$_id_auteur = index_pile($id_boucle, 'id_auteur', $boucles);
-	$_mail_auteur = index_pile($id_boucle, 'email', $boucles);
-	$code = '!email_valide('.$_mail_auteur.') ? "" :
+// Formulaire ecrire auteur
+function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
+	$_id_auteur = champ_sql('id_auteur', $p);
+	$_mail_auteur = champ_sql('email', $p);
+
+	$p->code = '!email_valide('.$_mail_auteur.') ? "" :
 		("<'.'?php include(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\');
 		formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\');
 		lang_dselect(); ?'.'>")';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
-	return array($c,$m);  
+
+	$p->type = 'php';
+	return $p;
 }
 
 // Formulaire signature de petition
-function calculer_champ_FORMULAIRE_SIGNATURE($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	$_id_article = index_pile($id_boucle, 'id_article', $boucles);
-	$code = '!($petition = sql_petitions('.$_id_article.')) ? "" :
+function balise_FORMULAIRE_SIGNATURE_dist($p) {
+	$_id_article = champ_sql('id_article', $p);
+
+	$p->code = '!($petition = sql_petitions('.$_id_article.')) ? "" :
 		("<"."?php include(\'inc-formulaires.php3\');
 		lang_select(\'$spip_lang\');
 		echo formulaire_signature(".'.$_id_article.'.",
 			\'".texte_script(serialize($petition))."\');
 		lang_dselect(); ?".">")';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
-	return array($c,$m);
+
+	$p->type = 'php';
+	return $p;
 }
 
 // Formulaire d'inscription de site dans l'annuaire
-function calculer_champ_FORMULAIRE_SITE($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	$code = '(lire_meta("proposer_sites") != 2) ? "":
+function balise_FORMULAIRE_SITE_dist($p) {
+	$_id_rubrique = champ_sql('id_rubrique', $p);
+
+	$p->code = '(lire_meta("proposer_sites") != 2) ? "":
 		"<"."?php include(\'inc-formulaires.php3\');
 		lang_select(\'".$GLOBALS[\'spip_lang\']."\');
-		formulaire_site(".'.index_pile($id_boucle, 'id_rubrique', $boucles).'.");
+		formulaire_site(".'.$_id_rubrique.'.");
 		lang_dselect(); ?".">"';
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
-	return array($c,$m);
+
+	$p->type = 'php';
+	return $p;
 }
 
 
 // Formulaire de reponse a un forum
-function calculer_champ_FORMULAIRE_FORUM($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	$type = $boucles[$id_boucle]->type_requete;
+function balise_FORMULAIRE_FORUM_dist($p) {
+	$type = $p->type_requete;
 	switch ($type) {
 		case 'breves':
-			$code = "boutons_de_forum('', '', ''," .
-				index_pile($id_boucle,  'id_breve', $boucles) .
+			$p->code = "boutons_de_forum('', '', ''," .
+				champ_sql('id_breve', $p) .
 				", '', " .
-				index_pile($id_boucle,  'titre', $boucles) .
+				champ_sql('titre', $p) .
 				", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
 		break;
 
 		case 'rubriques':
-			$code = 'boutons_de_forum(' .
-			index_pile($id_boucle,  'id_rubrique', $boucles) .
+			$p->code = 'boutons_de_forum(' .
+			champ_sql('id_rubrique', $p) .
 			", '', '', '', ''," .
-			index_pile($id_boucle,  'titre', $boucles) .
+			champ_sql('titre', $p) .
 			", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
 			break;
 
 		case 'syndication':
-			$code = "boutons_de_forum('', '', '','', " .
-			index_pile($id_boucle, 'id_rubrique', $boucles) . ", " .
-			index_pile($id_boucle,  'nom_site', $boucles) .
+			$p->code = "boutons_de_forum('', '', '','', " .
+			champ_sql('id_rubrique', $p) . ", " .
+			champ_sql('nom_site', $p) .
 			", '$type', substr(lire_meta('forums_publics'),0,3)), \$Cache)";
 			break;
     
-	case 'articles': 
-		$code = "boutons_de_forum('', '', " .
-		index_pile($id_boucle, 'id_article', $boucles) .
-		", '','', " .
-		index_pile($id_boucle,  'nom_site', $boucles) .
-		"'$type', " .
-		index_pile($id_boucle,  'accepter_forum', $boucles) .
-		', $Cache)';
-		break;
+		case 'articles': 
+			$p->code = "boutons_de_forum('', '', " .
+			champ_sql('id_article', $p) .
+			", '','', " .
+			champ_sql('nom_site', $p) .
+			"'$type', " .
+			champ_sql('accepter_forum', $p) .
+			', $Cache)';
+			break;
 
-	case 'forums':
-	default:
-		$code = "boutons_de_forum(" .
-		index_pile($id_boucle, 'id_rubrique', $boucles) . ', ' .
-		index_pile($id_boucle, 'id_forum', $boucles) . ', ' .
-		index_pile($id_boucle, 'id_article', $boucles) . ', ' .
-		index_pile($id_boucle, 'id_breve', $boucles) . ', ' .
-		index_pile($id_boucle, 'id_syndic', $boucles) . ', ' .
-		index_pile($id_boucle, 'titre', $boucles) .
-		", '$type', '', \$Cache)";
-		break;
+		case 'forums':
+		default:
+			$p->code = "boutons_de_forum(" .
+			champ_sql('id_rubrique', $p) . ', ' .
+			champ_sql('id_forum', $p) . ', ' .
+			champ_sql('id_article', $p) . ', ' .
+			champ_sql('id_breve', $p) . ', ' .
+			champ_sql('id_syndic', $p) . ', ' .
+			champ_sql('titre', $p) .
+			", '$type', '', \$Cache)";
+			break;
 	}
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
-	return array($c,$m);
+
+	$p->type = 'php';
+	return $p;
 }
 
 // Parametres de reponse a un forum
-function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	$_accepter_forum = index_pile($id_boucle,  "accepter_forum", $boucles);
-	$code = '
+function balise_PARAMETRES_FORUM_dist($p) {
+	$_accepter_forum = champ_sql('accepter_forum', $p);
+	$p->code = '
 	// refus des forums ?
 	('.$_accepter_forum.'=="non" OR
 	(lire_meta("forums_publics") == "non" AND '.$_accepter_forum.'!="oui"))
@@ -129,24 +142,24 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 	';
 
 
-	switch ($boucles[$id_boucle]->type_requete) {
+	switch ($p->type_requete) {
 		case 'articles':
-			$c = '"id_article=".' . index_pile($id_boucle, 'id_article', $boucles);
+			$c = '"id_article=".' . champ_sql('id_article', $p);
 			break;
 		case 'breves':
-			$c = '"id_breve=".' . index_pile($id_boucle, 'id_breve', $boucles);
+			$c = '"id_breve=".' . champ_sql('id_breve', $p);
 			break;
 		case 'rubriques':
-			$c = '"id_rubrique=".' . index_pile($id_boucle, 'id_rubrique', $boucles);
+			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
 			break;
 		case 'syndication':
-			$c = '"id_syndic=".' . index_pile($id_boucle, 'id_syndic', $boucles);
+			$c = '"id_syndic=".' . champ_sql('id_syndic', $p);
 			break;
 		case 'forums':
 		default:
 			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
 			foreach ($liste_champs as $champ) {
-				$x = index_pile($id_boucle,  $champ, $boucles);
+				$x = champ_sql( $champ, $p);
 				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
 			}
 			$c = "substr($c,1)";
@@ -163,21 +176,23 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
 	// invalideur forums
 	(!($Cache[\'id_forum\'][calcul_index_forum(' . 
 				// Retournera 4 [$SP] mais force la demande du champ a MySQL
-				index_pile($id_boucle, 'id_article', $boucles) . ',' .
-				index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
-				index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
-				index_pile($id_boucle, 'id_syndic', $boucles) .  ")]=1)?'':\n";
-	$code .= $invalide."(".$c."))";
+				champ_sql('id_article', $p) . ',' .
+				champ_sql('id_breve', $p) .  ',' .
+				champ_sql('id_rubrique', $p) .',' .
+				champ_sql('id_syndic', $p) .  ")]=1)?'':\n";
+	$p->code .= $invalide."(".$c."))";
 
-	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
-	return array($c,$m);
+	$p->type = 'html';
+	return $p;
 }
 
 /*
 # Boutons d'administration: 
 */
-function calculer_champ_FORMULAIRE_ADMIN($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-  return array("'<!-- @@formulaire_admin@@45609871@@ -->'",'');
+function balise_FORMULAIRE_ADMIN_dist($p) {
+	$p->code = "'<!-- @@formulaire_admin@@45609871@@ -->'";
+	$p->type = "php";
+	return $p;
 }
 
 ?>

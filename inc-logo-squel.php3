@@ -16,7 +16,7 @@ function balise_EXTRA_dist ($p) {
 	if ($p->fonctions) {
 		include_ecrire("inc_extra.php3");
 		list ($key, $champ_extra) = each($p->fonctions);	// le premier filtre
-		$type_extra = $p->boucles[$p->id_boucle]->type_requete;
+		$type_extra = $p->type_requete;
 			// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
 			// depuis un sous-objet sans champ extra d'un objet a champ extra,
 			// on aura le type_extra du sous-objet (!)
@@ -93,8 +93,7 @@ function balise_POPULARITE_dist ($p) {
 
 
 # Fonction commune aux logos (rubriques, articles...)
-
-function calculer_champ_LOGO($p) {
+function calcul_balise_logo ($p) {
 
 	// analyser la balise LOGO_xxx
 	eregi("^LOGO_(([A-Z]+)(_.*)?)", $p->nom_champ, $regs);

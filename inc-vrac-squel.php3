@@ -97,7 +97,7 @@ function balise_URL_SITE_SPIP_dist($p) {
 
 
 function balise_URL_ARTICLE_dist($p) {
-	$_type = $p->boucles[$p->id_boucle]->type_requete;
+	$_type = $p->type_requete;
 
 	// Cas particulier des boucles (SYNDIC_ARTICLES)
 	if ($_type == 'syndic_articles') {
@@ -274,7 +274,7 @@ function balise_EXPOSER_dist($p) {
 	$p->fonctions = $filtres;
 	}
 
-	$type_boucle = $p->boucles[$p->id_boucle]->type_requete;
+	$type_boucle = $p->type_requete;
 	$primary_key = $table_primary[$type_boucle];
 
 	$p->code = '(calcul_exposer('
@@ -369,7 +369,7 @@ function balise_URL_LOGOUT_dist($p) {
 }
 
 function balise_INTRODUCTION_dist ($p) {
-	$_type = $p->boucles[$p->id_boucle]->type_requete;
+	$_type = $p->type_requete;
 	$_texte = champ_sql('texte', $p);
 	$_chapo = champ_sql('chapo', $p);
 	$_descriptif = champ_sql('descriptif', $p);

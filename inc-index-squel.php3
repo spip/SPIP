@@ -79,21 +79,13 @@ function index_pile($idb, $nom_champ, &$boucles) {
 	return('$Pile[0][\''.$nom_champ.'\']');
 }
 
-# calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
-# Retourne un tableau dont le premier element est une EXPRESSION php 
-# et le deuxieme une suite d'INSTRUCTIONS a executer AVANT de calculer
-# l'expression (typiquement: un include ou une affectation d'auxiliaires)
-# Ce tableau est egalement retourne par la fonction applique_filtres
-# qui s'occupe de construire l'application 
-# s'il existe une fonction nommee "calculer_champ_" suivi du nom du champ,
-# on lui passe la main et elle est cense retourner le tableau ci-dessus
-# (Essayer de renvoyer une suite vide, ca diminue les allocations a l'exec)
-
 // cette fonction sert d'API pour demander le champ '$champ' dans la pile
 function champ_sql($champ, $p) {
 	return index_pile($p->id_boucle, $champ, $p->boucles);
 }
 
+# calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
+# Retourne une EXPRESSION php 
 function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere, $etoile = false) {
 	// Preparer les parametres
 	$p = new ParamChamp;
@@ -104,8 +96,7 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 	$p->id_mere = $id_mere;
 	$p->type = 'html';
 	$p->process = '';
-
-	# $p->type_requete = $boucles[$id_boucle]->type_requete; # A AJOUTER
+	$p->type_requete = $boucles[$id_boucle]->type_requete;
 
 	// regarder s'il existe une fonction personnalisee balise_NOM()
 	$f = 'balise_' . $nom_champ;
@@ -117,15 +108,8 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 	if (function_exists($f) AND $p = $f($p))
 		return $p->retour();
 
-	# A SUPPRIMER, cf. inc-form-squel.php3
-	// regarder s'il existe une fonction old style calculer_champ_NOM()
-	$f = 'calculer_champ_' . $nom_champ;
-	if (function_exists($f)) {
-		return $f($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
-	}
-
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $nom_champ) AND $p = calculer_champ_LOGO($p))
+	if (ereg('^LOGO_', $nom_champ) AND $p = calcul_balise_logo($p))
 		return $p->retour();
 
 	// On regarde ensuite s'il y a un champ SQL homonyme,
@@ -155,7 +139,6 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 
 // Genere l'application d'une liste de filtres
 function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $type ='html', $process='') {
-	$milieu = '';
 
 	// pretraitements standards
 	switch ($type) {
@@ -186,14 +169,11 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $t
 						$args = $regs[2];
 						$arg = trim($regs[1]);
 						if ($arg) {
-							if ($arg[0] =='#') {
-								list($arg,$m) = calculer_champ(array(),substr($arg,1),$id_boucle, $boucles, $id_mere);
-								$milieu .= $m;
-							}
-							else {
-								if ($arg[0] =='$')
-									$arg = '$Pile[0][\'' . substr($arg,1) . "']";
-							}
+							if ($arg[0] =='#')
+								$arg = calculer_champ(array(), substr($arg,1),
+									$id_boucle, $boucles, $id_mere);
+							else if ($arg[0] =='$')
+								$arg = '$Pile[0][\'' . substr($arg,1) . "']";
 							$arglist .= ','.$arg;
 						}
 					}
@@ -201,7 +181,9 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $t
 				if (function_exists($fonc))
 					$code = "$fonc($code$arglist)";
 				else
-					$code = "'"._T('erreur_filtre', array('filtre' => $fonc))."'";
+					$code = "'".texte_script(
+						_T('erreur_filtre', array('filtre' => $fonc))
+					)."'";
 			}
 		}
 	}
@@ -210,7 +192,7 @@ function applique_filtres ($fonctions, $code, $id_boucle, $boucles, $id_mere, $t
 	if ($type == 'html')
 		$code = "interdire_scripts($code)";
 
-	return array($code, $milieu);
+	return $code;
 }
 
 ?>

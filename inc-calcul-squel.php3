@@ -319,7 +319,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 
 		// balise SPIP
 		default: 
-			$rendu[0] = calculer_champ($objet->fonctions, 
+			$rendu[0][0] = calculer_champ($objet->fonctions, 
 				$objet->nom_champ,
 				$id_boucle,
 				$boucles,
