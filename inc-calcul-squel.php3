@@ -211,7 +211,7 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle)
 # Retourne un tableau de 2 e'le'ments: 
 # 1. une expression PHP,
 # 2. une suite d'instructions PHP a` exe'cuter avant d'e'valuer l'expression.
-# si cette suite est vide, on fusionne les se'quences d'expression
+# si cette suite est vide, on fusionne les se'quences d'expressions
 # ce qui doit re'duire la me'moire ne'cessaire au processus
 # En de'coule une combinatoire laborieuse mais sans difficulte'
 
@@ -251,8 +251,6 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 					       $id_boucle, $niv+2, $boucles, $nom);
 		list($oc,$om) = calculer_liste($objet->cond_altern, $prefix,
 					       $id_boucle, $niv+1,$boucles, $nom);
-
-	      
 	      $c = $prefix .
 		ereg_replace("-","_", $nom) .
 		'($Cache, $Pile, $doublons, $Numrows, $SP)';
@@ -294,25 +292,25 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 		(($ac == "''") ?  "" : " . $ac");
 	      // s'il y a un avant ou un apre`s ou un alternant, il faut '?'
 	      if (($a != $t) || ($oc != "''"))
-		$c = "(($t = $c) ? ($a) : ($oc))";
-	      $exp .= (!$exp ? $c : (" .\n\t\t$c"));
+		{ $c = "(($t = $c) ? ($a) : ($oc))"; }
+	      $exp = (!$exp ? $c : ("$exp .\n\t\t$c"));
 	    } else {
 	      // il faut achever le traitement de l'exp pre'ce'dente
 	      if ($exp) {
 		  $texte .= "\n\t\t\$t$niv " .
 		    (($firstset) ? "=" : ".=") .
-		    "$exp;$m" ;
+		    "$exp;" ;
 		  $firstset = false;
-		  $exp = "";
-	      } else { $texte .= $m;}
-	      $texte .= "\n\t\tif ($t = $c) {\n" . $bm;
-	      if ($bc != "''") $texte .= "\n\t\t$t = $bc . $t";
-	      if (!$am) {
-		$texte .= " . $ac";
-	      } else $texte .= "; $am $t .=  $ac";
-	      $texte .= ";}";
-	      if (!$om)
-		{ $texte .= " else {" . $om . "$t =  $oc;}"; }
+	      }
+	      $exp = (($bc == "''") ? $t : "($bc . $t)");
+	      $texte .= "\n\t\tif ($t = $c) \n{" . $bm;
+	      if ($am) {
+		$texte .= "$t = $exp;\n\t$am";
+		$exp = $t; }
+	      if ($ac != "''") $exp = "($exp . $ac)";
+	      $texte .= (($exp == $t) ? '' : ("$t = $exp;")) . ";}";
+	      if ($om || ($oc != "''"))
+		{ $texte .= " else {" . $om . "$t =  ($oc);}"; }
 	      $exp = $t;
 	    }
 	  }
@@ -320,7 +318,7 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 	} // while
 	if (!$exp) $exp ="''";
 	return  (!$texte ? array ($exp, "") : 
-		 array('$t'.$niv. ". $exp",$texte));
+		 array(($firstset ? $exp : ('$t'.$niv. ". $exp")),$texte));
 }
 
 # Prend en argument le source d'un squelette, sa grammaire et un nom.
