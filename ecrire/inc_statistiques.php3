@@ -88,7 +88,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
 				))
-				$keywords = utf_8_to_unicode($keywords);
+				$keywords = unicode2charset(utf_8_to_unicode($keywords));
 		}
 	}
 
