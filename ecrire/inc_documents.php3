@@ -141,7 +141,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	$link->addVar('id_article', $id_article);
 	$link->addVar('doc_supp', $id_document);
 
-	echo "[<a ".$link->getHref()."><b>SUPPRIMER</b>]\n";
+	echo "[<b><a ".$link->getHref().">SUPPRIMER</a></b>]\n";
 	echo "</font>\n";
 
 	echo "</font>\n";
