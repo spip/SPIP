@@ -21,12 +21,13 @@ gros_titre("&Eacute;volution des visites<html>".aide("confstat")."</html>");
 barre_onglets("statistiques", "evolution");
 
 if ($id_article){
-	$query = "SELECT titre, visites FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
+	$query = "SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article ='$id_article'";
 	$result = spip_query($query);
 
 	if ($row = mysql_fetch_array($result)) {
 		$titre = typo($row['titre']);
 		$total_absolu = $row['visites'];
+		$val_popularite = ceil(min(100,100 * $row['popularite'] / max(1,lire_meta('popularite_max'))));
 		gros_titre($titre);
 	}
 } 
@@ -57,35 +58,47 @@ debut_gauche();
 		echo "<li><b>Tout le site</b>";
 	}
 
-	echo "<font size=1>";
-	$query = "SELECT id_article, titre FROM spip_articles WHERE statut='publie' AND visites > 0 ORDER BY date DESC LIMIT 0,20";
-	$result = spip_query($query);
+	echo "<font size=1 color='#666666'>";
 
-	if (mysql_num_rows($result) > 0) {
-		echo "<br><br>";
-		while ($row = mysql_fetch_array($result)) {
-			$titre = typo($row['titre']);
-			$l_article = $row['id_article'];
-			if ($l_article == $id_article){
-				echo "\n<li><b>$titre</b></li>";
-			} else {
-				echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a></li>";
+	$query = "SELECT date FROM spip_visites_articles ORDER BY date DESC LIMIT 0,1";
+	$result = spip_query($query);
+	if ($row = mysql_fetch_array($result)) {
+		$hier = $row['date'];
+		
+		// Par visites hier
+		$query = "SELECT articles.id_article AS id_article, articles.titre AS titre, articles.visites AS visites, lien.visites AS visiteurs FROM spip_articles AS articles, spip_visites_articles AS lien WHERE lien.date='$hier' AND lien.visites > 0 AND articles.statut='publie' AND articles.id_article=lien.id_article ORDER BY articles.date DESC LIMIT 0,20";
+		$result = spip_query($query);
+	
+	
+		if (mysql_num_rows($result) > 0) {
+			echo "<br><br>";
+			while ($row = mysql_fetch_array($result)) {
+				$titre = typo($row['titre']);
+				$l_article = $row['id_article'];
+				$toutes_visites = $row['visites'];
+				$visites = $row['visiteurs'];
+				if ($l_article == $id_article){
+					echo "\n<li><b>$titre</b></li>";
+				} else {
+					echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a> ($visites/$toutes_visites)</li>";
+				}
 			}
 		}
+		else {
+			echo "\n<i>(aucun article visit&eacute;)</i>";
+		}
+		echo "</font>";
+		echo "</ul>";
+		echo "(entre parenth&egrave;ses, pour chaque article&nbsp;: le nombre de visiteurs hier / le nombre total de visites)";
+		
+		echo "</font>";
+		echo "</div>";
 	}
-	else {
-		echo "\n<i>(aucun article visit&eacute;)</i>";
-	}
-	echo "</font>";
-	echo "</ul>";
-	echo "</font>";
-	echo "</div>";
-
 
 	creer_colonne_droite();
 	
 	// Par popularite
-	$query = "SELECT id_article, titre, popularite FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC LIMIT 0,10";
+	$query = "SELECT id_article, titre, popularite FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC LIMIT 0,20";
 	$result = spip_query($query);
 
 	if (mysql_num_rows($result) > 0) {
@@ -94,7 +107,7 @@ debut_gauche();
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo typo("Afficher les visites pour <b>les articles les plus populaires</b>:");
 		echo "<ul>";
-		echo "<font size=1>";
+		echo "<font size=1 color='#666666'>";
 
 		while ($row = mysql_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -103,7 +116,7 @@ debut_gauche();
 			if ($l_article == $id_article){
 				echo "\n<li><b>$titre</b></li>";
 			} else {
-				echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre ($popularite%)</a></li>";
+				echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre</a> ($popularite%)</li>";
 			}
 		}
 		echo "</font>";
@@ -112,43 +125,6 @@ debut_gauche();
 		echo "</div>";
 	}
 
-
-	$query = "SELECT date FROM spip_visites_articles ORDER BY date DESC LIMIT 0,1";
-	$result = spip_query($query);
-	if ($row = mysql_fetch_array($result)) {
-		$hier = $row['date'];
-		
-		// Par visites hier
-		$query = "SELECT articles.id_article AS id_article, articles.titre AS titre, lien.visites AS visiteurs FROM spip_articles AS articles, spip_visites_articles AS lien WHERE lien.date='$hier' AND lien.visites > 0 AND articles.statut='publie' AND articles.id_article=lien.id_article ORDER BY visiteurs DESC LIMIT 0,10";
-		$result = spip_query($query);
-	
-		if (mysql_num_rows($result) > 0) {
-			echo "<p>";
-			echo "<div class='iconeoff' style='padding: 5px;'>";
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-			echo typo("Afficher les visites pour <b>les articles les plus visit&eacute;s hier</b>:");
-			echo "<ul>";
-			echo "<font size=1>";
-	
-			while ($row = mysql_fetch_array($result)) {
-				$titre = typo($row['titre']);
-				$l_article = $row['id_article'];
-				$visiteurs = $row['visiteurs'];
-				if ($l_article == $id_article){
-					echo "\n<li><b>$titre</b></li>";
-				} else {
-					echo "\n<li><a href='statistiques_visites.php3?id_article=$l_article'>$titre ($visiteurs)</a></li>";
-				}
-			}
-			echo "</font>";
-			echo "</ul>";
-			echo "</font>";
-			echo "</div>";
-		}
-
-	}
-
-	
 
 
 //
@@ -381,6 +357,17 @@ if (count($log)>0){
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo "<b>total : $total_absolu</b>";
+		
+		if ($id_article) {
+			echo "<br>popularité&nbsp;: $val_popularite%";
+		} else {
+			echo "<font size=1>";
+			echo "<br>popularité du site&nbsp;: ";
+			echo round(max(1,lire_meta('popularite_total')));
+			echo "</font>";
+		}
+		
+		
 		echo "</td></tr></table>";		
 	
 	fin_cadre_relief();
