@@ -7,8 +7,6 @@ $delais = 3600;
 
 $flag_preserver = true;
 
-@header("Content-type: text/xml");
-
 include ("inc-public.php3");
 
 ?>

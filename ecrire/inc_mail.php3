@@ -79,6 +79,25 @@ function tester_mail() {
 	return $test_mail;
 }
 
+function nettoyer_caracteres_mail($t) {
+
+	$t = filtrer_entites($t);
+
+	if (lire_meta('charset') <> 'utf-8') {
+		$t = str_replace(
+			array("&#8217;","&#8220;","&#8221;"),
+			array("'",      '"',      '"'),
+		$t);
+	}
+
+	$t = str_replace(
+		array("&mdash;", "&endash;"),
+		array("--","-" ),
+	$t);
+
+	return $t;
+}
+
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap;
 	include_ecrire('inc_filtres.php3');
@@ -102,20 +121,19 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		"Content-Transfer-Encoding: 8bit\n";
 
 	$headers .= "From: $from\n";
-	$texte = filtrer_entites($texte);
-	$sujet = filtrer_entites($sujet);
 
-	// fignoler ce qui peut l'etre...
-	if ($charset <> 'utf-8') {
-		$texte = str_replace("&#8217;", "'", $texte);
-		$sujet = str_replace("&#8217;", "'", $sujet);
-	}
-	$texte = str_replace("&mdash;", "--", $texte);
-	$sujet = str_replace("&mdash;", "--", $sujet);
+	// nettoyer les &eacute; &#8217, &emdash; etc...
+	$texte = nettoyer_caracteres_mail($texte);
+	$sujet = nettoyer_caracteres_mail($sujet);
 
 	// encoder le sujet si possible selon la RFC
-	if(init_mb_string())
+	if (init_mb_string()) {
+		# un bug de mb_string casse mb_encode_mimeheader si l'encoding interne
+		# est UTF-8 et le charset iso-8859-1 (constate php5-mac ; php4.3-debian)
+		mb_internal_encoding($charset);
 		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q');
+		mb_internal_encoding('utf-8');
+	}
 
 	if ($flag_wordwrap) $texte = wordwrap($texte);
 
