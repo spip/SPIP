@@ -52,7 +52,7 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-		redirige_par_entete((_DIR_RESTREINT ? "" : "../") .
+		redirige_par_entete(lire_meta("adresse_site") .
 				    "spip_test_dirs.php3");
 	}
 }

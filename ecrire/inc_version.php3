@@ -11,18 +11,20 @@ define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT',
        (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
-
-if ($d = ($GLOBALS['HTTP_GET_VARS']['var_install']))
+/* + tard
+if ($d = urldecode($GLOBALS['HTTP_GET_VARS']['var_install']))
   {
     $d = substr($d,0,strrpos($d,'/')+1);
     if (!ereg('^(.*)' . _DIR_RESTREINT_ABS . '$', $d))
       $d .= _DIR_RESTREINT_ABS;
     if (!@file_exists($d . 'mes_options.php3'))
-      {	header("Location: install.php3?var_install=$d");
-	exit;}
+      {	
+	header("Location: " . _DIR_RESTREINT . "install.php3?var_install=$d");
+	exit;
+      }
     define('_FILE_OPTIONS', $d . 'mes_options.php3');
     define('_FILE_CONNECT_INS', ($d . "inc_connect"));
-  } else {
+    } else */ {
   define('_FILE_OPTIONS', 'mes_options.php3');
   define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
  }
@@ -36,7 +38,7 @@ define_once('_FILE_CONNECT',
 
 if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
   if (!defined("_INC_PUBLIC"))
-	header("Location: install.php3");
+	header("Location: " . _DIR_RESTREINT . "install.php3");
   else
     {
 		$db_ok = 0;
@@ -786,14 +788,21 @@ class Link {
 			// (HTTP_GET_VARS may contain additional variables
 			// introduced by rewrite-rules)
 			$url = $GLOBALS['REQUEST_URI'];
-			$url = substr($url, strrpos($url, '/') + 1);
+			// Warning !!!! 
+			// since non encoded arguments may be present
+			// (especially those coming from Rewrite Rule)
+			// find the begining of the query string
+			// to compute the script-name
+			if ($v = strpos($url,'?'))
+			  $v = strrpos(substr($url, 0, $v), '/');
+			else $v = strrpos($url, '/');
+			$url = substr($url, $v + 1);
 			if (!$url) $url = "./";
 			if (count($GLOBALS['HTTP_POST_VARS']))
 				$vars = $GLOBALS['HTTP_POST_VARS'];
 		}
 		$v = split('[\?\&]', $url);
 		list(, $this->file) = each($v);
-
 		if (!$vars) {
 			while (list(,$var) = each($v)) {
 				list($name, $value) = split('=', $var, 2);
@@ -1180,6 +1189,7 @@ function redirige_par_entete($url)
 {
 #	$base=lire_meta("adresse_site");
 #	if ($base) $url = "$base/$url"; # + tard
+#	spip_log("red $url");
 	header("Location: $url");
 	taches_de_fond();
 	exit;

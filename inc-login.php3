@@ -13,24 +13,24 @@ include_ecrire ("inc_texte.php3");
 include_local ("inc-formulaires.php3");
 
 // gerer l'auth http
-function auth_http($cible, $essai_auth_http) {
+function auth_http($url, $essai_auth_http) {
 	$lien = " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
 	if ($essai_auth_http == 'oui') {
 		include_ecrire('inc_session.php3');
 		if (!verifier_php_auth()) {
-			$url = quote_amp(urlencode($cible->getUrl()));
-			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&amp;url=$url'>"._T('login_nouvelle_tentative')."</a>]";
+		  $url = quote_amp(urlencode($url));
+			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;url=$url'>"._T('login_nouvelle_tentative')."</a>]";
 			if (ereg(_DIR_RESTREINT_ABS, $url))
 			  $page_erreur .= $lien;
 			ask_php_auth($page_erreur);
 		}
 		else
-			redirige_par_entete($cible->getUrl());
+			redirige_par_entete($url);
 	}
 	// si demande logout auth_http
 	else if ($essai_auth_http == 'logout') {
 		include_ecrire('inc_session.php3');
-		ask_php_auth("<b>"._T('login_deconnexion_ok')."</b><p />"._T('login_verifiez_navigateur')."<p />[<a href='./'>"._T('login_retour_public')."</a>] [<a href='./spip_cookie.php3?essai_auth_http=oui&amp;redirect=ecrire'>"._T('login_test_navigateur')."</a>] $lien");
+		ask_php_auth("<b>"._T('login_deconnexion_ok')."</b><p />"._T('login_verifiez_navigateur')."<p />[<a href='./'>"._T('login_retour_public')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;redirect=ecrire'>"._T('login_test_navigateur')."</a>] $lien");
 		exit;
 	}
 }
@@ -47,14 +47,14 @@ function login($cible, $prive = 'prive') {
 	global $clean_link;
 	$clean_link->delVar('var_erreur');
 	$clean_link->delVar('var_login');
-	$action = $clean_link->getUrl();
+	$action = urldecode($clean_link->getUrl());
 
 	include_ecrire("inc_session.php3");
 	verifier_visiteur();
 
 	if ($auteur_session AND 
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
-	  if (($cible != $action) &&  !headers_sent())
+		if (($cible != $action) &&  !headers_sent())
 			redirige_par_entete($cible);
 		echo "<a href='$cible'>"._T('login_par_ici')."</a>\n";
 		return;
@@ -158,7 +158,7 @@ function login_pour_tous($cible, $prive, $message, $action) {
 		$src = _DIR_RESTREINT_ABS . 'md5.js';
 
 		if ($flag_challenge_md5) echo "<script type=\"text/javascript\" src=\"$src\"></script>\n";
-		echo "<form name='form_login' action='./spip_cookie.php3' method='post'";
+		echo "<form name='form_login' action='spip_cookie.php3' method='post'";
 		if ($flag_challenge_md5) echo " onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);

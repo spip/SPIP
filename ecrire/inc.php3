@@ -1,7 +1,7 @@
 <?php
 
 if (!defined('_ECRIRE_INC_VERSION')) { include ("inc_version.php3"); }
-spip_log("version lue " . _DIR_PREFIX1);
+
 include_ecrire("inc_auth.php3");
 include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
@@ -12,9 +12,7 @@ include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_calendrier.php");
 include_ecrire("inc_forum.php3");
 
-
 if (!@file_exists(_DIR_SESSIONS . "inc_meta_cache.php3")) ecrire_metas();
-
 
 //
 // Preferences de presentation
