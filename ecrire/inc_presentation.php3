@@ -585,7 +585,7 @@ function bonhomme_statut($row) {
 				$image = "<img src='img_pack/redac-12.gif' alt='' title='R&eacute;dacteur' border='0'>";
 			break;
 		case "5poubelle":
-			$image = "<img src='img_pack/supprimer.gif' alt='' title='Auteur supprim&eacute;' border='0'>";
+			$image = "<img src='img_pack/poubelle.gif' alt='' title='Auteur supprim&eacute;' border='0'>";
 			break;
 		case "6forum":
 			$image = "<img src='img_pack/visit-12.gif' alt='' title='Visiteur' border='0'>";
