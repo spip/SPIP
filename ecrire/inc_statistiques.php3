@@ -94,11 +94,16 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 // Compiler les statistiques temporaires : visites et referers (si active)
 //
 
-function calculer_referers($date) {
-	// Referers sur tout le site
+function calculer_100_referers() {
+	$nombre_de_refs = 100;
+	$date = date("Y-m-d");
+
+	// Selectionner 100 referers sur tout le site
 	$query = "SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
-		"FROM spip_referers_temp GROUP BY referer_md5";
+		"FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nombre_de_refs";
 	$result = spip_query($query);
+
+	$encore = (mysql_num_rows($result) == $nombre_de_refs);
 
 	$referer_insert = "";
 	$referer_update = "";
@@ -110,6 +115,7 @@ function calculer_referers($date) {
 
 		$referer_update[$visites][] = $referer_md5;
 		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites)";
+		$referer_vus[] = $referer_md5;
 	}
 
 	// Mise a jour de la base
@@ -120,15 +126,17 @@ function calculer_referers($date) {
 			$result = spip_query($query);
 		}
 	}
+
 	if (is_array($referer_insert)) {
 		$query_insert = "INSERT DELAYED IGNORE INTO spip_referers ".
 			"(date, referer, referer_md5, visites) VALUES ".join(', ', $referer_insert);
 		$result_insert = spip_query($query_insert);
 	}
 
-	// Referers par article
+	// Ventiler ces referers article par article
+	$where = (is_array($referer_vus)) ? "AND referer_md5 IN (".join(',',$referer_vus).")" : "";
 	$query = "SELECT COUNT(DISTINCT ip) AS visites, id_objet, referer, HEX(referer_md5) AS md5 ".
-		"FROM spip_referers_temp WHERE type='article' GROUP BY id_objet, referer_md5";
+		"FROM spip_referers_temp WHERE type='article' $where GROUP BY id_objet, referer_md5";
 	$result = spip_query($query);
 
 	$referer_insert = "";
@@ -158,8 +166,26 @@ function calculer_referers($date) {
 		$result_insert = spip_query($query_insert);
 	}
 
-	$query_effacer = "DELETE FROM spip_referers_temp";
-	$result_effacer = spip_query($query_effacer);	
+	if (is_array($referer_vus)) {
+		$query_effacer = "DELETE FROM spip_referers_temp WHERE referer_md5 IN (".join(",",$referer_vus).")";
+		$result_effacer = spip_query($query_effacer);	
+	}
+
+	// a-t-on atteint le dernier referer ?
+	return $encore;
+}
+
+function calculer_referers() {
+	$encore = calculer_100_referers();
+	if ($encore) {
+		include_ecrire("inc_meta.php3");
+		ecrire_meta ("calculer_referers_now", "oui");
+		ecrire_metas();
+	} else {
+		// un peu de menage
+		supprimer_referers();
+		supprimer_referers("article");
+	}
 }
 
 
@@ -214,9 +240,9 @@ function calculer_visites($date = "") {
 		}
 	}
 
-	if (lire_meta('activer_statistiques_ref') != 'non') {
+/*	if (lire_meta('activer_statistiques_ref') != 'non') {
 		calculer_referers($date);
-	}
+	} */
 }
 
 

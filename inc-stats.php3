@@ -8,7 +8,6 @@ define("_INC_STATS", "1");
 function ecrire_stats() {
 	global $id_article, $id_breve, $id_rubrique, $admin_ok;
 
-	$activer_referers = lire_meta('activer_statistiques_ref');
 
 	// Essai de fichier de log simplifie
 	$log_ip = $GLOBALS['REMOTE_ADDR'];
@@ -29,9 +28,6 @@ function ecrire_stats() {
 		$log_id_num = 0;
 	}
 
-	$date = date("Y-m-d");
-	$last_date = lire_meta("date_statistiques");
-
 	// Conversion IP 4 octets -> entier 32 bits
 	if (ereg("^([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$", $log_ip, $r)) {
 		$log_ip = sprintf("0x%02x%02x%02x%02x", $r[1], $r[2], $r[3], $r[4]);
@@ -39,7 +35,19 @@ function ecrire_stats() {
 	else return;
 
 	// Archivage des visites temporaires
-	if ($date != $last_date) {
+	$date = date("Y-m-d");
+	$last_date = lire_meta("date_statistiques");
+
+	if (lire_meta('calculer_referers_now') == 'oui') {
+		include_ecrire("inc_connect.php3");
+		if ($GLOBALS['db_ok']) {
+			include_ecrire("inc_meta.php3");
+			include_ecrire("inc_statistiques.php3");
+			ecrire_meta('calculer_referers_now', 'non');
+			ecrire_metas();
+			calculer_referers();
+		}
+	} else if ($date != $last_date) {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			include_ecrire("inc_meta.php3");
@@ -47,6 +55,11 @@ function ecrire_stats() {
 			ecrire_meta("date_statistiques", $date);
 			ecrire_metas();
 			calculer_visites($last_date);
+			// poser un message pour le prochain hit
+			if (lire_meta('activer_statistiques_ref') == 'oui') {
+				ecrire_meta('calculer_referers_now','oui');
+				ecrire_metas();
+			}
 		}
 	}
 
@@ -61,7 +74,7 @@ function ecrire_stats() {
 	}
 
 	// Log complexe (referers)
-	if ($activer_referers == 'oui') {
+	if (lire_meta('activer_statistiques_ref') == 'oui') {
 		$url_site_spip = lire_meta('adresse_site');
 		$url_site_spip = eregi_replace("^(https?|ftp://)www\.", "\\1(www)?\.", $url_site_spip);
 		$log_referer = $GLOBALS['HTTP_REFERER'];
@@ -89,17 +102,15 @@ function ecrire_stats() {
 	}
 
 
-	// Effacer les referers
+	// traiter les referers toutes les heures
 	$date_refs = lire_meta('date_stats_referers');
-	if ((time() - $date_refs) > 24 * 3600) {
+	if ((time() - $date_refs) > 3600) {
 		include_ecrire("inc_connect.php3");
 		if ($GLOBALS['db_ok']) {
 			include_ecrire("inc_meta.php3");
 			ecrire_meta("date_stats_referers", time());
+			ecrire_meta('calculer_referers_now', 'oui');
 			ecrire_metas();
-			include_ecrire ("inc_statistiques.php3");
-			supprimer_referers();
-			supprimer_referers("article");
 		}
 	}
 	
