@@ -1365,23 +1365,12 @@ if ((lire_meta('multi_articles') == 'oui')
 		echo "<td valign='top' width='150'>";
 		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
 
-		/*if ($ret) {
-			if ($flag_editable) {
-				$lien = $GLOBALS['clean_link'];
-				$lien->delVar($nom_select);
-				$lien = $lien->getUrl();
-				icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
-			}
-		}*/
-
 		echo "</td>";
 
 		echo "</tr></table>";
 
 		echo fin_block();
 	}
-
-	echo fin_block();
 
 	fin_cadre_enfonce();
 }
