@@ -1,20 +1,15 @@
 <?
 
-function aide ($aide) {
-	return " <P ALIGN='right'><FONT SIZE=2>[<B><A HREF='#' onMouseDown=\"window.open('aide_index.php3?aide=$aide','myWindow','scrollbars=yes,resizable=yes,width=550')\">AIDE</A></B>]</FONT>";
-}
-
-
 if (!file_exists("inc_connect.php3")) {
-	include ("inc_install.php3");
 	include ("inc_version.php3");
+	include_local ("inc_presentation.php3");
 	include_local ("inc_acces.php3");
 	include_local ("inc_base.php3");
 
 	if ($connect){
 
 	}elseif($etape6){
-		debut_html();
+		install_debut_html();
 
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Derni&egrave;re &eacute;tape : <B>C'est termin&eacute; !</B></FONT>";
 		echo "<P>";
@@ -66,7 +61,7 @@ if (!file_exists("inc_connect.php3")) {
 		$conn .= "\$GLOBALS['db_ok'] = true;\n";
 		$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_connect(\"$adresse_db\",\"$login_db\",\"$pass_db\");\n";
 		$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_select_db(\"$sel_db\");\n";
-		$conn .= "?>";
+		$conn .= "?".">";
 		$myFile = fopen("inc_connect.php3", "w");
 		fputs($myFile, $conn);
 		fclose($myFile);
@@ -77,10 +72,10 @@ if (!file_exists("inc_connect.php3")) {
 		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 		echo "</FORM>";
 
-		fin_html();
+		install_fin_html();
 
 	}elseif($etape5){
-		debut_html();
+		install_debut_html();
 
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Cinqui&egrave;me &eacute;tape : <B>Informations personnelles</B></FONT>";
 		echo "<P>";
@@ -143,11 +138,11 @@ if (!file_exists("inc_connect.php3")) {
 		echo "</FORM>";
 
 
-		fin_html();
+		install_fin_html();
 
 	}elseif($etape4){
 
-		debut_html();
+		install_debut_html();
 
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Quatri&egrave;me &eacute;tape : <B>Cr&eacute;ation des tables de la base</B></FONT>";
 		echo "<P>";
@@ -155,7 +150,7 @@ if (!file_exists("inc_connect.php3")) {
 		$link = mysql_connect("$adresse_db", "$login_db", "$pass_db");
 
 
-		echo "<!--";
+		echo "<"."!--";
 
 		if ($choix_db == "new_spip"){
 			$sel_db = $table_new;
@@ -194,11 +189,11 @@ if (!file_exists("inc_connect.php3")) {
 			echo "<B>L'op&eacute;ration a &eacute;chou&eacute;.</B> Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.";
 		}
 
-		fin_html();
+		install_fin_html();
 
 	}elseif($etape3){
 
-		debut_html();
+		install_debut_html();
 
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Troisi&egrave;me &eacute;tape : <B>Choix de votre base</B></FONT>";
 
@@ -261,11 +256,11 @@ if (!file_exists("inc_connect.php3")) {
 
 		echo "</FORM>";
 
-		fin_html();
+		install_fin_html();
 
 	}elseif($etape2){
 
-		debut_html();
+		install_debut_html();
 
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Deuxi&egrave;me &eacute;tape : <B>Essai de connexion &agrave; la base</B></FONT>";
 	
@@ -298,11 +293,11 @@ if (!file_exists("inc_connect.php3")) {
 			echo "<P><FONT SIZE=2><B>N.B.</B> Sur de nombreux serveurs, vous devez <B>demander</B> l'activation de votre acc&egrave;s &agrave; la base mySQL avant de pouvoir l'utiliser. Si vous ne pouvez vous connecter, v&eacute;rifiez que vous avez effectu&eacute; cette d&eacute;marche.</FONT>";
 		}
 
-		fin_html();
+		install_fin_html();
 			
 	}elseif($etape1){
 
-		debut_html();
+		install_debut_html();
 
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Premi&egrave;re &eacute;tape : <B>Votre connexion mySQL</B></FONT>";
 
@@ -330,14 +325,16 @@ if (!file_exists("inc_connect.php3")) {
 
 		echo "</FORM>";
 
-		fin_html();
+		install_fin_html();
 
 	}
 	else {
 		header("Location: ../spip_test_dirs.php3");
 	}
 }else{
+	install_debut_html();
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=4><B>Espace interdit</B></FONT>";
+	install_fin_html();
 }
 
 ?>
@@ -345,6 +342,5 @@ if (!file_exists("inc_connect.php3")) {
 </TD></TR></TABLE>
 </CENTER>
 </BODY>
-
 
 </HTML>

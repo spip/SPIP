@@ -328,10 +328,10 @@ function chercher_squelette_hierarchie($fond, $id_rubrique) {
 			return "$fond-dist";
 		} else {
 			// erreur webmaster : $fond ne correspond a rien
-			include ("ecrire/inc_install.php3");
-			debut_html("Erreur sur le site");
+			include_local ("ecrire/inc_presentation.php3");
+			install_debut_html("Erreur sur le site");
 			echo "<P>Aucun squelette <b>$fond</b> n'est disponible...</P>";
-			fin_html();
+			install_fin_html();
 			exit;
 		}
 	}
@@ -409,8 +409,5 @@ function calculer_page($fond) {
 
 	return $signale_globals.executer_squelette($fond, $contexte);
 }
-
-
-
 
 ?>
