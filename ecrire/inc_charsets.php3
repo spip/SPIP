@@ -382,10 +382,10 @@ function translitteration ($texte, $charset='AUTO') {
 		$texte = translit_iso8859_1($texte);
 	} else if ($charset == 'windows-1251') {
 		$texte = translit_windows_1251($texte);
-	} else if ($GLOBALS['flag_iconv']) {
-		if ($iconv = @iconv(strtoupper($charset), 'ASCII//TRANSLIT', $texte) && !ereg('^\?+$',$iconv)) {
+	} else if ($GLOBALS['flag_iconv']
+		AND ($iconv = @iconv(strtoupper($charset), 'ASCII//TRANSLIT', $texte))
+		AND !ereg('^\?+$',$iconv))
 			$texte = $iconv;
-		}
 	}
 	return $texte;
 }
