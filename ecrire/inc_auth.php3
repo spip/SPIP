@@ -110,9 +110,8 @@ function auth() {
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$addr =lire_meta("adresse_site") . '/';
-		$url = $addr . (str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
-		redirige_par_entete($addr . "spip_login.php3?var_url=$url");
+		$url = (str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
+		redirige_par_entete($addr . "../spip_login.php3?var_url=$url");
 	}
 
 
@@ -209,7 +208,7 @@ function auth() {
 	}
 
 	if (!$auth_pass_ok) {
-		redirige_par_entete("spip_login.php3?var_erreur=pass");
+		redirige_par_entete("../spip_login.php3?var_erreur=pass");
 	}
 
 	if ($connect_statut == 'nouveau') {
