@@ -173,7 +173,6 @@ if ($titre) {
 		$id_rubrique = spip_abstract_insert("spip_rubriques", 
 			"(titre, id_parent)",
 			"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
-		$result = spip_query($query);
 
 		// Modifier le lien de base pour qu'il prenne en compte le nouvel id
 		unset($GLOBALS['_POST']['id_parent']);
