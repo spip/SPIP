@@ -291,7 +291,12 @@ if (count($log)>0){
 				if ($decal == 30) $decal = 0;
 				$decal ++;
 				$tab_moyenne[$decal] = $value;
-				$moyenne = array_sum($tab_moyenne) / count($tab_moyenne);
+
+				reset($tab_moyenne);
+				$moyenne = 0;
+				while (list($val_tab) = each($tab_moyenne))
+					$moyenne += $$val_tab;
+				$moyenne = $moyenne / count($tab_moyenne);
 	
 				$hauteur_moyenne = round(($moyenne) * $rapport) - 1;
 				echo "<td valign='bottom' width=$largeur>";
@@ -306,7 +311,13 @@ if (count($log)>0){
 			}
 		}
 		$total_loc = $total_loc + $value;
-		$moyenne = array_sum($tab_moyenne) / count($tab_moyenne);
+		reset($tab_moyenne);
+
+		$moyenne = 0;
+		while (list($val_tab) = each($tab_moyenne))
+			$moyenne += $val_tab;
+		$moyenne = $moyenne / count($tab_moyenne);
+
 		$hauteur_moyenne = round($moyenne * $rapport) - 1;
 		$hauteur = round($value * $rapport)	- 1;
 		echo "<td valign='bottom' width=$largeur>";
