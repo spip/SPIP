@@ -26,8 +26,6 @@ if ($change_session == 'oui') {
 }
 
 // determiner ou l'on veut retomber
-spip_log("cook: $url");
-spip_log(rawurldecode($url));
 if ($url)
 	$cible = new Link($url);
 else
@@ -138,7 +136,6 @@ if ($cookie_admin == "non") {
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$redirect = ereg_replace("[?&]var_login=[^&]*", '', $redirect);
 	$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=-1";
-	spip_log("red $redirect");
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	spip_setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);

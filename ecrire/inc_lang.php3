@@ -44,23 +44,23 @@ function ecrire_caches_langues() {
 // Charger un fichier langue
 //
 function charger_langue($lang, $module = 'spip', $forcer = false) {
-	global $dir_ecrire, $flag_ecrire;
 
 	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
-	$fichier_lang_exists = @file_exists($dir_ecrire.$fichier_lang);
+	$fichier_lang_exists = @is_readable(_DIR_RESTREINT . $fichier_lang);
 
-	// chercher dans le fichier cache ?
-	if (!$flag_ecrire AND $fichier_lang_exists) {
-		if (!$forcer AND @file_exists(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3')
-		AND (@filemtime(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))
-		AND (@filemtime(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/perso.php3'))) {
+	if (_DIR_RESTREINT AND $fichier_lang_exists) {
+	  $ficher_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
+	  $fichier_cache_time = is_readable($fichier_cache) ? filemtime($ficher_cache) : false;
+
+	  if (!$forcer AND $ficher_cache_time
+		AND ($ficher_cache_time > filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
+		AND ($ficher_cache_time > @filemtime(_DIR_LANG . 'perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-			if (lire_fichier(_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3',
-			$contenu, array('phpcheck' => 'oui'))) {
+			if (lire_fichier($ficher_cache,	$contenu, array('phpcheck' => 'oui'))) {
 				eval ('?'.'>'.$contenu);
 				return;
 			}
-		}
+	  }
 		else $GLOBALS['cache_lang_modifs'][$module][$lang] = true;
 	}
 
@@ -72,7 +72,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 		// le francais, qui *par definition* doit exister, et on copie le
 		// tableau 'fr' dans la var liee a la langue
 		$fichier_lang = 'lang/'.$module.'_fr.php3';
-		if (@file_exists($dir_ecrire.$fichier_lang)) {
+		if (@is_readable(_DIR_RESTREINT . $fichier_lang)) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_fr';
 			include_ecrire ($fichier_lang);
 		}
@@ -80,8 +80,8 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	}
 
 	// surcharge perso
-	if (@file_exists($dir_ecrire.'lang/perso.php3')) {
-		include($dir_ecrire.'lang/perso.php3');
+	if (@is_readable(_DIR_LANG .'perso.php3')) {
+		include(_DIR_LANG .'perso.php3');
 	}
 
 }
@@ -90,7 +90,7 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 // Changer la langue courante
 //
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang, $flag_ecrire;
+	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
 
 	$liste_langues = $all_langs.','.lire_meta('langues_multilingue');
 

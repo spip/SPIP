@@ -5,8 +5,47 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-function define_once ($constant, $valeur) {
-	if (!defined($constant)) define($constant, $valeur);
+// 6 constantes incontournables et prioritaires
+
+define('_EXTENSION_PHP', '.php3'); # a etendre
+define('_DIR_RESTREINT_ABS', 'ecrire/');
+define('_DIR_RESTREINT',
+       (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
+
+if ($d = ($GLOBALS['HTTP_GET_VARS']['var_install']))
+  {
+    $d = substr($d,0,strrpos($d,'/')+1);
+    if (!ereg('^(.*)' . _DIR_RESTREINT_ABS . '$', $d))
+      $d .= _DIR_RESTREINT_ABS;
+    if (!@file_exists($d . 'mes_options.php3'))
+      {	header("Location: install.php3?var_install=$d");
+	exit;}
+    define('_FILE_OPTIONS', $d . 'mes_options.php3');
+    define('_FILE_CONNECT_INS', ($d . "inc_connect"));
+  } else {
+  define('_FILE_OPTIONS', 'mes_options.php3');
+  define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
+ }
+
+define_once('_FILE_CONNECT',
+	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
+		(_FILE_CONNECT_INS . _EXTENSION_PHP)
+	 : false));
+
+# Si Spip n'est pas installe, redirection... sauf si justement on l'installe!
+
+if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
+  if (!defined("_INC_PUBLIC"))
+	header("Location: install.php3");
+  else
+    {
+		$db_ok = 0;
+		include_ecrire ("inc_presentation.php3");
+		install_debut_html(_T('info_travaux_titre'));
+		echo "<P>"._T('info_travaux_texte')."</P>";
+		install_fin_html();
+		exit;
+	}
 }
 
 // *********** traiter les variables ************
@@ -198,56 +237,28 @@ $traiter_math = 'tex';
 // Masquer les warning
 error_reporting(E_ALL ^ E_NOTICE);
 
-// le repértoire des images
-
 /* ATTENTION CETTE VARIABLE NE FONCTIONNE PAS ENCORE */
 // Extension du fichier du squelette 
 $extension_squelette = 'html';
 /* / MERCI DE VOTRE ATTENTION */
 
-
-// utilise seulement à l'installation pour l'instant
-
-define('_EXTENSION_PHP', '.php3');
-
 // Droits d'acces maximum par defaut
 @umask(0);
 
 //
-// *** Fin du parametrage statique ***
+// Définition des repertoires standards, mes_options ayant priorite
 //
 
-define_once('_DIR_RESTREINT_ABS', 'ecrire/');
-
-$flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
-
-# en fait flag_ecrire est une constante, equivalente a la nullite de:
-
-define_once('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
-
-/* bientot 
-
-if ($d = ($GLOBALS['HTTP_GET_VARS']['var_install']))
-  {
-    $d = substr($d,0,strrpos($d,'/')+1);
-    define_once('_DIR_PREFIX1', $d);
-    define_once('_DIR_PREFIX2', $d);
-
-    } else   */
-{
-  define('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
-  define('_DIR_PREFIX2', _DIR_RESTREINT);
- }
-
-if (@file_exists(_DIR_PREFIX2 . 'mes_options.php3')) {
-	include(_DIR_PREFIX2 . 'mes_options.php3');
+function define_once ($constant, $valeur) {
+	if (!defined($constant)) define($constant, $valeur);
 }
 
-define_once('_FILE_CONNECT_INS', (_DIR_PREFIX2 . "inc_connect"));
-define_once('_FILE_CONNECT',
-	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
-		(_FILE_CONNECT_INS . _EXTENSION_PHP)
-		 : ''));
+if (@file_exists(_FILE_OPTIONS)) {
+  include(_FILE_OPTIONS);
+ }
+
+define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
+define_once('_DIR_PREFIX2', _DIR_RESTREINT);
 
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
@@ -294,16 +305,22 @@ define_once('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 define_once('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
 define_once('_DIR_TeX', _DIR_IMG . "TeX/");
 
-// pour ceux qui n'aiment pas nos icones, tout est prevu
+// pour ceux qui n'aiment pas nos icones et notre vocabulaire, tout est prevu
 // (pas tout à fait)
 
 define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
+define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 
 // qq chaines standard
 
 define_once('_ACCESS_FILE_NAME', '.htaccess');
 define_once('_AUTH_USER_FILE', '.htpasswd');
-;
+
+# negation d'une constante. A remplacer.
+
+$flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
+
+
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
 // (utilise pour les modifs de la base de donnees)
@@ -493,6 +510,7 @@ function spip_log($message, $logname='spip') {
 		.ereg_replace("\n*$", "\n", $message);
 
 	$logfile = _DIR_SESSIONS . $logname . '.log';
+#	$logfile = "/tmp/spip.log";
 	if (@filesize($logfile) > 10*1024) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
@@ -902,12 +920,11 @@ function lire_meta_maj($nom) {
 if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
 	unset($meta); # parano
 
-	if (lire_fichier (_DIR_SESSIONS . 'meta_cache.php3', $contenu,
-	array('phpcheck' => 'oui')))
-		eval('?'.'>'.$contenu);
-
+	if (file_exists(_DIR_SESSIONS . 'meta_cache.php3'))
+		include(_DIR_SESSIONS . 'meta_cache.php3');
 	// en cas d'echec refaire le fichier
 	if (!is_array($meta) AND _FILE_CONNECT) {
+
 		include_ecrire('inc_meta.php3');
 		lire_metas();
 		ecrire_metas();
@@ -1121,7 +1138,6 @@ function creer_repertoire_documents($ext) {
 
 function calcule_fichier_logo($on) {
   $r= ereg_replace("^" . _DIR_IMG, "", $on);
-#  spip_log("calculer_fihchier_logo $on $r");
   return $r;
 }
 
@@ -1183,13 +1199,13 @@ function debut_entete($title)
 	if (!$base)
 		$base = dirname($GLOBALS['HTTP_SERVERS_VARS']['SCRIPT_NAME']);
 	else
-		$base .= '/' . (_DIR_RESTREINT ? '' : 'ecrire/');
+	  $base .= '/' . (_DIR_RESTREINT ? '' : _DIR_RESTREINT_ABS);
 	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 	@Header("Content-Type: text/html; charset=$charset");
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
 	  "<head>\n" .
-#	  "<base href='$base' />\n" . # + tard
+#	  "<base href='$base' />\n" .
 	  "<title>$title</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }
