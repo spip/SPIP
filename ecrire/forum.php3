@@ -33,7 +33,6 @@ if ($connect_statut == '0minirezo') {
 		$nombre_petition = $row['cnt'];
 	}
 	if ($nombre_petition > 0) {
-		echo "<p>";
 		icone_horizontale("$nombre_petition signatures de p&eacute;titions", "controle_petition.php3", "petition-24.gif", "rien.gif");
 	}
 	

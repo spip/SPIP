@@ -373,10 +373,12 @@ echo "<P><HR><P>";
 		echo "<HR>";
 	
 		if (($articles_chapeau != "non") OR strlen($chapo) > 0) {
+			if ($spip_ecran == "large") $rows = 8;
+			else $rows = 5;
 			echo "<B>Chapeau</B>";
 			echo aide ("artchap");
 			echo "<BR>(Texte introductif de l'article.)<BR>";
-			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
+			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
 			echo $chapo;
 			echo "</TEXTAREA><P>\n";
 		}
@@ -386,6 +388,8 @@ echo "<P><HR><P>";
 	
 	}
 
+	if ($spip_ecran == "large") $rows = 35;
+	else $rows = 20;
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
 	{
@@ -398,7 +402,7 @@ echo "<P><HR><P>";
 				list($texte1,$texte) = coupe_trop_long($texte);
 
 				$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
-					" CLASS='formo' ROWS='20' COLS='40' wrap=soft>" .
+					" CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>" .
 					$texte1 . "</TEXTAREA><P>\n";
 			}
 		}
@@ -410,7 +414,7 @@ echo "<P><HR><P>";
 	
 	echo $textes_supplement;
 
-	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' ROWS='20' COLS='40' wrap=soft>";
+	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 	
