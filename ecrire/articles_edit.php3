@@ -222,9 +222,9 @@ function mySel($varaut,$variable) {
 
 function my_sel($num,$tex,$comp){
 	if ($num==$comp){
-		echo "<OPTION VALUE='$num' SELECTED>$tex\n";
+		echo "<option value='$num' selected>$tex\n";
 	}else{
-		echo "<OPTION VALUE='$num'>$tex\n";
+		echo "<option value='$num'>$tex\n";
 	}
 
 }
@@ -312,24 +312,24 @@ function enfant($leparent){
 			break;
 		}
 		if ($i==1) {
-			$style .= "background: url(img_pack/secteur-12.gif) $spip_lang_left no-repeat;";
+			$style .= "background-image: url(img_pack/secteur-12.gif);";
 			$style .= "background-color: $couleur_claire;";
 			$style .= "font-weight: bold;";
 		}
 		else if ($i==2) {
-			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			//$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 			$style .= "border-bottom: 1px solid $couleur_claire;";
 			$style .= "font-weight: bold;";
 		}
 		else {
-			$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
+			//$style .= "background: url(img_pack/rubrique-12.gif) $spip_lang_left no-repeat;";
 		}
 
 		if ($rubrique_acceptable) {
-			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
+			if ($i == 1 && !$premier) echo "<option value='$my_rubrique'>\n"; // sert a separer les secteurs
 			$titre = couper($titre." ", 50); // largeur maxi
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-			echo "<option".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace".supprimer_tags($titre)."</option>\n";
+			echo "<option".mySel($my_rubrique,$id_rubrique)." class='selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."</option>\n";
 		}
 		$premier = 0;
 		enfant($my_rubrique);
