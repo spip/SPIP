@@ -180,6 +180,23 @@ if ($changer_virtuel && $flag_editable) {
 	$result = spip_query($query);
 }
 
+// Changer la langue heritee
+if ($id_rubrique != id_rubrique_old) {
+	if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
+		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		$langue_old = $row['lang'];
+		$langue_choisie_old = $row['langue_choisie'];
+		
+		if ($langue_choisie_old != "oui") {
+			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			$langue_new = $row['lang'];
+	
+			if ($langue_new != $langue_old) {
+				spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
+			}
+		}
+	}
+}
 
 if ($titre && !$ajout_forum && $flag_editable) {
 	$surtitre = addslashes(corriger_caracteres($surtitre));
@@ -190,6 +207,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$texte = addslashes(corriger_caracteres($texte));
 	$ps = addslashes(corriger_caracteres($ps));
 
+	
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
@@ -1135,32 +1153,38 @@ if ($options == 'avancees' AND $articles_mots != 'non') {
 //
 // Langue de l'article
 //
-if ((lire_meta('multi_articles') <> 'non') AND ($flag_editable)) {
-	
-	if ($changer_lang) {
-		spip_log ("article $id_article = $changer_lang");
-	if ($changer_lang != "herit") {
-			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
-		} else {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_parent = $row['lang'];
-			spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
-		}
-	}
-
-	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-	$langue_article = $row['lang'];
-	$langue_choisie_article = $row['langue_choisie'];
-	
-	//echo "[$langue_article | $langue_choisie_article]";
-
-	if ($langue_choisie_article == 'oui') $herit = false;
-	else $herit = true;
+if ((lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')) {
 
 	debut_cadre_enfonce("langues-24.gif");
-		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-		echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $herit);
-		echo "</font></center>\n";
+	
+	// Choix langue article
+	if (lire_meta('multi_articles') == 'oui' AND ($flag_editable)) {
+	
+		if ($changer_lang) {
+			spip_log ("article $id_article = $changer_lang");
+		if ($changer_lang != "herit") {
+				spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_article=$id_article");
+			} else {
+				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+				$langue_parent = $row['lang'];
+				spip_query("UPDATE spip_articles SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_article=$id_article");
+			}
+		}
+	
+		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+		$langue_article = $row['lang'];
+		$langue_choisie_article = $row['langue_choisie'];
+		
+		//echo "[$langue_article | $langue_choisie_article]";
+	
+		if ($langue_choisie_article == 'oui') $herit = false;
+		else $herit = true;
+	
+			echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+			echo menu_langues('changer_lang', $langue_article, _T('info_multi_cet_article').' ', $herit);
+			echo "</font></center>\n";
+	}
+	// Liste des articles traduits
 	fin_cadre_enfonce();
 }
 
