@@ -752,8 +752,8 @@ function debut_html($titre = "") {
 
 	.reliefblanc {background-image: url(img_pack/barre-blanc.png)}
 	.reliefgris {background-image: url(img_pack/barre-gris.png)}
-	.iconeoff {padding: 3px; margin: 1px; border-left: solid 1px #ffffff; border-top: solid 1px #ffffff; border-right: solid 1px #000000; border-bottom: solid 1px #000000;}
-	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #666666;}
+	.iconeoff {padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #e4e4e4}
+	.iconeon {cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #000000; border-top: solid 1px #000000; background-color: #cccccc;}
 
 	a { text-decoration: none; }
 	a:hover { color:#FF9900; text-decoration: underline; }
@@ -1044,7 +1044,7 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 		$largeur = 70;
 	}
 
-	echo "\n<table cellpadding=0 cellspacing=0 border=0 bgcolor='$couleur_foncee' $aligner width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
+	echo "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
 	echo "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 	if ($spip_display != 1){	
@@ -1059,7 +1059,7 @@ function icone($texte, $lien, $fond, $fonction="", $align=""){
 	echo "</td></tr>";
 	if ($spip_display != 3){
 		echo "<tr><td background='' align='center'>";
-		echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='white'><b>$texte</b></font></a>";
+		echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		echo "</td></tr>";
 	}
 	echo "</table>";
@@ -1075,7 +1075,7 @@ function icone_horizontale($texte, $lien, $fond, $fonction=""){
 	$hauteur = 30;
 	$largeur = "100%";
 
-	echo "\n<table cellpadding=0 cellspacing=0 bgcolor='$couleur_foncee' border=0 width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
+	echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur class=\"iconeoff\" onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\">";
 	echo "<tr><td background='' align='left' valign='middle' width=$largeur height=$hauteur>";
 	echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td background='' align='center'>";
@@ -1089,7 +1089,7 @@ function icone_horizontale($texte, $lien, $fond, $fonction=""){
 		echo "</td>";
 
 		echo "<td background='' align='left'>";
-		echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='white'><b>$texte</b></font></a>";
+		echo "<a href='$lien' class='icone'><font face='verdana,arial,helvetica,sans-serif' size='1' color='#666666'><b>$texte</b></font></a>";
 		echo "</td></tr>";
 
 	echo "</table>";
