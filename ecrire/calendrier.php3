@@ -158,11 +158,10 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 	if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non"){
 		echo "<div style='float: $spip_lang_right; width: 120px;'>";
 		if (!$afficher_lien_aujourdhui) echo "<a href='calendrier_jour.php3'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
-		else  echo "<a href='calendrier_jour.php3?jour=1&mois=$mois&annee=$annee'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		else  echo "<a href='calendrier_jour.php3?jour=1&mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-jour.gif' alt='jour' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo "&nbsp;";
-//		par semaine c'est joli mais ca ne fait rien...
-//		echo "<img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'>";
-//		echo "&nbsp;";
+		echo "<a href='calendrier_semaine.php3?jour=1&mois=$mois_today&annee=$annee_today'><img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		echo "&nbsp;";
 		echo "<img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='border:1px solid black;'>";
 		echo aide ("messcalen");
 		echo "</div>";

@@ -142,7 +142,7 @@ while($row = spip_fetch_array($result_message)) {
 	
 	if ($rv == "oui") {
 		creer_colonne_droite();	
-		calendrier_jour($lejour,$lemois,$lannee, false, $id_message);
+		calendrier_jour($lejour,$lemois,$lannee, "col", $id_message);
 	}
 	
 	debut_droite();

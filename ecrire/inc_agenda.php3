@@ -13,7 +13,7 @@ include_ecrire("inc_acces.php3");
 // Afficher un agenda (un mois) sous forme de petit tableau
 //
 
-function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
+function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved, $semaine = false) {
 	global $couleur_foncee, $couleur_claire;
 	global $connect_id_auteur;
 
@@ -41,6 +41,13 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 	$jour_semaine = date("w",$nom);
 	$nom_mois = nom_mois('2000-'.sprintf("%02d", $mois).'-01');
 	
+	if ($semaine) {
+		$jour_valide = mktime(1,1,1,$mois_ved,$jour_ved,$annee_ved);
+		$jour_semaine_valide = date("w",$jour_valide);
+		$debut = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+1,$annee_ved);
+		$fin = mktime(1,1,1,$mois_ved,$jour_ved-$jour_semaine_valide+7,$annee_ved);
+	}
+	
 	echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier.php3?mois=$mois&&annee=$annee' style='color: black;'>".affdate_mois_annee("$annee-$mois-1")."</a></b></div>";
 	
 	echo "<table width='100%' cellspacing='1' cellpadding='2'>";
@@ -54,12 +61,16 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 		$jour_j = sprintf("%02d", $j);
 		$nom = mktime(1,1,1,$mois,$jour_j,$annee);
 		$jour_semaine = date("w",$nom);
-				
+		
 		if (checkdate($mois,$j,$annee)){
 
 			if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
-				echo "<td class='arial2' style='background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 8px;'>";
-				echo "<a href='calendrier_jour.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
+				echo "<td class='arial2' style='background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 5px;'>";
+				echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
+				echo "</td>";
+			} else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
+				echo "<td class='arial2' style='background-color: white; text-align: center;'>";
+				echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
 				echo "</td>";
 			} else {
 				if ($j == $jour_today AND $mois == $mois_today AND $annee == $annee_today) {
@@ -78,8 +89,9 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 						$couleur = "black";
 					}
 				}
-				echo "<td class='arial2' style='background-color: $couleur_fond; text-align: center; -moz-border-radius: 8px;'>";
-				echo "<a href='calendrier_jour.php3?jour=$j&mois=$mois&annee=$annee' style='color: $couleur;'>$j</a>";
+				echo "<td class='arial2' style='background-color: $couleur_fond; text-align: center; -moz-border-radius: 5px;'>";
+				if ($semaine) echo "<a href='calendrier_semaine.php3?jour=$j&mois=$mois&annee=$annee' style='color: $couleur;'>$j</a>";
+				else echo "<a href='calendrier_jour.php3?jour=$j&mois=$mois&annee=$annee' style='color: $couleur;'>$j</a>";
 				echo "</td>";
 			}			
 			
@@ -95,9 +107,10 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 
 
 
-function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
+function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	global $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
 	global $connect_id_auteur, $connect_statut;
+	global $couleur_claire;
 
 
 	$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
@@ -106,30 +119,53 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 	$annee = annee($date);
 
 
-	if ($large) {
+	if ($large == "large") {
 		$largeur = 300;
 		$modif_decalage = 40;
-	} else {
+		$debut_gauche = 40;
+	} else if ($large == "col") {
 		$largeur = 120;
 		$modif_decalage = 15;
+		$debut_gauche = 20;
+	} else {
+		$largeur = 80;
+		$modif_decalage = 5;
+		$debut_gauche = 5;
 	}
-
-	if (!$large) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate("$annee-$mois-$jour")."</a></b></div>";
-	else echo "<div align='center' style='padding: 5px;'><b class='verdana1'>&nbsp;</b></div>";
-
 	
-	echo "<div style='border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
+	$bgcolor = "white";
+	
+	if ($large == "etroit") {
+		$bgcolor = "#eeeeee";
+		
+		$today=getdate(time());
+		$jour_today = $today["mday"];
+		$mois_today = $today["mon"];
+		$annee_today = $today["year"];
+		
+		if ($jour == $jour_today AND $mois == $mois_today AND $annee == $annee_today) $bgcolor = "white";
+	}
+	
+	$nom = mktime(1,1,1,$mois,$jour,$annee);
+	$jour_semaine = date("w",$nom);
+	if ($jour_semaine == 0) $bgcolor = $couleur_claire;
+
+	if ($large == "col" ) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate("$annee-$mois-$jour")."</a></b></div>";
+	else if ($large == "large") echo "<div align='center' style='padding: 5px;'><b class='verdana1'>&nbsp;</b></div>";
+	
+	if ($large != "etroit") echo "<div style='background-color: $bgcolor; border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
+	else echo "<div style='background-color: $bgcolor;'>"; // bordure
+
 	echo "<div style='position: relative; width: 100%; height: 450px; background: url(img_pack/fond-calendrier.gif);'>";
 	
 	echo "<div style='position: absolute; $spip_lang_left: 2px; top: 2px; color: #666666;' class='arial0'><b class='arial0'>0:00<br />7:00</b></div>";
-	
 	for ($i = 7; $i < 20; $i++) {
 		echo "<div style='position: absolute; $spip_lang_left: 2px; top: ".(($i-6)*30+2)."px; color: #666666;' class='arial0'><b class='arial0'>$i:00</b></div>";
 	}
 	echo "<div style='position: absolute; $spip_lang_left: 2px; top: 422px; color: #666666;' class='arial0'><b class='arial0'>20:00<br />23:59</b></div>";
 
 
-	if ($large) {
+	if ($large == "large") {
 		// articles du jour
 		$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee-$mois-$jour' AND date < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date";
 		$result=spip_query($query);
@@ -160,10 +196,6 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 			echo "</div>";
 		}
 	}
-
-
-
-
 
 	// rendez-vous personnels
 	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-$jour' AND messages.date_heure <= '$annee-$mois-$jour 23:59:59' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
@@ -225,7 +257,7 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 		if ($hauteur < 23) $hauteur = 23;
 		
 		if ($bas_prec > $haut) $decalage = $decalage + $modif_decalage;
-		else $decalage = 40;
+		else $decalage = $debut_gauche;
 		
 		if ($bas > $bas_prec) $bas_prec = $bas;		
 		

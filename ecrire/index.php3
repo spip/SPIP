@@ -148,7 +148,7 @@ if (lire_meta('activer_messagerie') != 'non' AND $connect_activer_messagerie != 
 			"AND messages.statut='publie' LIMIT 0,1");
 	if (spip_num_rows($result_messages)) {
 		echo "<p />";
-		calendrier_jour($jour_today,$mois_today,$annee_today, false);
+		calendrier_jour($jour_today,$mois_today,$annee_today, "col");
 	}
 }
 
