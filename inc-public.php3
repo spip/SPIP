@@ -290,7 +290,7 @@ function bouton($titre, $lien) {
 // Fonctionnalites administrateur (declenchees par le cookie admin, authentifie ou non)
 //
 
-if (($HTTP_COOKIE_VARS['spip_admin'] == 'admin' OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
+if (($HTTP_COOKIE_VARS['spip_admin'] OR ($auteur_session['statut'] == '0minirezo')) AND !$flag_preserver) {
 	if ($id_article) {
 		bouton("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
@@ -306,6 +306,9 @@ if (($HTTP_COOKIE_VARS['spip_admin'] == 'admin' OR ($auteur_session['statut'] ==
 	else if ($id_auteur) {
 		bouton("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
+	else {
+		bouton("Acc&egrave;s admin", "./ecrire/index.php3?");
+	}
 
 	$link = new Link;
 	$link->addVar('recalcul', 'oui');
@@ -314,6 +317,10 @@ if (($HTTP_COOKIE_VARS['spip_admin'] == 'admin' OR ($auteur_session['statut'] ==
 	else $pop = "";
 	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page$pop'>";
 	echo "</form>\n";
+
+	if ($auteur_session['statut'] == '0minirezo') {
+		bouton ("D&eacute;connexion", "./spip_cookie.php3?cookie_session=non&redirect=./ecrire/login.php3");
+	}
 }
 
 
