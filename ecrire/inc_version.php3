@@ -1141,13 +1141,14 @@ function texte_script($texte) {
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
+define_once('_SPIP_PATH', './:squelettes/:dist/:formulaires/');
 function find_in_path ($filename, $path='AUTO') {
 	// Chemin standard depuis l'espace public
 
 	if ($path == 'AUTO') {
-		$path = '.:squelettes:dist:formulaires';
+		$path = _SPIP_PATH;
 		if ($GLOBALS['dossier_squelettes'])
-			$path = $GLOBALS['dossier_squelettes'].':'.$path;
+			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
 	}
 
 	// Depuis l'espace prive, remonter d'un cran 
@@ -1155,10 +1156,15 @@ function find_in_path ($filename, $path='AUTO') {
 
 	// Parcourir le chemin
 	foreach (split(':', $path) as $dir) {
-		$f = "$racine$dir/$filename";
-		if (@is_readable($f))
+		if (substr($dir, 0,1)<>'/')
+			$f = "$racine$dir$filename";
+		else
+			$f = "$dir$filename";
+
+		if (is_readable($f)) {
 			return $f;
 		}
+	}
 #	spip_log("find_in_path: pas de fichier '$filename' sur le chemin '$path'");
 }
 

@@ -35,7 +35,6 @@ foreach ($_FILES as $id => $file) {
 		unset ($_FILES[$id]);
 }
 
-
 // Si on est en mode 'document', les images doivent etre installees
 // comme documents dans le portfolio
 if ($forcer_document) $mode = 'document';
