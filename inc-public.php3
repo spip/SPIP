@@ -4,7 +4,10 @@
 if (defined("_INC_PUBLIC")) {
 	$page = inclure_page($fond, $delais, $contexte_inclus, $fichier_inclus);
 
-	eval('?' . '>' . $page['texte']);
+	if ($page['process_ins'] == 'php')
+		eval('?' . '>' . $page['texte']); // page 'php'
+	else
+		echo $page['texte']; // page tout 'html'
 
 	if ($page['lang_select'])
 		lang_dselect();
@@ -71,7 +74,11 @@ else {
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 
 	afficher_page_si_demande_admin ('page', $page['texte'], $page['cache']);
-	eval('?' . '>' . $page['texte']);
+
+	if ($page['process_ins'] == 'php')
+		eval('?' . '>' . $page['texte']); // page 'php'
+	else
+		echo $page['texte']; // page tout 'html'
 
 	terminer_public_global($use_cache, $page['cache']);
 }
