@@ -21,16 +21,13 @@ if ($spip_display != 4) {
 	echo "<p>";
 	
 	$titre_cadre = afficher_plus("auteurs_edit.php3?id_auteur=$connect_id_auteur");
-	if ($bonjour == "oui" OR $spip_ecran == "large") $titre_cadre .= bouton_block_visible("info_perso");
-	else $titre_cadre .= bouton_block_invisible("info_perso");
 	$titre_cadre .= majuscules(typo($connect_nom));
 	
-	debut_cadre_relief("fiche-perso-24.gif", false, '', $titre_cadre);
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+	debut_cadre_couleur_foncee("fiche-perso-24.gif", false, '', '');
+	echo "<center><b>".$titre_cadre."</b></center>";
+	fin_cadre_couleur_foncee();
 	
-	if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
-	else echo debut_block_invisible("info_perso");
-		
+
 	//
 	// Supprimer le cookie, se deconnecter...
 	//
@@ -38,10 +35,8 @@ if ($spip_display != 4) {
 	if ($connect_statut == "0minirezo" AND $cookie_admin) {
 		icone_horizontale(_T('icone_supprimer_cookie') . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode("ecrire/index.php3"), "cookie-24.gif", "");
 	}
-	
-	echo fin_block();
-	fin_cadre_relief();
-	
+
+	echo "<p>";	
 	
 	//
 	// Annonces
