@@ -269,9 +269,9 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 					list(,$url) = extraire_lien(array('','','',
 					substr($chapo, 1)));
 					if ($url) { // sinon les navigateurs pataugent
-						$url = addslashes($url);
+						$url = texte_script(str_replace('&amp;', '&', $url));
 						$page = array('texte' => "<".
-						"?php header(\"Location: $url\"); ?" . ">",
+						"?php header('Location: $url'); ?" . ">",
 						'process_ins' => 'php');
 					}
 				}
