@@ -223,7 +223,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 		unset($les_mots);
 	
-		$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot ORDER BY spip_mots.type, spip_mots.titre";
+		$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre";
 		$result = spip_query($query);
 		
 		echo "<table border=0 cellspacing=0 cellpadding=2 width=100% background=''>";
