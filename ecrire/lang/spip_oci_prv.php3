@@ -375,6 +375,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Br&egrave;vas',
+'icone_brouteur' => 'Navigacion rapida',
 'icone_calendrier' => 'Calendier',
 'icone_calendrier_messagerie' => '<MODIF> Agenda',
 'icone_configuration_site' => 'Configuracion dau sit',
@@ -540,8 +541,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_code_acces' => 'Oblidetz pas v&ograve;strei c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir aqueu tabl&egrave;u',
 'info_config_suivi' => 'S\'aquela adrei&ccedil;a corresp&ograve;nd a una mailing-list, pod&egrave;tz indicar &ccedil;ai sota l\'adrei&ccedil;a ont lei participants au sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => '<NEW> <NEW> Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
-'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
+'info_config_suivi_explication' => 'Pod&egrave;tz recebre automaticament, per e-mail, leis an&oacute;ncias pertocant l\'activitat editoriala d\'aqueu sit. Per aqu&ograve; faire, vos pod&egrave;tz abonar a la mailing-list seguenta:',
 'info_confirmer_passe' => 'Confirmar aqueu mot de santa Clara nov&egrave;u:',
 'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><P> Pod&egrave;tz passar a l\'estapa seguenta.',
@@ -684,7 +684,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_mail_fournisseur' => 'vos@fornidor.com',
 'info_maximum' => 'maximum:',
 'info_message' => 'Messatge dau',
-'info_message_2' => '<NEW> <NEW> MESSAGE',
+'info_message_2' => 'MESSATGE',
 'info_message_efface' => 'MESSATGE ESCAFAT',
 'info_message_en_redaction' => 'V&ograve;strei messatges en cors de redaccion',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -715,7 +715,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_multi_herit' => 'Lenga predefinida',
 'info_multi_langues_choisies' => 'Vougatz seleccionar &ccedil;ai sota lei lengas que son a posita dei redactors de v&ograve;stre sit.
   Lei lengas ja emplegadas dins v&ograve;stre sit (afichadas d\'en primier) se p&ograve;don pas desactivar.',
-'info_multi_langues_soulignees' => '<NEW> <NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
+'info_multi_langues_soulignees' => 'Lei <u>lengas solinhadas</u> benef&iacute;cian d\'una revirada de totei lei t&egrave;xts de l\'interf&agrave;cia. Se seleccionatz aquelei lengas, f&ograve;r&ccedil;a elements dau sit public (datas, formularis) se revirar&agrave;n automaticament. Per lei lengas non solinhadas, aqueleis elements apareisser&agrave;n dins la lenga principala dau sit.',
 'info_multi_rubriques' => 'Activar lo menut de lenga per lei rubricas?',
 'info_multi_secteurs' => '... ren que per lei rubricas a la rai&ccedil; dau sit?',
 'info_multilinguisme' => 'Multiling&uuml;isme',
@@ -1191,6 +1191,12 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'menu_aide_suivi_forum_statistiques' => 'Estadisticas dei vesitas',
 'menu_aide_suivi_forum_suivi' => 'Seguit dei forums',
 'menu_aide_suivi_forum_systeme_breves' => 'Sist&egrave;ma de br&egrave;vas',
+'module_fichier_langue' => 'Fichier de lenga',
+'module_fichiers_langues' => 'Fichiers de lenga',
+'module_raccourci' => 'Acorcha',
+'module_texte_affiche' => 'T&egrave;xt afichat',
+'module_texte_explicatif' => 'Pod&egrave;tz inserir leis acorchas seguentas dins leis esqueletas de v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins lei diferentei lengas per lei qualas exist&iacute;s un fichier de lenga.',
+'module_texte_traduction' => 'Lo fichier de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
 
 
@@ -1637,7 +1643,11 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Cessar de liar aquest article a sei reviradas ',
 'trad_lier' => 'Aquest article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aquest article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
+
+
+// PLUS_UTILISE
+'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );
 

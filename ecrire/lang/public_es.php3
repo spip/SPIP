@@ -57,17 +57,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // J
-'jours' => '<NEW> jours',
+'jours' => 'd&iacute;as',
 
 
 // M
-'meme_auteur' => '<NEW> Du m&ecirc;me auteur',
-'meme_rubrique' => '<NEW> Dans la m&ecirc;me rubrique',
-'memes_auteurs' => '<NEW> Des m&ecirc;mes auteurs',
-'message' => '<NEW> Message',
-'messages_forum' => '<NEW> Messages de forum',
-'messages_recents' => '<NEW> Messages de forums les plus r&eacute;cents',
-'mots_clefs' => '<NEW> Mots-cl&eacute;s',
+'meme_auteur' => 'Del mismo autor',
+'meme_rubrique' => 'De la misma secci&oacute;n',
+'memes_auteurs' => 'De los mismos autores',
+'message' => 'Mensaje',
+'messages_forum' => 'Mensajes del f&oacute;rum',
+'messages_recents' => 'Mensajes recientes del f&oacute;rum',
+'mots_clefs' => 'Palabras-clave',
 'mots_clefs_meme_groupe' => '<NEW> Mots-cl&eacute;s dans le m&ecirc;me groupe',
 
 
