@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
 include("inc_version.php3");
 
 // En-tetes
@@ -45,6 +46,7 @@ if (http_last_modified(@filemtime("spip_style.php3"), time() + 24 * 3600))
 
 	function http_img_pack($f) { return _DIR_IMG_PACK . $f; }
 ?>
+@import "calendrier.css";
 /*
  * Police par defaut (bof...)
  */

@@ -2,14 +2,34 @@
  * Styles du calendrier
  */
  
+.calendrier-arial9 { 
+	font-family: Arial, Sans, sans-serif; font-size: 9px;
+}
+
+.calendrier-arial10 { 
+	font-family: Arial, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-arial11 { 
+	font-family: Arial, Sans, sans-serif; font-size: 11px;
+}
+
+.calendrier-verdana10 {
+	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
+}
+
+.calendrier-helvetica16 {
+	font-family: arial,helvetica,sans-serif;
+	font-size: 16px; 
+	color: black;
+}
+
 div.navigation-calendrier {
 	color: white;
 	font-family: verdana, arial, sans,sans-serif;
 	font-weight: bold;
 	font-size: 14px;
 	padding: 2px;
-	-moz-border-radius-topleft: 8px;
-	-moz-border-radius-topright: 8px;
 }
 
 div.navigation-calendrier img {
@@ -81,42 +101,41 @@ a.calendrier-annee:hover {
 	-moz-border-radius: 5px;
  }
 
-.calendrier-left { 
+.calendrier-mozleft { 
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-bottomleft: 10px;
  }
 
-.calendrier-right { 
+.calendrier-mozright { 
 	-moz-border-radius-topright: 10px;
 	-moz-border-radius-bottomright: 10px;
  }
+
+.calendrier-moztop8 { 
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+}
+
+.calendrier-mozbottom8 { 
+	-moz-border-radius-bottomleft: 8px; 
+	-moz-border-radius-bottomright: 8px;
+}
+
+.calendrier-moztop6 { 
+	-moz-border-radius-topleft: 6px; 
+	-moz-border-radius-topright: 6px;
+}
+
+.calendrier-mozbottom6 { 
+	-moz-border-radius-bottomleft: 6px; 
+	-moz-border-radius-bottomright: 6px;
+}
 
 .calendrier-opacity { 
 	-moz-opacity: 0.3;
 	filter: alpha(opacity=30);
 }
 
-.calendrier-arial9 { 
-	font-family: Arial, Sans, sans-serif; font-size: 9px;
-}
-
-.calendrier-arial10 { 
-	font-family: Arial, Sans, sans-serif; font-size: 10px;
-}
-
-.calendrier-arial11 { 
-	font-family: Arial, Sans, sans-serif; font-size: 11px;
-}
-
-.calendrier-verdana10 {
-	font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px;
-}
-
-.calendrier-helvetica16 {
-	font-family: arial,helvetica,sans-serif;
-	font-size: 16px; 
-	color: black;
-}
 
 .calendrier-png { 
 	width: 12px; 
@@ -124,12 +143,8 @@ a.calendrier-annee:hover {
 	behavior: url(win_png.htc);
 }
 
-.radius-top { 
-	-moz-border-radius-topleft: 6px; 
-	-moz-border-radius-topright: 6px;
-}
-
-.radius-bottom { 
-	-moz-border-radius-bottomleft: 6px; 
-	-moz-border-radius-bottomright: 6px;
+.calendrier-icone { 
+	width: 14px;
+	height: 7px;
+	border: 0px;
 }
