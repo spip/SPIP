@@ -101,6 +101,19 @@ function transcoder_page($texte) {
 	return $texte;
 }
 
+function trouver_format($texte) {
+	$syndic_version = '';
+	
+	// Chercher un numero de version
+	if (ereg('(rss|feed)[[:space:]](([^>]*[[:space:]])*)version[[:space:]]*=[[:space:]]*[\'"]([-_a-zA-Z0-9\.]+)[\'"]', $texte, $regs)) {
+		$syndic_version = $regs[4];
+	} else {
+		if (strpos($texte,'rdf:RDF')) {
+			$syndic_version = '1.0';
+		}
+	}
+	return $syndic_version;
+}
 
 function analyser_site($url) {
 	include_ecrire("inc_filtres.php3");
@@ -108,21 +121,59 @@ function analyser_site($url) {
 	$texte = transcoder_page(recuperer_page($url));
 	if (!$texte) return false;
 	$result = '';
-	if (ereg('<channel[^>]*>(.*)</channel>', $texte, $regs)) {
+	
+	// definir les regexp pour decoder
+	// il faut deux etapes pour link sous Atom0.3
+	$syndic_version = trouver_format($texte);
+	switch ($syndic_version) {
+		case "0.91" :
+		case "0.92" :
+		case "2.0" :
+			$site_regexp = array(
+				'channel'     =>'<channel[^>]*>(.*)</channel>',
+				'link1'       => '<link[^>]*>([^<]*)</link>',
+				'link2'       => '(.*)',
+				'item'        => '<item[^>]*>',
+				'description' => '<description[^>]*>([^<]*)</description>'
+			);
+			break;
+		case "1.0" :
+			$site_regexp = array(
+				'channel'     => '<channel[^>]*>(.*)</channel>',
+				'link1'       => '<link[^>]*>([^<]*)</link>',
+				'link2'       => '(.*)',
+				'item'        => '<item[^>]*>',
+				'description' => '<description[^>]*>([^<]*)</description>'
+			);
+			break;
+		case "0.3" :
+			$site_regexp = array(
+				'channel'     => '<feed[^>]*>(.*)</feed>',
+				'link1'       => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)/>',
+				'link2'       => 'href[[:space:]]*=[[:space:]]*[\'"]([^["|\']]+)[\'"]',
+				'item'        => '<entry[^>]*>',
+				'description' => '<tagline[^>]*>([^<]*)</tagline>'
+			);
+			break;
+		default :
+		// faudra-t-il mettre ici un message d'erreur ?
+			return $result;
+	}
+
+	if (ereg($site_regexp['channel'], $texte, $regs)) {
 		$result['syndic'] = true;
 		$result['url_syndic'] = $url;
 		$channel = $regs[1];
 		if (ereg('<title[^>]*>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>', $channel, $r))
 			$result['nom_site'] = supprimer_tags(filtrer_entites($r[1]));
-		if (ereg('<link[^>]*>([^<]*)</link>', $channel, $r))
-			$result['url_site'] = filtrer_entites($r[1]);
+		if (ereg($site_regexp['link1'], $channel, $regs)) {
+			if (ereg($site_regexp['link2'], $regs[1].$regs[2], $r))
+				$result['url_site'] = filtrer_entites($r[1]);
+		}
 
 		// si le channel n'a pas de description, ne pas prendre celle d'un article
-		if ($a = strpos($channel, '<item>'))
-			$channel_desc = substr($channel, 0, $a);
-		else
-			$channel_desc = $channel;
-		if (ereg('<description[^>]*>([^<]*)</description>', $channel_desc, $r))
+		list($channel_desc,$drop) = split($site_regexp['item'], $channel, 2);
+		if (ereg($site_regexp['description'], $channel_desc, $r))
 			$result['descriptif'] = filtrer_entites($r[1]);
 	}
 	else {
@@ -163,12 +214,78 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	$le_retour = transcoder_page(recuperer_page($url_syndic));
 	$erreur = "";
+	$les_auteurs_du_site = "";
+
+	// definir les regexp pour decoder
+	// il faut deux etapes pour link sous Atom0.3
+	$syndic_version = trouver_format($le_retour);
+	switch ($syndic_version) {
+		case "0.91" :
+		case "0.92" :
+		case "2.0" :
+			$syndic_regexp = array(
+				'item'           => '<item[>[:space:]]',
+				'itemfin'        => '</item>',
+				'link1'          => '<link[^>]*>([^<]*)</link>',
+				'link2'          => '(.*)',
+				'date1'          => '<pubDate>([^<]*)</pubDate>',
+				'date2'          => '<[[:alpha:]]{2}:date>([^<]*)</[[:alpha:]]{2}:date>',
+				'author1'        => '<[[:alpha:]]{2}:[Cc]reator>([^<]*)</[[:alpha:]]{2}:[Cc]reator>',
+				'author2'        => '(.*)',
+				'authorbis'      => '<author>([^<]*)</author>',
+				'description'    => '<description[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</description[^>]*>',
+				'descriptionbis' =>     '<content[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</content[^>]*>'
+			);
+			break;
+		case "1.0" :
+			$syndic_regexp = array(
+				'item'           => '<item[>[:space:]]',
+				'itemfin'        => '</item>',
+				'link1'          => '<link[^>]*>([^<]*)</link>',
+				'link2'          => '(.*)',
+				'date1'          => '<[[:alpha:]]{2}:date>([^<]*)</[[:alpha:]]{2}:date>',
+				'date2'          => '<pubDate>([^<]*)</pubDate>',
+				'author1'        => '<[[:alpha:]]{2}:[Cc]reator>([^<]*)</[[:alpha:]]{2}:[Cc]reator>',
+				'author2'        => '(.*)',
+				'authorbis'      => '<author>([^<]*)</author>',
+				'description'    => '<description[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</description[^>]*>',
+				'descriptionbis' =>     '<content[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</content[^>]*>'
+			);
+			break;
+		case "0.3" :
+			$syndic_regexp = array('channel'=>'<feed[^>]*>(.*)</feed>',
+				'item'           => '<entry[>[:space:]]',
+				'itemfin'        => '</entry>',
+				'link1'          => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)/>',
+				'link2'          => 'href[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',
+				'date1'          => '<modified>([^<]*)</modified>',
+				'date2'          => '<issued>([^<]*)</issued>',
+				'author1'        => '<author>(.*<name>.*</name>.*)</author>',
+				'author2'        => '<name>([^<]*)</name>',
+				'authorbis'      => '<[[:alpha:]]{2}:[Cc]reator>([^<]*)</[[:alpha:]]{2}:[Cc]reator>',
+				'description'    => '<summary[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(\]{2}>)?[[:space:]]*</summary[^>]*>',
+				'descriptionbis' => '<content[^>]*>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(\]{2}>)?[[:space:]]*</content[^>]*>'
+			);
+			break;
+		default :
+			// format de syndication non reconnu
+			$erreur = _T('avis_echec_syndication_02');
+			$le_retour = '';
+			break;
+	}
+
+	// chercher un auteur dans le fil au cas ou les entry n'en auraient pas
+	list($channel_head,$drop) = split($syndic_regexp['item'], $le_retour, 2);
+	if (ereg($syndic_regexp['author1'],$channel_head,$mat)) {
+		if (ereg($syndic_regexp['author2'],$mat[1],$match))
+			$les_auteurs_du_site = addslashes(filtrer_entites($match[1]));
+	}
 
 	if ($le_retour) {
 		$i = 0;
-		while (ereg("<item[>[:space:]]",$le_retour,$regs)) {
+		while (ereg($syndic_regexp['item'],$le_retour,$regs)) {
 			$debut_item=strpos($le_retour,$regs[0]);
-			$fin_item=strpos($le_retour,"</item>")+strlen("</item>");
+			$fin_item=strpos($le_retour,$syndic_regexp['itemfin'])+strlen($syndic_regexp['itemfin']);
 			$item[$i]=substr($le_retour,$debut_item,$fin_item-$debut_item);
 
 			$debut_texte=substr($le_retour,"0",$debut_item);
@@ -179,21 +296,30 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		if (is_array($item)) {
 			$now = time();
 			for ($i = 0 ; $i < count($item) ; $i++) {
-				// Titre (obligatoire)
-				if (ereg("<title>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>",$item[$i],$match))
-					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[1])));
-				else continue;
+
 				// URL (obligatoire)
-				if (ereg("<link>([^<]*)</link>",$item[$i],$match))
-					$le_lien = addslashes(filtrer_entites($match[1]));
+				if (ereg($syndic_regexp['link1'],$item[$i],$match)) {
+					$link_match = $match[1].$match[2];
+					if (ereg($syndic_regexp['link2'], $link_match, $mat))
+						$le_lien = addslashes(filtrer_entites($mat[1]));
+				}
 				else if (ereg("<guid>([^<]*)</guid>",$item[$i],$match))
 					$le_lien = addslashes(filtrer_entites($match[1]));
 				else continue;
+
+				// Titre (obligatoire)
+				if (ereg("<title>(([^<]|<[^/]|</[^t]>|</t[^i]>)*)</title>",$item[$i],$match))
+					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[1])));
+				elseif (($syndic_version==0.3) AND (strlen($letitre)==0))
+					if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',$link_match,$mat))
+						$le_titre=$mat[1]; 
+				else continue;
+
 				// Date
 				$la_date = "";
-				if (ereg("<([[:alpha:]]+:)?date>([^<]*)</([[:alpha:]]+:)?date>",$item[$i],$match))
-					$la_date = $match[2];
-				else if (ereg("<pubDate>([^<]*)</pubDate>",$item[$i],$match))
+				if (ereg($syndic_regexp['date1'],$item[$i],$match))
+					$la_date = $match[1];
+				else if (ereg($syndic_regexp['date2'],$item[$i],$match))
 					$la_date = $match[1];
 				if ($GLOBALS['flag_strtotime'] AND $la_date) {
 					// http://www.w3.org/TR/NOTE-datetime
@@ -205,15 +331,22 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				}
 				if ($la_date < $now - 365 * 24 * 3600 OR $la_date > $now + 48 * 3600)
 					$la_date = $now;
+
 				// Auteur
-				if (ereg("<author>([^<]*)</author>",$item[$i],$match))
+				if (ereg($syndic_regexp['author1'],$item[$i],$mat)) {
+					if (ereg($syndic_regexp['author2'],$mat[1],$match))
+						$les_auteurs = addslashes(filtrer_entites($match[1]));
+				}
+				else if (ereg($syndic_regexp['authorbis'],$item[$i],$match))
 					$les_auteurs = addslashes(filtrer_entites($match[1]));
-				else if (ereg("<([[:alpha:]]+:)?creator>([^<]*)</([[:alpha:]]+:)?creator>",$item[$i],$match))
-					$les_auteurs = addslashes(filtrer_entites($match[2]));
-				else $les_auteurs = "";
+				else $les_auteurs = $les_auteurs_du_site;
+
 				// Description
-				if (ereg("<description[^>]*>(.*)</description>",$item[$i],$match))
-					$la_description = supprimer_tags(addslashes(filtrer_entites($match[1])));
+				if (ereg($syndic_regexp['description'],$item[$i],$match)) {
+					$la_description = couper(addslashes(supprimer_tags(filtrer_entites($match[2]))),300);
+				}
+				elseif (ereg($syndic_regexp['descriptionbis'],$item[$i],$match))
+					$la_description = couper(addslashes(supprimer_tags(filtrer_entites($match[2]))),300);
 				else $la_description = "";
 				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
 				$result_deja = spip_query($query_deja);
@@ -532,7 +665,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 						echo "&nbsp;";
 					}
 
-					echo "</td>";					
+					echo "</td>";
 					echo "</tr></n>";
 
 			}
