@@ -165,7 +165,9 @@ function echappe_html($letexte,$source) {
 
 			// ne pas mettre le <div...> s'il n'y a qu'une ligne
 			if (is_int(strpos($lecode,"\n")))
-				$lecode = nl2br("<div align='left' class='spip_code'>".$lecode."</div>");
+				$lecode = nl2br("<div align='left' class='spip_code' dir='ltr'>".$lecode."</div>");
+			else
+				$lecode = "<span class='spip_code' dir='ltr'>".$lecode."</span>";
 
 			$lecode = ereg_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
 			$lecode = ereg_replace("  ", " &nbsp;", $lecode);
@@ -177,7 +179,7 @@ function echappe_html($letexte,$source) {
 			$lecode = trim(entites_html($regs[8]));
 			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "<form><textarea cols='50' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre'>".$lecode."</textarea></form>";
+			$les_echap[$num_echap] = "<form><textarea cols='50' style='width: 100%;' rows='$total_lignes' wrap='off' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
 
 		}
 
