@@ -45,6 +45,7 @@ function creer_base() {
 		extra longblob NULL,
 		nom_site tinytext NOT NULL,
 		url_site VARCHAR(255) NOT NULL,
+		id_version int unsigned DEFAULT '0' NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
@@ -439,6 +440,39 @@ function creer_base() {
 		KEY id_forum (id_forum))";
 	$result = spip_query($query);
 
+
+	//
+	// Versionnage des articles
+	//
+
+	spip_log("creation des tables versionnage des articles");
+	$query = "CREATE TABLE spip_versions (
+		id_article bigint(21) NOT NULL,
+		id_version int unsigned DEFAULT '0' NOT NULL,
+		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		id_auteur bigint(21) NOT NULL,
+		titre_version text DEFAULT '' NOT NULL,
+		permanent char(3) NOT NULL,
+		chapo text NOT NULL,
+		texte text NOT NULL,
+		ps text NOT NULL,
+		extra text NOT NULL,
+
+		PRIMARY KEY (id_article, id_version),
+		KEY date (id_article, date),
+		KEY id_auteur (id_auteur))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_versions_fragments (
+		id_fragment int unsigned DEFAULT '0' NOT NULL,
+		version_min int unsigned DEFAULT '0' NOT NULL,
+		version_max int unsigned DEFAULT '0' NOT NULL,
+		id_article bigint(21) NOT NULL,
+		compress tinyint NOT NULL,
+		fragment longblob NOT NULL,
+
+		PRIMARY KEY (id_article, id_fragment, version_min))";
+	$result = spip_query($query);
 
 	//
 	// Gestion du site
@@ -1395,6 +1429,12 @@ function maj_base() {
 		maj_version (1.727);
 	}
 
+	// Ici version 1.7 officielle
+
+	if ($version_installee < 1.728) {
+		spip_query("ALTER TABLE spip_articles ADD id_version int unsigned DEFAULT '0' NOT NULL");
+		maj_version (1.728);
+	}
 
 	return true;
 }
