@@ -1044,6 +1044,31 @@ div.brouteur_rubrique_on div a {
 	z-index: 1;
 }
 
+/*
+ * Styles du calendrier
+ */
+ 
+div.navigation-calendrier {
+	background-color: <?php echo $couleur_foncee; ?>;
+	color: white;
+	font-family: verdana, arial, sans,sans-serif;
+	font-size: 14px;
+	padding: 2px;
+	-moz-border-radius-topleft: 8px;
+	-moz-border-radius-topright: 8px;
+}
+
+div.navigation-calendrier img {
+	border: 0px;
+	vertical-align: middle;
+	margin: 1px;
+}
+
+div.navigation-calendrier img.navigation-bouton-desactive {
+	-moz-opacity: 0.3;
+	filter: alpha(opacity=30);
+}
+
 
 /*
  * Styles generes par les raccourcis de mis en page
