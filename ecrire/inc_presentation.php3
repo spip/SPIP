@@ -1273,8 +1273,8 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	$icone .= "<img src='img_pack/rien.gif' width=$largeur height=1>";
 	$icone .= "</td></tr>";
 	if ($spip_display != 3){
-		$icone .= "<tr><td background='' align='center'>";
-		$icone .= "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+		$icone .= "<tr><td background='' align='center' style='	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);'>";
+		$icone .= "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='#505050'><b>$texte</b></font></a>";
 		$icone .= "</td></tr>";
 	}
 	$icone .= "</table>";

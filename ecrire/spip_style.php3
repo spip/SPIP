@@ -220,6 +220,7 @@ a.cellule-h table {
 	border: none;
 	padding: 0px;
 	margin: 0px;
+	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 }
 a.cellule-h td {
 	text-align: <?php echo $left; ?>;
@@ -469,6 +470,8 @@ a.boutonlien:hover {color:#454545; text-decoration: none;}
 a.boutonlien {color:#808080; text-decoration: none;}
 
 h3.spip {
+	margin-top : 40px;
+	margin-bottom : 40px;
 	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-weight: bold;
 	font-size: 115%;
