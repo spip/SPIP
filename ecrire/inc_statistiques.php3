@@ -83,12 +83,13 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			$kw_referer_host = $arr_engines[$cnt][0];
 			$keywords = ereg('=', $arr_engines[$cnt][1])
 				? ${str_replace('=', '', $arr_engines[$cnt][1])}:'';
-			if ((($kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
+			if ((($kw_referer_host == "Google" && ereg('[io]e=([-a-z0-9]+)', $query, $regs))
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
 				)) {
 				include_ecrire('inc_charsets.php3');
-				$keywords = unicode2charset(charset2unicode($keywords,'utf-8'));
+				if (!$cset = $regs[1]) $cset = 'utf-8';
+				$keywords = unicode2charset(charset2unicode($keywords,$cset));
 			}
 			$buffer["hostname"] = $kw_referer_host;
 		}
