@@ -89,7 +89,7 @@ function charger_squelette ($squelette) {
 	if (function_exists($nom)) return $nom;
 
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
-	spip_log($skel_code);
+
 	// Tester si le compilateur renvoie une erreur
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
