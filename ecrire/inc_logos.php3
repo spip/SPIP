@@ -4,9 +4,6 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_LOGOS")) return;
 define("_ECRIRE_INC_LOGOS", "1");
-global $flag_ecrire;
-define('_DIR_IMG', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/");
-
 
 function decrire_logo($racine) {
 	global $connect_id_auteur;

@@ -21,17 +21,16 @@ function test_ecrire($my_dir) {
 }
 
 //
-// teste les droits sur les repertoires
+// teste les droits sur les repertoires $test_dirs declares dans inc_version
 //
 
-$install = !@file_exists("ecrire/inc_connect.php3");
+// rajouter celui passer dans l'url ou celui du source (a l'installation)
 
 if ($test_dir)
 	$test_dirs[] = $test_dir;
 else {
-	$test_dirs = array("CACHE", "IMG", "ecrire/data");
-	if ($install)
-		$test_dirs[] = "ecrire";
+	if (!_FILE_CONNECT)
+	  $test_dirs[] = _DIR_RESTREINT;
 }
 
 unset($bad_dirs);
@@ -57,7 +56,7 @@ while (list(, $my_dir) = each($test_dirs)) {
 if ($bad_dirs OR $absent_dirs) {
 	install_debut_html();
 
-	if ($install) {
+	if (!_FILE_CONNECT) {
 		$titre = _T('dirs_preliminaire');
 		$continuer = ' '._T('dirs_commencer');
 	} else
@@ -94,7 +93,7 @@ if ($bad_dirs OR $absent_dirs) {
 	install_fin_html();
 
 } else {
-	if ($install)
+	if (!_FILE_CONNECT)
 		header("Location: ./ecrire/install.php3?etape=1");
 	else
 		header("Location: ./ecrire/");

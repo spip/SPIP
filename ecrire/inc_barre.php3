@@ -3,8 +3,6 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_BARRE")) return;
 define("_INC_BARRE", "1");
-global $flag_ecrire;
-define('_DIR_IMG_ICONES_BARRE', ($flag_ecrire ? "../" : "")."IMG/icones_barre/");
 
 //include_ecrire ("inc_layers.php3"); // (pour memoire)
 

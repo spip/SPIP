@@ -22,7 +22,7 @@ function debut_admin($action, $commentaire='') {
 		exit;
 	}
 	$fichier = fichier_admin($action);
-	if (@file_exists("data/$fichier")) {
+	if (@file_exists(_DIR_SESSIONS . $fichier)) {
 		spip_log ("Action admin: $action");
 		return true;
 	}
@@ -49,8 +49,8 @@ function debut_admin($action, $commentaire='') {
 
 function fin_admin($action) {
 	$fichier = fichier_admin($action);
-	@unlink("data/$fichier");
-	@rmdir("data/$fichier");
+	@unlink(_DIR_SESSIONS . $fichier);
+	@rmdir(_DIR_SESSIONS . $fichier);
 }
 
 

@@ -44,65 +44,6 @@ function insere_invalideur($a, $type, $fichier) {
 	}
 }
 
-// Regarde dans une table de nom de caches ceux verifiant une condition donnee
-// Les retire de cette table et de la table generale des caches
-// Si la condition est vide, c'est une simple purge generale
-
-
-//
-// Destruction des fichiers caches invalides
-//
-// NE PAS appeler ces fonctions depuis l'espace prive ! Elles ont besoin d'avoir
-// un acces direct au repertoire CACHE/
-
-// Securite : est sur que c'est un cache
-function retire_cache($cache) {
-	if ($GLOBALS['flag_ecrire']) return;
-	# spip_log("kill $cache ?");
-	if (preg_match(
-	"|^CACHE(/[0-9a-f])?(/[0-9]+)?/[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
-	$cache)) {
-		// supprimer le fichier (de facon propre)
-		supprimer_fichier($cache);
-		// et le fichier compagnon s'il existe
-		@unlink($cache.'.NEW');
-	} else
-		spip_log("Impossible de retirer $cache");
-}
-
-// Supprimer les caches marques "x"
-function retire_caches($chemin_prioritaire = '') {
-	if ($GLOBALS['flag_ecrire']) return;
-
-	// inutile de ramer si tout est invalide, on n'est pas tout seul
-	$max = 30;
-	// mais recuperer en priorite notre chemin
-	if ($chemin_prioritaire)
-		$order = "ORDER BY fichier != '$chemin_prioritaire'";
-
-	// faire le boulot de suppression
-	$q = spip_query("SELECT DISTINCT fichier FROM spip_caches
-	WHERE type='x' $order LIMIT 0,$max");
-	if ($n = @spip_num_rows($q)) {
-		spip_log ("Retire $n caches");
-		while (list($cache) = spip_fetch_array($q)) {
-			retire_cache($cache);
-			$supprimes[] = "'$cache'";
-		}
-		spip_query("DELETE FROM spip_caches WHERE "
-		.calcul_mysql_in('fichier', join(',',$supprimes)) );
-	}
-
-	// marque comme fait
-	if (count($supprimes) < $max) {
-		effacer_meta('invalider');
-		ecrire_metas();
-	} else {
-		ecrire_meta('invalider', 'oui');
-		ecrire_metas();
-	}
-}
-
 //
 // Invalider les caches lies a telle condition
 //
@@ -147,6 +88,7 @@ function applique_invalideur($depart) {
 			ecrire_meta('invalider', 'oui');
 			ecrire_metas();
 		} else {
+			include_local('inc-cache.php3');
 			retire_caches();
 		}
 	}

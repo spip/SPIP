@@ -161,12 +161,12 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // avec son code d'erreur
 //
 function erreur_requete_boucle($query, $id_boucle, $type) {
-	global $auteur_session, $HTTP_COOKIE_VARS, $dir_ecrire;
+
 	include_ecrire("inc_presentation.php3");
 
 	// Calmer le jeu avec MySQL (si jamais on est en saturation)
-	@touch($dir_ecrire.'data/mysql_out');	// pour spip_cron
-	@touch($dir_ecrire.'data/lock');		// lock hebergeur
+	@touch(_FILE_MYSQL_OUT);	// pour spip_cron
+	@touch(_FILE_LOCK);		// lock hebergeur
 	spip_log('Erreur MySQL: on limite les acces quelques minutes');
 	$GLOBALS['bouton_admin_debug'] = true;
 

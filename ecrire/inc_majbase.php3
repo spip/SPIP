@@ -4,8 +4,6 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_MAJBASE")) return;
 define("_ECRIRE_INC_MAJBASE", "1");
-# ATTENTION: ici DIR_IMG ne doit pas tenir compte du lieu d'appel 
-define('_DIR_IMG_ABSOLU', "IMG/");
 
 function maj_version ($version, $test = true) {
 	if ($test) {
@@ -356,8 +354,9 @@ function maj_base() {
 				ereg("-([0-9]+)\.(gif|jpg|png)$", $fichier, $match);
 				$id_type = intval($types[$match[2]]);
 				$num_img = $match[1];
-				$fichier = _DIR_IMG_ABSOLU . $fichier;
-				$taille = @filesize("../$fichier");
+				$fichier = _DIR_IMG . $fichier;
+				$taille = @filesize($fichier);
+				$fichier = substr('../', '', $fichier);
 				spip_query("INSERT INTO spip_documents (titre, id_type, fichier, mode, largeur, hauteur, taille) VALUES ".
 					"('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
 				$id_document = spip_insert_id();

@@ -4,8 +4,6 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_MATH")) return;
 define("_ECRIRE_INC_MATH", "1");
-define('_DIR_TeX', ($GLOBALS['flag_ecrire'] ? "../" : "")."IMG/TeX");
-
 
 //
 // Gestion du raccourci <math>...</math> en client-serveur

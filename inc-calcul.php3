@@ -62,7 +62,7 @@ function charger_squelette ($squelette) {
 	if (function_exists($nom))
 		return $nom;
 
-	$phpfile = 'CACHE/skel_' . $nom . '.php';
+	$phpfile = _DIR_CACHE . 'skel_' . $nom . '.php';
 
 	// le squelette est-il deja compile et perenne ?
 	if (!squelette_obsolete($phpfile, $sourcefile)

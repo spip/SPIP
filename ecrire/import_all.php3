@@ -13,14 +13,14 @@ function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
 	global $flag_gz;
 
-	$ok = @file_exists("data/$archive");
+	$ok = @file_exists(_DIR_SESSIONS . $archive);
 	$gz = $flag_gz;
 	$_fopen = ($gz) ? gzopen : fopen;
 	$_fread = ($gz) ? gzread : fread;
 	$buf_len = 1024; // la version doit etre dans le premier ko
 
 	if ($ok) {
-		$f = $_fopen("data/$archive", "rb");
+		$f = $_fopen(_DIR_SESSIONS . $archive, "rb");
 		$buf = $_fread($f, $buf_len);
 
 		if (ereg("<SPIP [^>]* version_base=\"([0-9\.]+)\" ", $buf, $regs)
@@ -40,7 +40,7 @@ if ($archive) {
 debut_admin($action, $commentaire);
 
 
-$archive = "data/$archive";
+$archive = _DIR_SESSIONS . $archive;
 
 ecrire_meta("debut_restauration", "debut");
 ecrire_meta("fichier_restauration", $archive);

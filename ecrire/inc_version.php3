@@ -204,26 +204,59 @@ $extension_squelette = 'html';
 
 
 //
-// *** Fin du parametrage ***
+// *** Fin du parametrage statique ***
 //
-
 
 $flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
 
-if ($flag_ecrire) {
-	if (@file_exists('mes_options.php3')) {
-		include('mes_options.php3');
-	}
-} else {
-	if (@file_exists('ecrire/mes_options.php3')) {
-		include('ecrire/mes_options.php3');
-	}
+# en fait flag_ecrire est une constante, equivalente a la nullite de:
+
+define('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
+
+if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
+	include(_DIR_RESTREINT . 'mes_options.php3');
 }
 
-// le repertoire des pieces rapportes
+// les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
-define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
+define('_DIR_IMG', (_DIR_RESTREINT ? "" : "../")."IMG/");
+define('_DIR_DOC', (_DIR_RESTREINT ? "" : "../")."IMG/");
+define('_DIR_CACHE', (_DIR_RESTREINT ? "" : "../")."CACHE/");
+define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
 
+// exemples de redefinition possible, 
+// SOUS RESERVE QUE php.ini N'AIT PAS pas openbasedir=. !!!!!!
+// il est recommande de mettre les deux premiers en dehors de l'arbo http
+// pour _DIR_DOC, on ne peut le faire qu'en configuration securisee
+// pour _DIR_IMG, NE PAS LE METTRE en dehors de l'arborescence http
+
+//define('_DIR_CACHE', "/tmp/c/");
+//define('_DIR_SESSIONS', "/tmp/s/");
+
+//define('_DIR_DOC', "/tmp/d/");
+
+// globale des repertoires devant etre accessibles en ecriture
+// (inutile de mettre leurs sous-repertoires)
+
+$test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
+
+// les fichiers qu'on y met, entre autres,
+
+define('_FILE_LOCK', _DIR_SESSIONS . 'lock');
+define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
+define('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
+define('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
+
+define('_FILE_CONNECT', (@file_exists(_DIR_RESTREINT . "inc_connect.php3") ?
+			(_DIR_RESTREINT . "inc_connect.php3") : ''));
+
+// et qq sous-repertoires
+
+define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
+define('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
+define('_DIR_TeX', _DIR_IMG . "TeX/");
+
+// define('_DIR_VIGNETTES', _DIR_IMG . "vignettes/"); a finaliser
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -405,22 +438,19 @@ function include_local($file) {
 }
 
 function include_ecrire($file) {
-	if (!$GLOBALS['flag_ecrire']) $file = "ecrire/$file";
+	$file = _DIR_RESTREINT . $file;
 	if ($GLOBALS['included_files'][$file]) return;
 	include($file);
 	$GLOBALS['included_files'][$file] = 1;
 }
 
-
-$flag_connect = @file_exists(($flag_ecrire ? "" : "ecrire/")."inc_connect.php3");
-
 function spip_query($query) {
-	if ($GLOBALS['flag_connect']) {
+	if (_FILE_CONNECT) {
 		include_ecrire("inc_connect.php3");
 		if (!$GLOBALS['db_ok'])
 			return;
 		if ($GLOBALS['spip_connect_version'] < 0.1) {
-			if (!$GLOBALS['flag_ecrire']) {
+			if (!ESPACE_RESTREINT) {
 				$GLOBALS['db_ok'] = false;
 				return;
 			}
@@ -697,12 +727,12 @@ function lire_meta_maj($nom) {
 if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
 	unset($meta); # parano
 
-	if (lire_fichier ($dir_ecrire.'data/meta_cache.php3', $contenu,
+	if (lire_fichier (_DIR_SESSIONS . 'meta_cache.php3', $contenu,
 	array('phpcheck' => 'oui')))
 		eval('?'.'>'.$contenu);
 
 	// en cas d'echec refaire le fichier
-	if (!is_array($meta) AND @file_exists($dir_ecrire.'inc_connect.php3')) {
+	if (!is_array($meta) AND _FILE_CONNECT) {
 		include_ecrire('inc_meta.php3');
 		lire_metas();
 		ecrire_metas();
@@ -776,7 +806,7 @@ function spip_log($message, $logname='spip') {
 	$message = date("M d H:i:s")." $ip $pid "
 		.ereg_replace("\n*$", "\n", $message);
 
-	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/$logname.log";
+	$logfile = _DIR_SESSIONS . $logname . '.log';
 	if (@filesize($logfile) > 10*1024) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
@@ -810,9 +840,9 @@ function timeout($lock=false, $action=true, $connect_mysql=true) {
 	global $db_ok, $dir_ecrire;
 
 	// Fichier lock hebergeur ?  (age maxi, 10 minutes)
-	$timeoutfile = $dir_ecrire.'data/lock';
-	if (@file_exists($timeoutfile)
-	AND ((time() - @filemtime($timeoutfile)) < 600))
+
+	if (@file_exists(_FILE_LOCK)
+	AND ((time() - @filemtime(_FILE_LOCK)) < 600))
 		return $ok = false;
 
 	// Ne rien faire ?

@@ -5,10 +5,6 @@
 if (defined("_ECRIRE_INC_DOCUMENTS")) return;
 define("_ECRIRE_INC_DOCUMENTS", "1");
 
-global $flag_ecrire;
-define('_DIR_IMG_ICONES', ($flag_ecrire ? "../" : "")."IMG/icones/");
-
-
 include_ecrire ("inc_admin.php3");
 
 //

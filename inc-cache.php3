@@ -21,7 +21,7 @@ function nettoyer_uri() {
 //
 // Le format souhaite : "CACHE/a/(8400/)bout-d-url.md5(.gz)"
 // Attention a modifier simultanement le sanity check de
-// la fonction retire_cache() dans ecrire/inc_invalideur.php3
+// la fonction retire_cache()
 //
 function generer_nom_fichier_cache($contexte='', $fond='') {
 	global $delais;
@@ -55,17 +55,70 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
 	// Sous-repertoires 0...9a..f/
-	$subdir = creer_repertoire('CACHE', substr($md_cache, 0, 1));
+	$subdir = creer_repertoire(_DIR_CACHE, substr($md_cache, 0, 1));
 	// Sous-sous-repertoires delais/ (inutile avec l'invalidation par 't')
 	# $subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
-	verifier_htaccess('CACHE');
+	verifier_htaccess(_DIR_CACHE);
 
 	$gzip = $flag_gz && $compresser_cache ? '.gz' : '';
 
-	return 'CACHE/' . $subdir.$subdir2.$fichier_cache.$gzip;
+	return _DIR_CACHE . $subdir.$subdir2.$fichier_cache.$gzip;
 }
 
+//
+// Destruction des fichiers caches invalides
+//
+// NE PAS appeler ces fonctions depuis l'espace prive 
+// car openbase_dir peut leur interdire l'acces au repertoire de cache
+
+// Securite : est sur que c'est un cache
+function retire_cache($cache) {
+	if ($GLOBALS['flag_ecrire']) return;
+	# spip_log("kill $cache ?");
+	if (preg_match('|^' . _DIR_CACHE .
+		"([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
+		       $cache)) {
+		// supprimer le fichier (de facon propre)
+		supprimer_fichier($cache);
+		// et le fichier compagnon s'il existe
+		@unlink($cache.'.NEW');
+	} else
+		spip_log("Impossible de retirer $cache");
+}
+
+// Supprimer les caches marques "x"
+function retire_caches($chemin_prioritaire = '') {
+	if ($GLOBALS['flag_ecrire']) return;
+
+	// inutile de ramer si tout est invalide, on n'est pas tout seul
+	$max = 30;
+	// mais recuperer en priorite notre chemin
+	if ($chemin_prioritaire)
+		$order = "ORDER BY fichier != '$chemin_prioritaire'";
+
+	// faire le boulot de suppression
+	$q = spip_query("SELECT DISTINCT fichier FROM spip_caches
+	WHERE type='x' $order LIMIT 0,$max");
+	if ($n = @spip_num_rows($q)) {
+		spip_log ("Retire $n caches");
+		while (list($cache) = spip_fetch_array($q)) {
+			retire_cache($cache);
+			$supprimes[] = "'$cache'";
+		}
+		spip_query("DELETE FROM spip_caches WHERE "
+		.calcul_mysql_in('fichier', join(',',$supprimes)) );
+	}
+
+	// marque comme fait
+	if (count($supprimes) < $max) {
+		effacer_meta('invalider');
+		ecrire_metas();
+	} else {
+		ecrire_meta('invalider', 'oui');
+		ecrire_metas();
+	}
+}
 
 //
 // Doit-on recalculer le cache ?
@@ -117,6 +170,20 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 				purger_repertoire($chemin);
 	}
 	closedir($handle);
+}
+
+function purger_cache()
+{
+	spip_log('vider le cache');
+	include_ecrire('inc_invalideur.php3');
+	supprime_invalideurs();
+	purger_repertoire(_DIR_CACHE, 0);
+}
+
+function purger_squelettes()
+{
+	spip_log('effacer les squelettes compiles');
+	purger_repertoire(_DIR_CACHE, 0, '^skel_');
 }
 
 

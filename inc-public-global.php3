@@ -126,7 +126,6 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {
-		include_ecrire('inc_invalideur.php3');
 		include_ecrire('inc_meta.php3');
 		lire_metas();
 		if (lire_meta('invalider'))
@@ -288,13 +287,13 @@ function admin_page($cached, $texte) {
 // (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
 	
-	verifier_htaccess('ecrire/data');
-	if (!@file_exists('ecrire/data/cron.lock')
-	OR (time() - @filemtime('ecrire/data/cron.lock') > 5)) {
+	verifier_htaccess(_DIR_SESSIONS);
+	if (!@file_exists(_FILE_CRON_LOCK)
+	OR (time() - @filemtime(_FILE_CRON_LOCK) > 5)) {
 
 		// Si MySQL est out, laisser souffler
-		if (!@file_exists('ecrire/data/mysql_out')
-		OR (time() - @filemtime('ecrire/data/mysql_out') > 300)) {
+		if (!@file_exists(_FILE_MYSQL_OUT)
+		OR (time() - @filemtime(_FILE_MYSQL_OUT) > 300)) {
 #		  spip_log("cron");
 			include_ecrire('inc_cron.php3');
 
