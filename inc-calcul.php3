@@ -429,6 +429,7 @@ function calculer_page_globale($fond) {
 	global $contexte;
 	global $fichier_requete;
 	global $id_rubrique_fond;
+	global $date;
 
 	$contexte = '';
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
@@ -439,8 +440,18 @@ function calculer_page_globale($fond) {
 			$contexte[$val] = (int) $GLOBALS[$val];
 		}
 	}
-	if ($GLOBALS["date"]) {
-		$contexte["date"] = $GLOBALS["date"];
+
+	// mettre la date eventuellement passee en globale au format MySQL
+	if ($date) {
+		if (ereg("^[12][0-9]{3}$", $date))
+			$date .= "-01-01";
+		else if (ereg("^[12][0-9]{3}[/-][01]?[0-9]$", $date))
+			$date = ereg_replace("/","-",$date)."-01";
+		else if ($GLOBALS['flag_strtotime']) {
+			if ($date_str = strtotime($date))
+				$date = date("Y-m-d H:i:s", $date_str);
+		}
+		$contexte['date'] = $date;
 	}
 
 	// Calcul de la rubrique associee a la requete

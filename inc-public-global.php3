@@ -69,10 +69,6 @@ if ($ajout_forum) {
 	ajout_forum();
 }
 
-
-// date relative a l'envoi du mail nouveautes
-$GLOBALS['date_nouv'] = date('Y-m-d H:i:s', lire_meta('majnouv'));
-
 if (!$use_cache) {
 	$lastmodified = time();
 	if (($lastmodified - lire_meta('date_purge_cache')) > 24 * 3600) {
@@ -236,6 +232,7 @@ if (!$timeout AND lire_meta('quoi_de_neuf') == 'oui' AND $jours_neuf = lire_meta
 		unset ($sujet_nouveautes);
 		$fond = 'nouveautes';
 		$delais = 0;
+		$contexte_inclus = array('date' => date('Y-m-d H:i:s', $majnouv));
 		include(inclure_fichier($fond, $delais, $contexte_inclus));
 
 		// envoi
