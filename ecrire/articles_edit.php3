@@ -218,9 +218,6 @@ function enfant($leparent){
 		for ($count=1;$count<$i;$count++){
 			$espace.="&nbsp;&nbsp;&nbsp; ";
 		}
-/*		if ($i > 3) $style .= "color: #666666;";
-		if ($i > 4) $style .= "font-style: italic;";
-		if ($i < 3) $style .= "font-weight:bold; ";*/
 
 		switch ($i) {
 		case 1:

@@ -190,9 +190,6 @@ debut_cadre_relief("forum-interne-24.gif");
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Mode de fonctionnement par d&eacute;faut des forums publics</FONT></B> ".aide ("confforums")."</TD></TR>";
 
-
-/*	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#000000'>D&eacute;sactiver les forums publics</FONT></B></TD></TR>"; */
-
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
 	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 	if ($forums_publics=="non") {
@@ -201,7 +198,7 @@ debut_cadre_relief("forum-interne-24.gif");
 	} else {
 		$checked = '';
 		$gras = ''; $fingras = '';
-	};
+	}
 	echo "<INPUT$checked TYPE='radio' NAME='forums_publics' VALUE='non' id='forums_non'>";
 	echo " $gras<label for='forums_non'>D&eacute;sactiver l'utilisation des forums publics. Les forums publics pourront &ecirc;tre autoris&eacute;s au cas par cas sur les articles ; ils seront interdits sur les rubriques, br&egrave;ves, etc. </label>$fingras ";
 	echo "</TD></TR>";
@@ -220,7 +217,7 @@ debut_cadre_relief("forum-interne-24.gif");
 	} else {
 		$checked = '';
 		$gras = ''; $fingras = '';
-	};
+	}
 	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='posteriori' id='forums_posteriori'>";
 	echo " $gras<label for='forums_posteriori'>Mod&eacute;ration &agrave; post&eacute;riori (les contributions s'affichent imm&eacute;diatement en ligne, les administrateurs peuvent les supprimer ensuite).</label>$fingras\n<br>";
 
@@ -230,7 +227,7 @@ debut_cadre_relief("forum-interne-24.gif");
 	} else {
 		$checked = '';
 		$gras = ''; $fingras = '';
-	};
+	}
 	echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='priori' id='forums_priori'>";
 	echo " $gras<label for='forums_priori'>Mod&eacute;ration &agrave; priori (les contributions ne s'affichent publiquement qu'apr&egrave;s validation par les administrateurs).</label>$fingras ";
 		
@@ -242,7 +239,7 @@ debut_cadre_relief("forum-interne-24.gif");
 		} else {
 			$checked = '';
 			$gras = ''; $fingras = '';
-		};
+		}
 		echo "<INPUT TYPE='radio'$checked NAME='forums_publics' VALUE='abonnement' id='forums_abonnement'>";
 		echo " $gras<label for='forums_abonnement'>Sur abonnement (les utilisateurs doivent fournir leur adresse email avant de pouvoir poster des contributions).</label>$fingras ";
 	}

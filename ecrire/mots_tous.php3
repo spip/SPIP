@@ -193,18 +193,12 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 	$acces_comite = $row_groupes['1comite'];
 	$acces_forum = $row_groupes['6forum'];
 
-	$ifond=0;
-	
 	// Afficher le titre du groupe
 	debut_cadre_enfonce("groupe-mot-24.gif");
 	echo "<p><table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
 	echo "<tr><td bgcolor='$couleur_foncee' colspan=2><font face='Verdana,Arial,Helvetica,sans-serif' size=3 color='#ffffff'><b>$titre_groupe</b>";
 	echo "</font></td>";
 	echo "<td bgcolor='$couleur_foncee' align='right'><font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
-	/*if ($connect_statut == "0minirezo"){
-		echo " [<a href=\"mots_type.php3?id_groupe=$id_groupe\">modifier</a>]";
-	}else echo "&nbsp;";
-	*/
 	echo "</font></td></tr>";
 
 
@@ -247,119 +241,91 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 			$type_mot = $row['type'];
 			$descriptif_mot = $row['descriptif'];
 
-			if ($connect_statut=="0minirezo") $aff_articles="prepa,prop,publie,refuse";
-			else $aff_articles="prop,publie";
+			if ($connect_statut=="0minirezo")
+				$aff_articles="prepa,prop,publie,refuse";
+			else
+				$aff_articles="prop,publie";
 
 			$query2 = "SELECT COUNT(*) FROM spip_mots_articles AS lien, spip_articles AS article WHERE lien.id_mot=$id_mot AND article.id_article=lien.id_article AND FIND_IN_SET(article.statut,'$aff_articles')>0 AND article.statut!='refuse'";
 			$result2 = spip_query($query2);
 			list($nombre_mots) = mysql_fetch_array($result2);
 
-
 			if ($nombre_articles>0) $nombre_articles++;
 			
-			if($id_mot!=$conf_mot){
-				if ($ifond==0){
-					$ifond=1;
-					$couleur="#FFFFFF";
-				}else{
-					$ifond=0;
-					$couleur="$couleur_claire";
-				}				
+			if ($id_mot!=$conf_mot) {
+				$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
+				$ifond = $ifond ^ 1;
+
 				echo "<TR BGCOLOR='$couleur'>";
 				echo "<TD>";
-				if ($connect_statut == "0minirezo" OR $nombre_mots>0){
+				if ($connect_statut == "0minirezo" OR $nombre_mots>0)
 					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'><img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'></A>";
-				}else{
+				else
 					echo "<img src='img_pack/petite-cle.gif' alt='X' width='23' height='12' border='0'>";
-				}
 				echo "</TD>";
 				echo "<TD WIDTH=\"50%\">";
 				echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
-				if ($connect_statut == "0minirezo" OR $nombre_mots>0){
+				if ($connect_statut == "0minirezo" OR $nombre_mots>0)
 					echo "<A HREF='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3'>$titre_mot</A>";
-				}else{
+				else
 					echo "$titre_mot";
-				}
 				echo "</FONT></TD>";
 				echo "<TD WIDTH=\"50%\" ALIGN='right'>";
 				echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>";
 
 
-		
-		$texte_lie="";
-		if ($nb_articles[$id_mot] == 1) {
-			$texte_lie[] = "1 article";
-		} else if ($nb_articles[$id_mot] > 1) {
-			$texte_lie[] = $nb_articles[$id_mot]." articles";
-		} 
-		if ($nb_breves[$id_mot] == 1) {
-			$texte_lie[] = "1 br&egrave;ve";
-		} else if ($nb_breves[$id_mot] > 1) {
-			$texte_lie[] = $nb_breves[$id_mot]." br&egrave;ves";
-		} 
-		if ($nb_sites[$id_mot] == 1) {
-			$texte_lie[] = "1 site";
-		} else if ($nb_sites[$id_mot] > 1) {
-			$texte_lie[] = $nb_sites[$id_mot]." sites";
-		}
-		if ($nb_rubriques[$id_mot] == 1) {
-			$texte_lie[] = "1 rubrique";
-		} else if ($nb_rubriques[$id_mot] > 1) {
-			$texte_lie[] = $nb_rubriques[$id_mot]." rubriques";
-		}
-		if (is_array($texte_lie)) $texte_lie = join($texte_lie,", ");
+				$texte_lie = array();
 
+				if ($nb_articles[$id_mot] == 1)
+					$texte_lie[] = "1 article";
+				else if ($nb_articles[$id_mot] > 1)
+					$texte_lie[] = $nb_articles[$id_mot]." articles";
 
-		echo $texte_lie;
+				if ($nb_breves[$id_mot] == 1)
+					$texte_lie[] = "1 br&egrave;ve";
+				else if ($nb_breves[$id_mot] > 1)
+					$texte_lie[] = $nb_breves[$id_mot]." br&egrave;ves";
+
+				if ($nb_sites[$id_mot] == 1)
+					$texte_lie[] = "1 site";
+				else if ($nb_sites[$id_mot] > 1)
+					$texte_lie[] = $nb_sites[$id_mot]." sites";
+
+				if ($nb_rubriques[$id_mot] == 1)
+					$texte_lie[] = "1 rubrique";
+				else if ($nb_rubriques[$id_mot] > 1)
+					$texte_lie[] = $nb_rubriques[$id_mot]." rubriques";
+
+				echo $texte_lie = join($texte_lie,", ");
 				
-				/*
-				if ($nombre_mots=="1") {
-					echo "$nombre_mots article  ";
-				}
-				else if ($nombre_mots) {
-					echo "$nombre_mots articles  ";
-				}
-				*/
-
-				if ($connect_statut=="0minirezo"){
+				if ($connect_statut=="0minirezo") {
 					echo " &nbsp;&nbsp;&nbsp;&nbsp; ";
 					echo "<FONT SIZE=1>[<A HREF='mots_tous.php3?conf_mot=$id_mot'>supprimer&nbsp;ce&nbsp;mot</A>]</FONT>";
-				} else echo "&nbsp;";
+				} else
+					echo "&nbsp;";
 
-				//echo "<IMG SRC='img_pack/rien.gif' WIDTH=100 HEIGHT=1 BORDER=0>";
 				echo "</FONT>";
 				echo "</TD>";
 				echo "</TR>\n";
 			}
 		}
 
-	echo "</table>";
-	fin_cadre_relief();
+		echo "</table>";
+		fin_cadre_relief();
 	
-	$supprimer_groupe = false;
-
-
+		$supprimer_groupe = false;
 	} 
-	else {
-		
-		if ($connect_statut =="0minirezo"){
+	else
+		if ($connect_statut =="0minirezo")
 			$supprimer_groupe = true;
-			//echo "<A HREF='mots_tous.php3?supp_group=$id_groupe'>Supprimer ce groupe</A>";
-		}
-	}
-	
-	
-	
-	
-	
-	
+
 	if ($connect_statut =="0minirezo" AND !$conf_mot){
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
 		echo "<tr>";
 		echo "<td>";
 		icone("Modifier ce groupe de mots", "mots_type.php3?id_groupe=$id_groupe", "groupe-mot-24.gif", "edit.gif");
 		echo "</td>";
-		if ($supprimer_groupe){
+		if ($supprimer_groupe) {
 			echo "<td>";
 			icone("Supprimer ce groupe", "mots_tous.php3?supp_group=$id_groupe", "groupe-mot-24.gif", "supprimer.gif");
 			echo "</td>";
@@ -369,19 +335,15 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
 		echo "</td></tr></table>";
 	}	
+
 	fin_cadre_enfonce();
-
 }
-
-
 
 if ($connect_statut =="0minirezo" AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
 	icone("Cr&eacute;er un nouveau groupe de mots", "mots_type.php3?new=oui", "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";
 }
-
-
 
 fin_page();
 
