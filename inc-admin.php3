@@ -56,7 +56,7 @@ function afficher_boutons_admin() {
 	echo "<input type='submit' class='spip_bouton' name='submit' value=\"".attribut_html(_T('admin_recalculer')).$pop."\">";
 	echo "</form>\n";
 
-	if (lire_meta("activer_statistiques") != "non" AND $id_article) {
+	if (lire_meta("activer_statistiques") != "non" AND $id_article AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
 		include_local ("inc-stats.php3");
 		afficher_raccourci_stats($id_article);
 	}
