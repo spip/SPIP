@@ -41,12 +41,12 @@ function vignette_par_defaut($type_extension, $size=true) {
 function vignette_previsu_ou_par_defaut($fichier, $extension) {
 	// si pas de vignette, utiliser la vignette par defaut
 	// ou essayer de creer une previsu si permis
- 	 global $flag_ecrire;
+
 	$formats = ','.lire_meta('formats_graphiques').',';
 	if ((strpos($formats, ",$extension,") === false) || (lire_meta("creer_preview") != 'oui')) {
 		return vignette_par_defaut($extension ? $extension : 'txt', true);
 	} else {
-		return array(($flag_ecrire?'../':'').'spip_image.php3?vignette='.rawurlencode($fichier), 0, 0);
+		return array(_DIR_PREFIX1 . 'spip_image.php3?vignette='.rawurlencode($fichier), 0, 0);
 	}
 }
 
@@ -199,7 +199,6 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 function integre_image($id_document, $align, $type_aff) {
 	global $id_doublons;
-	global $flag_ecrire;
 
 	$id_doublons['documents'] .= ",$id_document";
 
@@ -230,13 +229,13 @@ function integre_image($id_document, $align, $type_aff) {
 									 "SELECT largeur,hauteur,fichier FROM spip_documents WHERE id_document = $id_vignette"))) {
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
-				$path = ($flag_ecrire?'../':'') . $row_vignette['fichier'];
+				$path = _DIR_PREFIX1 . $row_vignette['fichier'];
 				// si le fichier correspondant n'existe pas
 				// et qu'on peut ecrire 
 				// (espace public ou espace prive+openbasedir)
 				// regenerer la vignette
 				if (!@file_exists($path) AND
-				(!$flag_ecrire OR !@is_dir(_DIR_IMG_ICONES)))
+				(_DIR_RESTREINT OR !@is_dir(_DIR_IMG_ICONES)))
 					$url_fichier_vignette = '';
 				else 
 				  $url_fichier_vignette = generer_url_document($id_vignette);

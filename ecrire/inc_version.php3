@@ -9,26 +9,9 @@ define("_ECRIRE_INC_VERSION", "1");
 
 define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
-define('_DIR_RESTREINT',
-       (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
-/*
-if ($d = urldecode($GLOBALS['HTTP_GET_VARS']['var_install']))
-  {
-    $d = substr($d,0,strrpos($d,'/')+1);
-    if (!ereg('^(.*)' . _DIR_RESTREINT_ABS . '$', $d))
-      $d .= _DIR_RESTREINT_ABS;
-    if (!@file_exists($d . 'mes_options.php3'))
-      {	
-	header("Location: " . _DIR_RESTREINT . "install.php3?var_install=$d");
-	exit;
-      }
-    define('_FILE_OPTIONS', $d . 'mes_options.php3');
-    define('_FILE_CONNECT_INS', ($d . "inc_connect"));
-    } else  */ {
-  define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
-  define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
- }
-
+define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
+define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
+define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 define_once('_FILE_CONNECT',
 	(@file_exists(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
 		(_FILE_CONNECT_INS . _EXTENSION_PHP)
@@ -130,11 +113,11 @@ feed_post_files('HTTP_POST_FILES');
 // 	*** Parametrage par defaut de SPIP ***
 //
 // Ces parametres d'ordre technique peuvent etre modifies
-// dans ecrire/mes_options.php3. Les valeurs specifiees
+// dans FILE_OPTIONS Les valeurs specifiees
 // dans ce dernier fichier remplaceront automatiquement
 // les valeurs ci-dessous.
 //
-// Pour creer ecrire/mes_options.php3 : recopier simplement
+// Pour creer _FILE_OPTIONS : recopier simplement
 // les lignes ci-dessous, et ajouter le marquage de debut et
 // de fin de fichier PHP ("< ?php" et "? >", sans les espaces)
 //
@@ -189,10 +172,10 @@ $mysql_rappel_connexion = true;
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
 
-// faut-il souligner en gris, dans ecrire/articles.php3, les espaces insecables ?
+// faut-il souligner en gris, dans articles.php3, les espaces insecables ?
 $activer_revision_nbsp = false;
 
-// gestion des extras (voir ecrire/inc_extra.php3 pour plus d'informations)
+// gestion des extras (voir inc_extra.php3 pour plus d'informations)
 $champs_extra = false;
 $champs_extra_proposes = false;
 
@@ -248,7 +231,7 @@ $extension_squelette = 'html';
 @umask(0);
 
 //
-// Définition des repertoires standards, mes_options ayant priorite
+// Définition des repertoires standards, _FILE_OPTIONS ayant priorite
 //
 
 function define_once ($constant, $valeur) {
@@ -261,6 +244,7 @@ if (@file_exists(_FILE_OPTIONS)) {
 
 define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
 define_once('_DIR_PREFIX2', _DIR_RESTREINT);
+define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
@@ -287,7 +271,7 @@ if (@file_exists(_DIR_SESSIONS . 'inc_plugins.php3')) {
 //define('_DIR_SESSIONS', "/tmp/s/");
 
 //define('_DIR_DOC', "/tmp/d/");
-
+//define('_DIR_INCLUDE', _DIR_RESTREINT  ? 'Include/' : '../Include/');
 // globale des repertoires devant etre accessibles en ecriture
 // (inutile de mettre leurs sous-repertoires)
 
@@ -318,10 +302,11 @@ define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 define_once('_ACCESS_FILE_NAME', '.htaccess');
 define_once('_AUTH_USER_FILE', '.htpasswd');
 
-# negation d'une constante. A remplacer.
+# obsoletes: utiliser les constantes ci-dessus.
+# Conserver pour compatibité vieilles contrib uniquement
 
 $flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
-
+$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
@@ -503,7 +488,6 @@ function verifier_htaccess($rep) {
 // Enregistrement des evenements
 //
 function spip_log($message, $logname='spip') {
-	global $flag_ecrire;
 
 	$pid = '(pid '.@getmypid().')';
 	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
@@ -512,8 +496,7 @@ function spip_log($message, $logname='spip') {
 		.ereg_replace("\n*$", "\n", $message);
 
 	$logfile = _DIR_SESSIONS . $logname . '.log';
-#	$logfile = "/tmp/spip.log";
-	if (@filesize($logfile) > 10*1024) {
+	if (@file_exists($logfile) && (@filesize($logfile) > 10*1024)) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
 	}
@@ -549,7 +532,6 @@ if (!$REQUEST_URI) {
 	if (!strpos($REQUEST_URI, '?') && $QUERY_STRING)
 		$REQUEST_URI .= '?'.$QUERY_STRING;
 }
-$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
@@ -562,19 +544,28 @@ if (!$PATH_TRANSLATED) {
 // Gestion des inclusions et infos repertoires
 //
 
-$included_files = '';
+$included_files = array();
 
 function include_local($file) {
 	if ($GLOBALS['included_files'][$file]) return;
-	include($file);
 	$GLOBALS['included_files'][$file] = 1;
+	include($file);
 }
 
 function include_ecrire($file) {
-	$file = _DIR_RESTREINT . $file;
+	$file = _DIR_INCLUDE . $file;
 	if ($GLOBALS['included_files'][$file]) return;
-	include($file);
 	$GLOBALS['included_files'][$file] = 1;
+	include($file);
+}
+
+function include_lang($file) {
+	$file = _DIR_LANG . $file;
+	spip_log("include $file");
+	if ($GLOBALS['included_files'][$file]) return;
+	$GLOBALS['included_files'][$file] = 1;
+	include($file);
+	spip_log("fin d'inclusion de $file");
 }
 
 function include_plug($file) {
@@ -819,7 +810,7 @@ class Link {
 			foreach ($vars as $name => $value) {
 				// items supprimes
 				if (!preg_match('/^('.
-				($GLOBALS['flag_ecrire'] ?
+				(!_DIR_RESTREINT ?
 					'|lang|set_options|set_couleur|set_disp|set_ecran':
 					'|submit|recalcul')
 				. ')$/i', $name)) {
@@ -1174,13 +1165,19 @@ function taches_de_fond() {
 	verifier_htaccess(_DIR_SESSIONS);
 	if (!@file_exists(_FILE_CRON_LOCK)
 	    OR (time() - @filemtime(_FILE_CRON_LOCK) > 30)) {
-
+		@touch(_FILE_CRON_LOCK);
 		// Si MySQL est out, laisser souffler
 		if (!@file_exists(_FILE_MYSQL_OUT)
 		OR (time() - @filemtime(_FILE_MYSQL_OUT) > 300)) {
+			include(_FILE_CONNECT);
+			if (!$GLOBALS['db_ok']) {
+				@touch(_FILE_MYSQL_OUT);
+				spip_log('pas de connexion DB pour taches de fond (cron)');
+			} else {
 			include_ecrire('inc_cron.php3');
 #			spip_log($GLOBALS['PHP_SELF'] . ": taches de fond");
 			spip_cron();
+			}
 		}
 	}
 }
@@ -1215,7 +1212,7 @@ function debut_entete($title)
 	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
 	  "<head>\n" .
-	  "<base href='$base' />\n" .
+#	  "<base href='$base' />\n" .
 	  "<title>$title</title>\n" .
 	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset' />\n";
 }

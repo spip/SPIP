@@ -91,7 +91,7 @@ function ecrire_fichier ($fichier, $contenu) {
 	if (!$ok)
 		spip_log("echec ecriture fichier $fichier");
 
-	#spip_log("$fputs $fichier ".spip_timer('ecrire_fichier'));
+	spip_log("$fputs $fichier ".spip_timer('ecrire_fichier'));
 
 	// liberer le verrou et fermer le fichier
 	@flock($fp, LOCK_UN);

@@ -218,7 +218,7 @@ function optimiser_base() {
 		if ($documents_poubelle) {
 			$documents_poubelle = join(",", $documents_poubelle);
 
-			$fichier = $GLOBALS['dir_ecrire'].'data/.poubelle';
+			$fichier = _DIR_RESTEINT_ABS .'data/.poubelle';
 			if (!$f = @fopen($fichier, 'a')) {
 				spip_log("impossible d'ecrire dans $fichier !");
 				@unlink($fichier);	// on essaie de forcer

@@ -1,7 +1,7 @@
 <?php
 
 include ("inc.php3");
-include ("inc_statistiques.php3");
+include_ecrire("inc_statistiques.php3");
 
 
 if ($id_article = intval($id_article)){

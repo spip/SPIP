@@ -13,15 +13,15 @@ include_ecrire ("inc_calendrier.php");
 // Aide
 //
 function aide($aide='') {
-	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $dir_ecrire, $spip_display;
+	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $spip_display;
 
 	if (!$aide OR $spip_display == 4) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=\"".$dir_ecrire
-	."aide_index.php3?aide=$aide&amp;var_lang=$spip_lang\" target=\"spip_aide\" ".
+	return "&nbsp;&nbsp;<a class='aide' href=\"". _DIR_RESTREINT .
+	  "aide_index.php3?aide=$aide&amp;var_lang=$spip_lang\" target=\"spip_aide\" ".
 		"onclick=\"javascript:window.open(this.href, 'spip_aide', 'scrollbars=yes, ".
 		"resizable=yes, width=740, height=580'); return false;\"><img ".
-		"src=\"".$dir_ecrire."img_pack/aide.gif\" alt=\""._T('info_image_aide')."\" ".
+		"src=\"". _DIR_IMG_PACK . "aide.gif\" alt=\""._T('info_image_aide')."\" ".
 		"title=\""._T('titre_image_aide')."\" width=\"12\" height=\"12\" border=\"0\" ".
 		"align=\"middle\"></a>";
 }
@@ -1485,7 +1485,6 @@ function bouton($titre,$lien) {
 
 function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
-	global $flag_ecrire;
 	global $spip_lang_rtl, $spip_lang_left, $spip_display;
 	global $mode;
 	global $connect_statut, $connect_toutes_rubriques;
@@ -1514,8 +1513,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 			echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' />";
 	}
 
-	echo '<link rel="stylesheet" type="text/css" href="';
-	if (!$flag_ecrire) echo 'ecrire/';
+	echo "\n",'<link rel="stylesheet" type="text/css" href="', _DIR_RESTREINT;
 	$link = new Link('spip_style.php3');
 	$link->addVar('couleur_claire', $couleur_claire);
 	$link->addVar('couleur_foncee', $couleur_foncee);

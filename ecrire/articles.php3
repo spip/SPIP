@@ -230,7 +230,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 
 	// Stockage des versions : creer une premier version si non-existante
 	if ($articles_versions AND $new != 'oui') {
-		include_ecrire("lab_revisions.php");
+		include("lab_revisions.php");
 		spip_log("version initiale de l'article $id_article");
 		$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0,1";
 		if (!spip_num_rows(spip_query($query))) {
@@ -265,7 +265,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 
 	// Stockage des versions
 	if ($articles_versions) {
-		include_ecrire("lab_revisions.php");
+		include("lab_revisions.php");
 		ajouter_version($id_article, $champs_versions);
 	}
 

@@ -1,6 +1,11 @@
 <?php
 
-include ("inc_export.php3");
+include ("inc_version.php3");
+
+include_ecrire ("inc_auth.php3");
+include_ecrire ("inc_export.php3");
+include_ecrire ("inc_admin.php3");
+include_ecrire ("inc_presentation.php3");
 
 // Liste un sommaire d'objets de n'importe quel type
 // a la condition d'etre publics et plus recents que $maj

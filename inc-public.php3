@@ -83,7 +83,6 @@ else {
 	if ($affiche_boutons_admin)
 		include_local('inc-admin.php3');
 
-
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 

@@ -21,10 +21,9 @@ function test_layer(){
 
 
 function afficher_script_layer(){
-	global $dir_ecrire;
 
 	if (test_layer()){
-		echo '<script type="text/javascript" src="'.$dir_ecrire.'layer.js">';
+		echo '<script type="text/javascript" src="' . _DIR_RESTREINT . 'layer.js">';
 		echo "</script>\n";
 	}
 }
@@ -75,7 +74,6 @@ function bouton_block_invisible($nom_block) {
 	global $numero_block;
 	global $compteur_block;
 	global $spip_lang_rtl;
-	global $dir_ecrire;
 
 	$num_triangle = $compteur_block + 1;
 
@@ -93,7 +91,7 @@ function bouton_block_invisible($nom_block) {
 			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\');";
 		}
 		$retour = "\n<script type='text/javascript'><!--\n";
-		$retour .= "document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"".$dir_ecrire."img_pack/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n";
+		$retour .= "document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "/deplierhaut$spip_lang_rtl.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n";
 		$retour .= "//-->\n";
 		$retour .= "</script>\n";
 
@@ -103,7 +101,6 @@ function bouton_block_invisible($nom_block) {
 
 
 function bouton_block_visible($nom_block){
-	global $dir_ecrire;
 	global $spip_lang_rtl;
 	if (test_layer()){
 		global $numero_block;
@@ -114,7 +111,7 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		return "<a class=\"triangle_block\" href=\"javascript:swap_couche('".$numero_block["$nom_block"]."', '$spip_lang_rtl')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='".$dir_ecrire."img_pack/deplierbas.gif' alt='' title='".addslashes(_T('info_deplier'))."' width='10' height='10' border='0'></a>";
+		return "<a class=\"triangle_block\" href=\"javascript:swap_couche('".$numero_block["$nom_block"]."', '$spip_lang_rtl')\"><IMG name='triangle".$numero_block["$nom_block"]."' src='"._DIR_IMG_PACK . "deplierbas.gif' alt='' title='".addslashes(_T('info_deplier'))."' width='10' height='10' border='0'></a>";
 	}
 }
 

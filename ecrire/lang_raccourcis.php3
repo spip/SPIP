@@ -20,7 +20,7 @@ debut_gauche();
 	
 $modules = array();
 
-if (!$d = @opendir($dir_ecrire.'lang')) return;
+if (!$d = @opendir(_DIR_LANG)) return;
 while ($f = readdir($d)) {
 	if (ereg('^([a-z_]+)\.php3?$', $f, $regs))
 		$nom_module = $regs[1];
@@ -46,19 +46,17 @@ debut_droite();
 
 
 function afficher_raccourcis($module = "public") {
-	global $dir_ecrire, $flag_ecrire;
 	global $spip_lang;
 	global $couleur_foncee;
 	
-	$lang = $spip_lang;
-	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
-	$fichier_lang_exists = @file_exists($dir_ecrire.$fichier_lang);
+	$lang = $module.'_'.$spip_lang;
+	$fichier_lang = $lang.'.php3';
 
-	if ($fichier_lang_exists) {
-		$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-		include_ecrire ($fichier_lang);
+	if (@file_exists(_DIR_LANG . $fichier_lang) {
+		$GLOBALS['idx_lang'] = 'i18n_' . $lang;
+		include_lang($fichier_lang);
 	
-		$tableau = $GLOBALS['i18n_'.$module.'_'.$lang];
+		$tableau = $GLOBALS['i18n_' . $lang];
 		ksort($tableau);
 		
 		if ($module != "public" AND $module != "local") $aff_nom_module = "$module:";
@@ -66,7 +64,7 @@ function afficher_raccourcis($module = "public") {
 		echo "<div class='arial2'>"._T('module_texte_explicatif')."</div>";
 		echo "<div>&nbsp;</div>";
 
-		if (!$d = @opendir($dir_ecrire.'lang')) return;
+		if (!$d = @opendir(_DIR_LANG)) return;
 		while ($f = readdir($d)) {
 			if (ereg("^".$module."\_([a-z_]+)\.php3?$", $f, $regs))
 				$langue_module[$regs[1]] = traduire_nom_langue($regs[1]);

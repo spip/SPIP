@@ -4,7 +4,6 @@
 if (defined("_ECRIRE_INC_LANG")) return;
 define("_ECRIRE_INC_LANG", "1");
 
-
 //
 // Ecrire un fichier cache langue
 //
@@ -45,8 +44,8 @@ function ecrire_caches_langues() {
 //
 function charger_langue($lang, $module = 'spip', $forcer = false) {
 
-	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
-	$fichier_lang_exists = @is_readable(_DIR_RESTREINT . $fichier_lang);
+	$fichier_lang = $module.'_'.$lang.'.php3';
+	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
 
 	if (_DIR_RESTREINT AND $fichier_lang_exists) {
 	  $ficher_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
@@ -66,22 +65,22 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 
 	if ($fichier_lang_exists) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
-		include_ecrire ($fichier_lang);
+		include_lang($fichier_lang);
 	} else {
 		// si le fichier de langue du module n'existe pas, on se rabat sur
 		// le francais, qui *par definition* doit exister, et on copie le
 		// tableau 'fr' dans la var liee a la langue
-		$fichier_lang = 'lang/'.$module.'_fr.php3';
-		if (@is_readable(_DIR_RESTREINT . $fichier_lang)) {
+		$fichier_lang = $module.'_fr.php3';
+		if (@is_readable(_DIR_LANG . $fichier_lang)) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_fr';
-			include_ecrire ($fichier_lang);
+			include_lang($fichier_lang);
 		}
 		$GLOBALS['i18n_'.$module.'_'.$lang] = $GLOBALS['i18n_'.$module.'_fr'];
 	}
 
 	// surcharge perso
 	if (@is_readable(_DIR_LANG .'perso.php3')) {
-		include(_DIR_LANG .'perso.php3');
+	  include_lang('perso.php3');
 	}
 
 }
@@ -132,7 +131,7 @@ function regler_langue_navigateur() {
 // Traduire une chaine internationalisee
 //
 function traduire_chaine($code, $args) {
-	global $spip_lang, $flag_ecrire;
+	global $spip_lang;
 	global $cache_lang;
 
 	// liste des modules a parcourir
@@ -148,7 +147,7 @@ function traduire_chaine($code, $args) {
 	while (!$text AND (list(,$module) = each ($modules))) {
 		$var = "i18n_".$module."_".$spip_lang;
 		if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
-		if (!$flag_ecrire) {
+		if (_DIR_RESTREINT) {
 			if (!isset($GLOBALS[$var][$code]))
 				charger_langue($spip_lang, $module, $code);
 			if (isset($GLOBALS[$var][$code]))
@@ -409,7 +408,7 @@ function lang_dselect ($rien='') {
 // - 'changer_lang' = langue de l'article, espace prive
 // 
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '') {
-	global $couleur_foncee, $couleur_claire, $flag_ecrire, $connect_id_auteur;
+	global $couleur_foncee, $couleur_claire, $connect_id_auteur;
 
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
@@ -449,7 +448,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	if ($texte)
 		$ret .= $texte;
 
-	if (!$flag_ecrire)
+	if (_DIR_RESTREINT)
 		$style = "class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'";
 	else if ($nom_select == 'var_lang_ecrire') 
 		$style = "class='verdana1' style='background-color: $couleur_foncee; max-height: 24px; border: 1px solid white; color: white; width: 100px;'";
@@ -529,7 +528,7 @@ function utiliser_langue_site() {
 }
 
 function utiliser_langue_visiteur() {
-	global $HTTP_COOKIE_VARS, $flag_ecrire;
+	global $HTTP_COOKIE_VARS;
 
 	if (!regler_langue_navigateur())
 		utiliser_langue_site();
@@ -537,20 +536,17 @@ function utiliser_langue_visiteur() {
 	if ($GLOBALS['auteur_session']['lang'])
 		changer_langue($GLOBALS['auteur_session']['lang']);
 
-	if (!$flag_ecrire AND ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang']))
-		changer_langue($cookie_lang);
+	if ($cookie_lang = $HTTP_COOKIE_VARS[(_DIR_RESTREINT  ? 'spip_lang' : 'spip_lang_ecrire')])
 
-	if ($flag_ecrire AND ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang_ecrire']))
 		changer_langue($cookie_lang);
-
 }
 
 //
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $flag_ecrire, $langue_site, $cache_lang, $cache_lang_modifs;
-	global $pile_langues, $lang_typo, $lang_dir, $dir_ecrire;
+	global $all_langs, $langue_site, $cache_lang, $cache_lang_modifs;
+	global $pile_langues, $lang_typo, $lang_dir;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
@@ -561,8 +557,8 @@ function init_langues() {
 	$lang_dir = '';
 
 	$toutes_langs = Array();
-	if (!$all_langs || !$langue_site || $flag_ecrire) {
-		if (!$d = @opendir($dir_ecrire.'lang')) return;
+	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
+		if (!$d = @opendir(_DIR_LANG)) return;
 		while ($f = readdir($d)) {
 			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
 				$toutes_langs[] = $regs[1];

@@ -167,7 +167,7 @@ function envoyer_mail_publication($id_article) {
 
 function envoyer_mail_proposition($id_article) {
 	$adresse_suivi = lire_meta("adresse_suivi");
-	$adresse_site = lire_meta("adresse_site");
+	$adresse_site = lire_meta("adresse_site") . _DIR_RESTREINT_ABS;
 	$nom_site_spip = lire_meta("nom_site");
 	$suivi_edito = lire_meta("suivi_edito");
 
@@ -186,7 +186,7 @@ function envoyer_mail_proposition($id_article) {
 			$courr .= _T('info_propose_3', array('titre' => $titre))."\n";
 			$courr .= _T('info_propose_4')."\n";
 			$courr .= _T('info_propose_5')."\n";
-			$courr .= $adresse_site."/ecrire/articles.php3?id_article=$id_article\n\n\n";
+			$courr .= $adresse_site."articles.php3?id_article=$id_article\n\n\n";
 			$courr = $courr . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
