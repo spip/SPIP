@@ -34,8 +34,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 if ($changer_config == 'oui') {
 
 	// purger les squelettes si un changement de meta les affecte
-	if (($post_dates AND ($post_dates != lire_meta("post_dates")))
-		OR ($forums_publics AND ($forums_publics != lire_meta("forums_publics"))))
+	if ($forums_publics AND ($forums_publics != lire_meta("forums_publics")))
 		$purger_skel = true;
 
 	// appliquer les changements de moderation forum
