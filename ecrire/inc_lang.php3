@@ -419,7 +419,11 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$post = $lien->getUrl();
 		$cible = '';
 	} else {
-		$site = lire_meta("adresse_site");
+		// eviter un bug a l'installation ; mais, dans le cas general,
+		// pourquoi aurait-on besoin ici d'une URL absolue ?
+		if (!defined('_ECRIRE_INSTALL')
+		AND !defined('_TEST_DIRS'))
+			$site = lire_meta("adresse_site");
 		if (!$site)
 			if (_DIR_RESTREINT)
 				$site = '.';
