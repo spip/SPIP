@@ -48,7 +48,7 @@ $GLOBALS['i18n_spip_eo'] = array(
 'avis_erreur_fonction_contexte' => 'Programeraro. Tiu funkcio ne alvokeblas en tiu &#265;i kunteksto.',
 'avis_erreur_mysql' => 'MySQL-eraro',
 'avis_erreur_sauvegarde' => 'Eraro dum konservado(@type@ @id_objet@)! ',
-'avis_erreur_version_archive' => '<B>Atentu! La dosiero @archive@ kongruas kun
+'avis_erreur_version_archive' => '<MODIF> <B>Atentu! La dosiero @archive@ kongruas kun
 				alia versio de SPIP ol kun tiu kiun vi instalis.</B>
 				Vi alfrontas grandegajn problemojn:
 				risko de detruo de via datenbazo,
@@ -504,7 +504,7 @@ Dankon pro via partopreno
 'info_contenu_articles' => 'Enhavo de la artikoloj',
 'info_contribution' => 'kontribua&#309;oj por la forumo',
 'info_copyright' => 'estas libera programo distribuata <a href=\'copyright_fr.html\'>sub GPL licenco.</a>',
-'info_copyright_doc' => 'Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo\'>http://www.spip.net/eo</a>.',
+'info_copyright_doc' => '<MODIF> Por pliaj informoj vidu la retpa&#285;on <a href=\'http://www.spip.net/eo\'>http://www.spip.net/eo</a>.',
 'info_cours_edition' => 'Viaj nun eldonataj artikoloj',
 'info_creation_mots_cles' => '&#264;i tie, bonvolu starigi kaj konfiguri la &#349;losilvortojn de la teksejo',
 'info_creation_paragraphe' => '(Por krei malplenajn paragrafojn, simple lasu malplenajn liniojn.)',
@@ -661,8 +661,7 @@ Dankon pro via partopreno
 'info_multi_cette_rubrique' => '<NEW> Langue utilis&eacute;e dans cette rubrique&nbsp;:',
 'info_multi_herit' => '<NEW> langue de la rubrique sup&eacute;rieure',
 'info_multi_langues_choisies' => '<NEW> Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
-		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.
-		Attention&nbsp;: seules les langues affich&eacute;es en gras sont int&eacute;gralement g&eacute;r&eacute;es par le syst&egrave;me de publication.',
+		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
 'info_multi_rubriques' => '<NEW> Activer le menu de langue sur les rubriques&nbsp;?',
 'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => '<NEW> Multilinguisme',
@@ -1041,7 +1040,7 @@ Dankon pro via partopreno
 'login_login2' => 'Salutnomo (identigilo por konekti al la teksejo)&nbsp;:',
 'login_login_pass_incorrect' => '(Salutnomo a&#365; pasvorto mal&#285;usta.)',
 'login_motpasseoublie' => '&#265;u vi forgesis la pasvorton?',
-'login_non_securise' => 'Atentu, tiu formularo ne estas sekurigita;.
+'login_non_securise' => '<MODIF> Atentu, tiu formularo ne estas sekurigita;.
 			Se vi ne volas ke via pasvorto estu fra&#365;de
 			interkaptita en la teksa&#309;o, bonvolu aktivigi
 			Javascript-on en via krozilo',
@@ -1050,6 +1049,7 @@ Dankon pro via partopreno
 'login_pass2' => 'Pasvorto&nbsp;:',
 'login_preferez_refuser' => '<b>Se vi preferas rifuzi kuketojn</b>, alia konektometodo (malpli sekura) estas je via dispono&nbsp;:',
 'login_recharger' => 're&#349;argi tiun &#265;i pa&#285;on',
+'login_rester_identifie' => '<NEW> Rester identifi&eacute; quelques jours',
 'login_retour_public' => 'Reveno al la publika spaco',
 'login_retour_site' => 'Reveno al la publika spaco',
 'login_retoursitepublic' => 'reveno&nbsp;al&nbsp;la&nbsp;publika&nbsp;spaco',
@@ -1226,7 +1226,7 @@ reinstaladon de SPIP por rekrei novan bazon kaj novan administrant-aliron.',
 la enhavon de la bazo en dosiero stokota en la dosierujo <i>ecrire/data/</i>.
 Ne forgesu anka&#365; reakiri la tuta&#309;on de la dosierujo <i>IMG/</i>, kiu entenas
 la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
-'texte_admin_tech_02' => 'Atentu: tiu konserva&#309;o povas esti resta&#365;rata
+'texte_admin_tech_02' => '<MODIF> Atentu: tiu konserva&#309;o povas esti resta&#365;rata
 	NUR en pa&#285;o instalita sub la sama versio de SPIP. Oftas
 	la eraro fari konservadon anta&#365; ol &#285;isdatigi
 	SPIP-on... Por pliaj detaloj konsultu <a href="http://www.spip.net/fr_article1489.html">la dokumenta&#309;on de SPIP</a>.',

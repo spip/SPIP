@@ -691,7 +691,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_multi_cet_article' => 'Gerbuikte taal in dit artikel is&nbsp;:',
 'info_multi_cette_rubrique' => 'Gerbuikte taal in deze rubriek is&nbsp;:',
 'info_multi_herit' => '<MODIF> taal van het ouderartikel',
-'info_multi_langues_choisies' => 'Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
+'info_multi_langues_choisies' => '<MODIF> Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
   Talen die al in gebruik zijn (als eerste in de lijst getoond) kunnen niet geschrapt worden.
   Opgelet&nbsp;: alleen de in het vet weergegeven talen worden in het publicatiesysteem ge&iuml;ntegreerd.',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken&nbsp;?',
@@ -1117,7 +1117,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'menu_aide_articles_en_cours_modification' => 'Artikels in redactie',
 'menu_aide_articles_logos' => 'Logo van het artikel',
 'menu_aide_articles_proposer' => 'Artikel voorstellen',
-'menu_aide_articles_raccourcis_typo' => 'Typografische verkortingen',
+'menu_aide_articles_raccourcis_typo' => 'Typografische snelkoppelingen',
 'menu_aide_articles_redirection' => 'Dooverwijzing van een artikel',
 'menu_aide_articles_statut' => 'Artikelstatus',
 'menu_aide_articles_texte' => 'Tekst',
@@ -1180,12 +1180,10 @@ De publieke forums kunnen per artikel toegestaan worden
 'onglet_affacer_base' => 'Database verwijderen',
 'onglet_auteur' => 'Auteur',
 'onglet_contenu_site' => 'Inhoud van de site',
-'onglet_evolution_visite' => '',
 'onglet_evolution_visite_mod' => 'Evolutie',
 'onglet_fonctions_avances' => 'Geavanceerde functies',
 'onglet_informations_personnelles' => 'Persoonlijke informatie',
 'onglet_interactivite' => 'Interactiviteit',
-'onglet_langue' => '',
 'onglet_langues' => 'Talen',
 'onglet_messagerie' => 'Berichtensysteem',
 'onglet_messages_internes' => 'Interne berichten',
@@ -1323,7 +1321,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_effacer_base' => 'Verwijder de SPIP databank',
 'texte_effacer_donnees_indexation' => 'Verwijder de ge&iuml;ndexeerde gegevens',
 'texte_en_cours_validation' => 'De artikels en berichten hieronder werden voorgesteld voor publicatie. Aarzel niet om je mening te geven via de forums die er op volgen.',
-'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;&nbsp;typografische verkortingen&nbsp;&raquo;.',
+'texte_enrichir_mise_a_jour' => 'De opmaak van een tekst kan gebeuren met behulp van de zogeheten &laquo;&nbsp;typografische snelkoppelingen&nbsp;&raquo;.',
 'texte_erreur_mise_niveau_base' => 'Fout met de databank bij het opladen.
  De afbeelding <B>@fichier@</B> is niet goed opgeladen
  (artikel @id_article@).

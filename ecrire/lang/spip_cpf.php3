@@ -716,7 +716,7 @@ fisy&eacute; SPIP.}}',
 'info_multi_cet_article' => 'Lang ans&egrave;rvi po lartik-la&nbsp;:',
 'info_multi_cette_rubrique' => 'Lang ans&egrave;rvi dann ribrik-la&nbsp;:',
 'info_multi_herit' => 'lang laribrik anl&egrave;r',
-'info_multi_langues_choisies' => 'Swazi anba-t&egrave;rla bann lang ou v&eacute; p&egrave;rm&egrave;t out bann zitilizat&egrave;r i ans&egrave;rv sir out sitw&egrave;b.
+'info_multi_langues_choisies' => '<MODIF> Swazi anba-t&egrave;rla bann lang ou v&eacute; p&egrave;rm&egrave;t out bann zitilizat&egrave;r i ans&egrave;rv sir out sitw&egrave;b.
   Zot i p&eacute; pa d&eacute;gr&egrave;n bann lang sak l&eacute; d&eacute;za pr&eacute;zan sir out sitw&egrave;b (ni afis azot dabor).
   Tansyon pangar&nbsp;: sist&egrave;m piblikasyon-la i z&egrave;r s&egrave;lman bann lang ou p&eacute; vwar &eacute;kri dann gro karakt&egrave;r.',
 'info_multi_rubriques' => 'F&eacute; zw&eacute; lo m&eacute;ni-d&eacute;roul&egrave;r pou bann lang si bann ribrik&nbsp;?',
@@ -1097,7 +1097,7 @@ sak i d&eacute;gr&egrave;n lanvwa bann lim&egrave;l sir zot bann serv&egrave;r&n
 'login_login2' => 'Nondkod (lidantifian pou lakostaz lo sitw&egrave;b)&nbsp;:',
 'login_login_pass_incorrect' => '(Out nondkod ou modpas l&eacute; pa kor&egrave;k.)',
 'login_motpasseoublie' => 'Ou&nbsp;la&nbsp;oubliy&eacute;&nbsp;out&nbsp;modpas&nbsp;?',
-'login_non_securise' => 'Tansyon pangar, formul&egrave;r-la l&eacute; pa s&eacute;kiriz&eacute;.
+'login_non_securise' => '<MODIF> Tansyon pangar, formul&egrave;r-la l&eacute; pa s&eacute;kiriz&eacute;.
 Si ou v&eacute; pa person i atrap out modpass si lo r&eacute;zo
 mersi f&eacute; zw&eacute; lo Javascript 
 dann out navigat&egrave;r &eacute;',
@@ -1106,6 +1106,7 @@ dann out navigat&egrave;r &eacute;',
 'login_pass2' => 'Modpas&nbsp;:',
 'login_preferez_refuser' => '<b>Si ou pr&eacute;f&egrave;r afront bann gatomakro</b>,nana inn ot sist&egrave;m lakostaz (mwin sir)&nbsp;sak ou p&eacute; anserv:',
 'login_recharger' => 'rosarz pazw&egrave;b-la',
+'login_rester_identifie' => 'Po inn lidantifikasyon i dir plisy&egrave;r zor',
 'login_retour_public' => 'Artourn sir figirw&egrave;b',
 'login_retour_site' => 'Artourn sir figirw&egrave;b',
 'login_retoursitepublic' => 'artourn&nbsp;sir&nbsp;figirw&egrave;b',
