@@ -1,7 +1,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="#LANG">
 <head>
-<title>[#NOM_SITE_SPIP] Poster un message</title>
+<title>[#NOM_SITE_SPIP] <:poster_un_message:></title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
 
 <!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
@@ -20,23 +20,23 @@
 
 <div id="navigation">
 
-<h1 class="structure"><:public:navigation:></h1>
+<h1 class="structure"><:navigation:></h1>
 
 <!-- Menu de navigation general -->
 
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	<a href="plan.php3"><:plan_du_site:></a>
 	</li>
 	<li class="menu-item">
-	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
 	</li>
 	<li class="menu-item">
-	<a href="ecrire/" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">R&eacute;daction</a>
+	<a href="ecrire/"><:espace_prive:></a>
 	</li>
 </ul>
 </div>
@@ -52,38 +52,38 @@
 
 <div id="principal" class="contenu">
 
-<h1 class="structure">Poster un message</h1>
+<h1 class="structure"><:poster_un_message:></h1>
 
 <BOUCLE_article(ARTICLES) {id_article}>
-	En r&eacute;ponse &agrave; l'article&nbsp;:
+	<:en_reponse:>
 	[(#LOGO_ARTICLE|right)]
 	[<div class="surtitre">(#SURTITRE)</div>]
 	<h2 class="titre-extrait"><a href="#URL_ARTICLE">#TITRE</a></h2>
 	[<div class="surtitre">(#SOUSTITRE)</div>]
 	<div class="detail">
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
-	<B_auteurs_un>par <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
+	<B_auteurs_un><:par_auteur:> <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
 	</div>
 	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
 	<br>
 </BOUCLE_article>
 
 <BOUCLE_breve(BREVES) {id_breve}>
-	En r&eacute;ponse &agrave; la br&egrave;ve&nbsp;:
+	<:en_reponse:>
 	[(#LOGO_BREVE|right)]
 	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
 	<div class="detail">
-	[Le (#DATE|nom_jour)] [(#DATE|affdate)]
+	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>
 	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
 	<br>
 </BOUCLE_breve>
 
 <BOUCLE_forum_parent(FORUMS) {id_forum}>
-	En r&eacute;ponse au message&nbsp;:
+	<:en_reponse:>
 	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
 	<div class="detail">
-	[Le (#DATE|nom_jour)] [(#DATE|affdate)]
+	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>
 	[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
 	<br>

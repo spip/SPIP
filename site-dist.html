@@ -27,7 +27,7 @@
 	<table cellpadding="1" cellspacing="0" border="0"><tr><td bgcolor="#000000" width="250">
 	<table cellpadding="5" cellspacing="0" border="0" width="100%"><tr><td bgcolor="#444444" width="100%">
 	<font face="Arial,Helvetica" color="#FFFFFF">
-	<b>D'autres sites</b>
+	<b><:autres_sites:></b>
 	</font>
 	</td></tr></table>
 
@@ -54,7 +54,7 @@
 [<b>(#DESCRIPTIF|justifier)</b>]
 
 <p>
-<B4><b>Rubrique :</b>
+<B4><b><:rubrique:>:</b>
 <ul>
 <BOUCLE4(RUBRIQUES){id_rubrique}>
 	<li><b><a href="#URL_RUBRIQUE">[(#TITRE|majuscules)]</a></b></li>
@@ -62,7 +62,7 @@
 </ul></B4>
 
 
-<B_articles_syndic><b>Articles :</b>
+<B_articles_syndic><b><:articles:>:</b>
 <ul>
 <BOUCLE_articles_syndic(SYNDIC_ARTICLES){id_syndic}{par date}{inverse}>
 	<li><a href="#URL_ARTICLE">[(#TITRE*)]</a></li>
@@ -70,7 +70,7 @@
 </ul></B_articles_syndic>
 
 
-	[<P align="right"><font size="3"><b><a href="forum.php3?(#PARAMETRES_FORUM)">Commenter ce site</a></b></font>]
+	[<P align="right"><font size="3"><b><a href="forum.php3?(#PARAMETRES_FORUM)"><:commenter_site:></a></b></font>]
 
 
 </font>
@@ -97,7 +97,7 @@
 	<a name="liens_forums">
 	<BOUCLE_forums_liens(FORUMS){id_syndic}{par date}{inverse}>
 		<a href="#forum#ID_FORUM"><img src="puce.gif" border="0">#TITRE</a>
-		<br>[(#DATE|affdate)][, par (#NOM)]
+		<br>[(#DATE|affdate)][, <:par_auteur:>(#NOM)]
 		<br>
 	</BOUCLE_forums_liens>
 	</font>
@@ -120,14 +120,14 @@
 	<tr><td bgcolor="#FFFFFF" width="100%">
 	<font face="Arial,Helvetica" SIZE="1">
 	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
-	 &nbsp; [<A HREF="#liens_forums">retour au d&eacute;but des forums</A>]
+	 &nbsp; [<A HREF="#liens_forums"><:retour_debut_forums:></A>]
 	[<BR><A HREF="#URL_SITE">(#NOM_SITE)</A>]
 	</font>
 	</td></tr>
 	<tr><TD BGCOLOR="#EEEEEE" width="100%">
 	<font face="Arial,Helvetica" SIZE="2">
 	<P>#TEXTE
-	<P align="right">[<font size="1"><A HREF="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</A></font>]</div>
+	<P align="right">[<font size="1"><A HREF="forum.php3?#PARAMETRES_FORUM"><:repondre_message:></A></font>]</div>
 	</font>
 	</td></tr></table>
 
@@ -140,13 +140,13 @@
 		<a name="forum#ID_FORUM">
 		<b>[(#TITRE)]</b>
 		<br><font size="1">
-		[(#DATE|affdate)][, par <a href="mailto:#EMAIL">(#NOM)</a>]
-		 &nbsp; [<z href="#liens_forums">retour au d&eacute;but des forums</a>]
+		[(#DATE|affdate)][, <:par_auteur:> <a href="mailto:#EMAIL">(#NOM)</a>]
+		 &nbsp; [<z href="#liens_forums"><:retour_debut_forums:></a>]
 		[<br><a href="#URL_SITE">(#NOM_SITE)</a>]
 		</font>
 		<hr noshade size="1">
 		#TEXTE
-		<p align="right">[<font size="1"><a href="forum.php3?#PARAMETRES_FORUM">R&eacute;pondre &agrave; ce message</a></font>]
+		<p align="right">[<font size="1"><a href="forum.php3?#PARAMETRES_FORUM"><:repondre_message:></a></font>]
 			
 
 			<BOUCLE_Forums_Boucle(boucle_fils)></BOUCLE_Forums_Boucle>
@@ -169,7 +169,7 @@
 
 
 </BOUCLE1>
-<h2>Il n'y a pas de site &agrave; cette adresse</h2>
+<h2><:pas_de_site:></h2>
 <//B1>
 </center>
 </body>

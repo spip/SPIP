@@ -8,7 +8,7 @@
 
 unset($mail_nouveautes);
 
-$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] Les nouveaut&eacute;s';
+$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] <:nouveautes:>';
 
 //
 // Articles
@@ -16,8 +16,7 @@ $sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] Les nouveaut&ea
 <B_nv1>
 $mail_nouveautes = '
 
-          -----------------
-          NOUVEAUX ARTICLES
+          <:nouveaux_articles:>
           -----------------
 
 ';
@@ -36,8 +35,8 @@ $mail_nouveautes = '
 <B_nv2>
 $mail_nouveautes .= '
 
-          ----------------
-          NOUVELLES BR&Egrave;VES
+          
+          <:nouvelles_breves:>
           ----------------
 
 ';
@@ -53,10 +52,10 @@ $mail_nouveautes .= '
 //	Ajouter l'entete
 //
 if ($mail_nouveautes) {
-		$mail_nouveautes = 'Bonjour,
+		$mail_nouveautes = '<:bonjour:>
 
-voici la lettre d\'information du site "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP),
-qui recense les articles et les br&egrave;ves publi&eacute;s depuis '.$jours_neuf.' jours.
+<:texte_lettre_information:> "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP).
+<:texte_lettre_information_2:> '.$jours_neuf.' <:jours:>.
 
 ' . $mail_nouveautes;
 	}

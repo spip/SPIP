@@ -23,23 +23,23 @@
 
 <div id="navigation">
 
-<h1 class="structure"><:public:navigation:></h1>
+<h1 class="structure"><:navigation:></h1>
 
 <!-- Menu de navigation general -->
 
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3" title="Tout le site sur une page"><:public:plan_du_site:></a>
+	<a href="plan.php3"><:plan_du_site:></a>
 	</li>
 	<li class="menu-item">
-	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
 	</li>
 	<li class="menu-item">
-	<a href="ecrire/" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">R&eacute;daction</a>
+	<a href="ecrire/"><:espace_prive:></a>
 	</li>
 </ul>
 </div>
@@ -76,9 +76,9 @@
 <B_mots>
 <div class="menu">
 
-<h1 class="structure">Mots-cl&eacute;s associ&eacute;s &agrave; l'article</h1>
+<h1 class="structure"><:mots_clefs:></h1>
 
-<ul class="divers" title="Mots-cl&eacute;s associ&eacute;s &agrave; l'article">
+<ul class="divers" title="<:mots_clefs:>">
 <BOUCLE_mots(MOTS) {id_article} {par titre}>
 <li>
 <div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
@@ -98,13 +98,13 @@
 
 <!-- Liens des forums -->
 <BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
-[<div class="menu" title="Les derniers messages publi&eacute;s sur le forum de cet article">
+[<div class="menu" title="<:derniers_commentaires:>">
 
-<h1 class="structure">Derni&egrave;res discussions sur le forum de cet article</h1>
+<h1 class="structure"><:derniers_commentaires:></h1>
 
 <ul class="forums">
 
-<li class="menu-titre">(#TOTAL_BOUCLE) message(s) de forum.</li>]
+<li class="menu-titre"><:messages_forum:>: (#TOTAL_BOUCLE)</li>]
 <//B_forums_decompte>
 <BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{0,5}>
     <li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
@@ -145,7 +145,7 @@
 	<B_auteurs>
 
 	<div class="menu">
-	<h2 class="structure">Des m&ecirc;mes auteurs...</h2>
+	<h2 class="structure"><:memes_auteurs:></h2>
 	<ul class="divers">
 	<BOUCLE_auteurs(AUTEURS) {id_article} {par nom}>
 		<li>
@@ -171,9 +171,9 @@
 
 	<div class="menu">
 	<div class="breves">
-		<h2 class="structure">Dans la m&ecirc;me rubrique...</h2>
+		<h2 class="structure"><:dans_meme_rubrique:></h2>
 		<div class="menu-titre">
-		Dans la m&ecirc;me rubrique
+		<:dans_meme_rubrique:>
 		</div>
 		<ul>
 	<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par hasard} {exclus} {0,8}>
@@ -206,14 +206,14 @@
 <!-- Signatures petition -->
 
 <BOUCLE_signatures_decompte(SIGNATURES) {id_article}></BOUCLE_signatures_decompte>
-[<div class="signatures-titre">(#TOTAL_BOUCLE) signatures &agrave; cette p&eacute;tition</div>
+[<div class="signatures-titre"><:signatures_petition:>: (#TOTAL_BOUCLE)</div>
 
 <table class="signatures">
 <thead class="structure">
 <tr>
-	<td>Date</td>
-	<td>Nom et site Web</td>
-	<td>Message</td>
+	<td><:date:></td>
+	<td><:nom:></td>
+	<td><:message:></td>
 </tr>
 </thead>
 <tbody>]
@@ -232,10 +232,10 @@
 
 <!-- Forums -->
 
-[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cet  article</A></B></div>]
+[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)"><:repondre_article:></A></B></div>]
 <br>
 
-<h1 class="structure">Forum de l'article</h1>
+<h1 class="structure"><:Forum:></h1>
 
 <B_forums>
 <ul class="forum-total">
@@ -249,12 +249,12 @@
 <a name="forum#ID_FORUM"></a>
 <div class="forum-chapo">
 <div class="forum-titre">#TITRE</div>
-[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+[(#DATE|affdate)][, <:par_auteur:> <A HREF="mailto:#EMAIL">(#NOM)</A>]
 </div>
 <div class="forum-item">
 #TEXTE
 [<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]
 </div>
 </div>
 
@@ -267,12 +267,12 @@
 	<a name="forum#ID_FORUM"></a>
 	<div class="forum-chapo">
 	<div class="forum-titre">#TITRE</div>
-	[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+	[(#DATE|affdate)][, <:par_auteur:> <A HREF="mailto:#EMAIL">(#NOM)</A>]
 	</div>
 	<div class="forum-item">
 	#TEXTE
 	[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-	[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+	[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]
 	</div>
 
 	</div>
@@ -300,5 +300,5 @@
 
 
 </BOUCLE_article_principal>
-(Pas d'article &agrave; cette adresse.)
+<:pas_d_article:>
 <//B_article_principal>

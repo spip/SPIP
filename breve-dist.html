@@ -24,23 +24,23 @@
 
 <div id="navigation">
 
-<h1 class="structure"><:public:navigation:></h1>
+<h1 class="structure"><:navigation:></h1>
 
 <!-- Menu de navigation general -->
 
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="Accueil du site"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3" title="Tout le site sur une page">Plan du site</a>
+	<a href="plan.php3"><:plan_du_site:></a>
 	</li>
 	<li class="menu-item">
-	<a href="resume.php3" title="Articles populaires et derniers messages de forum">En r&eacute;sum&eacute;</a>
+	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
 	</li>
 	<li class="menu-item">
-	<a href="ecrire/" title="Acc&eacute;der &agrave; l'espace r&eacute;serv&eacute; aux r&eacute;dacteurs">R&eacute;daction</a>
+	<a href="ecrire/"><:espace_prive:></a>
 	</li>
 </ul>
 </div>
@@ -69,7 +69,7 @@
 
 <B_mots>
 <div class="menu">
-<ul class="divers" title="Mots-cl&eacute;s associ&eacute;s &agrave; la br&egrave;ve">
+<ul class="divers" title="<:mots_clefs:>">
 <BOUCLE_mots(MOTS) {id_article} {par titre}>
 <li>
 <div class="menu-titre"><a href="#URL_MOT" [title="(#DESCRIPTIF|textebrut|entites_html)"]>#TITRE</a></div>
@@ -92,9 +92,9 @@
 <B_articles_secteur>
 
 <div class="menu">
-<div class="breves" title="Derniers articles parus dans cette partie du site">
+<div class="breves" title="<:derniers_articles:>">
 	<div class="menu-titre">
-	Derniers articles
+	<:derniers_articles:>
 	</div>
 	<ul>
 <BOUCLE_articles_secteur(ARTICLES) {id_secteur} {par date} {inverse} {0,5}>
@@ -135,10 +135,10 @@
 	<B_breves_rubrique>
 
 	<div class="menu">
-	<div class="breves" title="Derni&egrave;res br&egrave;ves parues dans la m&ecirc;me rubrique">
-		<h1 class="structure">Derni&egrave;res br&egrave;ves dans la m&ecirc;me rubrique</h1>
+	<div class="breves" title="<:dans_meme_rubrique:>">
+		<h1 class="structure"><:dans_meme_rubrique:></h1>
 		<div class="menu-titre">
-		Autres br&egrave;ves
+		<:autres_breves:>
 		</div>
 		<ul>
 	<BOUCLE_breves_rubrique(BREVES) {id_rubrique} {exclus} {par date} {inverse} {0,8}>
@@ -157,7 +157,7 @@
 
 
 [<div class="texte">(#TEXTE)</div>]
-[<div class="chapo">Voir en ligne&nbsp;: <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a>.</div>]
+[<div class="chapo"><:voir_en_ligne:>: <a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a>.</div>]
 [<div class="notes">(#NOTES)</div>]
 
 <br>
@@ -165,10 +165,10 @@
 
 <!-- Forums -->
 
-[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; cette br&egrave;ve</A></B></div>]
+[<div class="forum-repondre"><B><A  HREF="forum.php3?(#PARAMETRES_FORUM)"><:repondre_breve:></A></B></div>]
 <br>
 
-<h1 class="structure">Forum de la br&egrave;ve</h1>
+<h1 class="structure"><:forum:></h1>
 
 <B_forums>
 <ul class="forum-total">
@@ -181,12 +181,12 @@
 <a name="forum#ID_FORUM"></a>
 <div class="forum-chapo">
 <div class="forum-titre">#TITRE</div>
-[(#DATE|affdate)][, par <A HREF="mailto:#EMAIL">(#NOM)</A>]
+[(#DATE|affdate)][, <:par_auteur:> <A HREF="mailto:#EMAIL">(#NOM)</A>]
 </div>
 <div class="forum-item">
 #TEXTE
 [<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]
 </div>
 </div>
 
@@ -204,7 +204,7 @@
 	<div class="forum-item">
 	#TEXTE
 	[<div class="forum-titre"><a href="(#URL_SITE)" class="spip_out">#NOM_SITE</a></div>]
-	[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)">R&eacute;pondre &agrave; ce  message</a></div>]
+	[<div class="forum-repondre-message"><a href="forum.php3?(#PARAMETRES_FORUM)"><:repondre_message:></a></div>]
 	</div>
 
 	</div>
@@ -224,8 +224,7 @@
 </B_forums>
 
 </div>
-</body>
-</html>
+</body></html>
 </BOUCLE_breve_principal>
-
+<:pas_de_breve:>
 <//B_breve_principal>
