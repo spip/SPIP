@@ -4,6 +4,8 @@
 	// parano XSS
 	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left-$right", $regs);
 	list (,$couleur_claire,$couleur_foncee,$left,$right) = $regs;
+	$ltr = ($left == 'left');
+	$rtl = ($right == 'left');
 
 	// En-tetes
 	$lastmodified = @filemtime("spip_style.php3");
@@ -439,6 +441,7 @@ a.cellule-h-texte:hover {
 .arial2 { font-family: Arial, Sans, sans-serif; font-size: 12px; }
 .verdana1 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px; }
 .verdana2 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; }
+.verdana3 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 13px; }
 
 /* Liens hypertexte */
 a { text-decoration: none; }
@@ -515,7 +518,7 @@ td.icone a img {
 }
 .r-h {
 	height: 24px; background: url('img_pack/rond-h-24.gif') repeat-x bottom;
-	text-align: <? echo $left; ?>;
+	text-align: <?php echo $left; ?>;
 }
 .r-hd {
 	width: 5px; height: 24px; background: url('img_pack/rond-hd-24.gif') no-repeat left bottom;
@@ -537,7 +540,7 @@ td.icone a img {
 }
 .r-c {
 	background: white; padding: 2px;
-	text-align: <? echo $left; ?>;
+	text-align: <?php echo $left; ?>;
 }
 
 
@@ -551,7 +554,7 @@ td.icone a img {
 }
 .e-h {
 	height: 24px; background: url('img_pack/cadre-h.gif') repeat-x bottom;
-	text-align: <? echo $left; ?>;
+	text-align: <?php echo $left; ?>;
 }
 .e-hd {
 	width: 5px; height: 24px; background: url('img_pack/cadre-hd.gif') no-repeat left bottom;
@@ -573,35 +576,62 @@ td.icone a img {
 }
 .e-c {
 	background: #e0e0e0; padding: 2px;
-	text-align: <? echo $left; ?>;
+	text-align: <?php echo $left; ?>;
 }
 
 
 /*
  * Styles pour "Tout le site"
  */
- 
- 
-div.puce-article {
-	margin-<? echo $left; ?>: 10px; 
-	padding-<? echo $left; ?>: 12px;
-} 
-div.puce-article div {
-	padding: 2px; 
-	background-color: #e0e0e0; 
-	border-top: 1px solid white; 
-	border-left: 1px solid white; 
-	border-right: 1px solid #aaaaaa; 
-	border-bottom: 1px solid #aaaaaa;
+
+.plan-rubrique {
+	margin-<?php echo $left; ?>: 12px;
+	padding-<?php echo $left; ?>: 10px;
+	border-<?php echo $left; ?>: 1px dotted #888888;
 }
-div.puce-article div:hover {
-	padding: 2px; 
+.plan-secteur {
+	margin-<?php echo $left; ?>: 12px;
+	padding-<?php echo $left; ?>: 10px;
+	border-<?php echo $left; ?>: 1px dotted #404040;
+}
+ 
+.plan-articles a {
+	display: block;
+	padding: 2px;
+	margin-<?php echo $left; ?>: 2px;
+	padding-<?php echo $left; ?>: 20px;
+	background: <?php echo $ltr ? "1%" : "99%"; ?> no-repeat;
+	background-color: #e0e0e0;
+	border-top: 1px solid white;
+	border-left: 1px solid white;
+	border-right: 1px solid #aaaaaa;
+	border-bottom: 1px solid #aaaaaa;
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-size: 11px;
+}
+.plan-articles a:hover {
 	background-color: white; 
 	border-bottom: 1px solid white; 
 	border-right: 1px solid white; 
 	border-left: 1px solid #aaaaaa; 
 	border-top: 1px solid #aaaaaa;
 }
+.plan-articles .publie {
+	background-image: url(img_pack/puce-verte-breve.gif);
+}
+.plan-articles .prepa {
+	background-image: url(img_pack/puce-blanche-breve.gif);
+}
+.plan-articles .prop {
+	background-image: url(img_pack/puce-orange-breve.gif);
+}
+.plan-articles .refuse {
+	background-image: url(img_pack/puce-rouge-breve.gif);
+}
+.plan-articles .poubelle {
+	background-image: url(img_pack/puce-rouge-breve.gif);
+}
+
 
 /*
  * Styles generes par les raccourcis de mis en page

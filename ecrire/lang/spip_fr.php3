@@ -380,6 +380,7 @@ Merci de votre participation
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Auteurs',
 'icone_breves' => 'Br&egrave;ves',
+'icone_brouteur' => 'Navigation rapide',
 'icone_calendrier' => 'Calendrier',
 'icone_calendrier_messagerie' => 'Agenda et messagerie',
 'icone_configuration_site' => 'Configuration du site',
