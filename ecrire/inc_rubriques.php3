@@ -180,7 +180,7 @@ function calculer_langues_rubriques() {
 	// rubriques (recursivite)
 	
 	$langue_site = addslashes(lire_meta('langue_site'));
-	spip_query ("UPDATE spip_rubriques SET lang='$langue_site' WHERE id_parent='0' AND langue_choisie = 'non'");
+	spip_query ("UPDATE spip_rubriques SET lang='$langue_site', langue_choisie='non' WHERE id_parent='0' AND langue_choisie != 'oui'");
 	
 	
 	while (calculer_langues_rubriques_etape());
@@ -217,8 +217,12 @@ function calculer_langues_rubriques() {
 		while ($row = spip_fetch_array($s)) {
 			$lang_utilisees[] = $row['lang'];
 		}
-		$lang_utilisees = join (',', $lang_utilisees);
-		ecrire_meta('langues_utilisees', $lang_utilisees);
+		if ($lang_utilisees) {
+			$lang_utilisees = join (',', $lang_utilisees);
+			ecrire_meta('langues_utilisees', $lang_utilisees);
+		} else {
+			ecrire_meta('langues_utilisees', "");
+		}
 	}
 }
 
