@@ -205,6 +205,7 @@ function calcul_branche ($generation) {
 # fonction appelée par la balise #LOGO_DOCUMENT
 
 function calcule_document($id_document, $doubdoc, &$doublons){
+	if (!$id_document) return '';
 	if ($doubdoc && $id_document) $doublons["documents"] .= ', ' . $id_document;
 
 	if (!($row = spip_abstract_select(array('id_type', 'id_vignette', 'fichier', 'mode'), array('documents AS documents'), array("id_document = $id_document"))))

@@ -86,7 +86,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 	}
 
-	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
+	$query = "SELECT * FROM spip_documents WHERE id_document = " . intval($id_document);
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result)) {
 		$id_document = $row['id_document'];
@@ -100,7 +100,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		$mode = $row['mode'];
 
 
-		$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
+		$query_type = "SELECT * FROM spip_types_documents WHERE id_type=" . intval($id_type);
 		$result_type = spip_query($query_type);
 		if ($row_type = @spip_fetch_array($result_type)) {
 			$type = $row_type['titre'];
@@ -207,7 +207,7 @@ function integre_image($id_document, $align, $type_aff) {
 
 	$id_doublons['documents'] .= ",$id_document";
 
-	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
+	$query = "SELECT * FROM spip_documents WHERE id_document = " . intval($id_document);
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result)) {
 		$id_document = $row['id_document'];
@@ -954,7 +954,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 	$ancre = 'doc'.$id_document;
 
-	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_document"));
+	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
 	$id_type = $document['id_type'];
@@ -1322,7 +1322,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
-	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_document"));
+	$document = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = " . intval($id_document)));
 
 	$id_vignette = $document['id_vignette'];
 	$id_type = $document['id_type'];
