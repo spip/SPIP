@@ -170,8 +170,8 @@ if ($options == "avancees") {
 	if ($connect_statut == "0minirezo") {
 		if (lire_meta('forum_prive_admin') == 'oui') {
 			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
-			echo "<p>";
 		}
+			echo "<p>";
 		if (lire_meta("activer_statistiques") == 'oui')
 			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
 		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
