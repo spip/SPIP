@@ -71,7 +71,7 @@ function afficher_upload($link, $intitule, $inclus = '') {
 		$texte_upload = texte_upload_manuel("upload", $inclus);
 		echo "<font color='#505050'>";
 		if ($texte_upload) {
-			echo "\nEn tant qu'administrateur, vous pouvez aussi s&eacute;lectionner un fichier du dossier ecrire/upload&nbsp;:";
+			echo "\nS&eacute;lectionner un fichier du dossier ecrire/upload&nbsp;:";
 			echo "\n<select name='image2' size='1'>";
 			echo $texte_upload;
 			echo "\n</select>";
@@ -155,35 +155,35 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	//
 	// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
 	//
-	$raccourci_img =  "<font size='1'>\n".
-		"<div align='left'>&lt;img$id_document|left&gt;</div>\n".
+
+	$raccourci_doc = "<font size='1'>\n";
+	$raccourci_doc .= "<div align='center'><b>Raccourcis</b></div>\n";
+	$raccourci_doc .= "<div align='left'>&lt;img$id_document|left&gt;</div>\n".
 		"<div align='center'>&lt;img$id_document|center&gt;</div>\n".
-		"<div align='right'>&lt;img$id_document|right&gt;</div>\n".
-		"</font>\n";
-	$raccourci_doc =  "<font size='1'>\n".
-		"<div align='left'>&lt;doc$id_document|left&gt;</div>\n".
+		"<div align='right'>&lt;img$id_document|right&gt;</div>\n";
+	$raccourci_doc .=  "<div align='left'>&lt;doc$id_document|left&gt;</div>\n".
 		"<div align='center'>&lt;doc$id_document|center&gt;</div>\n".
-		"<div align='right'>&lt;doc$id_document|right&gt;</div>\n".
-		"</font>\n". "<br>".$raccourci_img;
+		"<div align='right'>&lt;doc$id_document|right&gt;</div>\n";
+	$raccourci_doc .= "</font>\n";
 
 	//
 	// Afficher un apercu (pour les images)
 	//
-	if ($type_inclus == 'image') {
+	if ($type_inclus == 'image' AND $mode == 'vignette') {
 		echo "<td width='150' align='center' valign='top' rowspan='2'>\n";
 		echo "<div style='border: 1px solid #808080; padding: 4px; background-color: #e0f080;'>\n";
-		echo "<font size='2'><b>IMAGE</b></font><br>";
+		echo "<font size='2'><b>IMAGE</b></font><br>\n";
 		echo texte_vignette($largeur, $hauteur, $fichier);
-		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'><br>$largeur x $hauteur pixels<br><br></font>";
+		echo "<font face='verdana, arial, helvetica, sans-serif' size='1'><br>$largeur x $hauteur pixels<br><br></font>\n";
 		echo $raccourci_doc;
-		$raccourci_doc='';
+		echo "</td>\n";
 	}
 
 	//
 	// Afficher le document en tant que tel
 	//
 
-	echo "<td width='100%' align='left' valign='top' colspan='2'>\n";
+	echo "<td width='100%' align='left' valign='top'>\n";
 
 	if ($descriptif) {
 		echo debut_cadre_relief();
@@ -215,54 +215,56 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 
 
 	//
-	// Affichage de la vignette
+	// Affichage de la vignette (pour les documents)
 	//
 
-	if ($id_vignette) $vignette = fetch_document($id_vignette);
+	if ($mode == 'document') {
+		if ($id_vignette) $vignette = fetch_document($id_vignette);
+		if ($vignette) {
+			$fichier_vignette = $vignette->get('fichier');
+			$largeur_vignette = $vignette->get('largeur');
+			$hauteur_vignette = $vignette->get('hauteur');
+			$taille_vignette = $vignette->get('taille');
+		}
 
-	if ($vignette) {
-		$fichier_vignette = $vignette->get('fichier');
-		$largeur_vignette = $vignette->get('largeur');
-		$hauteur_vignette = $vignette->get('hauteur');
-		$taille_vignette = $vignette->get('taille');
+		echo "<td width='150' align='center' valign='top'>\n";
+		echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
+
+		if ($fichier_vignette) {
+			echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
+			echo texte_vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
+			echo "<font size='2'>\n";
+			$hash = calculer_action_auteur("supp_doc ".$id_vignette);
+			echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
+			echo "supprimer la vignette";
+			echo "</a>]</font><br>\n";
+	
+			echo $raccourci_doc;
+		}
+		else {
+			// pas de vignette
+			echo "<div align='center' style='border: 0px; padding: 2px; background-color: #f0e8e4'>\n";
+			echo vignette_par_defaut ($type_extension, 'right');
+			echo "<font size='2'>VIGNETTE PAR D&Eacute;FAUT</font>";
+			echo "</div><br>\n";
+
+			echo "<div align='left'>\n";
+			$hash = calculer_action_auteur("ajout_doc");
+			$link = new Link('../spip_image.php3');
+			$link->addVar('redirect', $this_link->getUrl());
+			$link->addVar('ajout_doc', 'oui');
+			$link->addVar('id_document', $id_document);
+			$link->addVar('id_article', $id_article);
+			$link->addVar('mode', 'vignette');
+			$link->addVar('hash_id_auteur', $connect_id_auteur);
+			$link->addVar('hash', $hash);
+	
+			afficher_upload($link, 'Charger une vignette spécifique&nbsp;:', 'image');
+			echo "</div>\n";
+		}
+		echo "</div>\n";
+		echo "</td>\n";
 	}
-
-	if ($type_inclus == 'image') 
-		echo "<tr><td width='100%'>&nbsp;<td align='right' valign='top'>\n";
-	else
-		echo "<td width='150' align='right' valign='top'>\n";
-	echo "<div style='border: 1px dashed black; padding: 4px; background-color: #fdf4e8;'>\n";
-	echo "<font size='2'><b>VIGNETTE DE PR&Eacute;VISUALISATION</b></font><br>";
-
-	if ($fichier_vignette) {
-		echo texte_vignette($largeur_vignette, $hauteur_vignette, $fichier_vignette);
-		echo "<font size='2'>\n";
-		$hash = calculer_action_auteur("supp_doc ".$id_vignette);
-		echo "[<a href='../spip_image.php3?redirect=".urlencode("article_documents.php3")."&id_document=$id_document&id_article=$id_article&hash_id_auteur=$connect_id_auteur&hash=$hash&doc_supp=$id_vignette'>";
-		echo "supprimer la vignette";
-		echo "</a>]</font><br>\n";
-
-		echo $raccourci_doc;
-	}
-	else {
-		// pas de vignette
-		echo vignette_par_defaut ($type_extension);
-
-		$hash = calculer_action_auteur("ajout_doc");
-		$link = new Link('../spip_image.php3');
-		$link->addVar('redirect', $this_link->getUrl());
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('id_document', $id_document);
-		$link->addVar('id_article', $id_article);
-		$link->addVar('mode', 'vignette');
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('hash', $hash);
-
-		afficher_upload($link, 'Nouvelle vignette&nbsp;:', 'image');
-	}
-
-	echo "</div>\n";
-	echo "</td>\n";
 
 	//
 	// fin de la boite document

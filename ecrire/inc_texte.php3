@@ -67,9 +67,9 @@ function ereg_remplace($cherche_tableau, $remplace_tableau, $texte) {
 //
 // vignette pour les documents lies
 //
-function vignette_par_defaut ($type_extension) {
+function vignette_par_defaut($type_extension, $align = '') {
 	if ($GLOBALS['flag_ecrire'])
-		$img = "IMG2";
+		$img = "../IMG";
 	else
 		$img = "IMG";
 
@@ -77,18 +77,23 @@ function vignette_par_defaut ($type_extension) {
 
 	if (file_exists($filename.'.png')) {
 		$vig = "$filename.png";
-	} else if (file_exists($filename.'-dist.png')) {
+	}
+	else if (file_exists($filename.'-dist.png')) {
 		$vig = "$filename-dist.png";
-	} else if (file_exists("$img/type_defaut.png")) {
+	}
+	else if (file_exists("$img/type_defaut.png")) {
 		$vig = "$img/type_defaut.png";
-	} else if (file_exists("$img/type_defaut-dist.png")) {
+	}
+	else if (file_exists("$img/type_defaut-dist.png")) {
 		$vig = "$img/type_defaut-dist.png";
 	}
 
-	$image = getimagesize($vig);
-	$vig = "<img src='$vig' alt='$type_extension' border='0' ".$image[3]." >";
+	$texte = "<img src='$vig' alt='$type_extension' border='0'";
+	if ($size = @getimagesize($vig)) $texte .= " ".$size[3];
+	if ($align) $texte .= " align='$align'";
+	$texte .= ">";
 
-	return $vig;
+	return $texte;
 }
 
 // Mise de cote des echappements
