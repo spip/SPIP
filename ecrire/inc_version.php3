@@ -818,13 +818,15 @@ if (LOCK_UN!=3) {
 	define ('LOCK_UN', 3);
 	define ('LOCK_NB', 4);
 }
-function test_flock ($dir, $fp=false) {
+function test_flock ($fichier, $fp=false) {
 	static $flock = array();
 	global $flag_flock;
 	if (!$flag_flock
 	OR $os_serveur == 'windows') // sous win rename() plante avec fopen()
 		return false;
 
+	preg_match('|(.*)/([^/]*)$|', $fichier, $match);
+	$dir = $match[1];
 	if (!$dir) $dir = '.';
 
 	// premier appel pour ce $dir ?
@@ -849,10 +851,7 @@ function test_flock ($dir, $fp=false) {
 // Si flock ne marche pas dans ce repertoire ou chez cet hebergeur,
 // on renvoie OK pour ne pas bloquer
 function spip_flock($filehandle, $mode, $fichier) {
-	preg_match('|(.*)/([^/]*)$|', $fichier, $match);
-	$dir = $match[1];
-
-	if (!test_flock($dir))
+	if (!test_flock($fichier))
 		return true;
 
 	$r = flock($filehandle, $mode);
@@ -946,7 +945,7 @@ function ecrire_fichier ($fichier, $contenu) {
 
 	if ($ft = @$fopen($fichiertmp, 'wb')) {
 		// on en profite pour tester flock()
-		$flock = test_flock($dir, $ft);
+		$flock = test_flock($fichiertmp, $ft);
 		$s = @$fputs($ft, $contenu, $a = strlen($contenu));
 		@$fclose($ft);
 		$ok = ($s == $a);
@@ -986,12 +985,14 @@ function supprimer_fichier ($fichier) {
 	if (!@file_exists($fichier))
 		return false;
 
+	if (test_flock($fichier))
 	if ($fl = @fopen($fichier, 'r')) {
 		while(!spip_flock($fl, LOCK_EX, $fichier));
 		spip_flock($fl, LOCK_UN, $fichier);
 		@fclose($fl);
-		@unlink($fichier);
 	}
+
+	@unlink($fichier);
 }
 
 //
