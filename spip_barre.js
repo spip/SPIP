@@ -32,6 +32,21 @@ function barre_raccourci(debut,fin,champ) {
 	{
 		theSelection = document.selection.createRange().text; // Get text selection
 		if (theSelection) {
+		
+			if (theSelection.substring(theSelection.length-1, theSelection.length) == ' ') 
+			{	
+				theSelection = theSelection.substring(0, theSelection.length-1);
+				fin = fin + " ";
+			}
+			if (theSelection.substring(0,1) == '{' && debut.substring(0,1) == '{') 
+			{	
+				debut = debut + " ";
+			}
+			if (theSelection.substring(theSelection.length-1, theSelection.length) == '}' && fin.substring(0,1) == '}') 
+			{	
+				fin = " " + fin;
+			}
+			
 			// Add tags around selection
 			document.selection.createRange().text = debut + theSelection + fin;
 			txtarea.focus();
@@ -128,9 +143,11 @@ function mozWrap(txtarea, open, close)
 	var s2 = (txtarea.value).substring(selStart, selEnd)
 	var s3 = (txtarea.value).substring(selEnd, selLength);
 
-	// Eviter melange bold-italic
+	// Eviter melange bold-italic-intertitre
 	if ((txtarea.value).substring(selEnd,selEnd+1) == '}' && close.substring(0,1) == "}") close = close + " ";
+	if ((txtarea.value).substring(selEnd-1,selEnd) == '}' && close.substring(0,1) == "}") close = " " + close;
 	if ((txtarea.value).substring(selStart-1,selStart) == '{' && open.substring(0,1) == "{") open = " " + open;
+	if ((txtarea.value).substring(selStart,selStart+1) == '{' && open.substring(0,1) == "{") open = open + " ";
 
 
 
