@@ -140,12 +140,11 @@ function afficher_rubriques_filles($id_parent) {
 		if (!$numero_block["$nom_block"] > 0){
 			$compteur_block++;
 			$numero_block["$nom_block"] = $compteur_block;
+
+			if (!$first_couche) $first_couche = $compteur_block;
+			$last_couche = $compteur_block;
 		}
 
-
-		$javasc_ouvrir .= "ouvrir_couche('$compteur_block', '$spip_lang_rtl');";
-		$javasc_fermer .= "fermer_couche('$compteur_block', '$spip_lang_rtl');";
-		
 		if ($id_parent == '0') 	{
 			$rubrique[$id_rubrique] = "$titre";
 		}
@@ -185,9 +184,10 @@ function afficher_rubriques_filles($id_parent) {
 		
 		$article[$id_rubrique][] = "<div class='puce-article' style='background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div><a href='articles.php3?id_article=$id_article' class='verdana1'>$titre</a></div></div>";
 	}
-
-
 	
+	$javasc_ouvrir="manipuler_couches('ouvrir','$spip_lang_rtl',$first_couche,$last_couche)";
+	$javasc_fermer="manipuler_couches('fermer','$spip_lang_rtl',$first_couche,$last_couche)";
+
 	// Demarrer l'affichage
 	if ($les_rubriques AND test_layer()) {
 		$les_rubriques = join($les_rubriques,",");

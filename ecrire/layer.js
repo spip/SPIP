@@ -35,4 +35,14 @@ function fermer_couche(couche, rtl) {
 	layer.style.display = 'none';
 	vis[couche] = 'hide';
 }
-
+function manipuler_couches(action,rtl,first,last) {
+	if (action=='ouvrir') {
+		for (j=first; j<=last; j+=1) {
+			ouvrir_couche(j,rtl);
+		}
+	} else {
+		for (j=first; j<=last; j+=1) {
+			fermer_couche(j,rtl);
+		}
+	}
+}
