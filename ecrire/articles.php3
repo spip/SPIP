@@ -117,9 +117,11 @@ $result = mysql_query($query);
 while($row=mysql_fetch_array($result)){
 	$ze_doc[]=$row['id_document'];
 }
-$ze_docs = join($ze_doc,",");
 
-mysql_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
+if (count($ze_doc)>0){
+	$ze_docs = join($ze_doc,",");
+	mysql_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
+}
 
 
 //
