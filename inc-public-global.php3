@@ -160,10 +160,9 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	global $delais, $lastmodified;
 
 	spip_log("Inclusion dans $cache_incluant");
-	$contexte = $contexte_inclus;
-	$contexte['fond'] = $fond;
+	$contexte_inclus['fond'] = $fond;
 
-	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache($contexte, $fond);
+	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache($contexte_inclus, $fond);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
@@ -210,6 +209,20 @@ function admin_page($cached, $texte) {
 			$texte .= $a;
 	}
 	return $texte;
+}
+
+// Si l'admin a demande un affichage
+function afficher_page_si_demande_admin ($type, $texte, $fichier){
+	if ($GLOBALS['var_afficher_debug'] == $type
+	AND $GLOBALS['auteur_session']['statut'] == '0minirezo') {
+		include_local('inc-admin.php3');
+		@header('Content-Type: text/html; charset='.lire_meta('charset'));
+		echo "<code>$fichier</code>\n";
+		echo boutons_admin_debug();
+		echo "<hr />\n";
+		highlight_string($texte);
+		exit;
+	}
 }
 
 function cherche_image_nommee($nom) {

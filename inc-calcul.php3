@@ -78,14 +78,20 @@ function charger_squelette ($squelette) {
 
 		$skel_compile = "<"."?php\n"
 		. calculer_squelette($skel, $nom, $ext)."\n?".">";
+
+		// Evaluer le squelette
+		afficher_page_si_demande_admin ('skel', $skel_compile, "CACHE/skel_$nom.php");
 		eval('?'.'>'.$skel_compile);
 
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_compile);
 			return $nom;
 		} else {
-			echo ("<h1>Horreur, squelette pas compile !</h1>");
-			echo $skel_compile;
+			# bug du compilo !
+			# appeler le bouton admin
+			echo _L("<h1>Horreur, squelette pas compile !</h1>");
+			include_local('inc-admin.php3');
+			echo boutons_admin_debug();
 			exit;
 		}
 	}
