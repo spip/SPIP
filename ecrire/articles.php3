@@ -43,9 +43,6 @@ if ($id_article==0) {
 
 $clean_link = new Link("articles.php3?id_article=$id_article");
 
-// Initialiser doublons pour documents (completes par "propre($texte)")
-$id_doublons['documents'] = "0";
-
 
 
 //////////////////////////////////////////////////////

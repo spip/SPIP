@@ -61,9 +61,7 @@ function vignette_par_defaut($type_extension) {
 //
 
 function embed_document($id_document, $les_parametres="", $afficher_titre=true) {
-	global $id_doublons;
-
-	$id_doublons['documents'] .= ",$id_document";
+	$GLOBALS['doublons_documents'] .= ",$id_document";
 
 	if ($les_parametres) {
 		$parametres = explode("|",$les_parametres);
@@ -194,10 +192,9 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 //
 
 function integre_image($id_document, $align, $type_aff = 'IMG') {
-	global $id_doublons;
 	global $flag_ecrire;
 
-	$id_doublons['documents'] .= ",$id_document";
+	$GLOBALS['doublons_documents'] .= ",$id_document";
 
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = spip_query($query);
@@ -467,7 +464,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
-	global $id_doublons, $options;
+	global $options;
 	global $spip_lang_left, $spip_lang_right;
 
 	$image_link = new Link('../spip_image.php3');
@@ -487,7 +484,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		"AND docs.mode='document'".
 		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')";
 
-	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (".$id_doublons['documents'].") ";
+	if ($GLOBALS['doublons_documents']) $query .= " AND docs.id_document NOT IN (0".$GLOBALS['doublons_documents'].") ";
 	$query .= " ORDER BY docs.id_document";
 
 	$images_liees = fetch_document($query);
@@ -725,7 +722,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</tr>\n";
 			}
 			
-			$id_doublons['documents'] .= ",$id_document";
+			$GLOBALS['doublons_documents'] .= ",$id_document";
 		}
 		if ($case > 0) {
 			echo "<td style='border-left: 1px solid $couleur_claire;'>&nbsp;</td>";
@@ -742,7 +739,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'";
 
-	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (".$id_doublons['documents'].") ";
+	if ($GLOBALS['doublons_documents']) $query .= " AND docs.id_document NOT IN (0".$GLOBALS['doublons_documents'].") ";
 	$query .= " ORDER BY docs.id_document";
 
 	$documents_lies = fetch_document($query);
@@ -914,7 +911,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</tr>\n";
 			}
 			
-			$id_doublons['documents'] .= ",$id_document";
+			$GLOBALS['doublons_documents'] .= ",$id_document";
 		}
 		if ($case > 0) {
 			echo "<td style='border-left: 1px solid #aaaaaa;'>&nbsp;</td>";
@@ -1379,7 +1376,6 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 	global $options;
-	global $id_doublons;
 
 
 	if ($GLOBALS['id_document'] > 0) {
@@ -1388,7 +1384,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 	if ($id_document == $id_document_deplie) $flag_deplie = true;
 
- 	$doublons = $id_doublons['documents'].",";
+ 	$doublons = $GLOBALS['doublons_documents'].",";
 
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 
@@ -1505,7 +1501,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		}
 		echo "</div>";
 
-		if (!ereg(",$id_document,", "$doublons")) {
+		if (!ereg(",$id_document,", $doublons)) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
 			if ($options == "avancees" AND ($type_inclus == "embed" OR $type_inclus == "image") AND $largeur > 0 AND $hauteur > 0) {
 				echo "<b>"._T('info_inclusion_vignette')."</b></br>";
@@ -1525,7 +1521,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 
 		if ($flag_deplie) echo debut_block_visible($block);
 		else  echo debut_block_invisible($block);
-		if (ereg(",$id_document,", "$doublons")) {
+		if (ereg(",$id_document,", $doublons)) {
 			echo "<div style='padding:2px;'><font size=1 face='arial,helvetica,sans-serif'>";
 			echo "<div align=center>&lt;doc$id_document&gt;</div>\n";
 			echo "</font></div>";
@@ -1609,7 +1605,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		//
 		// Preparer le raccourci a afficher sous la vignette ou sous l'apercu
 		//
-		if (!ereg(",$id_document,", "$doublons")) {
+		if (!ereg(",$id_document,", $doublons)) {
 			$raccourci_doc = "<div><font size='2' color='#666666' face='arial,helvetica,sans-serif'>";
 			if (strlen($descriptif) > 0 OR strlen($titre) > 0) {
 				$raccourci_doc .= "<div align='left'>&lt;doc$id_document|left&gt;</div>\n".
@@ -1639,13 +1635,13 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			if (strlen($descriptif)>0)
 				echo propre($descriptif);
 
-			if (!ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
+			if (!ereg(",$id_document,", $doublons)) echo $raccourci_doc;
 		}
 
 		if ($flag_deplie) echo debut_block_visible($block);
 		else  echo debut_block_invisible($block);
 
-		if (ereg(",$id_document,", "$doublons")) echo $raccourci_doc;
+		if (ereg(",$id_document,", $doublons)) echo $raccourci_doc;
 		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br /></font></div>\n";
 
 		$link = new Link($redirect_url);
