@@ -322,7 +322,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$url = $url_base."&supp_mot=$id_mot";
 				
 				if ($flag_groupe)
-					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">"._T('info_retirer_mot')."</A></FONT>";
+					echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><A HREF=\"$url\">"._T('info_retirer_mot')."&nbsp;<img src='img_pack/croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></A></FONT>";
 				else echo "&nbsp;";
 				echo "</TD>";
 			}
