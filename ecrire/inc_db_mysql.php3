@@ -21,8 +21,10 @@ function spip_query_db($query) {
 	if ($my_profile)
 		$m1 = microtime();
 
-	if ($GLOBALS['mysql_rappel_connexion'] AND $spip_mysql_link) $result = mysql_query($query, $spip_mysql_link);
-	else $result = mysql_query($query);
+	if ($GLOBALS['mysql_rappel_connexion'] AND $spip_mysql_link)
+		$result = mysql_query($query, $spip_mysql_link);
+	else
+		$result = mysql_query($query);
 
 	if ($my_profile) {
 		$m2 = microtime();
@@ -102,14 +104,14 @@ function traite_query($query) {
 
 	// changer les noms des tables ($table_prefix)
 	if ($GLOBALS['flag_pcre']) {
-		if (preg_match('/\s(VALUES|WHERE)\s/i', $query, $regs)) {
+		if (preg_match('/\s(SET|VALUES|WHERE)\s/i', $query, $regs)) {
 			$suite = strstr($query, $regs[0]);
 			$query = substr($query, 0, -strlen($suite));
 		}
 		$query = preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
 	}
 	else {
-		if (eregi('[[:space:]](VALUES|WHERE)[[:space:]]', $query, $regs)) {
+		if (eregi('[[:space:]](SET|VALUES|WHERE)[[:space:]]', $query, $regs)) {
 			$suite = strstr($query, $regs[0]);
 			$query = substr($query, 0, -strlen($suite));
 		}
