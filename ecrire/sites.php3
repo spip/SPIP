@@ -80,7 +80,7 @@ if ($new == 'oui') {
 	
 		$moderation = (lire_meta("moderation_sites") == "oui")? 'oui' : 'non';
 	
-		$id_syndic = spip_insert("spip_syndic",
+		$id_syndic = spip_abstract_insert("spip_syndic",
 					 "(nom_site, id_rubrique, id_secteur, date, date_syndic, statut, syndication, moderation)",
 					 "('"._T('avis_site_introuvable')."', $id_rubrique, $id_rubrique, NOW(), NOW(), 'refuse', 'non', '$moderation')");
 	}

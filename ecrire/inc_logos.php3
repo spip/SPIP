@@ -380,7 +380,7 @@ function inserer_vignette_base($image, $vignette) {
 	{
 		if ($row = spip_fetch_array($t)) {
 			$id_document = $row['id_document'];
-			$id_vignette = spip_insert("spip_documents", 
+			$id_vignette = spip_abstract_insert("spip_documents", 
 						   "(mode)",
 						   "('vignette')");
 			spip_query("UPDATE spip_documents SET id_vignette=$id_vignette WHERE id_document=$id_document");

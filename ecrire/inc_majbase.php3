@@ -357,7 +357,7 @@ function maj_base() {
 				$fichier = _DIR_IMG . $fichier;
 				$taille = @filesize($fichier);
 				$fichier = substr('../', '', $fichier);
-				$id_document = spip_insert("spip_documents", 
+				$id_document = spip_abstract_insert("spip_documents", 
 							   "(titre, id_type, fichier, mode, largeur, hauteur, taille)",
 							   "('image $largeur x $hauteur', $id_type, '$fichier', 'vignette', '$largeur', '$hauteur', '$taille')");
 
@@ -528,7 +528,7 @@ function maj_base() {
 			$res = spip_query("SELECT * FROM spip_groupes_mots
 				WHERE titre='$type'");
 			if (spip_num_rows($res) == 0) {
-			  if ($id_groupe = spip_insert("spip_groupes_mots", 
+			  if ($id_groupe = spip_abstract_insert("spip_groupes_mots", 
 						       "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)",
 						       "('$type', 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')"))
 

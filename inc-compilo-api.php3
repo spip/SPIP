@@ -29,7 +29,7 @@ class Boucle {
 	var $lang_select;
 	var $type_requete;
 	var $sql_serveur;
-	var $param;
+	var $param = array();
 	var $separateur;
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
