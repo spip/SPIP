@@ -810,6 +810,9 @@ function debut_html($titre = "") {
 	$titre = textebrut(typo($titre));
 
 	if ($nom_site_spip == "") $nom_site_spip="SPIP";
+
+	$charset = lire_meta('charset') ||
+	$charset = 'iso-8859-1';
 	
 	?>
 	<html>
@@ -818,7 +821,7 @@ function debut_html($titre = "") {
 	<meta http-equiv="Expires" content="0">
 	<meta http-equiv="cache-control" content="no-cache,no-store">
 	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset ; ?>">
 <style><!--
 	.forml {width: 100%; background-color: #E4E4E4; background-position: center bottom; float: none; color: #000000}
 	.formo {width: 100%; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
