@@ -192,14 +192,6 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 }
 $texte = $texte_ajout . $texte;
 
-//
-// Traiter les fins de lignes
-//
-if ($post_autobr) {
-	$chapo = post_autobr($chapo);
-	$texte = post_autobr($texte);
-}
-
 // preparer le virtuel
 
 if ($changer_virtuel && $flag_editable) {
@@ -232,6 +224,25 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
+	// Stockage des versions : creer une premier version si non-existante
+	if ($articles_versions AND $new != 'oui') {
+		include_ecrire("lab_revisions.php");
+		spip_log("version initiale de l'article $id_article");
+		$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 0,1";
+		if (!spip_num_rows(spip_query($query))) {
+			$select = join(", ", $champs);
+			$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
+			$champs_originaux = spip_fetch_array(spip_query($query));
+			$id_version = ajouter_version($id_article, $champs_originaux, _L("Version initiale"));
+
+			// Remettre une date un peu ancienne pour la version initiale 
+			if ($id_version == 1) // test inutile ?
+			spip_query("UPDATE spip_versions
+			SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
+			WHERE id_article=$id_article AND id_version=1");
+		}
+	}
+
 	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_site=\"$url_site\", nom_site=\"$nom_site\" $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
@@ -248,10 +259,9 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		}
 	}
 
-	// -- Experimental --
 	// Stockage des versions
 	if ($articles_versions) {
-		include_ecrire("inc_revisions.php3");
+		include_ecrire("lab_revisions.php");
 		ajouter_version($id_article, $champs_versions);
 	}
 

@@ -230,6 +230,8 @@ function supprimer_fragments($id_article, $version_debut, $version_fin) {
 function recuperer_fragments($id_article, $id_version) {
 	$fragments = array();
 
+	if ($id_version == 0) return array();
+
 	$query = "SELECT id_fragment, version_min, compress, fragment FROM spip_versions_fragments ".
 		"WHERE id_article=$id_article AND version_min<=$id_version AND version_max>=$id_version";
 	$result = spip_query($query);

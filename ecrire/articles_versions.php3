@@ -1,8 +1,9 @@
 <?php
 
-include("inc.php3");
+include("inc.php");
 
-include_ecrire("inc_revisions.php3");
+include_spip("ecrire.php");
+include_spip("revisions.php");
 
 
 
@@ -20,7 +21,6 @@ if ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row["id_rubrique"];
 	$date = $row["date"];
 	$statut_article = $row["statut"];
-	$titre = typo($row["titre"]);
 	$maj = $row["maj"];
 	$date_redac = $row["date_redac"];
 	$visites = $row["visites"];
@@ -30,7 +30,7 @@ if ($row = spip_fetch_array($result)) {
 }
 
 if (!($id_version = intval($id_version))) {
-	$id_version = intval($row['id_version']);
+	$id_version = $row['id_version'];
 }
 $textes = recuperer_version($id_article, $id_version);
 
@@ -50,7 +50,7 @@ if (!$id_diff) {
 //
 
 if ($id_version && $id_diff) {
-	include_ecrire("inc_diff.php3");
+	include_spip("diff.php");
 
 	if ($id_diff > $id_version) {
 		$t = $id_version;
@@ -175,8 +175,9 @@ echo "</tr></table>";
 
 debut_cadre_relief();
 
-$query = "SELECT id_version, date, v.id_auteur, a.nom FROM spip_versions AS v, spip_auteurs AS a ".
-	"WHERE id_article=$id_article AND v.id_auteur=a.id_auteur ORDER BY date DESC";
+$query = "SELECT id_version, titre_version, date, v.id_auteur, a.nom ".
+	"FROM spip_versions AS v, spip_auteurs AS a ".
+	"WHERE id_article=$id_article AND v.id_auteur=a.id_auteur ORDER BY id_version DESC";
 $result = spip_query($query);
 
 echo "<ul class='verdana3'>";
@@ -184,17 +185,19 @@ while ($row = spip_fetch_array($result)) {
 	echo "<li>\n";
 	$date = affdate_heure($row['date']);
 	$version_aff = $row['id_version'];
+	$titre_version = typo($row['titre_version']);
+	$titre_aff = $titre_version ? $titre_version : $date;
 	if ($version_aff != $id_version) {
 		$link = new Link();
 		$link->addVar('id_version', $version_aff);
 		$link->delVar('id_diff');
-		echo "<a href='".$link->getUrl('diff')."' title=\""._T('info_historique_affiche')."\">$date</a>";
+		echo "<a href='".$link->getUrl('diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
 	}
 	else {
-		echo "<b>$date</b>";
+		echo "<b>$titre_aff</b>";
 	}
 	echo " (".typo($row['nom']).")";
-	if ($options == 'avancees') {	// note : c'est redondant car on ne peut arriver sur cette page qu'en options avancees...
+	#if ($options == 'avancees') {	// note : c'est redondant car on ne peut arriver sur cette page qu'en options avancees...
 		//echo " <span style='color:#989898; font-size: 80%; font-weight: bold;'><i>#".$row['id_version']."</i></span>";
 		if ($version_aff != $id_version) {
 			echo " <span class='verdana2'>";
@@ -210,7 +213,7 @@ while ($row = spip_fetch_array($result)) {
 			}
 			echo "</span>";
 		}
-	}
+	#} // fin avancees
 	echo "</li>\n";
 }
 echo "</ul>\n";
@@ -257,14 +260,14 @@ if ($id_version) {
 	
 		if ($les_notes) {
 			echo debut_cadre_relief();
-			echo "<div $dir_lang class='arial1'>";
+			echo "<div $dir_lang><font size='2'>";
 			echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-			echo "</font>";
+			echo "</font></div>";
 			echo fin_cadre_relief();
 		}
 	
 		if ($champs_extra AND $extra) {
-			include_ecrire("inc_extra.php3");
+			include_spip("extra.php");
 			extra_affichage($extra, "articles");
 		}
 	}
