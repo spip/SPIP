@@ -1092,7 +1092,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href<img src='img_pack/$fond'$alt$title border='0'></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 		echo "</td>\n";
@@ -1108,7 +1108,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			echo "$a_href<img src='img_pack/$fond'$alt$title border='0' alt=' '></a><br>";
 		}
 		if ($spip_display != 3) {
-			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "$a_href_icone<font face='Verdana,Arial,Helvetica,sans-serif' size='2' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td></tr></table>";
 		echo "</td>\n";
