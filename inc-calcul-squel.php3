@@ -1204,7 +1204,11 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		break;
 	
 	case 'ON_OFF':
-		$code = 'calcul_on_off($contexte)';
+		$id_on_off = $GLOBALS['tables_doublons'][$boucles[$id_boucle]->type_requete];
+		if ($id_on_off) 
+			$code = "(\$GLOBALS['$id_on_off'] == \$contexte['$id_on_off']) ? 'on' : 'off'";
+		else 
+			$code = "'off'";
 		break;
 
 	//
