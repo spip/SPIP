@@ -824,6 +824,20 @@ function maj_base() {
 		maj_version (1.732);
 	}
 
+	if ($version_installee < 1.733) {
+		// spip_query("ALTER TABLE spip_articles ADD id_version int unsigned DEFAULT '0' NOT NULL");
+		spip_query("DROP TABLE spip_versions");
+		spip_query("DROP TABLE spip_versions_fragments");
+		creer_base();
+		maj_version(1.733);
+	}
+
+	if ($version_installee < 1.734) {
+		// integrer nouvelles tables auxiliaires du compilateur ESJ
+		creer_base();
+		maj_version(1.734);
+	}
+
 	return true;
 }
 
