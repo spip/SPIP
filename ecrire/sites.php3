@@ -8,10 +8,12 @@ include_ecrire ("inc_sites.php3");
 $proposer_sites = lire_meta("proposer_sites");
 
 function calculer_droits() {
-	global $connect_statut, $statut, $id_rubrique, $proposer_sites, $new;
+	global $connect_statut, $statut, $id_rubrique, $id_rubrique_depart, $proposer_sites, $new;
 	global $flag_editable, $flag_administrable;
 
 	$flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique));
+	if ($id_rubrique_depart > 0)
+		 $flag_administrable &= acces_rubrique($id_rubrique_depart);
 	$flag_editable = ($flag_administrable OR ($statut == 'prop' AND $proposer_sites > 0) OR $new == 'oui');
 }
 
@@ -89,7 +91,7 @@ $result = spip_query($query);
 
 if ($row = spip_fetch_array($result)) {
 	$statut = $row["statut"];
-	$id_rubrique = $row["id_rubrique"];
+	$id_rubrique_depart = $row["id_rubrique"];
 }
 if ($new == 'oui') $statut = 'prop';
 
