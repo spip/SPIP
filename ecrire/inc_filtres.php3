@@ -87,6 +87,23 @@ function taille_en_octets ($taille) {
 }
 
 
+// transforme n'importe quel champ en une chaine utilisable dans php en toute securite
+// < ? php $x = [(#TEXTE|chainephp)]; ? >
+function chainephp ($texte) {
+	$texte = str_replace ('\\', '\\\\', $texte);
+	$texte = str_replace ('\'', '\\\'', $texte);
+	return '\''.$texte.'\'';
+}
+
+
+// extraire une date de n'importe quel champ (a completer...)
+function extraire_date($texte) {
+	// format = 2001-08
+	if (ereg("([1-2][0-9]{3})[^0-9]*(0?[1-9]|1[0-2])",$texte,$regs))
+		return $regs[1]."-".$regs[2]."01";
+}
+
+
 //
 // date, heure, saisons
 //
