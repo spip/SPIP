@@ -339,17 +339,23 @@ function parser_boucle($texte, $id_parent) {
 						}
 						// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
 						else if ($type != 'mots' AND ($col == 'type_mot' OR $col == 'titre_mot')) {
-							$col_lien = 'spip_mots_'."$type";
-							if ($type == 'forums') $col_lien = "spip_mots_forum";
-							if ($type == 'syndication') $col_lien = "spip_mots_syndic";
-							$req_from[] = $col_lien;
-							$col_table = 'spip_mots';
-							$req_from[] = $col_table;
-							$col = substr($col, 0, strlen($col)-4);
-							$req_where[] = "$table.$id_objet=$col_lien.$id_objet";
-							$req_where[] = "$col_lien.id_mot=$col_table.id_mot";
+							if ($type == 'forums')
+								$col_lien = "spip_mots_forum";
+							else if ($type == 'syndication')
+								$col_lien = "spip_mots_syndic";
+							else
+								$col_lien = 'spip_mots_'.$type;
+							$req_from[] = "$col_lien AS lien_mot";
+							$req_from[] = 'spip_mots AS mots';
+							$req_where[] = "$table.$id_objet=lien_mot.$id_objet";
+							$req_where[] = "lien_mot.id_mot=mots.id_mot";
 							$req_group = " GROUP BY $table.$id_objet";
+							$col_table = 'mots';
 							$flag_lien = true;
+							if ($col == 'type_mot')
+								$col = 'type';
+							else
+								$col = 'titre';
 						}
 
 						// Cas particulier : selection des documents selon l'extension
