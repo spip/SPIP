@@ -60,6 +60,7 @@ function init_config() {
 		'charset' => 'iso-8859-1',
 
 		'creer_htpasswd' => 'non',
+		'creer_htaccess' => 'non',
 
 		'langue_site' => $lang,
 
@@ -263,7 +264,8 @@ function appliquer_modifs_config() {
 	// modifs de secu (necessitent une authentification ftp)
 	$liste_meta = array(
 		// 'secu_avertissement',	// n'existe plus !
-		'creer_htpasswd'
+			    'creer_htpasswd',
+			    'creer_htaccess'
 	);
 	while (list(,$i) = each($liste_meta))
 		if (isset($GLOBALS[$i]) AND ($GLOBALS[$i] != lire_meta($i)))

@@ -538,7 +538,6 @@ function calcul_balise_logo ($p) {
 	eregi("^LOGO_([A-Z]+)(_.*)?$", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
 	$suite_logo = $regs[2];	
-	spip_log($suite_logo);
 	if (ereg("^_SPIP(.*)$", $suite_logo, $regs)) {
 		$type_objet = 'RUBRIQUE';
 		$suite_logo = $regs[1];

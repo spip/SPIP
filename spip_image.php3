@@ -12,11 +12,6 @@ function copier_document($ext, $orig, $source) {
 		ereg_replace("[^.a-zA-Z0-9_=-]+", "_", 
 			translitteration(ereg_replace("\.([^.]+)$", "", 
 						      ereg_replace("<[^>]*>", '', basename($orig)))));
-	// a améliorer au plus  vite
-	$secure = lire_meta("creer_htpasswd") == 'oui';
-	if ($secure)
-	  verifier_htaccess($dir);
-	else @unlink("$dir/.htaccess");
 
 	# bien vu ?
 	if ($orig == ($dest . '.' . $ext)) return $orig;

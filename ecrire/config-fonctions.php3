@@ -395,35 +395,59 @@ fin_cadre_trait_couleur();
 }
 
 
-###### ATTENTION EXPERIMENTAL:
-# l'option htpasswd est remplacee par la securisation des IMG/*
+
 //
 // Creer fichier .htpasswd ?
 //
 
 if ($options == "avancees" AND !@file_exists('.htaccess') AND !$REMOTE_USER ) {
-#	include_ecrire ("inc_acces.php3");
-#	ecrire_acces();
+	include_ecrire ("inc_acces.php3");
+	ecrire_acces();
 
 
 
 debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
-			  #_T('info_fichiers_authent')
-			  _L("acc&egrave;s aux document joints par leur URL"));
+			  _T('info_fichiers_authent'));
+
 	$creer_htpasswd = lire_meta("creer_htpasswd");
 
+	echo "<div class='verdana2'>", _T('texte_fichier_authent'), "</div>";
+
 	echo "<div class='verdana2'>";
-#	echo _T('texte_fichier_authent');
+	afficher_choix('creer_htpasswd', $creer_htpasswd,
+		       array('oui' => _T('item_creer_fichiers_authent'),
+			     'non' =>  _T('item_non_creer_fichiers_authent')),
+		       ' &nbsp; ');
+	echo "</div>";
+	echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+	
+fin_cadre_trait_couleur();
+
+	echo "<p>";
+}
+
+###### ATTENTION EXPERIMENTAL:
+
+//
+// Creer fichier .htaccess dans les répertoires de documents 
+//
+
+if ($options == "avancees" AND !$REMOTE_USER ) {
+
+debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
+			  _L("Acc&egrave;s aux document joints par leur URL"));
+#	include_ecrire ("inc_acces.php3"); vient d'etre fait
+	$creer_htaccess = gerer_htaccess();
+
+	echo "<div class='verdana2'>";
 	echo _L("Cette option interdit la lecture des documents joints si le texte auquel ils se rattachent n'est pas publi&eacute");
 	echo "</div>";
 
 	echo "<div class='verdana2'>";
-	afficher_choix('creer_htpasswd', $creer_htpasswd,
+	afficher_choix('creer_htaccess', $creer_htaccess,
 		       array('oui' => _L("interdire la lecture"),
-		      #_T('item_creer_fichiers_authent'),
 			     'non' => _L("autoriser la lecture")),
-# _T('item_non_creer_fichiers_authent')),
- ' &nbsp; ');
+		       ' &nbsp; ');
 	echo "</div>";
 		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 	
