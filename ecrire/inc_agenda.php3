@@ -217,5 +217,76 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 	echo "</div>";
 }
 
+function liste_rv($query, $type) {
+	global $spip_lang_rtl, $spip_lang_left;
+	
+	if ($type == annonces) {
+		$titre = _T('info_annonces_generales');
+		$couleur_titre = "yellow";
+		$couleur_texte = "black";
+		$couleur_fond = "#ffffee";
+	}
+	else if ($type == pb) {
+		$titre = _T('infos_vos_pense_bete');
+		$couleur_titre = "blue";
+		$couleur_fond = "#eeeeff";
+		$couleur_texte = "white";
+	}
+	else if ($type == rv) {
+		$titre = _T('info_vos_rendez_vous');
+		$couleur_titre = "#666666";
+		$couleur_fond = "#eeeeee";
+		$couleur_texte = "white";
+	}
+
+	$result = spip_query($query);
+	if (spip_num_rows($result) > 0){
+		echo "<p /><div style='border: 1px solid #999999; background-color: $couleur_fond; -moz-border-radius: 5px;'>";
+		echo "<div style='background-color: $couleur_titre; padding: 3px; color: $couleur_texte;'>";
+		echo "<b class='verdana1'>$titre</b>";
+		echo "</div>";
+		echo "<div style='padding: 3px;'>";
+		while ($row = spip_fetch_object($result)) {
+			if (ereg("^=([^[:space:]]+)$",$row->texte,$match))
+				$url = $match[1];
+			else
+				$url = "message.php3?id_message=".$row->id_message;
+				$type=$row->type;
+				$rv = $row->rv;
+				$date = $row->date_heure;
+
+				if ($type=="normal") $bouton = "m_envoi";
+				elseif ($type=="pb") $bouton = "m_envoi_bleu";
+				elseif ($type=="affich") $bouton = "m_envoi_jaune";
+				else $bouton = "m_envoi";
+			
+			$titre = typo($row->titre);
+
+			echo "<div style='margin: 5px; padding-$spip_lang_left: 20px; background: url(img_pack/$bouton$spip_lang_rtl.gif) $spip_lang_left center no-repeat;'>";
+			if ($rv == "oui") {
+				echo "<b class='arial0'>".affdate_court($date)."</b><br />";
+			}
+			echo "<b><a href='$url' class='arial1'>$titre</a></b>";
+			echo "</div>\n";
+		}
+		echo "</div>";
+		
+		echo "</div>";
+	}
+}
+
+function afficher_taches () {
+	global $connect_id_auteur;
+	$query = "SELECT * FROM spip_messages WHERE type = 'affich' AND rv != 'oui' AND statut = 'publie' ORDER BY date_heure DESC";
+	liste_rv($query, "annonces");
+
+	$query = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'";
+	liste_rv($query, "pb");
+
+	$query = "SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure";
+	liste_rv($query, "rv");
+
+}
+
 
 ?>
