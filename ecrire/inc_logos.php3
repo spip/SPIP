@@ -219,7 +219,9 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 
 		$creation = true;
 		if (!$srcsize = @getimagesize($image)) return;
-		list ($destWidth,$destHeight) = image_ratio($srcsize[0], $srcsize[1], $maxWidth, $maxHeight);
+		$srcWidth=$srcsize[0];
+		$srcHeight=$srcsize[1];
+		list ($destWidth,$destHeight) = image_ratio($srcWidth, $srcHeight, $maxWidth, $maxHeight);
 
 		// imagemagick en ligne de commande
 		if ($process == 'convert') {
@@ -239,7 +241,6 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 		else
 		// gd ou gd2
 		if ($process == 'gd1' OR $process == 'gd2') {
-
 			// Recuperer l'image d'origine
 			if ($format == "jpg") {
 				$srcImage = @ImageCreateFromJPEG($image);
