@@ -15,15 +15,15 @@ function aide ($aide) {
 	if (!ereg("/ecrire/", $GLOBALS['REQUEST_URI']))
 		$dir_ecrire = 'ecrire/';
 
-	return " <script><!--\n".
+	return " &nbsp;<script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\''.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700,height=1000'); ".
+	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); ".
 	'void(0);\">");'.
 	"\n// --></script><noscript>".
 	'<a href="'.$dir_ecrire.'aide_index.php3?aide='.
 	$aide.
-	'"></noscript><img src=\''.$dir_ecrire.'img_pack/aide.gif\' alt=\'AIDE\' width=\'12\' height=\'12\' border=\'0\' align=\'middle\'></a>';
+	'" target="_blank"></noscript><img src="'.$dir_ecrire.'img_pack/aide.gif" alt="AIDE" title="De l\'aide sur cet &eacute;l&eacute;ment" width="20" height="16" border="0" align="top"></a>';
 }
 
 
