@@ -60,7 +60,7 @@
 	<B_auteurs_un><:par_auteur:> <BOUCLE_auteurs_un(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_un>
 	</div>
 	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
-	<br>
+	<br />
 </BOUCLE_article>
 
 <BOUCLE_breve(BREVES) {id_breve}>
@@ -71,20 +71,20 @@
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>
 	[<div class="texte"><div class="extrait">(#INTRODUCTION)</div></div>]
-	<br>
+	<br />
 </BOUCLE_breve>
 
 <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
 	<:en_reponse:>
 	<h2 class="titre-extrait"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
 	[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
-	<br>
+	<br />
 </BOUCLE_rubrique>
 
 <BOUCLE_syndic(SITES) {id_syndic}>
 	<:en_reponse:>
 	<h2 class="titre-extrait"><a href="#URL_SYNDIC">#TITRE</a></h2>
-	<br>
+	<br />
 </BOUCLE_syndic>
 
 <BOUCLE_forum_parent(FORUMS) {id_forum}>
@@ -94,7 +94,7 @@
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>
 	[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
-	<br>
+	<br />
 </BOUCLE_forum_parent>
 
 

@@ -194,10 +194,10 @@
 [<div class="chapo">(#TEXTE)</div>]
 [<div class="notes">(#NOTES)</div>]
 
-<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {doublons} {"<br>"}>
-[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br>(#TITRE)][ - (#DESCRIPTIF)]
+<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {doublons} {"<br />"}>
+[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<br />(#TITRE)][ - (#DESCRIPTIF)]
 </BOUCLE_documents_joints>
-<br>
+<br />
 
 <!-- Articles de la rubrique -->
 
@@ -211,7 +211,7 @@
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	<B_auteurs_recents><:par_auteur:> <BOUCLE_auteurs_recents(AUTEURS) {id_article} {", "}>#NOM</BOUCLE_auteurs_recents>
 	</div>
-	<br>
+	<br />
 </BOUCLE_articles_recents>
 
 
