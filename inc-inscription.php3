@@ -5,7 +5,7 @@ $inscription_array = array();
 
 function inscription_stat($args, $filtres)
 {
-  return ((lire_meta('activer_moteur') != 'oui') ? '' :
+  return ((lire_meta('accepter_inscriptions') != 'oui') ? '' :
 	  array("'redac'"));
 }
 
