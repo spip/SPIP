@@ -180,7 +180,7 @@ echo "<p>";
 //
 
 if ($options == 'avancees') {
-	debut_cadre_relief();
+	debut_cadre_relief("breve-24.gif");
 
 	$charset = lire_meta("charset");
 
@@ -247,11 +247,14 @@ if ($options == "avancees") {
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Travail collaboratif sur les articles</FONT></B></TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
-	echo "S'il est fréquent que plusieurs r&eacute;dacteurs travaillent sur le m&ecirc;me article,
-		activer la fonctionnalit&eacute; suivante permettra de conserver l'heure de derni&egrave;re
-		ouverture d'un article afin d'en informer les autres r&eacute;dacteurs.
-		Par d&eacute;faut, cette option est d&eacute;sactiv&eacute;e afin d'&eacute;viter
-		d'afficher des messages d'avertissement intempestifs.";
+	echo "S'il est fr&eacute;quent que plusieurs r&eacute;dacteurs
+		travaillent sur le m&ecirc;me article, activer la
+		fonctionnalit&eacute; suivante permettra de conserver
+		l'heure de derni&egrave;re ouverture d'un article afin d'en
+		informer les autres r&eacute;dacteurs.  Par d&eacute;faut,
+		cette option est d&eacute;sactiv&eacute;e afin
+		d'&eacute;viter d'afficher des messages d'avertissement
+		intempestifs.";
 	echo "<p>Voulez-vous afficher les messages d'information li&eacute;s &agrave; l'heure d'ouverture
 		des articles&nbsp;?";
 	echo "</TD></TR>";
@@ -277,7 +280,7 @@ if ($options == "avancees") {
 //
 
 if ($options == 'avancees') {
-	debut_cadre_relief();
+	debut_cadre_relief("base-24.gif");
 
 	$http_proxy=entites_html(lire_meta("http_proxy"));
 

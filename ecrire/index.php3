@@ -342,12 +342,12 @@ if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0m
 if ($relief) {
 	echo "<p>";
 	debut_cadre_enfonce();
-	echo "<font color='red'><b>Les articles et br&egrave;ves suivants sont propos&eacute;s pour la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.</b></font><p>";
-	
+	echo "<font color='$couleur_foncee' face='arial,helvetica,sans-serif'><b>Les articles et br&egrave;ves ci-dessous sont propos&eacute;s &agrave; la publication. N'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.</b></font><p>";
+
 	//
 	// Les articles a valider
 	//
-	afficher_articles("Les articles propos&eacute;s &agrave; la publication",
+	afficher_articles("Articles propos&eacute;s",
 		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 		"FROM spip_articles WHERE statut='prop'$vos_articles ORDER BY date DESC");
 
@@ -355,14 +355,14 @@ if ($relief) {
 	// Les breves a valider
 	//
 	$query = "SELECT * FROM spip_breves WHERE statut='prepa' OR statut='prop' ORDER BY date_heure DESC";
-	afficher_breves("Les br&egrave;ves &agrave; valider", $query);
+	afficher_breves("Br&egrave;ves &agrave; valider", $query);
 
 	//
 	// Les sites references a valider
 	//
 	if (lire_meta('activer_syndic') != 'non') {
 		include_ecrire("inc_sites.php3");
-		afficher_sites("Les sites &agrave; valider", "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
+		afficher_sites("Sites &agrave; valider", "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
 	}
 
 	//
