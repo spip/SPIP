@@ -524,7 +524,7 @@ function extraire_lien ($regs) {
 	$lien_url = trim($regs[3]);
 	$compt_liens++;
 	$lien_interne = false;
-	if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))? *([[:digit:]]+)$', $lien_url, $match)) {
+	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)[[:space:]]*$', $lien_url, $match)) {
 		// Traitement des liens internes
 		if (@file_exists('inc-urls.php3')) {
 			include_local('inc-urls.php3');
@@ -535,10 +535,11 @@ function extraire_lien ($regs) {
 		}
 
 		$id_lien = $match[8];
-		$type_lien = $match[1];
+		$ancre = $match[9];
+		$type_lien = substr($match[1], 0, 2);
 		$lien_interne=true;
 		$class_lien = "in";
-		switch (substr($type_lien, 0, 2)) {
+		switch ($type_lien) {
 			case 'ru':
 				$lien_url = generer_url_rubrique($id_lien);
 				if (!$lien_texte) {
@@ -600,6 +601,8 @@ function extraire_lien ($regs) {
 				}
 				break;
 		}
+
+		$lien_url .= $ancre;
 
 		// supprimer les numeros des titres
 		include_ecrire("inc_filtres.php3");

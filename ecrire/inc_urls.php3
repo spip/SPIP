@@ -7,18 +7,30 @@ define("_ECRIRE_INC_URLS", "1");
 
 
 function generer_url_article($id_article) {
-	$url = "../spip_redirect.php3?id_article=$id_article";
-	return $url;
+	if (($row = spip_fetch_array(spip_query(
+	"SELECT statut FROM spip_articles WHERE id_article=$id_article"
+	))) AND ($row['statut'] == 'publie'))
+		return "../spip_redirect.php3?id_article=$id_article";
+	else
+		return "articles.php3?id_article=$id_article";
 }
 
 function generer_url_rubrique($id_rubrique) {
-	$url = "../spip_redirect.php3?id_rubrique=$id_rubrique";
-	return $url;
+	if (($row = spip_fetch_array(spip_query(
+	"SELECT statut FROM spip_rubriques WHERE id_rubrique=$id_rubrique"
+	))) AND ($row['statut'] == 'publie'))
+		return "../spip_redirect.php3?id_rubrique=$id_rubrique";
+	else
+		return "naviguer.php3?coll=$id_rubrique";
 }
 
 function generer_url_breve($id_breve) {
-	$url = "../spip_redirect.php3?id_breve=$id_breve";
-	return $url;
+	if (($row = spip_fetch_array(spip_query(
+	"SELECT statut FROM spip_breves WHERE id_breve=$id_breve"
+	))) AND ($row['statut'] == 'publie'))
+		return "../spip_redirect.php3?id_breve=$id_breve";
+	else
+		return "breves_voir.php3?id_breve=$id_breve";
 }
 
 function generer_url_forum($id_forum) {
