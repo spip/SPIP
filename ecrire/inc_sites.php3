@@ -316,6 +316,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 				// Date
 				$la_date = "";
+				if (ereg("<date>([^<]*)</date>",$item[$i],$match))
+					$la_date = $match[1];
 				if (ereg($syndic_regexp['date1'],$item[$i],$match))
 					$la_date = $match[1];
 				else if (ereg($syndic_regexp['date2'],$item[$i],$match))
