@@ -33,7 +33,7 @@ if ($p = addslashes($p)) {
 			echo "<p><br>";
 			echo "<form action='spip_pass.php3' method='post'>";
 			echo "<input type='hidden' name='p' value='$p'>";
-			echo "Veuillez entrer votre nouveau mot de passe :<br>\n";
+			echo "Veuillez choisir votre nouveau mot de passe :<br>\n";
 			echo "<input type='password' name='pass' value=''>";
 			echo "</form>\n";
 			install_fin_html();
