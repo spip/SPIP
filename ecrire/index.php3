@@ -88,16 +88,14 @@ else echo debut_block_invisible("info_perso");
 
 if (lire_meta('activer_messagerie') != 'non') {
 	if ($connect_activer_messagerie != "non") {
-		echo "<br>"._T('info_utilisation_messagerie_interne')." ";
+		echo _T('info_utilisation_messagerie_interne')." ";
 		if ($connect_activer_imessage != "non")
 			echo _T('info_nom_utilisateurs_connectes');
 		else
 			echo _T('info_nom_non_utilisateurs_connectes');
 	} else
-		echo "<br>"._T('info_non_utilisation_messagerie');
+		echo _T('info_non_utilisation_messagerie');
 }
-
-icone_horizontale(_T('icone_modifier_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
 
 //
 // Supprimer le cookie, se deconnecter...
@@ -169,6 +167,10 @@ if ($options != 'avancees') {
 
 debut_raccourcis();
 
+//
+// Afficher les boutons de creation d'article et de breve
+//
+
 $query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
 $result = spip_query($query);
 
@@ -189,9 +191,28 @@ if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
 	icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
 }
 
-if ($connect_statut == '0minirezo' && $connect_toutes_rubriques && $options == "avancees") {
+
+
+if ($options == "avancees") {
 	echo "<p>";
-	icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
+
+	icone_horizontale(_T('titre_forum'), "forum.php3", "forum-interne-24.gif","rien.gif");
+
+	if ($connect_statut == "0minirezo") {
+		if (lire_meta('forum_prive_admin') == 'oui') {
+			icone_horizontale(_T('titre_page_forum'), "forum_admin.php3", "forum-admin-24.gif");
+		}
+			echo "<p>";
+		if (lire_meta("activer_statistiques") == 'oui')
+			icone_horizontale(_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-24.gif");
+		icone_horizontale(_T('titre_page_forum_suivi'), "controle_forum.php3", "suivi-forum-24.gif");
+		if ($connect_toutes_rubriques)
+			icone_horizontale(_T('texte_vider_cache'), "admin_vider.php3", "cache-24.gif");
+	}
+}
+else if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+	echo "<p>";
+	icone_horizontale(_T('icone_configurer_site'), "configuration.php3", "administration-24.gif");
 }
 
 fin_raccourcis();
