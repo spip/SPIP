@@ -994,22 +994,22 @@ if ($cherche_auteur) {
 			echo "<B>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 			$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
 			$result = spip_query($query);
-			echo "<UL>";
+			echo "<UL class='verdana1'>";
 			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row['id_auteur'];
 				$nom_auteur = $row['nom'];
 				$email_auteur = $row['email'];
 				$bio_auteur = $row['bio'];
 
-				echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($nom_auteur)."</FONT></B>";
+				echo "<li><b>".typo($nom_auteur)."</b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
 				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</A>";
 
 				if (trim($bio_auteur)) {
-					echo "<BR><FONT SIZE=1>".couper(propre($bio_auteur), 100)."</FONT>\n";
+					echo "<br />".couper(propre($bio_auteur), 100)."\n";
 				}
-				echo "</FONT><p>\n";
+				echo "</li>\n";
 			}
 			echo "</UL>";
 		}
@@ -1171,7 +1171,7 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-		if (spip_num_rows($result) > 80 AND $flag_mots_ressemblants) {
+		if (spip_num_rows($result) > 200 AND $flag_mots_ressemblants) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" CLASS='fondl' VALUE='' SIZE='20'>";
 			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
@@ -1203,14 +1203,14 @@ if ($flag_editable AND $options == 'avancees') {
 
 				if ($statut != $statut_old) {
 					echo "\n<OPTION VALUE=\"x\">";
-					echo "\n<OPTION VALUE=\"x\"> $statut";
+					echo "\n<OPTION VALUE=\"x\" style='background-color: $couleur_claire;'> $statut";
 				}
 
 				if ($premiere != $premiere_old AND ($statut != _T('info_administrateurs') OR !$premiere_old)) {
 					echo "\n<OPTION VALUE=\"x\">";
 				}
 
-				$texte_option = supprimer_tags(couper("$nom$email", 40));
+				$texte_option = supprimer_tags(couper(typo("$nom$email"), 40));
 				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
 				$statut_old = $statut;
 				$premiere_old = $premiere;
