@@ -6,7 +6,7 @@ if (defined("_ECRIRE_INC_FILTRES")) return;
 define("_ECRIRE_INC_FILTRES", "1");
 
 //
-// divers
+// Divers
 //
 
 
@@ -135,14 +135,14 @@ function strtr2 ($texte, $trans) {
 	global $flag_strtr2;
 
 	if ($flag_strtr2)
-		return strtr($texte,$trans); 
+		return strtr($texte,$trans);
 	else {
 		reset ($trans);
 		while (list($entite, $remplace) = each ($trans))
 			$texte = ereg_replace($entite, $remplace, $texte);
 		return $texte;
 	}
-} 
+}
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
@@ -200,8 +200,8 @@ function PtoBR($texte){
 function majuscules($texte) {
 	$suite = htmlentities($texte);
 	$suite = ereg_replace('&amp;', '&', $suite);
-	$suite = ereg_replace('&lt;', '<', $suite); 
-	$suite = ereg_replace('&gt;', '>', $suite); 
+	$suite = ereg_replace('&lt;', '<', $suite);
+	$suite = ereg_replace('&gt;', '>', $suite);
 	$texte = '';
 	if (ereg('^(.*)&([A-Za-z])([a-zA-Z]*);(.*)$', $suite, $regs)) {
 		$texte .= majuscules($regs[1]); // quelle horrible recursion
@@ -209,7 +209,7 @@ function majuscules($texte) {
 		$carspe = $regs[2];
 		$accent = $regs[3];
 		if (ereg('^(acute|grave|circ|uml|cedil|slash|caron|ring|tilde|elig)$', $accent))
-			$carspe = strtoupper($carspe); 
+			$carspe = strtoupper($carspe);
 		if ($accent == 'elig') $accent = 'Elig';
 		$texte .= '&'.$carspe.$accent.';';
 	}
@@ -245,7 +245,7 @@ function attribut_html($texte) {
 	return $texte;
 }
 
-// vider les url nulles comme 'http://' ou 'mailto:'
+// Vider les url nulles comme 'http://' ou 'mailto:'
 function vider_url($url) {
 	if (eregi("^(http:?/?/?|mailto:?)$", trim($url)))
 		return false;
@@ -260,9 +260,16 @@ function extraire_date($texte) {
 		return $regs[1]."-".$regs[2]."01";
 }
 
+// Maquiller une adresse e-mail
+function antispam($texte) {
+	include_ecrire ("inc_acces.php3");
+	$masque = creer_pass_aleatoire(3);
+	return ereg_replace("@", " $masque ", $texte);
+}
+
 
 //
-// date, heure, saisons
+// Date, heure, saisons
 //
 
 function vider_date($letexte) {
@@ -426,7 +433,7 @@ function nom_jour($numdate) {
 		return '';
 
 	if (!$mois OR !$jour) return;
-	
+
 	$nom = mktime(1,1,1,$mois,$jour,$annee);
 	$nom = date("D",$nom);
 
@@ -519,7 +526,7 @@ function nom_mois($numdate) {
 }
 
 //
-// alignements
+// Alignements en HTML
 //
 
 function aligner($letexte,$justif) {
