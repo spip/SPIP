@@ -10,19 +10,24 @@ include_local ("inc_acces.php3");
 if ($supp && ($connect_statut == '0minirezo'))
 	spip_query("UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$supp");
 
-
-debut_page("Auteurs","redacteurs","redacteurs");
-
-debut_gauche();
-
 $myretour = "auteurs.php3?";
-if ($tri)
+if ($tri) {
 	$myretour .= "&tri=$tri";
+	if ($tri=='nom' OR $tri=='statut')
+		$partri = " (par $tri)";
+	else if ($tri=='nombre')
+		$partri = " (par nombre d'articles)";
+}
 if ($debut)
 	$retour = $myretour."&debut=$debut";
 else
 	$retour = $myretour;
 $retour = urlencode($retour);
+
+debut_page("Auteurs$partri","redacteurs","redacteurs");
+
+debut_gauche();
+
 
 if ($connect_statut == '0minirezo') {
 	debut_raccourcis();
@@ -58,18 +63,18 @@ if ($connect_statut != '0minirezo') {
 // tri
 switch ($tri) {
 	case 'nombre':
-		$sql_order = ' ORDER BY compteur DESC, UPPER(nom)';
+		$sql_order = ' ORDER BY compteur DESC, unom';
 		$type_requete = 'nombre';
 		break;
 
 	case 'statut':
-		$sql_order = ' ORDER BY auteurs.statut, UPPER(nom)';
+		$sql_order = ' ORDER BY auteurs.statut, unom';
 		$type_requete = 'auteur';
 		break;
 
 	case 'nom':
 	default:
-		$sql_order = ' ORDER BY UPPER(nom)';
+		$sql_order = ' ORDER BY unom';
 		$type_requete = 'auteur';
 }
 
@@ -83,7 +88,7 @@ switch ($tri) {
 unset($nombre_auteurs);
 
 if ($type_requete == 'auteur') {
-	$result_auteurs = spip_query("SELECT *
+	$result_auteurs = spip_query("SELECT *, UPPER(nom) AS unom
 		FROM spip_auteurs AS auteurs
 		WHERE 1 $sql_statut_auteurs
 		$sql_order");
@@ -92,7 +97,7 @@ if ($type_requete == 'auteur') {
 		$nombre_auteurs ++;
 	}
 
-	$result_nombres = spip_query("SELECT auteurs.id_auteur, COUNT(articles.id_article) AS compteur
+	$result_nombres = spip_query("SELECT auteurs.id_auteur, UPPER(auteurs.nom) AS unom, COUNT(articles.id_article) AS compteur
 		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
 		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
 		$sql_statut_auteurs $sql_statut_articles
@@ -113,7 +118,7 @@ if ($type_requete == 'auteur') {
 	}
 
 } else { // tri par nombre
-	$result_nombres = spip_query("SELECT auteurs.*, COUNT(articles.id_article) AS compteur
+	$result_nombres = spip_query("SELECT auteurs.*, UPPER(nom) AS unom, COUNT(articles.id_article) AS compteur
 		FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien, spip_articles AS articles
 		WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=articles.id_article
 		$sql_statut_auteurs $sql_statut_articles
@@ -128,7 +133,7 @@ if ($type_requete == 'auteur') {
 
 	// si on est minirezo, ajouter les auteurs sans articles
 	if ($connect_statut == '0minirezo') {
-		$result_auteurs = spip_query("SELECT auteurs.*, 0 as compteur
+		$result_auteurs = spip_query("SELECT auteurs.*, UPPER(nom) AS unom, 0 as compteur
 			FROM spip_auteurs AS auteurs
 			WHERE id_auteur NOT IN (0$vus) $sql_statut_auteurs
 			$sql_order");
