@@ -113,60 +113,6 @@ $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
 $couleur_lien = $couleurs_spip[$choix_couleur]['couleur_lien'];
 $couleur_lien_off = $couleurs_spip[$choix_couleur]['couleur_lien_off'];
 
-/*
-switch ($prefs['couleur']) {
-	case 6:
-		/// Jaune
-		$couleur_foncee="#9DBA00";
-		$couleur_claire="#C5E41C";
-		$couleur_lien="#657701";
-		$couleur_lien_off="#A6C113";
-		break;
-	case 1:
-		/// Violet clair
-		$couleur_foncee="#eb68b3";
-		$couleur_claire="#ffa9e6";
-		$couleur_lien="#E95503";
-		$couleur_lien_off="#8F004D";
-		break;
-	case 2:
-		/// Orange
-		$couleur_foncee="#fa9a00";
-		$couleur_claire="#ffc000";
-		$couleur_lien="#81A0C1";
-		$couleur_lien_off="#FF5B00";
-		break;
-	case 3:
-		/// Saumon
-		$couleur_foncee="#CDA261";
-		$couleur_claire="#FFDDAA";
-		$couleur_lien="#5E0283";
-		$couleur_lien_off="#472854";
-		break;
-	case 4:
-		/// Bleu pastelle
-		$couleur_foncee="#5da7c5";
-		$couleur_claire="#97d2e1";
-		$couleur_lien="#869100";
-		$couleur_lien_off="#5B55A0";
-		break;
-	case 5:
-		/// Gris
-		$couleur_foncee="#727D87";
-		$couleur_claire="#C0CAD4";
-		$couleur_lien="#854270";
-		$couleur_lien_off="#666666";
-		break;
-	default:
-		/// Jaune
-		$couleur_foncee="#9DBA00";
-		$couleur_claire="#C5E41C";
-		$couleur_lien="#657701";
-		$couleur_lien_off="#A6C113";
-}
-*/
-
-
 //
 // Gestion de version
 //

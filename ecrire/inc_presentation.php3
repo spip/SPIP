@@ -3172,7 +3172,10 @@ function fin_page($credits='') {
 
 	debut_grand_cadre();
 
-	echo "<div align='right' class='verdana2'>";
+	# ici on en profite pour glisser une tache de fond
+	echo "<div align='right' class='verdana2' ";
+	echo "style='background: url(\"../spip_background.php3\");' ";
+	echo ">";
 
 	if ($spip_display == 4) {
 		echo "<div><a href=\"index.php3?set_disp=2\">"._T("access_interface_graphique")."</a></div>";
@@ -3338,8 +3341,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 		icone_horizontale($message, "../spip_redirect.php3?id_$type=$id&$en_ligne=oui", $image, "rien.gif");
 }
 
-function http_img_pack($img, $att)
-{
+function http_img_pack($img, $att) {
   return "<img src='" . _DIR_IMG_PACK . $img . 
     ($att ? ("' " . $att) : "'") . " />";
 }
