@@ -1885,7 +1885,7 @@ function calculer_liste($tableau, $prefix_boucle, $id_boucle)
 		// Texte
 		//
 		case 'texte':
-			$texte .= "	\$retour .= '".ereg_replace("'", "\'", $objet->texte)."';\n";
+			$texte .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $objet->texte)."';\n";
 			break;
 
 
