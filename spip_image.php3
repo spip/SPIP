@@ -97,8 +97,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 
 	if ($mode == 'vignette') {
 		$id_document_lie = $id_document;
-		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document";
-		mysql_query($query);
+		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document_lie";
+		mysql_query($query); // requete inutile a mon avis (Fil)...
 		$id_document = 0;
 	}
 	if (!$id_document) {
@@ -149,9 +149,11 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	$query = "UPDATE spip_documents SET $update taille='$taille', largeur='$largeur', hauteur='$hauteur', fichier='$dest_path' ".
 		"WHERE id_document=$id_document";
 	mysql_query($query);
+
 	if ($id_document_lie) {
 		$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
 		mysql_query($query);
+		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 	}
 
 	return array (true,$id_document) ; // on veut bien effacer le fichier s'il est dans ftp/upload/
@@ -224,7 +226,7 @@ $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|id_document)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|id_document|transformer.*)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }

@@ -46,10 +46,18 @@ if ($modif_document == 'oui') {
 	mysql_query("UPDATE spip_documents SET titre=\"$titre\", descriptif=\"$descriptif\" WHERE id_document=$id_document");
 }
 
-if ($ajouter_vignette == 'oui') {
+// transformer en vignette/document
+if ($transformer_image == 'document') {
 	mysql_query("UPDATE spip_documents SET mode='document' WHERE id_document=$id_document");
+} else if ($transformer_image == 'vignette') {
+	// est-ce qu'on met aussi id_vignette=0 ? (Non : on garde une trace de l'id_vignette en cas
+	// d'aller-retour document -> vignette -> document
+	mysql_query("UPDATE spip_documents SET mode='vignette' WHERE id_document=$id_document");
 }
 
+//
+// Affichage
+//
 $query = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
 $result = mysql_query($query);
 if ($art = mysql_fetch_object($result)) {
@@ -76,6 +84,7 @@ if ($documents_lies) {
 	echo "<tr bgcolor='$couleur_foncee'>\n";
 	echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
 	echo "Documents li&eacute;s &agrave l'article".$lien_art;
+	$lien_art='';
 	echo "</td></tr>\n";
 
 	reset($documents_lies);
@@ -85,20 +94,30 @@ if ($documents_lies) {
 		echo "</td></tr>\n";
 	}
 	echo "<tr><td height='10'>&nbsp;</td></tr>\n";
+
+	$res = mysql_query("SELECT DISTINCT id_vignette FROM spip_documents ".
+		"WHERE id_document in (".join(',', $documents_lies).")");
+	while ($v = mysql_fetch_object($res))
+		$vignettes[] = $v->id_vignette;
+
+	$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
+
+	if ($docs_exclus)
+		$docs_exclus = "AND l.id_document NOT IN ($docs_exclus) ";
+
 }
 
-
-if ($documents_lies) $docs_exclus = "AND l.id_document NOT IN (".join(',', $documents_lies).") ";
 $query = "SELECT #cols FROM #table, spip_documents_articles AS l ".
-	"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".$docs_exclus.
-	"AND #table.mode='vignette' AND #table.titre!='' ORDER BY #table.titre";
+		"WHERE l.id_article=$id_article AND l.id_document=#table.id_document ".$docs_exclus.
+		"AND #table.mode='vignette' AND #table.titre!='' ORDER BY #table.titre";
 
 $images_liees = fetch_document($query);
 
 if ($images_liees) {
 	echo "<tr bgcolor='$couleur_foncee'>\n";
 	echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
-	echo "Images affichables dans l'article";
+	echo "Images affichables dans l'article".$lien_art;
+	$lien_art = '';
 	echo "</td></tr>\n";
 
 	reset($images_liees);
@@ -116,13 +135,11 @@ if ($images_liees) {
 //
 
 
-echo "<tr><td height='5'>&nbsp;</td></tr>\n";
-
-//echo "<tr bgcolor='$couleur_foncee'>\n";
-echo "<tr bgcolor='#EEEECC'>\n";
-echo "<td><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#000000'>";
-echo "Ajouter une image ou un document";
-echo "</td></tr>\n";
+echo "<tr bgcolor='$couleur_foncee'>\n";
+echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#ffffff'>";
+echo "<i>Ajouter une image ou un document &agrave; l'article".$lien_art;
+$lien_art = '';
+echo "</i></td></tr>\n";
 echo "</td></tr></table>\n";
 
 echo debut_boite_info();
