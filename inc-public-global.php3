@@ -47,7 +47,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 //
 // Appeler cette fonction pour obtenir la page principale
 //
-function afficher_page_globale ($fond, $delais) {
+function afficher_page_globale ($fond, $delais, &$use_cache) {
 	global $flag_preserver, $flag_dynamique, $recalcul, $last_modified;
 	include_local ("inc-cache.php3");
 
@@ -120,12 +120,15 @@ function afficher_page_globale ($fond, $delais) {
 		}
 
 		//
-		// Envoyer le body
+		// Calculer le body
 		//
-		$texte = admin_page($use_cache, $page['texte']);
-		eval('?' . '>' . $texte);
+		$page['texte'] = admin_page($use_cache, $page['texte']);
 	}
 
+	return $page;
+}
+
+function terminer_public_global($use_cache) {
 	# Toutes les heures, menage d'un cache si le processus n'a rien recalcule.
 	# On nettoie celui de la page retournee car le systeme vient d'y acceder:
 	# il y a de bonnes chances qu'il l'ait toujours dans son cache.
