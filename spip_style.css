@@ -93,3 +93,19 @@ i.spip { }
 }
 
 .spip_surligne { background-color: #FFFF66; }
+
+
+/*
+ * Barre de raccourcis
+ */
+
+a.spip_barre img {
+	border: 0px;
+	padding: 2px;
+}
+a.spip_barre:hover img {
+	border: 1px solid #808080;
+	padding: 1px;
+	background-color: #f8f8f4;
+}
+
