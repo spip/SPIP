@@ -7,7 +7,7 @@ define("_ECRIRE_INC_DOCUMENTS", "1");
 
 global $flag_ecrire;
 define('_DIR_IMG_ICONES', ($flag_ecrire ? "../" : "")."IMG/icones/");
-define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
+
 include_ecrire ("inc_objet.php3");
 include_ecrire ("inc_admin.php3");
 
@@ -209,19 +209,20 @@ function integre_image($id_document, $align, $type_aff) {
 
 		// recuperer la vignette pour affichage inline
 		if ($id_vignette) {
-			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
-			$result_vignette = spip_query($query_vignette);
-			if ($row_vignette = @spip_fetch_array($result_vignette)) {
-				$fichier_vignette = $row_vignette['fichier'];
-				$url_fichier_vignette = generer_url_document($id_vignette);
+			if ($row_vignette = @spip_fetch_array(spip_query(
+									 "SELECT largeur,hauteur,fichier FROM spip_documents WHERE id_document = $id_vignette"))) {
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
-
-				// verifier l'existence du fichier correspondant
-				$path = ($flag_ecrire?'../':'').$fichier_vignette;
+				$path = ($flag_ecrire?'../':'') . $row_vignette['fichier'];
+				// si le fichier correspondant n'existe pas
+				// et qu'on peut ecrire 
+				// (espace public ou espace prive+openbasedir)
+				// regenerer la vignette
 				if (!@file_exists($path) AND
-				(!$flag_ecrire OR !@file_exists(_DIR_IMG . 'test.jpg')))
+				(!$flag_ecrire OR !@is_dir(_DIR_IMG_ICONES)))
 					$url_fichier_vignette = '';
+				else 
+				  $url_fichier_vignette = generer_url_document($id_vignette);
 			}
 		}
 		else if ($mode == 'vignette') {
@@ -304,7 +305,6 @@ function integre_image($id_document, $align, $type_aff) {
 		}
 		else $retour = $vignette;
 	}
-#	spip_log("$path $url_fichier_vignette $type_aff $retour");
 	return $retour;
 }
 
