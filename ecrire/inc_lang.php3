@@ -85,13 +85,11 @@ function traduire_nom_langue($lang) {
 // Initialisation
 //
 $GLOBALS['langues_ok'] = 'fr';
-$GLOBALS['langues_tests'] = 'en,ro,eo,es,ar,br';
+$GLOBALS['langues_tests'] = 'en,it,ro,eo,es,ar,br,vi';
 //$GLOBALS['all_langs'] = $GLOBALS['langues_ok'].",".$GLOBALS['langues_tests'];
 
 $GLOBALS['all_langs'] = lire_meta('sauver_langues_ok');
 if (strlen($GLOBALS['all_langs']) == 0) $GLOBALS['all_langs'] = $GLOBALS['langues_ok'].",".$GLOBALS['langues_tests'];
-
-
 
 $GLOBALS['spip_lang'] = 'fr';
 if (!regler_langue_navigateur())
