@@ -10,6 +10,10 @@ define("_ECRIRE_INC_STATISTIQUES", "1");
 // par Jean-Paul Dezelus (http://www.phpinfo.net/applis/visiteurs/)
 
 function stats_load_engines() {
+	// le moteur de recherche interne
+	$arr_engines = Array();
+	$arr_engines[] = Array('Recherche SPIP','recherche=',ereg_replace('^http://','',lire_meta('adresse_site')));
+
 	$file_name = 'data/engines-list.ini';
 	if ($fp = @fopen($file_name, 'r'))
 	{
@@ -71,7 +75,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				: $lvm_directory;
 			if ($flag_utf8_decode
 				&& (($kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
-				|| ($kw_referer_host == "AOL")
+				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
 				))
 				$keywords = utf8_decode($keywords);

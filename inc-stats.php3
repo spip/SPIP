@@ -78,7 +78,7 @@ function ecrire_stats() {
 		$url_site_spip = lire_meta('adresse_site');
 		$url_site_spip = eregi_replace("^(https?|ftp://)www\.", "\\1(www)?\.", $url_site_spip);
 		$log_referer = $GLOBALS['HTTP_REFERER'];
-		if (eregi($url_site_spip, $log_referer)) $log_referer = "";
+		if (eregi($url_site_spip, $log_referer) AND !$GLOBALS['var_recherche']) $log_referer = "";
 		if ($log_referer) {
 			include_ecrire("inc_connect.php3");
 			if ($GLOBALS['db_ok']) {
