@@ -1051,7 +1051,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	$idb = $id_boucle;
 
 	//
-	// Calculer $id_row en prenant la boucle la plus proche$
+	// Calculer $id_row en prenant la boucle la plus proche
 	// (i.e. la plus profonde) qui autorise le champ demande
 	//
 
@@ -1954,6 +1954,58 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 
 
 //
+// Generer le code PHP correspondant a un texte brut
+//
+
+function calculer_texte($texte)
+{
+	$code = "";
+
+	// Reperer les directives d'inclusion de squelette
+	while (ereg("<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z. ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>", $texte, $match)) {
+		$s = $match[0];
+		$p = strpos($texte, $s);
+		$debut = substr($texte, 0, $p);
+		$texte = substr($texte, $p + strlen($s));
+		if ($debut)
+			$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $debut)."';\n";
+
+		// Traiter la directive d'inclusion
+		$fichier = $match[1];
+		ereg("^\{(.*)\}$", trim($match[2]), $params);
+		$code .= "	\$retour .= '<"."?php ';\n";
+
+//		echo "<b>Inclusion fichier</b> <pre>$fichier</pre><p>";
+//		echo "<b>Param</b> <pre>$match[2]</pre><p>";
+
+		if ($params) {
+			// Traiter chaque parametre de contexte
+			$params = split("\}[[:space:]]*\{", $params[1]);
+			reset($params);
+			while (list(, $param) = each($params)) {
+//				echo "<b>Param</b> <pre>$param</pre><p>";
+				if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
+					$var = $args[1];
+					$val = $args[3];
+//					echo "<b>Var</b> <pre>$var</pre><p>";
+					if ($val) 
+						$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
+					else
+						$code .= "	\$retour .= '\$contexte_inclus[$var] = '.\$contexte[$var].'; ';\n";
+				}
+			}
+		}
+		$code .= "	\$retour .= 'include(\'$fichier\'); ?".">';\n";
+	}
+
+	if ($texte)
+		$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $texte)."';\n";
+
+	return $code;
+}
+
+
+//
 // Generer le code PHP correspondant a une liste d'objets syntaxiques
 //
 
@@ -1975,7 +2027,7 @@ function calculer_liste($tableau, $prefix_boucle, $id_boucle)
 		// Texte
 		//
 		case 'texte':
-			$texte .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $objet->texte)."';\n";
+			$texte .= calculer_texte($objet->texte);
 			break;
 
 
