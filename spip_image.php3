@@ -162,14 +162,22 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		$query = "UPDATE spip_documents SET id_vignette=$id_document WHERE id_document=$id_document_lie";
 		mysql_query($query);
 	}
+
+	return true; // on veut bien effacer le fichier s'il est dans ftp/upload/
 }
 
 // image_name n'est valide que par POST http, mais pas par la methode ftp/upload
-if (!$image_name)
+// par ailleurs, pour un fichier ftp/upload, il faut effacer l'original nous-memes
+$effacer_si_ok = false;
+if (!$image_name AND ereg("^ecrire/upload/...", $image)) {
 	$image_name = $image;
+	$effacer_si_ok = true;
+}
 
 if ($ajout_doc == 'oui') {
-	ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	$ok = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	if ($ok AND $effacer_si_ok)
+		@unlink($image);
 }
 
 if ($ajout_logo == "oui") {
