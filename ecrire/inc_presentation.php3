@@ -1617,17 +1617,30 @@ function debut_gauche($rubrique = "asuivre") {
 	global $requete_fichier;
 	global $connect_id_auteur;
 	global $spip_ecran;
-	
+	global $flag_3_colonnes;
+
+	$flag_3_colonnes = false;
+	$largeur = 200;
+
+	// Ecran panoramique ?
 	if ($spip_ecran == "large") {
-		$largeur = 974;
-		$rspan = " rowspan=2";
+		$largeur_ecran = 974;
+		// Si edition de texte, formulaires larges
+		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $REQUEST_URI)) {
+			$largeur = 250;
+		}
+		// Sinon, trois colonnes
+		else {
+			$flag_3_colonnes = true;
+			$rspan = " rowspan=2";
+		}
 	}
 	else {
-		$largeur = 750;
+		$largeur_ecran = 750;
 	}
 
-	echo "<br><table width=$largeur cellpadding=0 cellspacing=0 border=0>
-		<tr><td width=200 valign='top' $rspan><font face='Georgia,Garamond,Times,serif' size=2>\n";
+	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
+		<tr><td width='$largeur' valign='top' $rspan><font face='Georgia,Garamond,Times,serif' size=2>\n";
 	
 
 	// Afficher les auteurs recemment connectes
@@ -1683,8 +1696,7 @@ function debut_gauche($rubrique = "asuivre") {
 	}
 
 
-
-	if ($spip_colonne == "etroit") {
+	if (!$flag_3_colonnes) {
 		if ($changer_config!="oui"){
 			$activer_messagerie=lire_meta("activer_messagerie");
 			$activer_imessage=lire_meta("activer_imessage");
@@ -1746,11 +1758,12 @@ function creer_colonne_droite(){
 	global $options;
 	global $requete_fichier;
 	global $connect_id_auteur, $spip_ecran;
+	global $flag_3_colonnes;
 
 	$deja_colonne_droite = true;
+
 	
-	
-	if ($spip_ecran == "large") {
+	if ($flag_3_colonnes) {
 		echo "<td width=37 rowspan=2>&nbsp;</td>";
 		echo "<td rowspan=1></td>";
 		echo "<td width=37 rowspan=2>&nbsp;</td>";
@@ -1804,6 +1817,7 @@ function creer_colonne_droite(){
 function debut_droite() {
 	global $options, $spip_ecran, $deja_colonne_droite;
 	global $connect_id_auteur, $clean_link;
+	global $flag_3_colonnes;
 
 	if ($options == "avancees") {
 		if (!$deja_colonne_droite) creer_colonne_droite();
@@ -1840,18 +1854,22 @@ function debut_droite() {
 
 	echo "<br></font>&nbsp;</td>";
 	
-	if ($spip_ecran == "etroit") {
+	if (!$flag_3_colonnes) {
 		echo "<td width=50>&nbsp;</td>";
 	}
 	else {
-	
 		if (!$deja_colonne_droite) {
 			creer_colonne_droite();
 		}
 		echo "</td></tr><tr>";
 	}
+
+	if ($spip_ecran == 'large' AND !$flag_3_colonnes)
+		$largeur = 674;
+	else
+		$largeur = 500;
 	
-	echo '<td width=500 valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
+	echo '<td width="'.$largeur.'" valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
 	// zap sessions si bonjour
 	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
