@@ -642,7 +642,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if (strlen($descriptif) > 0) {
 				echo "<div class='verdana1'>".propre($descriptif)."</div>";
 			}
-			echo "<div class='verdana1' style='text-align: center;'>$largeur &#215; $hauteur pixels</div>";
+			echo "<div class='verdana1' style='text-align: center;'>"
+			._T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur))."</div>";
 			
 			
 			
@@ -825,7 +826,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "<div class='verdana1'>".propre($descriptif)."</div>";
 			}
 			echo "<div class='verdana1' style='text-align: center;'>".taille_en_octets($taille)."</div>";
-			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>$largeur &#215; $hauteur pixels</div>";
+			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur))."</div>";
 			
 			
 			if ($flag_modif) {
