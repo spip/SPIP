@@ -59,19 +59,6 @@ debut_html();
 		}
 
 	}
-	else if ($special == "agenda") {
-		include_ecrire ("inc_agenda.php3");
-		// date du jour
-		$today=getdate(time());
-		$jour = $today["mday"];
-		$mois = $today["mon"];
-		$annee = $today["year"];
-		echo "<div style='padding: 10px;'>";
-		agenda($mois-1, $annee, $jour, $mois, $annee);
-		agenda($mois, $annee, $jour, $mois, $annee);
-		agenda($mois+1, $annee, $jour, $mois, $annee);
-		echo "</div>";
-	}
 	else {
 		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=$id_rubrique ORDER BY titre";
 		$result=spip_query($query);
@@ -225,9 +212,6 @@ debut_html();
 			if ($total_articles + $total_breves > 0)
 				echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/article-24.gif) $spip_lang_left center no-repeat;'><b class='verdana2'><a href='brouteur_frame.php3?special=valider&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("info_articles_proposes")." / "._T("info_breves_valider")."</a></b></div>";
 			
-			$activer_messagerie = lire_meta("activer_messagerie");
-			if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non")
-				echo "<div style='margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/agenda-24.gif) $spip_lang_left center no-repeat;'><b class='verdana2'><a href='brouteur_frame.php3?special=agenda&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("icone_agenda")."</a></b></div>";
 
 
 		}
