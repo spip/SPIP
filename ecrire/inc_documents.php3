@@ -473,10 +473,10 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	// Afficher portfolio
 	/////////
 
-	$query = "SELECT docs.* FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS types ".
+	$query = "SELECT docs.* FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'".
-		" AND docs.id_type=types.id_type AND types.extension IN ('gif', 'jpg', 'png')";
+		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')";
 
 	if ($id_doublons['documents']) $query .= " AND docs.id_document NOT IN (".$id_doublons['documents'].") ";
 	$query .= " ORDER BY docs.id_document";
