@@ -417,6 +417,8 @@ function formulaire_site($la_rubrique) {
 function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 	global $flag_wordwrap;
 
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_mail.php3");
 
 	$affiche_formulaire = true;
