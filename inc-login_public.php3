@@ -19,11 +19,16 @@ function balise_LOGIN_PUBLIC_stat ($args, $filtres)
 
 function balise_LOGIN_PUBLIC_dyn($cible, $login)
 {
+	if (!$cible) {
+		global $clean_link;
+		$clean_link->delVar('var_erreur');
+		$clean_link->delVar('var_login');
+		$cible = $clean_link->getUrl();
+	}
 	return login_explicite($login, $cible,  'forum');
 }
 
 function login_explicite($login, $cible, $mode) {
-
 	global $auteur_session, $clean_link;
 
 	$clean_link->delVar('var_erreur');
