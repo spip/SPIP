@@ -105,7 +105,7 @@ function ajout_image($source, $dest) {
 // Ajouter un document
 //
 
-function ajout_doc($orig, $source, $dest, $mode, $id_document) {
+function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='') {
 	global $hash_id_auteur, $hash, $id_article;
 
 	//
@@ -195,6 +195,13 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		mysql_query($query);
 		$id_document = $id_document_lie; // pour que le 'return' active le bon doc.
 	}
+	
+	if ($doc_vignette){
+		$query = "UPDATE spip_documents SET id_vignette=$doc_vignette, titre='$titre', descriptif='$descriptif' WHERE id_document=$id_document";
+		mysql_query($query);
+	
+	}
+
 
 	return $id_document;
 }
@@ -212,7 +219,17 @@ if (!$image_name AND $image2) {
 // ajouter un document
 //
 if ($ajout_doc == 'oui') {
-	$id_document = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	if ($forcer_document == 'oui')
+		$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document);
+	else
+		$id_document = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+}
+
+
+// joindre un document
+if ($joindre_doc == 'oui'){
+	$id_document = ajout_doc($image_name, $image, $fichier, "document", $id_document, $doc_vignette, $titre_vignette, $descriptif_vignette);
+	
 }
 
 
