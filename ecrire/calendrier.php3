@@ -81,8 +81,26 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		if ($lemois == $mois_today) $les_breves["$lejour"].="<BR><A HREF='breves_voir.php3?id_breve=$id_breve'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> <i>$titre</i></A>";
 	}
 
-	// rendez-vous personnels ou annonces
-	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	// annonces
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages WHERE messages.type='affich' AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
+	while($row=spip_fetch_array($result_messages)){
+		$id_message=$row['id_message'];
+		$date_heure=$row["date_heure"];
+		$titre=typo($row["titre"]);
+		$type=$row["type"];
+		$lejour=jour($row['date_heure']);
+		$lejour=ereg_replace("1er","1",$lejour);
+
+		if ($type=="normal") $la_couleur="red";
+		elseif ($type=="pb") $la_couleur="blue";
+		elseif ($type=="affich") $la_couleur="#ff6600";
+		else $la_couleur="black";
+
+		$les_rv["$lejour"].="<br><font color='$la_couleur'><b>".heures($date_heure).":".minutes($date_heure)."</b></font> <a href='message.php3?id_message=$id_message'>$titre</a>";
+	}
+
+	// rendez-vous personnels
+	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE (lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) AND messages.rv='oui' AND messages.date_heure >='$annee_today-$mois_today-1' AND messages.date_heure <= DATE_ADD('$annee_today-$mois_today-1', INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
 		$id_message=$row['id_message'];
 		$date_heure=$row["date_heure"];
