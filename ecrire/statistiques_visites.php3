@@ -214,8 +214,6 @@ else {
 }
 
 
-
-
 $query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
 	"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL 89 DAY) ORDER BY date";
 $result=spip_query($query);
@@ -602,10 +600,72 @@ if (count($log)>0){
 
 }
 
+
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 if ($activer_statistiques_ref != "non"){
 	// Affichage des referers
 
+	if (!$arr_engines) {
+		// Charger les moteurs de recherche
+		$arr_engines = stats_load_engines();
+	}
+
+	$query = "SELECT * FROM $table_ref WHERE $where ORDER BY visites DESC LIMIT 0,100";
+	$result = spip_query($query);
+	
+	echo "<p><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+	while ($row = spip_fetch_array($result)) {
+		$referer = $row['referer'];
+		$visites = $row['visites'];
+	
+	
+		$url   = parse_url( $referer );
+		$query = $url['query'];
+		$host  = $url['host'];
+		$found = false;
+
+		for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
+		{
+			if ($found = (ereg($arr_engines[$cnt][2], $host)))
+			{
+				$host = $arr_engines[$cnt][0];
+			}
+		}
+
+		$numero = substr(md5($host),0,8);
+	
+		$nbvisites[$numero] = $nbvisites[$numero] + $visites;
+		$lesreferers[$numero][] = stats_show_keywords($referer, $referer);
+		$lesdomaines[$numero] = $host;
+		
+	}
+	
+	arsort($nbvisites);
+	
+	echo "<ul>";
+	for (reset($nbvisites); $numero = key($nbvisites); next($nbvisites)) {
+		$visites = pos($nbvisites);
+		echo "\n<li>";
+	
+		if ($visites > 5) echo "<font color='red'>$visites "._T('lnfo_liens')."&nbsp;</font>";
+		else if ($visites > 1) echo "$visites "._T('lnfo_liens')."&nbsp;";
+		else echo "<font color='#999999'>$visites "._T('info_lien')."&nbsp;</font>";
+		
+		$referers = join ($lesreferers[$numero],"<br />");
+		if (count($lesreferers[$numero]) > 1) {
+			
+			echo "<b>$lesdomaines[$numero]</b>";
+			echo "<div>$referers</div>";
+			echo "</li><br />\n";
+		} else {
+			echo "$referers";
+			echo "</li>";
+		}
+	}
+	echo "</ul>";
+
+
+/*
 	$query = "SELECT * FROM $table_ref WHERE $where ORDER BY visites DESC LIMIT 0,100";
 	$result = spip_query($query);
 	
@@ -623,6 +683,10 @@ if ($activer_statistiques_ref != "non"){
 	
 		echo stats_show_keywords($referer, $referer);
 	}
+*/
+
+
+
 }
 echo "</font>";
 
