@@ -36,7 +36,7 @@ function affobject($val)
   else
     switch ($val->type) {
 		case 'boucle':
-			echo "<font color='red'><b>Boucle".$val->id_boucle."</b>: ".affval($val->commande);
+			echo "<font color='red'><b>Boucle".$val->id_boucle."</b>";
 			echo "<br><i><small>".affval($val->requete)."</small></i></font>";
 			break;
 		case 'texte':
