@@ -1323,7 +1323,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	//
 
 	case 'URL_SITE_SPIP':
-		$code = "lire_meta('adresse_site')";
+		$code = "lire_meta('adresse_site').'/'";
 		break;
 
 	case 'NOM_SITE_SPIP':
