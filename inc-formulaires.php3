@@ -507,7 +507,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 			$erreur .= erreur(_T('form_prop_message_envoye'));
 			$affiche_formulaire = false;
 		} else { //preview
-			$res = "<br /><div class='spip_encadrer'>"._T('form_prop_sujet')." <b>".$GLOBALS['sujet_message_auteur'.$id_auteur]."</b></div>";
+			$res = "<br /><div class='spip_encadrer'>"._T('form_prop_sujet')." <b>".entites_html($GLOBALS['sujet_message_auteur'.$id_auteur])."</b></div>";
 			if ($flag_wordwrap)
 				$GLOBALS['texte_message_auteur'.$id_auteur] = wordwrap($GLOBALS['texte_message_auteur'.$id_auteur]);
 			$res .= "<pre>".entites_html($GLOBALS['texte_message_auteur'.$id_auteur])."</pre>";
