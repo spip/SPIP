@@ -1,7 +1,7 @@
 <?php
 include ("ecrire/inc_version.php3");
 include_ecrire("inc_presentation.php3");
-include_local("inc-formulaire_inscription.php3");
+include_local(find_in_path("inc-formulaire_inscription.php3"));
 include_local("inc-public-global.php3"); 
 include_local ("inc-cache.php3");
 

@@ -246,8 +246,7 @@ function inclure_balise_dynamique($r) {
 	}
 }
 
-function inclure_page_lang($fond, $delais, $contexte_inclus)
-{
+function inclure_page_lang($fond, $delais, $contexte_inclus) {
 	$page = inclure_page($fond, $delais, $contexte_inclus);
 	if ($page['process_ins'] == 'html')
 		echo $page['texte'];

@@ -63,14 +63,7 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 		"?php\n\t\$contexte_inclus = array(" .
 		join(", ",$l) .
 		");" .
-		(($dossier_squelettes) ?
-		("
-			if (@file_exists(\'$dossier_squelettes/$fichier\')){
-				include(\'$dossier_squelettes/$fichier\');
-			} else {
-				include(\'$fichier\');
-			} " ) :
-		("\tinclude(\'$fichier\');")) .
+		"\tinclude(find_in_path(\'$fichier\'));" .
 		"\n?'." . "'>'";
 }
 

@@ -23,8 +23,8 @@ include_local("inc-calcul-outils.php3");
 // Ce fichier peut contenir une affectation de $dossier_squelettes  indiquant
 // le repertoire du source des squelettes (les pseudo-html avec BOUCLE...)
 
-if (@file_exists("mes_fonctions.php3")) 
-    include_local ("mes_fonctions.php3");
+if ($f = find_in_path("mes_fonctions.php3"))
+	include_local ($f);
 
 
 // Gestionnaire d'URLs
@@ -120,10 +120,10 @@ function charger_squelette ($squelette) {
 # (typiquement dans mes_fonctions.php3)
 
 function cherche_page ($cache, $contexte, $fond)  {
-	global $dossier_squelettes, $delais;
+	global $delais;
 
 	if (!function_exists('chercher_squelette'))
-		include_local("inc-chercher.php3"); # a renommer ?
+		include_local("inc-chercher-squelette.php3");
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
@@ -140,7 +140,6 @@ function cherche_page ($cache, $contexte, $fond)  {
 
 	$skel = chercher_squelette($fond,
 			$id_rubrique_fond,
-			$dossier_squelettes ? "$dossier_squelettes/" :'',
 			$GLOBALS['spip_lang']);
 
 	// Charger le squelette et recuperer sa fonction principale

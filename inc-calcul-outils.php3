@@ -126,8 +126,11 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 }
 
 function executer_balise_dynamique($nom, $args, $filtres, $lang) {
-	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
-	include_local($file);
+	if ($file = find_in_path('inc-' . strtolower($nom) . _EXTENSION_PHP))
+		include_local($file);
+	else
+		die ("pas de balise dynamique pour #". strtolower($nom)." !");
+
 	$f = 'balise_' . $nom . '_stat';
 	$r = $f($args, $filtres);
 	if (!is_array($r))
