@@ -123,7 +123,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 		break;
 
   case 'TOTAL_BOUCLE':
-	if (!$id_mere)
+	if ($id_mere === '')
 	    {
 	      include_local("inc-debug-squel.php3");
 	      erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), '', $id_boucle);
