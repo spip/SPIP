@@ -78,55 +78,98 @@ function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect=
 function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref) {
 	$controle = '';
 
-	// selection du logo correspondant a l'etat du forum
-	if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
-	else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
-	else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
-	else $logo = "forum-public-24.gif";
+	// selection du logo et des boutons correspondant a l'etat du forum
+	switch ($forum_stat) {
+		# forum sous un article dans l'espace prive
+		case "prive":
+			$logo = "forum-interne-24.gif";
+			$valider = false;
+			$valider_repondre = false;
+			$supprimer = 'supp_forum_priv';
+			break;
+		# forum des administrateurs
+		case "privadmin":
+			$logo = "forum-admin-24.gif";
+			$valider = false;
+			$valider_repondre = false;
+			$supprimer = false;
+			break;
+		# forum de l'espace prive, supprime (non revalidable,
+		# d'ailleurs on ne sait plus a quel type de forum il appartenait)
+		case "privoff":
+			$logo = "forum-interne-24.gif";
+			$valider = false;
+			$valider_repondre = false;
+			$supprimer = false;
+			break;
+		# forum general de l'espace prive
+		case "privrac":
+			$logo = "forum-interne-24.gif";
+			$valider = false;
+			$valider_repondre = false;
+			$supprimer = 'supp_forum_priv';
+			break;
 
-	if ($forum_stat != "off" AND $forum_stat != "privoff") {
-		if ($forum_stat == "publie" OR $forum_stat == "prop")
-			$controle .= 
-		  controle_cache_forum('supp_forum',
-				       $id_forum,
-				       _T('icone_supprimer_message'), 
-				       $logo,
-				       "supprimer.gif");
-		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
-			$controle .= 
-		  controle_cache_forum('supp_forum_priv',
-				       $id_forum,
-				       _T('icone_supprimer_message'), 
-				       $logo,
-				       "supprimer.gif");
-		    }
-	else {
-		$controle .= "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
-		if($forum_id_auteur)
-			$controle .= " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>"._T('lien_voir_auteur')."</A>";
+		# forum publie sur le site public
+		case "publie":
+			$logo = "forum-public-24.gif";
+			$valider = false;
+			$valider_repondre = false;
+			$supprimer = 'supp_forum';
+			break;
+		# forum supprime sur le site public
+		case "off":
+			$logo = "forum-public-24.gif";
+			$valider = 'valid_forum';
+			$valider_repondre = false;
+			$supprimer = false;
+			$message = "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
+			if($forum_id_auteur)
+				$message .= " - <A HREF='auteurs_edit.php3?id_auteur="
+				.$forum_id_auteur."'>" ._T('lien_voir_auteur'). "</A>";
+			break;
+		# forum propose (a moderer) sur le site public
+		case "prop":
+			$logo = "forum-public-24.gif";
+			$valider = 'valid_forum';
+			$valider_repondre = true;
+			$supprimer = true;
+			break;
+		default:
+			return;
 	}
 
-	if ($forum_stat=="prop")
-	  {
+	if ($message)
+		$controle .= $message;
+
+	if ($supprimer)
+		$controle .= controle_cache_forum($supprimer,
+			$id_forum,
+			_T('icone_supprimer_message'), 
+			$logo,
+			"supprimer.gif");
+
+	if ($valider)
+		$controle .= controle_cache_forum($valider,
+			$id_forum,
+			_T('icone_valider_message'), 
+			$logo,
+			"creer.gif");
+
+	if ($valider_repondre) {
 		$link = new Link();
 		$redirect = "../forum.php3?$ref&id_forum=$id_forum&retour=ecrire/"
 			.urlencode($link->getUrl());
 
-		$controle .=
-		  controle_cache_forum('valid_forum',
-				       $id_forum,
-				       _T('icone_valider_message'), 
-				       $logo,
-				       "creer.gif") .
-		  controle_cache_forum('valid_forum',
-				       $id_forum,
-				       _T('icone_valider_message') . " &amp; " .
-			           _T('lien_repondre_message'),
-				       $logo,
-				       "creer.gif",
-				       $redirect
-				       );
-	  }
+		$controle .= controle_cache_forum($valider,
+			$id_forum,
+			_T('icone_valider_message') . " &amp; " .
+			_T('lien_repondre_message'),
+			$logo,
+			"creer.gif",
+			$redirect
+		);
+	}
 
 	return $controle;
 }
