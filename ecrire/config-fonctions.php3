@@ -33,6 +33,11 @@ if ($changer_config == 'oui') {
 	}
 	if ($requete_appliquer) spip_query($requete_appliquer);
 
+	// activer le moteur : dresser la liste des choses a indexer
+	if ($activer_moteur == 'oui') {
+		include_ecrire('inc_index.php3');
+		creer_liste_indexation();
+	}
 
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 

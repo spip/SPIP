@@ -39,6 +39,9 @@ if ($purger_index == "oui") {
 		spip_query("DELETE FROM spip_index_syndic");
 
 		spip_query("DELETE FROM spip_index_dico");
+
+		include_ecrire('inc_index.php3');
+		creer_liste_indexation();
 	}
 }
 
