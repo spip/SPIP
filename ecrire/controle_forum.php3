@@ -172,7 +172,6 @@ function controle_forum($row, $rappel) {
 		  controle_cache_forum('supp_forum',
 				       $id_forum,
 				       _T('icone_supprimer_message'), 
-				       "controle_forum.php3?$rappel#$id_forum",
 				       $logo,
 				       "supprimer.gif");
 		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
@@ -180,7 +179,6 @@ function controle_forum($row, $rappel) {
 		  controle_cache_forum('supp_forum_priv',
 				       $id_forum,
 				       _T('icone_supprimer_message'), 
-				       "controle_forum.php3?$rappel#$id_forum",
 				       $logo,
 				       "supprimer.gif");
 		    }
@@ -192,24 +190,22 @@ function controle_forum($row, $rappel) {
 
 	if ($forum_stat=="prop")
 	  {
-		$appelant= "forum.php3?$type=$valeur&id_forum=$id_forum";
+		$redirect = "../forum.php3?$type=$valeur&id_forum=$id_forum";
+
 		$controle .=
 		  controle_cache_forum('valid_forum',
 				       $id_forum,
 				       _T('icone_valider_message'), 
-				       "controle_forum.php3?$rappel&#$id_forum",
 				       $logo,
 				       "creer.gif") .
 		  controle_cache_forum('valid_forum',
 				       $id_forum,
 				       _T('icone_valider_message') . " &amp; " .
-				       _T('lien_repondre_message'),
-				       "../$appelant&url=" .
-				       rawurlencode($appelant) . 
-				       "&retour=" .
-				       rawurlencode(_DIR_RESTREINT_ABS . "controle_forum.php3?$rappel&#$id_forum"), 
-				       _DIR_IMG_PACK . "messagerie-24.gif",
-				       "creer.gif");
+			           _T('lien_repondre_message'),
+				       $logo,
+				       "creer.gif",
+				       $redirect
+				       );
 	  }
 	$controle .= "<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
 	  "<P align='justify'>".propre($forum_texte);

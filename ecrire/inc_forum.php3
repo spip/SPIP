@@ -56,11 +56,16 @@ function changer_statut_forum($id_forum, $statut) {
 }
 
 // Installer un bouton de moderation (securise) dans l'espace prive
-function controle_cache_forum($action, $id, $texte, $lien, $fond, $fonction) {
+function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect='') {
 	$link = $GLOBALS['clean_link'];
+
 	$link->addvar('controle_forum', $action);
 	$link->addvar('id_controle_forum', $id);
 	$link->addvar('hash', calculer_action_auteur("$action$id"));
+
+	if ($redirect)
+		$link->addvar('redirect', $redirect);
+
 	return icone($texte,
 		$link->geturl(),
 		$fond,

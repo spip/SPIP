@@ -228,6 +228,9 @@ if ($controle_forum AND $id_controle_forum) {
 				changer_statut_forum($id_controle_forum, 'publie');
 				break;
 		}
+
+		if ($redirect)
+			redirige_par_entete($redirect);
 	}
 }
 
