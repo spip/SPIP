@@ -578,6 +578,24 @@ td.icone a img {
 
 
 /*
+ * Styles pour "Tout le site"
+ */
+ 
+ 
+div.puce-article {
+	margin-<? echo $left; ?>: 10px; 
+	padding-<? echo $left; ?>: 12px;
+} 
+div.puce-article div {
+	padding: 2px; 
+	background-color: #e0e0e0; 
+	border-top: 1px solid white; 
+	border-left: 1px solid white; 
+	border-right: 1px solid #aaaaaa; 
+	border-bottom: 1px solid #aaaaaa;
+}
+
+/*
  * Styles generes par les raccourcis de mis en page
  */
 
