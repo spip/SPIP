@@ -82,7 +82,7 @@ function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
  	if ($lang && ereg(",$lang,", ",$all_langs,")) {
 		$GLOBALS['spip_lang'] = $lang;
-		if ($lang == 'ar' OR $lang == 'fa')	// arabic, farsi
+		if ($lang == 'ar' OR $lang == 'fa' OR $lang == 'he')	// arabic, farsi, hebreu (cf. inc_filtres pour lang_rtl)
 			$spip_lang_rtl = '_rtl';
 		else
 			$spip_lang_rtl = '';

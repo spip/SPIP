@@ -612,6 +612,7 @@ requiring an FTP access to the Web site.',
 'info_gauche_visiteurs_enregistres' => 'You will find here the visitors registered
 	in the public area of the site (forums by subscription).',
 'info_generation_miniatures_images' => 'Generating images thumbnails',
+'info_gerer_trad' => '<NEW> G&eacute;rer les liens de traduction ?',
 'info_grand_ecran' => 'Large display',
 'info_groupe_important' => 'Important group',
 'info_hebergeur_desactiver_envoi_email' => 'Some hosts disable automated mail sending
@@ -694,8 +695,9 @@ requiring an FTP access to the Web site.',
 'info_multi_articles' => 'Enable the language menu for the articles?',
 'info_multi_cet_article' => '<MODIF> This article is in:',
 'info_multi_cette_rubrique' => '<MODIF> This section is in:',
-'info_multi_herit' => 'parent\'s language',
+'info_multi_herit' => '<MODIF> parent\'s language',
 'info_multi_rubriques' => 'Enable the language menu for the sections?',
+'info_multi_secteurs' => '<NEW> ... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => 'Multilingual',
 'info_nexen_1' => 'Your host is Nexen Services.',
 'info_nexen_2' => 'Protection of the directory <tt>ecrire/data/</tt> should be applied through',
@@ -1401,6 +1403,7 @@ the images and the documents used in the articles and sections.',
 		to customise the articles in your templates.',
 'texte_mots_cles_dans_forum' => 'Do you wish to allow the use of keywords that could be selected by visitors, in the public site forums? (Warning: this option is rather intricate to use properly.)',
 'texte_multilinguisme' => 'If you wish to manage articles in several languages, with a complicated navigation, you can add a language selection menu to the articles and/ot the sections, according to the organisation of your site.',
+'texte_multilinguisme_trad' => '<NEW> Vous pouvez &eacute;galement activer un syst&egrave;me de gestion de liens entre les diff&eacute;rentes versions d\'un article.',
 'texte_non_compresse' => '<i>uncompressed</i> (your server does not support this feature)',
 'texte_non_fonction_referencement' => 'You can choose not to use this automated feature, and enter the elements concerning that site manually...',
 'texte_nouveau_message' => 'New message',
@@ -1596,8 +1599,6 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
 'trad_reference' => '(reference article)'
-
-
 
 );
 
