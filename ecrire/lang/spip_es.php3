@@ -76,7 +76,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_gras' => 'Poner en {{negrilla}}',
 'barre_guillemets' => 'Poner entre &laquo; comillas francesas &raquo;',
 'barre_guillemets_de' => 'Poner entre „comillas“',
-'barre_guillemets_simples' => 'Poner entre “comillas”',
 'barre_intertitre' => 'Transformar en  {{{inter-t&iacute;tulo}}}',
 'barre_italic' => 'Poner en {cursiva}',
 'barre_lien' => 'Transformar en [enlace de hipertexto->http://...]',

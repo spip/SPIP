@@ -251,7 +251,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Tekst van het bericht',
 'entree_titre_document' => 'Documenttitel:',
 'entree_titre_image' => 'Afbeeldingstitel:',
-'entree_titre_obligatoire' => '<B>Titel</b> [verplicht]BR>',
+'entree_titre_obligatoire' => '<B>Titel</b> [verplicht]<BR>',
 'entree_url' => 'Je website-adres (URL)',
 
 
@@ -950,7 +950,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_une_rubrique_02' => '1 Rubriek',
 'info_url' => 'URL:',
 'info_url_site' => 'WEBSITE URL:',
-'info_urlref' => 'Referentie-adres (URL)&nbsp;:',
+'info_urlref' => '<MODIF> Referentie-adres (URL)&nbsp;:',
 'info_utilisation_messagerie_interne' => 'Je gebruikt het intern berichtensysteem van de site.',
 'info_utilisation_spip' => 'Je kan het publicatiesysteem nu gebruiken...',
 'info_valider_lien' => 'deze link goedkeuren',
@@ -1287,7 +1287,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_adresse_annuaire_1' => '(Als de map is ge&iuml;nstalleerd is op dezelfde computer als je website, is het waarschijnlijk &laquo;localhost&raquo;.)',
 'texte_ajout_auteur' => 'Deze auteuer is toegevoegd aan het artikel :',
 'texte_annuaire_ldap_1' => 'Als je toegang hebt tot een LDAP-adresboek, kan je dit gebruiken om automatisch gebruikers in te voeren in SPIP.',
-'texte_article_statut' => 'De Artikel is:',
+'texte_article_statut' => 'Dit artikel is:',
 'texte_article_virtuel' => 'Virtual artikel',
 'texte_article_virtuel_reference' => '<b>Virtueel artikel:</b> gekoppeld artikel in je SPIP site maar doorgestuurd naar een andere URL. Verwijder de URL om de doorverwijzing te stoppen.',
 'texte_aucun_resultat_auteur' => 'Geen resultaat voor "@cherche_auteur@"',
