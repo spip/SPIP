@@ -991,7 +991,7 @@ function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
 
 			if (strlen($icone)>3){
 				echo "\n<td height=40 valign='middle'>";
-				echo "<a href='$lien' class='icone'><img src='img_pack/$icone' border=0></a>";
+				echo "&nbsp; <a href='$lien' class='icone'><img src='img_pack/$icone' border=0></a>";
 				echo "</td>";
 			}
 			echo "\n<td height=40 valign='middle'>";
