@@ -241,11 +241,12 @@ function creer_base() {
 		id_message bigint(21) DEFAULT '0' NOT NULL,
 		id_syndic bigint(21) DEFAULT '0' NOT NULL,
 		PRIMARY KEY (id_forum),
-		KEY id_parent(id_parent),
-		KEY id_rubrique(id_rubrique),
-		KEY id_article(id_article),
-		KEY id_breve(id_breve),
-		KEY id_message(id_message),
+		KEY id_parent (id_parent),
+		KEY id_rubrique (id_rubrique),
+		KEY id_article (id_article),
+		KEY id_breve (id_breve),
+		KEY id_message (id_message),
+		KEY id_syndic (id_syndic),
 		KEY statut (statut, date_heure))";
 	$result = spip_query($query);
 
@@ -259,7 +260,7 @@ function creer_base() {
 		maj TIMESTAMP,
 		PRIMARY KEY (id_article))";
 	$result = spip_query($query);
-	
+
 	$query = "CREATE TABLE spip_signatures (
 		id_signature bigint(21) DEFAULT '0' NOT NULL auto_increment,
 		id_article bigint(21) DEFAULT '0' NOT NULL,
@@ -1206,6 +1207,11 @@ function maj_base() {
 		purger_index();
 		creer_liste_indexation();
 		maj_version (1.600);
+	}
+
+	if ($version_installee < 1.601) {
+		spip_query("ALTER TABLE spip_forum ADD INDEX id_syndic (id_syndic)");
+		maj_version (1.601);
 	}
 }
 
