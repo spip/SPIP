@@ -14,7 +14,7 @@ define("_ECRIRE_INC_VERSION", "1");
 // (a modifier pour avoir plusieurs sites SPIP dans une seule base)
 $table_prefix = "spip";
 
-// faut-il loger les infos de debug dans data/spip.log
+// faut-il loger les infos de debug dans data/spip.log ?
 $debug = false;
 
 // faut-il passer les connexions MySQL en mode debug ?
@@ -22,6 +22,9 @@ $mysql_debug = false;
 
 // faut-il chronometrer les requetes MySQL ?
 $mysql_profile = false;
+
+// faut-il autoriser SPIP a compresser les pages a la volee quand le navigateur l'accepte ?
+$auto_compress = true;
 
 //
 // 	*** Fin du parametrage ***
@@ -302,7 +305,7 @@ function tester_accesdistant() {
 // compressee pour economiser de la bande passante
 //
 
-if ($flag_obgz) {
+if ($auto_compress && $flag_obgz) {
 	$use_gz = true;
 
 	// si un buffer est deja ouvert, stop
