@@ -224,29 +224,6 @@ function controle_forum($row, $new) {
 	$controle .= "</FONT>";
 	$controle .= "</TD></TR></TABLE>";
 
-	// bouton de reponse
-	switch ($forum_stat) {
-		case 'prive':
-		case 'privadm':
-		case 'privrac':
-			$url_reponse = 'forum_envoi.php3';
-			$titre_reponse = "&titre_message=$forum_titre";
-			$retour = '&adresse_retour=controle_forum.php3?page=interne';
-			break;
-
-		case 'publie':
-		default:
-			$url_reponse = '';
-	}
-	if ($url_reponse) {
-		$url_reponse .= "?id_parent=$id_forum" .
-			($forum_id_rubrique ? "&id_rubrique=$forum_id_rubrique" :
-			($forum_id_article ? "&id_article=$forum_id_article" :
-			($forum_id_breve ? "&id_rubrique=$forum_id_breve" : "")))
-			. $retour . $titre_reponse;
-		$controle .= "<div align='right' style='font-face: arial,helvetica,sans-serif; font-size: 10;'>[<a href='$url_reponse'>"._L('R&eacute;pondre')."</a>]</div>";
-	}
-
 	$controle .= "</TD></TR></TABLE>\n";
 
 	if (!($forum_stat == 'off' OR $forum_stat == 'privoff' OR $forum_stat=='prop'))
