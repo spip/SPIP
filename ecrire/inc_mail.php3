@@ -40,8 +40,8 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	global $hebergeur, $queue_mails, $flag_wordwrap;
 
 	if (!$from) $from = $email;
-	if (! email_valide ($email) ) return;
-	if ($email == "vous@fournisseur.com") return;
+	if (! email_valide ($email) ) return false;
+	if ($email == "vous@fournisseur.com") return false;
 
 	$headers = "From: $from\n".
 		"MIME-Version: 1.0\n".
