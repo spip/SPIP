@@ -14,12 +14,11 @@ include_ecrire("inc_acces.php3");
 utiliser_langue_site();
 utiliser_langue_visiteur();
 
-$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
 unset($erreur);
 
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
-	$oubli_pass = 'oui';
+	$mode = 'oubli_pass';
 	$res = spip_query ("SELECT * FROM spip_auteurs WHERE cookie_oubli='$p' AND statut<>'5poubelle' AND pass<>''");
 	if ($row = spip_fetch_array($res)) {
 		if ($pass) {
@@ -38,7 +37,7 @@ if ($p = addslashes($p)) {
 			echo "<input type='hidden' name='p' value='".htmlspecialchars($p)."'>";
 			echo _T('pass_choix_pass')."<br>\n";
 			echo "<input type='password' name='pass' value=''>";
-			echo '  <input type=submit class="fondl" name="oubli" value="'._T('pass_ok').'"></div></form>';
+			echo '  <input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
 			install_fin_html();
 			exit;
 		}
@@ -76,7 +75,7 @@ if ($email_oubli) {
 		$erreur = _T('pass_erreur_non_valide', array('email_oubli' => htmlspecialchars($email_oubli)));
 }
 
-if ($oubli_pass == 'oui') {
+if ($mode == 'oubli_pass') {
 	// debut presentation
 	install_debut_html(_T('pass_mot_oublie'));
 
@@ -90,28 +89,32 @@ if ($oubli_pass == 'oui') {
 		echo '<form action="spip_pass.php3" method="post">';
 		echo '<div align="right">';
 		echo '<input type="text" class="fondo" name="email_oubli" value="">';
-		echo '<input type="hidden" name="oubli_pass" value="oui">';
-		echo '  <input type=submit class="fondl" name="oubli" value="'._T('pass_ok').'"></div></form>';
+		echo '<input type="hidden" name="mode" value="oubli_pass">';
+		echo '  <input type=submit class="fondl" value="'._T('pass_ok').'"></div></form>';
 	}
 }
-else if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
+ else {
+	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
+	if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
-	install_debut_html(_T('pass_vousinscrire'));
-	echo "<p>";
 
-	if ($inscriptions_ecrire)
-		echo _T('pass_espace_prive_bla');
-	else
-		echo _T('pass_forum_bla');
-	echo "\n<p>";
+		install_debut_html(_T('pass_vousinscrire'));
+		echo "<p>";
+		
+		if ($mode != 'forum')
+		  echo _T('pass_espace_prive_bla');
+		else
+		  echo _T('pass_forum_bla');
+		echo "\n<p>";
 
-	echo formulaire_inscription(($inscriptions_ecrire)? 'redac' : 'forum');
-}
-else {
-	install_debut_html(_T('pass_erreur'));
-	echo "<p>"._T('pass_rien_a_faire_ici');
-}
-
+		include_local("inc-inscription.php3");
+		echo (inscription_dyn($mode));
+	}
+	else {
+		install_debut_html(_T('pass_erreur'));
+		echo "<p>"._T('pass_rien_a_faire_ici');
+	}
+ }
 echo "<p align='right'>",
   http_script("if (window.opener) document.write(\"<a href='javascript:close();'>\");
 	else document.write(\"<a href='./'>\");

@@ -23,12 +23,12 @@ function inscription_dyn($type) {
 			$url = $link->getUrl();
 			$url = quote_amp($url);
 			return  _T('form_forum_indiquer_nom_email') .
-			  "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n" .
+			  "<form method='post' action='$url' style='border: 0px; margin: 0px;'>\n" .
 			  "<div><b>"._T('form_pet_votre_nom')."</b></div>" .
 			  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>" .
 			  "<div><b>"._T('form_pet_votre_email')."</b></div>" .
 			  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>" .
-			  "<div align=\"right\"><input type=\"submit\" name=\"Valider\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>" .
+			  "<div align=\"right\"><input type=\"submit\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>" .
 			  "</form>";
 	}
 }
