@@ -125,7 +125,7 @@ function calcul_mysql_in($val, $valeurs, $tobeornotobe)
 function calcul_generation ($generation) {
 	$lesfils = array();
 	$result = spip_abstract_select(array('id_rubrique'),
-				       array('spip_rubriques AS rubriques'),
+				       array('rubriques AS rubriques'),
 				       array(calcul_mysql_in('id_parent', 
 							     $generation,
 							     '')),
