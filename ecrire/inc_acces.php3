@@ -57,7 +57,8 @@ function ecrire_acces() {
 	global $htaccess, $htpasswd;
 
 	// ne pas creer ce fichier s'il n'existe pas deja
-	if (!file_exists($htpasswd))
+	// sauf si .htaccess existe !
+	if (!file_exists($htpasswd) and !file_exists($htaccess))
 		return;
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
