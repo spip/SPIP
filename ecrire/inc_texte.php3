@@ -44,18 +44,14 @@ else {
 }
 
 
-//
-// Variables globales : a virer pour une gestion intelligente de la langue
-//
-tester_variable('lang', 'fr');
 
 //
 // Trouver une locale qui marche
 //
-$lang2 = strtoupper($GLOBALS['lang']);
-setlocale(LC_CTYPE, $GLOBALS['lang']) ||
-setlocale(LC_CTYPE, $lang2.'_'.$GLOBALS['lang']) ||
-setlocale(LC_CTYPE, $GLOBALS['lang'].'_'.$lang2);
+$lang2 = strtoupper($GLOBALS['spip_lang']);
+setlocale(LC_CTYPE, $GLOBALS['spip_lang']) ||
+setlocale(LC_CTYPE, $lang2.'_'.$GLOBALS['spip_lang']) ||
+setlocale(LC_CTYPE, $GLOBALS['spip_lang'].'_'.$lang2);
 
 
 //
@@ -316,11 +312,11 @@ function typo_fr($letexte) {
 
 // Typographie generale : francaise sinon rien (pour l'instant)
 function typo($letexte) {
-	global $lang;
+	global $spip_lang;
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if ($lang == 'fr')
+	if ($spip_lang == 'fr')
 		$letexte = typo_fr($letexte);
 
 	$letexte = corriger_caracteres($letexte);

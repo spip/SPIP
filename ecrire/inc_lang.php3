@@ -97,14 +97,17 @@ function utiliser_langue_site() {
 // Initialisation
 //
 function init_langues() {
-	global $all_langs;
-	$d = opendir($GLOBALS['flag_ecrire'] ? "lang" : "ecrire/lang");
-	while ($f = readdir($d)) {
-		if (ereg('^spip_([a-z]{2,3})\.php3?$', $f, $regs))
-			$all_langs[] = $regs[1];
-	}
-	closedir($d);
-	$all_langs = join(',', $all_langs);
+	if ($GLOBALS['flag_ecrire'] || !lire_meta('langues_proposees')) {
+		$d = opendir($GLOBALS['flag_ecrire'] ? "lang" : "ecrire/lang");
+		while ($f = readdir($d)) {
+			if (ereg('^spip_([a-z]{2,3})\.php3?$', $f, $regs))
+				$all_langs[] = $regs[1];
+		}
+		closedir($d);
+		$GLOBALS['all_langs'] = join(',', $all_langs);
+		ecrire_meta('langues_proposees', $GLOBALS['all_langs']);
+	} else
+		$GLOBALS['all_langs'] = lire_meta('langues_proposees');
 }
 
 init_langues();

@@ -137,7 +137,7 @@ function forum_parent($id_forum) {
 }
 
 
-function controle_forum($row, $new) {
+function controle_forum($row) {
 	global $couleur_foncee;
 	global $mots_cles_forums;
 	global $controle_sans;
@@ -177,10 +177,7 @@ function controle_forum($row, $new) {
 	$controle .= "<TR><TD>";
 	$controle .= "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 
-	if ($new)
-		$new = " &nbsp; <i>"._T('info_nouveau')."</i>";
-
-	$controle .= "<FONT FACE='arial,helvetica'>".nom_jour($forum_date_heure)." ".affdate($forum_date_heure).", ".heures($forum_date_heure)."h".minutes($forum_date_heure)."$new</FONT>";
+	$controle .= "<FONT FACE='arial,helvetica'>".affdate_heure($forum_date_heure)."</FONT>";
 	if ($forum_auteur) {
 		if ($forum_email_auteur)
 			$forum_auteur="<A HREF=\"mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."\">$forum_auteur</A>";
@@ -296,7 +293,7 @@ while ($row = spip_fetch_array($result_forum)) {
 
 	// elements a controler
 	if ($ok_controle)
-		$controle .= controle_forum($row, $new);
+		$controle .= controle_forum($row);
 
 	$i ++;
 }
