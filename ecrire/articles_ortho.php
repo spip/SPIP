@@ -50,7 +50,7 @@ if ($row = spip_fetch_array($result)) {
 	$lang_article = $row["lang"];
 }
 if (!$lang_article) $lang_article = lire_meta('langue_site');
-changer_typo($lang_article);
+changer_typo($lang_article); # pour l'affichage du texte
 
 // pour l'affichage du virtuel
 unset($virtuel);
@@ -75,13 +75,13 @@ $code_ie = "<!--[if IE]>
 		overflow: hidden;
 	}
 	.ortho-content {
-		position: absolute; left: 0px;
+		position: absolute; $spip_lang_left: 0px;
 		height: 100%; margin: 0px; padding: 0px;
 		width: 72%;
 		overflow-y: auto;
 	}
 	#ortho-fixed {
-		position: absolute; right: 0px; width: 25%;
+		position: absolute; $spip_lang_right: 0px; width: 25%;
 		height: 100%; margin: 0px; padding: 0px;
 		overflow: hidden;
 	}
@@ -193,7 +193,7 @@ if ($soustitre) {
 }
 
 if ($descriptif OR $url_site OR $nom_site) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
+	echo "<p><div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	echo "<font size='2' face='Verdana,Arial,Sans,sans-serif'>";
 	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
 	$texte_case .= ($nom_site.$url_site) ? "{{"._T('info_urlref')."}} [".$nom_site."->".$url_site."]" : '';
