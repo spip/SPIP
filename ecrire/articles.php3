@@ -182,24 +182,6 @@ if ($changer_virtuel && $flag_editable) {
 	$result = spip_query($query);
 }
 
-// Changer la langue heritee
-if ($id_rubrique != id_rubrique_old) {
-	if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
-		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-		$langue_old = $row['lang'];
-		$langue_choisie_old = $row['langue_choisie'];
-		
-		if ($langue_choisie_old != "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_new = $row['lang'];
-	
-			if ($langue_new != $langue_old) {
-				spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
-			}
-		}
-	}
-}
-
 if ($titre && !$ajout_forum && $flag_editable) {
 	$surtitre = addslashes(corriger_caracteres($surtitre));
 	$titre = addslashes(corriger_caracteres($titre));
@@ -228,6 +210,26 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') $reindexer = true;
+
+	// Changer la langue heritee
+	if ($id_rubrique != $id_rubrique_old) {
+		if (lire_meta('multi_rubriques') == "oui") {
+			$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
+			$langue_old = $row['lang'];
+			$langue_choisie_old = $row['langue_choisie'];
+			
+			if ($langue_choisie_old != "oui") {
+				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+				$langue_new = $row['lang'];
+		
+				if ($langue_new != $langue_old) {
+					spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
+				}
+			}
+		}
+	}
+
+
 
 	// afficher le nouveau titre dans la barre de fenetre
 	$titre_article = stripslashes($titre);
