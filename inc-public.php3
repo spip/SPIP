@@ -306,9 +306,6 @@ if (($HTTP_COOKIE_VARS['spip_admin'] OR ($auteur_session['statut'] == '0minirezo
 	else if ($id_auteur) {
 		bouton("Modifier cet auteur ($id_auteur)", "./ecrire/auteurs_edit.php3?id_auteur=$id_auteur");
 	}
-	else {
-		bouton("Acc&egrave;s admin", "./ecrire/index.php3?");
-	}
 
 	$link = new Link;
 	$link->addVar('recalcul', 'oui');
@@ -317,10 +314,6 @@ if (($HTTP_COOKIE_VARS['spip_admin'] OR ($auteur_session['statut'] == '0minirezo
 	else $pop = "";
 	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page$pop'>";
 	echo "</form>\n";
-
-	if ($auteur_session['statut'] == '0minirezo') {
-		bouton ("D&eacute;connexion", "./spip_cookie.php3?cookie_session=non&redirect=./ecrire/login.php3");
-	}
 }
 
 

@@ -133,8 +133,9 @@ function creer_cookie_session($auteur) {
 
 
 // $login est optionnel
-function affiche_formulaire_login ($login, $redirect) {
+function affiche_formulaire_login ($login, $redirect, $redirect_echec = '') {
 	if ($GLOBALS['flag_ecrire']) $dir = "../";
+	if (!$redirect_echec) $redirect_echec = $redirect;
 
 	echo "<form action='$dir"."spip_cookie.php3' method='post'>\n";
 
@@ -146,7 +147,9 @@ function affiche_formulaire_login ($login, $redirect) {
 	echo "<label><b>Mot de passe</b><br></label>";
 	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
 
-	echo "<input type='hidden' name='redirect' value='$redirect'>";
+	echo "<input type='hidden' name='essai_login' value='oui'>\n";
+	echo "<input type='hidden' name='redirect' value='$redirect'>\n";
+	echo "<input type='hidden' name='redirect_echec' value='$redirect_echec'>\n";
 	echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
 
 	echo "</fieldset>\n";

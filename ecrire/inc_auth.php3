@@ -106,6 +106,11 @@ function auth() {
 			}
 		}
 	}
+	// Si echec de la pose du cookie, signaler et demander login / mdp
+	else if ($GLOBALS['essai_cookie'] == "oui") {
+		@header("Location: ./login.php3?echec_cookie=oui");
+		exit;
+	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
