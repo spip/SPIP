@@ -26,7 +26,7 @@ debut_html();
 				$id_article=$row['id_article'];
 				$titre = typo($row['titre']);
 				$puce = "puce-blanche-breve.gif";
-				echo "<div class='puce-article' style='background: url(img_pack/$puce) $spip_lang_left center no-repeat;'><div><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"' class='verdana1'>$titre</a></div></div>";
+				echo "<div class='puce-article' style='background: url(img_pack/$puce) left center no-repeat;'><div><a href='javascript:window.parent.location=\"articles.php3?id_article=$id_article\"' class='verdana1'>$titre</a></div></div>";
 			}
 		}
 	

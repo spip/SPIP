@@ -353,6 +353,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		$toujours_afficher = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
+	global $spip_lang_left;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
@@ -449,17 +450,21 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$title = _T('info_article_supprime');
 				break;
 			}
-			$s = "<a href=\"articles.php3?id_article=$id_article\" title=\"$title\">";
 			$puce = "puce-$puce.gif";
 
-			$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
+			$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; padding-$spip_lang_left: 17px;'>";
+
+			//$s. = "<a href=\"articles.php3?id_article=$id_article\" title=\"$title\">";
+
+			//$s .= "<img src=\"img_pack/$puce\" alt='' width=\"13\" height=\"14\" border=\"0\"></a>&nbsp;&nbsp;";
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang>".typo($titre)."</a>";
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
 			if ($petition) $s .= " <Font size=1 color='red'>"._T('lien_petitions')."</font>";
-
+			$s .= "</div>";
+			
 			$vals[] = $s;
 
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
