@@ -72,18 +72,21 @@ function vignette_par_defaut ($type_extension) {
 		$img = "IMG2";
 	else
 		$img = "IMG";
-		$filename = "$img/type_$type_extension.png";
 
-	if (file_exists($filename)) {
-		$vig = "<img src='$filename'>";
-	} else {
-		$vig =  "<table cellpadding=0 cellspacing=0 border=0 width=35 height=32 align='left' valign='bottom'>\n";
-		$vig .= "<tr width=35 height=32>\n";
-		$vig .= "<td width=35 height=32 background='$img/document-vierge.gif' align='left'>\n";
-		$vig .= "<table bgcolor='#666666' style='border: solid 1px black; margin-top: 10px; padding-top: 0px; padding-bottom: 0px; padding-left: 3px; padding-right: 3px;' cellspacing=0 border=0>\n";
-		$vig .= "<tr><td><font face='verdana,arial,helvetica,sans-serif' color='white' size='1'>$type_extension</font></td></tr></table>\n";
-		$vig .= "</td></tr></table>\n&nbsp;&nbsp;&nbsp;";
+	$filename = "$img/type_$type_extension";
+
+	if (file_exists($filename.'.png')) {
+		$vig = "$filename.png";
+	} else if (file_exists($filename.'-dist.png')) {
+		$vig = "$filename-dist.png";
+	} else if (file_exists("$img/type_defaut.png")) {
+		$vig = "$img/type_defaut.png";
+	} else if (file_exists("$img/type_defaut-dist.png")) {
+		$vig = "$img/type_defaut-dist.png";
 	}
+
+	$image = getimagesize($vig);
+	$vig = "<img src='$vig' alt='$type_extension' border='0' ".$image[3]." >";
 
 	return $vig;
 }

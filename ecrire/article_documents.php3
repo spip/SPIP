@@ -26,13 +26,23 @@ if ($modif_document == 'oui') {
 	mysql_query("UPDATE spip_documents SET titre=\"$titre\", descriptif=\"$descriptif\" WHERE id_document=$id_document");
 }
 
+$query = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
+$result = mysql_query($query);
+if ($art = mysql_fetch_object($result)) {
+	$titre_art = "&laquo; ".typo($art->titre)." &raquo;";
+	$lien_art = " <a href='articles.php3?id_article=$id_article' target='spip_normal'><font color='ffffff'>$titre_art</font></a>";
+} else {
+	$titre_art = '';
+	$lien_art = '';
+}
+
 debut_html("Images et documents");
 
 echo "<table width='100%' border='0' cellpadding='6' cellspacing='0'>\n";
 
 echo "<tr bgcolor='$couleur_foncee'>\n";
 echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#FFFFFF'>";
-echo "Documents li&eacute;s &agrave l'article";
+echo "Documents li&eacute;s &agrave l'article".$lien_art;
 echo "</td></tr>\n";
 
 $docs_affiches = "";
@@ -81,13 +91,11 @@ while ($row = mysql_fetch_array($result)) {
 
 echo "<tr><td height='15'>&nbsp;</td></tr>\n";
 
-echo "<tr bgcolor='#EEEECC'>\n";
-echo "<td width='100%'><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#000000'>";
-echo "Ajouter un nouveau document";
+echo "<tr bgcolor='$couleur_foncee'>\n";
+echo "<td><font face='Verdana,Arial,Helvetica,sans-serif' size='4' color='#FFFFFF'>";
+echo "Ajouter une image ou un document";
 echo "</td></tr>\n";
-
-
-echo "<tr><td>\n";
+echo debut_boite_info();
 
 $hash = calculer_action_auteur("ajout_doc");
 
@@ -98,7 +106,7 @@ echo "<INPUT NAME='id_article' TYPE=Hidden VALUE=$id_article>\n";
 echo "<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE=$connect_id_auteur>\n";
 echo "<INPUT NAME='hash' TYPE=Hidden VALUE=$hash>\n";
 echo "<INPUT NAME='ajout_doc' TYPE=Hidden VALUE='oui'>\n";
-echo "Ajouter une image ou un document&nbsp;:";
+// echo "Ajouter une image ou un document&nbsp;:";
 echo aide("artimg");
 if (tester_upload() AND ($connect_statut == '0minirezo')) {
 	$texte_upload = texte_upload("");
@@ -118,7 +126,7 @@ echo "</FORM>";
 echo "</div>";
 echo "</font>\n";
 
-echo "</td></tr>\n";
+echo fin_boite_info();
 
 echo "</table></body></html>\n";
 flush();
