@@ -19,7 +19,6 @@
  * - 2003/06/09 by Antoine Pitrou (unicode compatibility)
  *
  *
- * $Id$
  *
  */
 
