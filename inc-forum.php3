@@ -334,7 +334,7 @@ $forum_array = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_sy
 function forum_stat($args, $filtres)
 {
   list ($idr, $idf, $ida, $idb, $ids) = $args;
-  include_local("inc-forum.php3");
+
   // recuperer les donnees du forum auquel on repond, false = forum interdit
   if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
     return '';
@@ -372,7 +372,6 @@ function forum_dyn($args, $donnees_forum) {
 	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
 	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
 	$url = ereg_replace("[?&]var_url=[^&]*", '', $url);
-	$url = ereg_replace("[?&]retour=[^&]*", '', $url);
 	// url de retour du forum
 	if ($retour_forum = rawurldecode($GLOBALS['HTTP_GET_VARS']['retour']))
 	  $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
@@ -380,10 +379,12 @@ function forum_dyn($args, $donnees_forum) {
 	  if (!$retour_forum = rawurldecode($GLOBALS['HTTP_POST_VARS']['retour']))
 	    $retour_forum = $url;
 	}
-
 	// verifier l'identite des posteurs pour les forums sur abo
 	if (($accepter_forum == "abo") && (!$GLOBALS["auteur_session"]))
-	  return login_pour_tous($url, false, true, $url);
+	  {
+	    include_local('inc-login.php3');
+	    return login_pour_tous($url, false, true, $url);
+	  }
 	else
 	// debut formulaire forum
 	 return retour_forum($idr,$idf,$ida,$idb,$ids,
