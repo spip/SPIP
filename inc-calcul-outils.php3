@@ -38,8 +38,9 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
 	'SITE' => 'site'
 );
   $type = $table_logos[$type];
-  # attention au cas $id = '0' pour LOGO_SITE_SPIP ==> intval
-  while ($id) {
+  # attention au cas $id = '0' pour LOGO_SITE_SPIP
+  # utiliser intval et toujours faire au moins un essai
+  while (1) {
     $on = cherche_image_nommee($type . $onoff . intval($id));
     if ($on) 
       { if ($ff)
@@ -56,8 +57,8 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
     else if ($id_rubrique)
       {$type = 'rub'; $id = $id_rubrique; $id_rubrique = 0;}
     else if ($type = 'rub') $id = sql_parent($id);
+    if (!$id) return '';
   }
-  return '';
 }
 
 // Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
