@@ -59,6 +59,9 @@ fin_cadre_relief();
 afficher_taches();
 
 
+afficher_ical($connect_id_auteur);
+
+
 debut_droite("messagerie");
 
 

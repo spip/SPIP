@@ -106,7 +106,7 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 	
 
 	for ($j=0; $j<7;$j++){
-		echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top' style='border-bottom: 1px solid white; border-right: 1px solid white; border-left: 1px solid #aaaaaa; border-top: 1px solid #aaaaaa;'>";
+		echo "<td width='$largeur_col' HEIGHT='100' BGCOLOR='$couleur_fond' VALIGN='top'>";
 		calendrier_jour($jour_today-$jour_semaine+$j+1,$mois_today,$annee_today, "etroit");
 		echo "</td>";
 	}
@@ -126,6 +126,12 @@ if (!$mois){
 	$mois=$today["mon"];
 	$annee=$today["year"];
 }
+
+$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
+$jour = journum($date);
+$mois = mois($date);
+$annee = annee($date);
+
 
 
 debut_page(d_apostrophe(_T('titre_page_calendrier', array('nom_mois' => $nom_mois, 'annee' => $annee))), "redacteurs", "calendrier");

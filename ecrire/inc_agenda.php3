@@ -5,8 +5,6 @@
 if (defined("_ECRIRE_INC_AGENDA")) return;
 define("_ECRIRE_INC_AGENDA", "1");
 
-// pour low_sec (iCal)
-include_ecrire("inc_acces.php3");
 
 
 //
@@ -165,28 +163,29 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	echo "<div style='position: absolute; $spip_lang_left: 2px; top: 422px; color: #666666;' class='arial0'><b class='arial0'>20:00<br />23:59</b></div>";
 
 
+	// articles du jour
+	$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee-$mois-$jour' AND date < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date";
+	$result=spip_query($query);
+	while($row=spip_fetch_array($result)){
+		$id_article=$row['id_article'];
+		$titre=typo($row['titre']);
+		$lejour=journum($row['date']);
+		$lemois = mois($row['date']);		
+		$les_articles.="<div><a href='articles.php3?id_article=$id_article' class='arial1'><img src='img_pack/puce-verte-breve.gif' width='8' height='9' border='0'> $titre</a></div>";
+	}
+
+	// breves du jour
+	$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee-$mois-$jour' AND date_heure < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date_heure";
+	$result=spip_query($query);
+	while($row=spip_fetch_array($result)){
+		$id_breve=$row['id_breve'];
+		$titre=typo($row['titre']);
+		$lejour=journum($row['date_heure']);
+		$lemois = mois($row['date_heure']);		
+		$les_breves.="<div><a href='breves_voir.php3?id_breve=$id_breve' class='arial1'><img src='img_pack/puce-blanche-breve.gif' width='8' height='9' border='0'> $titre</a></div>";
+	}
+
 	if ($large == "large") {
-		// articles du jour
-		$query="SELECT * FROM spip_articles WHERE statut='publie' AND date >='$annee-$mois-$jour' AND date < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date";
-		$result=spip_query($query);
-		while($row=spip_fetch_array($result)){
-			$id_article=$row['id_article'];
-			$titre=typo($row['titre']);
-			$lejour=journum($row['date']);
-			$lemois = mois($row['date']);		
-			$les_articles.="<div><a href='articles.php3?id_article=$id_article' class='arial1'><img src='img_pack/puce-verte.gif' width='7' height='7' border='0'> $titre</a></div>";
-		}
-	
-		// breves du jour
-		$query="SELECT * FROM spip_breves WHERE statut='publie' AND date_heure >='$annee-$mois-$jour' AND date_heure < DATE_ADD('$annee-$mois-$jour', INTERVAL 1 DAY) ORDER BY date_heure";
-		$result=spip_query($query);
-		while($row=spip_fetch_array($result)){
-			$id_breve=$row['id_breve'];
-			$titre=typo($row['titre']);
-			$lejour=journum($row['date_heure']);
-			$lemois = mois($row['date_heure']);		
-			$les_breves.="<div><a href='breves_voir.php3?id_breve=$id_breve' class='arial1'><img src='img_pack/puce-blanche.gif' width='7' height='7' border='0'> $titre</a></div>";
-		}
 		if ($les_articles OR $les_breves) {
 			if ($les_articles) $les_articles = "<div><b class='verdana1'>"._T('info_articles')."</b></div>".$les_articles;
 			if ($les_breves) $les_breves = "<div><b class='verdana1'>"._T('info_breves_02')."</b></div>".$les_breves;
@@ -288,6 +287,19 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 
 	echo "</div>";
 	echo "</div>";
+	
+	if ($large != "large") {
+		if ($les_articles OR $les_breves) {
+			if ($les_articles) $les_articles = "<div><b class='verdana1'>"._T('info_articles')."</b></div>".$les_articles;
+			if ($les_breves) $les_breves = "<div><b class='verdana1'>"._T('info_breves_02')."</b></div>".$les_breves;
+			echo "<div style='padding: 5px;'>";
+			echo $les_articles;
+			echo $les_breves;
+			echo "</div>";
+		}
+	}
+
+	
 }
 
 function liste_rv($query, $type) {
@@ -364,7 +376,7 @@ function afficher_taches () {
 function afficher_ical($id) {
 	echo debut_cadre_enfonce();
 	echo "<div class='verdana1'>"._T("calendrier_synchro")."</div>";
-	icone_horizontale (_T("calendrier_synchro_lien"), "../spip_cal.php3?id=$id&cle=".afficher_low_sec($id,'ical'), "calendrier-24.gif");
+	icone_horizontale (_T("icone_suivi_activite"), "synchro.php3", "synchro-24.gif");
 	echo fin_cadre_enfonce();
 }
 

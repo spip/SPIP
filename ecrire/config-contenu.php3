@@ -263,6 +263,7 @@ if (tester_mail()) {
 
 	$suivi_edito=lire_meta("suivi_edito");
 	$adresse_suivi=lire_meta("adresse_suivi");
+	$adresse_suivi_inscription=lire_meta("adresse_suivi_inscription");
 
 	echo "<TR><TD>&nbsp;</TD></TR>";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
@@ -283,6 +284,13 @@ if (tester_mail()) {
 		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on' CHECKED>";
 		echo " <B><label for='suivi_edito_on'>"._T('bouton_radio_envoi_annonces_adresse')."</label></B> ";
 		echo "<input type='text' name='adresse_suivi' value='$adresse_suivi' size='30' CLASS='fondl'>";
+
+			echo "<blockquote class='spip'>";
+			if (!$adresse_suivi) $adresse_suivi = "mailing@monsite.net";
+			echo _T('info_config_suivi', array('adresse_suivi' => $adresse_suivi));
+			echo "<br><input type='text' name='adresse_suivi_insscription' value='$adresse_suivi_inscription' size='50' CLASS='fondl'>";
+			echo "</blockquote>";
+
 		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' id='suivi_edito_off'>";
 		echo " <label for='suivi_edito_off'>"._T('bouton_radio_non_envoi_annonces_editoriales')."</label> ";
 	}

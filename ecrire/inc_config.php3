@@ -220,6 +220,7 @@ function appliquer_modifs_config() {
 		'activer_imessage',
 		'suivi_edito',
 		'adresse_suivi',
+		'adresse_suivi_inscription',
 		'quoi_de_neuf',
 		'adresse_neuf',
 		'jours_neuf',

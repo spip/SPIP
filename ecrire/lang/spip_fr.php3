@@ -172,7 +172,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), vous pouvez le synchroniser avec l\'actualit&eacute; de ce site.',
-'calendrier_synchro_lien' => 'R&eacute;cup&eacute;rer le fichier <i>iCal</i>',
+'calendrier_synchro_lien' => 'R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Mozilla Calendar, Ximian Evolution...)',
+'calendrier_synchro_sync' => 'Synchroniser le fichier <i>iCal</i><br> (Apple iCal)',
 // D
 'date_avant_jc' => 'av. J.C.',
 'date_fmt_heures_minutes' => '@h@h@m@min',
@@ -433,6 +434,7 @@ Merci de votre participation
 'icone_sites_references' => 'Sites r&eacute;f&eacute;renc&eacute;s',
 'icone_statistiques' => 'Statistiques du site',
 'icone_statistiques_visites' => 'Statistiques des visites',
+'icone_suivi_activite' => 'Suivre l\'activit&eacute; &eacute;ditoriale',
 'icone_suivi_actualite' => '&Eacute;volution du&nbsp;site',
 'icone_suivi_forum' => 'Suivi du forum public&nbsp;: @nb_forums@&nbsp;contribution(s)',
 'icone_suivi_forums' => 'Suivre/g&eacute;rer les forums',
@@ -546,6 +548,9 @@ Merci de votre participation
 'info_classement_2' => '<sup>e</sup> sur @liste@',
 'info_code_acces' => 'N\'oubliez pas vos propres codes d\'acc&egrave;s&nbsp;!',
 'info_comment_lire_tableau' => 'Comment lire ce tableau',
+'info_config_suivi' => 'Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou un adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):', 
+'info_config_suivi_lien' => 'En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
+'info_config_suivi_explication' => 'Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
 'info_connexion_base' => 'Deuxi&egrave;me &eacute;tape : <B>Essai de connexion &agrave; la base</B>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l\'&eacute;tape suivante.',
