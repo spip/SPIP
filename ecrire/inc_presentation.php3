@@ -1079,14 +1079,8 @@ function barre_onglets($rubrique, $onglet){
 			onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues", $onglet, "langues-24.gif");
 	}
 
-	if ($rubrique == "traductions") {
-		onglet(_T('onglet_detail_traductions'), "plan_trad.php3", "detail", $onglet, "langues-24.gif");
-		onglet(_T('onglet_bilan_traductions'), "statistiques_trad.php3", "bilan", $onglet, "statistiques-24.gif");
-	}
-
 	if ($rubrique == "administration"){
 		onglet(_T('onglet_save_restaur_base'), "admin_tech.php3", "sauver", $onglet, "base-24.gif");
-//		onglet(_T('onglet_vider_cache'), "admin_vider.php3", "vider", $onglet, "cache-24.gif");
 		onglet(_T('onglet_affacer_base'), "admin_effacer.php3", "effacer", $onglet, "supprimer.gif");
 	}
 
@@ -1432,9 +1426,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_secondaire (_T('icone_a_suivre'), "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_site_entier'), "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
-		/*if ((lire_meta('multi_rubriques') == 'oui' OR lire_meta('multi_articles') == 'oui') AND lire_meta('gerer_trad') == 'oui' AND $options == 'avancees') {
-			icone_bandeau_secondaire (_T('icone_etat_traductions'), "plan_trad.php3", "langues-24.gif", "plan-trad", $sous_rubrique);
-		}*/
 		if ($options == "avancees"){
 			icone_bandeau_secondaire (_T('icone_suivi_activite'), "synchro.php3", "synchro-24.gif", "synchro", $sous_rubrique);
 		}
