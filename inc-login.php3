@@ -37,14 +37,22 @@ function auth_http($cible, $essai_auth_http) {
 }
 
 function ouvre_login($titre) {
-	$retour .= debut_cadre_enfonce("redacteurs-24.gif");
-	if ($titre) $retour .= gros_titre($titre);
-	$retour .= '<FONT size="2" FACE="arial,helvetica,sans-serif">';
+	//$retour .= debut_cadre_enfonce("redacteurs-24.gif");
+	
+	$retour .= "<div class='spip_encadrer'>";
+	
+	//if ($titre) $retour .= gros_titre($titre);
+	if ($titre) $retour .= "<h3 class='spip'>$titre</h3>";
+	
+	$retour .= '<font size="2" face="arial,helvetica,sans-serif">';
 	return $retour;
 }
 
 function ferme_login() {
-	return "</FONT>".fin_cadre_enfonce();
+	$retour =  "</font>";
+	//$retour .= fin_cadre_enfonce();
+	$retour .= "<div>";
+	return $retour;
 }
 
 function login($cible, $prive = 'prive', $message_login='') {
@@ -112,7 +120,7 @@ function login($cible, $prive = 'prive', $message_login='') {
 		echo "<p>Pour acc&eacute;der &agrave; l'espace priv&eacute; de ce site, ";
 		echo "vous devez entrer les codes d'identification qui vous ont &eacute;t&eacute; ";
 		echo "fournis lors de votre inscription. ";
-		echo "Si vous l'avez oubli&eacute;, ou si vous n'en avez pas encore, vous pouvez".
+		echo "Si vous n'en avez pas encore, ou si vous les avez oubli&eacute;s, vous pouvez".
 ' <script language="JavaScript"><!--
 document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'spip_pass\\\', \\\'scrollbars=yes,resizable=yes,width=740,height=580\\\'); void(0);\\"");
 //--></script><noscript><a href=\'spip_pass.php3\' target=\'_blank\'></noscript>demander de nouveaux identifiants</a>.';
@@ -130,14 +138,14 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
 		echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
-		echo "<form name='form_login' action='./spip_cookie.php3' method='post'";
+		echo "<form name='form_login' class='spip_encadrer' action='./spip_cookie.php3' method='post'";
 		echo " onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
 				this.session_password.value = \"\";
 			}'";
 		echo ">\n";
-		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
+		if ($erreur) echo "<div class='reponse_formulaire'><b>$erreur</b></div><p>";
 
 		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
 		echo "<script type=\"text/javascript\"><!--\n" .
@@ -156,14 +164,14 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 		echo "<input type='text' name='session_login' class='formo' value=\"$login\" size='40'></noscript>\n";
 
 		echo "<p>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
-		echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
+		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'><p>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
 
 		$url = $cible->getUrl();
 		echo "<input type='hidden' name='url' value='$url'>\n";
 		echo "<input type='hidden' name='session_password_md5' value=''>\n";
 		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
-		echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
 		echo "</form>";
 
 	}
@@ -172,13 +180,13 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 		$url = $cible->getUrl();
 		$action = $clean_link->getUrl();
 
-		echo "<form name='form_login' action='$action' method='post'>\n";
+		echo "<form name='form_login' action='$action' method='post' class='spip_encadrer'>\n";
 		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
-		echo "<label><b>Login (identifiant de connexion au site)</b><br></label>";
-		echo "<input type='text' name='var_login' class='formo' value=\"\" size='40'><p>\n";
+		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
+		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40'>\n";
 
 		echo "<input type='hidden' name='url' value='$url'>\n";
-		echo "<div align='right'><input type='submit' class='fondl' name='submit' value='Valider'></div>\n";
+		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
 		echo "</form>";
 	}
 
@@ -193,7 +201,7 @@ document.write("<a href=\\"javascript:window.open(\\\'spip_pass.php3\\\', \\\'sp
 		echo "<input type='hidden' name='essai_auth_http' value='oui'> ";
 		$url = $cible->getUrl();
 		echo "<input type='hidden' name='url' value='$url'>\n";
-		echo "<div align='right'><input type='submit' name='submit' class='fondl' value='Identification sans cookie'></div>\n";
+		echo "<div align='right'><input type='submit' name='submit' class='spip_bouton' value='Identification sans cookie'></div>\n";
 		echo "</fieldset></form>\n";
 	}
 

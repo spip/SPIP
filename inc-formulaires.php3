@@ -294,9 +294,12 @@ function formulaire_inscription() {
 	$request_uri = $GLOBALS["REQUEST_URI"];
 	global $mail_inscription;
 	global $nom_inscription;
+	
 
+	include_ecrire("inc_connect.php3");
 	include_ecrire("inc_meta.php3");
 	$inscriptions_ecrire = (lire_meta("autoriser_inscriptions") == "oui");
+
 	if ($inscriptions_ecrire) {
 		$ecrire = "ecrire/";
 		$statut = "nouveau";
@@ -306,7 +309,7 @@ function formulaire_inscription() {
 		$statut = "6forum";
 	}
 	else {
-		return; // tentative de hack...?
+		//return; // tentative de hack...?
 	}
 
 	if ($mail_inscription) {
