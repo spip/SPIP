@@ -134,49 +134,43 @@ function nettoyer_chapo($chapo){
 
 // Mise de cote des echappements
 function echappe_html($letexte,$source) {
-	//
-	// Echapper les <code>...</ code>
-	//
-	$regexp_echap = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
+
+	$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
+	$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
+	$regexp_echap_cadre = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
+
+	$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)";
+
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
-		$lecode = entites_html($regs[1]);
 
-		// ne pas mettre le <div...> s'il n'y a qu'une ligne
-		if (is_int(strpos($lecode,"\n")))
-			$lecode = nl2br("<div align='left' class='spip_code'>".trim($lecode)."</div>");
+		if ($code = $regs[1]) {
+			// Echapper les <html>...</ html>
+			$les_echap[$num_echap] = $regs[2];
+		}
+		else
+		if ($code = $regs[4]) {
+			// Echapper les <code>...</ code>
+			$lecode = entites_html($regs[5]);
 
-		$lecode = ereg_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
-		$lecode = ereg_replace("  ", " &nbsp;", $lecode);
-		$les_echap[$num_echap] = "<tt>".$lecode."</tt>";
-		$pos = strpos($letexte, $regs[0]);
-		$letexte = substr($letexte,0,$pos)."___SPIP_$source$num_echap ___"
-			.substr($letexte,$pos+strlen($regs[0]));
-	}
+			// ne pas mettre le <div...> s'il n'y a qu'une ligne
+			if (is_int(strpos($lecode,"\n")))
+				$lecode = nl2br("<div align='left' class='spip_code'>".trim($lecode)."</div>");
 
-	//
-	// Echapper les <cadre>...</cadre>
-	//
-	$regexp_echap = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
-	while (eregi($regexp_echap, $letexte, $regs)) {
-		$num_echap++;
-		$lecode = trim(entites_html($regs[1]));
-		$total_lignes = count(explode("\n", $lecode)) + 1;
+			$lecode = ereg_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
+			$lecode = ereg_replace("  ", " &nbsp;", $lecode);
+			$les_echap[$num_echap] = "<tt>".$lecode."</tt>";
+		}
+		else
+		if ($cadre = $regs[7]) {
+			// Echapper les <cadre>...</cadre>
+			$lecode = trim(entites_html($regs[8]));
+			$total_lignes = count(explode("\n", $lecode)) + 1;
 
-		$les_echap[$num_echap] = "<form><textarea cols='40' rows='$total_lignes' wrap='no' class='spip_cadre'>".$lecode."</textarea></form>";
+			$les_echap[$num_echap] = "<form><textarea cols='40' rows='$total_lignes' wrap='no' class='spip_cadre'>".$lecode."</textarea></form>";
 
-		$pos = strpos($letexte, $regs[0]);
-		$letexte = substr($letexte,0,$pos)."___SPIP_$source$num_echap ___"
-			.substr($letexte,$pos+strlen($regs[0]));
-	}
+		}
 
-	//
-	// Echapper les <html>...</ html>
-	//
-	$regexp_echap = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
-	while (eregi($regexp_echap, $letexte, $regs)) {
-		$num_echap++;
-		$les_echap[$num_echap] = $regs[1];
 		$pos = strpos($letexte, $regs[0]);
 		$letexte = substr($letexte,0,$pos)."___SPIP_$source$num_echap ___"
 			.substr($letexte,$pos+strlen($regs[0]));
