@@ -76,6 +76,7 @@ $GLOBALS['i18n_fr'] = array(
 'bouton_ajouter' => 'Ajouter',
 'bouton_ajouter_document' => 'AJOUTER UN DOCUMENT',
 'bouton_ajouter_image' => 'AJOUTER UNE IMAGE',
+'bouton_ajouter_participant' => 'AJOUTER UN PARTICIPANT&nbsp;:',
 'bouton_annonce' => 'ANNONCE',
 'bouton_changer' => 'Changer',
 'bouton_checkbox_envoi_message' => 'possibilit&eacute; d\'envoyer un message',

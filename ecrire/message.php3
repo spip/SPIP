@@ -350,7 +350,7 @@ while($row = spip_fetch_array($result_message)) {
 				if (spip_num_rows($result_ajout_auteurs) > 0) {
 
 					echo "<FORM ACTION='message.php3' METHOD='post'>";
-					echo "<DIV align=left><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>AJOUTER UN PARTICIPANT : &nbsp; </B></FONT>\n";
+					echo "<DIV align=left><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2><B>"._T('bouton_ajouter_participant')." &nbsp; </B></FONT>\n";
 					echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
 					if (spip_num_rows($result_ajout_auteurs) > 50 AND $flag_mots_ressemblants) {
