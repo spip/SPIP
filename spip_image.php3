@@ -112,6 +112,8 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 
 	if ($mode == 'vignette') {
 		$id_document_lie = $id_document;
+		$query = "UPDATE spip_documents SET mode='document' where id_document=$id_document";
+		mysql_query($query);
 		$id_document = 0;
 	}
 	if (!$id_document) {
