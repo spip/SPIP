@@ -38,9 +38,9 @@ function ecrire_cache_lang($lang, $module) {
 function ecrire_caches_langues() {
 	global $cache_lang_modifs;
 	reset($cache_lang_modifs);
-	while(list($lang, ) = each($cache_lang_modifs)) {
-		ecrire_cache_lang($lang, 'spip');
-	}
+	while(list($module,$cache_module) = each($cache_lang_modifs))
+		while(list($lang, ) = each($cache_module))
+			ecrire_cache_lang($lang, $module);
 }
 
 //
@@ -48,19 +48,21 @@ function ecrire_caches_langues() {
 //
 function charger_langue($lang, $module = 'spip', $forcer = false) {
 	global $dir_ecrire, $flag_ecrire;
+
+	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
+	$fichier_lang_exists = file_exists($dir_ecrire.$fichier_lang);
+
 	// chercher dans le fichier cache ?
-	if (!$flag_ecrire) {
+	if (!$flag_ecrire AND $fichier_lang_exists) {
 		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')
 		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
 			return include_local('CACHE/lang_'.$module.'_'.$lang.'.php3');
 		}
-		else $GLOBALS['cache_lang_modifs'][$lang] = true;
+		else $GLOBALS['cache_lang_modifs'][$module][$lang] = true;
 	}
 
-	$fichier_lang = 'lang/'.$module.'_'.$lang.'.php3';
-
-	if (file_exists($dir_ecrire.$fichier_lang)) {
+	if ($fichier_lang_exists) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
 		include_ecrire ($fichier_lang);
 	} else {
@@ -129,25 +131,26 @@ function regler_langue_navigateur() {
 function traduire_chaine($code, $args) {
 	global $spip_lang, $flag_ecrire;
 
-	$module = 'spip';
+	$modules = array('spip');
 	if (strpos($code, ':')) {
-		if (ereg("^([a-z]+):(.*)$", $code, $regs)) {
-			$module = $regs[1];
+		if (ereg("^([a-z/]+):(.*)$", $code, $regs)) {
+			$modules = explode("/",$regs[1]);
 			$code = $regs[2];
 		}
 	}
 
-	$var = "i18n_".$module."_".$spip_lang;
-	if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
-	if (!$flag_ecrire) {
-		global $cache_lang;
-		if (!isset($GLOBALS[$var][$code])) {
-			charger_langue($spip_lang, $module, $code);
+	while (!$text AND (list(,$module) = each ($modules))) {
+		$var = "i18n_".$module."_".$spip_lang;
+		if (!$GLOBALS[$var]) charger_langue($spip_lang, $module);
+		if (!$flag_ecrire) {
+			global $cache_lang;
+			if (!isset($GLOBALS[$var][$code]))
+				charger_langue($spip_lang, $module, $code);
+			if (isset($GLOBALS[$var][$code]))
+				$cache_lang[$spip_lang][$code] = 1;
 		}
-		$cache_lang[$spip_lang][$code] = 1;
+		$text = $GLOBALS[$var][$code];
 	}
-
-	$text = $GLOBALS[$var][$code];
 
 	if (!$args) return $text;
 
