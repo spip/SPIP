@@ -656,7 +656,7 @@ span.creer {
 .trad_float {
 	float: <?php echo $right; ?>;
 	z-index: 20;
-	margin-top: 4px;'
+	margin-top: 4px;
 }
 
 
@@ -704,6 +704,7 @@ div.spip_poesie div {
 	margin-left: -1px;
 	margin-right: -1px;
 }
+
 .boutonlien {
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
