@@ -712,6 +712,7 @@ if ($surtitre) {
 	echo "</b></font></span>\n";
 }
 	gros_titre($titre, $logo_statut);
+
 if ($soustitre) {
 	echo "<span $dir_lang><font face='arial,helvetica' size=3><b>";
 	echo typo($soustitre);
