@@ -741,6 +741,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_multi_herit' => 'Langue par d&eacute;faut',
 'info_multi_langues_choisies' => 'Veuillez s&eacute;lectionner ci-apr&egrave;s les langues &agrave; disposition des r&eacute;dacteurs de votre site.
 		Les langues d&eacute;j&agrave; utilis&eacute;es dans votre site (affich&eacute;es en premier) ne peuvent pas &ecirc;tre d&eacute;sactiv&eacute;es.',
+'info_multi_langues_soulignees' => 'Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multi_rubriques' => 'Activer le menu de langue sur les rubriques&nbsp;?',
 'info_multi_secteurs' => '... seulement pour les rubriques situ&eacute;es &agrave; la racine&nbsp;?',
 'info_multilinguisme' => 'Multilinguisme',
