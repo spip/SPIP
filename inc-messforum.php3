@@ -20,16 +20,26 @@ include_local(_FILE_CONNECT);
 // Ce fichier inclus par inc-public a un comportement special
 // Voir commentaires dans celui-ci et dans inc-formulaire_forum
 
-function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre) {
+function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	include_ecrire('inc_texte.php3');
 	include_ecrire('inc_filtres.php3');
 	include_ecrire('inc_mail.php3');
 	// Gestionnaire d'URLs
 	if (@file_exists("inc-urls.php3"))
-	  include_local("inc-urls.php3");
+		include_local("inc-urls.php3");
 	else
-	  include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
-	$url = ereg_replace('^/', '', generer_url_article($id_article));
+		include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+
+	if ($statut == 'prop') # forum modere
+		$url = "ecrire/controle_forum.php3?debut_id_forum=$id_forum";
+	else if (function_exists('generer_url_forum'))
+		$url = generer_url_forum($id_forum);
+	else {
+		spip_log('inc-urls personnalise : ajoutez generer_url_forum() !');
+		$url = generer_url_article($id_article);
+	}
+
+	$url = ereg_replace('^/', '', $url);
 	$adresse_site = lire_meta("adresse_site");
 	$nom_site_spip = lire_meta("nom_site");
 	$url = "$adresse_site/$url";
@@ -192,7 +202,7 @@ function enregistre_forum() {
 
 	// Prevenir les auteurs de l'article
 	if (lire_meta("prevenir_auteurs") == "oui" AND ($afficher_texte != "non"))
-		prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre);
+		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 
 	// Poser un cookie pour ne pas retaper le nom / email
 
