@@ -46,13 +46,13 @@ else {
 	}
 
 	// multilinguisme
-	if ($forcer_lang AND $forcer_lang<>'non') {
+	if ($forcer_lang AND ($forcer_lang!=='non')) {
 		include_ecrire('inc_lang.php3');
 		verifier_lang_url();
 	}
 	if ($HTTP_GET_VARS['lang']) {
 		include_ecrire('inc_lang.php3');
-		lang_select($HTTP_GET_VARS['lang']);     
+		lang_select($HTTP_GET_VARS['lang']);
 	}
 
 
