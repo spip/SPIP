@@ -123,7 +123,6 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 
 	if (tester_upload()) {
 		echo "<b>$intitule</b>";
-		echo aide ("artimg");
 		echo "<br><small><input name='image' type='File'  class='fondl' style='font-size: 9px; width: 100%;'>\n";
 		echo "<div align='right'><input name='ok' type='Submit' VALUE='T&eacute;l&eacute;charger' CLASS='fondo' style='font-size: 9px;'></div></small>\n";
 	}
@@ -151,7 +150,7 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 			
 		}
 		else if ($afficher_texte_ftp) {
-			echo "En tant qu'administrateur, vous pouvez installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.";
+			echo "En tant qu'administrateur, vous pouvez installer (par FTP) des fichiers dans le dossier ecrire/upload pour ensuite les s&eacute;lectionner directement ici.".aide("ins_upload");
 		}
 	}
 	echo "</form>\n";
@@ -159,6 +158,8 @@ function afficher_upload($link, $intitule, $inclus = '', $afficher_texte_ftp = t
 }
 
 
+
+/*
 //
 // Afficher un document sous forme de ligne depliable
 //
@@ -388,7 +389,7 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 	echo fin_boite_info();
 	echo fin_block($block);
 }
-
+*/
 
 
 //
@@ -399,7 +400,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
-	global $id_doublons;
+	global $id_doublons, $options;
 
 	if ($flag_modif){
 		$image_link = new Link('../spip_image.php3');
@@ -444,75 +445,76 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				}
 				
 			}
-			if ($case == "gauche") echo "<td width=50%> </td></tr>";
+			if ($case == "droite") echo "<td width=50%> &nbsp; </td></tr>";
 			else echo "</tr>";
 			echo "<tr><td><img src='img_pack/rien.gif' height=5></td></tr>";
 			echo "</table>";
 		}
 
 	
-	
-		/// Ajouter nouveau document/image
-		
-		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
-		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: left; color: black;'>";
-		echo bouton_block_invisible("ajouter_document");	
-		echo "<b><font size=1>AJOUTER UN DOCUMENT</font></b>";
-		echo "</div>\n";
-		echo debut_block_invisible("ajouter_document");
-		
-		echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr>";
-		echo "<td width='200' valign='top'>";
-		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
-		
-		if ($type == "article") echo "<font size=1><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
-		else if ($type == "rubrique") echo "<font size=1><b>Vous pouvez installer dans cette rubrique des documents de type&nbsp;:</b>";
-		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
-		$result_types_docs = spip_query($query_types_docs);
-		
-		while($row=mysql_fetch_array($result_types_docs)){
-			$extension=$row['extension'];
-			echo "$extension, ";
-		}
-		if ($type == "article") echo "<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>";
-
-		if (function_exists("imagejpeg") AND function_exists("ImageCreateFromJPEG")){
-			$creer_preview=lire_meta("creer_preview");
-			$taille_preview=lire_meta("taille_preview");
-			$gd_formats=lire_meta("gd_formats");
-			if ($taille_preview < 15) $taille_preview = 120;
+		if ($options == "avancees"){
+			/// Ajouter nouveau document/image
 			
-			if ($creer_preview == 'oui'){
-					echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au(x) format(s) $gd_formats, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels. ";
+			echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");
+			echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: left; color: black;'>";
+			echo bouton_block_invisible("ajouter_document");	
+			if ($type == "rubrique") echo "<b><font size=1>PUBLIER UN DOCUMENT DANS CETTE RUBRIQUE</font></b>".aide("ins_doc");
+			else echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>".aide("ins_doc");
+			echo "</div>\n";
+			echo debut_block_invisible("ajouter_document");
+			
+			echo "<p><table width='100%' cellpadding=0 cellspacing=0 border=0>";
+			echo "<tr>";
+			echo "<td width='200' valign='top'>";
+			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+			
+			if ($type == "article") echo "<font size=1><b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
+			else if ($type == "rubrique") echo "<font size=1><b>Vous pouvez installer dans cette rubrique des documents de type&nbsp;:</b>";
+			$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
+			$result_types_docs = spip_query($query_types_docs);
+			
+			while($row=mysql_fetch_array($result_types_docs)){
+				$extension=$row['extension'];
+				echo "$extension, ";
 			}
-			else {
-				if ($connect_statut == "0minirezo"){
-					echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;Configuration pr&eacute;cise&raquo;). Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables).";
+			if ($type == "article") echo "<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>";
+	
+			if (function_exists("imagejpeg") AND function_exists("ImageCreateFromJPEG")){
+				$creer_preview=lire_meta("creer_preview");
+				$taille_preview=lire_meta("taille_preview");
+				$gd_formats=lire_meta("gd_formats");
+				if ($taille_preview < 15) $taille_preview = 120;
+				
+				if ($creer_preview == 'oui'){
+						echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est activ&eacute;e sur ce site. Si vous installez &agrave; partir de ce formulaire des images au(x) format(s) $gd_formats, elles seront accompagn&eacute;es d'une vignette d'une taille maximale de $taille_preview&nbsp;pixels. ";
+				}
+				else {
+					if ($connect_statut == "0minirezo"){
+						echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;Configuration pr&eacute;cise&raquo;). Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables).";
+					}
 				}
 			}
+			echo "</font>";
+			echo "</td><td width=20>&nbsp;</td>";
+			echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
+			$link = $image_link;
+			$link->addVar('redirect', $redirect_url);
+			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+			$link->addVar('hash_id_auteur', $connect_id_auteur);
+			$link->addVar('ajout_doc', 'oui');
+			$link->addVar('type', $type);
+			
+			afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true, true);
+			
+			
+			
+			
+			echo "</font>\n";
+			echo "</td></tr></table>";
+			echo fin_block();
+			fin_cadre_enfonce();
 		}
-		echo "</font>";
-		echo "</td><td width=20>&nbsp;</td>";
-		echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
-		$link = $image_link;
-		$link->addVar('redirect', $redirect_url);
-		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('type', $type);
 		
-		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:', '', true, true, true);
-		
-		
-		
-		
-		echo "</font>\n";
-		echo "</td></tr></table>";
-		echo fin_block();
-		fin_cadre_enfonce();
-		
-		//fin_cadre_enfonce();
 
 	}
 
@@ -545,9 +547,12 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$largeur = $document->get('largeur');
 	$hauteur = $document->get('hauteur');
 	$taille = $document->get('taille');
+	$date = $document->get('date');
 	$mode = $document->get('mode');
 	if (!$titre) {
-		$titre = "fichier : ".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
+		$titre_aff = "fichier : ".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
+	} else {
+		$titre_aff = $titre;
 	}
 
 	$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
@@ -563,7 +568,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		//echo "<div style='border: 1px dashed #aaaaaa; padding: 0px; background-color: #e4e4e4;'>\n";
 			echo "<div style='padding: 2px; background-color: #aaaaaa; text-align: left; color: black;'>";	
 			echo bouton_block_invisible("doc_vignette $id_document,document $id_document");
-			echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre)."</font></b>";
+			echo "<font size=1 face='arial,helvetica,sans-serif'>Document : </font> <b><font size=2>".propre($titre_aff)."</font></b>";
 			echo "</div>\n";
 
 
@@ -659,6 +664,25 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		
 			echo "<b>Titre du document&nbsp;:</b><br>\n";
 			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+	
+			if ($GLOBALS['coll'] > 0){
+				if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
+					$mois = $regs[2];
+					$jour = $regs[3];
+					$annee = $regs[1];
+				}
+				echo "<b>Date de mise en ligne&nbsp;:</b><br>\n";
+				echo "<SELECT NAME='jour_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+				afficher_jour($jour);
+				echo "</SELECT> ";
+				echo "<SELECT NAME='mois_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+				afficher_mois($mois);
+				echo "</SELECT> ";
+				echo "<SELECT NAME='annee_doc' SIZE=1 CLASS='fondl' style='font-size:9px;'>";
+				afficher_annee($annee);
+				echo "</SELECT><br>";
+		
+			}
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
@@ -708,7 +732,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 
 function afficher_documents_colonne($id_article, $type="article", $flag_modif = true) {
 	global $connect_id_auteur, $connect_statut;
-	global $couleur_foncee, $couleur_claire;
+	global $couleur_foncee, $couleur_claire, $options;
 	global $this_link;
 	
 	if ($flag_modif){
@@ -742,7 +766,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		$query = "SELECT * FROM #table AS docs, spip_documents_".$type."s AS l ".
 				"WHERE l.id_".$type."=$id_article AND l.id_document=docs.id_document ".$docs_exclus.
 				"AND docs.mode='vignette' ORDER BY docs.id_document";
-		
+				
 		$images_liees = fetch_document($query);
 		
 		/// Ajouter nouvelle image
@@ -750,7 +774,6 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		//debut_cadre_relief("image-24.gif");
 		if ($images_liees) {
 			reset($images_liees);
-		
 			while (list(, $id_document) = each($images_liees)) {
 				afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
 				//echo "<p>\n";
@@ -762,7 +785,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		
 		echo "<div style='padding: 2px; background-color: $couleur_claire; text-align: center; color: black;'>";	
 		echo bouton_block_invisible("ajouter_image");
-		echo "<b><font size=1>AJOUTER UNE IMAGE</font></b>";
+		echo "<b><font size=1>AJOUTER UNE IMAGE".aide("ins_img")."</font></b>";
 		echo "</div>\n";
 		
 		echo debut_block_invisible("ajouter_image");
@@ -786,56 +809,55 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		
 		//fin_cadre_relief();
 
-
-		echo "\n<p>";
-		//debut_cadre_enfonce("doc-24.gif");
-		if ($documents_lies) {
+		if ($type == "article") {
+			echo "\n<p>";
+			if ($documents_lies) {
+			
+				reset($documents_lies);
+				while (list(, $id_document) = each($documents_lies)) {
+					afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
+					echo "<p>\n";
+				}
+			}
+	
 		
-			reset($documents_lies);
-			while (list(, $id_document) = each($documents_lies)) {
-				afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
-				echo "<p>\n";
+			if ($options == "avancees"){
+				/// Ajouter nouveau document
+					
+				debut_cadre_enfonce("doc-24.gif", false, "creer.gif");
+				echo "<div style='padding: 2px;background-color: $couleur_claire; text-align: center; color: black;'>";	
+				echo bouton_block_invisible("ajouter_document");
+				echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>".aide("ins_doc");
+				echo "</div>\n";
+				
+				echo debut_block_invisible("ajouter_document");
+				echo "<font size=1>";
+				echo "<b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
+				$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
+				$result_types_docs = spip_query($query_types_docs);
+				
+				while($row=mysql_fetch_array($result_types_docs)){
+					$extension=$row['extension'];
+					echo "$extension, ";
+				}
+				echo "<b>ou installer des images &agrave; ins&eacute;rer dans le texte.</b>";
+				echo "</font>";
+						
+				$link = $image_link;
+				$link->addVar('redirect', $redirect_url);
+				$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+				$link->addVar('hash_id_auteur', $connect_id_auteur);
+				$link->addVar('ajout_doc', 'oui');
+				$link->addVar('mode', 'document');
+				$link->addVar('type', $type);
+				
+				afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
+				echo fin_block();
+				
+				echo "</font>\n";
+				fin_cadre_enfonce();
 			}
 		}
-
-	
-	
-		/// Ajouter nouveau document
-			
-		debut_cadre_enfonce("doc-24.gif", false, "creer.gif");
-		echo "<div style='padding: 2px;background-color: $couleur_claire; text-align: center; color: black;'>";	
-		echo bouton_block_invisible("ajouter_document");
-		echo "<b><font size=1>JOINDRE UN DOCUMENT</font></b>";
-		echo "</div>\n";
-		
-		echo debut_block_invisible("ajouter_document");
-		echo "<font size=1>";
-		echo "<b>Vous pouvez joindre &agrave; votre article des documents de type&nbsp;:</b>";
-		$query_types_docs = "SELECT extension FROM spip_types_documents ORDER BY extension";
-		$result_types_docs = spip_query($query_types_docs);
-		
-		while($row=mysql_fetch_array($result_types_docs)){
-			$extension=$row['extension'];
-			echo "$extension, ";
-		}
-		echo "<b>ou installer des images &agrave; ins&eacute;rer dans le texte.</b>";
-		echo "</font>";
-				
-		$link = $image_link;
-		$link->addVar('redirect', $redirect_url);
-		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('ajout_doc', 'oui');
-		$link->addVar('mode', 'document');
-		$link->addVar('type', $type);
-		
-		afficher_upload($link, 'T&eacute;l&eacute;charger depuis votre ordinateur&nbsp;:');
-		echo fin_block();
-		
-		echo "</font>\n";
-		fin_cadre_enfonce();
-		
-		//fin_cadre_enfonce();
 	}
 
 }

@@ -14,7 +14,8 @@ define("_ECRIRE_INC_PRESENTATION", "1");
 // Aide
 //
 function aide ($aide) {
-	return " <font size='1'>[<b><script><!--\n".
+	global $couleur_foncee;
+	return " <script><!--\n".
 	'document.write("<a href=\"javascript:window.open(\'aide_index.php3?aide='.
 	$aide.
 	"', 'aide_spip', 'scrollbars=yes,resizable=yes,width=700'); ".
@@ -22,7 +23,7 @@ function aide ($aide) {
 	"\n// --></script><noscript>".
 	'<a href="aide_index.php3?aide='.
 	$aide.
-	'"></noscript>AIDE</a></b>]</font>';
+	'"></noscript><font size=\'1\' face=\'verdana, arial, helvetica, sans-serif\' style=\'background-color: white;\' color=\''.$couleur_foncee.'\'><b>&nbsp;AIDE&nbsp;</b></font></a>';
 }
 
 
@@ -888,7 +889,7 @@ afficher_script_layer();
 //-->
 </script>
 </head>
-<body bgcolor="#E4E4E4" background="img_pack/degrade.jpg" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+<body text="#000000" bgcolor="#e4e4e4" background="img_pack/degrade.jpg" link="#E86519" vlink="#6E003A" alink="#FF9900"  topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
 
 <?php
 
@@ -1221,6 +1222,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $REQUEST_URI;
 	global $requete_fichier;
 	global $auth_can_disconnect, $connect_login;
+	global $options;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	
 	if (!$requete_fichier) {
@@ -1269,10 +1271,16 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td background=''>";
 	echo "</td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Les r&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
+		if ($options == "avancees") {
+			icone_bandeau_principal ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-48.gif", "redacteurs", $rubrique);
+		} else {
+			icone_bandeau_principal ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-48.gif", "redacteurs", $rubrique);
+		}
 	echo "</td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Forums et messagerie", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
+		if ($options == "avancees" OR $rubrique == "messagerie") {
+			icone_bandeau_principal ("Forums et messagerie", "forum.php3", "messagerie-48.gif", "messagerie", $rubrique);
+		}
 	echo "</td>";
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques){
 	bandeau_barre_verticale();
@@ -1316,26 +1324,39 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 		else if ($rubrique == "documents"){
 			icone_bandeau_secondaire ("Rubriques", "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
-			icone_bandeau_secondaire ("Articles", "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
+			
+			$nombre_articles = mysql_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article"));
+			if ($nombre_articles > 0) {
+				icone_bandeau_secondaire ("$nombre_articles articles personnels", "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
+			}
+
 			$activer_breves=lire_meta("activer_breves");
 			if ($activer_breves != "non"){
 				icone_bandeau_secondaire ("Br&egrave;ves", "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
 			}
-			$articles_mots = lire_meta('articles_mots');
-			if ($articles_mots != "non") {
-				icone_bandeau_secondaire ("Mots-cl&eacute;s", "mots_tous.php3", "mot-cle-24.gif", "mots", $sous_rubrique);
+			
+			if ($options == "avancees"){
+				$articles_mots = lire_meta('articles_mots');
+				if ($articles_mots != "non") {
+					icone_bandeau_secondaire ("Mots-cl&eacute;s", "mots_tous.php3", "mot-cle-24.gif", "mots", $sous_rubrique);
+				}
+				icone_bandeau_secondaire ("Sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
+				if (@mysql_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 0,1")) > 0) {
+					icone_bandeau_secondaire ("Documents", "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
+				}
 			}
-			icone_bandeau_secondaire ("Sites r&eacute;f&eacute;renc&eacute;s", "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
 		}
 		else if ($rubrique == "redacteurs"){
-			icone_bandeau_secondaire ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
-			icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
-			icone_bandeau_secondaire ("Responsables &eacute;ditoriaux", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
-			if ($connect_statut == "0minirezo"){
+			if ($options == "avancees") {
+				icone_bandeau_secondaire ("R&eacute;dacteurs", "auteurs.php3?aff_art[]=1comite", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
+				icone_bandeau_secondaire ("Auteurs sans acc&egrave;s au site", "auteurs.php3?aff_art[]=1comite&sans_acces=oui", "redacteurs-24.gif", "redacteurs_sans", $sous_rubrique);
+				icone_bandeau_secondaire ("Administrateurs", "auteurs.php3?aff_art[]=0minirezo", "redacteurs-admin-24.gif", "administrateurs", $sous_rubrique);
+				if ($connect_statut == "0minirezo"){
+					bandeau_barre_verticale();
+					icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
+				}
 				bandeau_barre_verticale();
-				icone_bandeau_secondaire ("&Agrave; la poubelle", "auteurs.php3?aff_art[]=5poubelle", "redacteurs-poubelle-24.gif", "redac-poubelle", $sous_rubrique);
 			}
-			bandeau_barre_verticale();
 			icone_bandeau_secondaire ("Informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 		}
 		else if ($rubrique == "messagerie"){
@@ -1352,9 +1373,11 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			}
 		}
 		else if ($rubrique == "administration"){
-			icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
 			if ($connect_toutes_rubriques) {
 				icone_bandeau_secondaire ("Configuration du site", "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
+			}
+			icone_bandeau_secondaire ("Statistiques des visites", "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
+			if ($connect_toutes_rubriques) {
 				icone_bandeau_secondaire ("Gestion de la base", "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
 			}
 		}
@@ -1415,9 +1438,8 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td>   </td>";
 	echo "<td>";
 	echo "<font size=1 face='verdana,arial,helvetica,sans-serif'>";
-		global $options;
 		if ($options == "avancees") echo "<span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=basiques'><font color='black'>Interface simplifi&eacute;e</font></a></span> <font color='white'><b>interface compl&egrave;te</b></font>";
-		else  echo "<b><font color='white'>Interface simplifi&eacute;e</font></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
+		else  echo "<b><span class='fondgrison2'>Interface simplifi&eacute;e</span></b> <span class='fondgris' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\"><a href='$lien&set_options=avancees'><font color='black'>interface compl&egrave;te</font></a></span>";
 	echo "</font>";
 	echo "</td>";
 	echo "<td align='right'>";
@@ -1510,6 +1532,7 @@ function debut_gauche() {
 	global $activer_imessage;
 	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
+	global $options;
 	
 	if ($changer_config!="oui"){
 		$activer_messagerie=lire_meta("activer_messagerie");
@@ -1518,18 +1541,21 @@ function debut_gauche() {
 
 	if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
 	
-		debut_cadre_relief("messagerie-24.gif");
-
-		echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
-		echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
-		echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-		echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
-
 		if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
 		 	$query2 = "SELECT * FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
 			$result_auteurs = spip_query($query2);
+			$nb_connectes = mysql_num_rows($result_auteurs);
+		}
 
-			if (mysql_num_rows($result_auteurs) > 0) {
+		if ($options == "avancees" OR $nb_connectes > 0) debut_cadre_relief("messagerie-24.gif");
+		if ($options == "avancees") {
+			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
+			echo "<font color='#169249' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
+			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
+			echo "<font color='#044476' face='verdana,arial,helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+		}
+		
+			if ($nb_connectes > 0) {
 				echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 				echo "<p><b>Actuellement en ligne&nbsp;:</b>";
 			
@@ -1540,8 +1566,7 @@ function debut_gauche() {
 				}	
 				echo "</font>";
 			}
-		}
-		fin_cadre_relief();
+		if ($options == "avancees" OR $nb_connectes > 0) fin_cadre_relief();
 	}	
 }
 

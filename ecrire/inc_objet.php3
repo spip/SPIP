@@ -106,7 +106,7 @@ class DocumentFactory extends _ObjectFactory {
 	// Initialiser les variables de classe
 	function DocumentFactory() {
 		$this->fast_vars_list = array('id_document', 'id_vignette', 'id_type', 
-			'titre', 'descriptif', 'fichier', 'largeur', 'hauteur', 'taille', 'mode');
+			'titre', 'descriptif', 'fichier', 'largeur', 'hauteur', 'taille', 'mode', 'date');
 		$this->slow_vars_list = '';
 		$this->sql_table = 'spip_documents';
 		$this->object_class = 'Document';

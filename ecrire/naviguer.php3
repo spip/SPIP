@@ -69,6 +69,51 @@ function sous_enfant($collection2){
 }
 
 
+function my_sel($num,$tex,$comp){
+	if ($num==$comp){
+		echo "<OPTION VALUE='$num' SELECTED>$tex\n";
+	}else{
+		echo "<OPTION VALUE='$num'>$tex\n";
+	}
+
+}
+
+function afficher_mois($mois){
+	my_sel("00","non connu",$mois);
+	my_sel("01","janvier",$mois);
+	my_sel("02","f&eacute;vrier",$mois);
+	my_sel("03","mars",$mois);
+	my_sel("04","avril",$mois);
+	my_sel("05","mai",$mois);
+	my_sel("06","juin",$mois);
+	my_sel("07","juillet",$mois);
+	my_sel("08","ao&ucirc;t",$mois);
+	my_sel("09","septembre",$mois);
+	my_sel("10","octobre",$mois);
+	my_sel("11","novembre",$mois);
+	my_sel("12","d&eacute;cembre",$mois);
+}
+
+function afficher_annee($annee){
+	// Cette ligne permettrait de faire des articles sans date de publication
+	// my_sel("0000","n.c.",$annee); 
+
+	if($annee<1996 AND $annee <> 0){
+		echo "<OPTION VALUE='$annee' SELECTED>$annee\n";
+	}
+	for($i=1996;$i<date(Y)+2;$i++){
+		my_sel($i,$i,$annee);
+	}
+}
+
+function afficher_jour($jour){
+	my_sel("00","n.c.",$jour);
+	for($i=1;$i<32;$i++){
+		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
+		my_sel($i,$aff,$jour);
+	}
+}
+
 
 //
 // Gerer les modifications...
@@ -138,6 +183,34 @@ if ($titre)
 	$titre_page = "&laquo; ".textebrut($titre)." &raquo;";
 else
 	$titre_page = "Naviguer dans le site...";
+
+
+if ($id_document) {
+	$query_doc = "SELECT * FROM spip_documents_rubriques WHERE id_document=$id_document AND id_rubrique=$coll";
+	$result_doc = spip_query($query_doc);
+	$flag_document_editable = (mysql_num_rows($result_doc) > 0);
+} else {
+	$flag_document_editable = false;
+}
+
+
+$modif_document = $GLOBALS['modif_document'];
+if ($modif_document == 'oui' AND $flag_document_editable) {
+	$titre = addslashes(corriger_caracteres($titre));
+	$descriptif = addslashes(corriger_caracteres($descriptif));
+	spip_query("UPDATE spip_documents SET titre=\"$titre_document\", descriptif=\"$descriptif_document\" WHERE id_document=$id_document");
+
+
+	if ($jour_doc AND $connect_statut == '0minirezo') {
+		if ($annee_doc == "0000") $mois_doc = "00";
+		if ($mois_doc == "00") $jour_doc = "00";
+		$query = "UPDATE spip_documents SET date='$annee_doc-$mois_doc-$jour_doc' WHERE id_document=$id_document";
+		$result = spip_query($query);
+		calculer_dates_rubriques();
+	}
+
+}
+		
 
 
 
@@ -408,21 +481,19 @@ if ($id_parent == "0" AND $activer_breves!="non"){
 
 afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
 
-
-$proposer_sites=lire_meta("proposer_sites");
-if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
-	$link = new Link('sites_edit.php3');
-	$link->addVar('id_rubrique', $coll);
-	$link->addVar('target', 'sites.php3');
-	$link->addVar('redirect', $this_link->getUrl());
-
-	echo "<div align='right'>";
-	icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.gif", "creer.gif");
-	echo "</div><p>";
-
-
+if ($options == "avancees"){
+	$proposer_sites=lire_meta("proposer_sites");
+	if ($coll > 0 AND ($connect_statut == '0minirezo' OR $proposer_sites > 0)) {
+		$link = new Link('sites_edit.php3');
+		$link->addVar('id_rubrique', $coll);
+		$link->addVar('target', 'sites.php3');
+		$link->addVar('redirect', $this_link->getUrl());
+	
+		echo "<div align='right'>";
+		icone("R&eacute;f&eacute;rencer un site", $link->getUrl(), "site-24.gif", "creer.gif");
+		echo "</div><p>";
+	}
 }
-
 
 
 /// Documents associes a la rubrique

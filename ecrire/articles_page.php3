@@ -58,7 +58,7 @@ if ($options == 'avancees') {
 	//
 
 	echo "<p>";
-	afficher_articles("Vos derniers articles publi&eacute;s en ligne",
+	afficher_articles("Vos articles publi&eacute;s en ligne",
 		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
 		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
