@@ -311,6 +311,7 @@ function creer_base() {
 		date DATE NOT NULL,
 		referer VARCHAR(255) NOT NULL,
 		visites INTEGER UNSIGNED NOT NULL,
+		visites_jour INTEGER UNSIGNED NOT NULL,
 		maj TIMESTAMP,
 		PRIMARY KEY (referer_md5))";
 	$result = spip_query($query);
@@ -1194,6 +1195,11 @@ function maj_base() {
 			spip_query("ALTER TABLE spip_mots_forum DROP maj TIMESTAMP");
 		}
 		maj_version (1.471);
+	}
+
+	if ($version_installee < 1.472) {
+		spip_query("ALTER TABLE spip_referers ADD visites_jour INTEGER UNSIGNED NOT NULL");
+		maj_version (1.472);
 	}
 
 }

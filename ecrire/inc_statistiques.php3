@@ -152,21 +152,21 @@ function calculer_n_referers($nb_referers) {
 		$referer_md5 = '0x'.$row['md5'];
 
 		$referer_update[$visites][] = $referer_md5;
-		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites)";
+		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites, $visites)";
 		$referer_vus[] = $referer_md5;
 	}
 
 	// Mise a jour de la base
 	if (is_array($referer_update)) {
 		while (list($visites, $referers) = each($referer_update)) {
-			$query = "UPDATE spip_referers SET visites = visites + $visites ".
+			$query = "UPDATE spip_referers SET visites = visites + $visites, visites_jour = visites_jour + $visites ".
 				"WHERE referer_md5 IN (".join(', ', $referers).")";
 			$result = spip_query($query);
 		}
 	}
 	if (is_array($referer_insert)) {
 		$query_insert = "INSERT IGNORE INTO spip_referers ".
-			"(date, referer, referer_md5, visites) VALUES ".join(', ', $referer_insert);
+			"(date, referer, referer_md5, visites, visites_jour) VALUES ".join(', ', $referer_insert);
 		$result_insert = spip_query($query_insert);
 	}
 

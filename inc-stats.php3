@@ -52,8 +52,11 @@ function ecrire_stats() {
 		ecrire_meta("date_statistiques", $date);
 		ecrire_metas();
 		calculer_visites($last_date);
-		// poser un message pour le prochain hit
+
 		if (lire_meta('activer_statistiques_ref') == 'oui') {
+			// purger les referers du jour
+			spip_query("UPDATE spip_referers SET visites_jour=0");
+			// poser un message pour traiter les referers au prochain hit
 			ecrire_meta('calculer_referers_now','oui');
 			ecrire_metas();
 		}

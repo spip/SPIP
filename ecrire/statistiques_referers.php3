@@ -4,7 +4,7 @@ include ("inc.php3");
 include ("inc_statistiques.php3");
 
 
-debut_page("Statistiques", "administration", "statistiques");
+debut_page("Statistiques (liens entrants)", "administration", "statistiques");
 
 
 echo "<br><br><br>";
@@ -45,14 +45,14 @@ echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 echo "<ul>";
 // Recuperer les donnees du log
 $date = date("Y-m-d");
-$query = "SELECT referer, visites FROM spip_referers ".
+$query = "SELECT referer, visites_jour FROM spip_referers ".
 	"WHERE date='$date' ".
-	"GROUP BY referer_md5 ORDER BY visites DESC, referer";
+	"GROUP BY referer_md5 ORDER BY visites_jour DESC, referer";
 $result = spip_query($query);
 
 while ($row = @spip_fetch_array($result)) {
 	$referer = $row['referer'];
-	$count = $row['visites'];
+	$count = $row['visites_jour'];
 
 	echo "\n<li>";
 	if ($count > 5) echo "<font color='red'>$count visites : </font>";
