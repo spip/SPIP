@@ -86,7 +86,7 @@ function decoder_hash_forum($email, $hash) {
 	$query = "SELECT * FROM spip_auteurs WHERE email='$email'";
 	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
-		if (verifier_action_auteur("forum public $email", $hash, $row['spip_auteur'])) {
+		if (verifier_action_auteur("forum public $email", $hash, $row['id_auteur'])) {
 			$ok = true;
 			break;
 		}
@@ -100,6 +100,7 @@ function forum_abonnement() {
 	global $HTTP_COOKIE_VARS;
 	$email = $HTTP_COOKIE_VARS['spip_forum_email'];
 	$hash = $HTTP_COOKIE_VARS['spip_forum_hash'];
+		
 	$row = decoder_hash_forum($email, $hash);
 	echo "<div class='spip_encadrer'>";
 	if (!$row) {
@@ -122,8 +123,9 @@ function forum_abonnement() {
 
 
 function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic, $titre='') {
-	global $REQUEST_URI, $HTTP_GET_VARS, $PATH_TRANSLATED, $REMOTE_ADDR;
-	$id_message = $GLOBALS["id_message"];
+	global $REQUEST_URI, $HTTP_GET_VARS, $PATH_TRANSLATED, $REMOTE_ADDR, $id_message ;
+	$new = $GLOBALS["new"];
+	$redac = $GLOBALS["redac"];
 	$afficher_groupe = $GLOBALS["afficher_groupe"];
 	$afficher_texte = $GLOBALS["afficher_texte"];
 
@@ -169,65 +171,51 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	}
 	
 
-	if (!$id_message > 0){
-		$nouveau_document = true;
-		if ($HTTP_GET_VARS['titre']){
-			$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
-		}
 
-		$query_forum = "INSERT spip_forum (date_heure, titre, ip, statut)
-			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
-		$result_forum = spip_query($query_forum);
-		$id_message = mysql_insert_id();
-	}
-	
-	$query_forum="SELECT * FROM spip_forum WHERE ip=\"$REMOTE_ADDR\" AND id_forum=$id_message";
-	$result_forum=spip_query($query_forum);
-
-	
-	while($row = mysql_fetch_array($result_forum)) {
-		$titre=$row['titre'];
-		$texte=$row['texte'];
-		$auteur=$row['auteur'];
-		$email_auteur=$row['email_auteur'];
-		$nom_site_forum=$row['nom_site'];
-		$url_site=$row['url_site'];
-	}
-	
+	if ($id_message){		
+		$query_forum="SELECT * FROM spip_forum WHERE ip=\"$REMOTE_ADDR\" AND id_forum=$id_message";
+		$result_forum=spip_query($query_forum);
 		
+		while($row = mysql_fetch_array($result_forum)) {
+			$titre=$row['titre'];
+			$texte=$row['texte'];
+			$auteur=$row['auteur'];
+			$email_auteur=$row['email_auteur'];
+			$nom_site_forum=$row['nom_site'];
+			$url_site=$row['url_site'];
+		}
 	
-	if (!$nouveau_document AND $afficher_texte != 'non'){
-		$ret .= "<div class='spip_encadrer'>";
-		if ($afficher_texte != "non"){
-			$ret .= "<font size=4 color='#aaaaaa'><b>".propre($titre)."</b></font>";
-			$ret .= "<p><b><a href='mailto:$email_auteur'>".propre($auteur)."</a></b>";
-			$ret .= "<p>".propre($texte)."<p>";
-		}
+		if (!$nouveau_document AND $afficher_texte != 'non'){
+			$ret .= "<div class='spip_encadrer'>";
+			if ($afficher_texte != "non"){
+				$ret .= "<font size=4 color='#aaaaaa'><b>".propre($titre)."</b></font>";
+				$ret .= "<p><b><a href='mailto:$email_auteur'>".propre($auteur)."</a></b>";
+				$ret .= "<p>".propre($texte)."<p>";
+			}
+			
+			$ret .= "<a href='$url_site'>".propre($nom_site_forum)."</a>";
+	
+	
+			// Verifier mots associes au message	
+			$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
+			$result_mots = spip_query($query_mots);
+			if (mysql_num_rows($result_mots)>0) $ret .= "<p>Vous avez s&eacute;lectionn&eacute;&nbsp;:";
+			while ($row = mysql_fetch_array($result_mots)) {
+				$id_mot = $row['id_mot'];
+				$type_mot = $row['type'];
+				$titre_mot = $row['titre'];
+				$les_mots[$id_mot] = true;
+				$presence_mots = true;
+				
+				$ret.= "<li> $type_mot&nbsp;: <b>$titre_mot</b>";
+				
+			}
 		
-		$ret .= "<a href='$url_site'>".propre($nom_site_forum)."</a>";
-
-
-		// Verifier mots associes au message	
-		$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
-		$result_mots = spip_query($query_mots);
-		if (mysql_num_rows($result_mots)>0) $ret .= "<p>Vous avez s&eacute;lectionn&eacute;&nbsp;:";
-		while ($row = mysql_fetch_array($result_mots)) {
-			$id_mot = $row['id_mot'];
-			$type_mot = $row['type'];
-			$titre_mot = $row['titre'];
-			$les_mots[$id_mot] = true;
-			$presence_mots = true;
-			
-			$ret.= "<li> $type_mot&nbsp;: <b>$titre_mot</b>";
-			
+			if ((strlen($texte) >= 10 OR $presence_mots) AND (strlen($titre) >= 3 OR $afficher_texte=="non"))
+				$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='confirmer' CLASS='spip_bouton' VALUE='Message d&eacute;finitif : envoyer au site'></DIV>";
+	
+			$ret .= "</div>\n<p>";
 		}
-
-
-
-		if ((strlen($texte) >= 10 OR $presence_mots) AND (strlen($titre) >= 3 OR $afficher_texte=="non"))
-			$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='confirmer' CLASS='spip_bouton' VALUE='Message d&eacute;finitif : envoyer au site'></DIV>";
-
-		$ret .= "</div>\n<p>";
 	}
 	
 	$ret .= "\n";
@@ -269,6 +257,10 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$ret .= "\n<INPUT TYPE='Hidden' NAME='alea' VALUE=\"$alea\">";
 	$ret .= "\n<INPUT TYPE='Hidden' NAME='hash' VALUE=\"$hash\">";
 	$ret .= "\n<INPUT TYPE='Hidden' NAME='retour_forum' VALUE=\"$retour\">";
+	
+	if ($new != "oui" AND $redac != "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
+	if ($new == "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='redac' VALUE=\"oui\">";
+	
 
 	
 	if ($afficher_texte !="non"){
@@ -390,7 +382,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 function ajout_forum() {
 	global $texte, $titre, $nom_site_forum, $url_site, $auteur, $email_auteur, $retour_forum, $id_message, $confirmer;
 	global $forum_id_rubrique, $forum_id_parent, $forum_id_article, $forum_id_breve, $forum_id_auteur, $forum_id_syndic, $alea, $hash;
-	global $hash_email, $email_forum_abo, $pass_forum_abo, $ajouter_mot;
+	global $hash_email, $email_forum_abo, $pass_forum_abo, $ajouter_mot, $new;
 	global $HTTP_HOST, $REQUEST_URI, $HTTP_COOKIE_VARS, $REMOTE_ADDR;
 	$afficher_texte = $GLOBALS['afficher_texte'];
 	
@@ -473,8 +465,20 @@ function ajout_forum() {
 
 	
 	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
+	$auteur_session = $GLOBALS['auteur_session']['email'];
 	
-	
+	if ($new == "oui"){
+		$nouveau_document = true;
+		if ($HTTP_GET_VARS['titre']){
+			$titre = "> ".rawurldecode($HTTP_GET_VARS['titre']);
+		}
+		$query_forum = "INSERT spip_forum (date_heure, titre, ip, statut)
+			VALUES (NOW(), \"".addslashes($titre)."\", \"$REMOTE_ADDR\", \"redac\")";
+		$result_forum = spip_query($query_forum);
+		$id_message = mysql_insert_id();
+	}
+
+
 	$query_forum = "UPDATE spip_forum
 		SET id_parent = $forum_id_parent, id_rubrique =$forum_id_rubrique, id_article = $forum_id_article, id_breve = $forum_id_breve, id_syndic = \"$forum_id_syndic\", 
 			date_heure = NOW(), titre = \"$titre\", texte = \"$texte\", nom_site = \"$nom_site_forum\", url_site = \"$url_site\", auteur = \"$auteur\",
@@ -485,6 +489,7 @@ function ajout_forum() {
 
 
 	if ($forums_publics == 'abo') {
+	
 		$cookie_email = $HTTP_COOKIE_VARS['spip_forum_email'];
 		if ($hash_email && $forum_id_auteur) {
 			if (verifier_action_auteur("email $cookie_email", $hash_email, $forum_id_auteur)) {
@@ -499,7 +504,7 @@ function ajout_forum() {
 				$result = spip_query($query);
 				$mdpass = md5($pass_forum_abo);
 				while ($row = mysql_fetch_array($result)) {
-					if ($mdpass == $row['pass']) {
+					if ($mdpass == $row['pass'] OR "$auteur_session" == "$email_forum_abo") {
 						$ok = true;
 						poser_cookie_forum($email_forum_abo, $row["id_auteur"]);
 						
