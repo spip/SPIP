@@ -8,6 +8,7 @@ include_local("inc-cache.php3");
 
 if ($purger_cache == "oui") {
 	if (verifier_action_auteur("purger_cache", $hash, $id_auteur)) {
+		spip_log('vider le cache');
 		include_ecrire('inc_invalideur.php3');
 		supprime_invalideurs();
 		purger_repertoire('CACHE', 0);
@@ -16,6 +17,7 @@ if ($purger_cache == "oui") {
 
 if ($purger_squelettes == "oui") {
 	if (verifier_action_auteur("purger_squelettes", $hash, $id_auteur))
+		spip_log('effacer les squelettes compiles');
 		purger_repertoire('CACHE', 0, '^skel_');
 }
 

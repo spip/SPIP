@@ -49,7 +49,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		// pour la premiere fois : on change alors d'invalideur 't'
 		// pour le rendre plus perenne
 		if (@file_exists($chemin_cache.'.NEW')) {
-			spip_log ("$chemin_cache.NEW : premier acces");
+			spip_log ("premier acces: $chemin_cache.NEW");
 			// Attention ne pas mettre time()+$delais mais quelque chose
 			// de plus grand, sinon il y a risque de concurrence entre
 			// l'invalideur et un appel public de page ; plus on en ajoute

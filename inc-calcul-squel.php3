@@ -509,14 +509,19 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	}
 
 	$secondes = spip_timer('calcul_skel');
-	spip_log("CALCUL SKEL $sourcefile ($secondes)");
+	spip_log("calcul skel $sourcefile ($secondes)");
+
+	if (is_array($boucles))
+		$aff_boucles = join (', ', array_keys($boucles));
+	else
+		$aff_boucles = "pas de boucle";
 
 	return "
 /*
  * Squelette : $sourcefile
  * Date :      ".http_gmoddate(@filemtime($sourcefile))." GMT
  * Compile :   ".http_gmoddate(time())." GMT ($secondes)
- * Boucles :   ".join (', ', array_keys($boucles))."
+ * Boucles :   ".$aff_boucles."
  */
 $code
 
