@@ -34,13 +34,21 @@ function separateurs_indexation() {
 		chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
 }
 
+function spip_split($reg, $texte) {
+	global $flag_preg_replace;
+	if ($flag_preg_replace)
+		return preg_split("/$reg/", $texte);
+	else
+		return split($reg, $texte);
+}
+
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
-	global $index, $mots;
+	global $index, $mots, $flag_preg_replace;
 
 	$texte = nettoyer_chaine_indexation($texte);
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, "                                                           ");
-	$table = split(" +([^ ]{0,$min_long} +)*", ' '.$texte);
+	$table = spip_split(" +([^ ]{0,$min_long} +)*", ' '.$texte);
 	while (list(, $mot) = each($table)) {
 		$h = substr(md5($mot), 0, 16);
 		$index[$h] += $val;
