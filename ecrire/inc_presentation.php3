@@ -1069,7 +1069,8 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
-		$onClick = " onClick=\"document.location='$lien'\"";
+//		$onClick = " onClick=\"document.location='$lien'\"";
+		$onClick = "";
 		$a_href = "<a href=\"$lien\">";
 		$a_href_icone = "<a href=\"$lien\" class='icone'>";
 	}
@@ -1125,7 +1126,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 
 	if ($rubrique_icone == $rubrique){
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\" onClick=\"document.location='$lien'\">";
+		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\">";
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
@@ -1143,7 +1144,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td>";
 	}
 	else {
-		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" onClick=\"document.location='$lien'\">";
+		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\">";
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){	
 			echo "<tr><td background='' align='center'>";
