@@ -1394,8 +1394,12 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	if ($rubrique == "asuivre"){
 		icone_bandeau_secondaire ("&Agrave; suivre", "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
 		icone_bandeau_secondaire ("Tout le site", "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
-		if ($options == "avancees")
+		if ($options == "avancees") {
+			bandeau_barre_verticale();
+			if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non')
+				icone_bandeau_secondaire ("Messagerie personnelle", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
 			icone_bandeau_secondaire ("Calendrier", "calendrier.php3", "calendrier-24.gif", "calendrier", $sous_rubrique);
+		}
 	}
 	else if ($rubrique == "documents"){
 		icone_bandeau_secondaire ("Rubriques", "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
@@ -1442,10 +1446,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les forums", "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 			icone_bandeau_secondaire ("Suivre/g&eacute;rer les p&eacute;titions", "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
 		}
-		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
+/*		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 			bandeau_barre_verticale();
 			icone_bandeau_secondaire ("Messagerie interne", "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
-		}
+		}*/
 	}
 	else if ($rubrique == "administration"){
 		if ($connect_toutes_rubriques) {
