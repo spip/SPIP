@@ -65,7 +65,7 @@ function xhtml ($buffer) {
 		$charset = lire_meta('charset');
 		if ($charset == "iso-8859-1") $enc_char = "latin1";
 		else if ($charset == "utf-8") $enc_char = "utf8";
-		else return echappe_retour($buffer, $les_echap, "xhtml")r;
+		else return echappe_retour($buffer, $les_echap, "xhtml");
 
 		tidy_set_encoding ($enc_char);
 		tidy_setopt('wrap', 0);
@@ -76,9 +76,9 @@ function xhtml ($buffer) {
 		tidy_setopt('show-body-only', false);
 		tidy_setopt('quote-nbsp', false);
 
-		$tidy = tidy_parse_string($buffer);
-		tidy_clean_repair($tidy);
-		$tidy = tidy_get_output($tidy);
+		tidy_parse_string($buffer);
+		tidy_clean_repair();
+		$tidy = tidy_get_output();
 		$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		// En Latin1, tidy ajoute une declaration XML
 		// (malgre add-xml-decl a false) ; il faut le supprimer
