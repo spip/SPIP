@@ -53,7 +53,11 @@ function calculer_boucle($id_boucle, &$boucles)
 	if ($lang_select)
 		$boucle->select[] = (($id_table = $table_des_tables[$type_boucle]) ? $id_table.'.' : '') .'lang';
 
-	$flag_h = ($type_boucle == 'hierarchie');
+	if ($type_boucle == 'hierarchie')
+	  {
+	    $flag_h = true;
+	    $type_boucle = 'rubriques';
+	  }
 	$flag_parties = ($boucle->partie AND $boucle->total_parties);
 	$flag_cpt = $flag_parties || # pas '$compteur' a` cause du cas 0
 	  		strpos($corps,'compteur_boucle') ||
@@ -112,17 +116,12 @@ function calculer_boucle($id_boucle, &$boucles)
 	    ereg("([0-9]+),([0-9]+)",$boucle->limit,$limit);
 	    $boucle->limit = '';
 	    $texte .= '
-	$hierarchie = ' . ($boucle->tout ?  $boucle->tout : 
-			   // sinon,  parame`tre passe' par include.
-			   // me^me code, mais a` inexe'cutable a` la compilation:
-			   '(($Pile[0]["id_article"] ||
-	      $Pile[0]["id_syndic"]) ?
-	    $Pile[0]["id_rubrique"] :
-	    $Pile[0]["id_parent"])') .
+	$hierarchie = ' . 
+	      index_pile($boucle->id_parent, 'id_rubrique', $boucles) .
 	      ';
 	$h0 = ""; 
 	for($n=' .
-	      (($type_boucle == 'rubriques') ? -1 : 0) .
+	      (($boucle->tout == 'id_rubrique') ? -1 : 0) .
 	      ';' .
 	      (!$limit ? '$hierarchie' : ('$n<' . ($limit[1] + $limit[2]))) .
 	      ';$n++) {
