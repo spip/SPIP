@@ -22,7 +22,7 @@ function recuperer_page($url) {
 	else
 		$via_proxy = " (proxy $http_proxy)";
 
-	spip_log("syndication $url$via_proxy"); 
+	spip_log("syndication $url$via_proxy");
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 		$t = @parse_url($url);
@@ -95,33 +95,33 @@ function analyser_site($url) {
 		$result['url_syndic'] = $url;
 		$channel = $regs[1];
 		if (ereg('<title[^>]*>([^<]*)</title>', $channel, $r)) {
-			$result['nom_site'] = $r[1];
+			$result['nom_site'] = filtrer_entites($r[1]);
 		}
 		if (ereg('<link[^>]*>([^<]*)</link>', $channel, $r)) {
-			$result['url_site'] = $r[1];
+			$result['url_site'] = filtrer_entites($r[1]);
 		}
 
 		// si le channel n'a pas de description, ne pas prendre celle d'un article
 		if ($a = strpos($channel, '<item>'))
-			$channel_desc = substr ($channel, 0, $a);
+			$channel_desc = substr($channel, 0, $a);
 		else
 			$channel_desc = $channel;
 		if (ereg('<description[^>]*>([^<]*)</description>', $channel_desc, $r)) {
-			$result['descriptif'] = $r[1];
+			$result['descriptif'] = filtrer_entites($r[1]);
 		}
 	}
 	else {
 		$result['syndic'] = false;
 		$result['url_site'] = $url;
 		if (eregi('<head>(.*)', $texte, $regs)) {
-			$head = eregi_replace('</head>.*', '', $regs[1]);
+			$head = filtrer_entites(eregi_replace('</head>.*', '', $regs[1]));
 		}
 		else $head = $texte;
 		if (eregi('<title[^>]*>(.*)', $head, $regs)) {
-			$result['nom_site'] = supprimer_tags(eregi_replace('</title>.*', '', $regs[1]));
+			$result['nom_site'] = filtrer_entites(supprimer_tags(eregi_replace('</title>.*', '', $regs[1])));
 		}
-		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs)) {
-			$result['descriptif'] = supprimer_tags($regs[3]);
+		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs)) { //"
+			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
 		}
 	}
 	return $result;
@@ -132,7 +132,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_ecrire("inc_filtres.php3");
 
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
-	
+
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result))
@@ -165,52 +165,51 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		if (count($item)>1){
 			for($i = 0 ; $i < count($item) ; $i++){
 				ereg("<title>(.*)</title>",$item[$i],$match);
-				$le_titre=addslashes($match[1]);
+				$le_titre=filtrer_entites(addslashes($match[1]));
 				$match="";
 				ereg("<link>(.*)</link>",$item[$i],$match);
-				$le_lien=addslashes($match[1]);
+				$le_lien=filtrer_entites(addslashes($match[1]));
 				$match="";
 				ereg("<date>(.*)</date>",$item[$i],$match);
-				$la_date=addslashes($match[1]);
+				$la_date=filtrer_entites(addslashes($match[1]));
 				$match="";
 				ereg("<author>(.*)</author>",$item[$i],$match);
-				$les_auteurs=addslashes($match[1]);
+				$les_auteurs=filtrer_entites(addslashes($match[1]));
 				$match="";
 				ereg("<description[^>]*>([^<]*)</description>",$item[$i],$match);
-				$la_description=addslashes($match[1]);
-				
+				$la_description=filtrer_entites(addslashes($match[1]));
+
 				$match="";
 				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
-												
-				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
-				$result_deja=spip_query($query_deja);
+
+				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
+				$result_deja = spip_query($query_deja);
 				if (spip_num_rows($result_deja)==0){
-					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='$moderation', descriptif=\"$la_description\"";
+					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
+						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', '$la_date', '$les_auteurs', '$moderation', '$la_description')";
 					$result_syndic=spip_query($query_syndic);
-					
-					// Indexation pour moteur
-					$id_syndic_article=spip_insert_id();
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
-		} 
+		}
+		// syndication javascript : y a-t-il quelqu'un qui se sert de ce truc ??
 		else if (ereg("document\.write", $le_retour)) {
 
-			while ($i < 50 AND eregi("<a[[:space:]]+href[[:space:]]*=[[:space:]]*\"?([^\">]+)\"?[^>]*>(.*)",$le_retour,$reg)){
+			while ($i < 50 AND eregi("<a[[:space:]]+href[[:space:]]*=[[:space:]]*\"?([^\">]+)\"?[^>]*>(.*)",$le_retour,$reg)){ //"
 				$i++;
-				
+
 				$le_lien = addslashes(stripslashes($reg[1]));
 				$la_suite = $reg[2];
-				
+
 				$pos_fin = strpos($la_suite, "</a");
 				$pos_fin2 = strpos($la_suite, "</A");
 				if ($pos_fin2 > $pos_fin) $pos_fin = $pos_fin2;
-				
+
 				$le_titre = substr($la_suite, 0, $pos_fin);
 				$le_titre = addslashes(stripslashes($le_titre));
 				$le_titre = ereg_replace("<[^>]*>","",$le_titre);
 				$le_retour = substr($la_suite, $pos_fin + 4, strlen($le_retour));
-				
+
 				echo "<li> $le_titre / $le_lien";
 				
 			
@@ -221,9 +220,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				if (spip_num_rows($result_deja)==0){
 					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='$moderation'";
 					$result_syndic=spip_query($query_syndic);
-					
-					// Indexation pour moteur
-					$id_syndic_article=spip_insert_id();
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
