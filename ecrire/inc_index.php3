@@ -146,7 +146,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		$query3 = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_objet AND auteurs.id_auteur=lien.id_auteur";
 		$result3 = spip_query($query3);
 		while ($row = spip_fetch_array($result3)) {
-			indexer_chaine($row['nom'], 10);
+			indexer_chaine($row['nom'], 10, 1);
 		}
 		break;
 
@@ -173,7 +173,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		break;
 
 	case 'auteur':	
-		indexer_chaine($row['nom'], 5);
+		indexer_chaine($row['nom'], 5, 1);
 		if ($full) {
 			indexer_chaine($row['bio'], 1);
 			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
@@ -190,7 +190,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		break;
 
 	case 'signature':
-		indexer_chaine($row['nom_email'], 2);
+		indexer_chaine($row['nom_email'], 2, 1);
 		indexer_chaine($row['ad_email'], 2);
 		indexer_chaine($row['nom_site'], 2);
 		indexer_chaine($row['url_site'], 1);
@@ -253,7 +253,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		while ($row = spip_fetch_array($s)) {
 			indexer_chaine($row['titre'], 3);
 			indexer_chaine($row['texte'], 1);
-			indexer_chaine($row['auteur'], 2);
+			indexer_chaine($row['auteur'], 2, 1);
 			indexer_chaine($row['email_auteur'], 2);
 			indexer_chaine($row['nom_site'], 2);
 			indexer_chaine($row['url_site'], 1);
