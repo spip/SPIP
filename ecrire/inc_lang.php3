@@ -8,7 +8,8 @@ define("_ECRIRE_INC_LANG", "1");
 //
 // Charger un fichier langue
 //
-function charger_langue($lang, $module = 'spip', $forcer = false) {
+
+function charger_langue($lang, $module = 'spip') {
 
 	$fichier_lang = $module.'_'.$lang.'.php3';
 	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
@@ -35,9 +36,32 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	}
 
 	// surcharge perso
-	if ($f = (find_in_path('lang_perso.php3')))  include($f);
-	if ($f = (find_in_path('lang_perso_'.$lang.'.php3')))  include($f);
+	if ($f = (find_in_path('lang_perso.php3')))
+		surcharger_langue($f);
+	if ($f = (find_in_path('lang_perso_'.$lang.'.php3')))
+		surcharger_langue($f);
+
+	#	// Overkill ?  Surcharger uniquement le module demande
+	#	if ($f = (find_in_path('lang_perso_'.$module.'_'.$lang.'.php3')))
+	#		surcharger_langue($f);
 }
+
+//
+// Surcharger le fichier de langue courant avec un autre (tordu, hein...)
+//
+function surcharger_langue($f) {
+	$idx_lang_normal = $GLOBALS['idx_lang'];
+	$GLOBALS['idx_lang'] .= '_temporaire';
+	include($f);
+
+	foreach ($GLOBALS[$GLOBALS['idx_lang']] as $var => $val)
+		$GLOBALS[$idx_lang_normal][$var] = $val;
+
+	unset ($GLOBALS[$GLOBALS['idx_lang']]);
+	$GLOBALS['idx_lang'] = $idx_lang_normal;
+}
+
+
 
 //
 // Changer la langue courante
@@ -86,7 +110,6 @@ function regler_langue_navigateur() {
 //
 function traduire_chaine($code, $args) {
 	global $spip_lang;
-	global $cache_lang;
 
 	// modules par defaut
 	if (_DIR_RESTREINT)
@@ -102,17 +125,12 @@ function traduire_chaine($code, $args) {
 		}
 	}
 
-	$text = '';
 	// parcourir tous les modules jusqu'a ce qu'on trouve
+	$text = '';
 	while (!$text AND (list(,$module) = each ($modules))) {
 		$var = "i18n_".$module."_".$spip_lang;
-		if (empty($GLOBALS[$var])) charger_langue($spip_lang, $module);
-		if (_DIR_RESTREINT) {
-			if (!isset($GLOBALS[$var][$code]))
-				charger_langue($spip_lang, $module, $code);
-			if (isset($GLOBALS[$var][$code]))
-				$cache_lang[$spip_lang][$code] = 1;
-		}
+		if (empty($GLOBALS[$var]))
+			charger_langue($spip_lang, $module);
 		$text = $GLOBALS[$var][$code];
 	}
 
@@ -136,6 +154,7 @@ function traduire_chaine($code, $args) {
 
 
 function traduire_nom_langue($lang) {
+	init_codes_langues();
 	$r = $GLOBALS['codes_langues'][$lang];
 	if (!$r) $r = $lang;
 
@@ -518,13 +537,11 @@ function utiliser_langue_visiteur() {
 // Initialisation
 //
 function init_langues() {
-	global $all_langs, $langue_site, $cache_lang, $cache_lang_modifs;
+	global $all_langs, $langue_site;
 	global $pile_langues, $lang_typo, $lang_dir;
 
 	$all_langs = lire_meta('langues_proposees');
 	$langue_site = lire_meta('langue_site');
-	$cache_lang = array();
-	$cache_lang_modifs = array();
 	$pile_langues = array();
 	$lang_typo = '';
 	$lang_dir = '';
@@ -556,7 +573,6 @@ function init_langues() {
 			}
 		}
 	}
-	init_codes_langues();
 }
 
 init_langues();

@@ -1131,17 +1131,22 @@ function texte_script($texte) {
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
 function find_in_path ($filename, $path='AUTO') {
+	// Chemin standard depuis l'espace public
 	if ($path == 'AUTO') {
 		$path = '.:squelettes:dist:formulaires';
 		if ($GLOBALS['dossier_squelettes'])
 			$path = $GLOBALS['dossier_squelettes'].':'.$path;
 	}
 
+	// Depuis l'espace prive, remonter d'un cran (a ameliorer si 'AUTO')
+	$racine = (_DIR_RESTREINT ? '' : '../');
+
+	// Parcourir le chemin
 	foreach (split(':', $path) as $dir) {
 		#spip_log ("test $path for $filename");
-		if (@is_dir($dir) AND @file_exists("$dir/$filename")) {
+		if (@is_dir($dir) AND @file_exists("$racine$dir/$filename")) {
 			#spip_log("$dir/$filename");
-			return "$dir/$filename";
+			return "$racine$dir/$filename";
 		}
 	}
 
