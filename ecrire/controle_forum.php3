@@ -6,7 +6,7 @@ include ("inc.php3");
 debut_page("Suivi des forums", "messagerie", "forum-controle");
 
 echo "<br><br><br>";
-gros_titre("Suivi des forums (tous les messages)");
+gros_titre("Suivi des forums");
 barre_onglets("suivi_forum", "tous");
 
 
@@ -302,7 +302,7 @@ if ($connect_statut == "0minirezo") {
 
 	if (!$debut) $debut = 0;
 
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
+	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' AND date_heure>DATE_SUB(NOW(),INTERVAL 30 DAY)";
  	$result_forum = spip_query($query_forum);
  	$total = 0;
  	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
@@ -318,7 +318,7 @@ if ($connect_statut == "0minirezo") {
 		}
 	}
 
-	$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' ORDER BY date_heure DESC LIMIT $debut,10";
+	$query_forum = "SELECT * FROM spip_forum WHERE statut!='perso' AND statut != 'redac' AND texte!='' ORDER BY date_heure DESC LIMIT $debut,10";
  	$result_forum = spip_query($query_forum);
 	controle_forum($result_forum, "forum.php3");
 
