@@ -48,7 +48,7 @@ $GLOBALS['i18n_spip_en'] = array(
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
 'avis_erreur_mysql' => 'MySQL error',
 'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',
-'avis_erreur_version_archive' => '<B>Warning! The file @archive@ corresponds to
+'avis_erreur_version_archive' => '<MODIF> <B>Warning! The file @archive@ corresponds to
 				a version of SPIP other than the one you have
 				installed.</B> You are facing great
 				difficulties: risk of destruction of your database
@@ -521,7 +521,7 @@ Thank you for your participation
 'info_contenu_articles' => 'Articles content',
 'info_contribution' => 'forum contributions',
 'info_copyright' => 'is a free software distributed <a href=\'license.txt\'>under GPL license.</a>',
-'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.spip.net/es_\'>http://www.spip.net/es_</a>.',
+'info_copyright_doc' => 'For further information, visit the site <a href=\'http://www.spip.net/en_\'>http://www.spip.net/en_</a>.',
 'info_cours_edition' => 'In progress',
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
 'info_creation_paragraphe' => '(To create paragraphs, you simply leave blank lines.)',
@@ -1265,7 +1265,7 @@ reinstall SPIP in order to recreate a new database and the first administrator\'
 the content of the database in a file stored in the directory <i>ecrire/data/</i>.
 Also remember to retrieve the whole <i>IMG/</i>, directory, which contains
 the images and the documents used in the articles and sections.',
-'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored
+'texte_admin_tech_02' => '<MODIF> Warning: this backup can ONLY be restored
 	in a site installed under the same version of SPIP. It is a common mistake
 	to backup the database before upgrading
 	SPIP... For more information refer to <a href=\'http://www.spip.net/fr_article1489.html\'>SPIP documentation</a>.',

@@ -1511,12 +1511,7 @@ og igen f&aring; adgang til webstedet.',
 'trad_delier' => 'Afbryd forbindelsen mellem denne artikel og overs&aelig;ttelserne',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
 'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
-'trad_reference' => '(referenceartikel)',
-
-
-// CONFLIT
-'onglet_evolution_visite' => 'Udvikling i bes&oslash;gstal',
-'onglet_langue' => 'Sprog'
+'trad_reference' => '(referenceartikel)'
 
 );
 
