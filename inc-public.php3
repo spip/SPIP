@@ -119,23 +119,21 @@ else {
 
 			// Evaluer la page
 			if (!spip_active_ob) {
-				$res = eval('?' . '>' . $page['texte']);
+				eval('?' . '>' . $page['texte']);
 				$contenu = '';
 			} else {
 				ob_start(); 
 				$res = eval('?' . '>' . $page['texte']);
 				$contenu = ob_get_contents(); 
 				ob_end_clean();
+
+				// en cas d'erreur lors du eval, afficher un message
+				// et forcer les boutons de debug
+				if ($res === false AND $affiche_boutons_admin
+				AND $auteur_session['statut'] == '0minirezo')
+					erreur_squelette(_L('erreur d\'execution de la page'));
 			}
-                      
-			// en cas d'erreur afficher un message + demander boutons debug
-			if ($affiche_boutons_admin
-			AND $auteur_session['statut'] == '0minirezo') {
-				if (function_exists('restore_error_handler'))
-					restore_error_handler();
-				if ($res === false)
-					spip_error_handler(1,'erreur de compilation','','','');
-			}
+
 
 		}
 
@@ -143,8 +141,9 @@ else {
 		if ($var_debug) {
 			debug_dumpfile('');
 			exit;
-		} else if (count($tableau_des_erreurs) > 0)
-			affiche_erreurs_execution_page ();
+		} else if (count($tableau_des_erreurs) > 0
+		AND $affiche_boutons_admin)
+			affiche_erreurs_page ($tableau_des_erreurs);
 
 		// Traiter var_recherche pour surligner les mots
 		if ($var_recherche) {
