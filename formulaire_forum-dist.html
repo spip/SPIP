@@ -1,14 +1,10 @@
-<form action="[(#ENV{url})]" method="post" name="formulaire">
-
-<input type="hidden" name="ajout_forum" value="oui" />
-[<input type="hidden" name="alea" value="(#ENV{alea})" />]
-[<input type="hidden" name="hash" value="(#ENV{hash})" />]
-[<input type="hidden" name="retour" value="(#ENV{retour})" />]
-
-[<p>(#ENV*{modere})</p>]
-
-[(#ENV*{afficher_texte_hidden})]
-[(#ENV*{afficher_texte_input})
+<form action="[(#ENV{url})]" method="post" name="formulaire">[
+<input type="hidden" name="alea" value="(#ENV{alea})" />][
+<input type="hidden" name="hash" value="(#ENV{hash})" />][
+<input type="hidden" name="retour_forum" value="(#ENV{retour_forum})" />
+][<p>(#ENV*{modere})</p>
+][(#ENV*{afficher_texte_hidden})
+][(#ENV*{afficher_texte_input})
 	[(#ENV*{previsu})
 		<fieldset class="spip_encadrer">
 		<legend><b><:forum_titre:></b></legend>
@@ -51,8 +47,6 @@
 		</fieldset>
 		<br />
 		<div align="#LANG_RIGHT"><input type="submit" value="<:forum_voir_avant:>"
-		class="spip_bouton"></div>
-	]
-]
-</form>
+		class="spip_bouton"></div>]
+]</form>
 

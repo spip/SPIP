@@ -200,7 +200,7 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 	$param = substr($param,3);
 
 	while ($param) {
-	  spip_log($param);
+
 		preg_match('/[[:space:]]*([^,]*)[[:space:]]*,?(.*)/ims',
 			   $param, $regs);
 		$param = $regs[2];
@@ -347,6 +347,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 		// Restriction de valeurs (implicite ou explicite)
 	else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
 	  		$op = $match[5] ? $match[5] : '=';
+
 			// Variable comparee
 			$col = $match[1];
 			// fonction SQL

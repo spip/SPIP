@@ -43,8 +43,7 @@ function affiche_boutons_admin(&$contenu) {
 
 	lang_dselect();
 
-	echo $suite;
-	$contenu = '';
+	return $suite;
 }
 
 ?>

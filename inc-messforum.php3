@@ -47,96 +47,107 @@ function prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre) {
 }
 
 
+function controler_forum($id_article, $retour)
+{
+	global $auteur_session;
+	if ($id_article) {
+		$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
+		$r = spip_fetch_array($r);
+		if ($r)
+			$forums_publics = $r['accepter_forum'];
+		else
+			$forums_publics = lire_meta("forums_publics");
+	} else {
+		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+	}
 
-// Recuperation des donnees
-$retour_forum = rawurldecode($retour);
-$id_article = intval($id_article);
-$id_rubrique = intval($id_rubrique);
-$id_forum = intval($id_forum);
-$id_breve = intval($id_breve);
-$id_syndic = intval($id_syndic);
-
-// initialisation de l'eventuel visiteur connecte
-if (!$id_auteur)
-	$id_auteur = intval($auteur_session['id_auteur']);
-
-// chercher le statut du forum
-if ($id_article) {
-	$r = spip_query("SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article");
-	$r = spip_fetch_array($r);
-	if ($r)
-		$forums_publics = $r['accepter_forum'];
-	else
-		$forums_publics = lire_meta("forums_publics");
-} else {
-	$forums_publics = substr(lire_meta("forums_publics"),0,3);
-}
-
-if ($forums_publics == "abo") {
-	if ($auteur_session) {
-		$statut = $auteur_session['statut'];
-		if (!$statut OR $statut == '5poubelle') {
-			ask_php_auth(_T('forum_acces_refuse'),
+	if ($forums_publics == "abo") {
+		if ($auteur_session) {
+			$statut = $auteur_session['statut'];
+			if (!$statut OR $statut == '5poubelle') {
+				ask_php_auth(_T('forum_acces_refuse'),
+					     _T('forum_cliquer_retour',
+						array('retour_forum' => $retour)));
+				exit;		  
+			}
+		} else {
+			ask_php_auth(_T('forum_non_inscrit'),
 				     _T('forum_cliquer_retour',
-					array('retour_forum' => $retour_forum)));
+					array('retour_forum' => $retour)));
 			exit;		  
 		}
 	}
-	else {
-		ask_php_auth(_T('forum_non_inscrit'),
-			     _T('forum_cliquer_retour',
-				array('retour_forum' => $retour_forum)));
-		exit;		  
+	return $forums_publics;
+}
+
+function mots_du_forum($ajouter_mot, $id_message)
+{
+	foreach ($ajouter_mot as $id_mot)
+		if ($id_mot = intval($id_mot))
+			spip_query("INSERT INTO spip_mots_forum (id_mot, id_forum)
+				VALUES ($id_mot, $id_message)");
+}
+
+function enregistre_forum()
+{
+	global $REMOTE_ADDR, $auteur_session,
+	  $afficher_texte, $ajouter_mot, $alea, $hash,
+	  $auteur, $confirmer_forum, $email_auteur,
+	  $id_article, $id_auteur, $id_breve, $id_forum, $id_rubrique, $id_syndic,
+	  $nom_site_forum, $retour_forum, $texte, $titre, $url_site;
+
+	$retour_forum = rawurldecode($retour_forum);
+	$id_article = intval($id_article);
+	$id_rubrique = intval($id_rubrique);
+	$id_forum = intval($id_forum);
+	$id_breve = intval($id_breve);
+	$id_syndic = intval($id_syndic);
+
+// initialisation de l'eventuel visiteur connecte
+	if (!$id_auteur)
+	$id_auteur = intval($auteur_session['id_auteur']);
+
+	$statut == controler_forum($id_article, $retour_forum);
+
+// Ne pas autoriser de changement de nom si forum sur abonnement
+
+	if ($statut == 'abo') {
+		$auteur = $auteur_session['nom'];
+		$email_auteur = $auteur_session['email'];
 	}
 
-	// Ne pas autoriser de changement de nom si forum sur abonnement
-	$auteur = $auteur_session['nom'];
-	$email_auteur = $auteur_session['email'];
-}
-
-
 // trop court ?
-if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
-	ask_php_auth(_T('forum_message_trop_long'),
-		_T('forum_cliquer_retour',
-		array('retour_forum' => $retour_forum)));
-	exit;
-}
-
-
-// validation finale du post ?
-if (strlen($confirmer) > 0
-OR ($afficher_texte=='non' AND $ajouter_mot)) {
-
-	// prevoir le redirect
-	$redirect = $retour_forum;
+	if ((strlen($texte) + strlen($titre) + strlen($nom_site_forum) + strlen($url_site) + strlen($auteur) + strlen($email_auteur)) > 20 * 1024) {
+		ask_php_auth(_T('forum_message_trop_long'),
+			     _T('forum_cliquer_retour',
+				array('retour_forum' => $retour_forum)));
+		exit;
+	}
 
 	// Verifier hash securite
 	include_ecrire("inc_admin.php3");
 	if (!verifier_action_auteur("ajout_forum $id_rubrique".
 	" $id_forum $id_article $id_breve".
 	" $id_syndic $alea", $hash))
-		return; 	# echec silencieux du POST
+		exit; 	# echec silencieux du POST
 
 	// verifier fichier lock
 	$alea = preg_replace('/[^0-9]/', '', $alea);
-	if (!file_exists($f = _DIR_SESSIONS."forum_$alea.lck"))
-		return; # echec silencieux du POST
-	unlink($f);
+	if (!file_exists($hash = _DIR_SESSIONS."forum_$alea.lck"))
+		exit; # echec silencieux du POST
+	unlink($hash);
 
 	// Entrer le message dans la base
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
-
-	$statut =
-		($forums_publics == 'non') ? 'off' :
-		(($forums_publics == 'pri') ? 'prop' :
-		'publie');
 
 	if ($id_forum)
 		list($id_thread) = spip_fetch_array(spip_query(
 		"SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
+
+	$statut = ($statut == 'non') ? 'off' : (($statut == 'pri') ? 'prop' :
+						'publie');
 
 	spip_query("UPDATE spip_forum SET id_parent = $id_forum,
 	id_rubrique = $id_rubrique,
@@ -160,28 +171,22 @@ OR ($afficher_texte=='non' AND $ajouter_mot)) {
 	// calculer_threads();
 
 	// Entrer les mots-cles associes
-	if (is_array($ajouter_mot))
-		foreach ($ajouter_mot as $id_mot)
-			if ($id_mot = intval($id_mot))
-				spip_query("INSERT INTO spip_mots_forum (id_mot, id_forum)
-				VALUES ($id_mot, $id_message)");
-
+	if (is_array($ajouter_mot)) mots_du_forum($ajouter_mot, $id_message);
 
 	// Prevenir les auteurs de l'article
-	if (lire_meta("prevenir_auteurs") == "oui"
-	AND ($afficher_texte != "non")
-	AND ($id_article = $id_article))
+	if (lire_meta("prevenir_auteurs") == "oui" AND ($afficher_texte != "non"))
 		prevenir_auteurs($auteur, $email_auteur, $id_article, $texte, $titre);
 
 	// Poser un cookie pour ne pas retaper le nom / email
-	$cookie_user = array('nom' => $auteur, 'email' => $email_auteur);
-	spip_setcookie('spip_forum_user', serialize($cookie_user));
 
+	spip_setcookie('spip_forum_user',
+		       serialize(array('nom' => $auteur, 'email' => $email_auteur)));
+
+	if ($statut == 'publie') {
 	//
 	// INVALIDATION DES CACHES LIES AUX FORUMS
 	//
-	include_ecrire('inc_invalideur.php3');
-	if ($statut == 'publie') {
+		include_ecrire('inc_invalideur.php3');
 		suivre_invalideur ("id='id_forum/" .
 			calcul_index_forum($id_article,
 				$id_breve,
@@ -189,6 +194,7 @@ OR ($afficher_texte=='non' AND $ajouter_mot)) {
 				$id_syndic) . "'");
 	}
 
+	return $retour_forum;
 }
 
 ?>

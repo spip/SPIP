@@ -10,23 +10,23 @@ define("_INC_DEBUG_SQL", "1");
 // ajouter &var_mode=debug pour voir les erreurs et en parler sur spip@rezo.net
 function affiche_erreurs_page($tableau_des_erreurs) {
 
-	echo "<div id='spip-debug' style='position: absolute; top: 20;",
-	" z-index: 1000;'><ul><li>",
-	_T('zbug_erreur_squelette'),
+	$GLOBALS['bouton_admin_debug'] = true;
+	$res = '';
+	foreach ($tableau_des_erreurs as $err) {
+		$res .= "<li>" .$err[0] . ",. <small>".$err[1]."</small><br /</li>\n";
+	}
+	return "<div id='spip-debug' 
+style='position: absolute; top: 20; z-index: 1000;'><ul><li>" .
+	_T('zbug_erreur_squelette') .
 
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
 
-	"<br /></li>",
-	"<ul>";
-	foreach ($tableau_des_erreurs as $err) {
-		echo "<li>".$err[0],
-		", <small>".$err[1]."</small><br />",
-		"</li>\n";
-	}
-	echo "</ul>";
-	echo "</ul></div>";
-	$GLOBALS['bouton_admin_debug'] = true;
+	"<br /></li>" .
+	"<ul>" .
+	$res .
+	"</ul></ul></div>";
+
 }
 
 //
@@ -96,8 +96,9 @@ function erreur_squelette($message='', $lieu='') {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		    ($GLOBALS['var_mode'] == 'debug')) {
-			echo debut_entete('Debug'), '</head><body>';
-			die(affiche_erreurs_page($tableau_des_erreurs));
+			echo debut_entete('Debug'), '</head><body>',
+				affiche_erreurs_page($tableau_des_erreurs);
+			exit;
 		}
 	}
 }
