@@ -560,7 +560,8 @@ function tester_vignette ($test_vignette) {
 
 			return ($preview['fichier']);
 	}
-	return '';
+
+	return _DIR_IMG_PACK . 'puce-rouge-anim.gif';	# image echec
 }
 
 // Creation
