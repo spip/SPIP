@@ -1645,7 +1645,7 @@ function debut_gauche($rubrique = "asuivre") {
 		if ($flag_cadre) {
 			echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
 			if ($nb_connectes > 0) {
-				if ($options == "avancees") echo "<p>";
+				if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
 				echo "<b>Actuellement en ligne&nbsp;:</b>";
 				while ($row = mysql_fetch_array($result_auteurs)) {
 					$id_auteur = $row["id_auteur"];
