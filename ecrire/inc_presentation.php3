@@ -1012,7 +1012,7 @@ function barre_onglets($rubrique, $onglet){
 		onglet("Par rubriques", "statistiques.php3", "repartition", $onglet, "rubrique-24.gif");
 		onglet("Par articles", "statistiques_articles.php3", "recents", $onglet, "article-24.gif");
 		$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-		if ($activer_statistiques_ref == "oui")	onglet("Les liens entrants du jour", "statistiques_referers.php3", "referers", $onglet, "referers-24.png");
+		if ($activer_statistiques_ref == "oui")	onglet("Les liens entrants du jour", "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
 	
 	if ($rubrique == "administration"){
