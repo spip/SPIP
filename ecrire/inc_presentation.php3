@@ -2021,7 +2021,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
 	
 		// Redacteur connecte
-		echo $GLOBALS["connect_nom"];
+		echo typo($GLOBALS["connect_nom"]);
 	
 	
 	echo "</td>";
