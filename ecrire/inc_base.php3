@@ -185,6 +185,7 @@ function creer_base() {
 		date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		date_syndic datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		date_index datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
+		moderation VARCHAR(3) NOT NULL,
 		PRIMARY KEY (id_syndic),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
@@ -904,6 +905,10 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_auteurs CHANGE statut statut VARCHAR(255) NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX login (login)");
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX statut (statut)");
+	}
+
+	if ($version_installee < 1.444) {
+		spip_query("ALTER TABLE spip_syndic ADD moderation VARCHAR(3) NOT NULL");
 	}
 
 	//
