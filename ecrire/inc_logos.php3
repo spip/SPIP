@@ -29,7 +29,7 @@ function decrire_logo($racine) {
 				     calculer_action_auteur ("reduire $w $h") .
 				     "&hash_id_auteur=$connect_id_auteur" .
 				     (!$contre ? '' : ("&".md5($contre))) .
-				     "'$taille alt='' />",
+				     "'$taille border='0' alt='' />",
 				     $x, $y);
 			  }
 	}
