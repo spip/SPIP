@@ -12,7 +12,7 @@ define("_ECRIRE_INC_FILTRES", "1");
 function corriger_entites_html($texte) {
 	return ereg_replace('&amp;(#[0-9]+;)', '&\1', $texte);
 }
-// idem mais corriger aussi les &amp;eacute; en &eacute; (pour backend)
+// idem mais corriger aussi les &amp;eacute; en &eacute; (etait pour backends, mais n'est plus utilisee)
 function corriger_toutes_entites_html($texte) {
 	return eregi_replace('&amp;(#?[a-z0-9]+;)', '&\1', $texte);
 }
@@ -38,16 +38,20 @@ function entites_unicode($texte) {
 
 // Nettoyer les backend
 function texte_backend($texte) {
-	// supprimer tags et sauts de ligne
-	//$texte = str_replace("\n"," ",textebrut($texte));
 
 	// " -> &quot; et tout ce genre de choses
 	$texte = entites_html($texte);
-	$texte = str_replace("&amp;", "&", $texte);
 	$texte = str_replace("&nbsp;", " ", $texte);
 
 	// verifier le charset
 	$texte = entites_unicode($texte);
+
+	// Caracteres problematiques en iso-latin 1
+	if (lire_meta('charset') == 'iso-8859-1') {
+		$texte = str_replace(chr(156), '&#156;', $texte);
+		$texte = str_replace(chr(140), '&#140;', $texte);
+		$texte = str_replace(chr(159), '&#159;', $texte);
+	}
 
 	// nettoyer l'apostrophe curly qui semble poser probleme a certains rss-readers
 	$texte = str_replace("&#8217;","'",$texte);
