@@ -401,8 +401,13 @@ function retire_caches($caches)
 {
   if ($caches)
     {
+      $dir = dir_var();
       foreach ($caches as $path)
-	{ @unlink($GLOBALS['flag_ecrire'] ? ('../' . $path) : $path);}
+	{ if (strpos($path, $dir) === 0)
+	    @unlink($GLOBALS['flag_ecrire'] ? ('../' . $path) : $path);
+	  else die("PIRATE");
+	}
     }
 }
+
 ?>
