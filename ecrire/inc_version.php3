@@ -34,9 +34,7 @@ $table_prefix = "spip";
 
 function spip_query($query) {
 	include_ecrire("inc_mysql.php3");
-	if (!defined("_ECRIRE_INC_CONNECT")) { // eviter de boucler
-		include_ecrire("inc_connect.php3");
-	}
+	include_ecrire("inc_connect.php3");
 	if (!$GLOBALS['db_ok'])
 		return;
 	return query($query);
