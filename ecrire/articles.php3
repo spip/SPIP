@@ -1011,7 +1011,7 @@ if (spip_num_rows($result)) {
 		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur";
 
 		echo "<TR BGCOLOR='$couleur' WIDTH=\"100%\">";
-		echo "<TD WIDTH='20'>&nbsp;";
+		echo "<TD WIDTH='20'>";
 		echo bonhomme_statut($row);
 		echo "</TD>\n";
 
