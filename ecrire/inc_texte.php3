@@ -279,6 +279,7 @@ function couper($texte, $taille=50) {
 	$texte = filtrer_entites($texte);
 
 	// supprimer les liens
+	$texte = ereg_replace("\[->([^]]*)\]","\\1", $texte); // liens sans texte
 	$texte = ereg_replace("\[([^\[]*)->([^]]*)\]","\\1", $texte);
 
 	// supprimer les notes
