@@ -78,7 +78,6 @@ la documentacion d\'SPIP</a>.',
 'barre_gras' => 'Metre en {{gras}}',
 'barre_guillemets' => 'Enrodar amb de &laquo; verguetas francesas &raquo;',
 'barre_guillemets_de' => 'Enrodar amb de &#8222;verguetas&#8220;',
-'barre_guillemets_simples' => '<NEW> Rodar amb de &#8220;vergetas&#8221;',
 'barre_intertitre' => 'Transformar en {{{intert&iacute;tol}}}',
 'barre_italic' => 'Metre en {italics}',
 'barre_lien' => 'Transformar en [liame ipert&egrave;xt->http://...]',
@@ -519,7 +518,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'info_chemin_acces_2' => 'Ara dev&egrave;tz configurar lo camin d\'acc&egrave;s ais informacions dins l\'annuari.',
 'info_chemin_acces_annuaire' => 'Opcions: <B>camin d\'acc&egrave;s dins l\'annuari',
 'info_choix_base' => 'Tresena estapa:',
-'info_classement_1' => '&lt;sup&gt;ier&lt;/sup&gt; de @liste@',
+'info_classement_1' => '<sup>ier</sup> de @liste@',
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;strei c&ograve;des d\'acc&egrave;s pr&ograve;pris!',
 'info_comment_lire_tableau' => 'Coma legir aqueu tabl&egrave;u',
@@ -805,7 +804,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_rechercher_02' => 'Recercar:',
 'info_recommencer' => 'Vougatz tornar comen&ccedil;ar.',
 'info_redacteur_1' => 'Redactor',
-'info_redacteur_2' => 'qu\'acced&iacute;s a l\'espaci privat (&lt;i&gt;recomandat&lt;/i&gt;)',
+'info_redacteur_2' => 'qu\'acced&iacute;s a l\'espaci privat (<i>recomandat</i>)',
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
@@ -927,6 +926,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_une_rubrique_02' => '1 rubrica',
 'info_url' => 'URL:',
 'info_url_site' => 'URL DAU SIT:',
+'info_urlref' => 'Adrei&ccedil;a (URL) de refer&eacute;ncia:',
 'info_utilisation_messagerie_interne' => 'Utilizatz la messatjari&aacute; int&egrave;rna d\'aqueu sit.',
 'info_utilisation_spip' => 'Ara pod&egrave;tz comen&ccedil;ar d\'utilizar lo sist&egrave;ma de publicacion assistida...',
 'info_valider_lien' => 'validar aqueu liame',
@@ -1430,9 +1430,9 @@ tornar calcular ren qu\'una pagina, passatz pusl&egrave;u per l\'espaci public e
 'texte_restaurer_base' => 'Restaurar lo contengut d\'una sauvagarda de la basa',
 'texte_restaurer_sauvegarde' => 'Aquela opcion vos permet de restaurar una sauvagarda 
  de la basa que l\'aviatz facha avans. Per aqu&ograve; faire, cau aver botat lo fichier que conten la sauvagarda 
-dins lo repert&ograve;ri &lt;i&gt;ecrire/data/&lt;/i&gt;.
-  Pasmens, sigatz prudent(a) amb aquela foncionalitat: &lt;b&gt;lei modificacions e p&egrave;rdas eventualas son
-  irreversiblas.&lt;/b&gt;',
+dins lo repert&ograve;ri <i>ecrire/data/</i>.
+  Pasmens, sigatz prudent(a) amb aquela foncionalitat: <b>lei modificacions e p&egrave;rdas eventualas son
+  irreversiblas.</b>',
 'texte_sauvegarde' => 'Sauvagardar lo contengut de la basa',
 'texte_sauvegarde_base' => 'Sauvagardar la basa',
 'texte_sauvegarde_compressee' => 'La sauvagarda se far&agrave; dins lo fichier non comprimit <b>ecrire/data/dump.xml</b>.',

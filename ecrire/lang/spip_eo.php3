@@ -915,6 +915,7 @@ Dankon pro via partopreno
 'info_une_rubrique_02' => '1 rubriko',
 'info_url' => 'URL :',
 'info_url_site' => 'URL DE LA teksejo:',
+'info_urlref' => '<NEW> Adresse (URL) de r&eacute;f&eacute;rence&nbsp;:',
 'info_utilisation_messagerie_interne' => 'Vi uzas la internan po&#349;ton de tiu &#265;i teksejo.',
 'info_utilisation_spip' => 'Vi povas nun komenci uzi la sistemon de helpata publikigado...',
 'info_valider_lien' => 'validigi tiun &#265;i ligon',
