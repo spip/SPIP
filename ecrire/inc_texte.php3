@@ -229,12 +229,12 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 
 		if ($fichier_vignette) {
 			$vignette = "<img src='$fichier_vignette' border=0";
-			if ($largeur_vignette && $hauteur_vignette) {
+			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-			}
-			if ($titre) {
+			if ($align)
+				$vignette .= " align='$align'";
+			if ($titre)
 				$vignette .= " alt=\"$titre\" title=\"$titre\"";
-			}
 			if ($affichage_detaille)
 				$vignette .= ">";
 			else
@@ -244,9 +244,10 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 			$vignette = "pas de pr&eacute;visualisation";
 		}
 
-		if ($mode == 'document' OR $affichage_detaille) {
+		if ($mode == 'document' OR $affichage_detaille)
 			$vignette = "<a href='$fichier'>$vignette</a>";
-		}
+		if ($align == 'center')
+			$vignette = "<div align='center'>$vignette</div>";
 		if ($affichage_detaille) {
 			$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
 			$result_type = mysql_query($query_type);

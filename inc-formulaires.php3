@@ -7,8 +7,7 @@ define("_INC_FORMULAIRES", "1");
 
 
 function test_pass() {
-	include_local("ecrire/inc_acces.php3");
-
+	include_ecrire("inc_acces.php3");
 	for (;;) {
 		$passw = creer_pass_aleatoire();
 		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";
@@ -45,9 +44,9 @@ function erreur($zetexte){
 function formulaire_signature($id_article) {
 	global $val_confirm, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
 
-	include_local ("ecrire/inc_connect.php3");
-	include_local ("ecrire/inc_texte.php3");
-	include_local ("ecrire/inc_filtres.php3");
+	include_ecrire("inc_connect.php3");
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
 
 	echo "<a name='sp$id_article'>";
 
@@ -286,7 +285,7 @@ function formulaire_inscription() {
 	global $nom_inscription;
 
 	if ($mail_inscription) {
-		include_local ("ecrire/inc_connect.php3");
+		include_ecrire("inc_connect.php3");
 		$query = "SELECT * FROM spip_auteurs WHERE email='$mail_inscription'";
 		$result = mysql_query($query);
 		$ok = true;
@@ -375,7 +374,7 @@ function formulaire_site($la_rubrique) {
 		}
 		
 		// Tester l'URL du site
-		include_local ("ecrire/inc_sites.php3");
+		include_ecrire("inc_sites.php3");
 		if (!recuperer_page($url_site)) {
 			$reponse_signature .= erreur("L'URL que vous avez indiqu&eacute;e n'est pas valide.");
 			$refus = "oui";

@@ -1,7 +1,7 @@
 <?php
 
 include ("ecrire/inc_version.php3");
-include_local ("ecrire/inc_cookie.php3");
+include_ecrire("inc_cookie.php3");
 
 if ($ajout_cookie == "oui") {
 	ajout_cookie_admin();

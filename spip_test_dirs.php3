@@ -1,6 +1,8 @@
 <?php
 
-include ("ecrire/inc_presentation.php3");
+include("ecrire/inc_version.php3");
+
+include_ecrire("inc_presentation.php3");
 
 function bad_dirs($bad_dirs) {
 		echo "

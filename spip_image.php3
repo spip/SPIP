@@ -2,9 +2,9 @@
 
 include ("ecrire/inc_version.php3");
 
-include_local ("ecrire/inc_connect.php3");
-include_local ("ecrire/inc_meta.php3");
-include_local ("ecrire/inc_admin.php3");
+include_ecrire("inc_connect.php3");
+include_ecrire("inc_meta.php3");
+include_ecrire("inc_admin.php3");
 
 if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 else $vars = $HTTP_GET_VARS;

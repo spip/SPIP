@@ -65,17 +65,17 @@ $use_cache &= ($recalcul != 'oui');
 $use_cache &= empty($HTTP_POST_VARS);
 
 if (!$use_cache) {
-	include_local ("ecrire/inc_connect.php3");
+	include_ecrire("inc_connect.php3");
 	if (!$db_ok) $use_cache = true;
 }
 
 if ($use_cache) {
 	if (file_exists("ecrire/inc_meta_cache.php3")) {
-		include_local("ecrire/inc_meta_cache.php3");
+		include_ecrire("inc_meta_cache.php3");
 	}
 	else {
-		include_local ("ecrire/inc_connect.php3");
-		include_local ("ecrire/inc_meta.php3");
+		include_ecrire("inc_connect.php3");
+		include_ecrire("inc_meta.php3");
 	}
 }
 else {
@@ -172,9 +172,9 @@ if (!file_exists("CACHE/.htaccess")) {
 if (lire_meta('activer_moteur') == 'oui') {
 	$fichier_index = 'CACHE/.index';
 	if ($db_ok) {
-		include_local ("ecrire/inc_texte.php3");
-		include_local ("ecrire/inc_filtres.php3");
-		include_local ("ecrire/inc_index.php3");
+		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_filtres.php3");
+		include_ecrire("inc_index.php3");
 		$s = '';
 		if ($id_article AND !deja_indexe('article', $id_article))
 			$s .= "article $id_article\n";
@@ -193,11 +193,11 @@ if (lire_meta('activer_moteur') == 'oui') {
 		}
 	}
 	if ($use_cache AND file_exists($fichier_index) AND $size = filesize($fichier_index)) {
-		include_local ("ecrire/inc_connect.php3");
+		include_ecrire("inc_connect.php3");
 		if ($db_ok) {
-			include_local ("ecrire/inc_texte.php3");
-			include_local ("ecrire/inc_filtres.php3");
-			include_local ("ecrire/inc_index.php3");
+			include_ecrire("inc_texte.php3");
+			include_ecrire("inc_filtres.php3");
+			include_ecrire("inc_index.php3");
 			$f = fopen($fichier_index, 'r');
 			$s = fgets($f, 100);
 			$suite = fread($f, $size);
@@ -219,7 +219,7 @@ if (lire_meta('activer_moteur') == 'oui') {
 //
 
 if ($use_cache && file_exists('CACHE/.purge2')) {
-	include_local ("ecrire/inc_connect.php3");
+	include_ecrire("inc_connect.php3");
 	if ($db_ok) {
 		unlink('CACHE/.purge2');
 		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
@@ -237,7 +237,7 @@ if ($use_cache && file_exists('CACHE/.purge2')) {
 }
 
 if ($use_cache && file_exists('CACHE/.purge')) {
-	include_local ("ecrire/inc_connect.php3");
+	include_ecrire("inc_connect.php3");
 	if ($db_ok) {
 		unlink('CACHE/.purge');
 		$f = fopen('CACHE/.purge2', 'w');
@@ -309,7 +309,7 @@ if ($admin_ok AND !$flag_preserver) {
 //
 
 if ($id_article AND lire_meta("activer_statistiques") != "non" AND !$flag_preserver) {
-	include_local ("ecrire/inc_connect.php3");
+	include_ecrire("inc_connect.php3");
 	include_local ("inc-stats.php3");
 	if ($db_ok) ecrire_stats();
 }
@@ -320,10 +320,11 @@ if ($id_article AND lire_meta("activer_statistiques") != "non" AND !$flag_preser
 //
 
 if ($db_ok AND lire_meta("activer_syndic") != "non") {
-	include_local ("ecrire/inc_texte.php3");
-	include_local ("ecrire/inc_filtres.php3");
-	include_local ("ecrire/inc_sites.php3");
-	include_local ("ecrire/inc_index.php3");
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_filtres.php3");
+	include_ecrire("inc_sites.php3");
+	include_ecrire("inc_index.php3");
+
 	executer_une_syndication();
 	executer_une_indexation_syndic();
 }

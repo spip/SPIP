@@ -12,8 +12,8 @@ define("_ECRIRE_INC_VERSION", "1");
 // (utilise pour les modifs de la base de donnees)
 //
 
-$spip_version = 1.408; // version de la base
-$spip_version_affichee = "1.4 alpha 8"; // version de SPIP
+$spip_version = 1.409; // version de la base
+$spip_version_affichee = "1.4 alpha 9"; // version de SPIP
 
 
 //
