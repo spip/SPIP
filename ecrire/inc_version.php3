@@ -81,17 +81,17 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
 // et on nettoie les GET/POST/COOKIE le cas echeant
 //
 
-function magic_unquote($table, $http='') {
-	if (is_array($GLOBALS[$table])) {
-		foreach ($GLOBALS[$table] as $key => $val) {
+function magic_unquote($_table, $http='') {
+	if (is_array($GLOBALS[$_table])) {
+		foreach ($GLOBALS[$_table] as $key => $val) {
 			if (is_string($val))
-				$GLOBALS[$table][$key] = stripslashes($val);
+				$GLOBALS[$_table][$key] = stripslashes($val);
 		}
 	}
 	else {
 		// Si _GET n'existe pas, nettoyer HTTP_GET_VARS
 		if (!$http) // ne pas boucler
-			magic_unquote('HTTP'.$table.'_VARS', true);
+			magic_unquote('HTTP'.$_table.'_VARS', true);
 	}
 }
 
@@ -109,61 +109,84 @@ if (@get_magic_quotes_gpc()) {
 //
 // Attention pour compatibilite max $_GET n'est pas superglobale
 
-$INSECURE = array();
 
-function feed_globals($table, $insecure = true, $ignore_contexte = false) {
-	global $INSECURE;
-	$http_table_vars = 'HTTP'.$table.'_VARS';
+//
+// Une variable n'est pas "sure" si elle est arrivee par le client
+// Cette fonction sert a interdire tout hack de l'environnement
+// ou des variables de personnalisation
+//
+function is_insecure($var, $gpc='gpc') {
+
+	if (strpos('g',$gpc) !== false
+		AND isset($GLOBALS['_GET'][$var])
+		AND ($GLOBALS['_GET'][$var] === $GLOBALS[$var]))
+			return true;
+
+	if (strpos('p',$gpc) !== false
+		AND isset($GLOBALS['_POST'][$var])
+		AND ($GLOBALS['_POST'][$var] === $GLOBALS[$var]))
+			return true;
+
+	if (strpos('c',$gpc) !== false
+		AND isset($GLOBALS['_COOKIE'][$var])
+		AND ($GLOBALS['_COOKIE'][$var] === $GLOBALS[$var]))
+			return true;
+
+	return false;
+}
+
+
+function feed_globals($_table) {
+	$http_table_vars = 'HTTP'.$_table.'_VARS';
 
 	// identifier $GLOBALS[HTTP_GET_VARS] et $GLOBALS[_GET]
-	if (!is_array($GLOBALS[$table])) {
-		$GLOBALS[$table] = array();
+	if (!is_array($GLOBALS[$_table])) {
+		$GLOBALS[$_table] = array();
 		if (is_array($GLOBALS[$http_table_vars]))
-			$GLOBALS[$table] = & $GLOBALS[$http_table_vars];
+			$GLOBALS[$_table] = & $GLOBALS[$http_table_vars];
 	} else
-		$GLOBALS[$http_table_vars] = & $GLOBALS[$table];
+		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
 
-	// noter les valeurs passees en get, post ou cookie comme insecure
-	foreach ($GLOBALS[$table] as $key => $val) {
-		$GLOBALS[$key] = $val;
-		if ($insecure) $INSECURE[$key] = $val;
-	}
+	foreach ($GLOBALS[$_table] as $key => $val)
+		## securite
+		if (in_array($key,
+			array('REMOTE_USER', 'fond', 'delais'))
+		) {
+			die ("variable $_table"."[$key] interdite");
+			# NB: ici spip_log ne marche pas car _DIR_SESSIONS n'est pas encore definie !
+		}
+		else if (!isset($GLOBALS[$key])) {
 
-	// ignorer des cookies qui contiendraient du contexte
-	if ($ignore_contexte) {
-		foreach (array('id_parent', 'id_rubrique', 'id_article',
+			## a ignorer si elles sont envoyees par le client
+			if (!in_array($key,
+				array(
+		'debut_intertitre', 'fin_intertitre',
+		'ligne_horizontale',
+		'ouvre_ref', 'ferme_ref', 'ouvre_note',
+		'ferme_note', 'les_notes', 'compt_note',
+		'nombre_surligne', 'url_glossaire_externe',
+		'puce', 'puce_rtl'
+				))
+
+			## a ignorer dans le cookie
+			AND ($_table <> '_COOKIE' OR
+			!in_array($key,
+				array(
+		'id_parent', 'id_rubrique', 'id_article',
 		'id_auteur', 'id_breve', 'id_forum', 'id_secteur',
 		'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe',
-		'id_document', 'date', 'lang') as $key)
-			if (isset($GLOBALS[$key]))
-				unset ($GLOBALS[$key]);
-	}
-}
-
-feed_globals('_COOKIE', true, true);
-feed_globals('_GET');
-feed_globals('_POST');
-feed_globals('_SERVER', false);
-
-
-//
-// Avec register_globals a Off sous PHP4, il faut utiliser
-// la nouvelle variable HTTP_POST_FILES pour les fichiers uploades
-// (pas valable sous PHP3...)
-//
-
-function feed_post_files($table) {
-	global $INSECURE;
-	if (isset($GLOBALS[$table]) AND is_array($GLOBALS[$table])) {
-		reset($GLOBALS[$table]);
-		while (list($key, $val) = each($GLOBALS[$table])) {
-			$GLOBALS[$key] = $INSECURE[$key] = $val['tmp_name'];
-			$GLOBALS[$key.'_name'] = $INSECURE[$key.'_name'] = $val['name'];
+		'id_document', 'date', 'lang'
+				)
+			)))
+				$GLOBALS[$key] = $val;
 		}
-	}
 }
 
-feed_post_files('HTTP_POST_FILES');
+feed_globals('_SERVER');
+feed_globals('_POST');
+feed_globals('_GET');
+feed_globals('_COOKIE');
+# note : les $_FILE sont geres dans spip_image.php3
 
 
 //
@@ -493,8 +516,6 @@ function spip_log($message, $logname='spip') {
 //
 
 // Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-if (!$REQUEST_URI)
-	$REQUEST_URI = $_SERVER['REQUEST_URI'];
 if (!$REQUEST_URI)
 	$REQUEST_URI = $PHP_SELF;
 if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))

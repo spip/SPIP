@@ -104,13 +104,12 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 		$ret .= "<div class='cadre-$style'$style_cadre>";
 	}
 
-	//$ret = "<div class='cadre-$style' style='$style_haut'>";
 	$ret .= "<div style='position: relative;'>";
 
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$ret .= "<div style='position: absolute; top: -16px; $spip_lang_left: 10px;'>";
 		if ($fonction) {
-			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px;");
+			$ret .= "<div " . http_style_background($icone, "no-repeat; padding: 0px; margin: 0px");
 			$ret .= http_img_pack($fonction, "", "");
 			$ret .= "</div>";
 		}
@@ -1280,7 +1279,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 					$heure_fin = "...";
 
 				$s = "<div " . 
-				  http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px;") .
+				  http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px") .
 				  "><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
 			} else {
 				$s = "<font color='#999999'>$s</font>";

@@ -43,6 +43,7 @@ function vignette_previsu_ou_par_defaut($fichier, $extension) {
 	// ou essayer de creer une previsu si permis
 
 	$formats = ','.lire_meta('formats_graphiques').',';
+
 	if ((strpos($formats, ",$extension,") === false) || (lire_meta("creer_preview") != 'oui')) {
 		return vignette_par_defaut($extension ? $extension : 'txt', true);
 	} else {
@@ -50,12 +51,12 @@ function vignette_previsu_ou_par_defaut($fichier, $extension) {
 	}
 }
 
-function document_et_vignette($url, $document) 
-{
+function document_et_vignette($url, $document) {
 	eregi('\.([a-z0-9]+)$', $document, $regs);
 	list($fichier, $largeur, $hauteur) = 
 		vignette_previsu_ou_par_defaut($document, $regs[1]);
-	return "<a href='$url'><img src='$fichier' border='0'></a>";
+	$doc = "<a href='$url'><img src='$fichier' border='0' /></a>";
+	return $doc;
 }
 
 //
@@ -248,7 +249,8 @@ function integre_image($id_document, $align, $type_aff) {
 		}
 
 		if (!$url_fichier_vignette) 
-		  list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_previsu_ou_par_defaut($fichier, $extension);
+			list($url_fichier_vignette, $largeur_vignette, $hauteur_vignette)
+			= vignette_previsu_ou_par_defaut($fichier, $extension);
 
 		if ($url_fichier_vignette) {
 			$vignette = "<img src='$url_fichier_vignette' border='0'";
@@ -380,18 +382,6 @@ function texte_upload_manuel($dir, $inclus = '') {
 
 function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document) {
 	global $connect_id_auteur;
-#  spip_log("texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $fichier_document)");
-/*	if ($largeur_vignette > 120) {
-		$rapport = 120.0 / $largeur_vignette;
-		$largeur_vignette = 120;
-		$hauteur_vignette = ceil($hauteur_vignette * $rapport);
-	}
-	if ($hauteur_vignette > 110) {
-		$rapport = 110.0 / $hauteur_vignette;
-		$hauteur_vignette = 110;
-		$largeur_vignette = ceil($largeur_vignette * $rapport);
-	}
-*/
 	include_ecrire("inc_logos.php3");
 
 	$taille = image_ratio($largeur_vignette, $hauteur_vignette, 120, 110);
@@ -402,7 +392,7 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 	$image = "<img src='../spip_image_reduite.php3?img=$fichier_vignette&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' />";
 	
 
-# ça ne marche pas toujours car fichier_vignette peut etre n'importe quoi
+# Ca ne marche pas toujours car fichier_vignette peut etre n'importe quoi
 #	$fid = "?date=".@filemtime($fichier_vignette);
 
 	if ($fichier_document)
@@ -416,9 +406,10 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload($link, $redirect='', $intitule, $inclus = '', $afficher_texte_ftp = true, $forcer_document = false, $dossier_complet = false) {
+function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_multiple = true, $forcer_document = false) {
 	global $clean_link, $connect_statut, $connect_toutes_rubriques, $options;
-	static $num_form = 0;
+	static $num_form = 0; $num_form ++;
+
 
 	if (!$redirect)
 		$redirect = $clean_link->getUrl();
@@ -427,37 +418,53 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $afficher
 	if ($forcer_document)
 		$link->addVar('forcer_document', 'oui');
 
-	echo $link->getForm('POST', 'docs', 'multipart/form-data');
+	echo $link->getForm('POST', '', 'multipart/form-data');
+	echo "<div>";
+
+	// bouton permettant de telecharger 10 images ou docs a la fois
+	$envoi_multiple &= ($options == "avancees");
+	if ($envoi_multiple)
+		echo bouton_block_invisible("upload$num_form,ftp$num_form");
 
 	if (tester_upload()) {
-		echo "<div>$intitule</div>";
-		echo "<div><input name='image' type='File' style='font-size: 10px;' class='forml' size='15'></div>\n";
-		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div>\n";
+		echo "$intitule</div>";
+
+		// un modele de selecteur de fichier
+		$upload = "<div><input name='fichier*' type='File' style='font-size: 10px;' class='forml' size='15'></div>";
+
+		// afficher le premier
+		echo str_replace('*', '1', $upload);
+
+		// afficher les suivants, masques
+		if ($envoi_multiple) {
+			echo debut_block_invisible ("upload$num_form");
+			for ($i=2; $i<=10; $i++)
+				echo str_replace('*', "$i", $upload);
+			echo fin_block();
+		}
+
+		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok_post' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div>\n<div>";
 	}
 
-	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques AND $options == "avancees") {
+	echo "</div>\n";
+
+	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques
+	AND $envoi_multiple) {
 		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
-		if ($texte_upload AND $afficher_texte_ftp) {
+		if ($texte_upload) {
+			echo debut_block_invisible("ftp$num_form");
 			echo "<p><div style='color: #505050;'>";
 			if ($forcer_document) echo '<input type="hidden" name="forcer_document" value="oui">';
 			echo "\n"._T('info_selectionner_fichier')."&nbsp;:<br />";
 			echo "\n<select name='image2' size='1' class='fondl'>";
 			echo $texte_upload;
 			echo "\n</select>";
-			echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
+			echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok_ftp' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
 
-			/*
-			if ($afficher_texte_ftp){
-				if ($dossier_complet){
-					echo "\n<p><b>"._T('info_portfolio_automatique')."</b>";
-					echo "\n<br />"._T('info_installer_documents');
-					echo "\n<div align='".$GLOBALS['spip_lang_right']."'><input name='dossier_complet' type='Submit' value='"._T('info_installer_tous_documents')."' class='fondo'></div>";
-				}
-			}
-			*/
 			echo "</div>\n";
+			echo fin_block();
 		}
-		else if ($afficher_texte_ftp) {
+		else {
 			echo "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
 			echo _T('info_installer_ftp').aide("ins_upload");
 			echo "</div>";
@@ -478,9 +485,9 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	global $id_doublons, $options;
 	global $spip_lang_left, $spip_lang_right;
 
-	$image_link = new Link('../spip_image.php3');
-	if ($id_article) $image_link->addVar('id_article', $id_article);
-	if ($type == "rubrique") $image_link->addVar('modifier_rubrique','oui');
+	$image_url = '../spip_image.php3?';
+	if ($id_article) $image_url .= '&id_article='.$id_article;
+	if ($type == "rubrique") $image_url .= '&modifier_rubrique=oui';
 
 	if ($GLOBALS['id_document'] > 0) {
 		$id_document_deplie = $GLOBALS['id_document'];
@@ -532,7 +539,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$style = "border-left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;";
 			if ($case == 2) $style .= " border-right: 1px solid $couleur_claire;";
 			echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
-			//afficher_horizontal_document($id_document, $image_link, $redirect_url, $flag_modif);
+
 			
 			echo "<div style='text-align:center;'>";
 			
@@ -549,35 +556,36 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			}
 
 			if ($flag_modif) {
-				if ($id_vignette == 0) {
-					echo "<div style='float: $spip_lang_left;'>";		
-					echo bouton_block_invisible("gerer_vignette$id_document");	
-					echo "</div>";
-					$vignette_perso = false;
 
-				} else if (!ereg($format, lire_meta('formats_graphiques')))  {
-					$link = $image_link;
-					$link->addVar('redirect', $redirect_url);
-					$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
+				echo "<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
+
+				if (! $id_vignette) {
+
+					echo bouton_block_invisible("gerer_vignette$id_document", 'plus.gif')."<br />\n";
+					$vignette_perso = false;
+				}
+				else {
+					$vignette_perso = true;
+					$link = new Link ($image_url);
+					$link->addVar('redirect',
+						$redirect_url.'&id_document='.$id_document);
+					$link->addVar('hash',
+						calculer_action_auteur("supp_doc ".$id_vignette));
 					$link->addVar('hash_id_auteur', $connect_id_auteur);
 					$link->addVar('doc_supp', $id_vignette);
 					
-					echo "<div style='float: $spip_lang_left'>";		
-					echo "<a href='".$link->getUrl("porfolio")."' title=\""._T('info_supprimer_vignette')."\" class='bouton_rotation'>" . http_img_pack('croix-rouge.gif', "", "border='0'") ."</a>";	
-					echo "</div>";
-					$vignette_perso = true;
-				
+					echo http_href_img($link->getUrl("portfolio"), 'croix-rouge.gif', "border='0'", _T('info_supprimer_vignette'), '', 'bouton_rotation');
+					echo "<br />";
 				}
-				
-			
-			
-			
-				$process = lire_meta('image_process');
-				 // imagick (php4-imagemagick)
-				 if ($process == 'imagick' OR $process == 'gd2' OR $process == 'convert') {
-					if (ereg($format, lire_meta('formats_graphiques'))) {
-						echo "<div class='verdana1' style='float: right; text-align:$spip_lang_right;'>";		
-						$link_rot = $image_link;
+
+#				echo "</div>\n";
+#				echo "<div class='verdana1' style='float: $spip_lang_right; text-align:$spip_lang_right;'>";
+
+				if (ereg($format, lire_meta('formats_graphiques'))) {
+					$process = lire_meta('image_process');
+					if ($process == 'imagick' OR $process == 'gd2'
+					OR $process == 'convert') {
+						$link_rot = new Link ($image_url);
 						$link_rot->addVar('redirect', $redirect_url);
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
 						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
@@ -586,7 +594,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('var_rot', -90);
 						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-gauche.gif', "border='0'", "tourner-gauche", '', 'bouton_rotation');
 						echo "<br />";
-						$link_rot = $image_link;
+						$link_rot = new Link ($image_url);;
 						$link_rot->addVar('redirect', $redirect_url);
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
 						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
@@ -596,7 +604,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-droite.gif', "border='0'", "tourner-droite", '', 'bouton_rotation');
 						echo "<br />";
 		
-						$link_rot = $image_link;
+						$link_rot = new Link ($image_url);;
 						$link_rot->addVar('redirect', $redirect_url);
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
 						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
@@ -604,42 +612,56 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('vignette_aff', $id_document);
 						$link_rot->addVar('var_rot', 180);
 						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-180.gif', "border='0'", "tourner-180", '', 'bouton_rotation');
-						echo "</div>";
 					}
 				}
+
+				echo "</div>\n";
 			}
+
 			//
 			// Recuperer la vignette
 			//
-			if ($id_vignette >0) {
-				$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
-				if ($vignette) {
-					$fichier_vignette = generer_url_document($id_vignette);
-					$largeur_vignette = $vignette['largeur'];
-					$hauteur_vignette = $vignette['hauteur'];
-					$taille_vignette = $vignette['taille'];
+			if ($id_vignette AND
+			$vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"))) {
+				$fichier_vignette = generer_url_document($id_vignette);
+				$largeur_vignette = $vignette['largeur'];
+				$hauteur_vignette = $vignette['hauteur'];
+				$taille_vignette = $vignette['taille'];
 			
-					echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
-				}
+				echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
 			}
-			else { 
+			else {
 				echo document_et_vignette($url, $fichier); 
 			}
 			echo "</div>";
 			
 			if ($flag_modif) {
-					
 				if (!$vignette_perso) {
 						echo debut_block_invisible("gerer_vignette$id_document");
 						echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px; text-align: left; background-color: white;'>";
-						$link = $image_link;
-#						$link->addVar('redirect', $redirect_url);
+
+					// lien "creation automatique"
+					if ($format) {
+						$link = new Link($image_url);
+						$link->addvar('creer_vignette', 'oui');
+						$link->addVar('redirect',
+							$redirect_url.'&id_document='.$id_document);
+						$link->addvar('vignette', $document['fichier']);
+						$link->addVar('hash',
+						calculer_action_auteur("vign ".$document['fichier']));
+						$link->addVar('hash_id_auteur', $connect_id_auteur);
+						echo "<a href='".$link->getUrl("portfolio")."'>"._L('cr&eacute;ation automatique de la vignette')."</a>\n<hr />\n";
+					}
+
+						// lien "upload vignette"
+						$link = new Link ($image_url);
 						$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 						$link->addVar('hash_id_auteur', $connect_id_auteur);
 						$link->addVar('ajout_doc', 'oui');
 						$link->addVar('id_document', $id_document);
-						$link->addVar('mode', 'vignette');	
-						afficher_upload($link, $redirect_url, _T('info_remplacer_vignette'), 'image', false);
+						$link->addVar('mode', 'vignette');
+						afficher_upload($link, $redirect_url,
+							_T('info_remplacer_vignette'), 'image', false);
 						echo "</div>";
 						echo fin_block();
 				}
@@ -649,7 +671,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 			if ($flag_modif) {
 				if ($flag_deplier) $triangle = bouton_block_visible("port$id_document");
-				else $triangle =  bouton_block_invisible("port$id_document");
+				else $triangle = bouton_block_invisible("port$id_document");
 			}
 			if (strlen($titre) > 0) {
 				echo "<div class='verdana2'><b>$triangle".propre($titre)."</b></div>";
@@ -720,7 +742,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	
 
 				
-				$link_supp = $image_link;
+				$link_supp = new Link ($image_url);
 				$link_supp->addVar('redirect', $redirect_url);
 				$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 				$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
@@ -792,9 +814,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$style = "border-left: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;";
 			if ($case == 1) $style .= " border-right: 1px solid #aaaaaa;";
 			echo "<td width='50%' style='text-align: $spip_lang_left; $style' valign='top'>";
-			//afficher_horizontal_document($id_document, $image_link, $redirect_url, $flag_modif);
-			
-			
 		
 			$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
 			if ($type_doc = @spip_fetch_array($result))	{
@@ -811,7 +830,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			
 		
 			if ($id_vignette > 0) {
-					$link = $image_link;
+					$link = new Link ($image_url);
 					$link->addVar('redirect', $redirect_url);
 					$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 					$link->addVar('hash_id_auteur', $connect_id_auteur);
@@ -834,7 +853,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</div>";
 			}
 			else {
-				echo "<div style='float: $spip_lang_left;'>".bouton_block_invisible("gerer_vignette$id_document")."</div>";
+				echo "<div style='float: $spip_lang_left;'>".bouton_block_invisible("gerer_vignette$id_document", 'plus.gif')."</div>";
 				echo "<div style='text-align: center;'>",
 				document_et_vignette($url, $fichier), 
 				"</div>";
@@ -842,7 +861,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				if ($flag_modif) {
 							echo debut_block_invisible("gerer_vignette$id_document");
 							echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px; text-align: left; background-color: white;'>";
-							$link = $image_link;
+							$link = new Link ($image_url);
 							$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 							$link->addVar('hash_id_auteur', $connect_id_auteur);
 							$link->addVar('ajout_doc', 'oui');
@@ -932,7 +951,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "</div>";
 				
 				
-				$link_supp = $image_link;
+				$link_supp = new Link ($image_url);
 				$link_supp->addVar('redirect', $redirect_url);
 				$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 				$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
@@ -971,13 +990,13 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		
-		$link = $image_link;
+		$link = new Link ($image_url);
 		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('ajout_doc', 'oui');
 		$link->addVar('type', $type);
 
-		afficher_upload($link, $redirect_url, "", '', true, true, true);
+		afficher_upload($link, $redirect_url, _T('info_telecharger_ordinateur'), '', true, true);
 		
 		echo fin_cadre_relief();
 		
@@ -999,6 +1018,8 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 	global $options, $id_document_deplie;
+
+	$image_url = $image_link->geturl();
 
 	if ($GLOBALS['id_document']) $id_document_deplie = $GLOBALS['id_document'];
 	if ($id_document == $id_document_deplie) $flag_deplie = true;
@@ -1067,7 +1088,8 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<font size='2'>\n";
 		$hash = calculer_action_auteur("supp_doc ".$id_vignette);
 
-		$link = $image_link;
+
+		$link = new Link ($image_url);
 		$link->addVar('redirect', $redirect_url);
 		$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_vignette));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
@@ -1097,7 +1119,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<div align='left'>\n";
 		$hash = calculer_action_auteur("ajout_doc");
 
-		$link = $image_link;
+		$link = new Link ($image_url);
 		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);
 		$link->addVar('ajout_doc', 'oui');
@@ -1194,7 +1216,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "</form>";
 	}
 
-	$link_supp = $image_link;
+	$link_supp = new Link ($image_url);
 	$link_supp->addVar('redirect', $redirect_url);
 	$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 	$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
@@ -1227,12 +1249,48 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	global $couleur_foncee, $couleur_claire, $options;
 	global $clean_link;
 
-	$image_link = new Link('../spip_image.php3');
-	if ($id_article) $image_link->addVar('id_article', $id_article);
+	$image_url = '../spip_image.php3';
+	if ($id_article) $image_url .= '?id_article='.$id_article;
 
 	$id_doc_actif = $id_document;
 
-	// Ne pas afficher vignettes en tant qu'images sans docs
+	# HACK!!! simule une mise en page pour affecter la globale id_doublons
+	# referencee dans afficher_case_document appelee plus loin :
+	# utile pour un affichage differencie des image "libres" et des images
+	# integrees via <imgXX|left> dans le texte
+	propre($GLOBALS['descriptif']." ".$GLOBALS['texte']." ".$GLOBALS['chapo']);
+
+
+	/// Ajouter nouvelle image
+	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
+	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
+		$link = new Link ($image_url);
+		$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+		$link->addVar('hash_id_auteur', $connect_id_auteur);
+		$link->addVar('ajout_doc', 'oui');
+		$link->addVar('mode', 'vignette');
+		$link->addVar('type', $type);
+	afficher_upload($link, $redirect_url, _T('info_telecharger'));
+	fin_cadre_relief();
+
+	/// Ajouter nouveau document
+	if ($type == "article" AND lire_meta("documents_$type") != 'non') {
+		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
+
+		debut_cadre_couleur("doc-24.gif", false, "creer.gif", $titre_cadre);
+			$link = new Link ($image_url);
+			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
+			$link->addVar('hash_id_auteur', $connect_id_auteur);
+			$link->addVar('ajout_doc', 'oui');
+			$link->addVar('mode', 'document');
+			$link->addVar('type', $type);
+		afficher_upload($link, $redirect_url,
+			_T('info_telecharger_ordinateur'));
+		fin_cadre_couleur();
+	}
+
+	echo "<p /><p />\n";
+
 	//// Documents associes
 	$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_".$type."=$id_article AND l.id_document=docs.id_document ".
@@ -1243,13 +1301,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	while ($row = spip_fetch_array($res))
 		$documents_lies[]= $row['id_document'];
 
-	if ($documents_lies){
-		global $descriptif, $texte, $chapo;
-
-# HACK!!! simule une mise en page pour affecter la globale id_doublons
-# referencee dans affiche_cas_document appelee plus loin
-		$pour_documents_doublons = propre("$descriptif$texte$chapo");
-
+	if (count($documents_lies)) {
 		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
 			"WHERE id_document in (".join(',', $documents_lies).")");
 		while ($v = spip_fetch_array($res))
@@ -1267,57 +1319,22 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 
 	$images_liees = spip_query($query);
 
-	/// Ajouter nouvelle image
-	echo "\n<p>";
-	//debut_cadre_relief("image-24.gif");
+	echo "\n<p />";
 	while ($document = spip_fetch_array($images_liees)) {
 		$id_document = $document['id_document'];
-		afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
+		afficher_case_document($id_document, $image_url, $redirect_url, $id_doc_actif == $id_document);
 	}
 
-	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
-	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
 
-
-	$link = $image_link;
-	$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-	$link->addVar('hash_id_auteur', $connect_id_auteur);
-	$link->addVar('ajout_doc', 'oui');
-	$link->addVar('mode', 'vignette');
-	$link->addVar('type', $type);
-
-	afficher_upload($link, $redirect_url, _T('info_telecharger'));
-	fin_cadre_relief();
-
-	//fin_cadre_relief();
-
+	// Afficher les documents lies
 	if ($type == "article") {
 		echo "<p>&nbsp;<p>";
 		if ($documents_lies) {
 			reset($documents_lies);
 			while (list(, $id_document) = each($documents_lies)) {
-				afficher_case_document($id_document, $image_link, $redirect_url, $id_doc_actif == $id_document);
+				afficher_case_document($id_document, $image_url, $redirect_url, $id_doc_actif == $id_document);
 				echo "<p />\n";
 			}
-		}
-
-		if (lire_meta("documents_$type") != 'non') {
-			/// Ajouter nouveau document
-			
-			$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
-
-			debut_cadre_couleur("doc-24.gif", false, "creer.gif", $titre_cadre);
-
-			$link = $image_link;
-			$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('ajout_doc', 'oui');
-			$link->addVar('mode', 'document');
-			$link->addVar('type', $type);
-
-			afficher_upload($link, $redirect_url, _T('info_telecharger_ordinateur'));
-
-			fin_cadre_couleur();
 		}
 	}
 }
@@ -1327,7 +1344,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 // Afficher un document sous forme de ligne depliable
 //
 
-function afficher_case_document($id_document, $image_link, $redirect_url = "", $deplier = false) {
+function afficher_case_document($id_document, $image_url, $redirect_url = "", $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
@@ -1482,7 +1499,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "</div>";
 		echo "</form>";
 
-		$link_supp = $image_link;
+		$link_supp = new Link ($image_url);
 		$link_supp->addVar('redirect', $redirect_url);
 		$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 		$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
@@ -1505,9 +1522,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		$block = "image $id_document";
 		$titre_cadre = typo($titre).typo($titre_fichier);
 	
-		//echo "<div style='border: 1px dashed #aaaaaa; padding: 4px; background-color: #f0f0f0;'>\n";
 		debut_cadre_relief("image-24.gif", false, "", $titre_cadre);
-
 
 		echo "<div style='float: $spip_lang_left;'>";
 		if ($flag_deplie) echo bouton_block_visible("$block");
@@ -1579,7 +1594,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		echo "</form>";
 
 		echo "<center>";
-		$link = $image_link;
+		$link = new Link ($image_url);
 		$link->addVar('redirect', $redirect_url);
 		$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
 		$link->addVar('hash_id_auteur', $connect_id_auteur);

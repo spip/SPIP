@@ -29,7 +29,7 @@ function acces_restreint_rubrique($id_rubrique) {
 
 
 function auth() {
-	global $INSECURE, $_POST, $_GET, $_COOKIE;
+	global $_POST, $_GET, $_COOKIE;
 	global $REMOTE_USER, $PHP_AUTH_USER, $PHP_AUTH_PW;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
 
@@ -95,7 +95,8 @@ function auth() {
 	}
 
 	// Authentification .htaccess
-	else if ($REMOTE_USER && !$INSECURE['REMOTE_USER'] && !$ignore_remote_user) {
+	else if ($REMOTE_USER && !is_insecure('REMOTE_USER')
+	&& !$ignore_remote_user) {
 		$auth_login = $REMOTE_USER;
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
