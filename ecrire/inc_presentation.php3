@@ -1160,6 +1160,8 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 }
 
 
+
+
 function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
 	global $spip_display;
 	global $menu_accesskey, $compteur_survol;
@@ -1182,8 +1184,10 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($aide AND $spip_display != 3) {
 		$largeur += 50;
-		$texte .= aide($aide);
+		//$texte .= aide($aide);
 	}
+	if ($spip_display != 3 AND strlen($texte)>16) $largeur += 20;
+	
 	if ($largeur) $width = "width='$largeur'";
 
 	if (!$menu_accesskey) $menu_accesskey = 1;
@@ -1204,12 +1208,14 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 	if ($spip_display != 1) {
 		echo "<td class='cellule36' width='$largeur'>$a_href<img src='img_pack/$fond'$alt$title>";
+			if ($aide) echo aide($aide)." ";
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
 		}
 	}
 	else echo "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
-	echo "</a></td>\n";
+	echo "</a>";	
+	echo "</td>\n";
 }
 
 
