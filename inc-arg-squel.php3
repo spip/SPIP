@@ -243,13 +243,13 @@ function calculer_params($type, $params, $idb, &$boucles)
 	if ($col_table) $col = "$col_table.$col";
 
 	$vu = 0;
-	if (($op == '=') && ($boucle->where))
+	if (($op == '=') && (!$match[4]) && ($boucle->where))
 	  {
 	    // repe'rer un parame`tre re'pe'te' comme {id_mot=1}{id_mot=2}
 	    //  pour cre'er une sous-requete
 	      foreach ($boucle->where as $k => $v)
 	      {
-		if (ereg(" *$col *(=|IN) *['\(](.*)['\)]",$v, $m)) {
+		if (ereg("^ *$col *(=|IN) *['\(](.*)['\)]",$v, $m)) {
 		  $boucle->where[$k] = "$col IN ($m[2],$val)";
 		  // espe'rons que c'est le meme !
 		  $boucle->sous_requete = $col;

@@ -38,7 +38,7 @@ function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id)
   $q = (!$sous ? 
 	("\nSELECT\t". join(",\n\t", $s) . $q) :
 	("\nSELECT\tS_" . join(",\n\tS_", $s) .
-	 "\nFROM ($s,\n\tCOUNT(" . $sous .
+	 "\nFROM\t(" . join(",\n\t", $s) . " ,\n\tCOUNT(" . $sous .
 	 ") AS compteur $q)\n AS S_$table\nWHERE compteur= " . 
 	 $cpt));
 #  spip_log("$id: $q");
