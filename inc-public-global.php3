@@ -25,9 +25,11 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	if (!$use_cache) {
 		include_local("inc-calcul.php3");
 		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
+		$timer_a = time(); $timer_b = microtime();
 		$page = calculer_page($fond, $contexte_inclus);
 		if ($page) {
-			spip_log("calcul($delais): $chemin_cache");
+			$timer = ceil(1000*(time()-$timer_a + microtime() - $timer_b));
+			spip_log("inclus ${timer}ms: $chemin_cache (${delais}s)");
 			ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
@@ -111,9 +113,11 @@ if (!$use_cache) {
 
 	if ($calculer_cache) {
 		include_local ("inc-calcul.php3");
+		$timer_a = time(); $timer_b = microtime();
 		$page = calculer_page_globale($fond);
 		if ($page) {
-			spip_log("calcul($delais): $chemin_cache");
+			$timer = ceil(1000*(time()-$timer_a + microtime() - $timer_b));
+			spip_log("calcul ${timer}ms: $chemin_cache (${delais}s)");
 			ecrire_fichier_cache($chemin_cache, $page);
 		}
 	}
