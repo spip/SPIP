@@ -33,7 +33,7 @@
 	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3"><:plan_du_site:></a>
+	<a href="plan.php3"><:plan_site:></a>
 	</li>
 	<li class="menu-item">
 	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
@@ -71,11 +71,11 @@
 <!-- Menu de navigation mots-cles : les autres groupes avec un lien sur le premier mot du groupe -->
 
 <B_groupes_freres>
-<h2 class="structure"><:autres_groupes_de_mots_clefs:></h2>
+<h2 class="structure"><:autres_groupes_mots_clefs:></h2>
 
 <div class="menu">
 <div class="divers">
-<div class="menu-titre"><:autres_groupes_de_mots_clefs:></div>
+<div class="menu-titre"><:autres_groupes_mots_clefs:></div>
 	<ul class="menu-liste">
 <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
 <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
