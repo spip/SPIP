@@ -13,6 +13,7 @@
 
 include_ecrire('inc_meta.php3');
 include_ecrire('inc_forum.php3');
+include_ecrire('inc_filtres.php3');
 include_ecrire("inc_abstract_sql.php3");
 include_local(_FILE_CONNECT);
 
@@ -173,12 +174,12 @@ function enregistre_forum() {
 	id_auteur = $id_auteur,
 	id_thread = $id_thread,
 	date_heure = NOW(),
-	titre = '".addslashes($titre)."',
-	texte = '".addslashes($texte)."',
-	nom_site = '".addslashes($nom_site_forum)."',
-	url_site = '".addslashes($url_site)."',
-	auteur = '".addslashes($auteur)."',
-	email_auteur = '".addslashes($email_auteur)."',
+	titre = '".addslashes(corriger_caracteres($titre))."',
+	texte = '".addslashes(corriger_caracteres($texte))."',
+	nom_site = '".addslashes(corriger_caracteres($nom_site_forum))."',
+	url_site = '".addslashes(corriger_caracteres($url_site))."',
+	auteur = '".addslashes(corriger_caracteres($auteur))."',
+	email_auteur = '".addslashes(corriger_caracteres($email_auteur))."',
 	ip = '$REMOTE_ADDR',
 	statut = '$statut'
 	WHERE id_forum = $id_message
