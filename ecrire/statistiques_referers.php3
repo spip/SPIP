@@ -54,17 +54,29 @@ while ($row = @spip_fetch_array($result)) {
 	$domaine = $row['domaine'];
 	$count = $row['visites_jour'];
 
-	echo "\n<li><b>$domaine</b> - ";
+	echo "\n<li> ";
 	if ($count > 5) echo "<font color='red'>$count "._T('info_visites')." </font>";
 	else if ($count > 1) echo "$count "._T('info_visites')." ";
 	else echo "<font color='#999999'>$count "._T('info_visite')." </font>";
 
 	$refs = spip_query("SELECT referer, visites_jour FROM spip_referers WHERE domaine = '$domaine' AND (visites_jour > 0) ORDER BY visites_jour DESC LIMIT 0,30");
-	while ($row_ref = spip_fetch_array($refs)) {
-		$referer = $row_ref['referer'];
-		echo "<br />".stats_show_keywords($referer, $referer);
+
+	if (spip_num_rows($refs) > 1) {
+		echo "<b>$domaine</b>";
+		echo "<br />";
+		while ($row_ref = spip_fetch_array($refs)) {
+			$referer = $row_ref['referer'];
+			echo stats_show_keywords($referer, $referer)."<br />";
+		}
 	}
-	echo "</li><hr />\n";
+	else {
+		while ($row_ref = spip_fetch_array($refs)) {
+			$referer = $row_ref['referer'];
+			echo stats_show_keywords($referer, $referer)."<br />";
+		}
+	}
+
+	echo "</li><br />\n";
 }
 
 if (spip_num_rows($result) == 800)

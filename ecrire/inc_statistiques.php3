@@ -78,7 +78,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
 	{
-		if ($found = ($host == $arr_engines[$cnt][2]))
+		if ($found = (ereg($arr_engines[$cnt][2], $host)))
 		{
 			$kw_referer_host = $arr_engines[$cnt][0];
 			$keywords = ereg('=', $arr_engines[$cnt][1])
@@ -94,7 +94,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 		}
 	}
 
-	$nom_url = strip_tags($kw_referer_host);
+	$nom_url = ereg_replace("http://","", strip_tags($kw_referer_host));
 	if (strlen($nom_url) > 50) $nom_url = substr($nom_url, 0, 48) . "...";
 
 	$buffer = "&nbsp;<a href='".strip_tags($kw_referer)."'>".$nom_url."</a>\n";
