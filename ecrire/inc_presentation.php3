@@ -72,6 +72,7 @@ function bouton_imessage($destinataire, $row = '') {
 
 function debut_cadre($style, $icone, $fonction) {
 	global $spip_display;
+	static $accesskey = 97; // a
 
 	if ($GLOBALS['spip_lang_rtl']) {
 		$g = 'd';
@@ -81,6 +82,10 @@ function debut_cadre($style, $icone, $fonction) {
 		$g = 'g';
 		$d = 'd';
 	}
+
+	// accesskey pour accessibilite espace prive
+	$accesskey_c = chr($accesskey++);
+	$retour_aff .= "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
 
 	if ($spip_display != 1){
 		if (strlen($icone)<3) $icone = "rien.gif";
