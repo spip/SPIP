@@ -98,12 +98,11 @@ if ($connect_statut == "0minirezo") {
  		$result_forum = spip_query($query_forum);
 	}
 
-	// Invalider les articles correspondant
+	// Invalider les pages ayant trait aux petitions
 	if ($id_signature = ($add_petition?$add_petition:$supp_petition)) {
 		include_ecrire('inc_invalideur.php3');
-		list ($id_article) = spip_fetch_array(spip_query("SELECT id_article
-		FROM spip_signatures WHERE id_signature=$id_signature"));
-		suivre_invalideur("id='id_article/$id_article'");
+		# list ($id_article) = spip_fetch_array(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id_signature"));
+		suivre_invalideur("id='petition/petition'");
 	}
 
 	if (!$debut) $debut = 0;

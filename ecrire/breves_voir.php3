@@ -89,6 +89,12 @@ if ($titre AND $modifier_breve) {
 
 	$query = "UPDATE spip_breves SET titre='$titre', texte='$texte', lien_titre='$lien_titre', lien_url='$lien_url', statut='$statut', id_rubrique='$id_rubrique' $add_extra WHERE id_breve=$id_breve";
 	$result = spip_query($query);
+
+	// invalider et reindexer
+	if ($invalider_caches) {
+		include_ecrire ("inc_invalideur.php3");
+		suivre_invalideur("id='id_breve/$id_breve'");
+	}
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
 		indexer_breve($id_breve);

@@ -20,7 +20,7 @@ function boucle_DEFAUT($id_boucle, &$boucles) {
 
 
 //
-// <BOUCLE(BOUCLE)> boucle dite récursive
+// <BOUCLE(BOUCLE)> boucle dite recursive
 //
 function boucle_BOUCLE_dist($id_boucle, &$boucles) {
 

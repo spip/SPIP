@@ -168,7 +168,13 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
 	}
 	calculer_rubriques();
+
+	// invalider et reindexer
 	if ($statut == 'publie') {
+		if ($invalider_caches) {
+			include_ecrire ("inc_invalideur.php3");
+			suivre_invalideur("id='id_syndic/$id_syndic'");
+		}
 		if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire ("inc_index.php3");
 			indexer_syndic($id_syndic);

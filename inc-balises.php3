@@ -510,7 +510,7 @@ function balise_PETITION_dist ($p) {
 			$p->boucles[$nom]->type_requete .
 			"','" .
 			$p->boucles[$nom]->sql_serveur .
-			"')";
+			"', \$Cache)";
 	$p->statut = 'php';
 	return $p;
 }
@@ -738,7 +738,7 @@ function balise_FORMULAIRE_SIGNATURE_dist($p) {
 			$p->boucles[$nom]->type_requete .
 			"','" .
 			$p->boucles[$nom]->sql_serveur .
-			"')";
+			"', \$Cache)";
 
 	$p->code = '(!($petition = '.
 		$code .

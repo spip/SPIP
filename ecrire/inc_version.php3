@@ -235,10 +235,10 @@ $ignore_auth_http = false;
 $ignore_remote_user = false;
 
 // Faut-il "invalider" les caches quand on depublie ou modifie un article ?
-# en faire une option dans l'interface de configuration ?
+// (experimental)
 # NB: cette option ne concerne que articles,breves,rubriques et site
-# car les forums sont toujours invalidants.
-$invalider_caches = true;
+# car les forums et petitions sont toujours invalidants.
+$invalider_caches = false;
 
 // Quota : la variable $quota_cache, si elle est > 0, indique la taille
 // totale maximale desiree des fichiers contenus dans le CACHE/ ;
