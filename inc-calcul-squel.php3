@@ -478,12 +478,12 @@ function parser_boucle($texte, $id_parent) {
 				break;
 
 			case 'forums':
-				$forums_publics = lire_meta("forums_publics");
+/*				$forums_publics = lire_meta("forums_publics"); */
 				// Par defaut, selectionner uniquement les forums sans pere
 				if (!$plat) $req_where[] = "$table.id_parent=0";
-				if ($forums_publics == 'non') {
+/*				if ($forums_publics == 'non') {
 					$req_where[] = "1=2";
-				}
+				} */
 				$req_where[] = "$table.statut='publie'";
 				break;
 
@@ -1415,7 +1415,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$request_uri = $GLOBALS["REQUEST_URI"];
 		$http_get_vars = $GLOBALS["HTTP_GET_VARS"];
 		$forums_publics = lire_meta("forums_publics");
-		if ($forums_publics != "non" AND $contexte["accepter_forum"] != "non") {
+		if ($forums_publics != "non" OR ($contexte["accepter_forum"] != "" AND $contexte["accepter_forum"] != "non")) {
 			$lien = substr($request_uri, strrpos($request_uri, "/") + 1);
 			if (!$lien_retour = $http_get_vars["retour"])
 				$lien_retour = $lien;

@@ -20,6 +20,19 @@ else {
 	include_local ("inc-urls-dist.php3");
 }
 
+// dupliquee dans ecrire/articles.php3 ; mais je ne sais pas ou l'installer (Fil)...
+function get_forums_publics($id_article=0) {
+	$forums_publics = lire_meta("forums_publics");
+	if ($id_article) {
+		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
+		$res = mysql_query($query);
+		if ($obj = mysql_fetch_object($res))
+			$forums_publics = $obj->accepter_forum;
+	} else {
+		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+	}
+	return $forums_publics;
+}
 
 function generer_pass_forum($email = '') {
 	$passw = creer_pass_aleatoire(9, $email);
@@ -88,8 +101,8 @@ function forum_abonnement() {
 
 function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_syndic) {
 	global $REQUEST_URI, $HTTP_GET_VARS, $PATH_TRANSLATED;
-	$forums_publics = lire_meta("forums_publics");
 
+	$forums_publics = get_forums_publics($id_article);
 	if ($forums_publics == "non") return;
 
 	$lien = substr($REQUEST_URI, strrpos($REQUEST_URI, '/') + 1);
@@ -108,11 +121,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$ret .= "\n<FORM ACTION='$fich' METHOD='post'>";
 	$ret .= "\n<B>VOTRE MESSAGE...</B><p>";
 	
-	if ($forums_publics == "priori") {
+	if ($forums_publics == "pri") {
 		$ret.= "Ce forum est mod&eacute;r&eacute; &agrave; priori&nbsp;: votre contribution n'appara&icirc;tra qu'apr&egrave;s avoir &eacute;t&eacute; valid&eacute;e par un administrateur du site.<P>";
 	}
 	
-	if ($forums_publics == "abonnement") {
+	if ($forums_publics == "abo") {
 		$ret.= '<?php include("inc-forum.php3"); forum_abonnement(); ?'.'>';
 	}
 	
@@ -210,7 +223,7 @@ function ajout_forum() {
 	$nom_site_forum = addslashes($nom_site_forum);
 	$auteur = addslashes($auteur);
 	$retour_forum = rawurldecode($retour_forum);
-	$forums_publics = lire_meta("forums_publics");
+	$forums_publics = get_forums_publics($forum_id_article);
 
 	if (!verifier_action_auteur("ajout_forum $forum_id_rubrique $forum_id_parent $forum_id_article $forum_id_breve $forum_id_syndic $alea", $hash)) {
 		@header("Location: $retour_forum");
@@ -225,7 +238,7 @@ function ajout_forum() {
 		Cliquez <a href='$retour_forum'>ici</a> pour continuer.<p>");
 	}
 
-	if ($forums_publics == 'abonnement') {
+	if ($forums_publics == 'abo') {
 		$cookie_email = $HTTP_COOKIE_VARS['spip_forum_email'];
 		if ($hash_email && $forum_id_auteur) {
 			if (verifier_action_auteur("email $cookie_email", $hash_email, $forum_id_auteur)) {
@@ -293,7 +306,7 @@ function ajout_forum() {
 		case "non":
 			$etat = "off";
 			break;
-		case "priori":
+		case "pri":
 			$etat = "prop";
 			break;
 		default:
