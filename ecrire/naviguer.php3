@@ -335,14 +335,18 @@ echo "<DIV align='left'>";
 
 echo "<P>";
 afficher_articles("Vos articles en cours de r&eacute;daction",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles, spip_auteurs_articles AS lien WHERE spip_articles.id_article=lien.id_article AND id_rubrique='$coll' AND lien.id_auteur=\"$connect_id_auteur\" AND spip_articles.statut=\"prepa\" ORDER BY spip_articles.date DESC");
+"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
+"WHERE articles.id_article=lien.id_article AND id_rubrique='$coll' ".
+"AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
 
 
 //////////  Les articles a valider
 /////////////////////////
 
 afficher_articles("Les articles &agrave; valider",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE spip_articles.statut=\"prop\" AND id_rubrique='$coll' ORDER BY spip_articles.date DESC");
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+"FROM spip_articles WHERE statut=\"prop\" AND id_rubrique='$coll' ORDER BY date DESC");
 
 
 //////////  Les articles en cours de redaction
@@ -350,7 +354,8 @@ afficher_articles("Les articles &agrave; valider",
 
 if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 	afficher_articles("Tous les articles en cours de r&eacute;daction",
-	"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE spip_articles.statut=\"prepa\" AND id_rubrique='$coll' ORDER BY spip_articles.date DESC");
+	"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+	"FROM spip_articles WHERE statut=\"prepa\" AND id_rubrique='$coll' ORDER BY date DESC");
 }
 
 
@@ -358,7 +363,8 @@ if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 /////////////////////////
 
 afficher_articles("Tous les articles publi&eacute;s dans cette rubrique",
-"SELECT spip_articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut FROM spip_articles WHERE spip_articles.statut=\"publie\" AND id_rubrique='$coll' ORDER BY spip_articles.date DESC");
+"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
+"FROM spip_articles WHERE statut=\"publie\" AND id_rubrique='$coll' ORDER BY date DESC");
 
 if ($coll > 0){
 	echo "<div align='right'>";
