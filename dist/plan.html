@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="#LANG">
+<head>
+<title>[#NOM_SITE_SPIP] </title>
+<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+
+<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+<!-- Les feuilles de style specifiques aux presents squelettes -->
+<link rel="stylesheet" href="typographie.css" type="text/css">
+
+<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+</head>
+
+<body bgcolor="white" dir="#LANG_DIR">
+
+
+<!-- Plan du site -->
+
+<div id="plan" class="contenu">
+
+<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+
+<div class="plan-secteur">
+
+	[(#LOGO_RUBRIQUE|left)]<h1><a href="#URL_RUBRIQUE">#TITRE</a></h1>
+
+	<div class="encart">
+
+	<!-- Breves -->
+
+	<h2 class="structure"><:breves:></h2>
+
+	<B_breves>
+	<div class="menu">
+	<div class="breves">
+		<div class="menu-titre">
+		<:breves:>
+		</div>
+		<ul>
+	<BOUCLE_breves(BREVES) {id_secteur} {par date} {inverse} {0,15}>
+		<li class="menu-item">
+		<i>[(#DATE|affdate_court)]</i>:
+		<a href="#URL_BREVE">#TITRE</a>
+		</li>
+	</BOUCLE_breves>
+		</ul>
+	</div>
+	</div>
+	</B_breves>
+
+	<!-- Sur le Web -->
+
+	<h2 class="structure"><:sites_web:></h2>
+
+	<B_sites>
+	<div class="menu">
+	<div class="divers">
+		<div class="menu-titre">
+		<:sur_web:>
+		</div>
+		<ul>
+	<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+		<li class="menu-item">
+		<a href="#URL_SITE">#NOM_SITE</a>
+		</li>
+	</BOUCLE_sites>
+		</ul>
+	</div>
+	</div>
+	</B_sites>
+
+	</div>
+
+<!-- Articles et sous-rubriques -->
+
+<h2 class="structure"><:articles:></h2>
+
+<B_articles_racine>
+<ul class="plan-articles">
+
+<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+<li class="plan-article"><a href="#URL_ARTICLE">#TITRE</a></li>
+</BOUCLE_articles_racine>
+
+</ul>
+</B_articles_racine>
+
+<B_rubriques>
+
+<ul class="plan-rubriques">
+
+<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+<li>
+<div class="plan-rubrique"><a href="#URL_RUBRIQUE">#TITRE</a></div>
+
+	<B_articles>
+	<ul class="plan-articles">
+	<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+	<li class="plan-article"><a href="#URL_ARTICLE">#TITRE</a></li>
+	</BOUCLE_articles>
+	</ul>
+	</B_articles>
+
+	<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+
+</li>
+</BOUCLE_rubriques>
+
+</ul>
+</B_rubriques>
+
+
+</div>
+
+</BOUCLE_secteurs>
+
+</div>
+
+</body>
+</html>

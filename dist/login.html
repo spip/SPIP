@@ -1,0 +1,37 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="#LANG">
+<head>
+	<title><:login_acces_prive:></title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+	<link rel="stylesheet" href="spip_style.css" type="text/css">
+</head>
+<body dir="#LANG_DIR" bgcolor="#ffffff" text="#000000" link="#e86519" vlink="#6e003a" alink="#ff9900">
+
+<br><br><br><center><table width="400"><tr><td width="400">
+<div align="center">
+<h3 class="spip">#NOM_SITE_SPIP<br>
+<small><:login_acces_prive:></small></h3>
+<div align="#LANG_RIGHT">#MENU_LANG_ECRIRE</div>
+</div>
+
+#LOGIN_PRIVE
+
+<div align='center' style='font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;'>
+[&#91;<a
+	href='(#ENV{inscription})?mode=redac&amp;focus=nom_inscription'
+	target="spip_pass"
+	onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;]
+
+&#91;<a
+	href="spip_pass.php3"
+	target="spip_pass" 
+	onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+
+&#91;<a href='#URL_SITE_SPIP'><:login_retoursitepublic:></a>&#93
+
+</div>
+
+</td></tr></table></center>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html lang="#LANG">
+<head>
+	<title>[#NOM_SITE_SPIP - <:pass_erreur:> 404]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET">
+
+	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<link rel="stylesheet" href="spip_style.css" type="text/css">
+
+	<!-- Les feuilles de style specifiques aux presents squelettes -->
+	<link rel="stylesheet" href="typographie.css" type="text/css">
+
+	<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
+	<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+
+</head>
+<body bgcolor="white" dir="#LANG_DIR">
+
+
+
+<div id="navigation">
+
+	<h1 class="structure"><:navigation:></h1>
+	
+	<!-- Menu de navigation general -->
+	<div class="menu">
+	<ul class="general">
+		<li class="menu-titre"><a href="#URL_SITE_SPIP" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a></li>
+		<li class="menu-item"><a href="plan.php3"><:plan_site:></a></li>
+		<li class="menu-item"><a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a></li>
+		<li class="menu-item"><a href="ecrire/"><:espace_prive:></a></li>
+	</ul>
+	</div>
+	
+	<!-- Formulaire de recherche -->
+	#FORMULAIRE_RECHERCHE
+
+</div>
+
+<div id="principal" class="contenu">
+
+<h1 class="titre-texte"><:pass_erreur:> 404</h1>
+	<p>#ERREUR_AUCUN</p>
+</div>
+
+
+#SPIP_CRON
+
+</body>
+</html>
