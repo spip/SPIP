@@ -260,6 +260,80 @@ function interdire_scripts($source) {
 	return $source;
 }
 
+// Integration (embed) multimedia
+
+function embed_document($id_document, $align) {
+	global $id_doublons;
+	
+	$id_doublons['documents'] .= ",$id_document";
+
+	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
+	$result = spip_query($query);
+	if ($row = mysql_fetch_array($result)) {
+		$id_document = $row['id_document'];
+		$id_type = $row['id_type'];
+		$titre = propre($row ['titre']);
+		$descriptif = propre($row['descriptif']);
+		$fichier = $row['fichier'];
+		$largeur = $row['largeur'];
+		$hauteur = $row['hauteur'];
+		$taille = $row['taille'];
+		$mode = $row['mode'];
+
+
+		$query_type = "SELECT * FROM spip_types_documents WHERE id_type=$id_type";
+		$result_type = spip_query($query_type);
+		if ($row_type = @mysql_fetch_array($result_type)) {
+			$type = $row_type['titre'];
+			$inclus = $row_type['inclus'];
+		}
+		else $type = 'fichier';
+
+		// ajuster chemin d'acces au fichier
+		if ($GLOBALS['flag_ecrire']) {
+			if ($fichier) $fichier = "../$fichier";
+		}
+
+
+		if ($inclus == "embed") {
+			$vignette = "<object width='$largeur' height='$hauteur'>";
+			$vignette .= "<param name='movie' value='$fichier'>";
+			$vignette .= "<param name='src' value='$fichier'>";
+			$vignette .= "<param name='quality' value='high'>";
+			$vignette .= "<embed src='$fichier' quality='high'  width='$largeur' height='$hauteur'></embed></object>";
+		}
+		else if ($inclus == "image") {
+			$fichier_vignette = $fichier;
+			$largeur_vignette = $largeur;
+			$hauteur_vignette = $hauteur;
+			if ($fichier_vignette) {
+				$vignette = "<img src='$fichier_vignette' border=0";
+				if ($largeur_vignette && $hauteur_vignette)
+					$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
+				if ($titre) {
+					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
+					$vignette .= " alt=\"$titre_ko\" title=\"$titre_ko\"";
+				}
+				$vignette .= ">";
+			}
+		}
+		
+		$retour = "<table cellpadding=5 cellspacing=0 border=0 align='$align'>\n";
+		$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
+		$retour .= $vignette;
+
+		if ($titre) $retour .= "<br><b>$titre</b>";
+		if ($descriptif) $retour .= "<br>$descriptif";
+
+		$retour .= "</div>\n</td></tr>\n</table>\n";
+
+
+		return $retour;		
+
+	}
+}
+
+
 // Integration des images et documents
 function integre_image($id_document, $align, $type_aff = 'IMG') {
 	global $id_doublons;
@@ -628,6 +702,17 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$id_document = $match[2];
 		$align = $match[4];
 		$rempl = integre_image($id_document, $align, $match[1]);
+		$letexte = ereg_replace($letout, $rempl, $letexte);
+	}
+	//
+	// Insertion de fichiers multimedia
+	//
+	while (eregi("<(EMB)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
+		$letout = quotemeta($match[0]);
+		$letout = ereg_replace("\|", "\|", $letout);
+		$id_document = $match[2];
+		$align = $match[4];
+		$rempl = embed_document($id_document, $align);
 		$letexte = ereg_replace($letout, $rempl, $letexte);
 	}
 
