@@ -407,6 +407,7 @@ function calculer_page($fond, $contexte) {
 	$id_doublons['auteurs'] = '0';
 	$id_doublons['forums'] = '0';
 	$id_doublons['mots'] = '0';
+	$id_doublons['groupes_mots'] = '0';
 	$id_doublons['syndication'] = '0';
 	$id_doublons['documents'] = '0';
 
@@ -419,7 +420,6 @@ function calculer_page($fond, $contexte) {
 
 
 function calculer_page_globale($fond) {
-	global $id_doublons;
 	global $contexte;
 	global $fichier_requete;
 	global $id_rubrique_fond;
