@@ -1596,12 +1596,7 @@ sak i p&eacute; rand out sit inn p&eacute; pli lan.',
 'trad_delier' => 'Ar&egrave;t gatir&eacute; lartik-la &egrave;k son bann tradiksyon',
 'trad_lier' => 'Lartik-la l&eacute; inn tradiksyon lartik nim&eacute;ro&nbsp;:',
 'trad_new' => 'Ekri inn nouv&egrave;l tradiksyon lartik-la',
-'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)',
-
-
-// PLUS_UTILISE
-'info_donner_rendez_vous' => 'Bouton-la li perm&egrave;t aou anvwa inn rand&eacute;vou &egrave;k innd&eacute; zot dalon.',
-'info_nouveau_pense_bete' => 'Bouton-la i rand aou kav pou kr&eacute; inn nouvo gardant&egrave;t.'
+'trad_reference' => '(Lartik-p&eacute;i de r&eacute;f&eacute;rans)'
 
 );
 

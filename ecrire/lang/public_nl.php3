@@ -115,23 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Online bekijken',
-
-
-// PLUS_UTILISE
-'autres_groupes_de_mots_clefs' => 'Andere groepen trefwoorden',
-'dans_meme_rubrique' => 'In dezelfde rubriek',
-'derniers_messages_des_forums' => 'Meest recente bijdragen in de forums',
-'envoyer_un_message' => 'Een bericht verzenden',
-'pas_d_article' => 'Op dit adres is geen artikel te vinden',
-'pas_d_auteur' => 'Op dit adres is geen auteur te vinden',
-'pas_de_breve' => 'Op dit adres is geen nieuwsbericht te vinden',
-'pas_de_rubrique' => '<NEW> Il n\'y a pas de rubrique &agrave; cette adresse',
-'pas_de_site' => '<NEW> Il n\'y a pas de site &agrave; cette adresse',
-'plan_du_site' => 'Overzicht van de site',
-'poster_un_message' => '<NEW> Poster un message',
-'test' => '<NEW> ',
-'test2' => '<NEW> <NEW> <NEW> '
+'voir_en_ligne' => 'Online bekijken'
 
 );
 
