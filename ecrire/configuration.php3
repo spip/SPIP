@@ -2,7 +2,32 @@
 
 include ("inc.php3");
 
+if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+	echo _T('avis_non_acces_page');
+	fin_page();
+	exit;
+}
+
+
+//
+// Modifications
+//
+
 include_ecrire ("inc_config.php3");
+init_config();
+if ($changer_config == 'oui') {
+	appliquer_modifs_config();
+}
+else {
+	$forums_publics = lire_meta("forums_publics");
+	if (!$forums_publics) {
+		ecrire_meta("forums_publics", "posteriori");
+		ecrire_metas();
+	}
+}
+
+lire_metas();
+
 
 function mySel($varaut,$variable){
 		$retour= " VALUE=\"$varaut\"";
@@ -25,31 +50,6 @@ barre_onglets("configuration", "contenu");
 debut_gauche();
 
 debut_droite();
-
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-	echo _T('avis_non_acces_page');
-	fin_page();
-	exit;
-}
-
-
-//
-// Modifications
-//
-
-init_config();
-if ($changer_config == 'oui') {
-	appliquer_modifs_config();
-}
-else {
-	$forums_publics = lire_meta("forums_publics");
-	if (!$forums_publics) {
-		ecrire_meta("forums_publics", "posteriori");
-		ecrire_metas();
-	}
-}
-
-lire_metas();
 
 avertissement_config();
 
