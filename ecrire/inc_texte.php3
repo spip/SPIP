@@ -318,11 +318,11 @@ function typo_en($letexte) {
 
 // Typographie generale : francaise si la langue principale du site est 'fr', sinon anglaise (minimaliste)
 function typo($letexte) {
-	global $spip_lang;
+	global $langue_site;
 
 	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
-	if ($spip_lang == 'fr')
+	if ($langue_site == 'fr')
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);

@@ -778,9 +778,9 @@ function _L($text) {
 }
 
 // langue principale du site
-$spip_lang = lire_meta('langue_site');
-if (!$spip_lang) $spip_lang = 'fr';
-
+$langue_site = lire_meta('langue_site');
+if (!$langue_site) $langue_site = 'fr';
+$spip_lang = $langue_site;
 
 //
 // Enregistrement des evenements
