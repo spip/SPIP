@@ -149,13 +149,7 @@ debut_page("&laquo; $titre_breve &raquo;", "documents", "breves");
 
 debut_grand_cadre();
 
-afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle' alt='-' /> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
-
-$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
-$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
-
-echo "$parents";
+afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 
