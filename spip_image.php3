@@ -83,7 +83,7 @@ function deplacer_fichier_upload($source, $dest) {
 		}
 		@unlink($dest);
 
-		if ($GLOBALS['_FILES']['size'] == 0) {
+		if (($GLOBALS['_FILES']['size'] == 0) AND !$GLOBALS['action_zip']) {
 			echo _L("Ce fichier est trop gros pour le serveur, upload limit&eacute; &agrave; ").ini_get('upload_max_filesize');
 		}
 	}
@@ -354,7 +354,7 @@ if ($ajout_doc == 'oui') {
 		if ($afficher_message_zip) {
 			// presenter une interface pour choisir si fichier joint ou decompacter
 			include_ecrire ("inc_presentation.php3");
-			install_debut_html("Fichier ZIP");
+			install_debut_html(_L("Fichier ZIP"));
 		
 			
 			echo _L("<p>Le fichier que vous proposez d'installer est un fichier Zip.</p><p> Ce fichier peut &ecirc;tre :</p>\n\n");
@@ -363,16 +363,10 @@ if ($ajout_doc == 'oui') {
 			if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 			else $vars = $HTTP_GET_VARS;
 			
-			$link = new Link("spip_image.php3");
+			$link = new Link();
+			$link->delVar("image");
+			$link->delVar("image2");
 			$link->addVar("image_name", $image_name);
-			while (list ($key, $val) = each ($vars)) {
-				if ($key == "image" OR $key == "image2") {
-					//$link->addVar("image_name", $image_name);
-				}
-				else {
-					$link->addVar($key, $val);
-				}
-			}		
 
 			echo $link->getForm('POST');
 			
@@ -664,13 +658,16 @@ if ($vignette) {
 //
 // redirection
 //
+
+#var_dump($GLOBALS);
+
 if ($HTTP_POST_VARS) $vars = $HTTP_POST_VARS;
 else $vars = $HTTP_GET_VARS;
 $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zips)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zip)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }
@@ -679,7 +676,8 @@ if ($id_document)
 if ($type == 'rubrique')
 	$link->delVar('id_article');
 
-@header ("Location: ".$link->getUrl());
+header ("Location: ".$link->getUrl());
 
 exit;
+
 ?>
