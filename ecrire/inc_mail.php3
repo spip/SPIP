@@ -150,12 +150,16 @@ function envoyer_mail_nouveautes() {
 	$adresse_site = lire_meta("adresse_site");
 	$adresse_neuf = lire_meta("adresse_neuf");
 	$nom_site_spip = lire_meta("nom_site");
+	$post_dates = lire_meta("post_dates");
 
 	$courr .= "Bonjour,\n\n";
 	$courr .= "Voici la lettre d'information du site \"$nom_site_spip\" ($adresse_site),\n";
 	$courr .= "qui recense les articles et les breves publiés depuis $jours_neuf jours.\n\n";
 
-	$query = "SELECT * FROM spip_articles WHERE statut = 'publie' AND date > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY) ORDER BY date DESC";
+	if ($post_dates == 'non')
+		$query_post_dates = 'AND date < NOW()';
+
+	$query = "SELECT * FROM spip_articles WHERE statut = 'publie' AND date > DATE_SUB(NOW(), INTERVAL $jours_neuf DAY) $query_post_dates ORDER BY date DESC";
  	$result = mysql_query($query);
 
 	if (mysql_num_rows($result) > 0) {
