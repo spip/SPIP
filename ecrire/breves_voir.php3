@@ -169,9 +169,8 @@ echo "<CENTER>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
 echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
 echo "</CENTER>";
-if ($statut == 'publie') {
-	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_breve=$id_breve&recalcul=oui", "racine-24.gif", "rien.gif");
-}
+
+voir_en_ligne ('breve', $id_breve, $statut);
 
 fin_boite_info();
 

@@ -38,7 +38,8 @@ if (strpos($url,'?')) {
 else {
 	$super='?';
 }
-if ($recalcul) $url .= $super."recalcul=$recalcul";
+if ($recalcul) $url .= $super."recalcul=oui";
+else if ($preview) $url .= $super."var_preview=oui";
 @header("Location: $url");
 
 ?>

@@ -50,6 +50,7 @@ function init_config() {
 
 		'activer_moteur' => 'oui',
 		'articles_versions' => 'non',
+		'preview' => 'non',
 		'activer_statistiques' => 'oui',
 
 		'documents_article' => 'oui',
@@ -227,6 +228,7 @@ function appliquer_modifs_config() {
 
 		'activer_moteur',
 		'articles_versions',
+		'preview',
 		'activer_statistiques',
 
 		'documents_article',

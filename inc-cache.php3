@@ -55,7 +55,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	// Sous-sous-repertoires delais/ (inutile avec l'invalidation par 't')
 	# $subdir2 = creer_repertoire("CACHE/$subdir", $delais);
 
-	$gzip = $flag_gz && $compresser_cache;
+	$gzip = $flag_gz && $compresser_cache ? '.gz' : '';
 
 	return $subdir.$subdir2.$fichier_cache.$gzip;
 }
@@ -89,7 +89,6 @@ function utiliser_cache(&$chemin_cache, $delais) {
 	if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD')
 		$ok_cache = true;
 
-	# spip_log (($ok_cache ? "cache":"calcul")." ($chemin_cache)". ($age ? " age: $age s (reste ".($delais-$age)." s)":''));
 	return $ok_cache;
 }
 

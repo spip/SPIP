@@ -112,6 +112,10 @@ $dossier_squelettes = "";
 // navigateur l'accepte (valable pour apache >= 1.3 seulement) ?
 $auto_compress = true;
 
+// compresser les fichiers du repertoire CACHE/ avec gzip ?
+// attention : apres toute modification de ce reglage il faut vider le cache
+$compresser_cache = true;
+
 // creation des vignettes avec image magick en ligne de commande : mettre
 // le chemin complet '/bin/convert' (Linux) ou '/sw/bin/convert' (fink/Mac OS X)
 // Note : preferer GD2 ou le module php imagick s'ils sont disponibles
@@ -157,7 +161,8 @@ $invalider_caches = true;
 // totale maximale desiree des fichiers contenus dans le CACHE/ ;
 // ce quota n'est pas "dur", il ne s'applique qu'une fois par heure et
 // fait redescendre le cache a la taille voulue ; valeur en Mo
-$quota_cache = 0;
+// Si la variable vaut 0 aucun quota ne s'applique
+$quota_cache = 5;
 
 // Serveurs externes
 $spip_server = array (
@@ -863,7 +868,6 @@ function spip_file_get_contents ($fichier) {
 	
 }
 // options = array(
-// 'size' => 1024      # recuperer seulement le debut
 // 'phpcheck' => 'oui' # verifier qu'on a bien du php
 // dezippe automatiquement les fichiers .gz
 function lire_fichier ($fichier, &$contenu, $options=false) {

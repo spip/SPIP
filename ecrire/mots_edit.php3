@@ -102,8 +102,7 @@ echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('titre_gauche_mo
 echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_mot</B></FONT>";
 echo "</CENTER>";
 
-	icone_horizontale(_T('icone_voir_en_ligne'), "../spip_redirect.php3?id_mot=$id_mot&recalcul=oui", "racine-24.gif", "rien.gif");
-
+voir_en_ligne ('mot', $id_mot);
 
 fin_boite_info();
 

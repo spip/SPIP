@@ -100,40 +100,45 @@ function calculer_champ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere,
 
 	// regarder s'il existe une fonction personnalisee balise_NOM()
 	$f = 'balise_' . $nom_champ;
-	if (function_exists($f) AND $p = $f($p))
-		return $p->retour();
+	if (function_exists($f))
+		$p = $f($p);
 
+	else {
 	// regarder s'il existe une fonction standard balise_NOM_dist()
 	$f = 'balise_' . $nom_champ . '_dist';
-	if (function_exists($f) AND $p = $f($p))
-		return $p->retour();
+	if (function_exists($f))
+		$p = $f($p);
 
+	else {
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $nom_champ) AND $p = calcul_balise_logo($p))
-		return $p->retour();
+	if (ereg('^LOGO_', $nom_champ))
+		$p = calcul_balise_logo($p);
 
+	else {
 	// On regarde ensuite s'il y a un champ SQL homonyme,
 	// et on definit le type et les traitements
-	$code = index_pile($id_boucle, $nom_champ, $boucles);
-	if (($code) && ($code != '$Pile[0][\''.$nom_champ.'\']')) {
+	$p->code = champ_sql($nom_champ, $p);
+	if (($p->code) && ($p->code != '$Pile[0][\''.$nom_champ.'\']')) {
 
 		// Par defaut basculer en numerique pour les #ID_xxx
 		if (substr($nom_champ,0,3) == 'ID_') $p->type = 'num';
-
-		// Aller chercher les processeurs standards (cas des #TITRE, qui
-		// ne necessitent pas une fonction balise_TITRE)
-		if (!$etoile)
-			$p->process = champs_traitements($nom_champ);
-
-		return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, $p->type, $p->process);
 	}
 
+	else {
 	// si index_pile a ramene le choix par defaut, 
 	// ca doit plutot etre un champ SPIP non SQL,
 	// ou ni l'un ni l'autre => on le renvoie sous la forme brute '#TOTO'
-	$code = "'#$nom_champ'";
+	$p->code = "'#$nom_champ'";
 	$p->type = 'php';	// pas de traitement
-	return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, $p->type);
+	
+	}}}}
+	
+	// Aller chercher les processeurs standards definis dans inc-champ-squel
+	if (!$etoile)
+		$p->process = champs_traitements($nom_champ);
+
+	// Retourner l'expression php correspondant au champ + ses filtres
+	return $p->retour();
 }
 
 

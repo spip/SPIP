@@ -96,21 +96,22 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 // Appeler cette fonction pour obtenir la page principale
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
-	global $flag_preserver, $recalcul, $preview, $lastmodified;
+	global $flag_preserver, $recalcul, $var_preview, $lastmodified;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
 	// -> inc-calcul.php3 n'enregistrera pas les fichiers caches
 	// -> inc-reqsql-squel.php3 acceptera les objets non 'publie'
-	if ($preview == 'oui') {
+	if ($var_preview == 'oui') {
 		// Verifier qu'on a le droit de previsualisation
 		$statut = $GLOBALS['auteur_session']['statut'];
 		if ($statut=='0minirezo' OR
-		(lire_meta('preview_redacteurs')=='oui' AND $statut=='1comite')) {
+		(lire_meta('preview')=='1comite' AND $statut=='1comite')) {
 			$recalcul = 'oui';
 			$delais = 0;
-		} else
-			$preview = false;
+			$var_preview = true;
+			spip_log('preview !');
+		}
 	}
 
 	$chemin_cache = 'CACHE/'.generer_nom_fichier_cache('', $fond);
@@ -169,6 +170,25 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
+
+	if ($var_preview AND !$flag_preserver) {
+		$url = $GLOBALS['clean_link'];
+		$url->delvar('var_preview');
+		$url = $url->geturl();
+		$page['texte'] .= '<div style="
+		display: block;
+		color: #eeeeee;
+		background-color: #111111;
+		padding-right: 5px;
+		padding-top: 2px;
+		padding-bottom: 5px;
+		font-size: 20px;
+		top: 0px;
+		left: 0px;
+		position: absolute;
+		"><a href="'.$url.'"><img src="ecrire/img_pack/naviguer-site.gif" align="left" border="0" /></a>
+&nbsp; PREVISUALISATION</div>';
+	}
 
 	return $page;
 }
@@ -260,16 +280,6 @@ function cherche_image_nommee($nom) {
 	}
 }
 
-//
-// Leve un drapeau si le squelette donne une page generant de graves erreurs php
-//
-function spip_error_handler ($errno, $errmsg, $filename, $linenum, $vars) {
-	global $tableau_des_erreurs;
-	if ($errno & (E_ERROR | E_WARNING | E_PARSE)) {
-		$tableau_des_erreurs[]
-		= array($errno, $errmsg, $linenum);
-	}
-}
 
 // La fonction ci-dessous permet a un script de flusher ses resultats partiels
 function spip_ob_flush() {
