@@ -499,7 +499,7 @@ function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 		else if (! email_valide($GLOBALS['email_message_auteur'.$id_auteur]) )
 			$erreur .= erreur(_T('form_prop_indiquer_email'));
 		else if ($GLOBALS['valide_message_auteur'.$id_auteur]) {  // verifier hash ?
-			$GLOBALS['texte_message_auteur'.$id_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
+			$GLOBALS['texte_message_auteur'.$id_auteur] .= "\n\n-- "._T('envoi_via_le_site')." ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
 			envoyer_mail($email_auteur,
 				$GLOBALS['sujet_message_auteur'.$id_auteur],
 				$GLOBALS['texte_message_auteur'.$id_auteur], $GLOBALS['email_message_auteur'.$id_auteur],
