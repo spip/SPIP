@@ -73,12 +73,16 @@ function lire_meta_maj($nom) {
 	$s .= '?'.'>';
 
 	$fichier_meta_cache = ($flag_ecrire ? '' : 'ecrire/') . 'data/inc_meta_cache.php3';
-	$f = @fopen($fichier_meta_cache.'-'.@getmypid(), "wb");
+	$fichier_meta_cache_w = $fichier_meta_cache.'-'.@getmypid();
+	$f = @fopen($fichier_meta_cache_w, "wb");
 	if ($f) {
-		@fputs($f, $s);
+		$r = @fputs($f, $s);
 		@fclose($f);
 		@unlink($fichier_meta_cache);
-		@rename($fichier_meta_cache.'-'.@getmypid(), $fichier_meta_cache);
+		if ($r != strlen($s))
+			@rename($fichier_meta_cache_w, $fichier_meta_cache);
+		else
+			@unlink($fichier_meta_cache_w);
 	} else {
 		global $connect_statut;
 		if ($connect_statut == '0minirezo')
