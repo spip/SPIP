@@ -767,7 +767,11 @@ function maj_base() {
 
 	if ($version_installee == 1.415) {
 		spip_query("ALTER TABLE spip_documents DROP inclus");
-	}	
+	}
+
+	if ($version_installee < 1.417) {
+		spip_query("ALTER TABLE spip_syndic_articles DROP date_index");
+	}
 
 	//
 	// Mettre a jour le numero de version installee
