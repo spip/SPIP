@@ -66,13 +66,6 @@ else debut_page($nom,"documents","redacteurs");
 
 
 echo "<br><br><br>";
-gros_titre($nom);
-
-if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
-	$statut_auteur=$statut;
-	barre_onglets("auteur", "auteur");
-}
-
 
 debut_gauche();
 
@@ -101,12 +94,6 @@ $artoff = "autoff$id_auteur";
 if ($id_auteur>0 AND (($connect_statut == '0minirezo') OR ($connect_id_auteur == $id_auteur)))
 	afficher_boite_logo($arton, $artoff, _T('logo_auteur').aide ("logoart"), _T('logo_survol'));
 
-// raccourcis
-if ($connect_id_auteur == $id_auteur) {
-	debut_raccourcis();
-	icone_horizontale(_T('icone_tous_auteur'), "auteurs.php3", "redacteurs-24.gif","rien.gif");
-	fin_raccourcis();
-}
 
 debut_droite();
 
@@ -118,26 +105,43 @@ function mySel($varaut,$variable) {
 	return $retour;
 }
 
-if ($statut == "0minirezo") $logo = "redacteurs-admin-24.gif";
-else if ($statut == "5poubelle") $logo = "redacteurs-poubelle-24.gif";
-else $logo = "redacteurs-24.gif";
+	debut_cadre_relief("redacteurs-24.gif");
+	
+	
+	echo "<table width='100%' cellpadding='0' border='0' cellspacing='0'>";
+	
+	echo "<tr>";
+
+	echo "<td valign='top' width='100%'>";	
 
 
-if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0 OR ($champs_extra AND $extra)) {
-	debut_cadre_relief("$logo");
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'>";
-	if (strlen($email) > 2) echo _T('email_2')." <B><A HREF='mailto:$email'>$email</A></B><BR> ";
-	if (strlen($nom_site_auteur) > 2) echo _T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
-	echo "<P>".propre($bio)."</P>";
+	gros_titre($nom);
+
+	echo "<div>&nbsp;</div>";
+
+	if (strlen($email) > 2) echo "<div>"._T('email_2')." <B><A HREF='mailto:$email'>$email</A></B></div>";
+	if (strlen($nom_site_auteur) > 2) echo "<div>"._T('info_site_2')." <B><A HREF='$url_site'>$nom_site_auteur</A></B></div>";
+
+		
+	echo "</td>";
+	
+	echo "<td>";
+	
+	if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
+		icone (_T("admin_modifier_auteur"), "auteurs_infos.php3?id_auteur=$id_auteur", "redacteurs-24.gif", "edit.gif");
+	}
+	echo "</td></tr></table>";
+
+	if (strlen($bio) > 0) { echo "<div>".propre("<quote>".$bio."</quote>")."</div>"; }
+	if (strlen($pgp) > 0) { echo "<div>".propre("PGP:<cadre>".$pgp."</cadre>")."</div>"; }
 
 	if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
 		extra_affichage($extra, "auteurs");
 	}
 
-	echo "</FONT>";
+
 	fin_cadre_relief();
-}
 
 
 echo "<P>";
@@ -148,8 +152,19 @@ else $aff_art = "'prop','publie'";
 afficher_articles(_T('info_articles_auteur'),
 	", spip_auteurs_articles AS lien WHERE lien.id_auteur='$id_auteur' ".
 	"AND lien.id_article=articles.id_article AND articles.statut IN ($aff_art) ".
-	"ORDER BY articles.date DESC");
+	"ORDER BY articles.date DESC", true);
 }
+
+
+
+$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 ".
+	"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv!='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message";
+afficher_messages(_T('info_discussion_cours'), $query_message, false, false);
+
+$query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien, spip_auteurs_messages AS lien2 ".
+	"WHERE lien.id_auteur=$connect_id_auteur AND lien2.id_auteur = $id_auteur AND statut='publie' AND type='normal' AND rv='oui' AND lien.id_message=messages.id_message AND lien2.id_message=messages.id_message  AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY)";
+afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
+
 
 
 fin_page();

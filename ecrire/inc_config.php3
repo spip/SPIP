@@ -87,11 +87,12 @@ function init_config() {
 
 
 function avertissement_config() {
+	global $spip_lang_right, $spip_lang_left;
 	debut_boite_info();
 
-	echo "<div class='serif' align='justify'>
-	<center><B>"._T('avis_attention')."</B></center>
-	<img src='img_pack/warning.gif' alt='' width='48' height='48' align='right'>";
+	echo "<div class='verdana2' align='justify'>
+	<p align='center'><B>"._T('avis_attention')."</B></p>
+	<img src='img_pack/warning.gif' alt='' width='48' height='48' align='$spip_lang_right' style='padding-$spip_lang_left: 10px;' />";
 
 	echo _T('texte_inc_config');
 
@@ -102,9 +103,11 @@ function avertissement_config() {
 }
 
 
-function bouton_radio($nom, $valeur, $titre, $actif = false) {
+function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	static $id_label = 0;
-	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'";
+	
+	if (strlen($onClick) > 0) $onClick = " onClick=\"$onClick\"";
+	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'$onClick";
 	if ($actif) {
 		$texte .= ' checked';
 		$titre = '<b>'.$titre.'</b>';

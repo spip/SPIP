@@ -33,6 +33,8 @@ function bouton_imessage($destinataire, $row = '') {
 	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
 	global $connect_id_auteur;
 	global $spip_lang_rtl;
+	global $couche_invisible;
+	$couche_invisible ++;
 
 	$url = new Link("message_edit.php3");
 
@@ -40,7 +42,6 @@ function bouton_imessage($destinataire, $row = '') {
 	if ($destinataire == $connect_id_auteur)
 		return;
 	// verifier que le destinataire a un login
-
 	if ($row != "force") {
 		$login_req = "select login, messagerie from spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)";
 		$row = spip_fetch_array(spip_query($login_req));
@@ -57,122 +58,143 @@ function bouton_imessage($destinataire, $row = '') {
 	else $title = _T('info_ecire_message_prive');
 
 	$texte_bouton = "<img src='img_pack/m_envoi$spip_lang_rtl.gif' width='14' height='7' border='0'>";
-	return "<a href='". $url->getUrl() ."' title=\"$title\">$texte_bouton</a>";
+		
+	
+	$ret .= "<a href='". $url->getUrl() ."' title=\"$title\">";
+	$ret .= "$texte_bouton</a>";
+
+	return $ret;
+	
+
 }
+
 
 //
 // Cadres
 //
-
-function debut_cadre($style, $icone, $fonction) {
-	global $spip_display;
+function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
+	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
-
-	if ($GLOBALS['spip_lang_rtl']) {
-		$g = 'd';
-		$d = 'g';
-		$bgright = 'right';
-	} else {
-		$g = 'g';
-		$d = 'd';
-	}
 
 	// accesskey pour accessibilite espace prive
 	$accesskey_c = chr($accesskey++);
-	$retour_aff .= "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
+	$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
 
-	if ($spip_display != 1){
-		if (strlen($icone)<3) $icone = "rien.gif";
-		$retour_aff .= "\n<table class='cadre' cellspacing='0' cellpadding='0'><tr>";
-		$retour_aff .= "\n<td class='$style-h$g'></td>";
-		$retour_aff .= "\n<td class='$style-h'>";
+
+	$ret .= "<div style='position: relative; z-index: 1;'>";
+	if ($spip_display != 1 AND strlen($icone) > 1) {
+		$style_gauche = " style='padding-$spip_lang_left: 38px;'";
+		$ret .= "<div style='position: absolute; top: 0px; $spip_lang_left: 10px; z-index: 2;'>";
 		if ($fonction) {
-			$retour_aff .= "<div style='background: url(img_pack/$icone) no-repeat $bgright; padding: 0px; margin: 0px;'>";
-			$retour_aff .= "<img src='img_pack/$fonction'>";
-			$retour_aff .= "</div>";
+			$ret .= "<div style='$bgright"."background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
+			$ret .= "<img src='img_pack/$fonction'>";
+			$ret .= "</div>";
 		}
-		else $retour_aff .= "<img src='img_pack/$icone'>";
-		$retour_aff .= "</td>";
-		$retour_aff .= "\n<td class='$style-h$d'></td></tr>";
-		$retour_aff .= "\n<tr><td class='$style-$g'></td>";
-		$retour_aff .= "\n<td class='$style-c'>";
-	}
-	return $retour_aff;
-}
+		else $ret .= "<img src='img_pack/$icone'>";
+		$ret .= "</div>";
 
-function fin_cadre($style) {
-	global $spip_display;
-
-	if ($GLOBALS['spip_lang_rtl']) {
-		$g = 'd';
-		$d = 'g';
-	} else {
-		$g = 'g';
-		$d = 'd';
+		$style_cadre = " style='position: relative; top: 15px; margin-bottom: 15px; z-index: 1;'";
 	}
 
-	if ($spip_display != 1){
-		$retour_aff .= "\n</td>";
-		$retour_aff .= "\n<td class='$style-$d'></td></tr>";
-		$retour_aff .= "\n<tr><td class='$style-b$g'></td>";
-		$retour_aff .= "\n<td class='$style-b'></td>";
-		$retour_aff .= "\n<td class='$style-b$d'></td></tr>";
-		$retour_aff .= "\n<tr><td><img src='img_pack/rien.gif' alt='' width='1' height='5'></td></tr>";
-		$retour_aff .= "\n</table>\n";
-	}
-	return $retour_aff;
-}
-
-function debut_cadre_relief($icone='', $return = false, $fonction=''){
-	global $spip_display;
-	if ($spip_display != 1){
-		$retour_aff = debut_cadre('r', $icone, $fonction);
+	if ($style == "e") {
+		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
 	}
 	else {
-		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc; -moz-border-radius: 6px;'><div style='border: 1px solid #666666; padding: 5px; -moz-border-radius: 6px; background-color: white;'>";
+		$ret .= "<div class='cadre-$style'$style_cadre>";
 	}
+	
+	if (strlen($titre) > 0) {
+		$ret .= "<div class='cadre-titre'$style_gauche>$titre</div>";
+	}
+	
+	
+	$ret .= "<div class='cadre-padding'>";
+	
+	
+	return $ret;
+}
+
+
+function fin_cadre($style="") {
+	if ($style == "e") $ret = "</div>";
+	$ret .= "</div></div></div>\n";
+	$ret .= "<div style='height: 5px;'></div>";
+	
+	return $ret;
+}
+
+
+
+
+function debut_cadre_relief($icone='', $return = false, $fonction='', $titre = ''){
+	$retour_aff = debut_cadre('r', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
 
 function fin_cadre_relief($return = false){
-	global $spip_display;
-	if ($spip_display != 1){
-		$retour_aff = fin_cadre('r');
-	}
-	else {
-		$retour_aff = "</div></div></p>\n";
-	}
+	$retour_aff = fin_cadre('r');
 
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
 
 
-function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
-	global $spip_display;
-
-	if ($spip_display != 1){
-		$retour_aff = debut_cadre('e', $icone, $fonction);
-	}
-	else {
-		$retour_aff = "<p><div style=\"border: 1px solid #333333; -moz-border-radius: 6px; background-color: #e0e0e0;\"><div style=\"padding: 5px; border-left: 1px solid #999999; border-top: 1px solid #999999; -moz-border-radius: 6px;\">";
-	}
+function debut_cadre_enfonce($icone='', $return = false, $fonction='', $titre = ''){
+	$retour_aff = debut_cadre('e', $icone, $fonction, $titre);
 
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
 
 function fin_cadre_enfonce($return = false){
-	global $spip_display;
 
-	if ($spip_display != 1) {
-		$retour_aff = fin_cadre('e');
-	}
-	else {
-		$retour_aff = "</div></div></p>\n";
-	}
+	$retour_aff = fin_cadre('e');
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+
+function debut_cadre_gris_clair($icone='', $return = false, $fonction='', $titre = ''){
+	$retour_aff = debut_cadre('gris-clair', $icone, $fonction, $titre);
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+function fin_cadre_gris_clair($return = false){
+	$retour_aff = fin_cadre('gris-clair');
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+
+function debut_cadre_couleur($icone='', $return = false, $fonction='', $titre=''){
+	$retour_aff = debut_cadre('couleur', $icone, $fonction, $titre);
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+function fin_cadre_couleur($return = false){
+	$retour_aff = fin_cadre('couleur');
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+function debut_cadre_trait_couleur($icone='', $return = false, $fonction='', $titre=''){
+	$retour_aff = debut_cadre('trait-couleur', $icone, $fonction, $titre);
+
+	if ($return) return $retour_aff;
+	else echo $retour_aff;
+}
+
+function fin_cadre_trait_couleur($return = false){
+	$retour_aff = fin_cadre('trait-couleur');
 
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
@@ -198,14 +220,18 @@ function fin_boite_alerte() {
 // une boite info
 //
 function debut_boite_info() {
-	global $couleur_claire,  $couleur_foncee;
+/*	global $couleur_claire,  $couleur_foncee;
 	echo "&nbsp;<p><div style='border: 1px dashed #666666;'><table cellpadding='5' cellspacing='0' border='0' width='100%' style='border-left: 1px solid $couleur_foncee; border-top: 1px solid $couleur_foncee; border-bottom: 1px solid white; border-bottom: 1px solid white' background=''>";
 	echo "<tr><td bgcolor='$couleur_claire' width='100%'>";
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='#333333'>";
+	*/
+	
+	echo "<div class='cadre-info'>";
 }
 
 function fin_boite_info() {
-	echo "</font></td></tr></table></div>\n\n";
+	//echo "</font></td></tr></table></div>\n\n";
+	echo "</div>";
 }
 
 //
@@ -233,6 +259,23 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 	echo "</TD>";
 	echo "</TR>";
 }
+//
+// une autre boite
+//
+function bandeau_titre_boite2($titre, $logo="", $fond="white", $texte="black") {
+	global $spip_lang_left, $spip_display;
+	
+	if (strlen($logo) > 0 AND $spip_display != 1) {
+		echo "<div style='position: relative;'>";
+		echo "<div style='position: absolute; top: -12px; $spip_lang_left: 3px;'><img src='img_pack/$logo'></div>";
+		echo "<div style='background-color: $fond; color: $texte; padding: 3px; padding-$spip_lang_left: 30px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
+	
+		echo "</div>";
+	} else {
+		echo "<div style='background-color: $fond; color: $texte; padding: 3px; border-bottom: 1px solid #444444;' class='verdana2'><b>$titre</b></div>";
+	}
+
+}
 
 
 //
@@ -244,7 +287,7 @@ function debut_raccourcis() {
 
 	debut_cadre_enfonce();
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size=1>";
-	echo "<b>"._T('titre_cadre_raccourcis')."</b><p>";
+	echo "<b>"._T('titre_cadre_raccourcis')."</b><p />";
 }
 
 function fin_raccourcis() {
@@ -263,8 +306,9 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	reset($table);
 	echo "\n";
 	while (list(, $t) = each($table)) {
-		$couleur_fond = ($ifond ^= 1) ? '#FFFFFF' : $couleur_claire;
-		echo "<tr bgcolor=\"$couleur_fond\">";
+		// $couleur_fond = ($ifond ^= 1) ? '#FFFFFF' : $couleur_claire;
+		//echo "<tr bgcolor=\"$couleur_fond\">";
+		echo "<tr class='tr_liste' onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\">";
 		reset($largeurs);
 		if ($styles) reset($styles);
 		while (list(, $texte) = each($t)) {
@@ -284,6 +328,7 @@ function afficher_liste($largeurs, $table, $styles = '') {
 
 function afficher_tranches_requete(&$query, $colspan) {
 	static $ancre = 0;
+	global $spip_lang_right;
 
 	$query = trim($query);
 	$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
@@ -306,7 +351,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 		$ancre++;
 
 		$texte .= "<a name='a$ancre'></a>";
-		$texte .= "<tr><td background=\"\" class=\"arial2\" colspan=\"".($colspan - 1)."\">";
+		$texte .= "<tr style='background-color: #dddddd;'><td class=\"arial2\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
 
 		for ($i = 0; $i < $num_rows; $i += $nb_aff){
 			$deb = $i + 1;
@@ -323,7 +368,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 			}
 		}
 		$texte .= "</td>\n";
-		$texte .= "<td background=\"\" class=\"arial2\" colspan=\"1\" align=\"right\" valign=\"top\">";
+		$texte .= "<td class=\"arial2\" style='border-bottom: 1px solid #444444; text-align: $spip_lang_right;' colspan=\"1\" align=\"right\" valign=\"top\">";
 		if ($deb_aff == -1) {
 			$texte .= "<B>"._T('info_tout_afficher')."</B>";
 		} else {
@@ -344,6 +389,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 
 	return $texte;
 }
+
 
 
 //
@@ -383,11 +429,15 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if (strlen($tranches) OR $toujours_afficher) {
 	 	$result = spip_query($requete);
 
-		if ($afficher_cadre) debut_cadre_relief("article-24.gif");
-		echo "<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% background=''>";
-		echo "<table width=100% cellpadding=3 cellspacing=0 border=0>";
+		// if ($afficher_cadre) debut_cadre_gris_clair("article-24.gif");
 
-		bandeau_titre_boite($titre_table, $afficher_auteurs);
+
+		echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
+		bandeau_titre_boite2($titre_table, "article-24.gif");
+
+		echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+
 
 		echo $tranches;
 
@@ -426,6 +476,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				}
 				$les_auteurs = substr($les_auteurs, 2);
 			}
+			
+			
+			$les_auteurs = "<div class='liste_clip' style='width: 100px;'>$les_auteurs</div>";
 
 			switch ($statut) {
 			case 'publie':
@@ -451,7 +504,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			}
 			$puce = "puce-$puce.gif";
 
-			$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; padding-$spip_lang_left: 17px;'>";
+			$s = "<div style='background: url(img_pack/$puce) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 14px;'>";
 
 			//$s. = "<a href=\"articles.php3?id_article=$id_article\" title=\"$title\">";
 
@@ -474,6 +527,9 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_visites', array('visites' => $visites))."</a></font>";
 				if ($popularite > 0) $s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_popularite', array('popularite' => $popularite))."</a></font>";
 			}
+			
+			$s = "<div class='liste_clip' style='width: 100px;'>$s</div>";
+			
 			$vals[] = $s;
 
 			$table[] = $vals;
@@ -481,21 +537,23 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		spip_free_result($result);
 
 		if ($afficher_auteurs) {
-			$largeurs = array('', 100, 90);
+			$largeurs = array('', 100, 100);
 			$styles = array('arial2', 'arial1', 'arial1');
 		}
 		else {
-			$largeurs = array('', 90);
+			$largeurs = array('', 100);
 			$styles = array('arial2', 'arial1');
 		}
 		afficher_liste($largeurs, $table, $styles);
 
-		echo "</table></td></tr></table>";
-		if ($afficher_cadre) fin_cadre_relief();
+		echo "</table>";
+		echo "</div>";
+		//if ($afficher_cadre) fin_cadre_gris_clair();
 
 	}
 	return $tous_id;
 }
+
 
 
 //
@@ -503,7 +561,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 //
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global $connect_id_auteur, $spip_lang_right, $dir_lang;
+	global $connect_id_auteur, $spip_lang_right, $spip_lang_left, $dir_lang, $couleur_claire, $couleur_foncee;
+
 
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
 		$afficher_langue = true;
@@ -516,18 +575,16 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 
 	if (strlen($tranches)) {
 
-		debut_cadre_relief("breve-24.gif");
+		//debut_cadre_relief("breve-24.gif");
+
+		if ($titre_table) echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
 
 		if ($titre_table) {
-			echo "<p><table width=100% cellpadding=0 cellspacing=0 border=0 background=''>";
-			echo "<tr><td width=100% background=''>";
-			echo "<table width=100% cellpadding=3 cellspacing=0 border=0>";
-			echo "<tr bgcolor='#EEEECC'><td width=100% colspan=2><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#000000'>";
-			echo "<b>$titre_table</b></font></td></tr>";
+			bandeau_titre_boite2($titre_table, "breve-24.gif", $couleur_foncee, "white");
 		}
-		else {
-			echo "<p><table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
-		}
+
+		echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
 
 		echo $tranches;
 
@@ -546,7 +603,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$id_rubrique = $row['id_rubrique'];
 			switch ($statut) {
 			case 'prop':
-				$puce = "puce-blanche-breve";
+				$puce = "puce-orange-breve";
 				$title = _T('titre_breve_proposee');
 				break;
 			case 'publie':
@@ -559,37 +616,37 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 				break;
 			}
 
-			$s = "<a href='breves_voir.php3?id_breve=$id_breve' title=\"$title\">";
-			$s .= "<img src='img_pack/$puce.gif' alt='' width='8' height='9' border='0'></a>&nbsp;&nbsp;";
+			$s = "<div style='background: url(img_pack/$puce.gif) $spip_lang_left center no-repeat; margin-$spip_lang_left: 3px; padding-$spip_lang_left: 12px;'>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang>";
 			$s .= typo($titre);
 			$s .= "</a>";
 			if ($afficher_langue AND $lang != $langue_defaut)
 				$s .= " <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
 
+			$s .= "</div>";
 			$vals[] = $s;
 
-			$s = "<div align='$spip_lang_right'>";
+			$s = "";
 			if ($affrub) {
-				$rub = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-				$s .= typo($rub['titre']);
+				$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+				$id_rubrique = $rub['id_rubrique'];
+				$s .= "<a href='naviguer.php3?coll=$id_rubrique'>".typo($rub['titre'])."</a>";
 			} else if ($statut != "prop")
 				$s = affdate_jourcourt($date_heure);
 			else
 				$s .= _T('info_a_valider');
-			$s .= "</div>";
 			$vals[] = $s;
 			$table[] = $vals;
 		}
 		spip_free_result($result);
 
-		$largeurs = array('', '');
-		$styles = array('arial2', 'arial1');
+		if ($affrub) $largeurs = array('', '170');
+		else  $largeurs = array('', '100');
+		$styles = array('arial11', 'arial1');
 		afficher_liste($largeurs, $table, $styles);
 
-		if ($titre_table) echo "</TABLE></TD></TR>";
-		echo "</TABLE>";
-		fin_cadre_relief();
+		echo "</table></div>";
+		//fin_cadre_relief();
 	}
 	return $tous_id;
 }
@@ -607,18 +664,14 @@ function afficher_rubriques($titre_table, $requete) {
 
 	if (strlen($tranches)) {
 
-		debut_cadre_relief("rubrique-24.gif");
+		if ($titre_table) echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
+		//debut_cadre_relief("rubrique-24.gif");
 
 		if ($titre_table) {
-			echo "<p><table width=100% cellpadding=0 cellspacing=0 border=0 background=''>";
-			echo "<tr><td width=100% background=''>";
-			echo "<table width=100% cellpadding=3 cellspacing=0 border=0>";
-			echo "<tr bgcolor='#333333'><td width=100% colspan=2><font face='Verdana,Arial,Sans,sans-serif' size=3 color='#FFFFFF'>";
-			echo "<b>$titre_table</b></font></td></tr>";
+			bandeau_titre_boite2($titre_table, "rubrique-24.gif", "#999999", "white");
 		}
-		else {
-			echo "<p><table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
-		}
+		echo "<table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
 
 		echo $tranches;
 
@@ -629,11 +682,14 @@ function afficher_rubriques($titre_table, $requete) {
 			$vals = '';
 
 			$id_rubrique = $row['id_rubrique'];
+			$id_parent = $row['id_parent'];
 			$tous_id[] = $id_rubrique;
 			$titre = $row['titre'];
+			
+			if ($id_parent == 0) $puce = "img_pack/secteur-12.gif";
+			else $puce = "img_pack/rubrique-12.gif";
 
 			$s = "<b><a href=\"naviguer.php3?coll=$id_rubrique\">";
-			$puce = "puce$spip_lang_rtl.gif";
 			$s .= "<img src=\"$puce\" alt=\"- \" border=\"0\"> ";
 			$s .= typo($titre);
 			$s .= "</A></b>";
@@ -650,9 +706,9 @@ function afficher_rubriques($titre_table, $requete) {
 		$styles = array('arial2', 'arial2');
 		afficher_liste($largeurs, $table, $styles);
 
-		if ($titre_table) echo "</TABLE></TD></TR>";
 		echo "</TABLE>";
-		fin_cadre_relief();
+		//fin_cadre_relief();
+		echo "</div>";
 	}
 	return $tous_id;
 }
@@ -755,6 +811,145 @@ function afficher_auteurs ($titre_table, $requete) {
 	}
 	return $tous_id;
 }
+
+/*
+ * Afficher liste de messages
+ */
+
+function afficher_messages($titre_table, $query_message, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
+	global $messages_vus;
+	global $connect_id_auteur;
+	global $couleur_claire, $couleur_foncee;
+	global $spip_lang_rtl, $spip_lang_left;
+
+	// Interdire l'affichage de message en double
+	if ($messages_vus) {
+		$query_message .= ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')';
+	}
+
+
+	if ($afficher_auteurs) $cols = 3;
+	else $cols = 2;
+	$query_message .= ' ORDER BY date_heure DESC';
+	$tranches = afficher_tranches_requete($query_message, $cols);
+
+	if ($tranches OR $obligatoire) {
+		if ($important) debut_cadre_couleur();
+
+		echo "<div style='height: 12px;'></div>";
+		echo "<div class='liste'>";
+	//	bandeau_titre_boite($titre_table, $afficher_auteurs, $boite_importante);
+		bandeau_titre_boite2($titre_table, "messagerie-24.gif", $couleur_foncee, "white");
+		echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
+
+
+		echo $tranches;
+
+		$result_message = spip_query($query_message);
+		$num_rows = spip_num_rows($result_message);
+
+		while($row = spip_fetch_array($result_message)) {
+			$vals = '';
+
+			$id_message = $row['id_message'];
+			$date = $row["date_heure"];
+			$date_fin = $row["date_fin"];
+			$titre = $row["titre"];
+			$type = $row["type"];
+			$statut = $row["statut"];
+			$page = $row["page"];
+			$rv = $row["rv"];
+			$vu = $row["vu"];
+			$messages_vus[$id_message] = $id_message;
+
+			//
+			// Titre
+			//
+
+			$s = "<A HREF='message.php3?id_message=$id_message'>";
+
+			switch ($type) {
+			case 'pb' :
+				$puce = "m_envoi_bleu$spip_lang_rtl.gif";
+				break;
+			case 'memo' :
+				$puce = "m_envoi_jaune$spip_lang_rtl.gif";
+				break;
+			case 'affich' :
+				$puce = "m_envoi_jaune$spip_lang_rtl.gif";
+				break;
+			case 'normal':
+			default:
+				$puce = "m_envoi$spip_lang_rtl.gif";
+				break;
+			}
+				
+			$s .= "<img src='img_pack/$puce' width='14' height='7' border='0'>";
+			$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
+			$vals[] = $s;
+
+			//
+			// Auteurs
+
+			if ($afficher_auteurs) {
+				$query_auteurs = "SELECT auteurs.id_auteur, auteurs.nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur!=$connect_id_auteur AND lien.id_auteur=auteurs.id_auteur";
+				$result_auteurs = spip_query($query_auteurs);
+				$auteurs = '';
+				while ($row_auteurs = spip_fetch_array($result_auteurs)) {
+					$id_auteur = $row_auteurs['id_auteur'];
+					$auteurs[] = "<a href='auteurs_edit.php3?id_auteur=$id_auteur'>".typo($row_auteurs['nom'])."</a>";
+				}
+
+				if ($auteurs AND $type == 'normal') {
+					$s = "<FONT FACE='Arial,Sans,sans-serif' SIZE=1>";
+					$s .= join(', ', $auteurs);
+					$s .= "</FONT>";
+				}
+				else $s = "&nbsp;";
+				$vals[] = $s;
+			}
+			
+			//
+			// Date
+			//
+			
+			$s = affdate($date);
+			if ($rv == 'oui') {
+				$jour=journum($date);
+				$mois=mois($date);
+				$annee=annee($date);
+				
+				$heure = heures($date).":".minutes($date);
+				$heure_fin = heures($date_fin).":".minutes($date_fin);
+
+				$s = "<div style='background: url(img_pack/rv-12.gif) $spip_lang_left center no-repeat; padding-$spip_lang_left: 15px;'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
+			} else {
+				$s = "<font color='#999999'>$s</font>";
+			}
+			
+			$vals[] = $s;
+
+			$table[] = $vals;
+		}
+
+		if ($afficher_auteurs) {
+			$largeurs = array('', 130, 120);
+			$styles = array('arial2', 'arial1', 'arial1');
+		}
+		else {
+			$largeurs = array('', 120);
+			$styles = array('arial2', 'arial1');
+		}
+		afficher_liste($largeurs, $table, $styles);
+
+		echo "</TABLE>";
+		echo "</div>\n\n";
+		spip_free_result($result_message);
+		if ($important) fin_cadre_couleur();
+	}
+}
+
+
 
 //
 // Afficher les forums
@@ -937,11 +1132,20 @@ function bouton($titre,$lien) {
 // Presentation de l'interface privee, debut du HTML
 //
 
-function debut_html($titre = "") {
+function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
 	global $flag_ecrire;
-	global $spip_lang_rtl;
-
+	global $spip_lang_rtl, $spip_lang_left;
+	global $mode;
+	global $connect_statut, $connect_toutes_rubriques;
+	
+	/*
+	if ($rubrique == "administration") {
+		$GLOBALS["couleur_claire"] = "#e3d3d5";
+		$GLOBALS["couleur_foncee"] = "#960014";
+	}
+	*/
+	
 	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
@@ -967,21 +1171,166 @@ function debut_html($titre = "") {
 	afficher_script_layer();
 ?>
 <script type='text/javascript'><!--
-function changeclass(objet, myClass)
-{
-		objet.className = myClass;
-}
-function changesurvol(iddiv, myClass)
-{
-		document.getElementById(iddiv).className = myClass;
-}
-var antifocus=false; // effacement titre quand new=oui
+	var init_gauche = true;
+
+	function findObj(n, d) { //v4.0
+		var p,i,x;
+		if(!d) d = document; 
+		if((p = n.indexOf("?"))>0 && parent.frames.length) {
+			d = parent.frames[n.substring(p+1)].document; 
+			n = n.substring(0,p);
+		}
+		if(!(x = d[n]) && d.all) x = d.all[n]; 
+		for (i = 0; !x && i<d.forms.length; i++) x = d.forms[i][n];
+		for(i=0; !x && d.layers && i<d.layers.length; i++) x = findObj(n,d.layers[i].document);
+		if(!x && document.getElementById) x = document.getElementById(n); return x;
+	}
+	
+	function changestyle(id_couche, element, style) {
+
+		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
+			findObj('bandeaudocuments').style.visibility = 'hidden';
+			findObj('bandeauredacteurs').style.visibility = 'hidden';
+			<?php if (lire_meta("activer_statistiques") != 'non') ?> findObj('bandeausuivi').style.visibility = 'hidden';
+			findObj('bandeauadministration').style.visibility = 'hidden';
+		<?php } ?>
+		
+		findObj('bandeaudeconnecter').style.visibility = 'hidden';
+		findObj('bandeautoutsite').style.visibility = 'hidden';
+		findObj('bandeaunavrapide').style.visibility = 'hidden';
+		findObj('bandeauagenda').style.visibility = 'hidden';
+		findObj('bandeaumessagerie').style.visibility = 'hidden';
+		findObj('bandeausynchro').style.visibility = 'hidden';
+		findObj('bandeaurecherche').style.visibility = 'hidden';
+		findObj('bandeauinfoperso').style.visibility = 'hidden';
+		findObj('bandeaudisplay').style.visibility = 'hidden';
+		findObj('bandeauecran').style.visibility = 'hidden';
+		findObj('bandeauinterface').style.visibility = 'hidden';
+		
+		if (init_gauche) {
+		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
+			decalerCouche('bandeaudocuments');
+			decalerCouche('bandeauredacteurs');
+			<?php if (lire_meta("activer_statistiques") != 'non') ?> decalerCouche('bandeausuivi');
+			decalerCouche('bandeauadministration');
+		<?php } ?>
+			init_gauche = false;
+		}
+		
+		
+		if (!(layer = findObj(id_couche))) return;
+	
+		layer.style[element] = style;
+	}
+	
+	function decalerCouche(id_couche) {
+		if (!(layer = findObj(id_couche))) return;
+		
+		<?php if ($spip_lang_left == "left") {  /* uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse! */  ?>
+		
+		if ( parseInt(layer.style.<?php echo $spip_lang_left; ?>) > 0) {
+			gauche = parseInt(layer.style.<?php echo $spip_lang_left; ?>) - Math.floor( layer.offsetWidth / 2 ) + Math.floor(<?php echo largeur_icone_bandeau_principal(_T('icone_a_suivre')); ?> / 2);
+			if (gauche < 0) gauche = 0;
+		 
+			layer.style.<?php echo $spip_lang_left; ?> = gauche+"px";
+		}
+		
+		<?php } ?>
+		
+	}	
+	
+	function changeclass(objet, myClass)
+	{
+			objet.className = myClass;
+	}
+	function changesurvol(iddiv, myClass)
+	{
+			document.getElementById(iddiv).className = myClass;
+	}
+	function setActiveStyleSheet(title) {
+	   var i, a, main;
+	   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+		 if(a.getAttribute("rel").indexOf("style") != -1
+			&& a.getAttribute("title")) {
+		   a.disabled = true;
+		   if(a.getAttribute("title") == title) a.disabled = false;
+		 }
+	   }
+	}
+	
+	function getHeight(obj) {
+		if (obj == "window") {
+			return hauteur_fenetre();
+		}
+		else
+		{
+			obj = document.getElementById(obj);
+			if (obj.offsetHeight) return obj.offsetHeight;
+		}
+	}
+	function hauteur_fenetre() {
+		var myWidth = 0, myHeight = 0;
+		if( typeof( window.innerWidth ) == 'number' ) {
+			//Non-IE
+			myHeight = window.innerHeight;
+		} else {
+			if( document.documentElement &&
+				( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
+				//IE 6+ in 'standards compliant mode'
+				myHeight = document.documentElement.clientHeight;
+			} else {
+				if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
+					//IE 4 compatible
+					myHeight = document.body.clientHeight;
+				}
+			}
+		}
+		return myHeight;
+	}
+
+	
+	function hauteurFrame(nbCol) {
+		hauteur = hauteur_fenetre() - 40;
+		hauteur = hauteur - getHeight('haut-page');
+		
+		if (findObj('brouteur_hierarchie')) hauteur = hauteur - getHeight('brouteur_hierarchie');
+			
+		for (i=0; i<nbCol; i++) {
+			source = document.getElementById("iframe" + i);
+			source.style.height = hauteur + 'px';
+		}
+	}
+
+	function hauteurTextarea() {
+		hauteur = hauteur_fenetre() - 80;
+		
+		source = document.getElementById("text_area");
+		source.style.height = hauteur + 'px';
+	}
+
+	function changeVisible(input, id, select, nonselect) {
+		if (input) {
+			findObj(id).style.display = select;
+		} else {
+			findObj(id).style.display = nonselect;
+		}
+		
+	}
+
+	
+	var antifocus=false; // effacement titre quand new=oui
+	
 //--></script>
+	<link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
+	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
 </head>
 <?php
-	echo "<body text='#000000' bgcolor='#e4e4e4' background='img_pack/degrade.jpg' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'";
+	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
+
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
+	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
+	echo " onLoad=\"setActiveStyleSheet('invisible');$onLoad\"";
 	echo ">";
 }
 
@@ -989,91 +1338,63 @@ var antifocus=false; // effacement titre quand new=oui
 
 function onglet_relief_inter(){
 	global $spip_display;
-	if ($spip_display != 1) {
-		echo "<td background='img_pack/barre-noir.gif'><img src='img_pack/rien.gif' alt='' width='1' height='40'></td>";
-	}
+	
+	echo "<td>&nbsp;</td>";
+	
 }
 
 function debut_onglet(){
 	global $spip_display;
-	if ($spip_display == 1) {
-		echo "\n";
-		echo "<p><table cellpadding=0 cellspacing=3 border=0>";
-		echo "<tr>";
-	}
-	else {
-		echo "\n";
-		echo "<p><table cellpadding=0 cellspacing=0 border=0>";
-		echo "<tr><td>";
-		if ($GLOBALS['spip_lang_rtl'])
-			echo "<img src='img_pack/barre-d.gif' alt='' width='16' height='40'>";
-		else
-			echo "<img src='img_pack/barre-g.gif' alt='' width='16' height='40'>";
-		echo "</td>";
-	}
+
+	echo "\n\n";
+	echo "<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'>";
+	echo "<tr>";
 }
 
 function fin_onglet(){
 	global $spip_display;
-	onglet_relief_inter();
-	if ($spip_display == 1) {
-		echo "</tr>";
-		echo "</table>";
-	} else {
-		echo "<td>";
-		if ($GLOBALS['spip_lang_rtl'])
-			echo "<img src='img_pack/barre-g.gif' alt='' width='16' height='40'>";
-		else
-			echo "<img src='img_pack/barre-d.gif' alt='' width='16' height='40'>";
-		echo "</td></tr>";
-		echo "</table>";
-	}
+	echo "</tr>";
+	echo "</table></div>\n\n";
 }
 
 function onglet($texte, $lien, $onglet_ref, $onglet, $icone=""){
-	global $spip_display ;
-	if ($spip_display == 1) {
-		if ($onglet_ref == $onglet){
-			echo "\n<td  class='iconeon' valign='middle'>";
-			echo "<font face='Verdana,Arial,Sans,sans-serif' size='2' color='black'><b>$texte</b></font>";
-			echo "</td>";
-		}
-		else {
-			echo "\n<td class='iconeoff' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'iconeoff');\" onClick=\"document.location='$lien'\" valign='middle'>";
-			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>$texte</b></font></a>";
-			echo "</td>";
-		}
-	}
-	else {
-		if ($onglet_ref == $onglet){
-			onglet_relief_inter();
-			if (strlen($icone)>3){
-				echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='top'>";
-				echo "&nbsp; <img src='img_pack/$icone' border=0>";
-				echo "</td>";
-			}
-			echo "\n<td background='img_pack/barre-noir.gif' height=40 valign='middle'>";
-			echo "&nbsp; <font face='Verdana,Arial,Sans,sans-serif' size='2' color='black'><b>$texte</b></font> &nbsp;";
-			echo "</td>";
-		}
-		else {
-			onglet_relief_inter();
-			echo "\n<td class='reliefblanc' onMouseOver=\"changeclass(this,'reliefgris');\" onMouseOut=\"changeclass(this,'reliefblanc');\" height='40' valign='middle'>\n";
-			echo "<table border='0' cellspacing='0' cellpadding='0'><tr>\n";
+	global $spip_display, $spip_lang_left ;
 
-			if (strlen($icone)>3){
-				echo "\n<td height=40 valign='middle'>";
-				echo "&nbsp; <a href='$lien' class='icone'><img src='img_pack/$icone' border=0></a>";
-				echo "</td>";
-			}
-			echo "\n<td height=40 valign='middle'>";
-			echo "<a href='$lien' class='icone'>&nbsp; <font face='Verdana,Arial,Sans,sans-serif' size='2' color='#666666'><b>$texte</b></font></a> &nbsp;";
-			echo "</td>";
 
-			echo "\n</tr></table>";
-			echo "\n</td>\n";
+	echo "<td>";
+	
+	if ($onglet != $onglet_ref) {
+		echo "<div style='position: relative;'>";
+		if ($spip_display != 1) {
+			if (strlen($icone) > 0) {
+				echo "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'><img src='img_pack/$icone' /></div>";
+				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
+			} else {
+				$style = " top: 7px;";
+			}
 		}
+		
+		echo "<div onMouseOver=\"changeclass(this, 'onglet_on');\" onMouseOut=\"changeclass(this, 'onglet');\" class='onglet' style='position: relative;$style'><a href='$lien'>$texte</a></div>";
+		
+		
+		echo "</div>";
+	} else {
+		echo "<div style='position: relative;'>";
+		if ($spip_display != 1) {
+			if (strlen($icone) > 0) {
+				echo "<div style='z-index: 2; position: absolute; top: 0px; $spip_lang_left: 5px;'><img src='img_pack/$icone' /></div>";
+				$style = " top: 7px; padding-$spip_lang_left: 32px; z-index: 1;";
+			} else {
+				$style = " top: 7px;";
+			}
+		}
+		
+		echo "<div class='onglet_off' style='position: relative;$style'>$texte</div>";
+		
+		
+		echo "</div>";
 	}
+	echo "</td>";
 }
 
 
@@ -1083,13 +1404,26 @@ function barre_onglets($rubrique, $onglet){
 	debut_onglet();
 
 	if ($rubrique == "statistiques") {
-		onglet(_T('onglet_evolution_visite_mod'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
-		onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
+	//	onglet(_T('onglet_evolution_visite_mod'), "statistiques_visites.php3", "evolution", $onglet, "statistiques-24.gif");
+	//	onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
 	if ($rubrique == "repartition") {
-		onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "rubriques", $onglet, "rubrique-24.gif");
-		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
+		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') {
+			onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "rubriques", $onglet, "rubrique-24.gif");
 			onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues", $onglet, "langues-24.gif");
+		}
+	}
+
+	if ($rubrique == "rep_depuis") {
+		onglet(_T('icone_repartition_actuelle'), "statistiques_lang.php3", "popularite", $onglet);
+		onglet(_T('onglet_repartition_debut'), "statistiques_lang.php3?critere=debut", "debut", $onglet);
+
+	}
+
+	if ($rubrique == "stat_depuis") {
+		onglet(_T('icone_repartition_actuelle'), "statistiquesphp3", "popularite", $onglet);
+		onglet(_T('onglet_repartition_debut'), "statistiques.php3?critere=debut", "debut", $onglet);
+
 	}
 
 	if ($rubrique == "administration"){
@@ -1120,6 +1454,11 @@ function barre_onglets($rubrique, $onglet){
 			onglet(_T('module_fichiers_langues'), "lang_raccourcis.php3", "fichiers", $onglet, "traductions-24.gif");
 		}
 	}
+	
+	if ($rubrique == "forums") {
+		onglet(_T('titre_forum'), "forum.php3", "privrac", $onglet, "forum-interne-24.gif");
+		onglet(_T('icone_forum_administrateur'), "forum_admin.php3", "privadm", $onglet, "forum-admin-24.gif");
+	}
 
 	if ($rubrique == "suivi_forum"){
 		onglet(_T('onglet_messages_publics'), "controle_forum.php3?page=public", "public", $onglet, "racine-site-24.gif");
@@ -1136,27 +1475,47 @@ function barre_onglets($rubrique, $onglet){
 }
 
 
-function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
+function largeur_icone_bandeau_principal($texte) {
 	global $spip_display, $spip_ecran ;
-	global $menu_accesskey, $compteur_survol;
+	global $connect_statut, $connect_toutes_rubriques;
 
 	if ($spip_display == 1){
-		//$hauteur = 20;
 		$largeur = 80;
 	}
 	else if ($spip_display == 3){
-		//$hauteur = 50;
 		$largeur = 60;
-		$title = " title=\"$texte\"";
-		$alt = " alt=\"$texte\"";
 	}
 	else {
-		//$hauteur = 80;
 		if (count(explode(" ", $texte)) > 1) $largeur = 84;
 		else $largeur = 80;
 		$alt = " alt=\" \"";
 	}
+	if ($spip_ecran == "large") $largeur = $largeur + 30;
 
+	if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
+		$largeur = $largeur + 30;
+	}
+
+
+	return $largeur;
+}
+
+function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
+	global $spip_display, $spip_ecran, $couleur_foncee ;
+	global $menu_accesskey, $compteur_survol;
+
+	$largeur = largeur_icone_bandeau_principal($texte);
+
+	if ($spip_display == 1){
+	}
+	else if ($spip_display == 3){
+		$title = " title=\"$texte\"";
+		$alt = " alt=\"$texte\"";
+	}
+	else {
+		$alt = " alt=\" \"";
+	}
+	
 	if (!$menu_accesskey) $menu_accesskey = 1;
 	if ($menu_accesskey < 10) {
 		$accesskey = " accesskey='$menu_accesskey'";
@@ -1167,7 +1526,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$menu_accesskey++;
 	}
 
-	if ($rubrique_icone == $rubrique) $class_select = " class='selection'";
+	if ($sous_rubrique_icone == $sous_rubrique) $class_select = " class='selection'";
 
 	if (eregi("^javascript:",$lien)) {
 		$a_href = "<a$accesskey onClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select>";
@@ -1179,12 +1538,12 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 	$compteur_survol ++;
 
 	if ($spip_display != 1) {
-		echo "<td class='cellule48' width='$largeur'>$a_href<img src='img_pack/$fond'$alt$title>";
+		echo "<td class='cellule48' onMouseOver=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href<img src='img_pack/$fond' width='48' height='48'$alt$title>";
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
 		}
 	}
-	else echo "<td class='cellule-texte' width='$largeur'>$a_href".$texte;
+	else echo "<td class='cellule-texte' onMouseOver=\"changestyle('bandeau$rubrique_icone', 'visibility', 'visible');\" width='$largeur'>$a_href".$texte;
 	echo "</a></td>\n";
 }
 
@@ -1217,8 +1576,6 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($spip_display != 3 AND strlen($texte)>16) $largeur += 20;
 	
-	if ($largeur) $width = "width='$largeur'";
-
 	if (!$menu_accesskey) $menu_accesskey = 1;
 	if ($menu_accesskey < 10) {
 		$accesskey = " accesskey='$menu_accesskey'";
@@ -1236,7 +1593,8 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
 
 	if ($spip_display != 1) {
-		echo "<td class='cellule36' width='$largeur'>$a_href<img src='img_pack/$fond'$alt$title>";
+		echo "<td class='cellule36' style='width: ".$largeur."px;'>";
+		echo "$a_href<img src='img_pack/$fond'$alt$title>";
 		if ($aide AND $spip_display != 3) echo aide($aide)." ";
 		if ($spip_display != 3) {
 			echo "<span>$texte</span>";
@@ -1257,7 +1615,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 
 	if ($spip_display == 1){
 		$hauteur = 20;
-		$largeur = 80;
+		$largeur = 100;
 		$alt = " alt=\"\"";
 	}
 	else if ($spip_display == 3){
@@ -1268,7 +1626,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	}
 	else {
 		$hauteur = 70;
-		$largeur = 80;
+		$largeur = 100;
 	}
 
 	if ($fonction == "supprimer.gif") {
@@ -1326,16 +1684,59 @@ function bandeau_barre_verticale(){
 
 
 // lien changement de couleur
-function lien_change_var($lien, $set, $couleur, $coords, $titre) {
+function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
 	$lien->addVar($set, $couleur);
-	return "\n<area shape='rect' href='". $lien->getUrl() ."' coords='$coords' title=\"$titre\">";
+	return "\n<area shape='rect' href='". $lien->getUrl() ."' coords='$coords' title=\"$titre\" $mouseOver>";
 }
 
 //
 // Debut du corps de la page
 //
 
-function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre") {
+function bandeau_rubrique ($id_rubrique, $titre_rubrique, $z = 1) {
+	global $zdecal;
+	global $spip_ecran, $spip_display;
+	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
+
+	// Calcul du nombre max de sous-menus	
+	$zdecal = $zdecal + 1;
+	if ($spip_ecran == "large") $zmax = 8;
+	else $zmax= 6;
+	
+	// Limiter volontairement le nombre de sous-menus 
+	$zmax = 3;
+	
+	
+	if ($zindex < 1) $zindex = 1;
+	if ($zdecal == 1) $image = "secteur-12.gif";
+	else $image = "rubrique-12.gif";
+	
+	
+	
+	$result_rub = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=$id_rubrique ORDER BY titre");
+
+	$i = spip_num_rows($result_rub);
+	if ($i > 0 AND $zdecal < $zmax) {
+		echo "<div style='position: relative; z-index: $z;' onMouseOver=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'visible';\" onMouseOut=\"findObj('bandeau_rub$id_rubrique').style.visibility = 'hidden';\">\n";
+		echo "<div style='background: url(img_pack/triangle-droite$spip_lang_rtl.gif) $spip_lang_right center no-repeat;'><a href='naviguer.php3?coll=$id_rubrique' class='bandeau_rub' style='background-image: url(img_pack/$image);'>$titre_rubrique</a></div>\n";
+		echo "<div class='bandeau_rub' style='z-index: ".($z+1).";' id='bandeau_rub$id_rubrique'>";
+		while ($row_rub = spip_fetch_array($result_rub)) {
+			$id_rub = $row_rub["id_rubrique"];
+			$titre_rub = supprimer_numero(typo($row_rub["titre"]));
+			//echo "<a href='naviguer.php3?coll=$id_rub' class='bandeau_rub'>$titre_rub</a>";
+			bandeau_rubrique ($id_rub, $titre_rub, ($z+$i));
+			$i = $i - 1;
+		}
+		echo "</div>";
+		echo "</div></n>";
+	} else {
+		echo "<div><a href='naviguer.php3?coll=$id_rubrique' class='bandeau_rub' style='background-image: url(img_pack/$image); padding-$spip_lang_right: 2px;'>$titre_rubrique</a></div>";
+	}
+	$zdecal = $zdecal - 1;
+
+}
+
+function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
 	global $couleur_foncee;
 	global $couleur_claire;
 	global $adresse_site;
@@ -1345,7 +1746,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_toutes_rubriques;
 	global $auth_can_disconnect, $connect_login;
 	global $options, $spip_display, $spip_ecran;
-	global $spip_lang, $spip_lang_rtl;
+	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	global $clean_link;
 
@@ -1361,90 +1762,81 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	if (strlen($adresse_site)<10) $adresse_site="../";
 
-	debut_html($titre);
+	debut_html($titre, $rubrique, $onLoad);
 
 	$ctitre = _T('titre_changer_couleur_interface');
 	echo "\n<map name='map_couleur'>";
-	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 2, '24,0,34,10', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 3, '36,0,46,10', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 4, '48,0,58,10', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 5, '60,0,70,10', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 7, '0,11,10,21', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 8, '12,11,22,21', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 9, '24,11,34,21', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 10, '36,11,46,21', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 11, '48,11,58,21', $ctitre);
-	echo lien_change_var ($clean_link, 'set_couleur', 12, '60,11,70,21', $ctitre);
+	echo lien_change_var ($clean_link, 'set_couleur', 6, '0,0,10,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_couleur', 1, '12,0,22,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_couleur', 2, '24,0,34,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_couleur', 3, '36,0,46,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_couleur', 4, '48,0,58,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_couleur', 5, '60,0,70,10', $ctitre, "onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\"");
 	echo "\n</map>";
 
 	echo "\n<map name='map_layout'>";
-	echo lien_change_var ($clean_link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'));
-	echo lien_change_var ($clean_link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'));
-	echo lien_change_var ($clean_link, 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'));
+	echo lien_change_var ($clean_link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var ($clean_link, 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo "\n</map>";
 
+
+
 	// Icones principales
+	
+	echo "<div id='haut-page'>";
 
 	echo "<div class='bandeau-principal' align='center'>\n";
-	echo "<div class='bandeau-icones' style='width: ".$largeur."px'>\n";
-	echo "<table class='gauche'><tr>\n";
+	echo "<div class='bandeau-icones' >\n";
+	echo "<table width='$largeur' cellpadding='0' cellspacing='0' border='0' align='center'><tr>\n";
 
-	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
-	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.gif", "documents", $rubrique);
-	icone_bandeau_principal (_T('icone_discussions'), "forum.php3", "messagerie-48.gif", "redacteurs", $rubrique);
-	if ($connect_statut == "0minirezo") {
-		bandeau_barre_verticale();
-		if ($connect_toutes_rubriques) 
-			icone_bandeau_principal (_T('icone_suivi_actualite'), "controle_forum.php3", "suivi-48.gif", "suivi", $rubrique);
-		else if (lire_meta("activer_statistiques") != 'non') 
-			icone_bandeau_principal (_T('icone_statistiques'), "statistiques_visites.php3", "statistiques-48.gif", "suivi", $rubrique);
+	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
+	icone_bandeau_principal (_T('titre_forum'), "forum.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
+	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
+		//bandeau_barre_verticale();
+		icone_bandeau_principal (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
 	}
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		icone_bandeau_principal (_T('icone_admin_site'), "configuration.php3", "administration-48.gif", "administration", $rubrique);
+		icone_bandeau_principal (_T('icone_configuration_site'), "configuration.php3", "administration-48.png", "administration", $rubrique, "", "configuration", $sous_rubrique);
 	}
 
+	echo "<td> &nbsp; </td>";
+
+
+
+
+	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.png", "vide", "", "aide_index.php3?var_lang=$spip_lang", "aide-en-ligne", $sous_rubrique);
+	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
+
 	echo "</tr></table>\n";
-	echo "<table class='droite'><tr>\n";
 
-	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.gif", "vide", "", "aide_index.php3?var_lang=$spip_lang");
-	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site", "visiter-48$spip_lang_rtl.gif");
-
-	echo "</tr></table>\n";
-
-	// Merci le W3C pour l'alignement vertical / Thank you W3C idiots for vertical alignment
-	if ($spip_display == 1) $h = 8;
-	else if ($spip_display == 3) $h = 20;
-	else $h = 34;
-	echo "<div class='milieu' style='margin-top: ".$h."px'>";
-	echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".gif' alt='abc' vspace=3 border=0 usemap='#map_layout'>";
-	echo "</div>\n";
-
-	echo "<div class='fin'></div>\n";
 
 	echo "</div>\n";
-	echo "</div>\n";
-
-
+	
+	echo "<div style='text-align: $spip_lang_left; width: ".$largeur."px; position: relative; z-index: 2000;'>";
+	
 	// Icones secondaires
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$connect_activer_messagerie = $GLOBALS["connect_activer_messagerie"];
-
-	echo "<div class='bandeau-secondaire' align='center'>\n";
-	echo "<div class='bandeau-icones' style='width: ".$largeur."px'>\n";
-	echo "<table class='gauche'><tr>\n";
-
+	
 	if ($rubrique == "asuivre"){
-		icone_bandeau_secondaire (_T('icone_a_suivre'), "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_site_entier'), "articles_tous.php3", "tout-site-24.gif", "tout-site", $sous_rubrique);
-		if ($options == "avancees"){
-			icone_bandeau_secondaire (_T('icone_suivi_activite'), "synchro.php3", "synchro-24.gif", "synchro", $sous_rubrique);
-		}
+		$class = "visible_au_chargement";
+	} else {
+		$class = "invisible_au_chargement";
 	}
-	else if ($rubrique == "documents"){
-		icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
+	$decal = largeur_icone_bandeau_principal(_T('icone_a_suivre'));
+
+
+	if ($rubrique == "documents"){
+		$class = "visible_au_chargement";
+	} else {
+		$class = "invisible_au_chargement";
+	}
+	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
+		echo "<div class='$class' id='bandeaudocuments' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+		//icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
 
 		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 0,1"));
 		if ($nombre_articles > 0) {
@@ -1455,8 +1847,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		if ($activer_breves != "non"){
 			icone_bandeau_secondaire (_T('icone_breves'), "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
 		}
-
-		icone_bandeau_secondaire (_T('icone_auteurs'), "auteurs.php3", "redacteurs-24.gif", "redacteurs", $sous_rubrique);
 
 		if ($options == "avancees"){
 			$articles_mots = lire_meta('articles_mots');
@@ -1472,173 +1862,483 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 				icone_bandeau_secondaire (_T('icone_doc_rubrique'), "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
 			}
 		}
+		echo "</tr></table></div></div>";
 	}
-	else if ($rubrique == "redacteurs") {
-		icone_bandeau_secondaire (_T('titre_forum'), "forum.php3", "forum-interne-24.gif", "forum-interne", $sous_rubrique);
-		if ($connect_statut == "0minirezo" AND lire_meta('forum_prive_admin') == 'oui')
-			icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "forum-admin", $sous_rubrique);
-		
-		if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") {
-			bandeau_barre_verticale();
-			icone_bandeau_secondaire (_T('icone_agenda'), "calendrier_jour.php3", "agenda-24.gif", "calendrier", $sous_rubrique);
-			icone_bandeau_secondaire (_T('icone_messagerie_personnelle'), "messagerie.php3", "messagerie-24.gif", "messagerie", $sous_rubrique);
-		}
-	}
-	else if ($rubrique == "suivi") {
-		if ($connect_toutes_rubriques) {
-			icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
-			icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
-		}
-		if (lire_meta("activer_statistiques") != 'non') {
-			if ($connect_toutes_rubriques) bandeau_barre_verticale();
-			icone_bandeau_secondaire (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-24.gif", "statistiques", $sous_rubrique);
-			icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques.php3", "rubrique-24.gif", "repartition", $sous_rubrique);
-		}
-	}
-	else if ($rubrique == "administration") {
-		icone_bandeau_secondaire (_T('icone_configuration_site'), "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
-		icone_bandeau_secondaire (_T('icone_gestion_langues'), "config-lang.php3", "langues-24.gif", "langues", $sous_rubrique);
 
-		bandeau_barre_verticale();
-		if ($options == "avancees") {
-			icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
-			icone_bandeau_secondaire (_T('onglet_vider_cache'), "admin_vider.php3", "cache-24.gif", "cache", $sous_rubrique);
-		}
-		else {
-			icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
-		}
-	}
+	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_edition_site'));
+
 
 	
+	
+	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
+		if ($rubrique == "redacteurs") {
+			$class = "visible_au_chargement";
+		} else {
+			$class = "invisible_au_chargement";
+		}
 
-	if ($options == "avancees" AND !($spip_display != 3 AND $rubrique == "documents" AND $spip_ecran == "etroit")) {
-		global $recherche;
-		if ($recherche == '' AND $spip_display != 2) {
-			$recherche_aff = _T('info_rechercher');
-			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
-		} else
-			$recherche_aff = $recherche;
-		bandeau_barre_verticale();
-		echo "<td>";
-		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
-		if ($spip_display == "2")
-			echo "<font face='Verdana,Arial,Sans,sans-serif' size=1 color='#505050'><b>"._T('info_rechercher_02')."</b></font><br>";
-		echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" style="width: 70px" accesskey="r"'.$onfocus.'>';
-		echo "</form>";
-		echo "</td>";
+			echo "<div class='$class' id='bandeauredacteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+			if ($connect_toutes_rubriques) {
+				icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
+				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "petition-24.gif", "suivi-petition", $sous_rubrique);
+			}
+			echo "</tr></table></div></div>";
+	
+	}
+	
+	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_discussions'));
+	
+	
+	
+	
+	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_auteurs'));
+
+	// decalage pour barre verticale
+	//$decal = $decal + 11;
+
+	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
+		if ($rubrique == "suivi") {
+			$class = "visible_au_chargement";
+		} else {
+			$class = "invisible_au_chargement";
+		}
+		echo "<div class='$class' id='bandeausuivi' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+		if ($connect_toutes_rubriques) bandeau_barre_verticale();
+
+		icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques.php3", "rubrique-24.gif", "repartition", $sous_rubrique);
+		icone_bandeau_secondaire (_T('titre_liens_entrants'), "statistiques_referers.php3", "referers-24.gif", "referers", $sous_rubrique);
+
+		echo "</tr></table></div></div>";
+
+		$decal = $decal + largeur_icone_bandeau_principal(_T('icone_suivi_actualite'));
+	
 	}
 
-	echo "</tr></table>\n";
 
-	if ($auth_can_disconnect) {
-		echo "<table class='droite'><tr>\n";
-		icone_bandeau_secondaire (_T('icone_deconnecter'), "../spip_cookie.php3?logout=$connect_login", "deconnecter-24$spip_lang_rtl.gif", "", $sous_rubrique, "deconnect");
-		echo "</tr></table>\n";
-	}
+	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+		if ($rubrique == "administration") {
+			$class = "visible_au_chargement";
+		} else {
+			$class = "invisible_au_chargement";
+		}
+			echo "<div class='$class' id='bandeauadministration' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
+			//icone_bandeau_secondaire (_T('icone_configuration_site'), "configuration.php3", "administration-24.gif", "configuration", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_gestion_langues'), "config-lang.php3", "langues-24.gif", "langues", $sous_rubrique);
+	
+			bandeau_barre_verticale();
+			if ($options == "avancees") {
+				icone_bandeau_secondaire (_T('icone_maintenance_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+				icone_bandeau_secondaire (_T('onglet_vider_cache'), "admin_vider.php3", "cache-24.gif", "cache", $sous_rubrique);
+			}
+			else {
+				icone_bandeau_secondaire (_T('icone_sauver_site'), "admin_tech.php3", "base-24.gif", "base", $sous_rubrique);
+			}
+			echo "</tr></table></div></div>";
 
-	echo "<div class='fin'></div>\n";
 
+
+	}	
+	
+	echo "</div>";
 	echo "</div>\n";
-	echo "</div>\n";
-
 
 	// Bandeau
-	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%'>";
+	if ($rubrique == "administration") {
+		$style = "background: url(img_pack/rayures-danger.png); background-color: $couleur_foncee";
+		echo "<style>a.icone26 { color: white; }</style>";
+	}
+	else {
+		$style = "background-color: $couleur_claire";
+	}
+	echo "\n<div style=\"height: 27px; width: 100%; border-bottom: solid 1px white;$style\">";
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 
-	echo "<td>";
-	echo "<font size=1 face='Verdana,Arial,Sans,sans-serif'>";
-		if ($options == "avancees") {
-			$lien = $clean_link;
-			$lien->addVar('set_options', 'basiques');
-			echo "<span class='fondgris'
-				onMouseOver=\"changeclass(this,'fondgrison2')\"
-				onMouseOut=\"changeclass(this,'fondgris')\"><a
-				href='". $lien->getUrl() ."' class='icone'><font color='black'>"._T('icone_interface_simple')."</font></a></span>";
-			echo " <span class = 'fondo'><b>"._T('info_interface_complete')."</b></span>";
 
-		}
-		else {
-			$lien = $clean_link;
-			$lien->addVar('set_options', 'avancees');
-			echo "<span class='fondgrison2'><b>"._T('info_interface_simple')."</b></span> <span class='fondgris'
-				onMouseOver=\"changeclass(this,'fondgrison2')\"
-				onMouseOut=\"changeclass(this,'fondgris')\"><a
-				href='". $lien->getUrl() ."' class='icone'><font color='black'>"._T('icone_interface_complet')."</font></a></span>";
-		}
 
-	echo "</font>";
-	echo "</td>";
 
-	if ($options == 'avancees') {
-		echo "<td>   </td>";
-		echo "<td>";
-		global $id_rubrique;
-		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' title='"._T('icone_brouteur')."'><img src='img_pack/naviguer-site.gif' alt='nav' width='26' height='20' border='0'></a> ";
-		else echo "<a href='brouteur.php3' title='"._T('icone_brouteur')."'><img src='img_pack/naviguer-site.gif' alt='nav' width='26' height='20' border='0'></a> ";
-		if ($activer_messagerie == "oui" AND $connect_activer_messagerie != "non") echo "<a href='calendrier.php3' title='"._T('icone_agenda')."'><img src='img_pack/cal-mois.gif' alt='jour' width='26' height='20' border='0'></a>";
+	echo "<td valign='middle'>";
+		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\"><img src='img_pack/tout-site.gif' border='0'></a>";
+
+		$id_rubrique = $GLOBALS['id_rubrique'];
+		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\"><img src='img_pack/naviguer-site.gif' alt='' width='26' height='20' border='0'></a>";
+		else echo "<a href='brouteur.php3' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\" ><img src='img_pack/naviguer-site.gif' alt='' width='26' height='20' border='0'></a>";
+
+		echo "<a href='recherche.php3' class='icone26' onMouseOver=\"changestyle('bandeaurecherche','visibility','visible');\" ><img src='img_pack/loupe.gif' alt='' width='26' height='20' border='0'></a>";
+
+		echo"<img src='img_pack/rien.gif' width='10' />";
+
+		echo "<a href='calendrier.php3' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\"><img src='img_pack/cal-rv.gif' alt='' width='26' height='20' border='0'></a>";
+		echo "<a href='messagerie.php3' class='icone26' onMouseOver=\"changestyle('bandeaumessagerie','visibility','visible');\"><img src='img_pack/cal-messagerie.gif' alt='' width='26' height='20' border='0'></a>";
+		echo "<a href='synchro.php3' class='icone26' onMouseOver=\"changestyle('bandeausynchro','visibility','visible');\"><img src='img_pack/cal-suivi.gif' alt='' width='26' height='20' border='0'></a>";
 		
+
+
+		echo"<img src='img_pack/rien.gif' width='10' />";
+
+		// Redacteur connecte
+		echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\"><img src='img_pack/fiche-perso.gif' border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\">";
+		echo $GLOBALS["connect_nom"];
+		echo "</a>";
+	
+	echo "</td>";
+	
+	echo "<td> &nbsp; </td>";
+	echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
+
+
+			// Choix display
+		//	echo"<img src='img_pack/rien.gif' width='10' />";
+			if ($options != "avancees") {
+				$lien = $clean_link;
+				$lien->addVar('set_options', 'avancees');
+				$simple = "<b>"._T('icone_interface_simple')."</b>/"._T('icone_interface_complet');
+			} else {
+				$lien = $clean_link;
+				$lien->addVar('set_options', 'basiques');
+				$simple = _T('icone_interface_simple')."/<b>"._T('icone_interface_complet')."</b>";
+			}
+			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\"><img src='img_pack/interface-display.gif' alt='' width='26' height='20' border='0'></a>";
+
+			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			echo "<img src='img_pack/choix-layout$spip_lang_rtl".($spip_lang=='he'?'_he':'').".png' alt='abc' align='middle' width='59' height='15' usemap='#map_layout' border='0' />";
+
+
+			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			// grand ecran
+			$lien = $clean_link;
+			if ($spip_ecran == "large") {
+				$lien->addVar('set_ecran', 'etroit');
+				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\""._T('info_petit_ecran')."\"><img src='img_pack/set-ecran-etroit.gif' alt=\""._T('info_petit_ecran')."\" width='26' height='20' border='0'></a>";
+				$ecran = "<div>"._T('info_petit_ecran')."/<b>"._T('info_grand_ecran')."</b></div>";
+			}
+			else {
+				$lien->addVar('set_ecran', 'large');
+				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\""._T('info_grand_ecran')."\"><img src='img_pack/set-ecran.gif' alt=\""._T('info_grand_ecran')."\" width='26' height='20' border='0'></a>";
+				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/"._T('info_grand_ecran')."</div>";
+			}
+
+
+			// choix de la couleur
+			echo "<img src='img_pack/rien.gif' width='10' height='1' />";
+			echo "<img src='img_pack/barre-couleurs.gif' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' width='70' height='10' border='0' usemap='#map_couleur'>";
+
+	
+			echo "<img src='img_pack/rien.gif' width='120' height='1' />";
+
+
+			if ($auth_can_disconnect) {	
+				echo "<a href='../spip_cookie.php3?logout=$connect_login' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\"><img src='img_pack/deconnecter-24$spip_lang_rtl.gif' border='0'></a>";
+			}
+		echo "</td>";
+	
+	
+	echo "</tr></table>";
+	
+	echo "<table width='$largeur' cellpadding='0' cellspacing='0'' align='center'><tr><td>";
+	echo "<div style='position: relative; z-index: 1000;'>";
+	
+	
+		echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px; width: 170px;'>";
+		echo _T('icone_site_entier');
+		
+		$result_racine = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0 ORDER BY titre");
+		$i = spip_num_rows($result_racine);
+		if ($i > 0) {
+			echo "<div>&nbsp;</div>";
+			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			while ($row = spip_fetch_array($result_racine)) {
+				$id_rubrique = $row["id_rubrique"];
+				$titre_rubrique = supprimer_numero(typo($row["titre"]));
+				
+				bandeau_rubrique ($id_rubrique, $titre_rubrique, $i);
+				
+				$i = $i - 1;
+			}
+			echo "</div>";
+		}
+		
+		echo "</div>";
+	
+	
+	
+	
+		echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
+		echo _T('icone_brouteur');
+
+		
+
+		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
+			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 0,5");
+		if (spip_num_rows($vos_articles) > 0) {
+			echo "<div>&nbsp;</div>";
+			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			bandeau_titre_boite2(_T('info_en_cours_validation'), "article-24.gif");
+			echo "<div class='plan-articles'>";
+			while($row = spip_fetch_array($vos_articles)) {
+				$id_article = $row['id_article'];
+				$titre = typo($row['titre']);
+				$statut = $row['statut'];
+	
+				echo "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
+			}
+			echo "</div>";
+			echo "</div>";
+		}
+	
+		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut='prop' ".
+			" ORDER BY articles.date DESC LIMIT 0,5");
+		if (spip_num_rows($vos_articles) > 0) {
+			echo "<div>&nbsp;</div>";
+			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			bandeau_titre_boite2(_T('info_articles_proposes'), "article-24.gif");
+			echo "<div class='plan-articles'>";
+			while($row = spip_fetch_array($vos_articles)) {
+				$id_article = $row['id_article'];
+				$titre = typo($row['titre']);
+				$statut = $row['statut'];
+	
+				echo "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
+			}
+			echo "</div>";
+			echo "</div>";
+		}
+			
+		$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ".
+			" ORDER BY date_heure DESC LIMIT 0,5");
+		if (spip_num_rows($vos_articles) > 0) {
+			echo "<div>&nbsp;</div>";
+			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
+			bandeau_titre_boite2(_T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white");
+			echo "<div class='plan-articles'>";
+			while($row = spip_fetch_array($vos_articles)) {
+				$id_breve = $row['id_breve'];
+				$titre = typo($row['titre']);
+				$statut = $row['statut'];
+	
+				echo "<a class='$statut' style='font-size: 10px;' href='breves_voir.php3?id_breve=$id_breve'>$titre</a>";
+			}
+			echo "</div>";
+			echo "</div>";
+		}
+	
+
+		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+		$result = spip_query($query);
+	
+		if (spip_num_rows($result) > 0) {
+			$id_rubrique = $GLOBALS['id_rubrique'];
+			if ($id_rubrique > 0) $dans_rub = "&id_rubrique=$id_rubrique";
+		
+			echo "<table><tr>";
+			
+			echo "<td>";
+			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif");
+			echo "</td>";
+			echo "<td>&nbsp;</td>";
+			echo "<td>";
+			$activer_breves = lire_meta("activer_breves");
+			if ($activer_breves != "non") {
+				icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif");
+			}
+			echo "</td>";
+			echo "</tr></table>";
+		}
+
+
+		echo "</div>";
+	
+		echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 100px; $spip_lang_left: 60px;'>";
+		global $recherche;
+				$recherche_aff = _T('info_rechercher');
+				$onfocus = "onfocus=this.value='';";
+			echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
+			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="spip_recherche" accesskey="r" '.$onfocus.'>';
+			echo "</form>";
+		echo "</div>";
+	
+		echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: 420px; $spip_lang_left: 100px;'>";
+		echo _T('icone_agenda');
+
+
+		debut_cadre_relief();
+		
+		icone_horizontale("NOUVEAU RENDEZ-VOUS PERSONNEL","message_edit.php3?new=oui&type=pb", "pense-bete.gif", "rv.gif");
+		icone_horizontale("NOUVEAU RENDEZ-VOUS","message_edit.php3?new=oui&type=normal", "message.gif", "rv.gif");
+		
+		if ($connect_statut == "0minirezo") {
+			icone_horizontale("NOUVEAU RENDEZ-VOUS G&Eacute;N&Eacute;RAL","message_edit.php3?new=oui&type=affich", "annonce.gif", "rv.gif");
+		}
+		fin_cadre_relief();
+
+
+			include_ecrire("inc_agenda.php3");
+			
+			echo "<table style='border= 1px solid #cccccc; background-color: #dddddd; padding: 5px; margin-top: 5px;'><tr>";
+			
+			echo "<td valign='top' width='200'>";
+			echo "<div>&nbsp;</div>";
+			echo "<div style='color: black;'>";
+				afficher_taches();
+			echo "</div>";
+
+				$today = getdate(time());
+				$jour_today = $today["mday"];
+				$mois_today = $today["mon"];
+				$annee_today = $today["year"];
+				$date = date("Y-m-d", mktime(0,0,0,$mois_today, 1, $annee_today));
+				$mois = mois($date);
+				$annee = annee($date);
+				$jour = jour($date);
+		
+				// rendez-vous personnels dans le mois
+				$result_messages = spip_query("SELECT messages.id_message FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
+						"WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') ".
+						"AND messages.rv='oui' AND messages.date_heure >='$annee-$mois-1' AND date_heure < DATE_ADD('$annee-$mois-1', INTERVAL 1 MONTH) ".
+						"AND messages.statut='publie' LIMIT 0,1");
+				if (spip_num_rows($result_messages)) {
+					echo "<div>";
+					agenda ($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
+					echo "</div>";
+				}
+			echo "</td>";
+			echo "<td valign='top' width='10'> &nbsp;";
+			echo "</td>";
+			echo "<td valign='top' width='200'>";
+				echo "<div style='color: white;'>";
+				// rendez-vous personnels dans le mois
+				calendrier_jour($jour_today,$mois_today,$annee_today, "col");
+				echo "</div>";
+			echo "</td>";
+			echo "</tr></table>";
+		
+
+		echo "</div>";
+
+		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px;'>";
+		echo _T('icone_messagerie_personnelle');
+
+		debut_cadre_relief();
+
+		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
+		icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif");
+		
+		if ($connect_statut == "0minirezo") {
+			icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif");
+		}
+
+		fin_cadre_relief();
+
+		echo "</div>";
+	
+		echo "<div id='bandeausynchro' class='bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
+		echo _T('icone_suivi_activite');
+		echo "</div>";
+	
+		echo "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_left: 200px;'>";
+		echo _T('icone_informations_personnelles');
+
+			//
+			// choix de la langue
+			//
+			if ($GLOBALS['all_langs']) {
+				echo "<div>&nbsp;</div>";
+				echo menu_langues('var_lang_ecrire');
+			}
+
+
+		echo "</div>";
+	
+	
+		echo "<div id='bandeaudisplay' class='bandeau_couleur_sous' style='$spip_lang_right: 310px; text-align: $spip_lang_right;'>";
+			echo $simple;
+		echo "</div>";
+	
+		echo "<div id='bandeauecran' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_right: 237px; text-align: $spip_lang_right;'>";
+			echo $ecran;
+		echo "</div>";
+	
+		echo "<div id='bandeauinterface' class='bandeau_couleur_sous' style='$spip_lang_right: 150px; text-align: $spip_lang_right;'>";
+			echo _T('titre_changer_couleur_interface');
+		echo "</div>";
+
+	
+		echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
+		echo _T('icone_deconnecter').aide("deconnect");
+		echo "</div>";
+	
+	echo "</div>";
+	echo "</td></tr></table>";
+	
+	echo "</div>";
+	echo "</div>";
+
+	// Ouverture de la partie "principale" de la page
+	// Petite verif pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
+	echo "<center onMouseOver=\"if (findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
+
+
 		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
-			echo "</td><td> <font face='arial,helvetica,sans-serif' size=1><b>";
 			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);
 			if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<a href='message.php3?id_message=$ze_message'><font color='$couleur_claire'><b>"._T('info_nouveau_message')."</b></font></a>";
+					echo "<div class='messages'><a href='message.php3?id_message=$ze_message'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
 				}
 			}
-			if ($total_messages > 1) echo "<a href='messagerie.php3'><font color='$couleur_claire'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a>";
-			echo "</b></font>";
+			if ($total_messages > 1) echo "<div class='messages'><a href='messagerie.php3'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
 		}
-		echo "</td>";
-	}
 
-	// grand ecran
-	echo "<td style='text-align:center;'>";
-	$lien = $clean_link;
 
-	if ($spip_ecran == "large") {
-		$lien->addVar('set_ecran', 'etroit');
-		echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='"._T('info_petit_ecran')."' alt='"._T('info_petit_ecran')."' width='23' height='19' border='0'></a>";
-	}
-	else {
-		$lien->addVar('set_ecran', 'large');
-		echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='"._T('info_grand_ecran')."' alt='"._T('info_grand_ecran')."' width='23' height='19' border='0'></a>";
-	}
-	echo "</td>";
+	// Afficher les auteurs recemment connectes
+	
+	global $changer_config;
+	global $activer_messagerie;
+	global $activer_imessage;
+	global $connect_activer_messagerie;
+	global $connect_activer_imessage;
 
-	//
-	// choix de la langue
-	//
-	if ($GLOBALS['all_langs']) {
-		echo "<td>   </td>";
+		if ($changer_config!="oui"){
+			$activer_messagerie=lire_meta("activer_messagerie");
+			$activer_imessage=lire_meta("activer_imessage");
+		}
+	
+			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
+				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)";
+				$result_auteurs = spip_query($query2);
+				$nb_connectes = spip_num_rows($result_auteurs);
+			}
+	
+			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
+			if ($flag_cadre) echo "<div class='messages' style='color: #666666;'>";
 
-		echo "<td align='center'>";
-		echo menu_langues('var_lang_ecrire');
-		echo "</td>";
+			
+			if ($nb_connectes > 0) {
+				if ($nb_connectes > 0) {
+					echo "<b>"._T('info_en_ligne')."</b>";
+					while ($row = spip_fetch_array($result_auteurs)) {
+						$id_auteur = $row["id_auteur"];
+						$nom_auteur = typo($row["nom"]);
+						echo " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='auteurs_edit.php3?id_auteur=$id_auteur' style='color: #666666;'>$nom_auteur</a>";
+					}
+				}
+			}
+			if ($flag_cadre) echo "</div>";
 
-	}
 
-	// choix de la couleur
-	echo "<td style='text-align:center;'>";
-	echo "<img src='img_pack/barre-couleurs.gif' alt=\"".entites_html(_T('titre_changer_couleur_interface'))."\" width='70' height='21' border='0' usemap='#map_couleur'>";
-	echo "</td>";
-	echo "</tr></table>";
-	echo "</td></tr></table>";
 
-	echo "<center>";
+
+
 }
 
 
 function gros_titre($titre, $ze_logo=''){
 	global $couleur_foncee;
 	
-	echo "<div>";
+	echo "<div class='verdana2' style='font-size: 18px; color: $couleur_foncee; font-weight: bold;'>";
 	if (strlen($ze_logo) > 3) echo "<img src='img_pack/$ze_logo' alt='' border=0 align='middle'> &nbsp; ";
-	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='Verdana,Arial,Sans,sans-serif' color='$couleur_foncee' ".$GLOBALS['dir_lang']."><b>";
 	echo typo($titre);
-	echo "</b></font></span></div>\n";
+	echo "</div>\n";
 }
 
 
@@ -1664,12 +2364,10 @@ function fin_grand_cadre(){
 // Cadre formulaires
 
 function debut_cadre_formulaire(){
-	echo "\n<div style='width: 100%; border-top: 1px solid #aaaaaa; border-left: 1px solid #aaaaaa; border-right: 1px solid white; border-bottom: 1px solid white; margin: 0px; padding: 0px;'>";
-	echo "\n<div class='verdana3' style='border: 1px dashed #666666; margin: 0px; padding: 10px; background-color:#e4e4e4;'>";
+	echo "\n<div class='cadre-formulaire'>";
 }
 
 function fin_cadre_formulaire(){
-	echo "</div>";
 	echo "</div>\n";
 }
 
@@ -1710,57 +2408,6 @@ function debut_gauche($rubrique = "asuivre") {
 	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
 		<tr><td width='$largeur' valign='top' class='serif' $rspan>\n";
 
-	// Afficher les auteurs recemment connectes
-	
-	global $changer_config;
-	global $activer_messagerie;
-	global $activer_imessage;
-	global $connect_activer_messagerie;
-	global $connect_activer_imessage;
-
-	if (!$flag_3_colonnes) {
-		if ($changer_config!="oui"){
-			$activer_messagerie=lire_meta("activer_messagerie");
-			$activer_imessage=lire_meta("activer_imessage");
-		}
-	
-		if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
-			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
-				$result_auteurs = spip_query($query2);
-				$nb_connectes = spip_num_rows($result_auteurs);
-			}
-	
-			$flag_cadre = (($nb_connectes > 0) OR $rubrique == "messagerie");
-			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-			if ($rubrique == "messagerie") {
-				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-				echo "<font color='#169249' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouveau_message')."</b></font></a>";
-				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-				echo "<font color='#044476' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouvea_pense_bete')."</b></font></a>";
-				if ($connect_statut == "0minirezo") {
-					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune$spip_lang_rtl.gif' alt='' width='14' height='7' border='0'>";
-					echo "<font color='#ff9900' face='Verdana,Arial,Sans,sans-serif' size=1><b>&nbsp;"._T('lien_nouvelle_annonce')."</b></font></a>";
-				}
-			}
-			
-			if ($nb_connectes > 0) {
-				echo "<div class='verdana2'>";
-				if ($nb_connectes > 0) {
-					if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
-					echo "<b>"._T('info_en_ligne')."</b>";
-					while ($row = spip_fetch_array($result_auteurs)) {
-						$id_auteur = $row["id_auteur"];
-						$nom_auteur = typo($row["nom"]);
-						if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-						else  echo "<br> $nom_auteur";
-					}
-				}
-				echo "</div>";
-			}
-			if ($flag_cadre) fin_cadre_relief();
-		}
-	}	
 }
 
 
@@ -1799,37 +2446,6 @@ function creer_colonne_droite($rubrique=""){
 		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
 		echo "<td width=$largeur rowspan=2 align='$lang_left' valign='top'><p />";
 
-		if ($changer_config!="oui") {
-			$activer_messagerie=lire_meta("activer_messagerie");
-			$activer_imessage=lire_meta("activer_imessage");
-		}
-
-		if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non") {
-			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
-				$result_auteurs = spip_query($query2);
-				$nb_connectes = spip_num_rows($result_auteurs);
-			}
-
-			$flag_cadre = ($nb_connectes > 0);
-			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-
-			if ($flag_cadre) {
-				echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
-				if ($nb_connectes > 0) {
-					if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
-					echo "<b>"._T('info_nombre_en_ligne')."</b>";
-					while ($row = spip_fetch_array($result_auteurs)) {
-						$id_auteur = $row["id_auteur"];
-						$nom_auteur = typo($row["nom"]);
-						if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-						else  echo "<br> $nom_auteur";
-					}
-				}
-				echo "</font>";
-			}
-			if ($flag_cadre) fin_cadre_relief();
-		}
 	}
 
 }

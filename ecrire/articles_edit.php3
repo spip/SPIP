@@ -181,7 +181,7 @@ function coupe_trop_long($texte){	// utile pour les textes > 32ko
 }
 
 
-debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles");
+debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles", "hauteurTextarea();");
 
 
 debut_grand_cadre();
@@ -379,7 +379,7 @@ echo "<P><HR><P>";
 
 	echo _T('texte_titre_obligatoire');
 	echo aide ("arttitre");
-	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
+	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
 
 	if (($articles_soustitre != "non") OR $soustitre) {
 		echo "<B>"._T('texte_sous_titre')."</B>";
@@ -505,9 +505,9 @@ echo "<P><HR><P>";
 
 	echo $textes_supplement;
 
-	echo "<BR>";
+	//echo "<BR>";
 	echo afficher_barre('formulaire', 'texte');
-	echo "<TEXTAREA NAME='texte' ".afficher_claret()." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
+	echo "<TEXTAREA id='text_area' NAME='texte' ".afficher_claret()." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA>\n";
 

@@ -25,45 +25,46 @@ function enfant($collection){
 		changer_typo($row['lang']);
 		$descriptif=propre($row['descriptif']);
 
-		$les_enfants.= "<P>";
+		$les_enfants.= "<div class='enfants'>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants .= $bouton_layer;
 		}
-		$les_enfants .= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
+		//$les_enfants .= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
 
 		if (acces_restreint_rubrique($id_rubrique))
 			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
 
 		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
 		if (strlen($descriptif)>1) {
-			$les_enfants .= "<br><FONT SIZE=1><span dir='$lang_dir'>$descriptif</span></FONT>";
+			$les_enfants .= "<div class='verdana1'>$descriptif</span></div>";
 		}
 
-		$les_enfants.= "</FONT>";
+		//$les_enfants.= "</FONT>";
 
 		$les_enfants .= $les_sous_enfants;
 		$les_enfants .= fin_cadre_relief(true);
+		$les_enfants .= "</div>";
 	}
 }
 
 function sous_enfant($collection2){
-	global $lang_dir, $spip_lang_dir;
+	global $lang_dir, $spip_lang_dir, $spip_lang_left;
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='list-style-image: url(img_pack/rubrique-12.gif)'>\n<FONT SIZE=1 face='arial,helvetica,sans-serif'>";
+		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
 		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
 			$titre2=$row['titre'];
 			changer_typo($row['lang']);
 
-			$retour.="<LI><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></A>\n";
+			$retour.="<div class='arial11' style='background: url(img_pack/rubrique-12.gif) left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px;'><A HREF='naviguer.php3?coll=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
 		}
-		$retour .= "</FONT></ul>\n\n".fin_block()."\n\n";
+		$retour .= "</ul>\n\n".fin_block()."\n\n";
 	}
 	
 	return $retour;
@@ -435,8 +436,8 @@ enfant($coll);
 
 
 $les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
-if (strpos($les_enfants2,"<P>")){
-	$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<P>"),strlen($les_enfants2));
+if (strpos($les_enfants2,"<div class='enfants'>")){
+	$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<div class='enfants'>"),strlen($les_enfants2));
 	$les_enfants1=substr($les_enfants,0,strlen($les_enfants)-strlen($les_enfants2));
 }else{
 	$les_enfants1=$les_enfants;
@@ -445,7 +446,7 @@ if (strpos($les_enfants2,"<P>")){
 
 
 // Afficher les sous-rubriques
-echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
 echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' width=20></td>";
 echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
@@ -459,7 +460,7 @@ if ($flag_editable) {
 	echo "<p>";
 }
 echo "</div></td></tr>";
-echo "</table>";
+echo "</table><p />";
 
 
 //echo "<div align='$spip_lang_left'>";
@@ -475,11 +476,83 @@ afficher_articles(_T('info_en_cours_validation'),
 	"AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
 
 
-//////////  Les articles a valider
-/////////////////////////
 
-afficher_articles(_T('info_articles_a_valider'),
-	"WHERE statut=\"prop\" AND id_rubrique='$coll' ORDER BY date DESC");
+//
+// Verifier les boucles a mettre en relief
+//
+
+$relief = false;
+
+if (!$relief) {
+	$query = "SELECT id_article FROM spip_articles AS articles WHERE id_rubrique='$coll' AND statut='prop'$vos_articles LIMIT 0,1";
+	$result = spip_query($query);
+	$relief = (spip_num_rows($result) > 0);
+}
+
+if (!$relief) {
+	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$coll' AND (statut='prepa' OR statut='prop') LIMIT 0,1";
+	$result = spip_query($query);
+	$relief = (spip_num_rows($result) > 0);
+}
+
+if (!$relief AND lire_meta('activer_syndic') != 'non') {
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$coll' AND statut='prop' LIMIT 0,1";
+	$result = spip_query($query);
+	$relief = (spip_num_rows($result) > 0);
+}
+
+if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$coll' AND syndication='off' LIMIT 0,1";
+	$result = spip_query($query);
+	$relief = (spip_num_rows($result) > 0);
+}
+
+
+if ($relief) {
+	echo "<p>";
+	debut_cadre_couleur();
+	echo "<div class='verdana2' style='color: black;'><b>"._T('texte_en_cours_validation')."</b></div><p>";
+
+	//
+	// Les articles a valider
+	//
+	afficher_articles(_T('info_articles_proposes'),
+		"WHERE id_rubrique='$coll' AND statut='prop'$vos_articles ORDER BY date DESC");
+
+	//
+	// Les breves a valider
+	//
+	$query = "SELECT * FROM spip_breves WHERE id_rubrique='$coll' AND (statut='prepa' OR statut='prop') ORDER BY date_heure DESC";
+	afficher_breves(_T('info_breves_valider'), $query, true);
+
+	//
+	// Les sites references a valider
+	//
+	if (lire_meta('activer_syndic') != 'non') {
+		include_ecrire("inc_sites.php3");
+		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut='prop' ORDER BY nom_site");
+	}
+
+	//
+	// Les sites a probleme
+	//
+	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		include_ecrire("inc_sites.php3");
+		afficher_sites(_T('avis_sites_syndiques_probleme'),
+			"SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND syndication='off' AND statut='publie' ORDER BY nom_site");
+	}
+
+	// Les articles syndiques en attente de validation
+	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE id_rubrique='$coll' AND statut='dispo'");
+		if (($row = spip_fetch_array($result)) AND $row['compte'])
+			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a> "._T('info_liens_syndiques_2')."</small>";
+	}
+
+	fin_cadre_couleur();
+}
+
+
 
 
 //////////  Les articles en cours de redaction
@@ -495,7 +568,7 @@ if ($connect_statut == "0minirezo" AND $options == 'avancees') {
 /////////////////////////
 
 afficher_articles(_T('info_tous_articles_presents'),
-	"WHERE statut=\"publie\" AND id_rubrique='$coll' ORDER BY date DESC");
+	"WHERE statut=\"publie\" AND id_rubrique='$coll' ORDER BY date DESC", true);
 
 if ($coll > 0){
 	echo "<div align='right'>";
@@ -505,7 +578,7 @@ if ($coll > 0){
 
 //// Les breves
 
-afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WHERE id_rubrique='$coll' ORDER BY date_heure DESC");
+afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WHERE id_rubrique='$coll' AND statut != 'prop' AND statut != 'prepa' ORDER BY date_heure DESC");
 
 $activer_breves=lire_meta("activer_breves");
 
@@ -521,7 +594,7 @@ if ($id_parent == "0" AND $coll != "0" AND $activer_breves!="non"){
 
 if (lire_meta("activer_sites") == 'oui') {
 	include_ecrire("inc_sites.php3");
-	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
+	afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' AND statut != 'prop' AND syndication != 'off' ORDER BY nom_site");
 
 	$proposer_sites=lire_meta("proposer_sites");
 	if ($coll > 0 AND ($flag_editable OR $proposer_sites > 0)) {

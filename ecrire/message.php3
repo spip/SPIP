@@ -83,15 +83,36 @@ if ($changer_rv) {
 }
 
 if ($jour) {
-			if (($heures_fin * 60) + $minutes_fin < ($heures_debut * 60) + $minutes_debut) {
-				$minutes_fin = $minutes_debut;
-				$heures_fin = $heures_debut + 1;
-			}
-			if ($heures_fin >=24){
-				$heures_fin = 23;
-				$minutes_fin = 59;	
-			}
-	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee-$mois-$jour $heures_fin:$minutes_fin:00' WHERE id_message='$id_message'");
+			// Convertir dates a calendrier correct (exemple: 31 fevrier devient debut mars, 24h12 devient 00h12 du lendemain)
+			$date = date("Y-m-d H:i:s", mktime($heures,$minutes,0,$mois, $jour, $annee));
+			
+			$jour = journum($date);
+			$mois = mois($date);
+			$annee = annee($date);
+			$heures = heures($date);
+			$minutes = minutes($date);
+			
+			// Verifier que la date de fin est bien posterieure au debut
+			$unix_debut = date("U", mktime($heures,$minutes,0,$mois, $jour, $annee));
+			$unix_fin = date("U", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
+			if ($unix_fin <= $unix_debut) {
+				$jour_fin = $jour;
+				$mois_fin = $mois;
+				$annee_fin = $annee;
+				$heures_fin = $heures + 1;
+				$minutes_fin = $minutes;
+			}		
+
+			$date_fin = date("Y-m-d H:i:s", mktime($heures_fin,$minutes_fin,0,$mois_fin, $jour_fin, $annee_fin));
+			
+			$jour_fin = journum($date_fin);
+			$mois_fin = mois($date_fin);
+			$annee_fin = annee($date_fin);
+			$heures_fin = heures($date_fin);
+			$minutes_fin = minutes($date_fin);
+			
+
+	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00',  date_fin='$annee_fin-$mois_fin-$jour_fin $heures_fin:$minutes_fin:00' WHERE id_message='$id_message'");
 }
 
 if ($change_statut) {
@@ -419,7 +440,16 @@ while($row = spip_fetch_array($result_message)) {
 	//
 
 	if ($rv == "oui") {
-		echo "<p><center class='verdana2'>"._T('titre_rendez_vous')." ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b><br><b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>  &nbsp; <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</center>";
+
+		if (jour($date_heure) == jour($date_fin) AND mois($date_heure) == mois($date_fin) AND annee($date_heure) == annee($date_fin)) {		
+			echo "<p><center class='verdana2'>"._T('titre_rendez_vous')." ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b><br><b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
+			echo " &nbsp; <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</center>";
+		} else {
+			echo "<p><center class='verdana2'>"._T('titre_rendez_vous')."<br> ".majuscules(nom_jour($date_heure))." <b>".majuscules(affdate($date_heure))."</b>, <b>".heures($date_heure)." "._T('date_mot_heures')." ".minutes($date_heure)."</b>";
+			echo "<center class='verdana2'><img src='puce$spip_lang_rtl.gif' border='0'> ".majuscules(nom_jour($date_fin))." ".majuscules(affdate($date_fin)).", <b>".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</b>";
+			//echo " &nbsp; <img src='puce$spip_lang_rtl.gif' border='0'> &nbsp;  ".heures($date_fin)." "._T('date_mot_heures')." ".minutes($date_fin)."</center>";
+		
+		}
 	}
 
 

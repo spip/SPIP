@@ -30,19 +30,7 @@ function enfant($leparent){
 		$descriptif=$row['descriptif'];
 		$texte=$row['texte'];
 
-		debut_cadre_enfonce();
-
-		echo "<a href='naviguer.php3?coll=$id_rubrique'>";
-		echo "<IMG SRC='img_pack/secteur-24.gif' WIDTH=24 HEIGHT=24 BORDER=0 align='middle'>";
-		echo "</a>";
-		if (acces_restreint_rubrique($id_rubrique))
-			echo " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."' border='0' align='middle'>";
-
-		echo " <FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>";
-		echo "<B>$titre</B></FONT>\n";
-		echo aide ("breves");
-
-		echo "<p>";
+		debut_cadre_enfonce("secteur-24.gif", false, '', $titre.aide ("breves"));
 
 		if ($GLOBALS['connect_statut'] == "0minirezo") $statuts = "'prop', 'refuse', 'publie'";
 		else $statuts = "'prop', 'publie'";

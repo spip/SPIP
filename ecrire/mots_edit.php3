@@ -185,7 +185,7 @@ if ($id_mot) {
 
 	afficher_articles(_T('info_articles_lies_mot'),
 	", spip_mots_articles AS lien WHERE lien.id_mot='$id_mot'
-	AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles) ORDER BY articles.date DESC");
+	AND lien.id_article=articles.id_article AND articles.statut IN ($aff_articles) ORDER BY articles.date DESC", true);
 
 	afficher_breves(_T('info_breves_liees_mot'),
 	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'

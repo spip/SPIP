@@ -2,10 +2,6 @@
 
 include ("inc.php3");
 
-debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site");
-
-echo "<div>&nbsp;</div>";
-
 	if ($spip_ecran == "large") {
 		$largeur_table = 974;
 		$hauteur_table = 400;
@@ -17,7 +13,10 @@ echo "<div>&nbsp;</div>";
 	}
 	$largeur_col = round($largeur_table/$nb_col);
 	
-	
+
+debut_page(_T('titre_page_articles_tous'), "asuivre", "tout-site", " hauteurFrame($nb_col);");
+
+echo "<div>&nbsp;</div>";
 
 	echo "<table border='0' cellpadding='0' cellspacing='2' width='$largeur_table'>";
 
@@ -50,6 +49,9 @@ echo "<div>&nbsp;</div>";
 		if ($dest[0] > 0 AND $parent = $dest[$nb_col-2]) {
 			// Afficher la hierarchie pour "remonter"
 			echo "<tr><td colspan='$nb_col' style='text-align: $spip_lang_left;'>";
+			
+			echo "<div id='brouteur_hierarchie'>"; // pour calculer hauteur de iframe
+			
 			$la_rubrique = $dest[0];
 			
 			$query = "SELECT * FROM spip_rubriques WHERE id_rubrique = $la_rubrique";
@@ -76,6 +78,8 @@ echo "<div>&nbsp;</div>";
 			$icone = "racine-site-24.gif";
 			$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 			echo $ret;
+			
+			echo "</div>";
 			echo "</td></tr>";
 			
 		}
@@ -92,7 +96,7 @@ echo "<div>&nbsp;</div>";
 	for ($i=0; $i < $nb_col; $i++) {
 		echo "<td valign='top' width='$largeur_col'>";
 		
-		echo "<iframe width='100%' id='iframe$i' name='iframe$i' src='brouteur_frame.php3?id_rubrique=".$dest[$i]."&frame=$i' height='$hauteur_table' style='background-color: #eeeeee; border-right: 1px solid white; border-bottom: 1px solid white; border-left: 1px solid #cccccc; border-top: 1px solid #cccccc;'></iframe>";
+		echo "<iframe width='100%' id='iframe$i' name='iframe$i' src='brouteur_frame.php3?id_rubrique=".$dest[$i]."&frame=$i' class='iframe-bouteur' height='$hauteur_table'></iframe>";
 		
 		
 		echo "</td>";

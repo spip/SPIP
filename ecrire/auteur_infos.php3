@@ -139,6 +139,16 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 			$auteur['email'] = $email;
 	}
 
+	if ($connect_id_auteur == $id_auteur) {
+		if ($perso_activer_imessage) {
+			$query = "UPDATE spip_auteurs SET imessage='$perso_activer_imessage' WHERE id_auteur=$id_auteur";
+			$result = spip_query($query);
+			$auteur['imessage'] = $perso_activer_imessage;
+		}
+	}
+
+
+
 	// variables sans probleme
 	$auteur['bio'] = corriger_caracteres($bio);
 	$auteur['pgp'] = corriger_caracteres($pgp);
@@ -199,10 +209,18 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 }
 
 // Redirection
-if (($redirect_ok == 'oui') AND ($redirect)) {
-	@Header("Location: ".rawurldecode($redirect));
-	exit; 
+if (!$echec AND $redirect_ok == "oui") {
+	if ($redirect) {
+		@Header("Location: ".rawurldecode($redirect));
+		exit; 
+	}
+	else {
+		@Header("Location:auteurs_edit.php3?id_auteur=$id_auteur");
+		exit; 
+	}
 }
+
+
 
 
 
@@ -216,12 +234,6 @@ else
 	debut_page($auteur['nom'],"documents","redacteurs");
 
 echo "<br><br><br>";
-gros_titre($auteur['nom']);
-
-if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
-	$statut_auteur=$auteur['statut'];
-	barre_onglets("auteur", "infos");
-}
 
 debut_gauche();
 
@@ -261,7 +273,7 @@ echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
 
 echo "<div class='serif'>";
 
-debut_cadre_relief("fiche-perso-24.gif");
+debut_cadre_relief("fiche-perso-24.gif", false, "", _T("icone_informations_personnelles"));
 
 echo _T('titre_cadre_signature_obligatoire');
 echo "("._T('entree_nom_pseudo').")<BR>";
@@ -283,6 +295,28 @@ echo "<TEXTAREA NAME='bio' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
 echo entites_html($auteur['bio']);
 echo "</TEXTAREA>\n";
 
+debut_cadre_enfonce("site-24.gif", false, "", _T('info_site_web'));
+echo "<B>"._T('entree_nom_site')."</B><BR>";
+echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"".entites_html($auteur['nom_site'])."\" SIZE='40'><P>\n";
+
+echo "<B>"._T('entree_url')."</B><BR>";
+echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".entites_html($auteur['url_site'])."\" SIZE='40'>\n";
+fin_cadre_enfonce();
+	echo "<p>";
+
+if ($options == "avancees") {
+	debut_cadre_enfonce("cadenas-24.gif", false, "", _T('entree_cle_pgp'));
+	echo "<TEXTAREA NAME='pgp' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
+	echo entites_html($auteur['pgp']);
+	echo "</TEXTAREA>\n";
+	fin_cadre_enfonce();
+	echo "<p>";
+}
+else {
+	echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\">";
+}
+
+echo "<p>";
 	if ($champs_extra) {
 		include_ecrire("inc_extra.php3");
 		extra_saisie($auteur['extra'], 'auteurs', $auteur['statut']);
@@ -291,27 +325,6 @@ echo "</TEXTAREA>\n";
 fin_cadre_relief();
 echo "<p>";
 
-if ($options == "avancees") {
-	debut_cadre_relief("cadenas-24.gif");
-	echo "<B>"._T('entree_cle_pgp')."</B><BR>";
-	echo "<TEXTAREA NAME='pgp' CLASS='forml' ROWS='4' COLS='40' wrap=soft>";
-	echo entites_html($auteur['pgp']);
-	echo "</TEXTAREA>\n";
-	fin_cadre_relief();
-	echo "<p>";
-}
-else {
-	echo "<input type='hidden' name='pgp' value=\"".entites_html($auteur['pgp'])."\">";
-}
-
-debut_cadre_relief("site-24.gif");
-echo "<B>"._T('entree_nom_site')."</B><BR>";
-echo "<INPUT TYPE='text' NAME='nom_site_auteur' CLASS='forml' VALUE=\"".entites_html($auteur['nom_site'])."\" SIZE='40'><P>\n";
-
-echo "<B>"._T('entree_url')."</B><BR>";
-echo "<INPUT TYPE='text' NAME='url_site' CLASS='forml' VALUE=\"".entites_html($auteur['url_site'])."\" SIZE='40'>\n";
-fin_cadre_relief();
-echo "<p>";
 
 
 //
@@ -368,6 +381,37 @@ if ($edit_pass) {
 }
 fin_cadre_relief();
 echo "<p>";
+
+
+//
+// Apparaitre dans la liste des redacteurs connectes
+//
+
+if ($connect_id_auteur == $id_auteur) {
+
+	debut_cadre_relief("messagerie-24.gif", false, "", _T('info_liste_redacteurs_connectes'));
+		
+	echo "<div>"._T('texte_auteur_messagerie')."</div>";	
+
+		if ($auteur['imessage']=="non"){
+			echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on'>";
+			echo " <label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label> ";
+			echo "<BR><INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' CHECKED id='perso_activer_imessage_off'>";
+			echo " <B><label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label></B> ";
+		} else {
+			echo "<INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='oui' id='perso_activer_imessage_on' CHECKED>";
+			echo " <B><label for='perso_activer_imessage_on'>"._T('bouton_radio_apparaitre_liste_redacteurs_connectes')."</label></B> ";
+
+			echo "<BR><INPUT TYPE='radio' NAME='perso_activer_imessage' VALUE='non' id='perso_activer_imessage_off'>";
+			echo " <label for='perso_activer_imessage_off'>"._T('bouton_radio_non_apparaitre_liste_redacteurs_connectes')."</label> ";
+		}
+
+	fin_cadre_relief();
+	echo "<p />";
+
+	
+}
+
 
 
 //

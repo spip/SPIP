@@ -1,0 +1,9 @@
+.invisible_au_chargement {
+	visibility: hidden;
+}
+.visible_au_chargement {
+	visibility: hidden;
+}
+.display_au_chargement {
+	display: none;
+}

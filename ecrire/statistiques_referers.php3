@@ -30,9 +30,9 @@ if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 debut_page(_T('titre_page_statistiques_referers'), "suivi", "statistiques");
 echo "<br><br><br>";
 
-	//gros_titre(_T('titre_liens_entrants'));
+	gros_titre(_T('titre_liens_entrants'));
 
-barre_onglets("statistiques", "referers");
+//barre_onglets("statistiques", "referers");
 
 debut_gauche();
 debut_boite_info();
