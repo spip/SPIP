@@ -148,14 +148,15 @@ else {
 // si $var_recherche est positionnee, on met en rouge les mots cherches (php4 uniquement)
 //
 
-if ($var_recherche) {
-	if ($flag_ob AND !$flag_preserver) {
-		include_ecrire("inc_filtres.php3");
-		ob_start();
+if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver) {
+	include_ecrire("inc_surligne.php3");
+	if (!$mode_surligne) {
+		$mode_surligne = 'auto';
 	}
-	else unset($var_recherche);
+} else {
+	unset ($var_recherche);
+	unset ($mode_surligne);
 }
-
 
 //
 // Inclusion du cache pour envoyer la page au client
@@ -175,9 +176,7 @@ if (file_exists($chemin_cache)) {
 //
 
 if ($var_recherche) {
-	$page_tmp = ob_get_contents();
-	ob_end_clean();
-	echo surligner_mots($page_tmp, $var_recherche);
+	fin_surligne($var_recherche, $mode_surligne);
 }
 
 
