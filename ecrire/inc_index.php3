@@ -325,7 +325,6 @@ function requete_dico($val) {
 	}
 
 	// cas normal
-	$val = nettoyer_chaine_indexation($val);
 	if (strlen($val) > $min_long)
 		return "dico LIKE '$val%'";
 	else return "dico = '".$val."___'";
@@ -335,6 +334,7 @@ function requete_dico($val) {
 // decode la chaine recherchee et la traduit en hash
 function requete_hash ($rech) {
 	// recupere les mots de la recherche
+	$rech = nettoyer_chaine_indexation($rech);
 	$regs = separateurs_indexation(true)." ";
 	$rech = strtr($rech, $regs, ereg_replace('.', ' ', $regs));
 	$s = spip_split(" +", $rech);
