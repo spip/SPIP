@@ -1533,9 +1533,9 @@ else {
 
 	if ($les_notes) {
 		echo debut_cadre_relief();
-		echo "<div $dir_lang><font size=2>";
+		echo "<div $dir_lang class='arial11'>";
 		echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
-		echo "</font></div>";
+		echo "</div>";
 		echo fin_cadre_relief();
 	}
 
