@@ -55,8 +55,7 @@ $forums_publics=lire_meta("forums_publics");
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Mode de fonctionnement par d&eacute;faut des forums publics</FONT></B> ".aide ("confforums")."</TD></TR>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 if ($forums_publics=="non") {
 	$checked = ' CHECKED';
 	$gras = '<b>'; $fingras = '</b>';
@@ -76,9 +75,7 @@ echo "<i>Pour activer les forums publics, veuillez choisir leur mode
 	de mod&eacute;ration par d&eacute;faut :</i>";
 echo "</TD></TR>";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
-
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 
 if ($forums_publics=="posteriori") {
 	$checked = ' CHECKED';
@@ -120,11 +117,9 @@ if (tester_mail()){
 		pouvoir poster des contributions).</label>$fingras ";
 }
 
-echo "</FONT>";
 echo "</TD></TR>\n";
 
-echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 
 if ($options == 'avancees') {
 	echo "<ul><table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
@@ -135,7 +130,7 @@ if ($options == 'avancees') {
 	echo "</b></font></td></tr></table>";
 	echo debut_block_invisible('forum');
 	echo "<table width='100%' cellpadding='2' border='0' class='hauteur'>\n";
-	echo "<tr><td><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo "<tr><td class='verdana2'>";
 	echo "Appliquer ce choix de mod&eacute;ration :<br>";
 
 	echo "<INPUT TYPE='radio' CHECKED NAME='forums_publics_appliquer' VALUE='futur' id='forums_appliquer_futur'>";
@@ -144,7 +139,6 @@ if ($options == 'avancees') {
 	echo " <label for='forums_appliquer_saufnon'>&agrave; tous les articles, sauf ceux dont le forum est d&eacute;sactiv&eacute;.</label><br>";
 	echo "<INPUT TYPE='radio' NAME='forums_publics_appliquer' VALUE='tous' id='forums_appliquer_tous'>";
 	echo " <label for='forums_appliquer_tous'>&agrave; tous les articles sans exception.</label><br>";
-	echo "</FONT>";
 	echo "</TD></TR></table>\n";
 	echo fin_block();
 	echo "</ul>";
@@ -326,7 +320,6 @@ if (tester_mail()) {
 
 
 	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
 	if ($suivi_edito!="oui"){
 		echo "<INPUT TYPE='radio' NAME='suivi_edito' VALUE='oui' id='suivi_edito_on'>";
 		echo " <label for='suivi_edito_on'>Envoyer les annonces &eacute;ditoriales</label> ";
@@ -339,8 +332,6 @@ if (tester_mail()) {
 		echo "<BR><INPUT TYPE='radio' NAME='suivi_edito' VALUE='non' id='suivi_edito_off'>";
 		echo " <label for='suivi_edito_off'>Ne pas envoyer d'annonces &eacute;ditoriales </label> ";
 	}
-
-	echo "</FONT>";
 	echo "</TD></TR>\n";
 
 	//
@@ -364,8 +355,7 @@ if (tester_mail()) {
 		(articles et br&egrave;ves r&eacute;cemment publi&eacute;s).";
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='left' class='verdana2'>";
 	if ($quoi_de_neuf != "oui") {
 		echo "<INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='oui' id='quoi_de_neuf_on'>";
 		echo " <label for='quoi_de_neuf_on'>Envoyer la liste des nouveaut&eacute;s</label> ";
@@ -384,8 +374,6 @@ if (tester_mail()) {
 		echo "<BR><INPUT TYPE='radio' NAME='quoi_de_neuf' VALUE='non' id='quoi_de_neuf_off'>";
 		echo " <label for='quoi_de_neuf_off'>Ne pas envoyer  la liste des nouveaut&eacute;s</label> ";
 	}
-
-	echo "</FONT>";
 	echo "</TD></TR>\n";
 
 	echo "<TR><TD ALIGN='right'>";

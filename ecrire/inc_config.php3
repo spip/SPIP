@@ -46,7 +46,7 @@ function init_config() {
 		'activer_moteur' => 'non',
 		'activer_statistiques' => 'oui',
 		'activer_statistiques_ref' => 'non',
-		
+
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
 		'charset' => 'iso-8859-1'
@@ -84,18 +84,22 @@ function avertissement_config() {
 }
 
 
-function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br>") {
+function bouton_radio($nom, $valeur, $titre, $actif = false) {
 	static $id_label = 0;
+	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'";
+	if ($actif) {
+		$texte .= ' checked';
+		$titre = '<b>'.$titre.'</b>';
+	}
+	$texte .= "> <label for='label_$id_label'>$titre</label>\n";
+	$id_label++;
+	return $texte;
+}
 
+
+function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br>") {
 	while (list($valeur, $titre) = each($valeurs)) {
-		$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'";
-		if ($valeur == $valeur_actuelle) {
-			$texte .= ' checked';
-			$titre = '<b>'.$titre.'</b>';
-		}
-		$texte .= "> <label for='label_$id_label'>$titre</label>\n";
-		$choix[] = $texte;
-		$id_label++;
+		$choix[] = bouton_radio($nom, $valeur, $titre, $valeur == $valeur_actuelle);
 	}
 	echo "\n".join($sep, $choix);
 }
@@ -107,9 +111,9 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br>") {
 
 function appliquer_modifs_config() {
 	global $clean_link, $connect_id_auteur;
-	global $adresse_site, $email_webmaster, $post_dates, $tester_proxy,
-$test_proxy, $activer_moteur;
+	global $adresse_site, $email_webmaster, $post_dates, $tester_proxy, $test_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
+	global $charset, $charset_custom;
 
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 
@@ -154,6 +158,7 @@ $test_proxy, $activer_moteur;
 
 	if (isset($email_webmaster) AND email_valide($email_webmaster))
 		ecrire_meta("email_webmaster", $email_webmaster);
+	if ($charset == 'custom') $charset = $charset_custom;
 
 	$liste_meta = array(
 		'nom_site',
@@ -194,7 +199,7 @@ $test_proxy, $activer_moteur;
 		'activer_moteur',
 		'activer_statistiques',
 		'activer_statistiques_ref',
-		
+
 		'documents_article',
 		'documents_rubrique',
 		'charset'

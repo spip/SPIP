@@ -63,8 +63,7 @@ if ($flag_function_exists AND @function_exists("imagejpeg")) {
 		automatiquement une galerie ou un portfolio.";
 	echo "</TD></TR>";
 
-	echo "<TR><TD ALIGN='left'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+	echo "<TR><TD ALIGN='left' class='verdana2'>";
 	if ($gd_formats) {
 		afficher_choix('creer_preview', $creer_preview,
 			array('oui' => 'G&eacute;n&eacute;rer automatiquement les miniatures des images.',
@@ -86,7 +85,6 @@ if ($flag_function_exists AND @function_exists("imagejpeg")) {
 		echo " pixels";
 	}
 
-	echo "</FONT>";
 	echo "</TD></TR>\n";
 	echo "<TR><TD ALIGN='right' COLSPAN=2>";
 	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
@@ -176,6 +174,63 @@ fin_cadre_relief();
 
 
 //
+// Configuration du charset
+//
+
+if ($options == 'avancees') {
+	debut_cadre_relief();
+
+	$charset = lire_meta("charset");
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Jeu de caract&egrave;res du site</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif' class='verdana2'>";
+	echo "Cette option est utile si votre site doit afficher des alphabets
+	diff&eacute;rents de l'alphabet romain (ou &laquo;&nbsp;occidental&nbsp;&raquo;) et ses d&eacute;riv&eacute;s.
+	Dans ce cas, il faut changer le r&eacute;glage par d&eacute;faut pour utiliser
+	un jeu de caract&egrave;res appropri&eacute;. N'oubliez pas non plus d'adapter
+	le site public en cons&eacute;quence.<p>";
+	echo "<blockquote><i>Ce r&eacute;glage n'a pas d'effet r&eacute;troactif. Par
+	cons&eacute;quent, les textes d&eacute;j&agrave; entr&eacute;s peuvent s'afficher
+	incorrectement &agrave; la suite d'une modification du r&eacute;glage. Dans tous
+	les cas, vous pourrez sans dommage revenir au r&eacute;glage pr&eacute;c&eacute;dent.</i></blockquote>";
+
+	echo "</FONT>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='left' class='verdana2'>";
+	echo bouton_radio('charset', 'iso-8859-1',
+		"Alphabet occidental&nbsp; (<tt>ISO-8859-1</tt>): support&eacute; par tous les navigateurs, mais permet uniquement
+		l'affichage des langues ouest-europ&eacute;ennes (anglais, fran&ccedil;ais, allemand...).", $charset == 'iso-8859-1');
+	echo "<br>";
+	echo bouton_radio('charset', 'utf-8',
+		"Alphabet universel&nbsp; (<tt>UTF-8</tt>): permet l'affichage de toutes les langues, mais n'est pas reconnu
+		par tous les navigateurs &agrave; l'heure actuelle.", $charset == 'utf-8');
+	echo "<br>";
+	echo bouton_radio('charset', 'custom',
+		"Jeu de caract&egrave;res personnalis&eacute;&nbsp;: choisissez cette option si vous voulez
+		utiliser un jeu de caract&egrave;res sp&eacute;cifique", $charset != 'utf-8' && $charset != 'iso-8859-1');
+	echo "<br>";
+	if ($charset != 'utf-8' && $charset != 'iso-8859-1') {
+		echo "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Entrez le code de l'alphabet &agrave; utiliser&nbsp;: ";
+		echo "<input type='text' name='charset_custom' class='fondl' value='$charset' size='15'>";
+	}
+	else
+		echo "<input type='hidden' name='charset_custom' value=''>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD ALIGN='right'>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+
+	echo "</TABLE>";
+
+	fin_cadre_relief();
+}
+
+
+//
 // Utilisation d'un proxy pour aller lire les sites syndiques
 //
 
@@ -187,16 +242,15 @@ if ($options == 'avancees') {
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Utiliser un proxy</FONT></B> ".aide ("confhttpproxy")."</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
-		. propre("Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s...),
-			il peut &ecirc;tre n&eacute;cessaire d'utiliser un {proxy HTTP} pour atteindre les sites syndiqu&eacute;s.
-			Le cas &eacute;ch&eacute;ant, indiquez ci-dessous son adresse, sous la forme
-			<tt><html>http://proxy:8080</html></tt>. En g&eacute;n&eacute;ral,
-			vous laisserez cette case vide.") . "</FONT>";
+	echo "<TR><TD class='verdana2'>";
+	echo propre("Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s...),
+		il peut &ecirc;tre n&eacute;cessaire d'utiliser un {proxy HTTP} pour atteindre les sites syndiqu&eacute;s.
+		Le cas &eacute;ch&eacute;ant, indiquez ci-dessous son adresse, sous la forme
+		<tt><html>http://proxy:8080</html></tt>. En g&eacute;n&eacute;ral,
+		vous laisserez cette case vide.") . "</FONT>";
 	echo "</TD></TR>";
 
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+	echo "<TR><TD ALIGN='center'>";
 	echo "<INPUT TYPE='text' NAME='http_proxy' VALUE='$http_proxy' size='40' class='forml'>";
 	echo "</TD></TR>";
 
@@ -217,63 +271,6 @@ if ($options == 'avancees') {
 		echo "</font><div align='right'><INPUT TYPE='submit' NAME='tester_proxy' VALUE='Essayer le proxy' CLASS='fondo'></div>";
 	}
 	echo "</TD></TR>";
-
-	echo "</TABLE>";
-
-	fin_cadre_relief();
-}
-
-
-//
-// Configuration du charset
-//
-
-if ($options == 'avancees') {
-	debut_cadre_relief();
-
-	$charset=lire_meta("charset");
-
-	// peut-on modifier cette valeur ?
-	$nbart = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_articles WHERE statut='publie'"));
-	$nbbre = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_breves WHERE statut='publie'"));
-	$modif_charset = ($nbart['count'] <= 3 AND $nbbre['count'] <= 3);
-
-	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
-	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Jeu de caract&egrave;res du site</FONT></B></TD></TR>";
-
-	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
-		. propre("Cette option est utile pour construire un site dans un autre jeu de
-		caract&egrave;res que l'<code>iso-8859-1</code> (&eacute;galement appel&eacute;
-		<code>iso-latin-1</code> ou <code>occidental</code>). Exemples : un site en
-		cyrillique utilisera <code>windows-1251</code>; un site en esp&eacute;ranto
-		l'<code>UTF-8</code>; en cor&eacute;en, <code>EUC-KR</code>, etc.
-
-		Attention: il faudra &eacute;galement vous assurer que MySQL accepte les textes
-		entr&eacute;s dans le {charset} choisi.");
-
-		if (!$modif_charset) {
-			echo "<p>".propre("{{Vous avez maintenant publi&eacute; plus de trois articles
-			ou br&egrave;ves, il ne vous est donc plus possible de modifier le jeu de
-			caract&egrave;res de votre site sans risques.}}");
-
-			echo debut_boite_info();
-			echo propre("{{Jeu de caract&egrave;res de ce site: <code>$charset</code>}}");
-			echo fin_boite_info();
-		}
-	
-	echo "</FONT>";
-	echo "</TD></TR>";
-
-	if ($modif_charset) {
-		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
-		echo "<INPUT TYPE='text' NAME='charset' VALUE='".entites_html($charset)."' size='40' class='forml'>";
-		echo "</TD></TR>";
-
-		echo "<TR><TD ALIGN='right'>";
-		echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
-		echo "</TD></TR>";
-	}
 
 	echo "</TABLE>";
 
