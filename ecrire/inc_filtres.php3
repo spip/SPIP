@@ -833,6 +833,7 @@ function calendrier($date='', $type='mois', $echelle='', $partie_cal='', $script
 {
    include_ecrire("inc_calendrier.php");
    include_ecrire("inc_layer.php3");
+   if (!isset($GLOBALS['spip_ecran'])) $GLOBALS['spip_ecran'] = 'large';
    return
      $GLOBALS['browser_layer'] .
      http_script('',_DIR_RESTREINT . 'presentation.js') .
