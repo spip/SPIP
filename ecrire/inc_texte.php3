@@ -224,10 +224,10 @@ function couper($texte, $long) {
 	// supprimer les codes typos
 	$texte = ereg_replace("[{}]", "", $texte);
 
-	$texte2 = substr($texte." ", 0, $long);
+	$texte2 = substr($texte, 0, $long);
 	$texte2 = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*$", "\\1", $texte2);
 	if ((strlen($texte2) + 3) < strlen($texte)) $plus_petit = true;
-	if ($plus_petit) $texte2 .= ' (...)';
+	if ($plus_petit) $texte2 .= '&nbsp;(...)';
 	return $texte2;
 }
 
