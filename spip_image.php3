@@ -89,7 +89,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 	if ($row = @mysql_fetch_array($result)) {
 		$id_type = $row['id_type'];
 	}
-	else return;
+	else return array(false,0);
 
 	//
 	// Preparation
@@ -154,7 +154,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document) {
 		mysql_query($query);
 	}
 
-	return true; // on veut bien effacer le fichier s'il est dans ftp/upload/
+	return array (true,$id_document) ; // on veut bien effacer le fichier s'il est dans ftp/upload/
 }
 
 
@@ -172,7 +172,7 @@ if (!$image_name AND $image2) {
 // ajouter un document
 //
 if ($ajout_doc == 'oui') {
-	$ok = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
+	list ($ok, $id_document) = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
 }
 
 
@@ -224,11 +224,12 @@ $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|id_document)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }
-
+if ($id_document)
+	$link->addVar('id_document',$id_document);
 
 @header ("Location: ".$link->getUrl());
 

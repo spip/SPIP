@@ -171,7 +171,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	//
 	// Afficher un apercu (pour les images)
 	//
-	if ($type_inclus == 'image' AND $mode == 'vignette') {
+	if ($type_inclus == 'image') {
 		echo "<td width='150' align='center' valign='top' rowspan='2'>\n";
 		echo "<div style='border: 1px solid #808080; padding: 4px; background-color: #e0f080;'>\n";
 		echo "<font size='2'><b>IMAGE</b></font><br>\n";
@@ -180,6 +180,14 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 		echo $raccourci_doc;
 		echo "</td>\n";
 	}
+
+	if ($mode == 'vignette') {
+		$link = new Link();
+		$link->addVar('ajouter_vignette','oui');
+		$link->addVar('id_document',$id_document);
+		$link_ajouter = "<font size='1'>[<b><a ".$link->getHref().">AJOUTER UNE VIGNETTE</a></b>]</font>\n";
+	} else
+		unset($link_ajouter);
 
 	//
 	// Afficher le document en tant que tel
@@ -210,6 +218,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 	echo "</textarea>\n";
 
 	echo "<p align='right'>";
+	echo $link_ajouter;
 	echo "<input class='fondo' TYPE='submit' NAME='Valider' VALUE='Valider'>";
 	echo "</p>";
 
@@ -265,7 +274,7 @@ function afficher_document($id_document, $id_doc_actif = 0) {
 			$link->addVar('hash_id_auteur', $connect_id_auteur);
 			$link->addVar('hash', $hash);
 	
-			afficher_upload($link, 'Charger une vignette spécifique&nbsp;:', 'image');
+			afficher_upload($link, 'Charger une vignette sp&eacute;cifique&nbsp;:', 'image');
 			echo "</div>\n";
 		}
 

@@ -4,6 +4,25 @@ include ("inc.php3");
 include_local ("inc_documents.php3");
 
 //
+// editable ?
+//
+if ($id_article) {
+	$query = "SELECT id_rubrique FROM spip_articles WHERE id_article=$id_article";
+	if ($art = mysql_fetch_object(mysql_query($query)))
+		$id_rubrique = $art->id_rubrique;
+	$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
+	$result_auteur = mysql_query($query);
+	$flag_auteur = (mysql_num_rows($result_auteur) > 0);
+	$flag_editable = (acces_rubrique($id_rubrique) OR ($flag_auteur > 0 AND ($statut == 'prepa' OR $statut == 'prop' OR $new == 'oui')));
+} else
+	$flag_editable = false;
+
+if (!$flag_editable) {
+	echo "<h3>Acc&egrave;s interdit.</h3>";
+	exit;
+}
+
+//
 // Gerer les modifications
 //
 
@@ -18,12 +37,17 @@ if ($new == "oui") {
 	}
 }
 
-$flag_editable = true; // a affiner ;-))
+// eventuel triangle a garder deplie
+$id_doc_actif = $id_document;
 
 if ($modif_document == 'oui') {
 	$titre = addslashes(corriger_caracteres($titre));
 	$descriptif = addslashes(corriger_caracteres($descriptif));
 	mysql_query("UPDATE spip_documents SET titre=\"$titre\", descriptif=\"$descriptif\" WHERE id_document=$id_document");
+}
+
+if ($ajouter_vignette == 'oui') {
+	mysql_query("UPDATE spip_documents SET mode='document' WHERE id_document=$id_document");
 }
 
 $query = "SELECT titre FROM spip_articles WHERE id_article = $id_article";
