@@ -17,9 +17,9 @@ include_ecrire("inc_filtres.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 
-
 if (!file_exists("inc_meta_cache.php3")) ecrire_metas();
 
+utiliser_langue_visiteur();
 
 //
 // Preferences de presentation
@@ -41,6 +41,8 @@ if ($set_lang) {
 	if (changer_langue($set_lang)) {
 		$prefs['spip_lang'] = $set_lang;
 		$prefs_mod = true;
+		// Poser un cookie, pour les pages n'ayant pas acces aux meta
+		spip_setcookie('spip_lang', $set_lang, time() + 365 * 24 * 3600);
 	}
 }
 if ($securite == 'normal' || $securite == 'strict') {
@@ -53,7 +55,8 @@ if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }
 
-if ($set_ecran) {	// on pose un cookie long car ce reglage depend plus du navigateur que de l'utilisateur
+if ($set_ecran) {
+	// Poser un cookie, car ce reglage depend plus du navigateur que de l'utilisateur
 	spip_setcookie('spip_ecran', $set_ecran, time() + 365 * 24 * 3600);
 	$spip_ecran = $set_ecran;
 }

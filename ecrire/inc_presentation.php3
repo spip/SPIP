@@ -5,6 +5,9 @@
 if (defined("_ECRIRE_INC_PRESENTATION")) return;
 define("_ECRIRE_INC_PRESENTATION", "1");
 
+include_ecrire("inc_lang.php3");
+utiliser_langue_visiteur();
+
 //
 // Aide
 //
@@ -1529,53 +1532,28 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	//
 	// choix de la langue
 	//
-	if (strpos(lire_meta('langues_proposees'), ',')) {
-		//echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2><img src='img_pack/langues-24.gif' align='center'>";
+	if ($GLOBALS['all_langs']) {
 		echo "<td>   </td>";
-		
+
 		echo "<td align='center'>";
-			$lien = $clean_link;
-			$lien->addVar('changer_var', 'oui'); // Bidon, pour forcer point d'interrogation
+		$lien = $clean_link;
+		$lien->addVar('changer_var', 'oui'); // Bidon, pour forcer point d'interrogation
 
-			echo "<form action='".$lien->getUrl()."' method='get' style='margin:0px; padding:0px;'>";
-			echo "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
-			$langues = explode(',', lire_meta('langues_proposees'));
-			while (list(,$l) = each ($langues)) {
-				if ($l == $GLOBALS['spip_lang']) $selected = "selected";
-				else $selected = "";
+		echo "<form action='".$lien->getUrl()."' method='get' style='margin:0px; padding:0px;'>";
+		echo "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
+		$langues = explode(',', $GLOBALS['all_langs']);
+		while (list(,$l) = each ($langues)) {
+			if ($l == $GLOBALS['spip_lang']) $selected = "selected";
+			else $selected = "";
 
-				echo "<option value='$l' $selected style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 1px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
-			}
-			echo "</select>\n";
-			echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
-			echo "</form>";
-		
-		echo "</td>";
-		
-/*		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
-		$langues = explode(',', lire_meta('langues_proposees'));
-		while (list(,$langue) = each ($langues)) {
-			if (file_exists("lang/drap_$langue.gif")) $icone = "<img src='lang/drap_$langue.gif' border='0'>";
-			else $icone = "<font size=1 color='white'>".majuscules("$langue")."</font>";
-			
-			$lien = $clean_link;
-			$lien->addVar('set_lang', $langue);
-			if ($langue != $GLOBALS['spip_lang']) {
-				//echo "<span class='fondgris' color='white' onMouseOver=\"changeclass(this,'fondgrison2')\" onMouseOut=\"changeclass(this,'fondgris')\">";
-				echo "<a href='". $lien->getUrl() ."' title='"._T("langue_$langue")."'>$icone</a>";
-				//echo "</span>";
-			}
-			else {
-				echo "<b>$icone</b>";
-				//echo " <font color='#ffffff'>[$langue]</font>";
-			}
-			echo "&nbsp;";
+			echo "<option value='$l' $selected style='background-image: url(lang/drap_$l.gif); background-repeat: no-repeat; background-position: 3px 1px; padding-left: 20px;'>".traduire_nom_langue($l)."</option>\n";
 		}
-		echo "</font></td>";
-*/
-	}
-	// fin langue [a placer ailleurs]
+		echo "</select>\n";
+		echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
+		echo "</form>";
+		echo "</td>";
 
+	}
 
 	// choix de la couleur
 	echo "<td align='right'>";

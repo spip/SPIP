@@ -8,6 +8,7 @@ if (file_exists($flag_ecrire ? "inc_connect.php3" : "ecrire/inc_connect.php3")) 
 else $aide_statut = 'admin';
 
 include_ecrire("inc_lang.php3");
+utiliser_langue_visiteur();
 
 ?>
 <HTML>
