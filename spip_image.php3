@@ -371,6 +371,60 @@ if ($image_supp) {
 // Faire tourner une image
 //
 
+//$imagePath - path to your image; function will save rotated image overwriting the old one
+//$rtt - should be 90 or -90 - cw/ccw
+function gdRotate($imagePath,$rtt){
+	if(preg_match("/\.(png)/i", $imagePath)) $src_img=ImageCreateFromPNG($imagePath);
+	elseif(preg_match("/\.(jpg)/i", $imagePath)) $src_img=ImageCreateFromJPEG($imagePath);
+	elseif(preg_match("/\.(bmp)/i", $imagePath)) $src_img=ImageCreateFromWBMP($imagePath);
+	$size=GetImageSize($imagePath);
+	//note: to make it work on GD 2.xx properly change ImageCreate to ImageCreateTrueColor
+
+	$process = lire_meta('image_process');
+	if ($process == "gd2") $dst_img=ImageCreateTrueColor($size[1],$size[0]);
+	else  $dst_img=ImageCreate($size[1],$size[0]);
+	if($rtt==90){
+		$t=0;
+		$b=$size[1]-1;
+		while($t<=$b){
+			$l=0;
+			$r=$size[0]-1;
+			while($l<=$r){
+				imagecopy($dst_img,$src_img,$t,$r,$r,$b,1,1);
+				imagecopy($dst_img,$src_img,$t,$l,$l,$b,1,1);
+				imagecopy($dst_img,$src_img,$b,$r,$r,$t,1,1);
+				imagecopy($dst_img,$src_img,$b,$l,$l,$t,1,1);
+				$l++;
+				$r--;
+			}
+			$t++;
+			$b--;
+		}
+	}
+	elseif($rtt==-90){
+		$t=0;
+		$b=$size[1]-1;
+		while($t<=$b){
+			$l=0;
+			$r=$size[0]-1;
+			while($l<=$r){
+				imagecopy($dst_img,$src_img,$t,$l,$r,$t,1,1);
+				imagecopy($dst_img,$src_img,$t,$r,$l,$t,1,1);
+				imagecopy($dst_img,$src_img,$b,$l,$r,$b,1,1);
+				imagecopy($dst_img,$src_img,$b,$r,$l,$b,1,1);
+				$l++;
+				$r--;
+			}
+			$t++;
+			$b--;
+		}
+	}
+	ImageDestroy($src_img);
+	ImageInterlace($dst_img,0);
+	ImageJPEG($dst_img,$imagePath);
+}
+
+
 if ($doc_rotate) {
 	// Securite
 	if (!verifier_action_auteur("rotate $doc_rotate", $hash, $hash_id_auteur)) {
@@ -392,6 +446,18 @@ if ($doc_rotate) {
 			imagick_rotate($handle, $var_rot);
 			imagick_write($handle, $image);
 			if (!@file_exists($image)) return;	// echec imagick
+		}
+		else if ($process == "gd2") { // theoriquement compatible gd1, mais trop forte degradation d'image
+			if ($var_rot == 180) { // 180 = 90+90
+				gdRotate ($image, 90);
+				gdRotate ($image, 90);
+			} else {
+				gdRotate ($image, $var_rot);
+			}
+		}
+		else if ($process = "convert") {
+			$commande = "$convert_command -rotate $var_rot $image $image";
+			exec($commande);
 		}
 
 		$size_image = @getimagesize($image);
