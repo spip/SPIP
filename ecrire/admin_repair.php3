@@ -9,7 +9,7 @@ include_ecrire ("inc_presentation.php3");
 
 
 /*
- * REMARQUE IMPORTANTE : SECURITE LIMITEE
+ * REMARQUE IMPORTANTE : SECURITE
  * Ce systeme de reparation doit pouvoir fonctionner meme si
  * la table spip_auteurs est en panne : on n'appelle donc pas
  * inc_auth ; seule l'authentification ftp est exigee
