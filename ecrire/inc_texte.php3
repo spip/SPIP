@@ -135,9 +135,6 @@ function nettoyer_chapo($chapo){
 function echappe_html($letexte,$source) {
 	global $flag_pcre;
 
-
-
-
 	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
@@ -184,8 +181,6 @@ function echappe_html($letexte,$source) {
 
 		}
 
-
-
 		$pos = strpos($letexte, $regs[0]);
 		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
@@ -211,12 +206,12 @@ function echappe_html($letexte,$source) {
 		$les_echap[$num_echap] = $rempl;
 	}
 
-
 	//
 	// Echapper les <a href>
 	//
+
 	//$regexp_echap = "<a[[:space:]][^>]+>";
-	 $regexp_echap = "<[^>]+>"; // Echappement tout HTML
+	$regexp_echap = "<[^>]+>"; // Echappement tout HTML
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
 		$les_echap[$num_echap] = $regs[0];
@@ -372,10 +367,10 @@ function typo($letexte) {
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
-		
-	
-	$letexte = ereg_replace("'", "&#146;", $letexte);
-	
+
+
+	$letexte = str_replace("'", "&#146;", $letexte);
+
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
 
