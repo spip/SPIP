@@ -107,19 +107,22 @@ function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum, 
   $titre = ('> ' . supprimer_numero(ereg_replace ('^[>[:space:]]*', '',$titre)));
   $url = $GLOBALS[HTTP_GET_VARS][url];
   if (!$url) 
-    $url = substr($GLOBALS[PHP_SELF], strrpos($GLOBALS[PHP_SELF], '/')+1) . 
-      substr($GLOBALS[REQUEST_URI], strpos($GLOBALS[REQUEST_URI], '?')); 
+# Y a intéret à avoir fait un rawurlencode sur tous les paramètres...
+    $url =  substr($GLOBALS['REQUEST_URI'],
+		   strrpos($GLOBALS['REQUEST_URI'], '/') + 1);
+
   $retour_forum = $GLOBALS['retour'];
   if (!$retour_forum)
     $retour_forum = rawurlencode($url);
   else $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
+  $cache = $Cache[cache];
 
   $lacible = "
 	include_local('inc-forum.php3');
 	lang_select(\$GLOBALS['spip_lang']);
 	echo retour_forum('$idr','$idf','$ida','$idb','$ids',\"$titre\",'$table', '$forum', '$url', \"
 	<input type=hidden name='retour' value='$retour_forum' />
-	<input type=hidden name='var_cache' value='$Cache[cache]' />
+	<input type=hidden name='var_cache' value='$cache' />
 	<input type=hidden name='ajout_forum' value='oui' />
 	<input type=hidden name='forum_id_rubrique' value='$idr' />
 	<input type=hidden name='forum_id_parent' value='$idf' />
