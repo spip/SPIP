@@ -211,26 +211,29 @@ echo "</TD></TR>";
 // langue par defaut
 echo "<TR><TD ALIGN='center' class='verdana2'>";
 echo _L('Langue par d&eacute;faut&nbsp;: ');
-echo "<select name='langue_site' class='formo'>\n";
-echo "<option value='fr'>fr</option>\n";
-echo "</select><br> ";
-
-afficher_choix('activer_statistiques', $activer_statistiques,
-	array('oui' => _T('item_gerer_statistiques'),
-		'non' => _T('item_non_gerer_statistiques')), ' &nbsp; ');
-echo "</TD></TR>\n";
-
-if ($activer_statistiques != "non" AND $options == "avancees") {
-	echo "<TR><TD class='verdana2'>";
-	echo _T('info_question_referers');
-	echo "</TD></TR>";
-
-	echo "<TR><TD ALIGN='center' class='verdana2'>";
-	afficher_choix('activer_statistiques_ref', $activer_statistiques_ref,
-		array('oui' => _T('item_gerer_referers'),
-			'non' => _T('item_non_gerer_referers')), ' &nbsp; ');
-	echo "</TD></TR>\n";
+echo "\n<select name='langue_site' class='formo'>\n";
+echo "<option value='$langue_site'>"._T("langue_".$langue_site)."</option>\n";
+reset ($langues_proposees);
+while (list(,$l) = each ($langues_proposees)) {
+	if ($l <> $langue_site)
+		echo "<option value='$l'>"._T("langue_".$l)."</option>\n";
 }
+echo "</select><br>\n";
+echo "</TD></TR>";
+
+
+// langues proposees
+echo "<TR><TD ALIGN='center' class='verdana2'>";
+echo _L('Langues propos&eacute;es&nbsp;: ');
+echo "\n<select name='langue_site' class='formo'>\n";
+echo "<option value='$langue_site'>"._T("langue_".$langue_site)."</option>\n";
+reset ($langues_proposees);
+while (list(,$l) = each ($langues_proposees)) {
+	if ($l <> $langue_site)
+		echo "<option value='$l'>"._T("langue_".$l)."</option>\n";
+}
+echo "</select><br>\n";
+echo "</TD></TR>";
 
 
 echo "<TR><TD ALIGN='right'>";
