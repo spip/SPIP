@@ -70,7 +70,8 @@ if ($changer_config == 'oui') {
 	ecrire_meta("activer_imessage", $activer_imessage);
 	ecrire_meta("accepter_inscriptions", $accepter_inscriptions);
 	ecrire_meta("forums_publics","$forums_publics");
-
+	ecrire_meta("creer_preview", $creer_preview);
+	ecrire_meta("taille_preview", $taille_preview);
 
 	ecrire_meta("suivi_edito", $suivi_edito);
 	if ($adresse_suivi) ecrire_meta("adresse_suivi", $adresse_suivi);
@@ -144,6 +145,8 @@ de laisser la charge de cette page au webmestre principal de votre site.</B>
 
 fin_boite_info();
 echo "<P>";
+
+
 
 
 //// Contenu des articles
@@ -651,6 +654,56 @@ debut_cadre_relief();
 fin_cadre_relief();
 
 
+if (function_exists("imagejpeg")){
+//// Activer/desactiver creation automatique de vignettes
+	debut_cadre_relief();
+
+	$creer_preview=lire_meta("creer_preview");
+	$taille_preview=lire_meta("taille_preview");
+	if ($taille_preview < 15) $taille_preview = 120;
+
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='IMG2/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Cr&eacute;ation automatique de vignettes de pr&eacute;visualisation</FONT></B></TD></TR>";
+	echo "<TR><TD BACKGROUND='IMG2/rien.gif'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>Lorsque vous installez des images au format JPEG en tant que document joint, SPIP peut cr&eacute;er pour vous, automatiquement, des vignettes de pr&eacute;visualisation. Cette option facilite, par exemple, la cr&eacute;ation d'un portfolio.</FONT>";
+	echo "</TD></TR>";
+
+	echo "<TR><TD BACKGROUND='IMG2/rien.gif' ALIGN='left'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>";
+	if ($creer_preview!="oui"){
+		echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' id='creer_preview_on'>";
+		echo " <label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label> ";
+			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
+			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+			echo " pixels";
+		
+		echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' CHECKED id='creer_preview_off'>";
+		echo " <B><label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label></B> ";
+	}else{
+		echo "<INPUT TYPE='radio' NAME='creer_preview' VALUE='oui' CHECKED id='creer_preview_on'>";
+		echo " <b><label for='creer_preview_on'>Cr&eacute;er automatiquement les vignettes de pr&eacute;visualisation.</label></b> ";
+			echo "<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Taille maximale des vignettes&nbsp;:";
+			echo " &nbsp;&nbsp;<INPUT TYPE='text' NAME='taille_preview' VALUE='$taille_preview' class='fondl' size=5>";
+			echo " pixels";
+		echo "<BR><INPUT TYPE='radio' NAME='creer_preview' VALUE='non' id='creer_preview_off'>";
+		echo " <label for='creer_preview_off'>Ne pas cr&eacute;er  de vignettes de pr&eacute;visualisation.</label> ";
+	}
+
+	echo "</FONT>";
+	echo "</TD></TR>\n";
+	echo "<TR><TD ALIGN='right' COLSPAN=2>";
+	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+	echo "</TD></TR>";
+
+	echo "</table>";
+
+	fin_cadre_relief();
+}
+else {
+	echo "<INPUT TYPE='hidden' NAME='creer_preview' VALUE='non'>";
+	
+}
 
 
 //// Articles post-dates
