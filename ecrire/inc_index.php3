@@ -7,10 +7,7 @@ define("_ECRIRE_INC_INDEX", "1");
 
 function nettoyer_chaine_indexation($texte) {
 	include_ecrire("inc_charsets.php3");
-
-	$texte = ereg_replace("<[^<]*>", "", $texte);
 	$texte = strtolower(translitteration($texte));
-
 	return $texte;
 }
 
@@ -31,11 +28,12 @@ function spip_split($reg, $texte) {
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots;
 
-	$texte = nettoyer_chaine_indexation($texte);
+	$texte = supprimer_tags($texte);
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, "                                                           ");
 	$table = spip_split(" +([^ ]{0,$min_long} +)*", ' '.$texte);
 	while (list(, $mot) = each($table)) {
+		$mot = nettoyer_chaine_indexation($mot);
 		$h = substr(md5($mot), 0, 16);
 		$index[$h] += $val;
 		$mots .= ",(0x$h,'$mot')";
