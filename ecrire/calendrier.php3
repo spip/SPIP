@@ -58,15 +58,7 @@ if (!_DIR_RESTREINT)
   debut_page($titre,  "redacteurs", "calendrier");
  else debut_html($titre);
 
-$f = 'http_calendrier_init_' . $type;
-echo $f($date, $echelle, $partie_cal, $GLOBALS['PHP_SELF']);
+echo http_calendrier_init($date, $type);
 
 if (!_DIR_RESTREINT) fin_page(); else 	echo "</body></html>\n";
-
-// partie_cal est utilisee dans:
-// calendrier_navication navi_jour navi_sem 
-// calendrier_mois   calendrier_jour
-
-
-// calendrier_suite_heures
 ?>
