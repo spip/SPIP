@@ -47,7 +47,7 @@ if ($id_article) {
 		        $annee_redac = $regs[1];
 		        if ($annee_redac > 4000) $annee_redac -= 9000;
 		}
-		
+
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";
 		$result_auteur = spip_query($query);
 		$flag_auteur = (spip_num_rows($result_auteur) > 0);
@@ -195,7 +195,7 @@ function enfant($leparent){
 	global $connect_toutes_rubriques;
 	global $connect_id_rubriques;
 	global $couleur_claire;
-	
+
 	$i++;
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
@@ -240,7 +240,6 @@ function enfant($leparent){
 			$style .= "color: #A0A0A0;";
 			break;
 		}
-//		if ($statut_rubrique!='publie') $titre = "($titre)";
 
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
@@ -325,7 +324,7 @@ echo "<P><HR><P>";
 	debut_cadre_relief("$logo_parent");
 	echo "<B>&Agrave; l'int&eacute;rieur de la rubrique&nbsp;:</B>\n";
 	echo aide ("artrub");
-	echo "<BR><SELECT NAME='id_rubrique' style='background-color:$couleur_claire; font-size:10px; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
+	echo "<BR><SELECT NAME='id_rubrique' style='background-color: $couleur_claire; font-size: 90%; width:100%; font-face:verdana,arial,helvetica,sans-serif;' SIZE=1>\n";
 	enfant(0);
 	echo "</SELECT><BR>\n";
 	echo "[N'oubliez pas de s&eacute;lectionner correctement ce champ.]\n";
