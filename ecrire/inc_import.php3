@@ -397,6 +397,8 @@ function import_all($f, $gz=false) {
 	mysql_query($query);
 	$query = "DELETE FROM spip_documents WHERE maj < $my_date";
 	mysql_query($query);
+	$query = "DELETE FROM spip_types_documents WHERE maj < $my_date";
+	mysql_query($query);
 	$query = "DELETE FROM spip_forum WHERE maj < $my_date";
 	mysql_query($query);
 	$query = "DELETE FROM spip_mots WHERE maj < $my_date";
