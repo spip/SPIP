@@ -170,7 +170,7 @@ if ($options == "avancees") {
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>"._T('info_travail_colaboratif')."</FONT></B></TD></TR>";
 
 	echo "<TR><TD class='verdana2'>";
-	echo _T('texte_travail_colaboratif');
+	echo _T('texte_travail_collaboratif');
 	echo "</TD></TR>";
 
 	echo "<TR><TD ALIGN='center' class='verdana2'>";

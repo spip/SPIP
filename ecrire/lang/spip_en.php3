@@ -39,8 +39,8 @@ $GLOBALS['i18n_en'] = array(
 'avis_erreur_connexion_mysql' => 'MySQL connection error',
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
 'avis_erreur_mysql' => 'MySQL error  ',
-'avis_erreur_mysql_2' => 'MySQL error ! ',
-'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@) ! ',
+'avis_erreur_mysql_2' => 'MySQL error! ',
+'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)! ',
 'avis_erreur_version_archive' => '<B>Warning! The file @archive@ corresponds to
 				a version of SPIP other than the one you have
 				installed.</B> You are facing great
@@ -121,7 +121,7 @@ $GLOBALS['i18n_en'] = array(
 'bouton_radio_non_envoi_liste_nouveautes' => 'Do not send latest news list',
 'bouton_radio_non_syndication' => 'No syndication',
 'bouton_radio_occidental' => 'Western alphabet (<tt>iso-8859-1</tt>): supported by all browsers, but only
-		displays West European languages (English, French, German).',
+		displays West European languages (English, French, German...).',
 'bouton_radio_pas_petition' => 'No petition',
 'bouton_radio_personnalise' => 'Custom character set: choose this option if you want
 		to use a specific character set',
@@ -152,7 +152,7 @@ $GLOBALS['i18n_en'] = array(
 'email_2' => 'e-mail:',
 'entree_adresse_annuaire' => 'Directory\'s address',
 'entree_adresse_email' => 'Your e-mail address',
-'entree_adresse_fichier_syndication' => 'Address of "backend" file for syndication:',
+'entree_adresse_fichier_syndication' => 'Address of &laquo;backend&raquo; file for syndication:',
 'entree_adresse_site' => '<b>Site URL</b> [Compulsory]',
 'entree_base_donnee_1' => 'Database address',
 'entree_base_donnee_2' => '(Often, this address matches the address of your site, sometimes it corresponds to the name &laquo;localhost&raquo;, and sometimes it is left completely empty.)',
@@ -257,7 +257,7 @@ $GLOBALS['i18n_en'] = array(
 'icone_stat_site' => 'Site statistics',
 'icone_statistiques' => 'Site statistics',
 'icone_statistiques_visites' => 'Visits statistics',
-'icone_suivi_forum' => 'Follow-up of public forum: @nb_forums@&nbsp;contribution(s)',
+'icone_suivi_forum' => 'Follow-up of public forum: @nb_forums@ contribution(s)',
 'icone_suivi_forums' => 'Follow-up/manage forums',
 'icone_suivi_pettions' => 'Follow-up/manage petitions',
 'icone_supprimer_cookie' => 'Delete cookie',
@@ -272,7 +272,7 @@ $GLOBALS['i18n_en'] = array(
 'icone_valider_message' => 'Validate this message',
 'icone_valider_signature' => 'Validate this signature',
 'icone_visiter_site' => 'Visit the site',
-'icone_voir_en_ligne' => 'See online',
+'icone_voir_en_ligne' => 'View online',
 'icone_voir_sites_references' => 'Show referenced sites',
 'icone_voir_tous_mots_cles' => 'Show all keywords',
 'image_administrer_rubrique' => 'You can manage this section',
@@ -280,7 +280,7 @@ $GLOBALS['i18n_en'] = array(
 'info_1_breve' => '1 news item',
 'info_1_site' => '1 site',
 'info_a_grave' => ' At ',
-'info_a_suivre' => 'LAUNCH PAD &raquo;',
+'info_a_suivre' => 'LAUNCH PAD&raquo;',
 'info_a_valider' => '[to be validated]',
 'info_acces_interdit' => 'Access forbidden',
 'info_acces_refuse' => 'Access denied',
@@ -302,7 +302,7 @@ $GLOBALS['i18n_en'] = array(
 'info_administrer_rubriques' => 'You can manage this section and its sub-sections',
 'info_adresse' => 'to the address:',
 'info_adresse_email' => 'E-MAIL ADDRESS:',
-'info_adresse_non_indiquee' => 'You did not specify an address to test !',
+'info_adresse_non_indiquee' => 'You did not specify an address to test!',
 'info_adresse_url' => 'Your public site\'s URL',
 'info_afficher_visites' => 'Show visits for:',
 'info_affichier_visites_articles_plus_visites' => 'Show visits for <b>the most visited articles since the beginning:</b>',
@@ -367,7 +367,7 @@ $GLOBALS['i18n_en'] = array(
 'info_changer_nom_groupe' => 'Change the name of this group:',
 'info_chapeau' => 'Deck',
 'info_chapeau_2' => 'Deck:',
-'info_chemin_acces_1' => 'Options: <B>Access path in directory</B></B>',
+'info_chemin_acces_1' => 'Options: <B>Access path in directory</b>',
 'info_chemin_acces_2' => 'From now on, you have to configure the access path to the directory information. ',
 'info_chemin_acces_3' => 'This information is essential to read the users profiles stored in the directory. ',
 'info_chemin_acces_annuaire' => 'Options: <B>Access path in directory</B>',
@@ -379,7 +379,7 @@ $GLOBALS['i18n_en'] = array(
 'info_confirmer_passe' => 'Confirm new password:',
 'info_connexion_base' => 'Second step: <B>Attempting to connect to database</B>',
 'info_connexion_ldap_ok' => '<B>Your LDAP connection succeeded.</B><P> You can go to the next step.',
-'info_connexion_mysql' => 'First step: <B>Your MySQL connection</B>',
+'info_connexion_mysql' => 'First step: <B>Your MySQL connection</b>',
 'info_connexion_ok' => 'Connection succeeded.',
 'info_connexion_refusee' => 'Connection denied',
 'info_contact' => 'Contact',
@@ -392,8 +392,8 @@ $GLOBALS['i18n_en'] = array(
 'info_creation_mots_cles' => 'Create and configure the site\'s keywords here',
 'info_creation_paragraphe' => '(To create paragraphs, you simply leave blank lines.)',
 'info_creation_rubrique' => 'Before being able to write articles,<BR> you must create at least one section.<BR>',
-'info_creation_tables' => 'Fourth step: <B>Creation of the database tables</B>',
-'info_creer_base' => '<B>Create</B> a new database:',
+'info_creation_tables' => 'Fourth step: <B>Creation of the database tables</b>',
+'info_creer_base' => '<B>Create</b> a new database:',
 'info_creer_repertoire' => 'Please create a file or a directory called:',
 'info_creer_repertoire_2' => 'inside the sub-directory <b>ecrire/data/</b>, then',
 'info_dans_espace_prive' => '[in the private area]',
@@ -402,12 +402,12 @@ $GLOBALS['i18n_en'] = array(
 'info_date_publication_anterieure' => 'Date of earlier publication:',
 'info_date_referencement' => 'DATE OF REFERENCING THIS SITE:',
 'info_delet_mots_cles' => 'You requested the deletion of keyword
-<B>@titre_mot@</B> (@type_mot@). This keyword being linked to
+<B>@titre_mot@</b> (@type_mot@). This keyword being linked to
 <b>@texte_lie@</b>you must confirm this decision:',
 'info_demander_blocage_priori' => 'Request
 				a blocking beforehand',
 'info_deplier' => 'Unfold',
-'info_derniere_etape' => 'Last step: <B>It is completed !',
+'info_derniere_etape' => 'Last step: <B>It is completed!',
 'info_derniere_syndication' => 'The last syndication of this site was carried out on ',
 'info_derniers_articles_publies' => 'Your latest published articles',
 'info_desactiver_forum_public' => 'Disable the use of public
@@ -450,7 +450,7 @@ $GLOBALS['i18n_en'] = array(
 		the announcement of
 		publications requests and articles validations.',
 'info_fichiers_authent' => 'Authentication file ".htpasswd"',
-'info_fini' => 'It is finished !;',
+'info_fini' => 'It is finished!',
 'info_fonctionnement_forum' => 'Forum operation:',
 'info_format_image' => 'Image format to be used for the creation of vignettes: @gd_formats@.',
 'info_format_non_defini' => 'undefined format',
@@ -488,7 +488,7 @@ requiring an FTP access to the Web site.',
 'info_hier' => 'yesterday:',
 'info_identification_publique' => 'Your public identity...',
 'info_image_aide' => 'HELP',
-'info_impossible_lire_page' => '<B>Error !</B> The page could not be read <tt><html>@test_proxy@</html></tt> through the proxy <tt>',
+'info_impossible_lire_page' => '<B>Error!</b> The page could not be read <tt><html>@test_proxy@</html></tt> through the proxy <tt>',
 'info_inclusion_directe' => 'Direct inclusion:',
 'info_inclusion_vignette' => 'Include vignette:',
 'info_informations_personnelles' => 'Fifth step: <B>Personal information</B>',
@@ -593,7 +593,7 @@ requiring an FTP access to the Web site.',
 		informed of this message by e-mail. Do you wish to use this option?',
 'info_option_faire_suivre' => 'Forward forums messages to articles authors',
 'info_option_ne_pas_faire_suivre' => 'Do not forward forums messages',
-'info_options_avancees' => 'ADVANCED OPTIONSES',
+'info_options_avancees' => 'ADVANCED OPTIONS',
 'info_ou' => 'or... ',
 'info_oui_suppression_mot_cle' => ' I want to delete this keyword permanently.',
 'info_page_interdite' => 'Forbidden page',
@@ -611,7 +611,7 @@ requiring an FTP access to the Web site.',
 'info_plus_cinq_car_2' => '(More than 5 characters)',
 'info_plus_trois_car' => '(More than 3 characters)',
 'info_plusieurs_mots_trouves' => 'Several keywords were found for "@cherche_mot@":',
-'info_popularite' => 'popularity:&nbsp;@popularite@; visits:&nbsp;@visites@',
+'info_popularite' => 'popularity: @popularite@; visits: @visites@',
 'info_popularite_2' => 'site popularity: ',
 'info_popularite_3' => 'popularity:&nbsp;@popularite@; visits:&nbsp;@visites@',
 'info_popularite_4' => 'popularity:&nbsp;@popularite@; visits:&nbsp;@visites@',
@@ -669,7 +669,7 @@ requiring an FTP access to the Web site.',
 'info_redaction_en_cours' => 'EDITING IN PROGRESS',
 'info_redirection' => 'Redirection',
 'info_refuses' => 'Your articles rejected',
-'info_reglage_ldap' => 'Options: <B>Adjusting LDAP import</B>',
+'info_reglage_ldap' => 'Options: <B>Adjusting LDAP import</b>',
 'info_remplacer_vignette' => 'Replace the default vignette by a customised logo:',
 'info_remplacer_vignette_defaut' => 'Replace the default vignette with a customised logo:',
 'info_renvoi_article' => '<B>Redirection.</B> This article refers to
@@ -747,10 +747,10 @@ requiring an FTP access to the Web site.',
 'info_statut_utilisateurs_3' => 'the LDAP directory when they connect for the first time. ',
 'info_statut_utilisateurs_4' => 'Later, you can modify this value for each author on a case by case basis. ',
 'info_suivi_activite' => 'Follow-up of editorial activity',
-'info_supprimer_mot' => 'delete&nbsp;this&nbsp;keyword',
+'info_supprimer_mot' => 'delete this keyword',
 'info_supprimer_vignette' => 'delete the vignette',
 'info_sur_site_public' => '[on the public site]',
-'info_surtitre' => 'Top title :',
+'info_surtitre' => 'Top title:',
 'info_symbole_bleu' => 'The symbol <B>blue</B> indicates a <B>memo</B>: i.e. a message for your personal use.',
 'info_symbole_jaune' => 'The symbol <B>yellow</B> indicates an <B>announcement to all editors</B>: it can be edited by all administrators, and is visible to all editors.',
 'info_symbole_vert' => 'The symbol <B>green</B> indicates the <B>messages exchanged with other users</B> of the site.',
@@ -794,7 +794,7 @@ requiring an FTP access to the Web site.',
 'info_vignette_personnalisee' => 'Customised vignette',
 'info_visite' => 'visit:',
 'info_visites' => 'visits:',
-'info_visites_plus_populaires' => 'Show visits for <b>the most popular articles</b> and for <b>the last published articles:</b></b>',
+'info_visites_plus_populaires' => 'Show visits for <b>the most popular articles</b> and for <b>the last published articles:</b>',
 'info_visiteur_1' => 'Visitor',
 'info_visiteur_2' => 'of the public site',
 'info_visiteurs' => 'Visitors',
@@ -886,7 +886,10 @@ requiring an FTP access to the Web site.',
 'langue_es' => 'Spanish',
 'langue_fr' => 'French',
 'langue_it' => 'Italian',
+'langue_ja' => 'Japanese',
+'langue_oc' => '',
 'langue_ro' => 'Romanian',
+'langue_vi' => 'Vietnamese',
 'langue_zg' => 'Zorglubs',
 'lien_afficher_icones_seuls' => 'Show icons only',
 'lien_afficher_texte_icones' => 'Show icons and text',
@@ -930,9 +933,9 @@ requiring an FTP access to the Web site.',
 'lien_trier_nombre_articles' => 'Sort by number of articles',
 'lien_trier_statut' => 'Sort by status',
 'lien_visite_site' => 'visit this site',
-'lien_visites' => '@visites@&nbsp;visits',
+'lien_visites' => '@visites@ visits',
 'lien_voir_auteur' => 'Check this author',
-'lien_voir_en_ligne' => 'SEE ONLINE:',
+'lien_voir_en_ligne' => 'VIEW ONLINE:',
 'lnfo_liens' => 'links: ',
 'log_creation_table' => 'creation of objects tables',
 'log_creation_table_interactions' => 'creation of interaction tables',
@@ -1110,7 +1113,7 @@ the images used in the articles and sections.',
 'texte_compte_elements' => '@count@ elements',
 'texte_config_groupe_mots_cles' => 'Do you wish to activate the advanced configuration keyword groups,
 			by specifying, for instance that a unique word per group
-			could be selected, that a group is important...&nbsp?',
+			could be selected, that a group is important...?',
 'texte_connexion_mysql' => 'Refer to the information provided to you by your host: it should give you, if your host supports MySQL, the connection codes to MySQL server.',
 'texte_contenu_article' => '(Content of the article in a few words.)',
 'texte_contenu_articles' => 'Based on the layout chosen for your site, you can decide
@@ -1119,7 +1122,7 @@ the images used in the articles and sections.',
 'texte_crash_base' => 'If your database
 			crashed, you can try to repair it
 			automatically.',
-'texte_creation_automatique_vignette' => 'Automated creation of preview vignettes is enabled in this site. if you install, through this form, images in the format(s) @gd_formats@, they will be coupled with a vignette which maximum size is @taille_preview@&nbsp;pixels. ',
+'texte_creation_automatique_vignette' => 'Automated creation of preview vignettes is enabled in this site. if you install, through this form, images in the format(s) @gd_formats@, they will be coupled with a vignette which maximum size is @taille_preview@ pixels. ',
 'texte_creer_rubrique' => 'Before being able to write articles,<BR> you must create a section.',
 'texte_date_creation_article' => 'DATE OF ARTICLE CREATION:',
 'texte_date_publication_anterieure' => 'DATE OF EARLIER PUBLICATION',
@@ -1141,7 +1144,7 @@ the images used in the articles and sections.',
 'texte_effacer_base' => 'Delete the SPIP database',
 'texte_effacer_donnees_indexation' => 'Delete indexing data',
 'texte_en_cours_validation' => 'The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
-'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using "typographical shortcuts".',
+'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
 'texte_erreur_mise_niveau_base' => 'Database error during upgrade.
 						The image <B>@fichier@</B> could not be passed (article @id_article@).<p>
 						Note carefully this reference, retry the upgrade procedure,
@@ -1173,7 +1176,7 @@ the images used in the articles and sections.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can ',
 'texte_introductif_article' => '(Introductory Text to the article.)',
 'texte_jeu_caractere' => 'This option is useful if your site displays alphabets
-	different from the roman alphabet (that is "western") and its derivatives.
+	different from the roman alphabet (that is &laquo;western&raquo;) and its derivatives.
 	In this case, the default setting must be changed in order to use
 	a suitable character set. Also, remember to adapt
 	the site accordingly (<tt>#CHARSET</tt> tag).',
@@ -1193,8 +1196,8 @@ the images used in the articles and sections.',
 'texte_liens_syndication' => 'Future links
 				coming from this site will be displayed immediately on the public site.',
 'texte_login_ldap_1' => '(Keep empty for anonymous access or enter complete path, ',
-'texte_login_ldap_2' => 'for instance &laquo;&nbsp;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&nbsp;&raquo;.)',
-'texte_login_precaution' => 'Warning&nbsp;! This is the login with which you are connected now.
+'texte_login_ldap_2' => 'for instance &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
+'texte_login_precaution' => 'Warning! This is the login with which you are connected now.
 	Use this form with caution...',
 'texte_message_edit' => 'Warning: this message can be modified by all the site administrators, and it appears to all editors. Use the announcements only to stress important events in the site\'s life.',
 'texte_messages_publics' => 'Public Messages of the article:',
@@ -1212,13 +1215,13 @@ the images used in the articles and sections.',
 		irrespective of their section location. That way you can
 		enrich the navigation of your site or even use these properties
 		to customise the articles in your templates.',
-'texte_mots_cles_dans_forum' => 'Do you wish to allow the use of keywords that could be selected by visitors, in the public site forums&nbsp;? (Warning: this option is rather intricate to use properly.)',
+'texte_mots_cles_dans_forum' => 'Do you wish to allow the use of keywords that could be selected by visitors, in the public site forums? (Warning: this option is rather intricate to use properly.)',
 'texte_non_compresse' => '<i>uncompressed</i> (your server does not support this feature)',
 'texte_non_fonction_referencement' => 'You can choose not to use this automated feature, and enter the elements concerning that site manually...',
 'texte_nouveau_message' => 'New message',
 'texte_nouveau_mot' => 'New keyword',
 'texte_nouvelle_version_spip_1' => 'You have just installed a new version of SPIP.',
-'texte_nouvelle_version_spip_10' => 'before deleting it)',
+'texte_nouvelle_version_spip_10' => 'before deleting it...)',
 'texte_nouvelle_version_spip_2' => 'This new version requires an update more ',
 'texte_nouvelle_version_spip_3' => 'thorough than usual. ',
 'texte_nouvelle_version_spip_4' => 'If you are the webmaster of this site, please delete the file ',
@@ -1239,7 +1242,7 @@ the images used in the articles and sections.',
 		you will leave this box empty.',
 'texte_publication_articles_post_dates' => 'Which behaviour should SPIP adopt concerning articles which
 		publication have been set to
-		a future date&nbsp;?',
+		a future date?',
 'texte_rappel_selection_champs' => '[Remember to select this field correctly.]',
 'texte_recalcul_page' => 'If you want
 to refresh only one page, you would rather do it from the public area and use the button &laquo; refresh &raquo;.',
@@ -1250,10 +1253,10 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_requetes_echouent' => '<B>When some MySQL queries fail
 		systematically and without any apparent reason, it is possible
 		that the database itself
-		is the culprit.</B>
+		is the culprit.</b>
 		<p>MySQL has at its disposal a repair feature of its tables
 		when they have been accidentally corrupted.
-		Here, you can try to execute this repair&nbsp;; in
+		Here, you can try to execute this repair; in
 		case of failure, you should keep a copy of the display, which might contain
 		clues on what went wrong...
 		<p>If the problem remains, contact your 
@@ -1284,7 +1287,7 @@ entered important modifications on the graphics or the structure of the site. ',
 'texte_sur_titre' => 'Top title',
 'texte_syndication' => 'If a site allows it, it is possible to retrieve automatically
 		the list of its latest material. To achieve this, you must activate the syndication. 
-		<blockquote><i>Some hosts disable this function&nbsp;; 
+		<blockquote><i>Some hosts disable this function; 
 		in this case, you cannot use the content syndication
 		from your site.</i></blockquote>',
 'texte_table_ok' => ': this table is OK.',
@@ -1294,18 +1297,18 @@ entered important modifications on the graphics or the structure of the site. ',
 'texte_test_proxy' => 'To try this proxy, enter here the address of a Web site
 				that you wish to test.',
 'texte_titre_02' => 'Subject:',
-'texte_titre_obligatoire' => '<B>Headline</B> [Compulsory]',
+'texte_titre_obligatoire' => '<B>Title</b> [Compulsory]',
 'texte_travail_article' => '@nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
-'texte_travail_colaboratif' => 'If it is frequent that several editors
+'texte_travail_collaboratif' => 'If it is frequent that several editors
 		work on the same article, the system
-		can show the recently "opened" articles
+		can show the recently &laquo;opened&raquo; articles
 		in order to avoid simultaneous modifications.
 		This option is disabled by default
 		to avoid displaying untimely warning
 		messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
 'texte_unpack' => 'downloading the latest version',
-'texte_utilisation_moteur_syndiques' => 'When you use the search engine integrated to SPIP, you can perform searches on sites and articles syndicated in different manners. <br><img src=\'puce.gif\'>The most simple one is to search only in the titles and descriptions of the articles. <br><img src=\'puce.gif\'> A second method, much more powerful, allows SPIP to search also in the text of the referenced sites . If you reference a site, SPIP will perform the search in the site\'s text itself. ',
+'texte_utilisation_moteur_syndiques' => 'When you use the search engine integrated to SPIP, you can perform searches on sites and articles syndicated in different manners. <br><img src=\'puce.gif\'>The most simple one is to search only in the titles and descriptions of the articles. <br><img src=\'puce.gif\'> A second method, much more powerful, allows SPIP to search also in the text of the referenced sites. If you reference a site, SPIP will perform the search in the site\'s text itself. ',
 'texte_vide' => 'empty',
 'texte_vider_cache' => 'Empty the cache',
 'titre_admin_effacer' => 'Technical maintenance',
@@ -1329,7 +1332,7 @@ entered important modifications on the graphics or the structure of the site. ',
 'titre_config_fonctions' => 'Site configuration',
 'titre_config_groupe_mots_cles' => 'Configuration of keywords groups',
 'titre_configuration' => 'Site configuration',
-'titre_connexion_ldap' => 'Options: <B>Your LDAP connection</B>',
+'titre_connexion_ldap' => 'Options: <B>Your LDAP connection</b>',
 'titre_dernier_article_syndique' => 'Latest syndicated articles',
 'titre_documents_joints' => 'Attached documents',
 'titre_evolution_visite' => 'Visits evolution',
@@ -1362,7 +1365,7 @@ entered important modifications on the graphics or the structure of the site. ',
 'titre_page_articles_tous' => 'The entire site',
 'titre_page_auteurs' => 'Visitors',
 'titre_page_breves' => 'News',
-'titre_page_breves_edit' => 'Modify the news item: &laquo; @titre@ &raquo;',
+'titre_page_breves_edit' => 'Modify the news item: &laquo;@titre@&raquo;',
 'titre_page_calendrier' => 'Calendar @nom_mois@ @annee@',
 'titre_page_config_contenu' => 'Site configuration',
 'titre_page_config_fonctions' => 'Site configuration',
