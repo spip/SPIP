@@ -449,7 +449,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 			$link = new Link();
 			echo $link->getForm('POST');
 			echo "<input type='hidden' name='valide_message_auteur' value='oui'>";  // hash ?
-			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer\">";
+			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer l'envoi\">";
 			echo "</FORM>";
 		}
 	}
