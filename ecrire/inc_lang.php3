@@ -120,7 +120,7 @@ function traduire_nom_langue($lang) {
 	'fy' => "Frisian",
 	'ga' => "Irish",
 	'gd' => "Scots Gaelic",
-	'gl' => "Galician",
+	'gl' => "galego",
 	'gn' => "Guarani",
 	'gu' => "Gujarati",
 	'ha' => "Hausa",
