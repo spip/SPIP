@@ -638,7 +638,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if (strlen($descriptif) > 0) {
 				echo "<div class='verdana1'>".propre($descriptif)."</div>";
 			}
-			echo "<div class='verdana1' style='text-align: center;'>$largeur x $hauteur pixels</div>";
+			echo "<div class='verdana1' style='text-align: center;'>$largeur &#215; $hauteur pixels</div>";
 			
 			
 			
@@ -821,7 +821,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				echo "<div class='verdana1'>".propre($descriptif)."</div>";
 			}
 			echo "<div class='verdana1' style='text-align: center;'>".taille_en_octets($taille)."</div>";
-			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>$largeur x $hauteur pixels</div>";
+			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>$largeur &#215; $hauteur pixels</div>";
 			
 			
 			if ($flag_modif) {
@@ -868,7 +868,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					if ($type_inclus == "embed" OR $type_inclus == "image") {
 						echo "<b>"._T('info_dimension')."</b><br />\n";
 						echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-						echo " x <input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
+						echo " &#215; <input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 					} else {
 						echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
 						echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" /><br >\n";
@@ -1081,7 +1081,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		else echo debut_block_invisible($block);
 
 		echo "<b>"._T('info_vignette_personnalisee')."</b>";
-		echo "<center>$largeur_vignette x $hauteur_vignette "._T('info_pixels')."</center>";
+		echo "<center>$largeur_vignette &#215; $hauteur_vignette "._T('info_pixels')."</center>";
 		if ($flag_modif)
 			echo "<center><font face='Verdana,Arial,Sans,sans-serif'><b>[<a ".$link->getHref($ancre).">"._T('info_supprimer_vignette')."</a>]</b></font></center>\n";
 		echo fin_block();
@@ -1187,7 +1187,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		if ($type_inclus == "embed" OR $type_inclus == "image") {
 			echo "<br /><b>"._T('info_dimension')."</b><br />\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
+			echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 		} else {
 			echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
 			echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" />\n";
@@ -1554,7 +1554,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		if (($type_inclus == "embed" OR $type_inclus == "image") AND $options == "avancees") {
 			echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
-			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
+			echo " &#215; <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
 		}
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
@@ -1634,7 +1634,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		else  echo debut_block_invisible($block);
 
 		if (ereg(",$id_document,", $doublons)) echo $raccourci_doc;
-		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>$largeur x $hauteur "._T('info_pixels')."<br /></font></div>\n";
+		echo "\n<div align='center'><font face='Verdana,Arial,Sans,sans-serif' size='1'>$largeur &#215; $hauteur "._T('info_pixels')."<br /></font></div>\n";
 
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
