@@ -69,7 +69,9 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			$keywords = ereg('=', $arr_engines[$cnt][1])
 				? ${str_replace('=', '', $arr_engines[$cnt][1])}
 				: $lvm_directory;
-			if ($flag_utf8_decode && $kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
+			if ($flag_utf8_decode
+				&& (($kw_referer_host == "Google" && ereg('[io]e=UTF-8', $query))
+				|| ($kw_referer_host == "AOL")))
 				$keywords = utf8_decode($keywords);
 		}
 	}
