@@ -91,12 +91,15 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$col++;
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf" OR $spip_lang == "ar") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "guillemets.png", _T('barre_guillemets'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $formulaire, $texte);
 		}
 		else if ($spip_lang == "de" OR $spip_lang == "pl" OR $spip_lang == "hr" OR $spip_lang == "src") {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&bdquo;','&ldquo;',$champ)", "guillemets-de.png", _T('barre_guillemets_de'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&bdquo;','&ldquo;',$champ)", "guillemets-de.png", _T('barre_guillemets'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&sbquo;','&lsquo;',$champ)", "guillemets-uniques-de.png", _T('barre_guillemets_simples'), $formulaire, $texte);
 		}
 		else {
-			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets_simples'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&ldquo;','&rdquo;',$champ)", "guillemets-simples.png", _T('barre_guillemets'), $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&lsquo;','&rsquo;',$champ)", "guillemets-uniques.png", _T('barre_guillemets_simples'), $formulaire, $texte);
 		}
 		$ret .= "&nbsp;&nbsp;&nbsp;";
 		if ($spip_lang == "fr" OR $spip_lang == "eo" OR $spip_lang == "cpf") {
@@ -106,7 +109,7 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "oelig.png", _T('barre_eo'), $formulaire, $texte);
 			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "oelig-maj.png", _T('barre_eo_maj'), $formulaire, $texte);
 		}
-		//$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
+		$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "euro.png", _T('barre_euro'), $formulaire, $texte);
 		$ret .= "</td>";
 
 		if ($flag_ecrire) {
