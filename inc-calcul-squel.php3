@@ -308,6 +308,9 @@ function parser_boucle($texte, $id_parent) {
 					else if ($param == 'racine') {
 						$req_where[] = "$table.id_parent=0";
 					}
+					else if ($param == 'branche') {
+						$req_where[] = "$table.id_rubrique IN (\".calcul_branche(\$id_rubrique).\")";
+ 					}
 	
 					// Restriction de valeurs (implicite ou explicite)
 					else if (ereg('^([a-zA-Z_]+) *((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
