@@ -6,11 +6,21 @@ if (defined("_ECRIRE_INC_TEXTE")) return;
 define("_ECRIRE_INC_TEXTE", "1");
 
 
+function tester_variable($nom_var, $val){
+	if ($_GET[$nom_var]) {
+		$GLOBALS[$nom_var] = $val;
+	}
+	else if (!$GLOBALS[$nom_var]) {
+		$GLOBALS[$nom_var] = $val;
+	}
+}
+
+
 //
 // Initialisation de quelques variables globales
 // (on peut les modifier dans mes_fonctions.php3)
 //
-
+/*
 $GLOBALS['debut_intertitre'] = "\n&nbsp;<h3 class=\"spip\">\n";   // sale mais historique
 $GLOBALS['fin_intertitre'] = "\n</h3><br>\n";
 $GLOBALS['ouvre_ref']  = '&nbsp;[';
@@ -19,13 +29,23 @@ $GLOBALS['ouvre_note'] = '[';
 $GLOBALS['ferme_note'] = '] ';
 $GLOBALS['les_notes']  = '';
 $GLOBALS['compt_note'] = 0;
+*/
+
+tester_variable('debut_intertitre', "\n&nbsp;<h3 class=\"spip\">\n");   // sale mais historique
+tester_variable('fin_intertitre', "\n</h3><br>\n");
+tester_variable('ouvre_ref', '&nbsp;[');
+tester_variable('ferme_ref', ']');
+tester_variable('ouvre_note', '[');
+tester_variable('ferme_note', '] ');
+tester_variable('les_notes', '');
+tester_variable('compt_note', 0);
 
 if (file_exists("puce.gif")) {
 	$imgsize = getimagesize('puce.gif');
-	$GLOBALS['puce'] = "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'> ";
+	tester_variable('puce', "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'> ");
 }
 else {
-	$GLOBALS['puce'] = "- ";
+	tester_variable('puce', "- ");
 }
 
 

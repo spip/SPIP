@@ -5,14 +5,17 @@
 if (defined("_INC_CALCUL")) return;
 define("_INC_CALCUL", "1");
 
-// Globales a redefinir si l'on veut dans mes_fonctions.php3
-$GLOBALS['espace_logos'] = 3;  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
-$GLOBALS['espace_images'] = 3;  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
 
 
 include_ecrire("inc_index.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
+
+// Globales a redefinir si l'on veut dans mes_fonctions.php3
+//$GLOBALS['espace_logos'] = 3;  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
+//$GLOBALS['espace_images'] = 3;  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
+tester_variable('espace_logos',3);  // HSPACE=xxx VSPACE=xxx pour les logos (#LOGO_ARTICLE)
+tester_variable('espace_images',3);  // HSPACE=xxx VSPACE=xxx pour les images integrees (<IMG1>)
 
 include_local("inc-forum.php3");
 
