@@ -63,6 +63,8 @@ function init_config() {
 		
 		'multi_articles' => 'non',
 		'multi_rubriques' => 'non',
+		'multi_secteurs' => 'non',
+		'gerer_trad' => 'non',
 		'multi_auth' => $GLOBALS['all_langs']
 
 	);
@@ -222,6 +224,8 @@ function appliquer_modifs_config() {
 		'charset',
 		'multi_articles',
 		'multi_rubriques',
+		'multi_secteurs',
+		'gerer_trad',
 		'multi_auth'
 		
 	);

@@ -62,7 +62,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_new = $row['lang'];
 			$langue_choisie_new = 'non';
-		} else if (ereg (",".$GLOBALS['auteur_session']['lang'].",", ",".lire_meta('multi_auth').",")) { // Verifier que la langue d'interface est autorisee
+		} else if ((lire_meta("multi_articles") == "oui") AND (ereg (",".$GLOBALS['auteur_session']['lang'].",", ",".lire_meta('multi_auth').","))) { // Verifier que la langue d'interface est autorisee
 			$langue_new = $GLOBALS['auteur_session']['lang'];
 			$langue_choisie_new = 'oui';
 		} else {
@@ -101,9 +101,8 @@ if ($titre AND $modifier_breve) {
 	calculer_rubriques();
 	
 	
-// Changer la langue heritee
-if ($id_rubrique != id_rubrique_old) {
-	if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
+	// Changer la langue heritee
+	if ($id_rubrique != id_rubrique_old) {
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
@@ -117,7 +116,6 @@ if ($id_rubrique != id_rubrique_old) {
 			}
 		}
 	}
-}
 	
 }
 
@@ -290,7 +288,7 @@ if ($flag_mots!='non' AND $flag_editable AND $options == 'avancees') {
 
 
 //
-// Langue de l'article
+// Langue de la breve
 //
 if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 	

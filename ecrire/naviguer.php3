@@ -375,7 +375,7 @@ if (strlen($texte) > 1) {
 //
 // Langue de la rubrique
 //
-if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND $flag_editable) {
+if ($coll>0 AND (lire_meta('multi_rubriques') == 'oui') AND (lire_meta('multi_secteurs' == 'non') OR ($id_parent == 0)) AND $flag_editable) {
 
 	if ($changer_lang) {
 		spip_log ("rubrique $id_rubrique = $changer_lang");
@@ -397,17 +397,13 @@ if ($coll>0 AND (lire_meta('multi_rubriques') <> 'non') AND $flag_editable) {
 	$langue_rubrique = $row['lang'];
 	$langue_choisie_rubrique = $row['langue_choisie'];
 	
-	if ($langue_choisie_rubrique == 'oui') $herit = false;
-	else $herit = true;
-
-	//echo "[$langue_rubrique | $langue_choisie_rubrique]";
+	$herit = ($langue_choisie_rubrique != 'oui');
 
 	debut_cadre_enfonce("langues-24.gif");
 		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
 		echo menu_langues('changer_lang', $langue_rubrique, _T('info_multi_cette_rubrique').' ', $herit);
 		echo "</font></center>\n";
-	fin_cadre_enfonce();
-}
+	fin_cadre_enfonce();}
 
 
 fin_cadre_relief();
