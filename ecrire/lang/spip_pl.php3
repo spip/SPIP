@@ -672,6 +672,12 @@ Dzi&#281;kujemy za uczestnictwo
 'info_envoyer_message_prive' => 'Wy&#347;lij prywatn&#261; wiadomo&#347;&#263; do tego autora',
 'info_erreur_requete' => 'B&#322;&#261;d zapytania :',
 'info_erreur_restauration' => 'B&#322;&#261;d odtwarzania : plik nie istnieje.',
+'info_erreur_squelette' => 'B&#322;&#261;d na stronie',
+'info_erreur_squelette2' => '&#379;aden szkielet <b>@fichier@</b> nie jest dost&#281;pny ...',
+'info_erreur_systeme' => 'B&#322;&#261;d systemu (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Albo dysk twardy jest pe&#322;ny albo uszkodzona jest baza danych. <br>
+ <font color=\'red\'>Spr&oacute;buj <a href=\'ecrire/admin_repair.php3\'>naprawi&#263; baz&#281; danych</a>,
+ lub skontaktuj si&#281; z providerem.</font><br></b>',
 'info_etape_suivante' => 'Przejd&#378; do nast&#281;pnego kroku',
 'info_etape_suivante_1' => 'Mo&#380;esz przej&#347;&#263; do nast&#281;pnego kroku.',
 'info_etape_suivante_2' => 'Mo&#380;esz przej&#347;&#263; do nast&#281;pnego kroku.',
@@ -1379,10 +1385,8 @@ mo&#380;na ponownie po&#322;&#261;czy&#263; si&#281; ze stron&#261;.
 w&#322;&#261;cznie z <i>wszystkimi</i> parametrami dost&#281;pu dla redaktor&oacute;w i administartor&oacute;w. Po jej zastosowaniu powiniene&#347;
 zreinstalowa&#263; SPIP w celu utworzenia nowej bazy danych i dost&#281;pu pierwszego administratora.',
 'texte_admin_tech_01' => 'Ta opcja pozwala Ci zapisa&#263; zawarto&#347;&#263; bazy danych w pliku, kt&oacute;ry zostanie zachowany w katalogu <i>ecrire/data/</i>.Pami&#281;taj tak&#380;e o skopiowaniu ca&#322;ego katalogu <i>IMG/</i>, kt&oacute;ry zawiera obrazki i dokumenty u&#380;ywane w artyku&#322;ach i dzia&#322;ach.',
-'texte_admin_tech_02' => 'Uwaga: tej kopii bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
- TYLKO w serwisie opartym na tej samej wersji SPIP. Nie wolno szczeg&oacute;lnie "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu.B&#322;&#261;d
- polegaj&#261;cy na wykonaniu kopii przed uaktualnieniem
- SPIP jest cz&#281;sty... Wi&#281;cej informacji w <a href="http://www.spip.net/fr_article1489.html">dokumentacji SPIP</a>.',
+'texte_admin_tech_02' => 'Uwaga: t&#261; kopi&#281; bezpiecze&#324;stwa b&#281;dzie mo&#380;na odtworzy&#263;
+ TYLKO I WY&#321;&#260;CZNIE w serwisie opartym na tej samej wersji SPIP. Nie wolno  "opr&oacute;znia&#263; bazy danych" s&#261;dz&#261;c, &#380;e po zaktualizowaniu SPIP b&#281;dzie mo&#380;na odtworzy&#263; baz&#281; z backupu. Wi&#281;cej informacji w <a href="http://www.spip.net/fr_article1489.html">dokumentacji SPIP</a>.',
 'texte_admin_tech_03' => 'Mo&#380;esz wybra&#263; wykonanie kopii bezpiecze&#324;&#347;twa pod postaci&#261; skompresowan&#261;, w celu
  przyspieszenia &#347;ci&#261;gania pliku lub zapisywania na serwerze, i zarazem oszcz&#281;dno&#347;ci przestrzeni dyskowej.',
 'texte_adresse_annuaire_1' => '(Je&#347;li Tw&oacute;j katalog jest zainstalowany na tym samym komputerze co strona internetowa, chodzi zapewne o &laquo;localhost&raquo;.)',
