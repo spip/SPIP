@@ -142,9 +142,7 @@ function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
 	echo "<form action='$dir"."spip_cookie.php3' method='post'";
 
 	// Javascript, calculer le MD5 au submit et vider le mot de passe en clair
-	echo " onSubmit='".
-		"if (!(navigator.appName == \"Netscape\" && parseInt(navigator.appVersion) <= 4)) { this.session_password_md5.value = calcMD5(this.session_password.value); ".
-		"this.session_password.value = \"\"; }'";
+	echo " onSubmit='this.session_password_md5.value = calcMD5(this.session_password.value); this.session_password.value = \"\";'";
 
 	echo ">\n";
 	echo "<fieldset>\n";
