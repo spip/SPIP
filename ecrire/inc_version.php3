@@ -13,7 +13,11 @@ define("_ECRIRE_INC_VERSION", "1");
 //
 
 $spip_version = 1.409; // version de la base
-$spip_version_affichee = "1.4 beta 4"; // version de SPIP
+
+// dernier tag connu ou date si cvs
+if (! ereg("Name: v(.*) ","$Name$", $regs))
+	ereg("(20../../.. ..:..:..)", "$Id$", $regs);
+$spip_version_affichee = $regs[1];
 
 
 //
