@@ -407,10 +407,10 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			$selected = '';
 		}
 		if ($l == $herit) {
-			$ret .= "<option style='font-weight: bold;' value='herit'$selected>"
+			$ret .= "<option class='maj-debut' style='font-weight: bold;' value='herit'$selected>"
 				.traduire_nom_langue($herit)." ("._T('info_multi_herit').")</option>\n";
 		}
-		else $ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
 	if ($nom_select == 'var_lang') $ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";

@@ -253,7 +253,6 @@ debut_cadre_enfonce();
 
 		while (list($code_langue, $nom_langue) = each($langues)) {
 			if ($langues_bloquees[$code_langue]) continue;
-
 			$i++;
 			echo "<div>";
 
