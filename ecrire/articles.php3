@@ -182,6 +182,14 @@ while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
 }
 $texte = $texte_ajout . $texte;
 
+//
+// Traiter les fins de lignes
+//
+if ($post_autobr) {
+	$chapo = post_autobr($chapo);
+	$texte = post_autobr($texte);
+}
+
 // preparer le virtuel
 
 if ($changer_virtuel && $flag_editable) {
