@@ -96,8 +96,8 @@ else if ($essai_login == "oui") {
 		@spip_query($query);
 		$redirect .= '&bonjour=oui';
 	}
-	else if ($redirect) {
-		@header("Location: $redirect&login=$login&erreur=pass");
+	else {
+		@header("Location: login.php3?login=$login&erreur=pass");
 		exit;
 	}
 }
@@ -112,7 +112,6 @@ else if ($cookie_admin) {
 
 // redirection
 if (!$redirect) $redirect = './';
-
 @header("Location: $redirect");
 
 ?>

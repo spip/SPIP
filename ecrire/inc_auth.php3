@@ -114,20 +114,20 @@ function auth() {
 				$auth_pass_ok = true;
 				$auth_can_disconnect = true;
 				if ($GLOBALS['logout'] == $auth_login) {
-					@header("Location: ../spip_cookie.php3?cookie_session=non&redirect=".rawurlencode("./ecrire/login.php3"));
+					@header("Location: ../spip_cookie.php3?cookie_session=non&redirect=login.php3");
 					exit;
 				}
 			}
 		}
 	}
 	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
-		@header("Location: ./login.php3?echec_cookie=oui");
+		@header("Location: ../login.php3?echec_cookie=oui");
 		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		@header("Location: ./login.php3");
+		@header("Location: ../login.php3");
 		exit;
 	}
 
@@ -218,7 +218,7 @@ function auth() {
 	$auth_mdpass = '';
 	
 	if (!$auth_pass_ok) {
-		@header("Location: ./login.php3?erreur=pass");
+		@header("Location: ../login.php3?erreur=pass");
 		exit;
 	}
 	
