@@ -605,8 +605,15 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 			// Reproduire la boucle en commentaire
 			$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete).")";
-			if (is_array($boucle->param))
+		    if ($boucle->param && is_array($boucle->param)) 
 				$pretty .= " {".join("} {", $boucle->param)."}";
+			// sans oublier les parametres traites en amont
+			if ($boucle->separateur)
+			  $pretty .= '{"' . $boucle->separateur . '"}';
+			if ($boucle->tout)
+			  $pretty .= '{tout}';
+			if ($boucle->plat)
+			  $pretty .= '{plat}';
 			$pretty = ereg_replace("[\r\n]", " ", $pretty);
 
 			// Puis envoyer son code
