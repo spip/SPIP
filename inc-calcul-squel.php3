@@ -1189,103 +1189,76 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 		if ($type_logo == 'RUBRIQUE') {
 			$milieu .= '
-			$image = image_rubrique($contexte["id_rubrique"]);
-			$logon = $image[0];
-			$logoff = $image[1];
+			list($logon, $logoff) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 			';
 		}
 		else if ($type_logo == 'RUBRIQUE_NORMAL') {
 			$milieu .= '
-			$image = image_rubrique($contexte["id_rubrique"]);
-			$logon = $image[0];
+			list($logon,) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 			$logoff = "";
 			';
 		}
 		else if ($type_logo == 'RUBRIQUE_SURVOL') {
 			$milieu .= '
-			$image = image_rubrique($contexte["id_rubrique"]);
-			$logon = $image[1];
+			list(,$logon) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 			$logoff = "";
 			';
 		}
 		else if ($type_logo == 'DOCUMENT'){
 			$milieu .= '
-			$image = image_document($contexte["id_document"]);
-			$logon = $image[0];
+			$logon = integre_image($contexte["id_document"],"","fichier_vignette");
 			$logoff = "";
 			';
 		}
 		else if ($type_logo == 'AUTEUR') {
 			$milieu .= '
-			$image = image_auteur($contexte["id_auteur"]);
-			$logon = $image[0];
-			$logoff = $image[1];
+			list($logon, $logoff) = IMG_image(image_auteur($contexte["id_auteur"]));
 			';
 		}
 		else if ($type_logo == 'BREVE') {
 			$milieu .= '
-			$image = image_breve($contexte["id_breve"]);
-			$logon = $image[0];
-			$logoff = $image[1];
+			list($logon, $logoff) = IMG_image(image_breve($contexte["id_breve"]));
 			';
 		}
 		else if ($type_logo == 'BREVE_RUBRIQUE') {
 		  $milieu .= '
-		  $image = image_breve($contexte["id_breve"]);
-		  $logon = $image[0];
-		  $logoff = $image[1];
-		  if (!$logon) {
-			$image = image_rubrique($contexte["id_rubrique"]);
-			$logon = $image[0];
-			$logoff = $image[1];
-		  }
+		  list($logon, $logoff) = IMG_image(image_breve($contexte["id_breve"]));
+		  if (!$logon)
+			list($logon, $logoff) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 		  ';
 		}
 		else if ($type_logo == 'SITE') {
 			$milieu .= '
-			$image = image_site($contexte["id_syndic"]);
-			$logon = $image[0];
-			$logoff = $image[1];
+			list($logon, $logoff) = IMG_image(image_site($contexte["id_syndic"]));
 			';
 		}
 		else if ($type_logo == 'MOT') {
 			$milieu .= '
-			$image = image_mot($contexte["id_mot"]);
-			$logon = $image[0];
-			$logoff = $image[1];
+			list($logon, $logoff) = IMG_image(image_mot($contexte["id_mot"]));
 			';
 		}
 		else if ($type_logo == 'ARTICLE') {
 			$milieu .= '
-			$image = image_article($contexte["id_article"]);
-			$logon = $image[0];
-			$logoff = $image[1];
+			list($logon, $logoff) = IMG_image(image_article($contexte["id_article"]));
 			';
 		}
 		else if ($type_logo == 'ARTICLE_NORMAL') {
 			$milieu .= '
-			$image = image_article($contexte["id_article"]);
-			$logon = $image[0];
+			list($logon,) = IMG_image(image_article($contexte["id_article"]));
 			$logoff = "";
 			';
 		}
 		else if ($type_logo == 'ARTICLE_SURVOL') {
 			$milieu .= '
-			$image = image_article($contexte["id_article"]);
-			$logon = $image[1];
+			list(, $logon) = IMG_image(image_article($contexte["id_article"]));
 			$logoff = "";
 			';
 		}
 		else if ($type_logo == 'ARTICLE_RUBRIQUE') {
 			$milieu .= '
-			$image = image_article($contexte["id_article"]);
-			$logon = $image[0];
-			$logoff = $image[1];
-			if (!$logon) {
-				$image = image_rubrique($contexte["id_rubrique"]);
-				$logon = $image[0];
-				$logoff = $image[1];
-			}
+			list($logon, $logoff) = IMG_image(image_article($contexte["id_article"]));
+			if (!$logon)
+				list($logon, $logoff) = IMG_image(image_rubrique($contexte["id_rubrique"]));
 			';
 		}
 		if ($flag_fichier) $milieu .= "		\$$nom_var = \$logon;\n";

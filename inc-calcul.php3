@@ -85,7 +85,7 @@ function image_document($id_document){
 		$id_type = $row['id_type'];
 		$titre = propre($row ['titre']);
 		$descriptif = propre($row['descriptif']);
-		$fichier = $row['fichier'];
+		$fichier = generer_url_document($id_document);
 		$largeur = $row['largeur'];
 		$hauteur = $row['hauteur'];
 		$taille = $row['taille'];
@@ -97,7 +97,7 @@ function image_document($id_document){
 			$query_vignette = "SELECT * FROM spip_documents WHERE id_document = $id_vignette";
 			$result_vignette = spip_query($query_vignette);
 			if ($row_vignette = @spip_fetch_array($result_vignette)) {
-				$fichier_vignette = $row_vignette['fichier'];
+				$fichier_vignette = generer_url_document($id_vignette);
 				$largeur_vignette = $row_vignette['largeur'];
 				$hauteur_vignette = $row_vignette['hauteur'];
 			}
@@ -116,14 +116,6 @@ function image_document($id_document){
 			}
 			list($fichier_vignette, $largeur_vignette, $hauteur_vignette) = vignette_par_defaut($extension);
 		}
-
-		// ajuster chemin d'acces au fichier
-		if ($GLOBALS['flag_ecrire']) {
-			if ($fichier) $fichier = "../$fichier";
-			if ($fichier_vignette) $fichier_vignette = "../$fichier_vignette";
-		}
-
-		$fichier_vignette = ereg_replace("^IMG", "", $fichier_vignette);
 
 		$image[0] = $fichier_vignette;
 		return $image;
@@ -166,6 +158,15 @@ function image_rubrique($id_rubrique) {
 	return $image;
 }
 
+function IMG_image($im) {
+	// ajoute les "IMG/" devant les noms des images trouvees
+	if ($im[0])
+		$im[0] = 'IMG/'.$im[0];
+	if ($im[1])
+		$im[1] = 'IMG/'.$im[1];
+	return $im;
+}
+
 
 // Renvoie le code html pour afficher le logo, avec ou sans survol, avec ou sans lien, etc.
 function affiche_logos($arton, $artoff, $lien, $align) {
@@ -174,27 +175,27 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 
 	$num_survol++;
 	if ($arton) {
-		$imgsize = @getimagesize("IMG/$arton");
+		//$imgsize = @getimagesize("$arton");
 		//$taille_image = ereg_replace("\"","'",$imgsize[3]);
-		$milieu = "<IMG SRC='IMG/$arton' ALIGN='$align' ".
-			" NAME='image$num_survol' ".$taille_image." BORDER='0' ALT=''".
-			" HSPACE='$espace_logos' VSPACE='$espace_logos' class='spip_logos'>";
+		$milieu = "<img src='$arton' align='$align' ".
+			" name='image$num_survol' ".$taille_image." border='0' ALT=''".
+			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos'>";
 
 		if ($artoff) {
 			if ($lien) {
-				$afflien = "<A HREF='$lien'";
-				$afflien2 = "A>";
+				$afflien = "<a href='$lien'";
+				$afflien2 = "a>";
 			}
 			else {
-				$afflien = "<DIV";
-				$afflien2 = "DIV>";
+				$afflien = "<div";
+				$afflien2 = "div>";
 			}
 			$milieu = "$afflien onMouseOver=\"image$num_survol.src=".
-				"'IMG/$artoff'\" onMouseOut=\"image$num_survol.src=".
-				"'IMG/$arton'\">$milieu</$afflien2";
+				"'$artoff'\" onMouseOut=\"image$num_survol.src=".
+				"'$arton'\">$milieu</$afflien2";
 		}
 		else if ($lien) {
-			$milieu = "<A HREF='$lien'>$milieu</A>";
+			$milieu = "<a href='$lien'>$milieu</a>";
 		}
 	} else {
 		$milieu="";
