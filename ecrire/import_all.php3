@@ -34,7 +34,7 @@ function verifier_version_sauvegarde ($archive) {
 				d'informations, voyez [la documentation de
 				SPIP->.net/article1489.html].";
     } else
-		return "Probl&eagrave; de lecture du fichier $archive";
+		return "Probl&egrave;me de lecture du fichier $archive";
 	
 }
 
