@@ -301,6 +301,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_image' => 'Afbeeldingstitel:',
 'entree_titre_obligatoire' => '<B>Titel</b> [verplicht]<BR>',
 'entree_url' => 'Je website-adres (URL)',
+'erreur_boucle_double' => 'BOUCLE@id@: dubbel gebruik',
+'erreur_boucle_fermant' => 'BOUCLE@id@: sluitingshaakje ontbreekt',
+'erreur_boucle_syntaxe' => '<NEW> Syntaxe boucle incorrecte',
+'erreur_boucle_syntaxe2' => '<NEW> La boucle @milieu@ est incorrecte.',
+'erreur_filtre' => 'Fout : de filter <b>&laquo; @filtre@ &raquo;</b> is niet gedefinieerd',
 
 
 // F
@@ -596,8 +601,8 @@ Bedankt voor je deelname
 'info_chemin_acces_2' => 'Je dient de toegang tot de gegevens uit het adresboek in te stellen. Zonder deze instellingen is het ONmogelijk de gebruikersprofielen in dit adresboek te lezen.',
 'info_chemin_acces_annuaire' => 'Opties : <B>Toegang tot het adresboek',
 'info_choix_base' => 'Derde stap:',
-'info_classement_1' => '<sup>e</sup> op @liste@',
-'info_classement_2' => '<sup>e</sup> @liste@',
+'info_classement_1' => '<sup>ste</sup> op @liste@',
+'info_classement_2' => '<sup>de</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
 'info_config_suivi' => 'Wanneer dit adres van een rondzendlijst is, kan je hieronder het adres opgeven waarlangs deelnemers van de site zich kunnen inschrijven. Dit adres kan een URL zijn (bvb. het webadres voor het inschrijving op de mailinglist), of een e-mailadres met een onderwerp (bvb. <tt>@adresse_suivi@?subject=subscribe</tt>):',
@@ -667,6 +672,12 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_envoyer_message_prive' => 'Een priv&eacute;-bericht sturen naar deze auteur',
 'info_erreur_requete' => 'Fout bij uitvoering van de opdracht :',
 'info_erreur_restauration' => 'Herstelfout : onbestaande map.',
+'info_erreur_squelette' => 'Fout op de site',
+'info_erreur_squelette2' => 'Geen sjabloon <b>@fichier@</b> is beschikbaar...',
+'info_erreur_systeme' => 'Systeemfout (errno @errsys@)',
+'info_erreur_systeme2' => '<NEW> <b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
+	ou contactez votre h&eacute;bergeur.</font><br></b>',
 'info_etape_suivante' => 'Naar de volgende stap ',
 'info_etape_suivante_1' => 'Je kan de volgende stap zetten.',
 'info_etape_suivante_2' => 'Je kan de volgende stap zetten.',
@@ -751,7 +762,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_liens_syndiques_5' => 'forum',
 'info_liens_syndiques_6' => 'is',
 'info_liens_syndiques_7' => 'nog niet goedgekeurd',
-'info_liste_redacteurs_connectes' => 'Lijst met online redacteurs',
+'info_liste_redacteurs_connectes' => 'Lijst met online redacteuren',
 'info_login_existant' => 'Deze login is reeds in gebruik',
 'info_login_trop_court' => 'Login te kort.',
 'info_mail_fournisseur' => 'jullie@provider.be',
@@ -1134,7 +1145,7 @@ een kleur geeft hun status aan&nbsp;:',
 'lien_nom_site' => 'WEBSITENAME:',
 'lien_nouvea_pense_bete' => 'NIEUWE MEMO',
 'lien_nouveau_message' => 'NIEUW BERICHT',
-'lien_nouvelle_annonce' => 'NIEUWE AANKONDIGIGN',
+'lien_nouvelle_annonce' => 'NIEUWE AANKONDIGING',
 'lien_nouvelle_recuperation' => 'Probeer de gegevens opnieuw te vinden',
 'lien_petitions' => 'PETITIE',
 'lien_popularite' => 'populariteit: @popularite@%',
@@ -1373,7 +1384,7 @@ verbinding maken met de site
 'texte_admin_effacer_01' => 'Met dit commando vernietig je de  <i>volledige</i> inhoud van de databank,
 inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je dit uitgevoerd hebt, dien je de herinstallatie van SPIP te starten om een volledig nieuwe database aan te maken en toegangsrechten voor een eerste beheerder.',
 'texte_admin_tech_01' => 'Deze optie laat je toe de inhoud van de databank te bewaren in de map <i>ecrire/data/</i>. Vergeet ook niet de map <i>IMG/</i>, die alle afbeeldingen en bijlagen bij de artikels en rubrieken bevat, integraal te bewaren.',
-'texte_admin_tech_02' => 'Opgelet: deze reservekopie kan ENKEL worden teruggezet
+'texte_admin_tech_02' => '<MODIF> Opgelet: deze reservekopie kan ENKEL worden teruggezet
  op een site met dezelfde SPIP-versie. Vaak wordt de
  fout gemaakt om een reservekopie te maken alvorens SPIP
  te updaten ... Voor meer info, kan je de <a href="http://www.spip.net/fr_article1489.html">de documentatie van SPIP</a> er op naslaan.',
@@ -1423,7 +1434,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 'texte_creation_automatique_vignette' => 'Op deze site is de automatische aanmaak van miniaturen (vignettes) geactiveerd. Als je vanop dit forumulier afbeeldingen oplaadt van het formaat @gd_formats@, zullen miniaturen aangemaakt worden met een maximale grootte van  @taille_preview@&nbsp;pixels.',
 'texte_creer_rubrique' => 'Voor je een artikel kan schrijven,<BR> dien je een rubriek aan te maken.',
-'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ATIKEL:',
+'texte_date_creation_article' => '<MODIF> DATUM VAN AANMAKEN VAN HET ATIKEL:',
 'texte_date_publication_anterieure' => 'EERDERE PUBLICATIEDATUM',
 'texte_date_publication_anterieure_nonaffichee' => 'Verberg de datum van antidatering.',
 'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE:',

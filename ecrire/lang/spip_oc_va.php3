@@ -659,6 +659,12 @@ Merc&eacute; per v&ograve;stra participacion
 'info_envoyer_message_prive' => 'Mandar un messatge privat a aquel autor',
 'info_erreur_requete' => 'Error dins la requ&egrave;sta',
 'info_erreur_restauration' => 'Error de restauracion: fichier inexistent.',
+'info_erreur_squelette' => 'Error sobre lo sit',
+'info_erreur_squelette2' => 'Ges d\'esqueleta <b>@fichier@</b> es disponibla...',
+'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
+'info_erreur_systeme2' => '<b>Lo disc dur es benl&egrave;u plen, o la basa de donaas degalhaa. <br>
+ <font color=\'red\'>Assajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
+ o contactatz v&ograve;stre auberjaor.</font><br></b>',
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Po&egrave;tz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Po&egrave;tz passar a l\'estapa seguenta.',

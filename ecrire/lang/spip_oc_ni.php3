@@ -653,6 +653,12 @@ Merc&eacute; de la v&ograve;stra participacion
 'info_envoyer_message_prive' => 'Mandar un messatge privat a aquel autor',
 'info_erreur_requete' => 'Error dins la requesta',
 'info_erreur_restauration' => 'Error de restauracion: fichier inexistent.',
+'info_erreur_squelette' => '<NEW> Error subre lo sit',
+'info_erreur_squelette2' => '<NEW> Ges d\'esqueleta <b>@fichier@</b> es pas disponibla...',
+'info_erreur_systeme' => '<NEW> Error sist&egrave;ma (errno @errsys@)',
+'info_erreur_systeme2' => '<NEW> <b>Lo disc dur es benl&egrave;u plen, o la basa de donadas degalhada. <br>
+ <font color=\'red\'>Assajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
+ o contactatz v&ograve;stre albergador.</font><br></b>',
 'info_etape_suivante' => 'Passar a l\'estapa seguenta',
 'info_etape_suivante_1' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
