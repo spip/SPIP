@@ -315,6 +315,8 @@ function bouton_admin($titre, $lien) {
 if ($admin_ok AND !$flag_preserver) {
 	include_ecrire("inc_filtres.php3");
 
+	echo '<div class="spip-admin">';
+
 	if ($id_article) {
 		bouton_admin("Modifier cet article ($id_article)", "./ecrire/articles.php3?id_article=$id_article");
 	}
@@ -339,6 +341,13 @@ if ($admin_ok AND !$flag_preserver) {
 	else $pop = "";
 	echo "<input type='submit' class='spip_bouton' name='submit' value='Recalculer cette page$pop'>";
 	echo "</form>\n";
+
+	if (lire_meta("activer_statistiques") != "non" AND $id_article) {
+		include_local ("inc-stats.php3");
+		afficher_raccourci_stats($id_article);
+	}
+
+	echo "</div>";
 }
 
 
@@ -363,8 +372,6 @@ if ($db_ok AND lire_meta("activer_syndic") != "non") {
 if (lire_meta("activer_statistiques") != "non") {
 	include_local ("inc-stats.php3");
 	ecrire_stats();
-	if ($admin_ok AND $id_article AND !$flag_preserver)
-		afficher_raccourci_stats($id_article);
 }
 
 ?>
