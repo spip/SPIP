@@ -530,7 +530,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				}
 				
 				
-				$les_auteurs = "<div class='liste_clip' style='width: 100px;'>$les_auteurs</div>";
+				$les_auteurs = "$les_auteurs";
 	
 				switch ($statut) {
 				case 'publie':
