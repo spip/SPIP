@@ -116,7 +116,7 @@ function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum)
   $lacible = "
 	include_local('inc-forum.php3');
 	lang_select(\$GLOBALS['spip_lang']);
-	echo retour_forum('$idr','$idf','$ida','$idb','$ids','".addslashes($titre)."','$table', '$forum', '$url', \"
+	echo retour_forum('$idr','$idf','$ida','$idb','$ids','".texte_script($titre)."','$table', '$forum', '$url', \"
 	<input type='hidden' name='retour' value='$retour_forum' />
 	<input type='hidden' name='ajout_forum' value='oui' />
 	<input type='hidden' name='forum_id_rubrique' value='$idr' />
