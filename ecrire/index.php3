@@ -284,8 +284,7 @@ $post_dates = lire_meta("post_dates");
 if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
 	echo "<P align=left>";
 	afficher_articles(_T('info_article_a_paraitre'),
-		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles WHERE statut='publie' AND date>NOW() ORDER BY date");
+		"WHERE statut='publie' AND date>NOW() ORDER BY date");
 }
 
 
@@ -295,12 +294,10 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 
 echo "<P align=left>";
 $vos_articles = afficher_articles(_T('info_en_cours_validation'),
-	"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-	"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur".
-	" AND articles.statut='prepa' ORDER BY articles.date DESC");
+	", spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
+	"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
 
-if ($vos_articles) $vos_articles = ' AND id_article NOT IN ('.join($vos_articles,',').')';
+if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos_articles,',').')';
 
 //
 // Verifier les boucles a mettre en relief
@@ -309,7 +306,7 @@ if ($vos_articles) $vos_articles = ' AND id_article NOT IN ('.join($vos_articles
 $relief = false;
 
 if (!$relief) {
-	$query = "SELECT id_article FROM spip_articles WHERE statut='prop'$vos_articles LIMIT 0,1";
+	$query = "SELECT id_article FROM spip_articles AS articles WHERE statut='prop'$vos_articles LIMIT 0,1";
 	$result = spip_query($query);
 	$relief = (spip_num_rows($result) > 0);
 }
@@ -342,8 +339,7 @@ if ($relief) {
 	// Les articles a valider
 	//
 	afficher_articles(_T('info_articles_proposes'),
-		"SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, id_rubrique, statut ".
-		"FROM spip_articles WHERE statut='prop'$vos_articles ORDER BY date DESC");
+		"WHERE statut='prop'$vos_articles ORDER BY date DESC");
 
 	//
 	// Les breves a valider
@@ -375,13 +371,13 @@ if ($relief) {
 			echo "<br><small><a href='sites_tous.php3'>".$row['compte']." "._T('info_liens_syndiques_1')."</a> "._T('info_liens_syndiques_2')."</small>";
 	}
 
-	// Les forums en attente de moderation 
+	// Les forums en attente de moderation
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
 		if (($row = spip_fetch_array($result)) AND $row['compte']) {
-			echo "<br><small> <a href='controle_forum.php3'>".$row['compte']; 
+			echo "<br><small> <a href='controle_forum.php3'>".$row['compte'];
 			if ($row['compte']>1)
-				echo " "._T('info_liens_syndiques_3')."</a> "._T('info_liens_syndiques_4');  
+				echo " "._T('info_liens_syndiques_3')."</a> "._T('info_liens_syndiques_4');
 			else
 				echo " "._T('info_liens_syndiques_5')."</a> "._T('info_liens_syndiques_6');
 			echo " "._T('info_liens_syndiques_7')."</small>.";
@@ -419,8 +415,7 @@ if ($options == 'avancees') {
 
 	echo "<p>";
 	afficher_articles(_T('info_derniers_articles_publies'),
-		"SELECT articles.id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
-		"FROM spip_articles AS articles, spip_auteurs_articles AS lien ".
+		", spip_auteurs_articles AS lien ".
 		"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
 
 

@@ -352,21 +352,36 @@ function afficher_tranches_requete(&$query, $colspan) {
 //
 // Afficher tableau d'articles
 //
-function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $toujours_afficher = false, $afficher_cadre = true) {
+function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true,
+		$toujours_afficher = false, $afficher_cadre = true, $afficher_descriptif = true) {
+
 	global $connect_id_auteur, $connect_statut;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
-	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
-		$afficher_langue = true;
-		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
-		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
-		else $langue_defaut = lire_meta('langue_site');
+	if (!ereg("^SELECT", $requete)) {
+		$select = "SELECT articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
+
+		if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
+			$afficher_langue = true;
+			if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
+			else $langue_defaut = lire_meta('langue_site');
+			$select .= ", articles.lang";
+		}
+		if ($afficher_visites)
+			$select .= ", articles.visites, articles.popularite";
+		if ($afficher_descriptif)
+			$select .= ", articles.descriptif";
+		$select .= ", petitions.id_article AS petition ";
+		$requete = $select . "FROM spip_articles AS articles " . $requete;
 	}
 
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
+
+	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
 	if (strlen($tranches) OR $toujours_afficher) {
 	 	$result = spip_query($requete);
@@ -393,10 +408,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$popularite = ceil(min(100,100 * $row['popularite'] / max(1, 0 + lire_meta('popularite_max'))));
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
-
-			$query_petition = "SELECT id_article FROM spip_petitions WHERE id_article=$id_article";
-			$result_petition = spip_query($query_petition);
-			$petition = (@spip_num_rows($result_petition) > 0);
+			$petition = $row['petition'];
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
@@ -456,7 +468,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
 			$s = affdate($date);
-			if ($connect_statut == "0minirezo" AND $activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
+			if ($afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_visites', array('visites' => $visites))."</a></font>";
 				if ($popularite > 0) $s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_popularite', array('popularite' => $popularite))."</a></font>";
 			}
@@ -1502,7 +1514,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else if ($rubrique == "documents"){
 		icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
 
-		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article"));
+		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 0,1"));
 		if ($nombre_articles > 0) {
 			icone_bandeau_secondaire (_T('icone_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
 		}
@@ -1905,7 +1917,7 @@ function debut_droite($rubrique="") {
 	if ($options == "avancees") {
 		// liste des articles bloques
 		if (lire_meta("articles_modif") != "non") {
-			$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
+			$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
 			$result = spip_query($query);
 			$num_articles_ouverts = spip_num_rows($result);
 			if ($num_articles_ouverts) {
@@ -1919,7 +1931,7 @@ function debut_droite($rubrique="") {
 					$ze_article = $row['id_article'];
 					$ze_titre = typo($row['titre']);
 
-					
+
 					if ($ifond == 1) {
 						$couleur = $couleur_claire;
 						$ifond = 0;

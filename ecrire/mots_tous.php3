@@ -160,7 +160,7 @@ while ($row_breves = spip_fetch_array($result_breves)){
 
 $result_syndic = spip_query(
 	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic
-	WHERE syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles') GROUP BY lien.id_mot"
+	WHERE syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot"
 	);
 while ($row_syndic = spip_fetch_array($result_syndic)){
 	$id_mot = $row_syndic['id_mot'];

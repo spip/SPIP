@@ -287,18 +287,20 @@ function fichiers_upload($dir) {
 
 function texte_upload_manuel($dir, $inclus = '') {
 	$fichiers = fichiers_upload($dir);
+	$exts = array();
 
 	while (list(, $f) = each($fichiers)) {
 		$f = ereg_replace("^$dir/","",$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
-			if ($ext == 'jpeg')
-				$ext = 'jpg';
-			$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
-			if ($inclus)
-				$req .= " AND inclus='$inclus'";
-			if (@spip_fetch_array(spip_query($req)))
-				$texte_upload .= "\n<option value=\"$f\">$f</option>";
+			if (!$exts[$ext]) {
+				if ($ext == 'jpeg') $ext = 'jpg';
+				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
+				if ($inclus) $req .= " AND inclus='$inclus'";
+				if (@spip_fetch_array(spip_query($req))) $exts[$ext] = 'oui';
+				else $exts[$ext] = 'non';
+			}
+			if ($exts[$ext] == 'oui') $texte_upload .= "\n<option value=\"$f\">$f</option>";
 		}
 	}
 

@@ -48,7 +48,8 @@ function creer_base() {
 		KEY id_secteur (id_secteur),
 		KEY id_trad (id_trad),
 		KEY lang (lang),
-		KEY statut (statut, date))";
+		KEY statut (statut, date),
+		KEY date_modif (date_modif))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs (
@@ -1355,7 +1356,7 @@ function maj_base() {
 
 	/* le bloc qui suit procede par etapes, car il risque de partir de timeout */
 	if ($version_installee < 1.710) {
-		set_time_limit(0);
+		@set_time_limit(0);
 		spip_query("ALTER TABLE spip_referers ADD domaine varchar(255)");
 		spip_query("ALTER TABLE spip_referers_articles ADD domaine varchar(255)");
 		spip_query("UPDATE spip_referers SET domaine='-'");
@@ -1364,34 +1365,33 @@ function maj_base() {
 		maj_version (1.710);
 	}
 	if ($version_installee < 1.711) {
-		set_time_limit(0);
 		spip_query("UPDATE spip_referers SET domaine = CONCAT(RIGHT(referer,LENGTH(referer) - locate('://',referer)-2), ' -') WHERE domaine = '-' AND referer LIKE '%://%'");
 		maj_version (1.711);
 	}
 	if ($version_installee < 1.712) {
-		set_time_limit(0);
 		spip_query("UPDATE spip_referers SET domaine = LEFT(domaine, locate('/',domaine)-1) WHERE domaine LIKE '%/% -'");
 		maj_version (1.712);
 	}
 	if ($version_installee < 1.713) {
-		set_time_limit(0);
 		spip_query("UPDATE spip_referers SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
 		maj_version (1.713);
 	}
 	if ($version_installee < 1.714) {
-		set_time_limit(0);
 		spip_query("UPDATE spip_referers_articles SET domaine = CONCAT(RIGHT(referer,LENGTH(referer) - locate('://',referer)-2), ' -') WHERE domaine = '-' AND referer LIKE '%://%'");
 		maj_version (1.714);
 	}
 	if ($version_installee < 1.715) {
-		set_time_limit(0);
 		spip_query("UPDATE spip_referers_articles SET domaine = LEFT(domaine, locate('/',domaine)-1) WHERE domaine LIKE '%/% -'");
 		maj_version (1.715);
 	}
 	if ($version_installee < 1.716) {
-		set_time_limit(0);
 		spip_query("UPDATE spip_referers_articles SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
 		maj_version (1.716);
+	}
+
+	if ($version_installee < 1.717) {
+		spip_query("ALTER TABLE spip_articles ADD INDEX date_modif (date_modif)");
+		maj_version (1.717);
 	}
 }
 
