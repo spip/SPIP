@@ -91,7 +91,7 @@ function transcoder_page($texte) {
 	// Si le backend precise son charset et que celui-ci est connu de SPIP,
 	// decoder puis recoder
 	if (eregi('<\\?xml[[:space:]][^>]*(utf-8)', $texte, $regs)) {
-		$charset_page = $regs[1];
+		$charset_page = strtolower($regs[1]);
 		$texte = unicode2charset(charset2unicode($texte, $charset_page));
 	}
 	// Si le backend ne precise pas, on considere qu'il est iso-8859-1 : il faut
