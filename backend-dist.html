@@ -15,35 +15,39 @@
 		<description></description>
 	</image>
 
+<!-- d'abord les articles specifiques a une rubrique - syntaxe backend.php3?id_rubrique=123 -->
+
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
 	<BOUCLE1(articles){id_secteur}{par date}{inverse}{0,10}>
 		<item>
-			<title>#TITRE</title>
+			<title>[(#TITRE|textebrut)]</title>
 			<link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-			<description>#DESCRIPTIF</description>
-			<author><BOUCLE23(auteurs){id_article}{", "}>#NOM</BOUCLE23></author>
+			<description>[(#DESCRIPTIF|textebrut)]</description>
+			<author><BOUCLE23(auteurs){id_article}{", "}>[(#NOM|textebrut)]</BOUCLE23></author>
 		</item>
 	</BOUCLE1>
 </BOUCLE_rub>
 
+<!-- sinon tous les articles du site - syntaxe backend.php3 -->
+
 	<BOUCLE2(articles){tout}{par date}{inverse}{0,10}{unique}>
 	    <item>
-	      <title>#TITRE</title>
+	      <title>[(#TITRE|textebrut)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-	      <description>#DESCRIPTIF</description>
-	      <author><BOUCLE_aut2(auteurs){id_article}{", "}>#NOM</BOUCLE_aut2></author>
+	      <description>[(#DESCRIPTIF|textebrut)]</description>
+	      <author><BOUCLE_aut2(auteurs){id_article}{", "}>[(#NOM|textebrut)]</BOUCLE_aut2></author>
 	    </item>
 	</BOUCLE2>
 	<BOUCLE3(articles){tout}{par date}{inverse}{age<3}{unique}>
 	    <item>
-	      <title>#TITRE</title>
+	      <title>[(#TITRE|textebrut)]</title>
 	      <link>#URL_SITE_SPIP/#URL_ARTICLE</link>
-	      <description>#DESCRIPTIF</description>
-	      <author><BOUCLE_aut3(auteurs){id_article}{", "}>#NOM</BOUCLE_aut3></author>
+	      <description>[(#DESCRIPTIF|textebrut)]</description>
+	      <author><BOUCLE_aut3(auteurs){id_article}{", "}>[(#NOM|textebrut)]</BOUCLE_aut3></author>
 	    </item>
 	</BOUCLE3>
 <//B_rub>
- 
+
 </channel>
-  
+
 </rss>

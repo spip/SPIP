@@ -889,6 +889,13 @@ function parser($texte) {
 		$champs_traitement[$val][] = 'vider_url';
 	}
 
+	// URLs : remplacer les & par &nbsp;
+	$c = array('URL_SITE_SPIP', 'URL_SITE', 'LIEN_URL', 'PARAMETRES_FORUM',
+		'URL_ARTICLE', 'URL_RUBRIQUE', 'URL_BREVE', 'URL_FORUM', 'URL_SYNDIC', 'URL_MOT', 'URL_DOCUMENT');
+	reset($c);
+	while (list(, $val) = each($c)) {
+		$champs_traitement[$val][] = 'htmlspecialchars';
+	}
 
 	//
 	// Construire un tableau associatif des champs de chaque type
