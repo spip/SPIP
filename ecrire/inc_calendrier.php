@@ -1386,9 +1386,7 @@ WHERE	(lien.id_message='$id_message'
 		    }
 		  }
 		}
-//		$amj = sql_calendrier_jour_ical($date_heure);
-		
-		
+
  		$jour_avant = substr($avant, 9,2);
  		$mois_avant = substr($avant, 6,2);
  		$annee_avant = substr($avant, 1,4);
@@ -1396,13 +1394,13 @@ WHERE	(lien.id_message='$id_message'
   		$mois_apres = substr($apres, 6,2);
  		$annee_apres = substr($apres, 1,4);
  	 		
- 		$ical_apres = sql_calendrier_jour_ical("$annee_apres-$mois_apres-$jour_apres");
+ 		$ical_apres = sql_calendrier_jour_ical("$annee_apres-$mois_apres-".sprintf("%02d",$jour_apres));
 
-		// Calcul assez tordu pour les semaines a cheval sur deux mois 		 
- 		$j = $jour_avant;
-		$amj = sql_calendrier_jour_ical("$annee_avant-$mois_avant-".sprintf("%02d", $j));
+		// Calcul pour les semaines a cheval sur deux mois 
+ 		$j = 0;
+		$amj = sql_calendrier_jour_ical("$annee_avant-$mois_avant-".sprintf("%02d", $j+($jour_avant)));
 
-		while ($amj <= $ical_apres) {	
+		while ($amj <= $ical_apres) {
 			$evenements[$amj][$id_message]=
 			  array(
 				'URL' => "message.php3?id_message=$id_message",
@@ -1412,13 +1410,10 @@ WHERE	(lien.id_message='$id_message'
 				'SUMMARY' => $row['titre'],
 				'CATEGORIES' => $cat,
 				'ATTENDEE' => (count($auteurs) == 0) ? '' : join($auteurs,", "));
-
 			$j ++; 
-			if ($j > 32) { 
-				$j = 1; 
-				$mois_avant = $mois_apres; 
-			}
-			$amj = sql_calendrier_jour_ical("$annee_avant-$mois_avant-".sprintf("%02d", $j));
+	   		$ladate = date("Y-m-d",mktime (1,1,1,$mois_avant, ($j + $jour_avant), $annee_avant));
+			
+			$amj = sql_calendrier_jour_ical($ladate);
 
 		}
 
