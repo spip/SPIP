@@ -60,7 +60,7 @@ if ($connect_statut == '0minirezo') {
 	}
 	else if ($new == 'oui') {
 		$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
-		$onfocus = " onfocus=\"if(!done){this.value='';done=true;}\"";
+		$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 	}
 }
 
