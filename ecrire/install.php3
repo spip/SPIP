@@ -160,8 +160,8 @@ else if ($etape == 4) {
 		$conn .= "if (defined(\"_ECRIRE_INC_CONNECT\")) return;\n";
 		$conn .= "define(\"_ECRIRE_INC_CONNECT\", \"1\");\n";
 		$conn .= "\$GLOBALS['db_ok'] = true;\n";
-		$conn .= "@mysql_connect(\"$adresse_db\",\"$login_db\",\"$pass_db\");\n";
-		$conn .= "@mysql_select_db(\"$sel_db\");\n";
+		$conn .= "@mysql_connect('$adresse_db','$login_db','$pass_db');\n";
+		$conn .= "@mysql_select_db('$sel_db');\n";
 		$conn .= "\$GLOBALS['db_ok'] &= !!@mysql_num_rows(@spip_query('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
 		$myFile = fopen("inc_connect_install.php3", "wb");
