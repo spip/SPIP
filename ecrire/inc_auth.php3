@@ -90,7 +90,11 @@ function auth() {
 	if ($SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES)
 	if ($cookie = $HTTP_COOKIE_VARS[spip_session]) {
 		include_local ("inc_session.php3");
-		$session_login = verifie_cookie_session ($cookie);
+		if ($visiteur = verifie_cookie_session ($cookie)) {
+			if ($visiteur->statut == '0minirezo' OR $visiteur->statut == '1comite') {
+				$session_login = $visiteur->login;
+			}
+		}
 	}
 	if (! $session_login AND ($HTTP_COOKIE_VARS[cookie_login] == 'experimental')) {
 		@header ("Location: login.php3");
