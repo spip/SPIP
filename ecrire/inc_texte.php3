@@ -133,7 +133,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 	if ($flag_pcre) {	// beaucoup plus rapide si on a pcre
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
-		$regexp_echap_cadre = "<(cadre|frame)>((.*?))<\/(cadre|frame)>";
+		$regexp_echap_cadre = "[\n\r]*<(cadre|frame)>((.*?))<\/(cadre|frame)>[\n\r]*";
 		$regexp_echap_poesie = "[\n\r]*<(poesie|poetry)>((.*?))<\/(poesie|poetry)>[\n\r]*";
 		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)/si";
 	} else {
@@ -181,7 +181,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = trim(entites_html($regs[9]));
 			$total_lignes = count(explode("\n", $lecode));
 
-			$les_echap[$num_echap] = "</p><form action=\"get\"><textarea readonly='readonly' cols='40' wrap='off' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form><p class=\"spip\">";
+			$les_echap[$num_echap] = "</p><form action=\"/\" method=\"get\"><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form><p class=\"spip\">";
 		}
 		else
 		if ($regs[12]) {
