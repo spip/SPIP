@@ -39,10 +39,10 @@ function entites_unicode($texte) {
 // Nettoyer les backend
 function texte_backend($texte) {
 	// supprimer tags et sauts de ligne
-	$texte = str_replace("\n"," ",textebrut($texte));
+	//$texte = str_replace("\n"," ",textebrut($texte));
 
 	// " -> &quot; et tout ce genre de choses
-	$texte = corriger_toutes_entites_html(htmlspecialchars($texte));
+	$texte = entites_html($texte);
 
 	// verifier le charset
 	$texte = entites_unicode($texte);
@@ -82,6 +82,8 @@ function textebrut($texte) {
 	$texte = ereg_replace("\n +", "\n", $texte);
 	$texte = supprimer_tags($texte);
 	$texte = ereg_replace("(&nbsp;| )+", " ", $texte);
+	// nettoyer l'apostrophe curly qui pose probleme a certains rss-readers, lecteurs de mail...
+	$texte = str_replace("&#8217;","'",$texte);
 	return $texte;
 }
 
