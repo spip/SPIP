@@ -6,6 +6,80 @@ if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
 
+// *********** traiter les variables ************
+// Magic quotes : on n'en veut pas sur la base,
+// et on nettoie les GET/POST/COOKIE le cas echeant
+//
+
+$php_version = explode('.', phpversion());
+$php_version_maj = (int) $php_version[0];
+$php_version_med = (int) $php_version[1];
+if (ereg('([0-9]+)', $php_version[2], $match)) $php_version_min = (int) $match[1];
+
+function magic_unquote($table) {
+	if (is_array($GLOBALS[$table])) {
+	        reset($GLOBALS[$table]);
+	        while (list($key, $val) = each($GLOBALS[$table])) {
+	        	if (is_string($val))
+		                $GLOBALS[$key] = $GLOBALS[$table][$key] = stripslashes($val);
+	        }
+	}
+}
+
+$flag_magic_quotes = ($php_version_maj > 3 OR $php_version_min >= 6);
+if ($flag_magic_quotes) {
+	@set_magic_quotes_runtime(0);
+	$unquote_gpc = get_magic_quotes_gpc();
+}
+else $unquote_gpc = true;
+
+if ($unquote_gpc) {
+	magic_unquote('HTTP_GET_VARS');
+	magic_unquote('HTTP_POST_VARS');
+	magic_unquote('HTTP_COOKIE_VARS');
+}
+
+
+//
+// Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
+// A remplacer par une gestion propre des variables admissibles ;-)
+//
+
+function feed_globals($table) {
+	if (is_array($GLOBALS[$table])) {
+	        reset($GLOBALS[$table]);
+	        while (list($key, $val) = each($GLOBALS[$table])) {
+	                $GLOBALS[$key] = $val;
+	        }
+	}
+}
+
+feed_globals('HTTP_GET_VARS');
+feed_globals('HTTP_POST_VARS');
+feed_globals('HTTP_COOKIE_VARS');
+feed_globals('HTTP_SERVER_VARS');
+
+
+//
+// Avec register_globals a Off sous PHP4, il faut utiliser
+// la nouvelle variable HTTP_POST_FILES pour les fichiers uploades
+// (pas valable sous PHP3...)
+//
+
+function feed_post_files($table) {
+	if (is_array($GLOBALS[$table])) {
+	        reset($GLOBALS[$table]);
+	        while (list($key, $val) = each($GLOBALS[$table])) {
+	                $GLOBALS[$key] = $val['tmp_name'];
+	                $GLOBALS[$key.'_name'] = $val['name'];
+	        }
+	}
+}
+
+feed_post_files('HTTP_POST_FILES');
+
+
+
 //
 // 	*** Parametrage par defaut de SPIP ***
 //
@@ -155,73 +229,6 @@ else {
 
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 
-
-//
-// Magic quotes : on n'en veut pas sur la base,
-// et on nettoie les GET/POST/COOKIE le cas echeant
-//
-
-function magic_unquote($table) {
-	if (is_array($GLOBALS[$table])) {
-	        reset($GLOBALS[$table]);
-	        while (list($key, $val) = each($GLOBALS[$table])) {
-	        	if (is_string($val))
-		                $GLOBALS[$key] = $GLOBALS[$table][$key] = stripslashes($val);
-	        }
-	}
-}
-
-$flag_magic_quotes = ($php_version_maj > 3 OR $php_version_min >= 6);
-if ($flag_magic_quotes) {
-	@set_magic_quotes_runtime(0);
-	$unquote_gpc = get_magic_quotes_gpc();
-}
-else $unquote_gpc = true;
-
-if ($unquote_gpc) {
-	magic_unquote('HTTP_GET_VARS');
-	magic_unquote('HTTP_POST_VARS');
-	magic_unquote('HTTP_COOKIE_VARS');
-}
-
-
-//
-// Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
-// A remplacer par une gestion propre des variables admissibles ;-)
-//
-
-function feed_globals($table) {
-	if (is_array($GLOBALS[$table])) {
-	        reset($GLOBALS[$table]);
-	        while (list($key, $val) = each($GLOBALS[$table])) {
-	                $GLOBALS[$key] = $val;
-	        }
-	}
-}
-
-feed_globals('HTTP_GET_VARS');
-feed_globals('HTTP_POST_VARS');
-feed_globals('HTTP_COOKIE_VARS');
-feed_globals('HTTP_SERVER_VARS');
-
-
-//
-// Avec register_globals a Off sous PHP4, il faut utiliser
-// la nouvelle variable HTTP_POST_FILES pour les fichiers uploades
-// (pas valable sous PHP3...)
-//
-
-function feed_post_files($table) {
-	if (is_array($GLOBALS[$table])) {
-	        reset($GLOBALS[$table]);
-	        while (list($key, $val) = each($GLOBALS[$table])) {
-	                $GLOBALS[$key] = $val['tmp_name'];
-	                $GLOBALS[$key.'_name'] = $val['name'];
-	        }
-	}
-}
-
-feed_post_files('HTTP_POST_FILES');
 
 
 //
