@@ -141,13 +141,14 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	if ($login) {
 		// affiche formulaire de login en incluant le javascript MD5
 		echo "<script type=\"text/javascript\" src=\"ecrire/md5.js\"></script>";
-		echo "<form name='form_login' class='spip_encadrer' action='./spip_cookie.php3' method='post'";
+		echo "<form name='form_login' action='./spip_cookie.php3' method='post'";
 		echo " onSubmit='if (this.session_password.value) {
 				this.session_password_md5.value = calcMD5(\"$alea_actuel\" + this.session_password.value);
 				this.next_session_password_md5.value = calcMD5(\"$alea_futur\" + this.session_password.value);
 				this.session_password.value = \"\";
 			}'";
 		echo ">\n";
+		echo "<div class='spip_encadrer'>";
 		if ($erreur) echo "<div class='reponse_formulaire'><b>$erreur</b></div><p>";
 
 		// si jaja actif, on affiche le login en 'dur', et on le passe en champ hidden
@@ -167,7 +168,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<input type='text' name='session_login' class='forml' value=\"$login\" size='40'></noscript>\n";
 
 		echo "<p>\n<label><b>Mot de passe&nbsp;:</b><br></label>";
-		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'><p>\n";
+		echo "<input type='password' name='session_password' class='forml' value=\"\" size='40'>\n";
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
 
 		$url = $cible->getUrl();
@@ -175,6 +176,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		echo "<input type='hidden' name='session_password_md5' value=''>\n";
 		echo "<input type='hidden' name='next_session_password_md5' value=''>\n";
 		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
+		echo "</div>";
 		echo "</form>";
 	}
 	else { // demander seulement le login
@@ -182,13 +184,15 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 		$url = $cible->getUrl();
 		$action = $clean_link->getUrl();
 
-		echo "<form name='form_login' action='$action' method='post' class='spip_encadrer'>\n";
+		echo "<form name='form_login' action='$action' method='post'>\n";
+		echo "<div class='spip_encadrer'>";
 		if ($erreur) echo "<font color=red><b>$erreur</b></font><p>";
 		echo "<label><b>Login (identifiant de connexion au site)&nbsp;:</b><br></label>";
 		echo "<input type='text' name='var_login' class='forml' value=\"\" size='40'>\n";
 
 		echo "<input type='hidden' name='var_url' value='$url'>\n";
 		echo "<div align='right'><input type='submit' class='spip_bouton' name='submit' value='Valider'></div>\n";
+		echo "</div>";
 		echo "</form>";
 	}
 
