@@ -101,6 +101,7 @@ function traduire_chaine($code, $args) {
 }
 
 function traduire_nom_langue($lang) {
+	$lang = lang_supprimer_point ($lang);
 	$codes_langues = array(
 	'aa' => "Afar",
 	'ab' => "Abkhazian",
@@ -259,11 +260,13 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '') {
 	if ($default == '')
 		$default = $GLOBALS['spip_lang'];
 	else if ($default == '--') {
-		$premier_option = "<option value='--'>--</option>\n";
+		$parenthese_o = '(';
+		$parenthese_f = ')';
+		$default = lire_meta('langue_site');
 	} else if (substr($default,0,1) == '.') {
 		$parenthese_o = '(';
 		$parenthese_f = ')';
-		$default = substr($default,1);
+		$default = lang_supprimer_point($default);
 	}
 
 	$langues = explode(',', $GLOBALS['all_langs']);
@@ -347,6 +350,11 @@ function init_langues() {
 				ecrire_meta('langue_site', $langue_site);
 		}
 	}
+}
+
+// nettoyer les langues affectees automatiquement (cf. calculer_langues_rubriques)
+function lang_supprimer_point ($langue) {
+	return ereg_replace('^\.', '', $langue);
 }
 
 init_langues();

@@ -444,6 +444,7 @@ function extra ($letexte,$champ) {
 // <body[ dir="(#LANG|lang_rtl)"]> pour l'ecriture droite->gauche
 function lang_rtl ($lang) {
 	include_ecrire('inc_lang.php3');
+	$lang = lang_supprimer_point($lang);
 	if ($lang=='fa' OR $lang=='ar')
 		return 'rtl';
 }
@@ -453,7 +454,7 @@ function lang_select ($lang='') {
 	global $pile_langues, $spip_lang;
 	include_ecrire('inc_lang.php3');
 	array_push($pile_langues, $spip_lang);
-	changer_langue($lang);
+	changer_langue(lang_supprimer_point($lang));
 }
 
 // revenir a la langue precedente
@@ -461,11 +462,6 @@ function lang_dselect ($rien='') {
 	global $pile_langues;
 	include_ecrire('inc_lang.php3');
 	changer_langue(array_pop($pile_langues));
-}
-
-// nettoyer les langues affectees automatiquement (cf. calculer_langues_rubriques)
-function lang_supprimer_point ($langue) {
-	return ereg_replace('^\.', '', $langue);
 }
 
 ?>

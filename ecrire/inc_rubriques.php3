@@ -169,7 +169,7 @@ function calculer_langues_rubriques_etape() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes(lang_supprimer_point($row['lang']));
 		$id_rubrique = $row['id_rubrique'];
-		spip_log ("rubrique $id_rubrique = .$lang");
+		spip_debug ("rubrique $id_rubrique = .$lang");
 		$t = spip_query ("UPDATE spip_rubriques SET lang='.$lang' WHERE id_rubrique=$id_rubrique");
 	}
 
@@ -189,7 +189,7 @@ function calculer_langues_rubriques() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes(lang_supprimer_point($row['lang']));
 		$id_article = $row['id_article'];
-		spip_log ("article $id_article = .$lang");
+		spip_debug ("article $id_article = .$lang");
 		spip_query ("UPDATE spip_articles SET lang='.$lang' WHERE id_article=$id_article");
 	}
 	
