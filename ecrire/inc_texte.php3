@@ -344,7 +344,9 @@ function typo($letexte) {
 		$letexte = typo_fr($letexte);
 	else
 		$letexte = typo_en($letexte);
-
+		
+		
+	$letexte = ereg_replace("'", "&rsquo;", $letexte);
 	$letexte = corriger_caracteres($letexte);
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCETYPO");
 

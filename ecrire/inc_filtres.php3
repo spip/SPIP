@@ -75,7 +75,7 @@ function corriger_caracteres($texte) {
 	if (lire_meta('charset') != 'iso-8859-1')
 		return $texte;
 	// 145,146,180 = simple quote ; 147,148 = double quote ; 150,151 = tiret long
-	return strtr($texte, chr(145).chr(146).chr(180).chr(150).chr(151), "'''".'""--');
+	return strtr($texte, chr(180).chr(150).chr(151), "'''".'""--');
 }
 
 // Transformer les sauts de paragraphe en simples passages a la ligne
