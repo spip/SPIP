@@ -54,7 +54,10 @@ function include_plug($file) {
 
 
 // Que faire si Spip n'est pas installe... sauf si justement on l'installe!
-if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
+if (!(_FILE_CONNECT
+OR defined('_ECRIRE_INSTALL')
+OR defined('_TEST_DIRS')
+OR defined('_ECRIRE_AIDE'))) {
 	// Soit on est dans ecrire/ et on envoie sur l'installation
 	if (@file_exists("inc_version.php3")) {
 		header("Location: " . _DIR_RESTREINT . "install.php3");
