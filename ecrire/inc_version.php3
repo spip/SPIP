@@ -56,16 +56,17 @@ function include_plug($file) {
 	$GLOBALS['included_files'][$file] = 1;
 }
 
-# Refus si Spip n'est pas installe... sauf si justement on l'installe!
 
+// Que faire si Spip n'est pas installe... sauf si justement on l'installe!
 if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
-  if (!defined("_INC_PUBLIC"))
-    {
-	header("Location: " . _DIR_RESTREINT . "install.php3");
-    }
-  else
-    {
-      # on ne peut pas deviner ces repertoires avant l'installation !
+	// Soit on est dans ecrire/ et on envoie sur l'installation
+	if (@file_exists("inc_version.php3")) {
+		header("Location: " . _DIR_RESTREINT . "install.php3");
+		exit;
+	}
+	// Soit on est dans le site public
+	else if (defined("_INC_PUBLIC")) {
+		# on ne peut pas deviner ces repertoires avant l'installation !
 		define('_DIR_INCLUDE', _DIR_RESTREINT);
 		define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 		define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
@@ -74,8 +75,9 @@ if (!(_FILE_CONNECT OR defined('_ECRIRE_INSTALL') OR defined('_TEST_DIRS'))) {
 		install_debut_html(_T('info_travaux_titre'));
 		echo "<p>"._T('info_travaux_texte')."</p>";
 		install_fin_html();
+		exit;
 	}
-  exit;
+	// Soit on est appele de l'exterieur (spikini, etc)
 }
 
 // *********** traiter les variables ************
@@ -153,6 +155,7 @@ function feed_post_files($table) {
 }
 
 feed_post_files('HTTP_POST_FILES');
+
 
 //
 // 	*** Parametrage par defaut de SPIP ***
