@@ -307,9 +307,12 @@ function parser_boucle($texte, $id_parent) {
 					if ($param == 'inverse') {
 						if ($req_order) $req_order .= ' DESC';
 					}
-					
+					// Gerer les traductions
 					else if ($param == 'traduction') {
 						$req_where[] = "$table.id_trad > 0 AND $table.id_trad = \$id_trad";
+					}
+					else if ($param == 'origine_traduction') {
+						$req_where[] = "$table.id_trad = $table.id_article";
 					}
 
 					// Special rubriques
