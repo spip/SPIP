@@ -9,53 +9,6 @@ include_ecrire ("inc_objet.php3");
 
 
 //
-// Vignette pour les documents lies
-//
-
-function vignette_par_defaut($type_extension) {
-	if ($GLOBALS['flag_ecrire'])
-		$img = "../IMG/icones";
-	else
-		$img = "IMG/icones";
-
-	$filename = "$img/$type_extension";
-
-	// Glurps !
-	if (file_exists($filename.'.png')) {
-		$vig = "$filename.png";
-	}
-	else if (file_exists($filename.'.gif')) {
-		$vig = "$filename.gif";
-	}
-	else if (file_exists($filename.'-dist.png')) {
-		$vig = "$filename-dist.png";
-	}
-	else if (file_exists($filename.'-dist.gif')) {
-		$vig = "$filename-dist.gif";
-	}
-	else if (file_exists("$img/defaut.png")) {
-		$vig = "$img/defaut.png";
-	}
-	else if (file_exists("$img/defaut.gif")) {
-		$vig = "$img/defaut.gif";
-	}
-	else if (file_exists("$img/defaut-dist.png")) {
-		$vig = "$img/defaut-dist.png";
-	}
-	else if (file_exists("$img/defaut-dist.gif")) {
-		$vig = "$img/defaut-dist.gif";
-	}
-
-	if ($size = @getimagesize($vig)) {
-		$largeur = $size[0];
-		$hauteur = $size[1];
-	}
-
-	return array($vig, $largeur, $hauteur);
-}
-
-
-//
 // Integration (embed) multimedia
 //
 
