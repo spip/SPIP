@@ -12,23 +12,23 @@ define("_INC_CACHE", "1");
 
 function generer_nom_fichier_cache($fichier_requete) {
 	$md_cache = md5($fichier_requete);
-	
+
 	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
 	$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
 	$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
 	$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
 	if (strlen($fichier_cache) > 24)
 		$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-', '\1-', $fichier_cache), -24);
-	
+
 	if (!$fichier_cache)
 		$fichier_cache = 'INDEX-';
 	$fichier_cache .= '.'.substr($md_cache, 1, 6);
-	
+
 	$subdir_cache = substr($md_cache, 0, 1);
-	
+
 	if (creer_repertoire("CACHE", $subdir_cache))
 		$fichier_cache = "$subdir_cache/$fichier_cache";
-	
+
 	return $fichier_cache;
 }
 
@@ -66,6 +66,29 @@ function utiliser_cache($chemin_cache, $delais) {
 		if (!$GLOBALS['db_ok']) $use_cache = true;
 	}
 	return $use_cache;
+}
+
+
+function ecrire_fichier_cache($fichier, $contenu) {
+	global $flag_flock;
+
+	$fichier_tmp = $fichier.'_tmp';
+	$f = fopen($fichier_tmp, "wb");
+	if (!$f) return;
+
+	// Essayer de poser un verrou
+	if ($flag_flock) {
+		@flock($f, 6, $r);
+		if ($r) return;
+	}
+	$r = fwrite($f, $contenu);
+	if ($flag_flock) @flock($f, 3);
+	if ($r != strlen($contenu)) return;
+	if (!fclose($f)) return;
+
+	@unlink($fichier);
+	rename($fichier_tmp, $fichier);
+	if ($GLOBALS['flag_apc']) apc_rm($fichier);
 }
 
 
