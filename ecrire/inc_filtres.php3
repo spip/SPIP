@@ -236,10 +236,19 @@ function vider_url($url) {
 function url_var_recherche($url) {
 	if (_request('recherche')
 	AND !ereg("var_recherche", $url)) {
-		$url .= strpos($url, '?') ? '&' : '?';
-		$url .= "var_recherche=".urlencode(_request('recherche'));
+		$x = "var_recherche=".urlencode(_request('recherche'));
+		if (!strpos($url, '?'))
+		  return "$url?$x";
+		else
+		  {
+		    $p = strpos($url, '#');
+		    if (!$p)
+		      return "$url&$x";
+		    else
+		      return substr($url,0,$p) . "&$x" . substr($url,$p+1);
+		  }
 	}
-	return $url;
+	else return $url;
 }
 
 
