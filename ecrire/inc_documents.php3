@@ -485,7 +485,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if ($GLOBALS['id_document'] > 0) {
 		$id_document_deplie = $GLOBALS['id_document'];
 	}
-	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
+	$redirect_url = $clean_link->getUrl();
 
 	// Afficher portfolio
 	/////////
@@ -629,12 +629,11 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			
 			if ($flag_modif) {
 					
-				if ($vignette_perso) {
-				}
-				else {
+				if (!$vignette_perso) {
 						echo debut_block_invisible("gerer_vignette$id_document");
 						echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px; text-align: left; background-color: white;'>";
 						$link = $image_link;
+#						$link->addVar('redirect', $redirect_url);
 						$link->addVar('hash', calculer_action_auteur("ajout_doc"));
 						$link->addVar('hash_id_auteur', $connect_id_auteur);
 						$link->addVar('ajout_doc', 'oui');

@@ -551,6 +551,11 @@ function centrer($letexte) {
 	return aligner($letexte,'center');
 }
 
+function style_align($bof) {
+	global $spip_lang_left;
+	return "text-align: $spip_lang_left";
+}
+
 //
 // Export iCal
 //
@@ -726,5 +731,14 @@ function http_script($script, $src='', $noscript='') {
 		. "</script>\n"
 		. (!$noscript ? '' : "<noscript>\n\t$noscript\n</noscript>\n");
 }
+
+function inscriptionok($site, $mode)
+{
+  return ((lire_meta("accepter_inscriptions") == "oui") OR
+	  (($mode == 'forum') AND
+	   (lire_meta("accepter_visiteurs") == "oui"
+	    OR lire_meta('forums_publics') == 'abo'))) ? ($site . '/') : '';
+}
+
 
 ?>
