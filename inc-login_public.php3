@@ -88,8 +88,6 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 		}
 	}
 
-	include_ecrire("inc_mail.php3");
-
 	return array('formulaire_login', 0, 
 		     array_merge(array_map('addslashes', $row),
 				 array(
@@ -110,8 +108,8 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 
 function filtre_rester_connecte($prefs) 
 {
-	$prefs = unserialize($row['prefs']);
-	return $prefs['cnx'] == 'perma' ? ' checked="checked"' : '';
+	$prefs = unserialize(stripslashes($prefs));
+	return $prefs['cnx'] == 'perma' ? ' ' : '';
 }
 
 function silogoauteur($id_auteur)
@@ -119,8 +117,4 @@ function silogoauteur($id_auteur)
   $f = _DIR_IMG . 'auton' . $id_auteur . '.jpg';
   return (@file_exists($f) ? $f : '');
 }
-
-
-function choisir_noeud($t,$v,$f) {return $t ? ("_$t" . ".$v") : ".$f";}
-
 ?>
