@@ -15,17 +15,16 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 	foreach ($tableau_des_erreurs as $err) {
 		$res .= "<li>" .$err[0] . ",. <small>".$err[1]."</small><br /></li>\n";
 	}
-	return "<div id='spip-debug' 
-style='position: absolute; top: 20; z-index: 1000;'><ul><li>" .
-	_T('zbug_erreur_squelette') .
-
+	return "<div id='spip-debug' style='"
+	. "position: absolute; top: 20px; left: 20px; z-index: 1000;"
+	. "'><ul><li>"
+	. _T('zbug_erreur_squelette')
 ## aide locale courte a ecrire, avec lien vers une grosse page de documentation
 #		aide('erreur_compilation'),
-
-	"<br /></li>" .
-	"<ul>" .
-	$res .
-	"</ul></ul></div>";
+	. "<br /></li>"
+	. "<ul>"
+	. $res
+	. "</ul></ul></div>";
 
 }
 
