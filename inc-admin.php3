@@ -31,12 +31,7 @@ function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval(
 		lang_select($lang);
 	}
 
-	// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
-	// puis celle du squelette (.spip-admin, cf. impression.css)
-	$ret .= "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
-	if (@file_exists('spip_admin_perso.css')) $ret .= "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
-	$ret .= '<div class="spip-admin-float">
-	<div class="spip-admin-bloc" dir="'.lang_dir($lang,'ltr','rtl').'">
+	$ret = '<div class="spip-admin-bloc" dir="'.lang_dir($lang,'ltr','rtl').'">
 	<div class="spip-admin">
 	<ul>';
 
@@ -99,7 +94,7 @@ function afficher_boutons_admin($pop='', $forcer_debug = false /* cas ou l'eval(
 		$ret .= $debug_messages;
 	}
 
-	$ret .= "</ul></div></div></div>";
+	$ret .= "</ul></div></div>\n";
 
 	lang_dselect();
 
@@ -110,14 +105,31 @@ function calcul_admin_page($cached, $texte) {
 
 	$a = afficher_boutons_admin($cached ? ' *' : '');
 
+	// Inserer la feuille de style selon les normes, dans le <head>
+	// Feuilles de style admin : d'abord la CSS officielle, puis la perso,
+	// puis celle du squelette (.spip-admin, cf. impression.css)
+	$css = "<link rel='stylesheet' href='spip_admin.css' type='text/css' />\n";
+	if (@file_exists('spip_admin_perso.css'))
+		$css .= "<link rel='stylesheet' href='spip_admin_perso.css' type='text/css' />\n";
+	if (eregi('<(/head|body)', $texte, $regs)) {
+		$texte = explode($regs[0], $texte, 2);
+		$texte = $texte[0].$css.$regs[0].$texte[1];
+	} else
+		$texte .= $css;
+
+	// Inserer les boutons admin dans la page
 	// La constante doit etre definie a l'identique dans inc-form-squel
 	// balise #FORMULAIRE_ADMIN ? sinon ajouter en fin de page
 	if (!(strpos($texte, '<!-- @@formulaire_admin@@45609871@@ -->') === false))
 		$texte = str_replace('<!-- @@formulaire_admin@@45609871@@ -->', $a, $texte);
-	else if (eregi('</(body|html)>', $texte, $regs))
-		$texte = str_replace($regs[0], $a.$regs[0], $texte);
-	else
-		$texte .= $a;
+	else {
+		$a = '<div class="spip-admin-float">'.$a."</div>\n";
+		if (eregi('</(body|html)>', $texte, $regs)){
+			$texte = explode($regs[0], $texte, 2);
+			$texte = $texte[0].$a.$regs[0].$texte[1];
+		} else
+			$texte .= $a;
+	}
 
 	return $texte;
 }
