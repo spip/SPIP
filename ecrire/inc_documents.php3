@@ -98,7 +98,6 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $this_link;
-	global $id_article;
 
 	if (!$redirect_url) $redirect_url = $this_link->getUrl();
 
@@ -214,10 +213,10 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 	}
 	echo "<font face=\"Georgia, Garamond, Times, serif\" size=\"3\">";
 
-	echo "<form action='article_documents.php3' method='post'>";
-	echo "<input type='hidden' name='id_article' value='$id_article'>";
-	echo "<input type='hidden' name='id_document' value='$id_document'>";
-	echo "<input type='hidden' name='modif_document' value='oui'>";
+	$link = new Link($redirect_url);
+	$link->addVar('modif_document', 'oui');
+	$link->addVar('id_document', $id_document);
+	echo $link->getForm('POST');
 
 	echo "<b>Titre&nbsp;:</b><br>\n";
 	echo "<input type='text' name='titre' class='formo' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
@@ -312,7 +311,11 @@ function afficher_document($id_document, $image_link, $redirect_url = "", $depli
 }
 
 
-function pave_documents($id_article) {
+//
+// Resume et lien vers les documents lies a l'article
+//
+
+function boite_documents_article($id_article) {
 	global $puce;
 
 	$result_doc = mysql_query("SELECT type.extension AS extension, COUNT(doc.id_document) AS cnt
