@@ -1647,13 +1647,7 @@ er blevet &aelig;ndret. I dette tilf&aelig;lde tilr&aring;des det at ajourf&osla
 'trad_delier' => 'Afbryd forbindelsen mellem denne artikel og overs&aelig;ttelserne',
 'trad_lier' => 'Denne artikel er en overs&aelig;ttelse af artikel nummer&nbsp;:',
 'trad_new' => 'Lav en ny overs&aelig;ttelse af denne artikel',
-'trad_reference' => '(referenceartikel)',
-
-
-// PLUS_UTILISE
-'info_donner_rendez_vous' => 'Med denne knap kan du lave en aftale med en anden deltager.',
-'info_multi_cette_rubrique' => 'Dette afsnit er p&aring;:',
-'info_nouveau_pense_bete' => 'Denne knap giver dig mulighed for at lave en ny huskeseddel.'
+'trad_reference' => '(referenceartikel)'
 
 );
 
