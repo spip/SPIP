@@ -1,0 +1,12 @@
+body {
+	color: #000000;
+	background-color: #FFFFFF;
+	font-family: Verdana, Geneva, Arial, Helvetica;
+	font-size: 12px;
+	margin: 0px;
+	padding: 0px;
+}
+
+#haut-page, .colonne_etroite {
+	display: none;
+}
