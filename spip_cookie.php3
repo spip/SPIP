@@ -135,7 +135,7 @@ if ($essai_login == "oui") {
 
 		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."'";
 		$result = spip_query($query);
-		if ($row_auteur = spip_fetch_array($result)) 
+		if ($row_auteur = spip_fetch_array($result))
 			$cookie_session = creer_cookie_session($row_auteur);
 
 		if (ereg("ecrire/", $cible->getUrl())) {
@@ -165,8 +165,12 @@ else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 }
 
 // cookie de session ?
-if ($cookie_session)
-	spip_setcookie('spip_session', $cookie_session);
+if ($cookie_session) {
+	if ($session_remember == 'oui')
+		spip_setcookie('spip_session', $cookie_session, time() + 3600 * 24 * 14);
+	else
+		spip_setcookie('spip_session', $cookie_session);
+}
 
 // Redirection
 // Sous Apache 1.x, les cookies avec une redirection fonctionnent
