@@ -61,7 +61,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 			$bedtime = time() + $delais + $conservation;
 			$fichier = addslashes($chemin_cache);
 			spip_query("UPDATE spip_caches SET id='$bedtime'
-				WHERE fichier='$chemin_cache' AND type='t')");
+				WHERE fichier='$chemin_cache' AND type='t'");
 			if ($GLOBALS['db_ok'])
 				@unlink($chemin_cache.'.NEW');
 		}
