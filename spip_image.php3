@@ -161,7 +161,7 @@ function ajout_image($source, $dest) {
 // Ajouter un document
 //
 
-function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='') {
+function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='', $titre_automatique=true) {
 	global $hash_id_auteur, $hash, $id_article;
 
 	//
@@ -170,6 +170,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur)) {
 		exit;
 	}
+	
 
 	if (ereg("\.([^.]+)$", $orig, $match)) {
 		$ext = addslashes(strtolower($match[1]));
@@ -257,6 +258,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 		$titre = ereg_replace("\..*$", "", $orig);
 		$titre = ereg_replace("ecrire/|upload/", "", $titre);
 		$titre = strtr($titre, "_", " ");
+		if (!$titre_automatique) $titre = "";
 		$update = "mode='$mode', titre='".addslashes($titre)."', ";
 	}
 
@@ -308,7 +310,7 @@ if ($ajout_doc == 'oui') {
 					if ($inclus)
 						$req .= " AND inclus='$inclus'";
 					if (@mysql_fetch_array(spip_query($req)))
-						$id_document = ajout_doc('ecrire/upload/'.$entryName, 'ecrire/upload/'.$entryName, '', 'document', '');
+						$id_document = ajout_doc('ecrire/upload/'.$entryName, 'ecrire/upload/'.$entryName, '', 'document', '','','','',false);
 				}
 			}
 		}
