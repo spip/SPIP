@@ -60,32 +60,32 @@ export_objets($query, "groupe_mots", $f, $gz, $etape, 7, "Sauvegarder les groupe
 $query = "SELECT * FROM spip_breves".$debug_limit;
 export_objets($query, "breve", $f, $gz, $etape, 8, "Sauvegarder les br&egrave;ves");
 
-$query = "SELECT * FROM spip_messages";
-export_objets($query, "message", $f, $gz, $etape, 9, "Sauvegarder les messages");
+//$query = "SELECT * FROM spip_messages";
+//export_objets($query, "message", $f, $gz, $etape, 9, "Sauvegarder les messages");
 
-$query = "SELECT * FROM spip_forum".$debug_limit;
-export_objets($query, "forum", $f, $gz, $etape, 10, "Sauvegarder les forums");
+$query = "SELECT * FROM spip_forum WHERE statut='publie'".$debug_limit;
+export_objets($query, "forum", $f, $gz, $etape, 9, "Sauvegarder les forums");
 
 $query = "SELECT * FROM spip_petitions";
-export_objets($query, "petition", $f, $gz, $etape, 11, "Sauvegarder les p&eacute;titions");
+export_objets($query, "petition", $f, $gz, $etape, 10, "Sauvegarder les p&eacute;titions");
 
 $query = "SELECT * FROM spip_signatures".$debug_limit;
-export_objets($query, "signature", $f, $gz, $etape, 12, "Sauvegarder les signatures de p&eacute;titions");
+export_objets($query, "signature", $f, $gz, $etape, 11, "Sauvegarder les signatures de p&eacute;titions");
 
 $query = "SELECT * FROM spip_syndic";
-export_objets($query, "syndic", $f, $gz, $etape, 13, "Sauvegarder les sites r&eacute;f&eacute;renc&eacute;s");
+export_objets($query, "syndic", $f, $gz, $etape, 12, "Sauvegarder les sites r&eacute;f&eacute;renc&eacute;s");
 
 $query = "SELECT * FROM spip_syndic_articles".$debug_limit;
-export_objets($query, "syndic_article", $f, $gz, $etape, 14, "Sauvegarder les articles des sites r&eacute;f&eacute;renc&eacute;s");
+export_objets($query, "syndic_article", $f, $gz, $etape, 13, "Sauvegarder les articles des sites r&eacute;f&eacute;renc&eacute;s");
 
-$query = "SELECT * FROM spip_visites".$debug_limit;
-export_objets($query, "spip_visite", $f, $gz, $etape, 15, "Sauvegarder les visites");
+/*$query = "SELECT * FROM spip_visites".$debug_limit;
+export_objets($query, "spip_visite", $f, $gz, $etape, 14, "Sauvegarder les visites");
 
-$query = "SELECT * FROM spip_visites_referers".$debug_limit;
-export_objets($query, "spip_referers", $f, $gz, $etape, 16, "Sauvegarder les referers");
+$query = "SELECT * FROM spip_referers".$debug_limit;
+export_objets($query, "spip_referers", $f, $gz, $etape, 15, "Sauvegarder les referers");
+*/
 
-
-if (!$etape OR $etape == 14){
+if (!$etape OR $etape == 13){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
 
 
