@@ -117,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'ver_imprimer' => '<NEW>Printable version',
+'ver_imprimer' => 'Versione per la stampa',
 'voir_en_ligne' => 'Vedi on line'
 
 );

@@ -351,7 +351,7 @@ v&ograve;stra demanda):
 Merc&eacute;s per v&ograve;stra participacion
 ',
 'form_pet_message_commentaire' => 'Un messatge, una remarca?',
-'form_pet_nom_site2' => '<B>Nom de v&ograve;stre sit web',
+'form_pet_nom_site2' => 'Nom de v&ograve;stre sit web',
 'form_pet_probleme_technique' => 'Probl&egrave;ma tecnic, las signaturas son tempor&agrave;riament \'restadas.',
 'form_pet_signature_pasprise' => 'V&ograve;stra signatura es pas presa en compte.',
 'form_pet_signature_validee' => 'V&ograve;stra signatura es validada. Apareisser&aacute; sobre lo sit entre l\'actualizacion que ven. Merc&eacute;s!',

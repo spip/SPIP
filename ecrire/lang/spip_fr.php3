@@ -360,7 +360,7 @@ sera rejet&eacute;e) :
 Merci de votre participation
 ',
 'form_pet_message_commentaire' => 'Un message, un commentaire&nbsp;?',
-'form_pet_nom_site2' => '<B>Nom de votre site Web',
+'form_pet_nom_site2' => 'Nom de votre site Web',
 'form_pet_probleme_technique' => 'Probl&egrave;me technique, les signatures sont temporairement suspendues.',
 'form_pet_signature_pasprise' => 'Votre signature n\'est pas prise en compte.',
 'form_pet_signature_validee' => 'Votre signature est valid&eacute;e. Elle appara&icirc;tra lors de la prochaine mise &agrave; jour du site. Merci&nbsp;!',

@@ -353,7 +353,7 @@ la v&ograve;sta demanda):
 Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 ',
 'form_pet_message_commentaire' => 'Un messatge, ua remarca?',
-'form_pet_nom_site2' => '<B>Nom deu v&ograve;ste sit web',
+'form_pet_nom_site2' => 'Nom deu v&ograve;ste sit web',
 'form_pet_probleme_technique' => 'Probl&egrave;ma tecnic, las signaturas que son tempor&agrave;riament arrestadas.',
 'form_pet_signature_pasprise' => 'La v&ograve;sta signatura n\'ei pas presa en compte.',
 'form_pet_signature_validee' => 'La v&ograve;sta signatura qu\'ei validada. Qu\'apareisher&agrave; suu sit tanl&egrave;u l\'actualizacion qui vien. Merc&eacute;s!',

@@ -353,7 +353,7 @@ zostanie odrzucona):
 Dzi&#281;kujemy za uczestnictwo
 ',
 'form_pet_message_commentaire' => 'Jakie&#347; wiadomo&#347;ci lub komentarze?',
-'form_pet_nom_site2' => '<B>Nazwa Twojej strony internetowej',
+'form_pet_nom_site2' => 'Nazwa Twojej strony internetowej',
 'form_pet_probleme_technique' => 'Problem techniczny, podpisy s&#261; tymczasowo zawieszone.',
 'form_pet_signature_pasprise' => 'Tw&oacute;j podpis zosta&#322; zlekcewa&#380;ony.',
 'form_pet_signature_validee' => 'Tw&oacute;j podpis jest prawid&#322;owy. Pojawi si&#281; po zaktualizowaniu strony. Dzi&#281;kujemy!',

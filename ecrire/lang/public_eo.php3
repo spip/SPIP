@@ -91,7 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // R
-'repondre_article' => '<MODIF> Respondi al tiu artikolo',
+'repondre_article' => 'Respondi al tiu artikolo',
 'repondre_breve' => 'Respondi al tiu informeto',
 'repondre_message' => 'Respondi al tiu mesa&#285;o',
 'resultats_recherche' => 'Rezultoj de la ser&#265;o',
@@ -117,7 +117,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'ver_imprimer' => '<NEW> Version &agrave; imprimer',
+'ver_imprimer' => 'Printigota versio',
 'voir_en_ligne' => 'Vidi konektite'
 
 );
