@@ -154,16 +154,20 @@ if (!$flag_editable) {
 function coupe_trop_long($texte){	// utile pour les textes > 32ko
 	if (strlen($texte) > 28*1024) {
 		$texte = str_replace("\r\n","\n",$texte);
-		$pos = strpos($texte, "\n\n\n", 28*1024);	// coupe para > 28 ko
+		$pos = strpos($texte, "\n\n", 28*1024);	// coupe para > 28 ko
 		if ($pos > 0 and $pos < 32 * 1024) {
-			$debut = substr($texte, 0, $pos)."\n\n\n<!--SPIP-->\n";
-			$suite = substr($texte, $pos + 3);
+			$debut = substr($texte, 0, $pos)."\n\n<!--SPIP-->\n";
+			$suite = substr($texte, $pos + 2);
 		} else {
 			$pos = strpos($texte, " ", 28*1024);	// sinon coupe espace
-			if (!($pos > 0 and $pos < 32 * 1024))
-				$pos = 28*1024;	// au pire
-			$debut = substr($texte,0,$pos);
-			$suite = substr($texte,$pos + 1);
+			if (!($pos > 0 and $pos < 32 * 1024)) {
+				$pos = 28*1024;	// au pire (pas d'espace trouv'e)
+				$decalage = 0; // si y'a pas d'espace, il ne faut pas perdre le caract`ere
+			} else {
+				$decalage = 1;
+			}
+			$debut = substr($texte,0,$pos + $decalage); // Il faut conserver l'espace s'il y en a un
+			$suite = substr($texte,$pos + $decalage);
 		}
 		return (array($debut,$suite));
 	}
