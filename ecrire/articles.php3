@@ -858,44 +858,36 @@ if ($flag_editable AND ($options == 'avancees' OR $statut_article == 'publie')) 
 		echo "</TABLE>";
 	}
 	
-	if (($options == 'avancees' AND $articles_redac != "non") OR ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00")) {
-		echo "<P><TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD BGCOLOR='#cccccc' COLSPAN=2><FONT SIZE=2 COLOR='#000000'>";
-		if ("$annee_redac-$mois_redac-$jour_redac" != "0000-00-00") $date_affichee = " : ".majuscules(affdate($date_redac));
+	if (($options == 'avancees' AND $articles_redac != 'non') OR ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00')) {
+		echo '<p><table cellpadding="5" cellspacing="0" border="0" width="100%">';
+		echo '<tr><td bgcolor="#cccccc" colspan="2"><font size="2" color="#000000">';
+		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') $date_affichee = ' : '.majuscules(affdate($date_redac));
 		echo bouton_block_invisible('dateredac');
-		echo "<B>DATE DE PUBLICATION ANT&Eacute;RIEURE$date_affichee</B></FONT></TD></TR></table>";
+		echo '<b>DATE DE PUBLICATION ANT&Eacute;RIEURE'.$date_affichee.'</b></font></td></tr></table>';
 		echo debut_block_invisible('dateredac');
-		echo "<TABLE CELLPADDING=5 CELLSPACING=0 BORDER=0 WIDTH=100% BACKGROUND=''>";
-		echo "<TR><TD ALIGN='left'>";
-		if ("$annee_redac-$mois_redac-$jour_redac" == "0000-00-00") {
-			echo "<INPUT TYPE='radio' NAME='avec_redac' VALUE='non' id='on' checked>  <B><label for='on'>Ne pas afficher de date de publication ant&eacute;rieure.</label></B>";
-			echo "<BR><INPUT TYPE='radio' NAME='avec_redac' VALUE='oui' id='off'>";
-			echo " <label for='off'>Afficher la date de publication ant&eacute;rieure.</label> ";
-			
-			echo "<INPUT TYPE='hidden' NAME='jour_redac' VALUE=\"1\">";
-			echo "<INPUT TYPE='hidden' NAME='mois_redac' VALUE=\"1\">";
-			echo "<INPUT TYPE='hidden' NAME='annee_redac' VALUE=\"0\">";
-		}
-		else{
-			echo "<INPUT TYPE='radio' NAME='avec_redac' VALUE='non' id='on'>  <label for='on'>Ne pas afficher de date de publication ant&eacute;rieure.</label>";
-			echo "<BR><INPUT TYPE='radio' NAME='avec_redac' VALUE='oui' id='off' checked>";
-			echo " <B><label for='off'>Afficher :</label></B> ";
-			
-			echo "<SELECT NAME='jour_redac' SIZE=1 CLASS='fondl'>";
-			afficher_jour($jour_redac);
-			echo "</SELECT> &nbsp;";
-			echo "<SELECT NAME='mois_redac' SIZE=1 CLASS='fondl'>";
-			afficher_mois($mois_redac);
-			echo "</SELECT> &nbsp;";
-			echo "<INPUT TYPE='text' NAME='annee_redac' CLASS='fondl' VALUE=\"$annee_redac\" SIZE='5'>";
-		}
-		echo "</TD><TD ALIGN='right'>";
-		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
-		echo aide ("artdate-redac");
-		echo "</TD></TR>";
+		echo '<table cellpadding="5" cellspacing="0" border="0" width="100%">';
+		echo '<tr><td align="left">';
+		echo '<input type="radio" name="avec_redac" value="non" id="on"';
+		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac == '0000-00-00') echo ' checked="checked"';
+		echo ' /> <label for="on">Ne pas afficher de date de publication ant&eacute;rieure.</label>';
+		echo '<br /><input type="radio" name="avec_redac" value="oui" id="off"';
+		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') echo ' checked="checked"';
+		echo ' /> <label for="off">Afficher :</label> ';
+
+		echo '<select name="jour_redac" class="fondl">';
+		afficher_jour($jour_redac);
+		echo '</select> &nbsp;';
+		echo '<select name="mois_redac" class="fondl">';
+		afficher_mois($mois_redac);
+		echo '</select> &nbsp;';
+		echo '<input type="text" name="annee_redac" class="fondl" value="'.$annee_redac.'" size="5" maxlength="4" />';
+
+		echo '</td><td align="right">';
+		echo '<input type="submit" name="Changer" class="fondo" value="Changer" />';
+		echo aide('artdate-redac');
+		echo '</td></tr>';
 		echo fin_block();
-		echo "</TABLE>";
-	
+		echo '</table>';
 	}
 
 	echo "</FORM>";
