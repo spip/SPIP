@@ -68,13 +68,15 @@ function include_plug($file) {
 
 // Recuperer les superglobales $_GET si non definies
 // (en theorie c'est impossible depuis PHP 4.0.3, cf. track_vars)
+// et les identifier aux $HTTP_XX_VARS
 foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
+	$http_table_vars = 'HTTP'.$_table.'_VARS';
 	if (!is_array($GLOBALS[$_table])) {
 		$GLOBALS[$_table] = array();
 		if (is_array($GLOBALS[$http_table_vars]))
 			$GLOBALS[$_table] = & $GLOBALS[$http_table_vars];
-	} /* else
-	$GLOBALS[$http_table_vars] = & $GLOBALS[$_table]; */
+	}
+		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
 }
 
 
