@@ -25,8 +25,7 @@ function debut_block_invisible($nom_block){
 		$numero_block["$nom_block"] = $compteur_block;
 	}
 
-	return http_script("
-vis['".$numero_block["$nom_block"]."'] = 'hide';
+	return http_script("vis['".$numero_block["$nom_block"]."'] = 'hide';
 document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');",
 			      '',
 			   "<div id='Layer".$numero_block["$nom_block"]."' style='display: block;'>");
@@ -40,11 +39,9 @@ function fin_block() {
 function bouton_block_invisible($nom_block, $icone='') {
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 
-	$num_triangle = $compteur_block + 1;
-
 	if (!$browser_layer) return '';
 	$blocks = explode(",", $nom_block);
-
+	$javasc = array();
 	for ($index=0; $index < count($blocks); $index ++){
 		$nom_block = $blocks[$index];
 
@@ -55,24 +52,21 @@ function bouton_block_invisible($nom_block, $icone='') {
 
 		if (!$icone) {
 			$icone = "deplierhaut$spip_lang_rtl.gif";
-			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\', 0);";
+			$javasc[] = '[' . $numero_block[$nom_block] . ',0]';
 		}
 		else
-			$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\', 1);";
+			$javasc[] = '[' . $numero_block[$nom_block] . ',1]';
 	}
-	return http_script("
-document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "$icone\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n");
+	return produire_acceder_couche($javasc, $numero_block[$nom_block], $icone);
 }
 
 
 function bouton_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer, $spip_lang_rtl;
 
-	$num_triangle = $compteur_block + 1;
-
 	if (!$browser_layer) return '';
 	$blocks = explode(",", $nom_block);
-
+	$javasc = array();
 	for ($index=0; $index < count($blocks); $index ++){
 		$nom_block = $blocks[$index];
 
@@ -81,11 +75,24 @@ function bouton_block_visible($nom_block){
 			$numero_block["$nom_block"] = $compteur_block;
 		}
 
-		$javasc .= "swap_couche(\\'".$numero_block[$nom_block]."\\', \\'$spip_lang_rtl\\',\\'" . _DIR_IMG_PACK . "\\', 0);";
-		}
+		$javasc[] = '[' . $numero_block[$nom_block] . ',0]';
 
-	return http_script("
-document.write('<a class=\"triangle_block\" href=\"javascript:$javasc\"><img name=\"triangle".$numero_block["$nom_block"]."\" src=\"". _DIR_IMG_PACK . "deplierbas.gif\" alt=\"\" title=\"".addslashes(_T('info_deplier'))."\" width=\"10\" height=\"10\" border=\"0\"></a>');\n");
+	}
+
+	return produire_acceder_couche($javasc, $numero_block[$nom_block], "deplierbas.gif");
+}
+
+function produire_acceder_couche($couches, $nom, $icone) {
+	global $spip_lang_rtl;
+	return http_script("acceder_couche([" . join(',',$couches) . '], ' .
+			   $nom .
+			   ", '" .
+			   _DIR_IMG_PACK .
+			   "', '" .
+			   $icone .
+			   "', '" .
+			   addslashes(_T('info_deplier')) .
+			   "','$spip_lang_rtl')");
 }
 
 //
