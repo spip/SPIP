@@ -92,7 +92,7 @@ function init_champs_squel() {
 		'TAILLE', 'EXTENSION', 'DEBUT_SURLIGNE', 'FIN_SURLIGNE',
 		'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT', 'FORMULAIRE_ADMIN',
 		'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'URL_LOGOUT', 'PUCE', 'EXTRA',
-		'ON_OFF', 'EXPOSER'
+		'ON_OFF', 'EXPOSER', 'FORMULAIRE_LANG'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {

@@ -691,8 +691,14 @@ function multi_trad ($lang, $trads) {
 	if (isset($trads[$lang]))
 		$retour = $trads[$lang];
 
+	// cas des langues xx_yy
+	else if (ereg('^([a-z]+)_', $lang, $regs) AND isset($trads[$regs[1]]))
+			$retour = $trads[$regs[1]];
+
 	// sinon, renvoyer la premiere du tableau
 	// remarque : on pourrait aussi appeler un service de traduction externe
+	// ou permettre de choisir une langue "plus proche",
+	// par exemple le francais pour l'espagnol, l'anglais pour l'allemand, etc.
 	else {
 		list (,$trad) = each($trads);
 		$retour = $trad;
@@ -728,7 +734,8 @@ function extraire_trad ($langue_demandee, $bloc) {
 function extraire_multi ($letexte) {
 	global $flag_pcre;
 
-	if ($flag_pcre AND preg_match_all("@<multi>(.*?)</multi>@si", $letexte, $regs, PREG_SET_ORDER)) {
+	if (!strpos('-'.$letexte, '<multi>')) return $letexte; // perf
+	if ($flag_pcre AND preg_match_all("@<multi>(.*?)</multi>@s", $letexte, $regs, PREG_SET_ORDER)) {
 		foreach($regs as $reg) {
 			$letexte = str_replace($reg[0], extraire_trad($GLOBALS['spip_lang'], $reg[1]), $letexte);
 		}
