@@ -32,6 +32,9 @@ else {
 
 debut_gauche();
 
+	if ($id_article > 0){
+	icone_horizontale("Retour &agrave; l'article", "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
+	}
 
 	echo "<p>";
 	echo "<div class='iconeoff' style='padding: 5px;'>";
@@ -105,16 +108,17 @@ if (count($log)>0){
 	
 	if ($max>10) $maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
 	else $maxgraph = 10;
-	
+		
 	$rapport = 200 / $maxgraph;
 	
 	if (count($log) < 365) $largeur = floor(365 / ($nb_jours+1));
 	if ($largeur < 1) $largeur = 1;
 	
 	debut_cadre_relief();
+	echo "<table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/fond-stats.gif'>";
 	echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
-		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
+		echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=200></td>";
 
 	// Presentation graphique
 	while (list($key, $value) = each($log)) {
@@ -128,7 +132,6 @@ if (count($log)>0){
 				echo "<img src='img_pack/rien.gif' width=$largeur height=1 style='background-color:black;'>";
 				echo "</td>";
 			}
-
 		}
 		$hauteur = round($value * $rapport)	- 1;
 		echo "<td valign='bottom' width=$largeur>";
@@ -154,37 +157,42 @@ if (count($log)>0){
 	
 	
 	echo "<td bgcolor='black'><img src='img_pack/rien.gif' width=1 height=1></td>";
+	echo "</tr></table>";
+	echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=5 height=1></td>";
 	echo "<td valign='top'><font face='verdana,arial,helvetica,sans-serif' size=2>";
-		echo "max&nbsp;: $max";
+		echo "<font face='arial,helvetica,sans-serif' size=1>$maxgraph</font>";
+		echo "<p>max&nbsp;: $max";
 		echo "<br>aujourd'hui&nbsp;: $visites_today";
 		echo "<br>total : $total_absolu";
 	echo "</font></td>";
-	echo "</tr></table>";
+	echo "</td></tr></table>";
 	
 	fin_cadre_relief();
 
 }
 
-
-// Affichage des referers
-
-$query = "SELECT * FROM spip_visites_referers WHERE type = '$page' ORDER BY visites DESC LIMIT 0,100";
-$result = spip_query($query);
-
-echo "<p><font face='verdana,arial,helvetica,sans-serif' size=2>";
-while ($row = mysql_fetch_array($result)) {
-	$referer = $row['referer'];
-	$visites = $row['visites'];
-
-	echo "\n<li>";
-
-
-	if ($visites > 5) echo "<font color='red'>$visites liens : </font>";
-	else if ($visites > 1) echo "$visites liens : ";
-	else echo "<font color='#999999'>$visites lien : </font>";
-
-	echo stats_show_keywords($referer, $referer);
+$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
+if ($activer_statistiques_ref == "oui"){
+	// Affichage des referers
+	
+	$query = "SELECT * FROM spip_visites_referers WHERE type = '$page' ORDER BY visites DESC LIMIT 0,100";
+	$result = spip_query($query);
+	
+	echo "<p><font face='verdana,arial,helvetica,sans-serif' size=2>";
+	while ($row = mysql_fetch_array($result)) {
+		$referer = $row['referer'];
+		$visites = $row['visites'];
+	
+		echo "\n<li>";
+	
+	
+		if ($visites > 5) echo "<font color='red'>$visites liens : </font>";
+		else if ($visites > 1) echo "$visites liens : ";
+		else echo "<font color='#999999'>$visites lien : </font>";
+	
+		echo stats_show_keywords($referer, $referer);
+	}
 }
 echo "</font>";
 

@@ -361,6 +361,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
+	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
 
@@ -385,6 +386,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$date = $row['date'];
 			$statut = $row['statut'];
 			$visites = $row['visites'];
+			$referers = $row['referers'];
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 
@@ -433,7 +435,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			$s = affdate($date);
 			if ($activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
-				$s .= "<br><font size=\"1\">(<a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a>)</font>";
+				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a></font>";
+				if ($activer_statistiques_ref == "oui" AND $referers > 0){
+					$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$referers&nbsp;entr&eacute;es directes</a></font>";
+				}
+			
+				
 			}
 			$vals[] = $s;
 
