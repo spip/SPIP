@@ -1673,12 +1673,8 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 
 	case 'URL_LOGOUT':
 		if ($fonctions) {
-			list(, $url) = each ($fonctions);
-			$url = "&url=$url";
-			$filtres = array();
-			while(list(, $nom) = each($fonctions))
-				$filtres[] = $nom;
-			$fonctions = $filtres;
+			$url = "&url=".$fonctions[0];
+			$fonctions = array();
 		} else {
 			$url = '';
 		}
