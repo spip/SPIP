@@ -574,29 +574,27 @@ function afficher_rubriques($titre_table, $requete) {
 function bonhomme_statut($row) {
 	global $connect_statut;
 
-	switch($row['statut']){
+	switch($row['statut']) {
 		case "0minirezo":
-			$image = "<img src='img_pack/bonhomme-noir.gif' alt='Admin' border='0'>";
+			$image = "<img src='img_pack/admin-12.gif' alt='' title='Administrateur' border='0'>";
 			break;
 		case "1comite":
-			if ($connect_statut == '0minirezo' AND !($row['pass'] AND $row['login']))
-				$image = "<img src='img_pack/bonhomme-rouge.gif' alt='Sans acc&egrave;s' border='0'>";
+			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !$row['pass'] AND !$row['login']))
+				$image = "<img src='img_pack/visit-12.gif' alt='' title='R&eacute;dacteur sans acc&egrave;s' border='0'>";
 			else
-				$image = "<img src='img_pack/bonhomme-bleu.gif' alt='R&eacute;dacteur' border='0'>";
+				$image = "<img src='img_pack/redac-12.gif' alt='' title='R&eacute;dacteur' border='0'>";
 			break;
 		case "5poubelle":
-			$image = "<img src='img_pack/supprimer.gif' alt='Effac&eacute;' border='0'>";
+			$image = "<img src='img_pack/supprimer.gif' alt='' title='Auteur supprim&eacute;' border='0'>";
 			break;
 		case "6forum":
-			$image = "<img src='img_pack/bonhomme-rouge.gif' alt='Visiteur' border='0'>";
+			$image = "<img src='img_pack/visit-12.gif' alt='' title='Visiteur' border='0'>";
 			break;
 		case "nouveau":
 		default:
 			$image = '';
 			break;
 	}
-	if ($image && $connect_statut=="0minirezo")
-		$image = "<A HREF='auteur_infos.php3?id_auteur=".$row['id_auteur']."'>$image</a>";
 
 	return $image;
 }

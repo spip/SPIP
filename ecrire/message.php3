@@ -74,20 +74,20 @@ if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
 if ($modifier_message == "oui") {
 	$titre = addslashes($titre);
 	$texte = addslashes($texte);
-	spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET titre='$titre', texte='$texte' WHERE id_message='$id_message'");
 }
 
 if ($changer_rv) {
-	spip_query("UPDATE spip_messages SET rv='$rv' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET rv='$rv' WHERE id_message='$id_message'");
 }
 
 if ($jour) {
-	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00' WHERE id_message='$id_message'");	
+	spip_query("UPDATE spip_messages SET date_heure='$annee-$mois-$jour $heures:$minutes:00' WHERE id_message='$id_message'");
 }
 
 if ($change_statut) {
-	spip_query("UPDATE spip_messages SET statut='$change_statut' WHERE id_message='$id_message'");	
-	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");	
+	spip_query("UPDATE spip_messages SET statut='$change_statut' WHERE id_message='$id_message'");
+	spip_query("UPDATE spip_messages SET date_heure=NOW() WHERE id_message='$id_message' AND rv<>'oui'");
 }
 
 if ($supp_dest) {
@@ -182,7 +182,7 @@ while($row = spip_fetch_array($result_message)) {
 			$nom_auteur = typo($row["nom"]);
 			$statut_auteur = $row["statut"];
 			$id_auteur = $expediteur;
-			
+
 			if (!$ifond) {
 				$ifond = 1;
 				$couleur = '#FFFFFF';
@@ -190,26 +190,10 @@ while($row = spip_fetch_array($result_message)) {
 			else {
 				$ifond = 0;
 				$couleur = $couleur_claire;
-			}				
-
-			echo "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-
-			switch ($statut_auteur) {
-			case "0minirezo":
-				echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
-				break;					
-			case "2redac":
-			case "1comite":
-				echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
-				break;					
-			case "5poubelle":
-				echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
-				break;					
-			case "nouveau":
-			default:
-				echo "&nbsp;";
 			}
 
+			echo "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+			echo "&nbsp;".bonhomme_statut($row)."&nbsp;";
 			echo ' '.$nom_auteur;
 			echo "</font></td></tr>";
 				
@@ -306,21 +290,21 @@ while($row = spip_fetch_array($result_message)) {
 
 		$query_auteurs = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE lien.id_message=$id_message AND lien.id_auteur=auteurs.id_auteur";
 		$result_auteurs = spip_query($query_auteurs);
-		
+
 		$total_dest = spip_num_rows($result_auteurs);
-		
+
 		if ($total_dest > 0) {
 			echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' colspan=2>";
 			echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>PARTICIPANTS A LA DISCUSSION :</B></FONT>";
 			echo "</td></tr>";
-			
+
 			$ifond = 0;
 			while($row = spip_fetch_array($result_auteurs)) {
 				$id_auteur = $row["id_auteur"];
 				$nom_auteur = typo($row["nom"]);
 				$statut_auteur = $row["statut"];
 				$ze_auteurs[] = $id_auteur;
-			
+
 				if ($ifond == 0) {
 					$ifond = 1;
 					$couleur = "#FFFFFF";
@@ -328,28 +312,10 @@ while($row = spip_fetch_array($result_message)) {
 				else {
 					$ifond = 0;
 					$couleur = "$couleur_claire";
-				}				
-
-				echo "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-
-				switch ($statut_auteur) {
-				case "0minirezo":
-					echo "<img src='img_pack/bonhomme-noir.gif' alt='Admin' width='23' height='12' border='0'>";
-					break;					
-				case "2redac":
-				case "1comite":
-					echo "<img src='img_pack/bonhomme-bleu.gif' alt='Admin' width='23' height='12' border='0'>";
-					break;					
-				case "5poubelle":
-					echo "<img src='img_pack/bonhomme-rouge.gif' alt='Admin' width='23' height='12' border='0'>";
-					break;					
-				case "nouveau":
-					echo "&nbsp;";
-					break;
-				default:
-					echo "&nbsp;";
 				}
 
+				echo "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+				echo "&nbsp;".bonhomme_statut($row)."&nbsp;";
 				echo " $nom_auteur";
 				echo "</font></td>";
 				
@@ -395,24 +361,24 @@ while($row = spip_fetch_array($result_message)) {
 						echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='WIDTH=150' CLASS='fondl'>";
 						$group = false;
 						$group2 = false;
-				
+
 						while($row=spip_fetch_array($result_ajout_auteurs)) {
 							$id_auteur = $row['id_auteur'];
 							$nom = $row['nom'];
 							$email = $row['email'];
 							$statut_auteur = $row['statut'];
-				
+
 							$statut_auteur=ereg_replace("0minirezo", "Administrateur", $statut_auteur);
 							$statut_auteur=ereg_replace("1comite", "R&eacute;dacteur", $statut_auteur);
 							$statut_auteur=ereg_replace("2redac", "R&eacute;dacteur", $statut_auteur);
 							$statut_auteur=ereg_replace("5poubelle", "Effac&eacute;", $statut_auteur);
-				
+
 							$premiere = strtoupper(substr(trim($nom), 0, 1));
-				
+
 							if ($connect_statut != '0minirezo') {
 								if ($p = strpos($email, '@')) $email = substr($email, 0, $p).'@...';
 							}
-				
+
 							if ($statut_auteur != $statut_old) {
 								echo "\n<OPTION VALUE=\"x\">";
 								echo "\n<OPTION VALUE=\"x\"> $statut_auteur".'s';
@@ -445,7 +411,7 @@ while($row = spip_fetch_array($result_message)) {
 		$expediteur = $connect_id_auteur;
 		$ze_auteurs = $expediteur;
 	}
-	
+
 
 	//////////////////////////////////////////////////////
 	// Fixer rendez-vous?
