@@ -192,6 +192,7 @@ function corriger_caracteres($texte) {
 function PtoBR($texte){
 	$texte = eregi_replace("</p>", "\n", $texte);
 	$texte = eregi_replace("<p([[:space:]][^>]*)?".">", "<br>", $texte);
+	$texte = ereg_replace("^[[:space:]]*<br>", "", $texte);
 	return $texte;
 }
 
