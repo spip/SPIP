@@ -111,7 +111,7 @@ function extrait_article($row) {
 	$result_auteurs = spip_query($query);
 
 	while ($row = spip_fetch_array($result_auteurs)) {
-		$nom_auteur = typo($row['nom']);
+		$nom_auteur = trim(supprimer_tags(typo($row['nom'])));
 
 		if ($les_auteurs) $les_auteurs .= ', ';
 		$les_auteurs .= $nom_auteur;
@@ -152,7 +152,8 @@ function envoyer_mail_publication($id_article) {
 
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
-			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $connect_nom))."\n\n\n";
+			$nom = trim(supprimer_tags(typo($connect_nom)));
+			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))."\n\n\n";
 			$courr = $courr . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
 
