@@ -357,7 +357,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 			else {
 				$val = $match[1];
 
-		// Cas special {lang} : aller chercher $GLOBALS['spip_lang']
+				// Cas special {lang} : aller chercher $GLOBALS['spip_lang']
 				if ($val == 'lang')
 					$val = '".$GLOBALS[\'spip_lang\']."';
 				else {
@@ -384,7 +384,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$boucle->from[] = "$col_table AS $col_table";
 				$boucle->where[] = "$id_field=$col_table." . $primary;
 				$boucle->group = $id_field;
-				$boucle->select[] = $id_field; # pour postgres, neuneu ici
+				$boucle->select[] = $id_field; # pour postgres, neuneu ici (???)
 				$boucle->lien = true;
 			}
 			// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
@@ -496,6 +496,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$boucle->plat = true;
 
 			// Operateur de comparaison
+			if ($col_table)
+				$col = "$col_table.$col";
 
 			if (!$op)
 				$op = '=';
@@ -516,9 +518,6 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$boucle->where[] = $where;
 				$op = '';
 			}
-
-			if ($col_table)
-				$col = "$col_table.$col";
 
 			if ($op) {
 				if ($fct) $col = "$fct($col)";
