@@ -90,6 +90,9 @@ function spip_mysql_select($select, $from, $where,
 // Passage d'une requete standardisee
 //
 function traite_query($query) {
+	if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
+	else $table_pref = "";
+
 	if ($GLOBALS['mysql_rappel_connexion'] AND $db = $GLOBALS['spip_mysql_db'])
 		$db = '`'.$db.'`.';
 
@@ -99,14 +102,14 @@ function traite_query($query) {
 			$suite = strstr($query, $regs[0]);
 			$query = substr($query, 0, -strlen($suite));
 		}
-		$query = preg_replace('/([,\s])spip_/', '\1'.$db.$GLOBALS['table_prefix'].'_', $query) . $suite;
+		$query = preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
 	}
 	else {
 		if (eregi('[[:space:]](VALUES|WHERE)[[:space:]]', $query, $regs)) {
 			$suite = strstr($query, $regs[0]);
 			$query = substr($query, 0, -strlen($suite));
 		}
-		$query = ereg_replace('([[:space:],])spip_', '\1'.$db.$GLOBALS['table_prefix'].'_', $query) . $suite;
+		$query = ereg_replace('([[:space:],])spip_', '\1'.$db.$table_pref, $query) . $suite;
 	}
 
 	return $query;
