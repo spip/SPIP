@@ -134,7 +134,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$regexp_echap_html = "<html>((.*?))<\/html>";
 		$regexp_echap_code = "<code>((.*?))<\/code>";
 		$regexp_echap_cadre = "<(cadre|frame)>((.*?))<\/(cadre|frame)>";
-		$regexp_echap_poesie = "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>";
+		$regexp_echap_poesie = "[\n\r]*<(poesie|poetry)>((.*?))<\/(poesie|poetry)>[\n\r]*";
 		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)/si";
 	} else {
 		//echo creer_echappe_sans_pcre("cadre");
@@ -190,7 +190,8 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = ereg_replace("\r", "\n", $lecode);
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
 			
-			$les_echap[$num_echap] = "</p>".propre($lecode)."<p class=\"spip\">";
+	//		$les_echap[$num_echap] = "</p>".propre($lecode)."<p class=\"spip\">";
+			$les_echap[$num_echap] = propre($lecode);
 		} 
 		/*else
 		if ($regs[17]) {
@@ -216,7 +217,7 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
 
 		$traiter_math = "image";
-		$traiter_math = "mathml";
+		//$traiter_math = "mathml";
 		
 		if ($traiter_math == "image") {
 			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {
@@ -225,9 +226,6 @@ function echappe_html($letexte, $source, $no_transform=false) {
 				$pos = strpos($texte_milieu, $regs[0]);
 				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
 					.substr($texte_milieu,$pos+strlen($regs[0]));
-				
-				//$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n<p class=\"spip\" style=\"text-align: center;\">'.image_math(\"$2\").'</p>\n'",$texte_milieu);
-		//		$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","image_math(\"$2\")",$texte_milieu);
 			}
 			while((ereg("(\\$){1}([^$]+)(\\$){1}",$texte_milieu, $regs))) {
 				$num_echap++;
@@ -243,9 +241,6 @@ function echappe_html($letexte, $source, $no_transform=false) {
 				$pos = strpos($texte_milieu, $regs[0]);
 				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
 					.substr($texte_milieu,$pos+strlen($regs[0]));
-				
-				//$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n<p class=\"spip\" style=\"text-align: center;\">'.image_math(\"$2\").'</p>\n'",$texte_milieu);
-		//		$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","image_math(\"$2\")",$texte_milieu);
 			}
 			while((ereg("(\\$){1}([^$]+)(\\$){1}",$texte_milieu, $regs))) {
 				$num_echap++;

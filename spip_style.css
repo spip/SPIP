@@ -87,6 +87,7 @@ blockquote.spip {
 }
 
 div.spip_poesie {
+	margin-bottom: 5px;
 	margin-left: 10px;
 	padding-left: 10px;
 	border-left: 1px solid #999999;

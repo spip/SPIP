@@ -158,6 +158,10 @@ if (!$use_cache) {
 	}
 }
 
+if ($xhtml){
+	include_ecrire('inc_tidy.php');
+	if (version_tidy() > 0) ob_start("xhtml");
+}
 
 //
 // si $var_recherche est positionnee, on met en rouge les mots cherches (php4 uniquement)
@@ -173,6 +177,8 @@ else {
 	unset ($var_recherche);
 	unset ($mode_surligne);
 }
+
+
 
 //
 // Inclusion du cache pour envoyer la page au client
@@ -214,6 +220,12 @@ else if (!$flag_preserver) {
 // suite et fin mots en rouge
 if ($var_recherche)
 	fin_surligne($var_recherche, $mode_surligne);
+
+
+if ($xhtml) {
+	include_ecrire('inc_tidy.php');
+	if (version_tidy() > 0)	ob_end_flush();
+}
 
 
 // nettoie
