@@ -130,7 +130,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Keine editorischen Ank&uuml;ndigungen verschicken',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Keine Liste der Neuigkeiten verschicken',
 'bouton_radio_non_syndication' => 'Syndikation nicht verwenden',
-'bouton_radio_occidental' => 'Westliches Alphabet (<tt>iso-8859-1</tt>): wird von allen Browsern unterst&uuml;tzt, erm&ouml;glicht jedoch nur die Anzeige von westeurop&auml;ischen Sprachen (Deutsch, Franz&ouml;sisch, Englisch ...).',
+'bouton_radio_occidental' => '<MODIF> Westliches Alphabet (<tt>iso-8859-1</tt>): wird von allen Browsern unterst&uuml;tzt, erm&ouml;glicht jedoch nur die Anzeige von westeurop&auml;ischen Sprachen (Deutsch, Franz&ouml;sisch, Englisch ...).',
 'bouton_radio_pas_petition' => 'Keine Petition',
 'bouton_radio_personnalise' => 'Individuelle Zeichentabelle: W&auml;hlen Sie diese Option, wenn Sie einen bestimmten Zeichensatz verwenden m&ouml;chten.',
 'bouton_radio_petition_activee' => 'Petition aktiviert',
@@ -139,7 +139,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'unkomprimiert sichern nach <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Petition l&ouml;schen',
 'bouton_radio_syndication' => 'Syndikation:',
-'bouton_radio_universel' => 'Universelles Alphabet (<tt>utf-8</tt>): Alle Sprachen k&ouml;nnen angezeigt werden. Dieser Modus wird noch nicht von allen Browsern unterst&uuml;tzt.',
+'bouton_radio_universel' => '<MODIF> Universelles Alphabet (<tt>utf-8</tt>): Alle Sprachen k&ouml;nnen angezeigt werden. Dieser Modus wird noch nicht von allen Browsern unterst&uuml;tzt.',
 'bouton_recharger_page' => 'Seite neu laden',
 'bouton_redirection' => 'UMLEITUNG',
 'bouton_relancer_installation' => 'Installation wiederholen',
@@ -721,6 +721,7 @@ Vielen Dank f&uuml;r Ihre Teilnahme',
 'info_nouveaux_message' => 'Neue Nachrichten',
 'info_nouveaux_messages' => 'SIE HABEN @total_messages@ NEUE NACHRICHTEN',
 'info_nouvel_article' => 'Neuer Artikel',
+'info_nouvelle_traduction' => 'Neue &Uuml;bersetzung:',
 'info_numero_article' => 'ARTIKEL NUMMER:',
 'info_obligatoire_02' => '[Erforderlich]',
 'info_option_email' => 'Wenn ein Besucher einen Beitrag im Forum eines Artikels postet, kann SPIP ihn an den Autor des Artikels schicken. M&ouml;chten Sie diese Funktion nutzen?',
@@ -1296,7 +1297,7 @@ Sie k&ouml;nnen auf dieser Seite ein neues Passwort eingeben und sich wieder bei
 'texte_informations_personnelles_1' => 'Das System nun pers&ouml;nliche Zugangsdaten f&uuml;r Sie anlegen.',
 'texte_informations_personnelles_2' => '(Wenn Sie die Site erneut installieren, und Ihre Zugangsdaten funktionieren, k&ouml;nnen Sie',
 'texte_introductif_article' => '(Einleitender Text des Artikels.)',
-'texte_jeu_caractere' => 'Sie ben&ouml;tigen diese Option, wenn Ihre Website einen anderen Zeichensatz als den des r&ouml;mischen (bzw. &bdquo;westlichen&ldquo;) Alphabets und seiner Ableitungen anzeigen soll. In diesem Fall m&uuml;ssen Sie die Grundeinstellungen auf den passenden Zeichensatz &auml;ndern. Bitte vergessen Sie nicht, den &ouml;ffentlichen Bereich entsprechend zu &auml;ndern (SPIP-Tag <tt>#CHARSET</tt>).',
+'texte_jeu_caractere' => '<MODIF> Sie ben&ouml;tigen diese Option, wenn Ihre Website einen anderen Zeichensatz als den des r&ouml;mischen (bzw. &bdquo;westlichen&ldquo;) Alphabets und seiner Ableitungen anzeigen soll. In diesem Fall m&uuml;ssen Sie die Grundeinstellungen auf den passenden Zeichensatz &auml;ndern. Bitte vergessen Sie nicht, den &ouml;ffentlichen Bereich entsprechend zu &auml;ndern (SPIP-Tag <tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Diese Einstellung funktioniert nicht r&uuml;ckwirkend. Folglich kann es dazu kommen, dass bereits vorhandene Texte fehlerhaft angezeigt werden. Sie k&ouml;nnen dann jederzeit die vorige Einstellung wieder herstellen.',
 'texte_lien_hypertexte' => '(Wenn sich IhrBeitrag auf einen Artikel im WWW bezieht oder es eine Seite mit Zusatzinformationen gibt, geben Sie bitte die Bezeichnung der Seite und ihren URL an.)',
 'texte_liens_sites_syndiques' => 'Links zu syndizierten Websites k&ouml;nnen bis zur Freigabe durch einen Administrator gesperrt bleiben. Hier legen Sie die Grundeinstellung fest. Sie k&ouml;nnen diese Einstellung f&uuml;r jede Site einzeln &auml;ndern, bzw. nach und nach entscheiden, wie die neuen Links einer Website behandelt werden sollen.',
@@ -1492,7 +1493,6 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_lier' => 'Dieser Artikel ist eine &Uuml;bersetzung des Artikels Nummer&nbsp;',
 'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen',
 'trad_reference' => '(Referenzartikel)'
-
 
 );
 

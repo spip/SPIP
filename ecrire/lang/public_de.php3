@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // E
-'edition_mode_texte' => '<NEW> &Eacute;dition en mode texte de',
+'edition_mode_texte' => 'Im Textmodus bearbeiten ',
 'en_reponse' => 'Antwort auf:',
 'en_resume' => 'Als Zusammenfassung',
 'envoyer_message' => 'Nachricht senden',
@@ -53,7 +53,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // H
-'hierarchie_site' => '<NEW> Hi&eacute;rarchie du site',
+'hierarchie_site' => 'Baumstruktur der Website',
 
 
 // J

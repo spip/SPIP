@@ -142,8 +142,9 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar an&uacute;ncios editoriais',
 'bouton_radio_non_envoi_liste_nouveautes' => 'N&atilde;o enviar a lista das novidades',
 'bouton_radio_non_syndication' => 'N&atilde;o h&aacute; vincula&ccedil;&atilde;o',
-'bouton_radio_occidental' => '<MODIF>  Alfabeto ocidental&nbsp; (<tt>iso-8859-1</tt>): aceite por todos os  navegadores, mas permite unicamente
- a exibi&ccedil;&atilde;o das l&iacute;nguas da Europa Ocidental ( ingl&ecirc;s,franc&ecirc;s, alem&atilde;o...). ',
+'bouton_radio_occidental' => ' Alfabeto ocidental (<tt>iso-8859-1</tt>)&nbsp;: permite principalmente
+ a exibi&ccedil;&atilde;o das l&iacute;nguas da Europa Ocidental ( ingl&ecirc;s,franc&ecirc;s, alem&atilde;o...)&nbsp;;
+ SPIP permite no entanto a gest&atilde;o relativa das outras l&iacute;nguas. ',
 'bouton_radio_pas_petition' => 'N&atilde;o h&aacute; abaixo-assinado',
 'bouton_radio_personnalise' => 'Jogo de car&aacute;cteres personalizado&nbsp;: escolha esta op&ccedil;&atilde;o se quiser
  utilizar um jogo espec&iacute;fico de car&aacute;cteres   ',
@@ -154,8 +155,8 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'bouton_radio_sauvegarde_non_compressee' => 'salvaguarda n&atilde;o compressada sob   <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Suprimir o abaixo -assinado',
 'bouton_radio_syndication' => 'Vincula&ccedil;&atilde;o',
-'bouton_radio_universel' => '<MODIF>  Alfabeto universal&nbsp; (<tt>utf- 8</tt>): permite a exibi&ccedil;&atilde;o de todas as l&iacute;nguas, mas n&atilde;o &eacute; reconhecido
- hoje por todos os navegadores.  ',
+'bouton_radio_universel' => ' Alfabeto universal&nbsp; (<tt>utf- 8</tt>): permite a exibi&ccedil;&atilde;o de todas as l&iacute;nguas, mas pode criar problemas de compatibilidade com os softwares utilizados para modificar os esqueletos, e alguns leitores de
+ correio electr&oacute;nico.',
 'bouton_recharger_page' => 'recarregar esta p&aacute;gina',
 'bouton_redirection' => 'REDIRIGIR',
 'bouton_relancer_installation' => 'Lan&ccedil;ar de novo a instala&ccedil;&atilde;o',
@@ -170,7 +171,11 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 
 
 // C
-'calendrier_synchro' => '<MODIF> Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>  (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), pode sincroniz&aacute;-lo com a actualidade deste s&iacute;tio.',
+'calendrier_synchro' => 'Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>, pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste s&iacute;tio.',
+'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
+'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
+'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
+'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -365,18 +370,18 @@ Obrigado pela sua participa&ccedil;&atilde;o
 
 
 // I
-'ical_info1' => '<NEW> Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
-'ical_info2' => '<NEW> Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
-'ical_info_calendrier' => '<NEW> Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
-'ical_methode_http' => '<NEW> T&eacute;l&eacute;chargement',
-'ical_methode_webcal' => '<NEW> Synchronisation (webcal://)',
-'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
-'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
-'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
-'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
-'ical_titre_js' => '<NEW> Javascript',
-'ical_titre_mailing' => '<NEW> Mailing-list',
-'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
+'ical_info1' => 'Esta p&aacute;gina apresenta muitos m&eacute;todos para permanecer em contacto com a vida deste s&iacute;tio.',
+'ical_info2' => 'Para mais informa&ccedil;&otilde;es sobre estas t&eacute;cnicas, consultar  <a href="http://www.spip.net/fr_suivi">a documenta&ccedil;&atilde;o de SPIP</a>.',
+'ical_info_calendrier' => 'Dois calend&aacute;rios est&atilde;o &agrave; sua disposi&ccedil;&atilde;o. O primeiro &eacute; uma planta do s&iacute;tio anunciando todos os artigos publicados. O segundo contem os an&uacute;ncios editoriais assim como as &uacute;ltimas mensagens privadas&nbsp;: est&aacute; reservado para voc&ecirc; gra&ccedil;as a uma chave pessoal, que pode modificar a qualquer momento com a renova&ccedil;&atilde;o da sua palavra-passe.',
+'ical_methode_http' => 'Telecarregamento',
+'ical_methode_webcal' => 'Sincroniza&ccedil;&atilde;o (webcal://)',
+'ical_texte_js' => 'Uma linha de javascript permite-lhe exibir, muito simplesmente, em qualquer s&iacute;tio que lhe perten&ccedil;a, os artigos recentes publicados neste s&iacute;tio.',
+'ical_texte_prive' => 'Este calend&aacute;rio, de uso estritamente pessoal, informa sobre a actividade editorial privada deste s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostos...).',
+'ical_texte_public' => 'Este calend&aacute;rio permite acompanhar a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicados).',
+'ical_texte_rss' => 'Pode vincular as novidades deste s&iacute;tio em qualquer leitor de ficheiros de formato XML/RSS (Rich Site Summary). &Eacute; tamb&eacute;m o formato que permite a SPIP ler as novidades publicadas em outros s&iacute;tios que utilizam um formato de troca compat&iacute;vel.',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => ' Mailing-list',
+'ical_titre_rss' => 'Ficheiro &laquo; backend &raquo;',
 'icone_a_suivre' => 'A continuar',
 'icone_activer_cookie' => 'Activar o cookie de correspond&ecirc;ncia',
 'icone_admin_site' => 'Administra&ccedil;&atilde;o do s&iacute;tio',
@@ -406,7 +411,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'icone_doc_rubrique' => 'Documentos das rubricas',
 'icone_ecrire_article' => 'Escrever um novo artigo',
 'icone_ecrire_nouvel_article' => 'As not&iacute;cias contidas nesta rubrica',
-'icone_edition_site' => '<MODIF> Edi&ccedil;&atilde;o do s&iacute;tio',
+'icone_edition_site' => 'Edi&ccedil;&atilde;o do&nbsp; s&iacute;tio',
 'icone_envoyer_message' => 'Enviar esta mensagem',
 'icone_etat_traductions' => 'Situa&ccedil;&atilde;o das tradu&ccedil;&otilde;es',
 'icone_evolution_visites' => 'Evolu&ccedil;&atilde;o das visitas <br>@visites@ visitas@aff_ref@',
@@ -560,7 +565,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_code_acces' => 'N&atilde;o se esque&ccedil;a dos seus pr&oacute;prios c&oacute;digos de acesso&nbsp;!',
 'info_comment_lire_tableau' => 'Como ler este quadro',
 'info_config_suivi' => 'Se este endere&ccedil;o corresponder a uma mailing-list, pode indicar, a seguir, o endere&ccedil;o no qual os participantes no s&iacute;tio podem inscrever-se. Este endere&ccedil;o pode ser uma URL (por exemplo a p&aacute;gina de inscri&ccedil;&atilde;o na lista pelo Web), ou um endere&ccedil;o email com um assunto espec&iacute;fico (por exemplo: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => '<MODIF> Pode receber automaticamente, por correio electr&oacute;nico, os an&uacute;ncios relativos &agrave; actividade editorial deste s&iacute;tio.Para isso, pode assinar a seguinte mailing-list&nbsp;:',
+'info_config_suivi_explication' => ' Pode assinar a  mailing-list deste s&iacute;tio. Receber&aacute; ent&atilde;o  por correio electr&oacute;nico, os an&uacute;ncios de artigos e de not&iacute;cias propostos para publica&ccedil;&atilde;o.',
 'info_confirmer_passe' => 'Confirmar esta nova palavra-passe',
 'info_connexion_base' => 'Segunda etapa: <B>Teste de conex&atilde;o &agrave; base</B>',
 'info_connexion_ldap_ok' => 'A conex&atilde;o LDAP resultou.</B>Pode passar para a etapa seguinte.',
@@ -574,7 +579,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_contribution' => 'contribui&ccedil;&otilde;es de f&oacute;rum',
 'info_copyright' => '&eacute; um software livre distribuido <a href=\'copyright_fr.html\'>sob licen&ccedil;a GPL.</a>',
 'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, ver o s&iacute;tio <a href=\'http://www.spip.net/pt\'>http://www.spip.net/pt</a>.',
-'info_cours_edition' => '<MODIF> Os seus artigos em curso de edi&ccedil;&atilde;o',
+'info_cours_edition' => 'Os seus artigos em curso de reda&ccedil;&atilde;o',
 'info_creation_mots_cles' => 'Crie e configure aqui as palavras-chave do s&iacute;tio',
 'info_creation_paragraphe' => '(Para criar par&aacute;grafos, deixe simplesmente linhas vazias.)',
 'info_creation_rubrique' => 'Antes de poder escrever artigos, <BR>deve criar pelo menos uma rubrica.<BR>',
@@ -786,7 +791,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_nouveaux_message' => 'Novas mensagens',
 'info_nouveaux_messages' => 'TEM @total_messages@ NOVAS MENSAGENS',
 'info_nouvel_article' => 'Novo artigo',
-'info_nouvelle_traduction' => '<NEW> Nouvelle traduction&nbsp;:',
+'info_nouvelle_traduction' => 'Nova tradu&ccedil;&atilde;o&nbsp;:',
 'info_numero_article' => 'ARTIGO N&Uacute;MERO&nbsp;:',
 'info_obligatoire_02' => '[Obigat&oacute;rio]',
 'info_option_email' => 'Quando um visitador do s&iacute;tio manda uma nova mensagem no f&oacute;rum
@@ -1340,7 +1345,7 @@ encurtar a sua transfer&ecirc;ncia para o seu computador ou para um servidor de 
 'texte_article_virtuel' => 'Artigo virtual',
 'texte_article_virtuel_reference' => '<b>Artigo virtual&nbsp;:</b> artigo referenciado no seu s&iacute;tio SPIP, mas redirigido para uma outra URL. Para suprimir a redirec&ccedil;&atilde;o, apaga a URL acima.',
 'texte_aucun_resultat_auteur' => 'Nenhum resultado para "@cherche_auteur@"',
-'texte_auteur_messagerie' => '<MODIF> Este s&iacute;tio pode indicar permanentemente a lista dos redactores conectados, o que lhe permite trocar mensagens  em directo ( quando o correio est&aacute; desactivado mais acima, a lista dos redactores est&aacute; desactivada). Pode decidir n&atilde;o aparecer nesta lista (voc&ecirc; &eacute; &laquo;invis&iacute;vel&raquo; para outros utilizadores).',
+'texte_auteur_messagerie' => 'Este s&iacute;tio pode indicar permanentemente a lista dos redactores conectados, o que lhe permite trocar mensagens  em directo ( quando o correio est&aacute; desactivado mais acima, a lista dos redactores est&aacute; desactivada). Pode decidir n&atilde;o aparecer nesta lista (voc&ecirc; &eacute; &laquo;&nbsp;invis&iacute;vel&nbsp;&raquo; para os outros utilizadores).',
 'texte_auteur_messagerie_1' => 'Este s&iacute;tio permite a troca de mensagens e a constitui&ccedil;&atilde;o de f&oacute;runs de discuss&atilde;o privados entre os participantes do s&iacute;tio. Pode decidir n&atilde;o participar nessas trocas.',
 'texte_auteurs' => 'OS AUTORES',
 'texte_bilan_traductions' => 'Neste gr&aacute;fico, as barras verdes representam os artigos traduzidos e actualizados, as barras vermelhas as tradu&ccedil;&otilde;es que devem ser actualizadas.',
@@ -1424,10 +1429,11 @@ ao seu valor por defeito (n&atilde;o h&aacute; cria&ccedil;&atilde;o
 'texte_informations_personnelles_1' => 'O sistema vai agora criar-lhe um acesso personalizado ao s&iacute;tio',
 'texte_informations_personnelles_2' => '(Nota : se se tratar de uma reinstala&ccedil;&atilde;o e se o seu acesso sempre funcionar, pode',
 'texte_introductif_article' => '(Texto introdut&oacute;rio do artigo.)',
-'texte_jeu_caractere' => '<MODIF> Esta op&ccedil;&atilde;o &eacute; u&uacute;til se o seu s&iacute;tio deve exibir alfabetos
+'texte_jeu_caractere' => 'Esta op&ccedil;&atilde;o &eacute; u&uacute;til se o seu s&iacute;tio deve exibir alfabetos
  diferentes do alfabeto romano ( ou  &laquo;&nbsp;ocidental&nbsp;&raquo;) e seus derivados.
- Nesse caso, &eacute; preciso mudar o acerto por defeito para utilizar
- um jogo de car&aacute;cteres adequado. N&atilde;o esquecer tamb&eacute;m, por isso,   adaptar
+ Nesse caso, pode ser prefer&iacute;vel mudar o acerto por defeito para utilizar
+ um jogo de car&aacute;cteres adequado&nbsp;;aconselhamos, em todos os casos, de proceder a experimenta&ccedil;&otilde;es
+ a fim de encontrar uma solu&ccedil;&atilde;o satisfat&oacute;ria. Se modificar este par&acirc;metro, n&atilde;o esquecer tamb&eacute;m, por isso,   adaptar
 o s&iacute;tio p&uacute;blico (balisa<tt>#CHARSET</tt>).',
 'texte_jeu_caractere_2' => 'Este acerto n&atilde;o tem efeito retroactivo. Por
  conseguinte, os textos j&aacute; introduzidos podem exibir-se
@@ -1679,14 +1685,7 @@ a SPIP pesquisar igualmente no texto dos
 'trad_delier' => 'N&atilde;o mais ligar este artigo a estas tradu&ccedil;&otilde;es',
 'trad_lier' => 'Este artigo &eacute; uma tradu&ccedil;&atilde;o do artigo n&uacute;mero&nbsp;:',
 'trad_new' => 'Escrever uma nova tradu&ccedil;&atilde;o deste artigo',
-'trad_reference' => '(artigo de refer&ecirc;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Recuperar o ficheiro <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'O calend&aacute;rio seguinte,de uso estritamente pessoal,informa=lhe sobre a actividade editorial privada desse s&iacute;tio (tarefas e encontros pessoais, artigos e not&iacute;cias propostas...).',
-'calendrier_synchro_public' => 'O calend&aacute;rio seguinte permite seguir a actividade p&uacute;blica deste s&iacute;tio (artigos e not&iacute;cias publicadas)',
-'calendrier_synchro_sync' => 'Sincronizar o ficheiro <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(artigo de refer&ecirc;ncia)'
 
 );
 
