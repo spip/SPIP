@@ -43,12 +43,14 @@ function creer_base() {
 		langue_choisie VARCHAR(3) DEFAULT 'non',
 		id_trad bigint(21) DEFAULT '0' NOT NULL,
 		extra longblob NULL,
+		url_ref text NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
 		KEY id_trad (id_trad),
 		KEY lang (lang),
 		KEY statut (statut, date),
+		KEY url_ref (url_ref),
 		KEY date_modif (date_modif))";
 	$result = spip_query($query);
 
@@ -1411,6 +1413,12 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_referers_articles DROP domaine");
 		spip_query("ALTER TABLE spip_referers_temp DROP domaine");
 		maj_version (1.718);
+	}
+
+	if ($version_installee < 1.720) {
+		spip_query("ALTER TABLE spip_articles ADD url_ref text NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD INDEX url_ref (url_ref)");
+		maj_version (1.720);
 	}
 
 	return true;

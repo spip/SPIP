@@ -9,6 +9,7 @@ include_ecrire ("inc_documents.php3");
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");
 $articles_descriptif = lire_meta("articles_descriptif");
+$articles_urlref = lire_meta("articles_urlref");
 $articles_chapeau = lire_meta("articles_chapeau");
 $articles_ps = lire_meta("articles_ps");
 $articles_redac = lire_meta("articles_redac");
@@ -195,6 +196,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	$titre = addslashes(corriger_caracteres($titre));
 	$soustitre = addslashes(corriger_caracteres($soustitre));
 	$descriptif = addslashes(corriger_caracteres($descriptif));
+	$url_ref = addslashes(corriger_caracteres($url_ref));
 	$chapo = addslashes(corriger_caracteres($chapo));
 	$texte = addslashes(corriger_caracteres($texte));
 	$ps = addslashes(corriger_caracteres($ps));
@@ -214,7 +216,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\" $add_extra WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", url_ref=\"$url_ref\" $add_extra WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') $reindexer = true;
@@ -275,6 +277,7 @@ if ($row = spip_fetch_array($result)) {
 	$soustitre = $row["soustitre"];
 	$id_rubrique = $row["id_rubrique"];
 	$descriptif = $row["descriptif"];
+	$url_ref = $row["url_ref"];
 	$chapo = $row["chapo"];
 	$texte = $row["texte"];
 	$ps = $row["ps"];
@@ -720,15 +723,16 @@ if ($soustitre) {
 }
 
 
-if ($descriptif) {
+if ($descriptif<>'' OR $url_ref<>'') {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;' $dir_lang>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
-	echo "<b>"._T('info_descriptif')."</b> ";
-	echo propre($descriptif);
-	echo "&nbsp; ";
+	$texte_case = ($descriptif) ? "{{"._T('info_descriptif')."}} $descriptif\n\n" : '';
+	$texte_case .= ($url_ref) ? "{{"._T('info_urlref')."}} [->$url_ref]" : '';
+	echo propre($texte_case);
 	echo "</font>";
 	echo "</div>";
 }
+
 
 if ($statut_article == 'prop') {
 	echo "<P><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";

@@ -232,7 +232,7 @@ function parser_boucle($texte, $id_parent) {
 				if ($type == 'articles') {
 					$s = "$table.id_article,$table.id_rubrique,$table.id_secteur,".
 						"$table.surtitre,$table.titre,$table.soustitre,$table.date,$table.date_redac,$table.date_modif,".
-						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang,$table.id_trad";
+						"$table.visites,$table.popularite,$table.statut,$table.accepter_forum,$table.lang,$table.id_trad,$table.url_ref";
 					if (ereg('\#(TEXTE|INTRODUCTION)', $milieu)) {
 						$s .= ",$table.texte";
 					}
@@ -1688,6 +1688,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	$texte .= '	$query = "'.$requete.'";
 	$result = @spip_query($query);
 	if (!$result) {
+		$GLOBALS["delais"]=0;
 		include_local("inc-debug-squel.php3");
 		return erreur_requete_boucle($query, $instance->id_boucle);
 	}
