@@ -109,8 +109,8 @@ function calculer_boucle($id_boucle, &$boucles)
 	else { $texte = ''; }
 
 	if ($flag_h) {
-	    $corps = '
-		 $hierarchie = $Pile[$SP][id_parent];' . $corps;
+	    ereg("([0-9]+),([0-9]+)",$boucle->limit,$limit);
+	    $boucle->limit = '';
 	    $texte .= '
 	$hierarchie = ' . ($boucle->tout ?  $boucle->tout : 
 			   // sinon,  parame`tre passe' par include.
@@ -120,8 +120,17 @@ function calculer_boucle($id_boucle, &$boucles)
 	    $Pile[0]["id_rubrique"] :
 	    $Pile[0]["id_parent"])') .
 	      ';
-	$h0 = "";
-	while ($hierarchie) {';
+	$h0 = ""; 
+	' .
+	      (!$limit ? 
+	       'while ($hierarchie)' :
+	       ('for($n=0;$n<' . $limit[2] . ';$n++)')) . 
+	      '{';       
+	    $corps = '
+		$hierarchie = $Pile[$SP][id_parent];' .
+	      (!$limit ? $corps :
+	       ('
+		if ($n >=' . $limit[1] . ') {' . $corps  .'}'));
 	}
 
 	# si le corps est une constante, ne plus appeler le serveur
@@ -340,6 +349,7 @@ function calculer_squelette($squelette, $nom, $gram) {
   include_local("inc-$gram-squel.php3");
   $racine = parser($squelette, '',$boucles);
 #  include_local('inc-debug.php3');
+#  afftable($racine);
 #  affboucles($boucles);
   // Traduction des se'quences syntaxique des boucles 
 
