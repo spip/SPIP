@@ -71,7 +71,7 @@ function spip_cron($taches=array()) {
 			spip_timer('tache');
 			include_ecrire('inc_' . $tache . _EXTENSION_PHP);
 			$fonction = 'cron_' . $tache;
-			$code_de_retour = $fonction($t);
+			$code_de_retour = $fonction($last);
 			if ($code_de_retour) {
 				$msg = "cron: $tache";
 				if ($code_de_retour < 0) {
