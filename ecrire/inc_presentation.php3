@@ -1582,7 +1582,7 @@ function afficher_parents($collection){
 // Presentation des pages d'installation et d'erreurs
 //
 
-function install_debut_html($titre="Installation du syst&egrave;me de publication...") {
+function install_debut_html($titre="Installation du syst&egrave;me de publication...", $onload='') {
 	?>
 <html>
 <head>
@@ -1605,7 +1605,7 @@ function install_debut_html($titre="Installation du syst&egrave;me de publicatio
 </style>
 </head>
 
-<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+<body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0"<?php if($onload) echo " onLoad=\"$onload\""; ?>>
 
 <br><br><br>
 <center>
