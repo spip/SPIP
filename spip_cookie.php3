@@ -13,7 +13,7 @@ if ($rejoue==oui) {
 		supprimer_session($spip_session);
 		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
 		setcookie ('spip_session', $cookie, time() + 24 * 7 * 3600);
-		@header('Content-Type: text/javascript')
+		@header('Content-Type: text/javascript');
 		echo " \n";	// ne pas renvoyer un fichier vide, ca fait ramer.
 		exit;
 	}
