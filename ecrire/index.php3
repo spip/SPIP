@@ -296,7 +296,7 @@ if ($meta["debut_restauration"]) {
 // Modification du cookie
 //
 
-if ($connect_statut == "0minirezo") {
+if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 	if (!$cookie_admin) {
 		echo "<table width=100%><tr width=100%>";
 		echo "<td width=100%>";
@@ -326,6 +326,7 @@ if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'ava
 }
 
 
+
 //
 // Vos articles en cours de redaction
 //
@@ -336,6 +337,38 @@ $vos_articles = afficher_articles(afficher_plus('articles_page.php3')._T('info_e
 	"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
 
 if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos_articles,',').')';
+
+
+
+//
+// Raccourcis pour malvoyants
+//
+if ($spip_display == 4) {
+	debut_raccourcis();
+	$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
+	$result = spip_query($query);
+	
+	if (spip_num_rows($result) > 0) {
+		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
+	
+		$activer_breves = lire_meta("activer_breves");
+		if ($activer_breves != "non") {
+			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+		}
+	}
+	else {
+		if ($connect_statut == '0minirezo') {
+			echo "<div class='verdana11'>"._T('info_ecrire_article')."</div>";
+		}
+	}
+	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
+		icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
+	}
+	fin_raccourcis();
+}
+
+
+
 
 //
 // Verifier les boucles a mettre en relief
