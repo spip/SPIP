@@ -616,6 +616,9 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo "</font>";
 
 			echo debut_block_invisible($block);
+			
+			/*
+			// Afficher l'image du document (trop lourd?)
 			if (ereg("^jpg|gif|png$",$type_extension)){
 				$vignette = fetch_document($id_document);
 				$fichier_vignette = $vignette->get('fichier');
@@ -626,6 +629,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 				echo texte_vignette_previ($largeur_vignette, $hauteur_vignette, $fichier_vignette, "$fichier");
 				echo "</div>";
 			}
+			*/
 
 
 			$link = new Link($redirect_url);
