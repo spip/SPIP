@@ -125,18 +125,8 @@ function analyser_site($url) {
 	// definir les regexp pour decoder
 	// il faut deux etapes pour link sous Atom0.3
 	$syndic_version = trouver_format($texte);
+
 	switch ($syndic_version) {
-		case "0.91" :
-		case "0.92" :
-		case "2.0" :
-			$site_regexp = array(
-				'channel'     =>'<channel[^>]*>(.*)</channel>',
-				'link1'       => '<link[^>]*>([^<]*)</link>',
-				'link2'       => '(.*)',
-				'item'        => '<item[^>]*>',
-				'description' => '<description[^>]*>([^<]*)</description>'
-			);
-			break;
 		case "1.0" :
 			$site_regexp = array(
 				'channel'     => '<channel[^>]*>(.*)</channel>',
@@ -155,9 +145,18 @@ function analyser_site($url) {
 				'description' => '<tagline[^>]*>([^<]*)</tagline>'
 			);
 			break;
-		default :
-		// faudra-t-il mettre ici un message d'erreur ?
-			return $result;
+		case "0.91" :
+		case "0.92" :
+		case "2.0" :
+		default :	# backend defectueux, mais il faut une regexp
+			$site_regexp = array(
+				'channel'     =>'<channel[^>]*>(.*)</channel>',
+				'link1'       => '<link[^>]*>([^<]*)</link>',
+				'link2'       => '(.*)',
+				'item'        => '<item[^>]*>',
+				'description' => '<description[^>]*>([^<]*)</description>'
+			);
+			break;
 	}
 
 	if (ereg($site_regexp['channel'], $texte, $regs)) {
