@@ -4,7 +4,7 @@ include ("inc.php3");
 
 // cette page gere les deux types de forums ; forum_admin.php3 n'est qu'une coquille vide
 if ($admin=='oui') {
-	debut_page(_T('titre_page_forum'), "redacteurs", "forum-admin");
+	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
 	$urlforum = 'forum_admin.php3';

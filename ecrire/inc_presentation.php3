@@ -1146,7 +1146,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 		$forum_stat = $statut;
 		if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
 		else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
-		else if ($forum_stat == "privrac") $logo = "forum-admin-24.gif";
+		else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
 		else $logo = "forum-public-24.gif";
 
 		if ($compteur_forum==1) echo "\n<br /><br />";
@@ -2156,8 +2156,13 @@ else {
 	$decal = $decal + largeur_icone_bandeau_principal(_T('icone_discussions'));
 	
 	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) {
+		if ($rubrique == "auteurs") {
+			$class = "visible_au_chargement";
+		} else {
+			$class = "invisible_au_chargement";
+		}
 		echo "<div class='$class' id='bandeauauteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "xxx", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_informations_personnelles'), "auteurs_edit.php3?id_auteur=$connect_id_auteur", "fiche-perso-24.gif", "perso", $sous_rubrique);
 		icone_bandeau_secondaire (_T('icone_creer_nouvel_auteur'), "auteur_infos.php3?new=oui", "auteur-24.gif", "xxx", $sous_rubrique);
 	
 		echo "</tr></table></div></div>";

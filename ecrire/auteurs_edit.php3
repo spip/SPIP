@@ -61,8 +61,8 @@ if ($row = spip_fetch_array($result)) {
 	$low_sec = $row["low_sec"];
 
 
-if ($connect_id_auteur == $id_auteur) debut_page($nom, "asuivre", "perso");
-else debut_page($nom,"documents","redacteurs");
+if ($connect_id_auteur == $id_auteur) debut_page($nom, "auteurs", "perso");
+else debut_page($nom,"auteurs","redacteurs");
 
 
 echo "<br><br><br>";
