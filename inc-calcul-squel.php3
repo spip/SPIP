@@ -655,7 +655,7 @@ function parser_champs_etendus($texte) {
 
 	$debut = '';
 	while ($texte) {
-		$r = ereg('(\[([^\[]*)\(#([a-zA-Z_]+)(\*?)([^]\)]*)\)([^]]*)\])', $texte, $regs);
+		$r = ereg('(\[([^\[]*)\(#([a-zA-Z_]+)(\*?)([^])]*)\)([^]]*)\])', $texte, $regs);
 
 		if ($r) {
 			$cond_avant = $regs[2];
@@ -1051,7 +1051,7 @@ function applique_filtres ($fonctions, $code) {
 		while (list(, $fonc) = each($fonctions)) {
 			if ($fonc) {
 				$arglist = '';
-				if (ereg("([^{}]*){(.+)}$", $fonc, $regs)) {
+				if (ereg('([^\{\}]*)\{(.+)\}$', $fonc, $regs)) {
 					$fonc = $regs[1];
 					if (trim($regs[2]))
 						$arglist = ','.$regs[2];
