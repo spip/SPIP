@@ -63,7 +63,6 @@ function utiliser_cache($chemin_cache, $delais) {
 		$t = filemtime($chemin_cache);
 		$ledelais = time() - $t;
 		$use_cache &= ($ledelais < $delais AND $ledelais >= 0);
-		if (!$use_cache) @unlink($chemin_cache);
 		// Inclusions multiples : derniere modification
 		if ($lastmodified < $t) $lastmodified = $t;
 	}
@@ -90,7 +89,6 @@ function ecrire_fichier_cache($fichier, $contenu) {
 	global $flag_flock;
 
 	$fichier_tmp = $fichier.'_tmp';
-	$fichier = $fichier.'.NEW';
 	$f = fopen($fichier_tmp, "wb");
 	if (!$f) return;
 
@@ -104,6 +102,8 @@ function ecrire_fichier_cache($fichier, $contenu) {
 	if ($r != strlen($contenu)) return;
 	if (!fclose($f)) return;
 
+	@unlink($fichier);
+	$fichier = $fichier.'.NEW';
 	@unlink($fichier);
 	rename($fichier_tmp, $fichier);
 	if ($GLOBALS['flag_apc']) apc_rm($fichier);
