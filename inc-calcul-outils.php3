@@ -158,6 +158,7 @@ function calculer_formulaire($nom, $args, $filtres)
   else 
     return
     ('<'.'?php 
+include_ecrire(\'inc_lang.php3\');
 lang_select(\''
     . $GLOBALS["spip_lang"] 
     . '\');
