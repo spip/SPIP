@@ -68,7 +68,7 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 	
 		if ($debut != $debut_reel) {
 			echo "<div style='float: $spip_lang_left; width: 150px; align: left;'>";
-			icone_horizontale(_T("info_aujourdhui")."<br>".affdate("$annee-$mois-$jour"), "calendrier_semaine.php3", "calendrier-24.gif", "", "left");
+			icone_horizontale(_T("info_aujourdhui")."<br>".affdate_jourcourt("$annee-$mois-$jour"), "calendrier_semaine.php3", "calendrier-24.gif", "", "left");
 			echo "</div>";
 		}
 
@@ -84,8 +84,8 @@ function afficher_semaine($jour_today,$mois_today,$annee_today){
 	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE='4'><B>";
 	
 	if (annee($debut) != annee($fin)) echo affdate($debut)." - ".affdate($fin);
-	else if (mois($debut) == mois($fin)) echo journum($debut)." - ".journum($fin)." ".affdate_mois_annee($debut);
-	else echo journum($debut)." ".nom_mois($debut)." - ".journum($fin)." ".affdate_mois_annee($fin);
+	else if (mois($debut) == mois($fin)) echo journum($debut)." - ".affdate_jourcourt($fin);
+	else echo affdate_jourcourt($debut)." - ".affdate_jourcourt($fin);
 	
 	echo "</B></FONT>";
 

@@ -464,7 +464,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
-			$s = affdate_court($date);
+			$s = affdate_jourcourt($date);
 			
 			if ($afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>"._T('lien_visites', array('visites' => $visites))."</a></font>";
@@ -570,7 +570,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 				$rub = spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$s .= typo($rub['titre']);
 			} else if ($statut != "prop")
-				$s = affdate_court($date_heure);
+				$s = affdate_jourcourt($date_heure);
 			else
 				$s .= _T('info_a_valider');
 			$s .= "</div>";

@@ -27,7 +27,7 @@ $today=getdate(time());
 
 
 ///// debut de la page
-debut_page(nom_jour("$annee-$mois-$jour")." ".affdate("$annee-$mois-$jour"),  "redacteurs", "calendrier");
+debut_page(nom_jour("$annee-$mois-$jour")." ".affdate_jourcourt("$annee-$mois-$jour"),  "redacteurs", "calendrier");
 
 
 //////// parents
@@ -49,7 +49,7 @@ debut_page(nom_jour("$annee-$mois-$jour")." ".affdate("$annee-$mois-$jour"),  "r
 
 	echo "<div style='float: $spip_lang_left; width: 150px; align: left;'>";
 	if ($jour != $jour_today OR $mois != $mois_today OR $annee != $annee_today) {
-			icone_horizontale(_T("info_aujourdhui")."<br>".affdate("$annee_today-$mois_today-$jour_today"), "calendrier_jour.php3", "calendrier-24.gif", "", "center");
+			icone_horizontale(_T("info_aujourdhui")."<br>".affdate_jourcourt("$annee_today-$mois_today-$jour_today"), "calendrier_jour.php3", "calendrier-24.gif", "", "center");
 	}
 	echo "&nbsp;</div>";
 
@@ -63,7 +63,7 @@ debut_page(nom_jour("$annee-$mois-$jour")." ".affdate("$annee-$mois-$jour"),  "r
 		echo aide ("messcalen");
 		echo "</div>";
 
-	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=4><B>".nom_jour("$annee-$mois-$jour")." ".affdate("$annee-$mois-$jour")."</B></FONT>";
+	echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=4><B>".nom_jour("$annee-$mois-$jour")." ".affdate_jourcourt("$annee-$mois-$jour")."</B></FONT>";
 
 	
 	echo "</TD>";
