@@ -85,9 +85,7 @@ function auth() {
 	// Recuperer les donnees d'identification
 	//
 
-	// cookie - experimental
-	$SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES = false; // mettre true pour jouer
-	if ($SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES)
+	// cookie de session ?
 	if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 		include_local ("inc_session.php3");
 		if ($visiteur = verifie_cookie_session ($cookie_session)) {
@@ -95,23 +93,25 @@ function auth() {
 				$session_login = $visiteur->login;
 			}
 		}
-		$cookie_session = ''; // parano ?
 	}
-	if (! $session_login AND ($HTTP_COOKIE_VARS[cookie_login] == 'experimental')) {
+	// demander cookie de session - sauf si authentification via .htaccess
+	if ((! $session_login) AND (! $auth_login)) {
 		@header ("Location: ./login.php3");
 		exit;
 	}
 
+	// si on a un cookie de session
 	if ($session_login) {
 		$auth_login = $session_login;
 		$auth_pass_ok = true;
 		$auth_can_disconnect = true;
 		if ($GLOBALS['logout'] == $auth_login) {
 			@header("Location: ../spip_cookie.php3?cookie_session=-1&redirect=./ecrire/login.php3");
+			exit;
 		}
 	} else
-	// cookie - fin experimental
 
+	// un .htaccess
 	if ($auth_login) {
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
