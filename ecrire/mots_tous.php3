@@ -365,7 +365,7 @@ while($row_groupes = mysql_fetch_array($result_groupes)) {
 			echo "<td> &nbsp; </td>"; // Histoire de forcer "supprimer" un peu plus vers la gauche
 		}
 		echo "<td align='right'>";
-		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mots-cle-24.gif", "creer.gif");
+		icone("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
 		echo "</td></tr></table>";
 	}	
 	fin_cadre_enfonce();
