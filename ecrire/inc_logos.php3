@@ -15,7 +15,7 @@ function decrire_logo($racine) {
 		$contre = @filesize($fid) . @filemtime($fid);
 		if ($taille = @getimagesize($fid)) {
 				list($x, $y, $w, $h) = resize_logo($taille);
-				$xy = "$x &#215; $y "._T('info_pixels');
+				$xy = _T('info_largeur_vignette', array('largeur_vignette' => $x, 'hauteur_vignette' => $y));
 				$taille = " width='$w' height='$h'";
 			} else { $xy =''; $w = 0; $h = 0;}
 		include_ecrire("inc_admin.php3");
