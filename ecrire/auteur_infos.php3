@@ -80,6 +80,7 @@ if ($id_auteur) {
 	$auteur['source'] = 'spip';
 }
 
+
 //
 // Modification (et creation si besoin)
 //
@@ -219,9 +220,6 @@ if (!$echec AND $redirect_ok == "oui") {
 		exit; 
 	}
 }
-
-
-
 
 
 //
