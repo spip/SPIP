@@ -9,7 +9,7 @@
 
 function calculer_champ_FORMULAIRE_ADMIN($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
 {
-  return array("'<!-- @@formulaire_admin@@45609871@@ -->'",'');
+  return array("envoi_script('admin()')",'');
 }
 
 function calculer_champ_FORMULAIRE_RECHERCHE($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
@@ -191,7 +191,7 @@ function calculer_champ_PARAMETRES_FORUM($fonctions, $nom_champ, $id_boucle, &$b
   }
   $milieu .= "}\n";
   $code = "(!\$forums_publics) ? '' :
- 			($c .\n" . '"&cache=".$Cache[cache] .' . "\n\"&retour=\$lien\")";
+ 			($c .\n" . '"&cache=".rawurlencode($Cache[cache]) .' . "\n\"&retour=\$lien\")";
   
   list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
   return array($c,$milieu . $m);
