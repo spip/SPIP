@@ -435,7 +435,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 			echo "<p><div class='spip_encadrer'>Sujet : <b>$GLOBALS[sujet_message_auteur]</b></div>";
 			if ($flag_wordwrap)
 				$GLOBALS[texte_message_auteur] = wordwrap($GLOBALS[texte_message_auteur]);
-			echo "<pre>".htmlspecialchars($GLOBALS[texte_message_auteur])."</pre>";
+			echo "<pre>".entites_html($GLOBALS[texte_message_auteur])."</pre>";
 			$affiche_formulaire = false;
 			$link = new Link();
 			echo $link->getForm('POST');
@@ -453,10 +453,10 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 		$link = new Link();
 		echo $link->getForm('POST');
 		echo "<div class='spip_encadrer'><P><B>Votre adresse email</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur\" VALUE=\"".htmlspecialchars($GLOBALS[email_message_auteur])."\" SIZE=\"30\">\n";
+		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"email_message_auteur\" VALUE=\"".entites_html($GLOBALS[email_message_auteur])."\" SIZE=\"30\">\n";
 		echo  "<P><B>Sujet</B><BR>";
-		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur\" VALUE=\"".htmlspecialchars($GLOBALS[sujet_message_auteur])."\" SIZE=\"30\">\n";
-		echo  "<P><TEXTAREA NAME='texte_message_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".htmlspecialchars($GLOBALS[texte_message_auteur])."</textarea></div>\n";
+		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur\" VALUE=\"".entites_html($GLOBALS[sujet_message_auteur])."\" SIZE=\"30\">\n";
+		echo  "<P><TEXTAREA NAME='texte_message_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".entites_html($GLOBALS[texte_message_auteur])."</textarea></div>\n";
 		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Envoyer un message\">";
 		echo  "</FORM>";
 	}

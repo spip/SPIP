@@ -11,7 +11,8 @@ define("_ECRIRE_INC_FILTRES", "1");
 
 
 // Echappement des entites HTML avec correction des entites "brutes"
-// (generees par les butineurs lorsqu'on rentre des caracteres non-latins)
+// (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
+// pas au charset de la page [iso-8859-1 par defaut])
 function corriger_entites_html($texte) {
 	return ereg_replace('&amp;(#[0-9]+;)', '&\1', $texte);
 }

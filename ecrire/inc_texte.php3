@@ -141,7 +141,7 @@ function echappe_html($letexte,$source) {
 	$regexp_echap = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
-		$lecode = htmlspecialchars($regs[1]);
+		$lecode = entites_html($regs[1]);
 
 		// ne pas mettre le <div...> s'il n'y a qu'une ligne
 		if (is_int(strpos($lecode,"\n")))
@@ -161,7 +161,7 @@ function echappe_html($letexte,$source) {
 	$regexp_echap = "<cadre>(([^<]|<[^/]|</[^c]|</c[^a]|</ca[^d]|</cad[^r]|</cadr[^e]|<\/cadre[^>])*)<\/cadre>";
 	while (eregi($regexp_echap, $letexte, $regs)) {
 		$num_echap++;
-		$lecode = trim(htmlspecialchars($regs[1]));
+		$lecode = trim(entites_html($regs[1]));
 		$total_lignes = count(explode("\n", $lecode)) + 1;
 
 		$les_echap[$num_echap] = "<form><textarea cols='40' rows='$total_lignes' wrap='no' class='spip_cadre'>".$lecode."</textarea></form>";

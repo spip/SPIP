@@ -26,7 +26,7 @@ if ($changer_config == 'oui') {
 			include_ecrire("inc_sites.php3");
 			$page = recuperer_page($test_proxy);
 			if ($page)
-				echo "<pre>".htmlspecialchars($page)."</pre>";
+				echo "<pre>".entites_html($page)."</pre>";
 			else
 				echo propre("{{Erreur !}} Impossible de lire la page <tt><html>$test_proxy</html></tt> &agrave; travers le proxy <tt><html>$http_proxy</html></tt>.") . aide('confhttpproxy');
 			exit;
@@ -451,7 +451,7 @@ fin_cadre_relief();
 //// Utilisation d'un proxy pour aller lire les sites syndiques
 debut_cadre_relief();
 
-	$http_proxy=htmlspecialchars(lire_meta("http_proxy"));
+	$http_proxy=entites_html(lire_meta("http_proxy"));
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Utiliser un proxy</FONT></B> ".aide ("confhttpproxy")."</TD></TR>";

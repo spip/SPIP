@@ -251,7 +251,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$result_groupe = spip_query($query_groupe);
 			while($row_groupe = mysql_fetch_array($result_groupe)) {
 				$id_groupe = $row_groupe['id_groupe'];
-				$titre_groupe = htmlspecialchars($row_groupe['titre']);
+				$titre_groupe = entites_html($row_groupe['titre']);
 				$unseul = $row_groupe['unseul'];
 				$obligatoire = $row_groupe['obligatoire'];
 				$acces_admin =  $row_groupe['0minirezo'];
@@ -369,7 +369,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		while($row_groupes = mysql_fetch_array($result_groupes)) {
 			$id_groupe = $row_groupes['id_groupe'];
-			$titre_groupe = htmlspecialchars($row_groupes['titre']);
+			$titre_groupe = entites_html($row_groupes['titre']);
 			$unseul = $row_groupes['unseul'];
 			$obligatoire = $row_groupes['obligatoire'];
 			$articles = $row_groupes['articles'];
@@ -402,7 +402,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 							echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='Chercher' CLASS='fondo' STYLE='font-size:10px'>";
 							echo "</FORM>";
-							//$case_recherche = true; // on n'en veut pas d'autre
 						}
 					}
 					else {
@@ -418,13 +417,13 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 						else
 							echo "<SELECT NAME='nouv_mot' SIZE='1' STYLE='width:150px; font-size:10px' CLASS='fondl'>";
 							
-						$ifond == 0;	
-						$label = htmlspecialchars(strtoupper($titre_groupe));
+						$ifond == 0;
+						$label = majuscules($titre_groupe);
 						echo "<OPTION VALUE='x'>$label";
 						while($row = mysql_fetch_array($result)) {
 							$id_mot = $row['id_mot'];
 							$titre_mot = $row['titre'];		
-							$texte_option = htmlspecialchars(couper($titre_mot, 50));
+							$texte_option = entites_html(couper($titre_mot, 50));
 							echo "\n<OPTION VALUE=\"$id_mot\">";
 							echo "&nbsp;&nbsp;&nbsp;";
 							echo $texte_option;

@@ -132,7 +132,7 @@ echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
 echo "<INPUT TYPE='Hidden' NAME='coll' VALUE=\"$id_rubrique\">";
 if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
-$titre = htmlspecialchars($titre);
+$titre = entites_html($titre);
 
 echo "<B>Titre</B> [Obligatoire]<BR>";
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40'><P>";

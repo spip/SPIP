@@ -4,7 +4,7 @@ include ("inc.php3");
 
 
 $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
-$nom = htmlspecialchars(corriger_caracteres($connect_nom));
+$nom = entites_html(corriger_caracteres($connect_nom));
 $adresse_retour = rawurldecode($adresse_retour);
 
 if ($valider_forum) {
@@ -67,7 +67,7 @@ echo "<TABLE BORDER=0 CELLPADDING=0 CELLSPACING=0 BACKGROUND='' WIDTH=\"100%\"><
 echo "<TD><TD><IMG SRC='img_pack/rien.gif' WIDTH=10 BORDER=0>";
 echo "</TD><TD WIDTH=\"100%\">";
 echo "<B>Titre :</B><BR>";
-$titre_message = htmlspecialchars($titre_message);
+$titre_message = entites_html($titre_message);
 echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_message\" SIZE='40'><P>\n";
 echo "</TD></TR></TABLE>";
 

@@ -890,7 +890,7 @@ function debut_html($titre = "") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
 	global $flag_ecrire;
 
-	$nom_site_spip = htmlspecialchars(lire_meta("nom_site"));
+	$nom_site_spip = entites_html(lire_meta("nom_site"));
 	$titre = textebrut(typo($titre));
 
 	if (!$nom_site_spip) $nom_site_spip="SPIP";

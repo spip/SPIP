@@ -48,7 +48,7 @@ function spip_query_profile($query) {
 	list($usec2, $sec2) = explode(" ", $m2);
 	$dt = $sec2 + $usec2 - $sec - $usec;
 	$tt += $dt;
-	echo "<small>".htmlspecialchars($query);
+	echo "<small>".entites_html($query);
 	echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
 	return $result;
 }
@@ -62,8 +62,8 @@ function spip_query_debug($query) {
 	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
 	$r = mysql_query($query);
 	if ($GLOBALS['connect_statut'] == '0minirezo' AND $s = mysql_error()) {
-		echo "Erreur dans la requ&ecirc;te : ".htmlspecialchars($query)."<br>";
-		echo "&laquo; ".htmlspecialchars($s)." &raquo;<p>";
+		echo "Erreur dans la requ&ecirc;te : ".entites_html($query)."<br>";
+		echo "&laquo; ".entites_html($s)." &raquo;<p>";
 	}
 	return $r;
 }
@@ -553,7 +553,7 @@ class Link {
 		if (is_array($vars)) {
 			reset($vars);
 			while (list($name, $value) = each($vars)) {
-				$form .= "<input type=\"hidden\" name=\"$name\" value=\"".htmlspecialchars($value)."\">\n";
+				$form .= "<input type=\"hidden\" name=\"$name\" value=\"".entites_html($value)."\">\n";
 			}
 		}
 		if (is_array($this->arrays)) {
@@ -561,7 +561,7 @@ class Link {
 			while (list($name, $table) = each($this->vars)) {
 				reset($table);
 				while (list(, $value) = each($table)) {
-					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"".htmlspecialchars($value)."\">\n";
+					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"".entites_html($value)."\">\n";
 				}
 			}
 		}

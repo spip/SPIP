@@ -238,8 +238,8 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	$id_syndic = (int) $id_syndic;
 	$hash = calculer_action_auteur("ajout_forum $id_rubrique $id_parent $id_article $id_breve $id_syndic $alea");
 
-	$titre = htmlspecialchars($titre);
-	$texte = htmlspecialchars($texte);
+	$titre = entites_html($titre);
+	$texte = entites_html($texte);
 	
 	if ($afficher_texte == "non"){
 		$ret .= "\n<INPUT TYPE='hidden' NAME='titre' VALUE=\"$titre\">";
@@ -350,7 +350,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "\n<p><div class='spip_encadrer'><B>Lien hypertexte</B> (optionnel)<BR>";
 		$ret .= "\n(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)<BR>";
 		$ret .= "\nTitre :<BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='nom_site_forum' VALUE=\"".htmlspecialchars($nom_site_forum)."\" SIZE='40'><BR>";
+		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='nom_site_forum' VALUE=\"".entites_html($nom_site_forum)."\" SIZE='40'><BR>";
 
 		if (!$url_site) $url_site = "http://";
 		$ret .= "\nURL :<BR>";
@@ -365,7 +365,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if (!$email_auteur) $email_auteur = $nom_email;
 
 		$ret .= "\nVotre nom (ou pseudonyme) :<BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".htmlspecialchars($auteur)."\" SIZE='40'><BR>";
+		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".entites_html($auteur)."\" SIZE='40'><BR>";
 
 		$ret .= "\nVotre adresse email :<BR>";
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'></div>";

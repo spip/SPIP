@@ -426,7 +426,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo $link->getForm('POST');
 
 		echo "<b>Titre du document&nbsp;:</b><br>\n";
-		echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+		echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
 
 		if ($GLOBALS['coll'] > 0){
 			if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
@@ -448,7 +448,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		
 		echo "<b>Description&nbsp;:</b><br>\n";
 		echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
-		echo htmlspecialchars($descriptif);
+		echo entites_html($descriptif);
 		echo "</textarea>\n";
 
 		if ($type_inclus == "embed" OR $type_inclus == "image") {
@@ -788,11 +788,11 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 			echo $link->getForm('POST');
 		
 			echo "<b>Titre du document&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' style='font-size:9px;' cols='*' wrap='soft'>";
-			echo htmlspecialchars($descriptif);
+			echo entites_html($descriptif);
 			echo "</textarea>\n";
 			
 			if ($type_inclus == "embed" OR $type_inclus == "image") {
@@ -893,11 +893,11 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		
 			echo "<p></p><div class='iconeoff'>";	
 			echo "<b>Titre de l'image&nbsp;:</b><br>\n";
-			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".htmlspecialchars($titre)."\" size='40'><br>";
+			echo "<input type='text' name='titre_document' class='formo' style='font-size:9px;' value=\"".entites_html($titre)."\" size='40'><br>";
 		
 			echo "<b>Description&nbsp;:</b><br>\n";
 			echo "<textarea name='descriptif_document' rows='4' class='formo' cols='*' style='font-size:9px;' wrap='soft'>";
-			echo htmlspecialchars($descriptif);
+			echo entites_html($descriptif);
 			echo "</textarea>\n";
 		
 			echo "<div align='right'>";
