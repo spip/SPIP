@@ -16,6 +16,7 @@ include_local("inc-formulaires.php3");
 utiliser_langue_site();
 
 $inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
+unset($erreur);
 
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
@@ -35,7 +36,7 @@ if ($p = addslashes($p)) {
 			install_debut_html(_T('pass_nouveau_pass'));
 			echo "<p><br>";
 			echo "<form action='spip_pass.php3' method='post'>";
-			echo "<input type='hidden' name='p' value='$p'>";
+			echo "<input type='hidden' name='p' value='".htmlspecialchars($p)."'>";
 			echo _T('pass_choix_pass')."<br>\n";
 			echo "<input type='password' name='pass' value=''>";
 			echo '  <input type=submit class="fondl" name="oubli" value="'._T('pass_ok').'"></div></form>';
@@ -70,10 +71,10 @@ if ($email_oubli) {
 			}
 		}
 		else
-			$erreur = _T('pass_erreur_non_enregistre', array('email_oubli' => $email_oubli));
+			$erreur = _T('pass_erreur_non_enregistre', array('email_oubli' => htmlspecialchars($email_oubli)));
 	}
 	else
-		$erreur = _T('pass_erreur_non_valide', array('email_oubli' => $email_oubli));
+		$erreur = _T('pass_erreur_non_valide', array('email_oubli' => htmlspecialchars($email_oubli)));
 }
 
 if ($oubli_pass == 'oui') {
