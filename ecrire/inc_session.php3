@@ -169,14 +169,14 @@ function zap_sessions ($login, $zap) {
 		if (ereg("^session_([a-z0-9]+)\.php3$", $item, $regs) AND ($fichier_session != $dirname.$item)) {
 			$session = file("$dirname$item");
 			if (ereg("GLOBALS\['auteur_session'\]\['login'\] = '$login'", $session[3])) {
+				$zap_num ++;
 				if ($zap) {
 					@unlink("$dirname$item");
-				} else {
-					return true;
 				}
 			}
 		}
 	}
+	return $zap_num;
 }
 
 //
