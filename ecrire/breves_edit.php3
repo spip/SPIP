@@ -82,7 +82,7 @@ debut_cadre_formulaire();
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	icone("Retour", "breve_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
+	icone("Retour", "breves_voir.php3?id_breve=$id_breve", "breve-24.gif", "rien.gif");
 
 echo "</td>";
 	echo "<td><img src='img_pack/rien.gif' width=10></td>\n";
