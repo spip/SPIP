@@ -410,7 +410,9 @@ function calculer_param_date($date_compare, $date_orig) {
 	")))";
 }
 
+//
 // Calculer les parametres
+//
 function calculer_param_dynamique($val, &$boucles, $idb) {
 	if (ereg("^#([A-Za-z0-9_-]+)$", $val, $m)) {
 		$c = calculer_champ('',$m[1], $idb, $boucles,$idb);
@@ -428,10 +430,19 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 	}
 }
 
-# Prendre en compte le cas de la boucle dite recursive
+//
+// Reserve les champs necessaires a la comparaison avec le contexte donne par
+// la boucle parente ; attention en recursif il faut les reserver chez soi-meme
+// ET chez sa maman
+// 
 function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
-	return index_pile(($boucles[$idb]->externe ? $idb :
-	$boucles[$idb]->id_parent), $nom_champ, $boucles);
+
+	// recursif ?
+	if ($boucles[$idb]->externe)
+		index_pile ($idb, $nom_champ, $boucles); // reserver chez soi-meme
+
+	// reserver chez le parent et renvoyer l'habituel $Pile[$SP]['nom_champ']
+	return index_pile ($boucles[$idb]->id_parent, $nom_champ, $boucles);
 }
 
 ?>
