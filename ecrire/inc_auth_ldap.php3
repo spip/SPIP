@@ -10,6 +10,7 @@ class Auth_ldap {
 	var $nom, $login, $email, $pass, $statut, $bio;
 
 	function init() {
+		// Verifier la presence de LDAP
 		if (!$GLOBALS['ldap_present']) return false;
 		return spip_connect_ldap();
 	}
@@ -20,27 +21,49 @@ class Auth_ldap {
 
 	function verifier($login, $pass) {
 		global $ldap_link, $ldap_base;
-		$dn = "uid=$login, $ldap_base";
-		if (@ldap_bind($ldap_link, $dn, $pass)) {
-			$this->user_dn = $dn;
-			$this->login = $login;
-			return true;
+
+		// Attributs testes pour egalite avec le login
+		$atts = array('uid', 'login', 'userid', 'cn', 'sn');
+		$login_search = ereg_replace("[^[:space:][:alnum:]]", "", $login); // securite
+
+		// Tenter une recherche pour essayer de retrouver le DN
+		reset($atts);
+		while (list(, $att) = each($atts)) {
+			$filter = "$att=$login_search";
+			$result = @ldap_search($ldap_link, $ldap_base, $filter, array("dn"));
+			$info = @ldap_get_entries($ldap_link, $result);
+			// Ne pas accepter les resultats si plus d'une entree
+			// (on veut un attribut unique)
+			if (is_array($info) AND $info['count'] == 1) {
+				$dn = $info[0]['dn'];
+				if (@ldap_bind($ldap_link, $dn, $pass)) {
+					$this->user_dn = $dn;
+					$this->login = $login;
+					return true;
+				}
+			}
 		}
-		$dn = "cn=$login, $ldap_base";
-		if (@ldap_bind($ldap_link, $dn, $pass)) {
-			$this->user_dn = $dn;
-			$this->login = $login;
-			return true;
+
+		// Si echec, essayer de deviner le DN
+		reset($atts);
+		while (list(, $att) = each($atts)) {
+			$dn = "$att=$login_search, $ldap_base";
+			if (@ldap_bind($ldap_link, $dn, $pass)) {
+				$this->user_dn = $dn;
+				$this->login = $login;
+				return true;
+			}
 		}
 		return false;
 	}
 
 	function lire() {
-		global $ldap_link, $ldap_base;
+		global $ldap_link, $ldap_base, $flag_utf8_decode;
 		$this->nom = $this->email = $this->pass = $this->statut = '';
 
 		if (!$this->login) return false;
 
+		// Si l'auteur existe dans la base, y recuperer les infos
 		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($this->login)."' AND source='ldap'";
 		$result = spip_query($query);
 
@@ -52,6 +75,7 @@ class Auth_ldap {
 			return true;
 		}
 
+		// Lire les infos sur l'auteur depuis LDAP
 		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("uid", "cn", "mail", "description"));
 		if (!$result) return false;
 		$info = @ldap_get_entries($ldap_link, $result);
@@ -65,13 +89,14 @@ class Auth_ldap {
 				if (!$this->bio) $this->bio = $val['description'][0];
 			}
 		}
-/*		$result = @ldap_read($ldap_link, $this->user_dn, "objectClass=*", array("userPassword"));
-		if ($result) {
-			$info = @ldap_get_entries($ldap_link, $result);
-			if (is_array($info)) {
-				$this->pass = $val[0]['userPassword'][0];
-			}
-		}*/
+
+		// Convertir depuis UTF-8 (jeu de caracteres par defaut)
+		if ($flag_utf8_decode) {
+			$this->nom = utf8_decode($this->nom);
+			$this->email = utf8_decode($this->email);
+			$this->login = utf8_decode($this->login);
+			$this->bio = utf8_decode($this->bio);
+		}
 		return true;
 	}
 
@@ -84,6 +109,7 @@ class Auth_ldap {
 
 		if (!$statut) return false;
 
+		// Si l'auteur n'existe pas, l'inserer avec le statut par defaut (defini a l'install)
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
 		if (mysql_num_rows($result)) return false;

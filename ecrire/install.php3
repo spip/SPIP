@@ -307,7 +307,6 @@ else if ($etape == 1) {
 		if (ereg('mysql_connect\("(.*)","(.*)","(.*)"\)', $s, $regs)) {
 			$adresse_db = $regs[1];
 			$login_db = $regs[2];
-			$pass_db = $regs[3];
 		}
 	}
 
@@ -364,9 +363,10 @@ else if ($etape == 'ldap5') {
 else if ($etape == 'ldap4') {
 	install_debut_html();
 
-	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
-
 	if (!$base_ldap) $base_ldap = $base_ldap_text;
+
+	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
+	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
 
 	$r = @ldap_compare($ldap_link, $base_ldap, "objectClass", "");
 
@@ -387,7 +387,9 @@ else if ($etape == 'ldap4') {
 		$conn = $conn[0];
 		if (!strpos($conn, 'spip_connect_ldap')) {
 			$conn .= "function spip_connect_ldap() {\n";
-			$conn .= "\treturn (\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\"));\n";
+			$conn .= "\t\$GLOBALS['ldap_link'] = @ldap_connect(\"$adresse_ldap\",\"$port_ldap\");\n";
+			$conn .= "\t@ldap_bind(\$GLOBALS['ldap_link'],\"$login_ldap\",\"$pass_ldap\");\n";
+			$conn .= "\treturn \$GLOBALS['ldap_link'];\n";
 			$conn .= "}\n";
 			$conn .= "\$GLOBALS['ldap_base'] = \"$base_ldap\";\n";
 			$conn .= "\$GLOBALS['ldap_present'] = true;\n";
@@ -428,14 +430,17 @@ else if ($etape == 'ldap3') {
 	echo "Cette information est indispensable pour lire les profils utilisateurs stock&eacute;s dans l'annuaire. ";
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
+	@ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
 
 	$result = @ldap_read($ldap_link, "", "objectclass=*", array("namingContexts"));
 	$info = @ldap_get_entries($ldap_link, $result);
 
 	echo "<FORM ACTION='install.php3' METHOD='post'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap4'>";
-	echo "<INPUT TYPE='hidden' NAME='adresse_ldap'  VALUE=\"$adresse_ldap\" SIZE='40'>";
+	echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
 	echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
+	echo "<INPUT TYPE='hidden' NAME='login_ldap' VALUE=\"$login_ldap\">";
+	echo "<INPUT TYPE='hidden' NAME='pass_ldap' VALUE=\"$pass_ldap\">";
 
 	echo "<fieldset>";
 
@@ -487,14 +492,17 @@ else if ($etape == 'ldap2') {
 	echo "<P>";
 
 	$ldap_link = @ldap_connect("$adresse_ldap", "$port_ldap");
+	$r = @ldap_bind($ldap_link, "$login_ldap", "$pass_ldap");
 
-	if ($ldap_link) {
+	if ($ldap_link && $r) {
 		echo "<B>La connexion LDAP a r&eacute;ussi.</B><P> Vous pouvez passer &agrave; l'&eacute;tape suivante.";
 
 		echo "<FORM ACTION='install.php3' METHOD='post'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap3'>";
-		echo "<INPUT TYPE='hidden' NAME='adresse_ldap'  VALUE=\"$adresse_ldap\" SIZE='40'>";
+		echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
 		echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
+		echo "<INPUT TYPE='hidden' NAME='login_ldap' VALUE=\"$login_ldap\">";
+		echo "<INPUT TYPE='hidden' NAME='pass_ldap' VALUE=\"$pass_ldap\">";
 
 		echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 		echo "</FORM>";
@@ -541,8 +549,20 @@ else if ($etape == 'ldap1') {
 	echo "(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)<BR>";
 	echo "<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"$port_ldap\" SIZE='20'><P></fieldset>";
 
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
+	echo "<p><fieldset>";
+	echo "Certains serveurs LDAP n'acceptent aucun acc&egrave;s anonyme. Dans ce cas ";
+	echo "il faut sp&eacute;cifier un identifiant d'acc&eacute;s initial afin de pouvoir ";
+	echo "ensuite rechercher des informations dans l'annuaire. Dans la plupart des cas ";
+	echo "n&eacute;anmoins, les champs suivants pourront &ecirc;tre laiss&eacute;s vides.<p>";
+	echo "<label><B>Login LDAP initial</B><BR></label>";
+	echo "(Laisser vide pour un acc&egrave;s anonyme, ou entrer le chemin complet, ";
+	echo "par exemple &laquo;&nbsp;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&nbsp;&raquo;.)<br>";
+	echo "<INPUT TYPE='text' NAME='login_ldap' CLASS='formo' VALUE=\"\" SIZE='40'><P>";
 
+	echo "<label><B>Mot de passe</B><BR></label>";
+	echo "<INPUT TYPE='text' NAME='port_ldap' CLASS='formo' VALUE=\"\" SIZE='40'></fieldset>";
+
+	echo "<p><DIV align='right'><INPUT TYPE='submit' CLASS='fondl' NAME='Valider' VALUE='Suivant >>'>";
 
 	echo "</FORM>";
 
