@@ -217,17 +217,17 @@ td {
 	-moz-border-radius: 5px;
 }
 .cellule36 a span, .cellule48 a span {
-	color: #666666; display: block; margin: 2px;
+	color: #666666; display: block; margin: 1px;
 	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
-	width: 100%
+	width: 100%;
 }
 .cellule36 a:hover span, .cellule48 a:hover span {
-	color: #000000; display: block; margin: 2px;
+	color: #000000; display: block; margin: 1px;
 	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
 	width: 100%;
 }
 .cellule36 a.selection span, .cellule48 a.selection span {
-	color: #000000; display: block; margin: 2px;
+	color: #000000; display: block; margin: 1px;
 	filter: DropShadow(Color=white, OffX=-1, OffY=-1, Positive=1) DropShadow(Color=#cccccc, OffX=1, OffY=1, Positive=1);
 	width: 100%;
 }
