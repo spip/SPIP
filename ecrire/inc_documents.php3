@@ -170,8 +170,10 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 
 			if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
 			
-			if ($descriptif) $retour .= "<div style='text-align: left;'>$descriptif</div>";
-			
+			if ($descriptif) {
+				$alignement = (strlen($descriptif)>200)? 'left':'center';
+				$retour .= "<div style='text-align: $alignement;'>$descriptif</div>"; 
+			}
 
 			$retour .= "</div>\n</td>";
 			if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
@@ -299,7 +301,11 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 			$retour .= $vignette;
 
 			if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
-			if ($descriptif) $retour .= "<div style='text-align:left;'>$descriptif</div>";
+
+			if ($descriptif) {
+				$alignement = (strlen($descriptif)>200)? 'left':'center';
+				$retour .= "<div style='text-align: $alignement;'>$descriptif</div>"; 
+			}
 
 			if ($mode == 'document')
 				$retour .= "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
