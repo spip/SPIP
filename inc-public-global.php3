@@ -34,6 +34,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 			if ($GLOBALS['flag_apc']) {
 				apc_rm($chemin_cache);
 			}
+			spip_log("calcul: $chemin_cache");
 			$f = fopen($chemin_cache, "wb");
 			fwrite($f, $page);
 			fclose($f);
@@ -116,6 +117,7 @@ if (!$use_cache) {
 			if ($GLOBALS['flag_apc']) {
 				apc_rm($chemin_cache);
 			}
+			spip_log("redirection: $url");
 			$file = fopen($chemin_cache, "wb");
 			fwrite($file, $texte);
 			fclose($file);
@@ -129,6 +131,7 @@ if (!$use_cache) {
 			if ($GLOBALS['flag_apc']) {
 				apc_rm($chemin_cache);
 			}
+			spip_log("calcul: $chemin_cache");
 			$file = fopen($chemin_cache, "wb");
 			fwrite($file, $page);
 			fclose($file);
@@ -405,6 +408,8 @@ if ((lire_meta('quoi_de_neuf')=='oui') AND ($jours_neuf=lire_meta('jours_neuf'))
 			$nom_site = lire_meta('nom_site');
 			spip_log("envoi mail nouveautes");
 			envoyer_mail($adresse_neuf, "[$nom_site] Les nouveautes", $mail_nouveautes);
+		} else {
+			spip_log("envoi mail nouveautes : pas de nouveautes");
 		}
 	}
 }

@@ -340,8 +340,10 @@ if (tester_mail()) {
 	$adresse_neuf=lire_meta("adresse_neuf");
 	$jours_neuf=lire_meta("jours_neuf");
 
-	if ($envoi_now)
-		spip_query("DELETE FROM spip_meta WHERE nom='majnouv'");
+	if ($envoi_now) {
+		effacer_meta('majnouv');
+		ecrire_metas();
+	}
 	
 	echo "<TR><TD>&nbsp;</TD></TR>";
 	echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3>Annonce des nouveaut&eacute;s</FONT></B></TD></TR>";
