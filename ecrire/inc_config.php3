@@ -55,7 +55,7 @@ function init_config() {
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
-		'charset' => 'iso-8859-1',
+		'charset' => 'utf-8',
 
 		'creer_htpasswd' => 'non',
 		
