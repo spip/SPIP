@@ -126,7 +126,7 @@ function calculer_rubriques() {
 	AND fille.id_secteur <> maman.id_secteur");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_articles
-		SET id_secteur=".$row['secteur']." WHERE id_rubrique=".$row['id']);
+		SET id_secteur=".$row['secteur']." WHERE id_article=".$row['id']);
 	
 	// reparer les sites
 	$r = spip_query("SELECT fille.id_syndic AS id, maman.id_secteur AS secteur
@@ -135,7 +135,7 @@ function calculer_rubriques() {
 	AND fille.id_secteur <> maman.id_secteur");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_syndic SET id_secteur=".$row['secteur']."
-		WHERE id_rubrique=".$row['id']);
+		WHERE id_syndic=".$row['id']);
 	
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
 	ecrire_meta("date_calcul_rubriques", date("U"));
