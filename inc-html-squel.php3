@@ -77,7 +77,7 @@ function parser_champs($texte,$result) {
 	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
 	  $p = strpos($texte, $regs[0]);
 
-	  if ($regs[4] || !ereg("[0-9a-z]", $regs[5][0])) {
+	  if ($regs[4] || (strpos($regs[5][0], "[0-9]") === false)) {
 		if ($p) {
 			$champ = new Texte;
 			$champ->texte = (substr($texte, 0, $p));
