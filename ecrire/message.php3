@@ -378,7 +378,7 @@ while($row = mysql_fetch_array($result_message)) {
 			if ($statut == 'redac' OR $forcer_dest) {
 				$query_ajout_auteurs = "SELECT * FROM spip_auteurs WHERE ";
 				if ($les_auteurs) $query_ajout_auteurs .= "id_auteur NOT IN ($ze_auteurs) AND ";
-				$query_ajout_auteurs .= " messagerie<>'non' AND statut<>'5poubelle' AND statut<>'nouveau' AND statut<>'6forum' AND nom<>'Nouvel auteur' ORDER BY statut, nom";
+				$query_ajout_auteurs .= " messagerie<>'non' AND FIND_IN_SET(statut,'0minirezo,1comite') ORDER BY statut, nom";
 				$result_ajout_auteurs = spip_query($query_ajout_auteurs);
 
 				if (mysql_num_rows($result_ajout_auteurs) > 0) {
