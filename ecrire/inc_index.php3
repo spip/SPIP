@@ -320,7 +320,7 @@ function executer_une_indexation_syndic() {
 function creer_liste_indexation() {
 	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
 	while (list(,$type) = each($types)) {
-		$table = table_objet($type);
+		$table = 'spip_'.table_objet($type);
 		spip_query("UPDATE $table SET idx='1'");
 	}
 }
