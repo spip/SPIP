@@ -493,7 +493,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 				$puce = "puce-verte";
 				$title = "Br&egrave;ve publi&eacute;e";
 				break;
-			case 'publie':
+			case 'refuse':
 				$puce = "puce-rouge";
 				$title = "Br&egrave;ve refus&eacute;e";
 				break;
