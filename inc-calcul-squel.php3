@@ -1908,25 +1908,35 @@ function calculer_texte($texte)
 
 		$code .= "	\$retour .= 'lang_dselect(); ?".">';\n";
 	}
-	if ($texte)
-		$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $texte)."';\n";
 
 	//
-	// Reperer les balises de traduction <:toto:>
+	// Parties textuelles du squelette
 	//
-	while (eregi("(<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>)", $code, $match)) {
-		//
-		// Traiter la balise de traduction multilingue
-		//
-		$chaine = strtolower($match[4]);
-		if (!($module = $match[3]))
-			$module = 'local/public/spip';	// ordre des modules a explorer
-		$remplace = "_T('$module:$chaine')";
-		if ($filtres = $match[5]) {
-			$filtres = explode('|',substr($filtres,1));
-			$remplace = applique_filtres($filtres, $remplace);
+	if ($texte) {
+		// bloc multi
+		if (eregi('<multi>', $texte)) {
+			$ouvre_multi = 'extraire_multi(';
+			$ferme_multi = ')';
+		} else {
+			$ouvre_multi = $ferme_multi = '';
 		}
-		$code = str_replace($match[1], "'.$remplace.'", $code);
+
+		$texte = ereg_replace("([\\\\'])", "\\\\1", $texte);
+
+		// Reperer les balises de traduction <:toto:>
+		while (eregi("(<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>)", $texte, $match)) {
+			$chaine = strtolower($match[4]);
+			if (!($module = $match[3]))
+				$module = 'local/public/spip';	// ordre des modules a explorer
+			$remplace = "_T('$module:$chaine')";
+			if ($filtres = $match[5]) {
+				$filtres = explode('|',substr($filtres,1));
+				$remplace = applique_filtres($filtres, $remplace);
+			}
+			$texte = str_replace($match[1], "'$ferme_multi.$remplace.$ouvre_multi'", $texte);
+		}
+
+		$code .= "	\$retour .= $ouvre_multi'$texte'$ferme_multi;\n";
 	}
 
 	return $code;
