@@ -167,6 +167,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$url->delvar('var_preview');
 		$url = $url->geturl();
 		include_ecrire('inc_lang.php3');
+		include_ecrire('inc_filtres.php3');
 		lang_select($GLOBALS['auteur_session']['lang']);
 		$page['texte'] .= '<div style="
 		display: block;

@@ -3119,13 +3119,11 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 		$message = _T('icone_voir_en_ligne');
 	else if ($en_ligne == 'preview') {
 		// est-ce autorise ?
-		if (lire_meta('preview') == 'non'
-			OR (lire_meta('preview') == '1comite'
-			AND $connect_statut=='1comite')
-		)
-			$message = '';
-		else
+		if ((lire_meta('preview') == 'oui' AND $connect_statut=='0minirezo')
+			OR (lire_meta('preview') == '1comite'))
 			$message = _T('previsualiser');
+		else
+			$message = '';
 	}
 
 	if ($message)
