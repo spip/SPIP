@@ -1526,7 +1526,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	echo "</td>";
 
 	// choix de la langue
-	/*if (strpos($GLOBALS['all_langs'], ',')) {
+	if (strpos($GLOBALS['all_langs'], ',')) {
 		echo "<td align='center'><font face='arial,helvetica,sans-serif' size=2>";
 		$langues = explode(',', $GLOBALS['all_langs']);
 		while (list(,$langue) = each ($langues)) {
@@ -1535,7 +1535,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo " <a href='". $lien->getUrl() ."'><font color='#ffffff'>$langue</font></a>";
 		}
 		echo "</font></td>";
-	}*/
+	}
 
 	// choix de la couleur
 	echo "<td align='right'>";
