@@ -407,12 +407,12 @@ function typo_fr($letexte) {
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
 	$cherche2 = array(
-		'/--/',
+		'/([^-\n]|^)--([^-]|$)/',
 		'/(http|https|ftp|mailto)~:/',
 		'/~/'
 	);
 	$remplace2 = array(
-		'&mdash;',
+		'\1&mdash;\2',
 		'\1:',
 		'&nbsp;'
 	);
@@ -436,11 +436,11 @@ function typo_en($letexte) {
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
 
 	$cherche2 = array(
-		'/--/',
+		'/([^-\n]|^)--([^-]|$)/',
 		'/~/'
 	);
 	$remplace2 = array(
-		'&mdash;',
+		'\1&mdash;\2',
 		'&nbsp;'
 	);
 
@@ -859,7 +859,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		   est plus rapide que ereg_replace), donc laissons les deux branches cohabiter, ca
 		   permet de gagner un peu de temps chez les hergeurs nazes */
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "@@SPIP_ligne_horizontale@@", $letexte);
-		$letexte = ereg_replace("\n-- *", "\n<br />&mdash&nbsp;",$letexte);
+		$letexte = ereg_replace("\n-- *", "\n<br />&mdash;&nbsp;",$letexte);
 		$letexte = ereg_replace("\n- *", "\n<br />$puce&nbsp;",$letexte);
 		$letexte = ereg_replace("\n_ +", "\n<br />",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}(<br[[:space:]]*\/?".">)?", "<p>", $letexte);
