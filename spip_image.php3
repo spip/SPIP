@@ -180,18 +180,25 @@ if (!$image_name AND ereg("^ecrire/upload/...", $image)) {
 	$effacer_si_ok = true;
 }
 
-
+//
+// ajouter un document
+//
 if ($ajout_doc == 'oui') {
 	$ok = ajout_doc($image_name, $image, $fichier, $mode, $id_document);
 	if ($ok AND $effacer_si_ok) @unlink($image);
 }
 
 
+//
+// ajouter un logo
+//
 if ($ajout_logo == "oui") {
 	ajout_image($image, $logo);
 }
 
-
+//
+// supprimer un logo
+//
 if ($image_supp) {
 	// Securite
 	if (strstr($image_supp, "..")) {
@@ -203,7 +210,9 @@ if ($image_supp) {
 	@unlink("IMG/$image_supp");
 }
 
-
+//
+// supprimer un doc
+//
 if ($doc_supp) {
 	// Securite
 	if (!verifier_action_auteur("supp_doc $doc_supp", $hash, $hash_id_auteur)) {
@@ -219,7 +228,6 @@ if ($doc_supp) {
 		unlink($fichier);
 	}
 }
-
 
 @header ("Location: $redirect_url");
 
