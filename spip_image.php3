@@ -78,7 +78,7 @@ function tester_vignette ($test_vignette) {
 	}
 
 	// et maintenant envoyer la vignette de tests
-	if (ereg("^(gd1|gd2|imagick|convert)$", $test_vignette)) {
+	if (ereg("^(gd1|gd2|imagick|convert|netpbm)$", $test_vignette)) {
 		include_ecrire('inc_logos.php3');
 		$taille_preview = lire_meta("taille_preview");
 		if ($taille_preview < 10) $taille_preview = 120;

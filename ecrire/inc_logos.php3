@@ -194,7 +194,7 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 }
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $process='AUTO', $force=false) {
-	global $convert_command;
+	global $convert_command, $djpeg_command, $cjpeg_command, $pnmscale_command;
 
 	// ordre de preference des formats graphiques pour creer les vignettes
 	// le premier format disponible, selon la methode demandee, est utilise
@@ -257,7 +257,14 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 			imagick_write($handle, $vignette);
 			if (!@file_exists($vignette)) return;	// echec imagick
 		}
-		else
+		if ($process == "netpbm") {
+			if ($format == "jpg") {
+				$vignette = $destination.".".$format;
+				exec("$djpeg_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
+				if (!@file_exists($vignette))
+					return;	// echec commande
+			}
+		}
 		// gd ou gd2
 		if ($process == 'gd1' OR $process == 'gd2') {
 
