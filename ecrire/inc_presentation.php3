@@ -606,7 +606,7 @@ function bonhomme_statut($row) {
 			$image = "<img src='img_pack/admin-12.gif' alt='' title='"._T('titre_image_administrateur')."' border='0'>";
 			break;
 		case "1comite":
-			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !$row['pass'] AND !$row['login']))
+			if ($connect_statut == '0minirezo' AND ($row['source'] == 'spip' AND !($row['pass'] AND $row['login'])))
 				$image = "<img src='img_pack/visit-12.gif' alt='' title='"._T('titre_image_redacteur')."' border='0'>";
 			else
 				$image = "<img src='img_pack/redac-12.gif' alt='' title='"._T('titre_image_redacteur_02')."' border='0'>";
