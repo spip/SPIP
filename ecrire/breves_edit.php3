@@ -180,9 +180,9 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 		echo "<SELECT NAME='statut' SIZE=1 CLASS='fondl'>\n";
 		
-		echo "<OPTION".mySel("prop",$statut).">"._T('item_breve_proposee')."\n";		
-		echo "<OPTION".mySel("refuse",$statut).">"._T('item_breve_refusee')."\n";		
-		echo "<OPTION".mySel("publie",$statut).">"._T('item_breve_validee')."\n";		
+		echo "<OPTION".mySel("prop",$statut)." style='background-color: white'>"._T('item_breve_proposee')."\n";		
+		echo "<OPTION".mySel("refuse",$statut)." style='background:url(img_pack/rayures-sup.gif)'>"._T('item_breve_refusee')."\n";		
+		echo "<OPTION".mySel("publie",$statut)." style='background-color: #B4E8C5'>"._T('item_breve_validee')."\n";		
 
 		echo "</SELECT>".aide ("brevesstatut")."<P>\n";
 		fin_cadre_relief();
