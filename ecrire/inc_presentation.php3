@@ -543,7 +543,7 @@ function afficher_liste_fin_tableau() {
 }
 
 
-function puce_statut_article($id_article, $statut) {
+function puce_statut_article($id, $statut) {
 	global $spip_lang_left, $dir_lang, $connect_statut, $options, $browser_name;
 	
 	switch ($statut) {
@@ -584,71 +584,107 @@ function puce_statut_article($id_article, $statut) {
 			  "verte" => _T('texte_statut_publie'),
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
-		$inser_puce = "<div class='puce_article' id='statut$id_article'$dir_lang>"
-			. "<div class='puce_article_fixe' onmouseover=\"montrer('statutdecal$id_article');\">" .
-		  http_img_pack("$puce", "", "id='imgstatut$id_article' border='0' style='margin: 1px;'") ."</div>"
-			. "<div class='puce_article_popup' id='statutdecal$id_article' onmouseout=\"cacher('statutdecal$id_article');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
-			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 0, 'prepa');\">" .
-		  http_img_pack("puce-blanche.gif", "", "title='$titles[blanche]'"). "</a>"
-			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 1, 'prop');\">" .
-		  http_img_pack("puce-orange.gif", "", "title='$titles[orange]'") . "</a>"
-			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 2, 'publie');\">" .
-		  http_img_pack("puce-verte.gif", "", "title='$titles[verte]'")."</a>"
-			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 3, 'refuse');\">" .
-		  http_img_pack("puce-rouge.gif", "", "title='$titles[rouge]'"). "</a>"
-			. "<a onmouseover=\"montrer('statutdecal$id_article');\" href=\"javascript:selec_statut_art($id_article, 4, 'poubelle');\">" .
-		  http_img_pack("puce-poubelle.gif", "", "title='$titles[poubelle]'"). "</a>"
+	  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
+		$inser_puce = "<div class='puce_article' id='statut$id'$dir_lang>"
+			. "<div class='puce_article_fixe' $action>" .
+		  http_img_pack("$puce", "", "id='imgstatutarticle$id' border='0' style='margin: 1px;'") ."</div>"
+			. "<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
+		  . http_href_img("javascript:selec_statut($id, 'article', -1,'" . _DIR_IMG_PACK . "puce-blanche.gif', 'prepa');",
+				  "puce-blanche.gif", 
+				  "title=\"$titles[blanche]\"",
+				  "",'','',
+				  $action)
+		  . http_href_img("javascript:selec_statut($id, 'article', -12,'" . _DIR_IMG_PACK . "puce-orange.gif', 'prop');",
+				  "puce-orange.gif", 
+				  "title=\"$titles[orange]\"",
+				  "",'','',
+				  $action)
+		  . http_href_img("javascript:selec_statut($id, 'article', -23,'" . _DIR_IMG_PACK . "puce-verte.gif', 'publie');",
+				  "puce-verte.gif", 
+				  "title=\"$titles[verte]\"",
+				  "",'','',
+				  $action)
+		  . http_href_img("javascript:selec_statut($id, 'article', -34,'" . _DIR_IMG_PACK . "puce-rouge.gif', 'refuse');",
+				  "puce-rouge.gif", 
+				  "title=\"$titles[rouge]\"",
+				  "",'','',
+				  $action)
+		  . http_href_img("javascript:selec_statut($id, 'article', -45,'" . _DIR_IMG_PACK . "puce-poubelle.gif', 'poubelle');",
+				  "puce-poubelle.gif", 
+				  "title=\"$titles[poubelle]\"",
+				  "",'','',
+				  $action)
 			. "</div></div>";
 	} else {
-		$inser_puce = http_img_pack("$puce", "", "id='imgstatut$id_article' border='0' style='margin: 1px;'");
+		$inser_puce = http_img_pack("$puce", "", "id='imgstatutarticle$id' border='0' style='margin: 1px;'");
 	}
 	return $inser_puce;
 }
 
-function puce_statut_breve($id_breve, $statut) {
-	global $spip_lang_left, $dir_lang, $connect_statut, $options, $browser_name;
-	
-			switch ($statut) {
+function puce_statut_breve($id, $statut, $type) {
+	global $spip_lang_left, $dir_lang, $connect_statut, $options;
+
+	$puces = array(
+		       0 => 'puce-orange-breve.gif',
+		       1 => 'puce-verte-breve.gif',
+		       2 => 'puce-rouge-breve.gif',
+		       3 => 'puce-blanche-breve.gif');
+
+	switch ($statut) {
 			case 'prop':
 				$clip = 0;
-				$puce = "orange";
+				$puce = $puces[0];
 				$title = _T('titre_breve_proposee');
 				break;
 			case 'publie':
 				$clip = 1;
-				$puce = "verte";
+				$puce = $puces[1];
 				$title = _T('titre_breve_publiee');
 				break;
 			case 'refuse':
 				$clip = 2;
-				$puce = "rouge";
+				$puce = $puces[2];
 				$title = _T('titre_breve_refusee');
 				break;
-			}
+			default:
+				$clip = 0;
+				$puce = $puces[3];
+				$title = '';
+	}
 
+	$type1 = "statut$type$id"; 
+	$inser_puce = http_img_pack($puce, "", "id='img$type1' border='0' style='margin: 1px;'");
 
-	$puce = "puce-$puce-breve.gif";
+	if (!($connect_statut == '0minirezo' AND $options == 'avancees'))
+		return $inser_puce;
 	
-	if ($connect_statut == '0minirezo' AND $options == 'avancees') {
-	
+	$type2 = "statutdecal$type$id";
+	$action = "onmouseover=\"montrer('$type2');\"\n";
+
 	  // les versions de MSIE ne font pas toutes pareil sur alt/title
 	  // la combinaison suivante semble ok pour tout le monde.
 
-		$inser_puce = "<div class='puce_breve' id='statutbreve$id_breve'$dir_lang>"
-			. "<div class='puce_breve_fixe' onmouseover=\"montrer('statutdecalbreve$id_breve');\">" .
-		  http_img_pack("$puce", "", "id='imgstatutbreve$id_breve' border='0' style='margin: 1px;'"). "</div>"
-			. "<div class='puce_breve_popup' id='statutdecalbreve$id_breve' onmouseout=\"cacher('statutdecalbreve$id_breve');\" style=' margin-left: -".((9*$clip)+1)."px;'>"
-			. "<a onmouseover=\"montrer('statutdecalbreve$id_breve');\" href=\"javascript:selec_statut_breve($id_breve, 0, 'prop');\">" .
-		  http_img_pack("puce-orange-breve.gif", "", "title=\""._T('texte_statut_propose_evaluation')."\"") . "</a>"
-			. "<a onmouseover=\"montrer('statutdecalbreve$id_breve');\" href=\"javascript:selec_statut_breve($id_breve, 1, 'publie');\">" .
-		  http_img_pack("puce-verte-breve.gif", "", "title=\""._T('texte_statut_publie')."\""). "</a>"
-			. "<a onmouseover=\"montrer('statutdecalbreve$id_breve');\" href=\"javascript:selec_statut_breve($id_breve, 2, 'refuse');\">" .
-		  http_img_pack("puce-rouge-breve.gif", "", "title=\""._T('texte_statut_refuse')."\""). "</a>"
-			. "</div></div>";
-	} else {
-		$inser_puce = http_img_pack("$puce", "", "id='imgstatut$id_article' border='0' style='margin: 1px;'");
-	}
-	return $inser_puce;
+	return	"<div class='puce_breve' id='$type1'$dir_lang>"
+		. "<div class='puce_breve_fixe' $action>"
+		. $inser_puce
+		. "</div>"
+		. "<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>"
+		. http_href_img("javascript:selec_statut($id, '$type', -1, '" . _DIR_IMG_PACK . $puces[0] . "', 'prop');",
+			$puces[0],
+			"title=\""._T('texte_statut_propose_evaluation')."\"",
+			'','','',
+			$action)
+		. http_href_img("javascript:selec_statut($id, '$type', -10, '" . _DIR_IMG_PACK .$puces[1] . "', 'publie');",
+		 	$puces[1],
+			"title=\""._T('texte_statut_publie')."\"",
+			'','','',
+			$action)
+		. http_href_img("javascript:selec_statut($id, '$type', -19, '" . _DIR_IMG_PACK .$puces[2] . "', 'refuse');",
+			$puces[2],
+			"title=\""._T('texte_statut_refuse')."\"",
+			'','','',
+			$action)
+		.  "</div></div>";
 }
 
 
@@ -888,8 +924,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($lang = $row['lang']) changer_typo($lang);
 			$id_rubrique = $row['id_rubrique'];
 			
-			$vals[] = puce_statut_breve($id_breve, $statut);
-			
+			$vals[] = puce_statut_breve($id_breve, $statut, 'breve');
 
 			$s = "<div>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve'$dir_lang style=\"display:block;\">";
@@ -1561,8 +1596,13 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
 	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
-	echo " onLoad=\"setActiveStyleSheet('invisible'); verifForm();$onLoad\"";
-	echo ">";
+	echo " onLoad=\"setActiveStyleSheet('invisible'); ";
+
+	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
+	// meme principe que le behavior win_width.htc pour MSIE
+	if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7)
+		echo "verifForm();";
+	echo "$onLoad\">";
 }
 
 function debut_javascript($admin, $stat)
@@ -1573,282 +1613,20 @@ function debut_javascript($admin, $stat)
 	// envoi le fichier JS de config si browser ok.
 	echo $GLOBALS['browser_layer'];
 ?>
-<script type='text/javascript'><!--
-	var init_gauche = true;
+<script type='text/javascript'<!--
+	var admin = <?php echo ($admin ? 1 : 0) ?>;
+	var stat = <?php echo ($stat ? 1 : 0) ?>;
+	var largeur_icone = <?php echo largeur_icone_bandeau_principal(_T('icone_a_suivre')); ?>;
+	var  bug_offsetwidth = <?php 
+// uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse!
+	  echo ((($spip_lang_left == "left") &&
+		 (($browser_name != "MSIE") ||
+		  ($browser_version >= 6))) ? 1 : 0) ?> ;
 
-	function changestyle(id_couche, element, style) {
-
-		<?php if ($admin) { ?>
-			hide_obj("bandeaudocuments");
-			hide_obj("bandeauredacteurs");
-			hide_obj("bandeauauteurs");
-			<?php if ($stat) { ?> hide_obj("bandeausuivi"); <?php } ?>
-			hide_obj("bandeauadministration"); 
-		<?php } ?>
-		
-		hide_obj("bandeaudeconnecter");
-		hide_obj("bandeautoutsite");
-		hide_obj("bandeaunavrapide");
-		hide_obj("bandeauagenda");
-		hide_obj("bandeaumessagerie");
-		hide_obj("bandeausynchro");
-		hide_obj("bandeaurecherche");
-		hide_obj("bandeauinfoperso");
-		hide_obj("bandeaudisplay");
-		hide_obj("bandeauecran");
-		hide_obj("bandeauinterface");
-		
-		
-		if (init_gauche) {
-		<?php if ($admin) { ?>
-			decalerCouche('bandeaudocuments');
-			decalerCouche('bandeauredacteurs');
-			decalerCouche('bandeauauteurs');
-			<?php if ($stat) ?> decalerCouche('bandeausuivi');
-			decalerCouche('bandeauadministration');
-		<?php } ?>
-			init_gauche = false;
-		}
-		
-		
-		if (!(layer = findObj(id_couche))) return;
-	
-		layer.style[element] = style;
-	}
-	
-	function decalerCouche(id_couche) {
-		if (!(layer = findObj(id_couche))) return;
-				
-		<?php 
-		    if (($spip_lang_left == "left") &&
-					   // bug offsetwidth
-			($browser_name != "MSIE" OR $browser_version >= 6))
-		
-		      {  /* uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse! */  ?>
-		
-		if ( parseInt(layer.style.<?php echo $spip_lang_left; ?>) > 0) {
-
-
-			gauche = parseInt(layer.style.<?php echo $spip_lang_left; ?>) - Math.floor( layer.offsetWidth / 2 ) + Math.floor(<?php echo largeur_icone_bandeau_principal(_T('icone_a_suivre')); ?> / 2);
-			if (gauche < 0) gauche = 0;
-
-			layer.style.<?php echo $spip_lang_left; ?> = gauche+"px";
-		}
-		
-		<?php } ?>
-		
-	}	
-
-	var accepter_change_statut;
-	
-	function selec_statut_art(id_article, clip, statut) {
-
-		if (!accepter_change_statut) {
-			accepter_change_statut = confirm ('<?php 
-				include_ecrire("inc_charsets.php3");
-				echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>');
-		}
-
-		if (accepter_change_statut) {
-			decal = -1 * ((clip*11) + 1);
-			changestyle ('statutdecal'+id_article, 'marginLeft', decal+'px');
-			cacher ('statutdecal'+id_article);
-	
-			if (clip == 0) puce = 'blanche';
-			else if (clip == 1) puce = 'orange';
-			else if (clip == 2) puce = 'verte';
-			else if (clip == 3) puce = 'rouge';
-			else if (clip == 4) puce = 'poubelle';
-	
-			findObj('imgstatut'+id_article).src= '<?php echo _DIR_IMG_PACK; ?>puce-'+puce +'.gif';
-			
-			frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_article&id_article='+id_article+'&statut='+statut;
-		}
-	}
-	
-	function selec_statut_breve(id_breve, clip, statut) {
-	
-		if (!accepter_change_statut) {
-			accepter_change_statut = confirm ('<?php 
-				include_ecrire("inc_charsets.php3");
-				echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>');
-		}
-
-		if (accepter_change_statut) {
-			decal = -1 * ((clip*9) + 1);
-			changestyle ('statutdecalbreve'+id_breve, 'marginLeft', decal+'px');
-			cacher ('statutdecalbreve'+id_breve);
-	
-			if (clip == 0) puce = 'orange';
-			else if (clip == 1) puce = 'verte';
-			else if (clip == 2) puce = 'rouge';
-	
-			findObj('imgstatutbreve'+id_breve).src= '<?php echo _DIR_IMG_PACK; ?>puce-'+puce +'-breve.gif';
-			
-			frames['iframe_action'].location.href = 'iframe_action.php3?action=statut_breve&id_breve='+id_breve+'&statut='+statut;
-		}
-	}
-	
-	function changeclass(objet, myClass)
-	{
-			objet.className = myClass;
-	}
-	function changesurvol(iddiv, myClass)
-	{
-			document.getElementById(iddiv).className = myClass;
-	}
-	function setActiveStyleSheet(title) {
-	   var i, a, main;
-	   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-		 if(a.getAttribute("rel").indexOf("style") != -1
-			&& a.getAttribute("title")) {
-		   a.disabled = true;
-		   if(a.getAttribute("title") == title) a.disabled = false;
-		 }
-	   }
-	}
-	
-	function setvisibility (objet, statut) {
-		element = findObj(objet);
-		if (element.style.visibility != statut) element.style.visibility = statut;
-	}
-	
-	function montrer(objet) {
-		setvisibility(objet, 'visible');
-	}
-	function cacher(objet) {
-		setvisibility(objet, 'hidden');
-	}
-	
-	
-	
-	function getHeight(obj) {
-		if (obj == "window") {
-			return hauteur_fenetre();
-		}
-		else
-		{
-			obj = document.getElementById(obj);
-			if (obj.offsetHeight) return obj.offsetHeight;
-		}
-	}
-	function hauteur_fenetre() {
-		var myWidth = 0, myHeight = 0;
-		if( typeof( window.innerWidth ) == 'number' ) {
-			//Non-IE
-			myHeight = window.innerHeight;
-		} else {
-			if( document.documentElement &&
-				( document.documentElement.clientWidth || document.documentElement.clientHeight ) ) {
-				//IE 6+ in 'standards compliant mode'
-				myHeight = document.documentElement.clientHeight;
-			} else {
-				if( document.body && ( document.body.clientWidth || document.body.clientHeight ) ) {
-					//IE 4 compatible
-					myHeight = document.body.clientHeight;
-				}
-			}
-		}
-		return myHeight;
-	}
-
-	
-	function hauteurFrame(nbCol) {
-		hauteur = hauteur_fenetre() - 40;
-		hauteur = hauteur - getHeight('haut-page');
-		
-		if (findObj('brouteur_hierarchie')) hauteur = hauteur - getHeight('brouteur_hierarchie');
-			
-		for (i=0; i<nbCol; i++) {
-			source = document.getElementById("iframe" + i);
-			source.style.height = hauteur + 'px';
-		}
-	}
-
-	function hauteurTextarea() {
-		hauteur = hauteur_fenetre() - 80;
-		
-		source = document.getElementById("text_area");
-		source.style.height = hauteur + 'px';
-	}
-
-	function changeVisible(input, id, select, nonselect) {
-		if (input) {
-			element = findObj(id);
-			if (element.style.display != select)  element.style.display = select;
-		} else {
-			element = findObj(id);
-			if (element.style.display != nonselect)  element.style.display = nonselect;
-		}
-		
-	}
-	
-	
-
-	
-	
-	function verifForm() {
-		/* if (pluginlist.indexOf("SVG")!=-1)
-			document.cookie = "spip_svg_plugin=oui";
-		else
-			document.cookie = "spip_svg_plugin=non";
-		*/
-	
-		//convert2math();
-	<?php
-		// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
-		// meme principe que le behavior win_width.htc pour MSIE
-		if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7) {
-	?>
-		
-	
-		retrait = 16;
-		var obj=document.getElementsByTagName("input");
-		for(i=0;i<obj.length;i++) {
-			if(obj[i].className=="forml" || obj[i].className=="formo") {
-				element = obj[i];
-				if (element.offsetWidth) {
-					obj[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
-				} else {
-					obj[i]["nouvelle-largeur"] = "95%";
-				}
-			}
-		}
-		
-		var objx=document.getElementsByTagName("textarea");
-		for(i=0;i<objx.length;i++) {
-			if(objx[i].className=="forml" || objx[i].className=="formo") {
-				element = objx[i];
-				if (element.offsetWidth) {
-					objx[i]["nouvelle-largeur"] = (element.offsetWidth - retrait) + "px";
-				} else {
-					objx[i]["nouvelle-largeur"] = "95%";
-				}
-			}
-		}
-		
-		// Appliquer les modifs apres les calculs, sinon des decalages peuvent apparaitre
-		for(i=0;i<obj.length;i++) {
-			if (obj[i]["nouvelle-largeur"]) obj[i].style.width = obj[i]["nouvelle-largeur"];
-		}
-	
-		for(i=0;i<objx.length;i++) {
-			if (objx[i]["nouvelle-largeur"]) objx[i].style.width = objx[i]["nouvelle-largeur"];
-		}
-	
-		
-		
-	<?php
-		}
-	?>
-	}
-
-	
-	var antifocus=false; // effacement titre quand new=oui
-	
+	var confirm_changer_statut = '<?php include_ecrire("inc_charsets.php3"); echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>';
 //--></script>
-<?php
-    }
+<script type='text/javascript' src='presentation.js'></script>
+	<?php }
 
 // Fonctions onglets
 
@@ -3370,7 +3148,8 @@ function http_style_background($img, $att='')
     ($att ? (' ' . $att) : '') . ";'";
 }
 
-function http_href_img($href, $img, $att, $title='', $style='', $class='') {
- return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class);
+function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt='') {
+  return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
 }
+
 ?>

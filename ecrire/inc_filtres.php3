@@ -103,13 +103,14 @@ function liens_ouvrants ($texte) {
 // Fabrique une balise A, avec un href conforme au validateur W3C
 // attention au cas ou la href est du Javascript avec des "'"
 
-function http_href($href, $clic, $title='', $style='', $class='') {
+function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 	return '<a href="' .
 		str_replace('&', '&amp;', $href) .
 		'"' .
 		(!$style ? '' : (" style=\"" . $style . "\"")) .
 		(!$title ? '' : (" title=\"" . supprimer_tags($title)."\"")) .
 		(!$class ? '' : (" class=\"" . $class . "\"")) .
+		($evt ? " $evt" : '') .
 		'>' .
 		$clic .
 		'</a>';
