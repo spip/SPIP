@@ -101,8 +101,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				$keywords = "";
 			}
 						
-			if ((($kw_referer_host == "Google" &&
-				ereg('[io]e=([-a-z0-9]+)', strtolower($query), $regs))
+			if ((  ($kw_referer_host == "Google")
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
 				)) {
