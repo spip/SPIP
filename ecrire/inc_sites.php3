@@ -149,28 +149,28 @@ function analyser_site($url) {
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	include_ecrire("inc_filtres.php3");
 
-	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
-
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result))
-		$la_query=$row["url_syndic"];
-	else
-		return;
-
+		$url_syndic = $row["url_syndic"];
+	else return;
 	$moderation = $row['moderation'];
 	if ($moderation == 'oui')
 		$moderation = 'dispo';	// a valider
 	else
 		$moderation = 'publie';	// en ligne sans validation
 
-	$le_retour = transcoder_page(recuperer_page($la_query));
+	// Section critique : n'autoriser qu'une seule syndication simultanee pour un site donne
+	if (!spip_get_lock($url_syndic)) return;
 
-	if (strlen($le_retour)>10){
+	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
-		$i=0;
-		$item="";
-		while(ereg("<item[>[:space:]]",$le_retour,$regs)){
+	$le_retour = transcoder_page(recuperer_page($url_syndic));
+	$erreur = "";
+
+	if ($le_retour) {
+		$i = 0;
+		while (ereg("<item[>[:space:]]",$le_retour,$regs)) {
 			$debut_item=strpos($le_retour,$regs[0]);
 			$fin_item=strpos($le_retour,"</item>")+strlen("</item>");
 			$item[$i]=substr($le_retour,$debut_item,$fin_item-$debut_item);
@@ -180,8 +180,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			$le_retour=$debut_texte.$fin_texte;
 			$i++;
 		}
-		if (count($item)>1){
-			for($i = 0 ; $i < count($item) ; $i++){
+		if (is_array($item)) {
+			for ($i = 0 ; $i < count($item) ; $i++) {
 				ereg("<title>(.*)</title>",$item[$i],$match);
 				$le_titre=filtrer_entites(addslashes($match[1]));
 				$match="";
@@ -211,11 +211,10 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
 		}
 		// syndication javascript : y a-t-il quelqu'un qui se sert de ce truc ??
+		// la question est posee
 		else if (ereg("document\.write", $le_retour)) {
-
+			$i = 0;
 			while ($i < 50 AND eregi("<a[[:space:]]+href[[:space:]]*=[[:space:]]*\"?([^\">]+)\"?[^>]*>(.*)",$le_retour,$reg)){ //"
-				$i++;
-
 				$le_lien = addslashes(stripslashes($reg[1]));
 				$la_suite = $reg[2];
 
@@ -229,23 +228,27 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				$le_retour = substr($la_suite, $pos_fin + 4, strlen($le_retour));
 
 				echo "<li> $le_titre / $le_lien";
-				
 
 				if (strlen($la_date) < 4) $la_date=date("Y-m-j H:i:00");
-												
+
 				$query_deja="SELECT * FROM spip_syndic_articles WHERE url=\"$le_lien\" AND id_syndic=$now_id_syndic";
 				$result_deja=spip_query($query_deja);
 				if (spip_num_rows($result_deja)==0){
-					$query_syndic="INSERT INTO spip_syndic_articles SET id_syndic=\"$now_id_syndic\", titre=\"$le_titre\", url=\"$le_lien\", date=\"$la_date\", lesauteurs=\"$les_auteurs\", statut='$moderation'";
+					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
+						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', '$la_date', '$les_auteurs', '$moderation', '$la_description')";
 					$result_syndic=spip_query($query_syndic);
 				}
+				$i++;
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 		}
-		else
-			return _T('avis_echec_syndication_01');
-	} else
-		return _T('avis_echec_syndication_02');
+		else $erreur = _T('avis_echec_syndication_01');
+	}
+	else $erreur = _T('avis_echec_syndication_02');
+
+	// Ne pas oublier de liberer le verrou
+	spip_release_lock($url_syndic);
+	return $erreur;
 }
 
 

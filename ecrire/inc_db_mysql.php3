@@ -118,6 +118,24 @@ function spip_insert_id() {
 	return mysql_insert_id();
 }
 
+// Poser un verrou local a un SPIP donne
+function spip_get_lock($nom, $timeout = 0) {
+	global $spip_mysql_db, $table_prefix;
+	if ($table_prefix) $nom = "$table_prefix:$nom";
+	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
+	$nom = addslashes($nom);
+	list($lock_ok) = spip_fetch_array(spip_query("SELECT GET_LOCK('$nom', $timeout)"));
+	return $lock_ok;
+}
+
+function spip_release_lock($nom) {
+	global $spip_mysql_db, $table_prefix;
+	if ($table_prefix) $nom = "$table_prefix:$nom";
+	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
+
+	$nom = addslashes($nom);
+	spip_query("SELECT RELEASE_LOCK('$nom')");
+}
 
 ?>
