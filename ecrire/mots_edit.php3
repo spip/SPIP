@@ -113,13 +113,13 @@ if ($arton_ok) $artoff_ok = get_image($artoff);
 
 if ($connect_statut == '0minirezo' AND ($options == 'avancees' OR $arton_ok)) {
 
-	debut_boite_info();
+	debut_cadre_relief();
 	afficher_boite_logo($arton, "LOGO DU MOT-CL&Eacute;".aide ("breveslogo"));
 	if (($options == 'avancees' AND $arton_ok) OR $artoff_ok) {
 		echo "<P>";
 		afficher_boite_logo($artoff, "LOGO POUR SURVOL");
 	}
-	fin_boite_info();
+	fin_cadre_relief();
 }
 
 

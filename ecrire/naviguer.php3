@@ -120,7 +120,7 @@ function afficher_jour($jour){
 //
 
 if ($modifier_rubrique == "oui") {
-	calculer_rubriques_publiques();
+	calculer_rubriques();
 }
 
 if ($titre) {
@@ -268,7 +268,7 @@ if ($rubon_ok) $ruboff_ok = get_image($ruboff);
 
 if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'avancees' OR $rubon_ok) AND tester_upload()) {
 
-	debut_boite_info();
+	debut_cadre_relief();
 
 	afficher_boite_logo($rubon, "LOGO DE LA RUBRIQUE ".aide ("rublogo"));
 
@@ -277,7 +277,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'a
 		afficher_boite_logo($ruboff, "LOGO POUR SURVOL");
 	}
 
-	fin_boite_info();
+	fin_cadre_relief();
 }
 
 

@@ -272,13 +272,13 @@ $rubon_ok = get_image($rubon);
 if ($rubon_ok) $ruboff_ok = get_image($ruboff);
 
 if ($flag_administrable AND ($options == 'avancees' OR $rubon_ok)) {
-	debut_boite_info();
+	debut_cadre_relief();
 	afficher_boite_logo($rubon, "LOGO DE CE SITE ".aide ("rublogo"));
 	if (($options == 'avancees' AND $rubon_ok) OR $ruboff_ok) {
 		echo "<P>";
 		afficher_boite_logo($ruboff, "LOGO POUR SURVOL");
 	}
-	fin_boite_info();
+	fin_cadre_relief();
 }
 
 
