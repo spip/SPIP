@@ -54,7 +54,13 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 			if ($date_breves > $date_rubrique) $date_rubrique = $date_breves;
 		}
 
-		// recuperer l'article le plus recent syndique dans un site reference dans cette rubrique (ouf)
+		// site reference le plus recent
+		if ($row = spip_fetch_array(spip_query("SELECT MAX(date) AS date_h FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut='publie'"))) {
+			$date_sites = $row['date_h'];
+			if ($date_sites > $date_rubrique) $date_rubrique = $date_sites;
+		}
+
+/*		// recuperer l'article le plus recent syndique dans un site reference dans cette rubrique (ouf)
 		$result = spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique=$id_rubrique AND statut='publie'");
 		$syndic = '';
 		while ($row = spip_fetch_array($result))
@@ -64,6 +70,7 @@ function calculer_dates_rubriques($id_rubrique = 0, $date_parent = "0000-00-00")
 			$date_syndic_article = $row['date_h'];
 			if ($date_syndic_article > $date_rubrique) $date_rubrique = $date_syndic_article;
 		}
+*/
 
 		// articles post-dates
 		$post_dates = lire_meta("post_dates");
