@@ -419,7 +419,7 @@ if (count($log)>0){
 		echo "<br>"._T('info_moyenne').round($moyenne);
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
-		echo _T('info_aujourdhui').$visites_today;
+		echo _T('info_aujourdhui').' '.$visites_today;
 		if ($val_prec > 0) echo "<br>"._T('info_hier').$val_prec;
 		if ($id_article) echo "<br>"._T('info_popularite_5').$val_popularite;
 

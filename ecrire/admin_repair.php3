@@ -77,7 +77,7 @@ if ($ok) {
 
 	debut_cadre_relief();
 	if (! verifier_base())
-		echo "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql'). spip_sql_errno().": ".spip_sql_error() ."</tt></b></font><br><br>\n";
+		echo "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br><br>\n";
 	fin_cadre_relief();
 	echo "<br>";
 

@@ -139,7 +139,7 @@ class _ObjectFactory extends _Abstract {
 			return $GLOBALS[$g]->slow_vars[$v];
 		}
 		else {
-			$this->abstract_error(_T('avis_champ_incorrect_type_objet', array('name' => $name)).$this->object_class);
+			$this->abstract_error(_T('avis_champ_incorrect_type_objet', array('name' => $name, 'type' => $this->object_class)));
 		}
 	}
 

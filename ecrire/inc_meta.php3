@@ -79,7 +79,7 @@ function lire_meta_maj($nom) {
 	} else {
 		global $connect_statut;
 		if ($connect_statut == '0minirezo')
-			echo "<h4 font color=red>"._T('texte_inc_meta_1')."<a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')."</a>"._T('texte_inc_meta_3')."</h4>\n";
+			echo "<h4 font color=red>"._T('texte_inc_meta_1')." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')."</a> "._T('texte_inc_meta_3')."</h4>\n";
 	}
 }
 
