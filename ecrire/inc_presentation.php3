@@ -1303,11 +1303,10 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 
 	if ($danger) echo "<div class='danger'>";
 	if ($spip_display != 1) {
-		// <div> intercalaire pour konqueror / raffari
-		echo "<a href='$lien' class='cellule-h'><div><table cellpadding='0' valign='middle'><tr>\n";
-		echo "<td><a href='$lien'><div class='cellule-h-icone'><img style='background: url(\"img_pack/$fond\")' src='img_pack/$fonction' alt=''></div></a></td>\n";
+		echo "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n";
+		echo "<td><a href='$lien'><div class='cellule-h-icone'><img class='i' style='background: url(\"img_pack/$fond\")' src='img_pack/$fonction' alt=''></div></a></td>\n";
 		echo "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
-		echo "</tr></table></div></a>\n";
+		echo "</tr></table></a>\n";
 	}
 	else {
 		echo "<a href='$lien' class='cellule-h-texte'><div>$texte</div></a>\n";
