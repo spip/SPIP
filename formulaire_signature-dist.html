@@ -2,7 +2,7 @@
       action='#SELF#sp[(#HTTP_VARS{id_article})]' >
       <input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF">
       <div class='spip_encadrer' style='color: black; font-size: 80%; font-weight: normal;'>
-	[(#HTTP_VARS{texte}|traiter_raccourcis|interdire_scripts)]
+	[(#HTTP_VARS*{texte}|propre)]
 	<fieldset style='font-size: 110%; font-weight: bold;'>
 	  <legend></legend>
 	  <label>

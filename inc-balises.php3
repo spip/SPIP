@@ -47,7 +47,7 @@ function champs_traitements ($p) {
 		'URL_SITE_SPIP' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SITE' => 'htmlspecialchars(vider_url(%s))',
 		'URL_SYNDIC' => 'htmlspecialchars(vider_url(%s))',
-		'HTTP_VARS' => 'htmlspecialchars(%s)'
+		'HTTP_VARS' => 'entites_html(%s)'
 	);
 	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
@@ -679,8 +679,13 @@ function balise_SELF_dist($p) {
 	return $p;
 }
 
-// reference aux parametres GET & POST
-
+//
+// Reference aux parametres GET & POST (ou params dynamiques)
+//
+// en standard on applique |entites_html, mais attention si
+// vous utilisez [(#HTTP_VARS*{toto})] il *faut* vous assurer vous-memes
+// de la securite anti-php et anti-javascript
+//
 function balise_HTTP_VARS_dist($p) {
 	$nom = param_balise($p);
 	if (!$nom)

@@ -17,7 +17,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres)
 # Pas question de recompiler: ca fait boucler !
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
-function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $debug='') {
+function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $float='', $debug='') {
 	global $var_preview, $use_cache;
 	static $dejafait = false;
 
@@ -99,7 +99,8 @@ function balise_FORMULAIRE_ADMIN_dyn($id_article, $id_breve, $id_rubrique, $id_m
 				'popularite' => intval($popularite),
 				'statistiques' => $statistiques,
 				'visites' => intval($visites),
-				'use_cache' => ($use_cache ? ' *' : '')
+				'use_cache' => ($use_cache ? ' *' : ''),
+				'floatdiv' => $float
 			)
 		);
 }

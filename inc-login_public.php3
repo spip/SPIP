@@ -86,7 +86,8 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 		if ((!$row AND !$GLOBALS['ldap_present']) OR
 		    ($row['statut'] == '5poubelle') OR 
 		    (($row['source'] == 'spip') AND $row['pass'] == '')) {
-			$erreur =  _T('login_identifiant_inconnu', array('login' => $login));
+			$erreur =  _T('login_identifiant_inconnu',
+				array('login' => htmlspecialchars($login)));
  			$row = array();
 			$login = '';
 			@spip_setcookie("spip_admin", "", time() - 3600);
@@ -95,6 +96,10 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 		  unset($row['lang']);
 		}
 	}
+
+	// afficher "erreur de mot de passe" si &var_erreur=pass
+	if ($GLOBALS['var_erreur'] == 'pass')
+		$erreur = _T('login_erreur_pass');
 
 	return array('formulaire_login', 0, 
 		     array_merge(array_map('addslashes', $row),

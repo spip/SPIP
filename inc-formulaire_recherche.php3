@@ -9,9 +9,16 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres)
 }
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien) {
+	include_ecrire('inc_filtres.php3');
+	if (!$recherche_securisee = entites_html($GLOBALS['recherche'])) {
+		$recherche_securisee = _T('info_rechercher');
+	}
+
 	return array('formulaire_recherche', 3600, 
-		     array('lien' => ($lien ? $lien : 'recherche.php3'),
-			   'recherche' => ($GLOBALS['recherche'] ? $GLOBALS['recherche'] : _T('info_rechercher'))));
+		array(
+			'lien' => ($lien ? $lien : 'recherche.php3'),
+			'recherche_securisee' => $recherche_securisee
+		));
 }
 
 ?>
