@@ -1,7 +1,7 @@
 ###########################################################
 # Fichier .htaccess pour les URLs propres ; a installer   #
-# si vous reglez $type_urls='propre'                      #
-# dans ecrire/mes_options.php3 ou dans mes_fonctions.php3 #
+# si vous reglez $type_urls='propres'                     #
+# dans ecrire/mes_options.php3                            #
 # (fichier associe : inc-urls-propres.php3)               #
 ###########################################################
 

@@ -28,7 +28,7 @@ define('_FILE_CONNECT',
 $included_files = array();
 
 function include_local($file) {
-	if ($GLOBALS['included_files'][$file]++) return;
+	if (@$GLOBALS['included_files'][$file]++) return;
 	include($file);
 }
 
@@ -36,19 +36,19 @@ function include_ecrire($file) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$file = _DIR_INCLUDE . $file;
-	if ($GLOBALS['included_files'][$file]++) return;
+	if (@$GLOBALS['included_files'][$file]++) return;
 	include($file);
 }
 
 function include_lang($file) {
 	$file = _DIR_LANG . $file;
-	if ($GLOBALS['included_files'][$file]++) return;
+	if (@$GLOBALS['included_files'][$file]++) return;
 	include($file);
 }
 
 function include_plug($file) {
 	$file = _DIR_RESTREINT . $file;
-	if ($GLOBALS['included_files'][$file]++) return;
+	if (@$GLOBALS['included_files'][$file]++) return;
 	if (file_exists($file)) include($file);
 }
 
@@ -1094,6 +1094,8 @@ function redirige_par_entete($url) {
 }
 
 function debut_entete($title, $entete='') {
+	global $flag_preserver;
+
 	if (!$entete) {
 		if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 		$entete = "Content-Type: text/html; charset=$charset";

@@ -427,12 +427,25 @@ function effacer_logo($nom) {
 // Tester nos capacites
 function tester_vignette ($test_vignette) {
 	global $pnmscale_command;
+
 	// verifier les formats acceptes par GD
 	if ($test_vignette == "gd1") {
 		// Si GD est installe et php >= 4.0.2
 		if (function_exists('imagetypes')) {
-			if (imagetypes() & IMG_GIF)
+
+			if (imagetypes() & IMG_GIF & 0) {
 				$gd_formats[] = "gif";
+			} else {
+				# Attention GD sait lire le gif mais pas forcement l'ecrire
+				if (function_exists('ImageCreateFromGIF')) {
+					$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
+					if ($srcImage) {
+						$gd_formats_read_gif = ",gif";
+						ImageDestroy( $srcImage );
+					}
+				}
+			}
+
 			if (imagetypes() & IMG_JPG)
 				$gd_formats[] = "jpg";
 			if (imagetypes() & IMG_PNG)
@@ -469,6 +482,7 @@ function tester_vignette ($test_vignette) {
 		}
 
 		if ($gd_formats) $gd_formats = join(",", $gd_formats);
+		ecrire_meta("gd_formats_read", $gd_formats.$gd_formats_read_gif);
 		ecrire_meta("gd_formats", $gd_formats);
 		ecrire_metas();
 	}

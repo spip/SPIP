@@ -1,7 +1,7 @@
 ###########################################################
 # Fichier .htaccess pour les URLs 'html' ; a installer    #
 # si vous reglez $type_urls='html'                        #
-# dans ecrire/mes_options.php3 ou dans mes_fonctions.php3 #
+# dans ecrire/mes_options.php3                            #
 # (fichier associe : inc-urls-html.php3)                  #
 ###########################################################
 
