@@ -126,12 +126,6 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 			$page['texte'] = $page_boutons_admin;
 			$page['process_ins'] = 'php';
 		}
-
-		// Surligne
-		if ($GLOBALS['var_recherche']) {
-			include_ecrire("inc_surligne.php3");
-			$page['texte'] = surligner_mots($page['texte'], $GLOBALS['var_recherche']);
-		}
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;

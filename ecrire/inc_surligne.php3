@@ -100,12 +100,13 @@ function surligner_mots($page, $mots) {
 	// On boucle pour le cas ou` il y a plusieurs zones
 
 	$p = strpos($page, MARQUEUR_SURLIGNE);
-	if ($p) {
+	if ($p !== false) {
 		$debut = '';
 		while ($p) {
 			$debut .= substr($page, 0, $p-1);
 			$page = substr($page, $p+strlen(MARQUEUR_SURLIGNE));
-			$q = strpos($page,MARQUEUR_FSURLIGNE);
+			if (!$q = strpos($page,MARQUEUR_FSURLIGNE))
+				$q = 1+strlen($page);
 			$debut .= trouve_surligne(substr($page, 0, $q-1), $regexp);
 			$page = substr($page, $q+strlen(MARQUEUR_SURLIGNE)+1);
 			$p = strpos($page,MARQUEUR_SURLIGNE);
