@@ -67,7 +67,10 @@ else {
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {
 		include_ecrire('inc_invalideur.php3');
-		retire_caches();
+		include_ecrire('inc_meta.php3');
+		lire_metas();
+		if (lire_meta('invalider'))
+			retire_caches();
 	}
 
 	include_local ("inc-public-global.php3");

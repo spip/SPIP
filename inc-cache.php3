@@ -72,7 +72,7 @@ function utiliser_cache($chemin_cache, $delais) {
 
 	// Date de creation du fichier
 	if ($ok_cache) {
-		$t = filemtime($chemin_cache);
+		$t = @filemtime($chemin_cache);
 		$age = time() - $t;
 		$age_ok = (($age < $delais) AND ($age >= 0));
 
@@ -183,19 +183,21 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 			// calcule le meme fichier cache ou que
 			// l'invalideur ait fini de supprimer le fichier
 			$ok = spip_get_lock($chemin_cache, 20);
+			# ici mettre plutot du spip_flock ?
+			# avec le meme dans la partie invalideur ?
 
 			if (!$ok)
 				$use_cache = @file_exists($chemin_cache);
 
 			// Toujours rien ? La base est morte :-(
 			if (!$use_cache AND !$GLOBALS['db_ok']) {
+				spip_log("Erreur base de donnees &
+				impossible utiliser $chemin_cache");
 				if (!$GLOBALS['flag_preserver']) {
 					include_ecrire('inc_presentation.php3');
 					install_debut_html(_T('info_travaux_titre'));
 					echo "<p>"._T('titre_probleme_technique')."</p>\n";
 					install_fin_html();
-					spip_log("Erreur base de donnees & ".
-					"impossible de creer $chemin_cache");
 				}
 				exit;
 			}

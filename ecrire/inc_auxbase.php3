@@ -253,15 +253,6 @@ $spip_index_dico = array(
 $spip_index_dico_key = array(
 		"PRIMARY KEY"	=> "dico");
 
-$spip_inclure_caches = array(
-		"hache"		=> "CHAR (64) NOT NULL",
-		"inclure"	=> "CHAR (64) NOT NULL");
-
-$spip_inclure_caches_key = array(
-				 "KEY"	=> "hache",
-				 "KEY"	=> "inclure");
-
-
 $spip_versions = array (
 		"id_article"	=> "bigint(21) NOT NULL",
 		"id_version"	=> "int unsigned DEFAULT '0' NOT NULL",
@@ -288,24 +279,15 @@ $spip_versions_fragments_key = array(
 	     "PRIMARY KEY"	=> "id_article, id_fragment, version_min");
 
 $spip_caches = array(
-		"hache" => "char (64) NOT NULL",
+		"fichier" => "char (64) NOT NULL",
 		"id" => "char (64) NOT NULL",
-		"suppr" => "CHAR (1)");
+		// i=par id, t=timer, x=suppression
+		"type" => "CHAR (1) DEFAULT 'i' NOT NULL",
+		"taille" => "integer DEFAULT '0' NOT NULL");
 $spip_caches_key = array(
-		"PRIMARY KEY"	=> "hache, id",
-		"KEY hache" => "hache",
+		"PRIMARY KEY"	=> "fichier, id",
+		"KEY fichier" => "fichier",
 		"KEY id" => "id");
-
-/*
-$spip_caches_inclus = array(
-		"hache" => "char (64) NOT NULL",
-		"id" => "char (64) NOT NULL",
-		"suppr" => "CHAR (1)");
-$spip_caches_inclus_key = array(
-		"PRIMARY KEY"	=> "hache, id",
-		"KEY hache" => "hache",
-		"KEY id" => "id");
-*/
 
 global $tables_auxiliaires;
 
@@ -367,17 +349,12 @@ $tables_auxiliaires  =
 			       'key' => &$spip_index_forum_key),
 	'index_dico' => array('field' => &$spip_index_dico,
 			      'key' => &$spip_index_dico_key),
-	'inclure_caches' => array('field' => &$spip_inclure_caches,
-				  'key' => &$spip_inclure_caches_key),
 	'versions'	=> array('field' => &$spip_versions,
 					 'key' => &$spip_versions_key),
 	'versions_fragments'	=> array('field' => &$spip_versions_fragments,
 					 'key' => &$spip_versions_fragments_key),
 	'caches'	=> array('field' => &$spip_caches,
 					 'key' => &$spip_caches_key)
-	/*,
-	'caches_inclus'	=> array('field' => &$spip_caches_inclus,
-					 'key' => &$spip_caches_inclus_key)
-	*/
 	);
+
 ?>

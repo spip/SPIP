@@ -125,9 +125,7 @@ if ($validation_finale) {
 				calcul_index_forum($forum_id_article,
 					$forum_id_breve,
 					$forum_id_rubrique,
-					$forum_id_syndic) .
-				"'",
-				'spip_caches');
+					$forum_id_syndic) . "'");
 		}
 
 		$redirect = $retour_forum;

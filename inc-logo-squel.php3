@@ -10,25 +10,28 @@
 // Non documentes, en voie d'obsolescence, cf. ecrire/inc_extra.php3
 function balise_EXTRA_dist ($p) {
 	$_extra = champ_sql('extra', $p);
-	$p->code = 'trim($_extra)';
+	$p->code = $_extra;
 
-    // Gerer la notation [(#EXTRA|isbn)]
+	// Gerer la notation [(#EXTRA|isbn)]
 	if ($p->fonctions) {
 		include_ecrire("inc_extra.php3");
-		foreach ($p->fonctions as $key => $champ_extra)
-			$type_extra = $p->boucles[$p->id_boucle]->type_requete;
+		list ($key, $champ_extra) = each($p->fonctions);	// le premier filtre
+		$type_extra = $p->boucles[$p->id_boucle]->type_requete;
 			// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
 			// depuis un sous-objet sans champ extra d'un objet a champ extra,
 			// on aura le type_extra du sous-objet (!)
 		if (extra_champ_valide($type_extra, $champ_extra)) {
 			unset($p->fonctions[$key]);
 			$p->code = "extra($p->code, '".addslashes($champ_extra)."')";
+
+			// Appliquer les filtres definis par le webmestre
+			$filtres = extra_filtres($type_extra, $champ_extra);
+			if ($filtres) foreach ($filtres as $f)
+				$p->code = "$f($p->code)";
 		}
-		// Appliquer les filtres definis par le webmestre
-		$filtres = extra_filtres($type_extra, $champ_extra);
-		if ($filtres) foreach ($filtres as $f)
-			$p->code = "$f($p->code)";
 	}
+
+	$p->type = 'html';
 	return $p;
 }
 
@@ -38,6 +41,7 @@ function balise_EXTRA_dist ($p) {
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	$p->code = "($_lang ? $_lang : \$GLOBALS['spip_lang'])";
+	$p->type = 'php';
 	return $p;
 }
 
@@ -61,6 +65,7 @@ function balise_LESAUTEURS_dist ($p) {
 		$p->code = "sql_auteurs($_id_article)";
 	}
 
+	$p->type = 'html';
 	return $p;
 }
 
@@ -71,6 +76,7 @@ function balise_LESAUTEURS_dist ($p) {
 function balise_PETITION_dist ($p) {
 	$_id_article = champ_sql('id_article', $p);
 	$p->code = 'sql_petitions($_id_article)';
+	$p->type = 'php';
 	return $p;
 }
 
@@ -81,32 +87,22 @@ function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "ceil(min(100, 100 * $_popularite
 	/ max(1 , 0 + lire_meta('popularite_max'))))";
-	return $p;
-}
-
-
-// #DATE
-// Cette fonction n'est utile que parce qu'on a besoin d'aller chercher
-// dans le contexte general quand #DATE est en dehors des boucles
-// http://www.spip.net/fr_article1971.html
-function balise_DATE_dist ($p) {
-	$_date = champ_sql('date', $p);
-	$p->code = "$_date";
+	$p->type = 'php';
 	return $p;
 }
 
 
 # Fonction commune aux logos (rubriques, articles...)
 
-function calculer_champ_LOGO($params)
+function calculer_champ_LOGO($p)
 {
-  ereg("^LOGO_(([a-zA-Z]+).*)$", $params->nom_champ, $regs);
+  ereg("^LOGO_(([a-zA-Z]+).*)$", $p->nom_champ, $regs);
   $type_logo = $regs[1];
   $type_objet = strtolower($regs[2]);
   $flag_fichier = 0;  // compatibilite ascendante
   $filtres = '';
-  if (is_array($params->fonctions)) {
-    foreach($params->fonctions as $nom) {
+  if (is_array($p->fonctions)) {
+    foreach($p->fonctions as $nom) {
       if (ereg('^(left|right|center|top|bottom)$', $nom))
 	$align = $nom;
       else if ($nom == 'lien') {
@@ -129,137 +125,137 @@ function calculer_champ_LOGO($params)
 	}
     }
     // recuperer les filtres s'il y en a
-    $params->fonctions = $filtres;
+    $p->fonctions = $filtres;
   }
   if ($flag_lien_auto && !$lien) {
-    $params->entete .= "\n\t\$lien = generer_url_$type_objet(" .
-      champ_sql("id_$type_objet", $params) .
+    $p->entete .= "\n\t\$lien = generer_url_$type_objet(" .
+      champ_sql("id_$type_objet", $p) .
       ");\n";
   }
   else
     {
-      $params->entete .= "\n\t\$lien = ";
+      $p->entete .= "\n\t\$lien = ";
       $a = $lien;
       while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $a, $match))
 	{
-	  list($c,$m) = calculer_champ(array(), $match[2], $params->id_boucle, $params->boucles, $params->id_mere);
+	  list($c,$m) = calculer_champ(array(), $match[2], $p->id_boucle, $p->boucles, $p->id_mere);
 	  // $m est nul dans les cas pre'vus
-	  $params->entete .= ((!$match[1]) ? "" :"'$match[1]' .") . " $c .";
+	  $p->entete .= ((!$match[1]) ? "" :"'$match[1]' .") . " $c .";
 	  $a = $match[3];
 	}
-      if ($a) $params->entete .= "'$lien';"; 
+      if ($a) $p->entete .= "'$lien';"; 
       else 
 	{
-	  if ($lien) $params->entete = substr($params->entete,1,-1) .";";
-	  else $params->entete .= "'';";
+	  if ($lien) $p->entete = substr($p->entete,1,-1) .";";
+	  else $p->entete .= "'';";
 	}
     }
   
   if ($type_logo == 'RUBRIQUE') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_rubrique(' .
-      champ_sql('id_rubrique', $params) . ", $flag_fichier);
+      champ_sql('id_rubrique', $p) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'RUBRIQUE_NORMAL') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon,) = image_rubrique(' .
-      champ_sql('id_rubrique', $params) . ", $flag_fichier); ". '
+      champ_sql('id_rubrique', $p) . ", $flag_fichier); ". '
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'RUBRIQUE_SURVOL') {
-    $params->entete .= '
+    $p->entete .= '
 			list(,$logon) = image_rubrique(' .
-      champ_sql('id_rubrique', $params) . ", $flag_fichier); ". '
+      champ_sql('id_rubrique', $p) . ", $flag_fichier); ". '
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'DOCUMENT'){
     // Recours a une globale pour compatibilite avec l'ancien code. 
     // Il faudra reprendre inc_documents entierement (tu parles !)
-    $params->entete .= ' 
+    $p->entete .= ' 
 		$logoff = ' .
-      champ_sql('id_document', $params) . 
+      champ_sql('id_document', $p) . 
       '; 
 		$logon = integre_image($logoff,"","fichier_vignette");
 		$logoff = "";
 			';
   }
   else if ($type_logo == 'AUTEUR') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_auteur(' .
-      champ_sql('id_auteur', $params) . ", $flag_fichier);
+      champ_sql('id_auteur', $p) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'AUTEUR_NORMAL') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon,) = image_auteur(' .
-      champ_sql('id_auteur', $params) . ", $flag_fichier);".'
+      champ_sql('id_auteur', $p) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'AUTEUR_SURVOL') {
-    $params->entete .= '
+    $p->entete .= '
 			list(,$logon) = image_auteur(' .
-      champ_sql('id_auteur', $params) . ", $flag_fichier);".'
+      champ_sql('id_auteur', $p) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'BREVE') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_breve(' .
-      champ_sql('id_breve', $params) . ", $flag_fichier);
+      champ_sql('id_breve', $p) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'BREVE_RUBRIQUE') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_breve(' .
-      champ_sql('id_breve', $params) . ", $flag_fichier);".'
+      champ_sql('id_breve', $p) . ", $flag_fichier);".'
 			if (!$logon)
 				list($logon, $logoff) = image_rubrique(' .
-      champ_sql('id_rubrique', $params) . ", $flag_fichier);
+      champ_sql('id_rubrique', $p) . ", $flag_fichier);
 		  ";
   }
   else if ($type_logo == 'SITE') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_site(' .
-      champ_sql('id_syndic', $params) . ", $flag_fichier);
+      champ_sql('id_syndic', $p) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'MOT') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_mot(' .
-      champ_sql('id_mot', $params) . ", $flag_fichier);
+      champ_sql('id_mot', $p) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'ARTICLE') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_article(' .
-      champ_sql('id_article', $params) . ", $flag_fichier);
+      champ_sql('id_article', $p) . ", $flag_fichier);
 			";
   }
   else if ($type_logo == 'ARTICLE_NORMAL') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon,) = image_article(' .
-      champ_sql('id_article', $params) . ", $flag_fichier);".'
+      champ_sql('id_article', $p) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'ARTICLE_SURVOL') {
-    $params->entete .= '
+    $p->entete .= '
 			list(,$logon) = image_article(' .
-      champ_sql('id_article', $params) . ", $flag_fichier);".'
+      champ_sql('id_article', $p) . ", $flag_fichier);".'
 			$logoff = "";
 			';
   }
   else if ($type_logo == 'ARTICLE_RUBRIQUE') {
-    $params->entete .= '
+    $p->entete .= '
 			list($logon, $logoff) = image_article(' .
-      champ_sql('id_article', $params) . ", $flag_fichier);".'
+      champ_sql('id_article', $p) . ", $flag_fichier);".'
 			if (!$logon)
 				list($logon, $logoff) = image_rubrique(' .
-      champ_sql('id_rubrique', $params) . ", $flag_fichier);
+      champ_sql('id_rubrique', $p) . ", $flag_fichier);
 			";
   }
 
@@ -268,12 +264,13 @@ function calculer_champ_LOGO($params)
 	// remarquable, mais a conserver pour compatibilite ascendante.
 	// -> http://www.spip.net/fr_article901.html
 	if ($flag_fichier)
-		$params->code = 'ereg_replace("^IMG/","",$logon)';
+		$p->code = 'ereg_replace("^IMG/","",$logon)';
 	else
-		$params->code = "affiche_logos(\$logon, \$logoff, \$lien, '".
+		$p->code = "affiche_logos(\$logon, \$logoff, \$lien, '".
 		addslashes($align) . "')";
 
-	return $params;
+	$p->type = 'php';
+	return $p;
 }
 
 ?>

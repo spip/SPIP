@@ -27,10 +27,11 @@ function maj_base() {
 	if ($result) if ($row = spip_fetch_array($result)) $version_installee = (double) $row['valeur'];
 
 	//
-	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit d'une nouvelle installation
+	// Si pas de version mentionnee dans spip_meta, c'est qu'il s'agit
+	// d'une nouvelle installation
 	//   => ne pas passer par le processus de mise a jour
 	//
-	//	$version_installee = 1.702; quand on a besoin de forcer une MAJ
+	// $version_installee = 1.702; quand on a besoin de forcer une MAJ
 	if (!$version_installee) {
 		$version_installee = $spip_version;
 		maj_version($version_installee);
@@ -849,7 +850,6 @@ function maj_base() {
 
 	// Nouvelles tables d'invalidation
 	if ($version_installee < 1.802) {
-		spip_query("DROP TABLE spip_forum_cache");
 		spip_query("DROP TABLE spip_id_article_caches");
 		spip_query("DROP TABLE spip_id_auteur_caches");
 		spip_query("DROP TABLE spip_id_breve_caches");
@@ -865,6 +865,17 @@ function maj_base() {
 		spip_query("DROP TABLE spip_id_type_caches");
 		spip_query("DROP TABLE spip_inclure_caches");
 		maj_version(1.802);
+	}
+	if ($version_installee < 1.803) {
+		spip_query("DROP TABLE spip_forum_cache");
+		spip_query("DROP TABLE spip_inclure_caches");
+		maj_version(1.803);
+	}
+	if ($version_installee < 1.804) {
+		// recreer la table spip_caches
+		spip_query("DROP TABLE spip_caches");
+		creer_base();
+		maj_version(1.804);
 	}
 
 	return true;

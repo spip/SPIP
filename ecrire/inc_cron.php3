@@ -162,6 +162,17 @@ function spip_cron() {
 
 
 	//
+	// Toutes les heures, menage des vieux fichiers du cache
+	// marques par l'invalideur 't' = date de fin de fichier
+	//
+	if ($t - lire_meta('date_purge_cache') > 3600) {
+		ecrire_meta('date_purge_cache', $t);
+		ecrire_metas();
+		include_ecrire('inc_invalideur.php3');
+		retire_vieux_caches();
+	}
+
+	//
 	// Mise a jour d'un (ou de zero) site syndique
 	//
 	if (lire_meta("activer_syndic") == "oui") {
