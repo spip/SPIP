@@ -61,7 +61,7 @@ echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
 	if (!$debut) $debut = 0;
 
 	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='privrac' AND id_parent=0";
- 	$result_forum = mysql_query($query_forum);
+ 	$result_forum = spip_query($query_forum);
  	$total = 0;
  	if ($row = mysql_fetch_array($result_forum)) $total = $row['cnt'];
 
@@ -89,7 +89,7 @@ echo "<P align='left'>";
 
 
 $query_forum="SELECT * FROM spip_forum WHERE statut='privrac' AND id_parent=0 ORDER BY date_heure DESC LIMIT $debut,10";
-$result_forum=mysql_query($query_forum);
+$result_forum=spip_query($query_forum);
 
 afficher_forum($result_forum,"forum.php3");
 	

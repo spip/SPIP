@@ -191,19 +191,19 @@ if (!$adresse_site) {
 
 function tester_rubrique_vide($id_rubrique) {
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent='$id_rubrique' LIMIT 0,1";
-	list($n) = mysql_fetch_row(mysql_query($query));
+	list($n) = mysql_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_article FROM spip_articles WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prepa' OR statut='prop') LIMIT 0,1";
-	list($n) = mysql_fetch_row(mysql_query($query));
+	list($n) = mysql_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0,1";
-	list($n) = mysql_fetch_row(mysql_query($query));
+	list($n) = mysql_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	$query = "SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (statut='publie' OR statut='prop') LIMIT 0,1";
-	list($n) = mysql_fetch_row(mysql_query($query));
+	list($n) = mysql_fetch_row(spip_query($query));
 	if ($n > 0) return false;
 
 	return true;
@@ -227,7 +227,7 @@ if ($ajout_forum AND strlen($texte) > 10 AND strlen($titre) > 2) {
 	$nom_site = addslashes($nom_site);
 	$auteur = addslashes($auteur);
 	$query_forum = "INSERT INTO spip_forum (id_parent, id_rubrique, id_article, id_breve, id_message, id_syndic, date_heure, titre, texte, nom_site, url_site, auteur, email_auteur, statut, id_auteur) VALUES ('$forum_id_parent','$forum_id_rubrique','$forum_id_article','$forum_id_breve','$forum_id_message', '$forum_id_syndic', NOW(),\"$titre\",\"$texte\",\"$nom_site\",\"$url_site\",\"$auteur\",\"$email_auteur\",\"$forum_statut\",\"$connect_id_auteur\")";
-	$result_forum = mysql_query($query_forum);
+	$result_forum = spip_query($query_forum);
 }
 
 
@@ -241,7 +241,7 @@ function changer_statut_forum($id_forum, $statut) {
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) return;
 
 	$query = "SELECT * FROM spip_forum WHERE id_forum=$id_forum";
-	$result = mysql_query($query);
+	$result = spip_query($query);
  	if ($row = mysql_fetch_array($result)) {
 		$id_parent = $row['id_parent'];
 		$id_rubrique = $row['id_rubrique'];
@@ -259,7 +259,7 @@ function changer_statut_forum($id_forum, $statut) {
 	if ($id_parent) $where[] = "id_forum=$id_parent";
 	if ($where) {
 		$query = "SELECT fichier FROM spip_forum_cache WHERE ".join(' OR ', $where);
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		unset($fichiers);
 		if ($result) while ($row = mysql_fetch_array($result)) {
 			$fichier = $row['fichier'];
@@ -269,11 +269,11 @@ function changer_statut_forum($id_forum, $statut) {
 		if ($fichiers) {
 			$fichiers = join(',', $fichiers);
 			$query = "DELETE FROM spip_forum_cache WHERE fichier IN ($fichiers)";
-			mysql_query($query);
+			spip_query($query);
 		}
 	}
 	$query_forum = "UPDATE spip_forum SET statut='$statut' WHERE id_forum=$id_forum";
-	$result_forum = mysql_query($query_forum);
+	$result_forum = spip_query($query_forum);
 }
 
 if ($supp_forum) changer_statut_forum($supp_forum, 'off');
@@ -286,7 +286,7 @@ if ($valid_forum) changer_statut_forum($valid_forum, 'publie');
 
 function calculer_secteurs() {
 	$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	while ($row = mysql_fetch_array($result)) $secteurs[] = $row['id_rubrique'];
 	if (!$secteurs) return;
@@ -296,7 +296,7 @@ function calculer_secteurs() {
 		$rubriques_totales = $rubriques;
 		while ($rubriques) {
 			$query = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($rubriques)";
-			$result = mysql_query($query);
+			$result = spip_query($query);
 
 			unset($rubriques);
 			while ($row = mysql_fetch_array($result)) $rubriques[] = $row['id_rubrique'];
@@ -306,27 +306,27 @@ function calculer_secteurs() {
 			}
 		}
 		$query = "UPDATE spip_articles SET id_secteur=$id_secteur WHERE id_rubrique IN ($rubriques_totales)";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$query = "UPDATE spip_breves SET id_rubrique=$id_secteur WHERE id_rubrique IN ($rubriques_totales)";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$query = "UPDATE spip_rubriques SET id_secteur=$id_secteur WHERE id_rubrique IN ($rubriques_totales)";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		$query = "UPDATE spip_syndic SET id_secteur=$id_secteur WHERE id_rubrique IN ($rubriques_totales)";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 	}
 }
 
 
 function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00") {
 	$query = "SELECT MAX(date_heure) as date_h FROM spip_breves WHERE id_rubrique = '$id_parent' GROUP BY id_rubrique";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		$date_breves = $row['date_h'];
 		if ($date_breves > $date_parent) $date_parent = $date_breves;
 	}
 	
 	$query = "SELECT MAX(date) AS date_h FROM spip_syndic WHERE id_rubrique = '$id_parent' GROUP BY id_rubrique";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		$date_syndic = $row['date_h'];
 		if ($date_syndic > $date_parent) $date_parent = $date_syndic;
@@ -340,7 +340,7 @@ function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00") {
 	else {
 		$query = "SELECT rubrique.id_rubrique,  MAX(articles.date) AS date_h FROM spip_rubriques AS rubrique, spip_articles AS articles WHERE rubrique.id_parent='$id_parent' AND articles.id_rubrique=rubrique.id_rubrique AND articles.statut = 'publie' AND articles.date < NOW() GROUP BY rubrique.id_rubrique";
 	}
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	
 	while ($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -352,7 +352,7 @@ function calculer_dates_rubriques($id_parent="0", $date_parent="0000-00-00") {
 	}
 
 
-	mysql_query("UPDATE spip_rubriques SET date='$date_parent' WHERE id_rubrique='$id_parent'");
+	spip_query("UPDATE spip_rubriques SET date='$date_parent' WHERE id_rubrique='$id_parent'");
 
 	return $date_parent;
 
@@ -370,17 +370,17 @@ function calculer_rubriques_publiques()
 	else {
 		$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut = 'publie' AND date < NOW()";
 	}
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 	$query = "SELECT DISTINCT id_rubrique FROM spip_breves WHERE statut = 'publie'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
 	$query = "SELECT DISTINCT id_rubrique FROM spip_syndic WHERE statut = 'publie'";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		if ($row['id_rubrique']) $rubriques[] = $row['id_rubrique'];
 	}
@@ -390,16 +390,16 @@ function calculer_rubriques_publiques()
 		if ($rubriques_publiques) $rubriques_publiques .= ",$rubriques";
 		else $rubriques_publiques = $rubriques;
 		$query = "SELECT DISTINCT id_parent FROM spip_rubriques WHERE (id_rubrique IN ($rubriques)) AND (id_parent NOT IN ($rubriques_publiques))";
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		unset($rubriques);
 		while ($row = mysql_fetch_array($result)) {
 			if ($row['id_parent']) $rubriques[] = $row['id_parent'];
 		}
 	}
 	$query = "UPDATE spip_rubriques SET statut='prive' WHERE id_rubrique NOT IN ($rubriques_publiques)";
-	mysql_query($query);
+	spip_query($query);
 	$query = "UPDATE spip_rubriques SET statut='publie' WHERE id_rubrique IN ($rubriques_publiques)";
-	mysql_query($query);
+	spip_query($query);
 }
 
 
@@ -419,7 +419,7 @@ function calculer_rubriques()
 // Supprimer rubrique
 if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' AND acces_rubrique($supp_rubrique)) {
 	$query = "DELETE FROM spip_rubriques WHERE id_rubrique=$supp_rubrique";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	calculer_rubriques();
 }

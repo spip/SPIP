@@ -47,7 +47,7 @@ if ($changer_config == 'oui') {
 	} else if ($forums_publics_appliquer == 'tous') {
 		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum'";
 	}
-	if ($requete_appliquer) mysql_query($requete_appliquer);
+	if ($requete_appliquer) spip_query($requete_appliquer);
 
 
 	$adresse_site = ereg_replace("/$", "", $adresse_site);

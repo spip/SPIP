@@ -14,7 +14,7 @@ $flag_mots = lire_meta("articles_mots");
 function enfant($collection){
 	global $les_enfants;
 	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection\" ORDER BY titre";
-	$result2 = mysql_query($query2);
+	$result2 = spip_query($query2);
 	
 	while($row=mysql_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
@@ -52,7 +52,7 @@ function enfant($collection){
 
 function sous_enfant($collection2){
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
-	$result3 = mysql_query($query3);
+	$result3 = spip_query($query3);
 
 	if (mysql_num_rows($result3) > 0){
 		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
@@ -78,7 +78,7 @@ if ($titre){
 	// si c'est une rubrique-secteur contenant des breves, ne deplacer
 	// que si $confirme_deplace == 'oui'
 	$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique=\"$id_rubrique\"";
-	$row = mysql_fetch_array(mysql_query($query));
+	$row = mysql_fetch_array(spip_query($query));
 	if (($row['cnt'] > 0) and !($confirme_deplace == 'oui')) {
 		$id_parent = 0;
 	}
@@ -94,7 +94,7 @@ if ($titre){
 	$descriptif = addslashes($descriptif);
 	$texte = addslashes($texte);
 	$query = "UPDATE spip_rubriques SET $change_parent titre=\"$titre\", descriptif=\"$descriptif\", texte=\"$texte\" WHERE id_rubrique=$id_rubrique";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 	
 	calculer_rubriques();
 
@@ -107,7 +107,7 @@ if ($titre){
 // infos sur cette rubrique
 //
 $query="SELECT * FROM spip_rubriques WHERE id_rubrique='$coll'";
-$result=mysql_query($query);
+$result=spip_query($query);
 
 while($row=mysql_fetch_array($result)){
 	$id_rubrique=$row['id_rubrique'];

@@ -41,7 +41,7 @@ if ($connect_statut != '0minirezo') {
 
 
 $query="SELECT MAX(date) AS cnt FROM spip_articles WHERE statut='publie'";
-$result=mysql_query($query);
+$result=spip_query($query);
 
 if ($row = mysql_fetch_array($result)) {
 	$date = $row['cnt'];

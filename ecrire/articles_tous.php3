@@ -10,7 +10,7 @@ function collections_actives()
 	$coll_actives = "";
 	$query = "SELECT DISTINCT id_rubrique FROM spip_articles WHERE statut='publie' OR statut='prepa' OR statut='prop'";
 	for (;;) {
-		$result = mysql_query($query);
+		$result = spip_query($query);
 		unset($rubriques);
 		while ($row = mysql_fetch_array($result)) {
 			$rubriques[] = $row[0];
@@ -110,7 +110,7 @@ function enfants($id_parent, $decalage = 0) {
 	global $couleur_foncee, $couleur_claire;
 
 	$query = "SELECT id_rubrique, titre, statut, date FROM spip_rubriques WHERE id_parent=$id_parent ORDER BY titre";
-	$result = mysql_query($query);
+	$result = spip_query($query);
 
 	while ($row = mysql_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
