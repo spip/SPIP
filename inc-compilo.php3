@@ -578,7 +578,8 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 					// table non Spip.
 					$boucles[$id]->id_table = $type;
 					$serveur = $boucle->sql_serveur;
-					$boucles[$id]->primary = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key']["PRIMARY KEY"]; 
+					$x = &$tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];
+					$boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
 				}
 				if ($boucle->param) {
 					$res = calculer_criteres($id, $boucles);
