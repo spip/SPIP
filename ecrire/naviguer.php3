@@ -29,19 +29,20 @@ function enfant($collection){
 		$les_enfants.= "<P>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		$les_enfants.= "<span dir='$lang_dir'><FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
-
 		if (strlen($les_sous_enfants) > 0){
-			$les_enfants.= $bouton_layer;
+			$les_enfants .= $bouton_layer;
 		}
+		$les_enfants .= "<FONT FACE=\"Verdana,Arial,Sans,sans-serif\">";
+
 		if (acces_restreint_rubrique($id_rubrique))
-			$les_enfants.= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
+			$les_enfants .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('image_administrer_rubrique')."'> ";
 
-		$les_enfants.= "<B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B>";
-		if (strlen($descriptif)>1)
-			$les_enfants.="<BR><FONT SIZE=1>$descriptif</FONT>";
+		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
+		if (strlen($descriptif)>1) {
+			$les_enfants .= "<br><FONT SIZE=1><span dir='$lang_dir'>$descriptif</span></FONT>";
+		}
 
-		$les_enfants.= "</FONT></span>";
+		$les_enfants.= "</FONT>";
 
 		$les_enfants .= $les_sous_enfants;
 		$les_enfants .= fin_cadre_relief(true);
@@ -49,12 +50,12 @@ function enfant($collection){
 }
 
 function sous_enfant($collection2){
-	global $lang_dir;
+	global $lang_dir, $spip_lang_dir;
 	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent=\"$collection2\" ORDER BY titre";
 	$result3 = spip_query($query3);
 
 	if (spip_num_rows($result3) > 0){
-		$retour = debut_block_invisible("enfants$collection2")."\n\n<FONT SIZE=1 face='arial,helvetica,sans-serif'><ul style='list-style-image: url(img_pack/rubrique-12.gif)'>";
+		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='list-style-image: url(img_pack/rubrique-12.gif)'>\n<FONT SIZE=1 face='arial,helvetica,sans-serif'>";
 		while($row=spip_fetch_array($result3)){
 			$id_rubrique2=$row['id_rubrique'];
 			$id_parent2=$row['id_parent'];
@@ -367,7 +368,7 @@ echo "</tr>\n";
 
 if (strlen($descriptif) > 1) {
 	echo "<tr><td>\n";
-	echo "<div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
+	echo "<div align='$spip_lang_left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
 	echo "<font size=2 face='Verdana,Arial,Sans,sans-serif'>";
 	echo propre($descriptif."~");
 	echo "</font>";
@@ -390,7 +391,7 @@ if ($flag_mots!= 'non' AND $flag_editable AND $options == 'avancees' AND $coll >
 
 
 if (strlen($texte) > 1) {
-	echo "\n<p><font size=3 face='Verdana,Arial,Sans,sans-serif'><div align='justify'>";
+	echo "\n<p><div align='justify'><font size=3 face='Verdana,Arial,Sans,sans-serif'>";
 	echo justifier(propre($texte));
 	echo "&nbsp;</font></div>";
 }
@@ -426,16 +427,13 @@ if ($coll>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_sect
 	echo fin_block();
 
 	fin_cadre_enfonce();
-
-
-
 }
 
 
 fin_cadre_relief();
 
 
-echo "<DIV align=left>";
+//echo "<div align='$spip_lang_left'>";
 enfant($coll);
 
 
@@ -450,24 +448,24 @@ if (strpos($les_enfants2,"<P>")){
 
 
 // Afficher les sous-rubriques
-	echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
-	echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
-	echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' width=20></td>";
-	echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
-	if (strlen($les_enfants2) > 0) echo "<p>";
-	echo "</td></tr>";
-	
-	echo "<tr><td align='right' valign='bottom'>";
-	if ($flag_editable) {
+echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
+echo "<td width=20 rowspan=2><img src='img_pack/rien.gif' width=20></td>";
+echo "<td valign='top' width=50%>$les_enfants2 &nbsp;";
+if (strlen($les_enfants2) > 0) echo "<p>";
+echo "</td></tr>";
+
+echo "<tr><td align='right' valign='bottom'>";
+if ($flag_editable) {
 	if ($coll == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
 	else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$coll", "rubrique-24.gif", "creer.gif");
 	echo "<p>";
-	}
-	echo "</td></tr>";
-	echo "</table>";
+}
+echo "</td></tr>";
+echo "</table>";
 
 
-echo "<DIV align='left'>";
+//echo "<div align='$spip_lang_left'>";
 
 
 //////////  Vos articles en cours de redaction

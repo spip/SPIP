@@ -17,9 +17,9 @@ if ($statut) {
 }
 
 
-
-
 function enfant($leparent){
+	global $spip_lang_left, $spip_lang_right;
+
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
  	$result=spip_query($query);
 
@@ -42,7 +42,7 @@ function enfant($leparent){
 		echo "<B>$titre</B></FONT>\n";
 		echo aide ("breves");
 
-		echo "<P ALIGN='left'>";
+		echo "<p>";
 
 		if ($GLOBALS['connect_statut'] == "0minirezo") $statuts = "'prop', 'refuse', 'publie'";
 		else $statuts = "'prop', 'publie'";
@@ -50,7 +50,7 @@ function enfant($leparent){
 		$query = "SELECT id_breve, date_heure, titre, statut FROM spip_breves ".
 			"WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC";
 		afficher_breves('', $query);
-		echo "<div align='right'>";
+		echo "<div align='$spip_lang_right'>";
 		icone(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.gif", "creer.gif");
 		echo "</div>";
 

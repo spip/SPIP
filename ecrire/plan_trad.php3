@@ -51,8 +51,14 @@ function afficher_rubrique($id_parent, $marge = 0, $cond = '', $afficher = true)
 	global $trad_lang;
 	global $couleur_foncee;
 	global $dir_lang;
+	global $spip_lang_left;
 	static $total_articles = 0;
 	static $rubriques_actives;
+
+	//
+	// Calculer les rubriques actives
+	// (contenant des articles a afficher)
+	//
 
 	if (!$rubriques_actives) {
 		$rubriques_actives[0] = true;
@@ -125,8 +131,8 @@ function afficher_rubrique($id_parent, $marge = 0, $cond = '', $afficher = true)
 				$s .= "</a>&nbsp;&nbsp;";
 			}
 			
-			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif><span $dir_lang>".typo($titre)."</span></a>";
-			$s .= " &nbsp; <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
+			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang>".typo($titre)."</a>";
+			$s .= " &nbsp; <font size='1' color='#666666'$dir_lang>(".traduire_nom_langue($lang).")</font>";
 
 			$vals[] = $s;
 
@@ -184,7 +190,7 @@ function afficher_rubrique($id_parent, $marge = 0, $cond = '', $afficher = true)
 				"</div>\n";
 
 			if ($afficher) {
-				$cond_fils['avant'] = "<div style='margin: 0px; margin-left: ".$marge."px; padding: 0px; background: none;'>\n".$bandeau;
+				$cond_fils['avant'] = "<div style='margin: 0px; margin-$spip_lang_left: ".$marge."px; padding: 0px; background: none;'>\n".$bandeau;
 				$cond_fils['apres'] = "</div>\n";
 				if (!$id_parent) $cond_fils['avant'] = "<p>".$cond_fils['avant'];
 			}
