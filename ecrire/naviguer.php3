@@ -282,7 +282,6 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'a
 
 
 
-
 //
 // Afficher les boutons de creation d'article et de breve
 //

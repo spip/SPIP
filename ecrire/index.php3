@@ -83,11 +83,11 @@ function sous_enfant($collection2){
 echo "<p align='left'>";
 debut_cadre_relief("fiche-perso-24.gif");
 echo "<font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-if ($bonjour == "oui") echo bouton_block_visible("info_perso");
+if ($bonjour == "oui" OR $spip_ecran == "large") echo bouton_block_visible("info_perso");
 else echo bouton_block_invisible("info_perso");
 echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
 
-if ($bonjour == "oui") echo debut_block_visible("info_perso");
+if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
 else echo debut_block_invisible("info_perso");
 
 if ($connect_activer_messagerie != "non") {
@@ -146,7 +146,6 @@ if (mysql_num_rows($result) > 0){
 	echo "</font>";
 	fin_cadre_enfonce();
 }
-
 
 
 

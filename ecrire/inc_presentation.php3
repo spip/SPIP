@@ -241,6 +241,8 @@ function bandeau_titre_boite($titre, $afficher_auteurs, $boite_importante = true
 //
 
 function debut_raccourcis() {
+	creer_colonne_droite();
+
 	debut_cadre_enfonce();
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	echo "<b>RACCOURCIS :</b><p>";
@@ -1306,9 +1308,13 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $connect_toutes_rubriques;
 	global $REQUEST_URI;
 	global $auth_can_disconnect, $connect_login;
-	global $options, $spip_display;
+	global $options, $spip_display, $spip_ecran;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	global $clean_link;
+	global $spip_ecran;
+	
+	if ($spip_ecran == "large") $largeur = 974;
+	else $largeur = 750;
 	
 	// nettoyer le lien global
 	$clean_link->delVar('set_options');
@@ -1343,7 +1349,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	
 	// Icones principales
 	echo "<table cellpadding='0' style='background-image: url(img_pack/rayures-fines.gif);' width='100%'><tr width='100%'><td width='100%' align='center'>";
-	echo "<table cellpadding='0' background='' width='750'><tr width='750'>";
+	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 		icone_bandeau_principal ("&Eacute;dition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 		if ($options == "avancees") {
@@ -1378,7 +1384,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	// Icones secondaires
 	echo "<table cellpadding='0' bgcolor='white' style='border-bottom: solid 1px black; border-top: solid 1px #333333;' width='100%'><tr width='100%'><td width='100%' align='center'>";
 
-	echo "<table cellpadding='0' background='' width='750'><tr width='750'>";
+	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 
 	if ($rubrique == "asuivre"){
 		icone_bandeau_secondaire ("&Agrave; suivre", "index.php3", "asuivre-24.gif", "asuivre", $sous_rubrique);
@@ -1475,7 +1481,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		
 	// Bandeau
 	echo "\n<table cellpadding='0' bgcolor='$couleur_foncee' style='border-bottom: solid 1px white; border-top: solid 1px #666666;' width='100%'><tr width='100%'><td width='100%' align='center'>";
-	echo "<table cellpadding='0' background='' width='750'><tr width='750'><td>";
+	echo "<table cellpadding='0' background='' width='$largeur'><tr width='$largeur'><td>";
 		if ($activer_messagerie != 'non' AND $connect_activer_messagerie != 'non') {
 			echo "<font face='arial,helvetica,sans-serif' size=1><b>";
 			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
@@ -1528,6 +1534,18 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	echo "</font>";
 	echo "</td>";
+	echo "<td align='center' align='right'>";
+			$lien = $clean_link;
+		
+		if ($spip_ecran == "large") {
+			$lien->addVar('set_ecran', 'etroit');
+			echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Petit &eacute;cran' alt='Petit &eacute;cran' width='23' height='19' border='0'></a>";
+		}
+		else {
+			$lien->addVar('set_ecran', 'large');
+			echo "<a href='". $lien->getUrl() ."'><img src='img_pack/set-ecran.gif' title='Grand &eacute;cran' alt='Grand &eacute;cran' width='23' height='19' border='0'></a>";
+		}
+	echo "</td>";
 	echo "<td align='right'>";
 	echo "<img src='img_pack/barre-couleurs.gif' alt='couleurs' width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
@@ -1554,9 +1572,13 @@ function gros_titre($titre, $ze_logo=''){
 //
 
 function debut_grand_cadre(){
-	echo "\n<br><br><table width=750 cellpadding=0 cellspacing=0 border=0>";
+	global $spip_ecran;
+	
+	if ($spip_ecran == "large") $largeur = 974;
+	else $largeur = 750;
+	echo "\n<br><br><table width=$largeur cellpadding=0 cellspacing=0 border=0>";
 	echo "\n<tr>";
-	echo "<td width=750>";
+	echo "<td width=$largeur>";
 	echo "<font face='Georgia,Garamond,Times,serif' size=3>";
 
 }
@@ -1589,9 +1611,13 @@ function debut_gauche($rubrique = "asuivre") {
 	global $options;
 	global $requete_fichier;
 	global $connect_id_auteur;
+	global $spip_ecran;
+	
+	if ($spip_ecran == "large") $largeur = 974;
+	else $largeur = 750;
 
-	echo "<br><table width=750 cellpadding=0 cellspacing=0 border=0>
-		<tr><td width=200 valign='top'><font face='Georgia,Garamond,Times,serif' size=2>\n";
+	echo "<br><table width=$largeur cellpadding=0 cellspacing=0 border=0>
+		<tr><td width=200 valign='top' rowspan=2><font face='Georgia,Garamond,Times,serif' size=2>\n";
 	
 
 	// Afficher les auteurs recemment connectes
@@ -1645,47 +1671,48 @@ function debut_gauche($rubrique = "asuivre") {
 
 
 
+	if ($spip_colonne == "etroit") {
+		if ($changer_config!="oui"){
+			$activer_messagerie=lire_meta("activer_messagerie");
+			$activer_imessage=lire_meta("activer_imessage");
+		}
 	
-	if ($changer_config!="oui"){
-		$activer_messagerie=lire_meta("activer_messagerie");
-		$activer_imessage=lire_meta("activer_imessage");
-	}
-
-	if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
-		if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-		 	$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
-			$result_auteurs = spip_query($query2);
-			$nb_connectes = mysql_num_rows($result_auteurs);
-		}
-
-		$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
-		if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
-		if ($rubrique == "messagerie") {
-			echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
-			echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
-			echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
-			if ($connect_statut == "0minirezo") {
-				echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
-				echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
+		if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
+			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
+				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
+				$result_auteurs = spip_query($query2);
+				$nb_connectes = mysql_num_rows($result_auteurs);
 			}
-		}
-		
-		if ($flag_cadre) {
-			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
-			if ($nb_connectes > 0) {
-				if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
-				echo "<b>Actuellement en ligne&nbsp;:</b>";
-				while ($row = mysql_fetch_array($result_auteurs)) {
-					$id_auteur = $row["id_auteur"];
-					$nom_auteur = typo($row["nom"]);
-					if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
-					else  echo "<br> $nom_auteur";
+	
+			$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
+			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
+			if ($rubrique == "messagerie") {
+				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
+				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
+				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
+				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+				if ($connect_statut == "0minirezo") {
+					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
+					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
 				}
 			}
-			echo "</font>";
+			
+			if ($flag_cadre) {
+				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+				if ($nb_connectes > 0) {
+					if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
+					echo "<b>Actuellement en ligne&nbsp;:</b>";
+					while ($row = mysql_fetch_array($result_auteurs)) {
+						$id_auteur = $row["id_auteur"];
+						$nom_auteur = typo($row["nom"]);
+						if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+						else  echo "<br> $nom_auteur";
+					}
+				}
+				echo "</font>";
+			}
+			if ($flag_cadre) fin_cadre_relief();
 		}
-		if ($flag_cadre) fin_cadre_relief();
 	}	
 }
 
@@ -1694,11 +1721,80 @@ function debut_gauche($rubrique = "asuivre") {
 // Presentation de l'interface privee, marge de droite
 //
 
-function debut_droite() {
+function creer_colonne_droite(){
+	global $deja_colonne_droite;
+	global $changer_config;
+	global $activer_messagerie;
+	global $activer_imessage;
+	global $connect_activer_messagerie;
+	global $connect_activer_imessage;
+	global $connect_statut, $cookie_admin;
+	global $REQUEST_URI;
 	global $options;
+	global $requete_fichier;
+	global $connect_id_auteur, $spip_ecran;
+
+	$deja_colonne_droite = true;
+	
+	
+	if ($spip_ecran == "large") {
+	
+		echo "<td width=37 rowspan=2>&nbsp;</td>";
+		echo "<td rowspan=1></td>";
+		echo "<td width=37 rowspan=2>&nbsp;</td>";
+		echo "<td width=200 rowspan=2 valign='top'><p />";
+		
+		if ($changer_config!="oui"){
+			$activer_messagerie=lire_meta("activer_messagerie");
+			$activer_imessage=lire_meta("activer_imessage");
+		}
+	
+		if ($activer_messagerie!="non" AND $connect_activer_messagerie!="non"){
+			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
+				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND messagerie!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 5 MINUTE)";
+				$result_auteurs = spip_query($query2);
+				$nb_connectes = mysql_num_rows($result_auteurs);
+			}
+	
+			$flag_cadre = ($nb_connectes > 0 OR $rubrique == "messagerie");
+			if ($flag_cadre) debut_cadre_relief("messagerie-24.gif");
+			if ($rubrique == "messagerie") {
+				echo "<a href='message_edit.php3?new=oui&type=normal'><img src='img_pack/m_envoi.gif' alt='M>' width='14' height='7' border='0'>";
+				echo "<font color='#169249' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU MESSAGE</b></font></a>";
+				echo "\n<br><a href='message_edit.php3?new=oui&type=pb'><img src='img_pack/m_envoi_bleu.gif' alt='M>' width='14' height='7' border='0'>";
+				echo "<font color='#044476' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVEAU PENSE-B&Ecirc;TE</b></font></a>";
+				if ($connect_statut == "0minirezo") {
+					echo "\n<br><a href='message_edit.php3?new=oui&type=affich'><img src='img_pack/m_envoi_jaune.gif' alt='M>' width='14' height='7' border='0'>";
+					echo "<font color='#ff9900' face='Verdana,Arial,Helvetica,sans-serif' size=1><b>&nbsp;NOUVELLE ANNONCE</b></font></a>";
+				}
+			}
+			
+			if ($flag_cadre) {
+				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
+				if ($nb_connectes > 0) {
+					if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
+					echo "<b>Actuellement en ligne&nbsp;:</b>";
+					while ($row = mysql_fetch_array($result_auteurs)) {
+						$id_auteur = $row["id_auteur"];
+						$nom_auteur = typo($row["nom"]);
+						if ($options == "avancees") echo "<br>".bouton_imessage($id_auteur,$row)." $nom_auteur";
+						else  echo "<br> $nom_auteur";
+					}
+				}
+				echo "</font>";
+			}
+			if ($flag_cadre) fin_cadre_relief();
+		}
+	}
+
+}
+
+function debut_droite() {
+	global $options, $spip_ecran, $deja_colonne_droite;
 	global $connect_id_auteur, $clean_link;
 
 	if ($options == "avancees") {
+		if (!$deja_colonne_droite) creer_colonne_droite();
 		// liste des articles bloques
 		$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR)";
 		$result = spip_query($query);
@@ -1730,7 +1826,19 @@ function debut_droite() {
 		}
 	}
 
-	echo '<br></font>&nbsp;</td><td width=50 rowspan=1>&nbsp;</td><td width=500 valign="top" rowspan=2><font face="Georgia,Garamond,Times,serif" size=3>';
+	echo "<br></font>&nbsp;</td>";
+	
+	if ($spip_ecran == "etroit") {
+		echo "<td width=50 rowspan=2>&nbsp;";
+	}
+	else {
+	
+		if (!$deja_colonne_droite) {
+			creer_colonne_droite();
+		}
+	}
+	
+	echo '</td></tr><tr><td width=500 valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
 	// zap sessions si bonjour
 	if ($GLOBALS['bonjour'] == "oui" || $GLOBALS['secu'] == 'oui') {
@@ -1738,44 +1846,6 @@ function debut_droite() {
 		$zappees = zap_sessions($GLOBALS['connect_id_auteur'], $securite == 'strict');
 
 		if ($zappees && $GLOBALS['bonjour'] == "oui" && ($securite == 'strict' || $options == 'avancees')) {
-			/*
-			debut_cadre_enfonce();
-			gros_titre("Avertissement de s&eacute;curit&eacute;");
-
-			if ($securite == 'strict') {
-				if ($zappees > 1)
-					echo "<p>Il y avait " . ($zappees) ." connexion(s) parall&egrave;le(s) &agrave; votre nom. "
-						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
-						. " le syst&egrave;me a supprim&eacute; ces connexions.\n";
-				else
-					echo "<p>Il y avait une connexion parall&egrave;le &agrave; votre nom. "
-						. " Conform&eacute;mement &agrave; vos r&eacute;glages de s&eacute;curit&eacute;, "
-						. " le syst&egrave;me a supprim&eacute; cette connexion.\n";
-			}
-			else
-				echo "<p>Il y a actuellement " . ($zappees + 1) ." connexions simultan&eacute;es &agrave; votre nom.\n";
-
-			echo "<p>";
-			echo propre("<img align='right' src='img_pack/deconnecter-24.gif'>" .
-				"Pour &eacute;viter d'afficher ce message et de rendre votre connexion ".
-				"vuln&eacute;rable, pensez, lorsque vous aurez " .
-				"fini de travailler dans l'espace priv&eacute;, " .
-				"&agrave; vous d&eacute;connecter en cliquant sur le bouton ".
-				"ci-dessus. Il se peut aussi que vous ayez plusieurs connexions ".
-				"ouvertes depuis d'autres machines ou d'autres navigateurs, ".
-				"ou que quelqu'un d'autre utilise votre identifiant (si vous ".
-				"l'y avez autoris&eacute;).");
-			echo "\n<p>";
-
-			echo propre("Pour plus d'informations, vous pouvez afficher les informations de s&eacute;curit&eacute;.");
-			echo "<p>";
-
-			echo "<div align='right'>";
-			echo "<a href='index.php3?secu=oui'><b>Afficher les informations de s&eacute;curit&eacute;</b></a>";
-			echo "</div>\n";
-
-			fin_cadre_enfonce();
-			*/
 		}
 		else if ($GLOBALS['secu'] == 'oui') {
 			debut_cadre_enfonce();

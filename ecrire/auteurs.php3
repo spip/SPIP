@@ -29,11 +29,6 @@ debut_page("Auteurs$partri","redacteurs","redacteurs");
 debut_gauche();
 
 
-if ($connect_statut == '0minirezo') {
-	debut_raccourcis();
-	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
-	fin_raccourcis();
-}
 
 debut_boite_info();
 	echo "<p class='arial1'>".propre("Vous trouverez ici tous les auteurs du site.
@@ -44,6 +39,11 @@ debut_boite_info();
 		les auteurs effac&eacute;s par une poubelle.");
 fin_boite_info();
 
+if ($connect_statut == '0minirezo') {
+	debut_raccourcis();
+	icone_horizontale ("Cr&eacute;er un nouvel auteur", "auteur_infos.php3?new=oui", "redacteurs-24.gif", "creer.gif");
+	fin_raccourcis();
+}
 debut_droite();
 
 
