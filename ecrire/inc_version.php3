@@ -708,10 +708,14 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 //
 // Lire les meta cachees
 //
-if (file_exists(($flag_ecrire ? '' : 'ecrire/').'inc_meta_cache.php3')) {
+$inc_meta_cache = ($flag_ecrire ? '' : 'ecrire/').'inc_meta_cache.php3';
+if (file_exists($inc_meta_cache) AND !defined('_ECRIRE_INC_META_CACHE')  AND !defined('_ECRIRE_INC_META')) {
 	include_ecrire('inc_meta_cache.php3');
+	if (defined('_ECRIRE_INC_META')) {	// vieille version du meta-cache
+		unlink ($inc_meta_cache);
+	}
 }
-if (!defined("_ECRIRE_INC_META_CACHE") AND !is_array($meta)) {
+if (!defined("_ECRIRE_INC_META_CACHE")) {
 	function lire_meta($nom) {
 		global $meta;
 		return $meta[$nom];
