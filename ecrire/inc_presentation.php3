@@ -289,6 +289,8 @@ function afficher_liste($largeurs, $table, $styles = '') {
 }
 
 function afficher_tranches_requete(&$query, $colspan) {
+	static $ancre = 0;
+
 	$query = trim($query);
 	$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
 
@@ -307,7 +309,9 @@ function afficher_tranches_requete(&$query, $colspan) {
 	if ($num_rows > $nb_aff) {
 		$tmp_var = $query;
 		$deb_aff = intval(getTmpVar($tmp_var));
+		$ancre++;
 
+		$texte .= "<a name='a$ancre'></a>";
 		$texte .= "<tr><td background=\"\" class=\"arial2\" colspan=\"".($colspan - 1)."\">";
 
 		for ($i = 0; $i < $num_rows; $i += $nb_aff){
@@ -321,7 +325,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 			else {
 				$link = new Link;
 				$link->addTmpVar($tmp_var, strval($deb - 1));
-				$texte .= "<A HREF=\"".$link->getUrl()."\">$deb</A>";
+				$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">$deb</A>";
 			}
 		}
 		$texte .= "</td>\n";
@@ -331,7 +335,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 		} else {
 			$link = new Link;
 			$link->addTmpVar($tmp_var, -1);
-			$texte .= "<A HREF=\"".$link->getUrl()."\">"._T('lien_tout_afficher')."</A>";
+			$texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</A>";
 		}
 
 		$texte .= "</td>\n";
