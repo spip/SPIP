@@ -111,7 +111,7 @@ function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum, 
   if (!$retour_forum)
     $retour_forum = rawurlencode($url);
   else $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
-	$retour_forum = ereg_replace("\&","&amp;", $retour_forum);
+	$retour_forum = quote_amp($retour_forum);
 
   $cache = $Cache[cache];
   

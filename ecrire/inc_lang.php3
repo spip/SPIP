@@ -178,6 +178,10 @@ function traduire_chaine($code, $args) {
 function traduire_nom_langue($lang) {
 	$r = $GLOBALS['codes_langues'][$lang];
 	if (!$r) $r = $lang;
+
+		include_ecrire("inc_charsets.php3");
+		$r = html2unicode($r);
+
 	return $r;
 }
 
@@ -426,7 +430,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		if ($flag_ecrire) {
 			include_ecrire('inc_admin.php3');
 			$cible = 'ecrire/'.$lien->getUrl();
-			$post = "../spip_cookie.php3?id_auteur=$connect_id_auteur&valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			$post = "../spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 		} else {
 			$cible = $lien->getUrl();
 			$post = 'spip_cookie.php3';
@@ -434,8 +438,10 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	}
 
 	$ret = "<form action='$post' method='post' style='margin:0px; padding:0px;'>";
-	if ($cible)
-		$ret .= "<input type='hidden' name='url' value='$cible'>";
+	if ($cible) {
+		$cible = quote_amp($cible);
+		$ret .= "<input type='hidden' name='url' value='$cible' />";
+	}
 	if ($texte)
 		$ret .= $texte;
 
@@ -449,12 +455,13 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	$postcomplet = new Link($post);
 	if ($cible) $postcomplet->addvar('url', $cible);
 
-	$ret .= "\n<select name='$nom_select' $style onChange=\"document.location.href='".$postcomplet->geturl()."&$nom_select='+this.options[this.selectedIndex].value\">\n";
+	$lien_post = quote_amp($postcomplet->geturl());
+	$ret .= "\n<select name='$nom_select' $style onchange=\"document.location.href='".$lien_post."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n";
 
 	sort($langues);
 	while (list(, $l) = each ($langues)) {
 		if ($l == $default) {
-			$selected = ' selected';
+			$selected = ' selected=\'selected\'';
 		}
 		else {
 			$selected = '';
@@ -466,7 +473,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		else $ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	$ret .= "</select>\n";
-	$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='&gt;&gt;' class='spip_bouton' $style></noscript>";
+	$ret .= "<noscript><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></noscript>";
 	$ret .= "</form>";
 	return $ret;
 }

@@ -394,7 +394,7 @@ function formulaire_inscription($type) {
 
 		$link = new Link;
 		$url = $link->getUrl();
-		$url = ereg_replace("\&", "&amp;", $url);
+		$url = quote_amp($url);
 		echo "<form method='get' action='$url' style='border: 0px; margin: 0px;'>\n";
 		echo  "<div><b>"._T('form_pet_votre_nom')."</b></div>";
 		echo  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>";
