@@ -2409,49 +2409,113 @@ else {
 		
 		$result_pb = spip_query("SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
 		$result_rv = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
-		
 
 		if (spip_num_rows($result_pb) OR spip_num_rows($result_rv)) {
-			$largeur = "410px";
+			if ($GLOBALS['afficher_bandeau_calendrier']) $largeur = "800px";
+			else $largeur = "410px";
 			$afficher_cal = true;
 		}
 		else {
-			$largeur = "200px";
+			if ($GLOBALS['afficher_bandeau_calendrier']) $largeur = "600px";
+			else $largeur = "200px";
 			$afficher_cal = false;
 		}
 
-		echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
-		echo _T('icone_agenda');
 
+
+
+		if ($GLOBALS['afficher_bandeau_calendrier']) {
+			echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 0px;'>";
+			echo _T('icone_agenda');
+
+			$mois = $GLOBALS['mois'];
+			$jour = $GLOBALS['jour'];
+			$annee =$GLOBALS['annee'];			
+
+			$annee_avant = $annee - 1;
+			$annee_apres = $annee + 1;
+
+
+
+			echo "<table cellpadding='0' cellspacing='10' border='0'>";
+			echo "<tr><td colspan='3' style='text-align:$spip_lang_left;'>";
+			for ($i=$mois; $i < 13; $i++) {
+				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_avant",
+					nom_mois("$annee_avant-$i-1"),'','', 'calendrier-annee') ;
+			}
+			for ($i=1; $i < $mois - 1; $i++) {
+				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
+			}
+			echo "</td>";
+
+				if ($afficher_cal) {
+					echo "<td valign='top' width='200' rowspan='3'>";
+					echo "<div>&nbsp;</div>";
+					echo "<div style='color: black;'>";
+					echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+					echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
+					echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+					echo "</div>";
+					echo "</td>";
+				}
+		
+			echo "</tr>";
+			echo "<tr>";
+			echo "<td valign='top' width='180'>";
+			echo http_calendrier_agenda($mois-1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			echo "</td><td valign='top' width='180'>";
+			echo http_calendrier_agenda($mois, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			echo "</td><td valign='top' width='180'>";
+			echo http_calendrier_agenda($mois+1, $annee, $jour, $mois, $annee, $GLOBALS['afficher_bandeau_calendrier_semaine']) ;
+			echo "</td>";
+			echo "</tr>";
+			echo "<tr><td colspan='3' style='text-align:$spip_lang_right;'>";
+			echo "<div>&nbsp;</div>";
+			for ($i=$mois+2; $i <= 12; $i++) {
+				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee",
+					nom_mois("$annee-$i-1"),'','', 'calendrier-annee');
+			}
+			for ($i=1; $i < $mois+1; $i++) {
+				echo http_calendrier_href("calendrier.php3?mois=$i&annee=$annee_apres",
+					nom_mois("$annee_apres-$i-1"),'','', 'calendrier-annee');
+			}
+			echo "</td></tr>";
+			echo "</table>";
+
+
+
+			
+			
+			echo "</div>";
+		
+		} else {
+			echo "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
+			echo _T('icone_agenda');
 			
 			echo "<table><tr>";
 			echo "<td valign='top' width='200'>";
 				echo "<div>";
-			echo http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
-				echo "</div>";
-			echo "</td>";
-			if ($afficher_cal) {
-				echo "<td valign='top' width='10'> &nbsp; </td>";
-				echo "<td valign='top' width='200'>";
-				echo "<div>&nbsp;</div>";
-				echo "<div style='color: black;'>";
-	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
-	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
-	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+				echo http_calendrier_agenda($mois_today, $annee_today, $jour_today, $mois_today, $annee_today);
 				echo "</div>";
 				echo "</td>";
-			}
+				if ($afficher_cal) {
+					echo "<td valign='top' width='10'> &nbsp; </td>";
+					echo "<td valign='top' width='200'>";
+					echo "<div>&nbsp;</div>";
+					echo "<div style='color: black;'>";
+					echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
+					echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
+					echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+					echo "</div>";
+					echo "</td>";
+				}
 			
-			/*
-				echo "<div style='color: white;'>";
-				// rendez-vous personnels dans le mois
-				calendrier_jour($jour_today,$mois_today,$annee_today, "col");
-				echo "</div>";
-			*/
 			echo "</tr></table>";
+			echo "</div>";
+		}
 		
 
-		echo "</div>";
 
 		echo "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
 		echo _T('icone_messagerie_personnelle');
