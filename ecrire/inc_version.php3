@@ -18,8 +18,12 @@ $table_prefix = "spip";
 // (a modifier pour installer des sites SPIP dans des sous-repertoires)
 $cookie_prefix = "spip";
 
-// faut-il loger les infos de debug dans data/spip.log ?
+// faut-il loger les infos de debug dans data/spip.log ?  (peu utilise)
 $debug = false;
+
+// faut-il faire des connexions completes rappelant le nom du serveur
+// et de la base MySQL? (utile si vos squelettes appellent d'autres bases MySQL)
+$mysql_rappel_connexion = false;
 
 // faut-il passer les connexions MySQL en mode debug ?
 $mysql_debug = false;
