@@ -193,7 +193,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		//debut_cadre_enfonce("doc-24.gif");
 		if ($documents_lies) {
 	
-			if ($type == "article") echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>Les documents suivants sont associ&eacute;s &agrave; votre article. Vous ne les avez pas ins&eacute;r&eacute;s directement dans le texte de votre article, ils appara&icirc;tront sur le site public sous forme de &laquo;documents attach&eacute;s&raquo;.</font>";
+			if ($type == "article") echo propre("<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>Les documents suivants sont associ&eacute;s &agrave; votre article. Vous ne les avez pas ins&eacute;r&eacute;s directement dans le texte de votre article, ils appara&icirc;tront sur le site public sous forme de &laquo;documents attach&eacute;s&raquo;.</font>");
 
 			$case = "gauche";
 			echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
@@ -245,7 +245,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				$extension=$row['extension'];
 				echo "$extension, ";
 			}
-			if ($type == "article") echo "<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>";
+			if ($type == "article") echo typo("<b> ces documents pourront &ecirc;tre par la suite ins&eacute;r&eacute;s <i>&agrave; l'int&eacute;rieur</i> du texte si vous le d&eacute;sirez (&laquo;Modifier cet article&raquo; pour acc&eacute;der &agrave; cette option), ou affich&eacute;s hors du texte de l'article.</b>");
 	
 			if (function_exists("imagejpeg") AND function_exists("ImageCreateFromJPEG")){
 				$creer_preview=lire_meta("creer_preview");
@@ -258,7 +258,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				}
 				else {
 					if ($connect_statut == "0minirezo"){
-						echo "<p>La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;Configuration pr&eacute;cise&raquo;). Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables).";
+						echo '<p>'.propre("La cr&eacute;ation automatique de vignettes de pr&eacute;visualisation est d&eacute;sactiv&eacute;e sur ce site (r&eacute;glage sur la page &laquo;[Configuration du site / contenu->config-contenu.php3]&raquo;). Cette fonction facilite la mise en ligne d'un portfolio (collection de photographies pr&eacute;sent&eacute;es sous forme de vignettes cliquables).");
 					}
 				}
 			}
