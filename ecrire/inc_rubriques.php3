@@ -135,6 +135,9 @@ function calculer_rubriques() {
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_syndic SET id_secteur=".$row['secteur']."
 		WHERE id_rubrique=".$row['id']);
+	
+	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
+	ecrire_meta("date_calcul_rubriques", date("U"));
 
 }
 
