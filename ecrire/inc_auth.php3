@@ -105,15 +105,15 @@ function auth() {
 		$link = new Link("../spip_cookie.php3?test_echec_cookie=oui");
 		$clean_link->delVar('bonjour');
 		$url = str_replace('/./', '/', _DIR_RESTREINT_ABS .$clean_link->getUrl());
-		$link->addVar('var_url', $url);
+		$link->addVar('url', $url);
 		redirige_par_entete($link->getUrl());
 		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
-		$url = (str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
-		redirige_par_entete($addr . "../spip_login.php3?var_url=$url");
+		$url = urlencode(str_replace('/./', '/',  _DIR_RESTREINT_ABS .$clean_link->getUrl()));
+		redirige_par_entete($addr . "../spip_login.php3?url=$url");
 		exit;
 	}
 

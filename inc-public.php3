@@ -145,8 +145,10 @@ else {
 	}
 
 	// Ajouter au besoin la CSS des boutons admins
-	if ($affiche_boutons_admin)
+	if ($affiche_boutons_admin) {
+		include_local("inc-admin.php3");
 		$contenu = perso_admin($contenu);
+	}
 
 	// Afficher le resultat final
 	echo $contenu;
@@ -154,7 +156,7 @@ else {
 	// Ajouter les boutons admins (les normaux) si absents
 	// (ce sera apres la balise /html mais tant pis)
 	if ($affiche_boutons_admin)
-		echo inclure_formulaire(admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur));
+		inclure_balise_dynamique(balise_formulaire_admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur));
 
 	// Taches de fin
 	terminer_public_global();

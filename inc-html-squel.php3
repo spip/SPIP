@@ -73,7 +73,7 @@ function parser_champs($texte) {
 			$champ->texte = (substr($texte, 0, $p));
 			$result[] = $champ;
 		}
-
+		  
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];

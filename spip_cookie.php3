@@ -11,7 +11,7 @@ function auth_http($url, $essai_auth_http) {
 		include_ecrire('inc_session.php3');
 		if (!verifier_php_auth()) {
 		  $url = quote_amp(urlencode($url));
-			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;var_url=$url'>"._T('login_nouvelle_tentative')."</a>]";
+			$page_erreur = "<b>"._T('login_connexion_refusee')."</b><p />"._T('login_login_pass_incorrect')."<p />[<a href='./'>"._T('login_retour_site')."</a>] [<a href='spip_cookie.php3?essai_auth_http=oui&amp;url=$url'>"._T('login_nouvelle_tentative')."</a>]";
 			if (ereg(_DIR_RESTREINT_ABS, $url))
 			  $page_erreur .= $lien;
 			ask_php_auth($page_erreur);
@@ -48,21 +48,21 @@ if ($change_session == 'oui') {
 		exit;
 	}
 }
-#spip_log("cookie: $var_url");
+#spip_log("cookie: $url");
 
-if ($var_url)  $var_url = urldecode($var_url);
+if ($url)  $url = urldecode($url);
 
 // tentative de connexion en auth_http
 if ($essai_auth_http AND !$ignore_auth_http) {
-	auth_http(($var_url ? $var_url : _DIR_RESTREINT_ABS), $essai_auth_http);
+	auth_http(($url ? $url : _DIR_RESTREINT_ABS), $essai_auth_http);
 	exit;
 }
 
 // cas particulier, logout dans l'espace public
 if ($logout_public) {
 	$logout = $logout_public;
-	if (!$var_url)
-		$var_url = 'index.php3';
+	if (!$url)
+		$url = 'index.php3';
 }
 // tentative de logout
 if ($logout) {
@@ -75,12 +75,12 @@ if ($logout) {
 			spip_setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		}
 		if ($PHP_AUTH_USER AND !$ignore_auth_http) {
-			auth_http(($var_url ? $var_url : _DIR_RESTREINT_ABS), 'logout');
+			auth_http(($url ? $url : _DIR_RESTREINT_ABS), 'logout');
 		}
 		unset ($auteur_session);
 	}
 
-	redirige_par_entete($var_url ? $var_url : "spip_login.php3");
+	redirige_par_entete($url ? $url : "spip_login.php3");
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
@@ -88,13 +88,13 @@ if ($logout) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&var_url=" .
-			    ($var_url ? $var_url : _DIR_RESTREINT_ABS));
+	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&url=" .
+			    ($url ? $url : _DIR_RESTREINT_ABS));
 }
 
 // Tentative de login
 unset ($cookie_session);
-$redirect = ($var_url ? $var_url : _DIR_RESTREINT_ABS);
+$redirect = ($url ? $url : _DIR_RESTREINT_ABS);
 if ($essai_login == "oui") {
 	// Recuperer le login en champ hidden
 	if ($session_login_hidden AND !$session_login)
@@ -144,7 +144,7 @@ if ($essai_login == "oui") {
 		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=$login";
 		if ($session_password || $session_password_md5)
 			$redirect .= '&var_erreur=pass';
-		$redirect .= '&var_url=' . $var_url;
+		$redirect .= '&url=' . urlencode($url);
 	}
  }
 

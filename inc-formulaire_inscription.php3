@@ -1,16 +1,18 @@
 <?php
 
-global $inscription_array ;
-$inscription_array = array('mail_inscription', 'nom_inscription');
+include_ecrire('inc_abstract_sql.php3');
 
-function inscription_stat($args, $filtres)
+global $balise_FORMULAIRE_INSCRIPTION_collecte ;
+$balise_FORMULAIRE_INSCRIPTION_collecte = array('mail_inscription', 'nom_inscription');
+
+function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres)
 {
   list($mail_inscription, $nom_inscription) = $args;
   return ((lire_meta('accepter_inscriptions') != 'oui') ? '' :
 	  array('redac', $mail_inscription, $nom_inscription));
 }
 
-function inscription_dyn($type, $mail_inscription, $nom_inscription) {
+function balise_FORMULAIRE_INSCRIPTION_dyn($type, $mail_inscription, $nom_inscription) {
 	if ($type == 'redac') {
 		$statut = "nouveau";
 	}

@@ -9,9 +9,6 @@
 // Cette classe est definie dans inc-compilo-index.php3
 //
 
-## NB: les fonctions de forum sont definies dans inc-forum.php3
-
-
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_BALISES")) return;
 define("_INC_BALISES", "1");
@@ -71,17 +68,15 @@ function champs_traitements ($p) {
 			   $ps);				
 }
 
-function param_balise(&$p) 
-{
-	$a = $p->fonctions;
-	if ($a) list(,$nom) = each($a) ; else $nom = '';
-	if (!ereg(' *\{ *([^}]+) *\} *',$nom, $m))
-	  return '';
-	else {
-		$filtres= array();
-		while (list(, $f) = each($a)) if ($f) $filtres[] = $f;
-		$p->fonctions = $filtres;
-		return $m[1];
+// il faudrait savoir traiter les formulaires en local 
+// tout en appelant le serveur SQL distant.
+// En attendant, cette fonction permet de refuser une authentification 
+// sur qqch qui n'a rien à voir.
+
+function balise_distante_interdite($p) {
+	$nom = $p->id_boucle;
+	if ($p->boucles[$nom]->sql_serveur) {
+		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
 	}
 }
 
@@ -401,26 +396,6 @@ echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 	return $p;
 }
 
-//
-// Formulaires de login
-//
-function balise_LOGIN_PRIVE_dist($p) {
-	balise_distante_interdite($p);
-	$p->code = '("<"."?php include(\'inc-login.php3\'); echo login((\$GLOBALS[\'var_url\'] ? \$GLOBALS[\'var_url\'] : \'' . _DIR_RESTREINT_ABS . '\'), \'prive\'); ?".">")'; 
-	$p->statut = 'php';
-	return $p;
-}
-
-function balise_LOGIN_PUBLIC_dist($p) {
-	balise_distante_interdite($p);
-	$p->code = '("<"."?php include(\'inc-login.php3\'); echo login(\'' . 
-	    $p->fonctions[0]  .
-	    '\', false); ?".">")';
-	$p->fonctions = array();
-	$p->statut = 'php';
-	return $p;
-}
-
 function balise_URL_LOGOUT_dist($p) {
 	if ($p->fonctions) {
 	$url = "'" . $p->fonctions[0] . "'";
@@ -429,7 +404,7 @@ function balise_URL_LOGOUT_dist($p) {
 	$url = '\$clean_link->getUrl()';
 	}
 	$p->code = '("<"."?php if (\$GLOBALS[\'auteur_session\'][\'login\'])
-    { echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'&amp;var_url=\' .urlencode(' . $url . '); } ?".">")';
+    { echo \'spip_cookie.php3?logout_public=\'.\$GLOBALS[\'auteur_session\'][\'login\'].\'&amp;url=\' .urlencode(' . $url . '); } ?".">")';
 	$p->statut = 'php';
 	return $p;
 }
@@ -656,56 +631,65 @@ function balise_EXTRA_dist ($p) {
 }
 
 //
-// Gros morceau inséparable du formulaire associe. On delegue
+// Parametres de reponse a un forum
 //
 
 function balise_PARAMETRES_FORUM_dist($p) {
-  include_local("inc-forum.php3");
-  return calculer_balise_parametres($p);
-}
+	include_local('inc-formulaire_forum.php3');
+	$_accepter_forum = champ_sql('accepter_forum', $p);
+	$p->code = '
+	// refus des forums ?
+	('.$_accepter_forum.'=="non" OR
+	(lire_meta("forums_publics") == "non" AND !ereg("^(pos|pri|abo)", '.$_accepter_forum.')))
+	? "" : // sinon:
+	';
 
-//
-// Traduction des champs "formulaire"
-// Inclusion du fichier associe a son nom.
-// Ca donne les arguments a chercher dans la pile,on compile leur localisation
-// Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
-// qui recevra a l'execution la valeurs des arguments, 
-// ainsi que les filtres (qui ne sont donc pas traites à la compil)
+	switch ($p->type_requete) {
+		case 'articles':
+			$c = '"id_article=".' . champ_sql('id_article', $p);
+			break;
+		case 'breves':
+			$c = '"id_breve=".' . champ_sql('id_breve', $p);
+			break;
+		case 'rubriques':
+			$c = '"id_rubrique=".' . champ_sql('id_rubrique', $p);
+			break;
+		case 'syndication':
+			$c = '"id_syndic=".' . champ_sql('id_syndic', $p);
+			break;
+		case 'forums':
+		default:
+			$liste_champs = array ("id_article","id_breve","id_rubrique","id_syndic","id_forum");
+			foreach ($liste_champs as $champ) {
+				$x = champ_sql( $champ, $p);
+				$c .= (($c) ? ".\n" : "") . "((!$x) ? '' : ('&$champ='.$x))";
+			}
+			$c = "substr($c,1)";
+			break;
+	}
 
-function calculer_balise_formulaire($p) {
-	balise_distante_interdite($p);
-	$nom = strtolower(substr($p->nom_champ, strpos($p->nom_champ,'_')+1));
-	$filtres = $p->fonctions;
-	$file = 'inc-' . $nom . _EXTENSION_PHP;
-	include_local($file);
-	$l = $GLOBALS[$nom . '_array'];
-	$p->code = "calculer_formulaire('$nom', array("
-	  . join(',',calculer_multiple_balise($l, $p))
-	  . '), array('
-	  . (!$filtres ? '' : ("'" . join("','", $filtres) . "'"))
-	  . "))";
-	$p->statut = 'php';
-	$p->fonctions = '';
+	$c .= '.
+	"&retour=".rawurlencode($lien=$GLOBALS["HTTP_GET_VARS"]["retour"] ? $lien : nettoyer_uri())';
+
+	$p->code .= code_invalideur_forums($p, "(".$c.")");
+
+	$p->statut = 'html';
 	return $p;
 }
 
-// construire un tableau des valeurs interessant un formulaire
 
-function calculer_multiple_balise($l, $p) {
-  $args = array();
-  foreach($l as $c) { $x = calculer_balise($c, $p); $args[] = $x->code;}
-  return $args;
-}
-
-// il faudrait savoir traiter les formulaires en local 
-// tout en appelant le serveur SQL distant.
-// En attendant, refuser une authentification sur qqch qui n'a rien à voir.
-
-function balise_distante_interdite($p) {
-	$nom = $p->id_boucle;
-	if ($p->boucles[$nom]->sql_serveur) {
-		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
-	}
+// Noter l'invalideur de la page contenant ces parametres,
+// en cas de premier post sur le forum
+function code_invalideur_forums($p, $code) {
+	return '
+	// invalideur forums
+	(!($Cache[\'id_forum\'][calcul_index_forum(' . 
+				// Retournera 4 [$SP] mais force la demande du champ a MySQL
+				champ_sql('id_article', $p) . ',' .
+				champ_sql('id_breve', $p) .  ',' .
+				champ_sql('id_rubrique', $p) .',' .
+				champ_sql('id_syndic', $p) .  ")]=1)".
+				"?'':\n" . $code .")";
 }
 
 // reference a l'URL de la page courante

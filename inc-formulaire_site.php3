@@ -1,14 +1,14 @@
 <?php
 
-global $site_array;
-$site_array = array('id_rubrique', 'nom_site', 'url_site', 'description_site');
+global $balise_FORMULAIRE_SITE_collecte;
+$balise_FORMULAIRE_SITE_collecte = array('id_rubrique', 'nom_site', 'url_site', 'description_site');
 
-function site_stat($args, $filtres)
+function balise_FORMULAIRE_SITE_stat($args, $filtres)
 {
   return ((lire_meta("proposer_sites") != 2) ? '' : $args);
 }
 
-function site_dyn($id_rubrique, $nom_site, $url_site, $description_site) {
+function balise_FORMULAIRE_SITE_dyn($id_rubrique, $nom_site, $url_site, $description_site) {
 
 	global $spip_lang_rtl;
 	$puce_ligne = "<br /><img src='puce$spip_lang_rtl.gif' border='0' alt='-' /> ";

@@ -1,21 +1,21 @@
 <?php
 
-global $ecrire_auteur_array ;
-$ecrire_auteur_array = array('id_auteur',
+global $balise_FORMULAIRE_ECRIRE_AUTEUR_collecte ;
+$balise_FORMULAIRE_ECRIRE_AUTEUR_collecte = array('id_auteur',
 			     'email',
 			     'sujet_message_auteur',
 			     'texte_message_auteur',
 			     'email_message_auteur'
 );
 
-function ecrire_auteur_stat($args, $filtres)
+function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres)
 {
   list($id_auteur, $mail, $sujet, $texte, $adres) = $args;
   return (!email_valide($mail) ? '' :
 	  array($id_auteur, $mail,$sujet, $texte, $adres));
 }
 
-function ecrire_auteur_dyn($id_auteur, $mail, $sujet, $texte, $adres) {
+function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $mail, $sujet, $texte, $adres) {
   global $spip_lang_rtl;
 	include_ecrire("inc_lang.php3"); // pour spip_lang_rtl 
 	if (!$spip_lang_rt) $spip_lang_rtl = '_rtl'; # INDISPENSABLE cf skel

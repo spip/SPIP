@@ -1,7 +1,7 @@
 <?php
 
 
-// cfonctions de recherche et de reservation
+// fonctions de recherche et de reservation
 // dans l'arborescence des boucles
 
 // Ce fichier ne sera execute qu'une fois
@@ -132,17 +132,68 @@ function calculer_balise($nom, $p) {
 	if (function_exists($f))
 		return $f($p);
 
+	// regarder s'il existe un fichier d'inclusion au nom de la balise
+	// et contenant un tableau balise_NOM_collecte
+	$file = 'inc-' . strtolower($nom) . _EXTENSION_PHP;
+	if (@file_exists($file)) {
+		include_local($file);
+		$f = $GLOBALS['balise_' . $nom . '_collecte'];
+		if (is_array($f))
+			return calculer_balise_dynamique($p, $nom, $f);
+	}
+
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom))
 		return calculer_balise_logo($p);
 
-	// S'agit-il d'un formulaire ? Une fonction speciale les traite tous
-	if (ereg('^FORMULAIRE_', $nom))
-		return calculer_balise_formulaire($p);
-
 	// ca doit etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 	return $p;
+}
+
+
+//
+// Traduction des balises dynamiques, notamment les "formulaire_*"
+// Inclusion du fichier associe a son nom.
+// Ca donne les arguments a chercher dans la pile,on compile leur localisation
+// Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
+// qui recevra a l'execution la valeurs des arguments, 
+// ainsi que les filtres (qui ne sont donc pas traites à la compil)
+
+function calculer_balise_dynamique($p, $nom, $l) {
+	balise_distante_interdite($p);
+	$param = param_balise($p);
+	$p->code = "executer_balise_dynamique('" . $nom . "', array("
+	  . join(',',collecter_balise_dynamique($l, $p))
+	  . filtres_arglist($param, $p)
+	  . '), array('
+	  . (!$p->fonctions ? '' : ("'" . join("','", $p->fonctions) . "'"))
+	  . "))";
+	$p->statut = 'php';
+	$p->fonctions = '';
+	return $p;
+}
+
+function param_balise(&$p) 
+{
+	$a = $p->fonctions;
+	if ($a) list(,$nom) = each($a) ; else $nom = '';
+	if (!ereg(' *\{ *([^}]+) *\} *',$nom, $m))
+	  return '';
+	else {
+		$filtres= array();
+		while (list(, $f) = each($a)) if ($f) $filtres[] = $f;
+		$p->fonctions = $filtres;
+		return $m[1];
+	}
+}
+
+// construire un tableau des valeurs interessant un formulaire
+
+function collecter_balise_dynamique($l, $p) {
+	$args = array();
+	foreach($l as $c) { $x = calculer_balise($c, $p); $args[] = $x->code;}
+	return $args;
 }
 
 // Genere l'application d'une liste de filtres
@@ -191,6 +242,9 @@ function applique_filtres($p) {
 	return $code;
 }
 
+// analyse des parametres d'un champ etendu
+// [...(#CHAMP{parametres})...] ou [...(#CHAMP|filtre{parametres})...]
+// retourne une suite de N references aux N valeurs indiquées avec N virgules
 
 function filtres_arglist($args, $p) {
 	$arglist ='';;
