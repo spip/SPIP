@@ -20,12 +20,6 @@ $GLOBALS['ferme_note'] = '] ';
 $GLOBALS['les_notes']  = '';
 $GLOBALS['compt_note'] = 0;
 
-// switches pour l'affichage des documents (peut mieux faire !)
-$GLOBALS['doc_affiche_titre'] = true;
-$GLOBALS['doc_affiche_descriptif'] = true;
-$GLOBALS['doc_affiche_fichier'] = true;
-$GLOBALS['doc_affiche_largeurhauteur'] = true;
-
 if (file_exists("puce.gif")) {
 	$imgsize = getimagesize('puce.gif');
 	$GLOBALS['puce'] = "<img src='puce.gif' align='top' alt='- ' ".$imgsize[3]." border='0'> ";
@@ -244,7 +238,7 @@ function interdire_scripts($source) {
 }
 
 // Integration des images et documents
-function integre_image($id_document, $align, $affichage_detaille = false) {
+function integre_image($id_document, $align, $type_aff = 'IMG') {
 	$query = "SELECT * FROM spip_documents WHERE id_document = $id_document";
 	$result = mysql_query($query);
 	if ($row = mysql_fetch_array($result)) {
@@ -258,6 +252,10 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 		$taille = $row['taille'];
 		$mode = $row['mode'];
 		$id_vignette = $row['id_vignette'];
+
+		// type d'affichage : IMG, DOC
+		if (eregi("(DOC)", $type_aff, $regs))
+			$affichage_detaille = strtoupper($regs[1]);
 
 		// on construira le lien en fonction du type de doc
 		$result_type = mysql_query("SELECT * FROM spip_types_documents WHERE id_type = $id_type");
@@ -289,8 +287,8 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 			$vignette = "<img src='$fichier_vignette' border=0";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
-			if ($align)
-				$vignette .= " align='$align'";
+			if (eregi("(left|right|center)",$align,$regs))
+				$vignette .= " align='".$regs[1]."'";
 			if ($titre)
 				$vignette .= " alt=\"$titre\" title=\"$titre\"";
 			if ($affichage_detaille)
@@ -320,11 +318,12 @@ function integre_image($id_document, $align, $affichage_detaille = false) {
 			$retour .= "<tr><td align='center'>\n<div class='spip_documents'>\n";
 			$retour .= $vignette;
 
-			if ($GLOBALS['doc_affiche_titre'] AND $titre) $retour .= "<br><b>$titre</b>";
-			if ($GLOBALS['doc_affiche_descriptif'] AND $descriptif) $retour .= "<br>$descriptif";
-			if ($GLOBALS['doc_affiche_fichier'] AND $fichier) $retour .= "<br>$type - $taille_ko&nbsp;ko";
-			if ($GLOBALS['doc_affiche_largeurhauteur'] AND $largeur AND $hauteur) $retour .= "<br>$largeur x $hauteur pixels";
-			
+			if ($titre) $retour .= "<br><b>$titre</b>";
+			if ($descriptif) $retour .= "<br>$descriptif";
+		/*	a mettre eventuellement en info-bulle ?
+		 *	if ($fichier) $retour .= "<br>$type - $taille_ko&nbsp;ko";
+		 *	if ($largeur AND $hauteur) $retour .= "<br>$largeur x $hauteur pixels";
+		 */
 			$retour .= "</div>\n</td></tr>\n</table>\n";
 		}
 		else $retour = $vignette;
@@ -537,13 +536,12 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 	//
 	// Insertion d'images utilisateur
 	//
-	while (eregi("<(IMG|DOC)([0-9]+)\|([^\>]*)>", $letexte, $match)) {
+	while (eregi("<(IMG|DOC)([0-9]+)(\|[^\>]*)?".">", $letexte, $match)) {
 		$letout = quotemeta($match[0]);
 		$letout = ereg_replace("\|", "\|", $letout);
-		$aff_details = (strtoupper($match[1]) == 'DOC');
 		$id_document = $match[2];
 		$align = $match[3];
-		$rempl = integre_image($id_document, $align, $aff_details);
+		$rempl = integre_image($id_document, $align, $match[1]);
 		$letexte = ereg_replace($letout, $rempl, $letexte);
 	}
 
