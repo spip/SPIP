@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'calendrier_synchro' => 'Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), kan je deze synchroniseren met de actuele artikels van deze site.',
+'calendrier_synchro' => '<MODIF> Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), kan je deze synchroniseren met de actuele artikels van deze site.',
 'calendrier_synchro_lien' => 'Het bestand <i>iCal</i> ophalen',
 
 
@@ -362,17 +362,30 @@ Bedankt voor je deelname
 
 
 // I
+'ical_info1' => '<NEW> Cette page pr&eacute;sente plusieurs m&eacute;thodes pour rester en contact avec la vie de ce site.',
+'ical_info2' => '<NEW> Pour plus de renseignements sur toutes ces techniques, n\'h&eacute;sitez pas &agrave; consulter <a href="http://www.spip.net/fr_suivi">la documentation de SPIP</a>.',
+'ical_info_calendrier' => '<NEW> Deux calendriers sont &agrave; votre disposition. Le premier est un plan du site annon&ccedil;ant tous les articles publi&eacute;s. Le second contient les annonces &eacute;ditoriales ainsi que vos derniers messages priv&eacute;s&nbsp;: il vous est r&eacute;serv&eacute; gr&acirc;ce &agrave; une cl&eacute; personnelle, que vous pouvez modifier &agrave; tout moment en renouvelant votre mot de passe.',
+'ical_methode_http' => '<NEW> T&eacute;l&eacute;chargement',
+'ical_methode_webcal' => '<NEW> Synchronisation (webcal://)',
+'ical_texte_js' => '<NEW> Une ligne de javascript vous permet d\'afficher tr&egrave;s simplement, sur n\'importe quel site vous appartenant, les articles r&eacute;cents publi&eacute;s sur ce site.',
+'ical_texte_prive' => '<NEW> Ce calendrier, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
+'ical_texte_public' => '<NEW> Ce calendrier vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
+'ical_texte_rss' => '<NEW> Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible.',
+'ical_titre_js' => '<NEW> Javascript',
+'ical_titre_mailing' => '<NEW> Mailing-list',
+'ical_titre_rss' => '<NEW> Fichier &laquo; backend &raquo;',
 'icone_a_suivre' => 'Taken',
 'icone_activer_cookie' => 'De toegangskoekie activeren',
 'icone_admin_site' => 'Beheer van de site',
 'icone_afficher_auteurs' => 'Auteurs tonen',
 'icone_afficher_visiteurs' => 'Bezoekers tonen',
-'icone_agenda' => 'Agenda en berichtensysteem',
+'icone_agenda' => '<MODIF> Agenda en berichtensysteem',
 'icone_aide_ligne' => 'Online help',
 'icone_arret_discussion' => 'Niet langer deelnemen aan deze discussie',
 'icone_articles' => 'Artikels',
 'icone_auteurs' => 'Auteurs',
 'icone_breves' => 'Berichten',
+'icone_brouteur' => '<NEW> Navigation rapide',
 'icone_calendrier' => 'Kalender',
 'icone_calendrier_messagerie' => 'Agenda en berichtensysteem',
 'icone_configuration_site' => 'Configuratie van de site',
@@ -386,10 +399,11 @@ Bedankt voor je deelname
 'icone_creer_rubrique_2' => 'Een nieuwe rubriek aanmaken',
 'icone_creer_sous_rubrique' => 'Een subrubriek aanmaken',
 'icone_deconnecter' => 'Uitloggen',
+'icone_discussions' => '<NEW> Discussions',
 'icone_doc_rubrique' => 'Bijlagen van de rubrieken',
 'icone_ecrire_article' => 'Een nieuw artikel schrijven',
 'icone_ecrire_nouvel_article' => 'De berichten van deze rubriek',
-'icone_edition_site' => 'Redactie van de site',
+'icone_edition_site' => '<MODIF> Redactie van de site',
 'icone_envoyer_message' => 'Bericht verzenden',
 'icone_etat_traductions' => 'Status van de vertalingen ',
 'icone_evolution_visites' => 'Evolutie van de bezoeken<br>@visites@ bezoeken@aff_ref@',
@@ -398,6 +412,7 @@ Bedankt voor je deelname
 'icone_forum_interne' => 'Intern forum',
 'icone_forum_suivi' => 'Opvolging van de forums',
 'icone_forums_petitions' => 'Forums en petities',
+'icone_gestion_langues' => '<NEW> Gestion des langues',
 'icone_informations_personnelles' => 'Persoonlijke gegevens',
 'icone_interface_complet' => 'Volledige interface',
 'icone_interface_simple' => 'Eenvoudige interface',
@@ -418,6 +433,7 @@ Bedankt voor je deelname
 'icone_refuser_breve' => 'Dit nieuwsbericht weigeren',
 'icone_repartition_actuelle' => 'De huidige verdeling tonen',
 'icone_repartition_debut' => 'De verdeling sinds het begin tonen',
+'icone_repartition_visites' => '<NEW> R&eacute;partition des visites',
 'icone_retour' => 'Terug',
 'icone_retour_article' => 'Terug naar artikel',
 'icone_rubriques' => 'Rubrieken',
@@ -426,6 +442,8 @@ Bedankt voor je deelname
 'icone_sites_references' => 'Gekoppelde sites',
 'icone_statistiques' => 'Statistieken van de site',
 'icone_statistiques_visites' => 'Statistieken aantal bezoeken',
+'icone_suivi_activite' => '<NEW> Suivre la vie du site',
+'icone_suivi_actualite' => '<NEW> &Eacute;volution du&nbsp;site',
 'icone_suivi_forum' => 'Opvolging van het publieke forum: @nb_forums@&nbsp;bijdrage(n)',
 'icone_suivi_forums' => 'Forums opvolgen/beheren',
 'icone_suivi_pettions' => 'Petities opvolgen/beheren',
@@ -538,6 +556,8 @@ Bedankt voor je deelname
 'info_classement_2' => '<sup>e</sup> @liste@',
 'info_code_acces' => 'Vergeet je eigen toegangscode niet!',
 'info_comment_lire_tableau' => 'Hoe lees je deze tabel',
+'info_config_suivi' => '<NEW> Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => '<NEW> Vous pouvez vous abonner &agrave; la mailing-list de ce site. Vous recevrez alors par courrier &eacute;lectronique les annonces d\'articles et de br&egrave;ves propos&eacute;s &agrave; la publication.',
 'info_confirmer_passe' => 'Bevestig het nieuwe paswoord :',
 'info_connexion_base' => 'Tweede stap : <B>Poging tot verbinding met de gegevensbank</b>',
 'info_connexion_ldap_ok' => 'De LDAP-verbinding is gelukt.</b><P> Je kan de volgende stap zetten.',
@@ -551,7 +571,7 @@ Bedankt voor je deelname
 'info_contribution' => 'Bijdragen aan het forum',
 'info_copyright' => 'is vrije software verdeeld <a href=\'copyright_fr.html\'>onder GPL-licentie.</a>',
 'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl\'>http://www.spip.net/nl</a>.',
-'info_cours_edition' => 'Je artikels in redactie',
+'info_cours_edition' => '<MODIF> Je artikels in redactie',
 'info_creation_mots_cles' => 'Cre&euml;er en configureer hier de trefwoorden van de site',
 'info_creation_paragraphe' => '(Om een nieuwe paragraaf aan te maken, laat je gewoon enkele lijnen blanco.)',
 'info_creation_rubrique' => 'Om artikels te kunnen schrijven,<BR> dien je minstens &eacute;&eacute;n rubriek aan te maken.<BR>',
@@ -693,6 +713,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_mail_fournisseur' => 'jullie@provider.be',
 'info_maximum' => 'maximum:',
 'info_message' => 'Bericht van',
+'info_message_2' => '<NEW> MESSAGE',
 'info_message_efface' => 'GEWIST BERICHT',
 'info_message_en_redaction' => 'Je berichten in redactie',
 'info_message_supprime' => 'VERWIJDERD BERICHT',
@@ -724,6 +745,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_multi_langues_choisies' => 'Kies hierna welke talen ter beschikking staan van de redacteurs van je site.
   Talen die al worden gebruikt (vooraan in de lijst getoond) kunnen niet geschrapt worden.
 ',
+'info_multi_langues_soulignees' => '<NEW> Les <u>langues soulign&eacute;es</u> b&eacute;n&eacute;ficient d\'une traduction des tous les textes de l\'interface. Si vous s&eacute;lectionnez ces langues, de nombreux &eacute;l&eacute;ments du site public (dates, formulaires) seront automatiquement traduits. Pour les langues non soulign&eacute;es, ces &eacute;l&eacute;ments appara&icirc;tront dans la langue principale du site.',
 'info_multi_rubriques' => 'Taalmenu toepassen op de rubrieken?',
 'info_multi_secteurs' => '... enkel voor de rubrieken in de hoofdmap?',
 'info_multilinguisme' => 'Meertaligheid',
@@ -791,6 +813,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_pour' => 'voor',
 'info_premier_resultat' => '[@debut_limit@ eerste resultaten op @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ eerste resultaten op @total@]',
+'info_principaux_correspondants' => '<NEW> Vos principaux correspondants',
 'info_probleme_grave' => 'probleem van',
 'info_procedez_par_etape' => 'volg stap voor stap',
 'info_procedure_maj_version' => 'de procedure voor updaten die nodig is om de databank aan te passen
@@ -1194,7 +1217,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'menu_aide_sites_syndiquer' => 'Gesyndiceerde sites',
 'menu_aide_suivi_forum' => 'Opvolging van de forums',
 'menu_aide_suivi_forum_articles_postes' => 'Postgedateerde artikels',
-'menu_aide_suivi_forum_configuration' => 'Configuratie',
+'menu_aide_suivi_forum_configuration' => '<MODIF> Configuratie',
 'menu_aide_suivi_forum_contenu_articles' => 'Inhoud artikel',
 'menu_aide_suivi_forum_envoi_emails' => 'Automatische e-post',
 'menu_aide_suivi_forum_fonctionnement' => 'Werking van forums',
@@ -1204,6 +1227,12 @@ De publieke forums kunnen per artikel toegestaan worden
 'menu_aide_suivi_forum_statistiques' => 'Statistieken van de bezoeken',
 'menu_aide_suivi_forum_suivi' => 'Follow-up van de forums',
 'menu_aide_suivi_forum_systeme_breves' => 'Het nieuwssysteem',
+'module_fichier_langue' => '<NEW> Fichier de langue',
+'module_fichiers_langues' => '<NEW> Fichiers de langue',
+'module_raccourci' => '<NEW> Raccourci',
+'module_texte_affiche' => '<NEW> Texte affich&eacute;',
+'module_texte_explicatif' => '<NEW> Vous pouvez ins&eacute;rer les raccourcis suivants dans les squelettes de votre site public. Ils seront automatiquement traduits dans les diff&eacute;rentes langues pour lesquelles il existe un fichier de langue.',
+'module_texte_traduction' => '<NEW> Le fichier de langue &laquo;&nbsp;@module@&nbsp;&raquo; est disponible en&nbsp;:',
 'mois_non_connu' => 'Onbekend',
 
 
@@ -1303,7 +1332,7 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
 'texte_article_virtuel' => 'Virtual artikel',
 'texte_article_virtuel_reference' => '<b>Virtueel artikel:</b> gekoppeld artikel in je SPIP site maar doorgestuurd naar een andere URL. Verwijder de URL om de doorverwijzing te stoppen.',
 'texte_aucun_resultat_auteur' => 'Geen resultaat voor "@cherche_auteur@"',
-'texte_auteur_messagerie' => 'Deze site kan de lijst met auteurs die op dit moment aangelogd zijn, bijhouden. Dit laat je toe meteen en in realtime berichten uit te wisselen met deze auteurs. (als het berichtensysteem niet geactiveerd is, zal de lijst met verbonden auteurs zich ook automatisch desactiveren). Je kan kiezen om al dan niet in de lijst te verschijnen (je wordt dan &laquo;onzichtbaar&raquo; voor de andere gebruikers).',
+'texte_auteur_messagerie' => '<MODIF> Deze site kan de lijst met auteurs die op dit moment aangelogd zijn, bijhouden. Dit laat je toe meteen en in realtime berichten uit te wisselen met deze auteurs. (als het berichtensysteem niet geactiveerd is, zal de lijst met verbonden auteurs zich ook automatisch desactiveren). Je kan kiezen om al dan niet in de lijst te verschijnen (je wordt dan &laquo;onzichtbaar&raquo; voor de andere gebruikers).',
 'texte_auteur_messagerie_1' => 'Deze site biedt de mogelijkheid om berichten uit te wisselen en forums op te starten voor private discussies tussen de deelnemers van de site. Je kan kiezen om niet deel te nemen aan deze uitwisseling van informatie.',
 'texte_auteurs' => 'DE AUTEURS',
 'texte_bilan_traductions' => 'In deze grafiek tonen de groene staafjes de artikels die vertaald en up-to-date zijn; de rode staafjes geven de vertalingen aan die nog aangepast moeten worden.',
@@ -1434,14 +1463,14 @@ In dat geval dien je de standaardwaarde voor een aangepaste tekenset te wijzigen
 'texte_nouvelle_version_spip_2' => 'Deze nieuwe SPIP-versie vereist een meer grondige update dan gewoonlijk. Als je webmaster bent van deze site, verwijder dan het bestand <tt>inc_connect.php3</tt> in de map <tt>ecrire</tt>. Herneem nu de installatie van SPIP om de verbindingsgegevens met de databank te vernieuwen.<p> (NB.: als je je verbindingsgegevens niet meer kent, kan je best eerst een blik werpen op het bestand <tt>inc_connect.php3</tt> alvorens het te verwijderen...)',
 'texte_operation_echec' => 'Ga terug naar de vorige pagina, selecteer een andere gegevensbank of maak een nieuwe aan. Kijk nog eens alle gegevens na die je van je provider hebt ontvangen.',
 'texte_plan_trad' => '<NEW> Cette page vous permet de visualiser l\'&eacute;tat des traductions pour la langue choisie. 
-  La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave; jour, 
-  ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
+		La page affiche les articles dont la traduction est en cours, les articles dont la traduction doit &ecirc;tre mise &agrave jour, 
+		ainsi que les articles qui n\'ont pas encore &eacute;t&eacute; traduits. ',
 'texte_plan_trad_en_cours' => '<NEW> Ce symbole indique qu\'un article est en cours de traduction&nbsp;: cela veut dire qu\'une traduction 
-  a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
-  &agrave; la traduction. ',
-'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave; 
-  un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
-  traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
+		a &eacute;t&eacute; commenc&eacute;e mais n\'est pas encore publi&eacute;e. Cliquez sur le symbole pour acc&eacute;der
+		&agrave; la traduction. ',
+'texte_plan_trad_modif' => '<NEW> Ce symbole indique que des modifications ont &eacute;t&eacute; apport&eacute;es &agrave 
+		un article d&eacute;j&agrave; traduit. Dans ce cas il est conseill&eacute; de mettre &agrave; jour la
+		traduction en fonction des modifications apport&eacute;es &agrave; l\'article original. ',
 'texte_plan_trad_note' => 'Noot&nbsp;: alleen gepubliceerde artikels worden op deze pagina getoond.',
 'texte_plus_trois_car' => 'meer dan 3 karakters',
 'texte_plusieurs_articles' => 'Meerdere auteurs gevonden voor "@cherche_auteur@":',

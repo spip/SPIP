@@ -90,7 +90,7 @@ la documentacion d\'SPIP</a>.',
 'bouton_ajouter_document' => 'APONDRE UN DOCUMENT',
 'bouton_ajouter_image' => 'APONDRE UN IMATGE',
 'bouton_ajouter_participant' => 'APONDRE UN PARTICIPANT:',
-'bouton_annonce' => 'AN&Oacute;NCIA',
+'bouton_annonce' => 'ANONCI',
 'bouton_changer' => 'Cambiar',
 'bouton_checkbox_envoi_message' => 'possibilitat de mandar un messatge',
 'bouton_checkbox_indiquer_site' => 'indicar obligat&ograve;riament un sit web',
@@ -122,8 +122,8 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_enregistrement_obligatoire' => 'Registrament obligat&ograve;ri (los
  utilizaires se devon abonar en donant lor adrei&ccedil;a e-mail abans de
  poder mandar de contribucions).',
-'bouton_radio_envoi_annonces' => 'Mandar las an&oacute;ncias editorialas',
-'bouton_radio_envoi_annonces_adresse' => 'Mandar las an&oacute;ncias a l\'adrei&ccedil;a:',
+'bouton_radio_envoi_annonces' => 'Mandar los anoncis editorials',
+'bouton_radio_envoi_annonces_adresse' => 'Mandar los anoncis a l\'adrei&ccedil;a:',
 'bouton_radio_envoi_liste_nouveautes' => 'Mandar la ti&egrave;ra de las novetats',
 'bouton_radio_moderation_priori' => 'Moderacion a pri&ograve;ri (las
  contribucions apareisson en public sonque se los administrators
@@ -132,8 +132,8 @@ la documentacion d\'SPIP</a>.',
 'bouton_radio_modere_posteriori' => 'moderat a posteri&ograve;ri',
 'bouton_radio_modere_priori' => 'moderat a pri&ograve;ri',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Apar&eacute;isser pas dins la ti&egrave;ra dels redactors',
-'bouton_radio_non_envoi_annonces' => 'Mandar pas d\'an&oacute;ncias',
-'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'an&oacute;ncias editorialas',
+'bouton_radio_non_envoi_annonces' => 'Mandar pas d\'anoncis',
+'bouton_radio_non_envoi_annonces_editoriales' => 'Mandar pas d\'anoncis editorials',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Mandar pas la ti&egrave;ra de las novetats',
 'bouton_radio_non_syndication' => 'Pas cap de sindicacion',
 'bouton_radio_occidental' => 'Alfabet occidental&nbsp; (<tt>iso-8859-1</tt>):totes los navigadors lo sup&ograve;rtan, mas permet pas que
@@ -166,10 +166,6 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => '<MODIF> S\'utilizatz un logicial d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo pod&egrave;tz sincronizar amb l\'actualitat del sit.',
-'calendrier_synchro_lien' => '<MODIF> Anar qu&egrave;rre lo fichi&egrave;r <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'usatge estrictament personal, vos informa subre l\'activitat editoriala privada d\'aquel sit (pr&egrave;tzfaches et rend&egrave;tz-vos personals, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent vos permet de s&egrave;gre l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -364,6 +360,18 @@ Merc&eacute;s per v&ograve;stra participacion
 
 
 // I
+'ical_info1' => 'Aquela pagina m&ograve;stra de met&ograve;des diferents per demorar en contacte amb la vida d\'aquel sit.',
+'ical_info2' => 'Per t&eacute;ner mai d\'informacions subre aquelas tecnicas, esitetz pas de consultar <a href="http://www.spip.net/fr_suivi">la documentacion d\'SPIP</a>.',
+'ical_info_calendrier' => 'I a dos calendi&egrave;rs a la v&ograve;stra disposicion. Lo primi&egrave;r es un plan del sit qu\'an&oacute;ncia totes los articles publicats. Lo segond conten los anoncis editorials en mai de v&ograve;stres darri&egrave;rs messatges privats: vos es reservat gr&agrave;cias a una clau personala, que la pod&egrave;tz modificar en tot moment en renovant v&ograve;stre mot de santa Clara. ',
+'ical_methode_http' => 'Telecargament',
+'ical_methode_webcal' => 'Sincronizacion (webcal://)',
+'ical_texte_js' => 'Los articles publicats en aquel sit se p&ograve;don afichar aisit, dins totes los sits v&ograve;stres, en far servir una linha javascript. ',
+'ical_texte_prive' => 'Aquel calendi&egrave;r, d\'us estrictament personal, vos informa de l\'activitat editoriala privada d\'aquel sit (&ograve;bras e rend&egrave;tz-vos personals, articles e br&egrave;vas prepausats...).',
+'ical_texte_public' => 'Aquel calendi&egrave;r vos permet de seguir l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
+'ical_texte_rss' => 'Pod&egrave;tz sindicar las novetats d\'aquel sit dins tot legidor de fichi&egrave;rs en format XML/RSS (Rich Site Summary). Es tanben lo format que permet a SPIP de legir las novetats publicadas dins d\'autres sits en utilizar un format d\'escambi compatible. ',
+'ical_titre_js' => 'Javascript',
+'ical_titre_mailing' => 'Lista de corri&egrave;r',
+'ical_titre_rss' => 'Fichi&egrave;r &laquo;backend&raquo;',
 'icone_a_suivre' => 'De seguir',
 'icone_activer_cookie' => 'Activar lo cookie de correspond&eacute;ncia',
 'icone_admin_site' => 'Administracion del sit',
@@ -432,7 +440,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_sites_references' => 'Sits referenciats',
 'icone_statistiques' => 'Estadisticas del sit',
 'icone_statistiques_visites' => 'Estadisticas de las vesitas',
-'icone_suivi_activite' => 'Seguir l\'activitat editoriala',
+'icone_suivi_activite' => '<MODIF> Seguir l\'activitat editoriala',
 'icone_suivi_actualite' => 'Evolucion del&nbsp;sit',
 'icone_suivi_forum' => 'Seguit del forum public: @nb_forums@&nbsp;contribucion(s)',
 'icone_suivi_forums' => 'Seguir/gerir los forums',
@@ -485,9 +493,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_ajout_participant' => 'Lo participant seguent es apondut&nbsp;:',
 'info_ajouter_mot' => 'Apondre aquel mot',
 'info_ajouter_rubrique' => 'Apondre una autra rubrica d\'administrar:',
-'info_annonce' => 'AN&Oacute;NCIA',
-'info_annonce_nouveautes' => 'An&oacute;ncia de las novetats',
-'info_annonces_generales' => 'An&oacute;ncias generalas:',
+'info_annonce' => 'ANONCI',
+'info_annonce_nouveautes' => 'Anonci de las novetats',
+'info_annonces_generales' => 'Anoncis generals:',
 'info_annuler_blocage_priori' => 'Anullar aquel blocatge a pri&ograve;ri',
 'info_anterieur' => 'anteriora',
 'info_appliquer_choix_moderation' => 'Aplicar aquela causida de moderacion&nbsp;:',
@@ -540,8 +548,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_classement_2' => '<sup>nd</sup> de @liste@',
 'info_code_acces' => 'Oblidetz pas v&ograve;stres c&ograve;des d\'acc&egrave;s pr&ograve;pris&nbsp;!',
 'info_comment_lire_tableau' => 'Coss&iacute; legir aquel tabl&egrave;u',
-'info_config_suivi' => 'S\'aquela adrei&ccedil;a correspond a una mailing-list, pod&egrave;tz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants al sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista pel web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
-'info_config_suivi_explication' => 'Pod&egrave;tz recebre automaticament, per e-mail, las an&oacute;ncias pertocant l\'activitat editoriala d\'aquel sit. Per aqu&ograve; faire, vos pod&egrave;tz abonar a la mailing-list seguenta:',
+'info_config_suivi' => 'S\'aquela adrei&ccedil;a correspond a una lista de corri&egrave;r, pod&egrave;tz indicar &ccedil;ai jos l\'adrei&ccedil;a ont los participants al sit se p&ograve;don inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista pel web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi_explication' => '<MODIF> Pod&egrave;tz recebre automaticament, per e-mail, los anoncis pertocant l\'activitat editoriala d\'aquel sit. Per aqu&ograve; faire, vos pod&egrave;tz abonar a la lista de corri&egrave;r seguenta:',
 'info_confirmer_passe' => 'Confirmar aquel mot de santa Clara nov&egrave;l&nbsp;:',
 'info_connexion_base' => 'Segonda estapa: <B>Ensag de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a capitat.</b><P> Pod&egrave;tz passar a l\'estapa seguenta.',
@@ -605,7 +613,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_etape_suivante_1' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_etape_suivante_2' => 'Pod&egrave;tz passar a l\'estapa seguenta.',
 'info_exportation_base' => 'exportacion de la basa cap a @archive@',
-'info_facilite_suivi_activite' => 'Per facilitar lo seguit de l\'activitat editoriala del sit, SPIP vos p&ograve;t fornir per e-mail, per exemple a una mailing-list dels redactors, l\'an&oacute;ncia de las demandas de publicacion e de las validacions d\'articles.',
+'info_facilite_suivi_activite' => 'Per facilitar lo seguit de l\'activitat editoriala del sit, SPIP vos p&ograve;t fornir per e-mail, per exemple a una lista de corri&egrave;r dels redactors, l\'anonci de las demandas de publicacion e de las validacions d\'articles.',
 'info_fichiers_authent' => 'Fichi&egrave;rs d\'autentificacion &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
 'info_fini' => 'Es acabat&nbsp;!',
 'info_fonctionnement_forum' => 'Foncionament del forum:',
@@ -620,7 +628,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_gauche_admin_vider' => '<B>A aquela pagina, sonque los responsables del sit i p&ograve;don accedir.</b><P> Permet de trobar las diferentas foncions de mantenen&ccedil;a tecnica. D\'unas que i a implican un proc&egrave;s d\'autentificacion especific, que necessita un acc&egrave;s FTP al sit web.',
 'info_gauche_auteurs' => 'Trobaretz aic&iacute; totes los autors del sit. La color de las ic&ograve;nas n\'indica l\'estatut (redactor: verd; administrator: jaune).',
 'info_gauche_auteurs_exterieurs' => 'Los autors exteriors, sens acc&egrave;s al sit, son indicats per una ic&ograve;na blava; los autors escafats per un bordilhi&egrave;r.',
-'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'escambiar de messatges entre redactors, de servar de n&ograve;tas per se remembrar (per v&ograve;stre usatge personal) o d\'afichar d\'an&oacute;ncias sus la pagina d\'acu&egrave;lh de l\'espaci privat (se s&egrave;tz administrator/tritz).',
+'info_gauche_messagerie' => 'La messatjari&aacute; vos permet d\'escambiar de messatges entre redactors, de servar de n&ograve;tas per se remembrar (per v&ograve;stre usatge personal) o d\'afichar d\'anoncis sus la pagina d\'acu&egrave;lh de l\'espaci privat (se s&egrave;tz administrator/tritz).',
 'info_gauche_numero_auteur' => 'AUTOR NUM&Egrave;RO',
 'info_gauche_numero_breve' => 'BR&Egrave;VA NUM&Egrave;RO',
 'info_gauche_statistiques_referers' => 'Aquela pagina presenta la lista dels <I>referidors</i>, valent a dire dels sits que contenon de ligams que menan cap a v&ograve;stre quite sit, mas unicament per u&egrave;i: pr\'amor qu\'aquela lista s\'actualiza cada 24 oras.',
@@ -736,8 +744,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_nombre_rubriques' => '@nb_rubriques@ rubricas,',
 'info_nombre_sites' => '@nb_sites@ sits,',
 'info_non_deplacer' => 'De despla&ccedil;ar pas...',
-'info_non_envoi_annonce_dernieres_nouveautes' => 'SPIP p&ograve;t mandar, regularament, l\'an&oacute;ncia de las darri&egrave;ras novetats del sit
- (articles e br&egrave;vas publicadas recentament).',
+'info_non_envoi_annonce_dernieres_nouveautes' => 'SPIP p&ograve;t mandar, regularament, l\'anonci de las darri&egrave;ras novetats del sit
+ (articles e br&egrave;vas publicats recentament).',
 'info_non_envoi_liste_nouveautes' => 'Mandar pas la ti&egrave;ra de las novetats',
 'info_non_modifiable' => 'se p&ograve;t pas modificar',
 'info_non_resultat' => 'Pas cap de resultat per "@cherche_mot@"',
@@ -910,7 +918,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_sur_site_public' => '[sul sit public]',
 'info_surtitre' => 'Subret&iacute;tol:',
 'info_symbole_bleu' => 'Lo simb&egrave;l <B>blau</b> marca una <B>n&ograve;ta de remembran&ccedil;a</b>: valent a dire un messatge per v&ograve;stre usatge personal.',
-'info_symbole_jaune' => 'Lo simb&egrave;l <B>jaune</b> marca una <B>an&oacute;ncia per totes los redactors </b>: los administrators la p&ograve;don modificar, cada redactor la p&ograve;t veire.',
+'info_symbole_jaune' => 'Lo simb&egrave;l <B>jaune</b> marca un <B>anonci per totes los redactors </b>: los administrators lo p&ograve;don modificar, cada redactor lo p&ograve;t veire.',
 'info_symbole_vert' => 'Lo simb&egrave;l <B>verd</b> marca los <B>messatges escambiats amb d\'autres utilizaires</b> del sit.',
 'info_syndication' => 'sindicacion:',
 'info_syndication_articles' => 'article(s)',
@@ -930,8 +938,8 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_tous_articles_en_redaction' => 'Totes los articles en cors de redaccion',
 'info_tous_articles_presents' => 'Totes los articles publicats dins aquela rubrica',
 'info_tous_les' => 'totes los:',
-'info_tous_redacteur' => 'An&oacute;ncias a totes los redactors ',
-'info_tous_redacteurs' => 'An&oacute;ncias a totes los redactors ',
+'info_tous_redacteur' => 'Anoncis a totes los redactors ',
+'info_tous_redacteurs' => 'Anoncis a totes los redactors ',
 'info_tous_resultats_enregistres' => '[totes los resultats son registrats]',
 'info_tout_afficher' => 'O afichar tot',
 'info_tout_site' => 'Tot lo sit ',
@@ -1052,7 +1060,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'lien_nom_site' => 'NOM DEL SIT :',
 'lien_nouvea_pense_bete' => 'NOV&Egrave;LA N&Ograve;TA PER SE REMEMBRAR ',
 'lien_nouveau_message' => 'MESSATGE N&Ograve;U',
-'lien_nouvelle_annonce' => 'AN&Oacute;NCIA NOV&Egrave;LA',
+'lien_nouvelle_annonce' => 'ANONCI NOV&Egrave;L',
 'lien_nouvelle_recuperation' => 'Ensajar una nov&egrave;la recuperacion de las donadas',
 'lien_petitions' => 'PETICION',
 'lien_popularite' => 'popularitat: @popularite@%',
@@ -1405,7 +1413,7 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
 'texte_login_ldap_1' => '(Daissar vu&egrave;g per un acc&egrave;s anonim, o picar lo camin complet, per exemple &laquo;<tt>uid=fabre, ou=usanciers, dc=mon-domeni, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Atencion! Aqu&ograve;\'s lo login amb lo qual s&egrave;tz ara connectat/ada. 
  Utilizatz aqueste formulari amb precaucion...',
-'texte_message_edit' => 'Atencion: aqueste messatge, cada redactor lo p&ograve;t veire, e cada administrator del sit lo p&ograve;t modificar.  Utilizatz las an&oacute;ncias pas que per expausar d\'eveniments importants de la vida del sit.',
+'texte_message_edit' => 'Atencion: aqueste messatge, cada redactor lo p&ograve;t veire, e cada administrator del sit lo p&ograve;t modificar.  Utilizatz los anoncis pas que per expausar d\'eveniments importants de la vida del sit.',
 'texte_messages_publics' => 'Messatges publics de l\'article:',
 'texte_mise_a_niveau_base_1' => ' Ven&egrave;tz d\'actualizar los fichi&egrave;rs SPIP.
  Ara cal metre a niv&egrave;l la basa de donadas
@@ -1643,7 +1651,14 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_delier' => 'Ligar pas mai aqueste article a sas reviradas ',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => '<MODIF> Anar qu&egrave;rre lo fichi&egrave;r <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'usatge estrictament personal, vos informa subre l\'activitat editoriala privada d\'aquel sit (pr&egrave;tzfaches et rend&egrave;tz-vos personals, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent vos permet de s&egrave;gre l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 
