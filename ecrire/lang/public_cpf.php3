@@ -88,6 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Lakart lo sit',
 'popularite' => 'Koman l&eacute; popil&egrave;r',
 'poster_message' => 'Anvwa in mod&eacute;kri',
+'proposer_site' => 'Ou p&eacute; propoz azout inn sit dann ribrik-la&nbsp;:',
 
 
 // R
