@@ -55,15 +55,11 @@ function admin_dyn($id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $d
 	}
 
 	// repartir de zero pour les boutons car clean_link a pu etre utilisee
-
 	$link = new Link;
-
 	$link->delVar('var_mode');
 	$link->delVar('var_mode_objet');
 	$link->delVar('var_mode_affiche');
 	$action = $link->getUrl();
-	if (!$action ||($action == './'))
-		$action = lire_meta('adresse_site');
 	$action = quote_amp($action . ((strpos($action, '?') === false) ? '?' : '&'));
 
   // en preview pas de stat ni de debug
