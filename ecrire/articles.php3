@@ -685,60 +685,41 @@ debut_droite();
 changer_typo('','article'.$id_article);
 
 
-// qu'est-ce que c'est que ces choses ??
-
-function mySel($varaut,$variable){
-	$retour= " VALUE=\"$varaut\"";
-
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-	return $retour;
-}
-
-
-function my_sel($num,$tex,$comp){
-	if ($num==$comp){
-		echo "<OPTION VALUE='$num' SELECTED>$tex\n";
-	}else{
-		echo "<OPTION VALUE='$num'>$tex\n";
-	}
-
-}
-
 function afficher_mois($mois){
-	my_sel("00",_T('mois_non_connu'),$mois);
-	my_sel("01",_T('date_mois_1'),$mois);
-	my_sel("02",_T('date_mois_2'),$mois);
-	my_sel("03",_T('date_mois_3'),$mois);
-	my_sel("04",_T('date_mois_4'),$mois);
-	my_sel("05",_T('date_mois_5'),$mois);
-	my_sel("06",_T('date_mois_6'),$mois);
-	my_sel("07",_T('date_mois_7'),$mois);
-	my_sel("08",_T('date_mois_8'),$mois);
-	my_sel("09",_T('date_mois_9'),$mois);
-	my_sel("10",_T('date_mois_10'),$mois);
-	my_sel("11",_T('date_mois_11'),$mois);
-	my_sel("12",_T('date_mois_12'),$mois);
+	echo mySel("00",$mois,_T('mois_non_connu'));
+	echo mySel("01",$mois,_T('date_mois_1'));
+	echo mySel("02",$mois,_T('date_mois_2'));
+	echo mySel("03",$mois,_T('date_mois_3'));
+	echo mySel("04",$mois,_T('date_mois_4'));
+	echo mySel("05",$mois,_T('date_mois_5'));
+	echo mySel("06",$mois,_T('date_mois_6'));
+	echo mySel("07",$mois,_T('date_mois_7'));
+	echo mySel("08",$mois,_T('date_mois_8'));
+	echo mySel("09",$mois,_T('date_mois_9'));
+	echo mySel("10",$mois,_T('date_mois_10'));
+	echo mySel("11",$mois,_T('date_mois_11'));
+	echo mySel("12",$mois,_T('date_mois_12'));
 }
 
 function afficher_annee($annee){
 	// Cette ligne permettrait de faire des articles sans date de publication
-	// my_sel("0000","n.c.",$annee);
+	// echo mySel("0000",$annee,"n.c.");
 
 	if($annee<1996 AND $annee <> 0){
-		echo "<OPTION VALUE='$annee' SELECTED>$annee\n";
+		echo mySel($annee,$annee,$annee);
 	}
 	for($i=1996;$i<date(Y)+2;$i++){
-		my_sel($i,$i,$annee);
+		echo mySel($i,$annee,$i);
 	}
 }
 
 function afficher_jour($jour){
-	my_sel("00",_T('jour_non_connu_nc'),$jour);
+	echo mySel("00",$jour,_T('jour_non_connu_nc'));
 	for($i=1;$i<32;$i++){
-		if ($i<10){$aff="&nbsp;".$i;}else{$aff=$i;}
-		my_sel($i,$aff,$jour);
+		$aff = _T('date_jnum'.$i);
+		if ($i<10)
+			$aff="&nbsp;".$aff;
+		echo mySel($i,$jour,$aff);
 	}
 }
 

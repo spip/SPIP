@@ -21,14 +21,6 @@ include_ecrire ("inc_abstract_sql.php3");
 // securite
 $id_auteur = floor($id_auteur);
 
-// menu statuts
-function mySel($varaut,$variable) {
-	$retour = " VALUE=\"$varaut\"";
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-	return $retour;
-}
 
 //
 // Auteurs a acces restreint

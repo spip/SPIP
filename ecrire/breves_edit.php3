@@ -15,16 +15,6 @@ include ("inc.php3");
 include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_barre.php3");
 
-function mySel($varaut,$variable){
-		$retour= " VALUE=\"$varaut\"";
-
-	if ($variable==$varaut){
-		$retour.= " SELECTED";
-	}
-
-	return $retour;
-}
-
 function enfant($leparent) {
 	global $id_parent;
 	global $id_rubrique;

@@ -14,16 +14,6 @@
 include ("inc.php3");
 
 
-function mySel($varaut,$variable){
-	$retour= " value=\"$varaut\"";
-
-	if ($variable==$varaut){
-		$retour.= " selected";
-	}
-
-	return $retour;
-}
-
 function enfant($leparent){
 	global $id_parent;
 	global $id_rubrique;
