@@ -174,7 +174,7 @@ function calculer_langues_rubriques() {
 	$s = spip_query ("SELECT fils.id_article AS id_article, mere.lang AS lang
 		FROM spip_articles AS fils, spip_rubriques AS mere
 		WHERE fils.id_rubrique = mere.id_rubrique
-		AND fils.langue_choisie != 'oui' AND mere.lang<>''
+		AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'')
 		AND mere.lang<>fils.lang");
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
@@ -187,7 +187,7 @@ function calculer_langues_rubriques() {
 	$s = spip_query ("SELECT fils.id_breve AS id_breve, mere.lang AS lang
 		FROM spip_breves AS fils, spip_rubriques AS mere
 		WHERE fils.id_rubrique = mere.id_rubrique
-		AND fils.langue_choisie != 'oui' AND mere.lang<>''
+		AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'')
 		AND mere.lang<>fils.lang");
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
