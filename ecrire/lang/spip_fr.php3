@@ -100,7 +100,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_indiquer_site' => 'indiquer obligatoirement un site Web',
 'bouton_checkbox_qui_attribue_mot_cle_administrateurs' => 'les administrateurs du site',
 'bouton_checkbox_qui_attribue_mot_cle_redacteurs' => 'les r&eacute;dacteurs',
-'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
+'bouton_checkbox_qui_attribue_mot_cle_visiteurs' => 'les visiteurs du site public lorsqu\'ils postent un message dans un forum.',
 'bouton_checkbox_signature_unique_email' => 'une seule signature par adresse email',
 'bouton_checkbox_signature_unique_site' => 'une seule signature par site Web',
 'bouton_chercher' => 'Chercher',
@@ -705,7 +705,7 @@ Merci de votre participation
 		les r&eacute;dacteurs enregistr&eacute;s. Vous pouvez, ci-dessous, activer un
 		forum suppl&eacute;mentaire, r&eacute;serv&eacute; aux seuls administrateurs.',
 'info_forum_statistiques' => 'Statistiques des visites',
-'info_forums_abo_invites' => '',
+'info_forums_abo_invites' => 'Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
 'info_gauche_admin_effacer' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_gauche_admin_tech' => '<b>Cette page est uniquement accessible aux responsables du site.</b><p /> Elle donne acc&egrave;s aux diff&eacute;rentes
 fonctions de maintenance technique. Certaines d\'entre elles donnent lieu &agrave; un processus d\'authentification sp&eacute;cifique, qui
