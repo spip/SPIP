@@ -84,8 +84,12 @@ function deplacer_fichier_upload($source, $dest) {
 		@unlink($dest);
 
 		if (($GLOBALS['_FILES']['size'] == 0) AND !$GLOBALS['action_zip']) {
-			echo _T('upload_limit',
+			include_ecrire('inc_presentation.php3');
+			install_debut_html(_T('forum_titre_erreur'));
+			echo "<p>"._T('upload_limit',
 				array('max' => ini_get('upload_max_filesize')));
+			install_fin_html();
+			exit;
 		}
 	}
 
