@@ -211,7 +211,27 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 }
 
 
-// transformer les &eacute; en &#123;
+// Detecter les versions buggees d'iconv
+function test_iconv() {
+	static $iconv_ok;
+
+	if (!$iconv_ok) {
+		if (!$GLOBALS['flag_iconv']) $iconv_ok = -1;
+		else {
+			$s = 'chaine de test';
+			if (utf_32_to_unicode(iconv('utf-8', 'utf-32', $s)) == 'chaine de test')
+				$iconv_ok = 1;
+			else
+				$iconv_ok = -1;
+		}
+	}
+	return $iconv_ok == 1;
+}
+
+
+//
+// Transformer les &eacute; en &#123;
+//
 function html2unicode($texte) {
 	static $trans;
 	if (!$trans) {
@@ -233,81 +253,95 @@ function html2unicode($texte) {
 }
 
 
-// transforme une chaine en entites unicode &#129;
+//
+// Transforme une chaine en entites unicode &#129;
+//
 function charset2unicode($texte, $charset='AUTO', $forcer = false) {
+	static $trans;
+
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
 	switch ($charset) {
-		case 'utf-8':
-			if ($GLOBALS['flag_iconv']) {
-				$s = iconv('utf-8', 'utf-32', $texte);
-				if ($s) return utf_32_to_unicode($s);
+	case 'utf-8':
+		// Le passage par utf-32 devrait etre plus rapide
+		// (traitements PHP reduits au minimum)
+		if (test_iconv()) {
+			$s = iconv('utf-8', 'utf-32', $texte);
+			if ($s) return utf_32_to_unicode($s);
+		}
+		return utf_8_to_unicode($texte);
+
+	case 'iso-8859-1':
+		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
+		// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
+		if (!$forcer) return $texte;
+
+	default:
+		if (test_iconv()) {
+			$s = iconv($charset, 'utf-32', $texte);
+			if ($s) return utf_32_to_unicode($s);
+		}
+
+		if (!$trans[$charset]) {
+			global $CHARSET;
+			load_charset($charset);
+			reset($CHARSET[$charset]);
+			while (list($key, $val) = each($CHARSET[$charset])) {
+				$trans[$charset][chr($key)] = '&#'.$val.';';
 			}
-			return utf_8_to_unicode($texte);
-
-		case 'iso-8859-1':
-			// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
-			// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
-			if (!$forcer) return $texte;
-
-		default:
-			if ($GLOBALS['flag_iconv']) {
-				$s = iconv($charset, 'utf-32', $texte);
-				if ($s) return utf_32_to_unicode($s);
+		}
+		if ($GLOBALS['flag_strtr2'])
+			$texte = strtr($texte, $trans[$charset]);
+		else {
+			reset($trans[$charset]);
+			while (list($from, $to) = each($trans[$charset])) {
+				$texte = str_replace($from, $to, $texte);
 			}
-
-			$trans = load_charset($charset);
-			$s = '';
-			$len = strlen($texte);
-
-			for ($p = 0; $p <= $len; $c = substr($texte,$p++,1)) {
-				if ((($i=ord($c))>127) and ($j=$GLOBALS['CHARSET'][$trans][$i]))
-					$s .= "&#$j;";
-				else
-					$s .= $c;
-			}
-			return $s;
+		}
+		return $texte;
 	}
 }
 
-// transforme les entites unicode &#129; dans le charset courant
+//
+// Transforme les entites unicode &#129; dans le charset specifie
+//
 function unicode2charset($texte, $charset='AUTO') {
 	static $CHARSET_REVERSE;
 	if ($charset == 'AUTO')
 		$charset=lire_meta('charset');
 
 	switch($charset) {
+	case 'utf-8':
+		return unicode_to_utf_8($texte);
+		break;
 
-		case 'utf-8':
-			return unicode_to_utf_8($texte);
-			break;
+	default:
+		$charset = load_charset($charset);
 
-		default:
-			$charset = load_charset($charset);
+		// array_flip
+		if (!is_array($CHARSET_REVERSE[$charset])) {
+			$trans = $GLOBALS['CHARSET'][$charset];
+			while (list($chr,$uni) = each($trans))
+				$CHARSET_REVERSE[$charset][$uni] = $chr;
+		}
 
-			// array_flip
-			if (!is_array($CHARSET_REVERSE[$charset])) {
-				$trans = $GLOBALS['CHARSET'][$charset];
-				while (list($chr,$uni) = each($trans))
-					$CHARSET_REVERSE[$charset][$uni] = $chr;
-			}
-
-			while ($a = strpos(' '.$texte, '&')) {
-				$traduit .= substr($texte,0,$a-1);
-				$texte = substr($texte,$a-1);
-				if (eregi('^&#0*([0-9]+);',$texte,$match) AND ($s = $CHARSET_REVERSE[$charset][$match[1]]))
-					$texte = str_replace($match[0], chr($s), $texte);
-				// avancer d'un cran
-				$traduit .= $texte[0];
-				$texte = substr($texte,1);
-			}
-			return $traduit.$texte;
+		while ($a = strpos(' '.$texte, '&')) {
+			$traduit .= substr($texte,0,$a-1);
+			$texte = substr($texte,$a-1);
+			if (eregi('^&#0*([0-9]+);',$texte,$match) AND ($s = $CHARSET_REVERSE[$charset][$match[1]]))
+				$texte = str_replace($match[0], chr($s), $texte);
+			// avancer d'un cran
+			$traduit .= $texte[0];
+			$texte = substr($texte,1);
+		}
+		return $traduit.$texte;
 	}
 }
 
 
 // Importer un texte depuis un charset externe vers le charset du site
+// (les caracteres non resolus sont transformes en &#123;)
 function importer_charset($texte, $charset = 'AUTO', $forcer = false) {
 	return unicode2charset(charset2unicode($texte, $charset, $forcer));
 }
