@@ -1507,10 +1507,8 @@ function bouton($titre,$lien) {
 
 function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
-	global $spip_lang_rtl, $spip_lang_left, $spip_display;
-	global $mode;
+	global $mode, $spip_lang_rtl, $spip_display;
 	global $connect_statut, $connect_toutes_rubriques;
-	global $browser_name, $browser_version, $browser_rev;
 
 	// hack pour compatibilite spip-lab
 	if (strpos($rubrique, 'script>')) {
@@ -1550,6 +1548,29 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	// Supprime pour l'instant: pas de detection des plugin
 	// < script type="text/javascript" src="js_detectplugins.js"></script>
 
+	debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, (lire_meta("activer_statistiques") != 'non'));
+?>
+	  <link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
+	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
+	<link rel="stylesheet" href="spip_style_print.css" type="text/css" media="print">
+
+</head>
+<?php
+	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
+
+	if ($spip_lang_rtl)
+		echo " dir='rtl'";
+	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
+	echo " onLoad=\"setActiveStyleSheet('invisible'); verifForm();$onLoad\"";
+	echo ">";
+}
+
+function debut_javascript($admin, $stat)
+{
+	global $spip_lang_left;
+	global $browser_name, $browser_version, $browser_rev;
+
+	// envoi le fichier JS de config si browser ok.
 	echo $GLOBALS['browser_layer'];
 ?>
 <script type='text/javascript'><!--
@@ -1557,11 +1578,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 
 	function changestyle(id_couche, element, style) {
 
-		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
+		<?php if ($admin) { ?>
 			hide_obj("bandeaudocuments");
 			hide_obj("bandeauredacteurs");
 			hide_obj("bandeauauteurs");
-			<?php if (lire_meta("activer_statistiques") != 'non') { ?> hide_obj("bandeausuivi"); <?php } ?>
+			<?php if ($stat) { ?> hide_obj("bandeausuivi"); <?php } ?>
 			hide_obj("bandeauadministration"); 
 		<?php } ?>
 		
@@ -1579,11 +1600,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		
 		
 		if (init_gauche) {
-		<?php if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques) { ?>
+		<?php if ($admin) { ?>
 			decalerCouche('bandeaudocuments');
 			decalerCouche('bandeauredacteurs');
 			decalerCouche('bandeauauteurs');
-			<?php if (lire_meta("activer_statistiques") != 'non') ?> decalerCouche('bandeausuivi');
+			<?php if ($stat) ?> decalerCouche('bandeausuivi');
 			decalerCouche('bandeauadministration');
 		<?php } ?>
 			init_gauche = false;
@@ -1599,11 +1620,11 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		if (!(layer = findObj(id_couche))) return;
 				
 		<?php 
-		$effectuer_decalage = true;				
-		if ($spip_lang_left != "left") $effectuer_decalage = false;
-		if ($browser_name == "MSIE" AND $browser_version < 6) $effectuer_decalage = false; // bug offsetwidth
+		    if (($spip_lang_left == "left") &&
+					   // bug offsetwidth
+			($browser_name != "MSIE" OR $browser_version >= 6))
 		
-		if ($effectuer_decalage) {  /* uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse! */  ?>
+		      {  /* uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse! */  ?>
 		
 		if ( parseInt(layer.style.<?php echo $spip_lang_left; ?>) > 0) {
 
@@ -1826,21 +1847,8 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	var antifocus=false; // effacement titre quand new=oui
 	
 //--></script>
-
-	<link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
-	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
-	<link rel="stylesheet" href="spip_style_print.css" type="text/css" media="print">
-
-</head>
 <?php
-	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
-
-	if ($spip_lang_rtl)
-		echo " dir='rtl'";
-	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
-	echo " onLoad=\"setActiveStyleSheet('invisible'); verifForm();$onLoad\"";
-	echo ">";
-}
+    }
 
 // Fonctions onglets
 
@@ -2756,11 +2764,9 @@ document.write(\"" . addslashes(str_replace("\n", " ", $html))."\")");
 		$annee = annee($date);
 		$jour = jour($date);
 	
-		// Taches
-		$result_pb = spip_query("SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'");
-		$result_rv = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
-
-		if (spip_num_rows($result_pb) OR spip_num_rows($result_rv)) {
+		// Taches (ne calculer que la valeur booleenne...)
+		if (spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' LIMIT 0,1")) OR
+		    spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 0,1"))) {
 			$largeur = "410px";
 			$afficher_cal = true;
 		}
