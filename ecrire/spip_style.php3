@@ -205,14 +205,16 @@ a.icone26 {
 	font-weight: bold;
 	color: black;
 	text-decoration: none;
+	padding: 1px; 
+	margin-right: 2px;
 }
 a.icone26:hover {
 	text-decoration: none;
 }
 a.icone26 img {
-	padding: 1px;
-	margin-right: 2px;
 	vertical-align: middle;
+	behavior: url("win_png.htc");
+	background-color: <? echo $couleur_foncee; ?>;
 }
 a.icone26:hover img {
 	background: url(img_pack/fond-gris-anim.gif);
