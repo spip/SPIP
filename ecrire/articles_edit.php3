@@ -377,7 +377,7 @@ echo "<P><HR><P>";
 			echo "<B>Chapeau</B>";
 			echo aide ("artchap");
 			echo "<BR>(Texte introductif de l'article.)<BR>";
-			echo "<TEXTAREA NAME='chapo' CLASS='forml' ROWS='$rows' COLS='40' wrap=soft>";
+			echo "<TEXTAREA NAME='chapo' CLASS='forml' style='padding: 5px;' ROWS='$rows' COLS='40' wrap=soft>";
 			echo $chapo;
 			echo "</TEXTAREA><P>\n";
 		}
@@ -401,7 +401,7 @@ echo "<P><HR><P>";
 				list($texte1,$texte) = coupe_trop_long($texte);
 
 				$textes_supplement .= "<BR><TEXTAREA NAME='texte$nombre_textes'".
-					" CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>" .
+					" CLASS='formo' ROWS='$rows' style='padding: 5px;' COLS='40' wrap=soft>" .
 					$texte1 . "</TEXTAREA><P>\n";
 			}
 		}
@@ -413,13 +413,13 @@ echo "<P><HR><P>";
 	
 	echo $textes_supplement;
 
-	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
+	echo "<BR><TEXTAREA NAME='texte' CLASS='formo' style='padding: 5px;' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 	
 	if (($articles_ps != "non" AND $options == "avancees") OR strlen($ps) > 0) {
 		echo "<B>Post-Scriptum</B><BR>";
-		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='3' COLS='40' wrap=soft>";
+		echo "<TEXTAREA NAME='ps' CLASS='forml' style='padding: 5px;' ROWS='5' COLS='40' wrap=soft>";
 		echo $ps;
 		echo "</TEXTAREA><P>\n";
 	}
