@@ -330,7 +330,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 
 			// Recopie de l'image d'origine avec adaptation de la taille
 			$ok = false;
-			if (($process == 'gd2') AND function_exists('flag_ImageCopyResampled'))
+			if (($process == 'gd2') AND function_exists('ImageCopyResampled'))
 				$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
 			if (!$ok)
 				$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
