@@ -1225,7 +1225,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		icone_bandeau_principal ("&Agrave; suivre", "index.php3", "asuivre-48.gif", "asuivre", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
-		icone_bandeau_principal ("Les documents", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
+		icone_bandeau_principal ("Edition du site", "naviguer.php3", "documents-48.gif", "documents", $rubrique);
 	echo "</td>";
 	echo "<td background=''>";
 	echo "</td>";
