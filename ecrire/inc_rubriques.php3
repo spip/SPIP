@@ -152,6 +152,7 @@ function calculer_rubriques() {
 	
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
 	ecrire_meta("date_calcul_rubriques", date("U"));
+	ecrire_metas();
 
 }
 
