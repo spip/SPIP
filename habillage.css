@@ -343,7 +343,7 @@ ul ul ul ul ul .forum-chapo {
 	margin-bottom: 1em;
 	width: 100%;
 }
-.signatures td {
+.signatures td, .signatures th {
 	-moz-border-radius: 0.4em;
 }
 .signatures-titre {
