@@ -248,9 +248,15 @@ function balise_RECHERCHE_dist($p) {
 }
 
 function balise_COMPTEUR_BOUCLE_dist($p) {
-	$p->code = '$compteur_boucle';
-	$p->statut = 'php';
-	return $p;
+	if ($p->id_mere === '') {
+		include_local("inc-admin.php3");
+		erreur_squelette(_L("Champ #TOTAL_BOUCLE hors boucle"), $p->id_boucle);
+		$p->code = "''";
+	} else {
+		$p->code = '$compteur_boucle';
+		$p->statut = 'php';
+		return $p;
+	}
 }
 
 function balise_TOTAL_BOUCLE_dist($p) {
@@ -689,10 +695,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 	$_mail_auteur = champ_sql('email', $p);
 
 	$p->code = '(!email_valide('.$_mail_auteur.') ? "" :
-		("<'.'?php include_local(\'inc-formulaires.php3\');
-		lang_select(\'$spip_lang\');
-		formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\');
-		lang_dselect(); ?'.'>"))';
+		("<'.'?php include_local(\'inc-formulaires.php3\'); echo formulaire_ecrire_auteur(".'.$_id_auteur.'.", \'".texte_script('.$_mail_auteur.')."\') ?'.'>"))';
 
 	$p->statut = 'php';
 	return $p;
@@ -704,12 +707,11 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 function balise_FORMULAIRE_SIGNATURE_dist($p) {
 	$_id_article = champ_sql('id_article', $p);
 
-	$p->code = '(!($petition = sql_petitions('.$_id_article.')) ? "" :
-		("<"."?php include_local(\'inc-formulaires.php3\');
-		lang_select(\'$spip_lang\');
-		echo formulaire_signature(".'.$_id_article.'.",
-			\'".texte_script(serialize($petition))."\');
-		lang_dselect(); ?".">"))';
+	$p->code = '(!($petition = sql_petitions('.
+		$_id_article .
+		')) ? "" : ("<"."?php include_local(\'inc-formulaires.php3\'); echo formulaire_signature(".' .
+		$_id_article .
+		'.", \'".texte_script(serialize($petition))."\') ?".">"))';
 
 	$p->statut = 'php';
 	return $p;
@@ -720,10 +722,7 @@ function balise_FORMULAIRE_SITE_dist($p) {
 	$_id_rubrique = champ_sql('id_rubrique', $p);
 
 	$p->code = '((lire_meta("proposer_sites") != 2) ? "":
-		("<"."?php include_local(\'inc-formulaires.php3\');
-		lang_select(\'".$GLOBALS[\'spip_lang\']."\');
-		formulaire_site(\'".'.$_id_rubrique.'."\');
-		lang_dselect(); ?".">"))';
+		("<"."?php include_local(\'inc-formulaires.php3\'); echo formulaire_site(\'".'.$_id_rubrique.'."\') ?".">"))';
 
 	$p->statut = 'php';
 	return $p;
