@@ -57,7 +57,7 @@ if ($id_article) {
 }
 else if ($new=='oui') {
 	$flag_editable = true;
-	$titre = _T('info_nouvel_article');
+	$titre = filtrer_entites(_T('info_nouvel_article'));
 }
 
 if (!$flag_editable) {

@@ -85,17 +85,17 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 			switch ($type) {
 			case 'pb' :
-				$puce = 'm_envoi_bleu$spip_lang_rtl.gif';
+				$puce = "m_envoi_bleu$spip_lang_rtl.gif";
 				break;
 			case 'memo' :
-				$puce = 'm_envoi_jaune$spip_lang_rtl.gif';
+				$puce = "m_envoi_jaune$spip_lang_rtl.gif";
 				break;
 			case 'affich' :
-				$puce = 'm_envoi_jaune$spip_lang_rtl.gif';
+				$puce = "m_envoi_jaune$spip_lang_rtl.gif";
 				break;
 			case 'normal':
 			default:
-				$puce = 'm_envoi$spip_lang_rtl.gif';
+				$puce = "m_envoi$spip_lang_rtl.gif";
 				break;
 			}
 				

@@ -5,7 +5,7 @@ include ("inc.php3");
 
 if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$id_groupe = '';
-	$type = entites_html(_T('titre_nouveau_groupe'));
+	$type = filtrer_entites(_T('titre_nouveau_groupe'));
 	$ancien_type = '';
 	$unseul = 'non';
 	$obligatoire = 'non';

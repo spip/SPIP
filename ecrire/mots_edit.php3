@@ -52,7 +52,7 @@ if ($connect_statut == '0minirezo') {
 		}
 	}
 	else if ($new == 'oui') {
-		$titre_mot = _T('texte_nouveau_mot');
+		$titre_mot = filtrer_entites(_T('texte_nouveau_mot'));
 	}
 }
 
