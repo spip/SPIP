@@ -63,8 +63,8 @@ function ecrire_acces() {
 	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut != '5poubelle' AND statut!='6forum'";
-	$result = spip_query($query);
-	unset($logins);
+	$result = spip_query_db($query);	// attention, il faut au prealable se connecter a la base (necessaire car utilise par install.php3)
+	$logins = array();
 	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
 
 	$fichier = @fopen($htpasswd, "w");
@@ -77,9 +77,9 @@ function ecrire_acces() {
 	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'";
-	$result = spip_query($query);
+	$result = spip_query_db($query);
 
-	unset($logins);
+	$logins = array();
 	while($row = spip_fetch_array($result)) $logins[$row['login']] = $row['htpass'];
 
 	$fichier = fopen("$htpasswd-admin", "w");
