@@ -91,7 +91,7 @@ function auth() {
 			// normalement on n'arrive pas la sauf changement de mot de passe dans la base
 			$auth_login = '';
 			echo "<p><b>Connexion refus&eacute;e</b></p>";
-			echo "[<a href='../spip_login.php3?essai_auth_http=oui'>r&eacute;essayer</a>]";
+			echo "[<a href='../spip_cookie.php3?essai_auth_http=oui'>r&eacute;essayer</a>]";
 			exit;
 		}
 		$PHP_AUTH_PW = '';

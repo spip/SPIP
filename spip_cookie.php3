@@ -15,7 +15,6 @@ if ($change_session == 'oui') {
 	if (verifier_session($spip_session)) {
 		$cookie = creer_cookie_session($auteur_session);
 		supprimer_session($spip_session);
-//		setcookie ('spip_session', $spip_session, time() - 24 * 7 * 3600);
 		setcookie('spip_session', $cookie);
 		@header('Content-Type: image/gif');
 		@header('Expires: 0');
@@ -29,7 +28,37 @@ if ($change_session == 'oui') {
 }
 
 
+// tentative de connexion en auth_http
+if ($essai_auth_http) {
+	include_local("inc-login.php3");
+	auth_http($cible, 'spip_login.php3', $essai_auth_http);
+	exit;
+}
+
+// tentative de logout
+if ($logout) {
+	include_ecrire("inc_session.php3");
+	verifier_visiteur();
+	if ($auteur_session['login'] == $logout) {
+		include_ecrire('inc_connect.php3');
+		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
+		if ($spip_session) {
+			supprimer_session($spip_session);
+			setcookie('spip_session', $spip_session, time() - 3600 * 24);
+		}
+		if ($PHP_AUTH_USER) {
+			include_local("inc-login.php3");
+			auth_http($cible, 'spip_login.php3', 'logout');
+		}
+		unset ($auteur_session);
+	}
+	@Header("Location: spip_login.php3");
+	exit;
+}
+
+
 // tentative de login
+unset ($cookie_session);
 if ($essai_login == "oui") {
 	// recuperer le login passe en champ hidden
 	if ($session_login_hidden AND !$session_login)
@@ -64,7 +93,6 @@ if ($essai_login == "oui") {
 			$cookie_admin = "@".$row_auteur['login'];
 
 		$cookie_session = creer_cookie_session($row_auteur);
-		setcookie('spip_session', $cookie_session);
 	
 		// fait tourner le codage du pass dans la base
 		$nouvel_alea_futur = creer_uniqid();
@@ -93,6 +121,10 @@ if ($cookie_admin == "non") {
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);
 }
+
+// cookie de session ?
+if ($cookie_session)
+	setcookie('spip_session', $cookie_session);
 
 // redirection
 @header("Location: " . $cible->getUrl());
