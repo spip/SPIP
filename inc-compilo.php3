@@ -225,10 +225,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 		. "; // doublons";
 
 
-	spip_log($boucle->separateur);
-	if ($boucle->separateur)
+	if (count($boucle->separateur))
 	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
-	spip_log($code_sep);
+
 	// gestion optimale des separateurs et des boucles constantes
 
 	$corps = $debut . 
