@@ -153,7 +153,7 @@ gros_titre($titre_mot);
 
 
 if ($descriptif) {
-	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa;'>";
+	echo "<p><div align='left' border: 1px dashed #aaaaaa;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<b>Descriptif :</b> ";
 	echo propre($descriptif);
