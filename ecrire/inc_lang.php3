@@ -4,40 +4,6 @@
 if (defined("_ECRIRE_INC_LANG")) return;
 define("_ECRIRE_INC_LANG", "1");
 
-//
-// Ecrire un fichier cache langue
-//
-function ecrire_cache_lang($lang, $module) {
-	include_ecrire('inc_filtres.php3');
-
-	$contenu = "<"."?php\n\n// Ceci est le CACHE d'un fichier langue spip\n\n";
-	if (is_array($cache = $GLOBALS['cache_lang'][$lang])) {
-		$contenu .= "\$GLOBALS[\$GLOBALS['idx_lang']] = array(\n";
-		$texte = '';
-		ksort($cache);
-		reset($cache);
-		while (list($code, ) = each($cache))
-			$texte .= ",\n\t'".$code."' => '".texte_script($GLOBALS['i18n_'.$module.'_'.$lang][$code])."'";
-		$contenu .= substr($texte,2)."\n);\n\n";
-		$contenu .= "\$GLOBALS['cache_lang']['$lang'] = array(\n";
-		$texte = '';
-		reset($cache);
-		while (list($code, ) = each($cache))
-			$texte .= ",\n\t'".$code."' => 1";
-		$contenu .= substr($texte,2)."\n);\n\n";
-	}
-	$contenu .= "\n\n?".">\n";
-
-	ecrire_fichier (_DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3', $contenu);
-}
-
-function ecrire_caches_langues() {
-	global $cache_lang_modifs;
-	reset($cache_lang_modifs);
-	while(list($module,$cache_module) = each($cache_lang_modifs))
-		while(list($lang, ) = each($cache_module))
-			ecrire_cache_lang($lang, $module);
-}
 
 //
 // Charger un fichier langue
@@ -46,23 +12,6 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 
 	$fichier_lang = $module.'_'.$lang.'.php3';
 	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
-
-	if (_DIR_RESTREINT AND _FILE_CONNECT AND $fichier_lang_exists) {
-	  $fichier_cache = _DIR_CACHE . 'lang_'.$module.'_'.$lang.'.php3';
-	  $fichier_cache_time = @is_readable($fichier_cache) ? @filemtime($fichier_cache) : false;
-
-	  if (!$forcer AND $fichier_cache_time
-		AND ($fichier_cache_time > @filemtime(_DIR_LANG .$module.'_'.$lang.'.php3'))
-		AND ($fichier_cache_time > @filemtime(_DIR_LANG . 'perso.php3'))) {
-			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
-			if (lire_fichier($fichier_cache,
-			$contenu, array('phpcheck' => 'oui'))) {
-				eval ('?'.'>'.$contenu);
-				return;
-			}
-		}
-		else $GLOBALS['cache_lang_modifs'][$module][$lang] = true;
-	}
 
 	if ($fichier_lang_exists) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
@@ -77,8 +26,8 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 			$l = 'fr';
 		$fichier_lang = $module.'_' .$l. '.php3';
 		if (is_readable(_DIR_LANG . $fichier_lang)) {
-			include_lang($fichier_lang);
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
+			include_lang($fichier_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
 			spip_log("module de langue : ${module}_$l.php3");

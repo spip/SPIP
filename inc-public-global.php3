@@ -189,14 +189,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 
 function terminer_public_global() {
 
-	// Mise a jour des fichiers langues de l'espace public
-	if ($GLOBALS['cache_lang_modifs']) {
-		include_ecrire('inc_lang.php3');
-		ecrire_caches_langues();
-	}
-
 	// Gestion des statistiques du site public
-
 	if (lire_meta("activer_statistiques") != "non") {
 		include_local ("inc-stats.php3");
 		ecrire_stats();
@@ -206,13 +199,6 @@ function terminer_public_global() {
 	cron();
 }
 
-// Cette fonction sert au dernier ob_start() de inc-public : elle
-// va absorber les eventuels messages d'erreur de inc_cron(), permettant
-// de ne pas planter le content-length qu'on a annonce ; decommenter la ligne
-// pour afficher les bugs
-function masquer_les_bugs ($bugs) {
-	# return $bugs;
-}
 
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
 
