@@ -17,7 +17,8 @@ function calculer_rubriques() {
 	// Attention, faute de SQL transactionnel on travaille sur
 	// des champs temporaires afin de ne pas  casser la base
 	// pendant la demi seconde de recalculs
-	spip_query("UPDATE spip_rubriques SET date_tmp='0000-00-00 00:00:00', statut_tmp='prive'");
+	spip_query("UPDATE spip_rubriques
+	SET date_tmp='0000-00-00 00:00:00', statut_tmp='prive'");
 
 
 	//
@@ -25,35 +26,67 @@ function calculer_rubriques() {
 	//
 
 	// Gerer les articles post-dates ?
-	$postdates = (lire_meta("post_dates") != "non") ? "AND fille.date <= NOW()" : '';
+	$postdates = (lire_meta("post_dates") != "non") ?
+		"AND fille.date <= NOW()" : '';
 
-	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h from spip_rubriques AS rub, spip_articles AS fille WHERE rub.id_rubrique = fille.id_rubrique AND fille.statut='publie' $postdates GROUP BY fille.id_rubrique");
+	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
+	FROM spip_rubriques AS rub, spip_articles AS fille
+	WHERE rub.id_rubrique = fille.id_rubrique AND fille.statut='publie'
+	$postdates GROUP BY fille.id_rubrique");
 	while ($row = spip_fetch_array($r))
-		spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".$row['date_h']."' WHERE id_rubrique=".$row['id']);
+		spip_query("UPDATE spip_rubriques
+		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
+		WHERE id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont une breve publie
-	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date_heure) AS date_h from spip_rubriques AS rub, spip_breves AS fille WHERE rub.id_rubrique = fille.id_rubrique AND rub.date_tmp < fille.date_heure AND fille.statut='publie' GROUP BY fille.id_rubrique");
+	$r = spip_query("SELECT rub.id_rubrique AS id,
+	max(fille.date_heure) AS date_h
+	FROM spip_rubriques AS rub, spip_breves AS fille
+	WHERE rub.id_rubrique = fille.id_rubrique
+	AND rub.date_tmp < fille.date_heure AND fille.statut='publie'
+	GROUP BY fille.id_rubrique");
 	while ($row = spip_fetch_array($r))
-		spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".$row['date']."' WHERE id_rubrique=".$row['id']);
+		spip_query("UPDATE spip_rubriques
+		SET statut_tmp='publie', date_tmp='".$row['date']."'
+		WHERE id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont un site publie
-	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h from spip_rubriques AS rub, spip_syndic AS fille WHERE rub.id_rubrique = fille.id_rubrique AND rub.date_tmp < fille.date AND fille.statut='publie' GROUP BY fille.id_rubrique");
+	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
+	FROM spip_rubriques AS rub, spip_syndic AS fille
+	WHERE rub.id_rubrique = fille.id_rubrique AND rub.date_tmp < fille.date
+	AND fille.statut='publie' GROUP BY fille.id_rubrique");
 	while ($row = spip_fetch_array($r))
-		spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".$row['date_h']."' WHERE id_rubrique=".$row['id']);
+		spip_query("UPDATE spip_rubriques
+		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
+		WHERE id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont un document publie
-	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h from spip_rubriques AS rub, spip_documents AS fille, spip_documents_rubriques AS lien WHERE rub.id_rubrique = lien.id_rubrique AND lien.id_document=fille.id_document AND rub.date_tmp < fille.date GROUP BY lien.id_rubrique");
+	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
+	FROM spip_rubriques AS rub, spip_documents AS fille,
+	spip_documents_rubriques AS lien
+	WHERE rub.id_rubrique = lien.id_rubrique
+	AND lien.id_document=fille.id_document AND rub.date_tmp < fille.date
+	GROUP BY lien.id_rubrique");
 	while ($row = spip_fetch_array($r))
-		spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".$row['date_h']."' WHERE id_rubrique=".$row['id']);
+		spip_query("UPDATE spip_rubriques
+		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
+		WHERE id_rubrique=".$row['id']);
 	
 	
 	// Les rubriques qui ont une rubrique fille plus recente
 	// on tourne tant que les donnees remontent vers la racine.
 	do {
 		$continuer = false;
-		$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date_tmp) AS date_h from spip_rubriques AS rub, spip_rubriques AS fille WHERE rub.id_rubrique = fille.id_parent AND rub.date_tmp < fille.date_tmp AND fille.statut='publie' GROUP BY fille.id_parent");
+		$r = spip_query("SELECT rub.id_rubrique AS id,
+		max(fille.date_tmp) AS date_h
+		FROM spip_rubriques AS rub, spip_rubriques AS fille
+		WHERE rub.id_rubrique = fille.id_parent
+		AND rub.date_tmp < fille.date_tmp AND fille.statut='publie'
+		GROUP BY fille.id_parent");
 		while ($row = spip_fetch_array($r)) {
-			spip_query("UPDATE spip_rubriques SET statut_tmp='publie', date_tmp='".$row['date_h']."' WHERE id_rubrique=".$row['id']);
+			spip_query("UPDATE spip_rubriques
+			SET statut_tmp='publie', date_tmp='".$row['date_h']."'
+			WHERE id_rubrique=".$row['id']);
 			$continuer = true;
 		}
 	} while ($continuer);
@@ -67,27 +100,41 @@ function calculer_rubriques() {
 	//
 
 	// fixer les id_secteur des rubriques racines
-	spip_query("UPDATE spip_rubriques SET id_secteur=id_rubrique WHERE id_parent=0");
-	
+	spip_query("UPDATE spip_rubriques SET id_secteur=id_rubrique
+	WHERE id_parent=0");
+
 	// reparer les rubriques qui n'ont pas l'id_secteur de leur parent
 	do {
 		$continuer = false;
-		$r = spip_query("SELECT fille.id_rubrique AS id, maman.id_secteur AS secteur FROM spip_rubriques AS fille, spip_rubriques AS maman WHERE fille.id_parent = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
+		$r = spip_query("SELECT fille.id_rubrique AS id,
+		maman.id_secteur AS secteur
+		FROM spip_rubriques AS fille, spip_rubriques AS maman
+		WHERE fille.id_parent = maman.id_rubrique
+		AND fille.id_secteur <> maman.id_secteur");
 		while ($row = spip_fetch_array($r)) {
-			spip_query("UPDATE spip_rubriques SET id_secteur=".$row['secteur']." WHERE id_rubrique=".$row['id']);
+			spip_query("UPDATE spip_rubriques
+			SET id_secteur=".$row['secteur']." WHERE id_rubrique=".$row['id']);
 			$continuer = true;
 		}
 	} while ($continuer);
 	
 	// reparer les articles
-	$r = spip_query("SELECT fille.id_article AS id, maman.id_secteur AS secteur FROM spip_articles AS fille, spip_rubriques AS maman WHERE fille.id_rubrique = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
+	$r = spip_query("SELECT fille.id_article AS id, maman.id_secteur AS secteur
+	FROM spip_articles AS fille, spip_rubriques AS maman
+	WHERE fille.id_rubrique = maman.id_rubrique
+	AND fille.id_secteur <> maman.id_secteur");
 	while ($row = spip_fetch_array($r))
-		spip_query("UPDATE spip_articles SET id_secteur=".$row['secteur']." WHERE id_rubrique=".$row['id']);
+		spip_query("UPDATE spip_articles
+		SET id_secteur=".$row['secteur']." WHERE id_rubrique=".$row['id']);
 	
 	// reparer les sites
-	$r = spip_query("SELECT fille.id_syndic AS id, maman.id_secteur AS secteur FROM spip_syndic AS fille, spip_rubriques AS maman WHERE fille.id_rubrique = maman.id_rubrique AND fille.id_secteur <> maman.id_secteur");
+	$r = spip_query("SELECT fille.id_syndic AS id, maman.id_secteur AS secteur
+	FROM spip_syndic AS fille, spip_rubriques AS maman
+	WHERE fille.id_rubrique = maman.id_rubrique
+	AND fille.id_secteur <> maman.id_secteur");
 	while ($row = spip_fetch_array($r))
-		spip_query("UPDATE spip_syndic SET id_secteur=".$row['secteur']." WHERE id_rubrique=".$row['id']);
+		spip_query("UPDATE spip_syndic SET id_secteur=".$row['secteur']."
+		WHERE id_rubrique=".$row['id']);
 
 }
 
@@ -104,18 +151,20 @@ function calculer_langues_rubriques_etape() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
 		$id_rubrique = $row['id_rubrique'];
-		$t = spip_query ("UPDATE spip_rubriques SET lang='$lang', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
+		$t = spip_query ("UPDATE spip_rubriques
+		SET lang='$lang', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 	}
 
 	return $t;
 }
 
 function calculer_langues_rubriques() {
+
 	// rubriques (recursivite)
-
 	$langue_site = addslashes(lire_meta('langue_site'));
-	spip_query ("UPDATE spip_rubriques SET lang='$langue_site', langue_choisie='non' WHERE id_parent='0' AND langue_choisie != 'oui'");
-
+	spip_query ("UPDATE spip_rubriques
+	SET lang='$langue_site', langue_choisie='non'
+	WHERE id_parent=0 AND langue_choisie != 'oui'");
 	while (calculer_langues_rubriques_etape());
 
 	// articles
@@ -127,7 +176,8 @@ function calculer_langues_rubriques() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
 		$id_article = $row['id_article'];
-		spip_query ("UPDATE spip_articles SET lang='$lang', langue_choisie='non' WHERE id_article=$id_article");
+		spip_query ("UPDATE spip_articles
+		SET lang='$lang', langue_choisie='non' WHERE id_article=$id_article");
 	}
 
 	// breves
@@ -139,12 +189,14 @@ function calculer_langues_rubriques() {
 	while ($row = spip_fetch_array($s)) {
 		$lang = addslashes($row['lang']);
 		$id_breve = $row['id_breve'];
-		spip_query ("UPDATE spip_breves SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
+		spip_query ("UPDATE spip_breves
+		SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
 	}
 
 	if (lire_meta('multi_rubriques') == 'oui') {
 		// Ecrire meta liste langues utilisees dans rubriques
-		$s = spip_query ("SELECT lang FROM spip_rubriques WHERE lang != '' GROUP BY lang");
+		$s = spip_query ("SELECT lang FROM spip_rubriques
+		WHERE lang != '' GROUP BY lang");
 		while ($row = spip_fetch_array($s)) {
 			$lang_utilisees[] = $row['lang'];
 		}
