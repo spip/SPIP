@@ -117,9 +117,11 @@ function filtrer_entites($texte) {	// html -> texte, a completer
 
 	$texte = strtr2 ($texte, $trans);
 
-	if (lire_meta('charset') == 'iso-8859-1')	// recuperer les caracteres iso-latin
+	$charset = lire_meta('charset');
+	if ($charset == 'iso-8859-1')	// recuperer les caracteres iso-latin
 		$texte = strtr2 ($texte, $trans_iso);
-	else if (lire_meta('charset') == 'utf-8') {
+	else if (($charset == 'utf-8') OR ($charset == 'windows-1251'))	// autres charsets supportes
+	{
 		// 1. recuperer les caracteres binaires en &#1234;
 		$texte = entites_unicode($texte);
 		// 2. les &eacute; en iso-8859-1
