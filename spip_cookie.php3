@@ -5,10 +5,18 @@ include ("ecrire/inc_version.php3");
 include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_session.php3");
 
+// determiner ou l'on veut retomber
 if ($url)
 	$cible = new Link($url);
 else
 	$cible = new Link('ecrire/');
+
+// cas particulier, logout dans l'espace public
+if ($logout_public) {
+    $logout = $logout_public;
+	if (!$url)
+		$url = 'index.php3';
+}
 
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
@@ -57,10 +65,10 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 
-	if ($url)
-		@Header("Location: $url");
-	else // plus rapide
+	if (!$url)	// ecrire
 		@Header("Location: ./spip_login.php3");
+	else
+		@Header("Location: $url");
 	exit;
 }
 

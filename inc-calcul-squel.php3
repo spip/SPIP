@@ -828,7 +828,7 @@ function parser($texte) {
 		'IP', 'VISITES', 'POPULARITE', 'POPULARITE_ABSOLUE', 'POPULARITE_MAX', 'POPULARITE_SITE', 'POINTS', 'COMPTEUR_BOUCLE', 'TOTAL_BOUCLE', 'PETITION',
 		'LARGEUR', 'HAUTEUR', 'TAILLE', 'EXTENSION',
 		'DEBUT_SURLIGNE', 'FIN_SURLIGNE', 'TYPE_DOCUMENT', 'EXTENSION_DOCUMENT',
-		'FORMULAIRE_ADMIN', 'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'PUCE'
+		'FORMULAIRE_ADMIN', 'LOGIN_PRIVE', 'LOGIN_PUBLIC', 'URL_LOGOUT', 'PUCE'
 	);
 	reset($c);
 	while (list(, $val) = each($c)) {
@@ -1670,6 +1670,26 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 				login (\$cible, false); ?".">";
 			';
 		break;
+
+	case 'URL_LOGOUT':
+		if ($fonctions) {
+			list(, $url) = each ($fonctions);
+			$url = "&url=$url";
+			$filtres = array();
+			while(list(, $nom) = each($fonctions))
+				$filtres[] = $nom;
+			$fonctions = $filtres;
+		} else {
+			$url = '';
+		}
+		$milieu = '
+			$'.$nom_var.' = "<"."?php
+				if (\$auteur_session[\'login\']) {
+					echo \'spip_cookie.php3?logout_public=\'.\$auteur_session[\'login\'].\'' . $url . '\';
+				} ?".">";
+			';
+		break;
+
 
 	//
 	// Boutons d'administration
