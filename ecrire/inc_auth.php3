@@ -85,6 +85,28 @@ function auth() {
 	// Recuperer les donnees d'identification
 	//
 
+	// cookie - experimental
+	$SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES = false; // mettre true pour jouer
+	if ($SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES)
+	if ($cookie = $HTTP_COOKIE_VARS[spip_session]) {
+		include_local ("inc_session.php3");
+		$session_login = verifie_cookie_session ($cookie);
+	}
+	if (! $session_login AND ($HTTP_COOKIE_VARS[cookie_login] == 'experimental')) {
+		@header ("Location: login.php3");
+		exit;
+	}
+
+	if ($session_login) {
+		$auth_login = $session_login;
+		$auth_pass_ok = true;
+		$auth_can_disconnect = true;
+		if ($GLOBALS['logout'] == $auth_login) {
+			@header("Location: ../spip_session.php3?cookie=-1&redirect=ecrire/login.php3");
+		}
+	} else
+	// cookie - fin experimental
+
 	if ($auth_login) {
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
