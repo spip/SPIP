@@ -55,7 +55,8 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	// chercher dans le fichier cache ?
 	if (!$flag_ecrire AND $fichier_lang_exists) {
 		if (!$forcer AND @file_exists('CACHE/lang_'.$module.'_'.$lang.'.php3')
-		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))) {
+		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/'.$module.'_'.$lang.'.php3'))
+		AND (@filemtime('CACHE/lang_'.$module.'_'.$lang.'.php3') > @filemtime('ecrire/lang/perso.php3'))) {
 			$GLOBALS['idx_lang'] = 'i18n_'.$module.'_'.$lang;
 			return include_local('CACHE/lang_'.$module.'_'.$lang.'.php3');
 		}
@@ -78,8 +79,8 @@ function charger_langue($lang, $module = 'spip', $forcer = false) {
 	}
 
 	// surcharge perso
-	if (file_exists($dir_ecrire.'lang/perso.php3')) {
-		include_ecrire('lang/perso.php3');
+	if (@file_exists($dir_ecrire.'lang/perso.php3')) {
+		include($dir_ecrire.'lang/perso.php3');
 	}
 
 }
