@@ -148,7 +148,7 @@ rubrique("Les sites r&eacute;f&eacute;renc&eacute;s");
 article("R&eacute;f&eacute;rencer un site","reference");
 article("Sites syndiqu&eacute;s","rubsyn");
 article("Articles syndiqu&eacute;s","artsyn");
-
+article("Utiliser un proxy","confhttpproxy","admin");
 
 rubrique("La messagerie interne");
 article("<img src='img_pack/m_envoi.gif' align='left' border=0> Les messages entre utilisateurs","messut");
@@ -191,7 +191,6 @@ for ($i=0; $i<=count($texte); $i++) {
 		else {
 			$ajouter_rub="$larubrique";
 			$texte[$i]=ereg_replace("#IMG","<img src='img_pack/triangle-bleu.gif' alt='&gt;' width='14' height='14' border='0'>",$texte[$i]);
-//			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&add_rub=$add_rub&aide=$aide",$texte[$i]);
 			$texte[$i]=ereg_replace("#LIEN","aide_gauche.php3?les_rub=$les_rub&addrub=$ajouter_rub&aide=$aide",$texte[$i]);
 
 		}
