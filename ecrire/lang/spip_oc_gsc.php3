@@ -1356,9 +1356,7 @@ e tornar connect&agrave;\'vs au sit.
  incl&uacute;s <i>tots</i> los acc&egrave;s redactors e administrators. Un c&ograve;p que l\'auratz executada, qu\'auratz de tornar lan&ccedil;ar l\'installacion d\'SPIP t&agrave; tornar crear ua basa nav&egrave;ra atau com un perm&egrave;r acc&egrave;s administrator.',
 'texte_admin_tech_01' => 'Aquera opcion que\'vs permet de sauvagardar lo contengut de la basa dens un fichi&egrave;r qui ser&agrave; servat dens lo repert&ograve;ri <i>ecrire/data/</i>.
 N\'oblidetz pas tanp&ograve;c de recuperar l\'integralitat deu repert&ograve;ri <i>IMG/</i>, qui contien los imatges e los documents utilizats dens los articles e rubricas.',
-'texte_admin_tech_02' => 'Atencion: aquera sauvagarda que\'s poir&agrave; restaurar
- SONQUE dens un sit installat dab la medisha version d\'SPIP. L\'error
- qui consisteish a har ua sauvagarda abans de har ua actualizacion d\'SPIP qu\'ei correnta... Ent&agrave; mei detalhs, consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
+'texte_admin_tech_02' => 'Atencion: aquera sauvagarda que\'s poir&agrave; restaurar SONQUE dens un sit installat dab la medisha version d\'SPIP. Donc subertot non cau pas "vueitar la basa" en esperar de re&iuml;nstallar la sauvagarda apr&egrave;s ua actualizacion. Consultatz <a href="http://www.spip.net/fr_article1489.html">la documentacion d\'SPIP</a>.',
 'texte_admin_tech_03' => 'Que podetz causir de sauvagardar lo fichi&egrave;r devath forma comprimida, ent&agrave;
  accelerar lo son transferiment a v&ograve;ste o a &ccedil;&ograve; d\'un servider de sauvagardas, e ent&agrave; estauviar espaci disc.',
 'texte_adresse_annuaire_1' => '(Se lo v&ograve;ste annuari ei installat sus la medisha maquina qu\'aqueth sit web, que s\'ageish probable de "localhost".)',
