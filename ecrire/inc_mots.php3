@@ -433,7 +433,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 						while($row = spip_fetch_array($result)) {
 							$id_mot = $row['id_mot'];
 							$titre_mot = $row['titre'];		
-							$texte_option = entites_html(couper($titre_mot, 50));
+							$texte_option = entites_html($titre_mot);
 							echo "\n<OPTION VALUE=\"$id_mot\">";
 							echo "&nbsp;&nbsp;&nbsp;";
 							echo $texte_option;
