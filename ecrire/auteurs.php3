@@ -266,8 +266,15 @@ else $aff_articles="prop,publie";
 
 
 
+
+	if ($sans_acces == "oui") {
+		echo propre("<p>Les <b>auteurs sans acc&egrave;s au site</b> sont des auteurs qui ne disposent pas d'informations de connexion &agrave; l'espace priv&eacute;. Cr&eacute;&eacute;s par les administrateurs, ce sont g&eacute;n&eacute;ralement des auteurs dont on publie les textes sur le site, mais qui n'interviennent pas directement dans la vie du site (notamment: le site publie un de leurs textes d&eacute;j&agrave; publi&eacute; ailleurs; il est donc n&eacute;cessaire d'ajouter ces auteurs pour pouvoir signer leur article de leur nom, mais il n'est pas n&eacute;cessaire de leur fixer des donn&eacute;es de connexion &agrave; l'espace priv&eacute;).</p>");
+	}
 	echo "<P align='left'><A HREF='auteurs.php3?aff_art[]=$aff_art&class=auteurs&liste_lettres=tout&publies=$publies'>Tout d&eacute;plier</A>";
 	echo " | <A HREF='auteurs.php3?aff_art[]=$aff_art&class=auteurs&publies=$publies'>Tout replier</A><P>";
+
+
+
 
 $ifond=0;
 
