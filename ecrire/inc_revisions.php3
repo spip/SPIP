@@ -223,7 +223,7 @@ function ajouter_version($id_article, $champs) {
 	spip_get_lock($lock, 10);
 	
 	// Examiner la derniere version
-	$query = "SELECT id_version, (id_auteur=$connect_id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 SECOND) AND permanent!='oui') AS flag ".
+	$query = "SELECT id_version, (id_auteur=$connect_id_auteur AND date > DATE_SUB(NOW(), INTERVAL 1 HOUR) AND permanent!='oui') AS flag ".
 		"FROM spip_versions WHERE id_article=$id_article ".
 		"ORDER BY id_version DESC LIMIT 0,1";
 	$result = spip_query($query);

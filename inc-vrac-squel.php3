@@ -272,6 +272,10 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
     return calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, $boucles, $id_mere);
     break; 
 
+case 'POINTS':
+	$code = '$PileRow[$SP]["points"]';
+	break;
+
   default:
 	  // champ inconnu. Il s'auto-de'note.
 	    $code = "'#$nom_champ'";
