@@ -109,12 +109,12 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= '<'.'?php { ?'.'>';
 
 	$ret .= "\n<a name='formulaire_forum'></a>\n";
-	$ret .= "\n<FORM ACTION='$lien' METHOD='post'>";
-	
+	$ret .= "\n<form action='$lien' method='post'>";
+
 	if ($forums_publics == "pri") {
 		$ret.= _T('forum_info_modere')."<p>";
 	}
-	
+
 	// recuperer le titre
 	if (! $titre) {
 		if ($id_parent)
@@ -128,18 +128,18 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		else if ($id_syndic)
 			$titre_select = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $id_syndic";
 		else
-			$titre_select = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";	
+			$titre_select = "SELECT '".addslashes(_T('forum_titre_erreur'))."' AS titre";
 
 		$res = spip_fetch_object(spip_query($titre_select));
 		$titre = '> ' . ereg_replace ('^[>[:space:]]*', '', $res->titre);
 	}
-	
 
 
-	if ($id_message){		
+
+	if ($id_message){
 		$query_forum="SELECT * FROM spip_forum WHERE ip=\"$REMOTE_ADDR\" AND id_forum=$id_message";
 		$result_forum=spip_query($query_forum);
-		
+
 		while($row = spip_fetch_array($result_forum)) {
 			$titre=$row['titre'];
 			$texte=$row['texte'];
@@ -148,7 +148,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 			$nom_site_forum=$row['nom_site'];
 			$url_site=$row['url_site'];
 		}
-	
+
 		if (!$nouveau_document AND $afficher_texte != 'non'){
 			$ret .= "<div class='spip_encadrer'>";
 			if ($afficher_texte != "non"){
@@ -156,11 +156,11 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$ret .= "<p><b><a href='mailto:$email_auteur'>".typo($auteur)."</a></b>";
 				$ret .= "<p>".propre($texte)."<p>";
 			}
-			
+
 			$ret .= "<a href='$url_site'>".typo($nom_site_forum)."</a>";
-	
-	
-			// Verifier mots associes au message	
+
+
+			// Verifier mots associes au message
 			$query_mots = "SELECT mots.* FROM spip_mots_forum AS lien, spip_mots AS mots WHERE id_forum='$id_message' AND mots.id_mot = lien.id_mot GROUP BY mots.id_mot";
 			$result_mots = spip_query($query_mots);
 			if (spip_num_rows($result_mots)>0) $ret .= "<p>"._T('forum_avez_selectionne');
@@ -170,25 +170,23 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$titre_mot = $row['titre'];
 				$les_mots[$id_mot] = true;
 				$presence_mots = true;
-				
+
 				$ret.= "<li> $type_mot&nbsp;: <b>$titre_mot</b>";
-				
+
 			}
-		
+
 			if (strlen($texte) < 10 AND !$presence_mots)
-				$ret .= "<p><div align='right'><font color=red>"._T('forum_attention_dix_caracteres')."</font></div>\n";
+				$ret .= "<p align='right'><font color=red>"._T('forum_attention_dix_caracteres')."</font></p>\n";
 			else if (strlen($titre) < 3 AND $afficher_texte <> "non")
-				$ret .= "<p><div align='right'><font color=red>"._T('forum_attention_trois_caracteres')."</font></div>\n";
+				$ret .= "<p align='right'><font color=red>"._T('forum_attention_trois_caracteres')."</font></p>\n";
 			else
-				$ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='confirmer' CLASS='spip_bouton' VALUE='"._T('forum_message_definitif')."'></DIV>";
-	
-			$ret .= "</div>\n<p>";
+				$ret .= "\n<div align='right'><input type='submit' name='confirmer' class='spip_bouton' value='"._T('forum_message_definitif')."' /></div>";
+
+			$ret .= "</div>\n<br />";
 		}
 	}
 
 	$ret .= "\n";
-	
-	
 
 	$seed = (double) (microtime() + 1) * time() * 1000000;
 	@mt_srand($seed);
@@ -206,49 +204,47 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 
 	$titre = entites_html($titre);
 	$texte = entites_html($texte);
-	
+
 	if ($afficher_texte == "non"){
-		$ret .= "\n<INPUT TYPE='hidden' NAME='titre' VALUE=\"$titre\">";
+		$ret .= "\n<input type='hidden' name='titre' VALUE=\"$titre\" />";
 	}
 	else {
-		$ret .= "\n<div class='spip_encadrer'><B>"._T('forum_titre')."</B><BR>";
-		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='titre' VALUE=\"$titre\" SIZE='40'></div>";
+		$ret .= "\n<div class='spip_encadrer'><b>"._T('forum_titre')."</b><br />";
+		$ret .= "\n<input type='text' CLASS='forml' name='titre' value=\"$titre\" size='40'></div>";
 	}
-	
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='ajout_forum' VALUE=\"oui\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='forum_id_rubrique' VALUE=\"$id_rubrique\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='forum_id_parent' VALUE=\"$id_parent\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='forum_id_article' VALUE=\"$id_article\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='forum_id_breve' VALUE=\"$id_breve\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='forum_id_syndic' VALUE=\"$id_syndic\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='alea' VALUE=\"$alea\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='hash' VALUE=\"$hash\">";
-	$ret .= "\n<INPUT TYPE='Hidden' NAME='retour_forum' VALUE=\"$retour\">";
-	
-	if ($new != "oui" AND $redac != "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
-	if ($new == "oui") $ret .= "\n<INPUT TYPE='Hidden' NAME='redac' VALUE=\"oui\">";
 
-	
-	if ($afficher_texte !="non"){
-		$ret .= "\n<p><div class='spip_encadrer'><B>"._T('forum_texte')."</B><BR>\n";
+	$ret .= "\n<input type='Hidden' name='id_message' value=\"$id_message\" />";
+	$ret .= "\n<input type='Hidden' name='ajout_forum' value=\"oui\" />";
+	$ret .= "\n<input type='Hidden' name='forum_id_rubrique' value=\"$id_rubrique\" />";
+	$ret .= "\n<input type='Hidden' name='forum_id_parent' value=\"$id_parent\" />";
+	$ret .= "\n<input type='Hidden' name='forum_id_article' value=\"$id_article\" />";
+	$ret .= "\n<input type='Hidden' name='forum_id_breve' value=\"$id_breve\" />";
+	$ret .= "\n<input type='Hidden' name='forum_id_syndic' value=\"$id_syndic\" />";
+	$ret .= "\n<input type='Hidden' name='alea' value=\"$alea\" />";
+	$ret .= "\n<input type='Hidden' name='hash' value=\"$hash\" />";
+	$ret .= "\n<input type='Hidden' name='retour_forum' value=\"$retour\" />";
+
+	if ($new != "oui" AND $redac != "oui") $ret .= "\n<input type='Hidden' name='new' value=\"oui\" />";
+	if ($new == "oui") $ret .= "\n<input type='Hidden' name='redac' value=\"oui\" />";
+
+	if ($afficher_texte != "non"){
+		$ret .= "\n<br /><div class='spip_encadrer'><b>"._T('forum_texte')."</b><br />\n";
 		$ret .= _T('forum_creer_paragraphes');
-		$ret .= "<br>\n<TEXTAREA NAME='texte' ROWS='12' CLASS='forml' COLS='40' wrap=soft>";
+		$ret .= "<br>\n<textarea name='texte' rows='12' class='forml' cols='40'>";
 		$ret.= $texte;
-		$ret .= "\n</TEXTAREA></div>\n";
+		$ret .= "\n</textarea></div>\n";
 	}
-
 
 
 	/// Gestion des mots-cles
-	
+
 	$mots_cles_forums=lire_meta("mots_cles_forums");
 	if ($mots_cles_forums == "oui"){
 		if ($id_rubrique > 0) $table = "rubriques";
 		else if ($id_article > 0) $table = "articles";
 		else if ($id_breve > 0) $table = "breves";
 		else if ($id_syndic > 0) $table = "syndic";
-		
+
 
 		if ($afficher_groupe) {
 			$afficher_groupe = join($afficher_groupe, ",");
@@ -261,7 +257,7 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				$id_groupe = $row_groupe['id_groupe'];
 				$titre_groupe = $row_groupe['titre'];
 				$unseul_groupe = $row_groupe['unseul'];
-				
+
 				$query = "SELECT * FROM spip_mots WHERE id_groupe='$id_groupe'";
 				$result = spip_query($query);
 				$total_rows = spip_num_rows($result);
@@ -269,40 +265,40 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 				if ($total_rows > 0){
 					$ret .= "\n<p><div class='spip_encadrer'>";
 					$ret.= "<b>$titre_groupe&nbsp;:</b>";
-					
+
 					$ret .= "<table cellpadding=0 cellspacing=0 border=0 width='100%'>\n";
 					$ret .= "<tr><td width='47%' valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 					$i = 0;
-					
+
 					while ($row = spip_fetch_array($result)) {
 						$id_mot = $row['id_mot'];
 						$titre_mot = propre($row['titre']);
 						$type_mot = propre($row['type']);
 						$descriptif_mot = $row['descriptif'];
-					
+
 						if ($i >= ($total_rows/2) AND $i < $total_rows){
 							$i = $total_rows + 1;
 							$ret .= "</font></td><td width='6%'>&nbsp;</td><td width='47%' valign='top'><font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 						}
-						
+
 						if ($les_mots[$id_mot]) $checked = "checked";
 						else $checked = "";
-						
+
 						if ($unseul_groupe == 'oui'){
 							$ret .= "<input type='radio' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot'> ";
 						}
 						else {
 							$ret .= "<input type='checkbox' name='ajouter_mot[$id_groupe][]' value='$id_mot' $checked id='mot$id_mot'> ";
 						}
-					
+
 						$ret .=  afficher_petits_logos_mots($id_mot);
 						$ret .= "<B><label for='mot$id_mot'>$titre_mot</label></B><br>";
 						if (strlen($descriptif_mot) > 0) $ret .= "$descriptif_mot<br>";
 						$i++;
 					}
-					
+
 					$ret .= "</font></td></tr></table>";
-				
+
 					$ret .= "</div>";
 				}
 			}
@@ -311,17 +307,17 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 	///////
 
 
-	if ($afficher_texte != "non"){
-		$ret .= "\n<p><div class='spip_encadrer'>"._T('forum_lien_hyper')."<BR>\n";
+	if ($afficher_texte != "non") {
+		$ret .= "\n<br /><div class='spip_encadrer'>"._T('forum_lien_hyper')."<br />\n";
 		$ret .= _T('forum_page_url');
-		$ret .= "<br>\n"._T('forum_titre');
-		$ret .= "<br>\n<INPUT TYPE='text' CLASS='forml' NAME='nom_site_forum' VALUE=\"".entites_html($nom_site_forum)."\" SIZE='40'><BR>";
+		$ret .= "<br />\n"._T('forum_titre');
+		$ret .= "<br />\n<input type='text' class='forml' name='nom_site_forum' value=\"".entites_html($nom_site_forum)."\" size='40'><br />";
 
 		if (!$url_site) $url_site = "http://";
 		$ret .= "\n"._T('forum_url');
-		$ret .= "<BR>\n<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'></div>";
+		$ret .= "<br />\n<input type='text' class='forml' name='url_site' value=\"$url_site\" size='40' /></div>";
 
-		$ret .= "\n<p><div class='spip_encadrer'>"._T('forum_qui_etes_vous')."<BR>";
+		$ret .= "\n<br /><div class='spip_encadrer'>"._T('forum_qui_etes_vous')."<br />";
 
 		$nom_session = $GLOBALS['auteur_session']['nom'];
 		$nom_email = $GLOBALS['auteur_session']['email'];
@@ -330,22 +326,22 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		if (!$email_auteur) $email_auteur = $nom_email;
 
 		if ($forums_publics == "abo")
-			$disabled = ' Disabled'; 
+			$disabled = ' disabled="disabled"';
 
 		$ret .= "\n"._T('forum_votre_nom');
-		$ret .= "<BR>\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".entites_html($auteur)."\" SIZE='40'$disabled><BR>\n";
+		$ret .= "<br />\n<input type='text' class='forml' name='auteur' value=\"".entites_html($auteur)."\" size='40'$disabled /><br />\n";
 
 		$ret .= _T('forum_votre_email');
-		$ret .= "<br>\n<INPUT TYPE='text' CLASS='forml' NAME='email_auteur' VALUE=\"$email_auteur\" SIZE='40'$disabled></div>";
+		$ret .= "<br />\n<input type='text' class='forml' name='email_auteur' value=\"$email_auteur\" size='40'$disabled /></div>";
 	}
 
-	if ($afficher_texte !="non") $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='"._T('forum_voir_avant')."'></DIV>";
-	else  $ret .= "\n<p><DIV ALIGN='right'><INPUT TYPE='submit' NAME='Valider' CLASS='spip_bouton' VALUE='"._T('forum_valider')."'></DIV>";
-	
-	$ret .= "</FORM>";
+	if ($afficher_texte !="non") $ret .= "\n<br /><div align='right'><input type='submit' name='Valider' class='spip_bouton' value='"._T('forum_voir_avant')."' /></div>";
+	else  $ret .= "\n<br /><div align='right'><input type='submit' name='Valider' class='spip_bouton' value='"._T('forum_valider')."' /></div>";
+
+	$ret .= "</form>";
 
 	$ret .= '<'.'?php } ?'.'>';	// fin forums abo
-	
+
 	return $ret;
 }
 
