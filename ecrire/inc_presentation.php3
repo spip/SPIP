@@ -2985,13 +2985,14 @@ function install_debut_html($titre = 'AUTO') {
 	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
 	@Header("Content-Type: text/html; charset=$charset");
 
-	echo "<html><head>
+	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+	echo "\n<html><head>
 	<title>$titre</title>
 	<meta http-equiv='Expires' content='0'>
 	<meta http-equiv='cache-control' content='no-cache,no-store'>
 	<meta http-equiv='pragma' content='no-cache'>
 	<meta http-equiv='Content-Type' content='text/html; charset=$charset'>
-	<style>
+	<style type='text/css'>
 	<!--
 	a {text-decoration: none; }
 	A:Hover {color:#FF9900; text-decoration: underline;}
@@ -3004,7 +3005,7 @@ function install_debut_html($titre = 'AUTO') {
 	-->
 	</style>
 	</head>
-	<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'";
+	<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'";
 
 	if ($spip_lang_rtl) echo " dir='rtl'";
 
@@ -3017,7 +3018,6 @@ function install_debut_html($titre = 'AUTO') {
 
 function install_fin_html() {
 	echo '
-	</font>
 	</td></tr></table>
 	</center>
 	</body>

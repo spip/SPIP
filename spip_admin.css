@@ -15,8 +15,6 @@
 	background-color: transparent;
 	font-size: 10px;
 	z-index: 100;
-	color: #6C3;
- /*	line-height: 3em; */
 }
 
 .spip-admin-bloc li {
@@ -36,7 +34,8 @@ a.spip-admin-boutons {
 	text-decoration: none;
 	width: 3em;
 	text-align: center;
-	margin: 1em 0;
+	margin: 0;
+	padding: 1px .5em;
 	font-family: helvetica,arial,sans-serif;
 	font-size: 10px;
 	font-weight: bold;
@@ -44,6 +43,13 @@ a.spip-admin-boutons {
 	color: #0c479d;
 }
 
+a:hover.spip-admin-boutons {
+	background-color: #fc3;
+	border-bottom: 2px solid #36f;
+}
+
 a:active.spip-admin-boutons {
 	background-color: #ccc;
+	border-bottom: 2px solid #f00;
 }
+
