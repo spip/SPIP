@@ -471,7 +471,6 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_popularite_2' => 'popularno&#347;&#263; strony:',
 'info_popularite_3' => 'popularno&#347;&#263;:&nbsp;@popularite@; odwiedziny:&nbsp;@visites@',
 'info_popularite_4' => 'popularno&#347;&#263;:&nbsp;@popularite@; odwiedziny:&nbsp;@visites@',
-'info_popularite_5' => 'popularno&#347;&#263;:',
 'info_post_scriptum' => 'Postscriptum',
 'info_post_scriptum_2' => 'Postscriptum:',
 'info_pour' => 'dla',

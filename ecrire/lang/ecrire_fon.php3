@@ -425,7 +425,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_popularite_2' => 'm&#603; b&iacute; t&ugrave;n gblogbloj&iacute; &#596;&nbsp;:',
 'info_popularite_3' => 'T&ograve;b&iacute;t&ugrave;n&nbsp;:&nbsp;@popularite@&nbsp;; Jo&#772;n&#596;&nbsp;:&nbsp;@visites@',
 'info_popularite_4' => 'T&ograve;b&iacute;t&ugrave;n&nbsp;:&nbsp;@popularite@&nbsp;; Jo&#772;n&#596;&nbsp;:&nbsp;@visites@',
-'info_popularite_5' => 'T&ograve;b&iacute;t&ugrave;n&nbsp;:',
 'info_post_scriptum' => 'Gb&egrave; n&iacute; n&aacute;',
 'info_post_scriptum_2' => 'Gb&egrave; n&iacute; n&aacute; :',
 'info_pour' => 'gb&#596;n',
