@@ -548,7 +548,7 @@ Merci de votre participation
 'info_classement_2' => '<sup>e</sup> sur @liste@',
 'info_code_acces' => 'N\'oubliez pas vos propres codes d\'acc&egrave;s&nbsp;!',
 'info_comment_lire_tableau' => 'Comment lire ce tableau',
-'info_config_suivi' => 'Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou un adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):', 
+'info_config_suivi' => 'Si cette adresse correspond &agrave; une mailing-list, vous pouvez indiquer ci-dessous l\'adresse &agrave; laquelle les participants au site peuvent s\'inscrire. Cette adresse peut &ecirc;tre une URL (par exemple la page d\'inscription &agrave; la liste par le Web), ou une adresse email dot&eacute;e d\'un sujet sp&eacute;cifique (par exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):', 
 'info_config_suivi_lien' => 'En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_config_suivi_explication' => 'Vous pouvez recevoir automatiquement, par courrier &eacute;lectronique, les annonces concernant l\'activit&eacute; &eacute;ditoriale de ce site. Pour cela, vous pouvez vous abonner &agrave; la mailing-list suivante&nbsp;:',
 'info_confirmer_passe' => 'Confirmer ce nouveau mot de passe :',
