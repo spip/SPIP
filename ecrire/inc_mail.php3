@@ -64,6 +64,8 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		$texte = str_replace("&#8217;", "'", $texte);
 		$sujet = str_replace("&#8217;", "'", $sujet);
 	}
+	$texte = str_replace("&mdash;", "--", $texte);
+	$sujet = str_replace("&mdash;", "--", $sujet);
 
 	// encoder le sujet si possible selon la RFC
 	if($GLOBALS['flag_multibyte'] AND @mb_internal_encoding($charset))

@@ -17,10 +17,11 @@ include_ecrire("inc_lang.php3");
 utiliser_langue_visiteur();
 if ($var_lang) changer_langue($var_lang);
 
-echo "<HTML>";
-echo "<HEAD>";
-echo "<TITLE dir=\"".($spip_lang_rtl ? 'rtl' : 'ltr')."\">"._T('info_aide_en_ligne')."</TITLE>";
-echo "</HEAD>";
+echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">';
+echo "<html>";
+echo "<head>";
+echo "<title dir=\"".($spip_lang_rtl ? 'rtl' : 'ltr')."\">"._T('info_aide_en_ligne')."</title>";
+echo "</head><body>";
 
 $frame_menu = "<frame src=\"aide_gauche.php3?aide=$aide&les_rub=$les_rub&var_lang=$spip_lang#$ancre\" name=\"gauche\" scrolling=\"auto\" noresize>\n";
 $frame_body = "<frame src=\"aide_droite.php3?aide=$aide&var_lang=$spip_lang\" name=\"droite\" scrolling=\"auto\" noresize>\n";
@@ -35,7 +36,7 @@ else {
 }
 echo '</frameset>';
 
-echo "</HTML>";
+echo "</body></html>";
 
 ?>
 

@@ -21,10 +21,11 @@ if ($var_lang) changer_langue($var_lang);
 include_ecrire("inc_layer.php3");
 
 ?>
-<HTML>
-<HEAD>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
-<style>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<style type="text/css">
 <!--
 	a {text-decoration: none; }
 	A:Hover {text-decoration: underline;}
@@ -83,12 +84,12 @@ function activer_article(id) {
 }
 //--></script>
 <?php afficher_script_layer(); ?>
-</HEAD>
+</head>
 
 <body bgcolor="#FFFFFF" text="#000000" link='#E86519' vlink='#6E003A' alink='#FF9900' TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"<?php
 	if ($spip_lang_rtl)
 		echo " dir='rtl'";
-echo ">";
+		echo " lang='$lang_aide'>";
 
 function rubrique($titre, $statut = "redac") {
 	global $ligne_rubrique;
@@ -259,5 +260,5 @@ article(_T('menu_aide_interface_perso_deconnecter'),"deconnect");
 fin_rubrique();
 
 ?>
-</BODY>
-</HTML>
+</body>
+</html>
