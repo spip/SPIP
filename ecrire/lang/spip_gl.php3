@@ -1243,7 +1243,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'onglet_origine_visites' => 'Orixe das visitas',
 'onglet_repartition_actuelle' => 'actualmente',
 'onglet_repartition_debut' => 'dende o princ&iacute;pio',
-'onglet_repartition_lang' => 'por linguas',
+'onglet_repartition_lang' => 'Reparto por linguas',
 'onglet_repartition_rubrique' => 'Distribuci&oacute;n por temas',
 'onglet_save_restaur_base' => 'Gardar/restaurar a base',
 'onglet_vider_cache' => 'Baleirar a memoria cach&eacute;',
@@ -1508,7 +1508,7 @@ e reconectar co web.
   <li>a natureza do motor tipogr&aacute;fico que SPIP ten que empregar para a reproduci&oacute;n dos textos;</li>
   <li>a lingua empregada nos formularios do web p&uacute;blico;</li>
   <li>a lingua presentada por defecto no espazo privado.</li></ul>',
-'texte_signification' => 'As barras vermellas representan as entradas acumuladas (total dos apartados), as barras verdes o n&uacute;mero de visitas para cada tema.',
+'texte_signification' => 'As barras escuras representan as entradas acumuladas (total dos apartados), as barras claras o n&uacute;mero de visitas para cada tema.',
 'texte_sous_titre' => 'Subt&iacute;tulo',
 'texte_statistiques_visites' => '(barras escuras:  domingo / curva escura: evoluci&oacute;n da media)',
 'texte_statut_attente_validation' => 'agardando pola validaci&oacute;n',
