@@ -1058,9 +1058,15 @@ p.spip {
 	line-height: 140%;
 }
 
-a.spip_in  {background-color:#eeeeee;}
+a.spip_in  {
+	background-color:#eeeeee;
+	padding: 2px;	
+}
 a.spip_note {background-color:#eeeeee;}
-a.spip_out {}
+a.spip_out {
+	background: url(img_pack/spip_out.gif) <?php echo $right; ?> center no-repeat;
+	padding-<?php echo $right; ?>: 10px;
+}
 a.spip_url {}
 a.spip_glossaire:hover {text-decoration: underline overline;}
 
@@ -1120,7 +1126,7 @@ h3.spip {
 	margin-bottom : 40px;
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-weight: bold;
-	font-size: 115%;
+	font-size: 120%;
 	text-align: center;
 }
 .spip_documents{

@@ -91,15 +91,6 @@ if ($spip_display != 4) {
 		}
 	}
 	
-	if ($options != 'avancees') {
-		debut_boite_info();
-		echo "<div class='verdana2'>";
-		echo "<p><center><b>&laquo;&nbsp;"._T('info_a_suivre')."</b></center>";
-		echo "<p>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3');
-		echo "</div>";
-		fin_boite_info();
-	}
-
 }
 
 //
