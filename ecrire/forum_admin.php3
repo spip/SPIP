@@ -82,13 +82,11 @@ if ($connect_statut == "0minirezo"){
 	$result_forum=spip_query($query_forum);
 
 	afficher_forum($result_forum,"forum_admin.php3");
+
+	echo "</FONT>";
 } else {
 	echo "Vous n'avez pas acc&egrave;s &agrave; cette page.";
 }
-	
-echo "</FONT>";
-
-
 
 
 fin_page();
