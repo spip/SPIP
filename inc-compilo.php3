@@ -59,11 +59,17 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 				}
 			}
 	}
+
+	if ($path = find_in_path($fichier))
+		$path = "\\'$path\\'";
+	else
+		$path = "find_in_path(\\'$fichier\\')";	# pathologique ??
+
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
 		join(", ",$l) .
 		");" .
-		"\tinclude(find_in_path(\'$fichier\'));" .
+		"\n\tinclude($path);" .
 		"\n?'." . "'>'";
 }
 
