@@ -44,9 +44,8 @@ echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('texte_sauvegarde')."</FONT></B></TD></TR>";
 
-echo "<TR><TD BACKGROUND=''>";
+echo "<tr><td class='serif'>";
 
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 echo "\n<FORM ACTION='export_all.php3' METHOD='get'>";
 
 echo "\n<p align='justify'>";
@@ -68,8 +67,7 @@ else {
 
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('texte_sauvegarde_base')."'></FORM></DIV>";
 
-echo "</FONT>";
-echo "</TD></TR>";
+echo "</td></tr>";
 echo "</TABLE>";
 
 
@@ -82,9 +80,8 @@ echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 echo _T('texte_restaurer_base')."</FONT></B></TD></TR>";
 
-echo "<TR><TD BACKGROUND=''>";
+echo "<TR><td class='serif'>";
 
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 echo "\n<FORM ACTION='import_all.php3' METHOD='get'>";
 
 echo "\n<p align='justify'> "._T('texte_restaurer_sauvegarde');
@@ -104,8 +101,7 @@ echo "\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_de
 
 echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>";
 
-echo "</FONT>";
-echo "</TD></TR>";
+echo "</td></tr>";
 echo "</TABLE>";
 
 
@@ -121,16 +117,14 @@ if ($options == "avancees") {
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";
 		echo _T('texte_recuperer_base')."</FONT></B></TD></TR>";
 
-		echo "<TR><TD BACKGROUND=''>";
+		echo "<TR><TD class='serif'>";
 
-		echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
 		echo "\n<FORM ACTION='admin_repair.php3' METHOD='get'>";
 
 		echo "\n<p align='justify'>"._T('texte_crash_base');
 
 		echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_tenter_recuperation')."'></DIV></FORM>";
 
-		echo "</FONT>";
 		echo "</TD></TR>";
 		echo "</TABLE>";
 	}

@@ -194,10 +194,7 @@ debut_droite();
 
 debut_cadre_relief("breve-24.gif");
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
-echo "<TR><td>";
-
-echo "<font face='Georgia,Garamond,Times,serif'>";
-
+echo "<TR><td class='serif'>";
 
 
 
@@ -306,12 +303,12 @@ if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 
 	debut_cadre_enfonce('langues-24.gif');
 
-	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
 	echo bouton_block_invisible('languesbreve');
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
+	echo "<B>";
 	echo _T('titre_langue_breve');
 	echo "&nbsp; (".traduire_nom_langue($langue_breve).")";
-	echo "</B></FONT>";
+	echo "</B>";
 	echo "</TD></TR></TABLE>";
 
 	echo debut_block_invisible('languesbreve');

@@ -812,9 +812,8 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 
 			if ($compteur_forum == 1) echo debut_cadre_relief("forum-interne-24.gif");
 			echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Sans,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre)."</b></font></td></tr>";
-			echo "<tr><td bgcolor='#EEEEEE'>";
-			echo "<font size=2 face='Georgia,Garamond,Times,serif'>";
-			echo "<font face='arial,helvetica'>$date_heure</font>";
+			echo "<tr><td bgcolor='#EEEEEE' class='serif2'>";
+			echo "<span class='arial2'>$date_heure</span>";
 
 			if ($email_auteur) {
 				echo " <a href=\"mailto:$email_auteur?subject=".rawurlencode($titre)."\">$auteur</a>";
@@ -845,14 +844,14 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 			echo justifier(propre($texte));
 
 			if (strlen($url_site) > 10 AND $nom_site) {
-				echo "<p align='left'><font face='Verdana,Arial,Sans,sans-serif'><b><a href='$url_site'>$nom_site</a></b></font>";
+				echo "<div align='left' class='verdana2'><b><a href='$url_site'>$nom_site</a></b></div>";
 			}
 
 			if ($controle != "oui") {
-				echo "<p align='right'><font face='Verdana,Arial,Sans,sans-serif' size=1>";
+				echo "<div align='right' class='verdana1'>";
 				$url = "forum_envoi.php3?id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)
 					."&titre_message=".rawurlencode($titre);
-				echo "<b><a href=\"$url\">"._T('lien_repondre_message')."</a></b></font>";
+				echo "<b><a href=\"$url\">"._T('lien_repondre_message')."</a></b></div>";
 			}
 
 			if ($mots_cles_forums == "oui"){
@@ -869,7 +868,6 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 
 			}
 
-			echo "</font>";
 			echo "</td></tr></table>";
 			if ($compteur_forum == 1) echo fin_cadre_relief();
 			if ($statut == "off" OR $statut == "prop") {
@@ -886,8 +884,7 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 }
 
 function forum($le_forum, $adresse_retour, $controle = "non") {
-	global $id_breve;
-      	echo "<font size=2 face='Georgia,Garamond,Times,serif'>";
+      	echo "<div class='serif2'>";
 	
 	if ($controle == "oui") {
 		$query_forum2 = "SELECT * FROM spip_forum WHERE id_parent='$le_forum' ORDER BY date_heure";
@@ -897,6 +894,8 @@ function forum($le_forum, $adresse_retour, $controle = "non") {
 	}
  	$result_forum2 = spip_query($query_forum2);
 	afficher_forum($result_forum2, $adresse_retour, $controle);
+	
+	echo "</div>";
 }
 
 //
@@ -1645,22 +1644,21 @@ function debut_grand_cadre(){
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	echo "\n<br><br><table width=$largeur cellpadding=0 cellspacing=0 border=0>";
+	echo "\n<br><br><table width='$largeur' cellpadding='0' cellspacing='0' border='0'>";
 	echo "\n<tr>";
-	echo "<td width=$largeur>";
-	echo "<font face='Georgia,Garamond,Times,serif' size=3>";
+	echo "<td width='$largeur' class='serif'>";
 
 }
 
 function fin_grand_cadre(){
-	echo "\n</font></td></tr></table>";
+	echo "\n</td></tr></table>";
 }
 
 // Cadre formulaires
 
 function debut_cadre_formulaire(){
 	echo "\n<div style='width: 100%; border-top: 1px solid #aaaaaa; border-left: 1px solid #aaaaaa; border-right: 1px solid white; border-bottom: 1px solid white; margin: 0px; padding: 0px;'>";
-	echo "\n<div style='border: 1px dashed #666666; margin: 0px; padding: 10px; background-color:#e4e4e4;'>";
+	echo "\n<div class='arial2' style='border: 1px dashed #666666; margin: 0px; padding: 10px; background-color:#e4e4e4;'>";
 }
 
 function fin_cadre_formulaire(){
@@ -1703,8 +1701,7 @@ function debut_gauche($rubrique = "asuivre") {
 	}
 
 	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
-		<tr><td width='$largeur' valign='top' $rspan><font face='Georgia,Garamond,Times,serif' size=2>\n";
-	
+		<tr><td width='$largeur' valign='top' class='serif' $rspan>\n";
 
 	// Afficher les auteurs recemment connectes
 	
@@ -1740,8 +1737,8 @@ function debut_gauche($rubrique = "asuivre") {
 				}
 			}
 			
-			if ($flag_cadre) {
-				echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
+			if ($nb_connectes > 0) {
+				echo "<div class='verdana2'>";
 				if ($nb_connectes > 0) {
 					if ($options == "avancees" AND $rubrique == "messagerie") echo "<p>";
 					echo "<b>"._T('info_en_ligne')."</b>";
@@ -1752,7 +1749,7 @@ function debut_gauche($rubrique = "asuivre") {
 						else  echo "<br> $nom_auteur";
 					}
 				}
-				echo "</font>";
+				echo "</div>";
 			}
 			if ($flag_cadre) fin_cadre_relief();
 		}
@@ -1888,7 +1885,7 @@ function debut_droite($rubrique="") {
 		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 	}
 
-	echo "<br></font>&nbsp;</td>";
+	echo "<br></td>";
 
 	if (!$flag_3_colonnes) {
 		echo "<td width=50>&nbsp;</td>";
@@ -1905,7 +1902,7 @@ function debut_droite($rubrique="") {
 	else
 		$largeur = 500;
 
-	echo '<td width="'.$largeur.'" valign="top" align="'.$lang_left.'" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
+	echo '<td width="'.$largeur.'" valign="top" align="'.$lang_left.'" rowspan="1" class="serif">';
 
 	// touche d'acces rapide au debut du contenu
 	echo "\n<a name='saut' href='#saut' accesskey='s'></a>\n";
@@ -1942,7 +1939,7 @@ function fin_page($credits='') {
 
 	debut_grand_cadre();
 
-	echo "<div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'>";
+	echo "<div align='right' class='verdana2'>";
 	echo "<b>SPIP $spip_version_affichee</b> ";
 	echo _T('info_copyright');
 
@@ -1951,7 +1948,7 @@ function fin_page($credits='') {
 	if (ereg("jimmac", $credits))
 		echo "<br>"._T('lien_icones_interface');
 
-	echo "<p></font></div>";
+	echo "</div><p>";
 
 	fin_grand_cadre();
 	echo "</center>";
@@ -1977,7 +1974,7 @@ function afficher_parents($id_rubrique) {
 			$titre = $row['titre'];
 			changer_typo($row['lang']);
 
-			$parents = " <FONT SIZE=3 FACE='Verdana,Arial,Sans,sans-serif'><a href='naviguer.php3?coll=$id_rubrique'><font color='$couleur_foncee'><span dir='$lang_dir'>".typo($titre)."</span></font></a></FONT><BR>\n".$parents;
+			$parents = " <a href='naviguer.php3?coll=$id_rubrique'><span class='verdana3' style='color: $couleur_foncee;' dir='$lang_dir'>".typo($titre)."</span></a><br>\n".$parents;
 			if (acces_restreint_rubrique($id_rubrique))
 				$parents = " <img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('info_administrer_rubriques')."'> ".$parents;
 			if (!$id_parent)
@@ -1996,7 +1993,7 @@ function afficher_parents($id_rubrique) {
 // Presentation des pages d'installation et d'erreurs
 //
 
-function install_debut_html($titre='AUTO', $onload='') {
+function install_debut_html($titre = 'AUTO') {
 	global $spip_lang_rtl;
 
 	if ($titre=='AUTO')
@@ -2020,24 +2017,22 @@ function install_debut_html($titre='AUTO', $onload='') {
 	.fondl {background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
 	.fondo {background-color: #FFF0E0; background-position: center bottom; float: none; color: #000000}
 	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
+	.serif { font-family: Georgia, Garamond, Times New Roman, serif; }
 	-->
 	</style>
 	</head>
 	<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0'";
 
-	if ($onload) echo ' onLoad="$onload"';
 	if ($spip_lang_rtl) echo " dir='rtl'";
 
 	echo "><br><br><br>
 	<center>
 	<table width='450'>
-	<tr><td width='450'>
-	<font face='Verdana,Arial,Sans,sans-serif' size='4' color='#970038'><B>$titre</b></font>
-	<font face='Georgia,Garamond,Times,serif' size='3'>";
+	<tr><td width='450' class='serif'>
+	<font face='Verdana,Arial,Sans,sans-serif' size='4' color='#970038'><B>$titre</b></font>";
 }
 
 function install_fin_html() {
-
 	echo '
 	</font>
 	</td></tr></table>

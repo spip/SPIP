@@ -90,13 +90,13 @@ function init_config() {
 function avertissement_config() {
 	debut_boite_info();
 
-	echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE='3'>
-	<P align='center'><B>"._T('avis_attention')."</B><P align='justify'>
+	echo "<div class='serif' align='justify'>
+	<center><B>"._T('avis_attention')."</B></center>
 	<img src='img_pack/warning.gif' alt='' width='48' height='48' align='right'>";
 
 	echo _T('texte_inc_config');
 
-	echo "</FONT>";
+	echo "</div>";
 
 	fin_boite_info();
 	echo "<p>&nbsp;<p>";

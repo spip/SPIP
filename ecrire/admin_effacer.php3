@@ -40,9 +40,7 @@ echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND=''><B>";
 echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
 echo _T('texte_effacer_base')."</FONT></B></TD></TR>";
 
-echo "<TR><TD BACKGROUND=''>";
-
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+echo "<tr><td class='serif'>";
 
 echo "\n<p align='justify'>";
 echo '<img src="img_pack/warning.gif" alt="'._T('info_avertissement').'" width="48" height="48" align="right">';
@@ -52,20 +50,19 @@ echo "<CENTER>";
 
 debut_boite_alerte();
 
-echo "\n<FONT FACE='Georgia,Garamond,Times,serif' SIZE=3>";
+echo "\n<div class='serif'>";
 echo "\n<p align='justify'><b>"._T('avis_suppression_base')."&nbsp;!</b>";
 
 echo "\n<FORM ACTION='delete_all.php3' METHOD='get'>";
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_effacer_tout')."'></FORM></DIV>";
+echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('bouton_effacer_tout')."'></div></FORM>";
 
-echo "\n</FONT>";
+echo "\n</div>";
 
 fin_boite_alerte();
 
 echo "</CENTER>";
 
-echo "</FONT>";
-echo "</TD></TR>";
+echo "</td></tr>";
 echo "</TABLE>";
 
 fin_cadre_relief();

@@ -280,7 +280,7 @@ while($row = spip_fetch_array($result_message)) {
 		if ($total_dest > 0) {
 			echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
 			echo bouton_block_invisible("auteurs,ajouter_auteur");
-			echo "<FONT SIZE=1 FACE='Georgia,Garamond,Times,serif'><B>"._T('info_nombre_partcipants')."</B></FONT>";
+			echo "<span class='serif2'><B>"._T('info_nombre_partcipants')."</B></span>";
 
 			$result_auteurs_tmp = spip_query($query_auteurs);
 			while($row_tmp = spip_fetch_array($result_auteurs_tmp)) {
@@ -431,11 +431,10 @@ while($row = spip_fetch_array($result_message)) {
 	echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 	echo "<TR><TD>";
 
-	echo "<br><font face='Georgia,Garamond,Times,serif' size=3>";
-	
+	echo "<div class='serif'>";
 
 	echo "<p>$texte";
-	echo "</font>";
+	echo "</div>";
 
 
 		if ($expediteur == $connect_id_auteur AND $statut == 'redac') {

@@ -38,30 +38,31 @@ if ($admin == 'oui' AND $connect_statut != "0minirezo") {
 	exit;
 }
 
-echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'>";
-	if (!$debut) $debut = 0;
+echo "<div class='serif2'>";
 
-	$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='$statutforum' AND id_parent=0";
- 	$result_forum = spip_query($query_forum);
- 	$total = 0;
- 	if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
+if (!$debut) $debut = 0;
 
-	if ($total > 10) {
-		echo "<p>";
-		for ($i = 0; $i < $total; $i = $i + 10){
-			if ($i > 0) echo " | ";
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>$i</B></FONT>";
-			else
-				echo "<A HREF='$urlforum?debut=$i'>$i</A>";
-		}
+$query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='$statutforum' AND id_parent=0";
+$result_forum = spip_query($query_forum);
+$total = 0;
+if ($row = spip_fetch_array($result_forum)) $total = $row['cnt'];
+
+if ($total > 10) {
+	echo "<p>";
+	for ($i = 0; $i < $total; $i = $i + 10){
+		if ($i > 0) echo " | ";
+		if ($i == $debut)
+			echo "<FONT SIZE=3><B>$i</B></FONT>";
+		else
+			echo "<A HREF='$urlforum?debut=$i'>$i</A>";
 	}
+}
 
 
 
-	echo "<p><div align='center'>";
-	icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message=".urlencode(filtrer_entites(_T('texte_nouveau_message'))), "forum-interne-24.gif", "creer.gif");
-	echo "</div>";
+echo "<p><div align='center'>";
+icone (_T('icone_poster_message'), "forum_envoi.php3?statut=$statutforum&adresse_retour=$urlforum&titre_message=".urlencode(filtrer_entites(_T('texte_nouveau_message'))), "forum-interne-24.gif", "creer.gif");
+echo "</div>";
 
 
 echo "<P align='left'>";
@@ -71,7 +72,7 @@ $result_forum=spip_query($query_forum);
 
 afficher_forum($result_forum,$urlforum);
 
-echo "</FONT>";
+echo "</div>";
 
 
 fin_page();

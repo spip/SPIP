@@ -258,7 +258,7 @@ echo "<INPUT TYPE='Hidden' NAME='id_auteur' VALUE=\"$id_auteur\">";
 // Infos personnelles
 //
 
-echo "<FONT FACE='Georgia,Garamond,Times,serif' SIZE='3'>";
+echo "<div class='serif'>";
 
 debut_cadre_relief("fiche-perso-24.gif");
 
@@ -447,7 +447,7 @@ echo "<INPUT NAME='redirect_ok' VALUE='oui' TYPE='hidden'>\n";
 
 echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondo' NAME='Valider' VALUE='"._T('bouton_valider')."'></DIV>";
 
-echo "</font>";
+echo "</div>";
 
 echo "</form>";
 fin_cadre_formulaire();

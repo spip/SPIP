@@ -108,14 +108,14 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	echo "<a name='mots'></a>";
 	debut_cadre_enfonce("mot-cle-24.gif");
 
-	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
 	if ($flag_editable){
 		if ($nouv_mot.$cherche_mot.$supp_mot)
 			echo bouton_block_visible("lesmots");
 		else
 			echo bouton_block_invisible("lesmots");
 	}
-	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>"._T('titre_mots_cles')."</B></FONT>";
+	echo "<B>"._T('titre_mots_cles')."</B>";
 	echo aide ("artmots");
 	echo "</td></tr></TABLE>";
 

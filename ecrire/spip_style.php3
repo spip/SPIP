@@ -448,6 +448,8 @@ a.cellule-h-texte:hover {
 .verdana1 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 10px; }
 .verdana2 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 11px; }
 .verdana3 { font-family: Verdana, Arial, Sans, sans-serif; font-size: 13px; }
+.serif { font-family: Georgia, Garamond, Times New Roman, serif; }
+.serif2 { font-family: Georgia, Garamond, Times New Roman, serif; font-size: 13px; }
 
 /* Liens hypertexte */
 a { text-decoration: none; }
