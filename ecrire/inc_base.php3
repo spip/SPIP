@@ -773,6 +773,16 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_syndic_articles DROP date_index");
 	}
 
+	if ($version_installee < 1.418) {
+		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 0,1";
+		$result = spip_query($query);
+		if ($webmaster = mysql_fetch_object($result)) {
+			include_local("inc_meta.php3");
+			ecrire_meta('email_webmaster', $webmaster->email);
+			ecrire_metas();
+		}
+	}
+
 	//
 	// Mettre a jour le numero de version installee
 	//
