@@ -32,6 +32,8 @@ function creer_base() {
 		visites INTEGER DEFAULT '0' NOT NULL,
 		referers BLOB NOT NULL,
 		accepter_forum CHAR(3) NOT NULL,
+		auteur_modif bigint(21) DEFAULT '0' NOT NULL,
+		date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
@@ -52,6 +54,8 @@ function creer_base() {
 		en_ligne datetime DEFAULT '0000-00-00 00:00:00' NOT NULL,
 		imessage VARCHAR(3) NOT NULL,
 		messagerie VARCHAR(3) NOT NULL,
+		alea_actuel tinytext NOT NULL,
+		alea_futur tinytext NOT NULL,
 		PRIMARY KEY (id_auteur))";
 	$result = spip_query($query);
 
@@ -276,6 +280,11 @@ function creer_base() {
 	$query = "CREATE TABLE spip_documents_articles (
 		id_document bigint(21) DEFAULT '0' NOT NULL, id_article bigint(21) DEFAULT '0' NOT NULL,
 		KEY id_document (id_document), KEY id_article (id_article))";
+	$result = spip_query($query);
+
+	$query = "CREATE TABLE spip_documents_rubriques (
+		id_document bigint(21) DEFAULT '0' NOT NULL, id_rubrique bigint(21) DEFAULT '0' NOT NULL,
+		KEY id_document (id_document), KEY id_rubrique (id_rubrique))";
 	$result = spip_query($query);
 
 
@@ -782,6 +791,28 @@ function maj_base() {
 			ecrire_metas();
 		}
 	}
+
+	if ($version_installee < 1.419) {
+		$query = "ALTER TABLE spip_auteurs ADD alea_actuel TINYTEXT DEFAULT ''";
+		spip_query($query);
+		$query = "ALTER TABLE spip_auteurs ADD alea_futur TINYTEXT DEFAULT ''";
+		spip_query($query);
+		$query = "UPDATE spip_auteurs SET alea_futur = FLOOR(32000*RAND())";
+		spip_query($query);
+	}
+
+	if ($version_installee < 1.420) {
+		$query = "UPDATE spip_auteurs SET alea_actuel='' WHERE statut='nouveau'";
+		spip_query($query);
+	}
+	
+	if ($version_installee < 1.421) {
+		$query = "ALTER TABLE spip_articles ADD auteur_modif bigint(21) DEFAULT '0' NOT NULL";
+		spip_query($query);
+		$query = "ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
+		spip_query($query);
+	}
+
 
 	//
 	// Mettre a jour le numero de version installee
