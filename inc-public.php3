@@ -145,7 +145,7 @@ else {
 
 if (file_exists($chemin_cache)) {
 	$lastmodified = mktime(0,0,$lastmodified,1,1,1970);
-	@Header ("Last-Modified: ".date("D, d M Y H:m:s \\G\\M\\T", $lastmodified));
+	@Header ("Last-Modified: ".date("D, d M Y H:i:s \\G\\M\\T", $lastmodified));
 	include ($chemin_cache);
 	if ($flag_apc) {
 		apc_rm($chemin_cache);
