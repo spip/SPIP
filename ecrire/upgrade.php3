@@ -21,6 +21,9 @@ if ($reinstall == 'oui') {
 	echo "<tt>inc_connect.php3</tt> du r&eacute;pertoire <tt>ecrire</tt> ";
 	echo "et reprendre l'installation afin de mettre &agrave; jour vos ";
 	echo "param&egrave;tres de connexion &agrave; la base de donn&eacute;es.";
+	echo "<p>(NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres ";
+	echo "de connexion, jetez un oeil au fichier <tt>inc_connect.php3</tt> ";
+	echo "avant de le supprimer...)";
 
 	$link = new Link();
 	echo "<p><div align='right'>";
