@@ -59,6 +59,8 @@ function auth() {
 	$auth_can_disconnect = false;
 	$auth_htaccess = false;
 
+	unset($auteur_session);
+
 	//
 	// Recuperer les donnees d'identification
 	//

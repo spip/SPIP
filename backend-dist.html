@@ -30,7 +30,7 @@
 		</item>
 	</BOUCLE_langue>
 
-<!-- d'abord les articles specifiques a une rubrique - syntaxe backend.php3?id_rubrique=123 -->
+<!-- sinon, les articles specifiques a une rubrique - syntaxe backend.php3?id_rubrique=123 -->
 
 <BOUCLE_rub(RUBRIQUES){id_rubrique}>
 	<BOUCLE1(ARTICLES){branche}{par date}{inverse}{0,10}>
@@ -48,7 +48,7 @@
 	</BOUCLE1>
 </BOUCLE_rub>
 
-<!-- sinon tous les articles du site - syntaxe backend.php3 -->
+<!-- en dernier recours, tous les articles du site - syntaxe backend.php3 -->
 
 	<BOUCLE2(ARTICLES){tout}{par date}{inverse}{0,10}{unique}>
 		<item>
