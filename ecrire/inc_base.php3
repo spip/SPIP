@@ -1488,6 +1488,14 @@ function maj_base() {
 		maj_version (1.730);
 	}
 
+	if ($version_installee < 1.731) {	// reindexer les docs allemands et vietnamiens
+		spip_query("UPDATE spip_articles SET idx='1' where lang IN ('de','vi')");
+		spip_query("UPDATE spip_rubriques SET idx='1' where lang IN ('de','vi')");
+		spip_query("UPDATE spip_breves SET idx='1' where lang IN ('de','vi')");
+		spip_query("UPDATE spip_auteurs SET idx='1' where lang IN ('de','vi')");
+		maj_version (1.731);
+	}
+
 	return true;
 }
 

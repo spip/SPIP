@@ -10,8 +10,9 @@ function separateurs_indexation($requete = false) {
 	// Merci a Herve Lefebvre pour son apport sur cette fonction
 	$liste = "],:;*\"!\r\n\t\\/){}[|@<>$%";
 
-	// en vietnamien ne pas eliminer les accents de translitteration
-	if (!(lire_meta('langue_site') == 'vi' AND $requete))
+	// pour autoriser les recherches en vietnamien,
+	// ne pas eliminer les accents de translitteration
+	if (!$requete)
 		$liste .= "'`?\~.^+(-";
 
 	// windowzeries iso-8859-1
@@ -31,18 +32,22 @@ function spip_split($reg, $texte) {
 }
 
 function nettoyer_chaine_indexation($texte) {
+	global $translitteration_complexe;
 	include_ecrire("inc_charsets.php3");
 
-	$texte = translitteration($texte);
+	// translitteration complexe (vietnamien, allemand)
+	if ($translitteration_complexe) {
+		$texte_c = translitteration_complexe ($texte);
+		$texte_c = " ".strtr($texte_c, "'`?~.^+(-", "123456789");
+	}
 
-	if (lire_meta('langue_site') == 'vi')
-		$texte = strtr($texte, "'`?~.^+(-", "123456789");
+	$texte = translitteration($texte).$texte_c;
 
 	return $texte;
 }
 
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
-	global $index, $mots;
+	global $index, $mots, $translitteration_complexe;
 
 	// Nettoyer les tags, entites HTML, signes diacritiques...
 	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';
@@ -62,7 +67,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	while (list(, $mot) = each($table)) {
 		if (strlen($mot) > $min_long) {
 			$h = substr(md5($mot), 0, 16);
-			$index[$h] += $val;
+			$index[$h] += $val/(1+$translitteration_complexe);
 			$mots .= ",(0x$h,'$mot')";
 		}
 	}
@@ -77,7 +82,7 @@ function deja_indexe($type, $id_objet) {
 }
 
 function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* full : inutilise ? */) {
-	global $index, $mots;
+	global $index, $mots, $translitteration_complexe;
 
 	$table = 'spip_'.table_objet($type);
 	$table_index = 'spip_index_'.table_objet($type);
@@ -99,29 +104,38 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 	$index = '';
 	$mots = '';
 
+	$query = "SELECT * FROM $table WHERE $col_id=$id_objet";
+	$result = spip_query($query);
+	$row = spip_fetch_array($result);
+
+	if (!$row) return;
+
+	// translitteration complexe ?
+	if (!$lang = $row['lang']) $lang = lire_meta('langue_site');
+	if ($lang == 'de' OR $lang=='vi') {
+		$translitteration_complexe = 1;
+		spip_log ('-> translitteration complexe');
+	} else $translitteration_complexe = 0;
+
 	switch($type) {
 	case 'article':
-		$query = "SELECT * FROM spip_articles WHERE id_article=$id_objet";
-		$result = spip_query($query);
-		while ($row = spip_fetch_array($result)) {
-			indexer_chaine($row['titre'], 8);
-			indexer_chaine($row['soustitre'], 5);
-			indexer_chaine($row['surtitre'], 5);
-			indexer_chaine($row['descriptif'], 4);
-			if ($full) {
-				indexer_chaine($row['chapo'], 3);
-				indexer_chaine($row['texte'], 1);
-				indexer_chaine($row['ps'], 1);
-				indexer_chaine($row['nom_site'], 1);
-				indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-				$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_articles AS lien WHERE lien.id_article=$id_objet AND doc.id_document=lien.id_document");
-				while ($row_doc = spip_fetch_array($r)) {
-					indexer_chaine($row_doc[0],2);
-					indexer_chaine($row_doc[1],1);
-				}
+		indexer_chaine($row['titre'], 8);
+		indexer_chaine($row['soustitre'], 5);
+		indexer_chaine($row['surtitre'], 5);
+		indexer_chaine($row['descriptif'], 4);
+		if ($full) {
+			indexer_chaine($row['chapo'], 3);
+			indexer_chaine($row['texte'], 1);
+			indexer_chaine($row['ps'], 1);
+			indexer_chaine($row['nom_site'], 1);
+			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
+			$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_articles AS lien WHERE lien.id_article=$id_objet AND doc.id_document=lien.id_document");
+			while ($row_doc = spip_fetch_array($r)) {
+				indexer_chaine($row_doc[0],2);
+				indexer_chaine($row_doc[1],1);
 			}
 		}
-	
+
 		$query2 = "SELECT mots.* FROM spip_mots AS mots, spip_mots_articles AS lien WHERE lien.id_article=$id_objet AND mots.id_mot=lien.id_mot";
 		$result2 = spip_query($query2);
 		while ($row = spip_fetch_array($result2)) {
@@ -137,107 +151,78 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		break;
 
 	case 'breve':
-		$query = "SELECT * FROM spip_breves WHERE id_breve=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
-			indexer_chaine($row['titre'], 8);
-			if ($full) {
-				indexer_chaine($row['texte'], 2);
-				indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-			}
+		indexer_chaine($row['titre'], 8);
+		if ($full) {
+			indexer_chaine($row['texte'], 2);
+			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
 		}
 		break;
 
 	case 'rubrique':
-		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
-			indexer_chaine($row['titre'], 8);
-			indexer_chaine($row['descriptif'], 5);
-			if ($full) {
-				indexer_chaine($row['texte'], 1);
-				indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-				$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE lien.id_rubrique=$id_objet AND doc.id_document=lien.id_document");
-				while ($row_doc = spip_fetch_array($r)) {
-					indexer_chaine($row_doc[0],2);
-					indexer_chaine($row_doc[1],1);
-				}
+		indexer_chaine($row['titre'], 8);
+		indexer_chaine($row['descriptif'], 5);
+		if ($full) {
+			indexer_chaine($row['texte'], 1);
+			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
+			$r = spip_query("SELECT doc.titre, doc.descriptif FROM spip_documents AS doc, spip_documents_rubriques AS lien WHERE lien.id_rubrique=$id_objet AND doc.id_document=lien.id_document");
+			while ($row_doc = spip_fetch_array($r)) {
+				indexer_chaine($row_doc[0],2);
+				indexer_chaine($row_doc[1],1);
 			}
 		}
 		break;
 
 	case 'auteur':	
-		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)){
-			indexer_chaine($row['nom'], 5);
-			if ($full) {
-				indexer_chaine($row['bio'], 1);
-				indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-			}
+		indexer_chaine($row['nom'], 5);
+		if ($full) {
+			indexer_chaine($row['bio'], 1);
+			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
 		}
 		break;
 
 	case 'mot':
-		$query = "SELECT * FROM spip_mots WHERE id_mot=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)){
-			indexer_chaine($row['titre'], 8);
-			indexer_chaine($row['descriptif'], 5);
-			if ($full) {
-				indexer_chaine($row['texte'], 1);
-				indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
-			}
+		indexer_chaine($row['titre'], 8);
+		indexer_chaine($row['descriptif'], 5);
+		if ($full) {
+			indexer_chaine($row['texte'], 1);
+			indexer_chaine(@join(' ', unserialize($row['extra'])), 1);
 		}
 		break;
 
 	case 'forum':
-		$query = "SELECT * FROM spip_forum WHERE id_forum=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)){
-			indexer_chaine($row['titre'], 3);
-			indexer_chaine($row['texte'], 1);
-			indexer_chaine($row['auteur'], 2);
-			indexer_chaine($row['email_auteur'], 2);
-			indexer_chaine($row['nom_site'], 2);
-			indexer_chaine($row['url_site'], 1);
-		}
+		indexer_chaine($row['titre'], 3);
+		indexer_chaine($row['texte'], 1);
+		indexer_chaine($row['auteur'], 2);
+		indexer_chaine($row['email_auteur'], 2);
+		indexer_chaine($row['nom_site'], 2);
+		indexer_chaine($row['url_site'], 1);
 		break;
 
 	case 'signature':
-		$query = "SELECT * FROM spip_signatures WHERE id_signature=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)){
-			indexer_chaine($row['nom_email'], 2);
-			indexer_chaine($row['ad_email'], 2);
-			indexer_chaine($row['nom_site'], 2);
-			indexer_chaine($row['url_site'], 1);
-			indexer_chaine($row['message'], 1);
-		}
+		indexer_chaine($row['nom_email'], 2);
+		indexer_chaine($row['ad_email'], 2);
+		indexer_chaine($row['nom_site'], 2);
+		indexer_chaine($row['url_site'], 1);
+		indexer_chaine($row['message'], 1);
 		break;
 
 	case 'syndic':
-		$query = "SELECT * FROM spip_syndic WHERE id_syndic=$id_objet";
-		$result = spip_query($query);
-		while($row = spip_fetch_array($result)) {
-			indexer_chaine($row['nom_site'], 50);
-			indexer_chaine($row['descriptif'], 30);
-
-			if ($full) {
-				// Ajouter les titres des articles syndiques de ce site, le cas echeant
-				if ($row['syndication'] = "oui") {
-					$query_syndic = "SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet ORDER BY date DESC LIMIT 0,100";
-					$result_syndic = spip_query($query_syndic);
-					while ($row_syndic = spip_fetch_array($result_syndic)) {
-						indexer_chaine($row_syndic['titre'], 5);
-					}
+		indexer_chaine($row['nom_site'], 50);
+		indexer_chaine($row['descriptif'], 30);
+		if ($full) {
+			// Ajouter les titres des articles syndiques de ce site, le cas echeant
+			if ($row['syndication'] = "oui") {
+				$query_syndic = "SELECT titre FROM spip_syndic_articles WHERE id_syndic=$id_objet ORDER BY date DESC LIMIT 0,100";
+				$result_syndic = spip_query($query_syndic);
+				while ($row_syndic = spip_fetch_array($result_syndic)) {
+					indexer_chaine($row_syndic['titre'], 5);
 				}
-				// Aller chercher la page d'accueil
-				if (lire_meta("visiter_sites") == "oui") {
-					include_ecrire ("inc_sites.php3");
-					spip_log ("indexation contenu syndic ".$row['url_site']);
-					indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site']), 0, 50000)), 1);
-				}
+			}
+			// Aller chercher la page d'accueil
+			if (lire_meta("visiter_sites") == "oui") {
+				include_ecrire ("inc_sites.php3");
+				spip_log ("indexation contenu syndic ".$row['url_site']);
+				indexer_chaine(supprimer_tags(substr(recuperer_page($row['url_site']), 0, 50000)), 1);
 			}
 		}
 		break;
@@ -254,7 +239,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true /* f
 		}
 		reset($index);
 		unset($q);
-		while (list($hash, $points) = each($index)) $q[] = "(0x$hash,$points,$id_objet)";
+		while (list($hash, $points) = each($index)) $q[] = "(0x$hash,".ceil($points).",$id_objet)";
 		spip_query("INSERT INTO $table_index (hash, points, $col_id) VALUES ".join(',',$q));
 	}
 
@@ -334,7 +319,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		else
 			$limit = $nombre_indexations;
 
-		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') AND $critere ORDER BY (idx='idx') LIMIT 0,$limit");
+		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') AND $critere ORDER BY idx='idx',idx='' LIMIT 0,$limit");
 		while ($t = spip_fetch_array($s)) {
 			$vu[$type] .= $t[0].", ";
 			indexer_objet($type, $t[0], $t[1]);
@@ -362,7 +347,7 @@ function creer_liste_indexation() {
 	$types = array('article','auteur','breve','mot','rubrique','syndic','forum','signature');
 	while (list(,$type) = each($types)) {
 		$table = 'spip_'.table_objet($type);
-		spip_query("UPDATE $table SET idx='1'");
+		spip_query("UPDATE $table SET idx='1' WHERE idx!='non'");
 	}
 }
 
@@ -397,29 +382,18 @@ function requete_txt_integral($objet, $hash_recherche) {
 function requete_dico($val) {
 	$min_long = 3;
 
-	// cas particulier translitteration vietnamien
-	if (lire_meta('langue_site') == 'vi') {
-		// 1. recuperer des accents passes sous la forme a`
-		$val = strtr($val, "'`?~.^+(-","123456789");
-		// 2. translitterer les accents passes en unicode
-		$val = nettoyer_chaine_indexation($val);
-		// 3. composer la regexp pour les caracteres accentuables mais non accentues
-		while (ereg("([aeiouyd])([a-z])", $val.' ', $match))
-			$val = str_replace ($match[0], $match[1].'[-1-9]?[-1-9]?'.$match[2], $val);
-		return array("dico REGEXP '^$val'", "dico REGEXP '^$val$'");
-	}
-
 	// cas normal
 	if (strlen($val) > $min_long) {
-		return array("dico LIKE '$val%'", "dico = '$val'");
+		return array("dico LIKE '".addslashes($val)."%'", "dico = '".addslashes($val)."'");
 	} else
-		return array("dico = '".$val."___'", "dico = '".$val."___'");
+		return array("dico = '".addslashes($val)."___'", "dico = '".addslashes($val)."___'");
 }
 
 
 // decode la chaine recherchee et la traduit en hash
 function requete_hash ($rech) {
 	// recupere les mots de la recherche
+	$translitteration_complexe = true;
 	$rech = nettoyer_chaine_indexation($rech);
 	$regs = separateurs_indexation(true)." ";
 	$rech = strtr($rech, $regs, ereg_replace('.', ' ', $regs));
