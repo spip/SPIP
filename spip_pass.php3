@@ -11,8 +11,6 @@ include_ecrire("inc_meta.php3");
 include_ecrire("inc_mail.php3");
 include_ecrire("inc_acces.php3");
 
-include_local("inc-formulaires.php3");
-
 utiliser_langue_site();
 utiliser_langue_visiteur();
 

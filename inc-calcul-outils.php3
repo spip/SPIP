@@ -146,6 +146,34 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 	}
 }
 
+function calculer_formulaire($nom, $args, $filtres)
+{
+  $file = 'inc-' .$nom . _EXTENSION_PHP;
+  include_local($file);
+
+  $f = $nom . '_stat';
+  $r = $f($args, $filtres);
+  if (is_string($r))
+    return $r;
+  else 
+    return
+    ('<'.'?php 
+lang_select(\''
+    . $GLOBALS["spip_lang"] 
+    . '\');
+include_local("'
+     . $file
+     . '");
+echo '
+     . $nom
+     . '_dyn('
+     . join(',',$r)
+     . ');
+lang_dselect();
+?'
+     .">");
+}
+
 //
 // FONCTIONS FAISANT DES APPELS SQL
 //
@@ -348,8 +376,9 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 		'','','','',1, 
 		$table, $id_boucle, $serveur);
 
-	if ($retour)
-		$Cache['petition']['petition'] = 1;	# cette page est invalidee par toute petition
+	# cette page est invalidee par toute petition
+	if ($retour AND $Cache)
+		$Cache['petition']['petition'] = 1;
 
 	return $retour;
 }

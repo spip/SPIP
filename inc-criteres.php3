@@ -25,13 +25,13 @@ function critere_racine_dist($idb, &$boucles, $param, $not) {
 // http://www.spip.net/@exclus
 function critere_exclus_dist($idb, &$boucles, $param, $not) {
 	$boucle = &$boucles[$idb];
+	$id = $boucle->primary;
 
-	if ($param != 'exclus' OR $not)
+	if ($param != 'exclus' OR $not OR !$id)
 		erreur_squelette(_T('info_erreur_squelette'), $param);
 
-	$boucle->where[] = $boucle->id_table . '.' . $boucle->primary."!='\"."
-	. calculer_argument_precedent($idb,$boucle->primary, $boucles) .
-	 ".\"'";
+	$arg = calculer_argument_precedent($idb,$id, $boucles);
+	$boucle->where[] = $boucle->id_table . '.' . $id."!='\"." . $arg . ".\"'";
 
 }
 

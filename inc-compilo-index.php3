@@ -90,56 +90,60 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	return('$Pile[0][\''.$nom_champ.'\']');
 }
 
-// cette fonction sert d'API pour demander le champ '$champ' dans la pile
-function champ_sql($champ, $p) {
-	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle);
-}
-
-# calculer_champ genere le code PHP correspondant a la balise Spip $nom_champ
+# calculer_champ genere le code PHP correspondant a une balise Spip
 # Retourne une EXPRESSION php 
 function calculer_champ($p) {
+	$p = calculer_balise($p->nom_champ, $p);
 
-	$nom_champ = $p->nom_champ;
+	// definir le type et les traitements
+	// si ca ramene le choix par defaut, ce n'est pas un champ 
 
-	// regarder s'il existe une fonction personnalisee balise_NOM()
-	$f = 'balise_' . $nom_champ;
-	if (function_exists($f))
-		$p = $f($p);
-
-	else {
-	// regarder s'il existe une fonction standard balise_NOM_dist()
-	$f = 'balise_' . $nom_champ . '_dist';
-	if (function_exists($f))
-		$p = $f($p);
-
-	else {
-	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $nom_champ))
-		$p = calcul_balise_logo($p);
-
-	else {
-	// On regarde ensuite s'il y a un champ SQL homonyme,
-	// et on definit le type et les traitements
-	$p->code = index_pile($p->id_boucle, $nom_champ, $p->boucles, $p->nom_boucle);
-	if (($p->code) && ($p->code != '$Pile[0][\''.$nom_champ.'\']')) {
-
+	if (($p->code) && ($p->code != '$Pile[0][\''.$nom.'\']')) {
 		// Par defaut basculer en numerique pour les #ID_xxx
-		if (substr($nom_champ,0,3) == 'ID_') $p->statut = 'num';
+		if (substr($nom,0,3) == 'ID_') $p->statut = 'num';
 	}
 
 	else {
-	// si index_pile a ramene le choix par defaut, 
-	// ca doit plutot etre un champ SPIP non SQL,
-	// ou ni l'un ni l'autre => on le renvoie sous la forme brute '#TOTO'
-	$p->code = "'#" . $nom_champ . "'";
+	// on renvoie la forme initiale '#TOTO'
+	$p->code = "'#" . $nom . "'";
 	$p->statut = 'php';	// pas de traitement
 	
-	}}}}
+	}
 
 	// Retourner l'expression php correspondant au champ + ses filtres
 	return applique_filtres($p);
 }
 
+// cette fonction sert d'API pour demander le champ '$champ' dans la pile
+function champ_sql($champ, $p) {
+	return index_pile($p->id_boucle, $champ, $p->boucles, $p->nom_boucle);
+}
+
+// cette fonction sert d'API pour demander une balise quelconque sans filtre
+function calculer_balise($nom, $p) {
+
+	// regarder s'il existe une fonction personnalisee balise_NOM()
+	$f = 'balise_' . $nom;
+	if (function_exists($f))
+		return $f($p);
+
+	// regarder s'il existe une fonction standard balise_NOM_dist()
+	$f = 'balise_' . $nom . '_dist';
+	if (function_exists($f))
+		return $f($p);
+
+	// S'agit-il d'un logo ? Une fonction speciale les traite tous
+	if (ereg('^LOGO_', $nom))
+		return calculer_balise_logo($p);
+
+	// S'agit-il d'un formulaire ? Une fonction speciale les traite tous
+	if (ereg('^FORMULAIRE_', $nom))
+		return calculer_balise_formulaire($p);
+
+	// ca doit etre un champ SQL homonyme,
+	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
+	return $p;
+}
 
 // Genere l'application d'une liste de filtres
 function applique_filtres($p) {

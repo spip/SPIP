@@ -22,9 +22,6 @@ include_local("inc-criteres.php3");
 // definition des balises
 include_local("inc-balises.php3");
 
-// gestion des balises de forums
-include_local("inc-forum.php3");
-
 // definition de l'API
 include_local("inc-compilo-api.php3");
 
