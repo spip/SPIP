@@ -146,9 +146,10 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 // zippe les fichiers .gz
 function ecrire_fichier ($fichier, $contenu) {
 
-	// Ne rien faire si on est en preview ou si une erreur
+	// Ne rien faire si on est en preview, debug, ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
-	if ($GLOBALS['var_preview'] OR defined('spip_erreur_fatale'))
+	if ($GLOBALS['var_preview'] OR $GLOBALS['var_debug']
+	OR defined('spip_erreur_fatale'))
 		return;
 
 	$gzip = (substr($fichier, -3) == '.gz');
