@@ -9,6 +9,17 @@ define("_ECRIRE_INC_FILTRES", "1");
 // divers
 //
 
+
+// echappement des entites HTML avec correction des entites "brutes"
+// (generees par les butineurs lorsqu'on rentre des caracteres non-latins)
+function corriger_entites_html($texte) {
+	return ereg_replace('&amp;(#[0-9]+;)', '&\1', $texte);
+}
+
+function entites_html($texte) {
+	return corriger_entites_html(htmlspecialchars($texte));
+}
+
 // pour les titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+", "", $texte);
