@@ -362,9 +362,14 @@ else if (!$etape) {
 	else {
 		install_debut_html();
 
-		echo "<p>&nbsp;</p><p align='center'><img src='img_pack/logo-spip.gif'></p>";
+		echo "<p align='center'><img src='img_pack/logo-spip.gif'></p>";
+		
+		echo "<p style='text-align: center; font-family: Verdana,Arial,Sans,sans-serif; font-size: 10px;'>";
+		echo "<b>SPIP $spip_version_affichee</b> ";
+		echo _T('info_copyright');
+		echo "</p>";
 
-		echo "<p>&nbsp;</p><p>" . _T('install_select_langue');
+		echo "<p>" . _T('install_select_langue');
 
 		echo "<p><div align='center'>".$menu_langues."</div>";
 
