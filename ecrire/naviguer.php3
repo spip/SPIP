@@ -270,7 +270,10 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($coll) AND ($options == 'a
 
 	debut_cadre_relief();
 
-	afficher_boite_logo($rubon, "LOGO DE LA RUBRIQUE ".aide ("rublogo"));
+	if ($coll>0)
+		afficher_boite_logo($rubon, "LOGO DE LA RUBRIQUE ".aide ("rublogo"));
+	else
+		afficher_boite_logo($rubon, "LOGO STANDARD DES RUBRIQUES ".aide ("rublogo"));
 
 	if (($options == 'avancees' AND $rubon_ok) OR $ruboff_ok) {
 		echo "<P>";
