@@ -223,7 +223,7 @@ a.icone26 {
 	color: black;
 	text-decoration: none;
 	padding: 1px; 
-	margin-right: 2px;
+	margin-<? echo $right; ?>: 2px;
 }
 a.icone26:hover {
 	text-decoration: none;

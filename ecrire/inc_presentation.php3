@@ -371,9 +371,14 @@ function fin_raccourcis() {
 // Afficher un petit "+" pour lien vers autre page
 
 function afficher_plus($lien) {
-	global $options, $spip_lang_right;
+	global $options, $spip_lang_right, $browser_name;
 	
-	if ($options == "avancees") return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'><img src='img_pack/plus.gif' border='0'></a></div>";
+	if ($options == "avancees" AND $spip_display != 4) {
+		if ($browser_name == "MSIE") 
+			return "<a href='$lien'><img src='img_pack/plus.gif' alt='+' border='0'></a> ";
+		else
+			return "<div style='float:$spip_lang_right; padding-top: 2px;'><a href='$lien'><img src='img_pack/plus.gif' border='0'></a></div>";
+	}
 }
 
 
@@ -2598,14 +2603,14 @@ else {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
 			}
-		
-			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-			if ($id_rubrique > 0)
-				$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif", false);
-			else 
-				$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
-			$gadget .= "</div>";
-			
+			if ($connect_statut == "0minirezo") {	
+				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
+				if ($id_rubrique > 0)
+					$gadget .= icone_horizontale(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui$dans_parent", "rubrique-24.gif", "creer.gif", false);
+				else 
+					$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
+				$gadget .= "</div>";
+			}		
 			$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
 			$gadget .= "</div>";
@@ -2618,9 +2623,11 @@ else {
 			}
 			
 			if (lire_meta("activer_sites") == 'oui') {
-				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-				$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif", false);
-				$gadget .= "</div>";
+				if ($connect_statut == '0minirezo' OR lire_meta("proposer_sites") > 0) {
+					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui$dans_rub", "site-24.gif","creer.gif", false);
+					$gadget .= "</div>";
+				}
 			}
 			
 		}
