@@ -18,13 +18,11 @@ function erreur_requete_boucle($query, $id_boucle) {
 
 	// Erreur systeme
 	if ($errsys > 0 AND $errsys < 200) {
-		$retour .= "<tt><br><br><blink>Erreur syst&egrave;me (errno $errsys)</blink><br>\n";
+		$retour .= "<tt><br><br><blink>"._T('info_erreur_systeme', array('errsys'=>$errsys))."</blink><br>\n";
 		$retour .= "<" ."?php
 		if (\$GLOBALS['spip_admin']) {
-			echo \"<b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>\"
-				.\"<font color='red'>Essayez de <a href='ecrire/admin_repair.php3'>r&eacute;parer la base</a>, \"
-				.\"ou contactez votre h&eacute;bergeur.</font><br></b>".
-				"<blink>Erreur syst&egrave;me (errno $errsys)</blink>\";
+			echo \""._T('info_erreur_systeme2').
+				"<blink>"._T('info_erreur_systeme', array('errsys'=>$errsys))."</blink>\";
 		}
 		echo \"</tt>\n\";
 		?".">";
@@ -32,7 +30,7 @@ function erreur_requete_boucle($query, $id_boucle) {
 	// Requete erronee
 	else {
 		$retour .= "<tt><br><br><blink>&lt;BOUCLE".$id_boucle."&gt;</blink><br>\n".
-			"<b>Erreur dans la requ&ecirc;te envoy&eacute;e &agrave; MySQL :</b><br>\n".
+			"<b>"._T('avis_erreur_mysql')."</b><br>\n".
 			htmlspecialchars($query)."<br><font color='red'><b>$erreur</b></font><br>".
 			"<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 		$retour .= "<" ."?php
