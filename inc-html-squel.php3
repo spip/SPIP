@@ -11,7 +11,7 @@ define("_INC_HTML_SQUEL", "1");
 
 define(NOM_DE_BOUCLE, "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 define(NOM_DE_CHAMP, "#((" . NOM_DE_BOUCLE . ":)?([A-Z_]+))(\*?)");
-define(CHAMP_ETENDU, '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^])]*)\)([^]]*)\]');
+define(CHAMP_ETENDU, '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^]\[)]*)\)([^]\[]*)\]');
 define(PARAM_DE_BOUCLE,'\{[^}]*\}');
 define(TYPE_DE_BOUCLE, "[^)]*");
 define(BALISE_DE_BOUCLE,
