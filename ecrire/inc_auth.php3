@@ -75,17 +75,8 @@ function auth() {
 	// Recuperer les donnees d'identification
 	//
 
-
-	// Authentification .htaccess
-	if ($REMOTE_USER &&
-		!($HTTP_GET_VARS["REMOTE_USER"] || $HTTP_POST_VARS["REMOTE_USER"] || $HTTP_COOKIE_VARS["REMOTE_USER"])) {
-		$auth_login = $REMOTE_USER;
-		$auth_pass_ok = true;
-		$auth_htaccess = true;
-	}
-
 	// Peut-etre sommes-nous en auth http?
-	else if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
+	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
 		if (verifier_php_auth()) {
 			$auth_login = $PHP_AUTH_USER;
 			$auth_pass_ok = true;
@@ -112,7 +103,17 @@ function auth() {
 			}
 		}
 	}
-	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
+
+	// Authentification .htaccess
+	else if ($REMOTE_USER &&
+		!($HTTP_GET_VARS["REMOTE_USER"] || $HTTP_POST_VARS["REMOTE_USER"] || $HTTP_COOKIE_VARS["REMOTE_USER"])) {
+		$auth_login = $REMOTE_USER;
+		$auth_pass_ok = true;
+		$auth_htaccess = true;
+	}
+
+	// Tentative de login echec
+	else if ($GLOBALS['bonjour'] == 'oui') { 
 		if ($GLOBALS['essai_cookie'] == 'oui')
 			@header("Location: ../spip_login.php3?var_echec_cookie=oui");
 		else
