@@ -271,10 +271,7 @@ while ($i++ <= $fin && (list(,$row) = each ($auteurs))) {
 
 	// nom
 	echo '</td><td>';
-	if ($row['nom'] && $connect_statut=="0minirezo")
-		echo "<A HREF='auteurs_edit.php3?id_auteur=".$row['id_auteur']."&redirect=$retour'>".typo($row['nom']).'</a>';
-	else
-		echo typo($row['nom']);
+	echo "<a href='auteurs_edit.php3?id_auteur=".$row['id_auteur']."&redirect=$retour'>".typo($row['nom']).'</a>';
 
 	if ($connect_statut == '0minirezo' AND $rub_restreinte[$row['id_auteur']])
 		echo " &nbsp;<small>(admin restreint)</small>";
