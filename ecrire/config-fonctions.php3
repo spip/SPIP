@@ -369,7 +369,7 @@ if (tester_mail()) {
 	$jours_neuf=lire_meta("jours_neuf");
 
 	if ($envoi_now) {
-	    effacer_meta('majnouv');
+		effacer_meta('majnouv');
 		envoyer_mail_quoi_de_neuf();
 	}
 	
