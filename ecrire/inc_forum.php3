@@ -100,4 +100,5 @@ function calculer_threads() {
 	} while ($discussion != "0");
 }
 
+
 ?>

@@ -90,12 +90,16 @@ $statut = ((!$validation_finale) ? 'redac' :
 	(($forums_publics == 'non') ? 'off' :
 	(($forums_publics == 'pri') ? 'prop' : 'publie')));
 
+if ($forum_id_forum > 0) $id_thread = $forum_id_forum;
+else $id_thread = $id_message;
+
 spip_query("UPDATE spip_forum SET id_parent = $forum_id_parent,
 	id_rubrique =$forum_id_rubrique,
 	id_article = $forum_id_article,
 	id_breve = $forum_id_breve,
 	id_syndic = $forum_id_syndic,
 	id_auteur = $id_auteur,
+	id_thread = $id_thread,
 	date_heure = NOW(),
 	titre = \"$slash_titre\",
 	texte = \"$slash_texte\",
@@ -108,8 +112,7 @@ spip_query("UPDATE spip_forum SET id_parent = $forum_id_parent,
 	WHERE id_forum = '$id_message'
 ");
 
-calculer_threads();
-
+//calculer_threads();
 
 if ($validation_finale) {
 	include_ecrire("inc_admin.php3");
