@@ -2050,7 +2050,7 @@ function calculer_texte($texte)
 					if ($val) 
 						$code .= "	\$retour .= '\$contexte_inclus[$var] = \'".addslashes($val)."\'; ';\n";
 					else
-						$code .= "	\$retour .= '\$contexte_inclus[$var] = '.\$contexte[$var].'; ';\n";
+						$code .= "	\$retour .= '\$contexte_inclus[$var] = \''.addslashes(\$contexte[$var]).'\'; ';\n";
 				}
 			}
 		}
