@@ -223,6 +223,21 @@ function controle_forum($request,$adresse_retour) {
 		if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3) {
 			echo "<P align='left'><FONT FACE='Verdana,Arial,Helvetica,sans-serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></FONT>";
 		}
+
+		if ($mots_cles_forums == "oui"){
+			
+			$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
+			$result_mots = mysql_query($query_mots);
+			
+			while ($row_mots = mysql_fetch_array($result_mots)) {
+				$id_mot = $row_mots['id_mot'];
+				$titre_mot = propre($row_mots['titre']);
+				$type_mot = propre($row_mots['type']);
+				echo "<li> <b>$type_mot :</b> $titre_mot";
+			}
+			
+		}
+
 		echo "</FONT>";
 		echo "</TD></TR></TABLE>";
 		
