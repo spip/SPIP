@@ -1543,6 +1543,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 	global $couleur_foncee, $couleur_claire, $couleur_lien, $couleur_lien_off;
 	global $mode, $spip_lang_rtl, $spip_display;
 	global $connect_statut, $connect_toutes_rubriques;
+	global $browser_name, $browser_rev;
 
 	// hack pour compatibilite spip-lab
 	if (strpos($rubrique, 'script>')) {
