@@ -1389,6 +1389,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 	case 'EMBED_DOCUMENT':
 		if ($fonctions) $fonctions = join($fonctions, "|");
 		$milieu = "
+			include_ecrire('inc_documents.php3');
 			\$$nom_var = embed_document(\$contexte['id_document'], '$fonctions', false) ;
 		";
 		$fonctions = "";
