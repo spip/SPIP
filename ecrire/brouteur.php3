@@ -74,7 +74,7 @@ echo "<div>&nbsp;</div>";
 			}
 			$lien = $dest[$nb_col-$compteur-2];
 			$icone = "racine-site-24.gif";
-			$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+			$ret = "<div style='padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px; background: url(img_pack/$icone) $spip_lang_left no-repeat;'><a href='brouteur.php3?id_rubrique=$lien'>"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 			echo $ret;
 			echo "</td></tr>";
 			
