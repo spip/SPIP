@@ -10,7 +10,7 @@ function test_barre() {
 	global $HTTP_UA_OS, $browser_name, $browser_version, $browser_description, $browser_rev;
 		
 	if ($browser_name == '') verif_butineur();	
-		
+
 	if (
 	(eregi("msie", $browser_name) AND $browser_version >= 5 AND $HTTP_UA_OS != 'MacOS')
 	|| (eregi("mozilla", $browser_name) AND $browser_version >= 5 AND $browser_rev >= 1.3)

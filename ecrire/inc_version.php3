@@ -814,8 +814,7 @@ function verif_butineur() {
 	$browser_name = $match[1];
 	$browser_version = $match[2];
 	$browser_description = $match[3];
-	
-	
+
 	if (eregi("opera", $browser_description)) {
 		eregi("Opera ([^\ ]*)", $browser_description, $match);
 		$browser_name = "Opera";
@@ -827,9 +826,17 @@ function verif_butineur() {
 		$browser_version = $match[1];
 	}
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
-		ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match);
-		$browser_rev = doubleval($match[1]);
+		// Numero de version pour Mozilla "authentique"
+		if (ereg("rv:([0-9]+\.[0-9]+)", $browser_description, $match))
+			$browser_rev = doubleval($match[1]);
+		// Autres Gecko => equivalents 1.4 par defaut (Galeon, etc.)
+		else if (strpos($browser_description, "Gecko"))
+			$browser_rev = 1.4;
+		// Machins quelconques => equivalents 1.0 par defaut (Konqueror, etc.)
+		else $browser_rev = 1.0;
 	}
+
+	if (!$browser_name) $browser_name = "Mozilla";
 }
 
 
