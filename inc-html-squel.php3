@@ -94,13 +94,15 @@ function parser_champs($texte) {
 
 function parser_champs_etendus($debut) {
 	$sep = '##';
-	while (strpos($debut,$sep)!== false) $sep .= '#';
+	while (strpos($debut,$sep)!== false)
+		$sep .= '#';
 	return parser_champs_interieurs($debut, $sep, array());
 }
 
+
 function parser_champs_exterieurs($debut, $sep, $nested) {
 	$res = array();
-	while (($p=strpos($debut, "%$sep", $m))!==false) {
+	while (($p=strpos($debut, "%$sep"))!==false) {
 	    if ($p) $res = array_merge($res, 
 					parser_champs(substr($debut,0,$p)));
 	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
