@@ -6,6 +6,8 @@ include_local ("inc_auth.php3");
 include_local ("inc_import.php3");
 include_local ("inc_admin.php3");
 include_local ("inc_meta.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
 
 function verifier_version_sauvegarde ($archive) {
 	global $spip_version;
