@@ -80,27 +80,19 @@ function critere_debut_dist($idb, &$boucles, $param, $not) {
 // http://www.spip.net/@recherche
 function critere_recherche_dist($idb, &$boucles, $param, $not) {
 	$boucle = &$boucles[$idb];
-	$boucle->from[] = "index_".$boucle->id_table." AS rec";
-	$boucle->select[] = 'SUM(rec.points + 100*(" .' . 
-		'calcul_mysql_in("rec.hash",
-		$hash_recherche_strict,"") . "))
-		AS points';
+
+	$table = $boucle->id_table;	#articles
+	$id_table = 'id_'.preg_replace('/s$/', '', $table); 	#id_article
 
 	// horrible hack du aux id_forum = spip_forum et id_article=spip_articleS
 	// en fait il faudrait la fonction inverse de table_objet()
 	$id = 'id_'.preg_replace('/s$/', '', $boucle->id_table);
 
-	// rec.id_article = articles.id_article
-	$boucle->where[] = "rec.".$id
-	. "=" . $boucle->id_table.'.'.$id;
-
-	// group by articles.id_article
-	$boucle->group = $boucle->id_table . '.' . $boucle->primary;
 	$boucle->select[] = $boucle->id_table . '.' . $boucle->primary; # pour postgres, neuneu ici
+	$boucle->select[] = '$rech_select'; # pour les ... as points
 
 	// et la recherche trouve
-	$boucle->where[] = '" .' . 'calcul_mysql_in("rec.hash",
-		$hash_recherche,"") . "';
+	$boucle->where[] = '$rech_where';
 
 	// oui cette boucle est une boucle recherche, le noter dans la pile
 	// (certes, c'est un peu lourd comme ecriture)

@@ -478,4 +478,56 @@ function requete_hash ($rech) {
 	return array($hash_recherche, $hash_recherche_strict);
 }
 
+
+function prepare_recherche($recherche, $type = 'id_article', $table='articles') {
+	static $cache = array();
+
+	if (!$cache[$type][$recherche]) {
+
+		if (!$cache['hash'][$recherche])
+			$cache['hash'][$recherche] = requete_hash($recherche);
+		list($hash_recherche, $hash_recherche_strict)
+			= $cache['hash'][$recherche];
+
+		$strict = array();
+		if ($hash_recherche_strict)
+			foreach (split(',',$hash_recherche_strict) as $h)
+				$strict[$h] = 99;
+
+		$points = array();
+		$s = spip_query ("SELECT hash,points,$type as id
+			FROM spip_index_$table
+			WHERE hash IN ($hash_recherche)");
+
+		while ($r = spip_fetch_array($s))
+			$points[$r['id']]
+			+= (1 + $strict[$r['hash']]) * $r['points'];
+
+		arsort($points, SORT_NUMERIC);
+
+		# calculer le {id_article IN()} et le {... as points}
+		if (count($points)) {
+			$ids = array();
+			$expr = '';
+			foreach ($points as $id => $p)
+				$listes_ids[$p] .= ','.$id;
+			foreach ($listes_ids as $p => $liste_ids)
+				$expr .= "+$p*(".calcul_mysql_in("$table.$type", substr($liste_ids, 1)).") ";
+			if ($expr = substr($expr,1))
+				$select = "$expr as points";
+			else
+				$select = "0 as points";
+
+			$where = calcul_mysql_in("$table.$type", join(',',array_keys($points)));
+		} else {
+			$select = '';
+			$where = '';
+		}
+
+		$cache[$type][$recherche] = array($select, $where);
+	}
+
+	return $cache[$type][$recherche];
+}
+
 ?>
