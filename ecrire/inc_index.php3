@@ -51,14 +51,16 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
 
-	// Cas particulier : abbreviations d'au moins deux lettres
-	$texte = ereg_replace(" ([A-Z]{2,$min_long}) ", ' \\1___ ', $texte);
+	// Cas particulier : sigles d'au moins deux lettres
+	$texte = ereg_replace(" ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) ", ' \\1___ ', $texte);
+	$texte = strtolower($texte);
 
 	// Separer les mots
 	$table = spip_split(" +", $texte);
 
 	while (list(, $mot) = each($table)) {
 		if (strlen($mot) > $min_long) {
+			$mot = strtolower($mot);
 			$h = substr(md5($mot), 0, 16);
 			$index[$h] += $val;
 			$mots .= ",(0x$h,'$mot')";
