@@ -18,7 +18,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'I a ges de br&egrave;va a aquela adrei&ccedil;a ',
 'aucune_rubrique' => 'I a ges de rubrica a aquela adrei&ccedil;a ',
 'autres_breves' => 'Autrei br&egrave;vas',
-'autres_groupes_de_mots_clefs' => '-vide-',
 'autres_groupes_mots_clefs' => 'Autrei grops de mots claus',
 'autres_sites' => 'Autrei sits',
 
@@ -33,13 +32,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'Dins la meteissa rubrica',
 'date' => 'Data',
 'dernier_ajout' => 'Darrier apondon',
 'dernieres_breves' => 'Darrierei br&egrave;vas',
 'derniers_articles' => 'Darriers articles',
 'derniers_commentaires' => 'Darriers comentaris',
-'derniers_messages_des_forums' => 'Darriers messatges publicats dins lei forums',
 'derniers_messages_forum' => 'Darriers messatges publicats dins lei forums',
 
 
@@ -48,7 +45,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'en_reponse' => 'En resp&ograve;nsa a:',
 'en_resume' => 'En resumit',
 'envoyer_message' => 'Mandar un messatge',
-'envoyer_un_message' => 'Mandar un messatge',
 'espace_prive' => 'Espaci privat',
 
 
@@ -85,18 +81,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
-'par_auteur' => 'per',
+'page_precedente' => '<NEW> page pr&eacute;c&eacute;dente',
+'page_suivante' => '<NEW> page suivante',
+'par_auteur' => 'per&nbsp;',
 'participer_site' => 'Pod&egrave;tz participar a la vida d\'aqueu sit e prepausar leis articles v&ograve;stres en vos inscrivent &ccedil;ai sota. Recebretz sus lo c&ograve;p un e-mail que vos indicar&agrave; v&ograve;strei c&ograve;des per accedir a l\'espaci privat dau sit.',
-'pas_d_article' => 'I a ges d\'article a aquela adrei&ccedil;a',
-'pas_d_auteur' => 'I a ges d\'autor a aquela adrei&ccedil;a',
-'pas_de_breve' => 'I a ges de br&egrave;va a aquela adrei&ccedil;a',
-'pas_de_rubrique' => 'I a ges de rubrica a aquela adrei&ccedil;a',
-'pas_de_site' => 'I a ges de sit a aquela adrei&ccedil;a',
-'plan_du_site' => 'Plan dau sit',
 'plan_site' => 'Plan dau sit',
 'popularite' => 'Popularitat',
 'poster_message' => 'Postar un messatge',
-'poster_un_message' => 'Postar un messatge',
 
 
 // R
@@ -126,7 +117,21 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // V
-'voir_en_ligne' => 'Vejatz en linha'
+'voir_en_ligne' => 'Vejatz en linha',
+
+
+// PLUS_UTILISE
+'autres_groupes_de_mots_clefs' => '-vide-',
+'dans_meme_rubrique' => 'Dins la meteissa rubrica',
+'derniers_messages_des_forums' => 'Darriers messatges publicats dins lei forums',
+'envoyer_un_message' => 'Mandar un messatge',
+'pas_d_article' => 'I a ges d\'article a aquela adrei&ccedil;a',
+'pas_d_auteur' => 'I a ges d\'autor a aquela adrei&ccedil;a',
+'pas_de_breve' => 'I a ges de br&egrave;va a aquela adrei&ccedil;a',
+'pas_de_rubrique' => 'I a ges de rubrica a aquela adrei&ccedil;a',
+'pas_de_site' => 'I a ges de sit a aquela adrei&ccedil;a',
+'plan_du_site' => 'Plan dau sit',
+'poster_un_message' => 'Postar un messatge'
 
 );
 

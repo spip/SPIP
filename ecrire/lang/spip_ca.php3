@@ -171,10 +171,6 @@ desactivada per raons de seguretat (cosa normal en molts prove&iuml;dors d\'host
 
 // C
 'calendrier_synchro' => 'Si utilitzeu un programari d\'agenda compatible <b>iCal</b>, el podeu sincronitzar amb les informacions d\'aquest lloc.',
-'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
-'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
-'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
-'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -961,6 +957,10 @@ t&egrave;cnic. Algunes d\'aquestes necesiten un proc&eacute;s d\'autenticaci&oac
 'info_tous_resultats_enregistres' => '[tots els resultats s&oacute;n registrats]',
 'info_tout_afficher' => 'Mostrar-ho tot',
 'info_tout_site' => 'Tot el lloc',
+'info_tout_site1' => 'Llengua de l\'article.',
+'info_tout_site2' => 'L\'article no ha estat tradu&iuml;t a aquesta llengua. ',
+'info_tout_site3' => 'L\'article ha estat tradu&iuml;t a aquesta llengua, per&ograve; s\'han fet modificacions a l\'article de refer&egrave;ncia. La traducci&oacute; s\'ha de posar al dia.',
+'info_tout_site4' => 'L\'article ha estat tradu&iuml;t a aquesta llengua i la traducci&oacute; posada al dia. ',
 'info_travail_colaboratif' => 'Treball col&middot;lectiu en els articles',
 'info_travaux_texte' => 'Aquest lloc encara no est&aacute; configurat. Torneu m&eacute;s endavant...',
 'info_travaux_titre' => 'Lloc en construcci&oacute;',
@@ -1608,7 +1608,14 @@ el que pot provocar un lleuger alentiment de la vostra pr&ograve;pia web.',
 'trad_delier' => 'No enlla&ccedil;ar aquest article amb aquestes traduccions',
 'trad_lier' => 'Aquest article &eacute;s una traducci&oacute; de l\'article n&uacute;mero:',
 'trad_new' => 'Escriure una nova traducci&oacute; d\'aquest article',
-'trad_reference' => '(article de refer&egrave;ncia)'
+'trad_reference' => '(article de refer&egrave;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Recuperar el fitxer <i>iCal</i>',
+'calendrier_synchro_prive' => 'El seg&uuml;ent calendari, d\'&uacute;s estrictament personal, us informa de l\'activitat editorial privada d\'aquest lloc (feines i cites personals, articles i breus proposats...).',
+'calendrier_synchro_public' => 'El seg&uuml;ent calendari permet seguir l\'activitat de l\'espai p&uacute;blic d\'aquest lloc (articles i breus publicats).',
+'calendrier_synchro_sync' => 'Sincronitzar el fitxer <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
 
 );
 
