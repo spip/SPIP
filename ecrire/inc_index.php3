@@ -502,6 +502,7 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles') 
 		while ($r = spip_fetch_array($s))
 			$points[$r['id']]
 			+= (1 + $strict[$r['hash']]) * $r['points'];
+		spip_free_result($s);
 
 		arsort($points, SORT_NUMERIC);
 
@@ -518,7 +519,7 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles') 
 			else
 				$select = "0 as points";
 
-			$where = calcul_mysql_in("$table.$type", join(',',array_keys($points)));
+			$where = '('.calcul_mysql_in("$table.$type", join(',',array_keys($points))).')';
 		} else {
 			$select = '';
 			$where = '';
