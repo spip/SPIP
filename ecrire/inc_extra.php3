@@ -145,7 +145,9 @@ function extra_recup_saisie($type='article') {
 // a partir de la liste des champs, generer l'affichage
 function extra_affichage($extra, $type) {
 	$extra = unserialize ($extra);
+	if (!is_array($extra)) return;
 	$champs = $GLOBALS['champs_extra'][$type];
+
 	while (list($nom,$contenu) = each($extra)) {
 		list($type, $filtre, $prettyname) = explode("|", $champs[$nom]);
 		if ($filtre != 'brut' AND function_exists($filtre))
