@@ -196,30 +196,36 @@ function cron_mail($t) {
 
 	include_local("inc-calcul.php3");
 	$page= cherche_page('',
-				array('date' => date('Y-m-d H:i:s')),
+			    array('date' => date('Y-m-d H:i:s', $t),
+				  'jours_neuf' => $jours_neuf),
 				'nouveautes',
 				'',
 				lire_meta('langue_site'));
 	$page = $page['texte'];
 	if (substr($page,0,5) == '<'.'?php') {
-# ancienne version: squelette en PHP avec affections. 1 passe de +
-				unset ($mail_nouveautes);
-				unset ($sujet_nouveautes);
+# ancienne version: squelette en PHP avec affection des 2 variables ci-dessous
+# 1 passe de + à la sortie
+				$mail_nouveautes = '';
+				$sujet_nouveautes = '';
+				$headers = '';
 				eval ('?' . '>' . $page);
 	} else {
-# nouvelle version: squelette en mode texte, 1ere ligne = sujet
-# il faudrait ge'ne'raliser en produisant les Headers standars SMTP
-# a` passer en 4e argument de mail. Surtout utile pour le charset.
+# nouvelle version en une seule passe avec un squelette textuel:
+# 1ere ligne = sujet
+# lignes suivantes jusqu'a la premiere blanche: headers SMTP
+
 				$page = stripslashes($page);
-				$p = strpos($page,"\n");
-				$sujet_nouveautes = substr($page,0,$p);
-				$mail_nouveautes = ereg_replace('\$jours_neuf',
-								$jours_neuf,
-								substr($page,$p+1));
+				$p = strpos($page,"\n\n");
+				$s = strpos($page,"\n");
+				$headers = substr($page,$s+1,$p-$s);
+				$sujet_nouveautes = substr($page,0,$s);
+				$mail_nouveautes = substr($page,$p+2);
 	}
 
-	if ($mail_nouveautes)
-		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes);
+	$n = strlen($mail_nouveautes);
+	if ($n > 10)
+	  envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
+	spip_log("$n nouveautes depuis $jours_neuf jours");
 	return 1;
 }
 

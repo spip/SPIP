@@ -1,63 +1,36 @@
-<?php
+[[(#NOM_SITE_SPIP|textebrut|texte_script)]] <:nouveautes|texte_script:>
+Reply-to: esj
 
-/**********************************************************/
-/* Ce squelette tres specifique est utilise pour creer    */
-/* l'envoi de l'annonce des nouveautes. Attention, il     */
-/* fonctionne entierement en php...                       */
-/**********************************************************/
+<B0>
+<:bonjour|texte_script:>
 
-unset($mail_nouveautes);
+<:texte_lettre_information|texte_script:> "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP).
+<:texte_lettre_information_2|texte_script:> [(#HTTP_VARS{jours_neuf})] <:jours|texte_script:>.
 
-$sujet_nouveautes = '[[(#NOM_SITE_SPIP|textebrut|texte_script)]] <:nouveautes|texte_script:>';
-
-//
-// Articles
-//
-<B_nv1>
-$mail_nouveautes = '
-
+<BOUCLE0(AUTEURS){0,1}><B_nv1>
           <:nouveaux_articles|texte_script:>
           --------------------------
 
-';
 <BOUCLE_nv1(ARTICLES){age_relatif<=0}{par date}{inverse}{0,30}>
-	$mail_nouveautes .= '[** (#TITRE|textebrut|texte_script) **]';
-	$mail_nouveautes .= "\n";
-	$mail_nouveautes .= '[par (#LESAUTEURS|textebrut|texte_script)] ';
-	$mail_nouveautes .= '[le (#DATE|affdate|texte_script)]'."\n\n";
-	$mail_nouveautes .= '[(#INTRODUCTION|textebrut|texte_script)]'."\n\n";
-	$mail_nouveautes .= '-> #URL_SITE_SPIP/#URL_ARTICLE'."\n\n";
-</BOUCLE_nv1>
+[** (#TITRE|textebrut|texte_script) **]
+[par (#LESAUTEURS|textebrut|texte_script)]
+[le (#DATE|affdate|texte_script)]
 
-//
-// Breves
-//
-<B_nv2>
-$mail_nouveautes .= '
+[(#INTRODUCTION|textebrut|texte_script)]
 
+-> #URL_SITE_SPIP/#URL_ARTICLE
+
+</BOUCLE_nv1><B_nv2>
           
           <:nouvelles_breves|texte_script:>
           --------------------------
 
-';
 <BOUCLE_nv2(BREVES){age_relatif<=0}{par date}{inverse}{0,30}>
-	$mail_nouveautes .= '[* (#TITRE|textebrut|texte_script) *]';
-	$mail_nouveautes .= '[ - (#DATE|affdate|texte_script)]'."\n\n";
-	$mail_nouveautes .= '[(#INTRODUCTION|textebrut|texte_script)]'."\n\n";
-	$mail_nouveautes .= '-> #URL_SITE_SPIP/#URL_BREVE'."\n\n";
-</BOUCLE_nv2>
+[* (#TITRE|textebrut|texte_script) *]
+[ - (#DATE|affdate|texte_script)]
 
+[(#INTRODUCTION|textebrut|texte_script)]
 
-//
-//	Ajouter l'entete
-//
-if ($mail_nouveautes) {
-	$mail_nouveautes = '<:bonjour|texte_script:>
+-> #URL_SITE_SPIP/#URL_BREVE
 
-<:texte_lettre_information|texte_script:> "[(#NOM_SITE_SPIP|textebrut|texte_script)]" (#URL_SITE_SPIP).
-<:texte_lettre_information_2|texte_script:> '.$jours_neuf.' <:jours|texte_script:>.
-
-' . $mail_nouveautes;
-}
-
-?>
+</BOUCLE_nv2></BOUCLE0>
