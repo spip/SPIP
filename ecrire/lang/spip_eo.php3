@@ -163,10 +163,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // C
 'calendrier_synchro' => 'Se vi uzas agend-programon kongruan kun <b>iCal</b> formato, vi povas &#285;isdatigi tiun kun la datenoj de tiu teksejo.',
-'calendrier_synchro_lien' => '<NEW> R&eacute;cup&eacute;rer le fichier <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => '<NEW> Le calendrier suivant, &agrave; usage strictement personnel, vous informe de l\'activit&eacute; &eacute;ditoriale priv&eacute;e de ce site (t&acirc;ches et rendez-vous personnels, articles et br&egrave;ves propos&eacute;s...).',
-'calendrier_synchro_public' => '<NEW> Le calendrier suivant vous permet de suivre l\'activit&eacute; publique de ce site (articles et br&egrave;ves publi&eacute;s).',
-'calendrier_synchro_sync' => '<NEW> Synchroniser le fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -365,9 +361,9 @@ Dankon pro via partopreno
 'ical_texte_prive' => 'Tiu kalendro, rezervita al vi, informas vin pri la privata eldon-agado de la teksejo (personaj taskoj kaj rendevuoj, proponitaj artikoloj kaj informetoj...).',
 'ical_texte_public' => 'Per tiu kalendaro, vi povas observi la publikan funkciadon de tiu teksejo (publikigitaj informetoj kaj artikoloj).',
 'ical_texte_rss' => '<MODIF> Vi povas asociigi la nova&#309;ojn de tiu teksejo &#265;e iu ajn dosier-legilo de XML/RSS formato (Rich Site Summary). Tiu formato anka&#365; ebligas SPIPon legi la nova&#309;ojn publikigitajn en aliaj teksejoj kiuj uzas kongruan formaton.',
-'ical_texte_rss_articles' => '<NEW> Le fichier &laquo;backend&raquo; des articles de ce site se trouve &agrave; l\'adresse:',
-'ical_texte_rss_articles2' => '<NEW> Vous pouvez &eacute;galement obtenir des fichiers &laquo;backend&raquo; pour les articles de chaque rubrique du site:',
-'ical_texte_rss_breves' => '<NEW> Il existe de plus un fichier contenant les br&egrave;ves du site. En pr&eacute;cisant un num&eacute;ro de rubrique, vous obtiendrez uniquement les br&egrave;ves de cette rubrique.',
+'ical_texte_rss_articles' => 'La dosiero &laquo;backend&raquo; de la artikoloj de tiu teksejo troveblas je la adreso :',
+'ical_texte_rss_articles2' => 'Vi anka&#365; povas ricevi &laquo;backend&raquo; dosierojn por artikoloj de &#265;iu rubriko en la tekesejo:',
+'ical_texte_rss_breves' => 'Plie, ekzistas dosieron enhavantas &#265;iujn informetojn de la teksejo. Per presizeco de numero de iu rubriko, vi nur ricevos la informetojn el tiu rubriko.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Dissendolisto',
 'ical_titre_rss' => '<MODIF> Dosiero &laquo; backend &raquo;',
@@ -592,7 +588,6 @@ Dankon pro via partopreno
 'info_dimension' => 'Dimensioj:',
 'info_discussion_cours' => 'Nunaj diskutoj',
 'info_document' => 'Dokumento ',
-'info_donner_rendez_vous' => 'Tiu butono ebligas al vi doni rendevuon al alia partoprenanto.',
 'info_echange_message' => 'SPIP ebligas inter&#349;an&#285;on de mesa&#285;oj kaj la starigon de privataj diskutforumoj inter la partoprenantoj de la teksejo. Vi povas aktivigi a&#365; malaktivigi tiun funkcion.',
 'info_ecire_message_prive' => 'Skribi privatan mesa&#285;on',
 'info_ecrire_article' => 'Anta&#365; ol havi la eblecon skribi artikolojn, vi devas krei almena&#365; unu rubrikon.',
@@ -751,7 +746,6 @@ Dankon pro via partopreno
 'info_notes' => 'Notoj',
 'info_nouveau' => '(Nova)',
 'info_nouveau_message' => 'VI HAVAS NOVAN MESA&#284;ON',
-'info_nouveau_pense_bete' => 'Tiu butono ebligas al vi krei novan propran memorigilon.',
 'info_nouveaux_message' => 'Novaj mesa&#285;oj',
 'info_nouveaux_messages' => 'VI HAVAS @total_messages@ NOVA(J)N MESA&#284;O(J)N',
 'info_nouvel_article' => 'Nova artikolo',
@@ -942,14 +936,13 @@ Dankon pro via partopreno
 'info_tous_resultats_enregistres' => '[&#265;iuj rezultoj estas registritaj]',
 'info_tout_afficher' => '&#264;ion afi&#349;i',
 'info_tout_site' => 'La tuta teksejo',
-'info_tout_site1' => '<NEW> Langue de l\'article.',
-'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
-'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
-'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
-'info_tout_site5' => '<NEW> Article original.',
-'info_tout_site6' => '<NEW> <b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
-Les traductions sont associ&eacute;es &agrave; l\'original,
-dans une couleur qui indique leur &eacute;tat&nbsp;:',
+'info_tout_site1' => 'Lingvo de la artikolo.',
+'info_tout_site2' => 'La artikolo ne estas tradukita en tiu lingvo.',
+'info_tout_site3' => 'La artikolo estas tradukita en tiu lingvo, sed modifika&#309;oj estis aldonita poste la redakcio de la artikolo. Bonvolu &#285;isdatigi la tradukon.',
+'info_tout_site4' => 'La artikolo estas tradukita en tiu lingvo, kaj la traduko bone &#285;isdatigas.',
+'info_tout_site5' => 'Origina artikolo.',
+'info_tout_site6' => '<b>Attentu&nbsp;:</b> nun la originaj artikoloj estas afi&#349;itaj.
+ La tradukoj estas kunligitaj al la orginalo, kun koloro kiu indikas sia stato&nbsp;:',
 'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 'info_travaux_texte' => 'Tiu teksejo ne estas konfigurita jam. Bonvolu denove veni poste...',
 'info_travaux_titre' => 'Konstruado de la teksejo',
@@ -1028,7 +1021,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_non_utiliser_breves' => 'Ne uzi la informetojn',
 'item_non_utiliser_config_groupe_mots_cles' => 'Ne uzi la detalan konfiguradon de la grupoj de &#349;losilvortoj',
 'item_non_utiliser_moteur_recherche' => 'Ne uzi la ser&#265;ilon',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW> Ne pas indexer les forums',
+'item_non_utiliser_moteur_recherche_forum' => 'Ne indeksi forumojn',
 'item_non_utiliser_mots_cles' => 'Ne uzi la &#349;losilvortojn',
 'item_non_utiliser_syndication' => 'Ne uzi la a&#365;tomatan kunligadon',
 'item_nouvel_auteur' => 'Nova a&#365;toro',
@@ -1042,7 +1035,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_utiliser_breves' => 'Uzi la informetojn',
 'item_utiliser_config_groupe_mots_cles' => 'Uzi la detalan konfiguradon de la grupoj de &#349;losilvortoj',
 'item_utiliser_moteur_recherche' => 'Uzi la ser&#265;ilon',
-'item_utiliser_moteur_recherche_forum' => '<NEW> Indexer les forums',
+'item_utiliser_moteur_recherche_forum' => 'Indeksi forumojn',
 'item_utiliser_mots_cles' => 'Uzi la &#349;losilvortojn',
 'item_utiliser_syndication' => 'Uzi la a&#365;tomatan kunligadon',
 'item_visiteur' => 'vizitanto',
@@ -1218,7 +1211,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 
 // N
-'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
+'navigateur_pas_redirige' => '&#264;u via krozilo ne redirektigas, da&#365;rigu aklakante &#265;i tie.',
 
 
 // O
@@ -1614,7 +1607,6 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_langue_trad_article' => 'LINGVO KAJ TRADUKOJ DE LA ARTIKOLO',
 'titre_les_articles' => 'LA ARTIKOLOJ',
 'titre_liens_entrants' => 'La enantaj ligojn de la tago',
-'titre_liens_entrants_total' => '<NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => '&#348;LOSILVORTOJ',
 'titre_mots_cles_dans_forum' => '&#348;losilvortoj en la forumoj de la publikejo',
 'titre_mots_tous' => 'La &#349;losilvortoj',

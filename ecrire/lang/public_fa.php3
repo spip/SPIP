@@ -81,6 +81,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // P
+'page_precedente' => '<NEW> page pr&eacute;c&eacute;dente',
+'page_suivante' => '<NEW> page suivante',
 'par_auteur' => '<NEW> par ',
 'participer_site' => '<NEW> Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
 'plan_site' => '<NEW> Plan du site',
