@@ -79,7 +79,7 @@ function lire_meta_maj($nom) {
 		$r = @fputs($f, $s);
 		@fclose($f);
 		@unlink($fichier_meta_cache);
-		if ($r != strlen($s))
+		if ($r == strlen($s))
 			@rename($fichier_meta_cache_w, $fichier_meta_cache);
 		else
 			@unlink($fichier_meta_cache_w);
