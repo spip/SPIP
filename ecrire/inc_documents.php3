@@ -498,7 +498,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$date = $document->get('date');
 	$mode = $document->get('mode');
 	if (!$titre) {
-		$titre_aff = "fichier : ".ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
+		$titre_aff = ereg_replace("^[^\/]*\/[^\/]*\/","",$fichier);
 	} else {
 		$titre_aff = $titre;
 	}
