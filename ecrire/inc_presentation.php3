@@ -1555,7 +1555,7 @@ function gros_titre($titre, $ze_logo=''){
 	echo "<div>";
 	if (strlen($ze_logo) > 3) echo "<img src='img_pack/$ze_logo' alt='o' border=0 align='middle'> &nbsp; ";
 	echo "<span style='border-bottom: 1px dashed $couleur_foncee;'><font size=5 face='Verdana,Arial,Helvetica,sans-serif' color='$couleur_foncee'><b>";
-	echo propre("$titre");
+	echo typo($titre);
 	echo "</b></font></span></div>\n";
 }
 
