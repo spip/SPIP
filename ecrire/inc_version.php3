@@ -563,7 +563,7 @@ class Link {
 		if (is_array($vars)) {
 			reset($vars);
 			while (list($name, $value) = each($vars)) {
-				$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($texte));
+				$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($value));
 				$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
 			}
 		}
