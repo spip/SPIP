@@ -355,7 +355,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 	  calculer_critere_parties($idb, $boucles, $param, $not, $match);
 
 		// Restriction de valeurs (implicite ou explicite)
-	else if (eregi('^([a-z_]+\(?[a-z_]*\)?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
+	else if (eregi('^(`?[a-z_]+\(?[a-z_]*\)?`?) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
 	  		$op = $match[5] ? $match[5] : '=';
 
 			// Variable comparee
@@ -518,8 +518,11 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$boucle->plat = true;
 
 			// Operateur de comparaison
-			if ($col_table)
-				$col = "$col_table.$col";
+			if ($col_table) {
+				if ($col[0] == "`") 
+				  $col = "$col_table." . substr($col,1,-1);
+				else $col = "$col_table.$col";
+			}
 
 			if (strtoupper($op) == 'IN') {
 				// traitement special des valeurs textuelles
