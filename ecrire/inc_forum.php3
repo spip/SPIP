@@ -57,7 +57,7 @@ function changer_statut_forum($id_forum, $statut) {
 
 // Installer un bouton de moderation (securise) dans l'espace prive
 function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect='') {
-	$link = $GLOBALS['clean_link'];
+	$link = new Link();
 
 	$link->addvar('controle_forum', $action);
 	$link->addvar('id_controle_forum', $id);
@@ -72,6 +72,63 @@ function controle_cache_forum($action, $id, $texte, $fond, $fonction, $redirect=
 		$fonction,
 		"right",
 		'non');
+}
+
+// tous les boutons de controle d'un forum
+function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref) {
+	$controle = '';
+
+	// selection du logo correspondant a l'etat du forum
+	if ($forum_stat == "prive") $logo = "forum-interne-24.gif";
+	else if ($forum_stat == "privadm") $logo = "forum-admin-24.gif";
+	else if ($forum_stat == "privrac") $logo = "forum-interne-24.gif";
+	else $logo = "forum-public-24.gif";
+
+	if ($forum_stat != "off" AND $forum_stat != "privoff") {
+		if ($forum_stat == "publie" OR $forum_stat == "prop")
+			$controle .= 
+		  controle_cache_forum('supp_forum',
+				       $id_forum,
+				       _T('icone_supprimer_message'), 
+				       $logo,
+				       "supprimer.gif");
+		else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
+			$controle .= 
+		  controle_cache_forum('supp_forum_priv',
+				       $id_forum,
+				       _T('icone_supprimer_message'), 
+				       $logo,
+				       "supprimer.gif");
+		    }
+	else {
+		$controle .= "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
+		if($forum_id_auteur)
+			$controle .= " - <A HREF='auteurs_edit.php3?id_auteur=$forum_id_auteur'>"._T('lien_voir_auteur')."</A>";
+	}
+
+	if ($forum_stat=="prop")
+	  {
+		$link = new Link();
+		$redirect = "../forum.php3?$ref&id_forum=$id_forum&retour=ecrire/"
+			.urlencode($link->getUrl());
+
+		$controle .=
+		  controle_cache_forum('valid_forum',
+				       $id_forum,
+				       _T('icone_valider_message'), 
+				       $logo,
+				       "creer.gif") .
+		  controle_cache_forum('valid_forum',
+				       $id_forum,
+				       _T('icone_valider_message') . " &amp; " .
+			           _T('lien_repondre_message'),
+				       $logo,
+				       "creer.gif",
+				       $redirect
+				       );
+	  }
+
+	return $controle;
 }
 
 // Index d'invalidation des forums

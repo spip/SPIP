@@ -1451,31 +1451,10 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 				if ($bouton) echo "&nbsp;".$bouton;
 			}
 
-			if ($controle_id_article) {
-				if ($statut != "off") {
-					echo controle_cache_forum('supp_forum',
-						$id_forum,
-						_T('icone_supprimer_message'), 
-						"articles_forum.php3?id_article=$controle_id_article&debut=$debut#$id_forum",
-						$logo,
-						"supprimer.gif");
-				}
-				else {
-					echo "<br><font color='red'><b>"._T('info_message_supprime')." $ip</b></font>";
-					if ($id_auteur) {
-						echo " - <a href='auteurs_edit.php3?id_auteur=$id_auteur'>"._T('lien_voir_auteur')."</a>";
-					}
-				}
-				if ($statut == "prop" OR $statut == "off") {
-					$appelant= "forum.php3?$type=$valeur&id_forum=$id_forum";
-					echo controle_cache_forum('valid_forum',
-						$id_forum,
-						_T('icone_valider_message'),
-						"articles_forum.php3?id_article=$id_article&debut=$debut#$id_forum",
-						$logo,
-						"creer.gif");
-				}
-			}
+			// boutons de moderation
+			if ($controle_id_article)
+				echo boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$controle_id_article");
+
 			echo justifier(propre($texte));
 
 			if (strlen($url_site) > 10 AND $nom_site) {
