@@ -130,8 +130,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			unset($table_mots);
 			unset($table_ids);
 			while ($row = mysql_fetch_array($result)) {
-				$table_mots[] = $row['id_mot'];
-				$table_ids[] = $row['titre'];
+				$table_ids[] = $row['id_mot'];
+				$table_mots[] = $row['titre'];
 			}
 			$resultat = mots_ressemblants($cherche_mot, $table_mots, $table_ids);
 			debut_boite_info();
