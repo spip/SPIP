@@ -237,25 +237,41 @@ function integre_image($id_document, $align, $type_aff = 'IMG') {
 	return $retour;
 }
 
+//
+// Parcourt recursivement le repertoire upload/ (ou tout autre repertoire, d'ailleurs)
+// 
+function fichiers_upload($dir) {
+	$fichiers = array();
+	$d = opendir($dir);
 
+	while ($f = readdir($d)) {
+		if (is_file("$dir/$f") AND $f != 'remove.txt') {
+			$fichiers[] = "$dir/$f";
+		}
+		else
+		if (is_dir("$dir/$f") AND $f != '.' AND $f != '..') {
+			$fichiers_dir = fichiers_upload("$dir/$f");
+			while (list(,$f2) = each ($fichiers_dir))
+				$fichiers[] = $f2;
+		}
 
+	}
+	closedir($d);
+
+	sort($fichiers);
+
+	return $fichiers;
+}
 
 //
 // Retourner le code HTML d'utilisation de fichiers uploades a la main
 //
 
 function texte_upload_manuel($dir, $inclus = '') {
-	$fichiers = array();
-	$d = opendir($dir);
-	while ($f = readdir($d)) {
-		if (is_file("upload/".$f) AND $f != 'remove.txt') {
-			$fichiers[] = $f;
-		}
-	}
-	closedir($d);
+	$fichiers = fichiers_upload($dir);
 
-	sort($fichiers);
 	while (list(, $f) = each($fichiers)) {
+		$f = ereg_replace("^$dir/","",$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if ($ext == 'jpeg')

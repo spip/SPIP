@@ -319,7 +319,7 @@ function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='',
 	//
 	// Mettre a jour les infos du document uploade
 	//
-	$size_image = getimagesize($dest_path);
+	$size_image = @getimagesize($dest_path);
 	$type_image = decoder_type_image($size_image[2]);
 	if ($type_image) {
 		$largeur = $size_image[0];
@@ -373,23 +373,23 @@ if (!$image_name AND $image2) {
 //
 if ($ajout_doc == 'oui') {
 	if ($dossier_complet){
-		$myDir = opendir('ecrire/upload');
-		while($entryName = readdir($myDir)) {
-			if (is_file("ecrire/upload/".$entryName) AND !($entryName=='remove.txt')) {
-			if (ereg("\.([^.]+)$", $entryName, $match)) {
-					$ext = strtolower($match[1]);
-					if ($ext == 'jpeg')
-						$ext = 'jpg';
-					$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
-					if ($inclus)
-						$req .= " AND inclus='$inclus'";
-					if (@spip_fetch_array(spip_query($req)))
-						$id_document = ajout_doc('ecrire/upload/'.$entryName, 'ecrire/upload/'.$entryName, '', 'document', '','','','',false);
-				}
+		include_ecrire('inc_documents.php3');
+
+		$fichiers = fichiers_upload('ecrire/upload');
+
+		while (list(,$f) = each($fichiers)) {
+			if (ereg("\.([^.]+)$", $f, $match)) {
+				$ext = strtolower($match[1]);
+				if ($ext == 'jpeg')
+					$ext = 'jpg';
+				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
+				if ($inclus)
+					$req .= " AND inclus='$inclus'";
+				if (@spip_fetch_array(spip_query($req)))
+					$id_document = ajout_doc($f, $f, '', 'document', '','','','',false);
 			}
 		}
-		closedir($myDir);
-	
+
 	} 
 	else {
 		if ($forcer_document == 'oui')
