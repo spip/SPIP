@@ -325,7 +325,7 @@ Dankon pro via partopreno
 // I
 'icone_a_suivre' => 'Da&#365;rigota',
 'icone_activer_cookie' => 'Aktivigi la korespond-kuketon',
-'icone_admin_site' => 'Administrado de la teksejo',
+'icone_admin_site' => 'Teksej-administrado',
 'icone_afficher_auteurs' => 'Afi&#349;i la a&#365;torojn',
 'icone_afficher_visiteurs' => 'Afi&#349;i la vizitantojn',
 'icone_aide_ligne' => 'Konektita helpilo',
@@ -348,7 +348,7 @@ Dankon pro via partopreno
 'icone_doc_rubrique' => 'Dokumentoj de la rubrikoj',
 'icone_ecrire_article' => 'Skribi novan artikolon',
 'icone_ecrire_nouvel_article' => 'La informetoj entenataj en tiu rubriko',
-'icone_edition_site' => 'Eldonado de la teksejo',
+'icone_edition_site' => 'Teksej-eldono',
 'icone_envoyer_message' => 'Sendi tiun mesa&#285;on',
 'icone_evolution_visites' => 'Evoluo de la vizitoj<br>@visites@ vizita&#309;oj@aff_ref@',
 'icone_evolution_visites_2' => 'Evoluo de la vizitoj',
