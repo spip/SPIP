@@ -9,30 +9,36 @@ define("_INC_HTML_SQUEL", "1");
 # il est charge par un include calcule dans inc-calcul-squel
 # pour permettre differentes syntaxes en entree
 
-define(NOM_DE_BOUCLE, "[0-9]+|[-_][-_.a-zA-Z0-9]*");
-define(NOM_DE_CHAMP, "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
-define(CHAMP_ETENDU, '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^]\[)]*)\)([^]\[]*)\]');
-define(PARAM_DE_BOUCLE,'\{[^}]*\}');
-define(TYPE_DE_BOUCLE, "[^)]*");
-define(BALISE_DE_BOUCLE,
+define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
+define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
+define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^]\[)]*)\)([^]\[]*)\]');
+define('PARAM_DE_BOUCLE','[[:space:]]*\{[[:space:]]*([^{}]*(\{[^\}]*\}[^\} ]*)?)[[:space:]]*\}');
+define('TYPE_DE_BOUCLE', "[^)]*");
+define('BALISE_DE_BOUCLE',
 	"^<BOUCLE(" .
 	NOM_DE_BOUCLE .
 	')[[:space:]]*\((' .
 	TYPE_DE_BOUCLE .
-	')\)[[:space:]]*(([[:space:]]*' .
+	')\)((' .
 	PARAM_DE_BOUCLE .
 	')*)[[:space:]]*>');
-define(BALISE_INCLURE,"<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)([^>]*)>");
+define('PARAM_INCLURE','[[:space:]]*\{[[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^\{\}]*(\{[^\}]*\}[^\} ]*)?))?[[:space:]]*\}');
+define('BALISE_INCLURE',"<INCLU[DR]E[[:space:]]*\(" .
+       '([-_0-9a-zA-Z./ ]+)' .
+	'\)((' .
+	PARAM_INCLURE .
+	')*)[[:space:]]*>');
+define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
-define(DEBUT_DE_BOUCLE,'/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
+function parser_inclure($texte) {
+  while (($p=strpos($texte, '<INCLU')) !== false) {
+		$fin = substr($texte, $p);
 
-function parser_texte($texte) {
-	while (ereg(BALISE_INCLURE, $texte, $match)) {
+		if (!ereg('^' . BALISE_INCLURE, $fin, $match)) break;
 		$s = $match[0];
-		$p = strpos($texte, $s);
 		$debut = substr($texte, 0, $p);
-		$texte = substr($texte, $p + strlen($s));
+		$texte = substr($fin, strlen($s));
 
 		if ($debut) {
 			$champ = new Texte;
@@ -41,27 +47,22 @@ function parser_texte($texte) {
 		}
 		$champ = new Inclure;
 		$champ->fichier = $match[1];
-
+		$champ->params = array();
 		$p = trim($match[2]);
-		if (!$p)
-			$champ->params = '';
-		else {
-			if (!(ereg('^\\{(.*)\\}$', $p, $params))) {
-				erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"), $s);
+		if ($p) {
+			while (ereg('^' . PARAM_INCLURE . '(.*)$', $p, $m)) {
+				$champ->params[$m[1]] = $m[3];
+				$p = $m[5];
 			}
-			else
-				$champ->params = split("\}[[:space:]]*\{", $params[1]);
+			
+			if ($p)	erreur_squelette(_L("Param&egrave;tres d'inclusion incorrects"), $s);
 		}
 		$result[] = $champ;
 	}
 
-	if ($texte) {
-		$champ = new Texte;
-		$champ->texte = $texte;
-		$result[] = $champ;
-	}
-
-	return $result;
+	if ($texte) 
+		return array_merge($result, parser_champs_etendus($texte));
+	else	return $result;
 }
 
 function parser_champs($texte) {
@@ -69,8 +70,9 @@ function parser_champs($texte) {
 	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
 		$p = strpos($texte, $regs[0]);
 		if ($p) {
-			$result = array_merge($result,
-					      parser_texte(substr($texte, 0, $p)));
+			$champ = new Texte;
+			$champ->texte = (substr($texte, 0, $p));
+			$result[] = $champ;
 		}
 
 		$champ = new Champ;
@@ -80,10 +82,12 @@ function parser_champs($texte) {
 		$texte = $regs[5];
 		$result[] = $champ;
 	}
-	if (!$texte)
+	if ($texte) {
+		$champ = new Texte;
+		$champ->texte = $texte;
+		$result[] = $champ;
+	}
 		return $result;
-	else
-		return array_merge($result, parser_texte($texte));
 }
 
 // Gestion des imbrications:
@@ -126,7 +130,6 @@ function parser_champs_interieurs($texte, $sep, $result) {
 		$champ->cond_avant = parser_champs_exterieurs($regs[1],$sep,$result);
 		$champ->cond_apres = parser_champs_exterieurs($regs[7],$sep,$result);
 		$fonctions = $regs[6];
-
 		if ($fonctions) {
 			$fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
 			foreach($fonctions as $f) $champ->fonctions[]= $f;
@@ -153,12 +156,20 @@ function parser_champs_interieurs($texte, $sep, $result) {
 function parser_param($params, &$result) {
 	$params2 = Array();
 	$type = $result->type_requete;
-	$i = 1;
-	while (ereg('^[[:space:]]*\{[[:space:]]*([^ }])([^"}]*)(["}])(.*)$', $params, $args)) {
-		if ($args[3] == "}") {
-			$params = $args[4];
-			ereg("^(.*[^ \t\n])[[:space:]]*$", $args[2], $m);
-			$param = $args[1] . $m[1];
+	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', $params, $m)) {
+	  $params = $m[3];
+	  // cas d'un critere avec {...}
+	  if ($m[2])
+	    $params2[] = $m[1];
+	  else {
+	    if (strlen($m[1]) < 2 )
+	      $params2[] = $m[1];
+	    else {
+	      ereg('(.)([^"}]*)(.)', $m[1], $args);
+	      // cas syntaxique general, 
+	      // traiter qq lexemes particuliers pour faciliter la suite
+	      if ($args[3] != '"') {
+			$param = $m[1];
 			if (($param == 'tout') OR ($param == 'tous')) {
 				$result->tout = true;
 				unset ($param);
@@ -185,35 +196,21 @@ function parser_param($params, &$result) {
 			// l'ajouter
 			if ($param)
 				$params2[] = $param;
-		}
+	      }
 		else {
+		  // cas d'un guillemet final
 			if ($args[1] == '"') {
-				if (!ereg("[[:space:]]*\}(.*)$", $params, $m))
-					break;
-				else {
-					$params = $m[1];
-					$result->separateur = 
+			  // si tout le param est entre guillement, vite vu
+				$result->separateur = 
 					ereg_replace("'","\'",$args[2]);
-				}
 			}
 			else {
-				if (!ereg("([^\"]*\"[[:space:]]*)\}(.*)$", $args[4], $m))
-					break;
-				else {
-					$params = $m[2];
-					$params2[] = $args[1] . $args[2] . '"' . $m[1];
-				}
+				$params2[] = $args[1] . $args[2] . '"' . $m[1];
 			}
 		}
-		$i++;
+	    }
+	  }
 	}
-
-	if ($params) {
-		erreur_squelette(($result->id_boucle .
-				  _L(": Param&egrave;tre $i (ou suivants) incorrect")),
-				 $params);
-	}
-
 	$result->param = $params2;
 }
 
@@ -238,6 +235,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		//
 		$debut = substr($texte, 0, $p);
 		$milieu = substr($texte, $p);
+
 		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
 			erreur_squelette((_T('erreur_boucle_syntaxe')), $milieu);
 		}
@@ -321,7 +319,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 		$result->cond_altern = parser($result->cond_altern,$id_parent,$boucles, $nom);
 		$result->milieu = parser($milieu, $id_boucle,$boucles, $nom);
 
-		$all_res = array_merge($all_res, parser_champs_etendus($debut));
+		$all_res = array_merge($all_res, parser_inclure($debut));
 		$all_res[] = $result;
 		if ($boucles[$id_boucle]) {
 			erreur_squelette(_T('erreur_boucle_syntaxe'),
@@ -331,7 +329,7 @@ function parser($texte, $id_parent, &$boucles, $nom) {
 			$boucles[$id_boucle] = $result;
 	}
 
-	return array_merge($all_res, parser_champs_etendus($texte));
+	return array_merge($all_res, parser_inclure($texte));
 }
 
 ?>

@@ -1,53 +1,25 @@
 <?php
 
-global $inscription_array;
-$inscription_array = array();
+global $inscription_array ;
+$inscription_array = array('mail_inscription', 'nom_inscription');
 
 function inscription_stat($args, $filtres)
 {
+  list($mail_inscription, $nom_inscription) = $args;
   return ((lire_meta('accepter_inscriptions') != 'oui') ? '' :
-	  array("'redac'"));
+	  array('redac', $mail_inscription, $nom_inscription));
 }
 
-function inscription_dyn($type) {
-
-	switch (status_inscription($type)) {
-		case 1: return '';
-		case 2: return '';
-		case 3: return "<div class='reponse_formulaire'><b>" ._T('form_forum_identifiant_mail') . "</b></div>";
-		case 4: return "<div class='reponse_formulaire'><b>" ._T('form_forum_probleme_mail')  . "</b></div>";
-		case 5: return "<div class='reponse_formulaire'><b>" ._T('form_forum_access_refuse')  . "</b></div>";
-		case 6: return "<div class='reponse_formulaire'><b>" ._T('form_forum_email_deja_enregistre')  . "</b></div>";
-		case 7: 
-
-			$link = new Link;
-			$url = $link->getUrl();
-			$url = quote_amp($url);
-			return  _T('form_forum_indiquer_nom_email') .
-			  "<form method='post' action='$url' style='border: 0px; margin: 0px;'>\n" .
-			  "<div><b>"._T('form_pet_votre_nom')."</b></div>" .
-			  "<div><input type=\"text\" class=\"forml\" name=\"nom_inscription\" value=\"\" size=\"30\" /></div>" .
-			  "<div><b>"._T('form_pet_votre_email')."</b></div>" .
-			  "<div><input type=\"text\" class=\"forml\" name=\"mail_inscription\" value=\"\" size=\"30\" /></div>" .
-			  "<div align=\"right\"><input type=\"submit\" class=\"spip_bouton\" value=\""._T('bouton_valider')."\" /></div>" .
-			  "</form>";
-	}
-}
-
-function status_inscription($type) {
-
+function inscription_dyn($type, $mail_inscription, $nom_inscription) {
 	if ($type == 'redac') {
-		if (lire_meta("accepter_inscriptions") != "oui") return 1;
 		$statut = "nouveau";
 	}
 	else if ($type == 'forum') {
 		$statut = "6forum";
 	}
-	else return 2; // tentative de hack...?
+	else return ''; // tentative de hack...?
 
-	global $mail_inscription, $nom_inscription;
-
-	if ($mail_inscription && $nom_inscription) {
+	if (test_mail_ins($type, $mail_inscription) && $nom_inscription) {
 		include(_FILE_CONNECT);
 		// envoyer les identifiants si l'abonne n'existe pas déjà.
 		if (!$row = spip_fetch_array(spip_query("SELECT statut, id_auteur, login, pass FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."' LIMIT 1")))
@@ -62,7 +34,7 @@ function status_inscription($type) {
 					 "('".addslashes($nom_inscription)."',  '".addslashes($mail_inscription)."', '$login', '$mdpass', '$statut', '$htpass')");
 			ecrire_acces();
 			return envoyer_inscription($mail_inscription, $statut, $type, $login, $pass);
-		  } 
+		  }
 
 		else {
 		  // existant mais encore muet, renvoyer les infos
@@ -71,15 +43,31 @@ function status_inscription($type) {
 			} else {
 				if ($row['statut'] == '5poubelle')
 		  // dead
-				  return 5;
+				  return _T('form_forum_access_refuse');
 				else  
 		  // deja inscrit
-				  return 6;
+				  return _T('form_forum_email_deja_enregistre');
 			}
 		}
 	}
 	// demande du formulaire
-	else return 7;
+	else {
+		if (!$nom_inscription) 
+		  {
+		       return array("formulaire_inscription-dist",0);
+		  }
+		else {
+		  spip_log("Mail incorrect: '$mail_inscription'");
+		  return _L('adresse mail incorrecte');
+		}
+	}
+}
+
+// fonction qu'on peut redefinir pour filtrer selon l'adresse mail
+// cas general: controler juste que l'adresse n'est pas vide
+
+function test_mail_ins($type, $mail_inscription) {
+  return trim($mail_inscription);
 }
 
 	// envoyer identifiants par mail
@@ -98,9 +86,9 @@ function envoyer_inscription($mail, $statut, $type, $login, $pass) {
 
 	include_ecrire("inc_mail.php3");
 	if (envoyer_mail($mail, "[$nom_site_spip] "._T('form_forum_identifiants'), $message))
-	  return 3;
+	  return _T('form_forum_identifiant_mail');
 	else
-	  return 4;
+	  return _T('form_forum_probleme_mail');
 }
 
 

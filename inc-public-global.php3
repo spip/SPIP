@@ -250,6 +250,12 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 
 }
 
+function inclure_formulaire($r) {
+	if (is_string($r))
+	echo $r;
+	else { list($fond, $delais, $contexte_inclus) = $r; include('inc-public.php3'); }
+}
+
 //
 // Le bouton des administrateurs
 //

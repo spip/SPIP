@@ -37,36 +37,32 @@ include_ecrire('inc_serialbase.php3');
 function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 	global $dossier_squelettes;
 
-	$criteres = '';
+	$l = array();
 	if ($params) {
-		foreach($params as $param) {
-			if (ereg("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
-				$var = $args[1];
-				$val = ereg_replace('^["\'](.*)["\']$', "\\1", trim($args[3]));
-				$val = addslashes(addslashes($val));
-
-				// Cas de la langue : passer $spip_lang
-				// et non table.lang (car depend de {lang_select})
-				if ($var =='lang') {
-					if ($val)
-						$l[] = "\'lang\' => \'$val\'";
-					else
-						$l[] = "\'lang\' => \''.\$GLOBALS[\"spip_lang\"].'\'";
-				}
-
-				// Cas normal {var=val}
-				else
-				if ($val)
-					$l[] = "\'$var\' => \'$val\'";
+		foreach($params as $var => $val) {
+			if ($val) {
+			  $val = trim($val);
+			  $val = ereg_replace('^["\'](.*)["\']$', "\\1",$val);
+			  $l[] = "\'$var\' => \'" .
+				 addslashes(calculer_param_dynamique($val,
+								     $boucles,
+								     $idb)) .
+				  "\'";
+			}
+			else {
+			// Cas de la langue : passer $spip_lang
+			  // et non table.lang (car depend de {lang_select})
+				if ($var =='lang')
+					$l[] = "\'lang\' => \''.\$GLOBALS[\"spip_lang\"].'\'";
 				else
 					$l[] = "\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\'";
-		    }
-		$criteres = join(", ",$l);
-		}
+				}
+			}
 	}
 	return "\n'<".
-		"?php\n\t\$contexte_inclus = array($criteres);\n\t".
-		"\$fichier_inclus = \'$fichier\';\n" .
+		"?php\n\t\$contexte_inclus = array(" .
+		join(", ",$l) .
+		");\n\t\$fichier_inclus = \'$fichier\';\n" .
 		(($dossier_squelettes) ?
 		("
 			if (@file_exists(\'$dossier_squelettes/$fichier\')){

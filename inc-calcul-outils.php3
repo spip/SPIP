@@ -84,14 +84,14 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 	global $espace_logos;
 
 	$num_survol++;
-	if ($arton) {
-		if ($align) $align="align='$align' ";
+	if (!$arton) return '';
+	$milieu = "<img src='$arton'"
+		. ($align ? " align='$align' " : '') 
+		. " name='image$num_survol' border='0' "
+		. "alt='image$num_survol'"
+		. " hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
 
-		$milieu = "<img src='$arton' $align".
-			" name='image$num_survol' border='0' alt=''".
-			" hspace='$espace_logos' vspace='$espace_logos' class='spip_logos' />";
-
-		if ($artoff) {
+	if ($artoff) {
 			if ($lien) {
 				$afflien = "<a href='$lien'";
 				$afflien2 = "a>";
@@ -103,13 +103,11 @@ function affiche_logos($arton, $artoff, $lien, $align) {
 			$milieu = "$afflien onmouseover=\"image$num_survol.src=".
 				"'$artoff'\" onmouseout=\"image$num_survol.src=".
 				"'$arton'\">$milieu</$afflien2";
-		}
+	}
 		else if ($lien) {
 			$milieu = "<a href='$lien'>$milieu</a>";
 		}
-	} else {
-		$milieu="";
-	}
+
 	return $milieu;
 }
 
@@ -155,7 +153,7 @@ function calculer_formulaire($nom, $args, $filtres)
   $r = $f($args, $filtres);
   if (is_string($r))
     return $r;
-  else 
+  else { 
     return
     ('<'.'?php 
 include_ecrire(\'inc_lang.php3\');
@@ -165,14 +163,15 @@ lang_select(\''
 include_local("'
      . $file
      . '");
-echo '
+inclure_formulaire('
      . $nom
-     . '_dyn('
-     . join(',',$r)
-     . ');
+     . '_dyn(\''
+     . join("', '", array_map("addslashes", $r))
+     . '\'));
 lang_dselect();
 ?'
      .">");
+  }
 }
 
 //
@@ -370,18 +369,17 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='')
 
 function sql_petitions($id_article, $table, $id_boucle, $serveur, &$Cache) {
 	$retour = spip_abstract_fetsel(
-		array('id_article', 'email_unique', 'site_obli', 'site_unique',
-		'message', 'texte'),
-		array('petitions'),
-		array("id_article=".intval($id_article)),
-		'','','','',1, 
-		$table, $id_boucle, $serveur);
+				       array('id_article'),
+				       array('petitions'),
+				       array("id_article=".intval($id_article)),
+				       '','','','',1, 
+				       $table, $id_boucle, $serveur);
 
 	# cette page est invalidee par toute petition
 	if ($retour AND $Cache)
 		$Cache['petition']['petition'] = 1;
 
-	return $retour;
+	return ($retour ? $id_article : '');
 }
 
 # retourne le chapeau d'un article, et seulement s'il est publie

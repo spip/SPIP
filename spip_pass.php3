@@ -17,7 +17,7 @@ utiliser_langue_visiteur();
 unset($erreur);
 
 $mode = $GLOBALS['mode'];
-
+spip_log("mode $mode");
 // recuperer le cookie de relance
 if ($p = addslashes($p)) {
 	$mode = 'oubli_pass';
@@ -117,7 +117,10 @@ else {
 		echo "\n</p>";
 
 		include_local("inc-inscription.php3");
-		echo inscription_dyn($mode);
+		include_local("inc-public-global.php3"); 
+		echo inclure_formulaire(inscription_dyn($mode,
+							$GLOBALS['mail_inscription'],
+							$GLOBALS['nom_inscription']));
 	}
 	else {
 		install_debut_html(_T('pass_erreur'));
@@ -125,12 +128,13 @@ else {
 	}
 }
 
-echo "<p align='right'>" .
+echo "<p align='right'>",
 http_script("if (window.opener) document.write(\"<a href='javascript:close();'>\");
 else document.write(\"<a href='./'>\");
-document.write(\""._T('pass_quitter_fenetre')."</a>\");"),
-"<noscript>[<a href='./'>"._T('pass_retour_public')."</a>]</noscript>
-</p>";
+document.write(\""._T('pass_quitter_fenetre')."</a>\");",
+	    '',
+	    "[<a href='./'>"._T('pass_retour_public')."</a>]"),
+  "</p>";
 
 install_fin_html();
 
