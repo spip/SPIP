@@ -268,7 +268,7 @@ if ($row = spip_fetch_array($result)) {
 // pour l'affichage du virtuel
 unset($virtuel);
 if (substr($chapo, 0, 1) == '=') {
-	$virtuel = substr($chapo, 1, strlen($chapo));
+	$virtuel = substr($chapo, 1);
 }
 
 if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_redac, $regs)) {
@@ -680,20 +680,20 @@ else if ($statut_article == 'poubelle') {
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'><td width='100%' valign='top'>";
-if (strlen($surtitre) > 1) {
+if ($surtitre) {
 	echo "<font face='arial,helvetica' size=3><b>";
 	echo typo($surtitre);
 	echo "</b></font>\n";
 }
 	gros_titre($titre, $logo_statut);
-if (strlen($soustitre) > 1) {
+if ($soustitre) {
 	echo "<font face='arial,helvetica' size=3><b>";
 	echo typo($soustitre);
 	echo "</b></font>\n";
 }
 
 
-if (strlen($descriptif) > 1) {
+if ($descriptif) {
 	echo "<p><div align='left' style='padding: 5px; border: 1px dashed #aaaaaa; background-color: #e4e4e4;'>";
 	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	echo "<b>Descriptif :</b> ";
