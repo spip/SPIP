@@ -10,8 +10,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles' => 'Articles',
 'articles_populaires' => 'Articles les plus populaires',
 'articles_recents' => 'Articles les plus r&eacute;cents',
+'aucun_article' => 'Il n\'y a pas d\'article &agrave; cette adresse',
+'aucun_auteur' => 'Il n\'y a pas d\'auteur &agrave; cette adresse',
+'aucune_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
+'aucune_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
+'aucun_site' => 'Il n\'y a pas de site &agrave; cette adresse',
 'autres_breves' => 'Autres br&egrave;ves',
-'autres_groupes_de_mots_clefs' => 'Autres groupes de mots-cl&eacute;s',
+'autres_groupes_mots_clefs' => 'Autres groupes de mots-cl&eacute;s',
 'autres_sites' => 'Autres sites',
 
 
@@ -25,20 +30,20 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'dans_meme_rubrique' => 'Dans la m&ecirc;me rubrique',
+'meme_rubrique' => 'Dans la m&ecirc;me rubrique',
 'date' => 'Date',
 'dernier_ajout' => 'Dernier ajout',
 'dernieres_breves' => 'Derni&egrave;res br&egrave;ves',
 'derniers_articles' => 'Derniers articles',
 'derniers_commentaires' => 'Derniers commentaires',
-'derniers_messages_des_forums' => 'Derniers messages publi&eacute;s dans les forums',
+'derniers_messages_forum' => 'Derniers messages publi&eacute;s dans les forums',
 
 
 // E
 'edition_mode_texte' => '&Eacute;dition en mode texte de',
 'en_reponse' => 'En r&eacute;ponse &agrave;&nbsp;:',
 'en_resume' => 'En r&eacute;sum&eacute;',
-'envoyer_un_message' => 'Envoyer un message',
+'envoyer_message' => 'Envoyer un message',
 'espace_prive' => 'Espace priv&eacute;',
 
 
@@ -76,14 +81,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // P
 'par_auteur' => 'par ',
 'participer_site' => 'Vous pouvez participer &agrave; la vie de ce site et proposer vos propres articles en vous inscrivant ci-dessous. Vous recevrez imm&eacute;diatement un email vous indiquant vos codes d\'acc&egrave;s &agrave; l\'espace priv&eacute; du site.',
-'pas_d_article' => 'Il n\'y a pas d\'article &agrave; cette adresse',
-'pas_d_auteur' => 'Il n\'y a pas d\'auteur &agrave; cette adresse',
-'pas_de_breve' => 'Il n\'y a pas de br&egrave;ve &agrave; cette adresse',
-'pas_de_rubrique' => 'Il n\'y a pas de rubrique &agrave; cette adresse',
-'pas_de_site' => 'Il n\'y a pas de site &agrave; cette adresse',
-'plan_du_site' => 'Plan du site',
+'plan_site' => 'Plan du site',
 'popularite' => 'Popularit&eacute;',
-'poster_un_message' => 'Poster un message',
+'poster_message' => 'Poster un message',
 
 
 // R

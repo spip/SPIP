@@ -855,8 +855,8 @@ if ($flag_editable AND $options == 'avancees') {
 		echo '<input type="submit" name="Changer" class="fondo" value="'._T('bouton_changer').'" />';
 		echo aide('artdate_redac');
 		echo '</td></tr>';
-		echo fin_block();
 		echo '</table>';
+		echo fin_block();
 	}
 
 	echo "</FORM>";

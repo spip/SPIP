@@ -117,7 +117,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	}
 	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>"._T('titre_mots_cles')."</B></FONT>";
 	echo aide ("artmots");
-	echo "</TABLE>";
+	echo "</td></tr></TABLE>";
 
 	//////////////////////////////////////////////////////
 	// Recherche de mot-cle
@@ -377,7 +377,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		// Afficher un menu par groupe de mots
 
-		while($row_groupes = spip_fetch_array($result_groupes)) {
+		while ($row_groupes = spip_fetch_array($result_groupes)) {
 			$id_groupe = $row_groupes['id_groupe'];
 			$titre_groupe = entites_html($row_groupes['titre']);
 			$unseul = $row_groupes['unseul'];
@@ -414,8 +414,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "<INPUT TYPE='hidden' NAME='select_groupe'  VALUE='$id_groupe'>";
 
 					echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo' STYLE='font-size:10px'>";
-					echo "</FORM>";
-					echo "</td></tr>";
+					echo "</td></FORM>";
+					echo "</tr>";
 				}
 				else {
 					echo "\n<tr>";
@@ -445,8 +445,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "</SELECT>";
 					echo "</td>\n<td>";
 					echo " &nbsp; <INPUT TYPE='submit' NAME='Choisir' VALUE='"._T('bouton_choisir')."' CLASS='fondo'>";
-					echo "</FORM>";
-					echo "</td></tr>";
+					echo "</td></FORM>";
+					echo "</tr>";
 				}
 			}
 		}

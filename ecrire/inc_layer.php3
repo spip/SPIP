@@ -69,7 +69,7 @@ function debut_block_invisible($nom_block){
 
 function fin_block() {
 	if (test_layer()) {
-		return "</div>";
+		return "<div style='clear: both;'></div></div>";
 	}
 }
 
