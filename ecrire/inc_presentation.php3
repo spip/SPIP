@@ -2059,7 +2059,7 @@ else {
 			icone_bandeau_secondaire (_T('icone_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
 		}
 
-		if ($options == "avancees") {
+		/*if ($options == "avancees") {
 			if ($connect_statut == "0minirezo") $req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
 			else $req_where = " AND articles.statut IN ('prop','publie')"; 
 			$nombre_versions = spip_num_rows(spip_query("
@@ -2069,7 +2069,7 @@ else {
 			if ($nombre_versions > 0 OR 1==1) {
 				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_revisions.php3", "historique-24.gif", "revisions", $sous_rubrique);
 			}
-		}
+		}*/
 
 		$activer_breves=lire_meta("activer_breves");
 		if ($activer_breves != "non"){
@@ -2339,7 +2339,7 @@ else {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(_T('info_en_cours_validation'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus("articles_page.php3")._T('info_en_cours_validation'), "article-24.gif", '', '', false);
 			$gadget .= "\n<div class='plan-articles'>\n";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -2356,7 +2356,7 @@ else {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(_T('info_articles_proposes'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus("index.php3")._T('info_articles_proposes'), "article-24.gif", '', '', false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -2374,7 +2374,7 @@ else {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(_T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
+			$gadget .= bandeau_titre_boite2(afficher_plus("breves.php3")._T('info_breves_valider'), "breve-24.gif", "$couleur_foncee", "white", false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_breve = $row['id_breve'];
