@@ -17,7 +17,7 @@ function mySel($varaut,$variable){
 function enfant($leparent) {
 	global $id_parent;
 	global $id_rubrique;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
+ 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent'";
  	$result=spip_query($query);
 
 	while($row=spip_fetch_array($result)){
@@ -47,6 +47,7 @@ if ($new != "oui") {
 		$lien_url=$row['lien_url'];
 		$statut=$row['statut'];
 		$id_rubrique=$row['id_rubrique'];
+		$id_secteur=$id_rubrique;
 		$extra = $row['extra'];
 		$pour_doublons = propre ("$titre.$texte");
 	}

@@ -48,6 +48,8 @@ if ($id_article) {
 		        $annee_redac = $regs[1];
 		        if ($annee_redac > 4000) $annee_redac -= 9000;
 		}
+		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$id_secteur = $row_rub['id_secteur'];
 		$extra=$row["extra"];
 
 		$query = "SELECT * FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur";

@@ -84,12 +84,16 @@ function extra_saisie($extra, $type='article', $ensemble='') {
 	else if (isset($GLOBALS['champs_extra_proposes'][$type]['tous'])) {
 		$champs_proposes = explode('|', $GLOBALS['champs_extra_proposes'][$type]['tous']);
 	}
+
 	// sinon tous les champs extra du type
 	else {
 		$champs_proposes =  Array();
 		reset($champs);
 		while (list($ch, ) = each($champs)) $champs_proposes[] = $ch;
 	}
+
+	// bug explode
+	if($champs_proposes == explode('|', '')) $champs_proposes = Array();
 
 	// maintenant, on affiche les formulaires pour les champs renseignes dans $extra
 	// et pour les champs proposes
