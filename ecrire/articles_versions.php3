@@ -79,7 +79,7 @@ foreach ($textes as $var => $t) $$var = $t;
 
 
 
-debut_page(_L('R&eacute;visions :')." &laquo; $titre &raquo;", "documents", "articles");
+debut_page(_T('info_historique')." &laquo; $titre &raquo;", "documents", "articles");
 
 debut_grand_cadre();
 
@@ -163,7 +163,7 @@ if ($descriptif OR $url_site OR $nom_site) {
 echo "</td>";
 
 echo "<td align='center'>";
-icone(_L("Retour &agrave; l'article"), "articles.php3?id_article=$id_article", "", "article-24.gif");
+icone(_T('icone_retour_article'), "articles.php3?id_article=$id_article", "", "article-24.gif");
 echo "</td>";
 
 echo "</tr></table>";
@@ -188,7 +188,7 @@ while ($row = spip_fetch_array($result)) {
 		$link = new Link();
 		$link->addVar('id_version', $version_aff);
 		$link->delVar('id_diff');
-		echo "<a href='".$link->getUrl('diff')."' title=\""._L("Afficher cette version")."\">$date</a>";
+		echo "<a href='".$link->getUrl('diff')."' title=\""._T('info_historique_affiche')."\">$date</a>";
 	}
 	else {
 		echo "<b>$date</b>";
@@ -199,13 +199,14 @@ while ($row = spip_fetch_array($result)) {
 		if ($version_aff != $id_version) {
 			echo " <span class='verdana2'>";
 			if ($version_aff == $id_diff) {
-				echo "<b>("._L("comparaison").")</b>";
+				echo "<b>("._T('info_historique_comparaison').")</b>";
 			}
 			else {
 				$link = new Link();
 				$link->addVar('id_version', $id_version);
 				$link->addVar('id_diff', $version_aff);
-				echo "(<a href='".$link->getUrl('diff')."' title=\""._L("Afficher les modifications d'avec cette version")."\">"._L("comparaison")."</a>)";
+				echo "(<a href='".$link->getUrl('diff').
+				"'>"._T('info_historique_comparaison')."</a>)";
 			}
 			echo "</span>";
 		}

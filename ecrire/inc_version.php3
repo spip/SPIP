@@ -13,11 +13,11 @@ define("_ECRIRE_INC_VERSION", "1");
 
 function magic_unquote($table) {
 	if (is_array($GLOBALS[$table])) {
-	        reset($GLOBALS[$table]);
-	        while (list($key, $val) = each($GLOBALS[$table])) {
-	        	if (is_string($val))
+		reset($GLOBALS[$table]);
+		while (list($key, $val) = each($GLOBALS[$table])) {
+			if (is_string($val))
 				$GLOBALS[$table][$key] = stripslashes($val);
-	        }
+		}
 	}
 }
 
