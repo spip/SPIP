@@ -1,6 +1,11 @@
 <form action="[(#ENV{url})]" method="post" name="formulaire">[
 <input type="hidden" name="alea" value="(#ENV{alea})" />][
 <input type="hidden" name="hash" value="(#ENV{hash})" />][
+<input type="hidden" name="forum_id_article" value="(#ENV{id_article})" />][
+<input type="hidden" name="forum_id_breve" value="(#ENV{id_breve})" />][
+<input type="hidden" name="forum_id_syndic" value="(#ENV{id_syndic})" />][
+<input type="hidden" name="forum_id_rubrique" value="(#ENV{id_rubrique})" />][
+<input type="hidden" name="forum_id_forum" value="(#ENV{id_forum})" />][
 <input type="hidden" name="retour_forum" value="(#ENV{retour_forum})" />
 ][<p>(#ENV*{modere})</p>
 ][(#ENV*{afficher_texte_hidden})

@@ -40,7 +40,11 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
 		return '';
 
-	list($titre, $table, $forums_publics) = $r;
+	list ($titre, $table, $forums_publics) = $r;
+
+	// Attention id_rubrique est passe pour les articles => on n'en veut pas
+	if ($idr > 0 AND ($ida OR $idb OR $ids))
+		$idr = 0;
 
 	return
 		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids,
@@ -48,8 +52,15 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 }
 
 function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $url) {
+	global $REMOTE_ADDR, $afficher_texte, $_COOKIE, $_POST;
 
-	global $REMOTE_ADDR, $afficher_texte, $_COOKIE;
+	// Recuperer les donnees postees du formulaire ou, a defaut, du contexte
+	foreach (array('id_article', 'id_breve', 'id_syndic',
+	'id_rubrique', 'id_forum') as $id)
+		if (isset($_POST['forum_'.$id]))
+			$$id = intval($_POST['forum_'.$id]);
+		else
+			$$id = intval($$id);
 
 	// url de reference
 	if (!$url) {
@@ -75,12 +86,6 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"])) {
 		return array('formulaire_login_forum', 0, array());
 	}
-
-	$id_rubrique = intval($id_rubrique);
-	$id_forum = intval($id_forum);
-	$id_article = intval($id_article);
-	$id_breve = intval($id_breve);
-	$id_syndic = intval($id_syndic);
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
@@ -225,6 +230,13 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		'url' =>  $url,
 		'url_site' => ($url_site ? $url_site : "http://"),
 
+		# id de reference
+		'id_article' => $id_article,
+		'id_breve' => $id_breve,
+		'id_syndic' => $id_syndic,
+		'id_rubrique' => $id_rubrique,
+		'id_forum' => $id_forum,
+
 		## gestion des la variable de personnalisation $afficher_texte
 		# mode normal : afficher le texte en < input text >, cf. squelette
 		'afficher_texte_input' => (($afficher_texte <> 'non') ? '&nbsp;' : ''),
@@ -347,10 +359,7 @@ function afficher_petits_logos_mots($id_mot) {
 function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 
 	// changer la table de reference s'il y a lieu (pour afficher_groupes[] !!)
-	if ($idr) {
-		$r = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $idr";
-		$table = "rubriques";
-	} else if ($ida) {
+	if ($ida) {
 		$r = "SELECT titre FROM spip_articles WHERE id_article = $ida";
 		$table = "articles";
 	} else if ($idb) {
@@ -359,6 +368,9 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	} else if ($ids) {
 		$r = "SELECT nom_site AS titre FROM spip_syndic WHERE id_syndic = $ids";
 		$table = "syndic";
+	} else if ($idr) {
+		$r = "SELECT titre FROM spip_rubriques WHERE id_rubrique = $idr";
+		$table = "rubriques";
 	}
 
 	if ($idf)
