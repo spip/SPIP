@@ -17,12 +17,14 @@ if (defined("_INC_SITES")) return;
 define("_INC_SITES", "1");
 
 
-if ($supprimer_lien = $GLOBALS["supprimer_lien"]) {
-	spip_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
-}
-
-if ($ajouter_lien = $GLOBALS["ajouter_lien"]) {
-	spip_query("UPDATE spip_syndic_articles SET statut='publie' WHERE id_syndic_article='$ajouter_lien'");
+// Moderation manuelle des liens
+if (!_DIR_RESTREINT AND $GLOBALS['connect_statut'] == '0minirezo') {
+	if ($supprimer_lien = $GLOBALS["supprimer_lien"])
+		spip_query("UPDATE spip_syndic_articles SET statut='refuse'
+		WHERE id_syndic_article='$supprimer_lien'");
+	if ($ajouter_lien = $GLOBALS["ajouter_lien"])
+		spip_query("UPDATE spip_syndic_articles SET statut='publie'
+		WHERE id_syndic_article='$ajouter_lien'");
 }
 
 //
@@ -286,7 +288,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		list($channel_head,$drop) = split($syndic_regexp['item'], $le_retour, 2);
 		if (ereg($syndic_regexp['author1'],$channel_head,$mat)) {
 			if (ereg($syndic_regexp['author2'],$mat[1],$match))
-				$les_auteurs_du_site = addslashes(filtrer_entites($match[1]));
+				$les_auteurs_du_site = $match[1];
 	}
 		$i = 0;
 		while (ereg($syndic_regexp['item'],$le_retour,$regs)) {
@@ -309,14 +311,15 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					if (ereg($syndic_regexp['link2'], $link_match, $mat))
 						$le_lien = addslashes(filtrer_entites($mat[1]));
 				}
-				else if (ereg("<guid>([^<]*)</guid>",$item[$i],$match))
+				// guid n'est un URL que si marque de <guid permalink="true">
+				else if (eregi("<guid.*>([^<]*)</guid>",$item[$i],$match))
 					$le_lien = addslashes(filtrer_entites($match[1]));
 				else continue;
 
 				// Titre (obligatoire)
 				if
 (ereg("<title>[[:space:]]*(<\!\[CDATA\[)?(([^]]|][^]]|]{2}[^>]|(\[([^]])*]))*)(]{2}>)?[[:space:]]*</title>",$item[$i],$match))
-					$le_titre = addslashes(supprimer_tags(filtrer_entites($match[2])));
+					$le_titre = addslashes(trim(supprimer_tags(filtrer_entites($match[2]))));
 				else if (($syndic_version==0.3) AND (strlen($letitre)==0))
 					if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',$link_match,$mat))
 						$le_titre=$mat[1]; 
@@ -345,26 +348,47 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				// Auteur
 				if (ereg($syndic_regexp['author1'],$item[$i],$mat)) {
 					if (ereg($syndic_regexp['author2'],$mat[1],$match))
-						$les_auteurs = addslashes(filtrer_entites($match[1]));
+						$les_auteurs = $match[1];
 				}
 				else if (ereg($syndic_regexp['authorbis'],$item[$i],$match))
-					$les_auteurs = addslashes(filtrer_entites($match[1]));
+					$les_auteurs = $match[1];
 				else $les_auteurs = $les_auteurs_du_site;
 
 				// Description
 				if (ereg($syndic_regexp['description'],$item[$i],$match)) {
-					$la_description = couper(addslashes(supprimer_tags(filtrer_entites($match[2]))),300);
+					$la_description = addslashes(couper(supprimer_tags(filtrer_entites($match[2])),300));
 				}
-				elseif (ereg($syndic_regexp['descriptionbis'],$item[$i],$match))
-					$la_description = couper(addslashes(supprimer_tags(filtrer_entites($match[2]))),300);
-				else $la_description = "";
+				else if (ereg($syndic_regexp['descriptionbis'],$item[$i],$match)) {
+					$la_description = addslashes(couper(supprimer_tags(filtrer_entites($match[2])),300));
+				} else $la_description = "";
+
+				// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 				$query_deja = "SELECT * FROM spip_syndic_articles WHERE url='$le_lien' AND id_syndic=$now_id_syndic";
 				$result_deja = spip_query($query_deja);
 				if (spip_num_rows($result_deja) == 0 and !spip_sql_error()) {
-					$query_syndic = "INSERT INTO spip_syndic_articles (id_syndic, titre, url, date, lesauteurs, statut, descriptif) ".
-						"VALUES ('$now_id_syndic', '$le_titre', '$le_lien', FROM_UNIXTIME($la_date), '$les_auteurs', '$moderation', '$la_description')";
-					$result_syndic=spip_query($query_syndic);
+					spip_query("INSERT INTO spip_syndic_articles
+					(id_syndic, url, date, statut) VALUES
+					('$now_id_syndic', '$le_lien', FROM_UNIXTIME($la_date), '$moderation')");
 					$flag_ajout_lien = true;
+				}
+
+				// Mise a jour du contenu (titre,auteurs,description)
+				$les_auteurs = addslashes(trim(supprimer_tags(filtrer_entites($les_auteurs))));
+				spip_query ("UPDATE spip_syndic_articles SET
+				titre='$le_titre',
+				lesauteurs='$les_auteurs',
+				descriptif='$la_description'
+				WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
+
+				// Honorer le <lastbuilddate> en forcant la date
+				if (preg_match(',<(lastbuilddate|modified)>([^<>]+)</\1>,i',
+				$item[$i], $regs)
+				AND $lastbuilddate = strtotime(trim($regs[2]))
+				// pas dans le futur
+				AND $lastbuilddate < time()) {
+					spip_query("UPDATE spip_syndic_articles
+					SET date = FROM_UNIXTIME($lastbuilddate)
+					WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
