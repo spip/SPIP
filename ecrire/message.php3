@@ -438,7 +438,7 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1/
 
 	if ($expediteur == $connect_id_auteur OR ($type == 'affich' AND $connect_statut == '0minirezo')) {
 	  echo "\n<table align='right'><tr><td>";
-	  icone (_T('icone_modifier_message'), newLinkUrl("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
+	  icone (_T('icone_modifier_message'), ("message_edit.php3?id_message=$id_message"), "messagerie-24.gif", "edit.gif");
 	  echo "</td></tr></table>";
 	}
 	echo "</td></tr></table>";
