@@ -87,13 +87,16 @@ function xhtml ($buffer) {
 		fputs($f, $buffer);
 		fclose($f);
 		
-		exec("$tidy_command --char-encoding $enc_char --quote-nbsp false --show-body-only false --clean true --indent true --wrap false --output-xhtml true --add-xml-decl false -m $nomfich");
+		exec("$tidy_command --char-encoding $enc_char --quote-nbsp false --show-body-only false --indent true --wrap false --output-xhtml true --add-xml-decl false -m $nomfich");
 		
 		$tidy = join(file($nomfich),"");
 		@unlink($nomfich);
 		
 		$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		$tidy = ereg_replace ("\<\?xml([^\>]*)\>", "", $tidy);
+		//$tidy = ereg_replace ("\/\*\<\!\[CDATA\[\*\/\n*", "", $tidy);
+		//$tidy = ereg_replace ("\/\*\]\]>\*\/", "", $tidy);
+		
 		return $tidy;
 
 	}
