@@ -234,7 +234,7 @@ spip_log($commande);
 			$vignette = "$destination.jpg";
 
 			$handle = imagick_readimage($image);
-			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_UNKNOWN, 0);
+			imagick_resize($handle, $destWidth, $destHeight, IMAGICK_FILTER_QUADRATIC, 0.5);
 			imagick_write($handle, $vignette);
 		}
 		else
