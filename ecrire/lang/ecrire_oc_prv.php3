@@ -451,7 +451,6 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_popularite_2' => 'popularitat dau sit:',
 'info_popularite_3' => 'popularitat: @popularite@; vesitas: @visites@',
 'info_popularite_4' => 'popularitat: @popularite@; vesitas: @visites@',
-'info_popularite_5' => 'popularitat:',
 'info_post_scriptum' => 'Post-scriptum',
 'info_post_scriptum_2' => 'Post-scriptum:',
 'info_pour' => 'per',
@@ -894,7 +893,7 @@ dins lo repert&ograve;ri <i>ecrire/data/</i>.
  <li> la natura dau motor tipografic que SPIP deu utilizar per lo rendut dei t&egrave;xts;</li>
  <li> la lenga utilizada dins lei formularis dau sit public;</li>
  <li> la lenga presentada coma predefinida dins l\'espaci privat.</li></ul>',
-'texte_signification' => 'Lei barras rojas representan leis intradas cumuladas (totau dei sosrubricas), lei barras verdas lo nombre de vesitas per cada rubrica.',
+'texte_signification' => 'Lei barras escuras representan leis intradas cumuladas (totau dei sosrubricas), lei barras claras lo nombre de vesitas per cada rubrica.',
 'texte_sous_titre' => 'Sost&iacute;tol',
 'texte_statistiques_visites' => '(barras escuras:  dimenge / corba escura: evolucion de la mejana)',
 'texte_statut_attente_validation' => 'en esp&egrave;ra de validacion',

@@ -469,7 +469,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_popularite_2' => '&#31449;&#28857;&#27969;&#34892;:',
 'info_popularite_3' => '&#27969;&#34892;:&nbsp;@popularite@; &#35775;&#38382;:&nbsp;@visites@',
 'info_popularite_4' => '&#27969;&#34892;:&nbsp;@popularite@; &#35775;&#38382;:&nbsp;@visites@',
-'info_popularite_5' => '&#27969;&#34892;:',
 'info_post_scriptum' => '&#21518;&#35760;',
 'info_post_scriptum_2' => '&#21518;&#35760;:',
 'info_pour' => '&#20026;',
