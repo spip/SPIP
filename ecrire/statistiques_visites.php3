@@ -57,7 +57,7 @@ debut_gauche();
 	
 	// Par popularite
 	$articles_recents[] = "0";
-	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 0,20";
+	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 0,10";
 	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
 		$articles_recents[] = $row['id_article'];
@@ -84,7 +84,7 @@ debut_gauche();
 			$liste++;
 			$classement[$l_article] = $liste;
 			
-			if ($liste <= 20) {
+			if ($liste <= 30) {
 				$articles_vus[] = $l_article;
 			
 				if ($l_article == $id_article){
