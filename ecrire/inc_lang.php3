@@ -239,7 +239,6 @@ function traduire_nom_langue($lang) {
 	'ne' => "Nepali",
 	'nl' => "Nederlands",
 	'no' => "norsk",
-	'oci' => "occitan",
 	'oci_lnc' => "lengadocian",
 	'oci_ni' => "ni&ccedil;ard",
 	'oci_prv' => "proven&ccedil;au",
