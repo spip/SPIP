@@ -57,6 +57,7 @@ class Boucle {
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
+	var $nom_boucle; // seulement si boucle explicite
 	var $cond_avant, $cond_apres; // tableaux d'objets
 	var $fonctions;  // filtre explicites
 	var $etoile;
@@ -80,15 +81,13 @@ class Champ {
 // Si ca reference un champ SQL, on le memorise dans la structure $boucles
 // afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
 
-function index_pile($idb, $nom_champ, &$boucles) {
+function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	global $exceptions_des_tables, $table_des_tables, $tables_principales;
 
-	// Recherche d'un champ dans un etage superieur
 	$i = 0;
-	if ($c=strpos($nom_champ, ':')) {
-		$idbs = substr($nom_champ, 0, $c);
-		$nom_champ = substr($nom_champ, $c+1);
-		while (($idb != $idbs) && $idb) {
+	if ($$explicite) {
+	// Recherche d'un champ dans un etage superieur
+		while (($idb != $explicite) && $idb) {
 			$i++;
 			$idb = $boucles[$idb]->id_parent;
 		}
@@ -159,37 +158,39 @@ function champ_sql($champ, $p) {
 # Retourne une EXPRESSION php 
 function calculer_champ($p) {
 
+	$nom_champ = $p->nom_champ;
+
 	// regarder s'il existe une fonction personnalisee balise_NOM()
-	$f = 'balise_' . $p->nom_champ;
+	$f = 'balise_' . $nom_champ;
 	if (function_exists($f))
 		$p = $f($p);
 
 	else {
 	// regarder s'il existe une fonction standard balise_NOM_dist()
-	$f = 'balise_' . $p->nom_champ . '_dist';
+	$f = 'balise_' . $nom_champ . '_dist';
 	if (function_exists($f))
 		$p = $f($p);
 
 	else {
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $p->nom_champ))
+	if (ereg('^LOGO_', $nom_champ))
 		$p = calcul_balise_logo($p);
 
 	else {
 	// On regarde ensuite s'il y a un champ SQL homonyme,
 	// et on definit le type et les traitements
-	$p->code = champ_sql($p->nom_champ, $p);
-	if (($p->code) && ($p->code != '$Pile[0][\''.$p->nom_champ.'\']')) {
+	$p->code = index_pile($p->id_boucle, $nom_champ, $p->boucles, $p->explicite);
+	if (($p->code) && ($p->code != '$Pile[0][\''.$nom_champ.'\']')) {
 
 		// Par defaut basculer en numerique pour les #ID_xxx
-		if (substr($p->nom_champ,0,3) == 'ID_') $p->statut = 'num';
+		if (substr($nom_champ,0,3) == 'ID_') $p->statut = 'num';
 	}
 
 	else {
 	// si index_pile a ramene le choix par defaut, 
 	// ca doit plutot etre un champ SPIP non SQL,
 	// ou ni l'un ni l'autre => on le renvoie sous la forme brute '#TOTO'
-	$p->code = "'#" . $p->nom_champ . "'";
+	$p->code = "'#" . $nom_champ . "'";
 	$p->statut = 'php';	// pas de traitement
 	
 	}}}}
