@@ -500,7 +500,8 @@ if (eregi('\(Win', $HTTP_SERVER_VARS['SERVER_SOFTWARE']))
 //
 function verifier_htaccess($rep) {
 	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
-	if (!@file_exists($htaccess)) {
+	if ((!@file_exists($htaccess)) AND 
+	    !defined('_ECRIRE_INSTALL') AND !defined('_TEST_DIRS')) {
 		spip_log("demande de creation de $htaccess");
 		if ($GLOBALS['hebergeur'] != 'nexenservices'){
 			if (!$f = fopen($htaccess, "w"))
