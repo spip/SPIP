@@ -68,7 +68,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_apresmidi' => 'bu&#7893;i chi&#7873;u',
 'cal_jour_entier' => '<NEW>jour entier',
 'cal_matin' => '<NEW>matin',
 'cal_par_jour' => '<NEW>calendrier par jour',
@@ -267,7 +267,7 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'forum_votre_email' => '&#272;&#7883;a ch&#7881; email c&#7911;a b&#7841;n:',
 'forum_votre_nom' => 'T&ecirc;n (hay b&iacute; danh):',
 'forum_vous_enregistrer' => 'Tr&#432;&#7899;c khi tham gia v&agrave;o di&#7877;n &#273;&agrave;n n&agrave;y, b&#7841;n ph&#7843;i ghi danh. N&#7871;u ch&#432;a ghi danh, b&#7841;n ph&#7843;i',
-'forum_vous_inscrire' => 'ghi danh tr&#432;&#7899;c',
+'forum_vous_inscrire' => '<MODIF>ghi danh tr&#432;&#7899;c',
 
 
 // I
@@ -358,8 +358,9 @@ C&aacute;m &#417;n s&#7921; tham gia c&#7911;a b&#7841;n.',
 'info_contact_developpeur' => 'Xin li&ecirc;n l&#7841;c v&#7899;i l&#7853;p tr&igrave;nh vi&ecirc;n.',
 'info_contenance' => 'Website c&oacute;:',
 'info_contribution' => 'th&#432; t&iacute;n c&#7911;a di&#7877;n &#273;&agrave;n',
-'info_copyright' => 'l&#224; nhu li&#7879;u mi&#7877;n ph&#237; ph&#7893; bi&#7871;n <a href=\'license.txt\'>theo gi&#7845;y ph&#233;p GPL.</a>',
+'info_copyright' => '<MODIF>l&#224; nhu li&#7879;u mi&#7877;n ph&#237; ph&#7893; bi&#7871;n <a href=\'license.txt\'>theo gi&#7845;y ph&#233;p GPL.</a>',
 'info_copyright_doc' => '&#272;&#7875; bi&#7871;t th&ecirc;m, xin v&agrave;o xem trang <a href=\'http://www.spip.net/vi\'>http://www.spip.net/vi</a>.',
+'info_copyright_gpl' => '<NEW>sous licence GPL',
 'info_cours_edition' => 'B&agrave;i c&#7911;a b&#7841;n &#273;ang so&#7841;n',
 'info_creer_repertoire' => 'Xin l&#7853;p ra m&#7897;t h&#7891; s&#417; hay m&#7897;t ng&#259;n mang t&#234;n:',
 'info_creer_repertoire_2' => 'trong ng&#259;n ph&#7909; <B>ecrire/data/</b>, k&#7871; &#273;&#243;',

@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Tornar a l\'interf&agrave;cia grafica completa',
 'access_mode_texte' => 'Afichar l\'interf&agrave;cia textuau simplificada',
+'admin_debug' => '<NEW>debug',
 'admin_modifier_article' => 'Modificar aqueth article',
 'admin_modifier_auteur' => 'Modificar aqueth autor',
 'admin_modifier_breve' => 'Modificar aquera br&egrave;va',
@@ -50,7 +51,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'barre_italic' => 'Hicar en {italics}',
 'barre_lien' => 'Transformar en [ligam ipert&egrave;xt->http://...]',
 'barre_lien_input' => 'Volhatz indicar l\'adrei&ccedil;a deu v&ograve;ste ligam (que podetz indicar ua adrei&ccedil;a web devath la forma http://www.lomensit.com o simplament indicar lo num&egrave;ro d\'un article d\'aqueth sit).',
-'barre_note' => 'Transformar en [[N&ograve;ta de bas de pagina]]',
+'barre_note' => 'Transformar en [[N&ograve;ta de p&egrave;]]',
 'barre_quote' => '<quote>Citar un messatge</quote>',
 'bouton_ajouter_document' => 'AJUSTAR UN DOCUMENT',
 'bouton_ajouter_image' => 'AJUSTAR UN IMATGE',
@@ -67,6 +68,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
+'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_jour_entier' => '<NEW>jour entier',
+'cal_matin' => '<NEW>matin',
+'cal_par_jour' => '<NEW>calendrier par jour',
+'cal_par_mois' => '<NEW>calendrier par mois',
+'cal_par_semaine' => '<NEW>calendrier par semaine',
 'confirm_changer_statut' => 'Atencion, qu\'avetz demandat de cambiar l\'estatut d\'aqueth element. E desiratz de contunhar? ',
 
 
@@ -271,7 +278,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
   aqueth forum, en perm&egrave;ras que\'vs cau registrar. Merc&eacute;s
   de marcar &ccedil;a devath l\'identificant personau qui avetz recebut.
  Se n\'&egrave;tz pas registrat/ada, qu\'ei necessari',
-'forum_vous_inscrire' => 'de vs\'inscr&iacute;ver</a> en perm&egrave;ras.',
+'forum_vous_inscrire' => '<MODIF>de vs\'inscr&iacute;ver</a> en perm&egrave;ras.',
 
 
 // I
@@ -329,6 +336,10 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_valider_message' => 'Validar aqueth messatge',
 'icone_visiter_site' => 'Vesitar',
 'icone_voir_en_ligne' => 'V&eacute;der en linha',
+'image_tourner_180' => '<NEW>Rotation 180&deg;',
+'image_tourner_droite' => '<NEW>Rotation 90&deg; &agrave; droite',
+'image_tourner_gauche' => '<NEW>Rotation 90&deg; &agrave; gauche',
+'img_indisponible' => '<NEW>image indisponible',
 'info_a_suivre' => 'DE SEGUIR&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
@@ -358,17 +369,20 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_contact_developpeur' => 'Volhatz contactar un desvolopaire.',
 'info_contenance' => 'Aqueth sit que contien:',
 'info_contribution' => 'Contribucions de forum',
-'info_copyright' => 'qu\'ei un logiciau liure distribuit <a href=\'copyright_fr.html\'>devath lic&eacute;ncia GPL.</a>',
+'info_copyright' => '<MODIF>qu\'ei un logiciau liure distribuit <a href=\'copyright_fr.html\'>devath lic&eacute;ncia GPL.</a>',
 'info_copyright_doc' => 'Per mei informacions, v&eacute;der lo sit <a href=\'http://www.spip.net/oc\'>http://www.spip.net/oc</a>.',
+'info_copyright_gpl' => '<NEW>sous licence GPL',
 'info_cours_edition' => 'Los v&ograve;stes articles en cors de redaccion',
 'info_creer_repertoire' => 'Volhatz crear un fichi&egrave;r o un repert&ograve;ri nomentat',
 'info_creer_repertoire_2' => 'laguens lo sosrepert&ograve;ri   <b>ecrire/data/</b>, puish:',
+'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descriptiu(s):',
 'info_description' => 'Descripcion:',
 'info_description_2' => 'Descripcion:',
 'info_dimension' => 'Dimensions:',
 'info_document' => 'Document ',
+'info_documents' => '<NEW>Documents',
 'info_echange_message' => 'SPIP que permet d\'escambiar messatges e de constituir forums privats de discussion entre los participants deu sit. Que podetz activar o desactivar aquera foncionalitat.',
 'info_ecire_message_prive' => 'Escr&iacute;ver un messatge privat',
 'info_email_invalide' => 'Adrei&ccedil;a e-mail invalida',
@@ -407,6 +421,9 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_langue_principale' => 'Lenga majorau deu sit',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pix&egrave;ls',
 'info_les_auteurs_1' => 'per @les_auteurs@ ',
+'info_logo_format_interdit' => '<NEW>Seuls les logos aux formats @formats@ sont autoris&eacute;s.',
+'info_logo_max_poids' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
+'info_logo_max_taille' => '<NEW>Les logos doivent obligatoirement faire moins de @maxi@ (ce fichier fait @actuel@).',
 'info_mail_fournisseur' => 'vos@hornider.com',
 'info_message_2' => 'MESSATGE',
 'info_message_supprime' => 'MESSATGE SUPRIMIT',
@@ -426,10 +443,12 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_nouveaux_messages' => 'QU\'AVETZ @total_messages@ MESSATGES NAUS',
 'info_numero_abbreviation' => 'N&deg;&nbsp;',
 'info_panne_site_syndique' => 'Sit sindicat en pana',
-'info_pense_bete' => 'N&Ograve;TA DE REMEMBRAN&Ccedil;A',
+'info_pense_bete' => 'MEMENTO',
 'info_petit_ecran' => 'Ecran petit ',
 'info_pixels' => 'pix&egrave;ls',
 'info_plusieurs_mots_trouves' => 'Mei d\'un mot clau trobat per "@cherche_mot@":',
+'info_popularite_5' => 'popularitat:',
+'info_portfolio' => '<NEW>Portfolio',
 'info_portfolio_automatique' => 'P&ograve;rtf&ograve;lio automatic:',
 'info_premier_resultat' => '[@debut_limit@ perm&egrave;rs resultats de @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ perm&egrave;rs resultats de @total@]',
@@ -457,7 +476,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_site_refuse' => 'Sit web arrefusat',
 'info_sites_referencer' => 'Referenciar un sit',
 'info_supprimer_vignette' => 'suprimir la vinheta',
-'info_symbole_bleu' => 'Lo simb&egrave;u <B>blau</b> que marca ua <B>n&ograve;ta de remembran&ccedil;a</b>: qu\'ei a d&iacute;ser un messatge tau v&ograve;ste usatge personau.',
+'info_symbole_bleu' => 'Lo simb&egrave;u <B>blau</b> que marca un <B>memento</b>: qu\'ei a d&iacute;ser un messatge tau v&ograve;ste usatge personau.',
 'info_symbole_jaune' => 'Lo simb&egrave;u <B>jaune</b> que marca un <B>anonci t&agrave; tots los redactors </b>: los administrators que\'u p&ograve;den modificar, cada redactor que\'u p&ograve;t v&eacute;der.',
 'info_symbole_vert' => 'Lo simb&egrave;u <B>verd</b> que marca los <B>messatges escambiats dab autes utilizaires</b> deu sit.',
 'info_syndication' => 'sindicacion:',
@@ -478,7 +497,8 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_visite' => 'vesita:',
 'info_visites' => 'vesitas:',
 'info_vos_rendez_vous' => 'Los v&ograve;stes rendetz-vos qui vienen',
-'infos_vos_pense_bete' => 'Las v&ograve;stas n&ograve;tas de remembran&ccedil;a',
+'info_zoom' => '<NEW>zoom',
+'infos_vos_pense_bete' => 'Los v&ograve;stes mementos',
 'item_breve_proposee' => 'Br&egrave;va perpausada',
 
 
@@ -489,7 +509,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'lien_icones_interface' => 'Las ic&ograve;nas de l\'interf&agrave;cia que son de <a href=\'http://jimmac.musichall.cz/\'>Jakub \'Jimmac\' Steiner</a>.',
 'lien_liberer' => 'liberar',
 'lien_liberer_tous' => 'liberar aqueths articles',
-'lien_nouvea_pense_bete' => 'NAV&Egrave;RA N&Ograve;TA ENT&Agrave; REMEMBR&Agrave;\'S ',
+'lien_nouvea_pense_bete' => 'MEMENTO NAU ',
 'lien_nouveau_message' => 'MESSATGE NAU',
 'lien_nouvelle_annonce' => 'ANONCI NAV&Egrave;TH',
 'lien_petitions' => 'PETICION',
@@ -604,12 +624,14 @@ e tornar connect&agrave;\'vs au sit.
 'pass_retour_public' => 'Tornar au sit public',
 'pass_rien_a_faire_ici' => 'Pas arren a har ac&iacute;.',
 'pass_vousinscrire' => 'Inscrive\'s sus aqueste sit',
+'precedent' => '<NEW>pr&eacute;c&eacute;dent',
 'previsualisation' => 'Previsualizacion',
 'previsualiser' => 'Previsualizar',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ vesitas; popularitat: @popularite@',
+'suivant' => '<NEW>suivant',
 
 
 // T
@@ -642,6 +664,7 @@ e tornar connect&agrave;\'vs au sit.
 'texte_inc_meta_1' => 'Lo sist&egrave;ma qu\'a rescontrat ua error dens l\'escritura deu fichi&egrave;r <code>ecrire/data/meta_cache.php3</code>.Volhatz, com administrator/tritz deu sit,',
 'texte_inc_meta_2' => 'verificar los drets d\'escritura',
 'texte_inc_meta_3' => 'dens lo repert&ograve;ri <code>ecrire/data/</code>.',
+'texte_plan_trad_note' => '',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'a la caisha de las d&egrave;ishas',
 'texte_statut_propose_evaluation' => 'perpausat per avaloracion',
@@ -662,7 +685,7 @@ e tornar connect&agrave;\'vs au sit.
 'titre_image_redacteur_02' => 'Redactor',
 'titre_image_visiteur' => 'Vesitaire',
 'titre_joindre_document' => 'J&Oacute;NHER UN DOCUMENT',
-'titre_liens_entrants' => 'Los ligams entrants uei lo dia',
+'titre_liens_entrants' => '<MODIF>Los ligams entrants uei lo dia',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_probleme_technique' => 'Atencion: un probl&egrave;ma tecnic (servider MySQL) qu\'empacha d\'accedir a aquera part deu sit. Merc&eacute;s de la v&ograve;sta indulg&eacute;ncia.',
 'titre_publier_document' => 'PUBLICAR UN DOCUMENT DENS AQUERA RUBRICA',
@@ -681,11 +704,27 @@ e tornar connect&agrave;\'vs au sit.
 
 
 // Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle' => '<NEW>boucle',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_code' => '<NEW>code',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>externe interdit',
 'zbug_erreur_boucle_double' => 'BLOCA@id@: definicion dobla',
 'zbug_erreur_boucle_fermant' => 'BLOCA@id@: lo tag barrader que manca',
 'zbug_erreur_boucle_syntaxe' => 'Sintaxi bloca incorr&egrave;cta',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
 'zbug_erreur_filtre' => 'Error: filtre <b>&laquo; @filtre@ &raquo;</b> non definit',
-'zbug_info_erreur_squelette' => 'Error suber lo sit'
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => 'Error suber lo sit',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_resultat' => '<NEW>r&eacute;sultat',
+'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 

@@ -14,7 +14,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'access_interface_graphique' => 'Terug naar de volledig grafische interface',
-'access_mode_texte' => '<NEW>Afficher l\'interface textuelle simplifi&eacute;e',
+'access_mode_texte' => 'Vereenvoudigde tekst interface weergeven',
+'admin_debug' => 'debug',
 'admin_modifier_article' => 'Artikel wijzigen',
 'admin_modifier_auteur' => 'Auteur wijzigen',
 'admin_modifier_breve' => 'Bericht wijzigen',
@@ -67,7 +68,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // C
-'confirm_changer_statut' => '<NEW>Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
+'cal_apresmidi' => 'namiddag',
+'cal_jour_entier' => 'hele dag',
+'cal_matin' => 'voormiddag',
+'cal_par_jour' => 'kalender per dag',
+'cal_par_mois' => 'kalender per maand',
+'cal_par_semaine' => 'kalender per week',
+'confirm_changer_statut' => 'Opgelet. Je hebt gevraagd de status van dit element te wijzigen. Wil je verdergaan ?',
 
 
 // D
@@ -271,7 +278,7 @@ Bedankt voor je deelname
   dit forum, dien je op voorhand te registreren. Gelieve
   hieronder je logingegevens in te vullen die je bezorgd werden
   Als je nog niet geregistreerd bent, dien je ',
-'forum_vous_inscrire' => 'je vooraf in te schrijven </a>.',
+'forum_vous_inscrire' => 'je inschrijven.',
 
 
 // I
@@ -329,6 +336,10 @@ Bedankt voor je deelname
 'icone_valider_message' => 'Bericht goedkeuren',
 'icone_visiter_site' => 'Bekijken',
 'icone_voir_en_ligne' => 'Online bekijken',
+'image_tourner_180' => '180&deg; draaien',
+'image_tourner_droite' => '90&deg; naar rechts draaien',
+'image_tourner_gauche' => '90&deg; naar links draaien',
+'img_indisponible' => 'beeld onbeschikbaar',
 'info_a_suivre' => 'TAKEN&raquo;',
 'info_a_valider' => '[ter goedkeuring]',
 'info_acces_interdit' => 'Geen toegang',
@@ -358,17 +369,20 @@ Bedankt voor je deelname
 'info_contact_developpeur' => 'Gelieve een ontwikkelaar te contacteren.',
 'info_contenance' => 'Deze site bevat:',
 'info_contribution' => 'Bijdragen aan het forum',
-'info_copyright' => 'is vrije software verdeeld <a href=\'copyright_fr.html\'>onder GPL-licentie.</a>',
+'info_copyright' => '@spip@ is vrije software @lien_gpl@ distributie.',
 'info_copyright_doc' => 'Voor meer informatie, kijk op de website <a href=\'http://www.spip.net/nl\'>http://www.spip.net/nl</a>.',
+'info_copyright_gpl' => 'onder GPL licentie',
 'info_cours_edition' => 'Je artikels in redactie',
 'info_creer_repertoire' => 'Gelieve een bestand of map aan te maken met de volgende naam:',
 'info_creer_repertoire_2' => 'binnen in de map <b>ecrire/data/</b>, vervolgens:',
+'info_creer_vignette' => 'automatische aanmaak miniatuur-afbeeldingen',
 'info_deplier' => 'Uitvouwen',
 'info_descriptif_nombre' => 'Beschrijving(en):',
 'info_description' => 'Beschrijving:',
 'info_description_2' => 'Beschrijving:',
 'info_dimension' => 'Afmetingen:',
 'info_document' => 'Document',
+'info_documents' => 'documenten',
 'info_echange_message' => 'SPIP voorziet in de mogelijkheid om berichten uit te wisselen en private discussieforums op te
     starten tussen de deelnemers aan de site.Wil je deze mogelijkheid aan- of uitzetten ?',
 'info_ecire_message_prive' => 'Een priv&eacute;-bericht schrijven',
@@ -408,6 +422,9 @@ Bedankt voor je deelname
 'info_langue_principale' => 'Hoofdtaal',
 'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
 'info_les_auteurs_1' => 'door @les_auteurs@',
+'info_logo_format_interdit' => 'Enkel logo\'s van het formaat @formats@ worden toegestaan.',
+'info_logo_max_poids' => 'Logo\'s mogen maximaal @maxi@ zijn (dit bestand is @actuel@).',
+'info_logo_max_taille' => 'Logo\'s mogen maximaal @maxi@ zijn (dit bestand is @actuel@).',
 'info_mail_fournisseur' => 'jullie@provider.be',
 'info_message_2' => 'BERICHT',
 'info_message_supprime' => 'VERWIJDERD BERICHT',
@@ -431,6 +448,8 @@ Bedankt voor je deelname
 'info_petit_ecran' => 'Klein scherm',
 'info_pixels' => 'pixels',
 'info_plusieurs_mots_trouves' => 'Meerdere trefwoorden gevonden voor "@cherche_mot@":',
+'info_popularite_5' => 'populariteit:',
+'info_portfolio' => 'Portfolio',
 'info_portfolio_automatique' => 'Automatische portfolio:',
 'info_premier_resultat' => '[@debut_limit@ eerste resultaten op @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ eerste resultaten op @total@]',
@@ -481,6 +500,7 @@ Bedankt voor je deelname
 'info_visite' => 'bezoek:',
 'info_visites' => 'bezoeke:',
 'info_vos_rendez_vous' => 'Je komende afsrpaken',
+'info_zoom' => 'zoom',
 'infos_vos_pense_bete' => 'Je memo\'s',
 'item_breve_proposee' => 'Bericht voorgesteld',
 
@@ -607,12 +627,14 @@ verbinding maken met de site
 'pass_retour_public' => 'Terrug aan publiek site',
 'pass_rien_a_faire_ici' => 'Niets te zoeken hier.',
 'pass_vousinscrire' => 'Bezig met registreren bij de site',
+'precedent' => 'vorige',
 'previsualisation' => 'voorafkijk',
 'previsualiser' => 'Vooraf tonen',
 
 
 // S
 'stats_visites_et_popularite' => '@visites@ bezoeken; populariteit: @popularite@',
+'suivant' => 'volgende',
 
 
 // T
@@ -687,11 +709,27 @@ verbinding maken met de site
 
 
 // Z
+'zbug_balise_b_aval' => '&nbsp;: komende opmaakcode B',
+'zbug_boucle' => 'lus',
+'zbug_boucle_recursive_undef' => 'niet gedefinieerde wederkerige lus',
+'zbug_champ_hors_boucle' => 'Veld @champ@ buiten de lus',
+'zbug_champ_hors_motif' => 'Veld @champ@ buiten een lus van motief @motif@',
+'zbug_code' => 'code',
+'zbug_critere_inconnu' => 'criterium onbekend @critere@',
+'zbug_distant_interdit' => 'externe niet toegestaan',
 'zbug_erreur_boucle_double' => 'BOUCLE@id@: dubbel gebruik',
 'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: sluitingshaakje ontbreekt',
 'zbug_erreur_boucle_syntaxe' => 'Onjuiste syntaxis van de lus',
+'zbug_erreur_execution_page' => 'uitvoeringsfout van deze pagina',
 'zbug_erreur_filtre' => 'Fout : de filter <b>&laquo; @filtre@ &raquo;</b> is niet gedefinieerd',
-'zbug_info_erreur_squelette' => 'Fout op de site'
+'zbug_erreur_meme_parent' => '{meme_parent} is enkel van toepassing op de lussen (FORUMS) en (RUBRIQUES)',
+'zbug_erreur_squelette' => 'Fout(en) in het sjabloon',
+'zbug_info_erreur_squelette' => 'Fout op de site',
+'zbug_inversion_ordre_inexistant' => 'Omkering van een ongekende orde',
+'zbug_parametres_inclus_incorrects' => 'Parameters voor insluiting niet correct',
+'zbug_resultat' => 'resultaat',
+'zbug_serveur_indefini' => 'SQL server niet gedefinieerd',
+'zbug_table_inconnue' => 'SQL tabel &laquo; @table@ &raquo; onbekend'
 
 );
 

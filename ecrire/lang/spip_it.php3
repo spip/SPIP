@@ -186,7 +186,7 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'form_deja_inscrit' => 'Sei gi&agrave; iscritto.',
 'form_email_non_valide' => 'L\'indirizzo email non &egrave; valido.',
 'form_forum_access_refuse' => 'Non hai pi&ugrave; accesso a questo sito.',
-'form_forum_bonjour' => 'Buongiorno,',
+'form_forum_bonjour' => 'Buongiorno @nom@,',
 'form_forum_email_deja_enregistre' => 'Questo indirizzo email &egrave; gi&agrave; registrato, puoi dunque utilizzare la tua password abituale.',
 'form_forum_identifiant_mail' => 'Il nuovo codice identificativo (ID) ti &egrave; stato appena inviato tramite email.',
 'form_forum_identifiants' => 'Dati personali',

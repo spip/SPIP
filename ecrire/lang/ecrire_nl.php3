@@ -339,7 +339,7 @@ De publieke forums kunnen per artikel toegestaan worden
   voor alle geregistreerde redacteurs. Hieronder kan je een
   extra forum aanmaken dat alleen bestemd is voor de beheerders.',
 'info_forum_statistiques' => 'Statistieken van de bezoeken',
-'info_forums_abo_invites' => '<NEW>Votre site comporte des forums sur abonnement&nbsp;; les visiteurs sont donc invit&eacute;s &agrave; s\'enregistrer sur le site public.',
+'info_forums_abo_invites' => 'Je site bevat forums met abonnement; bezoekers worden dus op de publieke site verzocht zich in te schrijven.',
 'info_gauche_admin_effacer' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p /> Ze geeft toegang tot verschillende onderhoudstaken. Voor sommige taken is een afzonderlijke aanmelding tot de site via FTP vereist.',
 'info_gauche_admin_tech' => '<b>Deze pagina is enkel toegankelijk voor beheerders van de site.</b><p /> Ze geeft toegang tot allerlei technische onderhoudstaken.
  Voor het uitvoeren van sommige taken zijn een afzonderlijke aanmelding en toegang tot je site via FTP nodig.',
@@ -466,7 +466,6 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_popularite_2' => 'populariteit van de site:',
 'info_popularite_3' => 'populariteit:&nbsp;@popularite@; bezoeken:&nbsp;@visites@',
 'info_popularite_4' => 'populariteit:&nbsp;@popularite@; bezoeken:&nbsp;@visites@',
-'info_popularite_5' => 'populariteit:',
 'info_post_scriptum' => 'Post-Scriptum',
 'info_post_scriptum_2' => 'Post-scriptum :',
 'info_pour' => 'voor',
@@ -480,7 +479,7 @@ De publieke forums kunnen per artikel toegestaan worden
  aan de nieuwe versie van SPIP.',
 'info_ps' => 'P.S',
 'info_publies' => 'Je gepubliceerde artikels',
-'info_question_accepter_visiteurs' => '<NEW>Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
+'info_question_accepter_visiteurs' => 'Als de sjablonen van je site voorzien dat bezoekers zich kunnen registreren zonder toegang tot de priv&eacute;-ruimte, activeer dan de volgende optie&nbsp;:',
 'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
 'info_question_inscription_nouveaux_redacteurs' => 'Aanvaard je inschrijvingen van nieuwe redacteurs vanop
  de publieke site? Indien wel, dan kunnen bezoekers

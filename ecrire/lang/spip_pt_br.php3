@@ -273,7 +273,7 @@ Obrigado por participar.
 'forum_votre_email' => 'Seu endere&ccedil;o de e-mail:',
 'forum_votre_nom' => 'Seu nome (ou apelido):',
 'forum_vous_enregistrer' => 'Para participar deste f&oacute;rum, voc&ecirc; precisa se cadastrar previamente. Por favor, informe abaixo o identificador pessoal que lhe foi fornecido. Se voc&ecirc; n&atilde;o est&aacute; cadastrado, voc&ecirc; precisa',
-'forum_vous_inscrire' => 'se cadastrar</a> previamente.',
+'forum_vous_inscrire' => 'cadastrar-se.',
 
 
 // I
@@ -366,8 +366,9 @@ Obrigado por participar.
 'info_contact_developpeur' => 'Por favor, contate um desenvolvedor.',
 'info_contenance' => 'Este site cont&eacute;m:',
 'info_contribution' => 'contribui&ccedil;&otilde;es de f&oacute;rum',
-'info_copyright' => '&eacute; um software livre distribu&iacute;do <a href=\'copyright_fr.html\'>sob licen&ccedil;a GPL.</a>',
+'info_copyright' => '@spip@ &eacute; um software livre distribu&iacute;do @lien_gpl@.',
 'info_copyright_doc' => 'Para mais informa&ccedil;&otilde;es, veja o site <a href=\'http://www.spip.net/fr\'>http://www.spip.net/</a>.',
+'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
 'info_cours_edition' => 'Suas mat&eacute;rias em fase de reda&ccedil;&atilde;o',
 'info_creer_repertoire' => 'Por favor, crie um arquivo ou diret&oacute;rio com o nome:',
 'info_creer_repertoire_2' => 'dentro do subdiret&oacute;rio <b>ecrire/data/</b>, e depois:',
