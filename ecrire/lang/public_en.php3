@@ -41,7 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // E
-'edition_mode_texte' => 'Text mode edition',
+'edition_mode_texte' => 'Text mode only',
 'en_reponse' => 'Replying to:',
 'en_resume' => 'Summary',
 'envoyer_message' => 'To send a message',
