@@ -119,13 +119,13 @@ debut_gauche();
 			
 		echo "</ol>";
 
-		echo "<i><b>Comment lire ce tableau</b><br>Le rang de l'article,
+		echo "<b>Comment lire ce tableau</b><br>Le rang de l'article,
 		dans le classement par popularit&eacute;, est indiqu&eacute; dans la
 		marge&nbsp;; la popularit&eacute; de l'article (une estimation du
 		nombre de visites quotidiennes qu'il recevra si le rythme actuel de
 		consultation se maintient) et le nombre de visites re&ccedil;ues
 		depuis le d&eacute;but sont affich&eacute;es dans la bulle qui
-		appara&icirc;t lorsque la souris survole le titre.</i>";
+		appara&icirc;t lorsque la souris survole le titre.";
 
 		echo "</font>";
 		echo "</font>";
