@@ -1,6 +1,7 @@
 <?php
 
 include ("inc_version.php3");
+include_ecrire ("inc_presentation.php3");
 
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
 #$lastmodified = filemtime("aide_index.php3");
@@ -18,16 +19,6 @@ if (_FILE_CONNECT) {
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
 if ($var_lang) changer_langue($var_lang);
-
-// Debut page
-function entetes_html() {
-	header('Content-Type: text/html; charset=utf-8');
-	echo '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">';
-	echo "<html dir=\"".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."\">";
-	echo "<head>";
-	echo "<title>"._T('info_aide_en_ligne')."</title>";
-}
-
 
 /////////////////////////////
 // La frame de base
@@ -451,7 +442,7 @@ else {
 			install_fin_html();
 		}
 	} else {
-		entetes_html();
+		echo debut_entete(_T('info_aide_en_ligne')); 
 		if ($frame == 'menu')
 			help_menu($aide, $html);
 		else if ($frame == 'body')

@@ -5,8 +5,6 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-
-
 function define_once ($constant, $valeur) {
 	if (!defined($constant)) define($constant, $valeur);
 }
@@ -221,8 +219,18 @@ $flag_ecrire = !@file_exists('./ecrire/inc_version.php3');
 # en fait flag_ecrire est une constante, equivalente a la nullite de:
 
 define_once('_DIR_RESTREINT', (!@is_dir('ecrire') ? "" : "ecrire/"));
-define('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
-define('_DIR_PREFIX2', _DIR_RESTREINT);
+
+// essai d'un SPip multi-site. Expérimental.
+
+if ($d = ($GLOBALS['HTTP_GET_VARS']['var_install']))
+  {
+    $d = substr($d,0,strrpos($d,'/')+1);
+    define('_DIR_PREFIX1', $d);
+    define('_DIR_PREFIX2', $d);
+    } else  {
+  define('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
+  define('_DIR_PREFIX2', _DIR_RESTREINT);
+ }
 
 if (@file_exists(_DIR_PREFIX2 . 'mes_options.php3')) {
 	include(_DIR_PREFIX2 . 'mes_options.php3');
@@ -286,7 +294,7 @@ define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
 
 define_once('_ACCESS_FILE_NAME', '.htaccess');
 define_once('_AUTH_USER_FILE', '.htpasswd');
-
+;
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
 // (utilise pour les modifs de la base de donnees)
@@ -1128,6 +1136,31 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 		$d = _DIR_IMG . "$chemin$nom.$format";
 		if (@file_exists($d)) return array(_DIR_IMG."$chemin", $nom, $format);
 	}
+}
+
+// Envoi des en-tetes
+
+function debut_entete($title)
+{
+// '<html xmlns:m="http://www.w3.org/1998/Math/MathML">'."\n".'<head>'."\n";
+
+//if (eregi("msie", $browser_name)) {
+// '<object id="mathplayer" classid="clsid:32F66A20-7614-11D4-BD11-00104BD3F987">'."\n".'</object>'."\n";
+// '<'.'?import namespace="m" implementation="#mathplayer"?'.'>'."\n"; 
+
+	$base=lire_meta("adresse_site");
+	if (!$base)
+		$base = dirname($GLOBALS['HTTP_SERVERS_VARS']['SCRIPT_NAME']);
+	else
+		$base .= '/' . (_DIR_RESTREINT ? '' : 'ecrire/');
+	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
+	@Header("Content-Type: text/html; charset=$charset");
+	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
+	  "<html dir=\"".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."\">\n" .
+	  "<head>\n" .
+#	  "<base href='$base' />\n" . #
+	  "<title>$title</title>\n" .
+	  "<meta http-equiv='Content-Type' content='text/html; charset=$charset'>\n";
 }
 
 ?>
