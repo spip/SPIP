@@ -144,6 +144,24 @@ function strtr2 ($texte, $trans) {
 	}
 }
 
+// transforme une chaine en entites unicode &#129;
+// a completer pour d'autres charsets...
+function entites_unicode($chaine) {
+	switch(lire_meta('charset')) {
+		case '':
+		case 'iso-8859-1':
+			while ($i=ord(substr($chaine,$p++)))
+				if ($i>127)
+					$s .= "&#$i;";
+				else
+					$s .= chr($i);
+			return $s;
+
+		default:
+			return "non".$chaine;
+	}
+}
+
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
 	$texte = ereg_replace("^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+", "", $texte);
