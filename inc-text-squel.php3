@@ -3,35 +3,36 @@
 function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
 	global $dossier_squelettes;
 
-	$l = '';
+	$criteres = '';
 	if ($params) {
-		reset($params);
 		foreach($params as $param) {
-			$var = $args[1];
-			$val = $args[3];
+			if (eregi("^([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^}]+))?$", $param, $args)) {
+				$var = $args[1];
+				$val = $args[3];
 
 				// Cas de la langue : passer $spip_lang
 				// et non table.lang (car depend de {lang_select})
-			if ($var =='lang') {
-				$critere_langue = "";
-				if ($val)
-					$l[] = "'\'lang\' => " . addslashes($val) . "'";
-				else
-					$l[] = "'\'lang\' => \''.\$GLOBALS[spip_lang].'\''";
-			}
+				if ($var =='lang') {
+					if ($val)
+						$l[] = "'\'lang\' => " . addslashes($val) . "'";
+					else
+						$l[] = "'\'lang\' => \''.\$GLOBALS[spip_lang].'\''";
+				}
 
-			else
+				else
 				if ($val)
 					$l[] = "'\'$var\' => " . addslashes($val) . "'";
 				else {
 					$l[] = "'\'$var\' => \'' . addslashes(" . index_pile($id_boucle, $var, $boucles) . ") .'\''";
 				}
 			}
-		$criteres = ("' ." . join(".', '.\n",$l) . ". '");
+		}
+		if ($l)
+			$criteres = ("' ." . join(".', '.\n",$l) . ". '");
 	}
 	return "\n'<".
 		"?php
-		\$contexte_inclus = array('.$criteres.');" .
+		\$contexte_inclus = array($criteres);" .
 		(($dossier_squelettes) ?
 		("
 			if (@file_exists(\'$dossier_squelettes/$fichier\')){
