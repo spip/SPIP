@@ -74,9 +74,22 @@
 	<br>
 </BOUCLE_breve>
 
+<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
+	<:en_reponse:>
+	<h2 class="titre-extrait"><a href="#URL_RUBRIQUE">#TITRE</a></h2>
+	[<div class="texte"><div class="extrait">(#TEXTE)</div></div>]
+	<br>
+</BOUCLE_rubrique>
+
+<BOUCLE_syndic(SITES) {id_syndic}>
+	<:en_reponse:>
+	<h2 class="titre-extrait"><a href="#URL_SYNDIC">#TITRE</a></h2>
+	<br>
+</BOUCLE_syndic>
+
 <BOUCLE_forum_parent(FORUMS) {id_forum}>
 	<:en_reponse:>
-	<h2 class="titre-extrait"><a href="#URL_BREVE">#TITRE</a></h2>
+	<h2 class="titre-extrait"><a href="#URL_FORUM">#TITRE</a></h2>
 	<div class="detail">
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
 	</div>

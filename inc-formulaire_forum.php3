@@ -77,7 +77,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	$previsu = ' ';
 
 	// Recuperer le message a previsualiser
-	if ($GLOBALS['HTTP_POST_VARS']['post_forum'])  {
+	if ($GLOBALS['HTTP_POST_VARS']['ajout_forum'])  {
 		$titre = $GLOBALS['HTTP_POST_VARS']['titre'];
 		$texte = $GLOBALS['HTTP_POST_VARS']['texte'];
 		$auteur = $GLOBALS['HTTP_POST_VARS']['auteur'];
@@ -99,13 +99,13 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 			// Verifier mots associes au message
 			if (is_array($ajouter_mot))
-				$mots = preg_replace('/[^0-9,]/', '', join(',',$ajouter_mot));
-			else $mots = '';
+			$mots = preg_replace('/[^0-9,]/', '', join(',',$ajouter_mot));
+			else $mots = '0';
 
 			// affichage {par num type, type, num titre,titre}
 			$result_mots = spip_query("SELECT id_mot, titre, type
 				FROM spip_mots
-				WHERE id_mot IN (0, $mots)
+				WHERE id_mot IN ($mots)
 				ORDER BY 0+type,type,0+titre,titre");
 			if (spip_num_rows($result_mots)>0) {
 				$previsu .= "<p>"._T('forum_avez_selectionne')."</p><ul>";
@@ -164,35 +164,36 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	else
 		$table = '';
 
-	return array(
-		     'formulaire_forum',
-		     0,
-		     array(
-		     'afficher_texte_input' => (($afficher_texte <> 'non') ? '&nbsp;' : ''),
-		     'afficher_texte_hidden' => 
-		     (($afficher_texte <> 'non') ? '' :
-		      (boutonne('hidden', 'titre', htmlspecialchars($titre)) .
-		       $table .
-		       "\n<br /><div align='right'>" .
-		       boutonne('submit', '', _T('forum_valider'), "class='spip_bouton'") .
-		       "</div>")), 
-		     'alea' => $alea,
-		     'auteur' => $auteur,
-		     'disabled' => ($forums_publics == "abo")? " disabled='disabled'" : '',
-		     'email_auteur' => $email_auteur,
-		     'hash' => $hash,
-		     'id_message' => $id_message,
-		     'modere' => (($forums_publics != 'pri') ? '' :
-				  _T('forum_info_modere')),
-		     'nom_site_forum' => $nom_site_forum,
-		     'previsu' => $previsu,
-		     'retour' => $retour,
-		     'table' => $table,
-		     'texte' => $texte,
-		     'titre' => $titre,
-		     'url' =>  $url,
-		     'url_site' => ($url_site ? $url_site : "http://")
-		     ));
+	return array('formulaire_forum', 0,
+	array(
+		'alea' => $alea,
+		'auteur' => $auteur,
+		'disabled' => ($forums_publics == "abo")? " disabled='disabled'" : '',
+		'email_auteur' => $email_auteur,
+		'hash' => $hash,
+		'modere' => (($forums_publics != 'pri') ? '' : _T('forum_info_modere')),
+		'nom_site_forum' => $nom_site_forum,
+		'previsu' => $previsu,
+		'retour' => $retour,
+		'table' => $table,
+		'texte' => $texte,
+		'titre' => $titre,
+		'url' =>  $url,
+		'url_site' => ($url_site ? $url_site : "http://"),
+
+		## gestion des la variable de personnalisation $afficher_texte
+		# mode normal : afficher le texte en < input text >, cf. squelette
+		'afficher_texte_input' => (($afficher_texte <> 'non') ? '&nbsp;' : ''),
+		# mode 'non' : afficher les elements en < input hidden >
+		'afficher_texte_hidden' => (($afficher_texte <> 'non') ? '' :
+			(boutonne('hidden', 'titre', htmlspecialchars($titre)) .
+				$table .
+				"\n<br /><div align='right'>" .
+				boutonne('submit', '', _T('forum_valider'),
+				"class='spip_bouton'") .
+				"</div>"))
+
+		));
 }
 
 
@@ -329,7 +330,7 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	if ($ida)
 		list($accepter_forum) = spip_fetch_array(spip_query(
 		"SELECT accepter_forum FROM spip_articles WHERE id_article=$ida"));
-	else
+	if (!$accepter_forum)
 		$accepter_forum = substr(lire_meta("forums_publics"),0,3);
 	// valeurs possibles : 'pos'teriori, 'pri'ori, 'abo'nnement
 	if ($accepter_forum == "non")
