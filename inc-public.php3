@@ -29,7 +29,7 @@ $fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
 $fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
 $fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
 if (strlen($fichier_cache) > 24)
-	$fichier_cache = substr(ereg_replace('([a-zA-Z]{0,3})[^-]*-', '\1-', $fichier_cache), -24);
+	$fichier_cache = substr(ereg_replace('([a-zA-Z0-9]{0,3})[^-]*-', '\1-', $fichier_cache), -24);
 $fichier_cache .= '.'.substr($md_cache, 1, 6);
 
 $subdir_cache = substr($md_cache, 0, 1);
