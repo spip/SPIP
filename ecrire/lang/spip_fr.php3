@@ -1333,7 +1333,7 @@ les images utilis&eacute;es dans les articles et les rubriques.',
 		Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
 		et administrateurs en d\'autres endroits de votre site
 		(programme externe de statistiques, par exemple).<p>
-		Si vous n\'en avez pas utilité, vous pouvez laisser cette option
+		Si vous n\'en avez pas utilit&eacute;, vous pouvez laisser cette option
 		&agrave; sa valeur par d&eacute;faut (pas de cr&eacute;ation 
 		des fichiers).',
 'texte_inc_auth_1' => 'Vous &ecirc;tes identifi&eacute; sous le
