@@ -36,9 +36,9 @@ function calculer_rubriques() {
 	// Publier et dater les rubriques qui ont un article publie
 	//
 
-	// Gerer les articles post-dates ?
+	// Afficher les articles post-dates ?
 	include_ecrire('inc_meta.php3');
-	$postdates = (lire_meta("post_dates") != "non") ?
+	$postdates = (lire_meta("post_dates") == "non") ?
 		"AND fille.date <= NOW()" : '';
 
 	$r = spip_query("SELECT rub.id_rubrique AS id, max(fille.date) AS date_h
