@@ -63,6 +63,7 @@ debut_gauche();
 
 	
 	// Par popularite
+	$articles_recents[] = "0";
 	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 0,20";
 	$result = spip_query($query);
 	while ($row = mysql_fetch_array($result)) {
@@ -80,7 +81,7 @@ debut_gauche();
 		echo "<div class='iconeoff' style='padding: 5px;'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo typo("Afficher les visites pour <b>les articles les plus populaires</b> et pour <b>les derniers articles publi&eacute;s&nbsp;:</b>");
-		echo "<ol style='padding-left:15;'>";
+		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
 		while ($row = mysql_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -150,7 +151,7 @@ debut_gauche();
 		echo "<div class='iconeoff' style='padding: 5px;'>";
 		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 		echo typo("Afficher les visites pour <b>les articles les plus visit&eacute;s depuis le d&eacute;but&nbsp;:</b>");
-		echo "<ol style='padding-left:15;'>";
+		echo "<ol style='padding-left:25 px;'>";
 		echo "<font size=1 color='#666666'>";
 
 		while ($row = mysql_fetch_array($result)) {
