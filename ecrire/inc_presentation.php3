@@ -1658,7 +1658,7 @@ function fin_grand_cadre(){
 
 function debut_cadre_formulaire(){
 	echo "\n<div style='width: 100%; border-top: 1px solid #aaaaaa; border-left: 1px solid #aaaaaa; border-right: 1px solid white; border-bottom: 1px solid white; margin: 0px; padding: 0px;'>";
-	echo "\n<div class='arial2' style='border: 1px dashed #666666; margin: 0px; padding: 10px; background-color:#e4e4e4;'>";
+	echo "\n<div class='verdana3' style='border: 1px dashed #666666; margin: 0px; padding: 10px; background-color:#e4e4e4;'>";
 }
 
 function fin_cadre_formulaire(){

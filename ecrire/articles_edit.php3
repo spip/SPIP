@@ -1,5 +1,3 @@
-
-
 <?php
 
 include ("inc.php3");
@@ -18,6 +16,8 @@ $articles_modif = lire_meta("articles_modif");
 
 // securite
 $id_article = intval($id_article);
+$id_rubrique = intval($id_rubrique);
+$lier_trad = intval($lier_trad);
 unset ($flag_editable);
 
 //
@@ -64,10 +64,70 @@ if ($id_article) {
 	}
 }
 else if ($new=='oui') {
+	if ($lier_trad) {
+		// Pas de langue choisie par defaut
+		$changer_lang = '';
+
+		// Recuperer les donnees de la traduction
+		$query = "SELECT * FROM spip_articles WHERE id_article=$lier_trad";
+		$result = spip_query($query);
+	
+		if ($row = spip_fetch_array($result)) {
+			$surtitre = $row["surtitre"];
+			$titre = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
+			$soustitre = $row["soustitre"];
+			$id_rubrique_trad = $row["id_rubrique"];
+			$descriptif = $row["descriptif"];
+			$nom_site = $row["nom_site"];
+			$url_site = $row["url_site"];
+			$chapo = $row["chapo"];
+			$texte = $row["texte"];
+			$ps = $row["ps"];
+			$date = $row["date"];
+			$date_redac = $row['date_redac'];
+			if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})",$date_redac,$regs)) {
+				$mois_redac = $regs[2];
+				$jour_redac = $regs[3];
+				$annee_redac = $regs[1];
+				if ($annee_redac > 4000) $annee_redac -= 9000;
+			}
+			$extra = $row["extra"];
+		}
+		$langues_autorisees = lire_meta('langues_multilingue');
+		
+		// Regler la langue, si possible
+		if (ereg(",$spip_lang,", ",$langues_autorisees,")) {
+			if (lire_meta('multi_articles') == 'oui') {
+				// Si le menu de langues est autorise sur les articles,
+				// on peut changer la langue quelle que soit la rubrique
+				$changer_lang = $spip_lang;
+			}
+			else if (lire_meta('multi_rubriques') == 'oui') {
+				// Chercher la rubrique la plus adaptee pour accueillir l'article
+				if (lire_meta('multi_secteurs' == 'oui')) 
+					$id_parent = 0;
+				else {
+					$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
+					$row_rub = spip_fetch_array(spip_query($query));
+					$id_parent = $row_rub['id_parent'];
+				}
+				$query = "SELECT id_rubrique FROM spip_rubriques WHERE lang='$spip_lang' AND id_parent=$id_parent";
+				if ($row_rub = spip_fetch_array(spip_query($query))) {
+					$id_rubrique = $id_secteur = $row_rub['id_rubrique'];
+					$changer_lang = 'herit';
+				}
+			}
+		}
+	}
+	else {
+		// Nouvel article : titre par defaut
+		$titre = filtrer_entites(_T('info_nouvel_article'));
+	}
+	if (!$id_secteur) {
+		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+		$id_secteur = $row_rub['id_secteur'];
+	}
 	$flag_editable = true;
-	$titre = filtrer_entites(_T('info_nouvel_article'));
-	$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-	$id_secteur = $row_rub['id_secteur'];
 }
 
 if (!$flag_editable) {
@@ -126,7 +186,7 @@ debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents"
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-	echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\" >";
+
 $parents="~ <img src='img_pack/racine-site-24.gif' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>"._T('lien_racine_site')."</B></A> ".aide ("rubhier")."<BR>".$parents;
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -302,7 +362,10 @@ echo "<P><HR><P>";
 	else if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
 
-	if ($lier_trad) echo "<INPUT TYPE='Hidden' NAME='lier_trad' VALUE='$lier_trad'>";
+	if ($lier_trad) {
+		echo "<INPUT TYPE='Hidden' NAME='lier_trad' VALUE='$lier_trad'>";
+		echo "<INPUT TYPE='Hidden' NAME='changer_lang' VALUE='$spip_lang'>";
+	}
 
 	if (($options == "avancees" AND $articles_surtitre != "non") OR $surtitre) {
 		echo "<B>"._T('texte_sur_titre')."</B>";
@@ -348,6 +411,8 @@ echo "<P><HR><P>";
 	echo "</SELECT><BR>\n";
 	echo _T('texte_rappel_selection_champs');
 	fin_cadre_relief();
+	
+	if ($new != 'oui') echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\" >";
 
 	if (($options == "avancees" AND $articles_descriptif != "non") OR $descriptif) {
 		echo "<P><B>"._T('texte_descriptif_rapide')."</B>";
