@@ -66,12 +66,6 @@ function cherche_image($id_objet, $type_objet) {
 	// cherche l'image liee a l'objet
 	$image[0] = cherche_image_nommee($type_objet.'on'.$id_objet);
 
-	// sinon eventuellement une image par defaut
-	if (!$image[0]) {
-		$id_objet = '-defaut';
-		$image[0] = cherche_image_nommee($type_objet.'on'.$id_objet);
-	}
-
 	// cherche un survol
 	if ($image[0]) {
 		$image[1] = cherche_image_nommee($type_objet.'off'.$id_objet);
