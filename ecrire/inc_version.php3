@@ -106,6 +106,7 @@ if ($flag_function_exists) {
 	$flag_wordwrap = function_exists("wordwrap");
 	$flag_apc = function_exists("apc_rm");
 	$flag_sapi_name = function_exists("php_sapi_name");
+	$flag_utf8_decode = function_exists("utf8_decode");
 }
 else {
 	$flag_gz = false;
