@@ -42,7 +42,6 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 		$titre=typo($row['titre']);
 		$lejour=journum($row['date']);
 		$lemois = mois($row['date']);		
-
 		if ($lemois == $mois_today) $les_articles["$lejour"].="<BR><A HREF='articles.php3?id_article=$id_article'><img src='img_pack/puce-verte.gif' width='7' height='7' border='0'> $titre</A>";
 	}
 
@@ -137,14 +136,14 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 				echo " <a href='message_edit.php3?rv=$annee_today-$mois_today-$jour&new=oui&type=affich'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'></a>\n";
 			echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
 			
-			if (strlen($les_rv["$jour"])>0){
-				echo $les_rv["$jour"];
+			if (strlen($les_rv[$j])>0){
+				echo $les_rv[$j];
 				echo "<hr noshade size=1>";
 			}
 
-			echo $les_articles["$jour"];
+			echo $les_articles[$j];
 
-			echo $les_breves["$jour"];
+			echo $les_breves[$j];
 			
 			echo "</FONT></TD>";
 			
