@@ -146,7 +146,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	fin_cadre_relief();
 	
-	if ($spip_ecran == "large") $rows = 30;
+	if ($spip_ecran == "large") $rows = 28;
 	else $rows = 15;
 	
 	echo "<B>Texte de la br&egrave;ve</B><BR>";
