@@ -1949,7 +1949,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 
 
-	echo "<td valign='middle'>";
+	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
 		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\"><img src='img_pack/tout-site.gif' border='0'></a>";
 
 		$id_rubrique = $GLOBALS['id_rubrique'];
@@ -1966,12 +1966,16 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		
 
 
-		echo"<img src='img_pack/rien.gif' width='10' />";
-
-		// Redacteur connecte
+		echo "<img src='img_pack/rien.gif' width='10' />";
 		echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\"><img src='img_pack/fiche-perso.gif' border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\">";
-		echo $GLOBALS["connect_nom"];
 		echo "</a>";
+		
+	echo "</td>";
+	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
+	
+		// Redacteur connecte
+		echo $GLOBALS["connect_nom"];
+	
 	
 	echo "</td>";
 
@@ -1979,7 +1983,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 
 	echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right;' valign='middle'>";
-
 
 			// Choix display
 		//	echo"<img src='img_pack/rien.gif' width='10' />";
@@ -2018,7 +2021,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 			echo "<img src='img_pack/barre-couleurs.gif' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\" alt='' width='70' height='10' border='0' usemap='#map_couleur'>";
 
 			// echo "<img src='img_pack/rien.gif' width='10' height='1' />";
-
 		echo "</td>";
 	//
 	// choix de la langue
