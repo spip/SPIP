@@ -5,7 +5,30 @@ define("_ECRIRE_INSTALL", "1");
 include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
 
-# utiliser_langue_visiteur(); # fait dans inc_presentation
+
+// Une fonction pour faciliter la recherche du login (superflu ?)
+function login_hebergeur() {
+	global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
+
+	// Lycos (ex-Multimachin)
+	if ($HTTP_X_HOST == 'membres.lycos.fr') {
+		ereg('^/([^/]*)', $REQUEST_URI, $regs);
+		$login_hebergeur = $regs[1];
+	}
+	// Altern
+	else if (ereg('altern\.com$', $SERVER_NAME)) {
+		ereg('([^.]*\.[^.]*)$', $HTTP_HOST, $regs);
+		$login_hebergeur = ereg_replace('[^a-zA-Z0-9]', '_', $regs[1]);
+	}
+	// Free
+	else if (ereg('^/([^/]*)\.free.fr/', $REQUEST_URI, $regs)) {
+		$login_hebergeur = $regs[1];
+	}
+
+	return $login_hebergeur;
+}
+
+
 
 if (_FILE_CONNECT) {
 	install_debut_html();
@@ -316,7 +339,7 @@ else if ($etape == 1) {
 	echo aide ("install1");
 
 	$adresse_db = 'localhost';
-	$login_db = $login_hebergeur;
+	$login_db = login_hebergeur();
 	$pass_db = '';
 
 	// Recuperer les anciennes donnees pour plus de facilite (si presentes)

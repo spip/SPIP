@@ -128,8 +128,39 @@ function generer_htpass($pass) {
 	else return '';
 }
 
-function gerer_htaccess()
-{
+//
+// Verifier la presence des .htaccess
+//
+function verifier_htaccess($rep) {
+	$htaccess = "$rep/" . _ACCESS_FILE_NAME;
+	if ((!@file_exists($htaccess)) AND 
+	    !defined('_ECRIRE_INSTALL') AND !defined('_TEST_DIRS')) {
+		spip_log("demande de creation de $htaccess");
+		if ($GLOBALS['hebergeur'] != 'nexenservices'){
+			if (!$f = fopen($htaccess, "w"))
+				echo "<b>" .
+				  _L("ECHEC DE LA CREATION DE $htaccess") .
+				  "</b>";
+			else
+			  {
+				fputs($f, "deny from all\n");
+				fclose($f);
+			  }
+		} else {
+			echo "<font color=\"#FF0000\">IMPORTANT : </font>";
+			echo "Votre h&eacute;bergeur est Nexen Services.<br />";
+			echo "La protection du r&eacute;pertoire <i>$rep/</i> doit se faire
+			par l'interm&eacute;diaire de ";
+			echo "<a href=\"http://www.nexenservices.com/webmestres/htlocal.php\"
+			target=\"_blank\">l'espace webmestres</a>.";
+			echo "Veuillez cr&eacute;er manuellement la protection pour
+			ce r&eacute;pertoire (un couple login/mot de passe est
+			n&eacute;cessaire).<br />";
+		}
+	}
+}
+
+function gerer_htaccess() {
 	$mode = lire_meta('creer_htaccess');
 	$r = spip_query("SELECT extension FROM spip_types_documents");
 	while ($e = spip_fetch_array($r)) {
@@ -141,6 +172,9 @@ function gerer_htaccess()
 	}
 	return $mode;
 }
+
+// En profiter pour verifier la securite de ecrire/data/
+verifier_htaccess(_DIR_SESSIONS);
 
 initialiser_sel();
 

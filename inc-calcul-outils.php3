@@ -24,11 +24,24 @@ tester_variable('espace_logos',3);
 tester_variable('espace_images',3);
 // HSPACE=xxx VSPACE=xxx pour les images integrees
 
+
+// Pour les documents comme pour les logos, le filtre |fichier donne
+// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
+// remarquable, mais a conserver pour compatibilite ascendante.
+// -> http://www.spip.net/fr_article901.html
+function calcule_fichier_logo($on) {
+	$r = ereg_replace("^" . _DIR_IMG, "", $on);
+	return $r;
+}
+
+
 //
 // Retrouver le logo d'un objet (et son survol)
 //
 
 function calcule_logo($type, $onoff, $id, $id_rubrique, $lien, $align, $ff){
+	include_ecrire('inc_logos.php3');
+
 	$table_logos = array (
 	'ARTICLE' => 'art',
 	'AUTEUR' =>  'aut',

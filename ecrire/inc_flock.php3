@@ -8,7 +8,7 @@ define("_ECRIRE_INC_FLOCK", "1");
 function spip_file_get_contents ($fichier) {
 	if (substr($fichier, -3) != '.gz') {
 		if (function_exists('file_get_contents')
-		AND $GLOBALS['os_serveur'] !='windows') # windows retourne ''
+		AND os_serveur != 'windows') # windows retourne ''
 			return @file_get_contents ($fichier);
 		else
 			return join('', @file($fichier));

@@ -38,6 +38,16 @@ function effacer_image($nom) {
 		@unlink(_DIR_IMG . $nom);
 }
 
+function creer_repertoire_documents($ext) {
+# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
+	$rep = _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
+	if (lire_meta("creer_htaccess") == 'oui') {
+		include_ecrire('inc_acces.php3');
+		verifier_htaccess($rep);
+	}
+	return $rep;
+}
+
 function tester_vignette ($test_vignette) {
 	global $djpeg_command, $cjpeg_command, $pnmscale_command;
 	// verifier les formats acceptes par GD
