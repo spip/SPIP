@@ -355,7 +355,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			echo "<P><TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0><TR><TD WIDTH=100% BACKGROUND=''>";
 			echo "<TABLE WIDTH=100% CELLPADDING=3 CELLSPACING=0 BORDER=0>";
 
-			bandeau_titre_boite($titre_table, false);
+			bandeau_titre_boite($titre_table, true);
 
 			if ($num_rows > $nombre_aff) {
 				echo "<tr><td background='' class='arial2' colspan=4>";
