@@ -287,7 +287,7 @@ function sql_parent($id_rubrique)
 {
   $row = spip_abstract_fetsel(array(id_parent), 
 			      array('rubriques'), 
-			      array("id_rubrique='$id_rubrique'"));
+			      array("id_rubrique=" . intval($id_rubrique)));
   return $row['id_parent'];
 }
 
@@ -295,7 +295,7 @@ function sql_rubrique($id_article)
 {
   $row = spip_abstract_fetsel(array('id_rubrique'),
 			      array('articles'),
-			      array("id_article='$id_article'"));
+			      array("id_article=" . intval($id_article)));
   return $row['id_rubrique'];
 }
 
@@ -340,7 +340,7 @@ function sql_chapo($id_article)
 {
   return spip_abstract_fetsel(array('chapo'),
 			      array('articles'),
-			      array("id_article='$id_article'",
+			      array("id_article=".intval($id_article),
 				    "statut='publie'"));
 }
 
@@ -351,8 +351,8 @@ function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
 		$row = spip_abstract_fetsel(array('lang'),
-			array('rubriques'),
-			array("id_rubrique='$id'"));
+					    array('rubriques'),
+					    array("id_rubrique=$id"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array ($id, $lang);
@@ -361,7 +361,7 @@ function sql_rubrique_fond($contexte, $lang) {
 	if ($id  = intval($contexte['id_breve'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
 			array('breves'), 
-			array("id_breve='$id'"));
+			array("id_breve=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -371,7 +371,7 @@ function sql_rubrique_fond($contexte, $lang) {
 	if ($id = intval($contexte['id_syndic'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique'),
 			array('syndic'),
-			array("id_syndic='$id'"));
+			array("id_syndic=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		$row = spip_abstract_fetsel(array('lang'),
 			array('rubriques'),
@@ -384,7 +384,7 @@ function sql_rubrique_fond($contexte, $lang) {
 	if ($id = intval($contexte['id_article'])) {
 		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
 			array('articles'),
-			array("id_article='$id'"));
+			array("id_article=$id"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
