@@ -689,6 +689,10 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 			echo "<br /><b>"._T('info_dimension')."</b><br />\n";
 			echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"$largeur\" size='5'>";
 			echo " x <input type='text' name='hauteur_document' class='fondl' style='font-size:9px;' value=\"$hauteur\" size='5'> "._T('info_pixels');
+		} else {
+			echo "<input type='hidden' name='descriptif_document' value='".entites_html($descriptif)."' />\n";
+			echo "<input type='hidden' name='largeur_document' value=\"$largeur\" />\n";
+			echo "<input type='hidden' name='hauteur_document' value=\"$hauteur\" />\n";
 		}
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
@@ -1025,7 +1029,7 @@ function afficher_case_document($id_document, $image_link, $redirect_url = "", $
 		if (strlen($descriptif) > 0) echo propre($descriptif)."<br />";
 
 		echo "<font size='2'>";
-		if ($options == "avanceees") {
+		if ($options == "avancees") {
 			if ($type_titre){
 				echo "$type_titre";
 			} else {
