@@ -260,6 +260,7 @@ function init_codes_langues() {
 	'pl' => "polski",
 	'ps' => "Pashto, Pushto",
 	'pt' => "Portugu&#234;s",
+	'pt_br' => "Portugu&#234;s do Brasil",
 	'qu' => "Quechua",
 	'rm' => "Rhaeto-Romance",
 	'rn' => "Kirundi",
