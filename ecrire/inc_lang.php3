@@ -17,7 +17,7 @@ function charger_langue($lang) {
 // Changer la langue courante
 //
 function changer_langue($lang) {
-	global $all_langs, $spip_lang_rtl;
+	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
  	if ($lang && ereg(",$lang,", ",$all_langs,")) {
 		$GLOBALS['spip_lang'] = $lang;
 		if ($lang == 'ar')
