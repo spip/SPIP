@@ -3,7 +3,7 @@
 include ("inc.php3");
 
 
-debut_page("Maintenance technique", "administration", "base");
+debut_page("Maintenance technique : gestion du cache", "administration", "base");
 
 
 echo "<br><br><br>";
