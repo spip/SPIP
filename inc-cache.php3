@@ -75,7 +75,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 
 // Securite : est sur que c'est un cache
 function retire_cache($cache) {
-	if ($GLOBALS['flag_ecrire']) return;
+	if (!_DIR_RESTREINT) return;
 	if (preg_match('|^' . _DIR_CACHE .
 		"([0-9a-f]/)?([0-9]+/)?[^.][\-_\%0-9a-z]+\.[0-9a-f]+(\.gz)?$|i",
 		       $cache)) {
@@ -87,7 +87,7 @@ function retire_cache($cache) {
 
 // Supprimer les caches marques "x"
 function retire_caches() {
-	if ($GLOBALS['flag_ecrire']) return;
+	if (!_DIR_RESTREINT) return;
 
 	// signaler
 	effacer_meta('invalider');
@@ -104,7 +104,7 @@ function retire_caches() {
 		foreach ($suppr as $cache => $ignore)
 			retire_cache($cache);
 		spip_query("DELETE FROM spip_caches WHERE "
-		.calcul_mysql_in('fichier', "'".join("','",$suppr)."'") );
+		.calcul_mysql_in('fichier', "'".join("','",array_keys($suppr))."'") );
 	}
 }
 

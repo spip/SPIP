@@ -69,7 +69,7 @@ function controler_forum($id_article, $retour) {
 				ask_php_auth(_T('forum_acces_refuse'),
 					     _T('forum_cliquer_retour',
 						array('retour_forum' => $retour)));
-				exit;		  
+				exit;
 			}
 		} else {
 			ask_php_auth(_T('forum_non_inscrit'),
@@ -90,8 +90,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 				VALUES ($id_mot, $id_message)");
 }
 
-function enregistre_forum()
-{
+function enregistre_forum() {
 	global $REMOTE_ADDR, $auteur_session,
 	  $afficher_texte, $ajouter_mot, $alea, $hash,
 	  $auteur, $confirmer_forum, $email_auteur,
