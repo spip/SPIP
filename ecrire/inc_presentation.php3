@@ -1943,7 +1943,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	else {
 		$style = "background-color: $couleur_claire";
 	}
-	echo "\n<div style=\"height: 27px; width: 100%; border-bottom: solid 1px white;$style\">";
+	echo "\n<div style=\"max-height: 40px; width: 100%; border-bottom: solid 1px white;$style\">";
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 
 

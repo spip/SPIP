@@ -438,9 +438,9 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$ret .= $texte;
 
 	if (!$flag_ecrire)
-		$style = "class='forml' style='vertical-align: top; margin-bottom: 5px; width: 120px;'";
+		$style = "class='forml' style='vertical-align: top; max-height: 24px; margin-bottom: 5px; width: 120px;'";
 	else if ($nom_select == 'var_lang_ecrire') 
-		$style = "class='verdana1' style='background-color: $couleur_foncee; border: 1px solid white; color: white; width: 100px;'";
+		$style = "class='verdana1' style='background-color: $couleur_foncee; max-height: 24px; border: 1px solid white; color: white; width: 100px;'";
 	else
 		$style = "class='fondl'";
 
