@@ -59,14 +59,15 @@ function charger_squelette ($squelette) {
 	$sourcefile = $squelette . ".$ext";
 
 	// le squelette est-il deja en memoire (<inclure> a repetition)
-	if (function_exists($nom)) return $nom;
+	if (function_exists($nom))
+		return $nom;
 
 	$phpfile = 'CACHE/skel_' . $nom . '.php';
 
 	// le squelette est-il deja compile et perenne ?
 	if (!squelette_obsolete($phpfile, $sourcefile)
-	      AND lire_fichier ($phpfile, $contenu,
-				array('critique' => 'oui', 'phpcheck' => 'oui'))) 
+	AND lire_fichier ($phpfile, $contenu,
+	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
 
 	// sinon, charger le compilateur et verifier que le source est lisible
@@ -81,31 +82,28 @@ function charger_squelette ($squelette) {
 	// Le point 1 exige qu'il soit lu dans tous les cas.
 	// Le point 2 exige qu'il soit lu apres inc-compilo
 	// (car celui-ci initialise $tables_principales) mais avant la compil
-
 	$f = $squelette . '_fonctions.php3';
 	if (file_exists($f)) include($f);
 
-	if (function_exists($nom))  return $nom;
+	// A quoi sert ce test ???
+	if (function_exists($nom)) return $nom;
 
 	$skel_code = calculer_squelette($skel, $nom, $ext, $sourcefile);
 
 	// Tester si le compilateur renvoie une erreur
-
-	if (!is_array($skel_code)) {
-// Parler au debugguer
-		$skel_php = "<"."?php\n" . $skel_code ."\n?".">";
-		if ($GLOBALS['var_debug'] AND 
-		    $GLOBALS['debug_objet'] == $nom AND 
-		    $GLOBALS['debug_affiche'] == 'code')
-			debug_dumpfile ($skel_php);
-		eval($skel_code);
+	if (is_array($skel_code))
+		erreur_squelette($skel_code[0], $skel_code[1]);
+	else {
+		if ($GLOBALS['var_debug']
+		AND $GLOBALS['debug_objet'] == $nom
+		AND $GLOBALS['debug_affiche'] == 'code')
+			debug_dumpfile ($skel_code);
+		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
-		  ecrire_fichier ($phpfile, $skel_php);		  
-		  return $nom;
+			ecrire_fichier ($phpfile, $skel_code);
+			return $nom;
 		}
 	}
-	erreur_squelette($skel_code[0], $skel_code[1]) ; 
-	return '';
 }
 
 # Provoque la recherche du squelette $fond d'une $lang donnee,
