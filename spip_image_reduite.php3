@@ -1,6 +1,5 @@
 <?php
 
-//$img = "IMG/rubon0.png"; 
 $img = $_GET['img'];
 $logo = $img;
 	
@@ -22,7 +21,8 @@ else { $img = $logo; $logo = _DIR_IMG . $logo;}
 if (@file_exists($logo) 
 	AND eregi("^(.*)\.(jpg|gif|png)$", $img, $regs) 
 	AND verifier_action_auteur("reduire $taille_x $taille_y", $hash, $hash_id_auteur)
-) {
+	) 
+	{
 
 	include_ecrire("inc_logos.php3");
 		$nom = $regs[1];

@@ -41,12 +41,12 @@ function enfant($collection){
 
 
 		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
-			$logo = get_image("rubon$id_rubrique");
+			include_ecrire("inc_logos.php3");
+			$logo = decrire_logo("rubon$id_rubrique");
 			if ($logo) {
 				$fichier = $logo[0];
-				$taille = $logo[1];
-				$taille_x = $taille[0];
-				$taille_y = $taille[1];
+				$taille_x = $logo[3];
+				$taille_y = $logo[4];
 				$taille = image_ratio($taille_x, $taille_y, 48, 36);
 				$w = $taille[0];
 				$h = $taille[1];
