@@ -5,11 +5,6 @@
 if (defined("_ECRIRE_INC_FILTRES")) return;
 define("_ECRIRE_INC_FILTRES", "1");
 
-//
-// Charger les charsets
-//
-include_ecrire("inc_charsets.php3");
-
 
 // Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
@@ -20,6 +15,21 @@ function corriger_entites_html($texte) {
 
 function entites_html($texte) {
 	return corriger_entites_html(htmlspecialchars($texte));
+}
+
+// Transformer les &eacute; dans le charset local
+function filtrer_entites($texte) {
+	include_ecrire('inc_charsets.php3');
+	// filtrer
+	$texte = html2unicode($texte);
+	// remettre le tout dans le charset cible
+	return unicode2charset($texte);
+}
+
+// Tout mettre en entites pour l'export backend (sauf iso-8859-1)
+function entites_unicode($texte) {
+	include_ecrire('inc_charsets.php3');
+	return charset2unicode($texte);
 }
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")

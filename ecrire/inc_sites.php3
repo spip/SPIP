@@ -91,11 +91,11 @@ function transcoder_page($texte) {
 	// decoder puis recoder
 	if (eregi('<\\?xml[[:space:]][^>]*(utf-8)', $texte, $regs)) {
 		$charset_page = $regs[1];
-		$texte = unicode2charset(entites_unicode($texte, $charset_page));
+		$texte = unicode2charset(charset2unicode($texte, $charset_page));
 	}
 	// Si le backend ne precise pas, on considere qu'il est iso-8859-1 : il faut
 	// alors forcer la conversion
-	else $texte = unicode2charset(entites_unicode($texte, 'iso-8859-1', true));
+	else $texte = unicode2charset(charset2unicode($texte, 'iso-8859-1', true));
 
 	return $texte;
 }
