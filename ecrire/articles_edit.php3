@@ -144,7 +144,7 @@ debut_cadre_formulaire();
 
 
 function mySel($varaut,$variable) {
-		$retour= " VALUE=\"$varaut\"";
+	$retour= " VALUE=\"$varaut\"";
 
 	if ($variable==$varaut) {
 		$retour.= " SELECTED";
@@ -243,6 +243,7 @@ function enfant($leparent){
 
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
+			$titre = substr($titre,0,54); // largeur maxi
 			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace$titre\n";
 		}
 		$premier = 0;
