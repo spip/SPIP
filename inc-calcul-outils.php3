@@ -137,9 +137,7 @@ function executer_balise_dynamique($nom, $args, $filtres) {
 		return
 		('<'.'?php 
 include_ecrire(\'inc_lang.php3\');
-lang_select(\''
-		. $GLOBALS["spip_lang"] 
-		. '\');
+lang_select($GLOBALS["spip_lang"]);
 include_local("'
 		. $file
 		. '");
