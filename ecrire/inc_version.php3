@@ -314,9 +314,9 @@ if ($flag_obgz) {
 	if ($use_gz) {
 		@ob_start("ob_gzhandler");
 	}
-	@header("Vary: Accept-Encoding");
+	@header("Vary: Cookie, Accept-Encoding");
 }
-
+else @header("Vary: Cookie");
 
 
 class Link {
