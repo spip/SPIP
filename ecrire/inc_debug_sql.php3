@@ -5,8 +5,6 @@
 if (defined("_INC_DEBUG_SQL")) return;
 define("_INC_DEBUG_SQL", "1");
 
-include_ecrire('inc_presentation.php3');
-
 // Si le code php produit des erreurs, on les affiche en surimpression
 // sauf pour un visiteur non admin (lui ne voit rien de special)
 // ajouter &var_debug=oui pour voir les erreurs et en parler sur spip@rezo.net
@@ -69,6 +67,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 		. "</b></font><br>"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
+		include_ecrire('inc_presentation.php3');
 		include_ecrire('inc_lang.php3');
 		utiliser_langue_visiteur();
 		$retour .= aide('erreur_mysql');
