@@ -336,8 +336,8 @@ function afficher_tranches_requete(&$query, $colspan) {
 
 		$texte .= "</td>\n";
 		$texte .= "</tr>\n";
-		
-		
+
+
 		if ($deb_aff != -1) {
 			$query = eregi_replace('LIMIT[[:space:]].*$', '', $query);
 			$query .= " LIMIT $deb_aff, $nb_aff";
@@ -357,10 +357,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
 	$activer_statistiques_ref = lire_meta("activer_statistiques_ref");
-	
+
 	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['coll'] == 0) OR lire_meta('multi_articles') == 'oui') {
 		$afficher_langue = true;
 		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
+		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
+		else $langue_defaut = lire_meta('langue_site');
 	}
 
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 3 : 2);
@@ -444,7 +446,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= "<img src='img_pack/admin-12.gif' alt='' width='12' height='12' title='"._T('titre_image_admin_article')."'>&nbsp;";
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif>".typo($titre)."</a>";
-			if ($afficher_langue) $s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
+			if ($afficher_langue AND $lang != $langue_defaut)
+				$s .= " <font size='1' color='#666666'>(".traduire_nom_langue($lang).")</font>";
 			if ($petition) $s .= " <Font size=1 color='red'>"._T('lien_petitions')."</font>";
 
 			$vals[] = $s;

@@ -57,19 +57,14 @@ function afficher_jour($jour){
 }
 
 if (($id_breve == 0) AND ($new == "oui")) {
-
-		if (lire_meta("multi_rubriques") == "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_new = $row['lang'];
-			$langue_choisie_new = 'non';
-		} else if ((lire_meta("multi_articles") == "oui") AND (ereg (",".$GLOBALS['auteur_session']['lang'].",", ",".lire_meta('multi_auth').","))) { // Verifier que la langue d'interface est autorisee
-			$langue_new = $GLOBALS['auteur_session']['lang'];
-			$langue_choisie_new = 'oui';
-		} else {
-			$langue_new = lire_meta('langue_site');
-			$langue_choisie_new = 'oui';
-		}
-
+	$id_rubrique = intval($id_rubrique);
+	$langue_new = '';
+	$result_lang_rub = spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	if ($row = spip_fetch_array($result_lang_rub)) {
+		$langue_new = $row["lang"];
+	}
+	$langue_choisie_new = 'non';
+	if (!$langue_new) $langue_new = lire_meta('langue_site');
 
 	$query="INSERT INTO spip_breves (titre, date_heure, id_rubrique, statut, lang, langue_choisie) VALUES ('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', '$langue_choisie_new')";
 	$result=spip_query($query);
@@ -291,12 +286,10 @@ if ($flag_mots!='non' AND $flag_editable AND $options == 'avancees') {
 // Langue de la breve
 //
 if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
-	
 	if ($changer_lang) {
-		spip_log ("breve $id_breve = $changer_lang");
-	if ($changer_lang != "herit") {
+		if ($changer_lang != "herit")
 			spip_query("UPDATE spip_breves SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_breve=$id_breve");
-		} else {
+		else {
 			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 			$langue_parent = $row['lang'];
 			spip_query("UPDATE spip_breves SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_breve=$id_breve");
@@ -306,17 +299,25 @@ if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
 	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_breves WHERE id_breve=$id_breve"));
 	$langue_breve = $row['lang'];
 	$langue_choisie_breve = $row['langue_choisie'];
-	
-	//	echo "[$langue_breve | $langue_choisie_breve]";
 
 	if ($langue_choisie_breve == 'oui') $herit = false;
 	else $herit = true;
-	
 
-	debut_cadre_enfonce("langues-24.gif");
-		echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
-		echo menu_langues('changer_lang', $langue_breve, _T('info_multi_cet_breve').' ', $herit);
-		echo "</font></center>\n";
+	debut_cadre_enfonce('langues-24.gif');
+
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC'>";
+	echo bouton_block_invisible('languesbreve');
+	echo "<FONT SIZE=2 FACE='Georgia,Garamond,Times,serif'><B>";
+	echo _T('titre_langue_breve');
+	echo "</B></FONT>";
+	echo "</TD></TR></TABLE>";
+
+	echo debut_block_invisible('languesbreve');
+	echo "<center><font face='Verdana,Arial,Helvetica,sans-serif' size='2'>";
+	echo menu_langues('changer_lang', $langue_breve, _T('info_multi_cet_breve').' ', $herit);
+	echo "</font></center>\n";
+	echo fin_block();
+
 	fin_cadre_enfonce();
 }
 
