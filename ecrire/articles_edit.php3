@@ -338,19 +338,6 @@ echo "<P><HR><P>";
 		$chapo = "";
 	}
 
-	if ($connect_statut=="0minirezo" AND $options=="avancees"){
-		if (strlen($virtuel) > 0) {
-			echo "<input type='checkbox' name='confirme_virtuel' value='oui' id='confirme-virtuel' checked>";
-		} else {
-			echo "<input type='checkbox' name='confirme_virtuel' value='oui' id='confirme-virtuel'>";
-		}
-		echo "<B><label for='confirme-virtuel'>Redirection</label></B>";
-		echo aide ("artvirt");
-		echo "<br>(Article virtuel&nbsp;: cet article sera r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais il sera redirig&eacute; vers une autre URL.)";
-		echo "<BR><INPUT TYPE='text' NAME='virtuel' CLASS='forml' VALUE=\"$virtuel\" SIZE='40'><P>";
-		echo "<HR>";
-	}
-
 	if (($articles_chapeau!="non") OR strlen($chapeau) > 0) {
 		echo "<B>Chapeau</B>";
 		echo aide ("artchap");
@@ -390,16 +377,45 @@ echo "<P><HR><P>";
 	echo $texte;
 	echo "</TEXTAREA><P>\n";
 
+	
+	if (($articles_ps!="non") OR strlen($ps) > 0) {
+		echo "<B>Post-Scriptum</B><BR>";
+		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='3' COLS='40' wrap=soft>";
+		echo $ps;
+		echo "</TEXTAREA><P>\n";
+	}else{
+			echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
+	}
 
-if (($articles_ps!="non") OR strlen($ps) > 0) {
-	echo "<B>Post-Scriptum</B><BR>";
-	echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='3' COLS='40' wrap=soft>";
-	echo $ps;
-	echo "</TEXTAREA><P>\n";
-}else{
-		echo "<INPUT TYPE='hidden' NAME='ps' VALUE=\"$ps\">";
 
-}
+	if ($connect_statut=="0minirezo" AND $options=="avancees"){
+		echo "<div style='border: 1px dashed #666666; background-color: #f0f0f0; padding: 5px;'>";
+		echo "<table width=100% cellspacing=0 cellpadding=0 border=0>";
+		echo "<tr><td valign='top'>";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		if (strlen($virtuel) > 0) {
+			echo "<input type='checkbox' name='confirme_virtuel' value='oui' id='confirme-virtuel' checked>";
+		} else {
+			echo "<input type='checkbox' name='confirme_virtuel' value='oui' id='confirme-virtuel'>";
+		}
+		echo "<B><label for='confirme-virtuel'>Redirection&nbsp;:</label></B>";
+		echo aide ("artvirt");
+		echo "</font>";
+		echo "</td>";
+		echo "<td width=10>&nbsp;</td>";
+		echo "<td valign='top'>";
+		if (strlen($virtuel) == 0) $virtuel = "http://";
+		echo "<INPUT TYPE='text' NAME='virtuel' CLASS='forml' style='font-size:9px;' VALUE=\"$virtuel\" SIZE='40'><P>";
+		echo "</td></tr></table>\n";
+		echo "<font face='verdana,arial,helvetica,sans-serif' size=2>";
+		echo "(<b>Article virtuel&nbsp;:</b> article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.)";
+		echo "</font>";
+		echo "</div>\n";
+	}
+
+
+
+
 
 	echo "<INPUT TYPE='Hidden' NAME='date' VALUE=\"$date\" SIZE='40'><P>";
 
