@@ -197,7 +197,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 		$formats_sortie = array('png','jpg','gif');
 	else
 		$formats_sortie = array('jpg','png','gif');
-
+		
 	if ($process == 'AUTO')
 		$process = lire_meta('image_process');
 
@@ -258,11 +258,26 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			}
 		}
 		if ($process == "netpbm") {
+			$format_sortie = "jpg";
+			$vignette = $destination.".".$format_sortie;
 			if ($format == "jpg") {
-				$vignette = $destination.".".$format;
 				exec("$djpeg_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
 				if (!@file_exists($vignette)) {
-					spip_log("echec netpbm sur $vignette");
+					spip_log("echec netpbm-jpg sur $vignette");
+					return;
+				}
+			} else if ($format == "gif") {
+				$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
+				exec("$giftopnm_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
+				if (!@file_exists($vignette)) {
+					spip_log("echec netpbm-gif sur $vignette");
+					return;
+				}
+			} else if ($format == "png") {
+				$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
+				exec("$pngtopnm_command $image | $pnmscale_command -width $destWidth | $cjpeg_command -outfile $vignette");
+				if (!@file_exists($vignette)) {
+					spip_log("echec netpbm-png sur $vignette");
 					return;
 				}
 			}
