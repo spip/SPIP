@@ -19,8 +19,8 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 
 		spip_timer('calculer_page');
 		$page = calculer_page($chemin_cache,
-				      array('fond' => $fond,
-					    'contexte' => $contexte),
+			array('fond' => $fond,
+				'contexte' => $contexte),
 			$delais,
 			$inclusion);
 
@@ -32,49 +32,26 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
 		.spip_timer('calculer_page')."): $log");
 
-		// on vient d'ecrire le cache : creer un .NEW fantome qui indique
-		// qu'il faut changer d'invalideur a la prochaine lecture et donner
-		// un invalideur 't' dans 1 heure
-		// NB: cet invalideur connait aussi la taille du fichier
+		// Nouveau cache : creer un invalideur 't' fixant la date
+		// d'expiration et la taille du fichier
 		if (@file_exists($chemin_cache)) {
-
-			$bedtime = time() + 3600;
+			// Ici on ajoute 3600s pour eviter toute concurrence
+			// entre un invalideur et un appel public de page
+			$bedtime = time() + $delais + 3600;
 			$taille = @filesize($chemin_cache);
 			$fichier = addslashes($chemin_cache);
 			spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille)
 			VALUES ('$fichier','$bedtime','t','$taille')");
-			@touch($chemin_cache.'.NEW');
 		}
 
 	} else {
-
-		// Le fichier compagnon NEW existe => ce cache est utilise
-		// pour la premiere fois : on change alors d'invalideur 't'
-		// pour le rendre plus perenne
-		if (@file_exists($chemin_cache.'.NEW')) {
-			spip_log ("premier acces: $chemin_cache (.NEW)");
-			// Attention ne pas mettre time()+$delais mais quelque chose
-			// de plus grand, sinon il y a risque de concurrence entre
-			// l'invalideur et un appel public de page ; plus on en ajoute
-			// et plus le cache est gros, mais plus il procure de resistance
-			// aux pannes, car le cache contiendra les pages calculees
-			// il y a moins de $conservation secondes.
-			// L'invalideur initial avait pour date time()+3600 : cf. 
-			$conservation = 3600 * 12;	// intval(sqrt(3600*12*$delais)) ?
-			$bedtime = time() + $delais + $conservation;
-			$fichier = addslashes($chemin_cache);
-			spip_query("UPDATE spip_caches SET id='$bedtime'
-				WHERE fichier='$chemin_cache' AND type='t'");
-			if ($GLOBALS['db_ok'])
-				@unlink($chemin_cache.'.NEW');
-		}
 
 		//
 		// Lire le fichier cache
 		//
 		lire_fichier ($chemin_cache, $page['texte']);
 		$lastmodified = max($lastmodified, @filemtime($chemin_cache));
-		# spip_log ("cache $chemin_cache $lasmodified");
+		# spip_log ("cache $chemin_cache $lastmodified");
 
 		//
 		// Lire sa carte d'identite & fixer le contexte global
