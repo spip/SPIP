@@ -37,7 +37,7 @@ function textebrut($texte) {
 
 // pour ceux qui aiment les liens qui ouvrent une nouvelle fenetre
 function liens_ouvrants ($texte) {
-	return ereg_replace("<a ([^>]*class=\"spip_out\")>",
+	return ereg_replace("<a ([^>]*class=\"spip_(out|url)\")>",
 		"<a \\1 target=\"_blank\">", $texte);
 }
 
