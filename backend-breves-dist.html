@@ -1,5 +1,4 @@
 <?php echo '<'.'?xml version="1.0" encoding="#CHARSET"?'.'>'; ?>
-
 <rss version="0.91">
 
 <channel>
@@ -23,6 +22,9 @@
 		<link>#URL_SITE_SPIP/#URL_BREVE</link>
 		<date>#DATE</date>
 		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_BREVE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#TEXTE|texte_backend)]</description>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
 	</item>
 	</BOUCLE1>
 </BOUCLE_rub>
@@ -33,6 +35,9 @@
 		<link>#URL_SITE_SPIP/#URL_BREVE</link>
 		<date>#DATE</date>
 		<description>[&lt;img src="#URL_SITE_SPIP/IMG/(#LOGO_BREVE|fichier)" align="left" hspace="4" vspace="4"&gt; ][(#TEXTE|texte_backend)]</description>
+		<dc:date>[(#DATE|date_iso)]</dc:date>
+		<dc:format>text/html</dc:format>
+		<dc:language>#LANG</dc:language>
 	</item>
 	</BOUCLE2>
 <//B_rub>

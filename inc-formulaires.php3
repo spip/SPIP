@@ -221,7 +221,7 @@ function reponse_signature($id_article) {
 				while ($row = spip_fetch_array($result_site)) {
 					$titre = $row['titre'];
 				}
-	
+
 				$link = new Link($url_page);
 				$link->addVar('val_confirm', $passw);
 				$url = $link->getUrl("sp$id_article");
