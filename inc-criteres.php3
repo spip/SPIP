@@ -265,7 +265,6 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 		if ($order) {
 		  if ($boucle->order) $boucle->order .= '.",".';
 		  $boucle->order .= $order;
-
 		}
 	}
 }
@@ -517,11 +516,9 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				if ($match[4] == '!') {
 					$where = "NOT ($where)";
 				} else {
-					if (!$boucle->order) {
-						$boucle->order = 'rang';
-						$boucle->select[] =
+					$boucle->default_order = 'rang';
+					$boucle->select[] =
 						"FIND_IN_SET($col, \\\"$val\\\") AS rang";
-					}
 				}
 			} else {
 				if ($op == '==') $op = 'REGEXP';

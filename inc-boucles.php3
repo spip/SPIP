@@ -190,7 +190,7 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	// $hierarchie sera calculee par une fonction de inc-calcul-outils
 	$boucle->where[] = 'id_rubrique IN ($hierarchie)';
 	$boucle->select[] = 'FIND_IN_SET(id_rubrique, \'$hierarchie\')-1 AS rang';
-	$boucle->order = 'rang';
+	$boucle->default_order = 'rang';
 	$boucle->hierarchie = '$hierarchie = calculer_hierarchie('
 	. calculer_argument_precedent($boucle->id_boucle, 'id_rubrique', $boucles)
 	. ', '

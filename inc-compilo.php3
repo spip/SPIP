@@ -262,14 +262,15 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 	// hack critere recherche : ignorer la requete en cas de hash vide
 	// Recherche : recuperer les hash a partir de la chaine de recherche
-	if ($boucle->hash) {
+	if ($boucle->hash)
 		$init =  '
 	// RECHERCHE
 	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");
 	if ($rech_select) ';
-	}
 
-	else $init = '';
+	if (!$order = $boucle->order
+	AND !$order = $boucle->default_order)
+		$order = "''";
 
 	$init .= "\n\n	// REQUETE
 	\$result = spip_abstract_select(\n\t\tarray(\"". 
@@ -288,7 +289,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		"', $boucle->where) . '"')) .
 		"), # WHERE
 		'".addslashes($boucle->group)."', # GROUP
-		" . ($boucle->order ? $boucle->order : "''") .", # ORDER
+		" . $order .", # ORDER
 		" . (strpos($boucle->limit, 'intval') === false ?
 			"'".$boucle->limit."'" :
 			$boucle->limit). ", # LIMIT
