@@ -428,7 +428,7 @@ if ($image_supp) {
 }
 
 //
-// supprimer un doc
+// Supprimer un document
 //
 if ($doc_supp) {
 	// Securite
@@ -457,11 +457,9 @@ if ($doc_supp) {
 		}
 		spip_query("DELETE FROM spip_documents WHERE id_document=$id_vignette");
 		spip_query("DELETE FROM spip_documents_articles WHERE id_document=$id_vignette");
-		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$doc_supp");
-		spip_query("DELETE FROM spip_documents_breves WHERE id_document=$doc_supp");
+		spip_query("DELETE FROM spip_documents_rubriques WHERE id_document=$id_vignette");
+		spip_query("DELETE FROM spip_documents_breves WHERE id_document=$id_vignette");
 	}
-
-
 }
 
 
