@@ -136,6 +136,14 @@ function load_charset ($charset = 'AUTO') {
 			239=>'i', 241=>'n', 242=>'o', 243=>'o', 244=>'o', 245=>'o', 246=>'o',
 			248=>'o', 249=>'u', 250=>'u', 251=>'u', 252=>'u', 255=>'y',
 
+			// esperanto
+			264 => 'Cx',265 => 'cx',
+			284 => 'Gx',285 => 'gx',
+			292 => 'Hx',293 => 'hx',
+			308 => 'Jx',309 => 'jx',
+			348 => 'Sx',349 => 'sx',
+			364 => 'Ux',365 => 'ux',
+
 			// cyrillique
 			1026=>'D%', 1027=>'G%', 8218=>'\'', 1107=>'g%', 8222=>'"', 8230=>'...',
 			8224=>'/-', 8225=>'/=',  8364=>'EUR', 8240=>'0/00', 1033=>'LJ',
@@ -340,18 +348,19 @@ function translitteration ($texte, $charset='AUTO') {
 
 	// 2. translitterer
 	$trans = load_charset('translit');
-	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$i = $regs[1]]) {
-		$vu[$i] = true;
-		if ($s = $trans[$i])
-			$texte = ereg_replace($regs[0], $s, $texte);
+	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$j = $regs[0]]) {
+		$vu[$j] = true;
+		if ($s = $trans[$regs[1]])
+			$texte = ereg_replace($j, $s, $texte);
 		// on va tenter de trouver la translitteration ailleurs
 		// - dans iconv par exemple
-		else if ($GLOBALS['flag_iconv'] AND ($iconv = @iconv($charset, 'ASCII//TRANSLIT', $texte)) AND !ereg('^\?+$',$iconv)) {
-			$GLOBALS['CHARSET']['translit'][$i] = $iconv;
-				$texte = ereg_replace($regs[0], $iconv, $texte);
+		else if ($GLOBALS['flag_iconv'] AND ($iconv = @iconv('UTF-8', 'ASCII//TRANSLIT', unicode_to_utf_8($j))) AND !ereg('^\?+$',$iconv)) {
+			$GLOBALS['CHARSET']['translit'][$regs[1]] = $iconv;
+			$texte = ereg_replace($j, $iconv, $texte);
+			spip_debug("translitteration $j => '$iconv'");
 		} // supprimer les caracteres inconnus
 		else
-			$texte = ereg_replace($regs[0], '.', $texte);
+			$texte = ereg_replace($j, '.', $texte);
 	}
 	return $texte;
 }
