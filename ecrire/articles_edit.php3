@@ -327,7 +327,8 @@ function enfant($leparent){
 
 		if ($rubrique_acceptable) {
 			if ($i == 1 && !$premier) echo "<option value='$my_rubrique'>\n"; // sert a separer les secteurs
-			$titre = couper($titre." ", 50); // largeur maxi
+			// largeur maxi a 50
+			$titre = couper(extraire_multi($titre)." ", 50);
 			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
 			echo "<option".mySel($my_rubrique,$id_rubrique)." class='selec_rub' style=\"$style\">$espace".supprimer_tags($titre)."</option>\n";
 		}
