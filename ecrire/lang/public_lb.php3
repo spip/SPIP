@@ -15,16 +15,16 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucun_article' => '&Euml;t g&euml;t keen Artikel op d&euml;ser Adress',
 'aucun_auteur' => '&Euml;t g&euml;t keen Auteur op d&euml;ser Adress',
 'aucun_site' => '&Euml;t g&euml;t keen Site op d&euml;ser Adress',
-'aucune_breve' => '&Euml;t g&euml;t keng Kurzmeldung op d&euml;ser Adress',
+'aucune_breve' => '&Euml;t g&euml;t keng Kuurzmeldung op d&euml;ser Adress',
 'aucune_rubrique' => '&Euml;t g&euml;t keng Rubrik op d&euml;ser Adress',
-'autres_breves' => 'Aner Kurzmeldungen',
+'autres_breves' => 'Aner Kuurzmeldungen',
 'autres_groupes_mots_clefs' => 'Aner Schl&euml;sselwieder-Gruppen',
 'autres_sites' => 'Aner Siten',
 
 
 // B
 'bonjour' => 'Bonjour',
-'breves' => 'Kurzmeldungen',
+'breves' => 'Kuurzmeldungen',
 
 
 // C
@@ -34,17 +34,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // D
 'date' => 'Datum',
 'dernier_ajout' => 'L&auml;scht &Auml;nnerung',
-'dernieres_breves' => 'L&auml;scht Kurzmeldungen',
+'dernieres_breves' => 'L&auml;scht Kuurzmeldungen',
 'derniers_articles' => 'L&auml;scht Artikelen',
 'derniers_commentaires' => 'L&auml;scht Commentairen',
-'derniers_messages_forum' => 'L&auml;scht Messagen aus den Forum\'en',
+'derniers_messages_forum' => 'L&auml;scht Messagen aus de Forum\'en',
 
 
 // E
 'edition_mode_texte' => 'Editioun am Text-Modus vun',
 'en_reponse' => 'Als &Auml;ntwert un:',
 'en_resume' => 'Am R&eacute;sum&eacute;',
-'envoyer_message' => 'Een Message sch&eacute;cken',
+'envoyer_message' => 'E Message sch&eacute;cken',
 'espace_prive' => 'Privaten Deel',
 
 
@@ -53,17 +53,17 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // H
-'hierarchie_site' => 'Opbau vum Site',
+'hierarchie_site' => 'Struktur vum Site',
 
 
 // J
-'jours' => 'Deeg',
+'jours' => 'Deg',
 
 
 // M
 'meme_auteur' => 'Vum s&auml;lwechten Auteur',
 'meme_rubrique' => 'An der s&auml;lwechter Rubrik',
-'memes_auteurs' => 'Vun deenen s&auml;lwechten Auteur\'en',
+'memes_auteurs' => 'Vun de s&auml;lwechten Auteuren',
 'message' => 'Message',
 'messages_forum' => 'Messagen vum Forum',
 'messages_recents' => 'L&auml;scht Messagen aus de Forum\'en',
@@ -77,25 +77,25 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'nouveautes' => 'Neiegkeeten',
 'nouveautes_web' => 'Internet-Neiegkeeten',
 'nouveaux_articles' => 'Nei Artikelen',
-'nouvelles_breves' => 'Nei Kurzmeldungen',
+'nouvelles_breves' => 'Nei Kuurzmeldungen',
 
 
 // P
 'page_precedente' => 'l&auml;scht S&auml;it',
 'page_suivante' => 'n&auml;chst S&auml;it',
 'par_auteur' => 'vum',
-'participer_site' => 'Dir k&euml;nnt un d&euml;sem Site matschaffen an &auml;r Artikelen propos&eacute;ieren andem dat dier Iech hei aschreiwt. Dir kritt direkt een Email mat &auml;rem Login fir deen privaten Deel vum Site.',
+'participer_site' => 'Dir k&euml;nnt un d&euml;sem Site matschaffen an &auml;r Artikelen propos&eacute;ieren andem d&euml;r Iech hei aschreiwt. Dir kritt direkt en Email mat &auml;rem Login fir de privaten Deel vum Site.',
 'plan_site' => 'Plang vum Site',
 'popularite' => 'Popularit&eacute;it',
-'poster_message' => 'Een Message sch&eacute;cken',
+'poster_message' => 'E Message sch&eacute;cken',
 'proposer_site' => 'Dir k&euml;nnt e Site fir d&euml;s Rubrik uginn:',
 
 
 // R
 'repondre_article' => 'Op d&euml;sen Artikel &auml;ntweren',
-'repondre_breve' => 'Op d&euml;s Kurzmeldung &auml;ntweren',
+'repondre_breve' => 'Op d&euml;s Kuurzmeldung &auml;ntweren',
 'repondre_message' => 'Op d&euml;sen Message &auml;ntweren',
-'resultats_recherche' => 'Resultater vum Sichen',
+'resultats_recherche' => 'Resultater vun der Sich',
 'retour_debut_forums' => 'Zer&euml;ck op den Ufank vun de Forum\'en',
 'rubrique' => 'Rubrik',
 'rubriques' => 'Rubriken',
@@ -108,13 +108,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sous_rubriques' => '&Euml;nner-Rubriken',
 'suite' => 'weider',
 'sur_web' => 'Um Internet',
-'syndiquer_rubrique' => 'D&euml;s Rubrik syndik&eacute;ieren',
-'syndiquer_site' => 'Dee ganzen Site syndik&eacute;ieren',
+'syndiquer_rubrique' => 'D&euml;s Rubrik syndiqu&eacute;ieren',
+'syndiquer_site' => 'De ganzen Site syndiqu&eacute;ieren',
 
 
 // T
 'texte_lettre_information' => 'Hei ass d\'Newsletter vum Site',
-'texte_lettre_information_2' => 'D&euml;s Newsletter ass eng L&euml;scht vun den Artikelen a Kurzmeldungen zenter',
+'texte_lettre_information_2' => 'D&euml;s Newsletter ass eng L&euml;scht vun den Artikelen a Kuurzmeldungen z&euml;nter',
 
 
 // V
