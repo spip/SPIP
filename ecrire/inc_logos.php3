@@ -63,26 +63,23 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 	$logo_ok = get_image($logo);
 	if ($logo_ok) $survol_ok = get_image($survol);
 
-	if ($options == 'avancees' OR $logo_ok) {
-		echo "<p>";
-		debut_cadre_relief("image-24.gif");
-		echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
-		echo bouton_block_invisible(md5($texteon).",titrelogosurvol,".md5($texteoff));
-		echo $texteon;
-		echo "</b></center></font>";
-		afficher_logo($logo, $texteon);
+	echo "<p>";
+	debut_cadre_relief("image-24.gif");
+	echo "<font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><center><b>";
+	echo bouton_block_invisible(md5($texteon));
+	echo $texteon;
+	echo "</b></center></font>";
 
-		if (($options == 'avancees' AND $logo_ok) OR $survol_ok) {
-			echo debut_block_invisible("titrelogosurvol");
-			echo "<p align='center'><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><b>";
-			echo $texteoff;
-			echo "</b></font></p>";
-			echo fin_block();
-			afficher_logo($survol, $texteoff);
-		}
+	afficher_logo($logo, $texteon);
 
-		fin_cadre_relief();
+	if ($logo_ok OR $survol_ok) {
+		echo "<p align='center'><font size='2' FACE='Verdana,Arial,Helvetica,sans-serif'><b>";
+		echo bouton_block_invisible(md5($texteoff));
+		echo $texteoff;
+		echo "</b></font></p>";
+		afficher_logo($survol, $texteoff);
 	}
+	fin_cadre_relief();
 }
 
 function afficher_logo($racine, $titre) {

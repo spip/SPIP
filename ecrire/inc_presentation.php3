@@ -70,7 +70,14 @@ function debut_cadre($style, $icone, $fonction) {
 		if (strlen($icone)<3) $icone = "rien.gif";
 		$retour_aff .= "\n<table class='cadre' cellspacing='0'><tr>";
 		$retour_aff .= "\n<td class='$style-hg'></td>";
-		$retour_aff .= "\n<td class='$style-h'><img src='img_pack/$icone'></td>";
+		$retour_aff .= "\n<td class='$style-h'>";
+		if ($fonction) {
+			$retour_aff .= "<div style='background: url(img_pack/$icone) no-repeat; padding: 0px; margin: 0px;'>";
+			$retour_aff .= "<img src='img_pack/$fonction'>";
+			$retour_aff .= "</div>";
+		}
+		else $retour_aff .= "<img src='img_pack/$icone'>";
+		$retour_aff .= "</td>";
 		$retour_aff .= "\n<td class='$style-hd'></td></tr>";
 		$retour_aff .= "\n<tr><td class='$style-g'></td>";
 		$retour_aff .= "\n<td class='$style-c'>";
@@ -93,13 +100,13 @@ function fin_cadre($style) {
 
 function debut_cadre_relief($icone='', $return = false, $fonction=''){
 	global $spip_display;
-	if ($spip_display != 1){	
+	if ($spip_display != 1){
 		$retour_aff = debut_cadre('r', $icone, $fonction);
 	}
 	else {
 		$retour_aff = "<p><div style='border-right: 1px solid #cccccc; border-bottom: 1px solid #cccccc;'><div style='border: 1px solid #666666; padding: 5px; background-color: white;'>";
 	}
-	
+
 	if ($return) return $retour_aff;
 	else echo $retour_aff;
 }
