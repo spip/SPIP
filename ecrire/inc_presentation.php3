@@ -1311,7 +1311,6 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	global $options, $spip_display, $spip_ecran;
 	$activer_messagerie = lire_meta("activer_messagerie");
 	global $clean_link;
-	global $spip_ecran;
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
@@ -1320,6 +1319,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	$clean_link->delVar('set_options');
 	$clean_link->delVar('set_couleur');
 	$clean_link->delVar('set_disp');
+	$clean_link->delVar('set_ecran');
 	
 	if (strlen($adresse_site)<10) $adresse_site="../";
 

@@ -50,8 +50,8 @@ if ($prefs_mod) {
 	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
 }
 
-if ($set_ecran) {
-	setcookie('spip_ecran', $set_ecran);
+if ($set_ecran) {	// on pose un cookie long car ce reglage depend plus du navigateur que de l'utilisateur
+	setcookie('spip_ecran', $set_ecran, time() + 365 * 24 * 3600);
 	$spip_ecran = $set_ecran;
 }
 if (!$spip_ecran) $spip_ecran = "etroit";
