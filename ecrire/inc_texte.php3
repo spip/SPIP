@@ -739,7 +739,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 
 	// paragrapher
-	$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
+	if ($letexte = trim($letexte))
+		$letexte = '<p class="spip">'.ereg_replace('<p class="spip">', "</p>\n".'<p class="spip">',$letexte).'</p>';
 
 	// intertitres & hr compliants
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*___SPIP_debut_intertitre___', $debut_intertitre, $letexte);
