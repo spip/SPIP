@@ -44,12 +44,11 @@ if ($changer_config == 'oui') {
 	$requete_appliquer = '';
 	$accepter_forum = substr($forums_publics,0,3);
 	if ($forums_publics_appliquer == 'saufnon') {
-		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE NOT (accepter_forum='non')";
+		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
 	} else if ($forums_publics_appliquer == 'tous') {
 		$requete_appliquer = "UPDATE spip_articles SET accepter_forum='$accepter_forum'";
 	}
 	if ($requete_appliquer) spip_query($requete_appliquer);
-
 
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 

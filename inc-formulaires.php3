@@ -5,8 +5,6 @@
 if (defined("_INC_FORMULAIRES")) return;
 define("_INC_FORMULAIRES", "1");
 
-include_ecrire("inc_filtres.php3");
-
 function test_pass() {
 	include_ecrire("inc_acces.php3");
 	for (;;) {
@@ -14,7 +12,7 @@ function test_pass() {
 		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";
 		$result = spip_query($query);
 		if (!spip_num_rows($result)) break;
-	}	
+	}
 	return $passw;
 }
 
@@ -34,7 +32,7 @@ function test_login($mail) {
 		if (!spip_num_rows($result)) break;
 	}
 
-	return $login;		
+	return $login;
 }
 
 function erreur($zetexte){
@@ -45,8 +43,9 @@ function erreur($zetexte){
 function formulaire_signature($id_article) {
 	global $val_confirm, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page;
 
-		include_ecrire("inc_texte.php3");
+	include_ecrire("inc_texte.php3");
 	include_ecrire("inc_filtres.php3");
+	include_ecrire("inc_mail.php3");
 
 	echo "<a name='sp$id_article'></a>\n";
 
@@ -87,7 +86,7 @@ function formulaire_signature($id_article) {
 					$refus = "oui";
 				}
 			}
-			
+
 			if ($site_unique=="oui") {
 				$site=addslashes($url_site);
 				$query="SELECT * FROM spip_signatures WHERE id_article=$id_article AND url_site='$site' AND statut='publie'";
@@ -104,7 +103,7 @@ function formulaire_signature($id_article) {
 			else {
 				$query = "UPDATE spip_signatures SET statut=\"publie\" WHERE id_signature='$id_signature'";
 				$result = spip_query($query);
-			
+
 				$texte .= erreur("Votre signature est valid&eacute;e. Elle appara&icirc;tra lors de la prochaine mise &agrave; jour du site. Merci&nbsp;!");
 				$texte .= erreur("Your signature is now registered. Thank you!");
 			}
@@ -146,8 +145,8 @@ function formulaire_signature($id_article) {
 					$refus = "oui";
 				}
 			}
-			
-			if (! email_valide($adresse_email)) {
+
+			if (!email_valide($adresse_email)) {
 				$reponse_signature .= erreur("Votre adresse email n'est pas valide.");
 				$refus = "oui";
 			}
@@ -202,7 +201,6 @@ function formulaire_signature($id_article) {
 				$messagex .= "  your request will be discarded)\n\n";
 				$messagex .= "    $url\n\nMerci de votre participation\n  (Thank you!)\n\n";
 
-				include_local ("ecrire/inc_mail.php3");
 				envoyer_mail($adresse_email, "Veuillez confirmer votre signature : ".$titre, $messagex);
 
 				$reponse_signature.="<P><B>Un courrier &eacute;lectronique de confirmation vient de vous &ecirc;tre envoy&eacute;. Vous devrez visiter l'adresse Web mentionn&eacute;e dans ce courrier pour valider votre signature.</B>";
@@ -283,7 +281,7 @@ function formulaire_inscription($type) {
 	$request_uri = $GLOBALS["REQUEST_URI"];
 	global $mail_inscription;
 	global $nom_inscription;
-	
+
 	if ($type == 'redac') {
 		if (lire_meta("accepter_inscriptions") != "oui") return;
 		$statut = "nouveau";
@@ -300,7 +298,7 @@ function formulaire_inscription($type) {
 		$result = spip_query($query);
 
 		echo "<div class='reponse_formulaire'>";
-		
+
 		// l'abonne existe deja.
 	 	if ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
@@ -309,7 +307,7 @@ function formulaire_inscription($type) {
 			echo "<b>";
 			if ($statut == '5poubelle')
 				echo "Vous n'avez plus acc&egrave;s &agrave; ce site.";
-			else 
+			else
 				echo "Cette adresse e-mail est d&eacute;j&agrave; enregistr&eacute;e, vous pouvez donc utiliser votre mot de passe habituel.";
 			echo "</b>";
 		}
@@ -327,7 +325,7 @@ function formulaire_inscription($type) {
 			$nom_site_spip = lire_meta("nom_site");
 			$adresse_site = lire_meta("adresse_site");
 
-			$message = "(ceci est un message automatique)\n\n";	
+			$message = "(ceci est un message automatique)\n\n";
 			$message .= "Bonjour\n\n";
 			if ($type == 'forum') {
 				$message .= "Voici vos identifiants pour pouvoir participer aux forums\n";
@@ -374,7 +372,7 @@ function formulaire_site($la_rubrique) {
 			$reponse_signature .= erreur("Veuillez indiquer le nom du site.");
 			$refus = "oui";
 		}
-		
+
 		// Tester l'URL du site
 		include_ecrire("inc_sites.php3");
 		if (!recuperer_page($url_site)) {
@@ -411,13 +409,16 @@ function formulaire_site($la_rubrique) {
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"url_site\" VALUE=\"\" SIZE=\"30\"></div>";
 		echo  "<P><B>Description/commentaire</B><BR>";
 		echo "<TEXTAREA NAME='description_site' ROWS='5' CLASS='forml' COLS='40' wrap=soft></textarea>";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Valider\">";	
+		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Valider\">";
 		echo  "</DIV></FORM>";
 		}
 }
 
-function ecrire_auteur($id_auteur,$email_auteur) {
+function formulaire_ecrire_auteur($id_auteur, $email_auteur) {
 	global $flag_wordwrap;
+
+	include_ecrire("inc_mail.php3");
+
 	$affiche_formulaire = true;
 	if ($GLOBALS['texte_message_auteur'.$id_auteur]) {
 		if ($GLOBALS['sujet_message_auteur'.$id_auteur] == "")
@@ -425,7 +426,6 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 		else if (! email_valide($GLOBALS['email_message_auteur'.$id_auteur]) )
 			$erreur .= erreur("Veuillez indiquer une adresse email valide");
 		else if ($GLOBALS['valide_message_auteur'.$id_auteur]) {  // verifier hash ?
-			include_local("ecrire/inc_mail.php3");
 			$GLOBALS['texte_message_auteur'.$id_auteur] .= "\n\n-- Envoi via le site  ".lire_meta('nom_site')." (".lire_meta('adresse_site')."/) --\n";
 			envoyer_mail($email_auteur,
 				$GLOBALS['sujet_message_auteur'.$id_auteur],
@@ -443,7 +443,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 			$link->addVar('email_message_auteur'.$id_auteur, $GLOBALS['email_message_auteur'.$id_auteur]);
 			$link->addVar('sujet_message_auteur'.$id_auteur, $GLOBALS['sujet_message_auteur'.$id_auteur]);
 			$link->addVar('texte_message_auteur'.$id_auteur, $GLOBALS['texte_message_auteur'.$id_auteur]);
-			$link->addVar('valide_message_auteur'.$id_auteur, 'oui');			
+			$link->addVar('valide_message_auteur'.$id_auteur, 'oui');
 			echo $link->getForm('POST');
 			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer l'envoi\">";
 			echo "</DIV></FORM>";

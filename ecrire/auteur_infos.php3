@@ -129,7 +129,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 
 	// email
 	if ($connect_statut == '0minirezo') { // seuls les admins peuvent modifier l'email
-		if ($email!='' AND ! email_valide($email)) {
+		if ($email !='' AND !email_valide($email)) {
 			$echec .= "<p>Adresse email invalide.";
 			$auteur['email'] = $email;
 		} else

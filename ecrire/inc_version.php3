@@ -603,9 +603,9 @@ function getTmpVar($name) {
 	return $GLOBALS['this_link']->getTmpVar($name);
 }
 
-//
+
 // Lien vers la page demandee et lien nettoye ne contenant que des id_objet
-//
+
 $this_link = new Link();
 
 $clean_link = $this_link;
@@ -621,45 +621,23 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 	}
 }
 
-//
-// Verifier la conformite d'une adresse email
-//
+
+// Verifier la conformite d'une ou plusieurs adresses email
 
 function email_valide($adresse) {
-	if (strpos($adresse,',')) {					// autoriser plusieurs emails
-		$valide = true;
-		$lesadresses = split(',', $adresse);
-		while (list(,$ad) = each($lesadresses))
-			$valide &= email_valide($ad);
-		return $valide;
+	$adresses = explode(',', $adresse);
+	if (is_array($adresses)) {
+		while (list(, $adresse) = each($adresses)) {
+			if (!eregi("^[-!#\$%&'*+\\./0-9=?a-z^_`{|}~]+(@([-0-9a-z]+\.)*[-0-9a-z]+)?$", trim($adresse)))
+				return false;
+		}
+		return true;
 	}
-
-	return (eregi(
-		'^[-!#$%&\'*+\\./0-9=?a-z^_`{|}~]+'.	// nom d'utilisateur
-		'@'.									// @
-		'([-0-9a-z]+\.)+' .						// hote, sous-domaine
-		'([0-9a-z]){2,4}$',						// tld
-		trim($adresse)));
+	return false;
 }
 
-//
-// log des evenements
-//
 
-function logrotate() {
-	global $flag_ecrire;
-
-	$logfile = ($flag_ecrire ? "" : "ecrire/") . "data/spip.log";
-	@unlink($logfile.'.3');
-	@rename($logfile.'.2',$logfile.'.3');
-	@rename($logfile.'.1',$logfile.'.2');
-	@rename($logfile,$logfile.'.1');
-}
-
-function spip_debug($message) {
-	if ($GLOBALS['debug'])
-		spip_log($message);
-}
+// Enregistrement des evenements
 
 function spip_log($message) {
 	global $flag_ecrire;
@@ -680,11 +658,20 @@ function spip_log($message) {
 		fputs($f, $message);
 		fclose($f);
 	}
-	if ($rotate)
-		logrotate();
+	if ($rotate) {
+		@unlink($logfile.'.3');
+		@rename($logfile.'.2',$logfile.'.3');
+		@rename($logfile.'.1',$logfile.'.2');
+		@rename($logfile,$logfile.'.1');
+	}
 }
 
-// en mode debug, loger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
+function spip_debug($message) {
+	if ($GLOBALS['debug'])
+		spip_log($message);
+}
+
+// En mode debug, logger l'URI appelante (pas efficace, c'est vraiment pour debugguer !)
 if ($debug)
 	spip_debug("$REQUEST_METHOD: ".($flag_ecrire ? "/ecrire/" : "/").$clean_link->getUrl());
 
