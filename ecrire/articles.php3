@@ -397,7 +397,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $op
 	$arton_ok = get_image($arton);
 	if ($arton_ok) $artoff_ok = get_image($artoff);
 
-	if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $arton_ok) {
+	if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 		echo "<p>";
 		afficher_boite_logo($arton, "LOGO DE L'ARTICLE".aide ("logoart"));
 		echo "<br>";
