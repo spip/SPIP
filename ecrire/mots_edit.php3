@@ -1,7 +1,6 @@
 <?php
 
 include ("inc.php3");
-include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
 
 
@@ -48,6 +47,7 @@ if ($connect_statut == '0minirezo') {
 		$result = spip_query($query);
 
 		if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire ("inc_index.php3");
 			indexer_mot($id_mot);
 		}
 	}

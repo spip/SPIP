@@ -6,6 +6,9 @@ if (defined("_ECRIRE_INC_LOGOS")) return;
 define("_ECRIRE_INC_LOGOS", "1");
 
 
+include_ecrire ("inc_admin.php3");
+
+
 function get_image($racine) {
 	if (file_exists("../IMG/$racine.gif")) {
 		$fichier = "$racine.gif";

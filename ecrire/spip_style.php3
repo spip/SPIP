@@ -37,6 +37,22 @@ a.icone { text-decoration: none; }
 a.icone:hover { text-decoration: none; }
 
 
+td.icone table {
+}
+td.icone a {
+	color: black;
+	text-decoration: none;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+}
+td.icone a:hover {
+	text-decoration: none;
+}
+td.icone a img {
+	border: 0px;
+}
+
 /*
  * Cadre blanc arrondi
  */

@@ -2,6 +2,8 @@
 
 include ("inc.php3");
 
+include_ecrire ("inc_sites.php3");
+
 $proposer_sites = lire_meta("proposer_sites");
 
 function mySel($varaut,$variable) {

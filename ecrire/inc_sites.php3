@@ -166,9 +166,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					
 					// Indexation pour moteur
 					$id_syndic_article=mysql_insert_id();
-					// if (lire_meta('activer_moteur') == 'oui') {
-					//	indexer_syndic_article($id_syndic_article);
-					// }
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
@@ -203,10 +200,6 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					
 					// Indexation pour moteur
 					$id_syndic_article=mysql_insert_id();
-					// if (lire_meta('activer_moteur') == 'oui') {
-					//	indexer_syndic_article($id_syndic_article);
-					// }
-					
 				}
 			}
 			spip_query("UPDATE spip_syndic SET syndication='oui', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");

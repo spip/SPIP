@@ -15,11 +15,8 @@ include_ecrire("inc_presentation.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_filtres.php3");
 include_ecrire("inc_urls.php3");
-include_ecrire("inc_mail.php3");
-include_ecrire("inc_admin.php3");
 include_ecrire("inc_layer.php3");
-include_ecrire("inc_sites.php3");
-include_ecrire("inc_index.php3");
+
 
 if (!file_exists("inc_meta_cache.php3")) ecrire_metas();
 

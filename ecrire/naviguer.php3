@@ -2,8 +2,6 @@
 
 include ("inc.php3");
 include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_index.php3");
-include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_documents.php3");
 
@@ -158,6 +156,7 @@ if ($titre) {
 	calculer_rubriques();
 
 	if (lire_meta('activer_moteur') == 'oui') {
+		include_ecrire ("inc_index.php3");
 		indexer_rubrique($coll);
 	}
 }
@@ -480,7 +479,10 @@ if ($id_parent == "0" AND $activer_breves!="non"){
 
 //// Les sites references
 
-afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
+if (lire_meta("activer_syndic") != 'non') {
+	include_ecrire("inc_sites.php3");
+	afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s dans cette rubrique", "SELECT * FROM spip_syndic WHERE id_rubrique='$coll' AND statut!='refuse' ORDER BY nom_site");
+}
 
 if ($options == "avancees"){
 	$proposer_sites=lire_meta("proposer_sites");

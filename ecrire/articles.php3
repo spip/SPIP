@@ -3,7 +3,6 @@
 include ("inc.php3");
 
 include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_index.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_documents.php3");
 
@@ -95,6 +94,7 @@ if ($statut_nouv) {
 			$query = "UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article";
 			$result = spip_query($query);
 			if (lire_meta('activer_moteur') == 'oui') {
+				include_ecrire ("inc_index.php3");
 				indexer_article($id_article);
 			}
 		}
@@ -202,6 +202,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	calculer_rubriques();
 	if ($statut_article == 'publie') {
 		if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire ("inc_index.php3");
 			indexer_article($id_article);
 		}
 	}
