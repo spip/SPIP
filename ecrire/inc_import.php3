@@ -405,29 +405,29 @@ function import_all($f, $gz=false) {
 
 	// Destruction des entrees non restaurees
 
-	$query = "DELETE FROM spip_rubriques WHERE maj < $my_date";
+	$query = "DELETE FROM spip_rubriques WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_breves WHERE maj < $my_date";
+	$query = "DELETE FROM spip_breves WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_auteurs WHERE maj < $my_date";
+	$query = "DELETE FROM spip_auteurs WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_articles WHERE maj < $my_date";
+	$query = "DELETE FROM spip_articles WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_documents WHERE maj < $my_date";
+	$query = "DELETE FROM spip_documents WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_types_documents WHERE maj < $my_date";
+	$query = "DELETE FROM spip_types_documents WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_forum WHERE maj < $my_date";
+	$query = "DELETE FROM spip_forum WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_mots WHERE maj < $my_date";
+	$query = "DELETE FROM spip_mots WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_groupes_mots WHERE maj < $my_date";
+	$query = "DELETE FROM spip_groupes_mots WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_petitions WHERE maj < $my_date";
+	$query = "DELETE FROM spip_petitions WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_signatures WHERE maj < $my_date";
+	$query = "DELETE FROM spip_signatures WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_visites WHERE maj < $my_date";
+	$query = "DELETE FROM spip_visites WHERE UNIX_TIMESTAMP(maj) < $my_date";
 	spip_query($query);
 
 	import_fin();

@@ -453,9 +453,8 @@ if (lire_meta('calculer_rubriques') == 'oui') {
 // (ajouter une image, etc.)
 //
 
-$maj_alea = $meta_maj['alea_ephemere'];
-$t_jour = substr($maj_alea, 6, 2);
-if (abs($t_jour - date('d')) > 2) {
+
+if (abs(time() - $meta_maj['alea_ephemere']) > 2*24*3600) {
 	include_ecrire("inc_session.php3");
 	$alea = md5(creer_uniqid());
 	ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
