@@ -5,6 +5,7 @@ define("_INVALIDEUR", "1");
 
 include_ecrire('inc_serialbase.php3');
 include_local('inc-cache.php3');
+include_local('inc-calcul_mysql3.php'); # pour mysql_in
 
 function  supprime_invalideurs()
 {
@@ -30,10 +31,11 @@ DELETE FROM spip_inclure"  . _SUFFIXE_DES_CACHES . ($cond ? " WHERE $cond" :'')
 
 function maj_invalideurs($hache, $infosurpage)
 {
-    // pour l'instant on ne sait traiter que ces infos-là:
-  insere_invalideur($infosurpage['id_article'],'id_article', $hache);
-  insere_invalideur($infosurpage['id_breve'],   'id_breve', $hache);
-  insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $hache);
+  // en attendant de réécrire les 3 scripts dans ecrire
+#  insere_invalideur($infosurpage['id_article'],'id_article', $hache);
+#  insere_invalideur($infosurpage['id_breve'],   'id_breve', $hache);
+#  insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $hache);
+  insere_invalideur($infosurpage['id_forum'],'id_forum', $hache);
 }
 
 function insere_invalideur($a, $type, $hache) {
@@ -46,7 +48,7 @@ function insere_invalideur($a, $type, $hache) {
 INSERT IGNORE INTO spip_" . $type . _SUFFIXE_DES_CACHES . "
 (hache, " . $type . ")
 VALUES " . join(", ", $values));
-#      spip_log("Dépendances $type: " . join(", ", $values));
+      spip_log("Dépendances $type: " . join(", ", $values));
     }
 }
 
@@ -65,7 +67,7 @@ WHERE   $cond
   while ($row = spip_fetch_array($result)) 
     { $tous[] = $row['hache'];
     }
-  spip_log("suivre: " . join(' ' , $tous));
+  spip_log("suivre $cond");
   applique_invalideur($tous);
 }
 
@@ -78,15 +80,18 @@ function applique_invalideur($depart)
       $tous = join("', '", $depart);
       $tous = "'$tous'";
       $niveau = $tous;
+      spip_log("applique $tous");
       while ($niveau)
 	{
-# le NOT IN est théoriquement superflu, mais protège des tables endommagées
+# le NOT est théoriquement superflu, mais protège des tables endommagées
 	  $result = spip_query("
 SELECT  DISTINCT hache
-FROM    spip_inclure" . _SUFFIXE_DES_CACHES . "
-WHERE   inclure IN ($niveau) 
-AND	hache NOT IN ($tous)
-");
+FROM    spip_inclure" . _SUFFIXE_DES_CACHES . '
+WHERE	' .
+			       calcul_mysql_in('inclure', $niveau, '') . '
+AND	' .
+			       calcul_mysql_in('hache', $tous, 'NOT')
+);
 	  $niveau = array();
 	  while ($row = spip_fetch_array($result))
 	    { $niveau[] = "'" . $row['hache'] . "'"; 
@@ -95,9 +100,10 @@ AND	hache NOT IN ($tous)
 	  $niveau = join(', ', $niveau);
 	}
       spip_query("
-DELETE FROM spip_inclure"  . _SUFFIXE_DES_CACHES . "
-WHERE hache IN ($tous)
-");
+DELETE FROM spip_inclure"  . _SUFFIXE_DES_CACHES . '
+WHERE	' .
+			       calcul_mysql_in('hache', $tous, 'NOT')
+);
       
       foreach($tables_principales as $a)
 	{
@@ -105,9 +111,10 @@ WHERE hache IN ($tous)
 		$p = $a['key']["PRIMARY KEY"];
 		if (!strpos($p, ","))
 	    spip_query("
-DELETE FROM spip_" . $p  . _SUFFIXE_DES_CACHES ."
-WHERE hache IN ($tous)
-");
+DELETE FROM spip_" . $p  . _SUFFIXE_DES_CACHES . '
+WHERE	' .
+			       calcul_mysql_in('hache', $tous, 'NOT')
+);
 	}
       retire_caches($depart);
     }
