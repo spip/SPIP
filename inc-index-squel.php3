@@ -34,11 +34,12 @@ function index_pile($idb, $nom_champ, &$boucles)
     $t = $table_des_tables[$r];
     if (!$t) $t = $r; // pour les tables non Spip
     // $t est le nom PHP de cette table 
+    spip_log("'$idb' '$r' '$c' '$nom_champ'");
     $x = $tables_principales[$t];
     if (!$x) 
     {
       include_local("inc-debug-squel.php3");
-      erreur_syntaxe_boucle("Table SQL absente de \$tables_principales dans inc_serialbase", $r, $idb);
+      erreur_squelette("Table SQL absente de \$tables_principales dans inc_serialbase", $r, $idb);
     }
 
     $a = $x['field'];

@@ -5,7 +5,7 @@
 class Boucle {
 	var $type = 'boucle';
 	var $id_boucle, $id_parent;
-	var $avant, $cond_avant, $milieu, $cond_apres, $cond_altern, $apres;
+	var $cond_avant, $milieu, $cond_apres, $cond_altern;
 	var $commande;
 	var $lang_select;
 	var $type_requete;
