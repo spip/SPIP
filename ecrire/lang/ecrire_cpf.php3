@@ -148,18 +148,6 @@ l&eacute; pa kav rokon&egrave;t ali (banna pou sanz&eacute; bann lesk&eacute;l&e
 
 
 // D
-'date_mois_1' => 'zanvi&eacute;',
-'date_mois_10' => 'octob',
-'date_mois_11' => 'novanm',
-'date_mois_12' => 'd&eacute;sanm',
-'date_mois_2' => 'f&eacute;vri&eacute;',
-'date_mois_3' => 'mars',
-'date_mois_4' => 'avril',
-'date_mois_5' => 'm&eacute;',
-'date_mois_6' => 'zwin',
-'date_mois_7' => 'zwiy&eacute;',
-'date_mois_8' => 'out',
-'date_mois_9' => 's&eacute;ptanm',
 'date_mot_heures' => '&egrave;r',
 'diff_para_ajoute' => 'Paragraf azout&eacute;',
 'diff_para_deplace' => 'Paragraf la bouz&eacute;',

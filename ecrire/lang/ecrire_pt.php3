@@ -123,18 +123,6 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 
 
 // D
-'date_mois_1' => 'Janeiro',
-'date_mois_10' => 'Outubro',
-'date_mois_11' => 'Novembro',
-'date_mois_12' => 'Dezembro',
-'date_mois_2' => 'Fevereiro',
-'date_mois_3' => 'Mar&ccedil;o',
-'date_mois_4' => 'Abril',
-'date_mois_5' => 'Maio',
-'date_mois_6' => 'Junho',
-'date_mois_7' => 'Julho',
-'date_mois_8' => 'Agosto',
-'date_mois_9' => 'Setembro',
 'date_mot_heures' => 'horas',
 'diff_para_ajoute' => 'Paragrafo  acrescentado',
 'diff_para_deplace' => 'Paragrafo alterado',

@@ -114,18 +114,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'date_mois_1' => 'januaro',
-'date_mois_10' => 'oktobro',
-'date_mois_11' => 'novembro',
-'date_mois_12' => 'decembro',
-'date_mois_2' => 'februaro',
-'date_mois_3' => 'marto',
-'date_mois_4' => 'aprilo',
-'date_mois_5' => 'majo',
-'date_mois_6' => 'junio',
-'date_mois_7' => 'julio',
-'date_mois_8' => 'a&#365;gusto',
-'date_mois_9' => 'septembro',
 'date_mot_heures' => 'horoj',
 'diff_para_ajoute' => 'Aldonita paragrafo',
 'diff_para_deplace' => 'Translokita paragrafo',

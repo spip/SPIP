@@ -106,18 +106,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // D
-'date_mois_1' => 'av&igrave;v&#596;s&ugrave;n',
-'date_mois_10' => 'lyas&ugrave;n',
-'date_mois_11' => 'l&igrave;dos&ugrave;n',
-'date_mois_12' => 'wos&ugrave;n',
-'date_mois_2' => 'zofikpl&#596;ns&ugrave;n',
-'date_mois_3' => 'xw&egrave;j&iacute;s&ugrave;n ',
-'date_mois_4' => 'k&#596;y&aacute;s&ugrave;n ',
-'date_mois_5' => 'w&egrave;sinv&#596;s&ugrave;n',
-'date_mois_6' => 'j&iacute;s&ugrave;n',
-'date_mois_7' => 'af&ograve;s&ugrave;n',
-'date_mois_8' => 'z&oacute;s&ugrave;n',
-'date_mois_9' => 'j&#596;h&#596;ns&ugrave;n',
 'date_mot_heures' => 'ganm&#603; l&#603;',
 'diff_para_ajoute' => 'g&#596; we&#780;kpaxw&eacute; n&aacute;',
 'diff_para_deplace' => 's&#603; we&#780;kpaxw&eacute; s&iacute;n',

@@ -123,18 +123,6 @@ problemi di compatibilit&agrave; con le applicazioni usate per modificare i prop
 
 
 // D
-'date_mois_1' => 'gennaio',
-'date_mois_10' => 'ottobre',
-'date_mois_11' => 'novembre',
-'date_mois_12' => 'dicembre',
-'date_mois_2' => 'febbraio',
-'date_mois_3' => 'marzo',
-'date_mois_4' => 'aprile',
-'date_mois_5' => 'maggio',
-'date_mois_6' => 'giugno',
-'date_mois_7' => 'luglio',
-'date_mois_8' => 'agosto',
-'date_mois_9' => 'settembre',
 'date_mot_heures' => 'ore',
 'diff_para_ajoute' => 'paragrafo aggiunto',
 'diff_para_deplace' => 'Paragrafo spostato',

@@ -111,18 +111,6 @@ H&#7891; s&#417; SPIP</a>.',
 
 
 // D
-'date_mois_1' => 'Th&aacute;ng Gi&ecirc;ng',
-'date_mois_10' => 'Th&aacute;ng M&#432;&#7901;i',
-'date_mois_11' => 'Th&aacute;ng M&#432;&#7901;i M&#7897;t',
-'date_mois_12' => 'Th&aacute;ng M&#432;&#7901;i Hai',
-'date_mois_2' => 'Th&aacute;ng Hai',
-'date_mois_3' => 'Th&aacute;ng Ba',
-'date_mois_4' => 'Th&aacute;ng T&#432;',
-'date_mois_5' => 'Th&aacute;ng N&#259;m',
-'date_mois_6' => 'Th&aacute;ng S&aacute;u',
-'date_mois_7' => 'Th&aacute;ng B&#7843;y',
-'date_mois_8' => 'Th&aacute;ng T&aacute;m',
-'date_mois_9' => 'Th&aacute;ng Ch&iacute;n',
 'date_mot_heures' => 'Gi&#7901;',
 'diff_para_ajoute' => '<NEW>Paragraphe ajout&eacute;',
 'diff_para_deplace' => '<NEW>Paragraphe d&eacute;plac&eacute;',

@@ -115,18 +115,6 @@ la documentacion d\'SPIP</a>.',
 
 
 // D
-'date_mois_1' => 'geni&egrave;r',
-'date_mois_10' => 'octobre',
-'date_mois_11' => 'novembre',
-'date_mois_12' => 'decembre',
-'date_mois_2' => 'febri&egrave;r',
-'date_mois_3' => 'mar&ccedil;',
-'date_mois_4' => 'abril',
-'date_mois_5' => 'mai',
-'date_mois_6' => 'junh',
-'date_mois_7' => 'julh',
-'date_mois_8' => 'agost',
-'date_mois_9' => 'setembre',
 'date_mot_heures' => 'oras',
 'diff_para_ajoute' => 'Paragraf apondut',
 'diff_para_deplace' => 'Paragraf despla&ccedil;at',

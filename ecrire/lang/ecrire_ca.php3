@@ -121,18 +121,6 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 
 
 // D
-'date_mois_1' => 'gener',
-'date_mois_10' => 'octubre',
-'date_mois_11' => 'novembre',
-'date_mois_12' => 'desembre',
-'date_mois_2' => 'febrer',
-'date_mois_3' => 'mar&ccedil;',
-'date_mois_4' => 'abril',
-'date_mois_5' => 'maig',
-'date_mois_6' => 'juny',
-'date_mois_7' => 'juliol',
-'date_mois_8' => 'agost',
-'date_mois_9' => 'setembre',
 'date_mot_heures' => 'hores',
 'diff_para_ajoute' => 'Par&agrave;graf afegit',
 'diff_para_deplace' => 'Par&agrave;graf despla&ccedil;at',

@@ -121,18 +121,6 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 
 
 // D
-'date_mois_1' => 'Stycze&#324;',
-'date_mois_10' => 'Pa&#378;dziernik',
-'date_mois_11' => 'Listopad',
-'date_mois_12' => 'Grudzie&#324;',
-'date_mois_2' => 'Luty',
-'date_mois_3' => 'Marzec',
-'date_mois_4' => 'Kwiecie&#324;',
-'date_mois_5' => 'Maj',
-'date_mois_6' => 'Czerwiec',
-'date_mois_7' => 'Lipiec',
-'date_mois_8' => 'Sierpie&#324;',
-'date_mois_9' => 'Wrzesie&#324;',
 'date_mot_heures' => 'godz.',
 'diff_para_ajoute' => 'Dodany akapit',
 'diff_para_deplace' => 'Akapit przeniesiony',
