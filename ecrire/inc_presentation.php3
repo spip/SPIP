@@ -1766,7 +1766,8 @@ function debut_droite() {
 					"- {Vous connecter depuis certains fournisseurs d'acc&egrave;s} qui changent ".
 					"r&eacute;guli&egrave;rement votre adresse Internet (qui identifie votre ".
 					"ordinateur de fa&ccedil;on unique).\n\n\n".
-					"Notez que pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus, ".
+					"Pour utiliser les possibilit&eacute;s &eacute;voqu&eacute;es ci-dessus, ".
+					"ou {{si vous avez souvent des probl&egrave;mes de connexion}}, ".
 					"vous devez repasser en mode de s&eacute;curit&eacute; normal.");
 				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
 
@@ -1791,7 +1792,7 @@ function debut_droite() {
 					"ordinateur de fa&ccedil;on unique).\n\n\n".
 					"En contrepartie, la s&eacute;curit&eacute; du syst&egrave;me n'est pas maximale. ".
 					"Si vous n'utilisez pas les possibilit&eacute;s mentionn&eacute;es ci-dessus et ".
-					"que vous &ecirc;tes tr&egrave;s soucieux de votre s&eacute;curit&eacute;, ".
+					"que vous &ecirc;tes soucieux de votre s&eacute;curit&eacute;, ".
 					"vous pouvez passer &agrave; un mode de connexion plus strict.\n\n\n\n");
 
 				echo "<p>Pour plus de pr&eacute;cisions n'h&eacute;sitez pas &agrave; consulter l'aide en ligne ".aide('deconnect');
