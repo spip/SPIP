@@ -141,7 +141,18 @@ else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 if ($cookie_session)
 	setcookie('spip_session', $cookie_session);
 
-// redirection
-@header("Location: " . $cible->getUrl());
+// Redirection
+// Sous Apache 1.x, les cookies avec une redirection fonctionnent
+// Sinon, on fait un refresh HTTP
+if (ereg("^Apache", $SERVER_SOFTWARE)) {
+	@header("Location: " . $cible->getUrl());
+}
+else {
+	@header("Refresh: 0; url=" . $cible->getUrl());
+	echo "<html><head>";
+	echo "<meta http-equiv='Refresh' content='0; url=".$cible->getUrl()."'>";
+	echo "</head>\n";
+	echo "<body>Si votre navigateur n'est pas redirig&eacute;, <a href='".$cible->getUrl()."'>continuer</a>.</body></html>";
+}
 
 ?>
