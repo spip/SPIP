@@ -33,6 +33,13 @@ error_reporting(E_ALL ^ E_NOTICE);
 $table_prefix = "spip";
 
 //
+// Dossier des squelettes
+// (a modifier pour essayer plusieurs modèles de sites)
+// + chaine vide => racine du site (standard)
+
+$dossier_squelettes = '';
+
+//
 // Infos de version PHP
 //
 

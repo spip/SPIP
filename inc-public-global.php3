@@ -31,7 +31,7 @@ function inclure_fichier($fond, $delais, $contexte_inclus = "") {
 	$use_cache = utiliser_cache($chemin_cache, $delais);
 
 	if (!$use_cache) {
-				include_local("inc-calcul.php3");
+		include_local("inc-calcul.php3");
 		$fond = chercher_squelette($fond, $contexte_inclus['id_rubrique']);
 		$page = calculer_page($fond, $contexte_inclus);
 		if ($page) {

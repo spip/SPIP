@@ -357,6 +357,12 @@ function chercher_squelette_hierarchie($fond, $id_rubrique) {
 }
 
 function chercher_squelette($fond, $id_rubrique) {
+	global $dossier_squelettes;
+
+	// prendre en compte le bon repertoire (pas grave si on a deux / dans l'arborescence)
+	if ($dossier_squelettes)
+		$fond = "$dossier_squelettes/$fond";
+
 	// On selectionne, dans l'ordre :
 	// fond=10.html, fond-10.html, fond-<rubriques parentes>.html, fond.html puis fond-dist.html
 	if (($id_rubrique > 0) AND (file_exists($fond."=$id_rubrique.html"))) {
