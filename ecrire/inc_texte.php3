@@ -685,7 +685,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
 
 		// ajouter
-		$les_notes .= $mes_notes . $fin_notes;
+		$les_notes .= interdire_scripts($mes_notes) . $fin_notes;
 	}
 
 	return $letexte;
