@@ -116,7 +116,7 @@ if ($statut) { // si on poste un nom, c'est qu'on modifie une fiche auteur
 
 	if ($modif_login) {
 		include_ecrire('inc_session.php3');
-		zap_sessions ($old_login, true);
+		zap_sessions ($auteur['id_auteur'], true);
 		if ($connect_id_auteur == $auteur['id_auteur'])
 			supprimer_session($GLOBALS['spip_session']);
 	}
