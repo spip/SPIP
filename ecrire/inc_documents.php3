@@ -254,9 +254,11 @@ function integre_image($id_document, $align, $type_aff) {
 			= vignette_par_defaut($extension);
 
 		if ($url_fichier_vignette) {
-			$vignette = "<img src='$url_fichier_vignette' style='border-width: 0px'";
-			if ($largeur_vignette && $hauteur_vignette)
+			$vignette = "<img src='$url_fichier_vignette'";
+			$vignette_style = "border-width: 0px;";
+			if ($largeur_vignette && $hauteur_vignette) {
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
+			}
 			if ($titre) {
 				if ($mode == 'document')
 					$titre_ko = ($taille > 0) ? ($titre . " - ". taille_en_octets($taille)) : $titre;
@@ -271,11 +273,14 @@ function integre_image($id_document, $align, $type_aff) {
 			if ($type_aff == 'DOC')
 				$vignette .= " />";
 			else {
-				if ($align && $align != 'center')
-					$vignette .= " align='$align' hspace='5' vspace='3' />";
-				else
-					$vignette .= " align='middle' />";
-				if ($align == 'center') $vignette = "<p align='center'>$vignette</p>";
+				if ($align && $align != 'center') {
+					$vignette_style .= " float: $align; margin: 4px;";
+				}
+				else {
+					$vignette_style .= " vertical-align: middle; ";
+				}
+				$vignette .= " style=\"$vignette_style\" />";
+				if ($align == 'center') $vignette = "\n<div style='text-align: center;'>$vignette</div>\n";
 			}
 		}
 
