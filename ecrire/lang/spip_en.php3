@@ -466,7 +466,7 @@ Thank you for your participation
 'info_adresse_email' => 'E-MAIL ADDRESS:',
 'info_adresse_non_indiquee' => 'You did not specify an address to test!',
 'info_adresse_url' => 'Your public site\'s URL',
-'info_afficher_visites' => 'Show visits for:',
+'info_afficher_visites' => '<MODIF> Show visits for:',
 'info_affichier_visites_articles_plus_visites' => 'Show visits for <b>the most visited articles since the beginning:</b>',
 'info_aide' => 'HELP:',
 'info_aide_en_ligne' => 'SPIP Online Help',
@@ -1533,7 +1533,9 @@ entered important modifications on the graphics or the structure of the site.',
 'titre_admin_tech' => 'Technical maintenance',
 'titre_admin_vider' => 'Technical maintenance',
 'titre_ajouter_mot_cle' => 'ADD A KEYWORD:',
+'titre_articles_populaires' => 'Most popular articles',
 'titre_articles_syndiques' => 'Syndicated articles pulled out from this site',
+'titre_articles_visites' => 'Most visited articles',
 'titre_breve_proposee' => 'Submitted news item',
 'titre_breve_publiee' => 'News item published',
 'titre_breve_refusee' => 'News item rejected',
@@ -1631,7 +1633,6 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
 'trad_reference' => '(reference article)'
-
 
 );
 
