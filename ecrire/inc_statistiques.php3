@@ -319,7 +319,10 @@ function optimiser_referers($type = "") {
 				$articles = join(",",$articles);
 				$query = "UPDATE spip_articles SET popularite = $popularite ".
 					"WHERE id_article IN ($articles)";
+
+if ($GLOBALS['populogarithme'] != 'oui') {
 				$result = spip_query($query);
+}
 			}
 		}		
 	}
