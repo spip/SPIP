@@ -215,7 +215,7 @@ while($row=spip_fetch_array($result)){
 }
 
 if ($titre)
-	$titre_page = "&laquo; ".textebrut($titre)." &raquo;";
+	$titre_page = "&laquo; ".textebrut(typo($titre))." &raquo;";
 else
 	$titre_page = _T('titre_naviguer_dans_le_site');
 
