@@ -57,7 +57,7 @@ function deja_indexe($type, $id_objet) {
 function indexer_objet($type, $id_objet, $forcer_reset = true, $full = true) {
 	global $index, $mots;
 
-	if (!$forcer_reset AND deja_indexe($type, $id_objet)) return;
+	if (!$id_objet OR (!$forcer_reset AND deja_indexe($type, $id_objet))) return;
 
 	$index = '';
 	$mots = "INSERT DELAYED IGNORE spip_index_dico (hash, dico) VALUES (0,'')";
