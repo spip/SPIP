@@ -1019,6 +1019,9 @@ if ($cherche_auteur) {
 		$titre = urlencode($cherche_auteur);
 		icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour", "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
+
+		// message pour ne pas afficher le second bouton "creer un auteur"
+		$supprimer_bouton_creer_auteur = true;
 	}
 
 	fin_boite_info();
@@ -1150,7 +1153,11 @@ if ($flag_editable AND $options == 'avancees') {
 	
 	echo "<table width='100%'>";
 	echo "<tr>";
-	if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article) AND $options == "avancees") {
+
+	if ($connect_statut == '0minirezo'
+	AND acces_rubrique($rubrique_article)
+	AND $options == "avancees"
+	AND !$supprimer_bouton_creer_auteur) {
 		echo "<td width='200'>";
 		$retour = urlencode($clean_link->getUrl());
 		icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
