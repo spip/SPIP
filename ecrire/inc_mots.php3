@@ -5,6 +5,7 @@
 if (defined("_ECRIRE_INC_MOTS")) return;
 define("_ECRIRE_INC_MOTS", "1");
 
+include_ecrire("inc_filtres.php3"); # pour http_script (normalement déjà fait)
 
 $GLOBALS['flag_mots_ressemblants'] = $GLOBALS['flag_levenshtein'];
 
