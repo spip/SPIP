@@ -15,7 +15,7 @@ include_ecrire("inc_filtres.php3");
 // Par securite ne pas accepter les variables passees par l'utilisateur
 //
 function tester_variable($nom_var, $val){
-	if (! isset($GLOBALS[$nom_var])
+	if (!isset($GLOBALS[$nom_var])
 		OR $_GET[$nom_var] OR $GLOBALS['HTTP_GET_VARS'][$nom_var]
 		OR $_PUT[$nom_var] OR $GLOBALS['HTTP_PUT_VARS'][$nom_var]
 		OR $_POST[$nom_var] OR $GLOBALS['HTTP_POST_VARS'][$nom_var]
@@ -36,6 +36,8 @@ tester_variable('les_notes', '');
 $marqueur_notes='';
 tester_variable('compt_note', 0);
 tester_variable('nombre_surligne', 4);
+tester_variable('url_glossaire_externe', "http://".lire_meta('langue_site').".wikipedia.org/wiki/");
+
 
 if (file_exists("puce$spip_lang_rtl.gif")) {
 	$imgsize = getimagesize("puce$spip_lang_rtl.gif");
@@ -342,14 +344,6 @@ function typo($letexte) {
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place
 // et le lien "brut" a usage eventuel de redirection...
 function extraire_lien ($regs) {
-	if (file_exists('inc-urls.php3')) {
-		include_local('inc-urls.php3');
-	} elseif (file_exists('inc-urls-dist.php3')) {
-		include_local('inc-urls-dist.php3');
-	} else {
-		include_ecrire('inc_urls.php3');
-	}
-
 	$lien_texte = $regs[1];
 
 	$lien_url = trim($regs[3]);
@@ -357,6 +351,14 @@ function extraire_lien ($regs) {
 	$lien_interne = false;
 	if (ereg('^(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))? *([[:digit:]]+)$', $lien_url, $match)) {
 		// Traitement des liens internes
+		if (file_exists('inc-urls.php3')) {
+			include_local('inc-urls.php3');
+		} elseif (file_exists('inc-urls-dist.php3')) {
+			include_local('inc-urls-dist.php3');
+		} else {
+			include_ecrire('inc_urls.php3');
+		}
+
 		$id_lien = $match[8];
 		$type_lien = $match[1];
 		$lien_interne=true;
@@ -426,7 +428,14 @@ function extraire_lien ($regs) {
 		// supprimer les numeros des titres
 		include_ecrire("inc_filtres.php3");
 		$lien_texte = supprimer_numero($lien_texte);
-	} else {	// lien non automatique
+	}
+	else if (ereg('^\?(.*)$', $lien_url, $regs)) {
+		// Liens glossaire
+		$lien_url = substr($lien_url, 1);
+		$class_lien = "glossaire";
+	}
+	else {
+		// Liens non automatiques
 		$class_lien = "out";
 		// texte vide ?
 		if ((!$lien_texte) and (!$lien_interne)) {
@@ -532,7 +541,7 @@ function traiter_listes ($texte) {
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = 'oui') {
 	global $puce;
-	global $debut_intertitre, $fin_intertitre, $ligne_horizontale;
+	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
 	global $compt_note;
 	global $les_notes;
 	global $marqueur_notes;
@@ -595,6 +604,21 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	}
 
 	//
+	// Raccourcis automatiques vers un glossaire
+	// (on traite ce raccourci en deux temps afin de ne pas appliquer
+	//  la typo sur les URLs, voir raccourcis liens ci-dessous)
+	//
+	if ($url_glossaire_externe) {
+		$regexp = "\[\?+([^][<>]+)\]";
+		while (ereg($regexp, $letexte, $regs)) {
+			$terme = trim($regs[1]);
+			$url = $url_glossaire_externe.urlencode(ereg_replace('[[:space:]]+', '_', $terme));
+			$code = "[$terme->?$url]";
+			$letexte = str_replace($regs[0], $code, $letexte);
+		}
+	}
+
+	//
 	// Raccourcis liens (cf. fonction extraire_lien ci-dessus)
 	//
 	$regexp = "\[([^][]*)->(>?)([^]]*)\]";
@@ -621,7 +645,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 		$align = $match[4];
 		if (eregi("emb", $match[1]))
 			$rempl = embed_document($id_document, $align);
-		else 
+		else
 			$rempl = integre_image($id_document, $align, $match[1]);
 		$letexte = ereg_replace($letout, $rempl, $letexte);
 	}
@@ -631,7 +655,7 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	//
 	$letexte = ereg_replace("^\n?\|", "\n\n|", $letexte);
 	$letexte = ereg_replace("\|\n?$", "|\n\n", $letexte);
-	
+
 	$tableBeginPos = strpos($letexte, "\n\n|");
 	$tableEndPos = strpos($letexte, "|\n\n");
 	while (is_integer($tableBeginPos) && is_integer($tableEndPos) && $tableBeginPos < $tableEndPos + 3) {

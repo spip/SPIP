@@ -22,7 +22,8 @@ body { background: white; margin: 10px; }
 a { text-decoration: none; color: #505050; }
 a:hover { text-decoration: none; color: #303030; background: #e8e8e8; }
 a.spip_out { text-decoration: none; color: #a02020; }
-a.spip_in { text-decoration: none; color: #2020a0; }
+a.spip_in, a.spip_url { text-decoration: none; color: #2020a0; }
+a.spip_glossaire { text-decoration: none; color: #20a020; }
 
 .chapo {
 	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
