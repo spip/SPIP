@@ -264,10 +264,9 @@ if (tester_mail()) {
 	$adresse_neuf=lire_meta("adresse_neuf");
 	$jours_neuf=lire_meta("jours_neuf");
 
-	if ($envoi_now) {
-		ecrire_meta('majnouv', time()-3600*24*$jours_neuf);
-		ecrire_metas();
-	}
+	// provoquer l'envoi des nouveautes en supprimant le fichier lock
+	if ($envoi_now)
+		@unlink(_DIR_SESSIONS . 'mail.lock');
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_annonce_nouveautes'));

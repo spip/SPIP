@@ -172,7 +172,10 @@ function balise_DATE_MODIF_dist ($p) {
 // #DATE_NOUVEAUTES
 // http://www.spip.net/fr_article1971.html
 function balise_DATE_NOUVEAUTES_dist($p) {
-	$p->code = "((lire_meta('quoi_de_neuf') == 'oui' AND lire_meta('majnouv')) ? normaliser_date(lire_meta('majnouv')) : \"'0000-00-00'\")";
+	$p->code = "((lire_meta('quoi_de_neuf') == 'oui'
+	AND @file_exists(_DIR_SESSIONS . 'mail.lock')) ?
+	normaliser_date(@filemtime(_DIR_SESSIONS . 'mail.lock')) :
+	\"'0000-00-00'\")";
 	$p->statut = 'php';
 	return $p;
 }
