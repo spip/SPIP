@@ -37,15 +37,17 @@ function init_champs_squel() {
 	$tables_relations['articles']['id_mot'] = 'spip_mots_articles';
 	$tables_relations['articles']['id_auteur'] = 'spip_auteurs_articles';
 	$tables_relations['articles']['id_document'] = 'spip_documents_articles';
-	$tables_relations['rubriques']['id_document'] = 'spip_documents_rubriques';
 
 	$tables_relations['auteurs']['id_article'] = 'spip_auteurs_articles';
 
 	$tables_relations['breves']['id_mot'] = 'spip_mots_breves';
+	$tables_relations['breves']['id_document'] = 'spip_documents_breves';
 
 	$tables_relations['documents']['id_article'] = 'spip_documents_articles';
 	$tables_relations['documents']['id_rubrique'] = 'spip_documents_rubriques';
 	$tables_relations['documents']['id_breve'] = 'spip_documents_breves';
+
+	$tables_relations['forums']['id_mot'] = 'spip_mots_forum';
 
 	$tables_relations['mots']['id_article'] = 'spip_mots_articles';
 	$tables_relations['mots']['id_breve'] = 'spip_mots_breves';
@@ -56,7 +58,7 @@ function init_champs_squel() {
 	$tables_relations['groupes_mots']['id_groupe'] = 'spip_mots';
 
 	$tables_relations['rubriques']['id_mot'] = 'spip_mots_rubriques';
-	$tables_relations['forums']['id_mot'] = 'spip_mots_forum';
+	$tables_relations['rubriques']['id_document'] = 'spip_documents_rubriques';
 
 	$tables_relations['syndication']['id_mot'] = 'spip_mots_syndic';
 
@@ -317,11 +319,16 @@ function init_champs_squel() {
 		$contexte["id_secteur"] = $row["id_rubrique"];
 		$contexte["date"] = $row["date_heure"];
 	',
-	'syndication' => '
-		$contexte["id_syndic"] = $row["id_syndic"];
+	'rubriques' => '
 		$contexte["id_rubrique"] = $row["id_rubrique"];
+		$contexte["id_parent"] = $row["id_parent"];
 		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["url_site"] = $row["url_site"];
+		$contexte["date"] = $row["date"];
+	',
+	'hierarchie' => '
+		$contexte["id_rubrique"] = $row["id_rubrique"];
+		$contexte["id_parent"] = $row["id_parent"];
+		$contexte["id_secteur"] = $row["id_secteur"];
 		$contexte["date"] = $row["date"];
 	',
 	'documents' => '
@@ -331,17 +338,6 @@ function init_champs_squel() {
 	',
 	'types_documents' => '
 		$contexte["id_type"] = $row["id_type"];
-	',
-	'syndic_articles' => '
-		$contexte["id_syndic"] = $row["id_syndic"];
-		$contexte["id_syndic_article"] = $row["id_syndic_article"];
-		$contexte["date"] = $row["date"];
-	',
-	'rubriques' => '
-		$contexte["id_rubrique"] = $row["id_rubrique"];
-		$contexte["id_parent"] = $row["id_parent"];
-		$contexte["id_secteur"] = $row["id_secteur"];
-		$contexte["date"] = $row["date"];
 	',
 	'forums' => '
 		$contexte["id_forum"] = $row["id_forum"];
@@ -365,22 +361,35 @@ function init_champs_squel() {
 	',
 	'groupes_mots' => '
 		$contexte["id_groupe"] = $row["id_groupe"];
+	',
+	'syndication' => '
+		$contexte["id_syndic"] = $row["id_syndic"];
+		$contexte["id_rubrique"] = $row["id_rubrique"];
+		$contexte["id_secteur"] = $row["id_secteur"];
+		$contexte["url_site"] = $row["url_site"];
+		$contexte["date"] = $row["date"];
+	',
+	'syndic_articles' => '
+		$contexte["id_syndic"] = $row["id_syndic"];
+		$contexte["id_syndic_article"] = $row["id_syndic_article"];
+		$contexte["date"] = $row["date"];
 	'
 	);
 
 	$tables_doublons = array(
 		'articles' => "id_article",
-		'breves' => "id_breve",
-		'syndication' => "id_syndic",
-		'documents' => "id_document",
-		'types_documents' => "id_document",
-		'syndic_articles' => "syndic_articles",
-		'rubriques' => "id_rubrique",
-		'forums' => "id_forum",
 		'auteurs' => "id_auteur",
-		'signatures' => "id_signature",
+		'breves' => "id_breve",
+		'documents' => "id_document",
+		'forums' => "id_forum",
+		'groupes_mots'	=> "id_groupe",
+		'hierarchie' => "id_rubrique",
 		'mots'	=> "id_mot",
-		'groupes_mots'	=> "id_groupe"
+		'rubriques' => "id_rubrique",
+		'signatures' => "id_signature",
+		'syndication' => "id_syndic",
+		'syndic_articles' => "syndic_articles",
+		'types_documents' => "id_document"
 	);
 
 }
