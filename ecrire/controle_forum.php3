@@ -229,8 +229,10 @@ function controle_forum($request,$adresse_retour) {
 		}
 
 		if ($forum_stat <> "off" AND $forum_stat <> "prioff") {
-			if ($forum_stat == "publie") icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
-			else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm") icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
+			if ($forum_stat == "publie" OR $forum_stat == "prop")
+				icone ("Supprimer ce message", "controle_forum.php3?supp_forum=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
+			else if ($forum_stat == "prive" OR $forum_stat == "privrac" OR $forum_stat == "privadm")
+				icone ("Supprimer ce message", "controle_forum.php3?supp_forum_priv=$id_forum&debut=$debut$controle_sans", "forum-interne-24.gif", "supprimer.gif", "right");
 		}
 		else {
 			echo "<BR><FONT COLOR='red'><B>MESSAGE SUPPRIM&Eacute; $forum_ip</B></FONT>";
