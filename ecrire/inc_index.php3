@@ -43,7 +43,7 @@ function spip_split($reg, $texte) {
 }
 
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
-	global $index, $mots, $flag_preg_replace;
+	global $index, $mots;
 
 	$texte = nettoyer_chaine_indexation($texte);
 	$regs = separateurs_indexation();
