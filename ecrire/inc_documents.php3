@@ -601,8 +601,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if ($flag_modif) {
 				if ($flag_deplier) echo debut_block_visible("port$id_document");
 				else echo debut_block_invisible("port$id_document");
-				hr("#999999;");
-				echo "<div class='verdana1' style='color: $couleur_foncee;'>";
+				echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
 				$link = new Link($redirect_url);
 				$link->addVar('modif_document', 'oui');
 				$link->addVar('id_document', $id_document);
@@ -665,7 +664,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
 				$link_supp->addVar('doc_supp', $id_document);
 		
-				hr("#999999;");
 				icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 				
 				
@@ -785,8 +783,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if ($flag_modif) {
 				if ($flag_deplier) echo debut_block_visible("port$id_document");
 				else echo debut_block_invisible("port$id_document");
-				hr("#999999;");
-				echo "<div class='verdana1' style='color: #999999;'>";
+				echo "<div class='verdana1' style='color: #999999; border: 1px solid #999999; padding: 5px; margin-top: 3px;'>";
 				$link = new Link($redirect_url);
 				$link->addVar('modif_document', 'oui');
 				$link->addVar('id_document', $id_document);
@@ -847,7 +844,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 				$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
 				$link_supp->addVar('doc_supp', $id_document);
 		
-				hr("#999999;");
 				icone_horizontale(_T('icone_supprimer_document'), $link_supp->getUrl(), "doc-24.gif", "supprimer.gif");
 				
 				

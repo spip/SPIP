@@ -318,10 +318,31 @@ if ($ajout_doc == 'oui') {
   		
 		if (($list = $zip->listContent()) == 0) {
 			// pas possible de decompacter: installer comme fichier zip joint
-			$image = $image_name;
-			$supprimer_ecrire_upload = $image;
+			$afficher_message_zip = false;
 		}
 		else {
+			// Verifier si le contenu peut etre uploade (verif extension)
+			for ($i=0; $i<sizeof($list); $i++) {
+				for(reset($list[$i]); $key = key($list[$i]); next($list[$i])) {
+				
+					if ($key == "stored_filename") {
+						if (ereg("\.([^.]+)$", $list[$i][$key], $match)) {
+							$ext = addslashes(strtolower($match[1]));
+							$ext = corriger_extension($ext);
+
+							$query = "SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'";
+							$result = spip_query($query);
+							if ($row = @spip_fetch_array($result)) {
+								$afficher_message_zip = true;
+								$aff_fichiers .= "<li>".$list[$i][$key]."</li>";
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		if ($afficher_message_zip) {
 			// presenter une interface pour choisir si fichier joint ou decompacter
 			include_ecrire ("inc_presentation.php3");
 			install_debut_html("Fichier ZIP");
@@ -346,8 +367,10 @@ if ($ajout_doc == 'oui') {
 
 			echo $link->getForm('POST');
 			
-			echo "<div><input type='radio' name='action_zip' value='telquel'>install&eacute; tel quel, en tant qu'archive compress&eacute;e Zip,</div>";
-			echo "<div><input type='radio' name='action_zip' value='decompacter'>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu'il contient install&eacute; sur le site.</div>";
+			echo "<div><input type='radio' checked name='action_zip' value='telquel'>install&eacute; tel quel, en tant qu'archive compress&eacute;e Zip,</div>";
+			echo "<div><input type='radio' name='action_zip' value='decompacter'>d&eacute;compress&eacute; et chaque &eacute;l&eacute;ment qu'il contient install&eacute; sur le site. Les fichiers qui seront alors install&eacute;s sur le site sont&nbsp;:</div>";
+			
+			echo "<ul>$aff_fichiers</ul>";
 			
 			echo "<div>&nbsp;</div>";
 			echo "<div style='text-align: right;'><input class='fondo' style='font-size: 9px;' TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."'></div>";
@@ -355,16 +378,12 @@ if ($ajout_doc == 'oui') {
 			echo "</form>";
 			install_fin_html();
 				
-				
 			die();
-
-
 		}
-		  
-				
-  		
-  		
-		
+		else {
+			$image = $image_name;
+			$supprimer_ecrire_upload = $image;
+		}
 	}
 	else if (eregi(".zip$",$image_name)) {
 		if ($action_zip == "telquel") {
@@ -642,7 +661,7 @@ $redirect_url = "ecrire/" . $vars["redirect"];
 $link = new Link($redirect_url);
 reset($vars);
 while (list ($key, $val) = each ($vars)) {
-	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot)$", $key)) {
+	if (!ereg("^(redirect|image.*|hash.*|ajout.*|doc.*|transformer.*|modifier_.*|ok|type|forcer_.*|var_rot|action_zips)$", $key)) {
 		$link->addVar($key, $val);
 	}
 }
