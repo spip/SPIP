@@ -1292,7 +1292,11 @@ if ((lire_meta('multi_articles') == 'oui')
 			$id_trad = 0;
 		}
 
-		if ($connect_statut=='0minirezo' AND $id_trad_new > 0) { // Changer article de reference de la trad
+		// Changer article de reference de la trad
+		if ($id_trad_new = intval($id_trad_new)
+		AND $id_trad_old = intval($id_trad_old)
+		AND $connect_statut=='0minirezo'
+		AND $connect_toutes_rubriques) { 
 			spip_query("UPDATE spip_articles SET id_trad = $id_trad_new WHERE id_trad = $id_trad_old");
 			$id_trad = $id_trad_new;
 		}
@@ -1357,20 +1361,23 @@ if ((lire_meta('multi_articles') == 'oui')
 				  $vals[] = http_img_pack('langues-12.gif', "", "width='12' height='12' border='0'");
 					$titre_trad = "<b>$titre_trad</b>";
 				} else {
-				  if ($connect_statut=='0minirezo') $vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'>". 
-				    http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'") . "</a>";
+				  if ($connect_statut=='0minirezo'
+				  AND $connect_toutes_rubriques)
+				  	$vals[] = "<a href='articles.php3?id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad'>". 
+				    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'", _T('trad_reference')) . "</a>";
 				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
 				}
 
 				$ret .= "</td>";
 
-				if ($id_article_trad == $id_article) $s = "$titre_trad";
-				else $s = "<a href='articles.php3?id_article=$id_article_trad'>$titre_trad</a>";
-				if ($id_article_trad == $id_trad) $s .= " "._T("trad_reference");
-				$vals[] = $s;
+				$s = typo($titre_trad);
+				if ($id_article_trad != $id_article) 
+					$s = "<a href='articles.php3?id_article=$id_article_trad'>$s</a>";
+				if ($id_article_trad == $id_trad)
+					$s .= " "._T('trad_reference');
 
+				$vals[] = $s;
 				$vals[] = traduire_nom_langue($lang_trad);
-			
 				$table[] = $vals;
 			}
 
