@@ -369,7 +369,7 @@ function formulaire_inscription() {
 		echo  "<P><B>Votre adresse email</B><BR>";
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"mail_inscription\" VALUE=\"\" SIZE=\"30\">";
 		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Valider\">";
-		echo  "</FORM>";
+		echo  "</DIV></FORM>";
 	}
 }
 
@@ -424,9 +424,8 @@ function formulaire_site($la_rubrique) {
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"url_site\" VALUE=\"\" SIZE=\"30\"></div>";
 		echo  "<P><B>Description/commentaire</B><BR>";
 		echo "<TEXTAREA NAME='description_site' ROWS='5' CLASS='forml' COLS='40' wrap=soft></textarea>";
-		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Valider\">";
-	
-		echo  "</FORM>";
+		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Valider\">";	
+		echo  "</DIV></FORM>";
 		}
 }
 
@@ -457,7 +456,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 			echo $link->getForm('POST');
 			echo "<input type='hidden' name='valide_message_auteur' value='oui'>";  // hash ?
 			echo "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Confirmer\" CLASS=\"spip_bouton\" VALUE=\"Confirmer l'envoi\">";
-			echo "</FORM>";
+			echo "</DIV></FORM>";
 		}
 	}
 
@@ -474,7 +473,7 @@ function ecrire_auteur($id_auteur,$email_auteur) {
 		echo  "<INPUT TYPE=\"text\" CLASS=\"forml\" NAME=\"sujet_message_auteur\" VALUE=\"".entites_html($GLOBALS[sujet_message_auteur])."\" SIZE=\"30\">\n";
 		echo  "<P><TEXTAREA NAME='texte_message_auteur' ROWS='10' CLASS='forml' COLS='40' wrap=soft>".entites_html($GLOBALS[texte_message_auteur])."</textarea></div>\n";
 		echo  "<DIV ALIGN=\"right\"><INPUT TYPE=\"submit\" NAME=\"Valider\" CLASS=\"spip_bouton\" VALUE=\"Envoyer un message\">";
-		echo  "</FORM>";
+		echo  "</DIV></FORM>";
 	}
 }
 
