@@ -77,7 +77,7 @@ function debut_surligne($mots, $mode_surligne) {
 			break;
 
 		case 'actif' :	// il y a un buffer a traiter
-			$la_page = mots_surligne(ob_get_contents(), $mots);
+			$la_page = surligner_mots(ob_get_contents(), $mots);
 			ob_end_clean();
 			echo $la_page;
 			ob_start("");
