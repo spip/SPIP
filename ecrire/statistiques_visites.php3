@@ -225,6 +225,7 @@ if (count($log)>0){
 		echo "</td>\n";
 		
 		$jour_prec = $key;
+		$val_prec = $value;
 	}
 		// Dernier jour
 		$hauteur = round($visites_today * $rapport)	- 1;
@@ -280,13 +281,16 @@ if (count($log)>0){
 		echo "<font face='arial,helvetica,sans-serif' size=1>(barres fonc&eacute;es :  dimanche / courbe fonc&eacute;e : &eacute;volution de la moyenne)</font>";
 		
 		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
-		echo "<td valign='top' width='50%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo "maximum&nbsp;: $max";
 		echo "<br>moyenne&nbsp;: ".round($moyenne);
 		echo "</td>";
-		echo "<td valign='top' width='50%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
 		echo "aujourd'hui&nbsp;: $visites_today";
-		echo "<br>total : $total_absolu";
+		if ($val_prec > 0) echo "<br>hier&nbsp;: $val_prec";
+		echo "</td>";
+		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Helvetica,sans-serif'>";
+		echo "<b>total : $total_absolu</b>";
 		echo "</td></tr></table>";		
 	
 	fin_cadre_relief();
