@@ -205,7 +205,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destination, $p
 	$formats_sortie = array('jpg','png','gif');
 
 	// si le doc n'est pas une image, refuser
-	if (!eregi(",$format,", ",$formats_graphiques,"))
+	if (!$force AND !eregi(",$format,", ",$formats_graphiques,"))
 		return;
 
 	// chercher un cache
