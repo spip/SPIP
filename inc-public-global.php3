@@ -349,6 +349,37 @@ if (lire_meta("activer_statistiques") != "non") {
 
 
 //
+// Effacement de la poubelle (documents supprimes)
+//
+
+if (file_exists($fichier_poubelle = "ecrire/data/.poubelle")) {
+	if (timeout('poubelle')) {
+		if ($s = sizeof($suite = file($fichier_poubelle))) {
+			$s = $suite[$n = rand(0, $s)];
+			$s = trim($s);
+			include_ecrire("inc_connect.php3");
+			if ($db_ok) {
+				// Verifier qu'on peut vraiment effacer le fichier...
+				$query = "SELECT id_document FROM spip_documents WHERE fichier='$s'";
+				$result = spip_query($query);
+				if (spip_num_rows($result) OR !ereg('^IMG/', $s) OR strpos($s, '..')) {
+					spip_log("Tentative d'effacement interdit: $s");
+				}
+				else {
+					@unlink($s);
+				}
+				unset($suite[$n]);
+				$f = fopen($fichier_poubelle, 'wb');
+				fwrite($f, join("", $suite));
+				fclose($f);
+			}
+		}
+		else @unlink($fichier_poubelle);
+	}
+}
+
+
+//
 // Gerer l'indexation automatique
 //
 
