@@ -87,7 +87,7 @@ function traduire_nom_langue($lang) {
 //
 // Initialisation
 //
-$GLOBALS['langues_ok'] = 'fr,en';
+$GLOBALS['langues_ok'] = 'fr,en,es';
 
 $GLOBALS['all_langs'] = lire_meta('sauver_langues_ok');
 if (strlen($GLOBALS['all_langs']) == 0) $GLOBALS['all_langs'] = $GLOBALS['langues_ok'];
