@@ -221,6 +221,41 @@ function traduire_nom_langue($lang) {
 }
 
 //
+// Afficher un menu de selection de langue
+//
+function menu_langues() {
+		$lien = $GLOBALS['clean_link'];
+		$lien->delVar('set_lang');
+		$lien = $lien->getUrl();
+		$amp = (strpos($lien,'?') ? '&' : '?');
+
+		$ret = "<form action='$lien' method='get' style='margin:0px; padding:0px;'>";
+		$ret .= "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien . $amp."set_lang='+this.options[this.selectedIndex].value\">\n";
+		$langues = explode(',', $GLOBALS['all_langs']);
+		while (list(,$l) = each ($langues)) {
+			if ($l == $GLOBALS['spip_lang']) $selected = " selected";
+			else $selected = "";
+
+			$ret .= "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
+		}
+		$ret .= "</select>\n";
+		$ret .= "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
+		$ret .= "</form>";
+		return $ret;
+}
+
+// menu dans l'espace public
+function gerer_menu_langues() {
+	global $set_lang;
+	if ($set_lang) {
+		if (changer_langue($set_lang)) {
+			spip_setcookie('spip_lang', $set_lang, time() + 365 * 24 * 3600);
+
+		}
+	}
+}
+
+//
 // Selection de langue haut niveau
 //
 function utiliser_langue_visiteur() {

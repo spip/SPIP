@@ -1042,7 +1042,6 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('onglet_contenu_site'), "configuration.php3", "contenu", $onglet, "racine-site-24.gif");
 		onglet(_T('onglet_interactivite'), "config-contenu.php3", "interactivite", $onglet, "forum-interne-24.gif");
 		onglet(_T('onglet_fonctions_avances'), "config-fonctions.php3", "fonctions", $onglet, "image-24.gif");
-		//onglet(_T('onglet_langue'), "config-lang.php3", "lang", $onglet, "langues-24.gif");
 	}
 
 	if ($rubrique == "suivi_forum"){
@@ -1567,21 +1566,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<td>   </td>";
 
 		echo "<td align='center'>";
-		$lien = $clean_link;
-		$lien->addVar('changer_var', 'oui'); // Bidon, pour forcer point d'interrogation
-
-		echo "<form action='".$lien->getUrl()."' method='get' style='margin:0px; padding:0px;'>";
-		echo "\n<select name='set_lang' class='verdana1' style='background-color: $couleur_foncee; color: white;' onChange=\"document.location.href='". $lien->getUrl() ."&set_lang='+this.options[this.selectedIndex].value\">\n";
-		$langues = explode(',', $GLOBALS['all_langs']);
-		while (list(,$l) = each ($langues)) {
-			if ($l == $GLOBALS['spip_lang']) $selected = " selected";
-			else $selected = "";
-
-			echo "<option value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
-		}
-		echo "</select>\n";
-		echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='>>' class='verdana1' style='background-color: $couleur_foncee; color: white; height: 19px;'></noscript>";
-		echo "</form>";
+		echo menu_langues();
 		echo "</td>";
 
 	}

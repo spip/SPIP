@@ -4,20 +4,24 @@ include("ecrire/inc_version.php3");
 
 include_ecrire("inc_presentation.php3");
 
+gerer_menu_langues();
+
 function bad_dirs($bad_dirs, $test_dir, $install) {
 	if ($install) {
-		$titre = "Pr&eacute;liminaire : <B>R&eacute;gler les droits d'acc&egrave;s</B>";
-		$continuer = " afin de commencer r&eacute;ellement l'installation";
+		$titre = _L("Pr&eacute;liminaire : <B>R&eacute;gler les droits d'acc&egrave;s</B>");
+		$continuer = _L(" afin de commencer r&eacute;ellement l'installation");
 	} else
-		$titre = "<b>Probl&egrave;me de droits d'acc&egrave;s</b>";
+		$titre = _L("<b>Probl&egrave;me de droits d'acc&egrave;s</b>");
 
-	echo "<BR><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>
-		<P><B>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>$bad_dirs.</ul> </B>
+	echo "<BR><FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
+
+	echo _L("<B>Les r&eacute;pertoires suivants ne sont pas accessibles en &eacute;criture&nbsp;: <ul>$bad_dirs.</ul> </B>
 		<P>Pour y rem&eacute;dier, utilisez votre client FTP afin de r&eacute;gler les droits d'acc&egrave;s de chacun
 		de ces r&eacute;pertoires. La proc&eacute;dure est expliqu&eacute;e en d&eacute;tail dans le guide d'installation.
-		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez <B><A HREF='spip_test_dirs.php3";
+		<P>Une fois cette manipulation effectu&eacute;e, vous pourrez ");
+	echo "<B><A HREF='spip_test_dirs.php3";
 	if ($test_dir) echo '?test_dir='.$test_dir;
-	echo "'>recharger cette page</A>$continuer.";
+	echo "'>" . _L("recharger cette page")."</A>$continuer.";
 }
 
 //
@@ -50,6 +54,8 @@ if ($bad_dirs) {
 
 	if ($install)
 		echo aide ("install0");
+
+	echo "<p><div align='right'>".menu_langues()."</div>";
 
 	install_fin_html();
 } else {
