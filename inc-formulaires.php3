@@ -256,7 +256,7 @@ function formulaire_signature($id_article) {
 			echo "<input type=\"text\" class=\"forml\" name=\"url_site\" value=\"http://\" size=\"20\" /></p></fieldset>";
 
 			if ($message_petition == "oui") {
-				echo "<fieldset>";
+				echo "<br /><fieldset>";
 
 				echo "<b>"._T('form_pet_message_commentaire')."</b><br />";
 				echo "<textarea name=\"message\" rows=\"3\" class=\"forml\" cols=\"20\" wrap='soft'>";
