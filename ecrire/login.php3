@@ -16,10 +16,6 @@ if (!$flag_js) {
 	echo "window.location.href = \"login.php3?flag_js=1\";\n";
 	echo "// --></script>\n";
 }
-else {
-	// Inclure les fonctions de calcul du MD5 en Javascript
-	echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
-}
 
 install_debut_html("$nom_site : acc&egrave;s &agrave; l'espace priv&eacute;");
 

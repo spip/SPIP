@@ -141,6 +141,9 @@ function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
 
 	// Si Javascript, creer un formulaire fantome dans lequel sera recopie le md5
 	if ($flag_js) {
+		// Inclure les fonctions de calcul du MD5
+		echo "<script type=\"text/javascript\" src=\"md5.js\"></script>";
+
 		echo "<form action='$dir"."spip_cookie.php3' method='post' name='form_md5'>\n";
 		echo "<input type='hidden' name='session_login' value=''>\n";
 		echo "<input type='hidden' name='session_password_md5' value=''>\n";
@@ -151,9 +154,9 @@ function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
 
 		// A la soumission du formulaire visible, recopier les valeurs
 		// dans le formulaire fantome et valider ce dernier
-		echo "<form onSubmit='encrypt(this.session_password, this.session_password_md5); ".
+		echo "<form onSubmit='".
 			"document.form_md5.session_login.value = this.session_login.value; ".
-			"document.form_md5.session_password_md5.value = this.session_password_md5.value; ".
+			"document.form_md5.session_password_md5.value = calcMD5(this.session_password.value); ".
 			"this.action=\"javascript:document.form_md5.submit()\";".
 			"'>\n";
 	}
@@ -167,8 +170,6 @@ function affiche_formulaire_login($login, $redirect, $redirect_echec = '') {
 
 	echo "<label><b>Mot de passe</b><br></label>";
 	echo "<input type='password' name='session_password' class='formo' value=\"\" size='40'><p>\n";
-
-	echo "<input type='hidden' name='session_password_md5' value=''>\n";
 
 	if (!$flag_js) {
 		echo "<input type='hidden' name='essai_login' value='oui'>\n";
