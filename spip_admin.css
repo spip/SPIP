@@ -56,7 +56,7 @@ a:active.spip-admin-boutons {
 	background-color: #FFECD9;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
-#spip-debug ul ul {
+#spip-debug ul table {
 	font-size: 80%;
 }
 
@@ -74,10 +74,10 @@ a:active.spip-admin-boutons {
 	font-weight: bold;
 }
 
-#spip-debug ul ul a {
+#spip-debug ul table a {
 	text-decoration: none;
 }
 
-#spip-debug ul ul a:hover {
+#spip-debug ul table a:hover {
 	text-decoration: underline;
 }

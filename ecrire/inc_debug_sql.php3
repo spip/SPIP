@@ -96,7 +96,7 @@ function erreur_squelette($message='', $lieu='') {
 	if (++$runs > 4) {
 		if ($HTTP_COOKIE_VARS['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
-		$GLOBALS['var_mode']) {
+		    ($GLOBALS['var_mode'] == 'debug')) {
 			echo debut_entete('Debug'), '</head><body>';
 			die(affiche_erreurs_page($tableau_des_erreurs));
 		}
@@ -107,13 +107,21 @@ function erreur_squelette($message='', $lieu='') {
 // Le debugueur v2
 //
 
-// appelee a chaque sortie de boucle (inc-compilo)
-function boucle_debug_resultat ($nom, $resultat) {
+// appelee a chaque sortie de boucle (inc-compilo) et a chaque requete
+// dans ce derniers cas on n'a pas le nom du squelette
+// alors on memorise dans une statique et lors de l'autre appel qui suit
+// on finalise
+function boucle_debug_resultat ($id, $nom, $resultat) {
 	global $debug_objets;
-
+	static $requete = array();
+	if (!$nom) {$requete[$id] = $resultat; return;}
+	if ($requete[$id]) {
+		$debug_objets['requete']["$nom$id"] = $requete[$id];
+		$requete[$id] = '';
+	}
 	// ne pas memoriser plus de 3 tours d'une meme boucle
-	if (count($debug_objets['resultat'][$nom]) < 3)
-		$debug_objets['resultat'][$nom][] = $resultat;
+	if (count($debug_objets['resultat']["$nom$id"]) < 3)
+		$debug_objets['resultat']["$nom$id"][] = $resultat;
 }
 
 // appelee a chaque compilation de boucle (inc-compilo)
@@ -131,7 +139,7 @@ function squelette_debug_compile($nom, $sourcefile, $squelette) {
 	$debug_objets['sourcefile'][$nom] = $sourcefile;
 }
 
-// appelee a chaque parsing de squelette (inc-parser)
+// appelee a chaque analyse syntaxique de squelette (inc-parser)
 function boucle_debug ($id, $nom, $boucle) {
 	global $debug_objets;
 
@@ -154,6 +162,11 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	$link->addvar('var_mode','debug');
 	$self = $link->getUrl();
 
+// en cas de squelette inclus,  virer le code de l'incluant:
+// - il contient souvent une Div restreignant la largeur a 3 fois rien
+// - ca fait 2 headers !
+	ob_end_clean();
+
 	echo debut_entete('Debug'), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
 	  "</head>\n<body>",
@@ -162,30 +175,28 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "<li><b>",$sourcefile,"</b>";
 		echo " <a href='",$self, "&var_mode_objet=$nom_skel&var_mode_affiche=resultat'>resultat</a>";
 		echo " <a href='", $self, "&var_mode_objet=$nom_skel&var_mode_affiche=code'>code</a>";
-		echo "<ul>\n";
-
+		echo "<table width='100%'>\n";
+		$i = 0;
+		$colors = array('#ff00ff', '#00ff00');
 		if (is_array($debug_objets['pretty']))
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
+				$i++;
 				$aff = "&lt;".$pretty."&gt;";
 				if ($var_mode_objet == $nom)
 					$aff = "<b>$aff</b>";
-				echo "<li>";
-				echo $aff;
-				echo " <a href='",$self,"&var_mode_objet=$nom&var_mode_affiche=boucle' class='debug_link_boucle'>boucle</a>";
-				echo " <a href='",$self, "&var_mode_objet=$nom&var_mode_affiche=resultat' class='debug_link_resultat'>resultat</a>";
-				echo " <a href='", $self, "&var_mode_objet=$nom&var_mode_affiche=code' class='debug_link_code'>code</a>";
-				echo "</li>\n";
+				echo "<tr bgcolor='" . $colors[$i%2] . "'><td  align='right'>$i</td><td><a href='",$self,"&var_mode_objet=$nom&var_mode_affiche=boucle' class='debug_link_boucle'>boucle</a></td><td><a href='",$self, "&var_mode_objet=$nom&var_mode_affiche=resultat' class='debug_link_resultat'>resultat</a></td><td><a href='", $self, "&var_mode_objet=$nom&var_mode_affiche=code' class='debug_link_code'>code</a></td><td>$aff</td></tr>";
 			}
-		echo "</ul>\n</li>\n";
+		echo "</table>\n</li>\n";
 	}
 	echo "</ul>\n";
 	if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
 	  if ($var_mode_affiche == 'resultat') {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
+		highlight_string($debug_objets['requete'][$var_mode_objet]);
 		echo "<p class='spip-admin-bloc'>les premiers appels &agrave; cette boucle ont donn&eacute;&nbsp;:</p>";
-		foreach ($res as $view)
-			echo "<ul><fieldset>",interdire_scripts($view),"</fieldset></ul>";
+		foreach ($res as $view) 
+			if ($res) echo "<br><fieldset>",interdire_scripts($view),"</fieldset>";
 		echo "</fieldset></div>";
 
       } else if ($var_mode_affiche == 'code') {
@@ -196,7 +207,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
 		highlight_string($res);
 		echo "</fieldset></div>";
-  }
+	  }
     }
 
 	if ($texte) {
@@ -220,7 +231,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	}
 	echo "\n</div>";
 	echo inclure_balise_dynamique(balise_formulaire_admin_dyn('','','','','',$debug_objets));
-	echo '</body>';
+	echo '</body></html>';
 	exit;
 }
 
