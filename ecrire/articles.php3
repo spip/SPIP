@@ -261,7 +261,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 	// -- Experimental --
 	// Stockage des versions
 	if ($articles_versions) {
-		include_ecrire("inc_diff.php3");
+		include_ecrire("inc_revisions.php3");
 		ajouter_version($id_article, $champs_versions);
 	}
 
@@ -420,7 +420,7 @@ if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites 
 }
 
 if ($articles_versions AND $id_version>1 AND $options == "avancees") {
-	icone_horizontale(_L('Afficher les r&eacute;visions...'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
+	icone_horizontale(_L('Afficher l\'historique'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
 }
 
 echo "</div>\n";
