@@ -1,5 +1,37 @@
 <?php
 
+if (defined("_INC_PUBLIC")) {
+	global $contexte;
+	$fichier_requete = $fond;
+	if (is_array($contexte)) {
+		reset($contexte);
+		while(list($key, $val) = each($contexte)) $fichier_requete .= '&'.$key.'='.$val;
+	}
+	echo $fichier_requete."<p>";
+	$fichier_cache = generer_nom_fichier_cache($fichier_requete);
+	$chemin_cache = "CACHE/".$fichier_cache;
+	$use_cache = utiliser_cache($chemin_cache);
+
+	if (!$use_cache) {
+		include_ecrire("inc_connect.php3");
+		include_local("inc-calcul.php3");
+		$page = executer_squelette($fond, $contexte);
+		if ($page) {
+			$f = fopen($chemin_cache, "wb");
+			fwrite($f, $page);
+			fclose($f);
+		}
+	}
+
+	include_cache($chemin_cache);
+
+	// ATTENTION : ne marchera pas sous PHP3
+	return;
+}
+
+
+define("_INC_PUBLIC", "1");
+
 $dir_ecrire = 'ecrire/';
 include ("ecrire/inc_version.php3");
 include_local ("inc-cache.php3");
@@ -15,62 +47,19 @@ if ($ajout_forum) {
 
 
 //
-// Calcul du nom du fichier cache
+// Gestion du cache et calcul de la page
 //
 
 $fichier_requete = $REQUEST_URI;
 $fichier_requete = strtr($fichier_requete, '?', '&');
 $fichier_requete = eregi_replace('&(submit|valider|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
 
-$md_cache = md5($fichier_requete);
-
-$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
-$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
-$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
-$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
-if (strlen($fichier_cache) > 24)
-	$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-', '\1-', $fichier_cache), -24);
-
-if (!$fichier_cache)
-	$fichier_cache = 'INDEX-';
-$fichier_cache .= '.'.substr($md_cache, 1, 6);
-
-$subdir_cache = substr($md_cache, 0, 1);
-
-if (creer_repertoire("CACHE", $subdir_cache))
-	$fichier_cache = "$subdir_cache/$fichier_cache";
-
-$chemin_cache = "CACHE/$fichier_cache";
+$fichier_cache = generer_nom_fichier_cache($fichier_requete);
+$chemin_cache = "CACHE/".$fichier_cache;
 
 
-//
-// Doit-on recalculer le cache ?
-//
+$use_cache = utiliser_cache($chemin_cache);
 
-$use_cache = true;
-
-if (file_exists($chemin_cache)) {
-	// Eviter de recalculer pour les moteurs de recherche, proxies...
-	if ($REQUEST_METHOD == 'HEAD') {
-		$use_cache = true;
-	}
-	else {
-		$lastmodified = filemtime($chemin_cache);
-		$ledelais = time() - $lastmodified;
-		$use_cache &= ($ledelais < $delais AND $ledelais > 0);
-	}
-}
-else {
-	$use_cache = false;
-}
-
-$use_cache &= ($recalcul != 'oui');
-$use_cache &= empty($HTTP_POST_VARS);
-
-if (!$use_cache) {
-	include_ecrire("inc_connect.php3");
-	if (!$db_ok) $use_cache = true;
-}
 
 if ($use_cache) {
 	if (file_exists("ecrire/inc_meta_cache.php3")) {
@@ -96,29 +85,11 @@ else {
 
 	$calculer_cache = true;
 
-	if ($id_rubrique) {
-		$id_rubrique_fond = $id_rubrique;
-	}
-	else if ($id_breve) {
-		$query = "SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'";
+	if ($id_article) {
+		$query = "SELECT chapo FROM spip_articles WHERE id_article='$id_article'";
 		$result = spip_query($query);
 		while($row = mysql_fetch_array($result)) {
-			$id_rubrique_fond = $row[0];
-		}
-	}
-	else if ($id_syndic) {
-		$query = "SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
-		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
-			$id_rubrique_fond = $row[0];
-		}
-	}
-	else if ($id_article) {
-		$query = "SELECT id_rubrique, chapo FROM spip_articles WHERE id_article='$id_article'";
-		$result = spip_query($query);
-		while($row = mysql_fetch_array($result)) {
-			$id_rubrique_fond = $row[0];
-			$chapo = $row[1];
+			$chapo = $row[0];
 		}
 		if (substr($chapo, 0, 1) == '=') {
 			$url = substr($chapo, 1);
@@ -129,9 +100,7 @@ else {
 			fclose($file);
 		}
 	}
-	else {
-		$id_rubrique_fond = 0;
-	}
+
 	if ($calculer_cache) {
 		include_local ("inc-calcul.php3");
 		$page = calculer_page($fond);
@@ -162,11 +131,8 @@ if ($var_recherche AND $flag_ob AND $flag_preg_replace AND !$flag_preserver AND 
 //
 
 if (file_exists($chemin_cache)) {
-	@Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
-	include ($chemin_cache);
-	if ($flag_apc) {
-		apc_rm($chemin_cache);
-	}
+	if ($lastmodified) @Header ("Last-Modified: ".gmdate("D, d M Y H:i:s T", $lastmodified));
+	include_cache($chemin_cache);
 }
 
 

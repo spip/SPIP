@@ -7,6 +7,78 @@ define("_INC_CACHE", "1");
 
 
 //
+// Inclure un fichier cache
+//
+
+function include_cache($chemin_cache) {
+	include_local($chemin_cache);
+	if ($GLOBALS['flag_apc']) {
+		apc_rm($chemin_cache);
+	}
+}
+
+//
+// Calcul du nom du fichier cache
+//
+
+function generer_nom_fichier_cache($fichier_requete) {
+	$md_cache = md5($fichier_requete);
+	
+	$fichier_cache = ereg_replace('^/+', '', $fichier_requete);
+	$fichier_cache = ereg_replace('\.[a-zA-Z0-9]*', '', $fichier_cache);
+	$fichier_cache = ereg_replace('&[^&]+=([^&]+)', '&\1', $fichier_cache);
+	$fichier_cache = rawurlencode(strtr($fichier_cache, '/&-', '--_'));
+	if (strlen($fichier_cache) > 24)
+		$fichier_cache = substr(ereg_replace('([a-zA-Z]{1,3})[^-]*-', '\1-', $fichier_cache), -24);
+	
+	if (!$fichier_cache)
+		$fichier_cache = 'INDEX-';
+	$fichier_cache .= '.'.substr($md_cache, 1, 6);
+	
+	$subdir_cache = substr($md_cache, 0, 1);
+	
+	if (creer_repertoire("CACHE", $subdir_cache))
+		$fichier_cache = "$subdir_cache/$fichier_cache";
+	
+	return $fichier_cache;
+}
+
+
+//
+// Doit-on recalculer le cache ?
+//
+
+function utiliser_cache($chemin_cache) {
+	global $HTTP_SERVER_VARS, $HTTP_POST_VARS;
+	global $lastmodified;
+
+	$use_cache = true;
+	if (file_exists($chemin_cache)) {
+		// Eviter de recalculer pour les moteurs de recherche, proxies...
+		if ($HTTP_SERVER_VARS['REQUEST_METHOD'] == 'HEAD') {
+			$use_cache = true;
+		}
+		else {
+			$lastmodified = filemtime($chemin_cache);
+			$ledelais = time() - $lastmodified;
+			$use_cache &= ($ledelais < $delais AND $ledelais > 0);
+		}
+	}
+	else {
+		$use_cache = false;
+	}
+	$use_cache &= ($GLOBALS['recalcul'] != 'oui');
+	$use_cache &= empty($HTTP_POST_VARS);
+
+	if (!$use_cache) {
+		include_ecrire("inc_connect.php3");
+		if (!$GLOBALS['db_ok']) $use_cache = true;
+	}
+	return $use_cache;
+}
+
+
+//
 // Retourne true si le sous-repertoire peut etre cree, false sinon
 //
 

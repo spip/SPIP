@@ -266,35 +266,46 @@ class InstanceBoucle {
 function executer_squelette($squelette, $contexte) {
 	global $pile_boucles;
 	global $ptr_pile_boucles;
+	static $fonctions_squelettes = '';
 
 	$pile_boucles = '';
 	$ptr_pile_boucles = 0;
 
-	$squelette_cache = 'CACHE/skel_'.rawurlencode($squelette).'.php3';
-	$use_cache = false;
-	if (file_exists($squelette_cache)) {
-		$t = filemtime($squelette_cache);
-		if ((filemtime("$squelette.html") < $t)
-		AND (filemtime("inc-calcul-squel.php3") < $t)
-		AND (!file_exists("mes_fonctions.php3") OR (filemtime("mes_fonctions.php3") < $t))) {
-			$use_cache = true;
+	// Si squelette pas deja inclus, l'inclure
+	if (!$fonctions_squelettes[$squelette]) {
+		$squelette_cache = 'CACHE/skel_'.rawurlencode($squelette).'.php3';
+		$use_cache = false;
+		if (file_exists($squelette_cache)) {
+			$t = filemtime($squelette_cache);
+			if ((filemtime("$squelette.html") < $t)
+			AND (filemtime("inc-calcul-squel.php3") < $t)
+			AND (!file_exists("mes_fonctions.php3") OR (filemtime("mes_fonctions.php3") < $t))) {
+				$use_cache = true;
+			}
+		}
+		if ($GLOBALS['recalcul_squelettes'] == 'oui') {
+			$use_cache = false;
+		}
+
+		// Au besoin, recompiler le squelette
+		if (!$use_cache) {
+			include_local ("inc-calcul-squel.php3");
+			calculer_squelette($squelette, $squelette_cache);
+		}
+
+		// L'inclusion du squelette permet de definir les fonctions associees
+		// aux boucles, et de recuperer le nom de la fonction principale	
+		include($squelette_cache);
+		$fonctions_squelettes[$squelette] = $func_squelette_executer;
+		if ($GLOBALS['flag_apc']) {
+			apc_rm($squelette_cache);
 		}
 	}
-	if ($GLOBALS['recalcul_squelettes'] == 'oui') {
-		$use_cache = false;
-	}
-	
-	if (!$use_cache) {
-		include_local ("inc-calcul-squel.php3");
-		calculer_squelette($squelette, $squelette_cache);
-	}
 
-	include($squelette_cache);
-	if ($GLOBALS['flag_apc']) {
-		apc_rm($squelette_cache);
-	}
-
-	return $func_squelette_executer($contexte);
+	// Executer la fonction principale du squelette
+	// (i.e. racine de l'arbre d'execution)
+	$f = $fonctions_squelettes[$squelette];
+	return $f($contexte);
 }
 
 
@@ -364,8 +375,6 @@ function calculer_page($fond) {
 	$id_doublons['syndication'] = '0';
 	$id_doublons['documents'] = '0';
 
-	$fond = chercher_squelette($fond, $id_rubrique_fond);
-	
 	$contexte_defaut = array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 		'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_mot', 'id_document');
 	reset($contexte_defaut);
@@ -377,6 +386,39 @@ function calculer_page($fond) {
 	if ($GLOBALS["date"]) {
 		$contexte["date"] = $GLOBALS["date"];
 	}
+
+	// Calcul de la rubrique associee a la requete
+	// (selection de squelette specifique)
+
+	if ($id_rubrique = $contexte['id_rubrique']) {
+		$id_rubrique_fond = $id_rubrique;
+	}
+	else if ($id_breve  = $contexte['id_breve']) {
+		$query = "SELECT id_rubrique FROM spip_breves WHERE id_breve='$id_breve'";
+		$result = spip_query($query);
+		while($row = mysql_fetch_array($result)) {
+			$id_rubrique_fond = $row[0];
+		}
+	}
+	else if ($id_syndic = $contexte['id_syndic']) {
+		$query = "SELECT id_rubrique FROM spip_syndic WHERE id_syndic='$id_syndic'";
+		$result = spip_query($query);
+		while($row = mysql_fetch_array($result)) {
+			$id_rubrique_fond = $row[0];
+		}
+	}
+	else if ($id_article = $contexte['id_article']) {
+		$query = "SELECT id_rubrique FROM spip_articles WHERE id_article='$id_article'";
+		$result = spip_query($query);
+		while($row = mysql_fetch_array($result)) {
+			$id_rubrique_fond = $row[0];
+		}
+	}
+	else {
+		$id_rubrique_fond = 0;
+	}
+
+	$fond = chercher_squelette($fond, $id_rubrique_fond);
 
 	recuperer_parametres_url($fond, $fichier_requete);
 
