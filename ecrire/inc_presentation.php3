@@ -1481,7 +1481,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 
 	echo "<td width='100%'>   </td>";
 
-	if ($auth_can_disconnect AND $options == "avancees") {
+	if ($auth_can_disconnect) {
 		echo "<td width='5'>&nbsp;</td>";
 		icone_bandeau_secondaire ("Se d&eacute;connecter", "?logout=$connect_login", "deconnecter-24.gif", "", $sous_rubrique, "deconnect");
 	}
