@@ -814,22 +814,30 @@ if (LOCK_UN!=3) {
 	define ('LOCK_NB', 4);
 }
 function test_flock ($dir, $fp=false) {
+	static $flock = array();
 	global $flag_flock;
-	if (!$dir) $dir = '.';
-
 	if (!$flag_flock)
 		return false;
 
-	// si on me passe un pointeur, je teste et j'ecris le resultat
-	if ($fp) {
-		if (@flock($fp, LOCK_SH)) {
-			@flock($fp, LOCK_UN);
-			@touch("$dir/.flock_ok");
-		} else
-			@unlink("$dir/.flock_ok");
+	if (!$dir) $dir = '.';
+
+	// premier appel pour ce $dir ?
+	if (!isset($flock[$dir])) {
+		// si on me passe un pointeur, je teste et j'ecris le resultat
+		if ($fp) {
+			if (@flock($fp, LOCK_SH)) {
+				@flock($fp, LOCK_UN);
+				@touch("$dir/.flock_ok");
+			} else
+				@unlink("$dir/.flock_ok");
+		}
+		// si le fichier est la et pas trop vieux -- id est:
+		// pas recopie depuis une autre installation ! -- c'est ok.
+		$flock[$dir] = (@file_exists("$dir/.flock_ok")
+		AND (filemtime("$dir/.flock_ok") > time() - 3600));
 	}
 
-	return @file_exists("$dir/.flock_ok");
+	return $flock[$dir];
 }
 
 // Si flock ne marche pas dans ce repertoire ou chez cet hebergeur,
