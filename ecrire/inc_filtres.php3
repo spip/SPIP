@@ -528,10 +528,9 @@ function date_iso($date_heure) {
 }
 
 function reduire_image($img, $taille = 120, $taille_y=0) {
-  spip_log("reduire: $img, $taille");
 	if (!$img) return;
 	include_ecrire('inc_logos.php3');
-	reduire_image_logo($img, $taille, $taille_y);
+	return reduire_image_logo($img, $taille, $taille_y);
 }
 
 //
