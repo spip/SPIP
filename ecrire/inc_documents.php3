@@ -409,7 +409,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	}
 
 
-	if (lire_meta("documents_$type") != 'non' AND $flag_modif AND ($type == "rubrique" OR $options == "avancees")) {
+	if (lire_meta("documents_$type") != 'non' AND $flag_modif AND $type == "rubrique") {
 		/// Ajouter nouveau document/image
 
 		echo debut_cadre_enfonce("doc-24.gif",false,"creer.gif");

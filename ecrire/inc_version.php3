@@ -555,7 +555,6 @@ class Link {
 	//
 
 	function getForm($method = 'GET', $anchor = '', $enctype = '') {
-		include_ecrire("inc_filtres.php3");
 		if ($anchor) $anchor = '#'.$anchor;
 		$form = "<form method='$method' action='".$this->file.$anchor."'";
 		if ($enctype) $form .= " enctype='$enctype'";
@@ -564,7 +563,8 @@ class Link {
 		if (is_array($vars)) {
 			reset($vars);
 			while (list($name, $value) = each($vars)) {
-				$form .= "<input type=\"hidden\" name=\"$name\" value=\"".entites_html($value)."\">\n";
+				$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($texte));
+				$form .= "<input type=\"hidden\" name=\"$name\" value=\"$value\">\n";
 			}
 		}
 		if (is_array($this->arrays)) {
@@ -572,7 +572,8 @@ class Link {
 			while (list($name, $table) = each($this->vars)) {
 				reset($table);
 				while (list(, $value) = each($table)) {
-					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"".entites_html($value)."\">\n";
+					$value = ereg_replace('&amp;(#[0-9]+;)', '&\1', htmlspecialchars($texte));
+					$form .= "<input type=\"hidden\" name=\"".$name."[]\" value=\"$value\">\n";
 				}
 			}
 		}

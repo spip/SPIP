@@ -69,6 +69,7 @@ else {
 //
 // Authentification
 //
+
 if ($HTTP_COOKIE_VARS['spip_session'] OR $PHP_AUTH_USER) {
 	include_ecrire ("inc_session.php3");
 	verifier_visiteur();
@@ -254,37 +255,31 @@ if (lire_meta('activer_moteur') == 'oui') {
 // Se declenche une fois par jour quand le cache n'est pas recalcule
 //
 
-if ($use_cache && file_exists('CACHE/.purge2')) {
-		if ($db_ok) {
-		unlink('CACHE/.purge2');
-		$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
-		$result = spip_query($query);
-		unset($fichiers);
-		while ($row = spip_fetch_array($result)) {
-			$fichier = $row['fichier'];
-			if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
-		}
-		if ($fichiers) {
-			$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
-			spip_query($query);
-		}
+if ($use_cache && file_exists('CACHE/.purge2') && $db_ok) {
+	unlink('CACHE/.purge2');
+	$query = "SELECT fichier FROM spip_forum_cache WHERE maj < DATE_SUB(NOW(), INTERVAL 14 DAY)";
+	$result = spip_query($query);
+	unset($fichiers);
+	while ($row = spip_fetch_array($result)) {
+		$fichier = $row['fichier'];
+		if (!file_exists("CACHE/$fichier")) $fichiers[] = "'$fichier'";
+	}
+	if ($fichiers) {
+		$query = "DELETE FROM spip_forum_cache WHERE fichier IN (".join(',', $fichiers).")";
+		spip_query($query);
 	}
 }
 
 if ($use_cache && file_exists('CACHE/.purge')) {
-	if ($db_ok) {
-		unlink('CACHE/.purge');
-		$f = fopen('CACHE/.purge2', 'w');
-		fclose($f);
-		include_local ("inc-cache.php3");
-		purger_repertoire('CACHE', 14 * 24 * 3600);
-	}
+	unlink('CACHE/.purge');
+	$f = fopen('CACHE/.purge2', 'w');
+	fclose($f);
+	include_local ("inc-cache.php3");
+	purger_repertoire('CACHE', 14 * 24 * 3600);
 }
 
+
 // ---------------------------------------------------------------------------------------
-
-//include_local ("inc-debug.php3");
-
 
 //
 // Fonctionnalites administrateur (declenchees par le cookie admin, authentifie ou non)
@@ -303,7 +298,7 @@ function bouton_admin($titre, $lien) {
 
 	echo "\n<FORM ACTION='$lapage' METHOD='get'>\n";
 	$lesvars=explode("&",$lesvars);
-	
+
 	for($i=0;$i<count($lesvars);$i++){
 		$var_loc=explode("=",$lesvars[$i]);
 		if ($var_loc[0] != "submit")
@@ -315,8 +310,6 @@ function bouton_admin($titre, $lien) {
 
 
 if ($admin_ok AND !$flag_preserver) {
-	include_ecrire("inc_filtres.php3");
-
 	echo '<div class="spip-admin">';
 
 	if ($id_article) {

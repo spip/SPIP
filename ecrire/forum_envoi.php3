@@ -13,12 +13,12 @@ if ($valider_forum AND ($statut!='')) {
 	$query = "INSERT INTO spip_forum (titre, texte, date_heure, nom_site, url_site, statut, id_auteur, auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve, id_message, id_syndic) ".
 	"VALUES (\"$titre_message\", \"$texte\", NOW(), \"$nom_site\", \"$url_site\", \"$statut\", \"$connect_id_auteur\", \"$nom\", '$connect_email', '$id_rubrique', '$id_parent', '$id_article', '$id_breve', '$id_message', '$id_syndic')";
 	$result = spip_query($query);
-	
+
 	if ($id_message > 0) {
 		$query = "UPDATE spip_auteurs_messages SET vu = 'non' WHERE id_message='$id_message'";
 		$result = spip_query($query);
 	}
-	
+
 	@header("location:$adresse_retour");
 	die();
 }
@@ -47,13 +47,13 @@ echo "<FORM ACTION='forum_envoi.php3' METHOD='post'>";
 if ($modif_forum == "oui") {
 	debut_cadre_relief("forum-interne-24.gif");
 	echo "<b>".propre($titre_message)."</b>";
-	
+
 	echo "<p>".propre($texte);
-	
+
 	if (strlen($nom_site)>0) {
 		echo "<p><a href='$url_site'>$nom_site</a>";
 	}
-	
+
 	echo "<p><DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='Message d&eacute;finitif : envoyer'></div>";
 
 	fin_cadre_relief();
@@ -87,22 +87,23 @@ echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
 
 echo "<p><B>Texte de votre message :</B><BR>";
 echo "(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)<BR>";
-echo "<TEXTAREA NAME='texte' ROWS='25' CLASS='forml' COLS='40' wrap=soft>";
+echo "<TEXTAREA NAME='texte' ROWS='20' CLASS='forml' COLS='40' wrap=soft>";
 echo entites_html($texte);
 echo "</TEXTAREA><P>\n";
 
-echo "<B>Lien hypertexte :</B><BR>";
-echo "(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)<BR>";
-echo "Titre :<BR>";
-echo "<INPUT TYPE='text' CLASS='forml' NAME='nom_site' VALUE=\"$nom_site\" SIZE='40'><BR>";
+if ($statut != 'perso') {
+	echo "<B>Lien hypertexte :</B><BR>";
+	echo "(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)<BR>";
+	echo "Titre :<BR>";
+	echo "<INPUT TYPE='text' CLASS='forml' NAME='nom_site' VALUE=\"$nom_site\" SIZE='40'><BR>";
 
-$lien_url="http://";
-echo "URL :<BR>";
-echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'><P>";
+	$lien_url="http://";
+	echo "URL :<BR>";
+	echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'><P>";
+}
 
 echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' NAME='Valider' VALUE='Voir ce message avant de le valider'></div>";
 echo "</FORM>";
-
 
 fin_page();
 fin_cadre_formulaire();
