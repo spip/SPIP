@@ -211,22 +211,25 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 }
 
 
-// transformer les &eacute; en unicode
+// transformer les &eacute; en &#123;
 function html2unicode($texte) {
-	$trans = load_charset('html');
-
-	while ($a = strpos(' '.$texte, '&')) {
-		$traduit .= substr($texte,0,$a-1);
-		$texte = substr($texte,$a-1);
-		if (eregi('^&([a-z][a-z0-9]+);',$texte,$match)) {
-			if ($s = $GLOBALS['CHARSET'][$trans][$match[1]])
-				$texte = str_replace($match[0], $s, $texte);
+	static $trans;
+	if (!$trans) {
+		global $CHARSET;
+		load_charset('html');
+		reset($CHARSET['html']);
+		while (list($key, $val) = each($CHARSET['html'])) {
+			$trans["&$key;"] = $val;
 		}
-		// avancer d'un cran
-		$traduit .= $texte[0];
-		$texte = substr($texte, 1);
 	}
-	return $traduit.$texte;
+
+	if ($GLOBALS['flag_strtr2']) return strtr($texte, $trans);
+
+	reset($trans);
+	while (list($from, $to) = each($trans)) {
+		$texte = str_replace($from, $to, $texte);
+	}
+	return $texte;
 }
 
 
@@ -396,7 +399,7 @@ function utf_32_to_unicode($source) {
 		reset($words);
 		while (list(, $word) = each($words)) {
 			if ($word < 128) $texte .= chr($word);
-			else $texte .= '&#'.$word.';';
+			else if ($word != 65279) $texte .= '&#'.$word.';';
 		}
 	}
 	return $texte;
@@ -422,33 +425,40 @@ function unicode_to_utf_8($texte) {
 //
 // Translitteration charset => ascii (pour l'indexation)
 //
-function translitteration ($texte, $charset='AUTO') {
+function translitteration($texte, $charset='AUTO') {
+	static $trans;
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
-	// 1. passer le charset et les eacute en unicode
+	// 1. Passer le charset et les &eacute en entites unicode
 	$texte = html2unicode(charset2unicode($texte, $charset, true));
 
-	// 2. translitterer
-	$trans = load_charset('translit');
-	while (ereg('&#0*([0-9]+);', $texte, $regs) AND !$vu[$j = $regs[0]]) {
-		$vu[$j] = true;
-		if ($s = $GLOBALS['CHARSET'][$trans][$regs[1]])
-			$texte = str_replace($j, $s, $texte);
-		// on va tenter de trouver la translitteration ailleurs
-		// - dans iconv par exemple
-		else if ($GLOBALS['flag_iconv'] AND ($iconv = @iconv('UTF-8', 'ASCII//TRANSLIT', unicode_to_utf_8($j))) AND !ereg('^\?+$',$iconv)) {
-			$GLOBALS['CHARSET']['translit'][$regs[1]] = $iconv;
-			$texte = str_replace($j, $iconv, $texte);
-			spip_debug("translitteration $j => '$iconv'");
-		} // supprimer les caracteres inconnus
-		else
-			$texte = str_replace($j, '.', $texte);
+	// 2. Translitterer grace a la table predefinie
+	if (!$trans) {
+		global $CHARSET;
+		load_charset('translit');
+		reset($CHARSET['translit']);
+		while (list($key, $val) = each($CHARSET['translit'])) {
+			$trans["&#$key;"] = $val;
+		}
+	}
+	if ($GLOBALS['flag_strtr2'])
+		$texte = strtr($texte, $trans);
+	else {
+		reset($trans);
+		while (list($from, $to) = each($trans)) {
+			$texte = str_replace($from, $to, $texte);
+		}
+	}
+
+	// 3. Translitterer grace a iconv
+	if ($GLOBALS['flag_iconv'] && ereg('&#0*([0-9]+);', $texte)) {
+		$texte = iconv('utf-8', 'ascii//translit', unicode_to_utf_8($texte));
 	}
 	return $texte;
 }
 
-// initialisation securite
+// Initialisation
 $GLOBALS['CHARSET'] = Array();
 
 ?>
