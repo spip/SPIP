@@ -65,11 +65,11 @@ function calculer_champ_FORMULAIRE_SITE($fonctions, $nom_champ, $id_boucle, &$bo
 	$milieu = '
 		$spip_lang = $GLOBALS["spip_lang"];
 		$lacible = ' .
-		index_pile($id_boucle,  'id_rubrique', $boucles) . ';';
-	$code = '(lire_meta("proposer_sites") != "2") ? "" :
-		("<"."?php include(\'inc-formulaires.php3\');
-		lang_select(\"$spip_lang\"); formulaire_site($lacible);
-		lang_dselect(); ?".">")';
+		index_pile($id_boucle, 'id_rubrique', $boucles) . ';';
+	$code = '((lire_meta("proposer_sites") == 2) ?
+		"<"."?php include(\'inc-formulaires.php3\');
+		lang_select(\'$spip_lang\'); formulaire_site($lacible);
+		lang_dselect(); ?".">" : "")';
 	list($c,$m) = applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere, 'php');
 	return array($c,$milieu . $m);
 }
