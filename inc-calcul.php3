@@ -84,6 +84,7 @@ function cherche_page_incluse($cache, $contexte)
 function calculer_page_globale($cache, $fond, $var_recherche)
  {
    global $spip_lang;
+	global $contexte;	// va avec le truc sale ci-dessous :-)
 
    $contexte = $GLOBALS['HTTP_GET_VARS'];
    if ($GLOBALS['date'])
@@ -93,7 +94,6 @@ function calculer_page_globale($cache, $fond, $var_recherche)
 
 	// Analyser les URLs personnalisees (inc-urls-...)
 	/* attention c'est assez sale */
-	global $contexte;
 	$fichier_requete = $GLOBALS['REQUEST_URI'];
 	$fichier_requete = strtr($fichier_requete, '?', '&');
 	$fichier_requete = eregi_replace('&(submit|valider|PHPSESSID|(var_[^=&]*)|recalcul)=[^&]*', '', $fichier_requete);
