@@ -93,7 +93,7 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 
 	case 'URL_AUTEUR': # 1.7.2
 		$code = "generer_url_auteur(" .
-			index_pile($id_boucle, 'id_forum', $boucles) .")";
+			index_pile($id_boucle, 'id_auteur', $boucles) .")";
 		if ($boucles[$id_boucle]->hash)
 			$code = "url_var_recherche(" . $code . ")";
 		break;
