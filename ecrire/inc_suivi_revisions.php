@@ -109,7 +109,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 			echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' border='0'>&nbsp;";
 			echo "<a class='$statut' style='font-weight: bold;' href='articles_versions.php3?id_article=$id_article'>$titre</a>";
 			echo "</span>";
-			echo "<span class='arial1'>";
+			echo "<span class='arial1'$dir_lang>";
 			echo " $date $nom";
 			echo "</span>";
 		
