@@ -53,7 +53,7 @@ a:active.spip-admin-boutons {
 
 /* Style pour le mode debug */
 #spip-debug {
-	background-color: #FFECD9;
+	background-color: #f0f0f0;
 	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
 #spip-debug ul table {

@@ -426,7 +426,8 @@ else {
 	// On n'a pas d'aide du tout
 	if (!$html) {
 		// Renvoyer sur l'aide en ligne du serveur externe
-		if ($help_server)
+		// (hack: sauf sur SPIP.NET)
+		if ($help_server AND !defined('SPIP.NET_PAS_DE_BOUCLE_AIDE'))
 			@Header("Location: $help_server/?lang=$spip_lang");
 		// Ou alors message d'erreur
 		else {
