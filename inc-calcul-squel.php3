@@ -436,30 +436,31 @@ function parser_boucle($texte, $id_parent) {
 	
 					// Selection du classement
 					else if (ereg('^par[[:space:]]+([^}]*)$', $param, $match)) {
-						if ($match[1] == 'hasard') {
+						$tri = trim($match[1]);
+						if ($tri == 'hasard') { // par hasard
 							$req_select[] = "MOD($table.$id_objet * UNIX_TIMESTAMP(), 32767) & UNIX_TIMESTAMP() AS alea";
 							$req_order = " ORDER BY alea";
 						}
-						else if ($match[1] == 'titre_mot'){
+						else if ($tri == 'titre_mot'){ // par titre_mot
 							$req_order= " ORDER BY mots.titre";
 						}
-						else if ($match[1] == 'type_mot'){
+						else if ($tri == 'type_mot'){ // par type_mot
 							$req_order= " ORDER BY mots.type";
 						}
-						else if ($match[1] == 'points'){
+						else if ($tri == 'points'){ // par points
 							$req_order= " ORDER BY points";
 						}
-						else {
-							// numerique
-							if (ereg("^num[[:space:]]+(.*)",$match[1], $match2)) {
-								$parnum = '0+';
-								$match[1] = $match2[1];
-							} else {
-								$parnum = '';
-							}
-							$col = $match[1];
+						else if (ereg("^num[[:space:]]+(.*)",$tri, $match2)) { // par num champ
+							$req_select[] = "0+$table.".$match2[1]." AS num";
+							$req_order = " ORDER BY num";
+						}
+						else if (ereg("^[a-z0-9]+$", $tri)) { // par champ
+							$col = $tri;
 							if ($col == 'date') $col = $col_date;
-							$req_order = " ORDER BY $parnum$table.$col";
+							$req_order = " ORDER BY $table.$col";
+						}
+						else { // tris bizarres, par formule composee, virgules, etc.
+							$req_order = " ORDER BY ".$tri;
 						}
 					}
 				}
