@@ -80,9 +80,9 @@ if ($essai_login == "oui") {
 	else {
 		$url = urlencode($cible->getUrl());
 		if ($session_password || $session_password_md5) 
-			@header("Location: login.php3?login=$login&erreur=pass&url=$url");
+			@header("Location: spip_login.php3?login=$login&erreur=pass&url=$url");
 		else
-			@header("Location: login.php3?login=$login&url=$url");
+			@header("Location: spip_login.php3?login=$login&url=$url");
 		exit;
 	}
 }

@@ -91,7 +91,7 @@ function auth() {
 			// normalement on n'arrive pas la sauf changement de mot de passe dans la base
 			$auth_login = '';
 			echo "<p><b>Connexion refus&eacute;e</b></p>";
-			echo "[<a href='../login.php3?essai_auth_http=oui'>r&eacute;essayer</a>]";
+			echo "[<a href='../spip_login.php3?essai_auth_http=oui'>r&eacute;essayer</a>]";
 			exit;
 		}
 		$PHP_AUTH_PW = '';
@@ -112,14 +112,14 @@ function auth() {
 		}
 	}
 	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
-		@header("Location: ../login.php3?echec_cookie=oui");
+		@header("Location: ../spip_login.php3?echec_cookie=oui");
 		exit;
 	}
 
 	// Si pas authentifie, demander login / mdp
 	if (!$auth_login) {
 		$url = urlencode($GLOBALS['REQUEST_URI']);
-		@header("Location: ../login.php3?url=$url");
+		@header("Location: ../spip_login.php3?url=$url");
 		exit;
 	}
 
@@ -210,7 +210,7 @@ function auth() {
 	$auth_mdpass = '';
 	
 	if (!$auth_pass_ok) {
-		@header("Location: ../login.php3?erreur=pass");
+		@header("Location: ../spip_login.php3?erreur=pass");
 		exit;
 	}
 	

@@ -10,7 +10,7 @@ else
 
 // tentative de connexion en auth_http
 if ($essai_auth_http) {
-	auth_http($cible, 'login.php3', $essai_auth_http);
+	auth_http($cible, 'spip_login.php3', $essai_auth_http);
 	exit;
 }
 
@@ -25,11 +25,11 @@ if ($logout) {
 			supprimer_session($spip_session);
 		    setcookie('spip_session', $spip_session, time() - 3600 * 24);
 		} else if ($PHP_AUTH_USER)
-			auth_http($cible, 'login.php3', 'logout');
+			auth_http($cible, 'spip_login.php3', 'logout');
 	}
 }
 
 // login standard vers l'espace prive
-login($cible, "login.php3");
+login($cible, "spip_login.php3");
 
 ?>
