@@ -264,11 +264,11 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 		$script .= (strpos($script,'?') ? '&' : '?');
 	$args = "jour=$jour&mois=$mois&annee=$annee$ancre";
 	  
-  	$retour = "<div class='navigation-calendrier'>";
+  	$retour = "<div class='navigation-calendrier calendrier-moztop8' style='background-color: $couleur_foncee;'>";
 
 
    	if ($type != "mois") {
-   		$retour .= "<div id='nav-cal-choix-display'>";
+   		$retour .= "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>";
 		if ($partie_cal == "tout") $img_att = " class='calendrier-opacity'";
 		else $img_att = "";
 		$retour .= "<span$img_att>"
@@ -305,8 +305,8 @@ function http_calendrier_navigation($jour, $mois, $annee, $partie_cal, $echelle,
 					 _T('info_zoom'). '+');
  		$retour .= "</div>";
  	}
-
-	$retour .= "<div id='nav-cal-choix-calendrier'>";
+ 	
+ 	$retour .= "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>";
     $img_att = ($type == 'jour') ? " class='calendrier-opacity'" : '';
 	$retour .= http_href_img(($script . "type=jour&echelle=$echelle&$args"),"cal-jour.gif", $img_att, _T('cal_par_jour')) . "";
 	$img_att = ($type == 'semaine') ?  " class='calendrier-opacity'" : "" ;
