@@ -224,6 +224,64 @@ if ($options == 'avancees') {
 }
 
 
+//
+// Configuration du charset
+//
+
+if ($options == 'avancees') {
+	debut_cadre_relief();
+
+	$charset=lire_meta("charset");
+
+	// peut-on modifier cette valeur ?
+	$nbart = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_articles WHERE statut='publie'"));
+	$nbbre = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_breves WHERE statut='publie'"));
+	$modif_charset = ($nbart['count'] <= 3 AND $nbbre['count'] <= 3);
+
+	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='img_pack/rien.gif'><B><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3 COLOR='#FFFFFF'>Jeu de caract&egrave;res du site</FONT></B></TD></TR>";
+
+	echo "<TR><TD BACKGROUND='img_pack/rien.gif'>";
+	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 COLOR='#000000'>"
+		. propre("Cette option est utile pour construire un site dans un autre jeu de
+		caract&egrave;res que l'<code>iso-8859-1</code> (&eacute;galement appel&eacute;
+		<code>iso-latin-1</code> ou <code>occidental</code>). Exemples : un site en
+		cyrillique utilisera <code>windows-1251</code>; un site en esp&eacute;ranto
+		l'<code>UTF-8</code>; en cor&eacute;en, <code>EUC-KR</code>, etc.
+
+		Attention: il faudra &eacute;galement vous assurer que MySQL accepte les textes
+		entr&eacute;s dans le {charset} choisi.");
+
+		if (!$modif_charset) {
+			echo "<p>".propre("{{Vous avez maintenant publi&eacute; plus de trois articles
+			ou br&egrave;ves, il ne vous est donc plus possible de modifier le jeu de
+			caract&egrave;res de votre site sans risques.}}");
+
+			echo debut_boite_info();
+			echo propre("{{Jeu de caract&egrave;res de ce site: <code>$charset</code>}}");
+			echo fin_boite_info();
+		}
+	
+	echo "</FONT>";
+	echo "</TD></TR>";
+
+	if ($modif_charset) {
+		echo "<TR><TD BACKGROUND='img_pack/rien.gif' ALIGN='center'>";
+		echo "<INPUT TYPE='text' NAME='charset' VALUE='".entites_html($charset)."' size='40' class='forml'>";
+		echo "</TD></TR>";
+
+		echo "<TR><TD ALIGN='right'>";
+		echo "<INPUT TYPE='submit' NAME='Valider' VALUE='Valider' CLASS='fondo'>";
+		echo "</TD></TR>";
+	}
+
+	echo "</TABLE>";
+
+	fin_cadre_relief();
+}
+
+
+
 echo "</form>";
 
 
