@@ -144,7 +144,7 @@ function debut_cadre_relief($icone='', $return = false, $fonction=''){
 
 function fin_cadre_relief($return = false){
 	global $spip_display;
-	if ($spip_display != 1){	
+	if ($spip_display != 1){
 		$retour_aff = fin_cadre('r');
 	}
 	else {
@@ -159,7 +159,7 @@ function fin_cadre_relief($return = false){
 function debut_cadre_enfonce($icone='', $return = false, $fonction=''){
 	global $spip_display;
 
-	if ($spip_display != 1){	
+	if ($spip_display != 1){
 		$retour_aff = debut_cadre('e', $icone, $fonction);
 	}
 	else {
@@ -336,7 +336,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 			$link->addTmpVar($tmp_var, -1);
 			$texte .= "<A HREF=\"".$link->getUrl()."\">"._T('lien_tout_afficher')."</A>";
 		}
-	
+
 		$texte .= "</td>\n";
 		$texte .= "</tr>\n";
 		
@@ -1068,6 +1068,7 @@ function barre_onglets($rubrique, $onglet){
 
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = ""){
 	global $spip_display, $spip_ecran ;
+	global $menu_accesskey;
 
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -1085,20 +1086,30 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$alt = " alt=\"\" ";
 	}
 
-	if (eregi("^javascript:",$lien)){
+	if (!$menu_accesskey) $menu_accesskey = 1;
+	if ($menu_accesskey < 10) {
+		$accesskey = " accesskey='$menu_accesskey'";
+		$menu_accesskey++;
+	}
+	else if ($menu_accesskey == 10) {
+		$accesskey = " accesskey='0'";
+		$menu_accesskey++;
+	}
+
+	if (eregi("^javascript:",$lien)) {
 		$java_lien = substr($lien, 11, strlen($lien));
 		$onClick = "";
 		$a_href = '<script language="JavaScript"><!--' . "\n"
-			. 'document.write("<a href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
-			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
+			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\"");'."\n".'//--></script>'
+			. "<noscript><a$accesskey href='$lien_noscript' target='_blank'></noscript>\n";
 		$a_href_icone = '<script language="JavaScript"><!--' . "\n"
-			. 'document.write("<a href=\\"javascript:'.addslashes($java_lien).'\\" class=\\"icone\\"");'."\n".'//--></script>'
-			. "<noscript><a href='$lien_noscript' target='_blank'></noscript>\n";
+			. 'document.write("<a'.$accesskey.' href=\\"javascript:'.addslashes($java_lien).'\\" class=\\"icone\\"");'."\n".'//--></script>'
+			. "<noscript><a$accesskey href='$lien_noscript' target='_blank'></noscript>\n";
 	}
 	else {
 		$onClick = "";
-		$a_href = "<a href=\"$lien\">";
-		$a_href_icone = "<a href=\"$lien\" class='icone'>";
+		$a_href = "<a$accesskey href=\"$lien\">";
+		$a_href_icone = "<a$accesskey href=\"$lien\" class='icone'>";
 	}
 
 	if ($rubrique_icone == $rubrique){
@@ -1116,7 +1127,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		}
 		echo "</td></tr></table>";
 		echo "</td>\n";
-	} 
+	}
 	else {
 		echo "\n<td background='' align='center' width='$largeur' class=\"fondgris\" onMouseOver=\"changeclass(this,'fondgrison2');\" onMouseOut=\"changeclass(this,'fondgris');\" $onClick>";
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=$largeur>";
@@ -1133,16 +1144,17 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		echo "</td></tr></table>";
 		echo "</td>\n";
 	}
-	
+
 	if ($spip_ecran == "large") {
 		echo "<td width=10><img src='img_pack/rien.gif' border=0 width=10 height=1></td>";
 	}
-	
+
 }
 
 
 function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique, $aide=""){
 	global $spip_display;
+	global $menu_accesskey;
 
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -1160,12 +1172,22 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		$alt = " alt=\"\"";
 	}
 
+	if (!$menu_accesskey) $menu_accesskey = 1;
+	if ($menu_accesskey < 10) {
+		$accesskey = " accesskey='$menu_accesskey'";
+		$menu_accesskey++;
+	}
+	else if ($menu_accesskey == 10) {
+		$accesskey = " accesskey='0'";
+		$menu_accesskey++;
+	}
+
 	if ($rubrique_icone == $rubrique){
 		echo "\n<td background='' align='center' width='$largeur' class=\"fondgrison\">";
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
-		if ($spip_display != 1){	
+		if ($spip_display != 1){
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
+			echo "<a$accesskey href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
 			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
@@ -1174,7 +1196,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td></tr>";
 		echo "</table>";
 		if ($spip_display != 3){
-			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "<a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td>";
 	}
@@ -1183,7 +1205,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "\n<table cellpadding=0 cellspacing=0 border=0>";
 		if ($spip_display != 1){
 			echo "<tr><td background='' align='center'>";
-			echo "<a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
+			echo "<a$accesskey href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0' align='middle'></a>";
 			if (strlen($aide)>0) echo aide($aide);
 			echo "</td></tr>";
 		}
@@ -1192,10 +1214,10 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 		echo "</td></tr>";
 		echo "</table>";
 		if ($spip_display != 3){
-			echo "<a href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
+			echo "<a$accesskey href='$lien' class='icone'><font face='Verdana,Arial,Helvetica,sans-serif' size='1' color='black'><b>$texte</b></font></a>";
 		}
 		echo "</td>";
-	}	
+	}
 }
 
 
@@ -1324,7 +1346,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
-	
+
 	// nettoyer le lien global
 	$clean_link->delVar('var_lang');
 	$clean_link->delVar('set_options');
@@ -1482,11 +1504,10 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
 		if ($spip_display == "2")
 			echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1><b>"._T('info_rechercher_02')."</b></font><br>";
-		echo '<input type="text" size="18" value="'.$recherche_aff.'" name="recherche" class="spip_recherche">';
+		echo '<input accesskey="r" type="text" size="18" value="'.$recherche_aff.'" name="recherche" class="spip_recherche">';
 		echo "</form>";
 		echo "</td>";
 	}
-
 
 	echo "<td width='100%'>   </td>";
 
