@@ -401,7 +401,7 @@ function typo($letexte) {
 }
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
-function traiter_raccourcis($letexte, $les_echap = false) {
+function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = 'oui') {
 	global $puce;
 	global $debut_intertitre, $fin_intertitre;
 	global $compt_note;
@@ -432,27 +432,33 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 	while (ereg($regexp, $letexte, $regs)){
 		$note_texte = $regs[1];
 		$num_note = false;
-		if (ereg("^ *<([^>]*)>",$note_texte,$regs)){ // note pas auto ?
+
+		// note auto ou pas ?
+		if (ereg("^ *<([^>]*)>",$note_texte,$regs)){
 			$num_note=$regs[1];
 			$note_texte = ereg_replace ("^ *<([^>]*)>","",$note_texte);
-		} else { // note auto
+		} else {
 			$compt_note++;
 			$num_note=$compt_note;
 		}
+
+		// preparer la note
 		if ($num_note) {
 			$insert = "$ouvre_ref<a href='#nb$num_note' name='nh$num_note' class='spip_note'>$num_note</a>$ferme_ref";
-			if ($note_texte) {
-				if ($les_notes)
-					$les_notes .= "\n<p class='spip_note'>";
-				$les_notes .= traiter_raccourcis("<HTML>$ouvre_note<a href='#nh$num_note' name='nb$num_note' class='spip_note'>$num_note</a>$ferme_note</HTML> $note_texte");
-			}
+			$appel = "<html>$ouvre_note<a href='#nh$num_note' name='nb$num_note' class='spip_note'>$num_note</a>$ferme_note</html>";
 		} else {
 			$insert = '';
-			if ($les_notes)
-				$les_notes .= "\n<p class='spip_note'>";
-			if ($note_texte)
-				$les_notes .= traiter_raccourcis(trim($note_texte), $les_echap)."<p class='spip_note'>\n";
+			$appel = '';
 		}
+
+		// l'ajouter "brut" dans les notes
+		if ($note_texte) {
+			if ($les_notes || $mes_notes)
+				$mes_notes .= "<p>";
+			$mes_notes .= $appel . $note_texte;
+		}
+
+		// dans le texte, mettre l'appel de note a la place de la note
 		$letexte = implode($insert, split($regexp, $letexte, 2));
 	}
 
@@ -650,7 +656,12 @@ function traiter_raccourcis($letexte, $les_echap = false) {
 
 	// Reinserer les echappements
 	$letexte = echappe_retour($letexte, $les_echap, "SOURCEPROPRE");
-	$les_notes = echappe_retour($les_notes, $les_echap, "SOURCEPROPRE");
+
+	if ($mes_notes) {
+		$mes_notes = ereg_replace("<p class=\"spip\">", "<p class=\"spip_note\">",
+			traiter_raccourcis($mes_notes, $les_echap, 'non'));
+		$les_notes .= echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
+	}
 
 	return $letexte;
 }
