@@ -151,7 +151,7 @@ debut_cadre_enfonce("langues-24.gif");
 		echo "<p>";
 
 
-		$query = "SELECT lang, SUM(".$critere.") AS cnt FROM spip_articles GROUP BY lang";
+		$query = "SELECT lang, SUM(".$critere.") AS cnt FROM spip_articles WHERE statut='publie' GROUP BY lang";
 		$result = spip_query($query);
 		
 		
@@ -171,7 +171,8 @@ debut_cadre_enfonce("langues-24.gif");
 			}
 
 			echo "<tr bgcolor='$couleur'>";
-			echo "<td width='100%'><font face='verdana,arial,helvetica' size='2'>".traduire_nom_langue($lang)." : $visites%</font></td>";
+			if (lang_rtl($lang)) $dir=' dir=rtl'; else $dir='';
+			echo "<td width='100%'><font face='verdana,arial,helvetica' size='2'><span$dir>".traduire_nom_langue($lang)." : $visites%</span></font></td>";
 			
 			echo "<td>";
 				echo "<TABLE CELLPADDING=0 CELLSPACING=0 BORDER=0 WIDTH='100' HEIGHT=8>";
