@@ -83,7 +83,7 @@ function status_inscription($type) {
 }
 
 	// envoyer identifiants par mail
-function envoyer_inscription($mail, $statut, $type, $pass, $login) {
+function envoyer_inscription($mail, $statut, $type, $login, $pass) {
 	$nom_site_spip = lire_meta("nom_site");
 	$adresse_site = lire_meta("adresse_site");
 	
