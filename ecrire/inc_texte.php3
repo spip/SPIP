@@ -567,7 +567,6 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	if (!$les_echap)
 		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 
-//		echo htmlspecialchars($letexte)."<p>";
 	// Corriger HTML
 	$letexte = eregi_replace("</?p>","\n\n\n",$letexte);
 
