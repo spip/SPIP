@@ -425,8 +425,10 @@ function parser_boucle($texte, $id_parent) {
 								$date_compare = 'date';
 							}
 
-							if ($col == 'date')
+							if ($col == 'date') {
 								$col = $date_orig;
+								$col_table = '';
+							}
 							else if ($col == 'mois') {
 								$col = "MONTH($date_orig)";
 								$col_table = '';
