@@ -524,6 +524,7 @@ Merci de votre participation
 'info_contenu_articles' => 'Contenu des articles',
 'info_contribution' => 'contributions de forum',
 'info_copyright' => 'est un logiciel libre distribu&eacute; <a href=\'copyright_fr.html\'>sous licence GPL.</a>',
+'info_copyright_doc' => 'Pour plus d\'informations, voir le site <a href=\'http://www.uzine.net/spip\'>http://www.uzine.net/spip</a>.',
 'info_cours_edition' => 'Vos articles en cours d\'&eacute;dition',
 'info_creation_mots_cles' => 'Cr&eacute;ez et configurez ici les mots-cl&eacute;s du site',
 'info_creation_paragraphe' => '(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)',
