@@ -26,8 +26,12 @@
 /*
  * Police par defaut (bof...)
  */
-body { font-family: Verdana,Arial,Sans,sans-serif; }
-
+body { 
+	font-family: Verdana,Arial,Sans,sans-serif; 
+}
+td {
+	text-align: <? echo $left; ?>;
+}
 /*
  * Formulaires
  */
@@ -85,6 +89,83 @@ body { font-family: Verdana,Arial,Sans,sans-serif; }
 	background-position: 5px 0px;
 }
 
+
+/* Icones de fonctions */
+
+.icone36, icone36-danger {
+	border: none;
+	padding: 0px;
+	margin: 0px;
+	text-align: center;
+	vertical-align: top;
+	text-align: center;
+	text-decoration: none;
+}
+.icone36 a, .icone36 a:hover, icone36-danger a, .icone36-danger a:hover {
+	text-decoration: none;
+}
+.icone36 a img {
+	margin: 0px; 
+	display: inline;
+	padding: 3px;
+	background-color: #eeeeee;
+	border: 1px solid #cccccc;
+	filter: alpha(opacity=100);
+	-moz-border-radius: 5px;
+}
+.icone36 a:hover img {
+	margin: 0px; 
+	display: inline;
+	padding: 3px;
+	background-color: white;
+	border: 1px solid #666666;
+	filter: alpha(opacity=100);
+	-moz-border-radius: 5px;
+}
+.icone36-danger a img {
+	margin: 0px; 
+	display: inline;
+	padding: 3px;
+	background-color: white;
+	border: 2px solid #ff9999;
+	filter: alpha(opacity=100);
+	-moz-border-radius: 5px;
+}
+.icone36-danger a:hover img {
+	margin: 0px; 
+	display: inline;
+	padding: 3px;
+	background-color: white;
+	border: 2px solid red;
+	filter: alpha(opacity=100);
+	-moz-border-radius: 5px;
+}
+.icone36-danger a span {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	color: red; display: block; margin: 2px;
+	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
+	width: 100%
+}
+.icone36 a span {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	color: #666666; display: block; margin: 2px;
+	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
+	width: 100%
+}
+.icone36 a:hover span {
+	font-family: Verdana, Arial, Sans, sans-serif;
+	font-weight: bold;
+	font-size: 10px;
+	color: #000000; display: block; margin: 2px;
+	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);
+	width: 100%;
+}
+
+
 /* Icones 48 * 48 et 24 * 24 */
 
 .cellule36, .cellule48 {
@@ -108,31 +189,32 @@ body { font-family: Verdana,Arial,Sans,sans-serif; }
 	text-decoration: none;
 }
 .cellule36 a, .cellule48 a {
-	display: block; text-align: center; background: url(img_pack/rien.gif) no-repeat top center;
+	display: block; text-align: center;
 }
-.cellule36 a.selection {
-	display: block; text-align: center; background: url(img_pack/pave-blanc-36.png) no-repeat top center;
+.cellule36 a img, .cellule48 a img {
+	margin: 0px; 
+	display: inline;
+	padding: 4px;
+	border: 0px;
+	filter: alpha(opacity=70);
 }
-.cellule48 a.selection {
-	display: block; text-align: center; background: url(img_pack/pave-blanc-48.png) no-repeat top center;
+.cellule36 a.selection img, .cellule48 a.selection img {
+	margin: 0px; 
+	display: inline;
+	padding: 3px;
+	background-color: white;
+	border: 1px solid #aaaaaa;
+	filter: alpha(opacity=100);
+	-moz-border-radius: 5px;
 }
-.cellule36 a:hover {
-	background: url(img_pack/pave-gris-36.png) no-repeat top center;
-}
-.cellule48 a:hover {
-	background: url(img_pack/pave-gris-48.png) no-repeat top center;
-}
-.cellule36 a img {
-	border: 0px; margin: 6px; display: inline;
-}
-.cellule36 a.selection img, .cellule36 a:hover img {
-	border: 0px; margin: 6px; display: inline;
-}
-.cellule48 a img {
-	border: 0px; margin: 3px; display: inline;
-}
-.cellule48 a.selection img, .cellule48 a:hover img {
-	border: 0px; margin: 3px; display: inline;
+.cellule36 a:hover img, .cellule48 a:hover img {
+	margin: 0px; 
+	display: inline;
+	padding: 3px;
+	background-color: #dddddd;
+	border: 1px solid #999999;
+	filter: alpha(opacity=100);
+	-moz-border-radius: 5px;
 }
 .cellule36 a span, .cellule48 a span {
 	color: #666666; display: block; margin: 2px;
@@ -226,12 +308,22 @@ a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover 
 	text-decoration: none; 
 	color: #000000;
 }
-a.cellule-h div.cellule-h-icone {
-	background: url(img_pack/pave-gris-24.png) no-repeat center <?php echo $left; ?>;
+a.cellule-h div.cell-i {
+	padding: 1px;
+	border: 0px;
+	margin: 0px;
+	margin-<?php echo $right; ?>: 3px;
+	filter: alpha(opacity=50);
 }
-a.cellule-h:hover div.cellule-h-icone {
-	background: url(img_pack/pave-blanc-24.png) no-repeat center <?php echo $left; ?>;
+a.cellule-h:hover div.cell-i {
+	padding: 0px;
+	border: 1px solid #999999;
+	background-color: white;
+	-moz-border-radius: 5px;
+	margin: 0px;
+	margin-<?php echo $right; ?>: 3px;
 }
+
 a.cellule-h table {
 	border: none;
 	padding: 0px;
@@ -246,9 +338,14 @@ a.cellule-h img {
 	height: 24px;
 	border: none;
 	margin: 3px;
-	margin-<?php echo $right; ?>: 6px;
 	background-repeat: no-repeat;
 	background-position: center center;
+}
+a.cellule-h img {
+	filter: alpha(opacity=40);
+}
+a.cellule-h:hover img {
+	filter: alpha(opacity=100);
 }
 
 a.cellule-h a.aide img {
@@ -262,11 +359,12 @@ a.cellule-h-texte {
 	text-align: <?php echo $left; ?>;
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
-	font-size: 11px;
+	font-size: 9px;
 	color: #606060;
 	padding: 4px;
 	margin: 3px;
-	border: 1px dashed #aaaaaa;
+	border: 1px solid #dddddd;
+	-moz-border-radius: 5px;
 	background-color: #f0f0f0;
 	width: 92%;
 }
@@ -276,6 +374,7 @@ a.cellule-h-texte {
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
+	color: black;
 	border-right: solid 1px white;
 	border-bottom: solid 1px white;
 	border-left: solid 1px #666666;
@@ -395,6 +494,7 @@ td.icone a img {
 }
 .r-h {
 	height: 24px; background: url('img_pack/rond-h-24.gif') repeat-x bottom;
+	text-align: <? echo $left; ?>;
 }
 .r-hd {
 	width: 5px; height: 24px; background: url('img_pack/rond-hd-24.gif') no-repeat left bottom;
@@ -416,6 +516,7 @@ td.icone a img {
 }
 .r-c {
 	background: white; padding: 2px;
+	text-align: <? echo $left; ?>;
 }
 
 
@@ -429,6 +530,7 @@ td.icone a img {
 }
 .e-h {
 	height: 24px; background: url('img_pack/cadre-h.gif') repeat-x bottom;
+	text-align: <? echo $left; ?>;
 }
 .e-hd {
 	width: 5px; height: 24px; background: url('img_pack/cadre-hd.gif') no-repeat left bottom;
@@ -450,6 +552,7 @@ td.icone a img {
 }
 .e-c {
 	background: #e0e0e0; padding: 2px;
+	text-align: <? echo $left; ?>;
 }
 
 

@@ -931,7 +931,7 @@ function debut_html($titre = "") {
 	@Header("Pragma: no-cache");
 	@Header("Content-Type: text/html; charset=$charset");
 
-	echo "<html>\n<head>\n<title>[$nom_site_spip] $titre</title>\n";
+	echo "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n<head>\n<html>\n<title>[$nom_site_spip] $titre</title>\n";
 	echo '<meta http-equiv="Content-Type" content="text/html; charset='.$charset.'">';
 	echo '<link rel="stylesheet" type="text/css" href="';
 	if (!$flag_ecrire) echo 'ecrire/';
@@ -1248,46 +1248,28 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$largeur = 80;
 	}
 
-	$style = 'iconeoff';
-	$classe_image = 'bouton36gris';
 	if ($fonction == "supprimer.gif") {
-		$style = 'iconedanger';
-		$classe_image = 'bouton36rouge';
+		$style = '-danger';
+	} else {
+		$style = '';
 	}
 
 	$compteur_survol ++;
-	if ($spip_display == 1) {
-		$icone .= "\n<table cellpadding=0 cellspacing=0 border=0 $aligner width=$largeur class='$style' onMouseOver=\"changeclass(this,'iconeon');\" onMouseOut=\"changeclass(this,'$style');\">";
-		$icone .= "<tr><td background='' align='center' valign='middle' width=$largeur height=$hauteur>";
-	}
-	$icone .= "\n<table cellpadding=0 class='pointeur' cellspacing=0 border=0 $aligner width=$largeur onMouseOver=\"changesurvol('survol$compteur_survol','bouton36blanc');\" onMouseOut=\"changesurvol('survol$compteur_survol','$classe_image');\">";
+	$icone .= "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' $aligner width='$largeur'>";
+		$icone .= "<tr><td class='icone36$style' style='text-align:center;'><a href='$lien'>";
 	if ($spip_display != 1){
-		$icone .= "<tr><td background='' align='center'>";
 		if ($fonction != "rien.gif"){
-			$icone .= "\n<div class='$classe_image' id='survol$compteur_survol'><table cellpadding=0 cellspacing=0 border=0><tr><td background='img_pack/$fond'>";
-			$icone .= "<a href='$lien'><img src='img_pack/$fonction'$alt$title width='24' height='24' border='0'></a>";
-			$icone .= "</td></tr></table></div>\n";
+			$icone .= "<img src='img_pack/$fonction'$alt$title style='background: url(img_pack/$fond) no-repeat center center;' width='24' height='24' border='0'>";
 		}
 		else {
-			$icone .= "\n<table cellpadding=0 cellspacing=0 border=0><tr><td background=''>";
-			$icone .= "<div class='$classe_image' id='survol$compteur_survol'><a href='$lien'><img src='img_pack/$fond'$alt$title width='24' height='24' border='0'></a></div>";
-			$icone .= "</td></tr></table>\n";
+			$icone .= "<img src='img_pack/$fond'$alt$title width='24' height='24' border='0'>";
 		}
-		$icone .= "</td></tr>";
 	}
-	$icone .= "<tr><td background=''>";
-	$icone .= "<img src='img_pack/rien.gif' width=$largeur height=1>";
-	$icone .= "</td></tr>";
 	if ($spip_display != 3){
-		$icone .= "<tr><td background='' align='center' style='	filter: DropShadow(Color=white, OffX=1, OffY=1, Positive=1) DropShadow(Color=#cccccc, OffX=-1, OffY=-1, Positive=1);'>";
-		$icone .= "<a href='$lien' class='icone'><font face='Verdana,Arial,Sans,sans-serif' size='1' color='#505050'><b>$texte</b></font></a>";
-		$icone .= "</td></tr>";
+		$icone .= "<span>$texte</span>";
 	}
+	$icone .= "</a></td></tr>";
 	$icone .= "</table>";
-	if ($spip_display == 1) {
-		$icone .= "</td></tr>";
-		$icone .= "</table>";
-	}
 
 	if ($afficher == 'oui')
 		echo $icone;
@@ -1304,7 +1286,7 @@ function icone_horizontale($texte, $lien, $fond = "", $fonction = "") {
 	if ($danger) echo "<div class='danger'>";
 	if ($spip_display != 1) {
 		echo "<a href='$lien' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n";
-		echo "<td><a href='$lien'><div class='cellule-h-icone'><img class='i' style='background: url(\"img_pack/$fond\")' src='img_pack/$fonction' alt=''></div></a></td>\n";
+		echo "<td><a href='$lien'><div class='cell-i'><img style='background: url(\"img_pack/$fond\"); background-repeat: no-repeat; background-position: center center;' src='img_pack/$fonction' alt=''></div></a></td>\n";
 		echo "<td class='cellule-h-lien'><a href='$lien' class='cellule-h'>$texte</a></td>\n";
 		echo "</tr></table></a>\n";
 	}
@@ -1768,7 +1750,7 @@ function creer_colonne_droite($rubrique=""){
 	global $options;
 	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
-	global $spip_lang_rtl;
+	global $spip_lang_rtl, $lang_left;
 
 	if ($flag_3_colonnes AND !$deja_colonne_droite) {
 		$deja_colonne_droite = true;
@@ -1786,7 +1768,7 @@ function creer_colonne_droite($rubrique=""){
 		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
 		echo "<td rowspan=1></td>";
 		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
-		echo "<td width=$largeur rowspan=2 valign='top'><p />";
+		echo "<td width=$largeur rowspan=2 align='$lang_left' valign='top'><p />";
 
 		if ($changer_config!="oui") {
 			$activer_messagerie=lire_meta("activer_messagerie");
@@ -1837,6 +1819,7 @@ function debut_droite($rubrique="") {
 	global $options, $spip_ecran, $deja_colonne_droite;
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques, $clean_link;
 	global $flag_3_colonnes, $flag_centre_large, $couleur_foncee, $couleur_claire;
+	global $lang_left;
 
 	if ($options == "avancees") {
 		// liste des articles bloques
@@ -1907,7 +1890,7 @@ function debut_droite($rubrique="") {
 	else
 		$largeur = 500;
 
-	echo '<td width="'.$largeur.'" valign="top" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
+	echo '<td width="'.$largeur.'" valign="top" align="'.$lang_left.'" rowspan=1><font face="Georgia,Garamond,Times,serif" size=3>';
 
 	// touche d'acces rapide au debut du contenu
 	echo "\n<a name='saut' href='#saut' accesskey='s'></a>\n";

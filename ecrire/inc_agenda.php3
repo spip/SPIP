@@ -55,7 +55,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 		if (checkdate($mois,$j,$annee)){
 
 			if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
-				echo "<td align='center' class='arial2' style='background-color: white; border: 1px solid $couleur_foncee; -moz-border-radius: 8px;'>";
+				echo "<td class='arial2' style='background-color: white; border: 1px solid $couleur_foncee; text-align: center; -moz-border-radius: 8px;'>";
 				echo "<a href='calendrier_jour.php3?jour=$j&mois=$mois&annee=$annee' style='color: black'><b>$j</b></a>";
 				echo "</td>";
 			} else {
@@ -75,7 +75,7 @@ function agenda ($mois, $annee, $jour_ved, $mois_ved, $annee_ved) {
 						$couleur = "black";
 					}
 				}
-				echo "<td align='center' class='arial2' style='background-color: $couleur_fond; -moz-border-radius: 8px;'>";
+				echo "<td class='arial2' style='background-color: $couleur_fond; text-align: center; -moz-border-radius: 8px;'>";
 				echo "<a href='calendrier_jour.php3?jour=$j&mois=$mois&annee=$annee' style='color: $couleur;'>$j</a>";
 				echo "</td>";
 			}			
@@ -113,8 +113,8 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 
 	if (!$large) echo "<div align='center' style='padding: 5px;'><b class='verdana1'><a href='calendrier_jour.php3?jour=$jour&mois=$mois&annee=$annee' style='color:black;'>".affdate("$annee-$mois-$jour")."</a></b></div>";
 
-	echo"<div style='border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
-	echo "<div style='position: relative; width: 100%; height: 450; background: url(img_pack/fond-calendrier.gif)'>";
+	echo "<div style='border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure
+	echo "<div style='position: relative; width: 100%; height: 450px; background: url(img_pack/fond-calendrier.gif);'>";
 	
 	echo "<div style='position: absolute; $spip_lang_left: 2px; top: 2px; color: #666666;' class='arial0'><b class='arial0'>0:00<br />7:00</b></div>";
 	
@@ -213,7 +213,6 @@ function calendrier_jour($jour,$mois,$annee,$large = true, $le_message = 0) {
 		echo "</div>";
 	}
 
-	
 	echo "</div>";
 	echo "</div>";
 }
