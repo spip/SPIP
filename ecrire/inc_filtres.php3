@@ -464,4 +464,9 @@ function lang_dselect ($rien='') {
 	changer_langue(array_pop($pile_langues));
 }
 
+// nettoyer les langues affectees automatiquement (cf. calculer_langues_rubriques)
+function lang_supprimer_point ($langue) {
+	return ereg_replace('^\.', '', $langue);
+}
+
 ?>
