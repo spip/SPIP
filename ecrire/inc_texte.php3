@@ -849,8 +849,8 @@ function traiter_raccourcis($letexte, $les_echap = false, $traiter_les_notes = '
 	if ($flag_str_replace && !$flag_preg_replace) {
 		$letexte = ereg_replace("\n(-{4,}|_{4,})", "\n<hr class=\"spip\">\n", $letexte);
 		$letexte = ereg_replace("^- *", "$puce&nbsp;", $letexte);
-		$letexte = str_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
-		$letexte = str_replace("\n_ +", "\n<br>",$letexte);
+		$letexte = ereg_replace("\n- *", "\n<br>$puce&nbsp;",$letexte);
+		$letexte = ereg_replace("\n_ +", "\n<br>",$letexte);
 		$letexte = ereg_replace("(( *)\n){2,}", "\n<p>", $letexte);
 		$letexte = str_replace("{{{", $debut_intertitre, $letexte);
 		$letexte = str_replace("}}}", $fin_intertitre, $letexte);
