@@ -74,6 +74,10 @@ class Champ {
 	var $document;   // pour embed et <img dans les textes
 }
 
+global $tables_des_serveurs_sql, $tables_principales;
+
+$tables_des_serveurs_sql = array('localhost' => &$tables_principales);
+
 // index_pile retourne la position dans la pile du champ SQL $nom_champ 
 // en prenant la boucle la plus proche du sommet de pile (indique par $idb).
 // Si on ne trouve rien, on considere que ca doit provenir du contexte 
@@ -83,7 +87,7 @@ class Champ {
 // afin de construire un requete SQL minimale (plutot qu'un brutal 'SELECT *')
 
 function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
-	global $exceptions_des_tables, $table_des_tables, $tables_principales;
+  global $exceptions_des_tables, $table_des_tables, $tables_des_serveurs_sql;
 
 	$i = 0;
 	
@@ -100,16 +104,19 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	while ($idb!== '') {
 #		spip_log("Cherche: $nom_champ '$idb' '$c'");
 		$r = $boucles[$idb]->type_requete;
-		// indirection (pour les rares cas ou le nom de la table est /= du type)
-		$t = $table_des_tables[$r];
-		if (!$t)
-			$t = $r; // pour les tables non Spip
+		$s = $boucles[$idb]->sql_serveur;
+		if (!$s) 
+		  { $s = 'localhost';
+    // indirection (pour les rares cas ou le nom de la table!=type)
+		    $t = $table_des_tables[$r];
+		  }
+		if (!$t) $t = $r; // pour les tables non Spip
 		// $t est le nom PHP de cette table 
 		#spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ'");
-		$desc = $tables_principales[$t];
+		$desc = $tables_des_serveurs_sql[$s][$t];
 		if (!$desc) {
 			include_local("inc-admin.php3");
-			erreur_squelette(_L("Table SQL \"$r\" absente de \$tables_principales dans inc_serialbase"), "'$idb'");
+			erreur_squelette(_L("Table SQL \"$r\" inconnue"), "'$idb'");
 		}
 		$excep = $exceptions_des_tables[$r][$c];
 		if ($excep) {

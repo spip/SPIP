@@ -186,9 +186,10 @@ function calcul_exposer ($id, $type, $reference) {
 			if ($element == 'id_secteur') $element = 'id_rubrique';
 			if (ereg("id_(article|breve|rubrique|syndic)", $element, $regs)) {
 				$exposer[$element][$id_element] = true;
-				list ($id_rubrique) = spip_abstract_fetch(spip_abstract_select(array(id_rubrique), 
-											       array(table_objet($regs[1])),
-											       array("$element=$id_element")));
+				list ($id_rubrique) = spip_abstract_fetsel(
+array('id_rubrique'), 
+array(table_objet($regs[1])),
+array("$element=$id_element"));
 				$hierarchie = substr(calculer_hierarchie($id_rubrique), 2);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
@@ -263,17 +264,17 @@ function sql_profondeur($id)
 
 function sql_parent($id_rubrique)
 {
-  $row = spip_abstract_fetch(spip_abstract_select(array(id_parent), 
-						  array(rubriques), 
-						  array("id_rubrique='$id_rubrique'")));
+  $row = spip_abstract_fetsel(array(id_parent), 
+			      array('rubriques'), 
+			      array("id_rubrique='$id_rubrique'"));
   return $row['id_parent'];
 }
 
 function sql_rubrique($id_article)
 {
-  $row = spip_abstract_fetch(spip_abstract_select(array(id_rubrique),
-						  array(articles),
-						  array("id_article='$id_article'")));
+  $row = spip_abstract_fetsel(array('id_rubrique'),
+			      array('articles'),
+			      array("id_article='$id_article'"));
   return $row['id_rubrique'];
 }
 
@@ -290,7 +291,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='')
 					     '','','','',1, 
 					     $table, $id_boucle, $serveur);
 
-      while($row_auteur = spip_abstract_fetch($result_auteurs)) {
+      while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
 	$nom_auteur = typo($row_auteur["nom"]);
 	$email_auteur = $row_auteur["email"];
 	if ($email_auteur) {
@@ -305,21 +306,21 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='')
 }
 
 function sql_petitions($id_article, $table, $id_boucle, $serveur='') {
-  return spip_abstract_fetch(spip_abstract_select(array('id_article', 'email_unique', 'site_obli', 'site_unique', 'message', 'texte'),
-						  array('petitions'),
-						  array("id_article=".intval($id_article)),
-						  '','','','',1, 
-						  $table, $id_boucle, $serveur));
+  return spip_abstract_fetsel(array('id_article', 'email_unique', 'site_obli', 'site_unique', 'message', 'texte'),
+			      array('petitions'),
+			      array("id_article=".intval($id_article)),
+			      '','','','',1, 
+			      $table, $id_boucle, $serveur);
 }
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 function sql_chapo($id_article)
 {
-  return spip_abstract_fetch(spip_abstract_select(array(chapo),
+  return spip_abstract_fetsel(array('chapo'),
 			      array('articles'),
 			      array("id_article='$id_article'",
-				    "statut='publie'")));
+				    "statut='publie'"));
 }
 
 // Calcul de la rubrique associee a la requete
@@ -328,18 +329,18 @@ function sql_chapo($id_article)
 function sql_rubrique_fond($contexte, $lang) {
 
 	if ($id = intval($contexte['id_rubrique'])) {
-	  $row = spip_abstract_fetch(spip_abstract_select(array('lang'),
-							  array('rubriques'),
-							  array("id_rubrique='$id'")));
+	  $row = spip_abstract_fetsel(array('lang'),
+				      array('rubriques'),
+				      array("id_rubrique='$id'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array ($id, $lang);
 	}
 
 	if ($id  = intval($contexte['id_breve'])) {
-	  $row = spip_abstract_fetch(spip_abstract_select(array('id_rubrique', 'lang'),
-							  array(breves), 
-							  array("id_breve='$id'")));
+	  $row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+				      array('breves'), 
+				      array("id_breve='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
@@ -347,29 +348,27 @@ function sql_rubrique_fond($contexte, $lang) {
 	}
 
 	if ($id = intval($contexte['id_syndic'])) {
-	  $row = spip_abstract_fetch(spip_abstract_select(array(id_rubrique),
-							  array(syndic),
-							  array("id_syndic='$id'")));
+	  $row = spip_abstract_fetsel(array('id_rubrique'),
+				      array('syndic'),
+				      array("id_syndic='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
-		$row = spip_abstract_fetch(spip_abstract_select(array(lang),
-								array(rubriques),
-								array("id_rubrique='$id_rubrique_fond'")));
+		$row = spip_abstract_fetsel(array('lang'),
+					    array('rubriques'),
+					    array("id_rubrique='$id_rubrique_fond'"));
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array($id_rubrique_fond, $lang);
 	}
 
 	if ($id = intval($contexte['id_article'])) {
-	  $row = spip_abstract_fetch(spip_abstract_select(array('id_rubrique', 'lang'),
-							  array('articles'),
-							  array("id_article='$id'")));
+	  $row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
+				      array('articles'),
+				      array("id_article='$id'"));
 		$id_rubrique_fond = $row['id_rubrique'];
 		if ($row['lang'])
 			$lang = $row['lang'];
 		return array($id_rubrique_fond, $lang);
 	}
 }
-
-
 
 ?>

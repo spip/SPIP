@@ -120,6 +120,8 @@ define ('__regexp_echappe',
 		. "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>" #poesie
 		. ")/si");
 
+define ('__regexp_img_echappe', "<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">");
+
 function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	$debut = '';
 	$suite = $letexte;
@@ -187,7 +189,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	//
 	// Reperages d'images et de documents utilisateur 
 	// (insertion dans echappe_retour pour faciliter les doublons)
-	while (eregi("<(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?".">", $letexte, $match)) {
+	while (eregi(__regexp_img_echappe, $letexte, $match)) {
 		$num_echap++;
 
 		$letout = quotemeta($match[0]);
@@ -236,6 +238,18 @@ function echappe_retour($letexte, $les_echap, $source='') {
     $letexte = $regs[2];
   }
   return $debut . $letexte;
+}
+
+
+// fonction en cas de texte extrait d'un serveur distant:
+// on ne sait pas (encore) rappatrier les documents joints
+
+function supprime_img($letexte) {
+	$message = _L('indisponible');
+	while (eregi(__regexp_img_echappe, $letexte, $match)) {
+	  $letexte = ereg_replace($match[0], $message, $letexte);
+	}
+	return $letexte;
 }
 
 # il y a 3 couples de fonctions homonymes au prefixe _doublons pres

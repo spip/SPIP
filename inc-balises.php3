@@ -54,7 +54,6 @@ function champs_traitements ($p) {
 	);
 	$ps = $traitements[$p->nom_champ];
 	if (!$ps) return $p->code;
-
 	if ($p->documents)
 	  {$ps = str_replace('traiter_raccourcis(', 
 			     'traiter_raccourcis_doublon($doublons,',
@@ -62,7 +61,14 @@ function champs_traitements ($p) {
 					 'typo_doublon($doublons,',
 					 $ps));
 	  }
-	return str_replace('%s', $p->code, $ps);				
+	// on supprime les <IMGnnn> tant qu'on ne rapatrie pas
+	// les documents distants joints..
+	// il faudrait aussi corriger les raccourcis d'URL locales
+	return str_replace('%s',
+			   (!$p->boucles[$p->id_boucle]->sql_serveur ?
+			    $p->code :
+			    ('supprime_img(' . $p->code . ')')),
+			   $ps);				
 }
 
 //
@@ -356,6 +362,7 @@ function balise_EXPOSER_dist($p) {
 // Inserer directement un document dans le squelette
 //
 function balise_EMBED_DOCUMENT_dist($p) {
+	balise_distante_interdite($p);
 	$_id_document = champ_sql('id_document',$p);
 	$p->code = "calcule_embed_document(intval($_id_document), '" .
 	texte_script($p->fonctions ? join($p->fonctions, "|") : "") .
@@ -406,12 +413,14 @@ echo menu_langues(\"var_lang_ecrire\", \$menu_lang);
 // Formulaires de login
 //
 function balise_LOGIN_PRIVE_dist($p) {
+	balise_distante_interdite($p);
 	$p->code = '("<"."?php include(\'inc-login.php3\'); login(\'\', \'prive\'); ?".">")'; 
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_LOGIN_PUBLIC_dist($p) {
+	balise_distante_interdite($p);
 	if ($nom = $p->fonctions[0])
 	$lacible = "new Link('".$nom."')";
 	else
@@ -695,7 +704,7 @@ function balise_FORMULAIRE_RECHERCHE_dist($p) {
 // Formulaire d'inscription comme redacteur (dans inc-formulaires.php3)
 //
 function balise_FORMULAIRE_INSCRIPTION_dist($p) {
-
+	balise_distante_interdite($p);
 	$p->code = '((lire_meta("accepter_inscriptions") != "oui") ? "" :
 		("<"."?php include_local(\'inc-formulaires.php3\'); lang_select(\'".$GLOBALS[\'spip_lang\']."\'); echo formulaire_inscription(\"redac\"); lang_dselect(); ?".">"))';
 
@@ -707,6 +716,7 @@ function balise_FORMULAIRE_INSCRIPTION_dist($p) {
 // Formulaire ecrire auteur
 //
 function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
+	balise_distante_interdite($p);
 	$_id_auteur = champ_sql('id_auteur', $p);
 	$_mail_auteur = champ_sql('email', $p);
 
@@ -721,6 +731,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dist($p) {
 // Formulaire signature de petition
 //
 function balise_FORMULAIRE_SIGNATURE_dist($p) {
+	balise_distante_interdite($p);
 	$_id_article = champ_sql('id_article', $p);
 	$nom = $p->id_boucle;
 	$code = "sql_petitions(" .
@@ -746,6 +757,7 @@ echo formulaire_signature(".' .
 
 // Formulaire d'inscription de site dans l'annuaire
 function balise_FORMULAIRE_SITE_dist($p) {
+	balise_distante_interdite($p);
 	$_id_rubrique = champ_sql('id_rubrique', $p);
 
 	$p->code = '((lire_meta("proposer_sites") != 2) ? "":
@@ -755,6 +767,18 @@ function balise_FORMULAIRE_SITE_dist($p) {
 	return $p;
 }
 
+// il faudrait traiter le formulaire en local 
+// tout en appelant le serveur SQL distant.
+// En attendant, refuser une authentification sur qqch qui n'a rien à voir.
+
+function balise_distante_interdite($p) {
+	$nom = $p->id_boucle;
+	if ($p->boucles[$nom]->sql_serveur) {
+		include_local("inc-admin.php3");
+		erreur_squelette($p->nom_champ ._L(" distant interdit"), $nom);
+		exit;
+	}
+}
 
 
 //
@@ -765,6 +789,7 @@ function balise_FORMULAIRE_ADMIN_dist($p) {
 	$p->statut = "php";
 	return $p;
 }
+
 
 function balise_HTTP_dist($p) {
 	if (is_array($p->fonctions)) {
