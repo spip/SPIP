@@ -113,7 +113,17 @@ function auth() {
 		}
 	}
 	else if ($GLOBALS['bonjour'] == 'oui') { // tentative de login echec
-		@header("Location: ../spip_login.php3?var_echec_cookie=oui");
+		if ($GLOBALS['HTTP_REFERER'])
+			@header("Location: ../spip_login.php3?var_echec_cookie=oui");
+		else
+			@header("Location: ../spip_login.php3");
+		/*
+		 * Hack : si le referer est vide, c'est probablement qu'on vient
+		 * d'un bookmark posé sur la page ?bonjour=oui ; evitons donc de
+		 * signaler un probleme de cookie. Et si quelqu'un bloque ses referers
+		 * de maniere qu'ils soient toujours vides, et refuse les cookies,
+		 * qu'est-ce qu'on y peut ? -- Pas satisfaisant, donc, ce hack.
+		 */
 		exit;
 	}
 

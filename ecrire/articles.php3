@@ -628,30 +628,18 @@ if ($boite_ouverte) {
 //
 debut_raccourcis();
 
-$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 0,1";
-$result = spip_query($query);
-
 icone_horizontale("Tous vos articles", "articles_page.php3", "article-24.gif");
 
 if ($connect_statut == '0minirezo') {
 	echo "<p>";
+	$retour = urlencode($clean_link->getUrl());
 
-		echo "<form action='articles.php3' method='post'>";
-		echo "<div class='iconeon' style='padding:5px;'>";
-		echo "<input type='Hidden' name='id_article' value='$id_article'>";
-		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2 color='#333333'>Cr&eacute;er un nouvel auteur et l'associer &agrave; cet article&nbsp;:</font>";
-			echo "<div><INPUT TYPE='text' NAME='creer_auteur' CLASS='forml' style='font-size:9px;' VALUE='' SIZE='20'></div>";
-			echo "<div align='right'><INPUT TYPE='submit' NAME='Cr&eacute;er' style='font-size:9px;' VALUE='Cr&eacute;er' CLASS='fondl'></div>";
-		echo "</div>";
-		echo "</form>";
-
-
-
-
+	icone_horizontale("Cr&eacute;er un nouvel auteur pour cet article", "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
 
 	$articles_mots = lire_meta('articles_mots');
 	if ($articles_mots != "non") {
-		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute;", "mots_edit.php3?new=oui&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+		echo "<p>";
+		icone_horizontale("Cr&eacute;er un nouveau mot-cl&eacute; pour cet article", "mots_edit.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "mot-cle-24.gif", "creer.gif");
 	}
 }
 
