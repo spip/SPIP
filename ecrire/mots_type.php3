@@ -37,7 +37,7 @@ debut_gauche();
 
 debut_droite();
 
-debut_cadre_enfonce("groupe-mot-24.png");
+debut_cadre_relief("groupe-mot-24.png");
 
 
 
@@ -74,7 +74,7 @@ echo "</td></tr></table>";
 
 
 
-fin_cadre_enfonce();
+fin_cadre_relief();
 
 if ($connect_statut =="0minirezo"){
 	echo "<p>";

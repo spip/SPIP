@@ -146,7 +146,7 @@ fin_cadre_enfonce();
 
 debut_droite();
 
-debut_cadre_enfonce("groupe-mot-24.png");
+debut_cadre_relief("mot-cle-24.png");
 
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
@@ -204,7 +204,7 @@ afficher_breves("Les br&egrave;ves li&eacute;es &agrave; ce mot-cl&eacute;",
 afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s li&eacute;es &agrave; ce mot-cl&eacute;",
 "SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC LIMIT 0,10");
 
-fin_cadre_enfonce();
+fin_cadre_relief();
 
 
 

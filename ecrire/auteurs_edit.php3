@@ -129,13 +129,13 @@ else $logo = "redacteurs-24.png";
 
 
 	if (strlen($email) > 2 OR strlen($bio) > 0 OR strlen($nom_site_auteur) > 0) {
-		debut_cadre_enfonce("$logo");
+		debut_cadre_relief("$logo");
 		echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif'>";
 		if (strlen($email) > 2) echo "email : <B><A HREF='mailto:$email'>$email</A></B><BR> ";
 		if (strlen($nom_site_auteur) > 2) echo "site : <B><A HREF='$url_site'>$nom_site_auteur</A></B>";
 		echo "<P>".propre($bio);
 		echo "</FONT>";
-		fin_cadre_enfonce();
+		fin_cadre_relief();
 	}
 
 

@@ -190,7 +190,7 @@ function mySel($varaut,$variable) {
 		$nom_site_auteur = htmlspecialchars($nom_site_auteur);
 
 		
-		debut_cadre_relief("ficher-perso-24.png");
+		debut_cadre_relief("fiche-perso-24.png");
 
 		echo "<B>Signature</B> [Obligatoire]<BR>";
 		echo "(Votre nom ou votre pseudo)<BR>";

@@ -909,7 +909,7 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "configuration"){
-		onglet("Caract&eacute;ristiques principales", "configuration.php3", "config", $onglet, "racine-24.png");
+		onglet("Caract&eacute;ristiques principales", "configuration.php3", "config", $onglet, "racine-site-24.png");
 		onglet("Contenu de votre site", "config-contenu.php3", "contenu", $onglet, "secteur-24.png");
 		onglet("Fonctionnalit&eacute;s de SPIP", "config-fonctions.php3", "fonctions", $onglet, "statistiques-24.png");
 	}
@@ -1147,6 +1147,12 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		echo "\n<area shape='rect' href='$lien&set_couleur=3' alt='bleu' coords='36,0,46,10' title=\"Changer la couleur de l'interface\">";
 		echo "\n<area shape='rect' href='$lien&set_couleur=4' alt='bleu' coords='48,0,58,10' title=\"Changer la couleur de l'interface\">";
 		echo "\n<area shape='rect' href='$lien&set_couleur=5' alt='bleu' coords='60,0,70,10' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=7' alt='bleu' coords='0,11,10,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=8' alt='bleu' coords='12,11,22,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=9' alt='bleu' coords='24,11,34,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=10' alt='bleu' coords='36,11,46,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=11' alt='bleu' coords='48,11,58,21' title=\"Changer la couleur de l'interface\">";
+		echo "\n<area shape='rect' href='$lien&set_couleur=12' alt='bleu' coords='60,11,70,21' title=\"Changer la couleur de l'interface\">";
 		echo "\n</map>";
 
 		echo "\n<map name='map_layout'>";
@@ -1251,7 +1257,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 	echo "<td width='100%'>   </td>";
 	echo "<td>";
-	echo "<img src='img_pack/barre-couleurs.gif' alt='barre-couleurs.gif' width='70' height='10' border='0' usemap='#map_couleur'>";
+	echo "<img src='img_pack/barre-couleurs.gif' alt='barre-couleurs.gif' width='70' height='21' border='0' usemap='#map_couleur'>";
 	echo "</td>";
 	echo "</tr></table>";
 	echo "</td></tr></table>";

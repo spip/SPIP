@@ -118,10 +118,40 @@ switch ($spip_couleur) {
 		$couleur_foncee="#2b539c";
 		$couleur_claire="#EDF3FE";
 		break;
+	case 7:
+		/// Bleu pastelle
+		$couleur_foncee="#4085CD";
+		$couleur_claire="#EDF3FE";
+		break;
+	case 8:
+		/// Vert pastelles
+		$couleur_foncee="#009F3C";
+		$couleur_claire="#E2FDEC";
+		break;
+	case 9:
+		/// Rouge vif
+		$couleur_foncee="#FF0000";
+		$couleur_claire="#FFEDED";
+		break;
+	case 10:
+		/// Orange
+		$couleur_foncee="#E95503";
+		$couleur_claire="#FFF2EB";
+		break;
+	case 11:
+		/// Violet clair
+		$couleur_foncee="#CD006F";
+		$couleur_claire="#FDE5F2";
+		break;
+	case 12:
+		/// Marron
+		$couleur_foncee="#8C6635";
+		$couleur_claire="#F5EEE5";
+		break;
 	default:
 		/// Bleu
-		$couleur_foncee="#2b539c";
-		$couleur_claire="#EDF3FE";
+		$couleur_foncee="#2378CF";
+		$couleur_claire="#E1EEFB";
 }
 
 

@@ -105,7 +105,7 @@ debut_page("&laquo; $titre_breve &raquo;", "documents", "breves");
 debut_grand_cadre();
 
 afficher_parents($id_rubrique);
-$parents="~ <img src='img_pack/racine-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
+$parents="~ <img src='img_pack/racine-site-24.png' width=24 height=24 align='middle'> <A HREF='naviguer.php3?coll=0'><B>RACINE DU SITE</B></A> ".aide ("rubhier")."<BR>".$parents;
 
 $parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 $parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
@@ -161,7 +161,7 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique) AND ($option
 
 debut_droite();
 
-debut_cadre_enfonce("breve-24.png");
+debut_cadre_relief("breve-24.png");
 echo "<TABLE WIDTH=100% CELLPADDING=0 CELLSPACING=0 BORDER=0>";
 echo "<TR><td>";
 
@@ -220,7 +220,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		}
 
 
-		debut_cadre_relief();
+		debut_cadre_enfonce();
 		echo "<FORM ACTION='breves_voir.php3?id_breve=$id_breve' METHOD='GET'>";
 		echo "<INPUT TYPE='hidden' NAME='id_breve' VALUE='$id_breve'>";
 		echo "<INPUT NAME='options' TYPE=Hidden VALUE=\"$options\">";
@@ -228,7 +228,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<TR><TD BGCOLOR='$couleur_foncee' COLSPAN=2><FONT SIZE=2 COLOR='#FFFFFF'><B>DATE DE PUBLICATION EN LIGNE :";
 		//echo aide ("artdate");
 		echo "</B></FONT></TR>";
-		echo "<TR><TD ALIGN='center' BGCOLOR='#FFFFFF'>";
+		echo "<TR><TD ALIGN='center'>";
 		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl'>";
 		afficher_jour($jour);
 		echo "</SELECT> ";
@@ -239,11 +239,11 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		afficher_annee($annee);
 		echo "</SELECT>";
  		
-		echo "</TD><TD ALIGN='right' BGCOLOR='#FFFFFF'>";
+		echo "</TD><TD ALIGN='right'>";
 		echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='Changer'>";
 		echo "</TD></TR></TABLE>";
 		echo "</FORM>";
-		fin_cadre_relief();	
+		fin_cadre_enfonce();	
 	}
 	else {
 		echo "<BR><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=3><B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
@@ -281,7 +281,7 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	
 	echo "<td><img src='img_pack/rien.gif' width=5></td>\n";
 	echo "<td  align='right'>";
-	icone("Refuser cette brève", "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.png", "supprimer.gif");
+	icone("Refuser cette br&egrave;ve", "breves.php3?id_breve=$id_breve&statut=refuse", "breve-24.png", "supprimer.gif");
 	echo "</td>";
 	
 
@@ -292,7 +292,7 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 
 echo "</TD></TR></TABLE>";
 
-fin_cadre_enfonce();
+fin_cadre_relief();
 
 //////////////////////////////////////////////////////
 // Forums
