@@ -4,7 +4,6 @@
 if (defined("_ECRIRE_INC_SERIALBASE")) return;
 define("_ECRIRE_INC_SERIALBASE", "1");
 
-define("_SUFFIXE_DES_CACHES", "_caches");
 
 $spip_articles = array(
 		"id_article"	=> "bigint(21) NOT NULL",

@@ -6,40 +6,57 @@ define("_ECRIRE_INVALIDEUR", "1");
 
 include_ecrire('inc_serialbase.php3');
 
-function supprime_invalideurs() {
-	global $tables_principales;
-
-	foreach($tables_principales as $a) {
-		$p = $a['key']["PRIMARY KEY"];
-		if (!strpos($p, ","))
-			spip_query("DELETE FROM spip_" . $p . _SUFFIXE_DES_CACHES);
-	}
-	supprime_invalideurs_inclus();
-}
-
+/*
 function supprime_invalideurs_inclus ($cond='') {
-	spip_query("DELETE FROM spip_inclure"  . _SUFFIXE_DES_CACHES .
+	spip_query("DELETE FROM spip_caches_inclus" .
 	($cond ? " WHERE $cond" :''));
 }
+*/
 
-// en attendant de reecrire les 3 scripts dans ecrire ???
+function supprime_invalideurs() {
+	spip_query("DELETE FROM spip_caches");
+#	supprime_invalideurs_inclus();
+}
+
+//
+// Noter dans la base les liens d'invalidation
+//
 function maj_invalideurs ($hache, $infosurpage) {
-#	insere_invalideur($infosurpage['id_article'],'id_article', $hache);
-#	insere_invalideur($infosurpage['id_breve'],   'id_breve', $hache);
-#	insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $hache);
+	$hache = addslashes($hache); #parano
+	spip_query("DELETE FROM $table_caches WHERE hache='$hache'");
+
+	// invalidation des forums
 	insere_invalideur($infosurpage['id_forum'],'id_forum', $hache);
+
+	// invalidation du reste - on peut desactiver dans ecrire/mes_options.php3
+	if ($GLOBALS['invalider_caches']) {
+		insere_invalideur($infosurpage['id_article'],'id_article', $hache);
+
+### a activer quand les suivre_invalideurs() seront ajoutes dans l'espace prive
+#		insere_invalideur($infosurpage['id_breve'], 'id_breve', $hache);
+#		insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $hache);
+#		insere_invalideur($infosurpage['id_syndic'],'id_syndic', $hache);
+
+		# et eventuellement les inclure
+	}
 }
 
 function insere_invalideur($a, $type, $hache) {
+	if ($type == 'inclure') {
+		$prefix_id = '';
+		$table_caches = 'spip_caches_inclus';
+	} else {
+		$prefix_id = $type.'/';
+		$table_caches = 'spip_caches';
+	}
+
 	if (is_array($a)) {
 		$values = array();
-		foreach($a as $k => $v) {
-			$m = "('$hache', '$k')";
-			$values[] = $m;
-			$l .= " $k";
-		}
-		spip_query("INSERT IGNORE INTO spip_" . $type . _SUFFIXE_DES_CACHES .
-		" (hache, " . $type . ") VALUES " . join(", ", $values));
+		foreach($a as $k => $v)
+			$values[] = "('$hache', '$prefix_id$k')";
+			$query = "INSERT IGNORE INTO $table_caches" .
+		" (hache, id) VALUES " . join(", ", $values);
+		spip_query($query);
 		# spip_log("Dependances $type: " . join(", ", $values));
 	}
 }
@@ -63,13 +80,29 @@ function retire_cache($cache) {
 		@unlink($cache);
 }
 
-// Supprimer une liste de caches
-function retire_caches($caches) {
+// Supprimer les caches marques "suppr"
+function retire_caches() {
 	if ($GLOBALS['flag_ecrire']) return;
-	if ($n = sizeof($caches)) {
-		spip_log ("Retire $n caches");
-		foreach ($caches as $cache)
-			retire_cache($cache);
+
+	// gerer la concurrence et prendre le travail
+	include_ecrire('inc_meta.php3');
+	lire_metas();
+	if (!lire_meta('invalider')) return;
+	effacer_meta('invalider');
+	ecrire_metas();
+
+	// faire le boulot de suppression
+	foreach (array('spip_caches' /*, 'spip_caches_inclus'*/) as $table_cache) {
+		$q = spip_query("SELECT DISTINCT hache FROM $table_cache WHERE suppr='x'");
+		if ($n = @spip_num_rows($q)) {
+			spip_log ("Retire $n caches");
+			while (list($cache) = spip_fetch_array($q)) {
+				retire_cache($cache);
+				$supprimes[] = "'$cache'";
+			}
+			spip_query("DELETE FROM $table_cache WHERE "
+			.calcul_mysql_in('hache', join(',',$supprimes)) );
+		}
 	}
 }
 
@@ -123,57 +156,57 @@ function retire_vieux_caches($dir) {
 
 
 //
-// Commentaire ?
+// Invalider les caches lies a telle condition
 //
 function suivre_invalideur($cond, $table) {
-	if ($GLOBALS['flag_ecrire']) return;
 	$result = spip_query("SELECT DISTINCT hache FROM $table WHERE $cond");
 	$tous = array();
-	while ($row = spip_fetch_array($result)) {
+	while ($row = spip_fetch_array($result))
 		$tous[] = $row['hache'];
-	}
+
 	spip_log("suivre $cond");
 	applique_invalideur($tous);
 }
 
-// Commentaire ?
+//
+// Marquer les fichiers caches invalides comme etant a supprimer,
+// et suivre leurs inclusions de maniere recursive
+//
 function applique_invalideur($depart) {
-	global $tables_principales;
 
-	if ($GLOBALS['flag_ecrire']) return;
 	if ($depart) {
-		$tous = join("', '", $depart);
-		$tous = "'$tous'";
-		$niveau = $tous;
+		$tous = "'".join("', '", $depart)."'";
 		spip_log("applique $tous");
+
+/*
+		// Invalider les fichiers incluants, de maniere recursive
+		$niveau = $tous;
 		while ($niveau) {
 			// le NOT est theoriquement superflu, mais
 			// protege des tables endommagees
-			$result = spip_query("SELECT DISTINCT hache FROM spip_inclure" . 
-			_SUFFIXE_DES_CACHES . ' WHERE ' .
-			calcul_mysql_in('inclure', $niveau, '') . ' AND ' .
+			$result = spip_query("SELECT DISTINCT hache FROM spip_caches_inclus" 
+			. ' WHERE ' .
+			calcul_mysql_in('id', $niveau) . ' AND ' .
 			calcul_mysql_in('hache', $tous, 'NOT')
 			);
 			$niveau = array();
 			while ($row = spip_fetch_array($result)) {
 				$niveau[] = "'" . $row['hache'] . "'"; 
-				$depart[] = $row['hache'];
 				$tous .= ", '" . $row['hache'] . "'";
 			}
 			$niveau = join(', ', $niveau);
 		}
-		spip_query("DELETE FROM spip_inclure"  . _SUFFIXE_DES_CACHES .
-		' WHERE ' . calcul_mysql_in('hache', $tous, 'NOT'));
 
-		foreach($tables_principales as $a) {
-			$p = $a['key']["PRIMARY KEY"];
-			if (!strpos($p, ","))
-				spip_query("DELETE FROM spip_" . $p .
-				_SUFFIXE_DES_CACHES . ' WHERE ' .
-				calcul_mysql_in('hache', $tous, 'NOT')
-				);
-		}
-		retire_caches($depart);
+		spip_query("UPDATE spip_caches_inclus SET suppr='x'" .
+		' WHERE ' . calcul_mysql_in('hache', $tous));
+*/
+
+		spip_query("UPDATE spip_caches SET suppr='x'"
+		. ' WHERE ' . calcul_mysql_in('hache', $tous));
+
+		// Demander a inc-public.php3 de retirer les caches invalide's
+		ecrire_meta('invalider', 'oui');
+		ecrire_metas();
 	}
 }
 

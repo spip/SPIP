@@ -127,28 +127,22 @@ function creer_repertoire($base, $subdir) {
 }
 
 
-function purger_repertoire($dir, $age, $regexp = '') {
+// Obsolete ?  Utilisee pour vider le cache depuis l'espace prive
+// (ou juste les squelettes si un changement de config le necessite)
+function purger_repertoire($dir, $age='ignore', $regexp = '') {
 	$handle = @opendir($dir);
 	if (!$handle) return;
 
-	$t = time();
 	while (($fichier = @readdir($handle)) != '') {
 		// Eviter ".", "..", ".htaccess", etc.
 		if ($fichier[0] == '.') continue;
 		if ($regexp AND !ereg($regexp, $fichier)) continue;
 		$chemin = "$dir/$fichier";
-		if (is_file($chemin)) {
-			$d = $t - filemtime($chemin);
-			if ($d > $age OR (ereg('\.NEW$', $fichier) AND $d > 60)) {
-				@unlink($chemin);
-				$fichier = ereg_replace('\.NEW$', '', $fichier);
-				$query = "DELETE FROM spip_forum_cache WHERE fichier='$fichier'";
-				spip_query($query);
-			}
-		}
-		else if (is_dir($chemin)) {
-			if ($fichier != 'CVS') purger_repertoire($chemin, $age);
-		}
+		if (is_file($chemin))
+			@unlink($chemin);
+		else if (is_dir($chemin))
+			if ($fichier != 'CVS')
+				purger_repertoire($chemin);
 	}
 	closedir($handle);
 }

@@ -15,8 +15,6 @@ include_ecrire("inc_majbase.php3");
 // champs: champ => type
 // cles: type-de-cle => champ(s)
 // si $autoinc, c'est une auto-increment (i.e. serial) sur la Primary Key
-// si en  plus la Primary Key reference un champ unique,
-// on cree aussi une table des dependances de caches selon ce champ.
 // Le nom des caches doit etre inferieur a 64 caracteres
 
 function spip_create_table($nom, $champs, $cles, $autoinc=false) {
@@ -42,14 +40,19 @@ function spip_create_table($nom, $champs, $cles, $autoinc=false) {
 		")\n";
 	spip_query($query);  
 
-	if (($autoinc && !strpos($p, ","))) {
+/*
+if (($autoinc && !strpos($p, ","))) {
 		$t = "spip_" . $p . _SUFFIXE_DES_CACHES;
 		spip_query("DROP TABLE IF EXISTS $t");
 		spip_log("Destruction/creation de la table $t");
 		spip_query("CREATE TABLE $t (hache char (64) NOT NULL,
 			$p char (64) NOT NULL, KEY hache (hache), KEY $p ($p))");
 	}
+*/
+
 }
+
+
 
 function creer_base() {
 	global $tables_principales, $tables_auxiliaires;
