@@ -550,7 +550,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 		echo "<p></p><div style='border: 1px dashed #666666; padding: 5px; background-color: #f0f0f0;'>";
 		if ($fichier_vignette) {
 			echo "<div align='left'>\n";
-			echo "<div align='center''>";
+			echo "<div align='center'>";
 			$block = "doc_vignette $id_document";
 			echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, "$fichier");
 			echo "</div>";
