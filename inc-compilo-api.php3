@@ -41,7 +41,7 @@ class Boucle {
 	var $type_requete;
 	var $sql_serveur;
 	var $param = array();
-	var $separateur;
+	var $separateur = array();
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)

@@ -172,59 +172,38 @@ function parser_param($params, &$result) {
 	$type = $result->type_requete;
 	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', trim($params), $m)) {
 		$params = $m[3];
-		$m[1] = trim($m[1]);
+		$param = trim($m[1]);
 		// cas d'un critere avec {...}
-		if ($m[2])
-			$params2[] = $m[1];
-		else {
-			if (strlen($m[1]) < 2)
-				$params2[] = $m[1];
-	    else {
-	      ereg('^(.)([^"}]*)(.)$', $m[1], $args);
-	      // cas syntaxique general, 
+		if ($m[2]) {
+			$params2[] = $param;
+		}
 	      // traiter qq lexemes particuliers pour faciliter la suite
-	      if ($args[3] != '"') {
-			$param = $m[1];
-			if (($param == 'tout') OR ($param == 'tous')) {
-				$result->tout = true;
-				unset ($param);
-			}
-			else if ($param == 'plat') {
-				$result->plat = true;
-				unset ($param);
-			}
-
-			// Boucle hierarchie, analyser le critere id_article - id_rubrique
-			// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
-			// forcer {tout} pour avoir la rubrique mere...
-			else if ($type == 'hierarchie') {
+		else if (strlen($param) < 2)
+			$params2[] = $param;
+		else if (($param == 'tout') OR ($param == 'tous'))
+			$result->tout = true;
+		else if ($param == 'plat') 
+			$result->plat = true;
+		else if ($param == 'unique')
+			$params2[] = 'doublons';
+		else {
+			if ($type == 'hierarchie') {
+	// Boucle hierarchie, analyser le critere id_article - id_rubrique
+	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
+	// forcer {tout} pour avoir la rubrique mere...
 				if ($param == 'id_article' OR $param == 'id_syndic') {
 					$result->tout = true;
-					unset ($param);
+					$param = "";
 				} else if ($param == 'id_rubrique')
-					unset ($param);
+					$param = "";
 			}
-
-			// synonyme
-			if ($param == 'unique') $param = 'doublons';
-
-			// l'ajouter
-			if ($param)
-				$params2[] = $param;
-	      }
-		else {
-		  // cas d'un guillemet final
-			if ($args[1] == '"') {
-			  // si tout le param est entre guillement, vite vu
-				$result->separateur = 
-					ereg_replace("'","\'",$args[2]);
-			}
+			// les separateurs (specs CSS3 aN+b a finaliser)
+			if (ereg('^"([^"}]*)"( *, *(\-?[0-9]*)n)?(\+?([0-9]+))?)?$', $param, $args))
+			  $result->separateur[] = $args[1];
 			else {
-				$params2[] = $args[1] . $args[2] . '"' . $m[1];
+			  if ($param) $params2[] = $param;
 			}
 		}
-	    }
-	  }
 	}
 	$result->param = $params2;
 }
