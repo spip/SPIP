@@ -278,7 +278,7 @@ Gr&agrave;cies per la seva participaci&oacute;
 'forum_votre_nom' => 'El vostre nom (o pseud&ograve;nim):',
 'forum_vous_enregistrer' => 'Per participar al f&ograve;rum, us heu de registrar pr&egrave;viament.
 Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat proporcionat. Si encara no ho heu fet, heu d\'',
-'forum_vous_inscrire' => 'inscriure-us</a> pr&egrave;viament.',
+'forum_vous_inscrire' => 'inscriure\'s.',
 
 
 // I
@@ -375,8 +375,9 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_contact_developpeur' => 'Contacteu amb un desenvolupador.',
 'info_contenance' => 'Aquest lloc cont&eacute;:',
 'info_contribution' => 'contribucions del f&ograve;rum',
-'info_copyright' => '&eacute;s un programari lliure distribu&iuml;t <a href=\'copyright_fr.html\'>sota llic&egrave;ncia GPL.</a>',
+'info_copyright' => '@spip@ &eacute;s un programari lliure distribu&iuml;t @lien_gpl@.',
 'info_copyright_doc' => 'Per a m&eacute;s informaci&oacute;, veure el lloc <a href=\'http://www.spip.net/fr\'>http://www.spip.net/fr</a>.',
+'info_copyright_gpl' => 'sota llic&egrave;ncia GPL',
 'info_cours_edition' => 'Els vostres articles en proc&eacute;s de redacci&oacute;',
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
 'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>ecrire/data/</b>, despr&eacute;s:',
