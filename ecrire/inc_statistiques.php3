@@ -262,7 +262,7 @@ function calculer_popularites() {
 	ecrire_metas();	// il faut le marquer de suite pour eviter les acces concurrents
 
 	$duree = time() - $date;
-	$demivie = 3 * 24 * 60;	// en minutes
+	$demivie = 1 * 24 * 60;	// en minutes
 	$a = 1-exp(log(0.5)/$demivie);
 	$b = $a * 60 * 24;
 
