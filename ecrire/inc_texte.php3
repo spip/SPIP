@@ -1,7 +1,5 @@
 <?php
 
-// test
-
 //
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_TEXTE")) return;
