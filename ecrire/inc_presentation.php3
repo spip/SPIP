@@ -1496,7 +1496,9 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 		}
 	}
 
-	if ($options == "avancees") {
+	
+
+	if ($options == "avancees" AND ($rubrique == "asuivre" OR $spip_ecran == "large")) {
 		global $recherche;
 		if ($recherche == '' AND $spip_display != 2)
 			$recherche_aff = _T('info_rechercher');
