@@ -447,6 +447,7 @@ function extraire_lien ($regs) {
 			if (strlen($lien_texte)>40)
 				$lien_texte = substr($lien_texte,0,35).'...';
 			$class_lien = "url";
+			$lien_texte = "<html>$lien_texte</html>";
 		}
 		// petites corrections d'URL
 		if (ereg("^www\.[^@]+$",$lien_url))
