@@ -164,8 +164,6 @@ function ajout_image($source, $dest) {
 function ajout_doc($orig, $source, $dest, $mode, $id_document, $doc_vignette='', $titre_vignette='', $descriptif_vignette='', $titre_automatique=true) {
 	global $hash_id_auteur, $hash, $id_article, $type;
 
-	$flag_immagick = true;
-
 	//
 	// Securite
 	//
