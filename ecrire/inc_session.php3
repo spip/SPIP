@@ -15,8 +15,10 @@ define("_ECRIRE_INC_SESSION", "1");
 $GLOBALS['auteur_session'] = '';
 
 
-// un truc le plus unique possible mais constant brouteur + numero ip
-function md5_brouteur() {
+//
+// Caracterisation du brouteur pour limiter le chourage de cookies
+//
+function hash_env() {
 	return md5(getenv('HTTP_USER_AGENT'));
 }
 
@@ -56,13 +58,14 @@ function nettoyer_sessions() {
 function ajouter_session($auteur, $id_session) {
 	nettoyer_sessions();
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
-	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'brouteur');
+	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut');
 
 	$texte = "<"."?php\n";
 	reset($vars);
 	while (list(, $var) = each($vars)) {
 		$texte .= "\$GLOBALS['auteur_session']['$var'] = '".addslashes($auteur[$var])."';\n";
 	}
+	$texte .= "\$GLOBALS['auteur_session']['hash_env'] = '".hash_env()."';\n";
 	$texte .= "?".">";
 	if ($f = fopen($fichier_session, "wb")) {
 		fputs($f, $texte);
@@ -76,20 +79,25 @@ function ajouter_session($auteur, $id_session) {
 function verifier_session($id_session) {
 	// Tester avec alea courant
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
+	$ok = false;
 	if (file_exists($fichier_session)) {
 		include($fichier_session);
-		return true;
+		$ok = true;
 	}
-	// Sinon, tester avec alea precedent
-	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
-	if (file_exists($fichier_session)) {
-		// Renouveler la session (avec l'alea courant)
-		include($fichier_session);
-		supprimer_session($id_session);
-		ajouter_session($GLOBALS['auteur_session'], $id_session);
-		return true;
+	else {
+		// Sinon, tester avec alea precedent
+		$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere_ancien'));
+		if (file_exists($fichier_session)) {
+			// Renouveler la session (avec l'alea courant)
+			include($fichier_session);
+			supprimer_session($id_session);
+			ajouter_session($GLOBALS['auteur_session'], $id_session);
+			$ok = true;
+		}
 	}
-	return false;
+	// Valider le brouteur
+	if ($ok) $ok = (hash_env() == $GLOBALS['auteur_session']['hash_env']);
+	return $ok;
 }
 
 //
@@ -110,9 +118,10 @@ function supprimer_session($id_session) {
 // Creer une session et retourne le cookie correspondant (a poser)
 //
 function creer_cookie_session($auteur) {
+	global $flag_mt_rand;
 	if ($id_auteur = $auteur['id_auteur']) {
 		$seed = (double) (microtime() + 1) * time();
-		if ($GLOBALS['flag_mt_rand']) mt_srand($seed);
+		if ($flag_mt_rand) mt_srand($seed);
 		srand($seed);
 		if ($flag_mt_rand) $s = mt_rand();
 		if (!$s) $s = rand();
