@@ -34,7 +34,7 @@ function verifier_version_sauvegarde ($archive) {
 				donn&eacute;es, dysfonctionnements divers du site, etc. Ne
 				validez pas cette demande d'importation.<p>Pour plus
 				d'informations, voyez [la documentation de
-				SPIP->.net/article1489.html].";
+				SPIP->http://www.uzine.net/article1489.html].";
     } else
 		return "Probl&egrave;me de lecture du fichier $archive";
 	

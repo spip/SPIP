@@ -151,6 +151,12 @@ function import_debut($f, $gz=false) {
 
 function import_objet_1_2($f, $gz=false) {
 	global $import_ok, $pos, $abs_pos;
+	static $time_javascript;
+
+	if (time() - $time_javascript > 3) {	// 3 secondes
+		affiche_progression_javascript($abs_pos);
+		$time_javascript = time();
+	}
 
 	static $tables;
 	if (!$tables) $tables = array(
@@ -190,15 +196,31 @@ function import_objet_1_2($f, $gz=false) {
 			$liens[$type_lien][] = '('.$id_objet.','.$value.')';
 		}
 		else if ($col != 'maj') {
-			$cols[] = $col;
-			$values[] = '"'.addslashes($value).'"';
-			if ($col == $id) $id_objet = $value;
+			// tentative de restauration d'une base sauvegardee avec le champ 'images' ; d'experience, ca arrive...
+			// mieux vaut accepter que canner silencieusement...
+			if (($type == 'article') && ($col == 'images'))
+			{
+				if ($value) {		// ne pas afficher de message si on a un champ suppl mais vide
+					echo "--><br><font color='red'><b>Erreur dans la sauvegarde ($type $id_objet) ! </b></font>\n<font color='black'>La colonne $col n'existe pas";
+					if ($col == 'images') echo ", veuillez v&eacute;rifier que vos images ont &eacute;t&eacute; transf&eacute;r&eacute;es correctement.";
+					echo "</font>\n<!--";
+					$GLOBALS['erreur_restauration'] = true;
+				}
+			}
+			else {
+				$cols[] = $col;
+				$values[] = '"'.addslashes($value).'"';
+				if ($col == $id) $id_objet = $value;
+			}
 		}
 	}
 
 	$table = $tables[$type];
 	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
-	spip_query($query);
+	if (! spip_query($query)) {
+		echo "--><br><font color='red'><b>Erreur MySQL ! </b></font>\n<font color='black'><tt>".mysql_error()."</tt></font>\n<!--";
+		$GLOBALS['erreur_restauration'] = true;
+	}
 
 	if ($type == 'article') {
 		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
@@ -460,13 +482,39 @@ function import_all($f, $gz=false) {
 	spip_query($query);
 	$query = "DELETE FROM spip_visites WHERE maj < $my_date";
 	spip_query($query);
-	$query = "DELETE FROM spip_visites_referers WHERE maj < $my_date";
-	spip_query($query);
 
 	import_fin();
+
+	affiche_progression_javascript('100 %');
 
 	return true;
 }
 
+
+function affiche_progression_javascript($abs_pos) {
+	global $affiche_progression_pourcent;
+
+	// 8ko pour forcer le flush
+	for ($i=0; $i<8192; $i++)
+		echo " ";
+
+	echo " --><script language='javascript'><!--\n";
+
+	if ($abs_pos == '100 %') {
+		$taille = $abs_pos;
+		if ($GLOBALS['erreur_restauration'])
+			echo "document.progression.recharge.value='Erreur: voir ci-dessous';\n";
+		else
+			echo "document.progression.recharge.value='C\'est fini !';\n";
+	}
+	else if (! $affiche_progression_pourcent)
+		$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));
+	else
+		$taille = floor(100 * $abs_pos / $affiche_progression_pourcent)." %";
+
+	echo "document.progression.taille.value='$taille';\n";
+	echo "//--></script><!--\n";
+	flush;
+}
 
 ?>
