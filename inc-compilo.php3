@@ -57,7 +57,7 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 					if ($val)
 						$l[] = "\'lang\' => \'$val\'";
 					else
-						$l[] = "\'lang\' => \''.\$spip_lang.'\'";
+						$l[] = "\'lang\' => \''.\$GLOBALS[\"spip_lang\"].'\'";
 				}
 
 				// Cas normal {var=val}
