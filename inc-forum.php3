@@ -371,6 +371,13 @@ function retour_forum($id_rubrique, $id_parent, $id_article, $id_breve, $id_synd
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"$url_site\" SIZE='40'></div>";
 
 		$ret .= "\n<p><div class='spip_encadrer'><B>Qui &ecirc;tes-vous ?</B> (optionnel)<BR>";
+
+		$nom_session = $GLOBALS['auteur_session']['nom'];
+		$nom_email = $GLOBALS['auteur_session']['email'];
+
+		if (!$auteur) $auteur = $nom_session;
+		if (!$email_auteur) $email_auteur = $nom_email;
+
 		$ret .= "\nVotre nom (ou pseudonyme) :<BR>";
 		$ret .= "\n<INPUT TYPE='text' CLASS='forml' NAME='auteur' VALUE=\"".htmlspecialchars($auteur)."\" SIZE='40'><BR>";
 
@@ -470,6 +477,7 @@ function ajout_forum() {
 	}
 
 	
+	if (!$id_auteur) $id_auteur = $GLOBALS['auteur_session']['id_auteur'];
 	
 	
 	$query_forum = "UPDATE spip_forum
