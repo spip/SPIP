@@ -53,9 +53,9 @@ tester_variable('lang', 'fr');
 // Trouver une locale qui marche
 //
 $lang2 = strtoupper($GLOBALS['lang']);
-setlocale('LC_CTYPE', $GLOBALS['lang']) ||
-setlocale('LC_CTYPE', $lang2.'_'.$GLOBALS['lang']) ||
-setlocale('LC_CTYPE', $GLOBALS['lang'].'_'.$lang2);
+setlocale(LC_CTYPE, $GLOBALS['lang']) ||
+setlocale(LC_CTYPE, $lang2.'_'.$GLOBALS['lang']) ||
+setlocale(LC_CTYPE, $GLOBALS['lang'].'_'.$lang2);
 
 
 //
