@@ -187,7 +187,7 @@ function traduire_nom_langue($lang) {
 	'ne' => "Nepali",
 	'nl' => "Nederlands",
 	'no' => "norsk",
-	'oci_lnc' => "langadocian",
+	'oci_lnc' => "lengadocian",
 	'oci_prv_ni' => "ni&ccedil;ard",
 	'om' => "(Afan) Oromo",
 	'or' => "Oriya",
@@ -240,7 +240,7 @@ function traduire_nom_langue($lang) {
 	'wo' => "Wolof",
 	'xh' => "Xhosa",
 	'yi' => "Yiddish",
-	'yo' => "Yoruba",
+	'yor' => "Yoruba",
 	'za' => "Zhuang",
 	'zh' => "&#20013;&#25991;",
 	'zu' => "Zulu");
