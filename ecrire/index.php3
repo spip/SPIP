@@ -118,7 +118,7 @@ if ($connect_statut == "0minirezo" AND $cookie_admin) {
 	echo "<hr>";
 	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=1>";
 	echo "<img src='img_pack/triangle.gif' width=16 height=14 border=0>";
-	echo " <a href='../spip_cookie.php3?supp_cookie=oui'><B>SUPPRIMER LE COOKIE</B></A>";
+	echo " <a href='../spip_cookie.php3?cookie_admin=-1&redirect=./ecrire/index.php3'><B>SUPPRIMER LE COOKIE</B></A>";
 		echo aide ("cookie");
 	echo "</font>";
 }
@@ -276,7 +276,7 @@ if ($connect_statut == "0minirezo") {
 		echo "Vous pouvez activer un cookie, ce qui vous permettra d'&eacute;diter directement les articles depuis le site public.";
 		echo aide ("cookie");
 
-		bouton("Placer un cookie", "../spip_cookie.php3?ajout_cookie=oui");
+		bouton("Placer un cookie", "../spip_cookie.php3?cookie_admin=oui&redirect=./ecrire/index.php3");
 		echo "<p><hr><p>";
 	}
 }

@@ -88,16 +88,17 @@ function auth() {
 	// cookie - experimental
 	$SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES = false; // mettre true pour jouer
 	if ($SUPPRIME_LA_SECURITE_POUR_JOUER_AUX_COOKIES)
-	if ($cookie = $HTTP_COOKIE_VARS[spip_session]) {
+	if ($cookie_session = $HTTP_COOKIE_VARS['spip_session']) {
 		include_local ("inc_session.php3");
-		if ($visiteur = verifie_cookie_session ($cookie)) {
+		if ($visiteur = verifie_cookie_session ($cookie_session)) {
 			if ($visiteur->statut == '0minirezo' OR $visiteur->statut == '1comite') {
 				$session_login = $visiteur->login;
 			}
 		}
+		$cookie_session = ''; // parano ?
 	}
 	if (! $session_login AND ($HTTP_COOKIE_VARS[cookie_login] == 'experimental')) {
-		@header ("Location: login.php3");
+		@header ("Location: ./login.php3");
 		exit;
 	}
 
@@ -106,7 +107,7 @@ function auth() {
 		$auth_pass_ok = true;
 		$auth_can_disconnect = true;
 		if ($GLOBALS['logout'] == $auth_login) {
-			@header("Location: ../spip_session.php3?cookie=-1&redirect=ecrire/login.php3");
+			@header("Location: ../spip_cookie.php3?cookie_session=-1&redirect=./ecrire/login.php3");
 		}
 	} else
 	// cookie - fin experimental
