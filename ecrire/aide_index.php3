@@ -3,6 +3,7 @@
 include ("inc_version.php3");
 include_ecrire ("inc_presentation.php3");
 
+
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
 $lastmodified = filemtime("aide_index.php3");
 $headers_only = http_last_modified($lastmodified, time() + 24 * 3600);
@@ -55,26 +56,30 @@ function fichier_aide($lang_aide = '') {
 
 	if (!$lang_aide) $lang_aide = $GLOBALS['spip_lang'];
 
+	// fichier local ?
 	if (@file_exists($fichier_aide = "AIDE/$lang_aide/aide.html")) 
 		return array(file($fichier_aide), $lang_aide);
-	else	// reduction ISO du code langue oc_prv_ni => oc_prv => oc
-		if (ereg("(.*)_", $lang_aide, $regs)
-		AND $r = fichier_aide($regs[1]))
-			return $r;
 
-	else if ($help_server) {
-		// Aide internet, en cache ?
-		include_ecrire('inc_sites.php3');
-		if (@file_exists($fichier_aide = _DIR_SESSIONS . "aide-$lang_aide-aide.html")) {
-			return array(file($fichier_aide), $lang_aide);
-		}
-		else {
-			// sinon aller la chercher sur le site d'aide
-			if (ecrire_fichier(_DIR_SESSIONS . 'aide-test', "test")
-			AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html"))) {
-				ecrire_fichier ($fichier_aide, $contenu);
-				return array($contenu, $lang_aide);
+	// fichier local ? si reduction ISO du code langue oc_prv_ni => oc
+	else if (ereg("(.*)_", $lang_aide, $regs)
+		AND (@file_exists($fichier_aide = "AIDE/".$regs[1]."/aide.html")))
+			return array(file($fichier_aide), $regs[1]);
+
+	// Aide internet
+	else {
+		// en cache ?
+		if (!@file_exists($fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html")) {
+			if ($help_server) {
+				include_ecrire('inc_sites.php3');
+				if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
+				AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")))
+					ecrire_fichier ($fichier_aide, $contenu);
 			}
+		}
+
+		lire_fichier($fichier_aide, $contenu);
+		if (strlen($contenu) > 500) {
+			return array($contenu, $lang_aide);
 		}
 	}
 
@@ -193,12 +198,6 @@ table.spip td {
 
 	echo $html;
 
-	if (defined('erreur_langue')) {
-		include_ecrire('inc_presentation.php3');
-		install_debut_html(_T('forum_titre_erreur'));
-		echo "<div>".erreur_langue."</div>";
-	}
-
 }
 
 
@@ -211,15 +210,15 @@ function help_img($regs) {
 	list ($cache, $rep, $lang, $file, $ext) = $regs;
 
 	header("Content-Type: image/$ext");
-	if (@file_exists(_DIR_SESSIONS . 'aide-'.$cache)) {
-		readfile(_DIR_SESSIONS . 'aide-'.$cache);
+	if (@file_exists(_DIR_CACHE . 'aide-'.$cache)) {
+		readfile(_DIR_CACHE . 'aide-'.$cache);
 	} else {
 		include_ecrire('inc_sites.php3');
-		if (ecrire_fichier(_DIR_SESSIONS . 'aide-test', "test")
+		if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {
 			echo $contenu;
-			ecrire_fichier (_DIR_SESSIONS . 'aide-'.$cache, $contenu);
+			ecrire_fichier (_DIR_CACHE . 'aide-'.$cache, $contenu);
 		} else
 			header ("Location: $help_server/$rep/$lang/$file");
 	}
@@ -294,7 +293,8 @@ function activer_article(id) {
 //--></script>
 ';
 
-  echo $browser_layer,'
+afficher_script_layer();
+echo '
 </head>
 <body bgcolor="#FFFFFF" text="#000000" link="#E86519" vlink="#6E003A" alink="#FF9900" TOPMARGIN="5" LEFTMARGIN="5" MARGINWIDTH="5" MARGINHEIGHT="5"';
 
@@ -399,11 +399,6 @@ function article($titre, $lien, $statut = "redac") {
 
 
 function analyse_aide($html, $aide=false) {
-	if (is_array($html))
-		$html = join('', $html);
-
-	if (!$html)
-		define ('erreur_langue', _T('aide_non_disponible'));
 
 	preg_match_all(',<h([12])( class="spip")?'. '>([^/]+?)(/(.+?))?</h\1>,ism',
 	$html, $regs, PREG_SET_ORDER);
@@ -432,13 +427,14 @@ else {
 	if (!$html) {
 		// Renvoyer sur l'aide en ligne du serveur externe
 		if ($help_server)
-			@Header("Location: $help_server/" . _DIR_RESTREINT_ABS . "aide_index.php3?var_lang=$spip_lang");
+			@Header("Location: $help_server/?lang=$spip_lang");
 		// Ou alors message d'erreur
 		else {
 			include_ecrire('inc_presentation.php3');
-			install_debut_html(_L('Erreur : documentation non disponible'));
-			echo "<p>"._L('Votre site a &eacute;t&eacute; install&eacute; sans aide en ligne, et n\'est pas connect&eacute; &agrave; un serveur ext&eacute;rieur d\'aide en ligne. Sorry.');
+			install_debut_html(_T('forum_titre_erreur'));
+			echo "<div>"._T('aide_non_disponible')."</div>";
 			install_fin_html();
+			exit;
 		}
 	} else {
 		echo debut_entete(_T('info_aide_en_ligne'),
