@@ -94,7 +94,9 @@ if ($mode == 'oubli_pass') {
 	}
 }
  else {
-	$inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui") ;
+	if ($inscriptions_ecrire = (lire_meta("accepter_inscriptions") == "oui"))
+		$mode = 'redac';
+
 	if ($inscriptions_ecrire || (lire_meta('accepter_visiteurs') == 'oui') OR (lire_meta('forums_publics') == 'abo')) {
 	// debut presentation
 
@@ -108,7 +110,7 @@ if ($mode == 'oubli_pass') {
 		echo "\n<p>";
 
 		include_local("inc-inscription.php3");
-		echo (inscription_dyn($mode));
+		echo inscription_dyn($mode);
 	}
 	else {
 		install_debut_html(_T('pass_erreur'));
