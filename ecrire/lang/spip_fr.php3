@@ -382,6 +382,7 @@ Merci de votre participation
 'info_description_2' => 'Description&nbsp;:',
 'info_dimension' => 'Dimensions&nbsp;:',
 'info_document' => 'Document',
+'info_documents' => 'Documents',
 'info_echange_message' => 'SPIP permet l\'&eacute;change de messages et la constitution de forums de discussion
 		priv&eacute;s entre les participants du site. Vous pouvez activer ou
 		d&eacute;sactiver cette fonctionnalit&eacute;.',
