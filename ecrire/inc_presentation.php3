@@ -377,7 +377,7 @@ function afficher_tranches_requete(&$query, $colspan) {
 // Afficher tableau d'articles
 //
 function afficher_articles($titre_table, $requete, $afficher_visites = false, $afficher_auteurs = true, $toujours_afficher = false, $afficher_cadre = true) {
-	global $connect_id_auteur;
+	global $connect_id_auteur, $connect_statut;
 
 	$activer_messagerie = lire_meta("activer_messagerie");
 	$activer_statistiques = lire_meta("activer_statistiques");
@@ -454,7 +454,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if ($afficher_auteurs) $vals[] = $les_auteurs;
 
 			$s = affdate($date);
-			if ($activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
+			if ($connect_statut == "0minirezo" AND $activer_statistiques != "non" AND $afficher_visites AND $visites > 0) {
 				$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$visites&nbsp;visites</a></font>";
 				if ($activer_statistiques_ref == "oui" AND $referers > 0){
 					$s .= "<br><font size=\"1\"><a href='statistiques_visites.php3?id_article=$id_article'>$referers&nbsp;entr&eacute;es directes</a></font>";
