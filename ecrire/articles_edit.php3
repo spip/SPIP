@@ -292,8 +292,8 @@ function enfant($leparent){
 
 
 		if (eregi("mozilla", $browser_name)) {
-			$style .= "padding-left: 16px; ";
-			$style .= "margin-left: ".(($i-1)*16)."px;";
+			$style .= "padding-$spip_lang_left: 16px; ";
+			$style .= "margin-$spip_lang_left: ".(($i-1)*16)."px;";
 		} else {
 			for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
