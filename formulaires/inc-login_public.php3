@@ -60,12 +60,10 @@ function login_explicite($login, $cible, $mode) {
 			redirige_par_entete($cible);
 		return http_href($cible, _T('login_par_ici'));
 	}
-	return login_pour_tous($login ? $login : _request('var_login'), $cible, '', $action, $mode);
+	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action, $mode);
 }
 
-// fonction aussi pour les forums sur abonnement
-
-function login_pour_tous($login, $cible, $message, $action, $mode) {
+function login_pour_tous($login, $cible, $action, $mode) {
 	global $ignore_auth_http, $php_module, $_SERVER, $_COOKIE;
 
 	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
@@ -128,7 +126,6 @@ function login_pour_tous($login, $cible, $message, $action, $mode) {
 					'url' => $cible,
 					'auth_http' => $auth_http,
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
-					'message' => ($message ? ' ' : ''),
 					'inscription'  => $inscription
 					)
 				)

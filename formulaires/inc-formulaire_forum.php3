@@ -73,9 +73,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 	// verifier l'identite des posteurs pour les forums sur abo
 	if (($forums_publics == "abo") && (!$GLOBALS["auteur_session"])) {
-		include_local(find_in_path('inc-login_public.php3'));
-		return login_pour_tous(_request('var_login'), $url,
-			true, $url, 'forum');
+		return array('formulaire_login_forum', 0, array());
 	}
 
 	$id_rubrique = intval($id_rubrique);
