@@ -15,6 +15,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // A
 'access_interface_graphique' => 'Back to the complete graphical interface',
 'access_mode_texte' => 'Show the simplified text interface',
+'admin_debug' => 'debug',
 'admin_modifier_article' => 'Modify this article',
 'admin_modifier_auteur' => 'Modify this author',
 'admin_modifier_breve' => 'Modify this news item',
@@ -175,6 +176,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_compresse' => 'The cache files are saved in compressed mode.',
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
 'cache_modifiable_webmestre' => 'These parameters can be modified by the webmaster.',
+'cal_apresmidi' => '<NEW>apr&egrave;s-midi',
+'cal_jour_entier' => '<NEW>jour entier',
+'cal_matin' => '<NEW>matin',
+'cal_par_jour' => '<NEW>calendrier par jour',
+'cal_par_mois' => '<NEW>calendrier par mois',
+'cal_par_semaine' => '<NEW>calendrier par semaine',
 'calendrier_synchro' => 'If you use a diary application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
 'confirm_changer_statut' => 'Confirmation required: You have asked to change this article\'s status. Do you wish to continue?',
 
@@ -329,11 +336,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_titre_obligatoire' => '<B>Title</b> [Required]<BR>',
 'entree_url' => 'Your site\'s URL',
 'envoi_via_le_site' => 'Send via the site',
-'erreur_boucle_double' => 'BOUCLE@id@: double definition',
-'erreur_boucle_fermant' => 'BOUCLE@id@: missing closing tag',
-'erreur_boucle_syntaxe' => 'Incorrect loop (BOUCLE) syntax ',
-'erreur_boucle_syntaxe2' => 'The loop (BOUCLE) @milieu@ is incorrect.',
-'erreur_filtre' => 'Error - undefined filter: <b>"@filtre@"</b>',
 
 
 // F
@@ -533,6 +535,7 @@ Thank you for your participation
 'icone_voir_sites_references' => 'Show referenced sites',
 'icone_voir_tous_mots_cles' => 'Show all keywords',
 'image_administrer_rubrique' => 'You can manage this section',
+'img_indisponible' => '<NEW>image indisponible',
 'info_1_article' => '1 article',
 'info_1_breve' => '1 news item',
 'info_1_site' => '1 site',
@@ -648,6 +651,7 @@ Thank you for your participation
 'info_creer_base' => '<B>Create</b> a new database:',
 'info_creer_repertoire' => 'Please create a file or a directory called:',
 'info_creer_repertoire_2' => 'inside the sub-directory <b>ecrire/data/</b>, then',
+'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_dans_groupe' => 'In group:',
 'info_dans_rubrique' => 'In section:',
 'info_date_publication_anterieure' => 'Date of earlier publishing:',
@@ -690,7 +694,6 @@ Thank you for your participation
 'info_envoyer_message_prive' => 'Send a private message to this author',
 'info_erreur_requete' => 'Error in query:',
 'info_erreur_restauration' => 'Restoration error: file not found.',
-'info_erreur_squelette' => '&#1615;Error in the site',
 'info_erreur_squelette2' => 'No available template <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System error (errno @errsys@)',
 'info_erreur_systeme2' => '<b>The hard disk might be full or the database damaged. <br>
@@ -1087,6 +1090,7 @@ in a colour indicating their status:',
 'info_visiteurs' => 'Visitors',
 'info_visiteurs_02' => 'Public site visitors',
 'info_vos_rendez_vous' => 'Your future appointments',
+'info_zoom' => '<NEW>zoom',
 'infos_vos_pense_bete' => 'Your memos',
 'install_select_langue' => 'Select a language then click on the button "next" to start the installation procedure.',
 'intem_redacteur' => 'editor',
@@ -1326,6 +1330,7 @@ and connect again to the site.
 'pass_retour_public' => 'Back to the public site',
 'pass_rien_a_faire_ici' => 'Nothing to do here.',
 'pass_vousinscrire' => 'Registering with the site',
+'precedent' => '<NEW>pr&eacute;c&eacute;dent',
 'previsualisation' => 'Preview',
 'previsualiser' => 'Show preview',
 
@@ -1333,6 +1338,7 @@ and connect again to the site.
 // S
 'stats_visites_et_popularite' => '@visites@ visits; popularity: @popularite@',
 'statut_admin_restreint' => '(restricted admin)',
+'suivant' => '<NEW>suivant',
 
 
 // T
@@ -1706,7 +1712,29 @@ entered important modifications on the graphics or the structure of the site.',
 
 
 // V
-'version_initiale' => 'Initial version'
+'version_initiale' => 'Initial version',
+
+
+// Z
+'zbug_balise_b_aval' => '<NEW>&nbsp;: balise B en aval',
+'zbug_boucle_recursive_undef' => '<NEW>boucle r&eacute;cursive non d&eacute;finie',
+'zbug_champ_argument_manquant' => '<NEW>Champ @champ@&nbsp;: argument manquant',
+'zbug_champ_hors_boucle' => '<NEW>Champ @champ@ hors boucle',
+'zbug_champ_hors_motif' => '<NEW>Champ @champ@ hors d\'une boucle de motif @motif@',
+'zbug_critere_inconnu' => '<NEW>crit&egrave;re inconnu @critere@',
+'zbug_distant_interdit' => '<NEW>distant interdit',
+'zbug_erreur_boucle_double' => 'BOUCLE@id@: double definition',
+'zbug_erreur_boucle_fermant' => 'BOUCLE@id@: missing closing tag',
+'zbug_erreur_boucle_syntaxe' => 'Incorrect loop (BOUCLE) syntax ',
+'zbug_erreur_execution_page' => '<NEW>erreur d\'ex&eacute;cution de la page',
+'zbug_erreur_filtre' => 'Error - undefined filter: <b>"@filtre@"</b>',
+'zbug_erreur_meme_parent' => '<NEW>{meme_parent} ne s\'applique qu\'aux boucles (FORUMS) ou (RUBRIQUES)',
+'zbug_erreur_squelette' => '<NEW>Erreur(s) dans le squelette',
+'zbug_info_erreur_squelette' => '&#1615;Error in the site',
+'zbug_inversion_ordre_inexistant' => '<NEW>inversion d\'un ordre inexistant',
+'zbug_parametres_inclus_incorrects' => '<NEW>Param&egrave;tres d\'inclusion incorrects',
+'zbug_serveur_indefini' => '<NEW>serveur SQL ind&eacute;fini',
+'zbug_table_inconnue' => '<NEW>Table SQL &laquo; @table@ &raquo; inconnue'
 
 );
 
