@@ -236,7 +236,7 @@ if ($ob_exists) {
 	// special bug Netscape Win 4.0x
 	if (eregi("Mozilla/4\.0[^ ].*Win", $HTTP_SERVER_VARS['HTTP_USER_AGENT'])) {
 		$use_gz = false;
-	}	
+	}
 
 	if ($use_gz) {
 		@ob_start("ob_gzhandler");
