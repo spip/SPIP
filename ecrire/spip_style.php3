@@ -7,7 +7,7 @@
 	if (!isset($couleur_foncee))
 		$couleur_foncee = "#3874B0";
 ?>
-.forml {width: 100%; padding: 2px; background-color: #E4E4E4; 
+.forml {width: 100%; padding: 2px; background-color: #E4E4E4;
 background-position: center bottom; float: none; color: #000000}
 .formo {width: 100%; padding: 2px; background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none;}
 .fondl {background-color: <?php echo $couleur_claire; ?>; background-position: center bottom; float: none; color: #000000}
@@ -62,6 +62,7 @@ td.icone a img {
 
 .cadre {
 	padding: 0px;
+	margin: 0px;
 	border: 0px;
 	width: 100%;
 }

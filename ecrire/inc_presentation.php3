@@ -66,9 +66,9 @@ function bouton_imessage($destinataire, $row = '') {
 
 function debut_cadre($style, $icone, $fonction) {
 	global $spip_display;
-	if ($spip_display != 1){	
+	if ($spip_display != 1){
 		if (strlen($icone)<3) $icone = "rien.gif";
-		$retour_aff .= "\n<table class='cadre' cellspacing='0'><tr>";
+		$retour_aff .= "\n<table class='cadre' cellspacing='0' cellpadding='0'><tr>";
 		$retour_aff .= "\n<td class='$style-hg'></td>";
 		$retour_aff .= "\n<td class='$style-h'>";
 		if ($fonction) {
@@ -87,10 +87,10 @@ function debut_cadre($style, $icone, $fonction) {
 
 function fin_cadre($style) {
 	global $spip_display;
-	if ($spip_display != 1){	
+	if ($spip_display != 1){
 		$retour_aff .= "\n</td>";
 		$retour_aff .= "\n<td class='$style-d'></td></tr>";
-		$retour_aff .= "\n<td class='$style-bg'></td>";
+		$retour_aff .= "\n<tr><td class='$style-bg'></td>";
 		$retour_aff .= "\n<td class='$style-b'></td>";
 		$retour_aff .= "\n<td class='$style-bd'></td></tr>";
 		$retour_aff .= "\n</table>\n";
