@@ -3,8 +3,6 @@
 // Ce fichier ne sera execute qu'une fois
 if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
-global $flag_ecrire;
-define('_DIR_IMG', ($flag_ecrire ? "../" : "")."IMG/");
 
 //
 // Aller chercher la page dans le cache ou pas
@@ -285,29 +283,11 @@ function admin_page($cached, $texte) {
 	return false; // pas de boutons admin
 }
 
-// Pour les documents comme pour les logos, le filtre |fichier donne
-// le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
-// remarquable, mais a conserver pour compatibilite ascendante.
-// -> http://www.spip.net/fr_article901.html
-
-function calcule_fichier_logo($on) {
-  $r= ereg_replace("^" . _DIR_IMG, "", $on);
-#  spip_log("calculer_fihchier_logo $on $r");
-  return $r;
-}
-
-function cherche_image_nommee($nom) {
-	$formats = array ('gif', 'jpg', 'png');
-	while (list(, $format) = each($formats)) {
-		$d = _DIR_IMG . "$nom.$format";
-		if (@file_exists($d))
-			return ($d);
-	}
-}
 
 // Gestion des taches de fond ?  toutes les 5 secondes
 // (on mettra 30 s quand on aura prevu la preemption par une image-cron)
 function taches_de_fond() {
+	
 	if (!@file_exists('ecrire/data/cron.lock')
 	OR (time() - @filemtime('ecrire/data/cron.lock') > 5)) {
 
@@ -322,39 +302,5 @@ function taches_de_fond() {
 	}
 }
 
-
-//
-// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
-//
-
-function creer_repertoire($base, $subdir) {
-	if (@file_exists("$base/.plat")) return '';
-	$path = $base.'/'.$subdir;
-	if (@file_exists($path)) return "$subdir/";
-
-	@mkdir($path, 0777);
-	@chmod($path, 0777);
-	$ok = false;
-	if ($f = @fopen("$path/.test", "w")) {
-		@fputs($f, '<'.'?php $ok = true; ?'.'>');
-		@fclose($f);
-		include("$path/.test");
-	}
-	if (!$ok) {
-		$f = @fopen("$base/.plat", "w");
-		if ($f)
-			fclose($f);
-		else {
-			@header("Location: spip_test_dirs.php3");
-			exit;
-		}
-	}
-	return ($ok? "$subdir/" : '');
-}
-
-function creer_repertoire_documents($ext) {
-# est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	return  _DIR_IMG . creer_repertoire(_DIR_IMG, $ext);
-}
 
 ?>
