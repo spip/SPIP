@@ -218,7 +218,7 @@ function afficher_mois($jour_today,$mois_today,$annee_today,$nom_mois){
 			echo "<FONT FACE='arial,helvetica,sans-serif' SIZE=1>";
 			
 			if (count($les_rv[$j])>0){
-				echo join($les_rv[$j],"\n");
+				echo join("\n", $les_rv[$j]);
 			}
 
 			echo $les_articles[$j];

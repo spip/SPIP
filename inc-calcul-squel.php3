@@ -1286,7 +1286,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		}
 		else {
 			\$rech = _T('info_rechercher');
-			\$$nom_var = \"\n<a name='formulaire_recherche'></a>
+			\$$nom_var = \"
 				<form action='$lien' method='get' name='form_rech'>
 				<input type='text' id='formulaire_recherche' name='recherche' value=\\\"\$rech\\\" size='20' class='formrecherche'\";
 			\$$nom_var .= \"></form>\";

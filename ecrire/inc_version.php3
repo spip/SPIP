@@ -49,7 +49,7 @@ function feed_globals($table, $insecure = true, $ignore_variables_contexte = fal
 	if (is_array($GLOBALS[$table])) {
         reset($GLOBALS[$table]);
         while (list($key, $val) = each($GLOBALS[$table])) {
-			if ($ignore_variables_contexte AND $is_contexte[$key])
+			if ($ignore_variables_contexte AND isset($is_contexte[$key]))
 				unset ($GLOBALS[$key]);
 			else
 				$GLOBALS[$key] = $val;

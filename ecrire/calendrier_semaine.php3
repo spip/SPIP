@@ -7,7 +7,6 @@ include_ecrire("inc_agenda.php3");
 function afficher_semaine($jour_today,$mois_today,$annee_today){
 	global $spip_lang_rtl, $spip_lang_right, $spip_lang_left;
 	global $connect_id_auteur, $connect_statut;
-	global $spip_lang_rtl;
 	global $spip_ecran;
 	global $couleur_claire, $couleur_foncee;
 
