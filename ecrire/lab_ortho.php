@@ -108,6 +108,11 @@ function enlever_langue_miroir($url, $lang) {
 	ecrire_miroir_ortho($url, $langs);
 }
 
+function reset_miroir($url) {
+	global $miroirs_ortho;
+	ecrire_miroir_ortho($url, array());
+}
+
 //
 // Renvoie la liste des miroirs utilisables pour une langue donnee
 //
@@ -130,10 +135,14 @@ function chercher_miroirs_ortho($lang) {
 	return $result;
 }
 
-function choisir_miroir_ortho($lang) {
-	$miroirs = chercher_miroirs_ortho($lang);
-	if (!($n = count($miroirs))) return false;
-	return $miroirs[($n > 1) ? rand(0, $n - 1) : 0];
+function choisir_miroirs_ortho($lang) {
+	$liste = chercher_miroirs_ortho($lang);
+	if (!count($liste)) return false;
+	foreach ($liste as $url) {
+		$miroirs[md5(rand().$url)] = $url;
+	}
+	ksort($miroirs);
+	return $miroirs;
 }
 
 //
@@ -221,8 +230,11 @@ function post_ortho($url, $texte, $lang) {
 function verifier_langue_miroir($url, $lang) {
 	// Envoyer une requete bidon
 	$result = post_ortho($url, " ", $lang);
-	if (preg_match(',<ortho>.*</ortho>,s', $result) &&
-		!preg_match(',<erreur>.*<code>E_LANG_ABSENT</code>.*</erreur>,s', $result)) {
+	if (!preg_match(',<ortho>.*</ortho>,s', $result)) {
+		reset_miroir($url);
+		return false;
+	}
+	if (!preg_match(',<erreur>.*<code>E_LANG_ABSENT</code>.*</erreur>,s', $result)) {
 		ajouter_langue_miroir($url, $lang);
 		return true;
 	}
@@ -354,7 +366,8 @@ function preparer_ortho($texte, $lang) {
 
 	if ($charset == 'utf-8')
 		return unicode_to_utf_8(html2unicode($texte));
-	return unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
+	else
+		return unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 }
 
 function afficher_ortho($texte) {
@@ -422,31 +435,61 @@ function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	// 3. Envoyer les mots restants a un serveur
 	$mauvais = array();
 	if (count($mots)) {
-		//echo count($mots);
 		$texte = join(' ', $mots);
-		$url = choisir_miroir_ortho($lang);
-		$xml = post_ortho($url, $texte, $lang);
-		if (!$xml) return false;
-		if (!preg_match(',<ortho>(.*)</ortho>,s', $xml, $r)) return false;
-		$xml = $r[1];
+		
+		// Hack : ligatures en francais pas gerees par aspell
+		unset($trans_rev);
+		$texte_envoi = $texte;
+		if ($lang == 'fr') {
+			$trans = array(chr(197).chr(146) => 'OE', chr(197).chr(147) => 'oe', 
+					chr(195).chr(134) => 'AE', chr(195).chr(166) => 'ae');
+			$texte_envoi = strtr($texte_envoi, $trans);
+			$trans_rev = array_flip($trans);
+		}
+		
+		// POST de la requete et recuperation du resultat XML
+		$urls = choisir_miroirs_ortho($lang);
+		if (!$urls) return false;
+		$ok = '';
 		$erreur = false;
-		if (preg_match(',<erreur>.*<code>(.*)</code>.*</erreur>,s', $xml, $r)) 
-			$erreur = $r[1];
-		if (!preg_match(',<ok>(.*)</ok>,s', $xml, $r))
-			return $erreur;
+		foreach ($urls as $url) {
+			$xml = post_ortho($url, $texte_envoi, $lang);
+			if ($xml && preg_match(',<ortho>(.*)</ortho>,s', $xml, $r)) {
+				$xml = $r[1];
+				if (preg_match(',<erreur>.*<code>(.*)</code>.*</erreur>,s', $xml, $r)) 
+					$erreur = $r[1];
+				if (preg_match(',<ok>(.*)</ok>,s', $xml, $r))
+					$ok = $r[1];
+				if ($ok) break;
+			}
+			reset_miroir($url);
+		}
+		if (!$ok) return $erreur;
 
 		// Remplir le tableau des resultats (mots mal orthographies)
-		$ok = $r[1];
+		if ($trans_rev) {
+			$assoc_mots = array_flip($mots);
+		}
 		while (preg_match(',<mot>(.*?)</mot>(\s*<suggest>(.*?)</suggest>)?,s', $ok, $r)) {
 			$p = strpos($ok, $r[0]);
 			$ok = substr($ok, $p + strlen($r[0]));
 			$mot = $r[1];
-			if ($suggest = $r[3]) {
-				$mauvais[$mot] = preg_split('/[\s,]+/', $suggest);
+			if ($suggest = $r[3]) 
+				$s = preg_split('/[\s,]+/', $suggest);
+			else 
+				$s = array();
+			// Hack ligatures
+			if ($trans_rev) {
+				$mot_rev = strtr($mot, $trans_rev);
+				if ($mot != $mot_rev) {
+					if ($assoc_mots[$mot]) 
+						$mauvais[$mot] = $s;
+					if ($assoc_mots[$mot_rev]) 
+						$mauvais[$mot_rev] = $s;
+				}
+				else $mauvais[$mot] = $s;
 			}
-			else {
-				$mauvais[$mot] = array();
-			}
+			else $mauvais[$mot] = $s;
 		}
 	}
 	if (!$erreur) ajouter_cache_ortho($mots, $mauvais, $lang);

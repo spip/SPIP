@@ -121,33 +121,23 @@ function spip_apres_typo ($letexte) {
 }
 
 
+//
 // Mise de cote des echappements
+//
 
-// Les regexp de echappe_html, dépendant de la fonction de comparaison
-
-if ($GLOBALS['flag_pcre']) {
-	$GLOBALS['fct_match'] = 'preg_match';
-	$regexp_echap_html = "<html>((.*?))<\/html>";
-	$regexp_echap_code = "<code>((.*?))<\/code>";
-	$regexp_echap_cadre = "[\n\r]*<(cadre|frame)>((.*?))<\/(cadre|frame)>[\n\r]*";
-	$regexp_echap_poesie = "[\n\r]*<(poesie|poetry)>((.*?))<\/(poesie|poetry)>[\n\r]*";
-	$GLOBALS['regexp_echappe'] = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)/si";
-	} else {
-		//echo creer_echappe_sans_pcre("cadre");
-	$GLOBALS['fct_match'] = 'eregi';
-	$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
-	$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
-	$regexp_echap_cadre = "(<[cf][ar][da][rm]e>(([^<]|<[^/]|</[^cf]|</[cf][^ar]|</[cf][ar][^da]|</[cf][ar][da][^rm]|</[cf][ar][da][rm][^e]|<\/[cf][ar][da][rm]e[^>])*)<\/[cf][ar][da][rm]e>)()"; // parentheses finales pour obtenir meme nombre de regs que pcre
-	$regexp_echap_poesie = "(<poe[st][ir][ey]>(([^<]|<[^/]|</[^p]|</p[^o]|</po[^e]|</poe[^st]|</poe[st][^ir]|</poe[st][ir][^[ey]]|<\/poe[st][ir][ey][^>])*)<\/poe[st][ir][ey]>)()";
-	$GLOBALS['regexp_echappe'] = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)";
- }
+// Definition de la regexp de echappe_html
+define ('__regexp_echappe',
+		"/(" . "<html>((.*?))<\/html>" . ")|("	#html
+		. "<code>((.*?))<\/code>" . ")|("	#code
+		. "[\n\r]*<(cadre|frame)>((.*?))<\/(cadre|frame)>[\n\r]*" #cadre
+		. ")|("
+		. "[\n\r]*<(poesie|poetry)>((.*?))<\/(poesie|poetry)>[\n\r]*" #poesie
+		. ")/si");
 
 function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
-  global $flag_pcre, $fct_match, $regexp_echappe;
-
-  $debut = '';
-  $suite = $letexte;
-  while ($fct_match($regexp_echappe, $suite, $regs)) {
+	$debut = '';
+	$suite = $letexte;
+	while (preg_match(__regexp_echappe, $suite, $regs)) {
 		$num_echap++;
 
 		if ($no_transform) {	// echappements bruts
@@ -221,25 +211,16 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	// Echapper les tags html contenant des caracteres sensibles a la typo
 	//
 	$regexp_echap = "<[a-zA-Z!][^<>!':;\?]*[!':;\?][^<>]*>";
-	if ($flag_pcre) {
-		if (preg_match_all("/$regexp_echap/", $letexte, $regs, PREG_SET_ORDER))
-			while (list(,$reg) = each($regs)) {
-				$num_echap++;
-				$les_echap[$num_echap] = $reg[0];
-				//echo htmlspecialchars($reg[0])."<p>";
-				$pos = strpos($letexte, $les_echap[$num_echap]);
-				$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-					.substr($letexte,$pos+strlen($les_echap[$num_echap]));
-			}
-	} else {
-		while (ereg($regexp_echap, $letexte, $reg)) {
-			$num_echap++;
-			$les_echap[$num_echap] = $reg[0];
-			$pos = strpos($letexte, $les_echap[$num_echap]);
-			$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
-				.substr($letexte,$pos+strlen($les_echap[$num_echap]));
-		}
+	if (preg_match_all("/$regexp_echap/", $letexte, $regs, PREG_SET_ORDER))
+	while (list(,$reg) = each($regs)) {
+		$num_echap++;
+		$les_echap[$num_echap] = $reg[0];
+		//echo htmlspecialchars($reg[0])."<p>";
+		$pos = strpos($letexte, $les_echap[$num_echap]);
+		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
+			.substr($letexte,$pos+strlen($les_echap[$num_echap]));
 	}
+
 	return array($letexte, $les_echap);
 }
 
@@ -987,9 +968,10 @@ function traiter_les_notes($mes_notes, $les_echap) {
 	$GLOBALS['les_notes'] .= interdire_scripts($mes_notes);
 }
 
-function traiter_raccourcis($letexte) {
+function traiter_raccourcis($letexte, $les_echap=false) {
 	// echapper les <a href>, <html>...< /html>, <code>...< /code>
-	list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
+	if (!$les_echap)
+		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
 	if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
 	// Reinserer les echappements
