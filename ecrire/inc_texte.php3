@@ -161,8 +161,8 @@ function spip_apres_typo ($letexte) {
 	$letexte = str_replace("'", "&#8217;", $letexte);
 
 	// relecture des &nbsp;
-	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
-		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
+	// if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
+	//	$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
 
 	return $letexte;
 }
@@ -442,6 +442,12 @@ function typo($letexte) {
 		include_ecrire('inc_lang.php3');
 		$lang = lang_typo($spip_lang);
 	}
+
+	// relecture des &nbsp;
+	if ($GLOBALS['flag_ecrire'] AND $GLOBALS['revision_nbsp'])
+		$letexte = ereg_replace(" *~+ *", '<span class="spip-nbsp">&nbsp;</span>', $letexte);
+
+
 
 	if ($lang == 'fr')
 		$letexte = typo_fr($letexte);
