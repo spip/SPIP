@@ -128,6 +128,7 @@ $GLOBALS['i18n_es'] = array(
 
 // D
 'date_avant_jc' => 'aC',
+'date_fmt_heures_minutes' => '@h@h@m@min',
 'date_fmt_jour_mois' => '@jour@ de @nommois@',
 'date_fmt_jour_mois_annee' => '@jour@ de @nommois@ del @annee@',
 'date_fmt_mois_annee' => '@nommois@ del @annee@',
