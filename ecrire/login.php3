@@ -70,7 +70,7 @@ $images = array ('login.gif', 'login.jpg', 'login.png', 'login-dist.png');
 while (list(,$img) = each ($images)) {
 	if (file_exists($img)) {
 		echo '<style type="text/css"><!--
-			body {background-image: url("'.$img.'"); background-repeat: no-repeat; background-position: top-left;}
+			body {background-image: url("'.$img.'"); background-repeat: no-repeat; background-position: top left;}
 			--></style>';
 		break;
 	}
