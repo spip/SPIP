@@ -10,8 +10,8 @@ debut_gauche();
 
 if($options != 'avancees') {
 	debut_boite_info();
-	echo "<P align=center><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>&Agrave; SUIVRE</B></FONT>";
-	echo "<FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=2>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec l'interface, cliquez sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; pour ouvrir plus de possibilit&eacute;s.")."</FONT>";
+	echo "<p align=center><FONT FACE='Verdana,Arial,Helvetica,sans-serif' SIZE=1><B>&Agrave; SUIVRE</B></FONT></p>";
+	echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>".propre("Cette page recense l'actualit&eacute; du site et vous permet de suivre vos contributions. Vous y retrouverez vos articles en cours de r&eacute;daction, les articles et les br&egrave;ves pour lesquelles vous &ecirc;tes invit&eacute; &agrave; donner votre avis, puis un rappel de vos pr&eacute;c&eacute;dentes contributions.<p><hr><p>Quand vous serez familiaris&eacute;(e) avec l'interface, cliquez sur &laquo;<a href='index.php3?&set_options=avancees'>interface compl&egrave;te</a>&raquo; pour ouvrir plus de possibilit&eacute;s.")."</FONT>";
 	fin_boite_info();
 }
 
@@ -92,10 +92,9 @@ echo bouton_block_invisible("info_perso");
 echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
 
 echo debut_block_invisible("info_perso");
-echo "<hr>";
 
 if ($connect_activer_messagerie != "non") {
-	echo "Vous utilisez la messagerie interne de ce site. ";
+	echo "<br>Vous utilisez la messagerie interne de ce site. ";
 	
 	if ($connect_activer_imessage != "non") {
 		echo "Votre nom appara&icirc;t dans la liste des utilisateurs connect&eacute;s.";
@@ -108,7 +107,7 @@ else {
 	echo "<br>Vous n'utilisez pas la messagerie interne de ce site.";
 }
 
-echo "<p>";
+
 icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?id_auteur=$connect_id_auteur&redirect=index.php3", "fiche-perso-24.gif","rien.gif");
 
 //
@@ -116,8 +115,7 @@ icone_horizontale("Modifier les informations personnelles", "auteurs_edit.php3?i
 //
 
 if ($connect_statut == "0minirezo" AND $cookie_admin) {
-	echo "<p>";
-	icone_horizontale("Supprimer le cookie" . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&redirect=".rawurlencode("./ecrire/index.php3"), "", "");
+	icone_horizontale("Supprimer le cookie de correspondance" . aide("cookie"), "../spip_cookie.php3?cookie_admin=non&redirect=".rawurlencode("./ecrire/index.php3"), "cookie-24.gif", "");
 }
 
 
@@ -191,6 +189,9 @@ if ($options == "avancees") {
 	if ($connect_statut == "0minirezo") {
 		icone_horizontale("Forum des administrateurs", "forum_admin.php3", "forum-admin-24.gif","rien.gif");
 	}
+	if ($activer_message != "non") {
+		icone_horizontale("Votre messagerie interne", "messagerie.php3", "messagerie-24.gif","rien.gif");
+	}
 	if ($connect_statut == "0minirezo") {
 		echo "<p>";
 		icone_horizontale("Statistiques du site", "statistiques_visites.php3", "statistiques-24.gif","rien.gif");
@@ -257,10 +258,16 @@ if ($meta["debut_restauration"]) {
 
 if ($connect_statut == "0minirezo") {
 	if (!$cookie_admin) {
-		echo "Vous pouvez activer un cookie, ce qui vous permettra d'&eacute;diter directement les articles depuis le site public.";
+		echo "<table width=100%><tr width=100%>";
+		echo "<td width=100%>";
+		echo "Vous pouvez activer un <b>cookie de correspondance</b>, ce qui vous permettra de passer facilement du site public au site priv&eacute;.";
 		echo aide ("cookie");
-
-		bouton("Placer un cookie", "../spip_cookie.php3?cookie_admin=@$connect_login&redirect=./ecrire/index.php3");
+		echo "</td>";
+		echo "<td width=10><img src='img_pack/rien.gif' width=10>";
+		echo "</td>";
+		echo "<td width='250'>";
+		icone_horizontale("Activer le cookie de correspondance", "../spip_cookie.php3?cookie_admin=@$connect_login&redirect=./ecrire/index.php3", "cookie-24.gif", "");
+		echo "</td></tr></table>";
 		echo "<p><hr><p>";
 	}
 }
@@ -442,22 +449,14 @@ if (($date - $date_opt) > 24 * 3600) {
 	ecrire_metas();
 	include ("optimiser.php3");
 }
-
-
 // Traitement des statistiques
-$date_stats = $meta['date_stats_process'];
-if (($date - $date_stats) > 24 * 3600) {
-	ecrire_meta("date_stats_process", "$date");
-	ecrire_metas();
+if (($date - $date_opt) > 8 * 3600) {
 	include ("inc_statistiques.php3");
 	calculer_visites();
 }
 
 // Optimiser les referers
-$date_refs = $meta['date_stats_referers'];
-if (($date - $date_refs) > 24 * 3600) {
-	ecrire_meta("date_stats_referers", "$date");
-	ecrire_metas();
+if (($date - $date_opt) > 19 * 3600) {
 	include ("inc_statistiques.php3");
 	optimiser_referers();
 }
