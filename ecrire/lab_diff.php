@@ -294,21 +294,30 @@ class DiffPhrase {
 	}
 	function segmenter($texte) {
 		$paras = array();
-		//$texte = trim($texte);
-		while (preg_match('/([[:punct:]]+)(\s+|$)|(\s+)([[:punct:]]*)/u', $texte, $regs)) {
+		if (test_pcre_unicode()) {
+			$punct = '([[:punct:]]|'.plage_punct_unicode().')';
+			$mode = 'u';
+		}
+		else {
+			// Plages de poncutation pour preg_match bugge (ha ha)
+			$punct = '([^\w\s\x80-\xFF]|'.plage_punct_unicode().')';
+			$mode = '';
+		}
+		$preg = '/('.$punct.'+)(\s+|$)|(\s+)('.$punct.'*)/'.$mode;
+		while (preg_match($preg, $texte, $regs)) {
 			$p = strpos($texte, $regs[0]);
 			$l = strlen($regs[0]);
-			$punct = $regs[1] ? $regs[1] : $regs[4];
+			$punct = $regs[1] ? $regs[1] : $regs[6];
 			$milieu = "";
 			if ($punct) {
 				// Attacher les raccourcis fermants au mot precedent
 				if (preg_match(',^[\]}]+$,', $punct)) {
-					$avant = substr($texte, 0, $p) . $regs[3] . $punct;
-					$texte = $regs[2] . substr($texte, $p + $l);
+					$avant = substr($texte, 0, $p) . $regs[5] . $punct;
+					$texte = $regs[4] . substr($texte, $p + $l);
 				}
 				// Attacher les raccourcis ouvrants au mot suivant
-				else if ($regs[3] && preg_match(',^[\[{]+$,', $punct)) {
-					$avant = substr($texte, 0, $p) . $regs[3];
+				else if ($regs[5] && preg_match(',^[\[{]+$,', $punct)) {
+					$avant = substr($texte, 0, $p) . $regs[5];
 					$texte = $punct . substr($texte, $p + $l);
 				}
 				// Les autres signes de ponctuation sont des mots a part entiere
@@ -346,7 +355,7 @@ class DiffPhrase {
 
 
 function preparer_diff($texte) {
-	include_ecrire("inc_charsets.php3");
+	include_spip("charsets.php");
 
 	$charset = lire_meta('charset');
 	if ($charset == 'utf-8')
