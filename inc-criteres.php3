@@ -400,7 +400,6 @@ function calculer_criteres ($idb, &$boucles) {
 				else {
 				// traitement special des valeurs textuelles
 					ereg("^ *\(?(.*[^)])\)? *$",$match[6], $val2);
-					spip_log($match[6] . ' ' . $val2[1]);
 					$val2 = split(" *, *", $val2[1]);
 					foreach ($val2 as $v) {
 						$v = calculer_param_dynamique($v, $boucles, $idb);
@@ -690,7 +689,7 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 			else return $val; */
 	} else {
 		if (ereg('^\$(.*)$',$val,$regs))
-		  return '" . addslashes($Pile[0][\''. $regs[1] ."']') . ";
+		  return '" . addslashes($Pile[0][\''. $regs[1] ."']) . \"";
 		else
 		  return addslashes($val);
 	}
