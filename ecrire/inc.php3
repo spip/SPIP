@@ -133,7 +133,7 @@ $couleur_lien_off = $couleurs_spip[$choix_couleur]['couleur_lien_off'];
 // Gestion de version
 //
 
-$version_installee = (double) lire_meta("version_installee");
+$version_installee = (double) str_replace(',','.',lire_meta('version_installee'));
 if ($version_installee <> $spip_version) {
 	debut_page();
 	if (!$version_installee) $version_installee = _T('info_anterieur');
