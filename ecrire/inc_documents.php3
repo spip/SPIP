@@ -425,8 +425,8 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 		// afficher le premier
 		echo str_replace('*', '1', $upload);
 
-		// afficher les suivants, masques
-		if ($envoi_multiple) {
+		// afficher les suivants, masques (DESACTIVE)
+		if (false /* $envoi_multiple */) {
 			echo debut_block_invisible ("upload$num_form");
 			for ($i=2; $i<=10; $i++)
 				echo str_replace('*', "$i", $upload);
@@ -479,9 +479,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	if ($id_article) $image_url .= '&id_article='.$id_article;
 	if ($type == "rubrique") $image_url .= '&modifier_rubrique=oui';
 
-	if ($GLOBALS['id_document'] > 0) {
-		$id_document_deplie = $GLOBALS['id_document'];
-	}
 	$redirect_url = $clean_link->getUrl();
 
 	// Afficher portfolio
@@ -520,7 +517,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$date = $document['date'];
 			$mode = $document['mode'];
 
-			$flag_deplier = ($id_document_deplie == $id_document);
+			$flag_deplie = teste_doc_deplie($id_document);
 
 			if ($case == 0) {
 				echo "<tr style='border-top: 1px solid black;'>";
@@ -558,7 +555,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 					$vignette_perso = true;
 					$link = new Link ($image_url);
 					$link->addVar('redirect',
-						$redirect_url.'&id_document='.$id_document);
+						$redirect_url.'&show_docs='.$id_document);
 					$link->addVar('hash',
 						calculer_action_auteur("supp_doc ".$id_vignette));
 					$link->addVar('hash_id_auteur', $connect_id_auteur);
@@ -580,7 +577,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
 						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
 						$link_rot->addVar('doc_rotate', $id_document);
-						$link_rot->addVar('vignette_aff', $id_document);
+						$link_rot->addVar('show_docs', $id_document);
 						$link_rot->addVar('var_rot', -90);
 						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-gauche.gif', "border='0'", "tourner-gauche", '', 'bouton_rotation');
 						echo "<br />";
@@ -589,17 +586,17 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
 						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
 						$link_rot->addVar('doc_rotate', $id_document);
-						$link_rot->addVar('vignette_aff', $id_document);
+						$link_rot->addVar('show_docs', $id_document);
 						$link_rot->addVar('var_rot', 90);
 						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-droite.gif', "border='0'", "tourner-droite", '', 'bouton_rotation');
 						echo "<br />";
-		
+
 						$link_rot = new Link ($image_url);;
 						$link_rot->addVar('redirect', $redirect_url);
 						$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
 						$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
 						$link_rot->addVar('doc_rotate', $id_document);
-						$link_rot->addVar('vignette_aff', $id_document);
+						$link_rot->addVar('show_docs', $id_document);
 						$link_rot->addVar('var_rot', 180);
 						echo http_href_img($link_rot->getUrl("portfolio"), 'tourner-180.gif', "border='0'", "tourner-180", '', 'bouton_rotation');
 					}
@@ -660,7 +657,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			}
 
 			if ($flag_modif) {
-				if ($flag_deplier) $triangle = bouton_block_visible("port$id_document");
+				if ($flag_deplie) $triangle = bouton_block_visible("port$id_document");
 				else $triangle = bouton_block_invisible("port$id_document");
 			}
 			if (strlen($titre) > 0) {
@@ -682,12 +679,13 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			._T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur))."</div>";
 			
 			if ($flag_modif) {
-				if ($flag_deplier) echo debut_block_visible("port$id_document");
+				if ($flag_deplie) echo debut_block_visible("port$id_document");
 				else echo debut_block_invisible("port$id_document");
 				echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
 				$link = new Link($redirect_url);
 				$link->addVar('modif_document', 'oui');
 				$link->addVar('id_document', $id_document);
+				$link->addVar('show_docs', $id_document);
 				$ancre = "portfolio";
 				if ($flag_modif) {
 					echo $link->getForm('POST', $ancre);
@@ -795,7 +793,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$date = $document['date'];
 			$mode = $document['mode'];
 			
-			$flag_deplier = ($id_document_deplie == $id_document);
+			$flag_deplie = teste_doc_deplie($id_document);
 			
 			if ($case == 0) {
 				echo "<tr style='border-top: 1px solid black;'>";
@@ -867,7 +865,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			
 			
 			if ($flag_modif) {
-				if ($flag_deplier) $triangle = bouton_block_visible("port$id_document");
+				if ($flag_deplie) $triangle = bouton_block_visible("port$id_document");
 				else $triangle =  bouton_block_invisible("port$id_document");
 			}
 			if (strlen($titre) > 0) {
@@ -884,12 +882,13 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			if ($largeur > 0 AND $hauteur > 0) echo "<div class='verdana1' style='text-align: center;'>"._T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur))."</div>";
 			
 			if ($flag_modif) {
-				if ($flag_deplier) echo debut_block_visible("port$id_document");
+				if ($flag_deplie) echo debut_block_visible("port$id_document");
 				else echo debut_block_invisible("port$id_document");
 				echo "<div class='verdana1' style='color: #999999; border: 1px solid #999999; padding: 5px; margin-top: 3px;'>";
 				$link = new Link($redirect_url);
 				$link->addVar('modif_document', 'oui');
 				$link->addVar('id_document', $id_document);
+				$link->addVar('show_docs', $id_document);
 				$ancre = "docs";
 				if ($flag_modif) {
 					echo $link->getForm('POST', $ancre);
@@ -1007,12 +1006,11 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
-	global $options, $id_document_deplie;
+	global $options;
 
 	$image_url = $image_link->geturl();
 
-	if ($GLOBALS['id_document']) $id_document_deplie = $GLOBALS['id_document'];
-	if ($id_document == $id_document_deplie) $flag_deplie = true;
+	$flag_deplie = teste_doc_deplie($id_document);
 
 	if (!$redirect_url) $redirect_url = $clean_link->getUrl();
 	$ancre = 'doc'.$id_document;
@@ -1159,6 +1157,7 @@ function afficher_horizontal_document($id_document, $image_link, $redirect_url =
 	$link = new Link($redirect_url);
 	$link->addVar('modif_document', 'oui');
 	$link->addVar('id_document', $id_document);
+	$link->addVar('show_docs', $id_document);
 	if ($flag_modif) {
 		echo $link->getForm('POST', $ancre);
 
@@ -1344,11 +1343,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	global $spip_lang_left, $spip_lang_right;
 
 
-	if ($GLOBALS['id_document'] > 0) {
-		$id_document_deplie = $GLOBALS['id_document'];
-	}
-
-	if ($id_document == $id_document_deplie) $flag_deplie = true;
+	$flag_deplie = teste_doc_deplie($id_document);
 
  	$doublons = $id_doublons['documents'].",";
 
@@ -1468,6 +1463,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
 		$link->addVar('id_document', $id_document);
+		$link->addVar('show_docs', $id_document);
 		echo $link->getForm('POST');
 
 		echo "<b>"._T('entree_titre_document')."</b><br />\n";
@@ -1566,6 +1562,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		$link = new Link($redirect_url);
 		$link->addVar('modif_document', 'oui');
 		$link->addVar('id_document', $id_document);
+		$link->addVar('show_docs', $id_document);
 		echo $link->getForm('POST');
 
 		echo "<div class='verdana1' style='color: #999999; border: 1px solid #999999; padding: 5px; margin-top: 3px; text-align: left; background-color: #eeeeee;'>";
@@ -1601,5 +1598,14 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	}
 }
 
+function teste_doc_deplie($id_document) {
+	global $show_docs;
+	static $deplies;
+
+	if (!$deplies)
+		$deplies = split('-',$show_docs);
+
+	return in_array($id_document, $deplies);
+}
 
 ?>

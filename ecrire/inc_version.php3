@@ -400,7 +400,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 $spip_version = 1.810;
 
 // version de spip
-$spip_version_affichee = "1.8 beta 3 CVS";
+$spip_version_affichee = "1.8 beta 4 CVS";
 
 // version de spip / tag cvs
 if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
@@ -779,7 +779,7 @@ class Link {
 				if (!preg_match('/^('.
 				(!_DIR_RESTREINT ?
 					'|lang|set_options|set_couleur|set_disp|set_ecran':
-					'var_mode')
+					'var_mode|show_docs')
 				. ')$/i', $name)) {
 					if (is_array($value))
 						$this->arrays[$name] = $value;

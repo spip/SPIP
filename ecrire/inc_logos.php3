@@ -78,22 +78,25 @@ function resize_logo($limage, $maxi=170) {
 }
 
 
-function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
+
+function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
 	global $options, $spip_display;
 
+	$logon = $type.'on'.$id;
+	$logoff = $type.'off'.$id;
 
 	if ($spip_display != 4) {
 	
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
 		echo "<div class='verdana1' style='text-align: center;'>";
-		$desc = decrire_logo($logo);
-		afficher_logo($logo, $texteon, $desc);
+		$desc = decrire_logo($logon);
+		afficher_logo($logon, $texteon, $desc, $id_objet, $id);
 
 		if ($desc) {
 			echo "<br /><br />";
-			$desc = decrire_logo($survol);
-			afficher_logo($survol, $texteoff, $desc);   
+			$desc = decrire_logo($logoff);
+			afficher_logo($logoff, $texteoff, $desc, $id_objet, $id);
 		}
 	
 		echo "</div>";
@@ -103,8 +106,8 @@ function afficher_boite_logo($logo, $survol, $texteon, $texteoff) {
 }
 
 
-function afficher_logo($racine, $titre, $logo) {
-	global $id_article, $id_rubrique, $id_breve, $id_auteur, $id_mot, $id_syndic, $connect_id_auteur;
+function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
+	global $connect_id_auteur;
 	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 
@@ -126,13 +129,8 @@ function afficher_logo($racine, $titre, $logo) {
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
-		$elements = array('id_article', 'id_breve', 'id_syndic', 'id_rubrique', 'id_mot', 'id_auteur');
-		while (list(,$element) = each ($elements)) {
-			if ($$element) {
-				echo $element.'='.$$element.'&';
-			}
-		}
-		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&id_auteur=$id_auteur&hash=$hash&redirect=$redirect'>"._T('lien_supprimer')."</A>]";
+		echo "$id_objet=$id&";
+		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect'>"._T('lien_supprimer')."</A>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
@@ -140,14 +138,10 @@ function afficher_logo($racine, $titre, $logo) {
 		$hash = calculer_action_auteur("ajout_logo $racine");
 		echo debut_block_invisible(md5($titre));
 
-		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST' ENCTYPE='multipart/form-data'>";
+		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST'
+			ENCTYPE='multipart/form-data'>";
 		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect'>";
-		if ($id_auteur > 0) echo "\n<INPUT NAME='id_auteur' TYPE=Hidden VALUE='$id_auteur'>";
-		if ($id_article > 0) echo "\n<INPUT NAME='id_article' TYPE=Hidden VALUE='$id_article'>";
-		if ($id_breve > 0) echo "\n<INPUT NAME='id_breve' TYPE=Hidden VALUE='$id_breve'>";
-		if ($id_mot > 0) echo "\n<INPUT NAME='id_mot' TYPE=Hidden VALUE='$id_mot'>";
-		if ($id_syndic > 0) echo "\n<INPUT NAME='id_syndic' TYPE=Hidden VALUE='$id_syndic'>";
-		if ($id_rubrique > 0) echo "\n<INPUT NAME='id_rubrique' TYPE=Hidden VALUE='$id_rubrique'>";
+		echo "\n<INPUT NAME='$id_objet' TYPE=Hidden VALUE='$id'>";
 		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur'>";
 		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash'>";
 		echo "\n<INPUT NAME='ajout_logo' TYPE=Hidden VALUE='oui'>";

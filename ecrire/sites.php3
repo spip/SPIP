@@ -272,11 +272,8 @@ echo "<p><center>";
 	icone (_T('icone_voir_sites_references'), "sites_tous.php3", "site-24.gif","rien.gif");
 echo "</center>";
 
-$rubon = "siteon$id_syndic";
-$ruboff = "siteoff$id_syndic";
-
-if ($id_syndic>0 AND $flag_administrable)
-	afficher_boite_logo($rubon, $ruboff, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'));
+if ($id_syndic AND $flag_administrable)
+	afficher_boite_logo('site', 'id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'site');
 
 
 debut_droite();

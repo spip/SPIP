@@ -88,11 +88,11 @@ fin_boite_info();
 // Logos de l'auteur
 //
 
-$arton = "auton$id_auteur";
-$artoff = "autoff$id_auteur";
-
-if ($id_auteur>0 AND (($connect_statut == '0minirezo') OR ($connect_id_auteur == $id_auteur)))
-	afficher_boite_logo($arton, $artoff, _T('logo_auteur').aide ("logoart"), _T('logo_survol'));
+if ($id_auteur
+AND (($connect_statut == '0minirezo')
+OR ($connect_id_auteur == $id_auteur)))
+	afficher_boite_logo('aut', 'id_auteur', $id_auteur,
+	_T('logo_auteur').aide ("logoart"), _T('logo_survol'));
 
 
 debut_droite();
