@@ -10,6 +10,7 @@ define("_ECRIRE_INC_DB_MYSQL", "1");
 //
 
 function spip_query_db($query) {
+	global $spip_mysql_link;
 	static $tt = 0;
 
 	$my_admin = (($GLOBALS['connect_statut'] == '0minirezo') OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'));
@@ -21,7 +22,7 @@ function spip_query_db($query) {
 	if ($my_profile)
 		$m1 = microtime();
 
-	$result = mysql_query($query);
+	$result = mysql_query($query, $spip_mysql_link);
 
 	if ($my_profile) {
 		$m2 = microtime();
@@ -47,13 +48,14 @@ function spip_query_db($query) {
 // Passage d'une requete standardisee
 //
 function traite_query($query) {
+	global $spip_mysql_db;
 
 	// changer les noms des tables ($table_prefix)
 	if (eregi('[[:space:]](VALUES|WHERE)[[:space:]].*$', $query, $regs)) {
 		$suite = $regs[0];
 		$query = substr($query, 0, -strlen($suite));
 	}
-	$query = ereg_replace('([[:space:],])spip_', '\1'.$GLOBALS['table_prefix'].'_', $query) . $suite;
+	$query = ereg_replace('([[:space:],])spip_', '\1'.$spip_mysql_db.'.'.$GLOBALS['table_prefix'].'_', $query) . $suite;
 
 	return $query;
 }
@@ -64,8 +66,11 @@ function traite_query($query) {
 //
 
 function spip_connect_db($host, $port, $login, $pass, $db) {
+	global $spip_mysql_link, $spip_mysql_db;	// pour connexions multiples
+
 	if ($port > 0) $host = "$host:$port";
-	@mysql_connect($host, $login, $pass);
+	$spip_mysql_link = @mysql_connect($host, $login, $pass);
+	$spip_mysql_db = $db;
 	return @mysql_select_db($db);
 }
 
