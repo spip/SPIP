@@ -48,7 +48,7 @@ function generer_nom_fichier_cache($fichier_requete) {
 // Doit-on recalculer le cache ?
 //
 
-function utiliser_cache($chemin_cache) {
+function utiliser_cache($chemin_cache, $delais) {
 	global $HTTP_SERVER_VARS, $HTTP_POST_VARS;
 	global $lastmodified;
 
