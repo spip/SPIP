@@ -57,7 +57,7 @@ function bouton_imessage($destinataire, $row = '') {
 	if ($destinataire) $title = _T('info_envoyer_message_prive');
 	else $title = _T('info_ecire_message_prive');
 
-	$texte_bouton = "<img src='img_pack/m_envoi$spip_lang_rtl.gif' width='14' height='7' border='0'>";
+	$texte_bouton = "<img src='img_pack/m_envoi$spip_lang_rtl.gif' width='14' height='7' border='0' alt='m&gt;' title='$title' />";
 		
 	
 	$ret .= "<a href='". $url->getUrl() ."' title=\"$title\">";
@@ -969,7 +969,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				break;
 			}
 				
-			$s .= "<img src='img_pack/$puce' width='14' height='7' border='0'>";
+			$s .= "<img src='img_pack/$puce' width='14' height='7' border='0' alt='' />";
 			$s .= "&nbsp;&nbsp;".typo($titre)."</A>";
 			$vals[] = $s;
 

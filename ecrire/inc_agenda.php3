@@ -170,11 +170,11 @@ function calendrier_jour($jour,$mois,$annee,$large = "large", $le_message = 0) {
 	}
 	else if ($large == "large") {
 		echo "<div align='center' style='padding: 5px;'>";
-		echo " <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb' class='arial1' style='color: blue;'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouvea_pense_bete")."</a>";
-		echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal' class='arial1' style='color: green;'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouveau_message")."</a>";
+		echo " <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=pb' class='arial1' style='color: blue;'><IMG SRC='img_pack/m_envoi_bleu$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T("lien_nouvea_pense_bete")."</a>";
+		echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=normal' class='arial1' style='color: green;'><IMG SRC='img_pack/m_envoi$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T("lien_nouveau_message")."</a>";
 
 		if ($connect_statut == "0minirezo")
-			echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich' class='arial1' style='color: #ff9900;'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0'> "._T("lien_nouvelle_annonce")."</a>\n";
+			echo " &nbsp; <a href='message_edit.php3?rv=$annee-$mois-$jour&new=oui&type=affich' class='arial1' style='color: #ff9900;'><IMG SRC='img_pack/m_envoi_jaune$spip_lang_rtl.gif' WIDTH='14' HEIGHT='7' BORDER='0' alt='' /> "._T("lien_nouvelle_annonce")."</a>\n";
 		echo "</div>";
 	}
 	if ($large != "etroit") echo "<div style='background-color: $bgcolor; border-left: 1px solid #aaaaaa; border-right: 1px solid #aaaaaa; border-bottom: 1px solid #aaaaaa;'>"; // bordure

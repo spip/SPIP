@@ -261,7 +261,7 @@ debut_grand_cadre();
 
 if ($coll  > 0) {
 	afficher_parents($id_parent);
-	$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle'> <A HREF='naviguer.php3?coll=0'><b><font color='$couleur_foncee'>"._T('lien_racine_site')."</font></b></A> ".aide ("rubhier")."<BR>".$parents;
+	$parents="~ <IMG SRC='img_pack/racine-site-24.gif' WIDTH=24 HEIGHT=24 align='middle' alt='-' /> <A HREF='naviguer.php3?coll=0'><b><font color='$couleur_foncee'>"._T('lien_racine_site')."</font></b></A> ".aide ("rubhier")."<BR>".$parents;
 
 	$parents=ereg_replace("~","&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;",$parents);
 	$parents=ereg_replace("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ","",$parents);
