@@ -176,7 +176,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		$change_rubrique = "";
 	}
 
-	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\", auteur_modif=\"0\" WHERE id_article=$id_article";
+	$query = "UPDATE spip_articles SET surtitre=\"$surtitre\", titre=\"$titre\", soustitre=\"$soustitre\", $change_rubrique descriptif=\"$descriptif\", chapo=\"$chapo\", texte=\"$texte\", ps=\"$ps\" WHERE id_article=$id_article";
 	$result = spip_query($query);
 	calculer_rubriques();
 	if ($statut_article == 'publie') {
@@ -789,6 +789,7 @@ if ($flag_editable) {
 			}
 			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
 			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif est intervenu sur cet article<br>(il y a $date_diff minutes)</font>";
+			echo aide("artmodif");
 		}
 		else {
 			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
@@ -1334,7 +1335,22 @@ if ($les_notes) {
 
 if ($flag_editable) {
 echo "\n\n<div align=right>";
-	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+//	icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+
+		if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
+			$query_auteur = "SELECT * FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
+			$result_auteur = spip_query($query_auteur);
+			while ($row_auteur = mysql_fetch_array($result_auteur)) {
+				$nom_auteur_modif = $row_auteur["nom"];
+			}
+			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "warning-24.gif", "");
+			echo "<font face='arial,helvetica,sans-serif' size=1>$nom_auteur_modif est intervenu sur cet article<br>(il y a $date_diff minutes)</font>";
+			echo aide("artmodif");
+		}
+		else {
+			icone("Modifier cet article", "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+		}
+
 echo "</div>";
 }
 

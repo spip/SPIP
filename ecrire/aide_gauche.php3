@@ -118,6 +118,7 @@ article("Les auteurs","artauteurs");
 article("Logo de l'article","logoart","admin");
 article("Le statut de l'article","artstatut");
 article("Proposer son article","artprop");
+article("Articles en cours de modification","artmodif");
 
 
 rubrique("Les rubriques");
