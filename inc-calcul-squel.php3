@@ -1738,14 +1738,17 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	//
 	// Recherche : recuperer les hash a partir de la chaine de recherche
 	//
-
 	if (strpos($boucle->requete, '$hash_recherche')) {
 		$texte .= '
 		global $recherche, $hash_recherche;
+		$GLOBALS[\'activer_url_recherche\'] = true;
 		if (!$hash_recherche)
 			$hash_recherche = requete_hash($recherche);
 		';
-	}
+	} else
+		$texte .= '
+		$GLOBALS[\'activer_url_recherche\'] = false;
+		';
 
 	//
 	// Recuperation du contexte et creation de l'instance de boucle
