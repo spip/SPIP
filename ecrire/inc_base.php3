@@ -44,14 +44,14 @@ function creer_base() {
 		id_trad bigint(21) DEFAULT '0' NOT NULL,
 		extra longblob NULL,
 		nom_site tinytext NOT NULL,
-		url_site text NOT NULL,
+		url_site VARCHAR(255) NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
 		KEY id_secteur (id_secteur),
 		KEY id_trad (id_trad),
 		KEY lang (lang),
 		KEY statut (statut, date),
-		KEY url_site (url_site (25)),
+		KEY url_site (url_site),
 		KEY date_modif (date_modif))";
 	$result = spip_query($query);
 
@@ -1197,15 +1197,6 @@ function maj_base() {
 		maj_version (1.466);
 	}
 
-	/* ANNULE
-	if ($version_installee < 1.467) {
-		// gestion de listes de diff
-		spip_query("ALTER TABLE spip_auteurs ADD abonne TEXT NOT NULL");
-		spip_query("ALTER TABLE spip_auteurs ADD abonne_pass TINYTEXT NOT NULL");
-		maj_version (1.467);
-	}
-	*/
-
 	if ($version_installee < 1.468) {
 		spip_query("ALTER TABLE spip_auteurs ADD INDEX en_ligne (en_ligne)");
 		spip_query("ALTER TABLE spip_forum ADD INDEX statut (statut, date_heure)");
@@ -1213,19 +1204,6 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.470) {
-		/* ANNULE
-		spip_query("ALTER TABLE spip_auteurs_articles ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_auteurs_rubriques ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_auteurs_messages ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_documents_articles ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_documents_rubriques ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_documents_breves ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_mots_articles ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_mots_breves ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_mots_rubriques ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_mots_syndic ADD maj TIMESTAMP");
-		spip_query("ALTER TABLE spip_mots_forum ADD maj TIMESTAMP");*/
-
 		if ($version_installee >= 1.467) {	// annule les "listes de diff"
 			spip_query("DROP TABLE spip_listes");
 			spip_query("ALTER TABLE spip_auteurs DROP abonne");
@@ -1273,11 +1251,6 @@ function maj_base() {
 		spip_query("ALTER TABLE spip_forum ADD INDEX id_syndic (id_syndic)");
 		maj_version (1.601);
 	}
-
-	/* if ($version_installee < 1.602) {
-		// juste des types de documents en plus (creer_base())
-		maj_version (1.602);
-	} */
 
 	if ($version_installee < 1.603) {
 		// supprimer les fichiers deplaces
@@ -1368,42 +1341,6 @@ function maj_base() {
 		maj_version (1.709);
 	}
 
-	/* 'domaine' : idee abandonnee
-	if ($version_installee < 1.710) {
-		@set_time_limit(0);
-		spip_query("ALTER TABLE spip_referers ADD domaine varchar(255)");
-		spip_query("ALTER TABLE spip_referers_articles ADD domaine varchar(255)");
-		spip_query("UPDATE spip_referers SET domaine='-'");
-		spip_query("UPDATE spip_referers_articles SET domaine='-'");
-		spip_query("ALTER TABLE spip_referers_temp ADD domaine varchar(255);");
-		maj_version (1.710);
-	}
-	if ($version_installee < 1.711) {
-		spip_query("UPDATE spip_referers SET domaine = CONCAT(RIGHT(referer,LENGTH(referer) - locate('://',referer)-2), ' -') WHERE domaine = '-' AND referer LIKE '%://%'");
-		maj_version (1.711);
-	}
-	if ($version_installee < 1.712) {
-		spip_query("UPDATE spip_referers SET domaine = LEFT(domaine, locate('/',domaine)-1) WHERE domaine LIKE '%/% -'");
-		maj_version (1.712);
-	}
-	if ($version_installee < 1.713) {
-		spip_query("UPDATE spip_referers SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
-		maj_version (1.713);
-	}
-	if ($version_installee < 1.714) {
-		spip_query("UPDATE spip_referers_articles SET domaine = CONCAT(RIGHT(referer,LENGTH(referer) - locate('://',referer)-2), ' -') WHERE domaine = '-' AND referer LIKE '%://%'");
-		maj_version (1.714);
-	}
-	if ($version_installee < 1.715) {
-		spip_query("UPDATE spip_referers_articles SET domaine = LEFT(domaine, locate('/',domaine)-1) WHERE domaine LIKE '%/% -'");
-		maj_version (1.715);
-	}
-	if ($version_installee < 1.716) {
-		spip_query("UPDATE spip_referers_articles SET domaine = REPLACE(domaine, 'www.', '') WHERE domaine LIKE 'www.%'");
-		maj_version (1.716);
-	}
-	*/
-
 	if ($version_installee < 1.717) {
 		spip_query("ALTER TABLE spip_articles ADD INDEX date_modif (date_modif)");
 		maj_version (1.717);
@@ -1416,22 +1353,10 @@ function maj_base() {
 		maj_version (1.718);
 	}
 
-	/*
-	if ($version_installee < 1.720) {
-		spip_query("ALTER TABLE spip_articles ADD url_ref text NOT NULL");
-		maj_version (1.720);
-	}
-
-	if ($version_installee < 1.721) {
-		spip_query("ALTER TABLE spip_articles ADD INDEX url_ref (url_ref (25))");
-		maj_version (1.721);
-	}
-	*/
-
 	if ($version_installee < 1.722) {
 		spip_query("ALTER TABLE spip_articles ADD nom_site tinytext NOT NULL");
-		spip_query("ALTER TABLE spip_articles ADD url_site text NOT NULL");
-		spip_query("ALTER TABLE spip_articles ADD INDEX url_site (url_site (25))");
+		spip_query("ALTER TABLE spip_articles ADD url_site VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD INDEX url_site (url_site)");
 		if ($version_installee >= 1.720) {
 			spip_query("UPDATE spip_articles SET url_site=url_ref");
 			spip_query("ALTER TABLE spip_articles DROP INDEX url_ref");
@@ -1439,7 +1364,6 @@ function maj_base() {
 		}
 		maj_version (1.722);
 	}
-
 
 	return true;
 }
