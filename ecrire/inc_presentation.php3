@@ -1672,6 +1672,8 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 //--></script>
 	<link rel="alternate stylesheet" href="spip_style_invisible.css" type="text/css" title="invisible" />
 	<link rel="stylesheet" href="spip_style_visible.css" type="text/css" title="visible" />
+	<link rel="stylesheet" href="spip_style_print.css" type="text/css" media="print">
+
 </head>
 <?php
 	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
@@ -2894,7 +2896,7 @@ function debut_gauche($rubrique = "asuivre") {
 	}
 
 	echo "<br><table width='$largeur_ecran' cellpadding=0 cellspacing=0 border=0>
-		<tr><td width='$largeur' valign='top' class='serif' $rspan>\n";
+		<tr><td width='$largeur' class='colonne_etroite' valign='top' class='serif' $rspan>\n";
 		
 	if ($spip_display == 4) echo "<!-- ";
 
@@ -2931,10 +2933,10 @@ function creer_colonne_droite($rubrique=""){
 		}
 
 
-		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
-		echo "<td rowspan=1></td>";
-		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
-		echo "<td width=$largeur rowspan=2 align='$lang_left' valign='top'><p />";
+		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
+		echo "<td rowspan=1 class='colonne_etroite'></td>";
+		echo "<td width=$espacement rowspan=2 class='colonne_etroite'>&nbsp;</td>";
+		echo "<td width=$largeur rowspan=2 align='$lang_left' valign='top' class='colonne_etroite'><p />";
 
 	}
 
