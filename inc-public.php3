@@ -5,16 +5,7 @@ if (defined("_INC_PUBLIC")) {
 	$page = inclure_page($fond, $delais, $contexte_inclus, $fichier_inclus);
 
 	if ($page['process_ins'] == 'php') {
-
-
-		if ($i = ($flag_ob AND !$GLOBALS['flag_preserver'] AND $GLOBALS['HTTP_COOKIE_VARS']['spip_admin']))
-			ob_start();
-		array_push($pile_admin_page, $i);
-
 		eval('?' . '>' . $page['texte']); // page 'php'
-
-		if (array_pop($pile_admin_page))
-			echo admin_page(ob_get_clean());
 	} else
 		echo $page['texte']; // page tout 'html'
 
