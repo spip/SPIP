@@ -832,10 +832,10 @@ function afficher_forum($request, $adresse_retour, $controle = "non", $recurrenc
 			echo "<span class='arial2'>$date_heure</span>";
 
 			if ($email_auteur) {
-				echo " <a href=\"mailto:$email_auteur?subject=".rawurlencode($titre)."\">$auteur</a>";
+				echo " <a href=\"mailto:$email_auteur?subject=".rawurlencode($titre)."\">".typo($auteur)."</a>";
 			}
 			else {
-				echo " $auteur";
+				echo " ".typo($auteur);
 			}
 
 			if ($id_auteur AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non") {

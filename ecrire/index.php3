@@ -81,7 +81,7 @@ debut_cadre_relief("fiche-perso-24.gif");
 echo "<font face='Verdana,Arial,Sans,sans-serif' size='2'>";
 if ($bonjour == "oui" OR $spip_ecran == "large") echo bouton_block_visible("info_perso");
 else echo bouton_block_invisible("info_perso");
-echo "<font size='1' color='black'><b>".majuscules($connect_nom)."</b></font>";
+echo "<font size='1' color='black'><b>".majuscules(typo($connect_nom))."</b></font>";
 
 if ($bonjour == "oui" OR $spip_ecran == "large") echo debut_block_visible("info_perso");
 else echo debut_block_invisible("info_perso");

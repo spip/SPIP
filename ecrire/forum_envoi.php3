@@ -5,7 +5,7 @@ include_ecrire ("inc_barre.php3");
 
 
 if ($modif_forum != "oui") $titre_message = ereg_replace("^([^>])", "> \\1", $titre_message);
-$nom = entites_html(corriger_caracteres($connect_nom));
+$nom = addslashes(corriger_caracteres($connect_nom));
 $adresse_retour = rawurldecode($adresse_retour);
 
 if ($valider_forum AND ($statut!='')) {
@@ -57,7 +57,7 @@ if ($titre_parent) {
 	echo "<table width=100% cellpadding=3 cellspacing=0><tr><td bgcolor='$couleur_foncee'><font face='Verdana,Arial,Sans,sans-serif' size=2 color='#FFFFFF'><b>".typo($titre_parent)."</b></font></td></tr>";
 	echo "<tr><td bgcolor='#EEEEEE' class='serif2' style='padding:5px;'>";
 	echo "<span class='arial2'>$date_heure_parent</span>";
-	echo " $auteur_parent";
+	echo " ".typo($auteur_parent);
 
 	if ($id_auteur_parent AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non") {
 		$bouton = bouton_imessage($id_auteur_parent, $row);
