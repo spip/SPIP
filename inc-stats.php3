@@ -55,61 +55,6 @@ function ecrire_stats() {
 			spip_query($query);
 		}
 	}
-
-	// Traiter les referers toutes les heures
-	$date_refs = lire_meta('date_stats_referers');
-	if ((time() - $date_refs) > 3600) {
-		include_ecrire("inc_meta.php3");
-		ecrire_meta("date_stats_referers", time());
-		ecrire_meta('calculer_referers_now', 'oui');
-		ecrire_metas();
-	}
-}
-
-
-function archiver_stats() {
-	//
-	// Archivage des visites temporaires
-	//
-
-	// referers pas finis ?
-	if (lire_meta('calculer_referers_now') == 'oui') {
-		if (timeout('archiver_stats')) {
-			include_ecrire("inc_meta.php3");
-			include_ecrire("inc_statistiques.php3");
-			ecrire_meta('calculer_referers_now', 'non');
-			ecrire_metas();
-			calculer_referers();
-		}
-	}
-
-	// nettoyage du matin
-	if (date("Y-m-d") <> ($last_date = lire_meta("date_statistiques"))) {
-		if (timeout('archiver_stats')) {
-			include_ecrire("inc_meta.php3");
-			include_ecrire("inc_statistiques.php3");
-			ecrire_meta("date_statistiques", date("Y-m-d"));
-			ecrire_metas();
-			calculer_visites($last_date);
-
-			if (lire_meta('activer_statistiques_ref') == 'oui') {
-				// purger les referers du jour
-				spip_query("UPDATE spip_referers SET visites_jour=0");
-				// poser un message pour traiter les referers au prochain hit
-				ecrire_meta('calculer_referers_now','oui');
-				ecrire_metas();
-			}
-		}
-	}
-
-	// popularite, mise a jour une demi-heure
-	$date_popularite = lire_meta('date_stats_popularite');
-	if ((time() - $date_popularite) > 1800) {
-		if (timeout('archiver_stats')) {
-			include_ecrire("inc_statistiques.php3");
-			calculer_popularites();
-		}
-	}
 }
 
 
