@@ -114,7 +114,7 @@ function mySel($varaut,$variable) {
 		// Fonctionnement de la messagerie interne
 		//
 		$activer_messagerie = "oui";
-		$activer_imessage = "oui"
+		$activer_imessage = "oui";
 		
 		if ($activer_messagerie!="non"){
 			debut_cadre_formulaire();

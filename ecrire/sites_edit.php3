@@ -82,7 +82,7 @@ function enfant($leparent){
 		case 5:
 			$style .= "color: #808080;";
 			break;
-		default;
+		default:
 			$style .= "color: #A0A0A0;";
 			break;
 		}
