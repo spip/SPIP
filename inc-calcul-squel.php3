@@ -1415,7 +1415,7 @@ function calculer_champ($id_champ, $id_boucle, $nom_var)
 		$request_uri = $GLOBALS["REQUEST_URI"];
 		$http_get_vars = $GLOBALS["HTTP_GET_VARS"];
 		$forums_publics = lire_meta("forums_publics");
-		if ($forums_publics != "non" OR ($contexte["accepter_forum"] != "" AND $contexte["accepter_forum"] != "non")) {
+		if (($contexte["accepter_forum"] == "" AND $forums_publics != "non") OR ($contexte["accepter_forum"] != "" AND $contexte["accepter_forum"] != "non")) {
 			$lien = substr($request_uri, strrpos($request_uri, "/") + 1);
 			if (!$lien_retour = $http_get_vars["retour"])
 				$lien_retour = $lien;
@@ -1645,18 +1645,6 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	if ($type_boucle == 'forums') {
 
 		$texte .= '
-		if ($id_article) {
-			$query_acc = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
-			$result_acc = mysql_query($query_acc);
-	
-			if ($row = mysql_fetch_array($result_acc)) {
-				$accepter_forum = $row["accepter_forum"];
-			}
-			if ($accepter_forum == "non") {
-				$instance->requete = "SELECT * FROM spip_forum WHERE 1=2";
-			}
-		}
-		
 		if (!$id_rubrique AND !$id_article AND !$id_breve)
 			$my_id_forum = $id_forum;
 		else
