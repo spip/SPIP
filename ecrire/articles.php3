@@ -1306,11 +1306,15 @@ if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
 echo "\n\n<DIV align=justify>";
 
 if (substr($chapo, 0, 1) == '=') {
-	$chapo = substr($chapo, 1, strlen($chapo));
+	$adresse = substr($chapo, 1, strlen($chapo));
+	if (strlen($adresse)>60)
+		$chapo = substr($chapo, 1, 60)."...";
+	else
+		$chapo = $adresse;
 	debut_boite_info();
 	echo "<B>Redirection.</b> ";
 	echo "Cet article correspond &agrave; l'adresse&nbsp;:";
-	echo "<center>$chapo</center>";
+	echo "<center><a href='$adresse' class='spip_out'>$chapo</a></center>";
 	fin_boite_info();
 }
 else {
