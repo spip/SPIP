@@ -164,6 +164,7 @@ $GLOBALS['i18n_ar'] = array(
 // D
 'date_avant_jc' => '<NEW> av. J.C.',
 'date_fmt_heures_minutes' => '<NEW> @h@h@m@min',
+'date_fmt_jour_heure' => '<NEW> @jour@ &agrave; @heure@',
 'date_fmt_jour_mois' => '<NEW> @jour@ @nommois@',
 'date_fmt_jour_mois_annee' => '<NEW> @jour@ @nommois@ @annee@',
 'date_fmt_mois_annee' => '<NEW> @nommois@ @annee@',
@@ -186,6 +187,7 @@ $GLOBALS['i18n_ar'] = array(
 'date_mois_7' => '&#1578;&#1605;&#1608;&#1586;',
 'date_mois_8' => '&#1570;&#1576;',
 'date_mois_9' => '&#1571;&#1610;&#1604;&#1608;&#1604;',
+'date_mot_heures' => '<NEW> heures',
 'date_saison_1' => '&#1575;&#1604;&#1588;&#1578;&#1575;&#1569;',
 'date_saison_2' => '&#1575;&#1604;&#1585;&#1576;&#1610;&#1593;',
 'date_saison_3' => '&#1575;&#1604;&#1589;&#1610;&#1601;',
