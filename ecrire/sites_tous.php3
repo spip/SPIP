@@ -27,7 +27,7 @@ $proposer_sites=lire_meta("proposer_sites");
 afficher_sites("Les sites r&eacute;f&eacute;renc&eacute;s", "SELECT * FROM spip_syndic WHERE syndication='non' AND statut='publie' ORDER BY nom_site");
 
 
-afficher_sites("Les sites syndiqu&eacute;s", "SELECT * FROM spip_syndic WHERE syndication='oui' OR syndication='sus' AND statut='publie' ORDER BY nom_site");
+afficher_sites("Les sites syndiqu&eacute;s", "SELECT * FROM spip_syndic WHERE (syndication='oui' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 
 
 afficher_sites("Les sites propos&eacute;s", "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
