@@ -38,7 +38,7 @@ function optimiser_base() {
 	
 	$query = "SELECT id_article FROM spip_articles";
 	$result = spip_query($query);
-	while ($row = mysql_fetch_array($result)) $articles[] = $row['id_article];
+	while ($row = mysql_fetch_array($result)) $articles[] = $row['id_article'];
 	
 	if ($articles) {
 		$articles = join(",", $articles);
