@@ -217,6 +217,8 @@ if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
 	include(_DIR_RESTREINT . 'mes_options.php3');
 }
 
+define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack'));
+
 // les repertoires des logos, des pieces rapportees, du CACHE et des sessions
 
 define('_DIR_IMG', (_DIR_RESTREINT ? "" : "../")."IMG/");
@@ -995,10 +997,7 @@ function creer_repertoire($base, $subdir) {
 
 function creer_repertoire_documents($ext) {
 # est-il bien raisonnable d'accepter de creer si creer_rep retourne '' ?
-	$dir =  _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
-	// mode parano: verifier a chaque fois
-	if (lire_meta("creer_htaccess") == 'oui') verifier_htaccess($dir);
-	return $dir;
+	return  _DIR_DOC . creer_repertoire(_DIR_DOC, $ext);
 }
 
 // Pour les documents comme pour les logos, le filtre |fichier donne

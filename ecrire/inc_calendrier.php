@@ -26,11 +26,11 @@ if ($GLOBALS['set_partie_cal']) {
 # Il faudrait rationnaliser le nom des fonctions 
 # avec des suffixes identiques pour les memes fonctionnalites des 3 types
 
-global $bleu, $vert, $jaune, $flag_ecrire;
-$img_dir = ($flag_ecrire ? '' : 'ecrire/') . 'img_pack';
-$bleu = "<img src='$img_dir/m_envoi_bleu$spip_lang_rtl.gif' alt='B' width='14' height='7' border='0' />";
-$vert = "<img src='$img_dir/m_envoi$spip_lang_rtl.gif' alt='V' width='14' height='7' border='0' />";
-$jaune= "<img src='$img_dir/m_envoi_jaune$spip_lang_rtl.gif' alt='J' width='14' height='7' border='0' />";
+global $bleu, $vert, $jaune;
+
+$bleu = "<img src='" . _DIR_IMG_PACK . "/m_envoi_bleu$spip_lang_rtl.gif' alt='B' width='14' height='7' border='0' />";
+$vert = "<img src='" . _DIR_IMG_PACK . "/m_envoi$spip_lang_rtl.gif' alt='V' width='14' height='7' border='0' />";
+$jaune= "<img src='" . _DIR_IMG_PACK . "/m_envoi_jaune$spip_lang_rtl.gif' alt='J' width='14' height='7' border='0' />";
 
 // Conversion en HTML d'un tableau de champ ics
 // Le champ URL devient une balise a href=URL entourant les champs SUMMARY et DESC
@@ -140,7 +140,7 @@ function http_calendrier_aujourdhui_et_aide($now, $texte, $href)
       "<td>" . _T("info_aujourdhui")."<br />".
       $texte .
       "</td></tr></table></a>\n")) .
-    aide("messcalen");
+    (_DIR_RESTREINT ? '' :  aide("messcalen"));
 }
   
 # affiche un mois en grand, avec des tableau de clics vers d'autres mois
@@ -215,6 +215,17 @@ function http_calendrier_aide_mess()
  }
 
 
+function http_calendrier_retire_args($script, $args)
+{
+	foreach($args as $arg) {
+	  spip_log("args $arg: $script");
+		$script = ereg_replace("$arg=[^&]*&",'', $script);
+		$script = ereg_replace("$arg=[^#]*#",'#', $script);
+		$script = ereg_replace("$arg=[^&#]*$",'', $script);
+	}
+	return $script;
+}
+
 # Bandeau superieur d'un calendrier selon son $type (jour/mois/annee):
 # 2 icones vers les 2 autres types, a la meme date $jour $mois $annee
 # 2 icones de loupes pour zoom sur la meme date et le meme type
@@ -224,45 +235,41 @@ function http_calendrier_aide_mess()
 function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 			    $script, $args_pred, $args_suiv, $type, $ancre)
 {
-  global $spip_lang_right, $spip_lang_left, $flag_ecrire;
+  global $spip_lang_right, $spip_lang_left;
 
-  $img_dir = ($flag_ecrire ? '' : 'ecrire/') . 'img_pack';
-  if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
+	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
 
-  $script = ereg_replace("echelle=[0-9]*&",'', $script);
-  $script .= (strpos($script,'?') ? '&' : '?');
-  $args = "jour=$jour&mois=$mois&annee=$annee$ancre" ;
-  
-  
-	$retour = "<div class='navigation-calendrier'>";
+	$script = http_calendrier_retire_args($script, array('echelle'));
+	$script .= (strpos($script,'?') ? '&' : '?');
+	$args = "jour=$jour&mois=$mois&annee=$annee$ancre";
+	  
+  	$retour = "<div class='navigation-calendrier'>";
   
 	$retour .= http_calendrier_href($script . "type=$type&echelle=$echelle&$args_pred$ancre",
-			"<img\nsrc='$img_dir/fleche-$spip_lang_left.png' class='format_png' alt='&lt;&lt;&lt;' width='12' height='12' />",
+			"<img\nsrc='" . _DIR_IMG_PACK . "/fleche-$spip_lang_left.png' class='format_png' alt='&lt;&lt;&lt;' width='12' height='12' />",
 			'pr&eacute;c&eacute;dent');
 	$retour .= "&nbsp;";
  
  	$retour .= "<b>$nom</b>";
  	$retour .= "&nbsp;";
-	$retour .= http_calendrier_href($script . "type=$type&echelle=$echelle&$args_suiv$ancre",
-			"<img\nsrc='$img_dir/fleche-$spip_lang_right.png' class='format_png' alt='&gt;&gt;&gt;' width='12' height='12' />",
+	$retour .= http_calendrier_href(($script . "type=$type&echelle=$echelle&$args_suiv$ancre"),
+					"<img\nsrc='" . _DIR_IMG_PACK . "/fleche-$spip_lang_right.png' class='format_png' alt='&gt;&gt;&gt;' width='12' height='12' />",
 			'suivant');
 
  	$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
  
  
-
-	
-	($type == 'jour') ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
-    $retour .= http_calendrier_href($script . "type=jour&echelle=$echelle&$args",
-		    "<img\nsrc='$img_dir/cal-jour.gif' alt='jour' $img_att />",
+        $img_att = ($type == 'jour') ? " class='navigation-bouton-desactive'" : '';
+	$retour .= http_calendrier_href(($script . "type=jour&echelle=$echelle&$args"),
+				    ("<img\nsrc='" . _DIR_IMG_PACK . "/cal-jour.gif' alt='jour' $img_att />"),
 		    'calendrier par jour');
 	($type == 'semaine') ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
 	$retour .= http_calendrier_href($script . "type=semaine&echelle=$echelle&$args",
-		    "<img\nsrc='$img_dir/cal-semaine.gif' alt='semaine' $img_att />",
+					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-semaine.gif' alt='semaine' $img_att />"),
 		    'calendrier par semaine');
 	($type == 'mois') ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
 	$retour .= http_calendrier_href($script . "type=mois&echelle=$echelle&$args",
-		    "<img\nsrc='$img_dir/cal-mois.gif' alt='mois' $img_att />",
+					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-mois.gif' alt='mois' $img_att />"),
 		    'calendrier par mois');
 	
   	$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
@@ -279,18 +286,18 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 	
 	$condition ? $img_att = " class='navigation-bouton-desactive'" : $img_att = "" ;
 	$retour .= http_calendrier_href($script . "type=$type&echelle=$echelle&$arguments",
-		    "<img\nsrc='$img_dir/cal-today.gif' alt=\"aujourd\'hui\" $img_att />",
+					("<img\nsrc='" . _DIR_IMG_PACK . "/cal-today.gif' alt=\"aujourd\'hui\" $img_att />"),
 		    'aujourd\'hui');
 
  	if ($type != "mois") {
 		$retour .= "&nbsp;&nbsp;&nbsp;&nbsp;";
 		$retour .= http_calendrier_href($script . "type=$type&set_echelle=" .
 				floor($echelle * 1.5) . "&$args",
-				"<img\nsrc='$img_dir/loupe-moins.gif' alt='zoom-' />");
+				"<img\nsrc='" . _DIR_IMG_PACK . "/loupe-moins.gif' alt='zoom-' />");
 		$retour .= http_calendrier_href(($script . "type=$type&set_echelle=" .
 			floor($echelle / 1.5) .
 			"&$args"),
-					"<img\nsrc='$img_dir/loupe-plus.gif'  alt='zoom+' />");
+					"<img\nsrc='" . _DIR_IMG_PACK . "/loupe-plus.gif'  alt='zoom+' />");
 
  		$retour .= "&nbsp;&nbsp;";
 	
@@ -300,30 +307,27 @@ function http_calendrier_navigation($jour, $mois, $annee, $echelle, $nom,
 		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=tout" .
 			"&$args"),
-								 "<img\nsrc='$img_dir/heures-tout.png' alt='tout' class='format_png' />") . "</span>";
+								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-tout.png' alt='tout' class='format_png' />") . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "matin") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
 		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=matin" .
 			"&$args"),
-								 "<img\nsrc='$img_dir/heures-am.png' alt='AM' class='format_png' />") . "</span>";
+								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-am.png' alt='AM' class='format_png' />") . "</span>";
 
 		if ($GLOBALS['partie_cal'] == "soir") $img_att = " class='navigation-bouton-desactive'";
 		else $img_att = "";
 		$retour .= "<span$img_att>".http_calendrier_href(($script . "type=$type".
 			"&set_partie_cal=soir" .
 			"&$args"),
-								 "<img\nsrc='$img_dir/heures-pm.png' alt='PM' class='format_png' />") . "</span>";
+								 "<img\nsrc='" . _DIR_IMG_PACK . "/heures-pm.png' alt='PM' class='format_png' />") . "</span>";
  	}
  
- 
- 	$retour .= "&nbsp;&nbsp;&nbsp;";
- 	$retour .=  aide("messcalen");
- 
-	$retour .= "</div>";    
-    return $retour;
-    
+	return $retour .
+	  "&nbsp;&nbsp;&nbsp;" .
+	  (_DIR_RESTREINT ? '' :  aide("messcalen")) .
+	  "</div>";    
 }
 
 # affichage du bandeau d'un calendrier d'une journee
@@ -381,10 +385,6 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $eche
 {
   global $couleur_claire, $couleur_foncee;
 
-  if ($dernier_jour > 31)
-    $nav ='';
-  else
-    {
       $today=getdate(time());
       $j=$today["mday"];
       $m=$today["mon"];
@@ -399,19 +399,23 @@ function http_calendrier_mois($mois, $annee, $premier_jour, $dernier_jour, $eche
 	}
       else if ($mois==12){$mois_suiv=1;	$annee_suiv=$annee+1;}
       $nav = http_calendrier_navigation($j,
-				$mois,
-				$annee,
-				$echelle,
-				affdate_mois_annee("$annee-$mois-1"),
-				'calendrier.php3',
-				"mois=$mois_prec&annee=$annee_prec",
-				"mois=$mois_suiv&annee=$annee_suiv",
-				'mois',
-				'');
-    }
-  return "<table border='0' cellspacing='0' cellpadding='0' width='100%' >" .
-    "\n<tr><td colspan='7'>$nav</td></tr>".
-    http_calendrier_les_jours(array(_T('date_jour_2'),
+					$mois,
+					$annee,
+					$echelle,
+					affdate_mois_annee("$annee-$mois-1"),
+					$GLOBALS['PHP_SELF'],
+					"mois=$mois_prec&annee=$annee_prec",
+					"mois=$mois_suiv&annee=$annee_suiv",
+					'mois',
+					(($dernier_jour <= 31) ? '' : ('&' .
+					 http_calendrier_retire_args($GLOBALS['QUERY_STRING'], 
+								     array('echelle','jour','mois','annee', 'type')))));
+ 
+					 
+    
+      return "<table border='0' cellspacing='0' cellpadding='0' width='100%' >" .
+	"\n<tr><td colspan='7'>$nav</td></tr>".
+	http_calendrier_les_jours(array(_T('date_jour_2'),
 			    _T('date_jour_3'),
 			    _T('date_jour_4'),
 			    _T('date_jour_5'),
