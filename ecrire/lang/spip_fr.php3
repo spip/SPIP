@@ -1329,7 +1329,7 @@ avez fait des modifications importantes de graphisme ou de structure du site. ',
 'titre_cadre_numero_auteur' => 'AUTEUR NUM&Eacute;RO',
 'titre_cadre_raccourcis' => 'RACCOURCIS :',
 'titre_cadre_signature_obligatoire' => '<B>Signature</B> [Obligatoire]<BR>',
-'titre_changer_couleur_interface' => 'Changer la couleur de l\'interface'
+'titre_changer_couleur_interface' => 'Changer la couleur de l\'interface',
 'titre_config_fonctions' => 'Configuration du site',
 'titre_config_groupe_mots_cles' => 'Configuration des groupes de mots-cl&eacute;s',
 'titre_configuration' => 'Configuration du site',
