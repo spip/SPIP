@@ -148,7 +148,7 @@ function login($cible = '', $prive = 'prive', $message_login='') {
 	}
 	else {
 		echo ouvre_login ();
-		echo "<br>$message_login<br>\n";
+		if (strlen($message_login) > 0) echo "<br>$message_login<br>\n";
 	}
 
 	if ($login) {
