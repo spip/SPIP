@@ -1,18 +1,67 @@
 <?php
 
-// traduction des arguments d'une boucle par affectation du tableau $boucles
+# Traduction des arguments d'une boucle par affectation du tableau $boucles
+# retourne un tableau en cas d'erreur
 
-function calculer_params($type, $params, $idb, &$boucles) {
+function calculer_params($idb, &$boucles) {
 	global $tables_relations, $table_primary, $table_des_tables, $table_date;
 	$boucle = &$boucles[$idb];
+	$type = $boucle->type_requete;
+	$params = $boucle->param;
 	$id_table = $table_des_tables[$type];
 	$id_field = $id_table . "." . $table_primary[$type];
+
+	// Cas de la hierarchie : on cree des params supplementaires
+	// $hierarchie sera calculee par un ajout dans 
+	if ($type == 'hierarchie') {
+		$boucle->where[] = 'id_rubrique IN ($hierarchie)';
+		$boucle->select[] = 'FIND_IN_SET(id_rubrique, \'$hierarchie\')-1 AS rang';
+		if (!$boucle->order)
+			$boucle->order = 'rang';
+
+		// Extraire le parametre id_article/id_rubrique/id_syndic
+		$params2 = array();
+		foreach($params as $param) {
+			switch($param) {
+				case 'id_article':
+				case 'id_syndic':
+				case 'id_rubrique':
+					$h_feuille = $param;
+					break;
+				default:
+					$params2[]=$param;
+					break;
+			}
+		}
+		$params = $params2;
+
+		/*
+		## Pas grave : ca fonctionne meme sans ce critere (Fil)
+		if (!$h_feuille) {
+			include_local("inc-debug-squel.php3");
+			erreur_squelette(_L("Critere id_rubrique ou id_article absent"), $type, $idb);
+		}
+		*/
+
+		if (($h_feuille<>'id_rubrique') OR $boucle->tout)
+			$boucle->hierarchie = '
+			$hierarchie = calculer_hierarchie('
+			.calculer_argument_precedent($idb, 'id_rubrique', $boucles)
+			.", false);\n";
+		else
+			$boucle->hierarchie = '
+			$hierarchie = calculer_hierarchie('
+			.calculer_argument_precedent($idb, 'id_rubrique', $boucles)
+			.", true);\n";
+
+	}
+
 
 	if (is_array($params)) {
 		foreach($params as $param) {
 			if ($param == 'exclus') {
 			$boucle->where[] = "$id_field!='\"." .
-				index_pile($boucle->id_parent, $table_primary[$type], $boucles) .
+				calculer_argument_precedent($idb, $table_primary[$type], $boucles) .
 				".\"'";
 			}
 			else if ($param == 'unique' OR $param == 'doublons') {
@@ -42,13 +91,14 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					$boucle->total_parties =
 						($match[5] != 'n') ? $match[5] :
 						($match[8] ? $match[8] : 0);
-					$boucle->mode_partie = ($match[1] == 'n') ? '-' : '+';
+					$boucle->mode_partie =
+					(($match[1]=='n')?'-':'+').(($match[5]=='n')?'-':'+');
 				}
 			}
 			else if (ereg('^debut([-_a-zA-Z0-9]+),([0-9]*)$', $param, $match)) {
 				$debut_lim = "debut".$match[1];
 				$boucle->limit =
-					'".intval($GLOBALS[\''.$debut_lim.'\']).",'.$match[2];
+					'intval($GLOBALS["'.$debut_lim.'"]).",'.$match[2] .'"' ;
 			}
 			else if ($param == 'recherche') {
 				$boucle->from[] = "index_$id_table AS rec";
@@ -56,7 +106,12 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					'calcul_mysql_in("rec.hash",
 					calcul_branche($hash_recherche_strict),"") . "))
 					AS points';
-				$boucle->where[] = "rec.". $table_primary[$type] . "=$id_field";
+				# a cause des exceptions forum{s}? et syndic
+				# NB: utiliser table_objet() ?
+				if (!($r = $table_primary[$id_table]))
+				  $r = $table_primary[$type];
+				
+				$boucle->where[] = "rec.$r=$id_field";
 				$boucle->group = $id_field;
 				$boucle->where[] = '" .' . 'calcul_mysql_in("rec.hash",
 					calcul_branche($hash_recherche),"") . "';
@@ -68,15 +123,16 @@ function calculer_params($type, $params, $idb, &$boucles) {
 				if ($boucle->order) {
 					$boucle->order .= ' DESC';
 				} else {
-					include_local("inc-debug-squel.php3");
-					erreur_squelette(_L("Inversion d'un ordre inexistant"), $param, $idb);
+				  return array(_T('info_erreur_squelette'),
+					       $idb . (_L("&nbsp: inversion d'un ordre inexistant")));
 				}
 			}
 
 			// Gerer les traductions
 			else if ($param == 'traduction') {
-				$boucle->where[] = "$id_table.id_trad > 0 AND  $id_table.id_trad ='\"." .
-				index_pile($boucle->id_parent, 'id_trad', $boucles) . ".\"'";
+				$boucle->where[] = "$id_table.id_trad > 0
+				AND $id_table.id_trad ='\"." .
+				calculer_argument_precedent($idb, 'id_trad', $boucles) . ".\"'";
 			}
 			else if ($param == 'origine_traduction') {
 				$boucle->where[] = "$id_table.id_trad = $id_table.id_article";
@@ -85,7 +141,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 			// Special rubriques
 			else if ($param == 'meme_parent') {
 				$boucle->where[] = "$id_table.id_parent='\"." .
-					index_pile($boucle->id_parent, 'id_parent', $boucles) . ".\"'";
+					calculer_argument_precedent($idb, 'id_parent', $boucles) . ".\"'";
 				if ($type == 'forums') {
 					$boucle->where[] = "$id_table.id_parent > 0";
 					$boucle->plat = true;
@@ -96,25 +152,22 @@ function calculer_params($type, $params, $idb, &$boucles) {
 			}
 			else if (ereg("^branche *(\??)", $param, $regs)) {
 				$c = "calcul_mysql_in('$id_table.id_rubrique',
-				calcul_branche(" . index_pile($boucle->id_parent, 'id_rubrique',
+				calcul_branche(" . calculer_argument_precedent($idb, 'id_rubrique',
 				$boucles) . "), '')";
 				if (!$regs[1])
 					$boucle->where[] = "\". $c .\"" ;
 				else
-					$boucle->where[] = "\".(".index_pile($boucle->id_parent, 'id_rubrique', $boucles)."? $c : 1).\"";
-			}
-			else if ($type == 'hierarchie') {
-				// Hack specifique; voir à la fin de la fonction
-				$boucle->tout = $param;
+					$boucle->where[] = "\".(".calculer_argument_precedent($idb, 'id_rubrique', $boucles)."? $c : 1).\"";
 			}
 			// Restriction de valeurs (implicite ou explicite)
-			else if (ereg('^([a-zA-Z_]+) *(\??)((!?)(<=?|>=?|==?) *"?([^<>=!"]*))?"?$', $param, $match)) {
+			else if (eregi('^([a-z_]+) *(\??)((!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*))?"?$', $param, $match)) {
 				// Variable comparee
 				$col = $match[1];
 				$col_table = $id_table;
 				// Valeur de comparaison
 				if ($match[3]) {
 					$val = calculer_param_dynamique($match[6], $boucles, $idb);
+					if (is_array($val)) return $val;
 				} else {
 					$val = $match[1];
 					// Si id_parent, comparer l'id_parent avec l'id_objet
@@ -125,7 +178,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					// de la boucle superieure
 					else if ($val == 'id_enfant')
 						$val = 'id_parent';
-					$val = index_pile($boucle->id_parent, $val, $boucles) ;
+					$val = calculer_argument_precedent($idb, $val, $boucles) ;
 				}
 
 				if (ereg('^\$',$val))
@@ -194,13 +247,13 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					if ($regs[2]) {
 						$date_orig = $id_table . ".date_redac";
 						$date_compare = '\'" . normaliser_date(' .
-						index_pile($boucle->id_parent, 'date_redac', $boucles) .
+						calculer_argument_precedent($idb, 'date_redac', $boucles) .
 						') . "\'';
 					}
 					else {
 						$date_orig = "$id_table." . $table_date[$type];
 						$date_compare = '\'" . normaliser_date(' .
-						  index_pile($boucle->id_parent, 'date', $boucles) .
+						  calculer_argument_precedent($idb, 'date', $boucles) .
 						  ') . "\'';
 					}
 
@@ -254,10 +307,30 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					$op = '=';
 				else if ($op == '==')
 					$op = 'REGEXP';
+				else if (strtoupper($op) == 'IN') {
+					// traitement special des valeurs textuelles
+					$val2 = split(",", $val);
+					foreach ($val2 as $v) {
+						$v = trim($v);
+						if (ereg("^[0-9]+$",$v))
+							$val3[] = $v;
+						else
+							$val3[] = "'$v'";
+					}
+					$val = join(',', $val3);
+					$boucle->where[] = "$col IN ($val)";
+					$boucle->select[] = "FIND_IN_SET($col, \\\"$val\\\")
+						AS rang";
+					if (!$boucle->order)
+						$boucle->order = 'rang';
+					$op = '';
+				}
 	
 				if ($col_table)
 					$col = "$col_table.$col";
 
+				/*
+				// Pas bon : les criteres sont des ET logiques
 				$vu = 0;
 				if (($op == '=') && (!$match[4]) && ($boucle->where)) {
 					// reperer un parametre repete - {id_mot=1}{id_mot=2}
@@ -275,6 +348,9 @@ function calculer_params($type, $params, $idb, &$boucles) {
 					}
 
 				if (!$vu) {
+				*/
+
+				if ($op) {
 					if ($match[4] == '!')
 						$where = "NOT ($col $op '$val')";
 					else
@@ -282,7 +358,7 @@ function calculer_params($type, $params, $idb, &$boucles) {
 
 					// operateur optionnel {lang?}
 					if ($match[2]) {
-						$champ = index_pile($boucle->id_parent, $match[1], $boucles) ;
+						$champ = calculer_argument_precedent($idb, $match[1], $boucles) ;
 						$where = "\".($champ ? \"$where\" : 1).\"";
 					}
 
@@ -326,12 +402,6 @@ function calculer_params($type, $params, $idb, &$boucles) {
 			}
 		}
 	}
-	if (($type == 'hierarchie') &&
-	    (($boucle->tout != 'id_rubrique') && ($boucle->tout != 'id_article')))
-	  {
-		include_local("inc-debug-squel.php3");
-		erreur_squelette(_L("Critère id_rubrique ou id_article absent"), $type, $idb);
-	  }
 }
 
 function calculer_param_date($date_compare, $date_orig) {
@@ -361,13 +431,23 @@ function calculer_param_date($date_compare, $date_orig) {
 
 // Calculer les parametres
 function calculer_param_dynamique($val, &$boucles, $idb) {
-	if (ereg("^#(.*)$",$val,$m))
-		return index_pile($boucles[$idb]->id_parent, $m[1], $boucles) ;
-	else {
+	if (ereg("^#([A-Za-z0-9_-]+)$",$val,$m)) {
+		list($c,$a) = calculer_champ('',$m[1], $idb, $boucles, $idb);
+		return (!$a ? (ereg("'(.*)'", $c, $v) ? $v[1] : $c) :
+			array(_T('info_erreur_squelette'),
+			($val . _L("&nbsp;: champ interdit dans cette comparaison")))) ;
+	} else {
 		if (ereg('^\$(.*)$',$val,$m))
 			return '$Pile[0][\''. $m[1] ."']";
 		else
 			return $val;
 	}
 }
+
+# Prendre en compte le cas de la boucle dite recursive
+function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
+	return index_pile(($boucles[$idb]->externe ? $idb :
+	$boucles[$idb]->id_parent), $nom_champ, $boucles);
+}
+
 ?>

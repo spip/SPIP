@@ -95,7 +95,7 @@ function calcul_form_rech($lien)
 # fonctions pour la balise FORMULAIRE_FORUM
 # $Cache est passe' par re'fe'rence pour e'viter sa recopie mais n'est pas affecte'
 
-function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum, &$Cache)
+function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum)
 {
   $r = boutons_de_forum_table($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum);
   if (!$r) return '';
@@ -113,16 +113,11 @@ function boutons_de_forum($idr, $idf, $ida, $idb, $ids, $titre, $table, $forum, 
   else $retour_forum = ereg_replace('&recalcul=oui','',$retour_forum);
 	$retour_forum = quote_amp($retour_forum);
 
-  $cache = $Cache[cache];
-  
-  
-
   $lacible = "
 	include_local('inc-forum.php3');
 	lang_select(\$GLOBALS['spip_lang']);
 	echo retour_forum('$idr','$idf','$ida','$idb','$ids',\"$titre\",'$table', '$forum', '$url', \"
 	<input type='hidden' name='retour' value='$retour_forum' />
-	<input type='hidden' name='var_cache' value='$cache' />
 	<input type='hidden' name='ajout_forum' value='oui' />
 	<input type='hidden' name='forum_id_rubrique' value='$idr' />
 	<input type='hidden' name='forum_id_parent' value='$idf' />

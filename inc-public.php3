@@ -67,8 +67,7 @@ else {
 	include_local ("inc-public-global.php3");
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
 	eval('?' . '>' . $page['texte']);
-
-	terminer_public_global($use_cache);
+	terminer_public_global($use_cache, $page['cache']);
 }
 
 ?>

@@ -36,7 +36,7 @@ function calculer_champ_LESAUTEURS ($fonctions, $nom_champ, $id_boucle, &$boucle
 {
   $code = index_pile($id_boucle, 'lesauteurs', $boucles);
   if ((!$code) || ($code == '$Pile[0][lesauteurs]'))
-    $code = 'query_auteurs(' .
+    $code = 'sql_auteurs(' .
       index_pile($id_boucle,  "id_article", $boucles) .
       ')';    
    return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
@@ -44,7 +44,7 @@ function calculer_champ_LESAUTEURS ($fonctions, $nom_champ, $id_boucle, &$boucle
 
 function calculer_champ_PETITION ($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere)
  {
-   $code = 'query_petitions(' .
+   $code = 'sql_petitions(' .
      index_pile($id_boucle,  'id_article', $boucles)
      . '")) ? " " : "")';
   return applique_filtres($fonctions, $code, $id_boucle, $boucles, $id_mere);
@@ -102,10 +102,9 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
     $fonctions = $filtres;
   }
   if ($flag_lien_auto && !$lien) {
-    $milieu .= "
-			\$lien = generer_url_$type_objet(" .
-      index_pile($id_boucle,  'id_$type_objet', $boucles) . ");
-			";
+    $milieu .= "\n\t\$lien = generer_url_$type_objet(" .
+      index_pile($id_boucle,  'id_$type_objet', $boucles) .
+      ");\n";
   }
   else
     {
@@ -113,7 +112,7 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
       $a = $lien;
       while (ereg("^([^#]*)#([A-Za-z_]+)(.*)$", $a, $match))
 	{
-	  list($c,$m) = calculer_champ("", $match[2], $id_boucle, $boucles, $id_mere);
+	  list($c,$m) = calculer_champ(array(), $match[2], $id_boucle, $boucles, $id_mere);
 	  // $m est nul dans les cas pre'vus
 	  $milieu .= ((!$match[1]) ? "" :"'$match[1]' .") . " $c .";
 	  $a = $match[3];
@@ -147,11 +146,12 @@ function calculer_champ_LOGO($fonctions, $nom_champ, $id_boucle, &$boucles, $id_
 			';
   }
   else if ($type_logo == 'DOCUMENT'){
+    // Recours a une globale pour compatibilite avec l'ancien code. 
+    // Il faudra reprendre inc_documents entierement (tu parles !)
     $milieu .= ' 
 		$logoff = ' .
       index_pile($id_boucle,  "id_document", $boucles) . 
       '; 
-		$doublons["documents"] = ", $logoff"; 
 		$logon = integre_image($logoff,"","fichier_vignette");
 		$logoff = "";
 			';

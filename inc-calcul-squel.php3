@@ -53,11 +53,6 @@ function calculer_boucle($id_boucle, &$boucles)
 	if ($lang_select)
 		$boucle->select[] = (($id_table = $table_des_tables[$type_boucle]) ? $id_table.'.' : '') .'lang';
 
-	if ($type_boucle == 'hierarchie')
-	  {
-	    $flag_h = true;
-	    $type_boucle = 'rubriques';
-	  }
 	$flag_parties = ($boucle->partie AND $boucle->total_parties);
 	$flag_cpt = $flag_parties || # pas '$compteur' a` cause du cas 0
 	  		strpos($corps,'compteur_boucle') ||
@@ -103,33 +98,32 @@ function calculer_boucle($id_boucle, &$boucles)
 	    "' : '') . \$t1;")).
 	  ((!$flag_parties) ? "" : "\t\t}\n");
 
-	// Recherche : recuperer les hash a partir de la chaine de recherche
 
+	// Initialisation du $texte
+	$texte = '';
+
+	# hack doublons documents : s'il y a quelque chose dans
+	# global[id_doublons][documents], c'est que des documents ont
+	# ete vus par integre_image() ou autre fournisseur officiel de
+	# doublons : on les transfere alors vers la vraie variable
+	$texte .= '
+	#echo "(".$GLOBALS[\'id_doublons\'][\'documents\'].")\n";
+	$doublons[\'documents\'] .= $GLOBALS[\'id_doublons\'][\'documents\'];
+	unset($GLOBALS[\'id_doublons\'][\'documents\']);';
+
+	// Recherche : recuperer les hash a partir de la chaine de recherche
 	if ($boucle->hash) {
 		$texte =  '
+		list($hash_recherche, $hash_recherche_strict) = requete_hash($GLOBALS["recherche"]);' .
+			$texte ;
+	}
+/*		$texte .= '
 		global $recherche, $hash_recherche, $hash_recherche_strict;
 		list($hash_recherche, $hash_recherche_strict) = requete_hash($recherche);';
-	}
-	else { $texte = ''; }
+	}*/
 
-	if ($flag_h) {
-	    ereg("([0-9]+),([0-9]+)",$boucle->limit,$limit);
-	    $boucle->limit = '';
-	    $texte .= '
-	$hierarchie = ' . 
-	      index_pile($boucle->id_parent, 'id_rubrique', $boucles) .
-	      ';
-	$h0 = ""; 
-	for($n=' .
-	      (($boucle->tout == 'id_rubrique') ? -1 : 0) .
-	      ';' .
-	      (!$limit ? '$hierarchie' : ('$n<' . ($limit[1] + $limit[2]))) .
-	      ';$n++) {
-	';       
-	    $corps = '
-		$hierarchie = $Pile[$SP][id_parent];
-		if ($n >=' . ($limit[1] ? $limit[1] : 0) . ') {' . $corps  .'}';
-	}
+	// Gestion de la hierarchie (voir inc-arg-squel)
+	$texte .= $boucle->hierarchie;
 
 	# si le corps est une constante, ne plus appeler le serveur
 	if (!ereg("^'[^']*'$",$corps))
@@ -165,7 +159,8 @@ function calculer_boucle($id_boucle, &$boucles)
 		  ((!$boucle->numrows) ? '' : "
 	\$Numrows['$id_boucle'] = @spip_num_rows(\$result);")) .
 		 ((!$flag_cpt) ? '' : "\n\t\$compteur_boucle = 0;") .
-		$corps . '
+		$corps .
+		'
 	@spip_free_result($result);' .
 		 (!($flag_h) ? '
 	return $t0;' : ('
@@ -179,37 +174,58 @@ function calculer_boucle($id_boucle, &$boucles)
 
 // une grosse fonction pour un petit cas
 
-function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle)
-{
-     return ('
-	$fin_boucle = @spip_num_rows($result);' .
-		 (($mode_partie == '/') ?
-		  ('
-	$debut_boucle = 1+floor(($fin_boucle * ' . 
-		   ($partie - 1) .
-		   ' + ' .
-		   ($total_parties - 1) .
-		   ')/' .
-		   $total_parties .
-		   ");\n\t" .
-		   '$fin_boucle = floor(($fin_boucle * ' .
-		   $partie .
-		   ' + ' .
-		   ($total_parties - 1) .
-		   ')/' .
-		   $total_parties .
-		   ");") :
-		  (($mode_partie == '+') ?
-		   ('
-	$debut_boucle = ' . $partie . ';
-	$fin_boucle -= ' . 
-		   $total_parties) :
-		   ('
-	$debut_boucle = $fin_boucle - ' . $partie . ';
-	$fin_boucle -= ' . 
-		    ($partie - $total_parties)) .
-		   ';'))  . '
-	$Numrows[$SP] = $fin_boucle - $debut_boucle + 1;');
+function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
+
+	// Notes :
+	// $debut_boucle et $fin_boucle sont les indices SQL du premier
+	// et du dernier demandes dans la boucle : 0 pour le premier,
+	// n-1 pour le dernier ; donc total_boucle = 1 + debut - fin
+
+	# nombre total avant partition
+	$retour = "\n\t".'$nombre_boucle = @spip_num_rows($result);';
+
+	ereg("([+-/])([+-/])?", $mode_partie, $regs);
+	list(,$op1,$op2) = $regs;
+
+	# {1/3}
+	if ($op1 == '/') {
+		$retour .= "\n\t"
+			.'$debut_boucle = 1 + ceil(($nombre_boucle * '
+			. ($partie - 1) . ')/' . $total_parties . ");\n\t"
+			. '$fin_boucle = ceil (($nombre_boucle * '
+			. $partie . ')/' . $total_parties . ");";
+	}
+
+	# {1,x}
+	if ($op1 == '+') {
+		$retour .= "\n\t"
+			. '$debut_boucle = ' . $partie . ';';
+	}
+	# {n-1,x}
+	if ($op1 == '-') {
+		$retour .= "\n\t"
+			. '$debut_boucle = $nombre_boucle - ' . $partie . ';';
+	}
+	# {x,1}
+	if ($op2 == '+') {
+		$retour .= "\n\t"
+			. '$fin_boucle = $debut_boucle + ' . $partie . ' - 1;';
+	}
+	# {x,n-1}
+	if ($op2 == '-') {
+		$retour .= "\n\t"
+			. '$fin_boucle = $debut_boucle+($nombre_boucle-'.$partie.')-1;';
+	}
+
+	# Rabattre $fin_boucle sur le maximum
+	$retour .= "\n\t"
+		.'$fin_boucle = min($fin_boucle, $nombre_boucle);';
+
+	# calcul du total boucle final
+	$retour .= "\n\t"
+		.'$Numrows[\''.$id_boucle.'\'] = $fin_boucle - $debut_boucle + 1;';
+
+	return $retour;
 }
 
 
@@ -244,10 +260,10 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 	    if (!(strpos($c,'<?') === false)) $pi = true;
 	  } else {
 	  if ($objet->type == 'include') {
-	    $c = calculer_inclure($objet->fichier,$objet->params,
+	    $c = calculer_inclure($objet->fichier,
+				  $objet->params,
 				  $id_boucle,
-				  $boucles,
-				  $pi);
+				  $boucles);
 	    $exp .= (!$exp ? $c : (" .\n\t\t$c"));
 	  } else {
 	    if ($objet->type ==  'boucle') {
@@ -331,13 +347,15 @@ function calculer_liste($tableau, $prefix, $id_boucle, $niv, &$boucles, $id_mere
 # Prend en argument le source d'un squelette, sa grammaire et un nom.
 # Retourne une fonction PHP/SQL portant ce nom et calculant une page HTML.
 # Pour appeler la fonction produite, lui fournir 2 tableaux de 1 e'le'ment:
-# -1er: e'le'ment 'cache' => nom (du fichier ou` mettre la page)
-# -2e: e'lement 0 contenant un environnement ('id_article => $id_article, etc)
-# Elle retourne alors un tableau de 3 e'le'ments:
+# - 1er: element 'cache' => nom (du fichier ou` mettre la page)
+# - 2e: element 0 contenant un environnement ('id_article => $id_article, etc)
+# Elle retourne alors un tableau de 4 e'le'ments:
 # - 'texte' => page HTML, application du squelette a` l'environnement;
+# - 'squelette' => le nom du squelette
 # - 'process_ins' => 'html' ou 'php' selon la pre'sence de PHP dynamique
 # - 'invalideurs' =>  de'pendances de cette page, pour invalider son cache.
 # (voir son utilisation, optionnelle, dans invalideur.php)
+# En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
 function calculer_squelette($squelette, $nom, $gram) {
 
@@ -349,7 +367,9 @@ function calculer_squelette($squelette, $nom, $gram) {
 #  include_local('inc-debug.php3');
 #  afftable($racine);
 #  affboucles($boucles);
-  // Traduction des se'quences syntaxique des boucles 
+ 
+# Commencer par réperer les boucles appelées explicitement par d'autres
+# car elles indexent leurs arguments de manière dérogatoire
 
   if ($boucles)
     {
@@ -357,14 +377,14 @@ function calculer_squelette($squelette, $nom, $gram) {
 	{ 
 	  if ($boucle->type_requete == 'boucle')
 	    {
-	      $rec = $boucles[$boucle->param];
+	      $rec = &$boucles[$boucle->param];
 	      if (!$rec)
 		{
-		  include_local("inc-debug-squel.php3");
-		  erreur_squelette(_L('Boucle récursive non définie'), '',
-				   $boucle->param);
-		  exit;
+		  return array(_T('info_erreur_squelette'),
+			       ($boucle->param . _L('&nbsp: boucle récursive non définie')));
 		  } 
+
+	      $rec->externe = $id;
 	      $boucles[$id]->return =
 		calculer_liste(array($rec),
 			       $nom,
@@ -378,14 +398,15 @@ function calculer_squelette($squelette, $nom, $gram) {
 	{ 
 	  if ($boucle->type_requete != 'boucle') 
 	    {
-	  calculer_params($boucle->type_requete, $boucle->param, $id, $boucles);
-	  $boucles[$id]->return =
-	    calculer_liste($boucle->milieu,
-			   $nom,
-			   $id,
-			   1,
-			   $boucles,
-			   $id);
+	      $res = calculer_params($id, $boucles);
+	      if (is_array($res)) return $res;
+	      $boucles[$id]->return =
+		calculer_liste($boucle->milieu,
+			       $nom,
+			       $id,
+			       1,
+			       $boucles,
+			       $id);
 	    }
 	}
     }
@@ -425,10 +446,10 @@ function calculer_squelette($squelette, $nom, $gram) {
 function ' . $nom . '($Cache, $Pile, $doublons, $Numrows="", $SP=0) {
 ' .
     $corps . "\n \$t0 = " . $return . ';
-    $Cache["squelette"]= "' . $nom . '";
     return array("texte" => $t0,
-	       "process_ins" => ((strpos($t0,\'<\'.\'?\')=== false) ? \'html\' : \'php\'),
-	       "invalideurs" => $Cache);' .
+		"squelette" => "' . $nom . '",
+		"process_ins" => ((strpos($t0,\'<\'.\'?\')=== false) ? \'html\' : \'php\'),
+		"invalideurs" => $Cache);' .
     "\n}\n" ;
 }
 ?>

@@ -34,7 +34,7 @@ function effacer_meta($nom) {
 // Ne pas oublier d'appeler cette fonction apres ecrire_meta() et effacer_meta() !
 //
 function ecrire_metas() {
-	global $meta, $meta_maj, $flag_ecrire;
+	global $meta, $meta_maj, $dir_ecrire;
 
 	lire_metas();
 
@@ -72,18 +72,9 @@ function lire_meta_maj($nom) {
 	}
 	$s .= '?'.'>';
 
-	$fichier_meta_cache = ($flag_ecrire ? '' : 'ecrire/') . 'data/inc_meta_cache.php3';
-	@unlink($fichier_meta_cache);
-	$fichier_meta_cache_w = $fichier_meta_cache.'-'.@getmypid();
-	$f = @fopen($fichier_meta_cache_w, "wb");
-	if ($f) {
-		$r = @fputs($f, $s);
-		@fclose($f);
-		if ($r == strlen($s))
-			@rename($fichier_meta_cache_w, $fichier_meta_cache);
-		else
-			@unlink($fichier_meta_cache_w);
-	} else {
+	// ecrire le fichier
+	$ok = ecrire_fichier ($dir_ecrire . 'data/inc_meta_cache.php3', $s);
+	if (!$ok) {
 		global $connect_statut;
 		if ($connect_statut == '0minirezo')
 			echo "<h4 font color=red>"._T('texte_inc_meta_1')." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";

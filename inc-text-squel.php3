@@ -1,6 +1,6 @@
 <?php
 
-function calculer_inclure($fichier, $params, $id_boucle, &$boucles, $pi) {
+function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 	global $dossier_squelettes;
 
 	$criteres = '';

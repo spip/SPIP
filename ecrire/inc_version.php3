@@ -157,8 +157,6 @@ $traiter_math = 'tex';
 /* ATTENTION CES VARIABLES NE FONCTIONNENT PAS ENCORE */
 // Extension du fichier du squelette 
 $extension_squelette = 'html';
-// Repertoire des images
-$dossier_images = 'IMG';
 /* / MERCI DE VOTRE ATTENTION */
 
 
@@ -433,11 +431,6 @@ function tester_upload() {
 	return $GLOBALS['flag_upload'];
 }
 
-function tester_accesdistant() {
-	global $hebergeur;
-	$test_acces = true;
-	return $test_acces;
-}
 
 //
 // Reglage de l'output buffering : si possible, generer une sortie
@@ -793,27 +786,137 @@ if (count($GLOBALS['HTTP_POST_VARS'])) {
 // URLs avec passage & -> &amp;
 
 function quote_amp ($url) {
-/*	$debut = substr($url, 0, strpos($url, "?"));
-	$fin = substr($url, strpos($url, "?")+1, strlen($url));
-	if (strlen($fin) > 0) $fin = "?".htmlentities(urlencode($fin));
-	return $debut.$fin;
-	*/
-/*	$url = urlencode($url);*/
-	$url = ereg_replace("&amp;", "&", $url);
-	$url = ereg_replace("&", "&amp;", $url);
-	
+	$url = str_replace("&amp;", "&", $url);
+	$url = str_replace("&", "&amp;", $url);
 	return $url;
 }
 
+
+//
+// Lire un fichier de maniere un peu sure
+//
+
+
+// flock() marche dans ce repertoire <=> j'ai le droit de flock() sur ce fichier
+if (LOCK_UN!=3) {
+	define ('LOCK_SH', 1);
+	define ('LOCK_EX', 2);
+	define ('LOCK_UN', 3);
+	define ('LOCK_NB', 4);
+}
+function test_flock ($dir, $fp=false) {
+	global $flag_flock;
+	if (!$dir) $dir = '.';
+
+	if (!$flag_flock)
+		return false;
+
+	// si on me passe un pointeur, je teste et j'ecris le resultat
+	if ($fp) {
+		if (@flock($fp, LOCK_SH)) {
+			@flock($fp, LOCK_UN);
+			@touch("$dir/.flock_ok");
+		} else
+			@unlink("$dir/.flock_ok");
+	}
+
+	return @file_exists("$dir/.flock_ok");
+}
+
+// Si flock ne marche pas dans ce repertoire ou chez cet hebergeur,
+// on renvoie OK pour ne pas bloquer
+function spip_flock($filehandle, $mode, $fichier) {
+	preg_match('|(.*)/([^/]*)$|', $fichier, $match);
+	$dir = $match[1];
+
+	if (!test_flock($dir))
+		return true;
+	else
+		return @flock($filehandle, $mode);
+}
+
+// options = array(
+// 'size' => 1024      # recuperer seulement le debut
+// 'phpcheck' => 'oui' # verifier qu'on a bien du php
+function lire_fichier ($fichier, &$contenu, $options=false) {
+	$contenu = '';
+	if (!@file_exists($fichier))
+		return false;
+
+	if ($fl = @fopen($fichier, 'r')) {
+
+		// verrou lecture
+		while (!spip_flock($fl, LOCK_SH, $fichier));
+
+		if (!$s = $options['size'])
+			$s = filesize($fichier);
+		$contenu = @fread($fl, $s);
+
+		// liberer le verrou
+		spip_flock($fl, LOCK_UN, $fichier);
+		@fclose($fl);
+
+		// Verifications
+		$ok = (strlen($contenu) == $s);
+		if ($options['phpcheck'] == 'oui')
+			$ok &= (ereg("[?]>\n?$", $contenu));
+		return $ok;
+	}
+}
+
+
+//
+// Ecrire un fichier de maniere un peu sure
+//
+function ecrire_fichier ($fichier, $contenu) {
+
+	// Ecriture dans un fichier temporaire
+	// dans le repertoire destination
+	preg_match('|(.*)/([^/]*)$|', $fichier, $match);
+	$dir = $match[1];
+	$fichiertmp = $dir.'/'
+	.uniqid(substr(md5($fichier),0,6).'-'
+	.@getmypid()).".tmp";
+	if ($ft = @fopen($fichiertmp, 'wb')) {
+		// on en profite pour tester flock()
+		$flock = test_flock($dir, $ft);
+		$s = @fputs($ft, $contenu);
+		@fclose($ft);
+		$ok = (strlen($contenu) == $s);
+	}
+
+	if ($ok) {
+		// ouvrir et obtenir un verrou sur le fichier destination
+		if ($fp = @fopen($fichier, 'a')) {
+			if ($flock) while (!spip_flock($fp, LOCK_EX, $fichier));
+
+			// recopier le temporaire
+			$ok = @rename($fichiertmp, $fichier);
+
+			// liberer le verrou
+			if ($flock) spip_flock($fp, LOCK_UN, $fichier);
+
+			@fclose($fp);
+		}
+	}
+
+
+	// en cas d'echec effacer le temporaire
+	if (!$ok)
+		@unlink($fichiertmp);
+
+	return $ok;
+}
 
 
 //
 // Lire les meta cachees
 //
-$inc_meta_cache = ($flag_ecrire ? '' : 'ecrire/').'data/inc_meta_cache.php3';
-if (@file_exists($inc_meta_cache) AND !defined('_ECRIRE_INC_META_CACHE')  AND !defined('_ECRIRE_INC_META')) {
-	include_ecrire('data/inc_meta_cache.php3');
-}
+if (!defined('_ECRIRE_INC_META_CACHE') AND !defined('_ECRIRE_INC_META')
+AND lire_fichier ($dir_ecrire.'data/inc_meta_cache.php3', $contenu,
+array('phpcheck' => 'oui')))
+	eval('?'.'>'.$contenu);
+
 if (!defined("_ECRIRE_INC_META_CACHE")) {
 	function lire_meta($nom) {
 		global $meta;
@@ -825,7 +928,6 @@ if (!defined("_ECRIRE_INC_META_CACHE")) {
 	}
 	define("_ECRIRE_INC_META_CACHE", "1");
 }
-
 
 // Verifier la conformite d'une ou plusieurs adresses email
 function email_valide($adresse) {
@@ -913,7 +1015,7 @@ function spip_log($message, $logname='spip') {
 }
 
 //
-// Savoir si on peut lancer de gros calculs, et eventuellement poser un lock
+// Savoir si on peut lancer de gros calculs, et eventuellement poser un lock SQL
 // Resultat : true=vas-y ; false=stop
 //
 function timeout($lock=false, $action=true, $connect_mysql=true) {
@@ -994,6 +1096,23 @@ function spip_timer($t='rien') {
 		return sprintf("%.2fs", $p);
 	} else
 		$time[$t] = $a + $b;
+}
+
+
+//
+// Une fonction service pour tout le monde
+//
+function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
+	if (!$exclure_feuille)
+		$hierarchie = ",$id_rubrique";
+
+	do {
+		$q = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+		list($id_rubrique) = spip_fetch_array($q);
+		$hierarchie = ",$id_rubrique".$hierarchie;
+	} while ($id_rubrique);
+
+	return substr($hierarchie, 1); // Attention ca demarre toujours par '0'
 }
 
 ?>

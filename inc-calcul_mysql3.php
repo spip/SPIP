@@ -23,7 +23,7 @@
 # En commentaire, le court-circuit de spip_query,
 # avec traitement de table_prefix sans restriction sur son nom
 
-function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id) {
+function spip_abstract_select($s, $f, $w='', $g='', $o='', $l='', $sous='', $cpt='', $table='', $id='') {
 # if ($GLOBALS["mysql_rappel_connexion"] AND $DB = $GLOBALS["spip_mysql_db"])
 #        $DB = "`$DB`";
 # $DB .= $GLOBALS["table_prefix"] . '_';
@@ -40,6 +40,7 @@ function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id) 
 	 "\nFROM\t(" . join(",\n\t", $s) . " ,\n\tCOUNT(" . $sous .
 	 ") AS compteur $q)\n AS S_$table\nWHERE compteur= " . 
 	 $cpt));
+# spip_log("$id: $q\n");
 # if (!($result = @mysql_query($q)))
   if (!($result = @spip_query($q)))
     {
@@ -47,7 +48,7 @@ function spip_abstract_select($s, $f, $w, $g, $o, $l, $sous, $cpt, $table, $id) 
       echo erreur_requete_boucle($q, $id, $table);
       exit;
     }
-#  spip_log("$id: $q\n" . spip_num_rows($result));
+#  spip_log(spip_num_rows($result));
   return $result;
 }
 
@@ -114,57 +115,34 @@ function calcul_index_forum($id_article, $id_breve, $id_rubrique, $id_syndic)
     'd' . ($id_syndic ? $id_syndic : '0');
 }
 
-function calcul_exposer ($pile, $reference) {
-	static $hierarchie;
+function calcul_exposer ($id, $type, $reference) {
+	static $exposer;
 	static $ref_precedente;
 
+	// Que faut-il exposer ? Tous les elements de $reference
+	// ainsi que leur hierarchie ; on ne fait donc ce calcul
+	// qu'une fois (par squelette) et on conserve le resultat
+	// en static.
 	if ($reference<>$ref_precedente) {
 		$ref_precedente = $reference;
-		if ($id = $reference['id_article'])
-			$base = 'articles';
-		else if ($id = $reference['id_breve'])
-			$base = 'breves';
-		else if ($id = $reference['id_syndic'])
-			$base = 'syndic';
-		else if ($id = $reference['id_rubrique'])
-			$base = 'rubriques';
-		else if ($id = $reference['id_secteur'])
-			$base = 'rubriques';
 
-		unset ($hierarchie);
-		if ($base) {
-			if ($base != 'rubriques') {
-				$hierarchie[$base][$id] = true;
-				$id_element = 'id_'.ereg_replace('s$', '', $base);
-				$s = spip_fetch_array(spip_query(
-				"SELECT id_rubrique FROM spip_$base WHERE $id_element=$id"));
-				$id = $s['id_rubrique'];
-			}
-
-			$hierarchie['rubriques'][$id] = true;
-
-			while (true) {
-				$s = spip_fetch_array(spip_query(
-				"SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id"));
-				if ($id = $s['id_parent'])
-					$hierarchie['rubriques'][$id] = true;
-				else
-					break;
+		$exposer = array();
+		foreach ($reference as $element=>$id_element) {
+			if ($element == 'id_secteur') $element = 'id_rubrique';
+			if (ereg("id_(article|breve|rubrique|syndic)", $element, $regs)) {
+				$exposer[$element][$id_element] = true;
+				$table = "spip_".table_objet($regs[1]);
+				list ($id_rubrique) = spip_fetch_array(spip_query(
+				"SELECT id_rubrique FROM $table WHERE $element=$id_element"));
+				$hierarchie = substr(calculer_hierarchie($id_rubrique), 2);
+				foreach (split(',',$hierarchie) as $id_rubrique)
+					$exposer['id_rubrique'][$id_rubrique] = true;
 			}
 		}
 	}
 
-	if ($id = $pile['id_article'])
-		return $hierarchie['articles'][$id];
-	else if ($id = $pile['id_breve'])
-		return $hierarchie['breves'][$id];
-	else if ($id = $pile['id_syndic'])
-		return $hierarchie['syndic'][$id];
-	else if ($id = $pile['id_rubrique'])
-		return $hierarchie['rubriques'][$id];
-	else if ($id = $pile['id_secteur'])
-		return $hierarchie['rubriques'][$id];
-
+	// And the winner is...
+	return $exposer[$type][$id];
 }
 
 function calcul_generation ($generation) {
@@ -191,7 +169,21 @@ function calcul_branche ($generation) {
 	}
 }
 
-function query_parent($id_rubrique)
+
+# retourne la profondeur d'une rubrique
+
+function sql_profondeur($id)
+{
+	$n = 0;
+	while ($id) {
+		$n++;
+		$id = sql_parent($id);
+	}
+	return $n;
+}
+
+
+function sql_parent($id_rubrique)
 {
   $row = spip_fetch_array(spip_query("
 SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'
@@ -199,16 +191,24 @@ SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'
   return $row['id_parent'];
 }
 
-function query_auteurs($larticle)
+function sql_rubrique($id_article)
+{
+  $row = spip_fetch_array(spip_query("
+SELECT id_rubrique FROM spip_articles WHERE id_article='$id_article'
+"));
+  return $row['id_rubrique'];
+}
+
+function sql_auteurs($id_article)
 {
   $auteurs = "";
-  if ($larticle)
+  if ($id_article)
     {
       $result_auteurs = spip_query("
 SELECT	auteurs.nom, auteurs.email 
 FROM	spip_auteurs AS auteurs,
 	spip_auteurs_articles AS lien
-WHERE	lien.id_article=$larticle
+WHERE	lien.id_article=$id_article
  AND	auteurs.id_auteur=lien.id_auteur
 ");
 
@@ -226,7 +226,7 @@ WHERE	lien.id_article=$larticle
   return (!$auteurs) ? "" : join($auteurs, ", ");
 }
 
-function query_petitions($id_article)
+function sql_petitions($id_article)
 {
   return spip_fetch_array(spip_query("
 SELECT	id_article
@@ -236,7 +236,7 @@ WHERE	id_article='$id_article'"));
 
 # retourne le chapeau d'un article, et seulement s'il est publie
 
-function query_chapo($id_article)
+function sql_chapo($id_article)
 {
  return spip_fetch_array(spip_query("
 SELECT	chapo
@@ -248,7 +248,7 @@ WHERE	id_article='$id_article' AND statut='publie'
 // Calcul de la rubrique associee a la requete
 // (selection de squelette specifique)
 
-function cherche_rubrique_fond($contexte, $lang)
+function sql_rubrique_fond($contexte, $lang)
 {
   if ($id = $contexte['id_rubrique']) {
     if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique='$id'")))

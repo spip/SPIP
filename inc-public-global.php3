@@ -30,9 +30,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, $use_cache, $fond, $in
 		spip_log (($inclusion ? 'inclus':'calcul').' ('.spip_timer().
 		"): $chemin_cache");
 	} else {
-		$f = fopen($chemin_cache, "r") OR die ("Fichier cache illisible");
-		$page['texte'] = fread($f, filesize($chemin_cache));
-		fclose ($f);
+		lire_fichier ($chemin_cache, $page['texte']);
 		# spip_log ("cache $chemin_cache");
 	}
 
@@ -125,23 +123,25 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$page['texte'] = admin_page($use_cache, $page['texte']);
 	}
 
+	if ($chemin_cache) $page['cache'] = $chemin_cache;
+
 	return $page;
 }
 
-function terminer_public_global($use_cache) {
-	# Toutes les heures, menage d'un cache si le processus n'a rien recalcule.
-	# On nettoie celui de la page retournee car le systeme vient d'y acceder:
-	# il y a de bonnes chances qu'il l'ait toujours dans son cache.
-
-	if ($use_cache && (time() - lire_meta('date_purge_cache') > 3600)) {
-		ecrire_meta('date_purge_cache', time());
-#		retire_vieux_caches($cle, $delais);
-	}
+function terminer_public_global($use_cache, $chemin_cache='') {
 
 	// Mise a jour des fichiers langues de l'espace public
 	if ($GLOBALS['cache_lang_modifs']) {
 		include_ecrire('inc_lang.php3');
 		ecrire_caches_langues();
+	}
+
+	// Toutes les heures, menage du repertoire cache courant
+	if ($use_cache && (time() - lire_meta('date_purge_cache') > 3600)) {
+		if (eregi("^(CACHE.*/)[^/]*$", $chemin_cache, $regs)) {
+			include_ecrire('inc_invalideur.php3');
+			retire_vieux_caches($regs[1]);
+		}
 	}
 
 	// Calculs en background
@@ -158,12 +158,6 @@ function terminer_public_global($use_cache) {
 
 function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
 	global $delais, $lastmodified;
-
-/*
-static $pile_delais = '', $ptr_delais = 0;
-	$ptr_delais++;
-	$pile_delais[$ptr_delais] = $delais_inclus;
-*/
 
 	spip_log("Inclusion dans $cache_incluant");
 	$contexte = $contexte_inclus;
@@ -219,10 +213,11 @@ function admin_page($cached, $texte) {
 	return $texte;
 }
 
-function cherche_image_nommee($nom, $dossier) {
+function cherche_image_nommee($nom) {
+	$dossier = 'IMG';
 	$formats = array ('gif', 'jpg', 'png');
 	while (list(, $format) = each($formats)) {
-		$d = "$dossier$nom.$format";
+		$d = "$dossier/$nom.$format";
 		if (file_exists($d))
 			return ($d);
 	}

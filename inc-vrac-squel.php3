@@ -6,8 +6,7 @@
 //
 
 function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $id_mere) {
-	global  $flag_pcre;
-
+	global  $flag_pcre, $table_primary;
 	switch($nom_champ) {
 
 	// Introduction (d'un article, d'une breve ou d'un message de forum)
@@ -180,9 +179,12 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 			$fonctions = $filtres;
 		}
 
-		// Faut-il exposer ?
-		$code = '(calcul_exposer($Pile[$SP], $Pile[0]) ?'." '$on': '$off')";
+		$type_boucle = $boucles[$id_boucle]->type_requete;
+		$primary_key = $table_primary[$type_boucle];
 
+		$code = '(calcul_exposer('
+		.index_pile($id_boucle, $primary_key, $boucles)
+		.', "'.$primary_key.'", $Pile[0]) ?'." '$on': '$off')";
 		break;
 
 
@@ -191,14 +193,14 @@ function calculer_champ_divers($fonctions, $nom_champ, $id_boucle, &$boucles, $i
 	//
 	case 'EMBED_DOCUMENT':
 		$milieu = '
-		$lacible = ' .
-			index_pile($id_boucle, 'id_document', $boucles) .
-      '; 
-		if ($lacible) $doublons["documents"] = "," . intval($lacible); ';
-		$code = 'embed_document($lacible, \'' .
-		  ($fonctions ? join($fonctions, "|") : "") .
-			"', false)";
+		$lacible = '
+		. index_pile($id_boucle, 'id_document', $boucles)
+		. ';
+		$lacible = embed_document($lacible, \'' .
+		($fonctions ? join($fonctions, "|") : "") .
+		'\', false);';
 		$fonctions = "";
+		$code = '$lacible';
 		break;
 
 	// Debut et fin de surlignage auto des mots de la recherche
