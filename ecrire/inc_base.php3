@@ -982,11 +982,6 @@ function maj_base() {
 		}
 	}
 
-	if ($version_installee < 1.461) {
-		// recuperer les sites indiques 'sus'pendus : ils doivent etre 'off'
-		spip_query ("UPDATE spip_syndic SET syndication='off' WHERE syndication='sus'");
-	}
-
 	//
 	// Mettre a jour le numero de version installee
 	//

@@ -239,7 +239,7 @@ function creer_liste_indexation() {
 				$statut = "WHERE statut='publie'";
 				break;
 			case 'auteur':
-				$statut = "WHERE FIND_IN_SET(statut,'0minirezo,1comite')";
+				$statut = "WHERE statut IN ('0minirezo', '1comite')";
 				break;
 			default:
 				$statut = '';

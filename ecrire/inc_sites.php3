@@ -16,7 +16,7 @@ if ($ajouter_lien = $GLOBALS["ajouter_lien"]) {
 
 
 function recuperer_page($url) {
-	$http_proxy=lire_meta("http_proxy");
+	$http_proxy = lire_meta("http_proxy");
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
 
@@ -41,7 +41,7 @@ function recuperer_page($url) {
 			if (!$f) return;
 
 			if ($http_proxy) {
-				fputs($f, "GET http://$host:$port$path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
+				fputs($f, "GET http://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
 			}
 			else
 				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\nHost: $host\n\n");
@@ -106,12 +106,11 @@ function analyser_site($url) {
 }
 
 
-function syndic_a_jour($now_id_syndic, $statut = 'off'){
-
+function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	spip_query("UPDATE spip_syndic SET syndication='$statut', date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 	
-	$query="SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
-	$result=spip_query($query);
+	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
+	$result = spip_query($query);
 	if ($row = mysql_fetch_array($result))
 		$la_query=$row["url_syndic"];
 	else
@@ -485,7 +484,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 //
 
 function executer_une_syndication() {
-	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ".
+	$query_syndic = "SELECT * FROM spip_syndic WHERE syndication='sus' AND statut='publie' ".
 			"AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1";
 	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
@@ -498,7 +497,7 @@ function executer_une_syndication() {
 	if ($result_syndic = spip_query($query_syndic)) {
 		while ($row = mysql_fetch_array($result_syndic)) {
 			$id_syndic = $row["id_syndic"];
-			syndic_a_jour($id_syndic, 'off');
+			syndic_a_jour($id_syndic, 'sus');
 		}
 	}
 }
