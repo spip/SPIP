@@ -11,7 +11,6 @@ function inscription_stat($args, $filtres)
 
 function inscription_dyn($type) {
 
-echo status_inscription($type);
 	switch (status_inscription($type)) {
 		case 1: return '';
 		case 2: return '';
