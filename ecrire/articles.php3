@@ -1,6 +1,7 @@
 <?php
 
 include ("inc.php3");
+
 include_local ("inc_logos.php3");
 include_local ("inc_index.php3");
 include_local ("inc_mots.php3");
@@ -1137,97 +1138,8 @@ if ($flag_editable) {
 echo "<DIV ALIGN=left>";
 
 
-
-/////// Documents joints...
-function afficher_documents_non_inclus($row) {
-	global $nb_image, $connect_id_auteur, $flag_editable;
-	$id_article = $row['id_article'];
-	$id_document = $row['id_document'];
-	$titre = $row ['titre'];
-	$descriptif = $row['descriptif'];
-	$numero = $row['numero_document'];
-	$nom_fichier_preview = $row['nom_fichier_preview'];
-	$largeur = $row['largeur_preview'];
-	$hauteur = $row['hauteur_preview'];
-	$inclus = $row['inclus'];
-	$type = $row['type'];
-	$nom_fichier_doc = $row['nom_fichier_doc'];
-	$largeur_doc = $row['largeur_doc'];
-	$hauteur_doc = $row['hauteur_doc'];
-	$taille_fichier_doc = $row['taille_fichier_doc'];
-
-
-	if ($numero > $nb_image) $nb_image = $numero;
-	if (!$titre) $titre = "Document $numero";	
-
-	echo "<tr class='arial1'>";
-
-	
-	if ($flag_editable)
-		echo "<td><b><a href='document_edit.php3?id_document=$id_document&id_article=$id_article'><img src='IMG2/document.gif' align='middle' alt='[DOC]' width='16' height='12' border='0'> $titre</a></b></td>";
-	else 
-		echo "<td><b><img src='IMG2/document.gif' align='middle' alt='[DOC]' width='16' height='12' border='0'> $titre</b></td>";
-	
-	
-
-
-	echo "<td>";
-		if ($taille_fichier_doc > 0){
-			echo "<a href='../IMG/$nom_fichier_doc'>Voir le fichier ".strtoupper($type)."</a>";	
-		} else {
-			echo "$type";		
-		}
-	
-	echo "</td>";
-	
-	echo "<td>";
-		if ($taille_fichier_doc > 0){
-			echo taille_en_octets($taille_fichier_doc);
-		}
-		else {
-			echo "<font color='red'>Pas de document li&eacute;</font>";
-		}
-	echo "</td>";
-	echo "<td>";
-		if ($largeur_doc>0) echo "$largeur_doc x $hauteur_doc pixels";
-	echo "</td>";
-	
-	if ($flag_editable){
-		$hash = calculer_action_auteur("supp_def ".$id_document);
-
-		echo "<td align='right'>";
-		echo "<a href='../spip_image.php3?redirect=articles.php3&hash_id_auteur=$connect_id_auteur&hash=$hash&id_article=$id_article&def_supp=$id_document'>Supprimer ce document</a>";
-		echo "</td>";
-	}
-	echo "</tr>";
-}
-
-$query = "SELECT * FROM spip_documents WHERE id_article=$id_article AND inclus='non' ORDER BY numero_document";
-$result = mysql_query($query);
-
-if (mysql_num_rows($result)>0){
-
-	echo "<p><table width=100% cellpadding=3 cellspacing=0 border=0>";
-	echo "<tr width=100% background=''>";
-	echo "<td width=40%><hr noshade></td>";
-	echo "<td>&nbsp;&nbsp;</td>";
-	echo "<td><font size=1 face='verdana,arial,helvetica,sans-serif'><b>DOCUMENTS&nbsp;ASSOCI&Eacute;S</b></font></td>";
-	echo "<td>&nbsp;&nbsp;</td>";
-	echo "<td width=40%><hr noshade></td>";
-	echo "</tr></table>";
-	
-	while ($row = mysql_fetch_array($result))
-	{
-		echo "<table width=100% cellpadding=0 cellspacing=0 border=0>";
-		afficher_documents_non_inclus($row);
-		echo "</table>";
-	}
-}
-if ($flag_editable){
-	$nb_image ++;
-	echo "<div align='right'><b><a href='document_edit.php3?id_article=$id_article&new=oui&nb_image=$nb_image'>Ajouter un document li&eacute; &agrave; cet article</a></b></div>";
-}
-
+echo "$puce <b><a href=\"javascript:window.open('article_documents.php3?id_article=$id_article', 'docs_article', 'scrollbars=yes,resizable=yes,width=620,height=500'); void(0);\">\n";
+echo "Documents li&eacute;s &agrave; l'article</a></b>\n";
 
 
 //////////////////////////////////////////////////////
@@ -1242,7 +1154,6 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 	bouton("Demander la publication de cet article", "articles.php3?id_article=$id_article&statut_nouv=prop");
 	fin_cadre_relief();
 }
-
 
 echo "</TD></TR></TABLE>";
 
@@ -1287,7 +1198,6 @@ echo "<P align='left'>";
 $query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $debut,$total_afficher";
 $result_forum = mysql_query($query_forum);
 afficher_forum($result_forum, $forum_retour);
-	
 
 
 	if (!$debut) $debut = 0;
