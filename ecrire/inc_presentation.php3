@@ -1714,8 +1714,6 @@ function creer_colonne_droite($rubrique=""){
 	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
 
-
-
 	if ($flag_3_colonnes AND !$deja_colonne_droite) {
 		$deja_colonne_droite = true;
 
@@ -1727,8 +1725,8 @@ function creer_colonne_droite($rubrique=""){
 			$espacement = 37;
 			$largeur = 200;
 		}
-		
-		
+
+
 		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
 		echo "<td rowspan=1></td>";
 		echo "<td width=$espacement rowspan=2>&nbsp;</td>";
@@ -1785,8 +1783,6 @@ function debut_droite($rubrique="") {
 	global $flag_3_colonnes, $flag_centre_large;
 
 	if ($options == "avancees") {
-		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
-
 		// liste des articles bloques
 		if (lire_meta("articles_modif") != "non") {
 			$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND id_rubrique > 0 AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
@@ -1797,23 +1793,24 @@ function debut_droite($rubrique="") {
 				debut_cadre_formulaire('racine-24.gif');
 				echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2>";
 
-				echo _T('info_cours_edition').aide('artmodif');
+				echo _T('info_cours_edition')."&nbsp;:".aide('artmodif')."<br>";
 				while ($row = @spip_fetch_array($result)) {
 					$ze_article = $row['id_article'];
 					$ze_titre = typo($row['titre']);
-					echo "<div><font size=1><a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
+					echo "<br><a href='articles.php3?id_article=$ze_article'>$ze_titre</a>";
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
 						$lien = $clean_link;
 						$lien->addVar('debloquer_article', $ze_article);
-						echo " [<a href='". $lien->getUrl() ."'>"._T('lien_liberer')."</a>]</font>";
+						echo " [<a href='". $lien->getUrl() ."'>"._T('lien_liberer')."</a>]";
 					}
-					echo "</div>";
 				}
-
+				echo "</font>";
 				fin_cadre_formulaire();
 			}
 		}
+		
+		if (!$deja_colonne_droite) creer_colonne_droite($rubrique);
 	}
 
 	echo "<br></font>&nbsp;</td>";

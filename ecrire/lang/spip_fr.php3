@@ -386,7 +386,7 @@ $GLOBALS['i18n_fr'] = array(
 'info_contenu_articles' => 'Contenu des articles',
 'info_contribution' => 'contributions de forum',
 'info_copyright' => 'est un logiciel libre distribu&eacute; <a href=\'copyright_fr.html\'>sous licence GPL.</a>',
-'info_cours_edition' => 'En cours d\'&eacute;dition',
+'info_cours_edition' => 'Vos articles en cours d\'&eacute;dition',
 'info_creation_mots_cles' => 'Cr&eacute;ez et configurez ici les mots-cl&eacute;s du site',
 'info_creation_paragraphe' => '(Pour cr&eacute;er des paragraphes, laissez simplement des lignes vides.)',
 'info_creation_rubrique' => 'Avant de pouvoir &eacute;crire des articles,<BR> vous devez cr&eacute;er au moins une rubrique.<BR>',
@@ -448,7 +448,7 @@ $GLOBALS['i18n_fr'] = array(
 		&agrave; une mailing-list des r&eacute;dacteurs, l\'annonce des demandes de
 		publication et des validations d\'articles.',
 'info_fichiers_authent' => 'Fichiers d\'authentification &laquo;&nbsp;.htpasswd&nbsp;&raquo;',
-'info_fini' => 'C\\\'est fini !',
+'info_fini' => 'C\'est fini !',
 'info_fonctionnement_forum' => 'Fonctionnement du forum&nbsp;:',
 'info_format_image' => 'Formats d\'images pouvant &ecirc;tre utilis&eacute;es pour cr&eacute;er des vignettes&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'format non d&eacute;fini',
@@ -1133,10 +1133,10 @@ les images utilis&eacute;es dans les articles et les rubriques.',
 'texte_en_cours_validation' => 'Les articles et br&egrave;ves ci-dessous sont propos&eacute;s &agrave; la publication. N\'h&eacute;sitez pas &agrave; donner votre avis gr&acirc;ce aux forums qui leur sont attach&eacute;s.',
 'texte_enrichir_mise_a_jour' => 'Vous pouvez enrichir la mise en page de votre texte en utilisant des &laquo;&nbsp;raccourcis typographiques&nbsp;&raquo;.',
 'texte_erreur_mise_niveau_base' => 'Erreur de base de donn&eacute;es lors de la mise &agrave; niveau.
-						L\'image <B>@fichier@</B> n\'est pas pass&eacute;e (article @id_article@).\\n\\n
-						Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
-						niveau, et enfin v&eacute;rifiez que les images apparaissent
-						toujours dans les articles.',
+		L\'image <B>@fichier@</B> n\'est pas pass&eacute;e (article @id_article@).
+		Notez bien cette r&eacute;f&eacute;rence, r&eacute;essayez la mise &agrave;
+		niveau, et enfin v&eacute;rifiez que les images apparaissent
+		toujours dans les articles.',
 'texte_fichier_authent' => '<b>SPIP doit-il cr&eacute;er les fichiers sp&eacute;ciaux <tt>.htpasswd</tt>
 		et <tt>.htpasswd-admin</tt> dans le r&eacute;pertoire <tt>ecrire/data/</tt> ?</b><p>
 		Ces fichiers peuvent vous servir &agrave; restreindre l\'acc&egrave;s aux auteurs
@@ -1230,30 +1230,30 @@ les images utilis&eacute;es dans les articles et les rubriques.',
 'texte_publication_articles_post_dates' => 'Quel comportement SPIP doit-il adopter face aux articles dont la
 		date de publication a &eacute;t&eacute; fix&eacute;e &agrave; une
 		&eacute;ch&eacute;ance future&nbsp;?',
-'texte_rappel_selection_champs' => '[N\'oubliez pas de s&eacute;lectionner correctement ce champ.]\\n',
+'texte_rappel_selection_champs' => '[N\'oubliez pas de s&eacute;lectionner correctement ce champ.]',
 'texte_recalcul_page' => 'Si vous voulez
 recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-y le bouton &laquo; recalculer &raquo;.',
 'texte_recapitiule_liste_documents' => 'Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute; dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
 'texte_recuperer_base' => 'R&eacute;parer la base de donn&eacute;es',
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
 'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
-'texte_requetes_echouent' => '<B>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
+'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
 		syst&eacute;matiquement et sans raison apparente, il est possible
 		que ce soit &agrave; cause de la base de donn&eacute;es
-		elle-m&ecirc;me.</B>\\n\\n
+		elle-m&ecirc;me.</b><p>
 		MySQL dispose d\'une facult&eacute; de r&eacute;paration de ses
 		tables lorsqu\'elles ont &eacute;t&eacute; endommag&eacute;es par
 		accident. Vous pouvez ici tenter cette r&eacute;paration&nbsp;; en
 		cas d\'&eacute;chec, conservez une copie de l\'affichage, qui contient
-		peut-&ecirc;tre des indices de ce qui ne va pas...\\n\\n
+		peut-&ecirc;tre des indices de ce qui ne va pas...<p>
 		Si le probl&egrave;me persiste, prenez contact avec votre
-		h&eacute;bergeur.\\n',
+		h&eacute;bergeur.<p>',
 'texte_restaurer_base' => 'Restaurer le contenu d\'une sauvegarde de la base',
 'texte_restaurer_sauvegarde' => 'Cette option vous permet de restaurer une sauvegarde pr&eacute;c&eacute;demment
-effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
-plac&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.
-Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pertes &eacute;ventuelles, sont
-irr&eacute;versibles.</b>',
+		effectu&eacute;e de la base. A cet effet, le fichier contenant la sauvegarde doit avoir &eacute;t&eacute;
+		plac&eacute; dans le r&eacute;pertoire <i>ecrire/data/</i>.
+		Soyez prudent avec cette fonctionnalit&eacute;&nbsp;: <b>les modifications, pertes &eacute;ventuelles, sont
+		irr&eacute;versibles.</b>',
 'texte_sauvegarde' => 'Sauvegarder le contenu de la base',
 'texte_sauvegarde_base' => 'Sauvegarder la base',
 'texte_sauvegarde_compressee' => 'La sauvegarde sera faite dans le fichier non compress&eacute; <b>ecrire/data/dump.xml</b>.',
@@ -1343,7 +1343,7 @@ avez fait des modifications importantes de graphisme ou de structure du site. ',
 'titre_groupe_mots' => 'GROUPE DE MOTS :',
 'titre_image_admin_article' => 'Vous pouvez administrer cet article',
 'titre_image_administrateur' => 'Administrateur',
-'titre_image_aide' => 'De l\\\'aide sur cet &eacute;l&eacute;ment',
+'titre_image_aide' => 'De l\'aide sur cet &eacute;l&eacute;ment',
 'titre_image_auteur_supprime' => 'Auteur supprim&eacute;',
 'titre_image_redacteur' => 'R&eacute;dacteur sans acc&egrave;s',
 'titre_image_redacteur_02' => 'R&eacute;dacteur',
