@@ -88,6 +88,7 @@ function afficher_liens_calendrier($lien, $icone, $texte) {
 		$webcal = ereg_replace("https?://", "webcal://", $adresse_site);
 		icone_horizontale (_T('ical_methode_webcal'), "$webcal/$lien", "calendrier-24.gif");
 	echo "</div>";
+	echo "<div style='clear:both;'></div>\n";
 	echo fin_cadre_enfonce();
 }
 
