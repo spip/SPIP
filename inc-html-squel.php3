@@ -162,15 +162,30 @@ function parser_param($params, &$result) {
 			$param = $args[1] . $m[1];
 			if (($param == 'tout') OR ($param == 'tous')) {
 				$result->tout = true;
+				unset ($param);
 			}
 			else if ($param == 'plat') {
 				$result->plat = true;
+				unset ($param);
 			}
-// Boucle hierarchie, supprimer le critere id_article/id_rubrique/id_syndic
-// qui est superfetatoire (mais indique dans la doc)
-			else  if (($type != 'hierarchie') ||
-				  (!ereg('^id_(article|syndic|rubrique)$', $param))) {
-				 $params2[] = ($param == 'unique' ? 'doublons' : $param); }
+
+			// Boucle hierarchie, analyser le critere id_article - id_rubrique
+			// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
+			// forcer {tout} pour avoir la rubrique mere...
+			else if ($type == 'hierarchie') {
+				if ($param == 'id_article' OR $param == 'id_syndic') {
+					$result->tout = true;
+					unset ($param);
+				} else if ($param == 'id_rubrique')
+					unset ($param);
+			}
+
+			// synonyme
+			if ($param == 'unique') $param = 'doublons';
+
+			// l'ajouter
+			if ($param)
+				$params2[] = $param;
 		}
 		else {
 			if ($args[1] == '"') {
