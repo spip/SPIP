@@ -45,7 +45,7 @@ function creer_base() {
 		nom_site tinytext NOT NULL,
 		url_site VARCHAR(255) NOT NULL,
 		extra longblob NULL,
-		index ENUM('', '1', 'non', 'oui', 'indx') DEFAULT '' NOT NULL,
+		idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL,
 		id_version int unsigned DEFAULT '0' NOT NULL,
 		PRIMARY KEY (id_article),
 		KEY id_rubrique (id_rubrique),
@@ -55,7 +55,7 @@ function creer_base() {
 		KEY statut (statut, date),
 		KEY url_site (url_site),
 		KEY date_modif (date_modif),
-		KEY index (index))";
+		KEY idx (idx))";
 	$result = spip_query($query);
 
 	$query = "CREATE TABLE spip_auteurs (
