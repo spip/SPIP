@@ -193,8 +193,9 @@ function filtres_arglist($args, $p) {
 	while (ereg('([^,]+),?(.*)$', $args, $regs)) {
 		$arg = trim($regs[1]);
 		if ($arg) {
-			if ($arg[0] =='#') {
-				$p->nom_champ = substr($arg,1);
+		  if (ereg("^" . NOM_DE_CHAMP, $arg, $regs2)) {
+				$p->nom_boucle = $regs2[2];
+				$p->nom_champ = $regs2[3];
 				$arg = calculer_champ($p);
 			} else if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
