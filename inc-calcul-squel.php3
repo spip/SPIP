@@ -1952,7 +1952,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		$contexte["id_breve"] = $row["id_breve"];
 		$contexte["id_rubrique"] = $row["id_rubrique"];
 		$contexte["id_secteur"] = $row["id_rubrique"];
-		$contexte["date"] = $row["date"];
+		$contexte["date"] = $row["date_heure"];
 		if ($instance->doublons == "oui") $id_doublons["breves"] .= ",".$row["id_breve"];
 		';
 		break;
@@ -2026,7 +2026,7 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 	case 'signatures':
 		$texte .= '
 		$contexte["id_signature"] = $row["id_signature"];
-		$contexte["date"] = $row["date"];
+		$contexte["date"] = $row["date_time"];
 		if ($instance->doublons == "oui") $id_doublons["signatures"] .= ",".$row["id_signature"];
 		';
 		break;
