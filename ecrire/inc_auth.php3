@@ -106,10 +106,20 @@ function auth() {
 			}
 		}
 	}
-	// Si echec de la pose du cookie, signaler et demander login / mdp
-	else if ($GLOBALS['essai_cookie'] == "oui") {
-		@header("Location: ./login.php3?echec_cookie=oui");
-		exit;
+
+	// peut-etre sommes-nous en auth http?
+	if ($PHP_AUTH_USER && $PHP_AUTH_PW) {
+		if ($GLOBALS['logout'] == $PHP_AUTH_USER)
+			ask_php_auth($auth_text_failure);
+		else {
+			$auth_login = $PHP_AUTH_USER;
+			$auth_mdpass = md5($PHP_AUTH_PW);
+			$check_mdpass = " AND pass='$auth_mdpass'";
+			$auth_can_disconnect = true;
+			$PHP_AUTH_PW = '';
+			$_SERVER['PHP_AUTH_PW'] = '';
+			$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
+		}
 	}
 
 	// Si pas authentifie, demander login / mdp
@@ -118,27 +128,12 @@ function auth() {
 		exit;
 	}
 
-
-
-/*	else if (($GLOBALS['logout'] == $PHP_AUTH_USER) || !$PHP_AUTH_USER) {
-		ask_php_auth($auth_text_failure);
-	}
-	else {
-		$auth_login = $PHP_AUTH_USER;
-		$auth_mdpass = md5($PHP_AUTH_PW);
-		$auth_can_disconnect = true;
-		// Securite, ne pas garder la valeur en memoire
-		$PHP_AUTH_PW = '';
-		$_SERVER['PHP_AUTH_PW'] = '';
-		$HTTP_SERVER_VARS['PHP_AUTH_PW'] = '';
-	}*/
-
 	//
 	// Chercher le login dans la table auteurs
 	//
 	
 	$auth_login = addslashes($auth_login);
-	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
+	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'$checkmdpass";
 	$result = @spip_query($query);
 	
 	if (!@mysql_num_rows($result)) {
