@@ -92,19 +92,13 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 		$col++;
 		if ($spip_lang == "fr") {
 			$ret .= bouton_barre_racc ("javascript:barre_raccourci('&laquo;','&raquo;',$champ)", "barre-guillemets.png", "Insérer des &laquo; guillemets fran&ccedil;ais &raquo;", $formulaire, $texte);
-			//$ret .= "<a href=\"javascript:barre_raccourci('&laquo;','&raquo;',$champ, 'Insérer des &laquo; guillemets fran&ccedil;ais &raquo;')\"><img src='".($flag_ecrire ? "" : "ecrire/")."img_pack/barre-guillemets.png' border='0' width='24' height='24' title='Placer entre guillemets'></a>";
-			if (test_claret()) {
-				$ret .= "&nbsp;&nbsp;&nbsp;";
-				$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "barre-oe-maj.png", "Ins&eacute;rer un E-dans-l-O majuscule", $formulaire, $texte);
-				$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "barre-oe.png", "Ins&eacute;rer un E-dans-l-O", $formulaire, $texte);
-				$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "barre-a-grave.png", "Ins&eacute;rer un A accent grave", $formulaire, $texte);
-				$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "barre-e-aigu.png", "Ins&eacute;rer un E accent aigu", $formulaire, $texte);
-			}
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&OElig;',$champ)", "barre-oe-maj.png", "Ins&eacute;rer un E-dans-l-O majuscule", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&oelig;',$champ)", "barre-oe.png", "Ins&eacute;rer un E-dans-l-O", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Agrave;',$champ)", "barre-a-grave.png", "Ins&eacute;rer un A accent grave", $formulaire, $texte);
+			$ret .= bouton_barre_racc ("javascript:barre_inserer('&Eacute;',$champ)", "barre-e-aigu.png", "Ins&eacute;rer un E accent aigu", $formulaire, $texte);
 		}
-		if (test_claret()) {
-			$ret .= "&nbsp;";
-			$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "barre-euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
-		}
+		$ret .= "&nbsp;";
+		$ret .= bouton_barre_racc ("javascript:barre_inserer('&euro;',$champ)", "barre-euro.png", "Ins&eacute;rer le symbole euro", $formulaire, $texte);
 		$ret .= "</td>";
 		
 		$ret .= "<td> &nbsp; </td>";
@@ -125,8 +119,6 @@ function afficher_barre($formulaire='',$texte='', $forum=false) {
 }
 
 function afficher_claret() {
-	if (test_claret()) {
 		return "onselect='storeCaret(this);' onclick='storeCaret(this);' onkeyup='storeCaret(this);' ondbclick='storeCaret(this);'";
-	}
 }
 ?>
