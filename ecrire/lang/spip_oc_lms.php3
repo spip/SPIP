@@ -576,7 +576,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_dans_rubrique' => 'Dins la rubrica:',
 'info_date_publication_anterieure' => 'Data anteriora de publicacion:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENT DE QUEU SIT:',
-'info_delet_mots_cles' => 'Avetz demandat de suprimir lo mot clau<B>@titre_mot@</b> (@type_mot@). Queu mot clau es liat a <b>@texte_lie@</b>. Devetz confirmar quela decision:',
+'info_delet_mots_cles' => 'Avetz demandat de suprimir lo mot clau
+<B>@titre_mot@</b> (@type_mot@). Queu mot clau es liat a
+ <b>@texte_lie@</b>. Devetz confirmar quela decision:',
 'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_deplier' => 'Desplejar',
 'info_derniere_etape' => 'Darriera estapa: <B>Quo es \'chabat!',
@@ -944,6 +946,14 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'info_tous_resultats_enregistres' => '[tots los resultats son registrats]',
 'info_tout_afficher' => 'Afichar tot',
 'info_tout_site' => 'Tot lo sit ',
+'info_tout_site1' => 'Lenga de l\'article.',
+'info_tout_site2' => 'An pas revirat l\'article dins quela lenga.',
+'info_tout_site3' => 'An revirat l\'article dins quela lenga, mas an portat puei de las modificacions a l\'article de refer&eacute;ncia. Chau actualizar la revirada.',
+'info_tout_site4' => 'An revirat l\'article dins quela lenga, e la revirada es actualizada.',
+'info_tout_site5' => 'Article originau.',
+'info_tout_site6' => '<b>Atencion:</b> sonque los articles originaus s\'afichan.
+Las reviradas s\'ass&ograve;cian a l\'originau,
+una color indica lor estat:',
 'info_travail_colaboratif' => 'Trabalh collaboratiu subre los articles',
 'info_travaux_texte' => 'Queu sit es pas enquera configurat. Tornatz mai tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
@@ -1022,6 +1032,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'item_non_utiliser_breves' => 'Pas utilizar las brevas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Pas utilizar la configuracion avan&ccedil;ada daus grops de mots claus',
 'item_non_utiliser_moteur_recherche' => 'Pas utilizar lo motor',
+'item_non_utiliser_moteur_recherche_forum' => 'Pas indexar los forums',
 'item_non_utiliser_mots_cles' => 'Pas utilizar los mots claus',
 'item_non_utiliser_syndication' => 'Pas utilizar la sindicacion automatica',
 'item_nouvel_auteur' => 'Autor nu&ograve;u',
@@ -1035,6 +1046,7 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'item_utiliser_breves' => 'Utilizar las brevas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizar la configuracion avan&ccedil;ada daus grops de mots claus',
 'item_utiliser_moteur_recherche' => 'Utilizar lo motor de recercha',
+'item_utiliser_moteur_recherche_forum' => 'Indexar los forums',
 'item_utiliser_mots_cles' => 'Utilizar los mots claus',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
@@ -1207,6 +1219,10 @@ Quauques auberjadors autorizan pas l\'enviament d\'e-mails dempuei lors servidor
 'module_texte_explicatif' => 'Podetz inserir las escorchieras seguentas dins las esqueletas de v&ograve;stre sit public. Se revirar&aacute;n automaticament dins las diferentas lengas per las qualas exist&iacute;s un fichier de lenga.',
 'module_texte_traduction' => 'Lo fichier de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
+
+
+// N
+'navigateur_pas_redirige' => 'Se v&ograve;stre navigador es pas redirigit, clicatz aic&iacute; per contunhar.',
 
 
 // O

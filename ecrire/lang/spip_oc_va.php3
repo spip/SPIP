@@ -166,10 +166,6 @@ la documentacion d\'SPIP</a>.',
 
 // C
 'calendrier_synchro' => 'S\'utilizatz un logiciau d\'agenda compatible <b>iCal</b> (Apple iCal, Mozilla Calendar, Ximian Evolution, KOrganizer...), lo po&egrave;tz sincronizar amb l\'actualitat dau sit.',
-'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo chalendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privaa d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo chalendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 
 
 // D
@@ -554,7 +550,6 @@ Merc&eacute; per v&ograve;stra participacion
 'info_comment_lire_tableau' => 'Coma legir aqueu tabl&egrave;u',
 'info_config_suivi' => 'S\'aquela adrei&ccedil;a corresp&ograve;nd a una lista de corrier, po&egrave;tz indicar &ccedil;ai sos l\'adrei&ccedil;a ont los participants au sit se p&ograve;on inscriure. Aquela adrei&ccedil;a p&ograve;t &egrave;stre una URL (per exemple la pagina d\'inscripcion a la lista per lo web), o una adrei&ccedil;a e-mail tenent un subj&egrave;cte especific (per exemple: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'Po&egrave;tz recebre automaticament, per e-mail, los anoncis pertochant l\'activitat editoriala d\'aqueu sit. Per aqu&ograve; faire, vos po&egrave;tz abonar a la lista de corrier seguenta:',
-'info_config_suivi_lien' => '<NEW> <NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
 'info_confirmer_passe' => 'Confirmar aqueu mot de santa Clara nov&egrave;u:',
 'info_connexion_base' => 'Segonda estapa: <B>Assai de connexion a la basa</b>',
 'info_connexion_ldap_ok' => 'La connexion LDAP a abotit.</b><P> Po&egrave;tz passar a l\'estapa seguenta.',
@@ -581,7 +576,9 @@ Merc&eacute; per v&ograve;stra participacion
 'info_dans_rubrique' => 'Dins la rubrica:',
 'info_date_publication_anterieure' => 'Data anteriora de publicacion:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENT D\'AQUEU SIT:',
-'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau<B>@titre_mot@</b> (@type_mot@). Aqueu mot clau es liat a <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
+'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
+<B>@titre_mot@</b> (@type_mot@). Aqueu mot clau es liat a
+ <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
 'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_deplier' => 'Desplejar',
 'info_derniere_etape' => 'Darriera estapa: <B>Aqu&ograve;\'s achabat!',
@@ -949,6 +946,14 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'info_tous_resultats_enregistres' => '[tots los resultats son registrats]',
 'info_tout_afficher' => 'Afichar tot',
 'info_tout_site' => 'Tot lo sit ',
+'info_tout_site1' => 'Lenga de l\'article.',
+'info_tout_site2' => 'An pas revirat l\'article dins aquela lenga.',
+'info_tout_site3' => 'An revirat l\'article dins aquela lenga, mas an portat puei de modificacions a l\'article de refer&eacute;ncia. Chau actualizar la reviraa.',
+'info_tout_site4' => 'An revirat l\'article dins aquela lenga, e la reviraa es actualizaa.',
+'info_tout_site5' => 'Article originau.',
+'info_tout_site6' => '<b>Atencion:</b> mas que los articles originaus s\'afichan.
+Las reviraas s\'ass&ograve;cian a l\'originau,
+una color indica lor estat:',
 'info_travail_colaboratif' => 'Trabalh collaboratiu sobre los articles',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz mai tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
@@ -1027,6 +1032,7 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'item_non_utiliser_breves' => 'Pas utilizar las br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Pas utilizar la configuracion avan&ccedil;aa dels grops de mots claus',
 'item_non_utiliser_moteur_recherche' => 'Pas utilizar lo motor',
+'item_non_utiliser_moteur_recherche_forum' => 'Pas indexar los forums',
 'item_non_utiliser_mots_cles' => 'Pas utilizar los mots claus',
 'item_non_utiliser_syndication' => 'Pas utilizar la sindicacion automatica',
 'item_nouvel_auteur' => 'Autor n&ograve;u',
@@ -1040,6 +1046,7 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'item_utiliser_breves' => 'Utilizar las br&egrave;vas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizar la configuracion avan&ccedil;aa dels grops de mots claus',
 'item_utiliser_moteur_recherche' => 'Utilizar lo motor de rec&egrave;rcha',
+'item_utiliser_moteur_recherche_forum' => 'Indexar los forums',
 'item_utiliser_mots_cles' => 'Utilizar los mots claus',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
@@ -1212,6 +1219,10 @@ Quauques auberjaors autorizan pas l\'enviament d\'e-mails dempuei lors serviors:
 'module_texte_explicatif' => 'Po&egrave;tz inserir las acorchas seguentas dins las esqueletas de v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins las diferentas lengas per las qualas exist&iacute;s un fichier de lenga.',
 'module_texte_traduction' => 'Lo fichier de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
+
+
+// N
+'navigateur_pas_redirige' => 'Se v&ograve;stre navigaor es pas redirigit, clicatz aic&iacute; per contunhar.',
 
 
 // O
@@ -1564,7 +1575,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_breve_refusee' => 'Br&egrave;va refusaa',
 'titre_breves' => 'Las br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar los articles',
-'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las reviraas per aquela lenga',
+'titre_cadre_afficher_traductions' => '<MODIF> Afichar l\'estat de las reviraas per aquela lenga',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',
 'titre_cadre_forum_administrateur' => 'Forum privat dels administrators',
 'titre_cadre_forum_interne' => 'Forum int&egrave;rne',
@@ -1598,7 +1609,6 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'titre_langue_trad_article' => 'LENGA E REVIRAAS DE L\'ARTICLE',
 'titre_les_articles' => 'LOS ARTICLES',
 'titre_liens_entrants' => 'Los liams intrants per encuei',
-'titre_liens_entrants_total' => '<NEW> <NEW> <NEW> Les liens entrants depuis le d&eacute;but',
 'titre_mots_cles' => 'MOTS CLAUS',
 'titre_mots_cles_dans_forum' => 'Mots claus dins los forums dau sit public',
 'titre_mots_tous' => 'Los mots claus',
@@ -1658,7 +1668,16 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Pas pus liar aquest article a sas reviraas ',
 'trad_lier' => 'Aquest article es una reviraa de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una reviraa nov&egrave;la d\'aquest article',
-'trad_reference' => '(article de refer&eacute;ncia)'
+'trad_reference' => '(article de refer&eacute;ncia)',
+
+
+// PLUS_UTILISE
+'calendrier_synchro_lien' => 'Anar qu&egrave;rre lo fichier <i>iCal</i>',
+'calendrier_synchro_prive' => 'Lo chalendier seguent, d\'usatge estrictament personau, vos informa sobre l\'activitat editoriala privaa d\'aqueu sit (pr&egrave;tzfaches et rend&egrave;tz-vos personaus, articles et br&egrave;vas prepausats...).',
+'calendrier_synchro_public' => 'Lo chalendier seguent vos permet de s&egrave;gre l\'activitat publica d\'aqueu sit (articles e br&egrave;vas publicats).',
+'calendrier_synchro_sync' => 'Sincronizar lo fichier <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
+'info_config_suivi_lien' => '<NEW> <NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.',
+'titre_liens_entrants_total' => '<NEW> <NEW> <NEW> Les liens entrants depuis le d&eacute;but'
 
 );
 

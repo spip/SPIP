@@ -73,7 +73,8 @@ while (list(,$type) = each($types)) {
 debut_cadre_relief();
 
 function jauge($couleur,$pixels) {
-	echo "<img src='img_pack/jauge-$couleur.gif' height='10' width='$pixels' alt='$couleur' />";
+	if ($pixels)
+		echo "<img src='img_pack/jauge-$couleur.gif' height='10' width='$pixels' alt='$couleur' />";
 }
 
 echo "<table>";

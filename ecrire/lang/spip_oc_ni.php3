@@ -926,10 +926,14 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'info_tous_resultats_enregistres' => '[toi lu resultats son registrats]',
 'info_tout_afficher' => 'Far par&eacute;isser tot',
 'info_tout_site' => 'Tot lo sit',
-'info_tout_site1' => '<NEW> Langue de l\'article.',
-'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
-'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
-'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
+'info_tout_site1' => 'Lenga de l\'article.',
+'info_tout_site2' => 'An pas revirat l\'article dins aquela lenga.',
+'info_tout_site3' => 'An revirat l\'article dins aquela lenga, mas an portat pu&egrave;i de modificacions a l\'article de referen&ccedil;a. Cau actualisar la revirada.',
+'info_tout_site4' => 'An revirat l\'article dins aquela lenga, e la revirada es actualisada.',
+'info_tout_site5' => 'Article originau.',
+'info_tout_site6' => '<b>Atencion:</b> solament lu articles originaus s\'afichan.
+Li reviradas s\'ass&ograve;cian a l\'originau,
+una color indica lo sieu estat:',
 'info_travail_colaboratif' => 'Travalh collaboratiu sus lu articles',
 'info_travaux_texte' => 'Aqueu sit es pas encara configurat. Tornatz plus tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
@@ -1008,7 +1012,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'item_non_utiliser_breves' => 'Utilisar pas li br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Utilisar pas la configuracion avan&ccedil;ada dei grops de m&ograve;ts claus',
 'item_non_utiliser_moteur_recherche' => 'Utilisar pas lo motor',
-'item_non_utiliser_moteur_recherche_forum' => '<NEW> Ne pas indexer les forums',
+'item_non_utiliser_moteur_recherche_forum' => 'Indexar pas lu forums',
 'item_non_utiliser_mots_cles' => 'Utilisar pas lu m&ograve;ts claus',
 'item_non_utiliser_syndication' => 'Utilisar pas la sindicacion automatica',
 'item_nouvel_auteur' => 'Nov&egrave;l autor',
@@ -1022,7 +1026,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 'item_utiliser_breves' => 'Utilisar li br&egrave;vas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilisar la configuracion avan&ccedil;ada dei grops de m&ograve;ts claus',
 'item_utiliser_moteur_recherche' => 'Utilisar lo motor de recerca',
-'item_utiliser_moteur_recherche_forum' => '<NEW> Indexer les forums',
+'item_utiliser_moteur_recherche_forum' => 'Indexar lu forums',
 'item_utiliser_mots_cles' => 'Utilisar lu m&ograve;ts claus',
 'item_utiliser_syndication' => 'Utilisar la sindicacion automatica',
 'item_visiteur' => 'visitaire',
@@ -1198,7 +1202,7 @@ I son d\'aubergadors que desactivan lo mandad&iacute;s d\'e-mails desp&iacute; l
 
 
 // N
-'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
+'navigateur_pas_redirige' => 'Se lo v&ograve;stre navigador es pas redirigit, clicatz aqu&iacute; per continuar.',
 
 
 // O
@@ -1539,7 +1543,7 @@ s\'av&egrave;tz bravament modificat lo grafisme &ograve; l\'estructura dau sit.'
 'titre_breve_refusee' => 'Br&egrave;va refudada',
 'titre_breves' => 'Li br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar lu articles',
-'titre_cadre_afficher_traductions' => 'Afichar l\'estat dei reviradas per aqu&egrave;la lenga',
+'titre_cadre_afficher_traductions' => '<MODIF> Afichar l\'estat dei reviradas per aqu&egrave;la lenga',
 'titre_cadre_ajouter_auteur' => 'AJUSTAR UN AUTOR :',
 'titre_cadre_forum_administrateur' => 'Forum privat dei administrators',
 'titre_cadre_forum_interne' => 'Forum interne',

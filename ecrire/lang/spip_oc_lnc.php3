@@ -576,7 +576,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_dans_rubrique' => 'Dins la rubrica&nbsp;:',
 'info_date_publication_anterieure' => 'Data anteriora de publicacion&nbsp;:',
 'info_date_referencement' => 'DATA DE REFER&Eacute;NCIAMENT D\'AQUEL SIT:',
-'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau<B>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
+'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
+<B>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
+ <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
 'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_deplier' => 'Desplegar',
 'info_derniere_etape' => 'Darri&egrave;ra estapa: <B>Es acabat!',
@@ -944,10 +946,14 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_tous_resultats_enregistres' => '[totes los resultats son registrats]',
 'info_tout_afficher' => 'O afichar tot',
 'info_tout_site' => 'Tot lo sit ',
-'info_tout_site1' => '<NEW> Langue de l\'article.',
-'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
-'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
-'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
+'info_tout_site1' => 'Lenga de l\'article.',
+'info_tout_site2' => 'An pas revirat l\'article dins aquela lenga.',
+'info_tout_site3' => 'An revirat l\'article dins aquela lenga, mas an portat pu&egrave;i de modificacions a l\'article de refer&eacute;ncia. Cal actualizar la revirada.',
+'info_tout_site4' => 'An revirat l\'article dins aquela lenga, e la revirada es actualizada.',
+'info_tout_site5' => 'Article original.',
+'info_tout_site6' => '<b>Atencion:</b> sonque los articles originals s\'afichan.
+Las reviradas s\'ass&ograve;cian a l\'original,
+una color indica lor estat:',
 'info_travail_colaboratif' => 'Trabalh collaboratiu suls articles',
 'info_travaux_texte' => 'Aquel sit es pas encara configurat. Tornatz mai tard...',
 'info_travaux_titre' => 'Sit en &ograve;bras',
@@ -1026,6 +1032,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'item_non_utiliser_breves' => 'Utilizar pas las br&egrave;vas',
 'item_non_utiliser_config_groupe_mots_cles' => 'Utilizar pas la configuracion avan&ccedil;ada dels grops de mots claus',
 'item_non_utiliser_moteur_recherche' => 'Utilizar pas lo motor',
+'item_non_utiliser_moteur_recherche_forum' => 'Indexar pas los forums',
 'item_non_utiliser_mots_cles' => 'Utilizar pas los mots claus',
 'item_non_utiliser_syndication' => 'Utilizar pas la sindicacion automatica',
 'item_nouvel_auteur' => 'Autor n&ograve;u',
@@ -1039,6 +1046,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'item_utiliser_breves' => 'Utilizar las br&egrave;vas',
 'item_utiliser_config_groupe_mots_cles' => 'Utilizar la configuracion avan&ccedil;ada dels grops de mots claus',
 'item_utiliser_moteur_recherche' => 'Utilizar lo motor de rec&egrave;rca',
+'item_utiliser_moteur_recherche_forum' => 'Indexar los forums',
 'item_utiliser_mots_cles' => 'Utilizar los mots claus',
 'item_utiliser_syndication' => 'Utilizar la sindicacion automatica',
 'item_visiteur' => 'vesitaire',
@@ -1211,6 +1219,10 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'module_texte_explicatif' => 'Pod&egrave;tz inserir las acorchas seguentas dins las esqueletas de v&ograve;stre sit public. Se revirar&agrave;n automaticament  dins las diferentas lengas per las qualas exist&iacute;s un fichi&egrave;r de lenga.',
 'module_texte_traduction' => 'Lo fichi&egrave;r de lenga &laquo;@module@&raquo; es disponible en:',
 'mois_non_connu' => 'non conegut',
+
+
+// N
+'navigateur_pas_redirige' => 'Se v&ograve;stre navigador es pas redirigit, clicatz aic&iacute; per contunhar.',
 
 
 // O
@@ -1563,7 +1575,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'titre_breve_refusee' => 'Br&egrave;va refusada',
 'titre_breves' => 'Las br&egrave;vas',
 'titre_cadre_afficher_article' => 'Afichar los articles',
-'titre_cadre_afficher_traductions' => 'Afichar l\'estat de las reviradas per aquela lenga',
+'titre_cadre_afficher_traductions' => '<MODIF> Afichar l\'estat de las reviradas per aquela lenga',
 'titre_cadre_ajouter_auteur' => 'APONDRE UN AUTOR:',
 'titre_cadre_forum_administrateur' => 'Forum privat dels administrators',
 'titre_cadre_forum_interne' => 'Forum int&egrave;rne',

@@ -933,6 +933,14 @@ Dankon pro via partopreno
 'info_tous_resultats_enregistres' => '[&#265;iuj rezultoj estas registritaj]',
 'info_tout_afficher' => '&#264;ion afi&#349;i',
 'info_tout_site' => 'La tuta teksejo',
+'info_tout_site1' => '<NEW> Langue de l\'article.',
+'info_tout_site2' => '<NEW> L\'article n\'a pas &eacute;t&eacute; traduit dans cette langue.',
+'info_tout_site3' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, mais des modifications ont &eacute;t&eacute; apport&eacute;es par la suite &agrave; l\'article de r&eacute;f&eacute;rence. La traduction doit &ecirc;tre mise &agrave; jour.',
+'info_tout_site4' => '<NEW> L\'article a &eacute;t&eacute; traduit dans cette langue, et la traduction est &agrave; jour.',
+'info_tout_site5' => '<NEW> Article original.',
+'info_tout_site6' => '<NEW> <b>Attention&nbsp;:</b> seuls les articles originaux sont affich&eacute;s.
+Les traductions sont associ&eacute;es &agrave; l\'original,
+dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'info_travail_colaboratif' => 'Kunlaborado pri la artikoloj',
 'info_travaux_texte' => 'Tiu teksejo ne estas konfigurita jam. Bonvolu denove veni poste...',
 'info_travaux_titre' => 'Konstruado de la teksejo',
@@ -1011,6 +1019,7 @@ Dankon pro via partopreno
 'item_non_utiliser_breves' => 'Ne uzi la informetojn',
 'item_non_utiliser_config_groupe_mots_cles' => 'Ne uzi la detalan konfiguradon de la grupoj de &#349;losilvortoj',
 'item_non_utiliser_moteur_recherche' => 'Ne uzi la ser&#265;ilon',
+'item_non_utiliser_moteur_recherche_forum' => '<NEW> Ne pas indexer les forums',
 'item_non_utiliser_mots_cles' => 'Ne uzi la &#349;losilvortojn',
 'item_non_utiliser_syndication' => 'Ne uzi la a&#365;tomatan kunligadon',
 'item_nouvel_auteur' => 'Nova a&#365;toro',
@@ -1024,6 +1033,7 @@ Dankon pro via partopreno
 'item_utiliser_breves' => 'Uzi la informetojn',
 'item_utiliser_config_groupe_mots_cles' => 'Uzi la detalan konfiguradon de la grupoj de &#349;losilvortoj',
 'item_utiliser_moteur_recherche' => 'Uzi la ser&#265;ilon',
+'item_utiliser_moteur_recherche_forum' => '<NEW> Indexer les forums',
 'item_utiliser_mots_cles' => 'Uzi la &#349;losilvortojn',
 'item_utiliser_syndication' => 'Uzi la a&#365;tomatan kunligadon',
 'item_visiteur' => 'vizitanto',
@@ -1196,6 +1206,10 @@ Dankon pro via partopreno
 'module_texte_explicatif' => 'Vi povas enigi la jenajn &#349;parvojojn en la skeletoj de via publika teksejo. Tiuj estos a&#365;tomate tradukotaj en lingvoj kiuj havas specifan dosieron de lingvo.',
 'module_texte_traduction' => 'La dosiero de lingvo &laquo;&nbsp;@module@&nbsp;&raquo; disponeblas en&nbsp;:',
 'mois_non_connu' => 'nekonata',
+
+
+// N
+'navigateur_pas_redirige' => '<NEW> Si votre navigateur n\'est pas redirig&eacute;, cliquez ici pour continuer.',
 
 
 // O
@@ -1557,7 +1571,7 @@ faris gravajn &#349;an&#285;ojn en la grafika a&#365; struktura flanko de la tek
 'titre_breve_refusee' => 'Rifuzita informeto',
 'titre_breves' => 'La informetoj',
 'titre_cadre_afficher_article' => 'Afi&#349;i la artikolojn',
-'titre_cadre_afficher_traductions' => 'Afi&#349;i la staton de tradukoj de tiu lingvo',
+'titre_cadre_afficher_traductions' => 'Afi&#349;i la staton de tradukoj de tiuj lingvoj :',
 'titre_cadre_ajouter_auteur' => 'ALDONI A&#364;TORON:',
 'titre_cadre_forum_administrateur' => 'Privata forumo de la administrantoj',
 'titre_cadre_forum_interne' => 'Interna forumo',

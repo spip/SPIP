@@ -142,7 +142,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysy&#322;aj &#380;adnych zawiadomie&#324; redakcyjnych',
 'bouton_radio_non_envoi_liste_nouveautes' => 'Nie wysy&#322;aj najnowszej listy news&oacute;w',
 'bouton_radio_non_syndication' => 'Bez syndykacji',
-'bouton_radio_occidental' => '<MODIF> Alfabet zachodni(<tt>iso-8859-1</tt>): preferowany przez wszystkie przegl&#261;darki, lecz wy&#347;wietlaj&#261;cy tylko j&#281;zyki zachodnioeuropejskie (angielski, francuski, niemiecki...).',
+'bouton_radio_occidental' => 'Alfabet zachodni(<tt>iso-8859-1</tt>): pozwala przede wszystkimi wy&#347;wietla&#263; j&#281;zyki zachodnio-europejskie (angielski, francuski, niemiecki...&nbsp;;
+Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j&#281;zykami.',
 'bouton_radio_pas_petition' => 'Wy&#322;&#261;cz og&#322;oszenia',
 'bouton_radio_personnalise' => 'Dostosuj zestaw znak&oacute;w: wybierz t&#281; opcj&#281;, je&#347;li chcesz u&#380;ywa&#263; szczeg&oacute;lnego zestawu znak&oacute;w',
 'bouton_radio_petition_activee' => 'Og&#322;oszenia w&#322;&#261;czone',
@@ -153,8 +154,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'Zapisz w postaci nieskompresowanej w <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Usu&#324; og&#322;oszenia',
 'bouton_radio_syndication' => 'Syndykacja:',
-'bouton_radio_universel' => '<MODIF> Alfabet (kodowanie) uniwersalny&nbsp; (<tt>utf-8</tt>): pozwala na wy&#347;wietlanie we wszystkich j&#281;zykach, ale nie jest rozpoznawany
-  przez wszystkie przegl&#261;darki.',
+'bouton_radio_universel' => 'Alfabet (kodowanie) uniwersalny&nbsp; (<tt>utf-8</tt>): mo&#380;e wy&#347;wietlic teksty we wszystkich j&#281;zykach, ale mo&#380;e sprawia&#263; k&#322;opoty oprogramowaniu, kt&oacute;rego u&#380;ywasz do modyfikacji twoich szkielet&oacute;w, oraz niekt&oacute;rym klientom pocztowym.',
 'bouton_recharger_page' => 'ponownie za&#322;aduj t&#281; stron&#281;',
 'bouton_redirection' => 'PRZEKIERUJ',
 'bouton_relancer_installation' => 'Uruchom ponownie instalacj&#281;',
@@ -971,6 +971,13 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'info_tous_resultats_enregistres' => '[wszystkie wyniki s&#261; zapisane]',
 'info_tout_afficher' => 'Poka&#380; wszystko',
 'info_tout_site' => 'Ca&#322;a strona',
+'info_tout_site1' => 'J&#281;zyk artyku&#322;u',
+'info_tout_site2' => 'Artyku&#322; nie zosta&#322; jeszcze przet&#322;umaczony na ten j&#281;zyk.',
+'info_tout_site3' => 'Artyku&#322; zosta&#322; przet&#322;umaczony na ten j&#281;zyk, ale po dokonaniu przek&#322;adu zosta&#322;y wprowadzone zmiany do artyku&#322;u &#378;r&oacute;d&#322;owego. Przek&#322;ad powinien zosta&#263; uaktualniony.',
+'info_tout_site4' => 'Artyku&#322; zosta&#322; przet&#322;umaczony na ten j&#281;zyk i nie wymaga uaktualniania.',
+'info_tout_site5' => 'Artyku&#322; oryginalny.',
+'info_tout_site6' => '<b>Uwaga&nbsp;:</b> wy&#347;wietlone zosta&#322;y jedynie artyku&#322;y oryginalne.
+Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; koloru wskazuj&#261;cego na ich status&nbsp;:',
 'info_travail_colaboratif' => 'Praca zespo&#322;owa nad artyku&#322;em',
 'info_travaux_texte' => 'Ten serwis nie jest jeszcze skonfigurowany. Zapraszamy p&oacute;&#378;niej...',
 'info_travaux_titre' => 'Strona w trakcie budowy',
@@ -1049,6 +1056,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'item_non_utiliser_breves' => 'Nie u&#380;ywaj news&oacute;w',
 'item_non_utiliser_config_groupe_mots_cles' => 'Nie u&#380;ywaj zaawansowanej konfiguracji grup s&#322;&oacute;w kluczowych',
 'item_non_utiliser_moteur_recherche' => 'Nie u&#380;ywaj wyszukiwarki',
+'item_non_utiliser_moteur_recherche_forum' => 'Nie dokonywa&#263; indeksacji forum',
 'item_non_utiliser_mots_cles' => 'Nie u&#380;ywaj s&#322;&oacute;w kluczowych',
 'item_non_utiliser_syndication' => 'Wy&#322;&#261;cz automatyczn&#261; syndykacj&#281;',
 'item_nouvel_auteur' => 'Nowy autor',
@@ -1062,6 +1070,7 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'item_utiliser_breves' => 'U&#380;ywaj news&oacute;w',
 'item_utiliser_config_groupe_mots_cles' => 'Uzywaj zaawansowanej konfiguracji grup s&#322;&oacute;w kluczowych',
 'item_utiliser_moteur_recherche' => 'U&#380;ywaj wyszukiwarki',
+'item_utiliser_moteur_recherche_forum' => 'Indeksuj forum',
 'item_utiliser_mots_cles' => 'U&#380;ywaj s&#322;&oacute;w kluczowych',
 'item_utiliser_syndication' => 'U&#380;ywaj automatycznej syndykacji',
 'item_visiteur' => 'odwiedzaj&#261;cy',
@@ -1233,6 +1242,10 @@ funkcji technicznej konserwacji. Niekt&oacute;re spo&#347;r&oacute;d nich wymaga
 'module_texte_explicatif' => 'Mo&#380;esz umie&#347;ci&#263; nast&#281;puj&#261;ce skr&oacute;ty w szkielecie Twojej strony publicznej. Zostan&#261; automatycznie przet&#322;umaczone na r&oacute;zne j&#281;zyki, kt&oacute;rych pliki j&#281;zykowe istniej&#261;.',
 'module_texte_traduction' => 'Plik j&#281;zykowy &laquo;&nbsp;@module@&nbsp;&raquo; jest dost&#281;pny w&nbsp;:',
 'mois_non_connu' => 'nieznany',
+
+
+// N
+'navigateur_pas_redirige' => 'Je&#347;li twoja przegl&#261;darka ci&#281; nie przekierowa&#322;a, kliknij tutaj, &#380;eby kontynuowa&#263;.',
 
 
 // O
@@ -1417,11 +1430,11 @@ a nast&#281;pnie sprawd&#378; czy obrazki pojawiaj&#261; si&#281; zawsze w artyk
 'texte_informations_personnelles_1' => 'System stworzy teraz spersonalizowany dostep do serwisu.',
 'texte_informations_personnelles_2' => '(Informacja: je&#347;li jest to reinstalacja, a Tw&oacute;j dost&#281;p wci&#261;&#380; dzia&#322;a, mo&#380;esz',
 'texte_introductif_article' => '(Tekst wprowadzaj&#261;cy do artyku&#322;u.)',
-'texte_jeu_caractere' => '<MODIF> Ta opcja jest u&#380;yteczna je&#347;li Twoja strona ma by&#263; wy&#347;wietlana w alfabecie
- innym ni&#380; alfabet roma&#324;ski (lub &laquo;&nbsp;zachodni&nbsp;&raquo;) i jego odmiany.
+'texte_jeu_caractere' => 'Ta opcja jest u&#380;yteczna je&#347;li Twoja strona ma by&#263; wy&#347;wietlana w alfabecie
+ innym ni&#380; alfabet roma&#324;ski (lub "zachodni") i jego odmiany.
  W tym przypadku nale&#380;y zmieni&#263; domy&#347;lne ustawienia aby u&#380;ywa&#263;
- odpowiedniego kodowania. Nie zapomnij o dostosowania stron publicznych
- (znacznik <tt>#CHARSET</tt>).',
+ odpowiedniego kodowania. Radzimy &#380;eby&#347; wykona&#322; przed dokonaniem ostatecznego wyboru odpowiednie testy. Nie zapomnij o dostosowania stron publicznych
+ (znacznik <tt>#CHARSET</tt>), je&#347;li zmieniasz te parametry.',
 'texte_jeu_caractere_2' => 'Tych ustawie&#324; nie mo&#380;na cofn&#261;&#263;. Za
  tym idzie, &#380;e teksty ju&#380; wpisane
  mog&#261; si&#281; wy&#347;wietla&#263; nieprawid&#322;owo po wprowadzeniu zmian. Jednak
@@ -1570,7 +1583,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'titre_breve_refusee' => 'News odrzucony',
 'titre_breves' => 'Newsy',
 'titre_cadre_afficher_article' => 'Poka&#380; artyku&#322;y:',
-'titre_cadre_afficher_traductions' => 'Poka&#380; stan przek&#322;adu dla tego j&#281;zyka',
+'titre_cadre_afficher_traductions' => 'Wy&#347;wietl stan przek&#322;ad&oacute;w dla nast&#281;puj&#261;cych j&#281;zyk&oacute;w:',
 'titre_cadre_ajouter_auteur' => 'DODAJ ARTYKU&#321;Y:',
 'titre_cadre_forum_administrateur' => 'Prywatne forum administrator&oacute;w',
 'titre_cadre_forum_interne' => 'Forum wewn&#281;trzne',
