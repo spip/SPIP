@@ -1479,7 +1479,7 @@ if ($virtuel) {
 }
 else {
 	echo "<div $dir_lang><b>";
-	$revision_nbsp = ($options == "avancees");	// a regler pour relecture des nbsp dans les articles
+	$revision_nbsp = $activer_revision_nbsp;
 	echo justifier(propre($chapo));
 	echo "</b></div>\n\n";
 
