@@ -186,7 +186,7 @@ function ramener_cache($cle, $calcul, $contexte, &$fraicheur)
   # - recherche (trop couteux de mémoriser une recherche précise)
   # - valeurs hors URL (i.e. POST) sauf Forum qui les traite à part
   
-  if ($GLOBALS['recherche']||
+  if ($GLOBALS['var_recherche']||
       ($HTTP_POST_VARS && !$GLOBALS['ajout_forum']))
       {
 	include_local('inc-calcul.php3');
