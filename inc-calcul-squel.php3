@@ -73,8 +73,7 @@ function calculer_boucle($id_boucle, &$boucles)
 		  $primary_key . '"]]=1;';
 	      }
 	  }
-	spip_log(">>>>>>$return");
-	$corps =
+	$debut =
 	  ((!$flag_cpt) ? "" : "\n\t\t\$compteur_boucle++;") .
 	  ((!$flag_parties) ? "" : '
 		if	($compteur_boucle >= $debut_boucle AND 
@@ -85,10 +84,10 @@ function calculer_boucle($id_boucle, &$boucles)
 	  ((!$boucle->doublons) ? "" : 
 	   ("\n\t\t\$doublons['$type_boucle'] .= ','. " .
 	    index_pile($id_boucle, $primary_key, $boucles) .
-	    ";")).
-	  $corps .
+	    ";")) ;
+	  $corps = $debut .
 	  ((!$boucle->separateur) ? 
-	   ($constant ? $return : ("\n\t\t" . '$t0 .= ' . $return . ";")) :
+	   (($constant && !$debut) ? $return : ("\n\t\t" . '$t0 .= ' . $return . ";")) :
 	   ("\n\t\t" . '$t1 = ' . $return . ";\n\t\t" .
 	     '$t0 .= (($t1 && $t0) ? \'' . $boucle->separateur .
 	    "' : '') . \$t1;")).
@@ -119,7 +118,6 @@ function calculer_boucle($id_boucle, &$boucles)
 	while ($hierarchie) {';
 	}
 
-	spip_log(">>>>>>$corps");
 	# si le corps est une constante, ne plus appeler le serveur
 	if (!ereg("^'[^']*'$",$corps))
 	  {
