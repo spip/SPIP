@@ -135,16 +135,14 @@ function echappe_html($letexte, $source, $no_transform=false) {
 		$regexp_echap_code = "<code>((.*?))<\/code>";
 		$regexp_echap_cadre = "<(cadre|frame)>((.*?))<\/(cadre|frame)>";
 		$regexp_echap_poesie = "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>";
-		$regexp_echap_math = "<math>((.*?))<\/math>";
-		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)|($regexp_echap_math)/si";
+		$regexp_echap = "/($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)/si";
 	} else {
 		//echo creer_echappe_sans_pcre("cadre");
 		$regexp_echap_html = "<html>(([^<]|<[^/]|</[^h]|</h[^t]|</ht[^m]|</htm[^l]|<\/html[^>])*)<\/html>";
 		$regexp_echap_code = "<code>(([^<]|<[^/]|</[^c]|</c[^o]|</co[^d]|</cod[^e]|<\/code[^>])*)<\/code>";
 		$regexp_echap_cadre = "(<[cf][ar][da][rm]e>(([^<]|<[^/]|</[^cf]|</[cf][^ar]|</[cf][ar][^da]|</[cf][ar][da][^rm]|</[cf][ar][da][rm][^e]|<\/[cf][ar][da][rm]e[^>])*)<\/[cf][ar][da][rm]e>)()"; // parentheses finales pour obtenir meme nombre de regs que pcre
 		$regexp_echap_poesie = "(<poe[st][ir][ey]>(([^<]|<[^/]|</[^p]|</p[^o]|</po[^e]|</poe[^st]|</poe[st][^ir]|</poe[st][ir][^[ey]]|<\/poe[st][ir][ey][^>])*)<\/poe[st][ir][ey]>)()";
-		$regexp_echap_math = "<math>(([^<]|<[^/]|</[^m]|</m[^a]|</ma[^t]|</mat[^h]|<\/math[^>])*)<\/math>";
-		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)|($regexp_echap_math)";
+		$regexp_echap = "($regexp_echap_html)|($regexp_echap_code)|($regexp_echap_cadre)|($regexp_echap_poesie)";
 	}
 
 	while (($flag_pcre && preg_match($regexp_echap, $letexte, $regs))
@@ -193,16 +191,69 @@ function echappe_html($letexte, $source, $no_transform=false) {
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
 			
 			$les_echap[$num_echap] = "</p>".propre($lecode)."<p class=\"spip\">";
-		} else
+		} 
+		/*else
 		if ($regs[17]) {
 			$lecode = $regs[19];
 			$les_echap[$num_echap] = image_math($lecode);
 		}
+		*/
 
 		$pos = strpos($letexte, $regs[0]);
 		$letexte = substr($letexte,0,$pos)."@@SPIP_$source$num_echap@@"
 			.substr($letexte,$pos+strlen($regs[0]));
 	}
+
+
+	$texte_a_voir = $letexte;
+	while (ereg("<math>", $texte_a_voir)) {
+		include_ecrire ("inc_filtres_wem.php");
+		$debut =strpos($texte_a_voir, "<math>");
+		$fin = strpos($texte_a_voir,"</math>") + strlen("</math>");
+
+		$texte_debut = substr($texte_a_voir, 0, $debut);
+		
+		$texte_milieu = substr($texte_a_voir, $debut+strlen("<math>"), $fin-$debut-strlen("<math></math>"));
+		$texte_fin = substr($texte_a_voir, $fin, strlen($texte_a_voir));
+
+		//$traiter_math = "image";
+		
+		if ($traiter_math == "image") {
+			while((ereg("(\\$){2}([^$]+)(\\$){2}",$texte_milieu, $regs))) {
+				$num_echap++;
+				$les_echap[$num_echap] = "\n<p class=\"spip\" style=\"text-align: center;\">".image_math($regs[2])."</p>\n";
+				$pos = strpos($texte_milieu, $regs[0]);
+				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
+					.substr($texte_milieu,$pos+strlen($regs[0]));
+				
+				//$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n<p class=\"spip\" style=\"text-align: center;\">'.image_math(\"$2\").'</p>\n'",$texte_milieu);
+		//		$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","image_math(\"$2\")",$texte_milieu);
+			}
+			while((ereg("(\\$){1}([^$]+)(\\$){1}",$texte_milieu, $regs))) {
+				$num_echap++;
+				$les_echap[$num_echap] = image_math($regs[2]);
+				$pos = strpos($texte_milieu, $regs[0]);
+				$texte_milieu = substr($texte_milieu,0,$pos)."@@SPIP_$source$num_echap@@"
+					.substr($texte_milieu,$pos+strlen($regs[0]));
+			}
+		} else {
+
+			$texte_milieu = ereg_replace(">", "&#gt;", $texte_milieu);	
+			$texte_milieu = ereg_replace("<", "&#lt;", $texte_milieu);	
+			$fflag = 0;
+			while((ereg("$",$texte_milieu)) && ($fflag<5)) {
+				$texte_milieu = preg_replace("/(\\$){2}([^$]+)(\\$){2}/e","'\n\n<p class=\"spip\" style=\"text-align: center;\"><html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></p></html>\n\n'",$texte_milieu);
+				$texte_milieu = preg_replace("/(\\$){1}([^$]+)(\\$){1}/e","'<html><math xmlns=\"http://www.w3.org/1998/Math/MathML\"><mstyle displaystyle=\"true\">'.(mathml2unicode(editermaths(\"$2\"))).'</mstyle></math></html>'",$texte_milieu);
+			
+				$fflag++;
+			}
+		}
+
+		$texte_a_voir = $texte_debut.$texte_milieu.$texte_fin;
+		
+	}
+	$letexte = $texte_a_voir;
+
 
 
 	//
