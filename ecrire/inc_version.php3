@@ -5,17 +5,27 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-//
+
+/////////////// PARAMETRAGE UTILISATEUR ///////////////
+
+// Prefixe des tables dans la base de donnees
+// (a modifier pour avoir plusieurs sites SPIP dans une seule base)
+$table_prefix = "spip";
+
+// faut-il loger les infos de debug dans data/spip.log ?
+$debug = false; 
+
+///////////////////////////////////////////////////////
+
+
 // Version courante de SPIP
 // Stockee sous forme de nombre decimal afin de faciliter les comparaisons
 // (utilise pour les modifs de la base de donnees)
-//
 
 // version de la base
 $spip_version = 1.467;
 
 // version de spip
-// (mettre a jour a la main et conserver la mention "CVS")
 $spip_version_affichee = "1.5a1 CVS";
 
 // version de spip / tag
@@ -25,15 +35,8 @@ if (ereg('Name: v(.*) ','$Name$', $regs)) $spip_version_affichee = $regs[1];
 // Pas de warnings idiots
 error_reporting(E_ALL ^ E_NOTICE);
 
-//
-// Parametrage du prefixe des tables dans la base de donnees
-// (a modifier pour avoir plusieurs sites SPIP dans une seule base)
-//
-
-$table_prefix = "spip";
-
 // Securite : dossier des squelettes a preciser dans mes_fonctions.php3,
-// sous la forme d'une ligne : < ? php $GLOBALS['dossier_squelettes'] = 'toto'; ? >
+// sous la forme d'une ligne : < ? php $GLOBALS['dossier_squelettes'] = 'squel'; ? >
 $dossier_squelettes = '';
 
 //
@@ -644,6 +647,11 @@ function logrotate() {
 	@rename($logfile.'.2',$logfile.'.3'); 
 	@rename($logfile.'.1',$logfile.'.2'); 
 	@rename($logfile,$logfile.'.1'); 
+}
+
+function spip_debug($message) {
+	if ($GLOBALS['debug'])
+		spip_log($message);
 }
 
 function spip_log($message) {
