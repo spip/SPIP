@@ -361,6 +361,7 @@ Grandmerc&eacute; per v&ograve;stra participacion
 'icone_admin_site' => 'Administracion dau sit',
 'icone_afficher_auteurs' => 'Afichar leis autors',
 'icone_afficher_visiteurs' => 'Afichar lei vesitaires',
+'icone_agenda' => 'Agenda e messatjari&aacute;',
 'icone_aide_ligne' => 'Ajuda en linha',
 'icone_arret_discussion' => 'Quitar aquela discussion',
 'icone_articles' => 'Articles',
@@ -1175,7 +1176,9 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 
 // O
 'onglet_affacer_base' => 'Escafar la basa',
+'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'autor',
+'onglet_calendrier' => 'Calendier',
 'onglet_contenu_site' => 'Contengut dau sit',
 'onglet_evolution_visite_mod' => 'Evolucion',
 'onglet_fonctions_avances' => 'Foncions avan&ccedil;adas',
@@ -1183,6 +1186,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'onglet_interactivite' => 'Interactivitat',
 'onglet_langues' => 'Lengas',
 'onglet_messagerie' => 'Messatjari&aacute;',
+'onglet_messagerie_personnelle' => 'Messatjari&aacute; personala',
 'onglet_messages_internes' => 'Messatges int&egrave;rnes',
 'onglet_messages_publics' => 'Messatges publics',
 'onglet_messages_vide' => 'Messatges sens t&egrave;xt',

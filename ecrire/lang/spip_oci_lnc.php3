@@ -361,13 +361,14 @@ Merc&eacute;s per v&ograve;stra participacion
 'icone_admin_site' => 'Administracion del sit',
 'icone_afficher_auteurs' => 'Afichar los autors',
 'icone_afficher_visiteurs' => 'Afichar los vesitaires',
+'icone_agenda' => 'Agenda e messatjari&aacute;',
 'icone_aide_ligne' => 'Ajuda en linha',
 'icone_arret_discussion' => 'Quitar aquela discussion',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Autors',
 'icone_breves' => 'Br&egrave;vas',
 'icone_calendrier' => 'Calendi&egrave;r',
-'icone_calendrier_messagerie' => 'Agenda',
+'icone_calendrier_messagerie' => '<MODIF> Agenda',
 'icone_configuration_site' => 'Configuracion del sit',
 'icone_configurer_site' => 'Configurar v&ograve;stre sit',
 'icone_creation_groupe_mots' => 'Crear un nov&egrave;l grop de mots',
@@ -1175,7 +1176,9 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 
 // O
 'onglet_affacer_base' => 'Escafar la basa',
+'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'autor',
+'onglet_calendrier' => 'Calendi&egrave;r',
 'onglet_contenu_site' => 'Contengut del sit',
 'onglet_evolution_visite_mod' => 'Evolucion',
 'onglet_fonctions_avances' => 'Foncions avan&ccedil;adas',
@@ -1183,6 +1186,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'onglet_interactivite' => 'Interactivitat',
 'onglet_langues' => 'Lengas',
 'onglet_messagerie' => 'Messatjari&aacute;',
+'onglet_messagerie_personnelle' => 'Messatjari&aacute; personala',
 'onglet_messages_internes' => 'Messatges int&egrave;rnes',
 'onglet_messages_publics' => 'Messatges publics',
 'onglet_messages_vide' => 'Messatges sens t&egrave;xt',
@@ -1598,7 +1602,6 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
-
 
 );
 

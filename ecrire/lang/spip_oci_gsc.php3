@@ -361,6 +361,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'icone_admin_site' => 'Administracion deu sit',
 'icone_afficher_auteurs' => 'Afichar los autors',
 'icone_afficher_visiteurs' => 'Afichar los vesitaires',
+'icone_agenda' => 'Agenda e messatgeria',
 'icone_aide_ligne' => 'Ajuda en linha',
 'icone_arret_discussion' => 'Quitar aquera discussion',
 'icone_articles' => 'Articles',
@@ -1174,7 +1175,9 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 
 // O
 'onglet_affacer_base' => 'Esfa&ccedil;ar la basa',
+'onglet_agenda' => 'Agenda',
 'onglet_auteur' => 'L\'autor',
+'onglet_calendrier' => 'Calend&egrave;r',
 'onglet_contenu_site' => 'Contengut deu sit',
 'onglet_evolution_visite_mod' => 'Evolucion',
 'onglet_fonctions_avances' => 'Foncions avan&ccedil;adas',
@@ -1182,6 +1185,7 @@ Daubuns aubergaders n\'autorizan pas lo mandad&iacute;s d\'e-mails dempuish los 
 'onglet_interactivite' => 'Interactivitat',
 'onglet_langues' => 'Lengas',
 'onglet_messagerie' => 'Messatgeria',
+'onglet_messagerie_personnelle' => 'Messatgeria personau',
 'onglet_messages_internes' => 'Messatges int&egrave;rnes',
 'onglet_messages_publics' => 'Messatges publics',
 'onglet_messages_vide' => 'Messatges shens t&egrave;xt',
@@ -1597,7 +1601,6 @@ s\'avetz modificat de b&egrave;th pro lo grafisme o l\'estructura deu sit.',
 'trad_lier' => 'Aqueste article qu\'ei ua arrevirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escr&iacute;ver ua arrevirada nav&egrave;ra d\'aqueste article',
 'trad_reference' => '(article de refer&eacute;ncia)'
-
 
 );
 
