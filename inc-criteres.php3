@@ -420,20 +420,24 @@ function calculer_criteres ($idb, &$boucles) {
 			
 			else {
 				$val = $match[1];
-				// Si id_parent, comparer l'id_parent avec l'id_objet
-				// de la boucle superieure
-				if ($val == 'id_parent')
-					$val = $primary;
-				// Si id_enfant, comparer l'id_objet avec l'id_parent
-				// de la boucle superieure
-				else if ($val == 'id_enfant')
-					$val = 'id_parent';
-				$val = calculer_argument_precedent($idb, $val, $boucles) ;
-				if (ereg('^\$',$val))
-					$val = '" . addslashes(' . $val . ') . "';
-				else
-					$val = addslashes($val);
-
+				// Cas special {lang} : aller chercher $GLOBALS['spip_lang']
+				if ($val == 'lang')
+					$val = '".$GLOBALS[\'spip_lang\']."';
+				else {
+					// Si id_parent, comparer l'id_parent avec l'id_objet
+					// de la boucle superieure
+					if ($val == 'id_parent')
+						$val = $primary;
+					// Si id_enfant, comparer l'id_objet avec l'id_parent
+					// de la boucle superieure
+					else if ($val == 'id_enfant')
+						$val = 'id_parent';
+					$val = calculer_argument_precedent($idb, $val, $boucles) ;
+					if (ereg('^\$',$val))
+						$val = '" . addslashes(' . $val . ') . "';
+					else
+						$val = addslashes($val);
+				}
 			}
 
 			// Traitement general des relations externes
