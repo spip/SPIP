@@ -29,7 +29,7 @@ function enfant($collection){
 		$les_enfants.= "<P>";
 		if ($id_parent == "0") $les_enfants .= debut_cadre_relief("secteur-24.gif", true);
 		else  $les_enfants .= debut_cadre_relief("rubrique-24.gif", true);
-		$les_enfants.= "<FONT FACE=\"verdana,arial,helvetica,sans-serif\">";
+		$les_enfants.= "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\">";
 
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants.= $bouton_layer;
@@ -369,7 +369,7 @@ if ($flag_mots!= 'non' AND $connect_statut == '0minirezo' AND acces_rubrique($co
 
 
 if (strlen($texte) > 1) {
-	echo "\n<p><font size=3 face='verdana,arial,helvetica,sans-serif'><div align='justify'>";
+	echo "\n<p><font size=3 face='Verdana,Arial,Helvetica,sans-serif'><div align='justify'>";
 	echo justifier(propre($texte));
 	echo "&nbsp;</font></div>";
 }

@@ -35,7 +35,7 @@ if ($row = mysql_fetch_array($result)) {
 
 $activer_statistiques_ref = lire_meta("activer_statistiques_ref");
 if ($activer_statistiques_ref == "oui"){
-	echo "<font size=2 face='verdana,arial,helvetica'>";
+	echo "<font size=2 face='Verdana,Arial,Helvetica,sans-serif'>";
 	if ($critere == "visites" OR !$critere) echo "[<b>par nombre de visites</b>] " ;
 		else  echo "[<a href='statistiques_tous.php3'>par nombre de visites</a>] ";
 	if ($critere == "referers") echo "[<b>par arriv&eacute;es directes sur la page</b>] ";
@@ -53,7 +53,7 @@ if ($critere == "referers"){
 "FROM spip_articles WHERE visites > 0 ORDER BY referers DESC LIMIT 0,100", true);
 }
 else if ($critere == "popularite"){
-	echo propre("La Çpopularit&eacute;È est calcul&eacute;e d'apr&egrave;s le nombre d'arriv&eacute;es directes sur un article, multipli&eacute; par le nombre de visites. Un article devient donc &laquo;populaire&raquo; lorsqu'il fait l'objet d'un r&eacute;f&eacute;rencement sur d'autres sites et lorsqu'il est tr&egrave;s visit&eacute;.")."<p>";
+	echo propre("La &Ccedil;popularit&eacute;&Egrave; est calcul&eacute;e d'apr&egrave;s le nombre d'arriv&eacute;es directes sur un article, multipli&eacute; par le nombre de visites. Un article devient donc &laquo;populaire&raquo; lorsqu'il fait l'objet d'un r&eacute;f&eacute;rencement sur d'autres sites et lorsqu'il est tr&egrave;s visit&eacute;.")."<p>";
 	afficher_articles("Les articles les plus populaires depuis le d&eacute;but",
 "SELECT id_article, surtitre, titre, soustitre, descriptif, chapo, date, visites, referers, id_rubrique, statut ".
 "FROM spip_articles WHERE visites > 0 ORDER BY popularite DESC LIMIT 0,100", true);

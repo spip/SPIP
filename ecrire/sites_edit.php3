@@ -146,7 +146,7 @@ if ($new == 'oui'){
 		$link->addVar('analyser_site', 'oui');
 		echo $link->getForm();
 		
-		echo "<font face='verdana,arial,helvetica, sans-serif' size=2><b>R&eacute;f&eacute;rencement automatis&eacute; d'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l'adresse URL d&eacute;sir&eacute;e, ou l'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).</font>";
+		echo "<font face='Verdana,Arial,Helvetica,sans-serif' size=2><b>R&eacute;f&eacute;rencement automatis&eacute; d'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l'adresse URL d&eacute;sir&eacute;e, ou l'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).</font>";
 		echo "<div align='right'><input type=\"text\" name=\"url\" class='fondl' value=\"http://\">";
 		echo "<input type=\"submit\" name=\"submit\" value=\"Ajouter\" class='fondo'>";
 		
