@@ -13,14 +13,14 @@ $today=getdate(time());
 	$annee_today = $today["year"];
 
 // sans arguments => mois courant
-if (!$mois){
-	$jour=$today["mday"];
-	$mois=$today["mon"];
-	$annee=$today["year"];
-}
+	if (!$mois){
+		$jour=$today["mday"];
+		$mois=$today["mon"];
+		$annee=$today["year"];
+	}
 
 	$date = date("Y-m-d", mktime(0,0,0,$mois, $jour, $annee));
-	$jour = jour($date);
+	$jour = journum($date);
 	$mois = mois($date);
 	$annee = annee($date);
 
@@ -59,7 +59,7 @@ debut_page(nom_jour("$annee-$mois-$jour")." ".affdate("$annee-$mois-$jour"),  "r
 		echo "&nbsp;";
 		echo "<a href='calendrier_semaine.php3?mois=$mois&annee=$annee&jour=$jour'><img src='img_pack/cal-semaine.gif' alt='semaine' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo "&nbsp;";
-		echo "<a href='calendrier.php3?mois=$mois&annee=$annee'><img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
+		echo "<a href='calendrier.php3?mois=$mois&annee=$annee&jour=$jour'><img src='img_pack/cal-mois.gif' alt='mois' width='26' height='20' border='0' style='filter: alpha(opacity=50);'></a>";
 		echo aide ("messcalen");
 		echo "</div>";
 
