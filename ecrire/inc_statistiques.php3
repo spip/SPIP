@@ -290,7 +290,7 @@ function calculer_visites($date = "") {
 	// Mise a jour de la base
 	if (is_array($visites_update)) {
 		while (list($visites, $articles) = each($visites_update)) {
-			$query = "UPDATE spip_articles SET visites = visites + $visites ".
+			$query = "UPDATE spip_articles SET maj=maj, visites = visites + $visites ".
 				"WHERE id_article IN (".join(', ', $articles).")";
 			$result = spip_query($query);
 		}
@@ -330,7 +330,7 @@ function calculer_popularites() {
 	$b = log(2) * $periode / $demivie;
 
 	// oublier un peu le passe
-	spip_query("UPDATE spip_articles SET popularite = popularite * $a");
+	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
 
 	// ajouter les points visites
 	$count_article = Array();
@@ -343,7 +343,7 @@ function calculer_popularites() {
 	reset ($count_article);
 	while (list($count,$articles) = each($count_article)) {
 		$query = "UPDATE spip_articles
-			SET popularite = GREATEST(1,popularite) + $b * $count
+			SET maj=maj, popularite = GREATEST(1,popularite) + $b * $count
 			WHERE id_article IN (0$articles)";
 		spip_query($query);
 	}
@@ -359,7 +359,7 @@ function calculer_popularites() {
 	reset ($count_article);
 	while (list($count,$articles) = each($count_article)) {
 		$query = "UPDATE spip_articles
-			SET popularite = GREATEST(1,popularite) + $b * $count
+			SET maj=maj, popularite = GREATEST(1,popularite) + $b * $count
 			WHERE id_article IN (0$articles)";
 		spip_query($query);
 	}
