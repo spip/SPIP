@@ -1652,14 +1652,7 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura del sit.',
 'trad_delier' => 'Ligar pas mai aqueste article a sas reviradas ',
 'trad_lier' => 'Aqueste article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aqueste article',
-'trad_reference' => '(article de refer&eacute;ncia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => '<MODIF> Anar qu&egrave;rre lo fichi&egrave;r <i>iCal</i>',
-'calendrier_synchro_prive' => 'Lo calendi&egrave;r seguent, d\'usatge estrictament personal, vos informa subre l\'activitat editoriala privada d\'aquel sit (pr&egrave;tzfaches et rend&egrave;tz-vos personals, articles et br&egrave;vas prepausats...).',
-'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent vos permet de s&egrave;gre l\'activitat publica d\'aquel sit (articles e br&egrave;vas publicats).',
-'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(article de refer&eacute;ncia)'
 
 );
 

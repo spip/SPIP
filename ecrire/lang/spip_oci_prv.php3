@@ -1656,11 +1656,8 @@ s\'av&egrave;tz bravament modificat lo grafisme o l\'estructura dau sit.',
 'trad_delier' => 'Cessar de liar aquest article a sei reviradas ',
 'trad_lier' => 'Aquest article es una revirada de l\'article num&egrave;ro:',
 'trad_new' => 'Escriure una revirada nov&egrave;la d\'aquest article',
-'trad_reference' => '(article de refer&eacute;ncia)',
+'trad_reference' => '(article de refer&eacute;ncia)'
 
-
-// PLUS_UTILISE
-'info_config_suivi_lien' => '<NEW> <NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
 
 );
 

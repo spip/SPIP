@@ -1686,15 +1686,7 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_delier' => 'Stop linking this article to its translations',
 'trad_lier' => 'This article is a translation of the article number',
 'trad_new' => 'Write a new translation of this article',
-'trad_reference' => '(reference article)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'Retrieving the file <i>iCal</i><br>(Ximian Evolution, KOrganizer...)',
-'calendrier_synchro_prive' => 'The following calendar, which is strictly for personal use, informs you of the editorial activity of this site (tasks and personal appointements, articles and news items submited...).',
-'calendrier_synchro_public' => 'The following calendar allows you to follow the public activity of this site (published articles and news items).',
-'calendrier_synchro_sync' => 'Synchronizing the file <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
-'info_config_suivi_lien' => '<NEW> En tant qu\'administrateur, vous pouvez indiquer, dans la configuration du site, l\'adresse d\'une mailing-list &agrave; laquelle les participants &agrave; l\'espace priv&eacute; pourront s\'abonner.'
+'trad_reference' => '(reference article)'
 
 );
 

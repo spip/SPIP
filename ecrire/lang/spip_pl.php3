@@ -1662,14 +1662,7 @@ wyszukiwania w do&#322;&#261;czonej stronie.',
 'trad_delier' => 'Nie &#322;&#261;czy&#263; artyku&#322;u z tym przek&#322;adem',
 'trad_lier' => 'Ten artyku&#322; jest przek&#322;adem artyku&#322;u numer',
 'trad_new' => 'Napisz nowe t&#322;umaczenie artyku&#322;u',
-'trad_reference' => '(artyku&#322; wzorcowy)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => '',
-'calendrier_synchro_prive' => '',
-'calendrier_synchro_public' => '',
-'calendrier_synchro_sync' => ''
+'trad_reference' => '(artyku&#322; wzorcowy)'
 
 );
 

@@ -1527,14 +1527,7 @@ t&iacute;tulos y las descripciones de los art&iacute;culos. <br><img src="puce.g
 'trad_delier' => 'Ya no ligar este art&iacute;culo a sus traducciones ',
 'trad_lier' => 'Este art&iacute;culo es una traducci&oacute;n del art&iacute;culo n&uacute;mero:',
 'trad_new' => 'Escribir una nueva traducci&oacute;n de este art&iacute;culo',
-'trad_reference' => '(art&iacute;culo de referencia)',
-
-
-// PLUS_UTILISE
-'calendrier_synchro_lien' => 'R&eacute;cuperar el archivo <i>iCal</i>',
-'calendrier_synchro_prive' => 'El calendario siguiente, de uso estrictamente personal, te informa sobre la actividad editorial privada de este sitio (tareas y citas personales, art&iacute;culos y breves propuestos...).',
-'calendrier_synchro_public' => 'El calendario siguiente le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
-'calendrier_synchro_sync' => 'Sincronizar el fichero <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)'
+'trad_reference' => '(art&iacute;culo de referencia)'
 
 );
 

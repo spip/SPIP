@@ -1498,12 +1498,8 @@ Wenn das Problem weiter besteht, nehmen Sie bitte Kontakt mit Ihrem Provider auf
 'trad_delier' => 'Artikel nicht mehr mit diesen &Uuml;bersetzungen verbinden',
 'trad_lier' => 'Dieser Artikel ist eine &Uuml;bersetzung des Artikels Nummer&nbsp;',
 'trad_new' => 'Neue &Uuml;bersetzung dieses Artikels beginnen',
-'trad_reference' => '(Referenzartikel)',
+'trad_reference' => '(Referenzartikel)'
 
-
-// PLUS_UTILISE
-'info_donner_rendez_vous' => 'Mit diesem Schalter k&ouml;nnen Sie einem Mitbenutzer einen Terminvorschlag machen.',
-'info_nouveau_pense_bete' => 'Mit diesem Schalter k&ouml;nnen Sie einen neuen pers&ouml;nlichen Merkzettel anlegen.'
 
 );
 
