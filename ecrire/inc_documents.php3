@@ -775,10 +775,10 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 			$mode = $document->get('mode');
 		
 			$result = spip_query("SELECT * FROM spip_types_documents WHERE id_type=$id_type");
-			if ($type = @spip_fetch_array($result))	{
-				$type_extension = $type['extension'];
-				$type_inclus = $type['inclus'];
-				$type_titre = $type['titre'];
+			if ($type_doc = @spip_fetch_array($result))	{
+				$type_extension = $type_doc['extension'];
+				$type_inclus = $type_doc['inclus'];
+				$type_titre = $type_doc['titre'];
 			}
 
 
