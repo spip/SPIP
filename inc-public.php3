@@ -49,12 +49,8 @@ else {
 	}
 
 
-	// Ajout_forum est une HTTP_GET_VARS installee par retour_forum dans
-	// inc-forum.
-	// Il s'agit de memoriser les HTTP_POST_VARS, afin de mettre en base
-	// les valeurs transmises, avant reaffichage du formulaire avec celles-ci.
-	// En cas de validation finale ca redirige vers l'URL ayant provoque l'appel
-	// au lieu de laisser l'URL appelee resynthetiser le formulaire.
+	// Ajout_forum (pour les forums) et $val_confirm signalent des modifications
+	// a faire avant d'afficher la page
 	if ($ajout_forum) {
 		$redirect = '';
 		include('inc-messforum.php3');
@@ -63,6 +59,14 @@ else {
 			exit();
 		}
 	}
+	if ($val_confirm) {
+		// il nous faut id_article ! C'est donc encore a nettoyer...
+		include_local('inc-calcul.php3');
+		calculer_contexte();
+		include_local('inc-formulaires.php3');
+		reponse_confirmation($id_article);
+	}
+
 
 	// Faut-il effacer des pages invalidees ?
 	if (lire_meta('invalider')) {

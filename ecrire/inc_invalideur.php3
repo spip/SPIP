@@ -29,9 +29,6 @@ function maj_invalideurs ($fichier, $infosurpage, $delais) {
 #		insere_invalideur($infosurpage['id_breve'], 'id_breve', $fichier);
 #		insere_invalideur($infosurpage['id_rubrique'],'id_rubrique', $fichier);
 #		insere_invalideur($infosurpage['id_syndic'],'id_syndic', $fichier);
-
-### pas du tout prevus au programme ?
-#		insere_invalideur($infosurpage['id_signature'],'id_signature', $fichier);
 	}
 }
 
