@@ -1776,7 +1776,7 @@ function calculer_texte($texte)
 	$code = "";
 
 	//
-	// Reperer les directives d'inclusion de squelette et les balises de traduction <<toto>>
+	// Reperer les directives d'inclusion de squelette et les balises de traduction <:toto:>
 	//
 	while (ereg("(<INCLU[DR]E[[:space:]]*\(([-_0-9a-zA-Z./ ]+)\)(([[:space:]]*\{[^}]*\})*)[[:space:]]*>)", $texte, $match)) {
 		$s = $match[0];
@@ -1828,9 +1828,9 @@ function calculer_texte($texte)
 		$code .= "	\$retour .= '".ereg_replace("([\\\\'])", "\\\\1", $texte)."';\n";
 
 	//
-	// Reperer les balises de traduction <<toto>>
+	// Reperer les balises de traduction <:toto:>
 	//
-	while (eregi("(<<(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?>>)", $code, $match)) {
+	while (eregi("(<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>)", $code, $match)) {
 		//
 		// Traiter la balise de traduction multilingue
 		//
