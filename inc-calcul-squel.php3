@@ -1724,8 +1724,6 @@ function calculer_boucle($id_boucle, $prefix_boucle)
 		global $recherche, $hash_recherche;
 		if (!$hash_recherche)
 			$hash_recherche = requete_hash($recherche);
-		else
-			$hash_recherche = "0";
 		';
 	}
 
