@@ -127,12 +127,13 @@ function cherche_page ($cache, $contexte, $fond)  {
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
-	// Si inc-urls veut fixer la langue, on la recupere ici
-	$lang = $contexte['lang'];
 	// Chercher le fond qui va servir de squelette
-	if ($r = sql_rubrique_fond($contexte,
-	$lang ? $lang : lire_meta('langue_site')))
+	if ($r = sql_rubrique_fond($contexte))
 		list($id_rubrique_fond, $lang) = $r;
+	if (!$lang)
+		$lang = lire_meta('langue_site');
+	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
+	$lang = $contexte['lang'];
 
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
@@ -235,7 +236,7 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 }
 
 
-// Cf ramener_page +cherche_page_incluante+ cherche_page_incluse chez ESJ
+
 function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 
 	// Inclusion

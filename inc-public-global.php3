@@ -86,7 +86,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	// demande de previsualisation ?
 	// -> inc-calcul.php3 n'enregistrera pas les fichiers caches
 	// -> inc-reqsql-squel.php3 acceptera les objets non 'publie'
-	if ($var_preview == 'oui') {
+	if ($var_mode == 'preview') {
 		// Verifier qu'on a le droit de previsualisation
 		$statut = $GLOBALS['auteur_session']['statut'];
 		if ($statut=='0minirezo' OR
@@ -95,7 +95,8 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 			$delais = 0;
 			$var_preview = true;
 			spip_log('preview !');
-		}
+		} else
+			$var_preview = false;
 	}
 
 	// Faut-il effacer des pages invalidees ?
@@ -163,9 +164,6 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
 
 	if ($var_preview AND !$flag_preserver) {
-		$url = $GLOBALS['clean_link'];
-		$url->delvar('var_preview');
-		$url = $url->geturl();
 		include_ecrire('inc_lang.php3');
 		include_ecrire('inc_filtres.php3');
 		lang_select($GLOBALS['auteur_session']['lang']);
@@ -180,8 +178,9 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		top: 0px;
 		left: 0px;
 		position: absolute;
-		"><a href="'.$url.'"><img src="' . _DIR_IMG_PACK . 'naviguer-site.png" align="left" border="0" /></a>
-&nbsp; '.majuscules(_T('previsualisation')).'</div>';
+		"><img src="' . _DIR_IMG_PACK
+		. 'naviguer-site.png" align="left" border="0" />&nbsp; '
+		. majuscules(_T('previsualisation')).'</div>';
 	}
 
 	return $page;
@@ -238,11 +237,13 @@ function inclure_balise_dynamique($r) {
 		echo $r;
 	else {
 		list($fond, $delais, $contexte_inclus) = $r;
-		if ((!$contexte_inclus['lang']) AND
 
+		if ((!$contexte_inclus['lang']) AND
 		($GLOBALS['spip_lang'] != lire_meta('langue_site')))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
+
 		$page = inclure_page($fond, $delais, $contexte_inclus);
+
 		if ($page['process_ins'] == 'html')
 			echo $page['texte'];
 		else

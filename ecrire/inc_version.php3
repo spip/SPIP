@@ -197,7 +197,6 @@ feed_globals('_GET');
 feed_globals('_COOKIE');
 # note : les $_FILE sont geres dans spip_image.php3
 
-
 //
 // 	*** Parametrage par defaut de SPIP ***
 //
@@ -525,10 +524,11 @@ function spip_log($message, $logname='spip') {
 //
 
 // Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-if (!$REQUEST_URI)
+if (!$REQUEST_URI) {
 	$REQUEST_URI = $PHP_SELF;
-if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
-	$REQUEST_URI .= '?'.$QUERY_STRING;
+	if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
+		$REQUEST_URI .= '?'.$QUERY_STRING;
+}
 
 if (!$PATH_TRANSLATED) {
 	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;

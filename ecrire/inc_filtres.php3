@@ -206,17 +206,11 @@ function attribut_html($texte) {
 }
 
 // Vider les url nulles comme 'http://' ou 'mailto:'
-// + hack pour rester en mode 'preview' dans l'espace public
 function vider_url($url) {
-	global  $var_preview;
 
 	$url = trim($url);
 	if (eregi("^(http:?/?/?|mailto:?)$", $url))
 		return '';
-	else
-		if (_DIR_RESTREINT AND $var_preview AND !eregi("[a-z]+://", $url))
-			$url .= ((strpos($url, '?') !== false) ? '&':'?')
-			. "var_preview=oui";
 
 	return $url;
 }
