@@ -18,7 +18,8 @@ function calculer_params($type, $params, $idb, &$boucles)
 	  ".\"'";  }
       else if ($param == 'unique' OR $param == 'doublons') {
 	$boucle->doublons = true;
-	$boucle->where[] = "$id_field NOT IN (\" . \$doublons['$type'] . \")";
+	$boucle->where[] = '" .' . "calcul_mysql_in('$id_field',
+			\$doublons['$type'], 'NOT') . \"";
       }
       else if (ereg('^(!)? *lang_select(=(oui|non))?$', $param, $match)) {
 	if (!$lang_select = $match[3]) $lang_select = 'oui';
@@ -49,10 +50,11 @@ function calculer_params($type, $params, $idb, &$boucles)
       }
       else if ($param == 'recherche') {
 	$boucle->from[] = "index_$id_table AS rec";
-	$boucle->select[] = "SUM(rec.points + 100*(rec.hash IN (\$hash_recherche_strict))) AS points";
+	$boucle->select[] = 'SUM(rec.points + 100*(" .' . 
+'calcul_mysql_in("rec.hash", calcul_branche($hash_recherche_strict),"") . ")) AS points';
 	$boucle->where[] = "rec.". $table_primary[$type] . "=$id_field";
 	$boucle->group = "'$id_field'";
-	$boucle->where[] = "rec.hash IN (\$hash_recherche)";
+	$boucle->where[] = '" .' . 'calcul_mysql_in("rec.hash", calcul_branche($hash_recherche),"") . "';
 	$boucles[$idb]->hash = true;
      }
 
@@ -89,9 +91,9 @@ function calculer_params($type, $params, $idb, &$boucles)
 	$boucle->where[] = "$id_table.id_parent='0'";
       }
       else if (ereg("^branche *(\??)", $param, $regs)) {
-	$c = "$id_table.id_rubrique IN (\".calcul_branche(" .
+	$c = '".' ."calcul_mysql_in('$id_table.id_rubrique', calcul_branche(" .
 	  index_pile($boucles[$idb]->id_parent, 'id_rubrique', $boucles) .
-	  ").\")";
+	  "), '') . \"";
 	if (!$regs[1])
 	  $boucle->where[] = $c ;
 	else
