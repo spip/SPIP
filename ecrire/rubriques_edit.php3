@@ -56,7 +56,7 @@ function enfant($leparent){
 
 
 if ($new == "oui") {
-	if (($connect_statut=='0minirezo') AND acces_rubrique($supp_rubrique)) {
+	if (($connect_statut=='0minirezo') AND acces_rubrique($id_parent)) {
 		$id_parent = intval($id_parent);
 		$id_rubrique = 0;
 		$titre = "Nouvelle rubrique";
