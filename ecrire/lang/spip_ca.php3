@@ -14,7 +14,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // A
 'access_interface_graphique' => 'Retorn a la interf&iacute;cie gr&agrave;fica completa',
-'access_mode_texte' => 'Invidents: mostrar la interf&iacute;cie en mode text',
+'access_mode_texte' => 'Mostrar la interf&iacute;cie en mode text simplificada',
 'admin_modifier_article' => 'Modificar aquest article',
 'admin_modifier_auteur' => 'Modificar aquest autor',
 'admin_modifier_breve' => 'Modificar aquesta breu',
@@ -411,7 +411,7 @@ Gr&agrave;cies per la seva participaci&oacute;
 'forum_message_trop_long' => 'El vostre missatge &eacute;s massa llarg. La mida m&agrave;xima s&oacute;n 20000 car&agrave;cters.',
 'forum_ne_repondez_pas' => 'No respongueu a aquest correu electr&ograve;nic, feu-ho al f&ograve;rum que trobareu a la seg&uuml;ent adre&ccedil;a: ',
 'forum_non_inscrit' => 'No esteu inscrit o b&eacute; l\'adre&ccedil;a o la contrasenya s&oacute;n err&ograve;nies. ',
-'forum_page_url' => '(Si el missatge fa refer&egrave;ncia a un article publicat a la Web, o a una p&agrave;gina que cont&eacute; m&eacute;s informaci&oacute;, indiqueu a continuaci&oacute; el t&iacute;tol de la p&agrave;gina i la seva adre&ccedil;a URL.)',
+'forum_page_url' => '(Si el vostre missatge fa refer&egrave;ncia a un article publicat a la Web, o a una p&agrave;gina que cont&eacute; m&eacute;s informacions, podeu indicar a continuaci&oacute; el t&iacute;tol de la p&agrave;gina i la seva adre&ccedil;a URL.)',
 'forum_par_auteur' => 'per @auteur@',
 'forum_poste_par' => 'Missatge enviat@parauteur@ a continuaci&oacute; del vostre article.',
 'forum_probleme_database' => 'Problema de la base de dades, el vostre missatge no s\'ha registrat.',
@@ -762,7 +762,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_laisser_champs_vides' => 'deixar els camps buits)',
 'info_langue_principale' => 'Idioma principal del lloc',
 'info_langues' => 'Idiomes del lloc',
-'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
+'info_largeur_vignette' => '@largeur_vignette@ &times; @hauteur_vignette@ pixels',
 'info_ldap_ok' => 'L\'autenticaci&oacute; LDAP est&agrave; instal&middot;lada.',
 'info_les_auteurs_1' => 'per @les_auteurs@',
 'info_lien_hypertexte' => 'Enlla&ccedil; hipertext:',

@@ -177,6 +177,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_non_compresse' => 'Les fichiers du cache sont enregistr&eacute;s en mode non compress&eacute;.',
 'cache_modifiable_webmestre' => 'Ces param&egrave;tres sont modifiables par le webmestre du site.',
 'calendrier_synchro' => 'Si vous utilisez un logiciel d\'agenda compatible <b>iCal</b>, vous pouvez le synchroniser avec les informations de ce site.',
+'confirm_changer_statut' => 'Attention, vous avez demand&eacute; &agrave; changer le statut de cet &eacute;l&eacute;ment. Souhaitez-vous continuer?',
 
 
 // D
@@ -415,7 +416,7 @@ Merci de votre participation
 'forum_message_trop_long' => 'Votre message est trop long. La taille maximale est de 20000 caract&egrave;res.',
 'forum_ne_repondez_pas' => 'Ne repondez pas a ce mail mais sur le forum a l\'adresse suivante :',
 'forum_non_inscrit' => 'Vous n\'&ecirc;tes pas inscrit, ou l\'adresse ou le mot de passe sont erron&eacute;s.',
-'forum_page_url' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
+'forum_page_url' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, vous pouvez indiquer ci-apr&egrave;s le titre de la page et son adresse.)',
 'forum_par_auteur' => 'par @auteur@',
 'forum_poste_par' => 'Message poste@parauteur@ a la suite de votre article.',
 'forum_probleme_database' => 'Probl&egrave;me de base de donn&eacute;es, votre message n\'a pas &eacute;t&eacute; enregistr&eacute;.',
@@ -783,7 +784,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_laisser_champs_vides' => 'laisser ces champs vides)',
 'info_langue_principale' => 'Langue principale du site',
 'info_langues' => 'Langues du site',
-'info_largeur_vignette' => '@largeur_vignette@ x @hauteur_vignette@ pixels',
+'info_largeur_vignette' => '@largeur_vignette@ &#215; @hauteur_vignette@ pixels',
 'info_ldap_ok' => 'L\'authentification LDAP est install&eacute;e.',
 'info_les_auteurs_1' => 'par @les_auteurs@',
 'info_lien_hypertexte' => 'Lien hypertexte :',
