@@ -290,6 +290,9 @@ function optimiser_base() {
 		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx='' $critere");
 		while ($t = spip_fetch_array($s))
 			$suppr .= ','.$t[0];
+		$s = spip_query("SELECT id_$type FROM $table_objet WHERE idx='non'");
+		while ($t = spip_fetch_array($s))
+			$suppr .= ','.$t[0];
 		if ($suppr)
 			spip_query("DELETE FROM $table_index WHERE id_$type IN (0$suppr)");
 	}
