@@ -44,9 +44,12 @@ if (defined("_INC_PUBLIC")) {
 	else {
 	
 		// Une page "normale" va s'afficher ici
-		if (!($flag_ob AND ($var_mode == 'debug'
-		OR $var_recherche OR $affiche_boutons_admin
-		OR $xhtml_page))) {
+		if (!$flag_ob
+		OR (!($var_mode == 'debug')
+			AND !$var_recherche
+			AND !$affiche_boutons_admin
+			AND !$xhtml
+		)) {
 			eval('?' . '>' . $page['texte']);
 			$page = '';
 		}
@@ -90,7 +93,7 @@ if (defined("_INC_PUBLIC")) {
 	}
 
 	// Appliquer tidy au besoin
-	if (trim($page) AND $GLOBALS['xhtml_page'] AND !$flag_preserver) {
+	if (trim($page) AND $xhtml AND !$flag_preserver) {
 		include_ecrire('inc_tidy.php');
 		$page = xhtml($page);
 	}
