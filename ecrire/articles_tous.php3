@@ -27,7 +27,7 @@ $direction_generale = $spip_dir_lang;
 
 
 // Recuperer toutes les rubriques 
-$query = "SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY titre";
+$query = "SELECT id_rubrique, titre, id_parent FROM spip_rubriques ORDER BY 0+titre,titre";
 $result = spip_query($query);
 while ($row = spip_fetch_array($result)) {
 	$id_rubrique = $row['id_rubrique'];
