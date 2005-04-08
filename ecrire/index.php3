@@ -14,6 +14,103 @@
 include ("inc.php3");
 include_ecrire ("inc_calendrier.php");
 
+//// AFFICHAGE RUBRIQUES (COPIE naviguer.php3)
+function enfant($collection){
+	global $les_enfants, $couleur_foncee, $lang_dir;
+	global $spip_display, $spip_lang_left, $spip_lang_right;
+	global $connect_id_auteur;
+	
+	$query2 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection' ORDER BY 0+titre,titre";
+	$result2 = spip_query($query2);
+
+
+	if ($spip_display == 4) $les_enfants .= "<ul>";
+	
+	while($row=spip_fetch_array($result2)){
+		$id_rubrique=$row['id_rubrique'];
+		$id_parent=$row['id_parent'];
+		$titre=$row['titre'];
+
+		$bouton_layer = bouton_block_invisible("enfants$id_rubrique");
+		$les_sous_enfants = sous_enfant($id_rubrique);
+
+		changer_typo($row['lang']);
+		$descriptif=propre($row['descriptif']);
+
+		if ($spip_display == 4) $les_enfants .= "<li>";
+		$les_enfants.= "<div class='enfants'>";
+		
+		
+		if ($id_parent == "0") $logo_rub = "secteur-24.gif";
+		else $logo_rub = "rubrique-24.gif";
+		
+		$les_enfants .= debut_cadre_sous_rub($logo_rub, true);
+		
+		if ($spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+			include_ecrire("inc_logos.php3");
+			$logo = decrire_logo("rubon$id_rubrique");
+			if ($logo) {
+				$fichier = $logo[0];
+				$taille_x = $logo[3];
+				$taille_y = $logo[4];
+				$taille = image_ratio($taille_x, $taille_y, 48, 36);
+				$w = $taille[0];
+				$h = $taille[1];
+				$fid = $logo[2];
+				$hash = calculer_action_auteur ("reduire $w $h");
+
+				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='$spip_lang_right' style='margin-$spip_lang_right: -6px; margin-top: -6px;' />";
+			}
+		}
+
+		if (strlen($les_sous_enfants) > 0){
+			$les_enfants .= $bouton_layer;
+		}
+
+		if (acces_restreint_rubrique($id_rubrique))
+		  $les_enfants .= http_img_pack("admin-12.gif", '', "width='12' height='12'", _T('image_administrer_rubrique'));
+
+		$les_enfants.= "<span dir='$lang_dir'><B><A HREF='naviguer.php3?id_rubrique=$id_rubrique'><font color='$couleur_foncee'>".typo($titre)."</font></A></B></span>";
+		if (strlen($descriptif)) {
+			$les_enfants .= "<div class='verdana1'>$descriptif</div>";
+		}
+
+		if ($spip_display != 4) $les_enfants .= $les_sous_enfants;		
+		
+		$les_enfants .= "<div style='clear:both;'></div>";
+
+
+		$les_enfants .= fin_cadre_sous_rub(true);
+		$les_enfants .= "</div>";
+		if ($spip_display == 4) $les_enfants .= "</li>";
+	}
+	if ($spip_display == 4) $les_enfants .= "</ul>";
+	
+}
+
+function sous_enfant($collection2){
+	global $lang_dir, $spip_lang_dir, $spip_lang_left;
+	$query3 = "SELECT * FROM spip_rubriques WHERE id_parent='$collection2' ORDER BY 0+titre,titre";
+	$result3 = spip_query($query3);
+
+	if (spip_num_rows($result3) > 0){
+		$retour = debut_block_invisible("enfants$collection2")."\n<ul style='margin: 0px; padding: 0px; padding-top: 3px;'>\n";
+		while($row=spip_fetch_array($result3)){
+			$id_rubrique2=$row['id_rubrique'];
+			$id_parent2=$row['id_parent'];
+			$titre2=$row['titre'];
+			changer_typo($row['lang']);
+
+			$retour.="<div class='arial11' " .
+			  http_style_background('rubrique-12.gif', "left center no-repeat; padding: 2px; padding-$spip_lang_left: 18px; margin-$spip_lang_left: 3px") . "><A HREF='naviguer.php3?id_rubrique=$id_rubrique2'><span dir='$lang_dir'>".typo($titre2)."</span></a></div>\n";
+		}
+		$retour .= "</ul>\n\n".fin_block()."\n\n";
+	}
+	
+	return $retour;
+}
+//// FIN RUBRIQUES
+
 debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
 debut_gauche();
@@ -419,6 +516,40 @@ if ($flag_ob) {
 	}
 } else
 	fin_cadre_couleur_foncee();
+
+
+
+///// Afficher les rubriques (copie naviguer.php3)
+enfant(0);
+
+$les_enfants2=substr($les_enfants,round(strlen($les_enfants)/2),strlen($les_enfants));
+if (strpos($les_enfants2,"<div class='enfants'>")){
+	$les_enfants2=substr($les_enfants2,strpos($les_enfants2,"<div class='enfants'>"),strlen($les_enfants2));
+	$les_enfants1=substr($les_enfants,0,strlen($les_enfants)-strlen($les_enfants2));
+}else{
+	$les_enfants1=$les_enfants;
+	$les_enfants2="";
+}
+
+
+// Afficher les sous-rubriques
+echo "<div>&nbsp;</div>";
+echo "<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
+echo "<tr><td valign='top' width=50% rowspan=2>$les_enfants1</td>";
+echo "<td width='20' rowspan='2'>", http_img_pack("rien.gif", ' ', "width='20'") ."</td>\n";
+echo "<td valign='top' width='50%'>$les_enfants2 &nbsp;";
+if (strlen($les_enfants2) > 0) echo "<p>";
+echo "</td></tr>";
+
+echo "<tr><td style='text-align: $spip_lang_right;' valign='bottom'><div align='$spip_lang_right'>";
+if ($flag_editable) {
+	if ($id_rubrique == "0") icone(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "secteur-24.gif", "creer.gif");
+	else  icone(_T('icone_creer_sous_rubrique'), "rubriques_edit.php3?new=oui&retour=nav&id_parent=$id_rubrique", "rubrique-24.gif", "creer.gif");
+	echo "<p>";
+}
+echo "</div></td></tr>";
+echo "</table><p />";
+//////
 
 
 if ($options == 'avancees') {
