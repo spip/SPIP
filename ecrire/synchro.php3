@@ -122,8 +122,12 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 		while($row=spip_fetch_array($result)){
 			$id_rubrique=$row['id_rubrique'];
 			$titre_rubrique = typo($row['titre']);
+			$titre = htmlspecialchars($titre_rubrique);
 			
-			echo "<li><a href='$adresse_site/backend.php3?id_rubrique=$id_rubrique'><img src='" . _DIR_IMG_PACK . "xml.gif' border='0' align='middle'> &nbsp; $titre_rubrique</a>\n";
+			echo "<li>", http_href("$adresse_site/backend.php3?id_rubrique=$id_rubrique", 
+					       http_img_pack("xml.gif", $titre, "border='0' align='middle' valign='top'") . "&nbsp; $titre_rubrique",
+					       $titre),
+			  "</li>\n";
 		}
 		echo "</ul>";
 	}

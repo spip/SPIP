@@ -145,7 +145,7 @@ if ($id_rubrique) icone(_T('icone_retour'), "naviguer.php3?id_rubrique=$id_rubri
 else icone(_T('icone_retour'), "naviguer.php3?id_rubrique=$id_parent", $ze_logo, "rien.gif");
 
 echo "</td>";
-	echo "<td><img src='" . _DIR_IMG_PACK . "rien.gif' width=10></td>\n";
+echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
 echo "<td width='100%'>";
 echo _T('info_modifier_rubrique');
 gros_titre($titre);
