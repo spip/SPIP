@@ -143,7 +143,7 @@ function check_upload_error($error, $msg='') {
 //
 function accepte_fichier_upload ($f) {
 	if (!ereg(".*__MACOSX/", $f)
-	AND !ereg("^(\.|.*/\.|)", basename($f))) {
+	AND !ereg("^\.", basename($f))) {
 		$ext = substr(strrchr($f, "."), 1);
 		$result = spip_query("SELECT * FROM spip_types_documents
 		WHERE extension='"
