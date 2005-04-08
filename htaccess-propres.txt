@@ -12,6 +12,16 @@ RewriteEngine On
 ### si votre site est en sous-domaine, preciser ci-dessous
 # RewriteBase /sous/domaine/
 
+###
+# Compatibilite avec les URLS "html" (pour transition sympa)
+RewriteRule ^rubrique([0-9]+)\.html$	rubrique.php3?id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]
+# Fin compatibilite
+###
+
 # Rediriger les mots et breves sans le "+" final
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
@@ -37,16 +47,8 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^_[^/\.]+(\.html)?$ auteur.php3 [QSA,E=url_propre:$0,L]
 
-# Les articles
+# Les articles (en dernier car expression plus "large")
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^[^/\.]+(\.html)?$ article.php3 [QSA,E=url_propre:$0,L]
 
-
-###
-# Compatibilite avec les URLS "html" (pour transition sympa)
-RewriteRule ^rubrique([0-9]+)\.html$	rubrique.php3?id_rubrique=$1 [QSA,L]
-RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
-RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
-RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
-RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]

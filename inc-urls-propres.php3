@@ -39,8 +39,15 @@ function _generer_url_propre($type, $id_objet) {
 	$table = "spip_".$type."s";
 	$col_id = "id_".$type;
 
+	// Auteurs : on prend le nom
+	if ($type == 'auteur')
+		$champ_titre = 'nom AS titre';
+	else
+		$champ_titre = 'titre';
+
 	// D'abord, essayer de recuperer l'URL existante si possible
-	$result = spip_query("SELECT * FROM $table WHERE $col_id=$id_objet");
+	$result = spip_query("SELECT url_propre, $champ_titre
+	FROM $table WHERE $col_id=$id_objet");
 	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
 
 	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
@@ -93,6 +100,14 @@ function _generer_url_propre($type, $id_objet) {
 	if (spip_num_rows(spip_query($query)) > 0) {
 		$url = $url.','.$id_objet;
 	}
+
+	// Eviter de tamponner les URLs a l'ancienne (cas d'un article
+	// intitule "auteur2")
+	if ($type == 'article'
+	AND preg_match(',^(article|breve|rubrique|mot|auteur)[0-9]+$,', $url))
+		$url = $url.','.$id_objet;
+
+	// Mettre a jour dans la base
 	$query = "UPDATE $table SET url_propre='".addslashes($url)."' WHERE $col_id=$id_objet";
 	spip_query($query);
 	spip_release_lock($lock);
@@ -162,7 +177,7 @@ function recuperer_parametres_url($fond, $url) {
 
 	// Migration depuis anciennes URLs ?
 	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' &&
-		preg_match(',(^|/)((article|breve|rubrique|mot)\.php3?([\?&].*)?)$,', $url, $regs)) {
+preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&].*)?)$,', $url, $regs)) {
 		$type = $regs[3];
 		$id_objet = intval($GLOBALS['id_'.$type]);
 		if ($id_objet) {
