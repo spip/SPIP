@@ -37,15 +37,13 @@ function calcule_fichier_logo($on) {
 
 // Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
 
-function affiche_logos($logos, $lien, $align) {
-	static $num_survol=0;
+function affiche_logos($logos, $lien, $align, $alt='logo') {
 
 	list ($arton, $artoff) = $logos;
 
 	if (!$arton) return $artoff;
 
-	$num_survol++;
-	$milieu = "<img src='$arton'\nalt='image$num_survol'"
+	$milieu = "<img src='$arton'\nalt='$alt'"
 		. ($align ? " align='$align'" : '') 
 		. " style='border-width: 0px;' class='spip_logos' />";
 
