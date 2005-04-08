@@ -379,6 +379,8 @@ $tables_auxiliaires  =
 			       'key' => &$spip_mots_syndic_key),
 	'spip_mots_forum' => array('field' => &$spip_mots_forum,
 			      'key' => &$spip_mots_forum_key),
+	'spip_mots_documents' => array('field' => &$spip_mots_documents,
+			      'key' => &$spip_mots_documents_key),
 	'spip_meta' => array('field' => &$spip_meta,
 			'key' => &$spip_meta_key),
 	'spip_index_articles' => array('field' => &$spip_index_articles,
