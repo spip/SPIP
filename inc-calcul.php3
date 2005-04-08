@@ -222,8 +222,27 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 		$contexte_local = $contexte;
 	}
 
+	// si le champ chapo commence par '=' c'est une redirection.
+	if ($id_article = intval($contexte['id_article'])) {
+		if ($art = sql_chapo($id_article)) {
+			$chapo = $art['chapo'];
+			if (substr($chapo, 0, 1) == '=') {
+				include_ecrire('inc_texte.php3');
+				list(,$url) = extraire_lien(array('','','',
+				substr($chapo, 1)));
+				if ($url) { // sinon les navigateurs pataugent
+					$url = texte_script(str_replace('&amp;', '&', $url));
+					$page = array('texte' => "<".
+					"?php header('Location: $url'); ?" . ">",
+					'process_ins' => 'php');
+				}
+			}
+		}
+	}
+
 	// Go to work !
-	$page = cherche_page($cache, $contexte_local, $fond);
+	if (!$page)
+		$page = cherche_page($cache, $contexte_local, $fond);
 
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
@@ -250,29 +269,9 @@ function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
 			$contexte_inclus, $elements['fond']);
 	}
 	else {
-
-		// Page globale
-		// si le champ chapo commence par '=' c'est une redirection.
-		if ($id_article = intval($GLOBALS['id_article'])) {
-			if ($art = sql_chapo($id_article)) {
-				$chapo = $art['chapo'];
-				if (substr($chapo, 0, 1) == '=') {
-					include_ecrire('inc_texte.php3');
-					list(,$url) = extraire_lien(array('','','',
-					substr($chapo, 1)));
-					if ($url) { // sinon les navigateurs pataugent
-						$url = texte_script(str_replace('&amp;', '&', $url));
-						$page = array('texte' => "<".
-						"?php header('Location: $url'); ?" . ">",
-						'process_ins' => 'php');
-					}
-				}
-			}
-		}
-		if (!$page)
-			$page = calculer_page_globale($chemin_cache,
-				$elements['contexte'],
-				$elements['fond']);
+		$page = calculer_page_globale($chemin_cache,
+			$elements['contexte'],
+			$elements['fond']);
 	}
 
 	$page['signal']['process_ins'] = $page['process_ins'];
