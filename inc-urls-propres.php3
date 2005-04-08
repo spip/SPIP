@@ -15,27 +15,48 @@
 if (defined("_INC_URLS2")) return;
 define("_INC_URLS2", "1");
 
-
 /*
 
 - Comment utiliser ce jeu d'URLs ?
 
 Il faut recopier le fichier htaccess-propres.txt sous le nom .htaccess
 dans le repertoire de base du site SPIP (attention a ne pas ecraser
-d'autres reglages que vous pourriez avoir mis dans ce fichier)
+d'autres reglages que vous pourriez avoir mis dans ce fichier) ; si votre site
+est en "sous-repertoire", pensez a editer la ligne "RewriteBase" ce fichier.
+
+definissez ensuite dans ecrire/mes_options.php3 :
+	type_urls = 'propres';
+ou
+	type_urls = 'propres2';
+pour ajouter '.html' aux adresses generees.
 
 */
 
+if (!defined('_terminaison_urls_propres'))
+	define ('_terminaison_urls_propres', '');
 
 function _generer_url_propre($type, $id_objet) {
 	$table = "spip_".$type."s";
 	$col_id = "id_".$type;
 
 	// D'abord, essayer de recuperer l'URL existante si possible
-	$query = "SELECT url_propre, titre FROM $table WHERE $col_id=$id_objet";
-	$result = spip_query($query);
-	if (!($row = spip_fetch_array($result))) return "";
-	if ($row['url_propre']) return $row['url_propre'];
+	$result = spip_query("SELECT * FROM $table WHERE $col_id=$id_objet");
+	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
+
+	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
+	// ou en preview (astuce pour corriger un url-propre) + admin connecte
+	// Ne pas recalculer l'url-propre,
+	// sauf si :
+	// 1) il n'existe pas, ou
+	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
+	// 3) on le demande explicitement (preview) et on est admin connecte
+	if (defined('_SPIP_REDIRECT') AND
+	($GLOBALS['preview'] OR ($row['statut'] <> 'publie'))
+	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
+		$modif_url_propre = true;
+
+	if ($row['url_propre'] AND !$modif_url_propre)
+		return $row['url_propre'];
 
 	// Sinon, creer l'URL
 	include_ecrire("inc_filtres.php3");
@@ -68,7 +89,7 @@ function _generer_url_propre($type, $id_objet) {
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
 	$query = "SELECT $col_id FROM $table
-		WHERE url_propre='".addslashes($url)."'";
+		WHERE url_propre='".addslashes($url)."' AND $col_id != $id_objet";
 	if (spip_num_rows(spip_query($query)) > 0) {
 		$url = $url.','.$id_objet;
 	}
@@ -76,27 +97,33 @@ function _generer_url_propre($type, $id_objet) {
 	spip_query($query);
 	spip_release_lock($lock);
 
+	spip_log("Creation de l'url propre '$url' pour $col_id=$id_objet");
+
 	return $url;
 }
 
 function generer_url_article($id_article) {
 	$url = _generer_url_propre('article', $id_article);
-	if (!$url) $url = "article.php3?id_article=$id_article";
-	return $url;
+	if ($url)
+		return $url . _terminaison_urls_propres;
+	else
+		return "article.php3?id_article=$id_article";
 }
 
 function generer_url_rubrique($id_rubrique) {
 	$url = _generer_url_propre('rubrique', $id_rubrique);
-	if (!$url) $url = "rubrique.php3?id_rubrique=$id_rubrique";
-	else $url = '-'.$url.'-';
-	return $url;
+	if ($url)
+		return '-'.$url.'-'._terminaison_urls_propres;
+	else
+		return "rubrique.php3?id_rubrique=$id_rubrique";
 }
 
 function generer_url_breve($id_breve) {
 	$url = _generer_url_propre('breve', $id_breve);
-	if (!$url) $url = "breve.php3?id_breve=$id_breve";
-	else $url = '+'.$url.'+';
-	return $url;
+	if ($url)
+		return '+'.$url.'+'._terminaison_urls_propres;
+	else
+		return "breve.php3?id_breve=$id_breve";
 }
 
 function generer_url_forum($id_forum, $show_thread=false) {
@@ -106,13 +133,18 @@ function generer_url_forum($id_forum, $show_thread=false) {
 
 function generer_url_mot($id_mot) {
 	$url = _generer_url_propre('mot', $id_mot);
-	if (!$url) $url = "mot.php3?id_mot=$id_mot";
-	else $url = '+-'.$url.'-+';
-	return $url;
+	if ($url)
+		return '+-'.$url.'-+'._terminaison_urls_propres;
+	else
+		return "mot.php3?id_mot=$id_mot";
 }
 
 function generer_url_auteur($id_auteur) {
-	return "auteur.php3?id_auteur=$id_auteur";
+	$url = _generer_url_propre('auteur', $id_auteur);
+	if ($url)
+		return '_'.$url._terminaison_urls_propres;
+	else
+		return "auteur.php3?id_auteur=$id_auteur";
 }
 
 function generer_url_document($id_document) {
@@ -151,8 +183,11 @@ function recuperer_parametres_url($fond, $url) {
 	if (!$url_propre) $url_propre = substr($url, strrpos($url, '/') + 1);
 	if (!$url_propre) return;
 
+	// Compatilibite avec propres2
+	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
+
 	// Detecter les differents types d'objets demandes
-	if (preg_match(',^\+-(.*)-\+$,', $url_propre, $regs)) {
+	if (preg_match(',^\+-(.*?)-\+$,', $url_propre, $regs)) {
 		$type = 'mot';
 		$url_propre = $regs[1];
 	}
@@ -164,8 +199,14 @@ function recuperer_parametres_url($fond, $url) {
 		$type = 'breve';
 		$url_propre = $regs[1];
 	}
+	else if (preg_match(',^_(.*)$,', $url_propre, $regs)) {
+		$type = 'auteur';
+		$url_propre = $regs[1];
+	}
 	else {
 		$type = 'article';
+		preg_match(',^(.*)$,', $url_propre, $regs);
+		$url_propre = $regs[1];
 	}
 
 	$table = "spip_".$type."s";

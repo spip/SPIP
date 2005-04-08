@@ -10,6 +10,25 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+/*
+
+- Comment utiliser ce jeu d'URLs ?
+
+Il faut recopier le fichier htaccess-propres.txt sous le nom .htaccess
+dans le repertoire de base du site SPIP (attention a ne pas ecraser
+d'autres reglages que vous pourriez avoir mis dans ce fichier) ; si votre site
+est en "sous-repertoire", pensez a editer la ligne "RewriteBase" ce fichier.
+
+definissez ensuite dans ecrire/mes_options.php3 :
+	type_urls = 'html';
+
+Note : le fichier htaccess-propres.txt est compatible avec les URLS 'html' ;
+toutefois si htaccess-propres.txt se revele trop "puissant", car trop generique,
+et conduit a des problemes (en lien par exemple avec d'autres applications
+installees dans votre repertoire, a cote de SPIP), vous pouvez aussi utiliser
+le fichier htaccess-html.txt
+
+*/
 
 // executer une seule fois
 if (defined("_INC_URLS2")) return;

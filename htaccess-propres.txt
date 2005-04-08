@@ -3,6 +3,8 @@
 # si vous reglez $type_urls='propres'                     #
 # dans ecrire/mes_options.php3                            #
 # (fichier associe : inc-urls-propres.php3)               #
+#                                                         #
+# Note: ce fichier est compatible avec inc-urls-html.php3 #
 ###########################################################
 
 RewriteEngine On
@@ -13,24 +15,38 @@ RewriteEngine On
 # Rediriger les mots et breves sans le "+" final
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(\+[^/\.\+]+)$ /$1+ [QSA,R]
+RewriteRule ^(\+[^/\.\+]+)(\.html)?$ /$1+$2 [QSA,R]
 
 # Les mots-cles
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^\+-[^/\.]+-\+$ mot.php3 [QSA,E=url_propre:$0]
+RewriteRule ^\+-[^/\.]+-\+(\.html)?$ mot.php3 [QSA,E=url_propre:$0,L]
 
 # Les breves
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^\+[^/\.]+\+$ breve.php3 [QSA,E=url_propre:$0]
+RewriteRule ^\+[^/\.]+\+(\.html)?$ breve.php3 [QSA,E=url_propre:$0,L]
 
 # Les rubriques
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^-[^/\.]+-$ rubrique.php3 [QSA,E=url_propre:$0]
+RewriteRule ^-[^/\.]+-(\.html)?$ rubrique.php3 [QSA,E=url_propre:$0,L]
+
+# les auteurs
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^_[^/\.]+(\.html)?$ auteur.php3 [QSA,E=url_propre:$0,L]
 
 # Les articles
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^[^/\.]+$ article.php3 [QSA,E=url_propre:$0]
+RewriteRule ^[^/\.]+(\.html)?$ article.php3 [QSA,E=url_propre:$0,L]
+
+
+###
+# Compatibilite avec les URLS "html" (pour transition sympa)
+RewriteRule ^rubrique([0-9]+)\.html$	rubrique.php3?id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]
