@@ -72,7 +72,7 @@ function xhtml ($buffer) {
 	else if ($charset == "utf-8")
 		$enc_char = "utf8";
 	else {
-		spip_log("erreur inc_tidy : charset=$charset");
+		spip_log("erreur inc_tidy : charset=$charset", 'tidy');
 		return $buffer;
 	}
 
@@ -104,10 +104,13 @@ function xhtml ($buffer) {
 				." --add-xml-decl false"
 				." -m $tmp"
 				." 2>&1";
-			spip_log ($c);
+			spip_log(nettoyer_uri(), 'tidy');
+			spip_timer('tidy');
 			exec($c, $verbose, $exit_code);
-			if ($exit_code == 2)
-				spip_log("Erreur tidy :\n".join("\n", $verbose));
+			spip_log ($c.' ('.spip_timer('tidy').')', 'tidy');
+			if ($exit_code == 2) {
+				spip_log("Erreur tidy :\n".join("\n", $verbose), 'tidy');
+			}
 			rename($tmp,$nomfich);
 		}
 
