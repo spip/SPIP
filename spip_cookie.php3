@@ -101,7 +101,7 @@ if ($logout) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&url="
+	redirige_par_entete("spip_login.php3?var_echec_cookie=oui&amp;url="
 		. ($url ? $url : _DIR_RESTREINT_ABS));
 }
 
