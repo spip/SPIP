@@ -146,7 +146,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br>") {
 
 function appliquer_modifs_config() {
 	global $clean_link, $connect_id_auteur;
-	global $adresse_site, $email_webmaster, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $activer_moteur;
+	global $adresse_site, $email_webmaster, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
 
@@ -172,6 +172,11 @@ function appliquer_modifs_config() {
 		ecrire_meta('accepter_visiteurs', 'oui');
 
 	// Test du proxy : $tester_proxy est le bouton "submit"
+
+	// http_proxy : ne pas prendre en compte la modif si le password est '****'
+	if (preg_match(',:\*\*\*\*@,', $http_proxy))
+		$http_proxy = lire_meta('http_proxy');
+
 	if ($tester_proxy) {
 		if (!$test_proxy) {
 			echo _T('info_adresse_non_indiquee');
@@ -182,7 +187,7 @@ function appliquer_modifs_config() {
 			if ($page)
 				echo "<pre>".entites_html($page)."</pre>";
 			else
-				echo _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))."<html>$http_proxy</html></tt>.".aide('confhttpproxy');
+				echo _T('info_impossible_lire_page', array('test_proxy' => $test_proxy))." <tt>".no_password_proxy_url($http_proxy)."</tt>.".aide('confhttpproxy');
 			exit;
 		}
 	}
