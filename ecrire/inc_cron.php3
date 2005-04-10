@@ -25,7 +25,7 @@ define("_ECRIRE_INC_CRON", "1");
 
 // Solution:
 // les scripts usuels les plus brefs, en plus de livrer la page demandee,
-// s'achevent  par un appel à la fonction spip_cron.
+// s'achevent  par un appel a la fonction spip_cron.
 // Celle-ci prend dans la liste des taches a effectuer la plus prioritaire.
 // Une seule tache est executee pour eviter la guillotine des 30 secondes.
 // Une fonction executant une tache doit retourner un nombre:
@@ -78,7 +78,12 @@ function spip_cron($taches=array()) {
 		clearstatcache();
 		$last = @filemtime($lock);
 
-		if (spip_touch($lock, $frequence_taches[$tache])) {
+		// On opere un double lock : un dans _DIR_SESSIONS, pour les hits
+		// (en parallele sur le meme site) ; et un autre dans la base de
+		// donnees, de maniere a eviter toute concurrence entre deux SPIP
+		// differents partageant la meme base (replication de serveurs Web)
+		if (spip_touch($lock, $frequence_taches[$tache])
+		AND spip_get_lock('cron'.$tache)) {
 			spip_timer('tache');
 			include_ecrire('inc_' . $tache . _EXTENSION_PHP);
 			$fonction = 'cron_' . $tache;
@@ -89,12 +94,12 @@ function spip_cron($taches=array()) {
 					# modifier la date du fichier
 					@touch($lock, (0 - $code_de_retour));
 					spip_log($msg . " (en cours, " . spip_timer('tache') .")");
-					spip_timer('tache');
 				}
 				else
 					spip_log($msg . " (" . spip_timer('tache') . ")");
 				break;
 			}
+			spip_release_lock('cron'.$tache);
 		}
 	}
 }
@@ -205,10 +210,13 @@ function cron_popularites($t) {
 }
 
 function cron_visites($t) {
-	calculer_visites();
+	// Si le fichier .lock est absent, ne pas calculer (mais reparer la date
+	// du .lock de maniere a commencer a 00:00:01 demain).
+	if ($t) calculer_visites();
+
 	// il vaut mieux le lancer peu apres minuit, 
-	// donc on retourne "aujourd'hui a 0h 0m 1s 
-	// pour etre appele demain a cette heure
+	// donc on pretend avoir ete execute precisement "ce matin a 00:00:01"
+	// pour etre appele demain a la meme heure
 	return 0 - (strtotime(date("d F Y", time()))+60);
 }
 
