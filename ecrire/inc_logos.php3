@@ -124,7 +124,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 
 	include_ecrire('inc_admin.php3');
  
-	$redirect = $clean_link->getUrl();
+	$redirect = urlencode($clean_link->getUrl());
 
 	echo "<b>";
 	echo bouton_block_invisible(md5($titre));
