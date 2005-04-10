@@ -124,7 +124,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 
 	include_ecrire('inc_admin.php3');
  
-	$redirect = urlencode($clean_link->getUrl());
+	$redirect = $clean_link->getUrl();
 
 	echo "<b>";
 	echo bouton_block_invisible(md5($titre));
@@ -141,7 +141,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
 		echo "$id_objet=$id&";
-		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=$redirect'>"._T('lien_supprimer')."</A>]";
+		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</A>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
