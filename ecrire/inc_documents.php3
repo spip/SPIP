@@ -271,7 +271,7 @@ function integre_image($id_document, $align, $type_aff) {
 				$vignette .= ' alt=""';
 
 			if ($type_aff == 'DOC')
-				$vignette .= " />";
+				$vignette .= " style='$vignette_style' />";
 			else {
 				if ($align && $align != 'center') {
 					$vignette_style .= " float: $align; margin: 4px;";
