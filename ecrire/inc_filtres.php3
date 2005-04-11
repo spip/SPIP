@@ -883,4 +883,39 @@ function calendrier($date='', $type='mois', $echelle='', $partie_cal='', $script
      http_calendrier_init($date, $type, $echelle, $partie_cal, $script);
 }
 
+// un filtre pour transformer les URLs relatives en URLs absolues ;
+// ne s'applique qu'aux #URL_XXXX
+function url_absolue($url) {
+	$url = trim($url);
+
+	if (preg_match(',^[a-z0-9]+://,i', $url))
+		return $url;
+
+	$site = lire_meta('adresse_site');
+	if ($url[0] == '/') {
+		if (preg_match(',^([a-z0-9]+://)(.*?/)?,i', $site.'/', $regs))
+			$host = $regs[1].$regs[2];
+		else
+			$host = $site.'/';
+		return $host.substr($url,1);
+	}
+
+	return $site.'/'.$url;
+}
+
+// un filtre pour transformer les URLs relatives en URLs absolues ;
+// ne s'applique qu'aux textes contenant des liens
+function liens_absolus($texte) {
+	if (preg_match_all(',(<a[[:space:]]+[^<>]*href=["\']?)([^"\' ><[:space:]]+)([^<>]*>),ims', 
+	$texte, $liens, PREG_SET_ORDER)) {
+		foreach ($liens as $lien) {
+			$abs = url_absolue($lien[2]);
+			if ($abs <> $lien[2])
+				$texte = str_replace($lien[0], $lien[1].$abs.$lien[3], $texte);
+		}
+	}
+	return $texte;
+}
+
+
 ?>
