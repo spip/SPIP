@@ -207,12 +207,12 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	$debut = '';
 	if ($flag_cpt)
-		$debut = "\n		\$compteur_boucle++;";
+		$debut = "\n		\$Numrows['$id_boucle']['compteur_boucle']++;";
 
 	if ($boucle->mode_partie)
-		$debut .= '
-		if ($compteur_boucle-1 >= $debut_boucle
-		AND $compteur_boucle-1 <= $fin_boucle) {';
+		$debut .= "
+		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle
+		AND \$Numrows['$id_boucle']['compteur_boucle']-1 <= \$fin_boucle) {";
 	
 	if ($lang_select AND !$constant) {
 		$selecteur = 
@@ -268,7 +268,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 				$corps = "";
 		} else {
 			$boucle->numrows = true;
-			$corps = "\n		".'for($x=$Numrows["'.$id_boucle.'"];$x>0;$x--)
+			$corps = "\n		".'for($x=$Numrows["'.$id_boucle.'"]["total"];$x>0;$x--)
 			$t0 .= ' . $corps .';';
 		}
 	} else {
@@ -334,7 +334,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	$init .= "\n	".'$t0 = "";
 	$SP++;';
 	if ($flag_cpt)
-		$init .= "\n	\$compteur_boucle = 0;";
+		$init .= "\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;";
 
 	if ($boucle->mode_partie)
 		$init .= calculer_parties($boucle->partie,
@@ -344,7 +344,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	else if ($boucle->numrows)
 		$init .= "\n	\$Numrows['" .
 			$id_boucle .
-			"'] = @spip_abstract_count(\$result,'" .
+			"']['total'] = @spip_abstract_count(\$result,'" .
 			$boucle->sql_serveur .
 			"');";
 
@@ -414,7 +414,7 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 
 	// calcul du total boucle final
 	$retour .= "\n	"
-		.'$Numrows[\''.$id_boucle.'\'] = max(0,$fin_boucle - $debut_boucle + 1);';
+		.'$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);';
 
 	return $retour;
 }

@@ -287,14 +287,15 @@ function balise_RECHERCHE_dist($p) {
 }
 
 function balise_COMPTEUR_BOUCLE_dist($p) {
-	if ($p->id_mere === '') {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->id_mere;
+	if ($b === '') {
 		erreur_squelette(
 			_T('zbug_champ_hors_boucle',
 				array('champ' => '#COMPTEUR_BOUCLE')
 			), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		$p->code = '$compteur_boucle';
+		$p->code = "\$Numrows['$b']['compteur_boucle']";
 		$p->statut = 'php';
 		return $p;
 	}
@@ -309,7 +310,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 			), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		$p->code = "\$Numrows['$b']";
+		$p->code = "\$Numrows['$b']['total']";
 		$p->boucles[$b]->numrows = true;
 		$p->statut = 'php';
 	}
