@@ -159,7 +159,7 @@ if ($aff_statut['publie'])
 			    strpos($aff_art, 'publie'),
 			    'aff_art',
 			    'puce-verte-breve.gif',
-			    _T('texte_statut_refuse'));
+			    _T('texte_statut_publies'));
 
 if ($aff_statut['refuse'])
 	echo http_label_img('refuse',
