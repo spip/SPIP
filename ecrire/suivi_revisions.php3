@@ -58,7 +58,7 @@ else echo "<li><a href='suivi_revisions.php3?uniq_auteur=true'>$nom_auteur</a>";
 
 echo "<p>";
 
-$query = "SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY titre";
+$query = "SELECT * FROM spip_rubriques WHERE id_parent = 0 ORDER BY 0+titre, titre";
 $result = spip_query($query);
 
 while ($row = mysql_fetch_array($result)) {

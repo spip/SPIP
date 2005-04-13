@@ -222,7 +222,7 @@ function enfant($leparent){
 
 
 	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY titre";
+ 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY 0+titre, titre";
  	$result=spip_query($query);
 
 	while($row=spip_fetch_array($result)){

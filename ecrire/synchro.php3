@@ -113,7 +113,7 @@ echo propre("<ul><cadre>".$adresse_site."/backend.php3</cadre></ul>");
 echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
 
-	$query = "SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY titre";
+	$query = "SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY 0+titre, titre";
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
