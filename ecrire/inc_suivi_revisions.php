@@ -54,7 +54,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	
 	$result = spip_query($query . " ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
 	if (spip_num_rows($result) > 0) {	
-		$titre_table = _T('icone_suivi_revisions');
+		$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
 		if ($court) $titre_table = afficher_plus("suivi_revisions.php3").$titre_table;
 		echo "<div style='height: 12px;'></div>";
 		echo "<div class='liste'>";

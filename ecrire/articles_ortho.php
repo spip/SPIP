@@ -116,18 +116,18 @@ $result_ortho = corriger_ortho($ortho, $lang_article);
 if (is_array($result_ortho)) {
 	$mots = $result_ortho['mauvais'];
 	if ($erreur = $result_ortho['erreur']) {
-		echo "<b>"._T('ortho_trop_de_fautes')."</b><p>\n";
-		echo "<b>"._T('ortho_trop_de_fautes_2')."</b><p>";
+		echo "<b>"._T('ortho_trop_de_fautes').aide('corrortho')."</b><p>\n";
+		echo "<b>"._T('ortho_trop_de_fautes2')."</b><p>";
 	}
 	else {
-		echo "<b>"._T('ortho_mode_demploi')."</b><p>\n";
+		echo "<b>"._T('ortho_mode_demploi').aide('corrortho')."</b><p>\n";
 	}
 
 	panneau_ortho($result_ortho);
 }
 else {
 	$erreur = $result_ortho;
-	echo "<b>"._T('ortho_dico_absent')." (";
+	echo "<b>"._T('ortho_dico_absent').aide('corrortho')." (";
 	echo traduire_nom_langue($lang_article);
 	echo "). ";
 	echo _T('ortho_verif_impossible')."</b>";
