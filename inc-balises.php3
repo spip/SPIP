@@ -686,10 +686,21 @@ function balise_PARAMETRES_FORUM_dist($p) {
 			break;
 	}
 
+	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
+	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
+	# porter un nom et faire partie de l'API.
+	if ($retour = param_balise($p))
+		$code_retour = calculer_liste(
+			parser_champs_etendus($retour, array()),
+			$p->descr,
+			$p->boucles,
+			$p->id_boucle);
+	else
+		$code_retour = "''";
+
+	// Attention un eventuel &retour=xxx dans l'URL est prioritaire
 	$c .= '.
-	(($lien = (_request("retour") ? _request("retour") : ('.
-		($p->etoile ? "''" : 'nettoyer_uri()')
-	.'))) ? "&retour=".rawurlencode($lien) : "")';
+	(($lien = (_request("retour") ? _request("retour") : '.$code_retour.')) ? "&retour=".rawurlencode($lien) : "")';
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 
