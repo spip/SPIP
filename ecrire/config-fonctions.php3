@@ -266,7 +266,7 @@ echo "<p>";
 if ($options == "avancees") {
 
 
-debut_cadre_trait_couleur("article-24.gif", false, "", _T('info_travail_colaboratif'));
+debut_cadre_trait_couleur("article-24.gif", false, "", _T('info_travail_colaboratif').aide("artmodif"));
 	$articles_modif = lire_meta("articles_modif");
 
 
@@ -293,7 +293,7 @@ echo "<p>";
 
 if ($flag_revisions AND $options == "avancees") {
 
-debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_titre'));
+debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_titre').aide("suivimodif"));
 	$articles_versions = lire_meta("articles_versions");
 
 
@@ -317,7 +317,7 @@ debut_cadre_trait_couleur("historique-24.gif", false, "", _T('info_historique_ti
 // Correcteur d'orthographe
 //
 
-debut_cadre_trait_couleur("ortho-24.gif", false, "", _T('ortho_orthographe'));
+debut_cadre_trait_couleur("ortho-24.gif", false, "", _T('ortho_orthographe').aide("corrortho"));
 	$articles_ortho = lire_meta("articles_ortho");
 
 	echo "<div class='verdana2'>";
@@ -346,7 +346,7 @@ debut_cadre_trait_couleur("ortho-24.gif", false, "", _T('ortho_orthographe'));
 // Previsualisation sur le site public
 //
 
-debut_cadre_trait_couleur("naviguer-site.png", false, "", _T('previsualisation'));
+debut_cadre_trait_couleur("naviguer-site.png", false, "", _T('previsualisation').aide("previsu"));
 	$preview = lire_meta("preview");
 	# non = personne n'est autorise a previsualiser (defaut)
 	# oui = les admins
