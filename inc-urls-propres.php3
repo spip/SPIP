@@ -212,15 +212,15 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&
 		$type = 'mot';
 		$url_propre = $regs[1];
 	}
-	else if (preg_match(',^-(.*)-?$,', $url_propre, $regs)) {
+	else if (preg_match(',^-(.*?)-?$,', $url_propre, $regs)) {
 		$type = 'rubrique';
 		$url_propre = $regs[1];
 	}
-	else if (preg_match(',^\+(.*)\+?$,', $url_propre, $regs)) {
+	else if (preg_match(',^\+(.*?)\+?$,', $url_propre, $regs)) {
 		$type = 'breve';
 		$url_propre = $regs[1];
 	}
-	else if (preg_match(',^_(.*)_?$,', $url_propre, $regs)) {
+	else if (preg_match(',^_(.*?)_?$,', $url_propre, $regs)) {
 		$type = 'auteur';
 		$url_propre = $regs[1];
 	}
