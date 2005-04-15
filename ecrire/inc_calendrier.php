@@ -168,113 +168,6 @@ function http_cal_height ($heure, $heurefin, $debut, $fin, $dimheure, $dimjour, 
 	return $height;	
 }
 
-// Conversion en HTML d'un tableau de champ ics
-// Le champ URL devient une balise A 
-// 	avec href=URL et clic sur les champs SUMMARY et DESC
-// Le champ CATEGORIES indique les couleurs pour le style CSS
-
-function http_calendrier_ics($evenements, $amj = "") 
-{
-  $res = '';
-	if ($evenements)
-	{
-		foreach ($evenements as $evenement)
-		{
-			$url = $evenement['URL'];
-			$afficher_ev = true;
-						
-			$jour_debut = substr($evenement['DTSTART'], 0,8);
-			$jour_fin = substr($evenement['DTEND'], 0, 8);
-			
-			if ($jour_debut > 0) {
-				if (!($jour_fin > 0)) $jour_fin = $jour_debut;
-				if ($jour_debut > $amj OR $jour_fin < $amj) $afficher_ev = false;
-			}
-			
-			if ($jour_debut < $amj) $afficher_suite = true;
-
-			
-			if ($afficher_ev) {			
-			  $radius_top = " radius-top";
-			  $radius_bottom = " radius-bottom";
-
-				$deb_h = substr($evenement['DTSTART'],-6,2);
-				$deb_m = substr($evenement['DTSTART'],-4,2);
-				$fin_h = substr($evenement['DTEND'],-6,2);
-				$fin_m = substr($evenement['DTEND'],-4,2);
-
-				$desc = propre($evenement['DESCRIPTION']);
-				$sum = $evenement['SUMMARY'];
-				if (!(is_int($evenement['CATEGORIES'])))
-				  {
-				    if ($evenement['CATEGORIES'] == 'info_articles')
-				      $i = 'puce-verte-breve.gif';
-				    else
-				      $i = 'puce-blanche-breve.gif';
-				    $sum = http_img_pack($i, $desc,  "style='width: 8px; height: 9px; border: 0px'") . '&nbsp;' . $sum;
-				  }
-				else 
-				{
-				  if ($sum)
-				    $sum = "<span style='color: black'>" .
-						ereg_replace(' +','&nbsp;', typo($sum)) .
-						"</span>";
-				  else {
-				    if ($desc) $sum .= " <span class='calendrier-arial10'>$desc</span>"; 
-				  }
-				}
-				if ($deb_h >0 OR $deb_m > 0) {
-					if ((($deb_h > 0) OR ($deb_m > 0)) AND $amj == $jour_debut)
-						{ $deb = '<b>' . $deb_h . ':' . $deb_m . '</b> ';}
-					else { 
-						$deb = '...'; 
-						$radius_top = "";
-					}
-		
-					if ((($fin_h > 0) OR ($fin_m > 0)) AND $amj == $jour_fin)
-						{ $fin = '<b>' . $fin_h . ':' . $fin_m . '</b> ';}
-					else { 
-						$fin = '...'; 
-						$radius_bottom = "";
-					}
-	
-					if ($amj == $jour_debut OR $amj == $jour_fin) {
-						$date_affichee = "<div>$deb-$fin</div>";
-						$opacity = "";
-					}
-					else {
-						$date_affichee = "";
-						$opacity = " -moz-opacity: 0.5; filter: alpha(opacity=50);";
-						$desc = "";
-					}
-				} else {
-					$date_affichee = "";
-					$opacity = "";
-				}
-
-				$e = $date_affichee .
-				  (!$url ? "$sum $desc" : http_href($url, $sum, $desc));
-				if (trim($e))
-				  {
-					$c = calendrier_div_style($evenement);
-					if (!$c) 
-					  {
-					    $c = "color: black";
-					    $radius_top = "";
-					    $radius_bottom = "";
-					  } else {
-					  list($b,$c) = $c;
-					  $c = "padding: 2px; margin-top: 2px;
-$opacity background-color: $b; color: $c; border: 1px solid $c";
-					}
-				  $res .= "\n<div class='calendrier-arial10$radius_top$radius_bottom' style='$c'>$e\n</div>\n"; 
-				  }
-			}
-		}
-	}
-	return $res;
-}
-
 # affiche un mois en grand, avec des tableau de clics vers d'autres mois
 # si premier jour et dernier_jour sont donnes, affiche les semaines delimitees.
 
@@ -683,7 +576,7 @@ function http_calendrier_clics($annee, $mois, $jour, $script, $ancre)
 	"</td><td style='text-align: right'>" .
 	http_href("$script&type=semaine" . $ancre,
 		  $semaine,
-		  "Semaine numéro $semaine",
+		  _T('date_semaines') . " $semaine",
 		  '',
 		  'calendrier-helvetica16') .
 	"</td></tr>\n</table>";
@@ -963,12 +856,101 @@ function http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize)
 		"px;'>23:59</div>";
 }
 
-    
-// Visualise les $evenements de la journee $date
-// commencant a $debut heure et finissant a $fin heure avec
-// des couleurs definies par calendrier_div_style appliquee sur l'evenement
-// une $echelle (nombre de secondes representees par 1 pixel)
-// une dimension $largeur
+
+// Conversion d'un tableau de champ ics en des balises div successives
+// un champ CATEGORIES numerique indique un evenement avec heure
+
+function http_calendrier_ics($evenements, $amj = "") 
+{
+	$res = '';
+	if ($evenements)
+	{
+		foreach ($evenements as $evenement)
+		{
+		  list($ev, $style, $class) =
+				is_int($evenement['CATEGORIES']) ?
+				http_calendrier_avec_heure($evenement, $amj) :
+				http_calendrier_sans_heure($evenement);
+		  $res .= "\n<div class='$class' style='$style'>$ev\n</div>\n"; 
+		}
+	}
+	return $res;
+}
+
+function http_calendrier_sans_heure($evenement)
+{
+	if ($evenement['CATEGORIES'] == 'info_articles')
+	  $i = 'puce-verte-breve.gif';
+	else
+	  $i = 'puce-blanche-breve.gif';
+	$desc = propre($evenement['DESCRIPTION']);
+	$sum = $evenement['SUMMARY'];
+	if (!$sum) $sum = $desc;
+	$sum = http_img_pack($i, $desc,  "style='width: 8px; height: 9px; border: 0px'") . '&nbsp;' . $sum;
+	if ($evenement['URL']) {
+		$sum = http_href($evenement['URL'], $sum, $desc);
+	}
+	return array($sum, "color: black", 'calendrier-arial10');
+}
+
+function http_calendrier_avec_heure($evenement, $amj)
+{
+	$jour_debut = substr($evenement['DTSTART'], 0,8);
+	$jour_fin = substr($evenement['DTEND'], 0, 8);
+	if (!($jour_fin > 0)) $jour_fin = $jour_debut;
+	if (!(($jour_debut > 0) AND
+	      (($jour_debut <= $amj) AND ($jour_fin >= $amj))))
+	  return array();
+	
+	$desc = propre($evenement['DESCRIPTION']);
+	$sum = $evenement['SUMMARY'];
+	if (!$sum) $sum = $desc;
+	$sum = "<span style='color: black'>" .
+	  ereg_replace(' +','&nbsp;', typo($sum)) .
+	  "</span>";
+	if ($evenement['URL'])
+	  $sum = http_href($evenement['URL'], $sum, $desc);
+	$radius_top = " radius-top";
+	$radius_bottom = " radius-bottom";
+	$deb_h = substr($evenement['DTSTART'],-6,2);
+	$deb_m = substr($evenement['DTSTART'],-4,2);
+	$fin_h = substr($evenement['DTEND'],-6,2);
+	$fin_m = substr($evenement['DTEND'],-4,2);
+	
+	if ($deb_h >0 OR $deb_m > 0) {
+	  if ((($deb_h > 0) OR ($deb_m > 0)) AND $amj == $jour_debut)
+	    { $deb = '<b>' . $deb_h . ':' . $deb_m . '</b> ';}
+	  else { 
+	    $deb = '...'; 
+	    $radius_top = "";
+	  }
+	  
+	  if ((($fin_h > 0) OR ($fin_m > 0)) AND $amj == $jour_fin)
+	    { $fin = '<b>' . $fin_h . ':' . $fin_m . '</b> ';}
+	  else { 
+	    $fin = '...'; 
+	    $radius_bottom = "";
+	  }
+	  
+	  if ($amj == $jour_debut OR $amj == $jour_fin) {
+	    $sum = "<div>$deb-$fin</div>$sum";
+	    $opacity = "";
+	  }
+	  else {
+	    $opacity = " -moz-opacity: 0.5; filter: alpha(opacity=50);";
+	  }
+	} else { $opacity = "";	}
+	list($b,$c) = calendrier_div_style($evenement);
+
+	return array($sum,
+		     "padding: 2px; margin-top: 2px;
+$opacity background-color: $b; color: $c; border: 1px solid $c",
+		     "calendrier-arial10$radius_top$radius_bottom");
+}
+
+// Conversion d'un tableau de champ ics en des balises div positionnees    
+// Les $evenements a $date commencant a $debut heure et finissant a $fin heure// ont des couleurs definies par calendrier_div_style 
+// $echelle est le nombre de secondes representees par 1 pixel
 
 function http_calendrier_jour_ics($debut, $fin, $largeur, $echelle, $evenements, $date) {
 	global $spip_lang_left;
