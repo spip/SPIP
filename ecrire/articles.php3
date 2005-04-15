@@ -1536,6 +1536,7 @@ else {
 
 	echo "<div $dir_lang style='font-size: small;'>";
 	echo propre($texte);
+	echo "<br clear='both' />";
 	echo "</div>";
 
 	if ($ps) {
