@@ -134,6 +134,7 @@ if ($essai_login == "oui") {
 		}
 	}
 
+	// Si la connexion a reussi
 	if ($ok) {
 		// Nouveau redacteur ou visiteur inscrit par mail :
 		// 'nouveau' -> '1comite' ou  '6forum'
@@ -143,16 +144,23 @@ if ($essai_login == "oui") {
 		if ($auth->login AND $auth->statut == '0minirezo') // force le cookie pour les admins
 			$cookie_admin = "@".$auth->login;
 
+		// On est connecte : recuperer les donnees auteurs
+		// poser le cookie session, puis le cas echeant
+		// verifier que le statut correspond au minimum requis,
 		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($auth->login)."'";
 		$result = spip_query($query);
-		if ($row_auteur = spip_fetch_array($result))
+		if ($row_auteur = spip_fetch_array($result)) {
 			$cookie_session = creer_cookie_session($row_auteur);
+		} else
+			$ok = false;
 
-		if (ereg(_DIR_RESTREINT_ABS, $redirect)) {
+		// Si on se connecte dans l'espace prive, ajouter "bonjour" (inutilise)
+		if ($ok AND ereg(_DIR_RESTREINT_ABS, $redirect)) {
 		      $redirect .= (strpos($redirect, "?") ? "&" : "?") . 'bonjour=oui';
 		}
 	}
-	else {
+
+	if (!$ok) {
 		if (ereg(_DIR_RESTREINT_ABS, $redirect))
 			$redirect = "spip_login.php3";
 		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=$login";
