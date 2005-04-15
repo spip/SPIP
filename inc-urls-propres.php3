@@ -19,16 +19,19 @@ define("_INC_URLS2", "1");
 
 - Comment utiliser ce jeu d'URLs ?
 
-Il faut recopier le fichier htaccess-propres.txt sous le nom .htaccess
-dans le repertoire de base du site SPIP (attention a ne pas ecraser
-d'autres reglages que vous pourriez avoir mis dans ce fichier) ; si votre site
-est en "sous-repertoire", vous devrez editer la ligne "RewriteBase" ce fichier.
+Recopiez le fichier "htaccess.txt" du repertoire de base du site SPIP sous
+le sous le nom ".htaccess" (attention a ne pas ecraser d'autres reglages
+que vous pourriez avoir mis dans ce fichier) ; si votre site est en
+"sous-repertoire", vous devrez aussi editer la ligne "RewriteBase" ce fichier.
+Les URLs definies seront alors redirigees vers les fichiers de SPIP.
 
-definissez ensuite dans ecrire/mes_options.php3 :
+Definissez ensuite dans ecrire/mes_options.php3 :
 	type_urls = 'propres';
-ou
+SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
+
+Variante :
 	type_urls = 'propres2';
-pour ajouter '.html' aux adresses generees.
+ajoutera '.html' aux adresses generees : "Mon-titre-d-article.html"
 
 */
 
@@ -157,7 +160,7 @@ function generer_url_mot($id_mot) {
 function generer_url_auteur($id_auteur) {
 	$url = _generer_url_propre('auteur', $id_auteur);
 	if ($url)
-		return '_'.$url._terminaison_urls_propres;
+		return '_'.$url.'_'._terminaison_urls_propres;
 	else
 		return "auteur.php3?id_auteur=$id_auteur";
 }
@@ -202,19 +205,19 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&
 	$url_propre = preg_replace(',\.html$,i', '', $url_propre);
 
 	// Detecter les differents types d'objets demandes
-	if (preg_match(',^\+-(.*?)-\+$,', $url_propre, $regs)) {
+	if (preg_match(',^\+-(.*?)-?\+?$,', $url_propre, $regs)) {
 		$type = 'mot';
 		$url_propre = $regs[1];
 	}
-	else if (preg_match(',^-(.*)-$,', $url_propre, $regs)) {
+	else if (preg_match(',^-(.*)-?$,', $url_propre, $regs)) {
 		$type = 'rubrique';
 		$url_propre = $regs[1];
 	}
-	else if (preg_match(',^\+(.*)\+$,', $url_propre, $regs)) {
+	else if (preg_match(',^\+(.*)\+?$,', $url_propre, $regs)) {
 		$type = 'breve';
 		$url_propre = $regs[1];
 	}
-	else if (preg_match(',^_(.*)$,', $url_propre, $regs)) {
+	else if (preg_match(',^_(.*)_?$,', $url_propre, $regs)) {
 		$type = 'auteur';
 		$url_propre = $regs[1];
 	}
@@ -229,8 +232,7 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&
 	$query = "SELECT $col_id FROM $table
 		WHERE url_propre='".addslashes($url_propre)."'";
 	$result = spip_query($query);
-	if (spip_num_rows($result) == 1) {
-		$row = spip_fetch_array($result);
+	if ($row = spip_fetch_array($result)) {
 		$contexte[$col_id] = $row[$col_id];
 	}
 

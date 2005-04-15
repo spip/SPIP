@@ -1,0 +1,101 @@
+##############################################################
+# Fichier .htaccess                                SPIP v1.8 #
+#                                                            #
+# Permet de controler les URLs et la version de php utilisee #
+# Compatible avec les URLs 'html', 'propres' et 'propres2'   #
+# Permet aussi d'effectuer la transition de .PHP 3 vers .PHP #
+#                                                            #
+# Pour utiliser ce fichier renommez-le '.htaccess' dans le   #
+# repertoire racine du site, en veillant a ne pas ecraser un #
+# .htaccess personnalise qui s'y trouverait deja             #
+#                                                            #
+# Attention certains hebergeurs desactivent tout ou partie   #
+# des fonctions du fichier .htaccess ; celui-ci est donc     #
+# indicatif - en cas de difficulte voir sur les forums SPIP  #
+##############################################################
+
+RewriteEngine On
+
+
+################ CONFIGURATION ######################
+
+### Configuration sous-repertoire
+# Si votre site est dans un sous-repertoire, preciser ci-dessous
+# le nom du sous-repertoire, et supprimer le '#'
+
+#RewriteBase /sous/repertoire/
+
+
+### Version PHP 3
+# Si vous utilisez une distribution 'PHP 3' de SPIP, et si votre
+# hebergement execute encore les .php[3] avec un moteur PHP 3
+# au lieu de PHP 4, vous pouvez decommenter la ligne ci-dessous
+# pour faire fonctionner les fichiers sous php4 (sans garantie)
+
+#AddType x-mapp-php4 .php3
+
+
+# SPIP version 'php' - si vous avez d'anciennes adresses en '.php[3]',
+# supprimez le '#' sur les lignes qui suivent pour rediriger les acces
+# errones vers le .php correspondant
+
+#RewriteCond %{REQUEST_FILENAME} -f
+#RewriteRule ^(.+)\.php[3]$ $1.php [QSA,L]
+
+# Fin version
+###
+
+
+################ REGLAGES PERSONNALISES ######################
+# Inscrivez ci-dessous vos reglages supplementaires
+
+
+
+
+################ GESTIONS DES URLS SPIP #######################
+
+###
+# Si le fichier ou repertoire demande existe
+# ignorer toutes les regles qui suivent
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule "." - [skip=100]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule "." - [skip=100]
+#
+###
+
+
+###
+# Compatibilite avec les URLS "html" (pour transition sympa)
+# voir fichier inc-urls-html.php3
+RewriteRule ^rubrique([0-9]+)\.html$	rubrique.php3?id_rubrique=$1 [QSA,L]
+RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
+RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
+RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
+RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]
+# Fin compatibilite
+###
+
+###
+# URLs "propres" et "propres2"
+# pensez a regler $type_urls='propres' ou 'propres2'
+# dans ecrire/mes_options.php3
+# (fichier associe : inc-urls-propres.php3)
+
+# Les mots-cles
+RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$ mot.php3 [QSA,E=url_propre:$0,L]
+
+# Les breves
+RewriteRule ^\+[^/\.]+\+?(\.html)?$ breve.php3 [QSA,E=url_propre:$0,L]
+
+# Les rubriques
+RewriteRule ^-[^/\.]+-?(\.html)?$ rubrique.php3 [QSA,E=url_propre:$0,L]
+
+# les auteurs
+RewriteRule ^_[^/\.]+_?(\.html)?$ auteur.php3 [QSA,E=url_propre:$0,L]
+
+# Les articles (en dernier car expression plus "large")
+RewriteRule ^[^/\.]+(\.html)?$ article.php3 [QSA,E=url_propre:$0,L]
+
+# Fin URLs "propres" et "propres2"
+###
