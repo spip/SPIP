@@ -136,6 +136,21 @@ a.calendrier-annee:hover {
 	font-weight: bold;
  }
 
+.calendrier-heurepile { 
+	position: absolute;
+	margin-left: 2px;
+	margin-right: 2px;
+	border-top: 1px solid #cccccc;
+	font-weight: bold;
+ }
+
+.calendrier-heureface { 
+	position: absolute;
+	margin-left: 2px;
+	margin-right: 2px;
+	border-top: 1px solid #cccccc;
+ }
+
 .calendrier-mozleft { 
 	-moz-border-radius-topleft: 10px;
 	-moz-border-radius-bottomleft: 10px;

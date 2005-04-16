@@ -541,7 +541,7 @@ function http_calendrier_suitede7($mois_today,$annee_today, $premier_jour, $dern
 		else $border_left = "";
 		$ligne .= "\n\t<td style='$class_dispose background-color: $couleur_fond;$border_left'>" .
 		  http_calendrier_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre) .
-		  (!$evenements[$amj] ? '' : http_calendrier_ics($evenements[$amj], $amj) ).
+		  http_calendrier_ics($evenements[$amj], $amj).
 			"\n\t</td>";
 		if ($jour_semaine==0) 
 		{ 
@@ -830,28 +830,22 @@ function http_calendrier_heures($debut, $fin, $dimheure, $dimjour, $fontsize)
 	for ($i = $debut; $i < $fin; $i++) {
 		for ($j=0; $j < $slice; $j++) 
 		{
-			if ($j == 0) $gras = " font-weight: bold;";
-			else $gras = "";
+			$gras = "calendrier-heure" . ($j  ? "face" : "pile");
 			
-			$total .= "\n<div style='position: absolute; $spip_lang_left: 0px; top: ".
+			$total .= "\n<div class='$gras' style='$spip_lang_left: 0px; top: ".
 				http_cal_top ("$i:".sprintf("%02d",floor(($j*60)/$slice)), $debut, $fin, $dimheure, $dimjour, $fontsize) .
-				"px; border-top: 1px solid #cccccc;$gras'>
-				<div style='margin-$spip_lang_left: 2px'>$i:" . 
+				"px;'>$i:" .
 				sprintf("%02d",floor(($j*60)/$slice)) . 
-				"</div>\n</div>";
+				"</div>";
 		}
 	}
-	
-	$total .= "\n<div style='position: absolute; top: ".
-		http_cal_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize).
-		"px; border-top: 1px solid #cccccc;'>
-		<div style='font-weight: bold; margin-$spip_lang_left: 2px'>$fin:00" . 
-		"</div>\n</div>";
-	
-	
-	return "\n<div style='position: absolute; font-weight: bold; $spip_lang_left: 2px; top: 2px;'>0:00</div>" .
+
+	return "\n<div class='calendrier-heurepile' style='border: 0px; $spip_lang_left: 0px; top: 2px;'>0:00</div>" .
 		$total .
-		"\n<div style='position: absolute;font-weight: bold; $spip_lang_left: 2px; top: ".
+		"\n<div class='calendrier-heurepile' style='$spip_lang_left: 0px; top: ".
+		http_cal_top ("$fin:00", $debut, $fin, $dimheure, $dimjour, $fontsize).
+		"px;'>$fin:00</div>" .
+		"\n<div class='calendrier-heurepile' style='border: 0px; $spip_lang_left: 0px; top: ".
 		($dimjour - $fontsize - 2) .
 		"px;'>23:59</div>";
 }
