@@ -22,6 +22,7 @@ RewriteEngine On
 ### Configuration sous-repertoire
 # Si votre site est dans un sous-repertoire, preciser ci-dessous
 # le nom du sous-repertoire, et supprimer le '#'
+# Chez certains hebergeurs il faut indiquer "RewriteBase /"
 
 #RewriteBase /sous/repertoire/
 
