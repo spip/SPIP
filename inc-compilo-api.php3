@@ -148,6 +148,8 @@ $exceptions_des_tables['documents']['type_document']=array('types_documents'
 , 'titre');
 $exceptions_des_tables['documents']['extension_document']=array('types_docum
 ents', 'extension');
+$exceptions_des_tables['documents']['mime_type']=array('types_documents'
+, 'mime_type');
 
 # ne sert plus ? verifier balise_URL_ARTICLE
 $exceptions_des_tables['syndic_articles']['url_article']='url';
@@ -187,6 +189,8 @@ $tables_relations['breves']['id_document']='documents_breves';
 $tables_relations['documents']['id_article']='documents_articles';
 $tables_relations['documents']['id_rubrique']='documents_rubriques';
 $tables_relations['documents']['id_breve']='documents_breves';
+$tables_relations['documents']['id_syndic']='documents_syndic';
+$tables_relations['documents']['id_syndic_article']='documents_syndic';
 
 $tables_relations['forums']['id_mot']='mots_forum';
 
@@ -202,5 +206,7 @@ $tables_relations['rubriques']['id_mot']='mots_rubriques';
 $tables_relations['rubriques']['id_document']='documents_rubriques';
 
 $tables_relations['syndication']['id_mot']='mots_syndic';
+$tables_relations['syndication']['id_document']='documents_syndic';
+$tables_relations['syndic_articles']['id_document']='documents_syndic';
 
 ?>

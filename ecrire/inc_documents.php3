@@ -52,12 +52,20 @@ function vignette_par_defaut($type_extension, $size=true) {
 }
 
 
-function document_et_vignette($url, $document) {
-	eregi('\.([a-z0-9]+)$', $document, $regs);
+function document_et_vignette($url, $id_type) {
+	if ($id_type) {
+		list($extension) = spip_fetch_array(spip_query("SELECT id_type FROM
+		spip_types_documents WHERE id_type=$id_type"));
+	}
+
 	list($fichier, $largeur, $hauteur) =
-		vignette_par_defaut($regs[1]);
-	$doc = "<a href='$url'><img src='$fichier' style='border-width: 0px' /></a>";
-	return $doc;
+		vignette_par_defaut($extension);
+
+	if (!$taille)
+		return "<a href='$url'><img src='$fichier' style='border-width: 0px' /></a>";
+	else
+		return "<a href='$url'><img src='$fichier' style='border-width: 0px'  height='$taille' width='$taille' /></a>";
+
 }
 
 //
@@ -417,8 +425,10 @@ function texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_
 function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 
 	// (on ne le propose pas pour les images qu'on sait
-	// lire, id_type<=3)
-	if ($document['id_type'] <= 3)
+	// lire, id_type<=3), sauf bug, ou document distant
+	if ($document['id_type'] <= 3
+	AND $document['hauteur']*$document['largeur']>0
+	AND $document['distant']!='oui')
 		return '';
 
 	// Si on n'a pas le type_inclus, on va le chercher dans spip_types_documents
@@ -428,7 +438,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 	AND $type = @spip_fetch_array($r))
 			$type_inclus = $type['inclus'];
 
-	if (($type_inclus == "embed"
+	if (($type_inclus == "embed"  #meme pour le MP3 : "l x h pixels"? 
 	OR $type_inclus == "image")) {
 		echo "<br /><b>"._T('entree_dimensions')."</b><br />\n";
 		echo "<input type='text' name='largeur_document' class='fondl' style='font-size:9px;' value=\"".$document['largeur']."\" size='5'>";
@@ -442,7 +452,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 //
 
 function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_multiple = true, $forcer_document = false) {
-	global $clean_link, $connect_statut, $connect_toutes_rubriques, $options;
+	global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right;
 	static $num_form = 0; $num_form ++;
 
 
@@ -458,7 +468,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 
 	// bouton permettant de telecharger 10 images ou docs a la fois
 	$envoi_multiple &= ($options == "avancees");
-	if ($envoi_multiple)
+	if ($envoi_multiple OR $forcer_document)
 		echo bouton_block_invisible("ftp$num_form");
 
 	if (tester_upload()) {
@@ -485,9 +495,10 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 
 	echo "</div>\n";
 
+	echo debut_block_invisible("ftp$num_form");
+
 	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques
 	AND $envoi_multiple) {
-		echo debut_block_invisible("ftp$num_form");
 		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
 		if ($texte_upload) {
 			echo "<p><div style='color: #505050;'>";
@@ -505,8 +516,20 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 			echo _T('info_installer_ftp').aide("ins_upload");
 			echo "</div>";
 		}
-		echo fin_block();
 	}
+
+	// Lien document distant, jamais en mode image
+	if ($forcer_document) {
+		echo "<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
+		echo "<img src='"._DIR_IMG_PACK.'attachment.gif',
+			"' style='float: $spip_lang_right;' alt=\"\" />\n";
+		echo "\n"._L('R&eacute;f&eacute;rencer un document sur l\'internet')."&nbsp;:<br />";
+		echo "\n<input name='image_url' size='32' class='fondl' value='http://' />";
+		echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok_url' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
+		echo "</div>\n";
+	}
+
+	echo fin_block();
 	echo "</form>\n";
 }
 
@@ -551,9 +574,16 @@ function afficher_portfolio (
 		if ($case == 0) {
 			echo "<tr style='border-top: 1px solid black;'>";
 		}
+		
 		$style = "border-$spip_lang_left: 1px solid $couleur; border-bottom: 1px solid $couleur;";
 		if ($case == $bord_droit) $style .= " border-$spip_lang_right: 1px solid $couleur;";
 		echo "<td width='33%' style='text-align: $spip_lang_left; $style' valign='top'>";
+
+			// Signaler les documents distants par une icone de site
+			if ($document['distant'] == 'oui') {
+				echo "<img src='"._DIR_IMG_PACK.'attachment.gif'."' style='float: $spip_lang_right;' alt=\"".entites_html($document['fichier'])."\" title=\"" .
+entites_html($document['fichier'])."\" />\n";
+			}
 
 			// bloc vignette + rotation
 			echo "<div style='text-align:center;'>";
@@ -574,7 +604,8 @@ function afficher_portfolio (
 
 			// bloc rotation de l'image
 			if ($flag_modif
-			AND strstr(lire_meta('formats_graphiques'), $document['extension'])) {
+			AND strstr(lire_meta('formats_graphiques'), $document['extension'])
+			AND $document['distant']!='oui') {
 				echo "<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 				$process = lire_meta('image_process');
 				if ($process == 'imagick' OR $process == 'gd2'
@@ -634,7 +665,7 @@ function afficher_portfolio (
 				echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
 			}
 			else {
-				echo document_et_vignette($url, $fichier); 
+				echo document_et_vignette($url, $document['id_type']); 
 			}
 
 			echo "</div>"; // fin du bloc vignette + rotation
@@ -801,7 +832,8 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 	else {
 		// lien "creation automatique"
 		if (strstr(lire_meta('formats_graphiques'), $document['extension'])
-		AND lire_meta('creer_preview') == 'oui') {
+		AND lire_meta('creer_preview') == 'oui'
+		AND $document['distant'] != 'oui') {
 			$link = new Link($image_url);
 			$link->addvar('creer_vignette', 'oui');
 			$link->addVar('redirect',

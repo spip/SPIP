@@ -98,6 +98,15 @@ else if ($ajout_doc == 'oui') {
 				'tmp_name' => $upload)
 			);
 	}
+	
+	// Cas d'un document distant reference sur internet
+	else if (preg_match(',^https?://....+,i', $_POST['image_url'])) {
+		$_FILES = array(
+			array('name' => basename($_POST['image_url']),
+			'tmp_name' => $_POST['image_url'])
+		);
+		$mode = 'distant';
+	}
 
 	//
 	// Upload d'un ZIP
@@ -194,13 +203,16 @@ else if ($ajout_doc == 'oui') {
 		// afficher l'erreur 'fichier trop gros' ou autre
 		check_upload_error($file['error']);
 
-		spip_log ("ajout du document ".$file['name'].", $mode ($type $id_article)");
+		spip_log ("ajout du document ".$file['name'].", $mode ($type $id_article $id_document)");
 		ajouter_un_document (
 			$file['tmp_name'],	# le fichier sur le serveur (/var/tmp/xyz34)
 			$file['name'],		# son nom chez le client (portequoi.pdf)
 			$type,				# lie a un article, une breve ou une rubrique ?
 			$id_article,		# identifiant de l'article (ou rubrique) lie
-			$mode,				# 'vignette' => vignette personnalisee
+			$mode,				# 'vignette' => image en mode image
+								# ou vignette personnalisee liee a un document
+								# 'document' => doc ou image en mode document
+								# 'distant' => lien internet
 			$id_document,		# pour une vignette, l'id_document de maman
 			$documents_actifs	# tableau des id_document "actifs" (par ref)
 		);

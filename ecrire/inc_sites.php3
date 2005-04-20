@@ -68,7 +68,10 @@ function no_password_proxy_url($http_proxy) {
 // Recupere une page sur le net
 // et au besoin l'encode dans le charset local
 //
-function recuperer_page($url, $munge_charset=false) {
+// options : get_headers si on veut recuperer les entetes
+// taille_max : arreter le contenu au-dela (0 = seulement les entetes)
+// Par defaut taille_max = 1Mo.
+function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576) {
 	$http_proxy = lire_meta("http_proxy");
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
@@ -99,11 +102,16 @@ function recuperer_page($url, $munge_charset=false) {
 		} else
 			$f = @fsockopen($scheme_fsock.$host, $port);
 
+		if ($taille_max == 0)
+			$get = 'HEAD';
+		else
+			$get = 'GET';
+
 		if ($f) {
 			if ($http_proxy)
-				fputs($f, "GET $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
+				fputs($f, "$get $scheme://$host" . (($port != 80) ? ":$port" : "") . $path . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 			else
-				fputs($f, "GET $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
+				fputs($f, "$get $path" . ($query ? "?$query" : "") . " HTTP/1.0\r\n");
 
 			fputs($f, "Host: $host\r\n");
 			fputs($f, "User-Agent: SPIP-".$GLOBALS['spip_version_affichee']." (http://www.spip.net/)\r\n");
@@ -117,14 +125,18 @@ function recuperer_page($url, $munge_charset=false) {
 			if ($referer = lire_meta("adresse_site"))
 				fputs($f, "Referer: $referer/\r\n");
 
-			// Fin des entetes
+			// Fin des entetes envoyees par SPIP
 			fputs($f,"\r\n");
 
+			// Reponse du serveur distant
 			$s = trim(fgets($f, 16384));
 			if (ereg('^HTTP/[0-9]+\.[0-9]+ ([0-9]+)', $s, $r)) {
 				$status = $r[1];
 			}
 			else return;
+
+			// Entetes HTTP de la page
+			$headers = '';
 			while ($s = trim(fgets($f, 16384))) {
 				$headers .= $s."\n";
 				if (eregi('^Location: (.*)', $s, $r)) {
@@ -145,11 +157,12 @@ function recuperer_page($url, $munge_charset=false) {
 		}
 	}
 
+	// Contenu de la page
 	if (!$f) {
 		spip_log("ECHEC chargement $url$via_proxy");
 		$result = '';
 	} else {
-		while (!feof($f))
+		while (!feof($f) AND strlen($result)<$taille_max)
 			$result .= fread($f, 16384);
 		fclose($f);
 	}
@@ -160,7 +173,7 @@ function recuperer_page($url, $munge_charset=false) {
 		$result = transcoder_page ($result, $headers);
 	}
 
-	return $result;
+	return ($get_headers ? $headers."\n" : '').$result;
 }
 
 
@@ -251,6 +264,65 @@ function analyser_site($url) {
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
 	}
 	return $result;
+}
+
+// Inserer les references aux fichiers joints
+function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
+
+	list($id_syndic_article) = spip_fetch_array(spip_query(
+	"SELECT id_syndic_article FROM spip_syndic_articles
+	WHERE id_syndic=$id_syndic AND url='$lelien'"));
+
+	// deja vu ?
+	if (spip_num_rows(spip_query("SELECT id_document FROM spip_documents_syndic
+	WHERE id_syndic_article=$id_syndic_article")) > 0)
+		return;
+
+	foreach ($enclosures as $enclosure) {
+		$enclosure = $enclosure[0];
+		// url et type sont obligatoires
+		if (preg_match(',[[:space:]]url=[\'"]?(https?://[^\'"]*),i',
+		$enclosure, $enc_regs_url)
+		AND preg_match(',[[:space:]]type=[\'"]?([^\'"]*),i',
+		$enclosure, $enc_regs_type)) {
+
+			$url = urldecode($enc_regs_url[1]);
+			$type = $enc_regs_type[1];
+
+			// Verifier que le content-type nous convient
+			list($id_type) = spip_fetch_array(spip_query("SELECT id_type
+			FROM spip_types_documents WHERE mime_type='$type'"));
+			if (!$id_type) {die ("pas de id_type pour $type");}#continue;
+
+			// length : optionnel (non bloquant)
+			if (preg_match(',[[:space:]]length=[\'"]?([^\'"]*),i',
+			$enclosure, $enc_regs_length)) {
+				$taille = intval($enc_regs_length[1]);
+			} else {
+				$taille = 0;
+			}
+
+			// Inserer l'enclosure dans la table spip_documents
+			if ($t = spip_fetch_array(spip_query("SELECT id_document FROM
+			spip_documents WHERE fichier='$url' AND distant='oui'")))
+				$id_document = $t['id_document'];
+			else {
+				spip_query("INSERT INTO spip_documents
+				(id_type, titre, fichier, date, distant, taille, mode)
+				VALUES ($id_type,'','$url',NOW(),'oui',$taille, 'document')");
+				$id_document = spip_insert_id();
+			}
+
+			// lier avec l'article syndique
+			spip_query("INSERT INTO spip_documents_syndic
+			(id_document, id_syndic, id_syndic_article)
+			VALUES ($id_document, $id_syndic, $id_syndic_article)");
+
+			$n++;
+		}
+	}
+
+	return $n; #nombre d'enclosures integrees
 }
 
 
@@ -370,6 +442,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 			foreach ($items as $item) {
 
 				$data = array();
+				unset($error);
 
 				// URL (obligatoire)
 				if (ereg($syndic_regexp['link1'],$item,$match)) {
@@ -380,16 +453,19 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				// guid n'est un URL que si marque de <guid permalink="true">
 				else if (eregi("<guid.*>[[:space:]]*(https?:[^<]*)</guid>",$item,$match))
 					$data['url'] = addslashes(filtrer_entites($match[1]));
-				else continue;
+				else $error = 'url';
+				# note http://static.userland.com/gems/backend/gratefulDead.xml
+				# n'a que des enclosures, sans url ni titre... tant pis...
 
-				// Titre (obligatoire)
+				// Titre (semi-obligatoire)
 				if
 (preg_match(",<title>(.*?)</title>,ims",$item,$match))
 					$data['titre'] = $match[1];
 				else if (($syndic_version==0.3) AND (strlen($letitre)==0))
-					if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',$link_match,$mat))
+					if (ereg('title[[:space:]]*=[[:space:]]*[\'"]([^"\']+)[\'"]',$link_match,$mat))
 						$data['titre']=$mat[1]; 
-				else continue;
+				if (!$data['titre'] = trim($data['titre']))
+					$data['titre'] = _T('ecrire:info_sans_titre');
 
 				// Date
 				$la_date = "";
@@ -440,6 +516,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 				// Creer le lien s'il est nouveau - cle=(id_syndic,url)
 				$le_lien = addslashes($data['url']);
+				if (!$error)
 				if (spip_num_rows(spip_query(
 					"SELECT * FROM spip_syndic_articles
 					WHERE url='".addslashes($data['url'])."'
@@ -453,6 +530,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				}
 
 				// Mise a jour du contenu (titre,auteurs,description)
+				if (!$error)
 				spip_query ("UPDATE spip_syndic_articles SET
 				titre='".addslashes($data['titre'])."',
 				lesauteurs='".addslashes($data['lesauteurs'])."',
@@ -460,6 +538,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 				WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
 
 				// Honorer le <lastbuilddate> en forcant la date
+				if (!$error)
 				if (preg_match(',<(lastbuilddate|modified)>([^<>]+)</\1>,i',
 				$item, $regs)
 				AND $lastbuilddate = strtotime(trim($regs[2]))
@@ -469,8 +548,15 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 					SET date = FROM_UNIXTIME($lastbuilddate)
 					WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
 				}
-				
+
+				// Attraper les URLs des pieces jointes <enclosure>
+				if (!$error)
+				if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i', $item,
+				$enclosures, PREG_SET_ORDER)) {
+					traiter_les_enclosures_rss($enclosures,$now_id_syndic,$le_lien);
+				}
 			}
+
 			spip_query("UPDATE spip_syndic SET syndication='oui' WHERE id_syndic='$now_id_syndic'");
 		}
 		else $erreur = _T('avis_echec_syndication_01');
@@ -639,7 +725,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 	global $flag_editable;
 
 	static $n_liste_sites;
-	global $spip_lang_rtl;
+	global $spip_lang_rtl, $spip_lang_right;
 
 	$adresse_page = substr($REQUEST_URI, strpos($REQUEST_URI, "/ecrire")+8, strlen($REQUEST_URI));
 	$adresse_page = ereg_replace("\&?debut\_liste\_sites\[$n_liste_sites\]\=[0-9]+","",$adresse_page);
@@ -680,7 +766,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$titre=typo($row["titre"]);
 			$url=$row["url"];
 			$date=$row["date"];
-			$lesauteurs=propre($row["lesauteurs"]);
+			$lesauteurs=typo($row["lesauteurs"]);
 			$statut=$row["statut"];
 			$descriptif=propre($row["descriptif"]);
 
@@ -708,6 +794,17 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 			$s = "<a href='$url'>$titre</a>";
 			if (strlen($lesauteurs) > 0) $s .= " ($lesauteurs)";
+
+			// S'il y a des fichiers joints (enclosures), on les affiche ici
+			if (spip_num_rows($q = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_syndic AS lien WHERE lien.id_syndic_article = $id_syndic_article AND lien.id_document = docs.id_document"))) {
+				include_ecrire('inc_documents.php3');
+				while ($t = spip_fetch_array($q)) {
+					$s .= '&nbsp;<a href="' . $t['fichier'] . '">'
+					. http_img_pack('attachment.gif', 'height="15" width="15"
+					border="0" title="'.entites_html($t['fichier']).'"').'</a>';
+				}
+			}
+
 			if (strlen($descriptif) > 0) $s .= "<div class='arial1'>$descriptif</div>";
 			$vals[] = $s;
 
