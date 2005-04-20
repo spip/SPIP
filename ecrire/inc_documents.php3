@@ -54,7 +54,7 @@ function vignette_par_defaut($type_extension, $size=true) {
 
 function document_et_vignette($url, $id_type) {
 	if ($id_type) {
-		list($extension) = spip_fetch_array(spip_query("SELECT id_type FROM
+		list($extension) = spip_fetch_array(spip_query("SELECT extension FROM
 		spip_types_documents WHERE id_type=$id_type"));
 	}
 
