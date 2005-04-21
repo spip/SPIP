@@ -12,7 +12,7 @@ $delais = 3600;
 // 2. faire des forums uniquement pour affecter des mots-cles
 // $afficher_texte = "non";
 
-// En ca de forums sur abonnement, on a un panneau de login
+// En cas de forums sur abonnement, on a un panneau de login
 $flag_dynamique = true;
 
 include ("inc-public.php3");
