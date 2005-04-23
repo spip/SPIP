@@ -1330,6 +1330,23 @@ h3.spip {
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-size : 70%;
 }
+.spip_documents_center{
+	margin: auto; 
+	text-align: center;:
+}
+
+.spip_documents_left{
+	float: left;
+	margin: 4px; 
+	text-align: center;:
+}
+
+.spip_documents_right{
+	float: right;
+	margin: 4px; 
+	text-align: center;:
+}
+
 table.spip {
 }
 table.spip tr.row_first {
