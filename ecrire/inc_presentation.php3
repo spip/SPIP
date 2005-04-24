@@ -1409,6 +1409,13 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 				$logo_auteur = decrire_logo("auton$id_auteur");
 				if ($logo_auteur) {
 					$fichier = $logo_auteur[0];
+	
+					$s = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;'>";
+					$s .= reduire_image_logo(_DIR_IMG.$fichier, 48, 48);
+					$s .= "</div>";
+					$titre_boite = $s.typo($titre_boite);
+
+/*
 					$taille_x = $logo_auteur[3];
 					$taille_y = $logo_auteur[4];
 					$taille = image_ratio($taille_x, $taille_y, 48, 48);
@@ -1418,7 +1425,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 					$hash = calculer_action_auteur ("reduire $w $h");
 	
 					$titre_boite = "<div style='position: absolute; $spip_lang_right: 0px; margin: 0px; margin-top: -3px; margin-$spip_lang_right: 0px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h'></div>".typo($titre_boite);
-					
+*/					
 				}
 			}
 		
