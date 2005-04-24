@@ -15,6 +15,7 @@ include ("inc.php3");
 
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
+include_ecrire ("inc_date.php3");
 include_ecrire ("inc_documents.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
@@ -684,46 +685,6 @@ debut_droite();
 
 changer_typo('','article'.$id_article);
 
-
-function afficher_mois($mois){
-	echo mySel("00",$mois,_T('mois_non_connu'));
-	echo mySel("01",$mois,_T('date_mois_1'));
-	echo mySel("02",$mois,_T('date_mois_2'));
-	echo mySel("03",$mois,_T('date_mois_3'));
-	echo mySel("04",$mois,_T('date_mois_4'));
-	echo mySel("05",$mois,_T('date_mois_5'));
-	echo mySel("06",$mois,_T('date_mois_6'));
-	echo mySel("07",$mois,_T('date_mois_7'));
-	echo mySel("08",$mois,_T('date_mois_8'));
-	echo mySel("09",$mois,_T('date_mois_9'));
-	echo mySel("10",$mois,_T('date_mois_10'));
-	echo mySel("11",$mois,_T('date_mois_11'));
-	echo mySel("12",$mois,_T('date_mois_12'));
-}
-
-function afficher_annee($annee){
-	// Cette ligne permettrait de faire des articles sans date de publication
-	// echo mySel("0000",$annee,"n.c.");
-
-	if($annee<1996 AND $annee <> 0){
-		echo mySel($annee,$annee,$annee);
-	}
-	for($i=1996;$i<date(Y)+2;$i++){
-		echo mySel($i,$annee,$i);
-	}
-}
-
-function afficher_jour($jour){
-	echo mySel("00",$jour,_T('jour_non_connu_nc'));
-	for($i=1;$i<32;$i++){
-		$aff = _T('date_jnum'.$i);
-		if ($i<10)
-			$aff="&nbsp;".$aff;
-		echo mySel($i,$jour,$aff);
-	}
-}
-
-
 debut_cadre_relief();
 
 //
@@ -828,22 +789,16 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<span class='verdana1'>"._T('texte_date_publication_article').'</span> ';
 		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 
-		echo debut_block_invisible("datepub");
-		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
-		echo "<SELECT NAME='jour' SIZE=1 CLASS='fondl' onChange=\"setvisibility('valider_date', 'visible')\">";
-		afficher_jour($jour);
-		echo "</SELECT> ";
-		echo "<SELECT NAME='mois' SIZE=1 CLASS='fondl' onChange=\"setvisibility('valider_date', 'visible')\">";
-		afficher_mois($mois);
-		echo "</SELECT> ";
-		echo "<SELECT NAME='annee' SIZE=1 CLASS='fondl' onChange=\"setvisibility('valider_date', 'visible')\">";
-		afficher_annee($annee);
-		echo "</SELECT>";
-		echo "<span class='visible_au_chargement' id='valider_date'>";
-		echo " &nbsp; <INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>";
-		echo "</span>";
-		echo "</div>";
-		echo fin_block();
+		echo debut_block_invisible("datepub"),
+		  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>",
+		  afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
+		  afficher_mois($mois, "name='mois' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
+		  afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
+		  "<span class='visible_au_chargement' id='valider_date'>",
+		  " &nbsp; <INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>",
+		  "</span>",
+		  "</div>",
+		  fin_block();
 	}
 	else {
 		echo "<div><b> <span class='verdana1'>"._T('texte_date_creation_article').'</span> ';
@@ -870,14 +825,9 @@ if ($flag_editable AND $options == 'avancees') {
 		echo '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"';
 		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') echo ' checked="checked"';
 		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
-		echo ' /> <label for="avec_redac_off">'._T('bouton_radio_afficher').' :</label> ';
-
-		echo "<select name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\">";
-		afficher_jour($jour_redac);
-		echo '</select> &nbsp;';
-		echo "<select name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\">";
-		afficher_mois($mois_redac);
-		echo '</select> &nbsp;';
+		echo ' /> <label for="avec_redac_off">'._T('bouton_radio_afficher').' :</label> ',
+		  afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
+		  afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true);
 		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";
 
 		echo '</td><td align="$spip_lang_right">';
