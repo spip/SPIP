@@ -96,7 +96,7 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 // partie droite d'une affectation). Ici sont analyses les elements
 // multilingues des squelettes : <:xxx:> et <multi>[fr]coucou</multi>
 //
-function calculer_texte($texte, $id_boucle, &$boucles, $id_mere) {
+function calculer_texte($texte, $id_boucle, &$boucles) {
 	//
 	// Les elements multilingues
 	//
@@ -435,7 +435,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		switch($p->type) {
 		// texte seul
 		case 'texte':
-			$code = calculer_texte($p->texte, $id_boucle, $boucles, $descr['id_mere']);
+			$code = calculer_texte($p->texte, $id_boucle, $boucles);
 			$commentaire='';
 			$avant='';
 			$apres='';
@@ -477,8 +477,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			// cette structure pourrait etre completee des le phrase' (a faire)
 			$p->id_boucle = $id_boucle;
 			$p->boucles = &$boucles;
-			$p->id_mere = $descr['id_mere'];
-			$p->documents = $descr['documents'];
+			$p->descr = $descr;
 			$p->statut = 'html';
 			$p->type_requete = $boucles[$id_boucle]->type_requete;
 
@@ -538,7 +537,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$racine = parser($squelette, '',$boucles, $nom);
 
 	// tableau des informations sur le squelette
-	$descr = array('nom' => $nom, 'documents' => false);
+	$descr = array('nom' => $nom, 'documents' => false, 'sourcefile' => $sourcefile);
 
 	if ($boucles) {
 	  // une boucle documents est conditionnee par tout le reste!
