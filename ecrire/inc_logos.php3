@@ -18,7 +18,8 @@ define("_ECRIRE_INC_LOGOS", "1");
 
 
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
-	if (ereg("^../",$nom))	$nom = substr($nom,3);
+	// _DIR_IMG contient deja le ../ dans ecrire (PREFIX1
+	//	if (ereg("^../",$nom))	$nom = substr($nom,3);
 	if (ereg("^" . _DIR_IMG, $nom)) {
 		$nom = substr($nom,strlen(_DIR_IMG));
 	}
@@ -33,7 +34,9 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	reset($formats);
 	while (list(, $format) = each($formats)) {
 		$d = _DIR_IMG . "$chemin$nom.$format";
-		if (@file_exists($d)) return array(_DIR_IMG."$chemin", $nom, $format);
+		if (@file_exists($d)){ 
+			return array(_DIR_IMG."$chemin", $nom, $format);
+		}
 	}
 }
 
@@ -136,7 +139,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		list($fichier, $taille, $img) =  $logo;
 		$hash = calculer_action_auteur("supp_logo $fichier");
 
-		echo "<p><center><div>$img</div>";
+		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>".reduire_image_logo(_DIR_IMG.$fichier, 170)."</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
@@ -390,6 +393,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	$retour['height'] = $hauteur = $size[1];
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
+	$retour['date'] = filemtime($vignette);
+	
 
 	// renvoyer l'image
 	return $retour;
@@ -437,7 +442,7 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 		$taille_y = $taille;
 
 	// recuperer le nom du fichier
-	if (eregi("src='([^']+)'", $img, $regs)) $logo = $regs[1];
+	if (eregi("img src=['\"]([^'\"]+)['\"]", $img, $regs)) $logo = $regs[1];
 	if (!$logo) $logo = $img;
 
 	$attributs = '';
@@ -466,11 +471,13 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 				$vignette = $preview['fichier'];
 				$width = $preview['width'];
 				$height = $preview['height'];
-				return "<img src='$vignette' width='$width' height='$height'$attributs />";
+				$date = $preview['date'];
+				return "<img src='$vignette?date=$date' width='$width' height='$height'$attributs />";
 			}
 			else if ($taille_origine = @getimagesize($logo)) {
+				$date = filemtime($logo);
 				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-				return "<img src='$logo' width='$destWidth' height='$destHeight'$attributs />";
+				return "<img src='$logo?date=$date' width='$destWidth' height='$destHeight'$attributs />";
 			}
 		}
 	}

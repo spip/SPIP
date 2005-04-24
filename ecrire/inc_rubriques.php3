@@ -267,6 +267,11 @@ function enfant_rub($collection){
 			$logo = decrire_logo("rubon$id_rubrique");
 			if ($logo) {
 				$fichier = $logo[0];
+					$les_enfants .= "<div style='float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;'>";
+					$les_enfants .= reduire_image_logo(_DIR_IMG.$fichier, 48, 36);
+					$les_enfants .= "</div>";
+				
+				/*
 				$taille_x = $logo[3];
 				$taille_y = $logo[4];
 				$taille = image_ratio($taille_x, $taille_y, 48, 36);
@@ -276,6 +281,7 @@ function enfant_rub($collection){
 				$hash = calculer_action_auteur ("reduire $w $h");
 
 				$les_enfants.= "<img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' align='$spip_lang_right' style='margin-$spip_lang_right: -6px; margin-top: -6px;' />";
+				*/
 			}
 		}
 
