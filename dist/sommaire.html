@@ -8,17 +8,16 @@
 <link rel="stylesheet" href="spip_style.css" type="text/css">
 
 <!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="typographie.css" type="text/css">
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/typographie.css" type="text/css">
 
 <!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="habillage.css" type="text/css" media="print, projection, screen, tv">
+<link rel="stylesheet" href="#DOSSIER_SQUELETTE/habillage.css" type="text/css" media="print, projection, screen, tv">
 
 <!-- Lien vers le backend pour navigateurs eclaires -->
 <link rel="alternate" type="application/rss+xml" title="<:syndiquer_site:>" href="backend.php3">
 </head>
 
 <body>
-
 <div id="navigation">
 
 <h1 class="structure"><:navigation:></h1>
@@ -81,7 +80,7 @@
 	<h1 class="structure"><:derniers_articles:></h1>
 	
 	<BOUCLE_article_un(ARTICLES) {par date} {inverse} {0,2}>
-		[(#LOGO_ARTICLE_RUBRIQUE|right)]
+		[(#LOGO_ARTICLE_RUBRIQUE|right||reduire_image{200,200})]
 		[<div class="surtitre">(#SURTITRE)</div>]
 		<h2 class="titre-extrait"><a href="#URL_ARTICLE">#TITRE</a></h2>
 		[<div class="surtitre">(#SOUSTITRE)</div>]
