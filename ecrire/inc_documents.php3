@@ -113,7 +113,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	else $type = 'fichier';
 
 	// Pour RealVideo
-	$real = (!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension));
+	$real = ((!ereg("^controls", $les_parametres)) AND (ereg("^(rm|ra|ram)$", $extension)));
 
 	if ($inclus == "embed" AND !$real) {
 		
@@ -134,17 +134,16 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 					}
 				}
 				
-				$vignette = "<object width='$largeur' height='$hauteur'>";
-				$vignette .= "<param name='movie' value='$fichier'>";
-				$vignette .= "<param name='src' value='$fichier'>";
+				$vignette = "<object width='$largeur' height='$hauteur'>\n";
+				$vignette .= "<param name='movie' value='$fichier'>\n";
+				$vignette .= "<param name='src' value='$fichier'>\n";
 				$vignette .= $inserer_vignette;
 		
-				$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>";
+				$vignette .= "<embed src='$fichier' $param_emb width='$largeur' height='$hauteur'></embed></object>\n";
 		
 	}
 	else if ($inclus == "embed" AND $real) {
-			$vignette .= embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
-			$vignette .= "<br />";
+			$vignette .= "<div>".embed_document ($id_document, "controls=ImageWindow|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false)."</div>";
 			$vignette .= embed_document ($id_document, "controls=PlayButton|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 			$vignette .= embed_document ($id_document, "controls=PositionSlider|type=audio/x-pn-realaudio-plugin|console=Console$id_document|nojava=true|$les_parametres", false);
 		}
@@ -170,23 +169,20 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	if ($largeur_vignette < 120) $largeur_vignette = 120;
 	$forcer_largeur = " width = '$largeur_vignette'";
 
-	$retour = "<table style='border-width: 0px; padding: 0px; margin: 0px; text-align: $align;'>\n";
-	$retour .= "<tr>";
-	if ($align == "right") $retour .= "<td width='10'> &nbsp; </td>";
-	$retour .= "<td align='center'$forcer_largeur>\n<div class='spip_documents'>\n";
+	if ($align != 'center') $float = " style='float: $align;'";
+
+	$retour .= "<div class='spip_documents spip_documents_$align'$float>\n";
 	$retour .= $vignette;
 	
-	if ($titre) $retour .= "<div style='text-align: center;'><b>$titre</b></div>";
+	if ($titre) $retour .= "<div class='spip_doc_titre'><strong>$titre</strong></div>";
 	
 	if ($descriptif) {
-	  $alignement = (strlen($descriptif)>200)? 'left':'center';
-	  $retour .= "<div style='text-align: $alignement;'>$descriptif</div>"; 
+	  $retour .= "<div class='spip_doc_descriptif'>$descriptif</div>"; 
 	}
 
-	$retour .= "</div>\n</td>";
-	if ($align == "left") $retour .= "<td width='10'> &nbsp; </td>";
+	$retour .= "</div>\n";
 	
-	return $retour . "</tr>\n</table>\n";
+	return $retour;
 }
 
 
