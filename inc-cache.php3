@@ -223,19 +223,26 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 					. "impossible utiliser $chemin_cache");
 				if (!$GLOBALS['flag_preserver']) {
 					include_ecrire('inc_presentation.php3');
-					install_debut_html(_T('info_travaux_titre'));
-					echo _T('titre_probleme_technique');
-					install_fin_html();
+					if (!headers_sent()) {
+						install_debut_html(_T('info_travaux_titre'));
+						echo _T('titre_probleme_technique');
+						install_fin_html();
+					} else
+						echo _T('titre_probleme_technique');
 				}
-				exit;
+				// ne plus rien signaler, ne pas mettre en cache ...
+				$GLOBALS['flag_preserver'] = true;
+				define ('spip_interdire_cache', true);
+				// ... mais continuer quand meme
 			}
 		}
 	}
 }
 
+
+//
 // Fonctions pour le cache des images (vues reduites)
-
-
+//
 function calculer_taille_dossier ($dir) {
 	$handle = @opendir($dir);
 	if (!$handle) return;
