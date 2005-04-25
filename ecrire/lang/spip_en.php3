@@ -288,7 +288,7 @@ Thank you for your participation
 'ical_texte_rss_breves' => 'Furthermore, there is a file containing the site\'s news items. By selecting a section number, you could get only the news items of that section.',
 'icone_a_suivre' => 'Launch pad',
 'icone_admin_site' => 'Site administration',
-'icone_agenda' => 'Diary',
+'icone_agenda' => 'Calendar',
 'icone_aide_ligne' => 'Help',
 'icone_articles' => 'Articles',
 'icone_auteurs' => 'Authors',
@@ -456,7 +456,7 @@ Thank you for your participation
 'info_premier_resultat' => '[@debut_limit@ first results out of @total@]',
 'info_premier_resultat_sur' => '[@debut_limit@ first results out of @total@]',
 'info_probleme_grave' => 'error of',
-'info_propose_1' => '[@nom_site_spip@] Submits: @titre@',
+'info_propose_1' => '[@nom_site_spip@] Submitted: @titre@',
 'info_propose_2' => 'Article submitted
 -----------------',
 'info_propose_3' => 'The article "@titre@" is submitted for publication.',

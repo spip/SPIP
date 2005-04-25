@@ -120,7 +120,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_compresse' => 'The cache files are saved in compressed mode.',
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
 'cache_modifiable_webmestre' => 'These parameters can be modified by the webmaster.',
-'calendrier_synchro' => 'If you use a diary application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
+'calendrier_synchro' => 'If you use a calendar application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
 
 
 // D
