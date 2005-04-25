@@ -800,9 +800,12 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			if (spip_num_rows($q = spip_query("SELECT docs.* FROM spip_documents AS docs, spip_documents_syndic AS lien WHERE lien.id_syndic_article = $id_syndic_article AND lien.id_document = docs.id_document"))) {
 				include_ecrire('inc_documents.php3');
 				while ($t = spip_fetch_array($q)) {
-					$s .= '&nbsp;<a href="' . $t['fichier'] . '">'
-					. http_img_pack('attachment.gif', 'height="15" width="15"
-					border="0" title="'.entites_html($t['fichier']).'"').'</a>';
+					$t = $t['fichier'];
+					$s .= '&nbsp;' .
+					  http_href_img($t,
+							'attachment.gif',
+							entites_html($t),
+							'height="15" width="15" border="0"');
 				}
 			}
 
