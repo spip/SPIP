@@ -1561,7 +1561,7 @@ function debut_html($titre = "", $rubrique="", $onLoad="") {
 		$rubrique = '';
 	}
 	
-	$nom_site_spip = entites_html(lire_meta("nom_site"));
+	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
 	$titre = textebrut(typo($titre));
 
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
