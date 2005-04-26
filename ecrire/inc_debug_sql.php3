@@ -70,9 +70,6 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 //
 function erreur_requete_boucle($query, $id_boucle, $type) {
 
-	// Calmer le jeu avec MySQL (si jamais on est en saturation)
-	spip_touch(_FILE_MYSQL_OUT); // pour spip_cron
-	spip_log('Erreur MySQL: on limite les acces quelques minutes');
 	$GLOBALS['bouton_admin_debug'] = true;
 
 	$erreur = spip_sql_error();
@@ -97,7 +94,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 		. $type . ")</blink><br>\n"
 		. "<b>"._T('avis_erreur_mysql')."</b><br>\n"
 		. htmlspecialchars($query)
-		. "<br><font color='red'><b>".htmlspecialchars($erreur)
+		. "\n<br><font color='red'><b>".htmlspecialchars($erreur)
 		. "</b></font><br>"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
