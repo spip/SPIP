@@ -63,7 +63,6 @@ function spip_cron($taches=array()) {
 
 	include(_FILE_CONNECT);
 	if (!$GLOBALS['db_ok']) {
-		spip_touch(_FILE_MYSQL_OUT);
 		spip_log('pas de connexion DB pour taches de fond (cron)');
 		return;
 	}
