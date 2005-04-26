@@ -140,10 +140,26 @@ function traite_query($query) {
 function spip_connect_db($host, $port, $login, $pass, $db) {
 	global $spip_mysql_link, $spip_mysql_db;	// pour connexions multiples
 
+	// gerer le fichier ecrire/data/mysql_out
+	## TODO : ajouter md5(parametres de connexion)
+	if (@file_exists(_FILE_MYSQL_OUT)
+	AND (time() - @filemtime(_FILE_MYSQL_OUT) < 300)
+	AND !defined('_ECRIRE_INSTALL'))
+		return $GLOBALS['db_ok'] = false;
+
 	if ($port > 0) $host = "$host:$port";
 	$spip_mysql_link = @mysql_connect($host, $login, $pass);
 	$spip_mysql_db = $db;
-	return @mysql_select_db($db);
+	$ok = @mysql_select_db($db);
+
+	$GLOBALS['db_ok'] = $ok
+	AND !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));
+
+	// En cas d'erreur marquer le fichier mysql_out
+	if (!$GLOBALS['db_ok']
+	AND !defined('_ECRIRE_INSTALL')) @touch(_FILE_MYSQL_OUT);
+
+	return $GLOBALS['db_ok'];
 }
 
 
