@@ -35,6 +35,9 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	// $filtres[0] peut contenir l'url sur lequel faire tourner le formulaire
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum.php3)]
 
+	// $args[5] peut contenir l'url sur lequel faire le retour
+	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
+
 	// recuperer les donnees du forum auquel on repond, false = forum interdit
 	list ($idr, $idf, $ida, $idb, $ids) = $args;
 	if (!$r = sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids))
@@ -48,10 +51,10 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	return
 		array($titre, $table, $forums_publics, $idr, $idf, $ida, $idb, $ids,
-			$filtres[0]);
+			$filtres[0], $args[5]);
 }
 
-function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $url) {
+function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic, $url, $url_param_retour) {
 	global $REMOTE_ADDR, $afficher_texte, $_COOKIE, $_POST;
 
 	// Recuperer les donnees postees du formulaire ou, a defaut, du contexte
@@ -101,6 +104,10 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 			// par defaut, on veut prendre url_forum(), mais elle ne sera connue
 			// qu'en sortie, on inscrit donc une valeur absurde ("!")
 			$retour_forum = "!";
+			
+			// sauf si on a passe un parametre en argument (exemple : {#SELF})
+			if($url_param_retour)
+				$retour_forum = str_replace("&amp;", "&", $url_param_retour);
 		}
 
 		if (isset($_COOKIE['spip_forum_user'])
