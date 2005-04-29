@@ -70,25 +70,10 @@ function afficher_choix_vignette($process) {
 }
 
 
-// Si Imagick est present, alors c'est imagick automatiquement
-if ($flag_gd OR $flag_imagick OR $convert_command)
-	debut_cadre_trait_couleur("image-24.gif");
 
-if ($flag_imagick) {
-		$image_process = "imagick";
-		ecrire_meta('image_process', 'imagick');
-		$formats_graphiques = "gif,jpg,png";
-		ecrire_meta('formats_graphiques', 'gif,jpg,png');
-		ecrire_metas();
 
-	debut_cadre_relief("", false, "", _T("info_image_process_titre"));
-	echo "<table width='100%' align='center'><tr>";
-	afficher_choix_vignette('imagick');
-	echo "</tr></table>\n";
-	fin_cadre_relief();
-}
-else {
-	if ($flag_gd OR $convert_command) {
+debut_cadre_trait_couleur("image-24.gif");
+
 		$formats_graphiques = lire_meta("formats_graphiques");
 
 		debut_cadre_relief("", false, "", _T("info_image_process_titre"));
@@ -115,6 +100,9 @@ else {
 				case 'imagick':
 					$formats_graphiques = 'gif,jpg,png';
 					break;
+				case 'non': #debug
+					$formats_graphiques = '';
+					break;
 			}
 			ecrire_meta('formats_graphiques', $formats_graphiques);
 			ecrire_metas();
@@ -136,6 +124,10 @@ else {
 			afficher_choix_vignette($p = 'netpbm');
 			$nb_process ++;
 
+			if ($flag_imagick) {
+				afficher_choix_vignette('imagick');
+				$nb_process ++;
+			}
 
 			if ($convert_command) {
 				afficher_choix_vignette($p = 'convert');
@@ -152,19 +144,6 @@ else {
 	
 	
 		fin_cadre_relief();
-	}
-}
-
-
-	//
-	// Pour test pendant devel, possibilite de desactiver
-	//
-
-	if ($image_process == "non") {
-		ecrire_meta("formats_graphiques", "");
-		ecrire_metas();
-	}
-	echo "<p>[$image_process / $formats_graphiques]<a href='config-fonctions.php3?image_process=non'>Aucune m&eacute;thode</a></p>";
 
 
 	//
