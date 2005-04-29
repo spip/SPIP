@@ -656,10 +656,13 @@ function extraire_fichier($img) {
 	return $logo;
 }
 
-function reduire_image($img, $taille = 120, $taille_y=0) {
+function reduire_image($img, $taille = 0, $taille_y=0) {
 	if (!$img) return;
 	include_ecrire('inc_logos.php3');
-	
+
+	if (!$taille)
+		$taille = lire_meta('taille_preview');
+
 	if (eregi("onmouseover=\"this\.firstChild\.src=\'([^']+)\'\"", $img, $match)) {
 		$mouseover = extraire_fichier(reduire_image_logo($match[1], $taille, $taille_y));
 	}
@@ -687,6 +690,32 @@ function hauteur($img) {
 	list ($h,$l) = taille_image($img);
 	return $h;
 }
+
+//
+// Cree au besoin la copie locale d'un fichier distant
+// mode = 'test' - ne faire que tester
+// mode = 'auto' - charger au besoin
+// mode = 'force' - charger toujours (mettre a jour)
+//
+function copie_locale($source, $mode='auto') {
+	include_ecrire('inc_getdocument.php3');
+	$local = fichier_copie_locale($source);
+
+	if ($source != $local) {
+		if (($mode=='auto' AND !@file_exists($local))
+		OR $mode=='force') {
+			include_ecrire('inc_sites.php3');
+			$contenu = recuperer_page($source);
+			if ($contenu)
+				ecrire_fichier($local, $contenu);
+			else
+				return false;
+		}
+	}
+
+	return $local;
+}
+
 
 //
 // Recuperation de donnees dans le champ extra

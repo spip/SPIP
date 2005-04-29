@@ -213,13 +213,34 @@ function afficher_compactes($image_name /* not used */, $fichiers, $link) {
 // Si on doit conserver une copie locale des fichiers distants, autant que ca
 // soit a un endroit canonique -- si ca peut etre bijectif c'est encore mieux,
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
-// des filessystems
-function fichier_copie_locale($source, $extension) {
+// des filesystems
+function nom_fichier_copie_locale($source, $extension) {
 	$dir = _DIR_IMG. creer_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
 	$dir2 = $dir . creer_repertoire($dir, $extension); 		# IMG/distant/pdf/
 	return $dir2 . substr(basename($source).'-'.md5($source),0,12).
 		substr(md5($source),0,4).'.'.$extension;
 }
+
+//
+// Donne le nom de la copie locale de la source
+//
+function fichier_copie_locale($source) {
+	// Si c'est une image de IMG/ pas de souci
+	if (preg_match(',^'._DIR_IMG.',', $source))
+		return $source;
+
+	// Si l'extension n'est pas precisee, aller la chercher dans la table
+	// des documents -- si la source n'est pas dans la table des documents,
+	// on ne fait rien
+	if ($t = spip_fetch_array(spip_query("SELECT * FROM spip_documents
+	WHERE fichier='".addslashes($source)."' AND distant='oui'")))
+		list($extension) = spip_fetch_array(spip_query("SELECT extension
+		FROM spip_types_documents WHERE id_type=".$t['id_type']));
+
+	if ($extension)
+		return nom_fichier_copie_locale($source, $extension);
+}
+
 
 // Recuperer les infos d'un document distant, sans trop le telecharger
 function recuperer_infos_distantes($source, $max=0) {
@@ -251,8 +272,12 @@ function recuperer_infos_distantes($source, $max=0) {
 			$a['taille'] = intval($regs[1]);
 	}
 
-	// Si on n'a pas reussi avec une requete HEAD, ou si au contraire on a
-	// il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
+	// Echec avec HEAD, on tente avec GET
+	if (!$a) {
+		$a = recuperer_infos_distantes($source, 1024*1024);
+	}
+
+	// S'il s'agit d'une image pas trop grosse ou d'un fichier html, on va aller
 	// recharger le document en GET et recuperer des donnees supplementaires...
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
 		if ($max == 0
@@ -262,7 +287,7 @@ function recuperer_infos_distantes($source, $max=0) {
 			$a = recuperer_infos_distantes($source, 1024*1024);
 		}
 		else if ($a['body']) {
-			$a['fichier'] = fichier_copie_locale($source, $a['extension']);
+			$a['fichier'] = nom_fichier_copie_locale($source, $a['extension']);
 			ecrire_fichier($a['fichier'], $a['body']);
 			$size_image = @getimagesize($a['fichier']);
 			$a['largeur'] = intval($size_image[0]);
@@ -427,11 +452,16 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	else
 		$documents_actifs[] = $id_document; 
 
+/**
+	DESACTIVE CAR UTILISATION PAR DEFAUT DES IMAGES REDUITES
+
 	// Creer la vignette des images
 	if (ereg(",$ext,", ','.lire_meta('formats_graphiques').',')
 	AND $mode == 'document'
 	AND $type_image)
 		creer_fichier_vignette($fichier);
+
+**/
 
 	// Pour les fichiers distants remettre l'URL de base
 	if ($distant == 'oui')
@@ -918,9 +948,12 @@ function tourner_document($var_rot, $doc_rotate, $convert_command) {
 		$largeur = $size_image[0];
 		$hauteur = $size_image[1];
 
+/*
+	A DESACTIVER PEUT-ETRE ? QUE SE PASSE--IL SI JE TOURNE UNE IMAGE AYANT UNE VGNETTE "MANUELLE" -> NE PAS CREER DE VIGNETTE TOURNEE -- EN VERITE IL NE FAUT PAS PERMETTRE DE TOURNER UNE IMAGE AYANT UNE VIGNETTE MANUELLE
 		if ($id_vignette > 0) {
 			creer_fichier_vignette($image);
 		}
+*/
 
 		spip_query("UPDATE spip_documents SET largeur=$largeur, hauteur=$hauteur WHERE id_document=$doc_rotate");
 

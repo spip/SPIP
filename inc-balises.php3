@@ -599,15 +599,15 @@ function calculer_balise_logo ($p) {
 		$code_lien .= ", '". addslashes($align) . "'";
 	}
 	$code_lien .= ",'logo $type_objet ' . $_id_objet";
+
 	// cas des documents
 	if ($type_objet == 'DOCUMENT') {
-		$code_logo = "calcule_document($_id_objet, '" .
+		$p->code = "calcule_logo_document($_id_objet, '" .
 			$p->descr['documents'] .
-		  '\', $doublons)';
-		if ($flag_fichier)
-		  $p->code = "calcule_fichier_logo($code_logo)";
-		else
-		  $p->code = "affiche_logos(array($code_logo, ''), $code_lien)";
+			'\', $doublons, '. intval($flag_fichier).", $code_lien, '".
+			// #LOGO_DOCUMENT{x,y} donne la taille maxi
+			texte_script(param_balise($p))
+			."')";
 	}
 	else {
 	  $p->code = "affiche_logos(calcule_logo('$type_objet', '" .

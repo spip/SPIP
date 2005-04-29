@@ -270,8 +270,16 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			return;
 		}
 
+		// Si l'image est de la taille demandee (ou plus petite), simplement
+		// la retourner
+		if ($srcWidth
+		AND $srcWidth <= $maxWidth AND $srcHeight <= $maxHeight) {
+			$vignette = $destination.'.'.preg_replace(',^.*\.,', '', $image);
+			@copy($image, $vignette);
+		}
+
 		// imagemagick en ligne de commande
-		if ($process == 'convert') {
+		else if ($process == 'convert') {
 			$format = $formats_sortie[0];
 			$vignette = $destination.".".$format;
 			$commande = "$convert_command -size ${destWidth}x${destHeight} ./$image -geometry ${destWidth}x${destHeight} +profile \"*\" ./".escapeshellcmd($vignette);
@@ -283,8 +291,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			}
 		}
 		else
-		 // imagick (php4-imagemagick)
-		 if ($process == 'imagick') {
+		// imagick (php4-imagemagick)
+		if ($process == 'imagick') {
 			$format = $formats_sortie[0];
 			$vignette = "$destination.".$format;
 			$handle = imagick_readimage($image);
@@ -295,7 +303,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 				return;	
 			}
 		}
-		if ($process == "netpbm") {
+		else if ($process == "netpbm") {
 			$format_sortie = "jpg";
 			$vignette = $destination.".".$format_sortie;
 			$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
@@ -325,7 +333,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			}
 		}
 		// gd ou gd2
-		if ($process == 'gd1' OR $process == 'gd2') {
+		else if ($process == 'gd1' OR $process == 'gd2') {
 
 			// Recuperer l'image d'origine
 			if ($format == "jpg") {
@@ -393,7 +401,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 	$retour['height'] = $hauteur = $size[1];
 	$retour['fichier'] = $vignette;
 	$retour['format'] = $format;
-	$retour['date'] = filemtime($vignette);
+	$retour['date'] = @filemtime($vignette);
 	
 
 	// renvoyer l'image
@@ -437,9 +445,10 @@ function taille_image($img) {
 // [(#LOGO_ARTICLE||reduire_image{100,60})]
 //
 
-function reduire_image_logo($img, $taille = 120, $taille_y=0) {
-	if (!$taille_y)
-		$taille_y = $taille;
+function reduire_image_logo($img, $taille = 0, $taille_y=0) {
+	if (!$taille) $taille = lire_meta('taille_preview');
+	if (!$taille) $taille = 150;
+	if (!$taille_y) $taille_y = $taille;
 
 	// recuperer le nom du fichier
 	if (eregi("img src=['\"]([^'\"]+)['\"]", $img, $regs)) $logo = $regs[1];
@@ -471,8 +480,9 @@ function reduire_image_logo($img, $taille = 120, $taille_y=0) {
 				$vignette = $preview['fichier'];
 				$width = $preview['width'];
 				$height = $preview['height'];
-				$date = $preview['date'];
-				return "<img src='$vignette?date=$date' width='$width' height='$height'$attributs />";
+				if (!_DIR_ECRIRE)
+					$date = '?date='.$preview['date'];
+				return "<img src='$vignette$date' width='$width' height='$height'$attributs />";
 			}
 			else if ($taille_origine = @getimagesize($logo)) {
 				$date = filemtime($logo);
