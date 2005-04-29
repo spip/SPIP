@@ -243,7 +243,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		'previsu' => $previsu,
 		'table' => $table,
 		'texte' => $texte,
-		'titre' => $titre,
+		'titre' => extraire_multi($titre),
 		'url' =>  $url,
 		'url_site' => ($url_site ? $url_site : "http://"),
 		'parametres_forum' => $parametres_forum,
