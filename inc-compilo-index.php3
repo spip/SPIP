@@ -296,7 +296,7 @@ function filtres_arglist($args, $p, $sep) {
 		else
 		  ereg(' *([^,]+) *,?(.*)$', $args, $regs);
 		$arg = $regs[1];
-#		spip_log("$args $arg");
+
 		if ($arg !== '') {
 			if ($arg[0] =='$')
 				$arg = '$Pile[0][\'' . substr($arg,1) . "']";
@@ -307,7 +307,8 @@ function filtres_arglist($args, $p, $sep) {
 				$p->nom_champ = $r2[3];
 				# faudrait verifier !trim(r2[5])
 				$arg = calculer_champ($p);
-			} 
+			} elseif (!is_numeric($arg))
+				$arg = "'" . addslashes($arg) . "'";
 
 			$arglist .= $sep . $arg;
 		}
