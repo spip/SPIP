@@ -210,6 +210,31 @@ function PtoBR($texte){
 	return $texte;
 }
 
+// Couper les "mots" de plus de $l caracteres (souvent des URLs)
+function lignes_longues($texte, $l = 70) {
+	// echapper les tags (on ne veut pas casser les a href=...)
+	$tags = array();
+	if (preg_match_all('/<.*>/Ums', $texte, $t, PREG_SET_ORDER)) {
+		foreach ($t as $n => $tag) {
+			$tags[$n] = $tag[0];
+			$texte = str_replace($tag[0], " @@SPIPTAG$n@@ ", $texte);
+		}
+	}
+	// casser les mots longs qui restent
+	if (preg_match_all("/\S{".$l."}/ms", $texte, $longs, PREG_SET_ORDER)) {
+		foreach ($longs as $long) {
+			$texte = str_replace($long[0], $long[0].' ', $texte);
+		}
+	}
+
+	// retablir les tags
+	foreach ($tags as $n=>$tag) {
+		$texte = str_replace(" @@SPIPTAG$n@@ ", $tag, $texte);
+	}
+
+	return $texte;
+}
+
 // Majuscules y compris accents, en HTML
 function majuscules($texte) {
 	// Cas du turc
@@ -650,32 +675,54 @@ function date_iso($date_heure) {
 // Fonctions graphiques
 //
 
-function extraire_fichier($img) {
-	if (eregi("img src=['\"]([^'\"]+)['\"]", $img, $regs)) $logo = $regs[1];
-	if (!$logo) $logo = $img;
-	return $logo;
-}
-
-function reduire_image($img, $taille = 0, $taille_y=0) {
-	if (!$img) return;
+// Accepte en entree un tag <img ...>
+function reduire_une_image($img, $taille, $taille_y) {
 	include_ecrire('inc_logos.php3');
 
-	if (!$taille)
-		$taille = lire_meta('taille_preview');
+	// Cas du mouseover genere par les logos de survol de #LOGO_ARTICLE
+	if (eregi("onmouseover=\"this\.src=\'([^']+)\'\"", $img, $match)) {
+		$mouseover = extraire_attribut(
+			reduire_image_logo($match[1], $taille, $taille_y),
+			'src');
+	}
 
-	if (eregi("onmouseover=\"this\.firstChild\.src=\'([^']+)\'\"", $img, $match)) {
-		$mouseover = extraire_fichier(reduire_image_logo($match[1], $taille, $taille_y));
-	}
-	
 	$image = reduire_image_logo($img, $taille, $taille_y);
-	
+
 	if ($mouseover) {
-		$mouseout = extraire_fichier($image);
-		return "<div onmouseover=\"this.firstChild.src='$mouseover'\""
-		." onmouseout=\"this.firstChild.src='$mouseout'\">"
-		.$image."</div>";
+		$mouseout = extraire_attribut($image, 'src');
+		$js_mouseover = "onmouseover=\"this.src='$mouseover'\""
+			." onmouseout=\"this.src='$mouseout'\" />";
+		$image = preg_replace(",( /)?".">,", $js_mouseover, $image);
 	}
-	else return $image;
+
+	return $image;
+}
+
+// accepte en entree un texte complet, un img-log (produit par #LOGO_XX),
+// un tag <img ...> complet, ou encore un nom de fichier *local* (passer
+// le filtre |copie_locale si on veut l'appliquer a un document)
+function reduire_image($texte, $taille = 0, $taille_y=0) {
+	if (!$texte) return;
+
+	// Cas du nom de fichier local
+	if (preg_match(',^'._DIR_IMG.',', $texte)) {
+		if (!@file_exists($texte)) {
+			spip_log("Image absente : $texte");
+			return '';
+		} else {
+			return reduire_une_image("<img src='$texte' />", $taille, $taille_y);
+		}
+	}
+
+	// Cas general : trier toutes les images
+	if (preg_match_all(',<img\s.*>,Uims', $texte, $tags, PREG_SET_ORDER)) {
+		foreach ($tags as $tag) {
+			if ($reduit = reduire_une_image($tag[0], $taille, $taille_y))
+				$texte = str_replace($tag[0], $reduit, $texte);
+		}
+	}
+	
+	return $texte;
 }
 
 function largeur($img) {
@@ -885,11 +932,12 @@ function alterner($i) {
 function extraire_attribut($balise, $attribut) {
 # la mise en facteur ne marche pas....
 #  if (preg_match("/<[^>]*\s+$attribut=(['\"])([^\\1]*)\\1/i", $balise, $r))
-  if (preg_match("/<[^>]*\s+$attribut='([^']*)'/i", $balise, $r))
-     return $r[1];
-  else if (preg_match("/<[^>]*\s+$attribut=\"([^\"]*)\"/i", $balise, $r))
-     return $r[1];
-  else return '';
+	if (preg_match("/<[^>]*\s+$attribut='([^']*)'/i", $balise, $r))
+		return $r[1];
+	else if (preg_match("/<[^>]*\s+$attribut=\"([^\"]*)\"/i", $balise, $r))
+		return $r[1];
+	else
+		return '';
 }
 
 // fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a

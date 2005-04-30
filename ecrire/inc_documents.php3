@@ -1093,7 +1093,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	//
 
 	if ($mode == 'document') {
-		$titre_cadre = typo($titre).typo($titre_fichier);
+		$titre_cadre = lignes_longues(typo($titre).typo($titre_fichier), 30);
 		debut_cadre_enfonce("doc-24.gif", false, "", $titre_cadre);
 
 		echo "<div style='float: $spip_lang_left;'>";
@@ -1106,31 +1106,16 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		//
 		// Affichage de la vignette
 		//
-
-		if ($id_vignette) $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"));;
-		if ($vignette) {
-			$fichier_vignette = generer_url_document($id_vignette);
-			$largeur_vignette = $vignette['largeur'];
-			$hauteur_vignette = $vignette['hauteur'];
-			$taille_vignette = $vignette['taille'];
-		}
-
-		if ($fichier_vignette) {
-			echo "<div align='center'>";
-			echo texte_vignette_document($largeur_vignette, $hauteur_vignette, $fichier_vignette, $url);
-			echo "</div>";
+		echo "<div align='center'>\n";
+		if ($id_vignette
+		AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = $id_vignette"))) {
+			echo document_et_vignette($vignette, $url);
 		}
 		else {
-			// pas de vignette
-			echo "<div align='center'>\n";
-			$block = "doc_vignette $id_document";
-			list($icone, $largeur_icone, $hauteur_icone) =
-				vignette_par_defaut($type_extension);
-			if ($icone) {
-			  echo "<a href='$url'><img src='$icone' style='border-width: 0px' width='$largeur_icone' align='top' height='$hauteur_icone' alt='" . basename($icone) ."' /></a>\n";
-			}
-			echo "</div>\n";
+			echo document_et_vignette($document, $url); 
 		}
+		echo "</div\n";
+
 
 		// Affichage du raccourci <doc...> correspondant
 		if (!ereg(",$id_document,", $doublons)) {
@@ -1251,7 +1236,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 	//
 	else if ($mode == 'vignette') {
 		$block = "image $id_document";
-		$titre_cadre = typo($titre).typo($titre_fichier);
+		$titre_cadre = lignes_longues(typo($titre).typo($titre_fichier), 30);
 	
 		debut_cadre_relief("image-24.gif", false, "", $titre_cadre);
 

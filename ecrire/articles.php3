@@ -1485,6 +1485,7 @@ else {
 	}
 
 	echo "<div $dir_lang style='font-size: small;'>";
+#	echo reduire_image(propre($texte), 500,10000);
 	echo propre($texte);
 	echo "<br clear='both' />";
 	echo "</div>";
