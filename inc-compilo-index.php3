@@ -210,7 +210,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 function param_balise(&$p) {
 	$a = $p->fonctions;
 	if ($a) list(,$nom) = each($a) ; else $nom = '';
-	if (!ereg(' *\{ *([^}]+) *\} *',$nom, $m))
+	if (!ereg('^ *\{ *([^}]+) *\} *',$nom, $m))
 	  return '';
 	else {
 		$filtres= array();
