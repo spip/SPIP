@@ -24,7 +24,7 @@ function debut_block_visible($nom_block){
 		$compteur_block++;
 		$numero_block["$nom_block"] = $compteur_block;
 	}
-	return "<div id='Layer".$numero_block["$nom_block"]."' style='display: block'>";
+	return "<div id='Layer".$numero_block["$nom_block"]."' style='display: block;'>";
 
 }
 
@@ -35,7 +35,6 @@ function debut_block_invisible($nom_block){
 		$compteur_block++;
 		$numero_block["$nom_block"] = $compteur_block;
 	}
-
 	return http_script("vis['".$numero_block["$nom_block"]."'] = 'hide';
 document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display: none; margin-top: 1;\">');",
 			      '',
@@ -44,7 +43,8 @@ document.write('<div id=\"Layer".$numero_block["$nom_block"]."\" style=\"display
 }
 
 function fin_block() {
-  return (!$GLOBALS['browser_layer'] ? '' : "<div style='clear: both;'></div></div>");
+	if ($GLOBALS['browser_layer'])
+		return "<div style='clear: both;'></div></div>";
 }
 
 function bouton_block_invisible($nom_block, $icone='') {
@@ -116,7 +116,6 @@ function verif_butineur() {
 	$browser_name = $match[1];
 	$browser_version = $match[2];
 	$browser_description = $match[3];
-	$browser_layer = '';
 	$browser_layer = '';
 	$browser_barre = '';
 
