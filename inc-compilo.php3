@@ -46,15 +46,15 @@ include_ecrire('inc_serialbase.php3');
 // Calculer un <INCLURE()>
 //
 function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
-
 	$l = array();
 	if ($params) {
 		foreach($params as $var => $val) {
 			if ($val) {
+				$val = ereg_replace('^["\'](.*)["\']$', "\\1",trim($val));
 				$val = calculer_param_dynamique(
-					ereg_replace('^["\'](.*)["\']$', "\\1",trim($val)), 
+					$val, 
 					$boucles,
-					$idb);
+					$id_boucle);
 				$l[] = "\'$var\' => " .
 				  (!ereg('" \. *(.*)\. "', $val, $m) ?
 				   ('"' . addslashes($val) . '"') :
