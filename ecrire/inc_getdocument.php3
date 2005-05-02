@@ -176,7 +176,7 @@ function verifier_compactes($zip) {
 			else
 				spip_log("chargement de $f interdit");
 		}
-		return $aff_fichiers ;
+		return sort($aff_fichiers);
 	}
 }
 
