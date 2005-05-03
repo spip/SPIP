@@ -88,7 +88,7 @@ function document_et_vignette($document, $url, $portfolio = false) {
 
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
-		$image = "<a href='$url'><img src='$fichier' style='border-width: 0px'  height='$hauteur' width='$largeur' /></a>";
+		$image = "<img src='$fichier' style='border-width: 0px'  height='$hauteur' width='$largeur' />";
 	}
 
 	if (!$url)
@@ -269,10 +269,11 @@ function integre_image($id_document, $align, $type_aff) {
 
 	if (($type_aff == 'DOC') && ($mode == 'document')) { 
 		if ($type = @spip_fetch_array(spip_query("SELECT titre FROM spip_types_documents WHERE id_type=$id_type")))
-		  $type = $type['titre'];
-		else	$type = 'fichier';
-		$vignette = "$vignette"
-		  . "<div>(<a href='$url_fichier'>$type, ".taille_en_octets($taille)."</a>)</div>";
+			$type = $type['titre'];
+		else
+			$type = 'fichier';
+		$vignette .= "<div>(<a href='$url_fichier'>$type, "
+			.taille_en_octets($taille)."</a>)</div>";
 	}
 
 	// Passer un DIV pour les images centrees et, dans tous les cas, les <DOC>
