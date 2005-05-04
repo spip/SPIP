@@ -367,12 +367,7 @@ function prive_lien_image_reduite ($largeur_vignette, $hauteur_vignette, $fichie
 	global $connect_id_auteur;
 	include_ecrire("inc_logos.php3");
 
-	list($w,$h) = image_ratio($largeur_vignette, $hauteur_vignette, 120, 110);
-	$hash = calculer_action_auteur ("reduire $w $h");
-	
-	$image = "<img src='../spip_image_reduite.php3?img=$fichier_vignette&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' width='$w' height='$h' style='border-width: 0px' />";
-	
-	return $image;
+	return reduire_image_logo('../'.$fichier_vignette, 120, 110);
 }
 
 // Bloc d'edition de la taille du doc (pour embed)
@@ -1241,17 +1236,17 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		//
 		$raccourci_doc = "<div style='padding:2px;'>
 		<font size='1' face='arial,helvetica,sans-serif'>";
+		if (strlen($descriptif) > 0 OR strlen($titre) > 0)
+			$doc = 'doc';
+		else
+			$doc = 'img';
 		if (!ereg(",$id_document,", $doublons)) {
-			if (strlen($descriptif) > 0 OR strlen($titre) > 0)
-				$doc = 'doc';
-			else
-				$doc = 'img';
 			$raccourci_doc .=
 				affiche_raccourci_doc($doc, $id_document, 'left')
 				. affiche_raccourci_doc($doc, $id_document, 'center')
 				. affiche_raccourci_doc($doc, $id_document, 'right');
 		} else {
-			$raccourci_doc .= affiche_raccourci_doc('img', $id_document, '');;
+			$raccourci_doc .= affiche_raccourci_doc($doc, $id_document, '');;
 		}
 		$raccourci_doc .= "</font></div>\n";
 

@@ -697,18 +697,9 @@ function afficher_sites($titre_table, $requete) {
 				include_ecrire("inc_logos.php3");
 				$logo = decrire_logo("siteon$id_syndic");
 				if ($logo) {
-					$fichier = $logo[0];
-					$taille = $logo[1];
-					$taille_x = $logo[3];
-					$taille_y = $logo[4];
-					$taille = image_ratio($taille_x, $taille_y, 26, 20);
-					$w = $taille[0];
-					$h = $taille[1];
-					$fid = $logo[2];
-					$hash = calculer_action_auteur ("reduire $w $h");
-
-					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'><img src='../spip_image_reduite.php3?img="._DIR_IMG."$fichier&taille_x=$w&taille_y=$h&hash=$hash&hash_id_auteur=$connect_id_auteur' alt='$fichier' width='$w' height='$h' border='0'></div>";
-					
+					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>"
+					. reduire_image_logo(_DIR_IMG.$logo[0], 26, 20)
+					. "</div>\n";
 				}
 			}
 
@@ -716,11 +707,7 @@ function afficher_sites($titre_table, $requete) {
 			$s .= http_img_pack($puce, $statut, "width='7' height='7' border='0'") ."&nbsp;&nbsp;";
 			
 			$s .= typo($nom_site);
-			/*if ($moderation == 'oui')
-				$s .= "<i>".typo($nom_site)."</i>";
-			else
-				$s .= typo($nom_site);
-			*/
+
 			$s .= "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
 			$vals[] = $s;
 			

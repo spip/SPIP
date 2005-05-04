@@ -48,49 +48,13 @@ function decrire_logo($racine) {
 	if ($img = cherche_image_nommee($racine)) {
 		list($dir, $racine, $fmt) = $img;
 		$fid = $dir . "$racine.".$fmt; 
-			// contrer le cache du navigateur
-		$contre = @filesize($fid) . @filemtime($fid);
-		if ($taille = @getimagesize($fid)) {
-				list($x, $y, $w, $h) = resize_logo($taille);
-				$xy = _T('info_largeur_vignette', array('largeur_vignette' => $x, 'hauteur_vignette' => $y));
-				$taille = " width='$w' height='$h'";
-			} else { $xy =''; $w = 0; $h = 0;}
-		include_ecrire("inc_admin.php3");
-		return array("$racine.".$fmt, 
-			     $xy, 
-			     "<img src='../spip_image_reduite.php3?img=" .
-			     $fid . "&taille_x=$w&taille_y=$h&hash=" .
-			     calculer_action_auteur ("reduire $w $h") .
-			     "&hash_id_auteur=$connect_id_auteur" .
-			     (!$contre ? '' : ("&".md5($contre))) .
-			     "'$taille style='border-width: 0px' alt='$racine' />",
-			     $x, $y);
+		if ($taille = @getimagesize($fid))
+			$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
+
+		return array("$racine.$fmt", $xy);
 	}
 	return '';
 }
-
-function resize_logo($limage, $maxi=170) {
-
-	$limagelarge = $limage[0];
-	$limagehaut = $limage[1];
-
-	if ($limagelarge > $maxi){
-		$limagehaut = $limagehaut * $maxi / $limagelarge;
-		$limagelarge = $maxi;
-	}
-
-	if ($limagehaut > $maxi){
-		$limagelarge = $limagelarge * $maxi / $limagehaut;
-		$limagehaut = $maxi;
-	}
-
-	// arrondir a l'entier superieur
-	$limagehaut = ceil($limagehaut);
-	$limagelarge = ceil($limagelarge);
-
-	return (array($limage[0],$limage[1],$limagelarge,$limagehaut));
-}
-
 
 
 function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
@@ -136,10 +100,12 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 	echo "<font size=1>";
 
 	if ($logo) {
-		list($fichier, $taille, $img) =  $logo;
+		list ($fichier, $taille) =  $logo;
 		$hash = calculer_action_auteur("supp_logo $fichier");
 
-		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>".reduire_image_logo(_DIR_IMG.$fichier, 170)."</a></div>";
+		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>";
+		echo reduire_image_logo(_DIR_IMG.$fichier, 170);
+		echo "</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
@@ -502,13 +468,14 @@ function reduire_image_logo($img, $taille = 0, $taille_y=0) {
 				$vignette = $preview['fichier'];
 				$width = $preview['width'];
 				$height = $preview['height'];
-				if (!_DIR_ECRIRE)
+
+				if (!_DIR_RESTREINT)
 					$date = '?date='.$preview['date'];
 				return "<img src='$vignette$date' width='$width' height='$height'$attributs />";
 			}
 			else if ($taille_origine = @getimagesize($logo)) {
 				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-				if (!_DIR_ECRIRE)
+				if (!_DIR_RESTREINT)
 					$date = '?date='.filemtime($logo);
 				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
 			}
