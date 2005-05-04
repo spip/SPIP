@@ -160,7 +160,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		if ($regs[7]) {
 			// Echapper les <cadre>...</cadre>
 			$lecode = trim(entites_html($regs[9]));
-			$total_lignes = count(explode("\n", $lecode));
+			$total_lignes = substr_count($lecode, "\n");
 
 			$les_echap[$num_echap] = "<form action=\"/\" method=\"get\"><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></form>";
 			// Les marques ci-dessous indiquent qu'on ne veut pas paragrapher
@@ -170,6 +170,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		if ($regs[12]) {
 			$lecode = $regs[14];
 			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
+			$lecode = str_replace("\r", "\n", $lecode); # gestion des \r a revoir !
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
 			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
 			$les_echap[$num_echap] = propre($lecode);
@@ -187,8 +188,10 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	//
 	// Reperages d'images et de documents utilisateur 
 	// (insertion dans echappe_retour pour faciliter les doublons)
-	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)
+	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)	
 	if (eregi(__regexp_img_echappe, $letexte)) {
+		$letexte = str_replace("\r\n", "\n", $letexte);
+		$letexte = str_replace("\r", "\n", $letexte);
 		$paragraphes = explode("\n\n", $letexte);
 		
 		for ($p = 0; $p < count($paragraphes); $p++) {
@@ -785,6 +788,9 @@ function traiter_raccourcis_generale($letexte) {
 	else
 		$puce = $GLOBALS['puce'];
 
+	// Harmoniser les retours chariot
+	$letexte = preg_replace(",\r\n?,", "\n", $letexte);
+
 	// Corriger HTML
 	$letexte = preg_replace(",</?p>,i", "\n\n\n", $letexte);
 
@@ -931,9 +937,6 @@ function traiter_raccourcis_generale($letexte) {
 	if (ereg("\n-[*#]", $letexte))
 		$letexte = traiter_listes($letexte);
 
-	// les BR old style (pour nettoyer et accelerer ci-dessous)
-	$letexte = preg_replace(',<br[[:space:]]*/?'.'>,i', '<br />', $letexte);
-
 	// autres raccourcis
 	$cherche1 = array(
 		/* 0 */ 	"/\n(----+|____+)/",
@@ -942,12 +945,12 @@ function traiter_raccourcis_generale($letexte) {
 		/* 3 */ 	"/\n_ +/",
 		/* 4 */ 	"/\{\{\{/",
 		/* 5 */ 	"/\}\}\}/",
-		/* 6 */ 	"@(( *)\n){2,}(<br />)*@",
+		/* 6 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/",
 		/* 7 */ 	"/\{\{/",
 		/* 8 */ 	"/\}\}/",
 		/* 9 */ 	"/\{/",
 		/* 10 */	"/\}/",
-		/* 11 */	"@(<br />){2,}@",
+		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
 		/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
 		/* 13 */	"/<p>/",
 		/* 14 		"/\n/", */
@@ -975,7 +978,6 @@ function traiter_raccourcis_generale($letexte) {
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
-
 
 	// paragrapher
 	if (strpos(' '.$letexte, '<p class="spip">')) # ce test est destine a disparaitre, avec un impact sur les textes a un seul paragraphe
@@ -1035,10 +1037,6 @@ function traiter_raccourcis_doublon(&$doublons, $letexte) {
 
 // Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte, $echap=false) {
-	// Harmoniser les retours chariot CR-LF -> \n
-	$letexte = str_replace("\r\n", "\n", $letexte);
-	$letexte = str_replace("\r", "\n", $letexte);
-
 	return interdire_scripts(traiter_raccourcis(trim($letexte), $echap));
 //	$a=time(); $b=microtime();
 //	interdire_scripts(traiter_raccourcis(trim($letexte)));
