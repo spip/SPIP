@@ -97,7 +97,8 @@ function spip_apres_typo ($letexte) {
 
 	// relecture des &nbsp;
 	if (!_DIR_RESTREINT AND $GLOBALS['revision_nbsp'])
-		$letexte = ereg_replace('&nbsp;', '<span class="spip-nbsp">&nbsp;</span>', $letexte);
+		$letexte = str_replace('&nbsp;',
+			'<span class="spip-nbsp">&nbsp;</span>', $letexte);
 
 	if (function_exists('apres_typo'))
 		$letexte = apres_typo($letexte);
@@ -151,8 +152,8 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 			else
 				$lecode = "<span class='spip_code' dir='ltr'>".$lecode."</span>";
 
-			$lecode = ereg_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
-			$lecode = ereg_replace("  ", " &nbsp;", $lecode);
+			$lecode = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
+			$lecode = str_replace("  ", " &nbsp;", $lecode);
 			$les_echap[$num_echap] = "<tt>".$lecode."</tt>";
 		}
 		else
@@ -169,7 +170,6 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		if ($regs[12]) {
 			$lecode = $regs[14];
 			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
-			$lecode = ereg_replace("\r", "\n", $lecode);
 			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
 			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
 			$les_echap[$num_echap] = propre($lecode);
@@ -187,9 +187,8 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	//
 	// Reperages d'images et de documents utilisateur 
 	// (insertion dans echappe_retour pour faciliter les doublons)
-	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)	
+	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)
 	if (eregi(__regexp_img_echappe, $letexte)) {
-		$letexte = ereg_replace("\r", "\n", $letexte);
 		$paragraphes = explode("\n\n", $letexte);
 		
 		for ($p = 0; $p < count($paragraphes); $p++) {
@@ -786,9 +785,6 @@ function traiter_raccourcis_generale($letexte) {
 	else
 		$puce = $GLOBALS['puce'];
 
-	// Harmoniser les retours chariot
-	$letexte = preg_replace(",\r\n?,", "\n", $letexte);
-
 	// Corriger HTML
 	$letexte = preg_replace(",</?p>,i", "\n\n\n", $letexte);
 
@@ -935,20 +931,23 @@ function traiter_raccourcis_generale($letexte) {
 	if (ereg("\n-[*#]", $letexte))
 		$letexte = traiter_listes($letexte);
 
+	// les BR old style (pour nettoyer et accelerer ci-dessous)
+	$letexte = preg_replace(',<br[[:space:]]*/?'.'>,i', '<br />', $letexte);
+
 	// autres raccourcis
 	$cherche1 = array(
 		/* 0 */ 	"/\n(----+|____+)/",
 		/* 1 */ 	"/\n-- */",
 		/* 2 */ 	"/\n- */",
 		/* 3 */ 	"/\n_ +/",
-		/* 5 */ 	"/\{\{\{/",
-		/* 6 */ 	"/\}\}\}/",
-		/* 4 */ 	"/(( *)\n){2,}(<br[[:space:]]*\/?".">)?/",
+		/* 4 */ 	"/\{\{\{/",
+		/* 5 */ 	"/\}\}\}/",
+		/* 6 */ 	"@(( *)\n){2,}(<br />)*@",
 		/* 7 */ 	"/\{\{/",
 		/* 8 */ 	"/\}\}/",
 		/* 9 */ 	"/\{/",
 		/* 10 */	"/\}/",
-		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
+		/* 11 */	"@(<br />){2,}@",
 		/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
 		/* 13 */	"/<p>/",
 		/* 14 		"/\n/", */
@@ -960,9 +959,9 @@ function traiter_raccourcis_generale($letexte) {
 		/* 1 */ 	"\n<br />&mdash;&nbsp;",
 		/* 2 */ 	"\n<br />$puce&nbsp;",
 		/* 3 */ 	"\n<br />",
-		/* 5 */ 	"\n\n@@SPIP_debut_intertitre@@",
-		/* 6 */ 	"@@SPIP_fin_intertitre@@\n\n",
-		/* 4 */ 	"<p>",
+		/* 4 */ 	"\n\n@@SPIP_debut_intertitre@@",
+		/* 5 */ 	"@@SPIP_fin_intertitre@@\n\n",
+		/* 6 */ 	"<p>",
 		/* 7 */ 	"<strong class=\"spip\">",
 		/* 8 */ 	"</strong>",
 		/* 9 */ 	"<i class=\"spip\">",
@@ -976,6 +975,7 @@ function traiter_raccourcis_generale($letexte) {
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
+
 
 	// paragrapher
 	if (strpos(' '.$letexte, '<p class="spip">')) # ce test est destine a disparaitre, avec un impact sur les textes a un seul paragraphe
@@ -1035,6 +1035,10 @@ function traiter_raccourcis_doublon(&$doublons, $letexte) {
 
 // Filtre a appliquer aux champs du type #TEXTE*
 function propre($letexte, $echap=false) {
+	// Harmoniser les retours chariot CR-LF -> \n
+	$letexte = str_replace("\r\n", "\n", $letexte);
+	$letexte = str_replace("\r", "\n", $letexte);
+
 	return interdire_scripts(traiter_raccourcis(trim($letexte), $echap));
 //	$a=time(); $b=microtime();
 //	interdire_scripts(traiter_raccourcis(trim($letexte)));
