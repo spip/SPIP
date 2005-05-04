@@ -446,9 +446,14 @@ function reduire_image_logo($img, $taille = 0, $taille_y=0) {
 	$attributs = '';
 
 	// preserver le name='...' et le mettre en alt le cas echant
-	if ($name = extraire_attribut($img, 'name'))
-		$attributs .= " name='$name'"; 
-	$attributs .= " alt='$name'";
+	if ($name = extraire_attribut($img, 'name')) {
+		$attributs .= ' name="'.entites_html($name).'"'; 
+		$attributs_alt = ' alt="'.entites_html($name).'"'; 
+	}
+	if ($alt = extraire_attribut($img, 'alt'))
+		$attributs_alt = ' alt="'.entites_html($alt).'"'; 
+
+	$attributs .= $attributs_alt;
 
 	// attributs deprecies. Transformer en CSS
 	if ($espace = extraire_attribut($img, 'hspace'))
