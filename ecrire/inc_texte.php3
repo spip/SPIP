@@ -188,18 +188,21 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	//
 	// Reperages d'images et de documents utilisateur 
 	// (insertion dans echappe_retour pour faciliter les doublons)
-	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)	
+	// on explose par paragraphes pour sortir les insertions "lourdes" (xhtml)
 	if (eregi(__regexp_img_echappe, $letexte)) {
 		$letexte = str_replace("\r\n", "\n", $letexte);
 		$letexte = str_replace("\r", "\n", $letexte);
+
+		// Attention certains raccourcis impliquent un paragraphe
+		// (a completer, ou faire autrement !)
+		$letexte = str_replace('}}}', "}}}\n\n", $letexte);
+
 		$paragraphes = explode("\n\n", $letexte);
 		
-		for ($p = 0; $p < count($paragraphes); $p++) {
-			$para = $paragraphes[$p];
-
+		foreach ($paragraphes as $para) {
 			while (eregi(__regexp_doc_echappe, $para, $match)) {
 				$num_echap++;	
-				$para = "</no p>@@SPIP_$source$num_echap@@\n\n".str_replace($match[0], "", $para);
+				$para = "</no p>@@SPIP_$source$num_echap@@<no p>\n\n".str_replace($match[0], "", $para);
 				$les_echap[$num_echap] = $match;
 				
 			}
@@ -213,15 +216,7 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		}
 		$letexte= join("\n\n",$paragraphe);
 	}
-	
-/*	while (eregi(__regexp_img_echappe, $letexte, $match)) {
-		$num_echap++;
 
-		$letexte = str_replace($match[0],
-			"</no p>@@SPIP_$source$num_echap@@<no p>", $letexte);
-		$les_echap[$num_echap] = $match;
-	}
-*/
 	return array($letexte, $les_echap);
 }
 
