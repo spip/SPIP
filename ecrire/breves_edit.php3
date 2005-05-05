@@ -175,7 +175,7 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	else {
 		echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">";
 	}
-	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'  >";
+	echo "<P ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'  >";
 	echo "</FORM>";
 }
 else echo "<H2>"._T('info_page_interdite')."</H2>";

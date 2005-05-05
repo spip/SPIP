@@ -36,16 +36,19 @@ function tester_compatibilite_hebergement() {
 	}
 
 	if (!function_exists('mysql_query'))
-		$err[] = _L("SPIP exige l'extension php"). " <a href='http://se.php.net/mysql'>MYSQL</a>";
+		$err[] = _T('install_extension_php_obligatoire')
+		. " <a href='http://se.php.net/mysql'>MYSQL</a>";
 
 	if (!function_exists('preg_match_all'))
-		$err[] = _L("SPIP exige l'extension php"). " <a href='http://se.php.net/pcre'>PCRE</a>";
+		$err[] = _T('install_extension_php_obligatoire')
+		. " <a href='http://se.php.net/pcre'>PCRE</a>";
 
 	if ($a = @ini_get('mbstring.func_overload'))
-		$err[] = _L("SPIP ne fonctionne pas avec mbstring.func_overload=$a")." - voir <a href='http://se.php.net/mb_string'>mb_string</a>.<br /><small>"._L("Ce probl&egrave;me peut se corriger en installant &agrave; la racine du site un fichier .htaccess avec la ligne&nbsp;:")."<br /><tt>PHP_VALUE mbstring.func_overload 0</tt></small>";
+		$err[] = _T('install_extension_mbstring')
+		. "mbstring.func_overload=$a - <a href='http://se.php.net/mb_string'>mb_string</a>.<br /><small>";
 
 	if ($err) {
-			echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4><b>"._L('Attention&nbsp;!').'</b> <p>'._L('L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...')."</p></FONT>";
+			echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4><b>"._T('avis_attention').'</b> <p>'._T('install_echec_annonce')."</p></FONT>";
 		while (list(,$e) = each ($err))
 			echo "<li>$e</li>\n";
 

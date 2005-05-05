@@ -218,7 +218,7 @@ echo "</TEXTAREA>\n";
 		extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
-echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'>";
 echo "</FORM>";
 fin_cadre_formulaire();
 
