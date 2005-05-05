@@ -18,7 +18,8 @@ $forcer_lang = true;
 
 // Compatibilite anciennes versions de SPIP : si un 'var_url' (cible du login)
 // est passe, renvoyer vers la meme adresse mais avec 'url'
-if (strpos($_SERVER['REQUEST_URI'], 'var_url')) {
+if (isset($_SERVER['REQUEST_URI'])
+AND strpos($_SERVER['REQUEST_URI'], 'var_url')) {
 	header('Location: '.str_replace('var_url', 'url', $_SERVER['REQUEST_URI']));
 	exit;
 }
