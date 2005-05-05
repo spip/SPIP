@@ -704,7 +704,7 @@ function reduire_une_image($img, $taille, $taille_y) {
 // accepte en entree un texte complet, un img-log (produit par #LOGO_XX),
 // un tag <img ...> complet, ou encore un nom de fichier *local* (passer
 // le filtre |copie_locale si on veut l'appliquer a un document)
-function reduire_image($texte, $taille = 0, $taille_y=0) {
+function reduire_image($texte, $taille = -1, $taille_y = -1) {
 	if (!$texte) return;
 
 	// Cas du nom de fichier local

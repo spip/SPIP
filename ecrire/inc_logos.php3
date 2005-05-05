@@ -413,20 +413,24 @@ function taille_image($img) {
 
 // Cette fonction accepte en entree un nom de fichier ou un tag <img ...>
 
-function reduire_image_logo($img, $taille = 0, $taille_y=0) {
+function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 
 	// Determiner la taille x,y maxi
-	if (!$taille) {
-		if ($taille_y>0)
-			$taille = 100000; # {0,300} -> c'est 300 qui compte
-		else {
-			$taille = lire_meta('taille_preview');
-			if (!$taille)
-				$taille = 150;
-		}
+	if ($taille == -1) {
+		$taille = lire_meta('taille_preview');
+		if (!$taille)
+			$taille = 150;
 	}
-	if (!$taille_y)
+	if ($taille_y == -1)
 		$taille_y = $taille;
+
+	if ($taille == 0 AND $taille_y > 0)
+		$taille = 100000; # {0,300} -> c'est 300 qui compte
+	else
+	if ($taille > 0 AND $taille_y == 0)
+		$taille_y = 100000; # {300,0} -> c'est 300 qui compte
+	else if ($taille == 0 AND $taille_y == 0)
+		return '';
 
 	// recuperer le nom du fichier
 	if ($src = extraire_attribut($img, 'src'))
