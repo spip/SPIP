@@ -67,7 +67,7 @@ function image_pattern($vignette) {
 			. $vignette['fichier']."'
 			width='".$vignette['largeur']."'
 			height='".$vignette['hauteur']."'
-			style='border-width: 0px' />";
+			style='border-width: 0px;' />";
 }
 
 function document_et_vignette($document, $url, $portfolio=false) {
@@ -94,7 +94,7 @@ function document_et_vignette($document, $url, $portfolio=false) {
 
 	if (!$image) {
 		list($fichier, $largeur, $hauteur) = vignette_par_defaut($extension);
-		$image = "<img src='$fichier' style='border-width: 0px'  height='$hauteur' width='$largeur' />";
+		$image = "<img src='$fichier' style='border-width: 0px;'  height='$hauteur' width='$largeur' />";
 	}
 
 	if (!$url)
@@ -187,7 +187,7 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		$largeur_vignette = $largeur;
 		$hauteur_vignette = $hauteur;
 		if ($fichier_vignette) {
-			$vignette = "<img src='$fichier_vignette' style='border-width: 0px'";
+			$vignette = "<img src='$fichier_vignette' style='border-width: 0px;'";
 			if ($largeur_vignette && $hauteur_vignette)
 				$vignette .= " width='$largeur_vignette' height='$hauteur_vignette'";
 			if ($titre) {
@@ -617,7 +617,7 @@ entites_html($document['fichier'])."\" />\n";
 					$link_rot->addVar('redirect',
 						$redirect_url.'&show_docs='.$id_document);
 					$link_rot->addVar('ancre', $album);
-					echo http_href_img($link_rot->getUrl(), 'tourner-gauche.gif', "style='border-width: 0px'", _T('image_tourner_gauche'), '', 'bouton_rotation');
+					echo http_href_img($link_rot->getUrl(), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
 					echo "<br />";
 
 					// tourner a droite
@@ -630,7 +630,7 @@ entites_html($document['fichier'])."\" />\n";
 						$redirect_url.'&show_docs='.$id_document);
 					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(),
-						'tourner-droite.gif', "style='border-width: 0px'",
+						'tourner-droite.gif', "style='border-width: 0px;'",
 						_T('image_tourner_droite'), '', 'bouton_rotation');
 					echo "<br />";
 
@@ -644,7 +644,7 @@ entites_html($document['fichier'])."\" />\n";
 						$redirect_url.'&show_docs='.$id_document);
 					$link_rot->addVar('ancre', $album);
 					echo http_href_img($link_rot->getUrl(),
-						'tourner-180.gif', "style='border-width: 0px'",
+						'tourner-180.gif', "style='border-width: 0px;'",
 						_T('image_tourner_180'), '', 'bouton_rotation');
 				}
 				echo "</div>\n";
