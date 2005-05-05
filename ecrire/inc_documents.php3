@@ -274,10 +274,10 @@ function integre_image($id_document, $align, $type_aff) {
 		$alt_infos_doc .= ", ".$url_fichier;
 	if ($alt_titre_doc) $alt_sep = ', ';
 
-	// documents presentes en mode <DOC> : pas de title detaille
-	// puisque tout est en dessous
+	// documents presentes en mode <DOC> : alt et title "JPEG, 54 ko"
+	// mais pas de titre puisqu'il est en dessous
 	if ($mode == 'document' AND $type_aff == 'DOC') {
-		$alt = " alt=\"\"";
+		$alt = " alt=\"$alt_infos_doc\" title=\"$alt_infos_doc\"";
 	}
 	// document en mode <IMG> : alt + title detailles
 	else if ($mode == 'document' AND $type_aff == 'IMG') {
@@ -306,12 +306,6 @@ function integre_image($id_document, $align, $type_aff) {
 				. "</strong></div>\n";
 		if (strlen($descriptif))
 			$txt .= "<div class='spip_doc_descriptif'>$descriptif</div>\n";
-		if ($mode == 'document') {
-			list($type) = @spip_fetch_array(spip_query(
-			"SELECT titre FROM spip_types_documents WHERE id_type=$id_type"));
-			$txt .= "<div>(<a href='$url_fichier'>$type, "
-				.taille_en_octets($taille)."</a>)</div>";
-		}
 	}
 
 	// Passer un DIV pour les images centrees et, dans tous les cas, les <DOC>

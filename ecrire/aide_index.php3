@@ -64,6 +64,16 @@ function help_frame ($aide) {
 // Le contenu demande
 //
 
+// Erreur aide non disponible
+function erreur_aide_indisponible() {
+	include_ecrire('inc_presentation.php3');
+	install_debut_html(_T('forum_titre_erreur'));
+	echo "<div>"._T('aide_non_disponible')."</div>";
+	echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
+	install_fin_html();
+	exit;
+}
+
 // Selection de l'aide correspondant a la langue demandee
 function fichier_aide($lang_aide = '') {
 	global $help_server;
@@ -93,9 +103,13 @@ function fichier_aide($lang_aide = '') {
 		}
 
 		lire_fichier($fichier_aide, $contenu);
+
 		if (strlen($contenu) > 500) {
 			return array($contenu, $lang_aide);
 		}
+		
+		// Pas d'aide meme sur internet : n'existe pas dans la langue
+		erreur_aide_indisponible();
 	}
 
 	return false;
@@ -111,12 +125,7 @@ function help_body($aide, $html) {
 		$html = analyse_aide($html, $aide);
 
 		if (!$html) {
-			include_ecrire('inc_presentation.php3');
-			install_debut_html(_T('forum_titre_erreur'));
-			echo "<div>"._T('aide_non_disponible')."</div>";
-			echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
-			install_fin_html();
-			exit;
+			erreur_aide_indisponible();
 		}
 	} else {
 		// panneau d'accueil
@@ -457,20 +466,20 @@ if (preg_match(',^([^-.]*)-([^-.]*)-([^\.]*\.(gif|jpg|png))$,', $img, $regs))
 else {
 	list($html, $l, $url_aide) = fichier_aide();
 
-	// On n'a pas d'aide du tout
+	// On n'a pas d'aide
 	if (!$html) {
+		// Hack: comportement special sur le serveur d'aide SPIP.NET
+		// (definir la constante SPIP.NET_...)
+		if (defined('SPIP.NET_PAS_DE_BOUCLE_AIDE')) {
+			$GLOBALS['clean_link'] = new Link("../aide/?aide=$aide");
+			erreur_aide_indisponible();
+		}
 		// Renvoyer sur l'aide en ligne du serveur externe
-		// (hack: sauf sur SPIP.NET)
-		if ($help_server AND !defined('SPIP.NET_PAS_DE_BOUCLE_AIDE'))
+		if ($help_server)
 			@Header("Location: $help_server/?lang=$spip_lang");
-		// Ou alors message d'erreur
+		// Sinon message d'erreur
 		else {
-			include_ecrire('inc_presentation.php3');
-			install_debut_html(_T('forum_titre_erreur'));
-			echo "<div>"._T('aide_non_disponible')."</div>";
-			echo "<div align='right'>".menu_langues('var_lang_ecrire')."</div>";
-			install_fin_html();
-			exit;
+			erreur_aide_indisponible();
 		}
 	} else {
 		echo debut_entete(_T('info_aide_en_ligne'),
