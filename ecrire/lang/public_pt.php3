@@ -12,11 +12,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'articles_populaires' => 'Artigos mais populares',
 'articles_recents' => 'Artigos mais recentes',
 'articles_rubrique' => 'Artigos desta rubrica',
-'aucun_article' => 'N&atilde;o h&aacute; artigo neste endere&ccedil;o',
-'aucun_auteur' => 'N&atilde;o h&aacute; autor neste endere&ccedil;o',
-'aucun_site' => 'N&atilde;o h&aacute; s&iacute;tio neste endere&ccedil;o',
-'aucune_breve' => 'N&atilde;o h&aacute; not&iacute;cia neste endere&ccedil;o',
-'aucune_rubrique' => 'N&atilde;o h&aacute; rubrica neste endere&ccedil;o',
+'aucun_article' => 'Nenhum artigo neste endere&ccedil;o',
+'aucun_auteur' => 'Nenhum autor neste endere&ccedil;o',
+'aucun_site' => 'Nenhum s&iacute;tio neste endere&ccedil;o',
+'aucune_breve' => 'Nenhuma not&iacute;cia neste endere&ccedil;o',
+'aucune_rubrique' => 'Nenhuma rubrica neste endere&ccedil;o',
 'autres_breves' => 'Outras not&iacute;cias',
 'autres_groupes_mots_clefs' => 'Outros grupos de palavras-chave',
 'autres_sites' => 'Outros s&iacute;tios',
@@ -24,7 +24,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Bom dia',
-'breves' => 'Not1icias',
+'breves' => 'Not&iacute;cias',
 
 
 // C
@@ -33,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // D
 'date' => 'Data',
-'dernier_ajout' => '&Uacute;ltimo acr&eacute;scimo',
+'dernier_ajout' => '&Uacute;ltima adenda',
 'dernieres_breves' => '&Uacute;ltimas not&iacute;cias',
 'derniers_articles' => '&Uacute;ltimos artigos',
 'derniers_commentaires' => '&Uacute;ltimos coment&aacute;rios',
@@ -75,9 +75,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'navigation' => 'Navega&ccedil;&atilde;o',
 'nom' => 'Nome',
 'nouveautes' => 'As novidades',
-'nouveautes_web' => 'Novidades no Web',
+'nouveautes_web' => 'Novidades na Web',
 'nouveaux_articles' => 'Novos artigos',
-'nouvelles_breves' => 'Novas not&iacute;tcias',
+'nouvelles_breves' => 'Novas not&iacute;cias',
 
 
 // P
@@ -88,7 +88,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'plan_site' => 'Planta do s&iacute;tio',
 'popularite' => 'Popularidade',
 'poster_message' => 'Enviar uma mensagem',
-'proposer_site' => 'Voc&ecirc; pode prop&ocirc;r um sitio a adicionar a esta rubrica&nbsp;:',
+'proposer_site' => 'Voc&ecirc; pode propor um s&iacute;tio a adicionar a esta rubrica&nbsp;:',
 
 
 // R
@@ -107,14 +107,14 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'sites_web' => 'S&iacute;tios Web',
 'sous_rubriques' => 'Sub-rubricas',
 'suite' => 'continua&ccedil;&atilde;o',
-'sur_web' => 'No Web',
+'sur_web' => 'Na Web',
 'syndiquer_rubrique' => 'Vincular esta rubrica',
 'syndiquer_site' => 'Vincular todo o s&iacute;tio',
 
 
 // T
 'texte_lettre_information' => 'Eis a carta de informa&ccedil;&atilde;o do s&iacute;tio',
-'texte_lettre_information_2' => 'Esta carta recensea os artigos e as not&iacute;cias publicados desde',
+'texte_lettre_information_2' => 'Esta carta recenseia os artigos e as not&iacute;cias publicados desde',
 
 
 // V
