@@ -30,6 +30,8 @@ AND verifier_action_auteur("purger_squelettes", $hash, $id_auteur)) {
 
 if ($afficher_cache_images == "oui"
 AND verifier_action_auteur("afficher_cache_images", $hash, $id_auteur)) {
+	include_ecrire('inc_lang.php3');
+	lang_select($lang);
 	calculer_cache_vignettes();
 }
 
