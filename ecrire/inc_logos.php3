@@ -182,7 +182,8 @@ function image_ratio ($srcWidth, $srcHeight, $maxWidth, $maxHeight) {
 		$destWidth = $maxWidth;
 		$destHeight = $srcHeight/$ratioWidth;
 	}
-	return array (ceil($destWidth), ceil($destHeight));
+	return array (ceil($destWidth), ceil($destHeight),
+		max($ratioWidth,$ratioHeight));
 }
 
 function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destfile, $process='AUTO', $force=false, $test_cache_only = false) {
@@ -471,22 +472,31 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
-			$suffixe = '-'.$taille.'x'.$taille_y;
-			$preview = creer_vignette($logo, $taille, $taille_y, $format, ('cache'.$suffixe), $nom.$suffixe);
-			if ($preview) {
-				$vignette = $preview['fichier'];
-				$width = $preview['width'];
-				$height = $preview['height'];
+			if ($taille_origine = @getimagesize($logo)) {
+				list ($destWidth,$destHeight, $ratio) = image_ratio(
+					$taille_origine[0], $taille_origine[1], $taille, $taille_y);
 
-				if (!_DIR_RESTREINT)
-					$date = '?date='.$preview['date'];
-				return "<img src='$vignette$date' width='$width' height='$height'$attributs />";
-			}
-			else if ($taille_origine = @getimagesize($logo)) {
-				list ($destWidth,$destHeight) = image_ratio($taille_origine[0], $taille_origine[1], $taille, $taille_y);
-				if (!_DIR_RESTREINT)
-					$date = '?date='.filemtime($logo);
-				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
+				// Si la taille n'est pas tres differente, laisser le browser
+				// faire la reduction
+				if ($ratio >= 2
+				AND max($taille_origine[0], $taille_origine[1]) > 50) {
+					$suffixe = '-'.$destWidth.'x'.$destHeight;
+					$preview = creer_vignette($logo, $taille, $taille_y,
+						$format, ('cache'.$suffixe), $nom.$suffixe);
+				}
+
+				if (!$preview) {
+					if (!_DIR_RESTREINT)
+						$date = '?date='.filemtime($logo);
+					return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
+				} else {
+					$vignette = $preview['fichier'];
+					$width = $preview['width'];
+					$height = $preview['height'];
+					if (!_DIR_RESTREINT)
+						$date = '?date='.$preview['date'];
+					return "<img src='$vignette$date' width='$width' height='$height'$attributs />";
+				}
 			}
 		}
 	}
