@@ -263,7 +263,7 @@ function applique_filtres($p) {
 				}
 				if (function_exists($fonc))
 				  $code = "$fonc($code$arglist)";
-				else if (strpos(" < > <= >= == === != !== <> ? ", " $fonc "))
+				else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
 				  $code = "($code $fonc "
 				    . substr($arglist,1)
 				    . ')';
