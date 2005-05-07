@@ -14,12 +14,25 @@
 include ("inc.php3");
 include_ecrire("inc_statistiques.php3");
 
-function http_img_rien($width, $height, $style='', $title='')
-{
-  return http_img_pack('rien.gif', $title, 
-		       "width='$width' height='$height'" 
-		       . (!$style ? '' : (" style='$style'"))
-		       . (!$title ? '' : (" title=\"$title\"")));
+
+// Donne la hauteur du graphe en fonction de la valeur maximale
+// Doit etre un entier "rond", pas trop eloigne du max, et dont
+// les graduations (divisions par huit) soient jolies :
+// on prend donc le plus proche au-dessus de x de la forme 12,16,20,40,60,80,100
+function maxgraph($max) {
+	$max = max(10,$max);
+	$p = pow(10, strlen($max)-2);
+	$m = $max/$p;
+	foreach (array(100,80,60,40,20,16,12,10) as $l)
+		if ($m<=$l) $maxgraph = $l*$p;
+	return $maxgraph;
+}
+
+function http_img_rien($width, $height, $style='', $title='') {
+	return http_img_pack('rien.gif', $title, 
+		"width='$width' height='$height'" 
+		. (!$style ? '' : (" style='$style'"))
+		. (!$title ? '' : (" title=\"$title\"")));
 }
 
 if ($id_article = intval($id_article)){
@@ -274,12 +287,8 @@ if (!$origine) {
 		$max = max(max($log),$visites_today);
 		$date_today = time();
 		$nb_jours = floor(($date_today-$date_debut)/(3600*24));
-		
-		$maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
-	
-		if ($maxgraph < 10) $maxgraph = 10;
-		if (1.1 * $maxgraph < $max) $maxgraph.="0";	
-		if (0.8*$maxgraph > $max) $maxgraph = 0.8 * $maxgraph;
+
+		$maxgraph = maxgraph($max);
 		$rapport = 200 / $maxgraph;
 
 		if (count($log) < 420) $largeur = floor(450 / ($nb_jours+1));
@@ -591,13 +600,8 @@ if (!$origine) {
 		if (count($entrees)>0){
 		
 			$max = max($entrees);
-			$maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
-			
-			if ($maxgraph < 10) $maxgraph = 10;
-			if (1.1 * $maxgraph < $max) $maxgraph.="0";	
-			if (0.8*$maxgraph > $max) $maxgraph = 0.8 * $maxgraph;
-			$rapport = 200 / $maxgraph;
-	
+			$maxgraph = maxgraph($max);
+
 			$largeur = floor(420 / (count($entrees)));
 			if ($largeur < 1) $largeur = 1;
 			if ($largeur > 50) $largeur = 50;
