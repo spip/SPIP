@@ -601,6 +601,7 @@ if (!$origine) {
 		
 			$max = max($entrees);
 			$maxgraph = maxgraph($max);
+			$rapport = 200/$maxgraph;
 
 			$largeur = floor(420 / (count($entrees)));
 			if ($largeur < 1) $largeur = 1;
