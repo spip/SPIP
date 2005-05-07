@@ -263,6 +263,15 @@ function analyser_site($url) {
 			$result['nom_site'] = filtrer_entites(supprimer_tags(eregi_replace('</title>.*', '', $regs[1])));
 		if (eregi('<meta[[:space:]]+(name|http\-equiv)[[:space:]]*=[[:space:]]*[\'"]?description[\'"]?[[:space:]]+(content|value)[[:space:]]*=[[:space:]]*[\'"]([^>]+)[\'"]>', $head, $regs))
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
+
+		// Cherchons quand meme un backend
+		include_ecrire('feedfinder.php');
+		$feeds = get_feed_from_url($url, $texte);
+		if (count($feeds>1)) {
+			spip_log("feedfinder.php :\n".join("\n", $feeds));
+			$result['url_syndic'] = "select: ".join(' ',$feeds);
+		} else
+			$result['url_syndic'] = $feeds[0];
 	}
 	return $result;
 }

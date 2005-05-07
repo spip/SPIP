@@ -261,8 +261,21 @@ if ($activer_syndic != "non") {
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";
 	echo _T('entree_adresse_fichier_syndication');
 	echo "<br>";
-	echo "<INPUT TYPE='text' CLASS='formo' NAME='url_syndic' VALUE=\"$url_syndic\" SIZE='40'><P>";
-	echo "<INPUT TYPE='hidden' NAME='old_syndic' VALUE=\"$url_syndic\"";
+
+	// cas d'une liste de flux detectee par feedfinder : menu
+	if (preg_match(',^select: (.+),', $url_syndic, $regs)) {
+		$feeds = explode(' ',$regs[1]);
+		echo "<select name='url_syndic'>\n";
+		foreach ($feeds as $feed) {
+			echo '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
+		}
+		echo "</select>\n";
+	}
+	// cas normal
+	else {
+		echo "<INPUT TYPE='text' CLASS='formo' NAME='url_syndic' VALUE=\"$url_syndic\" SIZE='40'><P>";
+		echo "<INPUT TYPE='hidden' NAME='old_syndic' VALUE=\"$url_syndic\"";
+	}
 	echo "</td></tr></table>";
 
 	fin_cadre_enfonce();

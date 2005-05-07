@@ -158,6 +158,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	$link = new Link('sites.php3');
 	$link->addVar('id_syndic');
 	$link->addVar('redirect');
+	$link->addVar('recalcul', $recalcul);
 	$redirect = $link->getUrl();
 	$redirect_ok = 'oui';
 }
@@ -394,6 +395,36 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	}
 	echo "</font>";
 }
+// Cas d'un site ayant un feedfinder detecte
+else if (preg_match(',^select: (.*),', $url_syndic, $regs)) {
+	echo "<br /><br />\n";
+	echo "<form method='post' action='sites.php3?id_syndic=$id_syndic'>";
+	foreach (
+		array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')
+	as $var) {
+		echo "<input type='hidden' name='$var' value=\"".entites_html($$var)."\" />";
+	}
+	echo debut_cadre_relief();
+	echo "<div align='$spip_lang_left'>\n";
+	echo "<INPUT TYPE='radio' NAME='syndication' VALUE='non' id='syndication_non' CHECKED>";
+	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b><p>";
+	echo "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui'>";
+	echo " <b><label for='syndication_oui'>"._T('bouton_radio_syndication')."</label></b> &nbsp;";
+
+	$feeds = explode(' ',$regs[1]);
+	echo "<select name='url_syndic'>\n";
+	foreach ($feeds as $feed) {
+		echo '<option value="'.entites_html($feed).'">'.$feed."</option>\n";
+	}
+	echo "</select>\n";
+	echo aide("rubsyn");
+	echo '<input type="hidden" name="modifier_site" value="oui" />';
+	echo '<input type="hidden" name="recalcul" value="oui" />';
+	echo "<div align='$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
+	echo fin_cadre_relief();
+	echo "</div></form>\n";
+}
+
 
 if ($champs_extra AND $extra) {
 		include_ecrire("inc_extra.php3");
