@@ -162,20 +162,22 @@ function enregistre_forum() {
 		exit;
 	}
 
-	// Verifier hash securite
-	include_ecrire("inc_admin.php3");
-	if (!verifier_action_auteur("ajout_forum $id_rubrique".
-	" $id_forum $id_article $id_breve".
-	" $id_syndic $alea", $hash)) {
-		spip_log('erreur hash forum');
-		die (_T('forum_titre_erreur')); 	# echec du POST
-	}
+	// Verifier hash securite pour les forums avec previsu
+	if ($GLOBALS['afficher_texte'] <> 'non') {
+		include_ecrire("inc_admin.php3");
+		if (!verifier_action_auteur("ajout_forum $id_rubrique".
+		" $id_forum $id_article $id_breve".
+		" $id_syndic $alea", $hash)) {
+			spip_log('erreur hash forum');
+			die (_T('forum_titre_erreur')); 	# echec du POST
+		}
 
-	// verifier fichier lock
-	$alea = preg_replace('/[^0-9]/', '', $alea);
-	if (!file_exists($hash = _DIR_SESSIONS."forum_$alea.lck"))
-		return $retour_forum; # echec silencieux du POST
-	unlink($hash);
+		// verifier fichier lock
+		$alea = preg_replace('/[^0-9]/', '', $alea);
+		if (!file_exists($hash = _DIR_SESSIONS."forum_$alea.lck"))
+			return $retour_forum; # echec silencieux du POST
+		unlink($hash);
+	}
 
 	// Entrer le message dans la base
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');

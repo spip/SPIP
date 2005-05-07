@@ -130,33 +130,32 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 		$url_site = _request('url_site');
 		$ajouter_mot = _request('ajouter_mot'); // array
 
+		// Verifier mots associes au message
+		if (is_array($ajouter_mot))
+		$mots = preg_replace('/[^0-9,]/', '', join(',',$ajouter_mot));
+		else $mots = '0';
+
+		// affichage {par num type, type, num titre,titre}
+		$result_mots = spip_query("SELECT id_mot, titre, type
+			FROM spip_mots
+			WHERE id_mot IN ($mots)
+			ORDER BY 0+type,type,0+titre,titre");
+		if (spip_num_rows($result_mots)>0) {
+			$mots_forums = "<p>"._T('forum_avez_selectionne')."</p><ul>";
+			while ($row = spip_fetch_array($result_mots)) {
+				$les_mots[$row['id_mot']] = "checked='checked'";
+				$presence_mots = true;
+				$mots_forums .= "<li style='font-size: 80%;'> "
+				. typo($row['type']) . "&nbsp;: <b>"
+				. typo($row['titre']) ."</b></li>";
+			}
+			$mots_forums .= '</ul>';
+		}
+
 		//
 		// Preparer la previsualisation
 		//
 		if ($afficher_texte != 'non') {
-
-			// Verifier mots associes au message
-			if (is_array($ajouter_mot))
-			$mots = preg_replace('/[^0-9,]/', '', join(',',$ajouter_mot));
-			else $mots = '0';
-
-			// affichage {par num type, type, num titre,titre}
-			$result_mots = spip_query("SELECT id_mot, titre, type
-				FROM spip_mots
-				WHERE id_mot IN ($mots)
-				ORDER BY 0+type,type,0+titre,titre");
-			if (spip_num_rows($result_mots)>0) {
-				$mots_forums = "<p>"._T('forum_avez_selectionne')."</p><ul>";
-				while ($row = spip_fetch_array($result_mots)) {
-					$les_mots[$row['id_mot']] = "checked='checked'";
-					$presence_mots = true;
-					$mots_forums .= "<li style='font-size: 80%;'> "
-					. typo($row['type']) . "&nbsp;: <b>"
-					. typo($row['titre']) ."</b></li>";
-				}
-				$mots_forums .= '</ul>';
-			}
-
 			if (strlen($texte) < 10 AND !$presence_mots)
 				$erreur = _T('forum_attention_dix_caracteres');
 			else if (strlen($titre) < 3 AND $afficher_texte <> "non")
@@ -194,6 +193,8 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	// On installe un fichier temporaire dans _DIR_SESSIONS (et pas _DIR_CACHE
 	// afin de ne pas bugguer quand on vide le cache)
 	// Le lock est leve au moment de l'insertion en base (inc-messforum.php3)
+	// Ce systeme n'est pas fonctionnel pour les forums sans previsu (notamment
+	// si $afficher_texte = 'non')
 
 		$alea = preg_replace('/[^0-9]/', '', $alea);
 		if(!$alea OR !@file_exists(_DIR_SESSIONS."forum_$alea.lck")) {
@@ -290,8 +291,9 @@ ondbclick='storeCaret(this);'>$texte</textarea>";
 function table_des_mots($table, $les_mots) {
 	global $afficher_groupe;
 
-	if ($afficher_groupe)
-		$in_group = " AND id_groupe IN (" . join($afficher_groupe, ", ") .")";
+	if (!is_array($afficher_groupe)) return;
+
+	$in_group = " AND id_groupe IN (" . join($afficher_groupe, ", ") .")";
 
 	$result_groupe = spip_query("SELECT * FROM spip_groupes_mots
 	WHERE 6forum = 'oui' AND $table = 'oui'". $in_group);
@@ -312,7 +314,7 @@ function table_des_mots($table, $les_mots) {
 			  . "<table cellpadding='0' cellspacing='0' border='0' width='100%'>\n"
 			  ."<tr><td width='47%' valign='top'>";
 			$i = 0;
-      
+
 		while ($row = spip_fetch_array($result)) {
 			$id_mot = $row['id_mot'];
 			$titre_mot = propre($row['titre']);
