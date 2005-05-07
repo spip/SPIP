@@ -270,7 +270,7 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 	debut_gauche();
 	
 	if ($rv != 'non')
-	  echo http_calendrier_agenda ($lemois, $lannee, $lejour, $lemois, $lannee,false, 'calendrier.php3');
+	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, 'calendrier.php3');
 	
 	echo "<br />";
 	
@@ -279,9 +279,12 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
 
 	if ($rv != "non") {
+	// faute de fermeture en PHP...
+	  $calendrier_message_fermeture = $id_message;
+
 	  creer_colonne_droite();	
-	  echo http_calendrier_entetecol('', $lejour,$lemois,$lannee);
-	  echo http_calendrier_jour($lejour,$lemois,$lannee, 90, $partie_cal, $echelle, $id_message);
+	  echo http_calendrier_ics_titre($lannee,$lemois,$lejour,'calendrier.php3');
+	  echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90,  sql_calendrier_interval(sql_calendrier_jour($lannee,$lemois, $lejour)));
 	}
 	debut_droite();
 
