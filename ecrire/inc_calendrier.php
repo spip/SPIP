@@ -213,8 +213,9 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	if (!$evt) {
 	  $g = 'sql_calendrier_' . $type;
 	  $evt = sql_calendrier_interval($g($annee,$mois, $jour));
-	  sql_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", &$evt[0]);
-
+	  sql_calendrier_interval_articles("'$annee-$mois-00'", "'$annee-$mois-1'", $evt[0]);
+	  // si on veut les forums, decommenter
+#	  sql_calendrier_interval_forums($g($annee,$mois,$jour), $evt[0]);
 	}
 	$f = 'http_calendrier_' . $type;
 	return $f($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt);
@@ -253,7 +254,6 @@ function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $scri
 	global $spip_ecran, $couleur_claire, $couleur_foncee;
 
 	list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
-
 	if ($sansduree)
 		foreach($sansduree as $d => $r) 
 			{
@@ -888,8 +888,10 @@ function http_calendrier_sans_heure($evenement)
 {
 	if ($evenement['CATEGORIES'] == 'info_articles')
 	  $i = 'puce-verte-breve.gif';
-	else
+	elseif ($evenement['CATEGORIES'] == 'info_breves')
 	  $i = 'puce-blanche-breve.gif';
+	else
+	  $i = 'puce-orange-breve.gif';
 	$desc = propre($evenement['DESCRIPTION']);
 	$sum = $evenement['SUMMARY'];
 	if (!$sum) $sum = $desc;
@@ -1344,6 +1346,34 @@ function sql_calendrier_interval($limites) {
 	sql_calendrier_interval_articles($avant, $apres, $evt);
 	sql_calendrier_interval_breves($avant, $apres, $evt);
 	return array($evt, sql_calendrier_interval_rv($avant, $apres));
+}
+
+function  sql_calendrier_interval_forums($limites, &$evenements) {
+	list($avant, $apres) = $limites;
+	$result=spip_query("
+SELECT	id_forum, titre, date_heure, id_article
+FROM	spip_forum
+WHERE	date_heure >= $avant
+ AND	date_heure < $apres
+ORDER BY date_heure
+");
+	while($row=spip_fetch_array($result)){
+		$amj = sql_calendrier_jour_ical($row['date_heure']);
+		if (_DIR_RESTREINT)
+		  {
+		    $script = 'article';
+		    $id = $id_article;
+		  }
+		else {
+		    $script = 'articles_forum';
+		    $id = $id_article;
+		}
+		$evenements[$amj][]=
+		array(
+			'URL' => $script . _EXTENSION_PHP . "?id_article=$id",
+			'CATEGORIES' => 'info_liens_syndiques_3',
+			'SUMMARY' => $row['titre']);
+	}
 }
 
 # 3 fonctions retournant les evenements d'une periode
