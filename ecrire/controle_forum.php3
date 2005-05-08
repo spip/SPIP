@@ -137,7 +137,7 @@ function controle_forum($row, $rappel) {
 	
 	$cadre = "";
 	
-	$controle = "\n<br /><br /><a id='$id_forum'></a>";
+	$controle = "\n<br /><br /><a id='id$id_forum'></a>";
 	
 	$controle .= debut_cadre_thread_forum("", true, "", typo($forum_titre));
 
@@ -151,7 +151,7 @@ function controle_forum($row, $rappel) {
 		$controle .= "<div>";
 	}
 	
-	$controle .= "<table width=100% cellpadding=0 cellspacing=0 border=0><tr><td width=100% valign='top'><table width=100% cellpadding=5 cellspacing=0><tr><td class='serif'><span class='arial2'>" .
+	$controle .= "<table width='100%' cellpadding='0' cellspacing='0' border='0'>\n<tr><td width='100%' valign='top'><table width='100%' cellpadding='5' cellspacing='0'>\n<tr><td class='serif'><span class='arial2'>" .
 	  date_relative($forum_date_heure) .
 	  "</span>";
 	if ($forum_auteur) {
@@ -162,11 +162,11 @@ function controle_forum($row, $rappel) {
 
 	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
 
-	$controle .= "<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
+	$controle .= "\n<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
 	  "<P align='justify'>".propre($forum_texte);
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
-		$controle .= "<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
+		$controle .= "\n<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
 
 	if ($mots_cles_forums == "oui") {
 		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
@@ -175,7 +175,7 @@ function controle_forum($row, $rappel) {
 		while ($row_mots = spip_fetch_array($result_mots)) {
 			$titre_mot = propre($row_mots['titre']);
 			$type_mot = propre($row_mots['type']);
-			$controle .= "<li> <b>$type_mot :</b> $titre_mot";
+			$controle .= "\n<li> <b>$type_mot :</b> $titre_mot";
 		}
 	}
 
