@@ -202,5 +202,3 @@ echo concat_url("http://spip.net/" , "/ecrire")."<br>";
 
 
 ?>
-
-
