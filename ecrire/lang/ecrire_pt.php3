@@ -119,7 +119,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 // C
 'cache_mode_compresse' => 'Os ficheiros da cache s&atilde;o gravados em modo comprimido.',
 'cache_mode_non_compresse' => 'Os ficheiros da cache s&atilde;o gravados em modo n&atilde;o comprimido.',
-'cache_modifiable_webmestre' => 'Estes par&acirc;metros s&atilde;o modific&aacute;veis pelo webmaster do site.',
+'cache_modifiable_webmestre' => '<MODIF>Estes par&acirc;metros s&atilde;o modific&aacute;veis pelo webmaster do site.',
 'calendrier_synchro' => 'Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>, pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste s&iacute;tio.',
 
 
@@ -131,6 +131,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'diff_texte_ajoute' => 'Texto acrescentado',
 'diff_texte_deplace' => 'Texto alterado',
 'diff_texte_supprime' => 'Texto suprimido',
+'double_clic_inserer_doc' => '<NEW>Fa&ccedil;a duplo clique para inserir este atalho no texto',
 
 
 // E
@@ -380,6 +381,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_identification_publique' => 'A sua identidade p&uacute;blica...',
 'info_image_process' => 'Seleccione o melhor m&eacute;todo de criar as vinhetas clicando sobre a imagem correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, ent&atilde;o o servidor que alberga o seu s&iacute;tio n&atilde;o foi configurado para utilizar tais ferramentas. Se deseja utilizar essas fun&ccedil;&otilde;es, contacte o responsavel t&eacute;cnico e pe&ccedil;a as extens&otilde;es  &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => '<NEW>Images calcul&eacute;es automatiquement',
 'info_informations_personnelles' => 'Quinta etapa : <B>Informa&ccedil;&otilde;es pessoais<B>',
 'info_inscription_automatique' => 'Inscri&ccedil;&atilde;o autom&aacute;tica de novos redactores',
 'info_jeu_caractere' => 'Jogo de car&aacute;cteres do s&iacute;tio',
@@ -514,6 +516,7 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_redacteurs' => 'Redactores',
 'info_redaction_en_cours' => 'EM CURSO DE REDAC&Ccedil;&Atilde;O',
 'info_redirection' => 'Redirigir',
+'info_referencer_doc_distant' => '<NEW>R&eacute;f&eacute;rencer un document sur l\'internet&nbsp;:',
 'info_refuses' => 'Os seus artigos recusados',
 'info_reglage_ldap' => 'Op&ccedil;&otilde;es : <B>Acerto da importa&ccedil;&atilde;o LDAP</B>',
 'info_renvoi_article' => '<B>Redirigir.</B> Este artigo remete para a p&aacute;gina:',
@@ -619,6 +622,9 @@ numa cor que indica o seu estado:',
 'info_visiteur_2' => 'do s&iacute;tio p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do s&iacute;tio p&uacute;blico',
+'install_echec_annonce' => '<NEW>L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...',
+'install_extension_mbstring' => '<NEW>SPIP ne fonctionne pas avec&nbsp;:',
+'install_extension_php_obligatoire' => '<NEW>SPIP exige l\'extension php&nbsp;:',
 'install_select_langue' => 'Seleccione uma l&iacute;ngua e depois clique no bot&atilde;o "&nbsp;seguinte&nbsp;" para lan&ccedil;ar o procedimento de instala&ccedil;&atilde;o.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Aceitar as inscri&ccedil;&otilde;es',
@@ -749,6 +755,7 @@ numa cor que indica o seu estado:',
 
 
 // T
+'taille_cache_image' => '<NEW>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio <code>CACHE/</code>.',
 'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diret&oacute;rio <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.',
 'taille_cache_octets' => 'O tamanho da cache &eacute; atualmente de  @octets@.',

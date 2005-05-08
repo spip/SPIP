@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Los archivos de cach&eacute; se almacenan en modo comprimido.',
 'cache_mode_non_compresse' => 'Los archivos de cach&eacute; se almacenan en modo no comprimido.',
-'cache_modifiable_webmestre' => 'Estos par&aacute;metros son modificables por la webmistress del sitio.',
+'cache_modifiable_webmestre' => 'Este par&aacute;metro es modificable por la webmistress del sitio.',
 'calendrier_synchro' => 'Si utilizas un software de agenda compatible <b>iCal</b>, puedes sincronizarlo con la actualidad editorial de este sitio.',
 
 
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Texto a&ntilde;adido',
 'diff_texte_deplace' => 'Texto desplazado',
 'diff_texte_supprime' => 'Texto suprimido',
+'double_clic_inserer_doc' => 'Haga doble clic para insertar este atajo en el texto',
 
 
 // E
@@ -345,6 +346,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_identification_publique' => 'Tu identidad p&uacute;blica...',
 'info_image_process' => 'Por favor selecciona el mejor m&eacute;todo de fabricaci&oacute;n de vi&ntilde;etas pinchando en la im&aacute;gen correspondiente. ',
 'info_image_process2' => '<b>N.B.</b> <i>Si no aparece ninguna imagen, se debe a que el servidor que alberga su sitio web no est&aacute; configurado para usar estas funciones. Si necesita utilizarlas, contacte con el responsable t&eacute;cnico y solicite las extensiones &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Im&aacute;genes calculadas autom&aacute;ticamente',
 'info_informations_personnelles' => 'Quinta etapa: <B>Informaciones personales</B>',
 'info_inscription_automatique' => 'Inscripcci&oacute;n autom&aacute;tica de nuevas personas',
 'info_jeu_caractere' => 'Juego de caracteres del sitio',
@@ -463,6 +465,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_redacteurs' => 'Redactores/as',
 'info_redaction_en_cours' => 'En curso de redacci&oacute;n...',
 'info_redirection' => 'Redirecci&oacute;n',
+'info_referencer_doc_distant' => 'Referenciar un documento de Internet&nbsp;:',
 'info_refuses' => 'Tus art&iacute;culos rechazados',
 'info_reglage_ldap' => 'Opciones: <B>Reglajes de la importaci&oacute;n LDAP</B>',
 'info_renvoi_article' => '<B>Redirecci&oacute;n </B>Este art&iacute;culo reenv&iacute;a a la p&aacute;gina:',
@@ -567,6 +570,9 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'info_visiteur_2' => 'del sitio p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes del sitio p&uacute;blico',
+'install_echec_annonce' => 'La instalaci&oacute;n probablemente va a fallar, o crear&aacute; un sitio que no funcione...',
+'install_extension_mbstring' => 'SPIP no funciona con&nbsp;:',
+'install_extension_php_obligatoire' => 'SPIP exige instalar la extensi&oacute;n php&nbsp;:',
 'install_select_langue' => 'Selecciona un idioma y despu&eacute;s pulsa el bot&oacute;n &laquo;siguiente&raquo; para iniciar el proceso de instalaci&oacute;n.',
 'intem_redacteur' => 'redactor/a',
 'item_accepter_inscriptions' => 'Aceptar las inscripciones',
@@ -697,6 +703,7 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 
 
 // T
+'taille_cache_image' => 'Las im&aacute;genes calculadas autom&aacute;ticamente por SPIP (miniaturas de documentos, t&iacute;tulos presentados en forma gr&aacute;fica, f&oacute;rmulas matem&aacute;ticas en formato TeX...) ocupan en el directorio @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Este sitio no tiene previsto un l&iacute;mite del tama&ntilde;o de la carpeta <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP intenta limitar el tama&ntilde;o de la carpeta <code>CACHE/</code> de este sitio a unos <b>@octets@</b> de datos.',
 'taille_cache_octets' => 'El tama&ntilde;o de la cache es actualmente de @octets@.',

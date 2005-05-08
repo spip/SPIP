@@ -119,7 +119,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'The cache files are saved in compressed mode.',
 'cache_mode_non_compresse' => 'The cache files are written in uncompressed mode.',
-'cache_modifiable_webmestre' => 'These parameters can be modified by the webmaster.',
+'cache_modifiable_webmestre' => 'This parameter can be modified by the webmaster.',
 'calendrier_synchro' => 'If you use a calendar application compatible with <b>iCal</b>, you can synchronize it with this site\'s information.',
 
 
@@ -131,6 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Added text',
 'diff_texte_deplace' => 'Moved text',
 'diff_texte_supprime' => 'Deleted text',
+'double_clic_inserer_doc' => 'Double-click to insert this shortcut in the text',
 
 
 // E
@@ -380,6 +381,7 @@ requiring an FTP access to the Web site.',
 'info_identification_publique' => 'Your public identity...',
 'info_image_process' => 'Select the best method to create miniatures by clicking on the corresponding picture.',
 'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the &laquo;GD&raquo; or &laquo;Imagick&raquo; extensions to be installed.</i>',
+'info_images_auto' => 'Images automatically calculated',
 'info_informations_personnelles' => 'Fifth step: <B>Personal information</B>',
 'info_inscription_automatique' => 'Automated registration of new editors',
 'info_jeu_caractere' => 'Character set of the site',
@@ -514,6 +516,7 @@ requiring an FTP access to the Web site.',
 'info_redacteurs' => 'Editors',
 'info_redaction_en_cours' => 'EDITING IN PROGRESS',
 'info_redirection' => 'Redirection',
+'info_referencer_doc_distant' => 'Reference a document on the internet:',
 'info_refuses' => 'Your articles rejected',
 'info_reglage_ldap' => 'Options: <B>Adjusting LDAP import</b>',
 'info_renvoi_article' => '<B>Redirection.</B> This article refers to the page:',
@@ -619,6 +622,9 @@ in a colour indicating their status:',
 'info_visiteur_2' => 'of the public site',
 'info_visiteurs' => 'Visitors',
 'info_visiteurs_02' => 'Public site visitors',
+'install_echec_annonce' => 'This installation will probably not work, or will result in a nonfunctional site...',
+'install_extension_mbstring' => 'SPIP does not work with:',
+'install_extension_php_obligatoire' => 'SPIP requires a php extension:',
 'install_select_langue' => 'Select a language then click on the button "next" to start the installation procedure.',
 'intem_redacteur' => 'editor',
 'item_accepter_inscriptions' => 'Allow registrations',
@@ -749,6 +755,7 @@ in a colour indicating their status:',
 
 
 // T
+'taille_cache_image' => 'The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
 'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.',
 'taille_cache_maxi' => 'SPIP will try to limit the size of the <code>CACHE/</code> directory to approximately <b>@octets@</b> of data.',
 'taille_cache_octets' => 'The size of the cache is currently @octets@.',

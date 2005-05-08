@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Alterar',
 'bouton_chercher' => 'Procurar',
 'bouton_choisir' => 'Escolher',
+'bouton_enregistrer' => 'Gravar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desativar o sistema interno de mensagens',
 'bouton_radio_envoi_annonces' => 'Enviar os avisos editoriais',
 'bouton_radio_non_envoi_annonces' => 'N&atilde;o enviar os avisos',
@@ -182,6 +183,7 @@ Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios
 
 
 // F
+'fichier_introuvable' => 'Arquivo @fichier@ n&atilde;o encontrado',
 'form_deja_inscrit' => 'Voc&ecirc; j&aacute; est&aacute; inscrito.',
 'form_email_non_valide' => 'Seu endere&ccedil;o de e-mail n&atilde;o &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Voc&ecirc; n&atilde;o tem mais acesso a este site.',

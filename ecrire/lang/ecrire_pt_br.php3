@@ -111,7 +111,7 @@ O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 // C
 'cache_mode_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo compactado.',
 'cache_mode_non_compresse' => 'Os arquivos do cache s&atilde;o gravados em modo n&atilde;o compactado.',
-'cache_modifiable_webmestre' => 'Estes par&acirc;metros s&atilde;o modific&aacute;veis pelo webmaster do site.',
+'cache_modifiable_webmestre' => 'Este par&acirc;metro &eacute; modific&aacute;vel pelo webmaster do site.',
 'calendrier_synchro' => 'Se voc&ecirc; usa um programa de agenda compat&iacute;vel com <b>iCal</b>, voc&ecirc; pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste site.',
 
 
@@ -123,6 +123,7 @@ O SPIP permite, no entanto, gerenciar relativamente bem os outros idiomas.',
 'diff_texte_ajoute' => 'Texto inclu&iacute;do',
 'diff_texte_deplace' => 'Texto movido',
 'diff_texte_supprime' => 'Texto exclu&iacute;do',
+'double_clic_inserer_doc' => 'Fa&ccedil;a um clique duplo para inserir este atalho no texto',
 
 
 // E
@@ -358,6 +359,7 @@ os autores exclu&iacute;dos por uma lixeira.',
 'info_identification_publique' => 'Sua identifica&ccedil;&atilde;o p&uacute;blica...',
 'info_image_process' => 'Por favor, selecione o melhor m&eacute;todo de cria&ccedil;&atilde;o dos &iacute;cones, clicando na imagem correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se nenhuma imagem est&aacute; sendo exibida, o servidor que hospeda o seu site n&atilde;o foi configurado para utilizar essas ferramentas. Se voc&ecirc; deseja usar essas fun&ccedil;&otilde;es, contate o respons&aacute;vel t&eacute;cnico e solicite as extens&otilde;es &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Imagens calculadas automaticamente',
 'info_informations_personnelles' => 'Quinto passo: <B>Informa&ccedil;&otilde;es pessoais</B>',
 'info_inscription_automatique' => 'Inscri&ccedil;&atilde;o autom&aacute;tica de novos redatores',
 'info_jeu_caractere' => 'Conjunto de caracteres do site',
@@ -475,6 +477,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_redacteurs' => 'Redatores',
 'info_redaction_en_cours' => 'EM FASE DE REDA&Ccedil;&Atilde;O',
 'info_redirection' => 'Redirecionamento',
+'info_referencer_doc_distant' => 'Referenciar um documento na internet:',
 'info_refuses' => 'Suas mat&eacute;rias recusadas',
 'info_reglage_ldap' => 'Op&ccedil;&otilde;es: <b>Configura&ccedil;&atilde;o da importa&ccedil;&atilde;o LDAP</b>',
 'info_renvoi_article' => '<b>Redirecionamento.</b> Esta mat&eacute;ria redireciona para a p&aacute;gina:',
@@ -579,6 +582,9 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'info_visiteur_2' => 'do site p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do site p&uacute;blico',
+'install_echec_annonce' => 'A instala&ccedil;&atilde;o ir&aacute;, provavelmente, falhar, ou levar a um site que n&atilde;o funciona...',
+'install_extension_mbstring' => 'O SPIP n&atilde;o funciona com:',
+'install_extension_php_obligatoire' => 'O SPIP exige a extens&atilde;o php:',
 'install_select_langue' => 'Escolha um idioma e clique no bot&atilde;o &laquo;avan&ccedil;ar&raquo; para iniciar o procedimento de instala&ccedil;&atilde;o.',
 'intem_redacteur' => 'redator',
 'item_accepter_inscriptions' => 'Aceitar as inscri&ccedil;&otilde;es',
@@ -709,6 +715,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 
 
 // T
+'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (&iacute;cones de documentos, t&iacute;tulos apresentados sob a forma gr&aacute;fica, fun&ccedil;&otilde;es matem&aacute;ticas em formato TeX...) ocupam, no diret&oacute;rio @dir@, um total de @taille@.',
 'taille_cache_infinie' => 'Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio <code>CACHE/</code>.',
 'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diret&oacute;rio <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.',
 'taille_cache_octets' => 'O tamanho do cache &eacute; atualmente de  @octets@.',
