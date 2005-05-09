@@ -679,6 +679,69 @@ function extraire_lien ($regs) {
 }
 
 //
+// Tableaux
+//
+function traiter_tableau($bloc) {
+
+	// Decouper le tableau en lignes
+	preg_match_all(',([|].*)[|]\n,Ums', $bloc, $regs, PREG_PATTERN_ORDER);
+
+	// Traiter chaque ligne
+	foreach ($regs[1] as $ligne) {
+		$l ++;
+
+		// Gestion de la premiere ligne :
+		if ($l == 1) {
+		// - <caption> sous forme de ||xxx|| en premiere ligne
+			if (preg_match(',^\|\|([^|]*)\|$,ms', $ligne, $caption)) {
+				$debut_table .= "<caption>".$caption[1]."</caption>\n";
+				$l = 0;
+			}
+		// - <thead> sous la forme |{{titre}}|{{titre}}|
+		//   Attention thead oblige a avoir tbody
+			else if (preg_match(',^(\|[[:space:]]*{{[^}]+}}[[:space:]]*)+$,ms',
+				$ligne, $thead)) {
+				$debut_table .= "<thead>\n
+					<tr class='row_first'>".
+					preg_replace(",[|]([^|]*),",
+						"<th scope='col'>\\1</th>", $ligne)
+					."</tr>\n";
+				$l = 0;
+			}
+		}
+
+		// Sinon ligne normale
+		if ($l) {
+			// definition du tr
+			if ($l == 1
+			AND ereg("^(\|[[:space:]]*{{[^}]+}}[[:space:]]*)+$", $ligne)) {
+				$class = 'row_first';
+			} else {
+				$class = 'row_'.alterner($l, 'even', 'odd');
+			}
+
+			// Pas de paragraphes dans les cellules
+			$ligne = preg_replace(",\n\n+,", "<br />\n", $ligne);
+
+			// definition du <td>
+			$ligne = preg_replace(",[|]([^|]*),",
+				"<td>\\1</td>", $ligne);
+
+			// ligne complete
+			$html[$l] = "<tr class=\"$class\">" . $ligne . "</tr>\n";
+		}
+	}
+
+	return "\n\n</no p><table class=\"spip\">\n"
+		. $debut_table
+		. "<tbody>\n"
+		. join ('', $html)
+		. "</tbody>\n"
+		. "</table><no p>\n\n";
+}
+
+
+//
 // Traitement des listes (merci a Michael Parienti)
 //
 function traiter_listes ($texte) {
@@ -886,40 +949,14 @@ function traiter_raccourcis_generale($letexte) {
 	//
 	// Tableaux
 	//
-	$letexte = preg_replace(",^\n?\|,", "\n\n|", $letexte);
-	$letexte = preg_replace(",\|\n?$,", "|\n\n", $letexte);
-
-	$tableBeginPos = strpos($letexte, "\n\n|");
-	$tableEndPos = strpos($letexte, "|\n\n");
-	while (is_integer($tableBeginPos) && is_integer($tableEndPos) && $tableBeginPos < $tableEndPos + 3) {
-		$textBegin = substr($letexte, 0, $tableBeginPos);
-		$textTable = substr($letexte, $tableBeginPos + 2, $tableEndPos - $tableBeginPos);
-		$textEnd = substr($letexte, $tableEndPos + 3);
-
-		$newTextTable = "\n\n<table class=\"spip\">";
-		$rowId = 0;
-		$lineEnd = strpos($textTable, "|\n");
-		while (is_integer($lineEnd)) {
-			$rowId++;
-			$row = substr($textTable, 0, $lineEnd);
-			$textTable = substr($textTable, $lineEnd + 2);
-			if ($rowId == 1 && ereg("^(\\|[[:space:]]*\\{\\{[^}]+\\}\\}[[:space:]]*)+$", $row)) {
-				$newTextTable .= '<tr class="row_first">';
-			} else {
-				$newTextTable .= '<tr class="row_'.($rowId % 2 ? 'odd' : 'even').'">';
-			}
-			$newTextTable .= ereg_replace("\|([^\|]+)", "<td>\\1</td>", $row);
-			$newTextTable .= '</tr>';
-			$lineEnd = strpos($textTable, "|\n");
-		}
-		$newTextTable .= "</table>\n\n";
-
-		$letexte = $textBegin . $newTextTable . $textEnd;
-
-		$tableBeginPos = strpos($letexte, "\n\n|");
-		$tableEndPos = strpos($letexte, "|\n\n");
+	$letexte = preg_replace(",^\n?[|],", "\n\n|", $letexte);
+	$letexte = preg_replace(",\n\n+[|],", "\n\n\n\n|", $letexte);
+	$letexte = preg_replace(",[|](\n\n+|\n?$),", "|\n\n\n\n", $letexte);
+	if (preg_match_all(',\n\n[|].*[|]\n\n,Ums', $letexte,
+	$regs, PREG_SET_ORDER))
+	foreach ($regs as $tab) {
+		$letexte = str_replace($tab[0], traiter_tableau($tab[0]), $letexte);
 	}
-
 
 	//
 	// Ensemble de remplacements implementant le systeme de mise
@@ -986,10 +1023,10 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
 	$letexte = ereg_replace('@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<blockquote class=\"spip\"></p>', "<blockquote class=\"spip\">", $letexte);
-	$letexte = ereg_replace('</blockquote>[[:space:]]*(</p>)?', '</blockquote>', $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<table', "<table", $letexte);
-	$letexte = ereg_replace('</table>[[:space:]]*(</p>)?', '</table>', $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<blockquote class=\"spip\"></p>', "\n<blockquote class=\"spip\">", $letexte);
+	$letexte = ereg_replace('</blockquote>[[:space:]]*(</p>)?', "</blockquote>\n", $letexte);
+	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<table', "\n<table", $letexte);
+	$letexte = ereg_replace('</table>[[:space:]]*(</p>)?', "</table>\n", $letexte);
 	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<ul', "<ul", $letexte);
 	$letexte = ereg_replace('</ul>[[:space:]]*(</p>)?', '</ul>', $letexte);
 
