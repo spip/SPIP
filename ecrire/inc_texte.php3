@@ -692,10 +692,14 @@ function traiter_tableau($bloc) {
 
 		// Gestion de la premiere ligne :
 		if ($l == 1) {
-		// - <caption> sous forme de ||xxx|| en premiere ligne
-			if (preg_match(',^\|\|([^|]*)\|$,ms', $ligne, $caption)) {
-				$debut_table .= "<caption>".$caption[1]."</caption>\n";
+		// - <caption> et summary dans la premiere ligne :
+		//   || caption | summary || (|summary est optionnel)
+			if (preg_match(',^\|\|([^|]*)(\|(.*))?\|$,ms', $ligne, $cap)) {
 				$l = 0;
+				if ($caption = trim($cap[1]))
+					$debut_table .= "<caption>".$caption."</caption>\n";
+				if ($summary = trim($cap[3]))
+					$summary = ' summary="'.entites_html($summary).'"';
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
@@ -732,7 +736,7 @@ function traiter_tableau($bloc) {
 		}
 	}
 
-	return "\n\n</no p><table class=\"spip\">\n"
+	return "\n\n</no p><table class=\"spip\"$summary>\n"
 		. $debut_table
 		. "<tbody>\n"
 		. join ('', $html)
