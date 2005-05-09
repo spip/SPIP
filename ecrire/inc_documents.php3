@@ -89,8 +89,11 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	AND lire_meta('creer_preview') == 'oui') {
 		include_ecrire('inc_logos.php3');
 		#var_dump($document);
-		$image = reduire_image_logo(copie_locale(
-			(_DIR_RESTREINT ? '' : '../' ) . $document['fichier']));
+		$local = copie_locale($document['fichier']);
+		if ($portfolio)
+			$image = reduire_image_logo($local, 110, 120);
+		else
+			$image = reduire_image_logo($local);
 	}
 
 	if (!$image) {
