@@ -61,12 +61,6 @@ debut_cadre_trait_couleur("cache-24.gif", false, "", _T('texte_vider_cache'));
 echo "\n<p align='justify'>"._T('texte_suppression_fichiers')."</p>",
 	"<p align='justify'>"._T('texte_recalcul_page')."</p>";
 
-echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
-echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
-echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "'>";
-echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
-echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='" . _DIR_RESTREINT_ABS . "admin_vider.php3'>";
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
 
 echo "\n<div>&nbsp;</div>";
 
@@ -94,6 +88,13 @@ if ($quota_cache) {
 	echo _T('taille_cache_infinie');
 }
 echo ' ('._T('cache_modifiable_webmestre').')</p>';
+
+echo "\n<FORM ACTION='../spip_cache.php3' METHOD='post'>";
+echo "\n<INPUT TYPE='hidden' NAME='id_auteur' VALUE='$connect_id_auteur'>";
+echo "\n<INPUT TYPE='hidden' NAME='hash' VALUE='" . calculer_action_auteur("purger_cache") . "'>";
+echo "\n<INPUT TYPE='hidden' NAME='purger_cache' VALUE='oui'>";
+echo "\n<INPUT TYPE='hidden' NAME='redirect' VALUE='" . _DIR_RESTREINT_ABS . "admin_vider.php3'>";
+echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE=\"".str_replace('"', '&quot;', _T('bouton_vider_cache'))."\"></FORM></DIV>";
 
 fin_cadre_relief();
 
