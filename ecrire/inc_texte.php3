@@ -705,11 +705,11 @@ function traiter_tableau($bloc) {
 		//   Attention thead oblige a avoir tbody
 			else if (preg_match(',^(\|[[:space:]]*{{[^}]+}}[[:space:]]*)+$,ms',
 				$ligne, $thead)) {
-				$debut_table .= "<thead>\n
+				$debut_table .= "<thead>
 					<tr class='row_first'>".
 					preg_replace(",[|]([^|]*),",
 						"<th scope='col'>\\1</th>", $ligne)
-					."</tr>\n";
+					."</tr></thead>\n";
 				$l = 0;
 			}
 		}
