@@ -698,8 +698,7 @@ function traiter_tableau($bloc) {
 				$l = 0;
 				if ($caption = trim($cap[1]))
 					$debut_table .= "<caption>".$caption."</caption>\n";
-				if ($summary = trim($cap[3]))
-					$summary = ' summary="'.entites_html($summary).'"';
+				$summary = ' summary="'.entites_html(trim($cap[3])).'"';
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody

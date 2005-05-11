@@ -1358,18 +1358,16 @@ table.spip {
 }
 
 table.spip caption{
-	caption-side: bottom; /* top */
-	text-align:center;
+	caption-side: top; /* bottom pas pris en compte par IE */
+	text-align: center;
+	margin-left: auto;                                                       
+	margin-right: auto;
 	padding: 3px;
 	font-weight: bold;
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-size : 70%;
 }
-thead {
-padding-bottom: 0px;
-margin-bottom: 0px;
 
-}
 table.spip tr.row_first {
 	background-color: <?php echo $couleur_claire; ?>;
 }
