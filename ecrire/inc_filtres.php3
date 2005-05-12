@@ -937,17 +937,37 @@ function alterner($i) {
 	return $args[(intval($i)-1)%($num-1)+1];
 }
 
-
-function extraire_attribut($balise, $attribut) {
-# la mise en facteur ne marche pas....
-#  if (preg_match("/<[^>]*\s+$attribut=(['\"])([^\\1]*)\\1/i", $balise, $r))
-	if (preg_match("/<[^>]*\s+$attribut='([^']*)'/i", $balise, $r))
-		return $r[1];
-	else if (preg_match("/<[^>]*\s+$attribut=\"([^\"]*)\"/i", $balise, $r))
-		return $r[1];
+// recuperer un attribut html d'une balise
+// ($complet demande de retourner $r)
+function extraire_attribut($balise, $attribut, $complet = false) {
+	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([[:space:]/>].*>.*),ims", $balise, $r)) {
+		$att = $r[4];
+	}
 	else
-		return '';
+		$att = NULL;
+
+	if ($complet)
+		return array($att, $r);
+	else
+		return $att;
 }
+
+// modifier (ou inserer) un attribut html dans une balise
+function inserer_attribut($balise, $attribut, $val, $texte_backend=true) {
+	// preparer l'attribut
+	if ($texte_backend) $val = texte_backend($val); # supprimer les &nbsp; etc
+	$insert = " $attribut=\"".entites_html(texte_backend($val))."\" ";
+
+	list($old,$r) = extraire_attribut($balise, $attribut, true);
+	if ($old !== NULL) {
+		$balise = $r[1].$insert.$r[5];
+	}
+	else
+		$balise = preg_replace(",([[:space:]]/)?".">,", $insert."/>", $balise);
+
+	return $balise;
+}
+
 
 // fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
 # a placer ailleurs que dans inc_filtres
