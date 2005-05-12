@@ -13,13 +13,15 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 
 	// Seul un lien [(#FORMULAIRE_RECHERCHE|xxx.php3)] nous interesse
 	else
-		return array($filtres[0]);
+	  return array($filtres[0], $args[0]);
 }
  
-function balise_FORMULAIRE_RECHERCHE_dyn($lien) {
+function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 	include_ecrire('inc_filtres.php3');
 	if (!$recherche_securisee = entites_html(_request('recherche'))) {
+	  if (!$recherche_securisee = entites_html($rech)) {
 		$recherche_securisee = _T('info_rechercher');
+	  }
 	}
 	if (!$lien)
 		$lien = 'recherche.php3';	# par defaut

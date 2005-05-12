@@ -190,15 +190,17 @@ function calculer_balise($nom, $p) {
 
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
-	$param = param_balise($p);
+	$param = param_balise($p); # attention: ca affecte $p
+	$param = filtres_arglist($param, $p, ','); 
+	$collecte = join(',',collecter_balise_dynamique($l, $p));
 	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
-	  . join(',',collecter_balise_dynamique($l, $p))
-	  . filtres_arglist($param, $p, ',')
+	  . $collecte
+	  . ($collecte ? $param : substr($param,1)) # virer la virgule
 	  . "),\n\tarray("
-	  . (!$p->fonctions ? '' : ("'" . join("','", $p->fonctions) . "'"))
+	  . argumenter_balise($p->fonctions, "', '")
 	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
-	$p->fonctions = '';
+	$p->fonctions = array();
 
 	// Cas particulier de #FORMULAIRE_FORUM : inserer l'invalideur
 	if ($nom == 'FORMULAIRE_FORUM')
@@ -208,16 +210,11 @@ function calculer_balise_dynamique($p, $nom, $l) {
 }
 
 function param_balise(&$p) {
-	$a = $p->fonctions;
-	if ($a) list(,$nom) = each($a) ; else $nom = '';
-	if (!ereg('^ *\{([^{}]*(\{[^{}]*\})?[^{}]*)\} *',$nom, $m))
-	  return '';
-	else {
-		$filtres= array();
-		while (list(, $f) = each($a)) if ($f) $filtres[] = $f;
-		$p->fonctions = $filtres;
-		return $m[1];
-	}
+  if (!($a=$p->fonctions)) return "";
+  $c = array_shift($a);
+  if  ($c[0]) return "";
+  $p->fonctions = $a;
+  return $c[1];
 }
 
 // construire un tableau des valeurs interessant un formulaire
@@ -233,7 +230,7 @@ function applique_filtres($p) {
 
 	$statut = $p->statut;
 	$fonctions = $p->fonctions;
-	$p->fonctions = ''; # pour réutiliser la structure si récursion
+	$p->fonctions = array(); # pour reutilisation si recursion
 
 	// pretraitements standards
 	switch ($statut) {
@@ -252,29 +249,25 @@ function applique_filtres($p) {
 	$code = ($p->etoile ? $p->code : champs_traitements($p));
 	// Appliquer les filtres perso
 	if ($fonctions) {
-		foreach($fonctions as $fonc) {
-			if ($fonc) {
-				$arglist = '';
-				if (ereg('([^{}]+)\{([^{}]*(\{[^{}]*\})?[^{}]*)\}$', $fonc, $regs)) {
-					$fonc = $regs[1];
+		foreach($fonctions as $couple) {
+		  if ($couple) {
+		  $fonc = $couple[0];
+		  $arglist = filtres_arglist($couple[1],$p, ($fonc == '?' ? ':' : ','));
 
-				        $arglist = filtres_arglist($regs[2],$p, ($fonc == '?' ? ':' : ','));
-				}
-				if (function_exists($fonc))
+		  if (function_exists($fonc))
 				  $code = "$fonc($code$arglist)";
-				else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
+		  else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
 				  $code = "($code $fonc "
 				    . substr($arglist,1)
 				    . ')';
-				else 
+		  else 
 				  $code = "erreur_squelette('".
 					  texte_script(
 						_T('zbug_erreur_filtre', array('filtre' => $fonc))
 					)."','" . $p->id_boucle . "')";
-			}
+		  }
 		}
 	}
-
 	// post-traitement securite
 	if ($statut == 'html')
 		$code = "interdire_scripts($code)";
@@ -287,7 +280,6 @@ function applique_filtres($p) {
 
 function filtres_arglist($args, $p, $sep) {
 	$arglist ='';
-
 	while (strlen($args = trim($args))) {
 		if ($args[0] == '"')
 			ereg ('^[[:space:]]*(")([^"]*)"[[:space:]]*,?(.*)$', $args, $regs);
@@ -300,7 +292,6 @@ function filtres_arglist($args, $p, $sep) {
 		$quote = trim($regs[1]);	// valeur = ", ', ou vide
 		$arg = $regs[2];			// le premier argument
 		$args = $regs[3];			// ceux qui restent
-
 		if ($quote)
 			$arg = "'" . texte_script($arg) . "'";
 		else {
@@ -312,11 +303,9 @@ function filtres_arglist($args, $p, $sep) {
 			else if (ereg("^" . NOM_DE_CHAMP ."(.*)$", $arg, $r2)) {
 				$p->nom_boucle = $r2[2];
 				$p->nom_champ = $r2[3];
-				$p->fonctions = array($r2[5]);
+				$p->fonctions = phraser_filtres($r2[5]);
 				$arg = calculer_champ($p);
-			} else if (is_numeric($arg))
-				$arg = $arg;
-			else
+			} else if (!is_numeric($arg))
 				$arg = "'" . texte_script($arg) . "'";
 		}
 

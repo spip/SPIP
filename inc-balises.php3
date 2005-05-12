@@ -359,19 +359,14 @@ function balise_EXPOSER_dist($p) {
 	}
 	$on = 'on';
 	$off= '';
-	if ($p->fonctions) {
+	if ($a = ($p->fonctions)) {
 		// Gerer la notation [(#EXPOSER|on,off)]
-		reset($p->fonctions);
-		list(, $onoff) = each($p->fonctions);
-		ereg("([^,]*)(,(.*))?", $onoff, $regs);
+		$onoff = array_shift($a);
+		ereg("([^,]*)(,(.*))?", $onoff[0], $regs);
 		$on = addslashes($regs[1]);
 		$off = addslashes($regs[3]);
-		
 		// autres filtres
-		$filtres=Array();
-		while (list(, $nom) = each($p->fonctions))
-		  $filtres[] = $nom;
-		$p->fonctions = $filtres;
+		$p->fonctions = $a;
 	}
 
 
@@ -389,10 +384,10 @@ function balise_EXPOSER_dist($p) {
 function balise_EMBED_DOCUMENT_dist($p) {
 	balise_distante_interdite($p);
 	$_id_document = champ_sql('id_document',$p);
-	$p->code = "calcule_embed_document(intval($_id_document), '" .
-	texte_script($p->fonctions ? join($p->fonctions, "|") : "") .
-	  "', \$doublons, '" . $p->descr['documents'] . "')";
-	unset ($p->fonctions);
+	$p->code = "calcule_embed_document(intval($_id_document), " .
+	  argumenter_balise($p->fonctions, "|") .
+	  ", \$doublons, '" . $p->descr['documents'] . "')";
+	$p->fonctions = array();
 	$p->statut = 'html';
 	return $p;
 }
@@ -539,10 +534,11 @@ function calculer_balise_logo ($p) {
 			$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
 	}
 	// analyser les filtres
-	$flag_fichier = false;
+	$flag_fichier = 0;
 	$filtres = '';
 	if (is_array($p->fonctions)) {
-		foreach($p->fonctions as $nom) {
+		foreach($p->fonctions as $couple) {
+		  $nom = $couple[0];
 			if (ereg('^(left|right|center|top|bottom)$', $nom))
 				$align = $nom;
 			else if ($nom == 'lien') {
@@ -550,7 +546,7 @@ function calculer_balise_logo ($p) {
 				$flag_stop = true;
 			}
 			else if ($nom == 'fichier') {
-				$flag_fichier = 'true';
+				$flag_fichier = 1;
 				$flag_stop = true;
 			}
 			// double || signifie "on passe aux filtres"
@@ -563,7 +559,7 @@ function calculer_balise_logo ($p) {
 			// apres un URL ou || ou |fichier ce sont
 			// des filtres (sauf left...lien...fichier)
 			else
-				$filtres[] = $nom;
+				$filtres[] = $couple;
 		}
 		// recuperer les autres filtres s'il y en a
 		$p->fonctions = $filtres;
@@ -634,15 +630,15 @@ function balise_EXTRA_dist ($p) {
 		include_ecrire("inc_extra.php3");
 		list ($key, $champ_extra) = each($p->fonctions);	// le premier filtre
 		$type_extra = $p->type_requete;
-			// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
-			// depuis un sous-objet sans champ extra d'un objet a champ extra,
-			// on aura le type_extra du sous-objet (!)
-		if (extra_champ_valide($type_extra, $champ_extra)) {
+	// ci-dessus est sans doute un peu buggue : si on invoque #EXTRA
+	// depuis un sous-objet sans champ extra d'un objet a champ extra,
+	// on aura le type_extra du sous-objet (!)
+		if (extra_champ_valide($type_extra, $champ_extra[0])) {
 			unset($p->fonctions[$key]);
 			$p->code = "extra($p->code, '".addslashes($champ_extra)."')";
 
 			// Appliquer les filtres definis par le webmestre
-			$filtres = extra_filtres($type_extra, $champ_extra);
+			$filtres = extra_filtres($type_extra, $champ_extra[0]);
 			if ($filtres) foreach ($filtres as $f)
 				$p->code = "$f($p->code)";
 		}
@@ -696,7 +692,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	# porter un nom et faire partie de l'API.
 	if ($retour = param_balise($p))
 		$code_retour = calculer_liste(
-			parser_champs_etendus($retour, array()),
+			phraser_champs_etendus($retour, array()),
 			$p->descr,
 			$p->boucles,
 			$p->id_boucle);

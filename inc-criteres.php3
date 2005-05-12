@@ -617,7 +617,7 @@ function calculer_param_dynamique($val, &$boucles, $idb) {
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
 		$champ->etoile = $regs[4];
-		$champ->fonctions = $regs[5] ? array($regs[5]) : '';
+		$champ->fonctions = $regs[5] ? array(array('',$regs[5])) : '';
 		$champ->id_boucle = $idb;
 		$champ->boucles = &$boucles;
 		$champ = calculer_champ($champ);
