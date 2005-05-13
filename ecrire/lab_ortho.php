@@ -160,30 +160,13 @@ function choisir_miroirs_ortho($lang) {
 // Envoyer une requete a un serveur d'orthographe
 //
 function post_ortho($url, $texte, $lang) {
-	$errno = $errstr = "";
+	include_ecrire('inc_sites.php3');
 
-	$t = parse_url($url);
-	if ($t['scheme'] != 'http') return false;
-
-	$http_proxy = lire_meta("http_proxy");
-	if (eregi("^http://([^:]*)(:(.*))?", $http_proxy, $rr)) {
-		$host= $rr[1];
-		if($rr[2]) {
-			$port= $rr[3];
-		} else {
-			$port= 80;
-		}
-		$path= $url;
-	} else {
-		$host = $t['host'];
-		$port = $t['port'] ? $t['port'] : 80;
-		$path = $t['path'] ? $t['path'] : "/";
+	list($f, $fopen) = init_http('POST', $url);
+	if (!$f OR $fopen) {
+		spip_log("Echec connexion $url");
+		return false;
 	}
-
-	// Envoyer la requete en POST
-	$f = @fsockopen($host, $port, $errno, $errstr, 2);
-	if (!$f) return false;
-	fputs($f, "POST $path HTTP/1.0\r\n");
 
 	// Si le texte est petit, l'overhead du multipart est dispendieux
 	if (!$GLOBALS['flag_gz'] || strlen($texte) < 200) {
@@ -217,7 +200,7 @@ function post_ortho($url, $texte, $lang) {
 
 	// On envoie le contenu
 	fputs($f, "Content-Length: ".strlen($body)."\r\n");
-	fputs($f, "Host: $host\r\n\r\n");
+	fputs($f, "\r\n");	// Fin des entetes
 	fputs($f, $body);
 
 	// Lire les en-tetes HTTP de la reponse et decoder le Content-Length
