@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'De&#287;i&#351;tir',
 'bouton_chercher' => 'Arama',
 'bouton_choisir' => 'Se&ccedil;',
+'bouton_enregistrer' => 'Kaydet',
 'bouton_radio_desactiver_messagerie_interne' => '&#304;&ccedil; iletileri kapat',
 'bouton_radio_envoi_annonces' => 'Yazar a&ccedil;&#305;klamalar&#305;n&#305; yolla',
 'bouton_radio_non_envoi_annonces' => 'A&ccedil;&#305;klama yollama',
@@ -185,6 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => '@fichier@ dosyas&#305; bulunamad&#305;',
 'form_deja_inscrit' => 'Zaten kay&#305;tl&#305;s&#305;n&#305;z.',
 'form_email_non_valide' => 'E-posta adresiniz ge&ccedil;ersiz.',
 'form_forum_access_refuse' => 'Art&#305;k bu siteye eri&#351;im izniniz yok.',

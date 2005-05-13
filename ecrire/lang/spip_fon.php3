@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Mimam&#603; &#596; gbl&eacute; : m&#603; d&eacute; siwu yi backend gblogbloji &eacute; l&#596; t&#596;n a ',
 'avis_erreur' => 'af&#596;kikl&#603;n : mi kp&#596;n do',
 'avis_erreur_connexion' => 'af&#596;kikl&#603;n do cacadom&#603;',
+'avis_erreur_cookie' => '',
 'avis_erreur_fonction_contexte' => 'af&#596;kikl&#603;n do titom&#603;. &#598;id&egrave; &eacute; l&#596; do na t&#596;n do akpa &eacute; l&#596; m&#603; a',
 'avis_erreur_mysql' => 'af&#596;kikl&#603;n MySQL t&#596;n',
 'avis_erreur_sauvegarde' => 'af&#596;kikl&#603;n do wiwlih&#603;n &#596; m&#603;(@type@ @id_objet@) !',
@@ -40,6 +41,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'barre_a_accent_grave' => 'Mi z&eacute; w&egrave;kwin A bo xw&egrave; gbakun yi do na',
 'barre_aide' => 'Mi zan w&eacute;kwin l&#603;&#770; bo n&aacute; &#598;o blo titom&#603; mit&#596;n &#598;o',
+'barre_aide_rac' => '<NEW>Obter ajuda sobre as abrevia&ccedil;&otilde;es tipogr&aacute;ficas ',
 'barre_e_accent_aigu' => 'mi ze w&eacute;kwin asi E  d&eacute;m&#603;',
 'barre_eo' => 'mi ze w&eacute;kwin asi E  &#598;o l\'o',
 'barre_eo_maj' => 'mi ze w&eacute;kwin asi E  &#598;o l’o daxo &#596; m&#603;',
@@ -58,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => '&#598;y&#596;&#770;',
 'bouton_chercher' => 'B&agrave;',
 'bouton_choisir' => 'Cy&aacute;n',
+'bouton_enregistrer' => '<NEW>Enregistrer',
 'bouton_radio_desactiver_messagerie_interne' => 'Mi jo wiwlanm&#603; &#598;o ',
 'bouton_radio_envoi_annonces' => 'mi s&#603; gb&egrave;t&agrave;xojla do',
 'bouton_radio_non_envoi_annonces' => 'mi s&#603; xojla do wo ',
@@ -176,6 +179,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
 'form_deja_inscrit' => 'mi&#772; k&ograve; n&aacute; ny&igrave;k&#596; ',
 'form_email_non_valide' => 'e-mail&ugrave; mi&#772; t&#596;n &#596; s&#596; gb&egrave; &aacute;',
 'form_forum_access_refuse' => 'mi&#772; s&#596; si&#780;wu y&igrave; gblogblo &eacute; l&#596; j&iacute; &aacute;',
@@ -263,6 +267,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_auteurs' => 'ny&#596;wl&aacute;nt&#596;',
 'icone_breves' => 'x&oacute; kl&eacute;w&uacute;n ',
 'icone_brouteur' => 'num&#603;k&eacute;j&eacute; c&agrave;c&agrave;',
+'icone_calendrier_messagerie' => '<NEW>Agenda e correio',
 'icone_configuration_site' => 'T&igrave;t&ograve;m&#603;',
 'icone_configurer_site' => 'Mi t&ograve; gblogbloj&iacute; &#596;',
 'icone_creer_mot_cle' => 'Mi z&eacute; ny&#596;wl&aacute;nt&#596; y&#596;y&#596; d&eacute;v&oacute; t&#596;n b&oacute; c&aacute;&#598;&oacute; we&#780;kp&aacute;',
@@ -276,6 +281,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'icone_edition_site' => 'W&egrave;gb&oacute;',
 'icone_forum_administrateur' => 'kp&eacute;kp&eacute; g&aacute;n l&#603; t&#596;n',
 'icone_forum_suivi' => '&agrave;gun c&iacute;c&#596;',
+'icone_forums_petitions' => '<NEW>F&oacute;runs e peti&ccedil;&otilde;es',
 'icone_gestion_langues' => 't&igrave;t&ograve;m&#603; gb&egrave; l&#603; t&#596;n ',
 'icone_informations_personnelles' => 'x&oacute;gb&egrave; mi t&#596;n',
 'icone_interface_complet' => '&agrave;t&#603; &#596; b&iacute;',

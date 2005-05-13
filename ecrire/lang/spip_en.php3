@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Syndication failed: could not reach the backend of this site.',
 'avis_erreur' => 'Error: see below\';',
 'avis_erreur_connexion' => 'Connection error',
+'avis_erreur_cookie' => 'cookie problem',
 'avis_erreur_fonction_contexte' => 'Programming error. This function should not be called in this context.',
 'avis_erreur_mysql' => 'MySQL error',
 'avis_erreur_sauvegarde' => 'Error in backup (@type@ @id_objet@)!',

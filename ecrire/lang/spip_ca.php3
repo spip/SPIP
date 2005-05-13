@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'La sindicaci&oacute; ha fallat : impossible accedir al backend d\'aquest lloc.',
 'avis_erreur' => 'Error: veure ac&iacute; baix',
 'avis_erreur_connexion' => 'Error de connexi&oacute;',
+'avis_erreur_cookie' => 'problema de galeta (cookie)',
 'avis_erreur_fonction_contexte' => ' Error de programaci&oacute;. Aquesta funci&oacute; no ha de ser cridada dins d\'aquest context.',
 'avis_erreur_mysql' => ' Error MySQL',
 'avis_erreur_sauvegarde' => ' Error al desar (@type@ @id_objet@) !',
@@ -185,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // F
 'fichier_introuvable' => 'Fitxer @fichier@ introbable',
-'form_deja_inscrit' => 'Ja estas inscrit/a.',
+'form_deja_inscrit' => 'Ja est&agrave;s inscrit/a.',
 'form_email_non_valide' => 'La seva adre&ccedil;a electr&ograve;nica no ha estat validada.',
 'form_forum_access_refuse' => 'No teniu acc&eacute;s a aquest lloc.',
 'form_forum_bonjour' => 'Bon dia @nom@,',
@@ -436,7 +437,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_multi_herit' => 'Idioma per defecte',
 'info_multi_langues_soulignees' => 'Les <u>lleng&uuml;es subratllades</u> tenen una traducci&oacute; de tots els texts de la interf&iacute;cie. Si seleccioneu aquestes lleng&uuml;es, molts elements del lloc p&uacute;blic (dates, formularis) es traduiran autom&agrave;ticament. En les lleng&uuml;es no subratllades, aquests elements es mostraran en la llengua principal del lloc.',
 'info_multilinguisme' => 'Multiling&uuml;isme',
-'info_nom_non_utilisateurs_connectes' => 'El vostre nom no apareix a la llista d\'usuaris/es connectats/des.',
+'info_nom_non_utilisateurs_connectes' => 'El vostre nom no apareix a la llista d\'usuaris/&agrave;ries connectats/des.',
 'info_nom_utilisateurs_connectes' => 'El vostre nom apareix a la llista dels usuaris connectats.',
 'info_nombre_en_ligne' => 'Actualment en l&iacute;nia:',
 'info_non_resultat' => 'Cap resultat per "@cherche_mot@"',
@@ -526,7 +527,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'lien_visites' => '@visites@&nbsp;visites',
 'lien_voir_auteur' => 'Veure aquest autor',
 'login_acces_prive' => 'acc&eacute;s a l\'espai privat',
-'login_autre_identifiant' => 'connectar-se amb un altre nom d\'usuari/a',
+'login_autre_identifiant' => 'connectar-se amb un altre nom d\'usuari/&agrave;ria',
 'login_connexion_refusee' => 'connexi&oacute; rebutjada.',
 'login_cookie_accepte' => 'Configura el teu navegador perqu&egrave; les accepti (al menys per aquest lloc).',
 'login_cookie_oblige' => 'Per identificar-vos d\'una manera segura en aquest lloc, heu d\'acceptar les galetes.',
@@ -591,7 +592,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'pass_erreur_non_enregistre' => '<b>Error:</b> l\'adre&ccedil;a <tt>@email_oubli@</tt> no est&agrave; registrada en aquest lloc.',
 'pass_erreur_non_valide' => '<b>Error:</b> aquest correu electr&ograve;nic <tt>@email_oubli@</tt> no &eacute;s v&agrave;lid!',
 'pass_erreur_probleme_technique' => '<b>Error:</b> per culpa d\'un problema t&egrave;cnic, el correu electr&ograve;nic no s\'ha pogut enviar.',
-'pass_espace_prive_bla' => 'L\'espai privat d\'aquest lloc est&agrave; obert als visitants i visitantes, un cop s\'han inscrit. Una vegada registrats/ades, podeu consultar els articles en proc&eacute;s de redacci&oacute;, proposar articles i participar en tots els f&ograve;rums. ',
+'pass_espace_prive_bla' => 'L\'espai privat d\'aquest lloc est&agrave; obert als visitants, un cop s\'han inscrit. Una vegada registrats, podeu consultar els articles en proc&eacute;s de redacci&oacute;, proposar articles i participar en tots els f&ograve;rums. ',
 'pass_forum_bla' => 'Heu demanat d\'intervenir en un f&ograve;rum reservat als visitants registrats.',
 'pass_indiquez_cidessous' => 'Indiqueu a sota l\'adre&ccedil;a electr&ograve;nica amb la que us heu registrat anteriorment. Rebreu un correu electr&ograve;nic indicant-vos els passos a seguir per recuperar el vostre acc&eacute;s. ',
 'pass_mail_passcookie' => '(aquest &eacute;s un missatge autom&agrave;tic)
@@ -640,7 +641,7 @@ i tornar-vos a connectar al lloc.
  L\'imatge<B>@fichier@</B> no ha passat (article @id_article@).
   Apunteu aquesta refer&egrave;ncia, reintenteu l\'actualitzaci&oacute; i finalment verifiqueu que les imatges apareixen
   sempre als articles.',
-'texte_inc_auth_1' => 'Us he identificat amb el login (nom d\'usuari/a) <B>@auth_login@</B>, per&ograve; aquest no existeix a la base de dades.
+'texte_inc_auth_1' => 'Us heu identificat amb el login (nom d\'usuari/&agrave;ria) <B>@auth_login@</B>, per&ograve; aquest no existeix a la base de dades.
   Proveu de ',
 'texte_inc_auth_2' => 'reconnectar',
 'texte_inc_auth_3' => ', despr&eacute;s de tancar i tornar a arrencar el vostre ordinador.',
@@ -669,7 +670,7 @@ Generalment, es molt aconsellable
 'titre_image_auteur_supprime' => 'Autor/a suprimit/da',
 'titre_image_redacteur' => 'Redactor/a sense acc&eacute;s',
 'titre_image_redacteur_02' => 'Redactor/a',
-'titre_image_visiteur' => 'Visitant/e',
+'titre_image_visiteur' => 'Visitant',
 'titre_joindre_document' => 'INTRODUIR UN DOCUMENT',
 'titre_liens_entrants' => 'Enlla&ccedil;os entrants',
 'titre_mots_cles' => 'PARAULES CLAU',

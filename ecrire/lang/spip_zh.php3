@@ -59,6 +59,7 @@ Zhen QIN (zhen_q@21cn.com)',
 'bouton_changer' => '&#20462;&#25913;',
 'bouton_chercher' => '&#25628;&#32034;',
 'bouton_choisir' => '&#36873;&#25321;',
+'bouton_enregistrer' => '<NEW>Enregistrer',
 'bouton_radio_desactiver_messagerie_interne' => '&#20572;&#29992;&#20869;&#37096;&#28040;&#24687;',
 'bouton_radio_envoi_annonces' => '&#21457;&#36865;&#21487;&#32534;&#36753;&#30340;&#22768;&#26126;',
 'bouton_radio_non_envoi_annonces' => '&#19981;&#20351;&#29992;&#20219;&#20309;&#22768;&#26126;',
@@ -184,6 +185,7 @@ Zhen QIN (zhen_q@21cn.com)',
 
 
 // F
+'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
 'form_deja_inscrit' => '&#24744;&#24050;&#27880;&#20876;.',
 'form_email_non_valide' => '&#24744;&#30340;&#30005;&#23376;&#37038;&#20214;&#26080;&#25928;.',
 'form_forum_access_refuse' => '&#24744;&#26080;&#26435;&#32487;&#32493;&#35775;&#38382;&#35813;&#31449;&#28857;.',

@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'A szindik&aacute;l&aacute;s sikertelen: nem lehet el&eacute;rni a honlap backend-j&eacute;t.',
 'avis_erreur' => 'Hiba: l&aacute;sd lejjebb',
 'avis_erreur_connexion' => 'Csatlakoz&aacute;si hiba',
+'avis_erreur_cookie' => 'S&uuml;tis hiba',
 'avis_erreur_fonction_contexte' => 'Progr&aacute;moz&aacute;si hiba. Ezt a f&uuml;ggv&eacute;nyt nem lehet h&iacute;vni e k&ouml;r&uuml;lm&eacute;nyek k&ouml;z&ouml;tt.',
 'avis_erreur_mysql' => 'MySQL-es hiba',
 'avis_erreur_sauvegarde' => 'Hiba a ment&eacute;s sor&aacute;n (@type@ @id_objet@) !',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'V&aacute;ltoztatni',
 'bouton_chercher' => 'Keres&eacute;s',
 'bouton_choisir' => 'V&aacute;laszt&aacute;s',
+'bouton_enregistrer' => 'Ment&eacute;s',
 'bouton_radio_desactiver_messagerie_interne' => 'Inaktiv&aacute;lni a bels&#337; &uuml;zeneteket',
 'bouton_radio_envoi_annonces' => 'Szerkeszt&#337;i h&iacute;rek k&uuml;ld&eacute;se',
 'bouton_radio_non_envoi_annonces' => 'Nem k&uuml;ldeni h&iacute;rdet&eacute;seket',
@@ -183,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => '@fichier@ nev&#369; f&aacute;jl nem tal&aacute;lhat&oacute;',
 'form_deja_inscrit' => 'Megvan m&aacute;r be&iacute;ratkozva.',
 'form_email_non_valide' => 'Az email c&iacute;me nem &eacute;rv&eacute;nyes.',
 'form_forum_access_refuse' => 'M&aacute;r nincs hozz&aacute;f&eacute;r&eacute;se arra a honlapra.',
