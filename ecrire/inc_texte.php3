@@ -68,7 +68,6 @@ function nettoyer_chapo($chapo){
 // points d'entree de pre- et post-traitement pour propre() et typo()
 function spip_avant_propre ($letexte) {
 	$letexte = avant_propre_ancres($letexte);
-	$letexte = extraire_multi($letexte);
 
 	if (function_exists('avant_propre'))
 		$letexte = avant_propre($letexte);
@@ -84,7 +83,6 @@ function spip_apres_propre ($letexte) {
 }
 
 function spip_avant_typo ($letexte) {
-	$letexte = extraire_multi($letexte);
 	$letexte = avant_typo_smallcaps($letexte);
 
 	if (function_exists('avant_typo'))
@@ -365,7 +363,7 @@ function couper($texte, $taille=50) {
 
 // prendre <intro>...</intro> sinon couper a la longueur demandee
 function couper_intro($texte, $long) {
-	$texte = extraire_multi(eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
+	$texte = (eregi_replace("(</?)intro>", "\\1intro>", $texte)); // minuscules
 	while ($fin = strpos($texte, "</intro>")) {
 		$zone = substr($texte, 0, $fin);
 		$texte = substr($texte, $fin + strlen("</intro>"));

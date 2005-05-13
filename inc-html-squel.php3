@@ -51,7 +51,7 @@ function phraser_inclure($texte, $result) {
 		$debut = substr($texte, 0, $p);
 		$texte = substr($fin, strlen($s));
 
-		if ($debut) $result = phraser_champs($debut, $result);
+		if ($debut) $result = phraser_idiomes($debut, $result);
 
 		$champ = new Inclure;
 		$champ->fichier = $match[1];
@@ -70,7 +70,55 @@ function phraser_inclure($texte, $result) {
 		$result[] = $champ;
 	}
 
-	return (!$texte ? $result : phraser_champs($texte, $result));
+	return (!$texte ? $result : phraser_idiomes($texte, $result));
+}
+
+function phraser_polyglotte($texte,$result) {
+	while (eregi('<multi>([^<]*)</multi>', $texte, $match)) {
+		$p = strpos($texte, $match[0]);
+		if ($p) {
+			$champ = new Texte;
+			$champ->texte = (substr($texte, 0, $p));
+			$result[] = $champ;
+		}
+
+		$champ = new Polyglotte;
+		$lang = '';
+		$bloc = $match[1];
+		$texte = substr($texte,$p+strlen($match[0]));
+		while (preg_match("/^[[:space:]]*([^[{]*)[[:space:]]*[\{\[]([a-z_]+)[\}\]](.*)$/si", $bloc, $regs)) {
+		  $trad = $regs[1];
+		  if ($trad OR $lang) 
+			$champ->traductions[$lang] = $trad;
+		  $lang = $regs[2];
+		  $bloc = $regs[3];
+		}
+		$champ->traductions[$lang] = $bloc;
+		$result[] = $champ;
+	}
+	if ($texte) {
+			$champ = new Texte;
+			$champ->texte = $texte;
+			$result[] = $champ;
+	}
+	return $result;
+}
+
+
+function phraser_idiomes($texte,$result) {
+	// Reperer les balises de traduction <:toto:>
+	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>", $texte, $match)) {
+		$p = strpos($texte, $match[0]);
+		if ($p) $result = phraser_champs(substr($texte, 0, $p),$result);
+		$champ = new Idiome;
+		$champ->chaine = strtolower($match[3]);
+		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
+		$champ->fonctions = phraser_filtres(substr($match[4],1));
+		$texte = substr($texte,$p+strlen($match[0]));
+		$result[] = $champ;
+	}
+	if ($texte)  $result = phraser_champs($texte,$result);
+	return $result;
 }
 
 function phraser_champs($texte,$result) {
@@ -78,12 +126,8 @@ function phraser_champs($texte,$result) {
 	  $p = strpos($texte, $regs[0]);
 
 	  if ($regs[4] || (strpos($regs[5][0], "[0-9]") === false)) {
-		if ($p) {
-			$champ = new Texte;
-			$champ->texte = (substr($texte, 0, $p));
-			$result[] = $champ;
-		}
-		  
+		if ($p)
+			$result = phraser_polyglotte(substr($texte, 0, $p), $result);
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
@@ -92,18 +136,11 @@ function phraser_champs($texte,$result) {
 		$result[] = $champ;
 	  } else {
 	    // faux champ
-	    $champ = new Texte;
-	    $champ->texte = (substr($texte, 0, $p+1));
-	    $result[] = $champ;
+	    $result = phraser_polyglotte (substr($texte, 0, $p+1), $result);
 	    $texte = (substr($texte, $p+1));
 	  }
 	}
-	if ($texte) {
-	  
-		$champ = new Texte;
-		$champ->texte = $texte;
-		$result[] = $champ;
-	}
+	if ($texte) $result = phraser_polyglotte($texte, $result);
 	return $result;
 }
 
@@ -120,13 +157,12 @@ function phraser_champs_etendus($texte, $result) {
 	return array_merge($result, phraser_champs_interieurs($texte, $sep, array()));
 }
 
-
 function phraser_filtres($fonctions) {
   $r = array();
   if ($fonctions) {
     $fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
     foreach($fonctions as $f) {
-      ereg("^([^{]*)?(.*)$",$f,$m);
+      ereg("^([^{]*)(.*)$",$f,$m);
       $arg = $m[2];
       $fonc = $m[1];
       $x = ereg("^\{(.*)\} *$",$arg,$m);
@@ -145,7 +181,6 @@ function phraser_champs_exterieurs($debut, $sep, $nested) {
 	    $debut = $m[2];
 	}
 	return (!$debut ?  $res : phraser_inclure($debut, $res));
-
 }
 
 function phraser_champs_interieurs($texte, $sep, $result) {

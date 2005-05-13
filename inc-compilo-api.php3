@@ -16,7 +16,7 @@ if (defined("_INC_COMPILO_API")) return;
 define("_INC_COMPILO_API", "1");
 
 
-// Definition des classes Boucle, Texte, Inclure, Champ
+// Definition des noeuds de l'arbre de syntaxe abstraite
 
 class Texte {
 	var $type = 'texte';
@@ -73,7 +73,7 @@ class Champ {
 	var $nom_champ;
 	var $nom_boucle= ''; // seulement si boucle explicite
 	var $cond_avant, $cond_apres; // tableaux d'objets
-	var $fonctions;  // filtre explicites
+	var $fonctions = array();  // filtre explicites
 	var $etoile;
 	// champs pour la production de code
 	var $id_boucle;
@@ -90,6 +90,24 @@ class Champ {
 }
 
 
+class Idiome {
+	var $type = 'idiome';
+	var $chaine = ""; // la chaine a traduire
+	var $module = ""; // son module de definition
+	var $fonctions = array(); // les filtres a appliquer au resultat
+	// champs pour la production de code, cf ci-dessus
+	var $id_boucle;
+	var $boucles;
+	var $type_requete;
+	var $code;
+	var $statut;
+	var $descr = array();
+}
+
+class Polyglotte {
+	var $type = 'polyglotte';
+	var $traductions = array(); // les textes ou choisir
+}
 //
 // Globales de description de la base
 

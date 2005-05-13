@@ -73,9 +73,7 @@ function _generer_url_propre($type, $id_objet) {
 	// Sinon, creer l'URL
 	include_ecrire("inc_filtres.php3");
 	include_ecrire("inc_charsets.php3");
-	$url = translitteration(corriger_caracteres(
-		supprimer_tags(supprimer_numero(extraire_multi($row['titre'])))
-		));
+	$url = translitteration(corriger_caracteres(supprimer_tags(supprimer_numero($row['titre']))));
 	$url = @preg_replace(',[[:punct:][:space:]]+,u', ' ', $url);
 	// S'il reste des caracteres non latins, utiliser l'id a la place
 	if (preg_match(",[^a-zA-Z0-9 ],", $url)) {

@@ -90,51 +90,6 @@ function calculer_inclure($fichier, $params, $id_boucle, &$boucles) {
 		"\n?'." . "'>'";
 }
 
-
-//
-// Traite une partie "texte" d'un squelette (c'est-a-dire tout element
-// qui ne contient ni balise, ni boucle, ni <INCLURE()> ; le transforme
-// en une EXPRESSION php (qui peut etre l'argument d'un Return ou la
-// partie droite d'une affectation). Ici sont analyses les elements
-// multilingues des squelettes : <:xxx:> et <multi>[fr]coucou</multi>
-//
-function calculer_texte($texte, $id_boucle, &$boucles) {
-	//
-	// Les elements multilingues
-	//
-	$code = "'".ereg_replace("([\\\\'])", "\\\\1", $texte)."'";
-
-	// bloc multi
-	if (eregi('<multi>', $texte)) {
-		$ouvre_multi = 'extraire_multi(';
-		$ferme_multi = ')';
-	} else {
-		$ouvre_multi = $ferme_multi = '';
-	}
-
-	// Reperer les balises de traduction <:toto:>
-	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>", $code, $match)) {
-		//
-		// Traiter la balise de traduction multilingue
-		//
-		$chaine = strtolower($match[3]);
-		if (!($module = $match[2]))
-			// ordre standard des modules a explorer
-			$module = 'public/spip/ecrire';
-		$c = new Champ;
-		$c->code = "_T('$module:$chaine')";
-		$c->fonctions = phraser_filtres(substr($match[4],1));
-		$c->id_boucle = $id_boucle;
-		$c->boucles = &$boucles;
-		$c->statut = 'php'; // ne pas manger les espaces avec trim()
-		$c = applique_filtres($c);
-		$code = str_replace($match[0], "'$ferme_multi.$c.$ouvre_multi'", $code);
-	}
-
-	return $ouvre_multi . $code . $ferme_multi;
-}
-
-
 //
 // calculer_boucle() produit le corps PHP d'une boucle Spip 
 // (sauf les recursives)
@@ -424,6 +379,7 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 // Production du code PHP a partir de la sequence livree par le phraseur
 // $boucles est passe par reference pour affectation par index_pile.
 // Retourne une expression PHP,
+// (qui sera argument d'un Return ou la partie droite d'une affectation).
 
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 	if (!$tableau) return "''";
@@ -437,8 +393,27 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		switch($p->type) {
 		// texte seul
 		case 'texte':
-			$code = calculer_texte($p->texte, $id_boucle, $boucles);
+			$code = "'".ereg_replace("([\\\\'])", "\\\\1", $p->texte)."'";
+
 			$commentaire='';
+			$avant='';
+			$apres='';
+			$altern = "''";
+			break;
+
+		case 'polyglotte':
+			$code = "";
+			foreach($p->traductions as $k => $v) {
+			  $code .= ",'" .
+			    ereg_replace("([\\\\'])", "\\\\1", $k) .
+			    "' => '" .
+			    ereg_replace("([\\\\'])", "\\\\1", $v) .
+			    "'";
+			}
+			$code = "multi_trad(array(" .
+			  substr($code,1) .
+			  "))";
+			$commentaire= '';
 			$avant='';
 			$apres='';
 			$altern = "''";
@@ -473,7 +448,18 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 				$newdescr, $boucles, $id_boucle, $niv+1);
 			break;
 
-		// balise SPIP
+		case 'idiome':
+			$p->code = "_T('" . $p->module . ":" .$p->chaine. "')";
+			$p->id_boucle = $id_boucle;
+			$p->boucles = &$boucles;
+			$p->statut = 'php'; // ne pas manger les espaces avec trim()
+			$commentaire = "";
+			$code = applique_filtres($p);
+			$avant='';
+			$apres='';
+			$altern = "''";
+			break;
+
 		default: 
 
 			// cette structure pourrait etre completee des le phrase' (a faire)
