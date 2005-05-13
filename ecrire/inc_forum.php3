@@ -247,6 +247,9 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 		case 'rubrique':
 			return generer_url_rubrique($id)."#forum$id_forum";
 			break;
+		case 'site':
+			return generer_url_site($id)."#forum$id_forum";
+			break;
 		default:
 			return "forum.php3?id_forum=".$id_forum;
 	}

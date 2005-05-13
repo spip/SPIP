@@ -220,7 +220,10 @@ function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_syndic AS $id_table";
-	$boucle->where[] = "$id_table.statut='publie'";
+	if (!$GLOBALS['var_preview']) {
+		$boucle->where[] = "$id_table.statut='publie'";
+	} else
+		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -234,8 +237,11 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle->from[] =  "spip_syndic_articles  AS $id_table";
 	$boucle->from[] =  "spip_syndic AS syndic";
 	$boucle->where[] = "$id_table.id_syndic=syndic.id_syndic";
-	$boucle->where[] = "$id_table.statut='publie'";
-	$boucle->where[] = "syndic.statut='publie'";
+	if (!$GLOBALS['var_preview']) {
+		$boucle->where[] = "$id_table.statut='publie'";
+		$boucle->where[] = "syndic.statut='publie'";
+	} else
+		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
 	$boucle->select[]='syndic.nom_site AS nom_site'; # derogation zarbi
 	$boucle->select[]='syndic.url_site AS url_site'; # idem
 	return calculer_boucle($id_boucle, $boucles); 

@@ -74,6 +74,7 @@ RewriteRule ^article([0-9]+)\.html$		article.php3?id_article=$1 [QSA,L]
 RewriteRule ^breve([0-9]+)\.html$		breve.php3?id_breve=$1 [QSA,L]
 RewriteRule ^mot([0-9]+)\.html$			mot.php3?id_mot=$1 [QSA,L]
 RewriteRule ^auteur([0-9]+)\.html$		auteur.php3?id_auteur=$1 [QSA,L]
+RewriteRule ^site([0-9]+)\.html$		site.php3?id_syndic=$1 [QSA,L]
 # Fin compatibilite
 ###
 
@@ -94,6 +95,9 @@ RewriteRule ^-[^/\.]+-?(\.html)?$ rubrique.php3 [QSA,E=url_propre:$0,L]
 
 # les auteurs
 RewriteRule ^_[^/\.]+_?(\.html)?$ auteur.php3 [QSA,E=url_propre:$0,L]
+
+# Les sites
+RewriteRule ^@[^/\.]+@?(\.html)?$ site.php3 [QSA,E=url_propre:$0,L]
 
 # Les articles (en dernier car expression plus "large")
 RewriteRule ^[^/\.]+(\.html)?$ article.php3 [QSA,E=url_propre:$0,L]

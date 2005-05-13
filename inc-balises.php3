@@ -246,6 +246,12 @@ function balise_URL_MOT_dist($p) {
 	return $p;
 }
 
+# remarque : URL_SITE ne figure pas ici car c'est une donnee 'brute'
+# correspondant a l'URL du site reference ; URL_SYNDIC correspond
+# pour sa part a l'adresse de son backend.
+# Il n'existe pas de balise pour afficher generer_url_site($id_syndic),
+# a part [(#ID_SYNDIC|generer_url_site)]
+
 function balise_URL_FORUM_dist($p) {
 	$p->code = "generer_url_forum(" .
 	champ_sql('id_forum',$p) .")";

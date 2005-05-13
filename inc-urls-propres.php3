@@ -39,12 +39,14 @@ if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '');
 
 function _generer_url_propre($type, $id_objet) {
-	$table = "spip_".$type."s";
-	$col_id = "id_".$type;
+	$table = "spip_".table_objet($type);
+	$col_id = id_table_objet($type);
 
 	// Auteurs : on prend le nom
 	if ($type == 'auteur')
 		$champ_titre = 'nom AS titre';
+	else if ($type == 'site' OR $type=='syndic')
+		$champ_titre = 'nom_site AS titre';
 	else
 		$champ_titre = 'titre';
 
@@ -165,6 +167,14 @@ function generer_url_auteur($id_auteur) {
 		return "auteur.php3?id_auteur=$id_auteur";
 }
 
+function generer_url_site($id_syndic) {
+	$url = _generer_url_propre('site', $id_syndic);
+	if ($url)
+		return '@'.$url.'@'._terminaison_urls_propres;
+	else
+		return "site.php3?id_syndic=$id_syndic";
+}
+
 function generer_url_document($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
@@ -180,9 +190,9 @@ function recuperer_parametres_url($fond, $url) {
 
 	// Migration depuis anciennes URLs ?
 	if ($GLOBALS['_SERVER']['REQUEST_METHOD'] != 'POST' &&
-preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&].*)?)$,', $url, $regs)) {
+preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html)([?&].*)?)$,', $url, $regs)) {
 		$type = $regs[3];
-		$id_objet = intval($GLOBALS['id_'.$type]);
+		$id_objet = intval($GLOBALS[$id_table_objet = id_table_objet($type)]);
 		if ($id_objet) {
 			$func = "generer_url_$type";
 			$url_propre = $func($id_objet);
@@ -191,7 +201,7 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&
 				http_status(301);
 				// recuperer les arguments supplementaires (&debut_xxx=...)
 				$reste = preg_replace('/^&/','?',
-					preg_replace("/[?&]id_$type=$id_objet/",'',$regs[5]));
+					preg_replace("/[?&]$id_table_objet=$id_objet/",'',$regs[5]));
 				Header("Location: $url_propre$reste");
 				exit;
 			}
@@ -224,14 +234,18 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur)(\.php3?|[0-9]+\.html)([?&
 		$type = 'auteur';
 		$url_propre = $regs[1];
 	}
+	else if (preg_match(',^@(.*?)@?$,', $url_propre, $regs)) {
+		$type = 'syndic';
+		$url_propre = $regs[1];
+	}
 	else {
 		$type = 'article';
 		preg_match(',^(.*)$,', $url_propre, $regs);
 		$url_propre = $regs[1];
 	}
 
-	$table = "spip_".$type."s";
-	$col_id = "id_".$type;
+	$table = "spip_".table_objet($type);
+	$col_id = id_table_objet($type);
 	$query = "SELECT $col_id FROM $table
 		WHERE url_propre='".addslashes($url_propre)."'";
 	$result = spip_query($query);
