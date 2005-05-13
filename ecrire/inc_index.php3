@@ -34,14 +34,6 @@ function separateurs_indexation($requete = false) {
 	return $liste;
 }
 
-function spip_split($reg, $texte) {
-	global $flag_pcre;
-	if ($flag_pcre)
-		return preg_split("/$reg/", $texte);
-	else
-		return split($reg, $texte);
-}
-
 function nettoyer_chaine_indexation($texte) {
 	global $translitteration_complexe;
 	include_ecrire("inc_charsets.php3");
@@ -73,7 +65,7 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	$texte = strtolower($texte);
 
 	// Separer les mots
-	$table = spip_split(" +", $texte);
+	$table = preg_split("/ +/", $texte);
 
 	while (list(, $mot) = each($table)) {
 		if (strlen($mot) > $min_long) {
@@ -445,7 +437,7 @@ function requete_hash ($rech) {
 	$rech = nettoyer_chaine_indexation($rech);
 	$regs = separateurs_indexation(true)." ";
 	$rech = strtr($rech, $regs, ereg_replace('.', ' ', $regs));
-	$s = spip_split(" +", $rech);
+	$s = preg_split("/ +/", $rech);
 	unset($dico);
 	unset($h);
 
