@@ -811,7 +811,7 @@ if ($flag_editable AND $options == 'avancees') {
 		
 		echo "<div><b>";
 		echo bouton_block_invisible('dateredac');
-		echo "<span class='verdana1'>"._T('texte_date_publication_anterieure').'</span> '.majuscules($date_affichee)." ".aide('artdate_redac')."</b></div>";
+		echo "<span class='verdana1'>".majuscules(_T('texte_date_publication_anterieure')).'</span> '.majuscules($date_affichee)." ".aide('artdate_redac')."</b></div>";
 
 
 		echo debut_block_invisible('dateredac');
