@@ -866,24 +866,6 @@ function extraire_multi ($letexte) {
 	return $letexte;
 }
 
-// popup des blocs multi dans l'espace prive (a ameliorer)
-function ajoute_popup_multi($langue_demandee, $trads, $texte) {
-	static $num_multi=0;
-	global $multi_popup;
-	while (list($lang,$bloc) = each($trads)) {
-		if ($lang != $langue_demandee)
-			$survol .= "[$lang] ".supprimer_tags(couper($bloc,20))."\n";
-		$texte_popup .= "<br /><b>".traduire_nom_langue($lang)."</b> ".ereg_replace("\n+","<br />", supprimer_tags(couper(propre($bloc),200)));
-	}
-
-	if ($survol) {
-		$num_multi ++;
-		$texte .= " <img src=\"" . _DIR_IMG_PACK . "langues-modif-12.gif\" alt=\"(multi)\" title=\"$survol\" height=\"12\" width=\"12\" border=\"0\" onclick=\"return openmulti($num_multi)\" />";
-		$multi_popup .= "textes_multi[$num_multi] = '".addslashes($texte_popup)."';\n";
-	}
-
-	return $texte;
-}
 
 // Raccourci ancre [#ancre<-]
 function avant_propre_ancres($texte) {
