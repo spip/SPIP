@@ -492,8 +492,8 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
 		  }
 
-		$codes[]= $code;
-#		    (!$commentaire ? "" : ("/* $commentaire */ ") . $code);
+		$codes[]= #$code;
+		  (!$commentaire ? "" : ("/* $commentaire */ ")) . $code;
 	} // foreach
 
 	return ((count($codes)==1) ? $codes[0] : 

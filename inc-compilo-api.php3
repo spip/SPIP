@@ -97,6 +97,7 @@ class Idiome {
 	var $module = ""; // son module de definition
 	var $filtres = array(); // les filtres a appliquer au resultat
 	var $fonctions = array(); // source des filtres
+	var $cond_avant, $cond_apres; // inutilises mais faut = ci-dessus
 	// champs pour la production de code, cf ci-dessus
 	var $id_boucle;
 	var $boucles;
