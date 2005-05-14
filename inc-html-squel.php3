@@ -110,11 +110,12 @@ function phraser_idiomes($texte,$result) {
 	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)(\|[^>]*)?:>", $texte, $match)) {
 		$p = strpos($texte, $match[0]);
 		if ($p) $result = phraser_champs(substr($texte, 0, $p),$result);
-		$champ = new Idiome;
-		$champ->chaine = strtolower($match[3]);
-		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
-		$champ->fonctions = phraser_filtres(substr($match[4],1));
 		$texte = substr($texte,$p+strlen($match[0]));
+		$champ = new Idiome;
+		$champ->nom_champ = strtolower($match[3]);
+		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
+		// pas d'imbrication pour les filtres sur langue
+		$result = phraser_filtres(substr($match[4],1), '', $result, $champ);
 		$result[] = $champ;
 	}
 	if ($texte)  $result = phraser_champs($texte,$result);
@@ -146,7 +147,7 @@ function phraser_champs($texte,$result) {
 
 // Gestion des imbrications:
 // on cherche les [..] les plus internes et on les remplace par une chaine
-// %###N@ ou N indexe un tableau comportant le resultat de leur phrase
+// %###N@ ou N indexe un tableau comportant le resultat de leur analyse
 // on recommence tant qu'il y a des [...] en substituant a l'appel suivant
 
 function phraser_champs_etendus($texte, $result) {
@@ -157,19 +158,49 @@ function phraser_champs_etendus($texte, $result) {
 	return array_merge($result, phraser_champs_interieurs($texte, $sep, array()));
 }
 
-function phraser_filtres($fonctions) {
-  $r = array();
-  if ($fonctions) {
-    $fonctions = explode('|', ereg_replace("^\|", "", $fonctions));
-    foreach($fonctions as $f) {
-      ereg("^([^{]*)(.*)$",$f,$m);
-      $arg = $m[2];
-      $fonc = $m[1];
-      $x = ereg("^\{(.*)\} *$",$arg,$m);
-      $r[]= array($fonc, ($x ? $m[1] : $arg));
-    }
-  }
-  return $r;
+//  Analyse les filtres d'un champ etendu et affecte le resultat
+// renvoie la liste des lexemes d'origine augmentee
+// de ceux trouves dans les arguments des filtres (rare)
+
+function phraser_filtres($filtres, $sep, $result, &$pointeur_champ) {
+#	spip_log(" phraser_filtre " . $pointeur_champ->nom_champ . $filtres);
+	if ($filtres) {
+	  $filtres = explode('|', ereg_replace("^\|", "", $filtres));
+	  foreach($filtres as $f) {
+	    ereg("^([^{]*)(.*)$",$f,$match);
+	    $args = $match[2];
+	    $fonc = $match[1];
+	    if (ereg("^\{(.*)\} *$",$args,$m)) $args =$m[1];
+	    // pour les balises avec faux filtres
+	    $pointeur_champ->fonctions[] = array($fonc, $args);
+	    $res = array($fonc);
+	    while (strlen($args = trim($args))) {
+		if ($args[0] == '"')
+		  ereg ('^[[:space:]]*(")([^"]*)"[[:space:]]*,?(.*)$', $args, $regs);
+		else if ($args[0] == "'")
+			ereg ("^[[:space:]]*(')([^']*)'[[:space:]]*,?(.*)$", $args, $regs);
+		else
+			ereg('^([[:space:]]*)([^,]*),?(.*)$', $args, $regs);
+
+		$arg = $regs[2];		// le premier argument
+		$args = $regs[3];		// ceux qui restent
+		//  difference {#ID_ARTICLE} et {'#ID_ARTICLE'}
+		if ($regs[1]) { // valeur = ", ', ou vide
+			$champ = new Texte;
+			$champ->texte = $arg;
+			$result[] = $champ;
+			$res[] = array($champ);
+		} else {
+
+		  $arg = phraser_champs_exterieurs(trim($arg), $sep, $result);
+		  $res[] = $arg;
+		  $result = array_merge($result, $arg);
+		}
+	    }
+	    $pointeur_champ->filtres[] = $res;
+	  }
+	}
+	return $result;
 }
 
 function phraser_champs_exterieurs($debut, $sep, $nested) {
@@ -177,6 +208,7 @@ function phraser_champs_exterieurs($debut, $sep, $nested) {
 	while (($p=strpos($debut, "%$sep"))!==false) {
 	    if ($p) $res = phraser_inclure(substr($debut,0,$p), $res);
 	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
+#	    spip_log("nest " . $m[1] . "'$debut' '" . $nested[$m[1]] . "'"); 
 	    $res[]= $nested[$m[1]];
 	    $debut = $m[2];
 	}
@@ -184,8 +216,9 @@ function phraser_champs_exterieurs($debut, $sep, $nested) {
 }
 
 function phraser_champs_interieurs($texte, $sep, $result) {
-	$i = 1;
+  $i = 0; // en fait count($result)
 	while (true) {	  $j=$i;
+#	  spip_log("	  $j=$i");
 	  while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
 
 		$champ = new Champ;
@@ -194,7 +227,7 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		$champ->etoile = $regs[5];
 		$champ->cond_avant = phraser_champs_exterieurs($regs[1],$sep,$result);
 		$champ->cond_apres = phraser_champs_exterieurs($regs[7],$sep,$result);
-		$champ->fonctions = phraser_filtres($regs[6]);
+		$result = phraser_filtres($regs[6], $sep, $result, &$champ);
 
 		$p = strpos($texte, $regs[0]);
 		if ($p) {$result[$i] = substr($texte,0,$p);$i++; }
@@ -207,6 +240,7 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 
 	  while($j < $i) 
 	    { $z= $result[$j]; 
+#	      spip_log("res[$j] = $z");
 	      if (is_object($z)) $x .= "%$sep$j@" ; else $x.=$z ;
 	      $j++;}
 	  if (ereg(CHAMP_ETENDU, $x)) $texte = $x;

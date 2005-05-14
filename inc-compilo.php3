@@ -449,7 +449,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			break;
 
 		case 'idiome':
-			$p->code = "_T('" . $p->module . ":" .$p->chaine. "')";
+			$p->code = "_T('" . $p->module . ":" .$p->nom_champ . "')";
 			$p->id_boucle = $id_boucle;
 			$p->boucles = &$boucles;
 			$p->statut = 'php'; // ne pas manger les espaces avec trim()
@@ -496,7 +496,8 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			     ("/"."* $commentaire *"."/ " . $code));
 	} // foreach
 
-	return "(" . join ("\n$tab. ", $codes) . ")";
+	return ((count($codes)==1) ? $codes[0] : 
+		"(" . join ("\n$tab. ", $codes) . ")");
 }
 
 // Prend en argument le source d'un squelette, sa grammaire et un nom.

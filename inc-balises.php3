@@ -372,7 +372,7 @@ function balise_EXPOSER_dist($p) {
 		$on = addslashes($regs[1]);
 		$off = addslashes($regs[3]);
 		// autres filtres
-		$p->fonctions = $a;
+		array_shift($p->filtres);
 	}
 
 
@@ -393,7 +393,7 @@ function balise_EMBED_DOCUMENT_dist($p) {
 	$p->code = "calcule_embed_document(intval($_id_document), " .
 	  argumenter_balise($p->fonctions, "|") .
 	  ", \$doublons, '" . $p->descr['documents'] . "')";
-	$p->fonctions = array();
+	$p->filtres = array();
 	$p->statut = 'html';
 	return $p;
 }
@@ -536,11 +536,14 @@ function calculer_balise_logo ($p) {
 		else
 			$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
 	}
-	// analyser les filtres
+	// analyser les faux filtres, 
+	// supprimer ceux qui ont le tort d'etre vrais
 	$flag_fichier = 0;
 	$filtres = '';
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $couple) {
+		// eliminer les faux filtres
+		  if (!$flag_stop) array_shift($p->filtres);
 		  $nom = $couple[0];
 			if (ereg('^(left|right|center|top|bottom)$', $nom))
 				$align = $nom;
@@ -561,11 +564,7 @@ function calculer_balise_logo ($p) {
 			}
 			// apres un URL ou || ou |fichier ce sont
 			// des filtres (sauf left...lien...fichier)
-			else
-				$filtres[] = $couple;
 		}
-		// recuperer les autres filtres s'il y en a
-		$p->fonctions = $filtres;
 	}
 
 	//
@@ -630,6 +629,7 @@ function balise_EXTRA_dist ($p) {
 
 	// Gerer la notation [(#EXTRA|isbn)]
 	if ($p->fonctions) {
+	  $p->filtres = array();
 		include_ecrire("inc_extra.php3");
 		list ($key, $champ_extra) = each($p->fonctions);	// le premier filtre
 		$type_extra = $p->type_requete;
