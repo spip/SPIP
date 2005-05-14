@@ -693,18 +693,24 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
 	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
 	# porter un nom et faire partie de l'API.
-	if ($retour = param_balise($p))
-		$code_retour = calculer_liste(
-			phraser_champs_etendus($retour, array()),
-			$p->descr,
-			$p->boucles,
-			$p->id_boucle);
+	if ($filtres = $p->filtres) {
+		$retour = array_shift($filtres);
+		if  (!array_shift($retour)) {
+		  $p->fonctions = $a;
+		  array_shift( $p->filtres );
+		  $retour = calculer_liste($retour[0],
+					   $p->descr,
+					   $p->boucles,
+					   $p->id_boucle,
+					   $p->descr['niv']);
+		}
+	}
 	else
-		$code_retour = "''";
+		$retour = "''";
 
 	// Attention un eventuel &retour=xxx dans l'URL est prioritaire
 	$c .= '.
-	(($lien = (_request("retour") ? _request("retour") : '.$code_retour.')) ? "&retour=".rawurlencode($lien) : "")';
+	(($lien = (_request("retour") ? _request("retour") : '.$retour.')) ? "&retour=".rawurlencode($lien) : "")';
 
 	$p->code .= code_invalideur_forums($p, "(".$c.")");
 
@@ -748,7 +754,17 @@ function balise_SELF_dist($p) {
 // La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
 //
 function balise_ENV_dist($p) {
-	$nom = param_balise($p);
+
+	if ($a = $p->filtres) {
+		$sinon = array_shift($a);
+		if  (!array_shift($sinon)) {
+		  $p->fonctions = $a;
+		  array_shift( $p->filtres );
+		  $nom = array_shift($sinon);
+		  $nom = ($nom[0]->type=='texte') ? $nom[0]->texte : "";
+		}
+	}
+
 	if (!$nom) {
 		// cas de #ENV sans argument : on retourne le serialize() du tableau
 		// une belle fonction [(#ENV|affiche_env)] serait pratique
@@ -756,13 +772,15 @@ function balise_ENV_dist($p) {
 		$p->statut = 'html';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$nom = split(',', $nom, 2);
-		$p->code = '$Pile[0]["' . addslashes($nom[0]) . '"]';
-		if ($nom[1])
-			$p->code = 'sinon('. $p->code
-			. filtres_arglist($nom[1], $p, ',') . ')';
+		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
+		if ($sinon)
+			$p->code = 'sinon('. 
+			  $p->code .
+			  compose_filtres_args($p, $sinon, ',') . 
+			  ')';
 		$p->statut = 'php';
 	}
+
 	return $p;
 }
 

@@ -186,20 +186,26 @@ function calculer_balise($nom, $p) {
 // Ca donne les arguments a chercher dans la pile,on compile leur localisation
 // Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
 // qui recevra a l'execution la valeur des arguments, 
-// ainsi que les filtres (qui ne sont donc pas traites a la compil)
+// ainsi que les pseudo filtres qui ne sont donc pas traites a la compil
+// mais on traite le vrai parametre si present.
 
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
-#	$x = $p->filtres[0][1][0]; ca devrait etre = filtre_arglist.
-	$param = param_balise($p); # attention: ca affecte $p
-
-	$param = filtres_arglist($param, $p, ','); 
+	$param = "";
+	if ($a = $p->filtres) {
+		$c = array_shift($a);
+		if  (!array_shift($c)) {
+		  $p->fonctions = $a;
+		  array_shift( $p->filtres );
+		  $param = compose_filtres_args($p, $c, ',');
+		}
+	}
 	$collecte = join(',',collecter_balise_dynamique($l, $p));
 	$p->code = "executer_balise_dynamique('" . $nom . "',\n\tarray("
 	  . $collecte
 	  . ($collecte ? $param : substr($param,1)) # virer la virgule
 	  . "),\n\tarray("
-	  . argumenter_balise($p->fonctions, "', '")
+	  . argumenter_balise($p->filtres, "', '")
 	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
 	$p->fonctions = array();
@@ -258,12 +264,7 @@ function compose_filtres($p, $code)
   foreach($p->filtres as $filtre) {
     $fonc = array_shift($filtre);
     if ($fonc) {
-      $sep = ($fonc == '?' ? ':' : ',');
-      $arglist = "";
-      foreach ($filtre as $arg) {
-	$arglist .= $sep . calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle, $p->descr['niv']);
-
-      }
+      $arglist = compose_filtres_args($p, $filtre, ($fonc == '?' ? ':' : ','));
       if (function_exists($fonc))
 	$code = "$fonc($code$arglist)";
       else if (strpos("x < > <= >= == === != !== <> ? ", " $fonc "))
@@ -277,36 +278,13 @@ function compose_filtres($p, $code)
   return $code;
 }
 
-// analyse des parametres d'un champ etendu
-// [...(#CHAMP{parametres})...] ou [...(#CHAMP|filtre{parametres})...]
-// retourne une suite de N references aux N valeurs indiquées avec N virgules
-
-function filtres_arglist($args, $p, $sep) {
-	$arglist ='';
-	while (strlen($args = trim($args))) {
-		if ($args[0] == '"')
-			ereg ('^[[:space:]]*(")([^"]*)"[[:space:]]*,?(.*)$', $args, $regs);
-		else if ($args[0] == "'")
-			ereg ("^[[:space:]]*(')([^']*)'[[:space:]]*,?(.*)$", $args, $regs);
-		else
-			ereg('^([[:space:]]*)([^,]*),?(.*)$', $args, $regs);
-
-		$arg = $regs[2];		// le premier argument
-		$args = $regs[3];		// ceux qui restent
-		//  difference {#ID_ARTICLE} et {'#ID_ARTICLE'}
-		if ($regs[1]) // valeur = ", ', ou vide
-			$arg = "'" . texte_script($arg) . "'";
-		else {
-		  // Appel recursif de calculer_liste sur des cas restreints
-		  $arg = calculer_liste(phraser_champs(trim($arg), array()),
-					$p->descr,
-					$p->boucles,
-					$p->id_boucle);
-		}
-
-		$arglist .= $sep . $arg;
+function compose_filtres_args($p, $args, $sep)
+{
+	$arglist = "";
+	foreach ($args as $arg) {
+		$arglist .= $sep . 
+		  calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle, $p->descr['niv']);
 	}
-
 	return $arglist;
 }
 
