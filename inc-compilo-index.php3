@@ -261,7 +261,7 @@ function compose_filtres($p, $code)
       $sep = ($fonc == '?' ? ':' : ',');
       $arglist = "";
       foreach ($filtre as $arg) {
-	$arglist .= $sep . calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle);
+	$arglist .= $sep . calculer_liste($arg, $p->descr, $p->boucles, $p->id_boucle, $p->descr['niv']);
 
       }
       if (function_exists($fonc))

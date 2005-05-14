@@ -385,7 +385,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 	if (!$tableau) return "''";
         $codes = array();
 	$t = '$t' . $niv;
-
+	$descr['niv'] = $niv;
 	for ($i=0; $i<=$niv; $i++) $tab .= "\t";
 
 	foreach ($tableau as $p) {
@@ -492,8 +492,8 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
 		  }
 
-		  $codes[]= (!$commentaire ? $code : 
-			     ("/"."* $commentaire *"."/ " . $code));
+		$codes[]= $code;
+#		    (!$commentaire ? "" : ("/* $commentaire */ ") . $code);
 	} // foreach
 
 	return ((count($codes)==1) ? $codes[0] : 
