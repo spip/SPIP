@@ -762,8 +762,18 @@ function copie_locale($source, $mode='auto') {
 		OR $mode=='force') {
 			include_ecrire('inc_sites.php3');
 			$contenu = recuperer_page($source);
-			if ($contenu)
+			if ($contenu) {
 				ecrire_fichier($local, $contenu);
+
+				// signaler au moteur de recherche qu'il peut reindexer ce doc
+				$a = spip_query("SELECT id_document FROM spip_documents
+					WHERE fichier='".addslashes($source)."'");
+				list($id_document) = spip_fetch_array($a);
+				if ($id_document) {
+					include_ecrire('inc_index.php3');
+					marquer_indexer('document', $id_document);
+				}
+			}
 			else
 				return false;
 		}
@@ -931,11 +941,19 @@ function inserer_attribut($balise, $attribut, $val, $texte_backend=true) {
 	$insert = " $attribut=\"".entites_html(texte_backend($val))."\" ";
 
 	list($old,$r) = extraire_attribut($balise, $attribut, true);
+
 	if ($old !== NULL) {
+		// Remplacer l'ancien attribut du meme nom
 		$balise = $r[1].$insert.$r[5];
 	}
-	else
-		$balise = preg_replace(",([[:space:]]/)?".">,", $insert."/>", $balise);
+	else {
+		// preferer une balise " />" (comme <img />)
+		if (preg_match(',[[:space:]]/>,', $balise))
+			$balise = preg_replace(",[[:space:]]/>,", $insert."/>", $balise, 1);
+		// sinon une balise <a ...> ... </a>
+		else
+			$balise = preg_replace(",>,", $insert.">", $balise, 1);
+	}
 
 	return $balise;
 }

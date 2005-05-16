@@ -252,7 +252,7 @@ function calcul_branche ($generation) {
 }
 
 // fonction appelee par la balise #LOGO_DOCUMENT
-function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $params, $lien, $align) {
+function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier, $lien, $align, $params) {
 	if (!$id_document) return '';
 	if ($doubdoc) $doublons["documents"] .= ','.$id_document;
 
@@ -276,9 +276,23 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		}
 	} else if ($mode == 'vignette') {
 		$logo = generer_url_document($id_document);
+		if (!@file_exists($logo))
+			$logo = '';
 	}
 
-	if (!$logo) {
+	// taille maximum [(#LOGO_DOCUMENT{300,52})]
+	list($x,$y) = split(',', ereg_replace("[\{\}]", "", $params)); 
+
+
+	if ($logo AND @file_exists($logo)) {
+		if ($x OR $y)
+			$logo = reduire_image($logo, $x, $y);
+		else {
+			$size = @getimagesize($logo);
+			$logo = "<img src='$logo' ".$size[3]." />";
+		}
+	}
+	else {
 		// Retrouver l'extension
 		list($extension) =
 			spip_abstract_fetch(spip_abstract_select(array('extension'),
@@ -287,32 +301,47 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		if (!$extension) $extension = 'txt';
 
 		// Pas de vignette, mais un fichier image -- creer la vignette
-		if (strstr(lire_meta('formats_graphiques'), $extension)
-		AND lire_meta('creer_preview') == 'oui') {
-			if ($img = copie_locale($fichier)) {
-				// taille maximum [(#LOGO_DOCUMENT{300,52})]
-				list($x,$y) = split(',', ereg_replace("[\{\}]", "", $params)); 
-				$lien_logo = reduire_image($img, $x, $y);
-				$logo = extraire_attribut($lien_logo, 'src');
-				if ($lien)
-					$lien_logo = "<a href=\"$lien\">$lien_logo</a>";
+		if (strstr(lire_meta('formats_graphiques'), $extension)) {
+			if ($img = copie_locale($fichier)
+			AND @file_exists($img)) {
+				if (!$x AND !$y) {
+					$logo = reduire_image($img);
+				} else {
+					# eviter une double reduction
+					$size = @getimagesize($img);
+					$logo = "<img src='$img' ".$size[3]." />";
+				}
 			}
 		}
 
 		// Document sans vignette ni image : vignette par defaut
-		if (!$logo)
-			$logo = vignette_par_defaut($extension, false);
+		if (!$logo) {
+			$img = vignette_par_defaut($extension, false);
+			$size = @getimagesize($img);
+			$logo = "<img src='$img' ".$size[3]." />";
+		}
 	}
+
+	// Reduire si une taille precise est demandee
+	if ($x OR $y)
+		$logo = reduire_image($logo, $x, $y);
 
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
-		return calcule_fichier_logo($logo); # supprimer le IMG/
+		# supprimer le IMG/
+		return calcule_fichier_logo(extraire_attribut($lien_logo, 'src'));
 
-	// sinon calculer le code html de l'image, sauf si reduire_image le donne
-	if (!$lien_logo)
-		$lien_logo = affiche_logos(array($logo), $lien, $align);
+	// Calculer le code html complet (cf. calcule_logo)
+	$logo = inserer_attribut($logo, 'alt', '');
+	$logo = inserer_attribut($logo, 'style', 'border-width: 0px;');
+	$logo = inserer_attribut($logo, 'class', 'spip_logos');
+	if ($align)
+		$logo = inserer_attribut($logo, 'align', $align);
 
-	return $lien_logo;
+	if ($lien)
+		$logo = "<a href='$lien'>$logo</a>";
+
+	return $logo;
 }
 
 
