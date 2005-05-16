@@ -75,4 +75,3 @@ function calculer_popularites($t) {
 	ecrire_metas();
 }
 ?>
-
