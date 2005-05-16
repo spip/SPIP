@@ -116,6 +116,10 @@ function init_http($get, $url) {
 		if ($referer = lire_meta("adresse_site"))
 			fputs($f, "Referer: $referer/\r\n");
 
+		// On sait lire du gzip
+		if ($GLOBALS['flag_gz'])
+			fputs($f, "Accept-Encoding: gzip\r\n");
+
 	}
 	// fallback : fopen
 	else if (!$GLOBALS['tester_proxy']) {
@@ -172,6 +176,8 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 					$location = suivre_lien($url, $r[1]);
 					spip_log("Location: $location");
 				}
+				if (preg_match(",^Content-Encoding: .*gzip,i", $s))
+					$gz = true;
 			}
 			if ($status >= 300 AND $status < 400 AND $location)
 				$url = $location;
@@ -185,14 +191,18 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	}
 
 	// Contenu de la page
+	$result = '';
 	if (!$f) {
 		spip_log("ECHEC chargement $url");
-		$result = '';
 	} else {
 		while (!feof($f) AND strlen($result)<$taille_max)
 			$result .= fread($f, 16384);
 		fclose($f);
 	}
+
+	// Decompresser le flux
+	if ($gz)
+		$result = gzinflate(substr($result,10));
 
 	// Faut-il l'importer dans notre charset local ?
 	if ($munge_charset) {

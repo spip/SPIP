@@ -652,7 +652,6 @@ function test_obgz () {
 	&& $GLOBALS['flag_ob']
 	&& (phpversion()<>'4.0.4')
 	&& function_exists("ob_gzhandler")
-	&& $GLOBALS['flag_obgz']
 	// special bug de proxy
 	&& !eregi("NetCache|Hasd_proxy", $GLOBALS['HTTP_VIA'])
 	// special bug Netscape Win 4.0x
@@ -664,11 +663,13 @@ function test_obgz () {
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler");
 }
+
 // si un buffer est deja ouvert, stop
 if ($flag_ob AND !headers_sent()) {
 	@header("Vary: Cookie, Accept-Encoding");
-	if (test_obgz())
+	if (test_obgz()) {
 		ob_start('ob_gzhandler');
+	}
 }
 
 
