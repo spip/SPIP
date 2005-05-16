@@ -277,6 +277,15 @@ $spip_index_forum_key = array(
 		"KEY `hash`"	=> "`hash`",
 		"KEY id_forum"	=> "id_forum");
 
+$spip_index_documents = array(
+		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
+		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"id_document"	=> "INT UNSIGNED NOT NULL");
+
+$spip_index_documents_key = array(
+		"KEY `hash`"	=> "`hash`",
+		"KEY id_document"	=> "id_document");
+
 $spip_index_dico = array(
 		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
 		"dico"		=> "VARCHAR (30) NOT NULL");
@@ -401,6 +410,8 @@ $tables_auxiliaires  =
 				    'key' => &$spip_index_signatures_key),
 	'spip_index_forum' => array('field' => &$spip_index_forum,
 			       'key' => &$spip_index_forum_key),
+	'spip_index_documents' => array('field' => &$spip_index_documents,
+			       'key' => &$spip_index_documents_key),
 	'spip_index_dico' => array('field' => &$spip_index_dico,
 			      'key' => &$spip_index_dico_key),
 	'spip_versions'	=> array('field' => &$spip_versions,

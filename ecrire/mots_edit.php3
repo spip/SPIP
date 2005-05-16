@@ -58,7 +58,7 @@ if ($connect_statut == '0minirezo') {
 
 		if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire ("inc_index.php3");
-			indexer_mot($id_mot);
+			marquer_indexer('mot', $id_mot);
 		}
 	}
 	else if ($new == 'oui') {

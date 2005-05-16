@@ -40,7 +40,7 @@ if (($id > 0) && ($connect_statut == "0minirezo")) {
 			if ($statut == 'publie') {
 				spip_query("UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article");
 				include_ecrire ("inc_index.php3");
-				indexer_article($id_article);
+				marquer_indexer('article', $id_article);
 				calculer_rubriques();
 				include_ecrire("inc_mail.php3");
 				envoyer_mail_publication($id_article);

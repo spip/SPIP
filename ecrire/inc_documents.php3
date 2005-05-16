@@ -702,7 +702,12 @@ entites_html($document['fichier'])."\" />\n";
 				$link->addVar('id_document', $id_document);
 				$link->addVar('show_docs', $id_document);
 
-				echo $link->getForm('POST', $album);
+				if ($document['id_article'])
+					$query = '?id_article='.$document['id_article'];
+				if ($document['id_rubrique'])
+					$query = '?id_rubrique='.$document['id_rubrique'];
+
+				echo $link->getForm('POST', "$query#$album");
 				echo "<b>"._T('titre_titre_document')."</b><br />\n";
 				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
 
@@ -1418,6 +1423,10 @@ function maj_documents ($id_objet, $type) {
 			}
 
 		}
+
+		// Demander l'indexation du document
+		include_ecrire('inc_index.php3');
+		marquer_indexer('document', $id_document);
 
 	}
 }

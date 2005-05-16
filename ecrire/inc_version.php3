@@ -409,7 +409,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.815;
+$spip_version = 1.816;
 
 // version de spip
 $spip_version_affichee = "1.8.1 CVS";
@@ -812,9 +812,8 @@ class Link {
 	// (tag ouvrant + entrees cachees representant les variables)
 	//
 
-	function getForm($method = 'get', $anchor = '', $enctype = '') {
-		if ($anchor) $anchor = '#'.$anchor;
-		$form = "<form method='$method' action='".$this->file.$anchor."'";
+	function getForm($method = 'get', $query = '', $enctype = '') {
+		$form = "<form method='$method' action='".$this->file.$query."'";
 		if ($enctype) $form .= " enctype='$enctype'";
 		$form .= " style='border: 0px; margin: 0px;'>\n";
 		foreach ($this->vars as $name => $value) {

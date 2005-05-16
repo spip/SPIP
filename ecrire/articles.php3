@@ -123,7 +123,7 @@ if ($statut_nouv) {
 // 'publie' => reindexer
 if ($ok_nouveau_statut AND $statut_nouv == 'publie' AND $statut_nouv != $statut_ancien AND (lire_meta('activer_moteur') == 'oui')) {
 	include_ecrire ("inc_index.php3");
-	indexer_article($id_article);
+	marquer_indexer('article', $id_article);
 }
 
 // 'dŽpublie' => invalider les caches
@@ -269,7 +269,7 @@ if ($titre && !$ajout_forum && $flag_editable) {
 		}
 		if (lire_meta('activer_moteur') == 'oui') {
 			include_ecrire ("inc_index.php3");
-			indexer_article($id_article);
+			marquer_indexer('article', $id_article);
 		}
 	}
 
@@ -995,7 +995,7 @@ if ($ajout_auteur && $flag_editable) {
 
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
-		indexer_article($id_article);
+		marquer_indexer('article', $id_article);
 	}
 }
 
@@ -1004,7 +1004,7 @@ if ($supp_auteur && $flag_editable) {
 	$result=spip_query($query);
 	if (lire_meta('activer_moteur') == 'oui') {
 		include_ecrire ("inc_index.php3");
-		indexer_article($id_article);
+		marquer_indexer('article', $id_article);
 	}
 }
 
