@@ -192,11 +192,11 @@ function calculer_balise($nom, $p) {
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
 	$param = "";
-	if ($a = $p->filtres) {
+	if ($a = $p->args) {
 		$c = array_shift($a);
 		if  (!array_shift($c)) {
 		  $p->fonctions = $a;
-		  array_shift( $p->filtres );
+		  array_shift( $p->args );
 		  $param = compose_filtres_args($p, $c, ',');
 		}
 	}
@@ -205,11 +205,11 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . $collecte
 	  . ($collecte ? $param : substr($param,1)) # virer la virgule
 	  . "),\n\tarray("
-	  . argumenter_balise($p->filtres, "', '")
+	  . argumenter_balise($p->args, "', '")
 	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
 	$p->fonctions = array();
-	$p->filtres = array();
+	$p->args = array();
 
 	// Cas particulier de #FORMULAIRE_FORUM : inserer l'invalideur
 	if ($nom == 'FORMULAIRE_FORUM')
@@ -223,7 +223,7 @@ function param_balise(&$p) {
   $c = array_shift($a);
   if  ($c[0]) return "";
   $p->fonctions = $a;
-  array_shift( $p->filtres );
+  array_shift( $p->args );
   return $c[1];
 }
 
@@ -253,7 +253,7 @@ function applique_filtres($p) {
 //  processeurs standards (cf inc-balises.php3)
 	$code = ($p->etoile ? $p->code : champs_traitements($p));
 	// Appliquer les filtres perso
-	if ($p->filtres) $code = compose_filtres($p, $code);
+	if ($p->args) $code = compose_filtres($p, $code);
 	// post-traitement securite
 	if ($p->statut == 'html') $code = "interdire_scripts($code)";
 	return $code;
@@ -261,7 +261,7 @@ function applique_filtres($p) {
 
 function compose_filtres($p, $code)
 {
-  foreach($p->filtres as $filtre) {
+  foreach($p->args as $filtre) {
     $fonc = array_shift($filtre);
     if ($fonc) {
       $arglist = compose_filtres_args($p, $filtre, ($fonc == '?' ? ':' : ','));

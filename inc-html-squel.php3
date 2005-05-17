@@ -33,43 +33,39 @@ define('BALISE_DE_BOUCLE',
 	')\)((' .
 	PARAM_DE_BOUCLE .
 	')*)[[:space:]]*>');
-define('PARAM_INCLURE','[[:space:]]*\{[[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=[[:space:]]*([^\{\}]*(\{[^\}]*\}[^\} ]*)?))?[[:space:]]*\}');
-define('BALISE_INCLURE',"<INCLU[DR]E[[:space:]]*\(" .
-       '([-_0-9a-zA-Z./ ]+)' .
-	'\)((' .
-	PARAM_INCLURE .
-	')*)[[:space:]]*>');
+define('PARAM_INCLURE','^[[:space:]]*\{[[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=)?');
+define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
 define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
-
 function phraser_inclure($texte, $result) {
-	while (($p=strpos($texte, '<INCLU')) !== false) {
-		$fin = substr($texte, $p);
-
-		if (!ereg('^' . BALISE_INCLURE, $fin, $match)) break;
-		$s = $match[0];
-		$debut = substr($texte, 0, $p);
-		$texte = substr($fin, strlen($s));
-
-		if ($debut) $result = phraser_idiomes($debut, $result);
+	while (ereg(BALISE_INCLURE, $texte, $match)) {
+		$p = strpos($texte,$match[0]);
+		if ($p) $result = phraser_idiomes(substr($texte, 0, $p), $result);
 
 		$champ = new Inclure;
-		$champ->fichier = $match[1];
-		$champ->params = array();
-		$p = trim($match[2]);
-		if ($p) {
-			while (ereg('^' . PARAM_INCLURE . '(.*)$', $p, $m)) {
-				$champ->params[$m[1]] = $m[3];
-				$p = $m[5];
-			}
-			
-			if ($p)
-				erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
-				$s);
+		$champ->texte = $match[1];
+		$texte = substr($texte, $p+strlen($match[0]));
+		// on assimile {var=val} a une liste de un argument sans fonction
+		phraser_args($texte,">","",$result,$champ);
+		foreach ($champ->args as $k => $v) {
+		  $var = $v[1][0];
+		  if ($var->type != 'texte')
+			erreur_squelette(_T('zbug_parametres_inclus_incorrects'),
+					 $match[0]);
+		  else {
+		    ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
+		    if ($m[2]) {
+		      $champ->args[$k][0] = $m[1];
+		      $champ->args[$k][1][0]->texte = $m[3];
+		    }
+		    else
+		      $champ->args[$k] = array($m[1]);
+		  }
 		}
+		$texte = $champ->cond_apres;
+		$champ->cond_apres = "";
 		$result[] = $champ;
 	}
-
 	return (($texte==="") ? $result : phraser_idiomes($texte, $result));
 }
 
@@ -115,7 +111,7 @@ function phraser_idiomes($texte,$result) {
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
-		phraser_filtres($match[5], ":", '', array(), $champ);
+		phraser_args($match[5], ":", '', array(), $champ);
 		$result[] = $champ;
 	}
 	if ($texte!=="")  $result = phraser_champs($texte,$result);
@@ -162,7 +158,7 @@ function phraser_champs_etendus($texte, $result) {
 // renvoie la liste des lexemes d'origine augmentee
 // de ceux trouves dans les arguments des filtres (rare)
 
-function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
+function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && $texte[0] != $fin) {
       ereg("^(\|?[^{)|]*)(.*)$", $texte, $match);
@@ -184,8 +180,7 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
-
-		if ($regs[1]) { // valeur = ", ', ou vide
+		if (trim($regs[1])) { // valeur = ", ', ou vide
 			$champ = new Texte;
 			$champ->texte = $arg;
 			$result[] = $champ;
@@ -206,7 +201,7 @@ function phraser_filtres($texte, $fin, $sep, $result, &$pointeur_champ) {
 	$args = substr($args,1);
       }
       $n = strlen($suite) - strlen($args);
-      $pointeur_champ->filtres[] = $res;
+      $pointeur_champ->args[] = $res;
       // pour les balises avec faux filtres qui boudent ce dur larbeur
       $pointeur_champ->fonctions[] = array($fonc, substr($suite, 0, $n));
       $texte = ltrim($args);
@@ -235,8 +230,8 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		$champ->nom_boucle = $regs[3];
 		$champ->nom_champ = $regs[4];
 		$champ->etoile = $regs[5];
-		// phraser_filtres indiquera ou commence cond_apres
-		$result = phraser_filtres($regs[6], ")", $sep, $result, $champ);
+		// phraser_args indiquera ou commence cond_apres
+		$result = phraser_args($regs[6], ")", $sep, $result, $champ);
 		$champ->cond_avant = phraser_champs_exterieurs($regs[1],$sep,$result);
 		$champ->cond_apres = phraser_champs_exterieurs($champ->cond_apres,$sep,$result);
 
