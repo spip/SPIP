@@ -20,6 +20,19 @@ function my_sel($num, $tex, $comp) {
     ">$tex</option>\n";
 }
 
+function format_mysql_date($annee=0, $mois=0, $jour=0, $h=0, $m=0, $s=0) {
+	$annee = sprintf("%04s",$annee);
+	$mois = sprintf("%02s",$mois);
+
+	if ($annee == "0000") $mois = 0;
+	if ($mois == "00") $jour = 0;
+
+	return sprintf("%04s",$annee) . '-' . sprintf("%02s",$mois) . '-'
+		. sprintf("%02s",$jour) . ' ' . sprintf("%02s",$h) . ':'
+		. sprintf("%02s",$m) . ':' . sprintf("%02s",$s);
+}
+
+
 function afficher_mois($mois, $attributs, $autre=false){
   return
 	"<select $attributs>\n" .
@@ -56,6 +69,26 @@ function afficher_jour($jour, $attributs, $autre=false){
 	}
 	return "<select $attributs>\n$res</select>\n";
 }
+
+function afficher_heure($heure, $attributs, $autre=false){
+	for($i=0;$i<=23;$i++){
+		$aff = sprintf("%02s", $i);
+		$res .= my_sel($i,$aff,$heure);
+	}
+	return "<select $attributs>\n$res</select>\n";
+}
+
+function afficher_minute($minute, $attributs, $autre=false){
+	for($i=0;$i<=59;$i+=5){
+		$aff = sprintf("%02s", $i);
+		$res .= my_sel($i,$aff,$minute);
+
+		if ($minute>$i AND $minute<$i+5)
+			$res .= my_sel($minute,sprintf("%02s", $minute),$minute);
+	}
+	return "<select $attributs>\n$res</select>\n";
+}
+
 
 function afficher_jour_mois_annee_h_m($date, $heures, $minutes, $suffixe='')
 {

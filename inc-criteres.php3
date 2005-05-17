@@ -454,7 +454,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				$col = 'id_rubrique';
 
 			// Cas particulier : expressions de date
-			if (ereg("^(date|mois|annee|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
+			if (ereg("^(date|mois|annee|heure|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
 				$col = $regs[1];
 				if ($regs[2]) {
 					$date_orig = $id_table . ".date_redac";
@@ -479,6 +479,10 @@ function calculer_critere_DEFAUT($idb, &$boucles, $param, $not) {
 				}
 				else if ($col == 'annee') {
 					$col = "YEAR($date_orig)";
+					$col_table = '';
+				}
+				else if ($col == 'heure') {
+					$col = "DATE_FORMAT($date_orig, '%H:%i')";
 					$col_table = '';
 				}
 				else if ($col == 'age') {

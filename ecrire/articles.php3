@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("inc.php3");
 
 include_ecrire ("inc_logos.php3");
@@ -133,26 +132,24 @@ if ($ok_nouveau_statut AND $statut_ancien == 'publie' AND $statut_nouv != $statu
 }
 
 if ($jour && $flag_editable) {
-	if ($annee == "0000") $mois = "00";
-	if ($mois == "00") $jour = "00";
-	$query = "UPDATE spip_articles SET date='$annee-$mois-$jour' WHERE id_article=$id_article";
-	$result = spip_query($query);
+	$date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
+	spip_query("UPDATE spip_articles SET date='$date'
+		WHERE id_article=$id_article");
 	calculer_rubriques();
 }
 
 if ($jour_redac && $flag_editable) {
 	if ($annee_redac<>'' AND $annee_redac < 1001) $annee_redac += 9000;
 
-	if ($mois_redac == "00") $jour_redac = "00";
+	if ($avec_redac == 'non')
+		$date_redac = format_mysql_date();
+	else
+		$date_redac = format_mysql_date(
+			$annee_redac, $mois_redac, $jour_redac,
+			$heure_redac, $minute_redac);
 
-	if ($avec_redac=="non"){
-		$annee_redac = '0000';
-		$mois_redac = '00';
-		$jour_redac = '00';
-	}
-
-	$query = "UPDATE spip_articles SET date_redac='$annee_redac-$mois_redac-$jour_redac' WHERE id_article=$id_article";
-	$result = spip_query($query);
+	spip_query("UPDATE spip_articles SET date_redac='$date_redac'
+		WHERE id_article=$id_article");
 }
 
 
@@ -356,17 +353,21 @@ if (substr($chapo, 0, 1) == '=') {
 	$virtuel = substr($chapo, 1);
 }
 
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date_redac, $regs)) {
-        $mois_redac = $regs[2];
-        $jour_redac = $regs[3];
-        $annee_redac = $regs[1];
-        if ($annee_redac > 4000) $annee_redac -= 9000;
+if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
+	$annee_redac = $regs[1];
+	$mois_redac = $regs[2];
+	$jour_redac = $regs[3];
+	$heure_redac = $regs[4];
+	$minute_redac = $regs[5];
+	if ($annee_redac > 4000) $annee_redac -= 9000;
 }
 
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)) {
-        $mois = $regs[2];
-        $jour = $regs[3];
-        $annee = $regs[1];
+if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
+	$annee = $regs[1];
+	$mois = $regs[2];
+	$jour = $regs[3];
+	$heure = $regs[4];
+	$minute = $regs[5];
 }
 
 
@@ -724,7 +725,6 @@ if ($statut_article == 'prop') {
 	echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2 COLOR='red'><B>"._T('text_article_propose_publication')."</B></FONT></P>";
 }
 
-
 echo "</td>";
 
 
@@ -787,13 +787,19 @@ if ($flag_editable AND $options == 'avancees') {
 		echo "<div><b>";
 		echo bouton_block_invisible("datepub");
 		echo "<span class='verdana1'>"._T('texte_date_publication_article').'</span> ';
-		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
+		echo majuscules(affdate($date)),
+#			', <small>'._T('date_fmt_heures_minutes',
+#				array('h' =>$heure, 'm'=>$minute)), '</small>',
+			"</b>".aide('artdate')."</div>";
 
 		echo debut_block_invisible("datepub"),
 		  "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>",
 		  afficher_jour($jour, "name='jour' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
 		  afficher_mois($mois, "name='mois' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\"", true),
 		  afficher_annee($annee, "name='annee' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
+		  ' - ',
+		  afficher_heure($heure, "name='heure' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
+		  afficher_minute($minute, "name='minute' size='1' class='fondl' onChange=\"setvisibility('valider_date', 'visible')\""),
 		  "<span class='visible_au_chargement' id='valider_date'>",
 		  " &nbsp; <INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'>",
 		  "</span>",
@@ -805,30 +811,42 @@ if ($flag_editable AND $options == 'avancees') {
 		echo majuscules(affdate($date))."</b>".aide('artdate')."</div>";
 	}
 
-	if (($options == 'avancees' AND $articles_redac != 'non') OR ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00')) {
-		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') $date_affichee = affdate($date_redac);
-		else $date_affichee = _T('jour_non_connu_nc');
-		
+	$possedeDateRedac=($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00');
+	if (($options == 'avancees' AND $articles_redac != 'non')
+	OR $possedeDateRedac) {
+		if ($possedeDateRedac)
+			$date_affichee = majuscules(affdate($date_redac))
+#			." " ._T('date_fmt_heures_minutes', array('h' =>$heure_redac, 'm'=>$minute_redac))
+			;
+		else
+			$date_affichee = majuscules(_T('jour_non_connu_nc'));
+
 		echo "<div><b>";
 		echo bouton_block_invisible('dateredac');
-		echo "<span class='verdana1'>".majuscules(_T('texte_date_publication_anterieure')).'</span> '.majuscules($date_affichee)." ".aide('artdate_redac')."</b></div>";
-
+		echo "<span class='verdana1'>"
+			. majuscules(_T('texte_date_publication_anterieure'))
+			.'</span> '. $date_affichee ." ".aide('artdate_redac')."</b></div>";
 
 		echo debut_block_invisible('dateredac');
 		echo "<div style='margin: 5px; margin-$spip_lang_left: 20px;'>";
 		echo '<table cellpadding="0" cellspacing="0" border="0" width="100%">';
 		echo '<tr><td align="$spip_lang_left">';
 		echo '<input type="radio" name="avec_redac" value="non" id="avec_redac_on"';
-		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac == '0000-00-00') echo ' checked="checked"';
+		if (!$possedeDateRedac) echo ' checked="checked"';
 		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
 		echo ' /> <label for="avec_redac_on">'._T('texte_date_publication_anterieure_nonaffichee').'</label>';
 		echo '<br /><input type="radio" name="avec_redac" value="oui" id="avec_redac_off"';
-		if ($annee_redac.'-'.$mois_redac.'-'.$jour_redac != '0000-00-00') echo ' checked="checked"';
+		if ($possedeDateRedac) echo ' checked="checked"';
 		echo " onClick=\"setvisibility('valider_date_prec', 'visible')\"";
 		echo ' /> <label for="avec_redac_off">'._T('bouton_radio_afficher').' :</label> ',
-		  afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
-		  afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true);
+		afficher_jour($jour_redac, "name='jour_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
+		afficher_mois($mois_redac, "name='mois_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true);
 		echo "<input type='text' name='annee_redac' class='fondl' value='".$annee_redac."' size='5' maxlength='4' onClick=\"setvisibility('valider_date_prec', 'visible')\"/>";
+
+		echo '<div align="center">',
+		afficher_heure($heure_redac, "name='heure_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
+		afficher_minute($minute_redac, "name='minute_redac' class='fondl' onChange=\"setvisibility('valider_date_prec', 'visible')\"", true),
+		"</div>\n";
 
 		echo '</td><td align="$spip_lang_right">';
 		echo "<span class='visible_au_chargement' id='valider_date_prec'>";
