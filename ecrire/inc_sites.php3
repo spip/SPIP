@@ -191,14 +191,15 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	}
 
 	// Contenu de la page
-	$result = '';
 	if (!$f) {
 		spip_log("ECHEC chargement $url");
-	} else {
-		while (!feof($f) AND strlen($result)<$taille_max)
-			$result .= fread($f, 16384);
-		fclose($f);
+		return false;
 	}
+
+	$result = '';
+	while (!feof($f) AND strlen($result)<$taille_max)
+		$result .= fread($f, 16384);
+	fclose($f);
 
 	// Decompresser le flux
 	if ($gz)
