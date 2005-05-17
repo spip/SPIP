@@ -661,7 +661,9 @@ function test_obgz () {
 	&& !($GLOBALS['flag_sapi_name'] AND ereg("^apache2", @php_sapi_name()))
 	// si la compression est deja commencee, stop
 	&& !@ini_get("zlib.output_compression")
-	&& !@ini_get("output_handler");
+	&& !@ini_get("output_handler")
+	&& !$GLOBALS['var_mode'] # bug avec le debugueur qui appelle ob_end_clean()
+	;
 }
 
 // si un buffer est deja ouvert, stop
