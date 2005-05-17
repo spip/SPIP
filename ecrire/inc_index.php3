@@ -445,7 +445,7 @@ function executer_une_indexation_syndic() {
 	if ($row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 0,1"))) {
 		$id_syndic = $row['id_syndic'];
 		spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
-		indexer_syndic($id_syndic);
+		marquer_indexer('syndic', $id_syndic);
 	}
 	return $id_syndic;
 }
