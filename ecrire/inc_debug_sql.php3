@@ -247,13 +247,15 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "</fieldset></div>";
 	} else if ($var_mode_affiche == 'boucle') {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		highlight_string($res);
+		echo "<pre>".entites_html($res)."</pre>";
 		echo "</fieldset></div>";
 	  }
     }
 
 	if ($texte) {
-	  echo "<div id=\"debug_boucle\"><fieldset><legend>",$GLOBALS['var_mode_affiche'],"</legend>";
+	  echo "<div id=\"debug_boucle\"><fieldset><legend>";
+		echo _T('zbug_' . $GLOBALS['var_mode_affiche']);
+		echo "</legend>";
 	  ob_start();
 	  highlight_string($texte);
 	  $s = ob_get_contents();
