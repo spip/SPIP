@@ -176,7 +176,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
 		else
-			ereg("^( *)([^,{}]*(\{[^{}]*\}[^,{}]*)*[^,}])([,}].*)$", $args, $regs);
+			ereg("^( *)([^,{}]*(\{[^{}]*\}[^,{}]*)*[^,\}]*)([,}$fin].*)$", $args, $regs);
 
 		$args = ltrim($regs[count($regs)-1]);
 		$arg = $regs[2];
@@ -185,8 +185,17 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$champ->texte = $arg;
 			$result[] = $champ;
 			$collecte[] = $champ;
-		} else {
-		  $arg = phraser_champs_exterieurs(ltrim($arg), $sep, $result);
+		} else {   // valeur = ", ', ou vide
+		  if ((count($regs) > 3) &&
+		      ereg("^(.*)(#[A-Z0-9:_=]+\{.*\})(.*)$",$arg, $r))
+		    {
+		      // champ avec arg, sans les [( )]: on les rajoute
+		      $arg = $r[1] .  '[(' . $r[2] . ')' . $r[3] . ']';
+		      $arg = phraser_champs_etendus($arg, array());
+		      
+		    } else {
+		    $arg = phraser_champs_exterieurs(ltrim($arg), $sep, $result);
+		  }
 		  $collecte = array_merge($collecte, $arg);
 		  $result = array_merge($result, $arg);
 		}
@@ -260,38 +269,30 @@ function phraser_param($params, &$result) {
 	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', trim($params), $m)) {
 		$params = $m[3];
 		$param = trim($m[1]);
-		// cas d'un critere avec {...}
-		if ($m[2]) {
-			$params2[] = $param;
-		}
-	      // traiter qq lexemes particuliers pour faciliter la suite
-		else if (strlen($param) < 2)
-			$params2[] = $param;
-		else if (($param == 'tout') OR ($param == 'tous'))
+	// traiter qq lexemes particuliers pour faciliter la suite
+		if (($param == 'tout') OR ($param == 'tous'))
 			$result->tout = true;
 		else if ($param == 'plat') 
 			$result->plat = true;
-		else if ($param == 'unique')
-			$params2[] = 'doublons';
-		else {
-			if ($type == 'hierarchie') {
+	// les separateurs (specs CSS3 aN+b a finaliser)
+		else if (ereg('^"([^"}]*)"( *, *(\-?[0-9]*)n)?(\+?([0-9]+))?)?$', $param, $args))
+			  $result->separateur[] = $args[1];
+
 	// Boucle hierarchie, analyser le critere id_article - id_rubrique
 	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
 	// forcer {tout} pour avoir la rubrique mere...
-				if ($param == 'id_article' OR $param == 'id_syndic') {
-					$result->tout = true;
-					$param = "";
-				} else if ($param == 'id_rubrique')
-					$param = "";
-			}
-			// les separateurs (specs CSS3 aN+b a finaliser)
-			if (ereg('^"([^"}]*)"( *, *(\-?[0-9]*)n)?(\+?([0-9]+))?)?$', $param, $args))
-			  $result->separateur[] = $args[1];
-			else {
-			  if ($param) $params2[] = $param;
-			}
-		}
+
+		else if (($type == 'hierarchie') &&
+			 ($param == 'id_article' OR $param == 'id_syndic'))
+			$result->tout = true;
+		else if (($type == 'hierarchie') && ($param == 'id_rubrique'))
+			{;}
+		else  if ($param == 'unique')
+			$params2[] = 'doublons';
+		else
+			$params2[] = $param;
 	}
+
 	$result->param = $params2;
 }
 
