@@ -156,10 +156,7 @@ input.formrecherche {
  *  Images typographiques (via image_typo)
  */
 .image_typo {
-	display: inline;
-}
-.texte_typo {
-	display: none;
+	behavior: url("win_png.htc");
 }
 
 
