@@ -56,7 +56,9 @@ function phraser_inclure($texte, $result) {
 		    ereg("^([^=]*)(=)?(.*)$", $var->texte,$m);
 		    if ($m[2]) {
 		      $champ->args[$k][0] = $m[1];
-		      $champ->args[$k][1][0]->texte = $m[3];
+		      $val = $m[3];
+		      if (ereg('^[\'"](.*)[\'"]$', $val, $m)) $val = $m[1];
+		      $champ->args[$k][1][0]->texte = $val;
 		    }
 		    else
 		      $champ->args[$k] = array($m[1]);
@@ -265,6 +267,7 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 
 function phraser_param($params, &$result) {
 	$params2 = array();
+	$args = array();
 	$type = $result->type_requete;
 	while (ereg('^' . PARAM_DE_BOUCLE . '[[:space:]]*(.*)$', trim($params), $m)) {
 		$params = $m[3];
@@ -275,25 +278,35 @@ function phraser_param($params, &$result) {
 		else if ($param == 'plat') 
 			$result->plat = true;
 	// les separateurs (specs CSS3 aN+b a finaliser)
-		else if (ereg('^"([^"}]*)"( *, *(\-?[0-9]*)n)?(\+?([0-9]+))?)?$', $param, $args))
-			  $result->separateur[] = $args[1];
+		else if (ereg('^"([^"}]*)"( *, *(\-?[0-9]*)n)?(\+?([0-9]+))?)?$', $param, $m))
+			$result->separateur[] = $m[1];
 
 	// Boucle hierarchie, analyser le critere id_article - id_rubrique
 	// - id_syndic, afin, dans les cas autres que {id_rubrique}, de
 	// forcer {tout} pour avoir la rubrique mere...
 
 		else if (($type == 'hierarchie') &&
-			 ($param == 'id_article' OR $param == 'id_syndic'))
+			($param == 'id_article' OR $param == 'id_syndic'))
 			$result->tout = true;
 		else if (($type == 'hierarchie') && ($param == 'id_rubrique'))
 			{;}
-		else  if ($param == 'unique')
-			$params2[] = 'doublons';
-		else
-			$params2[] = $param;
+		else { 
+		  $params2[] = ($param == 'unique') ? 'doublons' :$param;
+		  /* pour bientot
+		   if (ereg('^([0-9a-zA-Z#_\{\}-]+)([,/])([0-9a-zA-Z#_\{\}-]+)$', $param, $match))
+			  $args['parties'] = $match;
+			else if (eregi('^(`?[a-z_]+\(?[a-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*)"?$', $param, $match))
+			  $args['comparaison'] = $match;
+			else {
+			  preg_match("/^([!]?)[[:space:]]*(debut|([a-z_]+))/ism", $param, $match);
+			  // contient aussi les comparaisons implicites !
+			  $args[$match[2]] = $match;
+		  */
+		}
 	}
 
 	$result->param = $params2;
+	// pour bientot	$result->args = $args2;
 }
 
 function phraser($texte, $id_parent, &$boucles, $nom) {
