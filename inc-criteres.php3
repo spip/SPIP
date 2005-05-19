@@ -279,7 +279,17 @@ function critere_par_dist($idb, &$boucles, $param, $not) {
 	}
 }
 
+// Le critere {statut=...}
+// particularite : si on l'invoque dans une boucle il faut interdire
+// a la boucle de mettre ses propres criteres de statut
+// http://www.spip.net/@statut (a documenter)
+function critere_statut_dist($idb, &$boucles, $param, $not) {
+	// interdire a function boucle_BOUCLE() de regler le statut
+	$boucle = &$boucles[$idb];
+	$boucle->where['statut'] = '1';
 
+	return calculer_critere_DEFAUT($idb, &$boucles, $param, $not);
+}
 
 function calculer_critere_parties($idb, &$boucles, $param, $not, $match) {
 	$boucle = &$boucles[$idb];

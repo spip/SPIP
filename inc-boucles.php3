@@ -45,12 +45,16 @@ function boucle_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_articles AS $id_table";
-	if (!$GLOBALS['var_preview']) {
-		$boucle->where[] = "$id_table.statut='publie'";
-		if (lire_meta("post_dates") == 'non')
-			$boucle->where[] = "$id_table.date < NOW()";
-	} else
-		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		if (!$GLOBALS['var_preview']) {
+			$boucle->where['statut'] = "$id_table.statut='publie'";
+			if (lire_meta("post_dates") == 'non')
+				$boucle->where['statut'] .= " AND $id_table.date < NOW()";
+		} else
+			$boucle->where['statut'] = "$id_table.statut IN ('publie','prop')";
+	}
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -61,19 +65,24 @@ function boucle_AUTEURS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_auteurs AS $id_table";
-	// Si pas de lien avec un article, selectionner
-	// uniquement les auteurs d'un article publie
-	if (!$GLOBALS['var_preview'])
-	if (!$boucle->lien AND !$boucle->tout) {
-		$boucle->from[] =  "spip_auteurs_articles AS lien";
-		$boucle->from[] =  "spip_articles AS articles";
-		$boucle->where[] = "lien.id_auteur=$id_table.id_auteur";
-		$boucle->where[] = 'lien.id_article=articles.id_article';
-		$boucle->where[] = "articles.statut='publie'";
-		$boucle->group =  $boucle->id_table . '.' . $boucle->primary;
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		// Si pas de lien avec un article, selectionner
+		// uniquement les auteurs d'un article publie
+		if (!$GLOBALS['var_preview'])
+		if (!$boucle->lien AND !$boucle->tout) {
+			$boucle->from[] =  "spip_auteurs_articles AS lien";
+			$boucle->from[] =  "spip_articles AS articles";
+			$boucle->where[] = "lien.id_auteur=$id_table.id_auteur";
+			$boucle->where[] = 'lien.id_article=articles.id_article';
+			$boucle->where['statut'] = "articles.statut='publie'";
+			$boucle->group =  $boucle->id_table . '.' . $boucle->primary;
+		}
+		// pas d'auteurs poubellises
+		$boucle->where[] = "NOT($id_table.statut='5poubelle')";
 	}
-	// pas d'auteurs poubellises
-	$boucle->where[] = "NOT($id_table.statut='5poubelle')";
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -84,10 +93,15 @@ function boucle_BREVES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_breves AS $id_table";
-	if (!$GLOBALS['var_preview'])
-		$boucle->where[] = "$id_table.statut='publie'";
-	else
-		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		if (!$GLOBALS['var_preview'])
+			$boucle->where['statut'] = "$id_table.statut='publie'";
+		else
+			$boucle->where['statut'] = "$id_table.statut IN ('publie','prop')";
+	}
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -100,11 +114,14 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_forum AS $id_table";
 	// Par defaut, selectionner uniquement les forums sans pere
-	if (!$boucle->tout AND !$boucle->plat) 
-		{
-	$boucle->where[] = "$id_table.id_parent=0";
-		}
-	$boucle->where[] = "$id_table.statut='publie'";
+	if (!$boucle->tout AND !$boucle->plat)
+		$boucle->where[] = "$id_table.id_parent=0";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		$boucle->where['statut'] = "$id_table.statut='publie'";
+	}
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -120,7 +137,12 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$boucle->from[] =  "spip_articles articles";
 	$boucle->where[] = "petitions.id_article=articles.id_article";
 	$boucle->where[] = "petitions.id_article=$id_table.id_article";
-	$boucle->where[] = "$id_table.statut='publie'";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		$boucle->where['statut'] = "$id_table.statut='publie'";
+	}
+
 	$boucle->group =  $boucle->id_table . '.' . $boucle->primary;
 	return calculer_boucle($id_boucle, $boucles); 
 }
@@ -182,8 +204,14 @@ function boucle_RUBRIQUES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_rubriques AS $id_table";
-	if (!$GLOBALS['var_preview'])
-		if (!$boucle->tout) $boucle->where[] = "$id_table.statut='publie'";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		if (!$GLOBALS['var_preview'])
+			if (!$boucle->tout)
+				$boucle->where['statut'] = "$id_table.statut='publie'";
+	}
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -220,10 +248,15 @@ function boucle_SYNDICATION_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[] =  "spip_syndic AS $id_table";
-	if (!$GLOBALS['var_preview']) {
-		$boucle->where[] = "$id_table.statut='publie'";
-	} else
-		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		if (!$GLOBALS['var_preview']) {
+			$boucle->where['statut'] = "$id_table.statut='publie'";
+		} else
+			$boucle->where['statut'] = "$id_table.statut IN ('publie','prop')";
+	}
+
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
@@ -237,11 +270,16 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle->from[] =  "spip_syndic_articles  AS $id_table";
 	$boucle->from[] =  "spip_syndic AS syndic";
 	$boucle->where[] = "$id_table.id_syndic=syndic.id_syndic";
-	if (!$GLOBALS['var_preview']) {
-		$boucle->where[] = "$id_table.statut='publie'";
-		$boucle->where[] = "syndic.statut='publie'";
-	} else
-		$boucle->where[] = "$id_table.statut IN ('publie','prop')";
+
+	// Restreindre aux elements publies
+	if (!isset($boucle->where['statut'])) {
+		if (!$GLOBALS['var_preview']) {
+			$boucle->where['statut'] = "$id_table.statut='publie'";
+			$boucle->where[] = "syndic.statut='publie'";
+		} else
+			$boucle->where['statut'] = "$id_table.statut IN ('publie','prop')";
+	}
+
 	$boucle->select[]='syndic.nom_site AS nom_site'; # derogation zarbi
 	$boucle->select[]='syndic.url_site AS url_site'; # idem
 	return calculer_boucle($id_boucle, $boucles); 
