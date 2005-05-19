@@ -1126,6 +1126,25 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 
 
 function image_typo() {
+	/*
+	arguments autorises:
+	
+	$texte : le texte a transformer; attention: c'est toujours le premier argument, et c'est automatique dans les filtres
+	$couleur : la couleur du texte dans l'image - pas de dieze
+	$fond: ne pas utiliser, puisque transparence du PNG
+	$ombre: la couleur de l'ombre
+	$ombrex, $ombrey: les decalages en pixels de l'ombre
+	$police: nom du fichier Truetype de la police
+	$largeur: la largeur maximale de l'image ; attention, l'image retournee a une largeur inferieure, selon les limites reelles du texte
+	
+	$alt: pour forcer l'affichage d'un alt; attention, comme utilisation d'un span invisible pour affiche le texte, generalement inutile
+	$retour : si on passe la valeur "retour=image_seule", ca ne retourne pas les spans, mais uniquement l'image <img=...>
+	          si on passe "retour=fichier_seul", on recupere l'URL de l'image.
+	
+	
+	*/
+
+
 
 	// Recuperer les differents arguments
 	$numargs = func_num_args();
