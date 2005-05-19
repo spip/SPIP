@@ -1138,7 +1138,6 @@ function image_typo() {
 	$largeur: la largeur maximale de l'image ; attention, l'image retournee a une largeur inferieure, selon les limites reelles du texte
 	
 	$alt: pour forcer l'affichage d'un alt; attention, comme utilisation d'un span invisible pour affiche le texte, generalement inutile
-	$retour :  si on passe "retour=fichier_seul", on recupere l'URL de l'image.
 	
 	
 	*/
@@ -1171,8 +1170,7 @@ function image_typo() {
 	$fond = $variable["fond"];
 	if (strlen($fond) < 6) $fond = "ffffff";
 	
-	if ($variable["alt"]) $alt = $variable["alt"];
-	else $alt = $texte;
+	$alt = $texte;
 	
 	$ombre = $variable["ombre"];
 	$ombrex = $variable["ombrex"];
@@ -1183,8 +1181,6 @@ function image_typo() {
 	$align = $variable["align"];
 	if (!$variable["align"]) $align="left";
 	 
-	$retour = $variable["retour"];
-	
 	$police = $variable["police"];
 	if (strlen($police) < 2) $police = "dustismo.ttf";
 
@@ -1245,10 +1241,7 @@ function image_typo() {
 		$dimensions = getimagesize($image);
 		$largeur = $dimensions[0];
 		$hauteur = $dimensions[1];
-	if ($retour == "fichier_seul")
-			return "$image";
-		else 
-			return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='image_typo'>", 'alt', $alt);
+		return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='image_typo'>", 'alt', $alt);
 	} else {
 		return $texte;
 	}
