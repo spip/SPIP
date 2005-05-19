@@ -57,7 +57,7 @@ if (!$id_utilisateur) {
 
 lang_select($langue_utilisateur);
 
-@header("content-type:text/calendar; charset=utf-8");
+@header("Content-Type: text/calendar; charset=utf-8");
 
 ligne ("BEGIN:VCALENDAR");
 ligne ("CALSCALE:GREGORIAN");
