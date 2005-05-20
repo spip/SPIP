@@ -27,7 +27,7 @@ class Inclure {
 	var $type = 'include';
 	var $texte;
 	var $args = array();  //  valeurs des params
-	var $cond_avant, $cond_apres; // inutilises mais generiques
+	var $avant, $apres; // inutilises mais generiques
 }
 
 //
@@ -37,11 +37,12 @@ class Boucle {
 	var $type = 'boucle';
 	var $id_boucle;
 	var $id_parent ='';
-	var $cond_avant, $milieu, $cond_apres, $cond_altern;
+	var $avant, $milieu, $apres, $altern;
 	var $lang_select;
 	var $type_requete;
 	var $sql_serveur;
 	var $param = array();
+	var $criteres = array();
 	var $separateur = array();
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
@@ -69,11 +70,20 @@ class Boucle {
 	var $numrows = false; 
 }
 
+// sous-noeud du precedent
+
+class Critere {
+	var $operateur;
+	var $arg1;
+	var $arg2;
+	var $not;	
+}
+
 class Champ {
 	var $type = 'champ';
 	var $nom_champ;
 	var $nom_boucle= ''; // seulement si boucle explicite
-	var $cond_avant, $cond_apres; // tableaux d'objets
+	var $avant, $apres; // tableaux d'objets
 	var $etoile;
 	var $filtres = array();  // filtre explicites
 	var $fonctions = array();  // source des filtres (compatibilite)
@@ -98,7 +108,7 @@ class Idiome {
 	var $module = ""; // son module de definition
 	var $filtres = array(); // les filtres a appliquer au resultat
 	var $fonctions = array(); // source des filtres
-	var $cond_avant, $cond_apres; // inutilises mais faut = ci-dessus
+	var $avant, $apres; // inutilises mais faut = ci-dessus
 	// champs pour la production de code, cf ci-dessus
 	var $id_boucle;
 	var $boucles;

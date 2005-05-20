@@ -423,11 +423,11 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			  ereg_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire='';
-			$avant = calculer_liste($p->cond_avant,
+			$avant = calculer_liste($p->avant,
 				$newdescr, $boucles, $id_boucle, $niv+2);
-			$apres = calculer_liste($p->cond_apres,
+			$apres = calculer_liste($p->apres,
 				$newdescr, $boucles, $id_boucle, $niv+2);
-			$altern = calculer_liste($p->cond_altern,
+			$altern = calculer_liste($p->altern,
 				$newdescr, $boucles, $id_boucle, $niv+1);
 			break;
 
@@ -454,9 +454,9 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 
 			$code = calculer_champ($p);
 			$commentaire = '#' . $p->nom_champ . $p->etoile;
-			$avant = calculer_liste($p->cond_avant,
+			$avant = calculer_liste($p->avant,
 				$descr, $boucles, $id_boucle, $niv+1);
-			$apres = calculer_liste($p->cond_apres,
+			$apres = calculer_liste($p->apres,
 				$descr, $boucles, $id_boucle, $niv+1);
 			$altern = "''";
 			break;
