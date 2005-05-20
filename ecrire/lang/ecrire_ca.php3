@@ -297,7 +297,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_creer_base' => '<B>Crear</B> una nova base de dades:',
 'info_dans_groupe' => 'Dins el grup:',
 'info_dans_rubrique' => 'Dins la secci&oacute;:',
-'info_date_publication_anterieure' => 'Data de publicaci&oacute; anterior:',
+'info_date_publication_anterieure' => 'Data de redacci&oacute; anterior:',
 'info_date_referencement' => 'DATA DE REFER&Egrave;NCIA D\'AQUEST LLOC:',
 'info_delet_mots_cles' => 'Heu sol&middot;licitat la supressi&oacute; de la
  paraula clau <B>@titre_mot@</B> (@type_mot@). Donat que la paraula-clau est&agrave; lligada a
@@ -776,8 +776,8 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_crash_base' => 'Si la bbdd ha deixat de funcionar correctament, es pot intentar fer una reparaci&oacute; autom&agrave;tica.',
 'texte_creer_rubrique' => 'Abans de poder escriure els articles, <BR> s\'ha de crear una  secci&oacute;.',
 'texte_date_creation_article' => 'DATA DE CREACI&Oacute; DE L\'ARTICLE&nbsp;:',
-'texte_date_publication_anterieure' => 'DATA DE PUBLICACI&Oacute; ANTERIOR&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles abans de la data de publicaci&oacute; indicada.',
+'texte_date_publication_anterieure' => 'Data de redacci&oacute; anterior:',
+'texte_date_publication_anterieure_nonaffichee' => 'No publicar els articles de data de redacci&oacute; anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICACI&Oacute; EN L&Iacute;NIA&nbsp;:',
 'texte_demander_blocage_priori' => 'Els pr&ograve;xims enlla&ccedil;os 
  procedents d\'aquest lloc ser&agrave;n bloquejats a priori.',
@@ -844,7 +844,7 @@ pot caldre utilitzar un <I>proxy HTTP</I> per enlla&ccedil;ar amb els llocs sind
 En aquest cas, indiqueu a continuaci&oacute; la seua adre&ccedil;a, baix la forma
   <tt><html>http://proxy:8080</html></tt>. En general,
  es deixar&agrave; buida aquesta opci&oacute;.',
-'texte_publication_articles_post_dates' => 'Que ha de fer SPIP quan els articles tinguen una data de publicaci&oacute; posterior a l\'actual?',
+'texte_publication_articles_post_dates' => 'Que ha de fer SPIP quan els articles tinguin una data de publicaci&oacute; posterior a l\'actual?',
 'texte_rappel_selection_champs' => ' [No oblide pas seleccionar correctament aquest camp.]',
 'texte_recalcul_page' => 'Si es vol recarregar una sola p&agrave;gina, cal passar abans per l\'espai p&uacute;blic i premer el bot&oacute; "recarregar".',
 'texte_recapitiule_liste_documents' => 'Aquesta p&agrave;gina recull un llistat de documents que hi ha a cada secci&oacute; de la seua web. Per modificar la informaci&oacute; de cada document premer el enlla&ccedil; cap a la p&agrave;gina de la seua secci&oacute;.',

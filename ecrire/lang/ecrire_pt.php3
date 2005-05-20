@@ -119,7 +119,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 // C
 'cache_mode_compresse' => 'Os ficheiros da cache s&atilde;o gravados em modo comprimido.',
 'cache_mode_non_compresse' => 'Os ficheiros da cache s&atilde;o gravados em modo n&atilde;o comprimido.',
-'cache_modifiable_webmestre' => '<MODIF>Estes par&acirc;metros s&atilde;o modific&aacute;veis pelo webmaster do site.',
+'cache_modifiable_webmestre' => 'Este par&acirc;metro &eacute; modific&aacute;vel pelo webmaster do site.',
 'calendrier_synchro' => 'Se utilizar um software de agenda compat&iacute;vel <b>iCal</b>, pode sincroniz&aacute;-lo com as informa&ccedil;&otilde;es deste s&iacute;tio.',
 
 
@@ -131,7 +131,7 @@ utilizadores devem ter uma assinatura ao fornecer o seu endere&ccedil;o e-mail a
 'diff_texte_ajoute' => 'Texto acrescentado',
 'diff_texte_deplace' => 'Texto alterado',
 'diff_texte_supprime' => 'Texto suprimido',
-'double_clic_inserer_doc' => '<NEW>Fa&ccedil;a duplo clique para inserir este atalho no texto',
+'double_clic_inserer_doc' => 'Fa&ccedil;a duplo clique para inserir este atalho no texto',
 
 
 // E
@@ -306,7 +306,7 @@ ou da rede',
 'info_creer_base' => '<B>Criar</B> uma nova base de dados',
 'info_dans_groupe' => 'No grupo :',
 'info_dans_rubrique' => 'Na rubrica :',
-'info_date_publication_anterieure' => 'Data de publica&ccedil;&atilde;o precedente :',
+'info_date_publication_anterieure' => 'Data de publica&ccedil;&atilde;o anterior:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENTO DESTE S&Iacute;TIO&nbsp;:',
 'info_delet_mots_cles' => 'Pediu para suprimir a palavra-chave
 <B>@titre_mot@</B> (@type_mot@). Esta palavra-chave estando ligada a
@@ -381,7 +381,7 @@ Os estatuto dos autores &eacute; indicado pela cor dos &iacute;cones (administra
 'info_identification_publique' => 'A sua identidade p&uacute;blica...',
 'info_image_process' => 'Seleccione o melhor m&eacute;todo de criar as vinhetas clicando sobre a imagem correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i> Se nenhuma imagem aparece, ent&atilde;o o servidor que alberga o seu s&iacute;tio n&atilde;o foi configurado para utilizar tais ferramentas. Se deseja utilizar essas fun&ccedil;&otilde;es, contacte o responsavel t&eacute;cnico e pe&ccedil;a as extens&otilde;es  &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
-'info_images_auto' => '<NEW>Images calcul&eacute;es automatiquement',
+'info_images_auto' => 'Imagens calculadas automaticamente',
 'info_informations_personnelles' => 'Quinta etapa : <B>Informa&ccedil;&otilde;es pessoais<B>',
 'info_inscription_automatique' => 'Inscri&ccedil;&atilde;o autom&aacute;tica de novos redactores',
 'info_jeu_caractere' => 'Jogo de car&aacute;cteres do s&iacute;tio',
@@ -516,7 +516,7 @@ servi&ccedil;os de hospedagem desactivam o envio de mails a partir dos seus
 'info_redacteurs' => 'Redactores',
 'info_redaction_en_cours' => 'EM CURSO DE REDAC&Ccedil;&Atilde;O',
 'info_redirection' => 'Redirigir',
-'info_referencer_doc_distant' => '<NEW>R&eacute;f&eacute;rencer un document sur l\'internet&nbsp;:',
+'info_referencer_doc_distant' => 'Referenciar um documento na internet&nbsp;:',
 'info_refuses' => 'Os seus artigos recusados',
 'info_reglage_ldap' => 'Op&ccedil;&otilde;es : <B>Acerto da importa&ccedil;&atilde;o LDAP</B>',
 'info_renvoi_article' => '<B>Redirigir.</B> Este artigo remete para a p&aacute;gina:',
@@ -622,9 +622,9 @@ numa cor que indica o seu estado:',
 'info_visiteur_2' => 'do s&iacute;tio p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do s&iacute;tio p&uacute;blico',
-'install_echec_annonce' => '<NEW>L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...',
-'install_extension_mbstring' => '<NEW>SPIP ne fonctionne pas avec&nbsp;:',
-'install_extension_php_obligatoire' => '<NEW>SPIP exige l\'extension php&nbsp;:',
+'install_echec_annonce' => 'A instala&ccedil;&atilde;o vai provavelmente falhar,ou criar um s&iacute;tio n&atilde;o funcional',
+'install_extension_mbstring' => 'O SPIP n&atilde;o funciona com&nbsp;:',
+'install_extension_php_obligatoire' => 'O SPIP exige a extens&atilde;o php&nbsp;:',
 'install_select_langue' => 'Seleccione uma l&iacute;ngua e depois clique no bot&atilde;o "&nbsp;seguinte&nbsp;" para lan&ccedil;ar o procedimento de instala&ccedil;&atilde;o.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Aceitar as inscri&ccedil;&otilde;es',
@@ -755,7 +755,7 @@ numa cor que indica o seu estado:',
 
 
 // T
-'taille_cache_image' => '<NEW>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
+'taille_cache_image' => 'As imagens calculadas automaticamente pelo SPIP (miniaturas dos documentos, t&iacute;tulos apresentados sob forma gr&aacute;fica, fun&ccedil;&otilde;es matem&aacute;ticas no formato TeX...) ocupam no direct&oacute;rio @dir@ um total de @taille@.',
 'taille_cache_infinie' => 'Este site n&atilde;o prev&ecirc; limita&ccedil;&atilde;o de tamanho do diret&oacute;rio <code>CACHE/</code>.',
 'taille_cache_maxi' => 'O SPIP tenta limitar o tamanho do diret&oacute;rio <code>CACHE/</code> deste site em cerca de <b>@octets@</b>.',
 'taille_cache_octets' => 'O tamanho da cache &eacute; atualmente de  @octets@.',
@@ -811,8 +811,8 @@ que alguns elementos dos artigos n&atilde;o s&atilde;o utilizados.
  autom&aacute;tica.',
 'texte_creer_rubrique' => 'Antes de poder escrever artigos, <BR> deve criar uma rubrica.',
 'texte_date_creation_article' => 'DATA DE CRIA&Ccedil;&Atilde;O DO ARTIGO:',
-'texte_date_publication_anterieure' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ANTERIOR:',
-'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir data de publica&ccedil;&atilde;o anterior',
+'texte_date_publication_anterieure' => 'Data de redac&ccedil;&atilde;o anterior&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de redac&ccedil;&atilde;o anterior',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
 'texte_demander_blocage_priori' => 'Os pr&oacute;ximos la&ccedil;os 
   provenientes deste s&iacute;tio ser&atilde;o bloqueados a priori.',
@@ -1044,7 +1044,7 @@ ao SPIP pesquisar igualmente no texto dos
 'titre_sites_tous' => 'Os s&iacute;tios referenciados',
 'titre_suivi_petition' => 'Seguimento dos abaixo-assinados',
 'titre_syndication' => 'Vincula&ccedil;&atilde;o de s&iacute;tios',
-'tout_dossier_upload' => '<MODIF>Todo o diret&oacute;rio @upload@',
+'tout_dossier_upload' => 'Todo o diret&oacute;rio @upload@',
 'trad_article_inexistant' => 'N&atilde;o h&aacute; artigo com este n&uacute;mero',
 'trad_article_traduction' => 'Todas as vers&otilde;es deste artigo&nbsp;:',
 'trad_deja_traduit' => 'Este artigo &eacute; j&aacute; uma tradu&ccedil;&atilde;o do presente artigo.',
