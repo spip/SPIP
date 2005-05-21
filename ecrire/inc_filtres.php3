@@ -875,7 +875,7 @@ function multi_trad ($trads) {
 function extraire_trad ($bloc) {
 	$lang = '';
 
-	while (preg_match("/^(.*?)[\{\[]([a-z_]+)[\}\]]/si", $bloc, $regs)) {
+	while (preg_match("/^(.*?)[{\[]([a-z_]+)[}\]]/si", $bloc, $regs)) {
 		$texte = trim($regs[1]);
 		if ($texte OR $lang)
 			$trads[$lang] = $texte;
