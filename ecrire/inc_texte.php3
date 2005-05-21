@@ -330,7 +330,7 @@ function couper($texte, $taille=50) {
 	$texte = ereg_replace("\[\[([^]]|\][^]])*\]\]", "", $texte);
 
 	// supprimer les codes typos
-	$texte = ereg_replace("[{}]", "", $texte);
+	$texte = ereg_replace("[}{]", "", $texte);
 
 	// supprimer les tableaux
 	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
