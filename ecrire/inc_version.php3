@@ -291,7 +291,7 @@ $invalider_caches = false;
 // ce quota n'est pas "dur", il ne s'applique qu'une fois par heure et
 // fait redescendre le cache a la taille voulue ; valeur en Mo
 // Si la variable vaut 0 aucun quota ne s'applique
-$quota_cache = 5;
+$quota_cache = 10;
 
 // code a fournir pour obtenir le debuggueur (urls &var_mode=debug)
 // par defaut seuls les admins : $code_activation_debug='';
