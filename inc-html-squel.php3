@@ -362,11 +362,10 @@ function phraser_criteres($params, &$result) {
 			  elseif ($param == 'recherche')
 			    // meme chose (a cause de #nom_de_boucle:URL_*)
 			      $result->hash = true;
-
 			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
 			    $v[0] = $v[1];
 			    $v[0][0]->texte = $m[1];
-			    $v[1][0]->texte = $m[2];
+			    $v[1][0]->texte = $m[3];
 			    $crit = new Critere;
 			    $crit->op = '/';
 			    $crit->not = "";
