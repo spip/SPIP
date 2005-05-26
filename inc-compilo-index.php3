@@ -192,11 +192,11 @@ function calculer_balise($nom, $p) {
 function calculer_balise_dynamique($p, $nom, $l) {
 	balise_distante_interdite($p);
 	$param = "";
-	if ($a = $p->args) {
+	if ($a = $p->param) {
 		$c = array_shift($a);
 		if  (!array_shift($c)) {
 		  $p->fonctions = $a;
-		  array_shift( $p->args );
+		  array_shift( $p->param );
 		  $param = compose_filtres_args($p, $c, ',');
 		}
 	}
@@ -205,26 +205,17 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . $collecte
 	  . ($collecte ? $param : substr($param,1)) # virer la virgule
 	  . "),\n\tarray("
-	  . argumenter_balise($p->args, "', '")
+	  . argumenter_balise($p->param, "', '")
 	  . "), \$GLOBALS['spip_lang'])";
 	$p->statut = 'php';
 	$p->fonctions = array();
-	$p->args = array();
+	$p->param = array();
 
 	// Cas particulier de #FORMULAIRE_FORUM : inserer l'invalideur
 	if ($nom == 'FORMULAIRE_FORUM')
 		$p->code = code_invalideur_forums($p, $p->code);
 
 	return $p;
-}
-
-function param_balise(&$p) {
-  if (!($a=$p->fonctions)) return "";
-  $c = array_shift($a);
-  if  ($c[0]) return "";
-  $p->fonctions = $a;
-  array_shift( $p->args );
-  return $c[1];
 }
 
 // construire un tableau des valeurs interessant un formulaire
@@ -253,7 +244,7 @@ function applique_filtres($p) {
 //  processeurs standards (cf inc-balises.php3)
 	$code = ($p->etoile ? $p->code : champs_traitements($p));
 	// Appliquer les filtres perso
-	if ($p->args) $code = compose_filtres($p, $code);
+	if ($p->param) $code = compose_filtres($p, $code);
 	// post-traitement securite
 	if ($p->statut == 'html') $code = "interdire_scripts($code)";
 	return $code;
@@ -261,7 +252,7 @@ function applique_filtres($p) {
 
 function compose_filtres($p, $code)
 {
-  foreach($p->args as $filtre) {
+  foreach($p->param as $filtre) {
     $fonc = array_shift($filtre);
     if ($fonc) {
       $arglist = compose_filtres_args($p, $filtre, ($fonc == '?' ? ':' : ','));

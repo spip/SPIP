@@ -58,7 +58,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle, $niv) {
 	}
 
 	$l = array();
-	foreach($struct->args as $val) {
+	foreach($struct->param as $val) {
 		$var = array_shift($val);
 		$l[] = "\'$var\' => \'' . addslashes(" .
 		    ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle, $niv) :
@@ -513,27 +513,21 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	if ($boucles) {
 	  // une boucle documents est conditionnee par tout le reste!
-	  // une boucle avec critere de recheche conditionne tout le reste!
-	  // (a cause du cas #nom_de_boucle:URL_*)
-	  // 
-		foreach($boucles as $idb => $boucle)
-		  {
-		    if ($boucle->param && is_array($boucle->param)) {
+		foreach($boucles as $idb => $boucle) {
+			if ($boucle->param) {
 				if (($boucle->type_requete == 'documents') && 
-				    in_array('doublons',$boucle->param))
+				     $boucle->doublons)
 				  { $descr['documents'] = true; break; }
-				if (in_array('recherche',$boucle->param))
-					$boucles[$idb]->hash = true;
 			}
 		  }
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
 		foreach($boucles as $id => $boucle) { 
 			if ($boucle->type_requete == 'boucle') {
-				$rec = &$boucles[$boucle->param];
+				$rec = &$boucles[$boucle->param[0]];
 				if (!$rec) {
 					return array(_T('zbug_info_erreur_squelette'),
-						($boucle->param
+						($boucle->param[0]
 						. ' '. _T('zbug_boucle_recursive_undef')));
 				} else {
 					$rec->externe = $id;
@@ -602,8 +596,9 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 			// Reproduire la boucle en commentaire
 			$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete).")";
-		    if ($boucle->param && is_array($boucle->param)) 
-				$pretty .= " {".join("} {", $boucle->param)."}";
+			// anachronique. A refaire.
+			/*    if ($boucle->param && is_array($boucle->param)) 
+			 $pretty .= " {".join("} {", $boucle->param)."}";*/
 			// sans oublier les parametres traites en amont
 		    if ($boucle->separateur)
 		      foreach($boucle->separateur as $v)

@@ -372,7 +372,7 @@ function balise_EXPOSER_dist($p) {
 		$on = addslashes($regs[1]);
 		$off = addslashes($regs[3]);
 		// autres filtres
-		array_shift($p->args);
+		array_shift($p->param);
 	}
 
 
@@ -393,7 +393,7 @@ function balise_EMBED_DOCUMENT_dist($p) {
 	$p->code = "calcule_embed_document(intval($_id_document), " .
 	  argumenter_balise($p->fonctions, "|") .
 	  ", \$doublons, '" . $p->descr['documents'] . "')";
-	$p->args = array();
+	$p->param = array();
 	$p->statut = 'html';
 	return $p;
 }
@@ -544,7 +544,7 @@ function calculer_balise_logo ($p) {
 		foreach($p->fonctions as $couple) {
 			// eliminer les faux filtres
 			if (!$flag_stop) {
-				array_shift($p->args);
+				array_shift($p->param);
 				$nom = $couple[0];
 				if (ereg('^(left|right|center|top|bottom)$', $nom))
 					$align = $nom;
@@ -635,7 +635,7 @@ function balise_EXTRA_dist ($p) {
 
 	// Gerer la notation [(#EXTRA|isbn)]
 	if ($p->fonctions) {
-	  $p->args = array();
+	  $p->param = array();
 		include_ecrire("inc_extra.php3");
 		list ($key, $champ_extra) = each($p->fonctions);	// le premier filtre
 		$type_extra = $p->type_requete;
@@ -699,11 +699,11 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	// Syntaxe [(#PARAMETRES_FORUM{#SELF})] pour fixer le retour du forum
 	# note : ce bloc qui sert a recuperer des arguments calcules pourrait
 	# porter un nom et faire partie de l'API.
-	if ($filtres = $p->args) {
+	if ($filtres = $p->param) {
 		$retour = array_shift($filtres);
 		if  (!array_shift($retour)) {
 		  $p->fonctions = $a;
-		  array_shift( $p->args );
+		  array_shift( $p->param );
 		  $retour = calculer_liste($retour[0],
 					   $p->descr,
 					   $p->boucles,
@@ -761,11 +761,11 @@ function balise_SELF_dist($p) {
 //
 function balise_ENV_dist($p) {
 
-	if ($a = $p->args) {
+	if ($a = $p->param) {
 		$sinon = array_shift($a);
 		if  (!array_shift($sinon)) {
 		  $p->fonctions = $a;
-		  array_shift( $p->args );
+		  array_shift( $p->param );
 		  $nom = array_shift($sinon);
 		  $nom = ($nom[0]->type=='texte') ? $nom[0]->texte : "";
 		}
