@@ -261,6 +261,34 @@ function critere_par_dist($idb, &$boucles, $crit) {
 	  }
 }
 
+function critere_agenda($idb, &$boucles, $crit)
+{
+	$params = $crit->param;
+	$args = array();
+	// les valeur $date et $type doivent etre connus à la compilation
+	// autrement dit ne pas être des champs
+	foreach ($params as $tri) {
+	    if ($tri[0]->type != 'texte')
+	      $args[] = calculer_liste($tri, array(), $boucles, $idb);
+	    else 
+	      $args[] = $tri[0]->texte;
+	}
+	list($date, $annee, $mois, $jour, $type) = $args;
+
+	$boucle = &$boucles[$idb];
+	$date = $boucle->id_table . ".$date";
+	if ($type == 'jour')
+	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m%d') = '\" .  $annee . $mois . $jour .\"'";
+	elseif ($type != 'semaine')
+	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m') = '\" .  $annee . $mois .\"'";
+	else
+	  $boucle->where[] = 
+	  "DATE_FORMAT($date, '%Y%m') >= ' \" . date_debut_semaine($annee . ',' . $mois . ',' . $jour . \"' AND
+	  DATE_FORMAT($date, '%Y%m') <= ' \" . date_fin_semaine($annee . ',' . $mois . ',' . $jour . \"'";
+}
+
+
+
 function calculer_critere_parties($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	$a1 = $crit->param[0];
