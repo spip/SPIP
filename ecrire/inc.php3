@@ -215,26 +215,9 @@ if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' A
 
 // Modifs forum
 if ($controle_forum AND $id_controle_forum) {
-	if (verifier_action_auteur("$controle_forum$id_controle_forum",
-	$hash, $connect_id_auteur)) {
-		switch($controle_forum) {
-			case 'supp_forum':
-				changer_statut_forum($id_controle_forum, 'off');
-				break;
-			case 'supp_forum_priv':
-				changer_statut_forum($id_controle_forum, 'privoff');
-				break;
-			case 'valid_forum':
-				changer_statut_forum($id_controle_forum, 'publie');
-				break;
-			// nb : les forums prives (privrac ou prive), une fois effaces
-			// (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
-			// n'est pas effacable
-		}
-
-		if ($redirect)
-			redirige_par_entete($redirect);
-	}
+	controler_statut_forum($controle_forum, $id_controle_forum);
+	if ($redirect)
+		redirige_par_entete($redirect);
 }
 
 ?>
