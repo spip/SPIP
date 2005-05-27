@@ -183,7 +183,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		else if ($args[0] == "'")
 			preg_match ("/^(')([^']*)(')(.*)$/ms", $args, $regs);
 		else {
-		  preg_match("/^( *)([^,}]*)([,}$fin].*)$/ms", $args, $regs);
+		  preg_match("/^([[:space:]]*)([^,}]*)([,}$fin].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
 		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
@@ -315,7 +315,7 @@ function phraser_criteres($params, &$result) {
 			     !== false))
 			  $op = ',';
 			else {
-			  ereg("^([a-zA-Z][a-zA-Z0-9]*) *(.*)$", $param, $m);
+			  preg_match("/^([a-zA-Z][a-zA-Z0-9]*)[[:space:]]*(.*)$/ms", $param, $m);
 			  $op = $m[1];
 			  $v[1][0]->texte = $m[2];
 			}
@@ -364,7 +364,7 @@ function phraser_criteres($params, &$result) {
 			      $result->hash = true;
 			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*)"?$', $param, $m)) {
+			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?)[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)[[:space:]]*"?([^<>=!"]*)"?$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
 							   (($m[1] == 'lang_select') ? $m[1] : trim($m[4])),
 							   $m[3], $m[2]);
