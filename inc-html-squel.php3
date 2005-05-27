@@ -163,7 +163,7 @@ function phraser_champs_etendus($texte, $result) {
 function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   $texte = ltrim($texte);
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
-      ereg("^(\|?[^{)|]*)(.*)$", $texte, $match);
+      preg_match(",^(\|?[^{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
       $fonc = $match[1];
       if ($fonc[0] == "|") $fonc = substr($fonc,1);
@@ -179,11 +179,11 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 	$collecte = array();
 	while ($args && $args[0] != '}') {
 		if ($args[0] == '"')
-			ereg ('^(")([^"]*)(")(.*)$', $args, $regs);
+			preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
 		else if ($args[0] == "'")
-			ereg ("^(')([^']*)(')(.*)$", $args, $regs);
+			preg_match ("/^(')([^']*)(')(.*)$/ms", $args, $regs);
 		else {
-		  ereg("^( *)([^,}]*)([,}$fin].*)$", $args, $regs);
+		  preg_match("/^( *)([^,}]*)([,}$fin].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
 		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
@@ -201,7 +201,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$collecte[] = $champ;
 			$args = ltrim($regs[count($regs)-1]);
 		} else {
-		  if (!ereg("^(.*)" . NOM_DE_CHAMP ."[|{]", $arg, $r)) {
+		  if (!ereg("^(.*)" . NOM_DE_CHAMP ."[{|]", $arg, $r)) {
 		    $arg = phraser_champs_exterieurs($arg, $sep, $result);
 		    $args = ltrim($regs[count($regs)-1]);
 		    $collecte = array_merge($collecte, $arg);
