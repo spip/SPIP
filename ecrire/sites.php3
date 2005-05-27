@@ -137,7 +137,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	$result = spip_query($query);
 
 	if ($syndication_old != $syndication OR $url_syndic != $old_syndic) {
-		$recalcul = "oui";
+		$reload = "oui";
 	}
 	if ($syndication_old != $syndication AND $syndication == "non") {
 		spip_query("DELETE FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
@@ -158,7 +158,7 @@ if ($nom_site AND $modifier_site == 'oui' AND $flag_editable) {
 	$link = new Link('sites.php3');
 	$link->addVar('id_syndic');
 	$link->addVar('redirect');
-	$link->addVar('recalcul', $recalcul);
+	$link->addVar('reload', $reload);
 	$redirect = $link->getUrl();
 	$redirect_ok = 'oui';
 }
@@ -180,9 +180,9 @@ if ($redirect AND $redirect_ok == 'oui') {
 
 
 //
-// recalcul
+// reload
 //
-if ($recalcul ==  "oui") {
+if ($reload ==  "oui") {
 	$result = spip_query ("SELECT * FROM spip_syndic WHERE id_syndic='$id_syndic' AND syndication IN ('oui', 'sus', 'off')");
 	if ($result AND spip_num_rows($result)>0)
 		$erreur_syndic = syndic_a_jour ($id_syndic);
@@ -367,7 +367,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => $url_syndic));
 		echo "<center><b>";
-		echo "<a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>";
+		echo "<a href='sites.php3?id_syndic=$id_syndic&reload=oui'>";
 		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
 		fin_boite_info();
 	}
@@ -379,7 +379,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	// afficher la date de dernier acces a la syndication
 	if ($date_syndic)
 		echo "<p><div align='left'>"._T('info_derniere_syndication').' '.affdate_heure($date_syndic)
-		.".</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&recalcul=oui'>"._T('lien_mise_a_jour_syndication')."</a></div>\n";
+		.".</div><div align='right'><a href='sites.php3?id_syndic=$id_syndic&reload=oui'>"._T('lien_mise_a_jour_syndication')."</a></div>\n";
 
 	// modifier la moderation
 	if ($flag_administrable && $options=='avancees') {
@@ -423,7 +423,7 @@ else if (preg_match(',^select: (.*),', $url_syndic, $regs)) {
 	echo "</select>\n";
 	echo aide("rubsyn");
 	echo '<input type="hidden" name="modifier_site" value="oui" />';
-	echo '<input type="hidden" name="recalcul" value="oui" />';
+	echo '<input type="hidden" name="reload" value="oui" />';
 	echo "<div align='$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>\n";
 	echo fin_cadre_relief();
 	echo "</div></form>\n";

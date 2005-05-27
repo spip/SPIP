@@ -54,8 +54,7 @@ if (strpos($url,'?')) {
 else {
 	$super='?';
 }
-if ($recalcul) $url .= $super."var_mode=recalcul";
-else if ($preview) $url .= $super."var_mode=preview";
+$url .= $super."var_mode=$var_mode";
 
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls.php3 ou mes_fonctions/mes_options)

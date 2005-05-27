@@ -3103,14 +3103,14 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 			FROM spip_articles WHERE id_article=$id AND date<=NOW()")))
 				$statut = 'prop';
 			if ($statut == 'publie')
-				$en_ligne = 'recalcul';
+				$en_ligne = 'calcul';
 			else if ($statut == 'prop')
 				$en_ligne = 'preview';
 			break;
 		case 'rubrique':
 			if ($id > 0)
 				if ($statut == 'publie')
-					$en_ligne = 'recalcul';
+					$en_ligne = 'calcul';
 				else
 					$en_ligne = 'preview';
 			break;
@@ -3118,16 +3118,16 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 		case 'auteur':
 		case 'site':
 			if ($statut == 'publie')
-				$en_ligne = 'recalcul';
+				$en_ligne = 'calcul';
 			else if ($statut == 'prop')
 				$en_ligne = 'preview';
 			break;
 		case 'mot':
-			$en_ligne = 'recalcul';
+			$en_ligne = 'calcul';
 			break;
 	}
 
-	if ($en_ligne == 'recalcul')
+	if ($en_ligne == 'calcul')
 		$message = _T('icone_voir_en_ligne');
 	else if ($en_ligne == 'preview') {
 		// est-ce autorise ?
@@ -3139,7 +3139,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	}
 
 	if ($message)
-		icone_horizontale($message, "../spip_redirect.php3?id_$type=$id&$en_ligne=oui", $image, "rien.gif");
+		icone_horizontale($message, "../spip_redirect.php3?id_$type=$id&var_mode=$en_ligne", $image, "rien.gif");
 }
 
 
