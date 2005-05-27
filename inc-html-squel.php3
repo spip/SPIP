@@ -364,7 +364,7 @@ function phraser_criteres($params, &$result) {
 			      $result->hash = true;
 			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?| IN) *"?([^<>=!"]*)"?$', $param, $m)) {
+			  } elseif (ereg('^(`?[A-Za-z_]+\(?[A-Za-z_]*\)?`?) *(\??)(!?)(<=?|>=?|==?|IN) *"?([^<>=!"]*)"?$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
 							   (($m[1] == 'lang_select') ? $m[1] : trim($m[4])),
 							   $m[3], $m[2]);
