@@ -550,16 +550,15 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		else $col = "$col_table.$col";
 	}
 	if (strtoupper($op) == 'IN') {
-	  $val = join(', ',$val);
-
-	  if (!ereg("^ *\(.*) *$", $val)) $val = "($val)";
-	  $where = "$col IN $val";
+	  $val = join(" .\n\"','\" . ", $val);
+	  
+	  $where = "$col IN ('\" . $val . \"')";
 	  if ($crit->not) {
 			$where = "NOT ($where)";
 		} else {
 			$boucle->default_order = 'rang';
 			$boucle->select[] =
-				"FIND_IN_SET($col, \\\"$val\\\") AS rang";
+				"FIND_IN_SET($col, \\\"'\" . " . $val . ' . "\'\\") AS rang';
 		}
 	} else {
 		if ($op == '==') $op = 'REGEXP';
