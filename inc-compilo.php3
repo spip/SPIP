@@ -45,7 +45,7 @@ include_ecrire('inc_serialbase.php3');
 //
 // Calculer un <INCLURE()>
 //
-function calculer_inclure($struct, $descr, &$boucles, $id_boucle, $niv) {
+function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	$fichier = $struct->texte;
 
 	if (!($path = find_in_path($fichier)))
@@ -61,7 +61,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle, $niv) {
 	foreach($struct->param as $val) {
 		$var = array_shift($val);
 		$l[] = "\'$var\' => \'' . addslashes(" .
-		    ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle, $niv) :
+		    ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle) :
 		    (($var =='lang') ?
 		     '$GLOBALS["spip_lang"]' :
 		     index_pile($id_boucle, $var, $boucles)))
@@ -367,12 +367,11 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 // Retourne une expression PHP,
 // (qui sera argument d'un Return ou la partie droite d'une affectation).
 
-function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
+function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
         $codes = array();
-	$t = '$t' . $niv;
-	$descr['niv'] = $niv;
-	for ($i=0; $i<=$niv; $i++) $tab .= "\t";
+	$descr['niv']++;
+	for ($i=0; $i<=$descr['niv']; $i++) $tab .= "\t";
 
 	foreach ($tableau as $p) {
 
@@ -397,7 +396,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			    "'";
 			}
 			$code = "multi_trad(array(" .
-			  substr($code,1) .
+ 			  substr($code,1) .
 			  "))";
 			$commentaire= '';
 			$avant='';
@@ -407,7 +406,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 
 		// inclure
 		case 'include':
-			$code = calculer_inclure($p, $descr, $boucles, $id_boucle, $niv);
+			$code = calculer_inclure($p, $descr, $boucles, $id_boucle);
 			$commentaire = '<INCLURE('.$p->texte.')>';
 			$avant='';
 			$apres='';
@@ -419,16 +418,18 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			$nom = $p->id_boucle;
 			$newdescr = $descr;
 			$newdescr['id_mere'] = $nom;
+			$newdescr['niv']++;
 			$code = 'BOUCLE' .
 			  ereg_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire='';
 			$avant = calculer_liste($p->avant,
-				$newdescr, $boucles, $id_boucle, $niv+2);
+				$newdescr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
-				$newdescr, $boucles, $id_boucle, $niv+2);
+				$newdescr, $boucles, $id_boucle);
+			$newdescr['niv']--;
 			$altern = calculer_liste($p->altern,
-				$newdescr, $boucles, $id_boucle, $niv+1);
+				$newdescr, $boucles, $id_boucle);
 			break;
 
 		case 'idiome':
@@ -455,9 +456,9 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 			$code = calculer_champ($p);
 			$commentaire = '#' . $p->nom_champ . $p->etoile;
 			$avant = calculer_liste($p->avant,
-				$descr, $boucles, $id_boucle, $niv+1);
+				$descr, $boucles, $id_boucle);
 			$apres = calculer_liste($p->apres,
-				$descr, $boucles, $id_boucle, $niv+1);
+				$descr, $boucles, $id_boucle);
 			$altern = "''";
 			break;
 
@@ -467,16 +468,16 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='', $niv=1) {
 		if ($apres == "''") $apres = '';
 		if ($avant||$apres||($altern!="''"))
 		  {
+		    $t = '$t' . $descr['niv'];
 		    $res = (!$avant ? "" : "$avant . ") . 
 		      $t .
 		      (!$apres ? "" : " . $apres");
-
-		    if (($res != $t) || ($altern != "''"))
-		      $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
+		    $code = "(($t = $code) ?\n\t$tab($res) :\n\t$tab($altern))";
 		  }
 		if ($code != "''")
 		  $codes[]= $code .
-		    // produire les commentaires à la fin, pour l'optimiseur.
+		    // produire les commentaires à la fin,
+		    // pour l'optimiseur (peut-etre plus vrai; a verifier)
 		    (!$commentaire ? "" : ("/* $commentaire */ "));
 	} // foreach
 

@@ -707,8 +707,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 		  $retour = calculer_liste($retour[0],
 					   $p->descr,
 					   $p->boucles,
-					   $p->id_boucle,
-					   $p->descr['niv']);
+					   $p->id_boucle);
 		}
 	}
 	else
