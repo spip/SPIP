@@ -21,7 +21,8 @@ define("_INC_HTML_SQUEL", "1");
 # pour permettre differentes syntaxes en entree
 
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
-define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?([A-Z_]+)(\*?)");
+# ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
+define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^{}]*([{][^[}]]*[}][^[}]]*)*)[[:space:]]*[}]');
 define('TYPE_DE_BOUCLE', "[^)]*");
@@ -122,14 +123,14 @@ function phraser_champs($texte,$result) {
 	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
 	  $p = strpos($texte, $regs[0]);
 
-	  if ($regs[4] || (strpos($regs[5][0], "[0-9]") === false)) {
+	  if ($regs[5] || (strpos($regs[6][0], "[0-9]") === false)) {
 		if ($p)
 			$result = phraser_polyglotte(substr($texte, 0, $p), $result);
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[2];
 		$champ->nom_champ = $regs[3];
-		$champ->etoile = $regs[4];
-		$texte = $regs[5];
+		$champ->etoile = $regs[5];
+		$texte = $regs[6];
 		$result[] = $champ;
 	  } else {
 	    // faux champ
@@ -223,7 +224,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		    $champ = new Champ;
 		    $champ->nom_boucle = $r[3];
 		    $champ->nom_champ = $r[4];
-		    $champ->etoile = $r[5];
+		    $champ->etoile = $r[6];
 		    phraser_args($rec, $par, $sep, array(), $champ);
 		    $args = $champ->apres ;
 		    $champ->apres = '';
@@ -271,18 +272,17 @@ function phraser_champs_interieurs($texte, $sep, $result) {
 		$champ = new Champ;
 		$champ->nom_boucle = $regs[3];
 		$champ->nom_champ = $regs[4];
-		$champ->etoile = $regs[5];
+		$champ->etoile = $regs[6];
 		// phraser_args indiquera ou commence apres
-		$result = phraser_args($regs[6], ")", $sep, $result, $champ);
+		$result = phraser_args($regs[7], ")", $sep, $result, $champ);
 		$champ->avant = phraser_champs_exterieurs($regs[1],$sep,$result);
 		$champ->apres = phraser_champs_exterieurs(substr($champ->apres,1),$sep,$result);
-
 
 		$p = strpos($texte, $regs[0]);
 		if ($p) {$result[$i] = substr($texte,0,$p);$i++; }
 		$result[$i] = $champ;
 		$i++;
-		$texte = $regs[7];
+		$texte = $regs[8];
 	  }
 	  if ($texte!=="") {$result[$i] = $texte; $i++;}
 	  $x ='';
