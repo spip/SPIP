@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'La sindicacion a partacat: impossible d\'accedir v&egrave;rs lo backend d\'aquel sit.',
 'avis_erreur' => 'Error: vejatz &ccedil;ai sos',
 'avis_erreur_connexion' => 'Error de connexion',
+'avis_erreur_cookie' => 'probl&egrave;ma de cookie',
 'avis_erreur_fonction_contexte' => 'Error de programacion. Chau pas cridar aquela foncion dins aquel cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@)! ',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Chamjar',
 'bouton_chercher' => 'Cerchar',
 'bouton_choisir' => 'Chausir',
+'bouton_enregistrer' => 'Registrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatjari&aacute; int&egrave;rna',
 'bouton_radio_envoi_annonces' => 'Mandar los anoncis editoriaus',
 'bouton_radio_non_envoi_annonces' => 'Pas mandar d\'anoncis',
@@ -187,6 +189,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'S\'es pas pogut trobar lo fich&egrave;ir @fichier@.',
 'form_deja_inscrit' => 'S&egrave;tz ja inscrit(a).',
 'form_email_non_valide' => 'V&ograve;stra adrei&ccedil;a e-mail es pas valida.',
 'form_forum_access_refuse' => 'Pod&egrave;tz pas mai accedir v&egrave;rs aquel sit.',
@@ -254,8 +257,8 @@ Merc&eacute;s per v&ograve;stra participacion
 'form_prop_sujet' => 'Subj&egrave;cte',
 'form_prop_url_site' => 'Adrei&ccedil;a (URL) dau sit',
 'forum_acces_refuse' => 'Pod&egrave;tz pas mai accedir v&egrave;rs aqueles forums.',
-'forum_attention_dix_caracteres' => '<b>Atencion!</b> v&ograve;stre messatge ten mens de d&egrave;tz caract&egrave;rs.',
-'forum_attention_trois_caracteres' => '<b>Atencion!</b> v&ograve;stre t&iacute;tol ten mens de tres caract&egrave;rs.',
+'forum_attention_dix_caracteres' => '<b>Atencion!</b> v&ograve;stre messatge deu t&eacute;ner aumens d&egrave;tz caract&egrave;rs.',
+'forum_attention_trois_caracteres' => '<b>Atencion!</b> v&ograve;stre t&iacute;tol deu t&eacute;ner aumens tres caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat:',
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aic&iacute;</a> per contunhar.',
 'forum_forum' => 'forum',

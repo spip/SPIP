@@ -302,7 +302,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_creer_base' => '<B>Creare</b> un nuovo database:',
 'info_dans_groupe' => 'Nel gruppo:',
 'info_dans_rubrique' => 'Nella rubrica:',
-'info_date_publication_anterieure' => 'Data di pubblicazione precedente:',
+'info_date_publication_anterieure' => 'Data di redazione anteriore:',
 'info_date_referencement' => 'DATA DI INSERIMENTO IN REPERTORIO DI QUESTO SITO:',
 'info_delet_mots_cles' => 'Hai chiesto
 di eliminare la parola chiave
@@ -803,8 +803,8 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_crash_base' => 'Se il database &egrave; stato danneggiato, puoi tentare un ripristino automatico.',
 'texte_creer_rubrique' => 'Prima di poter scrivere degli articoli,<BR> devi creare una rubrica.',
 'texte_date_creation_article' => 'DATA DI CREAZIONE DELL\'ARTICOLO:',
-'texte_date_publication_anterieure' => 'DATA DI PUBBLICAZIONE ANTERIORE',
-'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di pubblicazione anteriore.',
+'texte_date_publication_anterieure' => 'DATA DI REDAZIONE ANTERIORE',
+'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di redazione anteriore.',
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
 'texte_demander_blocage_priori' => 'I prossimi link in
 provenienza da questo sito saranno bloccati a priori.',

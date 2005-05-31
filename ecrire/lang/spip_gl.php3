@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'A afiliaci&oacute;n fallou: foi imposible acceder ao &laquo;backend&raquo; deste web.',
 'avis_erreur' => 'Erro: ver abaixo',
 'avis_erreur_connexion' => 'Erro de conexi&oacute;n',
+'avis_erreur_cookie' => 'problema de cookie',
 'avis_erreur_fonction_contexte' => 'Erro de programaci&oacute;n. Esta funci&oacute;n non se debe chamar neste contexto.',
 'avis_erreur_mysql' => 'Erro MySQL',
 'avis_erreur_sauvegarde' => 'Erro gardando (@type@ @id_objet@)!',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Trocar',
 'bouton_chercher' => 'Buscar',
 'bouton_choisir' => 'Elexir',
+'bouton_enregistrer' => 'Rexistrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar a mensaxer&iacute;a interna',
 'bouton_radio_envoi_annonces' => 'Enviar os anuncios editori&aacute;is',
 'bouton_radio_non_envoi_annonces' => 'Non enviar novas',
@@ -184,6 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'O ficheiro @fichier@ non foi atopado',
 'form_deja_inscrit' => 'Xa te rexistraches.',
 'form_email_non_valide' => 'O seu enderezo de correo-e. non &eacute; v&aacute;lido.',
 'form_forum_access_refuse' => 'Non tes acceso a este web.',
@@ -252,8 +255,8 @@ Gracias pola s&uacute;a participaci&oacute;n
 'form_prop_sujet' => 'Asunto',
 'form_prop_url_site' => 'Enderezo (URL) do web',
 'forum_acces_refuse' => 'Non tes acceso a estes foros.',
-'forum_attention_dix_caracteres' => '<b>Atenci&oacute;n!</b> a mensaxe ten menos de dez caracteres.',
-'forum_attention_trois_caracteres' => '<b>Atenci&oacute;n!</b> o t&iacute;tulo ten menos de tres caracteres.',
+'forum_attention_dix_caracteres' => '<b>Atenci&oacute;n!</b> a s&uacute;a mensaxe debe conter m&aacute;is de dez caracteres.',
+'forum_attention_trois_caracteres' => '<b>Atenci&oacute;n!</b> o seu t&iacute;tulo debe ter m&aacute;is de tres caracteres.',
 'forum_avez_selectionne' => 'Seleccionaches:',
 'forum_cliquer_retour' => 'Preme <a href=\'@retour_forum@\'>aqu&iacute;</a> para seguir.',
 'forum_forum' => 'foro',

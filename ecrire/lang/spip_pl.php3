@@ -32,6 +32,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Syndykacja nie powiod&#322;a si&#281; : nie ma dost&#281;pu do pliku backend tego serwisu.',
 'avis_erreur' => 'B&#322;&#261;d: zobacz poni&#380;ej\';',
 'avis_erreur_connexion' => 'B&#322;&#261;d po&#322;&#261;czenia',
+'avis_erreur_cookie' => 'problem z cookie',
 'avis_erreur_fonction_contexte' => 'B&#322;&#261;d programowania. Ta funkcja nie powinna by&#263; wywo&#322;ywana w tym kontek&#347;cie.',
 'avis_erreur_mysql' => 'B&#322;&#261;d MySQL',
 'avis_erreur_sauvegarde' => 'B&#322;&#261;d archiwizacji (@type@ @id_objet@)!',
@@ -58,6 +59,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Zatwierd&#378;',
 'bouton_chercher' => 'Szukaj',
 'bouton_choisir' => 'Wybierz',
+'bouton_enregistrer' => 'Zapisz',
 'bouton_radio_desactiver_messagerie_interne' => 'Dezaktywuj poczt&#281; wewn&#281;trzn&#261;',
 'bouton_radio_envoi_annonces' => 'Wy&#347;lij og&#322;oszenia redakcyjne',
 'bouton_radio_non_envoi_annonces' => 'Nie wysy&#322;aj &#380;adnych zawiadomie&#324;',
@@ -183,6 +185,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Plik @fichier@ nie odnaleziony',
 'form_deja_inscrit' => 'Jeste&#347; ju&#380; zarejestrowany.',
 'form_email_non_valide' => 'Tw&oacute;j adres e-mail nie jest prawid&#322;owy.',
 'form_forum_access_refuse' => 'Nie masz ju&#380; dost&#281;pu do tej strony.',
@@ -248,8 +251,8 @@ Dzi&#281;kujemy za uczestnictwo
 'form_prop_sujet' => 'Temat',
 'form_prop_url_site' => 'URL stron\\y',
 'forum_acces_refuse' => 'Nie masz ju&#380; dost&#281;pu do tego forum.',
-'forum_attention_dix_caracteres' => '<b>Uwaga!</b> Twoja wiadomo&#347;&#263; ma mniej ni&#380; dziesi&#281;&#263; znak&oacute;w.',
-'forum_attention_trois_caracteres' => '<b>Uwaga!</b> Tw&oacute;j temat ma mniej ni&#380; trzy znaki d&#322;ugo&#347;ci.',
+'forum_attention_dix_caracteres' => '<MODIF><b>Uwaga!</b> Twoja wiadomo&#347;&#263; ma mniej ni&#380; dziesi&#281;&#263; znak&oacute;w.',
+'forum_attention_trois_caracteres' => '<MODIF><b>Uwaga!</b> Tw&oacute;j temat ma mniej ni&#380; trzy znaki d&#322;ugo&#347;ci.',
 'forum_avez_selectionne' => 'Wybra&#322;e&#347;:',
 'forum_cliquer_retour' => 'Kliknij <a href=\'@retour_forum@\'>tutaj</a> aby kontynuowa&#263;.',
 'forum_forum' => 'forum',

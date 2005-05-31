@@ -115,7 +115,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Os ficheiros da memoria cach&eacute; est&aacute;n rexistrados en modo comprimido.',
 'cache_mode_non_compresse' => 'Os ficheiros da memoria cach&eacute; est&aacute;n rexistrados en modo comprimido',
-'cache_modifiable_webmestre' => 'Estes par&aacute;metros son modific&aacute;beis polo webm&aacute;sater do web.',
+'cache_modifiable_webmestre' => 'Este par&aacute;metro &eacute; modific&aacute;bel polo webm&aacute;ster do web.',
 'calendrier_synchro' => 'Se usa un programa de axenda compatible <b>iCal</b>, poder&aacute; sincronizalo coas informaci&oacute;ns deste web.',
 
 
@@ -127,6 +127,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Texto engadido',
 'diff_texte_deplace' => 'Texto desprazado',
 'diff_texte_supprime' => 'Texto suprimido',
+'double_clic_inserer_doc' => 'Faga dobre click para inserir este recurso no texto',
 
 
 // E
@@ -298,7 +299,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_creer_base' => '<B>Crear</B> unha nova base de datos:',
 'info_dans_groupe' => 'No grupo:',
 'info_dans_rubrique' => 'No tema:',
-'info_date_publication_anterieure' => 'Data de publicaci&oacute;n anterior:',
+'info_date_publication_anterieure' => 'Data de redacci&oacute;n anterior:',
 'info_date_referencement' => 'DATA DE REFERENCIA DESTE WEB:',
 'info_delet_mots_cles' => 'Solicitaches eliminar a palabra chave
 <B>@titre_mot@</B> (@type_mot@). Esta palabra chave est&aacute; ligada a
@@ -373,6 +374,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_identification_publique' => 'A t&uacute;a identidade p&uacute;blica...',
 'info_image_process' => 'Probe a seleccionar o mellor m&eacute;todo de fabricaci&oacute;n de vi&ntilde;etas premendo sobre a imaxe correspondente.',
 'info_image_process2' => '<b>N.B.</b> <i>Se non aparece ningunha imaxe, significa que o servidor que aloxa o web non foi configurado para para usar tales utilidades. Se desexa empregar estas funci&oacute;ns, contacte co responsable t&eacute;cnico e solic&iacute;telle as extensi&oacute;ns &laquo;GD&raquo; ou &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Imaxes calculadas automaticamente',
 'info_informations_personnelles' => 'Quinta etapa: <B>Informaci&oacute;n persoal</B>',
 'info_inscription_automatique' => 'Rexistro autom&aacute;tico no equipo de redacci&oacute;n',
 'info_jeu_caractere' => 'Xogo de caracteres do web',
@@ -506,6 +508,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Redacci&oacute;n',
 'info_redaction_en_cours' => 'EN PROCESO DE REDACCI&Oacute;N',
 'info_redirection' => 'Redirecci&oacute;n',
+'info_referencer_doc_distant' => 'Referenciar un documento na internet&nbsp;:',
 'info_refuses' => 'Os teus artigos rexeitados',
 'info_reglage_ldap' => 'Opci&oacute;ns: <B>Axustes da importaci&oacute;n LDAP</B>',
 'info_renvoi_article' => '<B>Redirecci&oacute;n.</B> Este artigo env&iacute;ache &aacute; p&aacute;xina:',
@@ -611,6 +614,9 @@ cunha cor que indica o seu estado&nbsp;:',
 'info_visiteur_2' => 'do web p&uacute;blico',
 'info_visiteurs' => 'Visitantes',
 'info_visiteurs_02' => 'Visitantes do web p&uacute;blico',
+'install_echec_annonce' => 'A instalaci&oacute;n probabelmente vai pechar ou lanzar un sitio non funcional...',
+'install_extension_mbstring' => 'SPIP non funnciona con&nbsp;:',
+'install_extension_php_obligatoire' => 'SPIP exixe a extensi&oacute;n php&nbsp;:',
 'install_select_langue' => 'Selecciona un idioma e preme o bot&oacute;n &laquo;seguinte&raquo; para comezar co proceso de instalaci&oacute;n.',
 'intem_redacteur' => 'redactor/a',
 'item_accepter_inscriptions' => 'aceptar as inscripci&oacute;ns',
@@ -741,6 +747,7 @@ cunha cor que indica o seu estado&nbsp;:',
 
 
 // T
+'taille_cache_image' => 'As imaxes calculadas automaticamente por SPIP (vi&ntilde;etas dos documentos, t&iacute;tulos presentados so a forma gr&aacute;fica, funci&oacute;ns matem&aacute;ticas en formato TeX...) ocupan no directorio @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Neste web non se preveu limitaci&oacute;n de tama&ntilde;o do directorio  <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP est&aacute; a tentar limitar o tama&ntilde;o do directorio <code>CACHE/</code> deste web en volta de <b>@octets@</b> de datos.',
 'taille_cache_octets' => 'O tama&ntilde;o da cach&eacute; &eacute; actualmente de  @octets@.',
@@ -802,8 +809,8 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_crash_base' => 'Se a base de datos ten alg&uacute;n problema, podes tentar unha reparaci&oacute;n autom&aacute;tica.',
 'texte_creer_rubrique' => 'Antes de poder escribir artigos<br>, tes que crear un tema ou secci&oacute;n.',
 'texte_date_creation_article' => 'DATA DE CREACI&Oacute;N DO ARTIGO',
-'texte_date_publication_anterieure' => 'DATA DE PUBLICACI&Oacute;N ANTERIOR&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Non amosar a data de publicaci&oacute;n anterior.',
+'texte_date_publication_anterieure' => 'Data de redacci&oacute;n anterior&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'Non amosar a data de redacci&oacute;n anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICACI&Oacute;N EN LI&Ntilde;A&nbsp;:',
 'texte_demander_blocage_priori' => 'As pr&oacute;ximas ligaz&oacute;ns deste web ser&aacute;n bloqueadas a priori.',
 'texte_descriptif_petition' => 'Descrici&oacute;n da petici&oacute;n',

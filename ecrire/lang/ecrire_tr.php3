@@ -794,7 +794,7 @@ Ta&#351;&#305;ma i&#351;lemini onaylamay&#305;n.
               otomatik tamiri deneyebilirsiniz. ',
 'texte_creer_rubrique' => 'Makale yazabilmek i&ccedil;in, bir b&ouml;l&uuml;m yaratman&#305;z gerekmektedir.',
 'texte_date_creation_article' => 'MAKALEN&#304;N YAYIN TAR&#304;H&#304;&nbsp;:',
-'texte_date_publication_anterieure' => 'B&#304;R &Ouml;NCEK&#304; YAYIN TAR&#304;H&#304;&nbsp;:',
+'texte_date_publication_anterieure' => 'Bir &ouml;nceki yay&#305;n tarihi&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Yay&#305;n tarihinin g&ouml;r&uuml;nt&uuml;lenmemesi',
 'texte_date_publication_article' => '&Ccedil;EVR&#304;M&#304;&Ccedil;&#304; (ONLINE) YAYINLANMA TAR&#304;H&#304;:',
 'texte_demander_blocage_priori' => 'Bu siteden gelecek olan bundan sonraki

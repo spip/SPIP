@@ -815,7 +815,7 @@ the images and the documents used in the articles and sections.',
 			automatically.',
 'texte_creer_rubrique' => 'Before being able to write articles,<BR> you must create a section.',
 'texte_date_creation_article' => 'DATE OF ARTICLE CREATION:',
-'texte_date_publication_anterieure' => 'DATE OF EARLIER PUBLISHING:',
+'texte_date_publication_anterieure' => 'Date of earlier publishing:',
 'texte_date_publication_anterieure_nonaffichee' => 'Hide date of earlier publishing.',
 'texte_date_publication_article' => 'DATE OF ONLINE PUBLICATION:',
 'texte_demander_blocage_priori' => 'Future links

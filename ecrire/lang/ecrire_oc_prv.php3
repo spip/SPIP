@@ -124,6 +124,7 @@ la documentacion d\'SPIP</a>.',
 'diff_texte_ajoute' => 'T&egrave;xt apondut',
 'diff_texte_deplace' => 'T&egrave;xt apondut',
 'diff_texte_supprime' => 'T&egrave;xt suprimit',
+'double_clic_inserer_doc' => 'Besclicatz per inserir aquela acorcha dins lo t&egrave;xt.',
 
 
 // E
@@ -357,6 +358,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_identification_publique' => 'V&ograve;stra identitat publica...',
 'info_image_process' => 'Vougatz seleccionar lo melhor met&ograve;de de fabricacion dei vinhetas en clicant sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se ges d\'imatge apareis, aladonc lo servidor qu\'aub&egrave;rga v&ograve;stre sit l\'an pas configurat per utilizar d\'aisinas talas. Se desiratz d\'utilizar aquelei foncions, contactatz lo responsable tecnic e demandatz leis extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Imatges calculats automaticament',
 'info_informations_personnelles' => 'Cinquena estapa: <B>Informacions personalas</b>',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors nov&egrave;us',
 'info_jeu_caractere' => 'J&ograve;c de caract&egrave;rs dau sit',
@@ -488,6 +490,7 @@ D\'uneis aubergadors autorizan pas lo mandad&iacute;s d\'e-mails dempuei sei ser
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
+'info_referencer_doc_distant' => 'Referenciar un document dins l\'Internet:',
 'info_refuses' => 'V&ograve;streis articles refusats',
 'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<B>Redireccion.</b> Aquel article remanda a la pagina:',
@@ -593,6 +596,9 @@ una color indica lor estat:',
 'info_visiteur_2' => 'dau sit public',
 'info_visiteurs' => 'Vesitaires',
 'info_visiteurs_02' => 'Vesitaires dau sit public',
+'install_echec_annonce' => 'L\'installacion capitar&agrave; mau, o abotir&agrave; a un sit non foncionau...',
+'install_extension_mbstring' => 'SPIP fonciona pas amb:',
+'install_extension_php_obligatoire' => 'SPIP exig&iacute;s l\'extension php:',
 'install_select_langue' => 'Seleccionatz una lenga puei clicatz lo boton &laquo;seguent&raquo; per amodar la procedura d\'installacion.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar leis inscripcions',
@@ -723,6 +729,7 @@ una color indica lor estat:',
 
 
 // T
+'taille_cache_image' => 'Leis imatges qu\'SPIP a calculat automaticament (vinhetas dei documents, t&iacute;tols presentats en forma grafica, foncions matematicas en format TeX...) ocupan dins lo repert&ograve;ri @dir@ un totau de @taille@.',
 'taille_cache_infinie' => 'Aqueu sit prevei ges de limitacion de talha dau repert&ograve;ri <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP assaja de limitar la talha dau repert&ograve;ri <code>CACHE/</code> d\'aqueu sit a <b>@octets@</b> de donadas aperaqu&iacute;.',
 'taille_cache_octets' => 'Ara la talha de l\'escondedor compassa @octets@.',

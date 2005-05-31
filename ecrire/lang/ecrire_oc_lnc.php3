@@ -110,7 +110,7 @@ la documentacion d\'SPIP</a>.',
 // C
 'cache_mode_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de comprimit.',
 'cache_mode_non_compresse' => 'Los fichi&egrave;rs de l\'escondedor son registrats en m&ograve;de non comprimit.',
-'cache_modifiable_webmestre' => 'Lo webm&egrave;stre del sit p&ograve;t modificar aquestes param&egrave;tres.',
+'cache_modifiable_webmestre' => 'Lo webm&egrave;stre del sit p&ograve;t modificar aqueste param&egrave;tre.',
 'calendrier_synchro' => 'S\'utilizatz un logicial d\'agenda compatible <b>iCal</b>, lo pod&egrave;tz sincronizar amb las informacions d\'aqueste sit.',
 
 
@@ -122,6 +122,7 @@ la documentacion d\'SPIP</a>.',
 'diff_texte_ajoute' => 'T&egrave;xt apondut',
 'diff_texte_deplace' => 'T&egrave;xt apondut',
 'diff_texte_supprime' => 'T&egrave;xt suprimit',
+'double_clic_inserer_doc' => 'Besclicatz per inserir aquela acorcha dins lo t&egrave;xt.',
 
 
 // E
@@ -290,7 +291,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_creer_base' => '<B>Crear</b> una basa de donadas nov&egrave;la:',
 'info_dans_groupe' => 'Dins lo grop&nbsp;:',
 'info_dans_rubrique' => 'Dins la rubrica&nbsp;:',
-'info_date_publication_anterieure' => 'Data anteriora de publicacion&nbsp;:',
+'info_date_publication_anterieure' => 'Data de redaccion anteriora:',
 'info_date_referencement' => 'DATA DE REFER&Eacute;NCIAMENT D\'AQUEL SIT:',
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
 <B>@titre_mot@</b> (@type_mot@). Aquel mot clau es ligat a
@@ -355,6 +356,7 @@ L\'administrator del sist&egrave;ma o de la ret vos deu poder fornir
 'info_identification_publique' => 'V&ograve;stra identitat publica...',
 'info_image_process' => 'Volgatz seleccionar lo melhor met&ograve;de de fabricacion de las vinhetas en clicar sus l\'imatge correspondent.',
 'info_image_process2' => '<b>N.B.</b> <i>Se cap d\'imatge apareis pas, aladonc lo servidor qu\'alb&egrave;rga v&ograve;stre sit l\'an pas configurat per utilizar d\'aisinas talas. Se desiratz d\'utilizar aquelas foncions, contactatz lo responsable tecnic e demandatz las extensions &laquo;GD&raquo; o &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Imatges calculats automaticament',
 'info_informations_personnelles' => 'Cinquena estapa: <B>Informacions personalas</b>',
 'info_inscription_automatique' => 'Inscripcion automatica de redactors nov&egrave;ls',
 'info_jeu_caractere' => 'J&ograve;c de caract&egrave;rs del sit',
@@ -486,6 +488,7 @@ D\'unes albergadors autorizan pas lo mandad&iacute;s d\'e-mails dempu&egrave;i l
 'info_redacteurs' => 'Redactors',
 'info_redaction_en_cours' => 'EN CORS DE REDACCION',
 'info_redirection' => 'Redireccion',
+'info_referencer_doc_distant' => 'Referenciar un document dins l\'Internet:',
 'info_refuses' => 'V&ograve;stres articles refusats',
 'info_reglage_ldap' => 'Opcions: <B>Reglatge de l\'importacion LDAP</b>',
 'info_renvoi_article' => '<B>Redireccion.</b> Aquel article remanda a la pagina:',
@@ -591,6 +594,9 @@ una color indica lor estat:',
 'info_visiteur_2' => 'del sit public',
 'info_visiteurs' => 'Vesitaires',
 'info_visiteurs_02' => 'Vesitaires del sit public',
+'install_echec_annonce' => 'L\'installacion capitar&agrave; mal, o abotir&agrave; a un sit non foncional...',
+'install_extension_mbstring' => 'SPIP fonciona pas amb:',
+'install_extension_php_obligatoire' => 'SPIP exig&iacute;s l\'extension php:',
 'install_select_langue' => 'Seleccionatz una lenga pu&egrave;i clicatz lo boton &laquo;&nbsp;seguent&nbsp;&raquo; per amodar la procedura d\'installacion.',
 'intem_redacteur' => 'redactor',
 'item_accepter_inscriptions' => 'Acceptar las inscripcions',
@@ -721,6 +727,7 @@ una color indica lor estat:',
 
 
 // T
+'taille_cache_image' => 'Los imatges qu\'SPIP a calculat automaticament (vinhetas dels documents, t&iacute;tols presentats en forma grafica, foncions matematicas en format TeX...) ocupan dins lo repert&ograve;ri @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Aquel sit prevei pas cap de limitacion de talha del repert&ograve;ri <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP assaja de limitar la talha del repert&ograve;ri <code>CACHE/</code> d\'aquel sit a <b>@octets@</b> de donadas aperaqu&iacute;.',
 'taille_cache_octets' => 'Ara la talha de l\'escondedor compassa @octets@.',
@@ -773,8 +780,8 @@ qu\'apareis quora la mirga passa sul t&iacute;tol.',
  automatica.',
 'texte_creer_rubrique' => 'Abans de poder escriure d\'articles,<BR> dev&egrave;tz crear una rubrica.',
 'texte_date_creation_article' => 'DATA DE CREACION DE L\'ARTICLE:',
-'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Afichar pas cap de data de publicacion anteriora.',
+'texte_date_publication_anterieure' => 'Data de redaccion anteriora:',
+'texte_date_publication_anterieure_nonaffichee' => 'Afichar pas cap de data de redaccion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA&nbsp;:',
 'texte_demander_blocage_priori' => 'Los ligams seguents
  que provenon d\'aquel sit ser&agrave;n blocats a pri&ograve;ri.',

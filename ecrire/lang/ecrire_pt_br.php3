@@ -294,7 +294,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_creer_base' => '<b>Criar</b> uma nova base de dados:',
 'info_dans_groupe' => 'No grupo:',
 'info_dans_rubrique' => 'Na se&ccedil;&atilde;o:',
-'info_date_publication_anterieure' => 'Data de publica&ccedil;&atilde;o anterior:',
+'info_date_publication_anterieure' => 'Data de reda&ccedil;&atilde;o anterior:',
 'info_date_referencement' => 'DATA DE REFERENCIAMENTO DESTE SITE:',
 'info_delet_mots_cles' => 'Voc&ecirc; pediu a exclus&atilde;o da palavra-chave
 <b>@titre_mot@</b> (@type_mot@). Esta palavra-chave est&aacute; associada a
@@ -753,8 +753,8 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_crash_base' => 'Se a sua base de dados se corrompeu, voc&ecirc; poder&aacute; tentar uma repara&ccedil;&atilde;o autom&aacute;tica.',
 'texte_creer_rubrique' => 'Antes de poder escrever mat&eacute;rias, voc&ecirc; precisa criar uma se&ccedil;&atilde;o.',
 'texte_date_creation_article' => 'DATA DE CRIA&Ccedil;&Atilde;O DA MAT&Eacute;RIA:',
-'texte_date_publication_anterieure' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ANTERIOR:',
-'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de publica&ccedil;&atilde;o anterior.',
+'texte_date_publication_anterieure' => 'Data de reda&ccedil;&atilde;o anterior:',
+'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de reda&ccedil;&atilde;o anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
 'texte_demander_blocage_priori' => 'Os pr&oacute;ximos links provenientes deste site ser&atilde;o bloqueados previamente.',
 'texte_descriptif_petition' => 'Descri&ccedil;&atilde;o da peti&ccedil;&atilde;o',
