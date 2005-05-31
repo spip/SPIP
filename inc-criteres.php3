@@ -283,8 +283,10 @@ function critere_agenda($idb, &$boucles, $crit)
 	  $boucle->where[] =  "DATE_FORMAT($date, '%Y%m') = '\" .  $annee . $mois .\"'";
 	else
 	  $boucle->where[] = 
-	  "DATE_FORMAT($date, '%Y%m') >= ' \" . date_debut_semaine($annee . ',' . $mois . ',' . $jour . \"' AND
-	  DATE_FORMAT($date, '%Y%m') <= ' \" . date_fin_semaine($annee . ',' . $mois . ',' . $jour . \"'";
+	  "DATE_FORMAT($date, '%Y%m%d') >= '\" . 
+		date_debut_semaine($annee, $mois, $jour) . \"' AND
+	  DATE_FORMAT($date, '%Y%m%d') <= '\" .
+		date_fin_semaine($annee, $mois, $jour) . \"'";
 }
 
 
