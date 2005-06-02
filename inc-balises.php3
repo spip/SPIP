@@ -353,7 +353,47 @@ function balise_POPULARITE_MAX_dist($p) {
 	return $p;
 }
 
-function balise_EXPOSER_dist($p) {
+function balise_EXPOSE_dist($p) {
+	$on = 'on';
+	$off= '';
+
+	if ($p->param && !$p->param[0][0]) {
+		$on =  calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		$off =  calculer_liste($p->param[0][2],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+		// autres filtres
+		array_shift($p->param);
+	}
+	return calculer_balise_expose($p, $on, $off);
+}
+
+// obsolete. utiliser la precedente
+
+function balise_EXPOSER_dist($p)
+{
+	$on = 'on';
+	$off= '';
+	if ($a = ($p->fonctions)) {
+		// Gerer la notation [(#EXPOSER|on,off)]
+		$onoff = array_shift($a);
+		ereg("([^,]*)(,(.*))?", $onoff[0], $regs);
+		$on = "'" . addslashes($regs[1]) . "'";
+		$off = "'" . addslashes($regs[3]) . "'" ;
+		// autres filtres
+		array_shift($p->param);
+	}
+	return calculer_balise_expose($p, $on, $off);
+}
+
+function calculer_balise_expose($p, $on, $off)
+{
 	global  $table_primary;
 	$type_boucle = $p->type_requete;
 	$primary_key = $table_primary[$type_boucle];
@@ -363,26 +403,13 @@ function balise_EXPOSER_dist($p) {
 			), $p->id_boucle);
 
 	}
-	$on = 'on';
-	$off= '';
-	if ($a = ($p->fonctions)) {
-		// Gerer la notation [(#EXPOSER|on,off)]
-		$onoff = array_shift($a);
-		ereg("([^,]*)(,(.*))?", $onoff[0], $regs);
-		$on = addslashes($regs[1]);
-		$off = addslashes($regs[3]);
-		// autres filtres
-		array_shift($p->param);
-	}
-
 
 	$p->code = '(calcul_exposer('
 	.champ_sql($primary_key, $p)
-	.', "'.$primary_key.'", $Pile[0]) ?'." '$on': '$off')";
+	.", '$primary_key', \$Pile[0]) ? $on : $off)";
 	$p->statut = 'php';
 	return $p;
 }
-
 
 //
 // Inserer directement un document dans le squelette
