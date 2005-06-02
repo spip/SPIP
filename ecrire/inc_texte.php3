@@ -1000,7 +1000,7 @@ function traiter_raccourcis_generale($letexte) {
 		/* 16 */	"/<\/quote>/"
 	);
 	$remplace1 = array(
-		/* 0 */ 	"@@SPIP_ligne_horizontale@@",
+		/* 0 */ 	"\n\n@@SPIP_ligne_horizontale@@\n\n",
 		/* 1 */ 	"\n<br />&mdash;&nbsp;",
 		/* 2 */ 	"\n<br />$puce&nbsp;",
 		/* 3 */ 	"\n<br />",
@@ -1030,15 +1030,16 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = preg_replace(',<no p>\s*(</center>)?\s*(</p>)?,ims', '\1', $letexte);
 
 	// intertitres / hr / blockquote / table / ul compliants
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@', $debut_intertitre, $letexte);
-	$letexte = ereg_replace('@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?', $fin_intertitre, $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?', $ligne_horizontale, $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<blockquote class=\"spip\"></p>', "\n<blockquote class=\"spip\">", $letexte);
-	$letexte = ereg_replace('</blockquote>[[:space:]]*(</p>)?', "</blockquote>\n", $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<table', "\n<table", $letexte);
-	$letexte = ereg_replace('</table>[[:space:]]*(</p>)?', "</table>\n", $letexte);
-	$letexte = ereg_replace('(<p class="spip">)?[[:space:]]*<ul', "<ul", $letexte);
-	$letexte = ereg_replace('</ul>[[:space:]]*(</p>)?', '</ul>', $letexte);
+	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@,ms', $debut_intertitre, $letexte);
+	$letexte = preg_replace(',@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?,ms', $fin_intertitre, $letexte);
+	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?,ms', $ligne_horizontale, $letexte);
+	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*<blockquote class=\"spip\"></p>,ms', "\n<blockquote class=\"spip\">", $letexte);
+	$letexte = preg_replace(',</blockquote>[[:space:]]*(</p>)?,ms', "</blockquote>\n", $letexte);
+	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*<table([>[:space:]]),ms', "\n<table\\2", $letexte);
+	$letexte = preg_replace(',</table>[[:space:]]*(</p>)?,ms', "</table>\n", $letexte);
+	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*<ul([>[:space:]]),ms', "<ul\\2", $letexte);
+	$letexte = preg_replace(',</ul>[[:space:]]*(</p>)?,ms', '</ul>', $letexte);
+	$letexte = preg_replace(',<p class="spip">[[:space:]]*</p>,ms', "\n", $letexte);
 
 	// Appeler la fonction de post-traitement
 	$letexte = spip_apres_propre ($letexte);
