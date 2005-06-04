@@ -3080,7 +3080,7 @@ function install_fin_html($suite = '') {
 		echo $link->getForm();
 		echo "<DIV align='$spip_lang_right'>"
 		. "<INPUT TYPE='submit' CLASS='fondl'  VALUE='"
-		. _T('bouton_suivant')." >>'></div>"
+		. _T('ecrire:bouton_suivant')." >>'></div>"
 		. "</FORM>";
 	}
 
