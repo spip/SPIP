@@ -342,12 +342,13 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
 	// Integrer les enclosures
 	foreach ($enclosures as $enclosure) {
 		// url et type sont obligatoires
-		if (preg_match(',[[:space:]]url=[\'"]?(https?://[^\'"]*),i',
+		if (preg_match(',[[:space:]]url=[\'"]?([^\'">]*),i',
 		$enclosure, $enc_regs_url)
-		AND preg_match(',[[:space:]]type=[\'"]?([^\'"]*),i',
+		AND preg_match(',[[:space:]]type=[\'"]?([^\'">]*),i',
 		$enclosure, $enc_regs_type)) {
 
-			$url = addslashes(substr(urldecode($enc_regs_url[1]), 0,255));
+			$url = substr(urldecode($enc_regs_url[1]), 0,255);
+			$url = addslashes(abs_url($url, $lelien));
 			$type = $enc_regs_type[1];
 
 			// Verifier que le content-type nous convient
