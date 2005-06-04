@@ -109,7 +109,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Dosieroj de ka&#349;ilo estas regitritaj en densigita modo.',
 'cache_mode_non_compresse' => 'La dosieroj de ka&#349;ilo estas registritaj en ne-densigita modo.',
-'cache_modifiable_webmestre' => 'Tiujn opciojn povas modifi la mastrumanto de la teksejo.',
+'cache_modifiable_webmestre' => 'Tiun opcion povas modifi la mastrumanto de la teksejo.',
 'calendrier_synchro' => 'Se vi uzas agend-programon kongruan kun <b>iCal</b> formato, vi povas &#285;isdatigi tiun kun la datenoj de tiu teksejo.',
 
 
@@ -121,6 +121,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_ajoute' => 'Aldonita teksto',
 'diff_texte_deplace' => 'Translokita teksto',
 'diff_texte_supprime' => 'Forigita teksto',
+'double_clic_inserer_doc' => 'Dufoje alklaku por enigi tiun trapadon en la teksto',
 
 
 // E
@@ -287,7 +288,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_creer_base' => '<B>Krei</b> novan datenbazon:',
 'info_dans_groupe' => 'En la grupo:',
 'info_dans_rubrique' => 'En la rubriko:',
-'info_date_publication_anterieure' => 'Dato de anta&#365;a aperigo:',
+'info_date_publication_anterieure' => 'Dato de anta&#365;a redaktado :',
 'info_date_referencement' => 'DATO DE REFERENCIGO DE TIU teksejo:',
 'info_delet_mots_cles' => 'Vi petis forigon de la &#349;losilvorto <B>@titre_mot@</b> (@type_mot@). Tiu &#349;losilvorto estante ligita al <b>@texte_lie@</b> vi devas konfirmi tiun decidon:',
 'info_demander_blocage_priori' => 'Peti aprioran blokadon',
@@ -352,6 +353,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_identification_publique' => 'Via publika identeco...',
 'info_image_process' => 'Bonvolu elekti la pli bonan metodon por fabriki vinjetojn alklakante la tiurilatan bildon.',
 'info_image_process2' => '<b>N.B.</b> <i>Se neniu bildo afi&#349;i&#285;as, la servilo kiu gastas vian teksejon ne estas konfigurita por tia iloj. Se vi deziras uzi tiujn funkciojn, petu la &laquo;GD&raquo; a&#365; &laquo;Imagick&raquo; modulojn al la teknika administranto.</i>',
+'info_images_auto' => 'Bildoj a&#365;tomate kalkulitaj',
 'info_informations_personnelles' => 'Kvina etapo: <B>Propaj datenoj</b>',
 'info_inscription_automatique' => 'A&#365;tomata registrado de novaj redaktantoj',
 'info_jeu_caractere' => 'Litertiparo de la teksejo',
@@ -478,6 +480,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_redacteurs' => 'Redaktistoj',
 'info_redaction_en_cours' => 'REDAKTATA',
 'info_redirection' => 'Alidirekto',
+'info_referencer_doc_distant' => 'Referencigi dokumenton en la reto&nbsp;:',
 'info_refuses' => 'Viaj rifuzitaj artikoloj',
 'info_reglage_ldap' => 'Opcioj: <B>aran&#285;o de la LDAP &#349;argo</b>',
 'info_renvoi_article' => '<B>Alidirekto.</b> Tiu artikolo alidirektas al la pa&#285;o:',
@@ -582,6 +585,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_visiteur_2' => 'de la publika spaco',
 'info_visiteurs' => 'Vizitantoj',
 'info_visiteurs_02' => 'Vizitantoj de la publika spaco',
+'install_echec_annonce' => '<NEW>L\'installation va probablement &eacute;chouer, ou aboutir &agrave; un site non fonctionnel...',
+'install_extension_mbstring' => 'SPIP ne ne funkcias kun&nbsp;:',
+'install_extension_php_obligatoire' => '<NEW>SPIP exige l\'extension php&nbsp;:',
 'install_select_langue' => 'Elektu lingvon kaj poste alklaku la butonon &laquo;&nbsp;sekva&nbsp;&raquo; por startigi la instal-proceduron.',
 'intem_redacteur' => 'redaktisto',
 'item_accepter_inscriptions' => 'Akcepti la enskribojn',
@@ -712,6 +718,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
+'taille_cache_image' => '<NEW>Les images calcul&eacute;es automatiquement par SPIP (vignettes des documents, titres pr&eacute;sent&eacute;s sous forme graphique, fonctions math&eacute;matiques au format TeX...) occupent dans le r&eacute;pertoire @dir@ un total de @taille@.',
 'taille_cache_infinie' => 'Tiu teksejo ne limigas grandecon de la dosierujo <code>CACHE/</code>.',
 'taille_cache_maxi' => 'SPIP provas limigi grandecon de la dosierujo <code>CACHE/</coche> cirka&#365; <b>@octets@</b> da datenoj.',
 'taille_cache_octets' => 'Grandeco de la ka&#349;ilo estas nun @octets@.',
@@ -774,8 +781,8 @@ la bildojn kaj la dokumentojn uzatajn en la artikoloj kaj la rubrikoj.',
 			a&#365;tomatan riparadon.',
 'texte_creer_rubrique' => 'Anta&#365; ol povi skribi artikolojn,<BR> vi devas krei rubrikon.',
 'texte_date_creation_article' => 'ESTIGODATO DE LA ARTIKOLO :',
-'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A PUBLIKIGO&nbsp;:',
-'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a publikigo.',
+'texte_date_publication_anterieure' => 'DATO DE ANTA&#364;A REDAKTADO&nbsp;:',
+'texte_date_publication_anterieure_nonaffichee' => 'Ne afi&#349;i daton de anta&#365;a redaktado.',
 'texte_date_publication_article' => 'DATO DE RETA PUBLIKIGO&nbsp;:',
 'texte_demander_blocage_priori' => 'La venontaj ligoj devenantaj
 				de tiu teksejo estos apriore blokitaj.',

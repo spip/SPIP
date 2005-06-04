@@ -318,7 +318,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_forum_statistiques' => 'Estad&iacute;sticas de las visitas',
 'info_forums_abo_invites' => 'Tu sitio tiene foros para abonados; en el sitio p&uacute;blico se invita a los visitantes a que se registren.',
 'info_gauche_admin_effacer' => '<B>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><P> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
-'info_gauche_admin_tech' => '<b>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
+'info_gauche_admin_tech' => '<b>S&oacute;lo los y las responsables del sitio acceden a esta p&aacute;gina.</b><p> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas requieren un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
 'info_gauche_admin_vider' => '<B>Esta p&aacute;gina s&oacute;lo es accesible para los/las responsables del sitio.</b><P> Da acceso a las distintas funciones de mantenimiento t&eacute;cnico. Algunas de ellas dan lugar a un proceso de autentificaci&oacute;n para el cual es necesario tener acceso por FTP al sitio web.',
 'info_gauche_auteurs' => 'Aqu&iacute; figuran todos los autores y autoras del sitio.
  Su estado se indica con el color de su icono (administrador/a = verde; redactor/a = amarillo).',

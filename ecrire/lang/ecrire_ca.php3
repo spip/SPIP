@@ -553,7 +553,7 @@ SPIP permet no obstant administrar relativament b&eacute; les altres lleng&uuml;
 'info_statut_utilisateurs_2' => 'Escolliu l\'estat atribu&iuml;t a les persones que hi ha al directori LDAP quan es connecten per primera vegada. Posteriorment podreu podreu modificar aquest valor cas per cas.',
 'info_suivi_activite' => 'Seguiment de l\'activitat editorial',
 'info_supprimer_mot' => 'suprimir aquesta paraula',
-'info_surtitre' => 'Subt&iacute;tol:',
+'info_surtitre' => 'Sobret&iacute;tol:',
 'info_taille_maximale_vignette' => 'Mida m&agrave;xima de les vinyetes generades pel sistema:',
 'info_terminer_installation' => 'Ara podeu finalitzar el proc&eacute;s d\'instal&middot;laci&oacute; est&agrave;ndard. ',
 'info_texte' => 'Text',
