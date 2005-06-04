@@ -11,20 +11,23 @@
 \***************************************************************************/
 
 
-include("inc_lab.php");
+//
+// Si le RSS est demande on ne passe pas par l'authentification de ecrire/
+// (hack rapide en attendant une meilleure solution)
+//
+if ($_GET['rss']) {
+	include("inc_version.php3");
 
-include_ecrire("inc_suivi_revisions.php");
-include_spip("ecrire.php");
-include_spip("revisions.php");
-include_spip("diff.php");
-include_ecrire("inc_acces.php3");
+	$debut = intval($debut);
+	$uniq_auteur = ($uniq_auteur != false);
+	include_ecrire("inc_suivi_revisions.php");
+	include_ecrire("lab_revisions.php");
+	include_ecrire("lab_diff.php");
+	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_presentation.php3");
+	include_ecrire("inc_acces.php3");
 
 
-$debut = intval($debut);
-$uniq_auteur = ($uniq_auteur != false);
-
-
-if ($rss) {
 	// verifier la securite du lien (rss = md5(arguments + low_sec(id_auteur))
 	if (!verifier_low_sec ($id_auteur, $rss,
 	"rss suivi $debut $id_secteur $uniq_auteur $lang_choisie"
@@ -45,6 +48,16 @@ if ($rss) {
 	exit;
 }
 
+
+include("inc_lab.php");
+include_ecrire("inc_suivi_revisions.php");
+include_spip("ecrire.php");
+include_spip("revisions.php");
+include_spip("diff.php");
+include_ecrire("inc_acces.php3");
+
+$debut = intval($debut);
+$uniq_auteur = ($uniq_auteur != false);
 
 debut_page(_T("icone_suivi_revisions"));
 
