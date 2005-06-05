@@ -8,11 +8,11 @@
 <script type="text/javascript" src="ecrire/presentation.js"></script>
 </head><body>[
 (#ENV{type}|=={'jour'}|?{' ',''}
- )<INCLURE(jour.php3){annee}{mois}{jour}{echelle}{partie_cal}>
+ )<INCLURE(agenda_jour.php3){annee}{mois}{jour}{echelle}{partie_cal}>
 ][(#ENV{type}|=={'semaine'}|?{' ',''}
-   )<INCLURE(semaine.php3){annee}{mois}{jour}{echelle}{partie_cal}>
+   )<INCLURE(agenda_semaine.php3){annee}{mois}{jour}{echelle}{partie_cal}>
 ][(#ENV{type}|=={'mois'}|?{' ',''}
-   )<INCLURE(mois.php3){annee}{mois}{jour}{echelle}{partie_cal}>
+   )<INCLURE(agenda_mois.php3){annee}{mois}{jour}{echelle}{partie_cal}>
 ][(#ENV{type}|=={''}|?{' ',''}
-   )<INCLURE(mois.php3){annee}{mois}{jour}{echelle}{partie_cal}>
+   )<INCLURE(agenda_mois.php3){annee}{mois}{jour}{echelle}{partie_cal}>
 ]</body></html>
