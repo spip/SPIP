@@ -550,36 +550,35 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 
 	// Rajouter le nom de la table SQL devant le nom du champ
 	if ($col_table) {
-	  //  `champ` devient `table.champ` (syntaxe SQL pour nom zarbi)
 		if ($col[0] == "`") 
-		  $col = "$col_table." . substr($col,1,-1);
-		else $col = "$col_table.$col";
-	}
+		  $ct = "$col_table." . substr($col,1,-1);
+		else $ct = "$col_table.$col";
+	} else $ct = $col;
 
 	// fonction SQL
-	if ($fct) $col = "$fct($col)";
+	if ($fct) $ct = "$fct($ct)";
 
-	if (($op != '=') || !calculer_critere_repete($boucle, $col, $val[0]))
+	if (($op != '=') || !calculer_critere_repete($boucle, $ct, $val[0]))
 	  {
 	    if (strtoupper($op) == 'IN') {
 	      $val = join(" .\n\"','\" . ", $val);
 	  
-	      $where = "$col IN ('\" . $val . \"')";
+	      $where = "$ct IN ('\" . $val . \"')";
 	      if ($crit->not) {
 		$where = "NOT ($where)";
 	      } else {
 			$boucle->default_order = 'rang';
 			$boucle->select[] =
-				"FIND_IN_SET($col, \\\"'\" . " . $val . ' . "\'\\") AS rang';
+				"FIND_IN_SET($ct, \\\"'\" . " . $val . ' . "\'\\") AS rang';
 	      }
 	    } else {
 		  if ($op == '==') $op = 'REGEXP';
-		  $where = "($col $op '\" . " . $val[0] . ' . "\')';
-		  if ($crit->not)	$where = "NOT $where";
+		  $where = "($ct $op '\" . " . $val[0] . ' . "\')';
+		  if ($crit->not) $where = "NOT $where";
 
 		// operateur optionnel {lang?}
 		  if ($crit->cond) {
-		    $champ = calculer_argument_precedent($idb, $arg1, $boucles) ;
+		    $champ = calculer_argument_precedent($idb, $col, $boucles) ;
 		    $where = "\".($champ ? \"$where\" : 1).\"";
 		  }
 	    }
