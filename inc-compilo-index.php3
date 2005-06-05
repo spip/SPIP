@@ -86,7 +86,7 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 				unset($e);
 		}
 
-#		spip_log("Dans $idb ('$t' '$e'): $desc");
+#		spip_log("Dans $idb ('$t' '$e' '$c'): $desc");
 
 		// On l'a trouve
 		if ($e) {

@@ -269,7 +269,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 			"'".$boucle->limit."'" :
 			$boucle->limit). ", # LIMIT
 		'".$boucle->sous_requete."', # sous
-		".$boucle->compte_requete.", # compte
+		'" . (!$boucle->having ? "" : "(COUNT(*)> $boucle->having)")."', # HAVING
 		'".$id_table."', # table
 		'".$boucle->id_boucle."', # boucle
 		'".$boucle->sql_serveur."'); # serveur";
@@ -486,6 +486,52 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 				"(" . join ("\n$tab. ", $codes) . ")"));
 }
 
+// affichage du code produit
+
+function code_boucle($boucle, $id, $nom, $sourcefile)
+{
+	// Indiquer la boucle en commentaire
+	$pretty = '';
+
+	// Resynthetiser les criteres
+	foreach ($boucle->param as $param) {
+	  $c = $param[1][0];
+	  $s = $c->apres ;
+	  if ($s)
+	    $s = ($s . $c->texte . $s);
+	  else 
+	    // faudrait decompiler aussi les balises...
+	    foreach ($param[1] as $c)
+	      $s .= ($c->type == 'texte') ? $c->texte : '#...';
+	  $pretty .= ' {' . $s . '}';
+	}
+
+	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
+		ereg_replace("[\r\n]", " ", $pretty);
+
+	// Puis envoyer son code
+	$codeboucle = "\n//\n// <$pretty>\n//\n"
+	  ."function BOUCLE" . ereg_replace("-","_",$id) . $nom .
+	  '(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
+	  $boucle->return;
+
+	$fincode = "\n	return \$t0;"
+	  ."\n}\n\n";
+
+	## inserer les elements pour le debuggueur, a deux niveaux :
+	## 1) apres le calcul d'une boucle compilee, envoyer le code
+	##    compile vers boucle_debug_compile()
+	## 2) le resultat de la boucle, lui, sera plus tard envoye vers
+	##    boucle_debug_resultat()
+	if ($GLOBALS['var_mode'] == 'debug') {
+		boucle_debug_compile ($id, $nom, $pretty,
+				      $sourcefile, $codeboucle.$fincode);
+		$codedebug = "
+	boucle_debug_resultat('$id', '$nom', \$t0);";
+	}
+	return $codeboucle.$codedebug.$fincode;
+}
+
 // Prend en argument le source d'un squelette, sa grammaire et un nom.
 // Retourne une fonction PHP/SQL portant ce nom et calculant une page HTML.
 // Pour appeler la fonction produite, lui fournir 2 tableaux de 1 e'le'ment:
@@ -596,46 +642,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		}
 
 		foreach($boucles as $id => $boucle) {
-
-			// Indiquer la boucle en commentaire
-			$pretty = "BOUCLE$id (".strtoupper($boucle->type_requete).")";
-#			// anachronique. A refaire.
-#			if ($boucle->param && is_array($boucle->param)) 
-#			 foreach ($boucle->param as $truc) {
-#			 $pretty .= " {". htmlspecialchars($truc[1][0]->texte) ."}";
-#			 }
-#			// sans oublier les parametres traites en amont
-#		    if ($boucle->separateur)
-#		      foreach($boucle->separateur as $v)
-#			$pretty .= ' {"'. htmlspecialchars($v) . '"}';
-#		    if ($boucle->tout)
-#			  $pretty .= '{tout}';
-#			if ($boucle->plat)
-#			  $pretty .= '{plat}';
-			$pretty = ereg_replace("[\r\n]", " ", $pretty);
-
-			// Puis envoyer son code
-			$codeboucle = "\n//\n// $pretty\n//\n"
-			."function BOUCLE" . ereg_replace("-","_",$id) . $nom .
-			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
-			$boucle->return;
-
-			$fincode = "\n	return \$t0;"
-			."\n}\n\n";
-
-			## inserer les elements pour le debuggueur, a deux niveaux :
-			## 1) apres le calcul d'une boucle compilee, envoyer le code
-			##    compile vers boucle_debug_compile()
-			## 2) le resultat de la boucle, lui, sera plus tard envoye vers
-			##    boucle_debug_resultat()
-			if ($GLOBALS['var_mode'] == 'debug') {
-				boucle_debug_compile ($id, $nom, $pretty,
-					$sourcefile, $codeboucle.$fincode);
-				$codedebug = "
-	boucle_debug_resultat('$id', '$nom', \$t0);";
-			}
-
-			$code .= $codeboucle.$codedebug.$fincode;
+			$code .= code_boucle($boucle, $id, $nom, $sourcefile);
 		}
 	}
 

@@ -71,12 +71,13 @@ function spip_query_db($query) {
 
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
-			   $sousrequete, $cpt,
+			   $sousrequete, $having,
 			   $table, $id, $serveur) {
 
 	$q = "\nFROM " . join(",\n\t", $from)
 	. ($where ? "\nWHERE " . join("\n\tAND ", $where) : '')
 	. ($groupby ? "\nGROUP BY $groupby" : '')
+	. ($having  ? "\nHAVING $having" : '')
 	. ($orderby ? "\nORDER BY $orderby" : '')
 	. ($limit ? "\nLIMIT $limit" : '');
 
