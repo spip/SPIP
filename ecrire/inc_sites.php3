@@ -278,6 +278,27 @@ function affiche_rss($rss, $intro = '') {
 	return $u;
 }
 
+//
+// Creer un bouton qui renvoie vers la bonne url spip_rss
+function bouton_spip_rss($op, $args) {
+	include_ecrire("inc_acces.php3");
+
+	if (is_array($args))
+		foreach ($args as $val => $var)
+			if ($var) $a .= $val.'-'.$var.':';
+	$a = substr($a,0,-1);
+	if ($a) $a = "&args=$a";
+
+	$link = new Link("../spip_rss.php?op=$op$a");
+	$link->addVar('id', $GLOBALS['connect_id_auteur']);
+	$link->addVar('cle', afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a"));
+	return "<a href='".$link->getUrl()."'>"
+	. http_img_pack("xml.gif", 'XML', "border='0' align='middle' valign='top'")
+	. "</a>";
+}
+
+
+
 function trouver_format($texte) {
 	$syndic_version = '';
 	
