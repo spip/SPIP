@@ -287,9 +287,9 @@ function bouton_spip_rss($op, $args) {
 		foreach ($args as $val => $var)
 			if ($var) $a .= $val.'-'.$var.':';
 	$a = substr($a,0,-1);
-	if ($a) $a = "&args=$a";
 
-	$link = new Link("../spip_rss.php?op=$op$a");
+	$link = new Link("../spip_rss.php?op=$op");
+	if ($a) $link->addVar('args', $a);
 	$link->addVar('id', $GLOBALS['connect_id_auteur']);
 	$link->addVar('cle', afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a"));
 	return "<a href='".$link->getUrl()."'>"
