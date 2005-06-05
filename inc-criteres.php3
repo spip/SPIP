@@ -65,7 +65,7 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@lang_select
 function critere_lang_select_dist($idb, &$boucles, $crit) {
 	if (!($param = $crit->param[1][0]->texte)) $param = 'oui';
-	if ($crit->not)	$param = ($param=='oui')?'non':'oui';
+	if ($crit->not)	$param = ($param=='oui') ? 'non' : 'oui';
 	$boucle = &$boucles[$idb];
 	$boucle->lang_select = $param;
 }
@@ -307,7 +307,7 @@ function calculer_critere_parties($idb, &$boucles, $crit) {
 		$boucle->partie = ($a11 != 'n') ? $a11 : $a12;
 		$boucle->total_parties =  ($a21 != 'n') ? $a21 : $a22;
 		$boucle->mode_partie = (($op == '/') ? '/' :
-			(($a11=='n')?'-':'+').(($a21=='n')?'-':'+'));
+			(($a11=='n') ? '-' : '+').(($a21=='n') ? '-' : '+'));
 	}
 }
 
@@ -357,6 +357,7 @@ function calculer_criteres ($idb, &$boucles) {
 function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	
 	global $table_date, $tables_des_serveurs_sql;
+	static $num_lien;
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
@@ -443,13 +444,14 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		  $col_lien = "syndic";
 		else
 		  $col_lien = $type;
-		$boucle->from[] = "spip_mots_$col_lien AS lien_mot";
-		$boucle->from[] = 'spip_mots AS mots';
-		$boucle->where[] = "$id_field=lien_mot." . $primary;
-		$boucle->where[] = 'lien_mot.id_mot=mots.id_mot';
+		$num_lien++;
+		$boucle->from[] = "spip_mots_$col_lien AS lien_mot$num_lien";
+		$boucle->from[] = "spip_mots AS mots$num_lien";
+		$boucle->where[] = "$id_field=lien_mot$num_lien." . $primary;
+		$boucle->where[] = "lien_mot$num_lien.id_mot=mots$num_lien.id_mot";
 		$boucle->group = $id_field;
 		$boucle->select[] = $id_field; # pour postgres, neuneu ici
-		$col_table = 'mots';
+		$col_table = "mots$num_lien";
 
 		$boucle->lien = true;
 		if ($col == 'type_mot')
@@ -583,21 +585,23 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 // tant qu'a faire eviter de dupliquer sa declaration,
 // mais c'est une goutte d'eau dans la mer
 
-function calculer_critere_externe(&$boucle, $id_field, $col, $type)
-{
+function calculer_critere_externe(&$boucle, $id_field, $col, $type) {
 	global $tables_relations;
+	static $num;
+
 	if ($col_table =  $tables_relations[$type][$col]) {
-		$externe = "$id_field=$col_table." . $boucle->primary;
+		$num++;
+		$externe = "$id_field=$col_table$num." . $boucle->primary;
 		if (!$boucle->where || (!in_array($externe, $boucle->where))) {
 			$boucle->lien = true;
-			$boucle->from[] = "spip_$col_table AS $col_table";
+			$boucle->from[] = "spip_$col_table AS $col_table$num";
 			$boucle->where[] = $externe;
 			$boucle->group = $id_field;
 			// postgres exige que le champ pour GROUP soit dans le SELECT
 			$boucle->select[] = $id_field;
 		}
+		return $col_table.$num;
 	}
-	return $col_table;
 }
 
 function calculer_param_date($date_compare, $date_orig) {
