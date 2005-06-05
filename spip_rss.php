@@ -20,12 +20,12 @@
 
 include("ecrire/inc_version.php3");
 include_ecrire("inc_texte.php3");
-
+include_ecrire('inc_sites.php3');
+include_ecrire("inc_acces.php3");
 
 //
 // Verifier la securite du lien et decoder les arguments
 //
-include_ecrire("inc_acces.php3");
 if (!verifier_low_sec ($id, $cle,
 "rss $op $args"
 )) {
@@ -37,16 +37,27 @@ if (!verifier_low_sec ($id, $cle,
 		list($var, $val) = split('-', $bout, 2);
 		$a[$var] = $val;
 	}
+	include_ecrire('inc_lang.php3');
+	lang_select($lang);
 }
 
 //
 // Choisir la fonction de calcul du RSS
 //
 switch($op) {
+	case 'forums':
+		include_ecrire("inc_forum.php3");
+		$rss = rss_suivi_forums($a);
+		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
+		$url = _DIR_RESTREINT_ABS .'controle_forum.php3?page='.$a['page'];
+		break;
 	case 'revisions':
+		include_ecrire("inc_suivi_revisions.php");
 		$rss = rss_suivi_versions($a);
 		$title = _T("icone_suivi_revisions");
-		$url = _DIR_RESTREINT_ABS .'suivi_revisions.php3';
+		$url = _DIR_RESTREINT_ABS .'suivi_revisions.php3?';
+		foreach (array('id_secteur', 'id_auteur', 'lang_choisie') as $var)
+			if ($a[$var]) $url.= '&'.$var.'='.$a[$var];
 		break;
 	case 'erreur securite':
 		$rss = array(array('title' => _L('Erreur de s&eacute;curit&eacute;')));
@@ -63,7 +74,6 @@ switch($op) {
 //
 // Envoyer le RSS
 //
-include_ecrire('inc_sites.php3');
 @header('Content-Type: text/xml; charset='.lire_meta('charset'));
 
 $intro = array(
@@ -73,17 +83,5 @@ $intro = array(
 
 echo affiche_rss($rss, $intro);
 exit;
-
-//
-// Fonctions de calcul (a dispatcher dans les librairies)
-//
-function rss_suivi_versions($a) {
-	include_ecrire("inc_suivi_revisions.php");
-	include_ecrire("lab_revisions.php");
-	include_ecrire("lab_diff.php");
-	include_ecrire("inc_presentation.php3");
-	$rss = afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
-	return $rss;
-}
 
 ?>

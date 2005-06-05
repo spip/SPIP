@@ -1739,9 +1739,14 @@ function barre_onglets($rubrique, $onglet){
 
 		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 0,1";
 		$result_forum = spip_query($query_forum);
-		if ($row = spip_fetch_array($result_forum)) {
-			onglet(_T('onglet_messages_vide'), "controle_forum.php3?page=vide", "sans", $onglet);
-		}
+		if ($row = spip_fetch_array($result_forum))
+			onglet(_T('onglet_messages_vide'), "controle_forum.php3?page=vide", "vide", $onglet);
+
+		$query_forum = "SELECT * FROM spip_forum WHERE statut='prop' LIMIT 0,1";
+		$result_forum = spip_query($query_forum);
+		if ($row = spip_fetch_array($result_forum))
+			onglet(_T('texte_statut_attente_validation'), "controle_forum.php3?page=prop", "prop", $onglet);
+
 	}
 
 	fin_onglet();

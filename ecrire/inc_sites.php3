@@ -236,7 +236,6 @@ function my_strtotime($la_date) {
 // A completer (il manque des tests, des valeurs par defaut, les enclosures, differents formats de sortie, etc.)
 //
 function affiche_rss($rss, $intro = '') {
-	if (!is_array($rss)) return;
 
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
@@ -251,6 +250,7 @@ function affiche_rss($rss, $intro = '') {
 	';
 
 	// elements
+	if (is_array($rss))
 	foreach ($rss as $article) {
 		$u .= '
 	<item>
@@ -291,7 +291,9 @@ function bouton_spip_rss($op, $args) {
 	$link = new Link("../spip_rss.php?op=$op");
 	if ($a) $link->addVar('args', $a);
 	$link->addVar('id', $GLOBALS['connect_id_auteur']);
-	$link->addVar('cle', afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a"));
+	$cle = afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a");
+	$link->addVar('cle', $cle);
+	$link->addVar('lang', $GLOBALS['spip_lang']);
 	return "<a href='".$link->getUrl()."'>"
 	. http_img_pack("xml.gif", 'XML', "border='0' align='middle' valign='top'")
 	. "</a>";

@@ -18,7 +18,7 @@ include_spip("revisions.php");
 include_spip("diff.php");
 
 $debut = intval($debut);
-$uniq_auteur = ($uniq_auteur != false);
+$id_auteur = ($id_auteur == $connect_id_auteur) ? $id_auteur : false;
 
 debut_page(_T("icone_suivi_revisions"));
 
@@ -41,15 +41,15 @@ debut_cadre_relief();
 echo "<div class='arial11'><ul>";
 echo "<p>";
 
-if (!$uniq_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
+if (!$id_auteur AND $id_secteur < 1) echo "<li><b>"._T('info_tout_site')."</b>";
 else echo "<li><a href='suivi_revisions.php3'>"._T('info_tout_site')."</a>";
 
 echo "<p>";
 
 $nom_auteur = $GLOBALS['auteur_session']['nom'];
 
-if ($uniq_auteur) echo "<li><b>$nom_auteur</b>";
-else echo "<li><a href='suivi_revisions.php3?uniq_auteur=true'>$nom_auteur</a>";
+if ($id_auteur) echo "<li><b>$nom_auteur</b>";
+else echo "<li><a href='suivi_revisions.php3?id_auteur=$connect_id_auteur'>$nom_auteur</a>";
 
 echo "<p>";
 
@@ -96,7 +96,7 @@ include_ecrire('inc_sites.php3');
 $op = 'revisions';
 $args = array(
 	'id_secteur' => $id_secteur,
-	'id_auteur' => $uniq_auteur ? $connect_id_auteur : false,
+	'id_auteur' => $id_auteur,
 	'lang_choisie' => $lang_choisie
 );
 echo "<div style='text-align: "
