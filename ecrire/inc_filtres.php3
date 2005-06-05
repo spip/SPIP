@@ -1042,6 +1042,22 @@ function tester_config($ignore, $quoi) {
 	}
 }
 
+//
+// Un filtre qui, etant donne un #PARAMETRES_FORUM, retourne un URL de suivi rss
+// dudit forum
+// Attention applique a un #PARAMETRES_FORUM complexe (id_article=x&id_forum=y)
+// ca retourne un url de suivi du thread y (que le thread existe ou non)
+function url_rss_forum($param) {
+	if (preg_match(',.*(id_.*?)=([0-9]+),', $param, $regs)) {
+		include_ecrire('inc_acces.php3');
+		$regs[1] = str_replace('id_forum', 'id_thread', $regs[1]);
+		$arg = $regs[1].'-'.$regs[2];
+		$cle = afficher_low_sec(0, "rss forum $arg");
+		return "spip_rss.php?op=forum&amp;args=$arg&amp;cle=$cle";
+	}
+}
+
+
 // filtre pour visualiser dans l'espace public le calendrier de l'espace de redac
 // Tres ad hoc, faudra ameliorer.
 

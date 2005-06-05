@@ -215,6 +215,7 @@ function critere_statut_controle_forum($page) {
 		$query_forum = "0=1";
 		break;
 	}
+
 	return $query_forum;
 }
 
@@ -300,10 +301,8 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 }
 
 // Interface pour SPIP RSS
-function rss_suivi_forums($a) {
+function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 	include_ecrire("inc_forum.php3");
-
-	$query_forum = critere_statut_controle_forum($a['page']);
 
 	$result_forum = spip_query("
 	SELECT	*
@@ -323,8 +322,13 @@ function rss_suivi_forums($a) {
 		$item['author'] = $t['auteur'];
 		if ($t['email_auteur'])
 			$item['author'] .= ' &lt;'.$t['email_auteur'].'&gt;';
-		$item['url'] = lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS
+
+		if ($lien_moderation)
+			$item['url'] = lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS
 			.'controle_forum.php3?page='.$a['page'].'&debut_id_forum='.$t['id_forum'];
+		else
+			$item['url'] = lire_meta('adresse_site').'/'.generer_url_forum($t['id_forum']);
+
 		$item['description'] = propre($t['texte']);
 		if ($GLOBALS['les_notes']) {
 			$item['description'] .= '<hr />'.$GLOBALS['les_notes'];
