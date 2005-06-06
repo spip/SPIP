@@ -566,7 +566,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
   global $table_primary, $table_des_tables, $tables_des_serveurs_sql;
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
-	$boucles = '';
+	$boucles = array();
 	spip_timer('calcul_skel');
 
 	include_local("inc-$gram-squel.php3");
@@ -576,18 +576,14 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'documents' => false, 'sourcefile' => $sourcefile);
 
-	if ($boucles) {
-	  // une boucle documents est conditionnee par tout le reste!
-		foreach($boucles as $idb => $boucle) {
-			if ($boucle->param) {
-				if (($boucle->type_requete == 'documents') && 
-				     $boucle->doublons)
-				  { $descr['documents'] = true; break; }
-			}
-		  }
+	// une boucle documents est conditionnee par tout le reste!
+	foreach($boucles as $idb => $boucle) {
+		if (($boucle->type_requete == 'documents') && $boucle->doublons)
+			{ $descr['documents'] = true; break; }
+	}
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire
-		foreach($boucles as $id => $boucle) { 
+	foreach($boucles as $id => $boucle) { 
 			if ($boucle->type_requete == 'boucle') {
 				$rec = &$boucles[$boucle->param[0]];
 				if (!$rec) {
@@ -604,8 +600,8 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 							 $boucle->param);
 				}
 			}
-		}
-		foreach($boucles as $id => $boucle) { 
+	}
+	foreach($boucles as $id => $boucle) { 
 			$type = $boucle->type_requete;
 			if ($type != 'boucle') {
 				$boucles[$id]->id_table = $table_des_tables[$type];
@@ -630,7 +626,6 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 					 $boucles,
 					 $id);
 			}
-		}
 	}
 
 	// idem pour la racine
