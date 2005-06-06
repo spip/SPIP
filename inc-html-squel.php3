@@ -179,12 +179,13 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
 	while ($args && $args[0] != '}') {
+
 		if ($args[0] == '"')
 			preg_match ('/^(")([^"]*)(")(.*)$/ms', $args, $regs);
 		else if ($args[0] == "'")
 			preg_match ("/^(')([^']*)(')(.*)$/ms", $args, $regs);
 		else {
-		  preg_match("/^([[:space:]]*)([^,}]*)([,}$fin].*)$/ms", $args, $regs);
+		  preg_match("/^([[:space:]]*)([^$fin,([{}]*([(\[{][^])}]*[])}])?[^$fin,}]*)([,}$fin].*)$/ms", $args, $regs);
 		  if (!strlen($regs[2]))
 		    {
 		      erreur_squelette(_T('zbug_info_erreur_squelette'), $args);
