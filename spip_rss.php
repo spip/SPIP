@@ -32,6 +32,7 @@ else
 //
 // Verifier la securite du lien et decoder les arguments
 //
+spip_timer('rss');
 if (!verifier_low_sec ($id, $cle,
 "rss $op $args"
 )) {
@@ -108,6 +109,7 @@ $intro = array(
 );
 
 echo affiche_rss($rss, $intro);
+spip_log("spip_rss: ".spip_timer('rss'));
 exit;
 
 ?>

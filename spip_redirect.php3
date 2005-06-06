@@ -54,7 +54,7 @@ if (strpos($url,'?')) {
 else {
 	$super='?';
 }
-$url .= $super."var_mode=$var_mode";
+if ($var_mode) $url .= $super."var_mode=$var_mode";
 
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls.php3 ou mes_fonctions/mes_options)
