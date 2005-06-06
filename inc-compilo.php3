@@ -370,6 +370,8 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
         $codes = array();
+	spip_log($id_boucle);
+	$type = $id_boucle ? $boucles[$id_boucle]->type_requete : '';
 	$descr['niv']++;
 	for ($i=0; $i<=$descr['niv']; $i++) $tab .= "\t";
 
@@ -451,7 +453,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 			$p->boucles = &$boucles;
 			$p->descr = $descr;
 			$p->statut = 'html';
-			$p->type_requete = $boucles[$id_boucle]->type_requete;
+			$p->type_requete = $type;
 
 			$code = calculer_champ($p);
 			$commentaire = '#' . $p->nom_champ . $p->etoile;
