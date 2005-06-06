@@ -76,7 +76,7 @@ class Boucle {
 class Critere {
 	var $op;
 	var $not;	
-	var $param;
+	var $param = array();
 }
 
 class Champ {
