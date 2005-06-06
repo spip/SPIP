@@ -370,7 +370,10 @@ function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
 function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	if (!$tableau) return "''";
         $codes = array();
-	$type = (is_array($id_boucle) ? $id_boucle[0] : $boucles[$id_boucle]->type_requete) ;
+	// cas de la boucle recursive
+	if (is_array($id_boucle)) 
+	  $id_boucle = $id_boucle[0];
+	$type = $boucles[$id_boucle]->type_requete;
 	$descr['niv']++;
 	for ($i=0; $i<=$descr['niv']; $i++) $tab .= "\t";
 
@@ -448,6 +451,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 		default: 
 
 			// cette structure pourrait etre completee des le phrase' (a faire)
+		  spip_log(" $id_boucle $p->texte");
 			$p->id_boucle = $id_boucle;
 			$p->boucles = &$boucles;
 			$p->descr = $descr;
