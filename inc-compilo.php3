@@ -451,7 +451,6 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 		default: 
 
 			// cette structure pourrait etre completee des le phrase' (a faire)
-		  spip_log(" $id_boucle $p->texte");
 			$p->id_boucle = $id_boucle;
 			$p->boucles = &$boucles;
 			$p->descr = $descr;
