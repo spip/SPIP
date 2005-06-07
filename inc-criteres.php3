@@ -356,6 +356,7 @@ function calculer_criteres ($idb, &$boucles) {
 function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	
 	global $table_date, $tables_des_serveurs_sql;
+	global $tables_relations;
 
 	$boucle = &$boucles[$idb];
 	$type = $boucle->type_requete;
@@ -430,34 +431,31 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 
 	// reperer les champs n'appartenant pas a la table de la boucle
 
-	if ($s = calculer_critere_externe($boucle, $id_field,$col, $type))
-		$col_table = $s;
-
+	if ($ext_table =  $tables_relations[$type][$col])
+		$col_table = $ext_table . 
+		  calculer_critere_externe($boucle, $id_field, $ext_table);
 	// Cas particulier pour les raccourcis 'type_mot' et 'titre_mot'
-	else if ($type != 'mots'
+	elseif ($type != 'mots'
 			AND ($col == 'type_mot' OR $col == 'titre_mot'
 			OR $col == 'id_groupe')) {
 		if ($type == 'forums')
-		  $col_lien = "forum";
+		  $lien = "mots_forum";
 		else if ($type == 'syndication')
-		  $col_lien = "syndic";
+		  $lien = "mots_syndic";
 		else
-		  $col_lien = $type;
-		$boucle->from[] = "spip_mots_$col_lien AS lien_mot";
-		$boucle->from[] = 'spip_mots AS mots';
-		$boucle->where[] = "$id_field=lien_mot." . $primary;
-		$boucle->where[] = 'lien_mot.id_mot=mots.id_mot';
-		$boucle->group = $id_field;
-		$boucle->select[] = $id_field; # pour postgres, neuneu ici
-		$col_table = 'mots';
+		  $lien = "mots_$type";
+		
+		// jointure nouvelle a chaque comparaison
+		$num_lien = calculer_critere_externe($boucle, $id_field, $lien );
+		// jointure pour lier la table principale et la nouvelle
+		$boucle->from[] = "spip_mots AS l_mots$num_lien";
+		$boucle->where[] = "$lien$num_lien.id_mot=l_mots$num_lien.id_mot";
+		$col_table = "mots$num_lien";
 
-		$boucle->lien = true;
 		if ($col == 'type_mot')
 		  $col = 'type';
 		else if ($col == 'titre_mot')
 		  $col = 'titre';
-		else if ($col == 'id_groupe')
-		  $col = 'id_groupe';
 	}
 
 	// Cas particulier : selection des documents selon l'extension
@@ -557,9 +555,8 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	// fonction SQL
 	if ($fct) $ct = "$fct($ct)";
 
-	if (($op != '=') || !calculer_critere_repete($boucle, $ct, $val[0]))
-	  {
-	    if (strtoupper($op) == 'IN') {
+	//	if (($op != '=') || !calculer_critere_repete($boucle, $ct, $val[0])) # a revoir
+	if (strtoupper($op) == 'IN') {
 	      $val = join(" .\n\"','\" . ", $val);
 	  
 	      $where = "$ct IN ('\" . $val . \"')";
@@ -581,13 +578,14 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 		    $where = "\".($champ ? \"$where\" : 1).\"";
 		  }
 	    }
-	    $boucle->where[] = $where;
-	  }
+
+	$boucle->where[] = $where;
 }
 
+// fonction provisoirement inutilisee
 // reperer des repetitions comme {id_mot=1}{id_mot=2}
 //  pour creer une clause HAVING
-
+/*
 function calculer_critere_repete(&$boucle, $col, $val)
 {
 	foreach ($boucle->where as $k => $v)  {
@@ -599,26 +597,21 @@ function calculer_critere_repete(&$boucle, $col, $val)
               }
 	return false;
 }
+*/
+// traitement des relations externes par DES jointures.
 
-// traitement des relations externes par une jointure.
-// tant qu'a faire eviter de dupliquer sa declaration,
-// mais c'est une goutte d'eau dans la mer
+function calculer_critere_externe(&$boucle, $id_field, $col_table) {
 
-function calculer_critere_externe(&$boucle, $id_field, $col, $type)
-{
-	global $tables_relations;
-	if ($col_table =  $tables_relations[$type][$col]) {
-		$externe = "$id_field=$col_table." . $boucle->primary;
-		if (!$boucle->where || (!in_array($externe, $boucle->where))) {
-			$boucle->lien = true;
-			$boucle->from[] = "spip_$col_table AS $col_table";
-			$boucle->where[] = $externe;
-			$boucle->group = $id_field;
-			// postgres exige que le champ pour GROUP soit dans le SELECT
-			$boucle->select[] = $id_field;
-		}
-	}
-	return $col_table;
+	static $num;
+
+	$num++;
+	$boucle->lien = true;
+	$boucle->from[] = "spip_$col_table AS $col_table$num";
+	$boucle->where[] = "$id_field=$col_table$num." . $boucle->primary;
+	$boucle->group = $id_field;
+	// postgres exige que le champ pour GROUP soit dans le SELECT
+	$boucle->select[] = $id_field;
+	return $num;
 }
 
 function calculer_param_date($date_compare, $date_orig) {
