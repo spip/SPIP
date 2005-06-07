@@ -94,16 +94,14 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 			$date = $row['date'];
 			$id_article = $row['id_article'];
 			$statut = $row['statut'];
-			$titre = propre($row['titre']);	
-			$nom = "";
+			$titre = propre($row['titre']);
 			$query_auteur = "
-				SELECT nom
+				SELECT nom,email
 				FROM spip_auteurs
 				WHERE id_auteur = $id_auteur";
-			$result_auteur = spip_query($query_auteur);
-			if ($row_auteur = spip_fetch_array($result_auteur)) {
-				$nom = typo($row_auteur["nom"]);
-			}
+			$row_auteur = spip_fetch_array(spip_query($query_auteur));
+			$nom = typo($row_auteur["nom"]);
+			$email = $row_auteur['email'];
 	
 	
 			$logo_statut = "puce-".puce_statut($statut).".gif";
@@ -125,7 +123,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 					'title' => $titre,
 					'url' => lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS."articles_versions.php3?id_article=$id_article&id_version=$id_version",
 					'date' => $date,
-					'author' => $nom
+					'author' => $nom,
+					'email' => $email
 				);
 			}
 
@@ -214,15 +213,6 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 
 	if ($rss)
 		return $items;
-}
-
-// Interface pour SPIP RSS
-function rss_suivi_versions($a) {
-	include_ecrire("lab_revisions.php");
-	include_ecrire("lab_diff.php");
-	include_ecrire("inc_presentation.php3");
-	$rss = afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
-	return $rss;
 }
 
 ?>

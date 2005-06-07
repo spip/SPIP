@@ -1167,7 +1167,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 	}
 
 
-	if ($afficher_auteurs) $cols = 3;
+	if ($afficher_auteurs) $cols = 4;
 	else $cols = 2;
 	$query_message .= ' ORDER BY date_heure DESC';
 	$tranches = afficher_tranches_requete($query_message, $cols);

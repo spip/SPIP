@@ -300,47 +300,4 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 	}
 }
 
-// Interface pour SPIP RSS
-function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
-	include_ecrire("inc_forum.php3");
-
-	$result_forum = spip_query("
-	SELECT	*
-	FROM	spip_forum
-	WHERE " . $query_forum . "
-	ORDER BY date_heure DESC LIMIT 0,20"
-	);
-
-	while ($t = spip_fetch_array($result_forum)) {
-		$item = array();
-		$item['title'] = typo($t['titre']);
-		if ($a['page'] == 'public'
-		AND $t['statut']<>'publie'
-		)
-			$item['title'] .= ' ('.$t['statut'].')';
-		$item['date'] = $t['date_heure'];
-		$item['author'] = $t['auteur'];
-		if ($t['email_auteur'])
-			$item['author'] .= ' &lt;'.$t['email_auteur'].'&gt;';
-
-		if ($lien_moderation)
-			$item['url'] = lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS
-			.'controle_forum.php3?page='.$a['page'].'&debut_id_forum='.$t['id_forum'];
-		else
-			$item['url'] = lire_meta('adresse_site').'/'.generer_url_forum($t['id_forum']);
-
-		$item['description'] = propre($t['texte']);
-		if ($GLOBALS['les_notes']) {
-			$item['description'] .= '<hr />'.$GLOBALS['les_notes'];
-			$GLOBALS['les_notes'] = '';
-		}
-		if ($t['nom_site'] OR vider_url($t['url_site']))
-			$item['description'] .= propre("\n- [".$t['nom_site']."->".$t['url_site']."]<br />");
-
-		$rss[] = $item;
-	}
-
-	return $rss;
-}
-
 ?>

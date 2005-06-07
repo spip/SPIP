@@ -235,8 +235,13 @@ function my_strtotime($la_date) {
 // (fonction inverse de analyser_backend)
 // A completer (il manque des tests, des valeurs par defaut, les enclosures, differents formats de sortie, etc.)
 //
-function affiche_rss($rss, $intro = '') {
 
+// mais d'abord un tri par date (inverse)
+function trier_par_date($a, $b) {
+	return ($a['date'] < $b['date']);
+}
+
+function affiche_rss($rss, $intro = '') {
 	// entetes
 	$u = '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
 
@@ -244,18 +249,21 @@ function affiche_rss($rss, $intro = '') {
 <rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
 <channel>
 	<title>'.texte_backend($intro['title']).'</title>
-	<link>'.texte_backend($intro['url']).'</link>
+	<link>'.texte_backend(url_absolue($intro['url'])).'</link>
 	<description>'.texte_backend($intro['description']).'</description>
 	<language>'.texte_backend($intro['language']).'</language>
 	';
 
 	// elements
-	if (is_array($rss))
-	foreach ($rss as $article) {
-		$u .= '
+	if (is_array($rss)) {
+		usort($rss, 'trier_par_date');
+		foreach ($rss as $article) {
+			if ($article['email'])
+				$article['author'].=' &lt;'.$article['email'].'&gt;';
+			$u .= '
 	<item>
 		<title>'.texte_backend($article['title']).'</title>
-		<link>'.texte_backend(liens_absolus($article['url'])).'</link>
+		<link>'.texte_backend(url_absolue($article['url'])).'</link>
 		<date>'.texte_backend($article['date']).'</date>
 		<description>'.
 			texte_backend(liens_absolus($article['description']))
@@ -267,6 +275,7 @@ function affiche_rss($rss, $intro = '') {
 		<dc:creator>'.texte_backend($article['author']).'</dc:creator>
 	</item>
 ';
+		}
 	}
 
 	// pied
