@@ -16,12 +16,11 @@
 if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
-define("MARQUEUR_SURLIGNE",  '!-- debut_surligneconditionnel -->');
-define("MARQUEUR_FSURLIGNE", '!-- debut_surligneconditionnel -->');
-
-// Balises qui ne font rien en mode normal
-// mais  vont etre substitue'es en mode recherche
+// Ces commentaires vont etre substitue's en mode recherche
 // voir les champs SURLIGNE dans inc-index-squel
+
+define("MARQUEUR_SURLIGNE",  '!-- debut_surligneconditionnel -->');
+define("MARQUEUR_FSURLIGNE", '!-- fin_surligneconditionnel -->');
 
 function surligner_sans_accents ($mot) {
 	$accents =
