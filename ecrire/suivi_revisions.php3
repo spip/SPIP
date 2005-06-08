@@ -92,7 +92,7 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 echo "</ul></div>\n";
 
 // lien vers le rss
-include_ecrire('inc_sites.php3');
+include_ecrire('inc_rss.php3');
 $op = 'revisions';
 $args = array(
 	'id_secteur' => $id_secteur,
