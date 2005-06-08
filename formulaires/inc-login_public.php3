@@ -56,7 +56,8 @@ function login_explicite($login, $cible) {
 
 	if ($auteur_session AND 
 	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
-		if (($cible != $action) && !headers_sent())
+		if (($cible != $action) && !headers_sent()
+		AND !$_GET['var_mode'])
 			redirige_par_entete($cible);
 		return http_href($cible, _T('login_par_ici'));
 	}
