@@ -26,6 +26,7 @@ function menu_lang_pour_tous($nom, $opt) {
 
 	// Voir s'il y a une langue demandee par _request,
 	// ou une langue par defaut dans le contexte {menu_lang=xx}
+	spip_log(" inc-menu " . $GLOBALS['spip_lang']);
 	$default = _request('lang');
 	lang_select($default);
 	if ($GLOBALS['spip_lang'] <> $default) {

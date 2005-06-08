@@ -18,6 +18,8 @@ include_ecrire("inc_mail.php3"); # pour envoyer_mail
 include_ecrire("inc_acces.php3"); # pour generer_htpass
 include_local("inc-public-global.php3"); # pour calculer la page
 include_local ("inc-cache.php3"); # ici c'est pour tester la connexion SQL
+include_ecrire("inc_lang.php3");
+lang_select(lire_meta('langue_site'));
 
 // Ce fichier est celui d'une balise dynamique qui s'ignore.
 
