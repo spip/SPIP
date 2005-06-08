@@ -44,14 +44,12 @@ if (defined("_INC_PUBLIC")) {
 	// etre declenchee dans l'espace des globales (donc pas
 	// dans une fonction).
 	else {
-	
 		// Une page "normale" va s'afficher ici
-		if (!$flag_ob
-		OR (!($var_mode == 'debug')
-			AND !$var_recherche
-			AND !$affiche_boutons_admin
-			AND !$xhtml
-		)) {
+		if (! ($flag_ob 
+			AND (($var_mode == 'debug')
+				OR $var_recherche
+				OR $affiche_boutons_admin
+				OR $xhtml		))) {
 			eval('?' . '>' . $page['texte']);
 			$page = '';
 		}
@@ -77,7 +75,8 @@ if (defined("_INC_PUBLIC")) {
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
 		include_ecrire("inc_debug_sql.php3");
-		debug_dumpfile('',$var_mode_objet,$var_mode_affiche);
+		debug_dumpfile($var_mode_affiche== 'validation' ? $page :"",
+			       $var_mode_objet,$var_mode_affiche);
 	} 
 	if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
 		$page = affiche_erreurs_page($tableau_des_erreurs) . $page;
