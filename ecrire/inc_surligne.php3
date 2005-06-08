@@ -16,8 +16,8 @@
 if (defined("_ECRIRE_INC_SURLIGNE")) return;
 define("_ECRIRE_INC_SURLIGNE", "1");
 
-define("MARQUEUR_SURLIGNE",  'span class="spip_surligneconditionnel">');
-define("MARQUEUR_FSURLIGNE", '/span                                 >');    
+define("MARQUEUR_SURLIGNE",  '!-- debut_surligneconditionnel -->');
+define("MARQUEUR_FSURLIGNE", '!-- debut_surligneconditionnel -->');
 
 // Balises qui ne font rien en mode normal
 // mais  vont etre substitue'es en mode recherche

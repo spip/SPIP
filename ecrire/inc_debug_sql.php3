@@ -189,7 +189,10 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
-	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
+	if ($texte && 
+	    ($var_mode_objet != $fonc ||
+	     ($var_mode_affiche != $type &&
+	      ($var_mode_affiche != 'validation' || $type != 'resultat'))))
 		return;
 
 	$link = new Link;
@@ -211,6 +214,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 
 	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
+		echo " <a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=validation'>"._T('validation')."</a>";
 		echo " <a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat'>"._T('zbug_resultat')."</a>";
 		echo " <a href='", $self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code'>"._T('zbug_code')."</a></legend>";
 
@@ -231,7 +235,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 			}
 		echo "</table>\n</fieldset>\n";
 	}
-	echo "</div>\n";
+	echo "</div>\n"; 
 	if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
 	  if ($var_mode_affiche == 'resultat') {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
@@ -241,7 +245,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 			if ($res) echo "<br /><fieldset>",interdire_scripts($view),"</fieldset>";
 		echo "</fieldset></div>";
 
-      } else if ($var_mode_affiche == 'code') {
+	  } else if ($var_mode_affiche == 'code') {
 		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
 		highlight_string("<"."?php\n".$res."\n?".">");
 		echo "</fieldset></div>";
@@ -250,12 +254,33 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		echo "<pre>".entites_html($res)."</pre>";
 		echo "</fieldset></div>";
 	  }
-    }
+	}
 
 	if ($texte) {
-	  echo "<div id=\"debug_boucle\"><fieldset><legend>";
-		echo _T('zbug_' . $GLOBALS['var_mode_affiche']);
-		echo "</legend>";
+	  $err = "";
+	  $titre = $GLOBALS['var_mode_affiche'];
+	  if ($titre != 'validation')
+	    $titre = 'zbug_' . $titre;
+	  else {
+	      global $phraseur_xml, $xml_parser;
+	      include_ecrire("inc_phraseur_xml.php");
+
+	      $res = $phraseur_xml->xml_parsestring($xml_parser, $texte);
+	      if (!$res)
+		$err = _L("impossible");
+	      elseif (ereg("(^erreur.*[^0-9])([0-9]*)$", $res, $r))
+		$err = $r[1] ."<a href='#L" . $r[2] . "'>$r[2]</a>";
+	      else
+		{
+		  $err = _L("correcte");
+		  $texte = $res;
+		}
+	    }
+	  echo "<div id=\"debug_boucle\"><fieldset><legend>",
+	    _T($titre),	       
+	    ' ',
+	    $err,
+	    "</legend>";
 	  ob_start();
 	  highlight_string($texte);
 	  $s = ob_get_contents();
@@ -267,10 +292,11 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    "d </span>";
 	  $format10=str_replace('black','pink',$format);
 	  $i=1;
+
 	  foreach ($tableau as $ligne)
-	    echo sprintf(($i%10) ? $format :$format10, $i++), $ligne ;
-
-
+	    echo sprintf(($i%10) ? $format :$format10, $i++),
+	    "<a id='L$i'></a>",
+	    $ligne ;
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
