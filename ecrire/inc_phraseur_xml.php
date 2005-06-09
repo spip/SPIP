@@ -25,12 +25,14 @@ function debutElement($parser, $name, $attrs)
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
   $ouvrant = &$phraseur_xml->ouvrant;
+  $reperes = &$phraseur_xml->reperes;
   $res = &$phraseur_xml->res;
 
-  if ($t = $ouvrant[$depth])
+  $t = $ouvrant[$depth];
+  if ($t[0] != ' ')
     {
       $res .= '<' . $t . '>';
-      $ouvrant[$depth] = '';
+      $ouvrant[$depth] = ' ' . $t;
     }
   $t = $contenu[$depth];
   $res .= ereg_replace("[\n\t ]+$", "", $t) . "\n$depth";
@@ -45,8 +47,9 @@ function debutElement($parser, $name, $attrs)
 	$sep = "\n $depth";
     }
   $depth .= '  ';
+  $contenu[$depth] = "";
   $ouvrant[$depth] = $name . $att;
-  $contenu[$depth]= "";
+  $reperes[$depth] = xml_get_current_line_number($parser);
 }
 
 function finElement($parser, $name)
@@ -57,13 +60,14 @@ function finElement($parser, $name)
   $ouvrant = &$phraseur_xml->ouvrant;
   $res = &$phraseur_xml->res;
 
-  if ($ouv = $ouvrant[$depth])
+  $ouv = $ouvrant[$depth];
+  if ($ouv[0] != ' ')
     {
-      $ouvrant[$depth] = '';
+      $ouvrant[$depth] = ' ' . $ouv;
     }
   $t = $contenu[$depth];
   $depth = substr($depth, 2);
-  $t = ereg_replace("[\n\t ]+$", "\n$depth", $t);
+  $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
   if ($t)
     $res .= ($ouv ? ('<' . $ouv . '>') : '') . $t . "</" . $name . ">";
   else
@@ -75,7 +79,6 @@ function textElement($parser, $data)
   global $phraseur_xml;
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
-
   $contenu[$depth] .= $phraseur_xml->translate_entities($data);
 }
 
@@ -84,7 +87,6 @@ function PiElement($parser, $target, $data)
   global $phraseur_xml, $xml_parser;
   $depth = &$phraseur_xml->depth;
   $contenu = &$phraseur_xml->contenu;
-
   if (strtolower($target) != "php")
     $contenu[$depth] .= $data;
   else {
@@ -137,9 +139,20 @@ function xml_parsestring($xml_parser, $data)
 	global $phraseur_xml;
 	$r = "";
 	if (!xml_parse($xml_parser, $data, true)) {
-	  $r = (sprintf("erreur XML : %s ligne %d",
-		      xml_error_string(xml_get_error_code($xml_parser)),
-		      xml_get_current_line_number($xml_parser)));
+	  // ne pas commencer le message par un "<" (cf inc_debug)
+	  $r = xml_error_string(xml_get_error_code($xml_parser)) .
+	    _L(" ligne ") .
+	    xml_get_current_line_number($xml_parser) .
+	    _L(" colonne ") .
+	    xml_get_current_column_number($xml_parser) .
+	    '<br />' .
+	    _L("derni&egrave;re balise non referm&eacute;e: ") .
+	    "<tt>" .
+	    $phraseur_xml->ouvrant[$phraseur_xml->depth] .
+	    "</tt>" .
+	    _L(" ligne ") .
+	    $phraseur_xml->reperes[$phraseur_xml->depth];
+
 	} else $r = $phraseur_xml->res;
 
 	xml_parser_free($xml_parser);
@@ -147,9 +160,10 @@ function xml_parsestring($xml_parser, $data)
 }
 
 var $depth = "";
+var $res = "";
 var $contenu = array();
 var $ouvrant = array();
-var $res = "";
+var $reperes = array();
 }
 
 // xml_set_objet a utiliser a terme
