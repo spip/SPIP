@@ -35,7 +35,7 @@ function debutElement($parser, $name, $attrs)
       $ouvrant[$depth] = ' ' . $t;
     }
   $t = $contenu[$depth];
-  $res .= ereg_replace("[\n\t ]+$", "", $t) . "\n$depth";
+  $res .= ereg_replace("[\n\t ]+$",  "\n$depth", $t);
   $contenu[$depth] = "";
   $att = '';
   $sep = ' ';
@@ -62,9 +62,8 @@ function finElement($parser, $name)
 
   $ouv = $ouvrant[$depth];
   if ($ouv[0] != ' ')
-    {
       $ouvrant[$depth] = ' ' . $ouv;
-    }
+  else $ouv= "";
   $t = $contenu[$depth];
   $depth = substr($depth, 2);
   $t = ereg_replace("[\n\t ]+$", "\n" . $depth, $t);
@@ -146,7 +145,7 @@ function xml_parsestring($xml_parser, $data)
 	    _L(" colonne ") .
 	    xml_get_current_column_number($xml_parser) .
 	    '<br />' .
-	    _L("derni&egrave;re balise non referm&eacute;e: ") .
+	    _L("derni&egrave;re balise non referm&eacute;e&nbsp;: ") .
 	    "<tt>" .
 	    $phraseur_xml->ouvrant[$phraseur_xml->depth] .
 	    "</tt>" .
