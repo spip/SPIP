@@ -742,7 +742,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_adresse_annuaire_1' => '(Si el vostre anuari est&agrave; instal.lat a la mateixa maquina que aquesta web, es tracta probablement de "localhost".)',
 'texte_ajout_auteur' => 'L\'autor seg&uuml;ent ha estat afegit a l\'article:',
 'texte_annuaire_ldap_1' => 'Si se disposa d\'un acc&eacute;s a un anuari (LDAP), es pot utilitzar per a importar autom&agrave;ticament els/les usuaris/es baix SPIP.',
-'texte_article_statut' => 'Aquest article &eacute;s:',
+'texte_article_statut' => 'Aquest article est&agrave;:',
 'texte_article_virtuel' => ' Article virtual',
 'texte_article_virtuel_reference' => ' <b>Article virtual:</b> article referenciat en la web amb SPIP, per&ograve; redirigit cap un altre URL. Per suprimir la redirecci&oacute;, esborreu l\'URL que apareix dalt.',
 'texte_aucun_resultat_auteur' => 'Cap resultat per "@cherche_auteur@"',
