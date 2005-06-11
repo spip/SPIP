@@ -20,7 +20,7 @@ define("_ECRIRE_INC_SURLIGNE", "1");
 // voir les champs SURLIGNE dans inc-index-squel
 
 define("MARQUEUR_SURLIGNE",  '!-- debut_surligneconditionnel -->');
-define("MARQUEUR_FSURLIGNE", '!-- fin_surligneconditionnel -->');
+define("MARQUEUR_FSURLIGNE", '!-- finde_surligneconditionnel -->');
 
 function surligner_sans_accents ($mot) {
 	$accents =
@@ -117,7 +117,7 @@ function surligner_mots($page, $mots) {
 			if (!$q = strpos($page,MARQUEUR_FSURLIGNE))
 				$q = 1+strlen($page);
 			$debut .= trouve_surligne(substr($page, 0, $q-1), $regexp);
-			$page = substr($page, $q+strlen(MARQUEUR_SURLIGNE)+1);
+			$page = substr($page, $q+strlen(MARQUEUR_FSURLIGNE));
 			$p = strpos($page,MARQUEUR_SURLIGNE);
 		}
 		return $debut . $page;
