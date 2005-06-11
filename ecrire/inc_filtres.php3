@@ -294,17 +294,16 @@ function vider_url($url) {
 function url_var_recherche($url) {
 	if (_request('recherche')
 	AND !ereg("var_recherche", $url)) {
+
+		list ($url,$ancre) = preg_split(',#,', $url, 2);
+		if ($ancre) $ancre='#'.$ancre;
+
 		$x = "var_recherche=".urlencode(_request('recherche'));
+
 		if (!strpos($url, '?'))
-		  return "$url?$x";
+			return "$url?$x$ancre";
 		else
-		  {
-		    $p = strpos($url, '#');
-		    if (!$p)
-		      return "$url&$x";
-		    else
-		      return substr($url,0,$p) . "&$x" . substr($url,$p+1);
-		  }
+			return "$url&$x$ancre";
 	}
 	else return $url;
 }

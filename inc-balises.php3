@@ -240,6 +240,8 @@ function balise_URL_MOT_dist($p) {
 	$p->code = "generer_url_mot(" .
 	champ_sql('id_mot',$p) .
 	")";
+
+	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->statut = 'html';
@@ -255,6 +257,9 @@ function balise_URL_MOT_dist($p) {
 function balise_URL_FORUM_dist($p) {
 	$p->code = "generer_url_forum(" .
 	champ_sql('id_forum',$p) .")";
+
+	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
+	$p->code = "url_var_recherche(" . $p->code . ")";
 
 	$p->statut = 'html';
 	return $p;
