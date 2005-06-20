@@ -92,7 +92,7 @@ function spip_mysql_select($select, $from, $where,
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
 	if ($GLOBALS['var_mode'] == 'debug') {
-		boucle_debug_resultat($id, '', $q);
+		boucle_debug_resultat($id, 'requete', $q);
 	}
 
 	if (!($res = @spip_query($q))) {

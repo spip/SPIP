@@ -36,12 +36,16 @@ define('PARAM_INCLURE','^[[:space:]]*[{][[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
 define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
-function phraser_inclure($texte, $result) {
+function phraser_inclure($texte, $ligne, $result) {
+
 	while (ereg(BALISE_INCLURE, $texte, $match)) {
 		$p = strpos($texte,$match[0]);
-		if ($p) $result = phraser_idiomes(substr($texte, 0, $p), $result);
-
+		$debut = substr($texte, 0, $p);
+		if ($p) $result = phraser_idiomes($debut, $ligne, $result);
+		$ligne +=  substr_count($debut, "\n");
 		$champ = new Inclure;
+		$champ->ligne = $ligne;
+		$ligne += substr_count($match[0], "\n");
 		$champ->texte = $match[1];
 		$texte = substr($texte, $p+strlen($match[0]));
 		// on assimile {var=val} a une liste de un argument sans fonction
@@ -67,19 +71,25 @@ function phraser_inclure($texte, $result) {
 		$champ->apres = "";
 		$result[] = $champ;
 	}
-	return (($texte==="") ? $result : phraser_idiomes($texte, $result));
+	return (($texte==="") ? $result : phraser_idiomes($texte, $ligne, $result));
 }
 
-function phraser_polyglotte($texte,$result) {
+function phraser_polyglotte($texte,$ligne, $result) {
+
 	while (eregi('<multi>([^<]*)</multi>', $texte, $match)) {
 		$p = strpos($texte, $match[0]);
+		$debut = substr($texte, 0, $p);
 		if ($p) {
 			$champ = new Texte;
-			$champ->texte = (substr($texte, 0, $p));
+			$champ->texte = $debut;
+			$champ->ligne = $ligne;
 			$result[] = $champ;
 		}
 
 		$champ = new Polyglotte;
+		$ligne += substr_count($champ->texte, "\n");
+		$champ->ligne = $ligne;
+		$ligne += substr_count($match[0], "\n");
 		$lang = '';
 		$bloc = $match[1];
 		$texte = substr($texte,$p+strlen($match[0]));
@@ -96,49 +106,58 @@ function phraser_polyglotte($texte,$result) {
 	if ($texte!=="") {
 			$champ = new Texte;
 			$champ->texte = $texte;
+			$champ->ligne = $ligne;
 			$result[] = $champ;
 	}
 	return $result;
 }
 
 
-function phraser_idiomes($texte,$result) {
+function phraser_idiomes($texte,$ligne,$result) {
+
 	// Reperer les balises de traduction <:toto:>
 	while (eregi("<:(([a-z0-9_]+):)?([a-z0-9_]+)((\|[^:>]*)?:>)", $texte, $match)) {
 		$p = strpos($texte, $match[0]);
-		if ($p) $result = phraser_champs(substr($texte, 0, $p),$result);
-		$texte = substr($texte,$p+strlen($match[0]));
+		$debut = substr($texte, 0, $p);
+		if ($p) $result = phraser_champs($debut, $ligne, $result);
 		$champ = new Idiome;
+		$ligne += substr_count($debut, "\n");	
+		$champ->ligne = $ligne;
+		$ligne += substr_count($match[0], "\n");
+		$texte = substr($texte,$p+strlen($match[0]));
 		$champ->nom_champ = strtolower($match[3]);
 		$champ->module = $match[2] ? $match[2] : 'public/spip/ecrire';
 		// pas d'imbrication pour les filtres sur langue
 		phraser_args($match[5], ":", '', array(), $champ);
 		$result[] = $champ;
 	}
-	if ($texte!=="")  $result = phraser_champs($texte,$result);
+	if ($texte!=="")  $result = phraser_champs($texte,$ligne,$result);
 	return $result;
 }
 
-function phraser_champs($texte,$result) {
-	while (ereg(NOM_DE_CHAMP . '(.*)$', $texte, $regs)) {
-	  $p = strpos($texte, $regs[0]);
-
-	  if ($regs[5] || (strpos($regs[6][0], "[0-9]") === false)) {
-		if ($p)
-			$result = phraser_polyglotte(substr($texte, 0, $p), $result);
+function phraser_champs($texte,$ligne,$result) {
+	while (ereg(NOM_DE_CHAMP, $texte, $match)) {
+	  $p = strpos($texte, $match[0]);
+	  $suite = substr($texte,$p+strlen($match[0]));
+	  if ($match[5] || (strpos($suite[0], "[0-9]") === false)) {
+		$debut = substr($texte, 0, $p);
+		if ($p)	$result = phraser_polyglotte($debut, $ligne, $result);
+		$ligne += substr_count($debut, "\n");
 		$champ = new Champ;
-		$champ->nom_boucle = $regs[2];
-		$champ->nom_champ = $regs[3];
-		$champ->etoile = $regs[5];
-		$texte = $regs[6];
+		$champ->ligne = $ligne;
+		$ligne += substr_count($match[0], "\n");
+		$champ->nom_boucle = $match[2];
+		$champ->nom_champ = $match[3];
+		$champ->etoile = $match[5];
+		$texte = $suite;
 		$result[] = $champ;
 	  } else {
 	    // faux champ
-	    $result = phraser_polyglotte (substr($texte, 0, $p+1), $result);
+	    $result = phraser_polyglotte (substr($texte, 0, $p+1), $ligne, $result);
 	    $texte = (substr($texte, $p+1));
 	  }
 	}
-	if ($texte!=="") $result = phraser_polyglotte($texte, $result);
+	if ($texte!=="") $result = phraser_polyglotte($texte, $ligne, $result);
 	return $result;
 }
 
@@ -147,12 +166,12 @@ function phraser_champs($texte,$result) {
 // %###N@ ou N indexe un tableau comportant le resultat de leur analyse
 // on recommence tant qu'il y a des [...] en substituant a l'appel suivant
 
-function phraser_champs_etendus($texte, $result) {
+function phraser_champs_etendus($texte, $ligne,$result) {
 	if ($texte==="") return $result;
 	$sep = '##';
 	while (strpos($texte,$sep)!== false)
 		$sep .= '#';
-	return array_merge($result, phraser_champs_interieurs($texte, $sep, array()));
+	return array_merge($result, phraser_champs_interieurs($texte, $ligne, $sep, array()));
 }
 
 //  Analyse les filtres d'un champ etendu et affecte le resultat
@@ -204,7 +223,8 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 			$args = ltrim($regs[count($regs)-1]);
 		} else {
 		  if (!ereg(NOM_DE_CHAMP ."[{|]", $arg, $r)) {
-		    $arg = phraser_champs_exterieurs($arg, $sep, $result);
+		    // 0 est un aveu d'impuissance. A completer
+		    $arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
 		    $args = ltrim($regs[count($regs)-1]);
 		    $collecte = array_merge($collecte, $arg);
 		    $result = array_merge($result, $arg);
@@ -256,45 +276,54 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   return $result;
 }
 
-function phraser_champs_exterieurs($debut, $sep, $nested) {
+function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	$res = array();
-	while (($p=strpos($debut, "%$sep"))!==false) {
-	    if ($p) $res = phraser_inclure(substr($debut,0,$p), $res);
-	    ereg("^%$sep([0-9]+)@(.*)$", substr($debut,$p),$m);
-	    $res[]= $nested[$m[1]];
-	    $debut = $m[2];
+	while (($p=strpos($texte, "%$sep"))!==false) {
+	  $debut = substr($texte,0,$p);
+	  if ($p) $res = phraser_inclure($debut, $ligne, $res);
+	  $ligne += substr_count($debut, "\n");
+	  ereg("^%$sep([0-9]+)@(.*)$", substr($texte,$p),$m);
+	  $res[]= $nested[$m[1]];
+	  $texte = $m[2];
 	}
-	return (($debut==="") ?  $res : phraser_inclure($debut, $res));
+	return (($texte==="") ?  $res : phraser_inclure($texte, $ligne, $res));
 }
 
-function phraser_champs_interieurs($texte, $sep, $result) {
+function phraser_champs_interieurs($texte, $ligne, $sep, $result) {
   $i = 0; // en fait count($result)
-	while (true) {	  $j=$i;
-	  while (ereg(CHAMP_ETENDU . '(.*)$', $texte, $regs)) {
+  $x = "";
+	while (true) {	  $j=$i;   $n = $ligne;
+	  while (ereg(CHAMP_ETENDU, $texte, $match)) {
+		$p = strpos($texte, $match[0]);
+		$debut = substr($texte, 0, $p);
+		if ($p) {$result[$i] = $debut;$i++; }
 		$champ = new Champ;
-		$champ->nom_boucle = $regs[3];
-		$champ->nom_champ = $regs[4];
-		$champ->etoile = $regs[6];
+		// ca ne marche pas encore en cas de champ imbrique
+		$champ->ligne = $x ? 0 :($n+substr_count($debut, "\n"));
+		$champ->nom_boucle = $match[3];
+		$champ->nom_champ = $match[4];
+		$champ->etoile = $match[6];
 		// phraser_args indiquera ou commence apres
-		$result = phraser_args($regs[7], ")", $sep, $result, $champ);
-		$champ->avant = phraser_champs_exterieurs($regs[1],$sep,$result);
-		$champ->apres = phraser_champs_exterieurs(substr($champ->apres,1),$sep,$result);
+		$result = phraser_args($match[7], ")", $sep, $result, $champ);
+		$champ->avant = phraser_champs_exterieurs($match[1],$n,$sep,$result);
+		$debut = substr($champ->apres,1);
+		$n += substr_count(substr($texte, 0, strpos($texte, $debut)), "\n");
+		$champ->apres = phraser_champs_exterieurs($debut,$n,$sep,$result);
 
-		$p = strpos($texte, $regs[0]);
-		if ($p) {$result[$i] = substr($texte,0,$p);$i++; }
 		$result[$i] = $champ;
 		$i++;
-		$texte = $regs[8];
+		$texte = substr($texte,$p+strlen($match[0]));
 	  }
 	  if ($texte!=="") {$result[$i] = $texte; $i++;}
 	  $x ='';
 
 	  while($j < $i) 
 	    { $z= $result[$j]; 
+	      // j'aurais besoin de connaitre le nombre de lignes...
 	      if (is_object($z)) $x .= "%$sep$j@" ; else $x.=$z ;
 	      $j++;}
 	  if (ereg(CHAMP_ETENDU, $x)) $texte = $x;
-	  else return phraser_champs_exterieurs($x, $sep, $result);}
+	  else return phraser_champs_exterieurs($x, $ligne, $sep, $result);}
 }
 
 // analyse des criteres de boucle, 
@@ -411,9 +440,10 @@ function phraser_critere_infixe($arg1, $arg2, $args, $op, $not, $cond)
 	return $crit;
 }
 
-function phraser($texte, $id_parent, &$boucles, $nom) {
+function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 	$all_res = array();
+
 	while (preg_match(DEBUT_DE_BOUCLE, $texte, $regs)) {
 		$nom_boucle = $regs[1].$regs[2];
 		$p = strpos($texte, '<BOUCLE'.$nom_boucle);
@@ -423,7 +453,7 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 			$preg = "@<B($nom_boucle|OUCLE${nom_boucle}[^-_.a-zA-Z0-9][^>]*)>"
 				. ".*</(BOUCLE|/?B)$nom_boucle>@ms";
 			preg_match($preg, $texte, $match);
-			boucle_debug ($nom_boucle, $nom, $match[0]);
+			boucle_debug ($nom_boucle, $nom, $match[0], $id_parent);
 		}
 
 		//
@@ -439,9 +469,8 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
 		$result->id_boucle = $id_boucle;
-
 		$type = $match[2];
-		if ($p =strpos($type, ':'))
+		if ($p = strpos($type, ':'))
 		  {
 		    $result->sql_serveur = substr($type,0,$p);
 		    $type = substr($type,$p+1);
@@ -472,7 +501,6 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 			$result->avant = substr($debut, $p + strlen($s));
 			$debut = substr($debut, 0, $p);
 		}
-
 		if (strpos($milieu, $s)) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 				$id_boucle . 
@@ -489,41 +517,48 @@ function phraser($texte, $id_parent, &$boucles, $nom) {
 					 _T('zbug_erreur_boucle_fermant',
 						array('id'=>$id_boucle)));
 		}
-		$texte = substr($milieu, $p + strlen($s));
+		$suite = substr($milieu, $p + strlen($s));
 		$milieu = substr($milieu, 0, $p);
 		//
 		// 1. Recuperer la partie conditionnelle apres
 		//
 		$s = "</B$id_boucle>";
-		$p = strpos($texte, $s);
+		$p = strpos($suite, $s);
 		if ($p !== false) {
-			$result->apres = substr($texte, 0, $p);
-			$texte = substr($texte, $p + strlen($s));
+			$result->apres = substr($suite, 0, $p);
+			$suite = substr($suite, $p + strlen($s));
 		}
 
 		//
 		// 2. Recuperer la partie alternative
 		//
 		$s = "<//B$id_boucle>";
-		$p = strpos($texte, $s);
+		$p = strpos($suite, $s);
 		if ($p !== false) {
-			$result->altern = substr($texte, 0, $p);
-			$texte = substr($texte, $p + strlen($s));
+			$result->altern = substr($suite, 0, $p);
+			$suite = substr($suite, $p + strlen($s));
 		}
-		$result->avant = phraser($result->avant, $id_parent,$boucles, $nom);
-		$result->apres = phraser($result->apres, $id_parent,$boucles, $nom);
-		$result->altern = phraser($result->altern,$id_parent,$boucles, $nom);
-		$result->milieu = phraser($milieu, $id_boucle,$boucles, $nom);
+		$result->ligne = $ligne + substr_count($debut, "\n");
+		$m = substr_count($milieu, "\n");
+		$b = substr_count($result->avant, "\n");
+		$a = substr_count($result->apres, "\n");
 
-		$all_res = phraser_champs_etendus($debut, $all_res);
-		$all_res[] = $result;
+		$result->avant = phraser($result->avant, $id_parent,$boucles, $nom, $result->ligne);
+		$result->apres = phraser($result->apres, $id_parent,$boucles, $nom, $result->ligne+$b+$m);
+		$result->altern = phraser($result->altern,$id_parent,$boucles, $nom, $result->ligne+$a+$m+$b);
+		$result->milieu = phraser($milieu, $id_boucle,$boucles, $nom, $result->ligne+$b);
+
 		if ($boucles[$id_boucle]) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 					 _T('zbug_erreur_boucle_double',
 					 	array('id'=>$id_boucle)));
 		} else
 			$boucles[$id_boucle] = $result;
+		$all_res = phraser_champs_etendus($debut, $ligne, $all_res);
+		$all_res[] = $result;
+		$ligne += substr_count(substr($texte, 0, strpos($texte, $suite)), "\n");
+		$texte = $suite;
 	}
-	return phraser_champs_etendus($texte, $all_res);
+	return phraser_champs_etendus($texte, $ligne, $all_res);
 }
 ?>

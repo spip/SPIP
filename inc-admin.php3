@@ -44,7 +44,7 @@ function affiche_boutons_admin($contenu) {
 
 	// Recuperer sans l'afficher la balise #FORMULAIRE_ADMIN, en float
 	$boutons_admin = inclure_balise_dynamique(
-		balise_FORMULAIRE_ADMIN_dyn('div'),
+		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float'),
 	false);
 
 	lang_dselect();

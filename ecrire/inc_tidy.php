@@ -53,7 +53,7 @@ function xhtml($buffer) {
 /** ici commence la petite usine a gaz des traitements d'erreurs de tidy **/
 	## NB: seul tidy en ligne de commande sait gerer ses erreurs,
 	if (defined('_erreur_tidy')) {
-		$url = "http://".$_SERVER['HTTP_HOST'].nettoyer_uri();
+
 		if (defined('_calcul_tidy')) {
 			spip_log("Erreur tidy : $url\n"._erreur_tidy, 'tidy');
 
@@ -65,11 +65,7 @@ function xhtml($buffer) {
 			}
 		}
 
-		// Ajouter un pseudo bouton d'admin
-		if ($GLOBALS['affiche_boutons_admin']) {
-			$buffer = preg_replace(',<div class="spip-admin-bloc" dir=\'(ltr|rtl)\'>\s*<ul>,ms',
-			'$0<li><a href="http://validator.w3.org/check?uri='.stripslashes(preg_quote(entites_html($url))).'" class=\'spip-admin-boutons\'>Erreur tidy !</a></li>', $buffer);
-		}
+		$GLOBALS['xhtml_error'] = _erreur_tidy;
 
 		// Na, na na nere, tidy a plante !
 		header("X-SPIP-Message: tidy/W3C could not repair this page");
@@ -93,7 +89,11 @@ function xhtml($buffer) {
 #			entetes_xhtml();
 
 	}
-
+	// Ajouter un pseudo bouton d'admin
+	$GLOBALS['xhtml_check'] = 'http://validator.w3.org/check?uri=' .
+	  stripslashes(preg_quote(entites_html("http://" .
+					       $_SERVER['HTTP_HOST'].
+					       nettoyer_uri())));
 /** fin de l'usine a gaz **/
 
 

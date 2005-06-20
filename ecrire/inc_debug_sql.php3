@@ -29,7 +29,7 @@ function afficher_debug_contexte($env) {
 			. "<fieldset><legend>#ENV</legend>\n"
 			. "<div><table>\n";
 		foreach ($env as $nom => $valeur) {
-			$env_texte .= "<tr><td><strong>".nl2br(entites_html($nom))
+			$env_texte .= "\n<tr><td><strong>".nl2br(entites_html($nom))
 				. "</strong></td>";
 			$env_texte .= "<td>:&nbsp;".nl2br(entites_html($valeur))
 				. "</td></tr>\n";
@@ -50,7 +50,7 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 	foreach ($tableau_des_erreurs as $err) {
 		$res .= "<li>" .$err[0] . ", <small>".$err[1]."</small><br /></li>\n";
 	}
-	return "<div id='spip-debug' style='"
+	return "\n<div id='spip-debug' style='"
 	. "position: absolute; top: 20px; left: 20px; z-index: 1000;"
 	. "filter:alpha(opacity=60); -moz-opacity:0.6; opacity: 0.6;"
 	. "'><ul><li>"
@@ -61,7 +61,6 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 	. "<ul>"
 	. $res
 	. "</ul></ul></div>";
-
 }
 
 //
@@ -82,20 +81,20 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 
 	// Erreur systeme
 	if ($errsys > 0 AND $errsys < 200) {
-		$retour .= "<tt><br><br><blink>"
+		$retour .= "<tt><br /><br /><blink>"
 		. _T('info_erreur_systeme', array('errsys'=>$errsys))
-		. "</blink><br>\n"
+		. "</blink><br />\n"
 		. _T('info_erreur_systeme2');
 		spip_log("Erreur systeme $errsys");
 	}
 	// Requete erronee
 	else {
 		$retour .= "<tt><blink>&lt;BOUCLE".$id_boucle."&gt;("
-		. $type . ")</blink><br>\n"
-		. "<b>"._T('avis_erreur_mysql')."</b><br>\n"
+		. $type . ")</blink><br />\n"
+		. "<b>"._T('avis_erreur_mysql')."</b><br />\n"
 		. htmlspecialchars($query)
-		. "\n<br><font color='red'><b>".htmlspecialchars($erreur)
-		. "</b></font><br>"
+		. "\n<br /><font color='red'><b>".htmlspecialchars($erreur)
+		. "</b></font><br />"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
 		include_ecrire('inc_presentation.php3');
@@ -136,24 +135,38 @@ function erreur_squelette($message='', $lieu='') {
 }
 
 //
-// Le debugueur v2
+// Le debusqueur version 3
 //
 
 // appelee a chaque sortie de boucle (inc-compilo) et a chaque requete
 // dans ce derniers cas on n'a pas le nom du squelette
-// alors on memorise dans une statique et lors de l'autre appel qui suit
-// on finalise
-function boucle_debug_resultat ($id, $nom, $resultat) {
+
+function boucle_debug_resultat ($id, $type, $resultat) {
 	global $debug_objets;
-	static $requete = array();
-	if (!$nom) {$requete[$id] = $resultat; return;}
-	if ($requete[$id]) {
-		$debug_objets['requete']["$nom$id"] = $requete[$id];
-		$requete[$id] = '';
+
+	$nom = $debug_objets['courant'];
+
+	if ($type == 'requete') {
+	  $debug_objets['requete']["$nom$id"] = $resultat;
 	}
-	// ne pas memoriser plus de 3 tours d'une meme boucle
-	if (count($debug_objets['resultat']["$nom$id"]) < 3)
-		$debug_objets['resultat']["$nom$id"][] = $resultat;
+	else {
+	  // ne pas memoriser plus de 3 tours d'une meme boucle
+	  if (count($debug_objets['resultat']["$nom$id"]) < 3)
+	    $debug_objets['resultat']["$nom$id"][] = $resultat;
+	}
+}
+
+// appelee a chaque sortie de sequence (inc-compilo)
+function debug_sequence($id, $nom, $niv, $sequence) {
+	global $debug_objets;
+
+	if (!$niv)
+	  {
+	    $debug_objets['sequence'][$nom.$id] = $sequence;
+	  }
+	$res = "";
+	foreach($sequence as $v) $res .= $v[2];
+	return $res;	
 }
 
 // appelee a chaque compilation de boucle (inc-compilo)
@@ -165,38 +178,138 @@ function boucle_debug_compile ($id, $nom, $pretty, $sourcefile, $code) {
 }
 
 // appelee a chaque compilation de squelette (inc-compilo)
-function squelette_debug_compile($nom, $sourcefile, $squelette) {
+function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 	global $debug_objets;
-	$debug_objets['squelettes'][$nom] = $squelette;
+
+	$debug_objets['squelette'][$nom] = $squelette;
 	$debug_objets['sourcefile'][$nom] = $sourcefile;
 
 	if (is_array($GLOBALS['contexte_inclus']))
 		$debug_objets['contexte'][$nom] = $GLOBALS['contexte_inclus'];
-	else
+	else {
 		$debug_objets['contexte'][$nom] = $GLOBALS['contexte'];
+		if (!isset($debug_objets['principal']))
+		  $debug_objets['principal'] = $nom;
+	}
 }
 
 // appelee a chaque analyse syntaxique de squelette (inc-parser)
-function boucle_debug ($id, $nom, $boucle) {
+function boucle_debug ($id, $nom, $boucle, $id_parent) {
 	global $debug_objets;
 
+	$debug_objets['courant'] = $nom;
 	$debug_objets['boucle'][$nom.$id] = $boucle;
+	$debug_objets['parent'][$nom.$id] = $id_parent;
+}
+
+function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
+{
+	global $debug_objets;
+
+	$id = $nom . $boucle;
+	foreach($debug_objets['sequence'][$id] as $v) {
+	  if (!ereg('^(.*)(<\?.*\?>)(.*)$', $v[2],$r))
+	    $y = substr_count($v[2], "\n");
+	  else {
+	    if ($v[1][0] == '#')
+	      // balise dynamique
+	      $incl = $debug_objets['resultat'][$v[0]];
+	    else
+	      // inclusion
+	      $incl = $debug_objets['squelette'][trouve_squelette_inclus($v[1])];
+	    $y = substr_count($incl, "\n")
+	      + substr_count($r[1], "\n") 
+	      + substr_count($r[3], "\n");
+	  }
+
+	  if ($n <= ($y + $debut)) {
+	    if ($v[1][0] == '?')
+	      return trouve_boucle_debug($n, $nom, $debut, substr($v[1],1));
+	    elseif ($v[1][0] == '!') {
+	      if ($incl = trouve_squelette_inclus($v[1]))
+		return trouve_boucle_debug($n, $incl, $debut);
+	    }
+	    return array($nom, $boucle, $v[0]);
+	  }
+	  $debut += $y;
+	}
+	return array($nom, $boucle, $n-$debut);
+}	  
+
+function trouve_squelette_inclus($script)
+{
+  global $debug_objets;
+  // on suppose que X.php appelle le squelette X.html (a revoir)
+  ereg('^.(.*).php?3', $script, $reg);
+  $incl = $reg[1] . '.html$';
+  foreach($debug_objets['sourcefile'] as $k => $v) {
+    if (ereg($incl,$v)) return $k;
+  }
+  return "";
+}
+
+function reference_boucle_debug($n, $nom, $self)
+{
+  list($skel, $boucle, $ligne) = trouve_boucle_debug($n, $nom);
+
+  if (!$boucle)
+    return !$ligne ? "" :  
+      (" (" .
+       (($nom != $skel) ? _L("squelette inclus, ligne: ") :
+	_L("squelette, ligne: ")) .
+       "<a href='$self&amp;var_mode_objet=$skel&amp;var_mode_affiche=squelette&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)");
+  else {
+  $self .= "&amp;var_mode_objet=$skel$boucle&amp;var_mode_affiche=boucle";
+
+    return !$ligne ? " (boucle <a href='$self#$skel$boucle'>$boucle</a>)" :
+      " (boucle $boucle ligne <a href='$self&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)";
+  }
+}
+
+// affiche un texte avec numero de ligne et ancre.
+
+function ancre_texte($texte, $fautifs=array())
+{
+	global $var_mode_ligne;
+	if ($var_mode_ligne) $fautifs[]=$var_mode_ligne;
+	ob_start();
+	highlight_string($texte);
+	$s = ob_get_contents();
+	ob_end_clean();
+	if (substr($s,0,6) == '<code>') { $s=substr($s,6); echo '<code>';}
+	$tableau = explode("<br />", $s);
+	$format = "<span style='color: black'>%0".
+	  strlen(count($tableau)).
+	  "d </span>";
+	$format10=str_replace('black','pink',$format);
+	$formaterr="<span style='background-color: pink'>%s</span>";
+	$i=1;
+
+	foreach ($tableau as $ligne) {
+		echo "<br />\n<a id='L$i' href='#debug_boucle'>",
+		  sprintf((($i%10) ? $format :$format10), $i),
+		  "</a>",
+		  sprintf(in_array($i, $fautifs) ? $formaterr : '%s',
+			  $ligne) ;
+		$i++;
+	}
 }
 
 // l'environnement graphique du debuggueur 
 function debug_dumpfile ($texte, $fonc, $type) {
 
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
+
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
 	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
 		return;
-
+	if (!$fonc) $fonc = $debug_objets['principal'];
 	$link = new Link;
 	$link->delvar('var_mode_affiche');
 	$link->delvar('var_mode_objet');
 	$link->addvar('var_mode','debug');
-	$self = $link->getUrl();
+	$self = quote_amp($link->getUrl());
 
 // en cas de squelette inclus,  virer le code de l'incluant:
 // - il contient souvent une Div restreignant la largeur a 3 fois rien
@@ -205,71 +318,99 @@ function debug_dumpfile ($texte, $fonc, $type) {
 
 	@header('Content-Type: text/html; charset='.lire_meta('charset'));
 	echo debut_entete('Spip ' . _T('admin_debug')), 
-	  "<link rel='stylesheet' href='spip_admin.css' type='text/css' />",
+	  "<link rel='stylesheet' href='spip_admin.css' type='text/css'>",
 	  "</head>\n<body style='margin:0 10px;'>",
-	  "<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
+	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 
-	foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
+	if ($var_mode_affiche !== 'validation') {
+	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
-		echo " <a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=validation'>"._T('validation')."</a>";
-		echo " <a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat'>"._T('zbug_resultat')."</a>";
-		echo " <a href='", $self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code'>"._T('zbug_code')."</a></legend>";
+		echo "\n<a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
+		echo "\n<a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
+		echo "\n<a href='", $self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
 			echo afficher_debug_contexte($contexte);
 
-		echo "<table width='100%'>\n";
 		$i = 0;
 		$colors = array('#e0e0f0', '#f8f8ff');
-		if (is_array($debug_objets['pretty']))
+		$res = "";
 		foreach ($debug_objets['pretty'] as $nom => $pretty)
 			if (substr($nom, 0, strlen($nom_skel)) == $nom_skel) {
 				$i++;
 				$aff = "&lt;".$pretty."&gt;";
 				if ($var_mode_objet == $nom)
 					$aff = "<b>$aff</b>";
-				echo "<tr bgcolor='" . $colors[$i%2] . "'><td  align='right'>$i</td><td><a href='",$self,"&amp;var_mode_objet=$nom&amp;var_mode_affiche=boucle' class='debug_link_boucle'>"._T('zbug_boucle')."</a></td><td><a href='",$self, "&amp;var_mode_objet=$nom&amp;var_mode_affiche=resultat' class='debug_link_resultat'>"._T('zbug_resultat')."</a></td><td><a href='", $self, "&amp;var_mode_objet=$nom&amp;var_mode_affiche=code' class='debug_link_code'>"._T('zbug_code')."</a></td><td>$aff</td></tr>";
+				$res .= "\n<tr bgcolor='" .
+				  $colors[$i%2] .
+				  "'><td  align='right'>$i</td><td>" .
+				  "<a  class='debug_link_boucle' href='" .
+				  $self .
+				  "&amp;var_mode_objet=" .
+				  $nom .
+				  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
+				  _T('zbug_boucle') .
+				  "</a></td><td><a class='debug_link_boucle' href='" .
+				  $self .
+				  "&amp;var_mode_objet=" .
+				  $nom .
+				  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
+				  _T('zbug_resultat') .
+				  "</a></td><td><a class='debug_link_resultat' href='" .
+				  $self .
+				  "&amp;var_mode_objet=" .
+				  $nom .
+				  "&amp;var_mode_affiche=code#$nom_skel'>" .
+				  _T('zbug_code') .
+				  "</a></td><td>" .
+				  $aff .
+				  "</td></tr>";
 			}
-		echo "</table>\n</fieldset>\n";
-	}
-	echo "</div>\n"; 
-	if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
-	  if ($var_mode_affiche == 'resultat') {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		highlight_string($debug_objets['requete'][$var_mode_objet]);
-#		echo "<p class='spip-admin-bloc'>les premiers appels &agrave; cette boucle ont donn&eacute;&nbsp;:</p>";
+		if ($res) echo "<table width='100%'>\n$res</table>\n";
+		echo "</fieldset>\n";
+	  }
+	  echo "</div>\n<a id='$fonc'></a>\n"; 
+	  if ($var_mode_objet && ($res = $debug_objets[$var_mode_affiche][$var_mode_objet])) {
+	    echo "<div id=\"debug_boucle\"><fieldset>";
+	    if ($var_mode_affiche == 'resultat') {
+		echo "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
+		ancre_texte($debug_objets['requete'][$var_mode_objet]);
 		foreach ($res as $view) 
-			if ($res) echo "<br /><fieldset>",interdire_scripts($view),"</fieldset>";
-		echo "</fieldset></div>";
+			if ($view) echo "\n<br /><fieldset>",interdire_scripts($view),"</fieldset>";
 
-	  } else if ($var_mode_affiche == 'code') {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		highlight_string("<"."?php\n".$res."\n?".">");
-		echo "</fieldset></div>";
-	} else if ($var_mode_affiche == 'boucle') {
-		echo "<div id=\"debug_boucle\"><fieldset><legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
-		echo "<pre>".entites_html($res)."</pre>";
-		echo "</fieldset></div>";
+	    } else if ($var_mode_affiche == 'code') {
+		echo  "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
+		ancre_texte("<"."?php\n".$res."\n?".">");
+	    } else if ($var_mode_affiche == 'boucle') {
+		echo  "<legend>",$debug_objets['pretty'][$var_mode_objet],"</legend>";
+		ancre_texte($res);
+	    } else if ($var_mode_affiche == 'squelette') {
+		echo  "<legend>",$debug_objets['sourcefile'][$var_mode_objet],"</legend>";
+		ancre_texte($debug_objets['squelette'][$var_mode_objet]);
+	    }
+	    echo "</fieldset></div>";
 	  }
 	}
-
 	if ($texte) {
+
 	  $ouvrant = $fermant = $err = "";
 	  $titre = $GLOBALS['var_mode_affiche'];
-	  if ($titre != 'validation')
+	  if ($titre != 'validation') {
 	    $titre = 'zbug_' . $titre;
+	  }
 	  else {
-	      global $phraseur_xml, $xml_parser;
-	      include_ecrire("inc_phraseur_xml.php");
-
-	      $res = $phraseur_xml->xml_parsestring($xml_parser, $texte);
+	      include_ecrire("inc_spip_sax.php");
+	      $res = spip_sax($texte);
 	      if (!$res)
 		$err = _L("impossible");
-	      elseif (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $res, $r)) {
+	      elseif (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
 		$fermant = $r[2];
 		$ouvrant = $r[4];
-		$err = ": " . $r[1] ."<a href='#L" . $r[2] . "'>$r[2]</a>" .
-		$r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>";
+		$rf = reference_boucle_debug($fermant, $fonc, $self);
+		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
+		$err = ": " . $r[1] .
+		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
+		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
 	      } else {
 		  $err = _L("correcte");
 		  $texte = $res;
@@ -280,34 +421,14 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    ' ',
 	    $err,
 	    "</legend>";
-	  ob_start();
-	  highlight_string($texte);
-	  $s = ob_get_contents();
-	  ob_end_clean();
-	  if (substr($s,0,6) == '<code>') { $s=substr($s,6); echo '<code>';}
-	  $tableau = explode("<br />", $s);
-	  $format = "<span style='color: black'>%0".
-	    strlen(count($tableau)).
-	    "d </span>";
-	  $format10=str_replace('black','pink',$format);
-	  $formaterr="<span style='background-color: pink'>%s</span>";
-	  $i=1;
-
-	  foreach ($tableau as $ligne) {
-	    echo "<br />\n<a id='L$i' />",
-	    sprintf((($i%10) ? $format :$format10), $i),
-	    sprintf((($i == $fermant)||($i == $ouvrant)) ? $formaterr : '%s',
-		    $ligne) ;
-	    $i++;
-	  }
+	  ancre_texte($texte, array($ouvrant, $fermant));
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
 	echo inclure_balise_dynamique(
-		balise_FORMULAIRE_ADMIN_dyn('div', $debug_objets)
+		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets)
 	);
 	echo '</body></html>';
 	exit;
 }
-
 ?>

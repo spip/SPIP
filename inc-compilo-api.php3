@@ -22,13 +22,15 @@ class Texte {
 	var $type = 'texte';
 	var $texte;
 	var $avant, $apres = ""; // s'il y avait des guillemets autour
+	var $ligne = 0; 
 }
 
 class Inclure {
 	var $type = 'include';
 	var $texte;
-	var $param = array();  //  valeurs des params
 	var $avant, $apres; // inutilises mais generiques
+	var $ligne = 0; 
+	var $param = array();  //  valeurs des params
 }
 
 //
@@ -69,6 +71,7 @@ class Boucle {
 	var $primary;
 	var $return;
 	var $numrows = false; 
+	var $ligne = 0; 
 }
 
 // sous-noeud du precedent
@@ -77,6 +80,7 @@ class Critere {
 	var $op;
 	var $not;	
 	var $param = array();
+	var $ligne = 0; 
 }
 
 class Champ {
@@ -99,6 +103,7 @@ class Champ {
 	// $document; pour embed et img dans les textes
 	// sourcefile; pour DOSSIER_SQUELETTE
 	var $descr = array();
+	var $ligne = 0; 
 }
 
 
@@ -116,11 +121,13 @@ class Idiome {
 	var $code;
 	var $statut;
 	var $descr = array();
+	var $ligne = 0; 
 }
 
 class Polyglotte {
 	var $type = 'polyglotte';
 	var $traductions = array(); // les textes ou choisir
+	var $ligne = 0; 
 }
 //
 // Globales de description de la base

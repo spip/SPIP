@@ -87,16 +87,25 @@ if (defined("_INC_PUBLIC")) {
 		$page = surligner_mots($page, $var_recherche);
 	}
 
+	// Valider/indenter a la demande. garder la compatibilite tidy
+	if (trim($page) AND $xhtml AND !$flag_preserver AND !headers_sent()) {
+		if ($xhtml === true) $xhtml = 'tidy';
+		$file = 'inc_' . $xhtml. ".php";
+		spip_log(_DIR_RESTREINT . $file);
+		if (is_readable(_DIR_RESTREINT . $file))
+		  include_ecrire($file);
+		if (function_exists($xhtml))
+		  {
+			$page = $xhtml($page);
+		  }
+		elseif (function_exists('xhtml'))
+			$page = xhtml($page);
+	}
+
 	// Inserer au besoin les boutons admins
 	if ($affiche_boutons_admin) {
 		include_local("inc-admin.php3");
 		$page = affiche_boutons_admin($page);
-	}
-
-	// Appliquer tidy au besoin
-	if (trim($page) AND $xhtml AND !$flag_preserver AND !headers_sent()) {
-		include_ecrire('inc_tidy.php');
-		$page = xhtml($page);
 	}
 
 	// Affichage final s'il en reste

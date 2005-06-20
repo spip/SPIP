@@ -19,7 +19,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 # Le debuger transmet donc ses donnees, et cette balise y retrouve son petit.
 
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
-	global $var_preview, $use_cache, $forcer_debug;
+  global $var_preview, $use_cache, $forcer_debug, $xhtml;
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic;
 	static $dejafait = false;
 
@@ -82,16 +82,18 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 
 	// Bouton de debug
-	$debug = (
-		($forcer_debug
-		OR $GLOBALS['bouton_admin_debug']
-		OR ($GLOBALS['var_mode'] == 'debug'
-			AND $GLOBALS['_COOKIE']['spip_debug']
-		)) AND ($GLOBALS['code_activation_debug'] == 'oui'
-			OR $GLOBALS['auteur_session']['statut'] == '0minirezo')
-		AND !$var_preview
+	$debug = (($forcer_debug
+		   OR $GLOBALS['bouton_admin_debug']
+		   OR ($GLOBALS['var_mode'] == 'debug'
+		       AND $GLOBALS['_COOKIE']['spip_debug']))
+		  AND ($GLOBALS['code_activation_debug'] == 'oui'
+		       OR $GLOBALS['auteur_session']['statut'] == '0minirezo')
+		  AND !$var_preview
 	) ? 'debug' : '';
-
+	$analyser = !$xhtml ? "" :
+	  (($xhtml === 'spip_sax') ?
+	   ($action . "var_mode=debug&var_mode_affiche=validation") :
+	   $xhtml_check); // cas tidy
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
 
@@ -133,7 +135,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				'statistiques' => $statistiques,
 				'visites' => intval($visites),
 				'use_cache' => ($use_cache ? ' *' : ''),
-				'floatdiv' => $float
+				'divclass' => $float,
+				'analyser' => $analyser,
+				'xhtml_error' => $GLOBALS['xhtml_error']
 			)
 		);
 }

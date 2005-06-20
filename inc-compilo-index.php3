@@ -206,7 +206,9 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . ($collecte ? $param : substr($param,1)) # virer la virgule
 	  . "),\n\tarray("
 	  . argumenter_balise($p->param, "', '")
-	  . "), \$GLOBALS['spip_lang'])";
+	  . "), \$GLOBALS['spip_lang'],"
+	  . $p->ligne
+	  . ')';
 	$p->statut = 'php';
 	$p->fonctions = array();
 	$p->param = array();
