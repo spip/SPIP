@@ -19,6 +19,8 @@
 if (defined("_INC_COMPILO")) return;
 define("_INC_COMPILO", "1");
 
+// reperer un code ne calculant rien, meme avec commentaire
+define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
@@ -83,20 +85,16 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 //
 function calculer_boucle($id_boucle, &$boucles) {
 
-	$boucle = &$boucles[$id_boucle];
-	$return = $boucle->return;
-	$type_boucle = $boucle->type_requete;
+  $boucle = &$boucles[$id_boucle];
+  $return = $boucle->return;
+  $type_boucle = $boucle->type_requete;
 
-	if ($type_boucle == 'boucle')
-	    return "\n	\$t0 = " . $return . ";";
-
+  if ($type_boucle == 'boucle') {
+	    $corps = "\n	\$t0 = " . $return . ";";
+	    $init = "";
+  } else {
 	$id_table = $boucle->id_table;
 	$primary = $boucle->primary;
-	if($p = strpos($primary, ',')) {
-		$id_field = $id_table . "." . substr($primary, 0, $p);
-	} else {
-		$id_field = $id_table . "." . $primary;
-	}
 
 	// La boucle doit-elle selectionner la langue ?
 	// 1. par defaut, les boucles suivantes le font
@@ -114,33 +112,26 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->lang_select == 'oui') $lang_select = 'oui';
 	if ($boucle->lang_select == 'non') $lang_select = false;
 
-	// Penser a demander le champ lang
+	// Penser a demander le champ lang au serveur SQL
 	if ($lang_select)
-		$boucle->select[] = 
-			// cas des tables SPIP
-			($id_table ? $id_table.'.' : '')
-			// cas general ({lang_select} sur une table externe)
-			. 'lang';
+	  index_pile($id_boucle, 'lang', $boucles);
 
 	// Calculer les invalideurs si c'est une boucle non constante
-	$constant = ereg("^\(?'[^']*'\)?$",$return);
-
+	$constant = ereg(CODE_MONOTONE,$return);
 	if ((!$primary) || $constant)
 		$invalide = '';
 	else {
-		$boucle->select[] = $id_field;
-
-		$invalide = "\n			\$Cache['$primary']";
-		if ($primary != 'id_forum')
-			$invalide .= "[\$Pile[\$SP]['$primary']] = 1;";
-		else
-			$invalide .= "[calcul_index_forum(" . 
-				// Retournera 4 [$SP] mais force la demande du champ a MySQL
-				index_pile($id_boucle, 'id_article', $boucles) . ',' .
-				index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
-				index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
-				index_pile($id_boucle, 'id_syndic', $boucles) .  ")] = 1;";
-		$invalide .= ' // invalideurs';
+		$invalide = "\n			\$Cache['$primary'][" .
+		  (($primary != 'id_forum')  ? 
+		   index_pile($id_boucle, $primary, $boucles) :
+		   ("calcul_index_forum(" . 
+		// Retournera 4 [$SP] mais force la demande du champ a MySQL
+		    index_pile($id_boucle, 'id_article', $boucles) . ',' .
+		    index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
+		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
+		    index_pile($id_boucle, 'id_syndic', $boucles) .
+		    ")")) .
+		  '] = 1; // invalideurs';
 	}
 
 	// Cas {1/3} {1,4} {n-2,1}...
@@ -181,7 +172,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
 
 	// gestion optimale des separateurs et des boucles constantes
-
 	$corps = $debut . 
 		((!$boucle->separateur) ? 
 			(($constant && !$debut) ? $return :
@@ -197,29 +187,27 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->mode_partie)
 		$corps .= "\n		}\n";
 
-	$texte = '';
+	$init = '';
 
 	// Gestion de la hierarchie (voir inc-boucles.php3)
 	if ($boucle->hierarchie)
-		$texte .= "\n	".$boucle->hierarchie;
-
+		$init .= "\n	".$boucle->hierarchie;
 
 	// si le corps est une constante, ne pas appeler le serveur N fois!
-	if (ereg("^\(?'[^']*'\)?$",$corps)) {
-		// vide ?
-		if (($corps == "''") || ($corps == "('')")) {
+	if (ereg(CODE_MONOTONE,$corps, $r)) {
+		if (!$r[2]) {
 			if (!$boucle->numrows)
 				return 'return "";';
 			else
 				$corps = "";
 		} else {
 			$boucle->numrows = true;
-			$corps = "\n		".'for($x=$Numrows["'.$id_boucle.'"]["total"];$x>0;$x--)
+			$corps = "\n	".'for($x=$Numrows["'.$id_boucle.'"]["total"];$x>0;$x--)
 			$t0 .= ' . $corps .';';
 		}
 	} else {
 
-	$corps = '
+		$corps = '
 
 	// RESULTATS
 	while ($Pile[$SP] = @spip_abstract_fetch($result,"' .
@@ -229,7 +217,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 
 		// Memoriser la langue avant la boucle pour la restituer apres
 		if ($lang_select) {
-			$texte .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
+			$init .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
 			$corps .= "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
 		}
 	}
@@ -238,26 +226,21 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// Requete
 	//
 
-	// hack critere recherche : ignorer la requete en cas de hash vide
-	// Recherche : recuperer les hash a partir de la chaine de recherche
-	if ($boucle->hash)
-		$init =  '
-	// RECHERCHE
-	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");
-	if ($rech_select) ';
-
 	if (!$order = $boucle->order
 	AND !$order = $boucle->default_order)
 		$order = "''";
 
-	$init .= "\n\n	// REQUETE
+	$init .= $boucle->hash . 
+	  "\n\n	// REQUETE
 	\$result = spip_abstract_select(\n\t\tarray(\"". 
 		# En absence de champ c'est un decompte : 
 	  	# prendre la primary pour avoir qqch
 	  	# (COUNT incompatible avec le cas general
-		(($boucle->select) ? 
-			join("\",\n\t\t\"", array_unique($boucle->select)) :
-			$id_field) .
+		($boucle->select ? 
+		 join("\",\n\t\t\"", $boucle->select) :
+		 ($id_table . "." .
+		 (($p = strpos($primary, ',')) ?
+		  substr($primary, 0, $p) : $primary))) .
 		'"), # SELECT
 		array("' .
 		join('","', array_unique($boucle->from)) .
@@ -297,15 +280,18 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	// Conclusion et retour
 	//
-	$conclusion = "\n	@spip_abstract_free(\$result,'" .
-	  $boucle->sql_serveur . "');" .
+	$corps .= "\n	@spip_abstract_free(\$result,'" .
+	     $boucle->sql_serveur . "');";
 
+  }
+
+  return $init . $corps . 
 	## inserer le code d'envoi au debusqueur du resultat de la fonction
 	(($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);") .
 	  "\n	return \$t0;";
 
-	return $texte . $init . $corps . $conclusion;
+
 }
 
 

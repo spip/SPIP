@@ -90,8 +90,10 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 
 		// On l'a trouve
 		if ($e) {
-			$boucles[$idb]->select[] = $t . "." . $e;
-			return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
+		  $t .= ".$e";
+		  if (!in_array($t, $boucles[$idb]->select))
+		    $boucles[$idb]->select[] = $t;
+		  return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
 		}
 #		spip_log("On remonte vers $i");
 		// Sinon on remonte d'un cran

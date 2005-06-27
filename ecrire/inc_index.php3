@@ -617,25 +617,19 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles') 
 		arsort($points, SORT_NUMERIC);
 
 		# calculer le {id_article IN()} et le {... as points}
-		if (count($points)) {
+		if (!count($points)) {
+			$cache[$type][$recherche] = array('', '');
+		} else {
 			$ids = array();
-			$expr = '';
+			$select = '0';
 			foreach ($points as $id => $p)
 				$listes_ids[$p] .= ','.$id;
 			foreach ($listes_ids as $p => $liste_ids)
-				$expr .= "+$p*(".calcul_mysql_in("$table.$type", substr($liste_ids, 1)).") ";
-			if ($expr = substr($expr,1))
-				$select = "$expr as points";
-			else
-				$select = "0 as points";
+				$select .= "+$p*(".calcul_mysql_in("$table.$type", substr($liste_ids, 1)).") ";
 
-			$where = '('.calcul_mysql_in("$table.$type", join(',',array_keys($points))).')';
-		} else {
-			$select = '';
-			$where = '';
+			$cache[$type][$recherche] = array($select, 
+							  '('.calcul_mysql_in("$table.$type", join(',',array_keys($points))).')');
 		}
-
-		$cache[$type][$recherche] = array($select, $where);
 	}
 
 	return $cache[$type][$recherche];
