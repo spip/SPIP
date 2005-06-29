@@ -168,7 +168,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// gestion optimale des separateurs et des boucles constantes
 	$corps .= 
 		((!$boucle->separateur) ? 
-			(($constant && !$debut) ? $return :
+			(($constant && !$corps) ? $return :
 			 	("\n\t\t" . '$t0 .= ' . $return . ";")) :
 		 ("\n\t\t\$t1 " .
 			((strpos($return, '$t1.') === 0) ? 
