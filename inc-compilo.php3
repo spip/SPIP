@@ -93,46 +93,8 @@ function calculer_boucle($id_boucle, &$boucles) {
 	    $corps = "\n	\$t0 = " . $return . ";";
 	    $init = "";
   } else {
-	$id_table = $boucle->id_table;
 	$primary = $boucle->primary;
-
-	// La boucle doit-elle selectionner la langue ?
-	// 1. par defaut, les boucles suivantes le font
-	// "peut-etre", c'est-a-dire si forcer_lang == false.
-	if (
-		$type_boucle == 'articles'
-		OR $type_boucle == 'rubriques'
-		OR $type_boucle == 'hierarchie'
-		OR $type_boucle == 'breves'
-	) $lang_select = 'maybe';
-	else
-		$lang_select = false;
-
-	// 2. a moins d'une demande explicite
-	if ($boucle->lang_select == 'oui') $lang_select = 'oui';
-	if ($boucle->lang_select == 'non') $lang_select = false;
-
-	// Penser a demander le champ lang au serveur SQL
-	if ($lang_select)
-	  index_pile($id_boucle, 'lang', $boucles);
-
-	// Calculer les invalideurs si c'est une boucle non constante
 	$constant = ereg(CODE_MONOTONE,$return);
-	if ((!$primary) || $constant)
-		$invalide = '';
-	else {
-		$invalide = "\n			\$Cache['$primary'][" .
-		  (($primary != 'id_forum')  ? 
-		   index_pile($id_boucle, $primary, $boucles) :
-		   ("calcul_index_forum(" . 
-		// Retournera 4 [$SP] mais force la demande du champ a MySQL
-		    index_pile($id_boucle, 'id_article', $boucles) . ',' .
-		    index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
-		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
-		    index_pile($id_boucle, 'id_syndic', $boucles) .
-		    ")")) .
-		  '] = 1; // invalideurs';
-	}
 
 	// Cas {1/3} {1,4} {n-2,1}...
 
@@ -142,28 +104,32 @@ function calculer_boucle($id_boucle, &$boucles) {
 	//
 	// Creer le debut du corps de la boucle :
 	//
-	$debut = '';
+	$corps = '';
 	if ($flag_cpt)
-		$debut = "\n		\$Numrows['$id_boucle']['compteur_boucle']++;";
+		$corps = "\n		\$Numrows['$id_boucle']['compteur_boucle']++;";
 
 	if ($boucle->mode_partie)
-		$debut .= "
+		$corps .= "
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle
 		AND \$Numrows['$id_boucle']['compteur_boucle']-1 <= \$fin_boucle) {";
 	
-	if ($lang_select AND !$constant) {
-		$selecteur = 
-			(($lang_select == 'maybe') ? 
-			'if (!$GLOBALS["forcer_lang"]) ':'')
-			. 'if ($x = $Pile[$SP]["lang"]) $GLOBALS[\'spip_lang\'] = $x;'
-			. ' // lang_select';
-		$debut .= "\n			".$selecteur;
-	}
+	// Calculer les invalideurs si c'est une boucle non constante
 
-	$debut .= $invalide;
+	if ($primary && !$constant)
+		$corps .= "\n\t\t\$Cache['$primary'][" .
+		  (($primary != 'id_forum')  ? 
+		   index_pile($id_boucle, $primary, $boucles) :
+		   ("calcul_index_forum(" . 
+		// Retournera 4 [$SP] mais force la demande du champ a MySQL
+		    index_pile($id_boucle, 'id_article', $boucles) . ',' .
+		    index_pile($id_boucle, 'id_breve', $boucles) .  ',' .
+		    index_pile($id_boucle, 'id_rubrique', $boucles) .',' .
+		    index_pile($id_boucle, 'id_syndic', $boucles) .
+		    ")")) .
+		  "] = 1; // invalideurs\n";
 
 	if ($boucle->doublons)
-		$debut .= "\n			\$doublons[".$boucle->doublons."] .= ','. " .
+		$corps .= "\n			\$doublons[".$boucle->doublons."] .= ','. " .
 		index_pile($id_boucle, $primary, $boucles)
 		. "; // doublons";
 
@@ -171,8 +137,36 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if (count($boucle->separateur))
 	  $code_sep = ("'" . ereg_replace("'","\'",join('',$boucle->separateur)) . "'"); 
 
+	$init = '';
+	$fin = '';
+
+	// La boucle doit-elle selectionner la langue ?
+	// -. par defaut, les boucles suivantes le font
+	// "peut-etre", c'est-a-dire si forcer_lang == false.
+	// - . a moins d'une demande explicite
+	if (!$constant && $boucle->lang_select != 'non' &&
+	    (($boucle->lang_select == 'oui')  ||
+		    (
+			$type_boucle == 'articles'
+			OR $type_boucle == 'rubriques'
+			OR $type_boucle == 'hierarchie'
+			OR $type_boucle == 'breves'
+			)))
+	  {
+	      $corps .= 
+		  (($boucle->lang_select != 'oui') ? 
+			"\t\tif (!\$GLOBALS['forcer_lang'])\n\t " : '')
+		  . "\t\t\$GLOBALS['spip_lang'] = (\$x = "
+		  . index_pile($id_boucle, 'lang', $boucles)
+		  . ') ? $x : $old_lang;';
+		// Memoriser la langue avant la boucle pour la restituer apres
+	      $init .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
+	      $fin .= "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
+
+	  }
+
 	// gestion optimale des separateurs et des boucles constantes
-	$corps = $debut . 
+	$corps .= 
 		((!$boucle->separateur) ? 
 			(($constant && !$debut) ? $return :
 			 	("\n\t\t" . '$t0 .= ' . $return . ";")) :
@@ -186,8 +180,6 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// Fin de parties
 	if ($boucle->mode_partie)
 		$corps .= "\n		}\n";
-
-	$init = '';
 
 	// Gestion de la hierarchie (voir inc-boucles.php3)
 	if ($boucle->hierarchie)
@@ -212,14 +204,9 @@ function calculer_boucle($id_boucle, &$boucles) {
 	// RESULTATS
 	while ($Pile[$SP] = @spip_abstract_fetch($result,"' .
 		  $boucle->sql_serveur .
-		  '")) {'. "\n$corps\n	}\n";
-		 
-
-		// Memoriser la langue avant la boucle pour la restituer apres
-		if ($lang_select) {
-			$init .= "\n	\$old_lang = \$GLOBALS['spip_lang'];";
-			$corps .= "\n	\$GLOBALS['spip_lang'] = \$old_lang;";
-		}
+		  '")) {' . 
+		  "\n$corps\n	}\n" .
+		  $fin ;
 	}
 
 	//
@@ -238,7 +225,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	  	# (COUNT incompatible avec le cas general
 		($boucle->select ? 
 		 join("\",\n\t\t\"", $boucle->select) :
-		 ($id_table . "." .
+		 ($boucle->id_table . "." .
 		 (($p = strpos($primary, ',')) ?
 		  substr($primary, 0, $p) : $primary))) .
 		'"), # SELECT
@@ -256,7 +243,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 			$boucle->limit). ", # LIMIT
 		'".$boucle->sous_requete."', # sous
 		'" . (!$boucle->having ? "" : "(COUNT(*)> $boucle->having)")."', # HAVING
-		'".$id_table."', # table
+		'".$boucle->id_table."', # table
 		'".$boucle->id_boucle."', # boucle
 		'".$boucle->sql_serveur."'); # serveur";
 
@@ -289,7 +276,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	## inserer le code d'envoi au debusqueur du resultat de la fonction
 	(($GLOBALS['var_mode_affiche'] != 'resultat') ? "" : "
 		boucle_debug_resultat('$id_boucle', 'resultat', \$t0);") .
-	  "\n	return \$t0;";
+    "\n	return \$t0;";
 
 
 }
