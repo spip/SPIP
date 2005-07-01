@@ -20,21 +20,20 @@ define("_INC_HTML_SQUEL", "1");
 # il est charge par un include calcule dans inc-calcul-squel
 # pour permettre differentes syntaxes en entree
 
+define('BALISE_BOUCLE', '<BOUCLE');
+define('BALISE_FIN_BOUCLE', '</BOUCLE');
+define('BALISE_PRE_BOUCLE', '<B');
+define('BALISE_POST_BOUCLE', '</B');
+define('BALISE_ALT_BOUCLE', '<//B');
+
+define('TYPE_RECURSIF', 'boucle');
+define('SPEC_BOUCLE','[[:space:]]*\(([^)]*)\)');
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
-define('PARAM_DE_BOUCLE','[[:space:]]*[{][[:space:]]*([^{}]*([{][^[}]]*[}][^[}]]*)*)[[:space:]]*[}]');
-define('TYPE_DE_BOUCLE', "[^)]*");
-define('BALISE_DE_BOUCLE',
-	"^<BOUCLE(" .
-	NOM_DE_BOUCLE .
-	')[[:space:]]*\((' .
-	TYPE_DE_BOUCLE .
-	')\)');
-define('PARAM_INCLURE','^[[:space:]]*[{][[:space:]]*([_0-9a-zA-Z]+)[[:space:]]*(=)?');
+
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
-define('DEBUT_DE_BOUCLE','/<B('.NOM_DE_BOUCLE.')>.*?<BOUCLE\1[^-_.a-zA-Z0-9]|<BOUCLE('.NOM_DE_BOUCLE.')/ms');	# preg
 
 function phraser_inclure($texte, $ligne, $result) {
 
@@ -412,9 +411,10 @@ function phraser_criteres($params, &$result) {
 			    $crit->not = $m[1];
 			    $crit->cond = $m[3];
 			  }
-			  else 
+			  else {spip_log("pb $param");
 			    erreur_squelette(_T('zbug_critere_inconnu',
 						array('critere' => $param)));
+			  }
 			  $args[] = $crit;
 			}
 		  }
@@ -442,85 +442,94 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 
 	$all_res = array();
 
-	while (preg_match(DEBUT_DE_BOUCLE, $texte, $regs)) {
-		$nom_boucle = $regs[1].$regs[2];
-		$p = strpos($texte, '<BOUCLE'.$nom_boucle);
+	while (($p = strpos($texte, BALISE_BOUCLE)) !== false) {
 
-		// envoyer la boucle au debugueur
-		if ($GLOBALS['var_mode']== 'debug') {
-			$preg = "@<B($nom_boucle|OUCLE${nom_boucle}[^-_.a-zA-Z0-9][^>]*)>"
-				. ".*</(BOUCLE|/?B)$nom_boucle>@ms";
-			preg_match($preg, $texte, $match);
-			boucle_debug ($nom_boucle, $nom, $match[0], $id_parent);
-		}
-
-		//
-		// Recuperer la partie principale de la boucle
-		//
-		$debut = substr($texte, 0, $p);
-		$milieu = substr($texte, $p);
-		if (!ereg(BALISE_DE_BOUCLE, $milieu, $match)) {
-			erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $milieu);
-		}
-		$milieu = substr($milieu, strlen($match[0]));
-		$id_boucle = $match[1];
 		$result = new Boucle;
 		$result->id_parent = $id_parent;
-		$result->id_boucle = $id_boucle;
-		$type = $match[2];
-		if ($p = strpos($type, ':'))
-		  {
-		    $result->sql_serveur = substr($type,0,$p);
-		    $type = substr($type,$p+1);
-		  }
-		$type = strtolower($type);
-		if ($type == 'sites') $type = 'syndication'; # alias
 
-		//
-		// Recuperer les criteres de la boucle (sauf boucle recursive)
-		//
-		if (substr($type, 0, 6) == 'boucle') {
-			$result->type_requete = 'boucle';
-			$result->param[0] = substr($match[2], 6);
-			$milieu = substr($milieu, strpos($milieu, '>'));
-		} else {
-			$result->type_requete = $type;
-			phraser_args($milieu,">","",$all_res,$result);
-			$milieu = substr($result->apres,1);
-			$result->apres = "";
-			phraser_criteres($result->param, $result);
-		}
-		//
-		// Recuperer la partie conditionnelle avant
-		//
-		$s = "<B$id_boucle>";
-		$p = strpos($debut, $s);
-		if ($p !== false) {
-			$result->avant = substr($debut, $p + strlen($s));
-			$debut = substr($debut, 0, $p);
-		}
+# attention: reperer la premiere des 2 balises: pre_boucle ou boucle
+# $n == $p possible car <B est un prefixe de <BOUCLE
+		$n = strpos($texte, BALISE_PRE_BOUCLE);
+
+		if ($n === false || ($n >= $p)) {
+		  $debut = substr($texte, 0, $p);
+		  $milieu = substr($texte, $p);
+		  $k = strpos($milieu, '(');
+		  $id_boucle = substr($milieu,
+				       strlen(BALISE_BOUCLE),
+				       $k - strlen(BALISE_BOUCLE));
+		  $milieu = substr($milieu, $k);
+
+		  /* a adapter: si $n pointe sur $id_boucle ...
 		if (strpos($milieu, $s)) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 				$id_boucle . 
 				_T('zbug_balise_b_aval'));
 		}
+		  */
+		} else {
+		  $debut = substr($texte, 0, $n);
+		  $milieu = substr($texte, $n);
+		  $k = strpos($milieu, '>');
+		  $id_boucle = substr($milieu,
+				       strlen(BALISE_PRE_BOUCLE),
+				       $k - strlen(BALISE_PRE_BOUCLE));
+
+		  if (!($p = strpos($milieu, BALISE_BOUCLE . $id_boucle . "(")))
+		    erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $id_boucle);
+		  $result->avant = substr($milieu, $k+1, $p-$k-1);
+		  $milieu = substr($milieu, $p+strlen($id_boucle)+strlen(BALISE_BOUCLE));
+		}
+		$result->id_boucle = $id_boucle;
+
+		ereg(SPEC_BOUCLE, $milieu, $match);
+                $milieu = substr($milieu, strlen($match[0]));
+		$type = $match[1];
+
+		if ($p = strpos($type, ':'))
+		  {
+		    $result->sql_serveur = substr($type,0,$p);
+		    $soustype = strtolower(substr($type,$p+1));
+		  }
+		else
+		  $soustype = strtolower($type);
+
+		if ($soustype == 'sites') $soustype = 'syndication' ; # alias
+		      
+		//
+		// analyser les criteres et distinguer la boucle recursive
+		//
+		if (substr($soustype, 0, 6) == TYPE_RECURSIF) {
+			$result->type_requete = TYPE_RECURSIF;
+			$result->param[0] = substr($soustype, strlen(TYPE_RECURSIF));
+			$milieu = substr($milieu, strpos($milieu, '>'));
+			$params = "";
+		} else {
+			$result->type_requete = $soustype;
+			phraser_args($milieu,">","",$all_res,$result);
+			$params = substr($milieu,0,strpos($milieu,$result->apres));
+			$milieu = substr($result->apres,1);
+			$result->apres = "";
+			phraser_criteres($result->param, $result);
+		}
 
 		//
 		// Recuperer la fin :
 		//
-		$s = "</BOUCLE$id_boucle>";
+		$s = BALISE_FIN_BOUCLE . $id_boucle . ">";
 		$p = strpos($milieu, $s);
 		if ($p === false) {
 			erreur_squelette(_T('zbug_erreur_boucle_syntaxe'),
 					 _T('zbug_erreur_boucle_fermant',
 						array('id'=>$id_boucle)));
 		}
+
 		$suite = substr($milieu, $p + strlen($s));
 		$milieu = substr($milieu, 0, $p);
 		//
 		// 1. Recuperer la partie conditionnelle apres
 		//
-		$s = "</B$id_boucle>";
+		$s = BALISE_POST_BOUCLE . $id_boucle . ">";
 		$p = strpos($suite, $s);
 		if ($p !== false) {
 			$result->apres = substr($suite, 0, $p);
@@ -530,7 +539,7 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		//
 		// 2. Recuperer la partie alternative
 		//
-		$s = "<//B$id_boucle>";
+		$s = BALISE_ALT_BOUCLE . $id_boucle . ">";
 		$p = strpos($suite, $s);
 		if ($p !== false) {
 			$result->altern = substr($suite, 0, $p);
@@ -540,6 +549,17 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		$m = substr_count($milieu, "\n");
 		$b = substr_count($result->avant, "\n");
 		$a = substr_count($result->apres, "\n");
+
+		// envoyer la boucle au debugueur
+		if ($GLOBALS['var_mode']== 'debug') {
+		  boucle_debug ($nom, $id_parent, $id_boucle, 
+				$type,
+				$params,
+				$result->avant,
+				$milieu,
+				$result->apres,
+				$result->altern);
+		}
 
 		$result->avant = phraser($result->avant, $id_parent,$boucles, $nom, $result->ligne);
 		$result->apres = phraser($result->apres, $id_parent,$boucles, $nom, $result->ligne+$b+$m);

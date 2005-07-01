@@ -194,12 +194,20 @@ function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 }
 
 // appelee a chaque analyse syntaxique de squelette (inc-parser)
-function boucle_debug ($id, $nom, $boucle, $id_parent) {
+function boucle_debug ($nom, $id_parent, $id, $type, $crit, $avant, $milieu, $apres, $altern) {
 	global $debug_objets;
 
 	$debug_objets['courant'] = $nom;
-	$debug_objets['boucle'][$nom.$id] = $boucle;
 	$debug_objets['parent'][$nom.$id] = $id_parent;
+	// on synthetise avec la syntaxe standard, mais "<//" pose pb 
+	$debug_objets['boucle'][$nom.$id] = 
+	  "<B$id>" .
+	  $avant . "<BOUCLE$id($type)" . $crit .
+	  '>' .
+	  $milieu .
+	  "</BOUCLE$id>" .
+	  $apres . "</B$id>" .
+	  $altern . '<//B' . $id . ">";
 }
 
 function trouve_boucle_debug($n, $nom, $debut=0, $boucle = "")
@@ -317,7 +325,9 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	ob_end_clean();
 
 	@header('Content-Type: text/html; charset='.lire_meta('charset'));
-	echo debut_entete('Spip ' . _T('admin_debug')), 
+	echo debut_entete('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
+			  _T('admin_debug') . ' ' .
+			  _T('info_mon_site_spip')), 
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css'>",
 	  "</head>\n<body style='margin:0 10px;'>",
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
