@@ -502,7 +502,7 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		if (substr($soustype, 0, 6) == TYPE_RECURSIF) {
 			$result->type_requete = TYPE_RECURSIF;
 			$result->param[0] = substr($soustype, strlen(TYPE_RECURSIF));
-			$milieu = substr($milieu, strpos($milieu, '>'));
+			$milieu = substr($milieu, strpos($milieu, '>')+1);
 			$params = "";
 		} else {
 			$result->type_requete = $soustype;

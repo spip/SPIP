@@ -491,7 +491,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle='') {
 
 // affichage du code produit
 
-function code_boucle(&$boucles, $id, $nom, $sourcefile)
+function code_boucle(&$boucles, $id, $nom)
 {
 	$boucle = &$boucles[$id];
 
@@ -525,8 +525,6 @@ function code_boucle(&$boucles, $id, $nom, $sourcefile)
 	$pretty = "BOUCLE$id(".strtoupper($boucle->type_requete) . ")" .
 		ereg_replace("[\r\n]", " ", $pretty);
 
-	if ($GLOBALS['var_mode'] == 'debug')
-		boucle_debug_compile ($id, $nom, $pretty, $sourcefile,$boucle->return);
 	return $pretty;	
 }
 
@@ -632,12 +630,16 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 			'(&$Cache, &$Pile, &$doublons, &$Numrows, $SP) {' .
 			$f($id, $boucles) .
 			"\n}\n\n";
+		if ($GLOBALS['var_mode'] == 'debug')
+		  boucle_debug_compile ($id, $nom, $boucles[$id]->return);
+
 	}
 
 	$code = "";
 	foreach($boucles as $id => $boucle) {
-		$code .= "\n//\n// <" .
-		  code_boucle($boucles, $id, $nom, $sourcefile).
+		$code .= "\n//\n// <BOUCLE " .
+#		  code_boucle($boucles, $id, $nom). # pas au point
+		  $boucle->type_requete .
 		  ">\n//\n" .
 		  $boucle->return;
 	}
