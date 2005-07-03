@@ -19,13 +19,15 @@
 if (defined("_INC_BOUCLES")) return;
 define("_INC_BOUCLES", "1");
 
-
 //
 // Boucle sur une table hors SPIP
 //
 function boucle_DEFAUT($id_boucle, &$boucles) {
+	global $table_des_tables;
 	$boucle = &$boucles[$id_boucle];
-	$boucle->from[] =  $boucle->type_requete . " AS " . $boucle->type_requete;
+	$t = $table_des_tables[$boucle->type_requete];
+	$boucle->from[] =  $boucle->type_requete . " AS " . 
+	  ($t ? $t : $boucle->type_requete);
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
