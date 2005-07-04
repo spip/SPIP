@@ -385,7 +385,7 @@ function phraser_criteres($params, &$result) {
 			      // cette variable sera inseree dans le code
 			      // et son nom sert d'indicateur des maintenant
 			      $result->doublons = '$doublons_index';
-			      $param = 'doublons';
+			      if ($param == 'unique') $param = 'doublons';
 			    }
 			  elseif ($param == 'recherche')
 			    // meme chose (a cause de #nom_de_boucle:URL_*)
@@ -396,7 +396,7 @@ function phraser_criteres($params, &$result) {
 			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
 							   (($m[1] == 'lang_select') ? $m[1] : trim($m[4])),
 							   $m[3], $m[2]);
-		  } elseif (preg_match("/^([!]?)[[:space:]]*([A-Za-z_][A-Za-z_0-9]*)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
+			  } elseif (preg_match("/^([!]?)[[:space:]]*([A-Za-z_][A-Za-z_0-9]*)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
 		  // contient aussi les comparaisons implicites !
 			    array_shift($v);
 			    if ($m[4])
