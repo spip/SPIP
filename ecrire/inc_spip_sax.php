@@ -43,8 +43,8 @@ function debutElement($parser, $name, $attrs)
   $sep = ' ';
   foreach ($attrs as $k => $v) {
 	$delim = strpos($v, "'") === false ? "'" : '"';
-	$att .= $sep .  $k . "=" . $delim . 
-	  $phraseur_xml->translate_entities($v)
+	$att .= $sep .  $k . "=" . $delim
+	  . str_replace('"',  '&quot;', $phraseur_xml->translate_entities($v))
 	  . $delim;
 	$sep = "\n $depth";
     }
@@ -96,7 +96,6 @@ function PiElement($parser, $target, $data)
 	  eval($data);
 	  $data = ob_get_contents();
 	  ob_end_clean();
-	  //	  xml_parse($xml_parser, $data); // pas si simple
 	  $contenu[$depth] .= $data;
   }
 }
