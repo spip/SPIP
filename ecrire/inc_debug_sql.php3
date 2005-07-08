@@ -67,17 +67,9 @@ function affiche_erreurs_page($tableau_des_erreurs) {
 // Si une boucle cree des soucis, on peut afficher la requete fautive
 // avec son code d'erreur
 //
-function erreur_requete_boucle($query, $id_boucle, $type) {
+function erreur_requete_boucle($query, $id_boucle, $type, $erreur, $errsys) {
 
 	$GLOBALS['bouton_admin_debug'] = true;
-
-	$erreur = spip_sql_error();
-	$errno = spip_sql_errno();
-	if (eregi('err(no|code):?[[:space:]]*([0-9]+)', $erreur, $regs))
-		$errsys = $regs[2];
-	else if (($errno == 1030 OR $errno <= 1026)
-	AND ereg('[^[:alnum:]]([0-9]+)[^[:alnum:]]', $erreur, $regs))
-		$errsys = $regs[1];
 
 	// Erreur systeme
 	if ($errsys > 0 AND $errsys < 200) {
@@ -101,7 +93,7 @@ function erreur_requete_boucle($query, $id_boucle, $type) {
 		include_ecrire('inc_lang.php3');
 		utiliser_langue_visiteur();
 		$retour .= aide('erreur_mysql');
-		spip_log("Erreur MySQL BOUCLE$id_boucle (".$GLOBALS['fond'].".html)");
+		spip_log("Erreur requete $id_boucle (".$GLOBALS['fond'].".html)");
 	}
 
 	erreur_squelette($retour);

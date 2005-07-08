@@ -253,10 +253,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 		$init .= "\n	\$Numrows['$id_boucle']['compteur_boucle'] = 0;";
 
 	if ($boucle->mode_partie)
-		$init .= calculer_parties($boucle->partie,
-			$boucle->mode_partie,
-			$boucle->total_parties,
-			$id_boucle);
+		$init .= calculer_parties($boucles, $id_boucle);
 	else if ($boucle->numrows)
 		$init .= "\n	\$Numrows['" .
 			$id_boucle .
@@ -286,7 +283,12 @@ function calculer_boucle($id_boucle, &$boucles) {
 // fonction traitant les criteres {1,n} (analyses dans inc-criteres)
 //
 ## a deplacer dans inc-criteres ??
-function calculer_parties($partie, $mode_partie, $total_parties, $id_boucle) {
+function calculer_parties($boucles, $id_boucle) {
+
+	$boucle = &$boucles[$id_boucle];
+	$partie = $boucle->partie;
+	$mode_partie = $boucle->mode_partie;
+	$total_parties = $boucle->total_parties;
 
 	// Notes :
 	// $debut_boucle et $fin_boucle sont les indices SQL du premier

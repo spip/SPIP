@@ -139,9 +139,6 @@ global $tables_des_serveurs_sql, $tables_principales; // (voir inc_serialbase)
 global $exceptions_des_tables, $table_des_tables;
 global $tables_relations,  $table_primary, $table_date;
 
-$tables_des_serveurs_sql['localhost'] =  &$tables_principales;
-	
-
  // champ principal des tables SQL
 $table_primary['articles']="id_article";
 $table_primary['auteurs']="id_auteur";

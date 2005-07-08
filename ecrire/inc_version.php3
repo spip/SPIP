@@ -317,7 +317,7 @@ $traiter_math = 'tex';
 error_reporting(E_ALL ^ E_NOTICE);
 
 // Variables du compilateur de squelettes
-$tables_des_serveurs_sql = array();
+
 $exceptions_des_tables = array();
 $tables_principales = array();
 $table_des_tables = array();
@@ -325,6 +325,8 @@ $tables_relations = array();
 $tables_relations_keys = array();
 $table_primary = array();
 $table_date = array();
+$tables_des_serveurs_sql['localhost'] =  &$tables_principales;
+
 /* ATTENTION CETTE VARIABLE NE FONCTIONNE PAS ENCORE */
 // Extension du fichier du squelette 
 $extension_squelette = 'html';
