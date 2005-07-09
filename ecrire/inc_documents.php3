@@ -320,13 +320,13 @@ function integre_image($id_document, $align, $type_aff) {
 	}
 
 	if ($align != 'center') {
-		$float = "float: $align;";
-		if ($type_aff == 'IMG') {
-			$width = extraire_attribut($vignette, 'width');
-			if ($width < 120) $width = 120;
-			$width = ' width: '.$width.'px;';
-		}
-		$style = " style='$float$width'";
+		// Largeur de la div = celle de l'image ; mais s'il y a une legende
+		// mettre au moins 120px
+		$width = extraire_attribut($vignette, 'width');
+		if (strlen($txt) AND $width < 120) $width = 120;
+		$width = 'width: '.$width.'px;';
+
+		$style = " style='float: $align; $width'";
 	}
 
 	return
