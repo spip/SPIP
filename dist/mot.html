@@ -54,10 +54,10 @@
 
 <div class="menu">
 <div class="divers">
-<div class="menu-titre"><BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}>#TITRE</BOUCLE_groupe></div>
-	<ul class="menu-liste">
-<BOUCLE_mots_freres(MOTS) {type} {doublons} {par titre}>
-	<li class="menu-item"><a href="#URL_MOT" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
+<BOUCLE_groupe(GROUPES_MOTS) {id_groupe} {doublons}><div class="menu-titre"[ title="(#DESCRIPTIF|attribut_html)"]>#TITRE</div></BOUCLE_groupe>
+<ul class="menu-liste">
+<BOUCLE_mots_freres(MOTS) {type} {par titre}>
+	<li class="menu-item"><a [(#EXPOSE{name,href})]="#URL_MOT" title="[(#DESCRIPTIF|textebrut|entites_html)]">#TITRE</a></li>
 </BOUCLE_mots_freres>
 	</ul>
 </div>
@@ -76,7 +76,7 @@
 	<ul class="menu-liste">
 <BOUCLE_groupes_freres(GROUPES_MOTS) {par titre} {doublons}>
 <BOUCLE_mot_cousin(MOTS) {id_groupe} {par titre} {0,1}>
-	<li class="menu-item"><a href="#URL_MOT">#TYPE</a></li>
+	<li class="menu-item"[ title="(#_groupes_freres:DESCRIPTIF|attribut_html)"]><a href="#URL_MOT">#TYPE</a></li>
 </BOUCLE_mot_cousin>
 </BOUCLE_groupes_freres>
 	</ul>
