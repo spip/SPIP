@@ -58,6 +58,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Cambiar',
 'bouton_chercher' => 'Cercar',
 'bouton_choisir' => 'Chausir',
+'bouton_enregistrer' => 'Registrar',
 'bouton_radio_desactiver_messagerie_interne' => 'Desactivar la messatgeria interna',
 'bouton_radio_envoi_annonces' => 'Mandar lu anoncis editoriaus',
 'bouton_radio_non_envoi_annonces' => 'Mandar pas d\'anoncis',
@@ -183,6 +184,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => '<NEW>Non s\'es pogut trobar lo fichier @fichier@.',
 'form_deja_inscrit' => 'Si&egrave;tz ja inscrich(a).',
 'form_email_non_valide' => 'La voastra adre&ccedil;a e-mail es pas valida.',
 'form_forum_access_refuse' => 'Pod&egrave;tz plus accedir a aqueu sit.',

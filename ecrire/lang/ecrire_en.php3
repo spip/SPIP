@@ -332,10 +332,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_etape_suivante_1' => 'You can move to the next step.',
 'info_etape_suivante_2' => 'You can move to the next step.',
 'info_exportation_base' => 'export database to @archive@',
-'info_facilite_suivi_activite' => 'To ease the follow-up of the site\'s editorial;
-		activities, SPIP sends by mail, to an editor\'s mailing list for instance,
-		the announcement of
-		publications requests and articles validations.',
+'info_facilite_suivi_activite' => 'To facilitate the follow-up of the site\'s editorial;
+  activities, SPIP can send notification by email, to an editor\'s mailing list for instance,
+  of publication requests and article validations.',
 'info_fichiers_authent' => 'Authentication file ".htpasswd"',
 'info_fonctionnement_forum' => 'Forum operation:',
 'info_forum_administrateur' => 'administrators\' forum',
