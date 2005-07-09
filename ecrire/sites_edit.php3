@@ -183,7 +183,7 @@ if ($new == 'oui'){
 		fin_cadre_relief();
 		echo "</form>";
 		
-		echo "<p><b>"._T('texte_non_fonction_referencement')."</b>";
+		echo "<p><blockquote><b>"._T('texte_non_fonction_referencement')."</b>";
 		$cadre_ouvert = true;
 		debut_cadre_enfonce("site-24.gif");
 		
@@ -295,7 +295,10 @@ if ($champs_extra) {
 echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
 echo "</FORM>";
 
-if ($cadre_ouvert) fin_cadre_enfonce();
+if ($cadre_ouvert) {
+	fin_cadre_enfonce();
+	echo "</blockquote>\n";
+}
 
 fin_cadre_formulaire();
 
