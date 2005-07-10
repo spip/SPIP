@@ -1001,6 +1001,12 @@ function maj_base() {
 		ADD COLUMN texte longblob NOT NULL AFTER descriptif");
 		maj_version(1.817);
 	}
+	if ($version_installee < 1.818) {
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE COLUMN 0minirezo minirezo char(3) NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE COLUMN 1comite comite char(3) NOT NULL");
+		spip_query("ALTER TABLE spip_groupes_mots CHANGE COLUMN 6forum forum char(3) NOT NULL");
+		maj_version(1.818);
+	}
 
 
 	return true;

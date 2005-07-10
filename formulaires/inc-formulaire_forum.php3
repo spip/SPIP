@@ -296,7 +296,7 @@ function table_des_mots($table, $les_mots) {
 	$in_group = " AND id_groupe IN (" . join($afficher_groupe, ", ") .")";
 
 	$result_groupe = spip_query("SELECT * FROM spip_groupes_mots
-	WHERE 6forum = 'oui' AND $table = 'oui'". $in_group);
+	WHERE forum = 'oui' AND $table = 'oui'". $in_group);
 
 	$ret = '';
 	while ($row_groupe = spip_fetch_array($result_groupe)) {

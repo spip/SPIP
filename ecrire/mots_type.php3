@@ -44,9 +44,9 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 		$breves = $row['breves'];
 		$rubriques = $row['rubriques'];
 		$syndic = $row['syndic'];
-		$acces_minirezo = $row['0minirezo'];
-		$acces_comite = $row['1comite'];
-		$acces_forum = $row['6forum'];
+		$acces_minirezo = $row['minirezo'];
+		$acces_comite = $row['comite'];
+		$acces_forum = $row['forum'];
 	}
 }
 

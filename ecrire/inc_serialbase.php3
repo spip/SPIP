@@ -162,9 +162,9 @@ $spip_groupes_mots = array(
 		"breves"	=> "varchar(3) NOT NULL",
 		"rubriques"	=> "varchar(3) NOT NULL",
 		"syndic"	=> "varchar(3) NOT NULL",
-		"0minirezo"	=> "varchar(3) NOT NULL",
-		"1comite"	=> "varchar(3) NOT NULL",
-		"6forum"	=> "varchar(3) NOT NULL",
+		"minirezo"	=> "varchar(3) NOT NULL",
+		"comite"	=> "varchar(3) NOT NULL",
+		"forum"	=> "varchar(3) NOT NULL",
 		"maj"	=> "TIMESTAMP");
 
 $spip_groupes_mots_key = array(
