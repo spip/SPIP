@@ -37,7 +37,7 @@ define("_INC_ABSTRACT_SQL", "1");
 
 function spip_abstract_select (
 	$select = array(), $from = array(), $where = '',
-	$groupby = '', $orderby = '', $limit = '',
+	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
 
@@ -56,7 +56,7 @@ function spip_abstract_select (
 		}
 	}
 	return $f($select, $from, $where,
-		  $groupby, $orderby, $limit,
+		  $groupby, array_filter($orderby), $limit,
 		  $sousrequete, $cpt,
 		  $table, $id, $serveur);
 }
@@ -105,7 +105,7 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
 # une composition tellement frequente...
 function spip_abstract_fetsel(
 	$select = array(), $from = array(), $where = '',
-	$groupby = '', $orderby = '', $limit = '',
+	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
 	return spip_abstract_fetch(spip_abstract_select(

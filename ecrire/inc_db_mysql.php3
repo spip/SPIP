@@ -75,11 +75,11 @@ function spip_mysql_select($select, $from, $where,
 			   $table, $id, $serveur) {
 
 	$q = "\nFROM " . join(",\n\t", $from)
-	. ($where ? "\nWHERE " . join("\n\tAND ", $where) : '')
-	. ($groupby ? "\nGROUP BY $groupby" : '')
-	. ($having  ? "\nHAVING $having" : '')
-	. ($orderby ? "\nORDER BY $orderby" : '')
-	. ($limit ? "\nLIMIT $limit" : '');
+	  . ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
+	  . ($groupby ? "\nGROUP BY $groupby" : '')
+	  . ($having  ? "\nHAVING $having" : '')
+	  . ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
+	  . ($limit ? "\nLIMIT $limit" : '');
 
 	if (!$sousrequete)
 		$q = " SELECT ". join(", ", $select) . $q;
