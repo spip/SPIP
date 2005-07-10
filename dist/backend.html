@@ -28,7 +28,7 @@
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
 		<dc:creator><BOUCLE_auteursb(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteursb></dc:creator>
-		<BOUCLE_podcast(DOCUMENTS){id_article}{doublons}{extension==(mp3|zip)}>[
+		<BOUCLE_podcast(DOCUMENTS){id_article}{mode=document}>[
 			<enclosure url="(#URL_DOCUMENT|url_absolue|unique)" length="[(#TAILLE)]" type="#MIME_TYPE" />]
 		</BOUCLE_podcast>
 
