@@ -178,7 +178,7 @@ function critere_branche_dist($idb, &$boucles, $crit) {
 // Tri : {par xxxx}
 // http://www.spip.net/@par
 function critere_par_dist($idb, &$boucles, $crit) {
-  critere_parinverse($idb, &$boucles, $crit, '') ;
+  critere_parinverse($idb, $boucles, $crit, '') ;
 }
 
 function critere_parinverse($idb, &$boucles, $crit, $sens) {
@@ -279,7 +279,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	    $boucle->order[$n] .= " . ' DESC'";
 	  }
 	else
-	  critere_parinverse($idb, &$boucles, $crit, " . ' DESC'");
+	  critere_parinverse($idb, $boucles, $crit, " . ' DESC'");
 }
 
 function critere_agenda($idb, &$boucles, $crit)
