@@ -657,9 +657,16 @@ function calculer_critere_externe(&$boucle, $id_field, $lien, $type, $col) {
 }
 
 function calculer_param_date($date_compare, $date_orig) {
+	if (ereg("'\" *\.(.*)\. *\"'", $date_compare, $r)) {
+	  $init = "'\" . (\$x = $r[1]) . \"'";
+	  $date_compare = '\'$x\'';
+	}
+	else
+	  $init = $date_compare;
+
 	return
 	"LEAST((UNIX_TIMESTAMP(" .
-	$date_compare .
+	$init .
 	")-UNIX_TIMESTAMP(" .
 	$date_orig .
 	"))/86400,\n\tTO_DAYS(" .
