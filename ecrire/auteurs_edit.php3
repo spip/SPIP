@@ -77,8 +77,7 @@ if ($row = spip_fetch_array($result)) {
 
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($row);
-
+modifier_statut_auteur($row, $_POST['statut'], $_POST['add_rub'], $_GET['supp_rub']);
 
 if ($connect_id_auteur == $id_auteur) debut_page($nom, "auteurs", "perso");
 else debut_page($nom,"auteurs","redacteurs");
