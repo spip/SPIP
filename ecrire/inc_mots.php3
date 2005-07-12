@@ -125,14 +125,15 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$url_base = "sites.php3?id_syndic=$id_objet";
 	}
 
-	$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot";
-	$nombre_mots = spip_num_rows(spip_query($query));
+	list($nombre_mots) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot"));
 
-	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE $table = 'oui'
-		AND ".substr($connect_statut,1)." = 'oui'";
-	$nombre_groupes = spip_num_rows(spip_query($query_groupes));
+	if (!$nombre_mots) {
+		if (!$flag_editable) return;
+		list($nombre_groupes) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_groupes_mots WHERE $table = 'oui'
+		AND ".substr($connect_statut,1)." = 'oui'"));
 
-	if (!$nombre_mots AND (!$nombre_groupes OR !$flag_editable)) return;
+		if (!$nombre_groupes) return;
+	}
 
 	echo "<a name='mots'></a>";
 	if ($flag_editable){
