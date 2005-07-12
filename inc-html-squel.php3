@@ -475,7 +475,6 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 				       strlen(BALISE_PRE_BOUCLE),
 				       $k - strlen(BALISE_PRE_BOUCLE));
 
-		  spip_log(BALISE_BOUCLE . $id_boucle);
 		  if (!ereg(BALISE_BOUCLE . $id_boucle . "[[:space:]]*\(", $milieu, $r))
 		    erreur_squelette((_T('zbug_erreur_boucle_syntaxe')), $id_boucle);
 		  $p = strpos($milieu, $r[0]);
