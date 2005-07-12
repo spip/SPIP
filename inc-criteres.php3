@@ -569,7 +569,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	      if ($crit->not) {
 		$where = "NOT ($where)";
 	      } else {
-			$boucle->default_order = 'rang';
+			$boucle->default_order = array('rang');
 			$boucle->select[]= "FIND_IN_SET($ct, \\\"'\" . " . $val . ' . "\'\\") AS rang';
 	      }
 	    } else {
