@@ -167,8 +167,13 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre' VALUE=\"$titre\" SIZE='40' $
 
 
 debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').aide ("rubrub"));
-//echo "<B>"._T('entree_interieur_rubrique')."</B> ".aide ("rubrub")."<BR>\n";
-echo "<SELECT NAME='id_parent' style='background-color:#ffffff; font-size:90%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' class='forml' SIZE='1'>\n";
+
+// Integrer la recherche de rubrique au clavier
+echo "<script language='JavaScript' type='text/javascript' src='filtery.js' />\n";
+echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_parent);\" onChange=\"filtery(this.value,this.form.id_parent);\"> ";
+
+echo "<SELECT NAME='id_parent' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
+
 if ($connect_toutes_rubriques) {
   echo "<OPTION".mySel("0",$id_parent). http_style_background('racine-site-12.gif',  "$spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white") .'>'._T('info_racine_site')."\n";
 } else {
