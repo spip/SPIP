@@ -252,7 +252,10 @@ $spip_syndic = array(
 		"date_syndic"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"date_index"	=> "datetime DEFAULT '0000-00-00 00:00:00' NOT NULL",
 		"extra"			=> "longblob NULL",
-		"moderation"	=> "VARCHAR(3) NOT NULL");
+		"moderation"	=> "VARCHAR(3) DEFAULT 'non'",
+		"miroir"	=> "VARCHAR(3) DEFAULT 'non'",
+		"oubli"	=> "VARCHAR(3) DEFAULT 'non'"
+);
 
 $spip_syndic_key = array(
 		"PRIMARY KEY"	=> "id_syndic",
