@@ -98,8 +98,10 @@ function texte_backend($texte) {
 	$texte = filtrer_entites($texte);
 
 	// " -> &quot; et tout ce genre de choses
+	// contourner bug windows ou char(160) fait partie de la regexp \s
+	$u = (lire_meta('charset')=='utf-8') ? 'u':'';
 	$texte = str_replace("&nbsp;", " ", $texte);
-	$texte = preg_replace("/[[:space:]][[:space:]]+/", " ", $texte);
+	$texte = preg_replace("/\s\s+/$u", " ", $texte);
 	$texte = entites_html($texte);
 
 	// verifier le charset
@@ -140,7 +142,8 @@ function echapper_tags($texte, $rempl = "") {
 
 // Convertit un texte HTML en texte brut
 function textebrut($texte) {
-	$texte = preg_replace("/[[:space:]]+/", " ", $texte);
+	$u = (lire_meta('charset')=='utf-8') ? 'u':'';
+	$texte = preg_replace("/\s+/$u", " ", $texte);
 	$texte = preg_replace("/<(p|br)( [^>]*)?".">/i", "\n\n", $texte);
 	$texte = preg_replace("/^\n+/", "", $texte);
 	$texte = preg_replace("/\n+$/", "", $texte);
