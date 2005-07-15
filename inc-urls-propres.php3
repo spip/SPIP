@@ -211,7 +211,10 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 
 	$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];
 	if (!$url_propre) $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
-	if (!$url_propre) $url_propre = substr($url, strrpos($url, '/') + 1);
+	if (!$url_propre) {
+		$url = substr($url, strrpos($url, '/') + 1);
+		$url_propre = preg_replace(',[?].*,', '', $url);
+	}
 	if (!$url_propre) return;
 
 	// Compatilibite avec propres2
