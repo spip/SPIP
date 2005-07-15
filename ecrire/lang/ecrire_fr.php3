@@ -84,9 +84,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_moderation_priori' => 'Mod&eacute;ration &agrave; priori (les
 	contributions ne s\'affichent publiquement qu\'apr&egrave;s validation par les
 	administrateurs).',
-'bouton_radio_modere_abonnement' => 'mod&eacute;r&eacute; sur abonnement',
-'bouton_radio_modere_posteriori' => 'mod&eacute;r&eacute; &agrave; posteriori',
-'bouton_radio_modere_priori' => 'mod&eacute;r&eacute; &agrave; priori',
+'bouton_radio_modere_abonnement' => 'mod&eacute;ration sur abonnement',
+'bouton_radio_modere_posteriori' => 'mod&eacute;ration &agrave; posteriori',
+'bouton_radio_modere_priori' => 'mod&eacute;ration &agrave; priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne pas appara&icirc;tre dans la liste des r&eacute;dacteurs',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne pas envoyer d\'annonces &eacute;ditoriales',
 'bouton_radio_non_syndication' => 'Pas de syndication',
@@ -275,6 +275,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Avertissement',
 'info_base_installee' => 'La structure de votre base de donn&eacute;es est install&eacute;e.',
 'info_base_restauration' => 'La base est en cours de restauration.',
+'info_bloquer' => 'bloquer',
 'info_breves' => 'Votre site utilise-t-il le syst&egrave;me de br&egrave;ves&nbsp;?',
 'info_breves_03' => 'br&egrave;ves',
 'info_breves_liees_mot' => 'Les br&egrave;ves li&eacute;es &agrave; ce mot-cl&eacute;',
@@ -493,6 +494,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_procedure_maj_version' => 'la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d\'adapter
 	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.',
 'info_ps' => 'P.S',
+'info_publier' => 'publier',
 'info_publies' => 'Vos articles publi&eacute;s en ligne',
 'info_question_accepter_visiteurs' => 'Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
 'info_question_gerer_statistiques' => 'Votre site doit-il g&eacute;rer les statistiques des visites&nbsp;?',
@@ -757,6 +759,12 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 
 // S
 'statut_admin_restreint' => '(admin restreint)',
+'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site&nbsp;?',
+'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_lien_obsolete' => 'lien obsol&egrave;te',
+'syndic_option_miroir' => 'les bloquer automatiquement',
+'syndic_option_oubli' => 'les effacer (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => 'Options de syndication&nbsp;:',
 
 
 // T
