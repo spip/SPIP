@@ -226,7 +226,7 @@ function traite_xhtml ($buffer) {
 			'indent-spaces' => 4,
 			'output-xhtml' => true,
 			'add-xml-decl' => false,
-			'indent' => 5,
+			'indent' => 0,
 			'show-body-only' => false,
 			'quote-nbsp' => false
 			);
