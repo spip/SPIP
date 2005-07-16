@@ -300,4 +300,71 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 	}
 }
 
+
+// Recuperer le reglage des forums publics de l'article x
+function get_forums_publics($id_article=0) {
+	$forums_publics = lire_meta("forums_publics");
+	if ($id_article) {
+		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
+		$res = spip_query($query);
+		if ($obj = spip_fetch_array($res))
+			$forums_publics = $obj['accepter_forum'];
+	} else { // dans ce contexte, inutile
+		$forums_publics = substr(lire_meta("forums_publics"),0,3);
+	}
+	return $forums_publics;
+}
+
+// Modifier le reglage des forums publics de l'article x
+function modifier_forums_publics($id_article, $forums_publics) {
+		spip_query ("UPDATE spip_articles
+			SET accepter_forum='$forums_publics'
+			WHERE id_article=".intval($id_article));
+		if ($forums_publics == 'abo') {
+			ecrire_meta('accepter_visiteurs', 'oui');
+			ecrire_metas();
+		}
+		include_ecrire('inc_invalideur.php3');
+		suivre_invalideur("id='id_forum/a$id_article'");
+
+}
+
+// Cree le formulaire de modification du reglage des forums de l'article
+function formulaire_modification_forums_publics($id_article, $forums_publics) {
+	global $spip_lang_right;
+
+	$r = "\n<form action='". $GLOBALS['clean_link']->getUrl()
+		."' method='POST'>";
+
+	$r .= "\n<input type='hidden' name='id_article' value='$id_article'>";
+	$r .= "<br>"._T('info_fonctionnement_forum')."\n";
+	$r .= "<select name='change_accepter_forum'
+		class='fondl' style='font-size:10px;'
+		onChange=\"setvisibility('valider_forum', 'visible');\"
+		>\n";
+
+	foreach (array(
+		'pos'=>_T('bouton_radio_modere_posteriori'),
+		'pri'=>_T('bouton_radio_modere_priori'),
+		'abo'=>_T('bouton_radio_modere_abonnement'),
+		'non'=>_T('info_pas_de_forum'))
+		as $val => $desc) {
+		$r .= "<option";
+		if ($forums_publics == $val)
+			$r .= " selected";
+		$r .= " value='$val'>".$desc."</option>\n";
+	}
+	$r .= "</select>\n";
+
+	$r .= "<div align='$spip_lang_right'
+	class='visible_au_chargement' id='valider_forum'>
+	<input type='submit' name='Changer' class='fondo'
+	value='"._T('bouton_changer')."' STYLE='font-size:10px'>
+	</div>\n";
+
+	$r .= "</form>";
+
+	return $r;
+}
+
 ?>

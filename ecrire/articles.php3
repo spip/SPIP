@@ -16,6 +16,7 @@ include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_date.php3");
 include_ecrire ("inc_documents.php3");
+include_ecrire ("inc_forum.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
 $articles_surtitre = lire_meta("articles_surtitre");
@@ -298,24 +299,6 @@ if ($titre && !$ajout_forum && $flag_editable) {
 
 
 
-//
-// Suivi forums publics
-//
-
-// fonction dupliquee dans inc-forum.php3
-function get_forums_publics($id_article=0) {
-	$forums_publics = lire_meta("forums_publics");
-	if ($id_article) {
-		$query = "SELECT accepter_forum FROM spip_articles WHERE id_article=$id_article";
-		$res = spip_query($query);
-		if ($obj = spip_fetch_array($res))
-			$forums_publics = $obj['accepter_forum'];
-	} else { // dans ce contexte, inutile
-		$forums_publics = substr(lire_meta("forums_publics"),0,3);
-	}
-	return $forums_publics;
-}
-
 
 //
 // Lire l'article
@@ -398,17 +381,6 @@ echo "<br><font face='Verdana,Arial,Sans,sans-serif' size='6'><b>$id_article</b>
 
 voir_en_ligne ('article', $id_article, $statut_article);
 
-if ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)) {
-	$query = "SELECT count(*) AS count FROM spip_forum WHERE id_article=$id_article AND statut IN ('publie', 'off', 'prop')";
-	if ($row = spip_fetch_array(spip_query($query))) {
-		$nb_forums = $row['count'];
-		if ($nb_forums) {
-			icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)),
-				"articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
-		}
-	}
-}
-
 
 $activer_statistiques = lire_meta("activer_statistiques");
 
@@ -445,15 +417,28 @@ if ($id_article AND $flag_editable)
 if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 	echo "<p>";
 	debut_cadre_relief("forum-interne-24.gif");
-	$visible = $change_accepter_forum || $change_petition;
 
+
+	list($nb_forums) = spip_fetch_array(spip_query(
+		"SELECT count(*) AS count FROM spip_forum
+		WHERE id_article=$id_article
+		AND statut IN ('publie', 'off', 'prop')"));
+
+	list($nb_signatures) = spip_fetch_array(spip_query(
+		"SELECT COUNT(*) AS count FROM spip_signatures
+		WHERE id_article=$id_article
+		AND statut IN ('publie', 'poubelle')"));
+
+
+	$visible = $change_accepter_forum || $change_petition
+		|| $nb_forums || $nb_signatures;
 
 	echo "<div class='verdana1' style='text-align: center;'><b>";
 	if ($visible)
 		echo bouton_block_visible("forumpetition");
 	else
 		echo bouton_block_invisible("forumpetition");
-	echo _T('bouton_forum_petition');
+	echo _T('bouton_forum_petition') .aide('confforums');
 	echo "</b></div>";
 	if ($visible)
 		echo debut_block_visible("forumpetition");
@@ -463,64 +448,29 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 
 	echo "<font face='Verdana,Arial,Sans,sans-serif' size='1'>\n";
 
-	// Forums et petitions
 
+	// Forums
+
+	if ($nb_forums) {
+		echo "<br />\n";
+		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)),
+		"articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
+	}
+
+	// Reglage existant
 	$forums_publics = get_forums_publics($id_article);
 
+	// Modification du reglage ?
 	if (isset($change_accepter_forum)
 	AND $change_accepter_forum <> $forums_publics) {
-		$query_forum = "UPDATE spip_articles
-			SET accepter_forum='$change_accepter_forum'
-			WHERE id_article='$id_article'";
-		$result_forum = spip_query($query_forum);
 		$forums_publics = $change_accepter_forum;
-		if ($change_accepter_forum == 'abo') {
-			ecrire_meta('accepter_visiteurs', 'oui');
-			ecrire_metas();
-		}
-		include_ecrire('inc_invalideur.php3');
-		suivre_invalideur("id='id_forum/a$id_article'");
+		modifier_forums_publics($id_article, $forums_publics);
 	}
 
-	echo "\n<form action='articles.php3' method='get'>";
+	// Afficher le formulaire de modification du reglage
+	echo formulaire_modification_forums_publics($id_article, $forums_publics);
 
-	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
-	echo "<br>"._T('info_fonctionnement_forum')."\n";
-	if ($forums_publics == "pos") {
-		echo "<br><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos' checked>";
-		echo "<B><label for='accepterforumpos'> "._T('bouton_radio_modere_posteriori')."</label></B>";
-	} else {
-		echo "<br><input type='radio' name='change_accepter_forum' value='pos' id='accepterforumpos'>";
-		echo "<label for='accepterforumpos'> "._T('bouton_radio_modere_posteriori')."</label>";
-	}
-	if ($forums_publics == "pri") {
-		echo "<br><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri' checked>";
-		echo "<B><label for='accepterforumpri'> "._T('bouton_radio_modere_priori')."</label></B>";
-	} else {
-		echo "<br><input type='radio' name='change_accepter_forum' value='pri' id='accepterforumpri'>";
-		echo "<label for='accepterforumpri'> "._T('bouton_radio_modere_priori')."</label>";
-	}
-	if ($forums_publics == "abo") {
-		echo "<br><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo' checked>";
-		echo "<B><label for='accepterforumabo'> "._T('bouton_radio_modere_abonnement')."</label></B>";
-	} else {
-		echo "<br><input type='radio' name='change_accepter_forum' value='abo' id='accepterforumabo'>";
-		echo "<label for='accepterforumabo'> "._T('bouton_radio_modere_abonnement')."</label>";
-	}
-	if ($forums_publics == "non") {
-		echo "<br><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon' checked>";
-		echo "<B><label for='accepterforumnon'> "._T('info_pas_de_forum')."</label></B>";
-	} else {
-		echo "<br><input type='radio' name='change_accepter_forum' value='non' id='accepterforumnon'>";
-		echo "<label for='accepterforumnon'> "._T('info_pas_de_forum')."</label>";
-	}
 
-	echo "<div align='$spip_lang_right'><input type='submit' name='Changer' class='fondo' value='"._T('bouton_changer')."' STYLE='font-size:10px'></div>\n";
-	echo "</form>";
-
-	echo "<br>";
-
-	
 	// Petitions
 
 	if ($change_petition) {
@@ -542,32 +492,56 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		}
 	}
 
-	$query_petition = "SELECT * FROM spip_petitions WHERE id_article=$id_article";
-	$result_petition = spip_query($query_petition);
-	$petition = (spip_num_rows($result_petition) > 0);
+	$petition = spip_fetch_array(spip_query(
+		"SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 
-	while ($row = spip_fetch_array($result_petition)) {
-		$id_rubrique=$row["id_article"];
-		$email_unique=$row["email_unique"];
-		$site_obli=$row["site_obli"];
-		$site_unique=$row["site_unique"];
-		$message=$row["message"];
-		$texte_petition=$row["texte"];
+	$email_unique=$petition["email_unique"];
+	$site_obli=$petition["site_obli"];
+	$site_unique=$petition["site_unique"];
+	$message=$petition["message"];
+	$texte_petition=$petition["texte"];
+
+	echo "\n<form action='".$GLOBALS['clean_link']->getUrl()
+		."' method='POST'>";
+	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
+
+	echo "<select name='change_petition'
+		class='fondl' style='font-size:10px;'
+		onChange=\"setvisibility('valider_petition', 'visible');\"
+		>\n";
+
+	if ($petition) {
+		$menu = array(
+			'on' => _T('bouton_radio_petition_activee'),
+			'off'=> _T('bouton_radio_supprimer_petition')
+		);
+		$val_menu = 'on';
+	} else {
+		$menu = array(
+			'off'=> _T('bouton_radio_pas_petition'),
+			'on' => _T('bouton_radio_activer_petition')
+		);
+		$val_menu = 'off';
 	}
 
-	echo "\n<FORM ACTION='articles.php3' METHOD='post'>";
-	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
-	if ($petition){
-		echo "<input type='radio' name='change_petition' value='on' id='petitionon' checked>";
-		echo "<B><label for='petitionon'>"._T('bouton_radio_petition_activee')."</label></B>";
-		$query_signatures = "SELECT COUNT(*) AS nb FROM spip_signatures WHERE id_article=$id_article";
-		$result = spip_fetch_array(spip_query($query_signatures));
-		if ($result['nb'] > 0) {
-			echo "<p><font size=1><a href='controle_petition.php3?id_article=$id_article'>".$result['nb']." "._T('info_signatures')."</a></font>\n";
+	foreach ($menu as $val => $desc) {
+		echo "<option";
+		if ($val_menu == $val)
+			echo " selected";
+		echo " value='$val'>".$desc."</option>\n";
+	}
+	echo "</select>\n";
+
+	if ($petition) {
+		if ($nb_signatures) {
+			echo "<br />\n";
+			icone_horizontale($nb_signatures.'&nbsp;'. _T('info_signatures'),
+			"controle_petition.php3?id_article=$id_article", "suivi-petition-24.gif", "");
 		}
 
-		echo "<p>";
+		echo "<br />\n";
+
 		if ($email_unique=="oui")
 			echo "<input type='checkbox' name='email_unique' value='oui' id='emailunique' checked>";
 		else
@@ -594,20 +568,12 @@ if ($options == "avancees" && $connect_statut=='0minirezo' && $flag_editable) {
 		echo $texte_petition;
 		echo "</TEXTAREA><P>\n";
 
-	}
-	else {
-		echo "<input type='radio' name='change_petition' value='on' id='petitionon'>";
-		echo "<label for='petitionon'>"._T('bouton_radio_activer_petition')."</label>";
-	}
-	if (!$petition){
-		echo "<br><input type='radio' name='change_petition' value='off' id='petitionoff' checked>";
-		echo "<B><label for='petitionoff'>"._T('bouton_radio_pas_petition')."</label></B>";
-	}else{
-		echo "<br><input type='radio' name='change_petition' value='off' id='petitionoff'>";
-		echo "<label for='petitionoff'>"._T('bouton_radio_supprimer_petition')."</label>";
+		echo "<P align='$spip_lang_right'>";
 	}
 
-	echo "<P align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'>";
+	if (!$petition) echo "<span class='visible_au_chargement' id='valider_petition'>";
+	echo "<INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."' STYLE='font-size:10px'>";
+	if (!$petition)  echo "</span>";
 	echo "</FORM>";
 
 	echo "</font>";
