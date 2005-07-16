@@ -224,7 +224,7 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 	debut_cadre_couleur("$logo_parent", false, "", _T('entree_interieur_rubrique'));
 
 	// Integrer la recherche de rubrique au clavier
-	echo "<script language='JavaScript' type='text/javascript' src='filtery.js' />\n";
+	echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
 	echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_rubrique);\" onChange=\"filtery(this.value,this.form.id_rubrique);\"> ";
 
 	echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
