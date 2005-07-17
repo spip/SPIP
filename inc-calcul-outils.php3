@@ -512,4 +512,24 @@ function sql_rubrique_fond($contexte) {
 	}
 }
 
+// Ajouter "&lang=..." si la langue de base n'est pas celle du site
+function lang_parametres_forum($s) {
+
+	// ne pas se fatiguer si le site est unilingue (plus rapide)
+	if (strstr(lire_meta('langues_utilisees'), ',')
+	// chercher l'identifiant qui nous donnera la langue
+	AND preg_match(',id_(article|breve|rubrique|syndic)=([0-9]+),', $s, $r)){
+		$objet = $r[1];
+		$id = $r[2];
+		list($lang) = spip_fetch_array(spip_query(
+			"SELECT lang FROM spip_${objet}s WHERE id_$objet=$id"
+		));
+		// Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
+		if ($lang AND $lang <> lire_meta('langue_site'))
+			$s .= "&lang=$lang";
+	}
+
+	return $s;
+}
+
 ?>
