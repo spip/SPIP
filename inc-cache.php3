@@ -198,20 +198,21 @@ function purger_squelettes() {
 
 // Determination du fichier cache (si besoin)
 function determiner_cache($delais, &$use_cache, &$chemin_cache) {
-	global $_POST;
+	global $_SERVER;
+
+	$post = ($_SERVER['REQUEST_METHOD'] == 'POST');
 
 	// Le fichier cache est-il valide ?
-	$use_cache = ($delais != 0 and !count($_POST));
-	if ($use_cache)	$use_cache = utiliser_cache($chemin_cache, $delais);
+	if ($delais<>0 AND !$post)
+		$use_cache = utiliser_cache($chemin_cache, $delais);
 
 	// Sinon, tester qu'on a la connexion a la base
 	if (!$use_cache) {
 		include_local(_FILE_CONNECT);
 		if (!$GLOBALS['db_ok']) {
 			if (@file_exists($chemin_cache)) 
-			  $use_cache = 1; // passer outre
-			else
-			  {
+				$use_cache = 1; // passer outre
+			else {
 				spip_log("Erreur base de donnees & "
 					. "impossible utiliser $chemin_cache");
 				if (!$GLOBALS['flag_preserver']) {
@@ -231,6 +232,13 @@ function determiner_cache($delais, &$use_cache, &$chemin_cache) {
 				define ('spip_interdire_cache', true);
 			  }
 		}
+
+		// En cas de POST (et si la connexion est ok) supprimer le cache
+		// histoire de faciliter la gestion de certaines balises dynamiques
+		else if ($post AND $chemin_cache) {
+			supprimer_fichier($chemin_cache);
+		}
+
 	}
 }
 
