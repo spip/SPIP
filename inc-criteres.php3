@@ -273,13 +273,18 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 	// Classement par ordre inverse
 
-	if (!$crit->not && !$crit->param)
-	  {
-	    $n = count($boucle->order) -1;
-	    $boucle->order[$n] .= " . ' DESC'";
-	  }
+	if ($crit->not || $crit->param)
+		critere_parinverse($idb, $boucles, $crit, " . ' DESC'");
 	else
-	  critere_parinverse($idb, $boucles, $crit, " . ' DESC'");
+	  {
+	    $n = count($boucle->order);
+	    if ($n)
+	      $boucle->order[$n-1] .= " . ' DESC'";
+	    else
+	      erreur_squelette(_T('zbug_info_erreur_squelette'), "{inverse ?} BOUCLE$idb");
+	  }
+
+
 }
 
 function critere_agenda($idb, &$boucles, $crit)
