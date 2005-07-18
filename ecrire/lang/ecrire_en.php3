@@ -81,12 +81,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
   being able to post contributions).',
 'bouton_radio_envoi_annonces_adresse' => 'Send announcements to the address:',
 'bouton_radio_envoi_liste_nouveautes' => 'Send latest news list',
-'bouton_radio_moderation_priori' => 'Beforehand moderation (
-	contributions will be shown only after validation by
-	administrators).',
-'bouton_radio_modere_abonnement' => 'moderation by subscription',
-'bouton_radio_modere_posteriori' => 'afterwards moderation',
-'bouton_radio_modere_priori' => 'beforehand moderation',
+'bouton_radio_moderation_priori' => 'Pre-moderation (
+ contributions will be shown only after validation by
+ administrators).',
+'bouton_radio_modere_abonnement' => 'registration required',
+'bouton_radio_modere_posteriori' => 'post-moderation',
+'bouton_radio_modere_priori' => 'pre-moderation',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Do not appear in the list of connected editors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Do not send any editorial announcements',
 'bouton_radio_non_syndication' => 'No syndication',
@@ -97,8 +97,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_personnalise' => 'Custom character set: choose this option if you want to use a specific character set',
 'bouton_radio_petition_activee' => 'Petition activated',
 'bouton_radio_publication_immediate' => 'Immediate publication of messages
-	(contributions will be shown the moment they are sent, administrators can
-	delete them then).',
+ (contributions will be shown as soon as they are sent, administrators can
+ then delete them).',
 'bouton_radio_sauvegarde_compressee' => 'save as compressed in <b>ecrire/data/dump.xml.gz</b>',
 'bouton_radio_sauvegarde_non_compressee' => 'save as uncompressed in <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Delete the petition',
@@ -248,8 +248,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'The following participant has been added:',
 'info_ajouter_rubrique' => 'Add another section to manage:',
 'info_annonce_nouveautes' => 'Latest news announcements',
-'info_annuler_blocage_priori' => 'Cancel
-				this beforehand blocking',
 'info_anterieur' => 'previous',
 'info_appliquer_choix_moderation' => 'Apply this choice of moderation:',
 'info_article' => 'article',
@@ -271,6 +269,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Warning',
 'info_base_installee' => 'The structure of your database is installed.',
 'info_base_restauration' => 'Restoration of the database in progress.',
+'info_bloquer' => 'block',
 'info_breves' => 'Does your site use the news system?',
 'info_breves_03' => 'news items',
 'info_breves_liees_mot' => 'News associated with this keyword',
@@ -308,8 +307,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'You requested the deletion of keyword
 <B>@titre_mot@</b> (@type_mot@). This keyword being linked to
 <b>@texte_lie@</b>you must confirm this decision:',
-'info_demander_blocage_priori' => 'Request
-				a blocking beforehand',
 'info_derniere_etape' => 'Last step: <B>Done!',
 'info_derniere_syndication' => 'The last syndication of this site was carried out on',
 'info_derniers_articles_publies' => 'Your latest published articles',
@@ -487,6 +484,7 @@ requiring an FTP access to the Web site.',
 'info_procedure_maj_version' => 'the upgrade procedure should be ran to adapt
 	the database to the new version of SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publish',
 'info_publies' => 'Your articles published online',
 'info_question_accepter_visiteurs' => 'If your site\'s templates allow visitors to register without entering the private area, please activate the following option:',
 'info_question_gerer_statistiques' => 'Should your site manage visits statistics?',
@@ -751,6 +749,12 @@ in a colour indicating their status:',
 
 // S
 'statut_admin_restreint' => '(restricted admin)',
+'syndic_choix_moderation' => 'What should be done with the next links from this site?',
+'syndic_choix_oublier' => 'What should be done with links which are no longer present in the syndication file?',
+'syndic_lien_obsolete' => 'obsolete link',
+'syndic_option_miroir' => 'block them automatically',
+'syndic_option_oubli' => 'delete them (after @mois@&nbsp;months)',
+'syndic_options' => 'Syndication options:',
 
 
 // T
@@ -817,8 +821,6 @@ the images and the documents used in the articles and sections.',
 'texte_date_publication_anterieure' => 'Date of earlier publishing:',
 'texte_date_publication_anterieure_nonaffichee' => 'Hide date of earlier publishing.',
 'texte_date_publication_article' => 'DATE OF ONLINE PUBLICATION:',
-'texte_demander_blocage_priori' => 'Future links
-				coming from this site will be blocked beforehand.',
 'texte_descriptif_petition' => 'Petition description',
 'texte_descriptif_rapide' => 'Brief description',
 'texte_documents_joints' => 'You can allow the addition of documents (office files, images,
@@ -860,8 +862,6 @@ the images and the documents used in the articles and sections.',
 			block each link individually, or to
 			choose, for each site, to block the links coming
 			from any particular site.',
-'texte_liens_syndication' => 'Future links
-				coming from this site will be displayed immediately on the public site.',
 'texte_login_ldap_1' => '(Keep empty for anonymous access or enter complete path, for instance &laquo;<tt>uid=smith, ou=users, dc=my-domain, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Warning! This is the login with which you are connected now.
 	Use this form with caution...',

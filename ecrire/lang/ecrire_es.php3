@@ -73,9 +73,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_annonces_adresse' => 'Enviar los anuncios a la direcci&oacute;n:',
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar la lista de novedades',
 'bouton_radio_moderation_priori' => 'Moderado a priori (las contribuciones no aparecen hasta ser validadas por una persona con derechos de administraci&oacute;n en el sitio).',
-'bouton_radio_modere_abonnement' => 'moderado (s&oacute;lo para abonados)',
-'bouton_radio_modere_posteriori' => 'moderado a posteriori',
-'bouton_radio_modere_priori' => 'moderado a priori',
+'bouton_radio_modere_abonnement' => '<MODIF>moderado (s&oacute;lo para abonados)',
+'bouton_radio_modere_posteriori' => '<MODIF>moderado a posteriori',
+'bouton_radio_modere_priori' => '<MODIF>moderado a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'No aparecer en la lista de redactores y redactoras',
 'bouton_radio_non_envoi_annonces_editoriales' => 'No enviar anuncios editoriales',
 'bouton_radio_non_syndication' => 'Ninguna sindicaci&oacute;n',
@@ -229,7 +229,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'El participante siguiente ha sido a&ntilde;adido:',
 'info_ajouter_rubrique' => 'A&ntilde;adir otra secci&oacute;n para administrar',
 'info_annonce_nouveautes' => 'Anunciar novedades',
-'info_annuler_blocage_priori' => 'Anular el bloqueo a priori',
 'info_anterieur' => 'anterior',
 'info_appliquer_choix_moderation' => 'Aplicar este tipo de moderaci&oacute;n',
 'info_article' => 'art&iacute;culo',
@@ -251,6 +250,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Advertencia',
 'info_base_installee' => 'La estructura de tu base de datos ha sido instalada',
 'info_base_restauration' => 'La base est&aacute; siendo restaurada',
+'info_bloquer' => '<NEW>bloquer',
 'info_breves' => 'Puedes utilizar el sisteme de breves',
 'info_breves_03' => 'breves',
 'info_breves_liees_mot' => 'Las breves ligadas a esta palabra clave',
@@ -288,7 +288,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_delet_mots_cles' => 'Has solicitado la supresi&oacute;n de la palabra clave 
 <B>@titre_mot@</b> (@type_mot@) que esta ligada a 
 <b>@texte_lie@</b>. Por favor, confirma tu decisi&oacute;n.',
-'info_demander_blocage_priori' => 'Pedir un bloqueo a priori',
 'info_derniere_etape' => 'Ultima etapa: <B>Hemos terminado!',
 'info_derniere_syndication' => 'La &uacute;ltima sindicaci&oacute;n de este sitio fue realizada el',
 'info_derniers_articles_publies' => 'Tus &uacute;ltimos art&iacute;culos publicados',
@@ -446,6 +445,7 @@ Los idiomas que ya se utilizan en el sitio (al principio de la lista) no pueden 
 'info_procedez_par_etape' => 'proceder etapa por etapa',
 'info_procedure_maj_version' => 'la actulizaci&oacute;n debe ser realizada para adaptar la base de datos a esta nueva versi&oacute;n de SPIP.',
 'info_ps' => 'P.S',
+'info_publier' => '<NEW>publier',
 'info_publies' => 'Tus art&iacute;culos publicados',
 'info_question_accepter_visiteurs' => 'Si en los esqueletos de tu sitio est&aacute; previsto el registro de visitantes sin acceso al espacio privado, tendr&aacute;s que activar la opci&oacute;n siguiente:',
 'info_question_gerer_statistiques' => '&iquest;Deseas que tu sitio gestione las estad&iacute;sticas de las visitas?',
@@ -700,6 +700,12 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 
 // S
 'statut_admin_restreint' => '(administrador restringido)',
+'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
+'syndic_choix_oublier' => '<NEW>Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_lien_obsolete' => '<NEW>lien obsol&egrave;te',
+'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
+'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => '<NEW>Options de syndication&nbsp;:',
 
 
 // T
@@ -745,7 +751,6 @@ No olvides igualmente recuperar la totalidad de la carpeta <i>IMG/</i>, que cont
 'texte_date_publication_anterieure' => 'Fecha de redacci&oacute;n anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'No mostrar fecha de redacci&oacute;n anterior.',
 'texte_date_publication_article' => 'Fecha de publicaci&oacute;n en l&iacute;nea:',
-'texte_demander_blocage_priori' => 'Los pr&oacute;ximos enlaces procedentes de este sitio ser&aacute;n, a priori, bloqueados.',
 'texte_descriptif_petition' => 'Descripci&oacute;n de la petici&oacute;n',
 'texte_descriptif_rapide' => 'Descripci&oacute;n r&aacute;pida',
 'texte_documents_joints' => 'Puedes autorizar el a&ntilde;adir documentos (archivos de ofim&aacute;tica, im&aacute;genes,
@@ -768,7 +773,6 @@ En ese caso, puede ser preferible cambiar el reglaje por omisi&oacute;n para uti
 'texte_jeu_caractere_2' => 'Este reglaje no tiene efecto retroactivo. Por lo tanto, los textos incluidos anteriormente pueden mostrarse incorrectamente despu&eacute;s de una modificaci&oacute;n del reglaje. En todos los casos, puedes, sin riesgos, volver a la configuraci&oacute;n anterior.',
 'texte_lien_hypertexte' => '(Si tu mensaje se refiere a un art&iacute;culo publicado en la Web, o a una p&aacute;gina que contiene m&aacute;s informaciones, indica a continuaci&oacute;n el t&iacute;tulo de la p&aacute;gina y su direcci&oacute;n URL.)',
 'texte_liens_sites_syndiques' => 'Los enlaces salidos de los sitios sindicados pueden ser bloqueados a priori; el ajuste indicado a continuaci&oacute;n se refiere al ajuste por defecto de los sitios sindicados despu&eacute;s de su creaci&oacute;n. De todos modos, posteriormente se puede desbloquear cada enlace individualmente, o escoger, sitio a sitio, bloquear los enlaces que viene de tal o cual sitio.',
-'texte_liens_syndication' => 'Los pr&oacute;ximos enlaces con procedencia de este sitio se mostrar&aacute;n inmediatamente en el sitio p&uacute;blico.',
 'texte_login_ldap_1' => '(Dejar en blanco para un acceso an&oacute;nimo, o indicar la ruta completa, por ejemplo "<tt>uid=perez, ou=users, dc=mi-dominio, dc=com</tt>".)',
 'texte_login_precaution' => '&iexcl;Atenci&oacute;n! Este es el identificante con el cual est&aacute;s conectado actualmente.
 Utiliza este formulario con precauci&oacute;n...',

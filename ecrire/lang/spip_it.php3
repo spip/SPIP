@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modifica la rubrica',
 'admin_recalculer' => 'Rigenera la pagina',
 'alerte_maj_impossible' => '<b>Attenzione!</b> L\'aggiornamento del database MySQL alla versione @version@ &egrave; impossibile, forse non si possiedono i diritti di modifica nel database. Contattare il proprio fornitore di hosting.',
+'analyse_xml' => 'Analisi XML',
 'avis_archive_incorrect' => 'il file archivio non &egrave; un file SPIP',
 'avis_archive_invalide' => 'il file archivio non &egrave; valido',
 'avis_attention' => 'ATTENZIONE!',

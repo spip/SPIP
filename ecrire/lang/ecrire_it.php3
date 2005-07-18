@@ -83,7 +83,7 @@ poter inviare contributi).',
 'bouton_radio_moderation_priori' => 'Moderazione a priori (i
 contributi saranno pubblicati previa autorizazione degli
 amministratori).',
-'bouton_radio_modere_abonnement' => 'moderato su abbonamento',
+'bouton_radio_modere_abonnement' => 'solo su abbonamento',
 'bouton_radio_modere_posteriori' => 'moderato a posteriori',
 'bouton_radio_modere_priori' => 'moderato a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non comparire nell\'elenco dei redattori collegati ',
@@ -248,7 +248,6 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_ajout_participant' => 'Si &egrave; aggiunto il seguente partecipante:',
 'info_ajouter_rubrique' => 'Aggiungi un\'altra rubrica da amministrare:',
 'info_annonce_nouveautes' => 'Annuncio delle novit&agrave;',
-'info_annuler_blocage_priori' => 'Annullare questa censura preventiva',
 'info_anterieur' => 'anteriore',
 'info_appliquer_choix_moderation' => 'Questa scelta di moderazione verr&agrave; applicata:',
 'info_article' => 'articolo',
@@ -270,6 +269,7 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 'info_avertissement' => 'Avvertimento',
 'info_base_installee' => 'La struttura del vostro database &egrave; installata.',
 'info_base_restauration' => 'Il database &egrave; in fase di ripristino.',
+'info_bloquer' => 'bloccare',
 'info_breves' => 'Il tuo sito dovr&agrave; utilizzare il sistema di brevi?',
 'info_breves_03' => 'brevi',
 'info_breves_liees_mot' => 'Le brevi collegate a questa parola chiave',
@@ -308,7 +308,6 @@ immagini inserite. Ci&ograve; permette ad esempio di creare in automatico una ga
 di eliminare la parola chiave
 <B>@titre_mot@</b> (@type_mot@). Essendo quest\'ultima collegata a
 <b>@texte_lie@</b>, &egrave; necessario confermare la decisione:',
-'info_demander_blocage_priori' => 'Richiedi una censura preventiva',
 'info_derniere_etape' => 'Ultima fase: <B>Finito!',
 'info_derniere_syndication' => 'L\'ultima <em>syndication</em> di questo sito &egrave; stata effettuata il',
 'info_derniers_articles_publies' => 'I tuoi ultimi articoli pubblicati',
@@ -481,6 +480,7 @@ avvertiti via email. Desideri utilizzare quest\'opzione?',
 'info_procedure_maj_version' => '&egrave; necessario avviare la procedura di aggiornamento per adattare
 il database alla nuova versione di SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'pubblicare',
 'info_publies' => 'I tuoi articoli pubblicati',
 'info_question_accepter_visiteurs' => 'I modelli di pagina del sito prevedono la registrazione di utenti senza accesso all\'area riservata. Attivare la seguente funzionalit&agrave;:',
 'info_question_gerer_statistiques' => 'Il sito deve gestire le statistiche delle visite?',
@@ -744,6 +744,12 @@ Le traduzioni sono associate all\'originale,
 
 // S
 'statut_admin_restreint' => '(admin restreint)',
+'syndic_choix_moderation' => 'Come comportarsi con i prossimi link provenienti da questo sito?',
+'syndic_choix_oublier' => 'Come comportarsi con i link che non compaiono pi&amp;ugrave; nel file di syndication?',
+'syndic_lien_obsolete' => 'link non pi&amp;ugrave; valido',
+'syndic_option_miroir' => 'bloccarli automaticamente',
+'syndic_option_oubli' => 'cancellarli (dopo @mois@&nbsp;mesi)',
+'syndic_options' => 'Opzioni per la syndication:',
 
 
 // T
@@ -806,8 +812,6 @@ Serviti dell\'elenco qui sotto per indicare quali elementi rendere disponibili.'
 'texte_date_publication_anterieure' => 'DATA DI REDAZIONE ANTERIORE',
 'texte_date_publication_anterieure_nonaffichee' => 'Non visualizzare la data di redazione anteriore.',
 'texte_date_publication_article' => 'DATA DI PUBBLICAZIONE:',
-'texte_demander_blocage_priori' => 'I prossimi link in
-provenienza da questo sito saranno bloccati a priori.',
 'texte_descriptif_petition' => 'Descrizione della petizione',
 'texte_descriptif_rapide' => 'Descrizione rapida',
 'texte_documents_joints' => '&Egrave; possibile autorizzare l\'aggiunta di documenti (file di testo, fogli elettronici, immagini, file multimediali, ecc.) agli articoli e/o alle rubriche. Questi file possono poi essere richiamati nel testo dell\'articolo, o visualizzati separatamente.<p />',
@@ -842,8 +846,6 @@ possono essere bloccati a priori; l\'impostazione
 qui sotto indica i criteri predefiniti dei siti in syndication.
 Sar&agrave; comunque possibile sbloccare singolarmente ogni link,
 o scegliere di bloccare i link di ogni singolo sito.',
-'texte_liens_syndication' => 'I prossimi link provenienti da questo sito saranno visualizzati immediatamente
-sul sito pubblico.',
 'texte_login_ldap_1' => '(Lascia vuoto per un accesso anonimo, o inserisci il percorso completo, per esempio &laquo;<tt>uid=rossi, ou=users, dc=mio-dominio, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Attenzione! Questo &egrave; l\'ID con il quale sei attualmente collegato.
 Utilizza questo modulo con cognizione di causa...',
