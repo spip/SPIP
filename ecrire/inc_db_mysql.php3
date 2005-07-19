@@ -240,19 +240,20 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 	if (!$valeurs) return '0=0';
 
 	$n = $i = 0;
-	$chunk = array();
+	$in_sql ="";
 	while ($n = strpos($valeurs, ',', $n+1)) {
 		if ((++$i) >= 255) {
-			$chunk = substr($valeurs, 0, $n);
-			$in_sql .= "($val $not IN (" . $chunk . "))\n" .
-				($not ? "AND\t" : "OR\t");
+			$in_sql .= "($val $not IN (" .
+			  substr($valeurs, 0, $n) .
+			  "))\n" .
+			  ($not ? "AND\t" : "OR\t");
 			$valeurs = substr($valeurs, $n+1);
 			$i = $n = 0;
 		}
 	}
 	$in_sql .= "($val $not IN ($valeurs))";
 
-	return $in_sql;
+	return "($in_sql)";
 }
 
 ?>
