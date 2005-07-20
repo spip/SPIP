@@ -218,6 +218,10 @@ function PtoBR($texte){
 
 // Couper les "mots" de plus de $l caracteres (souvent des URLs)
 function lignes_longues($texte, $l = 70) {
+	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
+	// qui prennent 7 caracteres
+	$texte = unicode_to_utf_8(filtrer_entites($texte));
+
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
 	if (preg_match_all('/<.*>/Ums', $texte, $t, PREG_SET_ORDER)) {
@@ -238,7 +242,7 @@ function lignes_longues($texte, $l = 70) {
 		$texte = str_replace(" @@SPIPTAG$n@@ ", $tag, $texte);
 	}
 
-	return $texte;
+	return importer_charset($texte, 'utf-8');
 }
 
 // Majuscules y compris accents, en HTML
