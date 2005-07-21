@@ -184,12 +184,9 @@ function critere_par_dist($idb, &$boucles, $crit) {
 function critere_parinverse($idb, &$boucles, $crit, $sens) {
 
 	$boucle = &$boucles[$idb];
-	if ($crit->not)
-		erreur_squelette(_T('zbug_info_erreur_squelette'), $param);
+	if ($crit->not) $sens = $sens ? "" : " . ' DESC'";
 
-	$params = $crit->param;
-
-	foreach ($params as $tri) {
+	foreach ($crit->param as $tri) {
 
 	// tris specifies dynamiquement
 	  if ($tri[0]->type != 'texte') {
