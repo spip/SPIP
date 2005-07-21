@@ -97,7 +97,7 @@ switch($op) {
 	# messagerie privee
 	case 'messagerie':
 		$rss = rss_suivi_messagerie($a);
-		$title = _T("icone_suivi_revisions");
+		$title = _T("icone_messagerie_personnelle");
 		$url = _DIR_RESTREINT_ABS .'messagerie.php3';
 		break;
 	# a suivre
