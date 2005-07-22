@@ -188,8 +188,15 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
 		foreach ($matches as $match) {
 			$num_echap++;
+
+			// Si le resultat contient des <div>, forcer la sortie de paragraphes			
+			if ( $match[1] == "doc" OR $match[1] == "emb" OR eregi("^\|center", $match[3]) )  {
+				$letexte = str_replace($match[0],
+					"\n\n</no p>@@SPIP_$source$num_echap@@<no p>\n\n", $letexte);
+			} else {
 			$letexte = str_replace($match[0],
-				"</no p>@@SPIP_$source$num_echap@@<no p>", $letexte);
+				"@@SPIP_$source$num_echap@@", $letexte);
+			}
 			$les_echap[$num_echap] = $match;
 		}
 	}
