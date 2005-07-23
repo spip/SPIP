@@ -224,10 +224,12 @@ function my_strtotime($la_date) {
 
 	if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
 		$la_date = str_replace("T", " ", $match[1])." GMT";
-		$la_date = strtotime($la_date) - intval($match[5]) * 3600;
+		return strtotime($la_date) - intval($match[5]) * 3600;
 	}
 
-	return $la_date;
+	// erreur
+	spip_log("Impossible de lire le format de date '$la_date'");
+	return false;
 }
 
 
@@ -255,7 +257,6 @@ function analyser_site($url) {
 	// definir les regexp pour decoder
 	// il faut deux etapes pour link sous Atom0.3
 	$syndic_version = trouver_format($texte);
-
 	switch ($syndic_version) {
 		case "1.0" :
 			$site_regexp = array(
@@ -269,7 +270,7 @@ function analyser_site($url) {
 		case "0.3" :
 			$site_regexp = array(
 				'channel'     => '<feed[^>]*>(.*)</feed>',
-				'link1'       => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)/>',
+				'link1'       => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)',
 				'link2'       => 'href[[:space:]]*=[[:space:]]*[\'"]([^["|\']]+)[\'"]',
 				'item'        => '<entry[^>]*>',
 				'description' => '<tagline[^>]*>([^<]*)</tagline>'
@@ -442,7 +443,7 @@ function analyser_backend($rss) {
 			$syndic_regexp = array('channel'=>'<feed[^>]*>(.*)</feed>',
 				'item'           => ',<entry[>[:space:]],i',
 				'itemfin'        => '</entry>',
-				'link1'          => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)/>',
+				'link1'          => '<link[[:space:]]([^<]*)rel[[:space:]]*=[[:space:]]*[\'"]alternate[\'"]([^<]*)',
 				'link2'          => 'href[[:space:]]*=[[:space:]]*[\'"]([^"|^\']+)[\'"]',
 				'date1'          => ',<modified>([^<]*)</modified>,Uims',
 				'date2'          => ',<issued>([^<]*)</issued>,Uims',
