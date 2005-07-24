@@ -287,16 +287,30 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 function critere_agenda($idb, &$boucles, $crit)
 {
 	$params = $crit->param;
-	$args = array();
+	$parent = $boucles[$idb]->id_parent;
+
 	// les valeur $date et $type doivent etre connus à la compilation
 	// autrement dit ne pas être des champs
-	foreach ($params as $tri) {
-	    if ($tri[0]->type != 'texte')
-	      $args[] = calculer_liste($tri, array(), $boucles, $boucles[$idb]->id_parent);
-	    else 
-	      $args[] = $tri[0]->texte;
-	}
-	list($date, $annee, $mois, $jour, $type) = $args;
+	$date = array_shift($params);
+	$date = $date[0]->texte;
+
+	$annee = array_shift($params);
+	$annee = "\n" . '((($x = ' .
+		calculer_liste($annee, array(), $boucles, $parent) .
+		') !== "") ? $x : date("Y"))';
+
+	$mois = array_shift($params);
+	$mois = "\n" . '(($x = ' .
+		calculer_liste($mois, array(), $boucles, $parent) .
+		') ? $x : date("m"))';
+
+	$jour = array_shift($params);
+	$jour = "\n" . '(($x = ' .
+		calculer_liste($jour, array(), $boucles, $parent) .
+		') ? $x : date("d"))';
+
+	$type = array_shift($params);
+	$type = $type[0]->texte;
 
 	$boucle = &$boucles[$idb];
 	$date = $boucle->id_table . ".$date";
@@ -415,6 +429,7 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 	    $op = $crit->op;
 
 	    $col = array_shift($params);
+
 	    $col = $col[0]->texte;
 	    // fonction SQL ?
 	    if (ereg("([A-Za-z_]+)\(([a-z_]+)\)", $col,$match3)) {

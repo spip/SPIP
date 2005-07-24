@@ -711,7 +711,7 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
   if ($type)
     {
       include('ecrire/inc_calendrier.php');
-      echo http_calendrier_init('', $type, '', '', '', 
+      return http_calendrier_init('', $type, '', '', '', 
 				  array($agenda[$cal]));
     }
   else {
