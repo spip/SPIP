@@ -705,16 +705,16 @@ function date_fin_semaine($annee, $mois, $jour) {
   return date("Ymd", mktime(0,0,0,$mois,$debut+6,$annee));
 }
 
+function agenda_connu($type)
+{
+  return in_array($type, array('jour','mois','semaine','periode')) ? ' ' : '';
+}
+
 function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $type='')
 {
   static $agenda = array();
-  if ($type)
+  if (!$type)
     {
-      include('ecrire/inc_calendrier.php');
-      return http_calendrier_init('', $type, '', '', '', 
-				  array($agenda[$cal]));
-    }
-  else {
     // rajouter une dimension dans le tableau afin d'autoriser plusieurs
     // calendriers dans une même page
     $agenda[$cal][(date_anneemoisjour($date))][] =  array(
@@ -724,7 +724,25 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
                         'URL' => $url);
     // signifier qu'il y a qqch
     return " ";
-  }
+  }  else {
+
+    if ($type != 'periode')
+      $evt = array($agenda[$cal]);
+    else
+      {
+	$d = array_keys($agenda[$cal]);
+	$mindate = min($d);
+	$max = max($d) - $mindate;
+	$min = substr($mindate,6,2);
+	$max += $min;
+	if ($max < 31) $max = 0;
+	$evt = array($agenda[$cal], '', $min, $max);
+	$type = 'mois';
+      }
+      include('ecrire/inc_calendrier.php');
+      return http_calendrier_init('', $type, '', '', '', $evt);
+    }
+
 }
 
 //

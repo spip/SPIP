@@ -1,5 +1,5 @@
 <BOUCLE_semaine(ARTICLES)
-    {agenda date, #ENV{annee}, #ENV{mois}, #ENV{jour}, semaine}>[
+    {agenda date, semaine, #ENV{annee}, #ENV{mois}, #ENV{jour}}>[
 (#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'semaine'})
 ]</BOUCLE_semaine>
 [(#DATE|agenda_memo{'', '', '', 'semaine', 'semaine'})]
