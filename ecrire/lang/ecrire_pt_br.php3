@@ -80,9 +80,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_annonces_adresse' => 'Enviar os avisos para o endere&ccedil;o:',
 'bouton_radio_envoi_liste_nouveautes' => 'Enviar a lista de novidades',
 'bouton_radio_moderation_priori' => 'Modera&ccedil;&atilde;o pr&eacute;via (as contribui&ccedil;&otilde;es s&oacute; ser&atilde;o exibidas publicamente ap&oacute;s a aprova&ccedil;&atilde;o dos administradores).',
-'bouton_radio_modere_abonnement' => 'moderado por assinatura',
-'bouton_radio_modere_posteriori' => 'moderado a posteriori',
-'bouton_radio_modere_priori' => 'moderado previamente',
+'bouton_radio_modere_abonnement' => 'por assinatura',
+'bouton_radio_modere_posteriori' => 'modera&ccedil;&atilde;o &agrave; posteriori',
+'bouton_radio_modere_priori' => 'modera&ccedil;&atilde;o &agrave; priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'N&atilde;o aparecer na lista de redatores',
 'bouton_radio_non_envoi_annonces_editoriales' => 'N&atilde;o enviar os avisos editoriais',
 'bouton_radio_non_syndication' => 'Sem sindica&ccedil;&atilde;o',
@@ -239,8 +239,6 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_ajout_participant' => 'O participante a seguir foi inclu&iacute;do:',
 'info_ajouter_rubrique' => 'Incluir outra se&ccedil;&atilde;o para administrar:',
 'info_annonce_nouveautes' => 'Aviso das novidades',
-'info_annuler_blocage_priori' => 'Anular
-    este bloqueio pr&eacute;vio',
 'info_anterieur' => 'anterior',
 'info_appliquer_choix_moderation' => 'Atribuir esta escolha de modera&ccedil;&atilde;o:',
 'info_article' => 'mat&eacute;ria',
@@ -262,6 +260,7 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_avertissement' => 'Aviso',
 'info_base_installee' => 'A estrutura da sua base de dados foi instalada.',
 'info_base_restauration' => 'A base est&aacute; sendo restaurada.',
+'info_bloquer' => 'bloquear',
 'info_breves' => 'O seu site utiliza o sistema de notas?',
 'info_breves_03' => 'notas',
 'info_breves_liees_mot' => 'As notas associadas a esta palavra-chave',
@@ -299,8 +298,6 @@ Estas informa&ccedil;&otilde;es dever&atilde;o ser fornecidas pelo administrador
 'info_delet_mots_cles' => 'Voc&ecirc; pediu a exclus&atilde;o da palavra-chave
 <b>@titre_mot@</b> (@type_mot@). Esta palavra-chave est&aacute; associada a
 <b>@texte_lie@</b>; voc&ecirc; precisa confirmar esta decis&atilde;o:',
-'info_demander_blocage_priori' => 'Solicitar
-    um bloqueio pr&eacute;vio',
 'info_derniere_etape' => '&ugrave;ltimo passo: <b>Terminou!',
 'info_derniere_syndication' => 'A &uacute;ltima sindica&ccedil;&atilde;o deste site foi efetuada em',
 'info_derniers_articles_publies' => 'Suas &uacute;ltimas mat&eacute;rias publicadas online',
@@ -458,6 +455,7 @@ Os idiomas j&aacute; utilizados no site (no topo da lista) n&atilde;o podem ser 
 'info_procedez_par_etape' => 'proceder passo-a-passo',
 'info_procedure_maj_version' => 'o procedimento de atualiza&ccedil;&atilde;o deve ser rodado para adaptar a base de dados &agrave; nova vers&atilde;o do SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publicar',
 'info_publies' => 'Suas mat&eacute;rias publicadas online',
 'info_question_accepter_visiteurs' => 'Se os gabaritos do seu site prev&ecirc;em o cadastramento de visitantes sem acesso ao espa&ccedil;o privado, por favor, ative a op&ccedil;&atilde;o abaixo:',
 'info_question_gerer_statistiques' => 'O seu site deve gerenciar as estat&iacute;sticas de visitas?',
@@ -712,6 +710,12 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 
 // S
 'statut_admin_restreint' => '(admin limitado)',
+'syndic_choix_moderation' => 'O que fazer com os pr&oacute;ximos links que venham deste site?',
+'syndic_choix_oublier' => 'O que fazer com os links que n&atilde;o constam mais do arquivo de sindica&ccedil;&atilde;o?',
+'syndic_lien_obsolete' => 'link obsoleto',
+'syndic_option_miroir' => 'bloque&aacute;-los automaticamente',
+'syndic_option_oubli' => 'apag&aacute;-los (ap&oacute;s @mois@&nbsp;mois)',
+'syndic_options' => 'Op&ccedil;&otilde;es de sindica&ccedil;&atilde;o:',
 
 
 // T
@@ -756,7 +760,6 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'texte_date_publication_anterieure' => 'Data de reda&ccedil;&atilde;o anterior:',
 'texte_date_publication_anterieure_nonaffichee' => 'N&atilde;o exibir a data de reda&ccedil;&atilde;o anterior.',
 'texte_date_publication_article' => 'DATA DE PUBLICA&Ccedil;&Atilde;O ONLINE:',
-'texte_demander_blocage_priori' => 'Os pr&oacute;ximos links provenientes deste site ser&atilde;o bloqueados previamente.',
 'texte_descriptif_petition' => 'Descri&ccedil;&atilde;o da peti&ccedil;&atilde;o',
 'texte_descriptif_rapide' => 'Descri&ccedil;&atilde;o r&aacute;pida',
 'texte_documents_joints' => 'Voc&ecirc; pode autorizar a inclus&atilde;o de documentos (arquivos, imagens,  multim&iacute;dia etc.) &agrave;s mat&eacute;rias e/ou &agrave;s se&ccedil;&otilde;es. Estes arquivos podem, em seguida, ser referenciados na mat&eacute;ria, ou exibidos separadamente.<p />',
@@ -776,7 +779,6 @@ Neste caso, &eacute; prefer&iacute;vel alterar a op&ccedil;&atilde;o padr&atilde
 'texte_jeu_caractere_2' => 'Esta configura&ccedil;&atilde;o n&atilde;o tem efeito retroativo. Consequentemente, os textos j&aacute; gravados na base de dados podem ser exibidos incorretamente ap&oacute;s uma altera&ccedil;&atilde;o da configura&ccedil;&atilde;o. Em todo o caso, voc&ecirc; poder&aacute; voltar sem problemas &agrave; configura&ccedil;&atilde;o anterior.',
 'texte_lien_hypertexte' => '(Se a sua mensagem se refere a uma mat&eacute;ria publicada na web, ou a uma p&aacute;gina fornecendo informa&ccedil;&otilde;es adicionais, por favor, informe o t&iacute;tulo da p&aacute;gina e respectivo URL.)',
 'texte_liens_sites_syndiques' => 'Os links gerados pelos sites sindicados podem ser bloqueados previamente; a configura&ccedil;&atilde;o abaixo indica a op&ccedil;&atilde;o padr&atilde;o para os sites sindicados, ap&oacute;s a sua inclus&atilde;o. &Eacute; poss&iacute;vel, em seguida, desbloquear cada link individualmente, ou escolher, site a site, o bloqueio de links originados de um ou outro site.',
-'texte_liens_syndication' => 'Os pr&oacute;ximos links originados deste site ser&atilde;o exibidos imediatamente no site p&uacute;blico.',
 'texte_login_ldap_1' => '(Deixe em branco para acesso an&ocirc;nimo, ou informe o caminho completo, por exemplo &laquo;<tt>uid=dupont, ou=users, dc=mon-domaine, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Aten&ccedil;&atilde;o! Este &eacute; o login com o qual voc&ecirc; est&aacute; conectado agora. Use este formul&aacute;rio com precau&ccedil;&atilde;o...',
 'texte_message_edit' => 'Aten&ccedil;&atilde;o: esta mensagem pode ser alterada por todos os administradores do site, e &eacute; vis&iacute;vell para todos os redatores. Use os avisos apenas para difundir os eventos importantes da vida do site.',

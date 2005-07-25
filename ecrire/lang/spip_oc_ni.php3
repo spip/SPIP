@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar aquela rubrica',
 'admin_recalculer' => 'Tornar calcular la p&agrave;gina',
 'alerte_maj_impossible' => '<b>Al&egrave;rta!</b> Es impossible d\'actualisar la basa MySQL dev&egrave;rs la version @version@; bessai i a un problema relatiu au drech de modificar la basa de donadas. Vorgatz contactar lo voastre aubergador.',
+'analyse_xml' => 'Analisa XML',
 'avis_archive_incorrect' => 'lo fichier arquiu es pas un fichier SPIP',
 'avis_archive_invalide' => 'lo fichier arquiu es pas valid',
 'avis_attention' => 'DAIDA&nbsp;!',
@@ -32,6 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'La sindicacion a pas capitat: impossible d\'accedir au backend d\'aqueu sit.',
 'avis_erreur' => 'Error: veire &ccedil;ai sota',
 'avis_erreur_connexion' => 'Error de connexion',
+'avis_erreur_cookie' => 'probl&egrave;ma de cookie',
 'avis_erreur_fonction_contexte' => 'Error de programacion. Cau pas apelar aquela foncion dins aqueu cont&egrave;xt.',
 'avis_erreur_mysql' => 'Error MySQL ',
 'avis_erreur_sauvegarde' => 'Error dins la sauvagarda (@type@ @id_objet@) ! ',
@@ -184,7 +186,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
-'fichier_introuvable' => '<NEW>Non s\'es pogut trobar lo fichier @fichier@.',
+'fichier_introuvable' => 'Fichi&egrave;r @fichier@ introuvable',
 'form_deja_inscrit' => 'Si&egrave;tz ja inscrich(a).',
 'form_email_non_valide' => 'La voastra adre&ccedil;a e-mail es pas valida.',
 'form_forum_access_refuse' => 'Pod&egrave;tz plus accedir a aqueu sit.',
@@ -253,8 +255,8 @@ Merc&eacute; de la voastra participacion
 'form_prop_sujet' => 'Subj&egrave;cte',
 'form_prop_url_site' => 'Adre&ccedil;a (URL) dau sit',
 'forum_acces_refuse' => 'Pod&egrave;tz pas plus accedir en aquelu forums.',
-'forum_attention_dix_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo voastre messatge ten mens de d&egrave;tz caract&egrave;rs.',
-'forum_attention_trois_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo voastre titre ten mens de tres caract&egrave;rs.',
+'forum_attention_dix_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo voastre messatge deu aver au manco d&egrave;tz caract&egrave;rs.',
+'forum_attention_trois_caracteres' => '<b>D&agrave;ida&nbsp;!</b> lo voastre titre deu aver au manco tres caract&egrave;rs.',
 'forum_avez_selectionne' => 'Av&egrave;tz seleccionat&nbsp;:',
 'forum_cliquer_retour' => 'Clicatz <a href=\'@retour_forum@\'>aqu&iacute;</a> per continuar.',
 'forum_forum' => 'forum',
