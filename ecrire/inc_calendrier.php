@@ -198,11 +198,11 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	if (!$time) 
 	  {
 	    $today=getdate(time());
-	    if (!isset($annee))
+	    if (!$annee)
 	      $annee = $today["year"];
-	    if (!isset($mois))
+	    if (!$mois)
 	      $mois = $today["mon"];
-	    if (!isset($jour))
+	    if (!$jour)
 	      $jour = $today["mday"];
 	    $time = mktime(0,0,0,$mois, $jour, $annee);
 	    $type= 'mois';

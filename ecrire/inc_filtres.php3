@@ -710,24 +710,31 @@ function agenda_connu($type)
   return in_array($type, array('jour','mois','semaine','periode')) ? ' ' : '';
 }
 
+// A chaque appel de moins 5 arguments,cette fonction memorise un evenement
+// decrit par une date, un descriptif, un titre et une URL. 
+// A l'appel avec 6 arguments, l'ensemble sera mis en page selon le type
+// indique par le 6e argument et la couleur indiquee par le 5e 
+// (nombre indexant le tableau $contraste de inc_calendrier -- a CSS-iser)
+// Ce 5e argument sert aussi d'index de memorisation
+// pour avoir plusieurs calendriers dans une meme page sans interferences
+
+
 function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $type='')
 {
   static $agenda = array();
   if (!$type)
     {
-    // rajouter une dimension dans le tableau afin d'autoriser plusieurs
-    // calendriers dans une même page
     $agenda[$cal][(date_anneemoisjour($date))][] =  array(
-# CATEGORIES reference le tableau $contraste de inc_calendrier
-# faudrait passer ca en CSS 
-			'CATEGORIES' => 2,
+			'CATEGORIES' => intval($cal),
 			'DTSTART' => date_ical($date),
+			'DTEND' => date_ical($date),
                         'DESCRIPTION' => texte_script($descriptif),
                         'SUMMARY' => texte_script($titre),
                         'URL' => $url);
     // signifier qu'il y a qqch
     return " ";
   }  else {
+
 
     if ($type != 'periode')
       $evt = array('', $agenda[$cal]);
@@ -741,8 +748,8 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
 	$evt = array('', $agenda[$cal], $min, $max);
 	$type = 'mois';
       }
-      include('ecrire/inc_calendrier.php');
-      return http_calendrier_init('', $type, '', '', '', $evt);
+    include('ecrire/inc_calendrier.php');
+    return http_calendrier_init('', $type, '', '', '', $evt);
     }
 
 }
