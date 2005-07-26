@@ -718,7 +718,10 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
     // rajouter une dimension dans le tableau afin d'autoriser plusieurs
     // calendriers dans une même page
     $agenda[$cal][(date_anneemoisjour($date))][] =  array(
-                        'CATEGORIES' => 'info_articles',
+# CATEGORIES reference le tableau $contraste de inc_calendrier
+# faudrait passer ca en CSS 
+			'CATEGORIES' => 2,
+			'DTSTART' => date_ical($date),
                         'DESCRIPTION' => texte_script($descriptif),
                         'SUMMARY' => texte_script($titre),
                         'URL' => $url);
@@ -727,16 +730,15 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
   }  else {
 
     if ($type != 'periode')
-      $evt = array($agenda[$cal]);
+      $evt = array('', $agenda[$cal]);
     else
       {
 	$d = array_keys($agenda[$cal]);
 	$mindate = min($d);
-	$max = max($d) - $mindate;
 	$min = substr($mindate,6,2);
-	$max += $min;
+	$max = $min + ((strtotime(max($d)) - strtotime($mindate)) / (3600 * 24));
 	if ($max < 31) $max = 0;
-	$evt = array($agenda[$cal], '', $min, $max);
+	$evt = array('', $agenda[$cal], $min, $max);
 	$type = 'mois';
       }
       include('ecrire/inc_calendrier.php');
