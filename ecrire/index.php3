@@ -375,7 +375,7 @@ else
 	//
 	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
-		afficher_sites(afficher_plus('sites_tous.php3')._T('avis_sites_syndiques_probleme'), "SELECT * FROM spip_syndic WHERE syndication='off' AND statut='publie' ORDER BY nom_site");
+		afficher_sites(afficher_plus('sites_tous.php3')._T('avis_sites_syndiques_probleme'), "SELECT * FROM spip_syndic WHERE (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
 
 	// Les articles syndiques en attente de validation

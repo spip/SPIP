@@ -269,7 +269,7 @@ debut_droite();
 debut_cadre_relief("site-24.gif");
 echo "<center>";
 
-if ($syndication == 'off') {
+if ($syndication == 'off' OR $syndication == 'sus') {
 	$logo_statut = "puce-orange-anim.gif";
 } 
 else if ($statut == 'publie') {
@@ -367,7 +367,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 	if ($erreur_syndic)
 		echo "<p><font color=red><b>$erreur_syndic</b></font>";
 
-	if ($syndication == "off") {
+	if ($syndication == "off" OR $syndication=="sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => $url_syndic));
 		echo "<center><b>";

@@ -656,7 +656,10 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	// Section critique : n'autoriser qu'une seule syndication
 	// simultanee pour un site donne
-	if (!spip_get_lock("syndication $url_syndic")) return;
+	if (!spip_get_lock("syndication $url_syndic")) {
+		spip_log("lock pour $url_syndic");
+		return;
+	}
 	spip_query("UPDATE spip_syndic SET syndication='$statut',
 		date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
@@ -788,7 +791,7 @@ function afficher_sites($titre_table, $requete) {
 				$title = _T('info_site_refuse');
 				break;
 			}
-			if ($syndication == "off") {
+			if ($syndication == 'off' OR $syndication == 'sus') {
 				$puce = 'puce-orange-anim.gif';
 				$title = _T('info_panne_site_syndique');
 			}
@@ -817,17 +820,17 @@ function afficher_sites($titre_table, $requete) {
 
 			$s = "";
 			//echo "<td class='arial1' align='right'> &nbsp;";
-			if ($syndication == "off") {
+			if ($syndication == 'off' OR $syndication == 'sus') {
 				$s .= "<font color='red'>"._T('info_probleme_grave')." </font>";
 			}
-			if ($syndication == "oui" or $syndication == "off"){
+			if ($syndication == "oui" or $syndication == "off" OR $syndication == 'sus'){
 				$s .= "<font color='red'>"._T('info_syndication')."</font>";
 			}
 				$vals[] = $s;
 			//echo "</td>";					
 			//echo "<td class='arial1'>";
 			$s = "";
-			if ($syndication == "oui" OR $syndication == "off") {
+			if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 				$result_art = spip_query("SELECT COUNT(*) FROM spip_syndic_articles WHERE id_syndic='$id_syndic'");
 				list($total_art) = spip_fetch_array($result_art);
 				$s .= " $total_art "._T('info_syndication_articles');
@@ -1019,11 +1022,15 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 function executer_une_syndication() {
 	$id_syndic = 0;
-	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='sus' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
+
+	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
+	// s'il echoue
+	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication IN ('sus','off') AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
 		$id_syndic = $row["id_syndic"];
-		syndic_a_jour($id_syndic);
+		syndic_a_jour($id_syndic, 'off');
 	}
 
+	// Et un site 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
 	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 0,1"))) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'sus');
