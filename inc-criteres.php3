@@ -343,11 +343,11 @@ function critere_agenda($idb, &$boucles, $crit)
 		date_debut_semaine($annee, $mois, $jour) . \"' AND
 	  DATE_FORMAT($date, '%Y%m%d') <= '\" .
 		date_fin_semaine($annee, $mois, $jour) . \"'";
-	elseif ($annee && $jour2)
+	elseif (count($params) > 2)
 	  $boucle->where[] = 
 	  "DATE_FORMAT($date, '%Y%m%d') >= '\" . $annee . $mois . $jour .\"' AND
 	  DATE_FORMAT($date, '%Y%m%d') <= '\" . $annee2 . $mois2 . $jour2 .\"'";
-	// sinon on veut tout
+	// sinon on prend tout
 }
 
 
