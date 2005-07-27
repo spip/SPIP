@@ -277,14 +277,24 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
 	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
 	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
+	spip_log("messs $id_message $rv");
 
 	if ($rv != "non") {
-	// faute de fermeture en PHP...
-	  $calendrier_message_fermeture = $id_message;
-
+	  list ($sh, $ah) = sql_calendrier_interval(sql_calendrier_jour($lannee,$lemois, $lejour));
+	  foreach ($ah as $k => $v)
+	    {
+	      foreach ($v as $l => $e)
+		{
+		  if (ereg("=$id_message$", $e['URL']))
+		    {
+		      $ah[$k][$l]['CATEGORIES'] = "calendrier-nb";
+		      break;
+		    }
+		}
+	    }
 	  creer_colonne_droite();	
 	  echo http_calendrier_ics_titre($lannee,$lemois,$lejour,'calendrier.php3');
-	  echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90,  sql_calendrier_interval(sql_calendrier_jour($lannee,$lemois, $lejour)));
+	  echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90, array($sh, $ah));
 	}
 	debut_droite();
 
