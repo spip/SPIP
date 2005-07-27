@@ -604,16 +604,16 @@ function calculer_critere_DEFAUT($idb, &$boucles, $crit) {
 
 	//	if (($op != '=') || !calculer_critere_repete($boucle, $ct, $val[0])) # a revoir
 	if (strtoupper($op) == 'IN') {
-	      $val = join(" .\n\"','\" . ", $val);
 	  
-	      $where = "$ct IN ('\" . $val . \"')";
+	      $where = "$ct IN ('\" . " . join(" .\n\"','\" . ", $val) . " . \"')";
 	      if ($crit->not) {
 		$where = "NOT ($where)";
 	      } else {
 			$boucle->default_order = array('rang');
-			$boucle->select[]= "FIND_IN_SET($ct, \\\"'\" . " . $val . ' . "\'\\") AS rang';
+			$boucle->select[]= "FIND_IN_SET($ct, '\" . " . 
+			  join(" .\n\",\" . ", $val) . ' . "\') AS rang';
 	      }
-	    } else {
+	} else {
 		  if ($op == '==') $op = 'REGEXP';
 		  $where = "($ct $op '\" . " . $val[0] . ' . "\')';
 		  if ($crit->not) $where = "NOT $where";
