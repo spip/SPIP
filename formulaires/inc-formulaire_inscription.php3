@@ -62,16 +62,15 @@ function test_mail_ins($mode, $mail) {
 
 // creer un nouvel utilisateur et lui envoyer un mail avec ses identifiants
 
-function message_inscription($mail_inscription, $nom_inscription, $force, $mode)
-{
+function message_inscription($mail_inscription, $nom_inscription, $force, $mode) {
+	$s = spip_query("SELECT statut, id_auteur, login
+		FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'");
+	$row = spip_fetch_array($s);
 
-  $row = spip_fetch_array(spip_query("SELECT statut, id_auteur, login
-FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'"));
-
-  if (!$row) {
-  // il n'existe pas, creer les identifiants 
-    $login = test_login($nom_inscription, $mail_inscription);
-    $pass = creer_pass_pour_auteur(spip_abstract_insert('spip_auteurs', 
+	if (!$row) {
+	// il n'existe pas, creer les identifiants 
+		$login = test_login($nom_inscription, $mail_inscription);
+		$pass = creer_pass_pour_auteur(spip_abstract_insert('spip_auteurs', 
 				'(nom, email, login, statut)',
 				"('".
 				addslashes($nom_inscription) .
@@ -81,24 +80,24 @@ FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'"));
 				$login .
 				"', 'nouveau')"));
 
-    return envoyer_inscription($mail_inscription, 'nouveau', $mode, $login, $pass, $nom_inscription);
-  } else {
-	// existant mais encore muet, ou ressucite: renvoyer les infos
-    if ((($row['statut'] == 'nouveau') && !$force) ||
-	(($row['statut'] == '5poubelle') && $force)) {
-      // recreer le pass
-      $pass = creer_pass_pour_auteur($row['id_auteur']);
-      return envoyer_inscription($mail_inscription, $row['statut'], $mode,
+		return envoyer_inscription($mail_inscription, 'nouveau', $mode, $login, $pass, $nom_inscription);
+	} else {
+		// existant mais encore muet, ou ressucite: renvoyer les infos
+		if ((($row['statut'] == 'nouveau') && !$force) ||
+		(($row['statut'] == '5poubelle') && $force)) {
+			// recreer le pass
+			$pass = creer_pass_pour_auteur($row['id_auteur']);
+			return envoyer_inscription($mail_inscription, $row['statut'], $mode,
 				     $row['login'], $pass, $nom_inscription);
-    } else {
-      // irrecuperable
-      if ($row['statut'] == '5poubelle')
-	return_T('form_forum_access_refuse');
-      else
-      // deja inscrit
-	return _T('form_forum_email_deja_enregistre');
-    }
-  }
+		} else {
+			// irrecuperable
+			if ($row['statut'] == '5poubelle')
+				return_T('form_forum_access_refuse');
+			else
+				// deja inscrit
+				return _T('form_forum_email_deja_enregistre');
+		}
+	}
 }
 
 
