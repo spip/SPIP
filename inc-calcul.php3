@@ -111,6 +111,8 @@ function charger_squelette ($squelette) {
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
 			return $nom;
+		} else {
+			erreur_squelette($sourcefile, _L('Erreur de compilation'));
 		}
 	}
 }
