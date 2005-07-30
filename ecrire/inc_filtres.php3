@@ -233,7 +233,7 @@ function lignes_longues($texte, $l = 70) {
 		}
 	}
 	// casser les mots longs qui restent
-	if (preg_match_all("/\S{".$l."}/ums", $texte, $longs, PREG_SET_ORDER)) {
+	if (preg_match_all("/\S{".$l."}/ms", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
 			$texte = str_replace($long[0], $long[0].' ', $texte);
 		}
