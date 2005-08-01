@@ -201,7 +201,8 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		'ucirc'=>'&#251;', 'uuml'=>'&#252;', 'yacute'=>'&#253;', 'thorn'=>'&#254;',
 		'nbsp' => " ", 'copy' => "(c)", 'reg' => "(r)", 'frac14' => "1/4",
 		'frac12' => "1/2", 'frac34' => "3/4", 'amp' => '&', 'quot' => '"',
-		'apos' => "'", 'lt' => '<', 'gt' => '>'
+		'apos' => "'", 'lt' => '<', 'gt' => '>',
+		'mdash' => '&#x2014;', 'ndash' => '&#x2013;'
 		);
 		return $charset;
 		
