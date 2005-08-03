@@ -42,7 +42,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // B
 'barre_a_accent_grave' => 'T&uuml;rk&ccedil;ede anlams&#305;z',
 'barre_aide' => 'T&uuml;rk&ccedil;ede anlams&#305;z',
-'barre_aide_rac' => '-vide-',
+'barre_aide_rac' => 'Karakter dizicisi kestirmelerin hakk&#305;nda daha fazla bilgi',
 'barre_e_accent_aigu' => 'T&uuml;rk&ccedil;ede anlams&#305;z',
 'barre_eo' => 'T&uuml;rk&ccedil;ede anlams&#305;z',
 'barre_eo_maj' => 'T&uuml;rk&ccedil;ede anlams&#305;z',

@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modifu tiun &#265;i rubrikon',
 'admin_recalculer' => 'Rekalkulu tiun &#265;i pa&#285;on',
 'alerte_maj_impossible' => '<b>Alarmo&nbsp;!</b> La &#285;isdatigo de la MySQL-datenbazo al versio @version@ ne estas ebla. La problemo eble deveni pro malbonaj rajtoj en la datenbazo. Bonvolu kontakti vian gastiganton.',
+'analyse_xml' => '<NEW>Analyse XML',
 'avis_archive_incorrect' => 'Tiu arkivo ne estas SPIP-dosiero',
 'avis_archive_invalide' => 'Tiu arkiva dosiero ne estas valida',
 'avis_attention' => 'ATENTU&nbsp;!',

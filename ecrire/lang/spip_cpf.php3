@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Sanz rubrik-la',
 'admin_recalculer' => 'Arkalkil pazw&egrave;b-la',
 'alerte_maj_impossible' => '<b>Tansyon&nbsp;!</b> Larnouv&egrave;lman labazdodn&eacute; MySQL zizka lo v&egrave;rsyon @version@ l&eacute; pa posib, peut-&ecirc;tre &agrave; cause d\'un probl&egrave;me de droit de modification sur la base de donn&eacute;es. Veuillez contacter votre h&eacute;bergeur.',
+'analyse_xml' => 'Analiz XML',
 'avis_archive_incorrect' => 'Lo fisy&eacute; arsiv l&eacute; pwinn inn fisy&eacute; SPIP',
 'avis_archive_invalide' => 'Lo fisy&eacute; arsiv i giny pa mars&eacute;',
 'avis_attention' => 'TANSYON PANGAR&nbsp;!',
@@ -34,6 +35,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur_connexion' => 'Ast&egrave;r n&eacute;na inn kanard &egrave;k lakostaz.
 
 ',
+'avis_erreur_cookie' => 'N&eacute;na in larlik &egrave;k lo gatomakro (kouki)',
 'avis_erreur_fonction_contexte' => 'Ast&egrave;r n&eacute;na inn kanard dann program-la. Fonksyon-la, ou dwa pa ap&egrave;l ali dann kont&egrave;ks-la.
 
 ',
@@ -62,6 +64,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Sanz',
 'bouton_chercher' => 'Rod',
 'bouton_choisir' => 'Swazi',
+'bouton_enregistrer' => 'Anrozistr&eacute;',
 'bouton_radio_desactiver_messagerie_interne' => 'D&eacute;gr&egrave;n lakazmod&eacute;kri',
 'bouton_radio_envoi_annonces' => 'Anvwa bann zanons l&eacute;ditoryal. ',
 'bouton_radio_non_envoi_annonces' => 'Anp&egrave;s anvway&eacute; bann zanons ',
@@ -193,6 +196,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => 'Fisy&eacute;-la @fichier@ ni pa kav trouv ali',
 'form_deja_inscrit' => 'Ou l&eacute; d&eacute;za inskri.',
 'form_email_non_valide' => 'Out ladr&egrave;s im&egrave;l la pa mars&eacute;.',
 'form_forum_access_refuse' => 'Ou n&eacute;na plid drwa pou akost dann sitw&egrave;b-la.',
@@ -256,7 +260,7 @@ Mersi aou m&egrave;t ansanm isi
 'form_prop_url_site' => 'Ladr&egrave;s (URL) lo sitw&egrave;b',
 'forum_acces_refuse' => 'Ou n&eacute;na pli lapermisyon pou g&egrave;t dann bann forom-la.',
 'forum_attention_dix_caracteres' => '<b>Tansyon pangar&nbsp;!</b> out mod&eacute;kri n&eacute;na mwin 10 karakt&egrave;r-linprimri. L&eacute; pa as&eacute; pou anrozistr ali.',
-'forum_attention_trois_caracteres' => '<b>Tansyon pangar&nbsp;!</b> Lo non ou la don&eacute; nana mwin 10 karact&egrave;r-linprimri.Sa l&eacute; pa as&eacute; pou anrozistr ali.',
+'forum_attention_trois_caracteres' => '<b>Tansyon pangar&nbsp;!</b> Lo non ou la don&eacute; nana mwin 3 karact&egrave;r-linprimri.Sa l&eacute; pa as&eacute; pou anrozistr ali.',
 'forum_avez_selectionne' => 'Ou la swazi&nbsp;:',
 'forum_cliquer_retour' => 'Klik <a href=\'@retour_forum@\'>t&egrave;rla</a> pour as&eacute;v&eacute;.',
 'forum_forum' => 'forom kozman',

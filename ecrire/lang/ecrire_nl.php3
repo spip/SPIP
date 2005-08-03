@@ -81,7 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_liste_nouveautes' => 'De lijst met nieuwe bijdragen versturen',
 'bouton_radio_moderation_priori' => 'Vooraf modereren (de
  bijdragen worden pas gepubliceerd na goedkeuring door een van de beheerders).',
-'bouton_radio_modere_abonnement' => 'moderatie op aanvraag',
+'bouton_radio_modere_abonnement' => 'op aanvraag',
 'bouton_radio_modere_posteriori' => 'nadien modereren',
 'bouton_radio_modere_priori' => 'vooraf modereren',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Niet opnemen in de lijst van redacteuren',
@@ -114,7 +114,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // C
 'cache_mode_compresse' => 'Bestanden in de buffer zijn in gecomprimeerd mode opgeslaagd.',
 'cache_mode_non_compresse' => 'Bestanden in de buffer zijn in niet gecomprimeerd mode opgeslaagd.',
-'cache_modifiable_webmestre' => '<MODIF>Deze parameters kunnen door de webmaster van de site gezijzigd worden.',
+'cache_modifiable_webmestre' => 'Deze parameter kan door de webmaster van de site gewijzigd worden.',
 'calendrier_synchro' => 'Wanneer je <b>iCal</b> compatibele agendasoftware gebruikt, kan je deze synchroniseren met informatie van deze site.',
 
 
@@ -245,8 +245,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'De volgende deelnemer is toegevoegd:',
 'info_ajouter_rubrique' => 'Een nieuwe rubriek toevoegen om te beheren:',
 'info_annonce_nouveautes' => 'Aankondiging van nieuwigheden',
-'info_annuler_blocage_priori' => 'Annuleer
-    deze a priori blokkage',
 'info_anterieur' => 'vorige',
 'info_appliquer_choix_moderation' => 'Pas deze moderatievorm toe ::',
 'info_article' => 'artikel',
@@ -268,6 +266,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Waarschuwing',
 'info_base_installee' => 'De structuur van je databank is ge&iuml;nstalleerd.',
 'info_base_restauration' => 'De databank wordt hersteld.',
+'info_bloquer' => 'blokkeren',
 'info_breves' => 'Werkt je website met het systeem van berichten?',
 'info_breves_03' => 'nieuwsberichten',
 'info_breves_liees_mot' => 'Berichten gekoppeld aan dit trefwoord',
@@ -300,13 +299,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_creer_base' => '<B>Cre&euml;ren</b> een nieuw gegevensbank:',
 'info_dans_groupe' => 'In de groep:',
 'info_dans_rubrique' => 'In de rubriek:',
-'info_date_publication_anterieure' => '<MODIF>Datum van eerdere publicatie :',
+'info_date_publication_anterieure' => 'Datum van eerdere redactie :',
 'info_date_referencement' => 'DATUM VAN DE KOPPELING VAN DEZE SITE:',
 'info_delet_mots_cles' => 'Je hebt gevraagd het trefwoord 
 <B>@titre_mot@</b> (@type_mot@) te verwijderen. Dit trefwoord is gekoppeld aan 
 <b>@texte_lie@</b>, je dient je beslissing te bevestigen:',
-'info_demander_blocage_priori' => 'Vraag een
-    een a priori blokkage aan',
 'info_derniere_etape' => 'Laatste stap : <B>Gedaan !',
 'info_derniere_syndication' => 'De laatste syndicatie van deze site heeft plaatsgevonden op ',
 'info_derniers_articles_publies' => 'Je meest recente online artikels',
@@ -480,6 +477,7 @@ De publieke forums kunnen per artikel toegestaan worden
 'info_procedure_maj_version' => 'de procedure voor updaten die nodig is om de databank aan te passen
  aan de nieuwe versie van SPIP.',
 'info_ps' => 'P.S',
+'info_publier' => '<NEW>publier',
 'info_publies' => 'Je gepubliceerde artikels',
 'info_question_accepter_visiteurs' => 'Als de sjablonen van je site voorzien dat bezoekers zich kunnen registreren zonder toegang tot de priv&eacute;-ruimte, activeer dan de volgende optie&nbsp;:',
 'info_question_gerer_statistiques' => 'Dient je site bezoekersstatiestieken aan te maken ?',
@@ -745,6 +743,12 @@ een kleur geeft hun status aan&nbsp;:',
 
 // S
 'statut_admin_restreint' => '(beperkte toegang)',
+'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
+'syndic_choix_oublier' => '<NEW>Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_lien_obsolete' => '<NEW>lien obsol&egrave;te',
+'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
+'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => '<NEW>Options de syndication&nbsp;:',
 
 
 // T
@@ -804,11 +808,9 @@ inbegrepen <i>alle</i> toegangsrechten voor redacteurs en beheerders. Nadat je d
   kan je een automatisch herstel proberen.',
 'texte_creer_rubrique' => 'Voor je een artikel kan schrijven,<BR> dien je een rubriek aan te maken.',
 'texte_date_creation_article' => 'DATUM VAN AANMAKEN VAN HET ARTIKEL:',
-'texte_date_publication_anterieure' => '<MODIF>DATUM VAN EERDERE PUBLICATIE&nbsp;:',
+'texte_date_publication_anterieure' => 'Datum van eerdere redactie&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => '<MODIF>Verberg de datum van antidatering.',
 'texte_date_publication_article' => 'DATUM VAN ONLINE PUBLICATIE&nbsp;:',
-'texte_demander_blocage_priori' => 'De volgende koppelingen
-    komende van deze site zullen preventief tegengehouden worden.',
 'texte_descriptif_petition' => 'Beschrijving van de petitie.',
 'texte_descriptif_rapide' => 'Korte beschrijving.',
 'texte_documents_joints' => 'Je kan het toevoegen van documenten (teksten, afbeeldingen, multimedia, ...) bij artikels of rubrieken toelaten. De bijgevoegde bestanden 
@@ -849,8 +851,6 @@ artikel of afzonderlijk getoond worden.<p />',
    Het is vervolgens perfect mogelijk om elke koppeling
    individueel te ontgrendelen, of om per site
    te kiezen of je koppelingen wil blokkeren of niet.',
-'texte_liens_syndication' => 'De volgende koppelingen komende
- van deze site zullen meteen op de publieke site getoond worden.',
 'texte_login_ldap_1' => '(Leeg laten voor een anonieme login, of een volledig pad invullen, bijvoorbeeld &laquo;<tt>uid=janssen, ou=users, dc=mijn-domein, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Opgelet! Met deze login ben je momenteel aangemeld.
  Gebruik dit formulier met de nodige voorzichtigheid...',
