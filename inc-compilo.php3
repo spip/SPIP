@@ -308,37 +308,43 @@ function calculer_parties($boucles, $id_boucle) {
 
 	// {1/3}
 	if ($op1 == '/') {
+		$pmoins1 = is_numeric($partie) ? ($partie-1) : "($partie-1)";
+		$totpos = is_numeric($total_parties) ? ($total_parties) :
+		  "($total_parties ? $total_parties : 1)";
 		$retour .= "\n	"
-			.'$debut_boucle = ceil(($nombre_boucle * '
-			. ($partie - 1) . ')/' . $total_parties . ");\n	"
-			. '$fin_boucle = ceil (($nombre_boucle * '
-			. $partie . ')/' . $total_parties . ") - 1;";
+		  .'$debut_boucle = ceil(($nombre_boucle * '
+		  . $pmoins1 . ')/' . $totpos . ");";
+		$fin = 'ceil (($nombre_boucle * '
+			. $partie . ')/' . $totpos . ") - 1";
 	}
 
 	// {1,x}
-	if ($op1 == '+') {
+	elseif ($op1 == '+') {
 		$retour .= "\n	"
 			. '$debut_boucle = ' . $partie . ';';
 	}
 	// {n-1,x}
-	if ($op1 == '-') {
+	elseif ($op1 == '-') {
 		$retour .= "\n	"
 			. '$debut_boucle = $nombre_boucle - ' . $partie . ';';
 	}
 	// {x,1}
 	if ($op2 == '+') {
-		$retour .= "\n	"
-			. '$fin_boucle = $debut_boucle + ' . $total_parties . ' - 1;';
+		$fin = '$debut_boucle'
+		  . (is_numeric($total_parties) ?
+		     (($total_parties==1) ? "" :(' + ' . ($total_parties-1))):
+		     ('+' . $total_parties . ' - 1'));
 	}
 	// {x,n-1}
-	if ($op2 == '-') {
-		$retour .= "\n	"
-			.'$fin_boucle = $debut_boucle + $nombre_boucle - '.$total_parties.' - 1;';
+	elseif ($op2 == '-') {
+		$fin = '$debut_boucle + $nombre_boucle - '
+		  . (is_numeric($total_parties) ? ($total_parties+1) :
+		     ($total_parties . ' - 1'));
 	}
 
 	// Rabattre $fin_boucle sur le maximum
 	$retour .= "\n	"
-		.'$fin_boucle = min($fin_boucle, $nombre_boucle - 1);';
+		.'$fin_boucle = min(' . $fin . ', $nombre_boucle - 1);';
 
 	// calcul du total boucle final
 	$retour .= "\n	"

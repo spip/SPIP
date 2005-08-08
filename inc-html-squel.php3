@@ -184,15 +184,15 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
   while (($texte!=="") && strpos($fin, $texte[0]) === false) {
       preg_match(",^(\|?[^{)|]*)(.*)$,ms", $texte, $match);
       $suite = ltrim($match[2]);
-      $fonc = $match[1];
-      if ($fonc[0] == "|") $fonc = substr($fonc,1);
-      $res = array(trim($fonc));
-      $args = $suite;
-      if ($suite[0] != '{')
-	{ if (!$match[1]) {
+      $fonc = trim($match[1]);
+      if ($fonc[0] == "|") $fonc = ltrim(substr($fonc,1));
+      $res = array($fonc);
+      $args = $suite ;
+      if (($suite[0] != '{') || !eregi("^[A-Z0-9_]*$", $fonc))
+	{ if (!$match[1])
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
-	    break;
-	  }
+	  // suite zarbi, c'est un critere infixe comme "/"
+	  if (strpos(")|", $suite[0]) === false) break;
 	} else {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
@@ -210,7 +210,6 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		      exit;
 		      }   
 		}
-
 		$arg = $regs[2];
 		if (trim($regs[1])) {
 			$champ = new Texte;
@@ -330,17 +329,17 @@ function phraser_criteres($params, &$result) {
 
 	$args = array();
 	$type = $result->type_requete;
+
 	foreach($params as $v) {
 		$var = $v[1][0];
 		$param = ($var->type != 'texte') ? "" : $var->texte;
 		if ((count($v) > 2) && (!eregi("[^A-Za-z]IN[^A-Za-z]",$param)))
 		  {
-// plus d'un argument:
-// c'est soit le critere LIMIT debut,fin si ça se termine par un chiffre
-// soit le critere PAR soit un critere perso
+// plus d'un argument et pas le critere IN:
+// detecter comme on peut si c'est le critere implicite LIMIT debut, fin
 
 			if (($var->type != 'texte') ||
-			    (strpos("0123456789", $param[strlen($param)-1])
+			    (strpos("0123456789-", $param[strlen($param)-1])
 			     !== false))
 			  $op = ',';
 			else {
@@ -355,9 +354,19 @@ function phraser_criteres($params, &$result) {
 			$crit->param = $v;
 			$args[] = $crit;
 		  } else {
-		  if ($var->type != 'texte')
-			  erreur_squelette('criteres','');
-		  else {
+		  if ($var->type != 'texte') {
+		    // cas 1 seul arg ne commencant pas par du texte brut: 
+		    // erreur ou critere infixe "/"
+		    if (($v[1][1]->type != 'texte') || (trim($v[1][1]->texte) !='/'))
+		      erreur_squelette('criteres',$var->nom_champ);
+		    else {
+		      $crit = new Critere;
+		      $crit->op = '/';
+		      $crit->not = "";
+		      $crit->param = array(array($v[1][0]),array($v[1][2]));
+		      $args[] = $crit;
+		    }
+		  } else {
 	// traiter qq lexemes particuliers pour faciliter la suite
 
 	// les separateurs
@@ -390,7 +399,7 @@ function phraser_criteres($params, &$result) {
 			  elseif ($param == 'recherche')
 			    // meme chose (a cause de #nom_de_boucle:URL_*)
 			      $result->hash = true;
-			  if (ereg('^([0-9-]+)(/)([0-9-]+)$', $param, $m)) {
+			  if (ereg('^ *([0-9-]+) *(/) *(.+) *$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
 			  } elseif (ereg('^(`?[A-Za-z_][A-Za-z_0-9]*\(?[A-Za-z_]*\)?`?)[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)[[:space:]]*"?([^<>=!"]*)"?$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
@@ -411,7 +420,7 @@ function phraser_criteres($params, &$result) {
 			    $crit->not = $m[1];
 			    $crit->cond = $m[3];
 			  }
-			  else {spip_log("pb $param");
+			  else {
 			    erreur_squelette(_T('zbug_critere_inconnu',
 						array('critere' => $param)));
 			  }
