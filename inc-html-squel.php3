@@ -192,7 +192,8 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 	{ if (!$match[1])
 	    erreur_squelette(_T('zbug_info_erreur_squelette'), $texte);
 	  // suite zarbi, c'est un critere infixe comme "/"
-	  if (strpos(")|", $suite[0]) === false) break;
+	  /* ca serait pas mal d'expliquer, la c'est abscons */
+	  if (!preg_match(',^[)|],', $suite)) break;
 	} else {
 	$args = ltrim(substr($suite,1)); 
 	$collecte = array();
