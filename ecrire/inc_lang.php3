@@ -200,7 +200,7 @@ function init_codes_langues() {
 	'co' => "corsu",
 	'cpf' => "Kr&eacute;ol r&eacute;yon&eacute;",
 	'cpf_dom' => "Krey&ograve;l",
-	'cpf_hat' => "Krey&ograve;l ayisyen",
+	'cpf_hat' => "Kr&eacute;y&ograve;l (P&eacute;yi Dayiti)",
 	'cs' => "&#269;e&#353;tina",
 	'cy' => "Cymraeg",	# welsh, gallois
 	'da' => "dansk",
