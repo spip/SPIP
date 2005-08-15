@@ -26,6 +26,7 @@
 
 div.navigation-calendrier {
 	color: white;
+	background-color: #cccccc;
 	font-family: verdana, arial, sans,sans-serif;
 	font-weight: bold;
 	font-size: 14px;
@@ -73,6 +74,7 @@ a.calendrier-annee:hover {
 .calendrier-td { 
 	width: 14%;
   	vertical-align: top;
+	background-color: #eeeeee;
  }
 
 .calendrier-th { 
@@ -108,6 +110,8 @@ a.calendrier-annee:hover {
 .calendrier-jour { 
 	position: relative; 
 	color: #999999;
+	background-color: white;
+	border: 1px solid #aaaaaa;
 }
 
 .calendrier-agenda { 

@@ -198,7 +198,7 @@ elseif ($type == 'jour') {
 
 function http_calendrier_mois($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
 {
-	global $spip_ecran, $couleur_claire, $couleur_foncee;
+	global $spip_ecran;
 
 	list($sansduree, $evenements, $premier_jour, $dernier_jour) = $evt;
 
@@ -300,13 +300,12 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$mois_en_cours = date("m",$nom);
 		$annee_en_cours = date("Y",$nom);
 		$amj = date("Y",$nom) . $mois_en_cours . $jour;
+		$couleur_lien = "black";
+		$couleur_fond = "";
 
 		if ($jour_semaine == 0) {
-			$couleur_lien = "black";
-			$couleur_fond = $couleur_claire;
+			$couleur_fond = " background-color: $couleur_claire;";
 		} else {
-			$couleur_lien = "black";
-			$couleur_fond = "#eeeeee";
 			if ($jour_semaine==1) 
 			  { 
 			    $total .= "\n<tr>$ligne\n</tr>";
@@ -317,7 +316,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		
 		if ($amj == date("Ymd")) {
 			$couleur_lien = "red";
-			$couleur_fond = "white";
+			$couleur_fond = " background-color: white;";
 		}
 		$evts = $evenements[$amj];
 		if ($evts) {
@@ -332,8 +331,9 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		    }
 		  $evts = $res;
 		}
+
 		$ligne .= "\n\t\t<td\tclass='calendrier-td'
-			style='height: 100px; background-color: $couleur_fond; border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;$border_left'>" .
+			style='height: 100px;$couleur_fond border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;$border_left'>" .
 		  http_calendrier_mois_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre, $couleur_lien) .
 		  $evts .
 		  "\n\t</td>";
@@ -374,7 +374,7 @@ function http_calendrier_mois_clics($annee, $mois, $jour, $script, $ancre, $colo
 
 function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $script, $ancre, $evt)
 {
-	global $couleur_claire, $couleur_foncee, $spip_ecran;
+	global $spip_ecran;
 
 	$init = date("w",mktime(1,1,1,$mois,$jour,$annee));
 	$init = $jour+1-($init ? $init : 7);
@@ -424,7 +424,7 @@ calendrier_args_date($fannee, $fmois, ($fjour+1)),
 }
 
 function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
-	global $couleur_claire, $couleur_foncee, $spip_ecran;
+	global $couleur_claire, $spip_ecran;
 	$href = $script .
 	  (ereg('[?&]$', $script) ? '' : (strpos($script,'?') ? '&' : '?')) .
 	  "type=jour&";
@@ -455,7 +455,7 @@ function http_calendrier_semaine_noms($annee, $mois, $jour, $script, $ancre){
 
 function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_cal, $evt)
 {
-	global $couleur_claire, $couleur_foncee, $spip_ecran, $spip_lang_left;
+	global $couleur_claire, $spip_ecran, $spip_lang_left;
 
 	$largeur =  ($spip_ecran == "large") ? 90 : 60;
 
@@ -679,9 +679,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 		}
     }
 	return
-	   "\n<div class='calendrier-jour' style='height: ${dimjour}px; font-size: ${fontsize}px;" .
-	  ($style ? $style : " background-color: white; border: 1px solid #aaaaaa;") .
-	  "'>\n" .
+	   "\n<div class='calendrier-jour' style='height: ${dimjour}px; font-size: ${fontsize}px;$style'>\n" .
 	  http_calendrier_ics_grille($debut, $fin, $dimheure, $dimjour, $fontsize) .
 	  $total .
 	  "\n</div>" .
@@ -907,7 +905,6 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 {
 	global $spip_lang_right, $spip_lang_left, $couleur_foncee;
 
-	if (!isset($couleur_foncee)) $couleur_foncee = '#aaaaaa';
 	if (!$echelle) $echelle = DEFAUT_D_ECHELLE;
 
 	if (!ereg('[?&]$', $script)) $script .= (strpos($script,'?') ? '&' : '?');
@@ -921,8 +918,9 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 	$id = 'nav-agenda' .ereg_replace('[^A-Za-z0-9]', '', $ancre);
 
 	return 
-	  "<div class='navigation-calendrier calendrier-moztop8'\nstyle='background-color: $couleur_foncee;'>"
-	  . "<div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
+	  "<div class='navigation-calendrier calendrier-moztop8'" 
+	  . (!isset($couleur_foncee) ? "" : "\nstyle='background-color: $couleur_foncee;'")
+	  . "><div style='float: $spip_lang_right; padding-left: 5px; padding-right: 5px;'>"
 	  . (($type == "mois") ? '' :
 	     (
 		  http_href_img(("$script$args&type=$type&set_partie_cal=tout$ancre"),
@@ -1110,15 +1108,15 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 	$jour_semaine = date("w", mktime(1,1,1,$mois,1,$annee));
 	if ($jour_semaine==0) $jour_semaine=7;
 	for ($i=1;$i<$jour_semaine;$i++) $ligne .= "\n\t<td></td>";
-	$style0 = "border: 1px solid $couleur_foncee;";
+	$style0 = (!isset($couleur_foncee)) ? "" : " style='border: 1px solid $couleur_foncee;'";
 	for ($j=1; (checkdate($mois,$j,$annee)); $j++) {
+		$style = "";
 		$nom = mktime(1,1,1,$mois,$j,$annee);
 		$jour_semaine = date("w",$nom);
 		if ($jour_semaine==0) $jour_semaine=7;
 
 		if ($j == $jour_ved AND $mois == $mois_ved AND $annee == $annee_ved) {
 		  $class= 'calendrier-arial11 calendrier-demiagenda';
-		  $style = $style0;
 		  $type = 'jour';
 		  $couleur = "black";
 		  } else if ($semaine AND $nom >= $debut AND $nom <= $fin) {
@@ -1126,30 +1124,32 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
  		      (($jour_semaine==1) ? " calendrier-$spip_lang_left"  :
 		       (($jour_semaine==7) ? " calendrier-$spip_lang_right" :
 			''));
-		  $style = $style0;
 		  $type = ($semaine ? 'semaine' : 'jour') ;
 		  $couleur = "black";
 		} else {
 		  if ($j == $jour_today AND $cemois) {
-			$style = "background-color: $couleur_foncee";
+			$style = $couleur_foncee;
 			$couleur = "white";
 		    } else {
 			if ($jour_semaine == 7) {
-				$style = "background-color: #aaaaaa";
+				$style = "#aaaaaa";
 				$couleur = 'white';
 			} else {
-				$style = "background-color: #ffffff";
+				$style = "#ffffff";
 				$couleur = "#aaaaaa";
 			}
 			if ($les_rv[$j] > 0) {
-			  $style = "background-color: #ffffff";
+			  $style = "#ffffff";
 			  $couleur = "black";
 			}
 		  }
 		  $class= 'calendrier-arial11 calendrier-agenda';
 		  $type = ($semaine ? 'semaine' : 'jour') ;
 		}
-		$ligne .= "\n\t<td><div class='$class' style='$style'>" .
+		if ($style)
+		  $style = " style='background-color: $style'";
+		else $style = $style0;
+		$ligne .= "\n\t<td><div class='$class'$style>" .
 		  $fclic($annee,$mois, $j, $type, $couleur, $perso) .
 		  "</div></td>";
 		if ($jour_semaine==7) 
