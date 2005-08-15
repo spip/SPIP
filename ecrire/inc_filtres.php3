@@ -671,8 +671,11 @@ function filtrer_ical($texte) {
 	return $texte;
 }
 
-function date_ical($date_heure, $minutes = 0) {
-	return date("Ymd\THis", mktime(heures($date_heure),minutes($date_heure)+$minutes,0,mois($date_heure),jour($date_heure),annee($date_heure)));
+function date_ical($date, $addminutes = 0) {
+	list($heures, $minutes, $secondes) = recup_heure($date);
+	list($annee, $mois, $jour) = recup_date($date);
+	return date("Ymd\THis", 
+		    mktime($heures, $minutes+$addminutes,$secondes,$mois,$jour,$annee));
 }
 
 function date_iso($date_heure) {
@@ -715,8 +718,7 @@ function agenda_connu($type)
 // A chaque appel de moins 5 arguments,cette fonction memorise un evenement
 // decrit par une date, un descriptif, un titre et une URL. 
 // A l'appel avec 6 arguments, l'ensemble sera mis en page selon le type
-// indique par le 6e argument et la couleur indiquee par le 5e 
-// (nombre indexant le tableau $contraste de inc_calendrier -- a CSS-iser)
+// indique par le 6e argument et le style CSS indiquee par le 5e 
 // Ce 5e argument sert aussi d'index de memorisation
 // pour avoir plusieurs calendriers dans une meme page sans interferences
 
@@ -726,18 +728,17 @@ function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $typ
   static $agenda = array();
   if (!$type)
     {
-    $agenda[$cal][(date_anneemoisjour($date))][] =  array(
+      $idate = date_ical($date);
+      $agenda[$cal][(date_anneemoisjour($date))][] =  array(
 			'CATEGORIES' => $cal,
-			'DTSTART' => date_ical($date),
-			'DTEND' => date_ical($date),
+			'DTSTART' => $idate,
+			'DTEND' => $idate,
                         'DESCRIPTION' => texte_script($descriptif),
                         'SUMMARY' => texte_script($titre),
                         'URL' => $url);
     // signifier qu'il y a qqch
-    return " ";
+      return " ";
   }  else {
-
-
     if ($type != 'periode')
       $evt = array('', $agenda[$cal]);
     else
