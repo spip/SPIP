@@ -23,6 +23,12 @@ utiliser_langue_visiteur();
 //
 // Aide
 //
+
+// en hebreu le ? ne doit pas etre inverse
+function aide_lang_dir($spip_lang,$spip_lang_rtl) {
+	return ($spip_lang<>'he') ? $spip_lang_rtl : '';
+}
+
 function aide($aide='') {
 	global $couleur_foncee, $spip_lang, $spip_lang_rtl, $spip_display;
 
@@ -34,7 +40,7 @@ function aide($aide='') {
 		. "onclick=\"javascript:window.open(this.href,"
 		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "
 		. "height=580'); return false;\">"
-		. http_img_pack("aide".$spip_lang_rtl.".gif",
+		. http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl).".gif",
 			_T('info_image_aide'), "title=\""._T('titre_image_aide')
 			. "\" width=\"12\" height=\"12\" border=\"0\" align=\"middle\"")
 		. "</a>";
@@ -2074,9 +2080,12 @@ else {
 	echo "<td> &nbsp; </td>";
 
 
+	icone_bandeau_principal (_T('icone_aide_ligne'),
+		"javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
+		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
+		"vide", "", "aide_index.php3?var_lang=$spip_lang",
+		"aide-en-ligne", $sous_rubrique);
 
-
-	icone_bandeau_principal (_T('icone_aide_ligne'), "javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');", "aide-48$spip_lang_rtl.png", "vide", "", "aide_index.php3?var_lang=$spip_lang", "aide-en-ligne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_visiter_site'), "$adresse_site/", "visiter-48$spip_lang_rtl.png", "visiter","", "visiter", $sous_rubrique);
 
 	echo "</tr></table>\n";
