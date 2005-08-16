@@ -122,7 +122,7 @@ function texte_backend($texte) {
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
 function supprimer_numero($texte) {
-	$texte = ereg_replace("^[[:space:]]*[0-9]+[.,/)".chr(176)."]?[0-9]*[[:space:]]+", "", $texte);
+	$texte = preg_replace(",^[[:space:]]*[0-9]+[.)".chr(176)."][[:space:]]+,", "", $texte);
 	return $texte;
 }
 
