@@ -277,7 +277,6 @@ if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_mes
 	echo  http_calendrier_rv(sql_calendrier_taches_annonces(),"annonces");
 	echo  http_calendrier_rv(sql_calendrier_taches_pb(),"pb");
 	echo  http_calendrier_rv(sql_calendrier_taches_rv(), "rv");
-	spip_log("messs $id_message $rv");
 
 	if ($rv != "non") {
 	  list ($sh, $ah) = sql_calendrier_interval(sql_calendrier_jour($lannee,$lemois, $lejour));

@@ -86,6 +86,10 @@ a.calendrier-annee:hover {
 	font-family: Verdana, Arial, Sans, sans-serif;
  }
 
+.calendrier-th a { 
+  color: black;
+}
+
 .calendrier-table-etroit  .calendrier-td-gauche {
 	width: 0px;
   	vertical-align: top;
@@ -219,9 +223,9 @@ a.calendrier-annee:hover {
 }
 
 .calendrier-nb  { 		/*  style cinemat(yp)ographe */
-	background-color: black;
-	border: 1px solid white;
-	color: white;
+	background-color: white;
+	border: 1px solid black;
+	color: black;
 }
 
 .calendrier-couleur1 { 		/* Fushia */
