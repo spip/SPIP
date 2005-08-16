@@ -1021,7 +1021,10 @@ function extraire_attribut($balise, $attribut, $complet = false) {
 function inserer_attribut($balise, $attribut, $val, $texte_backend=true) {
 	// preparer l'attribut
 	if ($texte_backend) $val = texte_backend($val); # supprimer les &nbsp; etc
-	$insert = " $attribut=\"$val\" ";
+
+	// echapper les ' pour eviter tout bug
+	$val = str_replace("'", "&#39;", $val);
+	$insert = " $attribut='$val' ";
 
 	list($old,$r) = extraire_attribut($balise, $attribut, true);
 
