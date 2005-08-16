@@ -74,7 +74,6 @@ a.calendrier-annee:hover {
 .calendrier-td { 
 	width: 14%;
   	vertical-align: top;
-	background-color: #eeeeee;
  }
 
 .calendrier-th { 
@@ -141,9 +140,11 @@ a.calendrier-annee:hover {
 .calendrier-cadreagenda { 
 	visibility: hidden;
 	width: 100%;
+	position: absolute; 
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border: 0px;
+	background-color: white;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
  }
