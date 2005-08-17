@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modificar esta rubrica',
 'admin_recalculer' => 'Recompor esta p&aacute;gina',
 'alerte_maj_impossible' => '<b>Alerta&nbsp;!</b> A actualiza&ccedil;&atilde;o da base MySQL para a vers&atilde;o @version@ &eacute;  imposs&iacute;vel, talvez por causa de um problema de direito de modifica&ccedil;&atilde;o na base de dados. Contactar com o seu servi&ccedil;o de hospedagem.',
+'analyse_xml' => 'An&aacute;lise XML',
 'avis_archive_incorrect' => 'o ficheiro arquivo n&atilde;o &eacute; um ficheiro SPIP',
 'avis_archive_invalide' => 'o ficheiro arquivo n&atilde;o &eacute; v&aacute;lido ',
 'avis_attention' => ' ATEN&Ccedil;&Acirc;O!',
