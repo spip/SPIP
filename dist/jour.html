@@ -1,8 +1,8 @@
 <BOUCLE_jour(ARTICLES)
-    {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}>[
-(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 'calendrier-couleur1'})
-]</BOUCLE_jour>
-[(#DATE|agenda_memo{'', '', '', 'calendrier-couleur1', 'jour'})]
-</B_jour>
-<:aucun_article:>
-<//B_jour>
+    {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}{par date}
+>[(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 
+  [(#COMPTEUR_BOUCLE|
+	alterner{'calendrier-couleur1', 'calendrier-couleur3'})]})]</BOUCLE_jour>[(#TOTAL_BOUCLE|
+	agenda_affiche{'jour', 'calendrier-couleur1', 'calendrier-couleur3'}
+)][(#TOTAL_BOUCLE|
+	choixsivide{<:aucun_article:>,''})]<//B_jour>

@@ -715,46 +715,63 @@ function agenda_connu($type)
   return in_array($type, array('jour','mois','semaine','periode')) ? ' ' : '';
 }
 
-// A chaque appel de moins 5 arguments,cette fonction memorise un evenement
-// decrit par une date, un descriptif, un titre et une URL. 
-// A l'appel avec 6 arguments, l'ensemble sera mis en page selon le type
-// indique par le 6e argument et le style CSS indiquee par le 5e 
-// Ce 5e argument sert aussi d'index de memorisation
-// pour avoir plusieurs calendriers dans une meme page sans interferences
 
+// Cette fonction memorise dans un tableau indexe par son 5e arg
+// un evenement decrit par les 4 autres (date, descriptif, titre, URL). 
+// Appellee avec une date nulle, elle renvoie le tableau construit.
+// l'indexation par le 5e arg autorise plusieurs calendriers dans une page
 
-function agenda_memo($date='', $descriptif='', $titre='', $url='', $cal='', $type='')
+function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 {
   static $agenda = array();
-  if (!$type)
-    {
-      $idate = date_ical($date);
-      $agenda[$cal][(date_anneemoisjour($date))][] =  array(
+  if (!$date) return $agenda;
+  $idate = date_ical($date);
+  $cal = trim($cal); // func_get_args (filtre alterner) rajoute \n !!!!
+  $agenda[$cal][(date_anneemoisjour($date))][] =  array(
 			'CATEGORIES' => $cal,
 			'DTSTART' => $idate,
 			'DTEND' => $idate,
                         'DESCRIPTION' => texte_script($descriptif),
                         'SUMMARY' => texte_script($titre),
                         'URL' => $url);
-    // signifier qu'il y a qqch
-      return " ";
-  }  else {
-    if ($type != 'periode')
-      $evt = array('', $agenda[$cal]);
-    else
+  // toujours retourner vide pour qu'il ne se passe rien
+  return "";
+}
+
+// Cette fonction recoit un nombre d'evenements, un type de calendriers
+// et une suite de noms N.
+// Elle demande a la fonction la precedente son tableau
+// et affiche selon le type les elements indexes par N dans ce tableau.
+// Ces noms N sont aussi des classes CSS utilisees par http_calendrier_init
+
+function agenda_affiche($i)
+{
+  $args = func_get_args();
+  $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
+  if (!$nb) return "";
+  $type = array_shift($args);
+  $agenda = agenda_memo(0);
+  $evt = array();
+  foreach ($args as $k) {  
+      if (is_array($agenda[$k]))
+	foreach($agenda[$k] as $d => $v) { 
+	  $evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
+	}
+  }
+  if ($type != 'periode')
+      $evt = array('', $evt);
+  else
       {
-	$d = array_keys($agenda[$cal]);
+	$d = array_keys($evt);
 	$mindate = min($d);
 	$min = substr($mindate,6,2);
 	$max = $min + ((strtotime(max($d)) - strtotime($mindate)) / (3600 * 24));
 	if ($max < 31) $max = 0;
-	$evt = array('', $agenda[$cal], $min, $max);
+	$evt = array('', $evt, $min, $max);
 	$type = 'mois';
       }
     include('ecrire/inc_calendrier.php');
     return http_calendrier_init('', $type, '', '', '', $evt);
-    }
-
 }
 
 //

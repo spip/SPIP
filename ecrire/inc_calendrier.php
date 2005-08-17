@@ -298,6 +298,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 
 	$total = '';
 	$ligne = '';
+	$today=date("Ymd");
 	for ($j=$premier_jour; $j<=$dernier_jour; $j++){
 		$nom = mktime(1,1,1,$mois,$j,$annee);
 		$jour = date("d",$nom);
@@ -315,20 +316,18 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 			    $ligne = $init = '';
 			  }
 		
-		if ($amj == date("Ymd")) {
+		if ($amj == $today) {
 			$couleur_lien = "red";
 			$couleur_fond = "white";
 		}
-		$evts = $evenements[$amj];
-		if ($evts) {
-		  $res = '';
+		$res = '';
+		if ($evts = $evenements[$amj]) {
 		  foreach ($evts as $evenement)
 		    {
 		      $res .= isset($evenement['DTSTART']) ?
 			http_calendrier_avec_heure($evenement, $amj) :
 			http_calendrier_sans_heure($evenement);
 		    }
-		  $evts = $res;
 		}
 
 		$ligne .= "\n\t\t<td\tclass='calendrier-td'
@@ -338,7 +337,7 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		   " border-$spip_lang_left: 1px solid $couleur_claire;") .
 		  "'>" .
 		  http_calendrier_mois_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre, $couleur_lien) .
-		  $evts .
+		  $res .
 		  "\n\t</td>";
 	}
 	return  $total . ($ligne ? "\n<tr>$ligne\n</tr>" : '');
@@ -705,9 +704,9 @@ function http_calendrier_ics_grille($debut, $fin, $dimheure, $dimjour, $fontsize
 	for ($i = $debut; $i < $fin; $i++) {
 		for ($j=0; $j < $slice; $j++) 
 		{
-			$gras = "calendrier-heure" . ($j  ? "face" : "pile");
-			
-			$total .= "\n<div class='$gras' style='$spip_lang_left: 0px; top: ".
+			$total .= "\n<div class='calendrier-heure" .
+				($j  ? "face" : "pile") .
+				"' style='$spip_lang_left: 0px; top: ".
 				calendrier_top ("$i:".sprintf("%02d",floor(($j*60)/$slice)), $debut, $fin, $dimheure, $dimjour, $fontsize) .
 				"px;'>$i:" .
 				sprintf("%02d",floor(($j*60)/$slice)) . 
