@@ -155,7 +155,7 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 	if (!$lpartie_cal) $lpartie_cal = $partie_cal;
 	list($script, $ancre) = 
 	  calendrier_retire_args_ancre($script ? $script :
-						  $GLOBALS['REQUEST_URI']); 
+						  $GLOBALS['clean_link']->getUrl()); 
 	if (!_DIR_RESTREINT) http_calendrier_titre($time, $ltype);
 	if (!$evt) {
 	  $g = 'sql_calendrier_' . $ltype;
