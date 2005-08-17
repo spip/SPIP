@@ -3,6 +3,5 @@
 >[(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE,
   [(#COMPTEUR_BOUCLE|
 	alterner{'calendrier-couleur2', 'calendrier-couleur4'})]})]</BOUCLE_semaine>[(#TOTAL_BOUCLE|
-	agenda_affiche{'semaine', 'calendrier-couleur2','calendrier-couleur4'}
-)][(#TOTAL_BOUCLE|
-	choixsivide{<:aucun_article:>,''})]<//B_semaine>
+	agenda_affiche{<:aucun_article:>, 'semaine', 'calendrier-couleur2','calendrier-couleur4'}
+)]<//B_semaine>
