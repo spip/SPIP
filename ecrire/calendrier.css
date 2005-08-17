@@ -110,7 +110,7 @@ a.calendrier-annee:hover {
   	vertical-align: top;
  }
 
-.calendrier-jour { 
+.calendrier-jour {
 	position: relative; 
 	color: #999999;
 	background-color: white;
@@ -157,6 +157,11 @@ a.calendrier-annee:hover {
 	padding: 5px;
 	text-align: center; 
 	font-weight: bold;
+ }
+
+.calendrier-evenement { 
+	padding: 2px;
+	margin-top: 2px;
  }
 
 .calendrier-heurepile { 
@@ -220,6 +225,10 @@ a.calendrier-annee:hover {
 	width: 14px;
 	height: 7px;
 	border: 0px;
+}
+
+.calendrier-noir  { 		/*  style anar */
+	color: black;
 }
 
 .calendrier-nb  { 		/*  style cinemat(yp)ographe */

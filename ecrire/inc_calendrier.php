@@ -291,12 +291,13 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 	  $script .= (strpos($script,'?') ? '&' : '?');
 
 	// affichage du debut de semaine hors periode
-	$ligne = '';
+	$init = '';
 	$debut = date("w",mktime(1,1,1,$mois,$premier_jour,$annee));
 	for ($i=$debut ? $debut : 7;$i>1;$i--)
-	  {$ligne .= "\n\t<td style=\"border-bottom: 1px solid $couleur_claire;\">&nbsp;</td>";}
+	  {$init .= "\n\t<td style=\"border-bottom: 1px solid $couleur_claire;\">&nbsp;</td>";}
 
 	$total = '';
+	$ligne = '';
 	for ($j=$premier_jour; $j<=$dernier_jour; $j++){
 		$nom = mktime(1,1,1,$mois,$j,$annee);
 		$jour = date("d",$nom);
@@ -307,16 +308,12 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$couleur_lien = "black";
 		$couleur_fond = "";
 
-		if ($jour_semaine == 0) {
-			$couleur_fond = $couleur_claire;
-		} else {
-			if ($jour_semaine==1) 
+		if ($jour_semaine == 0) $couleur_fond = $couleur_claire;
+		else if ($jour_semaine==1)
 			  { 
-			    $total .= "\n<tr>$ligne\n</tr>";
-			    $ligne = '';
-			    $border_left = " border-$spip_lang_left: 1px solid $couleur_claire;";
-			  } else $border_left = "";
-		}
+			    $total .= "\n<tr>$init$ligne\n</tr>";
+			    $ligne = $init = '';
+			  }
 		
 		if ($amj == date("Ymd")) {
 			$couleur_lien = "red";
@@ -327,11 +324,9 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		  $res = '';
 		  foreach ($evts as $evenement)
 		    {
-		      list($ev, $style, $class) =
-			isset($evenement['DTSTART']) ?
+		      $res .= isset($evenement['DTSTART']) ?
 			http_calendrier_avec_heure($evenement, $amj) :
 			http_calendrier_sans_heure($evenement);
-		      $res .= "\n<div class='$class' style='$style'>$ev\n</div>\n";
 		    }
 		  $evts = $res;
 		}
@@ -339,7 +334,9 @@ function http_calendrier_mois_sept($annee, $mois, $premier_jour, $dernier_jour,$
 		$ligne .= "\n\t\t<td\tclass='calendrier-td'
 			style='height: 100px; border-bottom: 1px solid $couleur_claire; border-$spip_lang_right: 1px solid $couleur_claire;" .
 		  ($couleur_fond ? " background-color: $couleur_fond;" : "") .
-		  "$border_left'>" .
+		  ($ligne ? "" :
+		   " border-$spip_lang_left: 1px solid $couleur_claire;") .
+		  "'>" .
 		  http_calendrier_mois_clics($annee_en_cours, $mois_en_cours, $jour, $script, $ancre, $couleur_lien) .
 		  $evts .
 		  "\n\t</td>";
@@ -468,13 +465,15 @@ function http_calendrier_semaine_sept($annee, $mois, $jour, $echelle, $partie_ca
 
 	$today=date("Ymd");
 	$total = '';
-	$style = "border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire;";
+	$style = "border-$spip_lang_left: 1px solid $couleur_claire; border-bottom: 1px solid $couleur_claire; border-top: 0px; border-right: 0px;";
 	for ($j=$jour; $j<$jour+7;$j++){
 		$v = mktime(0,0,0,$mois, $j, $annee);
 		$total .= "\n<td class='calendrier-td'>" .
 		  http_calendrier_ics($annee,$mois,$j, $echelle, $partie_cal, $largeur, $evt, ($style . ( (date("w",$v)==0 && isset($couleur_claire)) ? 
 			  " background-color: $couleur_claire;" :
-													  ((date("Ymd", $v) == $today) ? " background-color: white;" : "")))) .
+			  ((date("Ymd", $v) == $today) ? 
+			   " background-color: white;" :
+			   " background-color: #eeeeee;")))) .
 		  "\n</td>";
 	}
 	return "\n<tr class='calendrier-verdana10'>$total</tr>";
@@ -654,7 +653,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			if ($sum)
 			  $sum = "<span class='calendrier-verdana10'><b>$sum</b>$lieu $perso</span>";
 			if (($largeur > 90) && $desc)
-			  $sum .=  "\n<br /><span style='color: black'>$desc</span>";
+			  $sum .=  "\n<br /><span class='calendrier-noir'>$desc</span>";
 			$colors = $evenement['CATEGORIES'];
 
 			$total .= "\n<div class='calendrier-arial10 $colors' 
@@ -739,9 +738,7 @@ function http_calendrier_ics_trois($evt, $largeur, $dimjour, $fontsize, $border)
 	foreach ($types as $k => $v) {
 	  $res2 = '';
 	  foreach ($v as $evenement) {
-	    list($ev, $style, $class) =
-	      http_calendrier_sans_heure($evenement);
-	    $res2 .= "\n<div class='$class' style='$style'>$ev\n</div>\n";
+	    $res2 .= http_calendrier_sans_heure($evenement);
 	  }
 	  $res .= "\n<div class='calendrier-verdana10 calendrier-titre'>".
 	    _T($k) .
@@ -766,9 +763,8 @@ function http_calendrier_ics_titre($annee, $mois, $jour,$script)
 	return "<div class='calendrier-arial10 calendrier-titre'>" .
 	  http_href("$script?type=jour&" .
 		    calendrier_args_date($annee, $mois, $jour),
-		      affdate_jourcourt("$annee-$mois-$jour"),
-		      '',
-		      'color:black;') .
+		    affdate_jourcourt("$annee-$mois-$jour"),
+		    '', '', 'calendrier-noir') .
 	  "</div>";
 }
 
@@ -807,12 +803,7 @@ function http_calendrier_sans_date($annee, $mois, $evenements)
   $res = "\n<div class='calendrier-arial10 calendrier-titre'>".
     _T('info_mois_courant').
     "</div>";
-  foreach ($r as $evenement)
-      {
-	list($ev, $style, $class) =
-	  http_calendrier_sans_heure($evenement);
-	$res .= "\n<div class='$class' style='$style'>$ev\n</div>\n"; 
-      }
+  foreach ($r as $evenement) $res .= http_calendrier_sans_heure($evenement);
   return $res;
 }
 
@@ -832,7 +823,7 @@ function http_calendrier_sans_heure($evenement)
 	if ($evenement['URL']) {
 		$sum = http_href($evenement['URL'], $sum, $desc);
 	}
-	return array($sum, "color: black", 'calendrier-arial10');
+	return "\n<div class='calendrier-noir calendrier-arial10'>$sum\n</div>\n"; 
 }
 
 function http_calendrier_avec_heure($evenement, $amj)
@@ -841,18 +832,17 @@ function http_calendrier_avec_heure($evenement, $amj)
 	$jour_fin = substr($evenement['DTEND'], 0, 8);
 	if ($jour_fin <= 0) $jour_fin = $jour_debut;
 	if (($jour_debut <= 0) OR ($jour_debut > $amj) OR ($jour_fin < $amj))
-	  return array();
+	  return "";
 	
 	$desc = propre($evenement['DESCRIPTION']);
 	$sum = $evenement['SUMMARY'];
 	if (!$sum) $sum = $desc;
-	$sum = "<span style='color: black'>" .
+	$sum = "<span class='calendrier-noir'>" .
 	  ereg_replace(' +','&nbsp;', typo($sum)) .
 	  "</span>";
 	if ($evenement['URL'])
 	  $sum = http_href($evenement['URL'], $sum, $desc);
-	$radius_top = " radius-top";
-	$radius_bottom = " radius-bottom";
+	$opacity = "";
 	$deb_h = substr($evenement['DTSTART'],-6,2);
 	$deb_m = substr($evenement['DTSTART'],-4,2);
 	$fin_h = substr($evenement['DTEND'],-6,2);
@@ -863,28 +853,21 @@ function http_calendrier_avec_heure($evenement, $amj)
 	    { $deb = '<b>' . $deb_h . ':' . $deb_m . '</b> ';}
 	  else { 
 	    $deb = '...'; 
-	    $radius_top = "";
 	  }
 	  
 	  if ((($fin_h > 0) OR ($fin_m > 0)) AND $amj == $jour_fin)
 	    { $fin = '<b>' . $fin_h . ':' . $fin_m . '</b> ';}
 	  else { 
 	    $fin = '...'; 
-	    $radius_bottom = "";
 	  }
 	  
 	  if ($amj == $jour_debut OR $amj == $jour_fin) {
 	    $sum = "<div>$deb-$fin</div>$sum";
-	    $opacity = "";
+	  } else {
+	    $opacity ='calendrier-opacity';
 	  }
-	  else {
-	    $opacity = " -moz-opacity: 0.5; filter: alpha(opacity=50);";
-	  }
-	} else { $opacity = "";	}
-
-	return array($sum,
-		     "padding: 2px; margin-top: 2px;$opacity",
-		     "calendrier-arial10 " . $evenement['CATEGORIES']);
+	}
+	return "\n<div class='$opacity calendrier-evenement calendrier-arial10 " . $evenement['CATEGORIES'] ."'>$sum\n</div>\n"; 
 }
 
 function http_calendrier_aide_mess()
