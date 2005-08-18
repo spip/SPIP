@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Rediger afsnit',
 'admin_recalculer' => 'Opdater side',
 'alerte_maj_impossible' => '<b>Advarsel!</b> Opdatering af MySQL databasen til version @version@&#381;mislykkedes, m&aring;ske p&aring; grund af et problem med rettigheder i forhold til databasen. Kontakt venligst din webhotel.',
+'analyse_xml' => '<NEW>Analyse XML',
 'avis_archive_incorrect' => 'arkivfilen er ikke en gyldig SPIP fil',
 'avis_archive_invalide' => 'arkivfilen er ikke gyldig',
 'avis_attention' => 'Advarsel!',
@@ -32,7 +33,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_echec_syndication_02' => 'Syndication mislykket: kunne ikke f&aring; forbindelse til den valgte datakilde.',
 'avis_erreur' => 'Fejl: se nedenfor\';',
 'avis_erreur_connexion' => 'Ingen forbindelse',
-'avis_erreur_cookie' => 'cookie-problem',
+'avis_erreur_cookie' => '<MODIF>cookie-problem',
 'avis_erreur_fonction_contexte' => 'Programfejl. Denne funktion burde ikke kaldes i denne sammenh&aelig;ng.',
 'avis_erreur_mysql' => 'MySQL fejl',
 'avis_erreur_sauvegarde' => 'Fejl i sikkerhedskopi (@type@ @id_objet@)!',
@@ -60,6 +61,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_changer' => 'Opdater',
 'bouton_chercher' => 'S&oslash;g',
 'bouton_choisir' => 'V&aelig;lg',
+'bouton_enregistrer' => '<NEW>Enregistrer',
 'bouton_radio_desactiver_messagerie_interne' => 'Sl&aring; intern meddelelsesfunktion fra',
 'bouton_radio_envoi_annonces' => 'Send redaktionelle nyheder',
 'bouton_radio_non_envoi_annonces' => 'Send ingen nyheder',
@@ -187,10 +189,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // F
+'fichier_introuvable' => '<NEW>Fichier @fichier@ introuvable',
 'form_deja_inscrit' => 'Du har allerede tilmeldt dig.',
 'form_email_non_valide' => 'Din e-mail-adresse er ikke gyldig.',
 'form_forum_access_refuse' => 'Du har ikke mere adgang til dette websted.',
-'form_forum_bonjour' => 'Goddag,',
+'form_forum_bonjour' => '<MODIF>Goddag,',
 'form_forum_email_deja_enregistre' => 'Denne e-mail-adresse er allerede tilmeldt. Du kan derfor benytte din s&aelig;dvanlige adgangskode.',
 'form_forum_identifiant_mail' => 'Dine nye adgangsoplysninger er netop sendt til dig via e-mail.',
 'form_forum_identifiants' => 'Personlige adgangsoplysninger',
@@ -249,8 +252,8 @@ Tak for din deltagelse
 'form_prop_sujet' => 'Emne',
 'form_prop_url_site' => 'Webstedets URL',
 'forum_acces_refuse' => 'Du har ikke mere adgang til disse forummer',
-'forum_attention_dix_caracteres' => '<b>Advarsel!</b> dit indl&aelig;g er mindre end ti tegn langt.',
-'forum_attention_trois_caracteres' => '<b>Advarsel!</b> dit emne er mindre end tre tegn langt.',
+'forum_attention_dix_caracteres' => '<MODIF><b>Advarsel!</b> dit indl&aelig;g er mindre end ti tegn langt.',
+'forum_attention_trois_caracteres' => '<MODIF><b>Advarsel!</b> dit emne er mindre end tre tegn langt.',
 'forum_avez_selectionne' => 'Du har valgt:',
 'forum_cliquer_retour' => 'Klik  <a href=\'@retour_forum@\'>her</a> for at forts&aelig;tte.',
 'forum_forum' => 'forum',
@@ -277,7 +280,7 @@ Tak for din deltagelse
 		skal du tilmelde dig. Indtast venligst nedenfor de
 		personlige adgangsoplysninger, du har f&aring;et tilsendt.
 		Hvis du ikke allerede har tilmeldt dig, skal du g&oslash;re det.',
-'forum_vous_inscrire' => 'tilmeld dig </a> f&oslash;rst.',
+'forum_vous_inscrire' => '<MODIF>tilmeld dig </a> f&oslash;rst.',
 
 
 // I
@@ -373,8 +376,9 @@ Tak for din deltagelse
 'info_contact_developpeur' => 'Kontakt en udvikler.',
 'info_contenance' => 'Dette websted indeholder:',
 'info_contribution' => 'indl&aelig;g i fora',
-'info_copyright' => 'er fri software der distribueres <a href=\'license.txt\'>under GPL licens.</a>',
+'info_copyright' => '@spip@ er fri software der distribueres @lien_gpl@.',
 'info_copyright_doc' => 'For yderligere oplysninger bes&oslash;g webstedet <a href=\'http://www.spip.net/da\'>http://www.spip.net/da</a>.',
+'info_copyright_gpl' => 'under GPL licens',
 'info_cours_edition' => 'Artikler undervejs',
 'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',
 'info_creer_repertoire_2' => 'i underkataloget <b>ecrire/data/</b>, og derefter',
