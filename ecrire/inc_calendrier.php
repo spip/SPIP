@@ -634,7 +634,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			$haut = calendrier_top ("$heure_debut:$minutes_debut", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			$bas =  !$e ? $haut :calendrier_top ("$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
 			$hauteur = calendrier_height ("$heure_debut:$minutes_debut", "$heure_fin:$minutes_fin", $debut, $fin, $dimheure, $dimjour, $fontsize);
-			if ($bas_prec > $haut) $decale += $modif_decalage;
+			if ($bas_prec >= $haut) $decale += $modif_decalage;
 			else $decale = (4 * $fontsize);
 			if ($bas > $bas_prec) $bas_prec = $bas;
 			$url = $evenement['URL']; 
