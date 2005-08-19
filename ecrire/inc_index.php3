@@ -180,7 +180,7 @@ function indexer_elements_associes($objet, $id_objet, $associe, $valeur) {
 				spip_auteurs_".table_objet($objet)." AS lien
 				WHERE lien.".id_table_objet($objet)."=$id_objet
 				AND auteurs.id_auteur=lien.id_auteur");
-			while ($row_doc = spip_fetch_array($r)) {
+			while ($row = spip_fetch_array($r)) {
 				indexer_chaine($row['nom'], 1 * $valeur, 2);
 			}
 			break;
