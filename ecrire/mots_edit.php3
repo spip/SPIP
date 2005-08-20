@@ -32,17 +32,16 @@ if ($connect_statut == '0minirezo') {
 		if ($new == 'oui' && $id_groupe) {
 		  $id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");
 
-
 			// ajouter le mot a l'article
 			if (settype($ajouter_id_article, 'integer') AND ($ajouter_id_article>0))
-				spip_query("INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ($id_mot, $ajouter_id_article)");
+				spip_query("INSERT INTO spip_mots_$table (id_mot, $id_table) VALUES ($id_mot, $ajouter_id_article)");
 		}
 
 		$titre_mot = addslashes($titre_mot);
 		$texte = addslashes($texte);
 		$descriptif = addslashes($descriptif);
 		$type = addslashes(corriger_caracteres($type));
-		$result = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe='$id_groupe'");
+		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe='$id_groupe'");
 		if ($row = spip_fetch_array($result))
 			$type = addslashes(corriger_caracteres($row['titre']));
 
@@ -213,10 +212,12 @@ if ($connect_statut =="0minirezo"){
 	if ($id_mot)
 		echo "<INPUT TYPE='Hidden' NAME='id_mot' VALUE='$id_mot'>\n";
 	else if ($new=='oui')
-		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>\n";
-	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\">\n";
-	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui'>\n";
-	echo "<INPUT TYPE='Hidden' NAME='ajouter_id_article' VALUE=\"$ajouter_id_article\">\n";
+		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui' />\n";
+	echo "<INPUT TYPE='Hidden' NAME='redirect' VALUE=\"$redirect\" />\n";
+	echo "<INPUT TYPE='Hidden' NAME='redirect_ok' VALUE='oui' />\n";
+	echo "<INPUT TYPE='Hidden' NAME='table' VALUE='$table' />\n";
+	echo "<INPUT TYPE='Hidden' NAME='id_table' VALUE='$id_table' />\n";
+	echo "<INPUT TYPE='Hidden' NAME='ajouter_id_article' VALUE=\"$ajouter_id_article\" />\n";
 
 	$titre_mot = entites_html($titre_mot);
 	$descriptif = entites_html($descriptif);
@@ -225,7 +226,7 @@ if ($connect_statut =="0minirezo"){
 	echo "<B>"._T('info_titre_mot_cle')."</B> "._T('info_obligatoire_02');
 	echo aide ("mots");
 
-	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus>";
+	echo "<BR><INPUT TYPE='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus />";
 
 	// dans le groupe...
 	$query_groupes = "SELECT * FROM spip_groupes_mots ORDER BY titre";
