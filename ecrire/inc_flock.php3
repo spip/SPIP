@@ -100,12 +100,15 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false) {
 	$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
 	$ok = ($s == $a);
-	if (!$ok)
-		spip_log("echec ecriture fichier $fichier");
 
 	// liberer le verrou et fermer le fichier
 	@flock($fp, LOCK_UN);
 	@fclose($fp);
+
+	if (!$ok) {
+		spip_log("echec ecriture fichier $fichier");
+		@unlink($fichier);
+	}
 
 	return $ok;
 }
