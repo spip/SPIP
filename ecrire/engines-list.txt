@@ -17,7 +17,7 @@ rien=
 [Google]
 (q|as_q)=
 www\.google\.(.*)
-web.toile.com
+(web|www).toile.com
 
 [Voila]
 (kw|rdata)=
@@ -59,6 +59,7 @@ www.mirago\.([a-z]+)$
 s=
 (.*)\.nomade\.fr
 (.*)\.nomade\.tiscali\.fr
+(.*)\.nomade\.aliceadsl\.fr
 
 [Lycos]
 query=
@@ -136,6 +137,19 @@ www\.moteur-recherche\.net
 kw=
 www\.reacteur\.com
 
+[francesurf]
+q=
+www\.francesurf\.net
+
+
+
+#
+# Dmoz
+#
+[dmoz.org]
+rien=
+(.*\.)?dmoz\.org
+
 
 
 #
@@ -150,4 +164,5 @@ courrielweb\.cmaisonneuve\.qc\.ca
 (.*)mail\.(.*)\.([a-z]+)$
 webmail([0-9]*)\.wanadoo\.fr
 www\.laposte\.net
+mail([0-9]*)\.voila\.fr
 
