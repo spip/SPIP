@@ -239,7 +239,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_ajout_participant' => 'Lo participant seguent es apondut:',
 'info_ajouter_rubrique' => 'Apondre una autra rubrica d\'administrar:',
 'info_annonce_nouveautes' => 'Anonci de las novetats',
-'info_annuler_blocage_priori' => 'Anullar queu blocatge a pri&ograve;ri',
 'info_anterieur' => 'anteriora',
 'info_appliquer_choix_moderation' => 'Aplicar quela chausida de moderacion:',
 'info_article' => 'article',
@@ -261,6 +260,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_avertissement' => 'Av&iacute;s',
 'info_base_installee' => 'L\'estructura de v&ograve;stra basa de donadas es installada.',
 'info_base_restauration' => 'La basa es en cors de restauracion.',
+'info_bloquer' => 'blocar',
 'info_breves' => 'V&ograve;stre sit utiliza lo sistema de brevas?',
 'info_breves_03' => 'brevas',
 'info_breves_liees_mot' => 'Las brevas liadas a queu mot clau',
@@ -298,7 +298,6 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_delet_mots_cles' => 'Avetz demandat de suprimir lo mot clau
 <B>@titre_mot@</b> (@type_mot@). Queu mot clau es liat a
  <b>@texte_lie@</b>. Devetz confirmar quela decision:',
-'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_derniere_etape' => 'Darriera estapa: <B>Quo es \'chabat!',
 'info_derniere_syndication' => 'La darriera sindicacion de queu sit se faguet lo',
 'info_derniers_articles_publies' => 'V&ograve;stres darriers articles publicats en linha',
@@ -465,6 +464,7 @@ L\'administrator dau sistema o de la ret vos deu poder fornir
 'info_procedure_maj_version' => 'Chau lan&ccedil;ar la procedura d\'actualizacion per adaptar
  la basa de donadas a la version novela d\'SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publicar',
 'info_publies' => 'V&ograve;stres articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'a las esqueletas de v&ograve;stre sit web se prevei lo registrament de vesitaires sens acc&egrave;s a l\'espaci privat, volhatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, las estadisticas de las vesitas?',
@@ -726,6 +726,12 @@ una color indica lor estat:',
 
 // S
 'statut_admin_restreint' => '(admin. restrench)',
+'syndic_choix_moderation' => 'Que se p&ograve;t far emb los liams venents que provenon de queu sit?',
+'syndic_choix_oublier' => 'Que se p&ograve;t far emb los liams que figuran pas pus dins lo fichier de sindicacion?',
+'syndic_lien_obsolete' => 'liam obsolet',
+'syndic_option_miroir' => 'los blocar sus lo c&ograve;p',
+'syndic_option_oubli' => 'los esfa&ccedil;ar (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => 'Opcions de sindicacion:',
 
 
 // T
@@ -786,8 +792,6 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Afichar brisa de data de publicacion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA&nbsp;:',
-'texte_demander_blocage_priori' => 'Los liams seguents
- que provenen de queu sit ser&aacute;n blocats a pri&ograve;ri.',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_documents_joints' => 'Podetz autorizar que s\'apondan daus documents (fichiers burotics, imatges,
@@ -827,8 +831,6 @@ qu\'apareis quand la murja passa sus lo t&iacute;tol.',
     es possible puei de 
    desblocar chasque liam individualament, o de
    chausir, sit per sit, de blocar los liams avenidors.',
-'texte_liens_syndication' => 'Los liams venents que 
-   provenen de queu sit s\'afichar&aacute;n c&ograve;p sec dins lo sit public.',
 'texte_login_ldap_1' => '(Laissar voide per un acc&egrave;s anonim, o picar lo chamin complet, per exemple &laquo;<tt>uid=fabre, ou=usanciers, dc=mon-domeni, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Atencion! Quo es lo login emb lo quau setz aura connectat/ada. 
  Utilizatz queste formulari emb precaucion...',

@@ -242,8 +242,6 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'info_ajout_participant' => 'A k&ouml;vetkez&#337; r&eacute;sztvev&#337; hozz&aacute; van t&eacute;ve&nbsp;:',
 'info_ajouter_rubrique' => '&Uacute;jabb adminisztr&aacute;land&oacute; rovat l&eacute;trehoz&aacute;sa&nbsp;:',
 'info_annonce_nouveautes' => 'Az &uacute;jdons&aacute;gok k&ouml;zl&eacute;se',
-'info_annuler_blocage_priori' => 'T&ouml;r&ouml;lni
-    ezt az eleve blokkol&aacute;st',
 'info_anterieur' => 'el&ouml;z&#337;',
 'info_appliquer_choix_moderation' => 'Alkalmazni ezt a moder&aacute;l&aacute;si v&aacute;laszt&aacute;st&nbsp;:',
 'info_article' => 'cikk',
@@ -302,8 +300,6 @@ SPIP dokument&aacute;ci&oacute;ja (franci&aacute;ul)</a>.',
 'info_delet_mots_cles' => 'K&eacute;rte, hogy t&ouml;r&ouml;lve legyen a kulcssz&oacute;
 <B>@titre_mot@</B> (@type_mot@). Mivel ez a kulcssz&oacute; ehhez kapcsol&oacute;dik
 <b>@texte_lie@</b>, meg kell er&#337;s&iacute;teni ezt a d&ouml;nt&eacute;st&nbsp;:',
-'info_demander_blocage_priori' => 'K&eacute;rni
-    az eleve blokkol&aacute;st',
 'info_derniere_etape' => 'Utols&oacute; l&eacute;p&eacute;s : <B>V&eacute;ge van !',
 'info_derniere_syndication' => 'A honlap legutols&oacute; szindik&aacute;l&aacute;sa ker&uuml;lt sor',
 'info_derniers_articles_publies' => 'Az &Ouml;n legutols&oacute; publik&aacute;lt cikkei',
@@ -780,8 +776,6 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_date_publication_anterieure' => 'El&ouml;z&#337; szerkeszt&eacute;s d&aacute;tuma&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Nem kell megjelen&iacute;teni az el&ouml;z&#337; szerkeszt&eacute;s(ek) id&#337;pontj&aacute;t.',
 'texte_date_publication_article' => 'NYILV&Aacute;NOS PUBLIK&Aacute;L&Aacute;S ID&#336;PONTJA&nbsp;:',
-'texte_demander_blocage_priori' => 'A leend&#337; linkek, melyek
-    sz&aacute;rmaznak err&#337;l a honlapr&oacute;l eleve tiltva lesznek.',
 'texte_descriptif_petition' => 'Az al&aacute;&iacute;r&aacute;sgy&#369;jt&eacute;s le&iacute;r&aacute;sa',
 'texte_descriptif_rapide' => 'R&ouml;vid le&iacute;r&aacute;s',
 'texte_documents_joints' => 'Engedely&eacute;zheti a dokumentumok hozz&aacute;ad&aacute;s&aacute;t (irodai f&aacute;jlok, k&eacute;pek,
@@ -813,7 +807,6 @@ SPIP &uacute;jrat&eacute;l&eacute;p&iacute;t&eacute;s&eacute;t egy &uacute;jabb 
 'texte_liens_sites_syndiques' => 'A szindik&aacute;lt honlapokr&oacute;l sz&aacute;rmaz&oacute; linkeket lehetnek eleve tiltva&nbsp;; a lenti be&aacute;ll&iacute;t&aacute;s jelzi a szindik&aacute;lt honlapok alap&eacute;rtelmezett be&aacute;ll&iacute;t&aacute;s&aacute;t l&eacute;trehoz&aacute;suk ut&aacute;n.
 Egy&eacute;bkent minden linket lehet ut&oacute;lag enged&eacute;lyezni egyenk&eacute;nt, vagy honlap szerint tiltani a leend&#337; linkeket.
 ',
-'texte_liens_syndication' => 'E honlapr&oacute;l sz&aacute;rmaz&oacute; leend&#337; linkek azonnal lesznek publik&aacute;lva a nyilv&aacute;nos honlapon.',
 'texte_login_ldap_1' => '(N&eacute;vtelen hozz&aacute;f&eacute;r&eacute;shez &uuml;resen kell hagyni, vagy be&iacute;rni a teljes utat p&eacute;ld&aacute;ul &laquo;&nbsp;<tt>uid=azennevem, ou=users, dc=azen-domainem, dc=com</tt>&nbsp;&raquo;.)',
 'texte_login_precaution' => 'Vigy&aacute;zat&nbsp;! Ez az a login, amivel jelenleg csatlakozva van.
  Ezt az &#369;rlapot &oacute;vatosan haszn&aacute;lja...',

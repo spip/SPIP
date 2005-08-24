@@ -239,7 +239,6 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_ajout_participant' => 'Lo participant seguent es apondut:',
 'info_ajouter_rubrique' => 'Apondre una autra rubrica d\'administrar:',
 'info_annonce_nouveautes' => 'Anonci dei novetats',
-'info_annuler_blocage_priori' => 'Anullar aqueu blocatge a pri&ograve;ri',
 'info_anterieur' => 'anteriora',
 'info_appliquer_choix_moderation' => 'Aplicar aquela chausida de moderacion:',
 'info_article' => 'article',
@@ -261,6 +260,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_avertissement' => 'Av&iacute;s',
 'info_base_installee' => 'L\'estructura de v&ograve;stra basa de donadas es installada.',
 'info_base_restauration' => 'La basa es en cors de restauracion.',
+'info_bloquer' => 'blocar',
 'info_breves' => 'V&ograve;stre sit utiliza lo sist&egrave;ma de br&egrave;vas?',
 'info_breves_03' => 'br&egrave;vas',
 'info_breves_liees_mot' => 'Lei br&egrave;vas liadas a aqueu mot clau',
@@ -298,7 +298,6 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_delet_mots_cles' => 'Av&egrave;tz demandat de suprimir lo mot clau
  <B>@titre_mot@</b> (@type_mot@). Aqueu mot clau es ligat a
  <b>@texte_lie@</b>. Dev&egrave;tz confirmar aquela decision:',
-'info_demander_blocage_priori' => 'Demandar un blocatge a pri&ograve;ri',
 'info_derniere_etape' => 'Darriera estapa: <B>Es acabat!',
 'info_derniere_syndication' => 'La darriera sindicacion d\'aqueu sit se fagu&egrave;t lo',
 'info_derniers_articles_publies' => 'V&ograve;strei darriers articles publicats en linha',
@@ -465,6 +464,7 @@ L\'administrator dau sist&egrave;ma o de la ret vos deu poder fornir
 'info_procedure_maj_version' => 'Cau lan&ccedil;ar la procedura d\'actualizacion per adaptar
  la basa de donadas a la version nov&egrave;la d\'SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publicar',
 'info_publies' => 'V&ograve;streis articles publicats en linha',
 'info_question_accepter_visiteurs' => 'S\'ais esqueletas de v&ograve;stre sit web se prevei lo registrament de vesitaires sens acc&egrave;s a l\'espaci privat, vougatz activar l\'opcion seguenta:',
 'info_question_gerer_statistiques' => 'Deu gerir, v&ograve;stre sit, leis estadisticas dei vesitas?',
@@ -726,6 +726,12 @@ una color indica lor estat:',
 
 // S
 'statut_admin_restreint' => '(admin. restrench)',
+'syndic_choix_moderation' => 'Que se p&ograve;t far amb lei liames venents que provenon d\'aqueu sit?',
+'syndic_choix_oublier' => 'Que se p&ograve;t far amb lei liames que figuran pus dins lo fichier de sindicacion?',
+'syndic_lien_obsolete' => 'liame obsolet',
+'syndic_option_miroir' => 'lei blocar sus lo c&ograve;p',
+'syndic_option_oubli' => 'leis escafar (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => 'Opcions de sindication:',
 
 
 // T
@@ -785,8 +791,6 @@ qu\'apareis quora la rata passa sus lo t&iacute;tol.',
 'texte_date_publication_anterieure' => 'DATA DE PUBLICACION ANTERIORA&nbsp;:',
 'texte_date_publication_anterieure_nonaffichee' => 'Afichar ges de data de publicacion anteriora.',
 'texte_date_publication_article' => 'DATA DE PUBLICACION EN LINHA&nbsp;:',
-'texte_demander_blocage_priori' => 'Lei liames seguents
- que provenon d\'aqueu sit ser&agrave;n blocats a pri&ograve;ri.',
 'texte_descriptif_petition' => 'Descriptiu de la peticion',
 'texte_descriptif_rapide' => 'Descriptiu rapid',
 'texte_documents_joints' => 'Pod&egrave;tz autorizar que s\'apondan de documents (fichiers burotics, imatges,
@@ -826,8 +830,6 @@ qu\'apareis quora la rata passa sus lo t&iacute;tol.',
     es possible puei de 
    desblocar cada liame individualament, o de
    chausir, sit per sit, de blocar lei liames avenidors.',
-'texte_liens_syndication' => 'Lei liames venents que 
-   provenon d\'aqueu sit s\'afichar&agrave;n sus lo c&ograve;p dins lo sit public.',
 'texte_login_ldap_1' => '(Laissar vuege per un acc&egrave;s anonim, o picar lo camin complet, per exemple &laquo;<tt>uid=fabre, ou=usanciers, dc=mon-domeni, dc=com</tt>&raquo;.)',
 'texte_login_precaution' => 'Atencion! Aqu&ograve;\'s lo login amb lo quau siatz ara connectat/ada. 
  Utilizatz aquest formulari amb precaucion...',
