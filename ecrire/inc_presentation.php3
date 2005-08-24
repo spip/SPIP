@@ -3060,10 +3060,7 @@ function install_debut_html($titre = 'AUTO') {
 		$titre=_T('info_installation_systeme_publication');
 
 	echo debut_entete($titre),
-	  "<meta http-equiv='Expires' content='0'>
-	<meta http-equiv='cache-control' content='no-cache,no-store'>
-	<meta http-equiv='pragma' content='no-cache'>
-	<style type='text/css'>
+	  "<style type='text/css'>
 	<!--
 	a {text-decoration: none; }
 	A:Hover {color:#FF9900; text-decoration: underline;}
