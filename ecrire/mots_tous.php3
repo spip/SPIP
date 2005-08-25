@@ -303,7 +303,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 
 
 				if ($connect_statut=="0minirezo") {
-					$vals[] = "<a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='middle'></a>";
+					$vals[] = "<a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a>";
 				} 
 
 				$table[] = $vals;
@@ -313,7 +313,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 				
 		}
 		if ($connect_statut=="0minirezo") {
-			$largeurs = array('', 100, 100);
+			$largeurs = array('', 100, 130);
 			$styles = array('arial11', 'arial1', 'arial1');
 		}
 		else {

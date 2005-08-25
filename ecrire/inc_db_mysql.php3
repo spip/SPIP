@@ -258,7 +258,7 @@ function calcul_mysql_in($val, $valeurs, $not='') {
 
 
 function creer_objet_multi ($objet, $lang) {
-	$retour = "(IF(INSTR(".$objet.", '<multi>') = 0 , ".
+	$retour = "(TRIM(IF(INSTR(".$objet.", '<multi>') = 0 , ".
 		"     TRIM(".$objet."), ".
 		"     CONCAT( ".
 		"          LEFT(".$objet.", INSTR(".$objet.", '<multi>')-1), ".
@@ -277,7 +277,7 @@ function creer_objet_multi ($objet, $lang) {
 		"               TRIM(RIGHT(".$objet.", ( LENGTH(".$objet.") - (INSTR(".$objet.", '[".$lang."]')+ LENGTH('[".$lang."]')-1) ) )) ".
 		"          ) ".
 		"     ) ".
-		")) AS multi ";
+		"))) AS multi ";
 
 	return $retour;
 }
