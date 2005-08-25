@@ -128,7 +128,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 		$ret .= '<div class=\"bandeau_rub\" style=\"z-index: '.($z+1).';\" id=\"b_'.$id_rubrique.'\">';
 		
 		$ret .= '<table cellspacing=\"0\" cellpadding=\"0\"><tr><td valign=\"top\">';		
-		$ret .= "<div class='bandeau_rubriques' style='width: 170px;'>";
+		$ret .= "<div  style='width: 170px;'>";
 		foreach( $arr_rub as $id_rub => $titre_rub) {
 			$count_ligne ++;
 			
@@ -136,7 +136,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 				$count_ligne = 0;
 				$ret .= "</div>";
 				$ret .= '</td><td>&nbsp;</td><td valign=\"top\">';
-				$ret .= "<div class='bandeau_rubriques' style='width: 170px;'>";
+				$ret .= "<div  style='width: 170px;'>";
 
 			}
 		
