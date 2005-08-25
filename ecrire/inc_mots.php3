@@ -295,15 +295,15 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		
 			$id_mot = $row['id_mot'];
 			$titre_mot = $row['titre'];
-			$type_mot = typo($row['type']);
 			$descriptif_mot = $row['descriptif'];
 			$id_groupe = $row['id_groupe'];
-	
 			$query_groupe = "SELECT * FROM spip_groupes_mots WHERE id_groupe = $id_groupe";
 			$result_groupe = spip_query($query_groupe);
 			while($row_groupe = spip_fetch_array($result_groupe)) {
 				$id_groupe = $row_groupe['id_groupe'];
 				$titre_groupe = entites_html($row_groupe['titre']);
+				// On recupere le typo_mot ici, et non dans le mot-cle lui-meme; sinon bug avec arabe
+				$type_mot = typo($row_groupe['titre']);
 				$unseul = $row_groupe['unseul'];
 				$obligatoire = $row_groupe['obligatoire'];
 				$acces_admin =  $row_groupe['minirezo'];
