@@ -533,10 +533,6 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 			}
 		}
 	
-		if ($javascript) {
-			$id_img = "img_".substr($tmp_var, 2, strlen($tmp_var));
-			$texte .= "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; margin-left: 10px; border: 0px; vertical-align: middle;' />";
-		}
 
 		if ($spip_display != 4) {
 			$texte .= "</td>\n";
@@ -552,9 +548,9 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 			$link->addVar($tmp_var, -1);
 				if ($javascript) {
 					$jj = ereg_replace("::deb::", "&$tmp_var=-1", $javascript);
-					$texte .= "<a onMouseOver=\"this.href='javascript:$jj;'; \" href=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</a>";
+					$texte .= "<a onMouseOver=\"this.href='javascript:$jj;'; \" href=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
 				}
-				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\">"._T('lien_tout_afficher')."</A>";
+				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
 		}
 
 
@@ -814,9 +810,16 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		
 		}
 
+
+
 		echo "<div style='height: 12px;'></div>";
 		echo "<div class='liste'>";
-		bandeau_titre_boite2($titre_table, "article-24.gif");
+
+		$id_img = "img_".$tmp_var;
+		$texte_img .= "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; margin-left: 10px; border: 0px; vertical-align: middle;' />";
+
+
+		bandeau_titre_boite2($titre_table.$texte_img, "article-24.gif");
 
 		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 		echo afficher_liste_debut_tableau();
