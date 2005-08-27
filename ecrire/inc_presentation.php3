@@ -512,7 +512,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 		$ancre++;
 
 		$texte .= "<a name='a$ancre'></a>";
-		if ($spip_display != 4) $texte .= "<tr style='background-color: #dddddd;'><td class=\"arial11\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
+		if ($spip_display != 4) $texte .= "<tr style='background-color: #dddddd;'><td class=\"arial1\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
 
 		for ($i = 0; $i < $num_rows; $i += $nb_aff){
 			$deb = $i + 1;
@@ -2586,17 +2586,20 @@ else {
 
 
 	// GADGET Recherche
-		echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 450px; $spip_lang_left: 60px;'>";
+		echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 146px; $spip_lang_left: 60px;'>";
 		global $recherche;
 				$recherche_aff = _T('info_rechercher');
 			//	$onfocus = "onfocus=this.value='';";
 			echo "<form method='get' style='margin: 0px; position: relative;' action='recherche.php3'>";
 			
 			echo "<img src='img_pack/searching.gif' style='position: absolute; left: -25px; top: 5px; visibility: hidden;' id='img_resultats_recherche'>";
+
+			echo "<div id='resultats_recherche' style='position: absolute; visibility: hidden; background-color: $couleur_claire; top:-5px; left: 150px; width: 470px; padding: 5px;'></div>";
+
 			
-			echo '<input type="search" id="form_recherche" style="width: 200px;" size="10" value="'.$recherche_aff.'" name="recherche" onkeypress="if (this.value.length > 3) charger_id_url(\'ajax_page.php?recherche=\'+this.value,\'resultats_recherche\')" autocomplete="off" class="formo" accesskey="r" '.$onfocus.'>';
+			echo "<input type=\"search\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value='$recherche_aff' name=\"recherche\" onkeypress=\"t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" autocomplete=\"off\" class=\"formo\" accesskey=\"r\" ".$onfocus.">";
+			echo "<div id='sugg_recherche' style='margin: 5px;'></div>";
 			
-			echo "<div id='resultats_recherche'></div>";
 			
 			
 			
