@@ -345,7 +345,9 @@ $spip_ortho_dico = array(
 	"id_auteur" => "BIGINT UNSIGNED NOT NULL",
 	"maj" => "TIMESTAMP");
 $spip_ortho_dico_key = array(
-	"PRIMARY KEY" => "lang, mot",);
+	"PRIMARY KEY" => "lang, mot");
+
+
 
 
 global $tables_auxiliaires;

@@ -88,3 +88,42 @@ function acceder_couche(couches, n, dir, icone, texte, sens) {
 	    dir + icone + '" alt="' + texte + '" title="' + texte +
 	    '" width="10" height="10" border="0"></a>');
 }
+
+
+//
+// Cette fonction charge du contenu - dynamiquement - dans un 
+
+
+var url_chargee = new Array();
+
+function charger_id_url(myUrl,myField) 
+{
+	var Field = findObj(myField); // selects the given element
+	if (!Field) return;
+	
+	document.getElementById('img_'+myField).style.visibility = "visible";
+	
+	if (url_chargee['mem_'+myUrl]) {
+		Field.innerHTML = url_chargee['mem_'+myUrl];
+	} else {
+        if(window.XMLHttpRequest) {
+                xmlhttp = new XMLHttpRequest(); 
+        } else if(window.ActiveXObject) {
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        } else {
+                return false;
+        }
+        xmlhttp.open("GET", myUrl, true);
+
+        xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4) { 
+                        Field.innerHTML = xmlhttp.responseText; // puts the result into the element
+						url_chargee['mem_'+myUrl] = Field.innerHTML;
+						document.getElementById('img_'+myField).style.visibility = "hidden";
+               }
+        }
+        xmlhttp.send(null); 
+    }
+}
+
+
