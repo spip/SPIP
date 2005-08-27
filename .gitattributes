@@ -71,6 +71,7 @@ IMG/test.gif -text
 IMG/test.jpg -text
 IMG/test.png -text
 IMG/test_image.jpg -text
+ecrire/ajax_page.php -text
 ecrire/img_pack/admin-12.gif -text
 ecrire/img_pack/administration-24.gif -text
 ecrire/img_pack/administration-48.png -text
@@ -211,6 +212,7 @@ ecrire/img_pack/rubrique-12.gif -text
 ecrire/img_pack/rubrique-24.gif -text
 ecrire/img_pack/rv-12.gif -text
 ecrire/img_pack/rv.gif -text
+ecrire/img_pack/searching.gif -text
 ecrire/img_pack/secteur-12.gif -text
 ecrire/img_pack/secteur-24.gif -text
 ecrire/img_pack/set-ecran-etroit.png -text
