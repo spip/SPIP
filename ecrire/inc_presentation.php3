@@ -512,7 +512,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 		$ancre++;
 
 		$texte .= "<a name='a$ancre'></a>";
-		if ($spip_display != 4) $texte .= "<tr style='background-color: #dddddd;'><td class=\"arial2\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
+		if ($spip_display != 4) $texte .= "<tr style='background-color: #dddddd;'><td class=\"arial11\" style='border-bottom: 1px solid #444444;' colspan=\"".($colspan - 1)."\">";
 
 		for ($i = 0; $i < $num_rows; $i += $nb_aff){
 			$deb = $i + 1;
@@ -542,7 +542,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 		}
 		
 		if ($deb_aff == -1) {
-			$texte .= "<B>"._T('info_tout_afficher')."</B>";
+			//$texte .= "<B>"._T('info_tout_afficher')."</B>";
 		} else {
 			$link = new Link;
 			$link->addVar($tmp_var, -1);
@@ -806,20 +806,23 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				include_ecrire ("inc_abstract_sql.php3");
 				$id_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, fonction, variables, hash, date)", "($connect_id_auteur, 'afficher_articles', '$jjscript', $hash, NOW())");
 			}
+			
+
+
+
+			echo "<div style='height: 12px;'></div>";
+			echo "<div class='liste'>";
+
+			$id_img = "img_".$tmp_var;
+			$texte_img .= "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; border: 0px; float: $spip_lang_right' />";
+
+
+			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
+
 			echo "<div id='$tmp_var'>";
-		
+
 		}
-
-
-
-		echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
-
-		$id_img = "img_".$tmp_var;
-		$texte_img .= "<img src='img_pack/searching.gif' id='$id_img' style='visibility: hidden; margin-left: 10px; border: 0px; vertical-align: middle;' />";
-
-
-		bandeau_titre_boite2($titre_table.$texte_img, "article-24.gif");
+		
 
 		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 		echo afficher_liste_debut_tableau();
@@ -922,7 +925,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$largeurs = array(11, '', 80, 100, 50);
 				$styles = array('', 'arial2', 'arial1', 'arial1', 'arial1');
 			} else {
-				$largeurs = array(11, '', 100, 35);
+				$largeurs = array(11, '', 100, 50);
 				$styles = array('', 'arial2', 'arial1', 'arial1');
 			}
 		} else {
@@ -2343,7 +2346,7 @@ else {
 		else echo "<a href='brouteur.php3' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
-		echo "<a href='recherche.php3' class='icone26' onMouseOver=\"changestyle('bandeaurecherche','visibility','visible');\" >" .
+		echo "<a href='recherche.php3' class='icone26' onMouseOver=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\" >" .
 		  http_img_pack("loupe.png", "", "width='26' height='20' border='0'") ."</a>";
 
 		echo http_img_pack("rien.gif", " ", "width='10'");
@@ -2583,12 +2586,20 @@ else {
 
 
 	// GADGET Recherche
-		echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 100px; $spip_lang_left: 60px;'>";
+		echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 450px; $spip_lang_left: 60px;'>";
 		global $recherche;
 				$recherche_aff = _T('info_rechercher');
-				$onfocus = "onfocus=this.value='';";
-			echo "<form method='get' style='margin: 0px;' action='recherche.php3'>";
-			echo '<input type="text" size="10" value="'.$recherche_aff.'" name="recherche" class="formo" accesskey="r" '.$onfocus.'>';
+			//	$onfocus = "onfocus=this.value='';";
+			echo "<form method='get' style='margin: 0px; position: relative;' action='recherche.php3'>";
+			
+			echo "<img src='img_pack/searching.gif' style='position: absolute; left: -25px; top: 5px; visibility: hidden;' id='img_resultats_recherche'>";
+			
+			echo '<input type="search" id="form_recherche" style="width: 200px;" size="10" value="'.$recherche_aff.'" name="recherche" onkeypress="if (this.value.length > 3) charger_id_url(\'ajax_page.php?recherche=\'+this.value,\'resultats_recherche\')" autocomplete="off" class="formo" accesskey="r" '.$onfocus.'>';
+			
+			echo "<div id='resultats_recherche'></div>";
+			
+			
+			
 			echo "</form>";
 		echo "</div>";
 	// FIN GADGET recherche
