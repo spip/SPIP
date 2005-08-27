@@ -983,7 +983,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // quand il est appele par inc-public il n'est pas gourmand
 //
 function cron($gourmand = false) {
-	$touch = _DIR_SESSIONS.'.background';
+	$touch = _DIR_SESSIONS.'background';
 	$touch_gourmand = $touch.'-gourmand';
 
 	// Si on est gourmand, ou si le fichier gourmand n'existe pas
