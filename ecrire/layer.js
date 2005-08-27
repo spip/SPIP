@@ -101,7 +101,9 @@ function charger_id_url(myUrl,myField)
 	var Field = findObj(myField); // selects the given element
 	if (!Field) return;
 	
-	document.getElementById('img_'+myField).style.visibility = "visible";
+	image = document.getElementById('img_'+myField);
+	
+	if (image) image.style.visibility = "visible";
 	
 	if (url_chargee['mem_'+myUrl]) {
 		Field.innerHTML = url_chargee['mem_'+myUrl];
@@ -118,8 +120,8 @@ function charger_id_url(myUrl,myField)
         xmlhttp.onreadystatechange = function() {
                 if (xmlhttp.readyState == 4) { 
                         Field.innerHTML = xmlhttp.responseText; // puts the result into the element
-						url_chargee['mem_'+myUrl] = Field.innerHTML;
-						document.getElementById('img_'+myField).style.visibility = "hidden";
+					//	url_chargee['mem_'+myUrl] = Field.innerHTML;
+						if (image) image.style.visibility = "hidden";
                }
         }
         xmlhttp.send(null); 
