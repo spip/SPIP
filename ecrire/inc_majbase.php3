@@ -1049,6 +1049,10 @@ function maj_base() {
 	if ($version_installee < 1.825) {
 		maj_version(1.825);
 	}
+	if ($version_installee < 1.826) {
+		spip_query("ALTER TABLE spip_ajax_fonc DROP fonction");
+		maj_version(1.826);
+	}
 
 	return true;
 }
