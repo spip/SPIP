@@ -347,6 +347,7 @@ echo "<div>&nbsp;</div>";
 //
 // On utilise ob_start pour ne pas afficher de bloc vide (sinon tant pis)
 //
+
 if ($flag_ob)
 	ob_start();
 else

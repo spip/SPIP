@@ -1025,9 +1025,6 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript["afficher_auteurs"] = $afficher_auteurs;
 	$jjscript = addslashes(serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
-
-
-
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
 			

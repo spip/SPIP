@@ -102,7 +102,6 @@ function charger_id_url(myUrl,myField)
 	var Field = findObj(myField); // selects the given element
 	if (!Field) return;
 	
-	
 	image = document.getElementById('img_'+myField);
 	
 	if (image) image.style.visibility = "visible";
