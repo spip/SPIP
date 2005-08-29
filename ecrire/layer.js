@@ -3,11 +3,11 @@ var vis = new Array();
 
 	var memo_obj = new Array();
 
-	function findObj(n) { 
+	function findObj_test_forcer(n, forcer) { 
 		var p,i,x;
 
 		// Voir si on n'a pas deja memoriser cet element		
-		if (memo_obj[n]) {
+		if (memo_obj[n] && !forcer) {
 			return memo_obj[n];
 		}
 		
@@ -26,9 +26,17 @@ var vis = new Array();
 		if(!x && document.getElementById) x = document.getElementById(n); 
 		
 		// Memoriser l'element
-		memo_obj[n] = x;
+		if (!forcer) memo_obj[n] = x;
 		
 		return x;
+	}
+	
+	function findObj(n) { 
+		return findObj_test_forcer(n, false);
+	}
+	// findObj sans memorisation de l'objet - avec Ajax, les elements se deplacent dans DOM
+	function findObj_forcer(n) { 
+		return findObj_test_forcer(n, true);
 	}
 	
 	function hide_obj(obj) {
@@ -99,10 +107,11 @@ var xmlhttp = new Array();
 
 function charger_id_url(myUrl,myField) 
 {
-	var Field = findObj(myField); // selects the given element
+	var Field = findObj_forcer(myField); // selects the given element
+
 	if (!Field) return;
 	
-	image = document.getElementById('img_'+myField);
+	image = findObj_forcer('img_'+myField);
 	
 	if (image) image.style.visibility = "visible";
 	
