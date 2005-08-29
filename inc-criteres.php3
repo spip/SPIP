@@ -220,6 +220,13 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		else if ($par == 'type_mot'){
 		  $order= "'mots.type'";
 		}
+    // par multi champ
+    else if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
+        $texte = $boucle->id_table . '.' . trim($m[1]);
+        $boucle->select[] =  " \".creer_objet_multi('".$texte."', \$GLOBALS['spip_lang']).\"" ;
+        $order = "multi";
+    }
+	
 	// par num champ(, suite)
 		else if (ereg("^num[[:space:]]*(.*)$",$par, $m)) {
 		  $texte = '0+' . $boucle->id_table . '.' . trim($m[1]);
