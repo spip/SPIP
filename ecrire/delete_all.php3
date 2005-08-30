@@ -62,6 +62,18 @@ spip_query("DROP TABLE spip_visites");
 spip_query("DROP TABLE spip_visites_articles");
 spip_query("DROP TABLE spip_visites_temp");
 spip_query("DROP TABLE spip_test");
+spip_query("DROP TABLE spip_caches");
+spip_query("DROP TABLE spip_documents_syndic");
+spip_query("DROP TABLE spip_index_documents");
+spip_query("DROP TABLE spip_index_forum");
+spip_query("DROP TABLE spip_index_signatures");
+spip_query("DROP TABLE spip_mots_documents");
+spip_query("DROP TABLE spip_ortho_cache");
+spip_query("DROP TABLE spip_ortho_dico");
+spip_query("DROP TABLE spip_versions");
+spip_query("DROP TABLE spip_versions_fragments");
+spip_query("DROP TABLE spip_ajax_fonc");
+
 
 @unlink(_ACCESS_FILE_NAME);
 @unlink(_FILE_CONNECT);
