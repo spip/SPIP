@@ -2,7 +2,7 @@
     {agenda date, jour, #ENV{annee}, #ENV{mois}, #ENV{jour}}{par date}
 >[(#DATE|agenda_memo{#DESCRIPTIF, #TITRE, #URL_ARTICLE, 
   calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})]</BOUCLE_jour>[(#TOTAL_BOUCLE|agenda_affiche{<:aucun_article:>, 'jour', 
-  calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})
+  calendrier-couleur[(#ENV{theme,0}|modulo{14,1})]})][(#TOTAL_BOUCLE|?{' ',''})
 <div style='position: fixed; top:50px; left: 20px'>
 <table style='width: 10px'><tr>
 <td class='calendrier-couleur1'
