@@ -247,7 +247,7 @@ if (!$origine) {
 	} else {
 		$table = "spip_visites";
 		$table_ref = "spip_referers";
-		$where = "1";
+		$where = "TRUE";
 	}
 	
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".

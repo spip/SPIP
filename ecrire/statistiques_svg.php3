@@ -70,16 +70,16 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 	if ($id_article) {
 		$table = "spip_visites_articles";
 		$table_ref = "spip_referers_articles";
-		$where = "id_article=$id_article";
+		$where = "WHERE id_article=$id_article";
 	} else {
 		$table = "spip_visites";
 		$table_ref = "spip_referers";
-		$where = "1";
+		$where = "";
 	}
 
 	// Recuperer premier jour
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"WHERE $where ORDER BY date LIMIT 0,1";
+		"$where ORDER BY date LIMIT 0,1";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];

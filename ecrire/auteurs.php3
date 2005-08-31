@@ -121,7 +121,7 @@ $auteurs = Array();
 if ($type_requete == 'auteur') {
 	$result_auteurs = spip_query("SELECT id_auteur, statut, login, nom, email, url_site, messagerie, UPPER(nom) AS unom$sql_sel
 		FROM spip_auteurs AS auteurs
-		WHERE 1 $sql_statut_auteurs
+		WHERE TRUE $sql_statut_auteurs
 		$sql_order");
 	while ($row = spip_fetch_array($result_auteurs)) {
 		$auteurs[$row['id_auteur']] = $row;

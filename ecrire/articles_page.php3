@@ -48,7 +48,7 @@ debut_droite();
 echo "<P align=left>";
 afficher_articles(_T('info_en_cours_validation'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut=\"prepa\" ORDER BY articles.date DESC");
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
 
 
 
@@ -70,7 +70,7 @@ afficher_articles(_T('info_attente_validation'),
 echo "<p>";
 afficher_articles(_T('info_publies'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"publie\" ORDER BY articles.date DESC", true);
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie' ORDER BY articles.date DESC", true);
 
 //
 //  Vos articles refuses
@@ -79,7 +79,7 @@ afficher_articles(_T('info_publies'),
 echo "<p>";
 afficher_articles(_T('info_refuses'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut=\"refuse\" ORDER BY articles.date DESC");
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse' ORDER BY articles.date DESC");
 
 
 fin_page();
