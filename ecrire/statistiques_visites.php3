@@ -100,7 +100,7 @@ else {
 	
 	// Par popularite
 	$articles_recents[] = "0";
-	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 0 OFFSET 10";
+	$query = "SELECT id_article FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY date DESC LIMIT 10 OFFSET 0";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$articles_recents[] = $row['id_article'];
@@ -171,7 +171,7 @@ else {
 
 
 	// Par visites depuis le debut
-	$query = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 0 OFFSET 30";
+	$query = "SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY visites DESC LIMIT 30 OFFSET 0";
 	$result = spip_query($query);
 		
 	if (spip_num_rows($result) > 0) {
@@ -251,7 +251,7 @@ if (!$origine) {
 	}
 	
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"WHERE $where ORDER BY date LIMIT 0 OFFSET 1";
+		"WHERE $where ORDER BY date LIMIT 1 OFFSET 0";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];

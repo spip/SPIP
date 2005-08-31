@@ -79,7 +79,7 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 
 	// Recuperer premier jour
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"$where ORDER BY date LIMIT 0 OFFSET 1";
+		"$where ORDER BY date LIMIT 1 OFFSET 0";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];

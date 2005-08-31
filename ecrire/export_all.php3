@@ -28,7 +28,7 @@ $action = _T('info_exportation_base', array('archive' => $archive));
 debut_admin($action);
 
 $debug_limit = '';
-//$debug_limit = ' LIMIT 0 OFFSET 100';
+
 if (!$debut_limit) $debut_limit = 0;
 
 install_debut_html(_T('info_sauvegarde'));

@@ -49,7 +49,7 @@ $id_diff = intval($id_diff);
 if (!$id_diff) {
 	$diff_auto = true;
 	$query = "SELECT id_version FROM spip_versions WHERE id_article=$id_article ".
-		"AND id_version<$id_version ORDER BY id_version DESC LIMIT 0 OFFSET 1";
+		"AND id_version<$id_version ORDER BY id_version DESC LIMIT 1 OFFSET 0";
 	if ($result = spip_query($query)) {
 		$row = spip_fetch_array($result);
 		$id_diff = $row['id_version'];

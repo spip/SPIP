@@ -519,7 +519,7 @@ echo "</div>";
 echo "<p align='left'>\n";
 
 $result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive'
-AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 0 OFFSET 20");
+AND id_syndic=$id_syndic AND id_parent=0 ORDER BY date_heure DESC LIMIT 20 OFFSET 0");
 afficher_forum($result_forum, $forum_retour);
 
 

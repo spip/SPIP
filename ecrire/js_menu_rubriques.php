@@ -30,7 +30,7 @@ function gen_liste_rubriques() {
 	// se restreindre aux rubriques utilisees recemment +secteurs
 	$liste="0";
 	$s = spip_query("SELECT id_rubrique FROM spip_rubriques
-		ORDER BY id_parent=0 DESC, date DESC LIMIT 0,500");
+		ORDER BY id_parent=0 DESC, date DESC LIMIT 500 OFFSET 0");
 	while ($t = spip_fetch_array($s))
 		$liste .=",".$t['id_rubrique']; 
 	 
