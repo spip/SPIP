@@ -199,8 +199,9 @@ if ($spip_display == 4) {
 		$titre_parent = entites_html(_T("info_racine_site"));
 	}
 	
+	
 	echo "<table width='100%'><tr width='100%'><td width='45'>";
-	echo "<a href=\"javascript:findObj('selection_rubrique').style.display='block';charger_id_url('ajax_page.php?fonction=aff_parent&id_rubrique=$id_parent&exclus=$id_rubrique','selection_rubrique');\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
+	echo "<a href=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_parent&id_rubrique=$id_parent&exclus=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';}\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
 	echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
 	echo "</td><td>";
 	echo "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
