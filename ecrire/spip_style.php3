@@ -1403,3 +1403,26 @@ table.spip td {
 	line-height: 12px;
 	color: #666666; 
  }
+
+ div.highlight {
+  	color: black;
+ 	background-color: <?php echo $couleur_claire; ?>;
+ }
+  div.highlight, div.pashighlight {
+  	color: #666666;
+  	padding: 2px;
+  }
+  div.highlight:hover, div.pashighlight:hover {
+  	color: black;
+  	cursor: pointer;
+  }
+
+div.petite-rubrique {
+	background: <?php echo $ltr ? "1%" : "99%"; ?> no-repeat;
+	background-image : url(<?php echo http_img_pack('rubrique-12.gif'); ?>);
+	padding-<?php echo $left; ?>: 15px;
+}
+div.rub-ouverte {
+	padding-<?php echo $right; ?>: 10px;
+	background: url(<?php echo http_img_pack('triangle-droite'. $_rtl . '.gif'), ')', $right; ?> center no-repeat;
+ }
