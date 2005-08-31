@@ -27,13 +27,15 @@ define('BALISE_POST_BOUCLE', '</B');
 define('BALISE_ALT_BOUCLE', '<//B');
 
 define('TYPE_RECURSIF', 'boucle');
-define('SPEC_BOUCLE','[[:space:]]*\(([^)]*)\)');
+define('SPEC_BOUCLE','/\s*\(\s*([^\s)]+)(\s*[^)]*)\)/');
 define('NOM_DE_BOUCLE', "[0-9]+|[-_][-_.a-zA-Z0-9]*");
 # ecriture alambiquee pour rester compatible avec les hexadecimaux des vieux squelettes
 define('NOM_DE_CHAMP', "#((" . NOM_DE_BOUCLE . "):)?(([A-F]*[G-Z_][A-Z_0-9]*)|[A-Z_]+)(\*?)");
 define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*\(([^)]*)\)');
+
+define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)\(?([A-Za-z_.]*)\)?`?');
 
 function phraser_inclure($texte, $ligne, $result) {
 
@@ -226,6 +228,7 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 		  if (!ereg(NOM_DE_CHAMP ."[{|]", $arg, $r)) {
 		    // 0 est un aveu d'impuissance. A completer
 		    $arg = phraser_champs_exterieurs($arg, 0, $sep, $result);
+
 		    $args = ltrim($regs[count($regs)-1]);
 		    $collecte = array_merge($collecte, $arg);
 		    $result = array_merge($result, $arg);
@@ -280,10 +283,10 @@ function phraser_args($texte, $fin, $sep, $result, &$pointeur_champ) {
 function phraser_champs_exterieurs($texte, $ligne, $sep, $nested) {
 	$res = array();
 	while (($p=strpos($texte, "%$sep"))!==false) {
+	  if (!ereg("^%$sep([0-9]+)@(.*)$", substr($texte,$p),$m)) break;
 	  $debut = substr($texte,0,$p);
 	  if ($p) $res = phraser_inclure($debut, $ligne, $res);
 	  $ligne += substr_count($debut, "\n");
-	  ereg("^%$sep([0-9]+)@(.*)$", substr($texte,$p),$m);
 	  $res[]= $nested[$m[1]];
 	  $texte = $m[2];
 	}
@@ -374,7 +377,6 @@ function phraser_criteres($params, &$result) {
 		    }
 		  } else {
 	// traiter qq lexemes particuliers pour faciliter la suite
-
 	// les separateurs
 			if ($var->apres)
 				$result->separateur[] = $param;
@@ -407,15 +409,22 @@ function phraser_criteres($params, &$result) {
 			      $result->hash = true;
 			  if (ereg('^ *([0-9-]+) *(/) *(.+) *$', $param, $m)) {
 			    $crit = phraser_critere_infixe($m[1], $m[3],$v, '/', '', '');
-			  } elseif (ereg('^(`?[A-Za-z_][A-Za-z_0-9]*\(?[A-Za-z_]*\)?`?)[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)[[:space:]]*"?([^<>=!"]*)"?$', $param, $m)) {
-			    $crit = phraser_critere_infixe($m[1], $m[5],$v,
-							   (($m[1] == 'lang_select') ? $m[1] : trim($m[4])),
-							   $m[3], $m[2]);
-			  } elseif (preg_match("/^([!]?)[[:space:]]*([A-Za-z_][A-Za-z_0-9]*)[[:space:]]*(\??)(.*)$/ism", $param, $m)) {
+			  } elseif (ereg('^(' . CHAMP_SQL_PLUS_FONC . 
+					 ')[[:space:]]*(\??)(!?)(<=?|>=?|==?|IN)(.*)$', $param, $m)) {
+			    $a2 = $m[7];
+			    if (ereg("^'.*'$", $a2) OR ereg('^".*"$', $a2))
+			      $a2 = substr($a2,1,-1);
+			    $crit = phraser_critere_infixe($m[1], $a2, $v,
+							   (($m[1] == 'lang_select') ? $m[1] : $m[6]),
+							   $m[5], $m[4]);
+			  } elseif (preg_match("/^([!]?)\s*(" .
+					       CHAMP_SQL_PLUS_FONC .
+					       ")\s*(\??)(.*)$/ism", $param, $m)) {
 		  // contient aussi les comparaisons implicites !
+
 			    array_shift($v);
-			    if ($m[4])
-			      $v[0][0]->texte = $m[4];
+			    if ($m[6])
+			      $v[0][0]->texte = $m[6];
 			    else {
 			      array_shift($v[0]);
 			      if (!$v[0]) array_shift($v);
@@ -424,7 +433,7 @@ function phraser_criteres($params, &$result) {
 			    $crit->op = $m[2];
 			    $crit->param = $v;
 			    $crit->not = $m[1];
-			    $crit->cond = $m[3];
+			    $crit->cond = $m[5];
 			  }
 			  else {
 			    erreur_squelette(_T('zbug_critere_inconnu',
@@ -498,10 +507,11 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		}
 		$result->id_boucle = $id_boucle;
 
-		ereg(SPEC_BOUCLE, $milieu, $match);
+		preg_match(SPEC_BOUCLE, $milieu, $match);
                 $milieu = substr($milieu, strlen($match[0]));
 		$type = $match[1];
-
+		$jointures = $match[2];
+		$result->jointures = preg_split("/\s+/",trim($match[2]));
 		if ($p = strpos($type, ':'))
 		  {
 		    $result->sql_serveur = substr($type,0,$p);
@@ -569,7 +579,7 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		// envoyer la boucle au debugueur
 		if ($GLOBALS['var_mode']== 'debug') {
 		  boucle_debug ($nom, $id_parent, $id_boucle, 
-				$type,
+				$type . $jointures,
 				$params,
 				$result->avant,
 				$milieu,
