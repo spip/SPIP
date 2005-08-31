@@ -24,6 +24,10 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 		include_ecrire("inc_mini_nav.php");
 		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_parent.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $aff_racine=true);
 	}
+	if ($fonction == "aff_rubrique") {
+		include_ecrire("inc_mini_nav.php");
+		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", 0, $aff_racine=false);
+	}
 	
 
 	if ($fonction == "aff_info") {
@@ -32,7 +36,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 		if ($type == "rubrique") {
 			$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
 			if ($row = spip_fetch_array($res)) {
-				$titre = addslashes(typo($row["titre"]));
+				$titre = typo($row["titre"]);
 				$descriptif = propre($row["descriptif"]);
 			} else {
 			$titre = addslashes(_T('info_racine_site'));
@@ -41,7 +45,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 		
 		echo "<div style='display: none;'>";
 		echo "<input type='text' id='".$rac."_sel' value='$id' />";
-		echo "<input type='text' id='".$rac."_sel2' value='$titre' />";
+		echo "<input type='text' id='".$rac."_sel2' value='".addslashes($titre)."' />";
 		echo "</div>";
 
 		include_ecrire ("inc_logos.php3");
