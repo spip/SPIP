@@ -103,19 +103,21 @@ function acceder_couche(couches, n, dir, icone, texte, sens) {
 // Fonctions pour mini_nav
 //
 
-function slide_horizontal (couche, slide, depart, etape ) {
+function slide_horizontal (couche, slide, align, depart, etape ) {
 	obj = findObj_forcer(couche);
 	if (!obj) return;
 	if (!etape) {
-		depart = obj.scrollLeft;
+		if (align == 'left') depart = obj.scrollLeft;
+		else depart = obj.firstChild.offsetWidth - obj.scrollLeft;
 		etape = 0;
 	}
 	etape = Math.round(etape) + 1;
 	pos = Math.round(depart) + Math.round(((slide - depart) / 10) * etape);
 
-	obj.scrollLeft = pos;
-	if (etape < 10) setTimeout("slide_horizontal('"+couche+"', '"+slide+"', '"+depart+"', '"+etape+"')", 60);
-	else obj.scrollLeft = slide;
+	if (align == 'left') obj.scrollLeft = pos;
+	else obj.scrollLeft = obj.firstChild.offsetWidth - pos;
+	if (etape < 10) setTimeout("slide_horizontal('"+couche+"', '"+slide+"', '"+align+"', '"+depart+"', '"+etape+"')", 60);
+	//else obj.scrollLeft = slide;
 }
 
 function changerhighlight (couche) {
