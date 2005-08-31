@@ -174,38 +174,42 @@ debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').a
 //echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_parent);\" onChange=\"filtery(this.value,this.form.id_parent);\"> ";
 
 
-/*
-echo "<SELECT NAME='id_parent' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
-
-if ($connect_toutes_rubriques) {
-  echo "<OPTION".mySel("0",$id_parent). http_style_background('racine-site-12.gif',  "$spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white") .'>'._T('info_racine_site')."\n";
+if ($spip_display == 4) {
+	echo "<SELECT NAME='id_parent' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
+	
+	if ($connect_toutes_rubriques) {
+	  echo "<OPTION".mySel("0",$id_parent). http_style_background('racine-site-12.gif',  "$spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white") .'>'._T('info_racine_site')."\n";
+	} else {
+		echo "<OPTION".mySel("0",$id_parent).">"._T('info_non_deplacer')."\n";
+	}
+	
+	if (lire_meta('multi_rubriques') == 'oui') echo " [".traduire_nom_langue(lire_meta('langue_site'))."]";
+	
+	// si le parent ne fait pas partie des rubriques restreintes, modif impossible
+	if (acces_rubrique($id_parent)) {
+		enfant(0);
+	}
+	echo "</SELECT>\n";
 } else {
-	echo "<OPTION".mySel("0",$id_parent).">"._T('info_non_deplacer')."\n";
+
+	$query = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_parent");
+	if ($row = spip_fetch_array($query)) {
+		$titre_parent = entites_html(typo($row["titre"])); 
+	} else {
+		$titre_parent = entites_html(_T("info_racine_site"));
+	}
+	
+	echo "<table width='100%'><tr width='100%'><td width='45'>";
+	echo "<a href=\"javascript:findObj('selection_rubrique').style.display='block';charger_id_url('ajax_page.php?fonction=aff_parent&id_rubrique=$id_parent&exclus=$id_rubrique','selection_rubrique');\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
+	echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
+	echo "</td><td>";
+	echo "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
+	echo "<input type='hidden' id='id_parent' name='id_parent' value='$id_parent' />";
+	echo "</td></tr></table>";
+	
+	echo "<div id='selection_rubrique' style='display: none;'></div>";
+
 }
-
-if (lire_meta('multi_rubriques') == 'oui') echo " [".traduire_nom_langue(lire_meta('langue_site'))."]";
-
-// si le parent ne fait pas partie des rubriques restreintes, modif impossible
-if (acces_rubrique($id_parent)) {
-	enfant(0);
-}
-echo "</SELECT>\n";
-*/
-
-
-$query = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_parent");
-if ($row = spip_fetch_array($query)) {
-	$titre_parent = entites_html(typo($row["titre"])); 
-} else {
-	$titre_parent = entites_html(_T("info_racine_site"));
-}
-echo "<a href=\"javascript:findObj('selection_rubrique').style.display='block';charger_id_url('ajax_page.php?fonction=aff_parent&id_rubrique=$id_parent&exclus=$id_rubrique','selection_rubrique');\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
-echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
-
-echo "<input type='hidden' id='id_parent' name='id_parent' value='$id_parent' />";
-echo "<input  type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
-echo "<div id='selection_rubrique' style='display: none;'></div>";
-
 //include_ecrire("inc_mini_nav.php");
 //echo mini_nav ($id_parent, "choix-parent", "this.form.id_parent.value=::sel::;this.form.titreparent.value='::sel2::';", $id_rubrique, $aff_racine=true);
 
