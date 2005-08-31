@@ -165,7 +165,7 @@ function supprimer_referers($type = "") {
 	if (!$count) $count = 1;
 
 	$query = "SELECT visites FROM $table ".
-		"ORDER BY visites LIMIT ".intval($count * 100).",1";
+		"ORDER BY visites LIMIT ".intval($count * 100)." OFFSET 1";
 	$result = spip_query($query);
 	$visites_min =  1;
 	if ($row = @spip_fetch_array($result)) {
@@ -186,7 +186,7 @@ function calculer_n_referers($nb_referers) {
 	$date = date("Y-m-d");
 
 	$result = spip_query("SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
-			     "FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0,$nb_referers");
+			     "FROM spip_referers_temp GROUP BY referer_md5 LIMIT 0 OFFSET $nb_referers");
 
 	$tous = spip_num_rows($result);
 
@@ -267,7 +267,7 @@ function aff_referers ($query, $limit=10, $plus = true) {
 	// Charger les moteurs de recherche
 	$arr_engines = stats_load_engines();
 
-	$query .= " LIMIT 0,$limit";
+	$query .= " LIMIT 0 OFFSET $limit";
 	$result = spip_query($query);
 	
 	while ($row = spip_fetch_array($result)) {
