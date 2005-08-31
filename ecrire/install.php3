@@ -273,7 +273,7 @@ else if ($etape == 4) {
 	// Tester $mysql_rappel_nom_base
 	$GLOBALS['mysql_rappel_nom_base'] = true;
 	$GLOBALS['spip_mysql_db'] = $sel_db;
-	$ok_rappel_nom = spip_query("INSERT spip_meta (nom,valeur)
+	$ok_rappel_nom = spip_query("INSERT INTO spip_meta (nom,valeur)
 		VALUES ('mysql_rappel_nom_base', 'test')");
 	if ($ok_rappel_nom) {
 		echo " (ok rappel nom base `$sel_db`.spip_meta) ";
@@ -287,7 +287,7 @@ else if ($etape == 4) {
 	}
 
 	if ($nouvelle) {
-		spip_query("INSERT spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
+		spip_query("INSERT INTO spip_meta (nom, valeur) VALUES ('nouvelle_install', 'oui')");
 		$result_ok = !spip_sql_errno();
 	} else {
 		$result = spip_query("SELECT COUNT(*) FROM spip_articles");

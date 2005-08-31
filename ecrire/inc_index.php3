@@ -390,9 +390,9 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 			spip_query($mots);
 		}
 		reset($index);
-		unset($q);
-		while (list($hash, $points) = each($index)) $q[] = "(0x$hash,".ceil($points).",$id_objet)";
-		spip_query("INSERT INTO $table_index (hash, points, $col_id) VALUES ".join(',',$q));
+		while (list($hash, $points) = each($index)) {
+		  spip_query("INSERT INTO $table_index (hash, points, $col_id) VALUES (0x$hash,".ceil($points).",$id_objet)");
+		}
 	}
 
 	// marquer "indexe"

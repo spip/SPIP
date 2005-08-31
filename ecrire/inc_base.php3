@@ -69,17 +69,17 @@ function creer_base() {
 		spip_create_table($k, $v['field'], $v['key'], false);
 
 	foreach($tables_images as $k => $v)
-		spip_query_db("INSERT IGNORE spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .
+		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, inclus, titre, id_type) VALUES ('$k', 'image', '" .
 			      (is_numeric($v) ?
 			       (strtoupper($k) . "', $v") :
 			       "$v', 0") .
 			      ")");
 
 	foreach($tables_sequences as $k => $v)
-		spip_query_db("INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'embed')");
+		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'embed')");
 
 	foreach($tables_documents as $k => $v)
-		spip_query_db("INSERT IGNORE spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'non')");
+		spip_query_db("INSERT IGNORE INTO spip_types_documents (extension, titre, inclus) VALUES ('$k', '$v', 'non')");
 
 	foreach ($tables_mime as $extension => $type_mime)
 	  spip_query_db("UPDATE spip_types_documents
