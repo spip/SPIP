@@ -16,6 +16,7 @@ if (defined("_ECRIRE_INC_CALENDRIER")) return;
 define("_ECRIRE_INC_CALENDRIER", "1");
 
 include_ecrire("inc_texte.php3");
+charger_generer_url();
 
 //  Typographie generale des calendriers de 3 type: jour/semaine/mois(ou plus)
 
@@ -1319,20 +1320,7 @@ ORDER BY date
 
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
-		if ((!_DIR_RESTREINT) || ($now >= $amj))
-			$url = $script . $row['id_article'];
-		else {
-			if (substr($row['chapo'], 0, 1) != '=')
-				$url = " ";
-			else {
-				list(,$url) = extraire_lien(array('','','',
-					substr($row['chapo'], 1)));
-				if ($url)
-					$url = texte_script(str_replace('&amp;', '&', $url));
-				else $url = " ";
-			}
-		}
-
+		$url = generer_url_article($row['id_article']);
 		$evenements[$amj][]=
 		    array(
 			'CATEGORIES' => 'info_articles',
@@ -1353,10 +1341,10 @@ ORDER BY date_heure
 ");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
-		$script = (_DIR_RESTREINT ? 'breve' : 'breves_voir');
+		$script = generer_url_breve($row['id_breve']);
 		$evenements[$amj][]=
 		array(
-			'URL' => $script . _EXTENSION_PHP . "?id_breve=" . $row['id_breve'],
+			'URL' => $script,
 			'CATEGORIES' => 'info_breves_02',
 			'SUMMARY' => $row['titre']);
 	}

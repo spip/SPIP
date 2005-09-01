@@ -538,6 +538,18 @@ function typo_doublon(&$doublons, $letexte)
 	return echappe_retour_doublon($letexte, $les_echap, "SOURCETYPO", $doublons);
 }
 
+function charger_generer_url()
+{
+		// Traitement des liens internes
+	if (!_DIR_RESTREINT)
+		include_ecrire('inc_urls.php3');
+	else if (@file_exists("inc-urls.php3"))
+		include_local("inc-urls.php3");
+	else	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+}
+
+
+
 // cette fonction est tordue : on lui passe un tableau correspondant au match
 // de la regexp ci-dessous, et elle retourne le texte a inserer a la place
 // et le lien "brut" a usage eventuel de redirection...
@@ -548,20 +560,12 @@ function extraire_lien ($regs) {
 	$compt_liens++;
 	$lien_interne = false;
 	if (ereg('^[[:space:]]*(art(icle)?|rub(rique)?|br(.ve)?|aut(eur)?|mot|site|doc(ument)?|im(age|g))?[[:space:]]*([[:digit:]]+)(#.*)?[[:space:]]*$', $lien_url, $match)) {
-		// Traitement des liens internes
-		if (!_DIR_RESTREINT)
-			include_ecrire('inc_urls.php3');
-		else
-		if (@file_exists("inc-urls.php3"))
-			include_local("inc-urls.php3");
-		else
-			include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
-
 		$id_lien = $match[8];
 		$ancre = $match[9];
 		$type_lien = substr($match[1], 0, 2);
 		$lien_interne=true;
 		$class_lien = "in";
+		charger_generer_url();
 		switch ($type_lien) {
 			case 'ru':
 				$lien_url = generer_url_rubrique($id_lien);
