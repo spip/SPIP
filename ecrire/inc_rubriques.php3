@@ -355,7 +355,6 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 	echo "</table><p />";
 	//////
 
-
 }
 
 ?>

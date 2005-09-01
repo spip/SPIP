@@ -14,23 +14,19 @@ include ("inc.php3");
 $charset = lire_meta("charset");
 echo "<"."?xml version='1.0' encoding='$charset'?>";
 
-
 	if ($fonction == "aff_rub") {
 		include_ecrire("inc_mini_nav.php");
 		echo mini_afficher_rubrique ($id_rubrique, $rac, "", $col, $exclus);
 	}
-	
-	if ($fonction == "aff_parent") {
+	else if ($fonction == "aff_parent") {
 		include_ecrire("inc_mini_nav.php");
 		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_parent.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $aff_racine=true);
 	}
-	if ($fonction == "aff_rubrique") {
+	else if ($fonction == "aff_rubrique") {
 		include_ecrire("inc_mini_nav.php");
 		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", 0, $aff_racine=false);
 	}
-	
-
-	if ($fonction == "aff_info") {
+	else if ($fonction == "aff_info") {
 		// echo "$type - $id - $rac";
 		
 		if ($type == "rubrique") {
@@ -39,7 +35,7 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 				$titre = typo($row["titre"]);
 				$descriptif = propre($row["descriptif"]);
 			} else {
-			$titre = addslashes(_T('info_racine_site'));
+				$titre = addslashes(_T('info_racine_site'));
 			}
 		} 
 		
@@ -52,7 +48,6 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 
 
 		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
-
 		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
 			include_ecrire("inc_logos.php3");
 			$logo = decrire_logo("rubon$id");
@@ -63,8 +58,6 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 					echo "</div>";
 			}
 		}
-
-
 
 		echo "<div><p><b>$titre</b></p></div>";
 		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
@@ -77,9 +70,86 @@ echo "<"."?xml version='1.0' encoding='$charset'?>";
 		echo "</div>";
 		
 	}
+	else if ($recherche_rub) {
+	
+		function exclure_enfants ($id_parent, $liste_exclus) {
+			$res = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=$id_parent");
+			while ($row = spip_fetch_array($res)) {
+				$id_rubrique = $row["id_rubrique"];
+				$liste_exclus .= ", $id_rubrique";
+				$liste_exclus = exclure_enfants($id_rubrique, $liste_exclus);
+			}
+			return $liste_exclus;
+		}
+	
+	
+		if ($exclus > 0) {
+			$liste_exclus = $exclus;
+			$liste_exclus = exclure_enfants($exclus, $liste_exclus);
+		}
+	
+		$recherche = str_replace("%","\%",$recherche_rub);
+		$rech2 = split("[[:space:]]+", $recherche);
+		if ($rech2) {
+			$where_titre = " (titre LIKE '%".join("%' AND titre LIKE '%", $rech2)."%') ";
+			$where_desc = " (descriptif LIKE '%".join("%' AND descriptif LIKE '%", $rech2)."%') ";
+			$where_id = " (id_rubrique = '".join("' AND id_rubrique = '", $rech2)."') ";
+		}
+		else {
+			$where_titre = " 1=2";
+			$where_desc = " 1=2";
+			$where_id = " 1=2";
+		}
+		if ($liste_exclus) $where_exclus = " AND id_rubrique NOT IN ($liste_exclus)";
+		
 
-
-	if ($GLOBALS["id_ajax_fonc"]) {
+		$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_id$where_exclus");
+		while ($row = spip_fetch_array($res)) {
+			$id_rubrique = $row["id_rubrique"];
+			$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
+			$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
+			$points[$id_rubrique] = $points[$id_rubrique] + 3;			
+		}
+		$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_titre$where_exclus");
+		while ($row = spip_fetch_array($res)) {
+			$id_rubrique = $row["id_rubrique"];
+			$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
+			$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
+			$points[$id_rubrique] = $points[$id_rubrique] + 2;			
+		}
+		$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE $where_desc$where_exclus");
+		while ($row = spip_fetch_array($res)) {
+			$id_rubrique = $row["id_rubrique"];
+			$rub[$id_rubrique]["titre"] = typo ($row["titre"]);
+			$rub[$id_rubrique]["id_parent"] = $row["id_parent"];
+			$points[$id_rubrique] = $points[$id_rubrique] + 1;			
+		}
+		
+		if ($points) {
+			arsort($points);
+			while (list($id,$pts) = each($points)) {
+				
+				$id_rubrique = $id;
+				$titre = $rub[$id]["titre"];
+				$id_parent = $rub[$id]["id_parent"];
+				
+				// Eviter une premiere fois d'afficher la rubrique exclue
+					if ($id_parent == 0) $style = "style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
+					else $style = "";
+					$onClick = " aff_selection('rubrique','$rac','$id_rubrique');";
+	
+					$ret .= "<div class='pashighlight' onClick=\"changerhighlight(this); $onClick\"><div class='arial11 petite-rubrique'$style>";
+					$ret .= "&nbsp; $titre";
+					$ret .= "</div></div>";
+			}
+				
+		}
+		if ($ret) echo $ret;
+		else echo "<div style='padding: 5px; color: red;'>"._T('avis_aucun_resultat')."</div>";
+		
+		
+	}
+	else if ($GLOBALS["id_ajax_fonc"]) {
 		$res = spip_query("SELECT * FROM spip_ajax_fonc WHERE id_ajax_fonc = $id_ajax_fonc AND id_auteur=$connect_id_auteur");
 		if ($row = spip_fetch_array($res)) {
 			$variables = $row["variables"];
