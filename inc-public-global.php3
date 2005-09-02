@@ -326,7 +326,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
 	}
-	
+
 	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
 	$use_cache, $fond, true);
 
@@ -375,6 +375,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 			echo $texte;
 	else
 			return $texte;
+
 }
 
 
@@ -401,6 +402,13 @@ function _request($var) {
 	if (isset($_GET[$var])) return $_GET[$var];
 	if (isset($_POST[$var])) return $_POST[$var];
 	return NULL;
+}
+
+function charger_analyseur_xhtml($nom)
+{
+	if ($nom === true) $nom = 'tidy';
+	$file = 'inc_' . $nom. ".php";
+	if (is_readable(_DIR_RESTREINT . $file)) { include_ecrire($file); }
 }
 
 ?>

@@ -89,9 +89,6 @@ function xhtml($buffer) {
 #			entetes_xhtml();
 
 	}
-	// Ajouter un bouton d'admin "Analyser"
-	$GLOBALS['xhtml_check'] = 'http://validator.w3.org/check?uri='
-		. urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri());
 /** fin de l'usine a gaz **/
 
 

@@ -20,6 +20,7 @@ function balise_FORMULAIRE_ADMIN_stat($args, $filtres) {
 
 function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
   global $var_preview, $use_cache, $forcer_debug, $xhtml;
+
 	global $id_article, $id_breve, $id_rubrique, $id_mot, $id_auteur, $id_syndic;
 	static $dejafait = false;
 
@@ -90,10 +91,14 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		       OR $GLOBALS['auteur_session']['statut'] == '0minirezo')
 		  AND !$var_preview
 	) ? 'debug' : '';
+	if ($xhtml) charger_analyseur_xhtml($xhtml);
 	$analyser = !$xhtml ? "" :
 	  (($xhtml === 'spip_sax') ?
 	   ($action . "var_mode=debug&var_mode_affiche=validation") :
-	   $GLOBALS['xhtml_check']); // cas tidy
+	   ('http://validator.w3.org/check?uri='
+	    . urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
+
+
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
 
