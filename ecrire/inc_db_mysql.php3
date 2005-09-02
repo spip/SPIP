@@ -176,13 +176,13 @@ function spip_mysql_showtable($nom_table)
     $fields = array();
     foreach($a as $v) {
       preg_match("/^\s*`?([^`]*)`\s*(.*)$/",$v,$r);
-      $fields[$r[1]] = $r[2];
+      $fields[strtolower($r[1])] = $r[2];
     }
     $keys = array();
     foreach(split(",",$namedkeys) as $v) {
       preg_match("/^([^(]*)\((.*)\)\s*$/",$v,$r);
       $k = str_replace("`", '', $r[1]);
-      $t = str_replace("`", '', $r[2]);
+      $t = strtolower(str_replace("`", '', $r[2]));
       $keys[$k] = $t;
     }
     return array('field' => $fields,	'key' => $keys);
