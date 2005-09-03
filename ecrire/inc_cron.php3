@@ -20,7 +20,7 @@ define("_ECRIRE_INC_CRON", "1");
 // --------------------------
 
 // Deux difficultes:
-// - la plupat des hebergeurs ne fournissent pas le Cron d'Unix
+// - la plupart des hebergeurs ne fournissent pas le Cron d'Unix
 // - les scripts usuels standard sont limites a 30 secondes
 
 // Solution:
@@ -41,8 +41,10 @@ define("_ECRIRE_INC_CRON", "1");
 
 //----------
 
-// Cette fonction execute la premiere tache d'intervalle de temps expire,
-// sous reserve que le serveur MySQL soit actif.
+// Les taches sont dans un array ('nom de la tache' => periodicite)
+// Cette fonction execute la tache la plus urgente (celle dont la date
+// de derniere execution + la periodicite est minimale) sous reserve que
+// le serveur MySQL soit actif.
 // La date de la derniere intervention est donnee par un fichier homonyme,
 // de suffixe ".lock", modifie a chaque intervention et des le debut
 // de celle-ci afin qu'un processus concurrent ne la demarre pas aussi.
@@ -52,9 +54,7 @@ define("_ECRIRE_INC_CRON", "1");
 // Le fichier homonyme de prefixe "inc_" et de suffixe _EXTENSION_PHP
 // est automatiquement charge et est supposee la definir si ce n'est fait ici.
 
-function spip_cron($taches=array()) {
-
-	global $frequence_taches;
+function spip_cron($taches = array()) {
 	$t = time();
 
 	if (@file_exists(_FILE_MYSQL_OUT)
@@ -70,100 +70,97 @@ function spip_cron($taches=array()) {
 	if (!$taches)
 		$taches = taches_generales();
 
+	var_dump($taches);
+
 	include_ecrire("inc_meta.php3");
 
-	foreach ($taches as $tache) {
-		$lock = _DIR_SESSIONS . $tache . '.lock';
-		clearstatcache();
-		$last = @filemtime($lock);
-
-		// On opere un double lock : un dans _DIR_SESSIONS, pour les hits
-		// (en parallele sur le meme site) ; et un autre dans la base de
-		// donnees, de maniere a eviter toute concurrence entre deux SPIP
-		// differents partageant la meme base (replication de serveurs Web)
-		if (spip_touch($lock, $frequence_taches[$tache])
-		AND spip_get_lock('cron'.$tache)) {
-			spip_timer('tache');
-			include_ecrire('inc_' . $tache . _EXTENSION_PHP);
-			$fonction = 'cron_' . $tache;
-			$code_de_retour = $fonction($last);
-			if ($code_de_retour) {
-				$msg = "cron: $tache";
-				if ($code_de_retour < 0) {
-					# modifier la date du fichier
-					@touch($lock, (0 - $code_de_retour));
-					spip_log($msg . " (en cours, " . spip_timer('tache') .")");
-				}
-				else
-					spip_log($msg . " (" . spip_timer('tache') . ")");
-				break;
-			}
-			spip_release_lock('cron'.$tache);
+	// Quelle est la tache la plus urgente ?
+	$tache = '';
+	clearstatcache();
+	foreach ($taches as $nom => $periode) {
+		$lock = _DIR_SESSIONS . $nom . '.lock';
+		$date_lock = @filemtime($lock);
+		if ($date_lock + $periode < $t) {
+			$t = $date_lock + $periode;
+			$tache = $nom;
+			$last = $date_lock;
 		}
+	}
+	if (!$tache) return;
+
+
+	// On opere un double lock : un dans _DIR_SESSIONS, pour les hits
+	// (en parallele sur le meme site) ; et un autre dans la base de
+	// donnees, de maniere a eviter toute concurrence entre deux SPIP
+	// differents partageant la meme base (replication de serveurs Web)
+	$lock = _DIR_SESSIONS . $tache . '.lock';
+	if (spip_touch($lock, $taches[$tache])
+	AND spip_get_lock('cron'.$tache)) {
+
+		// preparer la tache
+		spip_timer('tache');
+		include_ecrire('inc_' . $tache . _EXTENSION_PHP);
+		$fonction = 'cron_' . $tache;
+
+		// l'appeler
+		$code_de_retour = $fonction($last);
+
+		// si la tache a eu un effet : log
+		if ($code_de_retour) {
+			spip_log("cron: $tache (" . spip_timer('tache') . ")");
+			// eventuellement modifier la date du fichier
+			if ($code_de_retour < 0) @touch($lock, (0 - $code_de_retour));
+		}
+
+		// relacher le lock mysql
+		spip_release_lock('cron'.$tache);
 	}
 }
 
-// Construction de la liste ordonnee des taches.
-// Certaines ne sont pas activables de l'espace prive. A revoir.
-
+//
+// Construction de la liste des taches.
+// la cle est la tache, la valeur le temps minimal, en secondes, entre
+// deux memes taches
+// NE PAS METTRE UNE VALEUR INFERIEURE A 30 (cf ci-dessus)
+//
 function taches_generales() {
 	$taches_generales = array();
 
 	// MAJ des rubriques publiques (cas de la publication post-datee)
-	$taches_generales[] = 'rubriques';
+	$taches_generales['rubriques'] = 3600;
 
 	// Optimisation de la base
-	$taches_generales[] = 'optimiser';
+	$taches_generales['optimiser'] = 3600*48;
 
 	// cache
 	if (_DIR_RESTREINT)
-	  $taches_generales[]= 'invalideur';
+		$taches_generales['invalideur'] = 3600;
 
 	// nouveautes
 	if (lire_meta('adresse_neuf') AND lire_meta('jours_neuf')
 	AND (lire_meta('quoi_de_neuf') == 'oui') AND _DIR_RESTREINT)
-		$taches_generales[]= 'mail';
+		$taches_generales['mail']= 3600 * 24 * lire_meta('jours_neuf');
 
 	// Stat. Attention: la popularite DOIT preceder les visites
 	if (lire_meta("activer_statistiques") == "oui") {
-		$taches_generales[]= 'statistiques';
-		$taches_generales[]= 'popularites';
-		$taches_generales[]= 'visites';
+		$taches_generales['statistiques'] = 3600;
+		$taches_generales['popularites'] = 1800;
+		$taches_generales['visites'] = 3600 * 24;
 	}
 
 	// syndication
 	if (lire_meta("activer_syndic") == "oui") 
-		$taches_generales[]= 'sites';
+		$taches_generales['sites'] = 90;
 
 	// indexation
 	if (lire_meta("activer_moteur") == "oui") 
-		$taches_generales[]= 'index';
+		$taches_generales['index'] = 60;
 		
 	// ajax
-		$taches_generales[] = 'ajax';
+		$taches_generales['ajax'] = 3600 * 2;
 
 	return $taches_generales;
 }
-
-// Definit le temps minimal, en secondes, entre deux memes taches 
-// NE PAS METTRE UNE VALEUR INFERIEURE A 30 (cf ci-dessus)
-// ca entrainerait plusieurs execution en parallele de la meme tache
-// Ces valeurs sont destinees a devenir des "metas" accessibles dans
-// le panneau de configuration, comme l'est deja la premiere
-
-global $frequence_taches;
-$frequence_taches = array(
-			  'mail' => 3600 * 24 * lire_meta('jours_neuf'),
-			  'visites' => 3600 * 24,
-			  'statistiques' => 3600,
-			  'invalideur' => 3600,
-			  'rubriques' => 3600,
-			  'popularites' => 1800,
-			  'sites' => 90,
-			  'index' => 60,
-			  'optimiser' => 3600 * 48,
-			  'ajax' => 3600 * 2
-);
 
 // Fonctions effectivement appelees.
 // Elles sont destinees a migrer dans leur fichier homonyme.
@@ -196,9 +193,12 @@ function cron_sites($t) {
 // calcule les stats en plusieurs etapes par tranche de 100
 
 function cron_statistiques($t) {
-
 	$ref = calculer_n_referers(100);
+
+	// Si ce n'est pas fini on redonne la meme date au fichier .lock
+	// pour etre prioritaire lors du cron suivant
 	if ($ref == 100) return (0 - $t);
+
 	// Supprimer les referers trop vieux
 	supprimer_referers();
 	supprimer_referers("article");
@@ -215,7 +215,8 @@ function cron_popularites($t) {
 function cron_visites($t) {
 	// Si le fichier .lock est absent, ne pas calculer (mais reparer la date
 	// du .lock de maniere a commencer a 00:00:01 demain).
-	if ($t) calculer_visites();
+	if ($t)
+		calculer_visites();
 
 	// il vaut mieux le lancer peu apres minuit, 
 	// donc on pretend avoir ete execute precisement "ce matin a 00:00:01"
@@ -239,7 +240,7 @@ function cron_mail($t) {
 	$page = $page['texte'];
 	if (substr($page,0,5) == '<'.'?php') {
 # ancienne version: squelette en PHP avec affection des 2 variables ci-dessous
-# 1 passe de + à la sortie
+# 1 passe de plus a la sortie
 				$mail_nouveautes = '';
 				$sujet_nouveautes = '';
 				$headers = '';
@@ -282,7 +283,7 @@ function cron_invalideur($t) {
 
 	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
 
-	// A revoir: il semble y avoir une désynchro ici.
+	// A revoir: il semble y avoir une desynchro ici.
 	
 		list ($total_cache) = spip_fetch_array(spip_query("SELECT SUM(taille)
 		FROM spip_caches WHERE type IN ('t', 'x')"));
