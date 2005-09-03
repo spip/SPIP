@@ -19,7 +19,12 @@ define("_ECRIRE_INC_POPULARITES", "1");
 // Popularite, modele logarithmique
 //
 
-function calculer_popularites($t) {
+function calculer_popularites() {
+
+	// Si c'est le premier appel (fichier .lock absent), ne pas calculer
+	$lock = _DIR_SESSIONS . 'popularites.lock';
+	if (!$t = @filemtime($lock)) return;
+	spip_touch($lock);
 
 	$duree = time() - $t;
 	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
@@ -74,4 +79,5 @@ function calculer_popularites($t) {
 	ecrire_meta("popularite_total", $totalpop);
 	ecrire_metas();
 }
+
 ?>

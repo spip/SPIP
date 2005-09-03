@@ -208,15 +208,18 @@ function cron_statistiques($t) {
 function cron_popularites($t) {
 	// Si c'est le premier appel (fichier .lock absent), ne pas calculer
 	if ($t == 0) return 0;
-	calculer_popularites($t);
+	calculer_popularites();
 	return 1;
 }
 
 function cron_visites($t) {
 	// Si le fichier .lock est absent, ne pas calculer (mais reparer la date
 	// du .lock de maniere a commencer a 00:00:01 demain).
-	if ($t)
+	if ($t) {
+		// il faut d'abord faire le calcul des popularites
+		calculer_popularites();
 		calculer_visites();
+	}
 
 	// il vaut mieux le lancer peu apres minuit, 
 	// donc on pretend avoir ete execute precisement "ce matin a 00:00:01"
