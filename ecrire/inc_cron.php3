@@ -70,8 +70,6 @@ function spip_cron($taches = array()) {
 	if (!$taches)
 		$taches = taches_generales();
 
-	var_dump($taches);
-
 	include_ecrire("inc_meta.php3");
 
 	// Quelle est la tache la plus urgente ?
@@ -215,7 +213,9 @@ function cron_visites($t) {
 	// du .lock de maniere a commencer a 00:00:01 demain).
 	if ($t) {
 		// il faut d'abord faire le calcul des popularites
+		include_ecrire('inc_popularites.php3');
 		calculer_popularites();
+
 		calculer_visites();
 	}
 
