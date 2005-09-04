@@ -128,27 +128,24 @@ function traduire_chaine($code, $args) {
 	}
 
 	// parcourir tous les modules jusqu'a ce qu'on trouve
-	$new = "";
 	while (list(,$module) = each ($modules)) {
 		$var = "i18n_".$module."_".$spip_lang;
-		if (empty($GLOBALS[$var]))
-		  {
+		if (empty($GLOBALS[$var])) {
 			charger_langue($spip_lang, $module);
-			$new = $var;
-		  }
+
+			// surcharge perso -- on cherche local(_xx).php3 dans le chemin
+			if ($f = find_in_path('local.php3'))
+				surcharger_langue($f);
+			if ($f = find_in_path('local_'.$spip_lang.'.php3'))
+				surcharger_langue($f);
+			// compatibilite ascendante : chercher aussi dans ecrire/lang/
+			else if (@is_readable($f = _DIR_LANG . 'local_'.$spip_lang.'.php3'))
+				surcharger_langue($f);
+
+		}
 		if (isset($GLOBALS[$var][$code])) break;
 	}
 
-	if ($new) {
-	// surcharge perso -- on cherche le fichier local(_xx).php3 dans le chemin
-	  if ($f = (find_in_path('local.php3')))
-		surcharger_langue($f);
-	  if ($f = (find_in_path('local_'.$lang.'.php3')))
-		surcharger_langue($f);
-	// compatibilite ascendante : chercher aussi local_xx.php3 dans ecrire/lang/
-	  else if (@is_readable($f = _DIR_LANG . 'local_'.$lang.'.php3'))
-		surcharger_langue($f);
-	}
 	$text = $GLOBALS[$var][$code];
 
 	// fallback langues pas finies ou en retard (eh oui, c'est moche...)
