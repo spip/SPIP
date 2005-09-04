@@ -286,7 +286,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_classement_2' => '&nbsp;out of @liste@',
 'info_code_acces' => 'Do not forget your own access codes!',
 'info_comment_lire_tableau' => 'How to read this graphic',
-'info_config_suivi' => 'If this address corresponds to amailing-list, you can indicate below the address where the site participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address endowed with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
+'info_config_suivi' => 'If this address corresponds to a mailing list, you can indicate below the address where the site\'s participants can register. This address could be a URL (for instance the page of the list registration via the web), or an e-mail address with a specific subject (for instance: <tt>@adresse_suivi@?subject=subscribe</tt>):',
 'info_config_suivi_explication' => 'You can subscribe to the mailing-list of this site. You will receive then, by automated electronic mail, the announcements concerning articles and news items submitted for publication.',
 'info_confirmer_passe' => 'Confirm new password:',
 'info_connexion_base' => 'Second step: <B>Attempting to connect to database</B>',
