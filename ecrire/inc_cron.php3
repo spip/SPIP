@@ -61,12 +61,6 @@ function spip_cron($taches = array()) {
 	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
 		return;
 
-	include(_FILE_CONNECT);
-	if (!$GLOBALS['db_ok']) {
-		spip_log('pas de connexion DB pour taches de fond (cron)');
-		return;
-	}
-
 	if (!$taches)
 		$taches = taches_generales();
 
@@ -86,14 +80,24 @@ function spip_cron($taches = array()) {
 	}
 	if (!$tache) return;
 
+	// Connexion DB
+	include(_FILE_CONNECT);
+	if (!$GLOBALS['db_ok']) {
+		spip_log('pas de connexion DB pour taches de fond (cron)');
+		return;
+	}
 
-	// On opere un double lock : un dans _DIR_SESSIONS, pour les hits
-	// (en parallele sur le meme site) ; et un autre dans la base de
-	// donnees, de maniere a eviter toute concurrence entre deux SPIP
-	// differents partageant la meme base (replication de serveurs Web)
+	// Interdire des taches paralleles, de maniere a eviter toute concurrence
+	// entre deux SPIP partageant la meme base, ainsi que toute interaction
+	// bizarre entre des taches differentes
+	if (!spip_get_lock('cron')) {
+		spip_lock("tache $tache: pas de lock cron");
+		return;
+	}
+
+	// Un autre lock dans _DIR_SESSIONS, pour plus de securite
 	$lock = _DIR_SESSIONS . $tache . '.lock';
-	if (spip_touch($lock, $taches[$tache])
-	AND spip_get_lock('cron'.$tache)) {
+	if (spip_touch($lock, $taches[$tache])) {
 
 		// preparer la tache
 		spip_timer('tache');
@@ -109,10 +113,10 @@ function spip_cron($taches = array()) {
 			// eventuellement modifier la date du fichier
 			if ($code_de_retour < 0) @touch($lock, (0 - $code_de_retour));
 		}
-
-		// relacher le lock mysql
-		spip_release_lock('cron'.$tache);
 	}
+
+	// relacher le lock mysql
+	spip_release_lock('cron');
 }
 
 //
@@ -152,7 +156,7 @@ function taches_generales() {
 
 	// indexation
 	if (lire_meta("activer_moteur") == "oui") 
-		$taches_generales['index'] = 60;
+		$taches_generales['index'] = 90;
 		
 	// ajax
 		$taches_generales['ajax'] = 3600 * 2;
@@ -174,7 +178,14 @@ function cron_optimiser($t) {
 }
 
 function cron_index($t) {
-	return count(effectuer_une_indexation());
+	$c = count(effectuer_une_indexation());
+	// si des indexations ont ete effectuees, on passe la periode a 0 s
+	## note : (time() - 90) correspond en fait a :
+	## time() - $taches_generales['index']
+	if ($c)
+		return (0 - (time() - 90));
+	else
+		return 0;
 }
 
 function cron_sites($t) {
