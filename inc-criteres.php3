@@ -631,15 +631,17 @@ function trouver_champ_exterieur($cle, $joints, &$boucle)
 }
 
 // traitement des relations externes par DES jointures.
-// mais ne pas dupliquer les jointures intermediaires
 
 function calculer_critere_externe(&$boucle, $id_table, $lien, $join, $suite) {
 	static $num;
 	$id_field = $id_table . '.' . $join; 
-	if ($suite)
+// dans certains cas on pourrait ne pas dupliquer les jointures intermediaires
+// a revoir
+/*	if ($suite)
 	  foreach ($boucle->join as $v) {
 	    if (ereg("^$id_field=L([0-9]+)\.$join$",$v, $r)) return $r[1];
 	  }
+*/
 	$num++;
 	$boucle->lien = true;
 	$boucle->from["L$num"] = $lien;
