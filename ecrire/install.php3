@@ -251,7 +251,7 @@ else if ($etape == 4) {
 
 	if ($choix_db == "new_spip") {
 		$sel_db = $table_new;
-		mysql_query("CREATE DATABASE $sel_db");
+		mysql_query("CREATE DATABASE `$sel_db`");
 	}
 	else {
 		$sel_db = $choix_db;
