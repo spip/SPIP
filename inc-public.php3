@@ -32,6 +32,11 @@ if (defined("_INC_PUBLIC")) {
 	// Calculer la page sans evaluer le php qu'elle contient
 	$page = calcule_header_et_page ($fond, $delais);
 
+	// est-on admin ?
+	if ($affiche_boutons_admin = (
+	(!$flag_preserver AND $GLOBALS['_COOKIE']['spip_admin'])
+	OR $var_mode == 'debug'))
+	  include_local(find_in_path('inc-formulaire_admin.php3'));
 	// Execution de la page calculee
 
 	// 1. Cas d'une page contenant uniquement du HTML :

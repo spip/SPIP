@@ -17,7 +17,7 @@ define("_INC_PUBLIC_GLOBAL", "1");
 
 // fonction principale declenchant tout le service
 function calcule_header_et_page ($fond, $delais) {
-	  global $affiche_boutons_admin, $auteur_session, $flag_dynamique,
+	  global $auteur_session, $flag_dynamique,
 	  $flag_ob, $flag_preserver, $forcer_lang, $ignore_auth_http,
 	  $lastmodified, $recherche, $use_cache, $var_confirm, $var_mode,
 	  $var_recherche, $tableau_des_erreurs;
@@ -75,14 +75,12 @@ function calcule_header_et_page ($fond, $delais) {
 		}
 	}
 
-	// est-on admin ?
-	if ($affiche_boutons_admin = (
-	(!$flag_preserver AND $GLOBALS['_COOKIE']['spip_admin'])
-	OR $var_mode == 'debug'))
-		include_local(find_in_path('inc-formulaire_admin.php3'));
-
 	$tableau_des_erreurs = array();
 	$page = afficher_page_globale ($fond, $delais, $use_cache);
+
+	if (!isset($flag_preserver))
+	  $flag_preserver = ($page['process_ins'] == 'php') &&
+	  preg_match("/<[?]php\s+.*header\s*\(\s*.content\-type:/is",$page['texte']);
 
 	//
 	// Envoyer les entetes appropries
