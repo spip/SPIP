@@ -160,8 +160,11 @@ function spip_register_globals() {
 						# interdire la mise en cache de la page produite
 						switch ($var) {
 							case 'REMOTE_USER':
-							case 'fond':
 								die ("$var interdite");
+								break;
+							case 'fond':
+								if (!defined('_SPIP_PAGE'))
+									die ("$var interdite");
 								break;
 							default:
 								define ('spip_interdire_cache', true);
