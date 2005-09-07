@@ -26,12 +26,21 @@ function levenshtein255 ($a, $b) {
 	return @levenshtein($a,$b);
 }
 
+// reduit un mot a sa valeur translitteree et en minuscules
+function reduire_mot($mot) {
+	return strtr(
+		translitteration(trim($mot)),
+		'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+		'abcdefghijklmnopqrstuvwxyz'
+		);
+}
+
 function mots_ressemblants($mot, $table_mots, $table_ids='') {
 	$lim = 2;
 	$nb = 0;
 	$opt = 1000000;
 	$mot_opt = '';
-	$mot = translitteration(strtolower(trim($mot)));
+	$mot = reduire_mot($mot);
 	$len = strlen($mot);
 
 	if (!$table_mots) return '';
@@ -45,7 +54,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 			$val2 = trim($val);
 			if ($val2) {
 				if (!($m = $distance[$id])) {
-					$val2 = translitteration(strtolower($val2));
+					$val2 = reduire_mot($val2);
 					$len2 = strlen($val2);
 					if ($val2 == $mot)
 						$m = -2; # resultat exact
