@@ -156,21 +156,21 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
 				while ($row_admin = spip_fetch_array($result_admin)) {
 					$id_rubrique = $row_admin["id_rubrique"];
-					$titre = typo($row_admin["titre"]);
-					echo "<li>$titre";
+					echo "<li><a href='naviguer.php3?id_rubrique=$id_rubrique'>", typo($row_admin["titre"]), "</a>";
+
 					if ($connect_toutes_rubriques
 					AND $connect_id_auteur != $id_auteur) {
-						echo " <font size=1>"
-						. "[<a href='$url_self&supp_rub=$id_rubrique'>"
-						._T('lien_supprimer_rubrique')
-						."</a>]</font>";
+					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='$url_self&supp_rub=$id_rubrique'>",
+					    _T('lien_supprimer_rubrique'),
+					    "</a>]</font>";
 					}
+					echo '</li>';
 					$toutes_rubriques .= "$id_rubrique,";
 				}
-				echo "</ul>";
 				$toutes_rubriques = ",$toutes_rubriques";
+
+				echo "</ul>";
 			}
-	
 			if ($connect_toutes_rubriques
 			AND $connect_id_auteur != $id_auteur) {
 				echo "</div><br /><div class='arial1'>";
