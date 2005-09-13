@@ -384,7 +384,7 @@ function http_calendrier_semaine($annee, $mois, $jour, $echelle, $partie_cal, $s
 	    $sd = http_calendrier_sans_date($annee, $mois,$evt[0]);
 	    $finurl = "&echelle=$echelle&partie_cal=$partie_cal$ancre";
 	    $evt =
-	      http_calendrier_semaine_noms($annee, $mois, $init, $scriptep, $finurl) .
+	      http_calendrier_semaine_noms($annee, $mois, $init, $script, $finurl) .
 	      http_calendrier_semaine_sept($annee, $mois, $init, $echelle, $partie_cal, $evt);
 	  }
 
@@ -1322,7 +1322,7 @@ ORDER BY date
 		$id = $row['id_article'];
 		$evenements[$amj][]=
 		    array(
-			'CATEGORIES' => calendrier_categories('articles', $id),
+			'CATEGORIES' => calendrier_categories('spip_articles', $id),
 			'DESCRIPTION' => $row['descriptif'],
 			'SUMMARY' => $row['titre'],
 			'URL' => generer_url_article($id));
@@ -1345,7 +1345,7 @@ ORDER BY date_heure
 		$evenements[$amj][]=
 		array(
 		      'URL' => generer_url_breve($id),
-		      'CATEGORIES' => calendrier_categories('breves', $ir),
+		      'CATEGORIES' => calendrier_categories('spip_breves', $ir),
 		      'SUMMARY' => $row['titre']);
 	}
 }

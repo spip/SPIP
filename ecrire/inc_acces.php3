@@ -93,13 +93,6 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	global $connect_statut, $connect_toutes_rubriques, $connect_id_auteur;
 	global $spip_lang_right;
 
-	if ($post) {
-		$url_self = $post;
-		echo "<p />";
-		echo "<form action='$post' method='post'>\n";
-	} else
-		$url_self = "auteur_infos.php3?id_auteur=$id_auteur";
-
 
 	// S'agit-il d'un admin restreint ?
 	if ($statut == '0minirezo') {
@@ -108,49 +101,60 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 		$admin_restreint = (spip_num_rows($result_admin) > 0);
 	}
 
-	// Seuls les admins voient le menu 'statut' ; les admins restreints
-	// ne peuvent l'utiliser que pour mettre un auteur a la poubelle
-	if ($connect_statut == "0minirezo"
-	AND ($connect_toutes_rubriques OR $statut != "0minirezo")
-	AND $connect_id_auteur != $id_auteur) {
+	$droit = ( ($connect_toutes_rubriques OR $statut != "0minirezo")
+		   && ($connect_id_auteur != $id_auteur));
+
+	if ($post && $droit) {
+		$url_self = $post;
+		echo "<p />";
+		echo "<form action='$post' method='post'>\n";
+	} else
+		$url_self = "auteur_infos.php3?id_auteur=$id_auteur";
+
+	// les admins voient et peuvent modifier les droits
+	// les admins restreints les voient mais 
+	// ne peuvent les utiliser que pour mettre un auteur a la poubelle
+	if ($connect_statut == "0minirezo") {
 		debut_cadre_relief();
 
-		if ($statut == '0minirezo') {
+		if ($droit) {
+
+		  if ($statut == '0minirezo') {
 			if ($admin_restreint)
 				echo bouton_block_visible("statut$id_auteur");
 			else
 				echo bouton_block_invisible("statut$id_auteur");
-		}
+		  }
 
-		echo "<b>"._T('info_statut_auteur')." </b> ";
-		echo "<select name='statut' size=1 class='fondl'>";
+		  echo "<b>"._T('info_statut_auteur')." </b> ";
+		  echo "<select name='statut' size=1 class='fondl'>";
 
-		if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques)
+		  if ($connect_toutes_rubriques)
 			echo "<OPTION".mySel("0minirezo",$statut).">"._T('item_administrateur_2');
 
-		echo "<OPTION".mySel("1comite",$statut).">"._T('intem_redacteur');
+		  echo "<OPTION".mySel("1comite",$statut).">"._T('intem_redacteur');
 
-		if (($statut == '6forum')
-		OR (lire_meta('accepter_visiteurs') == 'oui')
-		OR (lire_meta('forums_publics') == 'abo')
-		OR spip_num_rows(spip_query("SELECT statut
+		  if (($statut == '6forum')
+		      OR (lire_meta('accepter_visiteurs') == 'oui')
+		      OR (lire_meta('forums_publics') == 'abo')
+		      OR spip_num_rows(spip_query("SELECT statut
 		FROM spip_auteurs WHERE statut='6forum'")))
 			echo "<OPTION".mySel("6forum",$statut).">"._T('item_visiteur');
-		echo "<OPTION".mySel("5poubelle",$statut).
-		  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
+		  echo "<OPTION".mySel("5poubelle",$statut).
+		    " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle');
 
-		echo "</select>\n";
-
+		  echo "</select>\n";
+		}
 		//
 		// Gestion restreinte des rubriques
 		//
 		if ($statut == '0minirezo') {
+		  echo debut_block_visible("statut$id_auteur");
 			if (!$admin_restreint) {
-				echo debut_block_invisible("statut$id_auteur");
+#				echo debut_block_invisible("statut$id_auteur");
 				echo "<p /><div style='arial2'>\n";
 				echo _T('info_admin_gere_toutes_rubriques');
 			} else {
-				echo debut_block_visible("statut$id_auteur");
 				echo "<p /><div style='arial2'>\n";
 				echo _T('info_admin_gere_rubriques')."\n";
 				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
@@ -191,7 +195,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 		}
 
 
-		if ($post) {
+		if ($post && $droit) {
 			echo "<div align='$spip_lang_right'><input type='submit'
 			class='fondo' name='Valider'
 			value=\""._T('bouton_valider')."\" /></div>"; 
