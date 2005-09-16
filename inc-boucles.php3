@@ -249,22 +249,21 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_syndic_articles" ;
-	$jointure = array_search("spip_syndic", $boucle->from);
 
 	// Restreindre aux elements publies, sauf critere contraire
-	if (!$boucle->statut) {
-	  if ($GLOBALS['var_preview'])
-	    $boucle->where[] ="$id_table.statut IN ('publie','prop')";
-	  else {
-	    if (!$jointure)
-	      $jointure = 'J' . count($boucle->from);
-	      $boucle->from[$jointure] = "spip_syndic";
-	    }
-	    $boucle->where[] = $id_table . ".statut='publie'";
-	    $boucle->where[] = $jointure . ".statut='publie'";
+	if ($boucle->statut) {}
+	else if ($GLOBALS['var_preview'])
+		$boucle->where[] ="$id_table.statut IN ('publie','prop')";
+	else {
+		$jointure = array_search("spip_syndic", $boucle->from);
+		if (!$jointure)
+			$jointure = 'J' . count($boucle->from);
+		$boucle->from[$jointure] = "spip_syndic";
+		$boucle->where[] = $id_table . ".statut='publie'";
+		$boucle->where[] = $jointure . ".statut='publie'";
+		$boucle->where[] = $id_table . ".id_syndic=$jointure" . ".id_syndic";
 	}
-	if ($jointure)
-	  $boucle->where[]= $id_table . ".id_syndic=$jointure" . ".id_syndic";
+
 	return calculer_boucle($id_boucle, $boucles);
 }
 
