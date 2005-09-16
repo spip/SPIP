@@ -380,7 +380,7 @@ function couper_intro($texte, $long) {
 
 // Securite : empecher l'execution de code PHP
 function interdire_scripts($source) {
-	$source = preg_replace(",<(\%|\?|([[:space:]]*)script),", "&lt;\\1", $source);
+	$source = preg_replace(",<(\%|\?|[[:space:]]*(script|base)),ims", "&lt;\\1", $source);
 	return $source;
 }
 
