@@ -14,6 +14,10 @@
 include ("inc.php3");
 include_ecrire("inc_mots.php3");
 
+// secure
+if (!($connect_statut == '0minirezo'  AND $connect_toutes_rubriques))
+  $conf_mot = "";
+
 // suppression d'un mot ?
 if ($conf_mot = intval($conf_mot)) {
 	$query = "SELECT * FROM spip_mots WHERE id_mot='$conf_mot'";
@@ -56,7 +60,7 @@ if ($conf_mot = intval($conf_mot)) {
 }
 
 
-if ($connect_statut == '0minirezo') {
+if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 	if ($modifier_groupe == "oui") {
 		$change_type = addslashes(corriger_caracteres($change_type));
 		$ancien_type = addslashes(corriger_caracteres($ancien_type));
@@ -82,7 +86,7 @@ if ($connect_statut == '0minirezo') {
 		$query="DELETE FROM spip_groupes_mots WHERE id_groupe='$supp_group'";
 		$result=spip_query($query);
 	}
-}
+ }
 
 
 debut_page(_T('titre_page_mots_tous'), "documents", "mots");
@@ -91,7 +95,10 @@ debut_gauche();
 debut_droite();
 
 gros_titre(_T('titre_mots_tous'));
-echo typo(_T('info_creation_mots_cles')) . aide ("mots") . "<br><br>";
+if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
+  echo typo(_T('info_creation_mots_cles')) . aide ("mots") ;
+  }
+echo "<br><br>";
 
 /////
 
@@ -242,7 +249,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	//
 	$supprimer_groupe = afficher_groupe_mots($id_groupe);
 
-	if ($connect_statut =="0minirezo" AND !$conf_mot){
+	if ($connect_statut =="0minirezo" AND $connect_toutes_rubriques AND !$conf_mot){
 		echo "\n<table cellpadding=0 cellspacing=0 border=0 width=100%>";
 		echo "<tr>";
 		echo "<td>";
@@ -264,7 +271,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 	fin_cadre_enfonce();
 }
 
-if ($connect_statut =="0minirezo" AND !$conf_mot){
+if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques  AND !$conf_mot){
 	echo "<p>&nbsp;</p><div align='right'>";
 	icone(_T('icone_creation_groupe_mots'), "mots_type.php3?new=oui", "groupe-mot-24.gif", "creer.gif");
 	echo "</div>";

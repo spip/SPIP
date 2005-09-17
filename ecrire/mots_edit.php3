@@ -20,7 +20,7 @@ include_ecrire ("inc_abstract_sql.php3");
 //
 // modifications mot
 //
-if ($connect_statut == '0minirezo') {
+if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 	if ($supp_mot) {
 		$query = "DELETE FROM spip_mots WHERE id_mot=$supp_mot";
 		$result = spip_query($query);
@@ -123,7 +123,7 @@ echo "</center>";
 // Logos du mot-clef
 //
 
-if ($id_mot > 0 AND $connect_statut == '0minirezo')
+if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
 	afficher_boite_logo('mot', 'id_mot', $id_mot,
 	_T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'));
 
@@ -135,7 +135,7 @@ debut_raccourcis();
 
 icone_horizontale(_T('icone_voir_tous_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "rien.gif");
 
-if ($connect_statut == '0minirezo')
+if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
 		icone_horizontale(_T('icone_creation_mots_cles'), "mots_edit.php3?new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe", "mot-cle-24.gif", "creer.gif");
 
 fin_raccourcis();
@@ -202,7 +202,7 @@ fin_cadre_relief();
 
 
 
-if ($connect_statut =="0minirezo"){
+if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<P>";
 	debut_cadre_formulaire();
 
