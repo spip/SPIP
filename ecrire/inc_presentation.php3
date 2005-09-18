@@ -706,17 +706,17 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 		. $inser_puce
 		. "</div>"
 		. "<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>"
-		. http_href_img("javascript:selec_statut($id, '$type', -1, '" . _DIR_IMG_PACK . $puces[0] . "', 'prop');",
+		. http_href_img("javascript:selec_statut('$id', '$type', -1, '" . _DIR_IMG_PACK . $puces[0] . "', 'prop');",
 			$puces[0],
 			"title=\""._T('texte_statut_propose_evaluation')."\"",
 			'','','',
 			$action)
-		. http_href_img("javascript:selec_statut($id, '$type', -10, '" . _DIR_IMG_PACK .$puces[1] . "', 'publie');",
+		. http_href_img("javascript:selec_statut('$id', '$type', -10, '" . _DIR_IMG_PACK .$puces[1] . "', 'publie');",
 		 	$puces[1],
 			"title=\""._T('texte_statut_publie')."\"",
 			'','','',
 			$action)
-		. http_href_img("javascript:selec_statut($id, '$type', -19, '" . _DIR_IMG_PACK .$puces[2] . "', 'refuse');",
+		. http_href_img("javascript:selec_statut('$id', '$type', -19, '" . _DIR_IMG_PACK .$puces[2] . "', 'refuse');",
 			$puces[2],
 			"title=\""._T('texte_statut_refuse')."\"",
 			'','','',

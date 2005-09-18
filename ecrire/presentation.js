@@ -70,8 +70,7 @@ function selec_statut(id, type, decal, puce, statut) {
 
 		findObj('imgstatut'+type+id).src = puce;
 		frames['iframe_action'].location.href = 
-  'iframe_action.php3?action=statut_'+ type +'&id='+id+'&statut='+statut;
-
+  'iframe_action.php3?action='+ type + 's' + '&id='+id+'&statut='+statut;
 	}
 }
 
