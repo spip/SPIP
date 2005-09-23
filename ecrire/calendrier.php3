@@ -10,24 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-  // ce script peut etre recopie a la racine pour obtenir le calendrier
-  // a partir de l'espace public. 
-  // Evidemment les messages internes a la redaction seront absents.
+include ("inc.php3");
 
-if (!defined("_ECRIRE_INC_VERSION")) {
-	include((@is_dir("ecrire") ? 'ecrire/' : '') . "inc_version.php3");
-}
+$nom = "calendrier";
+$f = find_in_path('inc_' . $nom . '.php');
+if ($f) 
+  include($f);
+elseif (file_exists($f = (_DIR_INCLUDE . 'inc_' . $nom . '.php')))
+  include($f);
+if (function_exists($nom))
+  $nom($type, $css);
 
-if (!_DIR_RESTREINT)
-	include ("inc.php3");
- else {
-	include_ecrire("inc_presentation.php3");
-	include_ecrire("inc_calendrier.php");
-	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_layer.php3");
- }
-
-$afficher_bandeau_calendrier = true;
-echo http_calendrier_init('', $type);
-if (!_DIR_RESTREINT) fin_page();
 ?>
