@@ -218,14 +218,17 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 // http://www.w3.org/TR/NOTE-datetime
 function my_strtotime($la_date) {
 
-	$s = strtotime($la_date);
-	if ($s > 0)
-		return $s;
-
-	if (ereg('^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?(Z|([-+][0-9][0-9]):[0-9]+)$', $la_date, $match)) {
+	if (preg_match(
+	',^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?'
+	.'(Z|([-+][0-9][0-9]):[0-9]+)?$,',
+	$la_date, $match)) {
 		$la_date = str_replace("T", " ", $match[1])." GMT";
 		return strtotime($la_date) - intval($match[5]) * 3600;
 	}
+
+	$s = strtotime($la_date);
+	if ($s > 0)
+		return $s;
 
 	// erreur
 	spip_log("Impossible de lire le format de date '$la_date'");
