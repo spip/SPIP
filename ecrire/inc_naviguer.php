@@ -2,6 +2,7 @@
 
 function infos_naviguer($id_rubrique, $statut)
 {
+	global $connect_statut, $connect_toutes_rubriques;
 
 	if ($id_rubrique > 0) {
 		debut_boite_info();
@@ -12,6 +13,16 @@ function infos_naviguer($id_rubrique, $statut)
 	
 		voir_en_ligne ('rubrique', $id_rubrique, $statut);
 	
+		if ($connect_statut == "0minirezo" && acces_rubrique($id_rubrique)) {
+			list($id_parent) = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+			if (!$id_parent) {
+			  list($n) = spip_fetch_array(spip_query("SELECT COUNT(*) " .
+								 critere_statut_controle_forum('prop', $id_rubrique)));
+			  if ($n)
+			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)),
+		"controle_forum.php3?id_rubrique=$id_rubrique", "suivi-forum-24.gif", "");
+			}
+		}
 		fin_boite_info();
 	}
 }

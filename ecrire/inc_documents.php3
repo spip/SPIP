@@ -488,7 +488,7 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 
 	echo debut_block_invisible("ftp$num_form");
 
-	if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques
+	if ($connect_statut == '0minirezo'  # AND $connect_toutes_rubriques
 	AND $envoi_multiple) {
 		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
 		if ($texte_upload) {

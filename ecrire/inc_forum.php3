@@ -196,26 +196,30 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	return $controle;
 }
 
-// Selon ce qu'on veut suivre depuis ecrire/controle_forum, retourner le SQL
-function critere_statut_controle_forum($page) {
-	switch ($page) {
+// recuperer le critere SQL qui selectionne nos forums
+function critere_statut_controle_forum($page, $id_rubrique=0) {
+  if (!$id_rubrique)
+    $query_forum = "FROM spip_forum AS F WHERE ";
+  else
+    $query_forum = "FROM spip_forum AS F, spip_articles AS A WHERE A.id_secteur=$id_rubrique AND F.id_article=A.id_article  AND ";
+   
+  switch ($page) {
 	case 'public':
-		$query_forum = "statut IN ('publie', 'off', 'prop') AND texte!=''";
+		$query_forum .= "F.statut IN ('publie', 'off', 'prop') AND F.texte!=''";
 		break;
 	case 'prop':
-		$query_forum = "statut='prop'";
+		$query_forum .= "F.statut='prop'";
 		break;
 	case 'interne':
-		$query_forum = "statut IN ('prive', 'privrac', 'privoff', 'privadm') AND texte!=''";
+		$query_forum .= "F.statut IN ('prive', 'privrac', 'privoff', 'privadm') AND F.texte!=''";
 		break;
 	case 'vide':
-		$query_forum = "statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND texte=''";
+		$query_forum .= "F.statut IN ('publie', 'off', 'prive', 'privrac', 'privoff', 'privadm') AND F.texte=''";
 		break;
 	default:
-		$query_forum = "0=1";
+		$query_forum .= "0=1";
 		break;
 	}
-
 	return $query_forum;
 }
 
