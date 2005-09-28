@@ -681,7 +681,7 @@ function traiter_tableau($bloc) {
 
 	// Decouper le tableau en lignes
 	preg_match_all(',([|].*)[|]\n,Ums', $bloc, $regs, PREG_PATTERN_ORDER);
-
+	$html = array();
 	// Traiter chaque ligne
 	foreach ($regs[1] as $ligne) {
 		$l ++;
