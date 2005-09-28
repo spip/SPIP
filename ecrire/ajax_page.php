@@ -13,7 +13,7 @@
 include ("inc.php3");
 $charset = lire_meta("charset");
 @header('Content-type: text/html; charset=$charset');
-echo "<"."?xml version='1.0' encoding='$charset'?>\n";
+echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
 
 	if ($fonction == "aff_rub") {
 		include_ecrire("inc_mini_nav.php");
