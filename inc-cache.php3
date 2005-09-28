@@ -100,7 +100,7 @@ function retire_caches($chemin = '') {
 	// En priorite le cache qu'on appelle maintenant
 	if ($chemin) {
 		$q = spip_query("SELECT fichier FROM spip_caches
-		WHERE fichier = '".addslashes($chemin)."' AND type='x' LIMIT 1 OFFSET 0");
+		WHERE fichier = '".addslashes($chemin)."' AND type='x' LIMIT 1");
 		if ($r = spip_fetch_array($q))
 			$suppr[$r['fichier']] = true;
 	}
@@ -112,7 +112,7 @@ function retire_caches($chemin = '') {
 		ecrire_metas();
 
 		$q = spip_query("SELECT fichier FROM spip_caches
-		WHERE type='x' LIMIT 100 OFFSET 0");
+		WHERE type='x' LIMIT 100");
 		while ($r = spip_fetch_array($q)) {
 			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
 			$suppr[$r['fichier']] = true;

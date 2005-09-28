@@ -64,7 +64,7 @@ debut_body();
 			echo "</div>";
 		}
 	
-		$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20 OFFSET 0";
+		$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20";
 		$result=spip_query($query);
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
@@ -141,7 +141,7 @@ debut_body();
 				echo "</div>";
 			}
 	
-			$query = "SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT  20 OFFSET 0";
+			$query = "SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT  20";
 			$result=spip_query($query);
 			if (spip_num_rows($result)>0) {
 				echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
@@ -221,7 +221,7 @@ debut_body();
 			$result = spip_query($query);
 			$total_articles = spip_num_rows($result);
 			
-			$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20 OFFSET 0";
+			$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20";
 			$result=spip_query($query);
 			$total_breves = spip_num_rows($result);
 			

@@ -751,7 +751,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	
 		$div_trad = substr(md5($requete), 0, 4);
 
-		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1 OFFSET 0");
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
@@ -808,7 +808,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	if (strlen($tranches) OR $toujours_afficher) {
 
-		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1 OFFSET 0");
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
@@ -996,7 +996,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	
 		$div_trad = substr(md5($requete), 0, 4);
 
-		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1 OFFSET 0");
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
@@ -1036,7 +1036,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 	if (strlen($tranches) OR $toujours_afficher) {
 
-		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1 OFFSET 0");
+		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
@@ -2051,12 +2051,12 @@ function barre_onglets($rubrique, $onglet){
 		onglet(_T('onglet_messages_publics'), "controle_forum.php3?page=public", "public", $onglet, "forum-public-24.gif");
 		onglet(_T('onglet_messages_internes'), "controle_forum.php3?page=interne", "interne", $onglet, "forum-interne-24.gif");
 
-		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1 OFFSET 0";
+		$query_forum = "SELECT * FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1";
 		$result_forum = spip_query($query_forum);
 		if ($row = spip_fetch_array($result_forum))
 			onglet(_T('onglet_messages_vide'), "controle_forum.php3?page=vide", "vide", $onglet);
 
-		$query_forum = "SELECT * FROM spip_forum WHERE statut='prop' LIMIT 1 OFFSET 0";
+		$query_forum = "SELECT * FROM spip_forum WHERE statut='prop' LIMIT 1";
 		$result_forum = spip_query($query_forum);
 		if ($row = spip_fetch_array($result_forum))
 			onglet(_T('texte_statut_attente_validation'), "controle_forum.php3?page=prop", "prop", $onglet);
@@ -2440,7 +2440,7 @@ else {
 		echo "<div class='$class' id='bandeaudocuments' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 		//icone_bandeau_secondaire (_T('icone_rubriques'), "naviguer.php3", "rubrique-24.gif", "rubriques", $sous_rubrique);
 
-		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1 OFFSET 0"));
+		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
 		if ($nombre_articles > 0) {
 			icone_bandeau_secondaire (_T('icone_tous_articles'), "articles_page.php3", "article-24.gif", "articles", $sous_rubrique);
 		}
@@ -2451,7 +2451,7 @@ else {
 			$nombre_versions = spip_num_rows(spip_query("
 				SELECT versions.*, articles.statut, articles.titre
 				FROM spip_versions AS versions, spip_articles AS articles 
-				WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 1 OFFSET 0"));
+				WHERE versions.id_article = articles.id_article AND versions.id_version > 1$req_where LIMIT 1"));
 			if ($nombre_versions > 0 OR 1==1) {
 				icone_bandeau_secondaire (_T('icone_suivi_revisions'), "suivi_revisions.php3", "historique-24.gif", "revisions", $sous_rubrique);
 			}
@@ -2472,7 +2472,7 @@ else {
 			if ($activer_sites<>'non')
 				icone_bandeau_secondaire (_T('icone_sites_references'), "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
 
-			if (@spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1 OFFSET 0")) > 0) {
+			if (@spip_num_rows(spip_query("SELECT * FROM spip_documents_rubriques LIMIT 1")) > 0) {
 				icone_bandeau_secondaire (_T('icone_doc_rubrique'), "documents_liste.php3", "doc-24.gif", "documents", $sous_rubrique);
 			}
 		}
@@ -2746,7 +2746,7 @@ else {
 
 	$gadget = '';
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
-			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5 OFFSET 0");
+			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -2763,7 +2763,7 @@ else {
 		}
 	
 		$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut='prop' ".
-			" ORDER BY articles.date DESC LIMIT 5 OFFSET 0");
+			" ORDER BY articles.date DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -2781,7 +2781,7 @@ else {
 		}
 			
 		$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ".
-			" ORDER BY date_heure DESC LIMIT 5 OFFSET 0");
+			" ORDER BY date_heure DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -2799,7 +2799,7 @@ else {
 		}
 
 
-		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 1 OFFSET 0";
+		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 1";
 		$result = spip_query($query);
 		
 		if (spip_num_rows($result) > 0) {
@@ -2871,8 +2871,8 @@ else {
 		$jour = jour($date);
 	
 		// Taches (ne calculer que la valeur booleenne...)
-		if (spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' LIMIT 1 OFFSET 0")) OR
-		    spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 1 OFFSET 0"))) {
+		if (spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui' LIMIT 1")) OR
+		    spip_num_rows(spip_query("SELECT type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure LIMIT 1"))) {
 			$largeur = "410px";
 			$afficher_cal = true;
 		}

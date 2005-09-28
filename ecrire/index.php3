@@ -227,7 +227,7 @@ if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos
 //
 if ($spip_display == 4) {
 	debut_raccourcis();
-	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1 OFFSET 0"))) {
+	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"))) {
 		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
 	
 		$activer_breves = lire_meta("activer_breves");
@@ -259,7 +259,7 @@ if ($spip_display == 4) {
 			$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
 			$gadget .= "</td>";
 		}
-	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1 OFFSET 0"))) {
+	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"))) {
 			$gadget .= "<td>";
 			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
 			$gadget .= "</td>";
@@ -287,7 +287,7 @@ if ($spip_display == 4) {
 	
 		$gadget .= "<center><table><tr>";
 	
-		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1 OFFSET 0"));
+		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
 		if ($nombre_articles > 0) {
 			$gadget .= "<td>";
 			$gadget .= icone_horizontale (_T('icone_tous_articles'), "articles_page.php3", "article-24.gif", "", false);
