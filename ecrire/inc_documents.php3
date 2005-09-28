@@ -344,12 +344,11 @@ function fichiers_upload($dir) {
 	$d = opendir($dir);
 
 	while ($f = readdir($d)) {
-		if (is_file("$dir/$f") AND is_readable("$dir/$f")
-		AND $f != 'remove.txt')
-			$fichiers[] = "$dir/$f";
-		else
-		if (is_dir("$dir/$f") AND is_readable("$dir/$f")
-		AND $f != '.' AND $f != '..')
+		if (($f[0] != '.') AND is_readable("$dir/$f"))
+			if (is_file("$dir/$f") 
+			AND $f != 'remove.txt')
+				$fichiers[] = "$dir/$f";
+		else if (is_dir("$dir/$f"))
 			$fichiers = array_merge($fichiers, fichiers_upload("$dir/$f"));
 
 	}
@@ -445,7 +444,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_multiple = true, $forcer_document = false) {
+function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_multiple = true, $forcer_document = false, $type="") {
 	global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right;
 	static $num_form = 0; $num_form ++;
 
@@ -498,7 +497,11 @@ function afficher_upload($link, $redirect='', $intitule, $inclus = '', $envoi_mu
 			echo "\n<select name='image2' size='1' class='fondl'>";
 			echo $texte_upload;
 			echo "\n</select>";
-			echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok_ftp' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
+			if ($type == 'rubrique')
+			  echo "<br />\n<span style='margin-left: 20px'><input type='radio' name='identifier' />&nbsp;&nbsp;",
+			    _L("et identifier l'arborescence du r&eacute;pertoire &agrave; celle des rubriques."),
+			    "</span>\n";
+			echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok_ftp' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
 
 			echo "</div>\n";
 		}
@@ -942,7 +945,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		$link->addVar('ajout_doc', 'oui');
 		$link->addVar('type', $type);
 
-		afficher_upload($link, $redirect_url, _T('info_telecharger_ordinateur'), '', true, true);
+		afficher_upload($link, $redirect_url, _T('info_telecharger_ordinateur'), '', true, true, $type);
 		
 		echo fin_cadre_relief();
 		
