@@ -113,6 +113,9 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	OR (lire_meta('preview')<>''
 		AND $GLOBALS['auteur_session']['statut'] =='0minirezo'))
 	)) {
+		if ($objet_affiche == 'article' AND lire_meta('post_dates') != 'oui')
+			$postdates = "OR (statut='publie' AND date>NOW())";
+
 		if ($objet_affiche == 'article'
 		OR $objet_affiche == 'breve'
 		OR $objet_affiche == 'rubrique'
@@ -120,7 +123,10 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			if (spip_num_rows(spip_query(
 			"SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)."
 			WHERE ".id_table_objet($objet_affiche)."=".$$id_type."
-			AND statut IN ('prop', 'prive')")))
+			AND (
+				(statut IN ('prop', 'prive'))
+				$postdates
+			)")))
 				$preview = 'preview';
 	}
 
