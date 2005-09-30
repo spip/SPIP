@@ -232,9 +232,10 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $boucle->select[] = $texte . " AS $as";
 		  $order = "'$as'";
 		}
-		else if ($par == 'date') {
-		      $order = "'".$boucle->id_table.".".
-			$GLOBALS['table_date'][$boucle->type_requete]
+		else if ($par == 'date'
+		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
+			$order = "'".$boucle->id_table."."
+			.$GLOBALS['table_date'][$boucle->type_requete]
 			."'";
 		}
 		// par champ. Verifier qu'ils sont presents.
@@ -309,8 +310,8 @@ function critere_agenda($idb, &$boucles, $crit)
 
 	$parent = $boucles[$idb]->id_parent;
 
-	// les valeur $date et $type doivent etre connus à la compilation
-	// autrement dit ne pas être des champs
+	// les valeurs $date et $type doivent etre connus a la compilation
+	// autrement dit ne pas etre des champs
 
 	$date = array_shift($params);
 	$date = $date[0]->texte;
@@ -514,15 +515,18 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	  $col = 'id_rubrique';
 
 	// Cas particulier : expressions de date
-	else if (ereg("^(date|mois|annee|heure|age|age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$", $col, $regs)) {
-	  list($col, $col_table) =
-	    calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[2]);
-	} 
+	else if ($table_date[$type]
+	AND preg_match(",^(date|mois|annee|heure|age|"
+	."age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$,",
+	$col, $regs)) {
+		list($col, $col_table) =
+		calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[2]);
+	}
 
 	// HACK : selection des documents selon mode 'image'
-	// (a creer en dur dans la base)
-	else if ($type == 'documents' AND $col == 'mode' AND $val[0] == "'image'")
-	  $val[0] = "'vignette'";
+	// => on cherche en fait 'vignette'
+	else if ($type == 'documents' AND $col == 'mode')
+		$val[0] = str_replace('image', 'vignette', $val[0]);
 
 	else  {
 	  $nom = $table_des_tables[$type];

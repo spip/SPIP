@@ -42,7 +42,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 }
 
 
-if ($titre AND $modifier_breve) {
+if (strval($titre)!='' AND $modifier_breve) {
 	$titre = addslashes($titre);
 	$texte = addslashes($texte);
 	$lien_titre = addslashes($lien_titre);

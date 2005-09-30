@@ -78,7 +78,9 @@ if ($id_auteur) {
 //
 // Modification (et creation si besoin)
 //
-if ($nom) { // si on poste un nom, c'est qu'on modifie une fiche auteur
+
+// si on poste un nom, c'est qu'on modifie une fiche auteur
+if (strval($nom)!='') {
 	$auteur['nom'] = corriger_caracteres($nom);
 
 	// login et mot de passe
