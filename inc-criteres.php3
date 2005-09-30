@@ -184,7 +184,7 @@ function critere_par_dist($idb, &$boucles, $crit) {
 }
 
 function critere_parinverse($idb, &$boucles, $crit, $sens) {
-
+	global  $exceptions_des_jointures;
 	$boucle = &$boucles[$idb];
 	if ($crit->not) $sens = $sens ? "" : " . ' DESC'";
 
@@ -212,19 +212,10 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		  $order = "'alea'";
 		}
 
-	// par titre_mot
-		else if ($par == 'titre_mot') {
-		  $order= "'" .
-		    array_search('spip_mots', $boucle->from) .
-		    ".titre'";
-		}
-
-	// par type_mot
-		else if ($par == 'type_mot'){
-		  $order= "'" .
-		    array_search('spip_mots', $boucle->from) .
-		    ".type'";
-		}
+	// par titre_mot ou type_mot voire d'autres
+		else if ($m = ($exceptions_des_jointures[$par])) {
+		  $order = critere_par_jointure($boucle, $m);
+			 }
     // par multi champ
 		else if (ereg("^multi[[:space:]]*(.*)$",$par, $m)) {
 		  $texte = $boucle->id_table . '.' . trim($m[1]);
@@ -271,10 +262,26 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 	}
 }
 
+function critere_par_jointure(&$boucle, $champ)
+{
+  global $table_des_tables;
+  $t = array_search('spip_mots', $boucle->from);
+  if (!$t) {
+    $type = $boucle->type_requete;
+    $nom = $table_des_tables[$type];
+    list($nom, $desc) = trouver_def_table($nom ? $nom : $type, $boucle);
+
+    $cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
+    if ($cle) 
+      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
+    if ($cle) $t = "L$cle"; // sinon erreur
+  }
+  return "'" . $t . '.' . $champ . "'";
+}
 
 // {inverse}
 // http://www.spip.net/@inverse
-// obsolete. utiliser {!par ...}
+
 function critere_inverse_dist($idb, &$boucles, $crit) {
 
 	$boucle = &$boucles[$idb];
