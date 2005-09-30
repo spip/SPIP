@@ -818,26 +818,6 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 		$link->getUrl(), "vignette-24.png", "supprimer.gif");
 	}
 	else {
-/****
-	OBSOLETE
-		// lien "creation automatique"
-		if (strstr(lire_meta('formats_graphiques'), $document['extension'])
-		AND lire_meta('creer_preview') == 'oui'
-		AND $document['distant'] != 'oui') {
-			$link = new Link($image_url);
-			$link->addvar('creer_vignette', 'oui');
-			$link->addVar('redirect',
-				$redirect_url.'&show_docs='.$id_document);
-			$link->addvar('vignette', $document['fichier']);
-			$link->addVar('hash',
-				calculer_action_auteur("vign ".$document['fichier']));
-			$link->addVar('hash_id_auteur', $connect_id_auteur);
-			$link->addVar('id_document', $id_document);
-			$link->addVar('ancre', $album);
-			icone_horizontale(_T('info_creer_vignette'),
-			$link->getUrl(), "vignette-24.png", "creer.gif");
-		}
-*****/
 
 		// lien "upload vignette"
 		$link = new Link ($image_url);
@@ -863,8 +843,6 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	$image_url = '../spip_image.php3?';
 	if ($id_article)
 		$image_url .= 'id_article='.$id_article;
-	else if ($id_rubrique)
-		$image_url .= 'id_article='.$id_rubrique;
 
 	$redirect_url = new Link();
 	if ($type == "rubrique")
@@ -965,11 +943,10 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	global $connect_id_auteur, $connect_statut;
 	global $couleur_foncee, $couleur_claire, $options;
 	global $clean_link;
+	global $id_doc_actif;
 
 	$image_url = '../spip_image.php3';
 	if ($id_article) $image_url .= '?id_article='.$id_article;
-
-	$id_doc_actif = $id_document;
 
 	# HACK!!! simule une mise en page pour affecter la globale id_doublons
 	# referencee dans afficher_case_document appelee plus loin :
