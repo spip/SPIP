@@ -89,8 +89,10 @@ fin_admin($upgrade_titre);
 
 if ($ok) {
 	$hash = calculer_action_auteur("purger_cache");
-	@header ("Location: ../spip_cache.php3?purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS . "index.php3");
- }
+	redirige_par_entete("../spip_cache.php3?purger_cache=oui"
+		."&id_auteur=$connect_id_auteur&hash=$hash"
+		."&redirect=" .  _DIR_RESTREINT_ABS . "index.php3");
+}
 else {
 	include_ecrire ('inc_lang.php3');
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));

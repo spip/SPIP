@@ -236,7 +236,7 @@ function calculer_page_globale($cache, $contexte_local, $fond) {
 				if ($url) { // sinon les navigateurs pataugent
 					$url = texte_script(str_replace('&amp;', '&', $url));
 					$page = array('texte' => "<".
-					"?php header('Location: $url'); ?" . ">",
+					"?php redirige_par_entete('$url'); ?" . ">",
 					'process_ins' => 'php');
 				}
 			}

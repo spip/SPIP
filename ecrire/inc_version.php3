@@ -583,7 +583,7 @@ function spip_query($query) {
 	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		@Header("Location: upgrade.php3?reinstall=oui");
+		redirige_par_entete("upgrade.php3?reinstall=oui");
 		exit;
 	}
 
@@ -1054,10 +1054,17 @@ function creer_repertoire($base, $subdir) {
 //
 // Entetes
 //
+
+// Interdire les attaques par manipulation des headers
+function spip_header($h) {
+	@header(strtr($h, "\n\r", "  "));
+}
+
+// envoyer le navigateur sur une nouvelle adresse
 function redirige_par_entete($url) {
 	spip_log("redirige $url");
 	http_status(302);
-	header("Location: $url");
+	spip_header("Location: $url");
 	exit;
 }
 
