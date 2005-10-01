@@ -442,7 +442,6 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 	}
 }
 
-
 //
 // Afficher un formulaire d'upload
 //
@@ -451,97 +450,96 @@ function afficher_upload($image_url, $redirect='', $intitule, $inclus = '', $env
   global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
 	static $num_form = 0; $num_form ++;
 
-	if (!$redirect)
-		$redirect = $clean_link->getUrl();
-
-	$link = new Link ($image_url);
-	$link->addVar('redirect', $redirect);
-	$link->addVar('hash', calculer_action_auteur("ajout_doc"));
-	$link->addVar('hash_id_auteur', $connect_id_auteur);
-	$link->addVar('ajout_doc', 'oui');
-	$link->addVar('mode', $mode);
-	$link->addVar('type', $type);
-
-	echo $link->getForm('POST', '', 'multipart/form-data');
-	echo "<div>";
-
-	// bouton permettant de telecharger 10 images ou docs a la fois
-	$envoi_multiple &= ($options == "avancees");
-	if ($envoi_multiple OR ($mode = 'document' AND $type))
-		echo bouton_block_invisible("ftp$num_form");
-
-	if (tester_upload()) {
-		echo "$intitule</div>";
-
-		// un modele de selecteur de fichier
-		$upload = "<div><input name='fichier*' type='File' style='font-size: 10px;' class='forml' size='15'></div>";
-
-		// afficher le premier
-		echo str_replace('*', '1', $upload);
-
-		/* (TESTS POUR ENVOI MULTIPLE ; DESACTIVE)
-		// afficher les suivants, masques
-		if ($envoi_multiple) {
-			echo debut_block_invisible ("upload$num_form");
-			for ($i=2; $i<=10; $i++)
-				echo str_replace('*', "$i", $upload);
-			echo fin_block();
-		}
-		*/
-
-		echo "<div align='".$GLOBALS['spip_lang_right']."'><input name='ok_post' type='Submit' VALUE='"._T('bouton_telecharger')."' CLASS='fondo'></div>\n<div>";
+	$res = "";
+	if ($GLOBALS['flag_upload']) {
+		$res .= "\n<div>" . bouton_block_invisible("ftp$num_form") .
+		  $intitule . "</div>\n<div>" .
+		  "\n<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
+		  "\n<div align='" .
+		  $GLOBALS['spip_lang_right'] . 
+		  "'><input name='sousaction1' type='Submit' VALUE='" .
+		  _T('bouton_telecharger') .
+		  "' CLASS='fondo'></div>\n";
 	}
 
-	echo debut_block_invisible("ftp$num_form");
+	$res .= "<div>" . debut_block_invisible("ftp$num_form");
 
-	if ($connect_statut == '0minirezo'  # AND $connect_toutes_rubriques
-	AND $envoi_multiple) {
-		$texte_upload = texte_upload_manuel(_DIR_TRANSFERT, $inclus);
-		if ($texte_upload) {
-		  echo afficher_transferer_upload($texte_upload,$type);
-		}
-		else {
-			echo "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
-			echo _T('info_installer_ftp').aide("ins_upload");
-			echo "</div>";
-		}
+	if ($connect_statut == '0minirezo') {
+		$res .= afficher_transferer_upload($type,
+				     texte_upload_manuel(_DIR_TRANSFERT,
+							 $inclus));
+
 	}
 
 	// Lien document distant, jamais en mode image
-	if ($mode = 'document' AND $type) {
-		echo "<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>";
-		echo "<img src='"._DIR_IMG_PACK.'attachment.gif',
-			"' style='float: $spip_lang_right;' alt=\"\" />\n";
-		echo "\n"._T('info_referencer_doc_distant')."<br />";
-		echo "\n<input name='image_url' size='32' class='fondo' value='http://' />";
-		echo "\n  <div align='".$GLOBALS['spip_lang_right']."'><input name='ok_url' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>";
-		echo "</div>\n";
+	if ($mode == 'document' AND $type) {
+	  $res .=
+	    "<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
+	    "<img src='"._DIR_IMG_PACK.'attachment.gif' .
+	    "' style='float: $spip_lang_right;' alt=\"\" />\n" .
+	    "\n"._T('info_referencer_doc_distant')."<br />" .
+	    "\n<input name='url' size='32' class='fondo' value='http://' />" .
+	    "\n  <div align='".$GLOBALS['spip_lang_right'].
+	    "'><input name='sousaction2' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>" .
+	    "</div>\n";
 	}
 
-	echo "</div>\n";
-	echo fin_block();
-	echo "</form>\n";
+	$res .= "</div>\n" . fin_block();
+
+	if (!$redirect)	$redirect = $clean_link->getUrl();
+	return construire_upload($res,
+				array(
+				'redirect' => $redirect,
+				'hash' => calculer_action_auteur("joindre"),
+				'hash_id_auteur' => $connect_id_auteur,
+				'mode' => $mode,
+				'type' => $type),
+				$image_url,
+				'multipart/form-data');
 }
 
-function afficher_transferer_upload($texte_upload,$type)
+function construire_upload($corps, $args, $action, $enc='')
 {
-			
-  return "<p><div style='color: #505050;'>" .
-    "\n"._T('info_selectionner_fichier')."&nbsp;:<br />" .
-    "\n<select name='image2' size='1' class='fondl'>" .
-    $texte_upload .
-    "\n</select>" .
-    (($type != 'rubrique') ? "" :
-     ("<br />\n<span style='margin-left: 20px'><input type='radio' name='identifier' />&nbsp;&nbsp;" .
-      _L("et identifier l'arborescence du r&eacute;pertoire &agrave; celle des rubriques.") .
-      "</span>\n")) .
-     "<div align='".
-     $GLOBALS['spip_lang_right'] .
-     "'><input name='ok_ftp' type='Submit' value='" .
-     _T('bouton_choisir').
-     "' class='fondo'></div>" .
-     "</div>\n";
-     }
+	$res = "";
+	foreach($args as $k => $v)
+	  $res .= "\n<input type='hidden' name='$k' value='$v' />";
+	$res .= "\n<input type='hidden' name='action' value='joindre' />";
+
+	$link = new Link ($action);
+
+	return "\n" . $link->getForm('POST', '', $enc) . "<div>" .
+	  $res . $corps . "</div></form>";
+}
+
+function afficher_transferer_upload($type, $texte_upload)
+{
+	if (!$texte_upload) {
+		return "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
+			_T('info_installer_ftp') .
+			aide("ins_upload") .
+			"</div>";
+		}
+	else {  return
+		"<p><div style='color: #505050;'>" .
+		"\n"._T('info_selectionner_fichier')."&nbsp;:<br />" .
+		"\n<select name='chemin' size='1' class='fondl'>" .
+		$texte_upload .
+	  	"\n</select>" .
+		(($type != 'rubrique') ? "" :  ("<br />". _L("et choisir le mode de transfert:"))) .
+		"\n<div align='".
+		$GLOBALS['spip_lang_right'] .
+		"'><input name='sousaction3' type='Submit' value='" .
+		_L('recopier').
+		"' class='fondo'></div>" .
+		(($type != 'rubrique') ? "" :
+		    ("\n<div align='".
+				$GLOBALS['spip_lang_right'] .
+				"'><input name='sousaction4' type='Submit' value='" .
+				_L('identifier repertoires et rubriques').
+		     "' class='fondo'></div>")) .
+	    	"</div>\n";
+	}
+}
 
 //
 // Afficher les documents non inclus
@@ -834,7 +832,7 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 
 		// lien "upload vignette"
 	  $image_url .= "&id_document=$id_document&ancre=$album";
-	  afficher_upload($image_url,
+	  echo afficher_upload($image_url,
 				$redirect_url.'&show_docs='.$id_document,
 				/* _T('info_remplacer_vignette') */'',
 				'portfolio',
@@ -928,7 +926,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo debut_cadre_relief("image-24.gif", false, "", _T('titre_joindre_document'));
 		
 		
-		afficher_upload($image_url, $redirect_url, _T('info_telecharger_ordinateur'), '', true, 'document', $type);
+		echo afficher_upload($image_url, $redirect_url, _T('info_telecharger_ordinateur'), '', true, 'document', $type);
 		
 		echo fin_cadre_relief();
 		
@@ -964,7 +962,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
 
-	afficher_upload($image_url, $redirect_url, _T('info_telecharger'),'',true,'vignette',$type);
+	echo afficher_upload($image_url, $redirect_url, _T('info_telecharger'),'',true,'vignette',$type);
 
 	fin_cadre_relief();
 
@@ -1011,7 +1009,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 
 		debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);
-		afficher_upload($image_url, $redirect_url,_T('info_telecharger_ordinateur'), '',true,'document',$type);
+		echo afficher_upload($image_url, $redirect_url,_T('info_telecharger_ordinateur'), '',true,'document',$type);
 		fin_cadre_enfonce();
 	}
 

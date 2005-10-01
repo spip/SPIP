@@ -15,14 +15,14 @@
 // supprimer cet element, creer les vignettes, etc.
 
 include ("ecrire/inc_version.php3");
-include_ecrire('inc_presentation.php3');	# regler la langue en cas d'erreur
-include_ecrire('inc_getdocument.php3');		# diverses fonctions de ce fichier
-include_ecrire("inc_charsets.php3");		# pour le nom de fichier
-include_ecrire("inc_meta.php3");			# ne pas faire confiance au cache
-											# (alea_ephemere a peut-etre change)
-include_ecrire("inc_admin.php3");			# verifier_action_auteur
-include_ecrire("inc_abstract_sql.php3");	# spip_insert
-include_ecrire('inc_documents.php3');		# fichiers_upload()
+include_ecrire('inc_presentation.php3');# regler la langue en cas d'erreur
+include_ecrire('inc_getdocument.php3');	# diverses fonctions de ce fichier
+include_ecrire("inc_charsets.php3");	# pour le nom de fichier
+include_ecrire("inc_meta.php3");	# ne pas faire confiance au cache
+					# (alea_ephemere a peut-etre change)
+include_ecrire("inc_admin.php3");	# verifier_action_auteur
+include_ecrire("inc_abstract_sql.php3");# spip_insert
+include_ecrire('inc_documents.php3');	# fichiers_upload()
 
 $documents_actifs = array();
 //
@@ -33,49 +33,27 @@ $documents_actifs = array();
 if ($test_vignette)
 	redirige_par_entete(tester_vignette($test_vignette));
 
- else if ($ajout_doc == "oui")
+ else if ($action == 'joindre')
    {
-
 // Autorisation ?
-     if (!verifier_action_auteur("ajout_doc", $hash, $hash_id_auteur))
+     if (!verifier_action_auteur("joindre", $hash, $hash_id_auteur))
 	die ('Interdit');
+     // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte
+     // et son transcodage est couteux et perilleux
+     $fonc = 'joindre' . 
+       ($sousaction1 ? 1 :
+	($sousaction2 ? 2 :
+	 ($sousaction3 ? 3 : 
+	  ($sousaction4 ? 4 :
+	   $sousaction5 ))));
 
-// Cas d'un document distant reference sur internet
-     if (preg_match(',^https?://....+,i', $_POST['image_url'])) {
-	ajouter_les_fichiers(array(
-			array('name' => basename($_POST['image_url']),
-			'tmp_name' => $_POST['image_url'])
-			), 'distant', $type, $id_article, $id_document, $documents_actifs);
- } else {
+     $arg = ($sousaction1 ? ($_FILES ? $_FILES : $HTTP_POST_FILES) :
+	     ($sousaction2 ? $url : $chemin));
 
-  $image2 = $_POST['image2'];
-  if ($image2 AND !strstr($image2, '..') AND $_POST['ok_ftp']) {
-  //
-  // Cas d'un fichier ou d'un repertoire installe dans ecrire/upload/
-  //
-	$upload = _DIR_TRANSFERT .$image2;
-	if (!is_dir($upload))
-	  // seul un fichier est demande
-	  $_FILES = array(
-				array ('name' => basename($upload),
-				'tmp_name' => $upload)
-				);
-	else $_FILES = ajouter_par_upload($upload, $_POST['identifier'], $id_article, $hash_id_auteur);
-  } else {
-	if (!$_FILES)
-		$_FILES = &$HTTP_POST_FILES;
-	if (!is_array($_FILES))
-		$_FILES = array();
-	foreach ($_FILES as $id => $file) {
-		if ($file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
-			unset ($_FILES[$id]);
-	}
-  }
-  if (function_exists('gzopen') AND !($mode == 'distant'))
-	$_FILES = deballer_upload($_FILES, $_POST['source_zip'],$action_zip, $hash, $hash_id_auteur, $id_article, $id_document, $mode, $redirect, $type);
-  
-  ajouter_les_fichiers($_FILES, $mode, $type, $id_article, $id_document, $documents_actifs);
-     }
+     if (function_exists($fonc))
+       $fonc($arg, $mode, $type, $id_article, $id_document, 
+	     $hash, $hash_id_auteur, $redirect, $documents_actifs);
+     else spip_log("spip_image ne connait pas $fonc");
    }
 // Ajout d'un logo
 else if ($ajout_logo == "oui" and $logo) {
