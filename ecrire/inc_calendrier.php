@@ -165,7 +165,10 @@ function http_calendrier_init($time='', $ltype='', $lechelle='', $lpartie_cal=''
 
 	if (!$time) 
 	  {
-	    $time = time();
+	    if (!$mois)
+	      $time = time();
+	    else
+	      $time = mktime(0,0,0,$mois,$jour,$annee);
 	    $type= 'mois';
 	  }
 
