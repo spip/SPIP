@@ -292,7 +292,7 @@ function recuperer_infos_distantes($source, $max=0) {
 	// recharger le document en GET et recuperer des donnees supplementaires...
 	if (preg_match(',^image/(jpeg|gif|png|swf),', $mime_type)) {
 		if ($max == 0
-		AND $a['taille'] < 1024*1024
+		    AND $a['taille'] < 1024*1024
 		AND ereg(",".$a['extension'].",",
 		','.lire_meta('formats_graphiques').',')){
 			$a = recuperer_infos_distantes($source, 1024*1024);
@@ -610,12 +610,9 @@ function deballer_upload($_FILES, $source, $action_zip, $hash, $hash_id_auteur, 
 	// Traiter la liste des fichiers
 	//
 
-function ajouter_les_fichiers($_FILES, $mode, $type, $id, $id_document)
+function ajouter_les_fichiers($_FILES, $mode, $type, $id, $id_document, &$actifs)
 {
-	$documents_actifs = array();
-
 	foreach ($_FILES as $file) {
-
 		// afficher l'erreur 'fichier trop gros' ou autre
 		check_upload_error($file['error']);
 
@@ -630,7 +627,7 @@ function ajouter_les_fichiers($_FILES, $mode, $type, $id, $id_document)
 								# 'document' => doc ou image en mode document
 								# 'distant' => lien internet
 			$id_document,		# pour une vignette, l'id_document de maman
-			$documents_actifs	# tableau des id_document "actifs" (par ref)
+			$actifs	# tableau des id_document "actifs" (par ref)
 		);
 	}	// foreach $_FILES
 
@@ -639,24 +636,14 @@ function ajouter_les_fichiers($_FILES, $mode, $type, $id, $id_document)
 		effacer_repertoire_temporaire(_tmp_dir);
 }
 
-function ajouter_par_upload($nom, $identifier, $id, $id_auteur)
+// lire le repertoire upload et retourner ses fichiers
+
+function ajouter_par_upload($upload, $identifier, $id, $id_auteur, &$actifs)
 {
-
-	$upload = _DIR_TRANSFERT.$nom;
-
-		// lire le repertoire upload et remplir $_FILES
-	if (!is_dir($upload))
-	  // seul un fichier est demande
-
-		return array(
-				array ('name' => basename($upload),
-				'tmp_name' => $upload)
-				);
-	else {
 		$files = array();
 		if ($identifier)
 		  { 
-		    identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
+		    identifie_repertoire_et_rubrique($upload, $id, $id_auteur, $actifs);
 		    include_ecrire("inc_rubriques.php3");
 		    calculer_rubriques();
 		  }
@@ -669,12 +656,9 @@ function ajouter_par_upload($nom, $identifier, $id, $id_auteur)
 			}
 		}
 		return $files;
-	}
-
-
 }
 
-function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0)
+function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art, &$actifs)
 {
   static $exts = array();
 
@@ -739,7 +723,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
   }
 
   // si la rubrique a 0 ou 1  article, les documents sont 
-  // jointes l'article present ou de niveau superieur, sinon a la rubrique.
+  // joints l'article present ou de niveau superieur, sinon a la rubrique.
 
   $n = count($textes);
   if (($n <= 1) AND $art)
@@ -747,7 +731,6 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
   else
     {$type = 'rubrique'; $id = $id_rubrique; $n = count($docs);}
 
-  $actifs = array(); // a eclaircir
   if ($docs) {
     foreach($docs as $v) 
 	ajouter_un_document ("$DIR/$v",$v,$type,$id,'document',0,$actifs);
@@ -759,7 +742,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
 	$rub=spip_abstract_insert($GLOBALS['table_prefix'] . "_rubriques",
 				  "(titre,id_parent,statut)",
 				  "('" . addslashes($v) . "', $id_rubrique, 'prepa')");
-	$m = identifie_repertoire_et_rubrique($k, $rub, $id_auteur, $art);
+	$m = identifie_repertoire_et_rubrique($k, $rub, $id_auteur, $art, $actifs);
 	if ($m)
 	  $n++;
 	else {
