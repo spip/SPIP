@@ -29,16 +29,12 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 	    )))
 		return _T('pass_rien_a_faire_ici');
 
-	// recuperer les donnees envoyees
-	$mail_inscription = trim(_request('mail_inscription'));
-	$nom_inscription = _request('nom_inscription');
-
-	if (!$nom_inscription) 
+	if (!_request('nom_inscription')) 
 		$message = '';
-	elseif (!test_mail_ins($mode, $mail_inscription))
+	elseif (!test_mail_ins($mode, _request('mail_inscription')))
 		$message = _T('info_email_invalide');
-	else	$message = message_inscription($mail_inscription,
-					       $nom_inscription,
+	else	$message = message_inscription(_request('mail_inscription'),
+					       _request('nom_inscription'),
 					       false,
 					       ($mode == 'forum')  ?
 					       'form_forum_voici1' :
@@ -57,12 +53,14 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 // cas general: controler juste que l'adresse n'est pas vide et est valide
 
 function test_mail_ins($mode, $mail) {
-	return  ($mail = trim($mail)) AND email_valide($mail);
+	return email_valide($mail);
 }
 
 // creer un nouvel utilisateur et lui envoyer un mail avec ses identifiants
 
 function message_inscription($mail_inscription, $nom_inscription, $force, $mode) {
+	$mail_inscription = email_valide(_request('mail_inscription'));
+
 	$s = spip_query("SELECT statut, id_auteur, login
 		FROM spip_auteurs WHERE email='".addslashes($mail_inscription)."'");
 	$row = spip_fetch_array($s);
