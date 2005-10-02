@@ -87,7 +87,7 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
 function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 	global $connect_id_auteur;
 	global $couleur_foncee, $couleur_claire;
-	global $clean_link;
+	global $clean_link, $spip_lang_right;
 
 	include_ecrire('inc_admin.php3');
  
@@ -101,7 +101,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 
 	if ($logo) {
 		list ($fichier, $taille) =  $logo;
-		$hash = calculer_action_auteur("supp_logo $fichier");
+		$hash = calculer_action_auteur("effacer_logo $fichier");
 
 		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>";
 		echo reduire_image_logo(_DIR_IMG.$fichier, 170);
@@ -110,7 +110,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo $taille;
 		echo "\n<br />[<a href='../spip_image.php3?";
 		echo "$id_objet=$id&";
-		echo "image_supp=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</A>]";
+		echo "action=effacer_logo&amp;chemin=$fichier&amp;hash_id_auteur=$connect_id_auteur&amp;hash=$hash&amp;redirect=".urlencode($redirect)."'>"._T('lien_supprimer')."</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
@@ -119,43 +119,41 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 		echo debut_block_invisible(md5($titre));
 
 		echo "\n\n<FORM ACTION='../spip_image.php3' METHOD='POST'
-			ENCTYPE='multipart/form-data'>";
-		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect'>";
-		echo "\n<INPUT NAME='$id_objet' TYPE=Hidden VALUE='$id'>";
-		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur'>";
-		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash'>";
-		echo "\n<INPUT NAME='ajout_logo' TYPE=Hidden VALUE='oui'>";
-		echo "\n<INPUT NAME='logo' TYPE=Hidden VALUE='$racine'>";
-		if (tester_upload()){
-			echo "\n"._T('info_telecharger_nouveau_logo')."<BR>";
-			echo "\n<INPUT NAME='image' TYPE=File CLASS='forml' style='font-size:9px;' SIZE=15>";
-			echo "\n <div align='right'><INPUT NAME='ok' TYPE=Submit VALUE='"._T('bouton_telecharger')."' CLASS='fondo' style='font-size:9px;'></div>";
+			ENCTYPE='multipart/form-data'>
+			<div>";
+		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect' />";
+		echo "\n<INPUT NAME='$id_objet' TYPE=Hidden VALUE='$id' />";
+		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur' />";
+		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash' />";
+		echo "\n<INPUT NAME='action' TYPE=Hidden VALUE='ajout_logo' />";
+		echo "\n<INPUT NAME='logo' TYPE=Hidden VALUE='$racine' />";
+		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
+		echo "\n<INPUT NAME='image' type='File' class='forml' style='font-size:9px;' SIZE=15>";
+		echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
+		echo "\n<input name='sousaction1' type='submit' value='",
+		  _T('bouton_telecharger'),
+		  "' class='fondo' style='font-size:9px' /></div>";
+		if (!$GLOBALS['flag_upload']) {
+				echo _T('info_installer_images_dossier');
 		} else {
-
 			$myDir = opendir(_DIR_TRANSFERT);
 			while($entryName = readdir($myDir)){
 				if (!ereg("^\.",$entryName) AND eregi("(gif|jpg|png)$",$entryName)){
 					$entryName = addslashes($entryName);
-					$afficher .= "\n<OPTION VALUE='" .
-						_DIR_TRANSFERT .
-						"$entryName'>$entryName";
+					$afficher .= "\n<option value='$entryName'>$entryName</option>";
 				}
 			}
 			closedir($myDir);
 
-			if (strlen($afficher) > 10){
-				echo "\n"._T('info_selectionner_fichier_2');
-				echo "\n<SELECT NAME='image' CLASS='forml' SIZE=1>";
-				echo $afficher;
-				echo "\n</SELECT>";
-				echo "\n  <INPUT NAME='ok' TYPE=Submit VALUE='"._T('bouton_choisir')."' CLASS='fondo'>";
-			} else {
-				echo _T('info_installer_images_dossier');
-			}
-
+			echo "\n<div style='text-align: left'>"._T('info_selectionner_fichier').":</div>";
+			echo "\n<SELECT NAME='chemin' CLASS='forml' size='1'>";
+			echo $afficher;
+			echo "\n</SELECT>";
+			echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
+			echo "\n<input name='sousaction2' type='submit' value='"._T('bouton_choisir')."' CLASS='fondo'  style='font-size:9px' /></div>";
 		}
 		echo fin_block();
-		echo "</FORM>\n";
+		echo "</div></FORM>\n";
 	}
 
 	echo "</font>";
