@@ -450,21 +450,17 @@ function afficher_upload($image_url, $redirect='', $intitule, $inclus = '', $env
   global $clean_link, $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
 	static $num_form = 0; $num_form ++;
 
-	$res = "";
-	if ($GLOBALS['flag_upload']) {
-		$res .= "\n<div>" . bouton_block_invisible("ftp$num_form") .
-		  $intitule . "</div>\n<div>" .
-		  "\n<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
-		  "\n<div align='" .
-		  $GLOBALS['spip_lang_right'] . 
-		  "'><input name='sousaction1' type='Submit' VALUE='" .
-		  _T('bouton_telecharger') .
-		  "' CLASS='fondo'></div>\n";
-	}
+	$res = "\n<div>" . bouton_block_invisible("ftp$num_form") .
+		$intitule . "</div>\n<div>" .
+		"\n<input name='fichier' type='file' style='font-size: 10px;' class='forml' size='15' />" .
+		"\n<div align='" .
+		$GLOBALS['spip_lang_right'] . 
+		"'><input name='sousaction1' type='Submit' VALUE='" .
+		_T('bouton_telecharger') .
+		"' CLASS='fondo'></div>\n";
 
-	$res .= "<div>" . debut_block_invisible("ftp$num_form");
-
-	if ($connect_statut == '0minirezo') {
+	if ($connect_statut == '0minirezo' AND $GLOBALS['flag_upload']) {
+		$res .= "<div>" . debut_block_invisible("ftp$num_form");
 		$res .= afficher_transferer_upload($type,
 				     texte_upload_manuel(_DIR_TRANSFERT,
 							 $inclus));
@@ -490,9 +486,9 @@ function afficher_upload($image_url, $redirect='', $intitule, $inclus = '', $env
 	return construire_upload($res,
 				array(
 				'redirect' => $redirect,
-				'hash' => calculer_action_auteur("joindre"),
+				'hash' => calculer_action_auteur("joindre $mode"),
 				'hash_id_auteur' => $connect_id_auteur,
-				'mode' => $mode,
+				'doc' => $mode,
 				'type' => $type),
 				$image_url,
 				'multipart/form-data');
@@ -618,44 +614,22 @@ entites_html($document['fichier'])."\" />\n";
 			AND !$id_vignette) {
 				echo "<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 				$process = lire_meta('image_process');
+				// pour TEST: $process = 'imagick' ;
 				if ($process == 'imagick' OR $process == 'gd2'
 				OR $process == 'convert' OR $process == 'netpbm') {
-					// tourner a gauche
-					$link_rot = new Link ($image_url);
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('var_rot', -90);
-					$link_rot->addVar('redirect',
-						$redirect_url.'&show_docs='.$id_document);
-					$link_rot->addVar('ancre', $album);
-					echo http_href_img($link_rot->getUrl(), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
+					// tournerr a gauche
+					echo http_href_img(bouton_tourner_document($image_url, $redirect_url, $id_document, $album, -90), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
 					echo "<br />";
 
 					// tourner a droite
-					$link_rot = new Link ($image_url);;
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('var_rot', 90);
-					$link_rot->addVar('redirect',
-						$redirect_url.'&show_docs='.$id_document);
-					$link_rot->addVar('ancre', $album);
-					echo http_href_img($link_rot->getUrl(),
+					echo http_href_img(bouton_tourner_document($image_url, $redirect_url, $id_document, $album, 90),
 						'tourner-droite.gif', "style='border-width: 0px;'",
 						_T('image_tourner_droite'), '', 'bouton_rotation');
 					echo "<br />";
 
 					// tourner 180
-					$link_rot = new Link ($image_url);;
-					$link_rot->addVar('hash', calculer_action_auteur("rotate ".$id_document));
-					$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-					$link_rot->addVar('doc_rotate', $id_document);
-					$link_rot->addVar('var_rot', 180);
-					$link_rot->addVar('redirect',
-						$redirect_url.'&show_docs='.$id_document);
-					$link_rot->addVar('ancre', $album);
-					echo http_href_img($link_rot->getUrl(),
+
+					echo http_href_img(bouton_tourner_document($image_url, $redirect_url, $id_document, $album, 180),
 						'tourner-180.gif', "style='border-width: 0px;'",
 						_T('image_tourner_180'), '', 'bouton_rotation');
 				}
@@ -768,16 +742,7 @@ entites_html($document['fichier'])."\" />\n";
 				echo "</div>";
 				
 				// bouton "supprimer le doc"
-				$link_supp = new Link ($image_url);
-				$link_supp->addVar('redirect', $redirect_url);
-				$link_supp->addVar('hash',
-					calculer_action_auteur("supp_doc ".$id_document));
-				$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
-				$link_supp->addVar('doc_supp', $id_document);
-				$link_supp->addVar('ancre', $album);
-				icone_horizontale(_T('icone_supprimer_document'),
-					$link_supp->getUrl(), "image-24.gif", "supprimer.gif");
-
+				icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, $album), "image-24.gif",  "supprimer.gif");
 			} // fin block modifs
 
 
@@ -803,6 +768,35 @@ entites_html($document['fichier'])."\" />\n";
 
 }
 
+function bouton_tourner_document($url, $redirect, $id, $album, $rot)
+{
+	global $connect_id_auteur;
+	$link_rot = new Link ($url);
+	$action = 'tourner_document';
+	$link_rot->addVar('hash', calculer_action_auteur("$action $id"));
+	$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
+	$link_rot->addVar('doc', $id);
+	$link_rot->addVar('action', $action);
+	$link_rot->addVar('var_rot', $rot);
+	$link_rot->addVar('redirect', $redirect.'&show_docs='.$id);
+	$link_rot->addVar('ancre', $album);
+	return $link_rot->getUrl();
+}
+
+function bouton_supprime_document_et_vignette($url, $redirect, $id, $album)
+{
+	global $connect_id_auteur;
+
+	$action = 'supprime_document_et_vignette';
+	$link_supp = new Link ($url);
+	$link_supp->addVar('redirect', $redirect);
+	$link_supp->addVar('hash', calculer_action_auteur($action ." ".$id));
+	$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
+	$link_supp->addVar('action', $action);
+	$link_supp->addVar('doc', $id);
+	$link_supp->addVar('ancre', $album);
+	return $link_supp->getUrl();
+}
 
 function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 	global $connect_id_auteur;
@@ -815,20 +809,13 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 	echo debut_block_invisible("gerer_vignette$id_document");
 
 	if ($id_vignette) {
-		$link = new Link ($image_url);
-		$link->addVar('redirect',
-		$redirect_url.'&show_docs='.$id_document);
-		$link->addVar('hash',
-			calculer_action_auteur("supp_doc ".$id_vignette));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('doc_supp', $id_vignette);
-
-		$link->addVar('ancre', $album);
-
 		icone_horizontale (_T('info_supprimer_vignette'),
-		$link->getUrl(), "vignette-24.png", "supprimer.gif");
-	}
-	else {
+			bouton_supprime_document_et_vignette($image_url,
+				$redirect_url.'&show_docs='.$id_document,
+							     $id_vignette,
+							     $album),
+				   "vignette-24.png", "supprimer.gif");
+	} else {
 
 		// lien "upload vignette"
 	  $image_url .= "&id_document=$id_document&ancre=$album";
