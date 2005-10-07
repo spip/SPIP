@@ -102,12 +102,15 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 	if (!email_valide($email)) return false;
 	if ($email == _T('info_mail_fournisseur')) return false; // tres fort
-
+	if ($headers && $headers[strlen($headers)-1] != "\n")
+	  $headers = "\n";
 	if (!$from) {
 		$email_envoi = lire_meta("email_envoi");
 		$from = email_valide($email_envoi) ? $email_envoi : $email;
+	} else {
+	  // pour les sites qui colle d'office From: serveur-http
+	  $headers .= "Reply-To: $from\n";
 	}
-
 	spip_log("mail ($email): $sujet". ($from ?", from <$from>":''));
 
 	$charset = lire_meta('charset');
