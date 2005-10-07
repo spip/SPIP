@@ -199,7 +199,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
 	global $flag_preserver, $flag_dynamique, $lastmodified;
-	global $var_preview, $var_mode, $delais, $_SERVER;
+	global $var_preview, $var_mode, $_SERVER;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
