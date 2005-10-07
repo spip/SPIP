@@ -184,10 +184,6 @@ function traduire_nom_langue($lang) {
 	return $r;
 }
 
-function init_codes_langues() {
-	include_ecrire('inc_lang_liste.php');
-}
-
 //
 // Filtres de langue
 //

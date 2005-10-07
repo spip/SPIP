@@ -105,7 +105,7 @@ fin_cadre_couleur();
 		echo _T('info_multi_langues_choisies');
 		echo '</p>';
 
-		init_codes_langues();
+		include_ecrire('inc_lang_liste.php');
 		$langues = $GLOBALS['codes_langues'];
 		$cesure = floor((count($langues) + 1) / 2);
 
