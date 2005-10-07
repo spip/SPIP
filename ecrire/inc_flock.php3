@@ -134,4 +134,33 @@ function supprimer_fichier($fichier) {
 	@unlink($fichier);
 }
 
+
+//
+// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
+//
+function creer_repertoire($base, $subdir) {
+	if (@file_exists("$base/.plat")) return '';
+	$path = $base.'/'.$subdir;
+	if (@file_exists($path)) return "$subdir/";
+
+	@mkdir($path, 0777);
+	@chmod($path, 0777);
+	$ok = false;
+	if ($f = @fopen("$path/.test", "w")) {
+		@fputs($f, '<'.'?php $ok = true; ?'.'>');
+		@fclose($f);
+		include("$path/.test");
+	}
+	if (!$ok) {
+		$f = @fopen("$base/.plat", "w");
+		if ($f)
+			fclose($f);
+		else {
+			redirige_par_entete("spip_test_dirs.php3");
+		}
+	}
+	return ($ok? "$subdir/" : '');
+}
+
+
 ?>

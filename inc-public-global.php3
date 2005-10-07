@@ -16,12 +16,12 @@ if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
 
 // fonction principale declenchant tout le service
-function calcule_header_et_page ($fond, $delais) {
+function calcule_header_et_page ($fond, &$delais) {
 	  global $auteur_session, $flag_dynamique,
 	  $flag_ob, $flag_preserver, $forcer_lang, $ignore_auth_http,
 	  $lastmodified, $recherche, $use_cache, $var_confirm, $var_mode,
 	  $var_recherche, $tableau_des_erreurs;
-	  global $_GET, $_POST;
+	  global $_GET, $_POST, $_COOKIE, $_SERVER;
 
 	// Regler le $delais par defaut
 	if (!isset($delais))
@@ -30,8 +30,8 @@ function calcule_header_et_page ($fond, $delais) {
 		$delais = 0;
 
 	// authentification du visiteur
-	if ($GLOBALS['_COOKIE']['spip_session'] OR
-	($GLOBALS['_SERVER']['PHP_AUTH_USER']  AND !$ignore_auth_http)) {
+	if ($_COOKIE['spip_session'] OR
+	($_SERVER['PHP_AUTH_USER']  AND !$ignore_auth_http)) {
 		include_ecrire ("inc_session.php3");
 		verifier_visiteur();
 	}
@@ -95,6 +95,7 @@ function calcule_header_et_page ($fond, $delais) {
 			// Si la page est vide, gerer l'erreur 404
 			if (trim($page['texte']) === ''
 			AND $var_mode != 'debug') {
+				include_ecrire('inc_headers.php');
 				http_status(404);
 				$contexte_inclus = array(
 					'erreur_aucun' => message_erreur_404()
@@ -107,7 +108,7 @@ function calcule_header_et_page ($fond, $delais) {
 			}
 			// Interdire au client de cacher un login, un admin ou un recalcul
 			else if ($flag_dynamique OR $var_mode
-			OR $GLOBALS['_COOKIE']['spip_admin']) {
+			OR $_COOKIE['spip_admin']) {
 				header("Cache-Control: no-cache,must-revalidate");
 				header("Pragma: no-cache");
 			}
@@ -126,7 +127,7 @@ function calcule_header_et_page ($fond, $delais) {
 // Aller chercher la page dans le cache ou pas
 //
 function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $inclusion=false) {
-	global $lastmodified;
+	global $lastmodified, $_SERVER;
 
 	if (!$use_cache) {
 		include_local('inc-calcul.php3');
@@ -146,7 +147,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 
 		// log
 		if (!$log = $chemin_cache) $log = "($fond, delais=$delais, "
-		. $GLOBALS['_SERVER']['REQUEST_METHOD'].")";
+		. $_SERVER['REQUEST_METHOD'].")";
 		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
 		.spip_timer('calculer_page')."): $log");
 
@@ -198,7 +199,7 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 //
 function afficher_page_globale ($fond, $delais, &$use_cache) {
 	global $flag_preserver, $flag_dynamique, $lastmodified;
-	global $var_preview, $var_mode, $delais;
+	global $var_preview, $var_mode, $delais, $_SERVER;
 	include_local ("inc-cache.php3");
 
 	// demande de previsualisation ?
@@ -245,7 +246,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$lastmodified = @filemtime($chemin_cache);
 		$headers_only = http_last_modified($lastmodified);
 	}
-	$headers_only |= ($GLOBALS['_SERVER']['REQUEST_METHOD'] == 'HEAD');
+	$headers_only |= ($_SERVER['REQUEST_METHOD'] == 'HEAD');
 
 	if ($headers_only) {
 		if ($chemin_cache)

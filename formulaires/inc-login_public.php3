@@ -65,7 +65,7 @@ function login_explicite($login, $cible) {
 }
 
 function login_pour_tous($login, $cible, $action) {
-	global $ignore_auth_http, $php_module, $_SERVER, $_COOKIE;
+	global $ignore_auth_http, $_SERVER, $_COOKIE;
 
 	// en cas d'echec de cookie, inc_auth a renvoye vers spip_cookie qui
 	// a tente de poser un cookie ; s'il n'est pas la, c'est echec cookie
@@ -73,8 +73,11 @@ function login_pour_tous($login, $cible, $action) {
 	// et pas un echec cookie.
 	if (_request('var_echec_cookie'))
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
-	$auth_http = ($echec_cookie AND $php_module AND !$ignore_auth_http) ?
-		'spip_cookie.php3' : '';
+	if ($echec_cookie AND !$ignore_auth_http) {
+		include_ecrire('inc_headers.php');
+		if (php_module())
+			$auth_http = 'spip_cookie.php3';
+	}
 	// Attention dans le cas 'intranet' la proposition de se loger
 	// par auth_http peut conduire a l'echec.
 	if ($_SERVER['PHP_AUTH_USER'] AND $_SERVER['PHP_AUTH_PW'])

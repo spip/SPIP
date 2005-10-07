@@ -481,6 +481,7 @@ else {
 			erreur_aide_indisponible();
 		}
 	} else {
+		include_ecrire('inc_presentation.php3');
 		echo debut_entete(_T('info_aide_en_ligne'),
 				  array("Content-Type: text/html; charset=utf-8"));
 		if ($frame == 'menu')

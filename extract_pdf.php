@@ -23,13 +23,13 @@ function extracteur_pdf($fichier, &$charset) {
 
 	# metamail
 	exec('metamail -d -q -b -c application/pdf '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return join(' ', $r);
+	if (!$e) return @join(' ', $r);
 
 	# pdftotext
 	# http://www.glyphandcog.com/Xpdf.html
 	# l'option "-enc utf-8" peut echouer ... dommage !
 	exec('pdftotext '.escapeshellarg($fichier).' -', $r, $e);
-	if (!$e) return join(' ', $r);
+	if (!$e) return @join(' ', $r);
 }
 
 // Sait-on extraire ce format ?

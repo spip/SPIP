@@ -20,6 +20,32 @@ include_ecrire("inc_filtres.php3"); # pour les fonctions http_* (normalement dej
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
 
+
+function debut_entete($title, $entete='') {
+	global $flag_preserver;
+
+	if (!$charset = lire_meta('charset'))
+		$charset = 'utf-8';
+	if (!$entete)
+	  $entete = array("Content-Type: text/html; charset=$charset",
+			  "Expires: 0",
+			  "Last-Modified: " .gmdate("D, d M Y H:i:s"). " GMT",
+			  "Cache-Control: no-store, no-cache, must-revalidate",
+			  "Pragma: no-cache");
+	if (!$flag_preserver) array_map('header', $entete);
+	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
+	// il faudrait aussi pour Safari
+	// header("Cache-Control: post-check=0, pre-check=0", false)
+	// mais ca ne respecte pas
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n" .
+#	  "<base href='$base' />\n" .
+	  "<title>$title</title>\n";
+}
+
+
 //
 // Aide
 //

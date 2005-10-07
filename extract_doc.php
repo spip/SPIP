@@ -15,7 +15,7 @@ function extracteur_doc($fichier, &$charset) {
 	$charset = 'iso-8859-1';
 
 	exec('metamail -d -q -b -c application/msword '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return join(' ', $r);
+	if (!$e) return @join(' ', $r);
 
 	# wvText
 	# http://wvware.sourceforge.net/
@@ -28,12 +28,12 @@ function extracteur_doc($fichier, &$charset) {
 	# antiword
 	# http://www.winfield.demon.nl/
 	exec('antiword '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return join(' ', $r);
+	if (!$e) return @join(' ', $r);
 
 	# catdoc
 	# http://www.45.free.net/~vitus/ice/catdoc/
 	exec('catdoc '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return join(' ', $r);
+	if (!$e) return @join(' ', $r);
 
 }
 

@@ -19,9 +19,6 @@
 if (defined("_ECRIRE_INC_GETDOCUMENT")) return;
 define("_ECRIRE_INC_GETDOCUMENT", "1");
 
-if (!function_exists('file_get_contents'))
-  eval('function file_get_contents($f) {return join("",file($f));}');
-
 
 // Creer IMG/pdf/
 function creer_repertoire_documents($ext) {
@@ -444,7 +441,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		// Inserer le nouveau doc et recuperer son id_
 		$id_document = spip_abstract_insert("spip_documents",
 		"(id_type, titre, date, distant)",
-		"($id_type, '".texte_script($titre)."', NOW(), '$distant')");
+		"($id_type, '".addslashes($titre)."', NOW(), '$distant')");
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
@@ -725,7 +722,7 @@ function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0
       
 	$titre= addslashes(trim(preg_replace('/[-_]/', ' ', $k)));
 	$chemin = "$DIR/$k." . $v;
-	$texte = file_get_contents($chemin);
+	$texte = spip_file_get_contents($chemin);
 	if ($v[0] == 'h') {
 	  // cas du html
 	  if (preg_match(',<body[^>]*>(.*)</body>,is', $texte, $match))

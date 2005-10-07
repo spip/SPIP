@@ -15,7 +15,7 @@ function extracteur_rtf($fichier, &$charset) {
 	$charset = 'iso-8859-1';
 
 	exec('metamail -d -q -b -c application/rtf '.escapeshellarg($fichier), $r, $e);
-	if (!$e) return join(' ', $r);
+	if (!$e) return @join(' ', $r);
 
 	# wvText
 	# http://wvware.sourceforge.net/

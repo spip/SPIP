@@ -17,6 +17,13 @@ if (defined("_ECRIRE_INC_FILTRES")) return;
 define("_ECRIRE_INC_FILTRES", "1");
 
 
+// Transforme n'importe quel champ en une chaine utilisable
+// en PHP ou Javascript en toute securite
+// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
+function texte_script($texte) {
+	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
+}
+
 // Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
 // pas au charset de la page [iso-8859-1 par defaut])
@@ -1138,6 +1145,13 @@ function tester_config($ignore, $quoi) {
 	}
 }
 
+// transformation XML des "&" en "&amp;"
+function quote_amp($u) {
+	return preg_replace(
+		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
+		"&amp;",$u);
+}
+
 //
 // Un filtre qui, etant donne un #PARAMETRES_FORUM, retourne un URL de suivi rss
 // dudit forum
@@ -1400,8 +1414,28 @@ function image_typo() {
 
 }
 
-function modulo($nb, $mod, $add=0)
-{
-  return ($nb%$mod)+$add;
+function modulo($nb, $mod, $add=0) {
+	return ($nb%$mod)+$add;
 }
+
+// Verifier la conformite d'une ou plusieurs adresses email
+//  retourne false ou la  normalisation de la derniere adresse donnee
+function email_valide($adresses) {
+	// Si c'est un spammeur autant arreter tout de suite
+	if (preg_match(",[\n\r].*(MIME|multipart|Content-),i", $adresses)) {
+		spip_log("Tentative d'injection de mail : $adresses");
+		return false;
+	}
+
+	foreach (explode(',', $adresses) as $v) {
+		// nettoyer certains formats
+		// "Marie Toto <Marie@toto.com>"
+		$adresse = trim(eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $v));
+		// RFC 822
+		if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', $adresse))
+			return false;
+	}
+	return $adresse;
+}
+
 ?>

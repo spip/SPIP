@@ -51,18 +51,6 @@ function include_ecrire($file) {
 	include($file);
 }
 
-function include_lang($file) {
-	$file = _DIR_LANG . $file;
-	if (@$GLOBALS['included_files'][$file]++) return;
-	include($file);
-}
-
-function include_plug($file) {
-	$file = _DIR_RESTREINT . $file;
-	if (@$GLOBALS['included_files'][$file]++) return;
-	if (file_exists($file)) include($file);
-}
-
 
 // *********** traiter les variables ************
 
@@ -80,34 +68,11 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 }
 
 
-// Magic quotes : on n'en veut pas sur la base,
-// et on nettoie les GET/POST/COOKIE le cas echeant
-function magic_unquote($_table) {
-
-	// Certains hebergeurs n'activent pas $GLOBALS['GLOBALS']
-	if ($_table == 'GLOBALS'
-	AND !isset($GLOBALS['GLOBALS']))
-		$GLOBALS['GLOBALS'] = &$GLOBALS;
-
-	if (is_array($GLOBALS[$_table])) {
-		foreach ($GLOBALS[$_table] as $key => $val) {
-			if (is_string($val))
-				$GLOBALS[$_table][$key] = stripslashes($val);
-		}
-	}
-}
-
+// Annuler les magic quotes
 @set_magic_quotes_runtime(0);
 if (@get_magic_quotes_gpc()) {
-	magic_unquote('_GET');
-	magic_unquote('_POST');
-	magic_unquote('_COOKIE');
-
-#	if (@ini_get('register_globals')) // pas fiable
-		magic_unquote('GLOBALS');
+	include(_DIR_RESTREINT.'inc_magicquotes.php');
 }
-
-
 
 // Dirty hack contre le register_globals a 'Off' (PHP 4.1.x)
 // A remplacer (un jour!) par une gestion propre des variables admissibles ;-)
@@ -379,7 +344,6 @@ define_once('_DIR_TRANSFERT', _DIR_PREFIX2 . "upload/");
 // globale des repertoires devant etre accessibles en ecriture
 // (inutile de mettre leurs sous-repertoires)
 
-$test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
 
 // les fichiers qu'on y met, entre autres,
 
@@ -420,6 +384,12 @@ $spip_version = 1.826;
 // version de spip
 $spip_version_affichee = "1.9 alpha";
 
+// appliquer le cookie_prefix
+if ($cookie_prefix != 'spip') {
+	include_ecrire('inc_cookie.php');
+	recuperer_cookies_spip($cookie_prefix);
+}
+
 
 // ** Securite **
 $auteur_session = '';
@@ -440,9 +410,6 @@ $flag_gz = function_exists("gzencode"); #php 4.0.4
 $flag_ob = ($flag_ini_get
 	&& !ereg("ob_", ini_get('disable_functions'))
 	&& function_exists("ob_start")); 
-$flag_crypt = function_exists("crypt");
-$flag_wordwrap = function_exists("wordwrap");
-$flag_apc = function_exists("apc_rm");
 $flag_sapi_name = function_exists("php_sapi_name");
 $flag_utf8_decode = function_exists("utf8_decode");
 $flag_ldap = function_exists("ldap_connect");
@@ -457,41 +424,6 @@ $flag_imagick = function_exists("imagick_readimage");	// http://pear.sourceforge
 $flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 $flag_revisions = function_exists("gzcompress");
 $flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
-
-//
-// Appliquer le prefixe cookie
-//
-function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='', $secure='') {
-	$name = ereg_replace ('^spip_', $GLOBALS['cookie_prefix'].'_', $name);
-	if ($path == 'AUTO') $path=$GLOBALS['cookie_path'];
-
-	if ($secure)
-		@setcookie ($name, $value, $expire, $path, $domain, $secure);
-	else if ($domain)
-		@setcookie ($name, $value, $expire, $path, $domain);
-	else if ($path)
-		@setcookie ($name, $value, $expire, $path);
-	else if ($expire)
-		@setcookie ($name, $value, $expire);
-	else
-		@setcookie ($name, $value);
-}
-
-if ($cookie_prefix != 'spip') {
-	foreach ($_COOKIE as $name => $value) {
-		if (ereg('^spip_', $name)) {
-			unset($_COOKIE[$name]);
-			unset($$name);
-		}
-	}
-	foreach ($_COOKIE as $name => $value) {
-		if (ereg('^'.$cookie_prefix.'_', $name)) {
-			$spipname = ereg_replace ('^'.$cookie_prefix.'_', 'spip_', $name);
-			$_COOKIE[$spipname] = $INSECURE[$spipname] = $value;
-			$$spipname = $value;
-		}
-	}
-}
 
 
 //
@@ -559,10 +491,6 @@ if (!$PATH_TRANSLATED) {
 	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
 }
 
-# obsoletes: utiliser les constantes ci-dessus.
-# Conserver pour compatibilite vieilles contrib uniquement
-$flag_ecrire = !@file_exists(_DIR_RESTREINT_ABS . 'inc_version.php3');
-$dir_ecrire = (ereg("/ecrire/", $GLOBALS['REQUEST_URI'])) ? '' : 'ecrire/';
 
 // API d'appel a la base de donnees
 function spip_query($query) {
@@ -593,60 +521,18 @@ function spip_query($query) {
 }
 
 
-//
-// Infos de config PHP
-//
 
-// cf. liste des sapi_name - http://fr.php.net/php_sapi_name
-$php_module = (($flag_sapi_name AND eregi("apache", @php_sapi_name())) OR
-	ereg("^Apache.* PHP", $SERVER_SOFTWARE));
-$php_cgi = ($flag_sapi_name AND eregi("cgi", @php_sapi_name()));
-
-function http_status($status) {
-	global $php_cgi, $REDIRECT_STATUS;
-
-	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;
-	$status_string = array(
-		200 => '200 OK',
-		301 => '301 Moved Permanently',
-		302 => '302 Found',
-		304 => '304 Not Modified',
-		401 => '401 Unauthorized',
-		403 => '403 Forbidden',
-		404 => '404 Not Found'
-	);
-
-	if ($php_cgi) Header("Status: $status");
-	else Header("HTTP/1.0 ".$status_string[$status]);
-}
-
-function http_gmoddate($lastmodified) {
-	return gmdate("D, d M Y H:i:s", $lastmodified);
-}
-function http_last_modified($lastmodified, $expire = 0) {
-	$gmoddate = http_gmoddate($lastmodified);
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']
-	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
-	{
-		$if_modified_since = ereg_replace(';.*$', '', $GLOBALS['HTTP_IF_MODIFIED_SINCE']);
-		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
-		if ($if_modified_since == $gmoddate) {
-			http_status(304);
-			$headers_only = true;
-		}
-	}
-	@Header ("Last-Modified: ".$gmoddate." GMT");
-	if ($expire) 
-		@Header ("Expires: ".http_gmoddate($expire)." GMT");
-	return $headers_only;
-}
 
 //
 // Reglage de l'output buffering : si possible, generer une sortie
 // compressee pour economiser de la bande passante
 //
-function test_obgz () {
-	return
+
+// si un buffer est deja ouvert, stop
+if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
+	@header("Vary: Cookie, Accept-Encoding");
+
+	if (
 	$GLOBALS['auto_compress']
 	&& $GLOBALS['flag_ob']
 	&& (phpversion()<>'4.0.4')
@@ -662,15 +548,8 @@ function test_obgz () {
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler")
 	&& !$GLOBALS['var_mode'] # bug avec le debugueur qui appelle ob_end_clean()
-	;
-}
-
-// si un buffer est deja ouvert, stop
-if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
-	@header("Vary: Cookie, Accept-Encoding");
-	if (test_obgz()) {
+	)
 		ob_start('ob_gzhandler');
-	}
 }
 
 
@@ -838,14 +717,6 @@ class Link {
 $clean_link = new Link();
 
 
-// transformation XML des "&" en "&amp;"
-function quote_amp($u) {
-	return preg_replace(
-		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
-		"&amp;",$u);
-}
-
-
 //
 // Module de lecture/ecriture/suppression de fichiers utilisant flock()
 //
@@ -858,10 +729,6 @@ include_ecrire('inc_flock.php3');
 function lire_meta($nom) {
 	global $meta;
 	return $meta[$nom];
-}
-function lire_meta_maj($nom) {
-	global $meta_maj;
-	return $meta_maj[$nom];
 }
 
 // Lire les meta cachees
@@ -876,20 +743,6 @@ if (!defined('_DATA_META_CACHE') AND !defined('_ECRIRE_INC_META')) {
 		include_ecrire('inc_meta.php3');
 		ecrire_metas();
 	}
-}
-
-// Verifier la conformite d'une ou plusieurs adresses email
-//  retourne false ou la  normalisation de la derniere adresse donnee
-function email_valide($adresses) {
-	foreach (explode(',', $adresses) as $v) {
-	  // nettoyer certains formats
-	  // "Marie Toto <Marie@toto.com>"
-		$adresse = trim(eregi_replace("^[^<>\"]*<([^<>\"]+)>$", "\\1", $v));
-		// RFC 822
-		if (!eregi('^[^()<>@,;:\\"/[:space:]]+(@([-_0-9a-z]+\.)*[-_0-9a-z]+)$', $adresse))
-			return false;
-	}
-	return $adresse;
 }
 
 //
@@ -997,102 +850,44 @@ function cron($gourmand = false) {
 }
 
 
-//
-// qq  fonctions service pour les 2 niveaux
-//
-function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
-	if (!$id_rubrique)
-		return '0';
-	if (!$exclure_feuille)
-		$hierarchie = ",$id_rubrique";
 
-	do {
-		$q = spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-		list($id_rubrique) = spip_fetch_array($q);
-		$hierarchie = "," . intval($id_rubrique) . $hierarchie;
-	} while ($id_rubrique);
+//
+// Entetes (voir aussi inc_headers.php)
+//
 
-	return substr($hierarchie, 1); // Attention ca demarre toujours par '0'
+function http_gmoddate($lastmodified) {
+	return gmdate("D, d M Y H:i:s", $lastmodified);
 }
 
-
-//
-// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
-//
-
-function creer_repertoire($base, $subdir) {
-	if (@file_exists("$base/.plat")) return '';
-	$path = $base.'/'.$subdir;
-	if (@file_exists($path)) return "$subdir/";
-
-	@mkdir($path, 0777);
-	@chmod($path, 0777);
-	$ok = false;
-	if ($f = @fopen("$path/.test", "w")) {
-		@fputs($f, '<'.'?php $ok = true; ?'.'>');
-		@fclose($f);
-		include("$path/.test");
-	}
-	if (!$ok) {
-		$f = @fopen("$base/.plat", "w");
-		if ($f)
-			fclose($f);
-		else {
-			redirige_par_entete("spip_test_dirs.php3");
+function http_last_modified($lastmodified, $expire = 0) {
+	$gmoddate = http_gmoddate($lastmodified);
+	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE']
+	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
+	{
+		$if_modified_since = preg_replace('/;.*/', '',
+			$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
+		$if_modified_since = trim(str_replace('GMT', '', $if_modified_since));
+		if ($if_modified_since == $gmoddate) {
+			include_ecrire('inc_headers.php');
+			http_status(304);
+			$headers_only = true;
 		}
 	}
-	return ($ok? "$subdir/" : '');
-}
-
-
-//
-// Entetes
-//
-
-// Interdire les attaques par manipulation des headers
-function spip_header($h) {
-	@header(strtr($h, "\n\r", "  "));
+	@Header ("Last-Modified: ".$gmoddate." GMT");
+	if ($expire) 
+		@Header ("Expires: ".http_gmoddate($expire)." GMT");
+	return $headers_only;
 }
 
 // envoyer le navigateur sur une nouvelle adresse
 function redirige_par_entete($url) {
 	spip_log("redirige $url");
+	include_ecrire('inc_headers.php');
 	http_status(302);
 	spip_header("Location: $url");
 	exit;
 }
 
-function debut_entete($title, $entete='') {
-	global $flag_preserver;
-
-	if (!$charset = lire_meta('charset'))
-		$charset = 'utf-8';
-	if (!$entete)
-	  $entete = array("Content-Type: text/html; charset=$charset",
-			  "Expires: 0",
-			  "Last-Modified: " .gmdate("D, d M Y H:i:s"). " GMT",
-			  "Cache-Control: no-store, no-cache, must-revalidate",
-			  "Pragma: no-cache");
-	if (!$flag_preserver) array_map('header', $entete);
-	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
-	// il faudrait aussi pour Safari
-	// header("Cache-Control: post-check=0, pre-check=0", false)
-	// mais ca ne respecte pas
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
-	  "<head>\n" .
-#	  "<base href='$base' />\n" .
-	  "<title>$title</title>\n";
-}
-
-
-// Transforme n'importe quel champ en une chaine utilisable
-// en PHP ou Javascript en toute securite
-// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
-function texte_script($texte) {
-	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
-}
 
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3

@@ -9,6 +9,7 @@ global $balise_FORMULAIRE_ECRIRE_AUTEUR_collecte;
 $balise_FORMULAIRE_ECRIRE_AUTEUR_collecte = array('id_auteur', 'id_article', 'email');
 
 function balise_FORMULAIRE_ECRIRE_AUTEUR_stat($args, $filtres) {
+	include_ecrire('inc_filtres.php3');
 
 	// Pas d'id_auteur ni d'id_article ? Erreur de squelette
 	if (!$args[0] AND !$args[1])

@@ -53,6 +53,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus) {
 // cas general: controler juste que l'adresse n'est pas vide et est valide
 
 function test_mail_ins($mode, $mail) {
+	include_ecrire('inc_filtres.php3');
 	return email_valide($mail);
 }
 

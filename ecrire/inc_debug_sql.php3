@@ -124,7 +124,8 @@ function erreur_squelette($message='', $lieu='') {
 	if (++$runs > 4) {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
-		    ($GLOBALS['var_mode'] == 'debug')) {
+		($GLOBALS['var_mode'] == 'debug')) {
+			include_ecrire('inc_presentation.php3');
 			echo debut_entete(_T('admin_debug')), '</head><body>',
 				affiche_erreurs_page($tableau_des_erreurs);
 			exit;
@@ -303,8 +304,8 @@ function ancre_texte($texte, $fautifs=array())
 
 // l'environnement graphique du debuggueur 
 function debug_dumpfile ($texte, $fonc, $type) {
-
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
+	include_ecrire('inc_presentation.php3');
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;

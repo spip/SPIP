@@ -34,11 +34,11 @@ function test_ecrire($my_dir) {
 }
 
 //
-// teste les droits sur les repertoires $test_dirs declares dans inc_version
+// teste les droits en ecriture sur les repertoires
 //
+$test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
 
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
-
 if ($test_dir) {
   if (!ereg("/$", $test_dir)) $test_dir .= '/';
   if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;

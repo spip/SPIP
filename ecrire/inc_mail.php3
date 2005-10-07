@@ -96,7 +96,7 @@ function nettoyer_caracteres_mail($t) {
 }
 
 function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
-	global $hebergeur, $queue_mails, $flag_wordwrap;
+	global $hebergeur, $queue_mails;
 	include_ecrire('inc_filtres.php3');
 	include_ecrire('inc_charsets.php3');
 
@@ -141,7 +141,8 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		mb_internal_encoding('utf-8');
 	}
 
-	if ($flag_wordwrap) $texte = wordwrap($texte);
+	if (function_exists('wordwrap'))
+		$texte = wordwrap($texte);
 
 	if (os_serveur == 'windows') {
 		$texte = ereg_replace ("\r*\n","\r\n", $texte);
