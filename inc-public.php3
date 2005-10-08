@@ -110,8 +110,15 @@ if (defined("_INC_PUBLIC")) {
 	// Affichage final s'il en reste
 	echo $page;
 
-	// Taches de fond ?
-	terminer_public_global();
+	// Gestion des statistiques du site public
+	if (lire_meta("activer_statistiques") != "non") {
+		include_local ("inc-stats.php3");
+		ecrire_stats();
+	}
+
+	// Effectuer une tache de fond ?
+	cron();
+
 }
 
 ?>

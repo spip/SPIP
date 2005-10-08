@@ -16,7 +16,7 @@ if (defined("_INC_PUBLIC_GLOBAL")) return;
 define("_INC_PUBLIC_GLOBAL", "1");
 
 // fonction principale declenchant tout le service
-function calcule_header_et_page ($fond, &$delais) {
+function calcule_header_et_page ($fond, $delais) {
 	  global $auteur_session, $flag_dynamique,
 	  $flag_ob, $flag_preserver, $forcer_lang, $ignore_auth_http,
 	  $lastmodified, $recherche, $use_cache, $var_confirm, $var_mode,
@@ -258,40 +258,11 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
 
 	if ($var_preview AND !$flag_preserver) {
-		include_ecrire('inc_lang.php3');
-		include_ecrire('inc_filtres.php3');
-		lang_select($GLOBALS['auteur_session']['lang']);
-		$x = majuscules(_T('previsualisation'));
-		$page['texte'] .= '<div style="
-		display: block;
-		color: #eeeeee;
-		background-color: #111111;
-		padding-right: 5px;
-		padding-top: 2px;
-		padding-bottom: 5px;
-		font-size: 20px;
-		top: 0px;
-		left: 0px;
-		position: absolute;
-		">' 
-		  . http_img_pack('naviguer-site.png', $x, '')
-		  ."&nbsp;$x</div>";
+		include_ecrire('inc_presentation.php3');
+		$page['texte'] .= afficher_bouton_preview();
 	}
 
 	return $page;
-}
-
-
-function terminer_public_global() {
-
-	// Gestion des statistiques du site public
-	if (lire_meta("activer_statistiques") != "non") {
-		include_local ("inc-stats.php3");
-		ecrire_stats();
-	}
-
-	// Effectuer une tache de fond ?
-	cron();
 }
 
 

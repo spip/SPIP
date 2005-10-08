@@ -3521,4 +3521,24 @@ function http_style_background($img, $att='')
   return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
     ($att ? (' ' . $att) : '') . ";'";
 }
+
+// Afficher le bouton "preview" dans l'espace public
+function afficher_bouton_preview() {
+		$x = majuscules(_T('previsualisation'));
+		return '<div style="
+		display: block;
+		color: #eeeeee;
+		background-color: #111111;
+		padding-right: 5px;
+		padding-top: 2px;
+		padding-bottom: 5px;
+		font-size: 20px;
+		top: 0px;
+		left: 0px;
+		position: absolute;
+		">' 
+		  . http_img_pack('naviguer-site.png', $x, '')
+		  ."&nbsp;$x</div>";
+}
+
 ?>
