@@ -198,7 +198,7 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 			$url_propre = $func($id_objet);
 			if ($url_propre
 			AND ($url_propre<>$regs[2])) {
->                               include_ecrire('inc_headers.php');
+				include_ecrire('inc_headers.php');
 				http_status(301);
 				// recuperer les arguments supplementaires (&debut_xxx=...)
 				$reste = preg_replace('/^&/','?',
