@@ -107,7 +107,7 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  */
 
 function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable) {
-	global $connect_statut, $options;
+  global $connect_statut, $connect_toutes_rubriques, $options;
 	global $spip_lang_rtl, $spip_lang_right;
 
 	$select_groupe = $GLOBALS['select_groupe'];
@@ -233,7 +233,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			}
 		}
 
-		if ($GLOBALS['connect_statut'] == '0minirezo') {
+		if ($GLOBALS['connect_statut'] == '0minirezo'
+		     AND $connect_toutes_rubriques ) {
 			echo "<div style='width: 200px;'>";
 			$retour = urlencode($GLOBALS['clean_link']->getUrl());
 			$titre = urlencode($cherche_mot);
@@ -521,7 +522,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			}
 		}
 		
-		if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees") {
+		if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
 			$retour = urlencode($GLOBALS['clean_link']->getUrl());
