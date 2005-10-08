@@ -772,11 +772,11 @@ function bouton_tourner_document($url, $redirect, $id, $album, $rot)
 {
 	global $connect_id_auteur;
 	$link_rot = new Link ($url);
-	$action = 'tourner_document';
+	$action = 'tourner';
 	$link_rot->addVar('hash', calculer_action_auteur("$action $id"));
 	$link_rot->addVar('hash_id_auteur', $connect_id_auteur);
-	$link_rot->addVar('doc', $id);
 	$link_rot->addVar('action', $action);
+	$link_rot->addVar('doc', $id);
 	$link_rot->addVar('var_rot', $rot);
 	$link_rot->addVar('redirect', $redirect.'&show_docs='.$id);
 	$link_rot->addVar('ancre', $album);
@@ -787,13 +787,13 @@ function bouton_supprime_document_et_vignette($url, $redirect, $id, $album)
 {
 	global $connect_id_auteur;
 
-	$action = 'supprime_document_et_vignette';
+	$action = 'supprimer';
 	$link_supp = new Link ($url);
-	$link_supp->addVar('redirect', $redirect);
 	$link_supp->addVar('hash', calculer_action_auteur($action ." ".$id));
 	$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
 	$link_supp->addVar('action', $action);
 	$link_supp->addVar('doc', $id);
+	$link_supp->addVar('redirect', $redirect);
 	$link_supp->addVar('ancre', $album);
 	return $link_supp->getUrl();
 }
@@ -1175,16 +1175,11 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 			afficher_formulaire_taille($document, $type_inclus);
 
 		echo "<div align='".$GLOBALS['spip_lang_right']."'>";
-		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
+		echo "<input TYPE='submit' class='fondo' style='font-size:9px;' ' VALUE='"._T('bouton_enregistrer')."'>";
 		echo "</div>";
 		echo "</form>";
 
-		$link_supp = new Link ($image_url);
-		$link_supp->addVar('redirect', $redirect_url);
-		$link_supp->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
-		$link_supp->addVar('hash_id_auteur', $connect_id_auteur);
-		$link_supp->addVar('doc_supp', $id_document);
-		$link_supp->addVar('ancre', 'documents');
+		$link_supp = bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'documents');
 
 		echo "</div>";
 		echo fin_block();
@@ -1301,12 +1296,7 @@ function afficher_case_document($id_document, $image_url, $redirect_url = "", $d
 		echo "</form>";
 
 		echo "<center>";
-		$link = new Link ($image_url);
-		$link->addVar('redirect', $redirect_url);
-		$link->addVar('hash', calculer_action_auteur("supp_doc ".$id_document));
-		$link->addVar('hash_id_auteur', $connect_id_auteur);
-		$link->addVar('doc_supp', $id_document);
-		$link->addVar('ancre', 'images');
+		$link = bouton_supprime_document_et_vignette($image_url, $redirect_url, $id_document, 'images');
 		icone_horizontale (_T('icone_supprimer_image'), $link->getUrl(), "image-24.gif", "supprimer.gif");
 		echo "</center>\n";
 
