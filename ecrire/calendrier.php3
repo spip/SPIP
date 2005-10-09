@@ -12,17 +12,20 @@
 
 include ("inc.php3");
 
-$nom = "calendrier";
-$f = find_in_path('inc_' . $nom . '.php');
-if ($f) 
-  include($f);
-elseif (file_exists($f = (_DIR_INCLUDE . 'inc_' . $nom . '.php')))
-  include($f);
+// prendre $var_* comme variables pour eviter les conflits avec les http_vars
 
-if (function_exists($nom))
-  $nom($type, $css);
-elseif (function_exists($f = $nom . "_dist"))
-  $f($type, $css);
- else
-   spip_log("fonction $nom indisponible");
+$var_nom = "calendrier";
+$var_f = find_in_path('inc_' . $var_nom . '.php');
+
+if ($var_f) 
+  include($var_f);
+elseif (file_exists($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
+  include($var_f);
+
+if (function_exists($var_nom))
+  $var_nom($type, $css);
+elseif (function_exists($var_f = $var_nom . "_dist"))
+  $var_f($type, $css);
+else
+   spip_log("fonction $var_nom indisponible");
 ?>

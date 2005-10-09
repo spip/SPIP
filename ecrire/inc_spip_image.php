@@ -565,7 +565,6 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
 				  "' LIMIT 1")))
 	  $refus = 4; } } }
 
- spip_log("$refus");
   if (is_int($refus)) {
     spip_log("Acces refuse ($refus) au document " . $id_document . ': ' . $file);
   $fond = 404;

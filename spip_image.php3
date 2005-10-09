@@ -10,26 +10,25 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// Charger un document, une image, un logo, un repertoire
-// supprimer cet element, creer les vignettes, etc.
+// prendre $var_* comme variables pour eviter les conflits avec les http_vars
 
 include ("ecrire/inc_version.php3");
 
-$nom = "spip_image";
+$var_nom = "spip_image";
 
-$f = find_in_path('inc_' . $nom . '.php');
+$var_f = find_in_path('inc_' . $var_nom . '.php');
 
-if ($f) 
-	include($f);
-elseif (file_exists($f = (_DIR_INCLUDE . 'inc_' . $nom . '.php')))
-	include($f);
+if ($var_f) 
+	include($var_f);
+elseif (file_exists($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
+	include($var_f);
 
-$nom .= '_' . $action;
+$var_nom .= '_' . $action;
 
-if (function_exists($nom))
-	$nom($doc);
-elseif (function_exists($f = $nom . '_' .  "_dist"))
-	$f($doc);
+if (function_exists($var_nom))
+	$var_nom($doc);
+elseif (function_exists($var_f = $var_nom . '_' .  "_dist"))
+	$var_f($doc);
  else
-	spip_log("fonction $nom indisponible");
+	spip_log("fonction $var_nom indisponible");
 ?>
