@@ -368,7 +368,7 @@ function couper_intro($texte, $long) {
 		$intro = couper($texte, $long);
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
-	$intro = ereg_replace("^=[^[:space:]]+","",$intro);
+	$intro = preg_replace(',^=[^[:space:]]+,','',$intro);
 
 	return $intro;
 }
@@ -378,12 +378,23 @@ function couper_intro($texte, $long) {
 // Les elements de propre()
 //
 
-// Securite : empecher l'execution de code PHP
+// Securite : empecher l'execution de code PHP ou javascript ou autre malice
 function interdire_scripts($source) {
 	$source = preg_replace(",<(\%|\?|[[:space:]]*(script|base)),ims", "&lt;\\1", $source);
 	return $source;
 }
 
+// Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
+function safehtml($t) {
+	static $a;
+	define_once('XML_HTMLSAX3', _DIR_RESTREINT."safehtml/classes/");
+	if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
+		include_local(XML_HTMLSAX3.'safehtml.php');
+		$a =& new safehtml();
+		$t = $a->parse($t);
+	}
+	return $t;
+}
 
 // Correction typographique francaise
 function typo_fr($letexte) {
