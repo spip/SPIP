@@ -613,12 +613,18 @@ function trouver_cles_table($keys)
 
 function trouver_def_table($nom, &$boucle)
 {
-  global $tables_principales, $tables_auxiliaires, $table_des_tables;
-  include_ecrire('inc_auxbase.php3');
+  global $tables_principales, $tables_auxiliaires, $table_des_tables, $tables_des_serveurs_sql;
+
   if ($desc = $tables_principales['spip_' . $nom])
     return array('spip_' . $nom, $desc);
+
+  if ($boucle->sql_serveur && 
+      $desc = $tables_des_serveurs_sql[$boucle->sql_serveur][$nom])
+    return array($nom, $desc);
+  include_ecrire('inc_auxbase.php3');
   if ($desc = $tables_auxiliaires['spip_' . $nom])
     return array('spip_' . $nom, $desc);
+
   $desc = $table_des_tables[$nom] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $nom) : $nom;
   if ($desc = spip_abstract_showtable($desc, $boucle->sql_serveur))
     if (isset($desc['field'])) {
