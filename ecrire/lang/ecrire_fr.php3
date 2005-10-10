@@ -757,9 +757,12 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'statut_admin_restreint' => '(admin restreint)',
 'syndic_choix_moderation' => 'Que faire des prochains liens en provenance de ce site&nbsp;?',
 'syndic_choix_oublier' => 'Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_choix_resume' => 'Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'lien obsol&egrave;te',
 'syndic_option_miroir' => 'les bloquer automatiquement',
 'syndic_option_oubli' => 'les effacer (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_option_resume_non' => 'le contenu complet des articles (au format HTML)',
+'syndic_option_resume_oui' => 'un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Options de syndication&nbsp;:',
 
 
