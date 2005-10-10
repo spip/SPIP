@@ -164,26 +164,31 @@ function spip_mysql_showtable($nom_table)
   if (!a) return "";
   if (!spip_fetch_array($a)) return "";
   list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
-  if (!ereg("^[^()]*\(([^()]*(\([^()]*\)[^()]*)*)\)", $a, $r))
+
+  if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
     return "";
   else {
+    $dec = $r[1];
+    if (preg_match("/^(.*),(.*KEY.*)$/s", $dec, $r)) {
+      $namedkeys = $r[2];
+      $dec = $r[1];
+    }
+    else 
+      $namedkeys = "";
 
-    $a = preg_split("/,\s*`/",$r[1]);
-    $n = count($a)-1;
-    ereg("^([^(),]*([^(),]*(\([^()]*\)[^(),]*)*)),(.*)", $a[$n], $r);
-    $a[$n]= $r[1];
-    $namedkeys = $r[count($r)-1];
     $fields = array();
-    foreach($a as $v) {
+    foreach(preg_split("/,\s*`/",$dec) as $v) {
       preg_match("/^\s*`?([^`]*)`\s*(.*)$/",$v,$r);
       $fields[strtolower($r[1])] = $r[2];
     }
     $keys = array();
-    foreach(split(",",$namedkeys) as $v) {
-      preg_match("/^([^(]*)\((.*)\)\s*$/",$v,$r);
-      $k = str_replace("`", '', $r[1]);
-      $t = strtolower(str_replace("`", '', $r[2]));
-      $keys[$k] = $t;
+
+    foreach(split(")",$namedkeys) as $v) {
+	      if (preg_match("/^\s*([^(]*)\((.*)$/",$v,$r)) {
+		$k = str_replace("`", '', trim($r[1]));
+		$t = strtolower(str_replace("`", '', $r[2]));
+		if ($k && !isset($keys[$k])) $keys[$k] = $t; else $keys[] = $t;
+	    }
     }
     return array('field' => $fields,	'key' => $keys);
   }
