@@ -338,11 +338,11 @@ function analyser_site($url) {
 }
 
 // Inserer les references aux fichiers joints
-function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
+function traiter_les_enclosures_rss($enclosures,$id_syndic,$le_lien) {
 
 	list($id_syndic_article) = spip_fetch_array(spip_query(
 	"SELECT id_syndic_article FROM spip_syndic_articles
-	WHERE id_syndic=$id_syndic AND url='$lelien'"));
+	WHERE id_syndic=$id_syndic AND url='".addslashes($le_lien)."'"));
 
 	// Attention si cet article est deja vu, ne pas doubler les references
 	spip_query("DELETE FROM spip_documents_syndic
@@ -357,7 +357,7 @@ function traiter_les_enclosures_rss($enclosures,$id_syndic,$lelien) {
 		$enclosure, $enc_regs_type)) {
 
 			$url = substr(urldecode($enc_regs_url[1]), 0,255);
-			$url = addslashes(abs_url($url, $lelien));
+			$url = addslashes(abs_url($url, $le_lien));
 			$type = $enc_regs_type[1];
 
 			// Verifier que le content-type nous convient
@@ -550,21 +550,19 @@ function analyser_backend($rss) {
 			$data['lesauteurs'] = $match[1];
 		else
 			$data['lesauteurs'] = $les_auteurs_du_site;
+
 		// Description
 		if (preg_match($syndic_regexp['description'],$item,$match)) {
 			$data['descriptif'] = $match[1];
 		}
-		else if (preg_match($syndic_regexp['descriptionbis'],$item,$match))
-			$data['descriptif'] = $match[1];
-		else
-			$data['descriptif'] = "";
+		if (preg_match($syndic_regexp['descriptionbis'],$item,$match))
+			$data['content'] = $match[1];
 
 		// Nettoyer les donnees et remettre les CDATA en place
 		foreach ($data as $var => $val) {
 			$data[$var] = filtrer_entites($data[$var]);
 			foreach ($echappe_cdata as $n => $e)
 				$data[$var] = str_replace("@@@SPIP_CDATA$n@@@",$e, $data[$var]);
-			$data[$var] = trim(textebrut($data[$var]));
 		}
 
 		// Honorer le <lastbuilddate> en forcant la date
@@ -594,44 +592,55 @@ function analyser_backend($rss) {
 //
 // Insere un article syndique (renvoie true si l'article est nouveau)
 //
-function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site) {
+function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $resume) {
 
 	// Creer le lien s'il est nouveau - cle=(id_syndic,url)
-	$le_lien = addslashes(substr($data['url'], 0,255));
+	$le_lien = substr($data['url'], 0,255);
 	if (spip_num_rows(spip_query(
 		"SELECT * FROM spip_syndic_articles
-		WHERE url='$le_lien'
+		WHERE url='".addslashes($le_lien)."'
 		AND id_syndic=$now_id_syndic"
 	)) == 0 and !spip_sql_error()) {
 		spip_query("INSERT INTO spip_syndic_articles
 		(id_syndic, url, date, statut) VALUES
-		('$now_id_syndic', '$le_lien',
+		('$now_id_syndic', '".addslashes($le_lien)."',
 		FROM_UNIXTIME(".$data['date']."), '$statut')");
 		$ajout = true;
 	}
 
-	// Nettoyer le descriptif par une fonction personnalisee ?
-	if (function_exists('nettoyer_descriptif_syndication')) {
-		$data['descriptif'] = nettoyer_descriptif_syndication(
-			$data['descriptif'], $now_id_syndic, $url_site
-		);
+	// Descriptif, en mode resume ou mode 'full text'
+	// on prend en priorite data['descriptif'] si on est en mode resume,
+	// et data['content'] si on est en mode "full syndication"
+	if ($resume != 'non') {
+		// mode "resume"
+		$desc = strlen($data['descriptif']) ?
+			$data['descriptif'] : $data['content'];
+		$desc = couper(trim(textebrut($desc)), 300);
 	} else {
-		// fonction standard
-		$data['descriptif'] = couper($data['descriptif'], 300);
+		// mode "full syndication"
+		// 1. choisir le contenu pertinent
+		$desc = strlen($data['content']) ?
+			$data['content'] : $data['descriptif'];
+		// 2. refaire les liens relatifs
+		$desc = liens_absolus($desc, $le_lien);
+		// 3. securiser (XSS et XHTML)
+		$desc = safehtml($desc);
+		// 4. eviter propre()
+		if (strlen($desc)) $desc = "<html>$desc</html>";
 	}
 
 	// Mise a jour du contenu (titre,auteurs,description)
 	spip_query ("UPDATE spip_syndic_articles SET
 	titre='".addslashes($data['titre'])."',
 	lesauteurs='".addslashes($data['lesauteurs'])."',
-	descriptif='".addslashes($data['descriptif'])."'
-	WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
+	descriptif='".addslashes($desc)."'
+	WHERE id_syndic='$now_id_syndic' AND url='".addslashes($le_lien)."'");
 
 	// Mettre a jour la date si lastbuilddate
 	if ($data['lastbuilddate'])
 		spip_query("UPDATE spip_syndic_articles
 		SET date = FROM_UNIXTIME(".$data['lastbuilddate'].")
-		WHERE id_syndic='$now_id_syndic' AND url='$le_lien'");
+		WHERE id_syndic='$now_id_syndic' AND url='".addslashes($le_lien)."'");
 
 	// Inserer les enclosures
 	if ($data['enclosures']) {
@@ -683,7 +692,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		$urls = array();
 		foreach ($articles as $data) {
 			if ($data['url']) {
-				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site);
+				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $row['resume']);
 				$urls[] = $data['url'];
 			}
 		}
@@ -1033,13 +1042,23 @@ function executer_une_syndication() {
 
 	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
 	// s'il echoue
-	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication IN ('sus','off') AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR) ORDER BY date_syndic LIMIT 1"))) {
+	$s = spip_query("SELECT * FROM spip_syndic
+	WHERE syndication IN ('sus','off')
+	AND statut='publie'
+	AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR)
+	ORDER BY date_syndic LIMIT 1");
+	if ($row = spip_fetch_array($s)) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'off');
 	}
 
 	// Et un site 'oui' de plus de 2 heures, qui passe en 'sus' s'il echoue
-	if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE syndication='oui' AND statut='publie' AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR) ORDER BY date_syndic LIMIT 1"))) {
+	$s = spip_query("SELECT * FROM spip_syndic
+	WHERE syndication='oui'
+	AND statut='publie'
+	AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR)
+	ORDER BY date_syndic LIMIT 1");
+	if ($row = spip_fetch_array($s)) {
 		$id_syndic = $row["id_syndic"];
 		syndic_a_jour($id_syndic, 'sus');
 	}

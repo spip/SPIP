@@ -1054,6 +1054,15 @@ function maj_base() {
 		maj_version(1.826);
 	}
 
+	// Syndication : ajout de l'option resume=oui/non et de la langue
+	if ($version_installee < 1.901) {
+		spip_query("ALTER TABLE spip_syndic
+			ADD resume VARCHAR(3) DEFAULT 'oui'");
+		spip_query("ALTER TABLE spip_syndic_articles
+			ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
+		maj_version(1.901);
+	}
+
 	return true;
 }
 
