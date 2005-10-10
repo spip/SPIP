@@ -74,6 +74,7 @@ class Boucle {
 	var $primary;
 	var $return;
 	var $numrows = false; 
+	var $cptrows = false; 
 	var $ligne = 0; 
 }
 
