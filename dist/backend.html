@@ -24,14 +24,26 @@
 		<date>#DATE</date>
 		
 
-[(#REM)
-	Il est possible de mettre le texte integral de l'article dans le backend
-	en remplacant *INTRODUCTION par *CHAPO et *TEXTE etc., a filtrer avec
-	"liens_absolus".
-]
 
-<description>[(#LOGO_ARTICLE|right||liens_absolus|texte_backend)
-][(#INTRODUCTION|texte_backend)]</description>
+	[<description>(#INTRODUCTION|texte_backend)</description>]
+
+	<B_mots>
+	<dc:subject><BOUCLE_mots(MOTS){id_article}{" "}>[(#TITRE|former_tag)]</BOUCLE_mots></dc:subject>
+	</B_mots>
+
+[(#REM)
+	Lorsque ce fichier backend est appele avec un parametre ?full=1,
+	il diffuse aussi le texte integral de l'article, ce qui permet une
+	syndication plus riche.
+]
+[(#ENV{full}|?{' ',''})
+	<content:encoded>[(#LOGO_ARTICLE|right||html_backend)
+	][&lt;div class='rss_chapo'>(#CHAPO|html_backend)&lt;/div>
+	][&lt;div class='rss_texte'>(#TEXTE|html_backend)&lt;/div>
+	][&lt;hr />
+	&lt;div class='rss_notes'>(#NOTES|html_backend)&lt;/div>
+	]</content:encoded>
+]
 		<author><BOUCLE_auteurs(AUTEURS){id_article}{", "}>[(#NOM|texte_backend)]</BOUCLE_auteurs></author>
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>

@@ -70,9 +70,10 @@
 <div class="liste-articles">
 
 <BOUCLE_articles(SYNDIC_ARTICLES) {id_syndic} {par date}{inverse}{0,10}>
-	<h2><a href="#URL_ARTICLE" [title="(#DESCRIPTIF|couper{400}|textebrut|entites_html)"]>#TITRE</a></h2>
+	<h2><a href="#URL_ARTICLE">#TITRE</a></h2>
 	<div class="detail">
 	[(#DATE|nom_jour)] [(#DATE|affdate)]
+	[: (#DESCRIPTIF)] [&mdash; <em>(#TAGS)</em>]
 	</div>
 	<br />
 </BOUCLE_articles>

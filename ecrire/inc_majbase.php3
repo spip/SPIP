@@ -1063,6 +1063,17 @@ function maj_base() {
 		maj_version(1.901);
 	}
 
+	// Syndication : ajout de source, url_source, tags
+	if ($version_installee < 1.902) {
+		spip_query("ALTER TABLE spip_syndic_articles
+			ADD url_source TINYTEXT DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles
+			ADD source TINYTEXT DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles
+			ADD tags TEXT DEFAULT '' NOT NULL");
+		maj_version(1.902);
+	}
+
 	return true;
 }
 

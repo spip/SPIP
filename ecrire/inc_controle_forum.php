@@ -114,7 +114,7 @@ function controle_un_forum($row, $rappel) {
 	$forum_id_breve = $row['id_breve'];
 	$forum_date_heure = $row['date_heure'];
 	$forum_titre = echapper_tags($row['titre']);
-	$forum_texte = echapper_tags($row['texte']);
+	$forum_texte = $row['texte'];
 	$forum_auteur = echapper_tags($row['auteur']);
 	$forum_email_auteur = echapper_tags($row['email_auteur']);
 	$forum_nom_site = echapper_tags($row['nom_site']);
@@ -152,17 +152,22 @@ function controle_un_forum($row, $rappel) {
 	  "</span>";
 	if ($forum_auteur) {
 		if ($forum_email_auteur)
-			$forum_auteur="<a href='mailto:$forum_email_auteur?SUBJECT=".rawurlencode($forum_titre)."'>$forum_auteur</A>";
-		$controle .= "<span class='arial2'> / <B>$forum_auteur</B></span>";
+			$forum_auteur="<a href='mailto:"
+			.htmlspecialchars($forum_email_auteur)
+			."?subject=".rawurlencode($forum_titre)."'>".$forum_auteur
+			."</A>";
+		$controle .= safehtml("<span class='arial2'> / <b>$forum_auteur</b></span>");
 	}
 
 	$controle .= boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur, "$type=$valeur", $forum_ip);
 
-	$controle .= "\n<br />$avant<B>$pref <A HREF='$url'>$titre</A></B>" .
-	  "<P align='justify'>".propre($forum_texte);
+	$suite = "\n<br />$avant<b>$pref
+	<a href='$url'>$titre</a></b>" . justifier(propre($forum_texte));
 
 	if (strlen($forum_url_site) > 10 AND strlen($forum_nom_site) > 3)
-		$controle .= "\n<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
+		$suite .= "\n<div align='left' class='serif'><B><A HREF='$forum_url_site'>$forum_nom_site</A></B></div>";
+
+	$controle .= safehtml($suite);
 
 	if (lire_meta("mots_cles_forums") == "oui") {
 		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";

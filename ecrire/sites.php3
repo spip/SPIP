@@ -360,8 +360,8 @@ if ($flag_administrable) {
 
 	echo "<select name='nouveau_statut' size=1 class='fondl'>\n";
 
-	echo my_sel("publie",_T('info_statut_site_2'),$statut);
 	echo my_sel("prop",_T('info_statut_site_3'),$statut);
+	echo my_sel("publie",_T('info_statut_site_2'),$statut);
 	echo my_sel("refuse",_T('info_statut_site_4'),$statut);
 
 	echo "</select>\n";

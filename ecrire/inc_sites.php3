@@ -476,13 +476,15 @@ function analyser_backend($rss) {
 		}
 	}
 
-	// chercher un auteur dans le fil au cas ou les entry n'en auraient pas
+	// chercher auteur/lang dans le fil au cas ou les items n'en auraient pas
 	list($channel_head) = preg_split($syndic_regexp['item'], $rss, 2);
 	if (ereg($syndic_regexp['author1'],$channel_head,$mat)) {
 		if (ereg($syndic_regexp['author2'],$mat[1],$match))
 			$les_auteurs_du_site = $match[1];
 	}
-
+	if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
+	$channel_head, $match))
+		$langue_du_site = $match[4];
 
 	$items = array();
 	if (preg_match_all($syndic_regexp['item'],$rss,$r, PREG_SET_ORDER))
@@ -573,6 +575,34 @@ function analyser_backend($rss) {
 		AND $lastbuilddate < time())
 			$data['lastbuilddate'] = $lastbuilddate;
 
+		// lang
+		if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
+			$item, $match))
+			$data['lang'] = trim($match[4]);
+		else
+			$data['lang'] = trim($langue_du_site);
+
+		// source et url_source  (pas trouve d'exemple en ligne !!)
+		# <source url="http://www.truc.net/music/uatsap.mp3" length="19917" />
+		# <source url="http://www.truc.net/rss">Site source</source>
+		if (preg_match(',(<source[^>]*>)(([^<>]+)</source>)?,i',
+		$item, $match)) {
+			$data['source'] = trim($match[3]);
+			include_ecrire('inc_filtres.php3');
+			$data['url_source'] = trim(extraire_attribut($match[1], 'url'));
+		}
+
+		// tags
+		# a partir de "<dc:subject>", (del.icio.us)
+		# ou <media:category> (flickr)
+		# ou <itunes:category> (apple)
+		if (preg_match_all(
+		',<([a-z]+:)?(subject|category|keywords)[^>]*>([^<>]+),i',
+		$item, $matches, PREG_SET_ORDER))
+			foreach ($matches as $match)
+				$data['tags'] .= ' '.trim($match[3]);
+		$data['tags'] = trim($data['tags']);
+
 		// Attraper les URLs des pieces jointes <enclosure>
 		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i', $item,
 		$preg_enclosures, PREG_SET_ORDER)) {
@@ -618,29 +648,28 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $r
 		$desc = couper(trim(textebrut($desc)), 300);
 	} else {
 		// mode "full syndication"
-		// 1. choisir le contenu pertinent
+		// choisir le contenu pertinent
+		// & refaire les liens relatifs
 		$desc = strlen($data['content']) ?
 			$data['content'] : $data['descriptif'];
-		// 2. refaire les liens relatifs
 		$desc = liens_absolus($desc, $le_lien);
-		// 3. securiser (XSS et XHTML)
-		$desc = safehtml($desc);
-		// 4. eviter propre()
-		if (strlen($desc)) $desc = "<html>$desc</html>";
 	}
 
-	// Mise a jour du contenu (titre,auteurs,description)
+	// Mettre a jour la date si lastbuilddate
+	$update_date = $data['lastbuilddate'] ?
+		"date = FROM_UNIXTIME(".$data['lastbuilddate'].")," : '';
+
+	// Mise a jour du contenu (titre,auteurs,description,date?,source...)
 	spip_query ("UPDATE spip_syndic_articles SET
 	titre='".addslashes($data['titre'])."',
+	".$update_date."
 	lesauteurs='".addslashes($data['lesauteurs'])."',
-	descriptif='".addslashes($desc)."'
+	descriptif='".addslashes($desc)."',
+	lang='".addslashes(substr($data['lang'],0,10))."',
+	source='".addslashes(substr($data['source'],0,255))."',
+	url_source='".addslashes(substr($data['url_source'],0,255))."',
+	tags='".addslashes($data['tags'])."'
 	WHERE id_syndic='$now_id_syndic' AND url='".addslashes($le_lien)."'");
-
-	// Mettre a jour la date si lastbuilddate
-	if ($data['lastbuilddate'])
-		spip_query("UPDATE spip_syndic_articles
-		SET date = FROM_UNIXTIME(".$data['lastbuilddate'].")
-		WHERE id_syndic='$now_id_syndic' AND url='".addslashes($le_lien)."'");
 
 	// Inserer les enclosures
 	if ($data['enclosures']) {
@@ -923,7 +952,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$date=$row["date"];
 			$lesauteurs=typo($row["lesauteurs"]);
 			$statut=$row["statut"];
-			$descriptif=propre($row["descriptif"]);
+			$descriptif=safehtml($row["descriptif"]);
 
 			
 			if ($statut=='publie') {
@@ -966,7 +995,25 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 				}
 			}
 
-			if (strlen($descriptif) > 0) $s .= "<div class='arial1'>$descriptif</div>";
+			// descriptif
+			if (strlen($descriptif) > 0)
+				$s .= "<div class='arial1'>".safehtml($descriptif)."</div>";
+
+			// tags
+			if (strlen($row['tags']))
+				$s .= "<div style='float:$spip_lang_right;'><em>"
+					.traiter_tags($row['tags']) . '</em></div>';
+
+			// source
+			if (strlen($row['url_source']))
+				$s .= "<div style='float:$spip_lang_right;'>"
+				. propre("[".$row['source']."->".$row['url_source']."]")
+				. "</div>";
+			else if (strlen($row['source']))
+				$s .= "<div style='float:$spip_lang_right;'>"
+				. typo($row['source'])
+				. "</div>";
+
 			$vals[] = $s;
 
 			// $my_sites cache les resultats des requetes sur les sites
