@@ -66,19 +66,19 @@ function balise_distante_interdite($p) {
 //
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "lire_meta('nom_site')";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_EMAIL_WEBMASTER_dist($p) {
 	$p->code = "lire_meta('email_webmaster')";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_CHARSET_dist($p) {
 	$p->code = "lire_meta('charset')";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -152,13 +152,13 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 
 function balise_DOSSIER_SQUELETTE_dist($p) {
 	$p->code = "'" . addslashes(dirname($p->descr['sourcefile'])) . "'" ;
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "lire_meta('adresse_site')";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -180,7 +180,7 @@ function balise_URL_ARTICLE_dist($p) {
 			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -191,7 +191,7 @@ function balise_URL_RUBRIQUE_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -202,7 +202,7 @@ function balise_URL_BREVE_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -214,7 +214,7 @@ function balise_URL_MOT_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -231,7 +231,7 @@ function balise_URL_FORUM_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -239,7 +239,7 @@ function balise_URL_DOCUMENT_dist($p) {
 	$p->code = "generer_url_document(" .
 	champ_sql('id_document',$p) . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -249,7 +249,7 @@ function balise_URL_AUTEUR_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
