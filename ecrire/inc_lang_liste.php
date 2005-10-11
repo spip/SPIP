@@ -11,6 +11,14 @@
 \***************************************************************************/
 
 
+
+/*
+ Ce fichier contient les codes de langue de base de SPIP.
+ La plupart sont des codes ISO 639-1.
+ Voir leurs definitions/descriptions en francais et en anglais dans
+ http://www.loc.gov/standards/iso639-2/langcodes.html 
+*/
+
 // Ce fichier ne sera execute qu'une fois
 if (defined("_ECRIRE_INC_LANG_LISTE")) return;
 define("_ECRIRE_INC_LANG_LISTE", "1");
@@ -80,10 +88,10 @@ $GLOBALS['codes_langues'] = array(
 	'it' => "italiano",
 	'iu' => "Inuktitut",
 	'ja' => "&#26085;&#26412;&#35486;",
-	'jw' => "Javanese",
+	'jv' => "Javanese",
 	'ka' => "&#4325;&#4304;&#4320;&#4311;&#4323;&#4314;&#4312;",
 	'kk' => "&#1178;&#1072;&#1079;&#1072;&#1097;b",
-	'kl' => "Greenlandic",
+	'kl' => "kalaallisut",
 	'km' => "Cambodian",
 	'kn' => "Kannada",
 	'ko' => "&#54620;&#44397;&#50612;",
