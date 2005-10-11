@@ -1451,7 +1451,8 @@ function email_valide($adresses) {
 function traiter_tags($tags) {
 	$tags = explode(' ', supprimer_tags($tags));
 	foreach($tags as $tag)
-		$l .= " <a href='http://del.icio.us/tag/$tag'>$tag</a>";
+		if (strlen($tag))
+			$l .= " <a href='http://del.icio.us/tag/$tag'>$tag</a>";
 	return trim($l);
 }
 
