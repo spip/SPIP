@@ -1449,16 +1449,14 @@ function email_valide($adresses) {
 // ou vers les tags del.icio.us/flickr correspondants, etc...
 // ici essai avec del.icio.us
 function traiter_tags($tags) {
-	$tags = explode(' ', supprimer_tags($tags));
+	$tags = explode(',', supprimer_tags($tags));
+	$l = array();
 	foreach($tags as $tag)
-		if (strlen($tag))
-			$l .= " <a href='http://del.icio.us/tag/$tag'>$tag</a>";
-	return trim($l);
+		if (strlen($tag = trim($tag)))
+			$l[] = "<a href='http://del.icio.us/tag/"
+				. urlencode($tag) ."'>$tag</a>";
+	return join(', ',$l);
 }
 
-// former un tag a parti d'un titre de mot-cle
-function former_tag($mot) {
-	return str_replace(' ', '_', trim(supprimer_tags(typo($mot))));
-}
 
 ?>

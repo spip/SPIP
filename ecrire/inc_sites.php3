@@ -596,12 +596,14 @@ function analyser_backend($rss) {
 		# a partir de "<dc:subject>", (del.icio.us)
 		# ou <media:category> (flickr)
 		# ou <itunes:category> (apple)
+		# note : notre separateur sera la virgule ","
+		$data['tags'] = array();
 		if (preg_match_all(
 		',<([a-z]+:)?(subject|category|keywords)[^>]*>([^<>]+),i',
 		$item, $matches, PREG_SET_ORDER))
 			foreach ($matches as $match)
-				$data['tags'] .= ' '.trim($match[3]);
-		$data['tags'] = trim($data['tags']);
+				$data['tags'][] = trim(str_replace(',',' ',$match[3]));
+		$data['tags'] = join(', ', $data['tags']);
 
 		// Attraper les URLs des pieces jointes <enclosure>
 		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i', $item,
