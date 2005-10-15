@@ -207,13 +207,6 @@ function tester_rubrique_vide($id_rubrique) {
 
 $cookie_admin = $_COOKIE['spip_admin'];
 
-// Supprimer rubrique
-if ($supp_rubrique = intval($supp_rubrique) AND $connect_statut == '0minirezo' AND acces_rubrique($supp_rubrique)) {
-	$query = "DELETE FROM spip_rubriques WHERE id_rubrique=$supp_rubrique";
-	$result = spip_query($query);
-
-	calculer_rubriques();
-}
 
 // Modifs forum
 if ($controle_forum AND $id_controle_forum) {

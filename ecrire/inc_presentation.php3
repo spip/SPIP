@@ -587,7 +587,8 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 		if ($deb_aff != -1) {
 			if ($deb_aff > 0) $deb_aff --;  // Correction de bug: si on affiche "de 1 a 10", alors LIMIT 0 OFFSET 10
 			$query = eregi_replace('LIMIT[[:space:]].*$', '', $query);
-			$query .= " LIMIT  $nb_aff OFFSET $deb_aff";
+#			$query .= " LIMIT  $nb_aff OFFSET $deb_aff";
+			$query .= " LIMIT  $deb_aff, $nb_aff ";
 		}
 	}
 

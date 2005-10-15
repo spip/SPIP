@@ -43,10 +43,10 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 
 
 function decrire_logo($racine) {
-	global $connect_id_auteur;
 		
 	if ($img = cherche_image_nommee($racine)) {
 		list($dir, $racine, $fmt) = $img;
+
 		$fid = $dir . "$racine.".$fmt; 
 		if ($taille = @getimagesize($fid))
 			$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
@@ -58,7 +58,7 @@ function decrire_logo($racine) {
 
 
 function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
-	global $options, $spip_display;
+	global $spip_display;
 
 	$logon = $type.'on'.$id;
 	$logoff = $type.'off'.$id;
@@ -472,6 +472,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
+
 			if ($taille_origine = @getimagesize($logo)) {
 				list ($destWidth,$destHeight, $ratio) = image_ratio(
 					$taille_origine[0], $taille_origine[1], $taille, $taille_y);

@@ -159,7 +159,6 @@ else
 	echo "<FORM ACTION='naviguer.php3' METHOD='post'>";
 
 echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">";
-if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 
 $titre = entites_html($titre);
 
@@ -247,8 +246,9 @@ echo "</TEXTAREA>\n";
 		extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
-echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'>";
-echo "</FORM>";
+if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='action' VALUE='creer'>";
+echo "<p align='right'><INPUT TYPE='submit' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'>\n</p></form>";
+
 fin_cadre_formulaire();
 
 fin_page();
