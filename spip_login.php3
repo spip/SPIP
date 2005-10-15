@@ -20,7 +20,7 @@ $forcer_lang = true;
 // est passe, renvoyer vers la meme adresse mais avec 'url'
 if (isset($_SERVER['REQUEST_URI'])
 AND strpos($_SERVER['REQUEST_URI'], 'var_url'))
-	redirige_par_entete(str_replace('var_url', 'url', $_SERVER['REQUEST_URI']));
+	@header('Location: '.str_replace('var_url', 'url', $_SERVER['REQUEST_URI']));
 
 // Fin compatibilite
 
