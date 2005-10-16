@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function enfant($leparent){
+function enfant_breves($leparent){
 	global $spip_lang_left, $spip_lang_right;
 
  	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY 0+titre, titre";
@@ -22,35 +22,46 @@ function enfant($leparent){
 		$titre=typo($row['titre']);
 		$descriptif=$row['descriptif'];
 		$texte=$row['texte'];
+		$editable = ($GLOBALS['connect_statut'] == "0minirezo")
+		  && acces_rubrique($id_rubrique);
 
-		debut_cadre_enfonce("secteur-24.gif", false, '', $titre.aide ("breves"));
-
-		if ($GLOBALS['connect_statut'] == "0minirezo") $statuts = "'prop', 'refuse', 'publie'";
-		else $statuts = "'prop', 'publie'";
+		$statuts = "'prop', 'publie'" . ($editatble ? ", 'refuse'": "");
 
 		$query = "SELECT id_breve, date_heure, titre, statut FROM spip_breves ".
 			"WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC";
+		
+		debut_cadre_enfonce("secteur-24.gif", false, '', $titre.aide ("breves"));
 		afficher_breves('', $query);
-		echo "<div align='$spip_lang_right'>";
-		icone(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.gif", "creer.gif");
-		echo "</div>";
-
+						 
+		if ($editable) {
+		  echo "<div align='$spip_lang_right'>";
+		  icone(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.gif", "creer.gif");
+		  echo "</div>";
+		}
 		fin_cadre_enfonce();
-
 	}
 }
 
 
-function changer_statut_breves($id_breve, $statut)
+function breves_dist()
 {
- 	$cond = "WHERE id_breve=" . intval($id_breve);
-	list($statut_ancien) = spip_fetch_array(spip_query("SELECT statut FROM spip_breves $cond"));
-				
-	spip_log("$statut != $statut_ancien");
-	if ($statut != $statut_ancien) {
-		spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut'" . $cond);
-		include_ecrire("inc_rubriques.php3");
-		calculer_rubriques();
+	global $connect_statut,$id_breve, $statut, $id_rubrique;
+	if ($statut AND $connect_statut == "0minirezo") {
+	 	$cond = "WHERE id_breve=" . intval($id_breve);
+		list($statut_ancien) = spip_fetch_array(spip_query("SELECT statut FROM spip_breves $cond"));
+		if ($statut != $statut_ancien) {
+			spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut'" . $cond);
+			include_ecrire("inc_rubriques.php3");
+			calculer_rubriques();
+		}
+		redirige_par_entete("naviguer.php3?id_rubrique=$id_rubrique");
+	} else {
+
+		debut_page(_T('titre_page_breves'), "documents", "breves");
+		debut_gauche();
+		debut_droite();
+		enfant_breves(0);
+		fin_page();
 	}
 }
 
