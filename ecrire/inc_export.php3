@@ -17,7 +17,6 @@ if (defined("_ECRIRE_INC_EXPORT")) return;
 define("_ECRIRE_INC_EXPORT", "1");
 
 
-
 $GLOBALS['version_archive'] = '1.2';
 
 
@@ -209,5 +208,83 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 }
 
 
+// Liste un sommaire d'objets de n'importe quel type
+// a la condition d'etre publics et plus recents que $maj
+function liste_objets($query, $type, $maj) {
 
+	$res = array();
+	if ($result = spip_query($query)) 
+	  while ($row = spip_fetch_array($result)) {
+		$t_id = $row["id_$type"];
+		$t_statut = $row["statut"];
+		$t_maj = mysql_timestamp_to_time($row["maj"]);
+		if (!$maj ||
+			($t_maj > $maj && 
+			 (!$t_statut || $t_statut == "publie"))) {
+		  echo "$type $t_id ", ($maj ? $t_maj : ""), "\n";
+			if ($type == "article") $res[]=$t_id;
+		}
+	}
+	spip_free_result($result);
+	return $res;
+}
+
+// Liste un sommaire recursif de rubriques
+// a condition que la mise a jour soit plus recente que $maj
+function liste_rubriques($id_rubrique) {
+	global $maj;
+	static $rubriques = array();
+	if ($id_rubrique)
+		$query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
+	else
+		$query="SELECT * FROM spip_rubriques WHERE id_parent=0";
+	$result = spip_query($query);
+
+	if ($result) while ($row=spip_fetch_array($result)) {
+		$id_rubrique = $row['id_rubrique'];
+		$id_parent = $row['id_parent'];
+		$titre = $row['titre'];
+		$descriptif = $row['descriptif'];
+		$texte = $row['texte'];
+		$rubrique_maj = mysql_timestamp_to_time($row["maj"]);
+		if ($rubrique_maj > $maj) {
+			echo "rubrique $id_rubrique $rubrique_maj\n";
+		}
+		$t_rubriques[] = $id_rubrique;
+		$rubriques[] = $id_rubrique;
+	}
+	spip_free_result($result);
+ 	if ($t_rubriques) {
+ 		$t_rubriques = join(",", $t_rubriques);
+ 		$query = "SELECT * FROM spip_rubriques WHERE id_parent IN ($t_rubriques)";
+		liste_rubriques(spip_query($query));
+	}
+	return $rubriques;
+}
+
+function export_dist($id_rubrique, $maj)
+{
+
+	header("Content-Type: text/plain");
+
+	$rubriques = liste_rubriques($id_rubriques);
+
+	if ($rubriques) {
+		$rubriques = join(",", $rubriques);
+
+		$query = "SELECT id_article, statut, maj FROM spip_articles WHERE id_rubrique IN ($rubriques)";
+		$articles = liste_objets($query, "article", $maj);
+
+		$query = "SELECT id_breve, statut, maj FROM spip_breves WHERE id_rubrique IN ($rubriques)";
+		liste_objets($query, "breve", $maj);
+
+		if ($articles) {
+			$articles = join(",", $articles);
+
+			$query = "SELECT DISTINCT id_auteur FROM spip_auteurs_articles  WHERE id_article IN ($articles)";
+			liste_objets($query, "auteur", 0);
+		}
+	}
+
+}
 ?>
