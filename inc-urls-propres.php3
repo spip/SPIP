@@ -50,8 +50,14 @@ function _generer_url_propre($type, $id_objet) {
 	else
 		$champ_titre = 'titre';
 
+	// Mots-cles : pas de champ statut
+	if ($type == 'mot')
+		$statut = "'publie' as statut";
+	else
+		$statut = 'statut';
+
 	// D'abord, essayer de recuperer l'URL existante si possible
-	$result = spip_query("SELECT url_propre, statut, $champ_titre
+	$result = spip_query("SELECT url_propre, $statut, $champ_titre
 	FROM $table WHERE $col_id=$id_objet");
 	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
 

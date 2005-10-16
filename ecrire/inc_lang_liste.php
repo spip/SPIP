@@ -14,9 +14,9 @@
 
 /*
  Ce fichier contient les codes de langue de base de SPIP.
- La plupart sont des codes ISO 639-1.
- Voir leurs definitions/descriptions en francais et en anglais dans
- http://www.loc.gov/standards/iso639-2/langcodes.html 
+ La plupart sont des codes ISO 639-1, dont vous pouvez lire
+ les definitions/descriptions en francais et en anglais dans
+ http://www.loc.gov/standards/iso639-2/langcodes.html
 */
 
 // Ce fichier ne sera execute qu'une fois

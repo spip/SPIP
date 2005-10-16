@@ -302,7 +302,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 			), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		$p->code = "\$Numrows['$b']['total']";
+		$p->code = "(\$Numrows['$b']['total'] OR '')"; //  0 => ''
 		$p->boucles[$b]->numrows = true;
 		$p->statut = 'php';
 	}
@@ -795,6 +795,16 @@ function balise_ENV_dist($p) {
 		$p->statut = 'php';
 	}
 
+	return $p;
+}
+
+//
+// #REM
+// pour les remarques : renvoie toujours ''
+//
+function balise_REM_dist($p) {
+	$p->code="''";
+	$p->statut='php';
 	return $p;
 }
 

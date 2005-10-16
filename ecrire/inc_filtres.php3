@@ -1443,20 +1443,4 @@ function email_valide($adresses) {
 	return $adresse;
 }
 
-// Filtrer les champs de tags (a developper)
-// Un champ de tags c'est un ensemble de mots separes par des espaces
-// On pourrait les envoyer vers les mots-cles correspondants dans la base,
-// ou vers les tags del.icio.us/flickr correspondants, etc...
-// ici essai avec del.icio.us
-function traiter_tags($tags) {
-	$tags = explode(',', supprimer_tags($tags));
-	$l = array();
-	foreach($tags as $tag)
-		if (strlen($tag = trim($tag)))
-			$l[] = "<a href='http://del.icio.us/tag/"
-				. urlencode($tag) ."'>$tag</a>";
-	return join(', ',$l);
-}
-
-
 ?>
