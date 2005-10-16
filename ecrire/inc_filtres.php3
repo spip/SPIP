@@ -98,8 +98,14 @@ function corriger_caracteres ($texte) {
 }
 
 
-// Nettoyer les backend
+// Encode du HTML pour transmission XML
 function texte_backend($texte) {
+
+	// si on a des liens ou des images, les passer en absolu
+	$texte = liens_absolus($texte);
+
+	// echapper les tags &gt; &lt; et &amp;
+	$texte = preg_replace(',&(gt|lt|amp);,', '&amp;\1;', $texte);
 
 	// importer les &eacute;
 	$texte = filtrer_entites($texte);
@@ -125,11 +131,6 @@ function texte_backend($texte) {
 	$texte = str_replace("&#8217;","'",$texte);
 
 	return $texte;
-}
-
-// Encode du HTML pour transmission XML
-function html_backend($texte) {
-	return texte_backend(str_replace('&', '&amp;', liens_absolus($texte)));
 }
 
 // Enleve le numero des titres numerotes ("1. Titre" -> "Titre")
@@ -1443,4 +1444,36 @@ function email_valide($adresses) {
 	return $adresse;
 }
 
+// Pour un champ de microformats :
+// afficher les tags
+// ou afficher les enclosures
+function extraire_tags($tags) {
+	if (preg_match_all(',<a([[:space:]][^>]*)?[[:space:]][^>]*>.*</a>,Uims',
+	$tags, $regs, PREG_PATTERN_ORDER))
+		return $regs[0];
+	else
+		return array();
+}
+function afficher_enclosures($tags) {
+	$s = array();
+	foreach (extraire_tags($tags) as $tag) {
+		if (extraire_attribut($tag, 'rel') == 'enclosure'
+		AND $t = urldecode(extraire_attribut($tag, 'href'))) {
+			$s[] = http_href_img($t,
+				'attachment.gif',
+				'height="15" width="15" border="0"',
+				entites_html($t));
+		}
+	}
+	return join('&nbsp;', $s);
+}
+function afficher_tags($tags, $rels='tag,category') {
+	$s = array();
+	foreach (extraire_tags($tags) as $tag) {
+		$rel = extraire_attribut($tag, 'rel');
+		if (strstr(",$rels,", ",$rel,"))
+			$s[] = $tag;
+	}
+	return join(', ', $s);
+}
 ?>
