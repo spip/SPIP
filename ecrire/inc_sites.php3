@@ -246,10 +246,11 @@ function analyser_site($url) {
 	$texte = recuperer_page($url, true);
 	if (!$texte) return false;
 
-	if (preg_match(',<(channel|feed)>(.*)</\1>,ims', $texte, $regs)) {
+	if (preg_match(',<(channel|feed)([:[:space:]][^>]*)?'
+	.'>(.*)</\1>,ims', $texte, $regs)) {
 		$result['syndic'] = true;
 		$result['url_syndic'] = $url;
-		$channel = $regs[2];
+		$channel = $regs[3];
 
 		list($header) = preg_split(
 		',<(entry|item)([[:space]][^>]*)?'.'>,Uims', $channel,2);
