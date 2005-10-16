@@ -26,11 +26,12 @@
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
-		<description>[(#INTRODUCTION|texte_backend)]
 		<dc:date>[(#DATE|date_iso)]</dc:date>
 		<dc:format>text/html</dc:format>
 		<dc:language>#LANG</dc:language>
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
+
+		<description>[(#INTRODUCTION|texte_backend)]
 
 [(#REM)
 	Le bloc qui suit diffuse la rubrique et les mots-cles
