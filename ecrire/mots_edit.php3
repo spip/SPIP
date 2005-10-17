@@ -12,6 +12,7 @@
 
 
 include ("inc.php3");
+include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_sites.php3");
 include_ecrire ("inc_abstract_sql.php3");
@@ -30,11 +31,12 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 
 	if (strval($titre_mot)!='') {
 		if ($new == 'oui' && $id_groupe) {
-		  $id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");
+			$id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");
 
-			// ajouter le mot a l'article
-			if (settype($ajouter_id_article, 'integer') AND ($ajouter_id_article>0))
-				spip_query("INSERT INTO spip_mots_$table (id_mot, $id_table) VALUES ($id_mot, $ajouter_id_article)");
+			$ajouter_id_article = intval($ajouter_id_article);
+			if ($ajouter_id_article) 
+				supprime_mot_de_groupe($id_groupe, $table);
+			spip_query("INSERT INTO spip_mots_$table (id_mot, $id_table) VALUES ($id_mot, $ajouter_id_article)");
 		}
 
 		$titre_mot = addslashes($titre_mot);
