@@ -21,36 +21,6 @@ function supp_auteur($id_auteur) {
 	$result=spip_query($query);
 }
 
-
-function afficher_auteur_rubriques($leparent){
-	global $id_parent;
-	global $id_rubrique;
-	global $toutes_rubriques;
-	global $i;
-	
-	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY 0+titre, titre";
- 	$result=spip_query($query);
-
-	while($row=spip_fetch_array($result)){
-		$my_rubrique=$row["id_rubrique"];
-		$titre=typo($row["titre"]);
-	
-		if (!ereg(",$my_rubrique,","$toutes_rubriques")){
-			$espace="";
-			for ($count=0;$count<$i;$count++){$espace.="&nbsp;&nbsp;";}
-			$espace .= "|";
-			if ($i==1)
-				$espace = "*";
-
-			echo "<OPTION VALUE='$my_rubrique'>$espace ".supprimer_tags($titre)."\n";
-			afficher_auteur_rubriques($my_rubrique);
-		}
-	}
-	$i=$i-1;
-}
-
-
 if (!$id_auteur = intval($id_auteur)) {
 	die ('erreur');
 }
@@ -77,7 +47,7 @@ if ($row = spip_fetch_array($result)) {
 
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($row, $_POST['statut'], $_POST['add_rub'], $_GET['supp_rub']);
+modifier_statut_auteur($row, $_POST['statut'], $_POST['id_rubrique'], $_GET['supp_rub']);
 
 if ($connect_id_auteur == $id_auteur) debut_page($nom, "auteurs", "perso");
 else debut_page($nom,"auteurs","redacteurs");
@@ -165,7 +135,7 @@ debut_droite();
 
 	// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
 	if ($options == 'avancees')
-		afficher_formulaire_statut_auteur ($id_auteur,
+	  afficher_formulaire_statut_auteur ($id_auteur,
 			$row['statut'],
 			"auteurs_edit.php3?id_auteur=$id_auteur");
 

@@ -3400,13 +3400,9 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 
 // Pour construire des menu avec SELECTED
 function mySel($varaut,$variable, $option = NULL) {
-	if (!isset($option))
-		return ' value="'.$varaut.'"'
-			. (($variable==$varaut) ? ' selected' : '');
+	$res = ' value="'.$varaut.'"' . (($variable==$varaut) ? ' selected="selected"' : '');
 
-	return "<option value='$varaut'"
-		. (($variable==$varaut) ? ' selected' : '')
-		. ">$option\n";
+	return  (!isset($option) ? $res : "<option$res>$option</option>\n");
 }
 
 
