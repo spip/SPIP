@@ -480,30 +480,40 @@ function afficher_upload($image_url, $redirect='', $intitule, $inclus = '', $env
 		_T('bouton_telecharger') .
 		"' CLASS='fondo'></div>\n";
 
-	if ($connect_statut == '0minirezo' AND $GLOBALS['flag_upload']) {
-		$res .= "<div>" . debut_block_invisible("ftp$num_form");
-		$res .= afficher_transferer_upload($type,
-				     texte_upload_manuel(_DIR_TRANSFERT,
-							 $inclus));
+	// Un menu depliant si on a une possibilite supplementaire
+	$test_ftp = ($connect_statut == '0minirezo' AND $GLOBALS['flag_upload']);
+	$test_distant = ($mode == 'document' AND $type);
 
-	}
+	if ($test_ftp OR $test_distant)
+		$res .= "<div>" . debut_block_invisible("ftp$num_form");
+
+	if ($test_ftp)
+		$res .= afficher_transferer_upload($type,
+				texte_upload_manuel(_DIR_TRANSFERT,
+							$inclus));
+
 
 	// Lien document distant, jamais en mode image
-	if ($mode == 'document' AND $type) {
-	  $res .=
-	    "<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
-	    "<img src='"._DIR_IMG_PACK.'attachment.gif' .
-	    "' style='float: $spip_lang_right;' alt=\"\" />\n" .
-	    "\n"._T('info_referencer_doc_distant')."<br />" .
-	    "\n<input name='url' size='32' class='fondo' value='http://' />" .
-	    "\n  <div align='".$GLOBALS['spip_lang_right'].
-	    "'><input name='sousaction2' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>" .
-	    "</div>\n";
+	if ($test_distant) {
+		$res .=
+			"<p /><div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
+			"<img src='"._DIR_IMG_PACK.'attachment.gif' .
+			"' style='float: $spip_lang_right;' alt=\"\" />\n" .
+			"\n"._T('info_referencer_doc_distant')."<br />" .
+			"\n<input name='url' class='fondo' value='http://' />" .
+			"\n<div align='".$GLOBALS['spip_lang_right'].
+			"'><input name='sousaction2' type='Submit' value='"._T('bouton_choisir')."' class='fondo'></div>" .
+			"</div>\n";
 	}
+
+	if ($test_ftp OR $test_distant)
+		$res .= "</div>\n";
+	// Fin menu depliant
 
 	$res .= "</div>\n" . fin_block();
 
-	if (!$redirect)	$redirect = $clean_link->getUrl();
+	if (!$redirect)
+		$redirect = $clean_link->getUrl();
 	return construire_upload($res,
 				array(
 				'redirect' => $redirect,
@@ -966,7 +976,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	propre($GLOBALS['descriptif']." ".$GLOBALS['texte']." ".$GLOBALS['chapo']);
 
 	/// Ajouter nouvelle image
-	echo "<a id='images'></a>\n";
+	echo "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");
 	debut_cadre_relief("image-24.gif", false, "creer.gif", $titre_cadre);
 
