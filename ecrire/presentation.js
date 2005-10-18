@@ -238,11 +238,25 @@ function lancer_recherche_rub(champ, rac, exclus) {
 	}
 }
 
-
-
-
-
 // effacement titre quand new=oui
 var antifocus=false;
 // effacement titre des groupes de mots-cles de plus de 50 mots
 var antifocus_mots = new Array();
+
+function puce_statut(selection){
+	if (selection=="publie"){
+		return "puce-verte.gif";
+	}
+	if (selection=="prepa"){
+		return "puce-blanche.gif";
+	}
+	if (selection=="prop"){
+		return "puce-orange.gif";
+	}
+	if (selection=="refuse"){
+		return "puce-rouge.gif";
+	}
+	if (selection=="poubelle"){
+		return "puce-poubelle.gif";
+	}
+}
