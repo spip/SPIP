@@ -302,8 +302,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
 	  . $ret
 	  . "</select>\n"
-	  . "<fieldset><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></fieldset>"
-	  . "</form>";
+	  . "<noscript><fieldset><input type='submit' name='Valider' value='&gt;&gt;' class='spip_bouton' /></fieldset></noscript>\n"
+	  . "</form>\n";
 }
 
 function liste_options_langues($nom_select, $default='', $herit='') {
