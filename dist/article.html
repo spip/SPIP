@@ -91,19 +91,21 @@
 
 
 <!-- Liens des forums -->
-<BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
-[<div class="menu" title="<:derniers_commentaires:>">
+<B_forums_liens>
+
+<div class="menu" title="<:derniers_commentaires:>">
 
 <h1 class="structure"><:derniers_commentaires:></h1>
 
 <ul class="forums">
-
-<li class="menu-titre"><:messages_forum:>: (#TOTAL_BOUCLE|sinon)</li>]
+<BOUCLE_forums_decompte(FORUMS){id_article}{plat}></BOUCLE_forums_decompte>
+	<li class="menu-titre"><:messages_forum:>: #TOTAL_BOUCLE</li>
 <//B_forums_decompte>
+
 <BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{0,5}>
-    <li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
-    <a href="#forum#ID_FORUM">#TITRE</a>
-    </li>
+	<li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
+	<a href="#forum#ID_FORUM">#TITRE</a>
+	</li>
 </BOUCLE_forums_liens>
 </ul>
 </div>
@@ -225,8 +227,10 @@
 
 <!-- Signatures petition -->
 
-<BOUCLE_signatures_decompte(SIGNATURES) {id_article}></BOUCLE_signatures_decompte>
-[<div class="signatures-titre"><:signatures_petition:>: (#TOTAL_BOUCLE|sinon)</div>
+<B_signatures>
+<BOUCLE_signatures_decompte(SIGNATURES){id_article}></BOUCLE_signatures_decompte>
+<div class="signatures-titre"><:signatures_petition:>: #TOTAL_BOUCLE</div>
+<//B_signatures_decompte>
 
 <table class="signatures">
 <thead class="structure">
@@ -236,8 +240,7 @@
 	<th><:message:></th>
 </tr>
 </thead>
-<tbody>]
-<//B_signatures_decompte>
+<tbody>
 <BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {debut_signatures,30}>
 <tr>
 	<td class="signature-date">[(#DATE|affdate_court)]</td>
