@@ -25,6 +25,7 @@ function define_once ($constant, $valeur) {
 define('_EXTENSION_PHP', '.php3'); # a etendre
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
+define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
 define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 define('_FILE_CONNECT',
@@ -171,7 +172,36 @@ spip_register_globals();
 
 
 
+// un pipeline est lie a une action et une valeur
+// chaque element du pipeline est autorise a modifier la valeur
+//
+// le pipeline execute les elements disponibles pour cette action,
+// les uns apres les autres, et retourne la valeur finale
 
+function pipeline($cause, $val) {
+	global $spip_pipeline, $spip_matrice;
+	if (!is_array($spip_pipeline[$cause])) return $val;
+
+	foreach ($spip_pipeline[$cause] as $plug) {
+
+		// charger un fichier le cas echeant
+		if (!function_exists($plug)) {
+			if ($f = $spip_matrice[$plug]) {
+				include($f);
+				$ok = function_exists($plug);
+			}
+			if (!$ok) {
+				spip_log("Erreur - $plug n'est pas definie ($f)");
+				return $val;
+			}
+		}
+
+		// appliquer le filtre
+		$val = $plug($val);
+	}
+
+	return $val;
+}
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -237,15 +267,6 @@ $mysql_rappel_nom_base = true;
 // faut-il afficher en rouge les chaines non traduites ?
 $test_i18n = false;
 
-// faut-il souligner en gris, dans articles.php3, les espaces insecables ?
-$activer_revision_nbsp = false;
-
-// Syndication : faut-il integrer les <enclosure> des flux RSS sous
-// forme de documents distants dans la table spip_documents ?
-// (par defaut, on se contente de conserver une trace de ces documents
-// dans le champ #TAGS de l'article syndique).
-$integrer_enclosures = false;
-
 // gestion des extras (voir inc_extra.php3 pour plus d'informations)
 $champs_extra = false;
 $champs_extra_proposes = false;
@@ -287,6 +308,27 @@ $ortho_servers = array ('http://ortho.spip.net/ortho_serveur.php');
 // Produire du TeX ou du MathML ?
 $traiter_math = 'tex';
 
+
+//
+// Plugins
+//
+// (plus tard on fera une interface graphique qui les liste et permet de
+// les activer un par un, dans tel ordre, etc)
+# les pipeline standards (traitements derivables aka points d'entree)
+$spip_pipeline = array(
+	'pre_typo' => array('extraire_multi'),
+	'post_typo' => array('quote_amp'),
+	'pre_propre' => array('extraire_multi'),
+	'post_propre' => array(),
+	'post_syndication' => array()
+);
+# la matrice standard (fichiers definissant les fonctions a inclure)
+$spip_matrice = array ();
+# les plugins a activer
+$plugins = array();  // voir le contenu du repertoire /plugins/
+
+
+
 // Masquer les warning
 error_reporting(E_ALL ^ E_NOTICE);
 
@@ -309,13 +351,26 @@ $extension_squelette = 'html';
 // Droits d'acces maximum par defaut
 @umask(0);
 
-//
-// Definition des repertoires standards, _FILE_OPTIONS ayant priorite
-//
 
+//
+// Inclure le fichier ecrire/mes_options.php3 (ou equivalent)
+//
 if (@file_exists(_FILE_OPTIONS)) {
 	include(_FILE_OPTIONS);
 }
+
+// charger les definitions des plugins
+if ($plugins) {
+	foreach ($plugins as $plug) {
+		include(_DIR_RACINE.'plugins/'.$plug.'/version.php');
+	}
+#var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
+}
+
+//
+// Definition des repertoires standards
+//
+
 
 // la taille maxi des logos (0 : pas de limite)
 define_once('_LOGO_MAX_SIZE', 0); # poids en ko

@@ -65,47 +65,6 @@ function nettoyer_chapo($chapo){
 	return $chapo;
 }
 
-// points d'entree de pre- et post-traitement pour propre() et typo()
-function spip_avant_propre ($letexte) {
-	$letexte = avant_propre_ancres($letexte);
-	$letexte = extraire_multi($letexte);
-
-	if (function_exists('avant_propre'))
-		$letexte = avant_propre($letexte);
-
-	return $letexte;
-}
-
-function spip_apres_propre ($letexte) {
-	if (function_exists('apres_propre'))
-		$letexte = apres_propre($letexte);
-
-	return $letexte;
-}
-
-function spip_avant_typo ($letexte) {
-	$letexte = extraire_multi($letexte);
-	$letexte = avant_typo_smallcaps($letexte);
-
-	if (function_exists('avant_typo'))
-		$letexte = avant_typo($letexte);
-
-	return $letexte;
-}
-
-function spip_apres_typo ($letexte) {
-
-	// relecture des &nbsp;
-	if (!_DIR_RESTREINT AND $GLOBALS['revision_nbsp'])
-		$letexte = str_replace('&nbsp;',
-			'<span class="spip-nbsp">&nbsp;</span>', $letexte);
-
-	if (function_exists('apres_typo'))
-		$letexte = apres_typo($letexte);
-
-	return quote_amp($letexte);
-}
-
 
 //
 // Mise de cote des echappements
@@ -487,8 +446,11 @@ function typo_en($letexte) {
 function typo_generale($letexte) {
 	global $spip_lang;
 
-	// Appeler la fonction de pre-traitement
-	$letexte = spip_avant_typo ($letexte);
+	// Appeler les fonctions de pre-traitement
+	$letexte = pipeline('pre_typo', $letexte);
+	// old style
+	if (function_exists('avant_typo'))
+		$letexte = avant_typo($letexte);
 
 	// Caracteres de controle "illegaux"
 	$letexte = corriger_caracteres($letexte);
@@ -526,8 +488,11 @@ function typo_generale($letexte) {
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
 
-	// Appeler la fonction de post-traitement
-	$letexte = spip_apres_typo ($letexte);
+	// Appeler les fonctions de post-traitement
+	$letexte = pipeline('post_typo', $letexte);
+	// old style
+	if (function_exists('apres_typo'))
+		$letexte = apres_typo($letexte);
 
 	# un message pour abs_url - on est passe en mode texte
 	$GLOBALS['mode_abs_url'] = 'texte';
@@ -847,8 +812,11 @@ function traiter_raccourcis_generale($letexte) {
 	global $ferme_note;
 	global $lang_dir;
 
-	// Appeler la fonction de pre_traitement
-	$letexte = spip_avant_propre ($letexte);
+	// Appeler les fonctions de pre_traitement
+	$letexte = pipeline('pre_propre', $letexte);
+	// old style
+	if (function_exists('avant_propre'))
+		$letexte = avant_propre($letexte);
 
 	// Puce
 	if (!$lang_dir) {
@@ -1054,8 +1022,11 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = preg_replace(',</ul>[[:space:]]*(</p>)?,ms', '</ul>', $letexte);
 	$letexte = preg_replace(',<p class="spip">[[:space:]]*</p>,ms', "\n", $letexte);
 
-	// Appeler la fonction de post-traitement
-	$letexte = spip_apres_propre ($letexte);
+	// Appeler les fonctions de post-traitement
+	$letexte = pipeline('post_propre', $letexte);
+	// old style
+	if (function_exists('apres_propre'))
+		$letexte = apres_propre($letexte);
 
 	return array($letexte,$mes_notes);
 }
