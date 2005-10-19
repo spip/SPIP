@@ -302,7 +302,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 			), $p->id_boucle);
 		$p->code = "''";
 	} else {
-		$p->code = "(\$Numrows['$b']['total'] | '')"; //  0 => ''
+		$p->code = "\$Numrows['$b']['total']";
 		$p->boucles[$b]->numrows = true;
 		$p->statut = 'php';
 	}

@@ -98,7 +98,7 @@
 
 <ul class="forums">
 
-<li class="menu-titre"><:messages_forum:>: (#TOTAL_BOUCLE)</li>]
+<li class="menu-titre"><:messages_forum:>: (#TOTAL_BOUCLE|sinon)</li>]
 <//B_forums_decompte>
 <BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{0,5}>
     <li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
@@ -226,7 +226,7 @@
 <!-- Signatures petition -->
 
 <BOUCLE_signatures_decompte(SIGNATURES) {id_article}></BOUCLE_signatures_decompte>
-[<div class="signatures-titre"><:signatures_petition:>: (#TOTAL_BOUCLE)</div>
+[<div class="signatures-titre"><:signatures_petition:>: (#TOTAL_BOUCLE|sinon)</div>
 
 <table class="signatures">
 <thead class="structure">
