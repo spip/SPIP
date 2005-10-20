@@ -726,7 +726,7 @@ function afficher_sites($titre_table, $requete) {
 			$vals = '';
 			$id_syndic=$row["id_syndic"];
 			$id_rubrique=$row["id_rubrique"];
-			$nom_site=typo($row["nom_site"]);
+			$nom_site=sinon(typo($row["nom_site"]), _T('info_sans_titre'));
 			$url_site=$row["url_site"];
 			$url_syndic=$row["url_syndic"];
 			$description=propre($row["description"]);
