@@ -133,7 +133,7 @@ function spip_image_joindre4($arg, $mode, $type, $id, $id_document, $hash, $hash
 {
 	if (!$arg || strstr($arg, '..')) return;
 	$upload = (_DIR_TRANSFERT .$arg);
-	identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
+	identifie_repertoire_et_rubrique($upload, $id, $hash_id_auteur);
 	include_ecrire("inc_rubriques.php3");
 	calculer_rubriques();
 }
