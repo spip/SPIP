@@ -257,11 +257,17 @@ function analyser_site($url) {
 		$channel = $regs[3];
 
 		list($header) = preg_split(
-		',<(entry|item)([[:space]][^>]*)?'.'>,Uims', $channel,2);
-
+		',<(entry|item)([:[:space:]][^>]*)?'.'>,Uims', $channel,2);
 		if (preg_match(',<title[^>]*>(.*)</title>,Uims', $header, $r))
 			$result['nom_site'] = supprimer_tags(filtrer_entites($r[1]));
-		if (preg_match(',<link[^>]*>(.*)</link>,Uims', $header, $regs))
+		if (preg_match(
+		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
+		$header, $regs))
+			$result['url_site'] = filtrer_entites($regs[1]);
+		else if (preg_match(',<link[^>]*[[:space:]]rel=.alternate[^>]*>,Uims',
+		$header, $regs))
+			$result['url_site'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
+		else if (preg_match(',<link[^>]*>(.*)</link>,Uims', $header, $regs))
 			$result['url_site'] = filtrer_entites($regs[1]);
 		else if (preg_match(',<link[^>]*>,Uims', $header, $regs))
 			$result['url_site'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
@@ -364,7 +370,7 @@ function analyser_backend($rss, $url_syndic='') {
 	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
 
 	// chercher auteur/lang dans le fil au cas ou les items n'en auraient pas
-	list($header) = preg_split(',<(item|entry)[[:space:]>],', $rss, 2);
+	list($header) = preg_split(',<(item|entry)[:[:space:]>],', $rss, 2);
 	if (preg_match(',<((dc:)(author|creator))>(.*)</\1>,Uims',$header,$regs)) {
 		$les_auteurs_du_site = trim($regs[4]);
 		if (preg_match(',<name>(.*)</name>,Uims', $les_auteurs_du_site, $regs))
@@ -388,18 +394,25 @@ function analyser_backend($rss, $url_syndic='') {
 		$data = array();
 
 		// URL (obligatoire)
-		if (preg_match(',<link[^>]*>(.*)</link>,Uims', $item, $regs))
-			$data['url'] = filtrer_entites($regs[1]);
+		if (preg_match(
+		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
+		$item, $regs))
+			$data['url'] = $regs[1];
+		else if (preg_match(',<link[^>]*[[:space:]]rel=.alternate[^>]*>,Uims',
+		$item, $regs))
+			$data['url'] = extraire_attribut($regs[0], 'href');
+		else if (preg_match(',<link[^>]*>(.*)</link>,Uims', $item, $regs))
+			$data['url'] = $regs[1];
 		else if (preg_match(',<link[^>]*>,Uims', $item, $regs))
-			$data['url'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
+			$data['url'] = extraire_attribut($regs[0], 'href');
 		// guid n'est un URL que si marque de <guid permalink="true">
 		else if (preg_match(',<guid.*>[[:space:]]*(https?:[^<]*)</guid>,Uims',
-		$item,$match))
-			$data['url'] = filtrer_entites($match[1]);
+		$item, $regs))
+			$data['url'] = $regs[1];
 		else
 			$data['url'] = false;
 
-		$data['url'] = url_absolue($data['url'], $url_syndic);
+		$data['url'] = url_absolue(filtrer_entites($data['url']), $url_syndic);
 
 		// Titre (semi-obligatoire)
 		# note http://static.userland.com/gems/backend/gratefulDead.xml
@@ -458,7 +471,7 @@ function analyser_backend($rss, $url_syndic='') {
 		if (preg_match(',<((content)([:[:space:]][^>]*)?)'
 		.'>(.*)</\1>,Uims',$item,$match)) {
 			$data['content'] = $match[4];
-		}else var_dump($item);
+		}
 
 		// lang
 		if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
