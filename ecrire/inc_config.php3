@@ -20,8 +20,6 @@ include_ecrire ("inc_meta.php3");
 include_ecrire ("inc_admin.php3");
 include_ecrire ("inc_mail.php3");
 
-
-
 //
 // Appliquer les valeurs par defaut pour les options non initialisees
 //
@@ -123,16 +121,16 @@ function bouton_radio($nom, $valeur, $titre, $actif = false, $onClick="") {
 	if (strlen($onClick) > 0) $onClick = " onClick=\"$onClick\"";
 	$texte = "<input type='radio' name='$nom' value='$valeur' id='label_$id_label'$onClick";
 	if ($actif) {
-		$texte .= ' checked';
+		$texte .= ' checked="checked"';
 		$titre = '<b>'.$titre.'</b>';
 	}
-	$texte .= "> <label for='label_$id_label'>$titre</label>\n";
+	$texte .= " /> <label for='label_$id_label'>$titre</label>\n";
 	$id_label++;
 	return $texte;
 }
 
 
-function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br>") {
+function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 	while (list($valeur, $titre) = each($valeurs)) {
 		$choix[] = bouton_radio($nom, $valeur, $titre, $valeur == $valeur_actuelle);
 	}
