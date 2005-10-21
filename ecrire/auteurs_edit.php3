@@ -12,9 +12,9 @@
 
 
 include ("inc.php3");
-include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_index.php3");
 include_ecrire ("inc_logos.php3");
+include_ecrire ("inc_auteur_infos.php");
 
 function supp_auteur($id_auteur) {
 	$query="UPDATE spip_auteurs SET statut='5poubelle' WHERE id_auteur=$id_auteur";
@@ -29,25 +29,25 @@ $query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
 $result = spip_query($query);
 
 
-if ($row = spip_fetch_array($result)) {
-	$id_auteur=$row['id_auteur'];
-	$nom=$row['nom'];
-	$bio=$row['bio'];
-	$email=$row['email'];
-	$nom_site_auteur=$row['nom_site'];
-	$url_site=$row['url_site'];
-	$login=$row['login'];
-	$pass=$row['pass'];
-	$statut=$row['statut'];
-	$pgp=$row["pgp"];
-	$messagerie=$row["messagerie"];
-	$imessage=$row["imessage"];
-	$extra = $row["extra"];
-	$low_sec = $row["low_sec"];
+if ($auteur = spip_fetch_array($result)) {
+	$id_auteur=$auteur['id_auteur'];
+	$nom=$auteur['nom'];
+	$bio=$auteur['bio'];
+	$email=$auteur['email'];
+	$nom_site_auteur=$auteur['nom_site'];
+	$url_site=$auteur['url_site'];
+	$login=$auteur['login'];
+	$pass=$auteur['pass'];
+	$statut=$auteur['statut'];
+	$pgp=$auteur["pgp"];
+	$messagerie=$auteur["messagerie"];
+	$imessage=$auteur["imessage"];
+	$extra = $auteur["extra"];
+	$low_sec = $auteur["low_sec"];
 
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($row, $_POST['statut'], $_POST['id_rubrique'], $_GET['supp_rub']);
+modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_rubrique'], $_GET['supp_rub']);
 
 if ($connect_id_auteur == $id_auteur) debut_page($nom, "auteurs", "perso");
 else debut_page($nom,"auteurs","redacteurs");
@@ -89,12 +89,10 @@ fin_boite_info();
 // Logos de l'auteur
 //
 
-if ($id_auteur
-AND (($connect_statut == '0minirezo')
-OR ($connect_id_auteur == $id_auteur)))
+if (statut_modifiable_auteur($id_auteur, $auteur)) {
 	afficher_boite_logo('aut', 'id_auteur', $id_auteur,
 	_T('logo_auteur').aide ("logoart"), _T('logo_survol'));
-
+ }
 
 debut_droite();
 
@@ -120,7 +118,7 @@ debut_droite();
 	
 	echo "<td>";
 	
-	if (($connect_statut == "0minirezo") OR $connect_id_auteur == $id_auteur) {
+	if (statut_modifiable_auteur($id_auteur, $auteur)) {
 		icone (_T("admin_modifier_auteur"), "auteur_infos.php3?id_auteur=$id_auteur", "redacteurs-24.gif", "edit.gif");
 	}
 	echo "</td></tr></table>";
@@ -136,7 +134,7 @@ debut_droite();
 	// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
 	if ($options == 'avancees')
 	  afficher_formulaire_statut_auteur ($id_auteur,
-			$row['statut'],
+			$auteur['statut'],
 			"auteurs_edit.php3?id_auteur=$id_auteur");
 
 	fin_cadre_relief();

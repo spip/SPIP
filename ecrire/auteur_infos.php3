@@ -43,16 +43,9 @@ if ($id_auteur) {
 
 // securite
 
-// on peut se changer soi-meme
-if  ($connect_id_auteur != $id_auteur) {
-  // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin
-	if (($connect_statut != "0minirezo")
-	OR (!$connect_toutes_rubriques AND $auteur['statut'] == "0minirezo"))
-	  {
-		gros_titre(_T('info_acces_interdit'));
-		exit;
-	  }
+if (!statut_modifiable_auteur($id_auteur, $auteur)) {
+	gros_titre(_T('info_acces_interdit'));
+	exit;
  }
 
 
