@@ -316,7 +316,7 @@ function ajouter_tags($matches, $item) {
 	include_ecrire('inc_filtres.php3');
 	$tags = array();
 	foreach ($matches as $match) {
-		$type = $match[3];
+		$type = ($match[3] == 'category') ? 'category':'tag';
 		$mot = supprimer_tags($match[0]);
 		if (!$mot) break;
 		// rechercher un url
@@ -500,7 +500,13 @@ function analyser_backend($rss, $url_syndic='') {
 		',<(([a-z]+:)?(subject|category|keywords?|tags?))[^>]*>'
 		.'(.*?)</\1>,ims',
 		$item, $matches, PREG_SET_ORDER))
-			$data['tags'] = ajouter_tags($matches, $item);
+			$tags = ajouter_tags($matches, $item); # array()
+
+		// Trouver les pieces jointes <enclosure> (RSS)
+		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
+		$item, $matches, PREG_PATTERN_ORDER))
+			$data['enclosures'] = join(', ',
+				array_map('enclosure2microformat', $matches[0]));
 
 		$data['item'] = $item;
 
@@ -515,20 +521,16 @@ function analyser_backend($rss, $url_syndic='') {
 		if (preg_match_all(
 		',<a[[:space:]]([^>]+[[:space:]])?rel=[^>]+>.*</a>,Uims',
 		$data['item'], $regs, PREG_PATTERN_ORDER)) {
-			$data['tags'] = $regs[0];
+			$tags = $regs[0];
 		}
 		// Cas particulier : tags Connotea sous la forme <a class="postedtag">
 		if (preg_match_all(
 		',<a[[:space:]][^>]+ class="postedtag"[^>]*>.*</a>,Uims',
 		$data['item'], $regs, PREG_PATTERN_ORDER))
-			$data['tags'] = preg_replace(', class="postedtag",i',
+			$tags = preg_replace(', class="postedtag",i',
 			' rel="tag"', $regs[0]);
 
-		// Trouver les pieces jointes <enclosure> (RSS)
-		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
-		$item, $matches, PREG_PATTERN_ORDER))
-			$data['enclosures'] = join(', ',
-				array_map('enclosure2microformat', $matches[0]));
+		$data['tags'] = $tags;
 
 		$articles[] = $data;
 	}
