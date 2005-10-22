@@ -2033,7 +2033,7 @@ function barre_onglets($rubrique, $onglet){
 	}
 	if ($rubrique == "repartition") {
 		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') {
-			onglet(_T('onglet_repartition_rubrique'), "statistiques.php3", "rubriques", $onglet, "rubrique-24.gif");
+			onglet(_T('onglet_repartition_rubrique'), "statistiques_repartition.php", "rubriques", $onglet, "rubrique-24.gif");
 			onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues", $onglet, "langues-24.gif");
 		}
 	}
@@ -2045,8 +2045,8 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "stat_depuis") {
-		onglet(_T('icone_repartition_actuelle'), "statistiques.php3", "popularite", $onglet);
-		onglet(_T('onglet_repartition_debut'), "statistiques.php3?critere=debut", "debut", $onglet);
+		onglet(_T('icone_repartition_actuelle'), "statistiques_repartition.php", "popularite", $onglet);
+		onglet(_T('onglet_repartition_debut'), "statistiques_repartition.php?critere=debut", "debut", $onglet);
 
 	}
 
@@ -2564,7 +2564,7 @@ else {
 		echo "<div class='$class' id='bandeausuivi' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
 		if ($connect_toutes_rubriques) bandeau_barre_verticale();
 
-		icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques.php3", "rubrique-24.gif", "repartition", $sous_rubrique);
+		icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques_repartition.php", "rubrique-24.gif", "repartition", $sous_rubrique);
 		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
 			icone_bandeau_secondaire (_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues-24.gif", "repartition-langues", $sous_rubrique);
 		icone_bandeau_secondaire (_T('titre_liens_entrants'), "statistiques_referers.php3", "referers-24.gif", "referers", $sous_rubrique);

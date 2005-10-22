@@ -273,6 +273,7 @@ ecrire/inc_mini_nav.php -text
 ecrire/inc_naviguer.php -text
 ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_image.php -text
+ecrire/inc_statistiques_repartition.php -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_ru.php3 -text
 ecrire/lang/spip_ru.php3 -text
@@ -289,6 +290,7 @@ ecrire/safehtml/classes/safehtml.php -text
 ecrire/safehtml/license.txt -text
 ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
+ecrire/statistiques_repartition.php -text
 plugins/ancres/version.php -text
 plugins/podcast_client/podcast_client.php -text
 plugins/podcast_client/version.php -text
