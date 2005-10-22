@@ -305,6 +305,7 @@ function analyser_site($url) {
 // A partir d'un <dc:subject> ou autre essayer de recuperer
 // le mot et son url ; on cree <a href="url" rel="tag">mot</a>
 function creer_tag($mot,$type,$url) {
+	if (!strlen($mot = trim($mot))) return '';
 	$mot = "<a rel=\"tag\">$mot</a>";
 	if ($url)
 		$mot = inserer_attribut($mot, 'href', $url);
@@ -318,7 +319,7 @@ function ajouter_tags($matches, $item) {
 	foreach ($matches as $match) {
 		$type = ($match[3] == 'category') ? 'category':'tag';
 		$mot = supprimer_tags($match[0]);
-		if (!$mot) break;
+		if (!strlen($mot)) break;
 		// rechercher un url
 		if ($url = extraire_attribut($match[0], 'domain')
 		OR $url = extraire_attribut($match[0], 'resource')
@@ -328,8 +329,9 @@ function ajouter_tags($matches, $item) {
 		## cas particuliers
 		else if (extraire_attribut($match[0], 'scheme') == 'urn:flickr:tags') {
 			foreach(explode(' ', $mot) as $petit)
-				$tags[] = creer_tag($petit, $type,
-				'http://www.flickr.com/photos/tags/'.urlencode($petit).'/');
+				if ($t = creer_tag($petit, $type,
+				'http://www.flickr.com/photos/tags/'.urlencode($petit).'/'))
+					$tags[] = $t;
 			$mot = '';
 		} else {
 			# type del.icio.us
@@ -338,12 +340,13 @@ function ajouter_tags($matches, $item) {
 				.preg_quote(urlencode($petit),',').')["\'],i',
 				$item, $m)) {
 					$mot = '';
-					$tags[] = creer_tag($petit, $type, $m[1]);
+					if ($t = creer_tag($petit, $type, $m[1]))
+						$tags[] = $t;
 				}
 		}
 
-		if ($mot)
-			$tags[] = creer_tag($mot, $type, $url);
+		if ($t = creer_tag($mot, $type, $url))
+			$tags[] = $t;
 	}
 	return $tags;
 }
@@ -352,7 +355,7 @@ function ajouter_tags($matches, $item) {
 // et une chaine en cas d'erreur
 function analyser_backend($rss, $url_syndic='') {
 	include_ecrire("inc_texte.php3"); # pour couper()
-	include_ecrire("inc_filtres.php3"); # pour filtrer_entites()
+	include_ecrire("inc_filtres.php3");
 
 	$les_auteurs_du_site = "";
 
@@ -486,7 +489,6 @@ function analyser_backend($rss, $url_syndic='') {
 		if (preg_match(',(<source[^>]*>)(([^<>]+)</source>)?,i',
 		$item, $match)) {
 			$data['source'] = trim($match[3]);
-			include_ecrire('inc_filtres.php3');
 			$data['url_source'] = str_replace('&amp;', '&',
 				trim(extraire_attribut($match[1], 'url')));
 		}
@@ -496,18 +498,19 @@ function analyser_backend($rss, $url_syndic='') {
 		# ou <media:category> (flickr)
 		# ou <itunes:category> (apple)
 		# on cree nos tags microformat <a rel="category" href="url">titre</a>
+		$tags = array();
 		if (preg_match_all(
 		',<(([a-z]+:)?(subject|category|keywords?|tags?))[^>]*>'
 		.'(.*?)</\1>,ims',
 		$item, $matches, PREG_SET_ORDER))
 			$tags = ajouter_tags($matches, $item); # array()
-
-		// Trouver les pieces jointes <enclosure> (RSS)
-		if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
-		$item, $matches, PREG_PATTERN_ORDER))
-			$data['enclosures'] = join(', ',
-				array_map('enclosure2microformat', $matches[0]));
-
+		// Pieces jointes : s'il n'y a pas de microformat relEnclosure,
+		// chercher <enclosure> au format RSS et les passer en microformat
+		if (!afficher_enclosures(join(', ', $tags)))
+			if (preg_match_all(',<enclosure[[:space:]][^<>]+>,i',
+			$item, $matches, PREG_PATTERN_ORDER))
+				$data['enclosures'] = join(', ',
+					array_map('enclosure2microformat', $matches[0]));
 		$data['item'] = $item;
 
 		// Nettoyer les donnees et remettre les CDATA en place
@@ -536,20 +539,6 @@ function analyser_backend($rss, $url_syndic='') {
 	}
 
 	return $articles;
-}
-
-// Passe un <enclosure url="fichier" length="5588242" type="audio/mpeg"/>
-// au format microformat <a rel="enclosure" href="fichier" ...>fichier</a>
-function enclosure2microformat($e) {
-	include_ecrire('inc_filtres.php3');
-	$url = extraire_attribut($e, 'url');
-	$fichier = basename($url) OR $fichier;
-	$e = preg_replace(',<enclosure[[:space:]],i','<a rel="enclosure" ', $e)
-		. $fichier.'</a>';
-	$e = inserer_attribut($e, 'url', '');
-	$e = inserer_attribut($e, 'href', filtrer_entites($url));
-	$e = str_replace('/>', '>', $e);
-	return $e;
 }
 
 //
@@ -940,7 +929,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 			// tags
 			if ($tags = afficher_tags($row['tags']))
-				$s .= "<div style='float:$spip_lang_right;'><em>"
+				$s .= "<div style='float:$spip_lang_right;'>&nbsp;<em>"
 					. $tags . '</em></div>';
 
 			// source
