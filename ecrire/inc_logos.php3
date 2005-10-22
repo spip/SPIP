@@ -455,7 +455,8 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 		$attributs .= ' name="'.entites_html($name).'"'; 
 		$attributs_alt = ' alt="'.entites_html($name).'"'; 
 	}
-	if ($alt = extraire_attribut($img, 'alt'))
+	// si un alt (meme vide) etait present, le recuperer
+	if (($alt = extraire_attribut($img, 'alt')) !== NULL)
 		$attributs_alt = ' alt="'.entites_html($alt).'"'; 
 
 	$attributs .= $attributs_alt;
