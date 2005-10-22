@@ -702,9 +702,12 @@ Las traducciones est&aacute;n asociadas al original, en un color que indica su e
 'statut_admin_restreint' => '(administrador restringido)',
 'syndic_choix_moderation' => '&iquest;Qu&eacute; hacemos con los siguientes enlaces que vengan de este sitio?',
 'syndic_choix_oublier' => '&iquest;Qu&eacute; hacemos con los enlaces que no figuren en el archivo de sindicaci&oacute;n?',
+'syndic_choix_resume' => 'Algunos sitios difunden el texto completo de los art&iacute;culos. Cuando est&eacute; disponible, deseas sindicar:',
 'syndic_lien_obsolete' => 'enlace obsoleto',
 'syndic_option_miroir' => 'bloquearlos autom&aacute;ticamente',
 'syndic_option_oubli' => 'borrarlos (tras @mois@&nbsp;meses)',
+'syndic_option_resume_non' => 'el contenido completo de los art&iacute;culos (en formato HTML)',
+'syndic_option_resume_oui' => 'un resumen sencillo (en formato texto)',
 'syndic_options' => 'Opciones de sindicaci&oacute;n:',
 
 

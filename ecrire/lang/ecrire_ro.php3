@@ -72,9 +72,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_envoi_annonces_adresse' => 'Trimite&#355;i anun&#355;urile la adresa :',
 'bouton_radio_envoi_liste_nouveautes' => 'Trimite&#355;i lista de nout&#259;&#355;i',
 'bouton_radio_moderation_priori' => 'Moderare &agrave; priori (contribu&#355;iile nu sunt afi&#351;ate dec&acirc;t dup&#259; validarea lor de c&#259;tre un administrator).',
-'bouton_radio_modere_abonnement' => 'moderat cu abonament',
-'bouton_radio_modere_posteriori' => 'moderat &agrave; posteriori',
-'bouton_radio_modere_priori' => 'moderat &agrave; priori',
+'bouton_radio_modere_abonnement' => 'cu abonament',
+'bouton_radio_modere_posteriori' => 'moderare ulterioar&#259;',
+'bouton_radio_modere_priori' => 'moderare &agrave; priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nu ap&#259;re&#355;i &icirc;n lista redactorilor',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nu trimite&#355;i anun&#355;uri editoriale',
 'bouton_radio_non_syndication' => 'F&#259;r&#259; sindicalizare',
@@ -256,6 +256,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_avertissement' => 'Avertisment',
 'info_base_installee' => 'Structura bazei dumneavoastr&#259; de date a fost instalat&#259;.',
 'info_base_restauration' => 'Baza de date este pe cale s&#259; fie restaurat&#259;.',
+'info_bloquer' => 'bloca&#355;i',
 'info_breves' => 'Site-ul dumneavoastr&#259; utilizeaz&#259; sistemul de &#351;tiri?',
 'info_breves_03' => '&#351;tiri',
 'info_breves_liees_mot' => '&#350;tiri legate de acest cuv&acirc;nt-cheie',
@@ -463,6 +464,7 @@ trebuie s&#259; crea&#355;i cel pu&#355;in o rubric&#259;.
 'info_procedure_maj_version' => 'procedura de aducere la zi trebuie lansat&#259; pentru a adapta
  baza de date la noua versiune SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'publica&#355;i',
 'info_publies' => 'Articolele dumneavoatr&#259; publicate &icirc;n direct',
 'info_question_accepter_visiteurs' => 'Dac&#259; scheletele site-ului dumneavoastr&#259; prev&#259;d &icirc;nregistrarea vizitatorilor f&#259;r&#259; acces la spa&#355;iul privat, v&#259; rug&#259;m s&#259; activa&#355;i op&#355;iunea de mai jos&nbsp;:',
 'info_question_gerer_statistiques' => 'Site-ul dumneavoastr&#259; trebuie s&#259; gestioneze statisticile vizitelor&nbsp;?',
@@ -727,6 +729,15 @@ cu o culoare care le indic&#259; starea&nbsp;:',
 
 // S
 'statut_admin_restreint' => '(administrator cu drepturi restr&acirc;nse)',
+'syndic_choix_moderation' => 'Ce s&#259; fac cu urm&#259;toarele leg&#259;turi provenind de la acest site&nbsp;?',
+'syndic_choix_oublier' => 'Ce s&#259; fac cu leg&#259;turile care nu mai figureaz&#259; &icirc;n fi&#351;ierul de sindicalizare&nbsp;?',
+'syndic_choix_resume' => 'Anumite site-uri difuzeaz&#259; textul complet al articolelor. C&acirc;nd acesta este disponibil, dori&#355;i s&#259; sindicaliza&#355;i:&nbsp;:',
+'syndic_lien_obsolete' => 'leg&#259;tur&#259; &icirc;nvechit&#259;',
+'syndic_option_miroir' => 'blocare automat&#259;',
+'syndic_option_oubli' => '&#351;tergere (dup&#259; @mois@&nbsp;luni)',
+'syndic_option_resume_non' => 'con&#355;inutul complet al articolelor (&icirc;n format HTML)',
+'syndic_option_resume_oui' => 'un rezumat simplu (&icirc;n format text)',
+'syndic_options' => 'Op&#355;iuni de syndicalizare&nbsp;:',
 
 
 // T

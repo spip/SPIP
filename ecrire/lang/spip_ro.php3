@@ -23,6 +23,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'admin_modifier_rubrique' => 'Modifica&#355;i rubrica',
 'admin_recalculer' => 'Recalcula&#355;i aceast&#259; pagin&#259;',
 'alerte_maj_impossible' => '<b>Alert&#259;&nbsp;!</b> Aducerea la zi a bazei de date MySQL c&#259;tre versiunea @version@ este imposibil&#259;, probabil din cauza unei probleme de drepturi de modificare &icirc;n baza de date. V&#259; rug&#259;m s&#259; contacta&#355;i furnizorul dumneavoastr&#259; de hosting.',
+'analyse_xml' => 'Analiz&#259; XML',
 'avis_archive_incorrect' => 'fi&#351;ierul arhiv&#259; nu este de tip SPIP',
 'avis_archive_invalide' => 'fi&#351;ierul arhiv&#259; nu este valid',
 'avis_attention' => 'Aten&#355;ie!',

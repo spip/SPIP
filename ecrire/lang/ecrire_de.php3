@@ -699,9 +699,12 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'statut_admin_restreint' => '(Rubrik-Admin)',
 'syndic_choix_moderation' => 'Was soll mit weiteren Links dieser Seite geschehen?',
 'syndic_choix_oublier' => 'Was soll mit Links geschehen, die nicht mehr im Feed &uuml;bertragen werden?',
+'syndic_choix_resume' => 'Manche Websites &uuml;bertragen den vollst&auml;ndigen Text von Artikeln. In welcher Form m&ouml;chten sie diese Artikel &uuml;bernehmen:',
 'syndic_lien_obsolete' => 'veralteter Link',
 'syndic_option_miroir' => 'automatisch sperren',
 'syndic_option_oubli' => 'nach @mois@&nbsp;Monaten l&ouml;schen',
+'syndic_option_resume_non' => 'Den vollst&auml;ndigen Inhalt der Artikel (im HTML-Format)',
+'syndic_option_resume_oui' => 'Eine einfache Zusammenfassung (im Textformat)',
 'syndic_options' => 'Syndikation - Optionen:',
 
 

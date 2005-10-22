@@ -84,9 +84,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_moderation_priori' => 'Uprzednia moderacja (
  posty b&#281;d&#261; si&#281; ukazywa&#263; dopiero po ich zatwierdzeniu przez
  administrator&oacute;w).',
-'bouton_radio_modere_abonnement' => 'moderacja przez subskrypcj&#281; (zapis)',
-'bouton_radio_modere_posteriori' => 'moderacja a posteriori :)',
-'bouton_radio_modere_priori' => 'moderacja a priori (uprzednia)',
+'bouton_radio_modere_abonnement' => 'na abonament',
+'bouton_radio_modere_posteriori' => 'moderacja a posteriori',
+'bouton_radio_modere_priori' => 'moderacja a priori',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nie pokazuj w li&#347;cie redaktor&oacute;w',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nie wysy&#322;aj &#380;adnych zawiadomie&#324; redakcyjnych',
 'bouton_radio_non_syndication' => 'Bez syndykacji',
@@ -267,6 +267,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_avertissement' => 'Ostrze&#380;enie',
 'info_base_installee' => 'Struktura Twojej bazy danych zosta&#322;a zainstalowana.',
 'info_base_restauration' => 'Trwa odtwarzanie bazy danych.',
+'info_bloquer' => 'zablokuj',
 'info_breves' => 'Czy na Twojej stronie dzia&#322;a system news&oacute;w?',
 'info_breves_03' => 'newsy',
 'info_breves_liees_mot' => 'Newsy powi&#261;zane z tym s&#322;owem kluczowym',
@@ -481,6 +482,7 @@ Jednak SPIP pozwala zarz&#261;dza&#263; zupe&#322;nie dobrze tak&#380;e innymi j
 'info_procedure_maj_version' => 'powinna zosta&#263; procedura uaktualniania w celu dostosowania
  bazy danych do nowej wersji SPIP.',
 'info_ps' => 'P.S.',
+'info_publier' => 'opublikuj',
 'info_publies' => 'Twoje artyku&#322;y opublikowane online',
 'info_question_accepter_visiteurs' => 'Je&#347;li szkielety Twojego serwisu przewiduj&#261; dla odwiedzaj&#261;cych zapisy bez dost&#281;pu do panelu administracyjnego, w&#322;&#261;cz poni&#380;sz&#261; opcj&#281;:',
 'info_question_gerer_statistiques' => 'Czy Twoja strona ma prowadzi&#263; statystyk&#281; odwiedzin?',
@@ -744,6 +746,12 @@ Przek&#322;ady s&#261; po&#322;&#261;czone z orygina&#322;em, za pomoc&#261; kol
 
 // S
 'statut_admin_restreint' => '(admin z ograniczeniami)',
+'syndic_choix_moderation' => 'Co zrobi&#263; z linkami, kt&oacute;re pochodz&#261; z tego serwisu ?',
+'syndic_choix_oublier' => 'Co zrobi&#263; z linkami, kt&oacute;rych nie ma ju&#380; w pliku syndykacji?',
+'syndic_lien_obsolete' => '<NEW>lien obsol&egrave;te',
+'syndic_option_miroir' => '<NEW>les bloquer automatiquement',
+'syndic_option_oubli' => '<NEW>les effacer (apr&egrave;s @mois@&nbsp;mois)',
+'syndic_options' => '<NEW>Options de syndication&nbsp;:',
 
 
 // T
