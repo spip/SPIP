@@ -34,9 +34,10 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 			$id_mot = spip_abstract_insert("spip_mots", '(id_groupe)', "($id_groupe)");
 
 			$ajouter_id_article = intval($ajouter_id_article);
-			if ($ajouter_id_article) 
+			if ($ajouter_id_article) {
 				supprime_mot_de_groupe($id_groupe, $table);
-			spip_query("INSERT INTO spip_mots_$table (id_mot, $id_table) VALUES ($id_mot, $ajouter_id_article)");
+				spip_abstract_insert("spip_mots_$table", "(id_mot, $id_table)", "($id_mot, $ajouter_id_article)");
+			}
 		}
 
 		$titre_mot = addslashes($titre_mot);
