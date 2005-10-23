@@ -396,7 +396,7 @@ function analyser_backend($rss, $url_syndic='') {
 	foreach ($items as $item) {
 		$data = array();
 
-		// URL (obligatoire)
+		// URL (semi-obligatoire, sert de cle)
 		if (preg_match(
 		',<link[^>]*[[:space:]]rel=["\']?alternate[^>]*>(.*)</link>,Uims',
 		$item, $regs))
@@ -413,13 +413,11 @@ function analyser_backend($rss, $url_syndic='') {
 		$item, $regs))
 			$data['url'] = $regs[1];
 		else
-			$data['url'] = false;
+			$data['url'] = '';
 
 		$data['url'] = url_absolue(filtrer_entites($data['url']), $url_syndic);
 
 		// Titre (semi-obligatoire)
-		# note http://static.userland.com/gems/backend/gratefulDead.xml
-		# n'a que des enclosures, sans url ni titre... tant pis...
 		if (preg_match(",<title>(.*?)</title>,ims",$item,$match))
 			$data['titre'] = $match[1];
 			else if (preg_match(',<link[[:space:]][^>]*>,Uims',$item,$mat)
@@ -657,10 +655,8 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 	if (is_array($articles)) {
 		$urls = array();
 		foreach ($articles as $data) {
-			if ($data['url']) {
-				inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents']);
-				$urls[] = $data['url'];
-			}
+			inserer_article_syndique ($data, $now_id_syndic, $moderation, $url_site, $url_syndic, $row['resume'], $row['documents']);
+			$urls[] = $data['url'];
 		}
 
 		// moderation automatique des liens qui sont sortis du feed
@@ -1015,12 +1011,18 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 function executer_une_syndication() {
 	$id_syndic = 0;
 
+	## valeurs modifiables dans mes_options.php3
+	## attention il est tres mal vu de prendre une periode < 20 minutes
+	define_once('_PERIODE_SYNDICATION', 2*60);
+	define_once('_PERIODE_SYNDICATION_SUSPENDUE', 24*60);
+
 	// On va tenter un site 'sus' ou 'off' de plus de 24h, et le passer en 'off'
 	// s'il echoue
 	$s = spip_query("SELECT * FROM spip_syndic
 	WHERE syndication IN ('sus','off')
 	AND statut='publie'
-	AND date_syndic < DATE_SUB(NOW(), INTERVAL 24 HOUR)
+	AND date_syndic < DATE_SUB(NOW(), INTERVAL
+	"._PERIODE_SYNDICATION_SUSPENDUE." MINUTE)
 	ORDER BY date_syndic LIMIT 1");
 	if ($row = spip_fetch_array($s)) {
 		$id_syndic = $row["id_syndic"];
@@ -1031,7 +1033,7 @@ function executer_une_syndication() {
 	$s = spip_query("SELECT * FROM spip_syndic
 	WHERE syndication='oui'
 	AND statut='publie'
-	AND date_syndic < DATE_SUB(NOW(), INTERVAL 2 HOUR)
+	AND date_syndic < DATE_SUB(NOW(), INTERVAL "._PERIODE_SYNDICATION." MINUTE)
 	ORDER BY date_syndic LIMIT 1");
 	if ($row = spip_fetch_array($s)) {
 		$id_syndic = $row["id_syndic"];
