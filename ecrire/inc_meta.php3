@@ -48,24 +48,8 @@ function ecrire_metas() {
 
 	lire_metas();
 
-	$s = array();
-
-	if ($meta) {
-		foreach ($meta as $key => $val)
-			$s[] = "\t'".addslashes($key)."' => '".texte_script($val)."'";
-
-		$ok = ecrire_fichier (_DIR_SESSIONS . 'meta_cache.php3',
-			'<'.'?php
-
-if (defined("_DATA_META_CACHE")) return;
-define("_DATA_META_CACHE", "1");
-
-$GLOBALS[\'meta\'] = array(
-' 
-		. join (",\n", $s) . '
-);
-
-?'.'>');
+	if (is_array($meta)) {
+		$ok = ecrire_fichier (_DIR_SESSIONS.'meta_cache.txt', serialize($meta));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
 			echo "<h4 font color=red>"._T('texte_inc_meta_1')
 			." <a href='../spip_test_dirs.php3'>"._T('texte_inc_meta_2')
