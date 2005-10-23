@@ -169,4 +169,3 @@ function statistiques_repartition_dist($critere)
 	//	fin_page();
 }
 ?>
-
