@@ -96,7 +96,7 @@ td {
 .fondo { background-color: <?php echo $couleur_foncee; ?>; 
 	background-position: center bottom; float: none; color: #FFFFFF;
 }
-.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519; 
+.fondf { background-color: #FFFFFF; border-style: solid ; border-width: 1px; border-color: #E86519; color: #E86519; 
 }
 
 
@@ -144,7 +144,7 @@ select.fondl {
 }
 
 .bandeau-icones .separateur {
-	vertical-align: center;
+	vertical-align: middle;
 	height: 100%;
 	width: 11px;
 	padding: 0px;
@@ -174,7 +174,7 @@ select.fondl {
 	font-family: verdana, helvetica, arial, sans;
 	font-size: 11px;
 	border-bottom: 1px solid white;
-	border-right; 1px solid white;
+	border-right: 1px solid white;
 	-moz-border-radius-bottomleft: 5px;
 	-moz-border-radius-bottomright: 5px;
 }
@@ -1380,7 +1380,7 @@ table.spip tr.row_even {
 table.spip td {
 	padding: 3px;
 	text-align: left;
-	vertical-align: center;
+	vertical-align: middle;
 	margin: 1px;
 }
 

@@ -80,7 +80,7 @@ a.calendrier-annee:hover {
 	width: 14%;
 	padding: 5px;
 	text-align: center; 
-  	vertical-align: center;
+  	vertical-align: middle;
 	font-size: 10px;
 	font-weight: bold;
 	font-family: Verdana, Arial, Sans, sans-serif;
@@ -350,14 +350,14 @@ a.calendrier-annee:hover {
 .calendrier-couleur12 { 
 		background-color: #aaaaaa;
 		border: 1px solid black;
-		color black;
+		color: black;
 
 }
 .calendrier-couleur12i {
 		background-color: black;
 		border: 1px solid #aaaaaa;
 		color: #aaaaaa}
-.calendrier-couleur13 { 		/
+.calendrier-couleur13 {
 		background-color: #FFFFE0;
 		border: 1px solid #666500;
 		color: #666500; /* Caca d'oie */
