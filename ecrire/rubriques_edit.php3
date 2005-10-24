@@ -173,8 +173,9 @@ debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').a
 //echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_parent);\" onChange=\"filtery(this.value,this.form.id_parent);\"> ";
 
 
-if ($spip_display == 4) {
-	echo "<SELECT NAME='id_parent' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
+// Mode sans Ajax
+if ($GLOBALS['_COOKIE']['spip_accepte_ajax'] < 1) {
+	echo "<SELECT NAME='id_parent' style='font-size: 90%; width:99%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
 	
 	if ($connect_toutes_rubriques) {
 	  echo "<OPTION".mySel("0",$id_parent). http_style_background('racine-site-12.gif',  "$spip_lang_left no-repeat; background-color:$couleur_foncee; padding-$spip_lang_left: 16px; font-weight:bold; color:white") .'>'._T('info_racine_site')."\n";
@@ -189,6 +190,8 @@ if ($spip_display == 4) {
 		enfant(0);
 	}
 	echo "</SELECT>\n";
+
+// Mode avec Ajax
 } else {
 
 	$query = spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_parent");

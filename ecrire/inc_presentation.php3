@@ -1951,6 +1951,19 @@ function debut_javascript($admin, $stat)
 		  ($browser_version >= 6))) ? 1 : 0) ?> ;
 
 	var confirm_changer_statut = '<?php include_ecrire("inc_charsets.php3"); echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>';
+
+<?php
+	# tester la capacite ajax si ce n'est pas deja fait
+	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
+?>
+	if (a = createXmlHttp()) {
+		a.open('GET', 'ajax_page.php?fonction=test_ajax', true);
+		a.send(null);
+	}
+<?php
+	}
+?>
+
 //--></script>
 <?php
 	echo http_script('',_DIR_RESTREINT . 'presentation.js');
@@ -2432,7 +2445,6 @@ else {
 
 	echo "<td> &nbsp; </td>";
 
-
 	icone_bandeau_principal (_T('icone_aide_ligne'),
 		"javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
 		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
@@ -2610,7 +2622,11 @@ else {
 	
 	echo "</div>\n";
 
-	// Bandeau
+	//
+	// Bandeau colore
+	//
+
+if (true /*$bandeau_colore*/) {
 	if ($rubrique == "administration") {
 		$style = "background: url(" . _DIR_IMG_PACK . "rayures-danger.png); background-color: $couleur_foncee";
 		echo "<style>a.icone26 { color: white; }</style>";
@@ -2745,11 +2761,16 @@ else {
 	
 	
 	echo "</tr></table>";
-	
+
+} // fin bandeau colore
 
 	//
 	// Barre des gadgets
+	// (elements invisibles qui s'ouvrent sous la barre precedente)
 	//
+
+// debut des gadgets
+if (true /*$gadgets*/) {
 
 	echo "<table width='$largeur' cellpadding='0' cellspacing='0' align='center'><tr><td>";
 
@@ -3021,7 +3042,9 @@ else {
 	
 	echo "</div>";
 	echo "</td></tr></table>";
-	
+
+} // fin des gadgets
+
 	echo "</div>";
 	echo "</div>";
 
@@ -3031,7 +3054,7 @@ else {
 
 	// Ouverture de la partie "principale" de la page
 	// Petite verif pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
-	echo "<center onMouseOver=\"if (findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
+	echo "<center onMouseOver=\"if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') { ouvrir_recherche = true; } else { ouvrir_recherche = false; } changestyle('bandeauvide', 'visibility', 'hidden'); if (ouvrir_recherche == true) { changestyle('bandeaurecherche','visibility','visible'); }\">";
 
 			$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 			$total_messages = @spip_num_rows($result_messages);

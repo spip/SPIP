@@ -33,6 +33,12 @@ include_ecrire('inc_admin.php3');
 // Preferences de presentation
 //
 
+# teste la capacite ajax : on envoie un cookie -1
+# et un script ajax ; si le script reussit le cookie passera a +1
+if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
+	spip_setcookie('spip_accepte_ajax', -1);
+}
+
 if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
 AND $spip_lang_ecrire <> $auteur_session['lang']
 AND changer_langue($spip_lang_ecrire)) {

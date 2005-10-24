@@ -33,7 +33,12 @@ $articles_versions = (lire_meta("articles_versions")=='oui') && $flag_revisions;
 
 if ($id_article==0) {
 	if ($new=='oui') {
-		$id_rubrique = intval($id_rubrique);
+		// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
+		if (!$id_rubrique = intval($id_rubrique)) {
+			$s = spip_query("SELECT id_rubrique FROM spip_rubriques
+			WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1");
+			list($id_rubrique) = spip_fetch_array($s);
+		}
 		if ($titre=='') $titre = _T('info_sans_titre');
 
 		$langue_new = '';

@@ -357,4 +357,27 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 
 }
 
+function calcul_generation ($generation) {
+	$lesfils = array();
+	$result = spip_abstract_select(array('id_rubrique'),
+				array('spip_rubriques AS rubriques'),
+				array(calcul_mysql_in('id_parent', 
+					$generation,
+						      '')));
+	while ($row = spip_abstract_fetch($result))
+		$lesfils[] = $row['id_rubrique'];
+	return join(",",$lesfils);
+}
+
+function calcul_branche ($generation) {
+	if (!$generation) 
+		return '0';
+	else {
+		$branche[] = $generation;
+		while ($generation = calcul_generation ($generation))
+			$branche[] = $generation;
+		return join(",",$branche);
+	}
+}
+
 ?>

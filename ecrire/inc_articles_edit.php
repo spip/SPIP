@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+// Cree un menu de rubriques a partir de la rubrique parent (recursif
+// et pas efficace)
 function enfant($leparent){
 	global $id_parent;
 	global $id_rubrique;
@@ -137,19 +139,18 @@ function rubrique_articles_edit($titre_parent, $id_rubrique)
 {
 	global $spip_display;
 
-	if ($spip_display == 4) {
-	
-		// Integrer la recherche de rubrique au clavier
-		echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
-		echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_rubrique);\" onChange=\"filtery(this.value,this.form.id_rubrique);\"> ";
-	
-		echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
+	// Mode sans Ajax
+	if ($GLOBALS['_COOKIE']['spip_accepte_ajax'] < 1) {
+		echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width: 99%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
 		enfant(0);
 		echo "</SELECT><BR>\n";
 		
 		echo _T('texte_rappel_selection_champs');
 	
-	} else {
+	}
+
+	// Mode avec Ajax
+	else {
 		echo "<table width='100%'><tr width='100%'><td width='45'>";
 		echo "<a href=\"#\" onClick=\"javascript:if(findObj('selection_rubrique').style.display=='none') {charger_id_url_si_vide('ajax_page.php?fonction=aff_rubrique&id_rubrique=$id_rubrique','selection_rubrique');} else {findObj('selection_rubrique').style.display='none';}\"><img src='img_pack/loupe.png' style='border: 0px; vertical-align: middle;' /></a> ";
 		echo "<img src='img_pack/searching.gif' id='img_selection_rubrique' style='visibility: hidden;'>";
@@ -157,7 +158,6 @@ function rubrique_articles_edit($titre_parent, $id_rubrique)
 		echo "<input type='text' id='titreparent' name='titreparent' disabled='disabled' class='forml' value=\"$titre_parent\" />";
 		echo "<input type='hidden' id='id_rubrique' name='id_rubrique' value='$id_rubrique' />";
 		echo "</td></tr></table>";
-		
 		echo "<div id='selection_rubrique' style='display: none;'></div>";
 	
 	}

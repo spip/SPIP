@@ -267,8 +267,6 @@ if ($spip_display != 4) {
 		}
 	}
 
-	fin_cadre_relief();
-
 	//
 	// Supprimer le cookie, se deconnecter...
 	//
@@ -276,10 +274,11 @@ if ($spip_display != 4) {
 	if ($cookie_admin) {
 			$texte = _T('icone_supprimer_cookie');
 			if ($spip_display != 1) $texte .= aide("cookie");
-			echo '<div>&nbsp;</div>';
 			icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
 		}
-	}	
+	}
+
+	fin_cadre_relief();
 }
 
 
