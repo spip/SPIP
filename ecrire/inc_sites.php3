@@ -273,7 +273,7 @@ function analyser_site($url) {
 			$result['url_site'] = filtrer_entites(extraire_attribut($regs[0], 'href'));
 		$result['url_site'] = url_absolue($result['url_site'], $url);
 
-		if (preg_match('<(description|tagline)([[:space:]][^>]*)?'
+		if (preg_match(',<(description|tagline)([[:space:]][^>]*)?'
 		.'>(.*)</\1>,Uims', $header, $r))
 			$result['descriptif'] = filtrer_entites($r[3]);
 	}
