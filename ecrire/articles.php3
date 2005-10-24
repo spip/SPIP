@@ -292,7 +292,7 @@ if (function_exists('affiche_articles'))
 // on pourrait supprimer les arguments issus des meta
 // mais l'URL admet de fait une vingtaine de parametres differents
 
-$var_nom($id_article, $ajout_auteur, $articles_mots, $articles_redac, $articles_versions, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $dir_lang, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article);
+$var_nom($id_article, $ajout_auteur, $articles_mots, $articles_redac, $articles_versions, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $dir_lang, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
 // Taches lentes
 
