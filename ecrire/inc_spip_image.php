@@ -386,11 +386,11 @@ function spip_image_tester ($test_vignette) {
 		if ($taille_preview < 10) $taille_preview = 150;
 		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$test_vignette", $test_vignette, true))
 
-			header("Location: " . $preview['fichier']);
+			redirige_par_entete($preview['fichier']);
 	}
 
 	# image echec
-	header("Location: " .  _DIR_IMG_PACK . 'puce-rouge-anim.gif');
+	redirige_par_entete(_DIR_IMG_PACK . 'puce-rouge-anim.gif');
 }
 
 
