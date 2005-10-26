@@ -1149,7 +1149,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 						else $l .= "<a href='articles.php3?id_article=".$langues_art[$k]."' class='foncee'>$k</a>";
 					}			
 				}
-				else $l.= "<span class='creer'>$k</span>";
+#				else $l.= "<span class='creer'>$k</span>";
 			}
 			
 			if (!$span_lang)
