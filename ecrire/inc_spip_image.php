@@ -32,7 +32,7 @@ include_ecrire("inc_abstract_sql.php3");# spip_insert / spip_fetch...
 include_ecrire('inc_documents.php3');	# fichiers_upload()
 
 
-function spip_image_joindre($doc)
+function spip_image_joindre_dist($doc)
 {
   global 
     $sousaction1,
@@ -174,7 +174,7 @@ function spip_image_joindre6($arg, $mode, $type, $id, $id_document,$hash, $hash_
 
 // $source = $_FILES[0]
 // $dest = arton12.xxx
-function spip_image_ajouter($doc) {
+function spip_image_ajouter_dist($doc) {
 	global $sousaction2, $source;
 	global $action, $hash, $hash_id_auteur;
 
@@ -253,7 +253,7 @@ function spip_image_ajouter($doc) {
 }
 
 
-function spip_image_effacer($doc) {
+function spip_image_effacer_dist($doc) {
 	global $action, $hash, $hash_id_auteur;
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
 		die ($action . '!!!');
@@ -269,7 +269,7 @@ function spip_image_effacer($doc) {
 //
 
 // Tester nos capacites
-function spip_image_tester ($test_vignette) {
+function spip_image_tester_dist($test_vignette) {
 	global $pnmscale_command;
 
 	// verifier les formats acceptes par GD
@@ -395,7 +395,7 @@ function spip_image_tester ($test_vignette) {
 
 
 // Effacer un doc (et sa vignette)
-function spip_image_supprimer($doc) {
+function spip_image_supprimer_dist($doc) {
 
 	global $action, $hash, $hash_id_auteur;
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
@@ -442,7 +442,7 @@ function spip_image_supprimer($doc) {
 }
 
 
-function spip_image_tourner($doc) {
+function spip_image_tourner_dist($doc) {
 	
 	global $action, $hash, $hash_id_auteur;
 	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
@@ -502,11 +502,11 @@ function spip_image_tourner($doc) {
 
 //  acces aux documents joints securise
 //  est appelee avec id_document comme parametre CGI
-//  mais peu aussi etre appelle avec le parametre file directement 
+//  mais peu aussi etre appele avec le parametre file directement 
 //  il verifie soit que le demandeur est authentifie
-// soit que le fichier est joint à au moins 1 article, breve ou rubrique publie
+// soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
-function spip_image_autoriser($id_document)
+function spip_image_autoriser_dist($id_document)
 {
   global $file;
 
@@ -592,7 +592,7 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
 // pour envoyer un article proprement
 // spip_image.php3?action=telecharger&doc=$id_article
 
-function spip_image_telecharger($id_article)
+function spip_image_telecharger_dist($id_article)
 {
   $r = spip_query("
 SELECT	texte, soustitre, titre, date

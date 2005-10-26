@@ -12,9 +12,23 @@ function naviguer_dist($action)
 
 
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique
-	// si action vide, simple visite
-	if ($flag_editable AND $action) 
-	  $id_rubrique = maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descriptif, $flag_editable, $changer_lang);
+
+	if ($flag_editable AND $action) {
+		$fonc = 'enregistre_' . $action . '_naviguer';
+		if (function_exists($fonc)) {
+			$res = $fonc($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace);
+			if ($res) $id_rubrique = $res;
+
+			// toute action entraine ceci:
+			calculer_rubriques();
+			calculer_langues_rubriques();
+
+			if ($GLOBALS['invalider_caches']) {
+				include_ecrire ("inc_invalideur.php3");
+				suivre_invalideur("id='id_rubrique/$id_rubrique'");
+			}
+		}
+	}
 
 //
 // recuperer les infos sur cette rubrique
@@ -370,85 +384,7 @@ if ($relief) {
 
 ////// Supprimer cette rubrique (si vide)
 
-	supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
-}
-
-function maj_naviguer($action, $id_rubrique, $id_parent, $titre, $texte, $descriptif, $flag_editable, $changer_lang)
-{
-	if ($action == 'supprimer') {
-		  spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-		  $id_rubrique = $id_parent;
-		  unset($_POST['id_parent']);
-		  $_POST['id_rubrique'] = $id_rubrique;
-		  $GLOBALS['clean_link'] = new Link();
-		}
-	elseif ($action == 'coloniser') {
-		if ($changer_lang
-		    AND $id_rubrique>0
-		    AND lire_meta('multi_rubriques') == 'oui'
-		    AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0)) {
-		  if ($changer_lang != "herit")
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
-		  else {
-			if ($id_parent == 0)
-				$langue_parent = lire_meta('langue_site');
-			else {
-				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
-				$langue_parent = $row['lang'];
-			}
-			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
-		  }
-		}
-	}
-	  // pour le cas 'calculer_rubriques' (retour de spip_image),
-	  // i.e. document/logo ajoute/supprime/tourne
-	  // suffit seulement de faire le calculer_rubriques() final
-	  // mais il faudrait s'en dispenser dans le cas "tourne" etc
-
-	elseif ($action !='calculer_rubriques') {
-		if ($action =='creer') {
-			$id_rubrique = spip_abstract_insert("spip_rubriques", 
-				"(titre, id_parent)",
-				"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
-
-	// Modifier le lien de base pour qu'il prenne en compte le nouvel id
-			unset($_POST['id_parent']);
-			$_POST['id_rubrique'] = $id_rubrique;
-			$GLOBALS['clean_link'] = new Link();
-		}
-		// alors action = modifier
-		else {
-			// si c'est une rubrique-secteur contenant des breves, ne deplacer
-			// que si $confirme_deplace == 'oui'
-			if ($GLOBALS['confirme_deplace'] != 'oui')
-				$id_parent = 0;
-		}
-		if ($GLOBALS['champs_extra']) {
-			  include_ecrire("inc_extra.php3");
-			  $GLOBALS['champs_extra'] = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
-		}
-		spip_query("UPDATE spip_rubriques SET " .
-		   (acces_rubrique($id_parent) ? "id_parent='$id_parent'," : "") . "
-titre='" . addslashes($titre) ."',
-descriptif='" . addslashes($descriptif) . "',
-texte='" . addslashes($texte) . "'
-$champs_extra
-WHERE id_rubrique=$id_rubrique");
-		if (lire_meta('activer_moteur') == 'oui') {
-			include_ecrire ("inc_index.php3");
-			marquer_indexer('rubrique', $id_rubrique);
-		}
-	}
-
-	// toute action entraine ceci:
-	calculer_rubriques();
-	calculer_langues_rubriques();
-
-	if ($GLOBALS['invalider_caches']) {
-			include_ecrire ("inc_invalideur.php3");
-			suivre_invalideur("id='id_rubrique/$id_rubrique'");
-	}
-	return $id_rubrique;
+	bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable);
 }
 
 function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editable)
@@ -483,7 +419,7 @@ function montre_naviguer($id_rubrique, $titre, $descriptif, $logo, $flag_editabl
 }
 
 
-function supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
+function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
   if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
 	$link = "naviguer.php3?id_rubrique=$id_rubrique&action=supprimer&id_parent=$id_parent";
@@ -492,6 +428,83 @@ function supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 	icone(_T('icone_supprimer_rubrique'), $link, $ze_logo, "supprimer.gif");
 	echo "</div><p>";
  }
+}
+
+
+function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+{
+	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	$id_rubrique = $id_parent;
+	unset($_POST['id_parent']);
+	$_POST['id_rubrique'] = $id_rubrique;
+	$GLOBALS['clean_link'] = new Link();
+}
+
+function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+{
+	if ($changer_lang
+	AND $id_rubrique>0
+	AND lire_meta('multi_rubriques') == 'oui'
+	AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0)) {
+		if ($changer_lang != "herit")
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
+		else {
+			if ($id_parent == 0)
+				$langue_parent = lire_meta('langue_site');
+			else {
+				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
+				$langue_parent = $row['lang'];
+			}
+			spip_query("UPDATE spip_rubriques SET lang='".addslashes($langue_parent)."', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
+		  }
+		}
+}
+
+function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+{
+	  // retour de spip_image
+	  // i.e. document/logo ajoute/supprime/tourne
+	  // suffit seulement de faire le calculer_rubriques() final
+	  // mais il faudrait s'en dispenser dans le cas "tourne" etc
+}
+
+function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+{
+	$id_rubrique = spip_abstract_insert("spip_rubriques", 
+		"(titre, id_parent)",
+		"('"._T('item_nouvelle_rubrique')."', '$id_parent')");
+
+	// Modifier le lien de base pour qu'il prenne en compte le nouvel id
+	unset($_POST['id_parent']);
+	$_POST['id_rubrique'] = $id_rubrique;
+	$GLOBALS['clean_link'] = new Link();
+	modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, 'oui');
+}
+
+function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
+{
+	// si c'est une rubrique-secteur contenant des breves, ne deplacer
+	// que si $confirme_deplace == 'oui'
+
+	if ($GLOBALS['confirme_deplace'] != 'oui') $id_parent = 0;
+
+	if ($GLOBALS['champs_extra']) {
+			  include_ecrire("inc_extra.php3");
+			  $GLOBALS['champs_extra'] = ", extra = '".addslashes(extra_recup_saisie("rubriques"))."'";
+		}
+	spip_query("UPDATE spip_rubriques SET " .
+		   (acces_rubrique($id_parent) ? "id_parent='$id_parent'," : "") . "
+titre='" . addslashes($titre) ."',
+descriptif='" . addslashes($descriptif) . "',
+texte='" . addslashes($texte) . "'
+$champs_extra
+WHERE id_rubrique=$id_rubrique");
+	if (lire_meta('activer_moteur') == 'oui') {
+			include_ecrire ("inc_index.php3");
+			marquer_indexer('rubrique', $id_rubrique);
+	}
+
+	return $id_rubrique;
 }
 
 ?>
