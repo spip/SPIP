@@ -30,13 +30,13 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 	$ret .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; position: absolute; $spip_lang_left: ".(($col*150)-30)."px; top: 2px; z-index: 2;' id = 'img_".$rac."_col_".($col+1)."'");
 
 	$ret .= "<div style='width: 150px; height: 100%; overflow: auto; position: absolute; top: 0px; $spip_lang_left: ".(($col-1)*150)."px;'>";
-	
+
+	# recherche les filles et petites-filles de la rubrique donnee
 	$res = spip_query("SELECT rub1.* FROM spip_rubriques AS rub1, spip_rubriques AS rub2 WHERE ((rub1.id_parent = $id_rubrique) OR (rub2.id_parent = $id_rubrique AND rub1.id_parent=rub2.id_rubrique)) AND rub1.id_rubrique!=$rub_exclus GROUP BY rub1.id_rubrique ORDER BY rub1.titre");
-//	$res = spip_query("SELECT rub1.* FROM spip_rubriques AS rub1 WHERE rub1.id_parent = $id_rubrique ORDER BY rub1.titre");
 	while ($row = spip_fetch_array($res)) {
 		$le_parent = $row["id_parent"];
 		$la_rub = $row["id_rubrique"];
-		$titre = supprimer_numero(typo($row["titre"]));
+		$titre = typo($row["titre"]);
 		$lang = $row["lang"];
 		$langue_choisie = $row["langue_choisie"];
 		
@@ -62,19 +62,39 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 				
 				if ($rub[$i]["id_parent"] == 0) $style = " style='background-image: url(" . _DIR_IMG_PACK . "secteur-12.gif)'";
 
-				$titre = "<div class='petite-rubrique'$style>$titre</div>";
-				
+				$titre = "<div class='petite-rubrique'$style>"
+					.supprimer_numero($titre)."</div>";
+				# ce lien provoque la selection (directe) de la rubrique cliquee
+				$onClick = "findObj('id_parent').value=$la_rub;";
+				# et l'affichage de son titre dans le bandeau
+				$onClick .= "findObj('titreparent').value='"
+					. strtr(
+						str_replace("'", "&#8217;",
+						str_replace('"', "&#34;",
+							textebrut($titre))),
+						"\n\r", "  ")."';";
+
 				if ($rub[$i]["enfants"]) {
 					$titre = "<div class='rub-ouverte'>$titre</div>";
-					$onClick = "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id_rubrique=$la_rub&col=".($col+1)."', '".$rac."_col_".($col+1)."', 'slide_horizontal(\'".$rac."_principal\', \'".(($col-1)*150)."\', \'$spip_lang_left\')');";
 
+					# ensuite, l'ouverture du menu des sous-rubriques
+					$url = "ajax_page.php?fonction=aff_rub&rac=$rac"
+					."&exclus=$rub_exclus&id_rubrique=$la_rub&col=".($col+1);
+					$onClick .= "charger_id_url('$url',"
+					. "'".$rac."_col_".($col+1)
+					."', 'slide_horizontal(\'".$rac."_principal\', \'"
+					.(($col-1)*150)."\', \'$spip_lang_left\')');";
 				} else {
-					$onClick = " findObj_forcer('".$rac."_col_".($col+1)."').innerHTML='';";
+					# ou la fermeture du menu des sous-rubriques
+					$onClick .= "findObj_forcer('".$rac."_col_"
+					. ($col+1)."').innerHTML='';";
 				}
-//				$onClick .= "findObj('".$rac._sel."').value=$la_rub;";
+
+				## afficher le descriptif de la rubrique dans la div du dessous?
+				# si trop lent, commenter la ligne ci-dessous
 				$onClick .= " aff_selection('rubrique','$rac','$la_rub');";
-				
-				
+				##
+
 				$ret .= "<div class='$class' onClick=\"changerhighlight(this); $onClick\">";
 				$ret .= $titre;
 				$ret .= "</div>";
@@ -123,6 +143,9 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 	return $ret;
 }
 
+//
+// Affiche un mini-navigateur ajax positionne sur la rubrique $sel
+//
 function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id_rubrique=::sel::';", $rub_exclus=0, $aff_racine=false) {
 	global $couleur_claire, $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
@@ -135,8 +158,22 @@ function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id
 	$ret .= "<tr>";
 
 	$ret .= "<td style='vertical-align: bottom;'>";
-	if ($aff_racine) $onClick .= " aff_selection('rubrique','$rac', '0');";
+
+	if ($aff_racine) {
+		$onClick = " aff_selection('rubrique','$rac', '0');";
+		# ce lien provoque la selection (directe) de la rubrique cliquee
+		$onClick = "findObj('id_parent').value=0;";
+		# et l'affichage de son titre dans le bandeau
+		$onClick .= "findObj('titreparent').value='"
+			. strtr(
+				str_replace("'", "&#8217;",
+				str_replace('"', "&#34;",
+					textebrut(_T('info_racine_site')))),
+				"\n\r", "  ")."';";
+	}
+
 	$onClick .= "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id_rubrique=0&col=1', '".$rac."_col_1');";
+
 	$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px; width: 134px;'><div class='pashighlight'>";
 	$ret .= _T("info_racine_site");
 	$ret .= "</div></div>";

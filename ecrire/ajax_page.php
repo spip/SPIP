@@ -9,6 +9,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+#var_dump($_GET);
 
 include ("inc.php3");
 
@@ -28,70 +29,44 @@ $exclus = intval($exclus);
 $col = intval($col);
 
 
-	if ($fonction == "aff_rub") {
-		include_ecrire("inc_mini_nav.php");
-		echo mini_afficher_rubrique ($id_rubrique, $rac, "", $col, $exclus);
-	}
-	else if ($fonction == "aff_parent") {
-		include_ecrire("inc_mini_nav.php");
-		echo mini_nav ($id_rubrique, "choix-parent", "this.form.id_parent.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $aff_racine=true);
-	}
-	else if ($fonction == "aff_rubrique") {
-		include_ecrire("inc_mini_nav.php");
-		echo mini_nav ($id_rubrique, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", 0, $aff_racine=false);
-	}
-	else if ($fonction == "aff_nav_recherche") {
-		include_ecrire("inc_mini_nav.php");
-		echo mini_nav ($id_rubrique, "aff_nav_recherche", "document.location.href='naviguer.php3?id_rubrique=::sel::'", 0, $aff_racine=true);
-	}
-	
-	// Affiche les infos d'une rubrique selectionnee dans le mini navigateur
-	else if ($fonction == "aff_info") {
-		// echo "$type - $id - $rac";
+//
+// Quelle fonction a ete demandee ?
+//
+
+# Une fonction stockee en base de donnees ?
+if ($id_ajax_fonc) {
+	$res = spip_query("SELECT * FROM spip_ajax_fonc
+	WHERE id_ajax_fonc = $id_ajax_fonc AND id_auteur=$connect_id_auteur");
+	if ($row = spip_fetch_array($res)) {
+		$variables = $row["variables"];
 		
-		if ($type == "rubrique") {
-			$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
-			if ($row = spip_fetch_array($res)) {
-				$titre = typo($row["titre"]);
-				$descriptif = propre($row["descriptif"]);
-			} else {
-				$titre = _T('info_racine_site');
-			}
-		} else
-			$titre = '';
+		$variables = unserialize($variables);
+		while (list($i, $k) = each($variables)) {
+			$$i = $k;
+			
+		}
 		
-		echo "<div style='display: none;'>";
-		echo "<input type='text' id='".$rac."_sel' value='$id' />";
-		echo "<input type='text' id='".$rac."_sel2' value=\"".entites_html($titre)."\" />";
-		echo "</div>";
-
-		include_ecrire ("inc_logos.php3");
-
-
-		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
-		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
-			include_ecrire("inc_logos.php3");
-			$logo = decrire_logo("rubon$id");
-			if ($logo) {
-				$fichier = $logo[0];
-					echo  "<div style='float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;'>";
-					echo reduire_image_logo(_DIR_IMG.$fichier, 100, 48);
-					echo "</div>";
-			}
+		// Appliquer la fonction
+		if ($fonction == "afficher_articles") {
+			afficher_articles ($titre_table, $requete,
+				$afficher_visites, $afficher_auteurs);
 		}
 
-		echo "<div><p><b>$titre</b></p></div>";
-		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
-
-		echo "<div style='text-align: $spip_lang_right;'>";
-		echo "<input type='button' value='"._T('bouton_choisir')."' class='fondo' onClick=\"sel=findObj_forcer('".$rac."_sel').value; sel2=findObj_forcer('".$rac."_sel2').value; func = findObj('".$rac."_fonc').value; func = func.replace('::sel::', sel); func = func.replace('::sel2::', sel2.replace(/<\/?[^>]+>/gi, '')); eval(func);\">";
-		echo "</div>";
-
-
-		echo "</div>";
+		if ($fonction == "afficher_articles_trad") {
+			afficher_articles_trad ($titre_table, $requete,
+				$afficher_visites, $afficher_auteurs);
+		}
+		if ($fonction == "afficher_groupe_mots") {
+			include_ecrire("inc_mots.php3");
+			afficher_groupe_mots ($id_groupe);
+		}
 		
 	}
-	else if ($recherche_rub) {
+
+}
+
+# Un moteur de recherche ?
+else if ($recherche_rub) {
 	
 		$recherche = addslashes(str_replace("%","\%",$recherche_rub));
 		$rech2 = split("[[:space:]]+", $recherche);
@@ -153,44 +128,83 @@ $col = intval($col);
 			}
 				
 		}
-		if ($ret) echo $ret;
-		else echo "<div style='padding: 5px; color: red;'><b>".htmlentities($recherche_rub)."</b> :  "._T('avis_aucun_resultat')."</div>";
-		
-		
-	}
-	else if ($GLOBALS["id_ajax_fonc"]) {
-		$res = spip_query("SELECT * FROM spip_ajax_fonc WHERE id_ajax_fonc = $id_ajax_fonc AND id_auteur=$connect_id_auteur");
-		if ($row = spip_fetch_array($res)) {
-			$variables = $row["variables"];
-			
-			$variables = unserialize($variables);
-			while (list($i, $k) = each($variables)) {
-				$$i = $k;
-				
-			}
-			
-			// Appliquer la fonction
-			if ($fonction == "afficher_articles") {
-				afficher_articles ($titre_table, $requete, $afficher_visites, $afficher_auteurs);
-			}
+		if ($ret)
+			echo $ret;
+		else
+			echo "<div style='padding: 5px; color: red;'><b>"
+			.htmlentities($recherche_rub)
+			."</b> :  "._T('avis_aucun_resultat')."</div>";
+}
+else switch ($fonction) {
 
-			if ($fonction == "afficher_articles_trad") {
-				afficher_articles_trad ($titre_table, $requete, $afficher_visites, $afficher_auteurs);
+	# tester si ca fonctionne pour ce brouteur
+	// (si on arrive la c'est que c'est bon, donc poser le cookie)
+	case 'test_ajax':
+		spip_setcookie('spip_accepte_ajax', 1);
+		break;
+
+	# afficher un mini-navigateur de rubriques
+	case 'aff_rubrique':
+		include_ecrire("inc_mini_nav.php");
+		echo mini_nav ($id_rubrique, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $aff_racine=$racine);
+		break;
+
+	# afficher les sous-rubriques d'une rubrique (composant du mini-navigateur)
+	case 'aff_rub':
+		include_ecrire("inc_mini_nav.php");
+		echo mini_afficher_rubrique ($id_rubrique, $rac, "", $col, $exclus);
+		break;
+
+	# petit moteur de recherche sur les rubriques
+	case 'aff_nav_recherche':
+		include_ecrire("inc_mini_nav.php");
+		echo mini_nav ($id_rubrique, "aff_nav_recherche", "document.location.href='naviguer.php3?id_rubrique=::sel::'", 0, $aff_racine=true);
+		break;
+
+	# Affiche les infos d'une rubrique selectionnee dans le mini navigateur
+	case 'aff_info':
+		if ($type == "rubrique") {
+			$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
+			if ($row = spip_fetch_array($res)) {
+				$titre = typo($row["titre"]);
+				$descriptif = propre($row["descriptif"]);
+			} else {
+				$titre = _T('info_racine_site');
 			}
-			if ($fonction == "afficher_groupe_mots") {
-				include_ecrire("inc_mots.php3");
-				afficher_groupe_mots ($id_groupe);
+		} else
+			$titre = '';
+		
+		echo "<div style='display: none;'>";
+		echo "<input type='text' id='".$rac."_sel' value='$id' />";
+		echo "<input type='text' id='".$rac."_sel2' value=\"".entites_html($titre)."\" />";
+		echo "</div>";
+
+		include_ecrire ("inc_logos.php3");
+
+
+		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
+		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+			include_ecrire("inc_logos.php3");
+			$logo = decrire_logo("rubon$id");
+			if ($logo) {
+				$fichier = $logo[0];
+					echo  "<div style='float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;'>";
+					echo reduire_image_logo(_DIR_IMG.$fichier, 100, 48);
+					echo "</div>";
 			}
-			
 		}
 
-	}
+		echo "<div><p><b>$titre</b></p></div>";
+		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
 
-	# test ajax : si on arrive a cette fonction, c'est qu'ajax marche :
-	# on le note dans un cookie qui expire en fin de session (on recommencera)
-	else if ($fonction == 'test_ajax') {
-		spip_setcookie('spip_accepte_ajax', 1);
-	}
+		echo "</div>";
+		break;
+
+	default:
+		echo "erreur : ".htmlspecialchars($fonction)." non definie.";
+		break;
+
+}
 
 
 # fin gestion charset

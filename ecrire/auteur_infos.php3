@@ -169,7 +169,7 @@ if (strval($nom)!='') {
 }
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_rubrique'], $_GET['supp_rub']);
+modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent'], $_GET['supp_rub']);
 
 
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd

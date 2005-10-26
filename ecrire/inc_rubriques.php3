@@ -380,4 +380,235 @@ function calcul_branche ($generation) {
 	}
 }
 
+//
+// Selecteur de rubriques pour l'espace prive
+// En entree :
+// - l'id_rubrique courante (0 si NEW)
+// - le type d'objet a placer (une rubrique peut aller a la racine
+//    mais pas dans elle-meme, les articles et sites peuvent aller
+//    n'importe ou (defaut), et les breves dans les secteurs.
+// $idem : en mode rubrique = la rubrique soi-meme
+function selecteur_rubrique($id_rubrique, $type, $restreint, $idem=0) {
+	global $_COOKIE;
+
+	// Mode sans Ajax :
+	// - soit parce que le cookie ajax n'est pas la
+	// - soit parce qu'il y a peu de rubriques
+	if (false /* mettre true pour desactiver ajax */
+	OR $_COOKIE['spip_accepte_ajax'] < 1
+	OR spip_num_rows(
+	spip_query("SELECT id_rubrique FROM spip_rubriques")) < 50)
+		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
+
+	else
+		return selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem);
+
+}
+
+function style_menu_rubriques($i) {
+	global $browser_name, $browser_version;
+	global $couleur_claire, $spip_lang_left;
+
+	if (eregi("mozilla", $browser_name)) {
+		$style = "padding-$spip_lang_left: 16px; "
+		. "margin-$spip_lang_left: ".(($i-1)*16)."px;";
+		$espace = '';
+	} else {
+		$style = '';
+		for ($count = 0; $count <= $i; $count ++)
+			$espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
+	}
+	switch ($i) {
+		case 1:
+			$espace= "";
+			$style .= "font-weight: bold;";
+			break;
+		case 2:
+			$style .= "color: #202020;";
+			break;
+		case 3:
+			$style .= "color: #404040;";
+			break;
+		case 4:
+			$style .= "color: #606060;";
+			break;
+		case 5:
+			$style .= "color: #808080;";
+			break;
+		default:
+			$style .= "color: #A0A0A0;";
+			break;
+	}
+
+	if ($i==1) {
+		$style .= "background-image: url(" . _DIR_IMG_PACK. "secteur-12.gif);";
+		$style .= "background-color: $couleur_claire;";
+		$style .= "font-weight: bold;";
+	}
+	else if ($i==2) {
+		$style .= "border-bottom: 1px solid $couleur_claire;";
+		$style .= "font-weight: bold;";
+	}
+
+	if ($style) $style = " style='$style'";
+
+	return array($style,$espace);
+}
+
+function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $exclus, $restreint, $type) {
+	global $browser_name, $browser_version;
+	static $decalage_secteur;
+
+	// Si on a demande l'exclusion ne pas descendre dans la rubrique courante
+	if ($exclus > 0
+	AND $root == $exclus) return '';
+
+	// en fonction du niveau faire un affichage plus ou moins kikoo
+
+	// selected ?
+	$selected = ($root == $id_rubrique) ? ' selected' : '';
+
+	// class='selec_rub' sauf pour contourner le bug MSIE / MacOs 9.0
+	if (!($browser_name == "MSIE" AND floor($browser_version) == "5"))
+		$class = " class='selec_rub'";
+
+	// le style en fonction de la profondeur
+	list($style,$espace) = style_menu_rubriques($niv);
+
+	// creer l'<option> pour la rubrique $root
+	if (isset($data[$root])) # pas de racine sauf pour les rubriques
+	{
+		$r .= "<option$selected value='$root'$class$style>$espace"
+		.$data[$root]
+		.'</option>'."\n";
+	}
+	
+	// et le sous-menu pour ses enfants
+	$sous = '';
+	if ($enfants[$root])
+		foreach ($enfants[$root] as $sousrub)
+			$sous .= sous_menu_rubriques($id_rubrique, $sousrub,
+				$niv+1, $data, $enfants, $exclus, $restreint, $type);
+
+	// si l'objet a deplacer est publie, verifier qu'on a acces aux rubriques
+	if ($restreint AND !acces_rubrique($root))
+		return $sous;
+
+	// sauter un cran pour les secteurs (sauf premier)
+	if ($niv == 1
+	AND $decalage_secteur++
+	AND $type != 'breve')
+		$r = "<option value='$root'></option>\n".$r;
+
+	// et voila le travail
+	return $r.$sous;
+}
+
+// Le selecteur de rubriques en mode classique (menu)
+function selecteur_rubrique_html($id_rubrique, $type, $restreint) {
+	$data = array();
+	if ($type == 'rubrique')
+		$data[0] = _T('info_racine_site');
+	if ($type == 'auteur')
+		$data[0] = '&nbsp;'; # premier choix = neant (rubriques restreintes)
+
+	//
+	// creer une structure contenant toute l'arborescence
+	//
+
+	# oblige les breves a resider a la racine
+	if ($type == 'breve') $where = 'WHERE id_parent=0';
+
+	$q = spip_query("SELECT
+	id_rubrique, id_parent, titre, statut, lang, langue_choisie
+	FROM spip_rubriques
+	$where
+	ORDER BY 0+titre,titre");
+	while ($r = spip_fetch_array($q)) {
+		// titre largeur maxi a 50
+		$titre = couper(supprimer_tags(typo(extraire_multi(
+			$r['titre']
+		)))." ", 50);
+		if (lire_meta('multi_rubriques') == 'oui'
+		AND ($r['langue_choisie'] == "oui" OR $r['id_parent'] == 0))
+			$titre .= ' ['.traduire_nom_langue($r['lang']).']';
+		$data[$r['id_rubrique']] = $titre;
+		$enfants[$r['id_parent']][] = $r['id_rubrique'];
+		if ($id_rubrique == $r['id_rubrique']) $id_parent = $r['id_parent'];
+	}
+
+	$r = "<select name='id_parent' style='font-size: 90%; width: 99%;"
+	."font-face: verdana,arial,helvetica,sans-serif; max-height: 24px;'
+	size='1'>\n";
+
+	if ($type == 'rubrique')
+		$r .= sous_menu_rubriques($id_parent,0,
+			0,$data,$enfants,$id_rubrique, $restreint, $type);
+	else
+		$r .= sous_menu_rubriques($id_rubrique,0,
+			0,$data,$enfants,0, $restreint, $type);
+
+	$r .= "</select>\n";
+
+	# message pour neuneus (a supprimer ?)
+	if ($type != 'auteur' AND $type != 'breve')
+		$r .= "<br />"._T('texte_rappel_selection_champs');
+
+	return $r;
+}
+
+//
+// Le selecteur de rubriques en mode Ajax
+// necessite ajax_page.php et inc_mini_nav.php
+//
+function selecteur_rubrique_ajax($id_rubrique, $type, $restreint) {
+
+	## $restreint indique qu'il faut limiter les rubriques affichees
+	## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
+	## Pour la version HTML c'est bon (cf. ci-dessus), mais pour l'ajax...
+	## je laisse ca aux specialistes de l'ajax & des admins restreints
+	## note : toutefois c'est juste un pb d'interface, car question securite
+	## la verification est faite a l'arrivee des donnees (Fil)
+
+	if ($type == 'rubrique') {
+		$exclus = "&exclus=$id_rubrique&racine=oui";
+		list($id_rubrique) = spip_fetch_array(spip_query(
+		"SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	}
+
+	if ($id_rubrique)
+		list($titre_parent) = spip_fetch_array(spip_query(
+		"SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	else if ($type == 'auteur')
+		$titre_parent = '&nbsp;';
+	else
+		$titre_parent = _T('info_racine_site');
+
+	$r = "<table width='100%'><tr width='100%'><td width='45'>";
+
+	$onClick = "if(findObj('selection_rubrique').style.display=='none')"
+		."{charger_id_url_si_vide("
+			."'ajax_page.php?fonction=aff_rubrique"
+			."&id_rubrique=$id_rubrique$exclus',"
+			."'selection_rubrique'"
+		.");}"
+		."else {findObj('selection_rubrique').style.display='none';}";
+
+	$r .= "<a href=\"#\" onClick=\"$onClick\">"
+		."<img src='img_pack/loupe.png'
+			style='border: 0px; vertical-align: middle;' /></a> ";
+	$r .= "<img src='img_pack/searching.gif'
+		id='img_selection_rubrique' style='visibility: hidden;'>";
+	$r .= "</td><td>";
+	$r .= "<input type='text' id='titreparent' name='titreparent'
+		disabled='disabled' class='forml' value=\""
+		. entites_html(textebrut(typo($titre_parent)))."\" />";
+	$r .= "<input type='hidden' id='id_parent' name='id_parent'
+		value='$id_rubrique' />";
+	$r .= "</td></tr></table>";
+	$r .= "<div id='selection_rubrique' style='display: none;'></div>";
+
+	return $r;
+}
+
 ?>

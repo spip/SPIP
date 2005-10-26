@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("inc.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
@@ -21,10 +20,12 @@ include_ecrire ("inc_config.php3");
 
 $proposer_sites = lire_meta("proposer_sites");
 
+$id_rubrique = intval($id_parent);
+
+
 function calculer_droits() {
 	global $connect_statut, $statut, $id_rubrique, $id_rubrique_depart, $proposer_sites, $new;
 	global $flag_editable, $flag_administrable;
-
 	$flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique));
 	if ($id_rubrique_depart > 0)
 		 $flag_administrable &= acces_rubrique($id_rubrique_depart);

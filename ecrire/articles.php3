@@ -34,7 +34,7 @@ $articles_versions = (lire_meta("articles_versions")=='oui') && $flag_revisions;
 if ($id_article==0) {
 	if ($new=='oui') {
 		// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
-		if (!$id_rubrique = intval($id_rubrique)) {
+		if (!$id_rubrique = intval($id_parent)) {
 			$s = spip_query("SELECT id_rubrique FROM spip_rubriques
 			WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1");
 			list($id_rubrique) = spip_fetch_array($s);
@@ -230,7 +230,8 @@ if (strval($titre)!=='' AND !$ajout_forum AND $flag_editable) {
 		$add_extra = '';
 
 	// Verifier qu'on envoie bien dans une rubrique autorisee
-	if ($id_rubrique>0 AND ($flag_auteur OR acces_rubrique($id_rubrique))) {
+	if ($id_rubrique=intval($id_parent)
+	AND ($flag_auteur OR acces_rubrique($id_rubrique))) {
 		$change_rubrique = "id_rubrique=$id_rubrique,";
 	} else {
 		$change_rubrique = "";

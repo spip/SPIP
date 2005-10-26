@@ -28,86 +28,6 @@ function premiere_rubrique(){
 
 }
 
-function enfant($leparent){
-	global $id_parent;
-	global $id_rubrique;
-	static $i = 0, $premier = 1;
-	global $statut;
-	global $connect_toutes_rubriques;
-	global $couleur_claire, $spip_lang_left;
-	global $browser_name;
-
-
-	$i++;
- 	$query="SELECT * FROM spip_rubriques WHERE id_parent='$leparent' ORDER BY 0+titre, titre";
- 	$result=spip_query($query);
-
-	while($row=spip_fetch_array($result)){
-		$my_rubrique=$row['id_rubrique'];
-		$titre=typo($row['titre']);
-		$statut_rubrique=$row['statut'];
-		$lang_rub = $row['lang'];
-		$langue_choisie_rub = $row['langue_choisie'];
-		$style = "";
-		$espace = "";
-
-		// si l'article est publie il faut etre admin pour avoir le menu
-		// sinon le menu est present en entier (proposer un article)
-		if ($statut != "publie" OR acces_rubrique($my_rubrique)) {
-			$rubrique_acceptable = true;
-		} else {
-			$rubrique_acceptable = false;
-		}
-
-		if (eregi("mozilla", $browser_name)) {
-			$style .= "padding-$spip_lang_left: 16px; ";
-			$style .= "margin-$spip_lang_left: ".(($i-1)*16)."px;";
-		} else {
-			for ($count = 0; $count <= $i; $count ++) $espace .= "&nbsp;&nbsp;&nbsp;&nbsp;";
-		}
-
-		$img = _DIR_IMG_PACK . 'rubrique-12.gif';
-		switch ($i) {
-		case 1:
-			$espace= "";
-			$img = _DIR_IMG_PACK . 'secteur-12.gif';
-			$style .= "font-weight: bold;";
-			$style .= "background-color: $couleur_claire;";
-			break;
-		case 2:
-			$style .= "color: #202020;";
-			$style .= "font-weight: bold;";
-			$style .= "border-bottom: 1px solid $couleur_claire;";
-			break;
-		case 3:
-			$style .= "color: #404040;";
-			break;
-		case 4:
-			$style .= "color: #606060;";
-			break;
-		case 5:
-			$style .= "color: #808080;";
-			break;
-		default:
-			$style .= "color: #A0A0A0;";
-			break;
-		}
-
-		$style .= "background: url($img) $spip_lang_left no-repeat;";
-
-		if ($rubrique_acceptable) {
-			if ($i == 1 && !$premier) echo "<OPTION VALUE='$my_rubrique'>\n"; // sert a separer les secteurs
-			$titre = couper($titre." ", 50); // largeur maxi
-			if (lire_meta('multi_rubriques') == 'oui' AND ($langue_choisie_rub == "oui" OR $leparent == 0)) $titre = $titre." [".traduire_nom_langue($lang_rub)."]";
-			echo "<OPTION".mySel($my_rubrique,$id_rubrique)." style=\"$style\">$espace".supprimer_tags($titre)."\n";
-		}
-		$premier = 0;
-		enfant($my_rubrique);
-	}
-	$i=$i-1;
-}
-
-
 
 $proposer_sites = lire_meta("proposer_sites");
 
@@ -223,13 +143,11 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 
 	debut_cadre_couleur("$logo_parent", false, "", _T('entree_interieur_rubrique'));
 
-	// Integrer la recherche de rubrique au clavier
-	echo "<script language='JavaScript' type='text/javascript' src='filtery.js'></script>\n";
-	echo "<input type='text' size='10' style='font-size: 90%; width: 15%;' onkeyup=\"filtery(this.value,this.form.id_rubrique);\" onChange=\"filtery(this.value,this.form.id_rubrique);\"> ";
+	// selecteur de rubriques
+	include_ecrire('inc_rubriques.php3');
+	$restreint = ($GLOBALS['statut'] == 'publie');
+	echo selecteur_rubrique($id_rubrique, 'site', $restreint);
 
-	echo "<SELECT NAME='id_rubrique' style='font-size: 90%; width:80%; font-face:verdana,arial,helvetica,sans-serif; max-height: 24px;' SIZE=1>\n";
-	enfant(0);
-	echo "</select>\n";
 	fin_cadre_couleur();
 
 echo "<p /><b>"._T('entree_description_site')."</b><br>";
