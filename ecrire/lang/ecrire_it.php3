@@ -746,9 +746,12 @@ Le traduzioni sono associate all\'originale,
 'statut_admin_restreint' => '(admin restreint)',
 'syndic_choix_moderation' => 'Come comportarsi con i prossimi link provenienti da questo sito?',
 'syndic_choix_oublier' => 'Come comportarsi con i link che non compaiono pi&amp;ugrave; nel file di syndication?',
+'syndic_choix_resume' => 'Alcuni siti diffondono il testo completo degli articoli. Nel caso esso sia disponibile desiderate metterlo in syndication:',
 'syndic_lien_obsolete' => 'link non pi&amp;ugrave; valido',
 'syndic_option_miroir' => 'bloccarli automaticamente',
 'syndic_option_oubli' => 'cancellarli (dopo @mois@&nbsp;mesi)',
+'syndic_option_resume_non' => 'il contenuto completo degli articoli(in formato HTML)',
+'syndic_option_resume_oui' => 'un semplice riassunto (in formato testo)',
 'syndic_options' => 'Opzioni per la syndication:',
 
 

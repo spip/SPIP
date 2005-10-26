@@ -24,11 +24,11 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // B
 'bonjour' => 'Merhaba',
-'breves' => 'Kisa haberler',
+'breves' => 'K&#305;sa haberler',
 
 
 // C
-'commenter_site' => 'Bu siteyi yorumla',
+'commenter_site' => 'Bu siteye yorum ekle',
 
 
 // D
@@ -84,15 +84,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_precedente' => '&ouml;nceki sayfa',
 'page_suivante' => 'sonraki sayfa',
 'par_auteur' => 'taraf&#305;ndan ',
-'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. An&#305;nda sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir ileti alacaks&#305;n&#305;z.',
+'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. Sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir iletiyi hemen alacaks&#305;n&#305;z.',
 'plan_site' => 'Site plan&#305;',
 'popularite' => 'Pop&uuml;lerlik',
 'poster_message' => 'Bir ileti g&ouml;nder',
-'proposer_site' => 'Bu ana ba&#351;l&#305;&#287;a eklenecek bir site &ouml;nerebilirsiniz&nbsp;:',
+'proposer_site' => 'Bu b&ouml;l&uuml;me eklenecek bir site &ouml;nerebilirsiniz&nbsp;:',
 
 
 // R
-'repondre_article' => 'Bu makalaeyi yan&#305;tla',
+'repondre_article' => 'Bu makaleyi yan&#305;tla',
 'repondre_breve' => 'Bu k&#305;sa haberi yan&#305;tla',
 'repondre_message' => 'Bu iletiyi yan&#305;tla',
 'resultats_recherche' => 'Arama sonu&ccedil;lar&#305;',
@@ -104,8 +104,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // S
 'signatures_petition' => '&#304;mzalar',
 'site_realise_avec_spip' => 'SPIP ile ger&ccedil;ekle&#351;tirilmi&#351; site',
-'sites_web' => 'Siteler',
-'sous_rubriques' => 'Alt b&ouml;l&uuml;mler',
+'sites_web' => 'Web siteleri',
+'sous_rubriques' => 'Alt-b&ouml;l&uuml;mler',
 'suite' => 'devam&#305;',
 'sur_web' => 'Web\'de',
 'syndiquer_rubrique' => 'Bu b&ouml;l&uuml;m&uuml; payla&#351;',
@@ -114,12 +114,12 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 // T
 'texte_lettre_information' => 'Sitenin bilgi mektubu',
-'texte_lettre_information_2' => 'Bu mektup bu tarihten beri eklenen makale ve k&#305;sa haberleri listeler :',
+'texte_lettre_information_2' => 'Bu mektup belirtilen tarihten beri eklenen makale ve k&#305;sa haberleri listeler :',
 
 
 // V
 'ver_imprimer' => 'Bas&#305;lacak s&uuml;r&uuml;m',
-'voir_en_ligne' => 'On-line olarak g&ouml;r&uuml;nt&uuml;le'
+'voir_en_ligne' => '&Ccedil;evrimi&ccedil;i olarak g&ouml;r&uuml;nt&uuml;le'
 
 );
 

@@ -686,7 +686,7 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'module_fichier_langue' => 'Arquivo de idioma',
 'module_raccourci' => 'Atalhos',
 'module_texte_affiche' => 'Texto exibido',
-'module_texte_explicatif' => 'Voc&ecirc; pode inserir os atalhos a seguir nos gabaritos do seu site p&uacute;blico. Eles ser&atilde;o traduzidos automaticamente para os idiomas para os quias exista um arquivo de idioma.',
+'module_texte_explicatif' => 'Voc&ecirc; pode inserir os atalhos a seguir nos gabaritos do seu site p&uacute;blico. Eles ser&atilde;o traduzidos automaticamente para os idiomas para os quais exista um arquivo de idioma.',
 'module_texte_traduction' => 'O arquivo de idioma &laquo;&nbsp;@module@&nbsp;&raquo; est&aacute; dispon&iacute;vel em:',
 'mois_non_connu' => 'desconhecido',
 
@@ -712,9 +712,12 @@ As tradu&ccedil;&otilde;es est&atilde;o associadas ao original, numa c&ocirc;r q
 'statut_admin_restreint' => '(admin limitado)',
 'syndic_choix_moderation' => 'O que fazer com os pr&oacute;ximos links que venham deste site?',
 'syndic_choix_oublier' => 'O que fazer com os links que n&atilde;o constam mais do arquivo de sindica&ccedil;&atilde;o?',
+'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'link obsoleto',
 'syndic_option_miroir' => 'bloque&aacute;-los automaticamente',
 'syndic_option_oubli' => 'apag&aacute;-los (ap&oacute;s @mois@&nbsp;mois)',
+'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
+'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Op&ccedil;&otilde;es de sindica&ccedil;&atilde;o:',
 
 

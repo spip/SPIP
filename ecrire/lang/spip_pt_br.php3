@@ -230,7 +230,7 @@ Obrigado por participar.
 ',
 'form_pet_message_commentaire' => 'Uma mensagem ou coment&aacute;rio?',
 'form_pet_nom_site2' => 'Nome do seu website',
-'form_pet_probleme_technique' => 'Problema t&eacute;cnino: as assinaturas est&atilde;o suspensas temporariamente.',
+'form_pet_probleme_technique' => 'Problema t&eacute;cnico: as assinaturas est&atilde;o suspensas temporariamente.',
 'form_pet_signature_pasprise' => 'Sua assinatura n&atilde;o foi computada.',
 'form_pet_signature_validee' => 'Sua assinatura foi validada. Obrigado!',
 'form_pet_site_deja_enregistre' => 'Este site j&aacute; est&aacute; cadastrado',
