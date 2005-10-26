@@ -35,7 +35,6 @@ function balise_LOGIN_PUBLIC_dyn($url, $login) {
 
 function login_explicite($login, $cible) {
 	global $auteur_session;
-	spip_log("L $login C $cible");
 	$link = new Link();
 	$link->delVar('var_erreur');
 	$link->delVar('var_login');
@@ -61,7 +60,6 @@ function login_explicite($login, $cible) {
 			redirige_par_entete($cible);
 		return http_href($cible, _T('login_par_ici'));
 	}
-	spip_log("pour tous");
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
 
@@ -96,7 +94,6 @@ function login_pour_tous($login, $cible, $action) {
 		$s = spip_query("SELECT * FROM spip_auteurs
 			WHERE login='" .addslashes($login) ."'");
 		$row =  spip_fetch_array($s);
-	spip_log("renvoie du squelette avec '$row'");
 		// Retrouver ceux qui signent de leur nom ou email
 		if (!$row AND !$GLOBALS['ldap_present']) {
 			if ($t = spip_fetch_array(
@@ -128,11 +125,9 @@ function login_pour_tous($login, $cible, $action) {
 	}
 	if (!$row)
 		$row = array();
-	spip_log("renvoie du squelette avec '$row'");
 	// afficher "erreur de mot de passe" si &var_erreur=pass
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
-	spip_log("renvoie du squelette avec '$erreur'");
 	return array('formulaire_login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),

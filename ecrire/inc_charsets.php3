@@ -25,7 +25,7 @@ define("_ECRIRE_INC_CHARSETS", "1");
 function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
-	$charset = strtolower($charset);
+	$charset = trim(strtolower($charset));
 	if (is_array($GLOBALS['CHARSET'][$charset]))
 		return $charset;
 
@@ -36,7 +36,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		$GLOBALS['CHARSET'][$charset] = array();
 		return $charset;
 	}
-
+	
 	// Quelques synonymes
 	if ($charset == '') $charset = 'iso-8859-1';
 	else if ($charset == 'windows-1251') $charset = 'cp1251';
@@ -46,7 +46,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 		include($f);
 		return $charset;
 	} else {
-		spip_log("Charset $charset non supporte !");
+		spip_log("Charset '$charset' non supporte !");
 		$GLOBALS['CHARSET'][$charset] = array();
 		return false;
 	}
@@ -177,6 +177,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 	if ($charset == 'AUTO')
 		$charset = lire_meta('charset');
 
+	if ($charset == '') $charset = 'iso-8859-1';
 	switch ($charset) {
 	case 'utf-8':
 		return utf_8_to_unicode($texte);
@@ -229,7 +230,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 		}
 
 		// Au pire ne rien faire
-		spip_log("erreur charset $charset non supporte");
+		spip_log("erreur charset '$charset' non supporte");
 		return $texte;
 	}
 }
