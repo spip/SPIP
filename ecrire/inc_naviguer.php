@@ -434,10 +434,10 @@ function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_edi
 function enregistre_supprimer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
 {
 	spip_query("DELETE FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-	$id_rubrique = $id_parent;
 	unset($_POST['id_parent']);
-	$_POST['id_rubrique'] = $id_rubrique;
+	$_POST['id_rubrique'] = $id_parent;
 	$GLOBALS['clean_link'] = new Link();
+	return $id_parent;;
 }
 
 function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
@@ -478,7 +478,7 @@ function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $de
 	unset($_POST['id_parent']);
 	$_POST['id_rubrique'] = $id_rubrique;
 	$GLOBALS['clean_link'] = new Link();
-	modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, 'oui');
+	return enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, 'oui');
 }
 
 function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang, $confirmer_deplace)
