@@ -137,6 +137,9 @@ $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
 $couleur_lien = $couleurs_spip[$choix_couleur]['couleur_lien'];
 $couleur_lien_off = $couleurs_spip[$choix_couleur]['couleur_lien_off'];
 
+$attributes_body = "text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
+  ($spip_lang_rtl ? " dir='rtl'" : "");
+
 //
 // Gestion de version
 //

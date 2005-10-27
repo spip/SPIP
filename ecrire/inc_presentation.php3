@@ -1851,6 +1851,7 @@ function bouton($titre,$lien) {
 
 function debut_html($titre = "", $rubrique="") {
 
+	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 	$titre = textebrut(typo($titre));
@@ -1859,34 +1860,11 @@ function debut_html($titre = "", $rubrique="") {
 	echo debut_entete("[$nom_site_spip] $titre");
 	if (strpos($rubrique, 'script>'))
 	  echo  $rubrique, "\n";
-	envoi_link($nom_site_spip, $rubrique);
+	echo envoi_link($nom_site_spip, $rubrique);
 	// Fin des entetes
 	echo "\n</head>\n";
-	debut_body();
-}
-
-//
-// Presentation de l'interface privee, debut du HTML
-//
-
-function debut_body($onLoad="")
-{
-	global $couleur_lien, $couleur_lien_off;
-	global $mode, $spip_lang_rtl;
-	global $browser_name, $browser_rev;
-
-	echo "<body text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'";
-
-	if ($spip_lang_rtl)
-		echo " dir='rtl'";
-	//if ($mode == "wysiwyg") echo " onLoad='debut_editor();'";
-	echo " onLoad=\"setActiveStyleSheet('invisible'); ";
-
-	// Hack pour forcer largeur des formo/forml sous Mozilla >= 1.7
-	// meme principe que le behavior win_width.htc pour MSIE
-	if (eregi("mozilla", $browser_name) AND $browser_rev >= 1.7)
-		echo "verifForm();";
-	echo "$onLoad\">";
+	echo "<body $attributes_body
+	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm\">";
 }
 
 function envoi_link($nom_site_spip, $rubrique="")
@@ -1894,79 +1872,72 @@ function envoi_link($nom_site_spip, $rubrique="")
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $couleur_foncee, $couleur_claire;
 	$adresse_site=lire_meta("adresse_site");
+
+	$res = "";
 	if ($spip_display != 4) {
-		echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' />";
-		$activer_breves=lire_meta("activer_breves");
-		if ($activer_breves != "non")
-			echo "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' />";
+		$res .= "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' >\n";
+		if (lire_meta("activer_breves") != "non")
+			$res .= "\n<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' >\n";
 	}
-	
 
-	echo "\n",'<link rel="stylesheet" type="text/css" href="', _DIR_RESTREINT;
-	$link = new Link('spip_style.php3');
-	$link->addVar('couleur_claire', $couleur_claire);
-	$link->addVar('couleur_foncee', $couleur_foncee);
-	$link->addVar('left', $GLOBALS['spip_lang_left']);
-	echo $link->getUrl()."\">\n";
-
-	// Supprime pour l'instant: pas de creation mathml
-	// < script type="text/javascript" src="../mathmlinHTML.js"></script>
-	// Supprime pour l'instant: pas de detection des plugin
-	// < script type="text/javascript" src="js_detectplugins.js"></script>
-
-	debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, (lire_meta("activer_statistiques") != 'non'));
+	return $res .
+	  '<link rel="stylesheet" type="text/css" href="' .
+	  _DIR_RESTREINT .
+	  'spip_style.php3?couleur_claire=' .
+	  urlencode($couleur_claire) .
+	  '&amp;couleur_foncee=' .
+	  urlencode($couleur_foncee) .
+	  '&amp;left=' . 
+	  $GLOBALS['spip_lang_left'] .
+	  "\" >\n" .
+	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, (lire_meta("activer_statistiques") != 'non')) .
 
 	// CSS calendrier
-	echo '<link rel="stylesheet" href="', _DIR_RESTREINT, 'calendrier.css" type="text/css">', "\n";
+	  '<link rel="stylesheet" href="' . _DIR_RESTREINT . 'calendrier.css" type="text/css">' . "\n" .
 
 	// CSS imprimante (masque des trucs, a completer)
-	echo '<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_print.css" type="text/css" media="print">', "\n";
+	  '<link rel="stylesheet" href="' . _DIR_RESTREINT . 'spip_style_print.css" type="text/css" media="print">' . "\n" .
 
 	// CSS "visible au chargement", hack necessaire pour garder un depliement
 	// sympathique meme sans javascript (on exagere ?)
 	// Pour l'explication voir http://www.alistapart.com/articles/alternate/
-	echo '<link rel="alternate stylesheet" href="', _DIR_RESTREINT, 'spip_style_invisible.css" type="text/css" title="invisible" />', "\n",
-		'<link rel="stylesheet" href="', _DIR_RESTREINT, 'spip_style_visible.css" type="text/css" title="visible" />', "\n";
+	  '<link rel="alternate stylesheet" href="' . _DIR_RESTREINT . 'spip_style_invisible.css" type="text/css" title="invisible" >' . "\n" .
+	  '<link rel="stylesheet" href="' . _DIR_RESTREINT . 'spip_style_visible.css" type="text/css" title="visible" >' . "\n" . 
 
 	// favicon.ico
-	echo '<link rel="shortcut icon" href="', _DIR_IMG_PACK, 'favicon.ico" />', "\n";
+	  '<link rel="shortcut icon" href="' . _DIR_IMG_PACK . 'favicon.ico" >' . "\n";
 }
 
 function debut_javascript($admin, $stat)
 {
-	global $spip_lang_left;
-	global $browser_name, $browser_version;
+	global $spip_lang_left, $browser_name, $browser_version;
+	include_ecrire("inc_charsets.php3");
 
-	// envoi le fichier JS de config si browser ok.
-	echo $GLOBALS['browser_layer'];
-?>
-<script type='text/javascript'><!--
-	var admin = <?php echo ($admin ? 1 : 0) ?>;
-	var stat = <?php echo ($stat ? 1 : 0) ?>;
-	var largeur_icone = <?php echo largeur_icone_bandeau_principal(_T('icone_a_suivre')); ?>;
-	var  bug_offsetwidth = <?php 
+	return 
+		// envoi le fichier JS de config si browser ok.
+		$GLOBALS['browser_layer'] .
+		"<script type='text/javascript'><!--" .
+		"\nvar admin = " . ($admin ? 1 : 0) .
+		"\nvar stat = " . ($stat ? 1 : 0) .
+		"\nvar largeur_icone = " .
+		largeur_icone_bandeau_principal(_T('icone_a_suivre')) .
+		"\nvar  bug_offsetwidth = " .
 // uniquement affichage ltr: bug Mozilla dans offsetWidth quand ecran inverse!
-	  echo ((($spip_lang_left == "left") &&
+		((($spip_lang_left == "left") &&
 		 (($browser_name != "MSIE") ||
-		  ($browser_version >= 6))) ? 1 : 0) ?> ;
-
-	var confirm_changer_statut = '<?php include_ecrire("inc_charsets.php3"); echo unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))); ?>';
-
-<?php
+		  ($browser_version >= 6))) ? 1 : 0) .
+		"\nvar confirm_changer_statut = '" .
+		unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) . 
+		"';\n" .
 	# tester la capacite ajax si ce n'est pas deja fait
-	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
-?>
-	if (a = createXmlHttp()) {
-		a.open('GET', 'ajax_page.php?fonction=test_ajax', true);
+	  (($GLOBALS['_COOKIE']['spip_accepte_ajax'])  ? "" : (
+		"	if (a = createXmlHttp()) {
+		a.open('GET', 'ajax_page.php?fonction=test_ajax', true) .
 		a.send(null);
-	}
-<?php
-	}
-?>
+	}")) .
 
-//--></script>
-<?php
-	echo http_script('',_DIR_RESTREINT . 'presentation.js');
+		"\n//--></script>" .
+		http_script('',_DIR_RESTREINT . 'presentation.js');
 }
 
 // Fonctions onglets
@@ -2363,16 +2334,23 @@ function afficher_javascript ($html) {
 document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 }
 
+
+//
+// Presentation de l'interface privee, debut du HTML
+//
+
 function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
 
+	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 
 	// envoi des en-tetes, du doctype et du <head><title...
-	echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre)));
-	envoi_link($nom_site_spip, $rubrique);
-	echo "\n</head>\n";
-	debut_body($onLoad);
+	echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre))),
+	  envoi_link($nom_site_spip, $rubrique),
+	  "\n</head>\n",
+	  "<body $attributes_body
+	onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
 	init_body($rubrique, $sous_rubrique);
 }
 
