@@ -20,33 +20,6 @@ include_ecrire("inc_filtres.php3"); # pour les fonctions http_* (normalement dej
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
 
-
-function debut_entete($title, $entete='') {
-	global $flag_preserver;
-
-	if (headers_sent()) return;
-	if (!$charset = lire_meta('charset'))
-		$charset = 'utf-8';
-	if (!$entete)
-	  $entete = array("Content-Type: text/html; charset=$charset",
-			  "Expires: 0",
-			  "Last-Modified: " .gmdate("D, d M Y H:i:s"). " GMT",
-			  "Cache-Control: no-store, no-cache, must-revalidate",
-			  "Pragma: no-cache");
-	if (!$flag_preserver) array_map('header', $entete);
-	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
-	// il faudrait aussi pour Safari
-	// header("Cache-Control: post-check=0, pre-check=0", false)
-	// mais ca ne respecte pas
-	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
-	return "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n" .
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
-	  "<head>\n" .
-#	  "<base href='$base' />\n" .
-	  "<title>$title</title>\n";
-}
-
-
 //
 // Aide
 //
@@ -1848,7 +1821,7 @@ function bouton($titre,$lien) {
 	echo "</form>";
 }
 
-// point d'entree/hack pour spip-lab
+// point d'entree/hack pour spip-lab (duplication de debut_page)
 
 function debut_html($titre = "", $rubrique="") {
 
@@ -1857,8 +1830,11 @@ function debut_html($titre = "", $rubrique="") {
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 	$titre = textebrut(typo($titre));
 
-	// envoi des en-tetes, du doctype et du <head><title...
-	echo debut_entete("[$nom_site_spip] $titre");
+	http_no_cache();
+	echo _DOCTYPE_ECRIRE .
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n" .
+	  "<title>[$nom_site_spip] $titre</title>\n";
 	if (strpos($rubrique, 'script>'))
 	  echo  $rubrique, "\n";
 	echo envoi_link($nom_site_spip, $rubrique);
@@ -2340,15 +2316,24 @@ document.write(\"" . addslashes(strtr($html, "\n\r", "  "))."\")");
 // Presentation de l'interface privee, debut du HTML
 //
 
-function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "") {
+function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivre", $onLoad = "", $css="") {
 
 	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
 	if (!$nom_site_spip) $nom_site_spip="SPIP";
 
 	// envoi des en-tetes, du doctype et du <head><title...
-	echo debut_entete("[$nom_site_spip] " . textebrut(typo($titre))),
+	http_no_cache();
+	echo _DOCTYPE_ECRIRE .
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n" .
+	"<title>" .
+	"[$nom_site_spip] " .
+	textebrut(typo($titre)) .
+	"</title>\n" .
 	  envoi_link($nom_site_spip, $rubrique),
+	  (!$css ? "" :
+	   ('<link rel="stylesheet" href="' . addslashes($css) . '" type="text/css" />'. "\n")),
 	  "\n</head>\n",
 	  "<body $attributes_body
 	onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm$onLoad\">";
@@ -3418,7 +3403,12 @@ function install_debut_html($titre = 'AUTO') {
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
-	echo debut_entete($titre),
+	http_no_cache();
+	echo  _DOCTYPE_ECRIRE .
+	  "<html lang='".$GLOBALS['spip_lang'].
+	  "' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n" .
+	  "<title>$titre</title>\n" .
 	  '<link rel="stylesheet" type="text/css" href="' .
 	  _DIR_RESTREINT .
 	  'spip_style.php3?couleur_claire=' .
@@ -3430,9 +3420,11 @@ function install_debut_html($titre = 'AUTO') {
 	  "\" >
 </head>
 <body $attributes_body>
-<center><table width='450'><tr><th style='color: #970038; text-align: left'><h3>",
-	  $titre,
-	  "</h3></th></tr><tr><td  class='serif'>";
+<center><table style='margin-top:50px; width: 450px'>
+<tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>".
+	  $titre .
+	  "</th></tr>
+<tr><td  class='serif'>";
 }
 
 function install_fin_html() {

@@ -481,9 +481,13 @@ else {
 			erreur_aide_indisponible();
 		}
 	} else {
-		include_ecrire('inc_presentation.php3');
-		echo debut_entete(_T('info_aide_en_ligne'),
-				  array("Content-Type: text/html; charset=utf-8"));
+		header("Content-Type: text/html; charset=utf-8");
+		echo "<!DOCTYPE HTML PUBLIC 
+'-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>
+<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>
+<head>
+<title>$title</title>\n";
+
 		if ($frame == 'menu')
 			help_menu($aide, $html);
 		else if ($frame == 'body')
