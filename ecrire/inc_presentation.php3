@@ -1932,7 +1932,7 @@ function debut_javascript($admin, $stat)
 	# tester la capacite ajax si ce n'est pas deja fait
 	  (($GLOBALS['_COOKIE']['spip_accepte_ajax'])  ? "" : (
 		"	if (a = createXmlHttp()) {
-		a.open('GET', 'ajax_page.php?fonction=test_ajax', true) .
+		a.open('GET', 'ajax_page.php?fonction=test_ajax', true) ;
 		a.send(null);
 	}")) .
 
