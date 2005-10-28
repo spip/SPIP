@@ -24,6 +24,7 @@ utiliser_langue_visiteur();
 function debut_entete($title, $entete='') {
 	global $flag_preserver;
 
+	if (headers_sent()) return;
 	if (!$charset = lire_meta('charset'))
 		$charset = 'utf-8';
 	if (!$entete)
@@ -3412,55 +3413,31 @@ function mySel($varaut,$variable, $option = NULL) {
 //
 
 function install_debut_html($titre = 'AUTO') {
-	global $spip_lang_rtl;
+	global $attributes_body, $browser_verifForm;
 
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
 
 	echo debut_entete($titre),
-	  "<style type='text/css'>
-	<!--
-	a {text-decoration: none; }
-	A:Hover {color:#FF9900; text-decoration: underline;}
-	.forml {width: 100%; background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
-	.formo {width: 100%; background-color: #FFF0E0; background-position: center bottom; weight: bold; float: none; color: #000000}
-	.fondl {background-color: #FFCC66; background-position: center bottom; float: none; color: #000000}
-	.fondo {background-color: #FFF0E0; background-position: center bottom; float: none; color: #000000}
-	.fondf {background-color: #FFFFFF; border-style: solid ; border-width: 1; border-color: #E86519; color: #E86519}
-	.serif { font-family: Georgia, Garamond, Times New Roman, serif; }
-	-->
-	</style>
-	</head>
-	<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'";
-
-	if ($spip_lang_rtl) echo " dir='rtl'";
-
-	echo "><br><br><br>
-	<center>
-	<table width='450'>
-	<tr><td width='450' class='serif'>
-	<font face='Verdana,Arial,Sans,sans-serif' size='4' color='#970038'><B>$titre</b></font>\n<p>";
+	  '<link rel="stylesheet" type="text/css" href="' .
+	  _DIR_RESTREINT .
+	  'spip_style.php3?couleur_claire=' .
+	  urlencode('#FFCC66') .
+	  '&amp;couleur_foncee=' .
+	  urlencode('#000000') .
+	  '&amp;left=' . 
+	  $GLOBALS['spip_lang_left'] .
+	  "\" >
+</head>
+<body $attributes_body>
+<center><table width='450'><tr><th style='color: #970038; text-align: left'><h3>",
+	  $titre,
+	  "</h3></th></tr><tr><td  class='serif'>";
 }
 
-function install_fin_html($suite = '') {
+function install_fin_html() {
 
-	// bouton retour
-	global $spip_lang_right;
-	if ($suite) {
-		$link = new Link($suite);
-		echo $link->getForm();
-		echo "<DIV align='$spip_lang_right'>"
-		. "<INPUT TYPE='submit' CLASS='fondl'  VALUE='"
-		. _T('ecrire:bouton_suivant')." >>'></div>"
-		. "</FORM>";
-	}
-
-	echo '
-	</td></tr></table>
-	</center>
-	</body>
-	</html>
-	';
+	echo '</td></tr></table></body></html>';
 }
 
 // Voir en ligne, ou apercu, ou rien (renvoie tout le bloc)

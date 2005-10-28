@@ -69,43 +69,38 @@ while (list(, $my_dir) = each($test_dirs)) {
 }
 
 if ($bad_dirs OR $absent_dirs) {
-	install_debut_html();
 
 	if (!_FILE_CONNECT) {
 		$titre = _T('dirs_preliminaire');
-		$continuer = ' '._T('dirs_commencer');
+		$continuer = ' '._T('dirs_commencer') . '.';
 	} else
 		$titre = _T('dirs_probleme_droits');
 
 	$bad_url = "spip_test_dirs.php3";
 	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
 
-	echo "<FONT FACE=\"Verdana,Arial,Helvetica,sans-serif\" SIZE=3>$titre</FONT>\n<p>";
-	echo "<div align='right'>". menu_langues('var_lang_ecrire')."</div>\n";
+	$res = "<div align='right'>". menu_langues('var_lang_ecrire')."</div>\n";
 
 	if ($bad_dirs) {
-		echo "<p>";
-		echo _T('dirs_repertoires_suivants',
-			array('bad_dirs' => join(" ", $bad_dirs)));
-		echo "<B>". _T('login_recharger')."</b>";
+		$res .=
+		  _T('dirs_repertoires_suivants',
+			   array('bad_dirs' => join(" ", $bad_dirs))) .
+		  	"<b>". _T('login_recharger')."</b>.";
 	}
 
 	if ($absent_dirs) {
-		echo "<p>";
-		echo _T('dirs_repertoires_absents',
-			array('bad_dirs' => join(" ", $absent_dirs)));
-		echo "<B>". _T('login_recharger')."</b>";
+	  	$res .=
+			_T('dirs_repertoires_absents',
+			   array('bad_dirs' => join(" ", $absent_dirs))) .
+			"<b>". _T('login_recharger')."</b>.";
 	}
 
-	echo $continuer.'. ';
-	echo aide ("install0");
-	echo "<p>";
-
-	echo "<FORM ACTION='$bad_urls' METHOD='GET'>\n";
-	echo "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' VALUE='". _T('login_recharger')."'></DIV>";
-	echo "</FORM>";
-
-	install_fin_html();
+	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>" .
+	  "<FORM ACTION='$bad_urls' METHOD='GET'>\n" .
+	  "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' VALUE='". 
+	  _T('login_recharger')."'></DIV>" .
+	  "</FORM>";
+	install_debut_html($titre);echo $res;	install_fin_html();
 
 } else {
 	if (!_FILE_CONNECT)

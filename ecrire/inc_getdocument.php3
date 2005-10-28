@@ -105,6 +105,7 @@ function deplacer_fichier_upload($source, $dest) {
 // et true si erreur = pas de fichier
 // pour les autres erreurs affiche le message d'erreur et meurt
 function check_upload_error($error, $msg='') {
+	global $spip_lang_right;
 	switch ($error) {
 		case 0:
 			return false;
@@ -129,10 +130,16 @@ function check_upload_error($error, $msg='') {
 	spip_log ("erreur upload $error");
 
 	include_ecrire('inc_presentation.php3');
-	install_debut_html(_T('forum_titre_erreur'));
-	echo "<p>$msg</p>\n";
-
-	install_fin_html(_DIR_RESTREINT_ABS . $GLOBALS['redirect']);
+	install_debut_html($msg);
+	echo '<form action="' ,
+	  _DIR_RESTREINT_ABS,
+	  urldecode($GLOBALS['redirect']),
+	  '"><div align="',
+	  $spip_lang_right,
+	  '"><input type="submit" class="fondl"  value="',
+	  _T('ecrire:bouton_suivant'),
+	  ' >>"></div>',
+	  '</form></body></html>';
 	exit;
 }
 
