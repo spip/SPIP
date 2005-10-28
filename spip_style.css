@@ -113,6 +113,15 @@ blockquote.spip {
 	border: 1px #666666 solid;
 }
 
+.spip_sanscadre {
+	border: 0px;
+	font-weight: bold;
+}
+
+.spip_serif {
+	font-family: Georgia, Garamond, Times New Roman, serif;
+}
+
 .spip_cadre {
 	width : 95%;
 	background-color: #FFFFFF;
