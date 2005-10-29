@@ -112,7 +112,7 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 			if ($c == ($debut+1))
 				echo "<FONT SIZE=3><B>$c</B></FONT>";
 			else
-			  echo "<A alt='$date' title='$date' HREF='$script","debut=".($c-1)."'>$c</A>";
+			  echo "<A alt=\"$date\" title=\"$date\" HREF='$script","debut=".($c-1)."'>$c</A>";
 		}
 	}
 	return $where;
