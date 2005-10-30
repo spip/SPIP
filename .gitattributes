@@ -277,8 +277,11 @@ ecrire/inc_naviguer.php -text
 ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_image.php -text
 ecrire/inc_statistiques_repartition.php -text
+ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
+ecrire/lang/public_br.php3 -text
 ecrire/lang/public_ru.php3 -text
+ecrire/lang/spip_br.php3 -text
 ecrire/lang/spip_ru.php3 -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
