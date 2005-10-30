@@ -43,7 +43,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 // E
 'edition_mode_texte' => 'Metin &#351;eklinde de&#287;i&#351;tir',
 'en_reponse' => 'Yan&#305;tt&#305;r&nbsp;:',
-'en_resume' => '&Ouml;zetle',
+'en_resume' => '&Ouml;zet',
 'envoyer_message' => 'Bir ileti g&ouml;nder',
 'espace_prive' => '&Ouml;zel alan',
 
@@ -84,7 +84,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'page_precedente' => '&ouml;nceki sayfa',
 'page_suivante' => 'sonraki sayfa',
 'par_auteur' => 'taraf&#305;ndan ',
-'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. Sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir iletiyi hemen alacaks&#305;n&#305;z.',
+'participer_site' => 'Bu siteye katk&#305;da bulunabilir ve a&#351;a&#287;&#305;ya kay&#305;t olarak kendi makalelerinizi &ouml;nerebilirsiniz. An&#305;nda sitenin &ouml;zel alan&#305;na girmenizi sa&#287;layacak kodlar&#305; i&ccedil;eren bir iletiyi alabilirsiniz.',
 'plan_site' => 'Site plan&#305;',
 'popularite' => 'Pop&uuml;lerlik',
 'poster_message' => 'Bir ileti g&ouml;nder',
@@ -113,13 +113,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // T
-'texte_lettre_information' => 'Sitenin bilgi mektubu',
-'texte_lettre_information_2' => 'Bu mektup belirtilen tarihten beri eklenen makale ve k&#305;sa haberleri listeler :',
+'texte_lettre_information' => 'Sitenin bilgilendirme mektubu',
+'texte_lettre_information_2' => 'Bu mektup belirtilen tarihten beri eklenen makale ve k&#305;sa haberleri listeler',
 
 
 // V
 'ver_imprimer' => 'Bas&#305;lacak s&uuml;r&uuml;m',
-'voir_en_ligne' => '&Ccedil;evrimi&ccedil;i olarak g&ouml;r&uuml;nt&uuml;le'
+'voir_en_ligne' => '&Ccedil;evrimi&ccedil;i g&ouml;r&uuml;nt&uuml;le'
 
 );
 
