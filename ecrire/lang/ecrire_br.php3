@@ -19,7 +19,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_2' => 'Deuit en-dro d\'ar bajenn a-raok, ha gwiriit an titouro&ugrave; roet ganeoc\'h.',
 'avis_connexion_ldap_echec_3' => 'Bep eil tro, n\'implijit ket ar skor LDAP evit enporzhia&ntilde; implijourien.',
 'avis_conseil_selection_mot_cle' => '<b>Strollad pouezus&nbsp;:</b> kuzuliet start eo da zibab ur ger-alc\'hwez er strollad-ma&ntilde;.',
-'avis_deplacement_rubrique' => 'Diwallit&nbsp;! Er rummad-ma&ntilde; ez eus @contient_breves@ berrskrid@scb@&nbsp;: ma zilec\'hiit anezha&ntilde; kadarnait ama&ntilde;-dindan.',
+'avis_deplacement_rubrique' => 'Diwallit&nbsp;! Er rummad-ma&ntilde; ez eus @contient_breves@ berrskrid@scb@&nbsp;: kadarnait ama&ntilde;-dindan ma zilec\'hiit anezha&ntilde;.',
 'avis_destinataire_obligatoire' => 'Un degemerour a rankit diskleria&ntilde; a-raok kas ar c\'hemennadenn-ma&ntilde;.',
 'avis_erreur_connexion_mysql' => 'Fazi kennaska&ntilde; MySQL',
 'avis_erreur_version_archive' => '<b>Diwallit! Ar restr @archive@ a glot gant ur stumm all eus SPIP dishe&ntilde;vel eus an hini staliet ganeoc\'h.</b> Emaoc\'h o vont da zegouezhout dirak diaesamanto&ugrave; bras: riskl da zistruja&ntilde; ho tiaz titouro&ugrave;, drougplego&ugrave; a bep seurt el lec\'hienn, hag all. Arrabat gwiria&ntilde; ar goulenn emporzhiadur-ma&ntilde;.<p>Evit muioc\'h a ditouro&ugrave;, sellit ouzh <a href=\'http://www.spip.net/fr_article1489.html\'>diello&ugrave; SPIP</a>.',
@@ -104,7 +104,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cache_mode_compresse' => 'En doare gwaeget ema&ntilde; enrollet restro&ugrave; ar memoret.',
 'cache_mode_non_compresse' => 'Enrollet eo restro&ugrave; ar memroet, met ket en doare gwaeget.',
 'cache_modifiable_webmestre' => 'Gant webmestr al lec\'hienn e c\'hell an dilenn-se beza&ntilde; kemmet',
-'calendrier_synchro' => 'Ma implijit ur meziant deiziataer heglot gant <b>iCal<\b> e c\'hellit e adkenamzeria&ntilde; ouzh titouro&ugrave; al lec\'hienn-ma&ntilde;.',
+'calendrier_synchro' => 'Ma implijit ur meziant deiziataer heglot gant <b>iCal</b> e c\'hellit e adkenamzeria&ntilde; ouzh titouro&ugrave; al lec\'hienn-ma&ntilde;.',
 
 
 // D
@@ -116,6 +116,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'diff_texte_deplace' => 'Testenn dilec\'hiet',
 'diff_texte_supprime' => 'Testenn dilemet',
 'double_clic_inserer_doc' => 'Daouglikit evit ouzhpenna&ntilde; ar verradenn-ma&ntilde; en destenn',
+
 
 // E
 'email' => 'postel',
@@ -231,7 +232,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_ajout_participant' => 'Ouzhpennet eo bet ar perzhiad-ma&ntilde;&nbsp;:',
 'info_ajouter_rubrique' => 'Ouzhpenna&ntilde; ur rummad all da veza&ntilde; meret&nbsp;:',
 'info_annonce_nouveautes' => 'Kemenn an nevezinti',
-'info_annuler_blocage_priori' => 'Nulla&ntilde; an harz a-raok embann-ma&ntilde;',
+'info_annuler_blocage_priori' => '-vide-',
 'info_anterieur' => 'a-raok',
 'info_appliquer_choix_moderation' => 'Lakaat an dibab-ku&ntilde;vaat-ma&ntilde; e-pleustr&nbsp;:',
 'info_article' => 'pennad',
@@ -353,6 +354,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_identification_publique' => 'Ho anv foran...',
 'info_image_process' => 'Diuzit an hentenn gwella&ntilde; da sevel skeudennigo&ugrave; o klika&ntilde; war ar skeudenno&ugrave; a zere.',
 'info_image_process2' => '<b>N.B.</b> <i>Ma ne vez gwelet skeudenn ebet e talvez ne vez ket implijet binviji evit ober kement-se el lec\'h m\'ema&ntilde; bodet ho lec\'hienn. M\'ho peus c\'hoant da implijout ar servijo&ugrave;-se, kit e-darempred gant an dud e-karg, ha goulennit an astenno&ugrave; &laquo;GD&raquo; pe &laquo;Imagick&raquo;.</i>',
+'info_images_auto' => 'Skeudenno&ugrave; jedet hepken',
 'info_informations_personnelles' => 'Pempvet prantad : <B>Titouro&ugrave; hiniennel</B>',
 'info_inscription_automatique' => 'Enskrivadur emgefreek skridaozerien nevez.',
 'info_jeu_caractere' => 'Lizherennaoueg al lec\'hienn',
@@ -721,10 +723,14 @@ diskouezet en ul liv dishe&ntilde;vel, diouzh o stad&nbsp;:',
 'statut_admin_restreint' => '(merour strishaet)',
 'syndic_choix_moderation' => 'Petra ober gant al liammo&ugrave; a zeu a teuio ouzh al lec\'hienn-ma&ntilde;&nbsp;?',
 'syndic_choix_oublier' => 'Petra ober gant al liammo&ugrave; n\'emaint ket er restr-sindika&ntilde;&nbsp;?',
+'syndic_choix_resume' => 'Lec\'hienno&ugrave; \'zo a embann testenn a-bezh ar pennado&ugrave;. Pa vez hennezh da gaout, petra ho peus c\'hoant da zezastum&nbsp;?',
 'syndic_lien_obsolete' => 'liamm dibourvez',
 'syndic_option_miroir' => 'herzel anezho',
 'syndic_option_oubli' => 'diverka&ntilde; anezho (goude @mois@&nbsp;miz)',
+'syndic_option_resume_non' => 'pennad a-bezh ar pennado&ugrave; (er stumm HTML)',
+'syndic_option_resume_oui' => 'ur verradenn hepken (e stumm testenn)',
 'syndic_options' => 'Dilenno&ugrave; sindikadur&nbsp;:',
+
 
 // T
 'taille_cache_image' => '@taille@ eo ar skeudenno&ugrave; jedet gant SPIP (skeudennigo&ugrave; an teuliado&ugrave;, titlo&ugrave; skeudennaouet, fonksiono&ugrave; jedoniezh er stumm TeX,...) hag en teul @dir@  emaint.',
@@ -782,7 +788,7 @@ adstalia&ntilde; SPIP evit kroui&ntilde; un diaz-titouro&ugrave; nevez ha d\'an 
 'texte_demander_blocage_priori' => 'Harzet e vo al liammo&ugrave; o tont ouzh al lec\'hienn-ma&ntilde; a-raok embann.',
 'texte_descriptif_petition' => 'Diskrivadur ar sinadeg',
 'texte_descriptif_rapide' => 'Berr-ha-berr',
-'texte_documents_joints' => 'Gallout a rit aotrea&ntilde; ma vefe ouzhpennet restro&ugrave; (teuliado&ugrave;, skeudenno&ugrave;, liesmedia,...) d\ar pennado&ugrave; ha/pe d\'ar rummado&ugrave;.
+'texte_documents_joints' => 'Gallout a rit aotrea&ntilde; ma vefe ouzhpennet restro&ugrave; (teuliado&ugrave;, skeudenno&ugrave;, liesmedia,...) d\\ar pennado&ugrave; ha/pe d\'ar rummado&ugrave;.
 Ar re-se a c\'hell beza&ntilde; listennet er pennad, pe e-kichen.<p />',
 'texte_documents_joints_2' => 'Ne vir ket an dra-se da ziskouez skeudenno&ugrave; e-barzh ar pennad.',
 'texte_effacer_base' => 'Diverka&ntilde; diaz-titouro&ugrave; SPIP',
