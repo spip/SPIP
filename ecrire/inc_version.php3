@@ -509,6 +509,8 @@ if (!headers_sent())
 // Enregistrement des evenements
 //
 function spip_log($message, $logname='spip') {
+	static $compteur;
+	if ($compteur++ > 100) return;
 
 	$pid = '(pid '.@getmypid().')';
 	if (!$ip = $GLOBALS['REMOTE_ADDR']) $ip = '-';
