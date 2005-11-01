@@ -31,6 +31,6 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   '</title>
 <link rel="stylesheet" type="text/css" href="spip_style.css" />
 </head><body>';
-inclure_balise_dynamique(balise_formulaire_inscription_dyn($mode, $mail_inscription, $nom_inscription, $focus, $target));
+inclure_balise_dynamique(balise_formulaire_inscription_dyn($mode, $focus));
 echo "</body></html>";
 ?>
