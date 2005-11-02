@@ -1204,9 +1204,15 @@ function decal_couleur_122 ($coul, $val) {
 	else $y= $coul;
 	return $y;
 }
-function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
+//function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
+function image_sepia($im, $rgb = "896f5e")
 {
 	include_ecrire('inc_logos.php3');
+	
+	$couleurs = couleur_hex_to_dec($rgb);
+	$dr= $couleurs["red"];
+	$dv= $couleurs["green"];
+	$db= $couleurs["blue"];
 		
 	$image = valeurs_image_trans($im, "sepia-$dr-$dv-$db");
 	if (!$image) return("");
@@ -1247,6 +1253,148 @@ function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
 	if (strlen($style) > 1) $tags="$tags style='$style'";
 	
 	return "<img src='$dest'$tags />";
+}
+
+// A partir d'une image,
+// recupere une couleur
+// renvoit sous la forme hexadecimale ("F26C4E" par exemple).
+// Par defaut, la couleur choisie se trouve un peu au-dessus du centre de l'image.
+// On peut forcer un point en fixant $x et $y, entre 0 et 20.
+function couleur_extraire($img, $x=10, $y=6) {
+	$fichier = extraire_attribut($img, 'src');
+	if (strlen($fichier) < 1) $fichier = $img;
+
+	if (!file_exists($fichier)) return "F26C4E";
+
+	if (!$GLOBALS["couleur_extraite"]["$fichier-$x-$y"]) {	
+		if (file_exists($fichier)) {
+			list($width, $height) = getimagesize($fichier);
+		
+		
+			$newwidth = 20;
+			$newheight = 20;
+		
+			$thumb = imagecreate($newwidth, $newheight);
+
+			if (ereg("\.jpg", $fichier)) $source = imagecreatefromjpeg($fichier);
+			if (ereg("\.gif", $fichier)) $source = imagecreatefromgif($fichier);
+			if (ereg("\.png", $fichier)) $source = imagecreatefrompng($fichier);
+
+			imagecopyresized($thumb, $source, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+		
+			// get a color
+			$color_index = imagecolorat($thumb, $x, $y);
+			
+			// make it human readable
+			$color_tran = imagecolorsforindex($thumb, $color_index);
+			
+			$couleur = couleur_dec_to_hex($color_tran["red"], $color_tran["green"], $color_tran["blue"]);
+		}
+		else {
+			$couleur = "F26C4E";
+		}
+		$GLOBALS["couleur_extraite"]["$fichier"] = $couleur;
+	}
+	return $GLOBALS["couleur_extraite"]["$fichier"];
+}
+
+function couleur_dec_to_hex($red, $green, $blue) {
+	$red = dechex($red);
+	$green = dechex($green);
+	$blue = dechex($blue);
+	
+	if (strlen($red) == 1) $red = "0".$red;
+	if (strlen($green) == 1) $green = "0".$green;
+	if (strlen($blue) == 1) $blue = "0".$blue;
+	
+	return "$red$green$blue";
+}
+
+function couleur_hex_to_dec($couleur) {
+	$couleur = ereg_replace("^#","",$couleur);
+	$retour["red"] = hexdec(substr($couleur, 0, 2));
+	$retour["green"] = hexdec(substr($couleur, 2, 2));
+	$retour["blue"] = hexdec(substr($couleur, 4, 2));
+	
+	return $retour;
+}
+
+function couleur_extreme ($couleur) {
+	// force la couleur au noir ou au blanc le plus proche
+	// -> donc couleur foncee devient noire
+	//    et couleur claire devient blanche
+
+	$couleurs = couleur_hex_to_dec($couleur);
+	$red = $couleurs["red"];
+	$green = $couleurs["green"];
+	$blue = $couleurs["blue"];
+	
+	$moyenne = round(($red+$green+$blue)/3);
+
+	if ($moyenne > 122) $couleur_texte = "ffffff";
+	else $couleur_texte = "000000";
+
+	return $couleur_texte;
+}
+
+function couleur_inverser ($couleur) {
+	$couleurs = couleur_hex_to_dec($couleur);
+	$red = 255 - $couleurs["red"];
+	$green = 255 - $couleurs["green"];
+	$blue = 255 - $couleurs["blue"];
+
+	$couleur = couleur_dec_to_hex($red, $green, $blue);
+	
+	return $couleur;
+}
+
+function couleur_eclaircir ($couleur) {
+	$couleurs = couleur_hex_to_dec($couleur);
+
+	$red = $couleurs["red"] + round((255 - $couleurs["red"])/2);
+	$green = $couleurs["green"] + round((255 - $couleurs["green"])/2);
+	$blue = $couleurs["blue"] + round((255 - $couleurs["blue"])/2);
+
+	$couleur = couleur_dec_to_hex($red, $green, $blue);
+	
+	return $couleur;
+
+}
+function couleur_foncer ($couleur) {
+	$couleurs = couleur_hex_to_dec($couleur);
+
+	$red = $couleurs["red"] - round(($couleurs["red"])/2);
+	$green = $couleurs["green"] - round(($couleurs["green"])/2);
+	$blue = $couleurs["blue"] - round(($couleurs["blue"])/2);
+
+	$couleur = couleur_dec_to_hex($red, $green, $blue);
+	
+	return $couleur;
+}
+function couleur_foncer_si_claire ($couleur) {
+	// ne foncer que les couleurs claires
+	// utile pour ecrire sur fond blanc, 
+	// mais sans changer quand la couleur est deja foncee
+	$couleurs = couleur_hex_to_dec($couleur);
+	$red = $couleurs["red"];
+	$green = $couleurs["green"];
+	$blue = $couleurs["blue"];
+	
+	$moyenne = round(($red+$green+$blue)/3);
+	
+	if ($moyenne > 122) return couleur_foncer($couleur);
+	else return $couleur;
+}
+function couleur_eclaircir_si_foncee ($couleur) {
+	$couleurs = couleur_hex_to_dec($couleur);
+	$red = $couleurs["red"];
+	$green = $couleurs["green"];
+	$blue = $couleurs["blue"];
+	
+	$moyenne = round(($red+$green+$blue)/3);
+	
+	if ($moyenne < 123) return couleur_eclaircir($couleur);
+	else return $couleur;
 }
 
 
