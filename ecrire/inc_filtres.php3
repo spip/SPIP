@@ -1104,6 +1104,61 @@ function image_gamma($im, $gamma = 0)
 }
 
 
+// Passe l'image en "sepia"
+// On peut fixer les valeurs RVB 
+// de la couleur "complementaire" pour forcer une dominante
+
+function decal_couleur_122 ($coul, $val) {
+	if ($coul < 122) $y = round((($coul - 122) / 122) * $val) + $val;
+	else if ($coul >= 122) $y = round((($coul - 122) / 123) * (255-$val)) + $val;
+	else $y= $coul;
+	return $y;
+}
+function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
+{
+	include_ecrire('inc_logos.php3');
+		
+	$image = valeurs_image_trans($im, "sepia-$dr-$dv-$db");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im_ = $image["fonction_imagecreatefrom"]($im);
+		imagetruecolortopalette($im_, false, 256);
+
+		for($a=0; $a<imagecolorstotal ($im_); $a++)
+		{
+			$color = ImageColorsForIndex($im_,$a);
+
+			$R=.299 * ($color['red'])+ .587 * ($color['green'])+ .114 * ($color['blue']);
+			$G = $R;
+			$B = $R;
+
+			$R= decal_couleur_122($R, $dr);
+			$G= decal_couleur_122($G, $dv);
+			$B= decal_couleur_122($B, $db);
+						
+			ImageColorSet($im_, $a, $R, $G, $B);
+		}
+
+		$image["fonction_image"]($im_, "$dest");
+	}
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+
 
 
 //
