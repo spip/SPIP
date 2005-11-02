@@ -1228,7 +1228,7 @@ function image_sepia($im, $rgb = "896f5e")
 	
 	$creer = $image["creer"];
 	
-	if ($creer OR 1==1) {
+	if ($creer) {
 		$im_ = $image["fonction_imagecreatefrom"]($im);
 		imagetruecolortopalette($im_, true, 256);
 
