@@ -893,6 +893,219 @@ function hauteur($img) {
 	return $h;
 }
 
+
+
+// Fonctions de traitement d'image
+// uniquement pour GD2
+function valeurs_image_trans($img, $effet) {
+	include_ecrire("inc_logos.php3");
+	
+	$fichier = extraire_attribut($img, 'src');
+	if (strlen($fichier) < 1) $fichier = $img;
+	
+	$class = extraire_attribut($img, 'class');
+	$alt = extraire_attribut($img, 'alt');
+	$style = extraire_attribut($img, 'style');
+	
+
+	if (ereg("\.(gif|jpg|png)$", $fichier, $regs)) {
+		$terminaison = $regs[1];
+	}
+	$nom_fichier = substr($fichier, 0, strlen($fichier) - 4);
+	$fichier_dest = "$nom_fichier-$effet.$terminaison";
+	
+	$term_fonction = $terminaison;
+	if ($term_fonction == "jpg") $term_fonction = "jpeg";
+	
+	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
+	$fonction_image = "image".$term_fonction;
+	
+	$largeur = largeur($img);
+	$hauteur = hauteur($img);
+	
+	$creer = true;
+	if (@filemtime($fichier) < @filemtime($fichier_dest)) {
+		$creer = false;
+	}
+	
+	$ret["largeur"] = $largeur;
+	$ret["hauteur"] = $hauteur;
+	$ret["fichier"] = $fichier;
+	$ret["fonction_imagecreatefrom"] = $fonction_imagecreatefrom;
+	$ret["fonction_image"] = $fonction_image;
+	$ret["fichier_dest"] = $fichier_dest;
+	$ret["creer"] = $creer;
+	$ret["class"] = $class;
+	$ret["alt"] = $alt;
+	$ret["style"] = $style;
+	return $ret;
+
+}
+
+
+function image_flip_vertical($im)
+{
+	include_ecrire('inc_logos.php3');
+	
+	$image = valeurs_image_trans($im, "flip_v");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+	
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y = 0; $y < $y_i; $y++) {
+				imagecopy($im_, $im, $x_i - $x - 1, $y, $x, $y, 1, 1);
+			}
+		}
+		$image["fonction_image"]($im_, "$dest");
+	}
+	
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+function image_flip_horizontal($im)
+{
+	include_ecrire('inc_logos.php3');
+	
+	$image = valeurs_image_trans($im, "flip_h");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im_ = imagecreatetruecolor($x_i, $y_i);
+	
+		for ($x = 0; $x < $x_i; $x++) {
+			for ($y = 0; $y < $y_i; $y++) {
+   		imagecopy($im_, $im, $x, $y_i - $y - 1, $x, $y, 1, 1);
+			}
+		}
+		$image["fonction_image"]($im_, "$dest");
+	}
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+
+function image_nb($im)
+{
+	include_ecrire('inc_logos.php3');
+	
+	$image = valeurs_image_trans($im, "nb");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im_ = $image["fonction_imagecreatefrom"]($im);
+		imagetruecolortopalette($im_, false, 256);
+
+		for($a=0; $a<imagecolorstotal ($im_); $a++)
+		{
+			$color = ImageColorsForIndex($im_,$a);
+			$R=.299 * ($color['red'])+ .587 * ($color['green'])+ .114 * ($color['blue']);
+						
+			ImageColorSet($im_, $a, $R, $R, $R);
+		}
+
+		$image["fonction_image"]($im_, "$dest");
+	}
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+
+
+function decal_couleur($coul, $gamma) {
+	$coul = $coul + $gamma;
+	
+	if ($coul > 255) $coul = 255;
+	if ($coul < 0) $coul = 0;
+	return $coul;
+}
+
+// Permet de rendre une image
+// plus claire (gamma > 0)
+// ou plus foncee (gamma < 0)
+// attention: passe l'image en 256 couleurs!
+function image_gamma($im, $gamma = 0)
+{
+	include_ecrire('inc_logos.php3');
+	
+	$image = valeurs_image_trans($im, "gamma-$gamma");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		$im_ = $image["fonction_imagecreatefrom"]($im);
+		imagetruecolortopalette($im_, false, 256);
+
+		for($a=0; $a<imagecolorstotal ($im_); $a++)
+		{
+			$color = ImageColorsForIndex($im_,$a);
+			$R= decal_couleur($color['red'], $gamma);
+			$G= decal_couleur($color['green'], $gamma);
+			$B= decal_couleur($color['blue'], $gamma);
+						
+			ImageColorSet($im_, $a, $R, $G, $B);
+		}
+
+		$image["fonction_image"]($im_, "$dest");
+	}
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+	$style = $image["style"];
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+
+
+
 //
 // Cree au besoin la copie locale d'un fichier distant
 // mode = 'test' - ne faire que tester
