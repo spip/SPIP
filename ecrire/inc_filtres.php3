@@ -1202,6 +1202,9 @@ function decal_couleur_122 ($coul, $val) {
 	if ($coul < 122) $y = round((($coul - 122) / 122) * $val) + $val;
 	else if ($coul >= 122) $y = round((($coul - 122) / 123) * (255-$val)) + $val;
 	else $y= $coul;
+	
+	if ($y < 0) $y = 0;
+	if ($y > 255) $y = 255;
 	return $y;
 }
 //function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
@@ -1225,7 +1228,7 @@ function image_sepia($im, $rgb = "896f5e")
 	
 	$creer = $image["creer"];
 	
-	if ($creer) {
+	if ($creer OR 1==1) {
 		$im_ = $image["fonction_imagecreatefrom"]($im);
 		imagetruecolortopalette($im_, true, 256);
 
@@ -1233,7 +1236,7 @@ function image_sepia($im, $rgb = "896f5e")
 		{
 			$color = ImageColorsForIndex($im_,$a);
 
-			$R=.299 * ($color['red'])+ .587 * ($color['green'])+ .114 * ($color['blue']);
+			$R= round(.299 * ($color['red'])+ .587 * ($color['green'])+ .114 * ($color['blue']));
 			$G = $R;
 			$B = $R;
 
