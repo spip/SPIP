@@ -129,9 +129,8 @@ function check_upload_error($error, $msg='') {
 
 	spip_log ("erreur upload $error");
 
-	include_ecrire('inc_presentation.php3');
-	install_debut_html($msg);
-	echo '<form action="' ,
+	include_ecrire('inc_minipres.php');
+	install_debut_html($msg); echo '<form action="' ,
 	  _DIR_RESTREINT_ABS,
 	  urldecode($GLOBALS['redirect']),
 	  '"><div align="',
@@ -140,6 +139,7 @@ function check_upload_error($error, $msg='') {
 	  _T('ecrire:bouton_suivant'),
 	  ' >>"></div>',
 	  '</form></body></html>';
+	install_fin_html();
 	exit;
 }
 
@@ -510,9 +510,8 @@ function afficher_compactes($fichiers, $args, $action) {
 // presenter une interface pour choisir si fichier joint ou decompacte
 // passer ca en squelette un de ces jours.
 
-	include_ecrire ("inc_presentation.php3");
-	install_debut_html(_T('upload_fichier_zip'));
-	echo "<p>",
+	include_ecrire ("inc_minipres.php");
+	install_debut_html(_T('upload_fichier_zip')); echo "<p>",
 		_T('upload_fichier_zip_texte'),
 		"</p>",
 		"<p>",

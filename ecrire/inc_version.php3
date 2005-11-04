@@ -83,14 +83,14 @@ function spip_register_globals() {
 
 	// Liste des variables dont on refuse qu'elles puissent provenir du client
 	$refuse_gpc = array (
-		# inc-public.php3
+		# inc-public
 		'fond', 'delais',
 
-		# ecrire/inc_auth.php3
+		# ecrire/inc_auth
 		'REMOTE_USER',
 		'PHP_AUTH_USER', 'PHP_AUTH_PW',
 
-		# ecrire/inc_texte.php3
+		# ecrire/inc_texte
 		'debut_intertitre', 'fin_intertitre', 'ligne_horizontale',
 		'ouvre_ref', 'ferme_ref', 'ouvre_note', 'ferme_note',
 		'les_notes', 'compt_note', 'nombre_surligne',
@@ -100,7 +100,7 @@ function spip_register_globals() {
 	// Liste des variables (contexte) dont on refuse qu'elles soient cookie
 	// (histoire que personne ne vienne fausser le cache)
 	$refuse_c = array (
-		# inc-calcul.php3
+		# inc-calcul
 		'id_parent', 'id_rubrique', 'id_article',
 		'id_auteur', 'id_breve', 'id_forum', 'id_secteur',
 		'id_syndic', 'id_syndic_article', 'id_mot', 'id_groupe',
@@ -1022,9 +1022,8 @@ OR defined('_ECRIRE_AIDE'))) {
 		define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 		define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 		$db_ok = false;
-		include_ecrire ("inc_presentation.php3");
-		install_debut_html(_T('info_travaux_titre'));
-		echo "<p>"._T('info_travaux_texte')."</p>";
+		include_ecrire ("inc_minipres.php");
+		install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
 		install_fin_html();
 		exit;
 	}

@@ -27,9 +27,8 @@ function debut_admin($action, $commentaire='') {
 	global $connect_statut;
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
-		include_ecrire ("inc_presentation.php3");
-		install_debut_html(_T('info_acces_refuse'));
-		install_fin_html();
+		include_ecrire ("inc_minipre.php3");
+		install_debut_html(_T('info_acces_refuse'));install_fin_html();
 		exit;
 	}
 	$fichier = fichier_admin($action);
@@ -38,7 +37,7 @@ function debut_admin($action, $commentaire='') {
 		return true;
 	}
 
-	include_ecrire ("inc_presentation.php3");
+	include_ecrire ("inc_minipres.php");
 	install_debut_html(_T('info_action', array('action' => $action)));
 
 	if ($commentaire) {

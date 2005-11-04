@@ -104,9 +104,9 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 			$email = $row_auteur['email'];
 	
 	
-			$logo_statut = "puce-".puce_statut($statut).".gif";
 
 			if (!$rss) {
+				$logo_statut = "puce-".puce_statut($statut).".gif";
 				echo "<div class='tr_liste' style='padding: 5px; border-top: 1px solid #aaaaaa;'>";
 	
 				echo "<span class='arial2'>";

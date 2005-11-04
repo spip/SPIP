@@ -15,7 +15,7 @@ if (defined("_ECRIRE_INSTALL")) return;
 define("_ECRIRE_INSTALL", "1");
 
 include ("inc_version.php3");
-include_ecrire ("inc_presentation.php3");
+include_ecrire ("inc_minipres.php");
 
 
 //

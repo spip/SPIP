@@ -186,7 +186,6 @@ function rss_suivi_versions($a) {
 	include_ecrire("inc_suivi_revisions.php");
 	include_ecrire("lab_revisions.php");
 	include_ecrire("lab_diff.php");
-	include_ecrire("inc_presentation.php3");
 	$rss = afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
 	return $rss;
 }
