@@ -20,8 +20,6 @@ include_ecrire("inc_filtres.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_calendrier.php");
-include_ecrire ("inc_rubriques.php3");
 
 // prendre $var_* comme variables pour eviter les conflits avec les http_vars
 

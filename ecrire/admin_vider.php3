@@ -21,8 +21,6 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_layer.php3");
 include_ecrire("inc_rubriques.php3");
 
-include_ecrire ("inc_admin.php3");
-
 debut_page(_T('onglet_vider_cache'), "administration", "cache");
 
 
