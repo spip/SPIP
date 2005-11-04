@@ -6,7 +6,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
-'accueil_site' => 'Site giri&#351;i',
+'accueil_site' => 'Ana sayfa',
 'articles' => 'Makaleler',
 'articles_auteur' => 'Bu yazar&#305;n makaleleri',
 'articles_populaires' => 'En pop&uuml;ler makaleler',
