@@ -92,13 +92,13 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 
 	if ($supprimer)
 		$controle .= icone(_T('icone_supprimer_message'), 
-			$action ."&amp;statut=$supprimer&amp;redirect=$link",
+			$action ."&amp;statut=$supprimer&amp;redirect=$ulink",
 			$logo,
 			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
 		$controle .= icone(_T('icone_valider_message'), 
-			$action ."&amp;statut=$valider&amp;redirect=$link",
+			$action ."&amp;statut=$valider&amp;redirect=$ulink",
 			$logo,
 			"creer.gif", 'right', 'non');
 

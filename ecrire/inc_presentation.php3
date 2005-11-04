@@ -3213,19 +3213,13 @@ function debut_droite($rubrique="") {
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
 						$nb_liberer ++;
-						$lien = new Link;
-						$lien->addVar('debloquer_article', $ze_article);
-						echo "<div class='arial1' style='text-align:right;'><a href='". $lien->getUrl() ."' title='"._T('lien_liberer')."'>"._T('lien_liberer')."&nbsp;" .
-						  http_img_pack("croix-rouge.gif", "X", "width='7' height='7' border='0' align='middle'") . "</a></div>";
+						echo "<div class='arial1' style='text-align:right;'>", debloquer_article($ze_article,_T('lien_liberer')), "</div>";
 					}
 				
 					echo "</div>";
 				}
 				if ($nb_liberer >= 4) {
-					$lien = new Link;
-					$lien->addVar('debloquer_article', 'tous');
-					echo "<div class='arial2' style='text-align:right; padding:2px; border-top: 1px solid $couleur_foncee;'><a href='". $lien->getUrl() ."'>"._T('lien_liberer_tous')."&nbsp;" .
-					  http_img_pack("croix-rouge.gif", "", "width='7' height='7' border='0' align='middle'") ."</a></div>";
+				  echo "<div class='arial2' style='text-align:right;'>", debloquer_article('tous',_T('lien_liberer_tous')), "</div>";
 				}
 				//echo "</font>";
 				fin_cadre_enfonce();
@@ -3306,6 +3300,21 @@ function fin_page($credits='') {
 	fin_html();
 }
 
+function debloquer_article($arg, $texte)
+{
+	$lien = new Link;
+	$lien->addVar('debloquer_article', $arg);
+	return "<a href='iframe_action.php3?action=articles_page&amp;id=" .
+	  $arg .
+	  "&amp;redirect=" .
+	  urlencode($lien->getUrl()) .
+	  "' title='" .
+	  addslashes($texte) .
+	  "'>$texte&nbsp;" .
+	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
+			"width='7' height='7' border='0' align='middle'") .
+	  "</a>";
+}
 
 //
 // Afficher la hierarchie des rubriques
