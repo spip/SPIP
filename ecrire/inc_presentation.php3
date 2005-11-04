@@ -1619,7 +1619,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 // Afficher les forums
 //
 
-function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
+function afficher_forum($request, $adresse_retour, $controle_id_article = false) {
 	global $debut;
 	static $compteur_forum;
 	static $nb_forum;
@@ -1740,7 +1740,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = 0) {
 			}
 
 			// boutons de moderation
-			if ($controle_id_article && is_int($controle_id_article))
+			if ($controle_id_article && is_numeric($controle_id_article))
 				echo boutons_controle_forum($id_forum, $statut, $id_auteur, "id_article=$controle_id_article", $ip);
 
 			echo safehtml(justifier(propre($texte)));
@@ -2375,7 +2375,7 @@ if ($spip_display == "4") {
 	echo "<ul>";
 	echo "<li><a href=\"index.php3\">"._T('icone_a_suivre')."</a>";
 	echo "<li><a href=\"naviguer.php3\">"._T('icone_edition_site')."</a>";
-	echo "<li><a href=\"forum.php3\">"._T('titre_forum')."</a>";
+	echo "<li><a href=\"forum_admin.php3\">"._T('titre_forum')."</a>";
 	echo "<li><a href=\"auteurs.php3\">"._T('icone_auteurs')."</a>";
 	echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
 	echo "</ul>";
@@ -2397,7 +2397,7 @@ else {
 
 	icone_bandeau_principal (_T('icone_a_suivre'), "index.php3", "asuivre-48.png", "asuivre", $rubrique, "", "asuivre", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
-	icone_bandeau_principal (_T('titre_forum'), "forum.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
+	icone_bandeau_principal (_T('titre_forum'), "forum_admin.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
 	if ($connect_statut == "0minirezo"  AND lire_meta("activer_statistiques") != 'non') {
 		//bandeau_barre_verticale();
@@ -2500,7 +2500,7 @@ else {
 		}
 
 			echo "<div class='$class' id='bandeauredacteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-				if (lire_meta('forum_prive_admin') == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3", "forum-admin-24.gif", "privadm", $sous_rubrique);
+				if (lire_meta('forum_prive_admin') == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3?admin=admin", "forum-admin-24.gif", "privadm", $sous_rubrique);
 
 				icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "suivi-petition-24.gif", "suivi-petition", $sous_rubrique);

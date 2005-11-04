@@ -16,92 +16,18 @@
 if (defined("_ECRIRE_INC_FORUM")) return;
 define("_ECRIRE_INC_FORUM", "1");
 
-
-//
-// Suppression de forums
-//
-function changer_statut_forum($id_forum, $statut) {
-	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum");
-
-	if (!($row = spip_fetch_array($result)))
-		return;
-
-	$id_parent = $row['id_parent'];
-
-	// invalider les pages comportant ce forum
-	include_ecrire('inc_invalideur.php3');
-	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
-	suivre_invalideur("id='id_forum/$index_forum'");
-
-	// Signaler au moteur de recherche qu'il faut reindexer le thread
-	if ($id_parent) {
-		include_ecrire('inc_index.php3');
-		marquer_indexer ('forum', $id_parent);
-	}
-
-	// changer le statut de toute l'arborescence dependant de ce message
-	$id_messages = array($id_forum);
-	while ($id_messages) {
-		$id_messages = join(',', $id_messages);
-		$query_forum = "UPDATE spip_forum SET statut='$statut'
-		WHERE id_forum IN ($id_messages)";
-		$result_forum = spip_query($query_forum);
-		$query_forum = "SELECT id_forum FROM spip_forum
-		WHERE id_parent IN ($id_messages)";
-		$result_forum = spip_query($query_forum);
-		unset($id_messages);
-		while ($row = spip_fetch_array($result_forum))
-			$id_messages[] = $row['id_forum'];
-	}
-}
-
-function controler_statut_forum ($controle_forum, $id_controle_forum) {
-	// Verifier qu'on a le droit d'agir sur ce forum
-	global $connect_toutes_rubriques, $connect_statut;
-	$ok = ($connect_statut == "0minirezo" AND $connect_toutes_rubriques);
-	if (!$ok) return;
-
-	// Que faut-il faire ?
-	switch($controle_forum) {
-		case 'supp_forum':
-			$statut = 'off';
-			break;
-		case 'supp_forum_priv':
-			$statut = 'privoff';
-			break;
-		case 'valid_forum':
-			$statut = 'publie';
-			break;
-		// nb : les forums prives (privrac ou prive), une fois effaces
-		// (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
-		// n'est pas effacable
-	}
-	changer_statut_forum($id_controle_forum, $statut);
-	return $statut;
-}
-
-// Installer un bouton de moderation dans l'espace prive
-function controle_cache_forum($action, $id, $texte, $fond, $fonction, $but='') {
-	$link = new Link();
-
-	$link->addvar('controle_forum', $action);
-	$link->addvar('id_controle_forum', $id);
-	$link = $link->geturl() . "#id$id";
-
-	if ($but)
-		$link = $but . "&retour=ecrire/" . urlencode($link);
-
-	return icone($texte,
-		$link,
-		$fond,
-		$fonction,
-		"right",
-		'non');
-}
-
 // tous les boutons de controle d'un forum
+// nb : les forums prives (privrac ou prive), une fois effaces
+// (privoff), ne sont pas revalidables ; le forum d'admin (privadm)
+// n'est pas effacable
+
 function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref, $forum_ip) {
 	$controle = '';
+
+	$link = new Link();
+	$link = $link->geturl() . "#id$id_forum";
+	$ulink = urlencode($link);
+	$action = "iframe_action.php3?action=forum_admin&amp;id=$id_forum";
 
 	// selection du logo et des boutons correspondant a l'etat du forum
 	switch ($forum_stat) {
@@ -110,7 +36,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-interne-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = 'supp_forum_priv';
+			$supprimer = 'privoff';
 			break;
 		# forum des administrateurs
 		case "privadmin":
@@ -132,7 +58,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-interne-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = 'supp_forum_priv';
+			$supprimer = 'privoff';
 			break;
 
 		# forum publie sur le site public
@@ -140,57 +66,52 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$logo = "forum-public-24.gif";
 			$valider = false;
 			$valider_repondre = false;
-			$supprimer = 'supp_forum';
+			$supprimer = 'off';
 			break;
 		# forum supprime sur le site public
 		case "off":
 			$logo = "forum-public-24.gif";
-			$valider = 'valid_forum';
+			$valider = 'publie';
 			$valider_repondre = false;
 			$supprimer = false;
-			$message = "<BR><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
+			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 			if($forum_id_auteur)
-				$message .= " - <A HREF='auteurs_edit.php3?id_auteur="
+				$controle .= " - <A HREF='auteurs_edit.php3?id_auteur="
 				.$forum_id_auteur."'>" ._T('lien_voir_auteur'). "</A>";
 			break;
 		# forum propose (a moderer) sur le site public
 		case "prop":
 			$logo = "forum-public-24.gif";
-			$valider = 'valid_forum';
+			$valider = 'publie';
 			$valider_repondre = true;
-			$supprimer = 'supp_forum';
+			$supprimer = 'off';
 			break;
 		default:
 			return;
 	}
 
-	if ($message)
-		$controle .= $message;
-
 	if ($supprimer)
-		$controle .= controle_cache_forum($supprimer,
-			$id_forum,
-			_T('icone_supprimer_message'), 
+		$controle .= icone(_T('icone_supprimer_message'), 
+			$action ."&amp;statut=$supprimer&amp;redirect=$link",
 			$logo,
-			"supprimer.gif");
+			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
-		$controle .= controle_cache_forum($valider,
-			$id_forum,
-			_T('icone_valider_message'), 
+		$controle .= icone(_T('icone_valider_message'), 
+			$action ."&amp;statut=$valider&amp;redirect=$link",
 			$logo,
-			"creer.gif");
+			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
 
-		$controle .= controle_cache_forum($valider,
-			$id_forum,
-			_T('icone_valider_message') . " &amp; " .
-			_T('lien_repondre_message'),
-			$logo,
-			"creer.gif",
-			"../forum.php3?$ref&id_forum=$id_forum"
-		);
+		$retour = urlencode("../forum.php3?$ref&id_forum=$id_forum&retour=" .
+			      urlencode(_DIR_RESTREINT_ABS . $link));
+		$controle .= icone(_T('icone_valider_message') 
+				   . " &amp; " .
+				   _T('lien_repondre_message'),
+				   $action ."&amp;statut=$valider&amp;redirect=$retour",
+				   $logo,
+				   "creer.gif", 'right', 'non');
 	}
 
 	return $controle;
@@ -300,7 +221,7 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 			return generer_url_site($id)."#forum$id_forum";
 			break;
 		default:
-			return "forum.php3?id_forum=".$id_forum;
+			return "forum_admin.php3?id_forum=".$id_forum;
 	}
 }
 

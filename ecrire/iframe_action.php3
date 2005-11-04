@@ -13,19 +13,23 @@
 include ("inc_version.php3");
 include_ecrire("inc_auth.php3");
 
-@header("Cache-Control: no-store, no-cache, must-revalidate");
-echo "";
-
 if ($id && ($connect_statut == "0minirezo")) {
 
-	$nom = "inc_" . $action . ".php";
-	$f = find_in_path($nom);
-	if ($f) 
-	  include($f);
-	elseif (file_exists($f = (_DIR_INCLUDE . $nom)))
-	  include($f);
-	$nom = 'changer_statut_' . $action;
-	if (function_exists($nom))
-		$nom($id, $statut);
+	$var_f = find_in_path('inc_' . $action . '.php');
+	if ($var_f) 
+	  include($var_f);
+	elseif (is_readable($var_f = (_DIR_INCLUDE . 'inc_' . $action . '.php')))
+	  include($var_f);
+	else spip_log("pas de fichier $var_f");
+	$var_nom = 'changer_statut_' . $action;
+	if (function_exists($var_nom))
+		$var_nom($id, $statut);
+	else spip_log("fonction $var_nom indisponible dans $var_f");
  }
+
+if (!$redirect)
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+else
+	header("Location: " . urldecode($redirect));
+
 ?>
