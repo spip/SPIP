@@ -2003,5 +2003,17 @@ function microformat2enclosure($tags) {
 	}
 	return join("\n", $enclosures);
 }
+// Creer les elements ATOM <dc:subject> a partir des tags
+function tags2dcsubject($tags) {
+	$subjects = '';
+	foreach (extraire_tags($tags) as $e) {
+		if (extraire_attribut($e, rel) == 'tag') {
+			$subjects .= '<dc:subject>'
+				. texte_backend(textebrut($e))
+				. '</dc:subject>'."\n";
+		}
+	}
+	return $subjects;
+}
 
 ?>
