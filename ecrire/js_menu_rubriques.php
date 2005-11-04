@@ -11,7 +11,15 @@
 \***************************************************************************/
 
 
-include_once("inc.php3");
+
+include ("inc.php3");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_calendrier.php");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_filtres.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_layer.php3");
+include_ecrire("inc_rubriques.php3");
 
 if (http_last_modified(@filemtime("js_menu_rubriques.php"), time() + 24 * 3600)) 
 	exit;

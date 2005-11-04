@@ -11,11 +11,8 @@
 \***************************************************************************/
 
 
-include ("inc_version.php3");
-
-
-include_ecrire ("inc_auth.php3");
-include_ecrire ("inc_admin.php3");
+$reinstall = 'non';
+include ("inc.php3");
 
 $action = _T('texte_unpack');
 

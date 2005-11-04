@@ -11,16 +11,14 @@
 \***************************************************************************/
 
 
-include ("inc_version.php3");
+if (!isset($reinstall)) $reinstall = 'non';
+include ("inc.php3");
 
 if (!_FILE_CONNECT) {
 	Header("Location: install.php3");
 	exit;
  }
 
-include_ecrire ("inc_auth.php3");
-include_ecrire ("inc_admin.php3");
-include_ecrire ("inc_minipres.php");
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
