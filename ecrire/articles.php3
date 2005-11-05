@@ -12,20 +12,7 @@
 
 
 include ("inc.php3");
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_calendrier.php");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_layer.php3");
-include_ecrire("inc_rubriques.php3");
 
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_date.php3");
-include_ecrire ("inc_documents.php3");
-include_ecrire ("inc_forum.php3");
-include_ecrire ("inc_abstract_sql.php3");
 $var_f = find_in_path("inc_articles.php");
 include($var_f ? $var_f : (_DIR_INCLUDE . "inc_articles.php"));
 

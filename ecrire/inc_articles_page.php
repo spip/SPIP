@@ -10,6 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
 
 function articles_page_dist($id_auteur)
 {

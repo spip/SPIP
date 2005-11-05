@@ -10,11 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_FORUM_ADMIN")) return;
-define("_ECRIRE_INC_FORUM_ADMIN", "1");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
 
 function liste_numeros_forum($urlforum, $debut, $total)
 {

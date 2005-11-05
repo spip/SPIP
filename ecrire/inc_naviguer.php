@@ -1,11 +1,24 @@
 <?php
 
-include_ecrire('inc_forum.php3');
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_documents.php3");
-include_ecrire ("inc_abstract_sql.php3");
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
 
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
+include_ecrire('inc_forum.php3');
+include_ecrire("inc_logos.php3");
+include_ecrire("inc_mots.php3");
+include_ecrire("inc_documents.php3");
+include_ecrire("inc_abstract_sql.php3");
 
 function naviguer_dist($action)
 {

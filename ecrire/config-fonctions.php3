@@ -10,17 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-
 include ("inc.php3");
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_calendrier.php");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_filtres.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_layer.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_config.php3");
 
 $var_f = find_in_path("inc_config-fonctions.php");
 include($var_f ? $var_f : (_DIR_INCLUDE . "inc_config-fonctions.php"));

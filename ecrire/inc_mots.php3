@@ -16,7 +16,7 @@
 if (defined("_ECRIRE_INC_MOTS")) return;
 define("_ECRIRE_INC_MOTS", "1");
 
-include_ecrire("inc_filtres.php3"); # pour http_script (normalement déjà fait)
+include_ecrire ("inc_filtres.php3"); # pour http_script (normalement déjà fait)
 
 
 // ne pas faire d'erreur si les chaines sont > 254 caracteres

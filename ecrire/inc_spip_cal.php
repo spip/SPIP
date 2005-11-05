@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_ecrire("inc_filtres.php3");
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_charsets.php3");

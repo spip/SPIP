@@ -10,9 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include_ecrire ("inc_index.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_auteur_infos.php");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
+include_ecrire("inc_index.php3");
+include_ecrire("inc_logos.php3");
+include_ecrire("inc_auteur_infos.php");
 
 function auteurs_edit_dist($id_auteur)
 {

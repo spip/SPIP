@@ -10,11 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_PRESENTATION")) return;
-define("_ECRIRE_INC_PRESENTATION", "1");
+include_ecrire ("inc_layer.php3");
+include_ecrire("inc_calendrier.php");
 
 // Choix dynamique de la couleur
 

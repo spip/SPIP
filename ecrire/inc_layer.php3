@@ -15,7 +15,7 @@
 if (defined("_INC_LAYER")) return;
 define("_INC_LAYER", "1");
 
-include_ecrire("inc_filtres.php3"); # pour http_script (normalement déjà fait)
+ include_ecrire ("inc_filtres.php3"); # pour http_script (normalement déjà fait)
 
 
 

@@ -16,7 +16,7 @@
 if (defined("_ECRIRE_INC_MINIPRES")) return;
 define("_ECRIRE_INC_MINIPRES", "1");
 
-include_ecrire("inc_filtres.php3"); # pour les fonctions http_* (normalement deja la)
+include_ecrire ("inc_filtres.php3"); # pour les fonctions http_* (normalement deja la)
 include_ecrire ("inc_lang.php3");
 utiliser_langue_visiteur();
 
