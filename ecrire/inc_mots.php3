@@ -557,6 +557,65 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	fin_cadre_enfonce();
 }
 
+
+//
+// Calculer les nombres d'elements (articles, etc.) lies a chaque mot
+//
+
+function calculer_liens_mots()
+{
+
+if ($GLOBALS['connect_statut'] =="0minirezo") $aff_articles = "'prepa','prop','publie'";
+else $aff_articles = "'prop','publie'";
+
+ $articles = array();
+ $result_articles = spip_query(
+	"SELECT COUNT(*) as cnt, lien.id_mot FROM spip_mots_articles AS lien, spip_articles AS article
+	WHERE article.id_article=lien.id_article AND article.statut IN ($aff_articles) GROUP BY lien.id_mot"
+);
+ while ($row =  spip_fetch_array($result_articles)){
+	$articles[$row['id_mot']] = $row['cnt'];
+}
+
+
+ $rubriques = array();
+ $result_rubriques = spip_query(
+	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_rubriques AS lien, spip_rubriques AS rubrique
+	WHERE rubrique.id_rubrique=lien.id_rubrique GROUP BY lien.id_mot"
+	);
+
+ while ($row = spip_fetch_array($result_rubriques)){
+	$rubriques[$row['id_mot']] = $row['cnt'];
+}
+
+ $breves = array();
+ $result_breves = spip_query(
+	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_breves AS lien, spip_breves AS breve
+	WHERE breve.id_breve=lien.id_breve AND breve.statut IN ($aff_articles) GROUP BY lien.id_mot"
+	);
+
+ while ($row = spip_fetch_array($result_breves)){
+	$breves[$row['id_mot']] = $row['cnt'];
+}
+
+ $syndic = array(); 
+ $result_syndic = spip_query(
+	"SELECT COUNT(*) AS cnt, lien.id_mot FROM spip_mots_syndic AS lien, spip_syndic AS syndic
+	WHERE syndic.id_syndic=lien.id_syndic AND syndic.statut IN ($aff_articles) GROUP BY lien.id_mot"
+	);
+ while ($row = spip_fetch_array($result_syndic)){
+	$sites[$row['id_mot']] = $row['cnt'];
+
+ }
+
+ return array('articles' => $articles, 
+	      'breves' => $breves, 
+	      'rubriques' => $rubriques, 
+	      'syndic' => $syndic);
+}
+
+   
+
 function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right;
@@ -573,6 +632,8 @@ function afficher_groupe_mots($id_groupe) {
 	$javascript = "charger_id_url('ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
 	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
 
+
+	$occurrences = calculer_liens_mots();
 
 	$table = '';
 
@@ -614,7 +675,7 @@ function afficher_groupe_mots($id_groupe) {
 				$couleur = $ifond ? "#FFFFFF" : $couleur_claire;
 				$ifond = $ifond ^ 1;
 
-				if ($connect_statut == "0minirezo" OR $nb_articles[$id_mot] > 0)
+				if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 					$s = "<a href='mots_edit.php3?id_mot=$id_mot&redirect=mots_tous.php3' class='liste-mot'>".typo($titre_mot)."</a>";
 				else
 					$s = typo($titre_mot);
@@ -623,25 +684,25 @@ function afficher_groupe_mots($id_groupe) {
 
 				$texte_lie = array();
 
-				if ($nb_articles[$id_mot] == 1)
+				if ($occurrences['articles'][$id_mot] == 1)
 					$texte_lie[] = _T('info_1_article');
-				else if ($nb_articles[$id_mot] > 1)
-					$texte_lie[] = $nb_articles[$id_mot]." "._T('info_articles_02');
+				else if ($occurrences['articles'][$id_mot] > 1)
+					$texte_lie[] = $occurrences['articles'][$id_mot]." "._T('info_articles_02');
 
-				if ($nb_breves[$id_mot] == 1)
+				if ($occurrences['breves'][$id_mot] == 1)
 					$texte_lie[] = _T('info_1_breve');
-				else if ($nb_breves[$id_mot] > 1)
-					$texte_lie[] = $nb_breves[$id_mot]." "._T('info_breves_03');
+				else if ($occurrences['breves'][$id_mot] > 1)
+					$texte_lie[] = $occurrences['breves'][$id_mot]." "._T('info_breves_03');
 
-				if ($nb_sites[$id_mot] == 1)
+				if ($occurrences['sites'][$id_mot] == 1)
 					$texte_lie[] = _T('info_1_site');
-				else if ($nb_sites[$id_mot] > 1)
-					$texte_lie[] = $nb_sites[$id_mot]." "._T('info_sites');
+				else if ($occurrences['sites'][$id_mot] > 1)
+					$texte_lie[] = $occurrences['sites'][$id_mot]." "._T('info_sites');
 
-				if ($nb_rubriques[$id_mot] == 1)
+				if ($occurrences['rubriques'][$id_mot] == 1)
 					$texte_lie[] = _T('info_une_rubrique_02');
-				else if ($nb_rubriques[$id_mot] > 1)
-					$texte_lie[] = $nb_rubriques[$id_mot]." "._T('info_rubriques_02');
+				else if ($occurrences['rubriques'][$id_mot] > 1)
+					$texte_lie[] = $occurrences['rubriques'][$id_mot]." "._T('info_rubriques_02');
 
 				$texte_lie = join($texte_lie,", ");
 				
