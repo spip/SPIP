@@ -280,6 +280,7 @@ ecrire/inc_naviguer.php -text
 ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_image.php -text
 ecrire/inc_statistiques_repartition.php -text
+ecrire/inc_synchro.php -text
 ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_br.php3 -text
