@@ -86,7 +86,6 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff) {
 
 function afficher_logo($racine, $titre, $logo, $id_objet, $id) {
 	global $connect_id_auteur;
-	global $couleur_foncee, $couleur_claire;
 	global $clean_link, $spip_lang_right;
 
 	include_ecrire('inc_admin.php3');

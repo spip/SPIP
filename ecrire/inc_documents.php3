@@ -592,7 +592,7 @@ function afficher_portfolio (
 	$couleur				# couleur des cases du tableau
 ) {
 	global $connect_id_auteur, $connect_statut;
-	global $id_doublons, $options;
+	global $id_doublons, $options,  $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
 	// la derniere case d'une rangee
@@ -870,7 +870,7 @@ function bloc_gerer_vignette($document, $image_url, $redirect_url, $album) {
 }
 
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
-	global $couleur_foncee, $couleur_claire;
+	global $couleur_claire;
 	global $connect_id_auteur, $connect_statut;
 	global $id_doublons, $options;
 	global $spip_lang_left, $spip_lang_right;
@@ -970,8 +970,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 // (edition des articles)
 
 function afficher_documents_colonne($id_article, $type="article", $flag_modif = true) {
-	global $connect_id_auteur, $connect_statut;
-	global $couleur_foncee, $couleur_claire, $options;
+	global $connect_id_auteur, $connect_statut, $options;
 	global $clean_link;
 	global $id_doc_actif;
 
@@ -1074,11 +1073,10 @@ function affiche_raccourci_doc($doc, $id, $align) {
 
 function afficher_case_document($id_document, $image_url, $redirect_url = "", $deplier = false) {
 	global $connect_id_auteur, $connect_statut;
-	global $couleur_foncee, $couleur_claire;
 	global $clean_link;
 	global $options;
 	global $id_doublons;
-	global $spip_lang_left, $spip_lang_right;
+	global $couleur_foncee, $spip_lang_left, $spip_lang_right;
 
 
 	$flag_deplie = teste_doc_deplie($id_document);
