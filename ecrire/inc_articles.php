@@ -754,9 +754,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
   if ((lire_meta('multi_articles') == 'oui')
 	OR ((lire_meta('multi_rubriques') == 'oui') AND (lire_meta('gerer_trad') == 'oui'))) {
 
-	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-	$langue_article = $row['lang'];
-	$langue_choisie_article = $row['langue_choisie'];
+	list($langue_article) = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
 
 	if (lire_meta('gerer_trad') == 'oui')
 		$titre_barre = _T('titre_langue_trad_article');
@@ -774,9 +772,6 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 		$langue_parent = $row['lang'];
-
-		if ($langue_choisie_article == 'oui') $herit = false;
-		else $herit = true;
 
 		debut_cadre_couleur();
 		echo "<div style='text-align: center;'>";
