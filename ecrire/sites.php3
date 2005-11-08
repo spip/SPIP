@@ -145,6 +145,8 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	descriptif='$descriptif', syndication='$syndication', statut='$statut'
 	$add_extra WHERE id_syndic=$id_syndic");
 
+	propager_les_secteurs();
+
 	if ($syndication_old != $syndication
 	OR $url_syndic != $old_syndic)
 		$reload = "oui";

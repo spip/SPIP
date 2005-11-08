@@ -40,8 +40,9 @@ $col = intval($col);
 
 # Une fonction stockee en base de donnees ?
 if ($id_ajax_fonc) {
-	$res = spip_query("SELECT * FROM spip_ajax_fonc
-	WHERE id_ajax_fonc = $id_ajax_fonc AND id_auteur=$connect_id_auteur");
+	$res = spip_query("SELECT * FROM spip_ajax_fonc	WHERE id_ajax_fonc ='"
+			  . addslashes($id_ajax_fonc) 
+			  . "' AND id_auteur=$connect_id_auteur");
 	if ($row = spip_fetch_array($res)) {
 		$variables = $row["variables"];
 		

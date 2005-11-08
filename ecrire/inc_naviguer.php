@@ -540,7 +540,7 @@ WHERE id_rubrique=$id_rubrique");
 			include_ecrire ("inc_index.php3");
 			marquer_indexer('rubrique', $id_rubrique);
 	}
-
+	propager_les_secteurs();
 	return $id_rubrique;
 }
 
