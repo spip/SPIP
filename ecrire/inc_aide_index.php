@@ -12,10 +12,8 @@
 
 
 include_ecrire ("inc_minipres.php");
-include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_layer.php3");
 include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_lang.php3");
 
 /////////////////////////////
 // La frame de base

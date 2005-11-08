@@ -159,7 +159,6 @@ if ($etape == 6) {
 
 	include_ecrire("inc_config.php3");
 	init_config();
-	init_langues();
 
 	include_ecrire ("inc_acces.php3");
 	ecrire_acces();

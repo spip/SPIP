@@ -23,7 +23,6 @@ function maj_version ($version, $test = true) {
 		ecrire_metas();
 		spip_log("mise a jour de la base vers $version");
 	} else {
-		include_ecrire ('inc_lang.php3');
 		echo _T('alerte_maj_impossible', array('version' => $version));
 		exit;
 	}

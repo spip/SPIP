@@ -88,7 +88,6 @@ if ($ok) {
 		."&redirect=" .  _DIR_RESTREINT_ABS . "index.php3");
 }
 else {
-	include_ecrire ('inc_lang.php3');
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));
 	exit;
 }
