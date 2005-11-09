@@ -69,9 +69,10 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 }
 
 
-// Annuler les magic quotes
+// Annuler les magic quotes s'il y en a
 @set_magic_quotes_runtime(0);
-if (@get_magic_quotes_gpc()) {
+if (@get_magic_quotes_gpc()
+AND strstr(serialize($_GET).serialize($_POST).serialize($_COOKIE), '\\')) {
 	include(_DIR_RESTREINT.'inc_magicquotes.php');
 }
 
@@ -468,26 +469,14 @@ $hash_recherche_strict = '';
 // Capacites php (en fonction de la version)
 //
 
-$flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
-$flag_ini_get = (function_exists("ini_get")
-	&& (@ini_get('max_execution_time') > 0));	// verifier pas desactivee
 $flag_gz = function_exists("gzencode"); #php 4.0.4
-$flag_ob = ($flag_ini_get
-	&& !ereg("ob_", ini_get('disable_functions'))
-	&& function_exists("ob_start")); 
+$flag_ob = (function_exists("ob_start")
+	&& function_exists("ini_get")
+	&& (@ini_get('max_execution_time') > 0)
+	&& !strstr(ini_get('disable_functions'), 'ob_'));
 $flag_sapi_name = function_exists("php_sapi_name");
-$flag_utf8_decode = function_exists("utf8_decode");
-$flag_ldap = function_exists("ldap_connect");
-$flag_flock = function_exists("flock");
-$flag_ImageCreateTrueColor = function_exists("ImageCreateTrueColor");
-$flag_ImageCopyResampled = function_exists("ImageCopyResampled");
-$flag_ImageGif = function_exists("ImageGif");
-$flag_ImageJpeg = function_exists("ImageJpeg");
-$flag_ImagePng = function_exists("ImagePng");
-$flag_imagick = function_exists("imagick_readimage");	// http://pear.sourceforge.net/en/packages.imagick.php
-
-$flag_gd = $flag_ImageGif || $flag_ImageJpeg || $flag_ImagePng;
 $flag_revisions = function_exists("gzcompress");
+$flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
 $flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
 
 
@@ -601,7 +590,6 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 
 	if (
 	$GLOBALS['auto_compress']
-	&& $GLOBALS['flag_ob']
 	&& (phpversion()<>'4.0.4')
 	&& function_exists("ob_gzhandler")
 	// special bug de proxy
