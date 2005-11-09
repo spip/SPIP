@@ -275,6 +275,7 @@ ecrire/inc_js_menu_rubriques.php -text
 ecrire/inc_lang_liste.php -text
 ecrire/inc_magicquotes.php -text
 ecrire/inc_message.php -text
+ecrire/inc_messagerie.php -text
 ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
 ecrire/inc_naviguer.php -text

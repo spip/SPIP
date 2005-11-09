@@ -10,10 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-  // L'arborescence des rubriques n'a rien de secret, 
-  // pas la peine d'authentifier
 
-include ("inc_version.php3");
+include ("inc.php3");
 
 // prendre $var_* comme variables pour eviter les conflits avec les http_vars
 
