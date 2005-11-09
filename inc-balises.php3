@@ -310,8 +310,12 @@ function balise_TOTAL_BOUCLE_dist($p) {
 	return $p;
 }
 
+// Si on est hors d'une boucle {recherche}, ne pas "prendre" cette balise
 function balise_POINTS_dist($p) {
-	return rindex_pile($p, 'points', 'recherche');
+	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
+		return rindex_pile($p, 'points', 'recherche');
+	else
+		return NULL;
 }
 
 function balise_POPULARITE_ABSOLUE_dist($p) {

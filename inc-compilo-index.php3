@@ -129,18 +129,32 @@ function calculer_champ($p) {
 	return applique_filtres($p);
 }
 
-// cette fonction sert d'API pour demander une balise Spip sans filtres
+// Cette fonction sert d'API pour demander une balise SPIP sans filtres.
+// Pour une balise nommmee NOM, elle essaye successivement d'appeler
+// des fonctions balise_NOM ou balise_NOM_dist, de faire le calcul via
+// un fichier inc-nom.php3, de traiter le cas d'une balise LOGO ou de voir
+// si c'est une reference a une colonne de table connue
+// Pour chacune des premieres etapes, si la fonction existe mais qu'elle
+// retourne NULL, c'est qu'elle n'a pas traite la balise => on passe a la suite
+// comme si on n'avait rien trouve. Cela permet de ne surcharger une balise
+// que dans des cas precis.
 function calculer_balise($nom, $p) {
 
 	// regarder s'il existe une fonction personnalisee balise_NOM()
 	$f = 'balise_' . $nom;
-	if (function_exists($f))
-		return $f($p);
+	if (function_exists($f)) {
+		$res = $f($p);
+		if ($res !== NULL)
+			return $res;
+	}
 
 	// regarder s'il existe une fonction standard balise_NOM_dist()
 	$f = 'balise_' . $nom . '_dist';
-	if (function_exists($f))
-		return $f($p);
+	if (function_exists($f)) {
+		$res = $f($p);
+		if ($res !== NULL)
+			return $res;
+	}
 
 	// regarder s'il existe un fichier d'inclusion au nom de la balise
 	// contenant une fonction balise_NOM_collecte
@@ -149,13 +163,19 @@ function calculer_balise($nom, $p) {
 		include_local($file);
 		# une globale ?? defined ou function_exists(..._dyn) serait mieux ?
 		$f = $GLOBALS['balise_' . $nom . '_collecte'];
-		if (is_array($f))
-			return calculer_balise_dynamique($p, $nom, $f);
+		if (is_array($f)) {
+			$res = calculer_balise_dynamique($p, $nom, $f);
+			if ($res !== NULL)
+				return $res;
+		}
 	}
 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
-	if (ereg('^LOGO_', $nom))
-		return calculer_balise_logo($p);
+	if (ereg('^LOGO_', $nom)) {
+		$res = calculer_balise_logo($p);
+		if ($res !== NULL)
+			return $res;
+	}
 
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
