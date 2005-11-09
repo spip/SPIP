@@ -53,5 +53,23 @@ function http_status($status) {
 		header("HTTP/1.0 ".$status_string[$status]);
 }
 
+// Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
+function http_no_cache() {
+	if (headers_sent()) return;
+	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
+
+	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
+	// il faudrait aussi pour Safari
+	// header("Cache-Control: post-check=0, pre-check=0", false)
+	// mais ca ne respecte pas
+	// http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
+
+	header("Content-Type: text/html; charset=$charset");
+	header("Expires: 0");
+	header("Last-Modified: " .gmdate("D, d M Y H:i:s"). " GMT");
+	header("Cache-Control: no-store, no-cache, must-revalidate");
+	header("Pragma: no-cache");
+}
+
 
 ?>

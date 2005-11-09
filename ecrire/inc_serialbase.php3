@@ -93,7 +93,8 @@ $spip_auteurs_key = array(
 		"KEY statut"	=> "statut",
 		"KEY lang"	=> "lang",
 		"KEY idx"	=> "idx",
-		"KEY en_ligne"	=> "en_ligne");
+		"KEY en_ligne"	=> "en_ligne",
+		"KEY url_propre"	=> "url_propre");
 
 $spip_breves = array(
 		"id_breve"	=> "bigint(21) NOT NULL",
@@ -243,6 +244,7 @@ $spip_syndic = array(
 		"url_site"	=> "blob NOT NULL",
 		"url_syndic"	=> "blob NOT NULL",
 		"descriptif"	=> "blob NOT NULL",
+		"url_propre"	=> "VARCHAR(255) NOT NULL",
 		"idx"		=> "ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL",
 		"maj"	=> "TIMESTAMP",
 		"syndication"	=> "VARCHAR(3) NOT NULL",
@@ -262,7 +264,8 @@ $spip_syndic_key = array(
 		"KEY id_rubrique"	=> "id_rubrique",
 		"KEY id_secteur"	=> "id_secteur",
 		"KEY idx"		=> "idx",
-		"KEY statut"	=> "statut, date_syndic");
+		"KEY statut"	=> "statut, date_syndic",
+		"KEY url_propre"	=> "url_propre");
 
 $spip_syndic_articles = array(
 		"id_syndic_article"	=> "bigint(21) NOT NULL",

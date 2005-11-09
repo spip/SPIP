@@ -125,6 +125,7 @@ function erreur_squelette($message='', $lieu='') {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		($GLOBALS['var_mode'] == 'debug')) {
+			include_ecrire('inc_headers.php');
 			http_no_cache();
 			echo _DOCTYPE_ECRIRE,
 			  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
@@ -324,11 +325,12 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	$link->addvar('var_mode','debug');
 	$self = quote_amp($link->getUrl());
 
-// en cas de squelette inclus,  virer le code de l'incluant:
-// - il contient souvent une Div restreignant la largeur a 3 fois rien
-// - ca fait 2 headers !
+	// en cas de squelette inclus,  virer le code de l'incluant:
+	// - il contient souvent une Div restreignant la largeur a 3 fois rien
+	// - ca fait 2 headers !
 	ob_end_clean();
 
+	include_ecrire('inc_headers.php');
 	http_no_cache();
 	echo _DOCTYPE_ECRIRE,
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
