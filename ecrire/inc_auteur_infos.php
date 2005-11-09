@@ -20,7 +20,7 @@ include_ecrire ("inc_session.php3");
 include_ecrire ("inc_filtres.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
-function affiche_auteur_info_dist($id_auteur, $auteur,  $echec)
+function affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article)
 {
   global $connect_id_auteur;
 
@@ -50,7 +50,7 @@ function affiche_auteur_info_dist($id_auteur, $auteur,  $echec)
   }
 
   debut_cadre_formulaire();
-  formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $champs_extra, $redirect);
+  formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $champs_extra, $redirect, $ajouter_id_article);
   fin_cadre_formulaire();
   echo "&nbsp;<p />";
 
@@ -87,7 +87,7 @@ else if ($connect_statut == '0minirezo')
 }
 
 
-function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $champs_extra, $redirect, $apparait=true)
+function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $champs_extra, $redirect, $ajouter_id_article)
 {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options ;
 
