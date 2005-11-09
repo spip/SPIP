@@ -509,7 +509,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 				$link = new Link;
 				$link->addVar($tmp_var, strval($deb - 1));
 				if ($javascript) {
-					$jj = ereg_replace("::deb::", "&$tmp_var=$deb", $javascript);
+					$jj = str_replace("::deb::", "&amp;$tmp_var=$deb", $javascript);
 					$texte .= "<a onClick=\"$jj; return false;\" href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
 				}
 				else $texte .= "<a href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
@@ -530,7 +530,7 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 			$link = new Link;
 			$link->addVar($tmp_var, -1);
 				if ($javascript) {
-					$jj = ereg_replace("::deb::", "&$tmp_var=-1", $javascript);
+					$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
 					$texte .= "<a onClick=\"$jj; return false; \" href=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
 				}
 				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
@@ -742,8 +742,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			include_ecrire ("inc_abstract_sql.php3");
 			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
 		}
-
-
 	}
 
 	$activer_messagerie = "oui";
@@ -783,8 +781,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 
 	$tmp_var = substr(md5($jjscript), 0, 4);
-	
-			
 	$javascript = "charger_id_url('ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
 
@@ -829,9 +825,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 		echo afficher_liste_debut_tableau();
 
-		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
+		$tranches = str_replace("::id_ajax_fonc::", $id_ajax_fonc, $tranches);
 		echo $tranches;
-
 		$result = spip_query($requete);
 		while ($row = spip_fetch_array($result)) {
 			$vals = '';
@@ -872,9 +867,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				}
 				$les_auteurs = substr($les_auteurs, 2);
 			}
-			
-			
-			$les_auteurs = "$les_auteurs";
 
 			// La petite puce de changement de statut
 			$vals[] = puce_statut_article($id_article, $statut, $id_rubrique);
@@ -1012,7 +1004,6 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
-			
 	$javascript = "charger_id_url('ajax_page.php?id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, 4, $tmp_var, $javascript);
 
