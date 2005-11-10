@@ -19,7 +19,6 @@ charger_generer_url();
 
 function calendrier_dist($type, $css="")
 {
-  global $attributes_body, $browser_verifForm;
   $date = date("Y-m-d", time()); 
   if ($type == 'semaine') {
 
