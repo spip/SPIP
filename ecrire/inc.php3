@@ -138,10 +138,13 @@ if (strlen($couleurs_spip[$choix_couleur]['couleur_foncee']) < 7) $choix_couleur
 
 $couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
 $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
-$couleur_lien = $couleurs_spip[$choix_couleur]['couleur_lien'];
-$couleur_lien_off = $couleurs_spip[$choix_couleur]['couleur_lien_off'];
 
-$attributes_body = "text='#000000' bgcolor='#f8f7f3' link='$couleur_lien' vlink='$couleur_lien_off' alink='$couleur_lien_off' topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
+$attributes_body = "
+link='" .  $couleurs_spip[$choix_couleur]['couleur_lien'] . "'
+vlink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
+alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
+bgcolor='#f8f7f3' text='#000000' 
+topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
   ($spip_lang_rtl ? " dir='rtl'" : "");
 
 //
@@ -157,14 +160,6 @@ if (!isset($reinstall)) if (demande_maj_version()) exit;
 if (!$adresse_site) {
 	$nom_site_spip = lire_meta("nom_site");
 	$adresse_site = lire_meta("adresse_site");
-}
-if (!$activer_breves){
-	$activer_breves = lire_meta("activer_breves");
-	$articles_mots = lire_meta("articles_mots");
-}
-
-if (!$activer_statistiques){
-	$activer_statistiques = lire_meta("activer_statistiques");
 }
 
 if (!$nom_site_spip) {
