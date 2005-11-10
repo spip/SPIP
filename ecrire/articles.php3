@@ -17,7 +17,7 @@ $var_f = find_in_path("inc_articles.php");
 if ($var_f)
   include($var_f);
  else
-   include_ecrire(_DIR_INCLUDE . "inc_articles.php");
+   include_ecrire("inc_articles.php");
 
 $articles_surtitre = lire_meta("articles_surtitre");
 $articles_soustitre = lire_meta("articles_soustitre");

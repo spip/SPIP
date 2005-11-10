@@ -21,7 +21,7 @@ if ($var_f)
   include($var_f);
  // ATTENTION PHP3 ici
 else
-  include_ecrire(_DIR_INCLUDE . 'inc_' . $var_nom . '.php3');
+  include_ecrire('inc_' . $var_nom . '.php3');
 
 if (function_exists($var_nom))
   $var_nom($id_rubrique, $maj);

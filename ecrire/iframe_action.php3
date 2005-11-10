@@ -19,7 +19,7 @@ if ($id && ($connect_statut == "0minirezo")) {
 	if ($var_f) 
 	  include($var_f);
 	else
-	  include_ecrire(_DIR_INCLUDE . 'inc_' . $action . '.php');
+	  include_ecrire('inc_' . $action . '.php');
 
 	$var_nom = 'changer_statut_' . $action;
 	if (function_exists($var_nom))

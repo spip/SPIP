@@ -20,7 +20,7 @@ $var_f = find_in_path('inc_' . $var_nom . '.php');
 
 if ($var_f) 
       include($var_f);
-else  include_ecrire(_DIR_INCLUDE . 'inc_' . $var_nom . '.php3');
+else  include_ecrire('inc_' . $var_nom . '.php3');
     
 if (function_exists($var_nom))
         $var_res = $var_nom();
