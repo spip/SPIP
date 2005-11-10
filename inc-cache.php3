@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_CACHE")) return;
-define("_INC_CACHE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 //

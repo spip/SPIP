@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_PUBLIC_GLOBAL")) return;
-define("_INC_PUBLIC_GLOBAL", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction principale declenchant tout le service
 function calcule_header_et_page ($fond, $delais) {
@@ -48,8 +46,8 @@ function calcule_header_et_page ($fond, $delais) {
 	// Si envoi pour un forum, enregistrer puis rediriger
 
 	if (strlen($_POST['confirmer_forum']) > 0
-	OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
-		include('inc-messforum.php3');
+	    OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
+		include_local('inc-messforum.php3');
 		redirige_par_entete(enregistre_forum());
 	}
 

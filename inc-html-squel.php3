@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_HTML_SQUEL")) return;
-define("_INC_HTML_SQUEL", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # Ce fichier doit IMPERATIVEMENT contenir la fonction "phraser"
 # qui transforme un squelette en un tableau d'objets de classe Boucle

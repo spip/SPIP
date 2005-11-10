@@ -15,9 +15,7 @@
 // Ce fichier definit les boucles standard de SPIP
 //
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_BOUCLES")) return;
-define("_INC_BOUCLES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // Boucle standard, sans condition rajoutee

@@ -34,8 +34,7 @@ pouvez l'editer pour ne conserver que la partie concernant les URLS 'html'.
 */
 
 // executer une seule fois
-if (defined("_INC_URLS2")) return;
-define("_INC_URLS2", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function generer_url_article($id_article) {
 	return "article$id_article.html";

@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_STATS")) return;
-define("_INC_STATS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ecrire_stats() {
 	global $id_article, $id_breve, $id_rubrique;

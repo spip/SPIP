@@ -12,8 +12,7 @@
 
 
 // executer une seule fois
-if (defined("_INC_URLS2")) return;
-define("_INC_URLS2", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 /*
 
