@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_OBJET_BASE")) return;
-define("_ECRIRE_INC_OBJET_BASE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 class _Abstract {

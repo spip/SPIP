@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_META")) return;
-define("_ECRIRE_INC_META", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lire_metas() {
 	global $meta;

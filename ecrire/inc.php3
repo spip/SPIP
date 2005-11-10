@@ -19,11 +19,9 @@ $var_nom = "auth";
 $var_f = find_in_path('inc_' . $var_nom . '.php');
 
 if ($var_f) 
-        include($var_f);
-elseif (is_readable($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php3')))
-        include($var_f);
-else {spip_log("pas de fichier pour $var_nom");exit;}
-
+      include($var_f);
+else  include_ecrire(_DIR_INCLUDE . 'inc_' . $var_nom . '.php3');
+    
 if (function_exists($var_nom))
         $var_res = $var_nom();
 elseif (function_exists($var_f = $var_nom . "_dist"))

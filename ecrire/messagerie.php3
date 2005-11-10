@@ -18,9 +18,8 @@ $var_f = find_in_path('inc_' . $var_nom . '.php');
 
 if ($var_f) 
         include($var_f);
-elseif (is_readable($var_f = (_DIR_INCLUDE . 'inc_' . $var_nom . '.php')))
-        include($var_f);
-else {spip_log("pas de fichier pour $var_nom");}
+else
+  include_ecrire(_DIR_INCLUDE . 'inc_' . $var_nom . '.php');
 
 if (function_exists($var_nom))
         $var_res = $var_nom($id_message, $detruire_message, $supp_dest);

@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_STATISTIQUES")) return;
-define("_ECRIRE_INC_STATISTIQUES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
 // Compiler les statistiques temporaires : visites

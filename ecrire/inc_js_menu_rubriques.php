@@ -11,6 +11,8 @@
 \***************************************************************************/
 
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 function extraire_article($id_p) {
 	if (array_key_exists($id_p, $GLOBALS['db_art_cache'])) {
 		return $GLOBALS['db_art_cache'][$id_p];

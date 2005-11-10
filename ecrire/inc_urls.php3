@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_URLS")) return;
-define("_ECRIRE_INC_URLS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function generer_url_article($id_article) {

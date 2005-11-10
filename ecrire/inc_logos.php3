@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_LOGOS")) return;
-define("_ECRIRE_INC_LOGOS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {

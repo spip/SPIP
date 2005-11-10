@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_MINI_NAV")) return;
-define("_ECRIRE_INC_MINI_NAV", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $rub_exclus=0) {

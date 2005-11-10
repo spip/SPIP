@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_MOTS")) return;
-define("_ECRIRE_INC_MOTS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_filtres.php3"); # pour http_script (normalement déjà fait)
 

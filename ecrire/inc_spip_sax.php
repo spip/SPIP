@@ -11,11 +11,7 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("INC_PHRASEUR_XML")) return;
-define("INC__PHRASEUR_XML", "1");
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class PhraseurXML {
 

@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_BASE")) return;
-define("_ECRIRE_INC_BASE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_acces.php3");
 include_ecrire("inc_serialbase.php3");

@@ -10,10 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_BARRE_SPIP")) return;
-define("_INC_BARRE_SPIP", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // construit un bouton (ancre) de raccourci avec icone et aide
 

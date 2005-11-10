@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_TYPEBASE")) return;
-define("_ECRIRE_INC_TYPEBASE", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 global $tables_images, $tables_sequences, $tables_documents, $tables_mime;
 

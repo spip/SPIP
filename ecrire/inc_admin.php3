@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_ADMIN")) return;
-define("_ECRIRE_INC_ADMIN", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 function fichier_admin($action) {

@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_HEADERS")) return;
-define("_ECRIRE_INC_HEADERS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 // Interdire les attaques par manipulation des headers

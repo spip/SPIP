@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_RUBRIQUES")) return;
-define("_ECRIRE_INC_RUBRIQUES", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
 //

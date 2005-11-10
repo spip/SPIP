@@ -11,10 +11,7 @@
 \***************************************************************************/
 
 
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_INC_DEBUG_SQL")) return;
-define("_INC_DEBUG_SQL", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function afficher_debug_contexte($env) {
 	static $n;

@@ -13,7 +13,10 @@
 include ("inc.php3");
 
 $var_f = find_in_path("inc_auteur_infos.php");
-include($var_f ? $var_f : (_DIR_INCLUDE . "inc_auteur_infos.php"));
+if ($var_f)
+  include($var_f);
+ else
+   include_ecrire(_DIR_INCLUDE . "inc_auteur_infos.php");
 
 // securite
 $id_auteur = floor($id_auteur);

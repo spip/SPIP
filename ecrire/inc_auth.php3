@@ -12,9 +12,7 @@
 
 
 //
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_AUTH")) return;
-define("_ECRIRE_INC_AUTH", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_meta.php3");
