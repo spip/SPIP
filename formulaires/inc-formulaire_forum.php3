@@ -6,7 +6,6 @@ include_ecrire('inc_meta.php3');
 include_ecrire('inc_admin.php3');
 include_ecrire('inc_acces.php3');
 include_ecrire('inc_texte.php3');
-include_ecrire('inc_filtres.php3');
 include_ecrire('inc_lang.php3');
 include_ecrire('inc_mail.php3');
 include_ecrire('inc_forum.php3');

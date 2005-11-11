@@ -2003,5 +2003,11 @@ function tags2dcsubject($tags) {
 	}
 	return $subjects;
 }
+// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
+function boutonne($t, $n, $v, $a='') {
+  return "\n<input type='$t'" .
+    (!$n ? '' : " name='$n'") .
+    " value=\"$v\" $a />";
+}
 
 ?>

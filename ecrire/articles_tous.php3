@@ -33,13 +33,6 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
     "</label><br />";
 }
 
-// fabrique un bouton de type $t de Name $n, de Value $v et autres attributs $a
-function boutonne($t, $n, $v, $a='') {
-  return "\n<input type='$t'" .
-    (!$n ? '' : " name='$n'") .
-    " value=\"$v\" $a />";
-}
-
 if (count($aff_art) > 0) $aff_art = join(',', $aff_art);
 else $aff_art = 'prop,publie';
 
