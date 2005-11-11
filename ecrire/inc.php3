@@ -10,7 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined('_ECRIRE_INC_VERSION')) {
 	include ("inc_version.php3");
 }
@@ -30,11 +29,9 @@ else {spip_log("fonction $var_nom indisponible dans $var_f");exit;}
 
 if (!$var_res) exit;
 
-
 include_ecrire("inc_minipres.php"); // choisit la langue
 include_ecrire('inc_admin.php3');
 include_ecrire('inc_cookie.php');
-
 
 //
 // Preferences de presentation
@@ -49,8 +46,9 @@ if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
 if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
 AND $spip_lang_ecrire <> $auteur_session['lang']
 AND changer_langue($spip_lang_ecrire)) {
-	spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($spip_lang_ecrire)
-	."' WHERE id_auteur = $connect_id_auteur");
+	spip_query ("UPDATE spip_auteurs SET lang = '".
+		    addslashes($spip_lang_ecrire) .
+		    "' WHERE id_auteur = $connect_id_auteur");
 	$auteur_session['lang'] = $spip_lang_ecrire;
 	ajouter_session($auteur_session, $spip_session);
 }
@@ -88,7 +86,6 @@ $GLOBALS['couleurs_spip'] = array(
 		"couleur_lien" => "#657701",
 		"couleur_lien_off" => "#A6C113"
 		),
-
 // Violet clair
 2 => array (
 		"couleur_foncee" => "#eb68b3",
@@ -96,7 +93,6 @@ $GLOBALS['couleurs_spip'] = array(
 		"couleur_lien" => "#8F004D",
 		"couleur_lien_off" => "#BE6B97"
 		),
-
 // Orange
 3 => array (
 		"couleur_foncee" => "#fa9a00",
@@ -104,7 +100,6 @@ $GLOBALS['couleurs_spip'] = array(
 		"couleur_lien" => "#FF5B00",
 		"couleur_lien_off" => "#B49280"
 		),
-
 // Saumon
 4 => array (
 		"couleur_foncee" => "#CDA261",
@@ -112,7 +107,6 @@ $GLOBALS['couleurs_spip'] = array(
 		"couleur_lien" => "#AA6A09",
 		"couleur_lien_off" => "#B79562"
 		),
-
 //  Bleu pastel
 5 => array (
 		"couleur_foncee" => "#5da7c5",
@@ -120,7 +114,6 @@ $GLOBALS['couleurs_spip'] = array(
 		"couleur_lien" => "#116587",
 		"couleur_lien_off" => "#81B7CD"
 		),
-
 //  Gris
 6 => array (
 		"couleur_foncee" => "#85909A",
@@ -134,7 +127,7 @@ $GLOBALS['couleurs_spip'] = array(
 $options      = $prefs['options'];
 $spip_display = $prefs['display'];
 $choix_couleur = $prefs['couleur'];
-if (strlen($couleurs_spip[$choix_couleur]['couleur_foncee']) < 7) $choix_couleur = 1;
+if (!isset($couleurs_spip[$choix_couleur])) $choix_couleur = 1;
 
 $couleur_foncee = $couleurs_spip[$choix_couleur]['couleur_foncee'];
 $couleur_claire = $couleurs_spip[$choix_couleur]['couleur_claire'];
@@ -148,38 +141,9 @@ topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
   ($spip_lang_rtl ? " dir='rtl'" : "");
 
 //
-// Gestion de version
+// Gestion de version, sauf si justement on est en train de le faire
 //
 
 if (!isset($reinstall)) if (demande_maj_version()) exit;
-
-//
-// Gestion de la configuration globale du site
-//
-
-if (!$adresse_site) {
-	$nom_site_spip = lire_meta("nom_site");
-	$adresse_site = lire_meta("adresse_site");
-}
-
-if (!$nom_site_spip) {
-	$nom_site_spip = _T('info_mon_site_spip');
-	ecrire_meta("nom_site", $nom_site_spip);
-	ecrire_metas();
-}
-
-if (!$adresse_site) {
-	$adresse_site = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strpos($REQUEST_URI, "/ecrire"));
-	ecrire_meta("adresse_site", $adresse_site);
-	ecrire_metas();
-}
-
-
-
-//
-// Recuperation du cookie
-//
-
-$cookie_admin = $_COOKIE['spip_admin'];
 
 ?>

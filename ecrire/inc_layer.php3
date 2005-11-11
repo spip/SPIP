@@ -12,10 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
- include_ecrire ("inc_filtres.php3"); # pour http_script (normalement déjà fait)
-
-
-
 function debut_block_visible($nom_block){
 	global $numero_block, $compteur_block, $browser_layer;
 	if (!$browser_layer) return '';

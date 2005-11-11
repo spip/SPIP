@@ -110,7 +110,7 @@ function colonne_gauche_accueil($id_rubrique, $activer_breves,
 {
 
   global  $spip_display, $connect_statut, $connect_toutes_rubriques,
-    $connect_id_auteur, $cookie_admin, $connect_login;
+    $connect_id_auteur, $connect_login;
 
 
 //
@@ -211,7 +211,7 @@ if ($spip_display == 4) {
 //
 
 if ($connect_statut == "0minirezo" AND $spip_display != 4) {
-	if (!$cookie_admin) {
+	if (!$_COOKIE['spip_admin']) {
 		$gadget .= "<div>&nbsp;</div>".
 			"<table width=95%><tr>".
 			"<td width=100%>".
@@ -239,7 +239,7 @@ echo "<div>&nbsp;</div>";
 function personnel_accueil()
 {
   global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_id_rubrique,
-$connect_nom, $connect_statut, $cookie_admin,  $partie_cal, $echelle;
+$connect_nom, $connect_statut,  $partie_cal, $echelle;
 
 if ($spip_display != 4) {
 	
@@ -278,7 +278,7 @@ if ($spip_display != 4) {
 	// Supprimer le cookie, se deconnecter...
 	//
 	
-	if ($cookie_admin) {
+	if ($_COOKIE['spip_admin']) {
 			$texte = _T('icone_supprimer_cookie');
 			if ($spip_display != 1) $texte .= aide("cookie");
 			icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
@@ -291,12 +291,12 @@ if ($spip_display != 4) {
 
 function etat_base_accueil()
 {
-  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_nom, $connect_statut, $cookie_admin,  $partie_cal, $echelle;
+  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_nom, $connect_statut, $partie_cal, $echelle;
 
 if ($spip_display != 4) {
 
 	$nom_site_spip = propre(lire_meta("nom_site"));
-	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 	
 	
 	echo "\n<div>&nbsp;</div>";

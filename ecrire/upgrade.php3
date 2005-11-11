@@ -22,7 +22,6 @@ if (!_FILE_CONNECT) {
 include_ecrire ("inc_acces.php3");
 include_ecrire ("inc_config.php3");
 include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_filtres.php3");
 
 // Si reinstallation necessaire, message ad hoc
 if ($reinstall == 'oui') {

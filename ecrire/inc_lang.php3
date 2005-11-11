@@ -243,7 +243,6 @@ function lang_dselect ($rien='') {
 // 
 function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $herit = '', $lien='') {
 	global $couleur_foncee, $connect_id_auteur;
-	include_ecrire('inc_filtres.php3');
 
 	$ret = liste_options_langues($nom_select, $default, $herit);
 

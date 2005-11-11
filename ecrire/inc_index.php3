@@ -215,7 +215,6 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 	spip_query("UPDATE $table SET idx='idx' WHERE $col_id=$id_objet");
 
 	include_ecrire("inc_texte.php3");
-	include_ecrire("inc_filtres.php3");
 
 	spip_log("indexation $type $id_objet");
 	$index = '';

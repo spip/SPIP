@@ -949,6 +949,19 @@ function redirige_par_entete($url) {
 	exit;
 }
 
+// transformation XML des "&" en "&amp;"
+function quote_amp($u) {
+	return preg_replace(
+		"/&(?![a-z]{0,4}\w{2,3};|#x?[0-9a-f]{2,5};)/i",
+		"&amp;",$u);
+}
+
+// Transforme n'importe quel champ en une chaine utilisable
+// en PHP ou Javascript en toute securite
+// < ? php $x = '[(#TEXTE|texte_script)]'; ? >
+function texte_script($texte) {
+	return str_replace('\'', '\\\'', str_replace('\\', '\\\\', $texte));
+}
 
 //
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3

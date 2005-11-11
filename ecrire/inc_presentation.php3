@@ -1804,7 +1804,7 @@ function debut_html($titre = "", $rubrique="") {
 
 	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
-	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 	$titre = textebrut(typo($titre));
 
 	http_no_cache();
@@ -2302,7 +2302,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 function init_entete($titre, $rubrique, $css) {
 	global $attributes_body, $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
-	if (!$nom_site_spip) $nom_site_spip="SPIP";
+	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 
 	// envoi des en-tetes, du doctype et du <head><title...
 	include_ecrire('inc_headers.php');
@@ -2327,7 +2327,7 @@ function init_entete($titre, $rubrique, $css) {
 function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $couleur_foncee;
 	global $couleur_claire;
-	global $adresse_site;
+	global $REQUEST_URI;
 	global $connect_id_auteur;
 	global $connect_statut;
 	global $connect_activer_messagerie;
@@ -2337,6 +2337,14 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	$activer_messagerie = "oui";
 
+	if (!$adresse_site) {
+		$adresse_site = lire_meta("adresse_site");
+		if (!$adresse_site) {
+			$adresse_site = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strpos($REQUEST_URI, "/" . _DIR_RESTREINT_ABS));
+			ecrire_meta("adresse_site", $adresse_site);
+			ecrire_metas();
+		}
+	}
 
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
@@ -3091,7 +3099,7 @@ function fin_cadre_formulaire(){
 //
 
 function debut_gauche($rubrique = "asuivre") {
-	global $connect_statut, $cookie_admin;
+	global $connect_statut;
 	global $options, $spip_display;
 	global $connect_id_auteur;
 	global $spip_ecran;
@@ -3139,7 +3147,7 @@ function creer_colonne_droite($rubrique=""){
 	global $activer_imessage;
 	global $connect_activer_messagerie;
 	global $connect_activer_imessage;
-	global $connect_statut, $cookie_admin;
+	global $connect_statut;
 	global $options;
 	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
