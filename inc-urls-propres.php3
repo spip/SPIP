@@ -28,14 +28,21 @@ Definissez ensuite dans ecrire/mes_options.php3 :
 	type_urls = 'propres';
 SPIP calculera alors ses liens sous la forme "Mon-titre-d-article".
 
-Variante :
+Variante 'propres2' :
 	type_urls = 'propres2';
 ajoutera '.html' aux adresses generees : "Mon-titre-d-article.html"
+
+Variante 'qs' : ce systeme fonctionne en "Query-String", c'est-a-dire
+sans utilisation de .htaccess ; les adresses sont de la forme
+"/?Mon-titre-d-article"
+	type_urls = 'qs';
 
 */
 
 if (!defined('_terminaison_urls_propres'))
 	define ('_terminaison_urls_propres', '');
+if (!defined('_debut_urls_propres'))
+	define ('_debut_urls_propres', '');
 
 function _generer_url_propre($type, $id_objet) {
 	$table = "spip_".table_objet($type);
@@ -130,7 +137,7 @@ function _generer_url_propre($type, $id_objet) {
 function generer_url_article($id_article) {
 	$url = _generer_url_propre('article', $id_article);
 	if ($url)
-		return $url . _terminaison_urls_propres;
+		return _debut_urls_propres . $url . _terminaison_urls_propres;
 	else
 		return "article.php3?id_article=$id_article";
 }
@@ -138,7 +145,7 @@ function generer_url_article($id_article) {
 function generer_url_rubrique($id_rubrique) {
 	$url = _generer_url_propre('rubrique', $id_rubrique);
 	if ($url)
-		return '-'.$url.'-'._terminaison_urls_propres;
+		return _debut_urls_propres . '-'.$url.'-'._terminaison_urls_propres;
 	else
 		return "rubrique.php3?id_rubrique=$id_rubrique";
 }
@@ -146,7 +153,7 @@ function generer_url_rubrique($id_rubrique) {
 function generer_url_breve($id_breve) {
 	$url = _generer_url_propre('breve', $id_breve);
 	if ($url)
-		return '+'.$url.'+'._terminaison_urls_propres;
+		return _debut_urls_propres . '+'.$url.'+'._terminaison_urls_propres;
 	else
 		return "breve.php3?id_breve=$id_breve";
 }
@@ -159,7 +166,7 @@ function generer_url_forum($id_forum, $show_thread=false) {
 function generer_url_mot($id_mot) {
 	$url = _generer_url_propre('mot', $id_mot);
 	if ($url)
-		return '+-'.$url.'-+'._terminaison_urls_propres;
+		return _debut_urls_propres . '+-'.$url.'-+'._terminaison_urls_propres;
 	else
 		return "mot.php3?id_mot=$id_mot";
 }
@@ -167,7 +174,7 @@ function generer_url_mot($id_mot) {
 function generer_url_auteur($id_auteur) {
 	$url = _generer_url_propre('auteur', $id_auteur);
 	if ($url)
-		return '_'.$url.'_'._terminaison_urls_propres;
+		return _debut_urls_propres . '_'.$url.'_'._terminaison_urls_propres;
 	else
 		return "auteur.php3?id_auteur=$id_auteur";
 }
@@ -175,7 +182,7 @@ function generer_url_auteur($id_auteur) {
 function generer_url_site($id_syndic) {
 	$url = _generer_url_propre('site', $id_syndic);
 	if ($url)
-		return '@'.$url.'@'._terminaison_urls_propres;
+		return _debut_urls_propres . '@'.$url.'@'._terminaison_urls_propres;
 	else
 		return "site.php3?id_syndic=$id_syndic";
 }
@@ -190,7 +197,7 @@ function generer_url_document($id_document) {
 	return '';
 }
 
-function recuperer_parametres_url($fond, $url) {
+function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	// Migration depuis anciennes URLs ?
@@ -214,11 +221,20 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 		return;
 	}
 
+	// Chercher les valeurs d'environnement qui indiquent l'url-propre
 	$url_propre = $GLOBALS['_SERVER']['REDIRECT_url_propre'];
-	if (!$url_propre) $url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
+	if (!$url_propre)
+		$url_propre = $GLOBALS['HTTP_ENV_VARS']['url_propre'];
 	if (!$url_propre) {
 		$url = substr($url, strrpos($url, '/') + 1);
 		$url_propre = preg_replace(',[?].*,', '', $url);
+	}
+	// Mode Query-String ?
+	$adapter_le_fond = false;
+	if (!$url_propre
+	AND preg_match(',([?])([^=/?&]+)(&.*)?$,', $GLOBALS['REQUEST_URI'], $r)) {
+		$url_propre = $r[2];
+		$adapter_le_fond = true;
 	}
 	if (!$url_propre) return;
 
@@ -260,6 +276,10 @@ preg_match(',(^|/)((article|breve|rubrique|mot|auteur|site)(\.php3?|[0-9]+\.html
 	if ($row = spip_fetch_array($result)) {
 		$contexte[$col_id] = $row[$col_id];
 	}
+
+	// En mode Query-String, on fixe ici le $fond utilise
+	if ($adapter_le_fond)
+		$fond = $type;
 
 	return;
 }

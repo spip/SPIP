@@ -576,12 +576,6 @@ if (!$REQUEST_URI) {
 		$REQUEST_URI .= '?'.$QUERY_STRING;
 }
 
-if (!$PATH_TRANSLATED) {
-	if ($SCRIPT_FILENAME) $PATH_TRANSLATED = $SCRIPT_FILENAME;
-	else if ($DOCUMENT_ROOT && $SCRIPT_URL) $PATH_TRANSLATED = $DOCUMENT_ROOT.$SCRIPT_URL;
-}
-
-
 // API d'appel a la base de donnees
 function spip_query($query) {
 
@@ -767,8 +761,11 @@ class Link {
 		$url = $this->file;
 		if (!$url) $url = './';
 		$query = '';
-		foreach($this->vars as $name => $value)
-			$query .= '&'.$name.'='.urlencode($value);
+		foreach($this->vars as $name => $value) {
+			$query .= '&'.$name;
+			if (strlen($value))
+				$query .= '='.urlencode($value);
+		}
 
 		foreach ($this->arrays as $name => $table)
 		foreach ($table as $value)
