@@ -12,5 +12,5 @@
 
 include ("inc.php3");
 $var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
-$var_f(intval($id_rubrique), $frame, $effacer_suivant, $special);
+$var_f(is_numeric($id_rubrique) ? intval($id_rubrique) : "", $frame, $effacer_suivant, $special);
 ?>

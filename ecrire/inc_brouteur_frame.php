@@ -82,8 +82,7 @@ function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
 
 	}
 	else {
-	  if ($id_rubrique)
- {
+	  if ($id_rubrique !== "") {
 
 		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre";
 		$result=spip_query($query);
@@ -104,7 +103,7 @@ function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
 			echo "</div>";
 		}
 
-	
+
 		$query = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre";
 		$result=spip_query($query);
 		while($row=spip_fetch_array($result)){
@@ -209,9 +208,9 @@ function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
 			}
 		}
 
-
+		// en dernière colonnes, afficher articles et breves
 		if ($frame == 0 AND $id_rubrique==0) {
-	
+
 			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
 			$result=spip_query($query);
 			if (spip_num_rows($result)>0) {
@@ -229,8 +228,6 @@ function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
 			if ($total_articles + $total_breves > 0)
 			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
 					  "><b class='verdana2'><a href='brouteur_frame.php3?special=valider&frame=".($frame+1)."&effacer_suivant=oui' target='iframe".($frame+1)."'>"._T("info_articles_proposes")." / "._T("info_breves_valider")."</a></b></div>";
-			
-
 
 		}
 
@@ -241,4 +238,3 @@ function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
 echo "</body></html>";
 }
 ?>
-
