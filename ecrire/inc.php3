@@ -12,20 +12,8 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
-$var_nom = "auth";
-$var_f = find_in_path('inc_' . $var_nom . '.php');
-
-if ($var_f) 
-      include($var_f);
-else  include_ecrire($var_f = 'inc_' . $var_nom . '.php3');
-    
-if (function_exists($var_nom))
-        $var_res = $var_nom();
-elseif (function_exists($var_f = $var_nom . "_dist"))
-        $var_res = $var_f();
-else {spip_log("fonction $var_nom indisponible dans $var_f");exit;}
-
-if (!$var_res) exit;
+$var_f = include_fonction('auth');
+if (!$var_f()) exit;
 
 include_ecrire("inc_minipres.php"); // choisit la langue
 include_ecrire('inc_admin.php3');

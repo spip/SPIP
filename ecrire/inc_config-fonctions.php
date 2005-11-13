@@ -18,8 +18,18 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_config.php3");
 
-function affiche_config_fonctions_dist()
+function config_fonctions_dist($changer_config)
 {
+	global $connect_statut, $connect_toutes_rubriques;
+	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+		echo _T('avis_non_acces_page');
+		exit;
+
+	}
+
+	init_config();
+	if ($changer_config == 'oui') appliquer_modifs_config();
+
 	global $flag_revisions, $options ;
 
 	debut_page(_T('titre_page_config_fonctions'), "administration", "configuration");
