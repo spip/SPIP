@@ -12,6 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
+
 function enfants($id_parent, $critere){
 	global $nombre_vis;
 

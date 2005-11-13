@@ -11,22 +11,6 @@
 \***************************************************************************/
 
 include ("inc_version.php3");
-
-// prendre $var_* comme variables pour eviter les conflits avec les http_vars
-
-$var_nom = "export";
-$var_f = find_in_path('inc_' . $var_nom . '.php');
-
-if ($var_f) 
-  include($var_f);
- // ATTENTION PHP3 ici
-else
-  include_ecrire('inc_' . $var_nom . '.php3');
-
-if (function_exists($var_nom))
-  $var_nom($id_rubrique, $maj);
-elseif (function_exists($var_f = $var_nom . "_dist"))
-  $var_f($id_rubrique, $maj);
-else
-   spip_log("fonction $var_nom indisponible");
+$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
+$var_f(intval($id_rubrique), $maj);
 ?>

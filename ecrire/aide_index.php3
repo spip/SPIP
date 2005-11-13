@@ -12,14 +12,6 @@
 
 define('_ECRIRE_AIDE', 1);
 include ("inc_version.php3");
-
-$nom = "aide_index";
-$f = find_in_path('inc_' . $nom . '.php');
-if ($f) 
-  include($f);
- else include_ecrire('inc_' . $nom . '.php');
-  
-if (function_exists($nom))
-  $nom($img, $frame, $aide, $var_lang, $lang);
-
+$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
+$var_f($img, $frame, $aide, $var_lang, $lang);
 ?>

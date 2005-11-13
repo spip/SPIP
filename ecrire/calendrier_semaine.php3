@@ -10,7 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+// script obsolete; present pour compatibilite
 if (!isset($_GET['type'])) $type = 'semaine';
-include ("calendrier.php3");
-exit;
+include ("inc.php3");
+$var_f = include_fonction('calendrier');
+$var_f($type, $css);
 ?>

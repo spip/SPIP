@@ -17,9 +17,9 @@ include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 
-function articles_page_dist($id_auteur)
+function articles_page_dist()
 {
-	global $connect_statut;
+  global $connect_statut, $connect_id_auteur;
 
 	debut_page(_T('titre_page_articles_page'), "documents", "articles");
 
@@ -51,7 +51,7 @@ debut_droite();
 echo "<P align=left>";
 afficher_articles(_T('info_en_cours_validation'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC");
 echo "</p>";
 
 
@@ -63,7 +63,7 @@ echo "</p>";
 echo "<p>";
 afficher_articles(_T('info_attente_validation'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$id_auteur AND articles.statut='prop' ORDER BY articles.date");
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prop' ORDER BY articles.date");
 echo "</p>";
 
 //
@@ -73,7 +73,7 @@ echo "</p>";
 echo "<p>";
 afficher_articles(_T('info_publies'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$id_auteur\" AND articles.statut='publie' ORDER BY articles.date DESC", true);
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='publie' ORDER BY articles.date DESC", true);
 echo "</p>";
 
 //
@@ -83,7 +83,7 @@ echo "</p>";
 echo "<p>";
 afficher_articles(_T('info_refuses'),
 	", spip_auteurs_articles AS lien ".
-	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$id_auteur\" AND articles.statut='refuse' ORDER BY articles.date DESC");
+	"WHERE articles.id_article=lien.id_article AND lien.id_auteur=\"$connect_id_auteur\" AND articles.statut='refuse' ORDER BY articles.date DESC");
 echo "</p>";
 
 fin_page();

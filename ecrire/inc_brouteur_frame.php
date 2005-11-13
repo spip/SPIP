@@ -82,7 +82,7 @@ function brouteur_frame_dist($id_rubrique, $frame, $effacer_suivant, $special)
 
 	}
 	else {
-	  if (isset($id_rubrique) && ($id_rubrique !== ''))
+	  if ($id_rubrique)
  {
 
 		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre";

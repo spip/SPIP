@@ -10,6 +10,32 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+# gerer un charset minimaliste en convertissant tout en unicode &#xxx;
+
+function ajax_page_dist($fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+{
+	global $flag_ob;
+	$var_nom = 'ajax_page_' . $fonction;
+	if (!function_exists($var_nom))
+		spip_log("fonction $var_nom indisponible");
+	else {
+		if ($flag_ob) {
+			ob_start();
+			$charset = lire_meta("charset");
+		}
+		@header('Content-type: text/html; charset=$charset');
+		echo "<"."?xml version='1.0' encoding='$charset'?".">\n";
+		$var_nom($id, $exclus, $col, $id_ajax_fonc, $type, $rac);
+
+		if ($flag_ob) {
+			$a = ob_get_contents();
+			ob_end_clean();
+			include_ecrire('inc_charsets.php3');
+			echo charset2unicode($a, 'AUTO', true);
+		}
+	}
+}
+
 # Une fonction stockee en base de donnees ?
 
 function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
