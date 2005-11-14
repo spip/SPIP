@@ -424,7 +424,7 @@ if ($spip_display != 4) {
 
 
 
-function affiche_accueil_dist($id_rubrique)
+function accueil_dist($id_rubrique)
 {
 
   global $meta,  $connect_statut, $options,  $connect_id_auteur, $flag_ob;
@@ -447,7 +447,6 @@ if ($meta["debut_restauration"]) {
 	import_init();
 	exit;
  }
-
 
 //
 // Articles post-dates en attente de publication
@@ -489,6 +488,16 @@ if ($options == 'avancees') {
 
 fin_page("jimmac");
 
+
+//
+// Symetrique du debut: apres restauration ou MAJ, recalculer les rubriques
+//
+
+	if (lire_meta('calculer_rubriques') == 'oui') {
+		calculer_rubriques();
+		effacer_meta('calculer_rubriques');
+		ecrire_metas();
+	}
 
 }
 ?>

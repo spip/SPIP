@@ -30,6 +30,7 @@ $result = spip_query($query);
 if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
 	$id_rubrique = $row["id_rubrique"];
+	$titre = $row["titre"];
 	$date = $row["date"];
 	$statut_article = $row["statut"];
 	$maj = $row["maj"];

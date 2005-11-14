@@ -47,6 +47,7 @@ function fichier_session($id_session, $alea) {
 // Ajouter une session pour l'auteur specifie
 //
 function ajouter_session($auteur, $id_session) {
+	renouvelle_alea();
 	$fichier_session = fichier_session($id_session, lire_meta('alea_ephemere'));
 	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env');
 
@@ -235,4 +236,22 @@ function verifier_visiteur() {
 		return true;
 	return false;
 }
+
+//
+// Renouvellement de l'alea utilise pour valider certaines operations
+// (session, ajouter une image, etc.)
+//
+function renouvelle_alea()
+{
+	if (abs(time() -  lire_meta('alea_ephemere_date')) > 2 * 24*3600) {
+	  	spip_log("renouvellement de l'alea_ephemere");
+		include_ecrire("inc_session.php3");
+		$alea = md5(creer_uniqid());
+		ecrire_meta('alea_ephemere_ancien', lire_meta('alea_ephemere'));
+		ecrire_meta('alea_ephemere', $alea);
+		ecrire_meta('alea_ephemere_date', time());
+		ecrire_metas();
+	}
+}
+
 ?>
