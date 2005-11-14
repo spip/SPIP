@@ -271,6 +271,7 @@ ecrire/inc_brouteur.php -text
 ecrire/inc_brouteur_frame.php -text
 ecrire/inc_config-fonctions.php -text
 ecrire/inc_controle_forum.php -text
+ecrire/inc_controle_petition.php -text
 ecrire/inc_cookie.php -text
 ecrire/inc_forum_admin.php -text
 ecrire/inc_headers.php -text
