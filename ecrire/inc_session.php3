@@ -13,6 +13,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+include_ecrire ("inc_meta.php3");
 
 /*
  * Gestion de l'authentification par sessions
