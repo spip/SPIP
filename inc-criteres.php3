@@ -519,7 +519,7 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
 	AND preg_match(",^(date|mois|annee|heure|age|"
-	."age_relatif|jour_relatif|mois_relatif|annee_relatif)(_redac)?$,",
+	."age_relatif|jour_relatif|mois_relatif|annee_relatif)(_[a-z]+)?$,",
 	$col, $regs)) {
 		list($col, $col_table) =
 		calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[2]);
