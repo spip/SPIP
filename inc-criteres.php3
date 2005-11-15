@@ -770,10 +770,14 @@ function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
 	$boucle = $boucles[$idb];
 
 	if ($suite) {
-	    $date_orig = "date_redac";
-	} else {
-	    $date_orig = $table_date[$boucle->type_requete];
-	  }
+	# NOTE : A transformer en recherche de l'existence du champ date_xxxx,
+	# si oui choisir ce champ, sinon choisir xxxx
+		if ($suite =='_redac' OR $suite=='_modif')
+			$date_orig = 'date'.$suite;
+		else
+			$date_orig = substr($suite, 1);
+	} else
+		$date_orig = $table_date[$boucle->type_requete];
 
 	$date_orig = $boucle->id_table . ".$date_orig";
 	$date_compare = '\'" . normaliser_date(' .
