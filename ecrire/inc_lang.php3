@@ -269,7 +269,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			else
 				$site = '..';
 
-		if (!_DIR_RESTREINT) {
+		if (!_DIR_RESTREINT && _FILE_CONNECT) {
 			include_ecrire('inc_admin.php3');
 			$cible = _DIR_RESTREINT_ABS . $lien->getUrl();
 			$post = "$site/spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
