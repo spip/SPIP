@@ -63,7 +63,11 @@ function critere_doublons_dist($idb, &$boucles, $crit) {
 	  ')], \'' . 
 	  ($crit->not ? '' : 'NOT') .
 	  "') . \"";
-	if ($crit->not) $boucle->doublons = "";
+# la ligne suivante avait l'intention d'éviter une collecte deja faite
+# mais elle fait planter une boucle a 2 critere doublons:
+# {!doublons A}{doublons B}
+# (de http://article.gmane.org/gmane.comp.web.spip.devel/31034)
+#	if ($crit->not) $boucle->doublons = "";
 }
 
 // {lang_select}
