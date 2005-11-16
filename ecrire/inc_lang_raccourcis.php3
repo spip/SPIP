@@ -35,7 +35,7 @@ debut_gauche();
 $modules = array();
 
 if (!$d = @opendir(_DIR_LANG)) return;
-while ($f = readdir($d)) {
+while (($f = readdir($d)) !== false) {
 	if (ereg('^([a-z_]+)\.php3?$', $f, $regs))
 		$nom_module = $regs[1];
 		if (!ereg('^(spip|ecrire)\_', $nom_module) && ereg("^([a-zA-Z]+)\_".$spip_lang."$", $nom_module, $reps))
@@ -85,7 +85,7 @@ function afficher_raccourcis($module = "public") {
 		echo "<div>&nbsp;</div>";
 
 		if (!$d = @opendir(_DIR_LANG)) return;
-		while ($f = readdir($d)) {
+		while (($f = readdir($d)) !== false) {
 			if (ereg("^".$module."\_([a-z_]+)\.php3?$", $f, $regs))
 				$langue_module[$regs[1]] = traduire_nom_langue($regs[1]);
 		}

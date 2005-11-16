@@ -13,10 +13,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-//
-// Compiler les statistiques temporaires : visites
-//
-
 // Les deux fonctions suivantes sont adaptees du code des "Visiteurs",
 // par Jean-Paul Dezelus (http://www.phpinfo.net/applis/visiteurs/)
 
@@ -141,119 +137,6 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 
 	return $buffer;
 
-}
-
-
-//
-// Optimiser les informations liees aux referers
-//
-
-function supprimer_referers($type = "") {
-	$table = 'spip_referers';
-	if ($type) {
-		$table .= '_'. $type . 's';
-		$col_id = 'id_' . $type;
-		$query = "SELECT COUNT(DISTINCT $col_id) AS count FROM $table";
-		$result = spip_query($query);
-		if ($row = @spip_fetch_array($result)) {
-			$count = $row['count'];
-		}
-	}
-	if (!$count) $count = 1;
-	$count = intval($count * 100);
-	$query = "SELECT visites FROM $table ".
-		"ORDER BY visites LIMIT 1 OFFSET $count";
-	$result = spip_query($query);
-	$visites_min =  1;
-	if ($row = @spip_fetch_array($result)) {
-		$visites_min = $row['visites'];
-	}
-
-	$query = "DELETE FROM $table WHERE (date < DATE_SUB(NOW(),INTERVAL 7 DAY) AND visites <= $visites_min) OR (date < DATE_SUB(NOW(),INTERVAL 30 DAY))";
-	$result = spip_query($query);
-}
-
-
-
-//
-// Compiler les statistiques temporaires : referers (si active)
-//
-
-function calculer_n_referers($nb_referers) {
-	$date = date("Y-m-d");
-
-	$result = spip_query("SELECT COUNT(DISTINCT ip) AS visites, referer, HEX(referer_md5) AS md5 ".
-			     "FROM spip_referers_temp GROUP BY referer_md5 LIMIT $nb_referers");
-
-	$tous = spip_num_rows($result);
-
-	$referer_insert = "";
-	$referer_update = "";
-	$referer_vus = "";
-
-	while ($row = @spip_fetch_array($result)) {
-		$visites = $row['visites'];
-		$referer = addslashes($row['referer']);
-		$referer_md5 = '0x'.$row['md5'];
-		$referer_update[$visites][] = $referer_md5;
-		$referer_insert[] = "('$date', '$referer', $referer_md5, $visites, $visites)";
-		$referer_vus .= "," . $referer_md5;
-	}
-	if ($referer_vus) 
-	  $referer_vus = "referer_md5 IN (" . substr($referer_vus,1) . ")";
-
-	// Mise a jour de la base
-	if (is_array($referer_update)) {
-		while (list($visites, $referers) = each($referer_update)) {
-			$query = "UPDATE spip_referers SET visites = visites + $visites, visites_jour = visites_jour + $visites ".
-				"WHERE referer_md5 IN (".join(', ', $referers).")";
-			$result = spip_query($query);
-		}
-	}
-	if (is_array($referer_insert)) {
-		$query_insert = "INSERT IGNORE INTO spip_referers ".
-			"(date, referer, referer_md5, visites, visites_jour) VALUES ".join(', ', $referer_insert);
-		$result_insert = spip_query($query_insert);
-	}
-
-	// Ventiler ces referers article par article
-	$query = "SELECT COUNT(DISTINCT ip) AS visites, id_objet, referer, HEX(referer_md5) AS md5 FROM spip_referers_temp WHERE type='article'"
-		  . ($referer_vus ? " AND $referer_vus" : '')
-		  . " GROUP BY id_objet, referer_md5";
-	$result = spip_query($query);
-
-	$referer_insert = "";
-	$referer_update = "";
-
-	while ($row = @spip_fetch_array($result)) {
-		$id_article = $row['id_objet'];
-		$visites = $row['visites'];
-		$referer = addslashes($row['referer']);
-		$referer_md5 = '0x'.$row['md5'];
-
-		$referer_update[$visites][] = "(id_article=$id_article AND referer_md5=$referer_md5)";
-		$referer_insert[] = "('$date', '$referer', $referer_md5, $id_article, $visites)";
-	}
-
-	// Mise a jour de la base
-	if (is_array($referer_update)) {
-		while (list($visites, $where) = each($referer_update)) {
-			$query = "UPDATE spip_referers_articles SET visites = visites + $visites ".
-				"WHERE ".join(' OR ', $where);
-			$result = spip_query($query);
-		}
-	}
-	if (is_array($referer_insert)) {
-		$query_insert = "INSERT IGNORE INTO spip_referers_articles ".
-			"(date, referer, referer_md5, id_article, visites) VALUES ".join(', ', $referer_insert);
-		$result_insert = spip_query($query_insert);
-	}
-
-	// Effacer les referers traites
-	if ($referer_vus) {
-	  spip_query("DELETE FROM spip_referers_temp WHERE $referer_vus");
-	}
-	return  $tous ;
 }
 
 

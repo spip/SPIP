@@ -403,7 +403,7 @@ function init_langues() {
 	$toutes_langs = Array();
 	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
 		if (!$d = @opendir(_DIR_LANG)) return;
-		while ($f = readdir($d)) {
+		while (($f = readdir($d)) !== false) {
 			if (ereg('^spip_([a-z_]+)\.php3?$', $f, $regs))
 				$toutes_langs[] = $regs[1];
 		}

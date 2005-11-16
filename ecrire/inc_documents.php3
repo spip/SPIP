@@ -362,7 +362,7 @@ function fichiers_upload($dir) {
 	$fichiers = array();
 	$d = opendir($dir);
 
-	while ($f = readdir($d)) {
+	while (($f = readdir($d)) !== false) {
 		if (($f[0] != '.') AND is_readable("$dir/$f"))
 			if (is_file("$dir/$f") 
 			AND $f != 'remove.txt')
