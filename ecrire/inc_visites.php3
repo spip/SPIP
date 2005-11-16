@@ -103,8 +103,8 @@ function calculer_visites($t) {
 	// Maintenant on dispose de plusieurs tableaux qu'il faut ventiler dans
 	// les tables spip_visites, spip_visites_articles, spip_referers
 	// et spip_referers_articles ; attention a affecter tout ca a la bonne
-	// date quand on est a cheval (entre minuit et 1 h du mat)
-	$date = date("Y-m-d", time() - 3600);
+	// date quand on est a cheval (entre minuit et 0h30)
+	$date = date("Y-m-d", time() - 1800);
 
 	// 1. les visites du site (facile)
 	spip_query("INSERT IGNORE INTO spip_visites
