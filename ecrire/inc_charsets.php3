@@ -176,6 +176,8 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 		$charset = lire_meta('charset');
 
 	if ($charset == '') $charset = 'iso-8859-1';
+	$charset = strtolower($charset);
+
 	switch ($charset) {
 	case 'utf-8':
 		return utf_8_to_unicode($texte);
