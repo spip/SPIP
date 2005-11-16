@@ -191,9 +191,7 @@ function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 	include_ecrire("inc_forum.php3");
 
 	$result_forum = spip_query("
-	SELECT	*
-	FROM	spip_forum
-	WHERE " . $query_forum . "
+	SELECT	* " . $query_forum . "
 	ORDER BY date_heure DESC LIMIT 20"
 	);
 

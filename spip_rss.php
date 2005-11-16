@@ -75,7 +75,7 @@ switch($op) {
 			$critere = "statut='publie' AND id_thread=$id";
 			$url = generer_url_forum($id);
 		}
-		if ($id) $rss = rss_suivi_forums($a, $critere, false);
+		if ($id) $rss = rss_suivi_forums($a, "FROM spip_forum WHERE $critere", false);
 		$title = _T("ecrire:titre_page_forum_suivi");
 		break;
 	# suivi prive des forums
