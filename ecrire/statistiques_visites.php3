@@ -275,22 +275,20 @@ if (!$origine) {
 		$i++;
 	}
 
-	// Visites du jour
-	if ($id_article) {
-		$query = "SELECT COUNT(DISTINCT ip) AS visites FROM spip_visites_temp WHERE type = 'article' AND id_objet = $id_article";
-		$result = spip_query($query);
-	} else {
-		$query = "SELECT COUNT(DISTINCT ip) AS visites FROM spip_visites_temp";
-		$result = spip_query($query);
-	}
-	if ($row = @spip_fetch_array($result))
-		$visites_today = $row['visites'];
-	else
-		$visites_today = 0;
 
+	// S'il y a au moins cinq minutes de stats :-)
 	if (count($log)>0) {
-		$max = max(max($log),$visites_today);
-		$date_today = time();
+		// les visites du jour
+		$date_today = max(array_keys($log));
+		$visites_today = $log[$date_today];
+		// sauf s'il n'y en a pas :
+		if (time()-$date_today>3600*24) {
+			$date_today = time();
+			$visites_today=0;
+		}
+		
+		// le nombre maximum
+		$max = max($log);
 		$nb_jours = floor(($date_today-$date_debut)/(3600*24));
 
 		$maxgraph = maxgraph($max);
@@ -326,11 +324,6 @@ if (!$origine) {
 			$aff_jours_moins = 420 * ((1/$largeur_abs) - 1);
 		}
 		
-//		$aff_jours_plus = round($aff_jours * 1.5);		
-//		$aff_jours_moins = round($aff_jours / 1.5);
-		
-		
-		
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
 		if ($date_premier < $date_debut)
@@ -344,25 +337,17 @@ if (!$origine) {
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
-		/*
-		if ($spip_svg_plugin == 'oui') {
-			echo "<div>";
-			echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
-			echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
-			echo "</object>";
-			echo "</div>";
-		} 
-		else {
-		*/
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
 			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
 			echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
 	
-			// Presentation graphique
-			while (list($key, $value) = each($log)) {
-				
+			// Presentation graphique (rq: on n'affiche pas le jour courant)
+			foreach ($log as $key => $value) {
+				# quand on atteint aujourd'hui, stop
+				if ($key == $date_today) break; 
+
 				$test_agreg ++;
 		
 				if ($test_agreg == $agreg) {	
@@ -564,6 +549,7 @@ if (!$origine) {
 		echo "</td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo _T('info_aujourdhui').' '.$visites_today;
+
 		if ($val_prec > 0) echo "<br>"._T('info_hier').' '.$val_prec;
 		if ($id_article) echo "<br>"._T('info_popularite_5').' '.$val_popularite;
 
@@ -586,8 +572,8 @@ if (!$origine) {
 			echo "</font>";
 		}
 		echo "</td></tr></table>";	
-	}		
-	
+	}
+
 	if (count($log) > 60) {
 		echo "<p>";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
@@ -689,9 +675,6 @@ if (!$origine) {
 			}
 			echo http_img_rien($largeur,1,'background-color:black;', $tagtitle);
 			echo "</td>\n";
-			
-			$jour_prec = $key;
-			$val_prec = $value;
 		}
 		
 		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>";
