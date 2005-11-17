@@ -30,44 +30,35 @@ $articles_mots = lire_meta("articles_mots");
 $articles_versions = (lire_meta("articles_versions")=='oui') && $flag_revisions;
 
 if ($id_article==0) {
-	if ($new=='oui') {
-		// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
-		if (!$id_rubrique = intval($id_parent)) {
+	if ($new!='oui')  redirige_par_entete("./index.php3");
+	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
+	if (!$id_rubrique = intval($id_parent)) {
 			$s = spip_query("SELECT id_rubrique FROM spip_rubriques
 			WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1");
 			list($id_rubrique) = spip_fetch_array($s);
-		}
-		if ($titre=='') $titre = _T('info_sans_titre');
+	}
+	if ($titre=='') $titre = _T('info_sans_titre');
 
-		$langue_new = '';
-		$result_lang_rub = spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
-		if ($row = spip_fetch_array($result_lang_rub))
+	$langue_new = '';
+	$result_lang_rub = spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
+	if ($row = spip_fetch_array($result_lang_rub))
 			$langue_new = $row["lang"];
 
-		if (!$langue_new) $langue_new = lire_meta('langue_site');
-		$langue_choisie_new = 'non';
+	if (!$langue_new) $langue_new = lire_meta('langue_site');
+	$langue_choisie_new = 'non';
+	
+	$forums_publics = substr(lire_meta('forums_publics'),0,3);
 
-		$forums_publics = substr(lire_meta('forums_publics'),0,3);
-
-		$id_article = spip_abstract_insert("spip_articles",
+	$id_article = spip_abstract_insert("spip_articles",
 			"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
 			"($id_rubrique, 'prepa', NOW(), '$forums_publics', '$langue_new', '$langue_choisie_new')");
 
-		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
-		spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
+	spip_query("DELETE FROM spip_auteurs_articles WHERE id_article = $id_article");
+	spip_query("INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($connect_id_auteur, $id_article)");
 
-		// Modifier le lien de base pour qu'il prenne en compte le nouvel id
-		unset($_POST['id_rubrique']);
-		$_POST['id_article'] = $id_article;
-		$clean_link = new Link();
-	} else {
-		redirige_par_entete("./index.php3");
-	}
 }
 
-
 $clean_link = new Link("articles.php3?id_article=$id_article");
-
 
 
 //////////////////////////////////////////////////////
@@ -97,8 +88,6 @@ $flag_editable = (acces_rubrique($rubrique_article)
 //
 // Appliquer les modifications
 //
-
-$suivi_edito = lire_meta("suivi_edito");
 
 $ok_nouveau_statut = false;
 
@@ -156,8 +145,7 @@ if ($jour_redac && $flag_editable) {
 
 // Appliquer la modification de langue
 if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
-  $row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . intval($rubrique_article)));
-	$langue_parent = $row['lang'];
+	list($langue_parent) = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . intval($rubrique_article)));
 
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
@@ -167,33 +155,10 @@ if (lire_meta('multi_articles') == 'oui' AND $flag_editable) {
 	}
 }
 
-// Passer les images/docs en "inclus=non"
-$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
-$result = spip_query($query);
-
-while($row=spip_fetch_array($result)){
-	$ze_doc[]=$row['id_document'];
-}
-
-if (count($ze_doc)>0){
-	$ze_docs = join($ze_doc,",");
-	spip_query("UPDATE spip_documents SET inclus='non' WHERE id_document IN ($ze_docs)");
-}
-
+inclus_non_articles($id_article);
 
 # modifs de la description d'un des docs joints
 if ($flag_editable) maj_documents($id_article, 'article');
-
-
-//
-// Reunit les textes decoupes parce que trop longs
-//
-
-$nb_texte = 0;
-while ($nb_texte ++ < count($texte_plus)+1){
-	$texte_ajout .= ereg_replace("<!--SPIP-->[\n\r]*","",$texte_plus[$nb_texte]);
-}
-$texte = $texte_ajout . $texte;
 
 // preparer le virtuel
 
@@ -206,78 +171,21 @@ if ($changer_virtuel && $flag_editable) {
 }
 
 if (strval($titre)!=='' AND !$ajout_forum AND $flag_editable) {
-	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
-	$champs_version = array();
-	foreach ($champs as $nom_champ) {
-		$t = $champs_versions[$nom_champ] = corriger_caracteres($$nom_champ);
-		$$nom_champ = addslashes($t);
-	}
 
-	// recoller les champs du extra
-	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
-	} else
-		$add_extra = '';
+	$champs = array(
+			'surtitre' => corriger_caracteres($surtitre),
+			'titre' => ($titre_article=corriger_caracteres($titre)),
+			'soustitre' => corriger_caracteres($soustitre),
+			'descriptif' => corriger_caracteres($descriptif),
+			'nom_site' => corriger_caracteres($nom_site),
+			'url_site' => corriger_caracteres($url_site),
+			'chapo' => corriger_caracteres($chapo),
+			'texte' => corriger_caracteres(trop_longs_articles($texte_plus) . $texte),
+			'ps' => corriger_caracteres($ps))  ;
 
-	// Verifier qu'on envoie bien dans une rubrique autorisee
-	if ($id_rubrique=intval($id_parent)
-	AND ($flag_auteur OR acces_rubrique($id_rubrique))) {
-		$change_rubrique = "id_rubrique=$id_rubrique,";
-	} else {
-		$change_rubrique = "";
-	}
-
-	// Stockage des versions : creer une premier version si non-existante
-	if ($articles_versions) {
-		include("lab_revisions.php");
-		if  ($new != 'oui') {
-			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
-			if (!spip_num_rows(spip_query($query))) {
-				spip_log("version initiale de l'article $id_article");
-				$select = join(", ", $champs);
-				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
-				$champs_originaux = spip_fetch_array(spip_query($query));
-				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'), 0);
-
-				// Remettre une date un peu ancienne pour la version initiale 
-				if ($id_version == 1) // test inutile ?
-				spip_query("UPDATE spip_versions
-				SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
-				WHERE id_article=$id_article AND id_version=1");
-			}
-		}
-	}
-
-	$query = "UPDATE spip_articles SET surtitre='$surtitre', titre='$titre', soustitre='$soustitre', $change_rubrique descriptif='$descriptif', chapo='$chapo', texte='$texte', ps='$ps', url_site='$url_site', nom_site='$nom_site' $add_extra WHERE id_article=$id_article";
-	$result = spip_query($query);
-	if ($change_rubrique) propager_les_secteurs();
-	calculer_rubriques();
-
-	// Stockage des versions
-	if ($articles_versions) {
-		ajouter_version($id_article, $champs_versions, '', $connect_id_auteur);
-	}
-
-	// Changer la langue heritee
-	if ($id_rubrique != $id_rubrique_old) {
-		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
-		$langue_old = $row['lang'];
-		$langue_choisie_old = $row['langue_choisie'];
-
-		if ($langue_choisie_old != "oui") {
-			$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-			$langue_new = $row['lang'];
-			if ($langue_new != $langue_old) spip_query("UPDATE spip_articles SET lang = '$langue_new' WHERE id_article = $id_article");
-		}
-	}
-
-	// afficher le nouveau titre dans la barre de fenetre
-	$titre_article = stripslashes($titre);
-
-	// marquer l'article (important pour les articles nouvellement crees)
-	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
+	revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent, $flag_auteur, $articles_versions, $new, $champs, $id_rubrique_old);
 	$id_article_bloque = $id_article;   // message pour inc_presentation
+
  }
 
 ///////////////// Affichage
@@ -286,6 +194,7 @@ if (function_exists('affiche_articles'))
   $var_nom = 'affiche_articles';
  else
   $var_nom = 'affiche_articles_dist';
+
 
 // on pourrait supprimer les arguments issus des meta
 // mais l'URL admet de fait une vingtaine de parametres differents
