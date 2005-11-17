@@ -190,15 +190,8 @@ if ($flag_editable) maj_documents($id_article, 'article');
 //
 
 $nb_texte = 0;
-while ($nb_texte ++ < 100){		// 100 pour eviter une improbable boucle infinie
-	$varname = "texte$nb_texte";
-	$texte_plus = $$varname;	// double $ pour obtenir $texte1, $texte2...
-	if ($texte_plus){
-		$texte_plus = ereg_replace("<!--SPIP-->[\n\r]*","",$texte_plus);
-		$texte_ajout .= $texte_plus;
-	} else {
-		break;
-	}
+while ($nb_texte ++ < count($texte_plus)+1){
+	$texte_ajout .= ereg_replace("<!--SPIP-->[\n\r]*","",$texte_plus[$nb_texte]);
 }
 $texte = $texte_ajout . $texte;
 

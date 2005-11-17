@@ -227,15 +227,15 @@ echo "<P><HR><P>";
 
 	if (strlen($texte)>29*1024) // texte > 32 ko -> decouper en morceaux
 	{
-		$textes_supplement = "<br><font color='red'>"._T('info_texte_long')."</font>\n";
+		$textes_supplement = "<br /><font color='red'>"._T('info_texte_long')."</font>\n";
 		while (strlen($texte)>29*1024)
 		{
 			$nombre_textes ++;
 			list($texte1,$texte) = coupe_trop_long($texte);
 
-			$textes_supplement .= "<BR>";
+			$textes_supplement .= "<BR />";
 			$textes_supplement .= afficher_barre('document.formulaire.texte'.$nombre_textes);
-			$textes_supplement .= "<TEXTAREA NAME='texte$nombre_textes'".
+			$textes_supplement .= "<TEXTAREA NAME='texte_plus[$nombre_textes]'".
 				" CLASS='formo' ".$GLOBALS['browser_caret']." ROWS='$rows' COLS='40' wrap=soft>" .
 				$texte1 . "</TEXTAREA><P>\n";
 		}
