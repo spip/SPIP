@@ -167,7 +167,7 @@ function enregistre_forum() {
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($GLOBALS['afficher_texte'] <> 'non') {
-		include_ecrire("inc_admin.php3");
+		include_ecrire("inc_session.php3");
 		if (!verifier_action_auteur("ajout_forum $id_rubrique".
 		" $id_forum $id_article $id_breve".
 		" $id_syndic $alea", $hash)) {
