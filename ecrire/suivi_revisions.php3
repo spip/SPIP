@@ -70,9 +70,9 @@ WHERE versions.id_article = articles.id_article AND versions.id_version > 1 AND 
 	else if (spip_num_rows($result_rub) > 0) echo "<li><a href='suivi_revisions.php3?id_secteur=$id_rubrique'>$titre</a>";
 }
 
-if ((lire_meta('multi_rubriques') == 'oui') OR (lire_meta('multi_articles') == 'oui')) {
+if (($GLOBALS['meta']['multi_rubriques'] == 'oui') OR ($GLOBALS['meta']['multi_articles'] == 'oui')) {
 	echo "<p>";
-	$langues = explode(',', lire_meta('langues_multilingue'));
+	$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 	
 	foreach ($langues as $lang) {
 		$titre = traduire_nom_langue($lang);

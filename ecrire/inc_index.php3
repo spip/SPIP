@@ -24,7 +24,7 @@ function separateurs_indexation($requete = false) {
 		$liste .= "'`?\~.^+(-";
 
 	// windowzeries iso-8859-1
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'iso-8859-1')
 		$liste .= chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
 
@@ -101,7 +101,7 @@ function extracteur_html($fichier, &$charset) {
 	// Importer dans le charset local
 	include_ecrire('inc_charsets.php3');
 	$contenu = transcoder_page($contenu);
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 
 	return $contenu;
 }
@@ -227,7 +227,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 	if (!$row) return;
 
 	// translitteration complexe ?
-	if (!$lang = $row['lang']) $lang = lire_meta('langue_site');
+	if (!$lang = $row['lang']) $lang = $GLOBALS['meta']['langue_site'];
 	if ($lang == 'de' OR $lang=='vi') {
 		$translitteration_complexe = 1;
 		spip_log ('-> translitteration complexe');
@@ -304,7 +304,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 			}
 		}
 		// Aller chercher la page d'accueil
-		if (lire_meta("visiter_sites") == "oui") {
+		if ($GLOBALS['meta']["visiter_sites"] == "oui") {
 			include_ecrire ("inc_sites.php3");
 			spip_log ("indexation contenu syndic ".$row['url_site']);
 			indexer_chaine(supprimer_tags(

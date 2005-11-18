@@ -76,7 +76,7 @@ function corriger_caracteres_windows($texte) {
 			chr(194).chr(133) => '...'
 		);
 	}
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	if (!$trans[$charset]) return $texte;
 	return strtr($texte, $trans[$charset]);
 }
@@ -103,7 +103,7 @@ function texte_backend($texte) {
 
 	// " -> &quot; et tout ce genre de choses
 	// contourner bug windows ou char(160) fait partie de la regexp \s
-	$u = (lire_meta('charset')=='utf-8') ? 'u':'';
+	$u = ($GLOBALS['meta']['charset']=='utf-8') ? 'u':'';
 	$texte = str_replace("&nbsp;", " ", $texte);
 	$texte = preg_replace("/\s\s+/$u", " ", $texte);
 	$texte = entites_html($texte);
@@ -112,7 +112,7 @@ function texte_backend($texte) {
 	$texte = entites_unicode($texte);
 
 	// Caracteres problematiques en iso-latin 1
-	if (lire_meta('charset') == 'iso-8859-1') {
+	if ($GLOBALS['meta']['charset'] == 'iso-8859-1') {
 		$texte = str_replace(chr(156), '&#156;', $texte);
 		$texte = str_replace(chr(140), '&#140;', $texte);
 		$texte = str_replace(chr(159), '&#159;', $texte);
@@ -146,7 +146,7 @@ function echapper_tags($texte, $rempl = "") {
 
 // Convertit un texte HTML en texte brut
 function textebrut($texte) {
-	$u = (lire_meta('charset')=='utf-8') ? 'u':'';
+	$u = ($GLOBALS['meta']['charset']=='utf-8') ? 'u':'';
 	$texte = preg_replace("/\s+/$u", " ", $texte);
 	$texte = preg_replace("/<(p|br)( [^>]*)?".">/i", "\n\n", $texte);
 	$texte = preg_replace("/^\n+/", "", $texte);
@@ -179,7 +179,7 @@ function lignes_longues($texte, $l = 70) {
 	// qui prennent 7 caracteres
 	include_ecrire('inc_charsets.php3');
 	$texte = unicode_to_utf_8(charset2unicode(
-		$texte, lire_meta('charset'), true));
+		$texte, $GLOBALS['meta']['charset'], true));
 
 	// echapper les tags (on ne veut pas casser les a href=...)
 	$tags = array();
@@ -647,7 +647,7 @@ function style_align($bof) {
 function filtrer_ical($texte) {
 	include_ecrire('inc_charsets.php3');
 	$texte = html2unicode($texte);
-	$texte = unicode2charset(charset2unicode($texte, lire_meta('charset'), 1), 'utf-8');
+	$texte = unicode2charset(charset2unicode($texte, $GLOBALS['meta']['charset'], 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
 	$texte = ereg_replace(",", "\,", $texte);
 
@@ -1631,10 +1631,10 @@ function vider_attribut ($balise, $attribut) {
 function tester_config($ignore, $quoi) {
 	switch ($quoi) {
 		case 'mode_inscription':
-			if (lire_meta("accepter_inscriptions") == "oui")
+			if ($GLOBALS['meta']["accepter_inscriptions"] == "oui")
 				return 'redac';
-			else if (lire_meta("accepter_visiteurs") == "oui"
-			OR lire_meta('forums_publics') == 'abo')
+			else if ($GLOBALS['meta']["accepter_visiteurs"] == "oui"
+			OR $GLOBALS['meta']['forums_publics'] == 'abo')
 				return 'forum';
 			else
 				return '';
@@ -1703,7 +1703,7 @@ function suivre_lien($url, $lien) {
 function url_absolue($url, $base='') {
 	if (strlen($url = trim($url)) == 0)
 		return '';
-	if (!$base) $base=lire_meta('adresse_site').'/';
+	if (!$base) $base=$GLOBALS['meta']['adresse_site'].'/';
 	return suivre_lien($base, $url);
 }
 

@@ -18,10 +18,10 @@ define("_ECRIRE_INC_ORTHO", "1");
 
 // Mettre a jour la liste locale des miroirs
 function maj_miroirs_ortho() {
-	$liste = explode(" ", lire_meta("liste_miroirs_ortho"));
+	$liste = explode(" ", $GLOBALS['meta']["liste_miroirs_ortho"]);
 	$miroirs_old = array();
 	foreach ($liste as $index) {
-		list($url) = explode(" ", lire_meta("miroir_ortho_$index"));
+		list($url) = explode(" ", $GLOBALS['meta']["miroir_ortho_$index"]);
 		$miroirs_old[$url] = $index;
 	}
 
@@ -37,7 +37,7 @@ function maj_miroirs_ortho() {
 	$index = 1;
 	foreach ($urls as $url) {
 		if ($index_old = $miroirs_old[$url]) {
-			$s = lire_meta("miroir_ortho_$index_old");
+			$s = $GLOBALS['meta']["miroir_ortho_$index_old"];
 		}
 		else {
 			$s = $url." ".time();
@@ -62,16 +62,16 @@ function lire_miroirs_ortho() {
 	$index_miroirs_ortho = array();
 
 	$t = time();
-	$maj = lire_meta("maj_miroirs_ortho");
+	$maj = $GLOBALS['meta']["maj_miroirs_ortho"];
 	if ($maj < $t - $duree_cache_miroirs_ortho) {
 		maj_miroirs_ortho();
 		ecrire_meta("maj_miroirs_ortho", $t);
 		lire_metas();
 	}
 
-	$liste = explode(" ", lire_meta("liste_miroirs_ortho"));
+	$liste = explode(" ", $GLOBALS['meta']["liste_miroirs_ortho"]);
 	foreach ($liste as $index) {
-		$s = explode(" ", lire_meta("miroir_ortho_$index"));
+		$s = explode(" ", $GLOBALS['meta']["miroir_ortho_$index"]);
 		$url = $s[0];
 		$maj = $s[1];
 		$langs = explode(",", $s[2]);
@@ -99,7 +99,7 @@ function ecrire_miroir_ortho($url, $langs) {
 	global $index_miroirs_ortho;
 
 	$index = $index_miroirs_ortho[$url];
-	$s = explode(" ", lire_meta("miroir_ortho_$index"));
+	$s = explode(" ", $GLOBALS['meta']["miroir_ortho_$index"]);
 	$s[2] = join(",", $langs);
 	ecrire_meta("miroir_ortho_$index", join(" ", $s));
 }
@@ -384,7 +384,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 function preparer_ortho($texte, $lang) {
 	include_spip("charsets.php");
 
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 
 	if ($charset == 'utf-8')
 		return unicode_to_utf_8(html2unicode($texte));
@@ -393,7 +393,7 @@ function preparer_ortho($texte, $lang) {
 }
 
 function afficher_ortho($texte) {
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8') return $texte;
 
 	if (!is_array($texte)) return charset2unicode($texte, 'utf-8');

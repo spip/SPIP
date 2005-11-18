@@ -75,19 +75,19 @@ function balise_distante_interdite($p) {
 // Definition des balises
 //
 function balise_NOM_SITE_SPIP_dist($p) {
-	$p->code = "lire_meta('nom_site')";
+	$p->code = "\$GLOBALS['meta']['nom_site']";
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_EMAIL_WEBMASTER_dist($p) {
-	$p->code = "lire_meta('email_webmaster')";
+	$p->code = "\$GLOBALS['meta']['email_webmaster']";
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_CHARSET_dist($p) {
-	$p->code = "lire_meta('charset')";
+	$p->code = "\$GLOBALS['meta']['charset']";
 	$p->statut = 'php';
 	return $p;
 }
@@ -152,7 +152,7 @@ function balise_DATE_MODIF_dist ($p) {
 // #DATE_NOUVEAUTES
 // http://www.spip.net/fr_article1971.html
 function balise_DATE_NOUVEAUTES_dist($p) {
-	$p->code = "((lire_meta('quoi_de_neuf') == 'oui'
+	$p->code = "((\$GLOBALS['meta']['quoi_de_neuf'] == 'oui'
 	AND @file_exists(_DIR_SESSIONS . 'mail.lock')) ?
 	normaliser_date(@filemtime(_DIR_SESSIONS . 'mail.lock')) :
 	\"'0000-00-00'\")";
@@ -167,7 +167,7 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 }
 
 function balise_URL_SITE_SPIP_dist($p) {
-	$p->code = "lire_meta('adresse_site')";
+	$p->code = "\$GLOBALS['meta']['adresse_site']";
 	$p->statut = 'php';
 	return $p;
 }
@@ -325,13 +325,13 @@ function balise_POPULARITE_ABSOLUE_dist($p) {
 }
 
 function balise_POPULARITE_SITE_dist($p) {
-	$p->code = 'ceil(lire_meta(\'popularite_total\'))';
+	$p->code = 'ceil($GLOBALS["meta"][\'popularite_total\'])';
 	$p->statut = 'php';
 	return $p;
 }
 
 function balise_POPULARITE_MAX_dist($p) {
-	$p->code = 'ceil(lire_meta(\'popularite_max\'))';
+	$p->code = 'ceil($GLOBALS["meta"][\'popularite_max\'])';
 	$p->statut = 'php';
 	return $p;
 }
@@ -519,7 +519,7 @@ function balise_PETITION_dist ($p) {
 function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "(ceil(min(100, 100 * $_popularite
-	/ max(1 , 0 + lire_meta('popularite_max')))))";
+	/ max(1 , 0 + \$GLOBALS['meta']['popularite_max']))))";
 	$p->statut = 'php';
 	return $p;
 }
@@ -680,7 +680,7 @@ function balise_PARAMETRES_FORUM_dist($p) {
 	$p->code = '
 		// refus des forums ?
 		(sql_accepter_forum('.$_id_article.')=="non" OR
-		(lire_meta("forums_publics") == "non"
+		($GLOBALS["meta"]["forums_publics"] == "non"
 		AND sql_accepter_forum('.$_id_article.') == ""))
 		? "" : // sinon:
 		';

@@ -129,7 +129,7 @@ function erreur_squelette($message='', $lieu='') {
 			  "<head>\n<title>",
 			  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 			   _T('admin_debug') . ' ' .
-			   supprimer_tags(extraire_multi(lire_meta('nom_site')))), 
+			   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
 			  "</title>\n</head><body>",
 			  affiche_erreurs_page($tableau_des_erreurs),
 			  "</body></html>";
@@ -334,7 +334,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  "<head>\n<title>",
 	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 	   _T('admin_debug') . ' ' .
-	   supprimer_tags(extraire_multi(lire_meta('nom_site')))), 
+	   supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))), 
 	  "</title>\n",
 	  "<link rel='stylesheet' href='spip_admin.css' type='text/css'>",
 	  "</head>\n<body style='margin:0 10px;'>",

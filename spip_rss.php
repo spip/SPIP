@@ -122,7 +122,7 @@ switch($op) {
 // Envoyer le RSS
 //
 $intro = array(
-	'title' => "[".lire_meta('nom_site')."] RSS ".$title,
+	'title' => "[".$GLOBALS['meta']['nom_site']."] RSS ".$title,
 	'url' => $url
 );
 

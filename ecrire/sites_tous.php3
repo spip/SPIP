@@ -35,7 +35,7 @@ debut_droite();
 
 
 
-$proposer_sites=lire_meta("proposer_sites");
+$proposer_sites=$GLOBALS['meta']["proposer_sites"];
 
 
 

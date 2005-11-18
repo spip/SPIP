@@ -66,7 +66,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 
 	// Bouton statistiques
-	if (lire_meta("activer_statistiques") != "non" 
+	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
 	AND $id_article
 	AND !$var_preview
 	AND ($GLOBALS['auteur_session']['statut'] == '0minirezo')) {
@@ -108,12 +108,12 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	// Bouton "preview" si l'objet demande existe et est previsualisable
 	if (!$GLOBALS['var_preview'] AND (
-	((lire_meta('preview')=='1comite'
+	(($GLOBALS['meta']['preview']=='1comite'
 		AND $GLOBALS['auteur_session']['statut'] =='1comite')
-	OR (lire_meta('preview')<>''
+	OR ($GLOBALS['meta']['preview']<>''
 		AND $GLOBALS['auteur_session']['statut'] =='0minirezo'))
 	)) {
-		if ($objet_affiche == 'article' AND lire_meta('post_dates') != 'oui')
+		if ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
 			$postdates = "OR (statut='publie' AND date>NOW())";
 
 		if ($objet_affiche == 'article'

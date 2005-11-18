@@ -215,7 +215,7 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 	}
 
 	// Faut-il ajouter des propositions de mots-cles
-	if ($table AND (lire_meta("mots_cles_forums") == "oui"))
+	if ($table AND ($GLOBALS['meta']["mots_cles_forums"] == "oui"))
 		$table = table_des_mots($table, $les_mots);
 	else
 		$table = '';
@@ -400,7 +400,7 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 		list($accepter_forum) = spip_fetch_array(spip_query(
 		"SELECT accepter_forum FROM spip_articles WHERE id_article=$ida"));
 	if (!$accepter_forum)
-		$accepter_forum = substr(lire_meta("forums_publics"),0,3);
+		$accepter_forum = substr($GLOBALS['meta']["forums_publics"],0,3);
 	// valeurs possibles : 'pos'teriori, 'pri'ori, 'abo'nnement
 	if ($accepter_forum == "non")
 		return false;

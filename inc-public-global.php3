@@ -87,7 +87,7 @@ function calcule_header_et_page ($fond, $delais) {
 	if (!headers_sent() AND !$flag_preserver) {
 
 		// Content-type: par defaut html+charset (poss surcharge par la suite)
-		header("Content-Type: text/html; charset=".lire_meta('charset'));
+		header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
 
 		if ($flag_ob) {
 			// Si la page est vide, produire l'erreur 404
@@ -98,8 +98,8 @@ function calcule_header_et_page ($fond, $delais) {
 			// Interdire au client de cacher un login, un admin ou un recalcul
 			else if ($flag_dynamique OR $var_mode
 			OR $_COOKIE['spip_admin']) {
-				header("Cache-Control: no-cache,must-revalidate");
-				header("Pragma: no-cache");
+#				header("Cache-Control: no-cache,must-revalidate");
+#				header("Pragma: no-cache");
 			}
 			// Pour les autres donner l'heure de modif
 			else if ($lastmodified) {
@@ -198,7 +198,7 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		// Verifier qu'on a le droit de previsualisation
 		$statut = $GLOBALS['auteur_session']['statut'];
 		if ($statut=='0minirezo' OR
-		(lire_meta('preview')=='1comite' AND $statut=='1comite')) {
+		($GLOBALS['meta']['preview']=='1comite' AND $statut=='1comite')) {
 			$var_mode = 'recalcul';
 			$delais = 0;
 			$var_preview = true;
@@ -214,11 +214,11 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 		$chemin_cache = '';
 
 	// Faut-il effacer des pages invalidees ?
-	if (lire_meta('invalider')) {
+	if ($GLOBALS['meta']['invalider']) {
 		include_ecrire('inc_connect.php3');
 		include_ecrire('inc_meta.php3');
 		lire_metas();
-		if (lire_meta('invalider') AND $GLOBALS['db_ok'])
+		if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok'])
 			retire_caches($chemin_cache);
 	}
 
@@ -280,7 +280,7 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
 	// - on n'y est pas, et alors il faut revenir dans la langue par defaut
 	if (($lang = $contexte_inclus['lang'])
-	|| ($GLOBALS['spip_lang'] != ($lang = lire_meta('langue_site')))) {
+	|| ($GLOBALS['spip_lang'] != ($lang = $GLOBALS['meta']['langue_site']))) {
 		include_ecrire('inc_lang.php3');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
@@ -307,7 +307,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		list($fond, $delais, $contexte_inclus) = $texte;
 
 		if ((!$contexte_inclus['lang']) AND
-		($GLOBALS['spip_lang'] != lire_meta('langue_site')))
+		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
 		// Appeler la page

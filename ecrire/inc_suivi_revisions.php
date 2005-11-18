@@ -119,7 +119,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 			} else {
 				$item = array(
 					'title' => $titre,
-					'url' => lire_meta('adresse_site').'/'._DIR_RESTREINT_ABS."articles_versions.php3?id_article=$id_article&id_version=$id_version",
+					'url' => $GLOBALS['meta']['adresse_site'].'/'._DIR_RESTREINT_ABS."articles_versions.php3?id_article=$id_article&id_version=$id_version",
 					'date' => $date,
 					'author' => $nom,
 					'email' => $email

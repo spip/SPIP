@@ -371,14 +371,14 @@ class DiffPhrase {
 function preparer_diff($texte) {
 	include_spip("charsets.php");
 
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8')
 		return unicode_to_utf_8(html2unicode($texte));
 	return unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 }
 
 function afficher_diff($texte) {
-	$charset = lire_meta('charset');
+	$charset = $GLOBALS['meta']['charset'];
 	if ($charset == 'utf-8') return $texte;
 	return charset2unicode($texte, 'utf-8');
 }

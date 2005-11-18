@@ -36,7 +36,7 @@ function affiche_rss($rss, $intro = '', $fmt='') {
 
 function affiche_rss_rss($rss, $intro = '') {
 	// entetes
-	$u = '<'.'?xml version="1.0" encoding="'.lire_meta('charset').'"?'.">\n";
+	$u = '<'.'?xml version="1.0" encoding="'.$GLOBALS['meta']['charset'].'"?'.">\n";
 
 	$u .= '
 <rss version="0.91" xmlns:dc="http://purl.org/dc/elements/1.1/">
@@ -77,7 +77,7 @@ function affiche_rss_rss($rss, $intro = '') {
 </rss>
 ';
 
-	return array($u, 'Content-Type: text/xml; charset='.lire_meta('charset'));
+	return array($u, 'Content-Type: text/xml; charset='.$GLOBALS['meta']['charset']);
 }
 
 function affiche_rss_ical($rss, $intro = '') {

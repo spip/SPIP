@@ -37,7 +37,7 @@ function charger_langue($lang, $module = 'spip') {
 		// la langue par defaut du site -- et au pire sur le francais, qui
 		// *par definition* doit exister, et on copie le tableau dans la
 		// var liee a la langue
-		$l = lire_meta('langue_site');
+		$l = $GLOBALS['meta']['langue_site'];
 		if (!is_readable(_DIR_LANG . $module.'_'.$l.'.php3'))
 			$l = 'fr';
 		$fichier_lang = $module.'_' .$l. '.php3';
@@ -74,7 +74,7 @@ function surcharger_langue($f) {
 function changer_langue($lang) {
 	global $all_langs, $spip_lang_rtl, $spip_lang_right, $spip_lang_left, $spip_lang_dir, $spip_dir_lang;
 
-	$liste_langues = $all_langs.','.lire_meta('langues_multilingue');
+	$liste_langues = $all_langs.','.$GLOBALS['meta']['langues_multilingue'];
 
 	if ($lang && ereg(",$lang,", ",$liste_langues,")) {
 		$GLOBALS['spip_lang'] = $lang;
@@ -214,7 +214,7 @@ function changer_typo($lang = '', $source = '') {
 	}
 
 	if (!$lang)
-		$lang = lire_meta('langue_site');
+		$lang = $GLOBALS['meta']['langue_site'];
 
 	$lang_typo = lang_typo($lang);
 	$lang_dir = lang_dir($lang);
@@ -262,7 +262,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		// pourquoi aurait-on besoin ici d'une URL absolue ?
 		if (!defined('_ECRIRE_INSTALL')
 		AND !defined('_TEST_DIRS'))
-			$site = lire_meta("adresse_site");
+			$site = $GLOBALS['meta']["adresse_site"];
 		if (!$site)
 			if (_DIR_RESTREINT)
 				$site = '.';
@@ -270,7 +270,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 				$site = '..';
 
 		if (!_DIR_RESTREINT && _FILE_CONNECT) {
-			include_ecrire('inc_admin.php3');
+			include_ecrire('inc_session.php3');
 			$cible = _DIR_RESTREINT_ABS . $lien->getUrl();
 			$post = "$site/spip_cookie.php3?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 		} else {
@@ -309,7 +309,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 	if ($nom_select == 'var_lang_ecrire')
 		$langues = explode(',', $GLOBALS['all_langs']);
 	else
-		$langues = explode(',', lire_meta('langues_multilingue'));
+		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
 
 	if (count($langues) <= 1) return '';
 	$ret = '';
@@ -334,7 +334,7 @@ function verifier_lang_url() {
 	global $_GET, $_COOKIE, $spip_lang, $clean_link;
 
 	// quelle langue est demandee ?
-	$lang_demandee = lire_meta('langue_site');
+	$lang_demandee = $GLOBALS['meta']['langue_site'];
 	if ($_COOKIE['spip_lang_ecrire'])
 		$lang_demandee = $_COOKIE['spip_lang_ecrire'];
 	if ($_COOKIE['spip_lang'])
@@ -348,7 +348,7 @@ function verifier_lang_url() {
 
 	// Renvoyer si besoin
 	if (!($_GET['lang']<>'' AND $lang_demandee == $_GET['lang'])
-	AND !($_GET['lang']=='' AND $lang_demandee == lire_meta('langue_site')))
+	AND !($_GET['lang']=='' AND $lang_demandee == $GLOBALS['meta']['langue_site']))
 	{
 		$destination = new Link;
 		$destination->addvar('lang', $lang_demandee);
@@ -393,9 +393,9 @@ function init_langues() {
 	global $all_langs, $langue_site;
 	global $pile_langues, $lang_typo, $lang_dir;
 
-	$all_langs = lire_meta('langues_proposees')
-		.lire_meta('langues_proposees2');
-	$langue_site = lire_meta('langue_site');
+	$all_langs = $GLOBALS['meta']['langues_proposees']
+		.$GLOBALS['meta']['langues_proposees2'];
+	$langue_site = $GLOBALS['meta']['langue_site'];
 	$pile_langues = array();
 	$lang_typo = '';
 	$lang_dir = '';

@@ -8,7 +8,7 @@ $balise_FORMULAIRE_RECHERCHE_collecte = array();
 
 function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 	// Si le moteur n'est pas active, pas de balise
-	if (lire_meta("activer_moteur") != "oui")
+	if ($GLOBALS['meta']["activer_moteur"] != "oui")
 		return '';
 
 	// Seul un lien [(#FORMULAIRE_RECHERCHE|xxx.php3)] nous interesse

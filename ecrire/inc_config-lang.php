@@ -61,7 +61,7 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 debut_cadre_couleur("langues-24.gif", false, "", _T('info_langue_principale'));
 
 $langues_prop = split(",",$all_langs);
-$langue_site = lire_meta('langue_site');
+$langue_site = $GLOBALS['meta']['langue_site'];
 
 echo _T('texte_selection_langue_principale');
 
@@ -91,7 +91,7 @@ echo "<p>";
 if ($options == 'avancees') {
 	debut_cadre_relief("breve-24.gif", false, "", _T('info_jeu_caractere'));
 
-	$charset = lire_meta("charset");
+	$charset = $GLOBALS['meta']["charset"];
 
 	echo _T('texte_jeu_caractere')."<p>";
 	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_2')."</p></blockquote>";

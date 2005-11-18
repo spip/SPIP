@@ -167,7 +167,7 @@ var $reperes = array();
 global $phraseur_xml, $xml_parser;
 $phraseur_xml = new PhraseurXML();
 
-$xml_parser = xml_parser_create(lire_meta('charset'));
+$xml_parser = xml_parser_create($GLOBALS['meta']['charset']);
 xml_set_element_handler($xml_parser,
 			array($phraseur_xml, "debutElement"),
 			array($phraseur_xml, "finElement"));

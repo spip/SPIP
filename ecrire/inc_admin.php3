@@ -14,7 +14,6 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
 function fichier_admin($action) {
 	global $connect_login;
 	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
@@ -61,40 +60,10 @@ function fin_admin($action) {
 	@rmdir(_DIR_SESSIONS . $fichier);
 }
 
-
-function _action_auteur($action, $id_auteur, $nom_alea) {
-	if (!$id_auteur) {
-		global $connect_id_auteur, $connect_pass;
-		$id_auteur = $connect_id_auteur;
-		$pass = $connect_pass;
-	}
-	else {
-		$result = spip_query("SELECT pass FROM spip_auteurs WHERE id_auteur=$id_auteur");
-		if ($result) if ($row = spip_fetch_array($result)) $pass = $row['pass'];
-	}
-	$alea = lire_meta($nom_alea);
-	return md5($action.$id_auteur.$pass.$alea);
-}
-
-
-function calculer_action_auteur($action, $id_auteur = 0) {
-	renouvelle_alea();
-	return _action_auteur($action, $id_auteur, 'alea_ephemere');
-}
-
-function verifier_action_auteur($action, $valeur, $id_auteur = 0) {
-	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere'))
-		return true;
-	if ($valeur == _action_auteur($action, $id_auteur, 'alea_ephemere_ancien'))
-		return true;
-	spip_log("inc_admin: verifier action $action $id_auteur : echec");
-	return false;
-}
-
 function demande_maj_version()
 {
 	global $spip_version;
-	$version_installee = (double) str_replace(',','.',lire_meta('version_installee'));
+	$version_installee = (double) str_replace(',','.',$GLOBALS['meta']['version_installee']);
 	if ($version_installee == $spip_version) return false;
 	include_ecrire("inc_presentation.php3");
 	debut_page();

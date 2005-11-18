@@ -123,7 +123,7 @@ fin_cadre_trait_couleur();
 debut_cadre_trait_couleur("racine-site-24.gif", false, "", _T('texte_effacer_donnees_indexation'));
 
 	echo "\n<p align='justify'>";
-	if (lire_meta('activer_moteur') == 'oui')
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui')
 		echo _T('texte_moteur_recherche_active');
 	else {
 		echo "<b>"._T('texte_moteur_recherche_non_active')."</b> ";

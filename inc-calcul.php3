@@ -104,6 +104,7 @@ function charger_squelette ($squelette) {
 			include_ecrire("inc_debug_sql.php3");
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
+#		spip_log($skel_code);
 		eval('?'.'>'.$skel_code);
 		if (function_exists($nom)) {
 			ecrire_fichier ($phpfile, $skel_code);
@@ -137,7 +138,7 @@ function cherche_page ($cache, $contexte, $fond, $delais)  {
 	if ($r = sql_rubrique_fond($contexte))
 		list($id_rubrique_fond, $lang) = $r;
 	if (!$lang)
-		$lang = lire_meta('langue_site');
+		$lang = $GLOBALS['meta']['langue_site'];
 	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
 	$lang = $contexte['lang'];
 

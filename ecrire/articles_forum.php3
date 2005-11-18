@@ -110,7 +110,7 @@ echo "<A HREF='articles_forum.php3?id_article=$id_article&debut=$i&page=$page'>.
 
 echo "</div>";
 
-$mots_cles_forums = lire_meta("mots_cles_forums");
+$mots_cles_forums = $GLOBALS['meta']["mots_cles_forums"];
 
 if ($connect_statut == "0minirezo") {
 	$query_forum = "SELECT pied.*, max(thread.date_heure) AS date

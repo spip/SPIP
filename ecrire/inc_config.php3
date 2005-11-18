@@ -15,7 +15,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_meta.php3");
-include_ecrire ("inc_admin.php3");
 
 //
 // Appliquer les valeurs par defaut pour les options non initialisees
@@ -78,14 +77,14 @@ function init_config() {
 		'langues_multilingue' => $GLOBALS['all_langs']
 	);
 	while (list($nom, $valeur) = each($liste_meta)) {
-		if (!lire_meta($nom)) {
+		if (!$GLOBALS['meta'][$nom]) {
 			ecrire_meta($nom, $valeur);
 			$modifs = true;
 		}
 	}
 
 	// Cas particulier : charset regle a utf-8 uniquement si nouvelle installation
-	if (lire_meta('nouvelle_install') == 'oui') {
+	if ($GLOBALS['meta']['nouvelle_install'] == 'oui') {
 		//ecrire_meta('charset', 'utf-8');
 		effacer_meta('nouvelle_install');
 		$modifs = true;
@@ -148,9 +147,9 @@ function appliquer_modifs_config() {
 	$adresse_site = ereg_replace("/$", "", $adresse_site);
 
 	// Purger les squelettes si un changement de meta les affecte
-	if ($post_dates AND ($post_dates != lire_meta("post_dates")))
+	if ($post_dates AND ($post_dates != $GLOBALS['meta']["post_dates"]))
 		$purger_skel = true;
-	if ($forums_publics AND ($forums_publics != lire_meta("forums_publics")))
+	if ($forums_publics AND ($forums_publics != $GLOBALS['meta']["forums_publics"]))
 		$purger_skel = true;
 
 	// Appliquer les changements de moderation forum
@@ -170,7 +169,7 @@ function appliquer_modifs_config() {
 
 	// http_proxy : ne pas prendre en compte la modif si le password est '****'
 	if (preg_match(',:\*\*\*\*@,', $http_proxy))
-		$http_proxy = lire_meta('http_proxy');
+		$http_proxy = $GLOBALS['meta']['http_proxy'];
 
 	if ($tester_proxy) {
 		if (!$test_proxy) {
@@ -188,7 +187,7 @@ function appliquer_modifs_config() {
 	}
 
 	// Activer le moteur : dresser la liste des choses a indexer
-	if ($activer_moteur == 'oui' AND ($activer_moteur != lire_meta("activer_moteur"))) {
+	if ($activer_moteur == 'oui' AND ($activer_moteur != $GLOBALS['meta']["activer_moteur"])) {
 		include_ecrire('inc_index.php3');
 		creer_liste_indexation();
 	}
@@ -262,7 +261,7 @@ function appliquer_modifs_config() {
 	// (pour repercuter la modif sur le panneau de login)
 	if (isset($GLOBALS['accepter_inscriptions'])
 	AND ($GLOBALS['accepter_inscriptions']
-	!= lire_meta('accepter_inscriptions'))) {
+	!= $GLOBALS['meta']['accepter_inscriptions'])) {
 		include_ecrire('inc_invalideur.php3');
 		suivre_invalideur("1"); # tout effacer
 	}
@@ -287,11 +286,11 @@ function appliquer_modifs_config() {
 			    'creer_htaccess'
 	);
 	while (list(,$i) = each($liste_meta))
-		if (isset($GLOBALS[$i]) AND ($GLOBALS[$i] != lire_meta($i)))
+	  if (isset($GLOBALS[$i]) AND ($GLOBALS[$i] != $GLOBALS['meta'][$i]))
 			$modif_secu=true;
 	if ($modif_secu) {
-		include_ecrire('inc_admin.php3');
 		$admin = _T('info_modification_parametres_securite');
+		include_ecrire ("inc_admin.php3");
 		debut_admin($admin);
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))

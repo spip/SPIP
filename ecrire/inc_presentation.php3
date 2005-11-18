@@ -725,7 +725,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 
 	// Preparation pour basculter vers liens de traductions
-	$afficher_trad = (lire_meta('gerer_trad') == "oui");
+	$afficher_trad = ($GLOBALS['meta']['gerer_trad'] == "oui");
 	if ($afficher_trad) {
 		$jjscript_trad["fonction"] = "afficher_articles_trad";
 		$jjscript_trad["titre_table"] = $titre_table;
@@ -747,17 +747,17 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	}
 
 	$activer_messagerie = "oui";
-	$activer_statistiques = lire_meta("activer_statistiques");
+	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
 	// Preciser la requete (alleger les requetes)
 	if (!ereg("^SELECT", $requete)) {
 		$select = "SELECT articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
 
-		if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR lire_meta('multi_articles') == 'oui') {
+		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
 			if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
-			else $langue_defaut = lire_meta('langue_site');
+			else $langue_defaut = $GLOBALS['meta']['langue_site'];
 			$select .= ", articles.lang";
 		}
 		if ($afficher_visites)
@@ -841,7 +841,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$statut = $row['statut'];
 			$visites = $row['visites'];
 			if ($lang = $row['lang']) changer_typo($lang);
-			$popularite = ceil(min(100,100 * $row['popularite'] / max(1, 0 + lire_meta('popularite_max'))));
+			$popularite = ceil(min(100,100 * $row['popularite'] / max(1, 0 + $GLOBALS['meta']['popularite_max'])));
 			$descriptif = $row['descriptif'];
 			if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 			$petition = $row['petition'];
@@ -881,7 +881,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
 
-			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
+			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo = decrire_logo("arton$id_article");
 				if ($logo) {	
@@ -961,7 +961,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	global $options, $spip_display;
 	global $spip_lang_left, $spip_lang_right;
 
-	$langues_site = explode(',', lire_meta('langues_multilingue'));
+	$langues_site = explode(',', $GLOBALS['meta']['langues_multilingue']);
 
 	// Preparation pour basculter vers liste normale
 		$jjscript_trad["fonction"] = "afficher_articles";
@@ -984,7 +984,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 
 	$activer_messagerie = "oui";
-	$activer_statistiques = lire_meta("activer_statistiques");
+	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
 	// Preciser la requete (alleger les requetes)
@@ -1166,11 +1166,11 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	global $connect_statut, $options;	
 
 
-	if ((lire_meta('multi_rubriques') == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR lire_meta('multi_articles') == 'oui') {
+	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 		$afficher_langue = true;
 		$requete = ereg_replace(" FROM", ", lang FROM", $requete);
 		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
-		else $langue_defaut = lire_meta('langue_site');
+		else $langue_defaut = $GLOBALS['meta']['langue_site'];
 	}
 	
 	if ($options == "avancees") $tranches = afficher_tranches_requete($requete, 4);
@@ -1211,7 +1211,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$s = "<div>";
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve' style=\"display:block;\">";
 
-			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
+			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo = decrire_logo("breveon$id_breve");
 				if ($logo) {
@@ -1319,7 +1319,7 @@ function afficher_rubriques($titre_table, $requete) {
 			$vals[] = $s;
 
 			$s = "<div align=\"right\">";
-			if  (lire_meta('multi_rubriques') == 'oui') {
+			if  ($GLOBALS['meta']['multi_rubriques'] == 'oui') {
 				$s .= ($lang);
 			}
 			$s .= "</div>";
@@ -1663,7 +1663,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 			if ($spip_display != 4) echo "\n<td width=100% valign='top'>";
 
 			$titre_boite = $titre;
-			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND lire_meta('image_process') != "non") {
+			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo_auteur = decrire_logo("auton$id_auteur");
 				if ($logo_auteur) {
@@ -1803,7 +1803,7 @@ function debut_html($titre = "", $rubrique="") {
 	include_ecrire('inc_headers.php');
 
 	global $attributes_body, $browser_verifForm;
-	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
+	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 	$titre = textebrut(typo($titre));
 
@@ -1825,12 +1825,12 @@ function envoi_link($nom_site_spip, $rubrique="")
 {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $couleur_foncee, $couleur_claire;
-	$adresse_site=lire_meta("adresse_site");
+	$adresse_site=$GLOBALS['meta']["adresse_site"];
 
 	$res = "";
 	if ($spip_display != 4) {
 		$res .= "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' >\n";
-		if (lire_meta("activer_breves") != "non")
+		if ($GLOBALS['meta']["activer_breves"] != "non")
 			$res .= "\n<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' >\n";
 	}
 
@@ -1844,7 +1844,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 	  '&amp;left=' . 
 	  $GLOBALS['spip_lang_left'] .
 	  "\" >\n" .
-	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, (lire_meta("activer_statistiques") != 'non')) .
+	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 
 	// CSS calendrier
 	  '<link rel="stylesheet" href="' . _DIR_RESTREINT . 'calendrier.css" type="text/css">' . "\n" .
@@ -1975,7 +1975,7 @@ function barre_onglets($rubrique, $onglet){
 	//	onglet(_T('titre_liens_entrants'), "statistiques_referers.php3", "referers", $onglet, "referers-24.gif");
 	}
 	if ($rubrique == "repartition") {
-		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui') {
+		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
 			onglet(_T('onglet_repartition_rubrique'), "statistiques_repartition.php", "rubriques", $onglet, "rubrique-24.gif");
 			onglet(_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues", $onglet, "langues-24.gif");
 		}
@@ -2017,7 +2017,7 @@ function barre_onglets($rubrique, $onglet){
 	if ($rubrique == "config_lang") {
 		onglet(_T('info_langue_principale'), "config-lang.php3", "langues", $onglet, "langues-24.gif");
 		onglet(_T('info_multilinguisme'), "config-multilang.php3", "multi", $onglet, "traductions-24.gif");
-		if (lire_meta('multi_articles') == "oui" OR lire_meta('multi_rubriques') == "oui") {
+		if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
 			onglet(_T('module_fichiers_langues'), "lang_raccourcis.php3", "fichiers", $onglet, "traductions-24.gif");
 		}
 	}
@@ -2282,7 +2282,7 @@ function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") 
 
 function afficher_menu_rubriques() {
 	global $spip_lang_rtl, $spip_ecran;
-	$date_maj = lire_meta("date_calcul_rubriques");
+	$date_maj = $GLOBALS['meta']["date_calcul_rubriques"];
 
 	echo http_script('',"js_menu_rubriques.php?date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl",'');
 }
@@ -2306,7 +2306,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
  
 function init_entete($titre, $rubrique, $css) {
 	global $attributes_body, $browser_verifForm;
-	$nom_site_spip = entites_html(textebrut(typo(lire_meta("nom_site"))));
+	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 
 	// envoi des en-tetes, du doctype et du <head><title...
@@ -2343,7 +2343,7 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 	$activer_messagerie = "oui";
 
 	if (!$adresse_site) {
-		$adresse_site = lire_meta("adresse_site");
+		$adresse_site = $GLOBALS['meta']["adresse_site"];
 		if (!$adresse_site) {
 			$adresse_site = "http://$HTTP_HOST".substr($REQUEST_URI, 0, strpos($REQUEST_URI, "/" . _DIR_RESTREINT_ABS));
 			ecrire_meta("adresse_site", $adresse_site);
@@ -2394,7 +2394,7 @@ else {
 	icone_bandeau_principal (_T('icone_edition_site'), "naviguer.php3", "documents-48$spip_lang_rtl.png", "documents", $rubrique, "", "rubriques", $sous_rubrique);
 	icone_bandeau_principal (_T('titre_forum'), "forum_admin.php3", "messagerie-48.png", "redacteurs", $rubrique, "", "forum-interne", $sous_rubrique);
 	icone_bandeau_principal (_T('icone_auteurs'), "auteurs.php3", "redacteurs-48.png", "auteurs", $rubrique, "", "redacteurs", $sous_rubrique);
-	if ($connect_statut == "0minirezo"  AND lire_meta("activer_statistiques") != 'non') {
+	if ($connect_statut == "0minirezo"  AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
 		//bandeau_barre_verticale();
 		icone_bandeau_principal (_T('icone_statistiques_visites'), "statistiques_visites.php3", "statistiques-48.png", "suivi", $rubrique, "", "statistiques", $sous_rubrique);
 	}
@@ -2460,18 +2460,18 @@ else {
 			}
 		}*/
 
-		$activer_breves=lire_meta("activer_breves");
+		$activer_breves=$GLOBALS['meta']["activer_breves"];
 		if ($activer_breves != "non"){
 			icone_bandeau_secondaire (_T('icone_breves'), "breves.php3", "breve-24.gif", "breves", $sous_rubrique);
 		}
 
 		if ($options == "avancees"){
-			$articles_mots = lire_meta('articles_mots');
+			$articles_mots = $GLOBALS['meta']['articles_mots'];
 			if ($articles_mots != "non") {
 				icone_bandeau_secondaire (_T('icone_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "mots", $sous_rubrique);
 			}
 
-			$activer_sites = lire_meta('activer_sites');
+			$activer_sites = $GLOBALS['meta']['activer_sites'];
 			if ($activer_sites<>'non')
 				icone_bandeau_secondaire (_T('icone_sites_references'), "sites_tous.php3", "site-24.gif", "sites", $sous_rubrique);
 
@@ -2495,7 +2495,7 @@ else {
 		}
 
 			echo "<div class='$class' id='bandeauredacteurs' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-				if (lire_meta('forum_prive_admin') == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3?admin=admin", "forum-admin-24.gif", "privadm", $sous_rubrique);
+				if ($GLOBALS['meta']['forum_prive_admin'] == 'oui') icone_bandeau_secondaire (_T('icone_forum_administrateur'), "forum_admin.php3?admin=admin", "forum-admin-24.gif", "privadm", $sous_rubrique);
 
 				icone_bandeau_secondaire (_T('icone_suivi_forums'), "controle_forum.php3", "suivi-forum-24.gif", "forum-controle", $sous_rubrique);
 				icone_bandeau_secondaire (_T('icone_suivi_pettions'), "controle_petition.php3", "suivi-petition-24.gif", "suivi-petition", $sous_rubrique);
@@ -2526,7 +2526,7 @@ else {
 	// decalage pour barre verticale
 	// $decal = $decal + 11;
 
-	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND lire_meta("activer_statistiques") != 'non') {
+	if ($connect_statut == "0minirezo" AND $connect_toutes_rubriques AND $GLOBALS['meta']["activer_statistiques"] != 'non') {
 		if ($rubrique == "suivi") {
 			$class = "visible_au_chargement";
 		} else {
@@ -2536,7 +2536,7 @@ else {
 		if ($connect_toutes_rubriques) bandeau_barre_verticale();
 
 		icone_bandeau_secondaire (_T('icone_repartition_visites'), "statistiques_repartition.php", "rubrique-24.gif", "repartition", $sous_rubrique);
-		if (lire_meta('multi_articles') == 'oui' OR lire_meta('multi_rubriques') == 'oui')
+		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui')
 			icone_bandeau_secondaire (_T('onglet_repartition_lang'), "statistiques_lang.php3", "langues-24.gif", "repartition-langues", $sous_rubrique);
 		icone_bandeau_secondaire (_T('titre_liens_entrants'), "statistiques_referers.php3", "referers-24.gif", "referers", $sous_rubrique);
 
@@ -2822,15 +2822,15 @@ if (true /*$gadgets*/) {
 			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
 			$gadget .= "</div>";
 			
-			$activer_breves = lire_meta("activer_breves");
+			$activer_breves = $GLOBALS['meta']["activer_breves"];
 			if ($activer_breves != "non") {
 				$gadget .= "<div style='width: 140px;  float: $spip_lang_left;'>";
 				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif", false);
 				$gadget .= "</div>";
 			}
 			
-			if (lire_meta("activer_sites") == 'oui') {
-				if ($connect_statut == '0minirezo' OR lire_meta("proposer_sites") > 0) {
+			if ($GLOBALS['meta']["activer_sites"] == 'oui') {
+				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_rub", "site-24.gif","creer.gif", false);
 					$gadget .= "</div>";
@@ -3192,7 +3192,7 @@ function debut_droite($rubrique="") {
 
 	if ($options == "avancees") {
 		// liste des articles bloques
-		if (lire_meta("articles_modif") != "non") {
+		if ($GLOBALS['meta']["articles_modif"] != "non") {
 			$query = "SELECT id_article, titre FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
 			$result = spip_query($query);
 			$num_articles_ouverts = spip_num_rows($result);
@@ -3383,7 +3383,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 
 	switch ($type) {
 		case 'article':
-			if ($statut == "publie" AND lire_meta("post_dates") == 'non'
+			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non'
 			AND !spip_fetch_array(spip_query("SELECT id_article
 			FROM spip_articles WHERE id_article=$id AND date<=NOW()")))
 				$statut = 'prop';
@@ -3416,8 +3416,8 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 		$message = _T('icone_voir_en_ligne');
 	else if ($en_ligne == 'preview') {
 		// est-ce autorise ?
-		if ((lire_meta('preview') == 'oui' AND $connect_statut=='0minirezo')
-			OR (lire_meta('preview') == '1comite'))
+		if (($GLOBALS['meta']['preview'] == 'oui' AND $connect_statut=='0minirezo')
+			OR ($GLOBALS['meta']['preview'] == '1comite'))
 			$message = _T('previsualiser');
 		else
 			$message = '';

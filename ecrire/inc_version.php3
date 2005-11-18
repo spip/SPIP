@@ -819,8 +819,9 @@ include_ecrire('inc_flock.php3');
 
 
 //
-// Gerer les valeurs meta
+// Gerer les valeurs meta 
 //
+// Fonction lire_meta abandonnee, remplacee par son contenu. Ne plus utiliser
 function lire_meta($nom) {
 	global $meta;
 	return $meta[$nom];
@@ -864,7 +865,7 @@ function _L($text) {
 }
 
 // Langue principale du site
-$langue_site = lire_meta('langue_site');
+$langue_site = $GLOBALS['meta']['langue_site'];
 if (!$langue_site) include_ecrire('inc_lang.php3');
 $spip_lang = $langue_site;
 

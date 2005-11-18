@@ -155,20 +155,20 @@ function taches_generales() {
 		$taches_generales['invalideur'] = 3600;
 
 	// nouveautes
-	if (lire_meta('adresse_neuf') AND lire_meta('jours_neuf')
-	AND (lire_meta('quoi_de_neuf') == 'oui') AND _DIR_RESTREINT)
-		$taches_generales['mail']= 3600 * 24 * lire_meta('jours_neuf');
+	if ($GLOBALS['meta']['adresse_neuf'] AND $GLOBALS['meta']['jours_neuf']
+	AND ($GLOBALS['meta']['quoi_de_neuf'] == 'oui') AND _DIR_RESTREINT)
+		$taches_generales['mail']= 3600 * 24 * $GLOBALS['meta']['jours_neuf'];
 
 	// stats : toutes les 5 minutes on peut vider un panier de visites
-	if (lire_meta("activer_statistiques") == "oui")
+	if ($GLOBALS['meta']["activer_statistiques"] == "oui")
 		$taches_generales['visites'] = 300; 
 
 	// syndication
-	if (lire_meta("activer_syndic") == "oui") 
+	if ($GLOBALS['meta']["activer_syndic"] == "oui") 
 		$taches_generales['sites'] = 90;
 
 	// indexation
-	if (lire_meta("activer_moteur") == "oui") 
+	if ($GLOBALS['meta']["activer_moteur"] == "oui") 
 		$taches_generales['index'] = 90;
 		
 	// ajax
@@ -203,8 +203,8 @@ function cron_index($t) {
 
 function cron_sites($t) {
 	$r = executer_une_syndication();
-	if ((lire_meta('activer_moteur') == 'oui') &&
-	    (lire_meta("visiter_sites") == 'oui')) {
+	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&
+	    ($GLOBALS['meta']["visiter_sites"] == 'oui')) {
 		include_ecrire("inc_index.php3");
 		$r2 = executer_une_indexation_syndic();
 		$r = $r && $r2;
@@ -232,8 +232,8 @@ function cron_visites($t) {
 // Mail des nouveautes
 //
 function cron_mail($t) {
-	$adresse_neuf = lire_meta('adresse_neuf');
-	$jours_neuf = lire_meta('jours_neuf');
+	$adresse_neuf = $GLOBALS['meta']['adresse_neuf'];
+	$jours_neuf = $GLOBALS['meta']['jours_neuf'];
 	// $t = 0 si le fichier de lock a ete detruit
 	if (!$t) $t = time() - (3600 * 24 * $jours_neuf);
 
@@ -243,7 +243,7 @@ function cron_mail($t) {
 				  'jours_neuf' => $jours_neuf),
 				'nouveautes',
 				'',
-				lire_meta('langue_site'));
+				$GLOBALS['meta']['langue_site']);
 	$page = $page['texte'];
 	if (substr($page,0,5) == '<'.'?php') {
 # ancienne version: squelette en PHP avec affection des 2 variables ci-dessous

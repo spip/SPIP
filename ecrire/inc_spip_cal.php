@@ -16,7 +16,6 @@ include_ecrire("inc_lang.php3");
 include_ecrire("inc_texte.php3");
 include_ecrire("inc_charsets.php3");
 include_ecrire("inc_meta.php3");
-include_ecrire("inc_admin.php3");
 include_ecrire("inc_acces.php3");
 
 // avec le nouveau compilateur tout ceci me semble faisable en squelette.
@@ -43,8 +42,8 @@ function spip_cal_dist($id_auteur, $cle)
 		exit;
 	}
 	lang_select($langue_utilisateur);
-	$nom_site = lire_meta("nom_site");
-	$adresse_site = lire_meta("adresse_site");
+	$nom_site = $GLOBALS['meta']["nom_site"];
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
 
 	@header("Content-Type: text/calendar; charset=utf-8");
 	ligne ("BEGIN:VCALENDAR");

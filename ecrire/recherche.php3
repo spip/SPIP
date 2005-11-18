@@ -69,7 +69,7 @@ if (strlen($recherche) > 0) {
 	$query_sites .= " $where ORDER BY maj DESC";
 	$query_sites  = ereg_replace("titre LIKE", "nom_site LIKE", $query_sites);
 	
-	$activer_moteur = (lire_meta('activer_moteur') == 'oui');
+	$activer_moteur = ($GLOBALS['meta']['activer_moteur'] == 'oui');
 	if ($activer_moteur) {	// texte integral
 		include_ecrire ('inc_index.php3');
 		list($hash_recherche,) = requete_hash ($recherche);

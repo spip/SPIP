@@ -46,7 +46,7 @@ afficher_breves(afficher_plus('breves.php3')._T('info_breves_valider'), "SELECT 
 	//
 	// Les sites references a valider
 	//
-if (afficher_plus('sites_tous.php3').lire_meta('activer_syndic') != 'non') {
+if (afficher_plus('sites_tous.php3').$GLOBALS['meta']['activer_syndic'] != 'non') {
 		include_ecrire("inc_sites.php3");
 		afficher_sites(afficher_plus('sites_tous.php3')._T('info_site_valider'), "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
 	}
@@ -54,7 +54,7 @@ if (afficher_plus('sites_tous.php3').lire_meta('activer_syndic') != 'non') {
 	//
 	// Les sites a probleme
 	//
-if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
 		afficher_sites(afficher_plus('sites_tous.php3')._T('avis_sites_syndiques_probleme'), "SELECT * FROM spip_syndic WHERE (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
@@ -162,7 +162,7 @@ if ($spip_display == 4) {
 			}
 			
 			if ($activer_sites == 'oui') {
-				if ($connect_statut == '0minirezo' OR lire_meta("proposer_sites") > 0) {
+				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<td>";
 					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_rub", "site-24.gif","creer.gif", false);
 					$gadget .= "</td>";
@@ -295,7 +295,7 @@ function etat_base_accueil()
 
 if ($spip_display != 4) {
 
-	$nom_site_spip = propre(lire_meta("nom_site"));
+	$nom_site_spip = propre($GLOBALS['meta']["nom_site"]);
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 	
 	
@@ -452,7 +452,7 @@ if ($meta["debut_restauration"]) {
 // Articles post-dates en attente de publication
 //
 
-$post_dates = lire_meta("post_dates");
+$post_dates = $GLOBALS['meta']["post_dates"];
 
 if ($post_dates == "non" AND $connect_statut == '0minirezo' AND $options == 'avancees') {
 	echo "<p>";
@@ -470,9 +470,9 @@ if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos
 
 
   colonne_gauche_accueil($id_rubrique,
-			 lire_meta("activer_breves"),
-			 lire_meta("activer_sites"),
-			 lire_meta('articles_mots'));
+			 $GLOBALS['meta']["activer_breves"],
+			 $GLOBALS['meta']["activer_sites"],
+			 $GLOBALS['meta']['articles_mots']);
   
   encours_accueil($vos_articles);
 
@@ -493,7 +493,7 @@ fin_page("jimmac");
 // Symetrique du debut: apres restauration ou MAJ, recalculer les rubriques
 //
 
-	if (lire_meta('calculer_rubriques') == 'oui') {
+	if ($GLOBALS['meta']['calculer_rubriques'] == 'oui') {
 		calculer_rubriques();
 		effacer_meta('calculer_rubriques');
 		ecrire_metas();

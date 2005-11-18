@@ -12,7 +12,7 @@ $balise_FORMULAIRE_INSCRIPTION_collecte = array();
 // args[1] indique la rubrique eventuelle de proposition
 // [(#FORMULAIRE_INSCRIPTION{nom_inscription, #ID_RUBRIQUE})]
 function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
-	if (lire_meta('accepter_inscriptions') != 'oui')
+	if ($GLOBALS['meta']['accepter_inscriptions'] != 'oui')
 		return '';
 	else
 	  return array('redac', $args[0], $args[1]);
@@ -27,10 +27,10 @@ function balise_FORMULAIRE_INSCRIPTION_stat($args, $filtres) {
 
 function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 
-	if (!(($mode == 'redac' AND lire_meta('accepter_inscriptions') == 'oui')
+	if (!(($mode == 'redac' AND $GLOBALS['meta']['accepter_inscriptions'] == 'oui')
 	OR ($mode == 'forum' AND (
-		lire_meta('accepter_visiteurs') == 'oui'
-		OR lire_meta('forums_publics') == 'abo'
+		$GLOBALS['meta']['accepter_visiteurs'] == 'oui'
+		OR $GLOBALS['meta']['forums_publics'] == 'abo'
 		)
 	    )))
 		return _T('pass_rien_a_faire_ici');
@@ -123,8 +123,8 @@ function message_inscription($mail_inscription, $nom_inscription, $force, $mode)
 // fonction redefinissable
 
 function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
-	$nom_site_spip = lire_meta("nom_site");
-	$adresse_site = lire_meta("adresse_site");
+	$nom_site_spip = $GLOBALS['meta']["nom_site"];
+	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
 	$message = _T('form_forum_message_auto')."\n\n"
 	  . _T('form_forum_bonjour', array('nom'=>$nom))."\n\n"

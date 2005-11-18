@@ -16,7 +16,7 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 					'motif' => 'RUBRIQUES')), '');
 
 	// Verifier que les visisteurs sont autorises a proposer un site
-	return ((lire_meta("proposer_sites") != 2) ? '' : $args);
+	return (($GLOBALS['meta']["proposer_sites"] != 2) ? '' : $args);
 }
 
 function balise_FORMULAIRE_SITE_dyn($id_rubrique) {

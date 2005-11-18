@@ -63,7 +63,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$query = "UPDATE spip_mots SET titre='$titre_mot', texte='$texte', descriptif='$descriptif', type='$type', id_groupe=$id_groupe $add_extra WHERE id_mot=$id_mot";
 		$result = spip_query($query);
 
-		if (lire_meta('activer_moteur') == 'oui') {
+		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_ecrire ("inc_index.php3");
 			marquer_indexer('mot', $id_mot);
 		}

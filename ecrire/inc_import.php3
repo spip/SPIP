@@ -324,7 +324,7 @@ function import_fin() {
 	$query = "DELETE FROM spip_auteurs WHERE id_auteur=0";
 	spip_query($query);
 
-	if ($charset = lire_meta('charset_restauration'))
+	if ($charset = $GLOBALS['meta']['charset_restauration'])
 		ecrire_meta('charset', $charset);
 	effacer_meta("charset_restauration");
 	effacer_meta("status_restauration");
@@ -360,7 +360,7 @@ function import_all($f, $gz=false) {
 	list($my_date) = spip_fetch_array($s);
 	if (!$my_date) return false;
 
-	$my_pos = lire_meta("status_restauration");
+	$my_pos = $GLOBALS['meta']["status_restauration"];
 
 	if (!$my_pos) {
 		// Debut de l'importation
@@ -381,7 +381,7 @@ function import_all($f, $gz=false) {
 	else {
 		// Reprise de l'importation
 		$_fseek($f, $my_pos);
-		$version_archive = lire_meta('version_archive_restauration');
+		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
 	}
 
 	// Restauration des entrees du fichier

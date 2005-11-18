@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_admin.php3");
+include_ecrire ("inc_session.php3"); // action_auteur
 include_ecrire ("inc_date.php3");
 
 //
@@ -77,14 +77,14 @@ function document_et_vignette($document, $url, $portfolio=false) {
 	if ($document['id_vignette'] > 0
 	AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents
 	WHERE id_document = ".$document['id_vignette']))) {
-		if (!$portfolio OR !(lire_meta('creer_preview') == 'oui')) {
+		if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 			$image = image_pattern($vignette);
 		} else {
 			$image = prive_lien_image_reduite ($vignette['largeur'],
 				$vignette['hauteur'], $vignette['fichier']);
 		}
-	} else if (strstr(lire_meta('formats_graphiques'), $extension)
-	AND lire_meta('creer_preview') == 'oui') {
+	} else if (strstr($GLOBALS['meta']['formats_graphiques'], $extension)
+	AND $GLOBALS['meta']['creer_preview'] == 'oui') {
 		include_ecrire('inc_logos.php3');
 		#var_dump($document);
 		$local = copie_locale($document['fichier']);
@@ -647,11 +647,11 @@ entites_html($document['fichier'])."\" />\n";
 			// si c'est une image, qu'on sait la faire tourner, qu'elle
 			// n'est pas distante, et qu'elle n'a pas de vignette perso !
 			if ($flag_modif
-			AND strstr(lire_meta('formats_graphiques'), $document['extension'])
+			AND strstr($GLOBALS['meta']['formats_graphiques'], $document['extension'])
 			AND $document['distant']!='oui'
 			AND !$id_vignette) {
 				echo "<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
-				$process = lire_meta('image_process');
+				$process = $GLOBALS['meta']['image_process'];
 				// pour TEST: $process = 'imagick' ;
 				if ($process == 'imagick' OR $process == 'gd2'
 				OR $process == 'convert' OR $process == 'netpbm') {
@@ -940,7 +940,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	}
 
 
-	if (lire_meta("documents_$type") != 'non' AND $flag_modif) {
+	if ($GLOBALS['meta']["documents_$type"] != 'non' AND $flag_modif) {
 		/// Ajouter nouveau document/image
 
 		echo "<p>&nbsp;</p>";
@@ -1029,7 +1029,7 @@ function afficher_documents_colonne($id_article, $type="article", $flag_modif = 
 	echo "<p>&nbsp;</p>\n";
 	echo "<a name='documents'></a>\n";
 	echo "<a name='portfolio'></a>\n";
-	if ($type == "article" AND lire_meta("documents_$type") != 'non') {
+	if ($type == "article" AND $GLOBALS['meta']["documents_$type"] != 'non') {
 		$titre_cadre = _T('bouton_ajouter_document').aide("ins_doc");
 
 		debut_cadre_enfonce("doc-24.gif", false, "creer.gif", $titre_cadre);

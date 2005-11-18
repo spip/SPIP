@@ -50,7 +50,7 @@ if (!$upgrade_titre) $upgrade_titre = 'info_mise_a_niveau_base';
 $commentaire = _T('texte_mise_a_niveau_base_1');
 
 // Verifier la version
-$version_installee = (double) str_replace(',','.',lire_meta('version_installee'));
+$version_installee = (double) str_replace(',','.',$GLOBALS['meta']['version_installee']);
 # NB: str_replace car, sur club-internet, il semble que version_installe soit
 # enregistree au format '1,812' et non '1.812'
 

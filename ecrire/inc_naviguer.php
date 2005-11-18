@@ -78,7 +78,7 @@ function naviguer_dist($action)
 	    _T('titre_naviguer_dans_le_site')), "documents", "rubriques");
 
 	  if ($id_rubrique == 0) {
-	    $titre = _T('info_racine_site').": ". lire_meta("nom_site");
+	    $titre = _T('info_racine_site').": ". $GLOBALS['meta']["nom_site"];
 	  }
 
 //////// parents
@@ -120,7 +120,7 @@ function naviguer_dist($action)
 	  }
 
 /// Mots-cles
-	    if (lire_meta("articles_mots") != 'non' AND $id_rubrique > 0) {
+	    if ($GLOBALS['meta']["articles_mots"] != 'non' AND $id_rubrique > 0) {
 		echo "\n<p>";
 		formulaire_mots('rubriques', $id_rubrique,  $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
 	    }
@@ -219,7 +219,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 		if ($id_rubrique > 0)
 			icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?id_rubrique=$id_rubrique&new=oui", "article-24.gif","creer.gif");
 	
-		$activer_breves = lire_meta("activer_breves");
+		$activer_breves = $GLOBALS['meta']["activer_breves"];
 		if ($activer_breves != "non" AND $id_parent == "0" AND $id_rubrique != "0") {
 			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?id_rubrique=$id_rubrique&new=oui", "breve-24.gif","creer.gif");
 		}
@@ -236,7 +236,7 @@ function raccourcis_naviguer($id_rubrique, $id_parent)
 function langue_naviguer($id_rubrique, $id_parent, $flag_editable)
 {
 
-if ($id_rubrique>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0) AND $flag_editable) {
+if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0) AND $flag_editable) {
 
 	$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_rubrique = $row['lang'];
@@ -245,7 +245,7 @@ if ($id_rubrique>0 AND lire_meta('multi_rubriques') == 'oui' AND (lire_meta('mul
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		$langue_parent = $row[0];
 	}
-	else $langue_parent = lire_meta('langue_site');
+	else $langue_parent = $GLOBALS['meta']['langue_site'];
 
 	debut_cadre_enfonce('langues-24.gif');
 	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
@@ -293,11 +293,11 @@ if (!$relief) {
 	$relief = spip_num_rows(spip_query("SELECT id_breve FROM spip_breves WHERE id_rubrique='$id_rubrique' AND (statut='prepa' OR statut='prop') LIMIT 1"));
  }
 
-if (!$relief AND lire_meta('activer_syndic') != 'non') {
+if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non') {
 	$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' LIMIT 1"));
  }
 
-if (!$relief AND lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+if (!$relief AND $GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 	$relief = spip_num_rows(spip_query("SELECT id_syndic FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') LIMIT 1"));
  }
 
@@ -322,7 +322,7 @@ if ($relief) {
 	//
 	// Les sites references a valider
 	//
-	if (lire_meta('activer_syndic') != 'non') {
+	if ($GLOBALS['meta']['activer_syndic'] != 'non') {
 		include_ecrire("inc_sites.php3");
 		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' ORDER BY nom_site");
 	}
@@ -330,7 +330,7 @@ if ($relief) {
 	//
 	// Les sites a probleme
 	//
-	if (lire_meta('activer_syndic') != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+	if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		include_ecrire("inc_sites.php3");
 		afficher_sites(_T('avis_sites_syndiques_probleme'),
 			"SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
@@ -372,7 +372,7 @@ if ($relief) {
 
 	afficher_breves(_T('icone_ecrire_nouvel_article'), "SELECT * FROM spip_breves WHERE id_rubrique='$id_rubrique' AND statut != 'prop' AND statut != 'prepa' ORDER BY date_heure DESC");
 
-	$activer_breves=lire_meta("activer_breves");
+	$activer_breves=$GLOBALS['meta']["activer_breves"];
 
 	if ($id_parent == "0" AND $id_rubrique != "0" AND $activer_breves!="non"){
 	  echo "<div align='$spip_lang_right'>";
@@ -382,11 +382,11 @@ if ($relief) {
 
 //// Les sites references
 
-	if (lire_meta("activer_sites") == 'oui') {
+	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 	  include_ecrire("inc_sites.php3");
 	  afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus') ORDER BY nom_site");
 
-	  $proposer_sites=lire_meta("proposer_sites");
+	  $proposer_sites=$GLOBALS['meta']["proposer_sites"];
 	  if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
 		$link = new Link('sites_edit.php3');
 		$link->addVar('id_rubrique', $id_rubrique);
@@ -491,13 +491,13 @@ function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte,
 {
 	if ($changer_lang
 	AND $id_rubrique>0
-	AND lire_meta('multi_rubriques') == 'oui'
-	AND (lire_meta('multi_secteurs') == 'non' OR $id_parent == 0)) {
+	AND $GLOBALS['meta']['multi_rubriques'] == 'oui'
+	AND ($GLOBALS['meta']['multi_secteurs'] == 'non' OR $id_parent == 0)) {
 		if ($changer_lang != "herit")
 			spip_query("UPDATE spip_rubriques SET lang='".addslashes($changer_lang)."', langue_choisie='oui' WHERE id_rubrique=$id_rubrique");
 		else {
 			if ($id_parent == 0)
-				$langue_parent = lire_meta('langue_site');
+				$langue_parent = $GLOBALS['meta']['langue_site'];
 			else {
 				$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 				$langue_parent = $row['lang'];
@@ -556,7 +556,7 @@ descriptif='" . addslashes($descriptif) . "',
 texte='" . addslashes($texte) . "'
 $champs_extra
 WHERE id_rubrique=$id_rubrique");
-	if (lire_meta('activer_moteur') == 'oui') {
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_ecrire ("inc_index.php3");
 			marquer_indexer('rubrique', $id_rubrique);
 	}

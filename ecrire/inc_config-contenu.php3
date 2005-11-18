@@ -59,7 +59,7 @@ echo "<input type='hidden' name='changer_config' value='oui'>";
 //
 debut_cadre_trait_couleur("forum-interne-24.gif", false, "", _T('info_mode_fonctionnement_defaut_forum_public').aide ("confforums"));
 
-$forums_publics=lire_meta("forums_publics");
+$forums_publics=$GLOBALS['meta']["forums_publics"];
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' ALIGN='$spip_lang_left' class='verdana2'>";
@@ -143,7 +143,7 @@ echo "<p>";
 if ($options == "avancees") {
 	debut_cadre_trait_couleur("redacteurs-24.gif", false, "", _T('info_inscription_automatique'));
 
-	$accepter_inscriptions=lire_meta("accepter_inscriptions");
+	$accepter_inscriptions=$GLOBALS['meta']["accepter_inscriptions"];
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
 	echo "<TR><TD BACKGROUND='" . _DIR_IMG_PACK . "rien.gif' class='verdana2'>";
@@ -160,7 +160,7 @@ if ($options == "avancees") {
 	// ET si on n'a pas de forums sur abonnement, on peut vouloir
 	// tout de meme ouvrir les inscriptions aux *visiteurs*
 	if ($accepter_inscriptions == 'non') {
-		$accepter_visiteurs = lire_meta('accepter_visiteurs');
+		$accepter_visiteurs = $GLOBALS['meta']['accepter_visiteurs'];
 		echo "<br /><br />\n";
 		debut_cadre_relief("", false, "",
 		bouton_block_invisible("accepter_visiteurs") . ' ' .
@@ -206,7 +206,7 @@ if ($options == "avancees") {
 if (tester_mail()) {
 	debut_cadre_trait_couleur("", false, "", _T('info_envoi_email_automatique').aide ("confmails"));
 
-	$prevenir_auteurs=lire_meta("prevenir_auteurs");
+	$prevenir_auteurs=$GLOBALS['meta']["prevenir_auteurs"];
 
 
 	echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
@@ -231,9 +231,9 @@ if (tester_mail()) {
 	// Suivi editorial (articles proposes & publies)
 	//
 
-	$suivi_edito=lire_meta("suivi_edito");
-	$adresse_suivi=lire_meta("adresse_suivi");
-	$adresse_suivi_inscription=lire_meta("adresse_suivi_inscription");
+	$suivi_edito=$GLOBALS['meta']["suivi_edito"];
+	$adresse_suivi=$GLOBALS['meta']["adresse_suivi"];
+	$adresse_suivi_inscription=$GLOBALS['meta']["adresse_suivi_inscription"];
 
 	echo "<p />";
 	debut_cadre_relief("", false, "", _T('info_suivi_activite'));
@@ -270,9 +270,9 @@ if (tester_mail()) {
 	//
 	// Annonce des nouveautes
 	//
-	$quoi_de_neuf=lire_meta("quoi_de_neuf");
-	$adresse_neuf=lire_meta("adresse_neuf");
-	$jours_neuf=lire_meta("jours_neuf");
+	$quoi_de_neuf=$GLOBALS['meta']["quoi_de_neuf"];
+	$adresse_neuf=$GLOBALS['meta']["adresse_neuf"];
+	$jours_neuf=$GLOBALS['meta']["jours_neuf"];
 
 	// provoquer l'envoi des nouveautes en supprimant le fichier lock
 	if ($envoi_now)
@@ -313,7 +313,7 @@ if (tester_mail()) {
 	fin_cadre_relief();
 
 	if($options == "avancees") {
-		$email_envoi = entites_html(lire_meta("email_envoi"));
+		$email_envoi = entites_html($GLOBALS['meta']["email_envoi"]);
 		echo "<p />";
 		debut_cadre_relief("", false, "", _T('info_email_envoi'));
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
@@ -345,7 +345,7 @@ if ($options == "avancees") {
 
 	echo _T('info_forum_ouvert');
 	echo "<br />";
-	afficher_choix('forum_prive_admin', lire_meta('forum_prive_admin'),
+	afficher_choix('forum_prive_admin', $GLOBALS['meta']['forum_prive_admin'],
 		array('oui' => _T('item_activer_forum_administrateur'),
 			'non' => _T('item_desactiver_forum_administrateur')));
 

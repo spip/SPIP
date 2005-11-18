@@ -54,7 +54,7 @@ function http_status($status) {
 // Retourne ce qui va bien pour que le navigateur ne mette pas la page en cache
 function http_no_cache() {
 	if (headers_sent()) return;
-	if (!$charset = lire_meta('charset')) $charset = 'utf-8';
+	if (!$charset = $GLOBALS['meta']['charset']) $charset = 'utf-8';
 
 	// selon http://developer.apple.com/internet/safari/faq.html#anchor5
 	// il faudrait aussi pour Safari

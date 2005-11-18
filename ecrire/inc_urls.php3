@@ -71,7 +71,7 @@ function generer_url_document($id_document) {
 			$url = $row['fichier'];
 		} else {
 			$url = '../' . ($row['fichier']);
-			if ((lire_meta("creer_htaccess")) == 'oui')
+			if (($GLOBALS['meta']["creer_htaccess"]) == 'oui')
 				$url = "../spip_image.php3?action=autoriser&doc=$id_document";
 		}
 	}

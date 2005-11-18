@@ -283,8 +283,8 @@ function choix_statut_auteur($statut)
 	  _T('intem_redacteur') .
 	  '</option>' .
 	  (!(($statut == '6forum')
-		      OR (lire_meta('accepter_visiteurs') == 'oui')
-		      OR (lire_meta('forums_publics') == 'abo')
+		      OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
+		      OR ($GLOBALS['meta']['forums_publics'] == 'abo')
 	     OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs WHERE statut='6forum'"))) ? "" :
 	   ("\n<option" .
 	    mySel("6forum",$statut) .

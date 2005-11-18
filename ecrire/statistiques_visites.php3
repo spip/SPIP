@@ -568,7 +568,7 @@ if (!$origine) {
 		} else {
 			echo "<font size=1>";
 			echo "<br>"._T('info_popularite_2')." ";
-			echo ceil(lire_meta('popularite_total'));
+			echo ceil($GLOBALS['meta']['popularite_total']);
 			echo "</font>";
 		}
 		echo "</td></tr></table>";	

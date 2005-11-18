@@ -65,7 +65,7 @@ function no_password_proxy_url($http_proxy) {
 // retourne un descripteur de fichier
 //
 function init_http($get, $url, $refuse_gz=false) {
-	$http_proxy = lire_meta("http_proxy");
+	$http_proxy = $GLOBALS['meta']["http_proxy"];
 	if (!eregi("^http://", $http_proxy))
 		$http_proxy = '';
 	else
@@ -109,7 +109,7 @@ function init_http($get, $url, $refuse_gz=false) {
 			. base64_encode($proxy_user . ":" . $proxy_pass) . "\r\n");
 		}
 		// Referer = c'est nous !
-		if ($referer = lire_meta("adresse_site"))
+		if ($referer = $GLOBALS['meta']["adresse_site"])
 			fputs($f, "Referer: $referer/\r\n");
 
 		// On sait lire du gzip
@@ -773,7 +773,7 @@ function afficher_sites($titre_table, $requete) {
 
 			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
 
-			if ($spip_display != 1 AND $spip_display != 4 AND lire_meta('image_process') != "non") {
+			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
 				include_ecrire("inc_logos.php3");
 				$logo = decrire_logo("siteon$id_syndic");
 				if ($logo) {

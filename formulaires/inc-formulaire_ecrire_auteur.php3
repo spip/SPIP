@@ -59,7 +59,7 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 	if ($validable
 	AND $id == _request('num_formulaire_ecrire_auteur')
 	AND _request('confirmer'.$id)) { 
-		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi(lire_meta('nom_site')))." (".lire_meta('adresse_site')."/) --\n";
+		$texte .= "\n\n-- "._T('envoi_via_le_site')." ".supprimer_tags(extraire_multi($GLOBALS['meta']['nom_site']))." (".$GLOBALS['meta']['adresse_site']."/) --\n";
 		include_ecrire("inc_mail.php3");
 		envoyer_mail($mail, $sujet, $texte, $adres,
 				"X-Originating-IP: ".$GLOBALS['REMOTE_ADDR']);

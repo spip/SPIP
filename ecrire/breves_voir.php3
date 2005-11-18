@@ -24,7 +24,7 @@ include_ecrire ("inc_abstract_sql.php3");
 
 if (!$id_breve) $id_breve=0;
 
-$flag_mots = lire_meta("articles_mots");
+$flag_mots = $GLOBALS['meta']["articles_mots"];
 
 if (($id_breve == 0) AND ($new == "oui")) {
 	$id_rubrique = intval($id_parent);
@@ -33,7 +33,7 @@ if (($id_breve == 0) AND ($new == "oui")) {
 	if ($row = spip_fetch_array($result_lang_rub)) {
 		$langue_new = $row["lang"];
 	}
-	if (!$langue_new) $langue_new = lire_meta('langue_site');
+	if (!$langue_new) $langue_new = $GLOBALS['meta']['langue_site'];
 	$langue_choisie_new = 'non';
 
 	$id_breve = spip_abstract_insert("spip_breves",
@@ -68,7 +68,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 		include_ecrire ("inc_invalideur.php3");
 		suivre_invalideur("id='id_breve/$id_breve'");
 	}
-	if (lire_meta('activer_moteur') == 'oui') {
+	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_ecrire ("inc_index.php3");
 		marquer_indexer('breve', $id_breve);
 	}
@@ -212,7 +212,7 @@ if ($flag_mots!='non' AND $flag_editable AND $options == 'avancees') {
 //
 // Langue de la breve
 //
-if ((lire_meta('multi_articles') == 'oui') AND ($flag_editable)) {
+if (($GLOBALS['meta']['multi_articles'] == 'oui') AND ($flag_editable)) {
 	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_parent = $row['lang'];
 
