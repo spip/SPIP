@@ -3,7 +3,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_ecrire('inc_meta.php3');
-include_ecrire('inc_admin.php3');
+include_ecrire('inc_session.php3');
 include_ecrire('inc_acces.php3');
 include_ecrire('inc_texte.php3');
 include_ecrire('inc_lang.php3');
