@@ -217,7 +217,7 @@ fin_page();
 
 function boite_info_articles($id_article, $statut_article, $visites, $id_version)
 {
-	global $connect_statut, $options;
+  global $connect_statut, $options, $flag_revisions;
 
 	debut_boite_info();
  
@@ -480,6 +480,32 @@ meme_rubrique_articles($id_rubrique, $id_article, $options);
 
 }
 
+function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, $statut_rubrique, $flag_auteur)
+{
+	if ($statut_rubrique) $ok_nouveau_statut = true;
+	else if ($flag_auteur) {
+		if ($statut_nouv == 'prop' AND $statut_article == 'prepa')
+			$ok_nouveau_statut = true;
+		else if ($statut_nouv == 'prepa' AND $statut_article == 'poubelle')
+			$ok_nouveau_statut = true;
+	}
+	if ($ok_nouveau_statut) {
+		spip_query("UPDATE spip_articles SET statut='$statut_nouv' WHERE id_article=$id_article");
+
+		if ($statut_nouv == 'publie' AND $statut_nouv != $statut_article)
+			spip_query("UPDATE spip_articles SET date=NOW() WHERE id_article=$id_article");
+
+		$ok_nouveau_statut =  ($statut_nouv != $statut_article);
+
+		// 'depublie' => invalider les caches
+		if ($ok_nouveau_statut AND $statut_article == 'publie' 
+		    AND $GLOBALS['invalider_caches']) {
+		  include_ecrire ("inc_invalideur.php3");
+		  suivre_invalideur("id='id_article/$id_article'");
+		}
+	}
+	return $ok_nouveau_statut ;
+}
 
 function changer_statut_articles($id_article, $statut)
 {
@@ -1439,23 +1465,9 @@ if (count($ze_doc)>0){
 
 }
 
-function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent, $flag_auteur, $new, $champs, $id_rubrique_old) {
+function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old, $change_rubrique, $new, $champs, $champs_extra) {
 {
-  global $connect_id_auteur;
-	// recoller les champs du extra
-	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
-	} else
-		$add_extra = '';
-
-	// Verifier qu'on envoie bien dans une rubrique autorisee
-	if ($id_rubrique=intval($id_parent)
-	AND ($flag_auteur OR acces_rubrique($id_rubrique))) {
-		$change_rubrique = "id_rubrique=$id_rubrique,";
-	} else {
-		$change_rubrique = "";
-	}
+	global $connect_id_auteur, $flag_revisions;
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1478,28 +1490,32 @@ function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent
 		}
 	}
 
-	$query = "UPDATE spip_articles SET surtitre='" .
-	  addslashes($champs['surtitre']) .
-	  "', titre='" .
-	  addslashes($champs['titre']) .
-	  "', soustitre='" .
-	  addslashes($champs['soustitre']) .
-	  "', $change_rubrique descriptif='" .
-	  addslashes($champs['descriptif']) .
-	  "', chapo='" .
-	  addslashes($champs['chapo']) .
-	  "', texte='" .
-	  addslashes($champs['texte']) .
-	  "', ps='" .
-	  addslashes($champs['ps']) .
-	  "', url_site='" .
-	  addslashes($champs['url_site']) .
-	  "', nom_site='" .
-	  addslashes($champs['nom_site']) .
-	  "' $add_extra WHERE id_article=$id_article";
-	$result = spip_query($query);
-	if ($change_rubrique) propager_les_secteurs();
-	calculer_rubriques();
+	if ($champs_extra) {
+		include_ecrire("inc_extra.php3");
+		$champs_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
+	}
+
+	spip_query("UPDATE spip_articles SET surtitre='" .
+		   addslashes($champs['surtitre']) .
+		   "', titre='" .
+		   addslashes($champs['titre']) .
+		   "', soustitre='" .
+		   addslashes($champs['soustitre']) .
+		   "', " .
+		   (!$change_rubrique ? "" :  "id_rubrique=$id_rubrique,") .
+		   "descriptif='" .
+		   addslashes($champs['descriptif']) .
+		   "', chapo='" .
+		   addslashes($champs['chapo']) .
+		   "', texte='" .
+		   addslashes($champs['texte']) .
+		   "', ps='" .
+		   addslashes($champs['ps']) .
+		   "', url_site='" .
+		   addslashes($champs['url_site']) .
+		   "', nom_site='" .
+		   addslashes($champs['nom_site']) .
+		   "'$champs_extra WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1508,6 +1524,7 @@ function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent
 
 	// Changer la langue heritee
 	if ($id_rubrique != $id_rubrique_old) {
+		propager_les_secteurs();
 		$row = spip_fetch_array(spip_query("SELECT lang, langue_choisie FROM spip_articles WHERE id_article=$id_article"));
 		$langue_old = $row['lang'];
 		$langue_choisie_old = $row['langue_choisie'];
@@ -1521,7 +1538,136 @@ function revisions_articles ($id_article, $champs_extra, $id_secteur, $id_parent
 
 	// marquer l'article (important pour les articles nouvellement crees)
 	spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
+	calculer_rubriques();
+ }
+}
 
- }}
+function insert_article($id_parent, $new)
+{
+	if ($new!='oui')  redirige_par_entete("./index.php3");
+	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
+	if (!$id_rubrique = intval($id_parent)) {
+		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
+	}
 
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+
+	$id_article = spip_abstract_insert("spip_articles",
+			"(id_rubrique, statut, date, accepter_forum, lang, langue_choisie)", 
+			"($id_rubrique, 'prepa', NOW(), '" .
+				substr($GLOBALS['meta']['forums_publics'],0,3)
+				. "', '"
+				. ($row["lang"] ? $row["lang"] : $GLOBALS['meta']['langue_site'])
+				. "', 'non')");
+	return $id_article;
+}
+
+// Y a-t-il vraiment 56 variables determinant l'edition d'un article ?
+
+function articles_dist()
+{
+global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $clean_link, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
+
+ if (!($id_article=intval($id_article)))
+   $id_article = insert_article($id_parent, $new);
+
+$clean_link = new Link("articles.php3?id_article=$id_article");
+
+// aucun doc implicitement inclus au départ.
+
+inclus_non_articles($id_article);
+
+
+if ($row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article"))) {
+	$statut_article = $row['statut'];
+	$titre_article = $row['titre'];
+	$id_rubrique = $row['id_rubrique'];
+	$statut_rubrique = acces_rubrique($id_rubrique);
+	if ($titre_article=='') $titre_article = _T('info_sans_titre');
+}
+else {
+	$statut_article = '';
+	$statut_rubrique = false;
+	$id_rubrique = '0';
+	if ($titre=='') $titre = _T('info_sans_titre');
+}
+
+$flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=$id_article AND id_auteur=$connect_id_auteur LIMIT 1"));
+
+if (!$statut_nouv) {
+	$ok_nouveau_statut = false;
+	$flag_editable = ($statut_rubrique
+		OR ($flag_auteur
+			AND ($statut_article == 'prepa'
+				OR $statut_article == 'prop' 
+				OR $statut_article == 'poubelle')));
+ } else {
+	$ok_nouveau_statut = comparer_statut_articles($id_article, $statut_nouv, $statut_article, $statut_rubrique, $flag_auteur);
+	$flag_editable = ($statut_rubrique OR ($flag_auteur AND ($statut_nouv == 'prepa' OR $statut_nouv == 'prop')));
+}
+
+if ($flag_editable) {
+
+if ($jour) {
+	$date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
+	spip_query("UPDATE spip_articles SET date='$date'
+		WHERE id_article=$id_article");
+	calculer_rubriques();
+}
+
+if ($jour_redac) {
+	if ($annee_redac<>'' AND $annee_redac < 1001) $annee_redac += 9000;
+
+	if ($avec_redac == 'non')
+		$date_redac = format_mysql_date();
+	else
+		$date_redac = format_mysql_date(
+			$annee_redac, $mois_redac, $jour_redac,
+			$heure_redac, $minute_redac);
+
+	spip_query("UPDATE spip_articles SET date_redac='$date_redac'
+		WHERE id_article=$id_article");
+}
+
+
+modif_langue_articles($id_article, $id_rubrique, $changer_lang);
+
+maj_documents($id_article, 'article');
+
+if ($changer_virtuel) {
+	$virtuel = eregi_replace("^http://$", "", trim($virtuel));
+	if ($virtuel) $chapo = addslashes(corriger_caracteres("=$virtuel"));
+	else $chapo = "";
+	spip_query("UPDATE spip_articles SET chapo='$chapo' WHERE id_article=$id_article");
+}
+
+if ($titre) {
+
+	$champs = array(
+			'surtitre' => corriger_caracteres($surtitre),
+			'titre' => ($titre_article=corriger_caracteres($titre)),
+			'soustitre' => corriger_caracteres($soustitre),
+			'descriptif' => corriger_caracteres($descriptif),
+			'nom_site' => corriger_caracteres($nom_site),
+			'url_site' => corriger_caracteres($url_site),
+			'chapo' => corriger_caracteres($chapo),
+			'texte' => corriger_caracteres(trop_longs_articles($texte_plus) . $texte),
+			'ps' => corriger_caracteres($ps))  ;
+
+	revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old,
+			    ($flag_auteur||$statut_rubrique),
+			    $new, $champs, $champs_extra);
+	$id_article_bloque = $id_article;   // message pour inc_presentation
+
+ }
+ }
+
+affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
+
+// Taches lentes
+
+if ($ok_nouveau_statut) {
+  cron_articles($id_article, $statut_nouv, $statut_article);
+}
+    }    
 ?>
