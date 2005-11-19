@@ -13,8 +13,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-
-
 ### Pour se débarrasser du md5, comment faire ? Un index sur 'referer' ?
 ### ou alors la meme notion, mais sans passer par des fonctions HEX ?
 
@@ -76,29 +74,33 @@ function calculer_visites($t) {
 	}
 	closedir($dir);
 
-	// 2. Manger 1000 fichiers de ces paniers (sans ordre particulier)
-	$compteur = 1000;
+	// 2. Manger 100 fichiers de ces paniers (sans ordre particulier)
+	$compteur = 100;
 	$pasfini = false;
 	foreach ($paniers as $panier) {
+		spip_log("traite le panier $panier");
 		$dir = opendir(_DIR_SESSIONS.$panier);
 		while (($item = readdir($dir)) !== false) {
+			if ($compteur-- < 0) {
+				$pasfini = true;
+				break;
+			}
 			if (is_file($f = _DIR_SESSIONS.$panier.'/'.$item)) {
 				compte_fichier_visite($f,
 					$visites, $visites_a, $referers, $referers_a, $articles);
 				@unlink($f);
 			}
-			if (-- $compteur <= 0) {
-				$pasfini = true;
-				break;
-			}
 		}
 		// effacer le panier, sauf si on a atteint la limite de fichiers vus
 		closedir($dir);
-		if (!$pasfini)
+		if ($pasfini)
+			break;
+		else
 			@rmdir(_DIR_SESSIONS.$panier);
 	}
 
 	if (!$visites) return;
+	spip_log("analyse $visites visites");
 
 	// Maintenant on dispose de plusieurs tableaux qu'il faut ventiler dans
 	// les tables spip_visites, spip_visites_articles, spip_referers
@@ -112,9 +114,6 @@ function calculer_visites($t) {
 	spip_query("UPDATE spip_visites SET visites = visites+$visites
 	WHERE date='$date'");
 
-	// pour calcul_mysql_in
-	include_ecrire('inc_db_mysql.php3');
-
 	// 2. les visites des articles (en deux passes pour minimiser
 	// le nombre de requetes)
 	if ($articles) {
@@ -126,19 +125,34 @@ function calculer_visites($t) {
 		. ")");
 
 		// enregistrer les visites dans les deux tables
-		$ar = array(); # tableau num -> liste des articles ayant num visites
-		foreach($visites_a as $id_article => $num)
+		$ar = array();	# tableau num -> liste des articles ayant num visites
+		$tous = array();# liste des articles ayant des visites
+		foreach($visites_a as $id_article => $num) {
 			$ar[$num][] = $id_article;
-		foreach ($ar as $num => $liste) {
-			$in = calcul_mysql_in('id_article', join(',',$liste));
-			spip_query("UPDATE spip_visites_articles
-			SET visites = visites+$num
-			WHERE date='$date' AND $in");
-			spip_query("UPDATE spip_articles
-			SET visites = visites+$num, maj = maj
-			WHERE $in");
-			## Ajouter un JOIN sur le statut de l'article ?
+			$tous[] = $id_article;
 		}
+		$tous = calcul_mysql_in('id_article', join(',', $tous));
+		$sum = '';
+		$in = array();
+		foreach ($ar as $num => $liste)
+			$sum .= ' + '.$num.'*'
+				. calcul_mysql_in('id_article', join(',',$liste));
+
+		# pour les popularites ajouter 1 point par referer
+		$sumref = '';
+		if ($referers_a)
+			$sumref = ' + '.calcul_mysql_in('id_article',
+			join(',',array_keys($referers_a)));
+
+		spip_query("UPDATE spip_visites_articles
+			SET visites = visites $sum
+			WHERE date='$date' AND $tous");
+		spip_query("UPDATE spip_articles
+			SET visites = visites $sum$sumref,
+			popularite = popularite $sum,
+			maj = maj
+			WHERE $tous");
+			## Ajouter un JOIN sur le statut de l'article ?
 	}
 
 	// 3. Les referers du site
@@ -158,8 +172,8 @@ function calculer_visites($t) {
 		// ajouter les visites
 		foreach ($ar as $num => $liste) {
 			spip_query("UPDATE spip_referers
-			SET visites = visites+$num, visites_jour = visites_jour+$num
-			WHERE ".calcul_mysql_in('referer_md5',join(',',$liste)));
+				SET visites = visites+$num, visites_jour = visites_jour+$num
+				WHERE ".calcul_mysql_in('referer_md5',join(',',$liste)));
 		}
 	}
 	
@@ -188,82 +202,8 @@ function calculer_visites($t) {
 		}
 	}
 
-	// 5. Calculer les popularites ; ici c'est presque comme les visites,
-	// sauf qu'on ajoute 1 point par referer
-	if ($visites_a) {
-		$points = array();
-		foreach ($visites_a as $id_article => $v) {
-			// ajouter un point aux articles ayant un referer
-			if ($r = $referers_a[$id_article])
-				$v += 1; // ou array_pop($r);
-			$points[$v][] = $id_article;
-		}
-		foreach ($points as $num => $liste) {
-			spip_query("UPDATE spip_articles
-			SET popularite = popularite + $num, maj = maj
-			WHERE ".calcul_mysql_in('id_article', join(',',$liste)));
-		}
-	}
-
 	// S'il reste des fichiers a manger, le signaler pour reexecution rapide
 	return $pasfini;
-}
-
-
-
-//
-// Popularite, modele logarithmique
-//
-
-function calculer_popularites() {
-	include_ecrire('inc_meta.php3');
-
-	// Si c'est le premier appel, ne pas calculer
-	$t = $GLOBALS['meta']['date_popularites'];
-	ecrire_meta('date_popularites', time());
-	ecrire_metas();
-	if (!$t)
-		return;
-
-	$duree = time() - $t;
-	// duree de demi-vie d'une visite dans le calcul de la popularite (en jours)
-	$demivie = 1;
-	// periode de reference en jours
-	$periode = 1;
-	// $a est le coefficient d'amortissement depuis la derniere mesure
-	$a = pow(2, - $duree / ($demivie * 24 * 3600));
-	// $b est la constante multiplicative permettant d'avoir
-	// une visite par jour (periode de reference) = un point de popularite
-	// (en regime stationnaire)
-	// or, magie des maths, ca vaut log(2) * duree journee/demi-vie
-	// si la demi-vie n'est pas trop proche de la seconde ;)
-	$b = log(2) * $periode / $demivie;
-
-	// oublier un peu le passe
-	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
-
-	// enregistrer les metas...
-	list($maxpop, $totalpop) = spip_fetch_array(spip_query("SELECT MAX(popularite), SUM(popularite) FROM spip_articles"));
-	ecrire_meta("popularite_max", $maxpop);
-	ecrire_meta("popularite_total", $totalpop);
-
-
-	// Une fois par jour purger les referers du jour ; qui deviennent
-	// donc ceux de la veille ; au passage on stocke une date_statistiques
-	// dans spip_meta - cela permet au code d'etre "reentrant", ie ce cron
-	// peut etre appele par deux bases SPIP ne partageant pas le meme
-	// _DIR_SESSIONS, sans tout casser...
-	$aujourdhui = date("Y-m-d");
-	if ($date = $GLOBALS['meta']['date_statistiques']
-	AND $date != $aujourdhui) {
-		spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
-	}
-	ecrire_meta('date_statistiques', $aujourdhui);
-
-	// et c'est fini pour cette fois-ci
-	ecrire_metas();
-	return 1;
-
 }
 
 ?>

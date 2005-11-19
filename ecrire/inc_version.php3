@@ -936,7 +936,7 @@ function cron($gourmand = false) {
 
 		// Faut-il travailler ? Pas tous en meme temps svp
 		// Au passage si on travaille on bloque les autres
-		if (spip_touch(_FILE_CRON_LOCK, 1)) {
+		if (spip_touch(_FILE_CRON_LOCK, 2)) {
 			include_ecrire('inc_cron.php3');
 			spip_cron();
 		}
