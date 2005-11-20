@@ -25,15 +25,6 @@ $spip_petitions = array(
 $spip_petitions_key = array(
 		"PRIMARY KEY"	=> "id_article");
 
-$spip_visites_temp = array(
-		"ip"	=> "INT UNSIGNED NOT NULL",
-		"type"	=> "ENUM ('article', 'rubrique', 'breve', 'autre') NOT NULL",
-		"id_objet"	=> "INT UNSIGNED NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_visites_temp_key = array(
-		"PRIMARY KEY"	=> "type, id_objet, ip");
-
 $spip_visites = array(
 		"date"	=> "DATE NOT NULL",
 		"visites"	=> "INT UNSIGNED NOT NULL",
@@ -50,17 +41,6 @@ $spip_visites_articles = array(
 
 $spip_visites_articles_key = array(
 		"PRIMARY KEY"	=> "date, id_article");
-
-$spip_referers_temp = array(
-		"ip"	=> "INT UNSIGNED NOT NULL",
-		"referer"	=> "VARCHAR (255) NOT NULL",
-		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
-		"type"	=> "ENUM ('article', 'rubrique', 'breve', 'autre') NOT NULL",
-		"id_objet"	=> "INT UNSIGNED NOT NULL",
-		"maj"	=> "TIMESTAMP");
-
-$spip_referers_temp_key = array(
-		"PRIMARY KEY"	=> "type, id_objet, referer_md5, ip");
 
 $spip_referers = array(
 		"referer_md5"	=> "BIGINT UNSIGNED NOT NULL",
@@ -354,14 +334,10 @@ $tables_auxiliaires  =
   array(
 	'spip_petitions' => array('field' => &$spip_petitions,
 			     'key' => &$spip_petitions_key),
-	'spip_visites_temp' => array('field' => &$spip_visites_temp,
-				'key' => &$spip_visites_temp_key),
 	'spip_visites' =>	array('field' => &$spip_visites,
 			      'key' => &$spip_visites_key),
 	'spip_visites_articles' => array('field' => &$spip_visites_articles,
 				    'key' => &$spip_visites_articles_key),
-	'spip_referers_temp' => array('field' => &$spip_referers_temp,
-				 'key' => &$spip_referers_temp_key),
 	'spip_referers' => array('field' => &$spip_referers,
 			    'key' => &$spip_referers_key),
 	'spip_referers_articles' => array('field' => &$spip_referers_articles,
