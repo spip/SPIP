@@ -458,10 +458,14 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		else
 			$limit = $nombre_indexations;
 
-		$s = spip_query("SELECT id_$type, idx FROM $table_objet WHERE idx IN ('','1','idx') AND $critere ORDER BY idx='idx',idx='' LIMIT $limit");
-		while ($t = spip_fetch_array($s)) {
-			$vu[$type] .= $t[0].", ";
-			indexer_objet($type, $t[0], $t[1]);
+		foreach (array('1', '', 'idx') as $mode) {
+			$s = spip_query("SELECT id_$type, idx FROM $table_objet
+			WHERE idx='$mode' AND $critere LIMIT $limit");
+			while ($t = spip_fetch_array($s)) {
+				$vu[$type] .= $t[0].", ";
+				indexer_objet($type, $t[0], $t[1]);
+			}
+			if ($vu) break;
 		}
 	}
 	return $vu;
