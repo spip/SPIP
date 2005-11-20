@@ -312,7 +312,7 @@ function integre_image($id_document, $align, $type_aff) {
 	// Preparer le texte sous l'image pour les <DOC>
 	if ($type_aff == 'DOC') {
 		if (strlen($titre))
-			$txt = "\n<div class='spip_doc_titre'><strong>"
+			$txt = "<div class='spip_doc_titre'><strong>"
 				. $titre
 				. "</strong></div>\n";
 		if (strlen($descriptif))
