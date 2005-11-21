@@ -18,9 +18,9 @@ include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_date.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
-function afficher_breves_voir($id_breve, $champs_extra, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour )
+function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour )
 {
-	global $options, $connect_statut, $les_notes;
+	global $champs_extra, $options, $connect_statut, $les_notes;
 
 $query = "SELECT * FROM spip_breves WHERE id_breve='$id_breve'";
 $result = spip_query($query);
@@ -309,6 +309,6 @@ if ($jour AND $connect_statut == '0minirezo') {
 	calculer_rubriques();
 }
 
-afficher_breves_voir($id_breve, $champs_extra, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour);
+afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour);
 }
 ?>

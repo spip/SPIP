@@ -98,9 +98,9 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 	}
 }
 //// a TESTER
-function formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $champs_extra, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
+function formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
 {
- global  $spip_lang, $options , $spip_ecran;
+ global   $champs_extra, $spip_lang, $options , $spip_ecran;
 
  $articles_surtitre = $champs_article['articles_surtitre'];
  $articles_soustitre = $champs_article['articles_soustitre'];
@@ -280,8 +280,9 @@ echo "<P><HR><P>";
 }
 
 
-function affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $champs_extra, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
+function affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
 {
+  global $champs_extra;
 debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles", "hauteurTextarea();");
 
 debut_grand_cadre();
@@ -307,7 +308,7 @@ debut_gauche();
  debut_droite();
  debut_cadre_formulaire();
 
- formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $champs_extra, $extra, $id_secteur, $date, $onfocus, $lier_trad, 
+ formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, 
 $champs_article);
 fin_cadre_formulaire();
 
@@ -434,7 +435,7 @@ if (!$flag_editable) {
 
 spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 
-affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $champs_extra, $extra, $id_secteur, $date, $onfocus, $lier_trad, 
+affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, 
 	array(
 		'articles_surtitre' => $GLOBALS['meta']["articles_surtitre"],
 		'articles_soustitre' => $GLOBALS['meta']["articles_soustitre"],
