@@ -174,7 +174,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 afficher_statut_articles($id_article, $rubrique_article, $statut_article);
 
 
-afficher_corps_articles($virtuel, $chapo, $texte, $ps);
+ afficher_corps_articles($virtuel, $chapo, $texte, $ps, $extra);
 
 if ($flag_editable) {
 	echo "\n\n<div align='$spip_lang_right'><br />";
@@ -1275,9 +1275,9 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 	echo fin_block();
 }
 
-function afficher_corps_articles($virtuel, $chapo, $texte, $ps)
+function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 {
-  global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $extra, $les_notes, $dir_lang;
+  global $revision_nbsp, $activer_revision_nbsp, $champs_extra, $les_notes, $dir_lang;
 
 	echo "\n\n<div align='justify' style='padding: 10px;'>";
 
