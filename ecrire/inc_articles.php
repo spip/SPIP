@@ -1465,9 +1465,9 @@ if (count($ze_doc)>0){
 
 }
 
-function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old, $change_rubrique, $new, $champs, $champs_extra) {
+function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old, $change_rubrique, $new, $champs) {
 {
-	global $connect_id_auteur, $flag_revisions;
+  global $connect_id_auteur, $flag_revisions, $champs_extra;
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1656,7 +1656,7 @@ if ($titre) {
 
 	revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old,
 			    ($flag_auteur||$statut_rubrique),
-			    $new, $champs, $champs_extra);
+			    $new, $champs);
 	$id_article_bloque = $id_article;   // message pour inc_presentation
 
  }
