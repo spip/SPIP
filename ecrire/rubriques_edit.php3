@@ -111,7 +111,7 @@ debut_cadre_couleur("$logo_parent", false, '', _T('entree_interieur_rubrique').a
 // selecteur de rubriques
 include_ecrire('inc_rubriques.php3');
 $restreint = ($GLOBALS['statut'] == 'publie');
-echo selecteur_rubrique($id_parent, 'parent', $restreint);
+echo selecteur_rubrique($id_rubrique, 'rubrique', $restreint);
 
 
 // si c'est une rubrique-secteur contenant des breves, demander la

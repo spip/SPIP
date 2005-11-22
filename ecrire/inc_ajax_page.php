@@ -10,6 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
 
 function ajax_page_dist($fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $rac)
@@ -161,7 +162,7 @@ function ajax_page_aff_rubrique($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
 		include_ecrire("inc_texte.php3");
 		include_ecrire("inc_mini_nav.php");
-		echo mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus);
+		echo mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac);
 
 }
 
