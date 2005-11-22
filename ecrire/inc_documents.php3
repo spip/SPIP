@@ -336,23 +336,30 @@ function integre_image($id_document, $align, $type_aff) {
 			$float = "float: $align; ";
 	}
 
-	$retour .= "<div class='spip_documents$class_align'$float>\n";
+	# extraire la largeur de la vignette
+	$width = extraire_attribut($vignette, 'width');
 
-	if ($align != 'center') {
-		// Largeur de la div = celle de l'image ; mais s'il y a une legende
-		// mettre au moins 120px
-		$width = extraire_attribut($vignette, 'width');
-		if (strlen($txt) AND $width < 120) $width = 120;
-		$width = 'width: '.$width.'px;';
-
-		$style = " style='$float$width'";
+	# mode <span ...> : ne pas mettre d'attributs de type block sinon MSIE Windows refuse de faire des liens dessus
+	if ($span == 'span') {
+		$vignette = inserer_attribut($vignette, 'style', $float.'border-width: 0px; width:'.$width.'px;');
+		$vignette = inserer_attribut($vignette, 'class', "spip_documents$class_align");
+		return $vignette;
 	}
-
-	return
-		"<$span class='spip_documents$class_align'$style>"
-		. $vignette
-		. $txt
-		. "</$span>\n";
+	# mode <div ...>
+	else {
+		if ($align != 'center') {
+			// Largeur de la div = celle de l'image ; mais s'il y a une legende
+			// mettre au moins 120px
+			if (strlen($txt) AND $width < 120) $width = 120;
+			$width = 'width: '.$width.'px;';
+			$style = " style='$float$width'";
+		}
+		return
+			"<div class='spip_documents$class_align'$style>"
+			. $vignette
+			. $txt
+			. "</div>\n";
+	}
 }
 
 //
