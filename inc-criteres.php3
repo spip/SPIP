@@ -800,6 +800,10 @@ function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
 			$col = $date_orig;
 			$col_table = '';
 		}
+	else if ($col == 'jour') {
+			$col = "DAYOFMONTH($date_orig)";
+			$col_table = '';
+		}
 	else if ($col == 'mois') {
 			$col = "MONTH($date_orig)";
 			$col_table = '';
