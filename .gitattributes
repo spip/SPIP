@@ -265,6 +265,7 @@ ecrire/inc_articles_edit.php -text
 ecrire/inc_articles_page.php -text
 ecrire/inc_articles_tous.php -text
 ecrire/inc_auteur_infos.php -text
+ecrire/inc_auteurs.php3 -text
 ecrire/inc_auteurs_edit.php -text
 ecrire/inc_barre.php3 -text
 ecrire/inc_breves.php -text
