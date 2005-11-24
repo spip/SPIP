@@ -979,7 +979,13 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
   }
 }
 
-
+function add_auteur_article($id_article, $nouv_auteur)
+{
+	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$nouv_auteur' AND id_article='$id_article'";
+		$result=spip_query($query);
+		$query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$nouv_auteur','$id_article')";
+		$result=spip_query($query);
+}
 
 function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur)
 {
@@ -1075,10 +1081,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 
   if ($ajout_auteur && $flag_editable) {
 	if ($nouv_auteur > 0) {
-		$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$nouv_auteur' AND id_article='$id_article'";
-		$result=spip_query($query);
-		$query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$nouv_auteur','$id_article')";
-		$result=spip_query($query);
+		add_auteur_article($id_article, $nouv_auteur);
 	}
 
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
@@ -1568,9 +1571,10 @@ function articles_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $clean_link, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
- if (!($id_article=intval($id_article)))
+ if (!($id_article=intval($id_article))) {
    $id_article = insert_article($id_parent, $new);
-
+   add_auteur_article($id_article, $connect_id_auteur);
+ }
 $clean_link = new Link("articles.php3?id_article=$id_article");
 
 // aucun doc implicitement inclus au départ.
