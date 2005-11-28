@@ -1504,9 +1504,9 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 		   addslashes($champs['titre']) .
 		   "', soustitre='" .
 		   addslashes($champs['soustitre']) .
-		   "', " .
-		   (!$change_rubrique ? "" :  "id_rubrique=$id_rubrique,") .
-		   "descriptif='" .
+		   "', id_rubrique=" .
+		   intval($id_rubrique) .
+		   ", descriptif='" .
 		   addslashes($champs['descriptif']) .
 		   "', chapo='" .
 		   addslashes($champs['chapo']) .
@@ -1571,6 +1571,7 @@ function articles_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $clean_link, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $statut_nouv, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
+ $id_parent = intval($id_parent);
  if (!($id_article=intval($id_article))) {
    $id_article = insert_article($id_parent, $new);
    add_auteur_article($id_article, $connect_id_auteur);
@@ -1647,6 +1648,10 @@ if ($changer_virtuel) {
 
 if ($titre) {
 
+  // prendre en compte le changement eventuel, et seulement si autorise
+	if ($id_parent AND ($flag_auteur OR acces_rubrique($id_parent))) {
+		$id_rubrique = $id_parent;
+	}
 	$champs = array(
 			'surtitre' => corriger_caracteres($surtitre),
 			'titre' => ($titre_article=corriger_caracteres($titre)),
