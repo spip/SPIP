@@ -16,7 +16,6 @@ include_ecrire("inc_session.php3"); # pour creer_uniq_id
 include_ecrire("inc_mail.php3"); # pour envoyer_mail
 include_ecrire("inc_acces.php3"); # pour generer_htpass
 include_local("inc-public-global.php3"); # pour calculer la page
-include_local ("inc-cache.php3"); # ici c'est pour tester la connexion SQL
 include_ecrire("inc_lang.php3");
 include_ecrire("inc_filtres.php3"); # pour email_valide()
 include_ecrire('inc_headers.php');

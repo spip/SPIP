@@ -73,7 +73,7 @@ function suivre_invalideur($cond) {
 	while ($row = spip_fetch_array($result))
 		$tous[] = $row['fichier'];
 
-	spip_log("suivre $cond");
+	spip_log("suivre $cond dans " . count($tous) . " caches");
 	applique_invalideur($tous);
 }
 
@@ -110,11 +110,89 @@ function applique_invalideur($depart) {
 		ecrire_meta('invalider', 'oui'); // se verifier soi-meme
 		ecrire_meta('invalider_caches', 'oui'); // supprimer les autres
 		ecrire_metas();
-		if (_DIR_RESTREINT) {
-			include_local('inc-cache.php3');
-			retire_caches();
+	}
+}
+
+
+// Utilisee pour vider le cache depuis l'espace prive
+// (ou juste les squelettes si un changement de config le necessite)
+function purger_repertoire($dir, $age='ignore', $regexp = '') {
+	$handle = @opendir($dir);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		$chemin = "$dir/$fichier";
+		if (is_file($chemin))
+			@unlink($chemin);
+		else if (is_dir($chemin))
+			if ($fichier != 'CVS')
+				purger_repertoire($chemin);
+	}
+	closedir($handle);
+}
+
+function purger_cache() {
+	spip_log('vider le cache');
+	include_ecrire('inc_invalideur.php3');
+	supprime_invalideurs();
+	purger_repertoire(_DIR_CACHE, 0);
+}
+
+function purger_squelettes() {
+	spip_log('effacer les squelettes compiles');
+	purger_repertoire(_DIR_CACHE, 0, '^skel_');
+}
+
+
+function purger_cache_images() {
+	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
+}
+
+
+function calculer_cache_vignettes() {
+	$handle = @opendir(_DIR_IMG);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_dir(_DIR_IMG.$fichier) AND ereg("^cache-", $fichier)) {
+			$taille += calculer_taille_dossier(_DIR_IMG.$fichier);
 		}
 	}
+	closedir($handle);
+	
+	include_ecrire("inc_filtres.php3");
+	echo "<html><body>\n";
+	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
+	echo "<p align='justify'>\n";
+	echo _T('ecrire:taille_cache_image', array('dir' => _DIR_IMG,
+		'taille' => "<b>".taille_en_octets($taille)."</b>"));
+	echo "</p></div></body></html>";
+
+}
+
+// Fonctions pour le cache des images (vues reduites)
+
+
+function calculer_taille_dossier ($dir) {
+	$handle = @opendir($dir);
+	if (!$handle) return;
+
+	while (($fichier = @readdir($handle)) !== false) {
+		// Eviter ".", "..", ".htaccess", etc.
+		if ($fichier[0] == '.') continue;
+		if ($regexp AND !ereg($regexp, $fichier)) continue;
+		if (is_file("$dir/$fichier")) {
+			$taille += filesize("$dir/$fichier");
+		}
+	}
+	closedir($handle);
+	return $taille;
 }
 
 ?>

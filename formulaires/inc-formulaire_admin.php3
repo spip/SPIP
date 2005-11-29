@@ -145,7 +145,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				'popularite' => ceil($popularite),
 				'statistiques' => $statistiques,
 				'visites' => intval($visites),
-				'use_cache' => ($use_cache ? ' *' : ''),
+				'use_cache' => ($use_cache ? '' : ' *'),
 				'divclass' => $float,
 				'analyser' => $analyser,
 				'xhtml_error' => $GLOBALS['xhtml_error']

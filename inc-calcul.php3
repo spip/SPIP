@@ -128,7 +128,7 @@ function charger_squelette ($squelette) {
 # definie dans inc-chercher, fichier non charge si elle est deja definie
 # (typiquement dans mes_fonctions.php3)
 
-function cherche_page ($cache, $contexte, $fond, $delais)  {
+function cherche_page ($cache, $contexte, $fond)  {
 	if (!function_exists('chercher_squelette'))
 		include_local("inc-chercher-squelette.php3");
 
@@ -166,12 +166,6 @@ function cherche_page ($cache, $contexte, $fond, $delais)  {
 		  }
 	}
 
-	// Entrer les invalideurs dans la base
-	if ($delais>0) {
-		include_ecrire('inc_invalideur.php3');
-		maj_invalideurs($cache, $page['invalideurs'], $delais);
-	}
-
 	// Retourner la structure de la page
 
 	return $page;
@@ -188,6 +182,7 @@ function cherche_page ($cache, $contexte, $fond, $delais)  {
 function calculer_contexte() {
 	global $_GET, $_POST;
 
+	$contexte = array();
 	foreach($_GET as $var => $val) {
 		if (strpos($var, 'var_') !== 0)
 			$contexte[$var] = $val;
@@ -205,7 +200,11 @@ function calculer_contexte() {
 	return $contexte;
 }
 
-function calculer_page_globale($cache, $contexte_local, $fond, $delais) {
+function calculer_page_globale($cache, $fond) {
+
+	global $lastmodified, $_SERVER;
+
+	$contexte_local = calculer_contexte();
 
 	// Gestion des URLs personnalises - sale mais historique
 	if (function_exists("recuperer_parametres_url")) {
@@ -218,7 +217,6 @@ function calculer_page_globale($cache, $contexte_local, $fond, $delais) {
 			foreach ($contexte as $var=>$val)
 				if (substr($var,0,3) == 'id_')
 					$GLOBALS[$var] = $val;
-		$contexte_local = $contexte;
 	}
 
 	// si le champ chapo commence par '=' c'est une redirection.
@@ -231,7 +229,7 @@ function calculer_page_globale($cache, $contexte_local, $fond, $delais) {
 				substr($chapo, 1)));
 				if ($url) { // sinon les navigateurs pataugent
 					$url = texte_script(str_replace('&amp;', '&', $url));
-					$page = array('texte' => "<".
+					return array('texte' => "<".
 					"?php redirige_par_entete('$url'); ?" . ">",
 					'process_ins' => 'php');
 				}
@@ -240,9 +238,8 @@ function calculer_page_globale($cache, $contexte_local, $fond, $delais) {
 	}
 
 	// Go to work !
-	if (!$page)
-		$page = cherche_page($cache, $contexte_local, $fond, $delais);
-
+	spip_timer('calculer_page');
+	$page = cherche_page($cache, $contexte_local, $fond);
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
@@ -252,36 +249,11 @@ function calculer_page_globale($cache, $contexte_local, $fond, $delais) {
 	}
 
 	$page['signal'] = $signal;
-
-	return $page;
-}
-
-
-
-function calculer_page($chemin_cache, $elements, $delais, $inclusion=false) {
-	global $_POST;
-
-	// Inclusion
-	if ($inclusion) {
-		$contexte_inclus = $elements['contexte'];
-		$page = cherche_page($chemin_cache,
-			$contexte_inclus, $elements['fond'], $delais);
-	}
-	else {
-		$page = calculer_page_globale($chemin_cache,
-			$elements['contexte'],
-			$elements['fond'], $delais);
-	}
-
 	$page['signal']['process_ins'] = $page['process_ins'];
-	$signal = "<!-- ".str_replace("\n", " ",
-	serialize($page['signal']))." -->\n";
-
-	// Enregistrer le fichier cache
-	if ($delais > 0 AND $GLOBALS['var_mode'] != 'debug'
-	AND !count($_POST))
-		ecrire_fichier($chemin_cache, $signal.$page['texte']);
-
+	$lastmodified = time();
+	spip_log ("calculer_page ("
+		  . spip_timer('calculer_page')."): "
+		  . $_SERVER['REQUEST_METHOD']. " $fond");
 	return $page;
 }
 ?>

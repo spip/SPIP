@@ -14,18 +14,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // fonction principale declenchant tout le service
-function calcule_header_et_page ($fond, $delais) {
-	  global $auteur_session, $flag_dynamique,
-	  $flag_ob, $flag_preserver, $forcer_lang, $ignore_auth_http,
-	  $lastmodified, $recherche, $use_cache, $var_confirm, $var_mode,
-	  $var_recherche, $tableau_des_erreurs;
+// elle-meme ne fait que traiter les cas particuliers, puis passe la main.
+function calcule_header_et_page ($fond) {
+	  global $auteur_session, $forcer_lang, $ignore_auth_http,
+	  $var_confirm, $var_mode;
 	  global $_GET, $_POST, $_COOKIE, $_SERVER;
-
-	// Regler le $delais par defaut
-	if (!isset($delais))
-		$delais = 1 * 3600;
-	if ($recherche)
-		$delais = 0;
 
 	// authentification du visiteur
 	if ($_COOKIE['spip_session'] OR
@@ -73,86 +66,11 @@ function calcule_header_et_page ($fond, $delais) {
 		}
 	}
 
-	$tableau_des_erreurs = array();
-	$page = afficher_page_globale ($fond, $delais, $use_cache);
-
-	if (!isset($flag_preserver))
-	  $flag_preserver = ($page['process_ins'] == 'php') &&
-	  preg_match("/<[?]php\s+.*header\s*\(\s*.content\-type:/is",$page['texte']);
-
-	//
-	// Envoyer les entetes appropries
-	// a condition d'etre sur de pouvoir le faire
-	//
-	if (!headers_sent() AND !$flag_preserver) {
-
-		// Content-type: par defaut html+charset (poss surcharge par la suite)
-		header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
-
-		if ($flag_ob) {
-			// Si la page est vide, produire l'erreur 404
-			if (trim($page['texte']) === ''
-			AND $var_mode != 'debug') {
-				$page = message_erreur_404();	
-			}
-			// Interdire au client de cacher un login, un admin ou un recalcul
-			else if ($flag_dynamique OR $var_mode
-			OR $_COOKIE['spip_admin']) {
-#				header("Cache-Control: no-cache,must-revalidate");
-#				header("Pragma: no-cache");
-			}
-			// Pour les autres donner l'heure de modif
-			else if ($lastmodified) {
-				header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
-			}
-		}
-	}
-
-	return $page;
+	return afficher_page_globale ($fond);
 }
 
 
-//
-// Aller chercher la page dans le cache ou pas
-//
-function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $inclusion=false) {
-	global $lastmodified, $_SERVER;
-
-	if (!$use_cache) {
-		include_local('inc-calcul.php3');
-
-		// page globale ? calculer le contexte
-		if (!$contexte)
-			$contexte = calculer_contexte();
-
-		spip_timer('calculer_page');
-		$page = calculer_page($chemin_cache,
-			array('fond' => $fond,
-				'contexte' => $contexte),
-			$delais,
-			$inclusion);
-
-		$lastmodified = time();
-
-		// log
-		if (!$log = $chemin_cache) $log = "($fond, delais=$delais, "
-		. $_SERVER['REQUEST_METHOD'].")";
-		spip_log (($inclusion ? 'calcul inclus':'calcul').' ('
-		.spip_timer('calculer_page')."): $log");
-
-		// Nouveau cache : creer un invalideur 't' fixant la date
-		// d'expiration et la taille du fichier
-		if (@file_exists($chemin_cache)) {
-			// Ici on ajoute 3600s pour eviter toute concurrence
-			// entre un invalideur et un appel public de page
-			$bedtime = time() + $delais + 3600;
-			$taille = @filesize($chemin_cache);
-			$fichier = addslashes($chemin_cache);
-			spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille)
-			VALUES ('$fichier','$bedtime','t','$taille')");
-		}
-
-	} else {
+function obtenir_page_ancienne ($chemin_cache, $fond, $inclusion=false) {
 
 		//
 		// Lire le fichier cache
@@ -173,58 +91,47 @@ function obtenir_page ($contexte, $chemin_cache, $delais, &$use_cache, $fond, $i
 
 			// Remplir les globals pour les boutons d'admin
 			if (!$inclusion AND is_array($page['contexte']))
-				foreach ($page['contexte'] as $var=>$val)
+			  foreach ($page['contexte'] as $var=>$val) {
 					$GLOBALS[$var] = $val;
+			  }
 		}
-
-	}
-
 	return $page;
 }
 
+function is_preview()
+{
+	global $var_mode;
+	if ($var_mode !== 'preview') return false;
+	$statut = $GLOBALS['auteur_session']['statut'];
+	return ($statut=='0minirezo' OR
+		($GLOBALS['meta']['preview']=='1comite' AND $statut=='1comite'));
+}
 
 //
-// Appeler cette fonction pour obtenir la page principale
+// calculer la page principale et envoyer les entetes
 //
-function afficher_page_globale ($fond, $delais, &$use_cache) {
-	global $flag_preserver, $flag_dynamique, $lastmodified;
-	global $var_preview, $var_mode, $_SERVER;
-	include_local ("inc-cache.php3");
+function afficher_page_globale ($fond) {
+	global $flag_dynamique, $flag_ob, $flag_preserver,
+	  $lastmodified, $recherche, $use_cache, $var_mode;
+	global $_GET, $_POST, $_COOKIE, $_SERVER;
+
+	$f = find_in_path("inc-cache.php3");
+	if ($f && is_readable($f)) {
+        	if (!$GLOBALS['included_files'][$f]++) include($f);
+        } else include_local("inc-cache.php3");
+
+	// Peut-on utiliser un fichier cache ?
+	$chemin_cache = determiner_cache($use_cache, '', $fond);
 
 	// demande de previsualisation ?
 	// -> inc-calcul.php3 n'enregistrera pas les fichiers caches
 	// -> inc-reqsql-squel.php3 acceptera les objets non 'publie'
-	if ($var_mode == 'preview') {
-		// Verifier qu'on a le droit de previsualisation
-		$statut = $GLOBALS['auteur_session']['statut'];
-		if ($statut=='0minirezo' OR
-		($GLOBALS['meta']['preview']=='1comite' AND $statut=='1comite')) {
+	if (is_preview()) {
 			$var_mode = 'recalcul';
-			$delais = 0;
 			$var_preview = true;
 			spip_log('preview !');
 		} else
 			$var_preview = false;
-	}
-
-	// Calculer le chemin putatif du cache
-	if ($delais > 0)
-		$chemin_cache = generer_nom_fichier_cache('', $fond);
-	else
-		$chemin_cache = '';
-
-	// Faut-il effacer des pages invalidees ?
-	if ($GLOBALS['meta']['invalider']) {
-		include_ecrire('inc_connect.php3');
-		include_ecrire('inc_meta.php3');
-		lire_metas();
-		if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok'])
-			retire_caches($chemin_cache);
-	}
-
-
-	// Peut-on utiliser un fichier cache ?
-	determiner_cache($delais, $use_cache, $chemin_cache);
 
 	// Repondre gentiment aux requetes sympas
 	// (ici on ne tient pas compte d'une obsolence du cache ou des
@@ -249,32 +156,69 @@ function afficher_page_globale ($fond, $delais, &$use_cache) {
 	}
 	else {
 		// Obtenir la page
-		$page = obtenir_page ('', $chemin_cache, $delais, $use_cache,
-		$fond, false);
+	  if (!$use_cache)
+	    $page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
+	  else {
+	    include_local('inc-calcul.php3');
+	    $page = calculer_page_globale ($chemin_cache, $fond);
+
+	    if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
+	  }
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
 
+	if ($page['process_ins'] == 'php') {
+	  if (preg_match("/<[?]php\s+([^?]*[?]>)/ms",$page['texte'], $r)) {
+	    $php = $r[1];
+	    if (!isset($flag_preserver))
+	      $flag_preserver =	preg_match("/header\s*\(\s*.content\-type:/is",$php);
+	    $expire = preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$php, $r);
+	    if (!isset($flag_dynamique))
+	      $flag_dynamique = $expire && (intval($r[1]) === 0);
+	  }
+	}
+
 	if ($var_preview AND !$flag_preserver) {
 		include_ecrire('inc_minipres.php');
 		$page['texte'] .= afficher_bouton_preview();
+	}
+	//
+	// Envoyer les entetes appropries
+	// a condition d'etre sur de pouvoir le faire
+	//
+	if (!headers_sent() AND !$flag_preserver) {
+
+		// Content-type: par defaut html+charset (poss surcharge par la suite)
+		header("Content-Type: text/html; charset=".$GLOBALS['meta']['charset']);
+
+		if ($flag_ob) {
+			// Si la page est vide, produire l'erreur 404
+			if (trim($page['texte']) === ''
+			AND $var_mode != 'debug') {
+				$page = message_erreur_404();	
+			}
+			// Interdire au client de cacher un login, un admin ou un recalcul
+			else if ($flag_dynamique OR $var_mode
+			OR $_COOKIE['spip_admin']) {
+				header("Cache-Control: no-cache,must-revalidate");
+				header("Pragma: no-cache");
+			}
+			// Pour les autres donner l'heure de modif
+			else if ($lastmodified) {
+				header("Last-Modified: ".http_gmoddate($lastmodified)." GMT");
+			}
+		}
 	}
 
 	return $page;
 }
 
 
-function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='') {
-
-	$contexte_inclus['fond'] = $fond;
-
-	if ($delais_inclus > 0)
-		$chemin_cache = generer_nom_fichier_cache($contexte_inclus, $fond);
-	else
-		$chemin_cache = '';
+function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 
 	// Peut-on utiliser un fichier cache ?
-	determiner_cache($delais_inclus, $use_cache, $chemin_cache);
+	$chemin_cache = determiner_cache($use_cache, $contexte_inclus, $fond);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
@@ -286,32 +230,49 @@ function inclure_page($fond, $delais_inclus, $contexte_inclus, $cache_incluant='
 		$lang_select = true; // pour lang_dselect en sortie
 	}
 
-	$page = obtenir_page ($contexte_inclus, $chemin_cache, $delais_inclus,
-	$use_cache, $fond, true);
+	  if (!$use_cache)
+	    $page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
+	  else {
+	    include_local('inc-calcul.php3');
+	    $page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
+	    $page['signal']['process_ins'] = $page['process_ins'];
+	    $lastmodified = time();
+	    if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
+	  }
 
-	$page['lang_select'] = $lang_select;
+	  $page['lang_select'] = $lang_select;
 
-	// Retourner le contenu...
-	return $page;
+	  return $page;
 }
 
 
 # Attention, un appel explicite a cette fonction suppose certains include
 # (voir l'exemple de spip_inscription et spip_pass)
-# $r = complexe (fond, delais, contexte) ; $echo = faut-il faire echo ou return
+# $echo = faut-il faire echo ou return
+
 function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 	global $contexte_inclus; # provisoire : c'est pour le debuggueur
 
 	if (!is_string($texte))
 	  {
-		list($fond, $delais, $contexte_inclus) = $texte;
+	    // Revoir l'API des balises dynamiques:
+	    // leurs squelettes sont petits et sans boucle,
+	    // la gestion du delai est donc superfetatoire
+		list($fond, $delainc, $contexte_inclus) = $texte;
 
 		if ((!$contexte_inclus['lang']) AND
 		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
-		// Appeler la page
-		$page = inclure_page($fond, $delais, $contexte_inclus);
+		$f = find_in_path("inc-cache.php3");
+		if ($f && is_readable($f)) {
+		  if (!$GLOBALS['included_files'][$f]++) include($f);
+		} else include_local("inc-cache.php3");
+
+		$d = $GLOBALS['delais'];
+		$GLOBALS['delais'] = $delainc;
+		$page = inclure_page($fond, $contexte_inclus);
+		$GLOBALS['delais'] = $d;
 
 		if ($page['process_ins'] == 'html') {
 				$texte = $page['texte'];
@@ -359,6 +320,17 @@ function message_erreur_404 ($erreur= "") {
  				"erreur" => _T("' . $erreur  . '"));
 			include(\'page.php3\'); ?'.'>',
 		     'process_ins' => 'php');
+}
+
+//
+// pour calcul du nom du fichier cache et autres
+//
+
+function nettoyer_uri() {
+	return eregi_replace
+		('[?&](PHPSESSID|(var_[^=&]*))=[^&]*',
+		'', 
+		 $GLOBALS['REQUEST_URI']);
 }
 
 // Renvoie le _GET ou le _POST emis par l'utilisateur
