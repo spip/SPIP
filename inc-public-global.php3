@@ -169,14 +169,12 @@ function afficher_page_globale ($fond) {
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
 
 	if ($page['process_ins'] == 'php') {
-	  if (preg_match("/<[?]php\s+([^?]*[?]>)/ms",$page['texte'], $r)) {
-	    $php = $r[1];
-	    if (!isset($flag_preserver))
-	      $flag_preserver =	preg_match("/header\s*\(\s*.content\-type:/is",$php);
-	    $expire = preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$php, $r);
-	    if (!isset($flag_dynamique))
-	      $flag_dynamique = $expire && (intval($r[1]) === 0);
-	  }
+		if (!isset($flag_preserver))
+			$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']);
+
+		$expire = preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$php, $r);
+		if (!isset($flag_dynamique))
+		      $flag_dynamique = $expire && (intval($r[1]) === 0);
 	}
 
 	if ($var_preview AND !$flag_preserver) {
