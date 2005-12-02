@@ -978,12 +978,12 @@ function traiter_raccourcis_generale($letexte) {
 		/* 16 */	"/<\/quote>/"
 	);
 	$remplace1 = array(
-		/* 0 */ 	"\n\n@@SPIP_ligne_horizontale@@\n\n",
+		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
 		/* 1 */ 	"\n<br />&mdash;&nbsp;",
 		/* 2 */ 	"\n<br />$puce&nbsp;",
 		/* 3 */ 	"\n<br />",
-		/* 4 */ 	"\n\n@@SPIP_debut_intertitre@@",
-		/* 5 */ 	"@@SPIP_fin_intertitre@@\n\n",
+		/* 4 */ 	"\n\n$debut_intertitre",
+		/* 5 */ 	"$fin_intertitre\n\n",
 		/* 6 */ 	"<p>",
 		/* 7 */ 	"<strong class=\"spip\">",
 		/* 8 */ 	"</strong>",
@@ -999,25 +999,30 @@ function traiter_raccourcis_generale($letexte) {
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
 
-	// paragrapher
-	if (strpos(' '.$letexte, '<p class="spip">')) # ce test est destine a disparaitre, avec un impact sur les textes a un seul paragraphe
-	{
-		$letexte = '<p class="spip">'.str_replace('<p class="spip">', "</p>\n".'<p class="spip">', $letexte).'</p>';
-	}
-	$letexte = preg_replace(',(<p class="spip">)?\s*(<center>)?\s*</no p>,ims', '\2', $letexte);
-	$letexte = preg_replace(',<no p>\s*(</center>)?\s*(</p>)?,ims', '\1', $letexte);
 
-	// intertitres / hr / blockquote / table / ul compliants
-	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*@@SPIP_debut_intertitre@@,ms', $debut_intertitre, $letexte);
-	$letexte = preg_replace(',@@SPIP_fin_intertitre@@[[:space:]]*(</p>)?,ms', $fin_intertitre, $letexte);
-	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*@@SPIP_ligne_horizontale@@[[:space:]]*(</p>)?,ms', $ligne_horizontale, $letexte);
-	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*<blockquote class=\"spip\"></p>,ms', "\n<blockquote class=\"spip\">", $letexte);
-	$letexte = preg_replace(',</blockquote>[[:space:]]*(</p>)?,ms', "</blockquote>\n", $letexte);
-	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*<table([>[:space:]]),ms', "\n<table\\2", $letexte);
-	$letexte = preg_replace(',</table>[[:space:]]*(</p>)?,ms', "</table>\n", $letexte);
-	$letexte = preg_replace(',(<p class="spip">)?[[:space:]]*<ul([>[:space:]]),ms', "<ul\\2", $letexte);
-	$letexte = preg_replace(',</ul>[[:space:]]*(</p>)?,ms', '</ul>', $letexte);
-	$letexte = preg_replace(',<p class="spip">[[:space:]]*</p>,ms', "\n", $letexte);
+	//
+	// Affiner les paragraphes
+	//
+
+	// 1. preserver les balises-bloc
+	$blocs = 'div|pre|ul|li|blockquote|h[1-5r]|table|center';
+	$letexte = preg_replace(",<($blocs)[>[:space:]],i", '</no p>\0', $letexte);
+	$letexte = preg_replace(",<($blocs)[^>]*/>,i", '\0<no p>', $letexte);
+	$letexte = preg_replace(",</($blocs)[>[:space:]],i", '\0<no p>', $letexte);
+
+	// 2. Ajouter le paragraphe initial et final (s'il y a lieu)
+	if (strpos(' '.$letexte, '<p class="spip">')) {
+		$letexte = '<p class="spip">'
+				.str_replace('<p class="spip">',
+					"</p>\n".'<p class="spip">', $letexte)
+				.'</p>';
+	}
+
+	// 3. Manger les <no p>
+	$letexte = preg_replace(
+		',<p([[:space:]][^>]*)?'.'>(\s*</no p>)+,ims', '', $letexte);
+	$letexte = preg_replace(
+		',(<no p>\s*)+</p([[:space:]][^>]*)?'.'>,ims', '', $letexte);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
