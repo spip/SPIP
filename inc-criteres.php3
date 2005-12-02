@@ -97,9 +97,14 @@ function critere_recherche_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
 
 	// Ne pas executer la requete en cas de hash vide
-	$boucle->hash =  '
+	$boucle->hash = '
 	// RECHERCHE
-	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'");
+	list($rech_select, $rech_where) = prepare_recherche($GLOBALS["recherche"], "'.$boucle->primary.'", "'.$boucle->id_table.'", "'.$crit->cond.'");
+	';
+
+	// Sauf si le critere est conditionnel {recherche ?}
+	if (!$crit->cond)
+		$boucle->hash .= '
 	if ($rech_where) ';
 
 	$t = $boucle->id_table . '.' . $boucle->primary;
