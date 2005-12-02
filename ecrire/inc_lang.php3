@@ -402,7 +402,7 @@ function init_langues() {
 
 	$all_langs = $GLOBALS['meta']['langues_proposees']
 		.$GLOBALS['meta']['langues_proposees2'];
-	$langue_site = $GLOBALS['meta']['langue_site'];
+#	$langue_site = $GLOBALS['meta']['langue_site'];
 	$pile_langues = array();
 	$lang_typo = '';
 	$lang_dir = '';
@@ -425,10 +425,10 @@ function init_langues() {
 				// Initialisation : le francais par defaut, sinon la premiere langue trouvee
 				if (ereg(',fr,', ",$all_langs,")) $langue_site = 'fr';
 				else list(, $langue_site) = each($toutes_langs);
-				if (defined("_ECRIRE_INC_META"))
+				if (function_exists('ecrire_meta'))
 					ecrire_meta('langue_site', $langue_site);
 			}
-			if (defined("_ECRIRE_INC_META")) {
+				if (function_exists('ecrire_meta')) {
 				# sur spip.net le nombre de langues proposees fait exploser
 				# ce champ limite a 255 caracteres ; a revoir...
 				if (strlen($all_langs) <= 255) {

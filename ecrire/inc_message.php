@@ -25,6 +25,7 @@ $annee,
 $annee_fin,
 $change_statut,
 $changer_rv,
+$cherche_auteur,
 $connect_id_auteur,
 $heures,
 $heures_fin,
@@ -36,6 +37,7 @@ $minutes_fin,
 $modifier_message,
 $mois,
 $mois_fin,
+$nouv_auteur,
 $rv,
 $supp_dest,
 $texte,
@@ -43,6 +45,7 @@ $titre;
 
 $id_message = intval($id_message);
 $supp_dest = intval($supp_dest);
+$nouv_auteur = intval($nouv_auteur);
 
 if (!spip_num_rows(spip_query("
 SELECT id_auteur FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"))) {
@@ -84,7 +87,7 @@ if ($supp_dest) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
 }
 
-affiche_message_dist($id_message);
+ affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur);
 }
 
 
@@ -322,7 +325,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  return $total_dest;
 }
 
-function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure)
+function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur)
 {
 	global $connect_id_auteur,$connect_statut;
 
@@ -462,7 +465,7 @@ function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee,
 
 
 
-function affiche_message_dist($id_message)
+function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 {
   global $connect_id_auteur, $echelle, $partie_cal;
   if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"))) {
@@ -520,7 +523,7 @@ function affiche_message_dist($id_message)
 
 	debut_droite();
 
-	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure);
+	http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur);
 
 	// reponses et bouton poster message
 
