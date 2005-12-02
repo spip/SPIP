@@ -1005,7 +1005,8 @@ function traiter_raccourcis_generale($letexte) {
 	//
 
 	// 1. preserver les balises-bloc
-	$blocs = 'div|pre|ul|li|blockquote|h[1-5r]|table|center';
+	$blocs = 'div|pre|ul|li|blockquote|h[1-5r]|table|center|'
+		.'tr|td|th|tbody|tfoot';
 	$letexte = preg_replace(",<($blocs)[>[:space:]],i", '</no p>\0', $letexte);
 	$letexte = preg_replace(",<($blocs)[^>]*/>,i", '\0<no p>', $letexte);
 	$letexte = preg_replace(",</($blocs)[>[:space:]],i", '\0<no p>', $letexte);
