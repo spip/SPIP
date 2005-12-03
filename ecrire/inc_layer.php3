@@ -151,6 +151,20 @@ function verif_butineur() {
 	if (!$browser_name) $browser_name = "Mozilla";
 }
 
+
+function flag_svg() {
+	global $HTTP_USER_AGENT, $browser_name, $browser_version;
+	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
+
+	$flag = false;
+	
+	
+	if ($browser_name == "Safari" AND $browser_version >= 400) $flag = true;
+	if ($browser_name == "Mozilla" AND $browser_version >= 5) $flag = true;
+			
+	return $flag;
+}
+
 // Obsolete. Present pour compatibilite 
 function afficher_script_layer(){echo $GLOBALS['browser_layer'];}
 function test_layer(){return $GLOBALS['browser_layer'];}

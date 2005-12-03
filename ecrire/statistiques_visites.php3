@@ -20,6 +20,7 @@ include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_statistiques.php3");
 
 
+
 // Donne la hauteur du graphe en fonction de la valeur maximale
 // Doit etre un entier "rond", pas trop eloigne du max, et dont
 // les graduations (divisions par huit) soient jolies :
@@ -337,6 +338,15 @@ if (!$origine) {
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
+	
+if (flag_svg()) {
+	echo "<div>";
+	echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
+	echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
+	echo "</object>";
+	echo "</div>";
+} else {
+	
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
 			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
@@ -514,6 +524,8 @@ if (!$origine) {
 			echo "</table>";
 			echo "</font></td>";
 			echo "</td></tr></table>";
+			
+}			
 			
 			echo "<div style='position: relative; height: 15px;'>";
 			$gauche_prec = -50;

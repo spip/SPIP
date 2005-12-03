@@ -19,6 +19,7 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_charsets.php3");
 
+
 // Gestion d'expiration de ce jaja
 $date = date("U");
 $expire = $date + 2 * 3600;
@@ -26,37 +27,29 @@ $headers_only = http_last_modified($expire);
 
 $date = gmdate("D, d M Y H:i:s", $date);
 $expire = gmdate("D, d M Y H:i:s", $expire);
-@Header ("Content-Type: text/javascript");
 if ($headers_only) exit;
 @Header ("Last-Modified: ".$date." GMT");
 @Header ("Expires: ".$expire." GMT");
-
-
-
 
 if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
 	fin_page();
 	exit;
 }
-
-
 header("Content-type: image/svg+xml");
-echo "<?xml version=\"1.0\" standalone=\"no\"?>";
-
-?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"
-        "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
-<svg width="450" height="310" x="0" y="0">
-
-
-<defs>
-<linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="150%">
-<stop offset="0%" style="stop-color:rgb(255,255,0); stop-opacity:1"/>
-<stop offset="100%" style="stop-color:rgb(255,0,0); stop-opacity:1"/>
-</linearGradient>
-</defs>
-<?php
+echo "<?xml version=\"1.0\" standalone=\"no\"?>\n";
+echo "<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n";
+echo "<svg  xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" width=\"450\" height=\"310\" x=\"0\" y=\"0\">\n";
+	echo "<style type='text/css'>\n";
+	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
+	echo ".trait {stroke:black;stroke-width:1;}\n";
+	echo "</style>\n";
+echo '<defs>';
+echo '<linearGradient id="orange_red" x1="0%" y1="0%" x2="0%" y2="150%">';
+echo '<stop offset="0%" style="stop-color:rgb(255,255,0); stop-opacity:1" />';
+echo '<stop offset="100%" style="stop-color:rgb(255,0,0); stop-opacity:1" />';
+echo '</linearGradient>';
+echo '</defs>';
 	echo "<defs>\n";
 	echo '<linearGradient id="claire" x1="0%" y1="0%" x2="0%" y2="100%">';
 	echo '<stop offset="0%" style="stop-color:'.$couleur_claire.'; stop-opacity:0.3"/>';
@@ -64,10 +57,6 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 	echo "</linearGradient>\n";
 	echo "</defs>\n";
 	
-	echo "<style type='text/css'>\n";
-	echo ".gris {fill: #aaaaaa; fill-opacity: 0.2;}\n";
-	echo ".trait {stroke:black;stroke-width:1;}\n";
-	echo "</style>\n";
 
 
 
@@ -75,22 +64,20 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 	if ($id_article) {
 		$table = "spip_visites_articles";
 		$table_ref = "spip_referers_articles";
-		$where = "WHERE id_article=$id_article";
+		$where = "id_article=$id_article";
 	} else {
 		$table = "spip_visites";
 		$table_ref = "spip_referers";
-		$where = "";
+		$where = "0=0";
 	}
-
-	// Recuperer premier jour
+	
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"$where ORDER BY date LIMIT 1";
+		"WHERE $where ORDER BY date LIMIT 1";
 	$result = spip_query($query);
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];
 	}
-	
-	// Recuperer toutes visites
+
 	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
 		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date";
 	$result=spip_query($query);
@@ -103,7 +90,6 @@ echo "<?xml version=\"1.0\" standalone=\"no\"?>";
 		if ($i == 0) $date_debut = $date;
 		$i++;
 	}
-	
 
 
 	if (count($log)>0) {
