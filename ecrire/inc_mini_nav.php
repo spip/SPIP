@@ -63,14 +63,15 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 				$titre = "<div class='petite-rubrique'$style>"
 					.supprimer_numero($titre)."</div>";
 				# ce lien provoque la selection (directe) de la rubrique cliquee
-				$onClick = "findObj('id_parent').value=$la_rub;";
+				$ondbClick = "findObj('id_parent').value=$la_rub;";
 				# et l'affichage de son titre dans le bandeau
-				$onClick .= "findObj('titreparent').value='"
+				$ondbClick .= "findObj('titreparent').value='"
 					. strtr(
 						str_replace("'", "&#8217;",
 						str_replace('"', "&#34;",
 							textebrut($titre))),
 						"\n\r", "  ")."';";
+				$ondbClick .= "findObj('selection_rubrique').style.display='none';";
 
 				if ($rub[$i]["enfants"]) {
 					$titre = "<div class='rub-ouverte'>$titre</div>";
@@ -93,7 +94,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 				$onClick .= " aff_selection('rubrique','$rac','$la_rub');";
 				##
 
-				$ret .= "<div class='$class' onClick=\"changerhighlight(this); $onClick\">";
+				$ret .= "<div class='$class' onClick=\"changerhighlight(this); $onClick\" ondblclick=\"$ondbClick$onClick\">";
 				$ret .= $titre;
 				$ret .= "</div>";
 			}
@@ -160,19 +161,20 @@ function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id
 	if ($aff_racine) {
 		$onClick = " aff_selection('rubrique','$rac', '0');";
 		# ce lien provoque la selection (directe) de la rubrique cliquee
-		$onClick = "findObj('id_parent').value=0;";
+		$ondbClick = "findObj('id_parent').value=0;";
 		# et l'affichage de son titre dans le bandeau
-		$onClick .= "findObj('titreparent').value='"
+		$ondbClick .= "findObj('titreparent').value='"
 			. strtr(
 				str_replace("'", "&#8217;",
 				str_replace('"', "&#34;",
 					textebrut(_T('info_racine_site')))),
 				"\n\r", "  ")."';";
+		$ondbClick .= "findObj('selection_rubrique').style.display='none';";
 	}
 
 	$onClick .= "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id=0&col=1', '".$rac."_col_1');";
 
-	$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px; width: 134px;'><div class='pashighlight'>";
+	$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" ondblclick=\"$ondbClick$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px; width: 134px;'><div class='pashighlight'>";
 	$ret .= _T("info_racine_site");
 	$ret .= "</div></div>";
 	$ret .= "</td>";

@@ -141,7 +141,18 @@ function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 					  htmlentities($rac) .
 					  "','$id_rubrique');";
 	
-					$ret .= "<div class='pashighlight' onClick=\"changerhighlight(this); $onClick\"><div class='arial11 petite-rubrique'$style>";
+					$ondbClick = "findObj('id_parent').value=$id_rubrique;";
+					# et l'affichage de son titre dans le bandeau
+					$ondbClick .= "findObj('titreparent').value='"
+					. strtr(
+						str_replace("'", "&#8217;",
+						str_replace('"', "&#34;",
+							textebrut($titre))),
+						"\n\r", "  ")."';";
+				$ondbClick .= "findObj('selection_rubrique').style.display='none';";
+
+	
+					$ret .= "<div class='pashighlight' onClick=\"changerhighlight(this); $onClick\" ondblclick=\"$ondbClick$onClick\"><div class='arial11 petite-rubrique'$style>";
 					$ret .= "&nbsp; $titre";
 					$ret .= "</div></div>";
 			}
@@ -226,6 +237,25 @@ function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 		echo "<div><p><b>$titre</b></p></div>";
 		if (strlen($descriptif) > 0) echo "<div>$descriptif</div>";
+
+		echo "<div style='text-align: $spip_lang_right;'>";
+		
+				# ce lien provoque la selection (directe) de la rubrique cliquee
+				$onClick = "findObj('id_parent').value=$id;";
+				# et l'affichage de son titre dans le bandeau
+				$onClick .= "findObj('titreparent').value='"
+					. strtr(
+						str_replace("'", "&#8217;",
+						str_replace('"', "&#34;",
+							textebrut($titre))),
+						"\n\r", "  ")."';";
+				$onClick .= "findObj('selection_rubrique').style.display='none';";
+				$onClick .= "return false;";
+		
+		
+		echo "<input type='submit' value='"._T('bouton_choisir')."' onClick=\"$onClick\" class=\"fondo\" />";
+		echo "</div>";
+
 
 		echo "</div>";
 
