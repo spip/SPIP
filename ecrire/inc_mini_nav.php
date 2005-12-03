@@ -135,7 +135,7 @@ function mini_afficher_hierarchie ($id_rubrique, $rac="", $rub_exclus=0) {
 
 function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 	global $couleur_foncee;
-	$ret = "<div id ='".$rac."_principal' style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'>";
+	$ret = "<div id='".$rac."_principal' style='position: relative; height: 170px; background-color: white; border: 1px solid $couleur_foncee; overflow: auto;'>";
 	$ret .= mini_afficher_hierarchie($id_rubrique, $rac, $rub_exclus);
 	$ret .= "</div>";
 	
@@ -148,6 +148,7 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id_rubrique=::sel::';", $rub_exclus=0, $aff_racine=false) {
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;
+	spip_log("$sel, $rac, $fonction, $rub_exclus, $aff_racine");
 	$ret .= "<div id='$rac'>";
 	$ret .= "<div style='display: none;'>";
 	$ret .= "<input type='text' id='".$rac."_fonc' value=\"$fonction\" />";
@@ -180,7 +181,7 @@ function mini_nav ($sel, $rac="", $fonction="document.location='naviguer.php3?id
 	$ret .= "</td>";
 
 	$ret .= "<td>";
-	$ret .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden;' id = 'img_".$rac."_col_1'");
+	$ret .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden;' id='img_".$rac."_col_1'");
 	$ret .= "</td>";
 
 	$ret .= "<td style='text-align: $spip_lang_right'>";
