@@ -641,7 +641,7 @@ function http_calendrier_ics($annee, $mois, $jour,$echelle, $partie_cal,  $large
 			if ($bas > $bas_prec) $bas_prec = $bas;
 			$url = $evenement['URL']; 
 			$desc = propre($evenement['DESCRIPTION']);
-			$perso = $evenement['ATTENDEE'];
+			$perso = substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 			$lieu = $evenement['LOCATION'];
 			$sum = ereg_replace(' +','&nbsp;', typo($evenement['SUMMARY']));
 			if (!$sum) { $sum = $desc; $desc = '';}
@@ -833,7 +833,7 @@ function http_calendrier_avec_heure($evenement, $amj)
 	if ($lieu = $evenement['LOCATION'])
 	  $sum .= '<br />' . $lieu;
 	if ($perso = $evenement['ATTENDEE'])
-	  $sum .=  '<br />' . $perso;
+	  $sum .=  '<br />' . substr($evenement['ATTENDEE'], 0,strpos($evenement['ATTENDEE'],'@'));
 	if ($evenement['URL'])
 	  $sum = http_href($evenement['URL'], $sum, $desc, 'border: 0px');
 	$opacity = "";
