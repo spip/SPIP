@@ -345,6 +345,7 @@ if (flag_svg()) {
 	echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
 	echo "</object>";
 	echo "</div>";
+	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 } else {
 	
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
@@ -525,7 +526,7 @@ if (flag_svg()) {
 			echo "</font></td>";
 			echo "</td></tr></table>";
 			
-}			
+			
 			
 			echo "<div style='position: relative; height: 15px;'>";
 			$gauche_prec = -50;
@@ -546,7 +547,7 @@ if (flag_svg()) {
 				}
 			}
 			echo "</div>";
-			
+	}		
 		//}
 
 		// cette ligne donne la moyenne depuis le debut
