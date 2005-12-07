@@ -500,7 +500,7 @@ function sous_menu_rubriques($id_rubrique, $root, $niv, &$data, &$enfants, $excl
 }
 
 // Le selecteur de rubriques en mode classique (menu)
-function selecteur_rubrique_html($id_rubrique, $type, $restreint) {
+function selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem=0) {
 	$data = array();
 	if ($type == 'rubrique')
 		$data[0] = _T('info_racine_site');
@@ -536,12 +536,8 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint) {
 	."font-face: verdana,arial,helvetica,sans-serif; max-height: 24px;'
 	size='1'>\n";
 
-	if ($type == 'rubrique')
-		$r .= sous_menu_rubriques($id_parent,0,
-			0,$data,$enfants,$id_rubrique, $restreint, $type);
-	else
-		$r .= sous_menu_rubriques($id_rubrique,0,
-			0,$data,$enfants,0, $restreint, $type);
+	$r .= sous_menu_rubriques($id_rubrique,0,
+		0,$data,$enfants,$idem, $restreint, $type);
 
 	$r .= "</select>\n";
 
@@ -556,7 +552,7 @@ function selecteur_rubrique_html($id_rubrique, $type, $restreint) {
 // Le selecteur de rubriques en mode Ajax
 // necessite ajax_page.php et inc_mini_nav.php
 //
-function selecteur_rubrique_ajax($id_rubrique, $type, $restreint) {
+function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 
 	## $restreint indique qu'il faut limiter les rubriques affichees
 	## aux rubriques editables par l'admin restreint... or, ca ne marche pas.
@@ -565,11 +561,8 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint) {
 	## note : toutefois c'est juste un pb d'interface, car question securite
 	## la verification est faite a l'arrivee des donnees (Fil)
 
-	if ($type == 'rubrique') {
-		$exclus = "&exclus=$id_rubrique&rac=oui";
-		list($id_rubrique) = spip_fetch_array(spip_query(
-		"SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-	}
+	if ($idem)
+		$exclus = "&exclus=$idem&rac=oui";
 
 	if ($id_rubrique)
 		list($titre_parent) = spip_fetch_array(spip_query(
