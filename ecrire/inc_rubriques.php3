@@ -136,10 +136,11 @@ function propager_les_secteurs()
 	FROM spip_articles AS fille, spip_rubriques AS maman
 	WHERE fille.id_rubrique = maman.id_rubrique
 	AND fille.id_secteur <> maman.id_secteur");
-	while ($row = spip_fetch_array($r))
+	while ($row = spip_fetch_array($r)) {
+#	  spip_log("change " . $row['id'] . " secteur " . $row['secteur']);
 		spip_query("UPDATE spip_articles
 		SET id_secteur=".$row['secteur']." WHERE id_article=".$row['id']);
-	
+	}
 	// reparer les sites
 	$r = spip_query("SELECT fille.id_syndic AS id, maman.id_secteur AS secteur
 	FROM spip_syndic AS fille, spip_rubriques AS maman

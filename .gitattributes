@@ -280,6 +280,7 @@ ecrire/inc_configuration.php -text
 ecrire/inc_controle_forum.php -text
 ecrire/inc_controle_petition.php -text
 ecrire/inc_cookie.php -text
+ecrire/inc_distant.php -text
 ecrire/inc_forum_admin.php -text
 ecrire/inc_headers.php -text
 ecrire/inc_install.php -text
@@ -294,6 +295,7 @@ ecrire/inc_minipres.php -text
 ecrire/inc_naviguer.php -text
 ecrire/inc_popularites.php3 -text
 ecrire/inc_sites_edit.php -text
+ecrire/inc_sites_tous.php -text
 ecrire/inc_spip_cal.php -text
 ecrire/inc_spip_image.php -text
 ecrire/inc_statistiques_repartition.php -text

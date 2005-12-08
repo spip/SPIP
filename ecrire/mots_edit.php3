@@ -19,7 +19,6 @@ include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_sites.php3");
 include_ecrire ("inc_abstract_sql.php3");
 
 
@@ -202,6 +201,7 @@ if ($id_mot) {
 	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC");
 
+	include_ecrire ("inc_sites_tous.php");
 	afficher_sites(_T('info_sites_lies_mot'),
 	"SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC");

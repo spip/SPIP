@@ -18,7 +18,7 @@ include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_sites.php3");
+include_ecrire ("inc_sites_tous.php");
 
 $recherche = addslashes(entites_html($recherche));
 

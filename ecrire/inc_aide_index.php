@@ -72,7 +72,7 @@ function fichier_aide($lang_aide = '') {
 		// en cache ?
 		if (!@file_exists($fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html")) {
 			if ($help_server) {
-				include_ecrire('inc_sites.php3');
+				include_ecrire('inc_distant.php');
 				if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 				AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")))
 					ecrire_fichier ($fichier_aide, $contenu);
@@ -240,7 +240,7 @@ function help_img($regs) {
 	} else if (@file_exists($img = '../AIDE/aide-'.$cache)) {
 		readfile($img);
 	} else if ($help_server) {
-		include_ecrire('inc_sites.php3');
+		include_ecrire('inc_distant.php');
 		if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {

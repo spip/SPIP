@@ -11,9 +11,7 @@
 \***************************************************************************/
 
 
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
 
 // Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
@@ -1411,50 +1409,6 @@ function couleur_eclaircir_si_foncee ($couleur) {
 	
 	if ($moyenne < 123) return couleur_eclaircir($couleur);
 	else return $couleur;
-}
-
-
-
-
-//
-// Cree au besoin la copie locale d'un fichier distant
-// mode = 'test' - ne faire que tester
-// mode = 'auto' - charger au besoin
-// mode = 'force' - charger toujours (mettre a jour)
-//
-function copie_locale($source, $mode='auto') {
-	include_ecrire('inc_getdocument.php3');
-
-	// Si copie_locale() est appele depuis l'espace prive
-	if (!_DIR_RESTREINT
-	AND strpos('../'.$source, _DIR_IMG) === 0)
-		return '../'.$source;
-
-	$local = fichier_copie_locale($source);
-
-	if ($source != $local) {
-		if (($mode=='auto' AND !@file_exists($local))
-		OR $mode=='force') {
-			include_ecrire('inc_sites.php3');
-			$contenu = recuperer_page($source);
-			if ($contenu) {
-				ecrire_fichier($local, $contenu);
-
-				// signaler au moteur de recherche qu'il peut reindexer ce doc
-				$a = spip_query("SELECT id_document FROM spip_documents
-					WHERE fichier='".addslashes($source)."'");
-				list($id_document) = spip_fetch_array($a);
-				if ($id_document) {
-					include_ecrire('inc_index.php3');
-					marquer_indexer('document', $id_document);
-				}
-			}
-			else
-				return false;
-		}
-	}
-
-	return $local;
 }
 
 

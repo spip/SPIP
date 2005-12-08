@@ -133,6 +133,7 @@ function indexer_contenu_document ($row) {
 	if (function_exists($lire = $extracteur[$extension])) {
 		// Voir si on a deja une copie du doc distant
 		// Note: si copie_locale() charge le doc, elle demande une reindexation
+		include_ecrire('inc_distant.php');
 		if (!$fichier = copie_locale($row['fichier'], 'test')) {
 			spip_log("pas de copie locale de '$fichier'");
 			return;
@@ -305,7 +306,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		}
 		// Aller chercher la page d'accueil
 		if ($GLOBALS['meta']["visiter_sites"] == "oui") {
-			include_ecrire ("inc_sites.php3");
+			include_ecrire('inc_distant.php');
 			spip_log ("indexation contenu syndic ".$row['url_site']);
 			indexer_chaine(supprimer_tags(
 				recuperer_page($row['url_site'], true, false, 50000)
