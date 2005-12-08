@@ -654,7 +654,8 @@ function traiter_tableau($bloc) {
 
 	// Decouper le tableau en lignes
 	preg_match_all(',([|].*)[|]\n,Ums', $bloc, $regs, PREG_PATTERN_ORDER);
-	$html = array();
+	$lignes = array();
+
 	// Traiter chaque ligne
 	foreach ($regs[1] as $ligne) {
 		$l ++;
@@ -663,7 +664,7 @@ function traiter_tableau($bloc) {
 		if ($l == 1) {
 		// - <caption> et summary dans la premiere ligne :
 		//   || caption | summary || (|summary est optionnel)
-			if (preg_match(',^\|\|([^|]*)(\|(.*))?\|$,ms', $ligne, $cap)) {
+			if (preg_match(',^\|\|([^|]*)(\|(.*))?\|$,s', $ligne, $cap)) {
 				$l = 0;
 				if ($caption = trim($cap[1]))
 					$debut_table .= "<caption>".$caption."</caption>\n";
@@ -671,27 +672,32 @@ function traiter_tableau($bloc) {
 			}
 		// - <thead> sous la forme |{{titre}}|{{titre}}|
 		//   Attention thead oblige a avoir tbody
-			else if (preg_match(',^(\|[[:space:]]*{{[^}]+}}[[:space:]]*)+$,ms',
+			else if (preg_match(',^(\|([[:space:]]*{{[^}]+}}[[:space:]]*|<))+$,s',
 				$ligne, $thead)) {
-				$debut_table .= "<thead>
-					<tr class='row_first'>".
-					preg_replace(",[|]([^|]*),",
-						"<th scope='col'>\\1</th>", $ligne)
-					."</tr></thead>\n";
+			  	preg_match_all("/\|([^|]*)/", $ligne, $cols);
+				$ligne='';$cols= $cols[1];
+				$colspan=1;
+				for($c=count($cols)-1; $c>=0; $c--) {
+					$attr='';
+					if($cols[$c]=='<') {
+					  $colspan++;
+					} else {
+					  if($colspan>1) {
+						$attr= " colspan='$colspan'";
+						$colspan=1;
+					  }
+					  $ligne= "<th scope='col'$attr>$cols[$c]</th>$ligne";
+					}
+				}
+
+				$debut_table .= "<thead><tr class='row_first'>".
+					$ligne."</tr></thead>\n";
 				$l = 0;
 			}
 		}
 
 		// Sinon ligne normale
 		if ($l) {
-			// definition du tr
-			if ($l == 1
-			AND ereg("^(\|[[:space:]]*[{][{][^}]+[}][}][[:space:]]*)+$", $ligne)) {
-				$class = 'row_first';
-			} else {
-				$class = 'row_'.alterner($l, 'even', 'odd');
-			}
-
 			// Gerer les listes a puce dans les cellules
 			if (ereg("\n-[*#]", $ligne))
 				$ligne = traiter_listes($ligne);
@@ -699,19 +705,53 @@ function traiter_tableau($bloc) {
 			// Pas de paragraphes dans les cellules
 			$ligne = preg_replace(",\n\n+,", "<br />\n", $ligne);
 
-			// definition du <td>
-			$ligne = preg_replace(",[|]([^|]*),",
-				"<td>\\1</td>", $ligne);
-
-			// ligne complete
-			$html[$l] = "<tr class=\"$class\">" . $ligne . "</tr>\n";
+			// tout mettre dans un tableau 2d
+			preg_match_all("/\|([^|]*)/", $ligne, $cols);
+			$lignes[]= $cols[1];
 		}
+	}
+
+	// maintenant qu'on a toutes les cellules
+	// on prepare une liste de rowspan par défaut
+	$rowspans= array_fill(0, count($lignes[0]), 1);
+
+	// et on parcours le tableau a l'envers pour ramasser les
+	// colspan et rowspan en passant
+	for($l=count($lignes)-1; $l>=0; $l--) {
+		$cols= $lignes[$l];
+		$colspan=1;
+		$ligne='';
+
+		for($c=count($cols)-1; $c>=0; $c--) {
+			$attr='';
+			if($cols[$c]=='<') {
+			  $colspan++;
+
+			} elseif($cols[$c]=='^') {
+			  $rowspans[$c]++;
+
+			} else {
+			  if($colspan>1) {
+				$attr.= " colspan='$colspan'";
+				$colspan=1;
+			  }
+			  if($rowspans[$c]>1) {
+				$attr.= " rowspan='$rowspans[$c]'";
+				$rowspans[$c]=1;
+			  }
+			  $ligne= '<td'.$attr.'>'.$cols[$c].'</td>'.$ligne;
+			}
+		}
+
+		// ligne complete
+		$class = 'row_'.alterner($l+1, 'even', 'odd');
+		$html = "<tr class=\"$class\">" . $ligne . "</tr>\n".$html;
 	}
 
 	return "\n\n</no p><table class=\"spip\"$summary>\n"
 		. $debut_table
 		. "<tbody>\n"
-		. join ('', $html)
+		. $html
 		. "</tbody>\n"
 		. "</table><no p>\n\n";
 }
