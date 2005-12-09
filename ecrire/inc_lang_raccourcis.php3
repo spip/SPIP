@@ -15,11 +15,11 @@ include_ecrire("inc_texte.php3");
 include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 
-function lang_raccourcis_dist($module)
+function lang_raccourcis_dist()
 {
-  global $couleur_foncee,  $spip_lang, $spip_lang_left;
+  global $changer_config, $couleur_foncee,  $spip_lang, $spip_lang_left;
 
-if (!$module) $module = "public";
+  $module = $changer_config ? $changer_config : "public";
 
 
 debut_page(_T('module_fichier_langue').": $module", "administration", "langues");

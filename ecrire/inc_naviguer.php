@@ -22,9 +22,9 @@ include_ecrire("inc_mots.php3");
 include_ecrire("inc_documents.php3");
 include_ecrire("inc_abstract_sql.php3");
 
-function naviguer_dist($action)
+function naviguer_dist()
 {
-  global $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
+  global $action, $id_parent, $id_rubrique, $nouv_mot, $spip_display,  $connect_statut, $supp_mot, $champs_extra, $cherche_mot, $descriptif, $texte, $titre, $changer_lang;
 
 
 	$flag_editable = ($connect_statut == '0minirezo' AND (acces_rubrique($id_parent) OR acces_rubrique($id_rubrique))); // id_parent necessaire en cas de creation de sous-rubrique

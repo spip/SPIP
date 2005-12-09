@@ -30,9 +30,11 @@ function liste_numeros_forum($urlforum, $debut, $total)
 	echo "\n</p>\n";
 }
 
-function forum_admin_dist($debut, $admin)
+function forum_admin_dist()
 {
-  global $connect_statut;
+  global $connect_statut, $debut, $admin;
+
+  $debut = intval($debut);
 
   if ($admin) {
 	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
