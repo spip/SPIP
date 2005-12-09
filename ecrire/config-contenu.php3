@@ -12,5 +12,5 @@
 
 include ("inc.php3");
 $var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
-$var_f($changer_config, $envoi_now);
+$var_f();
 ?>
