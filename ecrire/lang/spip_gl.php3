@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://www.spip.net/gl',
 '0_langue' => 'Galego [gl]',
 '0_liste' => 'spip-gl@rezo.net',
-'0_mainteneur' => 'hacklab@hacklab.casaencantada.org, webmaster@avogacia.org',
+'0_mainteneur' => 'webmaster@avogacia.org',
 
 
 // A
@@ -479,7 +479,7 @@ Gracias pola s&uacute;a participaci&oacute;n
 'info_sans_titre_2' => 'sen t&iacute;tulo',
 'info_selectionner_fichier' => 'Podes seleccionar un ficheiro do directorio <i>upload</i>',
 'info_selectionner_fichier_2' => 'Seleccionar un ficheiro:',
-'info_site_attente' => 'Lugar web agardando pola validaci&oacute;n',
+'info_site_attente' => 'Sitio web agardando pola validaci&oacute;n',
 'info_site_reference' => 'Lugar referido en li&ntilde;a',
 'info_site_refuse' => 'Lugar web rexeitado',
 'info_sites_referencer' => 'Referir un lugar',
