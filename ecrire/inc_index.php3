@@ -49,6 +49,9 @@ function nettoyer_chaine_indexation($texte) {
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots, $translitteration_complexe;
 
+	// Point d'entree pour traiter le texte avant indexation
+	$texte = pipeline('pre_indexation', $texte);
+
 	// Supprimer les tags
 	$texte = ' '.preg_replace(',<.*>,Ums',' ',$texte).' ';
 	// Nettoyer les entites HTML, signes diacritiques...
