@@ -242,4 +242,23 @@ function creer_cache(&$page, $chemin_cache, $duree)
 		spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('$fichier','$bedtime','t','$taille')");
 	}
 }
+
+// purger un petit cache (tidy ou recherche) qui ne doit pas contenir de
+// vieux fichiers
+function nettoyer_petit_cache($prefix, $duree = 300) {
+	// determiner le repertoire a purger : 'CACHE/rech/'
+	$dircache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,$prefix);
+	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
+		if ($h = @opendir($dircache)) {
+			while (($f = @readdir($h)) !== false) {
+				if (preg_match(',^'.$prefix.'_,', $f)
+				AND time() - filemtime("$dircache$f") > $duree) {
+					@unlink("$dircache$f");
+					@unlink("$dircache$f.err"); # pour tidy
+				}
+			}
+		}
+	}
+}
+
 ?>

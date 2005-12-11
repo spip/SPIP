@@ -49,22 +49,23 @@ function nettoyer_chaine_indexation($texte) {
 function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	global $index, $mots, $translitteration_complexe;
 
-	// Nettoyer les tags, entites HTML, signes diacritiques...
-	$texte = ' '.ereg_replace("<[^>]*>"," ",$texte).' ';
+	// Supprimer les tags
+	$texte = ' '.preg_replace(',<.*>,Ums',' ',$texte).' ';
+	// Nettoyer les entites HTML, signes diacritiques...
 	$texte = nettoyer_chaine_indexation($texte);
-
-	// Nettoyer les caracteres non-alphanumeriques
+	// Enlever les caracteres de ponctuation
 	$regs = separateurs_indexation();
 	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
 
 	// Cas particulier : sigles d'au moins deux lettres
-	$texte = ereg_replace(" ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) ", ' \\1___ ', $texte);
+	$texte = preg_replace(", ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) ,",
+		' \\1___ ', $texte);
 	$texte = strtolower($texte);
 
 	// Separer les mots
 	$table = preg_split("/ +/", $texte);
 
-	while (list(, $mot) = each($table)) {
+	foreach ($table as $mot) {
 		if (strlen($mot) > $min_long) {
 			$h = substr(md5($mot), 0, 16);
 			$index[$h] += $val/(1+$translitteration_complexe);
@@ -598,15 +599,25 @@ function requete_hash ($rech) {
 function prepare_recherche($recherche, $type = 'id_article', $table='articles', $cond=false) {
 	static $cache = array();
 
+	// traiter le cas {recherche?}
 	if ($cond AND !strlen($recherche))
 		return array("''" /* as points */, /* where */ '1');
 
-	if (!$cache[$type][$recherche]) {
+	// Premier passage : chercher eventuel un cache des donnees sur le disque
+	if (!$cache[$recherche]['hash']) {
+		$dircache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'rech');
+		$fcache = $dircache.'rech_'.substr(md5($recherche),0,10).'.txt';
+		if (lire_fichier($fcache, $contenu))
+			$cache[$recherche] = @unserialize($contenu);
+	}
 
-		if (!$cache['hash'][$recherche])
-			$cache['hash'][$recherche] = requete_hash($recherche);
+	// si on n'a pas encore traite les donnees dans une boucle precedente
+	if (!$cache[$recherche][$type]) {
+
+		if (!$cache[$recherche]['hash'])
+			$cache[$recherche]['hash'] = requete_hash($recherche);
 		list($hash_recherche, $hash_recherche_strict)
-			= $cache['hash'][$recherche];
+			= $cache[$recherche]['hash'];
 
 		$strict = array();
 		if ($hash_recherche_strict)
@@ -627,21 +638,31 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 
 		# calculer le {id_article IN()} et le {... as points}
 		if (!count($points)) {
-			$cache[$type][$recherche] = array('', '');
+			$cache[$recherche][$type] = array("''", 0);
 		} else {
 			$ids = array();
 			$select = '0';
 			foreach ($points as $id => $p)
 				$listes_ids[$p] .= ','.$id;
 			foreach ($listes_ids as $p => $liste_ids)
-				$select .= "+$p*(".calcul_mysql_in("$table.$type", substr($liste_ids, 1)).") ";
+				$select .= "+$p*(".
+					calcul_mysql_in("$table.$type", substr($liste_ids, 1))
+					.") ";
 
-			$cache[$type][$recherche] = array($select, 
-							  '('.calcul_mysql_in("$table.$type", join(',',array_keys($points))).')');
+			$cache[$recherche][$type] = array($select,
+				'('.calcul_mysql_in("$table.$type",
+					join(',',array_keys($points))).')'
+				);
 		}
+
+		// ecrire le cache de la recherche sur le disque
+		ecrire_fichier($fcache, serialize($cache[$recherche]));
+		// purger le petit cache
+		# include_local('./inc-cache.php3'); # deja inclus
+		nettoyer_petit_cache('rech', 300);
 	}
 
-	return $cache[$type][$recherche];
+	return $cache[$recherche][$type];
 }
 
 ?>

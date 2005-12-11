@@ -115,10 +115,11 @@ function afficher_page_globale ($fond) {
 	  $lastmodified, $recherche, $use_cache, $var_mode, $var_preview;
 	global $_GET, $_POST, $_COOKIE, $_SERVER;
 
+	# methode de surcharge a revoir, car find_in_path donne './inc-cache'
 	$f = find_in_path("inc-cache.php3");
 	if ($f && is_readable($f)) {
-        	if (!$GLOBALS['included_files'][$f]++) include($f);
-        } else include_local("inc-cache.php3");
+		include_local($f);
+	} else include_local("inc-cache.php3");
 
 	// Peut-on utiliser un fichier cache ?
 	$chemin_cache = determiner_cache($use_cache, '', $fond);
