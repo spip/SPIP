@@ -349,7 +349,7 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 				}
 				if ($destFormat == "png") {
 					// Conserver la transparence
-					@imageAntiAlias($destImage,true);
+					if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true);
 					@imagealphablending($destImage, false);
          			@imagesavealpha($destImage,true);
 				}
