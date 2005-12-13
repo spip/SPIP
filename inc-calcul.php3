@@ -255,7 +255,7 @@ function calculer_page_globale($cache, $fond) {
 	spip_log ("calculer_page ("
 		  . spip_timer('calculer_page')."): "
 		  . $_SERVER['REQUEST_METHOD'].
-		  " $fond "
+		  " $fond ==> $cache "
 		  . strlen($page['texte'])
 		  . " octets");
 	return $page;
