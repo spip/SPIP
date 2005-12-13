@@ -51,6 +51,7 @@ function enfant_breves($leparent){
 
 function changer_statut_breves($id_breve, $statut)
 {
+	$id_breve = intval($id_breve);
 	$query = "SELECT statut FROM spip_breves WHERE id_breve=$id_breve";
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result)) {
