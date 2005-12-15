@@ -14,14 +14,23 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3");
 
-function sites_tous()
+function sites_tous_dist()
 {
   global $connect_statut, $supp_syndic, $options, $clean_link;
 
-if ($connect_statut == '0minirezo' AND $supp_syndic) {
-	$query="DELETE FROM spip_syndic WHERE id_syndic=".intval($supp_syndic);
-	$result=spip_query($query);
-}
+  if ($connect_statut == '0minirezo') {
+	if ($supp_syndic)
+		spip_query("DELETE FROM spip_syndic WHERE id_syndic=".intval($supp_syndic));
+
+   // Moderation manuelle des liens
+
+	if (!_DIR_RESTREINT) {
+		if ($supprimer_lien = intval($GLOBALS["supprimer_lien"]))
+			spip_query("UPDATE spip_syndic_articles SET statut='refuse' WHERE id_syndic_article='$supprimer_lien'");
+		if ($ajouter_lien = intval($GLOBALS["ajouter_lien"]))
+			spip_query("UPDATE spip_syndic_articles SET statut='publie' WHERE id_syndic_article='$ajouter_lien'");
+	}
+  }
 
 debut_page(_T('titre_page_sites_tous'),"documents","sites");
 debut_gauche();

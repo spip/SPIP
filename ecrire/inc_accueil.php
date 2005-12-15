@@ -164,7 +164,7 @@ if ($spip_display == 4) {
 			if ($activer_sites == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<td>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_rub", "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_parent", "site-24.gif","creer.gif", false);
 					$gadget .= "</td>";
 				}
 			}
