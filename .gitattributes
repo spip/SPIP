@@ -270,6 +270,7 @@ ecrire/inc_auteurs.php3 -text
 ecrire/inc_auteurs_edit.php -text
 ecrire/inc_barre.php3 -text
 ecrire/inc_breves.php -text
+ecrire/inc_breves_edit.php3 -text
 ecrire/inc_breves_voir.php -text
 ecrire/inc_brouteur.php -text
 ecrire/inc_brouteur_frame.php -text
