@@ -96,22 +96,6 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
 }
 
 
-function un_seul_mot_dans_groupe($id_groupe)
-{
-	list($u) = spip_fetch_array(spip_query("SELECT unseul FROM spip_groupes_mots WHERE id_groupe = $id_groupe"));
-	return ($u == 'oui');
-}
-
-function supprime_mot_de_groupe($id_groupe, $table)
-{
-	if (un_seul_mot_dans_groupe($id_groupe)) {
-		$mots = spip_query("SELECT id_mot FROM spip_mots WHERE id_groupe = $id_groupe");
-		while ($r = spip_fetch_array($mots))
-			spip_query("DELETE FROM spip_mots_$table WHERE id_mot=" .
-				   $r['id_mot']);
-	}
-}
-
 /*
  * Affiche la liste des mots-cles associes a l'objet
  * specifie, plus le formulaire d'ajout de mot-cle
