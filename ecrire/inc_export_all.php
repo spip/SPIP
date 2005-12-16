@@ -11,6 +11,7 @@
 \***************************************************************************/
 
 include_ecrire ("inc_export.php3");
+include_ecrire('inc_admin.php3');
 
 function export_all_dist()
 {

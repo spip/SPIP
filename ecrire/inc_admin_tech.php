@@ -76,7 +76,7 @@ else {
 	echo "\n<INPUT TYPE='hidden' NAME='gz' VALUE='0'>";
 }
 
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider' VALUE='"._T('texte_sauvegarde_base')."'></FORM></DIV>";
+echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('texte_sauvegarde_base')."'></FORM></DIV>";
 
 echo "</td></tr>";
 echo "</TABLE>";

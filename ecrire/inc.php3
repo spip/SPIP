@@ -123,13 +123,15 @@ topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
   ($spip_lang_rtl ? " dir='rtl'" : "");
 
 //
-// Gestion de version, sauf si justement on est en train de le faire
+// Controle de la version, sauf si on est deja en train de s'en occuper
 //
 
-if ($reinstall != 'oui') {
-	include_ecrire('inc_admin.php3');
-	// ... ou qu'il s'agit d'une autre intervention avec debut_admin
-	if ((!isset($reinstall)) && (demande_maj_version())) exit;
- }
+if (!isset($reinstall)) {
 
+	if ($spip_version <> ((double) str_replace(',','.',$GLOBALS['meta']['version_installee']))) {
+
+	  include_ecrire('inc_upgrade.php');
+	  demande_maj_version();
+	}
+ }
 ?>
