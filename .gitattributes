@@ -270,7 +270,7 @@ ecrire/inc_auteurs.php3 -text
 ecrire/inc_auteurs_edit.php -text
 ecrire/inc_barre.php3 -text
 ecrire/inc_breves.php -text
-ecrire/inc_breves_edit.php3 -text
+ecrire/inc_breves_edit.php -text
 ecrire/inc_breves_voir.php -text
 ecrire/inc_brouteur.php -text
 ecrire/inc_brouteur_frame.php -text
@@ -284,7 +284,7 @@ ecrire/inc_controle_petition.php -text
 ecrire/inc_cookie.php -text
 ecrire/inc_distant.php -text
 ecrire/inc_forum_admin.php -text
-ecrire/inc_forum_envoi.php3 -text
+ecrire/inc_forum_envoi.php -text
 ecrire/inc_headers.php -text
 ecrire/inc_install.php -text
 ecrire/inc_js_menu_rubriques.php -text
@@ -296,8 +296,8 @@ ecrire/inc_message_edit.php -text
 ecrire/inc_messagerie.php -text
 ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
-ecrire/inc_mots_edit.php3 -text
-ecrire/inc_mots_tous.php3 -text
+ecrire/inc_mots_edit.php -text
+ecrire/inc_mots_tous.php -text
 ecrire/inc_mots_type.php -text
 ecrire/inc_naviguer.php -text
 ecrire/inc_popularites.php3 -text
