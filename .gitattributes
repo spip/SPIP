@@ -286,6 +286,7 @@ ecrire/inc_configuration.php -text
 ecrire/inc_controle_forum.php -text
 ecrire/inc_controle_petition.php -text
 ecrire/inc_cookie.php -text
+ecrire/inc_delete_all.php -text
 ecrire/inc_distant.php -text
 ecrire/inc_documents_liste.php -text
 ecrire/inc_export_all.php -text
