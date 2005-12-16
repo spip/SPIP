@@ -303,6 +303,7 @@ ecrire/inc_mots_type.php -text
 ecrire/inc_naviguer.php -text
 ecrire/inc_popularites.php3 -text
 ecrire/inc_recherche.php -text
+ecrire/inc_rubriques_edit.php -text
 ecrire/inc_sites_edit.php -text
 ecrire/inc_sites_tous.php -text
 ecrire/inc_spip_cal.php -text
