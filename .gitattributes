@@ -292,6 +292,7 @@ ecrire/inc_lang_liste.php -text
 ecrire/inc_lang_raccourcis.php3 -text
 ecrire/inc_magicquotes.php -text
 ecrire/inc_message.php -text
+ecrire/inc_message_edit.php -text
 ecrire/inc_messagerie.php -text
 ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
