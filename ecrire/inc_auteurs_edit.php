@@ -13,19 +13,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire("inc_index.php3");
 include_ecrire("inc_logos.php3");
 include_ecrire("inc_auteur_infos.php");
 
-function auteurs_edit_dist($id_auteur)
+function auteurs_edit_dist()
 {
-	global $connect_id_auteur;
-
+	global $connect_id_auteur, $id_auteur;
+	$id_auteur = intval($id_auteur);
 	$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" .
-			     intval($id_auteur));
+			     $id_auteur);
 
 	if (!$auteur = spip_fetch_array($result)) die('erreur');
 

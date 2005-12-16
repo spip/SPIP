@@ -12,9 +12,6 @@
 
 
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
 
 function articles_tous_dist()
 {

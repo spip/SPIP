@@ -12,5 +12,5 @@
 
 include ("inc.php3");
 $var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
-$var_f($page, $debut, $debut_id_forum, $id_rubrique);
+$var_f();
 ?>
