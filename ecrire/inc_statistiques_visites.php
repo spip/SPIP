@@ -10,11 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
 include_ecrire("inc_statistiques.php3");
 
 // Donne la hauteur du graphe en fonction de la valeur maximale
@@ -41,8 +37,6 @@ function statistiques_visites_dist()
 {
   global
     $aff_jours,
-    $aff_jours_moins,
-    $aff_jours_plus,
     $connect_statut,
     $couleur_claire,
     $couleur_foncee,
@@ -130,11 +124,11 @@ else {
 
 	$nombre_articles = spip_num_rows($result);
 	if ($nombre_articles > 0) {
-		echo "<p>";
-		echo "<div class='iconeoff' style='padding: 5px;'>";
+		echo "<p>\n";
+		echo "<div class='iconeoff' style='padding: 5px;'>\n";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo typo(_T('info_visites_plus_populaires'));
-		echo "<ol style='padding-left:25 px;'>";
+		echo "<ol style='padding-left:25 px;'>\n";
 		echo "<font size=1 color='#666666'>";
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -194,7 +188,7 @@ else {
 	if (spip_num_rows($result) > 0) {
 		creer_colonne_droite();
 
-		echo "<p></p><div class='iconeoff' style='padding: 5px;'>";
+		echo "<p></p><div class='iconeoff' style='padding: 5px;'>\n";
 		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
 		echo "<ol style='padding-left:25 px;'>";
@@ -351,11 +345,11 @@ if (!$origine) {
 	
 	
 if (flag_svg()) {
-	echo "<div>";
+	echo "\n<div>";
 	echo "<object data='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours' width='450' height='310' type='image/svg+xml'>";
 	echo "<embed src='statistiques_svg.php3?id_article=$id_article&aff_jours=$aff_jours'  width='450' height='310' type='image/svg+xml' />";
 	echo "</object>";
-	echo "</div>";
+	echo "\n</div>";
 	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 } else {
 	
