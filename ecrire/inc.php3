@@ -14,26 +14,14 @@ if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
 include_ecrire ("inc_connect.php3");
 include_ecrire ("inc_session.php3");
+include_ecrire('inc_cookie.php');
 
 $var_f = include_fonction('auth');
 if (!$var_f()) exit;
 
-include_ecrire("inc_minipres.php"); // choisit la langue
-include_ecrire('inc_cookie.php');
-
 //
 // Preferences de presentation
 //
-
-if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
-AND $spip_lang_ecrire <> $auteur_session['lang']
-AND changer_langue($spip_lang_ecrire)) {
-	spip_query ("UPDATE spip_auteurs SET lang = '".
-		    addslashes($spip_lang_ecrire) .
-		    "' WHERE id_auteur = $connect_id_auteur");
-	$auteur_session['lang'] = $spip_lang_ecrire;
-	ajouter_session($auteur_session, $spip_session);
-}
 
 if ($set_couleur) {
 	$prefs['couleur'] = floor($set_couleur);
@@ -121,6 +109,21 @@ alink='" . $couleurs_spip[$choix_couleur]['couleur_lien_off'] ."'
 bgcolor='#f8f7f3' text='#000000' 
 topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 	($spip_lang_rtl ? " dir='rtl'" : ""));
+
+
+// Choisir la langue et charger le minimum vital pour l'affichage
+
+include_ecrire("inc_minipres.php");
+
+if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']
+AND $spip_lang_ecrire <> $auteur_session['lang']
+AND changer_langue($spip_lang_ecrire)) {
+	spip_query ("UPDATE spip_auteurs SET lang = '".
+		    addslashes($spip_lang_ecrire) .
+		    "' WHERE id_auteur = $connect_id_auteur");
+	$auteur_session['lang'] = $spip_lang_ecrire;
+	ajouter_session($auteur_session, $spip_session);
+}
 
 //
 // Controle de la version, sauf si on est deja en train de s'en occuper

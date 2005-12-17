@@ -40,8 +40,13 @@ function install_debut_html($titre = 'AUTO') {
 	  '&amp;left=' . 
 	  $GLOBALS['spip_lang_left'] .
 	  "\" >
+<style type='text/css'>
+<!--
+	a {text-decoration: none; }
+-->
+</style>
 </head>
-<body>
+<body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>
 <center><table style='margin-top:50px; width: 450px'>
 <tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>".
 	  $titre .
