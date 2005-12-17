@@ -10,11 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_REVISIONS")) return;
-define("_ECRIRE_INC_REVISIONS", "1");
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['agregation_versions'] = 10;
 

@@ -10,11 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-// Ce fichier ne sera execute qu'une fois
-if (defined("_ECRIRE_INC_ORTHO")) return;
-define("_ECRIRE_INC_ORTHO", "1");
-
+if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Mettre a jour la liste locale des miroirs
 function maj_miroirs_ortho() {
@@ -382,7 +378,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 // Cette fonction doit etre appelee pour reecrire le texte en utf-8 "propre"
 //
 function preparer_ortho($texte, $lang) {
-	include_spip("charsets.php");
+	include_ecrire("inc_charsets.php");
 
 	$charset = $GLOBALS['meta']['charset'];
 
@@ -408,9 +404,9 @@ function afficher_ortho($texte) {
 // et retourne un tableau de mots mal orthographies associes chacun a un tableau de mots suggeres
 //
 function corriger_ortho($texte, $lang, $charset = 'AUTO') {
-	include_spip("charsets.php");
-	include_spip("index.php");
-	include_spip("filtres.php");
+	include_ecrire("inc_charsets.php");
+	include_ecrire("inc_index.php");
+	include_ecrire("inc_filtres.php");
 
 	$texte = preg_replace(',<code>.*?</code>,is', '', $texte);
 	$texte = preg_replace(',<cadre>.*?</cadre>,is', '', $texte);

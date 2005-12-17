@@ -11,11 +11,17 @@
 \***************************************************************************/
 
 
-include("inc_lab.php");
+include("inc.php3");
 include_ecrire("inc_suivi_revisions.php");
-include_spip("ecrire.php");
-include_spip("revisions.php");
-include_spip("diff.php");
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
+include_ecrire("inc_index.php3");
+include_ecrire("inc_logos.php3");
+include_ecrire('inc_forum.php3');
+include_ecrire("lab_revisions.php");
+include_ecrire("lab_diff.php");
 
 $debut = intval($debut);
 $id_auteur = ($id_auteur == $connect_id_auteur) ? $id_auteur : false;

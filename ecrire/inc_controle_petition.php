@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_ecrire("inc_presentation.php3");
 include ("inc_signatures.php3");
 
@@ -17,7 +19,6 @@ function message_de_signature($row)
 {
   return propre(echapper_tags($row['message']));
 }
-
 
 function controle_petition_dist()
 {

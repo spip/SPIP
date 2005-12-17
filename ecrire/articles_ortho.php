@@ -10,15 +10,18 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-include("inc_lab.php");
-
-include_spip("ecrire.php");
-include_spip("ortho.php");
-include_spip("layer.php"); // Pour $browser_name
+include("inc.php3");
+include_ecrire("lab_ortho.php");
+include_ecrire("inc_layer.php3"); // Pour $browser_name
+include_ecrire("inc_presentation.php3");
+include_ecrire("inc_texte.php3");
+include_ecrire("inc_urls.php3");
+include_ecrire("inc_rubriques.php3");
+include_ecrire("inc_index.php3");
+include_ecrire("inc_logos.php3");
+include_ecrire('inc_forum.php3');
 
 //charset_texte('utf-8');
-
 
 //
 // Lire l'article
@@ -239,7 +242,7 @@ else {
 	}
 
 	if ($champs_extra AND $extra) {
-		include_spip("extra.php");
+		include_ecrire("inc_extra.php");
 		extra_affichage($extra, "articles");
 	}
 }

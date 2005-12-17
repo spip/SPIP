@@ -10,13 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_ecrire("inc_presentation.php3");
-include_ecrire("inc_urls.php3");
 include_ecrire("inc_rubriques.php3");
 include_ecrire ("inc_logos.php3");
 include_ecrire ("inc_mots.php3");
 include_ecrire ("inc_date.php3");
 include_ecrire ("inc_abstract_sql.php3");
+include_ecrire ("inc_index.php3");
 
 function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour )
 {
