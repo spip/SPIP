@@ -12,5 +12,5 @@
 
 include ("inc.php3");
 $var_f = include_fonction(basename($SCRIPT_NAME, '.php'));
-$var_f($fonction, intval($id), intval($exclus), intval($col), $id_ajax_fonc, $type, $rac);
+$var_f();
 ?>

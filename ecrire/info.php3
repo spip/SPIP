@@ -10,14 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-
-if (_FILE_CONNECT) {
-	$reinstall = 'non';
-	include ("inc.php3");
-	if ($connect_statut != '0minirezo') exit;
-}
-
-phpinfo();
-
+include ("inc.php3");
+$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
+$var_f();
 ?>

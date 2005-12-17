@@ -13,9 +13,13 @@
 
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
 
-function ajax_page_dist($fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $rac)
+function ajax_page_dist()
 {
-	global $flag_ob;
+	global $flag_ob, $fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $rac;
+	$id = intval($id);
+	$exclus = intval($exclus);
+	$col = intval($col);
+
 	$var_nom = 'ajax_page_' . $fonction;
 	if (!function_exists($var_nom))
 		spip_log("fonction $var_nom indisponible");

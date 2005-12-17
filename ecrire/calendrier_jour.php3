@@ -10,8 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+  // obsolete, mais assurer le service pour les vieux liens
 if (!isset($_GET['type'])) $type = 'jour';
 include ("inc.php3");
 $var_f = include_fonction('calendrier');
-$var_f($type, $css);
+$var_f();
 ?>

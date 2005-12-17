@@ -424,11 +424,12 @@ if ($spip_display != 4) {
 
 
 
-function accueil_dist($id_rubrique)
+function accueil_dist()
 {
 
-  global $meta,  $connect_statut, $options,  $connect_id_auteur, $flag_ob;
+  global $id_rubrique, $meta, $connect_statut, $options,  $connect_id_auteur, $flag_ob;
 
+  $id_rubrique =  intval($id_rubrique);
   debut_page(_T('titre_page_index'), "asuivre", "asuivre");
 
   debut_gauche();

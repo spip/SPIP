@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_lang.php3");
@@ -22,7 +20,6 @@ utiliser_langue_visiteur();
 //
 
 function install_debut_html($titre = 'AUTO') {
-	global $attributes_body, $browser_verifForm;
 
 	if ($titre=='AUTO')
 		$titre=_T('info_installation_systeme_publication');
@@ -44,7 +41,7 @@ function install_debut_html($titre = 'AUTO') {
 	  $GLOBALS['spip_lang_left'] .
 	  "\" >
 </head>
-<body $attributes_body>
+<body>
 <center><table style='margin-top:50px; width: 450px'>
 <tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>".
 	  $titre .
@@ -91,6 +88,13 @@ function info_copyright() {
 			      'lien_gpl' => 
 				"<a href='aide_index.php3?aide=licence&var_lang=".$GLOBALS['spip_lang']."' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
+}
+
+// normalement il faudrait definir inc_info.php, mais pour mettre juste ca:
+
+function info_dist() {
+	global $connect_statut;
+	if ($connect_statut == '0minirezo') phpinfo();
 }
 
 // Afficher le bouton "preview" dans l'espace public

@@ -74,7 +74,8 @@ function include_fonction($nom) {
 			if (is_readable($f)) {
 				if (!$GLOBALS['included_files'][$f]++) include($f);
 			} else {
-			  spip_log($f . " inconnu meme en php3");
+			  spip_log($f . " inconnu meme en php3; " .
+				   $nom . " est definie ailleurs ?");
 			// esperons qu'elle est dans les fichiers deja lus
 			}
 		}
@@ -1020,7 +1021,6 @@ function find_in_path ($filename, $path='AUTO') {
 			return $f;
 		}
 	}
-
 }
 
 
@@ -1031,26 +1031,10 @@ if (!(_FILE_CONNECT
 OR defined('_ECRIRE_INSTALL')
 OR defined('_TEST_DIRS')
 OR defined('_ECRIRE_AIDE'))) {
-	// Soit on est dans ecrire/ et on envoie sur l'installation
-	if (@file_exists("inc_version.php3")) {
-		header("Location: " . _DIR_RESTREINT . "install.php3");
-		exit;
-	}
-	// Soit on est dans le site public
-	else if (defined("_INC_PUBLIC")) {
-		# on ne peut pas deviner ces repertoires avant l'installation !
-		define('_DIR_INCLUDE', _DIR_RESTREINT);
-		define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
-		define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
-		$db_ok = false;
-		include_ecrire ("inc_minipres.php");
-		install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
-		install_fin_html();
-		exit;
-	}
-	// Soit on est appele de l'exterieur (spikini, etc)
-}
 
+	include_ecrire('inc_upgrade.php');
+	info_install();
+ }
 #spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl());
 
 ?>

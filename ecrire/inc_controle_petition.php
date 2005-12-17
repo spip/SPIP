@@ -19,9 +19,15 @@ function message_de_signature($row)
 }
 
 
-function controle_petition($id_article, $add_petition, $supp_petition, $debut)
+function controle_petition_dist()
 {
-	global $connect_statut;
+  global $connect_statut, $id_article, $add_petition, $supp_petition, $debut;
+
+	$id_article = intval($id_article);
+	$add_petition =  intval($add_petition);
+	$supp_petition =  intval($supp_petition);
+	$debut =  intval($debut);
+
 	debut_page(_T('titre_page_controle_petition'), "redacteurs", "suivi-petition");
 	debut_gauche();
 

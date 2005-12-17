@@ -106,4 +106,23 @@ function demande_maj_version()
 	exit;
 }
 
+// appele dans inc_version pour gestion de l'installation
+function info_install()
+ {
+	// Soit on est dans ecrire/ et on envoie sur l'installation
+	if (@file_exists("inc_version.php3")) {
+		header("Location: " . _DIR_RESTREINT . "install.php3");
+		exit;
+	}
+	// Soit on est dans le site public
+	else if (defined("_INC_PUBLIC")) {
+		# on ne peut pas deviner ces repertoires avant l'installation !
+		$db_ok = false;
+		include_ecrire ("inc_minipres.php");
+		install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
+		install_fin_html();
+		exit;
+	}
+	// Soit on est appele de l'exterieur (spikini, etc)
+}
 ?>

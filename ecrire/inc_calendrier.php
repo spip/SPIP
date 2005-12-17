@@ -17,9 +17,9 @@ include_ecrire("inc_texte.php3"); // inclut inc_filtre
 
 charger_generer_url();
 
-function calendrier_dist($type, $css="")
+function calendrier_dist()
 {
-
+  global $type, $css;
 // icones standards, fonction de la direction de la langue
 
   global $bleu, $vert, $jaune, $spip_lang_rtl;
