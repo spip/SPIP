@@ -152,7 +152,7 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 
 	// pour tester si la base est dispo
 
-	include_ecrire('inc_connect.php3');
+	include_local(_FILE_CONNECT);
 
 	// cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -189,7 +189,6 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 
 	// Si pas valide mais pas de connexion a la base, le garder quand meme
 
-	include_ecrire('inc_connect.php3');
 	if (!$GLOBALS['db_ok']) {
 		if (file_exists($chemin_cache))
   			$use_cache = 0 ;

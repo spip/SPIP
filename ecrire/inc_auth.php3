@@ -17,7 +17,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define("_DIR_LOGIN", _DIR_RESTREINT ? "" : "../");
 define("_DIR_LOGED_IN",   _DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS);
 
-
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
 //
@@ -48,17 +47,6 @@ function auth_dist() {
 
 	global $auteur_session, $prefs;
 	global $clean_link;
-
-	//
-	// Si pas MySQL, fini
-	//
-	if (!$GLOBALS['db_ok']) {
-		spip_log("Erreur base de donnees");
-		include_ecrire('inc_minipres.php');
-		install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
-		exit;
-	}
-
 
 	//
 	// Initialiser variables (eviter hacks par URL)
@@ -108,6 +96,7 @@ function auth_dist() {
 		$auth_pass_ok = true;
 		$auth_htaccess = true;
 	}
+
 
 	// Tentative de login echec
 	if ($_GET['bonjour'] == 'oui' AND !$auth_login) {
@@ -200,15 +189,21 @@ function auth_dist() {
 			$connect_toutes_rubriques = false;
 			$connect_id_rubrique = array();
 		}
-	}
-	else {
-		// ici on est dans un cas limite : l'auteur a ete identifie OK
-		// mais il n'existe pas dans la table auteur. Cause possible,
-		// notamment, une restauration de base de donnees dans laquelle
-		// il n'existe pas.
+	} else {
+
+	  // l'auteur a ete identifie mais on n'a pas d'info sur lui
+	  // C'est soit parce que le serveur MySQL ne repond pas,
+	  // soit parce que la table des auteurs a changee (restauration etc)
+
 		include_ecrire('inc_minipres.php');
-		include_ecrire('inc_texte.php3');
-		install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  _DIR_LOGIN . "spip_cookie.php3?logout=$auth_login'>", _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');install_fin_html();
+		if (!$GLOBALS['db_ok']) {
+			spip_log("Erreur base de donnees");
+
+			install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
+		} else {
+
+			install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  _DIR_LOGIN . "spip_cookie.php3?logout=$auth_login'>", _T('texte_inc_auth_2')."</A>"._T('texte_inc_auth_3');install_fin_html();
+		}
 		exit;
 	}
 

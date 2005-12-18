@@ -39,9 +39,10 @@ $included_files = array();
 
 function include_local($file) {
 	if (@$GLOBALS['included_files'][$file]++) return;
+
 	if (is_readable($file))
 	  include($file);
-	else spip_log($file . " illisble");
+	else spip_log($file . " illisible");
 }
 
 function include_ecrire($file) {
@@ -51,7 +52,7 @@ function include_ecrire($file) {
 	if ($GLOBALS['included_files'][$file]++) return;
 	if (is_readable($file))
 	  include($file);
-	else spip_log($file . " illisble");
+	else spip_log($file . " illisible");
 }
 
 // charge un fichier perso ou, a defaut, standard
@@ -590,7 +591,7 @@ function spip_query($query) {
 	if (!$GLOBALS['db_ok']) {
 		// Essaie de se connecter
 		if (_FILE_CONNECT)
-			include_ecrire(_FILE_CONNECT);
+			include_local(_FILE_CONNECT);
 	}
 
 	// Erreur de connexion
@@ -1036,6 +1037,6 @@ OR defined('_ECRIRE_AIDE'))) {
 	include_ecrire('inc_upgrade.php');
 	info_install();
  }
-#spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl());
+spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
 
 ?>
