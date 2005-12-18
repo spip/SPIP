@@ -74,11 +74,7 @@ function include_fonction($nom) {
 			$f = _DIR_INCLUDE . ('inc_' . $nom . '.php3');
 			if (is_readable($f)) {
 				if (!$GLOBALS['included_files'][$f]++) include($f);
-			} else {
-			  spip_log($f . " inconnu meme en php3; " .
-				   $nom . " est definie ailleurs ?");
-			// esperons qu'elle est dans les fichiers deja lus
-			}
+			} else  $inc = "";
 		}
 	}
 	$f = str_replace('-','_',$nom); // pour config-fonc etc. A renommer
@@ -87,8 +83,9 @@ function include_fonction($nom) {
 	elseif (function_exists($f .= "_dist"))
 		return $f;
 	else {
-		spip_log("fonction $nom indisponible");
-		exit;
+	  spip_log("fonction $nom indisponible" .
+		   ($inc ? "" : "(aucun fichier inc_$f disponible)"));
+	  exit;
 	}
 }
 
@@ -1037,6 +1034,6 @@ OR defined('_ECRIRE_AIDE'))) {
 	include_ecrire('inc_upgrade.php');
 	info_install();
  }
-spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
+# spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
 
 ?>

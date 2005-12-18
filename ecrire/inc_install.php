@@ -20,7 +20,7 @@ define('_FILE_TMP', '_install');
 function install()
 {
 	global $etape;
-	if (_FILE_CONNECT) {
+	if (_FILE_CONNECT && $etape != 'unpack') {
 		install_debut_html();
 		echo "<P><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=4>"._T('avis_espace_interdit')."</FONT>";
 
@@ -744,4 +744,27 @@ function install_ldap1()
 
 	install_fin_html();
 }
+
+function install_unpack()
+{
+  global  $connect_id_auteur;
+
+  include_ecrire('inc_admin.php3');
+
+  $action = _T('texte_unpack');
+ 
+  debut_admin($action);
+
+  $hash = calculer_action_auteur("unpack");
+
+  fin_admin($action);
+
+  if (@file_exists("../spip_loader.php3"))
+	redirige_par_entete("../spip_loader.php3?hash=$hash&id_auteur=$connect_id_auteur");
+  else if (@file_exists("../spip_unpack.php3"))
+	redirige_par_entete("../spip_unpack.php3?hash=$hash&id_auteur=$connect_id_auteur");
+  else
+	redirige_par_entete("../spip_loader.php3?hash=$hash&id_auteur=$connect_id_auteur");
+}
+
 ?>
