@@ -324,6 +324,7 @@ ecrire/inc_statistiques_svg.php -text
 ecrire/inc_statistiques_visites.php -text
 ecrire/inc_synchro.php -text
 ecrire/inc_upgrade.php -text
+ecrire/inc_utils.php -text
 ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_br.php3 -text
