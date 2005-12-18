@@ -61,6 +61,8 @@ function include_ecrire($file) {
 function include_fonction($nom) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
+
+	$nom = preg_replace("/\.php3?$/",'', basename($nom));
 	$inc = ('inc_' . $nom . '.php');
 	$f = find_in_path($inc);
 	if ($f && is_readable($f)) {

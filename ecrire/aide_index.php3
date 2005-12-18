@@ -12,6 +12,4 @@
 
 define('_ECRIRE_AIDE', 1);
 include ("inc_version.php3");
-$var_f = include_fonction(basename($SCRIPT_NAME, _EXTENSION_PHP));
-$var_f();
 ?>
