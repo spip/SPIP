@@ -106,7 +106,7 @@ function table_auteurs_edit($auteur)
 	if ($options == 'avancees')
 	  afficher_formulaire_statut_auteur ($id_auteur,
 			$auteur['statut'],
-			"auteurs_edit.php3?id_auteur=$id_auteur");
+			"auteurs_edit");
 
 	fin_cadre_relief();
 

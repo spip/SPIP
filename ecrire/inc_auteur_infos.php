@@ -278,9 +278,10 @@ function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajou
 {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
 
-  echo "<form  method='POST' action='auteur_infos.php3",
-  (!$id_auteur ? "'>" :
-   ("?id_auteur=$id_auteur'><input type='hidden' name='id_auteur' value='$id_auteur' />"));
+  echo "<form  method='POST' action=",
+    http_php_script('auteur_infos',
+		    (!$id_auteur ? "" : "?id_auteur=$id_auteur")),
+    "><input type='hidden' name='id_auteur' value='$id_auteur' />";
 
 
 //
@@ -507,9 +508,11 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	if ($post && $droit) {
 		$url_self = $post;
 		echo "<p />";
-		echo "<form action='$post' method='post'>\n";
+		echo "<form action=",
+		  http_php_script($post, "id_auteur=$id_auteur"),
+		  " method='POST'>\n";
 	} else
-		$url_self = "auteur_infos.php3?id_auteur=$id_auteur";
+		$url_self = "auteur_infos";
 
 	// les admins voient et peuvent modifier les droits
 	// les admins restreints les voient mais 
@@ -548,7 +551,9 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 
 					if ($connect_toutes_rubriques
 					AND $connect_id_auteur != $id_auteur) {
-					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='$url_self&supp_rub=$id_rubrique'>",
+					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href=",
+					    http_php_script($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique")
+					    . ">",
 					    _T('lien_supprimer_rubrique'),
 					    "</a>]</font>";
 					}
