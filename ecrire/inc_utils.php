@@ -18,16 +18,15 @@ if (defined("_ECRIRE_INC_VERSION")) return;
 
 $included_files = array();
 
-function include_local($file) {
+function include_local($file, $silence=false) {
 	$nom = preg_replace("/\.php3?$/",'', $file);
-	$nom = preg_replace(",^./,",'', $nom);
-	spip_log("$nom $file");
+#	spip_log("$nom $file");
 	if (@$GLOBALS['included_files'][$nom]++) return;
 	if (is_readable($f = $nom . '.php'))
 	  include($f);
 	else if (is_readable($f = $nom . '.php3'))
 	  include($f);
-	else spip_log($file . " illisible");
+	else if (!$silence) spip_log($file . " illisible");
 }
 
 function include_ecrire($file) {
@@ -44,7 +43,7 @@ function include_fonction($nom) {
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
 	$nom = preg_replace("/\.php3?$/",'', basename($nom));
 	$inc = ('inc_' . $nom);
-	spip_log("if $inc");
+#	spip_log("if $inc");
 	$f = find_in_path($inc  . '.php');
 	if ($f && is_readable($f)) {
 		if (!$GLOBALS['included_files'][$inc]++) include($f);
@@ -514,15 +513,17 @@ function find_in_path ($filename, $path='AUTO') {
 			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
 	}
 
-	// Depuis l'espace prive, remonter d'un cran 
+
 	$racine = (_DIR_RESTREINT ? '' : '../');
 
 	// Parcourir le chemin
 	foreach (split(':', $path) as $dir) {
-		if (substr($dir, 0,1)<>'/') $dir = "$racine$dir";
-		if (substr($dir, -1,1)<>'/') $dir .= "/";
-		$f = "$dir$filename";
-#		spip_log("find_in_path: essai $f");
+	// Depuis l'espace prive, remonter d'un cran, sauf pour les absolus
+		$racine = ($dir[0] <> '/' && !_DIR_RESTREINT) ? '../' : '';
+		if ($dir[0] == '.') $dir = "";
+		else if ($dir && $dir[strlen($dir)-1] <> '/') $dir .= "/";
+		$f = "$racine$dir$filename";
+#		spip_log("find_in_path: essai $racine $dir $filename");
 		if (@is_readable($f)) {
 			return $f;
 		}
