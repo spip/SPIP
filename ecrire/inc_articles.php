@@ -1334,7 +1334,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 
   echo "<BR><BR>";
 
-  $forum_retour = urlencode("articles.php3?id_article=$id_article");
+  $forum_retour = urlencode(http_php_scriptnq("articles","id_article=$id_article"));
   
   if (!$mute) {
     echo "\n<div align='center'>";
@@ -1577,7 +1577,7 @@ global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_
    $id_article = insert_article($id_parent, $new);
    add_auteur_article($id_article, $connect_id_auteur);
  }
-$clean_link = new Link("articles.php3?id_article=$id_article");
+$clean_link = new Link(http_php_scriptnq("articles","id_article=$id_article"));
 
 // aucun doc implicitement inclus au départ.
 

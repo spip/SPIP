@@ -174,7 +174,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 		if (!$rss) {
 			$titre_table = _T('icone_suivi_revisions').aide('suivimodif');
 			if ($court)
-				$titre_table = afficher_plus("suivi_revisions.php3")
+				$titre_table = afficher_plus(http_php_scriptnq("suivi_revisions",""))
 				. $titre_table;
 
 			echo "<div style='height: 12px;'></div>";

@@ -247,7 +247,7 @@ if ($spip_display != 4) {
 	// Infos personnelles : nom, utilisation de la messagerie
 	//
 	
-	$titre_cadre = afficher_plus("auteurs_edit.php3?id_auteur=$connect_id_auteur");
+	$titre_cadre = afficher_plus(http_php_scriptnq("auteurs_edit","id_auteur=$connect_id_auteur"));
 	$titre_cadre .= majuscules(typo($connect_nom));
 	
 	debut_cadre_relief("fiche-perso-24.gif", false, '',$titre_cadre);
@@ -323,7 +323,7 @@ if ($spip_display != 4) {
   
 	if ($nb_art_prepa OR $nb_art_prop OR $nb_art_publie) {
 
-		echo afficher_plus("articles_page.php3")."<b>"._T('info_articles')."</b>";
+		echo afficher_plus(http_php_scriptnq("articles_page",""))."<b>"._T('info_articles')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if ($nb_art_prepa) echo "<li>"._T("texte_statut_en_cours_redaction").": ".$nb_art_prepa;
 		if ($nb_art_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_art_prop;
@@ -341,7 +341,7 @@ if ($spip_display != 4) {
 	}
  
 	if ($nb_bre_prop OR $nb_bre_publie) {
-		echo afficher_plus("breves.php3")."<b>"._T('info_breves_02')."</b>";
+		echo afficher_plus(http_php_scriptnq("breves",""))."<b>"._T('info_breves_02')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if ($nb_bre_prop) echo "<li>"._T("texte_statut_attente_validation").": ".$nb_bre_prop;
 		if ($nb_bre_publie) echo "<li><b>"._T("texte_statut_publies").": ".$nb_bre_publie."</b>";
@@ -353,7 +353,7 @@ if ($spip_display != 4) {
 	$nb_forum = $result['cnt'];
 
 	if ($nb_forum) {
-		if ($connect_statut == "0minirezo") echo afficher_plus("controle_forum.php3");
+		if ($connect_statut == "0minirezo") echo afficher_plus(http_php_scriptnq("controle_forum",""));
 		echo "<b>"._T('onglet_messages_publics')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		echo "<li><b>".$nb_forum."</b>";
@@ -369,7 +369,7 @@ if ($spip_display != 4) {
 	}
 
 	if ($nb_aut_0minirezo OR $nb_aut_1comite OR $nb_aut_6forum) {
-		echo afficher_plus("auteurs.php3")."<b>"._T('icone_auteurs')."</b>";
+		echo afficher_plus(http_php_scriptnq("auteurs",""))."<b>"._T('icone_auteurs')."</b>";
 		echo "<ul style='margin:0px; padding-$spip_lang_left: 20px; margin-bottom: 5px;'>";
 		if ($nb_aut_0minirezo) echo "<li>"._T("info_administrateurs").": ".$nb_aut_0minirezo;
 		if ($nb_aut_1comite) echo "<li>"._T("info_redacteurs").": ".$nb_aut_1comite;

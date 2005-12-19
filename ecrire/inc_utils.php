@@ -162,7 +162,7 @@ function spip_query($query) {
 	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		redirige_par_entete("upgrade.php3?reinstall=oui");
+		redirige_par_entete(http_php_scriptnq("upgrade","reinstall=oui"));
 		exit;
 	}
 
