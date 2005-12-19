@@ -76,12 +76,12 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		    $id_article,
 		    " </b></span>";
 		
-		echo "<a href='",
-		  (($statut == 'publie') ? 
-		   "../spip_redirect.php3" :
-		   "articles.php3"),
-		  "?id_article=$id_article",
-		  "'>",
+		echo "<a href=",
+		  http_php_script((($statut == 'publie') ? 
+				   "../spip_redirect" :
+				   "articles"),
+				  "id_article=$id_article"),
+		  ">",
 		  typo($titre),
 		  "</a>";
 
