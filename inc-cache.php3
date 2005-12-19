@@ -47,7 +47,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 	// Sous-repertoires 0...9a..f/
 	$subdir = creer_repertoire(_DIR_CACHE, substr($md_cache, 0, 1));
 
-	include_ecrire('inc_acces.php3');
+	include_ecrire('inc_acces');
 	verifier_htaccess(_DIR_CACHE);
 
 	$gzip = $flag_gz ? '.gz' : '';
@@ -168,7 +168,7 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
 	if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok']) {
-		include_ecrire('inc_meta.php3');
+		include_ecrire('inc_meta');
 		lire_metas();
 		retire_caches($chemin_cache);
 	}
@@ -195,7 +195,7 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 			if (!spip_interdire_cache) {
 				spip_log("Erreur base de donnees & "
 				. "impossible utiliser $chemin_cache");
-				include_ecrire('inc_minipres.php');
+				include_ecrire('inc_minipres');
 				install_debut_html(_T('info_travaux_titre'));echo _T('titre_probleme_technique');install_fin_html();
 				// continuer quand meme, ca n'ira pas loin.
 				// mais ne plus rien signaler
@@ -215,7 +215,7 @@ function creer_cache(&$page, $chemin_cache, $duree)
 	// Entrer dans la base les invalideurs calcules par le compilateur
 	// (et supprimer les anciens)
 
-	include_ecrire('inc_invalideur.php3');
+	include_ecrire('inc_invalideur');
 	maj_invalideurs($chemin_cache, $page['invalideurs'], $duree);
 
 	// Enregistrer le fichier cache

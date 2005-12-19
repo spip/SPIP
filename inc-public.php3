@@ -27,7 +27,7 @@ if (defined("_INC_PUBLIC")) {
 	if (!function_exists('include_local')) { # cas de page.php3
 		include ("ecrire/inc_version.php3");
 	}
-	include_local('inc-public-global.php3');
+	include_local('inc-public-global');
 
 	// Calculer la page en envoyant seulement les en-tetes, pas la page
 	$tableau_des_erreurs = array();
@@ -72,7 +72,7 @@ if (defined("_INC_PUBLIC")) {
 			// On ne revient pas ici si le nb d'erreurs > 4
 			if ($res === false AND $affiche_boutons_admin
 			AND $auteur_session['statut'] == '0minirezo') {
-				include_ecrire('inc_debug_sql.php3');
+				include_ecrire('inc_debug_sql');
 				erreur_squelette(_T('zbug_erreur_execution_page'));
 			}
 		}
@@ -80,7 +80,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
-		include_ecrire("inc_debug_sql.php3");
+		include_ecrire("inc_debug_sql");
 		debug_dumpfile($var_mode_affiche== 'validation' ? $page :"",
 			       $var_mode_objet,$var_mode_affiche);
 	} 
@@ -89,7 +89,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Traiter var_recherche pour surligner les mots
 	if ($var_recherche) {
-		include_ecrire("inc_surligne.php3");
+		include_ecrire("inc_surligne");
 		$page = surligner_mots($page, $var_recherche);
 	}
 
@@ -104,7 +104,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Inserer au besoin les boutons admins
 	if ($affiche_boutons_admin) {
-		include_local("inc-admin.php3");
+		include_local("inc-admin");
 		$page = affiche_boutons_admin($page);
 	}
 
@@ -113,7 +113,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
-		include_local ("inc-stats.php3");
+		include_local ("inc-stats");
 		ecrire_stats();
 	}
 

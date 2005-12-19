@@ -13,9 +13,9 @@
 
 include ("ecrire/inc_version.php3");
 
-include_ecrire("inc_meta.php3");
-include_ecrire("inc_session.php3");
-include_ecrire("inc_invalideur.php3");
+include_ecrire("inc_meta");
+include_ecrire("inc_session");
+include_ecrire("inc_invalideur");
 
 if ($purger_cache == "oui"
 AND verifier_action_auteur("purger_cache", $hash, $id_auteur)) {
@@ -30,7 +30,7 @@ AND verifier_action_auteur("purger_squelettes", $hash, $id_auteur)) {
 
 if ($afficher_cache_images == "oui"
 AND verifier_action_auteur("afficher_cache_images", $hash, $id_auteur)) {
-	include_ecrire('inc_lang.php3');
+	include_ecrire('inc_lang');
 	lang_select($lang);
 	calculer_cache_vignettes();
 }

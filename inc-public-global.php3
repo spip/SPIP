@@ -23,16 +23,16 @@ function calcule_header_et_page ($fond) {
 	// authentification du visiteur
 	if ($_COOKIE['spip_session'] OR
 	($_SERVER['PHP_AUTH_USER']  AND !$ignore_auth_http)) {
-		include_ecrire ("inc_session.php3");
+		include_ecrire ("inc_session");
 		verifier_visiteur();
 	}
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
-		include_ecrire('inc_lang.php3');
+		include_ecrire('inc_lang');
 		verifier_lang_url();
 	}
 	if ($_GET['lang']) {
-		include_ecrire('inc_lang.php3');
+		include_ecrire('inc_lang');
 		lang_select($_GET['lang']);
 	}
 
@@ -40,7 +40,7 @@ function calcule_header_et_page ($fond) {
 
 	if (strlen($_POST['confirmer_forum']) > 0
 	    OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
-		include_local('inc-messforum.php3');
+		include_local('inc-messforum');
 		redirige_par_entete(enregistre_forum());
 	}
 
@@ -119,7 +119,7 @@ function afficher_page_globale ($fond) {
 	$f = find_in_path("inc-cache.php3");
 	if ($f && is_readable($f)) {
 		include_local($f);
-	} else include_local("inc-cache.php3");
+	} else include_local("inc-cache");
 
 	// Peut-on utiliser un fichier cache ?
 	$chemin_cache = determiner_cache($use_cache, '', $fond);
@@ -160,7 +160,7 @@ function afficher_page_globale ($fond) {
 	  if (!$use_cache)
 	    $page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
 	  else {
-	    include_local('inc-calcul.php3');
+	    include_local('inc-calcul');
 	    $page = calculer_page_globale ($chemin_cache, $fond);
 
 	    if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
@@ -179,7 +179,7 @@ function afficher_page_globale ($fond) {
 	}
 
 	if ($var_preview AND !$flag_preserver) {
-		include_ecrire('inc_minipres.php');
+		include_ecrire('inc_minipres');
 		$page['texte'] .= afficher_bouton_preview();
 	}
 	//
@@ -224,7 +224,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	// - on n'y est pas, et alors il faut revenir dans la langue par defaut
 	if (($lang = $contexte_inclus['lang'])
 	|| ($GLOBALS['spip_lang'] != ($lang = $GLOBALS['meta']['langue_site']))) {
-		include_ecrire('inc_lang.php3');
+		include_ecrire('inc_lang');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
 	}
@@ -232,7 +232,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	  if (!$use_cache)
 	    $page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
 	  else {
-	    include_local('inc-calcul.php3');
+	    include_local('inc-calcul');
 	    $page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
 	    $page['signal']['process_ins'] = $page['process_ins'];
 	    $lastmodified = time();
@@ -266,7 +266,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$f = find_in_path("inc-cache.php3");
 		if ($f && is_readable($f)) {
 		  if (!$GLOBALS['included_files']['inc-cache']++) include($f);
-		} else include_local("inc-cache.php3");
+		} else include_local("inc-cache");
 
 		$d = $GLOBALS['delais'];
 		$GLOBALS['delais'] = $delainc;
@@ -311,7 +311,7 @@ function message_erreur_404 ($erreur= "") {
 		else if (isset($GLOBALS['id_syndic']))
 		$erreur = 'public:aucun_site';
 	}
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 	http_status(404);
 
 	return array('texte' => '<'.'?php

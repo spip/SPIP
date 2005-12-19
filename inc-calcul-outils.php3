@@ -24,7 +24,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_rubriques.php3'); # pour calcul_branche()
+include_ecrire('inc_rubriques'); # pour calcul_branche()
 
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
@@ -70,7 +70,7 @@ function affiche_logos($logos, $lien, $align) {
 //
 
 function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 
 	$table_logos = array (
 	'ARTICLE' => 'art',
@@ -107,7 +107,7 @@ function calcule_logo($type, $onoff, $id, $id_rubrique, $ff) {
 
 //
 // fonction standard de calcul de la balise #INTRODUCTION
-// on peut la surcharger en definissant dans mes_fonctions.php3 :
+// on peut la surcharger en definissant dans mes_fonctions :
 // function introduction($type,$texte,$chapo,$descriptif) {...}
 //
 function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
@@ -147,7 +147,7 @@ function calcul_introduction ($type, $texte, $chapo='', $descriptif='') {
 function synthetiser_balise_dynamique($nom, $args, $file, $lang, $ligne) {
  return 
 		('<'.'?php 
-include_ecrire(\'inc_lang.php3\');
+include_ecrire(\'inc_lang\');
 lang_select("'.$lang.'");
 include_local("'
 		. $file
@@ -240,7 +240,7 @@ array("$element=$id_element"));
 
 function table_from_primary($id) {
 	global $tables_principales;
-	include_ecrire('inc_serialbase.php3');
+	include_ecrire('inc_serialbase');
 	foreach ($tables_principales as $k => $v) {
 		if ($v['key']['PRIMARY KEY'] == $id)
 			return array($k, array_key_exists('id_rubrique', $v['field']));

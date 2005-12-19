@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_meta.php3');
-include_ecrire('inc_forum.php3');
-include_ecrire('inc_filtres.php3');
-include_ecrire("inc_abstract_sql.php3");
+include_ecrire('inc_meta');
+include_ecrire('inc_forum');
+include_ecrire('inc_filtres');
+include_ecrire("inc_abstract_sql");
 include_local(_FILE_CONNECT);
 
 // Ce fichier inclus par inc-public a un comportement special
@@ -23,14 +23,14 @@ include_local(_FILE_CONNECT);
 
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
-	include_ecrire('inc_texte.php3');
-	include_ecrire('inc_filtres.php3');
-	include_ecrire('inc_mail.php3');
+	include_ecrire('inc_texte');
+	include_ecrire('inc_filtres');
+	include_ecrire('inc_mail');
 	// Gestionnaire d'URLs
 	if (@file_exists("inc-urls.php3"))
-		include_local("inc-urls.php3");
+		include_local("inc-urls");
 	else
-		include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+		include_local("inc-urls-".$GLOBALS['type_urls']);
 
 	if ($statut == 'prop') # forum modere
 		$url = "ecrire/controle_forum.php3?debut_id_forum=$id_forum";
@@ -167,7 +167,7 @@ function enregistre_forum() {
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($GLOBALS['afficher_texte'] <> 'non') {
-		include_ecrire("inc_session.php3");
+		include_ecrire("inc_session");
 		if (!verifier_action_auteur("ajout_forum $id_rubrique".
 		" $id_forum $id_article $id_breve".
 		" $id_syndic $alea", $hash)) {
@@ -218,9 +218,9 @@ function enregistre_forum() {
 	if ($calculer_retour) {
 		// Gestionnaire d'URLs
 		if (@file_exists("inc-urls.php3"))
-			include_local("inc-urls.php3");
+			include_local("inc-urls");
 		else
-			include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+			include_local("inc-urls-".$GLOBALS['type_urls']);
 
 		// le retour automatique envoie sur le thread, ce qui permet
 		// de traiter elegamment le cas des forums moderes a priori.
@@ -238,7 +238,7 @@ function enregistre_forum() {
 		prevenir_auteurs($auteur, $email_auteur, $id_message, $id_article, $texte, $titre, $statut);
 
 	// Poser un cookie pour ne pas retaper le nom / email
-	include_ecrire('inc_cookie.php');
+	include_ecrire('inc_cookie');
 	spip_setcookie('spip_forum_user',
 		       serialize(array('nom' => $auteur, 'email' => $email_auteur)));
 
@@ -246,7 +246,7 @@ function enregistre_forum() {
 	//
 	// INVALIDATION DES CACHES LIES AUX FORUMS
 	//
-		include_ecrire('inc_invalideur.php3');
+		include_ecrire('inc_invalideur');
 		suivre_invalideur ("id='id_forum/" .
 			calcul_index_forum($id_article,
 				$id_breve,

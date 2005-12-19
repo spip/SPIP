@@ -12,8 +12,8 @@
 
 
 include ("ecrire/inc_version.php3");
-include_ecrire ("inc_session.php3");
-include_ecrire('inc_cookie.php');
+include_ecrire ("inc_session");
+include_ecrire('inc_cookie');
 
 
 // gerer l'auth http
@@ -120,7 +120,7 @@ if ($essai_login == "oui") {
 	if ($ldap_present) $auths[] = 'ldap';
 	$ok = false;
 	foreach ($auths as $nom_auth) {
-		include_ecrire("inc_auth_".$nom_auth.".php3");
+		include_ecrire("inc_auth_".$nom_auth);
 		$classe_auth = "Auth_".$nom_auth;
 		$auth = new $classe_auth;
 		if ($auth->init()) {
@@ -197,7 +197,7 @@ if ($cookie_session) {
 
 // changement de langue espace public
 if ($var_lang) {
-	include_ecrire('inc_lang.php3');
+	include_ecrire('inc_lang');
 
 	if (changer_langue($var_lang)) {
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
@@ -208,7 +208,7 @@ if ($var_lang) {
 
 // changer de langue espace prive (ou login)
 if ($var_lang_ecrire) {
-	include_ecrire('inc_lang.php3');
+	include_ecrire('inc_lang');
 	verifier_visiteur();
 
 	if (changer_langue($var_lang_ecrire)) {
@@ -216,7 +216,7 @@ if ($var_lang_ecrire) {
 		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
 		if (_FILE_CONNECT) {
-			include_ecrire('inc_admin.php3');
+			include_ecrire('inc_admin');
 			if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
 				spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
 				$auteur_session['lang'] = $var_lang_ecrire;
@@ -236,7 +236,7 @@ if (ereg("^Apache", $SERVER_SOFTWARE)) {
 	redirige_par_entete($redirect);
 }
 else {
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 	spip_header("Refresh: 0; url=" . $redirect);
 	echo "<html><head>";
 	echo "<meta http-equiv='Refresh' content='0; url=".$redirect."'>";

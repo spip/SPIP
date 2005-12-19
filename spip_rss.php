@@ -19,14 +19,14 @@
 // On cree ensuite le RSS correspondant a l'operation
 
 include("ecrire/inc_version.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire('inc_rss.php3');
-include_ecrire("inc_acces.php3");
+include_ecrire("inc_texte");
+include_ecrire('inc_rss');
+include_ecrire("inc_acces");
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
-	include_local("inc-urls.php3");
+	include_local("inc-urls");
 else
-	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
+	include_local("inc-urls-".$GLOBALS['type_urls']);
 
 
 //
@@ -45,7 +45,7 @@ OR ($a['id_auteur']>0 AND $id<>$a['id_auteur'])) {
 		list($var, $val) = split('-', $bout, 2);
 		$a[$var] = $val;
 	}
-	include_ecrire('inc_lang.php3');
+	include_ecrire('inc_lang');
 	lang_select($lang);
 }
 
@@ -80,7 +80,7 @@ switch($op) {
 		break;
 	# suivi prive des forums
 	case 'forums':
-		include_ecrire("inc_forum.php3");
+		include_ecrire("inc_forum");
 		$critere = critere_statut_controle_forum($a['page']);
 		$rss = rss_suivi_forums($a, $critere, true);
 		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
