@@ -45,7 +45,7 @@ debut_gauche();
 
 debut_droite();
 
-echo "<form action='config-contenu.php3' method='post'>";
+echo "<form action=" . http_php_script("config-contenu","") . " method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
 

@@ -39,7 +39,7 @@ function config_fonctions_dist()
 	debut_droite();
 	lire_metas();
 
-	echo "<form action='config-fonctions.php3' method='post'>";
+	echo "<form action=" . http_php_script("config-fonctions","") . " method='post'>";
 	echo "<input type='hidden' name='changer_config' value='oui'>";
 
 //
