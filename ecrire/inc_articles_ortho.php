@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_distant.php");
-include_ecrire("lab_ortho.php");
+include_ecrire("inc_presentation");
+include_ecrire("inc_distant");
+include_ecrire("lab_ortho");
 
 function articles_ortho_dist()
 {
@@ -258,7 +258,7 @@ else {
 	}
 
 	if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra.php");
+		include_ecrire("inc_extra");
 		extra_affichage($extra, "articles");
 	}
 }

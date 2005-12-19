@@ -12,13 +12,13 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_date.php3");
-include_ecrire ("inc_abstract_sql.php3");
-include_ecrire ("inc_index.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_rubriques");
+include_ecrire ("inc_logos");
+include_ecrire ("inc_mots");
+include_ecrire ("inc_date");
+include_ecrire ("inc_abstract_sql");
+include_ecrire ("inc_index");
 
 function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour )
 {
@@ -186,7 +186,7 @@ if ($les_notes) {
 
 	// afficher les extra
 	if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		extra_affichage($extra, "breves");
 	}
 
@@ -266,7 +266,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 
 	// recoller les champs du extra
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		$add_extra = ", extra = '".addslashes(extra_recup_saisie("breves"))."'";
 	} else
 		$add_extra = '';
@@ -275,11 +275,11 @@ if (strval($titre)!='' AND $modifier_breve) {
 
 	// invalider et reindexer
 	if ($invalider_caches) {
-		include_ecrire ("inc_invalideur.php3");
+		include_ecrire ("inc_invalideur");
 		suivre_invalideur("id='id_breve/$id_breve'");
 	}
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_ecrire ("inc_index");
 		marquer_indexer('breve', $id_breve);
 	}
 	calculer_rubriques();

@@ -271,7 +271,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 
 	if ($reindexer AND $GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index.php3");
+		include_ecrire ("inc_index");
 		marquer_indexer($objet, $id_objet);
 	}
 
@@ -622,7 +622,7 @@ function afficher_groupe_mots($id_groupe) {
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql.php3");
+			include_ecrire ("inc_abstract_sql");
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
 		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);

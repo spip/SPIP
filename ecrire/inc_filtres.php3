@@ -30,7 +30,7 @@ function entites_html($texte) {
 
 // Transformer les &eacute; dans le charset local
 function filtrer_entites($texte) {
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	// filtrer
 	$texte = html2unicode($texte);
 	// remettre le tout dans le charset cible
@@ -39,7 +39,7 @@ function filtrer_entites($texte) {
 
 // Tout mettre en entites pour l'export backend (sauf iso-8859-1)
 function entites_unicode($texte) {
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	return charset2unicode($texte);
 }
 
@@ -175,7 +175,7 @@ function PtoBR($texte){
 function lignes_longues($texte, $l = 70) {
 	// Passer en utf-8 pour ne pas avoir de coupes trop courtes avec les &#xxxx;
 	// qui prennent 7 caracteres
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	$texte = unicode_to_utf_8(charset2unicode(
 		$texte, $GLOBALS['meta']['charset'], true));
 
@@ -308,7 +308,7 @@ function extraire_date($texte) {
 
 // Maquiller une adresse e-mail
 function antispam($texte) {
-	include_ecrire ("inc_acces.php3");
+	include_ecrire ("inc_acces");
 	$masque = creer_pass_aleatoire(3);
 	return ereg_replace("@", " $masque ", $texte);
 }
@@ -643,7 +643,7 @@ function style_align($bof) {
 //
 
 function filtrer_ical($texte) {
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	$texte = html2unicode($texte);
 	$texte = unicode2charset(charset2unicode($texte, $GLOBALS['meta']['charset'], 1), 'utf-8');
 	$texte = ereg_replace("\n", " ", $texte);
@@ -728,8 +728,8 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 
 function agenda_affiche($i)
 {
-  include_ecrire('inc_calendrier.php');
-  include_ecrire('inc_minipres.php'); // pour http_href
+  include_ecrire('inc_calendrier');
+  include_ecrire('inc_minipres'); // pour http_href
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
   $sinon = array_shift($args);
@@ -764,7 +764,7 @@ function agenda_affiche($i)
 
 // Accepte en entree un tag <img ...>
 function reduire_une_image($img, $taille, $taille_y) {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 
 	// Cas du mouseover genere par les logos de survol de #LOGO_ARTICLE
 	if (eregi("onmouseover=\"this\.src=\'([^']+)\'\"", $img, $match)) {
@@ -826,13 +826,13 @@ function reduire_image($texte, $taille = -1, $taille_y = -1) {
 
 function largeur($img) {
 	if (!$img) return;
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	list ($h,$l) = taille_image($img);
 	return $l;
 }
 function hauteur($img) {
 	if (!$img) return;
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	list ($h,$l) = taille_image($img);
 	return $h;
 }
@@ -842,7 +842,7 @@ function hauteur($img) {
 // Fonctions de traitement d'image
 // uniquement pour GD2
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
-	include_ecrire("inc_logos.php3");
+	include_ecrire("inc_logos");
 
 	if (strlen($img)==0) return false;
 
@@ -904,7 +904,7 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 // alpha = 127: completement transparent
 function image_alpha($im, $alpha = 63)
 {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	
 	$image = valeurs_image_trans($im, "alpha-$alpha", "png");
 	if (!$image) return("");
@@ -965,7 +965,7 @@ function image_alpha($im, $alpha = 63)
 
 function image_flip_vertical($im)
 {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	
 	$image = valeurs_image_trans($im, "flip_v");
 	if (!$image) return("");
@@ -1007,7 +1007,7 @@ function image_flip_vertical($im)
 
 function image_flip_horizontal($im)
 {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	
 	$image = valeurs_image_trans($im, "flip_h");
 	if (!$image) return("");
@@ -1048,7 +1048,7 @@ function image_flip_horizontal($im)
 
 function image_nb($im)
 {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	
 	$image = valeurs_image_trans($im, "nb");
 	if (!$image) return("");
@@ -1139,7 +1139,7 @@ function decal_couleur($coul, $gamma) {
 // ou plus foncee (gamma < 0)
 function image_gamma($im, $gamma = 0)
 {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	
 	$image = valeurs_image_trans($im, "gamma-$gamma");
 	if (!$image) return("");
@@ -1207,7 +1207,7 @@ function decal_couleur_127 ($coul, $val) {
 //function image_sepia($im, $dr = 137, $dv = 111, $db = 94)
 function image_sepia($im, $rgb = "896f5e")
 {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	
 	$couleurs = couleur_hex_to_dec($rgb);
 	$dr= $couleurs["red"];
@@ -1606,7 +1606,7 @@ function tester_config($ignore, $quoi) {
 // ca retourne un url de suivi du thread y (que le thread existe ou non)
 function url_rss_forum($param) {
 	if (preg_match(',.*(id_.*?)=([0-9]+),', $param, $regs)) {
-		include_ecrire('inc_acces.php3');
+		include_ecrire('inc_acces');
 		$regs[1] = str_replace('id_forum', 'id_thread', $regs[1]);
 		$arg = $regs[1].'-'.$regs[2];
 		$cle = afficher_low_sec(0, "rss forum $arg");
@@ -1854,7 +1854,7 @@ function image_typo() {
 		$dimensions = getimagesize($image);
 		$largeur = $dimensions[0];
 		$hauteur = $dimensions[1];
-		return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='image_typo'>", 'alt', $alt);
+		return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='image_typo' />", 'alt', $alt);
 	} else {
 		return $texte;
 	}

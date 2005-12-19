@@ -86,7 +86,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 	global $connect_id_auteur;
 	global $clean_link, $spip_lang_right;
 
-	include_ecrire('inc_session.php3');
+	include_ecrire('inc_session');
  
 	if (!$redirect) $redirect = $clean_link->getUrl();
 
@@ -451,7 +451,7 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (!$logo) return '';
 
 	// Si c'est une image distante, la recuperer (si possible)
-	include_ecrire('inc_distant.php');
+	include_ecrire('inc_distant');
 	if (!$local = copie_locale($logo)) {
 		spip_log("pas de version locale de $logo");
 		return $img;

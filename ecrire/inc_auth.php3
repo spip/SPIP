@@ -195,7 +195,7 @@ function auth_dist() {
 	  // C'est soit parce que le serveur MySQL ne repond pas,
 	  // soit parce que la table des auteurs a changee (restauration etc)
 
-		include_ecrire('inc_minipres.php');
+		include_ecrire('inc_minipres');
 		if (!$GLOBALS['db_ok']) {
 			spip_log("Erreur base de donnees");
 

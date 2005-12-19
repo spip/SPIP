@@ -16,7 +16,7 @@ function afficher_barre($champ, $forum=false) {
 	global $barre_typo;
 	tester_variable("barre_typo", "spip");
 	if($barre_typo != '' &&  file_exists(_DIR_RESTREINT."inc_barre_$barre_typo.php3")) {
-		include_ecrire("inc_barre_$barre_typo.php3");
+		include_ecrire("inc_barre_$barre_typo");
 		$f = "afficher_barre_$barre_typo";
 		if(function_exists($f)) {
 			return $f($champ, $forum);

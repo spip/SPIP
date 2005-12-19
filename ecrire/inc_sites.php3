@@ -12,14 +12,14 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire ("inc_sites_tous.php");
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_logos.php3");
-include_ecrire ("inc_mots.php3");
-include_ecrire ("inc_date.php3");
-include_ecrire ("inc_abstract_sql.php3");
-include_ecrire ("inc_config.php3");
+include_ecrire ("inc_sites_tous");
+include_ecrire("inc_presentation");
+include_ecrire("inc_rubriques");
+include_ecrire ("inc_logos");
+include_ecrire ("inc_mots");
+include_ecrire ("inc_date");
+include_ecrire ("inc_abstract_sql");
+include_ecrire ("inc_config");
 
 function sites_dist()
 {
@@ -147,7 +147,7 @@ if ($nouveau_statut AND $flag_administrable) {
 	calculer_rubriques();
 	if ($statut == 'publie') {
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index.php3");
+			include_ecrire ("inc_index");
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
@@ -162,7 +162,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	
 	// recoller les champs du extra
 	if ($champs_extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		$add_extra = ", extra = '".addslashes(extra_recup_saisie("sites"))."'";
 	} else
 		$add_extra = '';
@@ -189,11 +189,11 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	// invalider et reindexer
 	if ($statut == 'publie') {
 		if ($invalider_caches) {
-			include_ecrire ("inc_invalideur.php3");
+			include_ecrire ("inc_invalideur");
 			suivre_invalideur("id='id_syndic/$id_syndic'");
 		}
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index.php3");
+			include_ecrire ("inc_index");
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
@@ -550,7 +550,7 @@ else if (preg_match(',^select: (.*),', $url_syndic, $regs)) {
 
 
 if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra.php3");
+		include_ecrire("inc_extra");
 		extra_affichage($extra, "sites");
 	}
 
@@ -610,8 +610,8 @@ function my_strtotime($la_date) {
 
 
 function analyser_site($url) {
-	include_ecrire("inc_filtres.php3"); # pour filtrer_entites()
-	include_ecrire("inc_distant.php");
+	include_ecrire("inc_filtres"); # pour filtrer_entites()
+	include_ecrire("inc_distant");
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -660,8 +660,8 @@ function analyser_site($url) {
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
 
 		// Cherchons quand meme un backend
-		include_ecrire('inc_distant.php');
-		include_ecrire('feedfinder.php');
+		include_ecrire('inc_distant');
+		include_ecrire('feedfinder');
 		$feeds = get_feed_from_url($url, $texte);
 		if (count($feeds>1)) {
 			spip_log("feedfinder.php :\n".join("\n", $feeds));
@@ -685,7 +685,7 @@ function creer_tag($mot,$type,$url) {
 	return $mot;
 }
 function ajouter_tags($matches, $item) {
-	include_ecrire('inc_filtres.php3');
+	include_ecrire('inc_filtres');
 	$tags = array();
 	foreach ($matches as $match) {
 		$type = ($match[3] == 'category') ? 'category':'tag';
@@ -725,7 +725,7 @@ function ajouter_tags($matches, $item) {
 // prend un fichier backend et retourne un tableau des items lus,
 // et une chaine en cas d'erreur
 function analyser_backend($rss, $url_syndic='') {
-	include_ecrire("inc_texte.php3"); # pour couper()
+	include_ecrire("inc_texte"); # pour couper()
 
 	$les_auteurs_du_site = "";
 
@@ -989,7 +989,7 @@ function inserer_article_syndique ($data, $now_id_syndic, $statut, $url_site, $u
 // Mettre a jour le site
 //
 function syndic_a_jour($now_id_syndic, $statut = 'off') {
-	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_texte");
 
 	$query = "SELECT * FROM spip_syndic WHERE id_syndic='$now_id_syndic'";
 	$result = spip_query($query);
@@ -1014,7 +1014,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 		date_syndic=NOW() WHERE id_syndic='$now_id_syndic'");
 
 	// Aller chercher les donnees du RSS et les analyser
-	include_ecrire("inc_distant.php");
+	include_ecrire("inc_distant");
 	$rss = recuperer_page($url_syndic, true);
 	if (!$rss)
 		$articles = _T('avis_echec_syndication_02');
@@ -1064,7 +1064,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 
 	if ($liens_ajoutes) {
 		spip_log("Syndication: $liens_ajoutes nouveau(x) lien(s)");
-		include_ecrire('inc_rubriques.php3');
+		include_ecrire('inc_rubriques');
 		calculer_rubriques();
 	}
 

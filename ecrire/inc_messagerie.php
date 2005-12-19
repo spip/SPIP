@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
+include_ecrire("inc_presentation");
 
 function messagerie_dist()
 {
@@ -107,7 +107,7 @@ afficher_messages(_T('info_discussion_cours'), $query_message, true, false);
 
 
 // Afficher le lien RSS
-include_ecrire('inc_rss.php3');
+include_ecrire('inc_rss');
 $op = 'messagerie';
 $args = array(
 	'id_auteur' => $connect_id_auteur

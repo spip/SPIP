@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_admin.php3');
+include_ecrire('inc_admin');
 
 function delete_all_dist()
 {

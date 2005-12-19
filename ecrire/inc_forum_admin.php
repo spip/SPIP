@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_texte");
+include_ecrire("inc_urls");
+include_ecrire("inc_rubriques");
 
 function liste_numeros_forum($urlforum, $debut, $total)
 {
@@ -113,14 +113,14 @@ function changer_statut_forum_admin($id_forum, $statut) {
 	$id_parent = $row['id_parent'];
 
 	// invalider les pages comportant ce forum
-	include_ecrire('inc_invalideur.php3');
-	include_ecrire('inc_forum.php3');
+	include_ecrire('inc_invalideur');
+	include_ecrire('inc_forum');
 	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
 	suivre_invalideur("id='id_forum/$index_forum'");
 
 	// Signaler au moteur de recherche qu'il faut reindexer le thread
 	if ($id_parent) {
-		include_ecrire('inc_index.php3');
+		include_ecrire('inc_index');
 		marquer_indexer ('forum', $id_parent);
 	}
 

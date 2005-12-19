@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_layer.php3");
-include_ecrire("inc_calendrier.php");
+include_ecrire ("inc_layer");
+include_ecrire("inc_calendrier");
 
 // Choix dynamique de la couleur
 
@@ -741,7 +741,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql.php3");
+			include_ecrire ("inc_abstract_sql");
 			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
 		}
 	}
@@ -794,7 +794,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql.php3");
+			include_ecrire ("inc_abstract_sql");
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
 
@@ -882,7 +882,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
 
 			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos.php3");
+				include_ecrire("inc_logos");
 				$logo = decrire_logo("arton$id_article");
 				if ($logo) {	
 					$fichier = $logo[0];
@@ -978,7 +978,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql.php3");
+			include_ecrire ("inc_abstract_sql");
 			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
 		}
 
@@ -1017,7 +1017,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql.php3");
+			include_ecrire ("inc_abstract_sql");
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
 
@@ -1212,7 +1212,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$s .= "<a href='breves_voir.php3?id_breve=$id_breve' style=\"display:block;\">";
 
 			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos.php3");
+				include_ecrire("inc_logos");
 				$logo = decrire_logo("breveon$id_breve");
 				if ($logo) {
 					$fichier = $logo[0];
@@ -1664,7 +1664,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			$titre_boite = $titre;
 			if ($id_auteur AND $spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos.php3");
+				include_ecrire("inc_logos");
 				$logo_auteur = decrire_logo("auton$id_auteur");
 				if ($logo_auteur) {
 					$fichier = $logo_auteur[0];
@@ -1800,7 +1800,7 @@ function bouton($titre,$lien) {
 // point d'entree/hack pour spip-lab (duplication de debut_page)
 
 function debut_html($titre = "", $rubrique="") {
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 
 	global $browser_verifForm;
 	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
@@ -1865,7 +1865,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 function debut_javascript($admin, $stat)
 {
 	global $spip_lang_left, $browser_name, $browser_version;
-	include_ecrire("inc_charsets.php3");
+	include_ecrire("inc_charsets");
 
 
 	# teste la capacite ajax : on envoie un cookie -1
@@ -2310,7 +2310,7 @@ function init_entete($titre, $rubrique, $css) {
 	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
 
 	// envoi des en-tetes, du doctype et du <head><title...
-	include_ecrire('inc_headers.php');
+	include_ecrire('inc_headers');
 	http_no_cache();
 	echo _DOCTYPE_ECRIRE .
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .

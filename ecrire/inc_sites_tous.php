@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
+include_ecrire("inc_presentation");
 
 function sites_tous_dist()
 {
@@ -135,7 +135,7 @@ function afficher_sites($titre_table, $requete) {
 			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
 
 			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos.php3");
+				include_ecrire("inc_logos");
 				$logo = decrire_logo("siteon$id_syndic");
 				if ($logo) {
 					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>"

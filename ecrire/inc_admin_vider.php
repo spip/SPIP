@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
+include_ecrire("inc_presentation");
 
 function admin_vider_dist()
 {
@@ -53,7 +53,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 if ($purger_index == "oui") {
 	if (verifier_action_auteur("purger_index", $hash)) {
-		include_ecrire('inc_index.php3');
+		include_ecrire('inc_index');
 		purger_index();
 		creer_liste_indexation();
 	}

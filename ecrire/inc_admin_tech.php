@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
+include_ecrire("inc_presentation");
 
 function admin_tech_dist()
 {

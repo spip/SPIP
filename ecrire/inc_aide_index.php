@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_minipres.php");
-include_ecrire ("inc_layer.php3");
-include_ecrire ("inc_texte.php3");
+include_ecrire ("inc_minipres");
+include_ecrire ("inc_layer");
+include_ecrire ("inc_texte");
 
 /////////////////////////////
 // La frame de base
@@ -72,7 +72,7 @@ function fichier_aide($lang_aide = '') {
 		// en cache ?
 		if (!@file_exists($fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html")) {
 			if ($help_server) {
-				include_ecrire('inc_distant.php');
+				include_ecrire('inc_distant');
 				if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 				AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")))
 					ecrire_fichier ($fichier_aide, $contenu);
@@ -240,7 +240,7 @@ function help_img($regs) {
 	} else if (@file_exists($img = '../AIDE/aide-'.$cache)) {
 		readfile($img);
 	} else if ($help_server) {
-		include_ecrire('inc_distant.php');
+		include_ecrire('inc_distant');
 		if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {
@@ -454,7 +454,7 @@ if (http_last_modified(filemtime("aide_index.php3"), time() + 24 * 3600))
 
 // Recuperer les infos de langue (preferences auteur), si possible
 if (_FILE_CONNECT) {
-	include_ecrire ("inc_session.php3");
+	include_ecrire ("inc_session");
 	verifier_visiteur();
 }
 utiliser_langue_visiteur();

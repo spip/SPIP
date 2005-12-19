@@ -171,11 +171,11 @@ function traduire_chaine($code, $args) {
 
 
 function traduire_nom_langue($lang) {
-	include_ecrire('inc_lang_liste.php');
+	include_ecrire('inc_lang_liste');
 	$r = $GLOBALS['codes_langues'][$lang];
 	if (!$r) $r = $lang;
 
-		include_ecrire("inc_charsets.php3");
+		include_ecrire("inc_charsets");
 		$r = html2unicode($r);
 
 	return $r;
@@ -275,7 +275,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			  (is_object($lien) ? $lien->getUrl() : $lien);
 			$lien = "$site/spip_cookie.php3";
 			if (_FILE_CONNECT) {
-			  include_ecrire('inc_session.php3');
+			  include_ecrire('inc_session');
 			  $lien .= "?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 			}
 		} else {

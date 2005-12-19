@@ -59,7 +59,7 @@ function spip_cron($taches = array()) {
 	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
 		return;
 
-	include_ecrire("inc_meta.php3");
+	include_ecrire("inc_meta");
 	// force un spip_query
 	lire_metas();
 
@@ -112,7 +112,7 @@ function spip_cron($taches = array()) {
 
 		// preparer la tache
 		spip_timer('tache');
-		include_ecrire('inc_' . $tache . _EXTENSION_PHP);
+		include_ecrire('inc_' . $tache);
 		$fonction = 'cron_' . $tache;
 
 		// l'appeler
@@ -202,7 +202,7 @@ function cron_sites($t) {
 	$r = executer_une_syndication();
 	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&
 	    ($GLOBALS['meta']["visiter_sites"] == 'oui')) {
-		include_ecrire("inc_index.php3");
+		include_ecrire("inc_index");
 		$r2 = executer_une_indexation_syndic();
 		$r = $r && $r2;
 	}
@@ -241,7 +241,7 @@ function cron_mail($t) {
 	// $t = 0 si le fichier de lock a ete detruit
 	if (!$t) $t = time() - (3600 * 24 * $jours_neuf);
 
-	include_local("inc-calcul.php3");
+	include_local("inc-calcul");
 	$page= cherche_page('',
 			    array('date' => date('Y-m-d H:i:s', $t),
 				  'jours_neuf' => $jours_neuf),
@@ -312,7 +312,7 @@ function cron_invalideur($t) {
 				$taille_supprimee += $r['taille'];
 			}
 			spip_log ("Quota cache: efface $taille_supprimee octets");
-			include_ecrire('inc_invalideur.php3');
+			include_ecrire('inc_invalideur');
 			suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
 		}
 	return 1;

@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_acces.php3"); // pour low_sec (iCal)
+include_ecrire("inc_presentation");
+include_ecrire("inc_texte");
+include_ecrire("inc_urls");
+include_ecrire("inc_acces"); // pour low_sec (iCal)
 
 function afficher_liens_calendrier($lien, $icone, $texte) {
 	global $adresse_site;

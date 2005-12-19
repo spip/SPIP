@@ -14,11 +14,11 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_acces.php3");
-include_ecrire("inc_serialbase.php3");
-include_ecrire("inc_auxbase.php3");
-include_ecrire("inc_typebase.php3");
-include_ecrire("inc_majbase.php3");
+include_ecrire("inc_acces");
+include_ecrire("inc_serialbase");
+include_ecrire("inc_auxbase");
+include_ecrire("inc_typebase");
+include_ecrire("inc_majbase");
 
 // Fonction de creation d'une table SQL nommee $nom
 // a partir de 2 tableaux PHP :

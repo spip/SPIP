@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire('inc_forum.php3');
+include_ecrire("inc_presentation");
+include_ecrire("inc_urls");
+include_ecrire('inc_forum');
 
 function forum_parent($id_forum) {
 	$row=spip_fetch_array(spip_query("
@@ -277,7 +277,7 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
   echo "</FONT>";
 
   // Afficher le lien RSS
-  include_ecrire('inc_rss.php3');
+  include_ecrire('inc_rss');
   $op = 'forums';
   $args = array(
 		'page' => $page

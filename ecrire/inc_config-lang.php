@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire ("inc_config.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_rubriques");
+include_ecrire ("inc_config");
 
 function config_lang_dist()
 { 

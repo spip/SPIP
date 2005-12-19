@@ -156,7 +156,6 @@ function traite_xhtml ($buffer) {
 		if (lire_fichier($nomfich, $tidy)
 		AND strlen(trim($tidy)) > 0) {
 			spip_touch($nomfich); # rester vivant
-			# include_local('./inc-cache.php3'); # deja inclus
 			nettoyer_petit_cache('tidy', 300);
 
 			$tidy = preg_replace (",<[?]xml.*>,U", "", $tidy);
@@ -172,7 +171,7 @@ function traite_xhtml ($buffer) {
 
 	### tout ce qui suit est non teste, et probablement non fonctionnel
 	else if (version_tidy() == "1") {
-		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_texte");
 
 		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
@@ -190,7 +189,7 @@ function traite_xhtml ($buffer) {
 		$tidy = tidy_get_output();
 
 		if ($les_echap) {
-			include_ecrire("inc_texte.php3");
+			include_ecrire("inc_texte");
 			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		}
 
@@ -202,7 +201,7 @@ function traite_xhtml ($buffer) {
 		return $tidy;
 	}
 	else if (version_tidy() == "2") {
-		include_ecrire("inc_texte.php3");
+		include_ecrire("inc_texte");
 	
 		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
@@ -219,7 +218,7 @@ function traite_xhtml ($buffer) {
 		tidy_clean_repair($tidy);
 
 		if ($les_echap) {
-			include_ecrire("inc_texte.php3");
+			include_ecrire("inc_texte");
 			$tidy = echappe_retour($tidy, $les_echap, "xhtml");
 		}
 

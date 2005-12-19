@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_export.php3");
-include_ecrire('inc_admin.php3');
+include_ecrire ("inc_export");
+include_ecrire('inc_admin');
 
 function export_all_dist()
 {

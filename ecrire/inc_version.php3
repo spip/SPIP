@@ -305,7 +305,7 @@ $spip_version_affichee = "1.9 alpha";
 
 // appliquer le cookie_prefix
 if ($cookie_prefix != 'spip') {
-	include_ecrire('inc_cookie.php');
+	include_ecrire('inc_cookie');
 	recuperer_cookies_spip($cookie_prefix);
 }
 
@@ -400,7 +400,7 @@ if ($plugins)
 //
 // Module de lecture/ecriture/suppression de fichiers utilisant flock()
 //
-include_ecrire('inc_flock.php3');
+include_ecrire('inc_flock');
 
 // Lire les meta cachees
 
@@ -408,13 +408,13 @@ if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
 		$meta = @unserialize($meta);
 	// en cas d'echec refaire le fichier
 if (!is_array($meta) AND _FILE_CONNECT) {
-		include_ecrire('inc_meta.php3');
+		include_ecrire('inc_meta');
 		ecrire_metas();
 	}
 
 // Langue principale du site
 $langue_site = $GLOBALS['meta']['langue_site'];
-if (!$langue_site) include_ecrire('inc_lang.php3');
+if (!$langue_site) include_ecrire('inc_lang');
 $spip_lang = $langue_site;
 
 
@@ -426,7 +426,7 @@ OR defined('_ECRIRE_INSTALL')
 OR defined('_TEST_DIRS')
 OR defined('_ECRIRE_AIDE'))) {
 
-	include_ecrire('inc_upgrade.php');
+	include_ecrire('inc_upgrade');
 	info_install();
  }
 # spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);

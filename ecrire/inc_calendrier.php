@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3"); // inclut inc_layer
-include_ecrire("inc_texte.php3"); // inclut inc_filtre
+include_ecrire("inc_presentation"); // inclut inc_layer
+include_ecrire("inc_texte"); // inclut inc_filtre
 
 charger_generer_url();
 

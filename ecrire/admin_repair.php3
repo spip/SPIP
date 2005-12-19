@@ -13,9 +13,9 @@
 
 include ("inc_version.php3");
 
-include_ecrire ("inc_admin.php3");
-include_ecrire ("inc_texte.php3");
-include_ecrire ("inc_minipres.php");
+include_ecrire ("inc_admin");
+include_ecrire ("inc_texte");
+include_ecrire ("inc_minipres");
 
 
 /*

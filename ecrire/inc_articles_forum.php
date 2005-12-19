@@ -11,8 +11,8 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire("inc_presentation.php3");
-include_ecrire('inc_forum.php3'); // pour boutons_controle_forum 
+include_ecrire("inc_presentation");
+include_ecrire('inc_forum'); // pour boutons_controle_forum 
 
 function articles_forum_dist()
 {

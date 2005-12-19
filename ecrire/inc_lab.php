@@ -22,13 +22,13 @@
 		// Appel depuis un fichier d'affichage (articles_version.php)
 		if (!defined('_ECRIRE_INC_VERSION')) {
 			include("inc.php3");
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_texte.php3");
-include_ecrire("inc_urls.php3");
-include_ecrire("inc_rubriques.php3");
-include_ecrire("inc_index.php3");
-include_ecrire("inc_logos.php3");
-include_ecrire('inc_forum.php3');
+include_ecrire("inc_presentation");
+include_ecrire("inc_texte");
+include_ecrire("inc_urls");
+include_ecrire("inc_rubriques");
+include_ecrire("inc_index");
+include_ecrire("inc_logos");
+include_ecrire('inc_forum');
 		}
 
 		// Appel depuis un fichier librairie

@@ -110,7 +110,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				|| ($kw_referer_host == "AOL" && !ereg('enc=iso', $query))
 				|| ($kw_referer_host == "MSN")
 				)) {
-				include_ecrire('inc_charsets.php3');
+				include_ecrire('inc_charsets');
 				if (!$cset = $ie) $cset = 'utf-8';
 				$keywords = importer_charset($keywords,$cset);
 			}

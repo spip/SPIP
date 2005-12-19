@@ -33,7 +33,7 @@ function separateurs_indexation($requete = false) {
 
 function nettoyer_chaine_indexation($texte) {
 	global $translitteration_complexe;
-	include_ecrire("inc_charsets.php3");
+	include_ecrire("inc_charsets");
 
 	// translitteration complexe (vietnamien, allemand)
 	if ($translitteration_complexe) {
@@ -91,7 +91,7 @@ function extracteur_txt($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
 	// Reconnaitre le BOM utf-8 (0xEFBBBF)
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	if (bom_utf8($contenu))
 		$charset = 'utf-8';
 
@@ -103,7 +103,7 @@ function extracteur_html($fichier, &$charset) {
 	lire_fichier($fichier, $contenu);
 
 	// Importer dans le charset local
-	include_ecrire('inc_charsets.php3');
+	include_ecrire('inc_charsets');
 	$contenu = transcoder_page($contenu);
 	$charset = $GLOBALS['meta']['charset'];
 
@@ -131,13 +131,13 @@ function indexer_contenu_document ($row) {
 
 	// Voir si on sait lire le contenu (eventuellement en chargeant le
 	// fichier extract_pdf.php dans find_in_path() )
-	if ($plugin = find_in_path('extract_'.$extension.'.php')) {
+	if ($plugin = find_in_path('extract_'.$extension)) {
 		include_local($plugin);
 	}
 	if (function_exists($lire = $extracteur[$extension])) {
 		// Voir si on a deja une copie du doc distant
 		// Note: si copie_locale() charge le doc, elle demande une reindexation
-		include_ecrire('inc_distant.php');
+		include_ecrire('inc_distant');
 		if (!$fichier = copie_locale($row['fichier'], 'test')) {
 			spip_log("pas de copie locale de '$fichier'");
 			return;
@@ -219,7 +219,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 	// marquer "en cours d'indexation"
 	spip_query("UPDATE $table SET idx='idx' WHERE $col_id=$id_objet");
 
-	include_ecrire("inc_texte.php3");
+	include_ecrire("inc_texte");
 
 	spip_log("indexation $type $id_objet");
 	$index = '';
@@ -310,7 +310,7 @@ function indexer_objet($type, $id_objet, $forcer_reset = true) {
 		}
 		// Aller chercher la page d'accueil
 		if ($GLOBALS['meta']["visiter_sites"] == "oui") {
-			include_ecrire('inc_distant.php');
+			include_ecrire('inc_distant');
 			spip_log ("indexation contenu syndic ".$row['url_site']);
 			indexer_chaine(supprimer_tags(
 				recuperer_page($row['url_site'], true, false, 50000)
@@ -661,7 +661,6 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 		// ecrire le cache de la recherche sur le disque
 		ecrire_fichier($fcache, serialize($cache[$recherche]));
 		// purger le petit cache
-		# include_local('./inc-cache.php3'); # deja inclus
 		nettoyer_petit_cache('rech', 300);
 	}
 

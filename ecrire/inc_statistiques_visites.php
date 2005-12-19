@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire("inc_statistiques.php3");
+include_ecrire("inc_presentation");
+include_ecrire("inc_statistiques");
 
 // Donne la hauteur du graphe en fonction de la valeur maximale
 // Doit etre un entier "rond", pas trop eloigne du max, et dont

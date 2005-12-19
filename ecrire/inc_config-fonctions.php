@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation.php3");
-include_ecrire ("inc_config.php3");
+include_ecrire("inc_presentation");
+include_ecrire ("inc_config");
 
 function config_fonctions_dist()
 {
@@ -404,7 +404,7 @@ function proxy_config()
 
 	// Masquer un eventuel password authentifiant
 	if ($http_proxy = $GLOBALS['meta']["http_proxy"]) {
-		include_ecrire ("inc_distant.php3");
+		include_ecrire ("inc_distant");
 		$http_proxy=entites_html(no_password_proxy_url($http_proxy));
 	}
 
@@ -439,7 +439,7 @@ function htpasswd_config()
 {
 	global $spip_lang_right;
 
-	include_ecrire ("inc_acces.php3");
+	include_ecrire ("inc_acces");
 	ecrire_acces();
 
 	debut_cadre_trait_couleur("cadenas-24.gif", false, "",
@@ -469,7 +469,7 @@ function htaccess_config()
 
 	debut_cadre_trait_couleur("cadenas-24.gif", false, "", 
 			  _L("Acc&egrave;s aux document joints par leur URL"));
-#	include_ecrire ("inc_acces.php3"); vient d'etre fait
+#	include_ecrire ("inc_acces"); vient d'etre fait
 	$creer_htaccess = gerer_htaccess();
 
 	echo "<div class='verdana2'>";
