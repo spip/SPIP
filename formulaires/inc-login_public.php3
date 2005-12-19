@@ -1,11 +1,21 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include(_FILE_CONNECT);
-include_ecrire("inc_meta.php3");
-include_ecrire("inc_session.php3");
-include_ecrire("inc_filtres.php3");
+include_ecrire("inc_meta");
+include_ecrire("inc_session");
+include_ecrire("inc_filtres");
 
 global $balise_LOGIN_PUBLIC_collecte;
 $balise_LOGIN_PUBLIC_collecte = array('url');
@@ -50,7 +60,7 @@ function login_explicite($login, $cible) {
 	    $cible = _DIR_RESTREINT ;
 	}
 	      
-	include_ecrire("inc_session.php3");
+	include_ecrire("inc_session");
 	verifier_visiteur();
 
 	if ($auteur_session AND 
@@ -73,7 +83,7 @@ function login_pour_tous($login, $cible, $action) {
 	if (_request('var_echec_cookie'))
 		$echec_cookie = ($_COOKIE['spip_session'] != 'test_echec_cookie');
 	if ($echec_cookie AND !$ignore_auth_http) {
-		include_ecrire('inc_headers.php');
+		include_ecrire('inc_headers');
 		if (php_module())
 			$auth_http = 'spip_cookie.php3';
 	}
@@ -116,7 +126,7 @@ function login_pour_tous($login, $cible, $action) {
 				array('login' => htmlspecialchars($login)));
 			$row = array();
 			$login = '';
-			include_ecrire('inc_cookie.php');
+			include_ecrire('inc_cookie');
 			spip_setcookie("spip_admin", "", time() - 3600);
 		} else {
 			// on laisse le menu decider de la langue

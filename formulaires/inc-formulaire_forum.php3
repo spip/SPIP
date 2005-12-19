@@ -1,20 +1,30 @@
 <?php
 
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2005                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_ecrire('inc_meta.php3');
-include_ecrire('inc_session.php3');
-include_ecrire('inc_acces.php3');
-include_ecrire('inc_texte.php3');
-include_ecrire('inc_lang.php3');
-include_ecrire('inc_mail.php3');
-include_ecrire('inc_forum.php3');
-include_ecrire("inc_abstract_sql.php3");
+include_ecrire('inc_meta');
+include_ecrire('inc_session');
+include_ecrire('inc_acces');
+include_ecrire('inc_texte');
+include_ecrire('inc_lang');
+include_ecrire('inc_mail');
+include_ecrire('inc_forum');
+include_ecrire("inc_abstract_sql");
 include_local(_FILE_CONNECT);
 
 // Gestionnaire d'URLs
 if (@file_exists("inc-urls.php3"))
-	include_local("inc-urls.php3");
+	include_local("inc-urls");
 else
 	include_local("inc-urls-".$GLOBALS['type_urls'].".php3");
 
@@ -266,13 +276,13 @@ function balise_FORMULAIRE_FORUM_dyn($titre, $table, $forums_publics, $id_rubriq
 
 function barre_forum($texte)
 {
-	include_ecrire('inc_layer.php3');
+	include_ecrire('inc_layer');
 
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";
 	static $num_formulaire = 0;
 	$num_formulaire++;
-	include_ecrire('inc_barre.php3');
+	include_ecrire('inc_barre');
 	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true) .
 	  "
 <textarea name='texte' rows='12' class='forml' cols='40'
@@ -345,7 +355,7 @@ function table_des_mots($table, $les_mots) {
 
 
 function afficher_petits_logos_mots($id_mot) {
-	include_ecrire('inc_logos.php3');
+	include_ecrire('inc_logos');
 	$on = cherche_image_nommee("moton$id_mot");
 	if ($on) {
 	  $image = ("$on[0]$on[1].$on[2]");
