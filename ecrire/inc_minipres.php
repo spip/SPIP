@@ -73,9 +73,10 @@ function aide($aide='') {
 
 	if (!$aide OR $spip_display == 4) return;
 
-	return "&nbsp;&nbsp;<a class='aide' href=\"". _DIR_RESTREINT
-		. "aide_index.php3?aide=$aide&amp;"
-		. "var_lang=$spip_lang\" target=\"spip_aide\" "
+	return "&nbsp;&nbsp;<a class='aide' href=" 
+		. http_php_script(_DIR_RESTREINT . "aide_index", 
+			"aide=$aide&var_lang=$spip_lang")
+		. " target=\"spip_aide\" "
 		. "onclick=\"javascript:window.open(this.href,"
 		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "
 		. "height=580'); return false;\">"
@@ -86,12 +87,15 @@ function aide($aide='') {
 }
 
 function info_copyright() {
-	global $spip_version_affichee;
+  global $spip_version_affichee, $spip_lang;
 
 	echo _T('info_copyright', 
 		   array('spip' => "<b>SPIP $spip_version_affichee</b> ",
 			      'lien_gpl' => 
-				"<a href='aide_index.php3?aide=licence&var_lang=".$GLOBALS['spip_lang']."' target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
+				"<a href=" .
+			 http_php_script(_DIR_RESTREINT . "aide_index", 
+					 "aide=licence&var_lang=$spip_lang") .
+			 " target='spip_aide' onClick=\"javascript:window.open(this.href, 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580'); return false;\">" . _T('info_copyright_gpl')."</a>"));
 
 }
 
@@ -161,6 +165,18 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 		'>' .
 		$clic .
 		'</a>';
+}
+
+// fabrique un appel a un script php
+// cette fonction est destinee a assurer la transition
+// entre les scripts ecrire/*.php3  et le script generique ecrire/index.php
+
+function http_php_script($script, $args) {
+	return '"' .
+	  $script .
+	  _EXTENSION_PHP .
+	  (!$args ? "" : ('?'  .str_replace('&', '&amp;', $args))) .
+	  '"';
 }
 
 // produit une balise img avec un champ alt d'office si vide
