@@ -233,7 +233,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo "<div style='width: 200px;'>";
 			$retour = urlencode($GLOBALS['clean_link']->getUrl());
 			$titre = urlencode($cherche_mot);
-			icone_horizontale(_T('icone_creer_mot_cle'), "mots_edit.php3?new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&titre=$titre&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), http_php_scriptnq("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 		}
 
@@ -521,7 +521,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
 			$retour = urlencode($GLOBALS['clean_link']->getUrl());
-			icone_horizontale(_T('icone_creer_mot_cle'), "mots_edit.php3?new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour", "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), http_php_scriptnq("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 			echo "</td></tr>";
 		}

@@ -232,12 +232,12 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	$activer_statistiques = $GLOBALS['meta']["activer_statistiques"];
 
 	if ($connect_statut == "0minirezo" AND $statut_article == 'publie' AND $visites > 0 AND $activer_statistiques != "non" AND $options == "avancees"){
-	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), "statistiques_visites.php3?id_article=$id_article", "statistiques-24.gif","rien.gif");
+	icone_horizontale(_T('icone_evolution_visites', array('visites' => $visites)), http_php_scriptnq("statistiques_visites","id_article=$id_article"), "statistiques-24.gif","rien.gif");
 }
 
 	if ((($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions)
 		AND $id_version>1 AND $options == "avancees") {
-	icone_horizontale(_T('info_historique_lien'), "articles_versions.php3?id_article=$id_article", "historique-24.gif", "rien.gif");
+	icone_horizontale(_T('info_historique_lien'), http_php_scriptnq("articles_versions","id_article=$id_article"), "historique-24.gif", "rien.gif");
 }
 
 	// Correction orthographique
@@ -580,12 +580,12 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='art
 function bouton_modifier_articles($id_article, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
-	  icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", $ip, $im);
+	  icone(_T('icone_modifier_article'), http_php_scriptnq("articles_edit","id_article=$id_article"), $ip, $im);
 		echo "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>";
 		echo aide("artmodif");
 	}
 	else {
-		icone(_T('icone_modifier_article'), "articles_edit.php3?id_article=$id_article", "article-24.gif", "edit.gif");
+		icone(_T('icone_modifier_article'), http_php_scriptnq("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
 	}
 
 }
@@ -960,14 +960,14 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			echo "<td background='' width='10'> &nbsp; </td>";
 		}
 		echo "<td>";
-		icone_horizontale(_T('trad_new'), "articles_edit.php3?new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique", "traductions-24.gif", "creer.gif");
+		icone_horizontale(_T('trad_new'), http_php_scriptnq("articles_edit","new=oui&lier_trad=$id_article&id_rubrique=$id_rubrique"), "traductions-24.gif", "creer.gif");
 		echo "</td>";
 		if ($flag_editable AND $options == "avancees" AND $ret) {
 			echo "<td background='' width='10'> &nbsp; </td>";
 			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 			echo "<td>";
-			icone_horizontale(_T('trad_delier'), "articles.php3?id_article=$id_article&supp_trad=oui", "traductions-24.gif", "supprimer.gif");
+			icone_horizontale(_T('trad_delier'), http_php_scriptnq("articles","id_article=$id_article&supp_trad=oui"), "traductions-24.gif", "supprimer.gif");
 			echo "</td>\n";
 		}
 
@@ -1064,7 +1064,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 		echo "<div style='width: 200px;'>";
 		$retour = urlencode($GLOBALS['clean_link']->getUrl());
 		$titre = urlencode($cherche_auteur);
-		icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+		icone_horizontale(_T('icone_creer_auteur'), http_php_scriptnq("auteur_infos","new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
 
 		// message pour ne pas afficher le second bouton "creer un auteur"
@@ -1209,7 +1209,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
 	$retour = urlencode($GLOBALS['clean_link']->getUrl());
-	icone_horizontale(_T('icone_creer_auteur'), "auteur_infos.php3?new=oui&ajouter_id_article=$id_article&redirect=$retour", "redacteurs-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_creer_auteur'), http_php_scriptnq("auteur_infos","new=oui&ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
 	}

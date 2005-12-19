@@ -1434,7 +1434,7 @@ WHERE	(lien.id_message='$id_message'
 		if (!($amj == date_anneemoisjour($date_fin) AND ereg("00:00:00", $date_fin)))  // Ne pas prendre la fin a minuit sur jour precedent
 			$evenements[$amj][$id_message]=
 			  array(
-				'URL' => "message.php3?id_message=$id_message",
+				'URL' => http_php_scriptnq("message","id_message=$id_message"),
 				'DTSTART' => date_ical($date_heure),
 				'DTEND' => date_ical($date_fin),
 				'DESCRIPTION' => $row['texte'],

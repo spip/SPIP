@@ -119,11 +119,11 @@ function colonne_gauche_accueil($id_rubrique, $activer_breves,
 if ($spip_display == 4) {
 	debut_raccourcis();
 	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"))) {
-		icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif","creer.gif");
+		icone_horizontale(_T('icone_ecrire_article'), http_php_scriptnq("articles_edit","new=oui"), "article-24.gif","creer.gif");
 	
 
 		if ($activer_breves != "non") {
-			icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+			icone_horizontale(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui"), "breve-24.gif","creer.gif");
 		}
 	}
 	else {
@@ -132,7 +132,7 @@ if ($spip_display == 4) {
 		}
 	}
 	if ($connect_statut == '0minirezo' and $connect_toutes_rubriques) {
-		icone_horizontale(_T('icone_creer_rubrique_2'), "rubriques_edit.php3?new=oui", "rubrique-24.gif","creer.gif");
+		icone_horizontale(_T('icone_creer_rubrique_2'), http_php_scriptnq("rubriques_edit","new=oui"), "rubrique-24.gif","creer.gif");
 	}
 	fin_raccourcis();
  } else {
@@ -147,24 +147,24 @@ if ($spip_display == 4) {
 			}
 	if ($connect_statut == "0minirezo") {
 			$gadget .= "<td>";
-			$gadget .= icone_horizontale(_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui", "rubrique-24.gif", "creer.gif", false);
+			$gadget .= icone_horizontale(_T('icone_creer_rubrique'), http_php_scriptnq("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
 			$gadget .= "</td>";
 		}
 	if (spip_num_rows(spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1"))) {
 			$gadget .= "<td>";
-			$gadget .= icone_horizontale(_T('icone_ecrire_article'), "articles_edit.php3?new=oui$dans_rub", "article-24.gif","creer.gif", false);
+			$gadget .= icone_horizontale(_T('icone_ecrire_article'), http_php_scriptnq("articles_edit","new=oui$dans_rub"), "article-24.gif","creer.gif", false);
 			$gadget .= "</td>";
 			
 			if ($activer_breves != "non") {
 				$gadget .= "<td>";
-				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui$dans_rub", "breve-24.gif","creer.gif", false);
+				$gadget .= icone_horizontale(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui$dans_rub"), "breve-24.gif","creer.gif", false);
 				$gadget .= "</td>";
 			}
 			
 			if ($activer_sites == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<td>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), "sites_edit.php3?new=oui&target=sites.php3$dans_parent", "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), http_php_scriptnq("sites_edit","new=oui&target=sites.php3$dans_parent"), "site-24.gif","creer.gif", false);
 					$gadget .= "</td>";
 				}
 			}
@@ -180,25 +180,25 @@ if ($spip_display == 4) {
 		$nombre_articles = spip_num_rows(spip_query("SELECT art.id_article FROM spip_articles AS art, spip_auteurs_articles AS lien WHERE lien.id_auteur = '$connect_id_auteur' AND art.id_article = lien.id_article LIMIT 1"));
 		if ($nombre_articles > 0) {
 			$gadget .= "<td>";
-			$gadget .= icone_horizontale (_T('icone_tous_articles'), "articles_page.php3", "article-24.gif", "", false);
+			$gadget .= icone_horizontale (_T('icone_tous_articles'), http_php_scriptnq("articles_page",""), "article-24.gif", "", false);
 			$gadget .= "</td>";
 		}
 	
 		if ($activer_breves != "non"){
 			$gadget .= "<td>";
-			$gadget .= icone_horizontale (_T('icone_breves'), "breves.php3", "breve-24.gif", "", false);
+			$gadget .= icone_horizontale (_T('icone_breves'), http_php_scriptnq("breves",""), "breve-24.gif", "", false);
 			$gadget .= "</td>";
 		}
 	
 		if ($articles_mots != "non") {
 			$gadget .= "<td>";
-			$gadget .= icone_horizontale  (_T('icone_mots_cles'), "mots_tous.php3", "mot-cle-24.gif", "", false);
+			$gadget .= icone_horizontale  (_T('icone_mots_cles'), http_php_scriptnq("mots_tous",""), "mot-cle-24.gif", "", false);
 			$gadget .= "</td>";
 		}
 
 		if ($activer_sites<>'non') {
 			$gadget .= "<td>";
-			$gadget .= icone_horizontale  (_T('icone_sites_references'), "sites_tous.php3", "site-24.gif", "", false);
+			$gadget .= icone_horizontale  (_T('icone_sites_references'), http_php_scriptnq("sites_tous",""), "site-24.gif", "", false);
 			$gadget .= "</td>";
 		}
 		$gadget .= "</tr></table></center>\n";

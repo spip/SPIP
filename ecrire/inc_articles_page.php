@@ -33,12 +33,12 @@ function articles_page_dist()
 
 	if (spip_num_rows($result) > 0) {
 		debut_raccourcis();
-		icone_horizontale (_T('icone_ecrire_article'), "articles_edit.php3?new=oui", "article-24.gif", "creer.gif");
+		icone_horizontale (_T('icone_ecrire_article'), http_php_scriptnq("articles_edit","new=oui"), "article-24.gif", "creer.gif");
 		fin_raccourcis();
 	} else {
 		if ($connect_statut == '0minirezo') {
 		echo _T('texte_creer_rubrique');
-		icone_horizontale (_T('icone_creer_rubrique'), "rubriques_edit.php3?new=oui&retour=nav", "rubrique-24.gif", "creer.gif");
+		icone_horizontale (_T('icone_creer_rubrique'), http_php_scriptnq("rubriques_edit","new=oui&retour=nav"), "rubrique-24.gif", "creer.gif");
 	}
 }
 

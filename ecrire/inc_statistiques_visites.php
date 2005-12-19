@@ -223,7 +223,7 @@ else {
 	if ($connect_statut == '0minirezo') {
 		if ($id_article > 0) {
 			debut_raccourcis();
-			icone_horizontale(_T('icone_retour_article'), "articles.php3?id_article=$id_article", "article-24.gif","rien.gif");
+			icone_horizontale(_T('icone_retour_article'), http_php_scriptnq("articles","id_article=$id_article"), "article-24.gif","rien.gif");
 			fin_raccourcis();
 		}
 	}

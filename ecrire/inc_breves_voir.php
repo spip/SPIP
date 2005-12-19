@@ -74,7 +74,7 @@ if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubri
 			    _T('logo_breve').aide ("breveslogo"), _T('logo_survol'), $retour);
 
 debut_raccourcis();
-icone_horizontale(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui", "breve-24.gif","creer.gif");
+icone_horizontale(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui"), "breve-24.gif","creer.gif");
 fin_raccourcis();
 
 debut_droite();
@@ -93,7 +93,7 @@ echo "</td>";
 if ($flag_editable) {
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_modifier_breve'), "breves_edit.php3?id_breve=$id_breve&retour=nav", "breve-24.gif", "edit.gif");
+	icone(_T('icone_modifier_breve'), http_php_scriptnq("breves_edit","id_breve=$id_breve&retour=nav"), "breve-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -195,12 +195,12 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	
 	echo "<table>";
 	echo "<td  align='right'>";
-	icone(_T('icone_publier_breve'), "breves.php3?id_breve=$id_breve&statut=publie&id_rubrique=$id_rubrique", "breve-24.gif", "racine-24.gif");
+	icone(_T('icone_publier_breve'), http_php_scriptnq("breves","id_breve=$id_breve&statut=publie&id_rubrique=$id_rubrique"), "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_refuser_breve'), "breves.php3?id_breve=$id_breve&statut=refuse&id_rubrique=$id_rubrique", "breve-24.gif", "supprimer.gif");
+	icone(_T('icone_refuser_breve'), http_php_scriptnq("breves","id_breve=$id_breve&statut=refuse&id_rubrique=$id_rubrique"), "breve-24.gif", "supprimer.gif");
 	echo "</td>";
 	
 

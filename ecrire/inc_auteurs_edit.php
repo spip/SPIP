@@ -90,7 +90,7 @@ function table_auteurs_edit($auteur)
 	echo "<td>";
 	
 	if (statut_modifiable_auteur($id_auteur, $auteur)) {
-		icone (_T("admin_modifier_auteur"), "auteur_infos.php3?id_auteur=$id_auteur", "redacteurs-24.gif", "edit.gif");
+		icone (_T("admin_modifier_auteur"), http_php_scriptnq("auteur_infos","id_auteur=$id_auteur"), "redacteurs-24.gif", "edit.gif");
 	}
 	echo "</td></tr></table>";
 

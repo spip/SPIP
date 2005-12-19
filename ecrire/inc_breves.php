@@ -42,7 +42,7 @@ function enfant_breves($leparent){
 						 
 		if ($editable) {
 		  echo "<div align='$spip_lang_right'>";
-		  icone(_T('icone_nouvelle_breve'), "breves_edit.php3?new=oui&id_rubrique=$id_rubrique", "breve-24.gif", "creer.gif");
+		  icone(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif");
 		  echo "</div>";
 		}
 		fin_cadre_enfonce();
