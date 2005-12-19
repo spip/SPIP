@@ -1491,7 +1491,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			// Titre
 			//
 
-			$s = "<A HREF='message.php3?id_message=$id_message' style='display: block;'>";
+			$s = "<A href=" . http_php_script("message","id_message=$id_message") . " style='display: block;'>";
 
 			switch ($type) {
 			case 'pb' :
