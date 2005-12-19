@@ -15,13 +15,22 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ecrire_stats() {
+	global $_SERVER;
 	global $id_article, $id_breve, $id_rubrique;
 
-	if ($GLOBALS['HTTP_X_FORWARDED_FOR'])
-		$log_ip = $GLOBALS['HTTP_X_FORWARDED_FOR'];
-	else
-		$log_ip = $GLOBALS['REMOTE_ADDR'];
+	// Rejet des robots (qui sont pourtant des humains comme les autres)
+	if (preg_match(
+	',google|yahoo|msnbot|crawl|lycos|voila|slurp|jeeves|teoma,i',
+	$_SERVER['HTTP_USER_AGENT']))
+		return;
 
+	// Ne pas compter les visiteurs sur les flux rss (qui sont pourtant
+	// des pages web comme les autres) [hack pourri en attendant de trouver
+	// une meilleure idee ?]
+	if (preg_match(',^backend,', $GLOBALS['fond']))
+		return;
+
+	// Identification de l'element
 	if ($log_id_num = intval($id_rubrique))
 		$log_type = "rubrique";
 	else if ($log_id_num = intval($id_article))
@@ -31,15 +40,20 @@ function ecrire_stats() {
 	else
 		$log_type = "autre";
 
-	// Conversion IP 4 octets -> entier 32 bits
-	if (preg_match(",^(::ffff:)?([0-9]+)\.([0-9]+)\.([0-9]+)\.([0-9]+)$,",
-	$log_ip, $r))
-		$log_ip = sprintf("%02x%02x%02x%02x", $r[2], $r[3], $r[4], $r[5]);
-	else
-		return;
+	// Identification du client ("unique")
+	if ($_SERVER['HTTP_X_FORWARDED_FOR']) {
+		$client_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else {
+		$client_ip = $_SERVER['REMOTE_ADDR'];
+	}
+	$client_id = substr(md5(
+		$client_ip . $_SERVER['HTTP_USER_AGENT']
+		. $_SERVER['HTTP_ACCEPT'] . $_SERVER['HTTP_ACCEPT_LANGUAGE']
+		. $_SERVER['HTTP_ACCEPT_ENCODING']
+	), 0,10);
 
 	// Analyse du referer
-	if ($log_referer = $GLOBALS['HTTP_REFERER']) {
+	if ($log_referer = $_SERVER['HTTP_REFERER']) {
 		$url_site_spip = preg_replace(',^((https?|ftp)://)?(www\.)?,i', '',
 			$GLOBALS['meta']['adresse_site']);
 		if (($url_site_spip<>'')
@@ -51,7 +65,7 @@ function ecrire_stats() {
 	}
 
 	//
-	// stockage sous forme de fichier dans ecrire/data/stats_200511161005/ip
+	// stockage sous forme de fichier ecrire/data/stats_200511161005/client_id
 	//
 
 	// 1. Chercher dans les paniers recents (moins de 30 minutes) s'il existe
@@ -59,7 +73,7 @@ function ecrire_stats() {
 	$content = array();
 	for ($i = -5; $i <= 0; $i++) {
 		$panier = date('YmdHi', (intval(time()/300)+$i)*300);
-		if (@file_exists($s = _DIR_SESSIONS.'stats_'.$panier.'/'.$log_ip)) {
+		if (@file_exists($s = _DIR_SESSIONS.'stats_'.$panier.'/'.$client_id)) {
 			lire_fichier($s, $content);
 			$content = @unserialize($content);
 			if ($i<0) @unlink($s);
