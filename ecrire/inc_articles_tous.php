@@ -80,7 +80,7 @@ if ($text_article)
 			else
 			  $c = 'claire';
 			$text_article[$id_trad]["trad"]["$lang"] =
- "<a class='$c' href='articles.php3?id_article=$id_article'>$lang</a>";
+ "<a class='$c' href=" . http_php_script("articles","id_article=$id_article") . ">$lang</a>";
 		}
 	}
 
@@ -269,7 +269,7 @@ function afficher_rubriques_filles($id_parent) {
 			
 			if ($enfant[$id_rubrique] OR $article[$id_rubrique]) echo bouton_block_invisible("rubrique$id_rubrique");
 			
-			echo "<b class='verdana2'><a href='naviguer.php3?id_rubrique=$id_rubrique'>";
+			echo "<b class='verdana2'><a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . ">";
 			echo $titre;
 			echo "</b></a></div>\n";
 			
@@ -292,7 +292,7 @@ function afficher_rubriques_filles($id_parent) {
 						if ($text_article[$zarticle]["id_trad"] == 0 OR $text_article[$zarticle]["id_trad"] == $zarticle) {
 							//echo "<div style='position: relative;'$direction_generale>";
 							if (strlen($traductions)>0) echo "<div class='trad_float'>$traductions</div>";
-							echo "<a class='".$text_article[$zarticle]["statut"]."' href='articles.php3?id_article=$zarticle'>";
+							echo "<a class='".$text_article[$zarticle]["statut"]."' href=" . http_php_script("articles","id_article=$zarticle") . ">";
 							if (($GLOBALS['meta']['multi_rubriques'] == 'oui' OR $GLOBALS['meta']['multi_articles'] == 'oui') AND $GLOBALS['meta']['gerer_trad'] == 'oui') echo "<span class='lang_base'$direction_generale>".$text_article[$zarticle]["lang"]."</span> ";
 							echo "<span>".$text_article[$zarticle]["titre"]."</span></a>";	
 							//echo "</div>\n";

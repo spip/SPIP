@@ -49,7 +49,7 @@ if (count($modules) > 1) {
 	reset($modules);
 	while (list(, $nom_module) = each($modules)) {
 		if ($nom_module == $module) echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><b>$nom_module</b></div>";
-		else echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><a href='lang_raccourcis.php3?module=$nom_module'>$nom_module</a></div>";
+		else echo "<div style='padding-$spip_lang_left: 10px;' class='verdana3'><a href=" . http_php_script("lang_raccourcis","module=$nom_module") . ">$nom_module</a></div>";
 	}
 	echo fin_cadre_relief();
 }

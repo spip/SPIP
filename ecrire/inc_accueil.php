@@ -63,14 +63,14 @@ if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirez
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'");
 		if (($row = spip_fetch_array($result)) AND $row['compte'])
-			echo "<br><small><a href='sites_tous.php3' style='color: black;'>".$row['compte']." "._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')."</a></small>";
+			echo "<br><small><a href=" . http_php_script("sites_tous","") . " style='color: black;'>".$row['compte']." "._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')."</a></small>";
 	}
 
 	// Les forums en attente de moderation
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query ("SELECT COUNT(*) AS compte FROM spip_forum WHERE statut='prop'");
 		if (($row = spip_fetch_array($result)) AND $row['compte']) {
-			echo "<br><small> <a href='controle_forum.php3' style='color: black;'>".$row['compte'];
+			echo "<br><small> <a href=" . http_php_script("controle_forum","") . " style='color: black;'>".$row['compte'];
 			if ($row['compte']>1)
 				echo " "._T('info_liens_syndiques_3')
 				." "._T('info_liens_syndiques_4');
@@ -307,7 +307,7 @@ if ($spip_display != 4) {
 	if ($spip_display != 1) {
 		include_ecrire('inc_logos');
 		if ($logo = decrire_logo("rubon0")) {
-			echo "<div style='text-align:center; margin-bottom: 5px;'><a href='naviguer.php3'>";
+			echo "<div style='text-align:center; margin-bottom: 5px;'><a href=" . http_php_script("naviguer","") . ">";
 			echo reduire_image_logo(_DIR_IMG.$logo[0], 170);
 			echo "</a></div>";
 		}

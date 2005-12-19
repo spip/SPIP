@@ -862,7 +862,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 						$bio = " title=\"$bio\"";
 
 
-					$les_auteurs .= ", <a href='auteurs_edit.php3?id_auteur=$id_auteur'$bio>$nom_auteur</a>";
+					$les_auteurs .= ", <a href=" . http_php_script("auteurs_edit","id_auteur=$id_auteur") . "$bio>$nom_auteur</a>";
 					if ($id_auteur != $connect_id_auteur AND $auteur_messagerie != "non") {
 						$les_auteurs .= "&nbsp;".bouton_imessage($id_auteur, $row);
 					}
@@ -1103,7 +1103,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			}
 			
 			if (!$span_lang)
-				$span_lang = "<a href='articles.php3?id_article=$id_article'><span class='lang_base'>$lang</a></a>";
+				$span_lang = "<a href=" . http_php_script("articles","id_article=$id_article") . "><span class='lang_base'>$lang</a></a>";
 
 			
 			$vals[] = "<div style='text-align: center;'>$span_lang</div>";
@@ -1209,7 +1209,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
 
 			$s = "<div>";
-			$s .= "<a href='breves_voir.php3?id_breve=$id_breve' style=\"display:block;\">";
+			$s .= "<a href=" . http_php_script("breves_voir","id_breve=$id_breve") . " style=\"display:block;\">";
 
 			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
 				include_ecrire("inc_logos");
@@ -1234,7 +1234,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			if ($affrub) {
 				$rub = spip_fetch_array(spip_query("SELECT id_rubrique, titre FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 				$id_rubrique = $rub['id_rubrique'];
-				$s .= "<a href='naviguer.php3?id_rubrique=$id_rubrique' style=\"display:block;\">".typo($rub['titre'])."</a>";
+				$s .= "<a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . " style=\"display:block;\">".typo($rub['titre'])."</a>";
 			} else if ($statut != "prop")
 				$s = affdate_jourcourt($date_heure);
 			else
@@ -1522,7 +1522,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 				$auteurs = '';
 				while ($row_auteurs = spip_fetch_array($result_auteurs)) {
 					$id_auteur = $row_auteurs['id_auteur'];
-					$auteurs[] = "<a href='auteurs_edit.php3?id_auteur=$id_auteur'>".typo($row_auteurs['nom'])."</a>";
+					$auteurs[] = "<a href=" . http_php_script("auteurs_edit","id_auteur=$id_auteur") . ">".typo($row_auteurs['nom'])."</a>";
 				}
 
 				if ($auteurs AND $type == 'normal') {
@@ -1563,7 +1563,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 
 				$s = "<div " . 
 				  http_style_background('rv-12.gif', "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px") .
-				  "><a href='calendrier.php3?type=jour&jour=$jour&mois=$mois&annee=$annee'><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
+				  "><a href=" . http_php_script("calendrier","type=jour&jour=$jour&mois=$mois&annee=$annee") . "><b style='color: black;'>$s</b><br />$heure-$heure_fin</a></div>";
 			} else {
 				$s = "<font color='#999999'>$s</font>";
 			}
@@ -1704,7 +1704,7 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 			echo "</span>";
 			
 			if ($id_auteur)
-				echo " <a href='auteurs_edit.php3?id_auteur=$id_auteur'>".typo($auteur)."</a>";
+				echo " <a href=" . http_php_script("auteurs_edit","id_auteur=$id_auteur") . ">".typo($auteur)."</a>";
 			else if ($email_auteur)
 				echo " <a href='mailto:$email_auteur'>".typo($auteur)."</a>";
 			else
@@ -2596,33 +2596,33 @@ if (true /*$bandeau_colore*/) {
 	echo "<table align='center' cellpadding='0' background='' width='$largeur'><tr width='$largeur'>";
 
 	echo "<td valign='middle' class='bandeau_couleur' style='text-align: $spip_lang_left;'>";
-//		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\">" .
+//		echo "<a href=" . http_php_script("articles_tous","") . " class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\">" .
 //		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
 		$id_rubrique = $GLOBALS['id_rubrique'];
-		echo "<a href='articles_tous.php3' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('ajax_page.php?fonction=aff_nav_recherche&id=$id_rubrique','nav-recherche');\">" .
+		echo "<a href=" . http_php_script("articles_tous","") . " class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('ajax_page.php?fonction=aff_nav_recherche&id=$id_rubrique','nav-recherche');\">" .
 		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
-		if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
+		if ($id_rubrique > 0) echo "<a href=" . http_php_script("brouteur","id_rubrique=$id_rubrique") . " class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20' border='0'") ."</a>";
-		else echo "<a href='brouteur.php3' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
+		else echo "<a href=" . http_php_script("brouteur","") . " class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\" >" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
-		echo "<a href='recherche.php3' class='icone26' onMouseOver=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\" >" .
+		echo "<a href=" . http_php_script("recherche","") . " class='icone26' onMouseOver=\"changestyle('bandeaurecherche','visibility','visible'); findObj('form_recherche').focus();\" >" .
 		  http_img_pack("loupe.png", "", "width='26' height='20' border='0'") ."</a>";
 
 		echo http_img_pack("rien.gif", " ", "width='10'");
 
-		echo "<a href='calendrier.php3?type=semaine' class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\">" .
+		echo "<a href=" . http_php_script("calendrier","type=semaine") . " class='icone26' onMouseOver=\"changestyle('bandeauagenda','visibility','visible');\">" .
 		  http_img_pack("cal-rv.png", "", "width='26' height='20' border='0'") ."</a>";
-		echo "<a href='messagerie.php3' class='icone26' onMouseOver=\"changestyle('bandeaumessagerie','visibility','visible');\">" .
+		echo "<a href=" . http_php_script("messagerie","") . " class='icone26' onMouseOver=\"changestyle('bandeaumessagerie','visibility','visible');\">" .
 		  http_img_pack("cal-messagerie.png", "", "width='26' height='20' border='0'") ."</a>";
-		echo "<a href='synchro.php3' class='icone26' onMouseOver=\"changestyle('bandeausynchro','visibility','visible');\">" .
+		echo "<a href=" . http_php_script("synchro","") . " class='icone26' onMouseOver=\"changestyle('bandeausynchro','visibility','visible');\">" .
 		  http_img_pack("cal-suivi.png", "", "width='26' height='20' border='0'") . "</a>";
 		
 
 		if (!($connect_statut == "0minirezo" AND $connect_toutes_rubriques)) {
 			echo http_img_pack("rien.gif", " ", "width='10'");
-			echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
+			echo "<a href=" . http_php_script("auteurs_edit","id_auteur=$connect_id_auteur") . " class='icone26' onMouseOver=\"changestyle('bandeauinfoperso','visibility','visible');\">" .
 			  http_img_pack("fiche-perso.png", "", "border='0' onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 			echo "</a>";
 		}
@@ -2700,7 +2700,7 @@ if (true /*$bandeau_colore*/) {
 		echo "<td class='bandeau_couleur' style='text-align: $spip_lang_right; width: 28px;' valign='middle'>";
 
 			if ($auth_can_disconnect) {	
-				echo "<a href='../spip_cookie.php3?logout=$connect_login' class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">" .
+				echo "<a href=" . http_php_script("../spip_cookie","logout=$connect_login") . " class='icone26' onMouseOver=\"changestyle('bandeaudeconnecter','visibility', 'visible');\">" .
 				  http_img_pack("deconnecter-24.gif", "", "border='0'") . "</a>";
 			}
 		echo "</td>";
@@ -2724,7 +2724,7 @@ if (true /*$gadgets*/) {
 	// GADGET Menu rubriques
 	echo "<div style='position: relative; z-index: 1000;'>";
 	echo "<div id='bandeautoutsite' class='bandeau_couleur_sous' style='$spip_lang_left: 0px;'>";
-	echo "<a href='articles_tous.php3' class='lien_sous'>"._T('icone_site_entier')."</a>";
+	echo "<a href=" . http_php_script("articles_tous","") . " class='lien_sous'>"._T('icone_site_entier')."</a>";
 	echo "<img src='"._DIR_IMG_PACK."searching.gif' id='img_nav-recherche' style='border:0px; visibility: hidden' />";
 	afficher_menu_rubriques();
 
@@ -2738,8 +2738,8 @@ if (true /*$gadgets*/) {
 	// GADGET Navigation rapide
 	echo "<div id='bandeaunavrapide' class='bandeau_couleur_sous' style='$spip_lang_left: 30px; width: 300px;'>";
 
-	if ($id_rubrique > 0) echo "<a href='brouteur.php3?id_rubrique=$id_rubrique' class='lien_sous'>";
-	else echo "<a href='brouteur.php3' class='lien_sous'>";
+	if ($id_rubrique > 0) echo "<a href=" . http_php_script("brouteur","id_rubrique=$id_rubrique") . " class='lien_sous'>";
+	else echo "<a href=" . http_php_script("brouteur","") . " class='lien_sous'>";
 	echo _T('icone_brouteur');
 	echo "</a>";
 
@@ -2755,7 +2755,7 @@ if (true /*$gadgets*/) {
 				$id_article = $row['id_article'];
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>\n";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href=" . http_php_script("articles","id_article=$id_article") . ">$titre</a>\n";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -2773,7 +2773,7 @@ if (true /*$gadgets*/) {
 				$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 				$statut = $row['statut'];
 	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='articles.php3?id_article=$id_article'>$titre</a>";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href=" . http_php_script("articles","id_article=$id_article") . ">$titre</a>";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -2791,7 +2791,7 @@ if (true /*$gadgets*/) {
 				$titre = typo(sinon($row['titre'], _T('ecrire:info_sans_titre')));
 				$statut = $row['statut'];
 	
-				$gadget .= "<a class='$statut' style='font-size: 10px;' href='breves_voir.php3?id_breve=$id_breve'>$titre</a>";
+				$gadget .= "<a class='$statut' style='font-size: 10px;' href=" . http_php_script("breves_voir","id_breve=$id_breve") . ">$titre</a>";
 			}
 			$gadget .= "</div>";
 			$gadget .= "</div>";
@@ -2884,7 +2884,7 @@ if (true /*$gadgets*/) {
 
 		// Calendrier
 			$gadget .= "<div id='bandeauagenda' class='bandeau_couleur_sous' style='width: $largeur; $spip_lang_left: 100px;'>";
-			$gadget .= "<a href='calendrier.php3?type=semaine' class='lien_sous'>";
+			$gadget .= "<a href=" . http_php_script("calendrier","type=semaine") . " class='lien_sous'>";
 			$gadget .= _T('icone_agenda');
 			$gadget .= "</a>";
 			
@@ -2915,7 +2915,7 @@ if (true /*$gadgets*/) {
 	// GADGET Messagerie
 	$gadget = '';
 		$gadget .= "<div id='bandeaumessagerie' class='bandeau_couleur_sous' style='$spip_lang_left: 130px; width: 200px;'>";
-		$gadget .= "<a href='messagerie.php3' class='lien_sous'>";
+		$gadget .= "<a href=" . http_php_script("messagerie","") . " class='lien_sous'>";
 		$gadget .= _T('icone_messagerie_personnelle');
 		$gadget .= "</a>";
 		
@@ -2934,14 +2934,14 @@ if (true /*$gadgets*/) {
 
 		// Suivi activite	
 		echo "<div id='bandeausynchro' class='bandeau_couleur_sous' style='$spip_lang_left: 160px;'>";
-		echo "<a href='synchro.php3' class='lien_sous'>";
+		echo "<a href=" . http_php_script("synchro","") . " class='lien_sous'>";
 		echo _T('icone_suivi_activite');
 		echo "</a>";
 		echo "</div>";
 	
 		// Infos perso
 		echo "<div id='bandeauinfoperso' class='bandeau_couleur_sous' style='width: 200px; $spip_lang_left: 200px;'>";
-		echo "<a href='auteurs_edit.php3?id_auteur=$connect_id_auteur' class='lien_sous'>";
+		echo "<a href=" . http_php_script("auteurs_edit","id_auteur=$connect_id_auteur") . " class='lien_sous'>";
 		echo _T('icone_informations_personnelles');
 		echo "</a>";
 		echo "</div>";
@@ -2952,7 +2952,7 @@ if (true /*$gadgets*/) {
 	
 		// Deconnection
 		echo "<div class='bandeau_couleur_sous' id='bandeaudeconnecter' style='$spip_lang_right: 0px;'>";
-		echo "<a href='../spip_cookie.php3?logout=$connect_login' class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
+		echo "<a href=" . http_php_script("../spip_cookie","logout=$connect_login") . " class='lien_sous'>"._T('icone_deconnecter')."</a>".aide("deconnect");
 		echo "</div>";
 	
 		$decal = 0;
@@ -2980,7 +2980,7 @@ if (true /*$gadgets*/) {
 			echo $simple;
 
 			if ($options != "avancees") {		
-				echo "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href='index.php3?&set_options=avancees'>"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>";
+				echo "<div>&nbsp;</div><div style='width: 250px; text-align: $spip_lang_left;'>"._T('texte_actualite_site_1')."<a href=" . http_php_script("index","&set_options=avancees") . ">"._T('texte_actualite_site_2')."</a>"._T('texte_actualite_site_3')."</div>";
 			}
 
 		echo "</div>";
@@ -3007,10 +3007,10 @@ if (true /*$gadgets*/) {
 			if ($total_messages == 1) {
 				while($row = @spip_fetch_array($result_messages)) {
 					$ze_message=$row['id_message'];
-					echo "<div class='messages'><a href='message.php3?id_message=$ze_message'><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
+					echo "<div class='messages'><a href=" . http_php_script("message","id_message=$ze_message") . "><font color='$couleur_foncee'>"._T('info_nouveau_message')."</font></a></div>";
 				}
 			}
-			if ($total_messages > 1) echo "<div class='messages'><a href='messagerie.php3'><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
+			if ($total_messages > 1) echo "<div class='messages'><a href=" . http_php_script("messagerie","") . "><font color='$couleur_foncee'>"._T('info_nouveaux_messages', array('total_messages' => $total_messages))."</font></a></div>";
 
 
 	// Afficher les auteurs recemment connectes
@@ -3042,7 +3042,7 @@ if (true /*$gadgets*/) {
 					while ($row = spip_fetch_array($result_auteurs)) {
 						$id_auteur = $row["id_auteur"];
 						$nom_auteur = typo($row["nom"]);
-						echo " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href='auteurs_edit.php3?id_auteur=$id_auteur' style='color: #666666;'>$nom_auteur</a>";
+						echo " &nbsp; ".bouton_imessage($id_auteur,$row)."&nbsp;<a href=" . http_php_script("auteurs_edit","id_auteur=$id_auteur") . " style='color: #666666;'>$nom_auteur</a>";
 					}
 				}
 			}
@@ -3215,7 +3215,7 @@ function debut_droite($rubrique="") {
 					}
 					
 					echo "<div style='padding: 3px; background-color: $couleur;'>";
-					echo "<div class='verdana1'><b><a href='articles.php3?id_article=$ze_article'>$ze_titre</a></div></b>";
+					echo "<div class='verdana1'><b><a href=" . http_php_script("articles","id_article=$ze_article") . ">$ze_titre</a></div></b>";
 					
 					// ne pas proposer de debloquer si c'est l'article en cours d'edition
 					if ($ze_article != $GLOBALS['id_article_bloque']) {
@@ -3350,7 +3350,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 
 			$parents = "<div class='verdana3' ". 
 			  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-			  "><a href='naviguer.php3?id_rubrique=$id_rubrique'>".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+			  "><a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . ">".typo($titre)."</a></div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
 
 
 		}
@@ -3360,7 +3360,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 		$logo = "racine-site-12.gif";
 		$parents = "<div class='verdana3' " .
 		  http_style_background($logo, "$spip_lang_left center no-repeat; padding-$spip_lang_left: 15px"). 
-		  "><a href='naviguer.php3?id_rubrique=$id_rubrique'><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
+		  "><a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . "><b>"._T('lien_racine_site')."</b></a>".aide ("rubhier")."</div>\n<div style='margin-$spip_lang_left: 15px;'>".$parents."</div>";
 	
 		echo $parents;
 		

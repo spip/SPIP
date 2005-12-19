@@ -114,7 +114,7 @@ function afficher_choix_vignette($process) {
 		
 	} */
 
-	echo "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'><a href='config-fonctions.php3?image_process=$process'><img src='../spip_image.php3?action=tester&doc=$process' border='$border' /></a><br />";
+	echo "<td  width='".($taille_preview+4)."'><div align='center' valign='bottom' width='".($taille_preview+4)."'><a href=" . http_php_script("config-fonctions","image_process=$process") . "><img src='../spip_image.php3?action=tester&doc=$process' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";
 	echo "</div></td>\n";

@@ -689,7 +689,7 @@ function afficher_groupe_mots($id_groupe) {
 
 
 				if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
-					$vals[] = "<div style='text-align:right;'><a href='mots_tous.php3?conf_mot=$id_mot'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
+					$vals[] = "<div style='text-align:right;'><a href=" . http_php_script("mots_tous","conf_mot=$id_mot") . ">"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
 				} 
 
 				$table[] = $vals;			
