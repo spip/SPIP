@@ -82,9 +82,7 @@ function upgrade_dist()
 
   if ($ok) {
 	$hash = calculer_action_auteur("purger_cache");
-	redirige_par_entete("../spip_cache.php3?purger_cache=oui"
-		."&id_auteur=$connect_id_auteur&hash=$hash"
-		."&redirect=" .  _DIR_RESTREINT_ABS);
+	redirige_par_entete(http_php_script("../spip_cache", "purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS));
   }
   else {
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));
@@ -118,7 +116,6 @@ function info_install()
 	}
 	// Soit on est dans le site public
 	else if (defined("_INC_PUBLIC")) {
-		# on ne peut pas deviner ces repertoires avant l'installation !
 		$db_ok = false;
 		include_ecrire ("inc_minipres");
 		install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
