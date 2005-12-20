@@ -18,7 +18,7 @@ function upgrade_dist()
   global $connect_id_auteur, $spip_version, $reinstall;
 
   if (!_FILE_CONNECT) {
-	header("Location: " . http_php_script('install'));
+	header("Location: " . 'install' . _EXTENSION_PHP);
 	exit;
   }
 
@@ -113,7 +113,7 @@ function info_install()
  {
 	// Soit on est dans ecrire/ et on envoie sur l'installation
 	if (@file_exists("inc_version.php3")) {
-		header("Location: " . http_php_script('install'));
+		header("Location: " . 'install' . _EXTENSION_PHP);
 		exit;
 	}
 	// Soit on est dans le site public
