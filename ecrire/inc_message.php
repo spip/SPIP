@@ -494,7 +494,7 @@ function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 	debut_gauche();
 	
 	if ($rv != 'non')
-	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, 'calendrier.php3');
+	  echo http_calendrier_agenda ($lannee, $lemois, $lejour, $lemois, $lannee,false, http_php_script('calendrier'));
 	
 	echo "<br />";
 	
@@ -517,7 +517,7 @@ function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 		  }
 		creer_colonne_droite();	
 
-		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,'calendrier.php3');
+		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,http_php_script('calendrier'));
 		echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90, array($sh, $ah));
 	}
 
