@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
-include ("inc_signatures.php3");
+include_ecrire("inc_signatures");
 
 function message_de_signature($row)
 {
@@ -71,7 +71,7 @@ if ($connect_statut == "0minirezo") {
 
 	spip_query("DELETE FROM spip_signatures WHERE NOT (statut='publie' OR statut='poubelle') AND date_time<DATE_SUB(NOW(),INTERVAL 10 DAY)");
 
-	controle_signatures('controle_petition.php3',
+	controle_signatures('controle_petition',
 			    $id_article,
 			    $debut, 
 			    "(statut='publie' OR statut='poubelle')",
