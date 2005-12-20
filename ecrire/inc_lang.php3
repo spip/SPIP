@@ -25,7 +25,7 @@ function include_lang($file) {
 
 function charger_langue($lang, $module = 'spip') {
 
-	$fichier_lang = $module.'_'.$lang.'.php3';
+	$fichier_lang = $module.'_'.$lang._EXTENSION_PHP;
 	$fichier_lang_exists = @is_readable(_DIR_LANG . $fichier_lang);
 
 	if ($fichier_lang_exists) {
@@ -37,15 +37,15 @@ function charger_langue($lang, $module = 'spip') {
 		// *par definition* doit exister, et on copie le tableau dans la
 		// var liee a la langue
 		$l = $GLOBALS['meta']['langue_site'];
-		if (!is_readable(_DIR_LANG . $module.'_'.$l.'.php3'))
+		if (!is_readable(_DIR_LANG . $module.'_'.$l._EXTENSION_PHP));
 			$l = 'fr';
-		$fichier_lang = $module.'_' .$l. '.php3';
+		$fichier_lang = $module.'_' .$l . _EXTENSION_PHP;
 		if (is_readable(_DIR_LANG . $fichier_lang)) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
 			include_lang($fichier_lang);
 			$GLOBALS['i18n_'.$module.'_'.$lang]
 				= &$GLOBALS['i18n_'.$module.'_'.$l];
-			#spip_log("module de langue : ${module}_$l.php3");
+			#spip_log("module de langue : ${module}_$l.php");
 		}
 	}
 }
@@ -136,13 +136,13 @@ function traduire_chaine($code, $args) {
 		if (empty($GLOBALS[$var])) {
 			charger_langue($spip_lang, $module);
 
-			// surcharge perso -- on cherche local(_xx).php3 dans le chemin
+			// surcharge perso -- on cherche local(_xx).php dans le chemin
 			if ($f = find_in_path('local.php3'))
 				surcharger_langue($f);
-			if ($f = find_in_path('local_'.$spip_lang.'.php3'))
+			if ($f = find_in_path('local_'.$spip_lang._EXTENSION_PHP))
 				surcharger_langue($f);
 			// compatibilite ascendante : chercher aussi dans ecrire/lang/
-			else if (@is_readable($f = _DIR_LANG . 'local_'.$spip_lang.'.php3'))
+			else if (@is_readable($f = _DIR_LANG . 'local_'.$spip_lang._EXTENSION_PHP))
 				surcharger_langue($f);
 
 		}

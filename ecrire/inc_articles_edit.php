@@ -137,10 +137,10 @@ echo "<P><HR><P>";
 	$texte = entites_html($texte);
 	$ps = entites_html($ps);
 
-	echo "<FORM ACTION='",
-	  'articles.php3', 
-	  ($id_article ? "?id_article=$id_article" : ""),
-	  "' METHOD='post' name='formulaire'>\n";
+	echo "<FORM ACTION=",
+	  http_php_script('articles', 
+			  ($id_article ? "?id_article=$id_article" : "")),
+	  " method='POST' name='formulaire'>\n";
 
 	if ($id_article)
 		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE='$id_article'>";
