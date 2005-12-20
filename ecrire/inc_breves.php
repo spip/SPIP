@@ -55,12 +55,13 @@ function changer_statut_breves($id_breve, $statut)
 	$query = "SELECT statut FROM spip_breves WHERE id_breve=$id_breve";
 	$result = spip_query($query);
 	if ($row = spip_fetch_array($result)) {
-        	$statut_ancien = $row['statut'];
-	}
+		$id_rubrique= $row['id_rubrique'];
+		$statut_ancien = $row['statut'];
+		}
 
-	if ($statut != $statut_ancien) {
-        	$query = "UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve";
-		$result = spip_query($query);
+	if (($statut != $statut_ancien) AND 
+	    ($connect_toutes_rubriques OR acces_rubrique($id_rubrique))) {
+		spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve");
 
 		include_ecrire("inc_rubriques");
 		calculer_rubriques();
