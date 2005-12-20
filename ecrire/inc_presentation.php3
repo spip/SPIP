@@ -879,7 +879,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 
-			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
+			$s .= "<a href=" . http_php_script("articles","id_article=$id_article") . "$descriptif$dir_lang style=\"display:block;\">";
 
 			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
 				include_ecrire("inc_logos");
@@ -1091,12 +1091,13 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			while (list(,$k) = each($langues_site)) {
 				if ($langues_art[$k]) {
 					if ($langues_art[$k] == $id_trad) {
-						$span_lang = "<a href='articles.php3?id_article=".$langues_art[$k]."'><span class='lang_base'>$k</a></a>";
+					  $span_lang = "<a href=" . http_php_script("articles","id_article=".$langues_art[$k]) . "><span class='lang_base'>$k</a></a>";
 						$l .= $span_lang;
 					} else {
 						$date = $dates_art[$k];
-						if ($date < $date_ref) $l .= "<a href='articles.php3?id_article=".$langues_art[$k]."' class='claire'>$k</a>";
-						else $l .= "<a href='articles.php3?id_article=".$langues_art[$k]."' class='foncee'>$k</a>";
+						if ($date < $date_ref) 
+						  $l .= "<a href=" . http_php_script("articles","id_article=".$langues_art[$k]) . " class='claire'>$k</a>";
+						else $l .= "<a href=" . http_php_script("articles","id_article=".$langues_art[$k]) . " class='foncee'>$k</a>";
 					}			
 				}
 #				else $l.= "<span class='creer'>$k</span>";
@@ -1115,9 +1116,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			if (acces_restreint_rubrique($id_rubrique))
 				$s .= http_img_pack("admin-12.gif", "", "width='12' height='12'", _T('titre_image_admin_article'));
 
-			$s .= "<a href=\"articles.php3?id_article=$id_article\"$descriptif$dir_lang style=\"display:block;\">";
-
-			
+			$s .= "<a href=" . http_php_script("articles","id_article=$id_article") . "$descriptif$dir_lang style=\"display:block;\">";
 			
 			
 			if ($id_article == $id_trad) $titre = "<b>$titre</b>";
@@ -1313,7 +1312,7 @@ function afficher_rubriques($titre_table, $requete) {
 			$s = http_img_pack($puce, '- ', "border='0'");
 			$vals[] = $s;
 	
-			$s = "<b><a href=\"naviguer.php3?id_rubrique=$id_rubrique\">";
+			$s = "<b><a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . ">";
 			$s .= typo($titre);
 			$s .= "</A></b>";
 			$vals[] = $s;
@@ -1418,7 +1417,7 @@ function afficher_auteurs ($titre_table, $requete) {
 			$nom = $row['nom'];
 
 			$s = bonhomme_statut($row);
-			$s .= "<a href=\"auteurs_edit.php3?id_auteur=$id_auteur\">";
+			$s .= "<a href=" . http_php_script("auteurs_edit","id_auteur=$id_auteur") . ">";
 			$s .= typo($nom);
 			$s .= "</a>";
 			$vals[] = $s;
@@ -1491,7 +1490,7 @@ function afficher_messages($titre_table, $query_message, $afficher_auteurs = tru
 			// Titre
 			//
 
-			$s = "<A href=" . http_php_script("message","id_message=$id_message") . " style='display: block;'>";
+			$s = "<a href=" . http_php_script("message","id_message=$id_message") . " style='display: block;'>";
 
 			switch ($type) {
 			case 'pb' :
@@ -1727,9 +1726,11 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			if (!$controle_id_article) {
 				echo "<div align='right' class='verdana1'>";
-				$url = "forum_envoi.php3?id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)
-					."&titre_message=".rawurlencode($titre);
-				echo "<b><a href=\"$url\">"._T('lien_repondre_message')."</a></b></div>";
+				echo "<b><a href=",
+				  http_php_script("forum_envoi","id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)."&titre_message=".rawurlencode($titre)), 
+				  ">",
+				  _T('lien_repondre_message'),
+				  "</a></b></div>";
 			}
 
 			if ($mots_cles_forums == "oui"){
@@ -1829,21 +1830,22 @@ function envoi_link($nom_site_spip, $rubrique="")
 
 	$res = "";
 	if ($spip_display != 4) {
-		$res .= "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href='$adresse_site/backend.php3' >\n";
+	  $res .= "<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)."' href=" . http_php_script("$adresse_site/backend","") . ">\n";
 		if ($GLOBALS['meta']["activer_breves"] != "non")
-			$res .= "\n<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").")' href='$adresse_site/backend-breves.php3' >\n";
+			$res .= "\n<link rel='alternate' type='application/rss+xml' title='".addslashes($nom_site_spip)." ("._T("info_breves_03").
+			  ")' href=" . http_php_script("$adresse_site/backend-breves","") . ">\n";
 	}
 
 	return $res .
-	  '<link rel="stylesheet" type="text/css" href="' .
-	  _DIR_RESTREINT .
-	  'spip_style.php3?couleur_claire=' .
-	  urlencode($couleur_claire) .
-	  '&amp;couleur_foncee=' .
-	  urlencode($couleur_foncee) .
-	  '&amp;left=' . 
-	  $GLOBALS['spip_lang_left'] .
-	  "\" >\n" .
+	  '<link rel="stylesheet" type="text/css" href=' .
+	  http_php_script(_DIR_RESTREINT . 'spip_style',
+			  "couleur_claire=" .
+			  urlencode($couleur_claire) .
+			  '&couleur_foncee=' .
+			  urlencode($couleur_foncee) .
+			  '&left=' . 
+			  $GLOBALS['spip_lang_left']) .
+	  ">\n" .
 	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 
 	// CSS calendrier
@@ -2366,10 +2368,10 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 if ($spip_display == "4") {
 	// Icones principales
 	echo "<ul>";
-	echo "<li><a href=\"index.php3\">"._T('icone_a_suivre')."</a>";
-	echo "<li><a href=\"naviguer.php3\">"._T('icone_edition_site')."</a>";
-	echo "<li><a href=\"forum_admin.php3\">"._T('titre_forum')."</a>";
-	echo "<li><a href=\"auteurs.php3\">"._T('icone_auteurs')."</a>";
+	echo "<li><a href=" . http_php_script("index") . ">"._T('icone_a_suivre')."</a>";
+	echo "<li><a href=" . http_php_script("naviguer") . ">"._T('icone_edition_site')."</a>";
+	echo "<li><a href=" . http_php_script("forum_admin"). ">"._T('titre_forum')."</a>";
+	echo "<li><a href=" . http_php_script("auteurs") . ">"._T('icone_auteurs')."</a>";
 	echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
 	echo "</ul>";
 }
@@ -2403,7 +2405,9 @@ else {
 	echo "<td> &nbsp; </td>";
 
 	icone_bandeau_principal (_T('icone_aide_ligne'),
-		"javascript:window.open('aide_index.php3?var_lang=$spip_lang', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
+				 "javascript:window.open(" .
+				 http_php_script("aide_index","var_lang=$spip_lang") .
+				 ", 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
 		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
 		"vide", "", http_php_scriptnq("aide_index","var_lang=$spip_lang"),
 		"aide-en-ligne", $sous_rubrique);
@@ -2766,7 +2770,7 @@ if (true /*$gadgets*/) {
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
-			$gadget .= bandeau_titre_boite2(afficher_plus("index.php3")._T('info_articles_proposes'), "article-24.gif", '', '', false);
+			$gadget .= bandeau_titre_boite2(afficher_plus(http_php_scriptnq("index"))._T('info_articles_proposes'), "article-24.gif", '', '', false);
 			$gadget .= "<div class='plan-articles'>";
 			while($row = spip_fetch_array($vos_articles)) {
 				$id_article = $row['id_article'];
@@ -2830,7 +2834,7 @@ if (true /*$gadgets*/) {
 			if ($GLOBALS['meta']["activer_sites"] == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), http_php_scriptnq("sites_edit","new=oui&target=sites.php3$dans_parent"), "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), http_php_scriptnq("sites_edit","new=oui$dans_parent&target=" . http_php_scriptnq("sites")), "site-24.gif","creer.gif", false);
 					$gadget .= "</div>";
 				}
 			}
@@ -2891,7 +2895,7 @@ if (true /*$gadgets*/) {
 			$gadget .= "<table><tr>";
 			$gadget .= "<td valign='top' width='200'>";
 				$gadget .= "<div>";
-				$gadget .= http_calendrier_agenda($annee_today, $mois_today, $jour_today, $mois_today, $annee_today, false, 'calendrier.php3');
+				$gadget .= http_calendrier_agenda($annee_today, $mois_today, $jour_today, $mois_today, $annee_today, false, http_php_scriptnq('calendrier'));
 				$gadget .= "</div>";
 				$gadget .= "</td>";
 				if ($afficher_cal) {
@@ -2920,10 +2924,10 @@ if (true /*$gadgets*/) {
 		$gadget .= "</a>";
 		
 		$gadget .= "<div>&nbsp;</div>";
-		$gadget .= icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif", '', false);
-		$gadget .= icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif", '', false);
+		$gadget .= icone_horizontale(_T('lien_nouvea_pense_bete'),http_php_scriptnq("message_edit","new=oui&type=pb"), "pense-bete.gif", '', false);
+		$gadget .= icone_horizontale(_T('lien_nouveau_message'),http_php_scriptnq("message_edit","new=oui&type=normal"), "message.gif", '', false);
 		if ($connect_statut == "0minirezo") {
-			$gadget .= icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif", '', false);
+		  $gadget .= icone_horizontale(_T('lien_nouvelle_annonce'),http_php_scriptnq("message_edit","new=oui&type=affich"), "annonce.gif", '', false);
 		}
 		$gadget .= "</div>";
 
@@ -3117,7 +3121,7 @@ function debut_gauche($rubrique = "asuivre") {
 		$largeur_ecran = 974;
 		
 		// Si edition de texte, formulaires larges
-		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php3', $GLOBALS['REQUEST_URI'])) {
+		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php', $GLOBALS['REQUEST_URI'])) {
 			$flag_centre_large = true;
 		}
 		
@@ -3272,8 +3276,7 @@ function fin_html() {
 	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
 		echo 
 		  http_img_pack('rien.gif', " ", "name='img_session' width='0' height='0'"),
-		  http_script("
-document.img_session.src='../spip_cookie.php3?change_session=oui'");
+		  http_script("\ndocument.img_session.src=" . http_php_script('../spip_cookie','change_session=oui'));
 	}
 
 	echo "</body></html>\n";
@@ -3289,12 +3292,15 @@ function fin_page($credits='') {
 	debut_grand_cadre();
 
 	# ici on en profite pour glisser une tache de fond
-	echo "<div align='right' class='verdana2' ";
-	echo "style='background: url(\"../spip_background.php3\");' ";
-	echo ">";
+	echo "<div align='right' class='verdana2' ",
+	  "style='background: url(", 
+	  http_php_script('../spip_background'),
+	  ");'>";
 
 	if ($spip_display == 4) {
-		echo "<div><a href=\"index.php3?set_disp=2\">"._T("access_interface_graphique")."</a></div>";
+	  echo "<div><a href=",
+	    http_php_script('index', 'set_disp=2'),
+	    ">"._T("access_interface_graphique")."</a></div>";
 	} else {
 		echo info_copyright();
 		echo "<br>"._T('info_copyright_doc');
@@ -3311,11 +3317,13 @@ function debloquer_article($arg, $texte)
 {
 	$lien = new Link;
 	$lien->addVar('debloquer_article', $arg);
-	return "<a href='iframe_action.php3?action=articles_page&amp;id=" .
-	  $arg .
-	  "&amp;redirect=" .
-	  urlencode($lien->getUrl()) .
-	  "' title='" .
+	return "<a href=" .
+	  http_php_script('iframe_action',
+			  "action=articles_page&id=" .
+			  $arg .
+			  "&redirect=" .
+			  urlencode($lien->getUrl())) .
+	  " title='" .
 	  addslashes($texte) .
 	  "'>$texte&nbsp;" .
 	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),
