@@ -76,19 +76,19 @@ function balise_distante_interdite($p) {
 //
 function balise_NOM_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['nom_site']";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_EMAIL_WEBMASTER_dist($p) {
 	$p->code = "\$GLOBALS['meta']['email_webmaster']";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
 function balise_CHARSET_dist($p) {
 	$p->code = "\$GLOBALS['meta']['charset']";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -168,7 +168,7 @@ function balise_DOSSIER_SQUELETTE_dist($p) {
 
 function balise_URL_SITE_SPIP_dist($p) {
 	$p->code = "\$GLOBALS['meta']['adresse_site']";
-	$p->statut = 'php';
+	$p->statut = 'html';
 	return $p;
 }
 
@@ -190,7 +190,7 @@ function balise_URL_ARTICLE_dist($p) {
 			$p->code = "url_var_recherche(" . $p->code . ")";
 	}
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -201,7 +201,7 @@ function balise_URL_RUBRIQUE_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -212,7 +212,7 @@ function balise_URL_BREVE_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -224,7 +224,7 @@ function balise_URL_MOT_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -241,7 +241,7 @@ function balise_URL_FORUM_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -249,7 +249,7 @@ function balise_URL_DOCUMENT_dist($p) {
 	$p->code = "generer_url_document(" .
 	champ_sql('id_document',$p) . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -259,7 +259,7 @@ function balise_URL_AUTEUR_dist($p) {
 	if ($p->boucles[$p->nom_boucle ? $p->nom_boucle : $p->id_boucle]->hash)
 	$p->code = "url_var_recherche(" . $p->code . ")";
 
-	$p->statut = 'html';
+	$p->statut = 'php';
 	return $p;
 }
 
@@ -287,7 +287,7 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 	} else {
 		$p->code = "\$Numrows['$b']['compteur_boucle']";
 		$p->boucles[$b]->cptrows = true;
-		$p->statut = 'php';
+		$p->statut = 'num';
 		return $p;
 	}
 }
@@ -303,7 +303,7 @@ function balise_TOTAL_BOUCLE_dist($p) {
 	} else {
 		$p->code = "\$Numrows['$b']['total']";
 		$p->boucles[$b]->numrows = true;
-		$p->statut = 'php';
+		$p->statut = 'num';
 	}
 	return $p;
 }
@@ -320,19 +320,19 @@ function balise_POPULARITE_ABSOLUE_dist($p) {
 	$p->code = 'ceil(' .
 	champ_sql('popularite', $p) .
 	')';
-	$p->statut = 'php';
+	$p->statut = 'num';
 	return $p;
 }
 
 function balise_POPULARITE_SITE_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_total\'])';
-	$p->statut = 'php';
+	$p->statut = 'num';
 	return $p;
 }
 
 function balise_POPULARITE_MAX_dist($p) {
 	$p->code = 'ceil($GLOBALS["meta"][\'popularite_max\'])';
-	$p->statut = 'php';
+	$p->statut = 'num';
 	return $p;
 }
 
@@ -520,7 +520,7 @@ function balise_POPULARITE_dist ($p) {
 	$_popularite = champ_sql('popularite', $p);
 	$p->code = "(ceil(min(100, 100 * $_popularite
 	/ max(1 , 0 + \$GLOBALS['meta']['popularite_max']))))";
-	$p->statut = 'php';
+	$p->statut = 'num';
 	return $p;
 }
 
@@ -622,14 +622,14 @@ function calculer_balise_logo ($p) {
 			."')";
 	}
 	else {
-	  $p->code = "affiche_logos(calcule_logo('$type_objet', '" .
-	    (($suite_logo == '_SURVOL') ? 'off' : 
-	     (($suite_logo == '_NORMAL') ? 'on' : 'ON')) .
-	    "', $_id_objet," .
-	    (($suite_logo == '_RUBRIQUE') ? 
-	     champ_sql("id_rubrique", $p) :
-	     (($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
-	    ",  '$flag_fichier'), $code_lien)";
+		$p->code = "affiche_logos(calcule_logo('$type_objet', '" .
+			(($suite_logo == '_SURVOL') ? 'off' : 
+			(($suite_logo == '_NORMAL') ? 'on' : 'ON')) .
+			"', $_id_objet," .
+			(($suite_logo == '_RUBRIQUE') ? 
+			champ_sql("id_rubrique", $p) :
+			(($type_objet == 'RUBRIQUE') ? "sql_parent($_id_objet)" : "''")) .
+			",  '$flag_fichier'), $code_lien)";
 	}
 	$p->statut = 'php';
 	return $p;
@@ -775,10 +775,10 @@ function balise_ENV_dist($p) {
 	if ($a = $p->param) {
 		$sinon = array_shift($a);
 		if  (!array_shift($sinon)) {
-		  $p->fonctions = $a;
-		  array_shift( $p->param );
-		  $nom = array_shift($sinon);
-		  $nom = ($nom[0]->type=='texte') ? $nom[0]->texte : "";
+			$p->fonctions = $a;
+			array_shift( $p->param );
+			$nom = array_shift($sinon);
+			$nom = ($nom[0]->type=='texte') ? $nom[0]->texte : "";
 		}
 	}
 
@@ -792,9 +792,9 @@ function balise_ENV_dist($p) {
 		$p->code = '$Pile[0]["' . addslashes($nom) . '"]';
 		if ($sinon)
 			$p->code = 'sinon('. 
-			  $p->code .
-			  compose_filtres_args($p, $sinon, ',') . 
-			  ')';
+				$p->code
+				. compose_filtres_args($p, $sinon, ',')
+				. ')';
 		$p->statut = 'php';
 	}
 
