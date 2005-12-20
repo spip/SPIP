@@ -40,12 +40,12 @@ function forum_admin_dist()
 	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
-	$urlforum = 'forum_admin.php3?admin=admin';
+	$urlforum = http_php_scriptnq('forum_admin', 'admin=admin');
   } else {
 	debut_page(_T('titre_forum'), "redacteurs", "forum-interne");
 	$statutforum = 'privrac';
 	$logo = "forum-interne-24.gif";
-	$urlforum = 'forum_admin.php3?admin=';
+	$urlforum = http_php_scriptnq('forum_admin', 'admin=');
   }
 
   debut_gauche();
@@ -64,22 +64,19 @@ function forum_admin_dist()
 
   echo "<div class='serif2'>";
 
-
   $result_forum = spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='$statutforum' AND id_parent=0 LIMIT 11");
 
   $total =  ($row = spip_fetch_array($result_forum)) ? $row['cnt'] : 0;
 
-  if ($total > 10) {
-    liste_numeros_forum($urlforum, $debut, $total);
-      }
-
+  if ($total > 10) liste_numeros_forum($urlforum, $debut, $total);
 
   echo "<p><div align='center'>";
   icone (_T('icone_poster_message'), 
-	"forum_envoi.php3?statut=$statutforum&adresse_retour=" .
-       urlencode($urlforum) . 
-       "&titre_message=" .
-       urlencode(filtrer_entites(_T('texte_nouveau_message'))),
+	 http_php_script("forum_envoi", 
+			 "statut=$statutforum&adresse_retour=" .
+			 urlencode($urlforum) . 
+			 "&titre_message=" .
+			 urlencode(filtrer_entites(_T('texte_nouveau_message')))),
        $logo, "creer.gif");
   echo "</div></p>";
 
@@ -102,7 +99,7 @@ function forum_admin_dist()
 
 # fonction invoquee par calcul dans iframe_action
 # Elle n'a rien a faire ici en fait, et devra migrer en inc_forum
-# quand on abandonnera les .php3
+# quand on abandonnera les .php 3
 
 function changer_statut_forum_admin($id_forum, $statut) {
 	$id_forum = intval($id_forum);
