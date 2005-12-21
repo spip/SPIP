@@ -199,7 +199,7 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 	echo "<center>";
 	echo "<B>"._T('texte_proposer_publication')."</B>";
 	echo aide ("artprop");
-	bouton(_T('bouton_demande_publication'), "articles.php3?id_article=$id_article&statut_nouv=prop");
+	bouton(_T('bouton_demande_publication'), http_php_scriptnq("articles", "id_article=$id_article&statut_nouv=prop"));
 	echo "</center>";
 	fin_cadre_relief();
 }
@@ -310,7 +310,7 @@ function boites_de_config_articles($id_article, $flag_editable,
 	if ($nb_forums) {
 		echo "<br />\n";
 		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)),
-		"articles_forum.php3?id_article=$id_article", "suivi-forum-24.gif", "");
+				  http_php_scriptnq("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
 	}
 
 	// Reglage existant
@@ -393,7 +393,7 @@ function boites_de_config_articles($id_article, $flag_editable,
 		if ($nb_signatures) {
 			echo "<br />\n";
 			icone_horizontale($nb_signatures.'&nbsp;'. _T('info_signatures'),
-			"controle_petition.php3?id_article=$id_article", "suivi-petition-24.gif", "");
+					  http_php_scriptnq("controle_petition","id_article=$id_article"), "suivi-petition-24.gif", "");
 		}
 
 		echo "<br />\n";
@@ -1048,7 +1048,9 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 				echo "<li><b>".typo($nom_auteur)."</b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A HREF=\"articles.php3?id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs\">"._T('lien_ajouter_auteur')."</A>";
+				echo " | <A HREF=" . 
+				  http_php_script('articles', "id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs") .
+				  ">"._T('lien_ajouter_auteur')."</A>";
 
 				if (trim($bio_auteur)) {
 					echo "<br />".couper(propre($bio_auteur), 100)."\n";
@@ -1134,31 +1136,31 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			
 			$les_auteurs[] = $id_auteur;
 
-		if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
-		else $aff_articles = "('prop', 'publie')";
+			if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
+			else $aff_articles = "('prop', 'publie')";
 
-		$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
+			$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
 			"FROM spip_auteurs_articles AS lien, spip_articles AS articles ".
 			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
 			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
-		$result2 = spip_query($query2);
-		if ($result2) list($nombre_articles) = spip_fetch_array($result2);
-		else $nombre_articles = 0;
+			$result2 = spip_query($query2);
+			if ($result2) list($nombre_articles) = spip_fetch_array($result2);
+			else $nombre_articles = 0;
 
-		$url_auteur = "auteurs_edit.php3?id_auteur=$id_auteur";
+			$vals[] = bonhomme_statut($row);
 
-		$vals[] = bonhomme_statut($row);
+			$vals[] = "<A HREF=" . 
+			  http_php_script('auteurs_edit', "id_auteur=$id_auteur") .
+			  "$bio_auteur>".typo($nom_auteur)."</A>";
 
-		$vals[] = "<A HREF=\"$url_auteur\"$bio_auteur>".typo($nom_auteur)."</A>";
-
-		$vals[] = bouton_imessage($id_auteur);
+			$vals[] = bouton_imessage($id_auteur);
 
 		
 		
-		if ($email_auteur) $vals[] =  "<A HREF='mailto:$email_auteur'>"._T('email')."</A>";
+		if ($email_auteur) $vals[] =  "<A href='mailto:$email_auteur'>"._T('email')."</A>";
 		else $vals[] =  "&nbsp;";
 
-		if ($url_site_auteur) $vals[] =  "<A HREF='$url_site_auteur'>"._T('info_site_min')."</A>";
+		if ($url_site_auteur) $vals[] =  "<A href='$url_site_auteur'>"._T('info_site_min')."</A>";
 		else $vals[] =  "&nbsp;";
 
 		if ($nombre_articles > 1) $vals[] =  $nombre_articles.' '._T('info_article_2');
@@ -1172,7 +1174,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 		}
 		
 		$table[] = $vals;
-	}
+		}
 	
 	
 	$largeurs = array('14', '', '', '', '', '', '');
@@ -1339,8 +1341,9 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
   $forum_retour = urlencode(http_php_scriptnq("articles","id_article=$id_article"));
   
   if (!$mute) {
+    $tm = urlencode($titre);
     echo "\n<div align='center'>";
-    icone(_T('icone_poster_message'), "forum_envoi.php3?statut=prive&adresse_retour=".$forum_retour."&id_article=$id_article&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
+    icone(_T('icone_poster_message'), http_php_scriptnq("forum_envoi","statut=prive&adresse_retour=$forum_retour&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
     echo "</div>";
   }
 
@@ -1550,7 +1553,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 
 function insert_article($id_parent, $new)
 {
-	if ($new!='oui')  redirige_par_entete("./index.php3");
+	if ($new!='oui')  redirige_par_entete("./");
 	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
 	if (!$id_rubrique = intval($id_parent)) {
 		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
