@@ -10,9 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire('inc_minipres');
+
 //
 // Charger un fichier langue
 //
@@ -137,7 +136,7 @@ function traduire_chaine($code, $args) {
 			charger_langue($spip_lang, $module);
 
 			// surcharge perso -- on cherche local(_xx).php dans le chemin
-			if ($f = find_in_path(http_php_script('local')))
+			if ($f = find_in_path('local' ._EXTENSION_PHP))
 				surcharger_langue($f);
 			if ($f = find_in_path('local_'.$spip_lang._EXTENSION_PHP))
 				surcharger_langue($f);
