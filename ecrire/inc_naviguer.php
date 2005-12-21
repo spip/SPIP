@@ -390,7 +390,7 @@ if ($relief) {
 
 	  $proposer_sites=$GLOBALS['meta']["proposer_sites"];
 	  if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
-		$link = new Link(http_php_script('sites_edit'));
+		$link = new Link(http_php_scriptnq('sites_edit'));
 		$link->addVar('id_rubrique', $id_rubrique);
 		$link->addVar('target', http_php_script('sites'));
 		$link->addVar('redirect', $clean_link->getUrl());
