@@ -178,7 +178,9 @@ function calculer_balise($nom, $p) {
 	// ca pourrait etre un champ SQL homonyme,
 	$p->code = index_pile($p->id_boucle, $nom, $p->boucles, $p->nom_boucle);
 
-	if (strpos($nom, 'ID_') === 0) $p->statut = 'num';
+	// ne pas passer le filtre securite sur les id_xxx
+	if (strpos($nom, 'ID_') === 0)
+		$p->interdire_scripts = false;
 
 	// Compatibilite ascendante avec les couleurs html (#FEFEFE) :
 	// SI le champ SQL n'est pas trouve
@@ -190,7 +192,7 @@ function calculer_balise($nom, $p) {
 	AND !$p->etoile
 	AND !$p->fonctions) {
 		$p->code = "'#$nom'";
-		$p->statut = 'php';
+		$p->interdire_scripts = false;
 	}
 
 	return $p;
@@ -225,7 +227,7 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	  . "), \$GLOBALS['spip_lang'],"
 	  . $p->ligne
 	  . ')';
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	$p->fonctions = array();
 	$p->param = array();
 
@@ -264,7 +266,8 @@ function applique_filtres($p) {
 	// Appliquer les filtres perso
 	if ($p->param) $code = compose_filtres($p, $code);
 	// post-traitement securite
-	if ($p->statut == 'html') $code = "interdire_scripts($code)";
+	if ($p->interdire_scripts)
+		$code = "interdire_scripts($code)";
 	return $code;
 }
 
@@ -344,7 +347,7 @@ function rindex_pile($p, $champ, $motif)
 				'motif' => $motif)
 		), $p->id_boucle);
 	}
-	$p->statut = 'php';
+	$p->interdire_scripts = false;
 	return $p;
 }
 
