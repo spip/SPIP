@@ -96,8 +96,10 @@ if ($new == 'oui') {
 
   if ($row = spip_fetch_array($result)) {
     $statut = $row["statut"];
-    if (!$id_rubrique) $id_rubrique = $row["id_rubrique"];
-    $flag_administrable &= acces_rubrique($id_rubrique);
+    if (!$id_rubrique) {
+      $id_rubrique = $row["id_rubrique"];
+      $flag_administrable = ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique));}
+
     $flag_editable = ($flag_administrable OR ($GLOBALS['meta']["proposer_sites"] > 0 AND ($statut == 'prop')));
   }
  }
@@ -370,7 +372,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date("sites.php3?id_syndic=$id_syndic&options=$options", _T('info_date_referencement'), $jour, $mois, $annee);
+		echo afficher_formulaire_date(http_php_scriptnq("sites", "id_syndic=$id_syndic&options=$options"), _T('info_date_referencement'), $jour, $mois, $annee);
 		fin_cadre_enfonce();	
 	}
 	else {
@@ -383,25 +385,28 @@ if ($flag_editable AND $options == 'avancees') {
 }
 
 if ($flag_administrable) {
-	$link = $GLOBALS['clean_link'];
-	$link->delVar('new');
-	echo $link->getForm('GET');
 	debut_cadre_relief("racine-site-24.gif");
-	echo "\n<center>";
 
-	echo "<b>"._T('info_statut_site_1')."</b> &nbsp;&nbsp; \n";
-
-	echo "<select name='nouveau_statut' size=1 class='fondl'>\n";
-
-	echo my_sel("prop",_T('info_statut_site_3'),$statut);
-	echo my_sel("publie",_T('info_statut_site_2'),$statut);
-	echo my_sel("refuse",_T('info_statut_site_4'),$statut);
-
-	echo "</select>\n";
-
-	echo " &nbsp;&nbsp;&nbsp; <input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>\n</center>\n";
+	echo "<form action=",
+	  http_php_script('sites'),
+	  ">\n",
+	  "<center><b>",
+	  _T('info_statut_site_1'),
+	  "</b> &nbsp;&nbsp; \n",
+	  "<input type='hidden' name='id_parent' value='$id_rubrique' />\n",
+	  "<input type='hidden' name='id_syndic' value='$id_syndic' />\n",
+	  "<select name='nouveau_statut' size='1' class='fondl'>\n",
+	  my_sel("prop",_T('info_statut_site_3'),$statut),
+	  my_sel("publie",_T('info_statut_site_2'),$statut),
+	  my_sel("refuse",_T('info_statut_site_4'),$statut),
+	  "</select>\n",
+	  " &nbsp;&nbsp;&nbsp; ",
+	  "<input type='submit' value='",
+	  _T('bouton_valider'),
+	  "' class='fondo' />\n",
+	  "</center>\n",
+	  "</form>\n";
 	fin_cadre_relief();
-	echo "</form>\n";
 }
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
@@ -564,7 +569,7 @@ fin_cadre_relief();
 
 echo "<br><br>\n";
 
-$forum_retour = "sites.php3?id_syndic=$id_syndic";
+ $forum_retour = http_php_scriptnq("sites","id_syndic=$id_syndic");
 
 $link = new Link(http_php_scriptnq('forum_envoi'));
 $link->addVar('statut', 'prive');
