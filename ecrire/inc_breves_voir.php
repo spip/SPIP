@@ -20,7 +20,7 @@ include_ecrire ("inc_date");
 include_ecrire ("inc_abstract_sql");
 include_ecrire ("inc_index");
 
-function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour )
+function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot )
 {
 	global $champs_extra, $options, $connect_statut, $les_notes;
 
@@ -56,8 +56,8 @@ debut_gauche();
 debut_boite_info();
 
 echo "<CENTER>";
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=1><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
-echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=6><B>$id_breve</B></FONT>";
+echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='1'><B>"._T('info_gauche_numero_breve')."&nbsp;:</B></FONT>";
+echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='6'><B>$id_breve</B></FONT>";
 echo "</CENTER>";
 
 voir_en_ligne ('breve', $id_breve, $statut);
@@ -71,7 +71,9 @@ fin_boite_info();
 
 if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
 	afficher_boite_logo('breve', 'id_breve', $id_breve,
-			    _T('logo_breve').aide ("breveslogo"), _T('logo_survol'), $retour);
+			    _T('logo_breve').aide ("breveslogo"),
+			    _T('logo_survol'), 
+			    http_php_scriptnq("breves_voir", "id_breve=$id_breve"));
 
 debut_raccourcis();
 icone_horizontale(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui"), "breve-24.gif","creer.gif");
@@ -111,11 +113,12 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date("breves_voir.php3?id_breve=$id_breve&options=$options", _T('texte_date_publication_article'), $jour, $mois, $annee);
+		echo afficher_formulaire_date(http_php_scriptnq("breves_voir", "id_breve=$id_breve&options=$options"),
+					      _T('texte_date_publication_article'), $jour, $mois, $annee);
 		fin_cadre_enfonce();	
 	}
 	else {
-		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3><B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
+		echo "<br /><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE='3'><B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
 	}
 }
 
@@ -220,7 +223,9 @@ fin_cadre_relief();
 echo "<BR><BR>";
 
 echo "\n<div align='center'>";
-icone(_T('icone_poster_message'), "forum_envoi.php3?statut=prive&adresse_retour=".urlencode($retour)."&id_breve=$id_breve&titre_message=".urlencode($titre), "forum-interne-24.gif", "creer.gif");
+ icone(_T('icone_poster_message'),
+       http_php_scriptnq("forum_envoi", "statut=prive&id_breve=$id_breve&titre_message=".urlencode($titre) . "&adresse_retour=".urlencode( http_php_scriptnq("breves_voir", "id_breve=$id_breve"))),
+       "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 
@@ -228,7 +233,7 @@ echo "<P align='left'>";
 
 
 afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"),
-	       $retour);
+	        http_php_scriptnq("breves_voir", "id_breve=$id_breve"));
 
 fin_page();
 }
@@ -253,8 +258,6 @@ if (($id_breve == 0) AND ($new == "oui")) {
 		"(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
 		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', 'non')");
 }
-
-$retour = "breves_voir.php3?id_breve=$id_breve";
 
 if (strval($titre)!='' AND $modifier_breve) {
 	$titre = addslashes($titre);
@@ -311,6 +314,6 @@ if ($jour AND $connect_statut == '0minirezo') {
 	calculer_rubriques();
 }
 
-afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot, $retour);
+ afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot);
 }
 ?>

@@ -253,7 +253,7 @@ function vider_url($url) {
 }
 
 // urls des liens spip [->article1]
-// voir la definition tordue de extraire_lien() dans inc_texte.php3
+// voir la definition tordue de extraire_lien() dans inc_texte
 function calculer_url($url) {
 	list(,$l) = extraire_lien(array('','','',vider_url($url)));
 	return $l;
