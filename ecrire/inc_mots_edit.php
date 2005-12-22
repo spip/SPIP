@@ -145,14 +145,6 @@ if ($id_mot) {
 	fin_boite_info();
 }
 
-echo "<p><center>";
-if ($new == 'oui') {
-	$adresse_retour = "mots_edit.php3?redirect=$redirect&redirect_ok=oui&supp_mot=$id_mot";
-}else {
-	$adresse_retour = "mots_edit.php3?redirect=$redirect&redirect_ok=oui";
-}
-echo "</center>";
-
 //////////////////////////////////////////////////////
 // Logos du mot-clef
 //
@@ -169,7 +161,11 @@ debut_raccourcis();
 
 if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 		icone_horizontale(_T('icone_modif_groupe_mots'), http_php_scriptnq("mots_type","id_groupe=$id_groupe"), "groupe-mot-24.gif", "edit.gif");
-		icone_horizontale(_T('icone_creation_mots_cles'), http_php_scriptnq("mots_edit","new=oui&redirect=mots_tous.php3&id_groupe=$id_groupe"), "mot-cle-24.gif", "creer.gif");
+		icone_horizontale(_T('icone_creation_mots_cles'),
+				  http_php_scriptnq("mots_edit",
+						    "new=oui&id_groupe=$id_groupe&redirect=" . http_php_scriptnq('mots_tous')), 
+				  "mot-cle-24.gif",
+				  "creer.gif");
  }
 icone_horizontale(_T('icone_voir_tous_mots_cles'), http_php_scriptnq("mots_tous",""), "mot-cle-24.gif", "rien.gif");
 
@@ -282,7 +278,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	} else {
 		$row_groupes = spip_fetch_array($result);
 		if (!$row_groupes) {
-			// il faut creer un groupe de mots (cas d'un mot cree depuis articles.php3)
+			// il faut creer un groupe de mots (cas d'un mot cree depuis le script articles)
 		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots",
 			"(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)",
 			"('" . 
