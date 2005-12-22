@@ -167,25 +167,6 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 		'</a>';
 }
 
-// ces 2 fonctions fabriquent un appel a un script php
-// elles sont destinees a assurer la transition
-// entre les scripts ecrire/*.php3 et le script generique ecrire/index.php
-
-function http_php_script($script, $args="", $retour="", $retour_args="") {
-	return '"' . 
-	  http_php_scriptnq($script, $args, $retour, $retour_args) .
-	  '"';
-}
-
-function http_php_scriptnq($script, $args="", $retour="", $retour_args="") {
-	return $script .
-		_EXTENSION_PHP .
-		(!$args ? "" : ('?'  .str_replace('&', '&amp;', $args))) .
-		(!$retour ? "" : 
-		urlencode($retour . _EXTENSION_PHP .
-			  (!$retour_args ? "" : ('?' . $retour_args))));
-}
-
 // produit une balise img avec un champ alt d'office si vide
 // attention le htmlentities et la traduction doivent etre appliques avant.
 

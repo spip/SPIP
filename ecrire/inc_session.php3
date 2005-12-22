@@ -63,8 +63,8 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-		redirige_par_entete($GLOBALS['meta']["adresse_site"] .
-				    "/spip_test_dirs.php3");
+	  redirige_par_entete(http_php_scriptnq($GLOBALS['meta']["adresse_site"] .
+						"/spip_test_dirs"));
 	}
 }
 
@@ -162,7 +162,7 @@ function zap_sessions ($id_auteur, $zap) {
 	$t = time();
 	while(($item = readdir($dir)) !== false) {
 		$chemin = _DIR_SESSIONS . $item;
-		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php3$", $item, $regs)) {
+		if (ereg("^session_([0-9]+_)?([a-z0-9]+)\.php[3]?$", $item, $regs)) {
 
 			// Si c'est une vieille session, on jette
 			if (($t - filemtime($chemin)) > 48 * 3600)

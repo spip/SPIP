@@ -70,8 +70,10 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$supprimer = false;
 			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 			if($forum_id_auteur)
-				$controle .= " - <A HREF='auteurs_edit.php3?id_auteur="
-				.$forum_id_auteur."'>" ._T('lien_voir_auteur'). "</A>";
+				$controle .= " - <A href=" .
+				  http_php_script('auteurs_edit',
+						  "id_auteur=$forum_id_auteur") .
+				  ">" ._T('lien_voir_auteur'). "</A>";
 			break;
 		# forum propose (a moderer) sur le site public
 		case "prop":
@@ -220,7 +222,7 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 			return generer_url_site($id)."#forum$id_forum";
 			break;
 		default:
-			return "forum_admin.php3?id_forum=".$id_forum;
+		  return http_php_scriptnq("forum_admin", "id_forum=".$id_forum);
 	}
 }
 
