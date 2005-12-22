@@ -12,7 +12,7 @@
 
 
 //
-// Fonctions invoquees par spip_image.php3 en fonction du parametre "action"
+// Fonctions invoquees par spip_image en fonction du parametre "action"
 //  Les globales sont les variables CGI.
 
 //
@@ -148,7 +148,7 @@ function spip_image_joindre6($arg, $mode, $type, $id, $id_document,$hash, $hash_
 {
 	    define('_tmp_dir', creer_repertoire_documents($hash));
 	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    require_once(_DIR_RESTREINT . 'pclzip.lib.php');
+	    include_ecrire('pclzip.lib');
 	    $archive = new PclZip($arg);
 	    $archive->extract(
 			      PCLZIP_OPT_PATH, _tmp_dir,
@@ -296,7 +296,7 @@ function spip_image_tester_dist($test_vignette) {
 		else {	# ancienne methode de detection des formats, qui en plus
 				# est bugguee car elle teste les formats en lecture
 				# alors que la valeur deduite sert a identifier
-				# les formats disponibles en ecriture... (cf. inc_logos.php3)
+				# les formats disponibles en ecriture... (cf. inc_logos)
 		
 			$gd_formats = Array();
 			if (function_exists('ImageCreateFromJPEG')) {
@@ -565,7 +565,7 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
   if (is_int($refus)) {
     spip_log("Acces refuse ($refus) au document " . $id_document . ': ' . $file);
   $fond = 404;
-  include("inc-public.php3");
+  include_local("inc-public");
   }
   else
     {
@@ -587,7 +587,7 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
 }
 
 // pour envoyer un article proprement
-// spip_image.php3?action=telecharger&doc=$id_article
+// spip_image.php?action=telecharger&doc=$id_article
 
 function spip_image_telecharger_dist($id_article)
 {
