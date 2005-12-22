@@ -164,10 +164,10 @@ if ($spip_display == 4) {
 			if ($activer_sites == 'oui') {
 				if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 					$gadget .= "<td>";
-					$gadget .= icone_horizontale(_T('info_sites_referencer'), http_php_scriptnq("sites_edit","new=oui&target=sites.php3$dans_parent"), "site-24.gif","creer.gif", false);
+					$gadget .= icone_horizontale(_T('info_sites_referencer'), http_php_scriptnq("sites_edit","new=oui$dans_parent&target=" . http_php_script('sites')), "site-24.gif","creer.gif", false);
 					$gadget .= "</td>";
 				}
-			}
+			} 
 			
 		}
 		$gadget .= "</tr></table></center>\n";
@@ -222,7 +222,9 @@ if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 			http_img_pack("rien.gif", ' ', "width='10'") .
 			"</td>".
 			"<td width='250'>".
-			icone_horizontale(_T('icone_activer_cookie'), "../spip_cookie.php3?cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "", false).
+			icone_horizontale(_T('icone_activer_cookie'),
+					  http_php_scriptnq( "../spip_cookie",
+							     "cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "", false).
 			"</td></tr></table>";
 	}
 }
@@ -262,9 +264,9 @@ if ($spip_display != 4) {
 			    list($titre, $descr) = $r;
 			    $rubs[] = "<a title='" .
 			      typo($descr) .
-			      "' href='naviguer.php3?id_rubrique=" .
-			      $id_rubrique .
-			      "'>" .
+			      "' href=" .
+			      http_php_script('naviguer', "id_rubrique=$id_rubrique") .
+			      ">" .
 			      typo($titre) .
 			      '</a>';
 			  }
@@ -281,7 +283,7 @@ if ($spip_display != 4) {
 	if ($_COOKIE['spip_admin']) {
 			$texte = _T('icone_supprimer_cookie');
 			if ($spip_display != 1) $texte .= aide("cookie");
-			icone_horizontale( $texte , "../spip_cookie.php3?cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS), "cookie-24.gif", "");
+			icone_horizontale( $texte , http_php_scriptnq("../spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "");
 		}
 	}
 
