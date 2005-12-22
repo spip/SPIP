@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_lang");
+include_ecrire("inc_minipres");
 include_ecrire("inc_texte");
 include_ecrire("inc_charsets");
 include_ecrire("inc_meta");
@@ -28,7 +28,7 @@ function spip_cal_dist($id_auteur, $cle)
 {
 	  if (verifier_low_sec($id_auteur, $cle, 'ical')) {
 		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$id_auteur";
-	$result 	= spip_query($query);
+		$result = spip_query($query);
 
 		if ($row = spip_fetch_array($result)) {
 			$id_utilisateur=$row['id_auteur'];
@@ -38,6 +38,7 @@ function spip_cal_dist($id_auteur, $cle)
 		}
 	  }
 	if (!$id_utilisateur) {
+		spip_log("spip_cal: acces interdit a $id_auteur par $cle");
 		echo _T('info_acces_interdit');
 		exit;
 	}
@@ -45,7 +46,7 @@ function spip_cal_dist($id_auteur, $cle)
 	$nom_site = $GLOBALS['meta']["nom_site"];
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
 
-	@header("Content-Type: text/calendar; charset=utf-8");
+	header("Content-Type: text/calendar; charset=utf-8");
 	ligne ("BEGIN:VCALENDAR");
 	ligne ("CALSCALE:GREGORIAN");
 	ligne ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur");
@@ -124,7 +125,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site, $adresse_site)
 		if ($date_heure_fin > $date_heure) ligne ("DTEND:".date_ical($date_heure_fin));
 		
 		ligne ("CATEGORIES:$le_type");
-		ligne("URL:$adresse_site/ecrire/message.php3?id_message=$id_message");
+		ligne("URL:" . http_php_scriptnq("$adresse_site/ecrire/message","id_message=$id_message"));
 		
 		ligne ("END:VEVENT");
 	}
@@ -169,7 +170,7 @@ function spip_ical_taches($id_utilisateur, $nom_site, $adresse_site)
 		ligne ("DTSTAMP:".date_ical($date_heure));
 		ligne ("DTSTART:".date_ical($date_heure));
 		ligne ("CATEGORIES:$le_type");
-		ligne ("URL:$adresse_site/ecrire/message.php3?id_message=$id_message");
+		ligne ("URL:" . http_php_scriptnq("$adresse_site/ecrire/message","id_message=$id_message"));
 		ligne ("END:VTODO");
 	}
 }
@@ -190,7 +191,7 @@ function spip_ical_articles($nom_site, $adresse_site)
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('info_article_propose'));
-		ligne("URL:$adresse_site/ecrire/articles.php3?id_article=$id_article");
+		ligne("URL:" . http_php_scriptnq("$adresse_site/ecrire/articles","id_article=$id_article"));
 		ligne ("END:VEVENT");
 	}
 	return $nb_articles;
@@ -212,7 +213,7 @@ function spip_ical_breves($nom_site, $adresse_site)
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('item_breve_proposee'));
-		ligne ("URL:$adresse_site/ecrire/breves_voir.php3?id_breve=$id_breve");
+		ligne ("URL:" . http_php_scriptnq("$adresse_site/ecrire/breves_voir","id_breve=$id_breve"));
 		ligne ("END:VEVENT");
 	}
 	return $nb_breves;
@@ -274,7 +275,7 @@ function spip_ical_messages($id_utilisateur, $nom_site, $adresse_site)
 	ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 	ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 	ligne ("CATEGORIES:$le_type");
-	ligne("URL:$adresse_site/ecrire/message.php3?id_message=$id_message");
+	ligne("URL:" . http_php_scriptnq("$adresse_site/ecrire/message","id_message=$id_message"));
 	ligne ("END:VTODO");
 	}	
 }
@@ -303,7 +304,7 @@ function spip_ical_forums($id_utilisateur, $nom_site, $adresse_site)
 		ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('icone_forum_suivi'));
-		ligne("URL:$adresse_site/ecrire/controle_forum.php3");
+		ligne("URL:" . http_php_scriptnq("$adresse_site/ecrire/controle_forum",""));
 		ligne ("END:VEVENT");
 	}
 
@@ -319,7 +320,7 @@ function spip_ical_forums($id_utilisateur, $nom_site, $adresse_site)
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
 		ligne ("DTSTART:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
 		ligne ("CATEGORIES:"._T('icone_forum_suivi'));
-		ligne("URL:$adresse_site/ecrire/controle_forum.php3");
+		ligne("URL:" . http_php_scriptnq("$adresse_site/ecrire/controle_forum",""));
 		ligne ("END:VTODO");
 	}
 }

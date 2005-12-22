@@ -17,17 +17,21 @@ include_ecrire("inc_texte");
 include_ecrire("inc_urls");
 include_ecrire("inc_acces"); // pour low_sec (iCal)
 
-function afficher_liens_calendrier($lien, $icone, $texte) {
-	global $adresse_site;
+function afficher_liens_calendrier($lien, $args, $icone, $texte) {
+	$adresse_site=$GLOBALS['meta']["adresse_site"];
 	echo debut_cadre_enfonce($icone);
 	echo $texte;
 	echo "<table style='width: 100%;><tr'><td style='width: 200px;'>";
-		icone_horizontale (_T('ical_methode_http'), "$adresse_site/$lien", "calendrier-24.gif");
+		icone_horizontale (_T('ical_methode_http'),
+				   http_php_script("$adresse_site/$lien", $args),
+				   "calendrier-24.gif");
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
 		$webcal = ereg_replace("https?://", "webcal://", $adresse_site);
-		icone_horizontale (_T('ical_methode_webcal'), "$webcal/$lien", "calendrier-24.gif");
+		icone_horizontale (_T('ical_methode_webcal'), 
+				   http_php_script("$webcal/$lien", $args),
+				   "calendrier-24.gif");
 	echo "</td></tr></table>";
 	echo fin_cadre_enfonce();
 }
@@ -93,10 +97,10 @@ echo '<p>'._T('ical_info_calendrier').'</p>';
 
 
 
-afficher_liens_calendrier(http_php_script('ical'),'', _T('ical_texte_public'));
+ afficher_liens_calendrier('ical','','', _T('ical_texte_public'));
 
 
-afficher_liens_calendrier("spip_cal.php3?id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'),'cadenas-24.gif',  _T('ical_texte_prive'));
+ afficher_liens_calendrier("spip_cal", "id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'),'cadenas-24.gif',  _T('ical_texte_prive'));
 
 
 fin_cadre_relief();
