@@ -889,12 +889,16 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 
 	if ($args_pred) {
 	  list($a, $m, $j, $t) = $args_pred;
-	  $args_pred = calendrier_args_date($script, $a, $m, $j, $t, "&echelle=$echelle&partie_cal=$partie_cal$ancre");
+	  $args_pred = http_href(calendrier_args_date($script, $a, $m, $j, $t, "&echelle=$echelle&partie_cal=$partie_cal$ancre"),
+				 http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='calendrier-png'"),
+				 _T('precedent'));
 	}
 
 	if ($args_suiv) {
 	  list($a, $m, $j, $t) = $args_suiv;
-	  $args_suiv = calendrier_args_date($script, $a, $m, $j, $t, "&echelle=$echelle&partie_cal=$partie_cal$ancre");
+	  $args_suiv = http_href(calendrier_args_date($script, $a, $m, $j, $t, "&echelle=$echelle&partie_cal=$partie_cal$ancre"),
+				 http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='calendrier-png'"),
+				 _T('suivant'));
 	}
 
 	$args_e = calendrier_args_date($script, $annee, $mois, $jour, $type, "&echelle=$echelle");
@@ -960,14 +964,8 @@ function http_calendrier_navigation($annee, $mois, $jour, $echelle, $partie_cal,
 			    ? " class='calendrier-opacity'" : "")),
 			  _T("ecrire:info_aujourdhui"))
 	  . "&nbsp;"
-	  . (!$args_pred ? '' :
-	     http_href($args_pred,
-		       http_img_pack("fleche-$spip_lang_left.png", '&lt;&lt;&lt;', "class='calendrier-png'"),
-		       _T('precedent')))
-	  . (!$args_suiv ? '' :
-	     http_href($args_suiv,
-		       http_img_pack("fleche-$spip_lang_right.png",  '&gt;&gt;&gt;', "class='calendrier-png'"),
-		       _T('suivant')))
+	  . $args_pred 
+	  . $args_suiv
 	  . "&nbsp;&nbsp;"
 	  . $nom
 	  . (_DIR_RESTREINT ? '' :  aide("messcalen"))
@@ -1152,7 +1150,7 @@ function http_calendrier_rv($messages, $type) {
 		if (ereg("^=([^[:space:]]+)$",$row['texte'],$match))
 			$url = $match[1];
 		else
-			$url = "message.php3?id_message=".$row['id_message'];
+			$url = http_php_script("message", "id_message=".$row['id_message']);
 
 		$rv = ($row['rv'] == 'oui');
 		$date = $row['date_heure'];
@@ -1167,10 +1165,17 @@ function http_calendrier_rv($messages, $type) {
 				(($date_jour == $date_rv) ? '' :
 				"<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
 				"</td></tr>";
+			$rv =
+		((affdate($date) == affdate($date_fin)) ?
+		 ("<div class='calendrier-arial9 fond-agenda'>"
+		  . heures($date).":".minutes($date)."<br />"
+		  . heures($date_fin).":".minutes($date_fin)."</div>") :
+		( "<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
+		  . heures($date).":".minutes($date)."<br />...</div>" ));
 		}
 
 		$total .= "<tr><td style='width: 24px' valign='middle'>" .
-		http_href($url,
+		  http_href($url,
 				     ($rv ?
 				      http_img_pack("rv.gif", 'rv',
 						    http_style_background($bouton . '.gif', "no-repeat;' border='0'")) : 
@@ -1178,13 +1183,7 @@ function http_calendrier_rv($messages, $type) {
 				     '', '') .
 		"</td>" .
 		"<td valign='middle'>" .
-		((!$rv) ? '' :
-		((affdate($date) == affdate($date_fin)) ?
-		 ("<div class='calendrier-arial9 fond-agenda'>"
-		  . heures($date).":".minutes($date)."<br />"
-		  . heures($date_fin).":".minutes($date_fin)."</div>") :
-		( "<div class='calendrier-arial9 fond-agenda' style='text-align: center;'>"
-		  . heures($date).":".minutes($date)."<br />...</div>" ))) .
+		$rv .
 		"<div><b>" .
 		  http_href($url, typo($row['titre']), '', '', 'calendrier-verdana10') .
 		"</b></div>" .

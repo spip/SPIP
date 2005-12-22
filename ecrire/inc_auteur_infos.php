@@ -201,7 +201,8 @@ if ($nom OR $statut) {
 
 // Redirection
 if (!$echec AND $redirect_ok == "oui") {
-	redirige_par_entete($redirect ? rawurldecode($redirect) : "auteurs_edit.php3?id_auteur=$id_auteur");
+	redirige_par_entete($redirect ? rawurldecode($redirect) :
+			    http_php_scriptnq("auteurs_edit", "id_auteur=$id_auteur"));
 }
 affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus);
 
@@ -408,7 +409,7 @@ echo "<p />";
 
  if ($apparait) apparait_auteur_infos($id_auteur, $auteur);
 
-// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
+// Afficher le formulaire de changement de statut (cf. inc_acces)
 afficher_formulaire_statut_auteur ($id_auteur, $auteur['statut']);
 
 

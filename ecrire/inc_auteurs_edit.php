@@ -102,7 +102,7 @@ function table_auteurs_edit($auteur)
 		extra_affichage($extra, "auteurs");
 	}
 
-	// Afficher le formulaire de changement de statut (cf. inc_acces.php3)
+	// Afficher le formulaire de changement de statut (cf. inc_acces)
 	if ($options == 'avancees')
 	  afficher_formulaire_statut_auteur ($id_auteur,
 			$auteur['statut'],
@@ -131,7 +131,8 @@ function table_auteurs_edit($auteur)
 		afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
 	
 		icone_horizontale(_T('info_envoyer_message_prive'),
-			"message_edit.php3?new=oui&type=normal&dest=$id_auteur", "message.gif");
+				  http_php_scriptnq("message_edit", "new=oui&type=normal&dest=$id_auteur"),
+				  "message.gif");
 		fin_cadre_couleur();
 	}
 }
