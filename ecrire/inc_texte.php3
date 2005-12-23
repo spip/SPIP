@@ -965,7 +965,7 @@ function traiter_raccourcis_generale($letexte) {
 		/* 3 */ 	"\n<br />",
 		/* 4 */ 	"\n\n$debut_intertitre",
 		/* 5 */ 	"$fin_intertitre\n\n",
-		/* 6 */ 	"<p>",
+		/* 6 */ 	"<p class=\"spip\">",
 		/* 7 */ 	"<strong class=\"spip\">",
 		/* 8 */ 	"</strong>",
 		/* 9 */ 	"<i class=\"spip\">",
@@ -974,8 +974,8 @@ function traiter_raccourcis_generale($letexte) {
 		/* 12 */	"<p class=\"spip\">",
 		/* 13 */	"<p class=\"spip\">",
 		/* 14 		" ", */
-		/* 15 */	"\n\n<blockquote class=\"spip\"><p class=\"spip\">",
-		/* 16 */	"</p></blockquote>\n\n<p class=\"spip\">"
+		/* 15 */	"<blockquote class=\"spip\"><p class=\"spip\">",
+		/* 16 */	"</blockquote><p class=\"spip\">"
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
@@ -997,10 +997,9 @@ function traiter_raccourcis_generale($letexte) {
 
 	// 2. preserver les balises-bloc
 	$blocs = 'div|pre|ul|li|blockquote|h[1-5r]|table|center|'
-		.'tr|td|th|tbody|tfoot';
-	$letexte = preg_replace(",<($blocs)[>[:space:]],i", '</no p>\0', $letexte);
-	$letexte = preg_replace(",<($blocs)[^>]*/>,i", '\0<no p>', $letexte);
-	$letexte = preg_replace(",</($blocs)[>[:space:]].*>,Uims", '\0<no p>', $letexte);
+		.'tr|td|th|tbody|tfoot|form|object';
+
+	$letexte = preg_replace(",</?($blocs)(\s[^>]*)?/?'.'>,i", '</no p>\0<no p>', $letexte);
 
 	// 3. Manger les <p ..></no p>
 	$letexte = preg_replace(
@@ -1010,7 +1009,7 @@ function traiter_raccourcis_generale($letexte) {
 	if (strpos(' '.$letexte, '<p class="spip">')) {
 		$tmp = '';
 		foreach (explode('<p class="spip">', $letexte) as $paragraphe) {
-			if (preg_match(",<(p|$blocs)[>[:space:]].*,ims",
+			if (preg_match(",<(p|/?($blocs|no p))[>[:space:]].*,ims",
 			$paragraphe, $reg))
 				$paragraphe = str_replace($reg[0], "</p>\n\n".$reg[0], $paragraphe);
 			else
