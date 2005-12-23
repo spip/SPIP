@@ -140,44 +140,15 @@ function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
 		$letexte = traiter_math($letexte, $les_echap, $num_echap, $source);
 	}
 
-	// Traitement des images et documents <IMGxx|right>
-	// (insertion dans echappe_retour pour faciliter les doublons)
-	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
-		foreach ($matches as $match) {
-			$num_echap++;
-
-			// Si le resultat contient des <div>, forcer la sortie du paragraphe
-			if ( $match[1] == "doc" OR $match[1] == "emb"
-			OR eregi("^\|center", $match[3]) )  {
-				$letexte = str_replace($match[0],
-					"</no p>@@SPIP_$source$num_echap@@<no p>", $letexte);
-			} else {
-			$letexte = str_replace($match[0],
-				"@@SPIP_$source$num_echap@@", $letexte);
-			}
-			$les_echap[$num_echap] = $match;
-		}
-	}
-
 	return array($letexte, $les_echap);
 }
 
 // Traitement final des echappements
-function echappe_retour($letexte, $les_echap, $source='') {
+function echappe_retour($letexte, $les_echap, $source='SOURCEPROPRE') {
 	$expr = ",@@SPIP_$source([0-9]+)@@,";
 	if (preg_match_all($expr, $letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$rempl = $les_echap[$reg[1]];
-# si $rempl est un tableau, c'est le resultat (cf echappe_html) de eregi sur :
-# <(IMG|DOC|EMB)([0-9]+)(\|([^\>]*))?
-			if (is_array($rempl)) {
-				include_ecrire("inc_documents");
-				$type = strtoupper($rempl[1]);
-				if ($type == 'EMB')
-					$rempl = embed_document($rempl[2], $rempl[4]);
-				else
-					$rempl = integre_image($rempl[2], $rempl[4], $type);
-			}
 			$letexte = str_replace($reg[0], $rempl, $letexte);
 		}
 	}
@@ -192,20 +163,6 @@ function supprime_img($letexte) {
 	$message = _T('img_indisponible');
 	preg_replace(__preg_img, "($message)", $letexte);
 	return $letexte;
-}
-
-# il y a 3 couples de fonctions homonymes au prefixe _doublons pres
-# pour eviter a tous les appels de se trimbaler ce qui concerne les squelettes
-
-function echappe_retour_doublon($letexte, $les_echap, $source, &$doublons)
-{
-  if (!$les_echap)
-    return $letexte;
-  foreach($les_echap as $rempl) {
-    if (is_array($rempl)) # cf commentaires dans la fonction echappe_retour
-      $doublons['documents'] .= "," . $rempl[2];
-  }
-  return echappe_retour($letexte, $les_echap, $source);
 }
 
 //
@@ -441,8 +398,11 @@ function typo_en($letexte) {
 //
 // Typographie generale
 //
-function typo_generale($letexte) {
+function typo($letexte) {
 	global $spip_lang;
+
+	// Echapper les codes <html> etc
+	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
 
 	// Appeler les fonctions de pre-traitement
 	$letexte = pipeline('pre_typo', $letexte);
@@ -495,32 +455,12 @@ function typo_generale($letexte) {
 	# un message pour abs_url - on est passe en mode texte
 	$GLOBALS['mode_abs_url'] = 'texte';
 
-	// et retour
-	return $letexte;
-}
-
-function typo($letexte) {
-	// echapper les codes <html>...</html> etc.
-	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
-	
-	$letexte = typo_generale($letexte);
 	// reintegrer les echappements
 	return echappe_retour($letexte, $les_echap, "SOURCETYPO");
 }
 
-function typo_doublon(&$doublons, $letexte)
-{
-	// echapper les codes <html>...</html> etc.
-	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
-	
-	$letexte = typo_generale($letexte);
-	// reintegrer les echappements
-	return echappe_retour_doublon($letexte, $les_echap, "SOURCETYPO", $doublons);
-}
-
-function charger_generer_url()
-{
-		// Traitement des liens internes
+function charger_generer_url() {
+	// Traitement des liens internes
 	if (!_DIR_RESTREINT)
 		include_ecrire('inc_urls');
 	else if (@file_exists("inc-urls" . _EXTENSIONS_PHP))
@@ -838,6 +778,37 @@ function traiter_listes ($texte) {
 	return substr($texte, 0, -2);
 }
 
+//
+// Traitement des images et documents <IMGxx|right>
+//
+function traiter_documents($letexte, $matches) {
+	include_ecrire("inc_documents");
+
+	foreach ($matches as $match) {
+		$type = strtoupper($match[1]);
+		if ($type == 'EMB')
+			$rempl = embed_document($match[2], $match[4]);
+		else
+			$rempl = integre_image($match[2], $match[4], $type);
+
+		// Bloquer par une <div> le lien dans le cas [<docXX>->lien]
+		// (si le document est deja une <div> et pas une simple image)
+		if (preg_match(',<div ,', $rempl)
+		AND
+		preg_match_all(
+		',<a\s[^>]*>[^>]*'.preg_quote($match[0]).'[^>]*</a>,ims',
+		$letexte, $mm, PREG_SET_ORDER))
+			foreach ($mm as $m)
+				$letexte = str_replace($m[0],
+				'<div>'.$m[0]."</div>\n\n", $letexte);
+
+		// Installer le document
+		$letexte = str_replace($match[0], $rempl, $letexte);
+	}
+
+	return $letexte;
+}
+
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
 function traiter_raccourcis_generale($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
@@ -1034,10 +1005,15 @@ function traiter_raccourcis_generale($letexte) {
 		/* 13 */	"<p class=\"spip\">",
 		/* 14 		" ", */
 		/* 15 */	"\n\n<blockquote class=\"spip\"><p class=\"spip\">",
-		/* 16 */	"</p></blockquote>\n\n"
+		/* 16 */	"</p></blockquote>\n\n<p class=\"spip\">"
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
+
+
+	// Installer les images et documents
+	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER))
+		$letexte = traiter_documents($letexte, $matches);
 
 
 	//
@@ -1049,21 +1025,30 @@ function traiter_raccourcis_generale($letexte) {
 		.'tr|td|th|tbody|tfoot';
 	$letexte = preg_replace(",<($blocs)[>[:space:]],i", '</no p>\0', $letexte);
 	$letexte = preg_replace(",<($blocs)[^>]*/>,i", '\0<no p>', $letexte);
-	$letexte = preg_replace(",</($blocs)[>[:space:]],i", '\0<no p>', $letexte);
+	$letexte = preg_replace(",</($blocs)[>[:space:]].*>,Uims", '\0<no p>', $letexte);
 
-	// 2. Ajouter le paragraphe initial et final (s'il y a lieu)
-	if (strpos(' '.$letexte, '<p class="spip">')) {
-		$letexte = '<p class="spip">'
-				.str_replace('<p class="spip">',
-					"</p>\n".'<p class="spip">', $letexte)
-				.'</p>';
-	}
-
-	// 3. Manger les <no p>
+	// 2. Manger les <no p>
 	$letexte = preg_replace(
 		',(<p([[:space:]][^>]*)?'.'>)?(\s*</no p>)+,ims', '', $letexte);
 	$letexte = preg_replace(
 		',(<no p>\s*)+(</p([[:space:]][^>]*)?'.'>)?,ims', '', $letexte);
+
+	// 3. Ajouter le paragraphe initial et final (s'il y a lieu)
+	// et fermer les paragraphes
+	if (strpos(' '.$letexte, '<p class="spip">')) {
+		$tmp = '';
+		foreach (explode('<p class="spip">', $letexte) as $paragraphe) {
+			if (preg_match(",<(p|$blocs)[>[:space:]].*,ims",
+			$paragraphe, $reg))
+				$paragraphe = str_replace($reg[0], "</p>\n\n".$reg[0], $paragraphe);
+			else
+				$paragraphe .= "</p>\n\n";
+
+			$tmp .= '<p class="spip">'.$paragraphe;
+		}
+
+		$letexte = $tmp;
+	}
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
@@ -1071,22 +1056,20 @@ function traiter_raccourcis_generale($letexte) {
 	if (function_exists('apres_propre'))
 		$letexte = apres_propre($letexte);
 
-	return array($letexte,$mes_notes);
+	return array($letexte, $mes_notes);
 }
 
 function traiter_les_notes($mes_notes, $les_echap) {
-	list($mes_notes,) = traiter_raccourcis_generale($mes_notes);
-	if (ereg('<p class="spip">',$mes_notes))
+	$mes_notes = propre($mes_notes, $les_echap);
+	if (strstr($mes_notes, '<p class="spip">'))
 		$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
 	else
 		$mes_notes = '<p class="spip_note">'.$mes_notes."</p>\n";
-	$mes_notes = echappe_retour($mes_notes, $les_echap, "SOURCEPROPRE");
-	$GLOBALS['les_notes'] .= interdire_scripts($mes_notes);
+	$GLOBALS['les_notes'] .= $mes_notes;
 }
 
 function traiter_raccourcis($letexte, $les_echap=false) {
 	// echapper les <a href>, <html>...< /html>, <code>...< /code>
-
 	if (!$les_echap)
 		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
 	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
@@ -1095,19 +1078,12 @@ function traiter_raccourcis($letexte, $les_echap=false) {
 	return trim(echappe_retour($letexte, $les_echap, "SOURCEPROPRE"));
 }
 
-function traiter_raccourcis_doublon(&$doublons, $letexte) {
-	// echapper les <a href>, <html>...< /html>, <code>...< /code>
-	list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
-	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
-	if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
-	// Reinserer les echappements
-	return trim(echappe_retour_doublon($letexte, $les_echap, "SOURCEPROPRE", $doublons));
-}
-
-
 // Filtre a appliquer aux champs du type #TEXTE*
-function propre($letexte, $echap=false) {
-	return interdire_scripts(traiter_raccourcis(trim($letexte), $echap));
+function propre($letexte, $les_echap=false) {
+	$letexte = traiter_raccourcis($letexte, $les_echap);
+	if (!_DIR_RESTREINT)
+		$letexte = interdire_scripts($letexte);
+	return $letexte;
 }
 
 ?>

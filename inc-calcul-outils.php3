@@ -349,6 +349,17 @@ function calcule_embed_document($id_document, $filtres, &$doublons, $doubdoc) {
 	return embed_document($id_document, $filtres, false);
 }
 
+// cherche les documents numerotes dans un texte traite par propre()
+// et affecte les doublons['documents']
+function traiter_doublons_documents(&$doublons, $letexte) {
+	if (preg_match_all(
+	',<(span|div\s)[^>]*class=["\']spip_document_([0-9]+) ,',
+	$letexte, $matches, PREG_PATTERN_ORDER))
+		$doublons['documents'] .= "," . join(',', $matches[2]);
+	return $letexte;
+}
+
+
 // les balises dynamiques et EMBED ont des filtres sans arguments 
 // car en fait ce sont des arguments pas des filtres.
 // Si le besoin s'en fait sentir, il faudra récuperer la 2e moitie du tableau 

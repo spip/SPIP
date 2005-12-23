@@ -44,9 +44,7 @@ function champs_traitements ($p) {
 		 
 	if (!$ps) return $p->code;
 	if ($p->descr['documents']) {
-		$ps = str_replace('traiter_raccourcis(', 
-			'traiter_raccourcis_doublon($doublons,',
-			str_replace('typo(', 'typo_doublon($doublons,', $ps));
+		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
 	}
 
 	// on supprime les < IMGnnn > tant qu'on ne rapatrie pas
