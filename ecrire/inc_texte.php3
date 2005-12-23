@@ -991,21 +991,22 @@ function traiter_raccourcis_generale($letexte) {
 	// Affiner les paragraphes
 	//
 
-	// 1. preserver les balises-bloc
+	// 1. Ajouter le paragraphe initial s'il y a lieu
+	if (strpos(' '.$letexte, '<p class="spip">'))
+		$letexte = '<p class="spip">'.$letexte;
+
+	// 2. preserver les balises-bloc
 	$blocs = 'div|pre|ul|li|blockquote|h[1-5r]|table|center|'
 		.'tr|td|th|tbody|tfoot';
 	$letexte = preg_replace(",<($blocs)[>[:space:]],i", '</no p>\0', $letexte);
 	$letexte = preg_replace(",<($blocs)[^>]*/>,i", '\0<no p>', $letexte);
 	$letexte = preg_replace(",</($blocs)[>[:space:]].*>,Uims", '\0<no p>', $letexte);
 
-	// 2. Manger les <no p>
+	// 3. Manger les <p ..></no p>
 	$letexte = preg_replace(
 		',(<p([[:space:]][^>]*)?'.'>)?(\s*</no p>)+,ims', '', $letexte);
-	$letexte = preg_replace(
-		',(<no p>\s*)+(</p([[:space:]][^>]*)?'.'>)?,ims', '', $letexte);
 
-	// 3. Ajouter le paragraphe initial et final (s'il y a lieu)
-	// et fermer les paragraphes
+	// 4. Fermer les paragraphes
 	if (strpos(' '.$letexte, '<p class="spip">')) {
 		$tmp = '';
 		foreach (explode('<p class="spip">', $letexte) as $paragraphe) {
@@ -1013,13 +1014,21 @@ function traiter_raccourcis_generale($letexte) {
 			$paragraphe, $reg))
 				$paragraphe = str_replace($reg[0], "</p>\n\n".$reg[0], $paragraphe);
 			else
-				$paragraphe .= "</p>\n\n";
+				$paragraphe .= '</p>';
 
-			$tmp .= '<p class="spip">'.$paragraphe;
+			$paragraphe = str_replace('<p class="spip"></p>', '',
+				'<p class="spip">'.trim($paragraphe));
+
+			$tmp .= $paragraphe."\n\n";
 		}
 
 		$letexte = $tmp;
 	}
+
+	// 5. Manger les <no p></p>
+	$letexte = preg_replace(
+		',(<no p>\s*)+(</p([[:space:]][^>]*)?'.'>)?,ims', '', $letexte);
+
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
