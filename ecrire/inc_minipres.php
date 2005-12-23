@@ -26,20 +26,20 @@ function install_debut_html($titre = 'AUTO') {
 
 	include_ecrire('inc_headers');
 	http_no_cache();
-	echo  _DOCTYPE_ECRIRE .
-	  "<html lang='".$GLOBALS['spip_lang'].
-	  "' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
-	  "<head>\n" .
-	  "<title>$titre</title>\n" .
-	  '<link rel="stylesheet" type="text/css" href="' .
-	  _DIR_RESTREINT .
-	  'spip_style.php3?couleur_claire=' .
-	  urlencode('#FFCC66') .
-	  '&amp;couleur_foncee=' .
-	  urlencode('#000000') .
-	  '&amp;left=' . 
-	  $GLOBALS['spip_lang_left'] .
-	  "\" >
+	echo  _DOCTYPE_ECRIRE ,
+	  "<html lang='",$GLOBALS['spip_lang'],
+	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
+	  "<head>\n" ,
+	  "<title>$titre</title>\n" ,
+	  '<link rel="stylesheet" type="text/css" href=' ,
+	  http_php_script(_DIR_RESTREINT . 'spip_style', 
+			  "couleur_claire=" .
+			  urlencode('#FFCC66') .
+			  '&couleur_foncee=' .
+			  urlencode('#000000') .
+			  '&left=' . 
+			  $GLOBALS['spip_lang_left']) ,
+	  ">
 <style type='text/css'>
 <!--
 	a {text-decoration: none; }
@@ -48,8 +48,8 @@ function install_debut_html($titre = 'AUTO') {
 </head>
 <body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>
 <center><table style='margin-top:50px; width: 450px'>
-<tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>".
-	  $titre .
+<tr><th style='color: #970038;text-align: left;font-family: Verdana; font-weigth: bold; font-size: 18px'>",
+	  $titre ,
 	  "</th></tr>
 <tr><td  class='serif'>";
 }

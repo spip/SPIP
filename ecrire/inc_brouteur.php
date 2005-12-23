@@ -111,17 +111,18 @@ function brouteur_dist()
 	
 	
 	echo "<tr width='$largeur_table'>";
-	
+
 	for ($i=0; $i < $nb_col; $i++) {
 		echo "<td valign='top' width='$largeur_col'>";
 		
-		echo "<iframe width='100%' id='iframe$i' name='iframe$i' src='brouteur_frame.php3?id_rubrique=".$dest[$i]."&frame=$i' class='iframe-bouteur' height='$hauteur_table'></iframe>";
+		echo "<iframe width='100%' id='iframe$i' name='iframe$i' src=",
+		  http_php_script('brouteur_frame',"id_rubrique=".$dest[$i]."&frame=$i'"),
+		  "class='iframe-bouteur' height='$hauteur_table'></iframe>";
 		
 		
 		echo "</td>";
-	
 	}
-	
+
 fin_page();
 }
 ?>
