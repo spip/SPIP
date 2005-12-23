@@ -134,7 +134,7 @@ function iframe_action_dist()
 
 // Afficher le bouton "preview" dans l'espace public
 function afficher_bouton_preview() {
-		$x = majuscules(_T('previsualisation'));
+		$x = _T('previsualisation');
 		return '<div style="
 		display: block;
 		color: #eeeeee;
@@ -147,8 +147,8 @@ function afficher_bouton_preview() {
 		left: 0px;
 		position: absolute;
 		">' 
-		  . http_img_pack('naviguer-site.png', $x, '')
-		  ."&nbsp;$x</div>";
+		. http_img_pack('naviguer-site.png', $x, '')
+		. '&nbsp;' . majuscules($x) . '</div>';
 }
 
 // Fabrique une balise A, avec un href conforme au validateur W3C
