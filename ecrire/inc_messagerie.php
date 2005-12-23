@@ -60,11 +60,11 @@ fin_boite_info();
 creer_colonne_droite();
 
 debut_cadre_relief("messagerie-24.gif");
-		icone_horizontale(_T('lien_nouvea_pense_bete'),"message_edit.php3?new=oui&type=pb", "pense-bete.gif");
-		icone_horizontale(_T('lien_nouveau_message'),"message_edit.php3?new=oui&type=normal", "message.gif");
+ icone_horizontale(_T('lien_nouvea_pense_bete'),http_php_scriptnq("message_edit","new=oui&type=pb"), "pense-bete.gif");
+ icone_horizontale(_T('lien_nouveau_message'),http_php_scriptnq("message_edit","new=oui&type=normal"), "message.gif");
 		
 		if ($connect_statut == "0minirezo") {
-			icone_horizontale(_T('lien_nouvelle_annonce'),"message_edit.php3?new=oui&type=affich", "annonce.gif");
+		  icone_horizontale(_T('lien_nouvelle_annonce'),http_php_scriptnq("message_edit","new=oui&type=affich"), "annonce.gif");
 		}
 fin_cadre_relief();
 
