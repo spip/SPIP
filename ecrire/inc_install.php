@@ -492,7 +492,7 @@ function install_()
 
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues)
-		redirige_par_entete("../spip_test_dirs.php3");
+	  redirige_par_entete(http_php_scriptnq("../spip_test_dirs"));
 	else {
 		install_debut_html();
 	
@@ -759,12 +759,12 @@ function install_unpack()
 
   fin_admin($action);
 
-  if (@file_exists("../spip_loader.php3"))
-	redirige_par_entete("../spip_loader.php3?hash=$hash&id_auteur=$connect_id_auteur");
-  else if (@file_exists("../spip_unpack.php3"))
-	redirige_par_entete("../spip_unpack.php3?hash=$hash&id_auteur=$connect_id_auteur");
+  if (@file_exists("../spip_loader" . _EXTENSION_PHP))
+    redirige_par_entete(http_php_scriptnq("../spip_loader"), "hash=$hash&id_auteur=$connect_id_auteur");
+  else if (@file_exists("../spip_unpack" . _EXTENSION_PHP))
+    redirige_par_entete(http_php_scriptnq("../spip_unpack"), "hash=$hash&id_auteur=$connect_id_auteur");
   else
-	redirige_par_entete("../spip_loader.php3?hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(http_php_scriptnq("../spip_loader"), "hash=$hash&id_auteur=$connect_id_auteur");
 }
 
 ?>
