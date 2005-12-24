@@ -289,7 +289,8 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				$couleur = $couleurs[$ifond];
 				$ifond = 1 - $ifond;
 
-				$auteurs_tmp[] = "<a href='auteurs_edit.php3?id_auteur=" . $id_auteur ."'>". $nom_auteur . "</a>";
+				$auteurs_tmp[] = "<a href=" .
+				  http_php_script('auteurs_edit',"id_auteur=" . $id_auteur) .">". $nom_auteur . "</a>";
 
 				$res .= "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Sans,sans-serif' size=2>&nbsp;".
 				  bonhomme_statut($row)."&nbsp;" .

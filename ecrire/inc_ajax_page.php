@@ -199,7 +199,10 @@ function ajax_page_aff_nav_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $
 {
 	include_ecrire("inc_texte");
 	include_ecrire("inc_mini_nav");
-	echo mini_nav ($id, "aff_nav_recherche", "document.location.href='naviguer.php3?id_rubrique=::sel::'", 0, true);
+	echo mini_nav ($id, "aff_nav_recherche", 
+			"document.location.href=" .
+			http_php_script('naviguer', "id_rubrique=::sel::") .
+			';', 0, true);
 }
 
 # Affiche les infos d'une rubrique selectionnee dans le mini navigateur
