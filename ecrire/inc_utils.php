@@ -542,7 +542,7 @@ function charger_plugins($plugins) {
 
 // ces 2 fonctions fabriquent un appel a un script php
 // elles sont destinees a assurer la transition
-// entre les scripts ecrire/*.php3 et le script generique ecrire/index.php
+// entre les scripts ecrire/*.php[3] et le script generique ecrire/index.php
 
 function http_php_script($script, $args="", $retour="", $retour_args="") {
 	return '"' . 

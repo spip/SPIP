@@ -16,7 +16,7 @@ define("_ECRIRE_INC_VERSION", "1");
 
 // 6 constantes incontournables et prioritaires
 
-define('_EXTENSION_PHP', '.php3'); # a etendre
+define('_EXTENSION_PHP', '.php3');
 define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');

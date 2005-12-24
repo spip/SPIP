@@ -58,7 +58,7 @@ function decalerCouche(id_couche) {
 
 var accepter_change_statut;
 	
-function selec_statut(id, type, decal, puce, statut) {
+function selec_statut(id, type, decal, puce, statut, script) {
 
 	if (!accepter_change_statut) {
 	  accepter_change_statut = confirm(confirm_changer_statut)
@@ -70,7 +70,7 @@ function selec_statut(id, type, decal, puce, statut) {
 
 		findObj('imgstatut'+type+id).src = puce;
 		frames['iframe_action'].location.href = 
-  'iframe_action.php3?action='+ type + 's' + '&id='+id+'&statut='+statut;
+  script + '?action=' + type + 's' + '&id='+id+'&statut='+statut;
 	}
 }
 

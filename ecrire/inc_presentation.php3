@@ -613,32 +613,12 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 			. "<div class='puce_article_fixe' $action>" .
 		  http_img_pack("$puce", "", "id='imgstatutarticle$id' border='0' style='margin: 1px;'") ."</div>"
 			. "<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
-		  . http_href_img("javascript:selec_statut($id, 'article', -1,'" . _DIR_IMG_PACK . "puce-blanche.gif', 'prepa');",
-				  "puce-blanche.gif", 
-				  "title=\"$titles[blanche]\"",
-				  "",'','',
-				  $action)
-		  . http_href_img("javascript:selec_statut($id, 'article', -12,'" . _DIR_IMG_PACK . "puce-orange.gif', 'prop');",
-				  "puce-orange.gif", 
-				  "title=\"$titles[orange]\"",
-				  "",'','',
-				  $action)
-		  . http_href_img("javascript:selec_statut($id, 'article', -23,'" . _DIR_IMG_PACK . "puce-verte.gif', 'publie');",
-				  "puce-verte.gif", 
-				  "title=\"$titles[verte]\"",
-				  "",'','',
-				  $action)
-		  . http_href_img("javascript:selec_statut($id, 'article', -34,'" . _DIR_IMG_PACK . "puce-rouge.gif', 'refuse');",
-				  "puce-rouge.gif", 
-				  "title=\"$titles[rouge]\"",
-				  "",'','',
-				  $action)
-		  . http_href_img("javascript:selec_statut($id, 'article', -45,'" . _DIR_IMG_PACK . "puce-poubelle.gif', 'poubelle');",
-				  "puce-poubelle.gif", 
-				  "title=\"$titles[poubelle]\"",
-				  "",'','',
-				  $action)
-			. "</div></div>";
+			. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
+			. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
+			. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
+			. afficher_script_statut($id, 'article', -34, 'puce-rouge.gif', 'refuse', $titles['rouge'], $action)
+			. afficher_script_statut($id, 'article', -45, 'puce-poubelle.gif', 'poubelle', $titles['poubelle'], $action)
+		. "</div></div>";
 	} else {
 		$inser_puce = http_img_pack("$puce", "", "id='imgstatutarticle$id' border='0' style='margin: 1px;'");
 	}
@@ -692,24 +672,23 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 		. $inser_puce
 		. "</div>"
 		. "<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>"
-		. http_href_img("javascript:selec_statut('$id', '$type', -1, '" . _DIR_IMG_PACK . $puces[0] . "', 'prop');",
-			$puces[0],
-			"title=\""._T('texte_statut_propose_evaluation')."\"",
-			'','','',
-			$action)
-		. http_href_img("javascript:selec_statut('$id', '$type', -10, '" . _DIR_IMG_PACK .$puces[1] . "', 'publie');",
-		 	$puces[1],
-			"title=\""._T('texte_statut_publie')."\"",
-			'','','',
-			$action)
-		. http_href_img("javascript:selec_statut('$id', '$type', -19, '" . _DIR_IMG_PACK .$puces[2] . "', 'refuse');",
-			$puces[2],
-			"title=\""._T('texte_statut_refuse')."\"",
-			'','','',
-			$action)
+		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
+		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
+	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
 		.  "</div></div>";
 }
 
+function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
+{
+  return
+	http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
+		      _DIR_IMG_PACK . $img .
+		      "', '$statut', 'iframe_action" . _EXTENSION_PHP ."');",
+		      $img,
+			"title=\"".$title."\"",
+			'','','',
+		      $act);
+}
 
 //
 // Afficher tableau d'articles
