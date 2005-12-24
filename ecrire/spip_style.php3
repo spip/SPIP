@@ -15,7 +15,7 @@ include("inc_version.php3");
 
 // En-tetes
 
-if (http_last_modified(@filemtime("spip_style.php3"), time() + 24 * 3600)) 
+if (http_last_modified(@filemtime("spip_style" . _EXTENSION_PHP), time() + 24 * 3600)) 
 	exit;
 
 // mettre absolument le charset :

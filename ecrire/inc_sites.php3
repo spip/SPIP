@@ -1098,7 +1098,7 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 function executer_une_syndication() {
 	$id_syndic = 0;
 
-	## valeurs modifiables dans mes_options.php3
+	## valeurs modifiables dans mes_options
 	## attention il est tres mal vu de prendre une periode < 20 minutes
 	define_once('_PERIODE_SYNDICATION', 2*60);
 	define_once('_PERIODE_SYNDICATION_SUSPENDUE', 24*60);
