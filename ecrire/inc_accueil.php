@@ -412,7 +412,7 @@ if ($spip_display != 4) {
 
 	$evt = sql_calendrier_agenda($annee, $mois);
 	if ($evt) 
-		echo http_calendrier_agenda ($annee, $mois, $jour, $mois, $annee, false, http_php_script('calendrier'), '', $evt);
+		echo http_calendrier_agenda ($annee, $mois, $jour, $mois, $annee, false, http_php_scriptnq('calendrier'), '', $evt);
 
 	// et ceux du jour
 	$evt = date("Y-m-d");
