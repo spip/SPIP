@@ -171,7 +171,7 @@ function infos_naviguer($id_rubrique, $statut)
 								 critere_statut_controle_forum('prop', $id_rubrique)));
 			  if ($n)
 			    icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $n)),
-		"controle_forum.php3?id_rubrique=$id_rubrique", "suivi-forum-24.gif", "");
+					      http_php_scriptnq("controle_forum","id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
 			}
 		}
 		fin_boite_info();
@@ -187,9 +187,10 @@ function infos_naviguer($id_rubrique, $statut)
 			  echo 
 				http_img_pack('admin-12.gif','',''),
 				$logo,
-				" <a href='auteurs_edit.php3?id_auteur=",
-				$id,
-				"'>",
+			    " <a href=",
+			    http_php_script('auteurs_edit',
+					    "id_auteur=$id"),
+				">",
 				extraire_multi($row['nom']),
 				'</a><br />';
 			}
@@ -471,10 +472,10 @@ function tester_rubrique_vide($id_rubrique) {
 function bouton_supprimer_naviguer($id_rubrique, $id_parent, $ze_logo, $flag_editable)
 {
   if (($id_rubrique>0) AND tester_rubrique_vide($id_rubrique) AND $flag_editable) {
-	$link = "naviguer.php3?id_rubrique=$id_rubrique&action=supprimer&id_parent=$id_parent";
 
 	echo "<p><div align='center'>";
-	icone(_T('icone_supprimer_rubrique'), $link, $ze_logo, "supprimer.gif");
+	icone(_T('icone_supprimer_rubrique'), 
+	      http_php_scriptnq("naviguer","id_rubrique=$id_rubrique&action=supprimer&id_parent=$id_parent"), $ze_logo, "supprimer.gif");
 	echo "</div><p>";
  }
 }
