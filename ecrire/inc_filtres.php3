@@ -729,7 +729,7 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
 function agenda_affiche($i)
 {
   include_ecrire('inc_calendrier');
-  include_ecrire('inc_minipres'); // pour http_href
+  include_ecrire('inc_minipres');
   $args = func_get_args();
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
   $sinon = array_shift($args);
@@ -1899,7 +1899,7 @@ function afficher_enclosures($tags) {
 	$s = array();
 	foreach (extraire_tags($tags) as $tag) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
-		AND $t = urldecode(extraire_attribut($tag, 'href'))) {
+		AND $t = extraire_attribut($tag, 'href')) {
 			$s[] = http_href_img($t,
 				'attachment.gif',
 				'height="15" width="15" border="0"',

@@ -151,12 +151,13 @@ function afficher_bouton_preview() {
 		. '&nbsp;' . majuscules($x) . '</div>';
 }
 
-// Fabrique une balise A, avec un href conforme au validateur W3C
+// Fabrique une balise A, avec tous les attributs possibles
 // attention au cas ou la href est du Javascript avec des "'"
+// pour un href conforme au validateur W3C, faire & --> &amp; avant
 
 function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 	return '<a href="' .
-		str_replace('&', '&amp;', $href) .
+		$href .
 		'"' .
 		(!$title ? '' : ("\ntitle=\"" . supprimer_tags($title)."\"")) .
 		(!$style ? '' : ("\nstyle=\"" . $style . "\"")) .
