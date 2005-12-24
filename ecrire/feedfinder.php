@@ -81,7 +81,7 @@ function is_feed($url){
 }
 
 /*****************test is_feed******************************
-echo is_feed("http://spip-contrib.net/backend.php3") . "<br>"; //retourne rss
+echo is_feed("http://spip-contrib.net/backend" _EXTENSIO_PHP") . "<br>"; //retourne rss
 echo is_feed("http://liberation.fr/rss.php") . "<br>"; //retourne rss
 echo is_feed("http://liberation.fr/rss.php") . "<br>"; //retourne rss
 echo is_feed("http://willy.boerland.com/myblog/atom/feed") //retourne atom
@@ -157,7 +157,7 @@ print_r (get_feed_from_url("http://willy.boerland.com/myblog/"));
 *****************************    Résultat *****************************************
 Array
 (
-    [0] => http://www.spip-contrib.net/backend.php3
+    [0] => http://www.spip-contrib.net/backend.php
 )
 Array
 (
