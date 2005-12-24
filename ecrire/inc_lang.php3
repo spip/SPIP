@@ -275,7 +275,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 			  (is_object($lien) ? $lien->getUrl() : $lien);
 			if (_FILE_CONNECT) {
 			  include_ecrire('inc_session');
-			  $args = "?id_auteur=$connect_id_auteur&amp;valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
+			  $args = "id_auteur=$connect_id_auteur&valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 			}
 
 		} else {
@@ -284,13 +284,6 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		$lien = http_php_scriptnq("$site/spip_cookie", $args);
 	}
 
-	if (!$cible)
-	  $postcomplet = $lien;
-	else {
-	  $postcomplet = new Link($lien);
-	  $postcomplet->addvar('url', $cible);
-	  $postcomplet = $postcomplet->geturl();
-	}
 	return "<form action='"
 	  . $lien
 	  . "' method='post' style='margin:0px; padding:0px;'>"
@@ -303,8 +296,8 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 	      ("class='verdana1' style='background-color: " . $couleur_foncee
 	       . "; max-height: 24px; border: 1px solid white; color: white; width: 100px;'") :
 	      "class='fondl'"))
-	  . " onchange=\"document.location.href='"
-	  . $postcomplet
+	  . "\nonchange=\"document.location.href='"
+	  . $lien . (!$cible ? "" : "&amp;url=" . urlencode($cible))
 	  ."&amp;$nom_select='+this.options[this.selectedIndex].value\">\n"
 	  . $ret
 	  . "</select>\n"
