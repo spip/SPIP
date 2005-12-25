@@ -149,9 +149,9 @@ WHERE messagerie<>'non' AND id_auteur<>'$connect_id_auteur' AND pass<>'' AND log
       $bio_auteur = $row['bio'];
       $res .= "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b><FONT SIZE=3>$nom_auteur</FONT></b>" .
 	($email_auteur ? " ($email_auteur)" : '') .
-	" | <A href=" .
-	http_php_script('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
-	">" .
+	" | <A href='" .
+	http_php_scriptnq('message', "id_message=$id_message&ajout_auteur=oui&nouv_auteur=$id_auteur") .
+	"'>" .
 	_T('lien_ajout_destinataire').
 	"</A>" .
 	(!trim($bio_auteur) ? '' :
@@ -186,7 +186,7 @@ function http_ajouter_participants($ze_auteurs, $id_message)
 
     if (spip_num_rows($result_ajout_auteurs) > 0) {
 
-      echo "<FORM action=" . http_php_script("message") . " METHOD='post'>";
+      echo "<FORM action='" . http_php_scriptnq("message") . "' method='POST'>";
       echo "<DIV align=left><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><b>"._T('bouton_ajouter_participant')." &nbsp; </b></FONT>\n";
       echo "<input TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">";
 
@@ -289,8 +289,8 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				$couleur = $couleurs[$ifond];
 				$ifond = 1 - $ifond;
 
-				$auteurs_tmp[] = "<a href=" .
-				  http_php_script('auteurs_edit',"id_auteur=" . $id_auteur) .">". $nom_auteur . "</a>";
+				$auteurs_tmp[] = "<a href='" .
+				  http_php_scriptnq('auteurs_edit',"id_auteur=" . $id_auteur) ."'>". $nom_auteur . "</a>";
 
 				$res .= "<tr><td background='' bgcolor='$couleur'><font face='Verdana,Arial,Sans,sans-serif' size=2>&nbsp;".
 				  bonhomme_statut($row)."&nbsp;" .
@@ -303,7 +303,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 				  "<td background='' bgcolor='$couleur' align='right'><font face='Verdana,Arial,Sans,sans-serif' size='1'>" .
 				  (($id_auteur == $connect_id_auteur) ?
 				   "&nbsp;" :
-				   ("[<a href=" . http_php_script("message","id_message=$id_message&supp_dest=$id_auteur") . ">"._T('lien_retrait_particpant')."</a>]")) .
+				   ("[<a href='" . http_php_scriptnq("message","id_message=$id_message&supp_dest=$id_auteur") . "'>"._T('lien_retrait_particpant')."</a>]")) .
 				  "</font></td></tr>\n";
 			}
 			echo
@@ -321,7 +321,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 	  else {
 		  echo
 		    debut_block_invisible("ajouter_auteur"),
-		    "<br /><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href=" . http_php_script("message","id_message=$id_message&forcer_dest=oui") . ">"._T('lien_ajouter_participant')."</a></font></div>",
+		    "<br /><div align='right'><font face='Verdana,Arial,Sans,sans-serif' size='2'><a href='" . http_php_script("message","id_message=$id_message&forcer_dest=oui") . "'>"._T('lien_ajouter_participant')."</a></font></div>",
 		    fin_block();
 		}
 	  fin_cadre_enfonce();
@@ -520,7 +520,7 @@ function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 		  }
 		creer_colonne_droite();	
 
-		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,http_php_script('calendrier'));
+		echo http_calendrier_ics_titre($lannee,$lemois,$lejour,http_php_scriptnq('calendrier'));
 		echo http_calendrier_ics($lannee,$lemois, $lejour, $echelle, $partie_cal, 90, array($sh, $ah));
 	}
 
