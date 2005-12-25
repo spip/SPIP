@@ -40,12 +40,12 @@ function forum_admin_dist()
 	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
-	$urlforum = http_php_scriptnq('forum_admin', 'admin=admin');
+	$urlforum = generer_url_ecrire('forum_admin', 'admin=admin');
   } else {
 	debut_page(_T('titre_forum'), "redacteurs", "forum-interne");
 	$statutforum = 'privrac';
 	$logo = "forum-interne-24.gif";
-	$urlforum = http_php_scriptnq('forum_admin', 'admin=');
+	$urlforum = generer_url_ecrire('forum_admin', 'admin=');
   }
 
   debut_gauche();
@@ -72,7 +72,7 @@ function forum_admin_dist()
 
   echo "<p><div align='center'>";
   icone (_T('icone_poster_message'), 
-	 http_php_scriptnq("forum_envoi", 
+	 generer_url_ecrire("forum_envoi", 
 			 "statut=$statutforum&adresse_retour=" .
 			 urlencode($urlforum) . 
 			 "&titre_message=" .

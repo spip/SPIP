@@ -44,8 +44,8 @@ afficher_sites(_T('titre_sites_proposes'), "SELECT * FROM spip_syndic WHERE stat
 
 if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 	echo "<div align='right'>";
-	$link = new Link(http_php_scriptnq('sites_edit'));
-	$link->addVar('target', http_php_scriptnq('sites'));
+	$link = new Link(generer_url_ecrire('sites_edit'));
+	$link->addVar('target', generer_url_ecrire('sites'));
 	$link->addVar('redirect', $clean_link->getUrl());
 	icone(_T('icone_referencer_nouveau_site'), $link->getUrl(), "site-24.gif", "creer.gif");
 	echo "</div>";
@@ -103,7 +103,7 @@ function afficher_sites($titre_table, $requete) {
 			//echo "<tr bgcolor='$couleur'>";
 
 			//echo "<td class='arial2'>";
-			$link = new Link(http_php_scriptnq("sites","id_syndic=$id_syndic"));
+			$link = new Link(generer_url_ecrire("sites","id_syndic=$id_syndic"));
 			switch ($statut) {
 			case 'publie':
 				if (acces_restreint_rubrique($id_rubrique))
@@ -307,7 +307,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 				else
 					$s = $aff;
 					
-				$s = "<a href='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "'>$aff</a>";
+				$s = "<a href='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "'>$aff</a>";
 
 				$vals[] = $s;
 			}

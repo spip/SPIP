@@ -31,7 +31,7 @@ function upgrade_dist()
 	echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ",
 	 _T('texte_nouvelle_version_spip_2'),
 	 "<p><div align='right'>",
-	 '<form action="', http_php_scriptnq("upgrade"), '">',
+	 '<form action="', generer_url_ecrire("upgrade"), '">',
 	 "<input type='submit' value=\"",
 	  _T('bouton_relancer_installation'),
 	  "\" class='fondl'>",
@@ -82,7 +82,7 @@ function upgrade_dist()
 
   if ($ok) {
 	$hash = calculer_action_auteur("purger_cache");
-	redirige_par_entete(http_php_scriptnq("../spip_cache"), "purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS);
+	redirige_par_entete(generer_url_ecrire("../spip_cache"), "purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS);
   }
   else {
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));
@@ -99,7 +99,7 @@ function demande_maj_version()
 	_T('info_procedure_maj_version'),
 	"</h4>",
 	_T('info_administrateur_site_01'),
-	" <a href='" . http_php_scriptnq("upgrade","") . "'>",
+	" <a href='" . generer_url_ecrire("upgrade","") . "'>",
 	_T('info_administrateur_site_02'),
 	"</a></blockquote></blockquote><p>";
 	fin_page();

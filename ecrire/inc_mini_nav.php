@@ -149,7 +149,7 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 
 	if (!$fonction)
 		$fonction = "document.location='" .
-			http_php_scriptnq('naviguer', "id_rubrique=::sel::") .
+			generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
 			"';";
 
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;

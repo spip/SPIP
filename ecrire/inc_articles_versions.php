@@ -129,8 +129,8 @@ debut_gauche();
 
 
 debut_raccourcis();
-icone_horizontale(_T('icone_retour_article'), http_php_scriptnq("articles","id_article=$id_article"), "article-24.gif","rien.gif");
-icone_horizontale(_T('icone_suivi_revisions'), http_php_scriptnq("suivi_revisions",""), "historique-24.gif","rien.gif");
+icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif");
+icone_horizontale(_T('icone_suivi_revisions'), generer_url_ecrire("suivi_revisions",""), "historique-24.gif","rien.gif");
 fin_raccourcis();
 
 
@@ -205,7 +205,7 @@ $flag_editable = (acces_rubrique($id_rubrique)
 	OR ($flag_auteur AND ($statut_article == 'prepa' OR $statut_article == 'prop' OR $statut_article == 'poubelle')));
 
 if ($flag_editable)
-	icone(_T('icone_modifier_article'), http_php_scriptnq("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
+	icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
 
 echo "</td>";
 

@@ -50,7 +50,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 				
 		if ($statut=="publie"){
 			icone (_T('icone_supprimer_signature'), 
-			       http_php_scriptnq($script,
+			       generer_url_ecrire($script,
 						 "supp_petition=$id_signature&debut=$debut"),
 			       "forum-interne-24.gif", 
 			       "supprimer.gif",
@@ -58,7 +58,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		}
 		if ($statut=="poubelle"){
 			icone (_T('icone_valider_signature'),
-			       http_php_scriptnq($script,
+			       generer_url_ecrire($script,
 						 "add_petition=$id_signature&debut=$debut"),
 			       "forum-interne-24.gif", 
 			       "creer.gif",
@@ -86,7 +86,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		    $id_article,
 		    " </b></span>";
 		
-		echo "<a href='", http_php_scriptnq((($statut == 'publie') ? 
+		echo "<a href='", generer_url_ecrire((($statut == 'publie') ? 
 				   "../spip_redirect" :
 				   "articles"),
 				  "id_article=$id_article"),
@@ -119,7 +119,7 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 			if ($c == ($debut+1))
 				echo "<FONT SIZE=3><B>$c</B></FONT>";
 			else
-			  echo "<A alt=\"$date\" title=\"$date\" href='", http_php_scriptnq($script, $args ."debut=".($c-1)), "'>$c</A>";
+			  echo "<A alt=\"$date\" title=\"$date\" href='", generer_url_ecrire($script, $args ."debut=".($c-1)), "'>$c</A>";
 		}
 	}
 	return $where;

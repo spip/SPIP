@@ -50,7 +50,7 @@ debut_gauche();
 	
 debut_droite();
 
-echo "<form action='" . http_php_scriptnq("config-multilang","") . "' method='post'>";
+echo "<form action='" . generer_url_ecrire("config-multilang","") . "' method='post'>";
 echo "<input type='hidden' name='changer_config' value='oui'>";
 
 debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));

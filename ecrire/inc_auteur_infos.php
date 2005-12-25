@@ -202,7 +202,7 @@ if ($nom OR $statut) {
 // Redirection
 if (!$echec AND $redirect_ok == "oui") {
 	redirige_par_entete($redirect ? rawurldecode($redirect) :
-			    http_php_scriptnq("auteurs_edit", "id_auteur=$id_auteur"));
+			    generer_url_ecrire("auteurs_edit", "id_auteur=$id_auteur"));
 }
 affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus);
 
@@ -279,7 +279,7 @@ function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajou
 {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
 
-  echo "<form  method='POST' action='", http_php_scriptnq('auteur_infos',
+  echo "<form  method='POST' action='", generer_url_ecrire('auteur_infos',
 		    (!$id_auteur ? "" : "?id_auteur=$id_auteur")),
     "'><input type='hidden' name='id_auteur' value='$id_auteur' />";
 
@@ -508,7 +508,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	if ($post && $droit) {
 		$url_self = $post;
 		echo "<p />";
-		echo "<form action='", http_php_scriptnq($post, "id_auteur=$id_auteur"),
+		echo "<form action='", generer_url_ecrire($post, "id_auteur=$id_auteur"),
 		  "' method='POST'>\n";
 	} else
 		$url_self = "auteur_infos";
@@ -546,11 +546,11 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
 				while ($row_admin = spip_fetch_array($result_admin)) {
 					$id_rubrique = $row_admin["id_rubrique"];
-					echo "<li><a href='" . http_php_scriptnq("naviguer","id_rubrique=$id_rubrique") . "'>", typo($row_admin["titre"]), "</a>";
+					echo "<li><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>", typo($row_admin["titre"]), "</a>";
 
 					if ($connect_toutes_rubriques
 					AND $connect_id_auteur != $id_auteur) {
-					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", http_php_scriptnq($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), '">',
+					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_url_ecrire($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), '">',
 					    _T('lien_supprimer_rubrique'),
 					    "</a>]</font>";
 					}

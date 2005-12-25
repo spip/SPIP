@@ -37,7 +37,7 @@ SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_
 	  $statut = $row['statut'];
 	  if ($forum_stat == "prive" OR $forum_stat == "privoff") {
 	    return array('pref' => _T('item_reponse_article'),
-			 'url' => http_php_scriptnq("articles","id_article=$id_article"),
+			 'url' => generer_url_ecrire("articles","id_article=$id_article"),
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre);
@@ -47,7 +47,7 @@ SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_
 			 'type' => 'id_article',
 			 'valeur' => $id_article,
 			 'titre' => $titre,
-			 'avant' => "<a href='" . http_php_scriptnq("articles_forum","id_article=$id_article") . "'><font color='red'>"._T('lien_forum_public'). "</font></a><br>");
+			 'avant' => "<a href='" . generer_url_ecrire("articles_forum","id_article=$id_article") . "'><font color='red'>"._T('lien_forum_public'). "</font></a><br>");
 	  }
 	}
 	else if ($forum_id_rubrique > 0) {
@@ -68,7 +68,7 @@ SELECT * FROM spip_syndic WHERE id_syndic='$forum_id_syndic'"));
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
 	  return array('pref' => _T('lien_reponse_site_reference'),
-		       'url' => http_php_scriptnq("sites","id_syndic=$id_syndic"),
+		       'url' => generer_url_ecrire("sites","id_syndic=$id_syndic"),
 		       'type' => 'id_syndic',
 		       'valeur' => $id_syndic,
 		       'titre' => $titre);
@@ -81,7 +81,7 @@ SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	  $titre = $row['titre'];
 	  if ($forum_stat == "prive") {
 	    return array('pref' => _T('lien_reponse_breve'),
-			 'url' => http_php_scriptnq("breves_voir","id_breve=$id_breve"),
+			 'url' => generer_url_ecrire("breves_voir","id_breve=$id_breve"),
 			 'type' => 'id_breve',
 			 'valeur' => $id_breve,
 			 'titre' => $titre);
@@ -97,14 +97,14 @@ SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	  $retour = forum_parent($forum_id_parent);
 	  if ($retour) return $retour;
 	  else return array('pref' => _T('info_message'),
-			    'url' => http_php_scriptnq('forum_admin','admin=admin'),
+			    'url' => generer_url_ecrire('forum_admin','admin=admin'),
 			    'titre' => _T('info_forum_administrateur'));
 	}
 	else {
 	  $retour = forum_parent($forum_id_parent);
 	  if ($retour) return $retour;
 	  else return array('pref' => _T('info_message'),
-			    'url' => http_php_scriptnq('forum_admin'),
+			    'url' => generer_url_ecrire('forum_admin'),
 			    'titre' => _T('info_forum_interne'));
 	}
 }
@@ -217,16 +217,16 @@ function controle_forum_dist()
   $args =  (!$id_rubrique ? "" : "id_rubrique=$id_rubrique&") . 'page=';
 
   debut_onglet();
-  onglet(_T('onglet_messages_publics'), http_php_scriptnq('controle_forum', $args . "public"), "public", $onglet, "forum-public-24.gif");
-  onglet(_T('onglet_messages_internes'), http_php_scriptnq('controle_forum', $args . "interne"), "interne", $onglet, "forum-interne-24.gif");
+  onglet(_T('onglet_messages_publics'), generer_url_ecrire('controle_forum', $args . "public"), "public", $onglet, "forum-public-24.gif");
+  onglet(_T('onglet_messages_internes'), generer_url_ecrire('controle_forum', $args . "interne"), "interne", $onglet, "forum-interne-24.gif");
 
     if (spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1")))
-      onglet(_T('onglet_messages_vide'), http_php_scriptnq('controle_forum', $args . "vide"), "vide", $onglet);
+      onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", $onglet);
 
     if (spip_fetch_array(spip_query("SELECT F.id_forum " .
 				    critere_statut_controle_forum('prop', $id_rubrique) .
 				    " LIMIT 1")))
-      onglet(_T('texte_statut_attente_validation'), http_php_scriptnq('controle_forum', $args . "prop"), "prop", $onglet);
+      onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", $onglet);
 
   fin_onglet();
 
@@ -291,7 +291,7 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
 
   echo "<div class='serif2'>";
   $i = $limitdeb;
-  if ($i>0) echo "<a href='", http_php_scriptnq('controle_forum', $args),"'>0</a> ... | ";
+  if ($i>0) echo "<a href='", generer_url_ecrire('controle_forum', $args),"'>0</a> ... | ";
   $controle = '';
 
   while ($row = spip_fetch_array($result_forum)) {
@@ -301,16 +301,16 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
-		  echo "<a href='", http_php_scriptnq('controle_forum', $args . "&debut=$i"), "'>$i</a>";
+		  echo "<a href='", generer_url_ecrire('controle_forum', $args . "&debut=$i"), "'>$i</a>";
 		echo " | ";
 	}
 	// est-ce que ce message doit s'afficher dans la liste ?
 	if (($i>=$debut) AND ($i<($debut + $pack)))
-	  $controle .= controle_un_forum($row, http_php_scriptnq('controle_forum', $args . "&debut=$debut"));
+	  $controle .= controle_un_forum($row, generer_url_ecrire('controle_forum', $args . "&debut=$debut"));
 	$i ++;
  }
 
-  echo "<a href=", http_php_scriptnq('controle_forum', $args . "&debut=$i"),
+  echo "<a href=", generer_url_ecrire('controle_forum', $args . "&debut=$i"),
     ">...</a>$controle</div>";
   fin_page();
 }

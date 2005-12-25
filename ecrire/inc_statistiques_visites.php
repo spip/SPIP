@@ -101,7 +101,7 @@ else {
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
-		echo "<li><b><a href='" . http_php_scriptnq("statistiques_visites","") . "'>"._T('info_tout_site')."</a></b>";
+		echo "<li><b><a href='" . generer_url_ecrire("statistiques_visites","") . "'>"._T('info_tout_site')."</a></b>";
 	} else {
 		echo "<li><b>"._T('titre_page_articles_tous')."</b>";
 	}
@@ -146,7 +146,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li value='$liste'><b>$titre</b>";
 				} else {
-					echo "\n<li value='$liste'><a href='" . http_php_scriptnq("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a>";
+					echo "\n<li value='$liste'><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a>";
 				}
 			}
 		}
@@ -168,7 +168,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='" . http_php_scriptnq("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li value='$numero'><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_3', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 			}
 		}
@@ -206,7 +206,7 @@ else {
 				if ($l_article == $id_article){
 					echo "\n<li value='$numero'><b>$titre</b></li>";
 				} else {
-					echo "\n<li value='$numero'><a href='" . http_php_scriptnq("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
+					echo "\n<li value='$numero'><a href='" . generer_url_ecrire("statistiques_visites","id_article=$l_article") . "' title='"._T('info_popularite_4', array('popularite' => $popularite, 'visites' => $visites))."'>$titre</a></li>";
 				}
 		}
 		echo "</ol>";
@@ -223,7 +223,7 @@ else {
 	if ($connect_statut == '0minirezo') {
 		if ($id_article > 0) {
 			debut_raccourcis();
-			icone_horizontale(_T('icone_retour_article'), http_php_scriptnq("articles","id_article=$id_article"), "article-24.gif","rien.gif");
+			icone_horizontale(_T('icone_retour_article'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif","rien.gif");
 			fin_raccourcis();
 		}
 	}
@@ -335,12 +335,12 @@ if (!$origine) {
 		if ($id_article) $pour_article="&id_article=$id_article";
 		
 		if ($date_premier < $date_debut)
-		  echo http_href_img(http_php_scriptnq("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
+		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
 				     'loupe-moins.gif',
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '-'), "&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
-		  echo http_href_img(http_php_scriptnq("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
+		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
 				     'loupe-plus.gif',
 				     "border='0' valign='center'",
 				     _T('info_zoom'). '+'), "&nbsp;";
@@ -348,8 +348,8 @@ if (!$origine) {
 	
 if (flag_svg()) {
 	echo "\n<div>";
-	echo "<object data='", http_php_scriptnq('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
-	echo "<embed src='", http_php_scriptnq('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
+	echo "<object data='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
+	echo "<embed src='", generer_url_ecrire('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
 	echo "</object>";
 	echo "\n</div>";
 	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));

@@ -42,7 +42,7 @@ function enfant_breves($leparent){
 						 
 		if ($editable) {
 		  echo "<div align='$spip_lang_right'>";
-		  icone(_T('icone_nouvelle_breve'), http_php_scriptnq("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif");
+		  icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif");
 		  echo "</div>";
 		}
 		fin_cadre_enfonce();
@@ -79,7 +79,7 @@ function breves_dist()
 			include_ecrire("inc_rubriques");
 			calculer_rubriques();
 		}
-		redirige_par_entete(http_php_scriptnq("naviguer"),"id_rubrique=$id_rubrique");
+		redirige_par_entete(generer_url_ecrire("naviguer"),"id_rubrique=$id_rubrique");
 	} else {
 
 		debut_page(_T('titre_page_breves'), "documents", "breves");

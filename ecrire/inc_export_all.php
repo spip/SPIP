@@ -34,7 +34,7 @@ $debug_limit = '';
 
 install_debut_html(_T('info_sauvegarde'));
 
-if (!$etape) echo "<p><blockquote><font size=2>"._T('info_sauvegarde_echouee')." <a href='" . http_php_scriptnq("export_all","etape=1&gz=$gz") . "'>"._T('info_procedez_par_etape')."</a></font></blockquote><p>";
+if (!$etape) echo "<p><blockquote><font size=2>"._T('info_sauvegarde_echouee')." <a href='" . generer_url_ecrire("export_all","etape=1&gz=$gz") . "'>"._T('info_procedez_par_etape')."</a></font></blockquote><p>";
 
 if ($etape < 2)
 	$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "wb") : fopen(_DIR_SESSIONS . $archive, "wb");
@@ -102,12 +102,12 @@ export_objets($query, "spip_referers", $f, $gz, $etape, 15, _T('info_sauvegarde_
 
 if (!$etape OR $etape == 13){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
-	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='" . http_php_scriptnq("index","") . "'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
+	echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => $archive))." <a href='" . generer_url_ecrire("index","") . "'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 }
 else {
 	$etape_suivante = $etape + 1;
-	if ($debut_limit > 1) echo "<p align='right'> <a href='" . http_php_scriptnq("export_all","etape=$etape&debut_limit=$debut_limit&gz=$gz") . "'>>>>> "._T('info_etape_suivante')."</a>";
-	else echo "<p align='right'> <a href='" . http_php_scriptnq("export_all","etape=$etape_suivante&gz=$gz") . "'>>>>> "._T('info_etape_suivante')."</a>";
+	if ($debut_limit > 1) echo "<p align='right'> <a href='" . generer_url_ecrire("export_all","etape=$etape&debut_limit=$debut_limit&gz=$gz") . "'>>>>> "._T('info_etape_suivante')."</a>";
+	else echo "<p align='right'> <a href='" . generer_url_ecrire("export_all","etape=$etape_suivante&gz=$gz") . "'>>>>> "._T('info_etape_suivante')."</a>";
 }
 install_fin_html();
 

@@ -71,7 +71,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 			if($forum_id_auteur)
 				$controle .= " - <A href='" .
-				  http_php_scriptnq('auteurs_edit',
+				  generer_url_ecrire('auteurs_edit',
 						  "id_auteur=$forum_id_auteur") .
 				  "'>" ._T('lien_voir_auteur'). "</A>";
 			break;
@@ -92,13 +92,13 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 
 	if ($supprimer)
 		$controle .= icone(_T('icone_supprimer_message'), 
-				   http_php_scriptnq('iframe_action', "action=forum_admin&id=$id_forum&statut=$supprimer&redirect=$ulink"),
+				   generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$supprimer&redirect=$ulink"),
 			$logo,
 			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
 		$controle .= icone(_T('icone_valider_message'), 
-				   http_php_scriptnq('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$ulink"),
+				   generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$ulink"),
 			$logo,
 			"creer.gif", 'right', 'non');
 
@@ -107,7 +107,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 		$controle .= icone(_T('icone_valider_message') 
 				   . " &amp; " .
 				   _T('lien_repondre_message'),
-				   http_php_scriptnq('iframe_action',
+				   generer_url_ecrire('iframe_action',
 						     "action=forum_admin&id=$id_forum&statut=$valider&redirect=", 
 						     "../forum",
 						     "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link)),
@@ -222,7 +222,7 @@ function generer_url_forum_dist($id_forum, $show_thread=false) {
 			return generer_url_site($id)."#forum$id_forum";
 			break;
 		default:
-		  return http_php_scriptnq("forum_admin", "id_forum=".$id_forum);
+		  return generer_url_ecrire("forum_admin", "id_forum=".$id_forum);
 	}
 }
 

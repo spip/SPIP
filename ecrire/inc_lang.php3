@@ -281,7 +281,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		} else {
 			$cible = $lien->getUrl();
 		}
-		$lien = http_php_scriptnq("$site/spip_cookie", $args);
+		$lien = generer_url_ecrire("$site/spip_cookie", $args);
 	}
 
 	return "<form action='"

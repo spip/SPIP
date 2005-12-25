@@ -90,7 +90,7 @@ function table_auteurs_edit($auteur)
 	echo "<td>";
 	
 	if (statut_modifiable_auteur($id_auteur, $auteur)) {
-		icone (_T("admin_modifier_auteur"), http_php_scriptnq("auteur_infos","id_auteur=$id_auteur"), "redacteurs-24.gif", "edit.gif");
+		icone (_T("admin_modifier_auteur"), generer_url_ecrire("auteur_infos","id_auteur=$id_auteur"), "redacteurs-24.gif", "edit.gif");
 	}
 	echo "</td></tr></table>";
 
@@ -131,7 +131,7 @@ function table_auteurs_edit($auteur)
 		afficher_messages(_T('info_vos_rendez_vous'), $query_message, false, false);
 	
 		icone_horizontale(_T('info_envoyer_message_prive'),
-				  http_php_scriptnq("message_edit", "new=oui&type=normal&dest=$id_auteur"),
+				  generer_url_ecrire("message_edit", "new=oui&type=normal&dest=$id_auteur"),
 				  "message.gif");
 		fin_cadre_couleur();
 	}

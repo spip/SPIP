@@ -63,7 +63,7 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-	  redirige_par_entete(http_php_scriptnq($GLOBALS['meta']["adresse_site"] .
+	  redirige_par_entete(generer_url_ecrire($GLOBALS['meta']["adresse_site"] .
 						"/spip_test_dirs"));
 	}
 }
@@ -215,7 +215,7 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("HTTP/1.0 401 Unauthorized");
 	echo "<b>$pb</b><p>$raison</p>[<a href='./'>$retour</a>] ";
 	if ($url) {
-		echo "[<a href='", http_php_scriptnq('spip_cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
+		echo "[<a href='", generer_url_ecrire('spip_cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
 	}
 	
 	if ($lien)

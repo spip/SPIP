@@ -125,7 +125,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 			syndication='$syndication', statut='$statut'
 			WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-		$link = new Link(http_php_scriptnq('sites'));
+		$link = new Link(generer_url_ecrire('sites'));
 		$link->addVar('id_syndic');
 		$link->addVar('redirect');
 		$redirect = $link->getUrl();
@@ -199,7 +199,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
-	$link = new Link(http_php_scriptnq('sites'));
+	$link = new Link(generer_url_ecrire('sites'));
 	$link->addVar('id_syndic');
 	$link->addVar('redirect');
 	$link->addVar('reload', $reload);
@@ -302,7 +302,7 @@ fin_boite_info();
 
 
 echo "<p><center>";
-	icone (_T('icone_voir_sites_references'), http_php_scriptnq("sites_tous",""), "site-24.gif","rien.gif");
+	icone (_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 echo "</center>";
 
 if ($id_syndic AND $flag_administrable)
@@ -350,7 +350,7 @@ if (strlen($descriptif) > 1) {
 echo "</td>";
 
 if ($flag_editable) {
-	$link = new Link(http_php_scriptnq('sites_edit'));
+	$link = new Link(generer_url_ecrire('sites_edit'));
 	$link->addVar('id_syndic');
 	$link->addVar('target', $clean_link->getUrl());
 	echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
@@ -372,7 +372,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date(http_php_scriptnq("sites", "id_syndic=$id_syndic&options=$options"), _T('info_date_referencement'), $jour, $mois, $annee);
+		echo afficher_formulaire_date(generer_url_ecrire("sites", "id_syndic=$id_syndic&options=$options"), _T('info_date_referencement'), $jour, $mois, $annee);
 		fin_cadre_enfonce();	
 	}
 	else {
@@ -387,7 +387,7 @@ if ($flag_editable AND $options == 'avancees') {
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 
-	echo "<form action='", http_php_scriptnq('sites'), "'>\n",
+	echo "<form action='", generer_url_ecrire('sites'), "'>\n",
 	  "<center><b>",
 	  _T('info_statut_site_1'),
 	  "</b> &nbsp;&nbsp; \n",
@@ -417,7 +417,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		debut_boite_info();
 		echo _T('avis_site_syndique_probleme', array('url_syndic' => $url_syndic));
 		echo "<center><b>";
-		echo "<a href='" . http_php_scriptnq("sites","id_syndic=$id_syndic&reload=oui") . "'>";
+		echo "<a href='" . generer_url_ecrire("sites","id_syndic=$id_syndic&reload=oui") . "'>";
 		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
 		fin_boite_info();
 	}
@@ -433,7 +433,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		.".</div>\n";
 		
 		echo "<div align='right'>\n"
-		. "<form method='post' action='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "'>"
+		. "<form method='post' action='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "'>"
 		. "<input type='submit' name='reload' value=\""
 		. attribut_html(_T('lien_mise_a_jour_syndication'))
 		. "\" class='fondo' style='font-size:9px;' /></form></div>\n";
@@ -444,7 +444,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		debut_cadre_relief();
 		echo "<u>"._T('syndic_options')."</u>"
 			. aide('artsyn')."\n"
-			. "<form method='POST' action='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "' class='verdana2'>\n";
+			. "<form method='POST' action='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "' class='verdana2'>\n";
 
 		// modifier la moderation
 		if ($moderation == 'oui' OR $moderation == 'non')
@@ -524,7 +524,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 // Cas d'un site ayant un feedfinder detecte
 else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 	echo "<br /><br />\n";
-	echo "<form method='post' action='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "'>";
+	echo "<form method='post' action='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "'>";
 	foreach (
 		array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')
 	as $var) {
@@ -567,9 +567,9 @@ fin_cadre_relief();
 
 echo "<br><br>\n";
 
- $forum_retour = http_php_scriptnq("sites","id_syndic=$id_syndic");
+ $forum_retour = generer_url_ecrire("sites","id_syndic=$id_syndic");
 
-$link = new Link(http_php_scriptnq('forum_envoi'));
+$link = new Link(generer_url_ecrire('forum_envoi'));
 $link->addVar('statut', 'prive');
 $link->addVar('adresse_retour', $forum_retour);
 $link->addVar('id_syndic');
