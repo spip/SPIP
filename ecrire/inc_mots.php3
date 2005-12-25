@@ -217,7 +217,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
 
 					if ($type_mot) echo " ($type_mot)";
-					echo " | <A href=", http_php_script($url_base, "$id_table=$id_objet&nouv_mot=$id_mot#mots"), ">",_T('info_ajouter_mot'),"</A>";
+					echo " | <A href='", http_php_scriptnq($url_base, "$id_table=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
 
 					if (strlen($descriptif_mot) > 1) {
 						echo "<BR><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
@@ -417,7 +417,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		if ($nombre_mots_associes > 3) {
 			echo "<div align='right' class='arial1'>";
-			echo "<a href=", http_php_script($url_base, "$id_table=$id_objet&supp_mot=-1#mots"), ">",_T('info_retirer_mots'),"</a>";
+			echo "<a href='", http_php_scriptnq($url_base, "$id_table=$id_objet&supp_mot=-1#mots"), "'>",_T('info_retirer_mots'),"</a>";
 			echo "</div><br />\n";
 		}
 
