@@ -13,11 +13,11 @@
 
 //
 // Ce fichier regroupe la quasi totalite des definitions de #BALISES de spip
-// Pour chaque balise, il est possible de surcharger, dans mes_fonctions.php3,
+// Pour chaque balise, il est possible de surcharger, dans mes_fonctions,
 // la fonction balise_TOTO_dist par une fonction balise_TOTO() respectant la
 // meme API : 
 // elle recoit en entree un objet de classe CHAMP, le modifie et le retourne.
-// Cette classe est definie dans inc-compilo-index.php3
+// Cette classe est definie dans inc-compilo-index
 //
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
@@ -428,7 +428,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // quasiment jamais se trouver ralenti par des taches de fond un peu lentes
 // ATTENTION: cette balise efface parfois les boutons admin implicites
 function balise_SPIP_CRON_dist ($p) {
-	$p->code = "'<div style=\\'position: absolute; background-image: url(\"spip_background.php3\"); height: 1px; width: 1px;\\'></div>'";
+	$p->code = "'<div style=\\'position: absolute; background-image: url(\"spip_background" . _EXTENSION_PHP . "\"); height: 1px; width: 1px;\\'></div>'";
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -635,7 +635,7 @@ function calculer_balise_logo ($p) {
 
 // #EXTRA [(#EXTRA|isbn)]
 // Champs extra
-// Non documentes, en voie d'obsolescence, cf. ecrire/inc_extra.php3
+// Non documentes, en voie d'obsolescence, cf. ecrire/inc_extra
 function balise_EXTRA_dist ($p) {
 	$_extra = champ_sql('extra', $p);
 	$p->code = $_extra;
@@ -673,7 +673,7 @@ function balise_EXTRA_dist ($p) {
 //
 
 function balise_PARAMETRES_FORUM_dist($p) {
-	include_local(find_in_path('inc-formulaire_forum.php3'));
+	include_local(find_in_path('inc-formulaire_forum' . _EXTENSION_PHP));
 	$_id_article = champ_sql('id_article', $p);
 	$p->code = '
 		// refus des forums ?

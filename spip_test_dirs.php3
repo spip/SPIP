@@ -76,7 +76,7 @@ if ($bad_dirs OR $absent_dirs) {
 	} else
 		$titre = _T('dirs_probleme_droits');
 
-	$bad_url = "spip_test_dirs.php3";
+	$bad_url = "spip_test_dirs" . _EXTENSION_PHP;
 	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
 
 	$res = "<div align='right'>". menu_langues('var_lang_ecrire')."</div>\n";
@@ -104,7 +104,7 @@ if ($bad_dirs OR $absent_dirs) {
 
 } else {
 	if (!_FILE_CONNECT)
-		header("Location: " . _DIR_RESTREINT_ABS . "install.php3?etape=1");
+		header("Location: " . _DIR_RESTREINT_ABS . "install" . _EXTENSION_PHP . "?etape=1");
 	else
 		header("Location: " . _DIR_RESTREINT_ABS);
 }
