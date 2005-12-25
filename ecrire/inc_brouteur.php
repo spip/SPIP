@@ -89,13 +89,13 @@ function brouteur_dist()
 					else $icone = "rubrique-24.gif";
 					$ret = "<div " .
 					  http_style_background($icone,
-								"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href=" . http_php_script("brouteur","id_rubrique=$lien") . ">$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+								"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='" . http_php_scriptnq("brouteur","id_rubrique=$lien") . "'>$titre</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 				}
 			}
 			$lien = $dest[$nb_col-$compteur-2];
 			$ret = "<div " .
 			  http_style_background("racine-site-24.gif",
-						"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href=" . http_php_script("brouteur","id_rubrique=$lien") . ">"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
+						"$spip_lang_left no-repeat; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px") . "><a href='" . http_php_scriptnq("brouteur","id_rubrique=$lien") . "'>"._T('info_racine_site')."</a></div><div style='margin-$spip_lang_left: 28px;'>$ret</div>";
 			echo $ret;
 			
 			echo "</div>";

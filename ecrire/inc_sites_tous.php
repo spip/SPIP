@@ -307,7 +307,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 				else
 					$s = $aff;
 					
-				$s = "<a href=" . http_php_script("sites","id_syndic=$id_syndic") . ">$aff</a>";
+				$s = "<a href='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "'>$aff</a>";
 
 				$vals[] = $s;
 			}

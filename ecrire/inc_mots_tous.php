@@ -150,7 +150,7 @@ if ($conf_mot>0) {
 	  _T('item_oui'),
 	  "</A>,</B> ",
 	  _T('info_oui_suppression_mot_cle');
-	echo "<LI><B><A href=" . http_php_script("mots_tous","") . ">"._T('item_non')."</A>,</B> "._T('info_non_suppression_mot_cle');
+	echo "<LI><B><A href='" . http_php_scriptnq("mots_tous","") . "'>"._T('item_non')."</A>,</B> "._T('info_non_suppression_mot_cle');
 	echo "</UL>";
 	echo "</div>";
 	fin_boite_info();

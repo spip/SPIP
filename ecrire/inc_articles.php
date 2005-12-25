@@ -572,7 +572,7 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='art
 				if ($options == "avancees") {
 					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_article</b></div>";
 				}
-				echo "<a class='$ze_statut' style='font-size: 10px;' href=" . http_php_script("articles","id_article=$ze_article") . ">$numero$ze_titre</a>";
+				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . http_php_scriptnq("articles","id_article=$ze_article") . "'>$numero$ze_titre</a>";
 			}
 			echo "</div>";
 			echo "</div>";
@@ -902,7 +902,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 				} else {
 				  if ($connect_statut=='0minirezo'
 				  AND $connect_toutes_rubriques)
-				  	$vals[] = "<a href=" . http_php_script("articles","id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad") . ">". 
+				  	$vals[] = "<a href='" . http_php_scriptnq("articles","id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad") . "'>". 
 				    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'", _T('trad_reference')) . "</a>";
 				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
 				}
@@ -911,7 +911,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 				$s = typo($titre_trad);
 				if ($id_article_trad != $id_article) 
-					$s = "<a href=" . http_php_script("articles","id_article=$id_article_trad") . ">$s</a>";
+					$s = "<a href='" . http_php_scriptnq("articles","id_article=$id_article_trad") . "'>$s</a>";
 				if ($id_article_trad == $id_trad)
 					$s .= " "._T('trad_reference');
 
@@ -1168,7 +1168,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 		else $vals[] =  "&nbsp;";
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-		  $vals[] =  "<A href=" . http_php_script("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . ">"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
+		  $vals[] =  "<A href='" . http_php_scriptnq("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
 		} else {
 			$vals[] = "";
 		}
@@ -1363,7 +1363,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A href=" . http_php_script("articles","id_article=$id_article&debut=$i") . ">$i-$y</A>] ";
+			echo "[<A href='" . http_php_scriptnq("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
 	}
 	echo "</div>";
 }
@@ -1381,7 +1381,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A href=" . http_php_script("articles","id_article=$id_article&debut=$i") . ">$i-$y</A>] ";
+			echo "[<A href='" . http_php_scriptnq("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
 	  }
 	  echo "</div>";
 	}

@@ -49,7 +49,7 @@ function ecrire_metas() {
 		$ok = ecrire_fichier (_DIR_SESSIONS.'meta_cache.txt', serialize($meta));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
 			echo "<h4 font color=red>"._T('texte_inc_meta_1')
-			." <a href=" . http_php_script("../spip_test_dirs","") . ">"._T('texte_inc_meta_2')
+			." <a href='" . http_php_scriptnq("../spip_test_dirs","") . "'>"._T('texte_inc_meta_2')
 			."</a> "._T('texte_inc_meta_3')."&nbsp;</h4>\n";
 	}
 }

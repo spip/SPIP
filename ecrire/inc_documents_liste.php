@@ -65,7 +65,7 @@ debut_droite();
 			else
 				echo "<p><tt>$fichier</tt>";
 
-			echo "<p>"._T('info_dans_rubrique')." <a href=" . http_php_script("naviguer","id_rubrique=$id_rubrique") . ">$titre_rub</a>";
+			echo "<p>"._T('info_dans_rubrique')." <a href='" . http_php_scriptnq("naviguer","id_rubrique=$id_rubrique") . "'>$titre_rub</a>";
 			
 			fin_cadre_relief();
 	}

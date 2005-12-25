@@ -129,7 +129,7 @@ echo "</td><td>";
 	if ($tri == '' OR $tri=='nom')
 		echo '<b>'._T('info_nom').'</b>';
 	else
-		echo "<a href=" . http_php_script("auteurs","tri=nom") . " title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>";
+		echo "<a href='" . http_php_scriptnq("auteurs","tri=nom") . "' title='"._T('lien_trier_nom')."'>"._T('info_nom')."</a>";
 
 if ($options == 'avancees') echo "</td><td colspan='2'>"._T('info_contact');
 echo "</td><td>";
@@ -137,7 +137,7 @@ echo "</td><td>";
 		if ($tri=='nombre')
 			echo '<b>'._T('info_articles').'</b>';
 		else
-			echo "<a href=" . http_php_script("auteurs","tri=nombre") . " title=\""._T('lien_trier_nombre_articles')."\">"._T('info_articles_2')."</a>"; //'
+			echo "<a href='" . http_php_scriptnq("auteurs","tri=nombre") . "' title=\""._T('lien_trier_nombre_articles')."\">"._T('info_articles_2')."</a>"; //'
 	}
 echo "</td></tr>\n";
 
