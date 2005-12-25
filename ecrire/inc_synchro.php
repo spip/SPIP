@@ -23,14 +23,14 @@ function afficher_liens_calendrier($lien, $args, $icone, $texte) {
 	echo $texte;
 	echo "<table style='width: 100%;><tr'><td style='width: 200px;'>";
 		icone_horizontale (_T('ical_methode_http'),
-				   http_php_script("$adresse_site/$lien", $args),
+				   http_php_scriptnq("$adresse_site/$lien", $args),
 				   "calendrier-24.gif");
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
 		$webcal = ereg_replace("https?://", "webcal://", $adresse_site);
 		icone_horizontale (_T('ical_methode_webcal'), 
-				   http_php_script("$webcal/$lien", $args),
+				   http_php_scriptnq("$webcal/$lien", $args),
 				   "calendrier-24.gif");
 	echo "</td></tr></table>";
 	echo fin_cadre_enfonce();
@@ -164,9 +164,9 @@ debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
 
 echo _T('ical_texte_js').'<p />';
 
-echo propre('<cadre><script type="text/javascript" src='.
-	    http_php_script($adresse_site."/distrib") .
-	    "</script></cadre>");
+echo propre('<cadre><script type="text/javascript" src="'.
+	    http_php_scriptnq($adresse_site."/distrib") .
+	    '"</script></cadre>');
 
 fin_cadre_relief();
 

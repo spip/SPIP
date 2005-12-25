@@ -148,9 +148,9 @@ function mini_nav_principal ($id_rubrique, $rac="", $rub_exclus=0) {
 function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false) {
 
 	if (!$fonction)
-		$fonction = "document.location=" .
-			http_php_script('naviguer', "id_rubrique=::sel::") .
-			';';
+		$fonction = "document.location='" .
+			http_php_scriptnq('naviguer', "id_rubrique=::sel::") .
+			"';";
 
 	global $couleur_foncee, $spip_lang_right, $spip_lang_left;
 	if ($id_rubrique < 1) $id_rubrique = 0;

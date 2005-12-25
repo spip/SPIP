@@ -105,9 +105,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 		echo "</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
-		echo "\n<br />[<a href=",
-		  http_php_script("../spip_image", "$id_objet=$id&action=effacer&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)),
-		  ">",_T('lien_supprimer'),"</a>]";
+		echo "\n<br />[<a href='", http_php_scriptnq("../spip_image", "$id_objet=$id&action=effacer&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}

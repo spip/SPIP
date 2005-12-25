@@ -30,9 +30,7 @@ function brouteur_frame_dist()
 	if ($effacer_suivant == "oui" && $frame < $nb_col) {
 	  echo '<script>';
 		for ($i = $frame+1; $i < $nb_col; $i++) {
-		  echo "\nparent.iframe$i.location.href=\"",
-		    http_php_scriptnq('brouteur_frame',"frame=$i"),
-		    '"';
+		  echo "\nparent.iframe$i.location.href='", http_php_scriptnq('brouteur_frame',"frame=$i"), "'";
 		}
 	  echo '</script>';
 	}
@@ -122,15 +120,18 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 
 			if ($id_parent == '0') 	{
 			  echo "<div style='background-image: url(",
-			    _DIR_IMG_PACK, "secteur-24.gif);'><a href='",
-			    http_php_scriptnq('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"),
-			    "' target='iframe".($frame+1)."'>$titre</a></div>";
+			    _DIR_IMG_PACK,
+			    "secteur-24.gif);'><a href='", http_php_scriptnq('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe", ($frame+1), "'>",
+			    $titre,
+			    "</a></div>";
 			}
 			else {
 				if ($frame+1 < $nb_col)
-				  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "rubrique-24.gif);'><a href='",
-				    http_php_scriptnq('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"),
-				    "' target='iframe".($frame+1)."'>$titre</a></div>";
+				  echo "<div style='background-image: url(",
+				    _DIR_IMG_PACK,
+				    "rubrique-24.gif);'><a href='", http_php_scriptnq('brouteur_frame', "id_rubrique=$ze_rubrique&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
+				    ($frame+1),
+				    "'>$titre</a></div>";
 				else  echo "<div style='background-image: url(" . _DIR_IMG_PACK . "rubrique-24.gif);'><a href='javascript:window.parent.location=\"" . http_php_scriptnq('brouteur',"id_rubrique=$ze_rubrique")."\"'>",$titre,"</a></div>";
 			}
 			echo "</div>\n";
@@ -226,9 +227,9 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
 			$result=spip_query($query);
 			if (spip_num_rows($result)>0) {
-			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),"><b class='verdana2'><a href='",
-			    http_php_scriptnq('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"),
-			    "' target='iframe".($frame+1)."'>"._T("info_cours_edition")."</a></b></div>";
+			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
+			    "><b class='verdana2'><a href='", http_php_scriptnq('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",($frame+1),"'>",
+			    _T("info_cours_edition"),"</a></b></div>";
 			}
 			
 			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC";
@@ -241,12 +242,11 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 			
 			if ($total_articles + $total_breves > 0)
 			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
-			    "><b class='verdana2'><a href='",
-			    http_php_scriptnq('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui"),
-			    "' target='iframe".($frame+1)."'>"._T("info_articles_proposes")." / "._T("info_breves_valider")."</a></b></div>";
-
+			    "><b class='verdana2'><a href='", http_php_scriptnq('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
+			    ($frame+1)."'>",
+			    _T("info_articles_proposes"),
+			    " / "._T("info_breves_valider")."</a></b></div>";
 		}
-
 	}
    }
 	echo "</div>";

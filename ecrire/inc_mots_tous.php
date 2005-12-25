@@ -142,11 +142,11 @@ if ($conf_mot>0) {
 	echo _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie));
 
 	echo "<UL>";
-	echo "<LI><B><A HREF=",
-	  http_php_script('mots_edit', 
+	echo "<LI><B><A href='",
+	  http_php_scriptnq('mots_edit', 
 			  "supp_mot=$id_mot&redirect_ok=oui&redirect=" .
 			  http_php_scriptnq('mots_tous')),
-	  ">",
+	  "'>",
 	  _T('item_oui'),
 	  "</A>,</B> ",
 	  _T('info_oui_suppression_mot_cle');

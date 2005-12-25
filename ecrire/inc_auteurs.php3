@@ -150,13 +150,9 @@ if ($nombre_auteurs > $max_par_page) {
 		if ($j == $debut)
 			echo "<b>$j</b>";
 		else if ($j > 0)
-		  echo "<a href=",
-		    http_php_script('auteurs',"tri=$tri$visiteurs&debut=$j"),
-		    ">$j</a>";
+		  echo "<a href='", http_php_scriptnq('auteurs',"tri=$tri$visiteurs&debut=$j"), "'>$j</a>";
 		else
-		  echo " <a href=",
-		    http_php_script('auteurs',"tri=$tri$visiteurs"),
-		    ">0</a>";
+		  echo " <a href='",  http_php_scriptnq('auteurs',"tri=$tri$visiteurs"), "'>0</a>";
 
 		if ($debut > $j  AND $debut < $j+$max_par_page){
 			echo " | <b>$debut</b>";
@@ -173,9 +169,7 @@ if ($nombre_auteurs > $max_par_page) {
 			if ($val == $debut)
 				echo "<b>$key</b> ";
 			else
-			  echo "<a href=",
-			    http_php_script('auteurs',"tri=$tri$visiteurs&debut=$val"),
-			    ">$key</a> ";
+			  echo "<a href='", http_php_scriptnq('auteurs',"tri=$tri$visiteurs&debut=$val"),"'>$key</a> ";
 		}
 		echo "</td></tr>\n";
 	}

@@ -348,12 +348,8 @@ if (!$origine) {
 	
 if (flag_svg()) {
 	echo "\n<div>";
-	echo "<object data=",
-	  http_php_script('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"),
-	  " width='450' height='310' type='image/svg+xml'>";
-	echo "<embed src=",
-	  http_php_script('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"),
-	  " width='450' height='310' type='image/svg+xml' />";
+	echo "<object data='", http_php_scriptnq('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml'>";
+	echo "<embed src='", http_php_scriptnq('statistiques_svg',"id_article=$id_article&aff_jours=$aff_jours"), "' width='450' height='310' type='image/svg+xml' />";
 	echo "</object>";
 	echo "\n</div>";
 	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));

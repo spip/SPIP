@@ -1817,7 +1817,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 
 	return $res .
 	  '<link rel="stylesheet" type="text/css" href=\'' .
-	  http_php_script(_DIR_RESTREINT . 'spip_style',
+	  http_php_scriptnq(_DIR_RESTREINT . 'spip_style',
 			  "couleur_claire=" .
 			  urlencode($couleur_claire) .
 			  '&couleur_foncee=' .

@@ -387,9 +387,7 @@ if ($flag_editable AND $options == 'avancees') {
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 
-	echo "<form action=",
-	  http_php_script('sites'),
-	  ">\n",
+	echo "<form action='", http_php_scriptnq('sites'), "'>\n",
 	  "<center><b>",
 	  _T('info_statut_site_1'),
 	  "</b> &nbsp;&nbsp; \n",

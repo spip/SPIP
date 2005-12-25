@@ -215,14 +215,11 @@ function ask_php_auth($pb, $raison, $retour, $url='', $re='', $lien='') {
 	@Header("HTTP/1.0 401 Unauthorized");
 	echo "<b>$pb</b><p>$raison</p>[<a href='./'>$retour</a>] ";
 	if ($url) {
-		echo "[<a href=",
-		  http_php_script('spip_cookie',"essai_auth_http=oui&$url"),
-		  "'>$re</a>]";
+		echo "[<a href='", http_php_scriptnq('spip_cookie',"essai_auth_http=oui&$url"), "'>$re</a>]";
 	}
 	
 	if ($lien)
-		echo " [<a href='" . _DIR_RESTREINT_ABS
-		. "'>"._T('login_espace_prive')."</a>]";
+		echo " [<a href='" . _DIR_RESTREINT_ABS . "'>"._T('login_espace_prive')."</a>]";
 	exit;
 }
 

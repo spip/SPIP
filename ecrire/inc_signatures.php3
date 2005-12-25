@@ -86,12 +86,11 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		    $id_article,
 		    " </b></span>";
 		
-		echo "<a href=",
-		  http_php_script((($statut == 'publie') ? 
+		echo "<a href='", http_php_scriptnq((($statut == 'publie') ? 
 				   "../spip_redirect" :
 				   "articles"),
 				  "id_article=$id_article"),
-		  ">",
+		  "'>",
 		  typo($titre),
 		  "</a>";
 
@@ -120,9 +119,7 @@ function tronconne_signatures($script, $id_article, $debut, $where, $limit)
 			if ($c == ($debut+1))
 				echo "<FONT SIZE=3><B>$c</B></FONT>";
 			else
-			  echo "<A alt=\"$date\" title=\"$date\" href=",
-			    http_php_script($script, $args ."debut=".($c-1)),
-			    ">$c</A>";
+			  echo "<A alt=\"$date\" title=\"$date\" href='", http_php_scriptnq($script, $args ."debut=".($c-1)), "'>$c</A>";
 		}
 	}
 	return $where;
