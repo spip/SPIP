@@ -435,7 +435,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		.".</div>\n";
 		
 		echo "<div align='right'>\n"
-		. "<form method='post' action=" . http_php_script("sites","id_syndic=$id_syndic") . ">"
+		. "<form method='post' action='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "'>"
 		. "<input type='submit' name='reload' value=\""
 		. attribut_html(_T('lien_mise_a_jour_syndication'))
 		. "\" class='fondo' style='font-size:9px;' /></form></div>\n";
@@ -446,7 +446,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		debut_cadre_relief();
 		echo "<u>"._T('syndic_options')."</u>"
 			. aide('artsyn')."\n"
-			. "<form method='POST' action=" . http_php_script("sites","id_syndic=$id_syndic") . " class='verdana2'>\n";
+			. "<form method='POST' action='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "' class='verdana2'>\n";
 
 		// modifier la moderation
 		if ($moderation == 'oui' OR $moderation == 'non')
@@ -526,7 +526,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 // Cas d'un site ayant un feedfinder detecte
 else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 	echo "<br /><br />\n";
-	echo "<form method='post' action=" . http_php_script("sites","id_syndic=$id_syndic") . ">";
+	echo "<form method='post' action='" . http_php_scriptnq("sites","id_syndic=$id_syndic") . "'>";
 	foreach (
 		array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')
 	as $var) {

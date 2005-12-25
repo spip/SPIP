@@ -59,7 +59,7 @@ echo _T('texte_sauvegarde')."</FONT></B></TD></TR>";
 
 echo "<tr><td class='serif'>";
 
-echo "\n<FORM action=" . http_php_script("export_all","") . " METHOD='get'>";
+echo "\n<form action='" . http_php_scriptnq("export_all","") . "' method='get'>";
 
 echo "\n<p align='justify'>";
 echo http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
@@ -94,7 +94,7 @@ echo _T('texte_restaurer_base')."</FONT></B></TD></TR>";
 
 echo "<TR><td class='serif'>";
 
-echo "\n<FORM action=" . http_php_script("import_all","") . " METHOD='get'>";
+echo "\n<form action='" . http_php_scriptnq("import_all","") . "' method='get'>";
 
 echo "\n<p align='justify'> "._T('texte_restaurer_sauvegarde');
 
@@ -131,7 +131,7 @@ if ($options == "avancees") {
 
 		echo "<TR><TD class='serif'>";
 
-		echo "\n<FORM action=" . http_php_script("admin_repair","") . " METHOD='get'>";
+		echo "\n<form action='" . http_php_scriptnq("admin_repair","") . "' method='get'>";
 
 		echo "\n<p align='justify'>"._T('texte_crash_base');
 

@@ -115,7 +115,7 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 		$hash = calculer_action_auteur("ajouter $racine");
 		echo debut_block_invisible(md5($titre));
 
-		echo "\n\n<FORM action=" . http_php_script("../spip_image","") . " METHOD='POST'
+		echo "\n\n<form action='" . http_php_scriptnq("../spip_image","") . "' method='POST'
 			ENCTYPE='multipart/form-data'>
 			<div>";
 		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect' />";

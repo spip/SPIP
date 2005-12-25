@@ -195,7 +195,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	echo "<tr bgcolor='white'><td align='left'>";
 	if ($debut > 0) {
 		$debut_prec = max($debut - $max_par_page, 0);
-		echo "\n<form action=" . http_php_script("auteurs","") . ">",
+		echo "\n<form action='" . http_php_scriptnq("auteurs","") . "'>",
 		  "\n<input type='hidden' name='tri' value='$tri' />",
 		  "\n<input type='hidden' name='debut' value='$debut_prec' />",
 		  "\n<input type='submit' value='&lt;&lt;&lt;' class='fondo' />",
@@ -203,7 +203,7 @@ if ($debut_suivant < $nombre_auteurs OR $debut > 0) {
 	}
 	echo "</td><td style='text-align: $spip_lang_right'>";
 	if ($debut_suivant < $nombre_auteurs) {
-		echo "\n<form action=" . http_php_script("auteurs","") . ">",
+		echo "\n<form action='" . http_php_scriptnq("auteurs","") . "'>",
 		  "\n<input type='hidden' name='tri' value='$tri' />",
 		  "\n<input type='hidden' name='debut' value='$debut_suivant' />",
 		  "\n<input type='submit' value='&gt;&gt;&gt;' class='fondo' />",

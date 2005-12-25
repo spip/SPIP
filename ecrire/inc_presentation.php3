@@ -2831,7 +2831,7 @@ if (true /*$gadgets*/) {
 		global $recherche;
 				$recherche_aff = _T('info_rechercher');
 			//	$onfocus = "onfocus=this.value='';";
-			echo "<form method='get' style='margin: 0px; position: relative;' action=" . http_php_script("recherche","") . ">";
+			echo "<form method='get' style='margin: 0px; position: relative;' action='" . http_php_scriptnq("recherche","") . "'>";
 			
 
 			
