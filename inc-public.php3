@@ -24,7 +24,7 @@ if (defined("_INC_PUBLIC")) {
 
 } else {
 	define ("_INC_PUBLIC", 1);
-	if (!function_exists('include_local')) { # cas de page.php3
+	if (!function_exists('include_local')) { # cas du script page
 		include ("ecrire/inc_version.php3");
 	}
 	include_local('inc-public-global');
@@ -37,7 +37,7 @@ if (defined("_INC_PUBLIC")) {
 	if ($affiche_boutons_admin = (
 	(!$flag_preserver AND $GLOBALS['_COOKIE']['spip_admin'])
 	OR $var_mode == 'debug'))
-	  include_local(find_in_path('inc-formulaire_admin.php3'));
+	  include_local(find_in_path('inc-formulaire_admin'. _EXTENSION_PHP));
 	// Execution de la page calculee
 
 	// 1. Cas d'une page contenant uniquement du HTML :

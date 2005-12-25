@@ -180,7 +180,7 @@ function calculer_boucle($id_boucle, &$boucles) {
 	if ($boucle->mode_partie)
 		$corps .= "\n		}\n";
 
-	// Gestion de la hierarchie (voir inc-boucles.php3)
+	// Gestion de la hierarchie (voir inc-boucles)
 	if ($boucle->hierarchie)
 		$init .= "\n	".$boucle->hierarchie;
 
