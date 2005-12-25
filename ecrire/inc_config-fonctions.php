@@ -114,10 +114,10 @@ function afficher_choix_vignette($process) {
 		
 	} */
 
-	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'><a href=" , http_php_script("config-fonctions","image_process=$process") , 
-	  "><img src=",
-	  http_php_script('../spip_image', "action=tester&doc=$process"),
-	  " border='$border' /></a><br />";
+	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'><a href='" , http_php_scriptnq("config-fonctions","image_process=$process"), 
+	  "'><img src='",
+	  http_php_scriptnq('../spip_image', "action=tester&doc=$process"),
+	  "' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";
 	echo "</div></td>\n";

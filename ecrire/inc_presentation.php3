@@ -1705,9 +1705,9 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 
 			if (!$controle_id_article) {
 				echo "<div align='right' class='verdana1'>";
-				echo "<b><a href=",
-				  http_php_script("forum_envoi","id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)."&titre_message=".rawurlencode($titre)), 
-				  ">",
+				echo "<b><a href='",
+				  http_php_scriptnq("forum_envoi","id_parent=$id_forum&adresse_retour=".rawurlencode($adresse_retour)."&titre_message=".rawurlencode($titre)), 
+				  "'>",
 				  _T('lien_repondre_message'),
 				  "</a></b></div>";
 			}
@@ -1816,7 +1816,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 	}
 
 	return $res .
-	  '<link rel="stylesheet" type="text/css" href=' .
+	  '<link rel="stylesheet" type="text/css" href=\'' .
 	  http_php_script(_DIR_RESTREINT . 'spip_style',
 			  "couleur_claire=" .
 			  urlencode($couleur_claire) .
@@ -1824,7 +1824,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 			  urlencode($couleur_foncee) .
 			  '&left=' . 
 			  $GLOBALS['spip_lang_left']) .
-	  ">\n" .
+	  "'>\n" .
 	  debut_javascript($connect_statut == "0minirezo" AND $connect_toutes_rubriques, ($GLOBALS['meta']["activer_statistiques"] != 'non')) .
 
 	// CSS calendrier
@@ -2384,9 +2384,9 @@ else {
 	echo "<td> &nbsp; </td>";
 
 	icone_bandeau_principal (_T('icone_aide_ligne'),
-				 "javascript:window.open(" .
-				 http_php_script("aide_index","var_lang=$spip_lang") .
-				 ", 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
+				 "javascript:window.open('" .
+				 http_php_scriptnq("aide_index","var_lang=$spip_lang") .
+				 "', 'aide_spip', 'scrollbars=yes,resizable=yes,width=740,height=580');",
 		"aide-48".aide_lang_dir($spip_lang,$spip_lang_rtl).".png",
 		"vide", "", http_php_scriptnq("aide_index","var_lang=$spip_lang"),
 		"aide-en-ligne", $sous_rubrique);
@@ -3255,7 +3255,7 @@ function fin_html() {
 	if ($GLOBALS['spip_session'] && $GLOBALS['auteur_session']['ip_change']) {
 		echo 
 		  http_img_pack('rien.gif', " ", "name='img_session' width='0' height='0'"),
-		  http_script("\ndocument.img_session.src=" . http_php_script('../spip_cookie','change_session=oui'));
+		  http_script("\ndocument.img_session.src='" . http_php_scriptnq('../spip_cookie','change_session=oui') . "'");
 	}
 
 	echo "</body></html>\n";
@@ -3271,15 +3271,14 @@ function fin_page($credits='') {
 	debut_grand_cadre();
 
 	# ici on en profite pour glisser une tache de fond
-	echo "<div align='right' class='verdana2' ",
-	  "style='background: url(", 
-	  http_php_script('../spip_background'),
-	  ");'>";
+	echo "<div align='right' class='verdana2' style='background: url(\"", 
+	  http_php_scriptnq('../spip_background'),
+	  "\");'>";
 
 	if ($spip_display == 4) {
-	  echo "<div><a href=",
-	    http_php_script('index', 'set_disp=2'),
-	    ">"._T("access_interface_graphique")."</a></div>";
+	  echo "<div><a href='", http_php_scriptnq('index', 'set_disp=2'), "'>",
+	    _T("access_interface_graphique"),
+	    "</a></div>";
 	} else {
 		echo info_copyright();
 		echo "<br>"._T('info_copyright_doc');
@@ -3296,13 +3295,12 @@ function debloquer_article($arg, $texte)
 {
 	$lien = new Link;
 	$lien->addVar('debloquer_article', $arg);
-	return "<a href=" .
-	  http_php_script('iframe_action',
-			  "action=articles_page&id=" .
-			  $arg .
-			  "&redirect=" .
-			  urlencode($lien->getUrl())) .
-	  " title='" .
+	return "<a href='" . http_php_scriptnq('iframe_action',
+					       "action=articles_page&id=" .
+					       $arg .
+					       "&redirect=" .
+					       urlencode($lien->getUrl())) .
+	  "' title='" .
 	  addslashes($texte) .
 	  "'>$texte&nbsp;" .
 	  http_img_pack("croix-rouge.gif", ($arg=='tous' ? "" : "X"),

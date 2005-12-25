@@ -45,7 +45,7 @@ afficher_sites(_T('titre_sites_proposes'), "SELECT * FROM spip_syndic WHERE stat
 if ($connect_statut == '0minirezo' OR $GLOBALS['meta']["proposer_sites"] > 0) {
 	echo "<div align='right'>";
 	$link = new Link(http_php_scriptnq('sites_edit'));
-	$link->addVar('target', http_php_script('sites'));
+	$link->addVar('target', http_php_scriptnq('sites'));
 	$link->addVar('redirect', $clean_link->getUrl());
 	icone(_T('icone_referencer_nouveau_site'), $link->getUrl(), "site-24.gif", "creer.gif");
 	echo "</div>";

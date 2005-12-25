@@ -187,10 +187,10 @@ function infos_naviguer($id_rubrique, $statut)
 			  echo 
 				http_img_pack('admin-12.gif','',''),
 				$logo,
-			    " <a href=",
-			    http_php_script('auteurs_edit',
+			    " <a href='",
+			    http_php_scriptnq('auteurs_edit',
 					    "id_auteur=$id"),
-				">",
+				"'>",
 				extraire_multi($row['nom']),
 				'</a><br />';
 			}
@@ -393,7 +393,7 @@ if ($relief) {
 	  if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
 		$link = new Link(http_php_scriptnq('sites_edit'));
 		$link->addVar('id_rubrique', $id_rubrique);
-		$link->addVar('target', http_php_script('sites'));
+		$link->addVar('target', http_php_scriptnq('sites'));
 		$link->addVar('redirect', $clean_link->getUrl());
 	
 		echo "<div align='$spip_lang_right'>";

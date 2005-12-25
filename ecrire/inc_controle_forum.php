@@ -301,9 +301,7 @@ $query_forum ORDER BY F.date_heure DESC LIMIT $limitnb OFFSET $limitdeb");
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>$i</B></FONT>";
 		else
-		  echo "<a href=", http_php_script('controle_forum',
-						   $args . "&debut=$i"),
-		    ">$i</a>";
+		  echo "<a href='", http_php_scriptnq('controle_forum', $args . "&debut=$i"), "'>$i</a>";
 		echo " | ";
 	}
 	// est-ce que ce message doit s'afficher dans la liste ?

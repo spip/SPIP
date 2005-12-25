@@ -324,16 +324,16 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$couleur="#EDF3FE";
 			}
 	
-			$url = "href=" . http_php_script('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(http_php_scriptnq($url_base, "$id_table=$id_objet#mots")));
+			$url = "href='" . http_php_scriptnq('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(http_php_scriptnq($url_base, "$id_table=$id_objet#mots"))) . "'";
 
 			$vals[] = "<A $url>" . http_img_pack('petite-cle.gif', "", "width='23' height='12' border='0'") ."</A>";
 			
 	
 			// Changer
 			if ($unseul == "oui" AND $flag_groupe) {
-			  $s = "<form action=" .
-			    http_php_script($url_base,"$id_table=$id_objet#mots") .
-			    " method='POST'>" .
+			  $s = "<form action='" .
+			    http_php_scriptnq($url_base,"$id_table=$id_objet#mots") .
+			    "' method='POST'>" .
 			    "<input type='hidden' name='$id_table' VALUE='$id_objet' />";
 				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet'>";
 				$s .= "<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
@@ -422,7 +422,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		}
 
 
-			  $form_mot = "<FORM ACTION=" . http_php_script($url_base, "$id_table=$id_objet#mots") . " method='POST' STYLE='margin:1px;'>"
+			  $form_mot = "<form action='" . http_php_scriptnq($url_base, "$id_table=$id_objet#mots") . "' method='POST' STYLE='margin:1px;'>"
 			."<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet' />";
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet' />";
@@ -657,9 +657,9 @@ function afficher_groupe_mots($id_groupe) {
 				$ifond = $ifond ^ 1;
 
 				if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
-				  $s = "<a href=" .
-				    http_php_script('mots_edit', "id_mot=$id_mot&redirect=" . http_php_scriptnq('mots_tous')) .
-				    " class='liste-mot'>".typo($titre_mot)."</a>";
+				  $s = "<a href='" .
+				    http_php_scriptnq('mots_edit', "id_mot=$id_mot&redirect=" . http_php_scriptnq('mots_tous')) .
+				    "' class='liste-mot'>".typo($titre_mot)."</a>";
 				else
 					$s = typo($titre_mot);
 
