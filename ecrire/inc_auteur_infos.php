@@ -455,37 +455,69 @@ function apparait_auteur_infos($id_auteur, $auteur)
 }
 
 
-function choix_statut_auteur($statut)
-{
+// Menu de choix d'un statut d'auteur
+function choix_statut_auteur($statut) {
 	global $connect_toutes_rubriques;
-	return "<select name='statut' size=1 class='fondl'
-		onChange=\"setvisibility('changer_statut_auteur', this.selectedIndex ? 'hidden' : 'visible');\">" .
 
-		(!$connect_toutes_rubriques ? "" :
-			("\n<option" .
+	$menu = "<select name='statut' size=1 class='fondl'
+		onChange=\"setvisibility('changer_statut_auteur', this.selectedIndex ? 'hidden' : 'visible');\">";
+
+	// Si on est admin restreint, on n'a pas le droit de modifier un admin
+	if ($connect_toutes_rubriques)
+		$menu .= "\n<option" .
 			mySel("0minirezo",$statut) .
-			 ">" .
-			 _T('item_administrateur_2') .
-			 '</option>')) .
-	  "\n<option" .
-	  mySel("1comite",$statut) .
-	  ">" .
-	  _T('intem_redacteur') .
-	  '</option>' .
-	  (!(($statut == '6forum')
-		      OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
-		      OR ($GLOBALS['meta']['forums_publics'] == 'abo')
-	     OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs WHERE statut='6forum'"))) ? "" :
-	   ("\n<option" .
-	    mySel("6forum",$statut) .
-	    ">" .
-	    _T('item_visiteur') .
-	    '</option>')) .
-	  "\n<option" .
-	  mySel("5poubelle",$statut) .
-	  " style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "._T('texte_statut_poubelle') .
-	  '</option>' .
-	  "</select>\n";
+			">" . _T('item_administrateur_2')
+			. '</option>';
+
+	// Ajouter le choix "comite"
+	$menu .=
+		"\n<option" .
+		mySel("1comite",$statut) .
+		">" .
+		_T('intem_redacteur') .
+		'</option>';
+
+	// Ajouter le choix "visiteur" si :
+	// - l'auteur est visiteur
+	// - OU, on accepte les visiteurs (ou forums sur abonnement)
+	// - OU il y a des visiteurs dans la base
+	if (($statut == '6forum')
+	OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
+	OR ($GLOBALS['meta']['forums_publics'] == 'abo')
+	OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs
+	WHERE statut='6forum'")))
+		$menu .= "\n<option" .
+			mySel("6forum",$statut) .
+			">" .
+			_T('item_visiteur') .
+			'</option>';
+
+	// Ajouter l'option "nouveau" si l'auteur n'est pas confirme
+	if ($statut == 'nouveau')
+		$menu .= "\n<option" .
+			mySel('nouveau',$statut) .
+			">" .
+			_L('Inscription &agrave; confirmer') .
+			'</option>';
+
+	// Ajouter l'option "autre" si le statut est inconnu
+	if (!in_array($statut, array('nouveau', '0minirezo', '1comite', '6forum')))
+		$menu .= "\n<option" .
+			mySel('autre','autre') .
+			">" .
+			_L('Autre statut&nbsp;: ').htmlentities($statut).
+			'</option>';
+
+
+
+	$menu .= "\n<option" .
+		mySel("5poubelle",$statut) .
+		" style='background:url(" . _DIR_IMG_PACK . "rayures-sup.gif)'>&gt; "
+		._T('texte_statut_poubelle') .
+		'</option>' .
+		"</select>\n";
+
+	return $menu;
 }
 
 //  affiche le statut de l'auteur dans l'espace prive
