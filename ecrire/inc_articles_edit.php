@@ -324,6 +324,29 @@ function articles_edit_dist()
   $id_rubrique =  intval($id_rubrique);
   $lier_trad =  intval($lier_trad);
 
+// ESSAI pour "Joindre un document" depuis l'espace prive (UPLOAD_DIRECT)
+/*if ($GLOBALS['action'] AND $GLOBALS['doc']) {
+	global $action, $doc;
+
+	$var_nom = "spip_image";
+	$var_f = find_in_path('inc_' . $var_nom . '.php');
+	if ($var_f) 
+		include($var_f);
+	else include_ecrire('inc_' . $var_nom);
+
+	$var_nom .= '_' . $action;
+
+	if (function_exists($var_nom))
+		$var_nom($doc);
+	elseif (function_exists($var_f = $var_nom . '_dist'))
+		$var_f($doc);
+	else
+		spip_log("fonction $var_nom indisponible");
+
+#	return;
+}*/
+
+
   if ($id_article) {
 	// Recuperer les donnees de l'article
 	$query = "SELECT * FROM spip_articles WHERE id_article=$id_article";
