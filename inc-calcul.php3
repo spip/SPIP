@@ -156,15 +156,21 @@ function cherche_page ($cache, $contexte, $fond)  {
 	$page = array();
 
 	if ($skel) {
-		if ($fonc = charger_squelette($skel))
-		  $page = $fonc(array('cache' => $cache), array($contexte));
+		if ($fonc = charger_squelette($skel)) {
+			spip_timer('calcul page');
+			$page = $fonc(array('cache' => $cache), array($contexte));
+			spip_log("calcul ("
+				.spip_timer('calcul page')
+				.") ".trim("[$skel] $cache")
+				." - ".strlen($page['texte']).' octets'
+			);
+		}
 
 		// Passer la main au debuggueur)
-		if ($GLOBALS['var_mode'] == 'debug')
-		  {
+		if ($GLOBALS['var_mode'] == 'debug') {
 			include_ecrire("inc_debug_sql");
 			debug_dumpfile ($page['texte'], $fonc, 'resultat');
-		  }
+		}
 	}
 #	spip_log("page " . strlen($page['texte']) . " $skel .  $fonc");
 	// Retourner la structure de la page
@@ -239,7 +245,6 @@ function calculer_page_globale($cache, $fond) {
 	}
 
 	// Go to work !
-	spip_timer('calculer_page');
 	$page = cherche_page($cache, $contexte, $fond);
 	$signal = array();
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
@@ -252,12 +257,6 @@ function calculer_page_globale($cache, $fond) {
 	$page['signal'] = $signal;
 	$page['signal']['process_ins'] = $page['process_ins'];
 	$lastmodified = time();
-	spip_log ("calculer_page ("
-		  . spip_timer('calculer_page')."): "
-		  . $_SERVER['REQUEST_METHOD'].
-		  " $fond ==> $cache "
-		  . strlen($page['texte'])
-		  . " octets");
 	return $page;
 }
 ?>
