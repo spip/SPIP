@@ -427,7 +427,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle='') {
 		// inclure
 		case 'include':
 			$code = calculer_inclure($p, $descr, $boucles, $id_boucle);
-			$commentaire = '!' . $p->texte;
+			$commentaire = '<INCLURE ' . $p->texte . '>';
 			$avant='';
 			$apres='';
 			$altern = "''";
@@ -486,17 +486,19 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle='') {
 		  erreur_squelette(_T('zbug_info_erreur_squelette'));
 		} // switch
 
-		if ($avant == "''")
-			$avant = '';
-		if ($apres == "''")
-			$apres = '';
-		if ($avant||$apres||($altern!="''")) {
-			$t = '$t' . $descr['niv'];
-			$res = (!$avant ? "" : "$avant . ") . 
-				$t .
-				(!$apres ? "" : " . $apres");
-			$code = "((strval($t = $code)!='')"
-				." ?\n\t$tab($res) :\n\t$tab($altern))";
+		if ($code != "''") {
+			if ($avant == "''")
+				$avant = '';
+			if ($apres == "''")
+				$apres = '';
+			if ($avant||$apres||($altern!="''")) {
+				$t = '$t' . $descr['niv'];
+				$res = (!$avant ? "" : "$avant . ") . 
+					$t .
+					(!$apres ? "" : " . $apres");
+				$code = "((strval($t = $code)!='')"
+					." ?\n\t$tab($res) :\n\t$tab($altern))";
+			}
 		}
 		if ($code != "''")
 			$codes[]= (($GLOBALS['var_mode_affiche'] == 'validation') ?
@@ -669,7 +671,9 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	}
 
 	$secondes = spip_timer('calcul_skel');
-	spip_log("calcul skel $sourcefile ($secondes)");
+	spip_log("COMPIL ($secondes) ["
+		.preg_replace(',\.html$,', '', $sourcefile)
+		."] CACHE/skel_$nom.php");
 
 	$squelette_compile = "<"."?php
 /*
