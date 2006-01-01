@@ -27,8 +27,10 @@ $GLOBALS['CHARSET'][$charset] = array (
 'ugrave'=>'&#249;', 'uacute'=>'&#250;', 'ucirc'=>'&#251;', 'uuml'=>'&#252;',
 'yacute'=>'&#253;', 'thorn'=>'&#254;', 'nbsp' => " ", 'copy' => "(c)",
 'reg' => "(r)", 'frac14' => "1/4", 'frac12' => "1/2", 'frac34' => "3/4",
-'amp' => '&', 'quot' => '"', 'apos' => "'", 'lt' => '<', 'gt' => '>',
-'mdash' => '&#8212;', 'ndash' => '&#8211;'
+'apos' => "'", 'mdash' => '&#8212;', 'ndash' => '&#8211;'
 );
+
+## caracteres tres speciaux a ne pas convertir
+#'amp' => '&', 'quot' => '"', 'lt' => '<', 'gt' => '>',
 
 ?>
