@@ -587,7 +587,7 @@ function selecteur_rubrique_ajax($id_rubrique, $type, $restreint, $idem=0) {
 	</td><td>
 	<input type='text' id='titreparent' name='titreparent'
 		disabled='disabled' class='forml' value=\""
-	  . entites_html(textebrut(typo($titre_parent)))
+	  . str_replace('&amp;', '&', entites_html(textebrut(typo($titre_parent))))
 	  ."\" />
 	<input type='hidden' id='id_parent' name='id_parent' value='$id_rubrique' />
 	</td></tr></table>
