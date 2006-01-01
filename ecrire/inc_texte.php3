@@ -65,105 +65,118 @@ function nettoyer_chapo($chapo){
 
 
 //
-// Mise de cote des echappements
+// Echapper les les elements perilleux en les passant en base64
 //
 
-// Definition de la regexp de echappe_html
-define ('__regexp_echappe',
-		"/(" . "<html>((.*?))<\/html>" . ")|("	#html
-		. "<code>((.*?))<\/code>" . ")|("	#code
-		. "<(cadre|frame)>((.*?))<\/(cadre|frame)>" #cadre
-		. ")|("
-		. "<(poesie|poetry)>((.*?))<\/(poesie|poetry)>" #poesie
-		. ")/si");
-define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i');
+// Inserer dans le $texte le bloc base64 correspondant a $rempl, en remplacement
+// de $original ($mode=span|div ; au besoin en marquant une $source differente)
+function code_echappement($rempl, $mode='span', $source='') {
+	// Convertir en base64
+	$base64 = base64_encode($rempl);
 
-function echappe_html($letexte, $source='SOURCEPROPRE', $no_transform=false) {
-	if (preg_match_all(__regexp_echappe, $letexte, $matches, PREG_SET_ORDER))
+	// Ajouter le span/div d'echappement
+	$nn = ($mode == 'div') ? "\n\n" : '';
+	return "<$mode class=\"base64$source\">$base64</$mode>$nn";
+}
+
+// - pour $source voir commentaire infra (echappe_retour)
+// - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
+function echappe_html($letexte, $source='', $no_transform=false) {
+	if (preg_match_all(
+	',<(html|code|cadre|frame)>(.*)</\1>,Uims',
+	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
-		$num_echap++;
-		$marqueur_echap = "@@SPIP_$source$num_echap@@";
 
-		if ($no_transform) {	// echappements bruts
-			$les_echap[$num_echap] = $regs[0];
+		// mode d'echappement :
+		//    <span class='base64'> . base64_encode(contenu) . </span>
+		// ou 'div' selon les cas, pour refermer correctement les paragraphes
+		$mode = 'span';
+
+		// echappements tels quels ?
+		if ($no_transform) {
+			$echap = $regs[0];
 		}
-		else
-		if ($regs[1]) {
+
+		// sinon les traiter selon le cas
+		else switch(strtolower($regs[1])) {
+
 			// Echapper les <html>...</ html>
-			$les_echap[$num_echap] = $regs[2];
-		}
-		else
-		if ($regs[4]) {
+			case 'html':
+				$echap = $regs[2];
+				break;
+
 			// Echapper les <code>...</ code>
-			$lecode = entites_html($regs[5]);
+			case 'code':
+				$echap = entites_html($regs[2]);
+				// supprimer les sauts de ligne debut/fin
+				// (mais pas les espaces => ascii art).
+				$echap = ereg_replace("^\n+|\n+$", "", $echap);
 
-			// supprimer les sauts de ligne debut/fin (mais pas les espaces => ascii art).
-			$lecode = ereg_replace("^\n+|\n+$", "", $lecode);
+				// ne pas mettre le <div...> s'il n'y a qu'une ligne
+				if (is_int(strpos($echap,"\n"))) {
+					$echap = nl2br("<div style='text-align: left;' "
+					. "class='spip_code' dir='ltr'><code>"
+					.$echap."</code></div>");
+					$mode = 'div';
+				} else
+					$echap = "<span class='spip_code' "
+					."dir='ltr'><code>".$echap."</code></span>";
 
-			// ne pas mettre le <div...> s'il n'y a qu'une ligne
-			if (is_int(strpos($lecode,"\n"))) {
-				$lecode = nl2br("<div style='text-align: left;' class='spip_code' dir='ltr'><code>".$lecode."</code></div>");
-				$marqueur_echap = "</no p>$marqueur_echap<no p>";
-			} else
-				$lecode = "<span class='spip_code' dir='ltr'><code>".$lecode."</code></span>";
+				$echap = str_replace("\t",
+					"&nbsp; &nbsp; &nbsp; &nbsp; ", $echap);
+				$echap = str_replace("  ", " &nbsp;", $echap);
+				break;
 
-			$lecode = str_replace("\t", "&nbsp; &nbsp; &nbsp; &nbsp; ", $lecode);
-			$lecode = str_replace("  ", " &nbsp;", $lecode);
-			$les_echap[$num_echap] = $lecode;
+			// Echapper les <cadre>...</ cadre>
+			case 'cadre':
+			case 'frame':
+				$echap = trim(entites_html($regs[2]));
+				$total_lignes = substr_count($echap, "\n") + 1;
+				$echap = "<form action=\"/\" method=\"get\"><div>"
+				."<textarea readonly='readonly' cols='40' rows='$total_lignes' "
+				."class='spip_cadre' dir='ltr'>"
+				.$echap
+				."</textarea></div></form>";
+				$mode = "div";
+				break;
+
 		}
-		else
-		if ($regs[7]) {
-			// Echapper les <cadre>...</cadre>
-			$lecode = trim(entites_html($regs[9]));
-			$total_lignes = substr_count($lecode, "\n") + 1;
 
-			$les_echap[$num_echap] = "<form action=\"/\" method=\"get\"><div><textarea readonly='readonly' cols='40' rows='$total_lignes' class='spip_cadre' dir='ltr'>".$lecode."</textarea></div></form>";
-			// Les marques ci-dessous indiquent qu'on ne veut pas paragrapher
-			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
-		}
-		else
-		if ($regs[12]) {
-			$lecode = $regs[14];
-			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
-			$lecode = str_replace("\r", "\n", $lecode); # gestion des \r a revoir !
-			$lecode = "<div class=\"spip_poesie\"><div>".ereg_replace("\n+", "</div>\n<div>", $lecode)."</div></div>";
-			$marqueur_echap = "\n\n</no p>$marqueur_echap<no p>\n\n";
-			$les_echap[$num_echap] = propre($lecode);
-		} 
-
-		$letexte = str_replace($regs[0], $marqueur_echap, $letexte);
+		$letexte = str_replace($regs[0],
+			code_echappement($echap, $mode, $source),
+			$letexte);
 	}
 
 	// Gestion du TeX
-	if (!(strpos($letexte, "<math>") === false)) {
+	if (strpos($letexte, "<math>") !== false) {
 		include_ecrire("inc_math");
-		$letexte = traiter_math($letexte, $les_echap, $num_echap, $source);
+		$letexte = traiter_math($letexte, $source);
 	}
 
-	return array($letexte, $les_echap);
+	return $letexte;
 }
 
+
+//
 // Traitement final des echappements
-function echappe_retour($letexte, $les_echap, $source='SOURCEPROPRE') {
-	$expr = ",@@SPIP_$source([0-9]+)@@,";
-	if (preg_match_all($expr, $letexte, $regs, PREG_SET_ORDER)) {
-		foreach ($regs as $reg) {
-			$rempl = $les_echap[$reg[1]];
-			$letexte = str_replace($reg[0], $rempl, $letexte);
+// Rq: $source sert a faire des echappements "a soi" qui ne sont pas nettoyes
+// par propre() : exemple dans ecrire/inc_articles_ortho.php, $source='ORTHO'
+// ou encore dans typo()
+function echappe_retour($letexte, $source='') {
+	if (strpos($letexte," class=\"base64$source")) {
+		# var_dump($letexte);  ## pour les curieux
+		if (preg_match_all(
+		',<(span|div) class="base64'.$source.'">([^<>]*)</\1>,ms',
+		$letexte, $regs, PREG_SET_ORDER)) {
+			foreach ($regs as $reg) {
+				$rempl = base64_decode($reg[2]);
+				$letexte = str_replace($reg[0], $rempl, $letexte);
+			}
 		}
 	}
 	return $letexte;
 }
 
-
-// fonction en cas de texte extrait d'un serveur distant:
-// on ne sait pas (encore) rapatrier les documents joints
-
-function supprime_img($letexte) {
-	$message = _T('img_indisponible');
-	preg_replace(__preg_img, "($message)", $letexte);
-	return $letexte;
-}
 
 //
 // Gerer les outils mb_string
@@ -278,8 +291,9 @@ function couper_intro($texte, $long) {
 
 	if ($intro)
 		$intro = $intro.'&nbsp;(...)';
-	else
-		$intro = couper($texte, $long);
+	else {
+		$intro = preg_replace(',([|]\s*)+,', '; ', couper($texte, $long));
+	}
 
 	// supprimer un eventuel chapo redirecteur =http:/.....
 	$intro = preg_replace(',^=[^[:space:]]+,','',$intro);
@@ -294,20 +308,32 @@ function couper_intro($texte, $long) {
 
 // Securite : empecher l'execution de code PHP ou javascript ou autre malice
 function interdire_scripts($source) {
-	$source = preg_replace(",<(\%|\?|[[:space:]]*(script|base)),ims", "&lt;\\1", $source);
+	$source = preg_replace(",<(\%|\?|/?[[:space:]]*(script|base)),ims", "&lt;\\1", $source);
 	return $source;
 }
 
 // Securite : utiliser SafeHTML s'il est present dans ecrire/safehtml/
 function safehtml($t) {
-	static $a;
-	define_once('XML_HTMLSAX3', _DIR_RESTREINT."safehtml/classes/");
-	if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
-		include_local(XML_HTMLSAX3.'safehtml');
-		$a =& new safehtml();
-		$t = $a->parse($t);
+	static $process, $test;
+
+	if (!$test) {
+		define_once('XML_HTMLSAX3', _DIR_RESTREINT."safehtml/classes/");
+		if (@file_exists(XML_HTMLSAX3.'safehtml.php')) {
+			include_local(XML_HTMLSAX3.'safehtml');
+			$process = new safehtml();
+		}
+		if ($process)
+			$test = 1; # ok
+		else
+			$test = -1; # se rabattre sur interdire_scripts
 	}
-	return $t;
+
+	if ($test > 0) {
+		$process->clear(); # vider le buffer _xhtml de safehtml
+		$t = $process->parse($t);
+	}
+
+	return interdire_scripts($t); # gere le < ?php > en plus
 }
 
 // Correction typographique francaise
@@ -336,18 +362,16 @@ function typo_fr($letexte) {
 	$letexte = strtr($letexte, $trans);
 
 	$cherche1 = array(
-		/* 1		'/{([^}]+)}/',  */
-		/* 2 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
-		/* 3 */		'/&#187;| --?,|:([^0-9]|$)/',
-		/* 4 */		'/([^<!?])([!?])/',
-		/* 5 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /'
+		/* 1 */ 	'/((^|[^\#0-9a-zA-Z\&])[\#0-9a-zA-Z]*)\;/',
+		/* 2 */		'/&#187;| --?,|:([^0-9]|$)/',
+		/* 3 */		'/([^[<!?])([!?])/',
+		/* 4 */		'/&#171;|(M(M?\.|mes?|r\.?)|[MnN]&#176;) /'
 	);
 	$remplace1 = array(
-		/* 1		'<i class="spip">\1</i>', */
-		/* 2 */		'\1~;',
-		/* 3 */		'~\0',
-		/* 4 */		'\1~\2',
-		/* 5 */		'\0~'
+		/* 1 */		'\1~;',
+		/* 2 */		'~\0',
+		/* 3 */		'\1~\2',
+		/* 4 */		'\0~'
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = ereg_replace(" *~+ *", "~", $letexte);
@@ -397,12 +421,13 @@ function typo_en($letexte) {
 
 //
 // Typographie generale
+// note: $echapper = false lorsqu'on appelle depuis propre() [pour accelerer]
 //
-function typo($letexte) {
-	global $spip_lang;
+function typo($letexte, $echapper=true) {
 
 	// Echapper les codes <html> etc
-	list($letexte, $les_echap) = echappe_html($letexte, "SOURCETYPO");
+	if ($echapper)
+		$letexte = echappe_html($letexte, 'TYPO');
 
 	// Appeler les fonctions de pre-traitement
 	$letexte = pipeline('pre_typo', $letexte);
@@ -416,7 +441,7 @@ function typo($letexte) {
 	// Proteger les caracteres typographiques a l'interieur des tags html
 	$protege = "!':;?";
 	$illegal = "\x1\x2\x3\x4\x5";
-	if (preg_match_all("/<[a-z!][^<>!':;\?]*[!':;\?][^<>]*>/ims",
+	if (preg_match_all(",</?[a-z!][^<>]*[!':;\?][^<>]*>,ims",
 	$letexte, $regs, PREG_SET_ORDER)) {
 		foreach ($regs as $reg) {
 			$insert = $reg[0];
@@ -436,7 +461,7 @@ function typo($letexte) {
 	// sinon determiner la typo en fonction de la langue
 	if (!$lang = $GLOBALS['lang_typo']) {
 		include_ecrire('inc_lang');
-		$lang = lang_typo($spip_lang);
+		$lang = lang_typo($GLOBALS['spip_lang']);
 	}
 	if ($lang == 'fr')
 		$letexte = typo_fr($letexte);
@@ -446,17 +471,34 @@ function typo($letexte) {
 	// Retablir les caracteres proteges
 	$letexte = strtr($letexte, $illegal, $protege);
 
+	//
+	// Installer les images et documents ;
+	//
+	// NOTE : dans propre() ceci s'execute avant les tableaux a cause du "|",
+	// et apres les liens a cause du traitement de [<imgXX|right>->URL]
+	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
+		include_ecrire('inc_documents');
+		$letexte = inserer_documents($letexte, $matches);
+	}
+
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_typo', $letexte);
 	// old style
 	if (function_exists('apres_typo'))
 		$letexte = apres_typo($letexte);
 
+	// reintegrer les echappements
+	if ($echapper)
+		$letexte = echappe_retour($letexte, 'TYPO');
+
 	# un message pour abs_url - on est passe en mode texte
 	$GLOBALS['mode_abs_url'] = 'texte';
 
-	// reintegrer les echappements
-	return echappe_retour($letexte, $les_echap, "SOURCETYPO");
+	// Dans l'espace prive, securiser ici
+	if (!_DIR_RESTREINT)
+		$letexte = interdire_scripts($letexte);
+
+	return $letexte;
 }
 
 function charger_generer_url() {
@@ -581,8 +623,10 @@ function extraire_lien ($regs) {
 			$lien_url = "mailto:".$lien_url;
 	}
 
-	$insert = "<a href=\"$lien_url\" class=\"spip_$class_lien\""
-		.">".typo($lien_texte)."</a>";
+	// Preparer le texte du lien ; attention s'il contient un <div>
+	// (ex: [<docXX|right>->lien]), il faut etre smart
+	$insert = typo("<a href=\"$lien_url\" class=\"spip_$class_lien\""
+		.">$lien_texte</a>");
 
 	return array($insert, $lien_url, $lien_texte);
 }
@@ -688,12 +732,12 @@ function traiter_tableau($bloc) {
 		$html = "<tr class=\"$class\">" . $ligne . "</tr>\n".$html;
 	}
 
-	return "\n\n</no p><table class=\"spip\"$summary>\n"
+	return "\n\n<table class=\"spip\"$summary>\n"
 		. $debut_table
 		. "<tbody>\n"
 		. $html
 		. "</tbody>\n"
-		. "</table><no p>\n\n";
+		. "</table>\n\n";
 }
 
 
@@ -747,8 +791,8 @@ function traiter_listes ($texte) {
 				while ($niveau < $profond) {
 					if ($niveau == 0) $ajout .= "\n\n";
 					$niveau ++;
-					$ajout .= "</no p>"."<$type class=\"spip\">";
-					$pile_type[$niveau] = "</$type>"."<no p>";
+					$ajout .= "<$type class=\"spip\">";
+					$pile_type[$niveau] = "</$type>";
 				}
 
 				$ajout .= "<li class=\"spip\">";
@@ -778,9 +822,67 @@ function traiter_listes ($texte) {
 	return substr($texte, 0, -2);
 }
 
+// Definition de la regexp des images/documents
+define('__preg_img', ',<(img|doc|emb)([0-9]+)(\|([^>]*))?'.'>,i');
+
+// fonction en cas de texte extrait d'un serveur distant:
+// on ne sait pas (encore) rapatrier les documents joints
+
+function supprime_img($letexte) {
+	$message = _T('img_indisponible');
+	preg_replace(__preg_img, "($message)", $letexte);
+	return $letexte;
+}
+
+
+//
+// Une fonction pour fermer les paragraphes ; on essaie de preserver
+// des paragraphes indiques a la main dans le texte
+// (par ex: on ne modifie pas un <p align='center'>)
+//
+function paragrapher($letexte) {
+
+	if (preg_match(',<p[>[:space:]],i',$letexte)) {
+
+		// Preserver les balises-bloc (y compris "STOP P")
+		$blocs = 'STOP P|div|pre|ul|li|blockquote|h[1-5r]|'
+			.'t(able|[rdh]|body|foot)|'
+			.'form|object|center|marquee|address|'
+			.'d[ltd]|script|noscript|map|del|ins|button|fieldset';
+
+		// Ajouter un espace aux <p> et un "STOP P"
+		// transformer aussi les </p> existants en <p>, nettoyes ensuite
+		$letexte = preg_replace(',</?p(\s([^>]*))?'.'>,i', '<STOP P><p \2>',
+			'<p>'.$letexte.'<STOP P>');
+
+		// Fermer les paragraphes
+		$letexte = preg_replace(
+			',(<p\s.*)(</?('.$blocs.')[>[:space:]]),Uims',
+			"\n\\1</p>\n\\2", $letexte);
+
+		// Supprimer les marqueurs "STOP P"
+		$letexte = str_replace('<STOP P>', '', $letexte);
+
+		// Reduire les blancs dans les <p>
+		$letexte = preg_replace(
+		',(<p(>|\s[^>]*)>)\s*|\s*(</p[>[:space:]]),i', '\1\3',
+			$letexte);
+
+		// Supprimer les <p xx></p> vides
+		$letexte = preg_replace(',<p\s[^>]*></p>\s*,i', '',
+			$letexte);
+
+		// Renommer les paragraphes normaux avec class="spip"
+		$letexte = str_replace('<p >', '<p class="spip">',
+			$letexte);
+
+	}
+
+	return $letexte;
+}
 
 // Nettoie un texte, traite les raccourcis spip, la typo, etc.
-function traiter_raccourcis_generale($letexte) {
+function traiter_raccourcis($letexte) {
 	global $debut_intertitre, $fin_intertitre, $ligne_horizontale, $url_glossaire_externe;
 	global $compt_note;
 	global $marqueur_notes;
@@ -796,6 +898,18 @@ function traiter_raccourcis_generale($letexte) {
 	if (function_exists('avant_propre'))
 		$letexte = avant_propre($letexte);
 
+
+	// Gestion de la <poesie>
+	if (preg_match_all(",<(poesie|poetry)>(.*)<\/(poesie|poetry)>,Uims",
+	$letexte, $regs, PREG_SET_ORDER)) {
+		foreach ($regs as $reg) {
+			$lecode = preg_replace(",\r\n?,", "\n", $reg[2]);
+			$lecode = ereg_replace("\n[[:space:]]*\n", "\n&nbsp;\n",$lecode);
+			$lecode = "<div class=\"spip_poesie\">\n<div>".ereg_replace("\n+", "</div>\n<div>", trim($lecode))."</div>\n</div>\n\n";
+			$letexte = str_replace($reg[0], $lecode, $letexte);
+		}
+	}
+
 	// Puce
 	if (!$lang_dir) {
 		include_ecrire('inc_lang');
@@ -809,8 +923,9 @@ function traiter_raccourcis_generale($letexte) {
 	// Harmoniser les retours chariot
 	$letexte = preg_replace(",\r\n?,", "\n", $letexte);
 
-	// Corriger HTML
-	$letexte = preg_replace(",</?p>,i", "\n\n\n", $letexte);
+	// Recuperer les para HTML
+	$letexte = preg_replace(",<p[>[:space:]],i", "\n\n\\0", $letexte);
+	$letexte = preg_replace(",</p[>[:space:]],i", "\\0\n\n", $letexte);
 
 	//
 	// Notes de bas de page
@@ -838,25 +953,31 @@ function traiter_raccourcis_generale($letexte) {
 				$mn = $marqueur_notes.'-';
 			$ancre = $mn.urlencode($num_note);
 
+			$lien = "<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\">";
+
 			// creer le popup 'title' sur l'appel de note
 			if ($title = supprimer_tags(propre($note_texte))) {
 				$title = $ouvre_note.$ancre.$ferme_note.$title;
-				$title = ' title="<html>'
-				. texte_backend(couper($title,80)).'</html>"';
+				$title = couper($title,80);
+				$lien = inserer_attribut($lien, 'title', $title);
 			}
 
-			$insert = "$ouvre_ref<a href=\"#nb$ancre\" name=\"nh$ancre\" class=\"spip_note\"$title>$num_note</a>$ferme_ref";
-			$appel = "<html>$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note</html>";
+			$insert = "$ouvre_ref$lien$num_note</a>$ferme_ref";
+
+			// on l'echappe
+			$insert = code_echappement($insert, 'span');
+
+			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note";
 		} else {
 			$insert = '';
 			$appel = '';
 		}
 
-		// l'ajouter "brut" dans les notes
+		// l'ajouter "tel quel" (echappe) dans les notes
 		if ($note_texte) {
 			if ($mes_notes)
 				$mes_notes .= "\n\n";
-			$mes_notes .= $appel . $note_texte;
+			$mes_notes .= code_echappement($appel, 'span') . $note_texte;
 		}
 
 		// dans le texte, mettre l'appel de note a la place de la note
@@ -882,14 +1003,17 @@ function traiter_raccourcis_generale($letexte) {
 				$url = $url_glossaire_externe.$terme_underscore;
 			$url = str_replace("@lang@", $GLOBALS['spip_lang'], $url);
 			$code = '['.$terme.'->?'.$url.']';
-			$letexte = str_replace($regs[0], $code, $letexte);
+			
+			// Eviter les cas particulier genre "[?!?]"
+			if (preg_match(',[a-z],i', $terme))
+				$letexte = str_replace($regs[0], $code, $letexte);
 		}
 	}
 
 
 	//
 	// Raccourcis liens [xxx->url] (cf. fonction extraire_lien ci-dessus)
-	// Note : complique car c'est ici qu'on applique la typo() !
+	// Note : complique car c'est ici qu'on applique typo() !
 	//
 	$regexp = "|\[([^][]*)->(>?)([^]]*)\]|ms";
 	$inserts = array();
@@ -898,22 +1022,19 @@ function traiter_raccourcis_generale($letexte) {
 		foreach ($matches as $regs) {
 			list($insert) = extraire_lien($regs);
 			$inserts[++$i] = $insert;
-			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE$i@@", $letexte);
+			$letexte = str_replace($regs[0], "@@SPIP_ECHAPPE_LIEN_$i@@", $letexte);
 		}
 	}
-	$letexte = typo($letexte);
+
+	$letexte = typo($letexte, /* echap deja fait, accelerer */ false);
+
 	foreach ($inserts as $i => $insert) {
-		$letexte = str_replace("@@SPIP_ECHAPPE$i@@", $insert, $letexte);
+		$letexte = str_replace("@@SPIP_ECHAPPE_LIEN_$i@@", $insert, $letexte);
 	}
 
 	//
 	// Tableaux
 	//
-
-	// traiter le cas particulier des echappements (<doc...> par exemple)
-	// qui auraient provoque des \n\n</no p> devant les | des tableaux
-	$letexte = preg_replace(',[|]\n\n</no p>@@,','|@@', $letexte);
-	$letexte = preg_replace(',@@<no p>\n\n[|],','@@|', $letexte);
 
 	// ne pas oublier les tableaux au debut ou a la fin du texte
 	$letexte = preg_replace(",^\n?[|],", "\n\n|", $letexte);
@@ -952,11 +1073,9 @@ function traiter_raccourcis_generale($letexte) {
 		/* 9 */ 	"/[{]/",
 		/* 10 */	"/[}]/",
 		/* 11 */	"/(<br[[:space:]]*\/?".">){2,}/",
-		/* 12 */	"/<p>([\n]*)(<br[[:space:]]*\/?".">)+/",
-		/* 13 */	"/<p>/",
-		/* 14 		"/\n/", */
-		/* 15 */	"/<quote>/",
-		/* 16 */	"/<\/quote>/"
+		/* 12 */	"/<p>([\n]*(<br[[:space:]]*\/?".">)*)*/",
+		/* 13 */	"/<quote>/",
+		/* 14 */	"/<\/quote>/"
 	);
 	$remplace1 = array(
 		/* 0 */ 	"\n\n$ligne_horizontale\n\n",
@@ -965,69 +1084,22 @@ function traiter_raccourcis_generale($letexte) {
 		/* 3 */ 	"\n<br />",
 		/* 4 */ 	"\n\n$debut_intertitre",
 		/* 5 */ 	"$fin_intertitre\n\n",
-		/* 6 */ 	"<p class=\"spip\">",
+		/* 6 */ 	"<p>",
 		/* 7 */ 	"<strong class=\"spip\">",
 		/* 8 */ 	"</strong>",
 		/* 9 */ 	"<i class=\"spip\">",
 		/* 10 */	"</i>",
-		/* 11 */	"<p class=\"spip\">",
-		/* 12 */	"<p class=\"spip\">",
-		/* 13 */	"<p class=\"spip\">",
-		/* 14 		" ", */
-		/* 15 */	"<blockquote class=\"spip\"><p class=\"spip\">",
-		/* 16 */	"</blockquote><p class=\"spip\">"
+		/* 11 */	"<p>",
+		/* 12 */	"<p>",
+		/* 13 */	"<blockquote class=\"spip\"><p>",
+		/* 14 */	"</blockquote><p>"
 	);
 	$letexte = preg_replace($cherche1, $remplace1, $letexte);
 	$letexte = preg_replace("@^ <br />@", "", $letexte);
 
 
-	// Installer les images et documents
-	if (preg_match_all(__preg_img, $letexte, $matches, PREG_SET_ORDER)) {
-		include_ecrire("inc_documents");
-		$letexte = inserer_documents($letexte, $matches);
-	}
-
-	//
-	// Affiner les paragraphes
-	//
-
-	// 1. Ajouter le paragraphe initial s'il y a lieu
-	if (strpos(' '.$letexte, '<p class="spip">'))
-		$letexte = '<p class="spip">'.$letexte;
-
-	// 2. preserver les balises-bloc
-	$blocs = 'div|pre|ul|li|blockquote|h[1-5r]|table|center|'
-		.'tr|td|th|tbody|tfoot|form|object';
-
-	$letexte = preg_replace(",</?($blocs)(\s[^>]*)?/?'.'>,i", '</no p>\0<no p>', $letexte);
-
-	// 3. Manger les <p ..></no p>
-	$letexte = preg_replace(
-		',(<p([[:space:]][^>]*)?'.'>)?(\s*</no p>)+,ims', '', $letexte);
-
-	// 4. Fermer les paragraphes
-	if (strpos(' '.$letexte, '<p class="spip">')) {
-		$tmp = '';
-		foreach (explode('<p class="spip">', $letexte) as $paragraphe) {
-			if (preg_match(",<(p|/?($blocs|no p))[>[:space:]].*,ims",
-			$paragraphe, $reg))
-				$paragraphe = str_replace($reg[0], "</p>\n\n".$reg[0], $paragraphe);
-			else
-				$paragraphe .= '</p>';
-
-			$paragraphe = str_replace('<p class="spip"></p>', '',
-				'<p class="spip">'.trim($paragraphe));
-
-			$tmp .= $paragraphe."\n\n";
-		}
-
-		$letexte = $tmp;
-	}
-
-	// 5. Manger les <no p></p>
-	$letexte = preg_replace(
-		',(<no p>\s*)+(</p([[:space:]][^>]*)?'.'>)?,ims', '', $letexte);
-
+	// Fermer les paragraphes
+	$letexte = paragrapher($letexte);
 
 	// Appeler les fonctions de post-traitement
 	$letexte = pipeline('post_propre', $letexte);
@@ -1035,33 +1107,37 @@ function traiter_raccourcis_generale($letexte) {
 	if (function_exists('apres_propre'))
 		$letexte = apres_propre($letexte);
 
-	return array($letexte, $mes_notes);
+	if ($mes_notes) traiter_les_notes($mes_notes);
+
+	return $letexte;
 }
 
-function traiter_les_notes($mes_notes, $les_echap) {
-	$mes_notes = propre($mes_notes, $les_echap);
-	if (strstr($mes_notes, '<p class="spip">'))
-		$mes_notes = str_replace('<p class="spip">', '<p class="spip_note">', $mes_notes);
-	else
-		$mes_notes = '<p class="spip_note">'.$mes_notes."</p>\n";
+function traiter_les_notes($mes_notes) {
+	$mes_notes = propre('<p>'.$mes_notes);
+	$mes_notes = str_replace(
+		'<p class="spip">', '<p class="spip_note">', $mes_notes);
 	$GLOBALS['les_notes'] .= $mes_notes;
 }
 
-function traiter_raccourcis($letexte, $les_echap=false) {
-	// echapper les <a href>, <html>...< /html>, <code>...< /code>
-	if (!$les_echap)
-		list($letexte, $les_echap) = echappe_html($letexte, "SOURCEPROPRE");
-	list($letexte, $mes_notes) = traiter_raccourcis_generale($letexte);
-	if ($mes_notes) traiter_les_notes($mes_notes, $les_echap);
-	// Reinserer les echappements
-	return trim(echappe_retour($letexte, $les_echap, "SOURCEPROPRE"));
-}
 
 // Filtre a appliquer aux champs du type #TEXTE*
-function propre($letexte, $les_echap=false) {
-	$letexte = traiter_raccourcis($letexte, $les_echap);
+function propre($letexte) {
+	// Echapper les <a href>, <html>...< /html>, <code>...< /code>
+	$letexte = echappe_html($letexte);
+
+	// Traiter le texte
+	$letexte = traiter_raccourcis($letexte);
+
+	// Reinserer les echappements
+	$letexte = echappe_retour($letexte);
+
+	// Vider les espaces superflus
+	$letexte = trim($letexte);
+
+	// Dans l'espace prive, securiser ici
 	if (!_DIR_RESTREINT)
 		$letexte = interdire_scripts($letexte);
+
 	return $letexte;
 }
 

@@ -606,15 +606,22 @@ function affdate_heure($numdate) {
 
 
 //
-// Alignements en HTML
+// Alignements en HTML (Old-style, preferer CSS)
 //
 
-function aligner($letexte,$justif) {
-	$letexte = eregi_replace("<p([^>]*)", "<p\\1 align='$justif'", trim($letexte));
-	if ($letexte AND !ereg("^[[:space:]]*<p", $letexte)) {
-		$letexte = "<p class='spip' align='$justif'>" . $letexte . "</p>";
-	}
-	return $letexte;
+// Cette fonction cree le paragraphe s'il n'existe pas (texte sur un seul para)
+function aligner($letexte, $justif='') {
+	$letexte = trim($letexte);
+	if (!strlen($letexte)) return '';
+
+	// Ajouter un paragraphe au debut, et reparagrapher proprement
+	$letexte = paragrapher(
+		str_replace('</p>', '', '<p>'.$letexte));
+
+	// Inserer les alignements
+	return str_replace(
+		'<p class="spip">', '<p class="spip" align="'.$justif.'">',
+		$letexte);
 }
 
 function justifier($letexte) {
@@ -1425,7 +1432,7 @@ function extra($letexte, $champ) {
 function post_autobr($texte, $delim="\n_ ") {
 	$texte = str_replace("\r\n", "\r", $texte);
 	$texte = str_replace("\r", "\n", $texte);
-	list($texte, $les_echap) = echappe_html($texte, "POSTAUTOBR", true);
+	$texte = echappe_html($texte, '', true);
 
 	$debut = '';
 	$suite = $texte;
@@ -1444,7 +1451,7 @@ function post_autobr($texte, $delim="\n_ ") {
 	}
 	$texte = $debut.$suite;
 
-	$texte = echappe_retour($texte, $les_echap, "POSTAUTOBR");
+	$texte = echappe_retour($texte);
 	return $texte;
 }
 
