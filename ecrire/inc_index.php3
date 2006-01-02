@@ -601,6 +601,7 @@ function requete_hash ($rech) {
 //
 function prepare_recherche($recherche, $type = 'id_article', $table='articles', $cond=false) {
 	static $cache = array();
+	static $fcache = array();
 
 	// traiter le cas {recherche?}
 	if ($cond AND !strlen($recherche))
@@ -609,8 +610,9 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 	// Premier passage : chercher eventuel un cache des donnees sur le disque
 	if (!$cache[$recherche]['hash']) {
 		$dircache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'rech');
-		$fcache = $dircache.'rech_'.substr(md5($recherche),0,10).'.txt';
-		if (lire_fichier($fcache, $contenu))
+		$fcache[$recherche] =
+			$dircache.'rech_'.substr(md5($recherche),0,10).'.txt';
+		if (lire_fichier($fcache[$recherche], $contenu))
 			$cache[$recherche] = @unserialize($contenu);
 	}
 
@@ -659,7 +661,7 @@ function prepare_recherche($recherche, $type = 'id_article', $table='articles', 
 		}
 
 		// ecrire le cache de la recherche sur le disque
-		ecrire_fichier($fcache, serialize($cache[$recherche]));
+		ecrire_fichier($fcache[$recherche], serialize($cache[$recherche]));
 		// purger le petit cache
 		nettoyer_petit_cache('rech', 300);
 	}
