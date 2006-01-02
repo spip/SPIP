@@ -302,7 +302,7 @@ function champs_traitements ($p) {
 		case 'forums':
 		case 'signatures':
 		case 'syndic_articles':
-			$ps = str_replace('%s', 'safehtml(%s)', $ps);
+			$ps = 'safehtml('.$ps.')';
 			break;
 		default:
 			break;
