@@ -742,8 +742,6 @@ function cdata_echappe_retour(&$table, &$echappe_cdata) {
 function analyser_backend($rss, $url_syndic='') {
 	include_ecrire("inc_texte"); # pour couper()
 
-	$les_auteurs_du_site = "";
-
 	// Echapper les CDATA
 	$echappe_cdata = array();
 	if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $rss,
@@ -764,13 +762,15 @@ function analyser_backend($rss, $url_syndic='') {
 	$header, $regs, PREG_SET_ORDER)) {
 		$les_auteurs_du_site = array();
 		foreach ($regs as $reg) {
-			$nom = trim($reg[4]);
+			$nom = $reg[4];
 			if (preg_match(',<name>(.*)</name>,Uims', $nom, $reg))
 				$nom = $reg[1];
-			$les_auteurs_du_site[] = $nom;
+			$les_auteurs_du_site[] = trim(textebrut(filtrer_entites($nom)));
 		}
-		$les_auteurs_du_site = join(', ', $les_auteurs_du_site);
-	}
+		$les_auteurs_du_site = join(', ', array_unique($les_auteurs_du_site));
+	} else
+		$les_auteurs_du_site = '';
+
 	if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
 	$header, $match))
 		$langue_du_site = $match[4];
@@ -852,12 +852,12 @@ function analyser_backend($rss, $url_syndic='') {
 		$item, $regs, PREG_SET_ORDER)) {
 			$auteurs = array();
 			foreach ($regs as $reg) {
-				$nom = trim($reg[4]);
+				$nom = $reg[4];
 				if (preg_match(',<name>(.*)</name>,Uims', $nom, $reg))
 					$nom = $reg[1];
-				$auteurs[] = $nom;
+				$auteurs[] = trim(textebrut(filtrer_entites($nom)));
 			}
-			$data['lesauteurs'] = join(', ', $auteurs);
+			$data['lesauteurs'] = join(', ', array_unique($auteurs));
 		}
 		else
 			$data['lesauteurs'] = $les_auteurs_du_site;

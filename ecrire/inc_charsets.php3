@@ -135,12 +135,20 @@ function plage_punct_unicode() {
 
 //
 // Transformer les &eacute; en &#123;
+// $secure = true pour *ne pas convertir* les caracteres malins &lt; &amp; etc.
 //
-function html2unicode($texte) {
+function html2unicode($texte, $secure=false) {
 	static $trans;
 	if (!$trans) {
 		global $CHARSET;
 		load_charset('html');
+		
+		if (!$secure) {
+			$CHARSET['html']['amp'] = '&';
+			$CHARSET['html']['quot'] = '"';
+			$CHARSET['html']['lt'] = '<';
+			$CHARSET['html']['gt'] = '>';
+		}
 		foreach ($CHARSET['html'] as $key => $val) {
 			$trans["&$key;"] = $val;
 		}
