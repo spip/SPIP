@@ -13,7 +13,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
-include_ecrire("inc_texte");
 include_ecrire("inc_urls");
 include_ecrire("inc_acces"); // pour low_sec (iCal)
 

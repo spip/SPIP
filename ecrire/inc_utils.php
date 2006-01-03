@@ -162,7 +162,7 @@ function spip_query($query) {
 	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		redirige_par_entete(generer_url_ecrire("upgrade","reinstall=oui"));
+		redirige_par_entete(generer_url_ecrire("upgrade"),"?reinstall=oui");
 		exit;
 	}
 
@@ -486,9 +486,7 @@ function http_last_modified($lastmodified, $expire = 0) {
 // envoyer le navigateur sur une nouvelle adresse
 
 function redirige_par_entete($url, $fin="") {
-	## rustine temporaire
-	if (preg_match(',[^?],', $fin)) $fin = '?'.$fin;
-	spip_log("redirige $url$fin");
+#	spip_log("redirige $url$fin");
 	include_ecrire('inc_headers');
 	spip_header("Location: $url$fin");
 	exit;
@@ -549,7 +547,7 @@ function charger_plugins($plugins) {
 
 
 // cette fonction fabrique un appel a un script php
-// elle est destinees a assurer la transition
+// elle est destinee a assurer la transition
 // entre les scripts ecrire/*.php[3] et le script generique ecrire/index.php
 
 function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
