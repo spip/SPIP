@@ -196,11 +196,17 @@ if ($flag_editable) {
 if ($flag_auteur AND $statut_article == 'prepa') {
 	echo "<P>";
 	debut_cadre_relief();
-	echo "<center>";
-	echo "<B>"._T('texte_proposer_publication')."</B>";
-	echo aide ("artprop");
-	bouton(_T('bouton_demande_publication'), generer_url_ecrire("articles", "id_article=$id_article&statut_nouv=prop"));
-	echo "</center>";
+	echo	"<center>",
+		"<B>"._T('texte_proposer_publication')."</B>",
+		aide ("artprop"),
+		"\n<form action='", generer_url_ecrire("articles"), "'>\n",
+		"<input type='hidden' name='id_article' value='$id_article' />\n",
+		"<input type='hidden' name='statut_nouv' value='prop' />\n",
+		"<input type='submit' class='fondo' value=\"", 
+		_T('bouton_demande_publication'),
+		"\" />\n",
+		"</form>",
+		"</center>";
 	fin_cadre_relief();
 }
 
@@ -679,7 +685,7 @@ function dates_articles($id_article, $flag_editable, $statut_article, $date, $an
   if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_couleur();
 
-	echo "<form action='" . generer_url_ecrire("articles","") . "' method='GET' style='margin: 0px; padding: 0px;'>";
+	echo "<form action='" . generer_url_ecrire("articles") . "' method='GET' style='margin: 0px; padding: 0px;'>";
 	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
 
 	if ($statut_article == 'publie') {
@@ -1391,11 +1397,11 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
   global $connect_statut;
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
-	echo "<form action='" . generer_url_ecrire("articles","") . "' method='get'>";
+	echo "<form action='" . generer_url_ecrire("articles") . "' method='GET'>";
 	debut_cadre_relief("racine-site-24.gif");
 	echo "<CENTER>";
 	
-	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
+	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\" />";
 
 	echo "<B>"._T('texte_article_statut')."</B> ";
 
@@ -1677,6 +1683,7 @@ if ($titre) {
 affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
 // Taches lentes
+
 
 if ($ok_nouveau_statut) {
   cron_articles($id_article, $statut_nouv, $statut_article);

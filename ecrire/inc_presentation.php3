@@ -1758,25 +1758,6 @@ function afficher_thread_forum($le_forum, $adresse_retour, $controle = 0) {
 	
 }
 
-
-//
-// un bouton (en POST) a partir d'un URL en format GET
-//
-function bouton($titre,$lien) {
-	$lapage=substr($lien,0,strpos($lien,"?"));
-	$lesvars=substr($lien,strpos($lien,"?")+1,strlen($lien));
-
-	echo "\n<form action='$lapage' method='get'>\n";
-	$lesvars=explode("&",$lesvars);
-	
-	for($i=0;$i<count($lesvars);$i++){
-		$var_loc=explode("=",$lesvars[$i]);
-		echo "<input type='Hidden' name='$var_loc[0]' value=\"$var_loc[1]\">\n";
-	}
-	echo "<input type='submit' name='Submit' class='fondo' value=\"$titre\">\n";
-	echo "</form>";
-}
-
 // point d'entree/hack pour spip-lab (duplication de debut_page)
 
 function debut_html($titre = "", $rubrique="") {
