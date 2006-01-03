@@ -82,7 +82,7 @@ function upgrade_dist()
 
   if ($ok) {
 	$hash = calculer_action_auteur("purger_cache");
-	redirige_par_entete(generer_url_ecrire("../spip_cache"), "?purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS);
+	redirige_par_entete(generer_url_public("spip_cache"), "?purger_cache=oui&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS);
   }
   else {
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));

@@ -283,7 +283,7 @@ if ($spip_display != 4) {
 	if ($_COOKIE['spip_admin']) {
 			$texte = _T('icone_supprimer_cookie');
 			if ($spip_display != 1) $texte .= aide("cookie");
-			icone_horizontale( $texte , generer_url_ecrire("../spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "");
+			icone_horizontale( $texte , generer_url_public("spip_cookie", "cookie_admin=non&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "");
 		}
 	}
 

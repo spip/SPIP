@@ -14,7 +14,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_minipres");
 include_ecrire ("inc_base");
-include_ecrire ("inc_install");
 define('_FILE_TMP', '_install');
 
 function install()
@@ -158,7 +157,7 @@ function install_6()
 		@unlink(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 	}
 
-	echo "<form action='" . generer_url_ecrire("index","") . "' method='post'>";
+	echo "<form action='./' method='POST'>";
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
@@ -183,7 +182,7 @@ function install_5()
 	echo "<p>\n"._T('texte_informations_personnelles_2')." ";
 	echo _T('info_laisser_champs_vides');
 
-	echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='6'>";
 
 	echo "<fieldset><label><B>"._T('info_identification_publique')."</B><BR />\n</label>";
@@ -211,7 +210,7 @@ function install_5()
 		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
 		echo "<b>"._T('info_authentification_externe')."</b>";
 		echo "<p>\n"._T('texte_annuaire_ldap_1');
-		echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1'>";
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE=\""._T('bouton_acces_ldap')."\">";
 		echo "</FORM>";
@@ -298,7 +297,7 @@ function install_4()
 
 		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
 
-		echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
@@ -326,7 +325,7 @@ function install_3()
 	echo aide ("install2");
 	echo "<P>\n";
 
-	echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='4'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -414,7 +413,7 @@ function install_2()
 	if (($db_connect=="0") && $link){
 		echo "<B>"._T('info_connexion_ok')."</B><P> "._T('info_etape_suivante_2');
 
-		echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='3'>";
 		echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -464,7 +463,7 @@ function install_1()
 		}
 	}
 
-	echo "<p><form action='" . generer_url_ecrire("install","") . "' method='post'>";
+	echo "<p><form action='" . generer_url_ecrire("install") . "' method='POST'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2'>";
 	echo "<fieldset><label><B>"._T('entree_base_donnee_1')."</B><BR />\n</label>";
 	echo _T('entree_base_donnee_2')."<BR />\n";
@@ -492,7 +491,7 @@ function install_()
 
 	$menu_langues = menu_langues('var_lang_ecrire');
 	if (!$menu_langues)
-	  redirige_par_entete(generer_url_ecrire("../spip_test_dirs"));
+	  redirige_par_entete(generer_url_public("spip_test_dirs"));
 	else {
 		install_debut_html();
 	
@@ -506,7 +505,7 @@ function install_()
 
 		echo "<p><div align='center'>".$menu_langues."</div>";
 
-		echo "<p><form action='" . generer_url_ecrire("../spip_test_dirs","") . "' method='get'>";
+		echo "<p><form action='" . generer_url_public("spip_test_dirs","") . "' method='get'>";
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 		echo "</FORM>";
 		install_fin_html();
@@ -527,7 +526,7 @@ function install_ldap5()
 	echo "<B>"._T('info_ldap_ok')."</B>";
 	echo "<P>"._T('info_terminer_installation');
 
-	echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
@@ -578,7 +577,7 @@ function install_ldap4()
 		fputs($myFile, $conn);
 		fclose($myFile);
 
-		echo "<p><form action='" . generer_url_ecrire("install","") . "' method='post'>";
+		echo "<p><form action='" . generer_url_ecrire("install") . "' method='POST'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
 		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR />\n";
 		echo _T('info_statut_utilisateurs_2')." ";
@@ -614,7 +613,7 @@ function install_ldap3()
 	$result = @ldap_read($ldap_link, "", "objectclass=*", array("namingContexts"));
 	$info = @ldap_get_entries($ldap_link, $result);
 
-	echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap4'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
 	echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
@@ -678,7 +677,7 @@ function install_ldap2()
 	if ($ldap_link && ($r || !$login_ldap)) {
 		echo "<B>"._T('info_connexion_ldap_ok');
 
-		echo "<form action='" . generer_url_ecrire("install","") . "' method='post'>";
+		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap3'>";
 		echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
 		echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
@@ -719,7 +718,7 @@ function install_ldap1()
 		}
 	}
 
-	echo "<p><form action='" . generer_url_ecrire("install","") . "' method='post'>";
+	echo "<p><form action='" . generer_url_ecrire("install") . "' method='POST'>";
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
 	echo "<fieldset><label><B>"._T('entree_adresse_annuaire')."</B><BR />\n</label>";
 	echo _T('texte_adresse_annuaire_1')."<BR />\n";
@@ -760,11 +759,11 @@ function install_unpack()
   fin_admin($action);
 
   if (@file_exists("../spip_loader" . _EXTENSION_PHP))
-    redirige_par_entete(generer_url_ecrire("../spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else if (@file_exists("../spip_unpack" . _EXTENSION_PHP))
-    redirige_par_entete(generer_url_ecrire("../spip_unpack"), "?hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(generer_url_public("spip_unpack"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else
-    redirige_par_entete(generer_url_ecrire("../spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
+    redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
 }
 
 ?>
