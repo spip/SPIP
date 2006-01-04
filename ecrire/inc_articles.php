@@ -101,7 +101,7 @@ boite_info_articles($id_article, $statut_article, $visites, $id_version);
 // Logos de l'article et Boites de configuration avancee
 //
 
-boites_de_config_articles($id_article, $flag_editable,
+ boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			  $change_accepter_forum, $change_petition,
 			  $email_unique, $site_obli, $site_unique,
 			  $message, $texte_petition,
@@ -257,7 +257,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	fin_boite_info();
 }
 
-function boites_de_config_articles($id_article, $flag_editable,
+function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 				   $change_accepter_forum, $change_petition,
 				   $email_unique, $site_obli, $site_unique,
 				   $message, $texte_petition,
