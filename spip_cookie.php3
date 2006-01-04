@@ -14,7 +14,7 @@
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session");
 include_ecrire('inc_cookie');
-
+spip_log("uri: $REQUEST_URI");
 // gerer l'auth http
 function auth_http($url, $essai_auth_http) {
 	global $_SERVER;
@@ -37,6 +37,35 @@ function auth_http($url, $essai_auth_http) {
 		exit;
 	}
 }
+
+function spip_cookie_dist()
+{
+  global
+    $auteur_session,
+    $change_session,
+    $cookie_admin,
+    $cookie_session,
+    $essai_auth_http,
+    $essai_login,
+    $id_auteur,
+    $ignore_auth_http,
+    $ldap_present,
+    $logout,
+    $logout_public,
+    $next_session_password_md5,
+    $retour,
+    $session_login,
+    $session_login_hidden,
+    $session_password,
+    $session_password_md5,
+    $session_remember,
+    $spip_admin,
+    $spip_session,
+    $test_echec_cookie,
+    $url,
+    $valeur,
+    $var_lang,
+    $var_lang_ecrire;
 
 // rejoue le cookie pour renouveler spip_session
 if ($change_session == 'oui') {
@@ -111,7 +140,6 @@ if ($essai_login == "oui") {
 		$session_login = $session_login_hidden;
 
 	$login = $session_login;
-	$pass = $session_password;
 
 	// Essayer differentes methodes d'authentification
 	$auths = array('spip');
@@ -231,7 +259,7 @@ if ($var_lang_ecrire) {
 // Redirection
 // Sous Apache, les cookies avec une redirection fonctionnent
 // Sinon, on fait un refresh HTTP
-if (ereg("^Apache", $SERVER_SOFTWARE)) {
+if (ereg("^Apache", $GLOBALS['SERVER_SOFTWARE'])) {
 	redirige_par_entete($redirect);
 }
 else {
@@ -242,5 +270,8 @@ else {
 	echo "</head>\n";
 	echo "<body><a href='".$redirect."'>"._T('navigateur_pas_redirige')."</a></body></html>";
 }
+}
+
+spip_cookie_dist()
 
 ?>
