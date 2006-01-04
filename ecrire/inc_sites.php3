@@ -755,14 +755,17 @@ function analyser_backend($rss, $url_syndic='') {
 	// supprimer les commentaires
 	$rss = preg_replace(',<!--\s+.*\s-->,Ums', '', $rss);
 
+	// simplifier le backend, en supprimant les espaces de nommage type "dc:"
+	$rss = preg_replace(',<(/?)(dc):,i', '<\1', $rss);
+
 	// chercher auteur/lang dans le fil au cas ou les items n'en auraient pas
 	list($header) = preg_split(',<(item|entry)[:[:space:]>],', $rss, 2);
 	if (preg_match_all(
-	',<((dc:)?(author|creator))>(.*)</\1>,Uims',
+	',<(author|creator)>(.*)</\1>,Uims',
 	$header, $regs, PREG_SET_ORDER)) {
 		$les_auteurs_du_site = array();
 		foreach ($regs as $reg) {
-			$nom = $reg[4];
+			$nom = $reg[2];
 			if (preg_match(',<name>(.*)</name>,Uims', $nom, $reg))
 				$nom = $reg[1];
 			$les_auteurs_du_site[] = trim(textebrut(filtrer_entites($nom)));
@@ -771,9 +774,9 @@ function analyser_backend($rss, $url_syndic='') {
 	} else
 		$les_auteurs_du_site = '';
 
-	if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
+	if (preg_match(',<([^>]*xml:)?lang(uage)?'.'>([^<>]+)<,i',
 	$header, $match))
-		$langue_du_site = $match[4];
+		$langue_du_site = $match[3];
 
 	$items = array();
 	if (preg_match_all(',<(item|entry)([:[:space:]][^>]*)?'.
@@ -848,11 +851,11 @@ function analyser_backend($rss, $url_syndic='') {
 
 		// Auteur(s)
 		if (preg_match_all(
-		',<((dc:)?(author|creator))>(.*)</\1>,Uims',
+		',<(author|creator)>(.*)</\1>,Uims',
 		$item, $regs, PREG_SET_ORDER)) {
 			$auteurs = array();
 			foreach ($regs as $reg) {
-				$nom = $reg[4];
+				$nom = $reg[2];
 				if (preg_match(',<name>(.*)</name>,Uims', $nom, $reg))
 					$nom = $reg[1];
 				$auteurs[] = trim(textebrut(filtrer_entites($nom)));
@@ -873,9 +876,9 @@ function analyser_backend($rss, $url_syndic='') {
 		}
 
 		// lang
-		if (preg_match(',<((dc:|[^>]*xml:)lang(uage)?)>([^<>]+)</\1>,i',
+		if (preg_match(',<([^>]*xml:)?lang(uage)?'.'>([^<>]+)<,i',
 			$item, $match))
-			$data['lang'] = trim($match[4]);
+			$data['lang'] = trim($match[3]);
 		else
 			$data['lang'] = trim($langue_du_site);
 
@@ -896,7 +899,7 @@ function analyser_backend($rss, $url_syndic='') {
 		# on cree nos tags microformat <a rel="category" href="url">titre</a>
 		$tags = array();
 		if (preg_match_all(
-		',<(([a-z]+:)?(subject|category|keywords?|tags?))[^>]*>'
+		',<(([a-z]+:)?(subject|category|keywords?|tags?|type))[^>]*>'
 		.'(.*?)</\1>,ims',
 		$item, $matches, PREG_SET_ORDER))
 			$tags = ajouter_tags($matches, $item); # array()
