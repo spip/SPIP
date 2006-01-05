@@ -564,8 +564,9 @@ function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 // lorsque celle-ci deviendra generique
 
 function generer_url_public($script, $args="", $retour="", $retour_args="") {
-	$site = $GLOBALS['meta']["adresse_site"];
-	$site .= (($site && $site[strlen($site)-1] <> '/') ?'/':'') . $script;
+	if (!($site = $GLOBALS['meta']["adresse_site"]))
+		$site = '../';
+	$site .= (($site[strlen($site)-1] <> '/') ?'/':'') . $script;
 	return generer_url_ecrire($site, $args, $retour, $retour_args);
 }
 
