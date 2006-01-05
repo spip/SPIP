@@ -615,7 +615,7 @@ Pour retrouver votre acc&egrave;s au site
 
 Veuillez vous rendre &agrave; l\'adresse suivante :
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Vous pourrez alors entrer un nouveau mot de passe
 et vous reconnecter au site.
