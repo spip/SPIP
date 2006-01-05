@@ -515,6 +515,8 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 
 function changer_statut_articles($id_article, $statut)
 {
+	global $connect_toutes_rubriques;
+
 	$id_article = intval($id_article);
 	$result = spip_query("SELECT statut,id_rubrique FROM spip_articles WHERE id_article=$id_article");
 
