@@ -670,7 +670,7 @@ et vous reconnecter au site.
 	familier du fonctionnement du syst&egrave;me SPIP. <P align="justify"><B>Plus
 	g&eacute;n&eacute;ralement, il est fortement conseill&eacute;
 	de laisser la charge de ces pages au webmestre principal de votre site.</B>',
-'texte_inc_meta_1' => 'Le syst&egrave;me a rencontr&eacute; une erreur lors de l\'&eacute;criture du fichier <code>ecrire/data/meta_cache.php3</code>. Veuillez, en tant qu\'administrateur du site,',
+'texte_inc_meta_1' => 'Le syst&egrave;me a rencontr&eacute; une erreur lors de l\'&eacute;criture du fichier <code>@fichier@</code>. Veuillez, en tant qu\'administrateur du site,',
 'texte_inc_meta_2' => 'v&eacute;rifier les droits d\'&eacute;criture',
 'texte_inc_meta_3' => 'sur le r&eacute;pertoire <code>ecrire/data/</code>.',
 'texte_statut_en_cours_redaction' => 'en cours de r&eacute;daction',
