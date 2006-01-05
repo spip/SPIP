@@ -559,12 +559,14 @@ function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 			  (!$retour_args ? "" : ('?' . $retour_args))));
 }
 
-// cas particulier des scripts publics appeles a partir de l'espace prive
+// scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
 // il faudra substituer a l'appel ci-dessous la definition ci-dessus
 // lorsque celle-ci deviendra generique
 
 function generer_url_public($script, $args="", $retour="", $retour_args="") {
-  return generer_url_ecrire("../$script", $args, $retour, $retour_args);
+	$site = $GLOBALS['meta']["adresse_site"];
+	$site .= (($site && $site[strlen($site)-1] <> '/') ?'/':'') . $script;
+	return generer_url_ecrire($site, $args, $retour, $retour_args);
 }
 
 ?>
