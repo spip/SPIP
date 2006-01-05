@@ -246,30 +246,13 @@ define_once('_DIR_CACHE', _DIR_PREFIX1 ."CACHE/");
 define_once('_DIR_SESSIONS', _DIR_PREFIX2 . "data/");
 define_once('_DIR_TRANSFERT', _DIR_PREFIX2 . "upload/");
 
-
-// exemples de redefinition possible, 
-// SOUS RESERVE QUE php.ini N'AIT PAS pas openbasedir=. !!!!!!
-// il est recommande de mettre les deux premiers en dehors de l'arbo http
-// pour _DIR_DOC, on ne peut le faire qu'en configuration securisee
-// pour _DIR_IMG, NE PAS LE METTRE en dehors de l'arborescence http
-
-//define('_DIR_CACHE', "/tmp/c/");
-//define('_DIR_SESSIONS', "/tmp/s/");
-
-//define('_DIR_DOC', "/tmp/d/");
-//define('_DIR_INCLUDE', _DIR_RESTREINT  ? 'Include/' : '../Include/');
-// globale des repertoires devant etre accessibles en ecriture
-// (inutile de mettre leurs sous-repertoires)
-
-
 // les fichiers qu'on y met, entre autres,
 
 define_once('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
 define_once('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
 define_once('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
 
-
-// sous-repertoires d'images accessible en ecriture
+// sous-repertoires d'images 
 
 define_once('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
 define_once('_DIR_IMG_ICONES_BARRE', _DIR_IMG . "icones_barre/");
@@ -279,6 +262,10 @@ define_once('_DIR_TeX', _DIR_IMG . "cache-TeX/");
 
 define_once('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
 define_once('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
+
+// les repertoires devant etre TOUJOURS accessibles en ecriture
+
+$test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
 
 // qq chaines standard
 

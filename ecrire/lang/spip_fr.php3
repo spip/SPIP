@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semaines',
 'dirs_commencer' => ' afin de commencer r&eacute;ellement l\'installation',
 'dirs_preliminaire' => 'Pr&eacute;liminaire : <b>R&eacute;gler les droits d\'acc&egrave;s</b>',
-'dirs_probleme_droits' => '<b>Probl&egrave;me de droits d\'acc&egrave;s</b>',
+'dirs_probleme_droits' => 'Probl&egrave;me de droits d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<b>Les r&eacute;pertoires suivants n\'ont pas &eacute;t&eacute; trouv&eacute;s&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />Il est probable que cela soit d&ucirc; &agrave; un probl&egrave;me de mauvaise mise en majuscules ou minuscules.
   V&eacute;rifiez que les minuscules et majuscules de ces r&eacute;pertoires concordent bien avec ce qui est affich&eacute;
