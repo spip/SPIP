@@ -14,11 +14,7 @@ if (defined("_TEST_DIRS")) return;
 define("_TEST_DIRS", "1");
 
 include("ecrire/inc_version.php3");
-
 include_ecrire("inc_minipres");
-
-utiliser_langue_visiteur();
-
 
 //
 // Tente d'ecrire
@@ -34,11 +30,14 @@ function test_ecrire($my_dir) {
 }
 
 //
-// teste les droits en ecriture sur les repertoires
-//
-$test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
-
+// tester les droits en ecriture sur les repertoires
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
+//
+
+function spip_test_dirs_dist()
+{
+  global $test_dir, $test_dirs;
+
 if ($test_dir) {
   if (!ereg("/$", $test_dir)) $test_dir .= '/';
   if (!in_array($test_dir, $test_dirs)) $test_dirs[] = $test_dir;
@@ -48,8 +47,8 @@ else {
 	  $test_dirs[] = dirname(_FILE_CONNECT_INS);
 }
 
-unset($bad_dirs);
-unset($absent_dirs);
+$bad_dirs = array();
+$absent_dirs  = array();;
 
 while (list(, $my_dir) = each($test_dirs)) {
 	if (!test_ecrire($my_dir)) {
@@ -62,9 +61,9 @@ while (list(, $my_dir) = each($test_dirs)) {
 			if (!test_ecrire($my_dir))
 				@chmod($my_dir, 0755);
 			if (!test_ecrire($my_dir))
-				$bad_dirs[] = "<LI>".$my_dir;
+				$bad_dirs[] = "<li>".$my_dir;
 		} else
-			$absent_dirs[] = "<LI>".$my_dir;
+			$absent_dirs[] = "<li>". $my_dir;
 	}
 }
 
@@ -76,8 +75,6 @@ if ($bad_dirs OR $absent_dirs) {
 	} else
 		$titre = _T('dirs_probleme_droits');
 
-	$bad_url = "spip_test_dirs" . _EXTENSION_PHP;
-	if ($test_dir) $bad_url .= '?test_dir='.$test_dir;
 
 	$res = "<div align='right'>". menu_langues('var_lang_ecrire')."</div>\n";
 
@@ -96,17 +93,22 @@ if ($bad_dirs OR $absent_dirs) {
 	}
 
 	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>" .
-	  "<FORM ACTION='$bad_urls' METHOD='GET'>\n" .
-	  "<DIV align='right'><INPUT TYPE='submit' CLASS='fondl' VALUE='". 
+	  "<form action='" . generer_url_public('spip_test_dirs') . "'>" .
+	  (!$test_dir ? "" : 
+	   "<input type='hidden' name='test_dir' value='$test_dir' />") .
+	  "<DIV align='right'><input type='submit' class='fondl' value='". 
 	  _T('login_recharger')."'></DIV>" .
-	  "</FORM>";
+	  "</form>";
 	install_debut_html($titre);echo $res;	install_fin_html();
 
-} else {
+ } else {
 	if (!_FILE_CONNECT)
 		header("Location: " . _DIR_RESTREINT_ABS . "install" . _EXTENSION_PHP . "?etape=1");
 	else
 		header("Location: " . _DIR_RESTREINT_ABS);
+ }
 }
+
+spip_test_dirs_dist();
 
 ?>
