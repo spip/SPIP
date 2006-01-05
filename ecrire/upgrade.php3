@@ -10,6 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-if (!isset($reinstall)) $reinstall = 'non';
+if (!isset($_GET['reinstall'])) $reinstall = 'non';
 include ("inc.php3");
 ?>

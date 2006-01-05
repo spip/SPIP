@@ -895,7 +895,8 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_nouveau_message' => 'Nouveau message',
 'texte_nouveau_mot' => 'Nouveau mot',
 'texte_nouvelle_version_spip_1' => 'Vous avez install&eacute; une nouvelle version de SPIP.',
-'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier <tt>inc_connect.php3</tt> du r&eacute;pertoire <tt>ecrire</tt> et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p /> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un oeil au fichier <tt>inc_connect.php3</tt> avant de le supprimer...)',
+'texte_nouvelle_version_spip_2' => 'Cette nouvelle version n&eacute;cessite une mise &agrave; jour plus compl&egrave;te qu\'&agrave; l\'accoutum&eacute;e. Si vous &ecirc;tes webmestre du site, veuillez effacer le fichier @connect@
+et reprendre l\'installation afin de mettre &agrave; jour vos param&egrave;tres de connexion &agrave; la base de donn&eacute;es.<p /> (NB.&nbsp;: si vous avez oubli&eacute; vos param&egrave;tres de connexion, jetez un oeil au fichier @connect@ avant de le supprimer...)',
 'texte_operation_echec' => 'Retournez &agrave; la page pr&eacute;c&eacute;dente, s&eacute;lectionnez une autre base ou cr&eacute;ez-en une nouvelle. V&eacute;rifiez les informations fournies par votre h&eacute;bergeur.',
 'texte_plus_trois_car' => 'plus de 3 caract&egrave;res',
 'texte_plusieurs_articles' => 'Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',

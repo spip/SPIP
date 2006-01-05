@@ -29,7 +29,8 @@ function upgrade_dist()
 
 	install_debut_html(_T('titre_page_upgrade')); 
 	echo "<p><b>",_T('texte_nouvelle_version_spip_1'),"</b><p> ",
-	 _T('texte_nouvelle_version_spip_2'),
+	  _T('texte_nouvelle_version_spip_2',
+	     array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')),
 	 "<p><div align='right'>",
 	 '<form action="', generer_url_ecrire("upgrade"), '">',
 	 "<input type='submit' value=\"",
