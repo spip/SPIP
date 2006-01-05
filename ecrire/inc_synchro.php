@@ -17,20 +17,19 @@ include_ecrire("inc_urls");
 include_ecrire("inc_acces"); // pour low_sec (iCal)
 
 function afficher_liens_calendrier($lien, $args, $icone, $texte) {
-	$adresse_site=$GLOBALS['meta']["adresse_site"];
+
 	echo debut_cadre_enfonce($icone);
 	echo $texte;
 	echo "<table style='width: 100%;><tr'><td style='width: 200px;'>";
-		icone_horizontale (_T('ical_methode_http'),
-				   generer_url_ecrire("$adresse_site/$lien", $args),
-				   "calendrier-24.gif");
+	icone_horizontale (_T('ical_methode_http'),
+			   generer_url_public($lien, $args),
+			   "calendrier-24.gif");
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
-		$webcal = ereg_replace("https?://", "webcal://", $adresse_site);
-		icone_horizontale (_T('ical_methode_webcal'), 
-				   generer_url_ecrire("$webcal/$lien", $args),
-				   "calendrier-24.gif");
+	icone_horizontale (_T('ical_methode_webcal'), 
+			   ereg_replace("https?://", "webcal://", generer_url_public($lien, $args)),
+			   "calendrier-24.gif");
 	echo "</td></tr></table>";
 	echo fin_cadre_enfonce();
 }
@@ -116,8 +115,7 @@ echo _T('ical_texte_rss');
 
 echo "<p>"._T("ical_texte_rss_articles")."</p>";
 
- echo propre("<ul><cadre>".generer_url_ecrire($adresse_site."/backend") .
-	     "</cadre></ul>");
+echo propre("<ul><cadre>" . generer_url_public('backend') . "</cadre></ul>");
 
 echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
@@ -133,7 +131,7 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 			$titre_rubrique = typo($row['titre']);
 			$titre = htmlspecialchars($titre_rubrique);
 			
-			echo "<li>", http_href(generer_url_ecrire($adresse_site."/backend", "id_rubrique=$id_rubrique"), 
+			echo "<li>", http_href( generer_url_public('backend', "id_rubrique=$id_rubrique"), 
 	'<span class="rss-button">RSS</span>&nbsp; ' . $titre_rubrique,
 					       $titre),
 			  "</li>\n";
@@ -147,7 +145,7 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 	if ($activer_breves == "oui") {
 		
 		echo "<p>"._T("ical_texte_rss_breves")."</p>";
-		echo propre('<ul><cadre>'.generer_url_ecrire($adresse_site."/backend-breves"). "</cadre></ul>");
+		echo propre('<ul><cadre>' . generer_url_ecrire('backend-breves'). "</cadre></ul>");
 		
 	}
 
@@ -164,7 +162,7 @@ debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
 echo _T('ical_texte_js').'<p />';
 
 echo propre('<cadre><script type="text/javascript" src="'.
-	    generer_url_ecrire($adresse_site."/distrib") .
+	    generer_url_ecrire('distrib') .
 	    '"></script></cadre>');
 
 fin_cadre_relief();

@@ -86,10 +86,10 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		    $id_article,
 		    " </b></span>";
 		
-		echo "<a href='", generer_url_ecrire((($statut == 'publie') ? 
-				   "../spip_redirect" :
-				   "articles"),
-				  "id_article=$id_article"),
+		echo "<a href='",
+		  (($statut == 'publie') ? 
+		   generer_url_public('spip_redirect', "id_article=$id_article") :
+		   generer_url_ecrire('articles', "id_article=$id_article")),
 		  "'>",
 		  typo($titre),
 		  "</a>";

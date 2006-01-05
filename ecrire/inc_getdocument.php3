@@ -90,7 +90,7 @@ function deplacer_fichier_upload($source, $dest) {
 		if ($f) {
 			fclose ($f);
 		} else {
-		  redirige_par_entete(generer_url_ecrire("spip_test_dirs"),
+		  redirige_par_entete(generer_url_public('spip_test_dirs'),
 				      "?test_dir=". dirname($dest));
 		}
 		@unlink($dest);
@@ -464,7 +464,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 					 'chemin' => $zip,
 					 'doc' => $mode,
 					 'type' => $type),
-					     generer_url_ecrire("spip_image","id_article=$id"));
+					     generer_url_public('spip_image',"id_article=$id"));
 			  // a tout de suite en joindre5 ou joindre6
 			  exit;
 			}
