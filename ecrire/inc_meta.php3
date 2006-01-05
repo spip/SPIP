@@ -56,7 +56,7 @@ function ecrire_metas() {
 		    "'>",
 		    _T('texte_inc_meta_2'),
 		    "</a> ",
-		    _T('texte_inc_meta_3'),
+		    _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS)),
 		    "&nbsp;</h4>\n";
 	}
 }

@@ -625,13 +625,16 @@ function afficher_transferer_upload($type, $texte_upload)
 {
 	if (!$texte_upload) {
 		return "<div style='border: 1px #303030 solid; padding: 4px; color: #505050;'>" .
-			_T('info_installer_ftp') .
+		  _T('info_installer_ftp',
+			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>')).
 			aide("ins_upload") .
 			"</div>";
 		}
 	else {  return
-		"<p><div style='color: #505050;'>" .
-		"\n"._T('info_selectionner_fichier')."&nbsp;:<br />" .
+		"<p><div style='color: #505050;'>\n"
+		._T('info_selectionner_fichier',
+			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'))
+		."&nbsp;:<br />" .
 		"\n<select name='chemin' size='1' class='fondl'>" .
 		$texte_upload .
 	  	"\n</select>" .

@@ -140,12 +140,16 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 			closedir($myDir);
 		}
 		if (!$afficher) {
-		  echo _T('info_installer_images_dossier');
+		  echo _T('info_installer_images_dossier',
+			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'));
 		} else {
-			echo "\n<div style='text-align: left'>"._T('info_selectionner_fichier').":</div>";
-			echo "\n<SELECT NAME='source' CLASS='forml' size='1'>";
+		  echo "\n<div style='text-align: left'>",
+		    _T('info_selectionner_fichier',
+		       array('upload' => '<b>' . _DIR_TRANSFERT . '</b>')),
+		    ":</div>";
+			echo "\n<select name='source' CLASS='forml' size='1'>";
 			echo $afficher;
-			echo "\n</SELECT>";
+			echo "\n</select>";
 			echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
 			echo "\n<input name='sousaction2' type='submit' value='"._T('bouton_choisir')."' CLASS='fondo'  style='font-size:9px' /></div>";
 		}
