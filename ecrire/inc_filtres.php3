@@ -726,9 +726,12 @@ function agenda_memo($date=0 , $descriptif='', $titre='', $url='', $cal='')
   return "";
 }
 
-// Cette fonction recoit un nombre d'evenements, un type de calendriers
-// et une suite de noms N.
-// Elle demande a la fonction la precedente son tableau
+// Cette fonction recoit:
+// - un nombre d'evenements, 
+// - une chaine à afficher si ce nombre est nul, 
+// - un type de calendrier
+// -- et une suite de noms N.
+// Elle demande a la fonction precedente son tableau
 // et affiche selon le type les elements indexes par N dans ce tableau.
 // Si le suite de noms est vide, tout le tableau est pris
 // Ces noms N sont aussi des classes CSS utilisees par http_calendrier_init
@@ -750,19 +753,20 @@ function agenda_affiche($i)
 	  $evt[$d] = $evt[$d] ? (array_merge($evt[$d], $v)) : $v;
 	}
     }
+  $d = array_keys($evt);
+  $mindate = min($d);
+  $start = strtotime($mindate);
   if ($type != 'periode')
       $evt = array('', $evt);
   else
       {
-	$d = array_keys($evt);
-	$mindate = min($d);
 	$min = substr($mindate,6,2);
-	$max = $min + ((strtotime(max($d)) - strtotime($mindate)) / (3600 * 24));
+	$max = $min + ((strtotime(max($d)) - $start) / (3600 * 24));
 	if ($max < 31) $max = 0;
 	$evt = array('', $evt, $min, $max);
 	$type = 'mois';
       }
-    return http_calendrier_init('', $type, '', '', '', $evt);
+  return http_calendrier_init($start, $type, '', '', '', $evt);
 }
 
 //
