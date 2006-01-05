@@ -399,9 +399,9 @@ Merci de votre participation
 'info_erreur_requete' => 'Erreur dans la requ&ecirc;te :',
 'info_erreur_squelette2' => 'Aucun squelette <b>@fichier@</b> n\'est disponible...',
 'info_erreur_systeme' => 'Erreur syst&egrave;me (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
-	<font color=\'red\'>Essayez de <a href=\'ecrire/admin_repair.php3\'>r&eacute;parer la base</a>,
-	ou contactez votre h&eacute;bergeur.</font><br></b>',
+'info_erreur_systeme2' => 'Le disque dur est peut-&ecirc;tre plein, ou la base de donn&eacute;es endommag&eacute;e. <br>
+	<font color=\'red\'>Essayez de <a href=\'@script@\'>r&eacute;parer la base</a>,
+	ou contactez votre h&eacute;bergeur.</font>',
 'info_fini' => 'C\'est fini !',
 'info_format_image' => 'Formats d\'images pouvant &ecirc;tre utilis&eacute;es pour cr&eacute;er des vignettes&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'format non d&eacute;fini',
