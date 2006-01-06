@@ -318,7 +318,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	  }
 }
 
-function critere_agenda($idb, &$boucles, $crit)
+function critere_agenda_dist($idb, &$boucles, $crit)
 {
 	$params = $crit->param;
 
