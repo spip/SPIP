@@ -957,7 +957,7 @@ function traiter_raccourcis($letexte) {
 
 			// creer le popup 'title' sur l'appel de note
 			if ($title = supprimer_tags(propre($note_texte))) {
-				$title = $ouvre_note.$ancre.$ferme_note.$title;
+				$title = $ouvre_note.$num_note.$ferme_note.$title;
 				$title = couper($title,80);
 				$lien = inserer_attribut($lien, 'title', $title);
 			}

@@ -188,7 +188,8 @@ function lignes_longues($texte, $l = 70) {
 		}
 	}
 	// casser les mots longs qui restent
-	if (preg_match_all("/\S{".$l."}/Ums", $texte, $longs, PREG_SET_ORDER)) {
+	// note : on pourrait preferer couper sur les / , etc.
+	if (preg_match_all("/[\w,\/.]{".$l."}/Ums", $texte, $longs, PREG_SET_ORDER)) {
 		foreach ($longs as $long) {
 			$texte = str_replace($long[0], $long[0].' ', $texte);
 		}
