@@ -3,7 +3,7 @@
 ][
 (#ENV*{message}|?{'',' '})
 
-<form id="oubli_form" action='spip_pass.php3' method='post'>
+<form id="oubli_form" action='[(#ENV{action})]' method='POST'>
 	<fieldset class='spip_sanscadre'>
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type='hidden' name="p" value="(#ENV{p})" />

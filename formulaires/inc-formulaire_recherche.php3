@@ -21,7 +21,7 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
 	if ($GLOBALS['meta']["activer_moteur"] != "oui")
 		return '';
 
-	// Seul un lien [(#FORMULAIRE_RECHERCHE|xxx.php3)] nous interesse
+	// filtres[0] doit etre un script (a revoir)
 	else
 	  return array($filtres[0], $args[0]);
 }
@@ -33,12 +33,9 @@ function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 		$recherche_securisee = _T('info_rechercher');
 	  }
 	}
-	if (!$lien)
-		$lien = 'recherche' .  _EXTENSION_PHP ;	# par defaut
 
 	return array('formulaire_recherche', 3600, 
-		array(
-			'lien' => $lien,
+		     array('lien' => ($lien ? $lien : generer_url_public('recherche')),
 			'recherche_securisee' => $recherche_securisee
 		));
 }
