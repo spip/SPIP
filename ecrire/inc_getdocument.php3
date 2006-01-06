@@ -10,11 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
-// Fonctions de spip_image
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire('inc_minipres');
@@ -158,7 +153,7 @@ function accepte_fichier_upload ($f) {
 	}
 }
 
-# callback pour le deballage dans spip_image
+# callback pour le deballage d'un zip telecharge
 # http://www.phpconcept.net/pclzip/man/en/?options-pclzip_cb_pre_extractfunction
 function callback_deballe_fichier($p_event, &$p_header) {
 	if (accepte_fichier_upload($p_header['filename'])) {
@@ -405,6 +400,7 @@ function afficher_compactes($fichiers, $args, $action) {
 // presenter une interface pour choisir si fichier joint ou decompacte
 // passer ca en squelette un de ces jours.
 
+	include_ecrire('inc_documents');
 	install_debut_html(_T('upload_fichier_zip')); echo "<p>",
 		_T('upload_fichier_zip_texte'),
 		"</p>",
@@ -430,7 +426,7 @@ function afficher_compactes($fichiers, $args, $action) {
 }
 
 //
-// Traiter la liste des fichiers
+// Traiter la liste des fichiers (spip_image_joindre3)
 //
 
 function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$actifs)
@@ -792,5 +788,100 @@ function gdRotate ($imagePath,$rtt){
 	$save($dst_img,$imagePath);
 }
 
+
+
+// Cas d'un document distant reference sur internet
+
+function spip_image_joindre2($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	examiner_les_fichiers(array(
+				   array('name' => basename($arg),
+					 'tmp_name' => $arg)
+				   ), 'distant', $type, $id, $id_document,
+			     $hash, $hash_id_auteur, $redirect, $actifs);
+}
+
+// Cas d'un fichier transmis
+
+function spip_image_joindre1($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	$files = array();
+	if (is_array($arg))
+	  foreach ($arg as $file) {
+		if (!$file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+			$files[]=$file;
+	}
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+			     $hash, $hash_id_auteur, $redirect, $actifs);
+} 
+
+// copie de tout ou partie du repertoire upload
+
+function spip_image_joindre3($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	if (!$arg || strstr($arg, '..')) return;
+	    
+	$upload = (_DIR_TRANSFERT .$arg);
+
+	if (!is_dir($upload))
+	  // seul un fichier est demande
+	  $files = array(array ('name' => basename($upload),
+				'tmp_name' => $upload)
+			 );
+	else {
+	  include_ecrire('inc_documents');
+	  $files = array();
+	  foreach (fichiers_upload($upload) as $fichier) {
+			$files[]= array (
+					'name' => basename($fichier),
+					'tmp_name' => $fichier
+					);
+	  }
+	}
+
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+			     $hash, $hash_id_auteur, $redirect, $actifs);
+}
+
+//  identifie les repertoires de upload aux rubriques Spip
+
+function spip_image_joindre4($arg, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$documents_actifs)
+{
+	if (!$arg || strstr($arg, '..')) return;
+	$upload = (_DIR_TRANSFERT .$arg);
+	identifie_repertoire_et_rubrique($upload, $id, $hash_id_auteur);
+	include_ecrire("inc_rubriques");
+	calculer_rubriques();
+}
+
+//  Zip avec confirmation "tel quel"
+
+function spip_image_joindre5($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+  	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
+}
+
+// cas du zip a deballer. On ressort la bibli 
+
+function spip_image_joindre6($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
+{
+	    define('_tmp_dir', creer_repertoire_documents($hash));
+	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
+	    include_ecrire('pclzip.lib');
+	    $archive = new PclZip($arg);
+	    $archive->extract(
+			      PCLZIP_OPT_PATH, _tmp_dir,
+			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
+			      );
+	    $contenu = verifier_compactes($archive);
+	    //  on supprime la copie temporaire
+	    @unlink($arg);
+	    
+	    foreach ($contenu as $fichier)
+		ajouter_un_document(_tmp_dir.basename($fichier),
+				    basename($fichier),
+				    $type, $id, $mode, $id_document, $actifs);
+	    effacer_repertoire_temporaire(_tmp_dir);
+}
 
 ?>
