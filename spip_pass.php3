@@ -47,7 +47,7 @@ function spip_pass_passcookie($email, $param)
 			  _T('pass_mail_passcookie',
 			     array('nom_site_spip' => $nom,
 				   'adresse_site' => $url, 
-				   'sendcookie' => generer_url_ecrire("$url/spip_pass", "$param=$cookie")))) )
+				   'sendcookie' => generer_url_public('spip_pass', "$param=$cookie")))) )
 	  return _T('pass_recevoir_mail');
 	else
 	  return  _T('pass_erreur_probleme_technique');

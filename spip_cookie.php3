@@ -10,12 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("ecrire/inc_version.php3");
 include_ecrire ("inc_session");
 include_ecrire('inc_cookie');
-spip_log("uri: $REQUEST_URI");
-// gerer l'auth http
+
 function auth_http($url, $essai_auth_http) {
 	global $_SERVER;
 	if ($essai_auth_http == 'oui') {
@@ -119,7 +117,7 @@ if ($logout) {
 		unset ($auteur_session);
 	}
 
-	redirige_par_entete($url ? $url : "spip_login" . _EXTENSION_PHP);
+	redirige_par_entete($url ? $url : generer_url_public('spip_login'));
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
@@ -127,8 +125,9 @@ if ($logout) {
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
-	redirige_par_entete("spip_login" . _EXTENSION_PHP . "?var_echec_cookie=oui&url="
-		. ($url ? urlencode($url) : _DIR_RESTREINT_ABS));
+	redirige_par_entete(generer_url_public('spip_login'),
+			    "?var_echec_cookie=oui&url="
+			    . ($url ? urlencode($url) : _DIR_RESTREINT_ABS));
 }
 
 // Tentative de login
