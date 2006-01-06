@@ -88,7 +88,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			$r = afficher_raccourci_stats($id_article);
 			$visites = $r['visites'];
 			$popularite = $r['popularite'];
-			$statistiques = 'statistiques_visites.php3?'; # lien si connecte
+			$statistiques = generer_url_ecrire('statistiques_visites', "id_article=$id_article");
 		}
 	}
 
@@ -114,7 +114,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 
 	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
 	if (!($id_article || $id_rubrique || $id_auteur || $id_breve || $id_mot || $id_syndic))
-		$ecrire = 'ecrire';
+		$ecrire = _DIR_RESTREINT_ABS;
 
 	// Bouton "preview" si l'objet demande existe et est previsualisable
 	if (!$GLOBALS['var_preview'] AND (
@@ -140,27 +140,33 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				$preview = 'preview';
 	}
 
-	return array('formulaire_admin', 0,
-			array(
-				'id_article' => $id_article,
-				'id_rubrique' => $id_rubrique,
-				'id_auteur' => $id_auteur,
-				'id_breve' => $id_breve,
-				'id_mot' => $id_mot,
-				'id_syndic' => $id_syndic,
-				'ecrire' => $ecrire,
-				'action' => $action,
-				'preview' => $preview,
-				'debug' => $debug,
-				'popularite' => ceil($popularite),
-				'statistiques' => $statistiques,
-				'visites' => intval($visites),
-				'use_cache' => ($use_cache ? '' : ' *'),
-				'divclass' => $float,
-				'analyser' => $analyser,
-				'xhtml_error' => $GLOBALS['xhtml_error']
+	return array('formulaire_admin', 0, 
+		array(
+			'id_article' => $id_article,
+			'id_rubrique' => $id_rubrique,
+			'id_auteur' => $id_auteur,
+			'id_breve' => $id_breve,
+			'id_mot' => $id_mot,
+			'id_syndic' => $id_syndic,
+			'voir_article' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'articles', "id_article=$id_articles"),
+			'voir_breve' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'breves_voir', "id_breve=$id_breve"),
+			'voir_rubrique' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'naviguer', "id_rubrique=$id_rubrique"),
+			'voir_mot' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'mots_edit', "id_mot=$id_mot"),
+			'voir_site' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'sites', "id_syndic=$id_syndic"),
+			'voir_auteur' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'auteurs_edit', "id_auteur=$id_auteur"),
+			'ecrire' => $ecrire,
+			'action' => $action,
+			'preview' => $preview,
+			'debug' => $debug,
+			'popularite' => ceil($popularite),
+			'statistiques' => $statistiques,
+			'visites' => intval($visites),
+			'use_cache' => ($use_cache ? '' : ' *'),
+			'divclass' => $float,
+			'analyser' => $analyser,
+			'xhtml_error' => $GLOBALS['xhtml_error']
 			)
-		);
+		     );
 }
 
 // Un outil pour le bouton d'amin "statistiques"
