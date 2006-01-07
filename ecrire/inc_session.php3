@@ -63,7 +63,7 @@ function ajouter_session($auteur, $id_session) {
 		fputs($f, $texte);
  		fclose($f);
 	} else {
-	  redirige_par_entete(generer_url_public('spip_test_dirs'));
+		redirige_par_entete(generer_url_public('spip_action.php'), '?action=test_dirs');
 	}
 }
 

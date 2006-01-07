@@ -34,7 +34,7 @@ function test_ecrire($my_dir) {
 // rajouter celui passer dans l'url ou celui du source (a l'installation)
 //
 
-function spip_test_dirs_dist()
+function spip_action_test_dirs_dist()
 {
   global $test_dir, $test_dirs;
 
@@ -93,7 +93,8 @@ if ($bad_dirs OR $absent_dirs) {
 	}
 
 	$res = "<p>" . $continuer  . $res . aide ("install0") . "</p>" .
-	  "<form action='" . generer_url_public('spip_test_dirs') . "'>" .
+	  "<form action='" . generer_url_public('spip_action.php') . "'>" .
+	   "<input type='hidden' name='action' value='test_dirs' />" .
 	  (!$test_dir ? "" : 
 	   "<input type='hidden' name='test_dir' value='$test_dir' />") .
 	  "<DIV align='right'><input type='submit' class='fondl' value='". 
@@ -108,7 +109,4 @@ if ($bad_dirs OR $absent_dirs) {
 		header("Location: " . _DIR_RESTREINT_ABS);
  }
 }
-
-spip_test_dirs_dist();
-
 ?>

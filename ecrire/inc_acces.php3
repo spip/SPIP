@@ -126,7 +126,7 @@ function ecrire_acces() {
 		ecrire_logins($fichier, $logins);
 		fclose($fichier);
 	} else {
-		redirige_par_entete(generer_url_public("spip_test_dirs"));
+		redirige_par_entete(generer_url_public('spip_action.php'), '?action=test_dirs');
 	}
 
 	$query = "SELECT login, htpass FROM spip_auteurs WHERE statut = '0minirezo'";

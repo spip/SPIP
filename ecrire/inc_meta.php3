@@ -52,7 +52,7 @@ function ecrire_metas() {
 		  echo "<h4 font color=red>",
 		    _T('texte_inc_meta_1', array('fichier' => $file)),
 		    " <a href='",
-		    generer_url_public("spip_test_dirs"),
+		    generer_url_public('spip_action.php', 'action=test_dirs'),
 		    "'>",
 		    _T('texte_inc_meta_2'),
 		    "</a> ",

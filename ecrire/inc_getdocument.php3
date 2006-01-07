@@ -85,8 +85,7 @@ function deplacer_fichier_upload($source, $dest) {
 		if ($f) {
 			fclose ($f);
 		} else {
-		  redirige_par_entete(generer_url_public('spip_test_dirs'),
-				      "?test_dir=". dirname($dest));
+			redirige_par_entete(generer_url_public('spip_action.php'), "?action=test_dirs&test_dir=". dirname($dest));
 		}
 		@unlink($dest);
 	}
