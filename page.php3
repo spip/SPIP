@@ -19,6 +19,7 @@ if (strstr($fond, '/')) {
 }
 if (!find_in_path("$fond.html")) {
 	spip_log("page: find_in_path ne trouve pas le squelette $fond");
+	echo "Erreur ! squelette &laquo; ".htmlspecialchars($fond)."&raquo; absent.";
 	$fond = '404';
 }
 include ("inc-public.php3");
