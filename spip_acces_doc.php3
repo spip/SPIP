@@ -12,6 +12,6 @@
   // compatibilite
 
 header("Location: " . 
-	str_replace('spip_acces_doc.php', 'spip_image.php',
+	str_replace('spip_acces_doc.php', 'spip_action.php',
 		    $_SERVER['REQUEST_URI']));
 ?>
