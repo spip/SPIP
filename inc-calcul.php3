@@ -33,12 +33,7 @@ include_local("inc-calcul-outils");
 if ($f = find_in_path("mes_fonctions" . _EXTENSION_PHP))
 	include_local ($f);
 
-// Gestionnaire d'URLs
-if (@file_exists("inc-urls" . _EXTENSION_PHP)) // compat vieille version
-	include_local("inc-urls");
-else
-	include_local("inc-urls-".$GLOBALS['type_urls']);
-
+charger_generer_url();
 
 // Le squelette compile est-il trop vieux ?
 function squelette_obsolete($skel, $squelette) {

@@ -544,6 +544,23 @@ function charger_plugins($plugins) {
 #var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
 }
 
+// Cette fonction charge le bon inc-urls selon qu'on est dans l'espace
+// public ou prive, la presence d'un (old style) inc-urls.php3, etc.
+function charger_generer_url() {
+	static $ok;
+
+	if ($ok++) return; # fichier deja charge
+
+	// espace prive ?
+	if (!_DIR_RESTREINT)
+		include_ecrire('inc_urls');
+	// fichier inc-urls ?
+	else if (@file_exists("inc-urls" . _EXTENSION_PHP))
+		include_local("inc-urls");
+	// fichier inc-urls-xxx ?
+	else
+		include_local("inc-urls-".$GLOBALS['type_urls']);
+}
 
 
 // cette fonction fabrique un appel a un script php
