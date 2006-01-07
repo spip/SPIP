@@ -298,10 +298,11 @@ function appliquer_modifs_config() {
 	}
 
 	if ($purger_skel) {
-	  redirige_par_entete(generer_url_public("spip_cache"), "?action=purger_squelettes&id_auteur=$connect_id_auteur&hash=" .
-				    calculer_action_auteur("purger_squelettes") .
-				    "&redirect=".  _DIR_RESTREINT_ABS .
-						urlencode($clean_link->getUrl()));
+	  $action = 'purger';
+	  $arg = 'squelettes';
+	  $hash = calculer_action_auteur("$action $arg");
+	  redirige_par_entete(generer_url_public("spip_action.php"), "?action=$action&arg=$args&id_auteur=$connect_id_auteur&hash=&hash&redirect=" .
+			      _DIR_RESTREINT_ABS . urlencode($clean_link->getUrl()));
 	}
 }
 

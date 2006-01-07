@@ -82,9 +82,10 @@ function upgrade_dist()
   fin_admin($upgrade_titre);
 
   if ($ok) {
-	$action = 'purger_cache';
-	$hash = calculer_action_auteur($action);
-	redirige_par_entete(generer_url_public("spip_cache"), "?action=$action&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS);
+	$action = 'purger';
+	$arg = 'cache';
+	$hash = calculer_action_auteur("$action $arg");
+	redirige_par_entete(generer_url_public("spip_action.php"), "?action=$action&id_auteur=$connect_id_auteur&hash=$hash&redirect=" .  _DIR_RESTREINT_ABS);
   }
   else {
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));

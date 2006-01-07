@@ -134,50 +134,6 @@ function purger_repertoire($dir, $age='ignore', $regexp = '') {
 	closedir($handle);
 }
 
-function purger_cache() {
-	supprime_invalideurs();
-	purger_repertoire(_DIR_CACHE, 0);
-}
-
-function purger_cache_squelettes() {
-	purger_repertoire(_DIR_CACHE, 0, '^skel_');
-}
-
-
-function purger_cache_vignettes() {
-	purger_repertoire(_DIR_IMG, $age='ignore', $regexp = '^cache\-');
-	spip_log('vider le cache');
-	purger_cache();
-}
-
-
-function calculer_cache_vignettes() {
-  	global $lang;
-	$handle = @opendir(_DIR_IMG);
-	if (!$handle) return;
-
-	while (($fichier = @readdir($handle)) !== false) {
-		// Eviter ".", "..", ".htaccess", etc.
-		if ($fichier[0] == '.') continue;
-		if ($regexp AND !ereg($regexp, $fichier)) continue;
-		if (is_dir(_DIR_IMG.$fichier) AND ereg("^cache-", $fichier)) {
-			$taille += calculer_taille_dossier(_DIR_IMG.$fichier);
-		}
-	}
-	closedir($handle);
-	
-	include_ecrire("inc_filtres");
-	include_ecrire('inc_lang');
-	lang_select($lang);
-	echo "<html><body>\n";
-	echo "<div style='font-family: verdana, arial, sans; font-size: 12px;'>";
-	echo "<p align='justify'>\n";
-	echo _T('ecrire:taille_cache_image', array('dir' => _DIR_IMG,
-		'taille' => "<b>".taille_en_octets($taille)."</b>"));
-	echo "</p></div></body></html>";
-
-}
-
 // Fonctions pour le cache des images (vues reduites)
 
 
