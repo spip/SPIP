@@ -63,18 +63,19 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $redire
 
 	if ($spip_display != 4) {
 	
+		include_ecrire('inc_session');
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
 		echo "<div class='verdana1' style='text-align: center;'>";
 		$desc = decrire_logo($logon);
-		afficher_logo($logon, $texteon, $desc, $id_objet, $id, $redirect);
+		afficher_logo($logon, $texteon, $desc, $redirect);
 
 		if ($desc AND $texteoff) {
 			echo "<br /><br />";
 			$desc = decrire_logo($logoff);
-			afficher_logo($logoff, $texteoff, $desc, $id_objet, $id, $redirect);
+			afficher_logo($logoff, $texteoff, $desc, $redirect);
 		}
-	
+
 		echo "</div>";
 		fin_cadre_relief();
 		echo "</p>";
@@ -82,12 +83,10 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $redire
 }
 
 
-function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
+function afficher_logo($racine, $titre, $logo, $redirect) {
 	global $connect_id_auteur;
 	global $clean_link, $spip_lang_right;
 
-	include_ecrire('inc_session');
- 
 	if (!$redirect) $redirect = $clean_link->getUrl();
 
 	echo "<b>";
@@ -98,32 +97,31 @@ function afficher_logo($racine, $titre, $logo, $id_objet, $id, $redirect) {
 
 	if ($logo) {
 		list ($fichier, $taille) =  $logo;
-		$hash = calculer_action_auteur("effacer $fichier");
+		$hash = calculer_action_auteur("iconifier $fichier");
 
 		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>";
 		echo reduire_image_logo(_DIR_IMG.$fichier, 170);
 		echo "</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
-		echo "\n<br />[<a href='", generer_url_public("spip_image", "$id_objet=$id&action=effacer&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
+		echo "\n<br />[<a href='", generer_url_public('spip_action.php', "action=iconifier&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
 	else {
-		$hash = calculer_action_auteur("ajouter $racine");
+		$hash = calculer_action_auteur("iconifier $racine");
 		echo debut_block_invisible(md5($titre));
 
-		echo "\n\n<form action='" . generer_url_public("spip_image","") . "' method='POST'
+		echo "\n\n<form action='" . generer_url_public('spip_action.php') . "' method='POST'
 			ENCTYPE='multipart/form-data'>
 			<div>";
-		echo "\n<INPUT NAME='redirect' TYPE=Hidden VALUE='$redirect' />";
-		echo "\n<INPUT NAME='$id_objet' TYPE=Hidden VALUE='$id' />";
-		echo "\n<INPUT NAME='hash_id_auteur' TYPE=Hidden VALUE='$connect_id_auteur' />";
-		echo "\n<INPUT NAME='hash' TYPE=Hidden VALUE='$hash' />";
-		echo "\n<INPUT NAME='action' TYPE=Hidden VALUE='ajouter' />";
-		echo "\n<INPUT NAME='doc' TYPE=Hidden VALUE='$racine' />";
+		echo "\n<input name='redirect' type='hidden' value='$redirect' />";
+		echo "\n<input name='hash_id_auteur' type='hidden' value='$connect_id_auteur' />";
+		echo "\n<input name='hash' type='hidden' value='$hash' />";
+		echo "\n<input name='action' type='hidden' value='iconifier' />";
+		echo "\n<input name='doc' type='hidden' value='$racine' />";
 		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
-		echo "\n<INPUT NAME='image' type='File' class='forml' style='font-size:9px;' SIZE=15>";
+		echo "\n<input name='image' type='File' class='forml' style='font-size:9px;' size='15'>";
 		echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";
 		echo "\n<input name='sousaction1' type='submit' value='",
 		  _T('bouton_telecharger'),
