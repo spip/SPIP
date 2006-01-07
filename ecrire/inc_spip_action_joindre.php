@@ -1,0 +1,160 @@
+<?php
+
+/***************************************************************************\
+ *  SPIP, Systeme de publication pour l'internet                           *
+ *                                                                         *
+ *  Copyright (c) 2001-2006                                                *
+ *  Arnaud Martin, Antoine Pitrou, Philippe Riviere, Emmanuel Saint-James  *
+ *                                                                         *
+ *  Ce programme est un logiciel libre distribue sous licence GNU/GPL.     *
+ *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
+\***************************************************************************/
+
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_ecrire("inc_charsets");	# pour le nom de fichier
+include_ecrire("inc_session");	# verifier_action_auteur
+include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
+include_ecrire('inc_getdocument');
+
+function spip_action_joindre_dist()
+{
+  global 
+    $arg,
+    $sousaction1,
+    $sousaction2,
+    $sousaction3,
+    $sousaction4,
+    $sousaction5,
+    $action, $hash, $id_auteur,
+    $url, $chemin, $ancre, $type, $id_article, $id_document,  $redirect,
+    $_FILES,  $HTTP_POST_FILES;
+
+  if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
+		die ($action . '!!!');
+
+     // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
+     // et son transcodage est couteux et perilleux
+     $action = 'spip_action_joindre' .
+       ($sousaction1 ? 1 :
+	($sousaction2 ? 2 :
+	 ($sousaction3 ? 3 : 
+	  ($sousaction4 ? 4 :
+	   $sousaction5 ))));
+
+     $path = ($sousaction1 ? ($_FILES ? $_FILES : $HTTP_POST_FILES) :
+	     ($sousaction2 ? $url : $chemin));
+
+     $documents_actifs = array();
+
+     if (function_exists($action))
+       $action($path, $arg, $type, $id_article, $id_document, 
+	       $hash, $id_auteur, $redirect, $documents_actifs);
+
+     else spip_log("spip_action: sousaction inconnue $action");
+
+     $link = new Link(_DIR_RESTREINT . $redirect);
+     if ($documents_actifs) {
+	$link->addVar('show_docs',join('-',$documents_actifs));
+     }
+     
+     ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
+     redirige_par_entete($link->getUrl($ancre));
+}
+
+
+// Cas d'un document distant reference sur internet
+
+function spip_action_joindre2($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+	examiner_les_fichiers(array(
+				   array('name' => basename($arg),
+					 'tmp_name' => $arg)
+				   ), 'distant', $type, $id, $id_document,
+			     $hash, $id_auteur, $redirect, $actifs);
+}
+
+// Cas d'un fichier transmis
+
+function spip_action_joindre1($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+	$files = array();
+	if (is_array($arg))
+	  foreach ($arg as $file) {
+		if (!$file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
+			$files[]=$file;
+	}
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+			     $hash, $id_auteur, $redirect, $actifs);
+} 
+
+// copie de tout ou partie du repertoire upload
+
+function spip_action_joindre3($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+	if (!$arg || strstr($arg, '..')) return;
+	    
+	$upload = (_DIR_TRANSFERT .$arg);
+
+	if (!is_dir($upload))
+	  // seul un fichier est demande
+	  $files = array(array ('name' => basename($upload),
+				'tmp_name' => $upload)
+			 );
+	else {
+	  include_ecrire('inc_documents');
+	  $files = array();
+	  foreach (fichiers_upload($upload) as $fichier) {
+			$files[]= array (
+					'name' => basename($fichier),
+					'tmp_name' => $fichier
+					);
+	  }
+	}
+
+	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
+			     $hash, $id_auteur, $redirect, $actifs);
+}
+
+//  identifie les repertoires de upload aux rubriques Spip
+
+function spip_action_joindre4($arg, $mode, $type, $id, $id_document, $hash, $id_auteur, $redirect, &$documents_actifs)
+{
+	if (!$arg || strstr($arg, '..')) return;
+	$upload = (_DIR_TRANSFERT .$arg);
+	identifie_repertoire_et_rubrique($upload, $id, $id_auteur);
+	include_ecrire("inc_rubriques");
+	calculer_rubriques();
+}
+
+//  Zip avec confirmation "tel quel"
+
+function spip_action_joindre5($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+  	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
+}
+
+// cas du zip a deballer. On ressort la bibli 
+
+function spip_action_joindre6($arg, $mode, $type, $id, $id_document,$hash, $id_auteur, $redirect, &$actifs)
+{
+	    define('_tmp_dir', creer_repertoire_documents($hash));
+	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
+	    include_ecrire('pclzip.lib');
+	    $archive = new PclZip($arg);
+	    $archive->extract(
+			      PCLZIP_OPT_PATH, _tmp_dir,
+			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
+			      );
+	    $contenu = verifier_compactes($archive);
+	    //  on supprime la copie temporaire
+	    @unlink($arg);
+	    
+	    foreach ($contenu as $fichier)
+		ajouter_un_document(_tmp_dir.basename($fichier),
+				    basename($fichier),
+				    $type, $id, $mode, $id_document, $actifs);
+	    effacer_repertoire_temporaire(_tmp_dir);
+}
+
+?>

@@ -372,17 +372,6 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	else
 		$documents_actifs[] = $id_document; 
 
-/**
-	DESACTIVE CAR UTILISATION PAR DEFAUT DES IMAGES REDUITES
-
-	// Creer la vignette des images
-	if (ereg(",$ext,", ','.$GLOBALS['meta']['formats_graphiques'].',')
-	AND $mode == 'document'
-	AND $type_image)
-		creer_fichier_vignette($fichier);
-
-**/
-
 	// Pour les fichiers distants remettre l'URL de base
 	if ($distant == 'oui')
 		spip_query("UPDATE spip_documents SET fichier='".addslashes($source)."'
@@ -425,10 +414,10 @@ function afficher_compactes($fichiers, $args, $action) {
 }
 
 //
-// Traiter la liste des fichiers (spip_image_joindre3)
+// Traiter la liste des fichiers (spip_action_joindre3)
 //
 
-function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$actifs)
+function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $id_auteur, $redirect, &$actifs)
 {
 	if (function_exists('gzopen') 
 	AND !($mode == 'distant')
@@ -455,11 +444,11 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 					     array(
 					 'redirect' => $redirect,
 					 'hash' => $hash,
-					 'hash_id_auteur' => $hash_id_auteur,
+					 'id_auteur' => $id_auteur,
 					 'chemin' => $zip,
-					 'doc' => $mode,
+					 'arg' => $mode,
 					 'type' => $type),
-					     generer_url_public('spip_image',"id_article=$id"));
+					     generer_url_public('spip_action.php',"id_article=$id"));
 			  // a tout de suite en joindre5 ou joindre6
 			  exit;
 			}
@@ -631,256 +620,5 @@ function corriger_extension($ext) {
 }
 
 
-
-// Creation
-function creer_fichier_vignette($vignette, $test_cache_only=false) {
-	if ($vignette && $GLOBALS['meta']["creer_preview"] == 'oui') {
-		eregi('\.([a-z0-9]+)$', $vignette, $regs);
-		$ext = $regs[1];
-		$taille_preview = $GLOBALS['meta']["taille_preview"];
-		if ($taille_preview < 10) $taille_preview = 120;
-		include_ecrire('inc_logos');
-
-		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s', 'AUTO', false, $test_cache_only))
-		{
-			inserer_vignette_base($vignette, $preview['fichier']);
-			return $preview['fichier'];
-		}
-		include_ecrire('inc_documents');
-		return vignette_par_defaut($ext ? $ext : 'txt', false);
-	}
-}
-
-// Insertion d'une vignette dans la base
-function inserer_vignette_base($image, $vignette) {
-
-	$taille = @filesize($vignette);
-	
-	$size = @getimagesize($vignette);
-	$largeur = $size[0];
-	$hauteur = $size[1];
-	$type = $size[2];
-
-	if ($type == "2") $format = 1;			# spip_types_documents
-	else if ($type == "3") $format = 2;
-	else if ($type == "1") $format = 3;
-	else return;
-
-	$vignette = str_replace('../', '', $vignette);
-
-	spip_log("creation vignette($image) -> $vignette");
-
-	if ($t = spip_query("SELECT id_document FROM spip_documents
-	WHERE fichier='".addslashes($image)."'")) {
-		if ($row = spip_fetch_array($t)) {
-			$id_document = $row['id_document'];
-			$id_vignette = spip_abstract_insert("spip_documents", 
-				"(mode)",
-				"('vignette')");
-			spip_query("UPDATE spip_documents
-				SET id_vignette=$id_vignette WHERE id_document=$id_document");
-			spip_query("UPDATE spip_documents SET
-				id_type = '$format',
-				largeur = '$largeur',
-				hauteur = '$hauteur',
-				taille = '$taille',
-				fichier = '$vignette',
-				date = NOW()
-				WHERE id_document = $id_vignette");
-			spip_log("(document=$id_document, vignette=$id_vignette)");
-		}
-	}
-}
-
-
-/////////////////////////////////////////////////////////////////////
-//
-// Faire tourner une image
-//
-function gdRotate ($imagePath,$rtt){
-	if(preg_match("/\.(png|gif|jpe?g|bmp)$/i", $imagePath, $regs)) {
-		switch($regs[1]) {
-			case 'png':
-				$src_img=ImageCreateFromPNG($imagePath);
-				$save = 'imagepng';
-				break;
-			case 'gif':
-				$src_img=ImageCreateFromGIF($imagePath);
-				$save = 'imagegif';
-				break;
-			case 'jpeg':
-			case 'jpg':
-				$src_img=ImageCreateFromJPEG($imagePath);
-				$save = 'Imagejpeg';
-				break;
-			case 'bmp':
-				$src_img=ImageCreateFromWBMP($imagePath);
-				$save = 'imagewbmp';
-				break;
-			default:
-				return false;
-		}
-	}
-
-	if (!$src_img) {
-		spip_log("gdrotate: image non lue, $imagePath");
-		return false;
-	}
-
-	$size=@getimagesize($imagePath);
-	if (!($size[0] * $size[1])) return false;
-
-	if (function_exists('imagerotate')) {
-		$dst_img = imagerotate($src_img, -$rtt, 0);
-	} else {
-
-	// Creer l'image destination (hauteur x largeur) et la parcourir
-	// pixel par pixel (un truc de fou)
-	$process = $GLOBALS['meta']['image_process'];
-	if ($process == "gd2")
-		$dst_img=ImageCreateTrueColor($size[1],$size[0]);
-	else
-		$dst_img=ImageCreate($size[1],$size[0]);
-
-	if($rtt==90){
-		$t=0;
-		$b=$size[1]-1;
-		while($t<=$b){
-			$l=0;
-			$r=$size[0]-1;
-			while($l<=$r){
-				imagecopy($dst_img,$src_img,$t,$r,$r,$b,1,1);
-				imagecopy($dst_img,$src_img,$t,$l,$l,$b,1,1);
-				imagecopy($dst_img,$src_img,$b,$r,$r,$t,1,1);
-				imagecopy($dst_img,$src_img,$b,$l,$l,$t,1,1);
-				$l++;
-				$r--;
-			}
-			$t++;
-			$b--;
-		}
-	}
-	elseif($rtt==-90){
-		$t=0;
-		$b=$size[1]-1;
-		while($t<=$b){
-			$l=0;
-			$r=$size[0]-1;
-			while($l<=$r){
-				imagecopy($dst_img,$src_img,$t,$l,$r,$t,1,1);
-				imagecopy($dst_img,$src_img,$t,$r,$l,$t,1,1);
-				imagecopy($dst_img,$src_img,$b,$l,$r,$b,1,1);
-				imagecopy($dst_img,$src_img,$b,$r,$l,$b,1,1);
-				$l++;
-				$r--;
-			}
-			$t++;
-			$b--;
-		}
-	}
-	}
-	ImageDestroy($src_img);
-	ImageInterlace($dst_img,0);
-
-	# obligatoire d'enregistrer dans le meme format, puisque c'est
-	# dans le fichier de depart...
-	$save($dst_img,$imagePath);
-}
-
-
-
-// Cas d'un document distant reference sur internet
-
-function spip_image_joindre2($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	examiner_les_fichiers(array(
-				   array('name' => basename($arg),
-					 'tmp_name' => $arg)
-				   ), 'distant', $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, $actifs);
-}
-
-// Cas d'un fichier transmis
-
-function spip_image_joindre1($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	$files = array();
-	if (is_array($arg))
-	  foreach ($arg as $file) {
-		if (!$file['error'] == 4 /* UPLOAD_ERR_NO_FILE */)
-			$files[]=$file;
-	}
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, $actifs);
-} 
-
-// copie de tout ou partie du repertoire upload
-
-function spip_image_joindre3($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	if (!$arg || strstr($arg, '..')) return;
-	    
-	$upload = (_DIR_TRANSFERT .$arg);
-
-	if (!is_dir($upload))
-	  // seul un fichier est demande
-	  $files = array(array ('name' => basename($upload),
-				'tmp_name' => $upload)
-			 );
-	else {
-	  include_ecrire('inc_documents');
-	  $files = array();
-	  foreach (fichiers_upload($upload) as $fichier) {
-			$files[]= array (
-					'name' => basename($fichier),
-					'tmp_name' => $fichier
-					);
-	  }
-	}
-
-	examiner_les_fichiers($files, $mode, $type, $id, $id_document,
-			     $hash, $hash_id_auteur, $redirect, $actifs);
-}
-
-//  identifie les repertoires de upload aux rubriques Spip
-
-function spip_image_joindre4($arg, $mode, $type, $id, $id_document, $hash, $hash_id_auteur, $redirect, &$documents_actifs)
-{
-	if (!$arg || strstr($arg, '..')) return;
-	$upload = (_DIR_TRANSFERT .$arg);
-	identifie_repertoire_et_rubrique($upload, $id, $hash_id_auteur);
-	include_ecrire("inc_rubriques");
-	calculer_rubriques();
-}
-
-//  Zip avec confirmation "tel quel"
-
-function spip_image_joindre5($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-  	ajouter_un_document($arg, basename($arg), $type, $id, $mode, $id_document, $actifs);
-}
-
-// cas du zip a deballer. On ressort la bibli 
-
-function spip_image_joindre6($arg, $mode, $type, $id, $id_document,$hash, $hash_id_auteur, $redirect, &$actifs)
-{
-	    define('_tmp_dir', creer_repertoire_documents($hash));
-	    if (_tmp_dir == _DIR_DOC) die(_L('Op&eacute;ration impossible'));
-	    include_ecrire('pclzip.lib');
-	    $archive = new PclZip($arg);
-	    $archive->extract(
-			      PCLZIP_OPT_PATH, _tmp_dir,
-			      PCLZIP_CB_PRE_EXTRACT, 'callback_deballe_fichier'
-			      );
-	    $contenu = verifier_compactes($archive);
-	    //  on supprime la copie temporaire
-	    @unlink($arg);
-	    
-	    foreach ($contenu as $fichier)
-		ajouter_un_document(_tmp_dir.basename($fichier),
-				    basename($fichier),
-				    $type, $id, $mode, $id_document, $actifs);
-	    effacer_repertoire_temporaire(_tmp_dir);
-}
 
 ?>

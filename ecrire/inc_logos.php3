@@ -104,7 +104,7 @@ function afficher_logo($racine, $titre, $logo, $redirect) {
 		echo "</a></div>";
 		echo debut_block_invisible(md5($titre));
 		echo $taille;
-		echo "\n<br />[<a href='", generer_url_public('spip_action.php', "action=iconifier&doc=$fichier&hash_id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
+		echo "\n<br />[<a href='", generer_url_public('spip_action.php', "action=iconifier&arg=$fichier&id_auteur=$connect_id_auteur&hash=$hash&redirect=".urlencode($redirect)), "'>",_T('lien_supprimer'),"</a>]";
 		echo fin_block();
 		echo "</center></p>";
 	}
@@ -116,10 +116,10 @@ function afficher_logo($racine, $titre, $logo, $redirect) {
 			ENCTYPE='multipart/form-data'>
 			<div>";
 		echo "\n<input name='redirect' type='hidden' value='$redirect' />";
-		echo "\n<input name='hash_id_auteur' type='hidden' value='$connect_id_auteur' />";
+		echo "\n<input name='id_auteur' type='hidden' value='$connect_id_auteur' />";
 		echo "\n<input name='hash' type='hidden' value='$hash' />";
 		echo "\n<input name='action' type='hidden' value='iconifier' />";
-		echo "\n<input name='doc' type='hidden' value='$racine' />";
+		echo "\n<input name='arg' type='hidden' value='$racine' />";
 		echo "\n"._T('info_telecharger_nouveau_logo')."<br />";
 		echo "\n<input name='image' type='File' class='forml' style='font-size:9px;' size='15'>";
 		echo "<div align='",  $GLOBALS['spip_lang_right'], "'>";

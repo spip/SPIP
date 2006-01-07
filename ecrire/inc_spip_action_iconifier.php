@@ -16,9 +16,9 @@ include_ecrire("inc_session");	# verifier_action_auteur
 
 function spip_action_iconifier_dist()
 {
-	global $action, $hash, $hash_id_auteur, $doc, $image;
+	global $action, $hash, $id_auteur, $arg, $image;
 
-	if (!verifier_action_auteur("$action $doc", $hash, $hash_id_auteur))
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
 		die ($action . '!!!');
 
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -31,9 +31,9 @@ function spip_action_iconifier_dist()
 
 function spip_image_effacer_dist() {
 
-	global $doc;
-	if (!strstr($doc, ".."))
-		@unlink(_DIR_IMG . $doc);
+	global $arg;
+	if (!strstr($arg, ".."))
+		@unlink(_DIR_IMG . $arg);
 }
 
 //
@@ -43,7 +43,7 @@ function spip_image_effacer_dist() {
 // $source = $_FILES[0]
 // $dest = arton12.xxx
 function spip_image_ajouter_dist() {
-	global $sousaction2, $source, $doc;
+	global $sousaction2, $source, $arg;
 
 	include_ecrire('inc_getdocument');
 	if (!$sousaction2) {
@@ -51,7 +51,7 @@ function spip_image_ajouter_dist() {
 		$source = (is_array($_FILES) ? array_pop($_FILES) : "");
 	}
 	if ($source) {
-		$f =_DIR_DOC . $doc . '.tmp';
+		$f =_DIR_DOC . $arg . '.tmp';
 
 		if (!is_array($source)) 
 		// fichier dans upload/
@@ -102,7 +102,7 @@ function spip_image_ajouter_dist() {
 							'hauteur_vignette' => $size[1]))
 				)));
 			}
-			@rename ($f, _DIR_DOC . $doc . ".$type");
+			@rename ($f, _DIR_DOC . $arg . ".$type");
 		}
 		else {
 			@unlink ($f);
