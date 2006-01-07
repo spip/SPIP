@@ -552,7 +552,7 @@ function charger_plugins($plugins) {
 
 function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 	return $script .
-		_EXTENSION_PHP .
+		(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP) .
 		(!$args ? "" : ('?'  .str_replace('&', '&amp;', $args))) .
 		(!$retour ? "" : 
 		urlencode($retour . _EXTENSION_PHP .
