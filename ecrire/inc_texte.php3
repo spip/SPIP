@@ -55,6 +55,15 @@ if (!tester_variable('puce', "<img class='spip_puce' src='puce.gif' alt='-' />&n
 // Diverses fonctions essentielles
 //
 
+
+// XHTML - Preserver les balises-bloc
+define('_BALISES_BLOCS',
+	'div|pre|ul|li|blockquote|h[1-5r]|'
+	.'t(able|[rdh]|body|foot)|'
+	.'form|object|center|marquee|address|'
+	.'d[ltd]|script|noscript|map|del|ins|button|fieldset');
+
+
 // Ne pas afficher le chapo si article virtuel
 function nettoyer_chapo($chapo){
 	if (substr($chapo,0,1) == "="){
@@ -68,13 +77,16 @@ function nettoyer_chapo($chapo){
 // Echapper les les elements perilleux en les passant en base64
 //
 
-// Inserer dans le $texte le bloc base64 correspondant a $rempl, en remplacement
-// de $original ($mode=span|div ; au besoin en marquant une $source differente)
-function code_echappement($rempl, $mode='span', $source='') {
+// Creer un bloc base64 correspondant a $rempl ; au besoin en marquant
+// une $source differente ; le script detecte automagiquement si ce qu'on
+// echappe est un div ou un span
+function code_echappement($rempl, $source='') {
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
 
 	// Ajouter le span/div d'echappement
+	$mode = preg_match(',<('._BALISES_BLOCS.')[>[:space:]]>,', $rempl) ?
+		'div' : 'span';
 	$nn = ($mode == 'div') ? "\n\n" : '';
 	return "<$mode class=\"base64$source\">$base64</$mode>$nn";
 }
@@ -143,7 +155,7 @@ function echappe_html($letexte, $source='', $no_transform=false) {
 		}
 
 		$letexte = str_replace($regs[0],
-			code_echappement($echap, $mode, $source),
+			code_echappement($echap, $source),
 			$letexte);
 	}
 
@@ -834,20 +846,14 @@ function paragrapher($letexte) {
 
 	if (preg_match(',<p[>[:space:]],i',$letexte)) {
 
-		// Preserver les balises-bloc (y compris "STOP P")
-		$blocs = 'STOP P|div|pre|ul|li|blockquote|h[1-5r]|'
-			.'t(able|[rdh]|body|foot)|'
-			.'form|object|center|marquee|address|'
-			.'d[ltd]|script|noscript|map|del|ins|button|fieldset';
-
 		// Ajouter un espace aux <p> et un "STOP P"
 		// transformer aussi les </p> existants en <p>, nettoyes ensuite
 		$letexte = preg_replace(',</?p(\s([^>]*))?'.'>,i', '<STOP P><p \2>',
 			'<p>'.$letexte.'<STOP P>');
 
-		// Fermer les paragraphes
+		// Fermer les paragraphes (y compris sur "STOP P")
 		$letexte = preg_replace(
-			',(<p\s.*)(</?('.$blocs.')[>[:space:]]),Uims',
+			',(<p\s.*)(</?(STOP P|'._BALISES_BLOCS.')[>[:space:]]),Uims',
 			"\n\\1</p>\n\\2", $letexte);
 
 		// Supprimer les marqueurs "STOP P"
@@ -955,7 +961,7 @@ function traiter_raccourcis($letexte) {
 			$insert = "$ouvre_ref$lien$num_note</a>$ferme_ref";
 
 			// on l'echappe
-			$insert = code_echappement($insert, 'span');
+			$insert = code_echappement($insert);
 
 			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note";
 		} else {
@@ -967,7 +973,7 @@ function traiter_raccourcis($letexte) {
 		if ($note_texte) {
 			if ($mes_notes)
 				$mes_notes .= "\n\n";
-			$mes_notes .= code_echappement($appel, 'span') . $note_texte;
+			$mes_notes .= code_echappement($appel) . $note_texte;
 		}
 
 		// dans le texte, mettre l'appel de note a la place de la note
