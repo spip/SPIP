@@ -233,18 +233,13 @@ define_once('_LOGO_MAX_SIZE', 0); # poids en ko
 define_once('_LOGO_MAX_WIDTH', 0); # largeur en pixels
 define_once('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
 
-
+// les repertoires annexes
 define_once('_DIR_INCLUDE', _DIR_RESTREINT);
-define_once('_DIR_PREFIX1', (_DIR_RESTREINT ? "" : "../"));
-define_once('_DIR_PREFIX2', _DIR_RESTREINT);
-
-// les repertoires des logos, des documents joints, du CACHE et des sessions
-define_once('_DIR_IMG', _DIR_PREFIX1 ."IMG/");
-define_once('_DIR_DOC', _DIR_PREFIX1 ."IMG/");
-define_once('_DIR_CACHE', _DIR_PREFIX1 ."CACHE/");
-
-define_once('_DIR_SESSIONS', _DIR_PREFIX2 . "data/");
-define_once('_DIR_TRANSFERT', _DIR_PREFIX2 . "upload/");
+define_once('_DIR_IMG', _DIR_RACINE ."IMG/");
+define_once('_DIR_DOC', _DIR_RACINE ."IMG/");
+define_once('_DIR_CACHE', _DIR_RACINE ."CACHE/");
+define_once('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
+define_once('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
 
 // les fichiers qu'on y met, entre autres,
 

@@ -22,8 +22,8 @@ function copie_locale($source, $mode='auto') {
 
 	// Si copie_locale() est appele depuis l'espace prive
 	if (!_DIR_RESTREINT
-	AND strpos('../'.$source, _DIR_IMG) === 0)
-		return '../'.$source;
+	AND strpos(_DIR_RACINE . $source, _DIR_IMG) === 0)
+		return _DIR_RACINE . $source;
 
 	$local = fichier_copie_locale($source);
 

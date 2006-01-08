@@ -66,7 +66,7 @@ function generer_url_document($id_document) {
 			return $row['fichier'];
 		} else {
 			if (($GLOBALS['meta']["creer_htaccess"]) != 'oui')
-				return '../' . ($row['fichier']);
+				return _DIR_RACINE . ($row['fichier']);
 			else 	return generer_url_public('spip_action.php',"action=autoriser&arg=$id_document");
 		}
 	}

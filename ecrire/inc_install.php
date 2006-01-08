@@ -761,9 +761,9 @@ function install_unpack()
 
   fin_admin($action);
 
-  if (@file_exists("../spip_loader" . _EXTENSION_PHP))
+  if (@file_exists(_DIR_RACINE . "spip_loader" . _EXTENSION_PHP))
     redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");
-  else if (@file_exists("../spip_unpack" . _EXTENSION_PHP))
+  else if (@file_exists(_DIR_RACINE . "spip_unpack" . _EXTENSION_PHP))
     redirige_par_entete(generer_url_public("spip_unpack"), "?hash=$hash&id_auteur=$connect_id_auteur");
   else
     redirige_par_entete(generer_url_public("spip_loader"), "?hash=$hash&id_auteur=$connect_id_auteur");

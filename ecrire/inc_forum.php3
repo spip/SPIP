@@ -109,7 +109,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 				   _T('lien_repondre_message'),
 				   generer_url_ecrire('iframe_action',
 						     "action=forum_admin&id=$id_forum&statut=$valider&redirect=", 
-						     "../forum",
+						     _DIR_RACINE . 'forum',
 						     "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link)),
 				   $logo,
 				   "creer.gif", 'right', 'non');

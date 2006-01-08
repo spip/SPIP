@@ -519,13 +519,10 @@ function find_in_path ($filename, $path='AUTO') {
 			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
 	}
 
-
-	$racine = (_DIR_RESTREINT ? '' : '../');
-
 	// Parcourir le chemin
 	foreach (split(':', $path) as $dir) {
 	// Depuis l'espace prive, remonter d'un cran, sauf pour les absolus
-		$racine = ($dir[0] <> '/' && !_DIR_RESTREINT) ? '../' : '';
+		$racine = ($dir[0]=='/') ?  '' : _DIR_RACINE;
 		if ($dir[0] == '.') $dir = "";
 		else if ($dir && $dir[strlen($dir)-1] <> '/') $dir .= "/";
 		$f = "$racine$dir$filename";
@@ -582,7 +579,7 @@ function generer_url_ecrire($script, $args="", $retour="", $retour_args="") {
 
 function generer_url_public($script, $args="", $retour="", $retour_args="") {
 	if (!($site = $GLOBALS['meta']["adresse_site"]))
-		$site = '../';
+		$site = _DIR_RACINE;
 	$site .= (($site[strlen($site)-1] <> '/') ?'/':'') . $script;
 	return generer_url_ecrire($site, $args, $retour, $retour_args);
 }
