@@ -1083,7 +1083,7 @@ function image_masque($im, $masque) {
 	$creer = $image["creer"];
 
 
-	if ($creer OR 1==1) {
+	if ($creer) {
 	
 		$masque = find_in_path($masque);	
 		$mask = valeurs_image_trans($masque,"");
