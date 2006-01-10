@@ -97,8 +97,7 @@ echo '<p>'._T('ical_info_calendrier').'</p>';
 
  afficher_liens_calendrier('ical','','', _T('ical_texte_public'));
 
-
- afficher_liens_calendrier("spip_cal", "id=$connect_id_auteur&cle=".afficher_low_sec($connect_id_auteur,'ical'),'cadenas-24.gif',  _T('ical_texte_prive'));
+ afficher_liens_calendrier("spip_action.php", "action=ical&id_auteur=$connect_id_auteur&arg=".afficher_low_sec($connect_id_auteur,'ical'),'cadenas-24.gif',  _T('ical_texte_prive'));
 
 
 fin_cadre_relief();
