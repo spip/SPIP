@@ -101,15 +101,6 @@ function spip_cron($taches = array()) {
 	// Un autre lock dans _DIR_SESSIONS, pour plus de securite
 	$lock = _DIR_SESSIONS . $tache . '.lock';
 	if (spip_touch($lock, $taches[$tache])) {
-
-		// essayer d'eviter la lenteur d'affichage en envoyant 16 ko de
-		// donnees invisibles (aleatoires pour contrer la compression)
-		if (!$GLOBALS['flag_preserver']) {
-			$b = array(' ',"\t", "\n");
-			for ($i=0;$i<16*1024;$i++) echo $b[rand(0,2)];
-		}
-		flush(); ob_flush();
-
 		// preparer la tache
 		spip_timer('tache');
 		include_ecrire('inc_' . $tache);

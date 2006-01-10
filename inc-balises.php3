@@ -382,7 +382,7 @@ function balise_FIN_SURLIGNE_dist($p) {
 // quasiment jamais se trouver ralenti par des taches de fond un peu lentes
 // ATTENTION: cette balise efface parfois les boutons admin implicites
 function balise_SPIP_CRON_dist ($p) {
-	$p->code = "'<div style=\\'position: absolute; background-image: url(\"spip_background" . _EXTENSION_PHP . "\"); height: 1px; width: 1px;\\'></div>'";
+  $p->code = '"' . str_replace('"', '\"', (generer_spip_cron())) . '"';
 	$p->interdire_scripts = false;
 	return $p;
 }

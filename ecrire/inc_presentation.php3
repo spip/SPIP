@@ -3252,18 +3252,15 @@ function fin_page($credits='') {
 	debut_grand_cadre();
 
 	# ici on en profite pour glisser une tache de fond
-	echo "<div align='right' class='verdana2' style='background: url(\"", 
-	  generer_url_public('spip_background'),
-	  "\");'>";
+
+	echo generer_spip_cron();
 
 	if ($spip_display == 4) {
 	  echo "<div><a href='./?set_disp=2'>",
 	    _T("access_interface_graphique"),
 	    "</a></div>";
 	} else {
-		echo info_copyright();
-		echo "<br>"._T('info_copyright_doc');
-		echo "</div><p>";
+		echo info_copyright(), "<br />"._T('info_copyright_doc');
 	}
 
 	fin_grand_cadre();
