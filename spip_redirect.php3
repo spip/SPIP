@@ -15,44 +15,42 @@
 
 define ('_SPIP_REDIRECT', 1);
 include ("ecrire/inc_version.php3");
-include_ecrire ("inc_session");
-verifier_visiteur();
 charger_generer_url();
 
-if ($id_article) {
+function spip_action_redirect_dist()
+{
+  global $id_article, $id_auteur, $id_breve, $id_forum, $id_mot, $id_rubrique, $id_site, $id_syndic, $var_mode;
+
+
+  if ($id_article = intval($id_article)) {
 	$url = generer_url_article($id_article);
 }
-else if ($id_breve) {
+  else if ($id_breve = intval($id_breve)) {
 	$url = generer_url_breve($id_breve);
 }
-else if ($id_forum) {
+  else if ($id_forum = intval($id_forum)) {
 	$url = generer_url_forum($id_forum);
 }
-else if ($id_rubrique) {
+  else if ($id_rubrique = intval($id_rubrique)) {
 	$url = generer_url_rubrique($id_rubrique);
 }
-else if ($id_mot) {
+  else if ($id_mot = intval($id_mot)) {
 	$url = generer_url_mot($id_mot);
 }
-else if ($id_auteur) {
+  else if ($id_auteur = intval($id_auteur)) {
 	$url = generer_url_auteur($id_auteur);
 }
-else if ($id_syndic OR $id_syndic = $id_site) {
+  else if ($id_syndic = intval($id_syndic) OR $id_syndic = intval($id_site)) {
 	$url = generer_url_site($id_syndic);
 }
 else {
 	$url = _DIR_RESTREINT_ABS;
 }
-if (strpos($url,'?')) {
-	$super='&';
-}
-else {
-	$super='?';
-}
-if ($var_mode) $url .= $super."var_mode=$var_mode";
 
 // Ne pas masquer cette eventuelle erreur (aide a detecter des lignes vides
 // dans inc-urls ou mes_fonctions/mes_options)
-header("Location: $url");
+ header("Location: " . (!$var_mode ?  $url : ($url . (strpos($url,'?') ? '&' : '?') ."var_mode=" . $var_mode)));
+}
 
+spip_action_redirect_dist();
 ?>
