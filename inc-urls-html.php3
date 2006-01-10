@@ -33,8 +33,8 @@ pouvez l'editer pour ne conserver que la partie concernant les URLS 'html'.
 
 */
 
-// executer une seule fois
-if (!defined("_ECRIRE_INC_VERSION")) return;
+if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
+if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 function generer_url_article($id_article) {
 	return "article$id_article.html";
@@ -69,6 +69,7 @@ function generer_url_document($id_document) {
 		return ($row['fichier']);
 	return '';
 }
+
 
 function recuperer_parametres_url($fond, $url) {
 	global $contexte;
@@ -108,5 +109,5 @@ function generer_url_forum($id_forum, $show_thread=false) {
 	include_ecrire('inc_forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
-
+ }
 ?>
