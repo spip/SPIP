@@ -1679,12 +1679,12 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 			
 			echo date_relative($date_heure);
 			
-			echo "</span>";
+			echo "</span> ";
 			
 			if ($id_auteur)
-				echo " <a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($auteur)."</a>";
+				echo "<a href='" . generer_url_ecrire("auteurs_edit","id_auteur=$id_auteur") . "'>".typo($auteur)."</a>";
 			else if ($email_auteur)
-				echo " <a href='mailto:$email_auteur'>".typo($auteur)."</a>";
+				echo "<a href='mailto:$email_auteur'>".typo($auteur)."</a>";
 			else
 				echo typo($auteur);
 
