@@ -612,11 +612,9 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 		  if ($x = $table_des_tables[$type]) {
 		    $boucles[$id]->id_table = $x;
 		    $boucles[$id]->primary = $tables_principales["spip_$x"]['key']["PRIMARY KEY"];
-		    if (is_array($x = $tables_jointures['spip_' . $x])) {
-		      foreach($x as $j) {
-			$boucles[$id]->jointures[]= $j;
-		      }
-		    }
+		    if ((!$boucles[$id]->jointures)
+			AND (is_array($x = $tables_jointures['spip_' . $x])))
+		      $boucles[$id]->jointures = $x;
 		  } else {
 			// table non Spip.
 		    $boucles[$id]->id_table = $type;

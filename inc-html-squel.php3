@@ -515,8 +515,12 @@ function phraser($texte, $id_parent, &$boucles, $nom, $ligne=1) {
 		preg_match(SPEC_BOUCLE, $milieu, $match);
                 $milieu = substr($milieu, strlen($match[0]));
 		$type = $match[1];
-		$jointures = $match[2];
-		$result->jointures = preg_split("/\s+/",trim($match[2]));
+		$jointures = trim($match[2]);
+		if ($jointures) {
+			$result->jointures = preg_split("/\s+/",$jointures);
+			$result->jointures_explicites = $jointures;
+		}
+
 		if ($p = strpos($type, ':'))
 		  {
 		    $result->sql_serveur = substr($type,0,$p);

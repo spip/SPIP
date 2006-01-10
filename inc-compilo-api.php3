@@ -42,10 +42,11 @@ class Boucle {
 	var $lang_select;
 	var $type_requete;
 	var $sql_serveur;
-	var $jointures;
 	var $param = array();
 	var $criteres = array();
 	var $separateur = array();
+	var $jointures = array();
+	var $jointures_explicites = false;
 	var $doublons;
 	var $partie, $total_parties,$mode_partie;
 	var $externe = ''; # appel a partir d'une autre boucle (recursion)

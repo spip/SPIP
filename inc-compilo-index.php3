@@ -39,67 +39,12 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	}
 
 #	spip_log("Cherche: $nom_champ a partir de '$idb'");
-	$c = strtolower($nom_champ);
+	$nom_champ = strtolower($nom_champ);
 	// attention: entre la boucle nommee 0, "" et le tableau vide,
 	// il y a incoherences qu'il vaut mieux eviter
 	while ($boucles[$idb]) {
-		$r = $boucles[$idb]->type_requete;
-		$s = $boucles[$idb]->sql_serveur;
-		if (!$s) 
-		  { $s = 'localhost';
-    // indirection (pour les rares cas ou le nom de la table!=type)
-		    $t = $table_des_tables[$r];
-		  }
-		// pour les tables non Spip
-		if (!$t) {$nom_table = $t = $r; }
-		else $nom_table = 'spip_' . $t;
-
-		$desc = $tables_des_serveurs_sql[$s][$nom_table];
-#		spip_log("Go: idb='$idb' r='$r' c='$c' nom='$nom_champ' s=$s t=$t desc=" . array_keys($desc));
-
-		if (!isset($desc['field'])) {
-			$desc = $table_des_tables[$r] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $t) : $nom_table;
-
-			$desc = spip_abstract_showtable($desc, $boucles[$idb]->sql_serveur);
-			if (!isset($desc['field'])) {
-			  erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
-					   "'$idb'");
-			# continuer pour chercher l'erreur suivante
-			  return  "'#" . $r . ':' . $nom_champ . "'";
-			}
-			$tables_des_serveurs_sql[$s][$nom_table] = $desc;
-		}
-		$excep = $exceptions_des_tables[$r][$c];
-		if ($excep) {
-			// entite SPIP alias d'un champ SQL
-			if (!is_array($excep)) {
-				$e = $excep;
-				$c = $excep;
-			} 
-			// entite SPIP alias d'un champ dans une jointure
-			else {
-			  if (!$t = array_search($excep[0], $boucles[$idb]->from)) {
-			    $t = 'J' . count($boucles[$idb]->from);
-			    $boucles[$idb]->from[$t] = $excep[0];
-			  }
-			  $e = $excep[1];
-			  if ($e != $c) $e .= ' AS '.$c;
-			}
-		}
-		else {
-			// $e est le type SQL de l'entree
-			// entite SPIP homonyme au champ SQL
-			if ($desc['field'][$c])
-				$e = $c;
-			else
-				unset($e);
-		}
-
-#		spip_log("Dans $idb ('$t' '$e' '$c'): $desc");
-
-		// On l'a trouve
-		if ($e) {
-		  $t .= ".$e";
+		list ($t, $c) = index_tables_en_pile($idb, $nom_champ, $boucles);
+		if ($t) {
 		  if (!in_array($t, $boucles[$idb]->select))
 		    $boucles[$idb]->select[] = $t;
 		  return '$Pile[$SP' . ($i ? "-$i" : "") . '][\'' . $c . '\']';
@@ -113,6 +58,69 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 #	spip_log("Pas vu $nom_champ");
 	// esperons qu'il y sera
 	return('$Pile[0][\''. strtolower($nom_champ) . '\']');
+}
+
+function index_tables_en_pile($idb, $nom_champ, &$boucles)
+{
+	global $exceptions_des_tables, $table_des_tables, $tables_des_serveurs_sql;
+	$r = $boucles[$idb]->type_requete;
+	$s = $boucles[$idb]->sql_serveur;
+	if (!$s) 
+		{ $s = 'localhost';
+    // indirection (pour les rares cas ou le nom de la table!=type)
+		    $t = $table_des_tables[$r];
+		  }
+		// pour les tables non Spip
+	if (!$t) {$nom_table = $t = $r; } else $nom_table = 'spip_' . $t;
+
+	$desc = $tables_des_serveurs_sql[$s][$nom_table];
+#		spip_log("Go: idb='$idb' r='$r' nom='$nom_champ' s=$s t=$t desc=" . array_keys($desc));
+
+	if (!isset($desc['field'])) {
+		$desc = $table_des_tables[$r] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $t) : $nom_table;
+
+		$desc = spip_abstract_showtable($desc, $boucles[$idb]->sql_serveur);
+		if (!isset($desc['field'])) {
+			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
+					   "'$idb'");
+# continuer pour chercher l'erreur suivante
+			return  array("'#" . $r . ':' . $nom_champ . "'",'');
+		}
+		$tables_des_serveurs_sql[$s][$nom_table] = $desc;
+	}
+	
+	$excep = $exceptions_des_tables[$r][$nom_champ];
+	if ($excep) {
+			// entite SPIP alias d'un champ SQL
+		if (!is_array($excep)) {
+			$e = $excep;
+			$c = $excep;
+		} 
+			// entite SPIP alias d'un champ dans une jointure
+		else {
+			if (!$t = array_search($excep[0], $boucles[$idb]->from)) {
+			    $t = 'J' . count($boucles[$idb]->from);
+			    $boucles[$idb]->from[$t] = $excep[0];
+			}
+			$e = $excep[1];
+			if ($e != $c) $e .= ' AS '.$c;
+		}
+		return array("$t.$e", $c);
+
+	} else {
+		if ($desc['field'][$nom_champ])
+			return array("$t.$nom_champ", $nom_champ);
+		else {
+		  if ($boucles[$idb]->jointures_explicites) {
+		    $t = trouver_champ_exterieur($nom_champ, 
+						 $boucles[$idb]->jointures,
+						 $boucles[$idb]);
+		    if ($t) $t = array_search($t[0], $boucles[$idb]->from);
+		    if ($t) return array($t .'.' . $nom_champ, $nom_champ);
+		  }
+		  return array('','');
+		}
+	}
 }
 
 // cette fonction sert d'API pour demander le champ '$champ' dans la pile
