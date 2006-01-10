@@ -121,6 +121,7 @@ function verif_butineur() {
 		$browser_name = "Opera";
 		$browser_version = $match[1];
 		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_INCLUDE . 'layer.js',''));
+		$browser_barre = ($browser_version >= 8.5); 
 	}
 	else if (eregi("msie", $browser_description)) {
 		eregi("MSIE ([^;]*)", $browser_description, $match);
