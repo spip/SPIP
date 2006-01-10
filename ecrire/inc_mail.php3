@@ -10,11 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-
 
 //
 // Infos de mails sur l'hebergeur (tout ca est assez sale)
@@ -192,7 +188,7 @@ function extrait_article($row) {
 	$extrait .= "\n\n".textebrut(propre(couper_intro("$chapo<p>$texte", 700)))."\n\n";
 	if ($statut == 'publie') 
 		$extrait .= "-> ".
-		  generer_url_public('spip_redirect', "id_article=$id_article") .
+		  generer_url_public('spip_action.php', "action=redirect&id_article=$id_article") .
 		  "\n\n";
 	return $extrait;
 }
