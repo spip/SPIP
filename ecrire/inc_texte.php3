@@ -59,7 +59,7 @@ if (!tester_variable('puce', "<img class='spip_puce' src='puce.gif' alt='-' />&n
 // XHTML - Preserver les balises-bloc
 define('_BALISES_BLOCS',
 	'div|pre|ul|li|blockquote|h[1-5r]|'
-	.'t(able|[rdh]|body|foot)|'
+	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
 	.'d[ltd]|script|noscript|map|del|ins|button|fieldset');
 
@@ -84,8 +84,8 @@ function code_echappement($rempl, $source='') {
 	// Convertir en base64
 	$base64 = base64_encode($rempl);
 
-	// Ajouter le span/div d'echappement
-	$mode = preg_match(',<('._BALISES_BLOCS.')[>[:space:]]>,', $rempl) ?
+	// Tester si on echappe en span ou en div
+	$mode = preg_match(',</?('._BALISES_BLOCS.')[>[:space:]],i', $rempl) ?
 		'div' : 'span';
 	$nn = ($mode == 'div') ? "\n\n" : '';
 
@@ -152,7 +152,6 @@ function echappe_html($letexte, $source='', $no_transform=false) {
 				."class='spip_cadre' dir='ltr'>"
 				.$echap
 				."</textarea></div></form>";
-				$mode = "div";
 				break;
 
 		}

@@ -16,8 +16,12 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Echappement des entites HTML avec correction des entites "brutes"
 // (generees par les butineurs lorsqu'on rentre des caracteres n'appartenant
 // pas au charset de la page [iso-8859-1 par defaut])
+//
+// Attention on limite cette correction aux caracteres "hauts" (en fait > 99
+// pour aller plus vite que le > 127 qui serait logique), de maniere a
+// preserver des echappements de caracteres "bas" (par exemple [ ou ")
 function corriger_entites_html($texte) {
-	return preg_replace(',&amp;(#[0-9]+;),i', '&\1', $texte);
+	return preg_replace(',&amp;(#[0-9][0-9][0-9]+;),i', '&\1', $texte);
 }
 // idem mais corriger aussi les &amp;eacute; en &eacute;
 function corriger_toutes_entites_html($texte) {

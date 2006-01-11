@@ -132,7 +132,7 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 
 echo "<p /><b>"._T('entree_description_site')."</b><br>";
 echo "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap=soft>";
-echo $descriptif;
+echo entites_html($descriptif);
 echo "</textarea>\n";
 
 $activer_syndic = $GLOBALS['meta']["activer_syndic"];
