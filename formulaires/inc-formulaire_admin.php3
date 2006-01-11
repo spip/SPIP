@@ -107,7 +107,6 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			!$var_preview
 		)
 	) ? 'debug' : '';
-	if ($xhtml) charger_analyseur_xhtml($xhtml);
 	$analyser = !$xhtml ? "" :
 		(($xhtml === 'spip_sax') ?
 		($action . "var_mode=debug&var_mode_affiche=validation") :
