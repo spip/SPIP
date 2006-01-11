@@ -52,10 +52,9 @@ function calcule_header_et_page ($fond) {
 		reponse_confirmation($_GET['id_article'], $var_confirm);
 	}
 
-	//  refus du debug si pas dans les options generales ni admin connecte
+	//  refus du debug si l'admin n'est pas connecte
 	if ($var_mode=='debug') {
-		if (($GLOBALS['code_activation_debug'] == 'oui')
-		OR $auteur_session['statut'] == '0minirezo')
+		if ($auteur_session['statut'] == '0minirezo')
 			spip_log('debug !');
 		else {
 			$link = new Link();

@@ -107,8 +107,7 @@ function spip_register_globals() {
 }
 
 
-// Magic quotes : on n'en veut pas sur la base
-// et on nettoie les GET/POST/COOKIE le cas echeant
+// Magic quotes : on n'en veut pas
 function magic_unquote(&$t) {
 	if (is_array($t)) {
 		foreach ($t as $key => $val) {
@@ -118,6 +117,24 @@ function magic_unquote(&$t) {
 		}
 	} else
 		$t = stripslashes($t);
+}
+
+
+// Annuler les magic quotes Sur GET/POST/COOKIE et GLOBALS, s'il y en a
+function spip_magic_unquote() {
+	global $_GET, $_POST, $_COOKIE;
+	magic_unquote($_GET);
+	magic_unquote($_POST);
+	magic_unquote($_COOKIE);
+	#	if (@ini_get('register_globals')) // pas fiable
+	magic_unquote($GLOBALS);
+
+	# et a la fin supprimer la variable anti-recursion devenue inutile
+	# (et memenuisible, notamment si on teste $_POST)
+	unset($_GET['spip_recursions']);
+	unset($_POST['spip_recursions']);
+	unset($_COOKIE['spip_recursions']);
+	unset($GLOBALS['spip_recursions']);
 }
 
 ?>

@@ -44,25 +44,19 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 
 include(_DIR_RESTREINT . 'inc_magicquotes.php');
 
-// Annuler les magic quotes s'il y en a
 @set_magic_quotes_runtime(0);
 if (@get_magic_quotes_gpc()
-AND strstr(serialize($_GET).serialize($_POST).serialize($_COOKIE), '\\')) {
-
-	magic_unquote($_GET);
-	magic_unquote($_POST);
-	magic_unquote($_COOKIE);
-#	if (@ini_get('register_globals')) // pas fiable
-	magic_unquote($GLOBALS);
-
-# et a la fin supprimer la variable anti-recursion devenue inutile (et meme nuisible, notamment si on teste $_POST)
-	unset($_GET['spip_recursions']);
-	unset($_POST['spip_recursions']);
-	unset($_COOKIE['spip_recursions']);
-	unset($_GLOBALS['spip_recursions']);
+AND strstr(
+	serialize($_GET).serialize($_POST).serialize($_COOKIE),
+	'\\')
+) {
+	spip_magic_unquote();
 }
 
+// Remplir $GLOBALS avec $_GET et $_POST (methode a revoir pour fonctionner
+// completement en respectant register_globals = off)
 spip_register_globals();
+
 
 //
 // *** Parametrage par defaut de SPIP ***
@@ -148,11 +142,6 @@ $invalider_caches = false;
 // fait redescendre le cache a la taille voulue ; valeur en Mo
 // Si la variable vaut 0 aucun quota ne s'applique
 $quota_cache = 10;
-
-// code a fournir pour obtenir le debuggueur (urls &var_mode=debug)
-// par defaut seuls les admins : $code_activation_debug='';
-// pour mettre un mot de passe : $code_activation_debug='x5g8jk9';
-$code_activation_debug = '';
 
 //
 // Serveurs externes
@@ -240,6 +229,7 @@ define_once('_DIR_DOC', _DIR_RACINE ."IMG/");
 define_once('_DIR_CACHE', _DIR_RACINE ."CACHE/");
 define_once('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
 define_once('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
+define_once('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 
 // les fichiers qu'on y met, entre autres,
 

@@ -93,21 +93,26 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 
 	// Bouton de debug
-	$debug = (($forcer_debug
-		   OR $GLOBALS['bouton_admin_debug']
-		   OR ($GLOBALS['var_mode'] == 'debug'
-		       AND $GLOBALS['_COOKIE']['spip_debug']))
-		  AND ($GLOBALS['code_activation_debug'] == 'oui'
-		       OR $GLOBALS['auteur_session']['statut'] == '0minirezo')
-		  AND !$var_preview
+	$debug =
+	(
+		(	$forcer_debug
+			OR $GLOBALS['bouton_admin_debug']
+			OR (
+				$GLOBALS['var_mode'] == 'debug'
+				AND $GLOBALS['_COOKIE']['spip_debug']
+			)
+		) AND (
+			$GLOBALS['auteur_session']['statut'] == '0minirezo'
+		) AND (
+			!$var_preview
+		)
 	) ? 'debug' : '';
 	if ($xhtml) charger_analyseur_xhtml($xhtml);
 	$analyser = !$xhtml ? "" :
-	  (($xhtml === 'spip_sax') ?
-	   ($action . "var_mode=debug&var_mode_affiche=validation") :
-	   ('http://validator.w3.org/check?uri='
-	    . urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
-
+		(($xhtml === 'spip_sax') ?
+		($action . "var_mode=debug&var_mode_affiche=validation") :
+		('http://validator.w3.org/check?uri='
+		. urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 
 	// hack - ne pas avoir la rubrique si un autre bouton est deja present
 	if ($id_article OR $id_breve) unset ($id_rubrique);
