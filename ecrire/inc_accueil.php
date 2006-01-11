@@ -222,9 +222,7 @@ if ($connect_statut == "0minirezo" AND $spip_display != 4) {
 			http_img_pack("rien.gif", ' ', "width='10'") .
 			"</td>".
 			"<td width='250'>".
-			icone_horizontale(_T('icone_activer_cookie'),
-					  generer_url_public('spip_cookie',
-							     "cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "", false).
+			icone_horizontale(_T('icone_activer_cookie'), generer_url_public('spip_cookie', "cookie_admin=".rawurlencode("@$connect_login")."&url=".rawurlencode(_DIR_RESTREINT_ABS)), "cookie-24.gif", "", false).
 			"</td></tr></table>";
 	}
 }

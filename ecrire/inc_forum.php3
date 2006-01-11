@@ -70,10 +70,9 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 			$supprimer = false;
 			$controle = "<br /><FONT COLOR='red'><B>"._T('info_message_supprime')." $forum_ip</B></FONT>";
 			if($forum_id_auteur)
-				$controle .= " - <A href='" .
-				  generer_url_ecrire('auteurs_edit',
+				$controle .= " - <a href='" . generer_url_ecrire('auteurs_edit',
 						  "id_auteur=$forum_id_auteur") .
-				  "'>" ._T('lien_voir_auteur'). "</A>";
+				  "'>" ._T('lien_voir_auteur'). "</a>";
 			break;
 		# forum propose (a moderer) sur le site public
 		case "prop":
@@ -91,23 +90,18 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	$ulink = urlencode($link);
 
 	if ($supprimer)
-		$controle .= icone(_T('icone_supprimer_message'), 
-				   generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$supprimer&redirect=$ulink"),
+		$controle .= icone(_T('icone_supprimer_message'), generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$supprimer&redirect=$ulink"),
 			$logo,
 			"supprimer.gif", 'right', 'non');
 
 	if ($valider)
-		$controle .= icone(_T('icone_valider_message'), 
-				   generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$ulink"),
+		$controle .= icone(_T('icone_valider_message'), generer_url_ecrire('iframe_action', "action=forum_admin&id=$id_forum&statut=$valider&redirect=$ulink"),
 			$logo,
 			"creer.gif", 'right', 'non');
 
 	if ($valider_repondre) {
 
-		$controle .= icone(_T('icone_valider_message') 
-				   . " &amp; " .
-				   _T('lien_repondre_message'),
-				   generer_url_ecrire('iframe_action',
+		$controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_url_ecrire('iframe_action',
 						     "action=forum_admin&id=$id_forum&statut=$valider&redirect=", 
 						     _DIR_RACINE . 'forum',
 						     "$ref&id_forum=$id_forum&retour=" . urlencode(_DIR_RESTREINT_ABS . $link)),
