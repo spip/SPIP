@@ -103,7 +103,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles)
 			    $boucles[$idb]->from[$t] = $excep[0];
 			}
 			$e = $excep[1];
-			if ($e != $c) $e .= ' AS '.$c;
+			if ($e != $nom_champ) $e .= ' AS '.$c;
 		}
 		return array("$t.$e", $c);
 
