@@ -390,14 +390,22 @@ $spip_lang = $langue_site;
 
 
 //
-// Que faire si Spip n'est pas installe... sauf si justement on l'installe!
+// Installer Spip si pas installe... sauf si justement on est en train
 //
 if (!(_FILE_CONNECT
 OR defined('_TEST_DIRS')
 OR autoriser_sans_cookie($SCRIPT_NAME))) {
 
-	include_ecrire('inc_upgrade');
-	info_install();
+	// Si on peut installer, on lance illico
+	if (@file_exists($f = generer_url_ecrire("install")))
+		header("Location: $f" , "?reinstall=non");
+	else if (defined("_INC_PUBLIC")) {
+	// Si on est dans le site public, dire que qq s'en occupe
+		include_ecrire('inc_upgrade');
+		info_install();
+	}
+	// autrement c'est une install ad hoc (spikini...), on sait pas faire 
+	exit;
  }
 # spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
 

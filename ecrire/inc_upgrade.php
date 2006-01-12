@@ -32,7 +32,7 @@ function upgrade_dist()
 	  _T('texte_nouvelle_version_spip_2',
 	     array('connect' => '<tt>' . _FILE_CONNECT . '</tt>')),
 	 "<p><div align='right'>",
-	 '<form action="', generer_url_ecrire("upgrade"), '">',
+	  '<form action="', generer_url_ecrire("upgrade", 'reinstall=non'), '">',
 	 "<input type='submit' value=\"",
 	  _T('bouton_relancer_installation'),
 	  "\" class='fondl'>",
@@ -102,7 +102,7 @@ function demande_maj_version()
 	_T('info_procedure_maj_version'),
 	"</h4>",
 	_T('info_administrateur_site_01'),
-	" <a href='" . generer_url_ecrire("upgrade","") . "'>",
+	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
 	_T('info_administrateur_site_02'),
 	"</a></blockquote></blockquote><p>";
 	fin_page();
@@ -110,21 +110,11 @@ function demande_maj_version()
 }
 
 // appele dans inc_version pour gestion de l'installation
-function info_install()
- {
-	// Soit on est dans ecrire/ et on envoie sur l'installation
-	if (@file_exists("inc_version" . _EXTENSION_PHP)) {
-	header("Location: " . generer_url_ecrire("install"));
-		exit;
-	}
-	// Soit on est dans le site public
-	else if (defined("_INC_PUBLIC")) {
-		$db_ok = false;
-		include_ecrire ("inc_minipres");
-		install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
-		install_fin_html();
-		exit;
-	}
-	// Soit on est appele de l'exterieur (spikini, etc)
+function info_install() {
+
+	$db_ok = false;
+	include_ecrire ("inc_minipres");
+	install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
+	install_fin_html();
 }
 ?>
