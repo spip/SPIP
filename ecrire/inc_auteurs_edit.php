@@ -104,9 +104,7 @@ function table_auteurs_edit($auteur)
 
 	// Afficher le formulaire de changement de statut (cf. inc_acces)
 	if ($options == 'avancees')
-	  afficher_formulaire_statut_auteur ($id_auteur,
-			$auteur['statut'],
-			"auteurs_edit");
+	  afficher_formulaire_statut_auteur ($id_auteur, $auteur['statut'], "auteurs_edit");
 
 	fin_cadre_relief();
 

@@ -82,7 +82,7 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 		. _T('info_erreur_systeme', array('errsys'=>$errno))
 		. "</blink><br />\n<b>"
 		. _T('info_erreur_systeme2',
-			array('script' => generer_url_ecrire(_DIR_RESTREINT_ABS . 'admin_repair'))) 
+			array('script' => generer_url_ecrire('admin_repair'))) 
 		. '</b><br />';
 		spip_log("Erreur systeme $errno");
 	}
