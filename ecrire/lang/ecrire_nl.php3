@@ -745,9 +745,12 @@ een kleur geeft hun status aan&nbsp;:',
 'statut_admin_restreint' => '(beperkte toegang)',
 'syndic_choix_moderation' => '<NEW>Que faire des prochains liens en provenance de ce site&nbsp;?',
 'syndic_choix_oublier' => '<NEW>Que faire des liens qui ne figurent plus dans le fichier de syndication&nbsp;?',
+'syndic_choix_resume' => '<NEW>Certains sites diffusent le texte complet des articles. Lorsque celui-ci est disponible souhaitez-vous syndiquer&nbsp;:',
 'syndic_lien_obsolete' => 'obsoleet link',
 'syndic_option_miroir' => 'automatisch blokkeren',
 'syndic_option_oubli' => 'uitwissen (na @mois@&nbsp;maanden)',
+'syndic_option_resume_non' => '<NEW>le contenu complet des articles (au format HTML)',
+'syndic_option_resume_oui' => '<NEW>un simple r&eacute;sum&eacute; (au format texte)',
 'syndic_options' => 'Syndicatie opties&nbsp;:',
 
 
