@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'sem&egrave;n',
 'dirs_commencer' => 'pou komans fransv&eacute;rit&eacute; linstalasyon ',
 'dirs_preliminaire' => 'Dabor : <B> R&egrave;g out bann drwa-laks&eacute;</b>',
-'dirs_probleme_droits' => '<b>Ast&egrave;r, n&eacute;na inn larlik &egrave;k out bann drwa-laks&eacute;</b>',
+'dirs_probleme_droits' => 'Ast&egrave;r, n&eacute;na inn larlik &egrave;k out bann drwa-laks&eacute;',
 'dirs_repertoires_absents' => '<B>L&eacute; pa posib giny bann r&eacute;p&egrave;rtwar-la&nbsp;: <ul>@bad_dirs@.</ul> </B>
   <P>Ni pans n&eacute;na inn larlik &egrave;k l&eacute;kritir bann l&egrave;t maziskil o miniskil
   Ogad byin n&eacute;na okinn diskord ant bann zot maziskil o miniskil andann bann r&eacute;p&egrave;rtwar &eacute; sak l&eacute; afis&eacute;
@@ -209,8 +209,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(sa l&eacute; inn mod&eacute;kri otomatik)',
 'form_forum_pass' => 'modpas :',
 'form_forum_probleme_mail' => 'Ast&egrave;r, nana inn larlik &egrave;k out im&egrave;l&nbsp;: lo kod-lidantit&eacute; i giny pa &egrave;t anvway&eacute;.',
-'form_forum_voici1' => 'Ala out bann kod-lidantit&eacute; pou m&egrave;t ansanm andann forom kozman lo sit"@nom_site_spip@" (@adresse_site@/) :',
-'form_forum_voici2' => 'Ala out bann kod-lidantit&eacute; pou out i propoz bann zartik si lo sitw&egrave;b "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+'form_forum_voici1' => 'Ala out bann kod-lidantit&eacute; pou m&egrave;t ansanm andann forom kozman lo sit"@nom_site_spip@" (@adresse_site@) :',
+'form_forum_voici2' => 'Ala out bann kod-lidantit&eacute; pou out i propoz bann zartik si lo sitw&egrave;b "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Mersi inskri out ladr&egrave;s im&egrave;l.',
 'form_indiquer_nom' => 'Mersi m&egrave;t isi out non.',
 'form_indiquer_nom_site' => 'Mersi m&egrave;t isi lo non out sitw&egrave;b.',
@@ -382,7 +382,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_copyright_gpl' => 'sou lisans GPL',
 'info_cours_edition' => 'Out bann zartik l&eacute; apr&eacute; l&eacute;disyon',
 'info_creer_repertoire' => 'Mersi kr&eacute; inn fisy&eacute; o inn r&eacute;pertwar &egrave;k non-la&nbsp;:',
-'info_creer_repertoire_2' => 'an dodan lo sou-r&eacute;pertwar <b>ecrire/data/</b>, &eacute; apr&egrave;&nbsp;:',
+'info_creer_repertoire_2' => 'an dodan lo sou-r&eacute;pertwar <b>@repertoire@</b>, &eacute; apr&egrave;&nbsp;:',
 'info_creer_vignette' => 'pou kr&eacute;y inn tite-limaz otomatikman',
 'info_deplier' => 'D&eacute;pliy',
 'info_descriptif_nombre' => 'Bann zaf&egrave;r sak i kontyin&nbsp;:',
@@ -401,9 +401,9 @@ Mersi aou m&egrave;t ansanm isi
 'info_erreur_requete' => 'Kanard dann rok&egrave;t-la :',
 'info_erreur_squelette2' => 'N&eacute;na pa okin l&eacute;sk&eacute;l&egrave;t <b>@fichier@</b> sat l&eacute; disponib...',
 'info_erreur_systeme' => 'Kanar sist&egrave;m (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Lo diksodir li sr&eacute; byin po &egrave;t kompl&egrave;tman ragoul&eacute; o labazdodn&eacute; l&eacute; gat&eacute;<br>
- <font color=\'red\'>Anon esay&eacute; <a href=\'ecrire/admin_repair.php3\'>aranz&eacute; labaz</a>,
- ou kontakt&eacute; out l&eacute;b&egrave;rz&egrave;r.</font><br></b>',
+'info_erreur_systeme2' => 'Lo diksodir li sr&eacute; byin po &egrave;t kompl&egrave;tman ragoul&eacute; o labazdodn&eacute; l&eacute; gat&eacute;<br>
+ <font color=\'red\'>Anon esay&eacute; <a href=\'@script@\'>aranz&eacute; labaz</a>,
+ ou kontakt&eacute; out l&eacute;b&egrave;rz&egrave;r.</font>',
 'info_fini' => 'Ast&egrave;r sa l&egrave; fini !',
 'info_format_image' => 'Bann tay-zimaz ou p&eacute; itiliz&eacute; pou kr&eacute; out bann viny&egrave;t&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'forma-la l&eacute; pa kadr&eacute;',
@@ -414,10 +414,10 @@ Mersi aou m&egrave;t ansanm isi
 'info_inclusion_directe' => 'Linklizyon dir&egrave;k&nbsp;:',
 'info_inclusion_vignette' => 'Linklizyon limaz-minyatir&nbsp;:',
 'info_installation_systeme_publication' => 'Pou f&eacute; zw&eacute; (instal) lo sist&egrave;m lapiblikasyon...',
-'info_installer_documents' => 'Ou p&eacute; f&egrave; zw&eacute; otomatikman tout bann dokiman sak l&eacute; pr&eacute;zan dann fisy&eacute; <i>upload</i>.',
-'info_installer_ftp' => 'Kom komand&egrave;r, ou p&eacute; instal (&egrave;k FTP) bann fisy&eacute; dann dosy&eacute; ecrire/upload pou answuit swazi banna t&egrave;rla dir&egrave;kman.',
+'info_installer_documents' => 'Ou p&eacute; f&egrave; zw&eacute; otomatikman tout bann dokiman sak l&eacute; pr&eacute;zan dann fisy&eacute; @upload@.',
+'info_installer_ftp' => 'Kom komand&egrave;r, ou p&eacute; instal (&egrave;k FTP) bann fisy&eacute; dann dosy&eacute; @upload@ pou answuit swazi banna t&egrave;rla dir&egrave;kman.',
 'info_installer_images' => 'Ou p&eacute; f&egrave;r zw&eacute; bann zimaz &egrave;k lo forma JPEG, GIF &eacute; minm PNG.',
-'info_installer_images_dossier' => 'Instal bann zimaz dann dosy&eacute; /ecrire/upload pou swazi azot answit, t&egrave;rla dir&egrave;kman.',
+'info_installer_images_dossier' => 'Instal bann zimaz dann dosy&eacute; @upload@ pou swazi azot answit, t&egrave;rla dir&egrave;kman.',
 'info_installer_tous_documents' => 'Instal tout bann dokiman-minm',
 'info_interface_complete' => 'Lint&egrave;rfas konpl&eacute;',
 'info_interface_simple' => 'Lint&egrave;rfas sinp',
@@ -479,7 +479,7 @@ Mersi aou m&egrave;t ansanm isi
 'info_retirer_mot' => 'Anl&egrave;v mo-la',
 'info_retirer_mots' => 'Anl&egrave;v tout bann mo',
 'info_sans_titre_2' => 'n&eacute;na pwinn titr',
-'info_selectionner_fichier' => 'I p&eacute; swazi inn fisy&eacute; dann dosy&eacute; <i>upload</i>',
+'info_selectionner_fichier' => 'I p&eacute; swazi inn fisy&eacute; dann dosy&eacute; @upload@',
 'info_selectionner_fichier_2' => 'Swazi inn fisy&eacute;&nbsp;:',
 'info_site_attente' => 'Sitw&egrave;b-la l&eacute; apr&eacute; esp&egrave;r lakonfirmasyon',
 'info_site_reference' => 'Sitw&egrave;b r&eacute;f&eacute;rans&eacute; an liyn',
@@ -614,7 +614,7 @@ Pour ou p&eacute; artrouv out laks&eacute; si lo sitw&egrave;b
 @nom_site_spip@ (@adresse_site@)
 
 Mersi rand aou sir ladr&egrave;s la :
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Apr&eacute;sa, zi poura m&egrave;t inn nouvo modpas
  pou rakost lo sitw&egrave;b.
@@ -665,9 +665,9 @@ out sit i mars. Ni kons&egrave;y aou pa tous a ryin si ou l&eacute; pa fransv&ea
 
  <P align="justify"><B>&Eacute; minm, ni kons&eacute;y
 aou l&egrave;s laz&eacute;styon do bann paz-la pou lo w&egrave;bm&egrave;t prinsipal.</b>',
-'texte_inc_meta_1' => 'Sist&egrave;m-la la finn trov inn larlik &egrave;k l&eacute;kritir lo fisy&eacute; <code>ecrire/data/meta_cache.php3</code>.  Mersi, kom komand&egrave;r lo sit,',
+'texte_inc_meta_1' => 'Sist&egrave;m-la la finn trov inn larlik &egrave;k l&eacute;kritir lo fisy&eacute; <code>@fichier@</code>.  Mersi, kom komand&egrave;r lo sit,',
 'texte_inc_meta_2' => 'v&eacute;rify&eacute; bann drwa l&eacute;kritir',
-'texte_inc_meta_3' => 'dann r&eacute;pertwar <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'dann r&eacute;pertwar <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'apr&eacute; l&eacute;kritir',
 'texte_statut_poubelle' => 'dann korb&egrave;y',
 'texte_statut_propose_evaluation' => 'propoz&eacute; pou zot zizman',

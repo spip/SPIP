@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semajnoj',
 'dirs_commencer' => 'por vere komenci la instaladon',
 'dirs_preliminaire' => 'Anta&#365;e: <b>&#284;ustigu la alirrajtojn</b>',
-'dirs_probleme_droits' => '<b>Problemo de alirrajtoj</b>',
+'dirs_probleme_droits' => 'Problemo de alirrajtoj',
 'dirs_repertoires_absents' => '<b>La jenaj dosierujoj ne estis trovitaj&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />Kulpas ver&#349;ajne mal&#285;usta uskleco.
   Certigu ke la uskleco akordas kun la afi&#349;ado &#265;i-supre;
@@ -198,8 +198,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(tio estas a&#365;tomata mesa&#285;o)',
 'form_forum_pass' => 'pasvorto:',
 'form_forum_probleme_mail' => 'Retpo&#349;ta problemo: la identigilo ne sendeblas.',
-'form_forum_voici1' => 'Jen viaj identigiloj por partopreni la funkciadon de teksejo "@nom_site_spip@" (@adresse_site@/):',
-'form_forum_voici2' => '&#264;i tie estas viaj identigiloj por proponi artikolojn en la teksejo "@nom_site_spip@" (@adresse_site@/ecrire/):',
+'form_forum_voici1' => 'Jen viaj identigiloj por partopreni la funkciadon de teksejo "@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici2' => '&#264;i tie estas viaj identigiloj por proponi artikolojn en la teksejo "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Bonvolu indiki vian retpo&#349;tadreson.',
 'form_indiquer_nom' => 'Bonvolu indiki vian nomon.',
 'form_indiquer_nom_site' => 'Bonvolu indiki la nomon de via teksejo.',
@@ -376,7 +376,7 @@ Dankon pro via partopreno
 'info_copyright_gpl' => 'sub licenco GPL',
 'info_cours_edition' => 'Viaj nun redaktaj artikoloj',
 'info_creer_repertoire' => 'Bonvolu krei dosier(uj)on kies nomo estu:',
-'info_creer_repertoire_2' => 'ene de la subdosierujo <b>ecrire/data/</b>, kaj',
+'info_creer_repertoire_2' => 'ene de la subdosierujo <b>@repertoire@</b>, kaj',
 'info_creer_vignette' => 'a&#365;tomata kreado de vinjeto',
 'info_deplier' => 'Malfaldi',
 'info_descriptif_nombre' => 'Priskribo(j):',
@@ -394,8 +394,8 @@ Dankon pro via partopreno
 'info_erreur_requete' => 'Eraro ene de la peto: ',
 'info_erreur_squelette2' => 'Nenia skeleto <b>@fichier@</b> disponeblas...',
 'info_erreur_systeme' => 'Eraro de la sistemo (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Eble la fiksdisko estas plena, a&#365; dama&#285;is la datenbazo. <br>
- <font color=\'red\'><a href=\'ecrire/admin_repair.php3\'>Provu repari la datenbazon</a>, a&#365; kontaktu vian gastiganton.</font></br></b>',
+'info_erreur_systeme2' => 'Eble la fiksdisko estas plena, a&#365; dama&#285;is la datenbazo. <br>
+ <font color=\'red\'><a href=\'@script@\'>Provu repari la datenbazon</a>, a&#365; kontaktu vian gastiganton.</font></br>',
 'info_fini' => '&#264;io estas finita !',
 'info_format_image' => 'Formatoj de bildoj uzebla por krei bildetojn: @gd_formats@.',
 'info_format_non_defini' => 'nedefinita formato',
@@ -406,10 +406,10 @@ Dankon pro via partopreno
 'info_inclusion_directe' => 'Rekta inkludo:',
 'info_inclusion_vignette' => 'Inkludo de la vinjeto:',
 'info_installation_systeme_publication' => 'Instalado de la publikiga sistemo...',
-'info_installer_documents' => 'Vi povas a&#365;tomate instali &#265;iujn dokumentojn entenatajn en la dosiero <i>upload</i>.',
-'info_installer_ftp' => 'Kiel administranto, vi povas instali (FTP-e) dosierojn en la dosierujo ecrire/upload kaj poste rekte selekti ilin tie.',
+'info_installer_documents' => 'Vi povas a&#365;tomate instali &#265;iujn dokumentojn entenatajn en la dosiero @upload@.',
+'info_installer_ftp' => 'Kiel administranto, vi povas instali (FTP-e) dosierojn en la dosierujo @upload@ kaj poste rekte selekti ilin tie.',
 'info_installer_images' => 'Vi povas instali bildojn de formato JPEG, GIF kaj PNG.',
-'info_installer_images_dossier' => 'Instalu bildojn en la dosierujo /ecrire/upload por eble elekti ilin tie.',
+'info_installer_images_dossier' => 'Instalu bildojn en la dosierujo @upload@ por eble elekti ilin tie.',
 'info_installer_tous_documents' => 'Instali &#265;iujn dokumentojn',
 'info_interface_complete' => 'kompleta interfaco',
 'info_interface_simple' => 'Simpla interfaco',
@@ -471,7 +471,7 @@ Dankon pro via partopreno
 'info_retirer_mot' => 'Forigi tiun vorton',
 'info_retirer_mots' => 'Forigi &#265;iujn vortojn',
 'info_sans_titre_2' => 'sen titolo',
-'info_selectionner_fichier' => 'Vi povas elekti dosieron el la dosierujo <i>upload</i>',
+'info_selectionner_fichier' => 'Vi povas elekti dosieron el la dosierujo @upload@',
 'info_selectionner_fichier_2' => 'Elektu dosieron&nbsp;:',
 'info_site_attente' => 'teksejo atendanta validigon',
 'info_site_reference' => 'teksejo referencita konektita',
@@ -610,7 +610,7 @@ Por retrovi vian aliron al la teksejo
 
 Bonvolu iri al sekva adreso:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Vi povos tiam enigi novan pasvorton
 kaj rekonekti vin al la teksejo.
@@ -665,9 +665,9 @@ kaj rekonekti vin al la teksejo.
 	familiara kun la funkcionado de la sistemo SPIP. <P align="justify"><B>Pli
 	&#285;enerale, estas tre konsilinde lasi la mastrumadon de tiuj &#265;i pa&#285;oj
 	al la &#265;efa teksestro de via teksejo.</B>',
-'texte_inc_meta_1' => 'Sistemo malkovris eraron dum skribado de dosiero <code>ecrire/data/meta_cache.php3</code>.Bonvolu, kiel administranto de la teksejo,',
+'texte_inc_meta_1' => 'Sistemo malkovris eraron dum skribado de dosiero <code>@fichier@</code>.Bonvolu, kiel administranto de la teksejo,',
 'texte_inc_meta_2' => 'kontroli la skriborajtojn',
-'texte_inc_meta_3' => 'en la dosierujo <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'en la dosierujo <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'Redaktata',
 'texte_statut_poubelle' => 'Rubujen',
 'texte_statut_propose_evaluation' => 'proponita al taksado',

@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'hafta',
 'dirs_commencer' => ' y&uuml;klemeye ger&ccedil;ekten ba&#351;lamak i&ccedil;in',
 'dirs_preliminaire' => '&Ouml;n bilgi : <b>Eri&#351;im haklar&#305;n&#305; ayarlay&#305;n&#305;z</b>',
-'dirs_probleme_droits' => '<b>Eri&#351;im haklar&#305; sorunu</b>',
+'dirs_probleme_droits' => 'Eri&#351;im haklar&#305; sorunu',
 'dirs_repertoires_absents' => '<b>&#350;u dizinler bulunamad&#305;&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p />B&uuml;y&uuml;k k&uuml;&ccedil;&uuml;k harf hatas&#305;na ba&#287;l&#305; olabilir.
   K&uuml;&ccedil;&uuml;k b&uuml;y&uuml;k harflerin yukar&#305;da g&ouml;sterilenlerle uyu&#351;tu&#287;unu kontrol edin
@@ -200,8 +200,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(bu otomatik bir iletidir)',
 'form_forum_pass' => '&#351;ifre :',
 'form_forum_probleme_mail' => 'E-posta sorunu&nbsp;: tan&#305;mlay&#305;c&#305; g&ouml;nderilemiyor.',
-'form_forum_voici1' => '&#304;&#351;te  "@nom_site_spip@" (@adresse_site@/) site ya&#351;am&#305;na kat&#305;labilmek i&ccedil;in tan&#305;mlay&#305;c&#305;lar&#305;n&#305;z :',
-'form_forum_voici2' => '"@nom_site_spip@" (@adresse_site@/ecrire/) sitesinde makale yay&#305;nlayabilmeniz i&ccedil;in gereken kimlik bilgileriniz :',
+'form_forum_voici1' => '&#304;&#351;te  "@nom_site_spip@" (@adresse_site@) site ya&#351;am&#305;na kat&#305;labilmek i&ccedil;in tan&#305;mlay&#305;c&#305;lar&#305;n&#305;z :',
+'form_forum_voici2' => '"@nom_site_spip@" (@adresse_login@) sitesinde makale yay&#305;nlayabilmeniz i&ccedil;in gereken kimlik bilgileriniz :',
 'form_indiquer_email' => 'L&uuml;tfen e-posta adresinizi belirtiniz.',
 'form_indiquer_nom' => 'L&uuml;tfen isminizi belirtiniz.',
 'form_indiquer_nom_site' => 'L&uuml;tfen sitenizin ismini belirtiniz.',
@@ -384,7 +384,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_copyright_gpl' => 'GPL lisans&#305; alt&#305;nda',
 'info_cours_edition' => 'Yaz&#305;lmakta olan makaleleriniz',
 'info_creer_repertoire' => '&#350;u isimde bir dosya veya dizin olu&#351;turunuz&nbsp;:',
-'info_creer_repertoire_2' => ' <b>ecrire/data/</b> alt-dizini i&ccedil;erisinde, daha sonra&nbsp;:',
+'info_creer_repertoire_2' => ' <b>@repertoire@</b> alt-dizini i&ccedil;erisinde, daha sonra&nbsp;:',
 'info_creer_vignette' => 'otomatik ikon olu&#351;turma',
 'info_dans_espace_prive' => '-vide-',
 'info_deplier' => 'A&ccedil;&#305;l&#305;p sergilenmesi',
@@ -407,9 +407,9 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_erreur_requete' => 'Aramada hata :',
 'info_erreur_squelette2' => 'Hi&ccedil;bir @fichier@ iskeleti m&uuml;sait de&#287;il...',
 'info_erreur_systeme' => 'Sistem hatas&#305; (hata no @errsys@)',
-'info_erreur_systeme2' => '<b>Sabit disk dolu olabilir veya veritaban&#305; hasar g&ouml;rm&uuml;&#351; olabilir.  <br>
- <font color=\'red\'>Veritaban&#305;n&#305; <a href=\'ecrire/admin_repair.php3\'>onarmay&#305; deneyiniz </a>,
- veya sitenizi bar&#305;nd&#305;ran firmay&#305; aray&#305;n&#305;z.</font><br></b>',
+'info_erreur_systeme2' => 'Sabit disk dolu olabilir veya veritaban&#305; hasar g&ouml;rm&uuml;&#351; olabilir.  <br>
+ <font color=\'red\'>Veritaban&#305;n&#305; <a href=\'@script@\'>onarmay&#305; deneyiniz </a>,
+ veya sitenizi bar&#305;nd&#305;ran firmay&#305; aray&#305;n&#305;z.</font>',
 'info_fini' => 'Bitti !',
 'info_format_image' => '&#304;kon yaratmak i&ccedil;in kullan&#305;labilecek resim formatlar&#305;&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'tan&#305;ms&#305;z format',
@@ -421,9 +421,9 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'info_inclusion_vignette' => '&#304;kon ekleme&nbsp;:',
 'info_installation_systeme_publication' => 'Yay&#305;n sistemi kurulumu...',
 'info_installer_documents' => '<i>Upload</i> dizininde bulunan t&uuml;m belgeleri otomatik olarak kurabilirsiniz.',
-'info_installer_ftp' => 'Y&ouml;netici olarak, (FTP ile) ecrire/upload dizinine dosya kurup sonra onlar&#305; buradan direkt olarak se&ccedil;ebilirsiniz.',
+'info_installer_ftp' => 'Y&ouml;netici olarak, (FTP ile) @upload@ dizinine dosya kurup sonra onlar&#305; buradan direkt olarak se&ccedil;ebilirsiniz.',
 'info_installer_images' => 'JPEG, GIF ve PNG format&#305;nda resimler y&uuml;kleyebilirsiniz.',
-'info_installer_images_dossier' => 'Buradan se&ccedil;im yapabilmek i&ccedil;in /ecrire/upload dizinine resim y&uuml;kleyiniz.',
+'info_installer_images_dossier' => 'Buradan se&ccedil;im yapabilmek i&ccedil;in @upload@ dizinine resim y&uuml;kleyiniz.',
 'info_installer_tous_documents' => 'T&uuml;m belgeleri kur',
 'info_interface_complete' => 'Tam aray&uuml;z',
 'info_interface_simple' => 'Basit aray&uuml;z',
@@ -654,7 +654,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
  sitesine tekrar eri&#351;ebilmek i&ccedil;in,
  l&uuml;tfen &#351;u adrese gidiniz :
 
- @adresse_site@/spip_pass.php3?p=@cookie@
+ @sendcookie@
  O zaman yeni bir &#351;ifre girebilecek
  ve tekrar siteye ba&#287;lanabileceksiniz. ',
 'pass_mot_oublie' => '&#350;ifreyi unuttum',
@@ -696,7 +696,7 @@ Kat&#305;l&#305;m&#305;n&#305;z i&ccedil;in te&#351;ekk&uuml;rler
 'texte_inc_auth_2' => 'gezgininizi kapat&#305;p tekrar &ccedil;al&#305;&#351;t&#305;r&#305;n&#305;z ve ',
 'texte_inc_auth_3' => 'tekrar ba&#287;lan&#305;n&#305;z.',
 'texte_inc_config' => 'Bu sayfalarda yap&#305;lan de&#287;i&#351;iklikler sitenizin i&#351;leyi&#351;ini b&uuml;y&uuml;k &ouml;l&ccedil;&uuml;de etkiler. SPIP sisteminin i&#351;leyi&#351;ine a&#351;ina olmad&#305;&#287;&#305;n&#305;z s&uuml;rece m&uuml;dahale etmemenizi tavsiye ederiz. <P align="justify"><B>Daha genel bir ifadeyle s&ouml;ylemek gerekirse bu sayfalar&#305;n y&uuml;k&uuml;n&uuml; sitenin A&#287; Y&ouml;neticisi\'ne b&#305;rakman&#305;z&#305; &ouml;zellikle tavsiye ederiz.</B>',
-'texte_inc_meta_1' => 'Sistem, <code>ecrire/data/meta_cache.php3</code> dosyas&#305;n&#305;n yaz&#305;l&#305;&#351;&#305; s&#305;ras&#305;nda bir hata ile kar&#351;&#305;la&#351;t&#305;. L&uuml;tfen, site y&ouml;neticisi olarak, ',
+'texte_inc_meta_1' => 'Sistem, <code>@fichier@</code> dosyas&#305;n&#305;n yaz&#305;l&#305;&#351;&#305; s&#305;ras&#305;nda bir hata ile kar&#351;&#305;la&#351;t&#305;. L&uuml;tfen, site y&ouml;neticisi olarak, ',
 'texte_inc_meta_2' => '(<code>ecrire/data/</code> dizinindeki) ',
 'texte_inc_meta_3' => 'yazma haklar&#305;n&#305; kontrol ediniz.',
 'texte_plan_trad' => '-vide-',

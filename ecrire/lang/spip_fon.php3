@@ -573,7 +573,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 @nom_site_spip@ (@adresse_site@)
 
 N&uacute; mi n&aacute; &#598;&oacute; m&#596; n&#596;t&#603;n gblogbloj&iacute;  &eacute; l&#596; t&#596;n  mi y&igrave;
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 ',
 'pass_mot_oublie' => 'mi y&#596;n c&agrave;v&igrave; &#596;',
@@ -613,7 +613,7 @@ N&uacute; mi n&aacute; &#598;&oacute; m&#596; n&#596;t&#603;n gblogbloj&iacute; 
 'texte_inc_config' => 'kp&#596;nj&oacute;n&#596; t&ograve;b&iacute;t&ugrave;nt&igrave;to kl&eacute;w&uacute;ngb&agrave;v&iacute; &#596; j&#603; v&#596;w&#603;n &eacute; l&#596; y&eacute; s&#603; &#598;&oacute; &#596; mi k&#603;nkl&#603;&#770;n b&oacute; n&aacute; l&igrave;nl&igrave;n mi t&#596;n &#598;&eacute; w&uacute;&#598;&ograve; kpl&eacute;kpl&eacute; y&eacute; s&#596; &#598;&oacute; d&ograve; w&#596; m&#603;n&uacute; &agrave;t&#603; wo&#770; m&aacute; m&igrave; &#596; mi z&igrave;n f&iacute;mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;w&eacute;kp&aacute; &eacute; l&#596;x&oacute;gb&egrave; l&#603; ny&#596;wl&aacute;nt&#596; l&#603; gblogbloj&iacute; &eacute; l&#596; n&#596; z&#596;n b&#596; mi n&#596; s&#603;  w&#603;n &#598;&oacute; b&oacute; n&#596; l&#603; y&iacute; w&#603;nx&oacute; kl&eacute;wun l&#603; we&#780;m&agrave; kl&eacute;w&uacute;n &#598;&eacute; l&#603; w&#603;b&#596; y&eacute; n&#596; z&#596;n b&#596; x&oacute; l&#603; n&#596; y&iacute; &agrave;t&#603;j&iacute; g&agrave;nm&#603;g&agrave;nm&#603;mi s&#596; x&oacute;x&ograve;kpl&eacute;gb&agrave;v&iacute; mi t&#596;n ',
 'texte_inc_meta_1' => 'mi z&igrave;n f&iacute;mi n&aacute; s&#596; m&#596; &agrave;l&igrave; g&eacute;g&eacute;w&eacute;kp&aacute; &eacute; l&#596;x&oacute;gb&egrave; l&#603; ny&#596;wl&aacute;nt&#596; l&#603; gblogbloj&iacute; &eacute; l&#596; n&#596; z&#596;n b&#596; mi n&#596; s&#603;  w&#603;n &#598;&oacute; b&oacute; n&#596; l&#603; y&iacute; w&#603;nx&oacute; kl&eacute;wun l&#603; we&#780;m&agrave; kl&eacute;w&uacute;n &#598;&eacute; l&#603; w&#603;b&#596; y&eacute; n&#596; z&#596;n b&#596; x&oacute; l&#603; n&#596; y&iacute; &agrave;t&#603;j&iacute; g&agrave;nm&#603;g&agrave;nm&#603;',
 'texte_inc_meta_2' => 'mi k&nbsp;p&#596;n &agrave;c&#603; winwl t&#596;n ',
-'texte_inc_meta_3' => 'E &#598;&ograve; &agrave;kp&aacute;xw&eacute; &#596; m&#603; <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'E &#598;&ograve; &agrave;kp&aacute;xw&eacute; &#596; m&#603; <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'E kp&oacute; &#598;&ograve; w&iacute;wl&aacute;nw&#603;',
 'texte_statut_poubelle' => 's&#596; ny&iacute;gb&egrave;',
 'texte_statut_propose_evaluation' => 'Mi kp&#596;n&#598;&#596; y&eacute; n&aacute; s&#596; k&#603;n n&aacute;',

@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'sizhun',
 'dirs_commencer' => 'a-benn kregi&ntilde; da-vat gant ar staliadur',
 'dirs_preliminaire' => 'A-raok kenderc\'hel : <b>Renka&ntilde; ar gwirio&ugrave; da zont-tre</b>',
-'dirs_probleme_droits' => '<b>Kudenn gant ar gwirio&ugrave; da zont-tre</b>',
+'dirs_probleme_droits' => 'Kudenn gant ar gwirio&ugrave; da zont-tre',
 'dirs_repertoires_absents' => '<b>An teulio&ugrave;-ma&ntilde;&nbsp; n\'int ket bet kavet : <ul>@bad_dirs@.</ul></b>
   <p />Posupl eo e vefe dre fazi implij pennlizherenno&ugrave; pe lizherenno&ugrave; munud e lec\'hio&ugrave; fall.
   Gwiriit e klot mat stumm lizherenno&ugrave; an teulio&ugrave; gant ar pezh a vez diskouezet a-us;
@@ -199,8 +199,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(gant SPIP eo bet savet ar gemennadenn-ma&ntilde;)',
 'form_forum_pass' => 'ger-tremen :',
 'form_forum_probleme_mail' => 'Kudenn a bostelnbsp;: n\'hall ket an titouro&ugrave; beza&ntilde; kaset.',
-'form_forum_voici1' => 'Setu ho titouro&ugrave; evit gallout kemer perzh e buhez "@nom_site_spip@" (@adresse_site@/) :',
-'form_forum_voici2' => 'Setu ho titouro&ugrave; evit gallout kinnig pennado&ugrave; war "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+'form_forum_voici1' => 'Setu ho titouro&ugrave; evit gallout kemer perzh e buhez "@nom_site_spip@" (@adresse_site@) :',
+'form_forum_voici2' => 'Setu ho titouro&ugrave; evit gallout kinnig pennado&ugrave; war "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Skrivit ho postel mar-plij.',
 'form_indiquer_nom' => 'Skrivit ho anv mar-plij.',
 'form_indiquer_nom_site' => 'Skrivit anv ho lec\'hienn.',
@@ -375,7 +375,7 @@ Trugarez da gemer perzh
 'info_copyright_gpl' => 'dindan gwarez GPL',
 'info_cours_edition' => 'Ho pennado&ugrave; war-skriva&ntilde;',
 'info_creer_repertoire' => 'Krouit ur restr pe un teul anvet&nbsp;:',
-'info_creer_repertoire_2' => 'en teul <b>ecrire/data/</b>, ha&nbsp;:',
+'info_creer_repertoire_2' => 'en teul <b>@repertoire@</b>, ha&nbsp;:',
 'info_creer_vignette' => 'kroui&ntilde; emgefreek ar skeudennig',
 'info_deplier' => 'Displega&ntilde;',
 'info_descriptif_nombre' => 'deskriv(o&ugrave;)&nbsp;:',
@@ -393,9 +393,9 @@ Trugarez da gemer perzh
 'info_erreur_requete' => 'Fazi er galvadenn :',
 'info_erreur_squelette2' => 'N\'eus framm <b>@fichier@</b> ebet da gaout...',
 'info_erreur_systeme' => 'Fazi kenreizhad (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Marteze eo leun-chouk ar bladenn-galet, pe neuze eo mazaouet an diaz-titouro&ugrave;<br>
-	<font color=\'red\'>Klaskit <a href=\'ecrire/admin_repair.php3\'>kempenn an diaz</a>,
-	pe kit e-darempred gant ho poder.</font><br></b>',
+'info_erreur_systeme2' => 'Marteze eo leun-chouk ar bladenn-galet, pe neuze eo mazaouet an diaz-titouro&ugrave;<br>
+	<font color=\'red\'>Klaskit <a href=\'@script@\'>kempenn an diaz</a>,
+	pe kit e-darempred gant ho poder.</font>',
 'info_fini' => 'Echu eo !',
 'info_format_image' => 'Stummo&ugrave;-skeudenn a c\'hell beza&ntilde; implijet da sevel skeudennigo&ugrave;&nbsp;: @gd_formats@.',
 'info_format_non_defini' => 'Stumm ket termenet',
@@ -406,10 +406,10 @@ Trugarez da gemer perzh
 'info_inclusion_directe' => 'Enklosa&ntilde; warn-eeun:',
 'info_inclusion_vignette' => 'Enklosa&ntilde; ar skeudennig&nbsp;:',
 'info_installation_systeme_publication' => 'Staliadur ar genreizhad-embann...',
-'info_installer_documents' => 'Gallout a rit stalia&ntilde; en un doare emgefrek an holl deuliado&ugrave; a zo en teul <i>upload</i>.',
-'info_installer_ftp' => 'O veza&ntilde; ma\'z oc\'h merour e c\'hellit stalia&ntilde; restro&ugrave; (dre FTP) en teul ecrire/upload deoc\'h da c\'hallout ober ganto ama&ntilde; da c\'houde.',
+'info_installer_documents' => 'Gallout a rit stalia&ntilde; en un doare emgefrek an holl deuliado&ugrave; a zo en teul @upload@.',
+'info_installer_ftp' => 'O veza&ntilde; ma\'z oc\'h merour e c\'hellit stalia&ntilde; restro&ugrave; (dre FTP) en teul @upload@ deoc\'h da c\'hallout ober ganto ama&ntilde; da c\'houde.',
 'info_installer_images' => 'Er stummo&ugrave; JPEG, GIF ha PNG e c\'hellit stalia&ntilde; skeudenno&ugrave;.',
-'info_installer_images_dossier' => 'Stalia&ntilde; skeudenno&ugrave; en teul /ecrire/upload evit gallout o ziuza&ntilde; ama&ntilde;.',
+'info_installer_images_dossier' => 'Stalia&ntilde; skeudenno&ugrave; en teul @upload@ evit gallout o ziuza&ntilde; ama&ntilde;.',
 'info_installer_tous_documents' => 'Stalia&ntilde; an holl deuliado&ugrave;',
 'info_interface_complete' => 'Ketal klok',
 'info_interface_simple' => 'Ketal eeunaet',
@@ -471,7 +471,7 @@ Trugarez da gemer perzh
 'info_retirer_mot' => 'Tenna&ntilde; ar ger-ma&ntilde;',
 'info_retirer_mots' => 'Tenna&ntilde; an holl c\'herio&ugrave;',
 'info_sans_titre_2' => 'titl ebet',
-'info_selectionner_fichier' => 'Gallout a rit diuz ur restr eus an teul <i>upload</i>',
+'info_selectionner_fichier' => 'Gallout a rit diuz ur restr eus an teul @upload@',
 'info_selectionner_fichier_2' => 'Diuz ur restr&nbsp;:',
 'info_site_attente' => 'Lec\'hienn war-c\'hortoz beza&ntilde; asantet',
 'info_site_reference' => 'Lec\'hienn listennet',
@@ -603,7 +603,7 @@ Evit gallout distrei&ntilde; war al lec\'hienn
 
 Kit d\'ar chomlec\'h-ma&ntilde; :
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Neuze e c\'helloc\'h rei&ntilde; ur ger-tremen nevez ha
 kevrea&ntilde; en-dro ouzh al lec\'hienn.
@@ -653,9 +653,9 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 'texte_inc_config' => 'Ul levezon bras o deus kemmo&ugrave; ar bajenn-ma&ntilde; war mont-en-dro hollek al lec\'hienn.
 	Aliet oc\'h da chom hep kemm tra pe dra keit ha ma n\'oc\'h ket boaz ouzh SPIP.
 	<P align="justify"><B>Aliet oc\'h da lezel webmestr penna&ntilde; al lec\'hienn ober war-dro ar pajenno&ugrave;-ma&ntilde;.</B>',
-'texte_inc_meta_1' => 'Ur fazi a zo bet o skriva&ntilde; war ar restr <code>ecrire/data/meta_cache.php3</code>. o veza&ntilde; ma\'z oc\'h merour al lec\'hienn e rankit ',
+'texte_inc_meta_1' => 'Ur fazi a zo bet o skriva&ntilde; war ar restr <code>@fichier@</code>. o veza&ntilde; ma\'z oc\'h merour al lec\'hienn e rankit ',
 'texte_inc_meta_2' => 'Gwiria&ntilde; ar gwirio&ugrave; da skriva&ntilde; ',
-'texte_inc_meta_3' => 'war an teul <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'war an teul <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'war skridaoza&ntilde;',
 'texte_statut_poubelle' => 'er boubelenn',
 'texte_statut_propose_evaluation' => 'kinniget ouzh an amprou',

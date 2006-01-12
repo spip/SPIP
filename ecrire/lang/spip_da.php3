@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => '<NEW>semaines',
 'dirs_commencer' => ' for at kunne begynde installationen',
 'dirs_preliminaire' => 'Forberedelser: <B>Ops&aelig;tning af adgangsrettigheder</b>',
-'dirs_probleme_droits' => '<b>Problem med adgangsrettigheder</b>',
+'dirs_probleme_droits' => 'Problem med adgangsrettigheder',
 'dirs_repertoires_absents' => '<B>F&oslash;lgende kataloger blev ikke fundet: <ul>@bad_dirs@.</ul> </b>
   <P>Det skyldes sandsynligvis forkert brug af store og sm&aring; bogstaver.
   Kontroller, at katalognavnene har samme store og sm&aring; bogstaver som vist ovenfor.
@@ -202,8 +202,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(dette er en automatisk udkrevet meddelelse)',
 'form_forum_pass' => 'adgangskode:',
 'form_forum_probleme_mail' => 'E-mail-problem: adgangsoplysninger kunne ikke sendes.',
-'form_forum_voici1' => 'Her er dine adgangsoplysninger for at kunne deltage i forummer p&aring; webstedet "@nom_site_spip@" (@adresse_site@/):',
-'form_forum_voici2' => 'Her er dine adgangsoplysninger for at kunne indsende artikler til webstedet "@nom_site_spip@" (@adresse_site@/ecrire/):',
+'form_forum_voici1' => 'Her er dine adgangsoplysninger for at kunne deltage i forummer p&aring; webstedet "@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici2' => 'Her er dine adgangsoplysninger for at kunne indsende artikler til webstedet "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indtast venligst din e-mail-adresse.',
 'form_indiquer_nom' => 'Indtast venligst dit navn.',
 'form_indiquer_nom_site' => 'Indtast venligst dit websteds navn.',
@@ -381,7 +381,7 @@ Tak for din deltagelse
 'info_copyright_gpl' => 'under GPL licens',
 'info_cours_edition' => 'Artikler undervejs',
 'info_creer_repertoire' => 'Opret en fil eller et katalog med navnet:',
-'info_creer_repertoire_2' => 'i underkataloget <b>ecrire/data/</b>, og derefter',
+'info_creer_repertoire_2' => 'i underkataloget <b>@repertoire@</b>, og derefter',
 'info_creer_vignette' => '<NEW>cr&eacute;ation automatique de la vignette',
 'info_dans_espace_prive' => '[i det private omr&aring;de]',
 'info_deplier' => 'Luk op',
@@ -402,9 +402,9 @@ Tak for din deltagelse
 'info_erreur_requete' => 'Fejl i foresp&oslash;rgsel:',
 'info_erreur_squelette2' => 'Ingen template parat <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System fejl (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Harddisken er m&aring;ske fyldt eller databasen er skadet. <br>
- <font color=\'red\'>pr&oslash;v <a href=\'ecrire/admin_repair.php3\'>at reparere databasen</a>,
-eller kontakt din internetudbyder.</font><br></b>',
+'info_erreur_systeme2' => 'Harddisken er m&aring;ske fyldt eller databasen er skadet. <br>
+ <font color=\'red\'>pr&oslash;v <a href=\'@script@\'>at reparere databasen</a>,
+eller kontakt din internetudbyder.</font>',
 'info_fini' => 'Det er overst&aring;et!',
 'info_format_image' => 'Billedformater til brug ved dannelse af piktogrammer: @gd_formats@.',
 'info_format_non_defini' => 'ukendt format',
@@ -415,10 +415,10 @@ eller kontakt din internetudbyder.</font><br></b>',
 'info_inclusion_directe' => 'Direkte indlejring:',
 'info_inclusion_vignette' => 'Medtag piktogram:',
 'info_installation_systeme_publication' => 'Installation af publiceringssystemet ...',
-'info_installer_documents' => 'Du kan automatisk installere alle dokumenter, som findes i kataloget <i>upload</i>.',
-'info_installer_ftp' => 'Som administrator kan du via FTP indl&aelig;se filer i kataloget ecrire/upload, s&aring; du senere kan hente dem der.',
+'info_installer_documents' => 'Du kan automatisk installere alle dokumenter, som findes i kataloget @upload@.',
+'info_installer_ftp' => 'Som administrator kan du via FTP indl&aelig;se filer i kataloget @upload@, s&aring; du senere kan hente dem der.',
 'info_installer_images' => 'Du kan indl&aelig;se filer i formaterne JPEG, GIF og PNG.',
-'info_installer_images_dossier' => 'Indl&aelig;s billeder i kataloget /ecrire/upload for at kunne hente dem her.',
+'info_installer_images_dossier' => 'Indl&aelig;s billeder i kataloget @upload@ for at kunne hente dem her.',
 'info_installer_tous_documents' => 'Indl&aelig;s alle dokumenter',
 'info_interface_complete' => 'Fuld brugergr&aelig;nseflade',
 'info_interface_simple' => 'Forenklet brugergr&aelig;nseflade',
@@ -487,7 +487,7 @@ eller kontakt din internetudbyder.</font><br></b>',
 'info_retirer_mot' => 'Slet dette n&oslash;gleord',
 'info_retirer_mots' => 'Slet alle n&oslash;gleord',
 'info_sans_titre_2' => 'uden overskrift',
-'info_selectionner_fichier' => 'Du kan v&aelig;lge en fil fra mappen <i>upload</i>',
+'info_selectionner_fichier' => 'Du kan v&aelig;lge en fil fra mappen @upload@',
 'info_selectionner_fichier_2' => 'V&aelig;lg en fil:',
 'info_site_attente' => 'Websted afventer godkendelse',
 'info_site_reference' => 'Online henvisning',
@@ -639,7 +639,7 @@ For at f&aring; adgang til webstedet
 @nom_site_spip@ (@adresse_site@)
 
 skal du g&aring; til f&oslash;lgende adresse:
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Du kan s&aring; indtaste en ny adgangskode
 og igen f&aring; adgang til webstedet.',

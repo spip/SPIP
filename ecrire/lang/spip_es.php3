@@ -169,7 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semanas',
 'dirs_commencer' => 'Para empezar realmente la instalaci&oacute;n',
 'dirs_preliminaire' => 'Preliminar: <b>Regular los derechos de acceso</b>',
-'dirs_probleme_droits' => '<b>Problema de derechos de acceso</b>',
+'dirs_probleme_droits' => 'Problema de derechos de acceso',
 'dirs_repertoires_absents' => '<B>No se pudieron encontrar las carpetas siguientes: <ul>@bad_dirs@.</ul> </b>
 <P>Es probable que se deba a un problema de escritura entre may&uacute;sculas y min&uacute;sculas.
   Verifica que las may&uacute;sculas y min&uacute;sculas de los nombres de estas carpetas corresponden a lo se visualiza a continuaci&oacute;n; si no es el caso, cambia el nombre de las carpetas con tu software de FTP, de modo que se corrijan los errores.
@@ -203,9 +203,9 @@ de las carpetas mencionadas. El procedimiento se explica detalladamente en la gu
 'form_forum_pass' => 'contrase&ntilde;a:',
 'form_forum_probleme_mail' => 'Problema con el correo electr&oacute;nico: no se puede enviar el identificador.',
 'form_forum_voici1' => 'He aqu&iacute; tus identificadores para poder participar
-en los foros del sitio "@nom_site_spip@" (@adresse_site@/):',
+en los foros del sitio "@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'He aqu&iacute; tus identificadores para proponer art&iacute;culos
-en el sitio "@nom_site_spip@" (@adresse_site@/ecrire/):',
+en el sitio "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indica tu direcci&oacute;n de correo electr&oacute;nico.',
 'form_indiquer_nom' => 'Indica tu nombre.',
 'form_indiquer_nom_site' => 'Indica el nombre de tu sitio Web.',
@@ -381,7 +381,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_copyright_gpl' => 'bajo licencia GPL',
 'info_cours_edition' => 'Tus art&iacute;culos en curso de redacci&oacute;n',
 'info_creer_repertoire' => 'Debes crear un archivo o una carpeta llamada',
-'info_creer_repertoire_2' => 'en el directorio <b>ecrire/data/</b>, y luego',
+'info_creer_repertoire_2' => 'en el directorio <b>@repertoire@</b>, y luego',
 'info_creer_vignette' => 'creaci&oacute;n autom&aacute;tica de la miniatura',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descripcci&oacute;n(es):',
@@ -399,9 +399,9 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_erreur_requete' => 'Error en la petici&oacute;n:',
 'info_erreur_squelette2' => 'No hay ning&uacute;n esqueleto <b>@fichier@</b>  disponible...',
 'info_erreur_systeme' => 'Error sistema (errno @errsys@)',
-'info_erreur_systeme2' => '<b>El disco duro puede estar lleno o la base de datos da&ntilde;ada. <br>
- <font color=\'red\'>Prueba <a href=\'ecrire/admin_repair.php3\'>reparar la base</a>,
- o contacta tu hospedaje.</font><br></b>',
+'info_erreur_systeme2' => 'El disco duro puede estar lleno o la base de datos da&ntilde;ada. <br>
+ <font color=\'red\'>Prueba <a href=\'@script@\'>reparar la base</a>,
+ o contacta tu hospedaje.</font>',
 'info_fini' => 'Terminado!',
 'info_format_image' => 'Formatos de imagen utilizables para los iconos  @gd_formats@.',
 'info_format_non_defini' => 'formato no definido',
@@ -412,10 +412,10 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_inclusion_directe' => 'Inclusi&oacute;n directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute;n del icono',
 'info_installation_systeme_publication' => 'Instalaci&oacute;n del sistema de publicaci&oacute;n...',
-'info_installer_documents' => 'Puedes instalar autom&aacute;ticamente todos los documentos contenidos en el directorio <i>upload</i>.',
-'info_installer_ftp' => 'Con derechos de administraci&oacute;n, puedes instalar archivos (v&iacute;a FTP) en la carpeta ecrire/upload para luego poder seleccionarlos directamente aqu&iacute;.',
+'info_installer_documents' => 'Puedes instalar autom&aacute;ticamente todos los documentos contenidos en el directorio @upload@.',
+'info_installer_ftp' => 'Con derechos de administraci&oacute;n, puedes instalar archivos (v&iacute;a FTP) en la carpeta @upload@ para luego poder seleccionarlos directamente aqu&iacute;.',
 'info_installer_images' => 'Puedes instalar im&aacute;genes de formato JPEG, GIF y PNG.',
-'info_installer_images_dossier' => 'Instalar  im&aacute;genes en la carpeta ecrire/upload para luego poder seleccionarlas directamente aqu&iacute;.',
+'info_installer_images_dossier' => 'Instalar  im&aacute;genes en la carpeta @upload@ para luego poder seleccionarlas directamente aqu&iacute;.',
 'info_installer_tous_documents' => 'Instalar todos los documentos',
 'info_interface_complete' => 'Interfaz completa',
 'info_interface_simple' => 'Interfaz simple',
@@ -477,7 +477,7 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'info_retirer_mot' => 'Retirar la palabra',
 'info_retirer_mots' => 'Retirar todas las palabras',
 'info_sans_titre_2' => 'sin t&iacute;tulo',
-'info_selectionner_fichier' => 'Puedes seleccionar un documento del directorio <i>upload</i>',
+'info_selectionner_fichier' => 'Puedes seleccionar un documento del directorio @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un documento...',
 'info_site_attente' => 'Sitio Web en espera de validaci&oacute;n',
 'info_site_reference' => 'Sitio referenciado en l&iacute;nea',
@@ -606,7 +606,7 @@ Para recuperar tu acceso al sitio
 
 Ir a la siguiente direcci&oacute;n:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Entonces podr&aacute;s poner una nueva contrase&ntilde;a y volver a conectarte al sitio.
 ',
@@ -648,9 +648,9 @@ Debes intentar',
 'texte_inc_auth_2' => 'reconectarte',
 'texte_inc_auth_3' => ', eventualmente despu&eacute;s de cerrar y reiniciar tu navegador.',
 'texte_inc_config' => 'Las modificaciones efectuadas en estas p&aacute;ginas influyen notablemente en el funcionamiento de tu sitio. Te recomendamos no intervenir mientras no est&eacute;s familiarizado con el funcionamiento del sistema SPIP. <P align="justify"><B> De un modo general, se recomienda vivamente dejar la gesti&oacute;n de estas p&aacute;ginas al o a la webmestre principal de tu sitio. </b>',
-'texte_inc_meta_1' => 'El sistema encontr&oacute; un error de escritura del archivo <code>ecrire/data/meta_cache.php3</code>.Como administradorA del sitio, procede',
+'texte_inc_meta_1' => 'El sistema encontr&oacute; un error de escritura del archivo <code>@fichier@</code>.Como administradorA del sitio, procede',
 'texte_inc_meta_2' => 'a verificar los derechos de escritura',
-'texte_inc_meta_3' => 'del directorio <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'del directorio <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'En curso de redacci&oacute;n',
 'texte_statut_poubelle' => 'A la papelera',
 'texte_statut_propose_evaluation' => 'propuesto a la evaluaci&oacute;n',

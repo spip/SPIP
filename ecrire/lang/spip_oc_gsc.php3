@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'ent&agrave; comen&ccedil;ar vertad&egrave;rament l\'installacion',
 'dirs_preliminaire' => 'Preliminar: <B>Reglar los drets d\'acc&egrave;s</b>',
-'dirs_probleme_droits' => '<b>Probl&egrave;ma de drets d\'acc&egrave;s</b>',
+'dirs_probleme_droits' => 'Probl&egrave;ma de drets d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<B>Non s\'ei pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
   <P>Que\'s p&ograve;t que venga d\'un probl&egrave;ma de majusculas o minusculas mau hicadas.
   Verificatz que las minusculas e majusculas d\'aqueths repert&ograve;ris e corresp&oacute;nian plan dab &ccedil;&ograve; d\'afichat
@@ -204,9 +204,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'mot de santa Clara:',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail: ne\'s p&ograve;t pas mandar l\'identificant.',
 'form_forum_voici1' => 'Ti&egrave;tz los v&ograve;stes identificants ent&agrave; poder participar aus forums
-deu sit "@nom_site_spip@" (@adresse_site@/):',
+deu sit "@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Ti&egrave;tz los v&ograve;stes identificants ent&agrave; perpausar articles 
- suu sit "@nom_site_spip@" (@adresse_site@/ecrire/):',
+ suu sit "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Volhatz indicar la v&ograve;sta adrei&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Volhatz indicar lo v&ograve;ste nom.',
 'form_indiquer_nom_site' => 'Volhatz indicar lo nom deu v&ograve;ste sit.',
@@ -383,7 +383,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_copyright_gpl' => 'devath lic&eacute;ncia GPL',
 'info_cours_edition' => 'Los v&ograve;stes articles en cors de redaccion',
 'info_creer_repertoire' => 'Volhatz crear un fichi&egrave;r o un repert&ograve;ri nomentat',
-'info_creer_repertoire_2' => 'laguens lo sosrepert&ograve;ri   <b>ecrire/data/</b>, puish:',
+'info_creer_repertoire_2' => 'laguens lo sosrepert&ograve;ri   <b>@repertoire@</b>, puish:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descriptiu(s):',
@@ -401,9 +401,9 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_erreur_requete' => 'Error dens la requ&egrave;sta',
 'info_erreur_squelette2' => 'Nada esqueleta <b>@fichier@</b> n\'ei pas disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Lo disc dur qu\'ei dilh&egrave;u plen, o la basa de dadas gastada. <br>
- <font color=\'red\'>Ensajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
- o contactatz lo v&ograve;ste aubergader.</font><br></b>',
+'info_erreur_systeme2' => 'Lo disc dur qu\'ei dilh&egrave;u plen, o la basa de dadas gastada. <br>
+ <font color=\'red\'>Ensajatz de <a href=\'@script@\'>reparar la basa</a>,
+ o contactatz lo v&ograve;ste aubergader.</font>',
 'info_fini' => 'Qu\'ei acabat!',
 'info_format_image' => 'Formats d\'imatges qui\'s p&ograve;den utilizar t&agrave; crear vinhetas: @gd_formats@.',
 'info_format_non_defini' => 'format non definit',
@@ -414,10 +414,10 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion deu sist&egrave;ma de publicacion...',
-'info_installer_documents' => 'Que podetz installar automaticament tots los documents contenguts dens lo repert&ograve;ri <i>upload</i>.',
-'info_installer_ftp' => 'Com administrator, que podetz installar (per FTP) fichi&egrave;rs dens lo dorsi&egrave;r ecrire/upload, puish seleccion&agrave;\'us dir&egrave;ctament ac&iacute;.',
+'info_installer_documents' => 'Que podetz installar automaticament tots los documents contenguts dens lo repert&ograve;ri @upload@.',
+'info_installer_ftp' => 'Com administrator, que podetz installar (per FTP) fichi&egrave;rs dens lo dorsi&egrave;r @upload@, puish seleccion&agrave;\'us dir&egrave;ctament ac&iacute;.',
 'info_installer_images' => 'Que podetz installar imatges aus formats JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installar imatges dens lo dorsi&egrave;r /ecrire/upload ent&agrave;\'us poder seleccionar ac&iacute;.',
+'info_installer_images_dossier' => 'Installar imatges dens lo dorsi&egrave;r @upload@ ent&agrave;\'us poder seleccionar ac&iacute;.',
 'info_installer_tous_documents' => 'Installar tots los documents ',
 'info_interface_complete' => 'Interf&agrave;cia completa',
 'info_interface_simple' => 'Interf&agrave;cia simplificada',
@@ -479,7 +479,7 @@ Merc&eacute;s ent&agrave; la v&ograve;sta participacion
 'info_retirer_mot' => 'Quitar aqueth mot',
 'info_retirer_mots' => 'Quitar tots los mots ',
 'info_sans_titre_2' => 'shens t&iacute;tol',
-'info_selectionner_fichier' => 'Que podetz seleccionar un fichi&egrave;r deu dorsi&egrave;r <i>upload</i>',
+'info_selectionner_fichier' => 'Que podetz seleccionar un fichi&egrave;r deu dorsi&egrave;r @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichi&egrave;r:',
 'info_site_attente' => 'Sit web en esp&egrave;ra de validacion',
 'info_site_reference' => 'Sit referenciat en linha',
@@ -621,7 +621,7 @@ T&agrave; tornar trobar lo v&ograve;ste acc&egrave;s au sit
 
 Volhatz anar a l\'adrei&ccedil;a seguenta:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Alavetz que poiratz entrar un mot de santa Clara nav&egrave;th
 e tornar connect&agrave;\'vs au sit.
@@ -675,9 +675,9 @@ e tornar connect&agrave;\'vs au sit.
  acostumat/ada au foncionament deu sist&egrave;ma SPIP. <P align="justify"><B>
  En generau, que\'s conselha h&ograve;rt
  de deishar la carga d\'aquestas paginas au webm&egrave;stre principau deu v&ograve;ste sit.</b>',
-'texte_inc_meta_1' => 'Lo sist&egrave;ma qu\'a rescontrat ua error dens l\'escritura deu fichi&egrave;r <code>ecrire/data/meta_cache.php3</code>.Volhatz, com administrator/tritz deu sit,',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma qu\'a rescontrat ua error dens l\'escritura deu fichi&egrave;r <code>@fichier@</code>.Volhatz, com administrator/tritz deu sit,',
 'texte_inc_meta_2' => 'verificar los drets d\'escritura',
-'texte_inc_meta_3' => 'dens lo repert&ograve;ri <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'dens lo repert&ograve;ri <code>@repertoire@</code>.',
 'texte_plan_trad_note' => '',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'a la caisha de las d&egrave;ishas',

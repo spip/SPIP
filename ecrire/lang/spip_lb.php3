@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'Wochen',
 'dirs_commencer' => ' fir d\'Installatioun richteg unzef&auml;nken',
 'dirs_preliminaire' => 'Fir d\'&eacute;ischt: <b>R&eacute;gl&eacute;iert d\'Zougangs-Rechter</b>',
-'dirs_probleme_droits' => '<b>Problem mat den Zougangs-Rechter</b>',
+'dirs_probleme_droits' => 'Problem mat den Zougangs-Rechter',
 'dirs_repertoires_absents' => '<b>D&euml;s Dossier\'en konnten n&euml;t fonnt ginn: <ul>@bad_dirs@.</ul> </b>
 <p />&Euml;t ass m&eacute;iglech dass dat e Problem vu Grouss- oder Kleng-Schreiwen ass.
 Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat deem wat hei ugewisen g&euml;t iwwerteneenst&euml;mmen; wann dat n&euml;t de Fall ass, &auml;nnert de Numm vun den Dossier\'en mat &auml;rer FTP-Sofware fir de Fehler ze verbesseren.
@@ -197,8 +197,8 @@ Kontroll&eacute;iert op d&eacute;i grouss an d&eacute;i kleng Buchstawen mat dee
 'form_forum_message_auto' => '(d&euml;st ass eng automat&euml;sch &Auml;ntwert)',
 'form_forum_pass' => 'Passwuert:',
 'form_forum_probleme_mail' => 'Problem mam Email: de Login ka n&euml;t gesch&eacute;ckt ginn.',
-'form_forum_voici1' => 'Hei sinn &auml;r Identifikatiounen fir beim Liewen vum Site "@nom_site_spip@" (@adresse_site@/) matzemaachen:',
-'form_forum_voici2' => 'Hei sinn &auml;re Identifikatiounen fir Artikelen um Site "@nom_site_spip@" (@adresse_site@/ecrire/) ze propos&eacute;ieren:',
+'form_forum_voici1' => 'Hei sinn &auml;r Identifikatiounen fir beim Liewen vum Site "@nom_site_spip@" (@adresse_site@) matzemaachen:',
+'form_forum_voici2' => 'Hei sinn &auml;re Identifikatiounen fir Artikelen um Site "@nom_site_spip@" (@adresse_login@) ze propos&eacute;ieren:',
 'form_indiquer_email' => 'Gidd weg &auml;r Email-Adress un.',
 'form_indiquer_nom' => 'Gidd weg &auml;re Numm un.',
 'form_indiquer_nom_site' => 'Gidd weg de Numm vun &auml;rem Site un.',
@@ -389,8 +389,8 @@ Merci fir &auml;r Participatioun
 'info_erreur_requete' => 'Fehler am Query:',
 'info_erreur_squelette2' => '&Euml;t g&euml;t kee Skelett <b>@fichier@</b> ...',
 'info_erreur_systeme' => 'System-Fehler (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Den Harddisk ass vill&auml;icht voll oder d\'Datebank futti.<br>
-<font color=\'red\'>Versicht <a href=\'ecrire/admin_repair.php3\'>d\'Datebank ze fl&eacute;cken</a>, oder kontakt&eacute;iert &auml;re Provider.</font><br></b>',
+'info_erreur_systeme2' => 'Den Harddisk ass vill&auml;icht voll oder d\'Datebank futti.<br>
+<font color=\'red\'>Versicht <a href=\'@script@\'>d\'Datebank ze fl&eacute;cken</a>, oder kontakt&eacute;iert &auml;re Provider.</font>',
 'info_fini' => '&Euml;t ass f&auml;rdeg!',
 'info_format_image' => 'Bild-Formater d&eacute;i k&euml;nnen benotzt ginn fir Vignetten ze maachen: @gd_formats@.',
 'info_format_non_defini' => 'Format n&euml;t defin&eacute;iert',
@@ -401,10 +401,10 @@ Merci fir &auml;r Participatioun
 'info_inclusion_directe' => 'Direkt Abannung:',
 'info_inclusion_vignette' => 'Ubannen vun der Vignette:',
 'info_installation_systeme_publication' => 'Installatioun vum System...',
-'info_installer_documents' => 'Dir k&euml;nnt automat&euml;sch all d\'Dokumenter aus dem Dossier <i>upload</i> lueden.',
-'info_installer_ftp' => 'Als Administrateur k&euml;nnt dir Fichier\'en per FTP an den Dossier /ecrire/upload eroplueden an se dann hei auswielen.',
+'info_installer_documents' => 'Dir k&euml;nnt automat&euml;sch all d\'Dokumenter aus dem Dossier @upload@ lueden.',
+'info_installer_ftp' => 'Als Administrateur k&euml;nnt dir Fichier\'en per FTP an den Dossier /@upload@ eroplueden an se dann hei auswielen.',
 'info_installer_images' => 'Dir k&euml;nnt Biller am Format JPEG, GIF oder PNG eroplueden.',
-'info_installer_images_dossier' => 'Biller an den Dossier /ecrire/upload eroplueden fir se hei k&euml;nnen auszewielen.',
+'info_installer_images_dossier' => 'Biller an den Dossier @upload@ eroplueden fir se hei k&euml;nnen auszewielen.',
 'info_installer_tous_documents' => 'All d\'Dokumenter eroplueden',
 'info_interface_complete' => 'Kompletten Interface',
 'info_interface_simple' => 'Einfachen Interface',
@@ -466,7 +466,7 @@ Merci fir &auml;r Participatioun
 'info_retirer_mot' => 'D&euml;st Wuert l&auml;schen',
 'info_retirer_mots' => 'D\'Wieder all l&auml;schen',
 'info_sans_titre_2' => 'ouni Titel',
-'info_selectionner_fichier' => 'Dir k&euml;nnt e Fichier aus dem Dossier <i>upload</i> wielen',
+'info_selectionner_fichier' => 'Dir k&euml;nnt e Fichier aus dem Dossier @upload@ wielen',
 'info_selectionner_fichier_2' => 'Wielt e Fichier:',
 'info_site_attente' => 'Site waard op d\'Validatioun',
 'info_site_reference' => 'Referenz&eacute;ierten Site, publiz&eacute;iert',
@@ -594,7 +594,7 @@ Fir &auml;ren Zougang zum Site
 @nom_site_spip@ (@adresse_site@)
 er&euml;m ze kr&eacute;ien, gidd op d&euml;s Adress:
 
-@adresse_site@/spip_pass.php3?p=@cookie@
+@sendcookie@
 
 Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 
@@ -637,9 +637,9 @@ Versicht',
 'texte_inc_auth_2' => 'Iech unzemelden',
 'texte_inc_auth_3' => ', eventuell nodeem der &auml;re Browser nei gestart hutt.',
 'texte_inc_config' => 'D\'&Auml;nnerungen op d&euml;se S&auml;iten beaflossen de Fonktionnement vun &auml;rem Site staark. Maacht n&auml;ischt ier d&euml;r de SPIP-System richteg kennt.<P align="justify"><B>Generell ass ungeroden, d&euml;s S&auml;iten dem Webmaster vun &auml;rem Site ze iwwerloossen.</B>',
-'texte_inc_meta_1' => 'De System huet e Fehler fonnt beim Schreiwen vum Fichier <code>ecrire/data/meta_cache.php3</code>. Als Administrateur vum Site,',
+'texte_inc_meta_1' => 'De System huet e Fehler fonnt beim Schreiwen vum Fichier <code>@fichier@</code>. Als Administrateur vum Site,',
 'texte_inc_meta_2' => 'kontroll&eacute;iert d\'Schreiw-Rechter',
-'texte_inc_meta_3' => 'am Dossier <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'am Dossier <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'an der Aarbecht',
 'texte_statut_poubelle' => 'an der Drecksk&euml;scht',
 'texte_statut_propose_evaluation' => 'propos&eacute;iert',

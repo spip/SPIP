@@ -170,7 +170,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'settimane',
 'dirs_commencer' => ' per iniziare realmente l\'installazione',
 'dirs_preliminaire' => 'Prima di iniziare: <B>impostare i diritti di accesso</b>',
-'dirs_probleme_droits' => '<b>Problema nei diritti di accesso</b>',
+'dirs_probleme_droits' => 'Problema nei diritti di accesso',
 'dirs_repertoires_absents' => '<B>Le seguenti cartelle non sono state trovate: <ul>@bad_dirs@.</ul> </B>
   <p />Probabilmente ci&ograve; &egrave; dovuto a un\'errata formattazione delle lettere maiuscole o minuscole.
   Verificare che le maiuscole e le minuscole delle cartelle coincidano con quelle visualizzate
@@ -204,9 +204,9 @@ di ciascuna di queste cartelle. La procedura &egrave; spiegata in dettaglio nell
 'form_forum_pass' => 'password:',
 'form_forum_probleme_mail' => 'Problema di posta: l\'ID non pu&ograve; essere inviato.',
 'form_forum_voici1' => 'Ecco i dati per poter partecipare ai forum
- del sito"@nom_site_spip@" (@adresse_site@/):',
+ del sito"@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Ecco i dati per poter proporre degli articoli sul sito
-"@nom_site_spip@" (@adresse_site@/ecrire/):',
+"@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indica il tuo indirizzo email.',
 'form_indiquer_nom' => 'Indica il tuo nome.',
 'form_indiquer_nom_site' => 'Indica il nome del tuo sito.',
@@ -377,7 +377,7 @@ che ti &egrave; stato fornito.  Se non sei registrato, devi',
 'info_copyright_gpl' => 'sotto licenza GPL',
 'info_cours_edition' => 'Articoli in fase di redazione',
 'info_creer_repertoire' => 'Creare un file o una cartella chiamata:',
-'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>ecrire/data/</b>, poi:',
+'info_creer_repertoire_2' => 'all\'interno della sottocartella <b>@repertoire@</b>, poi:',
 'info_creer_vignette' => 'creazione automatica dell\'anteprima',
 'info_deplier' => 'Espandi',
 'info_descriptif_nombre' => 'descrizione(i):',
@@ -396,9 +396,9 @@ privati tra i membri del sito. Puoi attivare o disattivare questa funzionalit&ag
 'info_erreur_requete' => 'Errore nella richiesta: ',
 'info_erreur_squelette2' => 'Nessun modello di layout <b>@fichier@</b> trovato...',
 'info_erreur_systeme' => 'Errore di sistema (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Il disco rigido potrebbe essere pieno o la base dati danneggiata. <br>
- <font color=\'red\'>Tenta di <a href=\'ecrire/admin_repair.php3\'>ripristinare la base dati</a>,
-o contatta il tuo hoster.</font><br></b>',
+'info_erreur_systeme2' => 'Il disco rigido potrebbe essere pieno o la base dati danneggiata. <br>
+ <font color=\'red\'>Tenta di <a href=\'@script@\'>ripristinare la base dati</a>,
+o contatta il tuo hoster.</font>',
 'info_fini' => 'Finito!',
 'info_format_image' => 'Formati di file immagine utilizzabili per la creazione delle etichette: @gd_formats@.',
 'info_format_non_defini' => 'formato non definito',
@@ -409,10 +409,10 @@ o contatta il tuo hoster.</font><br></b>',
 'info_inclusion_directe' => 'Inclusione diretta:',
 'info_inclusion_vignette' => 'Inclusione dell\'immagine:',
 'info_installation_systeme_publication' => 'Installazione del sistema di pubblicazione...',
-'info_installer_documents' => '&Egrave; possibile installare automaticamente tutti i documenti contenuti nella cartella <i>upload</i>.',
-'info_installer_ftp' => 'In qualit&agrave; di amministratore, puoi installare file (via FTP) nella cartella ecrire/upload per poi selezionarli direttamente.',
+'info_installer_documents' => '&Egrave; possibile installare automaticamente tutti i documenti contenuti nella cartella @upload@.',
+'info_installer_ftp' => 'In qualit&agrave; di amministratore, puoi installare file (via FTP) nella cartella @upload@ per poi selezionarli direttamente.',
 'info_installer_images' => '&Egrave; possibile installare delle immagini in formato JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installare delle immagini nella cartella /ecrire/upload per poterle selezionare direttamente.',
+'info_installer_images_dossier' => 'Installare delle immagini nella cartella @upload@ per poterle selezionare direttamente.',
 'info_installer_tous_documents' => 'Installare tutti i documenti',
 'info_interface_complete' => 'Interfaccia completa',
 'info_interface_simple' => 'Interfaccia semplificata',
@@ -476,7 +476,7 @@ o contatta il tuo hoster.</font><br></b>',
 'info_retirer_mot' => 'Rimuovere questa parola',
 'info_retirer_mots' => 'Rimuovere tutte le parole',
 'info_sans_titre_2' => 'senza titolo',
-'info_selectionner_fichier' => 'Puoi selezionare un file della cartella <i>upload</i>',
+'info_selectionner_fichier' => 'Puoi selezionare un file della cartella @upload@',
 'info_selectionner_fichier_2' => 'Seleziona un file:',
 'info_site_attente' => 'Sito Web in attesa di convalida',
 'info_site_reference' => 'Sito repertoriato in linea',
@@ -611,7 +611,7 @@ Per recuperare i dati di accesso al sito
 @nom_site_spip@ (@adresse_site@)
 
 Clicca su questo link:
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Potrai quindi inserire una nuova password e riconnetterti all\'area riservata.',
 'pass_mot_oublie' => 'Password dimenticata',
@@ -660,9 +660,9 @@ Prova a ',
 riavviato il tuo browser.',
 'texte_inc_config' => 'Le modifiche effettuate in queste pagine influenzano notevolmente il
 funzionamento del sito. Non intervenire finch&eacute; non conosci bene i meccanismi del sistema SPIP. <P align="justify"><B>In generale, si consiglia di lasciare sempre al webmaster la configurazione delle opzioni qui presenti.</B>',
-'texte_inc_meta_1' => 'La scrittura del file <code>ecrire/data/meta_cache.php3</code> ha causato un errore di sistema. L\'amministratore del sito, ',
+'texte_inc_meta_1' => 'La scrittura del file <code>@fichier@</code> ha causato un errore di sistema. L\'amministratore del sito, ',
 'texte_inc_meta_2' => 'verifichi i diritti di scrittura',
-'texte_inc_meta_3' => 'nella cartella <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'nella cartella <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'in corso di redazione',
 'texte_statut_poubelle' => 'nel cestino',
 'texte_statut_propose_evaluation' => 'proposto per una valutazione',

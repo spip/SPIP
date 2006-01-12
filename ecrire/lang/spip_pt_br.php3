@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semanas',
 'dirs_commencer' => 'Para come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar: <b>Configurar os direitos de acesso</b>',
-'dirs_probleme_droits' => '<b>Problema com os direitos de acesso</b>',
+'dirs_probleme_droits' => 'Problema com os direitos de acesso',
 'dirs_repertoires_absents' => '<b>Os diret&oacute;rios a seguir n&atilde;o foram encontrados: <ul>@bad_dirs@.</ul> </b>
   <p />&Eacute; prov&aacute;vel que isto se deva a um problema de letras em mai&uacute;sculas e min&uacute;sculas.
 Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios coincidam exatamente com o que est&aacute; sendo exibido abaixo; se este n&atilde;o for o caso, renomeie os diret&oacute;rios com o seu programa de FTP de modo a corrigir o erro.
@@ -197,8 +197,8 @@ Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios
 'form_forum_message_auto' => '(esta &eacute; uma mensagem autom&aacute;tica)',
 'form_forum_pass' => 'senha:',
 'form_forum_probleme_mail' => 'Problema de e-mail: o identificador n&atilde;o p&ocirc;de ser enviado.',
-'form_forum_voici1' => 'Estes s&atilde;o os seus identificadores para que voc&ecirc; possa participar da vida do site "@nom_site_spip@" (@adresse_site@/):',
-'form_forum_voici2' => 'Estes s&atilde;o os seus identificadores para que voc&ecirc; possa propor mat&eacute;rias ao site "@nom_site_spip@" (@adresse_site@/ecrire/):',
+'form_forum_voici1' => 'Estes s&atilde;o os seus identificadores para que voc&ecirc; possa participar da vida do site "@nom_site_spip@" (@adresse_site@):',
+'form_forum_voici2' => 'Estes s&atilde;o os seus identificadores para que voc&ecirc; possa propor mat&eacute;rias ao site "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Por favor, informe o seu endere&ccedil;o de e-mail.',
 'form_indiquer_nom' => 'Por favor, informe o seu nome.',
 'form_indiquer_nom_site' => 'Por favor, informe o nome do seu site.',
@@ -374,7 +374,7 @@ Obrigado por participar.
 'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
 'info_cours_edition' => 'Suas mat&eacute;rias em fase de reda&ccedil;&atilde;o',
 'info_creer_repertoire' => 'Por favor, crie um arquivo ou diret&oacute;rio com o nome:',
-'info_creer_repertoire_2' => 'dentro do subdiret&oacute;rio <b>ecrire/data/</b>, e depois:',
+'info_creer_repertoire_2' => 'dentro do subdiret&oacute;rio <b>@repertoire@</b>, e depois:',
 'info_creer_vignette' => 'cria&ccedil;&atilde;o autom&aacute;tica do &iacute;cone',
 'info_deplier' => 'Expandir',
 'info_descriptif_nombre' => 'descri&ccedil;&atilde;o(&otilde;es):',
@@ -393,8 +393,8 @@ Obrigado por participar.
 'info_erreur_squelette2' => 'Nenhum gabarito <b>@fichier@</b> est&aacute; dispon&iacute;vel...',
 'info_erreur_systeme' => 'Erro do sistema (errno @errsys@)',
 'info_erreur_systeme2' => '&Eacute; poss&iacute;vel que n&atilde;o haja espa&ccedil;o livre em disco, ou que a base de dados esteja corrompida.<br>
- <font color=\'red\'>Tente <a href=\'ecrire/admin_repair.php3\'>reparar a base</a>,
- ou contate o servi&ccedil;o de hospedagem.</font><br></b>',
+ <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
+ ou contate o servi&ccedil;o de hospedagem.</font>',
 'info_fini' => 'Terminou!',
 'info_format_image' => 'Formatos das imagens que podem ser utilizados para criar os &iacute;cones @gd_formats@.',
 'info_format_non_defini' => 'formato n&atilde;o definido',
@@ -405,10 +405,10 @@ Obrigado por participar.
 'info_inclusion_directe' => 'Inclus&atilde;o direta:',
 'info_inclusion_vignette' => 'Inclus&atilde;o do &iacute;cone:',
 'info_installation_systeme_publication' => 'Instala&ccedil;&atilde;o do sistema de publica&ccedil;&atilde;o...',
-'info_installer_documents' => 'Voc&ecirc; pode instalar automaticamente todos os documentos cont&iacute;dos no diret&oacute;rio <i>upload</i>.',
-'info_installer_ftp' => 'Como administrador, voc&ecirc; pode transferir (por FTP) arquivos para o diret&oacute;rio ecrire/upload para depois selecion&aacute;-los aqui diretamente.',
+'info_installer_documents' => 'Voc&ecirc; pode instalar automaticamente todos os documentos cont&iacute;dos no diret&oacute;rio @upload@.',
+'info_installer_ftp' => 'Como administrador, voc&ecirc; pode transferir (por FTP) arquivos para o diret&oacute;rio @upload@ para depois selecion&aacute;-los aqui diretamente.',
 'info_installer_images' => 'Voc&ecirc; pode transferir imagens nos formatos JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Transferir as imagens para o diret&oacute;rio /ecrire/upload para poder selecion&aacute;-las aqui.',
+'info_installer_images_dossier' => 'Transferir as imagens para o diret&oacute;rio @upload@ para poder selecion&aacute;-las aqui.',
 'info_installer_tous_documents' => 'Instalar todos os documentos',
 'info_interface_complete' => 'interface completa',
 'info_interface_simple' => 'Interface simplificada',
@@ -470,7 +470,7 @@ Obrigado por participar.
 'info_retirer_mot' => 'Retirar esta palavra-chave',
 'info_retirer_mots' => 'Retirar todas as palavras-chave',
 'info_sans_titre_2' => 'sem t&iacute;tulo',
-'info_selectionner_fichier' => 'Voc&ecirc; pode escolher um arquivo do diret&oacute;rio <i>upload</i>',
+'info_selectionner_fichier' => 'Voc&ecirc; pode escolher um arquivo do diret&oacute;rio @upload@',
 'info_selectionner_fichier_2' => 'Selecionar um arquivo:',
 'info_site_attente' => 'Website aguardando valida&ccedil;&atilde;o',
 'info_site_reference' => 'Site referenciado online',
@@ -599,7 +599,7 @@ Para recuperar o seu acesso ao site
 
 clique por favor no endere&ccedil;o a seguir:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Voc&Ecirc; poder&aacute; ent&atilde;o cadastrar uma nova senha
 e reconectar-se com o site.
@@ -644,9 +644,9 @@ Tente se',
 'texte_inc_auth_2' => 'reconectar',
 'texte_inc_auth_3' => ', ap&oacute;s ter eventualmente sa&iacute;do e reiniciado o seu navegador.',
 'texte_inc_config' => 'As modifica&ccedil;&otilde;es efetuadoas nestas p&aacute;ginas influem consideravelmente no funcionamento do seu site. &Eacute; recomend&aacute;vel n&atilde;o intervir enquanto voc&ecirc; n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP.<p align="justify"><b>Geralmente, &eacute; fortemente aconselh&aacute;vel deixar a carga destas p&aacute;ginas para o webmaster principal do seu site.</b>',
-'texte_inc_meta_1' => 'O sistema encontrou um erro durante a escrita do arquivo <code>ecrire/data/meta_cache.php3</code>. Como administrador do site, queira por favor,',
+'texte_inc_meta_1' => 'O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',
 'texte_inc_meta_2' => 'Verificar os direitos de escrita',
-'texte_inc_meta_3' => 'no diret&oacute;rio <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'no diret&oacute;rio <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'em fase de reda&ccedil;&atilde;o',
 'texte_statut_poubelle' => 'na lixeira',
 'texte_statut_propose_evaluation' => 'proposto para avalia&ccedil;&atilde;o',

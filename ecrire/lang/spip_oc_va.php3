@@ -171,7 +171,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'setmana(s)',
 'dirs_commencer' => 'per comen&ccedil;ar verament l\'installacion',
 'dirs_preliminaire' => 'Preliminar: <B>Reglar los dreches d\'acc&egrave;s</b>',
-'dirs_probleme_droits' => '<b>Probl&egrave;ma de dreches d\'acc&egrave;s</b>',
+'dirs_probleme_droits' => 'Probl&egrave;ma de dreches d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<b>S\'es pas trobat los repert&ograve;ris seguents: <ul>@bad_dirs@.</ul> </b>
   <p/>Se p&ograve;t que vena d\'un probl&egrave;ma de majusculas o minusculas mau mesas.
   Verificatz que las minusculas e majusculas d\'aqueles repert&ograve;ris correspondan ben amb &ccedil;&ograve; afichat
@@ -205,9 +205,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'mot de santa Clara:',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail: se p&ograve;t pas mandar l\'identificant.',
 'form_forum_voici1' => 'Vaic&iacute; v&ograve;stres identificants per poer participar als forums
-dau sit "@nom_site_spip@" (@adresse_site@/):',
+dau sit "@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Vaic&iacute; v&ograve;stres identificants per prepausar d\'articles 
- sobre lo sit "@nom_site_spip@" (@adresse_site@/ecrire/):',
+ sobre lo sit "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Vougatz indicar v&ograve;stra adrei&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Vougatz indicar v&ograve;stre nom.',
 'form_indiquer_nom_site' => 'Vougatz indicar lo nom de v&ograve;stre sit.',
@@ -388,7 +388,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_copyright_gpl' => 'sos lic&eacute;ncia GPL',
 'info_cours_edition' => 'V&ograve;stres articles en cors de redaccion',
 'info_creer_repertoire' => 'Vougatz crear un fichier o un repert&ograve;ri nommat',
-'info_creer_repertoire_2' => 'Dedins lo sosrepert&ograve;ri   <b>ecrire/data/</b>, puei:',
+'info_creer_repertoire_2' => 'Dedins lo sosrepert&ograve;ri   <b>@repertoire@</b>, puei:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_dans_espace_prive' => '[dins l\'espaci privat]',
 'info_deplier' => 'Desplejar',
@@ -409,9 +409,9 @@ Merc&eacute; per v&ograve;stra participacion
 'info_erreur_requete' => 'Error dins la requ&egrave;sta',
 'info_erreur_squelette2' => 'Ges d\'esqueleta <b>@fichier@</b> es disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Lo disc dur es benl&egrave;u plen, o la basa de donaas degalhaa. <br>
- <font color=\'red\'>Assajatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
- o contactatz v&ograve;stre auberjaor.</font><br></b>',
+'info_erreur_systeme2' => 'Lo disc dur es benl&egrave;u plen, o la basa de donaas degalhaa. <br>
+ <font color=\'red\'>Assajatz de <a href=\'@script@\'>reparar la basa</a>,
+ o contactatz v&ograve;stre auberjaor.</font>',
 'info_fini' => 'Aqu&ograve;\'s achabat!',
 'info_format_image' => 'Formats d\'imatges que se p&ograve;on utilizar per crear de vinhetas: @gd_formats@.',
 'info_format_non_defini' => 'format non definit',
@@ -422,10 +422,10 @@ Merc&eacute; per v&ograve;stra participacion
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sist&egrave;ma de publicacion...',
-'info_installer_documents' => 'Po&egrave;tz installar automaticament tots los documents contenguts dins lo repert&ograve;ri <i>upload</i>.',
-'info_installer_ftp' => 'Coma administrator, po&egrave;tz installar (per FTP) de fichiers dins lo dorsier ecrire/upload,  puei los  seleccionar directament aic&iacute;.',
+'info_installer_documents' => 'Po&egrave;tz installar automaticament tots los documents contenguts dins lo repert&ograve;ri @upload@.',
+'info_installer_ftp' => 'Coma administrator, po&egrave;tz installar (per FTP) de fichiers dins lo dorsier @upload@,  puei los  seleccionar directament aic&iacute;.',
 'info_installer_images' => 'Po&egrave;tz installar d\'imatges als formats JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsier /ecrire/upload per los poer seleccionar aic&iacute;.',
+'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsier @upload@ per los poer seleccionar aic&iacute;.',
 'info_installer_tous_documents' => 'Installar tots los documents ',
 'info_interface_complete' => 'Interf&agrave;cia completa',
 'info_interface_simple' => 'Interf&agrave;cia simplificaa',
@@ -494,7 +494,7 @@ Merc&eacute; per v&ograve;stra participacion
 'info_retirer_mot' => 'Quitar aqueu mot',
 'info_retirer_mots' => 'Quitar tots los mots ',
 'info_sans_titre_2' => 'sensa t&iacute;tol',
-'info_selectionner_fichier' => 'Po&egrave;tz seleccionar un fichier dau dorsier <i>upload</i>',
+'info_selectionner_fichier' => 'Po&egrave;tz seleccionar un fichier dau dorsier @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichier:',
 'info_site_attente' => 'Sit web en esp&egrave;ra de validacion',
 'info_site_reference' => 'Sit referenciat en linha',
@@ -651,7 +651,7 @@ Per tornar trobar v&ograve;stre acc&egrave;s au sit
 
 Vougatz anar a l\'adrei&ccedil;a seguenta:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Alora poiretz intrar un mot de santa Clara nov&egrave;u
 e vos tornar connectar au sit.
@@ -707,9 +707,9 @@ e vos tornar connectar au sit.
  acostumat/aa au foncionament dau sist&egrave;ma SPIP. <P align="justify"><B>
  En generau, se conselha f&ograve;rt
  de laissar la charja d\'aquestas paginas au webm&egrave;stre principau de v&ograve;stre sit.</b>',
-'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichier <code>ecrire/data/meta_cache.php3</code>.Volhatz, coma administrator/tritz dau sit,',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichier <code>@fichier@</code>.Volhatz, coma administrator/tritz dau sit,',
 'texte_inc_meta_2' => 'verificar los dreches d\'escritura',
-'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>ecrire/data/<code>.',
+'texte_inc_meta_3' => 'dins lo repert&ograve;ri <code>@repertoire@<code>.',
 'texte_plan_trad' => 'Aquela pagina vos permet de visualizar l\'estat de las reviraas per la lenga chausia. 
   La pagina aficha los articles que son a se revirar, los articles que chau actualizar lor reviraa 
   e los articles que son pas encara revirats. ',

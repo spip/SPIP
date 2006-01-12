@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'setmanas',
 'dirs_commencer' => 'per comen&ccedil;ar vertadierament l\'installacion',
 'dirs_preliminaire' => 'Preliminari : <b>Reglar lu drechs d\'acc&egrave;s</b>',
-'dirs_probleme_droits' => '<b>Probl&egrave;ma de drechs d\'acc&egrave;s</b>',
+'dirs_probleme_droits' => 'Probl&egrave;ma de drechs d\'acc&egrave;s',
 'dirs_repertoires_absents' => '<b>Lu repert&ograve;ris seguents son pas estat trobats: <ul>@bad_dirs@.</ul> </b>
   <p />Si p&ograve;u que venga d\'un problema de majusculas &ograve; minusculas mau mesi.
   Verificatz que li minusculas e majusculas d\'aquelu repert&ograve;ris correspondon ben emb cen qu\'es afichat
@@ -200,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'm&ograve;t de santa Clara :',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail&nbsp;: si p&ograve;ut pas mandar l\'identificant.',
 'form_forum_voici1' => 'Vequ&iacute; lu voastres identificants per poder participar a la vida
-dau sit "@nom_site_spip@" (@adresse_site@/) :',
+dau sit "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Vequ&iacute; lu voastres identificants per prepauar d\'articles 
- sus lo sit "@nom_site_spip@" (@adresse_site@/ecrire/) :',
+ sus lo sit "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Vorgatz indicar la voastra adre&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Vorgatz indicar lo voastre nom.',
 'form_indiquer_nom_site' => 'Vorgatz indicar lo nom dau voastre sit.',
@@ -379,7 +379,7 @@ Merc&eacute; de la voastra participacion
 'info_copyright_gpl' => 'sota licen&ccedil;a GPL',
 'info_cours_edition' => 'Lu voastres articles en cors de redacion',
 'info_creer_repertoire' => 'Vorgatz crear un fichier &ograve; un repert&ograve;ri nomat',
-'info_creer_repertoire_2' => 'en dintre dau sosrepert&ograve;ri <b>ecrire/data/</b>, pi&nbsp;:',
+'info_creer_repertoire_2' => 'en dintre dau sosrepert&ograve;ri <b>@repertoire@</b>, pi&nbsp;:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descriptiu(s):',
@@ -397,9 +397,9 @@ Merc&eacute; de la voastra participacion
 'info_erreur_requete' => 'Error dins la requesta',
 'info_erreur_squelette2' => 'Minga d\'esqueleta <b>@fichier@</b> es disponibla...',
 'info_erreur_systeme' => 'Error sist&egrave;ma (errno @errsys@)',
-'info_erreur_systeme2' => '<b>Bessai lo disc dur es plen, &ograve; la basa de donadas degalhada.<br>
- <font color=\'red\'>Provatz de <a href=\'ecrire/admin_repair.php3\'>reparar la basa</a>,
- &ograve; contactatz lo voastre albergador.</font><br></b>',
+'info_erreur_systeme2' => 'Bessai lo disc dur es plen, &ograve; la basa de donadas degalhada.<br>
+ <font color=\'red\'>Provatz de <a href=\'@script@\'>reparar la basa</a>,
+ &ograve; contactatz lo voastre albergador.</font>',
 'info_fini' => 'Es acabat&nbsp;!',
 'info_format_image' => 'Formats d\'imatges que p&ograve;don &egrave;stre utilisats per crear de vinhetas: @gd_formats@.',
 'info_format_non_defini' => 'format non definit',
@@ -410,10 +410,10 @@ Merc&eacute; de la voastra participacion
 'info_inclusion_directe' => 'Inclusion dir&egrave;cta&nbsp;:',
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion dau sistema de publicacion...',
-'info_installer_documents' => 'Pod&egrave;tz installar automaticament toi lu documents contenguts dins lo dorsier <i>upload</i>.',
-'info_installer_ftp' => 'Coma administrator, pod&egrave;tz installar (per FTP) de fichiers dins lo dorsier ecrire/upload pi lu seleccionar directament aqu&iacute;.',
+'info_installer_documents' => 'Pod&egrave;tz installar automaticament toi lu documents contenguts dins lo dorsier @upload@.',
+'info_installer_ftp' => 'Coma administrator, pod&egrave;tz installar (per FTP) de fichiers dins lo dorsier @upload@ pi lu seleccionar directament aqu&iacute;.',
 'info_installer_images' => 'Pod&egrave;tz installar d\'imatges ai formats JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsier /ecrire/upload per lu poder seleccionar aqu&iacute;.',
+'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsier @upload@ per lu poder seleccionar aqu&iacute;.',
 'info_installer_tous_documents' => 'Installar toi lu documents',
 'info_interface_complete' => 'interfa&ccedil;a completa',
 'info_interface_simple' => 'Interfa&ccedil;a simplificada',
@@ -475,7 +475,7 @@ Merc&eacute; de la voastra participacion
 'info_retirer_mot' => 'Traire aqueu m&ograve;t',
 'info_retirer_mots' => 'Traire toi lu m&ograve;ts',
 'info_sans_titre_2' => 'sensa titre',
-'info_selectionner_fichier' => 'Pod&egrave;tz seleccionar un fichier dau dorsier <i>upload</i>',
+'info_selectionner_fichier' => 'Pod&egrave;tz seleccionar un fichier dau dorsier @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fichier&nbsp;:',
 'info_site_attente' => 'Sit web en asp&egrave;ra de validacion',
 'info_site_reference' => 'Sit referen&ccedil;at en linha',
@@ -613,7 +613,7 @@ Per tornar trobar lo voastre acc&egrave;s au sit
 
 Vorgatz anar a l\'adre&ccedil;a seguenta:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Podretz intrar un nov&egrave;u m&ograve;t de santa Clara
 e vos tornar connectar au sit.
@@ -662,9 +662,9 @@ e vos tornar connectar au sit.
  acostumat/ada au foncionament dau sistema SPIP. <p align="justify"><b>
  En generau, si conselha foart
  de laissar la carga d\'aquesti p&agrave;ginas au webm&egrave;stre principau dau voastre sit.</b>',
-'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichi&egrave;r <code>ecrire/data/meta_cache.php3</code>. Vorgatz, coma administrator dau sit,',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichi&egrave;r <code>@fichier@</code>. Vorgatz, coma administrator dau sit,',
 'texte_inc_meta_2' => 'verificar lu drechs d\'escritura',
-'texte_inc_meta_3' => 'sus lo repert&ograve;ri <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'sus lo repert&ograve;ri <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',
 'texte_statut_poubelle' => 'au bordilhier',
 'texte_statut_propose_evaluation' => 'prepauat per evaluacion',

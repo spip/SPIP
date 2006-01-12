@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'weeks',
 'dirs_commencer' => ' in order to really start the installation',
 'dirs_preliminaire' => 'Preliminary: <b>Setting up access permissions</b>',
-'dirs_probleme_droits' => '<b>Problem in access permissions</b>',
+'dirs_probleme_droits' => 'Problem in access permissions',
 'dirs_repertoires_absents' => '<b>The following directories have not been found: <ul>@bad_dirs@.</ul> </b>
   <p />The possible cause is a bad lower or upper case handling.
   Please make sure that the lower and upper case letters of these directories match what is displayed
@@ -203,9 +203,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_pass' => 'password:',
 'form_forum_probleme_mail' => 'Mail problem: the identifier could not be sent.',
 'form_forum_voici1' => 'Here are your identifiers to participate in the site\'s life
-"@nom_site_spip@" (@adresse_site@/):',
+"@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Here are your identifiers to submit articles for
-the site "@nom_site_spip@" (@adresse_site@/ecrire/):',
+the site "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Please enter your e-mail address.',
 'form_indiquer_nom' => 'Please enter your name.',
 'form_indiquer_nom_site' => 'Please enter your site’s name.',
@@ -379,7 +379,7 @@ Thank you for your participation
 'info_copyright_gpl' => 'under the GPL license',
 'info_cours_edition' => 'Your articles in progress',
 'info_creer_repertoire' => 'Please create a file or a directory called:',
-'info_creer_repertoire_2' => 'inside the sub-directory <b>ecrire/data/</b>, then',
+'info_creer_repertoire_2' => 'inside the sub-directory <b>@repertoire@</b>, then',
 'info_creer_vignette' => 'automated creation of the thumbnail',
 'info_deplier' => 'Unfold',
 'info_descriptif_nombre' => 'description(s):',
@@ -399,9 +399,9 @@ Thank you for your participation
 'info_erreur_requete' => 'Error in query:',
 'info_erreur_squelette2' => 'No available template <b>@fichier@</b>...',
 'info_erreur_systeme' => 'System error (errno @errsys@)',
-'info_erreur_systeme2' => '<b>The hard disk might be full or the database damaged. <br>
- <font color=\'red\'>try <a href=\'ecrire/admin_repair.php3\'>repairing the database</a>,
- or contact your host.</font><br></b>',
+'info_erreur_systeme2' => 'The hard disk might be full or the database damaged. <br>
+ <font color=\'red\'>try <a href=\'@script@\'>repairing the database</a>,
+ or contact your host.</font>',
 'info_fini' => 'Done!',
 'info_format_image' => 'Image format to be used for the creation of vignettes: @gd_formats@.',
 'info_format_non_defini' => 'undefined format',
@@ -412,10 +412,10 @@ Thank you for your participation
 'info_inclusion_directe' => 'Direct inclusion:',
 'info_inclusion_vignette' => 'Include vignette:',
 'info_installation_systeme_publication' => 'Publication system installation ...',
-'info_installer_documents' => 'You can automatically install all the documents which are in the folder <i>upload</i>.',
-'info_installer_ftp' => 'As an administrator, you can install (by FTP) files in the folder ecrire/upload in order to select them later directly from here.',
+'info_installer_documents' => 'You can automatically install all the documents which are in the folder @upload@.',
+'info_installer_ftp' => 'As an administrator, you can install (by FTP) files in the folder @upload@ in order to select them later directly from here.',
 'info_installer_images' => 'You can install images of formats JPEG, GIF et PNG.',
-'info_installer_images_dossier' => 'Install images in folder /ecrire/upload to be able to select them here.',
+'info_installer_images_dossier' => 'Install images in folder @upload@ to be able to select them here.',
 'info_installer_tous_documents' => 'Install all the documents',
 'info_interface_complete' => 'complete interface',
 'info_interface_simple' => 'Simplified interface',
@@ -477,7 +477,7 @@ Thank you for your participation
 'info_retirer_mot' => 'Remove this keyword',
 'info_retirer_mots' => 'Remove all keywords',
 'info_sans_titre_2' => 'untitled',
-'info_selectionner_fichier' => 'You can select a file from the folder <i>upload</i>',
+'info_selectionner_fichier' => 'You can select a file from the folder @upload@',
 'info_selectionner_fichier_2' => 'Select a file:',
 'info_site_attente' => 'Web site pending validation',
 'info_site_reference' => 'Referenced sites online',
@@ -615,7 +615,7 @@ To retrieve your access to the site
 @nom_site_spip@ (@adresse_site@)
 
 Please go to the following address:
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 You can then enter a new password
 and connect again to the site.
@@ -669,9 +669,9 @@ and connect again to the site.
 	familiar with the functioning of the SPIP system. <P align="justify"><B>More
 	generally, you are strongly advised
 	to let the main webmaster of your site deal with this page.</b>',
-'texte_inc_meta_1' => 'The system encountered an error when trying to write the file <code>ecrire/data/meta_cache.php3</code>. As a site administrator, please',
+'texte_inc_meta_1' => 'The system encountered an error when trying to write the file <code>@fichier@</code>. As a site administrator, please',
 'texte_inc_meta_2' => 'verify write permissions',
-'texte_inc_meta_3' => 'of the directory <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'of the directory <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'editing in progress',
 'texte_statut_poubelle' => 'in the dustbin',
 'texte_statut_propose_evaluation' => 'submitted for evaluation',

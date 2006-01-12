@@ -169,7 +169,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'setmanes',
 'dirs_commencer' => 'per comen&ccedil;ar realment la instal&middot;laci&oacute;',
 'dirs_preliminaire' => 'Preliminar: <B>Regular els drets d\'acc&eacute;s</B>',
-'dirs_probleme_droits' => '<b>Problema de drets d\'acc&eacute;s</b>',
+'dirs_probleme_droits' => 'Problema de drets d\'acc&eacute;s',
 'dirs_repertoires_absents' => '<B>No s\'han trobat els seg&uuml;ents directoris&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <P>&Eacute;s probable que la causa sigui un problema d\'escriptura de les maj&uacute;scules o les min&uacute;scules.
   Verifiqueu que les min&uacute;scules i les maj&uacute;scules d\'aquests directoris coincideixen exactament amb el que es mostra
@@ -202,9 +202,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(aix&ograve; &eacute;s un missatge autom&agrave;tic)',
 'form_forum_pass' => 'contrasenya:',
 'form_forum_probleme_mail' => 'Problema d\'adre&ccedil;a electr&ograve;nica: l\'identificador no es pot enviar.',
-'form_forum_voici1' => 'Aqu&iacute; teniu els identificadors per poder participar als f&ograve;rums del lloc Web "@nom_site_spip@" (@adresse_site@/):',
+'form_forum_voici1' => 'Aqu&iacute; teniu els identificadors per poder participar als f&ograve;rums del lloc Web "@nom_site_spip@" (@adresse_site@):',
 'form_forum_voici2' => 'Aquests s&oacute;n els identificadors per poder proposar articles en aquest lloc
-"@nom_site_spip@" (@adresse_site@/ecrire/):',
+"@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Indiqueu la vostra adre&ccedil;a electr&ograve;nica.',
 'form_indiquer_nom' => 'Indiqueu el vostre nom.',
 'form_indiquer_nom_site' => 'Indiqueu el nom del vostre lloc.',
@@ -379,7 +379,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_copyright_gpl' => 'sota llic&egrave;ncia GPL',
 'info_cours_edition' => 'Els vostres articles en proc&eacute;s de redacci&oacute;',
 'info_creer_repertoire' => 'Creeu un fitxer o un directori anomenat:',
-'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>ecrire/data/</b>, despr&eacute;s:',
+'info_creer_repertoire_2' => 'a l\'interior del subdirectori <b>@repertoire@</b>, despr&eacute;s:',
 'info_creer_vignette' => 'creaci&oacute; autom&agrave;tica de la miniatura',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descripci&oacute;(ns):',
@@ -399,9 +399,9 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_erreur_requete' => 'Error en la petici&oacute;:',
 'info_erreur_squelette2' => 'No hi ha cap esquelet <b>@fichier@</b> que estigui disponible...',
 'info_erreur_systeme' => 'Error del sistema (errno @errsys@)',
-'info_erreur_systeme2' => '<b>&Eacute;s probable que el disc dur estigui ple, o la base de dades feta malb&eacute;. <br>
- <font color=\'red\'>Proveu de <a href=\'ecrire/admin_repair.php3\'>reparar la base</a>,
- o contacteu amb el vostre hostatjador.</font><br></b>',
+'info_erreur_systeme2' => '&Eacute;s probable que el disc dur estigui ple, o la base de dades feta malb&eacute;. <br>
+ <font color=\'red\'>Proveu de <a href=\'@script@\'>reparar la base</a>,
+ o contacteu amb el vostre hostatjador.</font>',
 'info_fini' => 'S\'ha acabat! ',
 'info_format_image' => 'Formats d\'imatges que es poden fer servir per crear vinyetes: @gd_formats@.',
 'info_format_non_defini' => ' format no definit',
@@ -412,10 +412,10 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_inclusion_directe' => 'Inclusi&oacute; directa:',
 'info_inclusion_vignette' => 'Inclusi&oacute; de la icona:',
 'info_installation_systeme_publication' => 'Instal&middot;laci&oacute; del sistema de publicaci&oacute;...',
-'info_installer_documents' => 'Podeu instal&middot;lar autom&agrave;ticament tots els documents que hi ha dins la carpeta <i>upload</i>.',
-'info_installer_ftp' => 'En tan que administrador, podeu instal&middot;lar (per FTP) els fitxers a la carpeta ecrire/upload per a continuaci&oacute; seleccionar-los directament aqu&iacute;.',
+'info_installer_documents' => 'Podeu instal&middot;lar autom&agrave;ticament tots els documents que hi ha dins la carpeta @upload@.',
+'info_installer_ftp' => 'En tan que administrador, podeu instal&middot;lar (per FTP) els fitxers a la carpeta @upload@ per a continuaci&oacute; seleccionar-los directament aqu&iacute;.',
 'info_installer_images' => 'Podeu instal&middot;lar imatges amb els formats JPEG, GIF i PNG.',
-'info_installer_images_dossier' => 'Instal&middot;lar imatges a la carpeta /ecrire/upload per poder-les seleccionar aqu&iacute;.',
+'info_installer_images_dossier' => 'Instal&middot;lar imatges a la carpeta @upload@ per poder-les seleccionar aqu&iacute;.',
 'info_installer_tous_documents' => 'Instal&middot;lar tots els documents',
 'info_interface_complete' => 'interf&iacute;cie completa',
 'info_interface_simple' => 'Interf&iacute;cie simple',
@@ -477,7 +477,7 @@ Si ja n\'esteu, escriviu a continuaci&oacute; l\'identifcador que us ha estat pr
 'info_retirer_mot' => 'suprimir aquesta paraula',
 'info_retirer_mots' => 'suprimir totes les paraules',
 'info_sans_titre_2' => 'sense t&iacute;tol',
-'info_selectionner_fichier' => 'Podeu seleccionar un fitxer de la carpeta <i>upload</i>',
+'info_selectionner_fichier' => 'Podeu seleccionar un fitxer de la carpeta @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar un fitxer:',
 'info_site_attente' => 'Lloc Web pendent de validaci&oacute;',
 'info_site_reference' => 'Lloc referenciat en l&iacute;nia',
@@ -605,7 +605,7 @@ Per recuperar el vostre acc&eacute;s al lloc
 
 Aneu a l\'adre&ccedil;a seg&uuml;ent:
 
-    @adresse_site@/spip_pass.php3?p=@cookie@
+    @sendcookie@
 
 Llavors podreu entrar una nova contrasenya
 i tornar-vos a connectar al lloc.
@@ -653,9 +653,9 @@ i tornar-vos a connectar al lloc.
 funcionament de la web.Recomanem no tocar res fins que no li siga familiar el funcionament del sistema SPIP.<P align="justify"><B>
 Generalment, es molt aconsellable
  deixar la c&agrave;rrega de aquestes p&agrave;gines al webmestre/webmestressa principal de la vostra web.</B>',
-'texte_inc_meta_1' => 'El sistema ha trobat un error durant l\'escritura del fitxer <code>ecrire/data/meta_cache.php3</code>.Si us plau, ja que sou l\'administrador/a del lloc web,',
+'texte_inc_meta_1' => 'El sistema ha trobat un error durant l\'escritura del fitxer <code>@fichier@</code>.Si us plau, ja que sou l\'administrador/a del lloc web,',
 'texte_inc_meta_2' => 'verifiqueu els drets d\'escriptura',
-'texte_inc_meta_3' => 'del directori <code>ecrire/data/</code>.',
+'texte_inc_meta_3' => 'del directori <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'en curs de redacci&oacute;',
 'texte_statut_poubelle' => 'a la paperera',
 'texte_statut_propose_evaluation' => 'proposat per a l\'avaluaci&oacute;',
