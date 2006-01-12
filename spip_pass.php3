@@ -10,18 +10,13 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
 include ("ecrire/inc_version.php3");
-include_ecrire('inc_minipres');
 include_ecrire("inc_session"); # pour creer_uniq_id
+include_ecrire('inc_minipres'); # charge lang et execute utiliser_lang
 include_ecrire("inc_mail"); # pour envoyer_mail
 include_ecrire("inc_acces"); # pour generer_htpass
 include_local("inc-public-global"); # pour calculer la page
 include_ecrire("inc_filtres"); # pour email_valide()
-
-
-utiliser_langue_site();
-utiliser_langue_visiteur();
 
 // Ce fichier est celui d'une balise dynamique qui s'ignore.
 
