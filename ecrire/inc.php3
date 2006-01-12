@@ -12,11 +12,14 @@
 
 if (!defined('_ECRIRE_INC_VERSION')) include ("inc_version.php3");
 
-include_ecrire ("inc_session");
-include_ecrire('inc_cookie');
-
-$var_f = include_fonction('auth');
-if (!$var_f()) exit;
+if (autoriser_sans_cookie($SCRIPT_NAME))
+	unset($GLOBALS['_COOKIE']);
+else {
+	include_ecrire ("inc_session");
+	include_ecrire('inc_cookie');
+	$var_f = include_fonction('auth');
+	if (!$var_f()) exit;
+ } 
 
 //
 // Preferences de presentation

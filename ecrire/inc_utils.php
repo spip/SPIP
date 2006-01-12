@@ -581,6 +581,15 @@ function charger_plugins($plugins) {
 #var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
 }
 
+// predicat sur les scripts de ecrire qui n'authentifient pas par cookie
+
+function autoriser_sans_cookie($nom)
+{
+  static $autsanscookie = array('aide_index', 'install', 'admin_repair');
+  $nom = preg_replace('/.php[3]?$/', '', basename($nom));
+  return in_array($nom, $autsanscookie);
+}
+
 // Cette fonction charge le bon inc-urls selon qu'on est dans l'espace
 // public ou prive, la presence d'un (old style) inc-urls.php3, etc.
 function charger_generer_url() {
