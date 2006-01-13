@@ -432,19 +432,19 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		echo "<p><div align='left'>"._T('info_derniere_syndication').' '.affdate_heure($date_syndic)
 		.".</div>\n";
 		
-		echo "<div align='right'>\n"
-		. "<form method='post' action='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "'>"
-		. "<input type='submit' name='reload' value=\""
-		. attribut_html(_T('lien_mise_a_jour_syndication'))
-		. "\" class='fondo' style='font-size:9px;' /></form></div>\n";
+	echo "<div align='right'>\n",
+		  generer_url_post_ecrire("sites",("id_syndic=$id_syndic")),
+		  "<input type='submit' name='reload' value=\"",
+		  attribut_html(_T('lien_mise_a_jour_syndication')),
+		  "\" class='fondo' style='font-size:9px;' /></form></div>\n";
 
 	// Options
 	if ($flag_administrable && $options=='avancees') {
 
 		debut_cadre_relief();
-		echo "<u>"._T('syndic_options')."</u>"
-			. aide('artsyn')."\n"
-			. "<form method='POST' action='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "' class='verdana2'>\n";
+		echo "<u>",_T('syndic_options'),"</u>",
+		  aide('artsyn')."\n",
+		  generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
 
 		// modifier la moderation
 		if ($moderation == 'oui' OR $moderation == 'non')
@@ -454,8 +454,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			$moderation = $mod;
 		if ($moderation != 'oui') $moderation='non';
 
-		echo "<p><div align='$spip_lang_left'>"
-			. _T('syndic_choix_moderation') . "<br />\n";
+		echo "<p  class='verdana2'><div align='$spip_lang_left'>",
+		  _T('syndic_choix_moderation'), "</div>\n";
 		afficher_choix('moderation', $moderation,
 			array(
 			'non' => _T('info_publier')
@@ -474,7 +474,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			spip_query("UPDATE spip_syndic SET oubli='$oubli'
 			WHERE id_syndic=$id_syndic");
 
-		echo "<p><div align='left'>"._T('syndic_choix_oublier');
+		echo "<div align='left'>"._T('syndic_choix_oublier'), '</div>';
 
 		echo "<ul>\n";
 
@@ -503,18 +503,18 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 			spip_query("UPDATE spip_syndic SET resume='$resume'
 			WHERE id_syndic=$id_syndic");
 		if (!$resume AND !$resume = $row['resume']) $resume = 'oui';
-		echo "<p><div align='$spip_lang_left'>"
+		echo "<div align='$spip_lang_left'>"
 			. _T('syndic_choix_resume') . "<br />\n";
 		afficher_choix('resume', $resume,
 			array(
 				'oui' => _T('syndic_option_resume_oui'),
 				'non' => _T('syndic_option_resume_non')
 			));
-		echo "</li>\n";
+		echo "</div>\n";
 
 
 		// Bouton "Valider"
-		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div></p></form></div>";
 
 
 		fin_cadre_relief();
@@ -524,7 +524,8 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 // Cas d'un site ayant un feedfinder detecte
 else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 	echo "<br /><br />\n";
-	echo "<form method='post' action='" . generer_url_ecrire("sites","id_syndic=$id_syndic") . "'>";
+	echo   generer_url_post_ecrire("sites",("id_syndic=$id_syndic"));
+
 	foreach (
 		array('id_rubrique', 'nom_site', 'url_site', 'descriptif', 'statut')
 	as $var) {
