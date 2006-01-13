@@ -331,9 +331,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			// Changer
 			if ($unseul == "oui" AND $flag_groupe) {
-			  $s = "<form action='" .
-			    generer_url_ecrire($url_base,"$id_table=$id_objet#mots") .
-			    "' method='POST'>" .
+			  $s =  generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots") .
 			    "<input type='hidden' name='$id_table' VALUE='$id_objet' />";
 				if ($table == 'rubriques') $s .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet'>";
 				$s .= "<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
@@ -421,9 +419,8 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			echo "</div><br />\n";
 		}
 
-
-			  $form_mot = "<form action='" . generer_url_ecrire($url_base, "$id_table=$id_objet#mots") . "' method='POST' STYLE='margin:1px;'>"
-			."<INPUT TYPE='Hidden' NAME='$id_table' VALUE='$id_objet' />";
+		// il faudrait rajouter STYLE='margin:1px;' qq part
+		$form_mot = generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots");
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet' />";
 
