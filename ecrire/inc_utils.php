@@ -627,7 +627,7 @@ function generer_url_ecrire($script, $args="", $no_entities=false) {
 		$script = '/' . $script;
 	}
 
-	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
+	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? "?" : "");
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 
 	return "$site$script$ext$args";
