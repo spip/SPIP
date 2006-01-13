@@ -26,6 +26,12 @@ function install_debut_html($titre = 'AUTO') {
 
 	include_ecrire('inc_headers');
 	http_no_cache();
+	$args_color = 	  "couleur_claire=" .
+			  urlencode('#FFCC66') .
+			  '&couleur_foncee=' .
+			  urlencode('#000000') .
+			  '&left=' . 
+			  $GLOBALS['spip_lang_left'];
 	echo  _DOCTYPE_ECRIRE ,
 	  "<html lang='",$GLOBALS['spip_lang'],
 	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
@@ -34,13 +40,7 @@ function install_debut_html($titre = 'AUTO') {
 	  $titre,
 	  "</title>\n" ,
 	  '<link rel="stylesheet" type="text/css" href=\'' ,
-	  generer_url_ecrire('spip_style', 
-			  "couleur_claire=" .
-			  urlencode('#FFCC66') .
-			  '&couleur_foncee=' .
-			  urlencode('#000000') .
-			  '&left=' . 
-			  $GLOBALS['spip_lang_left']) ,
+	  generer_url_ecrire('spip_style', $args_color),
 	  "'>
 <style type='text/css'>
 <!--
@@ -76,8 +76,7 @@ function aide($aide='') {
 	if (!$aide OR $spip_display == 4) return;
 
 	return "&nbsp;&nbsp;<a class='aide' href='" 
-		. generer_url_ecrire("aide_index", 
-			"aide=$aide&var_lang=$spip_lang")
+		. generer_url_ecrire("aide_index", "aide=$aide&var_lang=$spip_lang")
 		. "' target=\"spip_aide\" "
 		. "onclick=\"javascript:window.open(this.href,"
 		. "'spip_aide', 'scrollbars=yes, resizable=yes, width=740, "

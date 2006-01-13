@@ -277,8 +277,7 @@ function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajou
 {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
 
-  echo "<form  method='POST' action='", generer_url_ecrire('auteur_infos',
-		    (!$id_auteur ? "" : "?id_auteur=$id_auteur")),
+  echo "<form  method='POST' action='", generer_url_ecrire('auteur_infos', (!$id_auteur ? "" : "?id_auteur=$id_auteur")),
     "'><input type='hidden' name='id_auteur' value='$id_auteur' />";
 
 

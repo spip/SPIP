@@ -143,9 +143,7 @@ if ($conf_mot>0) {
 
 	echo "<UL>";
 	echo "<LI><B><A href='",
-	  generer_url_ecrire('mots_edit', 
-			  "supp_mot=$id_mot&redirect_ok=oui&redirect=" .
-			  generer_url_ecrire('mots_tous')),
+	  generer_url_ecrire('mots_edit', "supp_mot=$id_mot&redirect_ok=oui&redirect=" . generer_url_ecrire('mots_tous')),
 	  "'>",
 	  _T('item_oui'),
 	  "</A>,</B> ",

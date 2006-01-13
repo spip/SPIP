@@ -206,8 +206,7 @@ function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 		$item['email'] = $t['email_auteur'];
 
 		if ($lien_moderation)
-		  $item['url'] = generer_url_ecrire('controle_forum', 'page='.$a['page']
-						   .'&debut_id_forum='.$t['id_forum']);
+		  $item['url'] = generer_url_ecrire('controle_forum', 'page='.$a['page'] .'&debut_id_forum='.$t['id_forum']);
 		else
 			$item['url'] = generer_url_forum($t['id_forum']);
 
@@ -251,8 +250,7 @@ function rss_suivi_messagerie($a) {
 				'author' => typo($auteur['nom']),
 				'email' => $auteur['email'],
 				'description' => propre($t['texte']),
-				'url' => generer_url_ecrire('message', 'id_message='.$t['id_message']
-							   ));
+				'url' => generer_url_ecrire('message', 'id_message='.$t['id_message'] ));
 			$rss[] = $item;
 		}
 		$messages_vus[] = $t['id_message'];
@@ -271,9 +269,7 @@ function rss_suivi_messagerie($a) {
 				'description' => propre($t['texte']),
 				'author' => typo($t['auteur']),
 				'email' => $t['email_auteur'],
-				'url' => generer_url_ecrire('message', 'id_message='.$t['id_message']
-					.'#'.$t['id_forum']
-							   ));
+				'url' => generer_url_ecrire('message', 'id_message='.$t['id_message']	.'#'.$t['id_forum']  ));
 			$rss[] = $item;
 		}
 	}
@@ -307,8 +303,7 @@ function rss_articles($critere) {
 			'author' => typo($auteur['nom']),
 			'email' => $auteur['email'],
 			'description' => propre(couper("{{".$t['chapo']."}}\n\n".$t['texte'],300)),
-			'url' => generer_url_ecrire('articles', 'id_article='.$t['id_article']
-						   ));
+			'url' => generer_url_ecrire('articles', 'id_article='.$t['id_article']   ));
 		if ($t['statut'] == 'prop')
 		  $item['title'] = _T('info_article_propose').' : '.$item['title'];
 
@@ -327,8 +322,7 @@ function rss_breves($critere) {
 			'title' => typo($t['titre']),
 			'date' => $t['date_heure'],
 			'description' => propre(couper($t['texte'],300)),
-			'url' => generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']
-						   ));
+			'url' => generer_url_ecrire('breves_voir', 'id_breve='.$t['id_breve']   ));
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('titre_breve_proposee').' : '.$item['title'];
 
@@ -347,8 +341,7 @@ function rss_sites($critere) {
 			'title' => typo($t['titre']." ".$t['url_site']),
 			'date' => $t['date'],
 			'description' => propre(couper($t['texte'],300)),
-			'url' => generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']
-						   ));
+			'url' => generer_url_ecrire('sites', 'id_syndic='.$t['id_syndic']   ));
 		if ($t['statut'] == 'prop')
 			$item['title'] = _T('info_site_attente').' : '.$item['title'];
 

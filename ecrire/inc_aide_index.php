@@ -132,11 +132,10 @@ function help_body($aide, $html) {
 		. "((AIDE|IMG)/([-_a-zA-Z0-9]*/?)([^'\"<>]*))@i",
 	$suite, $r)) {
 		$p = strpos($suite, $r[0]);
+		$img = str_replace('/', '-', $r[3]);
 		$html .= substr($suite, 0, $p) .
-		  ($r[1] . 
-		   generer_url_ecrire("aide_index",
-				   ("img=" . str_replace('/', '-', $r[3]))));
-
+		  $r[1] . 
+		  generer_url_ecrire('aide_index', "img=$img");
 		$suite = substr($suite, $p + strlen($r[0]));
 	}
 
