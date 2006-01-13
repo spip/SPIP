@@ -45,8 +45,8 @@ debut_gauche();
 
 debut_droite();
 
-echo "<form action='" . generer_url_ecrire("config-contenu") . "' method='POST'>";
-echo "<input type='hidden' name='changer_config' value='oui'>";
+ echo generer_url_post_ecrire("config-contenu");
+ echo "<input type='hidden' name='changer_config' value='oui'>";
 
 
 

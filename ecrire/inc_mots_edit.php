@@ -236,7 +236,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<P>";
 	debut_cadre_formulaire();
 
-	echo "<form action='" . generer_url_ecrire("mots_edit","") . "' method='post'>";
+	echo generer_url_post_ecrire("mots_edit");
 	echo "<div class='serif'>";
 	
 	if ($id_mot)

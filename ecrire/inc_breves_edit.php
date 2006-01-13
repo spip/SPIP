@@ -93,10 +93,9 @@ if ($new != "oui") {
 
 if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 	if ($id_breve) $lien = "id_breve=$id_breve";
-	echo "<form action='" . generer_url_ecrire("breves_voir","$lien") . "' method='post' name='formulaire'>";
+	echo generer_url_post_ecrire('breves_voir',$lien, 'formulaire');
 
 	echo "<INPUT TYPE='Hidden' NAME='modifier_breve' VALUE=\"oui\">";
-	echo "<INPUT TYPE='Hidden' NAME='id_breve' VALUE=\"$id_breve\">";
 	echo "<INPUT TYPE='Hidden' NAME='statut_old' VALUE=\"$statut\">";
 	if ($new == "oui") echo "<INPUT TYPE='Hidden' NAME='new' VALUE=\"oui\">";
 

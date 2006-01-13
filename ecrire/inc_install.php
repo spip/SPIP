@@ -158,7 +158,7 @@ function install_6()
 		@unlink(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
 	}
 
-	echo "<form action='./' method='POST'>";
+	echo "<form action='./' method='post'>";
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
 	echo "</FORM>";
 
@@ -183,7 +183,8 @@ function install_5()
 	echo "<p>\n"._T('texte_informations_personnelles_2')." ";
 	echo _T('info_laisser_champs_vides');
 
-	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+	echo generer_url_post_ecrire('install');
+
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='6'>";
 
 	echo "<fieldset><label><B>"._T('info_identification_publique')."</B><BR />\n</label>";
@@ -211,7 +212,7 @@ function install_5()
 		echo "<div style='border: 1px solid #404040; padding: 10px; text-align: left;'>";
 		echo "<b>"._T('info_authentification_externe')."</b>";
 		echo "<p>\n"._T('texte_annuaire_ldap_1');
-		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap1'>";
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE=\""._T('bouton_acces_ldap')."\">";
 		echo "</FORM>";
@@ -298,7 +299,7 @@ function install_4()
 
 		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
 
-		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
 		echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
@@ -326,7 +327,7 @@ function install_3()
 	echo aide ("install2");
 	echo "<P>\n";
 
-	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+	echo generer_url_post_ecrire('install');
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='4'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 	echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -414,7 +415,7 @@ function install_2()
 	if (($db_connect=="0") && $link){
 		echo "<B>"._T('info_connexion_ok')."</B><P> "._T('info_etape_suivante_2');
 
-		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='3'>";
 		echo "<INPUT TYPE='hidden' NAME='adresse_db'  VALUE=\"$adresse_db\" SIZE='40'>";
 		echo "<INPUT TYPE='hidden' NAME='login_db' VALUE=\"$login_db\">";
@@ -464,7 +465,7 @@ function install_1()
 		}
 	}
 
-	echo "<p><form action='" . generer_url_ecrire("install") . "' method='POST'>";
+	echo generer_url_post_ecrire('install');
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='2'>";
 	echo "<fieldset><label><B>"._T('entree_base_donnee_1')."</B><BR />\n</label>";
 	echo _T('entree_base_donnee_2')."<BR />\n";
@@ -530,7 +531,7 @@ function install_ldap5()
 	echo "<B>"._T('info_ldap_ok')."</B>";
 	echo "<P>"._T('info_terminer_installation');
 
-	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+	echo generer_url_post_ecrire('install');
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='5'>";
 
 	echo "<DIV align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondl'  VALUE='"._T('bouton_suivant')." >>'>";
@@ -581,7 +582,7 @@ function install_ldap4()
 		fputs($myFile, $conn);
 		fclose($myFile);
 
-		echo "<p><form action='" . generer_url_ecrire("install") . "' method='POST'>";
+		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap5'>";
 		echo "<fieldset><label><B>"._T('info_statut_utilisateurs_1')."</B></label><BR />\n";
 		echo _T('info_statut_utilisateurs_2')." ";
@@ -617,7 +618,7 @@ function install_ldap3()
 	$result = @ldap_read($ldap_link, "", "objectclass=*", array("namingContexts"));
 	$info = @ldap_get_entries($ldap_link, $result);
 
-	echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+	echo generer_url_post_ecrire('install');
 	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap4'>";
 	echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
 	echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
@@ -681,7 +682,7 @@ function install_ldap2()
 	if ($ldap_link && ($r || !$login_ldap)) {
 		echo "<B>"._T('info_connexion_ldap_ok');
 
-		echo "<form action='" . generer_url_ecrire("install") . "' method='POST'>";
+		echo generer_url_post_ecrire('install');
 		echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap3'>";
 		echo "<INPUT TYPE='hidden' NAME='adresse_ldap' VALUE=\"$adresse_ldap\">";
 		echo "<INPUT TYPE='hidden' NAME='port_ldap' VALUE=\"$port_ldap\">";
@@ -722,8 +723,8 @@ function install_ldap1()
 		}
 	}
 
-	echo "<p><form action='" . generer_url_ecrire("install") . "' method='POST'>";
-	echo "<INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
+	echo generer_url_post_ecrire('install');
+	echo "<p><INPUT TYPE='hidden' NAME='etape' VALUE='ldap2'>";
 	echo "<fieldset><label><B>"._T('entree_adresse_annuaire')."</B><BR />\n</label>";
 	echo _T('texte_adresse_annuaire_1')."<BR />\n";
 	echo "<INPUT TYPE='text' NAME='adresse_ldap' CLASS='formo' VALUE=\"$adresse_ldap\" SIZE='20'><P>";

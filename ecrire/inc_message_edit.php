@@ -109,7 +109,7 @@ if ($type == 'affich') {
   $logo = "annonce";
  }
 
-echo "<form action='" . generer_url_ecrire("message","id_message=$id_message") . "' method='post'>";
+ echo generer_url_post_ecrire('message',"id_message=$id_message");
 
  debut_gauche();
 

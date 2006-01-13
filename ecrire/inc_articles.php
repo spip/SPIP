@@ -362,8 +362,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	$message=$petition["message"];
 	$texte_petition=$petition["texte"];
 
-	echo "\n<form action='".$GLOBALS['clean_link']->getUrl()
-		."' method='POST'>";
+	echo "\n<form action='".$GLOBALS['clean_link']->getUrl()."' method='POST'>";
 	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
 
 	echo "<select name='change_petition'
@@ -441,8 +440,6 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 	fin_cadre_relief();
 
-
-
 	// Redirection (article virtuel)
 	debut_cadre_relief("site-24.gif");
 	$visible = ($changer_virtuel || $virtuel);
@@ -460,8 +457,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	else
 		echo debut_block_invisible("redirection");
 
-	echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article") . "' method='post'>";
-	echo "\n<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
+	echo generer_url_post_ecrire("articles", "id_article=$id_article");
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 	$virtuelhttp = ($virtuel ? "" : "http://");
 
@@ -1225,7 +1221,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 
 
 	if (spip_num_rows($result) > 0) {
-		echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article#auteurs") . "' method='post'>";
+		echo generer_url_post_ecrire("articles", "id_article=$id_article");;
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 

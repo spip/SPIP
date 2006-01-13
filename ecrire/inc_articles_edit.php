@@ -137,12 +137,9 @@ echo "<P><HR><P>";
 	$texte = entites_html($texte);
 	$ps = entites_html($ps);
 
-	echo "<form action='", generer_url_ecrire('articles', ($id_article ? "id_article=$id_article" : "")),
-	  "' method='POST' name='formulaire'>\n";
+	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire');
 
-	if ($id_article)
-		echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE='$id_article'>";
-	else if ($new == 'oui')
+	if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
 
 	if ($lier_trad) {
