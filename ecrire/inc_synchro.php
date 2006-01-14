@@ -142,7 +142,7 @@ echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 	if ($activer_breves == "oui") {
 		
 		echo "<p>"._T("ical_texte_rss_breves")."</p>";
-		echo propre('<ul><cadre>' . generer_url_ecrire('backend-breves'). "</cadre></ul>");
+		echo propre('<ul><cadre>' . generer_url_public('backend-breves'). "</cadre></ul>");
 		
 	}
 
