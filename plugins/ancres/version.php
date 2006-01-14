@@ -14,7 +14,7 @@ $nom = 'ancres';
 $version = 0.1;
 
 // s'inserer dans le pipeline 'avant_propre' @ ecrire/inc_texte.php3
-$GLOBALS['spip_pipeline']['post_propre'][] = 'ancres';
+$GLOBALS['spip_pipeline']['post_propre'] .= '|ancres';
 
 // la fonction est tres legere on la definit directement ici
 function ancres($texte) {

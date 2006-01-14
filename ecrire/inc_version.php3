@@ -166,12 +166,12 @@ $traiter_math = 'tex';
 // les activer un par un, dans tel ordre, etc)
 # les pipeline standards (traitements derivables aka points d'entree)
 $spip_pipeline = array(
-	'pre_typo' => array('extraire_multi'),
-	'post_typo' => array('quote_amp'),
-	'pre_propre' => array('extraire_multi'),
-	'post_propre' => array(),
-	'pre_indexation' => array(),
-	'post_syndication' => array()
+	'pre_typo' => '|extraire_multi',
+	'post_typo' => '|quote_amp',
+	'pre_propre' => '|extraire_multi',
+	'post_propre' => '',
+	'pre_indexation' => '',
+	'post_syndication' => ''
 );
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();
