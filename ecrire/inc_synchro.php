@@ -159,7 +159,7 @@ debut_cadre_relief("doc-24.gif", false, "", _T('ical_titre_js'));
 echo _T('ical_texte_js').'<p />';
 
 echo propre('<cadre><script type="text/javascript" src="'.
-	    generer_url_ecrire('distrib') .
+	    generer_url_public('distrib') .
 	    '"></script></cadre>');
 
 fin_cadre_relief();
