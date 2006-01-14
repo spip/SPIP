@@ -101,7 +101,7 @@ gros_titre($titre);
 echo "</td></tr></table>";
 echo "<p>";
 
- generer_url_post_ecrire("naviguer",($id_rubrique ? "id_rubrique=$id_rubrique" : ""));
+echo  generer_url_post_ecrire("naviguer",($id_rubrique ? "id_rubrique=$id_rubrique" : ""));
 
 $titre = entites_html($titre);
 
