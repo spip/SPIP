@@ -199,8 +199,7 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 	echo	"<center>",
 		"<B>"._T('texte_proposer_publication')."</B>",
 		aide ("artprop"),
-		"\n<form action='", generer_url_ecrire("articles"), "'>\n",
-		"<input type='hidden' name='id_article' value='$id_article' />\n",
+		generer_url_post_ecrire("articles", "id_article=$id_article"),
 		"<input type='hidden' name='statut_nouv' value='prop' />\n",
 		"<input type='submit' class='fondo' value=\"", 
 		_T('bouton_demande_publication'),
@@ -681,8 +680,7 @@ function dates_articles($id_article, $flag_editable, $statut_article, $date, $an
   if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_couleur();
 
-	echo "<form action='" . generer_url_ecrire("articles") . "' method='GET' style='margin: 0px; padding: 0px;'>";
-	echo "<INPUT TYPE='hidden' NAME='id_article' VALUE='$id_article'>";
+	echo generer_url_post_ecrire("articles", "id_article=$id_article");
 
 	if ($statut_article == 'publie') {
 
@@ -1393,34 +1391,32 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
   global $connect_statut;
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
-	echo "<form action='" . generer_url_ecrire("articles") . "' method='GET'>";
-	debut_cadre_relief("racine-site-24.gif");
-	echo "<CENTER>";
-	
-	echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\" />";
-
-	echo "<B>"._T('texte_article_statut')."</B> ";
-
-	$statut_url_javascript="'" . _DIR_IMG_PACK . "' + puce_statut(options[selectedIndex].value);";
-	echo "<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl' onChange=\"document.statut.src=$statut_url_javascript; setvisibility('valider_statut', 'visible');\">";
-	echo "<OPTION" . mySel("prepa", $statut_article) ." style='background-color: white'>"._T('texte_statut_en_cours_redaction')."\n";
-	echo "<OPTION" . mySel("prop", $statut_article) . " style='background-color: #FFF1C6'>"._T('texte_statut_propose_evaluation')."\n";
-	echo "<OPTION" . mySel("publie", $statut_article) . " style='background-color: #B4E8C5'>"._T('texte_statut_publie')."\n";
-	echo "<OPTION" . mySel("poubelle", $statut_article)
-	  . http_style_background('rayures-sup.gif') . '>' ._T('texte_statut_poubelle')."\n";
-	echo "<OPTION" . mySel("refuse", $statut_article) . " style='background-color: #FFA4A4'>"._T('texte_statut_refuse')."\n";
-	echo "</SELECT>";
-
-	echo " &nbsp; ". http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'") . "  &nbsp; ";
+    echo generer_url_post_ecrire("articles", "id_article=$id_article"),
+      "\n<CENTER>", "<B>",_T('texte_article_statut'),"</B>",
+	  "\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n",
+	  "onChange=\"document.statut.src='",
+	  _DIR_IMG_PACK,
+	  "' + puce_statut(options[selectedIndex].value);",
+	  " setvisibility('valider_statut', 'visible');\">\n",
+	 "<OPTION" , mySel("prepa", $statut_article) ," style='background-color: white'>",_T('texte_statut_en_cours_redaction'),"</OPTION>\n",
+	 "<OPTION" , mySel("prop", $statut_article) , " style='background-color: #FFF1C6'>",_T('texte_statut_propose_evaluation'),"</OPTION>\n",
+	 "<OPTION" , mySel("publie", $statut_article) , " style='background-color: #B4E8C5'>",_T('texte_statut_publie'),"</OPTION>\n",
+	 "<OPTION" , mySel("poubelle", $statut_article),
+	   http_style_background('rayures-sup.gif') , '>' ,_T('texte_statut_poubelle'),"</OPTION>\n",
+	 "<OPTION" , mySel("refuse", $statut_article) , " style='background-color: #FFA4A4'>",_T('texte_statut_refuse'),"</OPTION>\n",
+	  "</SELECT>",
+	  " &nbsp; ",
+	  http_img_pack("puce-".puce_statut($statut_article).'.gif', "", "border='0' NAME='statut'"),
+	  "  &nbsp; ";
 
 	// echo "<noscript><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></noscript>";
 	echo "<span class='visible_au_chargement' id='valider_statut'>";
-	echo "<INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
+	echo "<INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</span>";
 	echo aide ("artstatut");
 	echo "</CENTER>";
-	fin_cadre_relief();
 	echo "</FORM>";
+	fin_cadre_relief();
  }
 }
 

@@ -138,13 +138,13 @@ function http_label_img($statut, $etat, $var, $img, $texte) {
 
 function formulaire_affiche_tous($aff_art, $aff_statut,$sel_lang)
 {
-	global $spip_lang_right;
-echo "<form action='" . generer_url_ecrire("articles_tous","") . "' method='get'>";
-echo "<input type='hidden' name='aff_art[]' value='x'>";
+global $spip_lang_right;
+echo generer_url_post_ecrire("articles_tous"), 
+	"<input type='hidden' name='aff_art[]' value='x'>";
 
 debut_boite_info();
 
-echo "<B>"._T('titre_cadre_afficher_article')."&nbsp;:</B><BR>";
+ echo "<b>",_T('titre_cadre_afficher_article'),"&nbsp;:</b><br />";
 
 if ($aff_statut['prepa'])
 	echo http_label_img('prepa',
@@ -181,7 +181,7 @@ if ($aff_statut['poubelle'])
 			    'puce-poubelle-breve.gif',
 			    _T('texte_statut_poubelle'));
 
-echo "<div align='$spip_lang_right'><INPUT TYPE='submit' NAME='Changer' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
+echo "<div align='$spip_lang_right'><INPUT TYPE='submit' CLASS='fondo' VALUE='"._T('bouton_changer')."'></div>";
 
 
 // GERER LE MULTILINGUISME
