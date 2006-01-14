@@ -17,7 +17,7 @@ define('_FILE_TMP', '_install');
 include_ecrire ("inc_minipres");
 include_ecrire ("inc_base");
 
-function install()
+function install_dist()
 {
 	global $etape;
 	if (_FILE_CONNECT && $etape != 'unpack') {

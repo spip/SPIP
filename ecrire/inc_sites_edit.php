@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 
-function sites_edit()
+function sites_edit_dist()
 {
   global $champs_extra, $clean_link, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $target, $url_site, $url_syndic;
 

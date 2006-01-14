@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function statistiques_svg()
+function statistiques_svg_dist()
 {
 global
   $aff_jours,
