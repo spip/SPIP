@@ -262,9 +262,7 @@ if ($spip_display != 4) {
 			    list($titre, $descr) = $r;
 			    $rubs[] = "<a title='" .
 			      typo($descr) .
-			      "' href='" .
-			      generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique") .
-			      "'>" .
+			      "' href='" . generer_url_ecrire('naviguer', "id_rubrique=$id_rubrique") . "'>" .
 			      typo($titre) .
 			      '</a>';
 			  }
