@@ -258,7 +258,7 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 
 	echo debut_block_invisible('languesrubrique');
 	echo "<div class='verdana2' align='center'>";
-	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, generer_url_ecrire("naviguer","action=coloniser&id_rubrique=$id_rubrique", true, true  ));
+	echo menu_langues('changer_lang', $langue_rubrique, '', $langue_parent, new Link(generer_url_ecrire("naviguer","action=coloniser&id_rubrique=$id_rubrique")));
 	echo "</div>\n";
 	echo fin_block();
 

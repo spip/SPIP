@@ -652,9 +652,10 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	  $site .= ((substr($site,-1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
 	else $site =  _DIR_RESTREINT;
 
-	if (substr($site,-1) == '/') {
-		$site = substr($site, 0, -1);
-		$script = '/' . $script;
+	if (!$site)
+	  $site = './';
+	elseif (substr($site,-1) != '/') {
+		$site .= '/';
 	}
 
 	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? "?" : "");
