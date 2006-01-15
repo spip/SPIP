@@ -598,10 +598,10 @@ function puce_statut_article($id, $statut, $id_rubrique) {
 			  "rouge" => _T('texte_statut_refuse'),
 			  "poubelle" => _T('texte_statut_poubelle'));
 	  $action = "onmouseover=\"montrer('statutdecalarticle$id');\"";
-	  $inser_puce = "<div class='puce_article' id='statut$id'$dir_lang>"
-			. "<div class='puce_article_fixe' $action>" .
+	  $inser_puce = "\n<div class='puce_article' id='statut$id'$dir_lang>"
+			. "\n<div class='puce_article_fixe' $action>" .
 		  http_img_pack("$puce", "", "id='imgstatutarticle$id' border='0' style='margin: 1px;'") ."</div>"
-			. "<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>"
+			. "\n<div class='puce_article_popup' id='statutdecalarticle$id' onmouseout=\"cacher('statutdecalarticle$id');\" style=' margin-left: -".((11*$clip)+1)."px;'>\n"
 			. afficher_script_statut($id, 'article', -1, 'puce-blanche.gif', 'prepa', $titles['blanche'], $action)
 			. afficher_script_statut($id, 'article', -12, 'puce-orange.gif', 'prop', $titles['orange'], $action)
 			. afficher_script_statut($id, 'article', -23, 'puce-verte.gif', 'publie', $titles['verte'], $action)
@@ -660,7 +660,7 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 		. "<div class='puce_breve_fixe' $action>"
 		. $inser_puce
 		. "</div>"
-		. "<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>"
+		. "\n<div class='puce_breve_popup' id='$type2' onmouseout=\"cacher('$type2');\" style=' margin-left: -".((9*$clip)+1)."px;'>\n"
 		. afficher_script_statut($id, $type, -1, $puces[0], 'prop',_T('texte_statut_propose_evaluation'), $action)
 		. afficher_script_statut($id, $type, -10, $puces[1], 'publie',_T('texte_statut_publie'), $action)
 	  	. afficher_script_statut($id, $type, -19, $puces[2], 'refuse',_T('texte_statut_refuse'), $action)
@@ -669,10 +669,11 @@ function puce_statut_breve($id, $statut, $type, $droit) {
 
 function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
 {
-  return
-	http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
+  return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
 		      _DIR_IMG_PACK . $img .
-		      "', '$statut', 'iframe_action" . _EXTENSION_PHP ."');",
+		      "', '$statut', '" .
+		      generer_url_ecrire('iframe_action') .
+		      "');",
 		      $img,
 			"title=\"".$title."\"",
 			'','','',
