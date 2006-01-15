@@ -345,7 +345,7 @@ echo "</td>";
 if ($flag_editable) {
 	echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_modifier_site'),  $redirect = generer_url_ecrire('sites_edit',"id_syndic=$id_syndic&rtarget=" . $clean_link->getUrl()), "site-24.gif", "edit.gif");
+	icone(_T('icone_modifier_site'), generer_url_ecrire('sites_edit',"id_syndic=$id_syndic"), "site-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";

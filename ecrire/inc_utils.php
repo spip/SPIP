@@ -644,7 +644,8 @@ function charger_generer_url() {
 // Bravo au W3C qui n'a pas ete capable de nous eviter ca
 // faute de separer proprement langage et meta-langage
 
-// Ecriture tres tarabiscotee pour assurer la transition php3 & mutualisation
+// Attention, X?y=z et "X/?y=z" sont completement differents!
+// http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 
 function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	$site = $rel ? "" : $GLOBALS['meta']["adresse_site"];
