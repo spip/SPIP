@@ -113,7 +113,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date(generer_url_ecrire("breves_voir", "id_breve=$id_breve&options=$options"),
+		echo afficher_formulaire_date("breves_voir", "id_breve=$id_breve&options=$options",
 					      _T('texte_date_publication_article'), $jour, $mois, $annee);
 		fin_cadre_enfonce();	
 	}
@@ -231,8 +231,7 @@ echo "</div>";
 echo "<P align='left'>";
 
 
-afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"),
-	        generer_url_ecrire("breves_voir", "id_breve=$id_breve"));
+afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_breve='$id_breve' AND id_parent=0 ORDER BY date_heure DESC LIMIT 20"), generer_url_ecrire("breves_voir", "id_breve=$id_breve"));
 
 fin_page();
 }

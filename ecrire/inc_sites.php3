@@ -125,10 +125,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 			syndication='$syndication', statut='$statut'
 			WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-		$link = new Link(generer_url_ecrire('sites'));
-		$link->addVar('id_syndic');
-		$link->addVar('redirect');
-		$redirect = $link->getUrl();
+		$redirect = generer_url_ecrire('sites',"id_syndic=$id_syndic&redirect=$redirect");
 		$redirect_ok = 'oui';
 	}
 }
@@ -199,11 +196,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
-	$link = new Link(generer_url_ecrire('sites'));
-	$link->addVar('id_syndic');
-	$link->addVar('redirect');
-	$link->addVar('reload', $reload);
-	$redirect = $link->getUrl();
+	$redirect = generer_url_ecrire('sites',"id_syndic=$id_syndic&redirect=$redirect&reload=$reload");
 	$redirect_ok = 'oui';
 }
 
@@ -350,12 +343,9 @@ if (strlen($descriptif) > 1) {
 echo "</td>";
 
 if ($flag_editable) {
-	$link = new Link(generer_url_ecrire('sites_edit'));
-	$link->addVar('id_syndic');
-	$link->addVar('target', $clean_link->getUrl());
 	echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_modifier_site'), $link->getUrl(), "site-24.gif", "edit.gif");
+	icone(_T('icone_modifier_site'),  $redirect = generer_url_ecrire('sites_edit',"id_syndic=$id_syndic&rtarget=" . $clean_link->getUrl()), "site-24.gif", "edit.gif");
 	echo "</td>";
 }
 echo "</tr></table>\n";
@@ -372,7 +362,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date(generer_url_ecrire("sites", "id_syndic=$id_syndic&options=$options"), _T('info_date_referencement'), $jour, $mois, $annee);
+		echo afficher_formulaire_date("sites", "id_syndic=$id_syndic&options=$options", _T('info_date_referencement'), $jour, $mois, $annee);
 		fin_cadre_enfonce();	
 	}
 	else {
@@ -568,15 +558,8 @@ echo "<br><br>\n";
 
  $forum_retour = generer_url_ecrire("sites","id_syndic=$id_syndic");
 
-$link = new Link(generer_url_ecrire('forum_envoi'));
-$link->addVar('statut', 'prive');
-$link->addVar('adresse_retour', $forum_retour);
-$link->addVar('id_syndic');
-$link->addVar('titre_message', $nom_site);
-
-
 echo "<div align='center'>";
-icone (_T('icone_poster_message'), $link->getUrl(), "forum-interne-24.gif", "creer.gif");
+ icone (_T('icone_poster_message'), generer_url_ecrire('forum_envoi',"id_syndic=$id_syndic&statut=prive&adresse_retour=$forum_retour&titre_message=$nom_site"), "forum-interne-24.gif", "creer.gif");
 echo "</div>";
 
 echo "<p align='left'>\n";
