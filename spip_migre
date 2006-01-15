@@ -65,5 +65,5 @@ sed 's/inc_version.php3/inc_version.php/;s/$SCRIPT_NAME/"accueil"/' inc.php3 > i
 
 # consequence 2: nouveau test pour les scripts sans authentification
 
-sed 's/inc_version.php3/inc_version.php/;s%$SCRIPT_NAME%preg_replace("/^.*exec=([^\&]*).*$/","\\\\1",$REQUEST_URI)) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie"%'  inc_version > inc_version.php
+sed 's/inc_version.php3/inc_version.php/;s%SCRIPT_NAME%_REQUEST["exec"]) OR (substr(basename($SCRIPT_NAME),0,11) == "spip_cookie"%'  inc_version > inc_version.php
 

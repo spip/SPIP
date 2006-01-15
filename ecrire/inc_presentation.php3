@@ -1834,7 +1834,9 @@ function debut_javascript($admin, $stat)
 	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
 		spip_setcookie('spip_accepte_ajax', -1);
 		$ajax = "if (a = createXmlHttp()) {
-	a.open('GET', 'ajax_page.php?fonction=test', true) ;
+	a.open('GET', '" .
+		  generer_url_ecrire("ajax_page.php","fonction=test") .
+		  "', true) ;
 	a.send(null);
 }";
 	} else $ajax = "";
@@ -2245,7 +2247,7 @@ function afficher_menu_rubriques() {
 	global $spip_lang_rtl, $spip_ecran;
 	$date_maj = $GLOBALS['meta']["date_calcul_rubriques"];
 
-	echo http_script('',"js_menu_rubriques.php?date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl",'');
+	echo http_script('',generer_url_ecrire("js_menu_rubriques.php","date=$date_maj&spip_ecran=$spip_ecran&dir=$spip_lang_rtl"),'');
 }
 
 
