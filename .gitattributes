@@ -319,6 +319,7 @@ ecrire/inc_sites_tous.php -text
 ecrire/inc_spip_action_autoriser.php -text
 ecrire/inc_spip_action_ical.php -text
 ecrire/inc_spip_action_iconifier.php -text
+ecrire/inc_spip_action_instituer.php -text
 ecrire/inc_spip_action_joindre.php -text
 ecrire/inc_spip_action_purger.php -text
 ecrire/inc_spip_action_redirect.php -text

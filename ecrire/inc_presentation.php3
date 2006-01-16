@@ -672,7 +672,7 @@ function afficher_script_statut($id, $type, $n, $img, $statut, $title, $act)
   return http_href_img("javascript:selec_statut('$id', '$type', -1, '" .
 		      _DIR_IMG_PACK . $img .
 		      "', '" .
-		       generer_url_ecrire('iframe_action', "action=$type"."s&id=$id&statut=$statut",false,true) .
+		       generer_action_auteur('instituer', "$type $id $statut") .
 		      "');",
 		      $img,
 			"title=\"".$title."\"",
@@ -3259,8 +3259,8 @@ function debloquer_article($arg, $texte)
 {
 	$lien = new Link;
 	$lien->addVar('debloquer_article', $arg);
-	$lien = urlencode($lien->getUrl());
-	return "<a href='" . generer_url_ecrire('iframe_action', "action=articles_page&id=$arg&redirect=$lien") .
+	$lien = (_DIR_RESTREINT_ABS . $lien->getUrl());
+	return "<a href='" . generer_action_auteur('instituer', "collaboration $arg", $lien) .
 	  "' title='" .
 	  addslashes($texte) .
 	  "'>$texte&nbsp;" .

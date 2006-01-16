@@ -506,28 +506,6 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 	return $ok_nouveau_statut ;
 }
 
-function changer_statut_articles($id_article, $statut)
-{
-	global $connect_toutes_rubriques;
-
-	$id_article = intval($id_article);
-	$result = spip_query("SELECT statut,id_rubrique FROM spip_articles WHERE id_article=$id_article");
-
-	if ($row = spip_fetch_array($result)) {
-		$id_rubrique= $row['id_rubrique'];
-		$statut_ancien = $row['statut'];
-		}
-
-	if (($statut != $statut_ancien) AND 
-	    ($connect_toutes_rubriques OR acces_rubrique($id_rubrique))) {
-		spip_query("UPDATE spip_articles SET statut='$statut', date=NOW() WHERE id_article=$id_article");			
-		include_ecrire("inc_rubriques");
-		include_ecrire('inc_texte');
-		calculer_rubriques();
-
-		cron_articles($id_article, $statut, $statut_ancien);
-	}
-}
 
 function cron_articles($id_article, $statut, $statut_ancien)
 {
