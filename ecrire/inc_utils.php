@@ -568,7 +568,7 @@ function texte_script($texte) {
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
 
-function find_in_path ($filename, $path='AUTO') {
+function find_in_path ($filename, $path='AUTO', $sinon='') {
 	static $autopath;
 
 	// Chemin standard depuis l'espace public
@@ -601,6 +601,10 @@ function find_in_path ($filename, $path='AUTO') {
 			return $f;
 		}
 	}
+	
+	// sinon essayer $sinon
+	if ($sinon AND @is_readable($f = "$sinon$filename"))
+		return $f;
 }
 
 // charger les definitions des plugins
