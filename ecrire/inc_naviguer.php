@@ -322,7 +322,7 @@ if ($relief) {
 	// Les sites references a valider
 	//
 	if ($GLOBALS['meta']['activer_syndic'] != 'non') {
-		include_ecrire("inc_sites_tous");
+		include_ecrire("inc_sites_voir");
 		afficher_sites(_T('info_site_valider'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut='prop' ORDER BY nom_site");
 	}
 
@@ -330,7 +330,7 @@ if ($relief) {
 	// Les sites a probleme
 	//
 	if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		include_ecrire("inc_sites_tous");
+		include_ecrire("inc_sites_voir");
 		afficher_sites(_T('avis_sites_syndiques_probleme'),
 			"SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
@@ -382,11 +382,10 @@ if ($relief) {
 //// Les sites references
 
 	if ($GLOBALS['meta']["activer_sites"] == 'oui') {
-	  include_ecrire("inc_sites_tous");
-	  afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus') ORDER BY nom_site");
+		include_ecrire("inc_sites_voir");
+		afficher_sites(_T('titre_sites_references_rubrique'), "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' AND statut != 'prop' AND syndication NOT IN ('off','sus') ORDER BY nom_site");
 
-	  $proposer_sites=$GLOBALS['meta']["proposer_sites"];
-	  if ($id_rubrique > 0 AND ($flag_editable OR $proposer_sites > 0)) {
+		if ($id_rubrique > 0 AND ($flag_editable OR $GLOBALS['meta']["proposer_sites"]> 0)) {
 	
 		echo "<div align='$spip_lang_right'>";
 		icone(_T('info_sites_referencer'), generer_url_ecrire('sites_edit', "id_rubrique=$id_rubrique&redirect=" . urlencode($clean_link->getUrl())), "site-24.gif", "creer.gif");
