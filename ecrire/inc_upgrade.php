@@ -91,30 +91,4 @@ function upgrade_dist()
 	echo _T('alerte_maj_impossible', array('version' => $spip_version));
   }
 }
-
-function demande_maj_version()
-{
-	include_ecrire("inc_presentation");
-	debut_page();
-	echo "<blockquote><blockquote><h4><font color='red'>",
-	_T('info_message_technique'),
-	"</font><br> ",
-	_T('info_procedure_maj_version'),
-	"</h4>",
-	_T('info_administrateur_site_01'),
-	" <a href='" . generer_url_ecrire("upgrade","reinstall=non") . "'>",
-	_T('info_administrateur_site_02'),
-	"</a></blockquote></blockquote><p>";
-	fin_page();
-	exit;
-}
-
-// appele dans inc_version pour gestion de l'installation
-function info_install() {
-
-	$db_ok = false;
-	include_ecrire ("inc_minipres");
-	install_debut_html(_T('info_travaux_titre')); echo "<p>"._T('info_travaux_texte')."</p>";
-	install_fin_html();
-}
 ?>

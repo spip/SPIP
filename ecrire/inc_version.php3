@@ -398,14 +398,13 @@ OR (basename($REQUEST_URI) == 'spip_action.php?action=test_dirs'))) {
 
 	// Si on peut installer, on lance illico
 	if (@file_exists('inc_version.php3'))
-		header("Location: " . generer_url_ecrire("install"));
+		redirige_par_entete(generer_url_ecrire("install"));
 	else if (defined("_INC_PUBLIC")) {
 	// Si on est dans le site public, dire que qq s'en occupe
-		include_ecrire('inc_upgrade');
-		info_install();
+		include_ecrire ("inc_minipres");
+		install_tout_html(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
 	}
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire 
-	exit;
  }
 # spip_log($_SERVER['REQUEST_METHOD'].' '.$clean_link->getUrl() . _FILE_CONNECT);
 
