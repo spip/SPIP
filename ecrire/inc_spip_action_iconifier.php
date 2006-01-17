@@ -24,9 +24,6 @@ function spip_action_iconifier_dist()
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 		spip_image_ajouter_dist();
 	else	spip_image_effacer_dist();
-	$link = new Link(_DIR_RESTREINT_ABS . $GLOBALS['redirect']);
-	redirige_par_entete($link->getUrl($GLOBALS['ancre']));
-	
 }
 
 function spip_image_effacer_dist() {
