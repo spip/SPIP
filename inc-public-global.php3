@@ -223,19 +223,27 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		$lang_select = true; // pour lang_dselect en sortie
 	}
 
-	  if (!$use_cache)
-	    $page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
-	  else {
-	    include_local('inc-calcul');
-	    $page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
-	    $page['signal']['process_ins'] = $page['process_ins'];
-	    $lastmodified = time();
-	    if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
-	  }
+	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
+	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent
+	if (!isset($contexte_inclus['date']))
+		$contexte_inclus['date'] = date('Y-m-d H:i:s');
+	if (!isset($contexte_inclus['date_redac']))
+		$contexte_inclus['date_redac'] = $contexte_inclus['date'];
 
-	  $page['lang_select'] = $lang_select;
+	// On va ensuite chercher la page
+	if (!$use_cache)
+		$page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
+	else {
+		include_local('inc-calcul');
+		$page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
+		$page['signal']['process_ins'] = $page['process_ins'];
+		$lastmodified = time();
+		if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
+	}
 
-	  return $page;
+	$page['lang_select'] = $lang_select;
+
+	return $page;
 }
 
 
