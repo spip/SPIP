@@ -39,7 +39,7 @@ function install_debut_html($titre = 'AUTO') {
 	  "<title>",
 	  $titre,
 	  "</title>\n" ,
-	  '<link rel="stylesheet" type="text/css" href=\'', generer_url_ecrire('spip_style', $args_color),
+	  '<link rel="stylesheet" type="text/css" href=\'' . generer_url_public('spip_action.php', "action=style&$args_color"),
 	  "'>
 <style type='text/css'>
 <!--

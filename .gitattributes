@@ -326,6 +326,7 @@ ecrire/inc_spip_action_instituer.php -text
 ecrire/inc_spip_action_joindre.php -text
 ecrire/inc_spip_action_purger.php -text
 ecrire/inc_spip_action_redirect.php -text
+ecrire/inc_spip_action_style.php -text
 ecrire/inc_spip_action_supprimer.php -text
 ecrire/inc_spip_action_test_dirs.php -text
 ecrire/inc_spip_action_tester.php -text
