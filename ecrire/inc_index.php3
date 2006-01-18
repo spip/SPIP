@@ -96,60 +96,51 @@ function nettoie_nom_fichier($fichier){
 	return preg_replace(',^(IMG/|.*://),', '', $fichier);
 }
 
-
-function separateurs_indexation($requete = false) {
-	// Merci a Herve Lefebvre pour son apport sur cette fonction
-	$liste = "],:;*\"!\r\n\t\\/)}{[|@<>$%";
-
-	// pour autoriser les recherches en vietnamien,
-	// ne pas eliminer les accents de translitteration
-	if (!$requete)
-		$liste .= "'`?\~.^+(-";
-
-	// windowzeries iso-8859-1
-	$charset = $GLOBALS['meta']['charset'];
-	if ($charset == 'iso-8859-1')
-		$liste .= chr(187).chr(171).chr(133).chr(145).chr(146).chr(180).chr(147).chr(148);
-
-	return $liste;
-}
-
-function nettoyer_chaine_indexation($texte) {
-	global $translitteration_complexe;
+// Renvoie la liste des "mots" d'un texte (ou d'une requete adressee au moteur)
+function mots_indexation($texte, $min_long = 3) {
 	include_ecrire("inc_charsets");
-
-	// translitteration complexe (vietnamien, allemand)
-	if ($translitteration_complexe) {
-		$texte_c = translitteration_complexe ($texte);
-		$texte_c = " ".strtr($texte_c, "'`?~.^+(-", "123456789");
-	}
-
-	$texte = translitteration($texte).$texte_c;
-
-	return $texte;
-}
-
-function indexer_chaine($texte, $val = 1, $min_long = 3) {
-	global $index, $mots, $translitteration_complexe;
 
 	// Point d'entree pour traiter le texte avant indexation
 	$texte = pipeline('pre_indexation', $texte);
 
-	// Supprimer les tags
-	$texte = ' '.preg_replace(',<.*>,Ums',' ',$texte).' ';
-	// Nettoyer les entites HTML, signes diacritiques...
-	$texte = nettoyer_chaine_indexation($texte);
-	// Enlever les caracteres de ponctuation
-	$regs = separateurs_indexation();
-	$texte = strtr($texte, $regs, ereg_replace('.', ' ', $regs));
+	// Supprimer les tags HTML
+	$texte = preg_replace(',<.*>,Ums',' ',$texte);
+
+	// Translitterer (supprimer les accents, recuperer les &eacute; etc)
+	// la translitteration complexe (vietnamien, allemand) duplique
+	// le texte, en mettant bout a bout une translitteration simple +
+	// une translitteration riche
+	if ($GLOBALS['translitteration_complexe'])
+		$texte_c = ' '.translitteration_complexe ($texte, 'AUTO', true);
+	else
+		$texte_c = '';
+	$texte = translitteration($texte).$texte_c;
+	# NB. tous les caracteres non translitteres sont retournes en utf-8
+
+	// OPTIONNEL //  Gestion du tiret '-' :
+	// "vice-president" => "vice"+"president"+"vicepresident"
+#	$texte = preg_replace(',(\w+)-(\w+),', '\1 \2 \1\2', $texte);
+
+	// Supprimer les caracteres de ponctuation, les guillemets...
+	$e = "],:;*\"!\r\n\t\\/)}{[|@<>$%'`?\~.^+(-";
+	$texte = strtr($texte, $e, ereg_replace('.', ' ', $e));
 
 	// Cas particulier : sigles d'au moins deux lettres
 	$texte = preg_replace("/ ([A-Z][0-9A-Z]{1,".($min_long - 1)."}) /",
-		' \\1___ ', $texte);
+		' \\1___ ', $texte.' ');
+
+	// Tout passer en bas de casse
 	$texte = strtolower($texte);
 
-	// Separer les mots
-	$table = preg_split("/ +/", $texte);
+	// Retourner sous forme de table
+	return preg_split("/ +/", trim($texte));
+}
+
+function indexer_chaine($texte, $val = 1, $min_long = 3) {
+	global $index, $mots;
+	global $translitteration_complexe;
+
+	$table = mots_indexation($texte, $min_long);
 
 	foreach ($table as $mot) {
 		if (strlen($mot) > $min_long) {
@@ -604,11 +595,8 @@ function requete_dico($val) {
 // decode la chaine recherchee et la traduit en hash
 function requete_hash ($rech) {
 	// recupere les mots de la recherche
-	$translitteration_complexe = true;
-	$rech = nettoyer_chaine_indexation($rech);
-	$regs = separateurs_indexation(true)." ";
-	$rech = strtr($rech, $regs, ereg_replace('.', ' ', $regs));
-	$s = preg_split("/ +/", $rech);
+	$GLOBALS['translitteration_complexe'] = true;
+	$s = mots_indexation($rech);
 	unset($dico);
 	unset($h);
 
