@@ -177,92 +177,22 @@ $spip_mots_documents_key = array(
 
 $spip_meta = array(
 		"nom"	=> "VARCHAR (255) NOT NULL",
-		"valeur"	=> "VARCHAR (255) DEFAULT ''",
+		"valeur"	=> "text DEFAULT ''",
 		"maj"	=> "TIMESTAMP");
 
 $spip_meta_key = array(
 		"PRIMARY KEY"	=> "nom");
 
-$spip_index_articles = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_article"	=> "INT UNSIGNED NOT NULL");
+$spip_index = array(
+ 		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
+ 		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
+		"id_objet"	=> "INT UNSIGNED NOT NULL",
+		"id_table"	=> "TINYINT UNSIGNED NOT NULL"	);
 
-$spip_index_articles_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_article"	=> "id_article");
-
-$spip_index_auteurs = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_auteur"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_auteurs_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_auteur"	=> "id_auteur");
-
-$spip_index_breves = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_breve"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_breves_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_breve"	=> "id_breve");
-
-$spip_index_mots = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_mot"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_mots_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_mot"	=> "id_mot");
-
-$spip_index_rubriques = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_rubrique"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_rubriques_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_rubrique"	=> "id_rubrique");
-
-$spip_index_syndic = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_syndic"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_syndic_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_syndic"	=> "id_syndic");
-
-$spip_index_signatures = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_signature"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_signatures_key = array(
-		"KEY `hash`"		=> "`hash`",
-		"KEY id_signature"	=> "id_signature");
-
-$spip_index_forum = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_forum"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_forum_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_forum"	=> "id_forum");
-
-$spip_index_documents = array(
-		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
-		"points"	=> "INT UNSIGNED DEFAULT '0' NOT NULL",
-		"id_document"	=> "INT UNSIGNED NOT NULL");
-
-$spip_index_documents_key = array(
-		"KEY `hash`"	=> "`hash`",
-		"KEY id_document"	=> "id_document");
+$spip_index_key = array(
+ 		"KEY `hash`"	=> "`hash`",
+		"KEY id_objet"	=> "id_objet",
+		"KEY id_table"	=> "id_table");
 
 $spip_index_dico = array(
 		"`hash`"	=> "BIGINT UNSIGNED NOT NULL",
@@ -370,24 +300,8 @@ $tables_auxiliaires  =
 			      'key' => &$spip_mots_documents_key),
 	'spip_meta' => array('field' => &$spip_meta,
 			'key' => &$spip_meta_key),
-	'spip_index_articles' => array('field' => &$spip_index_articles,
-				  'key' => &$spip_index_articles_key),
-	'spip_index_auteurs' => array('field' => &$spip_index_auteurs,
-				 'key' => &$spip_index_auteurs_key),
-	'spip_index_breves' => array('field' => &$spip_index_breves,
-				'key' => &$spip_index_breves_key),
-	'spip_index_mots' => array('field' => &$spip_index_mots,
-			      'key' => &$spip_index_mots_key),
-	'spip_index_rubriques' => array('field' => &$spip_index_rubriques,
-				   'key' => &$spip_index_rubriques_key),
-	'spip_index_syndic' => array('field' => &$spip_index_syndic,
-				'key' => &$spip_index_syndic_key),
-	'spip_index_signatures' => array('field' => &$spip_index_signatures,
-				    'key' => &$spip_index_signatures_key),
-	'spip_index_forum' => array('field' => &$spip_index_forum,
-			       'key' => &$spip_index_forum_key),
-	'spip_index_documents' => array('field' => &$spip_index_documents,
-			       'key' => &$spip_index_documents_key),
+	'spip_index' => array('field' => &$spip_index,
+				  'key' => &$spip_index_key),
 	'spip_index_dico' => array('field' => &$spip_index_dico,
 			      'key' => &$spip_index_dico_key),
 	'spip_versions'	=> array('field' => &$spip_versions,
@@ -401,5 +315,45 @@ $tables_auxiliaires  =
 	'spip_ortho_dico'	=> array('field' => &$spip_ortho_dico,
 					 'key' => &$spip_ortho_dico_key)
 	);
+
+global $tables_relations;
+$tables_relations['articles']['id_auteur'] = 'auteurs_articles';
+$tables_relations['auteurs']['id_article'] = 'auteurs_articles';
+
+$tables_relations['rubriques']['id_auteur'] = 'auteurs_rubriques';
+$tables_relations['auteurs']['id_rubrique'] = 'auteurs_rubriques';
+
+$tables_relations['messages']['id_auteur'] = 'auteurs_messages';
+$tables_relations['auteurs']['id_message'] = 'auteurs_messages';
+
+$tables_relations['documents']['id_article'] = 'documents_articles';
+$tables_relations['articles']['id_document'] = 'documents_articles';
+
+$tables_relations['documents']['id_rubrique'] = 'documents_rubriques';
+$tables_relations['rubriques']['id_document'] = 'documents_rubriques';
+
+$tables_relations['documents']['id_breve'] = 'documents_breves';
+$tables_relations['breves']['id_document'] = 'documents_breves';
+
+$tables_relations['documents']['id_syndic'] = 'documents_syndic';
+$tables_relations['syndic']['id_document'] = 'documents_syndic';
+
+$tables_relations['mots']['id_article'] = 'mots_articles';
+$tables_relations['articles']['id_mot'] = 'mots_articles';
+
+$tables_relations['mots']['id_breve'] = 'mots_breves';
+$tables_relations['breves']['id_mot'] = 'mots_breves';
+
+$tables_relations['mots']['id_rubrique'] = 'mots_rubriques';
+$tables_relations['rubriques']['id_mot'] = 'mots_rubriques';
+
+$tables_relations['mots']['id_syndic'] = 'mots_syndic';
+$tables_relations['syndic']['id_mot'] = 'mots_syndic';
+
+$tables_relations['mots']['id_forum'] = 'mots_forum';
+$tables_relations['forum']['id_mot'] = 'mots_forum';
+
+$tables_relations['mots']['id_document'] = 'mots_documents';
+$tables_relations['documents']['id_mot'] = 'mots_documents';
 
 ?>

@@ -457,19 +457,24 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	echo "\n";
 }
 
-function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascript=false) {
+function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascript=false, $nb_aff = 10) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
 
 	$query = trim($query);
-	$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
+	$query_count = $query;
+	if (preg_match('{GROUP[[:space:]]BY}',$query_count)==FALSE){
+		$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
+	}
 	$query_count = eregi_replace('ORDER[[:space:]]+BY.*$', '', $query_count);
 
-	list($num_rows) = spip_fetch_array(spip_query($query_count));
-	
+	$res = spip_query($query_count);
+	$num_rows = spip_num_rows($res);
+	if ($num_rows == 1) // ca n'est pas une requete avec jointure
+		list($num_rows) = spip_fetch_array($res);
+
 	if (!$num_rows) return;
 
-	$nb_aff = 10;
 	// Ne pas couper pour trop peu
 	if ($num_rows <= 1.5 * $nb_aff) $nb_aff = $num_rows;
 	if (preg_match('/LIMIT .*(,|OFFSET) *([0-9]+)/', $query, $regs)) {
@@ -1746,6 +1751,8 @@ function afficher_thread_forum($le_forum, $adresse_retour, $controle = 0) {
 	afficher_forum($result_forum2, $adresse_retour, $controle);
 	
 }
+
+
 
 // point d'entree/hack pour spip-lab (duplication de debut_page)
 

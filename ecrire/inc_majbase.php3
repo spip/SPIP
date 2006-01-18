@@ -1088,6 +1088,58 @@ function maj_base() {
 		maj_version(1.904);
 	}
 
+	// fusion des 10 tables index en une seule
+	// pour fonctions futures evoluees du moteur de recherche
+	if ($version_installee < 1.905) {
+		// agrandir le champ "valeur" de spip_meta pour pouvoir y stocker
+		// des choses plus sympa
+		spip_query("ALTER TABLE `spip_meta` CHANGE `valeur` `valeur` TEXT");
+		// table des correspondances table->id_table
+		$liste_tables = array();
+		$liste_tables[1]='spip_articles';
+		$liste_tables[2]='spip_auteurs';
+		$liste_tables[3]='spip_breves';
+		$liste_tables[4]='spip_documents';
+		$liste_tables[5]='spip_forum';
+		$liste_tables[6]='spip_mots';
+		$liste_tables[7]='spip_rubriques';
+		$liste_tables[8]='spip_signatures';
+		$liste_tables[9]='spip_syndic';
+		$s=addslashes(serialize($liste_tables));
+		spip_query("INSERT INTO `spip_meta` ( `nom` , `valeur` , `maj` ) VALUES ('index_table', '$s', NOW( ));");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_article as id_objet,'1' as id_table FROM spip_index_articles");
+		spip_query("DROP TABLE IF EXISTS spip_index_articles");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_auteur as id_objet,'2' as id_table FROM spip_index_auteurs");
+		spip_query("DROP TABLE IF EXISTS spip_index_auteurs");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_breve as id_objet,'3' as id_table FROM spip_index_breves");
+		spip_query("DROP TABLE IF EXISTS spip_index_breves");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_document as id_objet,'4' as id_table FROM spip_index_documents");
+		spip_query("DROP TABLE IF EXISTS spip_index_documents");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_forum as id_objet,'5' as id_table FROM spip_index_forum");
+		spip_query("DROP TABLE IF EXISTS spip_index_forum");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_mot as id_objet,'6' as id_table FROM spip_index_mots");
+		spip_query("DROP TABLE IF EXISTS spip_index_mots");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_rubrique as id_objet,'7' as id_table FROM spip_index_rubriques");
+		spip_query("DROP TABLE IF EXISTS spip_index_rubriques");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_signature as id_objet,'8' as id_table FROM spip_index_signatures");
+		spip_query("DROP TABLE IF EXISTS spip_index_signatures");
+
+		spip_query("INSERT INTO spip_index (hash,points,id_objet,id_table) SELECT hash,points,id_syndic as id_objet,'9' as id_table FROM spip_index_syndic");
+		spip_query("DROP TABLE IF EXISTS spip_index_syndic");
+		lire_metas();
+		ecrire_metas();
+
+		maj_version(1.905);
+	}
+
 	return true;
 }
 
