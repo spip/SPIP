@@ -28,15 +28,15 @@ function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
  
 function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 	include_ecrire('inc_filtres');
-	if (!$recherche_securisee = entites_html(_request('recherche'))) {
-	  if (!$recherche_securisee = entites_html($rech)) {
-		$recherche_securisee = _T('info_rechercher');
-	  }
+	if (!$recherche = _request('recherche')
+	AND !$recherche = $rech) {
+		include_ecrire('inc_charsets');
+		$recherche = html2unicode(_T('info_rechercher'));
 	}
 
 	return array('formulaire_recherche', 3600, 
 		     array('lien' => ($lien ? $lien : generer_url_public('recherche')),
-			'recherche_securisee' => $recherche_securisee
+			'recherche' => $recherche
 		));
 }
 

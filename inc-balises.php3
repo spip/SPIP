@@ -223,7 +223,7 @@ function balise_NOTES_dist($p) {
 }
 
 function balise_RECHERCHE_dist($p) {
-	$p->code = 'htmlspecialchars($GLOBALS["recherche"])';
+	$p->code = 'entites_html($GLOBALS["recherche"])';
 	$p->interdire_scripts = false;
 	return $p;
 }

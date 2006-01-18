@@ -8,14 +8,14 @@
 		<fieldset class="spip_encadrer">
 		<legend><b><:forum_titre:></b></legend>
 		<label><input type="text" name="titre" 
-			[value="(#ENV*{titre})" ]class="forml" size="40" />
+			[value="(#ENV{titre})" ]class="forml" size="40" />
 		</label>
 		</fieldset>
 		<br />
 		<fieldset class="spip_encadrer">
 		<legend><b><:forum_texte:></b></legend>
 		<p><:info_creation_paragraphe:></p>
-		[(#ENV*{texte}|barre_forum)]
+		[(#ENV{texte}|barre_forum)]
 		</fieldset>
 		<br />
 		[<p>(#ENV*{table})</p>]
@@ -24,18 +24,18 @@
 			<p><:forum_page_url:></p>
 			<p><label><:forum_titre:>
 				<input type="text" name="nom_site_forum" class="forml" size="40"
-					value="[(#ENV*{nom_site_forum})]" />
+					value="[(#ENV{nom_site_forum})]" />
 			</label></p>
 			<p><label><:forum_url:>
 			<input type="text" name="url_site" class="forml" size="40"
-				value="[(#ENV*{url_site})]" />
+				value="[(#ENV{url_site})]" />
 			</label></p>
 		</fieldset>
 		<br />
 		<fieldset class="spip_encadrer">
 			<legend><:forum_qui_etes_vous:></legend>
 			<p><label><:forum_votre_nom:>
-				<input type="text" name="auteur" value="[(#ENV*{auteur})]"
+				<input type="text" name="auteur" value="[(#ENV{auteur})]"
 					class="forml" size="40" [(#ENV{disabled})] />
 			</label></p>
 			<p><label><:forum_votre_email:>
