@@ -888,7 +888,10 @@ function  afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_do
 
 function bouton_tourner_document($id_article, $id, $album, $rot)
 {
-  return generer_action_auteur('tourner', $id, new Link) .
+	$redirect_url = new Link();
+	$redirect_url = $redirect_url->getUrl();
+	
+  return generer_action_auteur('tourner', $id, $redirect_url) .
     ($id_article ? ('&amp;id_article=' .$id_article) : "") .
     ("&amp;var_rot=$rot&amp;ancre=$album");
 }
