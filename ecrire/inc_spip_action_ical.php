@@ -24,9 +24,13 @@ function ligne ($texte) {
 	echo filtrer_ical($texte)."\n";
 }
 
+function ligne_uid ($texte) {
+	echo filtrer_ical("UID:$texte @ " . $GLOBALS['meta']["adresse_site"])."\n";
+}
+
 function spip_action_ical_dist()
 {
-	global $id_auteur, $arg, $action;
+	global $id_auteur, $arg, $action, $titres;
 	if (verifier_low_sec($id_auteur, $arg, $action)) {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=" . intval($id_auteur));
 
@@ -45,23 +49,27 @@ function spip_action_ical_dist()
 	lang_select($langue_utilisateur);
 	$nom_site = $GLOBALS['meta']["nom_site"];
 	$adresse_site = $GLOBALS['meta']["adresse_site"];
+	if ($adresse_site && substr($adresse_site,-1) <> '/') 
+	  $adresse_site .= '/';
 
 	header("Content-Type: text/calendar; charset=utf-8");
 	ligne ("BEGIN:VCALENDAR");
 	ligne ("CALSCALE:GREGORIAN");
 	ligne ("X-WR-CALNAME;VALUE=TEXT:$nom_site / $nom_utilisateur");
 	ligne ("X-WR-RELCALID:cal$id_utilisateur @ $adresse_site");
-	spip_ical_rendez_vous($id_utilisateur, $nom_site, $adresse_site);
-	spip_ical_taches($id_utilisateur, $nom_site, $adresse_site);
-	$nb_articles = spip_ical_articles($nom_site, $adresse_site);
-	$nb_breves = spip_ical_breves($nom_site, $adresse_site);
+	spip_ical_rendez_vous($id_utilisateur, $nom_site);
+	spip_ical_taches($id_utilisateur, $nom_site);
+
+	$titres = Array();
+	$nb_articles = spip_ical_articles($nom_site);
+	$nb_breves = spip_ical_breves($nom_site);
 	if ($nb_articles || $nb_breves) {
 		if ($nb_articles > 0) $titre_prop[] = _T('info_articles_proposes').": ".$nb_articles;
 		if ($nb_breves > 0) $titre_prop[] = _T('info_breves_valider').": ".$nb_breves;
 		$titre = join($titre_prop," / ");
 		ligne ("BEGIN:VTODO");
 		ligne ("SUMMARY:[$nom_site] $titre");
-		ligne ("UID:prop @ $adresse_site");
+		ligne ("prop");
 		$texte = join($titres," / ");
 		ligne ("DESCRIPTION:$texte");
 	
@@ -72,17 +80,17 @@ function spip_action_ical_dist()
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
 		ligne ("DTSTART:".date ("Ymd\THis", mktime (12,0,0,$mois,$jour,$annee)));
 		ligne ("CATEGORIES:"._T('icone_a_suivre'));
-		ligne ("URL:$adresse_site/ecrire/");
+		ligne ("URL:$adresse_site" . _DIR_RESTREINT_ABS);
 		ligne ("END:VTODO");
 	}
-	spip_ical_messages($id_utilisateur, $nom_site, $adresse_site);
+	spip_ical_messages($id_utilisateur, $nom_site);
 	if ($statut_utilisateur == "0minirezo") {
-		spip_ical_forums($id_utilisateur, $nom_site, $adresse_site);
+		spip_ical_forums($id_utilisateur, $nom_site);
 	}
 	ligne ("END:VCALENDAR");
 }
 
-function spip_ical_rendez_vous($id_utilisateur, $nom_site, $adresse_site)
+function spip_ical_rendez_vous($id_utilisateur, $nom_site)
 {
 	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE ((lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
@@ -119,7 +127,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site, $adresse_site)
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:".$titre);
 		ligne ("DESCRIPTION:$texte");
-		ligne ("UID:mess$id_message @ $adresse_site");
+		ligne ("mess$id_message");
 		ligne ("DTSTAMP:".date_ical($date_heure));
 		ligne ("DTSTART:".date_ical($date_heure));
 		if ($date_heure_fin > $date_heure) ligne ("DTEND:".date_ical($date_heure_fin));
@@ -131,7 +139,7 @@ function spip_ical_rendez_vous($id_utilisateur, $nom_site, $adresse_site)
 	}
 }
 
-function spip_ical_taches($id_utilisateur, $nom_site, $adresse_site)
+function spip_ical_taches($id_utilisateur, $nom_site)
 {
 	$result_messages=spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur='$id_utilisateur' AND lien.id_message=messages.id_message AND messages.type='pb' AND messages.rv!='oui' AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result_messages)){
@@ -166,7 +174,7 @@ function spip_ical_taches($id_utilisateur, $nom_site, $adresse_site)
 		ligne ("BEGIN:VTODO");
 		ligne ("SUMMARY:".$titre);
 		ligne ("DESCRIPTION:$texte");
-		ligne ("UID:mess$id_message @ $adresse_site");
+		ligne ("mess$id_message");
 		ligne ("DTSTAMP:".date_ical($date_heure));
 		ligne ("DTSTART:".date_ical($date_heure));
 		ligne ("CATEGORIES:$le_type");
@@ -175,9 +183,9 @@ function spip_ical_taches($id_utilisateur, $nom_site, $adresse_site)
 	}
 }
 
-function spip_ical_articles($nom_site, $adresse_site)
+function spip_ical_articles($nom_site)
 {
-	$titres = Array();
+	global $titres;
 	$result_articles = spip_query("SELECT id_article, titre, date FROM spip_articles WHERE statut = 'prop'");
 	while($row=spip_fetch_array($result_articles)){
 		$id_article=$row['id_article'];
@@ -187,7 +195,7 @@ function spip_ical_articles($nom_site, $adresse_site)
 		$nb_articles ++;
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:[$nom_site] $titre ("._T('info_article_propose').")");
-		ligne ("UID:article$id_article @ $adresse_site");
+		ligne ("article$id_article");
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('info_article_propose'));
@@ -198,8 +206,9 @@ function spip_ical_articles($nom_site, $adresse_site)
 }
 
 
-function spip_ical_breves($nom_site, $adresse_site)
+function spip_ical_breves($nom_site)
 {
+	global $titres;
 	$result = spip_query("SELECT id_breve, titre, date_heure FROM spip_breves WHERE statut = 'prop'");
 	while($row=spip_fetch_array($result)){
 		$id_breve=$row['id_breve'];
@@ -209,7 +218,7 @@ function spip_ical_breves($nom_site, $adresse_site)
 		$nb_breves++;
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:[$nom_site] $titre ("._T('item_breve_proposee').")");
-		ligne ("UID:breve$id_breve @ $adresse_site");
+		ligne ("breve$id_breve");
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART;VALUE=DATE:".date ("Ymd", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("CATEGORIES:"._T('item_breve_proposee'));
@@ -220,7 +229,7 @@ function spip_ical_breves($nom_site, $adresse_site)
 }
 
 
-function spip_ical_messages($id_utilisateur, $nom_site, $adresse_site)
+function spip_ical_messages($id_utilisateur, $nom_site)
 {
 	$result_messages = spip_query("SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE lien.id_auteur=$id_utilisateur AND vu='non' AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message");
 	while($row=spip_fetch_array($result_messages)){
@@ -271,7 +280,7 @@ function spip_ical_messages($id_utilisateur, $nom_site, $adresse_site)
 	ligne ("BEGIN:VTODO");
 	ligne ("SUMMARY:".$titre);
 	ligne ("DESCRIPTION:$texte");
-	ligne ("UID:nouv_mess$id_message @ $adresse_site");
+	ligne ("nouv_mess$id_message");
 	ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 	ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 	ligne ("CATEGORIES:$le_type");
@@ -280,7 +289,7 @@ function spip_ical_messages($id_utilisateur, $nom_site, $adresse_site)
 	}	
 }
 
-function spip_ical_forums($id_utilisateur, $nom_site, $adresse_site)
+function spip_ical_forums($id_utilisateur, $nom_site)
 {
 	$query_forum = "SELECT * FROM spip_forum WHERE statut = 'prop'";
 	$result_forum = spip_query($query_forum);
@@ -299,7 +308,7 @@ function spip_ical_forums($id_utilisateur, $nom_site, $adresse_site)
 		ligne ("BEGIN:VEVENT");
 		ligne ("SUMMARY:[$nom_site] $titre "._T('icone_forum_suivi'));
 		ligne ("DESCRIPTION:$texte\r$auteur $email_auteur");
-		ligne ("UID:forum$id_forum @ $adresse_site");
+		ligne ("forum$id_forum");
 		ligne ("DTSTAMP:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTSTART:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure),0,mois($date_heure),jour($date_heure),annee($date_heure))));
 		ligne ("DTEND:".date ("Ymd\THis", mktime (heures($date_heure),minutes($date_heure)+60,0,mois($date_heure),jour($date_heure),annee($date_heure))));
@@ -311,7 +320,7 @@ function spip_ical_forums($id_utilisateur, $nom_site, $adresse_site)
 	if ($nb_forum > 0) {
 		ligne ("BEGIN:VTODO");
 		ligne ("SUMMARY:[$nom_site] "._T('icone_forum_suivi').": $nb_forum");
-		ligne ("UID:forum @ $adresse_site");
+		ligne ("forum");
 		
 		$today=getdate(time());
 		$jour = $today["mday"];
