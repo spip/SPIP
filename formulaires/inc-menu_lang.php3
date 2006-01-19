@@ -20,7 +20,7 @@ $balise_MENU_LANG_collecte = array('menu_lang');
 
 // s'il n'y a qu'une langue eviter definitivement la balise ?php 
 function balise_MENU_LANG_stat ($args, $filtres) {
-	if (strpos($GLOBALS['meta']['langues_multilingue'],',') === false) return '';
+	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
 	return $args;
 }
 
