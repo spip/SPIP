@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// pour compatibilite. Remplacer par spip_action.php?action=redirect + args
+// pour compatibilite. voir dans le fichier inclus comment remplacer
 
 define ('_SPIP_REDIRECT', 1);
 include ("ecrire/inc_version.php3");

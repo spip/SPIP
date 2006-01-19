@@ -368,7 +368,6 @@ class Link {
 			$form .= "<input type=\"hidden\" name=\"".$name."[]\" "
 				. "value=\"".$value."\" />\n";
 		}
-
 		return $form;
 	}
 }
@@ -470,8 +469,7 @@ function spip_touch($fichier, $duree=0, $touch=true) {
 // et pour l'espace public (cf #SPIP_CRON dans inc_balise)
 
 function generer_spip_cron() {
-  return '<div style="background-image: url(\'' . 
-	generer_url_public('spip_action.php', 'action=cron') .
+  return '<div style="background-image: url(\'' . generer_url_action('cron') .
 	'\');"></div>';
 }
 
@@ -681,4 +679,9 @@ function generer_url_public($script, $args="", $no_entities=false) {
 	return $site . $script . $ext . $args;
 }
 
+function generer_url_action($script, $args="", $no_entities=false) {
+	return generer_url_public('spip_action.php',
+				  "action=$script" .($args ? "&$args" : ''),
+				  $no_entities);
+}
 ?>

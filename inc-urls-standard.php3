@@ -41,7 +41,7 @@ function generer_url_document($id_document) {
 	if (intval($id_document) <= 0)
 		return '';
 	if (($GLOBALS['meta']["creer_htaccess"]) == 'oui')
- 		return generer_url_public('spip_action.php',"action=autoriser&arg=$id_document");
+		return generer_url_action('autoriser',"arg=$id_document");
 	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
 		return ($row['fichier']);
 	return '';

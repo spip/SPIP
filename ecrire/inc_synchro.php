@@ -16,18 +16,16 @@ include_ecrire("inc_presentation");
 include_ecrire("inc_urls");
 include_ecrire("inc_acces"); // pour low_sec (iCal)
 
-function afficher_liens_calendrier($lien, $args, $icone, $texte) {
+function afficher_liens_calendrier($lien, $icone, $texte) {
 
 	echo debut_cadre_enfonce($icone);
 	echo $texte;
 	echo "<table style='width: 100%;><tr'><td style='width: 200px;'>";
-	icone_horizontale (_T('ical_methode_http'), generer_url_public($lien, $args),
-			   "calendrier-24.gif");
+	icone_horizontale (_T('ical_methode_http'), $lien, "calendrier-24.gif");
 	echo "</td>";
 	echo "<td> &nbsp; </td>";
 	echo "<td style='width: 200px;'>";
-	icone_horizontale (_T('ical_methode_webcal'), ereg_replace("https?://", "webcal://", generer_url_public($lien, $args)),
-			   "calendrier-24.gif");
+	icone_horizontale (_T('ical_methode_webcal'), ereg_replace("https?://", "webcal://", $lien), "calendrier-24.gif");
 	echo "</td></tr></table>";
 	echo fin_cadre_enfonce();
 }
@@ -92,9 +90,9 @@ echo '<p>'._T('ical_info_calendrier').'</p>';
 
 
 
- afficher_liens_calendrier('ical','','', _T('ical_texte_public'));
+ afficher_liens_calendrier(generer_url_public('ical'),'', _T('ical_texte_public'));
 
- afficher_liens_calendrier("spip_action.php", "action=ical&id_auteur=$connect_id_auteur&arg=".afficher_low_sec($connect_id_auteur,'ical'),'cadenas-24.gif',  _T('ical_texte_prive'));
+ afficher_liens_calendrier(generer_url_action("ical", "id_auteur=$connect_id_auteur&arg=".afficher_low_sec($connect_id_auteur,'ical')),'cadenas-24.gif',  _T('ical_texte_prive'));
 
 
 fin_cadre_relief();

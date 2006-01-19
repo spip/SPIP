@@ -51,9 +51,7 @@ function ecrire_metas() {
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
 		  echo "<h4 font color=red>",
 		    _T('texte_inc_meta_1', array('fichier' => _FILE_META)),
-		    " <a href='",
-		    generer_url_public('spip_action.php', 'action=test_dirs'),
-		    "'>",
+		    " <a href='", generer_url_action('test_dirs'), "'>",
 		    _T('texte_inc_meta_2'),
 		    "</a> ",
 		    _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS)),

@@ -83,7 +83,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 		
 		echo "<a href='",
 		  (($statut == 'publie') ? 
-		   generer_url_public('spip_action.php', "action=redirect&id_article=$id_article") :
+		   generer_url_action('redirect', "id_article=$id_article") :
 		   generer_url_ecrire('articles', "id_article=$id_article")),
 		  "'>",
 		  typo($titre),
