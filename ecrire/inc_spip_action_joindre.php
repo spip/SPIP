@@ -27,7 +27,7 @@ function spip_action_joindre_dist()
     $sousaction4,
     $sousaction5,
     $action, $hash, $id_auteur,
-    $url, $chemin, $ancre, $type, $id_article, $id_document,  $redirect,
+    $url, $chemin, $ancre, $type, $id, $id_document,  $redirect,
     $_FILES,  $HTTP_POST_FILES;
 
   if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
@@ -48,18 +48,22 @@ function spip_action_joindre_dist()
      $documents_actifs = array();
 
      if (function_exists($action))
-       $action($path, $arg, $type, $id_article, $id_document, 
+       $action($path, $arg, $type, intval($id), $id_document, 
 	       $hash, $id_auteur, $redirect, $documents_actifs);
 
      else spip_log("spip_action: sousaction inconnue $action");
 
-     $link = new Link(_DIR_RESTREINT . $redirect);
      if ($documents_actifs) {
-	$link->addVar('show_docs',join('-',$documents_actifs));
+	$redirect .= '&show_docs=' . join('-',$documents_actifs);
      }
      
+     if ($ancre) {
+	$redirect .= '#' . $ancre;
+     }
+
+     $redirect = _DIR_RESTREINT . $redirect;
+     # spip_action fera la redirection.
      ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
-     redirige_par_entete($link->getUrl($ancre));
 }
 
 

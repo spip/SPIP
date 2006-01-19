@@ -60,8 +60,8 @@ function spip_action_supprimer_dist() {
 				WHERE id_document=$id_vignette");
 		}
 	}
-	$link = new Link(_DIR_RESTREINT_ABS . $GLOBALS['redirect']);
-	redirige_par_entete($link->getUrl($GLOBALS['ancre']));
+	$GLOBALS['redirect'] = _DIR_RESTREINT_ABS . $GLOBALS['redirect'];
+	if ($GLOBALS['ancre'])	$GLOBALS['redirect'] .= '#'. $GLOBALS['ancre'];
 }
 
 ?>
