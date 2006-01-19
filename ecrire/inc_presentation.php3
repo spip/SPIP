@@ -1782,7 +1782,7 @@ function envoi_link($nom_site_spip, $rubrique="")
 {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $couleur_foncee, $couleur_claire;
-	$adresse_site=$GLOBALS['meta']["adresse_site"];
+
 	$args_color =	  "couleur_claire=" .
 			  urlencode($couleur_claire) .
 			  '&couleur_foncee=' .

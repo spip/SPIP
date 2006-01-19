@@ -161,8 +161,6 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 
 function extrait_article($row) {
 	include_ecrire("inc_texte");
-
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	
 	$id_article = $row[0];
 	$titre = $row[2];
@@ -233,7 +231,6 @@ function envoyer_mail_publication($id_article) {
 
 function envoyer_mail_proposition($id_article) {
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-	$adresse_site = $GLOBALS['meta']["adresse_site"];
 	$nom_site_spip = $GLOBALS['meta']["nom_site"];
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
