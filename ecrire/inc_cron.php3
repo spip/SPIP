@@ -153,7 +153,7 @@ function taches_generales() {
 
 	// syndication
 	if ($GLOBALS['meta']["activer_syndic"] == "oui") 
-		$taches_generales['sites'] = 90;
+		$taches_generales['syndic'] = 90;
 
 	// indexation
 	if ($GLOBALS['meta']["activer_moteur"] == "oui") 
@@ -189,7 +189,7 @@ function cron_index($t) {
 		return 0;
 }
 
-function cron_sites($t) {
+function cron_syndic($t) {
 	$r = executer_une_syndication();
 	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&
 	    ($GLOBALS['meta']["visiter_sites"] == 'oui')) {
