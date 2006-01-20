@@ -262,6 +262,7 @@ ecrire/inc_admin_index.php -text
 ecrire/inc_admin_repair.php -text
 ecrire/inc_admin_tech.php -text
 ecrire/inc_admin_vider.php -text
+ecrire/inc_agenda.php -text
 ecrire/inc_aide_index.php -text
 ecrire/inc_ajax.php3 -text
 ecrire/inc_ajax_page.php -text
