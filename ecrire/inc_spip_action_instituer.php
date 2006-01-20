@@ -12,31 +12,24 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_session");
-
 function spip_action_instituer_dist()
 {
-	global $arg, $action, $hash, $id_auteur;
+	global $arg, $action ;
 
-  if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
-	spip_log("spip_action: $action $arg interdit a $id_auteur");
-  else {
-    ereg("^([^ ]*) (.*)$", $arg, $r);
-    $var_nom = 'instituer_' . $r[1];
-    if (function_exists($var_nom))
-      $var_nom($r[2]);
-    else spip_log("spip_action_$action: $arg incompris");
-  }
+	ereg("^([^ ]*) (.*)$", $arg, $r);
+	$var_nom = 'instituer_' . $r[1];
+	if (function_exists($var_nom))
+	  $var_nom($r[2]);
+	else spip_log("spip_action_$action: $arg incompris");
 }
 
 function instituer_collaboration($debloquer_article)
 {
         global $id_auteur;
-        if ($debloquer_article) {
+        if ($debloquer_article AND ($id_auteur = intval($id_auteur))) {
                 if ($debloquer_article <> 'tous')
                         $where_id = "AND id_article=".intval($debloquer_article);
-                $query = "UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$id_auteur $where_id";
-                spip_query ($query);
+                spip_query ("UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$id_auteur $where_id");
         }
 }
 

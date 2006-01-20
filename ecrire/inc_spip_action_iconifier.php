@@ -12,15 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_session");	# verifier_action_auteur
-
 function spip_action_iconifier_dist()
 {
-	global $action, $hash, $id_auteur, $arg, $image;
-
-	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
-		die ($action . '!!!');
-
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
 		spip_image_ajouter_dist();
 	else	spip_image_effacer_dist();

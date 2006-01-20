@@ -251,7 +251,7 @@ function renouvelle_alea()
 
 
 function _action_auteur($action, $id_auteur, $nom_alea) {
-	if (!$id_auteur) {
+	if (!($id_auteur = intval($id_auteur))) {
 		global $connect_id_auteur, $connect_pass;
 		$id_auteur = $connect_id_auteur;
 		$pass = $connect_pass;

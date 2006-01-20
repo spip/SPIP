@@ -13,20 +13,15 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_charsets");	# pour le nom de fichier
-include_ecrire("inc_session");	# verifier_action_auteur
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
-
 
 // Effacer un doc (et sa vignette)
 function spip_action_supprimer_dist() {
 
-	global $action, $hash, $id_auteur, $arg;
-	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
-		die ($action . '!!!');
+	global  $arg;
 
-	$result = spip_query("SELECT id_vignette, fichier
-		FROM spip_documents
-		WHERE id_document=$arg");
+	$arg = intval($arg);
+	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
 	if ($row = spip_fetch_array($result)) {
 		$fichier = $row['fichier'];
 		$id_vignette = $row['id_vignette'];

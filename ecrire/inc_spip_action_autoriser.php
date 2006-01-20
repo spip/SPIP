@@ -14,7 +14,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_charsets");	# pour le nom de fichier
-include_ecrire("inc_session");	# verifier_action_auteur
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 //  acces aux documents joints securise

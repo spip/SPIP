@@ -13,29 +13,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_charsets");	# pour le nom de fichier
-include_ecrire("inc_session");	# verifier_action_auteur
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 include_ecrire('inc_getdocument');
 
 function spip_action_joindre_dist()
 {
-  global 
-    $arg,
+  global $hash, $id_auteur, $arg, $redirect,
     $sousaction1,
     $sousaction2,
     $sousaction3,
     $sousaction4,
     $sousaction5,
-    $action, $hash, $id_auteur,
-    $url, $chemin, $ancre, $type, $id, $id_document,  $redirect,
+    $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
-
-  if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
-		die ($action . '!!!');
 
      // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,
      // et son transcodage est couteux et perilleux
-     $action = 'spip_action_joindre' .
+     $sousaction = 'spip_action_joindre' .
        ($sousaction1 ? 1 :
 	($sousaction2 ? 2 :
 	 ($sousaction3 ? 3 : 
@@ -47,11 +41,11 @@ function spip_action_joindre_dist()
 
      $documents_actifs = array();
 
-     if (function_exists($action))
-       $action($path, $arg, $type, intval($id), $id_document, 
+     if (function_exists($sousaction))
+       $sousaction($path, $arg, $type, intval($id), $id_document, 
 	       $hash, $id_auteur, $redirect, $documents_actifs);
 
-     else spip_log("spip_action: sousaction inconnue $action");
+     else spip_log("spip_action: sousaction inconnue $sousaction");
 
      if ($documents_actifs) {
 	$redirect .= '&show_docs=' . join('-',$documents_actifs);
@@ -61,7 +55,6 @@ function spip_action_joindre_dist()
 	$redirect .= '#' . $ancre;
      }
 
-     $redirect = _DIR_RESTREINT . $redirect;
      # spip_action fera la redirection.
      ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
 }

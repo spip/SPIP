@@ -13,17 +13,13 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_charsets");	# pour le nom de fichier
-include_ecrire("inc_session");	# verifier_action_auteur
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 function spip_action_tourner_dist() {
 	
-	global $action, $hash, $id_auteur, $arg;
-	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur))
-		die ($action . '!!!');
-
-	global $var_rot, $convert_command;
+	global $arg, $var_rot, $convert_command;
 	$var_rot = intval($var_rot);
+	$arg = intval($arg);
 
 	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg";
 	$result = spip_query($query);

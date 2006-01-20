@@ -12,13 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-include_ecrire("inc_session");
-
 function spip_action_purger_dist()
 {
-  global $arg, $hash, $id_auteur, $action;
-
-  if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) exit;
+  global $arg;
 
   include_ecrire("inc_invalideur");
 
