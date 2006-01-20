@@ -403,7 +403,7 @@ OR (basename($REQUEST_URI) == 'spip_action.php?action=test_dirs'))) {
 	else if (defined("_INC_PUBLIC")) {
 	// Si on est dans le site public, dire que qq s'en occupe
 		include_ecrire ("inc_minipres");
-		install_tout_html(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
+		minipres(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
 	}
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire 
  }
