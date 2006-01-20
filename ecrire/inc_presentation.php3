@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire ("inc_layer");
-include_ecrire("inc_calendrier");
+include_ecrire("inc_agenda");
 
 // Choix dynamique de la couleur
 
@@ -3382,6 +3382,42 @@ function http_style_background($img, $att='')
 {
   return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
     ($att ? (' ' . $att) : '') . ";'";
+}
+
+
+//
+// Creer un bouton qui renvoie vers la bonne url spip_rss
+function bouton_spip_rss($op, $args, $fmt='rss') {
+
+	if (is_array($args))
+		foreach ($args as $val => $var)
+			if ($var) $a .= ':' . $val.'-'.$var;
+	$a = substr($a,1);
+
+	$url = generer_url_action('rss', "op=$op" 
+			    . (!$a ? "" : "&args=$a")
+			    . ('&id=' . $GLOBALS['connect_id_auteur'])
+			    . ('&cle=' . afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a"))
+			    . ('&lang=' . $GLOBALS['spip_lang']));
+
+	switch($fmt) {
+		case 'ical':
+			$url = preg_replace(',^.*?://,', 'webcal://', $url)
+			  . "&amp;fmt=ical";
+			$button = 'iCal';
+			break;
+		case 'rss':
+		default:
+		  
+			$button = 'RSS';
+			break;
+	}
+
+	return "<a href='"
+	. $url
+	. "'>"
+	. '<span class="rss-button">'.$button.'</span>'
+	. "</a>";
 }
 
 

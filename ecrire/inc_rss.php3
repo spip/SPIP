@@ -132,45 +132,6 @@ END:'.$type.'
 	return array($u, 'Content-Type: text/calendar; charset=utf-8');
 }
 
-
-//
-// Creer un bouton qui renvoie vers la bonne url spip_rss
-function bouton_spip_rss($op, $args, $fmt='rss') {
-
-	if (is_array($args))
-		foreach ($args as $val => $var)
-			if ($var) $a .= ':' . $val.'-'.$var;
-	$a = substr($a,1);
-
-	$url = suivre_lien($GLOBALS['meta']['adresse_site'] . '/',
-			   ("spip_rss.php?op=$op" 
-			    . (!$a ? "" : "&amp;args=$a")
-			    . ('&amp;id=' . $GLOBALS['connect_id_auteur'])
-			    . ('&amp;cle=' . afficher_low_sec($GLOBALS['connect_id_auteur'], "rss $op $a"))
-			    . ('&amp;lang=' . $GLOBALS['spip_lang'])));
-
-	switch($fmt) {
-		case 'ical':
-			$url = preg_replace(',^.*?://,', 'webcal://', $url)
-			  . "&amp;fmt=ical";
-			$button = 'iCal';
-			break;
-		case 'rss':
-		default:
-		  
-			$button = 'RSS';
-			break;
-	}
-
-	return "<a href='"
-	. $url
-	. "'>"
-	. '<span class="rss-button">'.$button.'</span>'
-	. "</a>";
-}
-
-
-
 //
 // Fonctions de remplissage du RSS
 //
@@ -178,11 +139,9 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 
 // Suivi des revisions d'articles
 function rss_suivi_versions($a) {
-	include_ecrire("inc_suivi_revisions");
-	include_ecrire("lab_revisions");
-	include_ecrire("lab_diff");
-	$rss = afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
-	return $rss;
+	include_ecrire("inc_suivi_versions");
+	return  afficher_suivi_versions (0, $a['id_secteur'], $a['id_auteur'], $a['lang_choisie'], true, true);
+
 }
 
 // Suivi des forums
@@ -356,7 +315,7 @@ function rss_sites($critere) {
 // On cree ensuite le RSS correspondant a l'operation
 
 
-function spip_rss_dist()
+function spip_action_rss_dist()
 {
   global $args, $cle, $fmt, $id, $lang, $op;
 
