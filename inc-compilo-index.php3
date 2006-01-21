@@ -307,11 +307,16 @@ function champs_traitements ($p) {
 
 
 	// Passer |safehtml sur les boucles "sensibles"
+	// sauf sur les champs dont on est surs
 	switch ($p->type_requete) {
 		case 'forums':
 		case 'signatures':
 		case 'syndic_articles':
-			$ps = 'safehtml('.$ps.')';
+			$champs_surs = array(
+			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx');
+			if (!in_array(strtolower($p->nom_champ), $champs_surs)
+			AND !preg_match(',^ID_,', $p->nom_champ))
+				$ps = 'safehtml('.$ps.')';
 			break;
 		default:
 			break;
