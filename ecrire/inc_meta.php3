@@ -10,19 +10,15 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lire_metas() {
 	global $meta;
 
-	$meta = '';
-	$query = 'SELECT nom,valeur FROM spip_meta';
-	$result = spip_query($query);
-	while ($row = spip_fetch_array($result)) {
-		$nom = $row['nom'];
-		$meta[$nom] = $row['valeur'];
+	$meta = array();
+	$result = spip_query('SELECT nom,valeur FROM spip_meta');
+	while (list($nom,$valeur) = spip_fetch_array($result)) {
+		$meta[$nom] = $valeur;
 	}
 }
 
@@ -46,16 +42,17 @@ function ecrire_metas() {
 	lire_metas();
 
 	if (is_array($meta)) {
-
 		$ok = ecrire_fichier (_FILE_META, serialize($meta));
-		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo')
-		  echo "<h4 font color=red>",
-		    _T('texte_inc_meta_1', array('fichier' => _FILE_META)),
-		    " <a href='", generer_url_action('test_dirs'), "'>",
-		    _T('texte_inc_meta_2'),
-		    "</a> ",
-		    _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS)),
-		    "&nbsp;</h4>\n";
+		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo') {
+		  include_ecrire('minipres');
+		  minipres(_T('texte_inc_meta_2'), "<h4 font color=red>".
+		    _T('texte_inc_meta_1', array('fichier' => _FILE_META)).
+		    " <a href='". generer_url_action('test_dirs'). "'>".
+		    _T('texte_inc_meta_2').
+		    "</a> ".
+		    _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS)).
+			   "</h4>\n");
+		}
 	}
 }
 

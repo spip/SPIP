@@ -28,7 +28,6 @@ function messagerie_dist()
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
 }
 
-  spip_log("messa det $detruire_message");
 if ($detruire_message) {
 	spip_query("DELETE FROM spip_messages WHERE id_message=$detruire_message");
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$detruire_message");
