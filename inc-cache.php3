@@ -207,21 +207,21 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 
 // Passage par reference juste par souci d'economie
 
-function creer_cache(&$page, $chemin_cache, $duree)
-{
+function creer_cache(&$page, $chemin_cache, $duree) {
 	// Entrer dans la base les invalideurs calcules par le compilateur
 	// (et supprimer les anciens)
 
 	include_ecrire('inc_invalideur');
 	maj_invalideurs($chemin_cache, $page['invalideurs'], $duree);
 
-	// Enregistrer le fichier cache
-
-	$r = ecrire_fichier($chemin_cache, 
-			"<!-- "
-			. str_replace("\n", " ", serialize($page['signal']))
-			. " -->\n"
-			. $page['texte']);
+	// Enregistrer le fichier cache qui contient
+	// 1) la carte d'identite de la page (ses "globals", genre id_article=7)
+	// 2) son contenu
+	$r = ecrire_fichier($chemin_cache,
+		"<!-- "
+		. str_replace("\n", " ", serialize($page['signal']))
+		. " -->\n"
+		. $page['texte']);
 
 	// Nouveau cache : creer un invalideur 't' fixant la date
 	// d'expiration et la taille du fichier

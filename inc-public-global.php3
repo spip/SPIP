@@ -70,29 +70,34 @@ function calcule_header_et_page ($fond) {
 
 function obtenir_page_ancienne ($chemin_cache, $fond, $inclusion=false) {
 
-		//
-		// Lire le fichier cache
-		//
-		lire_fichier ($chemin_cache, $page['texte']);
-		$lastmodified = max($lastmodified, @filemtime($chemin_cache));
-		# spip_log ("cache $chemin_cache $lastmodified");
+	//
+	// Lire le fichier cache
+	//
+	lire_fichier ($chemin_cache, $page['texte']);
+	$lastmodified = max($lastmodified, @filemtime($chemin_cache));
+	# spip_log ("cache $chemin_cache $lastmodified");
 
-		//
-		// Lire sa carte d'identite & fixer le contexte global
-		//
-		if (preg_match("/^<!-- ([^\n]*) -->\n(.*)/ms", $page['texte'], $match)
-		AND is_array($meta_donnees = unserialize($match[1]))) {
-			foreach ($meta_donnees as $var=>$val)
+	//
+	// Lire sa carte d'identite & fixer le contexte global
+	//
+	if (preg_match("/^<!-- ([^\n]*) -->\n/ms", $page['texte'], $match)) {
+		$meta_donnees = unserialize($match[1]);
+		if (is_array($meta_donnees)) {
+			foreach ($meta_donnees as $var=>$val) {
 				$page[$var] = $val;
-
-			$page['texte'] = $match[2];
-
-			// Remplir les globals pour les boutons d'admin
-			if (!$inclusion AND is_array($page['contexte']))
-			  foreach ($page['contexte'] as $var=>$val) {
-					$GLOBALS[$var] = $val;
-			  }
+			}
 		}
+
+		$page['texte'] = substr($page['texte'], strlen($match[0]));
+
+		// Remplir les globals pour les boutons d'admin
+		if (!$inclusion AND is_array($page['contexte'])) {
+			foreach ($page['contexte'] as $var=>$val) {
+				$GLOBALS[$var] = $val;
+			}
+		}
+	}
+
 	return $page;
 }
 
@@ -151,14 +156,15 @@ function afficher_page_globale ($fond) {
 	}
 	else {
 		// Obtenir la page
-	  if (!$use_cache)
-	    $page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
-	  else {
-	    include_local('inc-calcul');
-	    $page = calculer_page_globale ($chemin_cache, $fond);
+		if (!$use_cache)
+			$page = obtenir_page_ancienne ($chemin_cache, $fond, false);
+		else {
+			include_local('inc-calcul');
+			$page = calculer_page_globale ($chemin_cache, $fond);
 
-	    if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
-	  }
+			if ($chemin_cache)
+				creer_cache($page, $chemin_cache, $use_cache);
+		}
 	}
 
 	if ($chemin_cache) $page['cache'] = $chemin_cache;
