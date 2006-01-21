@@ -233,7 +233,10 @@ function help_img($regs) {
 	list ($cache, $rep, $lang, $file, $ext) = $regs;
 
 	header("Content-Type: image/$ext");
-	if (@file_exists($img = _DIR_CACHE . 'aide-'.$cache)) {
+	if ($rep=="IMG" AND $lang=="cache"
+	AND @file_exists($img_tex = _DIR_IMG.'cache-TeX/'.preg_replace(',^TeX-,', '', $file))) {
+          readfile($img_tex);
+	} else if (@file_exists($img = _DIR_CACHE . 'aide-'.$cache)) {
 		readfile($img);
 	} else if (@file_exists($img = _DIR_RACINE . 'AIDE/aide-'.$cache)) {
 		readfile($img);
