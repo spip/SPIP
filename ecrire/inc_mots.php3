@@ -605,7 +605,7 @@ function afficher_groupe_mots($id_groupe) {
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
 			
-	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page.php", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::'") . ",'$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page.php", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::") . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
 
 
