@@ -77,8 +77,7 @@ function mini_afficher_rubrique ($id_rubrique, $rac="", $liste="", $col = 1, $ru
 					$titre = "<div class='rub-ouverte'>$titre</div>";
 
 					# ensuite, l'ouverture du menu des sous-rubriques
-					$url = "ajax_page.php?fonction=aff_rub&rac=$rac"
-					."&exclus=$rub_exclus&id=$la_rub&col=".($col+1);
+					$url = generer_url_ecrire("ajax_page.php", "fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id=$la_rub&col=".($col+1));
 					$onClick .= "charger_id_url('$url',"
 					. "'".$rac."_col_".($col+1)
 					."', 'slide_horizontal(\'".$rac."_principal\', \'"
@@ -178,7 +177,7 @@ function mini_nav ($sel, $rac="",$fonction="", $rub_exclus=0, $aff_racine=false)
 		$ondbClick .= "findObj('selection_rubrique').style.display='none';";
 	}
 
-	$onClick .= "charger_id_url('ajax_page.php?fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id=0&col=1', '".$rac."_col_1');";
+	$onClick .= "charger_id_url('" . generer_url_ecrire("ajax_page.php", "fonction=aff_rub&rac=$rac&exclus=$rub_exclus&id=0&col=1'") . ", '".$rac."_col_1');";
 
 	$ret .= "<div class='arial11 petite-rubrique' onclick=\"$onClick\" ondblclick=\"$ondbClick$onClick\" style='background-image: url(" . _DIR_IMG_PACK . "racine-site-12.gif); background-color: white; border: 1px solid $couleur_foncee; border-bottom: 0px; width: 134px;'><div class='pashighlight'>";
 	$ret .= _T("info_racine_site");

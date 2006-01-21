@@ -757,7 +757,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 
 	$tmp_var = substr(md5($jjscript), 0, 4);
-	$javascript = "charger_id_url('ajax_page.php?fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page.php","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::") . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
@@ -789,7 +789,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?fonction=sql&amp;id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('ajax_page.php', "fonction=sql&id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -980,7 +980,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
-	$javascript = "charger_id_url('ajax_page.php?fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire('ajax_page.php', 'fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, 4, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
@@ -1007,7 +1007,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('ajax_page.php?fonction=sql&amp;id_ajax_fonc=$id_ajax_trad','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('ajax_page.php', "fonction=sql&id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1932,7 +1932,7 @@ function barre_onglets($rubrique, $onglet){
 	}
 	if ($rubrique == "repartition") {
 		if ($GLOBALS['meta']['multi_articles'] == 'oui' OR $GLOBALS['meta']['multi_rubriques'] == 'oui') {
-			onglet(_T('onglet_repartition_rubrique'), "statistiques_repartition.php", "rubriques", $onglet, "rubrique-24.gif");
+		  onglet(_T('onglet_repartition_rubrique'), generer_url_ecrire("statistiques_repartition"), "rubriques", $onglet, "rubrique-24.gif");
 			onglet(_T('onglet_repartition_lang'), generer_url_ecrire("statistiques_lang",""), "langues", $onglet, "langues-24.gif");
 		}
 	}
@@ -1944,8 +1944,8 @@ function barre_onglets($rubrique, $onglet){
 	}
 
 	if ($rubrique == "stat_depuis") {
-		onglet(_T('icone_repartition_actuelle'), "statistiques_repartition.php", "popularite", $onglet);
-		onglet(_T('onglet_repartition_debut'), "statistiques_repartition.php?critere=debut", "debut", $onglet);
+	  onglet(_T('icone_repartition_actuelle'), generer_url_ecrire("statistiques_repartition"), "popularite", $onglet);
+	  onglet(_T('onglet_repartition_debut'), generer_url_ecrire("statistiques_repartition.php", "critere=debut"), "debut", $onglet);
 
 	}
 
@@ -2555,7 +2555,7 @@ if (true /*$bandeau_colore*/) {
 //		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
 		$id_rubrique = $GLOBALS['id_rubrique'];
-		echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('ajax_page.php?fonction=aff_nav_recherche&id=$id_rubrique','nav-recherche');\">" .
+		echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('" . generer_url_ecrire('ajax_page.php', "fonction=aff_nav_recherche&id=$id_rubrique") . "','nav-recherche');\">",
 		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20' border='0'") ."</a>";
@@ -3072,7 +3072,7 @@ function debut_gauche($rubrique = "asuivre") {
 		$largeur_ecran = 974;
 		
 		// Si edition de texte, formulaires larges
-		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)\.php', $GLOBALS['REQUEST_URI'])) {
+		if (ereg('((articles|breves|rubriques)_edit|forum_envoi)', $GLOBALS['REQUEST_URI'])) {
 			$flag_centre_large = true;
 		}
 		
