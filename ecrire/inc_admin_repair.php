@@ -86,12 +86,11 @@ if ($ok) {
 
 	if (! $res = verifier_base())
 	  $res = "<br><br><font color='red'><b><tt>"._T('avis_erreur_mysql').' '.spip_sql_errno().': '.spip_sql_error() ."</tt></b></font><br /><br /><br />\n";
-	install_debut_html(_T('texte_tentative_recuperation'));echo $res; install_fin_html();
-
 	fin_admin($action);
+	minipres(_T('texte_tentative_recuperation'), $res);
 }
 else {
-	install_debut_html(_T('titre_reparation'));echo "<p>$message</p>";install_fin_html();
+	minipres(_T('titre_reparation'), "<p>$message</p>");
 }
 
 }

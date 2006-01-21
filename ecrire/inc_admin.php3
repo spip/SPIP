@@ -23,34 +23,34 @@ function debut_admin($action, $commentaire='') {
 
 	if ((!$action) || ($connect_statut != "0minirezo")) {
 		include_ecrire ("inc_minipres");
-		install_debut_html(_T('info_acces_refuse'));install_fin_html();
-		exit;
+		minipres(_T('info_acces_refuse'));
 	}
 	$fichier = fichier_admin($action);
 	if (@file_exists(_DIR_SESSIONS . $fichier)) {
 		spip_log ("Action admin: $action");
 		return true;
 	}
-
-	include_ecrire ("inc_minipres");
-	include_ecrire ("inc_texte");
-	install_debut_html(_T('info_action', array('action' => $action)));
-
 	if ($commentaire) {
-		echo "<p>".propre($commentaire)."</p>";
+		include_ecrire ("inc_texte");
+		$commentaire = ("<p>".propre($commentaire)."</p>");
 	}
-
-	echo $clean_link->getForm('POST');
-	echo "<P><B>"._T('info_authentification_ftp')."</B>";
-	echo aide("ftp_auth");
-	echo "<P>"._T('info_creer_repertoire');
-	echo "<P align='center'><INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"$fichier\" SIZE='30'>";
-	echo "<P> "._T('info_creer_repertoire_2', array('repertoire' => _DIR_SESSIONS));
-	echo "<P align='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_recharger_page')."' CLASS='fondo'>";
-	echo "</FORM>";
-
-	install_fin_html();
-	exit;
+	include_ecrire ("inc_minipres");
+	minipres(_T('info_action', array('action' => $action)),
+		  $commentaire
+		. $clean_link->getForm('POST')
+		. "<P><B>"._T('info_authentification_ftp')."</B>"
+		. aide("ftp_auth")
+		. "<P>"
+		. _T('info_creer_repertoire')
+		. "<P align='center'><INPUT TYPE='text' NAME='fichier' CLASS='fondl' VALUE=\"".
+		 $fichier
+		. "\" size='30'>"
+		. "<P> "
+		. _T('info_creer_repertoire_2', array('repertoire' => _DIR_SESSIONS))
+		. "<P align='right'><INPUT TYPE='submit' VALUE='"
+		. _T('bouton_recharger_page')
+		. "' CLASS='fondo'>"
+		. "</form>");
 }
 
 function fin_admin($action) {
