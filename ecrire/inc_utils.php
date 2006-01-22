@@ -545,6 +545,18 @@ function redirige_par_entete($url, $fin="") {
 #	spip_log("redirige $url$fin");
 	include_ecrire('inc_headers');
 	spip_header("Location: $url$fin");
+
+	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
+<html><head>
+<title>302 Found</title>
+</head>
+<body>
+<h1>302 Found</h1>
+<a href="'
+.quote_amp("$url$fin")
+.'">Click here</a>.<p>
+</body></html>';
+
 	exit;
 }
 
@@ -640,7 +652,32 @@ function charger_generer_url() {
 		include_local("inc-urls-".$GLOBALS['type_urls']);
 }
 
-// Fonctions de fabriction des URL des scripts de Spip
+
+//
+// Fonctions de fabrication des URL des scripts de Spip
+//
+
+// l'URL de base du site, sans se fier a meta(adresse_site) qui peut etre fausse
+// (sites a plusieurs noms d'hotes, deplacements, erreurs)
+function url_de_base() {
+	global $_SERVER;
+	global $REQUEST_URI;
+
+	static $url;
+
+	if ($url)
+		return $url;
+
+	$http = (substr($_SERVER["SCRIPT_URI"],0,5) == 'https') ? 'https' : 'http';
+	# note : HTTP_HOST contient le :port si necessaire
+	$myself = $http.'://' .$_SERVER['HTTP_HOST'].$REQUEST_URI;
+
+	# supprimer (ecrire/)?xxxxx
+	$url = preg_replace(',/('._DIR_RESTREINT_ABS.')?[^/]*$,', '/', $myself);
+	return $url;
+}
+
+
 // Pour une redirection, la liste des arguments doit etre separee par "&"
 // Pour du code XHTML, ca doit etre &amp;
 // Bravo au W3C qui n'a pas ete capable de nous eviter ca
@@ -650,30 +687,23 @@ function charger_generer_url() {
 // http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 
 function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
-	$site = $rel ? "" : $GLOBALS['meta']["adresse_site"];
-	if ($site)
-	  $site .= ((substr($site,-1) <> '/') ? '/' : '') . _DIR_RESTREINT_ABS;
-	else $site =  _DIR_RESTREINT;
 
-	if (!$site)
-	  $site = './';
-	elseif (substr($site,-1) != '/') {
-		$site .= '/';
-	}
+	if (!$rel)
+		$ecrire = url_de_base() . _DIR_RESTREINT_ABS;
+	else
+		$ecrire = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
 	$ext=(ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? "?" : "");
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 
-	return "$site$script$ext$args";
+	return "$ecrire$script$ext$args";
 }
 
 // scripts publics appeles a partir de l'espace prive ou de l'exterieur (mail)
-
 function generer_url_public($script, $args="", $no_entities=false) {
-	$site = $GLOBALS['meta']["adresse_site"];
-	if ($site)
-	  $site .= ((substr($site,-1) <> '/') ? '/' : '');
-	else $site = _DIR_RACINE;
+	
+	$site = url_de_base();
+
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 	$ext =  (ereg('.php[3]?$', $script) ? '' :_EXTENSION_PHP).($args ? '?' : "");
 	return $site . $script . $ext . $args;

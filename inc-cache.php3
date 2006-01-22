@@ -18,6 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // la fonction retire_cache()
 //
 function generer_nom_fichier_cache($contexte='', $fond='') {
+	global $_SERVER;
 	global $flag_gz;
 
 	if (!$contexte) {
@@ -41,7 +42,7 @@ function generer_nom_fichier_cache($contexte='', $fond='') {
 		$fichier_cache = 'INDEX-';
 
 	// morceau de md5 selon HOST et $fond
-	$md_cache = md5($fichier_requete . $GLOBALS['HTTP_HOST'] . $fond);
+	$md_cache = md5($fichier_requete . $_SERVER['HTTP_HOST'] . $fond);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
 	// Sous-repertoires 0...9a..f/

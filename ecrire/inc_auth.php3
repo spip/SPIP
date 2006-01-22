@@ -101,10 +101,10 @@ function auth_dist() {
 		if ($_GET['bonjour'] == 'oui') $clean_link->delVar('bonjour');
 
 		$url = str_replace('/./', '/',  _DIR_LOGGED_IN. $clean_link->getUrl());
-		redirige_par_entete(generer_url_public('spip_login'),"?url=".urlencode($url));
-		exit;
+		redirige_par_entete(generer_url_public('spip_login'),
+			"?url=".urlencode($url));
+		exit; # pour etre vraiment surs :)
 	}
-
 
 	//
 	// Chercher le login dans la table auteurs
