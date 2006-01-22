@@ -346,8 +346,8 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 	&& !preg_match(",Mozilla/4\.0[^ ].*Win,i", $GLOBALS['HTTP_USER_AGENT'])
 	// special bug Apache2x
 	&& !preg_match(",Apache(-[^ ]+)?/2,i", $GLOBALS['SERVER_SOFTWARE'])
-	&& !($GLOBALS['flag_sapi_name']
-		AND preg_match(",^apache2,", @php_sapi_name()))
+	// test suspendu: http://article.gmane.org/gmane.comp.web.spip.devel/32038/
+	#&& !($GLOBALS['flag_sapi_name'] AND preg_match(",^apache2,", @php_sapi_name()))
 	// si la compression est deja commencee, stop
 	&& !@ini_get("zlib.output_compression")
 	&& !@ini_get("output_handler")
