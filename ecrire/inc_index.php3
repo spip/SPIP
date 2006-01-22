@@ -14,6 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire('inc_base');
+include_ecrire('inc_abstract_sql');
 
 // Quels formats sait-on extraire ?
 $GLOBALS['extracteur'] = array (
@@ -23,6 +24,10 @@ $GLOBALS['extracteur'] = array (
 	'css'   => 'extracteur_txt',
 	'html'  => 'extracteur_html'
 );
+
+// tables que l'on ne doit pas indexer
+global $INDEX_tables_interdites;
+$INDEX_tables_interdites=array('spip_ajax_fonc');
 
 // Indexation des elements de l'objet principal
 // 'champ'=>poids, ou 'champ'=>array(poids,min_long)
@@ -151,26 +156,81 @@ function indexer_chaine($texte, $val = 1, $min_long = 3) {
 	}
 }
 
-
+// id_table = 1...9 pour les tables spip, et ensuite 100, 101, 102...
+// pour les tables additionnelles, selon l'ordre dans lequel
+// elles sont reperees. On stocke le tableau de conversion table->id_table
+// dans spip_meta
 function update_index_tables(){
 	global $tables_principales;
-	$liste_tables = liste_index_tables();
+	global $INDEX_tables_interdites;
+	
+	$old_liste_tables = liste_index_tables();
+	$rev_old_liste_tables = array_flip($old_liste_tables);
+
+	$liste_tables = array();
+	// les tables SPIP conventionnelles en priorite
+	$liste_tables[1]='spip_articles';
+	$liste_tables[2]='spip_auteurs';
+	$liste_tables[3]='spip_breves';
+	$liste_tables[4]='spip_documents';
+	$liste_tables[5]='spip_forum';
+	$liste_tables[6]='spip_mots';
+	$liste_tables[7]='spip_rubriques';
+	$liste_tables[8]='spip_signatures';
+	$liste_tables[9]='spip_syndic';
+
+	// detection des nouvelles tables
+	$id_autres = 100;
 	foreach(array_keys($tables_principales) as $new_table){
-		if (!in_array($new_table,$liste_tables)){
-			$new_id = 1;
-			while (isset($liste_tables[$new_id])) $new_id++;
-			$liste_tables[$new_id] = $new_table;
+		if (	(!in_array($new_table,$INDEX_tables_interdites))
+				&&(!in_array($new_table,$liste_tables))
+				&&($id_autres<254) ){
+			$desc = spip_abstract_showtable($new_table);
+			if (isset($desc['field']['idx'])){
+			  // la table a un champ idx pour gerer l'indexation
+			  if ( 	(isset($rev_old_liste_tables[$new_table]))
+						&&(!isset($liste_tables[$rev_old_liste_tables[$new_table]])) )
+			  		$liste_tables[$rev_old_liste_tables[$new_table]] = $new_table; // id conserve
+				else{
+					while (isset($liste_tables[$id_autres])&&($id_autres<254)) $id_autres++;
+					$liste_tables[$id_autres] = $new_table;
+				}
+			}
 		}
 	}
+
+	// Cas de l'ajout d'une nouvelle table a indexer :
+	// mise en coherence de la table d'indexation avec les nouveaux id
+	$rev_old_liste_tables = array_flip($old_liste_tables);
+	foreach($liste_tables as $new_id=>$new_table){
+		if (isset($rev_old_liste_tables[$new_table])){
+		  if (	($old_id = ($rev_old_liste_tables[$new_table]))
+					&&($old_id!=$new_id)){
+				$temp_id = 254;
+				// liberer le nouvel id
+				spip_query("UPDATE spip_index SET id_table='$temp_id' WHERE id_table='$new_id'");
+				// deplacer les indexation de l'ancien id sous le nouvel id
+				spip_query("UPDATE spip_index SET id_table='$new_id' WHERE id_table='$old_id'");
+				// remettre les indexation deplacees sous l'id qui vient d'etre libere
+				spip_query("UPDATE spip_index SET id_table='$old_id' WHERE id_table='$temp_id'");
+	
+				$old_liste_tables[$old_id] = $old_liste_tables[$new_id]; 
+				unset($old_liste_tables[$new_id]);
+				$rev_old_liste_tables = array_flip($old_liste_tables);
+			}
+		}
+	} 
+
 	ecrire_meta('index_table',serialize($liste_tables));
 	ecrire_metas();
 }
-function liste_index_tables(){
-    $liste_tables = array();
-    if (!isset($GLOBALS['meta']['index_table']))
-        lire_metas();
-    if (isset($GLOBALS['meta']['index_table']))
-        $liste_tables = unserialize($GLOBALS['meta']['index_table']);
+
+function liste_index_tables() {
+	$liste_tables = array();
+	if (!isset($GLOBALS['meta']['index_table']))
+		lire_metas();
+	if (isset($GLOBALS['meta']['index_table']))
+		$liste_tables = unserialize($GLOBALS['meta']['index_table']);
 	return $liste_tables;
 }
 
@@ -191,18 +251,18 @@ function id_index_table($table){
 function primary_index_table($table){
 	global $tables_principales;
 	/*global $table_des_tables;
-  $t = $table_des_tables[$table];
-  // pour les tables non Spip
-  if (!$t) $t = $table; else $t = "spip_$t";*/
-  $t = $table;
+	$t = $table_des_tables[$table];
+	// pour les tables non Spip
+	if (!$t) $t = $table; else $t = "spip_$t";*/
+	$t = $table;
 	$p = $tables_principales["$t"]['key']["PRIMARY KEY"];
 	if (!$p){
 		$p = preg_replace("{^spip_}","",$table);
 		$p = "id_" . $p;
 		if (substr($p,-1,1)=='s')
 		  $p = substr($p,0,strlen($p)-1);
- 	}
- 	return $p;
+	}
+	return $p;
 }
 
 function deja_indexe($table, $id_objet) {
@@ -430,9 +490,9 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			$id_objet = $id_forum;
 		} else {
 
-	    indexer_les_champs($row,$INDEX_elements_objet[$table]);
-	    if (isset($INDEX_objet_associes[$table]))
-	      foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
+			indexer_les_champs($row,$INDEX_elements_objet[$table]);
+			if (isset($INDEX_objet_associes[$table]))
+				foreach($INDEX_objet_associes[$table] as $quoi=>$poids)
 					indexer_elements_associes($table, $id_objet, $quoi, $poids);
 
 			if ($table=='spip_syndic'){
@@ -720,5 +780,9 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 	}
 	return $cache[$recherche][$primary];
 }
+
+// Si la liste des correspondances tables/id_table n'est pas la, la creer
+if ((isset($GLOBALS['meta']))&&(!isset($GLOBALS['meta']['index_table'])))
+	update_index_tables();
 
 ?>
