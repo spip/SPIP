@@ -539,7 +539,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 //
 
 function afficher_upload(
-$id_article, 
+$id, 
 $intitule, 
 $inclus = '', 
 $mode, 
@@ -590,17 +590,17 @@ $document=0) {
 
 	$res .= "</div>\n" . fin_block();
 
-	$redirect = new Link;
-	$redirect = $redirect->getUrl();
+	$script = retour_a_l_envoyeur($type);
+	$redirect = generer_url_ecrire($script,
+				       ("id_$type=$id" .
+					(($type == "rubrique") ?
+					 '&action=calculer_rubriques' : '')));
 
-	if ($type == "rubrique")
-		$redirect .='&amp;action=calculer_rubriques';
-		
 	return construire_upload($res,
 				array(
 				'redirect' => $redirect,
 				'hash' => calculer_action_auteur("joindre $mode"),
-				'id' => $id_article, 
+				'id' => $id, 
 				'id_auteur' => $connect_id_auteur,
 				'arg' => $mode,
 				'type' => $type,
@@ -676,10 +676,6 @@ function afficher_portfolio(
 	global $options,  $couleur_foncee;
 	global $spip_lang_left, $spip_lang_right;
 
-	$redirect_url = new Link();
-	if ($type == "rubrique")
-		$redirect_url->addVar('action', 'calculer_rubriques');
-	$redirect_url = $redirect_url->getUrl();
 
 	// la derniere case d'une rangee
 	$bord_droit = ($album == 'portfolio' ? 2 : 1);
@@ -766,87 +762,93 @@ entites_html($document['fichier'])."\" />\n";
 				else
 					echo debut_block_invisible("port$id_document");
 
-				echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
-				$link = new Link($redirect_url);
-				$link->addVar('modif_document', 'oui');
-				$link->addVar('id_document', $id_document);
-				$link->addVar('show_docs', $id_document);
-
-				$query = '?id_'.$type.'='.$document['id_type'];
-				$query .= '&show_docs='.$id_document;
-
-				echo $link->getForm('POST', "$query#$album");
-				echo "<b>"._T('titre_titre_document')."</b><br />\n";
-				echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
-
-				// modifier la date
-				if (
-				#$type == 'rubrique' AND  // (seulement dans les rubriques?)
-				$options == "avancees" AND
-				$connect_statut == '0minirezo') {
-					if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
-						$mois = $regs[2];
-						$jour = $regs[3];
-						$annee = $regs[1];
-					}
-					echo "<b>"._T('info_mise_en_ligne')."</b><br />\n",
-					  afficher_jour($jour, "NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
-					  afficher_mois($mois, "NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
-					  afficher_annee($annee, "NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\""),
-					  "<br />\n";
-				}
-
-				// bloc descriptif (affiche ou hidden)
-				if ($options == "avancees") {
-					echo "<b>"._T('info_description')."</b><br />\n";
-					echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
-					echo entites_html($descriptif);
-					echo "</textarea>\n";
-
-					if ($options == "avancees")
-						afficher_formulaire_taille($document);
-
-				} else {
-					echo "<input type='hidden' name='descriptif_document' value=\"".entites_html($descriptif)."\" />\n";
-				}
-
-				echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
-				echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
-				echo "</div>";
-				echo "</form>";
-
-
-				// bloc mettre a jour la vignette
-				echo "<hr />";
-				bloc_gerer_vignette($document, $id_article, $type, $album);
-
-				echo "</div>";
-				
-				// bouton "supprimer le doc"
-				icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id_article, $type, $id_document, $album), "image-24.gif",  "supprimer.gif");
-			} // fin block modifs
-
-
+				block_document($id_article, $id_document, $type, $titre, $descriptif,$date, $document, $album);
 			// fin bloc titre + descriptif
-			echo fin_block();
+				echo fin_block();
 
-			echo "</td>\n";
-			$case ++;
-
-			if ($case > $bord_droit) {
-				$case = 0;
-				echo "</tr>\n";
-			}
+				echo "</td>\n";
+				$case ++;
+				
+				if ($case > $bord_droit) {
+				  $case = 0;
+				  echo "</tr>\n";
+				}
 			
 			document_vu($id_document);
+			}
 	}
-
 	// fermer la derniere ligne
 	if ($case > 0) {
 			echo "<td style='border-$spip_lang_left: 1px solid $couleur;'>&nbsp;</td>";
 			echo "</tr>";
 	}
 }
+
+function block_document($id, $id_document, $type, $titre, $descriptif, $date, $document, $album)
+{
+	global $connect_statut, $couleur_foncee, $options;
+
+	if ($type == "rubrique") {
+	  $hidden = "<input type='hidden' name='action' value='calculer_rubriques' />";
+	  $script = 'naviguer';
+	} else {
+	  $hidden = "";
+	  $script = 'articles';
+	}
+	echo "<div class='verdana1' style='color: $couleur_foncee; border: 1px solid $couleur_foncee; padding: 5px; margin-top: 3px;'>";
+	
+	echo generer_url_post_ecrire($script, "id_$type=$id", '', "#$album");
+	echo "<b>"._T('titre_titre_document')."</b><br />\n";
+	echo "<input type='text' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\" name='titre_document' class='formo' style='font-size:11px;' value=\"".entites_html($titre)."\" size='40'><br />\n";
+	echo "<input type='hidden' name='modif_document' value='oui' />";
+	echo "<input type='hidden' name='id_document' value='$id_document' />";
+	echo "<input type='hidden' name='show_docs' value='$id_document' />";
+
+	// modifier la date
+	if ( #$type == 'rubrique' AND  // (seulement dans les rubriques?)
+	    $options == "avancees" AND
+	    $connect_statut == '0minirezo') {
+		if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2})", $date, $regs)){
+						$mois = $regs[2];
+						$jour = $regs[3];
+						$annee = $regs[1];
+		}
+		echo "<b>"._T('info_mise_en_ligne')."</b><br />\n",
+			afficher_jour($jour, "NAME='jour_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
+			afficher_mois($mois, "NAME='mois_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\""),
+			afficher_annee($annee, "NAME='annee_doc' SIZE='1' CLASS='fondl' style='font-size:9px;'\n\tonChange=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block')\""),
+		       "<br />\n";
+	}
+
+	// bloc descriptif (affiche ou hidden)
+	if ($options == "avancees") {
+		echo "<b>"._T('info_description')."</b><br />\n";
+		echo "<textarea name='descriptif_document' rows='4' class='forml' style='font-size:10px;' cols='*' wrap='soft' onFocus=\"changeVisible(true, 'valider_doc$id_document', 'block', 'block');\">";
+		echo entites_html($descriptif);
+		echo "</textarea>\n";
+		
+		if ($options == "avancees")
+		  afficher_formulaire_taille($document);
+
+	} else {
+		echo "<input type='hidden' name='descriptif_document' value=\"".entites_html($descriptif)."\" />\n";
+				}
+
+	echo "<div class='display_au_chargement' id='valider_doc$id_document' align='".$GLOBALS['spip_lang_right']."'>";
+	echo "<input TYPE='submit' class='fondo' NAME='Valider' VALUE='"._T('bouton_enregistrer')."'>";
+	echo "</div>";
+	echo "</form>";
+
+
+	// bloc mettre a jour la vignette
+	echo "<hr />";
+	bloc_gerer_vignette($document, $id, $type, $album);
+
+	echo "</div>";
+				
+	// bouton "supprimer le doc"
+	icone_horizontale(_T('icone_supprimer_document'), bouton_supprime_document_et_vignette($id, $type, $id_document, $album), "image-24.gif",  "supprimer.gif");
+} 
 
 function  afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_document, $id_vignette) {
 	global $spip_lang_right;
@@ -885,28 +887,33 @@ function  afficher_rotateurs($album, $document, $flag_modif, $id_article, $id_do
 	}
 }
 
-function bouton_tourner_document($id_article, $id, $album, $rot)
+
+function retour_a_l_envoyeur($type)
 {
-	$redirect = new Link();
-	$redirect = $redirect->getUrl();
-	
-	return generer_action_auteur('tourner', $id, $redirect) .
-		($id_article ? ('&amp;id_article=' .$id_article) : "") .
-		("&amp;var_rot=$rot&amp;ancre=$album");
+	if ($type == "rubrique") {
+		return  strpos($GLOBALS['REQUEST_URI'], '_edit.php') ? 'rubriques_edit' :  'naviguer';
+	} else {
+	  return strpos($GLOBALS['REQUEST_URI'], '_edit.php') ? ($type . 's_edit') :   ($type . 's');
+	}
 }
 
-function bouton_supprime_document_et_vignette($id_article, $type, $id, $album, $id_document=0)
+function bouton_tourner_document($id_article, $id, $album, $rot)
 {
-	$redirect = new Link();
-	$redirect = $redirect->getUrl();
-	if ($id_document) 
-		$redirect .= "&show_docs='.$id_document";
-	if ($type == "rubrique")
-		$redirect.= '&action=calculer_rubriques';
+	$script = retour_a_l_envoyeur('article');
+	
+	$redirect = generer_url_ecrire($script, ("id_$type=$id_article&ancre=$album"));
 
-	return generer_action_auteur('supprimer', $id, $redirect) .
-	  ($id_article ? ('&amp;id_article=' .$id_article) : "") .
-	  ("&amp;ancre=$album");
+	return generer_action_auteur('tourner', $id, $redirect) .
+		("&amp;var_rot=$rot");
+}
+
+function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album, $id_document=0)
+{
+
+	$script = retour_a_l_envoyeur($type);
+	$redirect = generer_url_ecrire($script, ("id_$type=$id_article$hidden&ancre=$album" . ($id_document ? "&show_docs=$id_document" : '')));
+
+	return generer_action_auteur('supprimer', $id_v, $redirect);
 }
 
 function bloc_gerer_vignette($document, $id_article, $type, $album) {
@@ -1213,7 +1220,7 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 			echo "</div>";
 		}
 
-		echo generer_url_post_ecrire($type . "s_edit", 
+		echo generer_url_post_ecrire(retour_a_l_envoyeur($type),
 					     "id_$type=$id&modif_document=oui&id_document=$id_document&show_docs=$id_document",
 					     "",
 					     "#document$id_document");
@@ -1329,11 +1336,10 @@ function afficher_case_document($id_document, $id, $type, $deplier = false) {
 		  _T('info_largeur_vignette', array('largeur_vignette' => $largeur, 'hauteur_vignette' => $hauteur)),
 		  "</div>\n";
 
-		$link = new Link();
-		$link->addVar('modif_document', 'oui');
-		$link->addVar('id_document', $id_document);
-		$link->addVar('show_docs', $id_document);
-		echo $link->getForm('POST');
+		echo generer_url_post_ecrire(retour_a_l_envoyeur($type),
+					     "id_$type=$id&modif_document=oui&id_document=$id_document&show_docs=$id_document",
+					     "",
+					     "#document$id_document");
 
 		echo "<div class='verdana1' style='color: #999999; border: 1px solid #999999; padding: 5px; margin-top: 3px; text-align: left; background-color: #eeeeee;'>";
 		echo "<b>"._T('entree_titre_image')."</b><br />\n";
