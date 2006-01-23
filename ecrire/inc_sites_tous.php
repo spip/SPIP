@@ -17,7 +17,7 @@ include_ecrire("inc_sites_voir");
 
 function sites_tous_dist()
 {
-  global $connect_statut, $supp_syndic, $options, $clean_link;
+  global $connect_statut, $supp_syndic, $options;
 
   if ($connect_statut == '0minirezo') {
 	if ($supp_syndic)
