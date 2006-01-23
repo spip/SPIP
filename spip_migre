@@ -39,6 +39,7 @@ mv lab_revisions.php inc_revisions.php
 mv index.php3 i3
 mv index.php i
 mv forum.php3 f
+mv statistiques.php3 s
 for i in *.php*; do 
 	if [ -f inc_${i%3} ]; 
 	then 
@@ -51,7 +52,7 @@ done
 mv i3 index.php3 
 mv i index.php 
 mv f forum.php3 
-
+mv s statistiques.php3 
 # et d'autres en plus
 mv inc_auth.php3 exec_auth.php
 mv inc_accueil.php exec_accueil.php
