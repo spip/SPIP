@@ -315,7 +315,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 // si necessaire vers l'URL xxxx?lang=ll
 //
 function verifier_lang_url() {
-	global $_GET, $_COOKIE, $spip_lang, $clean_link;
+	global $_GET, $_COOKIE, $spip_lang;
 
 	// quelle langue est demandee ?
 	$lang_demandee = $GLOBALS['meta']['langue_site'];

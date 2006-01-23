@@ -49,14 +49,14 @@ function decrire_logo($racine) {
 }
 
 
-function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $redirect="") {
+function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script) {
 	global $spip_display;
-
-	$logon = $type.'on'.$id;
-	$logoff = $type.'off'.$id;
 
 	if ($spip_display != 4) {
 	
+		$redirect = urlencode(generer_url_ecrire($script, "$id_objet=$id"));
+		$logon = $type.'on'.$id;
+		$logoff = $type.'off'.$id;
 		include_ecrire('inc_session');
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
@@ -79,9 +79,6 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $redire
 
 function afficher_logo($racine, $titre, $logo, $redirect) {
 	global $connect_id_auteur;
-	global $clean_link, $spip_lang_right;
-
-	if (!$redirect) $redirect = $clean_link->getUrl();
 
 	echo "<b>";
 	echo bouton_block_invisible(md5($titre));

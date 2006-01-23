@@ -476,7 +476,7 @@ function generer_spip_cron() {
 // envoi de l'image demandee dans le code ci-dessus
 
 function spip_action_cron() {
-  
+
 	$image = pack("H*", "47494638396118001800800000ffffff00000021f90401000000002c0000000018001800000216848fa9cbed0fa39cb4da8bb3debcfb0f86e248965301003b");
 	header("Content-Type: image/gif");
 	header("Content-Length: ".strlen($image));
@@ -710,6 +710,7 @@ function generer_url_public($script, $args="", $no_entities=false) {
 }
 
 function generer_url_action($script, $args="", $no_entities=false) {
+
 	return generer_url_public('spip_action.php',
 				  "action=$script" .($args ? "&$args" : ''),
 				  $no_entities);

@@ -268,7 +268,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 	if ($id_article AND $flag_editable)
 	  afficher_boite_logo('art', 'id_article', $id_article,
-			      _T('logo_article').aide ("logoart"), _T('logo_survol'));
+			      _T('logo_article').aide ("logoart"), _T('logo_survol'), 'articles');
 
 
 //

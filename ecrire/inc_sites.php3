@@ -28,7 +28,6 @@ global
   $annee,
   $champs_extra,
   $cherche_mot,
-  $clean_link,
   $connect_statut,
   $id_parent,
   $id_syndic,
@@ -299,7 +298,7 @@ echo "<p><center>";
 echo "</center>";
 
 if ($id_syndic AND $flag_administrable)
-	afficher_boite_logo('site', 'id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'site');
+  afficher_boite_logo('site', 'id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'sites');
 
 
 debut_droite();

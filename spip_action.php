@@ -23,5 +23,5 @@ if (isset($hash)) {
 
 $var_f = include_fonction('spip_action_' . $action);
 $var_f();
-if ($redirect) redirige_par_entete($redirect);
+if ($redirect) redirige_par_entete(urldecode($redirect));
 ?>
