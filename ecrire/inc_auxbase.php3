@@ -249,59 +249,82 @@ $spip_ortho_dico_key = array(
 
 global $tables_auxiliaires;
 
-$tables_auxiliaires  = 
-  array(
-	'spip_petitions' => array('field' => &$spip_petitions,
-			     'key' => &$spip_petitions_key),
-	'spip_visites' =>	array('field' => &$spip_visites,
-			      'key' => &$spip_visites_key),
-	'spip_visites_articles' => array('field' => &$spip_visites_articles,
-				    'key' => &$spip_visites_articles_key),
-	'spip_referers' => array('field' => &$spip_referers,
-			    'key' => &$spip_referers_key),
-	'spip_referers_articles' => array('field' => &$spip_referers_articles,
-				     'key' => &$spip_referers_articles_key),
-	'spip_auteurs_articles' => array('field' => &$spip_auteurs_articles,
-				    'key' => &$spip_auteurs_articles_key),
-	'spip_auteurs_rubriques' => array('field' => &$spip_auteurs_rubriques,
-				     'key' => &$spip_auteurs_rubriques_key),
-	'spip_auteurs_messages' => array('field' => &$spip_auteurs_messages,
-				    'key' => &$spip_auteurs_messages_key),
-	'spip_documents_articles' => array('field' => &$spip_documents_articles,
-				      'key' => &$spip_documents_articles_key),
-	'spip_documents_rubriques' => array('field' => &$spip_documents_rubriques,
-				       'key' => &$spip_documents_rubriques_key),
-	'spip_documents_breves' => array('field' => &$spip_documents_breves,
-				    'key' => &$spip_documents_breves_key),
-	'spip_mots_articles' => array('field' => &$spip_mots_articles,
-				 'key' => &$spip_mots_articles_key),
-	'spip_mots_breves' => array('field' => &$spip_mots_breves,
-			       'key' => &$spip_mots_breves_key),
-	'spip_mots_rubriques' => array('field' => &$spip_mots_rubriques,
-				  'key' => &$spip_mots_rubriques_key),
-	'spip_mots_syndic' => array('field' => &$spip_mots_syndic,
-			       'key' => &$spip_mots_syndic_key),
-	'spip_mots_forum' => array('field' => &$spip_mots_forum,
-			      'key' => &$spip_mots_forum_key),
-	'spip_mots_documents' => array('field' => &$spip_mots_documents,
-			      'key' => &$spip_mots_documents_key),
-	'spip_meta' => array('field' => &$spip_meta,
-			'key' => &$spip_meta_key),
-	'spip_index' => array('field' => &$spip_index,
-				  'key' => &$spip_index_key),
-	'spip_index_dico' => array('field' => &$spip_index_dico,
-			      'key' => &$spip_index_dico_key),
-	'spip_versions'	=> array('field' => &$spip_versions,
-					 'key' => &$spip_versions_key),
-	'spip_versions_fragments'	=> array('field' => &$spip_versions_fragments,
-					 'key' => &$spip_versions_fragments_key),
-	'spip_caches'	=> array('field' => &$spip_caches,
-					 'key' => &$spip_caches_key),
-	'spip_ortho_cache'	=> array('field' => &$spip_ortho_cache,
-					 'key' => &$spip_ortho_cache_key),
-	'spip_ortho_dico'	=> array('field' => &$spip_ortho_dico,
-					 'key' => &$spip_ortho_dico_key)
-	);
+$tables_auxiliaires['spip_petitions'] = array(
+	'field' => &$spip_petitions,
+	'key' => &$spip_petitions_key
+);
+$tables_auxiliaires['spip_visites'] = array(
+	'field' => &$spip_visites,
+	'key' => &$spip_visites_key);
+$tables_auxiliaires['spip_visites_articles'] = array(
+	'field' => &$spip_visites_articles,
+	'key' => &$spip_visites_articles_key);
+$tables_auxiliaires['spip_referers'] = array(
+	'field' => &$spip_referers,
+	'key' => &$spip_referers_key);
+$tables_auxiliaires['spip_referers_articles'] = array(
+	'field' => &$spip_referers_articles,
+	'key' => &$spip_referers_articles_key);
+$tables_auxiliaires['spip_auteurs_articles'] = array(
+	'field' => &$spip_auteurs_articles,
+	'key' => &$spip_auteurs_articles_key);
+$tables_auxiliaires['spip_auteurs_rubriques'] = array(
+	'field' => &$spip_auteurs_rubriques,
+	'key' => &$spip_auteurs_rubriques_key);
+$tables_auxiliaires['spip_auteurs_messages'] = array(
+	'field' => &$spip_auteurs_messages,
+	'key' => &$spip_auteurs_messages_key);
+$tables_auxiliaires['spip_documents_articles'] = array(
+	'field' => &$spip_documents_articles,
+	'key' => &$spip_documents_articles_key);
+$tables_auxiliaires['spip_documents_rubriques'] = array(
+	'field' => &$spip_documents_rubriques,
+	'key' => &$spip_documents_rubriques_key);
+$tables_auxiliaires['spip_documents_breves'] = array(
+	'field' => &$spip_documents_breves,
+	'key' => &$spip_documents_breves_key);
+$tables_auxiliaires['spip_mots_articles'] = array(
+	'field' => &$spip_mots_articles,
+	'key' => &$spip_mots_articles_key);
+$tables_auxiliaires['spip_mots_breves'] = array(
+	'field' => &$spip_mots_breves,
+	'key' => &$spip_mots_breves_key);
+$tables_auxiliaires['spip_mots_rubriques'] = array(
+	'field' => &$spip_mots_rubriques,
+	'key' => &$spip_mots_rubriques_key);
+$tables_auxiliaires['spip_mots_syndic'] = array(
+	'field' => &$spip_mots_syndic,
+	'key' => &$spip_mots_syndic_key);
+$tables_auxiliaires['spip_mots_forum'] = array(
+	'field' => &$spip_mots_forum,
+	'key' => &$spip_mots_forum_key);
+$tables_auxiliaires['spip_mots_documents'] = array(
+	'field' => &$spip_mots_documents,
+	'key' => &$spip_mots_documents_key);
+$tables_auxiliaires['spip_meta'] = array(
+	'field' => &$spip_meta,
+	'key' => &$spip_meta_key);
+$tables_auxiliaires['spip_index'] = array(
+	'field' => &$spip_index,
+	'key' => &$spip_index_key);
+$tables_auxiliaires['spip_index_dico'] = array(
+	'field' => &$spip_index_dico,
+	'key' => &$spip_index_dico_key);
+$tables_auxiliaires['spip_versions'] = array(
+	'field' => &$spip_versions,
+	'key' => &$spip_versions_key);
+$tables_auxiliaires['spip_versions_fragments'] = array(
+	'field' => &$spip_versions_fragments,
+	'key' => &$spip_versions_fragments_key);
+$tables_auxiliaires['spip_caches'] = array(
+	'field' => &$spip_caches,
+	'key' => &$spip_caches_key);
+$tables_auxiliaires['spip_ortho_cache'] = array(
+	'field' => &$spip_ortho_cache,
+	'key' => &$spip_ortho_cache_key);
+$tables_auxiliaires['spip_ortho_dico'] = array(
+	'field' => &$spip_ortho_dico,
+	'key' => &$spip_ortho_dico_key);
 
 global $tables_relations;
 $tables_relations['articles']['id_auteur'] = 'auteurs_articles';
