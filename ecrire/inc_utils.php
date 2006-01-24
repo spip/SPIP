@@ -620,7 +620,10 @@ function find_in_path ($filename, $path='AUTO', $sinon='') {
 // charger les definitions des plugins
 function charger_plugins($plugins) {
 	foreach ($plugins as $plug) {
-		include(_DIR_PLUGINS.$plug.'/version.php');
+		if (@is_readable($f = _DIR_PLUGINS.$plug.'/version.php'))
+			include($f);
+		else if (isset($_COOKIE['spip_admin']))
+			echo _L("Erreur plugin &laquo; $plug &raquo; absent.<br />\n");
 	}
 #var_dump($plugins);var_dump($spip_pipeline);var_dump($spip_matrice);exit;
 }
