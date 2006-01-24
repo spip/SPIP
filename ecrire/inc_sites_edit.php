@@ -95,7 +95,7 @@ $nom_site = entites_html($nom_site);
 $url_site = entites_html($url_site);
 $url_syndic = entites_html($url_syndic);
 
- echo generer_url_post_ecrire('sites', ($id_syndic ? "id_syndic=$id_syndic" : "new=oui") . "&modifier_site=oui&syndication_old=$syndication");
+ echo generer_url_post_ecrire('sites', ($id_syndic ? "id_syndic=$id_syndic" : "new=oui&modifier_site=oui&syndication_old=$syndication"));
 echo _T('info_nom_site_2')."<br />";
 echo "<input type='text' class='formo' name='nom_site' value=\"$nom_site\" size='40'><p>";
 if (strlen($url_site)<8) $url_site="http://";
