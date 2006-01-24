@@ -653,7 +653,7 @@ function afficher_groupe_mots($id_groupe) {
 
 				if ($connect_statut == "0minirezo" OR $occurrences['articles'][$id_mot] > 0)
 				  $s = "<a href='" .
-				    generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . generer_url_ecrire('mots_tous')) .
+				    generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=" . urlencode(generer_url_ecrire('mots_tous'))) .
 				    "' class='liste-mot'>".typo($titre_mot)."</a>";
 				else
 					$s = typo($titre_mot);

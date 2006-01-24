@@ -56,7 +56,7 @@ function mots_tous_dist()
 
 		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
-		  redirige_par_entete(generer_url_ecrire("mots_edit"),"?supp_mot=$id_mot&redirect_ok=oui&redirect=" . generer_url_ecrire('mots_tous'));
+		  redirige_par_entete(generer_url_ecrire("mots_edit"),"?supp_mot=$id_mot&redirect_ok=oui&redirect=" . urlencode(generer_url_ecrire('mots_tous')));
 		} // else traite plus loin (confirmation de suppression)
 	}
 }
@@ -142,7 +142,7 @@ if ($conf_mot>0) {
 	echo _T('info_delet_mots_cles', array('titre_mot' => $titre_mot, 'type_mot' => $type_mot, 'texte_lie' => $texte_lie));
 
 	echo "<UL>";
-	echo "<LI><B><A href='", generer_url_ecrire('mots_edit', "supp_mot=$id_mot&redirect_ok=oui&redirect=" . generer_url_ecrire('mots_tous')),
+	echo "<LI><B><A href='", generer_url_ecrire('mots_edit', "supp_mot=$id_mot&redirect_ok=oui&redirect=" . urlencode(generer_url_ecrire('mots_tous'))),
 	  "'>",
 	  _T('item_oui'),
 	  "</A>,</B> ",
@@ -230,7 +230,7 @@ while ($row_groupes = spip_fetch_array($result_groupes)) {
 		}
 		echo "<td>";
 		echo "<div align='$spip_lang_right'>";
-		icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . generer_url_ecrire('mots_tous')), "mot-cle-24.gif", "creer.gif");
+		icone(_T('icone_creation_mots_cles'), generer_url_ecrire("mots_edit","new=oui&id_groupe=$id_groupe&redirect=" . urlencode(generer_url_ecrire('mots_tous'))), "mot-cle-24.gif", "creer.gif");
 		echo "</div>";
 		echo "</td></tr></table>";
 	}	

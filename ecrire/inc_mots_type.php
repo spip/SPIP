@@ -85,7 +85,7 @@ echo aide("motsgroupes");
 if ($connect_statut =="0minirezo"){
 	$type=entites_html(urldecode($type));
 	echo "<p><font face='Verdana,Arial,Sans,sans-serif'>";
-	echo generer_url_post_ecrire("mots_tous", "$id_groupe=$id_groupe");
+	echo generer_url_post_ecrire("mots_tous", "id_groupe=$id_groupe");
 	echo "<INPUT TYPE='Hidden' NAME='modifier_groupe' VALUE=\"oui\">\n";
 	echo "<INPUT TYPE='Hidden' NAME='ancien_type' VALUE=\"$ancien_type\">\n";
 	debut_cadre_formulaire();
