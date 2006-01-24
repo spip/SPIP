@@ -86,15 +86,6 @@ echo "</TABLE>";
 // Restauration de la base
 //
 
-echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">",
-	"<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>",
-	"<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>",
-	_T('texte_restaurer_base')."</FONT></B></TD></TR>",
-	"<TR><td class='serif'>",
-	generer_url_post_ecrire("import_all"),
-	"\n<p align='justify'> ",
-	_T('texte_restaurer_sauvegarde');
-
 if ($flag_gz) {
 	$fichier_defaut = 'dump.xml.gz';
 	$texte_compresse = _T('texte_compresse_ou_non')."&nbsp;";
@@ -104,12 +95,20 @@ else {
 	$texte_compresse = _T('texte_non_compresse')."&nbsp;";
 }
 
-echo "\n<p>"._T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
-	"\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>";
-
-echo "\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>";
-
-echo "</td></tr>",
+echo	"<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">",
+	"<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>",
+	"<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>",
+	_T('texte_restaurer_base')."</FONT></B></TD></TR>",
+	"<TR><td class='serif'>\n",
+	"<form method='get' action='",
+	generer_url_ecrire("import_all"),
+	"'>\n<p align='justify'> ",
+	_T('texte_restaurer_sauvegarde'),
+	"\n<p>",
+	_T('entree_nom_fichier', array('texte_compresse' => $texte_compresse)),
+	"\n<p><FONT SIZE=3><ul><INPUT TYPE='text' NAME='archive' VALUE='$fichier_defaut' SIZE='30'></ul></FONT>",
+	"\n<p><DIV align='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('bouton_restaurer_base')."'></DIV></FORM>",
+	"\n</td></tr>",
 	"</TABLE>";
 
 
