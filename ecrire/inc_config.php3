@@ -298,7 +298,6 @@ function appliquer_modifs_config() {
 	}
 
 	if ($purger_skel) {
-	  spip_log("je redir");
 	  redirige_par_entete(generer_action_auteur('purger', 'squelettes',
 						    _DIR_RESTREINT_ABS . $clean_link->getUrl(), true));
 

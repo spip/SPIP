@@ -114,7 +114,7 @@ function spip_cron($taches = array()) {
 			spip_log("cron: $tache (" . spip_timer('tache') . ")");
 			// eventuellement modifier la date du fichier
 			if ($code_de_retour < 0) @touch($lock, (0 - $code_de_retour));
-		}
+		} else spip_log("cron $tache a reprendre");
 	}
 
 	// relacher le lock mysql
