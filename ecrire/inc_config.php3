@@ -137,7 +137,7 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 //
 
 function appliquer_modifs_config() {
-	global $clean_link, $connect_id_auteur;
+	global $clean_link;
 	global $adresse_site, $email_webmaster, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
@@ -298,11 +298,9 @@ function appliquer_modifs_config() {
 	}
 
 	if ($purger_skel) {
-	  $action = 'purger';
-	  $arg = 'squelettes';
-	  $hash = calculer_action_auteur("$action $arg");
-	  $args = "arg=$arg&id_auteur=$connect_id_auteur&hash=$hash&redirect=" . _DIR_RESTREINT_ABS . urlencode($clean_link->getUrl());
-	  redirige_par_entete(generer_url_action($action, $args, true));
+	  spip_log("je redir");
+	  redirige_par_entete(generer_action_auteur('purger', 'squelettes',
+						    _DIR_RESTREINT_ABS . $clean_link->getUrl(), true));
 
 	}
 }

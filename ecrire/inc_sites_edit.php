@@ -85,7 +85,7 @@ if ($new == 'oui'){
 		  "</form>";		
 		fin_cadre_relief();
 		
-		echo "<p><blockquote><b>"._T('texte_non_fonction_referencement')."</b>";
+		echo "\n<p><blockquote><b>"._T('texte_non_fonction_referencement')."</b>";
 		$cadre_ouvert = true;
 		debut_cadre_enfonce("site-24.gif");
 	}
@@ -95,12 +95,12 @@ $nom_site = entites_html($nom_site);
 $url_site = entites_html($url_site);
 $url_syndic = entites_html($url_syndic);
 
- echo generer_url_post_ecrire('sites', ($id_syndic ? "id_syndic=$id_syndic" : "new=oui&modifier_site=oui&syndication_old=$syndication"));
-echo _T('info_nom_site_2')."<br />";
-echo "<input type='text' class='formo' name='nom_site' value=\"$nom_site\" size='40'><p>";
+ echo generer_url_post_ecrire('sites', ($id_syndic ? "id_syndic=$id_syndic" : "new=$new") . "&modifier_site=oui&syndication_old=$syndication");
+echo _T('info_nom_site_2')."<br />\n";
+echo "<input type='text' class='formo' name='nom_site' value=\"$nom_site\" size='40'>\n<p>";
 if (strlen($url_site)<8) $url_site="http://";
-echo _T('entree_adresse_site')."<br>";
-echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size='40'><p>";
+echo _T('entree_adresse_site')."<br />\n";
+echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size='40'>\n<p>";
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
@@ -122,24 +122,24 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 
 	fin_cadre_couleur();
 
-echo "<p /><b>"._T('entree_description_site')."</b><br>";
+echo "<p /><b>"._T('entree_description_site')."</b><br />\n";
 echo "<textarea name='descriptif' rows='8' class='forml' cols='40' wrap=soft>";
 echo entites_html($descriptif);
 echo "</textarea>\n";
 
 $activer_syndic = $GLOBALS['meta']["activer_syndic"];
 
-echo "<input type='hidden' name='syndication_old' value=\"$syndication\">";
+echo "\n<input type='hidden' name='syndication_old' value=\"$syndication\">";
 
 if ($activer_syndic != "non") {
 	debut_cadre_enfonce();
 	if ($syndication == "non") {
-		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='non' id='syndication_non' CHECKED>";
+		echo "\n<input type='radio' name='syndication' value='non' id='syndication_non' CHECKED>";
 	}
 	else {
-		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='non' id='syndication_non'>";
+		echo "\n<input type='radio' name='syndication' value='non' id='syndication_non'>";
 	}
-	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b><p>";
+	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b>\n<p>";
 
 	if ($syndication == "non") {
 		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui'>";
@@ -155,7 +155,7 @@ if ($activer_syndic != "non") {
 
 	if (strlen($url_syndic) < 8) $url_syndic = "http://";
 	echo _T('entree_adresse_fichier_syndication');
-	echo "<br>";
+	echo "<br />\n";
 
 	// cas d'une liste de flux detectee par feedfinder : menu
 	if (preg_match(',^select: (.+),', $url_syndic, $regs)) {
@@ -168,16 +168,16 @@ if ($activer_syndic != "non") {
 	}
 	// cas normal
 	else {
-		echo "<INPUT TYPE='text' CLASS='formo' NAME='url_syndic' VALUE=\"$url_syndic\" SIZE='40'><P>";
-		echo "<INPUT TYPE='hidden' NAME='old_syndic' VALUE=\"$url_syndic\"";
+		echo "<INPUT TYPE='text' CLASS='formo' NAME='url_syndic' VALUE=\"$url_syndic\" SIZE='40'>\n<P>";
+		echo "<INPUT TYPE='hidden' NAME='old_syndic' VALUE=\"$url_syndic\">\n";
 	}
 	echo "</td></tr></table>";
 
 	fin_cadre_enfonce();
 } 
 else {
-	echo "<INPUT TYPE='Hidden' NAME='syndication' VALUE=\"$syndication\">";
-	echo "<INPUT TYPE='hidden' NAME='url_syndic' VALUE=\"$url_syndic\"";
+	echo "\n<INPUT TYPE='Hidden' NAME='syndication' VALUE=\"$syndication\">";
+	echo "\n<INPUT TYPE='hidden' NAME='url_syndic' VALUE=\"$url_syndic\"";
 }
 
 
@@ -187,8 +187,8 @@ if ($champs_extra) {
 	}
 
 
-echo "<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
-echo "</FORM>";
+echo "\n<div ALIGN='right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_enregistrer')."' CLASS='fondo'></div>";
+echo "\n</form>";
 
 if ($cadre_ouvert) {
 	fin_cadre_enfonce();

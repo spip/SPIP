@@ -101,10 +101,11 @@ function mots_ressemblants($mot, $table_mots, $table_ids='') {
  * specifie, plus le formulaire d'ajout de mot-cle
  */
 
-function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable) {
+function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, $retour) {
   global $connect_statut, $connect_toutes_rubriques, $options;
 	global $spip_lang_rtl, $spip_lang_right;
 
+	$retour = urlencode($retour);
 	$select_groupe = $GLOBALS['select_groupe'];
 
 	if ($table == 'articles') {
@@ -231,7 +232,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if ($GLOBALS['connect_statut'] == '0minirezo'
 		     AND $connect_toutes_rubriques ) {
 			echo "<div style='width: 200px;'>";
-			$retour = urlencode($GLOBALS['clean_link']->getUrl());
 			$titre = urlencode($cherche_mot);
 			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
@@ -517,7 +517,6 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
-			$retour = urlencode($GLOBALS['clean_link']->getUrl());
 			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 			echo "</td></tr>";

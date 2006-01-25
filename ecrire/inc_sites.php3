@@ -124,7 +124,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 			syndication='$syndication', statut='$statut'
 			WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-		$redirect = generer_url_ecrire('sites',"id_syndic=$id_syndic&redirect=$redirect");
+		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")));
 		$redirect_ok = 'oui';
 	}
 }
@@ -195,9 +195,9 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 			marquer_indexer('syndic', $id_syndic);
 		}
 	}
-	$redirect = generer_url_ecrire('sites',"id_syndic=$id_syndic&redirect=$redirect&reload=$reload");
+	$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "") . ($reload ? "&reload=$reload" : '')), true);
 	$redirect_ok = 'oui';
-}
+ }
 
 
 if ($jour AND $flag_administrable) {
@@ -368,9 +368,10 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 		echo "<BR><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_site_propose')." <B>".affdate($date_heure)."&nbsp;</B></FONT><P>";
 	}
 }
+ echo "\n";
 
 if ($flag_editable AND $options == 'avancees') {
-	formulaire_mots('syndic', $id_syndic, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+  formulaire_mots('syndic', $id_syndic, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable,generer_url_ecrire('sites',"id_syndic=$id_syndic"));
 }
 
 if ($flag_administrable) {

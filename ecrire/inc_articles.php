@@ -165,7 +165,7 @@ fin_cadre_enfonce(false);
 //
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-	formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable);
+  formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("articles","id_article=$id_article"));
 }
 
  langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad);
@@ -328,7 +328,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	}
 
 	// Afficher le formulaire de modification du reglage
-	echo formulaire_modification_forums_publics($id_article, $forums_publics);
+	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article"));
 
 
 	// Petitions

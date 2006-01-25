@@ -80,7 +80,8 @@ $vis = "visites_$jour";
 $query = "SELECT referer, $vis AS vis FROM spip_referers WHERE $where ORDER BY $vis DESC";
 
 echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
-echo aff_referers ($query, $limit);
+ echo aff_referers ($query, $limit, generer_url_ecrire('statistiques_referers', ('limit=' . strval($limit+200))));
+
 echo "</font></p>";	
 
 echo "</font>";
