@@ -589,12 +589,15 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		if (isset($INDEX_iteration_nb_maxi[$table]))
 		  $limit = min($limit,$INDEX_iteration_nb_maxi[$table]);
 
+		// indexer en priorite les '1' (a reindexer), ensuite les ''
+		// (statut d'indexation inconnu), enfin les 'idx' (ceux dont
+		// l'indexation a precedemment echoue, p. ex. a cause d'un timeout)
 		foreach (array('1', '', 'idx') as $mode) {
-			$s = spip_query("SELECT $table_primary, idx FROM $table
+			$s = spip_query("SELECT $table_primary AS id FROM $table
 			WHERE idx='$mode' AND $critere LIMIT $limit");
 			while ($t = spip_fetch_array($s)) {
-				$vu[$table] .= $t[0].", ";
-				indexer_objet($table, $t[0], $t[1]);
+				$vu[$table] .= $t['id'].", ";
+				indexer_objet($table, $t['id'], $mode);
 			}
 			if ($vu) break;
 		}
@@ -613,10 +616,8 @@ function executer_une_indexation_syndic() {
 }
 
 function creer_liste_indexation() {
-	$tables = liste_index_tables();
-	while (list(,$table) = each($tables)) {
+	foreach (liste_index_tables() as $table)
 		spip_query("UPDATE $table SET idx='1' WHERE idx!='non'");
-	}
 }
 
 function purger_index() {

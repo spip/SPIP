@@ -118,6 +118,8 @@ function cdata_echappe_retour(&$table, &$echappe_cdata) {
 function analyser_backend($rss, $url_syndic='') {
 	include_ecrire("inc_texte"); # pour couper()
 
+	$rss = pipeline('pre_syndication', $rss);
+
 	// Echapper les CDATA
 	$echappe_cdata = array();
 	if (preg_match_all(',<!\[CDATA\[(.*)]]>,Uims', $rss,
@@ -212,9 +214,16 @@ function analyser_backend($rss, $url_syndic='') {
 		preg_match(',<date>([^<]*)<,Uims',$item,$match))
 			$la_date = my_strtotime($match[1]);
 
-		if ($la_date < time() - 365 * 24 * 3600
-		OR $la_date > time() + 48 * 3600)
-			$la_date = time();
+		// controle de validite de la date
+		// pour eviter qu'un backend errone passe toujours devant
+		// (note: ca pourrait etre defini site par site, mais ca risque d'etre
+		// plus lourd que vraiment utile)
+		if ($GLOBALS['controler_dates_rss']) {
+			if ($la_date < time() - 365 * 24 * 3600
+			OR $la_date > time() + 48 * 3600)
+				$la_date = time();
+		}
+
 		$data['date'] = $la_date;
 
 		// Honorer le <lastbuilddate> en forcant la date
@@ -483,14 +492,24 @@ function syndic_a_jour($now_id_syndic, $statut = 'off') {
 // http://www.w3.org/TR/NOTE-datetime
 function my_strtotime($la_date) {
 
+	// format complet
 	if (preg_match(
-	',^([0-9]+-[0-9]+-[0-9]+T[0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?'
+	',^([0-9]+-[0-9]+-[0-9]+[T ][0-9]+:[0-9]+(:[0-9]+)?)(\.[0-9]+)?'
 	.'(Z|([-+][0-9][0-9]):[0-9]+)?$,',
 	$la_date, $match)) {
 		$la_date = str_replace("T", " ", $match[1])." GMT";
 		return strtotime($la_date) - intval($match[5]) * 3600;
 	}
 
+	// YYYY
+	if (preg_match(',^([0-9][0-9][0-9][0-9])$,', $la_date, $match))
+		return strtotime($match[1]."-01-01");
+
+	// YYYY-MM
+	if (preg_match(',^([0-9][0-9][0-9][0-9]-[0-9][0-9])$,', $la_date, $match))
+		return strtotime($match[1]."-01");
+
+	// utiliser strtotime en dernier ressort
 	$s = strtotime($la_date);
 	if ($s > 0)
 		return $s;
