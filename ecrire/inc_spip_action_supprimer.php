@@ -18,7 +18,7 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 // Effacer un doc (et sa vignette)
 function spip_action_supprimer_dist() {
 
-  global  $arg, $ancre, $redirect;
+  global  $arg,  $redirect;
 
 	$arg = intval($arg);
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
@@ -56,6 +56,6 @@ function spip_action_supprimer_dist() {
 		}
 	}
 
-	redirige_par_entete(urldecode($redirect), $ancre ? "#$ancre" : '');
+	redirige_par_entete(urldecode($redirect));
 }
 ?>

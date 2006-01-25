@@ -807,6 +807,7 @@ function block_document($id, $id_document, $type, $titre, $descriptif, $date, $d
 	echo "<input type='hidden' name='modif_document' value='oui' />";
 	echo "<input type='hidden' name='id_document' value='$id_document' />";
 	echo "<input type='hidden' name='show_docs' value='$id_document' />";
+	echo $hidden;
 
 	// modifier la date
 	if ( #$type == 'rubrique' AND  // (seulement dans les rubriques?)
@@ -864,11 +865,11 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 	// si c'est une image, qu'on sait la faire tourner, qu'elle
 	// n'est pas distante, et qu'elle n'a pas de vignette perso 
 	// et qu'on a la bibli !
-	if ($document['distant']!='oui' AND !$id_vignette
+	/*	if ($document['distant']!='oui' AND !$id_vignette
 	AND strstr($GLOBALS['meta']['formats_graphiques'],
 		   $ftype[$document['id_type']])
 	AND ($process == 'imagick' OR $process == 'gd2'
-	OR $process == 'convert' OR $process == 'netpbm') )  {
+	OR $process == 'convert' OR $process == 'netpbm') ) */ {
 
 		echo "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
@@ -905,7 +906,7 @@ function bouton_tourner_document($id_article, $id, $album, $rot, $type)
 {
 	$script = retour_a_l_envoyeur('article');
 	
-	$redirect = generer_url_ecrire($script, ("id_$type=$id_article&ancre=$album"), true);
+	$redirect = generer_url_ecrire($script, ("id_$type=$id_article&show_docs=$id"), true) . "#$album";
 
 	return generer_action_auteur('tourner', $id, $redirect) .
 		("&amp;var_rot=$rot");
@@ -915,7 +916,7 @@ function bouton_supprime_document_et_vignette($id_article, $type, $id_v, $album,
 {
 
 	$script = retour_a_l_envoyeur($type);
-	$redirect = generer_url_ecrire($script, ("id_$type=$id_article$hidden&ancre=$album" . ($id_document ? "&show_docs=$id_document" : '')), true);
+	$redirect = generer_url_ecrire($script, ("id_$type=$id_article"), true) . "#$album";
 
 	return generer_action_auteur('supprimer', $id_v, $redirect);
 }
