@@ -88,6 +88,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
 function extra_saisie($extra, $type, $ensemble='') {
+	if ($affiche = extra_form($extra, $type, $ensemble='')) {
+		debut_cadre_enfonce();
+		echo $affiche;
+		fin_cadre_enfonce();
+	}
+}
+
+function extra_form($extra, $type, $ensemble='') {
 	$extra = unserialize($extra);
 
 	// quels sont les extras de ce type d'objet
@@ -232,11 +240,7 @@ function extra_saisie($extra, $type, $ensemble='') {
 		$affiche .= "<p>\n";
 	}
 
-	if ($affiche) {
-		debut_cadre_enfonce();
-		echo $affiche;
-		fin_cadre_enfonce();
-	}
+	return $affiche;
 }
 
 // recupere les valeurs postees pour reconstituer l'extra
