@@ -1860,7 +1860,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 	$words = explode(' ', strip_tags($text)); // split the text into an array of single words
 	$line = '';
 	while (count($words) > 0) {
-		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0]);
+		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0], NULL);
 		$lineWidth = $dimensions[2] - $dimensions[0]; // get the length of this line, if the word is to be included
 		if ($lineWidth > $maxWidth) { // if this makes the text wider that anticipated
 			$lines[] = $line; // add the line to the others
@@ -1876,19 +1876,19 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 	$i = 0;
 	foreach ($lines as $line) {
 		$line = ereg_replace("~", " ", $line);
-		$dimensions = imageftbbox($textSize, 0, $font, $line);
+		$dimensions = imageftbbox($textSize, 0, $font, $line, NULL);
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
 		if ($align == "right") $left_pos = $maxWidth - $largeur_ligne;
 		else if ($align == "center") $left_pos = floor(($maxWidth - $largeur_ligne)/2);
 		else $left_pos = 0;
-		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line));
+		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line), NULL);
 		$i++;
 	}
 	$retour["height"] = $height;
 	$retour["width"] = $largeur_max;
                  
-	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ');
+	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', NULL);
 	$largeur_espace = $dimensions_espace[2] - $dimensions_espace[0];
 	$retour["espace"] = $largeur_espace;
 	return $retour;
