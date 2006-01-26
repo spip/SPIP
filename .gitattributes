@@ -105,10 +105,10 @@ ecrire/exec_breves_edit.php -text
 ecrire/exec_breves_voir.php -text
 ecrire/exec_brouteur.php -text
 ecrire/exec_brouteur_frame.php -text
-ecrire/exec_config-contenu.php -text
-ecrire/exec_config-fonctions.php -text
-ecrire/exec_config-lang.php -text
-ecrire/exec_config-multilang.php -text
+ecrire/exec_config_contenu.php -text
+ecrire/exec_config_fonctions.php -text
+ecrire/exec_config_lang.php -text
+ecrire/exec_config_multilang.php -text
 ecrire/exec_configuration.php -text
 ecrire/exec_controle_forum.php -text
 ecrire/exec_controle_petition.php -text
