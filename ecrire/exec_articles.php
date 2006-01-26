@@ -247,7 +247,7 @@ function boite_info_articles($id_article, $statut_article, $visites, $id_version
 	// Correction orthographique
 	if ($GLOBALS['meta']['articles_ortho'] == 'oui') {
 		$js_ortho = "onclick=\"window.open(this.href, 'spip_ortho', 'scrollbars=yes, resizable=yes, width=740, height=580'); return false;\"";
-		icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho.php", "id_article=$id_article"), "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
+		icone_horizontale(_T('ortho_verifier'), generer_url_ecrire("articles_ortho", "id_article=$id_article"), "ortho-24.gif", "rien.gif", 'echo', $js_ortho);
 	}
 
 	echo "</div>\n";

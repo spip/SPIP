@@ -72,7 +72,7 @@ function index_tous_dist()
 	icone_horizontale (_L('Statut de l\'indexation'), generer_url_ecrire("admin_index"), "tout-site-24.gif");
 	echo "</p>";
 
-	icone_horizontale (_L('Tout'), generer_url_ecrire("index_tous.php"), "tout-site-24.gif");
+	icone_horizontale (_L('Tout'), generer_url_ecrire("index_tous"), "tout-site-24.gif");
 
 	$link = new Link();
 	$link->addVar('filtre',$filtre);
