@@ -51,6 +51,29 @@ function copie_locale($source, $mode='auto') {
 	return $local;
 }
 
+// fabrique une chaine HTTP pour un POST
+function buildQueryString($data, $munge_charset = false) {
+	$querystring = '';
+	
+	if (is_array($data)) {
+		// Change data in to postable data
+		foreach ($data as $key => $val) {
+			if (is_array($val)) {
+				foreach ($val as $val2) {
+					$querystring .= urlencode($key).'='.urlencode($val2).'&';
+				}
+			} else {
+				$querystring .= urlencode($key).'='.urlencode($val).'&';
+			}
+		}
+		$querystring = substr($querystring, 0, -1); // Eliminate unnecessary &
+	} else {
+		$querystring = $data;
+	}
+	
+	return $querystring;
+}
+
 //
 // Recupere une page sur le net
 // et au besoin l'encode dans le charset local
@@ -58,7 +81,7 @@ function copie_locale($source, $mode='auto') {
 // options : get_headers si on veut recuperer les entetes
 // taille_max : arreter le contenu au-dela (0 = seulement les entetes)
 // Par defaut taille_max = 1Mo.
-function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576) {
+function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_max = 1048576, $datas='') {
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -69,6 +92,10 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 	else
 		$get = 'GET';
 
+	if (!empty($datas) && is_array($datas)) {
+		$get = 'POST';
+		$postdata = buildQueryString($datas, $munge_charset);
+	}
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
 		list($f, $fopen) = init_http($get, $url);
@@ -79,7 +106,13 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 			break;
 		} else {
 			// Fin des entetes envoyees par SPIP
-			fputs($f,"\r\n");
+			if($get == 'POST') {
+				fputs($f, 'Content-Type: application/x-www-form-urlencoded'."\r\n");
+				fputs($f, 'Content-Length: '.strlen($postdata)."\r\n");
+				fputs($f, "\r\n".$postdata);
+			} else {
+				fputs($f,"\r\n");
+			}
 
 			// Reponse du serveur distant
 			$s = trim(fgets($f, 16384));
