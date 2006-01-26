@@ -84,7 +84,6 @@ ecrire/charsets/translit.php -text
 ecrire/charsets/translitcomplexe.php -text
 ecrire/exec_accueil.php -text
 ecrire/exec_admin_effacer.php -text
-ecrire/exec_admin_index.php -text
 ecrire/exec_admin_repair.php -text
 ecrire/exec_admin_tech.php -text
 ecrire/exec_admin_vider.php -text
@@ -118,7 +117,6 @@ ecrire/exec_export_all.php -text
 ecrire/exec_forum_admin.php -text
 ecrire/exec_forum_envoi.php -text
 ecrire/exec_import_all.php -text
-ecrire/exec_index_tous.php -text
 ecrire/exec_install.php -text
 ecrire/exec_js_menu_rubriques.php -text
 ecrire/exec_lang_raccourcis.php -text
@@ -344,7 +342,6 @@ ecrire/inc_sites_voir.php -text
 ecrire/inc_suivi_versions.php -text
 ecrire/inc_syndic.php -text
 ecrire/inc_utils.php -text
-ecrire/index_tous.php -text
 ecrire/lang/ecrire_br.php3 -text
 ecrire/lang/ecrire_ru.php3 -text
 ecrire/lang/public_br.php3 -text
