@@ -87,18 +87,21 @@ function pipeline($action, $val) {
 	if (!isset($pipe[$action]))
 		$pipe[$action] = array_filter(explode('|',$spip_pipeline[$action]));
 
+	$args= func_get_args();
+	array_shift($args);
+
 	// Eclater le pipeline en filtres et appliquer chaque filtre
 	foreach ($pipe[$action] as $fonc) {
 
 		// fonction
 		if (function_exists($fonc))
-			$val = $fonc($val);
+			$val = call_user_func_array($fonc, $args);
 
 		// Class::Methode
 		else if (preg_match("/^(\w*)::(\w*)$/", $fonc, $regs)                            
 		AND $methode = array($regs[1], $regs[2])
 		AND is_callable($methode))
-			$val = call_user_func($methode, $val);
+			$val = call_user_func_array($methode, $args);
 
 		// Charger un fichier
 		else if ($f = $spip_matrice[$fonc]) {
