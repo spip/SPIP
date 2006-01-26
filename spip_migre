@@ -4,25 +4,35 @@
 # laisse tomber les .php3 par la meme occasion
 # garde neanmoins les .php3 qui peuvent avoir été mémorisés comme signets.
 
-# differencie les inc_c charge automatiquement en les renommant en exec_
+MVCOMMANB="mv"
+# a terme:
+#$MVCOMMANB="svn mv"
 
+COMMITCOMMAND="cat "
+# aterme
+#COMMITCOMMAND="svn commit -F "
+
+function sed_inc_version_php3_in_public
+{
 for i in $(grep -l inc_version.php3 *.php*)
 do
 	sed 's/inc_version.php3/inc_version.php/' $i > x
 	mv x $i
 done
+}
 
-cd ecrire
 
-# Ajouter inc_ a qq fichiers derogatoires 
+# Ajouter inc_ a qq fichiers derogatoires et reporter ce renommage
 
+function normalise_inc
+{
 for i in $(grep -l 'pclzip.lib' inc*php*)
 do
     sed 's/pclzip.lib/inc_pclzip/' $i > x
     mv x $i
 done
 
-mv pclzip.lib.php inc_pclzip.php
+$MVCOMMANB pclzip.lib.php inc_pclzip.php
 
 for i in $(grep -l 'lab_' inc*php*)
 do
@@ -30,12 +40,17 @@ do
     mv x $i
 done
 
-mv lab_diff.php inc_diff.php
-mv lab_ortho.php inc_ortho.php
-mv lab_revisions.php inc_revisions.php
+$MVCOMMANB lab_diff.php inc_diff.php
+$MVCOMMANB lab_ortho.php inc_ortho.php
+$MVCOMMANB lab_revisions.php inc_revisions.php
+}
 
-# pour tous les scripts S ayant un inc_S associe, renommer celui-ci
+# Differencier les inc_c charge automatiquement en les renommant en exec_
+# Donc pour tous les scripts S ayant un inc_S associe, renommer celui-ci
 # sauf qq cas particuliers en moins
+
+function renomme_en_exec_et_en_php
+{
 mv index.php3 i3
 mv index.php i
 mv forum.php3 f
@@ -43,10 +58,10 @@ mv statistiques.php3 s
 for i in *.php*; do 
 	if [ -f inc_${i%3} ]; 
 	then 
-	mv inc_${i%3} exec_${i%3}
+	$MVCOMMANB inc_${i%3} exec_${i%3}
 	elif [ -f inc_$i ]; 
 	then 
-	mv inc_$i exec_${i%3}
+	$MVCOMMANB inc_$i exec_${i%3}
 	fi
 done
 mv i3 index.php3 
@@ -54,33 +69,40 @@ mv i index.php
 mv f forum.php3 
 mv s statistiques.php3 
 # et d'autres en plus
-mv inc_auth.php3 exec_auth.php
-mv inc_accueil.php exec_accueil.php
+$MVCOMMANB inc_auth.php3 exec_auth.php
+$MVCOMMANB inc_accueil.php exec_accueil.php
 
 for i in inc_spip_action*; do 
-    mv $i exec_${i#inc_}
+    $MVCOMMANB $i exec_${i#inc_}
 done
 
 for i in inc_*.php3; do 
-	mv $i ${i%3} 
+	$MVCOMMANB $i ${i%3} 
 done
 
 # Pour respecter "la fonction F_dist est definie dans exec_F.php"
 # il faut remplacer - par _ dans le nom des fichiers
 
-mv exec_config-contenu.php exec_config_contenu.php
-mv exec_config-multilang.php exec_config_multilang.php
-mv exec_config-fonctions.php exec_config_fonctions.php
-mv exec_config-lang.php exec_config_lang.php
+$MVCOMMANB  exec_config-contenu.php exec_config_contenu.php
+$MVCOMMANB  exec_config-multilang.php exec_config_multilang.php
+$MVCOMMANB  exec_config-fonctions.php exec_config_fonctions.php
+$MVCOMMANB  exec_config-lang.php exec_config_lang.php
+}
+
 
 # et renommer les qq fonction config-F en config_F
-
+function renomme_tiret_en_souligne
+{
 for i in exec_config* inc_presentation.php
 do
 	sed 's/\(_ecrire(.[a-z]*\)\-/\1_/' $i > x
 	mv x $i
 done
+}
 
+
+function change_pivot
+{
 # 2 appels de la fonction pivot qui n'ont pas de php3
 for i in $(grep -l "generer_url_ecrire([^)]*.php" *.php*)
 do
@@ -106,3 +128,38 @@ mv x inc_version.php
 # pour continuer le service des .php3: changer inc pour qu'il appelle index
 # (tous les scripts .php3 valent "include('inc.php3')" a present)
 sed 's/include.*$/$_REQUEST["exec"] = $SCRIPT_NAME; include("index.php");/' info.php3  > inc.php3
+}
+
+
+echo "Ce depot resulte de l'application de:" > log
+type normalise_inc | grep -v "is a function" >> log
+sed_inc_version_php3_in_public
+$COMMITCOMMAND log
+sleep 1
+
+cd ecrire
+
+echo "Ce depot resulte de l'application de:" > log
+type normalise_inc | grep -v "is a function" >> log
+normalise_inc
+$COMMITCOMMAND log
+sleep 1
+
+echo "Ce depot resulte de l'application de:" > log
+type renomme_en_exec_et_en_php | grep -v "is a function" >> log
+renomme_en_exec_et_en_php
+$COMMITCOMMAND log
+sleep 1
+
+echo "Ce depot resulte de l'application de:" > log
+type renomme_tiret_en_souligne | grep -v "is a function" >> log
+renomme_tiret_en_souligne
+$COMMITCOMMAND log
+sleep 1
+
+echo "Ce depot resulte de l'application de:" > log
+type change_pivot | grep -v "is a function" >> log
+change_pivot
+$COMMITCOMMAND log
+
+rm log
