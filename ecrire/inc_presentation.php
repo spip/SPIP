@@ -757,7 +757,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 
 	$tmp_var = substr(md5($jjscript), 0, 4);
-	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::") . "','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
@@ -789,7 +789,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('ajax_page.php', "fonction=sql&id_ajax_fonc=$id_ajax_trad"). "','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=$id_ajax_trad", true). "','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -980,7 +980,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
-	$javascript = "charger_id_url('" . generer_url_ecrire('ajax_page.php', 'fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
+	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", 'fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::', true) . "','$tmp_var')";
 	$tranches = afficher_tranches_requete($requete, 4, $tmp_var, $javascript);
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
@@ -1007,7 +1007,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire('ajax_page.php', "fonction=sql&id_ajax_fonc=$id_ajax_trad") . "','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=$id_ajax_trad", true) . "','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1829,12 +1829,12 @@ function debut_javascript($admin, $stat)
 	if (!$GLOBALS['_COOKIE']['spip_accepte_ajax']) {
 		spip_setcookie('spip_accepte_ajax', -1);
 		$ajax = "if (a = createXmlHttp()) {
-	a.open('GET', '" . generer_url_ecrire("ajax_page","fonction=test") .
+	a.open('GET', '" . generer_url_ecrire("ajax_page","fonction=test", true) .
 		  "', true) ;
 	a.send(null);
 }";
 	} else $ajax = "";
-
+	spip_log("Ajax $ajax " . $GLOBALS['_COOKIE']['spip_accepte_ajax']);
 	return 
 	// envoi le fichier JS de config si browser ok.
 		$GLOBALS['browser_layer'] .
@@ -2556,7 +2556,7 @@ if (true /*$bandeau_colore*/) {
 //		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
 		$id_rubrique = $GLOBALS['id_rubrique'];
-		echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('" . generer_url_ecrire('ajax_page.php', "fonction=aff_nav_recherche&id=$id_rubrique") . "','nav-recherche');\">",
+		echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('" . generer_url_ecrire("ajax_page", "fonction=aff_nav_recherche&id=$id_rubrique", true) . "','nav-recherche');\">",
 		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
 		  http_img_pack("naviguer-site.png", "", "width='26' height='20' border='0'") ."</a>";
