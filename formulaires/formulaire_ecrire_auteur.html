@@ -7,12 +7,12 @@
 [(#REM) Previsualisation ... ]
 [<input type="hidden" name="num_formulaire_ecrire_auteur" value="(#ENV{valide})" />]
 [<div class='spip_encadrer'>
-<i>[(#ENV{mail})]</i> - <strong>[(#ENV{sujet})]</strong>
+<i>#ENV{mail}</i> - <strong>#ENV{sujet}</strong>
 <div>
 [(#ENV{texte}|nl2br)]
 </div>
 <div style="text-align:#LANG_RIGHT;">
-	<input type="submit"  class="spip_bouton" name="confirmer[(#ENV{id})]"
+	<input type="submit"  class="spip_bouton" name="confirmer#ENV{id}"
 		 value="(#ENV{boutonconfirmation})" />
 </div>
 </div>
@@ -20,19 +20,19 @@
 
 [(#REM) Formulaire normal   ]
 <p><label><:form_pet_votre_email:><br />
-<input type="text" class="forml" name="email_message_auteur[(#ENV{id})]"
-	value="[(#ENV{mail})]" size="30" />
+<input type="text" class="forml" name="email_message_auteur#ENV{id}"
+	value="#ENV{mail}" size="30" />
 </label></p>
 <p><label><:form_prop_sujet:><br />
-<input type="text" class="forml" name="sujet_message_auteur[(#ENV{id})]"
-	value="[(#ENV{sujet})]" size="30" />
+<input type="text" class="forml" name="sujet_message_auteur#ENV{id}"
+	value="#ENV{sujet}" size="30" />
 </label></p>
 <p>
-<textarea name="texte_message_auteur[(#ENV{id})]" rows='10' class='forml' cols='40'>[(#ENV{texte})]</textarea>
+<textarea name="texte_message_auteur#ENV{id}" rows='10' class='forml' cols='40'>#ENV{texte}</textarea>
 </p>
 <div style="text-align:#LANG_RIGHT;">
 	<input type="submit"  class="spip_bouton" name="valide"
-		 value="[(#ENV{bouton})]" />
+		 value="#ENV{bouton}" />
 </div>
 
 </form>
