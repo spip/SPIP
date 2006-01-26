@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php3");
+include ("ecrire/inc_version.php");
 
 if (isset($hash)) {
 	include_ecrire("inc_session");

@@ -10,7 +10,7 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php3");
+include ("ecrire/inc_version.php");
 include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
 include_local("inc-public-global"); 
 include_ecrire("inc_lang");
