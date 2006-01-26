@@ -39,7 +39,7 @@ function config_fonctions_dist()
 	debut_droite();
 	lire_metas();
 
-	echo generer_url_post_ecrire('config-fonctions');
+	echo generer_url_post_ecrire('config_fonctions');
 	echo "<input type='hidden' name='changer_config' value='oui'>";
 
 //
@@ -114,7 +114,7 @@ function afficher_choix_vignette($process) {
 		
 	} */
 
-	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'><a href='" , generer_url_ecrire("config-fonctions","image_process=$process"), 
+	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'><a href='" , generer_url_ecrire("config_fonctions","image_process=$process"), 
 	  "'><img src='", generer_url_action("tester", "arg=$process"),
 	  "' border='$border' /></a><br />";
 	if ($border) echo "<b>$process</b>";

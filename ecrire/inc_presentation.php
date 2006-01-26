@@ -1967,13 +1967,13 @@ function barre_onglets($rubrique, $onglet){
 
 	if ($rubrique == "configuration"){
 		onglet(_T('onglet_contenu_site'), generer_url_ecrire("configuration"), "contenu", $onglet, "racine-site-24.gif");
-		onglet(_T('onglet_interactivite'), generer_url_ecrire("config-contenu"), "interactivite", $onglet, "forum-interne-24.gif");
-		onglet(_T('onglet_fonctions_avances'), generer_url_ecrire("config-fonctions"), "fonctions", $onglet, "image-24.gif");
+		onglet(_T('onglet_interactivite'), generer_url_ecrire("config_contenu"), "interactivite", $onglet, "forum-interne-24.gif");
+		onglet(_T('onglet_fonctions_avances'), generer_url_ecrire("config_fonctions"), "fonctions", $onglet, "image-24.gif");
 	}
 
 	if ($rubrique == "config_lang") {
-		onglet(_T('info_langue_principale'), generer_url_ecrire("config-lang"), "langues", $onglet, "langues-24.gif");
-		onglet(_T('info_multilinguisme'), generer_url_ecrire("config-multilang"), "multi", $onglet, "traductions-24.gif");
+		onglet(_T('info_langue_principale'), generer_url_ecrire("config_lang"), "langues", $onglet, "langues-24.gif");
+		onglet(_T('info_multilinguisme'), generer_url_ecrire("config_multilang"), "multi", $onglet, "traductions-24.gif");
 		if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
 			onglet(_T('module_fichiers_langues'), generer_url_ecrire("lang_raccourcis"), "fichiers", $onglet, "traductions-24.gif");
 		}
@@ -2508,7 +2508,7 @@ else {
 			$class = "invisible_au_chargement";
 		}
 			echo "<div class='$class' id='bandeauadministration' style='position: absolute; $spip_lang_left: ".$decal."px;'><div class='bandeau_sec'><table class='gauche'><tr>\n";
-			icone_bandeau_secondaire (_T('icone_gestion_langues'), generer_url_ecrire("config-lang"), "langues-24.gif", "langues", $sous_rubrique);
+			icone_bandeau_secondaire (_T('icone_gestion_langues'), generer_url_ecrire("config_lang"), "langues-24.gif", "langues", $sous_rubrique);
 	
 			bandeau_barre_verticale();
 			if ($options == "avancees") {
