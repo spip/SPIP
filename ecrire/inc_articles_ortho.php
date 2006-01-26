@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 include_ecrire("inc_distant");
-include_ecrire("lab_ortho");
+include_ecrire("inc_ortho");
 
 function articles_ortho_dist()
 {

@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("lab_revisions");
-include_ecrire("lab_diff");
+include_ecrire("inc_revisions");
+include_ecrire("inc_diff");
 
 function afficher_para_modifies ($texte, $court = false) {
 	// Limiter la taille de l'affichage

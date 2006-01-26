@@ -907,7 +907,7 @@ function maj_base() {
 	#if ($version_installee < 1.806)
 	#	maj_version(1.806);
 
-	// URLs propres (lab_version = 0.12)
+	// URLs propres (inc_version = 0.12)
 	if ($version_installee < 1.807) {
 		foreach (array('articles', 'breves', 'rubriques', 'mots') as $objets) {
 			spip_query("ALTER TABLE spip_$objets

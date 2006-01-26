@@ -14,7 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
-include_ecrire("lab_revisions");
+include_ecrire("inc_revisions");
 
 function articles_versions_dist()
 {
@@ -81,7 +81,7 @@ if (!$id_diff) {
 //
 
 if ($id_version && $id_diff) {
-	include_ecrire("lab_diff");
+	include_ecrire("inc_diff");
 
 	if ($id_diff > $id_version) {
 		$t = $id_version;
