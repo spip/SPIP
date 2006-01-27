@@ -2279,7 +2279,7 @@ function init_body($rubrique = "asuivre", $sous_rubrique = "asuivre") {
 		} else {
 			icone_bandeau_principal(
 				_T($detail->libelle),
-				$detail->url?$detail->url:generer_url_ecrire($page),
+				$detail->url ? $detail->url : generer_url_ecrire($page),
 				$detail->icone, $page, $rubrique, $detail->url2,
 				$page, $sous_rubrique);
 		}

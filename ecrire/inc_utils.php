@@ -684,7 +684,16 @@ function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
 	else
 		$ecrire = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
-	$args = "?exec=$script" . ($args ? "&$args" : "");
+	if ($script AND $script<>'accueil')
+		$exec = "exec=$script";
+
+	if ($args AND $exec)
+		$args = "?$exec&$args";
+	else if ($args)
+		$args = "?$args";
+	else if ($exec)
+		$args = "?$exec";
+
 	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
 
 	return "$ecrire$args";
