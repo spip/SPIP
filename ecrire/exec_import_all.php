@@ -39,14 +39,13 @@ function verifier_version_sauvegarde ($archive) {
 
 function import_all_dist()
 {
-  global $archive;
-  if ($archive) {
+	global $archive;
+	if ($archive) {
 	$action = _T('info_restauration_sauvegarde', array('archive' => $archive));
 	$commentaire = verifier_version_sauvegarde ($archive);
-}
+	}
 
-  debut_admin($action, $commentaire);
-
+  debut_admin(generer_url_post_ecrire("import_all","archive=$archive"), $action, $commentaire);
 
   $archive = _DIR_SESSIONS . $archive;
 
@@ -56,7 +55,6 @@ function import_all_dist()
   ecrire_metas();
   
   fin_admin($action);
-
   header("Location: ./");
 }
 ?>

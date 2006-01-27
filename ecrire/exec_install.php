@@ -755,7 +755,7 @@ function install_unpack()
 
   $action = _T('texte_unpack');
  
-  debut_admin($action);
+  debut_admin(generer_url_post_ecrire("install"),$action);
 
   $hash = calculer_action_auteur("unpack");
 

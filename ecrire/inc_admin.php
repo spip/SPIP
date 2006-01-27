@@ -17,7 +17,7 @@ function fichier_admin($action) {
 	return "admin_".substr(md5($action.(time() & ~2047).$connect_login), 0, 10);
 }
 
-function debut_admin($action, $commentaire='') {
+function debut_admin($form, $action, $commentaire='') {
 	global $clean_link;
 	global $connect_statut;
 
@@ -37,7 +37,7 @@ function debut_admin($action, $commentaire='') {
 	include_ecrire ("inc_minipres");
 	minipres(_T('info_action', array('action' => $action)),
 		  $commentaire
-		. $clean_link->getForm('POST')
+		. $form
 		. "\n<p><b>"._T('info_authentification_ftp')."</b>"
 		. aide("ftp_auth")
 		. "\n<p>"

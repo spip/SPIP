@@ -289,7 +289,7 @@ function appliquer_modifs_config() {
 	if ($modif_secu) {
 		$admin = _T('info_modification_parametres_securite');
 		include_ecrire ("inc_admin");
-		debut_admin($admin);
+		debut_admin(generer_url_post_ecrire($_GET['exec']),$admin); # si ca se trouve ca marche ...
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))
 			if (isset($GLOBALS[$i])) ecrire_meta($i, $GLOBALS[$i]);
