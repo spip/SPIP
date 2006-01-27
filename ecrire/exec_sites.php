@@ -124,7 +124,7 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 			syndication='$syndication', statut='$statut'
 			WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
-		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")));
+		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")), true);
 		$redirect_ok = 'oui';
 	}
 }
@@ -208,8 +208,6 @@ if ($jour AND $flag_administrable) {
 		   "' WHERE id_syndic=$id_syndic");
 	calculer_rubriques();
 }
-
-
 
 if ($redirect AND $redirect_ok == 'oui') {
 	redirige_par_entete($redirect);
