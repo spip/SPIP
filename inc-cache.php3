@@ -189,17 +189,9 @@ function determiner_cache(&$use_cache, $contexte,$fond) {
 		if (file_exists($chemin_cache))
   			$use_cache = 0 ;
 		else {
-		  // prevenir du pb (une fois, pas pour chaque inclusion)
-			if (!spip_interdire_cache) {
-				spip_log("Erreur base de donnees & "
-				. "impossible utiliser $chemin_cache");
-				include_ecrire('inc_minipres');
-				install_debut_html(_T('info_travaux_titre'));echo _T('titre_probleme_technique');install_fin_html();
-				// continuer quand meme, ca n'ira pas loin.
-				// mais ne plus rien signaler
-				$GLOBALS['flag_preserver'] = true;
-				define ('spip_interdire_cache', true);
-			}
+			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
+			include_ecrire('inc_minipres');
+			minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
 		}
 	}
 
