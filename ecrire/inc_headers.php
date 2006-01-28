@@ -22,6 +22,7 @@ function spip_header($h) {
 
 // cf. liste des sapi_name - http://fr.php.net/php_sapi_name
 function php_module() {
+	global $SERVER_SOFTWARE, $flag_sapi_name;
 	return (
 		($flag_sapi_name AND eregi("apache", @php_sapi_name()))
 		OR ereg("^Apache.* PHP", $SERVER_SOFTWARE)
@@ -30,11 +31,8 @@ function php_module() {
 
 
 function http_status($status) {
-	global $REDIRECT_STATUS;
-
-	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;
-
-	$status_string = array(
+	global $REDIRECT_STATUS, $flag_sapi_name;
+	static $status_string = array(
 		200 => '200 OK',
 		301 => '301 Moved Permanently',
 		302 => '302 Found',
@@ -43,6 +41,8 @@ function http_status($status) {
 		403 => '403 Forbidden',
 		404 => '404 Not Found'
 	);
+
+	if ($REDIRECT_STATUS && $REDIRECT_STATUS == $status) return;
 
 	$php_cgi = ($flag_sapi_name AND eregi("cgi", @php_sapi_name()));
 	if ($php_cgi)
