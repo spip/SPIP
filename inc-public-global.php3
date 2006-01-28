@@ -121,7 +121,7 @@ function afficher_page_globale ($fond) {
 	include_local("inc-cache");
 
 	// Peut-on utiliser un fichier cache ?
-	$chemin_cache = determiner_cache($use_cache, '', $fond);
+	$chemin_cache = determiner_cache($use_cache, NULL, $fond);
 
 	// demande de previsualisation ?
 	// -> inc-calcul n'enregistrera pas les fichiers caches
