@@ -12,43 +12,33 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-// En-tetes
+// definit les styles qui sont specifiques a ecrire/
+function styles_ecrire() {
 
-#if (http_last_modified(@filemtime("spip_style" . _EXTENSION_PHP), time() + 24 * 3600)) 
-#	exit;
-
-function spip_action_style_dist() {
-
-  global $couleur_claire,$couleur_foncee,$left;
-
-// mettre absolument le charset :
-// Apache-AdvancedExtranetServer & FireFox s'entendent mal sinon
-	Header ("Content-Type: text/css; charset=iso-8859-1");
-
-	// parano XSS
-	eregi("^([#0-9a-z]*).*-([#0-9a-z]*).*-([0-9a-z]*).*", "$couleur_claire-$couleur_foncee-$left", $regs);
-	list (,$couleur_claire,$couleur_foncee,$left) = $regs;
+	global $couleur_claire,$couleur_foncee;
 
 	// Sommes-nous en rtl ou ltr ?
-	$ltr = ($left == 'left');
+	$ltr = ($GLOBALS['spip_lang_left'] == 'left');
 	if ($ltr) {
 		$left = 'left';
 		$right = 'right';
 		$_rtl = '';
+		$pcent = '1%';
 	} else {
 		$left = 'right';
 		$right = 'left';
 		$_rtl = '_rtl';
+		$pcent = '99%';
 	}
 
-	// Envoyer la feuille de style
+	// Couleurs par defaut (normalement, non)
 	if (!isset($couleur_claire))
 		$couleur_claire = "#EDF3FE";
 	if (!isset($couleur_foncee))
 		$couleur_foncee = "#3874B0";
 
 
-?>
+$a= <<<FIN_CSS
 
 /*
  * Police par defaut (bof...)
@@ -59,13 +49,13 @@ body {
 	scrollbar-face-color: white;
 	scrollbar-shadow-color: white;
 	scrollbar-highlight-color: white;
-	scrollbar-3dlight-color: <?php echo $couleur_claire; ?>;
-	scrollbar-darkshadow-color: white; 		
-	scrollbar-track-color: <?php echo $couleur_foncee; ?>;
-	scrollbar-arrow-color: <?php echo $couleur_foncee; ?>;
+	scrollbar-3dlight-color: #COULEURCLAIRE;
+	scrollbar-darkshadow-color: white;
+	scrollbar-track-color: #COULEURFONCEE;
+	scrollbar-arrow-color: #COULEURFONCEE;
 }
 td {
-	text-align: <?php echo $left; ?>;
+	text-align: #LEFT;
 }
 /*
  * Formulaires
@@ -75,7 +65,7 @@ td {
 	display: block;
 	padding: 3px; 
 	background-color: #e4e4e4; 
-	border: 1px solid <?php echo $couleur_claire; ?>; 
+	border: 1px solid #COULEURCLAIRE; 
 	background-position: center bottom; 
 	float: none;
 	behavior: url("win_width.htc");
@@ -87,7 +77,7 @@ td {
 	display: block;
 	padding: 3px; 
 	background-color: white; 
-	border: 1px solid <?php echo $couleur_claire; ?>; 
+	border: 1px solid #COULEURCLAIRE; 
 	background-position: center bottom; float: none; 
 	behavior: url("win_width.htc");
  	font-size: 12px;
@@ -96,13 +86,13 @@ td {
 .fondl { 
 	padding: 3px; 
 	background-color: #e4e4e4; 
-	border: 1px solid <?php echo $couleur_claire; ?>; 
+	border: 1px solid #COULEURCLAIRE; 
 	background-position: center bottom; 
 	float: none;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
-.fondo { background-color: <?php echo $couleur_foncee; ?>; 
+.fondo { background-color: #COULEURFONCEE; 
 	background-position: center bottom; float: none; color: #FFFFFF;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
@@ -116,11 +106,6 @@ select.fondl {
 	padding: 0px;
 }
 .maj-debut:first-letter { text-transform: uppercase; }
-
-
-.format_png {
-	behavior: url("<?php echo _DIR_RACINE; ?>win_png.htc");
-}
 
 
 /*
@@ -161,7 +146,7 @@ select.fondl {
 	width: 11px;
 	padding: 0px;
 	margin: 0px;
-	background: url(<?php echo _DIR_IMG_PACK . 'tirets-separation.gif' ?>);
+	background: url(#IMG_PACK/tirets-separation.gif);
 	background-position: 5px 0px;
 }
 .bandeau_couleur {
@@ -179,7 +164,7 @@ select.fondl {
 	position: absolute; 
 	visibility: hidden;
 	top: 0px; 
-	background-color: <?php echo $couleur_claire; ?>; 
+	background-color: #COULEURCLAIRE; 
 	color: black;
 	padding: 5px;
 	padding-top: 2px;
@@ -207,26 +192,26 @@ a.bandeau_rub {
 	display: block;
 	font-size: 10px;
 	padding: 2px;
-	padding-<?php echo $right; ?>: 13px;
-	padding-<?php echo $left; ?>: 16px;
+	padding-#RIGHT: 13px;
+	padding-#LEFT: 16px;
 	color: #666666;
 	text-decoration: none;
 	border-bottom: 1px solid #cccccc;
 	background-repeat: no-repeat;
-	background-position: <?php echo $ltr ? "1%" : "99%"; ?> center;
-	background-image: url(<?php echo _DIR_IMG_PACK . 'rubrique-12.gif' ?>);
+	background-position: #PCENT center;
+	background-image: url(#IMG_PACK/rubrique-12.gif);
 }
 a.bandeau_rub:hover {
 	background-color: white;
 	text-decoration: none;
 	color: #333333;
 	background-repeat: no-repeat;
-	background-position: <?php echo $ltr ? "1%" : "99%"; ?> center;
+	background-position: #PCENT center;
 }
 div.bandeau_rub {
 	position: absolute;
 	top: 4px;
-	<?php echo $left; ?>: 120px;
+	#LEFT: 120px;
 	background-color: #eeeeee;
 	padding: 0px;
 	border: 1px solid #555555;
@@ -235,23 +220,23 @@ div.bandeau_rub {
 }
 
 div.brt {
-	background: url(<?php echo _DIR_IMG_PACK . 'triangle-droite' . $_rtl .'.gif', ')', $right; ?> center no-repeat;
+	background: url(#IMG_PACK/triangle-droite#RTL.gif) #RIGHT center no-repeat;
 }
 div.pos_r {
 	position: relative;
 }
 
 option.selec_rub {
-	background-position: <?php echo $left; ?> center;
-	background-image: url(<?php echo _DIR_IMG_PACK . 'rubrique-12.gif' ?>);
+	background-position: #LEFT center;
+	background-image: url(#IMG_PACK/rubrique-12.gif);
 	background-repeat: no-repeat;
-	padding-<?php echo $left; ?>: 16px;
+	padding-#LEFT: 16px;
 }
 
 
 div.messages {
 	padding: 5px;
-	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
+	border-bottom: 1px solid #COULEURFONCEE;
 	font-size: 10px;
 	font-weight: bold;
 }
@@ -266,18 +251,18 @@ a.icone26 {
 	color: black;
 	text-decoration: none;
 	padding: 1px; 
-	margin-<?php echo $right; ?>: 2px;
+	margin-#RIGHT: 2px;
 }
 a.icone26:hover {
 	text-decoration: none;
 }
 a.icone26 img {
 	vertical-align: middle;
-	behavior: url("<?php echo _DIR_RACINE; ?>win_png.htc");
-	background-color: <?php echo $couleur_foncee; ?>;
+	behavior: url("../win_png.htc");
+	background-color: #COULEURFONCEE;
 }
 a.icone26:hover img {
-	background: url(<?php echo _DIR_IMG_PACK . 'fond-gris-anim.gif' ?>);
+	background: url(#IMG_PACK/fond-gris-anim.gif);
 }
 
 
@@ -298,7 +283,7 @@ a.icone26:hover img {
 	display: inline;
 	padding: 4px;
 	background-color: #eeeeee;
-	border: 2px solid <?php echo $couleur_foncee; ?>;
+	border: 2px solid #COULEURFONCEE;
 	-moz-border-radius: 5px;
 }
 .icone36 a:hover img {
@@ -336,7 +321,7 @@ a.icone26:hover img {
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	color: <?php echo $couleur_foncee; ?>; 
+	color: #COULEURFONCEE; 
 	display: block; 
 	margin: 2px;
 	width: 100%
@@ -379,12 +364,12 @@ a.icone26:hover img {
 
 
 .cellule48 a img {
-	behavior: url("<?php echo _DIR_RACINE; ?>win_png.htc");
+	behavior: url("../win_png.htc");
 	display: inline;
 	margin: 4px;
 	padding: 0px;
 	border: 0px;
-	background-color: <?php echo $couleur_claire; ?>;
+	background-color: #COULEURCLAIRE;
 }
 
 .cellule48 a.selection img {
@@ -399,7 +384,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0px;
 	border: 0px;
-	background: url(<?php echo _DIR_IMG_PACK . 'fond-gris-anim.gif' ?>);
+	background: url(#IMG_PACK/fond-gris-anim.gif);
 }
 
 
@@ -424,8 +409,8 @@ a.icone26:hover img {
 	display: inline;
 	padding: 3px;
 	background-color: #e4e4e4;
-	background: url(<?php echo _DIR_IMG_PACK . 'fond-gris-anim.gif' ?>);
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	background: url(#IMG_PACK/fond-gris-anim.gif);
+	border: 1px solid #COULEURFONCEE;
 	-moz-border-radius: 5px;
 }
 .cellule36 a span, .cellule48 a span {
@@ -476,14 +461,14 @@ a.icone26:hover img {
 }
 .cellule-texte a.selection {
 	padding: 3px; margin: 1px; 
-	border: 1px solid <?php echo $couleur_foncee; ?>; 
-	background-color: <?php echo $couleur_claire; ?>;
+	border: 1px solid #COULEURFONCEE; 
+	background-color: #COULEURCLAIRE;
 	-moz-border-radius: 5px;
 	color: #000000;
 }
 .cellule-texte a:hover {
 	padding: 3px; margin: 1px; 
-	border: 1px solid <?php echo $couleur_foncee; ?>; 
+	border: 1px solid #COULEURFONCEE; 
 	background-color: white;
 	-moz-border-radius: 5px;
 	color: #333333;
@@ -509,7 +494,7 @@ a.cellule-h {
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	text-align: <?php echo $left; ?>;
+	text-align: #LEFT;
 	text-decoration: none; 
 	color: #666666;
 }
@@ -517,7 +502,7 @@ a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover 
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	text-align: <?php echo $left; ?>;
+	text-align: #LEFT;
 	text-decoration: none; 
 	color: #000000;
 }
@@ -526,15 +511,15 @@ a.cellule-h div.cell-i {
 	border: 1px solid white;
 	-moz-border-radius: 5px;
 	margin: 0px;
-	margin-<?php echo $right; ?>: 3px;
+	margin-#RIGHT: 3px;
 }
 a.cellule-h:hover div.cell-i {
 	padding: 0px;
-	border: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(<?php echo _DIR_IMG_PACK . 'fond-gris-anim.gif' ?>);
+	border: 1px solid #COULEURFONCEE;
+	background: url(#IMG_PACK/fond-gris-anim.gif);
 	-moz-border-radius: 5px;
 	margin: 0px;
-	margin-<?php echo $right; ?>: 3px;
+	margin-#RIGHT: 3px;
 }
 
 a.cellule-h table {
@@ -560,7 +545,7 @@ a.cellule-h a.aide img {
 a.cellule-h-texte {
 	display: block;
 	clear: both;
-	text-align: <?php echo $left; ?>;
+	text-align: #LEFT;
 	font-family: Trebuchet Sans MS, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 11px;
@@ -574,7 +559,7 @@ a.cellule-h-texte {
 }
 .danger a.cellule-h-texte {
 	border: 1px dashed black;
-	background: url(<?php echo _DIR_IMG_PACK . 'rayures-sup.gif' ?>);
+	background: url(#IMG_PACK/rayures-sup.gif);
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
@@ -631,26 +616,26 @@ div.onglet {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	border: 1px solid #COULEURFONCEE;
 	margin-right: 3px;
 	padding: 5px;
 	background-color: white;
 }
 div.onglet a {
-	color: <?php echo $couleur_foncee; ?>;
+	color: #COULEURFONCEE;
 }
 
 div.onglet_on {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	border: 1px solid #COULEURFONCEE;
 	margin-right: 3px;
 	padding: 5px;
-	background-color: <?php echo $couleur_claire; ?>;
+	background-color: #COULEURCLAIRE;
 }
 div.onglet_on a, div.onglet_on a:hover {
-	color: <?php echo $couleur_foncee; ?>;
+	color: #COULEURFONCEE;
 	text-decoration: none;
 }
 
@@ -658,20 +643,20 @@ div.onglet_off {
 	font-family: Arial, Sans, sans-serif; 
 	font-size: 11px;
 	font-weight: bold; 
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	border: 1px solid #COULEURFONCEE;
 	margin-right: 3px;
 	padding: 5px;
-	background-color: <?php echo $couleur_foncee; ?>;
+	background-color: #COULEURFONCEE;
 	color: white;
 }
 
 
 
 .reliefblanc {
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'barre-blanc.gif' ?>);
+	 background-image: url(#IMG_PACK/barre-blanc.gif);
 }
 .reliefgris { 
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'barre-noir.gif' ?>);
+	 background-image: url(#IMG_PACK/barre-noir.gif);
 }
 .iconeoff {
 	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
@@ -680,7 +665,7 @@ div.onglet_off {
 	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
 }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black;
-	background: url(<?php echo _DIR_IMG_PACK . 'rayures-sup.gif' ?>);
+	background: url(#IMG_PACK/rayures-sup.gif);
 }
 
 /* Raccourcis pour les polices (utile pour les tableaux) */
@@ -735,7 +720,7 @@ a.ortho-dico:hover {
 }
 
 #ortho-fixed {
-	position: fixed; top: 0px; <?php echo $right; ?>: 0px; width: 25%; padding: 15px; margin: 0px;
+	position: fixed; top: 0px; #RIGHT: 0px; width: 25%; padding: 15px; margin: 0px;
 }
 .ortho-content {
 	position: absolute; top: 0px; width: 70%; padding: 15px; margin: 0px;
@@ -759,7 +744,7 @@ a.ortho-dico:hover {
 	z-index: 0;
 }
 .suggest-actif .detail ul, .suggest-inactif .detail ul {
-	 list-style-image: url(<?php echo _DIR_IMG_PACK . 'puce.gif' ?>);
+	 list-style-image: url(#IMG_PACK/puce.gif);
 	background: #f3f2f3;
 	margin: 0px;
 	padding: 0px;
@@ -777,7 +762,7 @@ a.ortho-dico:hover {
 
 
 /*
- * Comparaison d'articles
+ * Comparaison d articles
  */
 
 .diff-para-deplace {
@@ -821,20 +806,20 @@ a.ortho-dico:hover {
  */
 
 table.spip_barre {
-	border-<?php echo $right; ?>: 1px solid <?php echo $couleur_claire; ?>;
+	border-#RIGHT: 1px solid #COULEURCLAIRE;
 }
 
 table.spip_barre td {
-	text-align: <?php echo $left; ?>;
-	border-top: 1px solid <?php echo $couleur_claire; ?>;
-	border-<?php echo $left; ?>: 1px solid <?php echo $couleur_claire; ?>;
+	text-align: #LEFT;
+	border-top: 1px solid #COULEURCLAIRE;
+	border-#LEFT: 1px solid #COULEURCLAIRE;
 }
 
 a.spip_barre img {
 	padding: 3px;
 	margin: 0px;
 	background-color: #eeeeee;
-	border-<?php echo $right; ?>: 1px solid <?php echo $couleur_claire; ?>;
+	border-#RIGHT: 1px solid #COULEURCLAIRE;
 }
 a.spip_barre:hover img {
 	background-color: white;
@@ -860,11 +845,11 @@ a.bouton_rotation img, div.bouton_rotation img {
 	padding: 1px;
 	margin-bottom: 1px;
 	background-color: #eeeeee;
-	border: 1px solid <?php echo $couleur_claire; ?>;
+	border: 1px solid #COULEURCLAIRE;
 }
 
 a.bouton_rotation:hover img {
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	border: 1px solid #COULEURFONCEE;
 }
 
 
@@ -887,7 +872,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-fonce {
-	background-color: <?php echo $couleur_foncee; ?>;
+	background-color: #COULEURFONCEE;
 	-moz-border-radius: 8px;
 }
 
@@ -903,19 +888,19 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-couleur {
-	background-color: <?php echo $couleur_claire; ?>;
+	background-color: #COULEURCLAIRE;
 	-moz-border-radius: 8px;
 }
 .cadre-couleur div.cadre-titre {
 	-moz-border-radius-topleft: 8px;
 	-moz-border-radius-topright: 8px;
-	background: <?php echo $couleur_foncee; ?>;
-	border-bottom: 2px solid <?php echo $couleur_foncee; ?>;
+	background: #COULEURFONCEE;
+	border-bottom: 2px solid #COULEURFONCEE;
 	color: white;	
 }
 
 .cadre-couleur-foncee {
-	background-color: <?php echo $couleur_foncee; ?>;
+	background-color: #COULEURFONCEE;
 	-moz-border-radius: 8px;
 }
 .cadre-couleur-foncee div.cadre-titre {
@@ -926,12 +911,12 @@ a.bouton_rotation:hover img {
 
 .cadre-trait-couleur {
 	background-color: white;
-	border: 2px solid <?php echo $couleur_foncee; ?>;
+	border: 2px solid #COULEURFONCEE;
 	-moz-border-radius: 8px;
 }
 .cadre-trait-couleur div.cadre-titre {
-	background: <?php echo $couleur_foncee; ?>;
-	border-bottom: 2px solid <?php echo $couleur_foncee; ?>;
+	background: #COULEURFONCEE;
+	border-bottom: 2px solid #COULEURFONCEE;
 	color: white;	
 }
 
@@ -958,7 +943,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-e div.cadre-titre {
-	background: <?php echo $couleur_claire; ?>;
+	background: #COULEURCLAIRE;
 	border-bottom: 1px solid #666666;
 	color: black;	
 }
@@ -971,10 +956,10 @@ a.bouton_rotation:hover img {
 .cadre-forum {
 	background-color: white;
 	border: 1px solid #aaaaaa;
-	-moz-border-radius-top<?php echo $left; ?>: 8px;
+	-moz-border-radius-top#LEFT: 8px;
 }
 .cadre-forum div.cadre-titre {
-	background: <?php echo $couleur_claire; ?>;
+	background: #COULEURCLAIRE;
 	border-bottom: 1px solid #aaaaaa;
 	color: black;	
 }
@@ -984,7 +969,7 @@ a.bouton_rotation:hover img {
 	border: 1px solid #666666;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-top<?php echo $left; ?>: 8px;
+	-moz-border-radius-top#LEFT: 8px;
 }
 
 
@@ -1000,14 +985,14 @@ a.bouton_rotation:hover img {
 
 .cadre-info{
 	background-color: white;
-	border: 2px solid <?php echo $couleur_foncee; ?>;
+	border: 2px solid #COULEURFONCEE;
 	padding: 5px;
 	-moz-border-radius: 8px;
 }
 
 
 .cadre-formulaire {
-/*	border: 1px solid <?php echo $couleur_foncee; ?>;
+/*	border: 1px solid #COULEURFONCEE;
 	background-color: #dddddd;*/
 	color: #444444;
 	font-family: verdana, arial, helvetica, sans;
@@ -1021,14 +1006,14 @@ a.bouton_rotation:hover img {
  */
 
 .plan-rubrique {
-	margin-<?php echo $left; ?>: 12px;
-	padding-<?php echo $left; ?>: 10px;
-	border-<?php echo $left; ?>: 1px dotted #888888;
+	margin-#LEFT: 12px;
+	padding-#LEFT: 10px;
+	border-#LEFT: 1px dotted #888888;
 }
 .plan-secteur {
-	margin-<?php echo $left; ?>: 12px;
-	padding-<?php echo $left; ?>: 10px;
-	border-<?php echo $left; ?>: 1px dotted #404040;
+	margin-#LEFT: 12px;
+	padding-#LEFT: 10px;
+	border-#LEFT: 1px dotted #404040;
 }
  
 .plan-articles {
@@ -1039,9 +1024,9 @@ a.bouton_rotation:hover img {
 .plan-articles a {
 	display: block;
 	padding: 2px;
-	padding-<?php echo $left; ?>: 18px;
+	padding-#LEFT: 18px;
 	border-bottom: 1px solid #cccccc;
-	 background: <?php echo $ltr ? "1%" : "99%"; ?> no-repeat;
+	 background: #PCENT no-repeat;
 	background-color: #e0e0e0;
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-size: 11px;
@@ -1052,19 +1037,19 @@ a.bouton_rotation:hover img {
 	text-decoration: none;
 }
 .plan-articles .publie {
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'puce-verte.gif' ?>);
+	 background-image: url(#IMG_PACK/puce-verte.gif);
 }
 .plan-articles .prepa {
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'puce-blanche.gif' ?>);
+	 background-image: url(#IMG_PACK/puce-blanche.gif);
 }
 .plan-articles .prop {
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'puce-orange.gif' ?>);
+	 background-image: url(#IMG_PACK/puce-orange.gif);
 }
 .plan-articles .refuse {
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'puce-rouge.gif' ?>);
+	 background-image: url(#IMG_PACK/puce-rouge.gif);
 }
 .plan-articles .poubelle {
-	 background-image: url(<?php echo _DIR_IMG_PACK . 'puce-poubelle.gif' ?>);
+	 background-image: url(#IMG_PACK/puce-poubelle.gif);
 }
 
 a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
@@ -1082,14 +1067,14 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 
 }
 a.foncee, a.foncee:hover {
-	background-color: <?php echo $couleur_foncee; ?>;
+	background-color: #COULEURFONCEE;
 	color: white;
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	border: 1px solid #COULEURFONCEE;
 }
 a.claire, a.claire:hover {
-	background-color: <?php echo $couleur_claire; ?>;
-	color: <?php echo $couleur_foncee; ?>;
-	border: 1px solid <?php echo $couleur_foncee; ?>;
+	background-color: #COULEURCLAIRE;
+	color: #COULEURFONCEE;
+	border: 1px solid #COULEURFONCEE;
 }
 span.lang_base {
 	color: #666666;
@@ -1102,7 +1087,7 @@ span.creer {
 	background-color: white;
 }
 .trad_float {
-	float: <?php echo $right; ?>;
+	float: #RIGHT;
 	z-index: 20;
 	margin-top: 4px;
 }
@@ -1114,8 +1099,8 @@ div.liste {
 }
 
 a.liste-mot {
-	background: url(<?php echo _DIR_IMG_PACK . 'petite-cle.gif', ')', $left; ?> center no-repeat; 
-	padding-<?php echo $left; ?>: 30px;
+	background: url(#IMG_PACK/petite-cle.gif) #LEFT center no-repeat; 
+	padding-#LEFT: 30px;
 }
 
 .tr_liste {
@@ -1180,24 +1165,24 @@ div.puce_breve_popup {
 div.brouteur_rubrique {
 	display: block;
 	padding: 3px;
-	padding-<?php echo $right; ?>: 10px;
-	border-top: 0px solid <?php echo $couleur_foncee; ?>;
-	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
-	border-left: 1px solid <?php echo $couleur_foncee; ?>;
-	border-right: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(<?php echo _DIR_IMG_PACK . 'triangle-droite'. $_rtl . '.gif', ')', $right; ?> center no-repeat;
+	padding-#RIGHT: 10px;
+	border-top: 0px solid #COULEURFONCEE;
+	border-bottom: 1px solid #COULEURFONCEE;
+	border-left: 1px solid #COULEURFONCEE;
+	border-right: 1px solid #COULEURFONCEE;
+	background: url(#IMG_PACK/triangle-droite#RTL.gif)#RIGHT center no-repeat;
 	background-color: white;
 }
 
 div.brouteur_rubrique_on {
 	display: block;
 	padding: 3px;
-	padding-<?php echo $right; ?>: 10px;
-	border-top: 0px solid <?php echo $couleur_foncee; ?>;
-	border-bottom: 1px solid <?php echo $couleur_foncee; ?>;
-	border-left: 1px solid <?php echo $couleur_foncee; ?>;
-	border-right: 1px solid <?php echo $couleur_foncee; ?>;
-	background: url(<?php echo _DIR_IMG_PACK . 'triangle-droite' . $_rtl . '.gif', ')', $right; ?> center no-repeat;
+	padding-#RIGHT: 10px;
+	border-top: 0px solid #COULEURFONCEE;
+	border-bottom: 1px solid #COULEURFONCEE;
+	border-left: 1px solid #COULEURFONCEE;
+	border-right: 1px solid #COULEURFONCEE;
+	background: url(#IMG_PACK/triangle-droite#RTL.gif) #RIGHT center no-repeat;
 	background-color: #e0e0e0;
 }
 
@@ -1208,16 +1193,16 @@ xdiv.brouteur_rubrique:hover {
 div.brouteur_rubrique div, div.brouteur_rubrique_on div  {
 	padding-top: 5px; 
 	padding-bottom: 5px; 
-	padding-<?php echo $left; ?>: 28px; 
+	padding-#LEFT: 28px; 
 	background-repeat: no-repeat;
-	background-position: center <?php echo $left; ?>;
+	background-position: center #LEFT;
 	font-weight: bold;
 	font-family: Arial,Sans,sans-serif;
 	font-size: 12px;
 }
 
 div.brouteur_rubrique div a {
-	color: <?php echo $couleur_foncee; ?>;
+	color: #COULEURFONCEE;
 }
 
 div.brouteur_rubrique_on div a {
@@ -1241,7 +1226,7 @@ p.spip {
 p.spip_note {
 	margin-bottom: 3px;
 	margin-top: 3px;
-	margin-<?php echo $left; ?>: 17px;
+	margin-#LEFT: 17px;
 	text-indent: -17px;
 }
 
@@ -1250,28 +1235,24 @@ a.spip_in {
 	border-bottom: 1px dashed;
 }
 a.spip_out {
-	background: url(<?php echo _DIR_IMG_PACK . 'spip_out.gif', ') ', $right; ?> center no-repeat;
-	padding-<?php echo $right; ?>: 10px;
+	background: url(#IMG_PACK/spip_out.gif)#RIGHT center no-repeat;
+	padding-#RIGHT: 10px;
 	border-bottom: 1px solid;
-}
-a.spip_url {
-}
-
-.spip_code {
-	font-family: monospace;
 }
 
 a.spip_note {
 	background-color:#eeeeee;
 }
-a.spip_glossaire:hover {text-decoration: underline overline;}
+a.spip_glossaire:hover {
+	text-decoration: underline overline;
+}
 
 .spip_recherche {
 	padding: 3px; 
 	width : 100%; 
 	font-size: 10px;
 	border: 1px solid white;
-	background-color: <?php echo $couleur_foncee; ?>;
+	background-color: #COULEURFONCEE;
 	color: white;
 }
 .spip_cadre {
@@ -1283,8 +1264,8 @@ a.spip_glossaire:hover {text-decoration: underline overline;}
 	behavior: url("win_width.htc");
 }
 blockquote.spip {
-	margin-<?php echo $left; ?>: 40px;
-	margin-<?php echo $right; ?>: 0px;
+	margin-#LEFT: 40px;
+	margin-#RIGHT: 0px;
 	margin-top : 10px;
 	margin-bottom : 10px;
 	border : solid 1px #aaaaaa;
@@ -1294,15 +1275,16 @@ blockquote.spip {
 }
 
 div.spip_poesie {
-	margin-<?php echo $left; ?>: 10px;
-	padding-<?php echo $left; ?>: 10px;
-	border-<?php echo $left; ?>: 1px solid #999999;
+	margin-#LEFT: 10px;
+	padding-#LEFT: 10px;
+	border-#LEFT: 1px solid #999999;
 }
 div.spip_poesie div {
 	text-indent: -60px;
-	margin-<?php echo $left; ?>: 60px;
+	margin-#LEFT: 60px;
 }
 
+/* pour le plugin "revision_nbsp" */
 .spip-nbsp {
 	border-bottom: 2px solid #c8c8c8;
 	padding-left: 2px;
@@ -1326,78 +1308,11 @@ a.boutonlien {
 a.triangle_block {
 	margin-top: -3px;
 	margin-bottom: -3px;
-	margin-<?php echo $right; ?>: -3px;
+	margin-#RIGHT: -3px;
 }
 a.triangle_block:hover {
-	margin-<?php echo $left; ?>: 1px;
-	margin-<?php echo $right; ?>: -4px;
-}
-
-h3.spip {
-	margin-top : 40px;
-	margin-bottom : 40px;
-	font-family: Verdana,Arial,Sans,sans-serif;
-	font-weight: bold;
-	font-size: 120%;
-	text-align: center;
-	clear: both;
-}
-.spip_documents{
-	font-family: Verdana,Arial,Sans,sans-serif;
-	font-size : 70%;
-}
-.spip_documents_center{
-	margin: auto; 
-	text-align: center;
-	width: 80%
-}
-
-.spip_documents_left{
-	margin: 0px; 
-	margin-right: 20px;
-	margin-bottom: 5px;
-	text-align: center;
-}
-
-.spip_documents_right{
-	margin: 0px; 
-	margin-left: 20px;
-	margin-bottom: 5px;
-	text-align: center;
-}
-
-table.spip {
-	margin-left: auto;
-	margin-right: auto;
-	border: 1px solid black;
-	border-collapse:collapse;
-}
-
-table.spip caption{
-	caption-side: top; /* bottom pas pris en compte par IE */
-	text-align: center;
-	margin-left: auto;                                                       
-	margin-right: auto;
-	padding: 3px;
-	font-weight: bold;
-	font-family: Verdana,Arial,Sans,sans-serif;
-	font-size : 70%;
-}
-
-table.spip tr.row_first {
-	background-color: <?php echo $couleur_claire; ?>;
-}
-table.spip tr.row_odd {
-	background-color: #d0d0d0;
-}
-table.spip tr.row_even {
-	background-color: #F0F0F0;
-}
-table.spip td {
-	padding: 3px;
-	text-align: left;
-	vertical-align: middle;
-	margin: 1px;
+	margin-#LEFT: 1px;
+	margin-#RIGHT: -4px;
 }
 
 .rss-button {
@@ -1412,17 +1327,17 @@ table.spip td {
 }
 
 .fond-agenda {
-	background: url<?php echo '(', _DIR_IMG_PACK . 'fond-agenda.gif', ') ', $right; ?> center no-repeat;
-	float: <?php echo $left; ?>; 
-	margin-<?php echo $right; ?>: 3px;
-	padding-<?php echo $right; ?>: 4px;
+	background: url (#IMG_PACK/fond-agenda.gif)#RIGHT center no-repeat;
+	float: #LEFT; 
+	margin-#RIGHT: 3px;
+	padding-#RIGHT: 4px;
 	line-height: 12px;
 	color: #666666; 
  }
 
  div.highlight {
   	color: black;
- 	background-color: <?php echo $couleur_claire; ?>;
+ 	background-color: #COULEURCLAIRE;
  }
   div.highlight, div.pashighlight {
   	color: #666666;
@@ -1434,13 +1349,25 @@ table.spip td {
   }
 
 div.petite-rubrique {
-	background: <?php echo $ltr ? "1%" : "99%"; ?> no-repeat;
-	background-image : url(<?php echo _DIR_IMG_PACK . 'rubrique-12.gif'; ?>);
-	padding-<?php echo $left; ?>: 15px;
+	background: #PCENT no-repeat;
+	background-image : url(#IMG_PACKrubrique-12.gif'.');
+	padding-#LEFT: 15px;
 }
 div.rub-ouverte {
-	padding-<?php echo $right; ?>: 10px;
-	background: url(<?php echo _DIR_IMG_PACK . 'triangle-droite'. $_rtl . '.gif', ')', $right; ?> center no-repeat;
- }
-	<?php }
+	padding-#RIGHT: 10px;
+	background: url(#IMG_PACK/triangle-droite#RTL.gif) #RIGHT center no-repeat;
+}
+FIN_CSS;
+
+return str_replace('#RIGHT', $right,
+	str_replace('#LEFT', $left,
+	str_replace('#RTL', $_rtl,
+	str_replace('#COULEURCLAIRE', $couleur_claire,
+	str_replace('#COULEURFONCEE', $couleur_foncee,
+	str_replace('#PCENT', $pcent,
+	str_replace('#IMG_PACK/', _DIR_IMG_PACK,
+	$a)))))));
+
+}
+
 ?>
