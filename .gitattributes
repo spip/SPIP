@@ -142,7 +142,6 @@ ecrire/exec_spip_action_supprimer.php -text
 ecrire/exec_spip_action_test_dirs.php -text
 ecrire/exec_spip_action_tester.php -text
 ecrire/exec_spip_action_tourner.php -text
-ecrire/exec_spip_style.php -text
 ecrire/exec_statistiques_lang.php -text
 ecrire/exec_statistiques_referers.php -text
 ecrire/exec_statistiques_repartition.php -text
