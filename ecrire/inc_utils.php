@@ -577,11 +577,11 @@ function find_in_path ($filename, $path='AUTO', $sinon='') {
 			// Ajouter les repertoires des plugins
 			foreach ($GLOBALS['plugins'] as $plug)
 				$autopath = _DIR_PLUGINS.$plug.'/:'.$autopath;
-
-			if ($GLOBALS['dossier_squelettes'])
-				$autopath = $GLOBALS['dossier_squelettes'].'/:'.$autopath;
 		}
 		$path = $autopath;
+
+		if ($GLOBALS['dossier_squelettes'])
+			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
 	}
 #spip_log("path = $path");
 
