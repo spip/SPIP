@@ -68,38 +68,14 @@ function calcule_header_et_page ($fond) {
 }
 
 
-function obtenir_page_ancienne ($chemin_cache, $fond, $inclusion=false) {
+// Remplir les globals pour les boutons d'admin
 
-	global $lastmodified ;
-	//
-	// Lire le fichier cache
-	//
-	lire_fichier ($chemin_cache, $page['texte']);
-	$lastmodified = max($lastmodified, @filemtime($chemin_cache));
-	# spip_log ("cache $chemin_cache $lastmodified");
-
-	//
-	// Lire sa carte d'identite & fixer le contexte global
-	//
-	if (preg_match("/^<!-- ([^\n]*) -->\n/ms", $page['texte'], $match)) {
-		$meta_donnees = unserialize($match[1]);
-		if (is_array($meta_donnees)) {
-			foreach ($meta_donnees as $var=>$val) {
-				$page[$var] = $val;
-			}
-		}
-
-		$page['texte'] = substr($page['texte'], strlen($match[0]));
-
-		// Remplir les globals pour les boutons d'admin
-		if (!$inclusion AND is_array($page['contexte'])) {
-			foreach ($page['contexte'] as $var=>$val) {
-				$GLOBALS[$var] = $val;
-			}
+function restaurer_globales ($contexte) {
+	if (!is_array($contexte)) {
+		foreach ($contexte as $var=>$val) {
+			$GLOBALS[$var] = $val;
 		}
 	}
-
-	return $page;
 }
 
 function is_preview()
@@ -122,11 +98,10 @@ function afficher_page_globale ($fond) {
 	include_local("inc-cache");
 
 	// Peut-on utiliser un fichier cache ?
-	$chemin_cache = determiner_cache($use_cache, NULL, $fond);
-	if ($chemin_cache)
-		$lastmodified = @filemtime($chemin_cache);
-	else
-		$lastmodified = time();
+	list($chemin_cache, $page, $lastmodified) = 
+		determiner_cache($use_cache, NULL, $fond);
+
+	if (!$chemin_cache) $lastmodified = time();
 
 	// demande de previsualisation ?
 	// -> inc-calcul n'enregistrera pas les fichiers caches
@@ -162,7 +137,7 @@ function afficher_page_globale ($fond) {
 		$page['entetes']["Connection"] = "close";
 	} else {
 		if (!$use_cache)
-			$page = obtenir_page_ancienne ($chemin_cache, $fond, false);
+			restaurer_globales($page['contexte']);
 		else {
 			include_local('inc-calcul');
 			$page = calculer_page_globale ($chemin_cache, $fond);
@@ -239,7 +214,8 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 
 	global $lastmodified;
 	// Peut-on utiliser un fichier cache ?
-	$chemin_cache = determiner_cache($use_cache, $contexte_inclus, $fond);
+	list($chemin_cache, $page, $lastinclude) = 
+		determiner_cache($use_cache, $contexte_inclus, $fond);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
@@ -259,9 +235,9 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		$contexte_inclus['date_redac'] = $contexte_inclus['date'];
 
 	// On va ensuite chercher la page
-	if (!$use_cache)
-		$page =  obtenir_page_ancienne ($chemin_cache, $fond, false);
-	else {
+	if (!$use_cache) {
+		$lastmodified = max($lastmodified, $lastinclude);
+	} else {
 		include_local('inc-calcul');
 		$page = cherche_page($chemin_cache, $contexte_inclus, $fond, false);
 		$lastmodified = time();
