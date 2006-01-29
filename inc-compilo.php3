@@ -39,9 +39,6 @@ include_local("inc-compilo-api");
 # definition des tables
 include_ecrire('inc_serialbase');
 
-// outils pour debugguer le compilateur
-#include_local("inc-compilo-debug"); # desactive
-
 //
 // Calculer un <INCLURE()>
 //
@@ -385,7 +382,7 @@ function calculer_liste($tableau, $descr, &$boucles, $id_boucle='') {
 	  join(" ,\n$tab", $codes) . "))";
 }
 
-function compile_cas($tableau, $descr, &$boucles, $id_boucle='') {
+function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
         $codes = array();
 	// cas de la boucle recursive
 	if (is_array($id_boucle)) 
@@ -558,11 +555,12 @@ function code_boucle(&$boucles, $id, $nom)
 // Pour appeler la fonction produite, lui fournir 2 tableaux de 1 e'le'ment:
 // - 1er: element 'cache' => nom (du fichier ou` mettre la page)
 // - 2e: element 0 contenant un environnement ('id_article => $id_article, etc)
-// Elle retourne alors un tableau de 4 e'le'ments:
+// Elle retourne alors un tableau de 5 e'le'ments:
 // - 'texte' => page HTML, application du squelette a` l'environnement;
 // - 'squelette' => le nom du squelette
 // - 'process_ins' => 'html' ou 'php' selon la pre'sence de PHP dynamique
 // - 'invalideurs' =>  de'pendances de cette page, pour invalider son cache.
+// - 'entetes' => tableau des entetes http
 // (voir son utilisation, optionnelle, dans invalideur.php)
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
@@ -690,14 +688,8 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 // Fonction principale du squelette $sourcefile
 //
 function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
-\$t0 = $corps;
 
-	return array(
-		'texte' => \$t0,
-		'squelette' => '$nom',
-		'process_ins' => ((strpos(\$t0,'<'.'?')=== false) ? 'html' : 'php'),
-		'invalideurs' => \$Cache
-	);
+	return analyse_resultat_skel('$nom', \$Cache, $corps);
 }
 
 ?".">";

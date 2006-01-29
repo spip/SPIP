@@ -207,7 +207,7 @@ function calculer_contexte() {
 
 function calculer_page_globale($cache, $fond) {
 
-	global $lastmodified, $_SERVER, $contexte;
+	global $_SERVER, $contexte;
 
 	$contexte = calculer_contexte();
 
@@ -253,8 +253,25 @@ function calculer_page_globale($cache, $fond) {
 	}
 
 	$page['signal'] = $signal;
-	$page['signal']['process_ins'] = $page['process_ins'];
-	$lastmodified = time();
 	return $page;
 }
+
+function analyse_resultat_skel($nom, $Cache, $corps)
+{
+	$headers = array();
+        while (preg_match('/^(<[?]php\s+)@?header\s*\(\s*.([^:]*):\s*([^)]*)[^)]\s*\)\s*[;]?/ims',$corps, $r))
+          {
+            $corps = $r[1] . substr($corps,strlen($r[0]));
+	    $j=str_replace(' - ','-',ucwords(str_replace('-',' - ',$r[2])));
+	    $headers[$j] = $r[3];
+	  }
+	if (preg_match('/^<[?]php\s+[?]>\s*/', $corps, $r))
+	  $corps = substr($corps,strlen($r[0]));
+	return array('texte' => $corps,
+		     'squelette' => $nom,
+		     'process_ins' => ((strpos($corps,'<'.'?')=== false) ? 'html' : 'php'),
+		     'invalideurs' => $Cache,
+		     'entetes' => $headers);
+}
+
 ?>

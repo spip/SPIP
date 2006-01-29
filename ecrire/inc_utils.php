@@ -528,11 +528,11 @@ function http_last_modified($lastmodified, $expire = 0) {
 }
 
 // envoyer le navigateur sur une nouvelle adresse
+// en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
 function redirige_par_entete($url, $fin="") {
 #	spip_log("redirige $url$fin");
-	include_ecrire('inc_headers');
-	spip_header("Location: $url$fin");
+	header("Location: " . strtr("$url$fin", "\n\r", "  "));
 
 	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
 <html><head>
@@ -542,7 +542,7 @@ function redirige_par_entete($url, $fin="") {
 <h1>302 Found</h1>
 <a href="'
 .quote_amp("$url$fin")
-.'">Click here</a>.<p>
+.'">Click here</a>.
 </body></html>';
 
 	exit;
