@@ -220,7 +220,7 @@ Vous avez demand&eacute; &agrave; signer la p&eacute;tition :
 Vous avez fourni les informations suivantes :
     Nom: @nom_email@
     Site: @nom_site@ - @url_site@
-
+    @message@
 
 IMPORTANT...
 Pour valider votre signature, il suffit de vous connecter &agrave;
