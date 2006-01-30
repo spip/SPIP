@@ -774,7 +774,11 @@ function balise_HTTP_dist($p) {
   $a = $p->param[0];
   array_shift($a);
   $code = "";
-  foreach($a as $v) $code .= 'header("' . $v[0]->texte . '");';
+  foreach($a as $v) {
+    if (is_numeric($h = $v[0]->texte))
+      $h = "Cache-Control: max-age=$h";
+    $code .= 'header("' . $h . '");';
+  }
   $p->code="('<'.'?php $code  ?' . '>')";
   $p->interdire_scripts = false;
   return $p;
