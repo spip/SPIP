@@ -71,7 +71,7 @@ function calcule_header_et_page ($fond) {
 // Remplir les globals pour les boutons d'admin
 
 function restaurer_globales ($contexte) {
-	if (!is_array($contexte)) {
+	if (is_array($contexte)) {
 		foreach ($contexte as $var=>$val) {
 			$GLOBALS[$var] = $val;
 		}
