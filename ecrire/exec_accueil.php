@@ -436,17 +436,6 @@ function accueil_dist()
   debut_droite();
 
 //
-// Restauration d'une archive
-//
-
-if ($meta["debut_restauration"]) {
-	@ignore_user_abort(1);
-	include_ecrire("inc_import");
-	import_init();
-	exit;
- }
-
-//
 // Articles post-dates en attente de publication
 //
 
