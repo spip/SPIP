@@ -27,23 +27,23 @@ function install_debut_html($titre = 'AUTO') {
 	include_ecrire('inc_headers');
 	include_ecrire('inc_style');
 	http_no_cache();
-	$args_color = 	  "couleur_claire=" .
-			  urlencode('#FFCC66') .
-			  '&couleur_foncee=' .
-			  urlencode('#000000') .
-			  '&left=' . 
-			  $GLOBALS['spip_lang_left'];
+	$args =  "couleur_claire=FFCC66&couleur_foncee=000000&left=" . 
+		$GLOBALS['spip_lang_left']
+	  	. '&dir='
+		. _DIR_IMG_PACK;
+;
 	echo  _DOCTYPE_ECRIRE ,
 	  "<html lang='",$GLOBALS['spip_lang'],
 	  "' dir='",($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr'),"'>\n" ,
 	  "<head>\n",
 	  "<title>",
 	  $titre,
-	  "</title>\n" ,
-	// mettre inline les styles de l'espace prive (sinon ca clignote)
+	  '</title>
+<link	rel="stylesheet" 
+	type="text/css"
+	href="', generer_url_public('page', $args), '">',
 	  "<style type='text/css'><!--\n/*<![CDATA[*/\n\n\n",
-	  styles_ecrire(), "
-	a {text-decoration: none; }",
+	  "a {text-decoration: none; }",
 	  "\n\n]]>\n--></style>\n\n
 </head>
 <body bgcolor='#FFFFFF' text='#000000' link='#E86519' vlink='#6E003A' alink='#FF9900'>

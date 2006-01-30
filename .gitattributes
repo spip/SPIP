@@ -71,6 +71,7 @@ IMG/test.gif -text
 IMG/test.jpg -text
 IMG/test.png -text
 IMG/test_image.jpg -text
+dist/style.html -text
 ecrire/ajax_page.php -text
 ecrire/charsets/cp1251.php -text
 ecrire/charsets/cp1256.php -text
@@ -337,7 +338,6 @@ ecrire/inc_mini_nav.php -text
 ecrire/inc_minipres.php -text
 ecrire/inc_popularites.php -text
 ecrire/inc_sites_voir.php -text
-ecrire/inc_style.php -text
 ecrire/inc_suivi_versions.php -text
 ecrire/inc_syndic.php -text
 ecrire/inc_utils.php -text
