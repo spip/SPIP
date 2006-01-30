@@ -167,7 +167,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 's&#259;pt&#259;m&acirc;ni',
 'dirs_commencer' => ' pentru a &icirc;ncepe cu adev&#259;rat instalarea',
 'dirs_preliminaire' => 'Preliminar : <b>Regla&#355;i drepturile de acces</b>',
-'dirs_probleme_droits' => 'Problem&#259; de drepturi de acces',
+'dirs_probleme_droits' => '<MODIF>Problem&#259; de drepturi de acces',
 'dirs_repertoires_absents' => '<b>Urm&#259;toarele directoare nu au fost g&#259;site&nbsp;: <ul>@bad_dirs@.</ul> </b>
   Cel mai probabil, aceast&#259; situa&#355;ie este datorat&#259; unei probleme de litere majuscule sau minuscule.
  Verifica&#539;i ca litere majuscule &#351;i minuscule a acestor directoare s&#259; concorde cu ceea ce este afi&#351;at
@@ -200,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(acesta este un mesaj automatic)',
 'form_forum_pass' => 'parola :',
 'form_forum_probleme_mail' => 'Problem&#259; de email&nbsp;: identificatorul nu poate fi trimis.',
-'form_forum_voici1' => 'Iat&#259; identificatorii dumneavoastr&#259; pentru a participa la activitatea
+'form_forum_voici1' => '<MODIF>Iat&#259; identificatorii dumneavoastr&#259; pentru a participa la activitatea
 site-ului "@nom_site_spip@" (@adresse_site@) :',
-'form_forum_voici2' => 'Iat&#259; identificatorii dvs. pentru  "@nom_site_spip@" (@adresse_login@):',
+'form_forum_voici2' => '<MODIF>Iat&#259; identificatorii dvs. pentru  "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'V&#259; rug&#259;m sa indica&#355;i adresa dumneavoastr&#259; de email.',
 'form_indiquer_nom' => 'Va rug&#259;m s&#259; indica&#355;i numele dumneavoastr&#259;.',
 'form_indiquer_nom_site' => 'V&#259; rug&#259;m s&#259; indica&#355;i adresa site-ul dumneavoastr&#259; de web.',
@@ -383,7 +383,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_copyright_gpl' => 'sub licen&#355;&#259; GPL',
 'info_cours_edition' => 'Articolele dumneavoastr&#259; &icirc;n curs de redactare',
 'info_creer_repertoire' => 'V&#259; rug&#259;m s&#259; crea&#355;i un fi&#537;ier sau un director numit&nbsp;:',
-'info_creer_repertoire_2' => 'sub directorul <b>@repertoire@</b>, apoi&nbsp;:',
+'info_creer_repertoire_2' => '<MODIF>sub directorul <b>@repertoire@</b>, apoi&nbsp;:',
 'info_creer_vignette' => 'crearea vini&eacute;tei &icirc;n mod automat ',
 'info_dans_espace_prive' => '[&icirc;n spa&#355;iul privat]',
 'info_deplier' => 'Desface&#355;i',
@@ -407,7 +407,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_erreur_requete' => 'Eroare &icirc;n cererea :',
 'info_erreur_squelette2' => 'Nici un schelet <b>@fichier@</b> nu este disponibil...',
 'info_erreur_systeme' => 'Eroare sistem (errno @errsys@)',
-'info_erreur_systeme2' => 'Discul este probabil plin sau baza de date este corupt&#259;.
+'info_erreur_systeme2' => '<MODIF>Discul este probabil plin sau baza de date este corupt&#259;.
  <font color=\'red\'>&Icirc;ncerca&#355;i s&#259; <a href=\'@script@\'>repara&#355;i baza de date</a>,
  sau contacta&#355;i-l pe furnizorul dumneavoastr&#259; de hosting.</font>
 ',
@@ -421,10 +421,10 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_inclusion_directe' => 'Includere direct&#259;&nbsp;:',
 'info_inclusion_vignette' => 'Includerea vinietei&nbsp;:',
 'info_installation_systeme_publication' => 'Instalarea sistemului de publicare...',
-'info_installer_documents' => 'Pute&#355;i instala &icirc;n mod automat toate documentele con&#355;inute &icirc;n directorul @upload@.',
-'info_installer_ftp' => 'Ca administrator, pute&#355;i s&#259; instala&#355;i (prin FTP) fi&#351;iere &icirc;n directorul @upload@ pentru ca mai apoi s&#259; le selec&#355;iona&#355;i direct aici.',
+'info_installer_documents' => '<MODIF>Pute&#355;i instala &icirc;n mod automat toate documentele con&#355;inute &icirc;n directorul @upload@.',
+'info_installer_ftp' => '<MODIF>Ca administrator, pute&#355;i s&#259; instala&#355;i (prin FTP) fi&#351;iere &icirc;n directorul @upload@ pentru ca mai apoi s&#259; le selec&#355;iona&#355;i direct aici.',
 'info_installer_images' => 'Pute&#355;i instala imagini &icirc;n formatele JPEG, GIF &#351;i PNG.',
-'info_installer_images_dossier' => 'Instala&#355;i imagini &icirc;n directorul @upload@ pentru a putea s&#259; le selec&#355;iona&#355;i aici.',
+'info_installer_images_dossier' => '<MODIF>Instala&#355;i imagini &icirc;n directorul @upload@ pentru a putea s&#259; le selec&#355;iona&#355;i aici.',
 'info_installer_tous_documents' => 'Instala&#355;i toate documentele',
 'info_interface_complete' => 'interfa&#355;a complet&#259;',
 'info_interface_simple' => 'Interfa&#355;a simplificat&#259;',
@@ -497,7 +497,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
 'info_retirer_mot' => 'Retrage&#355;i acest cuv&acirc;nt',
 'info_retirer_mots' => 'Retrage&#355;i toate cuvintele',
 'info_sans_titre_2' => 'f&#259;r&#259; titlu',
-'info_selectionner_fichier' => 'Pute&#355;i selec&#355;iona un fi&#351;ier din directorul @upload@',
+'info_selectionner_fichier' => '<MODIF>Pute&#355;i selec&#355;iona un fi&#351;ier din directorul @upload@',
 'info_selectionner_fichier_2' => 'Selec&#355;iona&#355;i un fi&#351;ier&nbsp;:',
 'info_site_attente' => 'Site Web &icirc;n a&#351;teptarea valid&#259;rii',
 'info_site_reference' => 'Site referen&#355;iat &icirc;n direct',
@@ -651,7 +651,7 @@ Mul&#355;umim pentru participarea dumneavoastr&#259;
   rezervat vizitatorilor &icirc;nregistra&#355;i.',
 'pass_indiquez_cidessous' => 'V&#259; rug&#259;m s&#259; indica&#539;i adresa de email cu care v-a&#355;i &icirc;nregistrat &icirc;n trecut.
 Ve&#355;i primi un email care v&#259; va indica pa&#351;ii necesari recuper&#259;rii accesului la site.',
-'pass_mail_passcookie' => '(acesta este un mesaj automatic)
+'pass_mail_passcookie' => '<MODIF>(acesta este un mesaj automatic)
 Pentru a reg&#259;si accesul la site-ul
 @nom_site_spip@ (@adresse_site@)
 
@@ -707,9 +707,9 @@ Ve&#355;i putea dup&#259; aceea alege o nou&#259; parol&#259; &#351;i ve&#355;i 
 'texte_inc_auth_3' => ', dup&#259; ce, eventual, a&#355;i p&#259;r&#259;sit &#351;i redemarat navigatorul de web.',
 'texte_inc_config' => 'Modific&#259;rile efectuate &icirc;n aceste pagini au influen&#355;&#259; direct&#259; asupra func&#355;ion&#259;rii site-ului. V&#259; recomand&#259;m s&#259; nu interveni&#355;i at&acirc;t timp c&acirc;t nu sunte&#355;i familiarizat cu func&#355;ionarea sistemului SPIP. <p align="justify"><b>&Icirc;n
  general, este recomandat s&#259; l&#259;sa&#355;i aceste pagini &icirc;n sarcina webmaster-ului principal al acestui site.</b></p>',
-'texte_inc_meta_1' => 'Sistemul a &icirc;nt&acirc;lnit o eroare la scrierea fi&#351;ierului <code>@fichier@</code>. V&#259; rugam ca, &icirc;n calitate de administrator al acestui site,',
+'texte_inc_meta_1' => '<MODIF>Sistemul a &icirc;nt&acirc;lnit o eroare la scrierea fi&#351;ierului <code>@fichier@</code>. V&#259; rugam ca, &icirc;n calitate de administrator al acestui site,',
 'texte_inc_meta_2' => 's&#259; verifica&#355;i drepturile de scriere',
-'texte_inc_meta_3' => '&icirc;n directorul <code>@repertoire@</code>.',
+'texte_inc_meta_3' => '<MODIF>&icirc;n directorul <code>@repertoire@</code>.',
 'texte_plan_trad' => 'Aceast&#259; pagin&#259; v&#259; permite s&#259; vizualiza&#355;i starea traducerilor pentru limba aleas&#259;.
   Pagina afi&#351;eaz&#259; articolele a c&#259;ror traducere este &icirc;n desf&#259;&#351;urare, articolele a c&#259;ror traducere trebuie adus&#259; la zi, 
   c&acirc;t &#351;i articolele care nu au fost &icirc;nc&#259; traduse.',

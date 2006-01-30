@@ -606,14 +606,16 @@ riservato agli utenti registrati.',
 'pass_indiquez_cidessous' => 'Indica qui sotto l\'indirizzo email con il quale ti sei registrato precedentemente.
 Riceverai un email con le istruzioni per recuperare i dati di accesso al sito.',
 'pass_mail_passcookie' => '(questo &egrave; un messaggio generato automaticamente)
-
 Per recuperare i dati di accesso al sito
 @nom_site_spip@ (@adresse_site@)
 
 Clicca su questo link:
     @sendcookie@
 
-Potrai quindi inserire una nuova password e riconnetterti all\'area riservata.',
+Potrai quindi inserire una nuova password 
+e riconnetterti all\'area riservata.
+
+',
 'pass_mot_oublie' => 'Password dimenticata',
 'pass_nouveau_enregistre' => 'La nuova password &egrave; stata salvata.',
 'pass_nouveau_pass' => 'Nuova password',

@@ -166,7 +166,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'date_semaines' => 'semanas',
 'dirs_commencer' => 'a fim de come&ccedil;ar realmente a instala&ccedil;&atilde;o',
 'dirs_preliminaire' => 'Preliminar : <B>Configurar os direitos de acesso</B>',
-'dirs_probleme_droits' => 'Problema de direitos de acesso',
+'dirs_probleme_droits' => '<MODIF>Problema de direitos de acesso',
 'dirs_repertoires_absents' => '<b>Os seguintes direct&oacute;rios n&atilde;o foram encontrados&nbsp;: <ul>@bad_dirs@.</ul> </b>
   <p>&Eacute; prov&aacute;vel que resulte de um problema de m&aacute; coloca&ccedil;&atilde;o de mai&uacute;sculas ou min&uacute;sculas.
   Verifique que as min&uacute;sculas e mai&uacute;sculas destes repert&oacute;rios concordam com o que est&aacute; exibido
@@ -199,9 +199,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(isto &eacute; uma mensagem autom&aacute;tica)',
 'form_forum_pass' => 'palavra-passe',
 'form_forum_probleme_mail' => 'Problema de mail&nbsp;:o identificador n&atilde;o pode ser mandado ',
-'form_forum_voici1' => 'Estes s&atilde;o os seus dados para poder participar nos f&oacute;runs
+'form_forum_voici1' => '<MODIF>Estes s&atilde;o os seus dados para poder participar nos f&oacute;runs
  do s&iacute;tio  "@nom_site_spip@" (@adresse_site@):',
-'form_forum_voici2' => 'Eis os seus identificadores para propor artigos no
+'form_forum_voici2' => '<MODIF>Eis os seus identificadores para propor artigos no
  s&iacute;tio "@nom_site_spip@" (@adresse_login@):',
 'form_indiquer_email' => 'Favor indicar o seu endere&ccedil;o email.',
 'form_indiquer_nom' => 'Favor indicar o seu nome.',
@@ -378,7 +378,7 @@ Obrigado pela sua participa&ccedil;&atilde;o
 'info_copyright_gpl' => 'sob licen&ccedil;a GPL',
 'info_cours_edition' => 'Os seus artigos em curso de redac&ccedil;&atilde;o',
 'info_creer_repertoire' => 'Favor criar um ficheiro ou um repert&oacute;rio chamado&nbsp;:',
-'info_creer_repertoire_2' => 'dentro do sub-repert&oacute;rio <b>@repertoire@</b>, depois&nbsp;:',
+'info_creer_repertoire_2' => '<MODIF>dentro do sub-repert&oacute;rio <b>@repertoire@</b>, depois&nbsp;:',
 'info_creer_vignette' => 'cria&ccedil;&atilde;o autom&aacute;tica do &iacute;cone',
 'info_deplier' => 'Desenvolver',
 'info_descriptif_nombre' => 'descritivo(s)&nbsp;:',
@@ -398,7 +398,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_erreur_requete' => 'Erro no pedido :',
 'info_erreur_squelette2' => 'Template <b>@fichier@</b> n&atilde;o dispon&iacute;vel...',
 'info_erreur_systeme' => 'Erro de Sistema (errno @errsys@)',
-'info_erreur_systeme2' => 'O disco r&iacute;gido poder&aacute; estar cheio, ou a base de dados danificada. <br>
+'info_erreur_systeme2' => '<MODIF>O disco r&iacute;gido poder&aacute; estar cheio, ou a base de dados danificada. <br>
  <font color=\'red\'>Tente <a href=\'@script@\'>reparar a base</a>,
  ou contacte o seu fornecedor de internet.</font>',
 'info_fini' => 'Acabou !',
@@ -411,10 +411,10 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_inclusion_directe' => 'Inclus&atilde;o directa&nbsp;:',
 'info_inclusion_vignette' => 'Inclus&atilde;o da vinheta&nbsp;:',
 'info_installation_systeme_publication' => 'Instala&ccedil;&atilde;o do sistema de publica&ccedil;&atilde;o',
-'info_installer_documents' => 'Pode instalar automaticamente todos os documentos contidos no dossier @upload@.',
-'info_installer_ftp' => 'Como administrador, pode instalar (por FTP) ficheiros no dossier @upload@ para depois seleccion&aacute;-los directamente aqui.',
+'info_installer_documents' => '<MODIF>Pode instalar automaticamente todos os documentos contidos no dossier @upload@.',
+'info_installer_ftp' => '<MODIF>Como administrador, pode instalar (por FTP) ficheiros no dossier @upload@ para depois seleccion&aacute;-los directamente aqui.',
 'info_installer_images' => 'Pode instalar imagens nos formatos JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Instalar imagens no dossier @upload@ para poder seleccion&aacute;-los aqui.',
+'info_installer_images_dossier' => '<MODIF>Instalar imagens no dossier @upload@ para poder seleccion&aacute;-los aqui.',
 'info_installer_tous_documents' => 'Instalar todos os documentos',
 'info_interface_complete' => 'Interface completa',
 'info_interface_simple' => 'Interface simplificada',
@@ -476,7 +476,7 @@ entre os participantes do s&iacute;tio. Pode activar ou
 'info_retirer_mot' => 'Retirar esta palavra',
 'info_retirer_mots' => 'Retirar todas as palavras',
 'info_sans_titre_2' => 'sem t&iacute;tulo',
-'info_selectionner_fichier' => 'Pode seleccionar um ficheiro do dossier @upload@',
+'info_selectionner_fichier' => '<MODIF>Pode seleccionar um ficheiro do dossier @upload@',
 'info_selectionner_fichier_2' => 'Seleccionar um ficheiro&nbsp;:',
 'info_site_attente' => 'S&iacute;tio Web &agrave; espera de valida&ccedil;&atilde;o',
 'info_site_reference' => 'S&iacute;tio referenciado em linha',
@@ -606,7 +606,7 @@ propor artigos e participar em todos os f&oacute;runs.',
 'pass_indiquez_cidessous' => 'Indique abaixo o endere&ccedil;o email sob o qual se registou. Receber&aacute;
  um mail que indicar&aacute; o procedimento a seguir para
         recuperar o seu acesso.',
-'pass_mail_passcookie' => '(esta &eacute; uma mensagem autom&aacute;tica)
+'pass_mail_passcookie' => '<MODIF>(esta &eacute; uma mensagem autom&aacute;tica)
 Para reencontrar o seu acesso ao s&iacute;tio
 @nom_site_spip@ (@adresse_site@)
 
@@ -666,9 +666,9 @@ Poder&aacute; ent&atilde;o introduzir uma nova palavra-passe
  funcionamento do seu s&iacute;tio. Recomendamos que n&atilde;o intervenha enquanto n&atilde;o estiver familiarizado com o funcionamento do sistema SPIP. <P align="justify"><B>Em
  geral, &eacute; fortemente recomendado
  deixar a responsabilidade dessas p&aacute;ginas ao webmestre principal do seu s&iacute;tio. <B>',
-'texte_inc_meta_1' => 'O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',
+'texte_inc_meta_1' => '<MODIF>O sistema encontrou um erro durante a escrita do arquivo <code>@fichier@</code>. Como administrador do site, queira por favor,',
 'texte_inc_meta_2' => 'verificar os direitos de escrita',
-'texte_inc_meta_3' => 'no direct&oacute;rio <code>@repertoire@</code>.',
+'texte_inc_meta_3' => '<MODIF>no direct&oacute;rio <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'em curso de reda&ccedil;&atilde;o',
 'texte_statut_poubelle' => 'no caixote de lixo',
 'texte_statut_propose_evaluation' => 'proposto para avalia&ccedil;&atilde;o',

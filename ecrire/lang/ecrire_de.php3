@@ -787,13 +787,12 @@ in einer Farbe, die den Status anzeigt&nbsp;:',
 'texte_nouveau_message' => 'Neue Nachricht',
 'texte_nouveau_mot' => 'Neues Wort',
 'texte_nouvelle_version_spip_1' => 'Sie haben eine neue Version von SPIP installiert.',
-'texte_nouvelle_version_spip_2' => 'Diese Version erfordert eine weiter gehende Aktualisierung Ihres Systems als bisherige SPIP-Updates.
-        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bitte die Datei
-        <tt>inc_connect.php3</tt> im Verzeichnis <tt>ecrire</tt>
-        und nehmen Sie die Installation wieder auf, indem Sie
+'texte_nouvelle_version_spip_2' => 'Diese neue Version erfordert eine weiter gehende Aktualisierung Ihres Systems als g.
+ew&ouml;hnlich.        Wenn Sie Webmaster dieser Site sind, l&ouml;schen Sie bitte die Datei
+       @connect@         und nehmen Sie die Installation wieder auf, indem Sie
         die Verbindungsdaten zur Datenbank neu eingeben.
         <p>(Tipp: Sollten Sie Ihre Verbindungsdaten vergessen haben,
-        schauen Sie in der Datei <tt>inc_connect.php3</tt> nach,
+        schauen Sie in der Datei @connect@ nach,
         bevor Sie sie l&ouml;schen ...)',
 'texte_operation_echec' => 'Gehen Sie zur vorigen Seite zur&uuml;ck und w&auml;hlen Sie eine andere Datenbank aus bzw. legen Sie eine neue an. &Uuml;berpr&uuml;fen Sie die Angaben Ihres Providers.',
 'texte_plus_trois_car' => 'mehr als 3 Zeichen',
