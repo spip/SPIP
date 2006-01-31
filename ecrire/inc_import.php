@@ -12,9 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_presentation');
-include_ecrire ("inc_acces");
-
+include_ecrire("inc_acces");
+include_ecrire("inc_filtres");
 
 function xml_fetch_tag($f, &$before, $gz=false) {
 	global $buf, $pos, $abs_pos;
@@ -341,6 +340,7 @@ function import_abandon() {
 }
 
 function import_tables($f, $tables, $gz=false) {
+
 	global $import_ok;
 	global $auth_htaccess;
 	global $connect_id_auteur;
@@ -353,7 +353,11 @@ function import_tables($f, $tables, $gz=false) {
 	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d
 		FROM spip_meta WHERE nom='debut_restauration'");
 	list($my_date) = spip_fetch_array($s);
-	if (!$my_date) return false;
+
+	if (!$my_date) {
+		spip_log("importation: debut_restauration absent");
+		return false;
+	}
 
 	$my_pos = $GLOBALS['meta']["status_restauration"];
 
@@ -362,6 +366,7 @@ function import_tables($f, $tables, $gz=false) {
 		ecrire_meta('charset_restauration', 'iso-8859-1');
 		if (!($r = import_debut($f, $gz))) {
 			ecrire_meta("erreur", _T('avis_archive_incorrect'));
+			spip_log("importation: avis_archive_incorrect");
 			return false;
 		}
 		else {
@@ -389,6 +394,7 @@ function import_tables($f, $tables, $gz=false) {
 		while (import_objet_0_0($f, $gz));
 		break;
 	}
+
 	if (!$import_ok) {
 		ecrire_meta("erreur", _T('avis_archive_invalide'));
 		return false;
@@ -400,7 +406,7 @@ function import_tables($f, $tables, $gz=false) {
 
 	// Destruction des entrees non restaurees
 
-	detruit_non_restaurees($mydate, $tables);
+	detruit_non_restaurees($my_date, $tables);
 
 	import_fin();
 
@@ -412,8 +418,9 @@ function import_tables($f, $tables, $gz=false) {
 
 // Destruction des entrees non restaurees
 
-function detruit_non_restaurees($mydate, $tables)
+function detruit_non_restaurees($my_date, $tables)
 {
+	
 	foreach ($tables as $v) 
 	  spip_query("DELETE FROM $v WHERE UNIX_TIMESTAMP(maj) < $my_date");
 }
@@ -424,7 +431,7 @@ function affiche_progression_javascript($abs_pos) {
 	include_ecrire('inc_charsets');
 
 	flush();
-	echo " -->\n<script type='text/javascript'><!--\n";
+	echo "<script type='text/javascript'><!--\n";
 
 	if ($abs_pos == '100 %') {
 		$taille = $abs_pos;
@@ -439,7 +446,7 @@ function affiche_progression_javascript($abs_pos) {
 		$taille = floor(100 * $abs_pos / $affiche_progression_pourcent)." %";
 
 	echo "document.progression.taille.value='$taille';\n";
-	echo "//--></script>\n<!--\n";
+	echo "//--></script>\n";
 	flush();
 }
 
@@ -473,19 +480,22 @@ function import_all_continue($tables)
 		}
 	install_debut_html(_T('info_base_restauration'));
 	echo "<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
-		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
+		<input type='text' class='forml' size='80' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
 
 #	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 
-	install_fin_html();
-	flush();
 	$_fopen = ($gz) ? gzopen : fopen;
 	$f = $_fopen($archive, "rb");
 	$pos = 0;
 	$buf = "";
-	if (!import_tables($f, $tables, $gz))
+	$res = import_tables($f, $tables, $gz);
+	spip_log("Restauration: " . ($res ? "finie" : "echec"));
+	if ($res)
 		import_abandon();
 	else	import_fin();
+	echo "<a href='./'>retour au site</a>";
+	install_fin_html();
+	flush();
 }
 
 ?>
