@@ -453,20 +453,12 @@ function import_all_continue($tables)
 
 	$archive = _DIR_SESSIONS . $request['archive'];
 
-	debut_page(_T('titre_page_index'), "asuivre", "asuivre");
-
-	debut_gauche();
-
-	debut_droite();
-
 	if (!@is_readable($archive)) {
-		$texte_boite = _T('info_erreur_restauration');
-		debut_boite_alerte();
-		echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
-		fin_boite_alerte();
-		fin_html();
-		exit;
+		import_abandon();
+		minipres(_T('info_base_restauration'),
+			 _T('info_erreur_restauration'));
 	}
+
 
 	$my_pos = $meta["status_restauration"];
 
@@ -479,17 +471,14 @@ function import_all_continue($tables)
 			$taille = floor(100 * $my_pos / $affiche_progression_pourcent)." %";
 			$gz = false;
 		}
-	$texte_boite = _T('info_base_restauration')."<p>
-		<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
+	install_debut_html(_T('info_base_restauration'));
+	echo "<form name='progression'><center><input type='text' size=10 style='text-align:center;' name='taille' value='$taille'><br>
 		<input type='text' class='forml' name='recharge' value='"._T('info_recharger_page')."'></center></form>";
 
-	debut_boite_alerte();
-	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
-	fin_boite_alerte();
-	fin_page();
-	echo "</HTML><font color='white'>\n<!--";
-	@flush();
+#	echo "<font FACE='Verdana,Arial,Sans,sans-serif' SIZE=4 color='black'><B>$texte_boite</B></font>";
 
+	install_fin_html();
+	flush();
 	$_fopen = ($gz) ? gzopen : fopen;
 	$f = $_fopen($archive, "rb");
 	$pos = 0;
