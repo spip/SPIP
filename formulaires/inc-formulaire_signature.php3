@@ -91,6 +91,7 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 function reponse_confirmation($id_article, $var_confirm = '') {
 	static $confirm = '';
 
+	$id_article = intval($id_article);
 	if (!$var_confirm) return $confirm;
 	include_local(_FILE_CONNECT);
 	if ($GLOBALS['db_ok']) {
