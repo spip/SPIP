@@ -12,15 +12,6 @@
 
 include ("ecrire/inc_version.php");
 
-if (isset($hash)) {
-	include_ecrire("inc_session");
-	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-		include_ecrire('inc_minipres');
-		minipres(_T('info_acces_interdit'));
-		exit;
-	}
- }
-
 $var_f = include_fonction('spip_action_' . $action);
 $var_f();
 if ($redirect) redirige_par_entete(urldecode($redirect));
