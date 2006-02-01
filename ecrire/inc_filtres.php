@@ -1693,10 +1693,6 @@ function extraire_tag($texte, $tag) {
 // recuperer un attribut html d'une balise
 // ($complet demande de retourner $r)
 function extraire_attribut($balise, $attribut, $complet = false) {
-
-var_dump($balise);
-var_dump($attribut);
-
 	if (preg_match(",(.*<[^>]*)([[:space:]]+$attribut=[[:space:]]*(['\"])?(.*?)\\3)([^>]*>.*),ims", $balise, $r)) {
 		$att = $r[4];
 	}
