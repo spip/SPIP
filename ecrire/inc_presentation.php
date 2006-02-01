@@ -528,9 +528,9 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 			$link->addVar($tmp_var, -1);
 				if ($javascript) {
 					$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
-					$texte .= "<a onClick=\"$jj; return false; \" href=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
+					$texte .= "<a onClick=\"$jj; return false; \" href=\"".$link->getUrl()."#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
 				}
-				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\"><img src='img_pack/plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
+				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
 		}
 
 
@@ -790,7 +790,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_trad) {
 				$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
-				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=$id_ajax_trad", true). "','$div_trad');\"><img src='img_pack/langues-12.gif' border='0' /></a></div>";
+				$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=$id_ajax_trad", true). "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-12.gif' border='0' /></a></div>";
 			}
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1008,7 +1008,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			
 			$texte_img .= http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; float: $spip_lang_right' id = 'img_$div_trad'");
 
-			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=$id_ajax_trad", true) . "','$div_trad');\"><img src='img_pack/langues-off-12.gif' border='0' /></a></div>";
+			$texte_img .= "<div style='float: $spip_lang_right;'><a href=\"javascript:charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&id_ajax_fonc=$id_ajax_trad", true) . "','$div_trad');\"><img src='". _DIR_IMG_PACK . "langues-off-12.gif' border='0' /></a></div>";
 
 			bandeau_titre_boite2($texte_img.$titre_table, "article-24.gif");
 
@@ -1055,10 +1055,6 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 				$langues_art[$lang_trad] = $id_article_trad;
 				if ($id_article_trad == $id_trad) $date_ref = $date;
 				
-			//	if ($id_article_trad == $id_trad) $langues_art[$lang_trad] = "<img src='img_pack/langues-12.gif' border='0' align='middle' />";
-			//	else $langues_art[$lang_trad] = "<b>[$lang_trad]</b>";
-				
-			//	
 			}
 
 			reset($langues_site);
