@@ -489,51 +489,61 @@ function calculer_balise_logo ($p) {
 	eregi("^LOGO_([A-Z]+)(_.*)?$", $p->nom_champ, $regs);
 	$type_objet = $regs[1];
 	$suite_logo = $regs[2];	
+
+	// cas de #LOGO_SITE_SPIP
 	if (ereg("^_SPIP(.*)$", $suite_logo, $regs)) {
 		$type_objet = 'RUBRIQUE';
 		$suite_logo = $regs[1];
 		$_id_objet = "\"'0'\"";
 	} else {
-
 		if ($type_objet == 'SITE')
 			$_id_objet = champ_sql("id_syndic", $p);
 		else
 			$_id_objet = champ_sql("id_".strtolower($type_objet), $p);
 	}
-	// analyser les faux filtres, 
-	// supprimer ceux qui ont le tort d'etre vrais
+
+	// analyser les faux filtres
 	$flag_fichier = 0;
 	$filtres = '';
+
 	if (is_array($p->fonctions)) {
 		foreach($p->fonctions as $couple) {
-			// eliminer les faux filtres
 			if (!$flag_stop) {
-				array_shift($p->param);
-				$nom = $couple[0];
-				if (ereg('^(left|right|center|top|bottom)$', $nom))
-					$align = $nom;
-				else if ($nom == 'lien') {
-					$flag_lien_auto = 'oui';
-					$flag_stop = true;
-				}
-				else if ($nom == 'fichier') {
-					$flag_fichier = 1;
-					$flag_stop = true;
-				}
-				// double || signifie "on passe aux filtres"
-				else if ($nom == '') {
+				$nom = trim($couple[0]);
+
+				// double || signifie "on passe aux vrais filtres"
+				if ($nom == '') {
 					if (!$params = $couple[1])
 						$flag_stop = true;
-				}
-				else if ($nom) {
-					$lien = $nom;
-					$flag_stop = true;
 				} else {
-					
+					// faux filtres
+					array_shift($p->param);
+					switch($nom) {
+						case 'left':
+						case 'right':
+						case 'center':
+						case 'top':
+						case 'bottom':
+							$align = $nom;
+							break;
+						
+						case 'lien':
+							$flag_lien_auto = 'oui';
+							$flag_stop = true; # apres |lien : vrais filtres
+							break;
+
+						case 'fichier':
+							$flag_fichier = 1;
+							$flag_stop = true; # apres |fichier : vrais filtres
+							break;
+
+						default:
+							$lien = $nom;
+							$flag_stop = true; # apres |#URL... : vrais filtres
+							break;
+					}
 				}
 			}
-			// apres un URL ou || ou |fichier ce sont
-			// des filtres (sauf left...lien...fichier)
 		}
 	}
 
