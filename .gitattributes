@@ -72,7 +72,6 @@ IMG/test.jpg -text
 IMG/test.png -text
 IMG/test_image.jpg -text
 dist/style.html -text
-ecrire/ajax_page.php -text
 ecrire/charsets/cp1251.php -text
 ecrire/charsets/cp1256.php -text
 ecrire/charsets/html.php -text
@@ -360,7 +359,6 @@ ecrire/safehtml/classes/safehtml.php -text
 ecrire/safehtml/license.txt -text
 ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
-ecrire/statistiques_repartition.php -text
 /inc-urls-propres-qs.php3 -text
 /puce.gif -text
 /puce_rtl.gif -text
