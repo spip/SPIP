@@ -18,7 +18,13 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 // Effacer un doc (et sa vignette)
 function spip_action_supprimer_dist() {
 
-  global  $arg,  $redirect;
+	global $redirect;
+	global $action, $arg, $hash, $id_auteur;
+	include_ecrire("inc_session");
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+		include_ecrire('inc_minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 
 	$arg = intval($arg);
 	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");

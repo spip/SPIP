@@ -17,7 +17,13 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 function spip_action_tourner_dist() {
 	
-  global $arg, $var_rot, $convert_command, $redirect;
+	global, $var_rot, $convert_command, $redirect;
+	global $action, $arg, $hash, $id_auteur;
+	include_ecrire("inc_session");
+	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
+		include_ecrire('inc_minipres');
+		minipres(_T('info_acces_interdit'));
+	}
 	$var_rot = intval($var_rot);
 	$arg = intval($arg);
 
