@@ -231,7 +231,7 @@ function vignettes_config()
 		$block= "'none', 'block'";
 		echo bouton_radio("creer_preview", "non", _T('item_choix_non_generation_miniature'), $creer_preview != "oui", "changeVisible(this.checked, 'config-preview', $block);");
 	
-		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
+		echo "<div style='text-align:$spip_lang_right'><INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'></div>";
 		
 		fin_cadre_trait_couleur();
 	}
