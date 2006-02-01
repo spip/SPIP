@@ -1,7 +1,5 @@
-<?php	@header("Content-type: text/xml[; charset=(#CHARSET)]"); 
-	@header('Cache-Control: max-age=3600');
-	echo '<'.'?xml version="1.0"[ encoding="(#CHARSET)"]?'.">\n"; 
-?>
+#CACHE{3600}
+[(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
 <rss version="2.0"
 	xmlns:dc="http://purl.org/dc/elements/1.1/"
 	xmlns:content="http://purl.org/rss/1.0/modules/content/"
@@ -13,6 +11,10 @@
 	<description></description>
 	<language>#LANG</language>
 	<generator>SPIP - www.spip.net</generator>
+
+#LOGO_SITE_SPIP
+
+[(#LOGO_SITE_SPIP||extraire_attribut{src})]
 
 [	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>

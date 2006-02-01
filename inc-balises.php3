@@ -776,22 +776,46 @@ function balise_REM_dist($p) {
 	return $p;
 }
 
+
 //
-// #HTTP
-// pour les entetes. A n'utiliser qu'en debut de squelette
+// #HTTP_HEADER
+// pour les entetes de retour http
+// Ne fonctionne pas sur les INCLURE !
+// #HTTP_HEADER{Content-Type: text/css}
 //
-function balise_HTTP_dist($p) {
-  $a = $p->param[0];
-  array_shift($a);
-  $code = "";
-  foreach($a as $v) {
-    if (is_numeric($h = $v[0]->texte))
-      $h = "Cache-Control: max-age=$h";
-    $code .= 'header("' . $h . '");';
-  }
-  $p->code="('<'.'?php $code  ?' . '>')";
-  $p->interdire_scripts = false;
-  return $p;
+function balise_HTTP_HEADER_dist($p) {
+
+	$header = calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+
+	$p->code = "'<'.'?php header(\"' . "
+		. $header
+		. " . '\"); ?'.'>'";
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+//
+// #CACHE
+// definit la duree de vie ($delais) du squelette
+// #CACHE{24*3600}
+function balise_CACHE_dist($p) {
+	$duree = valeur_numerique($p->param[0][1][0]->texte);
+	if ($duree > 0)
+		$p->code = '\'<'.'?php header("Cache-Control: max-age='
+			. $duree
+			. '"); ?'.'>\'';
+	else
+		$p->code = '\'<'
+		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
+		.'><'
+		.'?php header("Pragma: no-cache"); ?'
+		.'>\'';
+
+	$p->interdire_scripts = false;
+	return $p;
 }
 
 ?>

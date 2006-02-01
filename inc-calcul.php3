@@ -256,20 +256,25 @@ function calculer_page_globale($cache, $fond) {
 	return $page;
 }
 
-function analyse_resultat_skel($nom, $Cache, $corps)
-{
+function analyse_resultat_skel($nom, $Cache, $corps) {
 	$headers = array();
-        while (preg_match('/^(<[?]php\s+)@?header\s*\(\s*.([^:]*):\s*([^)]*)[^)]\s*\)\s*[;]?/ims',$corps, $r))
-          {
-            $corps = $r[1] . substr($corps,strlen($r[0]));
-	    $j=str_replace(' - ','-',ucwords(str_replace('-',' - ',$r[2])));
-	    $headers[$j] = $r[3];
-	  }
-	if (preg_match('/^<[?]php\s+[?]>\s*/', $corps, $r))
-	  $corps = substr($corps,strlen($r[0]));
+
+	// Recupere les < ?php header('Xx: y'); ? > pour $page['headers']
+	// note: on essaie d'attrapper aussi certains de ces entetes codes
+	// "a la main" dans les squelettes, mais evidemment sans exhaustivite
+	if (preg_match_all(
+	'/(<[?]php\s+)@?header\s*\(\s*.([^:]*):\s*([^)]*)[^)]\s*\)\s*[;]?\s*[?]>/ims',
+	$corps, $regs, PREG_SET_ORDER))
+	foreach ($regs as $r) {
+		$corps = str_replace($r[0], '', $corps);
+		# $j = Content-Type, et pas content-TYPE.
+		$j = join('-', array_map('ucwords', explode('-', strtolower($r[2]))));
+		$headers[$j] = $r[3];
+	}
+
 	return array('texte' => $corps,
 		     'squelette' => $nom,
-		     'process_ins' => ((strpos($corps,'<'.'?')=== false) ? 'html' : 'php'),
+		     'process_ins' => ((strpos($corps,'<'.'?')=== false)?'html':'php'),
 		     'invalideurs' => $Cache,
 		     'entetes' => $headers);
 }

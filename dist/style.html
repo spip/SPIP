@@ -1,4 +1,3 @@
-#HTTP{'Content-type: text/css', 'Vary: Accept-Encoding', 360000}
 [(#REM)
 
 	Ce squelette definit les styles de l'espace prive
@@ -8,6 +7,9 @@
 	genant en cas de "rotation du cookie de session" apres
 	un changement d'IP (effet de clignotement).
 ]
+#CACHE{360*1000}
+#HTTP_HEADER{Content-Type: text/css}
+#HTTP_HEADER{Vary: Accept-Encoding}
 
 /*
  * Police par defaut (bof...)
