@@ -68,3 +68,4 @@ function spip_action_purger_dist()
 	break;
   }
 }
+?>
