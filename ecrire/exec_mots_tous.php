@@ -56,7 +56,7 @@ function mots_tous_dist()
 
 		// si le mot n'est pas lie, on demande sa suppression
 		if ($nb_articles + $nb_breves + $nb_sites + $nb_forum == 0) {
-		  redirige_par_entete(generer_url_ecrire("mots_edit"),"?supp_mot=$id_mot&redirect_ok=oui&redirect=" . urlencode(generer_url_ecrire('mots_tous')));
+		  redirige_par_entete(generer_url_ecrire("mots_edit"),"&supp_mot=$id_mot&redirect_ok=oui&redirect=" . urlencode(generer_url_ecrire('mots_tous')));
 		} // else traite plus loin (confirmation de suppression)
 	}
 }
