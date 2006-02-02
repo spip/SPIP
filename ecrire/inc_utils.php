@@ -41,9 +41,8 @@ function include_ecrire($file) {
 function include_fonction($nom) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
-	$nom = preg_replace("/\.php[3]?$/",'', basename($nom));
+# vieillerie	$nom = preg_replace("/\.php[3]?$/",'', basename($nom));
 	$inc = ("exec_" . $nom);
-#	spip_log("if $inc");
 	$f = find_in_path($inc  . '.php');
 	if ($f && is_readable($f)) {
 		if (!$GLOBALS['included_files'][$f]++) include($f);
@@ -62,7 +61,7 @@ function include_fonction($nom) {
 		return $f;
 	else {
 	  spip_log("fonction $nom indisponible" .
-		   ($inc ? "" : "(aucun fichier exec_$f disponible)"));
+		   ($inc ? "" : "(aucun fichier exec_$nom disponible)"));
 	  exit;
 	}
 }
