@@ -684,14 +684,16 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
  * " . (!$boucles ?  "Pas de boucle" :
 	("Boucles :   " . join (', ', array_keys($boucles)))) ."
  */ " .
+	  // ATTENTION, le calcul du l'expression $corps affectera $Cache
+	  // ==> l'affecter a une variable auxiliaire avant de referencer $Cache
 	  $code . "
 
 //
 // Fonction principale du squelette $sourcefile
 //
 function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
-	\$corps = $corps;
-	return analyse_resultat_skel('$nom', \$Cache, \$corps);
+	\$page = $corps;
+	return analyse_resultat_skel('$nom', \$Cache, \$page);
 }
 
 ?".">";
