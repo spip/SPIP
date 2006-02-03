@@ -1801,8 +1801,8 @@ function envoi_link($nom_site_spip, $rubrique="") {
 		substr($couleur_foncee,1) .
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'] .
-	  	'&dir='
-		. _DIR_IMG_PACK;
+	  	'&dir=' .
+		_DIR_RESTREINT_ABS . _DIR_IMG_PACK;
 	
 	return $res . '
 <link	rel="stylesheet" 
