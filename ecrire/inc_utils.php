@@ -544,6 +544,10 @@ function redirige_par_entete($url, $fin="") {
 	exit;
 }
 
+function redirige_url_public($script, $args="") {
+	redirige_par_entete(generer_url_public($script, $args, true));
+}
+
 // transformation XML des "&" en "&amp;"
 function quote_amp($u) {
 	return preg_replace(
