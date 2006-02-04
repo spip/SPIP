@@ -246,7 +246,7 @@ function formulaire_auteur_infos($id_auteur, $auteur, $onfocus, $redirect, $ajou
 {
   global $connect_statut, $connect_toutes_rubriques,$connect_id_auteur, $options, $champs_extra  ;
 
-	echo generer_url_post_ecrire('auteur_infos', (!$id_auteur ? "" : "?id_auteur=$id_auteur"));
+	echo generer_url_post_ecrire('auteur_infos', (!$id_auteur ? "" : "id_auteur=$id_auteur"));
 
 //
 // Infos personnelles
