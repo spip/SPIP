@@ -286,4 +286,9 @@ function build_end_tag($tag) {
 	return "</$tag>";
 }
 
+// Conversion texte -> xml (ajout d'entites)
+function text_to_xml($string) {
+	return str_replace('<', '&lt;', str_replace('&', '&amp;', $string));
+}
+
 ?>
