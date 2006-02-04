@@ -21,11 +21,6 @@ define('_DIR_RESTREINT_ABS', 'ecrire/');
 define('_DIR_RESTREINT', (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options' . _EXTENSION_PHP);
-define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
-define('_FILE_CONNECT',
-	(@is_readable(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
-		(_FILE_CONNECT_INS . _EXTENSION_PHP)
-	 : false));
 
 // *********** traiter les variables ************
 
@@ -228,6 +223,13 @@ if (@file_exists(_FILE_OPTIONS)) {
 define_once('_LOGO_MAX_SIZE', 0); # poids en ko
 define_once('_LOGO_MAX_WIDTH', 0); # largeur en pixels
 define_once('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
+
+// Le fichier de connexion a la base de donnees
+define_once('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
+define_once('_FILE_CONNECT',
+	(@is_readable(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
+		(_FILE_CONNECT_INS . _EXTENSION_PHP)
+	 : false));
 
 // les repertoires annexes
 define_once('_DIR_INCLUDE', _DIR_RESTREINT);
