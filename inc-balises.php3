@@ -403,13 +403,15 @@ function balise_INTRODUCTION_dist ($p) {
 
 
 // #LANG
-// non documente ?
+// affiche la langue de l'objet (ou superieure), et a defaut la langue courante
+// (celle du site ou celle qui a ete passee dans l'URL par le visiteur)
+// #LANG* n'affiche rien si aucune langue n'est trouvee dans le sql/le contexte
 function balise_LANG_dist ($p) {
 	$_lang = champ_sql('lang', $p);
 	if (!$p->etoile)
-		$p->code = "($_lang ? $_lang : \$GLOBALS['spip_lang'])";
+		$p->code = "htmlentities($_lang ? $_lang : \$GLOBALS['spip_lang'])";
 	else
-		$p->code = $_lang;
+		$p->code = "htmlentities($_lang)";
 	$p->interdire_scripts = false;
 	return $p;
 }
