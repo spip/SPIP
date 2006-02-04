@@ -176,7 +176,7 @@ function spip_query($query) {
 	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
 	if ($GLOBALS['spip_connect_version'] < 0.1) {
 		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		redirige_par_entete(generer_url_ecrire("upgrade","reinstall=oui"));
+		redirige_url_ecrire("upgrade","reinstall=oui");
 		exit;
 	}
 
@@ -542,6 +542,10 @@ function redirige_par_entete($url, $fin="") {
 </body></html>';
 
 	exit;
+}
+
+function redirige_url_ecrire($script, $args="") {
+	redirige_par_entete(generer_url_ecrire($script, $args, true));
 }
 
 // transformation XML des "&" en "&amp;"
