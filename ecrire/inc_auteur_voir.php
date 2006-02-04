@@ -100,7 +100,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 
 					if ($connect_toutes_rubriques
 					AND $connect_id_auteur != $id_auteur) {
-					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_url_ecrire($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), '">',
+					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_url_ecrire($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), "'>",
 					    _T('lien_supprimer_rubrique'),
 					    "</a>]</font>";
 					}
