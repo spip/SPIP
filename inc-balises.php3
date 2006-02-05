@@ -805,12 +805,19 @@ function balise_HTTP_HEADER_dist($p) {
 // #CACHE{24*3600}
 function balise_CACHE_dist($p) {
 	$duree = valeur_numerique($p->param[0][1][0]->texte);
+
+	// noter la duree du cache dans un entete proprietaire
+	$p->code .= '\'<'.'?php header("X-Spip-Cache: '
+		. $duree
+		. '"); ?'.'>\'';
+
+	// remplir le header Cache-Control
 	if ($duree > 0)
-		$p->code = '\'<'.'?php header("Cache-Control: max-age='
+		$p->code .= '.\'<'.'?php header("Cache-Control: max-age='
 			. $duree
 			. '"); ?'.'>\'';
 	else
-		$p->code = '\'<'
+		$p->code .= '.\'<'
 		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
 		.'><'
 		.'?php header("Pragma: no-cache"); ?'

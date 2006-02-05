@@ -273,10 +273,12 @@ function analyse_resultat_skel($nom, $Cache, $corps) {
 	}
 
 	return array('texte' => $corps,
-		     'squelette' => $nom,
-		     'process_ins' => ((strpos($corps,'<'.'?')=== false)?'html':'php'),
-		     'invalideurs' => $Cache,
-		     'entetes' => $headers);
+		'squelette' => $nom,
+		'process_ins' => ((strpos($corps,'<'.'?')=== false)?'html':'php'),
+		'invalideurs' => $Cache,
+		'entetes' => $headers,
+		'duree' => $headers['X-Spip-Cache']
+	);
 }
 
 ?>

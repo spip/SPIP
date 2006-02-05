@@ -136,15 +136,13 @@ function cache_valide($chemin_cache, $contenu, $date) {
 
 // gestion des delais par specification a l'interieur du squelette
 
-function cache_valide_autodetermine($chemin_cache, $contenu, $date) {
+function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
-	if (!$contenu) return 1;
+	if (!$page) return 1;
 
-	if (preg_match('/max-age\s*=\s*(\d+)/', 
-		       $page['entetes']['Cache-Control'],
-		       $r)) 
-	  return ($r[1] > (time() - $date)) ? 0 : $r[1];
-	
+	if (strlen($duree = $page['entetes']['X-Spip-Cache']))
+		return ($date + $duree > time()) ? 0 : $t;
+
 	// squelette ancienne maniere, on se rabat sur le vieux modele
 	return cache_valide($chemin_cache, $contenu, $date);
 }
