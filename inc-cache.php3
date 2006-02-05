@@ -140,9 +140,6 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 	if (!$page) return 1;
 
-var_dump($page['entetes']);
-echo " - $chemin_cache - ";
-
 	if (strlen($duree = $page['entetes']['X-Spip-Cache']))
 		return ($date + intval($duree) > time()) ? 0 : $t;
 
