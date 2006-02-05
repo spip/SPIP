@@ -434,20 +434,24 @@ function inserer_documents($letexte) {
 //
 function fichiers_upload($dir) {
 	$fichiers = array();
-	$d = opendir($dir);
 
-	while (($f = readdir($d)) !== false) {
-		if (($f[0] != '.') AND is_readable("$dir/$f"))
-			if (is_file("$dir/$f") 
-			AND $f != 'remove.txt')
-				$fichiers[] = "$dir/$f";
-		else if (is_dir("$dir/$f"))
-			$fichiers = array_merge($fichiers, fichiers_upload("$dir/$f"));
+	if (@is_dir($dir) AND is_readable($dir)) {
+		$d = opendir($dir);
+		while (($f = readdir($d)) !== false) {
+			if (($f[0] != '.') AND is_readable("$dir/$f"))
+				if (is_file("$dir/$f") 
+				AND $f != 'remove.txt')
+					$fichiers[] = "$dir/$f";
+			else if (is_dir("$dir/$f"))
+				$fichiers = array_merge($fichiers, fichiers_upload("$dir/$f"));
 
+		}
+		closedir($d);
+
+		sort($fichiers);
 	}
-	closedir($d);
-
-	sort($fichiers);
+	else
+		spip_log("repertoire $dir absent ou illisible");
 
 	return $fichiers;
 }
