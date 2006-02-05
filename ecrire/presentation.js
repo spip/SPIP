@@ -2,13 +2,14 @@ var init_gauche = true;
 
 function changestyle(id_couche, element, style) {
 
-  if (admin) {
+	if (admin) {
+		hide_obj("bandeauaccueil");
 		hide_obj("bandeaunaviguer");
 		hide_obj("bandeauforum_admin");
 		hide_obj("bandeauauteurs");
 		if (stat) {  hide_obj("bandeaustatistiques_visites"); } 
 		hide_obj("bandeauconfiguration"); 
-  }
+	}
 	hide_obj("bandeaudeconnecter");
 	hide_obj("bandeautoutsite");
 	hide_obj("bandeaunavrapide");
@@ -21,20 +22,19 @@ function changestyle(id_couche, element, style) {
 	hide_obj("bandeaudisplay");
 	hide_obj("bandeauecran");
 	hide_obj("bandeauinterface");
-	
-	
+
 	if (init_gauche) {
-	   if (admin) {
-		decalerCouche('bandeaunaviguer');
-		decalerCouche('bandeauforum_admin');
-		decalerCouche('bandeauauteurs');
-		if (stat) decalerCouche('bandeaustatistiques_visites');
-		decalerCouche('bandeauconfiguration');
-		} 
+		if (admin) {
+			decalerCouche('bandeauaccueil');
+			decalerCouche('bandeaunaviguer');
+			decalerCouche('bandeauforum_admin');
+			decalerCouche('bandeauauteurs');
+			if (stat) decalerCouche('bandeaustatistiques_visites');
+			decalerCouche('bandeauconfiguration');
+		}
 		init_gauche = false;
 	}
-	
-	
+
 	if (!(layer = findObj(id_couche))) return;
 
 	layer.style[element] = style;
@@ -48,20 +48,20 @@ function decalerCouche(id_couche) {
 		gauche = parseInt(layer.style.left)
 		  - demilargeur
 		  + Math.floor(largeur_icone / 2);
-		  		  
+
 		if (gauche < 0) gauche = 0;
 
 		layer.style.left = gauche+"px";
 	}
 
-}	
+}
 
 var accepter_change_statut;
-	
+
 function selec_statut(id, type, decal, puce, script) {
 
 	if (!accepter_change_statut) {
-	  accepter_change_statut = confirm(confirm_changer_statut)
+		accepter_change_statut = confirm(confirm_changer_statut)
 	}
 
 	if (accepter_change_statut) {
@@ -73,23 +73,21 @@ function selec_statut(id, type, decal, puce, script) {
 	}
 }
 
-function changeclass(objet, myClass)
-{
-		objet.className = myClass;
+function changeclass(objet, myClass) {
+	objet.className = myClass;
 }
-function changesurvol(iddiv, myClass)
-{
-		document.getElementById(iddiv).className = myClass;
+function changesurvol(iddiv, myClass) {
+	document.getElementById(iddiv).className = myClass;
 }
 function setActiveStyleSheet(title) {
-   var i, a, main;
-   for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
-	 if(a.getAttribute("rel").indexOf("style") != -1
+	var i, a, main;
+	for(i=0; (a = document.getElementsByTagName("link")[i]); i++) {
+		if(a.getAttribute("rel").indexOf("style") != -1
 		&& a.getAttribute("title")) {
-	   a.disabled = true;
-	   if(a.getAttribute("title") == title) a.disabled = false;
-	 }
-   }
+			a.disabled = true;
+			if(a.getAttribute("title") == title) a.disabled = false;
+		}
+	}
 }
 
 function setvisibility (objet, statut) {
@@ -164,10 +162,7 @@ function changeVisible(input, id, select, nonselect) {
 		element = findObj(id);
 		if (element.style.display != nonselect)  element.style.display = nonselect;
 	}
-	
 }
-
-
 
 
 
