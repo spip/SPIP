@@ -369,10 +369,6 @@ if ($flag_ob AND strlen(ob_get_contents())==0 AND !headers_sent()) {
 // Lien vers la page demandee et lien nettoye ne contenant que des id_objet
 $clean_link = new Link();
 
-
-if ($plugins)
-	charger_plugins($plugins);
-
 // tidy en ligne de commande (si on ne l'a pas en module php,
 // ou si le module php ne marche pas)
 // '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
@@ -398,6 +394,27 @@ $langue_site = $GLOBALS['meta']['langue_site'];
 if (!$langue_site) include_ecrire('inc_lang');
 $spip_lang = $langue_site;
 
+
+// chargement des plugins : doit arriver en dernier
+// car dans les plugins on peut inclure inc-version
+// qui ne sera pas execute car _ECRIRE_INC_VERSION est defini
+// donc il faut avoir tout fini ici avant de charger les plugins
+if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
+	// chargement optimise precompile
+	include_once(_DIR_SESSIONS."charger_plugins_options.php");
+}
+else
+{
+	include_ecrire('inc_plugin');
+	// generer les fichiers php precompiles
+	// de chargement des plugins et des pipelines
+	verif_plugin();
+	if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
+		include_once(_DIR_SESSIONS."charger_plugins_options.php");
+	}
+	else
+		spip_log("generation de charger_plugins_options.php impossible; pipeline desactives");
+}
 
 //
 // Installer Spip si pas installe... sauf si justement on est en train

@@ -35,6 +35,10 @@ if ($f = find_in_path("mes_fonctions" . _EXTENSION_PHP)) {
 	global $dossier_squelettes;
 	include ($f);
 }
+if (@is_readable(_DIR_SESSIONS."charger_plugins_fonctions.php")){
+	// chargement optimise precompile
+	include_once(_DIR_SESSIONS."charger_plugins_fonctions.php");
+}
 
 charger_generer_url();
 
