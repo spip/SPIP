@@ -164,14 +164,17 @@ function post_ortho($url, $texte, $lang) {
 		return false;
 	}
 
+	$gz = ($GLOBALS['flag_gz'] && strlen($texte) >= 200);
+	$boundary = '';
+	$vars = array(
+		'op' => 'spell',
+		'lang' => $lang,
+		'texte' => $texte,
+		'gz' => $gz ? 1 : 0
+	);
 	// Si le texte est petit, l'overhead du multipart est dispendieux
-	if (!$GLOBALS['flag_gz'] || strlen($texte) < 200) {
-		$gz = false;
-		$body = "op=spell&lang=".urlencode($lang)."&texte=".urlencode($texte);
-		fputs($f, "Content-Type: application/x-www-form-urlencoded\r\n");
-	}
 	// Sinon, on passe en multipart pour compresser la chaine a corriger
-	else {
+	if ($gz) {
 		// Il faut eliminer les caracteres 0 sinon PHP ne lit pas la suite du parametre
 		// passe en multipart/form-data (gros hack bien sale)
 		$texte_gz = gzcompress($texte);
@@ -180,21 +183,14 @@ function post_ortho($url, $texte, $lang) {
 			if (!is_int(strpos($texte_gz, $str_echap))) break;
 		}
 		$texte_gz = str_replace("\x00", $str_echap, $texte_gz);
-		$gz = true;
-		$vars = array('op' => 'spell', 'lang' => $lang, 'texte' => $texte_gz, 'gz' => 1, 'nul_echap' => $str_echap);
+		$vars['texte'] = $texte_gz;
+		$vars['nul_echap'] = $str_echap;
 		$boundary = substr(md5(rand().'ortho'), 0, 8);
-		$body = '';
-		foreach ($vars as $key => $val) {
-			$body .= "\r\n--$boundary\r\n";
-			$body .= "Content-Disposition: form-data; name=\"$key\"\r\n";
-			$body .= "\r\n";
-			$body .= $val;
-		}
-		$body .= "\r\n--$boundary\r\n";
-		fputs($f, "Content-Type: multipart/form-data; boundary=$boundary\r\n");
 	}
+	list($content_type, $body) = prepare_donnees_post($vars, $boundary);
 
 	// On envoie le contenu
+	fputs($f, $content_type);
 	fputs($f, "Content-Length: ".strlen($body)."\r\n");
 	fputs($f, "\r\n");	// Fin des entetes
 	fputs($f, $body);

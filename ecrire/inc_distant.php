@@ -74,6 +74,42 @@ function buildQueryString($data, $munge_charset = false) {
 	return $querystring;
 }
 
+function prepare_donnees_post($donnees, $boundary = '') {
+	if($boundary) {
+		// fabrique une chaine HTTP pour un POST avec boundary
+		$entete = "Content-Type: multipart/form-data; boundary=$boundary\r\n";
+		$chaine = '';
+		if (is_array($donnees)) {
+			foreach ($donnees as $cle => $valeur) {
+				$chaine .= "\r\n--$boundary\r\n";
+				$chaine .= "Content-Disposition: form-data; name=\"$cle\"\r\n";
+				$chaine .= "\r\n";
+				$chaine .= $valeur;
+			}
+			$chaine .= "\r\n--$boundary\r\n";
+		}
+	} else {
+		// fabrique une chaine HTTP simple pour un POST
+		$entete = 'Content-Type: application/x-www-form-urlencoded'."\r\n";
+		$chaine = array();
+		if (is_array($donnees)) {
+			foreach ($donnees as $cle => $valeur) {
+				if (is_array($valeur)) {
+					foreach ($valeur as $val2) {
+						$chaine[] = urlencode($cle).'='.urlencode($val);
+					}
+				} else {
+					$chaine[] = urlencode($cle).'='.urlencode($valeur);
+				}
+			}
+			$chaine = implode('&', $chaine);
+		} else {
+			$chaine = $donnees;
+		}
+	}
+	return array($entete, $chaine);
+}
+
 //
 // Recupere une page sur le net
 // et au besoin l'encode dans le charset local
@@ -94,7 +130,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 
 	if (!empty($datas) && is_array($datas)) {
 		$get = 'POST';
-		$postdata = buildQueryString($datas, $munge_charset);
+		list($content_type, $postdata) = prepare_donnees_post($datas);
 	}
 
 	for ($i=0;$i<10;$i++) {	// dix tentatives maximum en cas d'entetes 301...
@@ -107,7 +143,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 		} else {
 			// Fin des entetes envoyees par SPIP
 			if($get == 'POST') {
-				fputs($f, 'Content-Type: application/x-www-form-urlencoded'."\r\n");
+				fputs($f, $content_type);
 				fputs($f, 'Content-Length: '.strlen($postdata)."\r\n");
 				fputs($f, "\r\n".$postdata);
 			} else {
