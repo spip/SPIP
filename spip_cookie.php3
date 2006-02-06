@@ -243,7 +243,7 @@ if ($var_lang_ecrire) {
 		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
 		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-		if (_FILE_CONNECT) {
+		if (_FILE_CONNECT AND $id_auteur) {
 			include_ecrire('inc_admin');
 			if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
 				spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
