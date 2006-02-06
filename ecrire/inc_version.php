@@ -269,7 +269,7 @@ define_once('_AUTH_USER_FILE', '.htpasswd');
 
 define_once('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 
-define_once('_SPIP_PATH', './:squelettes/:dist/:formulaires/');
+define_once('_SPIP_PATH', './:squelettes/:dist/:formulaires/:ecrire/');
 
 // charge les fonctions indispensables, 
 
