@@ -566,14 +566,26 @@ function texte_script($texte) {
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
 
-function find_in_path ($filename, $path='AUTO', $sinon='') {
+function find_in_path ($filename, $sinon='', $path='AUTO') {
 	static $autopath;
 
 	// Chemin standard depuis l'espace public
-
 	if ($path == 'AUTO') {
 		if (!$autopath) {
-			$autopath = _SPIP_PATH;
+
+			// Depuis l'espace prive, remonter d'un cran, sauf pour :
+			// - les absolus (/) ; - les locaux (./) ; les remontees (../)
+			if (_DIR_RACINE) {
+				$autopath = array();
+				foreach (split(':', _SPIP_PATH) as $dir) {
+					if (preg_match('@^([.]{0,2}/)@', $dir))
+						$dir = _DIR_RACINE.$dir;
+					$autopath[] = $dir;
+				}
+				$autopath = join(':', $autopath);
+			} else
+				$autopath = _SPIP_PATH;
+
 			// Ajouter les repertoires des plugins
 			foreach ($GLOBALS['plugins'] as $plug)
 				$autopath = _DIR_PLUGINS.$plug.'/:'.$autopath;
@@ -586,23 +598,16 @@ function find_in_path ($filename, $path='AUTO', $sinon='') {
 #spip_log("path = $path");
 
 	// Parcourir le chemin
+	if ($sinon) $path .= ':'.$sinon;
 	foreach (split(':', $path) as $dir) {
-		// Depuis l'espace prive, remonter d'un cran, sauf pour :
-		// - les absolus (/) ; - les locaux (./) ; les remontees (../)
-		$racine = preg_match('@^([.]{0,2}/)@', $dir) ?  '' : _DIR_RACINE;
-		// ajouter un / eventuellement manquant
-		if (substr($dir,-1) <> '/')
-			$dir .= "/";
+		// ajouter un / eventuellement manquant a la fin
+		if (substr($dir,-1) <> '/') $dir .= "/";
 #spip_log("find_in_path: essai $racine $dir $filename");
-		if (@is_readable($f = "$racine$dir$filename")) {
+		if (@is_readable($f = "$dir$filename")) {
 			#spip_log("trouve $f");
 			return $f;
 		}
 	}
-	
-	// sinon essayer $sinon
-	if ($sinon AND @is_readable($f = "$sinon$filename"))
-		return $f;
 }
 
 // charger les definitions des plugins

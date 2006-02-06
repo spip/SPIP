@@ -33,6 +33,8 @@ debut_gauche();
 	
 $modules = array();
 
+##### a revoir : des repertoires lang, il peut y en avoir partout sur le chemin
+##### cf. aussi fonction ci-dessous
 if (!$d = @opendir(_DIR_LANG)) return;
 while (($f = readdir($d)) !== false) {
 	if (ereg('^([a-z_]+)\.php[3]?$', $f, $regs))
@@ -54,6 +56,8 @@ if (count($modules) > 1) {
 	echo fin_cadre_relief();
 }
 
+$module = array_pop($modules);
+
 
 debut_droite();
 
@@ -63,13 +67,13 @@ afficher_raccourcis($module);
 fin_page();
 }
 
-
+##### a revoir aussi (cf. commentaire ci-dessus)
 function afficher_raccourcis($module = "public") {
 	global $spip_lang;
 	global $couleur_foncee;
 	
 	$lang = $module.'_'.$spip_lang;
-	if ($fichier_lang = find_in_path($lang._EXTENSION_PHP, 'AUTO', _DIR_LANG)) {
+	if ($fichier_lang = find_in_path($lang._EXTENSION_PHP, _DIR_LANG)) {
 		$GLOBALS['idx_lang'] = 'i18n_' . $lang;
 		include_local($fichier_lang);
 	
@@ -111,7 +115,7 @@ function afficher_raccourcis($module = "public") {
 			echo "<tr bgcolor='$bgcolor'><td class='verdana2'><b><:$aff_nom_module$raccourci:></b></td><td class='arial2'>$texte</td></tr>\n";
 		}
 		echo "</table>";
-	} 
+	}
 }
 
 ?>

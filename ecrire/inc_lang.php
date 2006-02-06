@@ -15,11 +15,18 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 // Charger un fichier langue
 //
+function chercher_module_lang($module, $lang) {
+	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
+	if ($f = find_in_path('lang/'.$module.'_'.$lang._EXTENSION_PHP))
+		return $f;
+
+	// 2) directement dans le chemin, ou dans _DIR_LANG
+	return find_in_path($module.'_'.$lang._EXTENSION_PHP, _DIR_LANG);
+}
 
 function charger_langue($lang, $module = 'spip') {
 
-	if ($fichier_lang = find_in_path($module.'_'.$lang._EXTENSION_PHP,
-	'AUTO', _DIR_LANG)) {
+	if ($fichier_lang = chercher_module_lang($module, $lang)) {
 		$GLOBALS['idx_lang']='i18n_'.$module.'_'.$lang;
 		include_local($fichier_lang);
 	} else {
@@ -28,12 +35,9 @@ function charger_langue($lang, $module = 'spip') {
 		// *par definition* doit exister, et on copie le tableau dans la
 		// var liee a la langue
 		$l = $GLOBALS['meta']['langue_site'];
-		if (!$fichier_lang = find_in_path($module.'_'.$l._EXTENSION_PHP,
-		'AUTO', _DIR_LANG)) {
-			$l = 'fr';
-			$fichier_lang = find_in_path($module.'_'.$l._EXTENSION_PHP,
-			'AUTO', _DIR_LANG);
-		}
+		if (!$fichier_lang = chercher_module_lang($module, $l))
+			$fichier_lang = chercher_module_lang($module, 'fr');
+
 		if ($fichier_lang) {
 			$GLOBALS['idx_lang']='i18n_'.$module.'_' .$l;
 			include_local($fichier_lang);
@@ -130,15 +134,11 @@ function traduire_chaine($code, $args) {
 		if (empty($GLOBALS[$var])) {
 			charger_langue($spip_lang, $module);
 
-			// surcharge perso -- on cherche local(_xx).php dans le chemin
+			// surcharge perso -- on cherche (lang/)local(_xx).php
 			if ($f = find_in_path('local' ._EXTENSION_PHP))
 				surcharger_langue($f);
-			if ($f = find_in_path('local_'.$spip_lang._EXTENSION_PHP))
+			if ($f = chercher_module_lang('local', $spip_lang))
 				surcharger_langue($f);
-			// compatibilite ascendante : chercher aussi dans ecrire/lang/
-			else if (@is_readable($f = _DIR_LANG . 'local_'.$spip_lang._EXTENSION_PHP))
-				surcharger_langue($f);
-
 		}
 		if (isset($GLOBALS[$var][$code])) break;
 	}

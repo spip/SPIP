@@ -310,8 +310,8 @@ function indexer_contenu_document ($row) {
 	));
 
 	// Voir si on sait lire le contenu (eventuellement en chargeant le
-	// fichier extract_pdf.php dans find_in_path() )
-	if ($plugin = find_in_path('extract_'.$extension)) {
+	// fichier extract/pdf.php dans find_in_path() )
+	if ($plugin = find_in_path('extract/'.$extension, _DIR_INCLUDE)) {
 		include_local($plugin);
 	}
 	if (function_exists($lire = $extracteur[$extension])) {
