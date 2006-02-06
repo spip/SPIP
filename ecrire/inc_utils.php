@@ -564,7 +564,7 @@ function texte_script($texte) {
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
 
-function find_in_path ($filename, $sinon='', $path='AUTO') {
+function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 	static $autopath;
 
 	// Chemin standard depuis l'espace public
@@ -596,16 +596,20 @@ function find_in_path ($filename, $sinon='', $path='AUTO') {
 #spip_log("path = $path");
 
 	// Parcourir le chemin
-	if ($sinon) $path .= ':'.$sinon;
+	# Attention, dans l'espace prive on a parfois sinon='' pour _DIR_INCLUDE
+	if ($sinon !== NULL) $path .= ':'.$sinon;
+
 	foreach (split(':', $path) as $dir) {
 		// ajouter un / eventuellement manquant a la fin
-		if (substr($dir,-1) <> '/') $dir .= "/";
+		if (strlen($dir) AND substr($dir,-1) != '/') $dir .= "/";
 #spip_log("find_in_path: essai $racine $dir $filename");
 		if (@is_readable($f = "$dir$filename")) {
 			#spip_log("trouve $f");
 			return $f;
 		}
 	}
+
+spip_log("$filename $path ($sinon)");
 }
 
 // charger les definitions des plugins
