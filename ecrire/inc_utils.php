@@ -36,28 +36,26 @@ function include_ecrire($file) {
 }
 
 // charge un fichier perso ou, a defaut, standard
-// et retourne si elle existe le nom de la fonction homonyme, ou de prefixe _dist
+// et retourne si elle existe le nom de la fonction homonyme, ou de suffixe _dist
 
 function include_fonction($nom) {
-# Hack pour etre compatible avec les mes_options qui appellent cette fonction
-	define_once('_DIR_INCLUDE', _DIR_RESTREINT);
-# vieillerie	$nom = preg_replace("/\.php[3]?$/",'', basename($nom));
-	$inc = ("exec_" . $nom);
-	$f = find_in_path($inc  . '.php');
-	if ($f && is_readable($f)) {
+	$inc = ("exec_" . $nom  . '.php');
+	$f = find_in_path($inc);
+	if ($f) {
 		if (!$GLOBALS['included_files'][$f]++) include($f);
+		spip_log("surcharge de $nom trouvee dans $f");
 	} else {
-		$f = _DIR_INCLUDE . $inc . '.php';
+		$f = (defined(' _DIR_INCLUDE') ? _DIR_INCLUDE : _DIR_RESTREINT)
+			. $inc;
 		if (is_readable($f)) {
 			if (!$GLOBALS['included_files'][$f]++) include($f);
 		} else {
 		    $inc = "";
 		}
 	}
-	$f = $nom;
-	if (function_exists($f))
-		return $f;
-	elseif (function_exists($f .= "_dist"))
+	if (function_exists($nom))
+		return $nom;
+	elseif (function_exists($f = $nom . "_dist"))
 		return $f;
 	else {
 	  spip_log("fonction $nom indisponible" .
