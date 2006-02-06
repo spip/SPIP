@@ -576,7 +576,7 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 			if (_DIR_RACINE) {
 				$autopath = array();
 				foreach (split(':', _SPIP_PATH) as $dir) {
-					if (preg_match('@^([.]{0,2}/)@', $dir))
+					if (!preg_match('@^([.]{0,2}/)@', $dir))
 						$dir = _DIR_RACINE.$dir;
 					$autopath[] = $dir;
 				}
@@ -593,7 +593,6 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 		if ($GLOBALS['dossier_squelettes'])
 			$path = $GLOBALS['dossier_squelettes'].'/:'.$path;
 	}
-#spip_log("path = $path");
 
 	// Parcourir le chemin
 	# Attention, dans l'espace prive on a parfois sinon='' pour _DIR_INCLUDE
@@ -602,14 +601,13 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 	foreach (split(':', $path) as $dir) {
 		// ajouter un / eventuellement manquant a la fin
 		if (strlen($dir) AND substr($dir,-1) != '/') $dir .= "/";
-#spip_log("find_in_path: essai $racine $dir $filename");
 		if (@is_readable($f = "$dir$filename")) {
-			#spip_log("trouve $f");
+#			spip_log("find_in_path trouve $f");
 			return $f;
 		}
 	}
+#	spip_log("find_in_apth a pas vu '$filename' dans $autopath");
 
-spip_log("$filename $path ($sinon)");
 }
 
 // charger les definitions des plugins
