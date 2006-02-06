@@ -1779,7 +1779,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	global $connect_statut, $connect_toutes_rubriques, $spip_display;
 	global $spip_lang, $couleur_claire, $couleur_foncee;
 
-	$args =	"fond=style&couleur_claire=" .
+	$args = "fond=style&couleur_claire=" .
 		substr($couleur_claire,1) .
 		'&couleur_foncee=' .
 		substr($couleur_foncee,1) .
@@ -1788,7 +1788,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 	  	'&dir=' .
 		_DIR_RESTREINT_ABS . _DIR_IMG_PACK;
 	
-	$res = '<link rel="stylesheet" type="text/css" href="' . generer_url_public('page', 'fond=style') .'" />
+	$res = '<link rel="stylesheet" type="text/css" href="' . generer_url_public('page', $args) .'" />
 '
 	// CSS calendrier
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_RESTREINT
