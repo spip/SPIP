@@ -7,8 +7,15 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 'auteur_plugin' => 'Auteur',
 
-'lien_plugin' => 'Lien',
+'erreur_plugin_fichier_def_absent' => "Fichier de definition absent",
+'erreur_plugin_tag_plugin_absent' => "&lt;plugin&gt; manquant dans le fichier de definition",
+'erreur_plugin_nom_manquant' => "Nom du plugin manquant",
+'erreur_plugin_version_manquant' => "Version du plugin manquante",
+'erreur_plugin_class_manquant' => "Classe du plugin manquant",
+'erreur_plugin_fichier_absent' => "Fichier absent",
+'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit',
 
+'lien_plugin' => 'Lien',
 'onglet_plugin' => 'Gestion des plugins',
 
 'repertoire_plugin' => 'R&eacute;pertoire',
