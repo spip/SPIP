@@ -219,7 +219,7 @@ echo "</body></html>";
 function frame_background_image($f)
 {
 	return "background-image: url(" . 
-		generer_url_ecrire(_DIR_IMG_PACK . $f) .
+		_DIR_IMG_PACK . $f .
 		")";
 }
 ?>

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // librairie pour parametrage plugin
 //
-define_once('_FILE_PLUGIN_CONFIG', "plugin.xml");
+define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
 // besoin de inc_meta (et aussi de version mais on suppose qu'il est cahrgé par ailleurs ...)
 include_ecrire ("inc_db_mysql");

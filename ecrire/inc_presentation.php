@@ -1784,26 +1784,30 @@ function envoi_link($nom_site_spip, $rubrique="") {
 		'&couleur_foncee=' .
 		substr($couleur_foncee,1) .
 		'&ltr=' . 
-		$GLOBALS['spip_lang_left'] .
-	  	'&dir=' .
-		_DIR_RESTREINT_ABS . _DIR_IMG_PACK;
-	
-	$res = '<link rel="stylesheet" type="text/css" href="' . generer_url_public('page', $args) .'" />
+		$GLOBALS['spip_lang_left'];
+
+	// CSS par defaut /spip_style.css
+	$res = '<link rel="stylesheet" type="text/css" href="'
+	. _DIR_RACINE . 'spip_style.css'.'" />'
+
+	// CSS espace prive
+	. '<link rel="stylesheet" type="text/css" href="'
+	. generer_url_public('page', $args) .'" />
 '
 	// CSS calendrier
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_RESTREINT
+	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
 	. 'calendrier.css"  />' . "\n"
 
 	// CSS imprimante (masque des trucs, a completer)
-	. '<link rel="stylesheet" type="text/css" href="' . _DIR_RESTREINT
+	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
 	. 'spip_style_print.css" media="print" />' . "\n"
 
 	// CSS "visible au chargement", hack necessaire pour garder un depliement
 	// sympathique meme sans javascript (on exagere ?)
 	// Pour l'explication voir http://www.alistapart.com/articles/alternate/
-	. '<link rel="alternate stylesheet" type="text/css" href="' . _DIR_RESTREINT
+	. '<link rel="alternate stylesheet" type="text/css" href="' . _DIR_IMG_PACK
 	. 'spip_style_invisible.css" title="invisible" />' . "\n"
-	. '<link rel="stylesheet" href="' . _DIR_RESTREINT
+	. '<link rel="stylesheet" href="' . _DIR_IMG_PACK
 	. 'spip_style_visible.css"  title="visible" />' . "\n"
 
 	// favicon.ico
@@ -1865,7 +1869,7 @@ function debut_javascript($admin, $stat)
 			"\nvar confirm_changer_statut = '" .
 			unicode_to_javascript(addslashes(html2unicode(_T("confirm_changer_statut")))) . 
 			"';\n") .
-		http_script('',_DIR_RESTREINT . 'presentation.js');
+		http_script('',_DIR_IMG_PACK . 'presentation.js');
 }
 
 // Fonctions onglets

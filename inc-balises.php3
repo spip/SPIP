@@ -769,6 +769,36 @@ function balise_ENV_dist($p) {
 }
 
 //
+// #EVAL{...}
+// evalue un code php ; a utiliser avec precaution :-)
+//
+// #EVAL*{code} fait exactement eval('code')
+// mais #EVAL{code} fait eval('return code;')
+// ce qui permet de faire #EVAL{6*50} ou #EVAL{_DIR_IMG_PACK}
+function balise_EVAL_dist($p) {
+	if ($p->param && !$p->param[0][0]) {
+		$php = array_shift( $p->param );
+		array_shift($php);
+		$php = calculer_liste($php[0],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+	}
+
+	if ($php) {
+		if ($p->etoile)
+			$p->code = "eval($php)";
+		else
+			$p->code = "eval('return '.$php.';')";
+	} else
+		$p->code = '';
+
+	$p->interdire_scripts = false;
+
+	return $p;
+}
+
+//
 // #REM
 // pour les remarques : renvoie toujours ''
 //

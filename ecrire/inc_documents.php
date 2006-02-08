@@ -19,23 +19,24 @@ include_ecrire ("inc_date");
 // Vignette pour les documents lies
 //
 
-function vignette_par_defaut($type_extension, $size=true) {
+function vignette_par_defaut($ext, $size=true, $loop = true) {
 
-	if (!$type_extension)
-		$type_extension = 'txt';
-
-	$filename = _DIR_IMG_ICONES . $type_extension;
+	if (!$ext)
+		$ext = 'txt';
 
 	// Chercher la vignette correspondant a ce type de document
-	if (!@file_exists($v = $filename.'.png'))
-	if (!@file_exists($v = $filename.'.gif'))
-	if (!@file_exists($v = $filename.'-dist.png'))
-	if (!@file_exists($v = $filename.'-dist.gif'))
-	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut.png")) 
-	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut.gif")) 
-	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut-dist.png")) 
-	if (!@file_exists($v = _DIR_IMG_ICONES . "defaut-dist.gif")) 
-	$v = _DIR_IMG_ICONES . "defaut-dist.gif";
+	// dans les vignettes persos, ou dans les vignettes standard
+	if (!@file_exists($v = _DIR_IMG_ICONES . $ext.'.png')
+	AND !@file_exists($v = _DIR_IMG_ICONES . $ext.'.gif')
+	# icones standard
+	AND !@file_exists($v = _DIR_IMG_ICONES_DIST . $ext.'-dist.png')
+	# cas d'une install dans un repertoire "applicatif"...
+	AND !@file_exists(_ROOT_IMG_ICONES_DIST . $v)
+	)
+		if ($loop)
+			$v = vignette_par_defaut('defaut', false, $loop=false);
+		else
+			$v = false; # pas trouve l'icone de base
 
 	if (!$size) return $v;
 

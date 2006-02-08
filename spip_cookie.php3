@@ -81,12 +81,7 @@ if ($change_session == 'oui') {
 		else
 			spip_log("session non rejouee, changement d'IP ?");
 	}
-	@header('Content-Type: image/gif');
-	@header('Expires: 0');
-	@header("Cache-Control: no-store, no-cache, must-revalidate");
-	@header('Pragma: no-cache');
-	@header("Last-Modified: " . gmdate("D, d M Y H:i:s") . " GMT");
-	@readfile(_DIR_IMG_PACK . 'rien.gif');
+	envoie_image_vide();
 	exit;
 }
 

@@ -27,7 +27,7 @@ function spip_action_tester_dist() {
 			} else {
 				# Attention GD sait lire le gif mais pas forcement l'ecrire
 				if (function_exists('ImageCreateFromGIF')) {
-					$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
+					$srcImage = @ImageCreateFromGIF(_ROOT_IMG_PACK."test.gif");
 					if ($srcImage) {
 						$gd_formats_read_gif = ",gif";
 						ImageDestroy( $srcImage );
@@ -48,21 +48,21 @@ function spip_action_tester_dist() {
 		
 			$gd_formats = Array();
 			if (function_exists('ImageCreateFromJPEG')) {
-				$srcImage = @ImageCreateFromJPEG(_DIR_IMG . "test.jpg");
+				$srcImage = @ImageCreateFromJPEG(_ROOT_IMG_PACK."test.jpg");
 				if ($srcImage) {
 					$gd_formats[] = "jpg";
 					ImageDestroy( $srcImage );
 				}
 			}
 			if (function_exists('ImageCreateFromGIF')) {
-				$srcImage = @ImageCreateFromGIF(_DIR_IMG . "test.gif");
+				$srcImage = @ImageCreateFromGIF(_ROOT_IMG_PACK."test.gif");
 				if ($srcImage) {
 					$gd_formats[] = "gif";
 					ImageDestroy( $srcImage );
 				}
 			}
 			if (function_exists('ImageCreateFromPNG')) {
-				$srcImage = @ImageCreateFromPNG(_DIR_IMG . "test.png");
+				$srcImage = @ImageCreateFromPNG(_ROOT_IMG_PACK."test.png");
 				if ($srcImage) {
 					$gd_formats[] = "png";
 					ImageDestroy( $srcImage );
@@ -86,7 +86,7 @@ function spip_action_tester_dist() {
 		$pnmtojpeg_command = str_replace("pnmscale",
 			"pnmtojpeg", $pnmscale_command);
 
-		$vignette = _DIR_IMG . "test.jpg";
+		$vignette = _ROOT_IMG_PACK."test.jpg";
 		$dest = _DIR_IMG . "test-jpg.jpg";
 		$commande = "$jpegtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
@@ -96,7 +96,7 @@ function spip_action_tester_dist() {
 		}
 		$giftopnm_command = ereg_replace("pnmscale", "giftopnm", $pnmscale_command);
 		$pnmtojpeg_command = ereg_replace("pnmscale", "pnmtojpeg", $pnmscale_command);
-		$vignette = _DIR_IMG . "test.gif";
+		$vignette = _ROOT_IMG_PACK."test.gif";
 		$dest = _DIR_IMG . "test-gif.jpg";
 		$commande = "$giftopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
@@ -106,7 +106,7 @@ function spip_action_tester_dist() {
 		}
 
 		$pngtopnm_command = ereg_replace("pnmscale", "pngtopnm", $pnmscale_command);
-		$vignette = _DIR_IMG . "test.png";
+		$vignette = _ROOT_IMG_PACK."test.png";
 		$dest = _DIR_IMG . "test-gif.jpg";
 		$commande = "$pngtopnm_command $vignette | $pnmscale_command -width 10 | $pnmtojpeg_command > $dest";
 		spip_log($commande);
@@ -129,8 +129,10 @@ function spip_action_tester_dist() {
 		include_ecrire('inc_logos');
 		//$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 150;
-		if ($preview = creer_vignette(_DIR_IMG . 'test_image.jpg', $taille_preview, $taille_preview, 'jpg', '', "test_$arg", $arg, true))
-
+		if ($preview = creer_vignette(
+		_ROOT_IMG_PACK.'test_image.jpg',
+		$taille_preview, $taille_preview, 'jpg', '', "test_$arg", $arg, true)
+		AND ($preview['width'] * $preview['height'] > 0))
 			redirige_par_entete($preview['fichier']);
 	}
 
