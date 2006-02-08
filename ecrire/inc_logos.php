@@ -495,8 +495,9 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 				// dans l'espace prive mettre un timestamp sur l'adresse 
 				// de l'image, de facon a tromper le cache du navigateur
 				// quand on fait supprimer/reuploader un logo
+				// (pas de filemtime si SAFE MODE)
 				if (!_DIR_RESTREINT)
-					$date = '?date='.filemtime($logo);
+					$date = '?date='.@filemtime($logo);
 				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
 			}
 		}
