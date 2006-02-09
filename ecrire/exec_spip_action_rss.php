@@ -146,6 +146,7 @@ function rss_suivi_versions($a) {
 
 // Suivi des forums
 function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
+	$rss = array();
 	include_ecrire("inc_forum");
 
 	$result_forum = spip_query("
@@ -327,8 +328,7 @@ function spip_action_rss_dist()
 spip_timer('rss');
 if (!verifier_low_sec ($id, $cle,
 "rss $op $args"
-)
-OR ($a['id_auteur']>0 AND $id<>$a['id_auteur'])) {
+)) {
 	$op = 'erreur securite';
 	unset($a);
 } else {

@@ -288,14 +288,20 @@ foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
 		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
 }
 
-// Securite : nettoyer les magic quotes \' et les caracteres nuls %00
+//
+// Securite
+//
+
+// Ne pas se faire manger par un bug php qui laisse passer ?GLOBALS[truc]=toto
+if (isset($_REQUEST['GLOBALS'])) die();
+// nettoyer les magic quotes \' et les caracteres nuls %00
 spip_desinfecte($_GET);
 spip_desinfecte($_POST);
 spip_desinfecte($_COOKIE);
 #	if (@ini_get('register_globals')) // pas fiable
 spip_desinfecte($GLOBALS);
-# a la fin supprimer la variable anti-recursion devenue inutile
-# (et meme nuisible, notamment si on teste $_POST)
+// a la fin supprimer la variable anti-recursion devenue inutile
+// (et meme nuisible, notamment si on teste $_POST)
 unset($_GET['spip_recursions']);
 unset($_POST['spip_recursions']);
 unset($_COOKIE['spip_recursions']);
