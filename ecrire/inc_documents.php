@@ -722,6 +722,15 @@ entites_html($document['fichier'])."\" />\n";
 			//
 			// Recuperer la vignette et afficher le doc
 			//
+
+			// Indiquer les documents manquants
+			if ($document['distant'] != 'oui'
+			AND !@file_exists(_DIR_RACINE.$document['fichier']))
+				echo "<img src='" . _DIR_IMG_PACK
+				. "warning-24.gif' style='float: right;' alt=\""
+				. _L('Attention : document manquant'). "\" title=\""
+				. _L('Attention : document manquant'). "\" />";
+
 			echo document_et_vignette($document, $url, true);
 
 			echo "</div>"; // fin du bloc vignette + rotation
@@ -867,17 +876,19 @@ function  afficher_rotateurs($album, $document, $type, $id_article, $id_document
 
 	// bloc rotation de l'image
 	// si c'est une image, qu'on sait la faire tourner, qu'elle
-	// n'est pas distante, et qu'elle n'a pas de vignette perso 
-	// et qu'on a la bibli !
+	// n'est pas distante, qu'elle est bien presente dans IMG/
+	// qu'elle n'a pas de vignette perso ; et qu'on a la bibli !
 	if ($document['distant']!='oui' AND !$id_vignette
 	AND strstr($GLOBALS['meta']['formats_graphiques'],
 		   $ftype[$document['id_type']])
 	AND ($process == 'imagick' OR $process == 'gd2'
-	OR $process == 'convert' OR $process == 'netpbm') ) {
+	OR $process == 'convert' OR $process == 'netpbm')
+	AND @file_exists(_DIR_RACINE.$document['fichier'])
+	) {
 
 		echo "\n<div class='verdana1' style='float: $spip_lang_right; text-align: $spip_lang_right;'>";
 
-		  // tournerr a gauche
+		  // tourner a gauche
 		echo http_href_img(bouton_tourner_document($id_article, $id_document, $album, -90, $type), 'tourner-gauche.gif', "style='border-width: 0px;'", _T('image_tourner_gauche'), '', 'bouton_rotation');
 		echo "<br />";
 

@@ -113,7 +113,7 @@ if ($logout) {
 		}
 		unset ($auteur_session);
 	}
-
+	spip_log("logout: $logout");
 	redirige_par_entete($url ? $url : generer_url_public('spip_login'));
 }
 
@@ -188,8 +188,11 @@ if ($essai_login == "oui") {
 		if ($session_password || $session_password_md5)
 			$redirect .= '&var_erreur=pass';
 		$redirect .= '&url=' . urlencode($url);
+		spip_log("echec login: $login");
 	}
- }
+	else
+		spip_log("login: $login");
+}
 
 // cookie d'admin ?
 if ($cookie_admin == "non") {
