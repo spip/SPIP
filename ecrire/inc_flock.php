@@ -149,7 +149,9 @@ function creer_repertoire($base, $subdir) {
 		@unlink("$path/.test");
 	}
 	if ($ok) return "$subdir/";
-	redirige_par_entete(generer_url_action('test_dirs','',true));
+
+	redirige_par_entete(generer_url_action('test_dirs',
+		'test_dir='.urlencode($path),true));
 }
 
 ?>
