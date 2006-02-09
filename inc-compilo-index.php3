@@ -318,7 +318,8 @@ function champs_traitements ($p) {
 		case 'signatures':
 		case 'syndic_articles':
 			$champs_surs = array(
-			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx');
+			'date', 'date_heure', 'statut', 'ip', 'url_article', 'maj', 'idx',
+			'parametres_forum');
 			if (!in_array(strtolower($p->nom_champ), $champs_surs)
 			AND !preg_match(',^ID_,', $p->nom_champ))
 				$ps = 'safehtml('.$ps.')';
