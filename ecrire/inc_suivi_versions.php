@@ -41,7 +41,8 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 		$req_where = " AND articles.statut IN ('prop','publie')";
 	}
 	
-	if (strlen($lang) > 0) $req_where .= " AND articles.lang='$lang'";
+	if (strlen($lang) > 0)
+		$req_where .= " AND articles.lang='".addslashes($lang)."'";
 
 	if ($id_secteur > 0) $req_where .= " AND articles.id_secteur = $id_secteur";
 
