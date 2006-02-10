@@ -65,31 +65,22 @@ function ecrire_stats() {
 	}
 
 	//
-	// stockage sous forme de fichier ecrire/data/stats_200511161005/client_id
+	// stockage sous forme de fichier ecrire/data/stats/client_id
 	//
 
-	// 1. Chercher dans les paniers recents (moins de 30 minutes) s'il existe
-	// deja une session pour ce numero IP. Chaque panier couvre 5 minutes
+	// 1. Chercher s'il existe deja une session pour ce numero IP.
 	$content = array();
-	for ($i = -5; $i <= 0; $i++) {
-		$panier = date('YmdHi', (intval(time()/300)+$i)*300);
-		if (@file_exists($s = _DIR_SESSIONS.'stats_'.$panier.'/'.$client_id)) {
-			lire_fichier($s, $content);
-			$content = @unserialize($content);
-			if ($i<0) @unlink($s);
-			break;
-		}
-	}
+	$session = sous_repertoire(_DIR_SESSIONS, 'visites') . $client_id;
+	if (@file_exists($session)
+	AND lire_fichier($session, $content))
+		$content = @unserialize($content);
 
-	// 2. Determiner le fichier session dans le panier actuel
-	$panier = date('YmdHi', (intval(time()/300))*300);
-	$dir = _DIR_SESSIONS.creer_repertoire(_DIR_SESSIONS,'stats_'.$panier);
-
-	// 3. Plafonner le nombre de hits pris en compte pour un IP (robots etc.)
+	// 2. Plafonner le nombre de hits pris en compte pour un IP (robots etc.)
+	// et ecrire la session
 	if (count($content) < 200) {
 		$entree = trim("$log_type\t$log_id_num\t$log_referer");
 		$content[$entree] ++;
-		ecrire_fichier($s, serialize($content));
+		ecrire_fichier($session, serialize($content));
 	}
 }
 

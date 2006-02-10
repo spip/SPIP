@@ -133,25 +133,95 @@ function supprimer_fichier($fichier) {
 
 
 //
-// Retourne $subdir/ si le sous-repertoire peut etre cree, '' sinon
+// Retourne $base/${subdir}/ si le sous-repertoire peut etre cree,
+// $base/${subdir}_ sinon ; le flag $nobase signale qu'on ne veut pas de $base/
 //
-function creer_repertoire($base, $subdir) {
+function sous_repertoire($base, $subdir, $nobase = false) {
+	$base = str_replace("//", "/", "$base/");
+	$baseaff = $nobase ? '' : $base;
+
+	if (!strlen($subdir)) return $baseaff;
+
+	$subdir = str_replace("/", "", "$subdir");
+
+	if (@file_exists("$base${subdir}.plat"))
+		return "$baseaff${subdir}_";; 
+
 	$path = $base.'/'.$subdir;
-	if (@is_dir($path)) return "$subdir/";
+	if (@file_exists("$path/.ok"))
+		return "$baseaff$subdir/";
 
 	@mkdir($path, 0777);
 	@chmod($path, 0777);
+
 	$ok = false;
-	if ($f = @fopen("$path/.test", "w")) {
+	if ($f = @fopen("$path/dir_test.php", "w")) {
 		@fputs($f, '<'.'?php $ok = true; ?'.'>');
 		@fclose($f);
-		include("$path/.test");
-		@unlink("$path/.test");
+		@include("$path/dir_test.php");
+		@unlink("$path/dir_test.php");
 	}
-	if ($ok) return "$subdir/";
+	if ($ok) {
+		@touch ("$path/.ok");
+		spip_log("creation $base$subdir/");
+		return "$baseaff$subdir/";
+	}
 
-	redirige_par_entete(generer_url_action('test_dirs',
-		'test_dir='.urlencode($path),true));
+	$f = @fopen("$base${subdir}.plat", "w");
+	if ($f)
+		fclose($f);
+	else {
+		spip_log("echec creation $base${subdir}_");
+		redirige_par_entete(generer_url_action('test_dirs','',true));
+	}
+	spip_log("faux sous-repertoire $base${subdir}_");
+	return "$baseaff${subdir}_";
+}
+// compatibilite ascendante
+function creer_repertoire($base, $subdir) {
+	return sous_repertoire($base, $subdir, true);
+}
+
+//
+// Cette fonction parcourt recursivement le repertoire $dir, et renvoie les
+// fichiers dont le chemin verifie le pattern (preg) donne en argument.
+// En cas d'echec retourne un array() vide
+//
+// Usage: array preg_files('ecrire/data/', '[.]lock$');
+//
+// Attention, afin de conserver la compatibilite avec les repertoires '.plat'
+// si $dir = 'rep/sous_rep_' au lieu de 'rep/sous_rep/' on scanne 'rep/' et on
+// applique un pattern '^rep/sous_rep_'
+//
+function preg_files($dir, $pattern=-1 /* AUTO */ ) {
+	if ($pattern == -1)
+		$pattern = "^$dir";
+	$fichiers = array();
+	$dir = preg_replace(',/[^/]*$,', '', $dir);
+
+	if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
+		while (($f = readdir($d)) !== false) {
+			if ($f[0] != '.' # ignorer . .. .svn etc
+			AND $f != 'CVS'
+			AND $f != 'remove.txt'
+			AND is_readable("$dir/$f")) {
+				if (is_file("$dir/$f")) {
+					if (preg_match(",$pattern,i", "$dir/$f"))
+						$fichiers[] = "$dir/$f";
+				} else if (is_dir("$dir/$f")) {
+					$fichiers = array_merge($fichiers,
+						preg_files("$dir/$f", $pattern));
+				}
+			}
+		}
+		closedir($d);
+		sort($fichiers);
+	}
+	else
+		spip_log("repertoire $dir absent ou illisible");
+
+	sort($fichiers);
+	return $fichiers;
 }
 
 ?>

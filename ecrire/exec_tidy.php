@@ -113,7 +113,7 @@ function traite_xhtml ($buffer) {
 
 		list($buffer, $les_echap) = echappe_xhtml($buffer); # math et textarea
 
-		$cache = _DIR_CACHE.creer_repertoire(_DIR_CACHE,'tidy');
+		$cache = sous_repertoire(_DIR_CACHE,'tidy');
 		$nomfich = $cache.'tidy'.md5($buffer);
 		if (!file_exists($nomfich)) {
 			define ('_calcul_tidy', 1);

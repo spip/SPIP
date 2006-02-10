@@ -431,38 +431,11 @@ function inserer_documents($letexte) {
 
 
 //
-// Parcourt recursivement le repertoire upload/ (ou tout autre repertoire, d'ailleurs)
-//
-function fichiers_upload($dir) {
-	$fichiers = array();
-
-	if (@is_dir($dir) AND is_readable($dir)) {
-		$d = opendir($dir);
-		while (($f = readdir($d)) !== false) {
-			if (($f[0] != '.') AND is_readable("$dir/$f"))
-				if (is_file("$dir/$f") 
-				AND $f != 'remove.txt')
-					$fichiers[] = "$dir/$f";
-			else if (is_dir("$dir/$f"))
-				$fichiers = array_merge($fichiers, fichiers_upload("$dir/$f"));
-
-		}
-		closedir($d);
-
-		sort($fichiers);
-	}
-	else
-		spip_log("repertoire $dir absent ou illisible");
-
-	return $fichiers;
-}
-
-//
 // Retourner le code HTML d'utilisation de fichiers uploades a la main
 //
 
 function texte_upload_manuel($dir, $inclus = '') {
-	$fichiers = fichiers_upload($dir);
+	$fichiers = preg_files($dir);
 	$exts = array();
 	$dirs = array();
 	foreach ($fichiers as $f) {

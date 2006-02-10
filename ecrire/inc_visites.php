@@ -28,7 +28,8 @@ function compte_fichier_visite($fichier,
 
 	$content = array();
 	if (lire_fichier($fichier, $content))
-		$content = unserialize($content);
+		$content = @unserialize($content);
+	if (!is_array($content)) return;
 
 	foreach ($content as $source => $num) {
 		list($log_type, $log_id_num, $log_referer)
@@ -62,41 +63,21 @@ function calculer_visites($t) {
 	// charger un certain nombre de fichiers de visites,
 	// et faire les calculs correspondants
 
-	// 1. Chercher les paniers datant d'au moins 30 minutes
-	$date_init = date('YmdHi', time()-30*60);
-	$paniers = array();
-	$dir = opendir(_DIR_SESSIONS);
-	while (($item = readdir($dir)) !== false) {
-		if (preg_match(',^stats_([0-9]{12})$,', $item, $regs)
-		AND $regs[1]<$date_init
-		AND is_dir(_DIR_SESSIONS.$item))
-			$paniers[] = $item;
-	}
-	closedir($dir);
+	// Traiter jusqu'a 100 sessions datant d'au moins 30 minutes
+	$sessions = preg_files(sous_repertoire(_DIR_SESSIONS, 'visites'));
 
-	// 2. Manger 100 fichiers de ces paniers (sans ordre particulier)
 	$compteur = 100;
-	$pasfini = false;
-	foreach ($paniers as $panier) {
-		spip_log("traite le panier $panier");
-		$dir = opendir(_DIR_SESSIONS.$panier);
-		while (($item = readdir($dir)) !== false) {
-			if ($compteur-- < 0) {
-				$pasfini = true;
-				break;
-			}
-			if (is_file($f = _DIR_SESSIONS.$panier.'/'.$item)) {
-				compte_fichier_visite($f,
-					$visites, $visites_a, $referers, $referers_a, $articles);
-				@unlink($f);
-			}
-		}
-		// effacer le panier, sauf si on a atteint la limite de fichiers vus
-		closedir($dir);
-		if ($pasfini)
-			break;
-		else
-			@rmdir(_DIR_SESSIONS.$panier);
+	$date_init = time()-30*60;
+
+	while ($compteur -- > 0
+	AND list(,$item) = each($sessions)) {
+		if (@filemtime($item) < $date_init) {
+			spip_log("traite la session $item");
+			compte_fichier_visite($item,
+				$visites, $visites_a, $referers, $referers_a, $articles);
+			@unlink($item);
+		} else
+			spip_log("$item pas vieux");
 	}
 
 	if (!$visites) return;

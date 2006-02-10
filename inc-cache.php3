@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
-// Le format souhaite : "CACHE/a/bout-d-url.md5(.gz)"
+// Le format souhaite : "a/bout-d-url.md5(.gz)"
 // Attention a modifier simultanement le sanity check de
 // la fonction retire_cache()
 //
@@ -45,8 +45,8 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	$md_cache = md5($fichier_requete . $_SERVER['HTTP_HOST'] . $fond);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
-	// Sous-repertoires 0...9a..f/
-	$subdir = creer_repertoire(_DIR_CACHE, substr($md_cache, 0, 1));
+	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
+	$subdir = sous_repertoire(_DIR_CACHE, substr($md_cache, 0, 1), true);
 
 	include_ecrire('inc_acces');
 	verifier_htaccess(_DIR_CACHE);
@@ -270,15 +270,12 @@ function restaurer_meta_donnees ($contenu) {
 // vieux fichiers
 function nettoyer_petit_cache($prefix, $duree = 300) {
 	// determiner le repertoire a purger : 'CACHE/rech/'
-	$dircache = _DIR_CACHE . creer_repertoire(_DIR_CACHE,$prefix);
+	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
-		if ($h = @opendir($dircache)) {
-			while (($f = @readdir($h)) !== false) {
-				if (preg_match(',^'.$prefix.'_,', $f)
-				AND time() - filemtime("$dircache$f") > $duree) {
-					@unlink("$dircache$f");
-					@unlink("$dircache$f.err"); # pour tidy
-				}
+		foreach (preg_files("$dircache$prefix") as $f) {
+			if (time() - filemtime($f) > $duree) {
+				@unlink($f);
+				@unlink("$f.err"); # pour tidy
 			}
 		}
 	}

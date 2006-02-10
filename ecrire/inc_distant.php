@@ -187,8 +187,8 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 // mais la tout de suite je ne trouve pas l'idee, etant donne les limitations
 // des filesystems
 function nom_fichier_copie_locale($source, $extension) {
-	$dir = _DIR_IMG. creer_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
-	$dir2 = $dir . creer_repertoire($dir, $extension); 		# IMG/distant/pdf/
+	$dir = sous_repertoire(_DIR_IMG, 'distant'); # IMG/distant/
+	$dir2 = sous_repertoire($dir, $extension); 		# IMG/distant/pdf/
 	return $dir2 . substr(basename($source).'-'.md5($source),0,12).
 		substr(md5($source),0,4).'.'.$extension;
 }
