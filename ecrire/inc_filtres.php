@@ -873,6 +873,7 @@ function hauteur($img) {
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	include_ecrire("inc_logos");
 
+
 	if (strlen($img)==0) return false;
 
 	
@@ -901,6 +902,13 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	if ($term_fonction == "jpg") $term_fonction = "jpeg";
 	$term_fonction_dest = $terminaison_dest;
 	if ($term_fonction_dest == "jpg") $term_fonction_dest = "jpeg";
+
+	// Placer le fichier destination dans IMG/cache-gd2/
+	if (ereg("\/", $fichier_dest)) {
+		$fichier_dest = substr($fichier_dest, strrpos($fichier_dest,"/")+1, strlen($fichier_dest));
+	}
+	$destdir = creer_repertoire(_DIR_IMG, "cache-gd2");
+	$fichier_dest = _DIR_IMG . $destdir . $fichier_dest;
 	
 	$fonction_imagecreatefrom = "imagecreatefrom".$term_fonction;
 	$fonction_image = "image".$term_fonction_dest;
