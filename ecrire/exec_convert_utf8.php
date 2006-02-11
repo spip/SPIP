@@ -16,9 +16,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire('inc_admin');
 
 
-function demander_conversion($tables_a_convertir) {
+function demander_conversion($tables_a_convertir, $action) {
 
-	$action = _L('Conversion utf-8');
 
 	$charset_orig = $GLOBALS['meta']['charset'];
 
@@ -26,7 +25,8 @@ function demander_conversion($tables_a_convertir) {
 		$commentaire = 'Votre site est d&eacute;j&agrave; en utf-8, inutile de le convertir...';
 	else {
 		$commentaire = _L("Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res ".("<b>".$GLOBALS['meta']['charset']."</b>")." vers le jeu de caract&egrave;res universel <b>utf-8</b>.");
-		$commentaire .= _L("<p>Note&nbsp;: en cas de timeout, veuillez simplement recharger la page jusqu'à ce qu'elle indique 'terminé'.");
+		$commentaire .= _L("<p>N'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles utf-8.");
+		$commentaire .= _L("<p>Note&nbsp;: en cas de timeout, veuillez simplement recharger la page jusqu'&agrave; ce qu'elle indique 'termin&eacute;'.");
 	}
 
 	// tester si le charset d'origine est connu de spip
@@ -42,7 +42,7 @@ function demander_conversion($tables_a_convertir) {
 	ecrire_metas();
 	foreach ($tables_a_convertir as $table => $champ) {
 		spip_log("demande update charset table $table ($champ)");
-		echo("demande update charset table $table ($champ)<br>\n");
+		echo _L("demande update charset table $table ($champ)<br>\n");
 		spip_query("UPDATE $table
 		SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)
 		WHERE $champ NOT LIKE '<CONVERT %'");
@@ -73,13 +73,19 @@ function convert_utf8_dist() {
 	);
 	## quid de spip_meta ?
 
+	// Definir le titre de la page (et le nom du fichier admin)
+	$action = _L('Conversion utf-8');
 
 	// si l'appel est explicite, passer par l'authentification ftp
 	if (!$GLOBALS['meta']['conversion_charset']) {
-		demander_conversion($tables_a_convertir);
+		demander_conversion($tables_a_convertir, $action);
 	}
 
+
 	// sinon commencer (ou continuer apres un timeout et reload)
+
+	install_debut_html($action);
+
 	foreach ($tables_a_convertir as $table => $champ) {
 		echo "<br>$table ($champ) :<br>";
 		$s = spip_query("SELECT * FROM $table
@@ -89,6 +95,7 @@ function convert_utf8_dist() {
 		preg_match(',^spip_(.*?)s?$,', $table, $r);
 		$id_champ = 'id_'.$r[1];
 		if ($table == 'spip_petitions') $id_champ = 'id_article';
+		if ($table == 'spip_groupes_mots') $id_champ = 'id_groupe';
 
 		// lire les donnees dans un array
 		while ($t = spip_fetch_array($s, SPIP_ASSOC)) {
@@ -108,10 +115,12 @@ function convert_utf8_dist() {
 			. " AND $champ LIKE '<CONVERT %'"; # eviter une double conversion
 
 			// Mais on la transcode
-			$query = unicode_to_utf_8(charset2unicode($query, $charset_source));
-
-			spip_query($query);
-			echo '.                                                 '; flush();
+			if ($charset_source != 'utf-8') {
+				$query = unicode_to_utf_8(
+					charset2unicode($query, $charset_source));
+				spip_query($query);
+				echo '.                                           '; flush();
+			}
 		}
 		spip_free_result($s);
 	}
@@ -122,7 +131,9 @@ function convert_utf8_dist() {
 
 	// C'est fini, supprimer le fichier autorisant les modifs
 	fin_admin($action);
-
+	
+	// bouton "retour au site" + redirige_par_entete
+	install_fin_html();
 }
 
 
