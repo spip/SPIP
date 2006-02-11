@@ -12,6 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+$GLOBALS['version_archive'] = '1.2';
+
 include_ecrire('inc_admin');
 
 function export_all_dist()
@@ -25,7 +27,7 @@ if (!$archive) {
 
 $action = _T('info_exportation_base', array('archive' => $archive));
 
-debut_admin(generer_url_post_ecrire("export_all","archive=$archive"), $action);
+debut_admin(generer_url_post_ecrire("export_all","archive=$archive&gz=$gz"), $action);
 
 $debug_limit = '';
 

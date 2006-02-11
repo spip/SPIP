@@ -11,12 +11,7 @@
 \***************************************************************************/
 
 
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
-
-
-$GLOBALS['version_archive'] = '1.2';
-
 
 // Conversion timestamp MySQL (format ascii) en Unix (format integer)
 function mysql_timestamp_to_time($maj)
