@@ -98,6 +98,15 @@ echo "<p>";
 	echo bouton_radio('charset', 'utf-8',
 		_T('bouton_radio_universel'), $charset == 'utf-8');
 	echo "<br>";
+
+	if ($charset != 'utf-8'
+	AND load_charset($charset)) {
+
+		echo generer_url_post_ecrire('convert_utf8');
+		echo "\n<div align='center'><input class='fondo' type='submit' VALUE='". _L("Convertir votre site en utf-8") ."'></div></form>";
+		echo "<br>";
+	}
+
 	echo bouton_radio('charset', 'iso-8859-1',
 		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
 	echo "<br>";
