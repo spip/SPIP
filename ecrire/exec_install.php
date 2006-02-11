@@ -119,12 +119,26 @@ function install_6()
 	echo "<B>"._T('info_code_acces')."</B>";
 	echo "<P>"._T('info_utilisation_spip');
 
-	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
-	include_ecrire ("inc_meta");
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP))
+		include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	else
+		redirige_par_entete(generer_url_ecrire('install'));
+
+	# maintenant on connait le vrai charset du site s'il est deja configure
+	# sinon par defaut inc_meta reglera _DEFAULT_CHARSET
+	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
+	include_ecrire ('inc_meta');
+	lire_metas();
 
 	if ($login) {
-		$nom = addslashes($nom);
-		$login = addslashes($login);
+		include_ecrire ('inc_charsets');
+
+		$nom = addslashes(importer_charset($nom, _DEFAULT_CHARSET));
+		$login = addslashes(importer_charset($login, _DEFAULT_CHARSET));
+		$email = addslashes(importer_charset($email, _DEFAULT_CHARSET));
+		# pour le passwd, bizarrement il faut le convertir comme s'il avait
+		# ete tape en iso-8859-1 ; car c'est en fait ce que voit md5.js
+		$pass = unicode2charset(utf_8_to_unicode($pass), 'iso-8859-1');
 		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
 		$result = spip_query($query);
 		unset($id_auteur);
@@ -174,7 +188,10 @@ function install_5()
 
 	install_debut_html();
 
-	include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	if (@file_exists(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP))
+		include(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
+	else
+		redirige_par_entete(generer_url_ecrire('install'));
 
 	echo "<BR />\n<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3>"._T('info_informations_personnelles')."</FONT>";
 	echo "<P>\n";
@@ -296,9 +313,13 @@ function install_4()
 		$conn .= "spip_connect_db('$adresse_db','','$login_db','$pass_db','$sel_db');\n";
 #		$conn .= "\$GLOBALS['db_ok'] = !!@spip_num_rows(@spip_query_db('SELECT COUNT(*) FROM spip_meta'));\n";
 		$conn .= "?".">";
-		$myFile = fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb");
-		fputs($myFile, $conn);
-		fclose($myFile);
+		if ($myFile =
+		@fopen(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP, "wb")) {
+			fputs($myFile, $conn);
+			fclose($myFile);
+		}
+		else
+			redirige_par_entete(generer_url_ecrire('install'));
 
 		echo "<B>"._T('info_base_installee')."</B><P>\n"._T('info_etape_suivante_1');
 

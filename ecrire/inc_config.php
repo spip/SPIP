@@ -62,7 +62,7 @@ function init_config() {
 
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
-		'charset' => 'iso-8859-1',
+		'charset' => _DEFAULT_CHARSET,
 
 		'creer_htpasswd' => 'non',
 		'creer_htaccess' => 'non',
@@ -82,9 +82,7 @@ function init_config() {
 		}
 	}
 
-	// Cas particulier : charset regle a utf-8 uniquement si nouvelle installation
 	if ($GLOBALS['meta']['nouvelle_install'] == 'oui') {
-		//ecrire_meta('charset', 'utf-8');
 		effacer_meta('nouvelle_install');
 		$modifs = true;
 	}
