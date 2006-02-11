@@ -155,14 +155,12 @@ function convert_utf8_dist() {
 
 			// Mais on la transcode
 			if ($charset_source != 'utf-8') {
-				$query2 = unicode_to_utf_8(
+				$query = unicode_to_utf_8(
 					charset2unicode($query, $charset_source));
-				# ne pas up la base si l'objet n'a pas change
-				if ($query2 != $query)
-					spip_query($query2
-						# eviter une double conversion
-						." AND $champ LIKE '<CONVERT %'"
-					);
+				spip_query($query
+					# eviter une double conversion
+					." AND $champ LIKE '<CONVERT %'"
+				);
 				echo '.           '; flush();
 			}
 		}
