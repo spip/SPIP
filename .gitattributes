@@ -41,6 +41,7 @@ ecrire/exec_config_multilang.php -text
 ecrire/exec_configuration.php -text
 ecrire/exec_controle_forum.php -text
 ecrire/exec_controle_petition.php -text
+ecrire/exec_convert_utf8.php -text
 ecrire/exec_delete_all.php -text
 ecrire/exec_documents_liste.php -text
 ecrire/exec_export_all.php -text
