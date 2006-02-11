@@ -41,12 +41,12 @@ function demander_conversion($tables_a_convertir, $action) {
 			$action, $commentaire);
 
 		// noter dans les meta qu'on veut convertir
-		ecrire_meta('conversion_charset', time());
+		ecrire_meta('conversion_charset', $charset_orig);
 		ecrire_meta('charset', 'utf-8');
 		ecrire_metas();
 		foreach ($tables_a_convertir as $table => $champ) {
 			spip_log("demande update charset table $table ($champ)");
-			echo _L("demande update charset table $table ($champ)<br>\n");
+			#echo _L("demande update charset table $table ($champ)<br>\n");
 			spip_query("UPDATE $table
 			SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)
 			WHERE $champ NOT LIKE '<CONVERT %'");
@@ -71,8 +71,10 @@ function convert_utf8_dist() {
 	lire_metas();
 
 	// une liste des tables a convertir, avec le champ dans lequel on
-	// indique '<CONVERT charset>'
+	// indique '<CONVERT charset>' ; on commence par les rubriques sinon
+	// ca fait desordre dans l'interface privee
 	$tables_a_convertir = array(
+		'spip_rubriques' => 'titre',
 		'spip_auteurs' => 'nom',
 		'spip_articles' => 'titre',
 		'spip_breves' => 'titre',
@@ -81,28 +83,37 @@ function convert_utf8_dist() {
 		'spip_mots' => 'titre',
 		'spip_groupes_mots' => 'titre',
 		'spip_petitions' => 'texte',
-		'spip_rubriques' => 'titre',
 		'spip_signatures' => 'nom_email',
 		'spip_syndic' => 'nom_site',
 		'spip_messages' => 'titre'
 	);
-	## quid de spip_meta ?
-
+#	$tables_a_convertir = array();
 	// Definir le titre de la page (et le nom du fichier admin)
 	$action = _L('Conversion utf-8');
 
 	// si l'appel est explicite, passer par l'authentification ftp
 	if (!$GLOBALS['meta']['conversion_charset']) {
 		demander_conversion($tables_a_convertir, $action);
+
+		// si on est la c'est que l'autorisation ftp vient d'etre donnee
+
+		// convertir spip_meta
+		$charset_source = lire_meta('conversion_charset');
+		foreach ($GLOBALS['meta'] as $c => $v) {
+			$v2 = unicode_to_utf_8(charset2unicode($v, $charset_source));
+			if ($v2 != $v)
+				ecrire_meta($c, $v);
+		}
+		ecrire_metas();
 	}
 
-
-	// sinon commencer (ou continuer apres un timeout et reload)
+	// commencer (ou continuer apres un timeout et reload)
 
 	install_debut_html($action);
 
 	// preparer un fichier de sauvegarde au cas ou
-	$f = @fopen(_DIR_SESSIONS.'backup_conversion.sql', 'w');
+	// on met 'a' car ca peut demander plusieurs rechargements
+	$f = @fopen(_DIR_SESSIONS.'convert_utf8_backup.sql', 'a');
 
 
 	foreach ($tables_a_convertir as $table => $champ) {
