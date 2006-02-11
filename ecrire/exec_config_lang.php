@@ -86,10 +86,11 @@ echo "<p>";
 // Configuration du charset
 //
 
+$charset = $GLOBALS['meta']["charset"];
+
 #if ($options == 'avancees') {
 	debut_cadre_relief("breve-24.gif", false, "", _T('info_jeu_caractere'));
 
-	$charset = $GLOBALS['meta']["charset"];
 
 	echo _T('texte_jeu_caractere')."<p>";
 	echo "<blockquote class='spip'><p>"._T('texte_jeu_caractere_2')."</p></blockquote>";
@@ -98,14 +99,6 @@ echo "<p>";
 	echo bouton_radio('charset', 'utf-8',
 		_T('bouton_radio_universel'), $charset == 'utf-8');
 	echo "<br>";
-
-	if ($charset != 'utf-8'
-	AND load_charset($charset)) {
-
-		echo generer_url_post_ecrire('convert_utf8');
-		echo "\n<div align='center'><input class='fondo' type='submit' VALUE='". _L("Convertir votre site en utf-8") ."'></div></form>";
-		echo "<br>";
-	}
 
 	echo bouton_radio('charset', 'iso-8859-1',
 		_T('bouton_radio_occidental'), $charset == 'iso-8859-1');
@@ -126,8 +119,18 @@ echo "<p>";
 
 #} # /avancees
 
-
 echo "</form>";
+
+
+	if ($charset != 'utf-8'
+	AND load_charset($charset)) {
+
+		echo generer_url_post_ecrire('convert_utf8');
+		echo "\n<div align='center'><input class='fondo' type='submit' VALUE='". _L("Convertir votre site en utf-8") ."'></div></form>";
+		echo "<br>";
+	}
+
+
 
 fin_page();
 }
