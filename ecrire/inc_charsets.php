@@ -177,7 +177,9 @@ function mathml2unicode($texte) {
 //
 // Transforme une chaine en entites unicode &#129;
 //
-function charset2unicode($texte, $charset='AUTO', $forcer = false) {
+// Note: l'argument $forcer est obsolete : il visait a ne pas
+// convertir les accents iso-8859-1
+function charset2unicode($texte, $charset='AUTO' /* $forcer: obsolete*/) {
 	static $trans;
 
 	if ($charset == 'AUTO')
@@ -201,10 +203,7 @@ function charset2unicode($texte, $charset='AUTO', $forcer = false) {
 			chr(158) => "&#382;" // zcaron
 		);
 		$texte = strtr($texte, $faux_latin);
-
-		// On commente cet appel tant qu'il reste des spip v<1.5 dans la nature
-		// pour que le filtre |entites_unicode donne des backends lisibles sur ces spips.
-		if (!$forcer) return $texte;
+		// pas de break; ici, on suit sur default:
 
 	default:
 		// mbstring presente ?
@@ -504,19 +503,51 @@ function translitteration_chiffree($car) {
 function bom_utf8($texte) {
 	return (substr($texte, 0,3) == chr(0xEF).chr(0xBB).chr(0xBF));
 }
+// Verifie qu'un document est en utf-8 valide
+// http://us2.php.net/manual/fr/function.mb-detect-encoding.php#50087
+// http://w3.org/International/questions/qa-forms-utf-8.html
+function is_utf8($string) {
+	return preg_match('%^(?:
+	[\x09\x0A\x0D\x20-\x7E]            # ASCII
+	| [\xC2-\xDF][\x80-\xBF]            # non-overlong 2-byte
+	|  \xE0[\xA0-\xBF][\x80-\xBF]        # excluding overlongs
+	| [\xE1-\xEC\xEE\xEF][\x80-\xBF]{2}  # straight 3-byte
+	|  \xED[\x80-\x9F][\x80-\xBF]        # excluding surrogates
+	|  \xF0[\x90-\xBF][\x80-\xBF]{2}    # planes 1-3
+	| [\xF1-\xF3][\x80-\xBF]{3}          # planes 4-15
+	|  \xF4[\x80-\x8F][\x80-\xBF]{2}    # plane 16
+	)*$%xs', $string);
+}
+function is_ascii($string) {
+	return preg_match('%^(?:
+	[\x09\x0A\x0D\x20-\x7E]            # ASCII
+	)*$%xs', $string);
+}
 
-// Transcode une page (probablement attrapee sur le web) en essayant
+// Transcode une page (attrapee sur le web, ou un squelette) en essayant
 // par tous les moyens de deviner son charset (y compris headers HTTP)
 function transcoder_page($texte, $headers='') {
 
+	// Si tout est < 128 pas la peine d'aller plus loin
+	if (is_ascii($texte)) {
+		#spip_log('charset: ascii');
+		return $texte;
+	}
+
 	// Reconnaitre le BOM utf-8 (0xEFBBBF)
-	if (bom_utf8($texte))
+	if (bom_utf8($texte)) {
 		$charset = 'utf-8';
+		$texte = substr($texte,3);
+	}
+
 	// charset precise par le contenu (xml)
-	else if (preg_match(',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
+	else if (preg_match(
+	',<[?]xml[^>]*encoding[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
 		$charset = trim(strtolower($regs[1]));
 	// charset precise par le contenu (html)
-	else if (preg_match(',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),Uims', $texte, $regs))
+	else if (preg_match(
+	',<(meta|html|body)[^>]*charset[^>]*=[^>]*([-_a-z0-9]+?),Uims',
+	$texte, $regs))
 		$charset = trim(strtolower($regs[2]));
 	// charset de la reponse http
 	else if (preg_match(',charset=([-_a-z0-9]+),i', $headers, $regs))
@@ -527,11 +558,14 @@ function transcoder_page($texte, $headers='') {
 		$charset = 'shift-jis';
 
 	if ($charset) {
-		spip_log("charset source detecte : $charset");
+		spip_log("charset: $charset");
 	} else {
 		// valeur par defaut
-		$charset = 'iso-8859-1';
-		spip_log("pas de charset detecte, on suppose : $charset");
+		if (is_utf8($texte))
+			$charset = 'utf-8';
+		else
+			$charset = 'iso-8859-1';
+		spip_log("charset probable: $charset");
 	}
 
 	return importer_charset($texte, $charset);
