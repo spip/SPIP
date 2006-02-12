@@ -197,8 +197,11 @@ function preg_files($dir, $pattern=-1 /* AUTO */ ) {
 	if ($pattern == -1)
 		$pattern = "^$dir";
 	$fichiers = array();
-	// A quoi sert cette ligne?
-//	$dir = preg_replace(',/[^/]*$,', '', $dir);
+
+	// revenir au repertoire racine si on a recu dossier/truc
+	// pour regarder dossier/truc/ ne pas oublier le / final
+	$dir = preg_replace(',/[^/]*$,', '', $dir);
+	if ($dir == '') $dir = '.';
 
 	if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
 		while (($f = readdir($d)) !== false) {
@@ -211,7 +214,7 @@ function preg_files($dir, $pattern=-1 /* AUTO */ ) {
 						$fichiers[] = "$dir/$f";
 				} else if (is_dir("$dir/$f")) {
 					$beginning = $fichiers;
-					$end = preg_files("$dir/$f", $pattern);
+					$end = preg_files("$dir/$f/", $pattern);
 					$fichiers = array_merge((array)$beginning, (array)$end);
 				}
 			}

@@ -117,19 +117,14 @@ function afficher_logo($racine, $titre, $logo, $redirect) {
 		  _T('bouton_telecharger'),
 		  "' class='fondo' style='font-size:9px' /></div>";
 		$afficher = "";
-		if ($GLOBALS['flag_upload']) {
-			if (@is_dir(_DIR_TRANSFERT) AND is_readable(_DIR_TRANSFERT)) {
-				$myDir = opendir(_DIR_TRANSFERT);
-				while(($entryName = readdir($myDir)) !== false){
-					if (!ereg("^\.",$entryName) AND eregi("(gif|jpg|png)$",$entryName)){
-						$entryName = addslashes($entryName);
-						$afficher .= "\n<option value='$entryName'>$entryName</option>";
-					}
-				}
-				closedir($myDir);
-			} else
-				spip_log("repertoire "._DIR_TRANSFERT." absent ou illisible");
+		if ($GLOBALS['flag_upload']
+		AND $fichiers = preg_files(_DIR_TRANSFERT, '[.](gif|jpg|png)$')) {
+			foreach ($fichiers as $f) {
+				$f = substr($f, strlen(_DIR_TRANSFERT));
+				$afficher .= "\n<option value='$f'>$f</option>";
+			}
 		}
+
 		if (!$afficher) {
 		  echo _T('info_installer_images_dossier',
 			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'));
