@@ -12,6 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
+
 include_ecrire("inc_presentation");
 include_ecrire("inc_texte");
 include_ecrire("inc_rubriques");
@@ -1365,8 +1366,10 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
   global $connect_statut;
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
+  	
     echo generer_url_post_ecrire("articles", "id_article=$id_article"),
-      "\n<CENTER>", "<B>",_T('texte_article_statut'),"</B>",
+	  debut_cadre_relief("", true),
+      "\n<center>", "<B>",_T('texte_article_statut'),"</B>",
 	  "\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n",
 	  "onChange=\"document.statut.src='",
 	  _DIR_IMG_PACK,
@@ -1388,9 +1391,9 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 	echo "<INPUT TYPE='submit' VALUE='"._T('bouton_valider')."' CLASS='fondo'>";
 	echo "</span>";
 	echo aide ("artstatut");
-	echo "</CENTER>";
-	echo "</FORM>";
+	echo "</center>";
 	fin_cadre_relief();
+	echo "</form>";
  }
 }
 
@@ -1539,7 +1542,6 @@ function insert_article($id_parent, $new)
 				. "', 'non')");
 	return $id_article;
 }
-
 // Y a-t-il vraiment 56 variables determinant l'edition d'un article ?
 
 function articles_dist()
