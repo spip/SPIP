@@ -1,4 +1,4 @@
-<?
+<?php
 
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
@@ -16,29 +16,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
-// besoin de inc_meta (et aussi de version mais on suppose qu'il est cahrgé par ailleurs ...)
-include_ecrire ("inc_db_mysql");
+// besoin de inc_meta
 include_ecrire ("inc_meta");
 
 // lecture des sous repertoire plugin existants
-function liste_plugin_files(){	
-	//unset $plugin_files;
-	$plugin_files=array();// tableau des repertoire de plugin
-  if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
-		if ($handle = opendir(_DIR_PLUGINS)) {
-			while (false !== ($file = readdir($handle))) {
-				if ($file != "." && $file != "..") {
-					if (@file_exists(_DIR_PLUGINS."$file/"._FILE_PLUGIN_CONFIG)) {
-						// verif de disponibilite des infos minimu
-						// nom, version, class
-						$infos = plugin_get_infos($file);
-						if (isset($infos['nom'])&&isset($infos['version'])&&isset($infos['class']))
-							$plugin_files[]=$file; //le plugin est "valide"
-					}
-				}
-			}
-			closedir($handle);
-		}
+function liste_plugin_files(){
+	$plugin_files=array();
+	foreach (preg_files(_DIR_PLUGINS, '/plugin[.]xml$') as $plugin) {
+		$infos = plugin_get_infos($file);
+		if (isset($infos['nom']) && isset($infos['version'])
+		&& isset($infos['prefix']))
+			$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
 	}
 	return $plugin_files;
 }
@@ -52,8 +40,11 @@ function liste_plugin_actifs(){
 		return array();
 }
 
-function ecrire_plugin_actifs($plugin){
-
+function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
+	static $liste_pipe_manquants=array();
+	if (($pipe_recherche)&&(!in_array($pipe_recherche,$liste_pipe_manquants)))
+		$liste_pipe_manquants[]=$pipe_recherche;
+	
 	$plugin_valides = array();
 	if (is_array($plugin)){
 		// charger les infos de plugin en memoire
@@ -87,11 +78,8 @@ function ecrire_plugin_actifs($plugin){
 					$s .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';'."\n";
 			}
 		}
-		$filename = _DIR_SESSIONS."charger_plugins_$charge.php";
-		if ($handle = fopen($filename, 'wb')) {
-			@fwrite($handle, $start_file . $s . $end_file);
-			@fclose($handle);
-		}
+		ecrire_fichier(_DIR_SESSIONS."charger_plugins_$charge.php",
+			$start_file . $s . $end_file);
 	}
 
 	if (is_array($infos)){
@@ -99,21 +87,26 @@ function ecrire_plugin_actifs($plugin){
 		// $GLOBALS['spip_pipeline']
 		// $GLOBALS['spip_matrice']
 		foreach($infos as $plug=>$info){
-			$class = trim(array_pop($info['class']));
+			$prefix = "";
+			$prefix = trim(array_pop($info['prefix']))."_";
 			foreach($info['pipeline'] as $pipe){
 				$nom = trim(array_pop($pipe['nom']));
 				if (isset($pipe['action']))
 					$action = trim(array_pop($pipe['action']));
 				else
 					$action = $nom;
-				$GLOBALS['spip_pipeline'][$nom] .= "|$class::$action";
+				$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
 				if (isset($pipe['inclure'])){
-					$GLOBALS['spip_matrice']["$class::$action"] = 
+					$GLOBALS['spip_matrice']["$prefix$action"] = 
 						"_DIR_PLUGINS$plug/".array_pop($pipe['inclure']);
 				}
 			}
 		}
 	}
+	// on ajoute les pipe qui ont ete recenses manquants
+	foreach($liste_pipe_manquants as $add_pipe)
+		if (!isset($GLOBALS['spip_pipeline'][$add_pipe]))
+			$GLOBALS['spip_pipeline'][$add_pipe]= '';
 
 	pipeline_precompile();
 }
@@ -121,13 +114,13 @@ function ecrire_plugin_actifs($plugin){
 // precompilsation des pipelines
 function pipeline_precompile(){
 	global $spip_pipeline, $spip_matrice;
-	$nouveaux_pipe=array();
 	
 	$start_file = "<"."?php\nif (!defined('_ECRIRE_INC_VERSION')) return;\n";
 	$end_file = "\n?".">";
+	$content = "";
 	foreach($spip_pipeline as $action=>$pipeline){
 		$s_inc = "";
-		$s_call = "function execute_pipeline_$action(\$val){\n";
+		$s_call = "";
 		$pipe = array_filter(explode('|',$pipeline));
 		// Eclater le pipeline en filtres et appliquer chaque filtre
 		foreach ($pipe as $fonc) {
@@ -147,28 +140,14 @@ function pipeline_precompile(){
 				$s_inc .= ');'."\n";
 			}
 		}
-		$s_inc .= "\n";
-		$s_call .= "return \$val;\n}\n";
-		$filename = _DIR_SESSIONS."charger_pipeline_$action.php";
-		if ($handle = fopen($filename, 'wb')) {
-			@fwrite($handle, $start_file . $s_inc . $s_call . $end_file);
-			@fclose($handle);
-		}
-		$nouveaux_pipe[] = "charger_pipeline_$action.php";
+		$content .= "// Pipeline $action \n";
+		$content .= "function execute_pipeline_$action(\$val){\n";
+		$content .= $s_inc;
+		$content .= $s_call;
+		$content .= "return \$val;\n}\n\n";
 	}
-
-	// nettoyer les anciens fichiers pipeline obsoletes
-	if ($handle = opendir(_DIR_SESSIONS)) {
-		while (false !== ($file = readdir($handle))) {
-			if ($file != "." && $file != "..") {
-				if (preg_match(",^charger_pipeline_(.*).php$,",$file)){
-					if (!in_array($file,$nouveaux_pipe))
-						unlink(_DIR_SESSIONS.$file);
-				}
-			}
-		}
-		closedir($handle);
-	}
+	ecrire_fichier(_DIR_SESSIONS."charger_pipelines.php",
+		$start_file . $content . $end_file);
 }
 
 // pas sur que ça serve juste au cas où
@@ -180,11 +159,11 @@ function liste_plugin_inactifs(){
 // penser à faire une maj du cache =>  ecrire_meta()
 // en principe cela doit aussi initialiser la valeur à vide si elle n'esite pas 
 // risque de pb en php5 à cause du typage ou de null (vérifier dans la doc php)
-function verif_plugin(){
+function verif_plugin($pipe_recherche = false){
 	$plugin_actifs = liste_plugin_actifs();
 	$plugin_liste = liste_plugin_files();
 	$plugin_new = array_intersect($plugin_actifs,$plugin_liste);
-	ecrire_plugin_actifs($plugin_new);
+	ecrire_plugin_actifs($plugin_new,$pipe_recherche);
 	ecrire_metas();
 }
 
@@ -273,7 +252,7 @@ function plugin_get_infos($plug){
   $ret = array();
   if ((@file_exists(_DIR_PLUGINS))&&(is_dir(_DIR_PLUGINS))){
 		if (@file_exists(_DIR_PLUGINS."$plug/plugin.xml")) {
-			$texte = file_get_contents(_DIR_PLUGINS."$plug/plugin.xml");
+			lire_fichier(_DIR_PLUGINS."$plug/plugin.xml", $texte);
 			$arbre = parse_plugin_xml($texte);
 			if (!isset($arbre['plugin'])&&is_array($arbre['plugin']))
 				$arbre = array('erreur' => array(_T('plugin:erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
@@ -285,19 +264,21 @@ function plugin_get_infos($plug){
 
 		plugin_verifie_conformite($plug,$arbre);
 		
-		$ret['nom'] = join(' ',$arbre['nom']);
-		$ret['version'] = array_pop($arbre['version']);
+		$ret['nom'] = trim(join(' ',$arbre['nom']));
+		$ret['version'] = trim(end($arbre['version']));
 		if (isset($arbre['auteur']))
-			$ret['auteur'] = join(',',$arbre['auteur']);
+			$ret['auteur'] = trim(join(',',$arbre['auteur']));
 		if (isset($arbre['description']))
 			$ret['description'] = chaines_lang(join(' ',$arbre['description']));
 		if (isset($arbre['lien']))
 			$ret['lien'] = join(' ',$arbre['lien']);
+		if (isset($arbre['etat']))
+			$ret['etat'] = trim(end($arbre['etat']));
 		if (isset($arbre['options']))
 			$ret['options'] = $arbre['options'];
 		if (isset($arbre['fonctions']))
 			$ret['fonctions'] = $arbre['fonctions'];
-		$ret['class'] = $arbre['class'];
+		$ret['prefix'] = $arbre['prefix'];
 		if (isset($arbre['pipeline']))
 			$ret['pipeline'] = $arbre['pipeline'];
 		if (isset($arbre['erreur']))
@@ -326,13 +307,19 @@ function plugin_verifie_conformite($plug,&$arbre){
 			$arbre['erreur'][] = _T('plugin:erreur_plugin_version_manquant');
 		$arbre['version'] = array("");
 	}
-  if (!isset($arbre['class'])){
+  if (!isset($arbre['prefix'])){
   	if (!$silence)
-			$arbre['erreur'][] = _T('plugin:erreur_plugin_class_manquant');
-		$arbre['class'] = array("");
+			$arbre['erreur'][] = _T('plugin:erreur_plugin_prefix_manquant');
+		$arbre['prefix'] = array("");
 	}
 	else{
-		$class = trim(end($arbre['class']));
+		$prefix = "";
+		$prefix = trim(end($arbre['prefix']));
+		if (isset($arbre['etat'])){
+			$etat = trim(end($arbre['etat']));
+			if (!preg_match(',^(dev|experimental|test|stable)$,',$etat))
+				$arbre['erreur'][] = _T('plugin:erreur_plugin_etat_inconnu')." : $etat";
+		}
 		if (isset($arbre['options'])){
 			foreach($arbre['options'] as $optfile){
 				$optfile = trim($optfile);
@@ -352,7 +339,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 		$fonctions = array();
 		if (isset($arbre['fonctions']))
 			$fonctions = $arbres['fonctions'];
-	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install',strtolower($class));
+	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install','uninstall',strtolower($prefix));
 		foreach($arbre['pipeline'] as $pipe){
 			$nom = trim(end($pipe['nom']));
 			if (isset($pipe['action']))
@@ -376,4 +363,5 @@ function plugin_verifie_conformite($plug,&$arbre){
 		}
 	}
 }
+
 ?>

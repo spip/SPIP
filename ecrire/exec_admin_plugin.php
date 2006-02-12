@@ -39,11 +39,36 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 				$s .= "/!\ $err <br/>";
 			$s .=  "</div>";
 		}
+		// puce d'etat du plugin
+		// <etat>dev|experimental|test|stable</etat>
+		$etat = 'dev';
+		if (isset($info['etat']))
+			$etat = $info['etat'];
+		switch ($etat) {
+			case 'experimental':
+				$puce = 'puce-rouge.gif';
+				$titre_etat = _T('plugin:etat_experimental');
+				break;
+			case 'test':
+				$puce = 'puce-orange.gif';
+				$titre_etat = _T('plugin:etat_test');
+				break;
+			case 'stable':
+				$puce = 'puce-verte.gif';
+				$titre_etat = _T('plugin:etat_stable');
+				break;
+			default:
+				$puce = 'puce-poubelle.gif';
+				$titre_etat = _T('plugin:etat_developpement');
+				break;
+		}
+		$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt='$titre_etat' title='$titre_etat' />&nbsp;";
+		
 		$s .= bouton_block_invisible("$plug_file");
 		$s .= ($plugok=='O'?"<strong>":"").$info['nom'].($plugok=='O'?"</strong>":"");
 		$s .= "</div>";
 		$s .= debut_block_invisible("$plug_file");
-		$s .= _T("plugin:version_plugin") . " : " . $info['version'] . "<br/>";
+		$s .= _T("plugin:version_plugin") . " : " . $info['version'] . " | <strong>$titre_etat</strong><br/>";
 		$s .= _T("plugin:repertoire_plugin") . " : " . $plug_file . "<br/>";
 
 		if (isset($info['description']))
@@ -86,6 +111,7 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 function admin_plugin(){
 	global $connect_statut;
 	global $connect_toutes_rubriques;
+	global $spip_lang_right;
 	$surligne = "";
   
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {

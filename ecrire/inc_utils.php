@@ -92,24 +92,34 @@ function minipipe($fonc,$val){
 
 // chargement du pipeline sous la forme d'un fichier php prepare
 function pipeline($action,$val){
-	$ok = @is_readable($f = _DIR_SESSIONS."charger_pipeline_$action.php");
+	$ok = @is_readable($f = _DIR_SESSIONS."charger_pipelines.php");
 	if (!$ok){
 		include_ecrire('inc_plugin');
 		// generer les fichiers php precompiles
 		// de chargement des plugins et des pipelines
 		verif_plugin();
-		$ok = @is_readable($f = _DIR_SESSIONS."charger_pipeline_$action.php");
+		$ok = @is_readable($f = _DIR_SESSIONS."charger_pipelines.php");
 		if (!$ok)
-			spip_log("generation de $f impossible; pipeline desactives");
+			spip_log("generation de $f impossible; tous les pipeline desactives");
 	}
 	if ($ok){
 		require_once($f);
 		$f = "execute_pipeline_$action";
-		$val = $f($val);
-		// si le flux est une table qui encapsule donnees et autres
-		// on ne ressort du pipe que les donnees
-		if (is_array($val)&&isset($val['data']))
-			$val = $val['data'];
+		$ok = function_exists($f);
+		if ($ok){
+			$val = $f($val);
+			// si le flux est une table qui encapsule donnees et autres
+			// on ne ressort du pipe que les donnees
+			if (is_array($val)&&isset($val['data']))
+				$val = $val['data'];
+		}
+		else{
+			include_ecrire('inc_plugin');
+			//on passe $action en arg pour creer la fonction meme si le pipe n'est defini nul part
+			// vu qu'on est la c'est qu'il existe !
+			verif_plugin($action);
+			spip_log("fonction $f absente : pipeline desactive");
+		}
 	}
 	return $val;
 }
