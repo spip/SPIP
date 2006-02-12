@@ -197,7 +197,8 @@ function preg_files($dir, $pattern=-1 /* AUTO */ ) {
 	if ($pattern == -1)
 		$pattern = "^$dir";
 	$fichiers = array();
-	$dir = preg_replace(',/[^/]*$,', '', $dir);
+	// A quoi sert cette ligne?
+//	$dir = preg_replace(',/[^/]*$,', '', $dir);
 
 	if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
 		while (($f = readdir($d)) !== false) {
@@ -209,17 +210,18 @@ function preg_files($dir, $pattern=-1 /* AUTO */ ) {
 					if (preg_match(",$pattern,i", "$dir/$f"))
 						$fichiers[] = "$dir/$f";
 				} else if (is_dir("$dir/$f")) {
-					$fichiers = array_merge($fichiers,
-						preg_files("$dir/$f", $pattern));
+					$beginning = $fichiers;
+					$end = preg_files("$dir/$f", $pattern);
+					$fichiers = array_merge((array)$beginning, (array)$end);
 				}
 			}
 		}
 		closedir($d);
 		sort($fichiers);
 	}
-	else
+	else {
 		spip_log("repertoire $dir absent ou illisible");
-
+	}
 	sort($fichiers);
 	return $fichiers;
 }
