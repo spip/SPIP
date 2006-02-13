@@ -150,7 +150,7 @@ if ($modif_forum == "oui") {
 	}
 
 	echo generer_url_post_ecrire('forum_envoi',"",'formulaire');
-	echo "<p><div align='right'><INPUT CLASS='fondo' TYPE='submit' NAME='valider_forum' VALUE='"._T('bouton_envoyer_message')."'></div>";
+	echo "<p><div align='right'><input class='fondo' type='submit' name='valider_forum' value='",_T('bouton_envoyer_message'),"'></div>";
 
 	fin_cadre_thread_forum();
 	if ($titre_parent) {
@@ -166,8 +166,7 @@ else {
 	echo generer_url_post_ecrire('forum_envoi',"",'formulaire');
 }
 
-	echo "<div>&nbsp;</div>";
-
+echo "<div>&nbsp;</div>";
 
 debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;');
 
@@ -188,25 +187,29 @@ echo "<INPUT TYPE='text' CLASS='formo' NAME='titre_message' VALUE=\"$titre_messa
 echo "</TD></TR></TABLE>";
 
 if (!$modif_forum OR $modif_forum == "oui") {
-	echo "<INPUT TYPE='Hidden' NAME='modif_forum' VALUE='oui'>\n";
+	echo "<input type='hidden' name='modif_forum' value='oui'>\n";
 }
 
-echo "<INPUT TYPE='Hidden' NAME='adresse_retour' VALUE=\"$adresse_retour\">\n";
-echo "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE=\"$id_rubrique\">\n";
-echo "<INPUT TYPE='Hidden' NAME='id_parent' VALUE=\"$id_parent\">\n";
-echo "<INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">\n";
-echo "<INPUT TYPE='Hidden' NAME='id_breve' VALUE=\"$id_breve\">\n";
-echo "<INPUT TYPE='Hidden' NAME='id_message' VALUE=\"$id_message\">\n";
-echo "<INPUT TYPE='Hidden' NAME='id_syndic' VALUE=\"$id_syndic\">\n";
-echo "<INPUT TYPE='Hidden' NAME='statut' VALUE=\"$statut\">\n";
-
-
-echo "<p><B>"._T('info_texte_message')."</B><BR>";
-echo _T('info_creation_paragraphe')."<BR>";
-echo afficher_barre('document.formulaire.texte', true);
-echo "<TEXTAREA NAME='texte' ".$GLOBALS['browser_caret']." ROWS='15' CLASS='formo' COLS='40' wrap=soft>";
-echo entites_html($texte);
-echo "</TEXTAREA><P>\n";
+ echo "<input type='hidden' name='adresse_retour' value=\"",
+   rawurlencode($adresse_retour), "\" />\n",
+   "<input type='hidden' name='id_rubrique' value=\"", $id_rubrique, "\" />\n",
+   "<input type='hidden' name='id_parent' value=\"", $id_parent, "\" />\n",
+   "<input type='hidden' name='id_article' value=\"", $id_article, "\" />\n",
+   "<input type='hidden' name='id_breve' value=\"", $id_breve, "\" />\n",
+   "<input type='hidden' name='id_message' value=\"", $id_message, "\" />\n",
+   "<input type='hidden' name='id_syndic' value=\"", $id_syndic, "\" />\n",
+   "<input type='hidden' name='statut' value=\"", $statut, "\" />\n",
+   "<p><b>",
+   _T('info_texte_message'),
+   "</b><br />\n",
+   _T('info_creation_paragraphe'),
+   "<br />\n",
+   afficher_barre('document.formulaire.texte', true),
+   "<textarea name='texte' ",
+   $GLOBALS['browser_caret'],
+   " rows='15' class='formo' cols='40' wrap=soft>",
+   entites_html($texte),
+   "</textarea><p>\n";
 
 if ($statut != 'perso' AND $options == "avancees") {
 	echo "<B>"._T('info_lien_hypertexte')."</B><BR>";
@@ -219,8 +222,8 @@ if ($statut != 'perso' AND $options == "avancees") {
 	echo "<INPUT TYPE='text' CLASS='forml' NAME='url_site' VALUE=\"".entites_html($url_site)."\" SIZE='40'><P>";
 }
 
-echo "<DIV ALIGN='right'><INPUT CLASS='fondo' TYPE='submit' VALUE='"._T('bouton_voir_message')."'></div>";
-echo "</FORM>";
+echo "<div align='right'><input class='fondo' type='submit' value='"._T('bouton_voir_message')."'></div>",
+	 "</form>";
 
 fin_page();
 fin_cadre_formulaire();

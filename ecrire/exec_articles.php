@@ -1310,19 +1310,19 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 
   echo "<BR><BR>";
 
-  $forum_retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
+  $forum_retour = generer_url_ecrire("articles","id_article=$id_article", true);
   
   if (!$mute) {
     $tm = urlencode($titre);
     echo "\n<div align='center'>";
-    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=$forum_retour&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
+    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=" . urlencode($forum_retour) . "&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
     echo "</div>";
   }
 
   echo "<P align='$spip_lang_left'>";
 
-  $query_forum = "SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0";
-  $result_forum = spip_query($query_forum);
+  $result_forum = spip_query("SELECT COUNT(*) AS cnt FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0");
+
   $total = 0;
   if ($row = spip_fetch_array($result_forum)) $total = $row["cnt"];
 
@@ -1340,8 +1340,8 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 	echo "</div>";
 }
 
-	$query_forum = "SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $total_afficher OFFSET $debut";
-	$result_forum = spip_query($query_forum);
+	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $total_afficher OFFSET $debut");
+
 	afficher_forum($result_forum, $forum_retour, $mute);
 
 	if (!$debut) $debut = 0;
