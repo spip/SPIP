@@ -1285,6 +1285,180 @@ function image_nb($im)
 
 
 
+
+// $src_img - a GD image resource
+// $angle - degrees to rotate clockwise, in degrees
+// returns a GD image resource
+// script de php.net lourdement corrig'e
+// (le bicubic deconnait completement,
+// et j'ai ajoute la ponderation par la distance au pixel)
+
+function distance_pixel($xo, $yo, $x0, $y0) {
+	$vx = $xo - $x0;
+	$vy = $yo - $y0;
+	$d = 1 - (sqrt(($vx)*($vx) + ($vy)*($vy)) / sqrt(2));
+	return $d;
+}
+
+
+function imageRotateBicubic($src_img, $angle, $bicubic=0) {
+   
+  // convert degrees to radians
+   $angle = $angle + 180;
+   $angle = deg2rad($angle);
+  
+   $src_x = imagesx($src_img);
+   $src_y = imagesy($src_img);
+  
+   $center_x = floor($src_x/2);
+   $center_y = floor($src_y/2);
+
+   $cosangle = cos($angle);
+   $sinangle = sin($angle);
+
+   $corners=array(array(0,0), array($src_x,0), array($src_x,$src_y), array(0,$src_y));
+
+   foreach($corners as $key=>$value) {
+     $value[0]-=$center_x;        //Translate coords to center for rotation
+     $value[1]-=$center_y;
+     $temp=array();
+     $temp[0]=$value[0]*$cosangle+$value[1]*$sinangle;
+     $temp[1]=$value[1]*$cosangle-$value[0]*$sinangle;
+     $corners[$key]=$temp;    
+   }
+   
+   $min_x=1000000000000000;
+   $max_x=-1000000000000000;
+   $min_y=1000000000000000;
+   $max_y=-1000000000000000;
+   
+   foreach($corners as $key => $value) {
+     if($value[0]<$min_x)
+       $min_x=$value[0];
+     if($value[0]>$max_x)
+       $max_x=$value[0];
+   
+     if($value[1]<$min_y)
+       $min_y=$value[1];
+     if($value[1]>$max_y)
+       $max_y=$value[1];
+   }
+
+   $rotate_width=ceil($max_x-$min_x);
+   $rotate_height=ceil($max_y-$min_y);
+   
+   $rotate=imagecreatetruecolor($rotate_width,$rotate_height);
+   imagealphablending($rotate, false);
+   imagesavealpha($rotate, true);
+
+   $cosangle = cos($angle);
+   $sinangle = sin($angle);
+   $newcenter_x = ($rotate_width)/2;
+   $newcenter_y = ($rotate_height)/2;
+   
+   for ($y = 0; $y < $rotate_height; $y++) {
+     for ($x = 0; $x < $rotate_width; $x++) {
+   // rotate...
+       $old_x = ((($newcenter_x-$x) * $cosangle + ($newcenter_y-$y) * $sinangle))
+         + $center_x;
+       $old_y = ((($newcenter_y-$y) * $cosangle - ($newcenter_x-$x) * $sinangle))
+         + $center_y;   
+   if ( $old_x >= 0 && ceil($old_x) < $src_x
+         && $old_y >= 0 && ceil($old_y) < $src_y ) {
+     if ($bicubic == true) {
+       $xo = $old_x;
+       $x0 = floor($xo);
+       $x1 = ceil($xo);
+       $yo = $old_y;
+       $y0 = floor($yo);
+       $y1 = ceil($yo);
+       
+
+		$rgb = ImageColorAt($src_img, $x0, $y0); 
+		$a1 = ($rgb >> 24) & 0xFF;
+		$r1 = ($rgb >> 16) & 0xFF;
+		$g1 = ($rgb >> 8) & 0xFF;
+		$b1 = $rgb & 0xFF;
+		$d1 = distance_pixel($xo, $yo, $x0, $y0);
+
+		$rgb = ImageColorAt($src_img, $x1, $y0); 
+		$a2 = ($rgb >> 24) & 0xFF;
+		$r2 = ($rgb >> 16) & 0xFF;
+		$g2 = ($rgb >> 8) & 0xFF;
+		$b2 = $rgb & 0xFF;
+		$d2 = distance_pixel($xo, $yo, $x1, $y0);
+
+		$rgb = ImageColorAt($src_img,$x0, $y1); 
+		$a3 = ($rgb >> 24) & 0xFF;
+		$r3 = ($rgb >> 16) & 0xFF;
+		$g3 = ($rgb >> 8) & 0xFF;
+		$b3 = $rgb & 0xFF;
+		$d3 = distance_pixel($xo, $yo, $x0, $y1);
+
+		$rgb = ImageColorAt($src_img,$x1, $y1);
+		$a4 = ($rgb >> 24) & 0xFF;
+		$r4 = ($rgb >> 16) & 0xFF;
+		$g4 = ($rgb >> 8) & 0xFF;
+		$b4 = $rgb & 0xFF;
+		$d4 = distance_pixel($xo, $yo, $x1, $y1);
+		
+		$tot  = $d1 + $d2 + $d3 + $d4;
+
+       $r = round((($d1*$r1)+($d2*$r2)+($d3*$r3)+($d4*$r4))/$tot);
+       $g = round((($d1*$g1+($d2*$g2)+$d3*$g3+$d4*$g4))/$tot);
+       $b = round((($d1*$b1+($d2*$b2)+$d3*$b3+$d4*$b4))/$tot);
+       $a = round((($d1*$a1+($d2*$a2)+$d3*$a3+$d4*$a4))/$tot);
+        $color = imagecolorallocatealpha($src_img, $r,$g,$b,$a);
+     } else {
+       $color = imagecolorat($src_img, round($old_x), round($old_y));
+     }
+   } else {
+         // this line sets the background colour
+     $color = imagecolorallocatealpha($src_img, 255, 255, 255, 127);
+   }
+   @imagesetpixel($rotate, $x, $y, $color);
+     }
+   }
+   return $rotate;
+}
+
+// permet de faire tourner une image d'un angle quelconque
+// la fonction "crop" n'est pas implementee...
+function image_rotation($im, $angle, $crop=false)
+{
+	include_ecrire('inc_logos');
+	
+	$image = valeurs_image_trans($im, "rot-$angle-$crop", "png");
+	if (!$image) return("");
+	
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	if ($creer) {
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$im = imageRotateBicubic($im, $angle, true);
+		$image["fonction_image"]($im, "$dest");
+		
+	}
+  	$src_x = largeur($dest);
+   	$src_y = hauteur($dest);
+	
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+//	$style = $image["style"]; // on force le remplacement par nouvelles valeurs...
+	$style = "border: 0px; height: ".$src_y."px; width: ".$src_x."px;";
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
+
+
+
 function decal_couleur($coul, $gamma) {
 	$coul = $coul + $gamma;
 	
@@ -1311,7 +1485,7 @@ function image_gamma($im, $gamma = 0)
 	
 	$creer = $image["creer"];
 	
-	if ($creer) {
+	if ($creer OR 1==1) {
 		// Creation de l'image en deux temps
 		// de facon a conserver les GIF transparents
 		$im = $image["fonction_imagecreatefrom"]($im);
@@ -1882,8 +2056,11 @@ function abs_url($texte, $base='') {
 
 // Image typographique
 
-function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, $textSize, $align="left") {
+function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, $textSize, $align="left", $hauteur_ligne = 0) {
 	$words = explode(' ', strip_tags($text)); // split the text into an array of single words
+	if ($hauteur_ligne == 0) 	$lineHeight = floor($textSize * 1.3);
+	else $lineHeight = $hauteur_ligne;
+
 	$line = '';
 	while (count($words) > 0) {
 		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0], NULL);
@@ -1896,7 +2073,6 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 		$words = array_slice($words, 1); // remove the word from the array
 	}
 	if ($line != '') { $lines[] = $line; } // add the last line to the others, if it isn't empty
-	$lineHeight = floor($textSize * 1.3);
 	$height = count($lines) * $lineHeight; // the height of all the lines total
 	// do the actual printing
 	$i = 0;
@@ -1911,7 +2087,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line), NULL);
 		$i++;
 	}
-	$retour["height"] = $height;
+	$retour["height"] = $height + round(0.3 * $hauteur_ligne);
 	$retour["width"] = $largeur_max;
                  
 	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', NULL);
@@ -1933,7 +2109,8 @@ function image_typo() {
 	$ombrex, $ombrey: les decalages en pixels de l'ombre
 	$police: nom du fichier Truetype de la police
 	$largeur: la largeur maximale de l'image ; attention, l'image retournee a une largeur inferieure, selon les limites reelles du texte
-	
+	$hauteur_ligne: la hauteur de chaque ligne de texte si texte sur plusieurs lignes
+	(equivalent a "line-height")
 	$alt: pour forcer l'affichage d'un alt; attention, comme utilisation d'un span invisible pour affiche le texte, generalement inutile
 	
 	
@@ -1984,8 +2161,12 @@ function image_typo() {
 	$largeur = $variable["largeur"];
 	if ($largeur < 5) $largeur = 600;
 
+	if ($variable["hauteur_ligne"] > 0) $hauteur_ligne = $variable["hauteur_ligne"];
+	else $hauteur_ligne = 0;
+	
 
-	$string = "$text-$taille-$couleur-$fond-$ombre-$ombrex-$ombrey-$align-$police-$largeur";
+
+	$string = "$text-$taille-$couleur-$fond-$ombre-$ombrex-$ombrey-$align-$police-$largeur-$hauteur_ligne";
 	$query = md5($string);
 	$dossier = sous_repertoire(_DIR_IMG, 'cache-texte');
 	$fichier = "$dossier$query.png";
@@ -1999,7 +2180,7 @@ function image_typo() {
 		$font = find_in_path('polices/'.$police, _DIR_INCLUDE);
 
 		$imgbidon = imageCreateTrueColor($largeur, 45);
-		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille);
+		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille, 'left', $hauteur_ligne);
 		$hauteur = $retour["height"];
 		$largeur_reelle = $retour["width"];
 		$espace = $retour["espace"];
@@ -2020,8 +2201,8 @@ function image_typo() {
 		// Remplacez le chemin par votre propre chemin de police
 		//global $text;
 				
-		if (strlen($ombre) == 6) printWordWrapped($im, $taille+$ombrey+5, $ombrex, $largeur, $font, $grey, $text, $taille, $align);
-		printWordWrapped($im, $taille+5, 0, $largeur, $font, $black, $text, $taille, $align);
+		if (strlen($ombre) == 6) printWordWrapped($im, $taille+$ombrey+5, $ombrex, $largeur, $font, $grey, $text, $taille, $align, $hauteur_ligne);
+		printWordWrapped($im, $taille+5, 0, $largeur, $font, $black, $text, $taille, $align, $hauteur_ligne);
 		
 		
 		// Utiliser imagepng() donnera un texte plus claire,
