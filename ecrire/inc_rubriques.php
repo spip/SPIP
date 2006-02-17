@@ -393,7 +393,7 @@ function selecteur_rubrique($id_rubrique, $type, $restreint, $idem=0) {
 	if (false /* mettre true pour desactiver ajax */
 	OR $_COOKIE['spip_accepte_ajax'] < 1
 	OR spip_num_rows(
-	spip_query("SELECT id_rubrique FROM spip_rubriques")) < 50)
+	spip_query("SELECT id_rubrique FROM spip_rubriques")) < 20)
 		return selecteur_rubrique_html($id_rubrique, $type, $restreint, $idem);
 
 	else
