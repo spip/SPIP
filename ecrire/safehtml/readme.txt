@@ -1,6 +1,6 @@
 SafeHTML
 --------
-Version 1.3.5.
+Version 1.3.7.
 http://pixel-apes.com/safehtml/
 --------
 
@@ -30,6 +30,12 @@ when SAFEHTML will be updated.
 --------
 Version history:
 --------
+1.3.7.
+ * Added 'dl' to the list of 'lists' tags.
+ * Added 'callto' to the white list of protocols.
+ * Added white list of "namespaced" attributes.
+1.3.6.
+ * More accurate UTF-7 decoding.
 1.3.5.
  * Two serious security flaws fixed: UTF-7 XSS and CSS comments handling.
 1.3.2.
