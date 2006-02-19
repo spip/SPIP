@@ -875,16 +875,11 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_informations_personnelles_1' => 'Le syst&egrave;me va maintenant vous cr&eacute;er un acc&egrave;s personnalis&eacute; au site.',
 'texte_informations_personnelles_2' => '(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
 'texte_introductif_article' => '(Texte introductif de l\'article.)',
-'texte_jeu_caractere' => 'Cette option est utile si votre site doit afficher des alphabets
-	diff&eacute;rents de l\'alphabet romain (ou &laquo;&nbsp;occidental&nbsp;&raquo;) et ses d&eacute;riv&eacute;s.
-	Dans ce cas, il peut &ecirc;tre pr&eacute;f&eacute;rable de changer le r&eacute;glage par d&eacute;faut pour 
-	un jeu de caract&egrave;res appropri&eacute;&nbsp;; nous vous conseillons dans tous les cas de faire des essais
-	afin de trouver une solution satisfaisante. Si vous modifiez ce param&egrave;tre, n\'oubliez pas non plus d\'adapter
-	le site public en cons&eacute;quence (balise <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Ce r&eacute;glage n\'a pas d\'effet r&eacute;troactif. Par
-	cons&eacute;quent, les textes d&eacute;j&agrave; entr&eacute;s peuvent s\'afficher
-	incorrectement &agrave; la suite d\'une modification du r&eacute;glage. Dans tous
-	les cas, vous pourrez sans dommage revenir au r&eacute;glage pr&eacute;c&eacute;dent.',
+'texte_jeu_caractere' => 'Il est conseill&eacute; d\'employer, sur votre site, l\'alphabet universel (<tt>utf-8</tt>)&nbsp;: celui-ci permet l\'affichage de textes dans toutes les langues, et ne pose plus de probl&egrave;mes de compatibilit&eacute; avec les navigateurs modernes.',
+'texte_jeu_caractere_2' => 'Ce r&eacute;glage n\'a pas d\'effet r&eacute;troactif sur les textes enregistr&eacute;s dans la base de donn&eacute;es.',
+'texte_jeu_caractere_3' => 'Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:',
+'texte_jeu_caractere_4' => 'Si cela ne correspond pas &agrave; vos donn&eacute;es actuelles (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_conversion' => 'Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
 'texte_liens_sites_syndiques' => 'Les liens issus des sites syndiqu&eacute;s peuvent
 			&ecirc;tre bloqu&eacute;s a priori&nbsp;; le r&eacute;glage
@@ -1099,6 +1094,10 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'trad_delier' => 'Ne plus lier cet article &agrave; ces traductions',
 'trad_lier' => 'Cet article est une traduction de l\'article num&eacute;ro&nbsp;:',
 'trad_new' => '&Eacute;crire une nouvelle traduction de cet article',
+
+
+// U
+'utf8_convertir_votre_site' => 'Convertir votre site en utf-8',
 
 
 // V
