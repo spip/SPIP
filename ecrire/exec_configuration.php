@@ -446,6 +446,37 @@ else $style = "display: none;";
 	echo "</div>";
 
 
+//
+// Gestion des flux RSS
+//
+
+debut_cadre_relief("", false, "", _T('ical_titre_rss'));
+
+echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
+
+echo "<TR><TD class='verdana2'>";
+echo '<img src="'._DIR_IMG_PACK."feed.png".'" /> ',
+	_T('info_syndication_integrale_1',
+		array('url' => generer_url_ecrire('synchro'),
+		'titre' => _T("icone_suivi_activite"))
+	),
+	'<p>',
+	_T('info_syndication_integrale_2');
+echo "</TD></TR>";
+
+echo "<TR>";
+echo "<TD align='$spip_lang_left' class='verdana2'>";
+afficher_choix('syndication_integrale', $GLOBALS['meta']["syndication_integrale"],
+	array('oui' => _T('item_autoriser_syndication_integrale'),
+		'non' => _T('item_non_autoriser_syndication_integrale')), "<br>");
+echo "</TD></TR>";
+echo "</TABLE>\n";
+
+fin_cadre_relief();
+
+echo "<p>";
+
+
 
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 echo "<TR><td style='text-align:$spip_lang_right;'>";
@@ -501,5 +532,6 @@ echo "</form>";
 
 
 fin_page();
+
 }
 ?>

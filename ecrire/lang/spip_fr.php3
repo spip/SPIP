@@ -292,7 +292,6 @@ Merci de votre participation
 'ical_texte_rss_breves' => 'Il existe de plus un fichier contenant les br&egrave;ves du site. En pr&eacute;cisant un num&eacute;ro de rubrique, vous obtiendrez uniquement les br&egrave;ves de cette rubrique.',
 'icone_a_suivre' => '&Agrave; suivre',
 'icone_admin_site' => 'Administration du site',
-'icone_admin_plugin' => 'Administration des plugin',
 'icone_agenda' => 'Agenda',
 'icone_aide_ligne' => 'Aide',
 'icone_articles' => 'Articles',

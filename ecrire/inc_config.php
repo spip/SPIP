@@ -63,6 +63,7 @@ function init_config() {
 		'documents_article' => 'oui',
 		'documents_rubrique' => 'non',
 		'charset' => _DEFAULT_CHARSET,
+		'syndication_integrale' => 'oui',
 
 		'creer_htpasswd' => 'non',
 		'creer_htaccess' => 'non',

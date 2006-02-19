@@ -255,11 +255,11 @@ function plugin_get_infos($plug){
 			lire_fichier(_DIR_PLUGINS."$plug/plugin.xml", $texte);
 			$arbre = parse_plugin_xml($texte);
 			if (!isset($arbre['plugin'])&&is_array($arbre['plugin']))
-				$arbre = array('erreur' => array(_T('plugin:erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
+				$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_incorrect')." : $plug/plugin.xml"));
 		}
 		else {
 			// pour arriver ici on l'a vraiment cherche...
-			$arbre = array('erreur' => array(_T('plugin:erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
+			$arbre = array('erreur' => array(_T('erreur_plugin_fichier_def_absent')." : $plug/plugin.xml"));
 		}
 
 		plugin_verifie_conformite($plug,$arbre);
@@ -292,24 +292,24 @@ function plugin_verifie_conformite($plug,&$arbre){
 	if (isset($arbre['plugin'])&&is_array($arbre['plugin']))
 		$arbre = end($arbre['plugin']); // derniere def plugin
 	else{
-		$arbre = array('erreur' => array(_T('plugin:erreur_plugin_tag_plugin_absent')." : $plug/plugin.xml"));
+		$arbre = array('erreur' => array(_T('erreur_plugin_tag_plugin_absent')." : $plug/plugin.xml"));
 		$silence = true;
 	}
   // verification de la conformite du plugin avec quelques
   // precautions elementaires
   if (!isset($arbre['nom'])){
   	if (!$silence)
-			$arbre['erreur'][] = _T('plugin:erreur_plugin_nom_manquant');
+			$arbre['erreur'][] = _T('erreur_plugin_nom_manquant');
 		$arbre['nom'] = array("");
 	}
   if (!isset($arbre['version'])){
   	if (!$silence)
-			$arbre['erreur'][] = _T('plugin:erreur_plugin_version_manquant');
+			$arbre['erreur'][] = _T('erreur_plugin_version_manquant');
 		$arbre['version'] = array("");
 	}
   if (!isset($arbre['prefix'])){
   	if (!$silence)
-			$arbre['erreur'][] = _T('plugin:erreur_plugin_prefix_manquant');
+			$arbre['erreur'][] = _T('erreur_plugin_prefix_manquant');
 		$arbre['prefix'] = array("");
 	}
 	else{
@@ -318,14 +318,14 @@ function plugin_verifie_conformite($plug,&$arbre){
 		if (isset($arbre['etat'])){
 			$etat = trim(end($arbre['etat']));
 			if (!preg_match(',^(dev|experimental|test|stable)$,',$etat))
-				$arbre['erreur'][] = _T('plugin:erreur_plugin_etat_inconnu')." : $etat";
+				$arbre['erreur'][] = _T('erreur_plugin_etat_inconnu')." : $etat";
 		}
 		if (isset($arbre['options'])){
 			foreach($arbre['options'] as $optfile){
 				$optfile = trim($optfile);
 				if (!@is_readable(_DIR_PLUGINS."$plug/$optfile"))
   				if (!$silence)
-						$arbre['erreur'][] = _T('plugin:erreur_plugin_fichier_absent')." : $optfile";
+						$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $optfile";
 			}
 		}
 		if (isset($arbre['fonctions'])){
@@ -333,7 +333,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 				$optfile = trim($optfile);
 				if (!@is_readable(_DIR_PLUGINS."$plug/$optfile"))
   				if (!$silence)
-						$arbre['erreur'][] = _T('plugin:erreur_plugin_fichier_absent')." : $optfile";
+						$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $optfile";
 			}
 		}
 		$fonctions = array();
@@ -349,7 +349,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 			// verif que la methode a un nom autorise
 			if (in_array(strtolower($action),$liste_methodes_reservees)){
 				if (!$silence)
-					$arbre['erreur'][] = _T("plugin:erreur_plugin_nom_fonction_interdit")." : $action";
+					$arbre['erreur'][] = _T("erreur_plugin_nom_fonction_interdit")." : $action";
 			}
 			else{
 				// verif que le fichier de def est bien present
@@ -357,7 +357,7 @@ function plugin_verifie_conformite($plug,&$arbre){
 					$inclure = _DIR_PLUGINS."$plug/".end($pipe['inclure']);
 					if (!@is_readable($inclure))
 	  				if (!$silence)
-							$arbre['erreur'][] = _T('plugin:erreur_plugin_fichier_absent')." : $inclure";
+							$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $inclure";
 				}
 			}
 		}

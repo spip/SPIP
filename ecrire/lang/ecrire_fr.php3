@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Activer le plugin',
 'aide_non_disponible' => 'Cette partie de l\'aide en ligne n\'est pas encore disponible dans cette langue.',
+'auteur' => 'Auteur&nbsp;:',
 'avis_acces_interdit' => 'Acc&egrave;s interdit.',
 'avis_article_modifie' => 'Attention, @nom_auteur_modif@ a travaill&eacute; sur cet article il y a @date_diff@ minutes',
 'avis_aucun_resultat' => 'Aucun r&eacute;sultat.',
@@ -140,7 +142,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'email :',
 'entree_adresse_annuaire' => 'Adresse de l\'annuaire',
 'entree_adresse_email' => 'Votre adresse email',
-'entree_adresse_fichier_syndication' => 'Adresse du fichier &laquo;&nbsp;backend&nbsp;&raquo; pour la syndication&nbsp;:',
+'entree_adresse_fichier_syndication' => 'Adresse du fichier de syndication&nbsp;:',
 'entree_adresse_site' => '<b>Adresse du site</b> [Obligatoire]',
 'entree_base_donnee_1' => 'Adresse de la base de donn&eacute;es',
 'entree_base_donnee_2' => '(Souvent cette adresse correspond &agrave; celle de votre site, parfois elle correspond &agrave; la mention &laquo;localhost&raquo;, parfois elle est laiss&eacute;e totalement vide.)',
@@ -175,6 +177,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texte de la br&egrave;ve',
 'entree_titre_obligatoire' => '<B>Titre</B> [Obligatoire]<BR>',
 'entree_url' => 'L\'adresse (URL) de votre site',
+'erreur_plugin_fichier_absent' => 'Fichier absent',
+'erreur_plugin_fichier_def_absent' => 'Fichier de d&eacute;finition absent',
+'erreur_plugin_nom_fonction_interdit' => 'Nom de fonction interdit',
+'erreur_plugin_nom_manquant' => 'Nom du plugin manquant',
+'erreur_plugin_prefix_manquant' => 'Espace de nommage du plugin non d&eacute;fini',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; manquant dans le fichier de d&eacute;finition',
+'erreur_plugin_version_manquant' => 'Version du plugin manquante',
 
 
 // I
@@ -189,8 +198,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'Vous pouvez syndiquer les nouveaut&eacute;s de ce site dans n\'importe quel lecteur de fichiers au format XML/RSS (Rich Site Summary). C\'est aussi le format qui permet &agrave; SPIP de lire les nouveaut&eacute;s publi&eacute;es sur d\'autres sites utilisant un format d\'&eacute;change compatible (sites syndiqu&eacute;s).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
-'ical_titre_rss' => 'Fichiers &laquo; backend &raquo;',
+'ical_titre_rss' => 'Fichiers de syndication',
 'icone_activer_cookie' => 'Activer le cookie de correspondance',
+'icone_admin_plugin' => 'Gestion des plugins',
 'icone_afficher_auteurs' => 'Afficher les auteurs',
 'icone_afficher_visiteurs' => 'Afficher les visiteurs',
 'icone_arret_discussion' => 'Ne plus participer &agrave; cette discussion',
@@ -586,6 +596,8 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_suivi_activite' => 'Suivi de l\'activit&eacute; &eacute;ditoriale',
 'info_supprimer_mot' => 'supprimer&nbsp;ce&nbsp;mot',
 'info_surtitre' => 'Surtitre :',
+'info_syndication_integrale_1' => 'Votre site propose des fichiers de syndication (voir &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Souhaitez-vous transmettre les articles dans leur int&eacute;gralit&eacute;, ou ne diffuser qu\'un r&eacute;sum&eacute; de quelques centaines de caract&egrave;res&nbsp;?',
 'info_taille_maximale_vignette' => 'Taille maximale des vignettes g&eacute;n&eacute;r&eacute;es par le syst&egrave;me&nbsp;:',
 'info_terminer_installation' => 'Vous pouvez maintenant terminer la proc&eacute;dure d\'installation standard.',
 'info_texte' => 'Texte',
@@ -615,8 +627,8 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'info_une_breve' => 'une br&egrave;ve,',
 'info_une_rubrique' => 'une rubrique,',
 'info_une_rubrique_02' => '1 rubrique',
-'info_url' => 'URL :',
-'info_url_site' => 'URL DU SITE :',
+'info_url' => 'URL&nbsp;:',
+'info_url_site' => 'URL DU SITE&nbsp;:',
 'info_urlref' => 'Lien hypertexte&nbsp;:',
 'info_utilisation_spip' => 'Vous pouvez maintenant commencer &agrave; utiliser le syst&egrave;me de publication assist&eacute;e...',
 'info_visites_par_mois' => 'Affichage par mois :',
@@ -638,6 +650,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_ajout_mots_cles' => 'Autoriser l\'ajout de mots-cl&eacute;s aux forums',
 'item_autoriser_documents_joints' => 'Autoriser les documents joints aux articles',
 'item_autoriser_documents_joints_rubriques' => 'Autoriser les documents dans les rubriques',
+'item_autoriser_syndication_integrale' => 'Diffuser l\'int&eacute;gralit&eacute; des articles dans les fichiers de syndication',
 'item_bloquer_liens_syndiques' => 'Bloquer les liens syndiqu&eacute;s pour validation',
 'item_breve_refusee' => 'NON - Br&egrave;ve refus&eacute;e',
 'item_breve_validee' => 'OUI - Br&egrave;ve valid&eacute;e',
@@ -663,6 +676,7 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'item_non_ajout_mots_cles' => 'Interdire l\'utilisation des mots-cl&eacute;s dans les forums',
 'item_non_autoriser_documents_joints' => 'Ne pas autoriser les documents dans les articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Ne pas autoriser les documents dans les rubriques',
+'item_non_autoriser_syndication_integrale' => 'Ne diffuser qu\'un r&eacute;sum&eacute;',
 'item_non_bloquer_liens_syndiques' => 'Ne pas bloquer les liens issus de la syndication',
 'item_non_creer_fichiers_authent' => 'Ne pas cr&eacute;er ces fichiers',
 'item_non_gerer_annuaire_site_web' => 'D&eacute;sactiver l\'annuaire de sites Web',
@@ -751,6 +765,18 @@ dans une couleur qui indique leur &eacute;tat&nbsp;:',
 'ortho_trop_de_fautes' => 'Attention&nbsp;: votre texte contient trop de fautes, aucune correction n\'est sugg&eacute;r&eacute;e afin de ne pas surcharger le syst&egrave;me.',
 'ortho_verif_impossible' => 'Le syst&egrave;me ne peut pas v&eacute;rifier l\'orthographe de ce texte.',
 'ortho_verifier' => 'V&eacute;rifier l\'orthographe',
+
+
+// P
+'plugin_etat_developpement' => 'en d&eacute;veloppement',
+'plugin_etat_experimental' => 'exp&eacute;rimental',
+'plugin_etat_stable' => 'stable',
+'plugin_etat_test' => 'en test',
+'plugins_liste' => 'Liste des plugins',
+
+
+// R
+'repertoire_plugins' => 'R&eacute;pertoire&nbsp;:',
 
 
 // S
@@ -900,6 +926,7 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_plus_trois_car' => 'plus de 3 caract&egrave;res',
 'texte_plusieurs_articles' => 'Plusieurs auteurs trouv&eacute;s pour "@cherche_auteur@":',
 'texte_port_annuaire' => '(La valeur indiqu&eacute;e par d&eacute;faut convient g&eacute;n&eacute;ralement.)',
+'texte_presente_plugin' => 'Cette page liste les plugins disponibles sur le site. Vous pouvez activer les plugins n&eacute;cessaires en cochant la case correspondante.',
 'texte_proposer_publication' => 'Lorsque votre article est termin&eacute;,<br> vous pouvez proposer sa publication.',
 'texte_proxy' => 'Dans certains cas (intranet, r&eacute;seaux prot&eacute;g&eacute;s...),
 		il peut &ecirc;tre n&eacute;cessaire d\'utiliser un <I>proxy HTTP</I> pour atteindre les sites syndiqu&eacute;s.
@@ -915,7 +942,7 @@ recalculer une seule page, passez plut&ocirc;t par l\'espace public et utilisez-
 'texte_recapitiule_liste_documents' => 'Cette page r&eacute;capitule la liste des documents que vous avez plac&eacute;s dans les rubriques. Pour modifier les informations de chaque document, suivez le lien vers la page de sa rubrique.',
 'texte_recuperer_base' => 'R&eacute;parer la base de donn&eacute;es',
 'texte_reference_mais_redirige' => 'article r&eacute;f&eacute;renc&eacute; dans votre site SPIP, mais redirig&eacute; vers une autre URL.',
-'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier backend. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
+'texte_referencement_automatique' => '<b>R&eacute;f&eacute;rencement automatis&eacute; d\'un site</b><br>Vous pouvez r&eacute;f&eacute;rencer rapidement un site Web en indiquant ci-dessous l\'adresse URL d&eacute;sir&eacute;e, ou l\'adresse de son fichier de syndication. SPIP va r&eacute;cup&eacute;rer automatiquement les informations concernant ce site (titre, description...).',
 'texte_requetes_echouent' => '<b>Lorsque certaines requ&ecirc;tes MySQL &eacute;chouent
   syst&eacute;matiquement et sans raison apparente, il est possible
   que ce soit &agrave; cause de la base de donn&eacute;es
@@ -975,16 +1002,16 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 'texte_trop_resultats_auteurs' => 'Trop de r&eacute;sultats pour "@cherche_auteur@" ; veuillez affiner la recherche.',
 'texte_unpack' => 't&eacute;l&eacute;chargement de la derni&egrave;re version',
 'texte_utilisation_moteur_syndiques' => 'Lorsque vous utilisez le moteur de recherche int&eacute;gr&eacute; 
-				&agrave; SPIP, vous pouvez effectuer les recherches sur les sites et
-				les articles syndiqu&eacute;s de deux mani&egrave;res
-				diff&eacute;rentes. <br><img src=\'puce.gif\'> La plus
-				simple consiste &agrave; rechercher uniquement dans les
-				titres et les descriptifs des articles. <br><img src=\'puce.gif\'>
-				Une seconde m&eacute;thode, beaucoup plus puissante, permet
-				&agrave; SPIP de rechercher &eacute;galement dans le texte des
-				sites r&eacute;f&eacute;renc&eacute;s&nbsp;. Si vous
-				r&eacute;f&eacute;rencez un site, SPIP va alors effectuer la
-				recherche dans le texte du site lui-m&ecirc;me.',
+    &agrave; SPIP, vous pouvez effectuer les recherches sur les sites et
+    les articles syndiqu&eacute;s de deux mani&egrave;res
+    diff&eacute;rentes. <br>- La plus
+    simple consiste &agrave; rechercher uniquement dans les
+    titres et les descriptifs des articles. <br>-
+    Une seconde m&eacute;thode, beaucoup plus puissante, permet
+    &agrave; SPIP de rechercher &eacute;galement dans le texte des
+    sites r&eacute;f&eacute;renc&eacute;s&nbsp;. Si vous
+    r&eacute;f&eacute;rencez un site, SPIP va alors effectuer la
+    recherche dans le texte du site lui-m&ecirc;me.',
 'texte_utilisation_moteur_syndiques_2' => 'Cette m&eacute;thode oblige SPIP &agrave; visiter
 				r&eacute;guli&egrave;rement les sites r&eacute;f&eacute;renc&eacute;s,
 				ce qui peut provoquer un l&eacute;ger ralentissement de votre propre
@@ -1075,6 +1102,7 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 
 
 // V
+'version' => 'Version&nbsp;:',
 'version_initiale' => 'Version initiale'
 
 );

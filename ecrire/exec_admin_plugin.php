@@ -47,37 +47,37 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		switch ($etat) {
 			case 'experimental':
 				$puce = 'puce-rouge.gif';
-				$titre_etat = _T('plugin:etat_experimental');
+				$titre_etat = _T('plugin_etat_experimental');
 				break;
 			case 'test':
 				$puce = 'puce-orange.gif';
-				$titre_etat = _T('plugin:etat_test');
+				$titre_etat = _T('plugin_etat_test');
 				break;
 			case 'stable':
 				$puce = 'puce-verte.gif';
-				$titre_etat = _T('plugin:etat_stable');
+				$titre_etat = _T('plugin_etat_stable');
 				break;
 			default:
 				$puce = 'puce-poubelle.gif';
-				$titre_etat = _T('plugin:etat_developpement');
+				$titre_etat = _T('plugin_etat_developpement');
 				break;
 		}
-		$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt='$titre_etat' title='$titre_etat' />&nbsp;";
+		$s .= "<img src='"._DIR_IMG_PACK."$puce' width='9' height='9' style='border:0;' alt=\"$titre_etat\" title=\"$titre_etat\" />&nbsp;";
 		
 		$s .= bouton_block_invisible("$plug_file");
 		$s .= ($plugok=='O'?"<strong>":"").$info['nom'].($plugok=='O'?"</strong>":"");
 		$s .= "</div>";
 		$s .= debut_block_invisible("$plug_file");
-		$s .= _T("plugin:version_plugin") . " : " . $info['version'] . " | <strong>$titre_etat</strong><br/>";
-		$s .= _T("plugin:repertoire_plugin") . " : " . $plug_file . "<br/>";
+		$s .= _T('version') .' '.  $info['version'] . " | <strong>$titre_etat</strong><br/>";
+		$s .= _T('repertoire_plugins') .' '. $plug_file . "<br/>";
 
 		if (isset($info['description']))
 			$s .= "<hr/>" . propre($info['description']) . "<br/>";
 
 		if (isset($info['auteur']))
-			$s .= "<hr/>" . _T("plugin:auteur_plugin") . " : " . propre($info['auteur']) . "<br/>";
+			$s .= "<hr/>" . _T('auteur') .' '. propre($info['auteur']) . "<br/>";
 		if (isset($info['lien']))
-			$s .= "<hr/>" . _T("plugin:lien_plugin") . " : " . propre($info['lien']) . "<br/>";
+			$s .= "<hr/>" . _T('info_url') .' '. propre($info['lien']) . "<br/>";
 
 		$s .= fin_block();
 		$vals[] = $s;
@@ -100,9 +100,9 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		if (!$erreur){
 			$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 			$s .= ('O' == $plugok)?" checked='checked'":"";
-			$s .= " /> <label for='label_$id_input'><strong>"._T('plugin:activer_plugin')."</strong></label>";
+			$s .= " /> <label for='label_$id_input'><strong>"._T('activer_plugin')."</strong></label>";
 		}
-		$id_input++;		
+		$id_input++;
 		$vals[] = $s;
 
 		return $vals;
@@ -115,13 +115,13 @@ function admin_plugin(){
 	$surligne = "";
   
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
-		debut_page(_T('plugin:onglet_plugin'), "administration", "plugin");
+		debut_page(_T('icone_admin_plugin'), "administration", "plugin");
 		echo _T('avis_non_acces_page');
 		fin_page();
 		exit;
 	}
 	
-	// mise à jour des données si envoi via formulaire
+	// mise a jour des donnees si envoi via formulaire
 	// sinon fait une passe de verif sur les plugin
 	if ($_POST['changer_plugin']=='oui'){
 		enregistre_modif_plugin();
@@ -144,39 +144,37 @@ function admin_plugin(){
 	if (isset($_GET['surligne']))
 		$surligne = $_GET['surligne'];
 
-	debut_page(_T('plugin:onglet_plugin'), "administration", "plugin");
+	debut_page(_T('icone_admin_plugin'), "administration", "plugin");
 	echo "<br/><br/><br/>";
 	
-	gros_titre(_T('plugin:titre_admin_plugin'));
-	// barre_onglets("administration", "plugin"); // a creer dynamiquement en fonction des plugin chargés qui utilisent une page admin ?
+	gros_titre(_T('icone_admin_plugin'));
+	// barre_onglets("administration", "plugin"); // a creer dynamiquement en fonction des plugin charges qui utilisent une page admin ?
 	
 	debut_gauche();
-	
 	debut_boite_info();
-	
 	echo _T('info_gauche_admin_tech');
-	
 	fin_boite_info();
-	
-	debut_droite();
-	
-	debut_cadre_trait_couleur("plugin-24.png", false, "", _T('plugin:texte_plugin'));
-	
-	echo "\n<p align='justify'>"._T('plugin:texte_presente_plugin')."</p>";
-	echo "\n<div>&nbsp;</div>\n";
-	echo generer_url_post_ecrire("admin_plugin");
-	
 
-	$titre_table = _L("Liste des plugin disponibles");
-	$icone = "plugin-24.png";
-	if ($titre_table) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-	bandeau_titre_boite2($titre_table, $icone, $couleur_claire, "black");
-	echo "<table width='100%' cellpadding='4' cellspacing='0' border='0'>";
+
+	debut_droite();
+
+	debut_cadre_relief();
+
+	global $couleur_foncee;
+	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=5 WIDTH=\"100%\">";
+	echo "<TR><TD BGCOLOR='$couleur_foncee' BACKGROUND='' colspan=4><B>";
+	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#FFFFFF'>";
+	echo _T('plugins_liste')."</FONT></B></TD></TR>";
+
+	echo "<tr><td class='serif' colspan=4>";
+	echo _T('texte_presente_plugin');
+
+	echo generer_url_post_ecrire("admin_plugin");
 	$tableau = array();
 
 	//
 	// boucle sur les plugins
+	//
 	$plugins_actifs=liste_plugin_actifs();
 	$count = 0;
 	foreach ($plugins_actifs as $plug_file){
@@ -195,15 +193,16 @@ function admin_plugin(){
 	echo "\n<input type='hidden' name='id_auteur' value='$connect_id_auteur' />";
 	echo "\n<input type='hidden' name='hash' value='" . calculer_action_auteur("valide_plugin") . "'>";
 	echo "\n<input type='hidden' name='changer_plugin' value='oui'>";
-	//echo "\n<input type='hidden' name='redirect' value='" . _DIR_RESTREINT_ABS . "admin_plugin.php3'>";
+
 	echo "\n<p>";
 	
 	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
-	fin_cadre_trait_couleur();
-	
-	
+
+	echo "</form></tr></table>\n";
+
 	echo "<br />";
-	
+
+
 	fin_page();
 
 }
