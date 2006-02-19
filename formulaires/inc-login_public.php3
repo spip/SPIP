@@ -68,6 +68,7 @@ function login_explicite($login, $cible) {
 		if (($cible != $action) && !headers_sent()
 		AND !$_GET['var_mode'])
 			redirige_par_entete($cible);
+		include_ecrire('inc_minipres');
 		return http_href($cible, _T('login_par_ici'));
 	}
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);

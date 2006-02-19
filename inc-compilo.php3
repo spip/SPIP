@@ -573,7 +573,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
 	include_ecrire('inc_charsets');
-#	$squelette = transcoder_page($squelette);
+	$squelette = transcoder_page($squelette);
 
 	// Phraser le squelette, selon sa grammaire
 	// pour le moment: "html" seul connu (HTML+balises BOUCLE)
