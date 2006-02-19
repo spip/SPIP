@@ -247,6 +247,7 @@ function appliquer_modifs_config() {
 
 		'documents_article',
 		'documents_rubrique',
+		'syndication_integrale',
 
 		'charset',
 		'multi_articles',
