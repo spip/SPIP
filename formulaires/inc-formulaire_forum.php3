@@ -267,29 +267,6 @@ function forum_fichier_tmp()
 	return $alea;
 }
 
-// filtres pour le squelette
-
-function barre_forum($texte) {
-	include_ecrire('inc_layer');
-
-	if (!$GLOBALS['browser_barre'])
-		return "<textarea name='texte' rows='12' class='forml' cols='40'>$texte</textarea>";
-	static $num_formulaire = 0;
-	$num_formulaire++;
-	include_ecrire('inc_barre');
-	return afficher_barre("document.getElementById('formulaire_$num_formulaire')", true) .
-	  "
-<textarea name='texte' rows='12' class='forml' cols='40'
-id='formulaire_$num_formulaire'
-onselect='storeCaret(this);'
-onclick='storeCaret(this);'
-onkeyup='storeCaret(this);'
-ondbclick='storeCaret(this);'>$texte</textarea>";
-}
-
-function in_any($val, $vals, $def) {
-  return (!is_array($vals) ? $def : (in_array($val, $vals) ? ' ' : ''));
-}
 
 /*******************************************************/
 /* FONCTIONS DE CALCUL DES DONNEES DU FORMULAIRE FORUM */

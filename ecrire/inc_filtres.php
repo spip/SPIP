@@ -2314,6 +2314,37 @@ function boutonne($t, $n, $v, $a='') {
 	. " value=\"$v\" $a />";
 }
 
+// construit une balise textarea avec la barre de raccourcis std de Spip.
+// ATTENTION: cette barre injecte un script JS que le squelette doit accepter
+// donc ce filtre doit IMPERATIVEMENT assurer la securite a sa place
+
+function barre_textarea($texte, $rows, $cols) {
+	static $num_textarea = 0;
+	include_ecrire('inc_layer');
+
+	$texte = interdire_scripts(entites_html($texte));
+	if (!$GLOBALS['browser_barre'])
+		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
+
+	$num_textarea++;
+	include_ecrire('inc_barre');
+	return afficher_barre("document.getElementById('textarea_$num_textarea')", true) .
+	  "
+<textarea name='texte' rows='$rows' class='forml' cols='$cols'
+id='textarea_$num_textarea'
+onselect='storeCaret(this);'
+onclick='storeCaret(this);'
+onkeyup='storeCaret(this);'
+ondbclick='storeCaret(this);'>$texte</textarea>";
+}
+
+// comme in_array mais renvoie son 3e arg si le 2er arg n'est pas un tableau
+// prend ' ' comme representant de vrai et '' de faux
+
+function in_any($val, $vals, $def) {
+  return (!is_array($vals) ? $def : (in_array($val, $vals) ? ' ' : ''));
+}
+
 // valeur_numerique("3*2") => 6
 // n'accepte que les *, + et - (a ameliorer si on l'utilise vraiment)
 function valeur_numerique($expr) {
