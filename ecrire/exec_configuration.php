@@ -455,7 +455,7 @@ debut_cadre_relief("", false, "", _T('ical_titre_rss'));
 echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=3 WIDTH=\"100%\">";
 
 echo "<TR><TD class='verdana2'>";
-echo '<img src="'._DIR_IMG_PACK."feed.png".'" /> ',
+echo '<img src="'._DIR_IMG_PACK."feed.png".'" alt="RSS" /> ',
 	_T('info_syndication_integrale_1',
 		array('url' => generer_url_ecrire('synchro'),
 		'titre' => _T("icone_suivi_activite"))
