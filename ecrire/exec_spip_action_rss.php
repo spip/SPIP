@@ -400,13 +400,13 @@ switch($op) {
 		$url = _DIR_RESTREINT_ABS;
 		break;
 	case 'erreur securite':
-		$rss = array(array('title' => _L('Erreur de s&eacute;curit&eacute;')));
-		$title = _L('Erreur de s&eacute;curit&eacute;');
+		$rss = array(array('title' => _T('login_erreur_pass')));
+		$title = _T('login_erreur_pass');
 		$url = '';
 		break;
 	default:
-		$rss = array(array('title' => _L('Erreur')));
-		$title = _L('Erreur');
+		$rss = array(array('title' => _T('forum_titre_erreur')));
+		$title = _T('forum_titre_erreur');
 		$url = '';
 		break;
 }

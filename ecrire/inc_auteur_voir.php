@@ -226,7 +226,7 @@ function choix_statut_auteur($statut) {
 		$menu .= "\n<option" .
 			mySel('nouveau',$statut) .
 			">" .
-			_L('Inscription &agrave; confirmer') .
+			_T('info_statut_auteur_a_confirmer') .
 			'</option>';
 
 	// Ajouter l'option "autre" si le statut est inconnu
@@ -234,7 +234,7 @@ function choix_statut_auteur($statut) {
 		$menu .= "\n<option" .
 			mySel('autre','autre') .
 			">" .
-			_L('Autre statut&nbsp;: ').htmlentities($statut).
+			_T('info_statut_auteur_autre').' '.htmlentities($statut).
 			'</option>';
 
 

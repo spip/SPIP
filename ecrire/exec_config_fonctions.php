@@ -464,6 +464,7 @@ function htpasswd_config()
 	echo "<p>";
 }
 
+##### n'est pas encore utilise #######
 function htaccess_config()
  {
 
