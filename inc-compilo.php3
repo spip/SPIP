@@ -57,13 +57,13 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	$l = array();
 	foreach($struct->param as $val) {
 		$var = array_shift($val);
-		$l[] = "\'$var\' => \'' . addslashes(" .
-		    ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle) :
-		    (($var =='lang') ?
-		     '$GLOBALS["spip_lang"]' :
-		     index_pile($id_boucle, $var, $boucles)))
-		    . ") . '\\'";
-		}
+		$futurval = ($val ? calculer_liste($val[0], $descr, $boucles, $id_boucle) :(($var =='lang') ? '$GLOBALS["spip_lang"]' : index_pile($id_boucle, $var, $boucles))); 
+		$l[] = "\'$var\' => ' . (!is_array(\$x = " .
+		  $futurval . 
+		  ") ? (\"'\" . addslashes(\$x) . \"'\") :
+ 		argumenter_balise_dynamique(array(\$x))) . '";
+
+	}
 
 	return "\n'<".
 		"?php\n\t\$contexte_inclus = array(" .
