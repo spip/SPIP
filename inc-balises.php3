@@ -642,7 +642,6 @@ function balise_EXTRA_dist ($p) {
 //
 
 function balise_PARAMETRES_FORUM_dist($p) {
-	include_local(find_in_path('inc-formulaire_forum' . _EXTENSION_PHP));
 	$_id_article = champ_sql('id_article', $p);
 	$p->code = '
 		// refus des forums ?

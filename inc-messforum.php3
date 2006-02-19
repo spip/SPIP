@@ -122,7 +122,8 @@ function enregistre_forum() {
 	global $REMOTE_ADDR, $auteur_session,
 		$afficher_texte, $ajouter_mot, $alea, $hash,
 		$auteur, $confirmer_forum, $email_auteur, $id_auteur,
-		$nom_site_forum, $retour_forum, $texte, $titre, $url_site;
+		$nom_site_forum, $retour_forum, $texte, $titre, $url_site,
+		$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic;
 
 	$retour_forum = rawurldecode($retour_forum);
 
@@ -132,14 +133,6 @@ function enregistre_forum() {
 		$retour_forum = $retour_forum->getUrl(); # en cas d'echec du post
 		$calculer_retour = true;
 	}
-
-	// Recuperer les donnees postees du formulaire ou stocker '0'
-	foreach (array('id_article', 'id_breve', 'id_syndic',
-	'id_rubrique', 'id_forum') as $id)
-		if (isset($_POST['forum_'.$id]))
-			$$id = intval($_POST['forum_'.$id]);
-		else
-			$$id = 0;
 
 	// initialisation de l'eventuel visiteur connecte
 	if (!$id_auteur)

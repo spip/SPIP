@@ -1,0 +1,15 @@
+<B_M>
+ 	<table cellpadding='0' cellspacing='0' border='0' width='100%'>
+	<tr><td width='47%' valign='top'>
+	<BOUCLE_M(MOTS){id_groupe}>
+		<input	type='[(#ENV{unseul}|choixsiegal{oui,radio,checkbox})]'
+			name='ajouter_mot[]'
+		    	value='#ID_MOT'
+		    	id='mot#ID_MOT' 
+			[(#ID_MOT|in_any{#ENV*{ajouter_mot}, ''}|?
+				{'checked="checked"',''})] />
+		    #LOGO_MOT
+		<b><label for='mot#ID_MOT'>#TITRE</label></b><br />
+	</BOUCLE_M>
+		  </td></tr></table>
+</B_M>
