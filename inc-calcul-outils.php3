@@ -154,12 +154,23 @@ include_local("'
 		. '");
 inclure_balise_dynamique(balise_'
 		. $nom
-		. '_dyn(\''
-		. join("', '", array_map('texte_script', $args))
-		. "'),1, $ligne);
+		. '_dyn('
+		. argumenter_balise_dynamique($args)
+		. "),1, $ligne);
 lang_dselect();
 ?"
 		.">");
+}
+function argumenter_balise_dynamique($args) {
+
+	$res = array();
+	foreach ($args as $v) {
+		if (!is_array($v))
+			$res[]= "'" . texte_script($v) . "'";
+		else
+			$res[]= 'array(' . argumenter_balise_dynamique($v) . ')';
+	}
+	return join(", ", $res);
 }
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
