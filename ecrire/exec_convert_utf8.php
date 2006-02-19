@@ -23,18 +23,24 @@ function demander_conversion($tables_a_convertir, $action) {
 
 	// tester si le charset d'origine est connu de spip
 	if (!load_charset($charset_orig))
-		$message = _L("Erreur : le jeu de caract&egrave;res ".("<b>".$charset_orig."</b>")." n'est pas support&eacute;.");
+		$message = _T('utf8_convert_erreur_orig', array('charset' => "<b>".$charset_orig."</b>"));
 
 	// ne pas convertir si deja utf8
 	else if ($charset_orig == 'utf-8')
-		$message = 'Votre site est d&eacute;j&agrave; en utf-8, inutile de le convertir...';
+		$message = _T('utf8_convert_erreur_deja',
+			array('charset' => $charset_orig)
+		);
 
 	else {
-		$commentaire = _L("Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res ".("<b>".$GLOBALS['meta']['charset']."</b>")." vers le jeu de caract&egrave;res universel <b>utf-8</b>.");
+		$commentaire = _T('utf8_convert_avertissement',
+			array('orig' => $charset_orig,
+				'charset' => 'utf-8')
+		);
 		$commentaire .=  "<p><small>"
 		. http_img_pack('warning.gif', _T('info_avertissement'), "width='48' height='48' align='right'");
-		$commentaire .= _L("N'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles utf-8. D'autre part le suivi des r&eacute;visions, s'il est activ&eacute;, sera endommag&eacute;.</small>");
-		$commentaire .= _L("<p><b>Important&nbsp;:</b> en cas de timeout, veuillez recharger la page jusqu'&agrave; ce qu'elle indique 'termin&eacute;'.");
+		$commentaire .= _T('utf8_convert_backup', array('charset' => 'utf-8'))
+		."</small>";
+		$commentaire .= '<p>'._T('utf8_convert_timeout');
 		$commentaire .= "<hr />\n";
 
 		debut_admin(generer_url_post_ecrire("convert_utf8"),
@@ -46,7 +52,6 @@ function demander_conversion($tables_a_convertir, $action) {
 		ecrire_metas();
 		foreach ($tables_a_convertir as $table => $champ) {
 			spip_log("demande update charset table $table ($champ)");
-			#echo _L("demande update charset table $table ($champ)<br>\n");
 			spip_query("UPDATE $table
 			SET $champ = CONCAT('<CONVERT ".$charset_orig.">', $champ)
 			WHERE $champ NOT LIKE '<CONVERT %'");
@@ -90,7 +95,7 @@ function convert_utf8_dist() {
 	);
 
 	// Definir le titre de la page (et le nom du fichier admin)
-	$action = _L('Conversion utf-8');
+	$action = _T('utf8_convertir_votre_site');
 
 	// si l'appel est explicite, passer par l'authentification ftp
 	if (!$GLOBALS['meta']['conversion_charset']) {
@@ -114,7 +119,7 @@ function convert_utf8_dist() {
 	install_debut_html($action);
 
 	if (!spip_get_lock('conversion_charset'))
-		die(_L('Attendez quelques instants et rechargez cette page.'));
+		die(_T('utf8_convert_attendez'));
 
 	// preparer un fichier de sauvegarde au cas ou
 	// on met 'a' car ca peut demander plusieurs rechargements
@@ -170,8 +175,8 @@ function convert_utf8_dist() {
 
 	if ($f) fclose($f);
 
-	echo _L("<p><b>C'est termin&eacute;&nbsp;!</b>");
-	echo _L("<p>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde au format SQL a &eacute;t&eacute; r&eacute;alis&eacute;e dans le r&eacute;pertoire "._DIR_SESSIONS);
+	echo "<p><b>"._T('utf8_convert_termine')."</b>";
+	echo "<p> "._T('utf8_convert_verifier', array('rep' => _DIR_SESSIONS));
 	effacer_meta('conversion_charset');
 	ecrire_metas();
 
