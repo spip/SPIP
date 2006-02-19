@@ -4,9 +4,9 @@
 <head>
 <title><:icone_agenda:> [#NOM_SITE_SPIP]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-<link rel="stylesheet" href="ecrire/img_pack/calendrier.css" type="text/css" />
-<script type="text/javascript" src="ecrire/img_pack/layer.js"></script>
-<script type="text/javascript" src="ecrire/img_pack/presentation.js"></script>
+<link rel="stylesheet" href="#EVAL{_DIR_IMG_PACK}calendrier.css" type="text/css" />
+<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}layer.js"></script>
+<script type="text/javascript" src="#EVAL{_DIR_IMG_PACK}presentation.js"></script>
 </head><body>
 [(#ENV{type, mois}|agenda_connu)<INCLURE(page.php3)
  {fond=agenda_#ENV{type,mois}}{type}{delais=900}{annee}{mois}{jour}{echelle}{partie_cal}{theme}>]
