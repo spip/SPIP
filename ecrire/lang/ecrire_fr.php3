@@ -92,12 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Ne pas appara&icirc;tre dans la liste des r&eacute;dacteurs',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Ne pas envoyer d\'annonces &eacute;ditoriales',
 'bouton_radio_non_syndication' => 'Pas de syndication',
-'bouton_radio_occidental' => 'Alphabet occidental (<tt>iso-8859-1</tt>)&nbsp;: permet principalement
-		l\'affichage des langues ouest-europ&eacute;ennes (anglais, fran&ccedil;ais, allemand...)&nbsp;;
-		SPIP permet cependant de g&eacute;rer relativement bien les autres langues.',
 'bouton_radio_pas_petition' => 'Pas de p&eacute;tition',
-'bouton_radio_personnalise' => 'Jeu de caract&egrave;res personnalis&eacute;&nbsp;: choisissez cette option si vous voulez
-		utiliser un jeu de caract&egrave;res sp&eacute;cifique',
 'bouton_radio_petition_activee' => 'P&eacute;tition activ&eacute;e',
 'bouton_radio_publication_immediate' => 'Publication imm&eacute;diate des messages
 	(les contributions s\'affichent d&egrave;s leur envoi, les administrateurs peuvent
@@ -106,9 +101,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'sauvegarde non compress&eacute;e sous <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Supprimer la p&eacute;tition',
 'bouton_radio_syndication' => 'Syndication :',
-'bouton_radio_universel' => 'Alphabet universel&nbsp; (<tt>utf-8</tt>): permet l\'affichage de toutes les langues, mais peut poser des
-	probl&egrave;mes de compatibilit&eacute; avec les logiciels utilis&eacute;s pour modifier vos squelettes, et certains lecteurs de
-	courrier &eacute;lectronique.',
 'bouton_redirection' => 'REDIRECTION',
 'bouton_relancer_installation' => 'Relancer l\'installation',
 'bouton_restaurer_base' => 'Restaurer la base',
@@ -876,9 +868,9 @@ r&eacute;installation de SPIP pour recr&eacute;er une nouvelle base ainsi qu\'un
 'texte_informations_personnelles_2' => '(Note : s\'il s\'agit d\'une r&eacute;installation, et que votre acc&egrave;s marche toujours, vous pouvez',
 'texte_introductif_article' => '(Texte introductif de l\'article.)',
 'texte_jeu_caractere' => 'Il est conseill&eacute; d\'employer, sur votre site, l\'alphabet universel (<tt>utf-8</tt>)&nbsp;: celui-ci permet l\'affichage de textes dans toutes les langues, et ne pose plus de probl&egrave;mes de compatibilit&eacute; avec les navigateurs modernes.',
-'texte_jeu_caractere_2' => 'Ce r&eacute;glage n\'a pas d\'effet r&eacute;troactif sur les textes enregistr&eacute;s dans la base de donn&eacute;es.',
+'texte_jeu_caractere_2' => 'Attention : ce r&eacute;glage ne provoque pas la conversion des textes d&eacute;j&agrave; enregistr&eacute;s dans la base de donn&eacute;es.',
 'texte_jeu_caractere_3' => 'Votre site est actuellement install&eacute; dans le jeu de caract&egrave;res&nbsp;:',
-'texte_jeu_caractere_4' => 'Si cela ne correspond pas &agrave; vos donn&eacute;es actuelles (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
+'texte_jeu_caractere_4' => 'Si cela ne correspond pas &agrave; la r&eacute;alit&eacute; de vos donn&eacute;es (suite, par exemple, &agrave; une restauration de base de donn&eacute;es), ou si <em>vous d&eacute;marrez ce site</em> et souhaitez partir sur un autre jeu de caract&egrave;res, veuillez indiquer ce dernier ici&nbsp;:',
 'texte_jeu_caractere_conversion' => 'Note&nbsp;: vous pouvez d&eacute;cider de convertir une fois pour toutes l\'ensemble des textes de votre site (articles, br&egrave;ves, forums, etc.) vers l\'alphabet <tt>utf-8</tt>, en vous rendant sur <a href="@url@">la page de conversion vers l\'utf-8</a>.',
 'texte_lien_hypertexte' => '(Si votre message se r&eacute;f&egrave;re &agrave; un article publi&eacute; sur le Web, ou &agrave; une page fournissant plus d\'informations, veuillez indiquer ci-apr&egrave;s le titre de la page et son adresse URL.)',
 'texte_liens_sites_syndiques' => 'Les liens issus des sites syndiqu&eacute;s peuvent
@@ -1097,6 +1089,14 @@ avez fait des modifications importantes de graphisme ou de structure du site.',
 
 
 // U
+'utf8_convert_attendez' => 'Attendez quelques instants et rechargez cette page.',
+'utf8_convert_avertissement' => 'Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
+'utf8_convert_backup' => 'N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
+'utf8_convert_erreur_deja' => 'Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
+'utf8_convert_erreur_orig' => 'Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
+'utf8_convert_termine' => 'C\'est termin&eacute;&nbsp;!',
+'utf8_convert_timeout' => '<b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => 'Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
 'utf8_convertir_votre_site' => 'Convertir votre site en utf-8',
 
 
