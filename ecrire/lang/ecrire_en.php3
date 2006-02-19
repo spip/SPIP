@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Activate plugin',
 'aide_non_disponible' => 'This part of the online help is not yet available in the present language.',
+'auteur' => 'Author:',
 'avis_acces_interdit' => 'Access forbidden.',
 'avis_article_modifie' => 'Warning, @nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
 'avis_aucun_resultat' => 'No results found.',
@@ -90,11 +92,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Do not appear in the list of connected editors',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Do not send any editorial announcements',
 'bouton_radio_non_syndication' => 'No syndication',
-'bouton_radio_occidental' => 'Western alphabet (<tt>iso-8859-1</tt>): displays mainly
- West-european languages (English, French, German...);
- However, SPIP manages quite well other languages.',
 'bouton_radio_pas_petition' => 'No petition',
-'bouton_radio_personnalise' => 'Custom character set: choose this option if you want to use a specific character set',
 'bouton_radio_petition_activee' => 'Petition activated',
 'bouton_radio_publication_immediate' => 'Immediate publication of messages
  (contributions will be shown as soon as they are sent, administrators can
@@ -103,9 +101,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'save as uncompressed in <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Delete the petition',
 'bouton_radio_syndication' => 'Syndication:',
-'bouton_radio_universel' => 'Universal alphabet (<tt>utf-8</tt>): displays all the languages but could create
-  compatibility problems with the software you use to modify your templates and some e-mail
- clients.',
 'bouton_redirection' => 'REDIRECT',
 'bouton_relancer_installation' => 'Re-launch installation',
 'bouton_restaurer_base' => 'Restore the database',
@@ -139,7 +134,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'e-mail:',
 'entree_adresse_annuaire' => 'Directory\'s address',
 'entree_adresse_email' => 'Your e-mail address',
-'entree_adresse_fichier_syndication' => 'Address of &laquo;backend&raquo; file for syndication:',
+'entree_adresse_fichier_syndication' => 'Address of file for syndication:',
 'entree_adresse_site' => '<b>Site URL</b> [Required]',
 'entree_base_donnee_1' => 'Database address',
 'entree_base_donnee_2' => '(Often, this address matches the address of your site, sometimes it corresponds to the name &laquo;localhost&raquo;, and sometimes it is left completely empty.)',
@@ -172,6 +167,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Text of news item',
 'entree_titre_obligatoire' => '<B>Title</b> [Required]<BR>',
 'entree_url' => 'Your site\'s URL',
+'erreur_plugin_fichier_absent' => 'File missing',
+'erreur_plugin_fichier_def_absent' => 'Definition file missing',
+'erreur_plugin_nom_fonction_interdit' => 'Prohibited function name',
+'erreur_plugin_nom_manquant' => 'Missing plugin name',
+'erreur_plugin_prefix_manquant' => 'Plugin\'s namespace undefined',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; missing in the definition file',
+'erreur_plugin_version_manquant' => 'Missing version of the plugin',
 
 
 // I
@@ -186,8 +188,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'You can syndicate the latest news of this site in any XML/RSS (Rich Site Summary) files reader. This is also the format that allows SPIP to read the latest news published by other sites using a compatible exchange format (syndicated sites).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
-'ical_titre_rss' => 'Backend files',
+'ical_titre_rss' => 'Syndication files',
 'icone_activer_cookie' => 'Place a cookie',
+'icone_admin_plugin' => 'Manage plugins',
 'icone_afficher_auteurs' => 'Show authors',
 'icone_afficher_visiteurs' => 'Show visitors',
 'icone_arret_discussion' => 'Stop participating in this discussion',
@@ -367,13 +370,13 @@ requiring an FTP access to the Web site.',
 		of SPIP cannot be implemented.',
 'info_hier' => 'yesterday:',
 'info_historique' => 'Revisions:',
-'info_historique_activer' => 'Enable revisions follow-up',
+'info_historique_activer' => 'Enable revision tracking',
 'info_historique_affiche' => 'Display this version',
 'info_historique_comparaison' => 'compare',
-'info_historique_desactiver' => 'Disable revisions follow-up',
+'info_historique_desactiver' => 'Disable revision tracking',
 'info_historique_lien' => 'Display list of versions',
-'info_historique_texte' => 'Revisions follow-up allows you to keep track of every modifications added to an article and displays the differences between successive versions.',
-'info_historique_titre' => 'Revisions follow-up',
+'info_historique_texte' => 'Revision tracking allows you to see the changes and additions made to an article and displays the differences between successive versions.',
+'info_historique_titre' => 'Revision tracking',
 'info_identification_publique' => 'Your public identity...',
 'info_image_process' => 'Select the best method to create thumbnails by clicking on the corresponding picture.',
 'info_image_process2' => '<b>N.B.</b> <i>If you can\'t see any image, then your server is not configured to use such tools. If you want to use these features, contact your provider\'s technical support and ask for the &laquo;GD&raquo; or &laquo;Imagick&raquo; extensions to be installed.</i>',
@@ -569,6 +572,8 @@ requiring an FTP access to the Web site.',
 'info_sous_titre' => 'Subtitle:',
 'info_statut_administrateur' => 'Administrator',
 'info_statut_auteur' => 'This author\'s status:',
+'info_statut_auteur_a_confirmer' => 'Registration to be confirmed',
+'info_statut_auteur_autre' => 'Other status:',
 'info_statut_efface' => 'Deleted',
 'info_statut_redacteur' => 'Editor',
 'info_statut_site_1' => 'This site is:',
@@ -580,6 +585,8 @@ requiring an FTP access to the Web site.',
 'info_suivi_activite' => 'Follow-up of editorial activity',
 'info_supprimer_mot' => 'delete this keyword',
 'info_surtitre' => 'Top title:',
+'info_syndication_integrale_1' => 'Your site offers syndication files (see &#147;<a href="@url@">@titre@</a>”).',
+'info_syndication_integrale_2' => 'Do you wish to send whole articles or only a summary of a few hundred characters?',
 'info_taille_maximale_vignette' => 'Maximum size of vignettes generated by the system:',
 'info_terminer_installation' => 'You can now finish the standard installation process.',
 'info_texte' => 'Text',
@@ -632,6 +639,7 @@ in a colour indicating their status:',
 'item_ajout_mots_cles' => 'Authorise the addition of keywords to forums',
 'item_autoriser_documents_joints' => 'Authorise documents attached to articles',
 'item_autoriser_documents_joints_rubriques' => 'Authorise documents in the sections',
+'item_autoriser_syndication_integrale' => 'Include entire articles in the syndication files',
 'item_bloquer_liens_syndiques' => 'Block syndicated links for validation',
 'item_breve_refusee' => 'NO - News item rejected',
 'item_breve_validee' => 'YES - News item validated',
@@ -657,6 +665,7 @@ in a colour indicating their status:',
 'item_non_ajout_mots_cles' => 'Do not authorise the addition of keywords to forums',
 'item_non_autoriser_documents_joints' => 'Do not authorise documents in articles',
 'item_non_autoriser_documents_joints_rubriques' => 'Do not authorise documents in the sections',
+'item_non_autoriser_syndication_integrale' => 'Only send a summary',
 'item_non_bloquer_liens_syndiques' => 'Do not block the links emanating from syndication',
 'item_non_creer_fichiers_authent' => 'Do not create these files',
 'item_non_gerer_annuaire_site_web' => 'Disable Web sites directory',
@@ -735,7 +744,7 @@ in a colour indicating their status:',
 'ortho_ajouter_ce_mot' => 'Add this word to the dictionary',
 'ortho_aucune_suggestion' => 'No suggestion was found for this word.',
 'ortho_avis_privacy' => 'Spip contains a spell checker. However, before enabling it, please read the following paragraph carefully:',
-'ortho_avis_privacy2' => 'In order to check spelling  a text, the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some level of confidentiality. If you are concerned about your data, do not activate this option (and withdraw all your information from the web at once).',
+'ortho_avis_privacy2' => 'In order to check the spelling of a text, the site will send the list of words to be checked to an external "spelling server", which people of the Spip community have made available. The words are mixed up before being sent in order to maintain some level of confidentiality. If you are concerned about your data, do not activate this option (and withdraw all your information from the web at once).',
 'ortho_ce_mot_connu' => 'This word is in the site\'s dictionary.',
 'ortho_dico_absent' => 'No dictionary was found for this language',
 'ortho_mode_demploi' => 'Urecognised words have been highlighted in red. Click on these words to see suggested corrections.',
@@ -745,6 +754,18 @@ in a colour indicating their status:',
 'ortho_trop_de_fautes' => 'Your text contains too many mistakes! In order to avoid overloading the system, no corrections have been suggested.',
 'ortho_verif_impossible' => 'The system cannot check the spelling of this text.',
 'ortho_verifier' => 'Spell check',
+
+
+// P
+'plugin_etat_developpement' => 'under development',
+'plugin_etat_experimental' => 'experimental',
+'plugin_etat_stable' => 'stable',
+'plugin_etat_test' => 'being tested',
+'plugins_liste' => 'Plugin list',
+
+
+// R
+'repertoire_plugins' => 'Directory:',
 
 
 // S
@@ -846,16 +867,11 @@ the images and the documents used in the articles and sections.',
 'texte_informations_personnelles_1' => 'The system will provide you now with a custom access to the site.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can',
 'texte_introductif_article' => '(Introductory Text to the article.)',
-'texte_jeu_caractere' => 'This option is useful if your site displays alphabets
- different from the roman alphabet (that is &laquo;western&raquo;) and its derivatives.
- In this case, the default setting must be changed in order to use
- a suitable character set; anyway, we advise you to try different sets
- in order to find the right solution. If you modify this parameter, do not forget either, to adapt
- the public site accordingly (<tt>#CHARSET</tt> tag).',
-'texte_jeu_caractere_2' => 'This setting is not retroactive.
-	Consequently, text already entered might be wrongly
-	displayed after modifying the setting. Anyway,
-	you can always revert to the previous setting.',
+'texte_jeu_caractere' => 'You are advised to use the universal alphabet (<tt>utf-8</tt>) on your site. This will make it possible to display text in any language. No modern browsers have any difficulty with this character set.',
+'texte_jeu_caractere_2' => 'N.B. This setting will not convert text which has already been saved in the database.',
+'texte_jeu_caractere_3' => 'Your site currently uses this character set:',
+'texte_jeu_caractere_4' => 'If that does not correspond to the situation you have with your data (for example, after restoring your database from a backup), or if <em>you are setting up this site</em> and wish to use a different character set, please indicate the character set here:',
+'texte_jeu_caractere_conversion' => 'Note: You can decide to convert all the texts (articles, news items, forums, etc.) of your site once and for all to the character set <tt>utf-8</tt>. To do this, go to the <a href="@url@">UTF-8 conversion page</a>.',
 'texte_lien_hypertexte' => '(If your message refers to an article published on the Web, or to a page providing more information, please enter here the title of the page and its URL.)',
 'texte_liens_sites_syndiques' => 'Links emanating from syndicated sites could
 			be blocked beforehand; the following
@@ -897,6 +913,7 @@ the images and the documents used in the articles and sections.',
 'texte_plus_trois_car' => 'more than 3 characters',
 'texte_plusieurs_articles' => 'Several authors were found for "@cherche_auteur@":',
 'texte_port_annuaire' => '(Default value is generally suitable.)',
+'texte_presente_plugin' => 'This page lists the available plugins on the site. Activate the plugins you require by ticking the corresponding box.',
 'texte_proposer_publication' => 'When your article is finished,<br> you can submit it for publication.',
 'texte_proxy' => 'In some cases (intranet, protected networks...),
 		it is necessary to use a <I>proxy HTTP</i> to reach the syndicated sites.
@@ -912,7 +929,7 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_recapitiule_liste_documents' => 'This page sums up the list of documents that you have placed in the sections. To modify each document\'s information, follow the link to its section\'s page.',
 'texte_recuperer_base' => 'Repair the database',
 'texte_reference_mais_redirige' => 'referenced article in your SPIP site, but redirected to another URL.',
-'texte_referencement_automatique' => '<b>Automated site referencing</b><br>You can reference a Web site quickly by indicating below the desired URL, or the address of its backend file. SPIP will automatically pick up the information concerning that site (title, description...).',
+'texte_referencement_automatique' => '<b>Automated site referencing</b><br>You can reference a Web site quickly by indicating below the desired URL, or the address of its syndication file. SPIP will automatically pick up the information concerning that site (title, description...).',
 'texte_requetes_echouent' => '<b>When some MySQL queries fail
   systematically and without any apparent reason, it is possible
   that the database itself
@@ -966,16 +983,12 @@ entered important modifications on the graphics or the structure of the site.',
 'texte_titre_02' => 'Subject:',
 'texte_titre_obligatoire' => '<B>Title</b> [Required]',
 'texte_travail_article' => '@nom_auteur_modif@ has worked on this article @date_diff@ minutes ago',
-'texte_travail_collaboratif' => 'If it is frequent that several editors
-		work on the same article, the system
-		can show the recently &laquo;opened&raquo; articles
-		in order to avoid simultaneous modifications.
-		This option is disabled by default
-		to avoid displaying untimely warning
-		messages.',
+'texte_travail_collaboratif' => 'If several editors may often   work on the same article, the system can mark the recently &laquo;opened&raquo; articles in order to avoid simultaneous changes being attempted.
+  This option is disabled by default to avoid displaying unnecessary warnings.
+  messages.',
 'texte_trop_resultats_auteurs' => 'Too many results for "@cherche_auteur@"; please refine the search.',
 'texte_unpack' => 'downloading the latest version',
-'texte_utilisation_moteur_syndiques' => 'When you use the search engine integrated to SPIP, you can perform searches on sites and articles syndicated in different manners. <br><img src=\'puce.gif\'>The most simple one is to search only in the titles and descriptions of the articles. <br><img src=\'puce.gif\'> A second method, much more powerful, allows SPIP to search also in the text of the referenced sites. If you reference a site, SPIP will perform the search in the site\'s text itself.',
+'texte_utilisation_moteur_syndiques' => 'When you use SPIP\'s integrated search engine, you can perform searches on sites and articles syndicated in two different manners. <br>- The simplest way is to search only in the titles and descriptions of the articles. <br>- A second, much more powerful, method allows SPIP to search also in the text of the referenced sites. If you reference a site, SPIP will perform the search in the site\'s text itself.',
 'texte_utilisation_moteur_syndiques_2' => 'This method forces SPIP to visit the referenced sites regularly, which could cause a drop in the performance of your own site.',
 'texte_vide' => 'empty',
 'texte_vider_cache' => 'Empty the cache',
@@ -1062,7 +1075,20 @@ entered important modifications on the graphics or the structure of the site.',
 'trad_new' => 'Write a new translation of this article',
 
 
+// U
+'utf8_convert_attendez' => 'Wait a few seconds and then reload this page.',
+'utf8_convert_avertissement' => 'You are about to convert the contents of your database (articles, news items, etc) from the character set <b>@orig@</b> to the character set <b>@charset@</b>.',
+'utf8_convert_backup' => 'Don\'t forget to first make a complete backup of your site. You need also to check that your templates and language files are compatible with @charset@. If revision tracking is enabled it will in any case be damaged.',
+'utf8_convert_erreur_deja' => 'Your site is already in @charset@, there is no point in converting.',
+'utf8_convert_erreur_orig' => 'Error: the character set @charset@ is not supported.',
+'utf8_convert_termine' => 'Finished!',
+'utf8_convert_timeout' => '<b>Important:</b> If the server  indicates <i>timeout</i>, please reload the page you receive the message &laquo;Finished!&raquo;.',
+'utf8_convert_verifier' => 'You now need to empty the site cache and then check if all is well on the public pages of the site. If you are stuck with a major problem, a backup of your original data (in SQL format) has been made int the @rep@ directory.',
+'utf8_convertir_votre_site' => 'Convert your site to utf-8',
+
+
 // V
+'version' => 'Version:',
 'version_initiale' => 'Initial version'
 
 );
