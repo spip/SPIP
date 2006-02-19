@@ -52,14 +52,14 @@ function affiche_logos($logos, $lien, $align) {
 			."onmouseout=\"this.src='$arton'\"";
 
 	$milieu = "<img src=\"$arton\" alt=\"\""
-		. ($align ? " align='$align'" : '') 
+		. ($align ? " align=\"$align\"" : '') 
 		. $taille
 		. $mouseover
 		. " style='border-width: 0px;' class='spip_logos' />";
 
 	return (!$lien ? $milieu :
 		('<a href="' .
-		 str_replace('&', '&amp;', $lien) .
+		 quote_amp($lien) .
 		'">' .
 		$milieu .
 		'</a>'	 ));
