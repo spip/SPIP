@@ -452,7 +452,7 @@ function examiner_les_fichiers($files, $mode, $type, $id, $id_document, $hash, $
 	}
 }
 
-
+/* code mort cf sousaction4
 function identifie_repertoire_et_rubrique($DIR, $id_rubrique, $id_auteur, $art=0)
 {
   static $exts = array();
@@ -564,7 +564,7 @@ WHERE id_rubrique=$id_rubrique");
   return $collecte;
  
 }
-
+*/
 
 //
 // Convertit le type numerique retourne par getimagesize() en extension fichier

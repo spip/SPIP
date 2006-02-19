@@ -439,7 +439,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 	$exts = array();
 	$dirs = array();
 	foreach ($fichiers as $f) {
-		$f = ereg_replace("^$dir/","",$f);
+		$f = preg_replace(",^$dir,",'',$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if (!$exts[$ext]) {
@@ -615,24 +615,17 @@ function afficher_transferer_upload($type, $texte_upload)
 	else {  return
 		"<p><div style='color: #505050;'>\n"
 		._T('info_selectionner_fichier',
-			  array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'))
+			array('upload' => '<b>' . _DIR_TRANSFERT . '</b>'))
 		."&nbsp;:<br />" .
 		"\n<select name='chemin' size='1' class='fondl'>" .
 		$texte_upload .
-	  	"\n</select>" .
-		(($type != 'rubrique') ? "" :  ("<br />". _L("et choisir le mode de transfert:"))) .
+		"\n</select>" .
 		"\n<div align='".
 		$GLOBALS['spip_lang_right'] .
 		"'><input name='sousaction3' type='Submit' value='" .
-		_L('recopier').
+		_T('bouton_choisir').
 		"' class='fondo'></div>" .
-		(($type != 'rubrique') ? "" :
-		    ("\n<div align='".
-				$GLOBALS['spip_lang_right'] .
-				"'><input name='sousaction4' type='Submit' value='" .
-				_L('identifier repertoires et rubriques').
-		     "' class='fondo'></div>")) .
-	    	"</div>\n";
+		"</div>\n";
 	}
 }
 
