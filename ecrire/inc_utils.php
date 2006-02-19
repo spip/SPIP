@@ -21,18 +21,27 @@ $included_files = array();
 function include_local($file, $silence=false) {
 	$nom = preg_replace("/\.php[3]?$/",'', $file);
 #	spip_log("'$nom' '$file'");
-	if (@$GLOBALS['included_files'][$nom]++) return;
-	if (is_readable($f = $nom . '.php'))
-	  include($f);
-	else if (is_readable($f = $nom . _EXTENSION_PHP))
-	  include($f);
-	else if (!$silence) spip_log($file . " illisible");
+	if (@$GLOBALS['included_files'][$nom]++)
+		return true;
+	if (is_readable($f = $nom . '.php')) {
+		include($f);
+		return true;
+	}
+	else if (is_readable($f = $nom . _EXTENSION_PHP)) {
+		include($f);
+		return true;
+	}
+	else {
+		if (!$silence)
+			spip_log($file . " illisible");
+		return false;
+	}
 }
 
-function include_ecrire($file) {
+function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
-	include_local(_DIR_INCLUDE . $file);
+	return include_local(_DIR_INCLUDE . $file, $silence);
 }
 
 // charge un fichier perso ou, a defaut, standard
@@ -633,15 +642,17 @@ function charger_generer_url() {
 
 	if ($ok++) return; # fichier deja charge
 
-	// espace prive ?
+	// espace prive
 	if (!_DIR_RESTREINT)
 		include_ecrire('inc_urls');
-	// fichier inc-urls ?
-	else if (@file_exists("inc-urls" . _EXTENSION_PHP))
-		include_local("inc-urls");
-	// fichier inc-urls-xxx ?
-	else
-		include_local("inc-urls-".$GLOBALS['type_urls']);
+
+	// espace public
+	else {
+		// fichier inc-urls ? (old style)
+		include_local(_DIR_RACINE."inc-urls")
+		// sinon fichier inc-urls-xxx
+		OR include_local(_DIR_RACINE."inc-urls-".$GLOBALS['type_urls']);
+	}
 }
 
 
