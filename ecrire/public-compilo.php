@@ -43,6 +43,7 @@ include_ecrire('inc_serialbase');
 // Calculer un <INCLURE()>
 //
 function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
+	$fichier = $struct->texte;
 
 	# raccourci <INCLURE{fond=xxx}> sans fichier .php
 	if (!strlen($fichier))
