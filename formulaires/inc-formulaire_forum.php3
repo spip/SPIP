@@ -43,7 +43,7 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	// Note : ceci n'est pas documente !!
 	// $filtres[0] peut contenir l'url sur lequel faire tourner le formulaire
-	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum.php)]
+	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM|forum)]
 
 	// le denier arg peut contenir l'url sur lequel faire le retour
 	// exemple dans un squelette article.html : [(#FORMULAIRE_FORUM{#SELF})]
@@ -67,13 +67,15 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	if (($GLOBALS['meta']["mots_cles_forums"] != "oui"))
 		$table = '';
 
+	// compatibilite: virer l'extension
+	$script = preg_match(',.php3?$,', $filtres[0],$r) ? $r[1] : $filtres[0];
 	return
-	  array($titre, $table, $forums_publics, $filtres[0],
+	  array($titre, $table, $forums_publics, ($script ? $script : 'forum'),
 		$idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url);
 }
 
 function balise_FORMULAIRE_FORUM_dyn(
-$titre, $table, $type, $url,
+$titre, $table, $type, $page,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
 $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 {
@@ -85,31 +87,18 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	}
 
 // exclure des id_* postees du formulaire tout ce qui n'est pas nombre > 0. 
-// y aura plein de input hidden value=0  dans le squelette mais il faut
-// que le calcul du hachage soit le meme ici et dans inc-messforum
+// attention le calcul du hachage doit etre le meme ici et dans inc-messforum
 
-	$ids = array('id_article' => intval($id_article),
-		     'id_breve'=> intval($id_breve),
-		     'id_forum'=> intval($id_forum),
-		     'id_rubrique'=> intval($id_rubrique),
-		     'id_syndic'=> intval($id_syndic));
+	$ids = array();
+	if ($x = intval($id_article)) $ids['id_article'] = $x;
+	if ($x = intval($id_breve)) $ids['id_breve'] = $x;
+	if ($x = intval($id_forum)) $ids['id_forum'] = $x;
+	if ($x = intval($id_rubrique)) $ids['id_rubrique'] = $x;
+	if ($x = intval($id_syndic)) $ids['id_syndic'] = $x;
 
-	// url de reference
-	if (!$url) {
-		$url = new Link();
-		$url = $url->getUrl();
-	} else {
-		// identifiants des parents
-		$args = "";
-		foreach ($ids as $id => $v) $args .= "&$id=$v";
-		if (strpos($url,'?'))
-			$url .= $args;
-		else  $url .= '?' . substr($args,1);
-	}
-
-	$url = ereg_replace("[?&]var_erreur=[^&]*", '', $url);
-	$url = ereg_replace("[?&]var_login=[^&]*", '', $url);
-	$url = ereg_replace("[?&]url=[^&]*", '', $url);
+	$args = "";
+	foreach ($ids as $id => $v) $args .= "&$id=$v";
+	$url = "./?page=$page$args";
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
@@ -128,7 +117,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			
 			// sauf si on a passe un parametre en argument (exemple : {#SELF})
 			if($url_param_retour)
-				$retour_forum = str_replace("&amp;", "&", $url_param_retour);
+				$retour_forum = urlencode($url_param_retour);
 		}
 
 		if (isset($_COOKIE['spip_forum_user'])
@@ -177,7 +166,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		'table' => $table,
 		'texte' => $texte,
 		'titre' => extraire_multi($titre),
-		'url' =>  $url,
+		'page' =>  $page,
+		'url' => $url,
 		'url_site' => ($url_site ? $url_site : "http://"),
 		'id_article' => $ids['id_article'],
 		'id_breve' => $ids['id_breve'],

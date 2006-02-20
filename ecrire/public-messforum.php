@@ -135,8 +135,32 @@ function enregistre_forum() {
 	}
 
 	// initialisation de l'eventuel visiteur connecte
-	if (!$id_auteur)
+	if (!($id_auteur = intval($id_auteur)))
 	$id_auteur = intval($auteur_session['id_auteur']);
+
+	// Verifier hash securite pour les forums avec previsu
+	if ($GLOBALS['afficher_texte'] <> 'non') {
+		include_ecrire("inc_session");
+		if (!verifier_action_auteur("ajout_forum $id_rubrique".
+		" $id_forum $id_article $id_breve".
+		" $id_syndic $alea", $hash)) {
+			spip_log('erreur hash forum');
+			die (_T('forum_titre_erreur')); 	# echec du POST
+		}
+
+		// verifier fichier lock
+		$alea = preg_replace('/[^0-9]/', '', $alea);
+		if (!file_exists($file = _DIR_SESSIONS."forum_$alea.lck"))
+			return $retour_forum; # echec silencieux du POST
+	}
+
+	// securite
+
+	$id_article = intval($id_article);
+	$id_breve = intval($id_breve);
+	$id_forum = intval($id_forum);
+	$id_rubrique = intval($id_rubrique);
+	$id_syndic = intval($id_syndic);
 
 	$statut = controler_forum($id_article, $retour_forum);
 
@@ -155,21 +179,8 @@ function enregistre_forum() {
 		exit;
 	}
 
-	// Verifier hash securite pour les forums avec previsu
 	if ($GLOBALS['afficher_texte'] <> 'non') {
-		include_ecrire("inc_session");
-		if (!verifier_action_auteur("ajout_forum $id_rubrique".
-		" $id_forum $id_article $id_breve".
-		" $id_syndic $alea", $hash)) {
-			spip_log('erreur hash forum');
-			die (_T('forum_titre_erreur')); 	# echec du POST
-		}
-
-		// verifier fichier lock
-		$alea = preg_replace('/[^0-9]/', '', $alea);
-		if (!file_exists($hash = _DIR_SESSIONS."forum_$alea.lck"))
-			return $retour_forum; # echec silencieux du POST
-		unlink($hash);
+		unlink($file);
 	}
 
 	// Entrer le message dans la base
@@ -213,7 +224,7 @@ function enregistre_forum() {
 		// Cela assure aussi qu'on retrouve son message dans le thread
 		// dans le cas des forums moderes a posteriori, ce qui n'est
 		// pas plus mal.
-		$retour_forum = generer_url_forum($id_message, true);
+		$retour_forum = generer_url_forum($id_message);
 	}
 
 	// Entrer les mots-cles associes

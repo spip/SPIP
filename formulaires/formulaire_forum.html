@@ -1,5 +1,6 @@
 <a id="formulaire"></a>
 <form action="[(#ENV{url})][(#ENV**{previsu}|?{'#formulaire',''})]" method="post">[
+<input type='hidden' name='page' value='(#ENV{page})' />][
 <input type='hidden' name='id_article' value='(#ENV{id_article})' />][
 <input type='hidden' name='id_breve' value='(#ENV{id_breve})' />][
 <input type='hidden' name='id_forum' value='(#ENV{id_forum})' />][
