@@ -13,28 +13,44 @@
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
+
+####### modifications possibles dans ecrire/mes_options
+# on peut indiquer '.html' pour faire joli
+define ('_terminaison_urls_page', '');
+# ici, ce qu'on veut ou presque (de preference pas de '/' ni de '.')
+define ('_separateur_urls_page', '=');
+# on peut indiquer '' si on a installe le .htaccess
+define ('_debut_urls_page', './?');
+#######
+
+
+function composer_url_page($page,$id) {
+	return _debut_urls_page . $page . _separateur_urls_page
+	. $id . _terminaison_urls_page;
+}
+
 function generer_url_article($id_article) {
-	return "page.php3?fond=article&id_article=$id_article";
+	return composer_url_page('article', $id_article);
 }
 
 function generer_url_rubrique($id_rubrique) {
-	return "page.php3?fond=rubrique&id_rubrique=$id_rubrique";
+	return composer_url_page('rubrique', $id_rubrique);
 }
 
 function generer_url_breve($id_breve) {
-	return "page.php3?fond=breve&id_breve=$id_breve";
+	return composer_url_page('breve', $id_breve);
 }
 
 function generer_url_mot($id_mot) {
-	return "page.php3?fond=mot&id_mot=$id_mot";
+	return composer_url_page('mot', $id_mot);
 }
 
 function generer_url_site($id_syndic) {
-	return "page.php3?fond=site&id_syndic=$id_syndic";
+	return composer_url_page('site', $id_syndic);
 }
 
 function generer_url_auteur($id_auteur) {
-	return "page.php3?fond=auteur&id_auteur=$id_auteur";
+	return composer_url_page('auteur', $id_auteur);
 }
 
 function generer_url_document($id_document) {
@@ -47,13 +63,25 @@ function generer_url_document($id_document) {
 	return '';
 }
 
-function recuperer_parametres_url($fond, $url) {
+function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
+	if (preg_match(
+	',/[?]?(article|rubrique|breve|mot|site|auteur)'
+	.preg_quote(_separateur_urls_page).'([0-9]+),',
+	$url, $regs)) {
+		$fond = $regs[1];
+		if ($regs[1] == 'site')
+			$contexte['id_syndic'] = $regs[2];
+		else
+			$contexte['id_'.$fond] = $regs[2];
+
+		return;
+	}
 
 	/*
 	 * Le bloc qui suit sert a faciliter les transitions depuis
-	 * le mode 'urls-propres' vers les modes 'urls-standard' et 'url-html'
+	 * le mode 'urls-propres' vers les modes 'urls-standard/page' et 'url-html'
 	 * Il est inutile de le recopier si vous personnalisez vos URLs
 	 * et votre .htaccess
 	 */

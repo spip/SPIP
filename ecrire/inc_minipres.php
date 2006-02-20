@@ -189,15 +189,11 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 // Attention: generer_url_ecrire peut rajouter des args
 
 function generer_url_post_ecrire($script, $args='', $name='', $ancre='') {
-	$hidden = "";
+	include_ecrire('inc_filtres');
 	$action = generer_url_ecrire($script, $args);
-	if ($p = strpos($action, '?'))
-	  foreach(preg_split('/&(amp;)?/',substr($action,$p+1)) as $c) {
-		$hidden .= "\n<input name='" . 
-		  str_replace('=', "' value='", $c) .
-		  "' type='hidden' />";
-	}
 	if ($name) $name = " name='$name'";
-	return "\n<form action='$action$ancre'$name method='post'>$hidden";
+	return "\n<form action='$action$ancre'$name method='post'>"
+	.form_hidden($action);
 }
+
 ?>

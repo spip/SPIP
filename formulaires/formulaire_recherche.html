@@ -1,5 +1,6 @@
 <form action="[(#ENV{lien})]" method="get" class="formrecherche">
-	<div>
+[(#ENV{lien}|form_hidden)
+]	<div>
 		<input type="text"
 			id="formulaire_recherche"
 			class="formrecherche"

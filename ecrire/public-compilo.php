@@ -22,19 +22,19 @@ define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
-include_local("inc-compilo-index");  # index ? structure ? pile ?
+include_ecrire("public-compilo-index");  # index ? structure ? pile ?
 
 // definition des boucles
-include_local("inc-boucles");
+include_ecrire("public-boucles");
 
 // definition des criteres
-include_local("inc-criteres");
+include_ecrire("public-criteres");
 
 // definition des balises
-include_local("inc-balises");
+include_ecrire("public-balises");
 
 // definition de l'API
-include_local("inc-compilo-api");
+include_ecrire("public-compilo-api");
 
 # definition des tables
 include_ecrire('inc_serialbase');
@@ -43,10 +43,13 @@ include_ecrire('inc_serialbase');
 // Calculer un <INCLURE()>
 //
 function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
-	$fichier = $struct->texte;
 
-	if (!($path = find_in_path($fichier)))
-	  {
+	# raccourci <INCLURE{fond=xxx}> sans fichier .php
+	if (!strlen($fichier))
+		$path = _DIR_RESTREINT.'page.php';
+
+	# sinon chercher le fichier demande
+	else if (!($path = find_in_path($fichier))) {
 		spip_log("ERREUR: <INCLURE($fichier)> impossible");
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
 				 "&lt;INCLURE($fichier)&gt; - "
@@ -577,7 +580,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-	include_local("inc-$gram-squel");
+	include_ecrire("public-$gram-squel");
 
 	$racine = phraser($squelette, '',$boucles, $nom);
 

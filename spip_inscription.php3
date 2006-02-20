@@ -12,7 +12,7 @@
 
 include ("ecrire/inc_version.php");
 include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
-include_local("inc-public-global"); 
+include_ecrire('public-global'); 
 include_ecrire("inc_lang");
 include_ecrire('inc_headers');
 

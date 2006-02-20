@@ -1,5 +1,6 @@
 <?php
 
+
 /***************************************************************************\
  *  SPIP, Systeme de publication pour l'internet                           *
  *                                                                         *
@@ -10,10 +11,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-// pour compatibilite. voir dans le fichier inclus comment remplacer
 
-define ('_SPIP_REDIRECT', 1);
-include ("ecrire/inc_version.php");
-include_ecrire("inc_spip_action_redirect.php");
-spip_action_redirect_dist();
+/*
+
+Ce jeu d'URLs est une variation de inc-urls-propres, qui ajoute
+le suffixe '.html' aux adresses ;
+
+*/
+
+if (!defined('_terminaison_urls_propres'))
+	define ('_terminaison_urls_propres', '.html');
+
+include_ecrire('urls/propres');
+
 ?>

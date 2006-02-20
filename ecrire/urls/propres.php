@@ -38,10 +38,8 @@ sans utilisation de .htaccess ; les adresses sont de la forme
 
 */
 
-if (!defined('_terminaison_urls_propres'))
-	define ('_terminaison_urls_propres', '');
-if (!defined('_debut_urls_propres'))
-	define ('_debut_urls_propres', '');
+define ('_terminaison_urls_propres', '');
+define ('_debut_urls_propres', '');
 
 function _generer_url_propre($type, $id_objet) {
 	$table = "spip_".table_objet($type);

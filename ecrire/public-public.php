@@ -27,7 +27,7 @@ if (defined("_INC_PUBLIC")) {
 	if (!function_exists('include_local')) { # cas du script page
 		include ("ecrire/inc_version.php");
 	}
-	include_local('inc-public-global');
+	include_ecrire('public-global');
 
 	$tableau_des_erreurs = array();
 	$page = calcule_header_et_page ($fond);
@@ -115,7 +115,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Inserer au besoin les boutons admins
 	if ($affiche_boutons_admin) {
-		include_local("inc-admin");
+		include_ecrire('public-admin');
 		$page = affiche_boutons_admin($page);
 	}
 
@@ -124,7 +124,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Gestion des statistiques du site public
 	if ($GLOBALS['meta']["activer_statistiques"] != "non") {
-		include_local ("inc-stats");
+		include_ecrire ('public-stats');
 		ecrire_stats();
 	}
 

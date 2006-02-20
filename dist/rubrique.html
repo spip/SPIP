@@ -18,7 +18,7 @@
 <link rel="stylesheet" href="#DOSSIER_SQUELETTE/impression.css" type="text/css" media="print" />
 
 <!-- Lien vers le backend pour navigateurs eclaires -->
-<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="backend.php3?id_rubrique=#ID_RUBRIQUE" />
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="#URL_PAGE{backend,id_rubrique=#ID_RUBRIQUE}" />
 </head>
 
 <body>
@@ -35,10 +35,10 @@
 	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
 	</li>
 	<li class="menu-item">
-	<a href="plan.php3"><:plan_site:></a>
+	<a href="#URL_PAGE{plan}"><:plan_site:></a>
 	</li>
 	<li class="menu-item">
-	<a href="resume.php3" title="<:articles_populaires:>"><:en_resume:></a>
+	<a href="#URL_PAGE{resume}" title="<:articles_populaires:>"><:en_resume:></a>
 	</li>
 	<li class="menu-item">
 	<a href="ecrire/"><:espace_prive:></a>

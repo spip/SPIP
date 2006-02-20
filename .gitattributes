@@ -368,8 +368,8 @@ ecrire/safehtml/classes/safehtml.php -text
 ecrire/safehtml/license.txt -text
 ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
-/inc-urls-page.php3 -text
-/inc-urls-propres-qs.php3 -text
+ecrire/urls/page.php -text
+ecrire/urls/propres-qs.php -text
 /puce.gif -text
 /puce_rtl.gif -text
 /rien.gif -text

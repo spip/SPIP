@@ -27,7 +27,7 @@ include_ecrire("inc_abstract_sql");
 include_ecrire("inc_forum");
 include_ecrire("inc_debug_sql");
 include_ecrire("inc_distant");
-include_local("inc-calcul-outils");
+include_ecrire("public-calcul-outils");
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
@@ -81,7 +81,7 @@ function charger_squelette ($squelette) {
 
 	// sinon, charger le compilateur et verifier que le source est lisible
 	if (!function_exists($nom)) {
-		include_local("inc-compilo");
+		include_ecrire('public-compilo');
 		lire_fichier ($sourcefile, $skel);
 	}
 
@@ -133,7 +133,7 @@ function charger_squelette ($squelette) {
 
 function cherche_page ($cache, $contexte, $fond)  {
 	if (!function_exists('chercher_squelette'))
-		include_local("inc-chercher-squelette");
+		include_ecrire('public-chercher-squelette');
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
