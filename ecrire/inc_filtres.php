@@ -277,25 +277,6 @@ function calculer_url($url) {
 }
 
 //
-// Prend une URL (destinee a l'affichage) et lui ajoute/retire
-// un parametre.
-// Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
-//            [(#SELF|parametre_url{suite,''})] (supprime)
-//            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
-// http://www.spip.net/@parametre_url
-//
-function parametre_url($url, $parametre, $valeur = NULL) {
-	$link = new Link(str_replace('&amp;', '&', $url));
-	if ($valeur === NULL)
-		$valeur = _request($parametre);
-	if (empty($valeur))
-		$link->delVar($parametre);
-	else
-		$link->addVar($parametre, $valeur);
-	return quote_amp($link->getUrl());
-}
-
-//
 // Ajouter le &var_recherche=toto dans les boucles de recherche
 //
 function url_var_recherche($url) {

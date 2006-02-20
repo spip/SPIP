@@ -720,7 +720,7 @@ function code_invalideur_forums($p, $code) {
 // mettre en cache #SELF car il peut correspondre a une autre page (attaque XSS)
 // http://www.spip.net/@self
 function balise_SELF_dist($p) {
-	$p->code = 'quote_amp($GLOBALS["clean_link"]->getUrl())';
+	$p->code = 'quote_amp(self())';
 	$p->interdire_scripts = false;
 	return $p;
 }

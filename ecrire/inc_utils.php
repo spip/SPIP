@@ -203,10 +203,104 @@ function spip_query($query) {
 }
 
 
+// Renvoie le _GET ou le _POST emis par l'utilisateur
+function _request($var) {
+	global $_GET, $_POST;
+	if (isset($_GET[$var])) return $_GET[$var];
+	if (isset($_POST[$var])) return $_POST[$var];
+	return NULL;
+}
+
+
+//
+// Prend une URL et lui ajoute/retire un parametre.
+// Exemples : [(#SELF|parametre_url{suite,18})] (ajout)
+//            [(#SELF|parametre_url{suite,''})] (supprime)
+//            [(#SELF|parametre_url{suite})]    (prend $suite dans la _request)
+// http://www.spip.net/@parametre_url
+//
+function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
+
+	// lever l'#ancre
+	if (preg_match(',^([^#]*)(#.*)$,', $url, $r)) {
+		$url = $r[1];
+		$ancre = $r[2];
+	} else
+		$ancre = '';
+
+	// eclater
+	$url = preg_split(',[?]|&amp;|&,', $url);
+
+	// recuperer la base
+	$a = array_shift($url);
+
+	// ajout de la globale ?
+	if ($v === NULL)
+		$v = _request($c);
+
+	// lire les variables et agir
+	foreach ($url as $n => $val) {
+		if (preg_match(',^'.$c.'(=.*)?$,', $val)) {
+			// suppression
+			if (!$v) {
+				unset($url[$n]);
+			} else {
+				$url[$n] = $c.'='.urlencode($v);
+				$v = '';
+			}
+		}
+	}
+
+	// ajouter notre parametre si on ne l'a pas encore trouve
+	if ($v)
+		$url[] = $c.'='.urlencode($v);
+
+	// eliminer les vides
+	$url = array_filter($url);
+
+	// recomposer l'adresse
+	if ($url)
+		$a .= '?' . join($sep, $url);
+
+	return $a . $ancre;
+}
+
+//
+// pour calcul du nom du fichier cache et autres
+//
+function nettoyer_uri() {
+	return preg_replace
+		(',[?&](PHPSESSID|(var_[^=&]*))=[^&]*,i',
+		'', 
+		$GLOBALS['REQUEST_URI']);
+}
+
+//
+// donner l'URL de base d'un lien vers "soi-meme", modulo
+// les trucs inutiles
+//
+function self($root = false) {
+	$url = nettoyer_uri();
+	if (!$root)
+		$url = preg_replace(',^[^?]*/,', '', $url);
+
+	// ajouter le cas echeant les variables _POST
+	foreach ($_POST as $v => $c)
+		if (substr($v,0,3) == 'id_')
+			$url = parametre_url($url, $v, $c, '&');
+
+	// supprimer les variables sans interet
+	if (!_DIR_RESTREINT)
+		preg_replace (',[?&]('
+		.'lang|set_options|set_couleur|set_disp|set_ecran|show_docs'
+		.')=[^&]*,i', '', $url);
+
+	return $url;
+}
+
+
 class Link {
-	var $file;
-	var $vars;
-	var $arrays;
+	var $uri;
 
 	//
 	// Contructeur : a appeler soit avec l'URL du lien a creer,
@@ -214,132 +308,31 @@ class Link {
 	//
 	// parametre $root = demander un lien a partir de la racine du serveur /
 	function Link($url = '', $root = false) {
-		global $_POST;
-		static $link = '';
-
-		$this->vars = array();
-		$this->arrays = array();
-
-		// Normal case
-		if ($link) {
-			if ($url) {
-				$v = split('[\?\&]', $url);
-				list(, $this->file) = each($v);
-				while (list(, $var) = each($v)) {
-					list($name, $value) = split('=', $var, 2);
-					$name = urldecode($name);
-					$value = urldecode($value);
-					if (preg_match(',^(.*)\[\]$,', $name, $regs)) {
-						$this->arrays[$regs[1]][] = $value;
-					}
-					else {
-						$this->vars[$name] = $value;
-					}
-				}
-			}
-			else {
-				$this->file = $link->file;
-				$this->vars = $link->vars;
-				$this->arrays = $link->arrays;
-			}
-			return;
-		}
-
-		// Si aucun URL n'est specifie, creer le lien "propre"
-		// ou l'on supprime de l'URL courant les bidules inutiles
-		if (!$url) {
-			// GET variables are read from the original URL
-			// (_GET may contain additional variables
-			// introduced by rewrite-rules)
-			$url = $GLOBALS['REQUEST_URI'];
-			// Warning !!!! 
-			// since non encoded arguments may be present
-			// (especially those coming from Rewrite Rule)
-			// find the begining of the query string
-			// to compute the script-name
-			if ($v = strpos($url,'?'))
-			  $v = strrpos(substr($url, 0, $v), '/');
-			else $v = strrpos($url, '/');
-			if (!$root) $url = substr($url, $v + 1);
-			if (!$url) $url = "./";
-			if (count($_POST)) {
-				$vars = array();
-				foreach ($_POST as $var => $val)
-					if (preg_match('/^id_/', $var))
-						$vars[$var] = $val;
-			}
-		}
-		$v = split('[\?\&]', $url);
-		list(, $this->file) = each($v);
-		if (!$vars) {
-			while (list(,$var) = each($v)) {
-				list($name, $value) = split('=', $var, 2);
-				$name = urldecode($name);
-				$value = urldecode($value);
-				if (preg_match(',^(.*)\[\]$,', $name, $regs))
-					$vars[$regs[1]][] = $value;
-				else
-					$vars[$name] = $value;
-			}
-		}
-
-		if (is_array($vars)) {
-			foreach ($vars as $name => $value) {
-				// items supprimes
-				if (!preg_match('/^('.
-				(!_DIR_RESTREINT ?
-					'|lang|set_options|set_couleur|set_disp|set_ecran':
-					'var_mode|show_docs')
-				. ')$/i', $name)) {
-					if (is_array($value))
-						$this->arrays[$name] = $value;
-					else
-						$this->vars[$name] = $value;
-				}
-			}
-		}
+		if (!$url)
+			$url = self($root);
+		$this->uri = $url;
 	}
 
 	//
 	// Effacer une variable
 	//
 	function delVar($name) {
-		if(isset($this->vars[$name])) unset($this->vars[$name]);
-		if($this->arrays[$name]) unset($this->arrays[$name]);
+		$this->uri = parametre_url($this->uri, $name, '', '&');
 	}
 
 	//
 	// Ajouter une variable
 	// (si aucune valeur n'est specifiee, prend la valeur globale actuelle)
 	//
-	function addVar($name, $value = '__global__') {
-		if ($value == '__global__') $value = $GLOBALS[$name];
-		if (is_array($value))
-			$this->arrays[$name] = $value;
-		else
-			$this->vars[$name] = $value;
+	function addVar($name, $value = NULL) {
+		$this->uri = parametre_url($this->uri, $name, $value, '&');
 	}
 
 	//
 	// Recuperer l'URL correspondant au lien
 	//
 	function getUrl($anchor = '') {
-		$url = $this->file;
-		if (!$url) $url = './';
-		$query = '';
-		foreach($this->vars as $name => $value) {
-			$query .= '&'.$name;
-			if (strlen($value))
-				$query .= '='.urlencode($value);
-		}
-
-		foreach ($this->arrays as $name => $table)
-		foreach ($table as $value)
-			$query .= '&'.$name.'[]='.urlencode($value);
-
-		if ($query) $query = '?'. substr($query, 1);
-		if ($anchor) $anchor = '#'.$anchor;
-		return "$url$query$anchor";
+		return $this->uri . ($anchor ? '#'.$anchor : '');
 	}
 
 	//
@@ -348,28 +341,18 @@ class Link {
 	//
 
 	function getForm($method = 'get', $query = '', $enctype = '') {
+		include_ecrire('inc_filtres');
+
 		if (preg_match(',^[a-z],i', $query))
 			$action = $query;
 		else
-			$action = $this->file.$query;
+			$action = preg_replace(',[?].*,', '', $this->uri).$query;
 
 		$form = "<form method='$method' action='"
 		.quote_amp($action)."'";
 		if ($enctype) $form .= " enctype='$enctype'";
 		$form .= " style='border: 0px; margin: 0px;'>\n";
-		foreach ($this->vars as $name => $value) {
-			$value = preg_replace(',&amp;(#[0-9]+;),', '&\1',
-				htmlspecialchars($value));
-			$form .= "<input type=\"hidden\" name=\"$name\" "
-				. "value=\"$value\" />\n";
-		}
-		foreach ($this->arrays as $name => $table)
-		foreach ($table as $value) {
-			$value = preg_replace(',&amp;(#[0-9]+;),', '&\1',
-				htmlspecialchars($value));
-			$form .= "<input type=\"hidden\" name=\"".$name."[]\" "
-				. "value=\"".$value."\" />\n";
-		}
+		$form .= form_hidden($this->uri);
 		return $form;
 	}
 }
