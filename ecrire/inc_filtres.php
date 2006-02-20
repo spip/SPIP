@@ -1192,11 +1192,13 @@ function image_masque($im, $masque) {
 
 }
 
-
-function image_nb($im)
+// Passage de l'image en noir et blanc
+// un noir & blanc "photo" n'est pas "neutre": les composantes de couleur sont
+// ponderees pour obtenir le niveau de gris;
+// on peut ici regler cette ponderation en "pour mille"
+function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 {
-	
-	$image = valeurs_image_trans($im, "nb");
+	$image = valeurs_image_trans($im, "nb-$val_r-$val_g-$val_b");
 	if (!$image) return("");
 	
 	$x_i = $image["largeur"];
@@ -1230,10 +1232,11 @@ function image_nb($im)
 				$g = ($rgb >> 8) & 0xFF;
 				$b = $rgb & 0xFF;
 
-				//echo "[$a]";
-
-				$c = round(.299 * $r+ .587 * $g + .114 * $b);
-
+				$c = round(($val_r * $r / 1000) + ($val_g * $g / 1000) + ($val_b * $b / 1000));
+				if ($c < 0) $c = 0;
+				if ($c > 254) $c = 254;
+				
+				
 				$color = ImageColorAllocateAlpha( $im_, $c, $c, $c , $a );
 				imagesetpixel ($im_, $x, $y, $color);			
 			}
@@ -1241,26 +1244,7 @@ function image_nb($im)
 		$image["fonction_image"]($im_, "$dest");
 		
 	}
-	
-	// Methode avec reduction de couleurs
-	// moins precise, mais infiniment plus rapide!
-/*	if ($creer) {
-		$im_ = $image["fonction_imagecreatefrom"]($im);
-		@imagealphablending($im_, false);
-		@imagesavealpha($im_,true);
-		imagetruecolortopalette($im_, true, 256);
 
-		for($a=0; $a<imagecolorstotal ($im_); $a++)
-		{
-			$color = ImageColorsForIndex($im_,$a);
-			$R=.299 * ($color['red'])+ .587 * ($color['green'])+ .114 * ($color['blue']);
-						
-			ImageColorSet($im_, $a, $R, $R, $R);
-		}
-
-		$image["fonction_image"]($im_, "$dest");
-	}
-*/
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
@@ -1270,6 +1254,134 @@ function image_nb($im)
 	return "<img src='$dest'$tags />";
 }
 
+
+function image_flou($im,$niveau=3)
+{
+	// Il s'agit d'une modification du script blur qu'on trouve un peu partout:
+	// + la transparence est geree correctement
+	// + les dimensions de l'image sont augmentees pour flouter les bords
+	$coeffs = array (
+				array ( 1),
+				array ( 1, 1), 
+				array ( 1, 2, 1),
+				array ( 1, 3, 3, 1),
+				array ( 1, 4, 6, 4, 1),
+				array ( 1, 5, 10, 10, 5, 1),
+				array ( 1, 6, 15, 20, 15, 6, 1),
+				array ( 1, 7, 21, 35, 35, 21, 7, 1),
+				array ( 1, 8, 28, 56, 70, 56, 28, 8, 1),
+				array ( 1, 9, 36, 84, 126, 126, 84, 36, 9, 1),
+				array ( 1, 10, 45, 120, 210, 252, 210, 120, 45, 10, 1),
+				array ( 1, 11, 55, 165, 330, 462, 462, 330, 165, 55, 11, 1)
+				);
+	
+	$image = valeurs_image_trans($im, "flou-$niveau");
+	if (!$image) return("");
+	
+	$x_i = $image["largeur"];
+	$y_i = $image["hauteur"];
+	$sum = pow (2, $niveau);
+
+	$im = $image["fichier"];
+	$dest = $image["fichier_dest"];
+	
+	$creer = $image["creer"];
+	
+	// Methode precise
+	// resultat plus beau, mais tres lourd
+	// Et: indispensable pour preserver transparence!
+
+	if ($creer) {
+		// Creation de l'image en deux temps
+		// de facon a conserver les GIF transparents
+		$im = $image["fonction_imagecreatefrom"]($im);
+		$temp1 = imagecreatetruecolor($x_i+$niveau, $y_i);
+		$temp2 = imagecreatetruecolor($x_i+$niveau, $y_i+$niveau);
+		
+		@imagealphablending($temp1, false);
+		@imagesavealpha($temp1,true);
+		@imagealphablending($temp2, false);
+		@imagesavealpha($temp2,true);
+
+		
+		for ($i = 0; $i < $x_i+$niveau; $i++) {
+			for ($j=0; $j < $y_i; $j++) {
+				$suma=0;
+				$sumr=0;
+				$sumg=0;
+				$sumb=0;
+				$sum = 0;
+				$sum_ = 0;
+				for ( $k=0 ; $k <= $niveau ; ++$k ) {
+					$color = imagecolorat($im, $i_ = ($i-$niveau)+$k , $j);
+
+					$a = ($color >> 24) & 0xFF;
+					$r = ($color >> 16) & 0xFF;
+					$g = ($color >> 8) & 0xFF;
+					$b = ($color) & 0xFF;
+					
+					if ($i_ < 0 OR $i_ >= $x_i) $a = 127;
+					
+					$suma += $a*$coeffs[$niveau][$k];
+					$ac = ((127-$a) / 127);
+										
+					$sumr += $r * $coeffs[$niveau][$k] * $ac;
+					$sumg += $g * $coeffs[$niveau][$k] * $ac;
+					$sumb += $b * $coeffs[$niveau][$k] * $ac;
+					$sum += $coeffs[$niveau][$k] * $ac;
+					$sum_ += $coeffs[$niveau][$k];
+				}
+				if ($sum > 0) $color = ImageColorAllocateAlpha ($temp1, $sumr/$sum, $sumg/$sum, $sumb/$sum, $suma/$sum_);
+				else $color = ImageColorAllocateAlpha ($temp1, 255, 255, 255, 127);
+				imagesetpixel($temp1,$i,$j,$color);
+			}
+		}
+		imagedestroy($im);
+		for ($i = 0; $i < $x_i+$niveau; $i++) {
+			for ($j=0; $j < $y_i+$niveau; $j++) {
+				$suma=0;
+				$sumr=0;
+				$sumg=0;
+				$sumb=0;
+				$sum = 0;
+				$sum_ = 0;
+				for ( $k=0 ; $k <= $niveau ; ++$k ) {
+					$color = imagecolorat($temp1, $i, $j_ = $j-$niveau+$k);
+					$a = ($color >> 24) & 0xFF;
+					$r = ($color >> 16) & 0xFF;
+					$g = ($color >> 8) & 0xFF;
+					$b = ($color) & 0xFF;
+					if ($j_ < 0 OR $j_ >= $y_i) $a = 127;
+					
+					$suma += $a*$coeffs[$niveau][$k];
+					$ac = ((127-$a) / 127);
+										
+					$sumr += $r * $coeffs[$niveau][$k] * $ac;
+					$sumg += $g * $coeffs[$niveau][$k] * $ac;
+					$sumb += $b * $coeffs[$niveau][$k] * $ac;
+					$sum += $coeffs[$niveau][$k] * $ac;
+					$sum_ += $coeffs[$niveau][$k];
+					
+				}
+				if ($sum > 0) $color = ImageColorAllocateAlpha ($temp2, $sumr/$sum, $sumg/$sum, $sumb/$sum, $suma/$sum_);
+				else $color = ImageColorAllocateAlpha ($temp2, 255, 255, 255, 127);
+				imagesetpixel($temp2,$i,$j,$color);
+			}
+		}
+	
+		$image["fonction_image"]($temp2, "$dest");
+		
+	}
+	
+	$class = $image["class"];
+	if (strlen($class) > 1) $tags=" class='$class'";
+	$tags = "$tags alt='".$image["alt"]."'";
+//	$style = $image["style"]; // on force le remplacement par nouvelles valeurs...
+	$style = "border: 0px; height: ".($y_i+$niveau)."px; width: ".($x_i+$niveau)."px;";
+	if (strlen($style) > 1) $tags="$tags style='$style'";
+	
+	return "<img src='$dest'$tags />";
+}
 
 
 
