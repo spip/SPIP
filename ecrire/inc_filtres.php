@@ -761,8 +761,7 @@ function agenda_affiche($i)
   $nb = array_shift($args); // nombre d'evenements (on pourrait l'afficher)
   $sinon = array_shift($args);
   $type = array_shift($args);
-  $self = new Link();
-  $self = $self->getUrl;
+  $self = $_SERVER['REQUEST_URI'];
   if (!$nb) return http_calendrier_init('', $type, '', '', $self, $sinon);
   $agenda = agenda_memo(0);
   $evt = array();
