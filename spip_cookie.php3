@@ -118,13 +118,13 @@ if ($logout) {
 }
 
 // en cas de login sur bonjour=oui, on tente de poser un cookie
-// puis de passer a spip_login qui diagnostiquera l'echec de cookie
+// puis de passer au login qui diagnostiquera l'echec de cookie
 // le cas echeant.
 if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
 	redirige_par_entete(generer_url_public('spip_login'),
-			    "?var_echec_cookie=oui&url="
-			    . ($url ? urlencode($url) : _DIR_RESTREINT_ABS));
+			    "var_echec_cookie=oui&url="
+			    . ($url ? urlencode($url) : _DIR_RESTREINT_ABS), true);
 }
 
 // Tentative de login
@@ -177,14 +177,15 @@ if ($essai_login == "oui") {
 
 		// Si on se connecte dans l'espace prive, ajouter "bonjour" (inutilise)
 		if ($ok AND ereg(_DIR_RESTREINT_ABS, $redirect)) {
-		      $redirect .= (strpos($redirect, "?") ? "&" : "?") . 'bonjour=oui';
+			$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
+			. 'bonjour=oui';
 		}
 	}
 
 	if (!$ok) {
 		if (ereg(_DIR_RESTREINT_ABS, $redirect))
-			$redirect = generer_url_public('spip_login');
-		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=$login";
+			$redirect = generer_url_public('spip_login',
+				"var_login=$login", true);
 		if ($session_password || $session_password_md5)
 			$redirect .= '&var_erreur=pass';
 		$redirect .= '&url=' . urlencode($url);
@@ -197,12 +198,14 @@ if ($essai_login == "oui") {
 // cookie d'admin ?
 if ($cookie_admin == "non") {
 	if (!$retour)
-		$retour = generer_url_public('spip_login', 'url='.urlencode($url));
+		$retour = generer_url_public('spip_login',
+			'url='.urlencode($url), true);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$redirect = ereg_replace("([?&])var_login=[^&]*&?", '\1', $retour);
 	$redirect = ereg_replace("([?&])var_erreur=[^&]*&?", '\1', $redirect);
-	$redirect .= (strpos($redirect, "?") ? "&" : "?") . "var_login=-1";
+	$redirect .= ((false !== strpos($redirect, "?")) ? "&" : "?")
+		. "var_login=-1";
 }
 else if ($cookie_admin AND $spip_admin != $cookie_admin) {
 	spip_setcookie('spip_admin', $cookie_admin, time() + 3600 * 24 * 14);

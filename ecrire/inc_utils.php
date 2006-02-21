@@ -529,7 +529,11 @@ function http_last_modified($lastmodified, $expire = 0) {
 // en evitant les attaques par la redirection (souvent indique par 1 $_GET)
 
 function redirige_par_entete($url, $fin="") {
-#	spip_log("redirige $url$fin");
+	# en theorie on devrait faire ca tout le temps, mais quand la chaine
+	# commence par ? c'est imperatif, sinon l'url finale n'est pas la bonne
+	if ($url[0]=='?')
+		$url = url_de_base().$url;
+
 	header("Location: " . strtr("$url$fin", "\n\r", "  "));
 
 	echo '<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
@@ -544,10 +548,6 @@ function redirige_par_entete($url, $fin="") {
 </body></html>';
 
 	exit;
-}
-
-function redirige_url_public($script, $args="") {
-	redirige_par_entete(generer_url_public($script, $args, true));
 }
 
 // transformation XML des "&" en "&amp;"

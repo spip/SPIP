@@ -12,7 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-define("_DIR_LOGGED_IN",   _DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS);
 
 //
 // Fonctions de gestion de l'acces restreint aux rubriques
@@ -95,12 +94,18 @@ function auth_dist() {
 	}
 
 
-	// pas authentifie, 
+	// pas authentifie,
 	// demander login / mdp et nettoyer en cas de login en echec
 	if (!$auth_login) {
-		if ($_GET['bonjour'] == 'oui') $clean_link->delVar('bonjour');
+		if ($_GET['bonjour'] == 'oui') {
+			$clean_link->delVar('bonjour');
+			$erreurcookie = '&var_echec_cookie=true';
+		}
 
-		redirige_par_entete(generer_url_public('spip_login', "url=".urlencode(str_replace('/./', '/',  _DIR_LOGGED_IN. $clean_link->getUrl())),true));
+		redirige_par_entete(generer_url_public('spip_login',
+			"url=".urlencode(str_replace('/./', '/',
+			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
+			. $clean_link->getUrl())),true).$erreurcookie);
 	}
 
 	//
@@ -193,9 +198,9 @@ function auth_dist() {
 		exit;
 	}
 
-	if (!$auth_pass_ok) {
-	  redirige_url_public('spip_login',"var_erreur=pass");
-	}
+	if (!$auth_pass_ok)
+		redirige_par_entete(
+			generer_url_public('spip_login', 'var_erreur=pass', true));
 
 	// Si c'est un nouvel inscrit, le passer de 'nouveau' a '1comite'
 	// (code presque mort, utilise peut-etre encore sous .htpasswd ?)
