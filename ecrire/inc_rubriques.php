@@ -236,6 +236,10 @@ function enfant_rub($collection){
 
 	if ($spip_display == 4) $les_enfants .= "<ul>";
 	
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+		
+	if ($voir_logo) include_ecrire("inc_logos");
+
 	while($row=spip_fetch_array($result2)){
 		$id_rubrique=$row['id_rubrique'];
 		$id_parent=$row['id_parent'];
@@ -256,18 +260,8 @@ function enfant_rub($collection){
 		
 		$les_enfants .= debut_cadre_sous_rub($logo_rub, true);
 		
-		if ($spip_display != 1
-		AND $spip_display!=4
-		AND $GLOBALS['meta']['image_process'] != "non") {
-			include_ecrire("inc_logos");
-			$logo = decrire_logo("rubon$id_rubrique");
-			if ($logo) {
-				$fichier = $logo[0];
-					$les_enfants .= "<div style='float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;'>";
-					$les_enfants .= reduire_image_logo(_DIR_IMG.$fichier, 48, 36);
-					$les_enfants .= "</div>";
-			}
-		}
+		if ($voir_logo)
+		  $les_enfants .= baliser_logo("rub", $id_rubrique, 48, 36, "float: $spip_lang_right; margin-$spip_lang_right: -6px; margin-top: -6px;");
 
 		if (strlen($les_sous_enfants) > 0){
 			$les_enfants .= $bouton_layer;

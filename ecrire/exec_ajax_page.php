@@ -233,13 +233,7 @@ function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
 		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
 			include_ecrire("inc_logos");
-			$logo = decrire_logo("rubon$id");
-			if ($logo) {
-				$fichier = $logo[0];
-					echo  "<div style='float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;'>";
-					echo reduire_image_logo(_DIR_IMG.$fichier, 100, 48);
-					echo "</div>";
-			}
+			echo baliser_logo("rub",$id, 100, 48,"float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;");
 		}
 
 		echo "<div><p><b>$titre</b></p></div>";

@@ -229,6 +229,7 @@ define('_DIR_CACHE', _DIR_RACINE ."CACHE/");
 define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
 define('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
 define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
+define('_DIR_LOGOS', _DIR_RACINE ."IMG/");
 
 // les fichiers qu'on y met, entre autres
 define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');

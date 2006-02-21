@@ -33,21 +33,50 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 	}
 }
 
-
-function decrire_logo($racine) {
-		
-	if ($img = cherche_image_nommee($racine)) {
-		list($dir, $racine, $fmt) = $img;
-
-		$fid = $dir . "$racine.".$fmt; 
-		if ($taille = @getimagesize($fid))
-			$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
-
-		return array("$racine.$fmt", $xy);
+function cherche_logo($id, $type, $mode, $formats = array ('gif', 'jpg', 'png')) {
+	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
+	$nom = $type . $mode . intval($id);
+	reset($formats);
+	while (list(, $format) = each($formats)) {
+		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
+			return array($d, _DIR_LOGOS, $nom, $format);
 	}
-	return '';
+	# coherence de type pour servir comme filtre (formulaire_login)
+	return array();
 }
 
+function baliser_logo($type, $id, $width, $height, $style='') {
+	global $spip_lang_right;
+	$logo = decrire_logo($type, 'on', $id, $width, $height);
+	if (!$logo) return "";
+	if (!$style) $style = "float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;";
+	return  "<div style='$style'>$logo</div>";
+}
+
+function decrire_logo($type, $mode, $id, $width, $height, $titre="", $redirect="") {
+		
+	if (!$img = cherche_logo($id, $type, $mode)) 	return '';
+	list($fid, $dir, $nom, $format) = $img;
+
+	if ($taille = @getimagesize($fid))
+		$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
+
+	$res = ratio_image($fid, $nom, $format, $width, $height, "alt=''");
+	if (!$titre)
+	  return $res;
+	else return "<p><center><div><a href='" .
+		$fid .
+		"'>$res</a></div>" .
+		debut_block_invisible(md5($titre)) .
+		$xy .
+		"\n<br />[<a href='" .
+		generer_action_auteur("iconifier", "$nom.$format", $redirect) .
+		"'>".
+		_T('lien_supprimer') .
+		"</a>]" .
+		fin_block() .
+		"</center></p>";
+}
 
 function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script) {
 	global $spip_display;
@@ -61,13 +90,11 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script
 		echo "<p>";
 		debut_cadre_relief("image-24.gif");
 		echo "<div class='verdana1' style='text-align: center;'>";
-		$desc = decrire_logo($logon);
-		afficher_logo($logon, $texteon, $desc, $redirect);
+		$desc = afficher_logo($logon, $texteon, $type, 'on', $id, $redirect);
 
 		if ($desc AND $texteoff) {
 			echo "<br /><br />";
-			$desc = decrire_logo($logoff);
-			afficher_logo($logoff, $texteoff, $desc, $redirect);
+			afficher_logo($logoff, $texteoff, $type, 'off', $id, $redirect);
 		}
 
 		echo "</div>";
@@ -77,7 +104,7 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script
 }
 
 
-function afficher_logo($racine, $titre, $logo, $redirect) {
+function afficher_logo($racine, $titre, $type, $mode, $id, $redirect) {
 	global $connect_id_auteur;
 
 	echo "<b>";
@@ -86,17 +113,10 @@ function afficher_logo($racine, $titre, $logo, $redirect) {
 	echo "</b>";
 	echo "<font size=1>";
 
-	if ($logo) {
-		list ($fichier, $taille) =  $logo;
+	$logo = decrire_logo($type,$mode,$id, 170, 170, $titre, $redirect);
 
-		echo "<p><center><div><a href='"._DIR_IMG.$fichier."'>";
-		echo reduire_image_logo(_DIR_IMG.$fichier, 170);
-		echo "</a></div>";
-		echo debut_block_invisible(md5($titre));
-		echo $taille;
-		echo "\n<br />[<a href='", generer_action_auteur("iconifier", $fichier,$redirect), "'>",_T('lien_supprimer'),"</a>]";
-		echo fin_block();
-		echo "</center></p>";
+	if ($logo) {
+	  echo $logo;
 	}
 	else {
 		$hash = calculer_action_auteur("iconifier $racine");
@@ -144,6 +164,7 @@ function afficher_logo($racine, $titre, $logo, $redirect) {
 	}
 
 	echo "</font>";
+	return $logo;
 }
 
 
@@ -476,30 +497,34 @@ function reduire_image_logo($img, $taille = -1, $taille_y = -1) {
 	if (eregi("(.*)\.(jpg|gif|png)$", $logo, $regs)) {
 		if ($i = cherche_image_nommee($regs[1], array($regs[2]))) {
 			list(,$nom,$format) = $i;
+			ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs);
+		}
+	}
+}
 
-			if ($taille_origine = @getimagesize($logo)) {
-				list ($destWidth,$destHeight, $ratio) = image_ratio(
+function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
+{
+	if ($taille_origine = @getimagesize($logo)) {
+		list ($destWidth,$destHeight, $ratio) = image_ratio(
 					$taille_origine[0], $taille_origine[1], $taille, $taille_y);
 
 				// Creer effectivement la vignette reduite
-				$suffixe = '-'.$destWidth.'x'.$destHeight;
-				$preview = creer_vignette($logo, $taille, $taille_y,
-					$format, ('cache'.$suffixe), $nom.$suffixe);
-				if ($preview) {
+		$suffixe = '-'.$destWidth.'x'.$destHeight;
+		$preview = creer_vignette($logo, $taille, $taille_y,
+					  $format, ('cache'.$suffixe), $nom.$suffixe);
+		if ($preview) {
 					$logo = $preview['fichier'];
 					$destWidth = $preview['width'];
 					$destHeight = $preview['height'];
 				}
 
-				// dans l'espace prive mettre un timestamp sur l'adresse 
-				// de l'image, de facon a tromper le cache du navigateur
-				// quand on fait supprimer/reuploader un logo
-				// (pas de filemtime si SAFE MODE)
-				if (!_DIR_RESTREINT)
-					$date = '?date='.@filemtime($logo);
-				return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
-			}
-		}
+		// dans l'espace prive mettre un timestamp sur l'adresse 
+		// de l'image, de facon a tromper le cache du navigateur
+		// quand on fait supprimer/reuploader un logo
+		// (pas de filemtime si SAFE MODE)
+		if (!_DIR_RESTREINT)
+				$date = '?date='.@filemtime($logo);
+		return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
 	}
 }
 

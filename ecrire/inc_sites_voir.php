@@ -32,6 +32,9 @@ function afficher_sites($titre_table, $requete) {
 
 		$ifond = 0;
 		$premier = true;
+		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+		
+		if ($voir_logo) include_ecrire("inc_logos");
 		
 		$compteur_liste = 0;
 		while ($row = spip_fetch_array($result)) {
@@ -83,16 +86,8 @@ function afficher_sites($titre_table, $requete) {
 
 			$s = "<a href=\"".$link->getUrl()."\" title=\"$title\">";
 
-			if ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non") {
-				include_ecrire("inc_logos");
-				$logo = decrire_logo("siteon$id_syndic");
-				if ($logo) {
-					$s.= "<div style='float: $spip_lang_right; margin-top: -2px; margin-bottom: -2px;'>"
-					. reduire_image_logo(_DIR_IMG.$logo[0], 26, 20)
-					. "</div>\n";
-				}
-			}
-
+			if ($voir_logo);
+				$s .= baliser_logo("site", $id_syndic, 26, 20) ;
 
 			$s .= http_img_pack($puce, $statut, "width='7' height='7' border='0'") ."&nbsp;&nbsp;";
 			

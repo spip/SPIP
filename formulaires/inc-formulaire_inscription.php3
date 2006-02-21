@@ -87,6 +87,7 @@ function message_inscription($mail_inscription, $nom_inscription, $force, $mode)
 	    $f = 'test_inscription';
 	else 
 	  $f  = 'test_inscription_dist';
+
 	if (!($mail_inscription = $f($mode, $mail_inscription)))
 		return  _T('info_email_invalide');
 
