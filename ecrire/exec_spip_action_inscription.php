@@ -10,16 +10,17 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php");
-include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
-include_ecrire('public-global'); 
-include_ecrire("inc_lang");
-include_ecrire('inc_headers');
+function spip_action_inscription_dist() {
 
-utiliser_langue_site();
-utiliser_langue_visiteur();
-http_no_cache();
-echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	include_local(find_in_path("inc-formulaire_inscription" . _EXTENSION_PHP));
+	include_ecrire('public-global'); 
+	include_ecrire("inc_lang");
+	include_ecrire('inc_headers');
+
+	utiliser_langue_site();
+	utiliser_langue_visiteur();
+	http_no_cache();
+	echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 	 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="', 
   $GLOBALS['spip_lang'],
@@ -31,6 +32,11 @@ echo '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   '</title>
 <link rel="stylesheet" type="text/css" href="spip_style.css" />
 </head><body>';
-inclure_balise_dynamique(balise_formulaire_inscription_dyn($mode, $focus));
-echo "</body></html>";
+
+	inclure_balise_dynamique(
+		balise_formulaire_inscription_dyn(_request('mode'), _request('focus'))
+	);
+	echo "</body></html>";
+}
+
 ?>
