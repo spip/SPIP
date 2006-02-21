@@ -711,6 +711,12 @@ function generer_url_public($script, $args="", $no_entities=false) {
 	else
 		$action = '?page=' . $script;
 
+	// si le script est une action (spip_pass, spip_****),
+	// utiliser generer_url_action
+	if (preg_match(',^spip_(.*),', $script, $regs)
+	AND $script != 'spip_action.php')
+		return generer_url_action($regs[1],$args,true);
+
 	if ($args)
 		$action .=
 			(strpos($action, '?') !== false ? '&' : '?') . $args;

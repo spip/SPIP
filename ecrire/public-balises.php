@@ -727,7 +727,9 @@ function balise_SELF_dist($p) {
 
 
 //
-// #URL_PAGE{backend} -> backend.php3
+// #URL_PAGE{backend} -> backend.php3 ou ?page=backend selon les cas
+// Pour les pages qui commencent par "spip_", il faut eventuellement
+// aller chercher spip_action.php?action=xxxx
 //
 function balise_URL_PAGE_dist($p) {
 
