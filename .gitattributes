@@ -2,7 +2,7 @@
 IMG/logo_spip.jpg -text
 /INSTALL.txt -text
 dist/choix_mots.html -text
-dist/style.html -text
+dist/spip_style_prive.html -text
 ecrire/charsets/cp1251.php -text
 ecrire/charsets/cp1256.php -text
 ecrire/charsets/html.php -text
