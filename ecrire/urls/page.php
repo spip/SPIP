@@ -67,14 +67,14 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	if (preg_match(
-	',.*[?]?(article|rubrique|breve|mot|site|auteur)'
+	',.*([?]|/)(article|rubrique|breve|mot|site|auteur)'
 	.preg_quote(_separateur_urls_page).'([0-9]+),',
 	$url, $regs)) {
-		$fond = $regs[1];
-		if ($regs[1] == 'site')
-			$contexte['id_syndic'] = $regs[2];
+		$fond = $regs[2];
+		if ($regs[2] == 'site')
+			$contexte['id_syndic'] = $regs[3];
 		else
-			$contexte['id_'.$fond] = $regs[2];
+			$contexte['id_'.$fond] = $regs[3];
 
 		return;
 	}
