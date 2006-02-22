@@ -120,15 +120,16 @@ function boucle_FORUMS_dist($id_boucle, &$boucles) {
 	$boucle = &$boucles[$id_boucle];
 	$id_table = $boucle->id_table;
 	$boucle->from[$id_table] =  "spip_forum";
-	// Par defaut, selectionner uniquement les forums sans pere
+
+	// Par defaut, selectionner uniquement les forums sans mere
+	// Les criteres {tout} et {plat} inversent ce choix
 	if (!$boucle->tout AND !$boucle->plat)
 		$boucle->where[] = "$id_table.id_parent=0";
 
 	// Restreindre aux elements publies
 	if (!$boucle->statut) {
 		if (!$GLOBALS['var_preview'])
-			if (!$boucle->tout)
-				$boucle->where[] ="$id_table.statut='publie'";
+			$boucle->where[] ="$id_table.statut='publie'";
 	}
 
 	return calculer_boucle($id_boucle, $boucles); 
