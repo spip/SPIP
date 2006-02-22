@@ -50,7 +50,6 @@ global $INDEX_objet_associes;
 $INDEX_objet_associes['spip_articles'] = array('spip_documents'=>1,'spip_auteurs'=>10,'mot'=>3);
 $INDEX_objet_associes['spip_breves'] = array('spip_documents'=>1,'spip_mots'=>3);
 $INDEX_objet_associes['spip_rubriques'] = array('spip_documents'=>1,'spip_mots'=>3);
-$INDEX_objet_associes['spip_syndic'] = array('spip_documents'=>1,'spip_mots'=>3);
 $INDEX_objet_associes['spip_documents'] = array('spip_mots'=>3);
 
 // Indexation des elements des objets associes
@@ -385,20 +384,21 @@ function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
 		$relation = $tables_relations[$table];
 		if (!$relation) $relation = $tables_relations[$table_abreg];
 		if ( ($relation)
-				&&(isset($relation[$col_id_as])) )
+				&&(isset($relation[$col_id_as])) ){
+				
 			$table_rel = $relation[$col_id_as];
-
-	  $select="assoc.$col_id_as";
-	  foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
-			$select.=',assoc.' . $quoi;
-		$q = "SELECT $select FROM $table_associe AS assoc,
-			spip_$table_rel AS lien
-			WHERE lien.$col_id=$id_objet
-			AND assoc.$col_id_as=lien.$col_id_as";
-
-		$r = spip_query($q);
-		while ($row = spip_fetch_array($r)) {
-      indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
+		  $select="assoc.$col_id_as";
+		  foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
+				$select.=',assoc.' . $quoi;
+			$q = "SELECT $select FROM $table_associe AS assoc,
+				spip_$table_rel AS lien
+				WHERE lien.$col_id=$id_objet
+				AND assoc.$col_id_as=lien.$col_id_as";
+	
+			$r = spip_query($q);
+			while ($row = spip_fetch_array($r)) {
+	      indexer_les_champs($row,$INDEX_elements_associes[$table_associe],$valeur);
+			}
 		}
  	}
 }
