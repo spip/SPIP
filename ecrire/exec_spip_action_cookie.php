@@ -233,7 +233,7 @@ if ($var_lang) {
 	if (changer_langue($var_lang)) {
 		spip_setcookie('spip_lang', $var_lang, time() + 365 * 24 * 3600);
 		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
-		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "lang=$var_lang";
+		$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang";
 	}
 }
 
@@ -256,7 +256,7 @@ if ($var_lang_ecrire) {
 		}
 
 		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
-		$redirect .= (strpos($redirect, "?") ? "&" : "?") . "lang=$var_lang_ecrire";
+		$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang_ecrire";
 	}
 }
 
