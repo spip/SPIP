@@ -109,28 +109,28 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	$select_groupe = $GLOBALS['select_groupe'];
 
 	if ($table == 'articles') {
-		$id_table = 'id_article';
+		$table_id = 'id_article';
 		$objet = 'article';
 		$url_base = "articles";
 	}
 	else if ($table == 'breves') {
-		$id_table = 'id_breve';
+		$table_id = 'id_breve';
 		$objet = 'breve';
 		$url_base = "breves_voir";
 	}
 	else if ($table == 'rubriques') {
-		$id_table = 'id_rubrique';
+		$table_id = 'id_rubrique';
 		$objet = 'rubrique';
 		$url_base = "naviguer";
 	}
 
 	else if ($table == 'syndic') {
-		$id_table = 'id_syndic';
+		$table_id = 'id_syndic';
 		$objet = 'syndic';
 		$url_base = "sites";
 	}
 
-	list($nombre_mots) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot"));
+	list($nombre_mots) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
 	if (!$nombre_mots) {
 		if (!$flag_editable) return;
@@ -218,7 +218,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 					echo "<LI><FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2><B><FONT SIZE=3>".typo($titre_mot)."</FONT></B>";
 
 					if ($type_mot) echo " ($type_mot)";
-					echo " | <A href='", generer_url_ecrire($url_base, "$id_table=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
+					echo " | <A href='", generer_url_ecrire($url_base, "$table_id=$id_objet&nouv_mot=$id_mot#mots"), "'>",_T('info_ajouter_mot'),"</A>";
 
 					if (strlen($descriptif_mot) > 1) {
 						echo "<BR><FONT SIZE=1>".propre(couper($descriptif_mot, 100))."</FONT>\n";
@@ -233,7 +233,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		     AND $connect_toutes_rubriques ) {
 			echo "<div style='width: 200px;'>";
 			$titre = urlencode($cherche_mot);
-			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&titre=$titre&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 		}
 
@@ -249,10 +249,10 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	if ($nouveaux_mots && $flag_editable) {
 		while ((list(,$nouv_mot) = each($nouveaux_mots)) AND $nouv_mot!='x') {
-			$query = "SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $id_table=$id_objet";
+			$query = "SELECT * FROM spip_mots_$table WHERE id_mot=$nouv_mot AND $table_id=$id_objet";
 			$result = spip_query($query);
 			if (!spip_num_rows($result)) {
-				$query = "INSERT INTO spip_mots_$table (id_mot,$id_table) VALUES ($nouv_mot, $id_objet)";
+				$query = "INSERT INTO spip_mots_$table (id_mot,$table_id) VALUES ($nouv_mot, $id_objet)";
 				$result = spip_query($query);
 			}
 		}
@@ -264,7 +264,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 			$mots_supp = "";
 		else
 			$mots_supp = " AND id_mot=$supp_mot";
-		$query = "DELETE FROM spip_mots_$table WHERE $id_table=$id_objet $mots_supp";
+		$query = "DELETE FROM spip_mots_$table WHERE $table_id=$id_objet $mots_supp";
 		$result = spip_query($query);
 		$reindexer = true;
 	}
@@ -281,7 +281,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 	unset($les_mots);
 
-	$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$id_table=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre";
+	$query = "SELECT mots.* FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot ORDER BY mots.type, mots.titre";
 	$result = spip_query($query);
 
 	if (spip_num_rows($result) > 0) {
@@ -324,14 +324,14 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 				$couleur="#EDF3FE";
 			}
 	
-			$url = "href='" . generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(generer_url_ecrire($url_base, "$id_table=$id_objet#mots"))) . "'";
+			$url = "href='" . generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(generer_url_ecrire($url_base, "$table_id=$id_objet#mots"))) . "'";
 
 			$vals[] = "<A $url>" . http_img_pack('petite-cle.gif', "", "width='23' height='12' border='0'") ."</A>";
 			
 	
 			// Changer
 			if ($unseul == "oui" AND $flag_groupe) {
-				$s =  generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots") . 
+				$s =  generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots") . 
 					"<select name='nouv_mot' onChange=\"setvisibility('valider_groupe_$id_groupe', 'visible');\" CLASS='fondl' STYLE='font-size:10px; width:90px;'>";
 				$query_autres_mots = "SELECT * FROM spip_mots WHERE id_groupe = $id_groupe ORDER by titre";
 				$result_autres_mots = spip_query($query_autres_mots);
@@ -359,7 +359,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			if ($flag_editable){
 				if ($flag_groupe)
-				  $s = "<A href='" . generer_url_ecrire($url_base, "$id_table=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
+				  $s = "<A href='" . generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
 				else $s = "&nbsp;";
 				$vals[] = $s;
 			} else $vals[]= "";
@@ -412,13 +412,13 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		if ($nombre_mots_associes > 3) {
 			echo "<div align='right' class='arial1'>";
-			echo "<a href='", generer_url_ecrire($url_base, "$id_table=$id_objet&supp_mot=-1#mots"), "'>",_T('info_retirer_mots'),"</a>";
+			echo "<a href='", generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=-1#mots"), "'>",_T('info_retirer_mots'),"</a>";
 			echo "</div><br />\n";
 		}
 
 		// il faudrait rajouter STYLE='margin:1px;' qq part
 
-		$form_mot = generer_url_post_ecrire($url_base,"$id_table=$id_objet", '', "#mots");
+		$form_mot = generer_url_post_ecrire($url_base,"$table_id=$id_objet", '', "#mots");
 
 		if ($table == 'rubriques') $form_mot .= "<INPUT TYPE='Hidden' NAME='id_rubrique' VALUE='$id_objet' />";
 
@@ -517,7 +517,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		if ($connect_statut == '0minirezo' AND $flag_editable AND $options == "avancees" AND $connect_toutes_rubriques) {
 			echo "<tr><td></td><td colspan='2'>";
 			echo "<div style='width: 200px;'>";
-			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&id_table=$id_table&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
+			icone_horizontale(_T('icone_creer_mot_cle'), generer_url_ecrire("mots_edit","new=oui&ajouter_id_article=$id_objet&table=$table&table_id=$table_id&redirect=$retour"), "mot-cle-24.gif", "creer.gif");
 			echo "</div> ";
 			echo "</td></tr>";
 		}

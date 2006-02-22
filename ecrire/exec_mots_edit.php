@@ -26,7 +26,7 @@ global
   $descriptif,
   $id_groupe,
   $id_mot,
-  $id_table,
+  $table_id,
   $new,
   $onfocus,
   $options,
@@ -67,7 +67,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 			// sinon bonjour le XSS
 			if ($ajouter_id_article) {
 				supprime_mot_de_groupe($id_groupe, $table);
-				spip_abstract_insert("spip_mots_$table", "(id_mot, $id_table)", "($id_mot, $ajouter_id_article)");
+				spip_abstract_insert("spip_mots_$table", "(id_mot, $table_id)", "($id_mot, $ajouter_id_article)");
 			}
 		}
 
@@ -243,7 +243,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<input type='hidden' name='redirect' VALUE=\"$redirect\" />\n";
 	echo "<input type='hidden' name='redirect_ok' VALUE='oui' />\n";
 	echo "<input type='hidden' name='table' VALUE='$table' />\n";
-	echo "<input type='hidden' name='id_table' VALUE='$id_table' />\n";
+	echo "<input type='hidden' name='table_id' VALUE='$table_id' />\n";
 	echo "<input type='hidden' name='ajouter_id_article' VALUE=\"$ajouter_id_article\" />\n";
 
 	$titre_mot = entites_html($titre_mot);
