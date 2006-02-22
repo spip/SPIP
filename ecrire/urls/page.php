@@ -20,7 +20,7 @@ define ('_terminaison_urls_page', '');
 # ici, ce qu'on veut ou presque (de preference pas de '/' ni de '.')
 define ('_separateur_urls_page', '=');
 # on peut indiquer '' si on a installe le .htaccess
-define ('_debut_urls_page', './?');
+define ('_debut_urls_page', get_spip_script('./').'?');
 #######
 
 
@@ -67,7 +67,7 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	if (preg_match(
-	',/[?]?(article|rubrique|breve|mot|site|auteur)'
+	',.*[?]?(article|rubrique|breve|mot|site|auteur)'
 	.preg_quote(_separateur_urls_page).'([0-9]+),',
 	$url, $regs)) {
 		$fond = $regs[1];

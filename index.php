@@ -1,4 +1,4 @@
 <?php
 	# appel SPIP
-	include ("ecrire/page.php");
+	include ('spip.php');
 ?>

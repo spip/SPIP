@@ -69,14 +69,14 @@ RewriteRule "." - [skip=100]
 ###
 # Compatibilite avec les URLS "html" (pour transition sympa)
 # voir fichier inc-urls-html.php3
-RewriteRule rubrique([0-9]+)\.html$	index.php?page=rubrique&id_rubrique=$1 [QSA,L]
-RewriteRule article([0-9]+)\.html$	index.php?page=article&id_article=$1 [QSA,L]
-RewriteRule breve([0-9]+)\.html$	index.php?page=breve&id_breve=$1 [QSA,L]
-RewriteRule mot([0-9]+)\.html$		index.php?page=mot&id_mot=$1 [QSA,L]
-RewriteRule auteur([0-9]+)\.html$	index.php?page=auteur&id_auteur=$1 [QSA,L]
-RewriteRule site([0-9]+)\.html$	index.php?page=site&id_syndic=$1 [QSA,L]
+RewriteRule rubrique([0-9]+)\.html$	spip.php?page=rubrique&id_rubrique=$1 [QSA,L]
+RewriteRule article([0-9]+)\.html$	spip.php?page=article&id_article=$1 [QSA,L]
+RewriteRule breve([0-9]+)\.html$	spip.php?page=breve&id_breve=$1 [QSA,L]
+RewriteRule mot([0-9]+)\.html$		spip.php?page=mot&id_mot=$1 [QSA,L]
+RewriteRule auteur([0-9]+)\.html$	spip.php?page=auteur&id_auteur=$1 [QSA,L]
+RewriteRule site([0-9]+)\.html$	spip.php?page=site&id_syndic=$1 [QSA,L]
 # Compatibilite avec les URLS "standard"
-RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|resume|sommaire|sommaire_texte)\.php3?$	index.php?page=$1 [QSA,L]
+RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|resume|sommaire|sommaire_texte)\.php3?$	spip.php?page=$1 [QSA,L]
 # Fin compatibilite
 ###
 
@@ -87,22 +87,22 @@ RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-brev
 # (fichier associe : inc-urls-propres.php3)
 
 # Les mots-cles
-RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$	index.php?page=mot [QSA,E=url_propre:$0,L]
+RewriteRule ^\+-[^/\.]+(-\+)?(\.html)?$	spip.php?page=mot [QSA,E=url_propre:$0,L]
 
 # Les breves
-RewriteRule ^\+[^/\.]+\+?(\.html)?$ 	index.php?page=breve [QSA,E=url_propre:$0,L]
+RewriteRule ^\+[^/\.]+\+?(\.html)?$ 	spip.php?page=breve [QSA,E=url_propre:$0,L]
 
 # Les rubriques
-RewriteRule ^-[^/\.]+-?(\.html)?$	index.php?page=rubrique [QSA,E=url_propre:$0,L]
+RewriteRule ^-[^/\.]+-?(\.html)?$	spip.php?page=rubrique [QSA,E=url_propre:$0,L]
 
 # les auteurs
-RewriteRule ^_[^/\.]+_?(\.html)?$	index.php?page=auteur [QSA,E=url_propre:$0,L]
+RewriteRule ^_[^/\.]+_?(\.html)?$	spip.php?page=auteur [QSA,E=url_propre:$0,L]
 
 # Les sites
-RewriteRule ^@[^/\.]+@?(\.html)?$	index.php?page=site [QSA,E=url_propre:$0,L]
+RewriteRule ^@[^/\.]+@?(\.html)?$	spip.php?page=site [QSA,E=url_propre:$0,L]
 
 # Les articles (en dernier car expression plus "large")
-RewriteRule ^[^/\.]+(\.html)?$		index.php?page=article [QSA,E=url_propre:$0,L]
+RewriteRule ^[^/\.]+(\.html)?$		spip.php?page=article [QSA,E=url_propre:$0,L]
 
 # Fin URLs "propres" et "propres2"
 ###

@@ -10,9 +10,9 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-include ("ecrire/inc_version.php");
+# ou est l'espace prive ?
+@define('_DIR_RESTREINT_ABS', 'ecrire/');
+# au travail...
+include _DIR_RESTREINT_ABS.'page.php';
 
-$var_f = include_fonction('spip_action_' . $action);
-$var_f();
-if ($redirect) redirige_par_entete(urldecode($redirect));
 ?>

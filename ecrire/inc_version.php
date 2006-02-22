@@ -14,19 +14,18 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-
-define('_EXTENSION_PHP', '.php3');
+@define('_EXTENSION_PHP', '.php3');
 
 # le nom du repertoire ecrire/
-define('_DIR_RESTREINT_ABS', 'ecrire/');
+@define('_DIR_RESTREINT_ABS', 'ecrire/');
 # sommes-nous dans ecrire/ ?
-define('_DIR_RESTREINT',
+@define('_DIR_RESTREINT',
  (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 # ou inversement ?
-define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
+@define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
 
 # le fichier ecrire/mes_options
-define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options' . _EXTENSION_PHP);
+@define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options' . _EXTENSION_PHP);
 
 
 //
@@ -60,11 +59,11 @@ $dossier_squelettes = "";
 $auto_compress = true;
 
 // Type d'URLs
-// 'page': page.php3?fond=article&id_article=123
-// 'standard': article.php3?id_article=123
+// 'page': ?article=123
 // 'html': article123.html
 // 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
+// 'standard': article.php3?id_article=123
 $type_urls = 'page';
 
 // creation des vignettes avec image magick en ligne de commande : mettre
@@ -367,6 +366,7 @@ if (!$REQUEST_URI) {
 // Module de lecture/ecriture/suppression de fichiers utilisant flock()
 //
 include_ecrire('inc_flock');
+
 
 // Lire les meta cachees
 

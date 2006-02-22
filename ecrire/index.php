@@ -17,7 +17,7 @@ include_ecrire('inc_cookie');
 // Determiner l'action demandee
 //
 
-$exec = $_REQUEST['exec'];
+$exec = _request('exec');
 if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 
 $var_auth ="";
