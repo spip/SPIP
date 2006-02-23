@@ -284,10 +284,8 @@ GROUP BY aut.id_auteur
 $sql_order");
 }
 
-function afficher_n_auteurs($auteurs)
-{
-global  $connect_statut, $options,
-	$connect_activer_messagerie, $messagerie;
+function afficher_n_auteurs($auteurs) {
+	global $connect_statut, $options, $messagerie;
 
  foreach ($auteurs as $row) {
 
@@ -309,7 +307,7 @@ global  $connect_statut, $options,
 	if ($options == 'avancees') {
 		echo "</td><td class='arial1' style='border-top: 1px solid #cccccc;'>";
 		if ($row['messagerie'] != 'non' AND $row['login']
-		AND $connect_activer_messagerie != "non" AND $messagerie != "non")
+		AND $messagerie != "non")
 			echo bouton_imessage($row['id_auteur'],"force")."&nbsp;";
 		if ($connect_statut=="0minirezo")
 			if (strlen($row['email'])>3)

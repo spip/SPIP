@@ -19,9 +19,7 @@ include_ecrire ("inc_forum");
 function forum_envoi_dist()
 {
 global
-  $activer_messagerie,
   $adresse_retour,
-  $connect_activer_messagerie,
   $connect_email,
   $connect_id_auteur,
   $connect_nom,
@@ -117,7 +115,7 @@ if ($titre_parent) {
 	echo "<span class='arial2'>$date_heure_parent</span>";
 	echo " ".typo($auteur_parent);
 
-	if ($id_auteur_parent  AND $activer_messagerie != "non" AND $connect_activer_messagerie != "non") {
+	if ($id_auteur_parent) {
 		$bouton = bouton_imessage($id_auteur_parent, $row);
 		if ($bouton) echo "&nbsp;".$bouton;
 	}
