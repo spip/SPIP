@@ -18,8 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // la fonction retire_cache()
 //
 function generer_nom_fichier_cache($contexte, $fond) {
-	global $_SERVER;
-	global $flag_gz;
 
 	if ($contexte === NULL) {
 		$fichier_requete = nettoyer_uri();
@@ -41,8 +39,9 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	if (!$fichier_cache)
 		$fichier_cache = 'INDEX-';
 
-	// morceau de md5 selon HOST et $fond
-	$md_cache = md5($fichier_requete . $_SERVER['HTTP_HOST'] . $fond);
+	// morceau de md5 selon HOST, $dossier_squelettes & $fond
+	$md_cache = md5($fichier_requete . $_SERVER['HTTP_HOST']
+		. $fond . $GLOBALS['dossier_squelettes']);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
@@ -51,7 +50,7 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	include_ecrire('inc_acces');
 	verifier_htaccess(_DIR_CACHE);
 
-	$gzip = $flag_gz ? '.gz' : '';
+	$gzip = $GLOBALS['flag_gz'] ? '.gz' : '';
 
 	return $subdir.$fichier_cache.$gzip;
 }
@@ -121,15 +120,14 @@ function retire_caches($chemin = '') {
 // gestion des delais par specification a l'exterieur du squelette
 
 function cache_valide($chemin_cache, $contenu, $date) {
-	global $delais;
 
-	if (!isset($delais)) $delais = 3600;
+	if (!isset($GLOBALS['delais'])) $GLOBALS['delais'] = 3600;
 
-	if (!$delais) return -1;
+	if (!$GLOBALS['delais']) return -1;
 
-	if (!$contenu) return $delais;
+	if (!$contenu) return $GLOBALS['delais'];
 
-	if ((time() - $date) > $delais) return $delais;
+	if ((time() - $date) > $GLOBALS['delais']) return $GLOBALS['delais'];
 
 	return 0;
 }
@@ -155,10 +153,8 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 //
 
 function determiner_cache(&$use_cache, $contexte, $fond) {
-	global $_SERVER;
 
 	// pour tester si la base est dispo
-
 	include_local(_FILE_CONNECT);
 
 	// cas ignorant le cache car complement dynamique
