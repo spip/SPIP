@@ -61,7 +61,7 @@ function calendrier_args_date($script, $annee, $mois, $jour, $type, $finurl) {
 	$script = parametre_url($script, 'mois',  sprintf("%02d", $mois));
 	$script = parametre_url($script, 'jour',  sprintf("%02d", $jour));
 	$script = parametre_url($script, 'type',  $type);
-	return $script;
+	return $script . $finurl;
 }
 
 # prend une heure de debut et de fin, ainsi qu'une echelle (seconde/pixel)
@@ -323,7 +323,7 @@ function http_calendrier_mois_clics($annee, $mois, $jour, $script, $ancre)
 	"</td><td style='text-align: right'>" .
 	http_href(calendrier_args_date($script,$annee, $mois, $jour, "semaine", $ancre),
 		  $semaine,
-		  _T('date_semaines') . " $semaine",
+		  _T('date_semaines') . ": $semaine",
 		  '',
 		  'calendrier-helvetica16') .
 	"</td></tr>\n</table>";

@@ -453,18 +453,7 @@ if (!$flag_editable) {
 
 spip_query("UPDATE spip_articles SET date_modif=NOW(), auteur_modif=$connect_id_auteur WHERE id_article=$id_article");
 
-affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, 
-	array(
-		'articles_surtitre' => $GLOBALS['meta']["articles_surtitre"],
-		'articles_soustitre' => $GLOBALS['meta']["articles_soustitre"],
-		'articles_descriptif' => $GLOBALS['meta']["articles_descriptif"],
-		'articles_urlref' => $GLOBALS['meta']["articles_urlref"],
-		'articles_chapeau' => $GLOBALS['meta']["articles_chapeau"],
-		'articles_ps' => $GLOBALS['meta']["articles_ps"],
-		'articles_redac' => $GLOBALS['meta']["articles_redac"],
-		'articles_mots' => $GLOBALS['meta']["articles_mots"],
-		'articles_modif' => $GLOBALS['meta']["articles_modif"]
-		));
+ affiche_articles_edit_dist($flag_editable, $id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $url, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $GLOBALS['meta']);
 }
 
 ?>
