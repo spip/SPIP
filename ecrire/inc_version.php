@@ -72,9 +72,10 @@ $type_urls = 'page';
 //
 ($ip = @$_SERVER['HTTP_X_FORWARDED_FOR']) OR $ip = @$_SERVER['REMOTE_ADDR'];
 
-// Pour renforcer la privacy, decommentez la ligne ci-dessous : SPIP ne pourra
-// alors conserver aucun numero IP, ni temporairement lors des visites (pour
-// gerer les statistiques ou dans spip.log), ni dans les forums (responsabilite)
+// Pour renforcer la privacy, decommentez la ligne ci-dessous (ou recopiez-la
+// dans le fichier ecrire/mes_options : SPIP ne pourra alors conserver aucun
+// numero IP, ni temporairement lors des visites (pour gerer les statistiques
+// ou dans spip.log), ni dans les forums (responsabilite)
 # $ip = substr(md5($ip),0,16);
 
 

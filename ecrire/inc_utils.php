@@ -107,6 +107,7 @@ function include_spip($f) {
 
 	// alors on le charge
 	include($s);
+	return true;
 }
 
 // un pipeline est lie a une action et une valeur
