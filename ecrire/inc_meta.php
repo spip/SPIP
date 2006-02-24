@@ -17,8 +17,9 @@ function lire_metas() {
 
 	$meta = array();
 	$result = spip_query('SELECT nom,valeur FROM spip_meta');
-	while (list($nom,$valeur) = spip_fetch_array($result)) {
-		$meta[$nom] = $valeur;
+	if($GLOBALS['db_ok']) {
+		while (list($nom,$valeur) = spip_fetch_array($result))
+			$meta[$nom] = $valeur;
 	}
 	if (!$meta['charset'])
 		ecrire_meta('charset', _DEFAULT_CHARSET);
@@ -46,14 +47,14 @@ function ecrire_metas() {
 	if (is_array($meta)) {
 		$ok = ecrire_fichier (_FILE_META, serialize($meta));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo') {
-		  include_ecrire('minipres');
-		  minipres(_T('texte_inc_meta_2'), "<h4 font color=red>".
-		    _T('texte_inc_meta_1', array('fichier' => _FILE_META)).
-		    " <a href='". generer_url_action('test_dirs'). "'>".
-		    _T('texte_inc_meta_2').
-		    "</a> ".
-		    _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS)).
-			   "</h4>\n");
+			include_ecrire('minipres');
+			minipres(_T('texte_inc_meta_2'), "<h4 font color=red>"
+			. _T('texte_inc_meta_1', array('fichier' => _FILE_META))
+			. " <a href='". generer_url_action('test_dirs'). "'>"
+			. _T('texte_inc_meta_2')
+			. "</a> "
+			. _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS))
+			. "</h4>\n");
 		}
 	}
 }

@@ -89,16 +89,18 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 		foreach($infos as $plug=>$info){
 			$prefix = "";
 			$prefix = trim(array_pop($info['prefix']))."_";
-			foreach($info['pipeline'] as $pipe){
-				$nom = trim(array_pop($pipe['nom']));
-				if (isset($pipe['action']))
-					$action = trim(array_pop($pipe['action']));
-				else
-					$action = $nom;
-				$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
-				if (isset($pipe['inclure'])){
-					$GLOBALS['spip_matrice']["$prefix$action"] = 
-						"_DIR_PLUGINS$plug/".array_pop($pipe['inclure']);
+			if (is_array($info['pipeline'])){
+				foreach($info['pipeline'] as $pipe){
+					$nom = trim(array_pop($pipe['nom']));
+					if (isset($pipe['action']))
+						$action = trim(array_pop($pipe['action']));
+					else
+						$action = $nom;
+					$GLOBALS['spip_pipeline'][$nom] .= "|$prefix$action";
+					if (isset($pipe['inclure'])){
+						$GLOBALS['spip_matrice']["$prefix$action"] = 
+							"_DIR_PLUGINS$plug/".array_pop($pipe['inclure']);
+					}
 				}
 			}
 		}
@@ -340,24 +342,26 @@ function plugin_verifie_conformite($plug,&$arbre){
 		if (isset($arbre['fonctions']))
 			$fonctions = $arbres['fonctions'];
 	  $liste_methodes_reservees = array('__construct','__destruct','plugin','install','uninstall',strtolower($prefix));
-		foreach($arbre['pipeline'] as $pipe){
-			$nom = trim(end($pipe['nom']));
-			if (isset($pipe['action']))
-				$action = trim(end($pipe['action']));
-			else
-				$action = $nom;
-			// verif que la methode a un nom autorise
-			if (in_array(strtolower($action),$liste_methodes_reservees)){
-				if (!$silence)
-					$arbre['erreur'][] = _T("erreur_plugin_nom_fonction_interdit")." : $action";
-			}
-			else{
-				// verif que le fichier de def est bien present
-				if (isset($pipe['inclure'])){
-					$inclure = _DIR_PLUGINS."$plug/".end($pipe['inclure']);
-					if (!@is_readable($inclure))
-	  				if (!$silence)
-							$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $inclure";
+		if (is_array($arbre['pipeline'])){
+			foreach($arbre['pipeline'] as $pipe){
+				$nom = trim(end($pipe['nom']));
+				if (isset($pipe['action']))
+					$action = trim(end($pipe['action']));
+				else
+					$action = $nom;
+				// verif que la methode a un nom autorise
+				if (in_array(strtolower($action),$liste_methodes_reservees)){
+					if (!$silence)
+						$arbre['erreur'][] = _T("erreur_plugin_nom_fonction_interdit")." : $action";
+				}
+				else{
+					// verif que le fichier de def est bien present
+					if (isset($pipe['inclure'])){
+						$inclure = _DIR_PLUGINS."$plug/".end($pipe['inclure']);
+						if (!@is_readable($inclure))
+		  				if (!$silence)
+								$arbre['erreur'][] = _T('erreur_plugin_fichier_absent')." : $inclure";
+					}
 				}
 			}
 		}

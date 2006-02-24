@@ -502,13 +502,12 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 				$texte .= "<B>$deb</B>";
 			}
 			else {
-				$link = new Link;
-				$link->addVar($tmp_var, strval($deb - 1));
+				$url = parametre_url(self(), $tmp_var, $deb-1);
 				if ($javascript) {
 					$jj = str_replace("::deb::", "&amp;$tmp_var=$deb", $javascript);
-					$texte .= "<a onClick=\"$jj; return false;\" href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
+					$texte .= "<a onClick=\"$jj; return false;\" href=\"$url#a$ancre\">$deb</a>";
 				}
-				else $texte .= "<a href=\"".$link->getUrl()."#a$ancre\">$deb</a>";
+				else $texte .= "<a href=\"$url#a$ancre\">$deb</a>";
 			}
 		}
 	
