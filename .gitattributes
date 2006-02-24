@@ -336,7 +336,6 @@ ecrire/img_pack/xml.gif -text
 ecrire/inc_agenda.php -text
 ecrire/inc_ajax.php -text
 ecrire/inc_auteur_voir.php -text
-ecrire/inc_barre.php -text
 ecrire/inc_boutons.php -text
 ecrire/inc_cookie.php -text
 ecrire/inc_distant.php -text

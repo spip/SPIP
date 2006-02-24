@@ -125,9 +125,10 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle
 		AND \$Numrows['$id_boucle']['compteur_boucle']-1 <= \$fin_boucle) {";
 	
-	// Calculer les invalideurs si c'est une boucle non constante
-
-	if ($primary && !$constant)
+	// Calculer les invalideurs si c'est une boucle non constante et si on
+	// souhaite invalider ces elements
+	if (!$constant AND $primary AND ($primary == 'id_forum'
+	OR in_array($primary, explode(',', $GLOBALS['invalider_caches']))))
 		$corps .= "\n\t\t\$Cache['$primary'][intval(" .
 		  (($primary != 'id_forum')  ? 
 		   index_pile($id_boucle, $primary, $boucles) :

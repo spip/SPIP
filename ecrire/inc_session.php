@@ -27,8 +27,7 @@ $GLOBALS['auteur_session'] = '';
 // On verifie l'IP et le nom du navigateur
 //
 function hash_env() {
-	global $_SERVER;
-	return md5($_SERVER['REMOTE_ADDR'] . $_SERVER['HTTP_USER_AGENT']);
+	return md5($GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']);
 }
 
 

@@ -119,7 +119,7 @@ function mots_du_forum($ajouter_mot, $id_message)
 }
 
 function enregistre_forum() {
-	global $REMOTE_ADDR, $auteur_session,
+	global $auteur_session,
 		$afficher_texte, $ajouter_mot, $alea, $hash,
 		$auteur, $confirmer_forum, $email_auteur, $id_auteur,
 		$nom_site_forum, $retour_forum, $texte, $titre, $url_site,
@@ -210,7 +210,7 @@ function enregistre_forum() {
 	url_site = '".addslashes(corriger_caracteres($url_site))."',
 	auteur = '".addslashes(corriger_caracteres($auteur))."',
 	email_auteur = '".addslashes(corriger_caracteres($email_auteur))."',
-	ip = '$REMOTE_ADDR',
+	ip = '".addslashes($ip)."',
 	statut = '$statut'
 	WHERE id_forum = $id_message
 	");

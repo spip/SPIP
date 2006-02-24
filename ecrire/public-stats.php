@@ -15,8 +15,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ecrire_stats() {
-	global $_SERVER;
-	global $id_article, $id_breve, $id_rubrique;
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
 	if (preg_match(
@@ -31,23 +29,17 @@ function ecrire_stats() {
 		return;
 
 	// Identification de l'element
-	if ($log_id_num = intval($id_rubrique))
+	if ($log_id_num = intval(_request('id_rubrique')))
 		$log_type = "rubrique";
-	else if ($log_id_num = intval($id_article))
+	else if ($log_id_num = intval(_request('id_article')))
 		$log_type = "article";
-	else if ($log_id_num = intval($id_breve))
+	else if ($log_id_num = intval(_request('id_breve')))
 		$log_type = "breve";
 	else
 		$log_type = "autre";
 
-	// Identification du client ("unique")
-	if ($_SERVER['HTTP_X_FORWARDED_FOR']) {
-		$client_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
-	} else {
-		$client_ip = $_SERVER['REMOTE_ADDR'];
-	}
 	$client_id = substr(md5(
-		$client_ip . $_SERVER['HTTP_USER_AGENT']
+		$GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']
 		. $_SERVER['HTTP_ACCEPT'] . $_SERVER['HTTP_ACCEPT_LANGUAGE']
 		. $_SERVER['HTTP_ACCEPT_ENCODING']
 	), 0,10);
