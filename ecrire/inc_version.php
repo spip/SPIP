@@ -221,7 +221,7 @@ if (@file_exists(_FILE_OPTIONS)) {
 //
 // Definitions standards (charge aussi inc_flock)
 //
-# on peu mettre ces deux lignes dans mes_options si on veut beneficier
+# on peut mettre ces deux lignes dans mes_options si on veut beneficier
 # des definitions (notamment de $auteur_session)
 define('_DIR_INCLUDE', _DIR_RESTREINT);
 require_once(_DIR_INCLUDE . 'inc_utils.php');

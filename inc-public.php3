@@ -1,4 +1,4 @@
 <?php
 	# fantome
-	include('ecrire/public.php');
+	include('spip.php');
 ?>
