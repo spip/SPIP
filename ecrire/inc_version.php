@@ -214,188 +214,17 @@ $hash_recherche_strict = '';
 // Inclure le fichier ecrire/mes_options (ou equivalent)
 //
 if (@file_exists(_FILE_OPTIONS)) {
-	include(_FILE_OPTIONS);
+	include_once(_FILE_OPTIONS);
 }
 
+
 //
-// Definitions standards
+// Definitions standards (charge aussi inc_flock)
 //
-
-// la taille maxi des logos (0 : pas de limite)
-define('_LOGO_MAX_SIZE', 0); # poids en ko
-define('_LOGO_MAX_WIDTH', 0); # largeur en pixels
-define('_LOGO_MAX_HEIGHT', 0); # hauteur en pixels
-
-// Le fichier de connexion a la base de donnees
-define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
-define('_FILE_CONNECT',
-	(@is_readable(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
-		(_FILE_CONNECT_INS . _EXTENSION_PHP)
-	 : false));
-
-// les repertoires annexes
+# on peu mettre ces deux lignes dans mes_options si on veut beneficier
+# des definitions (notamment de $auteur_session)
 define('_DIR_INCLUDE', _DIR_RESTREINT);
-define('_DIR_IMG', _DIR_RACINE ."IMG/");
-define('_DIR_DOC', _DIR_RACINE ."IMG/");
-define('_DIR_CACHE', _DIR_RACINE ."CACHE/");
-define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
-define('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
-define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
-define('_DIR_LOGOS', _DIR_RACINE ."IMG/");
-
-// les fichiers qu'on y met, entre autres
-define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
-define('_FILE_MYSQL_OUT', _DIR_SESSIONS . 'mysql_out');
-define('_FILE_GARBAGE', _DIR_SESSIONS . '.poubelle');
-define('_FILE_META', _DIR_SESSIONS . 'meta_cache.txt');
-
-// sous-repertoires d'images 
-define('_DIR_TeX', _DIR_IMG . "cache-TeX/");
-
-// Icones
-# le chemin http (relatif) vers les images standard
-define('_DIR_IMG_PACK', (_DIR_RESTREINT . 'img_pack/'));
-# vers les logos de type de document, standard & perso
-define('_DIR_IMG_ICONES_DIST', _DIR_IMG_PACK . "icones/");
-define('_DIR_IMG_ICONES', _DIR_IMG . "icones/");
-# les icones de la barre d'edition des formulaires
-define('_DIR_IMG_ICONES_BARRE', _DIR_IMG_PACK . "icones_barre/");
-
-# le chemin php (absolu) vers les images standard (pour hebergement centralise)
-define('_ROOT_IMG_PACK', (dirname(__FILE__) . '/img_pack/'));
-define('_ROOT_IMG_ICONES_DIST', (dirname(__FILE__) . '/img_pack/icones/'));
-
-// Fichiers de langue
-define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
-
-// Le charset par defaut lors de l'installation
-define('_DEFAULT_CHARSET', 'utf-8');
-
-// les repertoires devant etre TOUJOURS accessibles en ecriture
-
-$test_dirs = array(_DIR_CACHE, _DIR_IMG, _DIR_SESSIONS);
-
-// qq chaines standard
-
-define('_ACCESS_FILE_NAME', '.htaccess');
-define('_AUTH_USER_FILE', '.htpasswd');
-
-define('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
-
-define('_SPIP_PATH', './:squelettes/:dist/:formulaires/:ecrire/');
-
-
-// charge les fonctions indispensables
-include(_DIR_INCLUDE . 'inc_utils.php');
-
-
-// *********** traiter les variables ************
-
-// Recuperer les superglobales $_GET si non definies
-// (en theorie c'est impossible depuis PHP 4.0.3, cf. track_vars)
-// et les identifier aux $HTTP_XX_VARS
-foreach (array('_GET', '_POST', '_COOKIE', '_SERVER') as $_table) {
-	$http_table_vars = 'HTTP'.$_table.'_VARS';
-	if (!is_array($GLOBALS[$_table])) {
-		$GLOBALS[$_table] = array();
-		if (is_array($GLOBALS[$http_table_vars]))
-			$GLOBALS[$_table] = & $GLOBALS[$http_table_vars];
-	}
-		$GLOBALS[$http_table_vars] = & $GLOBALS[$_table];
-}
-
-//
-// Securite
-//
-
-// Ne pas se faire manger par un bug php qui laisse passer ?GLOBALS[truc]=toto
-if (isset($_REQUEST['GLOBALS'])) die();
-// nettoyer les magic quotes \' et les caracteres nuls %00
-spip_desinfecte($_GET);
-spip_desinfecte($_POST);
-spip_desinfecte($_COOKIE);
-#	if (@ini_get('register_globals')) // pas fiable
-spip_desinfecte($GLOBALS);
-// a la fin supprimer la variable anti-recursion devenue inutile
-// (et meme nuisible, notamment si on teste $_POST)
-unset($_GET['spip_recursions']);
-unset($_POST['spip_recursions']);
-unset($_COOKIE['spip_recursions']);
-unset($GLOBALS['spip_recursions']);
-// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
-@set_magic_quotes_runtime(0);
-
-// Remplir $GLOBALS avec $_GET et $_POST (methode a revoir pour fonctionner
-// completement en respectant register_globals = off)
-spip_register_globals();
-
-// appliquer le cookie_prefix
-if ($cookie_prefix != 'spip') {
-	include_ecrire('inc_cookie');
-	recuperer_cookies_spip($cookie_prefix);
-}
-
-
-//
-// Capacites php (en fonction de la version)
-//
-
-$flag_gz = function_exists("gzencode"); #php 4.0.4
-$flag_ob = (function_exists("ob_start")
-	&& function_exists("ini_get")
-	&& (@ini_get('max_execution_time') > 0)
-	&& !strstr(ini_get('disable_functions'), 'ob_'));
-$flag_sapi_name = function_exists("php_sapi_name");
-$flag_revisions = function_exists("gzcompress");
-$flag_get_cfg_var = (@get_cfg_var('error_reporting') != "");
-$flag_upload = (!$flag_get_cfg_var || (get_cfg_var('upload_max_filesize') > 0));
-
-//
-// Sommes-nous dans l'empire du Mal ?
-// (ou sous le signe du Pingouin, ascendant GNU ?)
-//
-
-if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
-	define ('os_serveur', 'windows');
-
-//
-// Infos sur le fichier courant
-//
-
-// Compatibilite avec serveurs ne fournissant pas $REQUEST_URI
-if (!$REQUEST_URI) {
-	$REQUEST_URI = $PHP_SELF;
-	if ($QUERY_STRING AND !strpos($REQUEST_URI, '?'))
-		$REQUEST_URI .= '?'.$QUERY_STRING;
-}
-
-
-// tidy en ligne de commande (si on ne l'a pas en module php,
-// ou si le module php ne marche pas)
-// '/bin/tidy' ou '/usr/local/bin/tidy' ou tout simplement 'tidy'
-#define('_TIDY_COMMAND', 'tidy');
-
-//
-// Module de lecture/ecriture/suppression de fichiers utilisant flock()
-//
-include_ecrire('inc_flock');
-
-
-// Lire les meta cachees
-
-if (lire_fichier(_DIR_SESSIONS . 'meta_cache.txt', $meta))
-		$meta = @unserialize($meta);
-	// en cas d'echec refaire le fichier
-if (!is_array($meta) AND _FILE_CONNECT) {
-		include_ecrire('inc_meta');
-		ecrire_metas();
-	}
-
-
-// Langue principale du site
-$langue_site = $GLOBALS['meta']['langue_site'];
-if (!$langue_site) include_ecrire('inc_lang');
-$spip_lang = $langue_site;
+require_once(_DIR_INCLUDE . 'inc_utils.php');
 
 
 // chargement des plugins : doit arriver en dernier
@@ -405,9 +234,7 @@ $spip_lang = $langue_site;
 if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
 	// chargement optimise precompile
 	include_once(_DIR_SESSIONS."charger_plugins_options.php");
-}
-else
-{
+} else {
 	include_ecrire('inc_plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
@@ -436,8 +263,8 @@ OR _request('action') == 'test_dirs')) {
 		include_ecrire ("inc_minipres");
 		minipres(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
 	}
-	// autrement c'est une install ad hoc (spikini...), on sait pas faire 
- }
+	// autrement c'est une install ad hoc (spikini...), on sait pas faire
+}
 
 //
 // Reglage de l'output buffering : si possible, generer une sortie

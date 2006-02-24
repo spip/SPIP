@@ -100,7 +100,6 @@ if ($logout_public) {
  }
 // tentative de logout
 if ($logout) {
-	verifier_visiteur();
 	if ($auteur_session['login'] == $logout) {
 		spip_query("UPDATE spip_auteurs SET en_ligne = DATE_SUB(NOW(),INTERVAL 6 MINUTE) WHERE id_auteur = ".$auteur_session['id_auteur']);
 		if ($spip_session) {
@@ -240,7 +239,6 @@ if ($var_lang) {
 // changer de langue espace prive (ou login)
 if ($var_lang_ecrire) {
 	include_ecrire('inc_lang');
-	verifier_visiteur();
 
 	if (changer_langue($var_lang_ecrire)) {
 		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
