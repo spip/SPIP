@@ -76,7 +76,7 @@ function include_fonction($nom, $dossier='exec') {
 function include_spip($f, $include = true) {
 	// deja charge (nom) ?
 	if (isset($GLOBALS['included_files'][$f]))
-		return @$GLOBALS['included_files'][$f];
+		return $GLOBALS['included_files'][$f];
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -97,7 +97,9 @@ function include_spip($f, $include = true) {
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
-		include($s);
+		require($s);
+echo $s;
+
 	}
 	return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s] = $s;
 }

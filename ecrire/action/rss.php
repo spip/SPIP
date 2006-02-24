@@ -316,7 +316,7 @@ function rss_sites($critere) {
 // On cree ensuite le RSS correspondant a l'operation
 
 
-function spip_action_rss_dist()
+function rss_dist()
 {
   global $args, $cle, $fmt, $id, $lang, $op;
 
