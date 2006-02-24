@@ -22,7 +22,7 @@ if (!function_exists('find_in_path')) {
 
 // Est-ce une action ?
 if ($action = _request('action')) {
-	$var_f = include_fonction('spip_action_' . $action);
+	$var_f = include_fonction($action, 'action');
 	$var_f();
 	if ($redirect) redirige_par_entete(urldecode($redirect));
 	exit;
