@@ -97,9 +97,7 @@ function include_spip($f, $include = true) {
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
-		require($s);
-echo $s;
-
+		include($s);
 	}
 	return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s] = $s;
 }
