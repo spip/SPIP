@@ -167,7 +167,8 @@ $spip_pipeline = array(
 $spip_matrice = array ();
 # les plugins a activer
 $plugins = array();  // voir le contenu du repertoire /plugins/
-
+# les surcharges de include_spip()
+$surcharges = array(); // format 'inc_truc' => '/plugins/chose/inc_truc2.php'
 
 // Masquer les warning
 error_reporting(E_ALL ^ E_NOTICE);
@@ -197,7 +198,7 @@ $extension_squelette = 'html';
 // (utilise pour les modifs de la base de donnees)
 
 // version de la base
-$spip_version = 1.906;
+$spip_version = 1.907;
 
 // version de spip
 $spip_version_affichee = "1.9 alpha 3";

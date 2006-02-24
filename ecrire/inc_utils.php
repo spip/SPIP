@@ -18,7 +18,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $included_files = array();
 
-function include_local($file, $silence=false) {
+// inclure un fichier "local", signifie en general qu'on suit le chemin
+// depuis le repertoire courant. Mais si le fichier est redefini dans
+// spip_matrice, on prefere spip_matrice ; et s'il n'existe pas localement
+// on le find_in_path()
+function include_local ($file, $silence=false) {
 	$nom = preg_replace("/\.php[3]?$/",'', $file);
 #	spip_log("'$nom' '$file'");
 	if (@$GLOBALS['included_files'][$nom]++)
@@ -75,6 +79,34 @@ function include_fonction($nom) {
 		   ($inc ? "" : "(aucun fichier exec_$nom disponible)"));
 	  exit;
 	}
+}
+
+//
+// une fonction destinee a remplacer include_ecrire, surchargeable
+// par $surcharge['inc_truc'] = '/chemin/vers/truc.php'
+//
+function include_spip($f) {
+	// deja charge (nom) ?
+	if (@$GLOBALS['included_files'][$f]++) return true;
+
+	// Hack pour pouvoir appeler cette fonction depuis mes_options.
+	define('_DIR_INCLUDE', _DIR_RESTREINT);
+
+	// une surcharge existe ?
+	if (!$s = $GLOBALS['surcharge'][$f]
+	// sinon, le fichier existe dans le repertoire ecrire ?
+	AND !is_readable($s = _DIR_INCLUDE . $f . '.php')
+	AND !is_readable($s = _DIR_INCLUDE . $f . '.php3')
+	// sinon, chercher dans le chemin
+	AND !$s = find_in_path($f . '.php')
+	AND !$s = find_in_path($f . '.php3'))
+		return false;
+
+	// deja charge (chemin complet) ?
+	if ($GLOBALS['included_files'][$s]++) return true;
+
+	// alors on le charge
+	include($s);
 }
 
 // un pipeline est lie a une action et une valeur
@@ -804,9 +836,9 @@ function spip_register_globals() {
 			if (isset($GLOBALS[$var])) {
 				if (
 				// demande par le client
-				_request($var) !== NULL
+				$_REQUEST[$var] !== NULL
 				// et pas modifie par les fichiers d'appel
-				AND $GLOBALS[$var] == _request($var)
+				AND $GLOBALS[$var] == $_REQUEST[$var]
 				) // Alors on ne sait pas si c'est un hack
 					die ("register_globals: $var interdite");
 			}
@@ -928,6 +960,8 @@ function spip_initialisation() {
 	spip_desinfecte($_GET);
 	spip_desinfecte($_POST);
 	spip_desinfecte($_COOKIE);
+	# et _REQUEST pour que tester_variable fonctionne meme avec magic_quotes
+	spip_desinfecte($_REQUEST);
 	#	if (@ini_get('register_globals')) // pas fiable
 	spip_desinfecte($GLOBALS);
 	// a la fin supprimer la variable anti-recursion devenue inutile
@@ -935,6 +969,7 @@ function spip_initialisation() {
 	unset($_GET['spip_recursions']);
 	unset($_POST['spip_recursions']);
 	unset($_COOKIE['spip_recursions']);
+	unset($_REQUEST['spip_recursions']);
 	unset($GLOBALS['spip_recursions']);
 	// Par ailleurs on ne veut pas de magic_quotes au cours de l'execution
 	@set_magic_quotes_runtime(0);
@@ -1025,9 +1060,8 @@ function tester_variable($var, $val){
 		$GLOBALS[$var] = $val;
 
 	if (
-		_request($var) !== NULL
-		// et pas modifie par les fichiers d'appel
-		AND $GLOBALS[$var] == _request($var)
+		$_REQUEST[$var] !== NULL
+		AND $GLOBALS[$var] == $_REQUEST[$var]
 	)
 		die ("tester_variable: $var interdite");
 }
@@ -1049,7 +1083,7 @@ function spip_desinfecte(&$t) {
 			}
 		}
 	} else {
-		$t = str_replace(chr(0), '', $t);
+		$t = str_replace(chr(0), '-', $t);
 		if ($magic_quotes)
 			$t = stripslashes($t);
 	}
