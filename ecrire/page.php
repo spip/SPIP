@@ -43,7 +43,7 @@ else if (isset($_GET['page'])) {
 
 # par defaut
 } else
-	$fond = 'sommaire';
+	tester_variable('fond', 'sommaire');
 
 
 // Particularites de certains squelettes
