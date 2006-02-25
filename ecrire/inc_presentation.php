@@ -2223,7 +2223,7 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='') {
 		echo "<ul>";
 		echo "<li><a href='./'>"._T('icone_a_suivre')."</a>";
 		echo "<li><a href='" . generer_url_ecrire("naviguer") . "'>"._T('icone_edition_site')."</a>";
-		echo "<li><a href='" . generer_url_ecrire("forum_admin"). "'>"._T('titre_forum')."</a>";
+		echo "<li><a href='" . generer_url_ecrire("forum"). "'>"._T('titre_forum')."</a>";
 		echo "<li><a href='" . generer_url_ecrire("auteurs") . "'>"._T('icone_auteurs')."</a>";
 		echo "<li><a href=\"$adresse_site/\">"._T('icone_visiter_site')."</a>";
 		echo "</ul>";

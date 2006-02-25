@@ -30,7 +30,7 @@ function liste_numeros_forum($urlforum, $debut, $total)
 	echo "\n</p>\n";
 }
 
-function forum_admin_dist()
+function forum_dist()
 {
   global $connect_statut, $debut, $admin;
 
@@ -40,24 +40,24 @@ function forum_admin_dist()
 	debut_page(_T('titre_page_forum'), "redacteurs", "privadm");
 	$statutforum = 'privadm';
 	$logo = "forum-admin-24.gif";
-	$urlforum = generer_url_ecrire('forum_admin', 'admin=admin');
+	$urlforum = generer_url_ecrire('forum_admin');
   } else {
 	debut_page(_T('titre_forum'), "redacteurs", "forum-interne");
 	$statutforum = 'privrac';
 	$logo = "forum-interne-24.gif";
-	$urlforum = generer_url_ecrire('forum_admin', 'admin=');
+	$urlforum = generer_url_ecrire('forum','', true);
   }
 
   debut_gauche();
 
   debut_droite();
 
-  if ($admin=='oui')
+  if ($admin)
 	gros_titre(_T('titre_cadre_forum_administrateur'));
   else
 	gros_titre(_T('titre_cadre_forum_interne'));
 
-  if ($admin == 'oui' AND $connect_statut != "0minirezo") {
+  if ($admin AND $connect_statut != "0minirezo") {
 	echo _T('avis_non_acces_page');
 	exit;
   }

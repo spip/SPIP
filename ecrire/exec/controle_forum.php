@@ -97,14 +97,14 @@ SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	  $retour = forum_parent($forum_id_parent);
 	  if ($retour) return $retour;
 	  else return array('pref' => _T('info_message'),
-			    'url' => generer_url_ecrire('forum_admin','admin=admin'),
+			    'url' => generer_url_ecrire('forum_admin'),
 			    'titre' => _T('info_forum_administrateur'));
 	}
 	else {
 	  $retour = forum_parent($forum_id_parent);
 	  if ($retour) return $retour;
 	  else return array('pref' => _T('info_message'),
-			    'url' => generer_url_ecrire('forum_admin'),
+			    'url' => generer_url_ecrire('forum'),
 			    'titre' => _T('info_forum_interne'));
 	}
 }
