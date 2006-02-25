@@ -539,14 +539,11 @@ $document=0) {
 	// Un menu depliant si on a une possibilite supplementaire
 	$test_ftp = ($connect_statut == '0minirezo' AND $GLOBALS['flag_upload']);
 	$test_distant = ($mode == 'document' AND $type);
-
 	if ($test_ftp OR $test_distant)
 		$res .= "<div>" . debut_block_invisible("ftp$num_form");
 
 	if ($test_ftp)
-		$res .= afficher_transferer_upload($type,
-				texte_upload_manuel(_DIR_TRANSFERT,
-							$inclus));
+		$res .= afficher_transferer_upload($type, texte_upload_manuel(_DIR_TRANSFERT,$inclus));
 
 
 	// Lien document distant, jamais en mode image
@@ -922,6 +919,7 @@ function bloc_gerer_vignette($document, $id_article, $type, $album) {
 function afficher_documents_non_inclus($id_article, $type = "article", $flag_modif) {
 	global $couleur_claire, $connect_id_auteur, $connect_statut;
 	global $options, $spip_lang_left, $spip_lang_right;
+
 
 	// Afficher portfolio
 	/////////
