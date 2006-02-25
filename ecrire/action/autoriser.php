@@ -33,6 +33,8 @@ function autoriser_dist()
     $refus = 1;
   else
   {
+
+	## code inutile ?? $auteur_session est connu des qu'on a charge inc_utils.
     if ($cookie_session = $_COOKIE['spip_session']) 
       {
 	include_ecrire("inc_session");
@@ -46,6 +48,7 @@ function autoriser_dist()
 	      $auth_login = $auteur_session['login'];
 	  }
       }
+    ## /code inutile
 
     if (!$arg) {
       $arg = spip_query("select id_document from spip_documents as documents where documents.fichier='". addslashes($file) ."'");
@@ -106,36 +109,5 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
       readfile($file);
     }
 }
-
-// pour envoyer un article proprement
-// spip_action.php?action=telecharger&arg=$id_article
-// Code mort ???
-/*
-function spip_action_telecharger_dist()
-{
-  global $arg;
-  $r = spip_query("
-SELECT	texte, soustitre, titre, date
-FROM	spip_articles
-WHERE	id_article=" . intval($arg)
-				 );
-  $r = spip_fetch_array($r);
-  if (!$r)
-    return 0;
-  else
-    {
-      $titre = $r['titre'];
-      $text =ereg_replace("^<code>[[:space:]]*",'',
-			  ereg_replace('</code>$','',$r['texte']));
-      header("Content-Type: text/plain; charset='iso-8859-1'");
-      if ($titre) header("Content-Description: $titre");
-      header("Content-Disposition: attachment; filename=" .
-            ($r['soustitre'] ? $r['soustitre'] : ($arg . ".txt")) .
-             ";" );
-      header("Content-Length: ". strlen($text)+1);
-      print $text;
-    }
-}
-*/
 
 ?>
