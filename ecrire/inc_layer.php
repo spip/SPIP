@@ -107,9 +107,9 @@ function produire_acceder_couche($couches, $nom, $icone) {
 //
 function verif_butineur() {
 
-	global $HTTP_USER_AGENT, $browser_name, $browser_version;
+	global $browser_name, $browser_version;
 	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
-	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $HTTP_USER_AGENT, $match);
+	ereg("^([A-Za-z]+)/([0-9]+\.[0-9]+) (.*)$", $_SERVER['HTTP_USER_AGENT'], $match);
 	$browser_name = $match[1];
 	$browser_version = $match[2];
 	$browser_description = $match[3];
@@ -135,6 +135,7 @@ function verif_butineur() {
 		$browser_name = "Safari";
 		$browser_version = $match[1];
 		$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
+		$browser_barre = ($browser_version >= 5.0);
 	}
 	else if (eregi("mozilla", $browser_name) AND $browser_version >= 5) {
 		$browser_layer = http_script('', _DIR_IMG_PACK . 'layer.js','');
