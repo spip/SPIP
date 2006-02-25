@@ -850,6 +850,19 @@ function hauteur($img) {
 }
 
 
+function my_filemtime ($fichier) {
+	// pour limiter acces disques
+	// (est-ce que PHP fait ca tout seul?)
+	global $mes_filemt;
+	
+	if ($mes_filemt["$fichier"]) {
+		$filmt = $mes_filemt["$fichier"];
+	} else {
+		$filmt = @filemtime($fichier);
+		$mes_filemt["$fichier"] = $filmt;
+	}
+	return $filmt;	
+}	
 
 // Fonctions de traitement d'image
 // uniquement pour GD2
@@ -896,7 +909,7 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	$hauteur = hauteur($img);
 	
 	$creer = true;
-	if (@filemtime($fichier) < @filemtime($fichier_dest)) {
+	if (my_filemtime($fichier) < my_filemtime($fichier_dest)) {
 		$creer = false;
 	}
 	
@@ -1482,6 +1495,20 @@ function imageRotateBicubic($src_img, $angle, $bicubic=0) {
 		$g4 = ($rgb >> 8) & 0xFF;
 		$b4 = $rgb & 0xFF;
 		$d4 = distance_pixel($xo, $yo, $x1, $y1);
+
+		$ac1 = ((127-$a1) / 127);
+		$ac2 = ((127-$a2) / 127);
+		$ac3 = ((127-$a3) / 127);
+		$ac4 = ((127-$a4) / 127);
+		
+		// limiter impact des couleurs transparentes, 
+		// mais attention tout transp: division par 0
+		if ($ac1*$d1 + $ac2*$d2 + $ac3+$d3 + $ac4+$d4 > 0) {
+			if ($ac1 > 0) $d1 = $d1 * $ac1;
+			if ($ac2 > 0) $d2 = $d2 * $ac2;
+			if ($ac3 > 0) $d3 = $d3 * $ac3;
+			if ($ac4 > 0) $d4 = $d4 * $ac4;
+		}
 		
 		$tot  = $d1 + $d2 + $d3 + $d4;
 
@@ -2149,7 +2176,7 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 
 	$line = '';
 	while (count($words) > 0) {
-		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0], NULL);
+		$dimensions = imageftbbox($textSize, 0, $font, $line.' '.$words[0], array());
 		$lineWidth = $dimensions[2] - $dimensions[0]; // get the length of this line, if the word is to be included
 		if ($lineWidth > $maxWidth) { // if this makes the text wider that anticipated
 			$lines[] = $line; // add the line to the others
@@ -2164,19 +2191,19 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 	$i = 0;
 	foreach ($lines as $line) {
 		$line = ereg_replace("~", " ", $line);
-		$dimensions = imageftbbox($textSize, 0, $font, $line, NULL);
+		$dimensions = imageftbbox($textSize, 0, $font, $line, array());
 		$largeur_ligne = $dimensions[2] - $dimensions[0];
 		if ($largeur_ligne > $largeur_max) $largeur_max = $largeur_ligne;
 		if ($align == "right") $left_pos = $maxWidth - $largeur_ligne;
 		else if ($align == "center") $left_pos = floor(($maxWidth - $largeur_ligne)/2);
 		else $left_pos = 0;
-		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line), NULL);
+		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line), array());
 		$i++;
 	}
 	$retour["height"] = $height + round(0.3 * $hauteur_ligne);
 	$retour["width"] = $largeur_max;
                  
-	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', NULL);
+	$dimensions_espace = imageftbbox($textSize, 0, $font, ' ', array());
 	$largeur_espace = $dimensions_espace[2] - $dimensions_espace[0];
 	$retour["espace"] = $largeur_espace;
 	return $retour;
