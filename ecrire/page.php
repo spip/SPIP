@@ -30,12 +30,12 @@ if ($action = _request('action')) {
 
 // Sinon, reglage du $fond
 
-# cas normal (securise anti injection par inc_utils)
-if (isset($fond)) { }
-
 # passe par INCLURE(){fond=...}
-else if (isset($contexte_inclus['fond']))
+if (isset($contexte_inclus['fond']))
 	$fond = $contexte_inclus['fond'];
+
+# cas normal (securise anti injection par inc_utils)
+else if (isset($fond)) { }
 
 # passe par l'url
 else if (isset($_GET['page'])) {
