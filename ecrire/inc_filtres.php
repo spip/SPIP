@@ -850,20 +850,6 @@ function hauteur($img) {
 }
 
 
-function my_filemtime ($fichier) {
-	// pour limiter acces disques
-	// (est-ce que PHP fait ca tout seul?)
-	global $mes_filemt;
-	
-	if ($mes_filemt["$fichier"]) {
-		$filmt = $mes_filemt["$fichier"];
-	} else {
-		$filmt = @filemtime($fichier);
-		$mes_filemt["$fichier"] = $filmt;
-	}
-	return $filmt;	
-}	
-
 // Fonctions de traitement d'image
 // uniquement pour GD2
 function valeurs_image_trans($img, $effet, $forcer_format = false) {
@@ -909,7 +895,7 @@ function valeurs_image_trans($img, $effet, $forcer_format = false) {
 	$hauteur = hauteur($img);
 	
 	$creer = true;
-	if (my_filemtime($fichier) < my_filemtime($fichier_dest)) {
+	if (@filemtime($fichier) < @filemtime($fichier_dest)) {
 		$creer = false;
 	}
 	
@@ -979,6 +965,9 @@ function image_alpha($im, $alpha = 63)
 			}
 		}
 		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
+		imagedestroy($im);
+		imagedestroy($im2);
 	}
 	
 	$class = $image["class"];
@@ -1019,6 +1008,8 @@ function image_flip_vertical($im)
 		}
 
 		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 	
 	$class = $image["class"];
@@ -1058,6 +1049,8 @@ function image_flip_horizontal($im)
 			}
 		}
 		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
@@ -1173,6 +1166,9 @@ function image_masque($im, $masque) {
 
 
 		$image["fonction_image"]($im_, "$dest");
+		imagedestroy($im_);
+		imagedestroy($im);
+		imagedestroy($im2);
 
 	}
 
@@ -1237,7 +1233,8 @@ function image_nb($im, $val_r = 299, $val_g = 587, $val_b = 114)
 			}
 		}
 		$image["fonction_image"]($im_, "$dest");
-		
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 
 	$class = $image["class"];
@@ -1365,7 +1362,9 @@ function image_flou($im,$niveau=3)
 		}
 	
 		$image["fonction_image"]($temp2, "$dest");
-		
+		imagedestroy($temp1);
+		imagedestroy($im);
+	
 	}
 	
 	$class = $image["class"];
@@ -1549,7 +1548,7 @@ function image_rotation($im, $angle, $crop=false)
 		$im = $image["fonction_imagecreatefrom"]($im);
 		$im = imageRotateBicubic($im, $angle, true);
 		$image["fonction_image"]($im, "$dest");
-		
+		imagedestroy($im);
 	}
   	$src_x = largeur($dest);
    	$src_y = hauteur($dest);
@@ -1695,7 +1694,8 @@ function image_sepia($im, $rgb = "896f5e")
 			}
 		}
 		$image["fonction_image"]($im_, "$dest");
-
+		imagedestroy($im_);
+		imagedestroy($im);
 	}
 	$class = $image["class"];
 	if (strlen($class) > 1) $tags=" class='$class'";
@@ -2225,8 +2225,7 @@ function image_typo() {
 	$hauteur_ligne: la hauteur de chaque ligne de texte si texte sur plusieurs lignes
 	(equivalent a "line-height")
 	$alt: pour forcer l'affichage d'un alt; attention, comme utilisation d'un span invisible pour affiche le texte, generalement inutile
-	
-	
+
 	*/
 
 
