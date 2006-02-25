@@ -22,19 +22,19 @@ define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
-include_ecrire("public-compilo-index");  # index ? structure ? pile ?
+include_spip('public/compilo-index');  # index ? structure ? pile ?
 
 // definition des boucles
-include_ecrire("public-boucles");
+include_spip('public/boucles');
 
 // definition des criteres
-include_ecrire("public-criteres");
+include_spip('public/criteres');
 
 // definition des balises
-include_ecrire("public-balises");
+include_spip('public/balises');
 
 // definition de l'API
-include_ecrire("public-compilo-api");
+include_spip('public/compilo-api');
 
 # definition des tables
 include_ecrire('inc_serialbase');
@@ -582,7 +582,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-	include_ecrire("public-$gram-squel");
+	include_spip('public/phraser-'.$gram);
 
 	$racine = phraser($squelette, '',$boucles, $nom);
 
@@ -682,7 +682,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$secondes = spip_timer('calcul_skel');
 	spip_log("COMPIL ($secondes) ["
 		.preg_replace(',\.html$,', '', $sourcefile)
-		."] CACHE/skel_$nom.php");
+		."] ".creer_repertoire(_DIR_CACHE, 'skel')."$nom.php");
 
 	$squelette_compile = "<"."?php
 /*

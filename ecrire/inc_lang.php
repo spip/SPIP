@@ -308,7 +308,7 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 }
 
 //
-// Cette fonction est appelee depuis inc-public-global si on a installe
+// Cette fonction est appelee depuis public/global si on a installe
 // la variable de personnalisation $forcer_lang ; elle renvoie le brouteur
 // si necessaire vers l'URL xxxx?lang=ll
 //
