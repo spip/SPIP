@@ -12,6 +12,6 @@ $trans[253]=305; //inodot
 $trans[254]=351; //scedil
 $trans[222]=350; //Scedil
 
-$GLOBALS['CHARSET'][$charset] = $trans;
+$GLOBALS['CHARSET']['iso-8859-9'] = $trans;
 
 ?>

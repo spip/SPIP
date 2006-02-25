@@ -2,7 +2,7 @@
 
 // mathml
 
-$GLOBALS['CHARSET'][$charset] = array (
+$GLOBALS['CHARSET']['mathml'] = array (
 
 'ac' => '&#xE207;',
 'acd' => '&#xE3A6;',
