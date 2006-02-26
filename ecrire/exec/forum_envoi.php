@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
-include_spip ('inc_barre');
+include_spip ('inc/barre');
 include_ecrire ("inc_forum");
 
 function exec_forum_envoi_dist()

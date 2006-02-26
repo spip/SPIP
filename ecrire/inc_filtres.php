@@ -2456,7 +2456,7 @@ function barre_textarea($texte, $rows, $cols) {
 		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
 
 	$num_textarea++;
-	include_spip ('inc_barre');
+	include_spip ('inc/barre');
 	return afficher_barre("document.getElementById('textarea_$num_textarea')", true) .
 	  "
 <textarea name='texte' rows='$rows' class='forml' cols='$cols'
