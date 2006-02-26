@@ -1,7 +1,12 @@
 #CACHE{7200}
 <BOUCLE_site(SITES){id_syndic}
-><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html dir="#LANG_DIR" lang="#LANG">
+>[(#REM)
+	Les sites n'ont pas de "lang" a proprement parler ; on va donc se
+	baser sur la langue de la rubrique qui les contient. Les articles
+	syndiques, eux, ont une lang.
+]<BOUCLE_lang(RUBRIQUES){id_rubrique}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="#LANG_DIR" lang="#LANG"></BOUCLE_lang>
 <head>
 <title>[(#NOM_SITE|textebrut)]</title>
 <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />

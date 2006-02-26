@@ -2377,6 +2377,7 @@ function afficher_enclosures($tags) {
 	foreach (extraire_tags($tags) as $tag) {
 		if (extraire_attribut($tag, 'rel') == 'enclosure'
 		AND $t = extraire_attribut($tag, 'href')) {
+			include_ecrire('inc_minipres'); #pour http_href_img (quel bazar)
 			$s[] = http_href_img($t,
 				'attachment.gif',
 				'height="15" width="15" border="0"',
