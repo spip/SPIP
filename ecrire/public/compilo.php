@@ -49,8 +49,12 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 	if (!strlen($fichier))
 		$path = _DIR_RESTREINT.'page.php';
 
-	# sinon chercher le fichier demande
-	else if (!($path = find_in_path($fichier))) {
+	# sinon chercher le fichier, eventuellement en changeant.php3 => .php
+	else if (!($path = find_in_path($fichier))
+	AND !(
+		preg_match(',^(.*[.]php3)$,', $fichier, $r)
+		AND $path = find_in_path($r[1]))
+	) {
 		spip_log("ERREUR: <INCLURE($fichier)> impossible");
 		erreur_squelette(_T('zbug_info_erreur_squelette'),
 				 "&lt;INCLURE($fichier)&gt; - "
