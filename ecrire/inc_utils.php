@@ -49,7 +49,15 @@ function include_local ($file, $silence=false) {
 function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
-	return include_local(_DIR_INCLUDE . $file, $silence);
+	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
+
+	# fichiers old-style, ecrire/inc_truc.php
+	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
+		return include_local($f, $silence);
+
+	# new style, surchargeable
+var_dump($r);
+	return include_spip('inc/'.$r[3]);
 }
 
 
@@ -64,6 +72,7 @@ function include_fonction($nom, $dossier='exec') {
 
 	// Si la fonction existe deja (definie par mes_options, par exemple)
 	if (function_exists($f = $dossier.'_'.$nom))
+#	OR function_exists($f = $dossier.'_'.$nom.'_dist'))
 		return $f;
 
 	// Sinon charger le fichier de declaration
@@ -515,7 +524,7 @@ function envoie_image_vide() {
 	echo $image;
 	flush();
 }
-function spip_action_cron() {
+function action_cron() {
 	envoie_image_vide();
 	cron (1);
 }
