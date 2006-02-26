@@ -100,13 +100,11 @@ function config_fonctions_dist()
 
 
 function afficher_choix_vignette($process) {
+	global $couleur_foncee;
 	//global $taille_preview;
 	$taille_preview = 120;
 
-	if ($process == $GLOBALS['meta']['image_process'])
-		$border = 2;
-	else
-		$border=0;
+	$border = ($process == $GLOBALS['meta']['image_process']);
 
 	// Ici on va tester les capacites de GD independamment des tests realises
 	// dans les images spip_image -- qui servent neanmoins pour la qualite
@@ -114,9 +112,11 @@ function afficher_choix_vignette($process) {
 		
 	} */
 
-	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'><a href='" , generer_url_ecrire("config_fonctions","image_process=$process"), 
+	echo "<td  width='",($taille_preview+4),"'><div align='center' valign='bottom' width='",($taille_preview+4),"'",
+	($border ? "style='border:2px;border-style: dotted; border-color: $couleur_foncee;'" : ''),
+	"><a href='" , generer_url_ecrire("config_fonctions","image_process=$process"), 
 	  "'><img src='", generer_url_action("tester", "arg=$process"),
-	  "' border='$border' /></a><br />";
+	  "' /></a><br />";
 	if ($border) echo "<b>$process</b>";
 	else echo "$process";
 	echo "</div></td>\n";
