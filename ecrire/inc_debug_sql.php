@@ -125,9 +125,10 @@ function erreur_squelette($message='', $lieu='') {
 		$auteur_session['statut'] == '0minirezo' OR
 		($GLOBALS['var_mode'] == 'debug')) {
 			include_ecrire('inc_headers');
+			lang_select($auteur_session['lang']);
 			http_no_cache();
 			echo _DOCTYPE_ECRIRE,
-			  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+			  "<html lang='".$GLOBALS['spip_lang']."' dir='ltr'>\n" .
 			  "<head>\n<title>",
 			  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 			   _T('admin_debug') . ' ' .
@@ -269,9 +270,9 @@ function reference_boucle_debug($n, $nom, $self)
   if (!$boucle)
     return !$ligne ? "" :  
       (" (" .
-       (($nom != $skel) ? _L("squelette inclus, ligne: ") :
-	_L("squelette, ligne: ")) .
-       "<a href='$self&amp;var_mode_objet=$skel&amp;var_mode_affiche=squelette&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)");
+       (($nom != $skel) ? _T('squelette_inclus_ligne') :
+	_T('squelette_ligne')) .
+	" <a href='$self&amp;var_mode_objet=$skel&amp;var_mode_affiche=squelette&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)");
   else {
   $self .= "&amp;var_mode_objet=$skel$boucle&amp;var_mode_affiche=boucle";
 
@@ -312,6 +313,7 @@ function ancre_texte($texte, $fautifs=array())
 // l'environnement graphique du debuggueur 
 function debug_dumpfile ($texte, $fonc, $type) {
 	global $debug_objets, $var_mode_objet, $var_mode_affiche;
+	global $auteur_session;
 
 	$debug_objets[$type][$fonc . 'tout'] = $texte;
 	if (!$debug_objets['sourcefile']) return;
@@ -331,8 +333,9 @@ function debug_dumpfile ($texte, $fonc, $type) {
 
 	include_ecrire('inc_headers');
 	http_no_cache();
+	lang_select($auteur_session['lang']);
 	echo _DOCTYPE_ECRIRE,
-	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='ltr'>\n" .
 	  "<head>\n<title>",
 	  ('Spip ' . $GLOBALS['spip_version_affichee'] . ' ' .
 	   _T('admin_debug') . ' ' .
@@ -423,7 +426,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	      include_ecrire("inc_spip_sax");
 	      $res = spip_sax($texte);
 	      if (!$res)
-		$err = _L("impossible");
+		$err = _T('impossible');
 	      elseif (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
 		$fermant = $r[2];
 		$ouvrant = $r[4];
@@ -433,7 +436,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
 		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
 	      } else {
-		  $err = _L("correcte");
+		  $err = _T('correcte');
 		  $texte = $res;
 	      }
 	  }
