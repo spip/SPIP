@@ -56,7 +56,6 @@ function include_ecrire($file, $silence=false) {
 		return include_local($f, $silence);
 
 	# new style, surchargeable
-var_dump($r);
 	return include_spip('inc/'.$r[3]);
 }
 
