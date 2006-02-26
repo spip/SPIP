@@ -3183,6 +3183,9 @@ function bouton_spip_rss($op, $args, $fmt='rss') {
 			  . "&amp;fmt=ical";
 			$button = 'iCal';
 			break;
+		case 'atom':
+			$button = 'atom';
+			break;
 		case 'rss':
 		default:
 		  
