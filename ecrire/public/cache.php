@@ -169,7 +169,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 	}
 
 	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
-	if ($GLOBALS['flag_gz'] AND @file_exists($chemin_cache.'.gz'))
+	if ($GLOBALS['flag_gz'] AND @file_exists(_DIR_CACHE.$chemin_cache.'.gz'))
 		$chemin_cache .= '.gz';
 
 	// HEAD : cas sans jamais de calcul pour raisons de performance
