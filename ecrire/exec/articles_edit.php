@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 include_ecrire("inc_rubriques");
-include_ecrire ("inc_documents");
+include_spip('inc/documents');
 include_spip ('inc/barre');
 
 //

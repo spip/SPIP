@@ -19,7 +19,7 @@ include_ecrire("inc_rubriques");
 include_ecrire('inc_forum');
 include_ecrire("inc_logos");
 include_ecrire("inc_mots");
-include_ecrire("inc_documents");
+include_spip('inc/documents');
 include_ecrire("inc_abstract_sql");
 
 function exec_naviguer_dist()
