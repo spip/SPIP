@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire("inc_sites_voir");
 
-function recherche_dist()
+function exec_recherche_dist()
 {
   global $couleur_foncee, $recherche;
 

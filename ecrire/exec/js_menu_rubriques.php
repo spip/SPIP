@@ -150,7 +150,7 @@ function bandeau_rubrique($id_rubrique, $titre_rubrique, $z = 1) {
 	return $ret;
 }
 
-function js_menu_rubriques_dist()
+function exec_js_menu_rubriques_dist()
 {
 	if (http_last_modified(@filemtime("js_menu_rubriques.php"), time() + 24 * 3600)) 
 		exit;

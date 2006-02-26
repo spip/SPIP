@@ -17,7 +17,7 @@ include_ecrire("inc_rubriques");
 include_ecrire ("inc_documents");
 include_spip ('inc_barre');
 
-function breves_edit_dist()
+function exec_breves_edit_dist()
 {
 global
   $champs_extra,

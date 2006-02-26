@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function messagerie_dist()
+function exec_messagerie_dist()
 {
 
   global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;

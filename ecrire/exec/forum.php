@@ -30,7 +30,7 @@ function liste_numeros_forum($urlforum, $debut, $total)
 	echo "\n</p>\n";
 }
 
-function forum_dist()
+function exec_forum_dist()
 {
   global $connect_statut, $debut, $admin;
 

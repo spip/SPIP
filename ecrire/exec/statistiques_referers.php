@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire("inc_statistiques");
 
-function statistiques_referers_dist()
+function exec_statistiques_referers_dist()
 {
   global $connect_statut, $id_article, $jour, $limit;
 

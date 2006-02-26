@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function documents_liste_dist()
+function exec_documents_liste_dist()
 {
 
 //

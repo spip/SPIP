@@ -10,10 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-function cookie_dist() {
+function action_cookie_dist() {
 	include_ecrire ("inc_session");
 	include_ecrire('inc_cookie');
-	spip_cookie_dist();
+	action_spip_cookie_dist();
 }
 
 function auth_http($url, $essai_auth_http) {
@@ -38,7 +38,7 @@ function auth_http($url, $essai_auth_http) {
 	}
 }
 
-function spip_cookie_dist()
+function action_spip_cookie_dist()
 {
   global
     $auteur_session,

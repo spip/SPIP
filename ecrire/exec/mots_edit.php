@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_ecrire ("inc_logos");
 include_ecrire ("inc_abstract_sql");
 
-function mots_edit_dist()
+function exec_mots_edit_dist()
 {
 global
   $ajouter_id_article,

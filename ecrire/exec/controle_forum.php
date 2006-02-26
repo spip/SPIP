@@ -197,7 +197,7 @@ function controle_un_forum($row, $rappel) {
 // Debut de la page de controle
 //
 
-function controle_forum_dist()
+function exec_controle_forum_dist()
 {
 
   global $page, $debut, $debut_id_forum, $id_rubrique, $connect_statut, $connect_toutes_rubriques;

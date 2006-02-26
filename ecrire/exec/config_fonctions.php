@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire ("inc_config");
 
-function config_fonctions_dist()
+function exec_config_fonctions_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $changer_config;
 	if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {

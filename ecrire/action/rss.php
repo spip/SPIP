@@ -354,7 +354,7 @@ function rss_sites($critere) {
 // On cree ensuite le RSS correspondant a l'operation
 
 
-function rss_dist()
+function action_rss_dist()
 {
   global $args, $cle, $fmt, $id, $lang, $op;
 

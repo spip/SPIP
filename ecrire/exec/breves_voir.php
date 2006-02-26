@@ -236,7 +236,7 @@ afficher_forum(spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_
 fin_page();
 }
 
-function breves_voir_dist()
+function exec_breves_voir_dist()
 {
 global $id_breve, $id_parent, $texte, $titre, $statut,
   $annee, $mois, $jour, $lien_titre, $lien_url,$champs_extra,

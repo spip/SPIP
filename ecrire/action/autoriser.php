@@ -22,7 +22,7 @@ include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 //  il verifie soit que le demandeur est authentifie
 // soit que le fichier est joint a au moins 1 article, breve ou rubrique publie
 
-function autoriser_dist()
+function action_autoriser_dist()
 {
   global $file, $arg, $toujours;
 

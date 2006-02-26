@@ -109,8 +109,8 @@ if (defined("_INC_PUBLIC")) {
 
 	// Valider/indenter a la demande. garder la compatibilite tidy
 	if (trim($page) AND $xhtml AND $html AND !headers_sent()) {
-		$f = include_fonction(($xhtml === true) ? 'tidy' : $xhtml);
-		$page = $f($page);
+		if ($f = include_fonction(($xhtml === true) ? 'tidy' : $xhtml))
+			$page = $f($page);
 	}
 
 	// Inserer au besoin les boutons admins

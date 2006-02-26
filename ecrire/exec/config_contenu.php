@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_ecrire("inc_mail");
 include_ecrire ("inc_config");
 
-function config_contenu_dist()
+function exec_config_contenu_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right, $spip_lang_left,$changer_config, $envoi_now ;
 

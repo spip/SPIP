@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function instituer_dist()
+function action_instituer_dist()
 {
 	global $action, $arg, $hash, $id_auteur;
 	include_ecrire("inc_session");

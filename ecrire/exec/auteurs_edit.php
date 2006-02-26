@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_ecrire("inc_logos");
 include_ecrire("inc_auteur_voir");
 
-function auteurs_edit_dist()
+function exec_auteurs_edit_dist()
 {
 	global $connect_id_auteur, $id_auteur;
 	$id_auteur = intval($id_auteur);

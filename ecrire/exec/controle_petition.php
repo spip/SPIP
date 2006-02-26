@@ -20,7 +20,7 @@ function message_de_signature($row)
   return propre(echapper_tags($row['message']));
 }
 
-function controle_petition_dist()
+function exec_controle_petition_dist()
 {
   global $connect_statut, $id_article, $add_petition, $supp_petition, $debut;
 

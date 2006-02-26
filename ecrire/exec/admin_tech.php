@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function admin_tech_dist()
+function exec_admin_tech_dist()
 {
   global $connect_statut, $connect_toutes_rubriques, $couleur_foncee, $flag_gz, $options;
 

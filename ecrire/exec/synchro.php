@@ -30,7 +30,7 @@ function afficher_liens_calendrier($lien, $icone, $texte) {
 	echo fin_cadre_enfonce();
 }
 
-function synchro_dist()
+function exec_synchro_dist()
 {
 global   $connect_id_auteur;
 ///// debut de la page

@@ -16,7 +16,7 @@ include_ecrire("inc_charsets");	# pour le nom de fichier
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 include_ecrire('inc_getdocument');
 
-function joindre_dist()
+function action_joindre_dist()
 {
   global $action, $arg, $hash, $id_auteur,  $redirect,
     $sousaction1,

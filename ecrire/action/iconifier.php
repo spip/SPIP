@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function iconifier_dist()
+function action_iconifier_dist()
 {
 	global $action, $arg, $hash, $id_auteur;
 	include_ecrire("inc_session");
@@ -21,11 +21,11 @@ function iconifier_dist()
 		minipres(_T('info_acces_interdit'));
 	}
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
-		spip_image_ajouter_dist();
-	else	spip_image_effacer_dist();
+		action_spip_image_ajouter_dist();
+	else	action_spip_image_effacer_dist();
 }
 
-function spip_image_effacer_dist() {
+function action_spip_image_effacer_dist() {
 
 	global $arg;
 	if (!strstr($arg, ".."))
@@ -38,7 +38,7 @@ function spip_image_effacer_dist() {
 
 // $source = $_FILES[0]
 // $dest = arton12.xxx
-function spip_image_ajouter_dist() {
+function action_spip_image_ajouter_dist() {
 	global $sousaction2, $source, $arg;
 
 	include_ecrire('inc_getdocument');

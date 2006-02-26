@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_ecrire("inc_presentation");
 include_ecrire('inc_forum'); // pour boutons_controle_forum 
 
-function articles_forum_dist()
+function exec_articles_forum_dist()
 {
   global $connect_statut, $debut, $forum_retour, $id_article;
 

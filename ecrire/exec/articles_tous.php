@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function articles_tous_dist()
+function exec_articles_tous_dist()
 {
   global $aff_art, $aff_statut, $sel_lang,
     $article, $enfant, $text_article,  $first_couche,     $last_couche;

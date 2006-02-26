@@ -62,7 +62,7 @@ function verifier_base() {
 	return $res;
 }
 
-function admin_repair_dist()
+function exec_admin_repair_dist()
 {
 
 // verifier version MySQL

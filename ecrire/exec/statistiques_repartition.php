@@ -125,7 +125,7 @@ function enfants_aff($id_parent,$decalage, $critere, $gauche=0) {
 	}
 }
 
-function statistiques_repartition_dist()
+function exec_statistiques_repartition_dist()
 {
 
   global $connect_statut, $connect_toutes_rubriques, $spip_ecran, $taille,

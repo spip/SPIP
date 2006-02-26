@@ -60,8 +60,7 @@ function fin_admin($action) {
 }
 
 
-function demande_maj_version()
-{
+function demande_maj_version() {
 	include_ecrire("inc_presentation");
 	debut_page();
 	echo "<blockquote><blockquote><h4><font color='red'>",
@@ -76,4 +75,5 @@ function demande_maj_version()
 	fin_page();
 	exit;
 }
+
 ?>

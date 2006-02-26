@@ -16,7 +16,7 @@ include_ecrire("inc_presentation");
 include_ecrire("inc_distant");
 include_ecrire("inc_ortho");
 
-function articles_ortho_dist()
+function exec_articles_ortho_dist()
 {
   global
     $browser_name,

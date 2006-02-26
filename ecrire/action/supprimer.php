@@ -16,7 +16,7 @@ include_ecrire("inc_charsets");	# pour le nom de fichier
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 // Effacer un doc (et sa vignette)
-function supprimer_dist() {
+function action_supprimer_dist() {
 
 	global $redirect;
 	global $action, $arg, $hash, $id_auteur;

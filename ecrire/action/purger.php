@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 
-function purger_dist()
+function action_purger_dist()
 {
   global $action, $arg, $hash, $id_auteur;
   include_ecrire("inc_session");

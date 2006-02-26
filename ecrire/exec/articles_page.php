@@ -17,7 +17,7 @@ include_ecrire("inc_texte");
 charger_generer_url();
 include_ecrire("inc_rubriques");
 
-function articles_page_dist()
+function exec_articles_page_dist()
 {
   global $connect_statut, $connect_id_auteur;
 

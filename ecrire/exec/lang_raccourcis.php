@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_presentation");
 
-function lang_raccourcis_dist()
+function exec_lang_raccourcis_dist()
 {
   global $changer_config, $couleur_foncee,  $spip_lang, $spip_lang_left;
 

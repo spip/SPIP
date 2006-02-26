@@ -17,7 +17,7 @@ charger_generer_url();
 include_ecrire("inc_rubriques");
 include_ecrire ("inc_mots");
 
-function message_dist()
+function exec_message_dist()
 {
 global 
 $ajout_forum,
@@ -87,7 +87,7 @@ if ($supp_dest) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message='$id_message' AND id_auteur='$supp_dest'");
 }
 
- affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur);
+ exec_affiche_message_dist($id_message,  $cherche_auteur, $nouv_auteur);
 }
 
 
@@ -468,7 +468,7 @@ function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee,
 
 
 
-function affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
+function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur)
 {
   global $connect_id_auteur, $echelle, $partie_cal;
   if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"))) {

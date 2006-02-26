@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_agenda");
 
-function calendrier_dist()
+function exec_calendrier_dist()
 {
   global $type, $css;
 // icones standards, fonction de la direction de la langue

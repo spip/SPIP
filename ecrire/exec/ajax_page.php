@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 # gerer un charset minimaliste en convertissant tout en unicode &#xxx;
 
-function ajax_page_dist()
+function exec_ajax_page_dist()
 {
 	global $flag_ob, $fonction, $id, $exclus, $col, $id_ajax_fonc, $type, $rac;
 	$id = intval($id);
