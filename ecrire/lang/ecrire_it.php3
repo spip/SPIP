@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Attiva il plugin',
 'aide_non_disponible' => 'Questa parte della guida in linea non &egrave; ancora disponibile in italiano.',
+'auteur' => 'Autore:',
 'avis_acces_interdit' => 'Accesso vietato.',
 'avis_article_modifie' => 'Attenzione, @nom_auteur_modif@ ha lavorato su quest\'articolo @date_diff@ minuti fa',
 'avis_aucun_resultat' => 'Nessun risultato.',
@@ -89,12 +91,7 @@ amministratori).',
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non comparire nell\'elenco dei redattori collegati ',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non inviare annunci editoriali ',
 'bouton_radio_non_syndication' => 'Nessuna syndication',
-'bouton_radio_occidental' => 'Alfabeto occidentale&nbsp; (<tt>iso-8859-1</tt>): permette solo
-la visualizzazione corretta delle lingue dell\'Europa occidentale (inglese, francese, tedesco...)&nbsp;;
- tuttavia, SPIP permette di gestire tutte le altre lingue con relativa facilit&agrave;.',
 'bouton_radio_pas_petition' => 'Nessuna petizione',
-'bouton_radio_personnalise' => 'Set di caratteri personalizzato: scegli quest\'opzione se desideri
-utilizzare un set di caratteri specifico',
 'bouton_radio_petition_activee' => 'Petizione attivata',
 'bouton_radio_publication_immediate' => 'Pubblicazione immediata dei messaggi
 (i contributi sono pubblicati subito dopo il loro invio, gli amministratori possono
@@ -103,8 +100,6 @@ cancellarli successivamente).',
 'bouton_radio_sauvegarde_non_compressee' => 'backup non compresso in <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Elimina la petizione',
 'bouton_radio_syndication' => 'Syndication:',
-'bouton_radio_universel' => 'Alfabeto universale&nbsp; (<tt>utf-8</tt>): permette la visualizzazione di tutte le lingue, ma pu&ograve; porre dei
-problemi di compatibilit&agrave; con le applicazioni usate per modificare i propri modelli di layout e con alcuni client di posta.',
 'bouton_redirection' => 'REINDIRIZZAMENTO',
 'bouton_relancer_installation' => 'Rilanciare l\'installazione',
 'bouton_restaurer_base' => 'Ripristina il database',
@@ -138,7 +133,7 @@ problemi di compatibilit&agrave; con le applicazioni usate per modificare i prop
 'email_2' => 'email:',
 'entree_adresse_annuaire' => 'Indirizzo della rubrica',
 'entree_adresse_email' => 'Il tuo indirizzo email',
-'entree_adresse_fichier_syndication' => 'Indirizzo del file di <b>backend</b> per la syndication:',
+'entree_adresse_fichier_syndication' => 'Indirizzo del file di syndication:',
 'entree_adresse_site' => '<b>Indirizzo del sito</b> [Obbligatorio]',
 'entree_base_donnee_1' => 'Indirizzo del database',
 'entree_base_donnee_2' => '(Spesso questo indirizzo coincide con quello dell\'intero sito, qualche volta corrisponde a "localhost", altre volte invece non &egrave; necessario specificarlo.)',
@@ -172,6 +167,13 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'entree_texte_breve' => 'Testo della breve',
 'entree_titre_obligatoire' => '<B>Titolo</B> [Obbligatorio]<BR>',
 'entree_url' => 'Indirizzo (URL) del sito',
+'erreur_plugin_fichier_absent' => 'File non presente',
+'erreur_plugin_fichier_def_absent' => 'File di definizioni non presente',
+'erreur_plugin_nom_fonction_interdit' => 'Nome di funzione non possibile',
+'erreur_plugin_nom_manquant' => 'Nome del plugin mancante',
+'erreur_plugin_prefix_manquant' => 'Spazio per il nome del plugin non definito',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; mancante nel file di definizione',
+'erreur_plugin_version_manquant' => 'Versione del plugin mancante',
 
 
 // I
@@ -186,8 +188,9 @@ Se non conosci queste informazioni, richiedile all\'amministratore del sistema o
 'ical_texte_rss' => '&Egrave; possibile mettere in syndication le novit&agrave; di questo sito con qualsiasi lettore di file in formato XML/RSS (Rich Site Summary). Questo &egrave; il medesimo formato che permette a SPIP di leggere le novit&agrave; pubblicate su altri siti che utilizzano un formato di scambio compatibile.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Mailing-list',
-'ical_titre_rss' => 'File &laquo;backend&raquo;',
+'ical_titre_rss' => 'File di syndication',
 'icone_activer_cookie' => 'Attiva il cookie di corrispondenza',
+'icone_admin_plugin' => 'Gestione dei plugin',
 'icone_afficher_auteurs' => 'Pubblica gli autori',
 'icone_afficher_visiteurs' => 'Pubblica i visitatori',
 'icone_arret_discussion' => 'Non partecipare pi&ugrave; a questa discussione',
@@ -564,6 +567,8 @@ impossibile.',
 'info_sous_titre' => 'Sottotitolo:',
 'info_statut_administrateur' => 'Amministratore',
 'info_statut_auteur' => 'status di questo autore:',
+'info_statut_auteur_a_confirmer' => 'Iscrizione da confermare',
+'info_statut_auteur_autre' => 'Altro stato:',
 'info_statut_efface' => 'Cancellato',
 'info_statut_redacteur' => 'Redattore',
 'info_statut_site_1' => 'Questo sito &egrave;:',
@@ -575,6 +580,8 @@ impossibile.',
 'info_suivi_activite' => 'Monitoraggio dell\'attivit&agrave; editoriale',
 'info_supprimer_mot' => 'cancella&nbsp;questa&nbsp;parola',
 'info_surtitre' => 'Occhiello:',
+'info_syndication_integrale_1' => 'Il tuo sito propone dei file di  syndication (vedi &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Si desidera trasmettere gli articoli in versione integrale oppure in versione riassunta di un centinaio di caratteri?',
 'info_taille_maximale_vignette' => 'Taglia massima delle immagini create dal sistema:',
 'info_terminer_installation' => 'Puoi ora terminare la procedura d\'installazione standard.',
 'info_texte' => 'Testo',
@@ -627,6 +634,7 @@ Le traduzioni sono associate all\'originale,
 'item_ajout_mots_cles' => 'Consenti l\'uso di parole chiave nei forum',
 'item_autoriser_documents_joints' => 'Consenti di allegare documenti agli articoli',
 'item_autoriser_documents_joints_rubriques' => 'Consenti di allegare documenti alle rubriche',
+'item_autoriser_syndication_integrale' => 'Diffondere la versione integrale degli articoli nei file di syndication',
 'item_bloquer_liens_syndiques' => 'Blocca i link in syndication per la convalida',
 'item_breve_refusee' => 'NO - Breve rifiutata',
 'item_breve_validee' => 'SI - Breve convalidata',
@@ -652,6 +660,7 @@ Le traduzioni sono associate all\'originale,
 'item_non_ajout_mots_cles' => 'Non consentire l\'uso di parole chiave nei forum',
 'item_non_autoriser_documents_joints' => 'Non consentire di allegare documenti agli articoli',
 'item_non_autoriser_documents_joints_rubriques' => 'Non consentire di allegare documenti alle rubriche',
+'item_non_autoriser_syndication_integrale' => 'Diffondere solo un riassunto',
 'item_non_bloquer_liens_syndiques' => 'Non bloccare i link provenienti da una syndication',
 'item_non_creer_fichiers_authent' => 'Non creare questi file',
 'item_non_gerer_annuaire_site_web' => 'Disattiva il repertorio di siti Web',
@@ -740,6 +749,18 @@ Le traduzioni sono associate all\'originale,
 'ortho_trop_de_fautes' => 'Attenzione: il testo contiene troppi errori, non &egrave; stato fornito alcun suggerimento di correzione per evitare di sovraccaricare il sistema.',
 'ortho_verif_impossible' => 'Il sistema non pu&ograve; controllare l\'ortografia di questo testo.',
 'ortho_verifier' => 'Controllare l\'ortografia',
+
+
+// P
+'plugin_etat_developpement' => 'in corso di sviluppo',
+'plugin_etat_experimental' => 'sperimentale',
+'plugin_etat_stable' => 'stabile',
+'plugin_etat_test' => 'in prova',
+'plugins_liste' => 'Elenco dei plugin',
+
+
+// R
+'repertoire_plugins' => 'Cartella:',
 
 
 // S
@@ -833,16 +854,11 @@ al suo valore predefinito (nessuna creazione di file).',
 'texte_informations_personnelles_1' => 'Il sistema creer&agrave; un tuo accesso personalizzato al sito.',
 'texte_informations_personnelles_2' => '(Nota: se si tratta di una reinstallazione, e il tuo accesso funziona ancora, puoi ',
 'texte_introductif_article' => 'Testo introduttivo dell\'articolo',
-'texte_jeu_caractere' => 'Quest\'opzione &egrave; utile se il tuo sito dovr&agrave; essere visualizzato con alfabeti
-diversi dall\'alfabeto latino (o &laquo;&nbsp;occidentale&nbsp;&raquo;) e dai suoi derivati.
-In questo caso, bisogna cambiare l\'impostazione predefinita per utilizzare il
-set di caratteri appropriato. Consigliamo di fare delle prove, in qualsiasi caso
- fino a trovare la soluzione soddisfacente. Se si modifica questo parametro non dimenticare di adattare
-il sito pubblico di conseguenza (scrivendo il segnaposto <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Questa impostazione non ha alcun effetto retroattivo.
-Modificando il valore del set di caratteri,
-i testi gi&agrave; inseriti rischiano quindi di venire visualizzati in modo errato.
-Sar&agrave; comunque possibile tornare all\'impostazione precedente senza alcun danno.',
+'texte_jeu_caractere' => 'Si consiglia di utilizzare sul proprio sito l\'alfabeto universale (<tt>utf-8</tt>): esso permette di visualizzare i testi in tutte le lingue e non pone problemi di compatibilit&agrave; con i browser moderni.',
+'texte_jeu_caractere_2' => 'Attenzione: questa impostazione non causa la conversione dei testi gi&agrave; registrati nel database.',
+'texte_jeu_caractere_3' => 'Il tuo sito usa attualmente il set di caratteri:',
+'texte_jeu_caractere_4' => 'Se ci&ograve; non corrisponde alla realt&agrave; dei propri dati (a causa, per esempio, di un ripristino del database), o se  <em>si avvia il sito</em> e si desidera partire con un altro set di caratteri &egrave; necessario indicare quest\'ultimo qui:',
+'texte_jeu_caractere_conversion' => 'Nota: &egrave; possibile decidere di convertire una volta per tutte tutti i testi del sito (articoli, brevi, forum, ecc.) nell\'alfabeto <tt>utf-8</tt>, andando sulla <a href="@url@">pagina di conversione in utf-8</a>.',
 'texte_lien_hypertexte' => '(Se il tuo messaggio si riferisce ad un articolo pubblicato sul Web, o ad una pagina che fornisce informazioni supplementari, indica il titolo della pagina e il suo indirizzo URL.)',
 'texte_liens_sites_syndiques' => 'I link provenienti dai siti in syndication
 possono essere bloccati a priori; l\'impostazione
@@ -879,6 +895,7 @@ per personalizzare la presentazione degli articoli nei tuoi modelli di layout.',
 'texte_plus_trois_car' => 'pi&ugrave; di tre caratteri',
 'texte_plusieurs_articles' => 'Diversi autori trovati per "@cherche_auteur@":',
 'texte_port_annuaire' => '(Il valore predefinito &egrave; in genere quello adatto.)',
+'texte_presente_plugin' => 'Questa pagina elenca i plugin disponibili sul sito. &Egrave; possibile attivare i plugin necessari selezionando la casella corrispondente.',
 'texte_proposer_publication' => 'Quando l\'articolo &egrave; completo,<br> puoi proporne la pubblicazione.',
 'texte_proxy' => 'In alcuni casi (intranet, reti protette...),
 pu&ograve; essere necessario utilizzare un <I>proxy HTTP</i> per accedere ai siti in syndication.
@@ -893,7 +910,7 @@ una sola pagina, utilizza piuttosto lo spazio pubblico e clicca sul pulsante &la
 'texte_recapitiule_liste_documents' => 'Questa pagina mostra l\'elenco dei documenti allegati alle rubriche. Per modificare le informazioni di un documento, seguire il link verso la relativa pagina di rubrica.',
 'texte_recuperer_base' => 'Ripara il database',
 'texte_reference_mais_redirige' => 'articolo catalogato nel tuo sito SPIP, ma con reindirizzamento verso un altro URL.',
-'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br>Se si desidera, &egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di backend. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
+'texte_referencement_automatique' => '<b>Inserimento automatizzato in repertorio</b><br>&Egrave; possibile repertoriare rapidamente un sito Web indicandone qui sotto l\'indirizzo URL, o l\'indirizzo del file di syndication. SPIP recuperer&agrave; automaticamente le informazioni riguardanti il sito (titolo, descrizione...).',
 'texte_requetes_echouent' => '<B>Quando alcune query MySQL falliscono
 ripetutamente e senza un chiaro motivo, &egrave; possibile
 che sia per colpa del database stesso.</B><p />
@@ -946,9 +963,10 @@ per evitare di generare messaggi d\'avvertimento intempestivi.',
 'texte_trop_resultats_auteurs' => 'Troppi risultati per "@cherche_auteur@"; restringi la ricerca.',
 'texte_unpack' => 'scarica l\'ultima versione',
 'texte_utilisation_moteur_syndiques' => 'Quando utilizzi il motore di ricerca integrato di SPIP,
-puoi effettuare le ricerche sui siti e gli articoli in syndication
-in due modalit&agrave; diverse.<br><img src=\'puce.gif\'> La pi&ugrave; semplice
-consiste nel ricercare solo nei titoli e nelle descrizioni degli articoli.<br><img src=\'puce.gif\'>
+puoi effettuare le ricerche sui siti e
+gli articoli in syndication
+in due modalit&agrave; diverse. <br>- La pi&ugrave; semplice
+consiste nel ricercare solo nei titoli e nelle descrizioni degli articoli.<br>-
 Un altro metodo, molto pi&ugrave; potente, consente
 a SPIP di ricercare anche nel testo degli articoli in syndication.
 Se inserisci un sito nel repertorio, SPIP effettuer&agrave; la ricerca anche nel testo del sito stesso.',
@@ -1040,7 +1058,20 @@ in tal caso si pu&ograve; verificare un leggero rallentamento del tuo sito.',
 'trad_new' => 'Scrivere una nuova traduzione dell\'articolo',
 
 
+// U
+'utf8_convert_attendez' => 'Attendi qualche secondo e aggiorna la pagina.',
+'utf8_convert_avertissement' => 'Stai per convertire il contenuto del proprio database (articoli, brevi, ecc.) dal set di caratteri <b>@orig@</b> al set di caratteri <b>@charset@</b>.',
+'utf8_convert_backup' => 'Non dimenticare di fare prima un backup completo del sito. Inoltre si deve verificare che i modelli e i file lingua sono compatibili @charset@. In caso contrario il monitoraggio delle revisioini, se attivo, verr&agrave; danneggiato.',
+'utf8_convert_erreur_deja' => 'Il tuo sito &egrave; gi&agrave; in @charset@, &egrave; inutile convertirlo...',
+'utf8_convert_erreur_orig' => 'Errore: il set di caratteri @charset@ non &egrave; supportato.',
+'utf8_convert_termine' => 'Finito!',
+'utf8_convert_timeout' => '<b>Importante:</b> in caso di  <i>timeout</i> del server, aggiorna la pagina fino a che non si ottiene il messaggio &laquo;&nbsp;finito&nbsp;&raquo;.',
+'utf8_convert_verifier' => 'Ora &egrave; necessario svuotale la cache e verificare che non vi siano problemi sulle pagine pubbliche del sito. In caso di problemi gravi &egrave; stato effettuato un backup dei dati (in formato SQL) nella cartella @rep@.',
+'utf8_convertir_votre_site' => 'Convertire il sito in UTF-8',
+
+
 // V
+'version' => 'Versione:',
 'version_initiale' => 'Versione iniziale'
 
 );

@@ -208,7 +208,7 @@ Verifique que as mai&uacute;sculas e min&uacute;suculas destes diret&oacute;rios
 'form_pet_deja_enregistre' => 'Este site j&aacute; est&aacute; cadastrado',
 'form_pet_deja_signe' => 'Voc&ecirc; j&aacute; assinou este texto.',
 'form_pet_envoi_mail_confirmation' => 'Um e-mail de confirma&ccedil;&atilde;o acabou de lhe ser enviado. Voc&ecirc; dever&aacute; visitar o endere&ccedil;o web mencionado na mensagem para validar a sua assinatura.',
-'form_pet_mail_confirmation' => 'Bom dia,
+'form_pet_mail_confirmation' => '<MODIF>Bom dia,
 
 Voc&ecirc; pediu para assinar a peti&ccedil;&atilde;o:
 @titre@.
@@ -216,7 +216,7 @@ Voc&ecirc; pediu para assinar a peti&ccedil;&atilde;o:
 Voc&ecirc; forneceu as informa&ccedil;&otilde;es abaixo:
     Nome: @nom_email@
     Site: @nom_site@ - @url_site@
-
+    @message@
 
 IMPORTANTE...
 Para validar a sua assinatura, basta se conectar ao
@@ -226,7 +226,7 @@ rejeitado):
     @url@
 
 
-Obrigado por participar.
+Obrigado por participar
 ',
 'form_pet_message_commentaire' => 'Uma mensagem ou coment&aacute;rio?',
 'form_pet_nom_site2' => 'Nome do seu website',

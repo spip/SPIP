@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Activar o m&oacute;dulo',
 'aide_non_disponible' => 'Esta parte da axuda en li&ntilde;a a&iacute;nda non est&aacute; dispo&ntilde;ible nesta lingua.',
+'auteur' => 'Autor&nbsp;:',
 'avis_acces_interdit' => 'Acceso prohibido.',
 'avis_article_modifie' => 'Atenci&oacute;n, @nom_auteur_modif@ ten traballado neste artigo hai @date_diff@ minutos',
 'avis_aucun_resultat' => 'Ning&uacute;n resultado.',
@@ -87,11 +89,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Non aparecer na lista de redactores que publica',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Non enviar as novidades editoriais',
 'bouton_radio_non_syndication' => 'Sen afiliaci&oacute;n',
-'bouton_radio_occidental' => 'Alfabeto occidental (<tt>ISO-8859-1</tt>): soportado por todo os os navegadores, mais s&oacute; permite
-  mostrar linguas do oeste de Europa (ingl&eacute;s, franc&eacute;s, alem&aacute;n, galego...).',
 'bouton_radio_pas_petition' => 'Sen petici&oacute;n',
-'bouton_radio_personnalise' => 'Xogo de caracteres persoalizado: elixe esta opci&oacute;n se queres
-		empregar un xogo de caracteres espec&iacute;fico',
 'bouton_radio_petition_activee' => 'Petici&oacute;n activada',
 'bouton_radio_publication_immediate' => 'Publicaci&oacute;n inmediata das mensaxes
 		(as contribuci&oacute;ns am&oacute;sanse dende o seu env&iacute;o, o equipo de xesti&oacute;n p&oacute;deas borrar).',
@@ -100,8 +98,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 		 en <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Eliminar a petici&oacute;n',
 'bouton_radio_syndication' => 'Afiliaci&oacute;n:',
-'bouton_radio_universel' => 'Alfabeto occidental (<tt>UTF-8</tt>): permite amosar todas as linguas, mais non &eacute; reco&ntilde;ecido
-  por todos os navegadores ata o de agora.',
 'bouton_redirection' => 'REDIRECCI&Oacute;N',
 'bouton_relancer_installation' => 'Relanzar a instalaci&oacute;n',
 'bouton_restaurer_base' => 'Restaurar a base',
@@ -135,7 +131,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'correo electr&oacute;nico:',
 'entree_adresse_annuaire' => 'Enderezo da gu&iacute;a',
 'entree_adresse_email' => 'O seu enderezo de correo-e',
-'entree_adresse_fichier_syndication' => 'Enderezo do ficheiro &laquo;backend&raquo; para a afiliaci&oacute;n:',
+'entree_adresse_fichier_syndication' => 'Enderezo do ficheiro de afiliaci&oacute;n&nbsp;:',
 'entree_adresse_site' => '<b>Enderezo do web</b> [Obrigatorio]',
 'entree_base_donnee_1' => 'Enderezo da base de datos',
 'entree_base_donnee_2' => '(Moitas veces este enderezo corresponde ao do teu web, &aacute;s veces corresp&oacute;ndese coa menci&oacute;n &laquo;localhost&raquo;, e outras p&oacute;dese deixar baleiro.)',
@@ -169,6 +165,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Texto da breve',
 'entree_titre_obligatoire' => '<B>T&iacute;tulo</B> [Obrigatorio]<BR>',
 'entree_url' => 'O enderezo (URL) do teu web',
+'erreur_plugin_fichier_absent' => 'Ficheiro ausente',
+'erreur_plugin_fichier_def_absent' => 'Ficheiro de definici&oacute;n ausente',
+'erreur_plugin_nom_fonction_interdit' => 'Nome de funci&oacute;n prohibido',
+'erreur_plugin_nom_manquant' => 'Falta o nome do m&oacute;dulo',
+'erreur_plugin_prefix_manquant' => 'Espazo de chamada do m&oacute;dulo non definido',
+'erreur_plugin_tag_plugin_absent' => 'Falta o&lt;m&oacute;dulo&gt; no ficheiro de definici&oacute;n',
+'erreur_plugin_version_manquant' => 'Falta a versi&oacute;n do m&oacute;dulo',
 
 
 // I
@@ -183,8 +186,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'Pode sindicar as novidades deste web dentro de calquera lector de ficheiros en formato XML/RSS (Rich Site Summary). Este formato tam&eacute;n lle permite ler con SPIP as novidades publicadas noutros webs que utilicen un formato de intercambio compatible (webs sindicados).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Lista de correo',
-'ical_titre_rss' => 'Ficheiros &laquo; backend &raquo;',
+'ical_titre_rss' => 'Ficheiros de afiliaci&oacute;n',
 'icone_activer_cookie' => 'Activar a cookie de correspondencia',
+'icone_admin_plugin' => 'Xesti&oacute;n de m&oacute;dulos',
 'icone_afficher_auteurs' => 'Amosar o equipo de redacci&oacute;n',
 'icone_afficher_visiteurs' => 'Amosar as visitas',
 'icone_arret_discussion' => 'Non volver participar nesta discusi&oacute;n',
@@ -564,6 +568,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_sous_titre' => 'Subt&iacute;tulo:',
 'info_statut_administrateur' => 'Equipo de xesti&oacute;n',
 'info_statut_auteur' => 'Categor&iacute;a desta persoa:',
+'info_statut_auteur_a_confirmer' => 'Inscrici&oacute;n para confirmar',
+'info_statut_auteur_autre' => 'Outro estatuto&nbsp;:',
 'info_statut_efface' => 'Eliminado',
 'info_statut_redacteur' => 'Redactor/a',
 'info_statut_site_1' => 'Este lugar foi:',
@@ -575,6 +581,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'info_suivi_activite' => 'Seguimento da actividade editorial',
 'info_supprimer_mot' => 'suprimir esta palabra',
 'info_surtitre' => 'Sobret&iacute;tulo:',
+'info_syndication_integrale_1' => 'O seu web prop&oacute;n ficheiros de sindicaci&oacute;n (ver &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Quere transmitir os seus artigos &iacute;ntegros, ou non difundir m&aacute;is ca un resumo dalg&uacute;ns centos de car&aacute;cteres&nbsp;?',
 'info_taille_maximale_vignette' => 'Tama&ntilde;o m&aacute;ximo das vi&ntilde;etas xeradas polo sistema:',
 'info_terminer_installation' => 'Agora podes rematar o proceso de instalaci&oacute;n est&aacute;ndar.',
 'info_texte' => 'Texto',
@@ -605,7 +613,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'info_une_rubrique' => 'un tema,',
 'info_une_rubrique_02' => '1 tema',
 'info_url' => 'URL:',
-'info_url_site' => 'URL DO LUGAR:',
+'info_url_site' => 'URL DO WEB&nbsp;:',
 'info_urlref' => 'Ligaz&oacute;n de hipertexto&nbsp;:',
 'info_utilisation_spip' => 'Agora podes comezar a usar o sistema de publicaci&oacute;n asistida...',
 'info_visites_par_mois' => 'Ordear por mes:',
@@ -627,6 +635,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'item_ajout_mots_cles' => 'Permitir palabras chave nos foros',
 'item_autoriser_documents_joints' => 'Autorizar os documentos adxuntos cos artigos',
 'item_autoriser_documents_joints_rubriques' => 'Autorizar os documentos nos temas',
+'item_autoriser_syndication_integrale' => 'Difundir integramente os artigos nos ficheiros de sindicaci&oacute;n',
 'item_bloquer_liens_syndiques' => 'Bloquear as ligaz&oacute;ns afiliadas para validaci&oacute;n',
 'item_breve_refusee' => 'NON - Breve rexeitada',
 'item_breve_validee' => 'S&iacute; - Breve validada',
@@ -652,6 +661,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'item_non_ajout_mots_cles' => 'Prohibir o uso de palabras chave nos foros',
 'item_non_autoriser_documents_joints' => 'Non permitir documentos nos artigos',
 'item_non_autoriser_documents_joints_rubriques' => 'Non permitir documentos nos temas',
+'item_non_autoriser_syndication_integrale' => 'Non difundir sen&oacute;n un resumo',
 'item_non_bloquer_liens_syndiques' => 'Non bloquear as ligaz&oacute;ns afiliadas',
 'item_non_creer_fichiers_authent' => 'Non crear estes ficheiros',
 'item_non_gerer_annuaire_site_web' => 'Desactivar a gu&iacute;a de lugares web',
@@ -740,6 +750,18 @@ cunha cor que indica o seu estado&nbsp;:',
 'ortho_trop_de_fautes' => 'Atenci&oacute;n&nbsp;: o seu texto cont&eacute;n demasiadas faltas, non se suxire ningunha correcci&oacute;n co fin de non sobrecargar o sistema.',
 'ortho_verif_impossible' => 'O sistema non pode comprobar a ortograf&iacute;a deste texto.',
 'ortho_verifier' => 'Comprobar a ortograf&iacute;a',
+
+
+// P
+'plugin_etat_developpement' => 'en desenvolvemento',
+'plugin_etat_experimental' => 'experimental',
+'plugin_etat_stable' => 'est&aacute;bel',
+'plugin_etat_test' => 'en test',
+'plugins_liste' => 'Lista de m&oacute;dulos',
+
+
+// R
+'repertoire_plugins' => 'Repertorio&nbsp;:',
 
 
 // S
@@ -841,14 +863,11 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_informations_personnelles_1' => 'O sistema vaiche crear agora un acceso personalizado ao web',
 'texte_informations_personnelles_2' => '(Nota: se se trata dunha reinstalaci&oacute;n, e o teu acceso vai sen atrancos, podes',
 'texte_introductif_article' => '(Texto introdutorio do artigo.)',
-'texte_jeu_caractere' => 'Esta opci&oacute;n &eacute; util se o seu lugar debe amosar alfabetos
-  diferentes do alfabeto romano (ou &laquo;occidental&raquo;) e os seus derivados.
-  Neste caso, ter&aacute; que trocar o axuste por defecto para empregar
-  un xogo de caracteres axeitado. L&eacute;mbrese de adaptar
-  o web p&uacute;blico en consecuencia (etiqueta <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Este axuste non ten efecto retroactivo. Daquela, os textos
-  existentes p&oacute;dense presentar incorrectamente logo dunha modificaci&oacute;n aqu&iacute;. En
-  calquera caso, poder&aacute; volver &aacute; configuraci&oacute;n anterior sen estragar nada. ',
+'texte_jeu_caractere' => 'Acons&eacute;llase empregar, no seu web, o alfabeto universal (<tt>utf-8</tt>)&nbsp;: isto permite amosar textos en todas as linguas, e non presenta problemas de compatibilidade cos navegadores modernos.',
+'texte_jeu_caractere_2' => 'Atenci&oacute;n : este axuste non ten efecto retroactivo. Daquela, non se produce a conversi&oacute;n dos textos xa rexistrados na base de datos.',
+'texte_jeu_caractere_3' => 'O seu web est&aacute; actualmente instalado co xogo de car&aacute;cteres&nbsp;:',
+'texte_jeu_caractere_4' => 'Se iso non corresponde coa realidade dos seus datos (logo, por exemplo, dunha restauraci&oacute;n da base de datos), ou se <em>vostede principia neste web</em> e quere partir doutro xogo de car&aacute;cteres, ind&iacute;queo por favor aqu&iacute;&nbsp;:',
+'texte_jeu_caractere_conversion' => 'Nota&nbsp;: pode decidir converter dunha soa vez o conxunto dos texto do seu web (artigos, breves, foros, etc.) ao alfabeto <tt>utf-8</tt>, se accede en <a href="@url@">&aacute; p&aacute;xina de conversi&oacute;n a utf-8</a>.',
 'texte_lien_hypertexte' => '(Se a s&uacute;a mensaxe se refire a un artigo publicado no web, ou a
   unha p&aacute;xina con que forneza m&aacute;is informaci&oacute;n, indica aqu&iacute; o t&iacute;tulo da p&aacute;xina e o seu enderezo URL.)',
 'texte_liens_sites_syndiques' => 'As ligaz&oacute;ns procedentes dos webs afiliados
@@ -890,6 +909,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_plus_trois_car' => 'm&aacute;is de 3 caracteres',
 'texte_plusieurs_articles' => 'Atop&aacute;ron.se varias entradas para "@cherche_auteur@":',
 'texte_port_annuaire' => '(En xeral, conv&eacute;n po&ntilde;er o valor indicado por defecto.)',
+'texte_presente_plugin' => 'Esta p&aacute;xina lista os m&oacute;dulos dispo&ntilde;ibles no web. Pode activar os m&oacute;dulos necesarios marcando a caixa correspondente.',
 'texte_proposer_publication' => 'Cando remates o teu artigo,<br>podes propor a s&uacute;a publicaci&oacute;n.',
 'texte_proxy' => 'Nalg&uacute;ns casos (intranet, redes protexidas...), pode ser necesario empregar
   un <I>proxy HTTP</I> para chegar aos lugares afiliados. Nese caso, indica aqu&iacute;
@@ -902,7 +922,7 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_recapitiule_liste_documents' => 'Esta p&aacute;xina recolle a lista dos documentos introducidos nos temas. Para modificar as informaci&oacute;ns de cada documento, siga a ligaz&oacute;n cara &aacute; p&aacute;xina de tal tema.',
 'texte_recuperer_base' => 'Reparar a base de datos',
 'texte_reference_mais_redirige' => 'artigo referido no teu lugar SPIP, mais redirixido cara a outra URL.',
-'texte_referencement_automatique' => '<b>Referencia automatizada dun web</b><br>Pode referir rapidamente un sitio web ao indicar aqu&iacute; embaixo o enderezo URL desexado, ou o enderezo do seu ficheiro &laquo;backend&raquo;. SPIP recuperar&aacute; automaticamente as informaci&oacute;ns concernintes a este lugar (t&iacute;tulo, descrici&oacute;n...).',
+'texte_referencement_automatique' => '<b>Referencia automatizada dun web</b><br>Pode referir rapidamente un sitio web ao indicar aqu&iacute; embaixo o enderezo URL desexado, ou o enderezo do seu ficheiro de afiliaci&oacute;n. SPIP recuperar&aacute; automaticamente as informaci&oacute;ns concernintes a este lugar (t&iacute;tulo, descrici&oacute;n...).',
 'texte_requetes_echouent' => '<b>Cando algunhas petici&oacute;ns MySQL fallan sistematicamente e sen raz&oacute;n aparente, &eacute; posible que a causa sexa a propia base de datos.</b><p>
   MySQL ten unha opci&oacute;n de reparaci&oacute;n das s&uacute;as t&aacute;boas cando estas foron danadas por accidente.
   Aqu&iacute; pode tentar esta reparaci&oacute;n; en caso de fallo, garde unha copia do resultado, que pode que conte&ntilde;a indicios do que non vai ben...<p>
@@ -954,10 +974,11 @@ cunha cor que indica o seu estado&nbsp;:',
 'texte_utilisation_moteur_syndiques' => 'Cando emprega o motor de procura integrado
   no SPIP, pode efectuar as procuras nos webs e nos artigos afiliados
   de dous xeitos diferentes.
-  <br><img src=\'puce.gif\'> O m&aacute;is sinxelo consiste en buscar s&oacute; nos t&iacute;tulos
-  e nas descrici&oacute;ns dos artigos.
-  <br><img src=\'puce.gif\'> Un segundo m&eacute;todo, moito m&aacute;is potente, permite
-  a SPIP buscar, a maiores, no texto dos lugares referidos. Se refires un web,
+  <br>-  O m&aacute;is
+ sinxelo consiste en buscar s&oacute;
+ nos t&iacute;tulos  e nas descrici&oacute;ns dos artigos.<br>-
+  Un segundo m&eacute;todo, moito m&aacute;is potente, permite
+  a SPIP buscar, a maiores, no texto dos lugares referidos&nbsp;. Se se refire un web,
   o SPIP daquela vai efectuar a procura al&aacute;, no texto do lugar mesmo.',
 'texte_utilisation_moteur_syndiques_2' => 'Este m&eacute;todo obriga a SPIP a visitar
 		regularmente os lugares referidos, o cal pode provocar unha lixeira perda de
@@ -1047,7 +1068,20 @@ cunha cor que indica o seu estado&nbsp;:',
 'trad_new' => 'Escribir unha nova traduci&oacute;n deste artigo',
 
 
+// U
+'utf8_convert_attendez' => 'Agarde un pouco de tempo e recargue esta p&aacute;xina.',
+'utf8_convert_avertissement' => 'Vai converter o contido da s&uacute;a base de datos (artigos, breves, etc) do xogo de car&aacute;cteres <b>@orig@</b> ao xogo de car&aacute;cteres <b>@charset@</b>.',
+'utf8_convert_backup' => 'Non esqueza antes de nada de facer unha salvagarda completa do seu web.  Debe tam&eacute;n comprobar que os seus esqueletos e ficheiros de lingua sexan compatibles con @charset@. Doutro xeito o seguimento das revisi&oacute;ns, se est&aacute; activado, danarase.',
+'utf8_convert_erreur_deja' => 'O seu web xa est&aacute; en car&aacute;cter @charset@, &eacute; in&uacute;til convertelo...',
+'utf8_convert_erreur_orig' => 'Erro&nbsp;: o xogo de car&aacute;cteres @charset@ non est&aacute; soportado.',
+'utf8_convert_termine' => 'Rematou!',
+'utf8_convert_timeout' => '<b>Importante&nbsp;:</b> para o caso de que se produza <i>timeout</i> do servidor, recargue a p&aacute;xina at&eacute; que indique  &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
+'utf8_convert_verifier' => 'Agora debe baleirar a memoria temporal (cach&eacute;), e comprobar que todo vai ben nas p&aacute;xinas p&uacute;blicas do web. No caso de que haxa problemas graves, unha salvagarda dos seus datos foi realizada (en formato SQL) no cartafol @rep@.',
+'utf8_convertir_votre_site' => 'Converter o seu web a utf-8',
+
+
 // V
+'version' => 'Versi&oacute;n&nbsp;:',
 'version_initiale' => 'Versi&oacute;n inicial'
 
 );

@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Aktivovat plugin',
 'aide_non_disponible' => 'Tato &#269;&aacute;st vestav&#283;n&eacute; n&aacute;pov&#283;dy nen&iacute; je&#353;t&#283; v tomto jazykov&eacute;m zn&#283;n&iacute; k dispozici.',
+'auteur' => 'Autor:',
 'avis_acces_interdit' => 'P&#345;&iacute;stup zak&aacute;z&aacute;n.',
 'avis_article_modifie' => 'Varov&aacute;n&iacute;: Na tomto &#269;l&aacute;nku pracoval p&#345;ed @date_diff@ minutou/minutami @nom_auteur_modif@.',
 'avis_aucun_resultat' => 'Nenalezeny &#382;&aacute;dn&eacute; v&yacute;sledky.',
@@ -19,7 +21,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_connexion_ldap_echec_2' => 'Vra&#357;te se na p&#345;edchoz&iacute; str&aacute;nku a zkontrolujte zadan&eacute; &uacute;daje.',
 'avis_connexion_ldap_echec_3' => 'P&#345;&iacute;padn&#283; p&#345;i importu u&#382;ivatel&#367; nepou&#382;&iacute;vejte podporu LDAP.',
 'avis_conseil_selection_mot_cle' => '<b>D&#367;le&#382;it&aacute; skupina:</b> Doporu&#269;ujeme, abyste k t&eacute;to skupin&#283; vybrali kl&iacute;&#269;ov&eacute; slovo.',
-'avis_deplacement_rubrique' => 'Varov&aacute;n&iacute;! V t&eacute;to sekci @contient_breves@ existuje novinka item@scb@: potvr&#271;te p&#345;esun za&#353;krtnut&iacute;m tohoto pol&iacute;&#269;ka.',
+'avis_deplacement_rubrique' => 'Upozorn&#283;n&iacute;! V t&eacute;to sekci je celkem @contient_breves@ vlo&#382;en&yacute;ch novinek: potvr&#271;te jejich p&#345;esun za&#353;krtnut&iacute;m tohoto pol&iacute;&#269;ka.',
 'avis_destinataire_obligatoire' => 'P&#345;ed odesl&aacute;n&iacute;m zpr&aacute;vy mus&iacute;te vybrat adres&aacute;ta.',
 'avis_erreur_connexion_mysql' => 'Chyba p&#345;ipojen&iacute; MySQL',
 'avis_erreur_version_archive' => '<b>Varov&aacute;n&iacute;! Soubor @archive@ odpov&iacute;d&aacute; jin&eacute; verzi
@@ -89,12 +91,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Nezobrazovat v seznamu redaktor&#367;',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Nezas&iacute;lat redaktorsk&aacute; ozn&aacute;men&iacute;',
 'bouton_radio_non_syndication' => 'Bez syndikace',
-'bouton_radio_occidental' => 'Znakov&aacute; sada pro z&aacute;padn&iacute; jazyky (<tt>iso-8859-1</tt>): v z&aacute;sad&#283; umo&#382;&#328;uje
-  zobrazovat z&aacute;padoevropsk&eacute; jazyky (angli&#269;tinu, francouz&#353;tinu, n&#283;m&#269;inu...);
-  syst&eacute;m SPIP v&#353;ak umo&#382;&#328;uje v podstat&#283; bezprobl&eacute;movou spr&aacute;vu ostatn&iacute;ch jazyk&#367;.',
 'bouton_radio_pas_petition' => 'Bez petice',
-'bouton_radio_personnalise' => 'Vlastn&iacute; znakov&aacute; sada: Tuto mo&#382;nost zvolte,
-  chcete-li pou&#382;&iacute;vat specifickou znakovou sadu.',
 'bouton_radio_petition_activee' => 'Petice zapnuta',
 'bouton_radio_publication_immediate' => 'Okam&#382;it&eacute; zve&#345;ej&#328;ov&aacute;n&iacute; zpr&aacute;v
  (p&#345;&iacute;sp&#283;vky se zobrazuj&iacute; okam&#382;it&#283;,
@@ -103,9 +100,6 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_sauvegarde_non_compressee' => 'nekomprimovan&eacute; ukl&aacute;d&aacute;n&iacute; jako  <b>ecrire/data/dump.xml</b>',
 'bouton_radio_supprimer_petition' => 'Odstranit petici',
 'bouton_radio_syndication' => 'Syndikace:',
-'bouton_radio_universel' => 'Univerz&aacute;ln&iacute; znakov&aacute; sada&nbsp; (<tt>utf-8</tt>): umo&#382;&#328;uje zobrazit libovoln&yacute; jazyk, ale m&#367;&#382;e zp&#367;sobit
- pot&iacute;&#382;e se softwarem pou&#382;&iacute;van&aacute;m ke zm&#283;n&aacute;m &#353;ablon a s n&#283;kter&yacute;mi programy
- elektronick&eacute; po&#353;ty.',
 'bouton_redirection' => 'P&#344;ESM&#282;ROV&Aacute;N&Iacute;',
 'bouton_relancer_installation' => 'Znovu spustit instalaci',
 'bouton_restaurer_base' => 'Obnovit datab&aacute;zi',
@@ -139,7 +133,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'email_2' => 'email:',
 'entree_adresse_annuaire' => 'Adresa seznamu',
 'entree_adresse_email' => 'V&aacute;&#353; email',
-'entree_adresse_fichier_syndication' => 'Adresa souboru "backend" pro syndikaci:',
+'entree_adresse_fichier_syndication' => '<MODIF>Adresa souboru "backend" pro syndikaci:',
 'entree_adresse_site' => '<b>Adresa webu</b> [povinn&yacute; &uacute;daj]',
 'entree_base_donnee_1' => 'Adresa datab&aacute;ze',
 'entree_base_donnee_2' => '(Tato adresa v&#283;t&#353;inou odpov&iacute;d&aacute; adrese va&#353;eho webu n&#283;kdy v&yacute;razu "localhost", n&#283;kdy je pr&aacute;zdn&aacute;.)',
@@ -173,6 +167,13 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'entree_texte_breve' => 'Text novinky',
 'entree_titre_obligatoire' => '<B>Titul</B> [povinn&yacute; &uacute;daj]<BR>',
 'entree_url' => 'Adresa (URL) va&#353;eho webu',
+'erreur_plugin_fichier_absent' => 'Soubor chyb&iacute;',
+'erreur_plugin_fichier_def_absent' => 'Chyb&iacute; defini&#269;n&iacute; soubor',
+'erreur_plugin_nom_fonction_interdit' => 'Zak&aacute;zan&eacute; jm&eacute;no funkce',
+'erreur_plugin_nom_manquant' => 'Chyb&iacute; jm&eacute;no pluginu',
+'erreur_plugin_prefix_manquant' => 'Jmenn&yacute; prostor pluginu nen&iacute; definovan&yacute;',
+'erreur_plugin_tag_plugin_absent' => '&lt;plugin&gt; chyb&iacute; v defini&#269;n&iacute;m souboru',
+'erreur_plugin_version_manquant' => 'Chyb&iacute; informace o verzi pluginu',
 
 
 // I
@@ -187,8 +188,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'ical_texte_rss' => 'Novinky tohoto webu m&#367;&#382;ete syndikovat v libovoln&eacute;m programu, kter&yacute; umo&#382;&#328;uje &#269;&iacute;st soubory ve form&aacute;tu XML/RSS (Rich Site Summary). Tento form&aacute;t umo&#382;&#328;uje syst&eacute;mu SPIP &#269;&iacute;st novinky zve&#345;ejn&#283;n&eacute; na jin&yacute;ch webech, kter&eacute; pou&#382;&iacute;vaj&iacute; kompatibiln&iacute; form&aacute;t (syndikovan&yacute;ch webech).',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'Seznam pro rozes&iacute;l&aacute;n&iacute; email&#367;',
-'ical_titre_rss' => 'Soubor "backend"',
+'ical_titre_rss' => '<MODIF>Soubor "backend"',
 'icone_activer_cookie' => 'Nastavit cookie',
+'icone_admin_plugin' => 'Spravovat pluginy',
 'icone_afficher_auteurs' => 'Zobrazit autory',
 'icone_afficher_visiteurs' => 'Zobrazit n&aacute;v&#353;t&#283;vn&iacute;ky',
 'icone_arret_discussion' => 'Ukon&#269;it &uacute;&#269;ast v diskusi',
@@ -570,6 +572,8 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_sous_titre' => 'D&iacute;l&#269;&iacute; nadpis:',
 'info_statut_administrateur' => 'Spr&aacute;vce',
 'info_statut_auteur' => 'Statut autora:',
+'info_statut_auteur_a_confirmer' => 'Registrace k potvrzen&iacute;',
+'info_statut_auteur_autre' => 'Dal&#353;&iacute; status:',
 'info_statut_efface' => 'Odstran&#283;no',
 'info_statut_redacteur' => 'Redaktor',
 'info_statut_site_1' => 'Tento web je:',
@@ -581,6 +585,8 @@ pro technickou &uacute;dr&#382;bu. N&#283;kter&eacute; z nich spou&#353;t&iacute
 'info_suivi_activite' => 'Sledov&aacute;n&iacute; redaktorsk&eacute; &#269;innosti',
 'info_supprimer_mot' => 'odstranit&nbsp;slovo',
 'info_surtitre' => 'Nad&#345;&iacute;zen&yacute; nadpis:',
+'info_syndication_integrale_1' => 'V&aacute;&#353; web nab&iacute;z&iacute; soubory pro syndikaci (viz &#147;<a href="@url@">@titre@</a>”).',
+'info_syndication_integrale_2' => 'Chcete poslat cel&eacute; &#269;l&aacute;nky, nebo jen prvn&iacute;ch p&aacute;r set znak&#367; jako shrnut&iacute;?',
 'info_taille_maximale_vignette' => 'Maxim&aacute;ln&iacute; velikost n&aacute;hled&#367; generovan&yacute;ch syst&eacute;mem:',
 'info_terminer_installation' => 'Nyn&iacute; m&#367;&#382;ete ukon&#269;it standardn&iacute; instalaci.',
 'info_texte' => 'Text',
@@ -610,8 +616,8 @@ ukazuje jejich stav:',
 'info_une_breve' => 'jedna novinka,',
 'info_une_rubrique' => 'jedna sekce, ',
 'info_une_rubrique_02' => '1 sekce',
-'info_url' => 'adresa URL:',
-'info_url_site' => 'ADRESA URL WEBU:',
+'info_url' => '<MODIF>adresa URL:',
+'info_url_site' => '<MODIF>ADRESA URL WEBU:',
 'info_urlref' => 'Hypertextov&yacute; odkaz:',
 'info_utilisation_spip' => 'Nyn&iacute; m&#367;&#382;ete za&#269;&iacute;t pou&#382;&iacute;vat redak&#269;n&iacute; syst&eacute;m...',
 'info_visites_par_mois' => 'Zobrazen&iacute; po m&#283;s&iacute;c&iacute;ch:',
@@ -633,6 +639,7 @@ ukazuje jejich stav:',
 'item_ajout_mots_cles' => 'Povolit p&#345;id&aacute;n&iacute; kl&iacute;&#269;ov&eacute;ho slova k diskusn&iacute; skupin&#283;',
 'item_autoriser_documents_joints' => 'Povolit dokumenty p&#345;ilo&#382;en&eacute; k &#269;l&aacute;nku',
 'item_autoriser_documents_joints_rubriques' => 'Povolit dokumenty v sekc&iacute;ch',
+'item_autoriser_syndication_integrale' => 'Vlo&#382;it kompletn&iacute; &#269;l&aacute;nky do syndika&#269;n&iacute;ch soubor&#367;',
 'item_bloquer_liens_syndiques' => 'Zablokovat syndikovan&eacute; odkazy pro schv&aacute;len&iacute;',
 'item_breve_refusee' => 'Odm&iacute;tnut&aacute; novinka',
 'item_breve_validee' => 'Schv&aacute;len&aacute; novinka',
@@ -658,6 +665,7 @@ ukazuje jejich stav:',
 'item_non_ajout_mots_cles' => 'Zak&aacute;zat pou&#382;&iacute;v&aacute;n&iacute; kl&iacute;&#269;ov&yacute;ch slov v diskusn&iacute;ch skupin&aacute;ch',
 'item_non_autoriser_documents_joints' => 'Nepovolit dokumenty v &#269;l&aacute;nc&iacute;ch',
 'item_non_autoriser_documents_joints_rubriques' => 'Nepovolit dokumenty v sekc&iacute;ch',
+'item_non_autoriser_syndication_integrale' => 'Poslat pouze shrnut&iacute;',
 'item_non_bloquer_liens_syndiques' => 'Neblokovat odkazy, kter&eacute; jsou v&yacute;sledkem syndikace',
 'item_non_creer_fichiers_authent' => 'Nevytv&aacute;&#345;et tyto soubory',
 'item_non_gerer_annuaire_site_web' => 'Vypnout adres&aacute;&#345; webu',
@@ -746,6 +754,18 @@ ukazuje jejich stav:',
 'ortho_trop_de_fautes' => 'Pozor!: v textu je p&#345;&iacute;l&#353; mnoho chyb. Aby nedo&#353;lo k p&#345;et&iacute;&#382;en&iacute; syst&eacute;mu, nejsou navrhov&aacute;ny &#382;&aacute;dn&eacute; opravy.',
 'ortho_verif_impossible' => 'Syst&eacute;m nem&#367;&#382;e zkontrolavat p&#345;eklepy v tomto textu.',
 'ortho_verifier' => 'Zkontrolovat p&#345;eklepy',
+
+
+// P
+'plugin_etat_developpement' => 'upravuje se',
+'plugin_etat_experimental' => 'experimentaln&iacute;',
+'plugin_etat_stable' => 'stabiln&iacute;',
+'plugin_etat_test' => 'testovac&iacute; verze',
+'plugins_liste' => 'Seznam plugin&#367;',
+
+
+// R
+'repertoire_plugins' => 'Adres&aacute;&#345;:',
 
 
 // S
@@ -840,16 +860,19 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_informations_personnelles_1' => 'Syst&eacute;m pro v&aacute;s nyn&iacute; vytvo&#345;&iacute; vlastn&iacute; p&#345;&iacute;stup k webu.',
 'texte_informations_personnelles_2' => '(Pozn&aacute;mka: pokud se jedn&aacute; o opakovanou instalaci a v&aacute;&#353; p&#345;&iacute;stup je st&aacute;le funk&#269;n&iacute;, m&#367;&#382;ete',
 'texte_introductif_article' => '(&Uacute;vodn&iacute; text &#269;l&aacute;nku.)',
-'texte_jeu_caractere' => 'Tato mo&#382;nost je u&#382;ite&#269;n&aacute;, pokud na webu pot&#345;ebujete zobrazovat jinou abecedu
+'texte_jeu_caractere' => '<MODIF>Tato mo&#382;nost je u&#382;ite&#269;n&aacute;, pokud na webu pot&#345;ebujete zobrazovat jinou abecedu
  ne&#382; latinku (resp. "z&aacute;padn&iacute; znakovou sadu") a jej&iacute; varianty.
  V takov&eacute;m p&#345;&iacute;pad&#283; m&#367;&#382;e b&yacute;t vhodn&eacute; zm&#283;nit standardn&iacute; nastaven&iacute; na pot&#345;ebnou
  znakovou sadu. V ka&#382;d&eacute;m p&#345;&iacute;pad&#283; doporu&#269;ujeme toto nastaven&iacute; odzkou&#353;et,
  abyste nalezli vyhovuj&iacute;c&iacute; &#345;e&#353;en&iacute;. Pokud tento parametr zm&#283;n&iacute;te, nezapome&#328;te zm&#283;nit
  i navazuj&iacute;c&iacute; ve&#345;ejn&yacute; web (ozna&#269;en&iacute; <tt>#CHARSET</tt>).',
-'texte_jeu_caractere_2' => 'Nastaven&iacute; nem&aacute; zp&#283;tn&yacute; &uacute;&#269;inek. To znamen&aacute;,
+'texte_jeu_caractere_2' => '<MODIF>Nastaven&iacute; nem&aacute; zp&#283;tn&yacute; &uacute;&#269;inek. To znamen&aacute;,
  &#382;e ji&#382; zadan&eacute; texty nemus&iacute; b&yacute;t po zm&#283;n&#283; nastaven&iacute;
  zobrazeny spr&aacute;vn&#283;. K p&#345;edchoz&iacute;mu nastaven&iacute;
  se m&#367;&#382;ete v&#382;dy vr&aacute;tit, ani&#382; by vznikly n&#283;jak&eacute; &#353;kody.',
+'texte_jeu_caractere_3' => 'V&aacute;&#353; web nyn&iacute; pou&#382;&iacute;v&aacute; tuto znakovou sadu:',
+'texte_jeu_caractere_4' => 'Pokud toto neodpov&iacute;d&aacute; va&#353;&iacute; situaci (nap&#345;&iacute;klad po obnoven&iacute; dat ze z&aacute;lohy), nebo <em>pokud konfigurujete tento web</em> a chcete pou&#382;&iacute;t jinou znakovou sadu, pros&iacute;m ozna&#269;te znakovou sadu:',
+'texte_jeu_caractere_conversion' => 'M&#367;&#382;ete se rozhodnout zkonvertovat v&#353;echny texty (&#269;l&aacute;nky, novinky, diskuse, ...) jednou prov&#382;dy do <tt>UTF-8</tt>. Pou&#382;ijte <a href="@url@">UTF-8 konverzn&iacute; str&aacute;nku</a>.',
 'texte_lien_hypertexte' => '(Jestli&#382;e se va&#353;e zpr&aacute;va vztahuje k n&#283;jak&eacute;mu &#269;l&aacute;nku na webu nebo jin&eacute; str&aacute;nce s dal&#353;&iacute;mi informacemi, vlo&#382;te zde jej&iacute; titulek a URL.)',
 'texte_liens_sites_syndiques' => 'Odkazy ze syndikovan&yacute;ch web&#367; lze p&#345;edem zablokovat.
    N&iacute;&#382;e uveden&eacute; nastaven&iacute; je standardn&iacute;m
@@ -887,6 +910,7 @@ syst&eacute;m SPIP, abyste vytvo&#345;ili novou datab&aacute;zi a prvn&iacute; p
 'texte_plus_trois_car' => 'v&iacute;ce ne&#382; 3 znaky',
 'texte_plusieurs_articles' => 'Pro "@cherche_auteur@" bylo nalezeno n&#283;kolik autor&#367;:',
 'texte_port_annuaire' => '(V&#283;t&#353;inou vyhovuje p&#345;ednastaven&aacute; hodnota.)',
+'texte_presente_plugin' => 'Tato str&aacute;nka zobrazuje v&#353;echny dostupn&eacute; pluginy. Aktivujte pot&#345;ebn&eacute; pluginy za&#353;krtnut&iacute;m p&#345;&iacute;slu&#353;n&eacute;ho pol&iacute;&#269;ka.',
 'texte_proposer_publication' => 'Po dops&aacute;n&iacute; &#269;l&aacute;nku,<br> m&#367;&#382;ete navrhnout jeho zve&#345;ejn&#283;n&iacute;.',
 'texte_proxy' => 'V n&#283;kter&yacute;ch p&#345;&iacute;padech (intranet, chr&aacute;n&#283;n&eacute; s&iacute;t&#283;...),
   je t&#345;eba pou&#382;&iacute;vat <I>HTTP proxy</I>.  Jinak se k syndikovan&yacute;m web&#367;m nedostanete.
@@ -901,7 +925,7 @@ p&#345;ejd&#283;te rad&#283;ji do ve&#345;ejn&eacute; &#269;&aacute;sti a pou&#3
 'texte_recapitiule_liste_documents' => 'Na t&eacute;to str&aacute;nkce je p&#345;ehled dokument&#367; um&iacute;stn&#283;n&yacute;ch v sekc&iacute;ch. Informace o dokumentech zm&#283;n&iacute;te klepnut&iacute;m na odkaz na str&aacute;nku p&#345;&iacute;slu&#353;n&eacute; sekce.',
 'texte_recuperer_base' => 'Opravit datab&aacute;zi',
 'texte_reference_mais_redirige' => 'Na &#269;l&aacute;nek je na va&#353;em webu SPIP odkaz, ale je p&#345;esm&#283;rov&aacute;n na jinou adresu URL.',
-'texte_referencement_automatique' => '<b>Automatick&yacute; odkaz na web</b><br>Odkaz na web vytvo&#345;&iacute;te rychle zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho serverov&eacute;ho souboru (backend. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
+'texte_referencement_automatique' => '<MODIF><b>Automatick&yacute; odkaz na web</b><br>Odkaz na web vytvo&#345;&iacute;te rychle zad&aacute;n&iacute;m po&#382;adovan&eacute; adresy URL nebo adresy jeho serverov&eacute;ho souboru (backend. Syst&eacute;m SPIP automaticky p&#345;evezme &uacute;daje o takov&eacute;m webu (n&aacute;zev, popis...).',
 'texte_requetes_echouent' => '<b>Pokud n&#283;kter&eacute; dotazy MySQL neust&aacute;le
   selh&aacute;vaj&iacute; bez zjevn&eacute; p&#345;&iacute;&#269;iny, m&#367;&#382;e to b&yacute;t kv&#367;li samotn&eacute; datab&aacute;zi.</b><p />
   Datab&aacute;ze MySQL umo&#382;&#328;uje opravu n&aacute;hodn&#283; po&#353;kozen&yacute;ch datab&aacute;zov&yacute;ch tabulek.
@@ -953,7 +977,7 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
   zobrazov&aacute;n&iacute; zbyte&#269;n&yacute;ch varovn&yacute;ch hl&aacute;&#353;en&iacute;.',
 'texte_trop_resultats_auteurs' => 'Pro "@cherche_auteur@" bylo zobrazeno p&#345;&iacute;li&#353; mnoho v&yacute;sledk&#367;. Zp&#345;esn&#283;te vyhled&aacute;vac&iacute; krit&eacute;ria.',
 'texte_unpack' => 'odes&iacute;l&aacute;n&iacute;/stahov&aacute;n&iacute; posledn&iacute; verze',
-'texte_utilisation_moteur_syndiques' => 'Pou&#382;&iacute;v&aacute;te-li vestav&#283;n&yacute; vyhled&aacute;va&#269; syst&eacute;mu SPIS,
+'texte_utilisation_moteur_syndiques' => '<MODIF>Pou&#382;&iacute;v&aacute;te-li vestav&#283;n&yacute; vyhled&aacute;va&#269; syst&eacute;mu SPIS,
     m&#367;&#382;ete vyhled&aacute;vat i na syndikovan&yacute;ch webech a v syndikovan&yacute;ch
     &#269;l&aacute;nc&iacute;ch, a to dv&#283;ma r&#367;zn&yacute;mi zp&#367;soby.
     <br><img src=\'puce.gif\'> Nejjednodu&#353;&#353;&iacute; je
@@ -1051,7 +1075,20 @@ zm&#283;ny grafick&eacute;ho uspo&#345;&aacute;d&aacute;n&iacute; nebo struktury
 'trad_new' => 'Nov&#283; p&#345;elo&#382;it &#269;l&aacute;nek',
 
 
+// U
+'utf8_convert_attendez' => 'Po&#269;kejte n&#283;kolik sekund a potom znovu na&#269;t&#283;te tuto str&aacute;nku.',
+'utf8_convert_avertissement' => 'Nyn&iacute; zkonvertujete obsah datab&aacute;ze (&#269;l&aacute;nky, novinky, ...) ze znakov&eacute; sady <b>@orig@</b> do znakov&eacute; sady  <b>@charset@</b>.',
+'utf8_convert_backup' => 'Nezapome&#328;te nejprve ud&#283;lat kompletn&iacute; z&aacute;lohu va&#353;eho webu. Rovn&#283;&#382; zkontrolujte, zda jsou va&#353;e &#353;ablony a jazykov&eacute; soubory kompatibiln&iacute; se znakovou sadou @charset@. Je-li zapnuto sledov&aacute;n&iacute; zm&#283;n (verzov&aacute;n&iacute;), bude v ka&#382;d&eacute;m p&#345;&iacute;pad&#283; po&#353;kozeno.',
+'utf8_convert_erreur_deja' => 'V&aacute;&#353; web ji&#382; pou&#382;&iacute;v&aacute; znakovou sadu @charset@, nen&iacute; d&#367;vod ke konverzi.',
+'utf8_convert_erreur_orig' => 'Chyba: jazykov&aacute; sada @charset@ nen&iacute; podporov&aacute;na.',
+'utf8_convert_termine' => 'Hotovo!',
+'utf8_convert_timeout' => '<b>D&#367;le&#382;it&eacute;:</b> Pokud server odpov&iacute; <i>timeout</i> nebo podobn&#283;, obnovujte str&aacute;nku dokud se neobjev&iacute; &laquo;Hotovo!&raquo;.',
+'utf8_convert_verifier' => 'Nyn&iacute; vypr&aacute;zdn&#283;te cache a zkontrolujte ve&#345;ejnou &#269;&aacute;st va&#353;eho webu. Pokud by nastaly v&aacute;&#382;n&eacute; probl&eacute;my, najdete z&aacute;lohu p&#367;vodn&iacute;ch dat (ve form&aacute;tu SQL) v adres&aacute;&#345;i @rep@.',
+'utf8_convertir_votre_site' => 'Zkovertujte web do UTF-8',
+
+
 // V
+'version' => 'Verze:',
 'version_initiale' => 'P&#367;vodn&iacute; verze'
 
 );

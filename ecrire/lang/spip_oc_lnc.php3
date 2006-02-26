@@ -203,7 +203,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(aqu&ograve;\'s un messatge automatic)',
 'form_forum_pass' => 'mot de santa Clara :',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail: se p&ograve;t pas mandar l\'identificant.',
-'form_forum_voici1' => 'Vaic&iacute; v&ograve;stres identificants per poder participar als forums
+'form_forum_voici1' => 'Vaic&iacute; v&ograve;stres identificants per poder participar a la vida
 del sit "@nom_site_spip@" (@adresse_site@) :',
 'form_forum_voici2' => 'Vaqu&iacute; v&ograve;stres identificants per prepausar d\'articles 
  sul sit "@nom_site_spip@" (@adresse_login@) :',
@@ -216,7 +216,7 @@ del sit "@nom_site_spip@" (@adresse_site@) :',
 'form_pet_deja_enregistre' => 'Ja aquel sit es registrat',
 'form_pet_deja_signe' => 'Av&egrave;tz ja signat aquel t&egrave;xt.',
 'form_pet_envoi_mail_confirmation' => 'Ara recebretz un e-mail de confirmacion. Per validar v&ograve;stra signatura, cal vesitar l\'adrei&ccedil;a web men&ccedil;onada per aqueste corri&egrave;r.',
-'form_pet_mail_confirmation' => ' Bonjorn,
+'form_pet_mail_confirmation' => 'Bonjorn,
 
 av&egrave;tz demandat de signar la peticion:
 @titre@.
@@ -224,6 +224,7 @@ av&egrave;tz demandat de signar la peticion:
 Av&egrave;tz fornidas las informacions seguentas:
     Nom: @nom_email@
     Sit: @nom_site@ - @url_site@
+    @message@
 
 
 IMPORTANT...
@@ -414,9 +415,9 @@ Merc&eacute;s per v&ograve;stra participacion
 'info_inclusion_vignette' => 'Inclusion de la vinheta:',
 'info_installation_systeme_publication' => 'Installacion del sist&egrave;ma de publicacion...',
 'info_installer_documents' => 'Pod&egrave;tz installar automaticament totes los documents contenguts dins lo repert&ograve;ri @upload@.',
-'info_installer_ftp' => 'Coma administrator, pod&egrave;tz installar (per FTP) de fichi&egrave;rs dins lo dorsi&egrave;r @upload@,  pu&egrave;i los  seleccionar dir&egrave;ctament aic&iacute;.',
+'info_installer_ftp' => 'Coma administrator, pod&egrave;tz installar (per FTP) de fichi&egrave;rs dins lo repert&ograve;ri @upload@,  pu&egrave;i los  seleccionar dir&egrave;ctament aic&iacute;.',
 'info_installer_images' => 'Pod&egrave;tz installar d\'imatges als formats JPEG, GIF e PNG.',
-'info_installer_images_dossier' => 'Installar d\'imatges dins lo dorsi&egrave;r @upload@ per los poder seleccionar aic&iacute;.',
+'info_installer_images_dossier' => 'Installar d\'imatges dins lo reprt&ograve;ri @upload@ per los poder seleccionar aic&iacute;.',
 'info_installer_tous_documents' => 'Installar totes los documents ',
 'info_interface_complete' => 'Interf&agrave;cia completa',
 'info_interface_simple' => 'Interf&agrave;cia simplificada',

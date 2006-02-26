@@ -217,7 +217,7 @@ ze &euml;nnerschreiwen.
 Dir hutt d&eacute;i hei Informatiounen uginn:
     Numm: @nom_email@
     Site: @nom_site@ - @url_site@
-
+    @message@
 
 WICHTEG...
 Fir &auml;r &Euml;nnerschr&euml;ft ze valid&eacute;ieren, surft op d&euml;s Adress (am aneren Fall g&euml;t &auml;r Demande verworf):
@@ -401,8 +401,8 @@ Merci fir &auml;r Participatioun
 'info_inclusion_directe' => 'Direkt Abannung:',
 'info_inclusion_vignette' => 'Ubannen vun der Vignette:',
 'info_installation_systeme_publication' => 'Installatioun vum System...',
-'info_installer_documents' => 'Dir k&euml;nnt automat&euml;sch all d\'Dokumenter aus dem Dossier @upload@ lueden.',
-'info_installer_ftp' => 'Als Administrateur k&euml;nnt dir Fichier\'en per FTP an den Dossier /@upload@ eroplueden an se dann hei auswielen.',
+'info_installer_documents' => 'Dir k&euml;nnt automat&euml;sch all d\'Dokumenter aus dem Dossier @upload@ install&eacute;ieren.',
+'info_installer_ftp' => 'Als Administrateur k&euml;nnt dir Fichier\'en per FTP an den Dossier @upload@ eroplueden an se dann hei auswielen.',
 'info_installer_images' => 'Dir k&euml;nnt Biller am Format JPEG, GIF oder PNG eroplueden.',
 'info_installer_images_dossier' => 'Biller an den Dossier @upload@ eroplueden fir se hei k&euml;nnen auszewielen.',
 'info_installer_tous_documents' => 'All d\'Dokumenter eroplueden',
