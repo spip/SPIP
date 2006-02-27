@@ -70,8 +70,8 @@ function include_fonction($nom, $dossier='exec') {
 		redirige_par_entete('./');
 
 	// Si la fonction existe deja (definie par mes_options, par exemple)
-	if (function_exists($f = $dossier.'_'.$nom))
-#	OR function_exists($f = $dossier.'_'.$nom.'_dist'))
+	if (function_exists($f = $dossier.'_'.$nom)
+	OR function_exists($f = $dossier.'_'.$nom.'_dist'))
 		return $f;
 
 	// Sinon charger le fichier de declaration
@@ -93,8 +93,7 @@ function include_fonction($nom, $dossier='exec') {
 }
 
 //
-// une fonction destinee a remplacer include_ecrire, surchargeable
-// par $surcharge['inc_truc'] = '/chemin/vers/truc.php'
+// une fonction destinee a remplacer include_ecrire, pour les surcharges
 //
 function include_spip($f, $include = true) {
 	// deja charge (nom) ?
@@ -105,13 +104,12 @@ function include_spip($f, $include = true) {
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 
 	// une surcharge existe ?
-	if (!$s = $GLOBALS['surcharge'][$f]
+	if (!$s = find_in_path($f . '.php')
+	AND !$s = find_in_path($f . '.php3')
 	// sinon, le fichier existe dans le repertoire ecrire ?
 	AND !is_readable($s = _DIR_INCLUDE . $f . '.php')
 	AND !is_readable($s = _DIR_INCLUDE . $f . '.php3')
-	// sinon, chercher dans le chemin
-	AND !$s = find_in_path($f . '.php')
-	AND !$s = find_in_path($f . '.php3'))
+)
 		return $GLOBALS['included_files'][$f] = false;
 
 	// deja charge (chemin complet) ?
