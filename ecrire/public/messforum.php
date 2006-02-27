@@ -138,9 +138,13 @@ function enregistre_forum() {
 	// Verifier hash securite pour les forums avec previsu
 	if ($GLOBALS['afficher_texte'] <> 'non') {
 		include_ecrire("inc_session");
-		if (!verifier_action_auteur("ajout_forum $id_rubrique".
-		" $id_forum $id_article $id_breve".
-		" $id_syndic $alea", $hash)) {
+
+		$ids = array();
+		foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
+			$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
+
+		if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
+		$hash)) {
 			spip_log('erreur hash forum');
 			die (_T('forum_titre_erreur')); 	# echec du POST
 		}

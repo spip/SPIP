@@ -70,12 +70,12 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 	// compatibilite: virer l'extension
 	$script = preg_match(',.php3?$,', $filtres[0],$r) ? $r[1] : $filtres[0];
 	return
-	  array($titre, $table, $forums_publics, ($script ? $script : 'forum'),
+		array($titre, $table, $forums_publics, $script,
 		$idr, $idf, $ida, $idb, $ids, $am, $ag, $af, $url);
 }
 
 function balise_FORMULAIRE_FORUM_dyn(
-$titre, $table, $type, $page,
+$titre, $table, $type, $script,
 $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
 $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 {
@@ -90,15 +90,13 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 // attention le calcul du hachage doit etre le meme ici et dans inc-messforum
 
 	$ids = array();
-	if ($x = intval($id_article)) $ids['id_article'] = $x;
-	if ($x = intval($id_breve)) $ids['id_breve'] = $x;
-	if ($x = intval($id_forum)) $ids['id_forum'] = $x;
-	if ($x = intval($id_rubrique)) $ids['id_rubrique'] = $x;
-	if ($x = intval($id_syndic)) $ids['id_syndic'] = $x;
+	foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
+		$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
 
-	$args = "";
-	foreach ($ids as $id => $v) $args .= "&$id=$v";
-	$url = "./?page=$page$args";
+	if ($script)
+		$url = $script;
+	else
+		$url = generer_url_public('forum');
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
@@ -116,10 +114,10 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			$retour_forum = "!";
 			
 			// sauf si on a passe un parametre en argument (exemple : {#SELF})
-			if($url_param_retour) {
-				$retour_forum = urlencode($url_param_retour);
+			if ($url_param_retour) {
+				$retour_forum = $url_param_retour;
 				$url = $retour_forum;
-				}
+			}
 		}
 		if (isset($_COOKIE['spip_forum_user'])
 		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
@@ -147,22 +145,15 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 
 		$alea = forum_fichier_tmp();
 
-		$hash = calculer_action_auteur("ajout_forum " .
-					       $ids['id_rubrique'] ." " .
-					       $ids['id_forum'] ." " .
-					       $ids['id_article'] ." " .
-					       $ids['id_breve'] ." " .
-					       $ids['id_syndic'] ." " .
-					       $alea);
+		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
 	}
+
+	$url_post = $url;
+	foreach ($ids as $id => $v)
+		$url_post = parametre_url($url_post, $id, $v, '&');
 
 	return array('formulaire_forum', 0,
 	array(
-		'id_rubrique' => $ids['id_rubrique'],
-		'id_forum' => $ids['id_forum'],
-		'id_article' => $ids['id_article'],
-		'id_breve' => $ids['id_breve'],
-		'id_syndic' => $ids['id_syndic'],
 		'auteur' => $auteur,
 		'disabled' => ($type == "abo")? "disabled" : '',
 		'email_auteur' => $email_auteur,
@@ -174,7 +165,8 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		'table' => $table,
 		'texte' => $texte,
 		'titre' => extraire_multi($titre),
-		'url' => $url,
+		'url' => $url, # ce sur quoi on fait le action='...'
+		'url_post' => $url_post, # pour les variables hidden
 		'url_site' => ($url_site ? $url_site : "http://"),
 		'alea' => $alea,
 		'hash' => $hash,
