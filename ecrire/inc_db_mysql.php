@@ -77,6 +77,9 @@ function spip_mysql_select($select, $from, $where,
 			   $sousrequete, $having,
 			   $table, $id, $serveur) {
 
+	foreach($where as $k => $v)
+	  { if (!$v) unset($where[$k]);}
+
 	$q = ($from  ?("\nFROM " . join(",\n\t", $from)) : '')
 	  .  ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
 	  .  ($groupby ? "\nGROUP BY $groupby" : '')
