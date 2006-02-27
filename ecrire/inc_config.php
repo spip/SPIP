@@ -186,7 +186,7 @@ function appliquer_modifs_config() {
 
 	// Activer le moteur : dresser la liste des choses a indexer
 	if ($activer_moteur == 'oui' AND ($activer_moteur != $GLOBALS['meta']["activer_moteur"])) {
-		include_ecrire('inc_index');
+		include_spip('inc/indexation');
 		creer_liste_indexation();
 	}
 

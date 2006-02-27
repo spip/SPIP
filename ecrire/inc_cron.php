@@ -156,7 +156,7 @@ function taches_generales() {
 
 	// indexation
 	if ($GLOBALS['meta']["activer_moteur"] == "oui") 
-		$taches_generales['index'] = 90;
+		$taches_generales['indexation'] = 90;
 		
 	// ajax
 		$taches_generales['ajax'] = 3600 * 2;
@@ -177,11 +177,11 @@ function cron_optimiser($t) {
 	return 1;
 }
 
-function cron_index($t) {
+function cron_indexation($t) {
 	$c = count(effectuer_une_indexation());
 	// si des indexations ont ete effectuees, on passe la periode a 0 s
 	## note : (time() - 90) correspond en fait a :
-	## time() - $taches_generales['index']
+	## time() - $taches_generales['indexation']
 	if ($c)
 		return (0 - (time() - 90));
 	else
@@ -192,7 +192,7 @@ function cron_syndic($t) {
 	$r = executer_une_syndication();
 	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&
 	    ($GLOBALS['meta']["visiter_sites"] == 'oui')) {
-		include_ecrire("inc_index");
+		include_spip("inc/indexation");
 		$r2 = executer_une_indexation_syndic();
 		$r = $r && $r2;
 	}

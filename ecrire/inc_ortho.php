@@ -400,7 +400,7 @@ function afficher_ortho($texte) {
 //
 function corriger_ortho($texte, $lang, $charset = 'AUTO') {
 	include_ecrire("inc_charsets");
-	include_ecrire("inc_index");
+	include_spip("inc/indexation");
 	include_ecrire("inc_filtres");
 
 	$texte = preg_replace(',<code>.*?</code>,is', '', $texte);

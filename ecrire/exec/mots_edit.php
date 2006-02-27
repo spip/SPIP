@@ -90,7 +90,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		$result = spip_query($query);
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index");
+			include_spip("inc/indexation");
 			marquer_indexer('mot', $id_mot);
 		}
 	}

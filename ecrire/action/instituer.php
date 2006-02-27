@@ -61,7 +61,7 @@ function instituer_forum($arg) {
 
 	// Signaler au moteur de recherche qu'il faut reindexer le thread
 	if ($id_parent) {
-		include_ecrire('inc_index');
+		include_spip('inc/indexation');
 		marquer_indexer ('forum', $id_parent);
 	}
 

@@ -53,7 +53,7 @@ if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
 
 if ($purger_index == "oui") {
 	if (verifier_action_auteur("purger_index", $hash)) {
-		include_ecrire('inc_index');
+		include_spip('inc/indexation');
 		purger_index();
 		creer_liste_indexation();
 	}

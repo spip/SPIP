@@ -546,7 +546,7 @@ texte='" . addslashes($texte) . "'
 $champs_extra
 WHERE id_rubrique=$id_rubrique");
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
-			include_ecrire ("inc_index");
+			include_spip("inc/indexation");
 			marquer_indexer('rubrique', $id_rubrique);
 	}
 	propager_les_secteurs();

@@ -1417,7 +1417,7 @@ function maj_documents ($id_objet, $type) {
 		}
 
 		// Demander l'indexation du document
-		include_ecrire('inc_index');
+		include_spip('inc/indexation');
 		marquer_indexer('document', $id_document);
 
 	}

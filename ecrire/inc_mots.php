@@ -271,7 +271,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 
 	if ($reindexer AND $GLOBALS['meta']['activer_moteur'] == 'oui') {
-		include_ecrire ("inc_index");
+		include_spip("inc/indexation");
 		marquer_indexer($objet, $id_objet);
 	}
 
