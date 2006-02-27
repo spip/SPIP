@@ -198,14 +198,14 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return '0';
 
-	$hierarchie = ", $id_rubrique";
+	$hierarchie = ",$id_rubrique";
 
 	do {
 		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-		$hierarchie = ", " . $id_rubrique . $hierarchie;
+		$hierarchie = "," . $id_rubrique . $hierarchie;
 	} while ($id_rubrique);
 
-	return substr($hierarchie,2);
+	return substr($hierarchie,1);
 }
 
 
