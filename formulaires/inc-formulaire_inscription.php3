@@ -47,10 +47,11 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 
 	$nom = _request('nom_inscription');
 	$mail = _request('mail_inscription');
-	if (!$nom)
+	if (!$mail)
 		$message = '';
 	else {
-		$message = message_inscription($mail, $nom, false, $mode);
+		include_ecrire('inc_filtres'); // pour email_valide
+		$message = message_inscription($mail, $nom, false, $mode, $id_rubrique);
 		if (is_array($message)) {
 			if (function_exists('envoyer_inscription'))
 				$f = 'envoyer_inscription';
@@ -67,12 +68,16 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 				));
 }
 
-// fonction qu'on peut redefinir pour filtrer les adresses mail
-// cas general: controler juste que l'adresse n'est pas vide et est valide
+// fonction qu'on peut redefinir pour filtrer les adresses mail et les noms,
+// et donner des infos supplémentaires
+// Std: controler que le nom (qui sert a calculer le login) est assez long
+// et que l'adresse est valide (et on la normalise)
+// Retour: une chaine message d'erreur ou un tableau email/nom au minimum
 
-function test_inscription_dist($mode, $mail) {
-	include_ecrire('inc_filtres');
-	return email_valide($mail);
+function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
+	if (!($nom = trim($nom))) return _T('ecrire:info_login_trop_court');
+	if (!$r = email_valide($mail)) return _T('info_email_invalide');
+	return array('email' => $r, 'nom' => $nom);
 }
 
 // cree un nouvel utilisateur et renvoie un message d'impossibilite ou la
@@ -81,37 +86,26 @@ function test_inscription_dist($mode, $mail) {
 // et on lui envoie ses codes par email ; lors de
 // sa premiere connexion il obtiendra son statut final (auth->activer())
 
-function message_inscription($mail_inscription, $nom_inscription, $force, $mode) {
+function message_inscription($mail, $nom, $force, $mode, $id_rubrique=0) {
 
 	if (function_exists('test_inscription'))
-	    $f = 'test_inscription';
+		$f = 'test_inscription';
 	else 
-	  $f  = 'test_inscription_dist';
+		$f = 'test_inscription_dist';
+	$declaration = $f($mode, $mail, $nom, $id_rubrique);
 
-	if (!($mail_inscription = $f($mode, $mail_inscription)))
-		return  _T('info_email_invalide');
+	if (is_string($declaration))
+		return  $declaration;
 
-	$mail = addslashes($mail_inscription);
 	$s = spip_query("SELECT statut, id_auteur, login, email
-		FROM spip_auteurs WHERE email='". $mail ."'");
+		FROM spip_auteurs WHERE email='".
+			addslashes($declaration['email']) .
+			"'");
 	$row = spip_fetch_array($s);
-
-	if (!$row) {
-	// il n'existe pas, creer les identifiants 
-		$row['email'] = $mail_inscription;
-		$row['login'] = test_login($nom_inscription, $mail_inscription);
-		$row['id_auteur'] = spip_abstract_insert('spip_auteurs', 
-							 '(nom, email, login, statut)',
-							 "('".
-							 addslashes($nom_inscription) .
-							 "', '".
-							 $mail .
-							 "', '" .
-							 $row['login'] .
-							 "', 'nouveau')");
-		$row['pass'] = creer_pass_pour_auteur($row['id_auteur']);
-		return $row;
-	} else {
+	if (!$row) 
+	  // il n'existe pas, creer les identifiants  
+		return inscription_nouveau($declaration);
+	else {
 		// existant mais encore muet, ou ressucite: renvoyer les infos
 		if ((($row['statut'] == 'nouveau') && !$force) ||
 			(($row['statut'] == '5poubelle') && $force)) {
@@ -129,6 +123,22 @@ function message_inscription($mail_inscription, $nom_inscription, $force, $mode)
 	}
 }
 
+function inscription_nouveau($declaration)
+{
+	if (!isset($declaration['login']))
+		$declaration['login'] = test_login($declaration['nom'], $declaration['email']);
+
+	$declaration['statut'] = 'nouveau';
+
+	$n = spip_abstract_insert('spip_auteurs', 
+		('(' .join(',',array_keys($declaration)).')'),
+		("('" .join("','",array_map('addslashes', $declaration)) ."')"));
+
+	$declaration['id_auteur'] = $n;
+
+	$declaration['pass'] = creer_pass_pour_auteur($declaration['id_auteur']);
+	return $declaration;
+}
 
 // envoyer identifiants par mail
 // fonction redefinissable

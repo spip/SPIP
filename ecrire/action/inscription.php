@@ -33,8 +33,7 @@ function action_inscription_dist() {
 <link rel="stylesheet" type="text/css" href="spip_style.css" />
 </head><body>';
 
-	inclure_balise_dynamique(
-		balise_formulaire_inscription_dyn(_request('mode'), _request('focus'))
+	inclure_balise_dynamique(balise_formulaire_inscription_dyn(_request('mode'), _request('focus'), _request('id_rubrique'))
 	);
 	echo "</body></html>";
 }
