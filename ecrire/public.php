@@ -107,9 +107,13 @@ if (defined("_INC_PUBLIC")) {
 		$page = surligner_mots($page, $var_recherche);
 	}
 
-	// Valider/indenter a la demande. garder la compatibilite tidy
+	// Valider/indenter a la demande.
 	if (trim($page) AND $xhtml AND $html AND !headers_sent()) {
-		if ($f = include_fonction(($xhtml === true) ? 'tidy' : $xhtml))
+		# Compatibilite ascendante
+		if ($xhtml === true) $xhtml ='tidy';
+		else if ($xhtml == 'spip_sax') $xhtml = 'sax';
+
+		if ($f = include_fonction($xhtml, 'inc'))
 			$page = $f($page);
 	}
 

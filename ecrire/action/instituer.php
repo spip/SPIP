@@ -12,8 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function action_instituer_dist()
-{
+#
+# Gere les actions cachees derrire le petit iframe de l'espace prive (faux Ajax)
+#
+
+function action_instituer_dist() {
 	global $action, $arg, $hash, $id_auteur;
 	include_ecrire("inc_session");
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
@@ -23,19 +26,22 @@ function action_instituer_dist()
 
 	ereg("^([^ ]*) (.*)$", $arg, $r);
 	$var_nom = 'instituer_' . $r[1];
-	if (function_exists($var_nom))
-	  $var_nom($r[2]);
-	else spip_log("spip_action_$action: $arg incompris");
+	if (function_exists($var_nom)) {
+		spip_log("$var_nom $r[2]");
+		$var_nom($r[2]);
+	}
+	else
+		spip_log("action $action: $arg incompris");
 }
 
-function instituer_collaboration($debloquer_article)
-{
-        global $id_auteur;
-        if ($debloquer_article AND ($id_auteur = intval($id_auteur))) {
-                if ($debloquer_article <> 'tous')
-                        $where_id = "AND id_article=".intval($debloquer_article);
-                spip_query ("UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$id_auteur $where_id");
-        }
+function instituer_collaboration($debloquer_article) {
+	global $id_auteur;
+	if ($debloquer_article AND ($id_auteur = intval($id_auteur))) {
+		if ($debloquer_article <> 'tous')
+			$where_id = "AND id_article=".intval($debloquer_article);
+		spip_query ("UPDATE spip_articles SET auteur_modif='0'
+		WHERE auteur_modif=$id_auteur $where_id");
+	}
 }
 
 function instituer_forum($arg) {
@@ -75,18 +81,20 @@ function instituer_forum($arg) {
 	}
 }
 
-function instituer_article($arg)
-{	list($id_article, $statut) = split(' ', $arg);
+function instituer_article($arg) {
+	list($id_article, $statut) = split(' ', $arg);
 
 	$id_article = intval($id_article);
-	$result = spip_query("SELECT statut FROM spip_articles WHERE id_article=$id_article");
+	$result = spip_query("SELECT statut FROM spip_articles
+	WHERE id_article=$id_article");
 
 	if ($row = spip_fetch_array($result)) {
 		$statut_ancien = $row['statut'];
 		}
 
 	if ($statut != $statut_ancien) {
-		spip_query("UPDATE spip_articles SET statut='$statut', date=NOW() WHERE id_article=$id_article");			
+		spip_query("UPDATE spip_articles SET statut='$statut',
+		date=NOW() WHERE id_article=$id_article");
 		include_ecrire("inc_rubriques");
 		include_ecrire('inc_texte');
 		calculer_rubriques();
@@ -96,8 +104,8 @@ function instituer_article($arg)
 }
 
 
-function instituer_breve($arg)
-{	list($id_breve, $statut) = split(' ', $arg);
+function instituer_breve($arg) {
+	list($id_breve, $statut) = split(' ', $arg);
 
 	$id_breve = intval($id_breve);
 	$query = "SELECT statut FROM spip_breves WHERE id_breve=$id_breve";
@@ -107,7 +115,8 @@ function instituer_breve($arg)
 		}
 
 	if ($statut != $statut_ancien) {
-		spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut' WHERE id_breve=$id_breve");
+		spip_query("UPDATE spip_breves SET date_heure=NOW(),
+		statut='$statut' WHERE id_breve=$id_breve");
 
 		include_ecrire("inc_rubriques");
 		calculer_rubriques();
