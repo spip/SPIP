@@ -256,6 +256,9 @@ function spip_get_lock($nom, $timeout = 0) {
 	if ($table_prefix) $nom = "$table_prefix:$nom";
 	if ($spip_mysql_db) $nom = "$spip_mysql_db:$nom";
 
+	// Changer de nom toutes les heures en cas de blocage MySQL (ca arrive)
+	$nom = intval(time()/3600-316982).$nom;
+
 	$nom = addslashes($nom);
 	$q = spip_query("SELECT GET_LOCK('$nom', $timeout)");
 	list($lock_ok) = spip_fetch_array($q);
