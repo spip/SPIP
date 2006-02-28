@@ -405,7 +405,7 @@ if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 
 	if ($syndication == "off" OR $syndication=="sus") {
 		debut_boite_info();
-		echo _T('avis_site_syndique_probleme', array('url_syndic' => $url_syndic));
+		echo _T('avis_site_syndique_probleme', array('url_syndic' => quote_amp($url_syndic)));
 		echo "<center><b>";
 		echo "<a href='" . generer_url_ecrire("sites","id_syndic=$id_syndic&reload=oui") . "'>";
 		echo _T('lien_nouvelle_recuperation')."</a></b></center>\n";
