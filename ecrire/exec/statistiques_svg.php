@@ -100,7 +100,7 @@ echo '</defs>';
 	if (count($log)>0) {
 		$max = max(max($log),$visites_today);
 		$date_today = time();
-		$nb_jours = floor(($date_today-$date_debut)/(3600*24));
+		$nb_jours = floor(($date_today-$date_debut)/(3600*24)) + 1;
 		
 		$maxgraph = substr(ceil(substr($max,0,2) / 10)."000000000000", 0, strlen($max));
 	
