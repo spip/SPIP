@@ -337,9 +337,15 @@ if ($relief) {
 	}
 
 	// Les articles syndiques en attente de validation
-	if ($id_rubrique == 0 AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		$row = spip_fetch_array(spip_query ("SELECT COUNT(*) AS compte FROM spip_syndic_articles WHERE statut='dispo'"));
-			echo "<br><small><a href='" . generer_url_ecrire("sites_tous") . "' style='color: black;'>".$row['compte']." "._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')."</a></small>";
+	if ($id_rubrique == 0
+	AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
+		$row = spip_fetch_array(spip_query ("SELECT COUNT(*) AS compte 
+		FROM spip_syndic_articles WHERE statut='dispo'"));
+		if ($row['compte'] > 0)
+			echo "<br><small><a href='" . generer_url_ecrire("sites_tous")
+			. "' style='color: black;'>".$row['compte']." "
+			._T('info_liens_syndiques_1')." "._T('info_liens_syndiques_2')
+			."</a></small>";
 	}
 
 	fin_cadre_couleur();
