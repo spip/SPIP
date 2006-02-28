@@ -111,19 +111,21 @@ function include_spip($f, $include = true) {
 	AND !$s = find_in_path($f . '.php3')
 	// sinon, le fichier existe dans le repertoire ecrire ?
 	AND !is_readable($s = _DIR_INCLUDE . $f . '.php')
-	AND !is_readable($s = _DIR_INCLUDE . $f . '.php3')
-)
+	AND !is_readable($s = _DIR_INCLUDE . $f . '.php3'))
 		return $GLOBALS['included_files'][$f] = false;
 
 	// deja charge (chemin complet) ?
 	if (isset($GLOBALS['included_files'][$s]))
 		return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s];
+	else
+		$GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s] = $s;
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
 		include($s);
 	}
-	return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s] = $s;
+
+	return $s;
 }
 
 // un pipeline est lie a une action et une valeur

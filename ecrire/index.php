@@ -121,7 +121,6 @@ topmargin='0' leftmargin='0' marginwidth='0' marginheight='0' frameborder='0'" .
 	($spip_lang_rtl ? " dir='rtl'" : ""));
 
 // charger l'affichage minimal et initialiser a la langue par defaut
-
 include_ecrire("inc_minipres");
 
 //  si la langue est specifiee par cookie alors ...

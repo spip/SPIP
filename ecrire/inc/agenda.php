@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation"); // inclut inc_layer
+include_spip("inc/presentation"); // inclut inc_layer
 include_ecrire("inc_texte"); // inclut inc_filtre
 
 charger_generer_url();

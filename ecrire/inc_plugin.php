@@ -68,18 +68,21 @@ function ecrire_plugin_actifs($plugin,$pipe_recherche=false){
 	// charger_plugins_fonctions.php
 	foreach(array('options','fonctions') as $charge){
 		$s = "";
+		$splugs = "";
 		if (is_array($infos)){
 			foreach($infos as $plug=>$info){
+				// definir le plugin, donc le path avant l'include du fichier options
+				// permet de faire des include_ecrire pour attraper un inc_ du plugin
+				if ($charge=='options')
+					$splugs .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';'."\n";
 				if (isset($info[$charge])){
 					foreach($info[$charge] as $file)
 						$s .= "include_once _DIR_PLUGINS.'$plug/".trim($file)."';\n";
 				}
-				if ($charge=='options')
-					$s .= '$GLOBALS[\'plugins\'][]=\''.$plug.'\';'."\n";
 			}
 		}
 		ecrire_fichier(_DIR_SESSIONS."charger_plugins_$charge.php",
-			$start_file . $s . $end_file);
+			$start_file . $splugs . $s . $end_file);
 	}
 
 	if (is_array($infos)){
@@ -193,8 +196,8 @@ function ordonne_plugin(){
 	foreach($liste as $plug){
 		$index = $i;
 		$i = $i+2;
-		if ($_GET['monter']==$plug) $index = $index-3;
-		if ($_GET['descendre']==$plug) $index = $index+3;
+		if (urldecode($_GET['monter'])==$plug) $index = $index-3;
+		if (urldecode($_GET['descendre'])==$plug) $index = $index+3;
 		$liste_triee[$index] = $plug;
 	}
 	ksort($liste_triee);
