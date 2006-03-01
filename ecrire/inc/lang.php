@@ -376,6 +376,21 @@ function utiliser_langue_visiteur() {
 		changer_langue($_COOKIE[$cookie_lang]);
 }
 
+// Une fonction qui donne le repertoire ou trouver des fichiers de langue
+// note : pourrait en donner une liste... complique
+function repertoire_lang($module='spip', $lang='fr') {
+	# valeur forcee (par ex.sur spip.net), old style, a faire disparaitre
+	if (defined('_DIR_LANG'))
+		return _DIR_LANG;
+
+	# regarder s'il existe une v.f. qq part
+	if ($f = include_spip('lang/'.$module.'_'.$lang));
+		return dirname($f).'/';
+
+	# sinon, je ne sais trop pas quoi dire...
+	return _DIR_INCLUDE.'lang/';
+}
+
 //
 // Initialisation
 //
@@ -392,7 +407,7 @@ function init_langues() {
 
 	$toutes_langs = Array();
 	if (!$all_langs || !$langue_site || !_DIR_RESTREINT) {
-		if (!$d = @opendir(_DIR_LANG)) return;
+		if (!$d = @opendir(repertoire_lang())) return;
 		while (($f = readdir($d)) !== false) {
 			if (ereg('^spip_([a-z_]+)\.php[3]?$', $f, $regs))
 				$toutes_langs[] = $regs[1];

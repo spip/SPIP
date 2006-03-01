@@ -31,7 +31,7 @@ function include_local ($file, $silence=false) {
 		include($f);
 		return true;
 	}
-	else if (is_readable($f = $nom . _EXTENSION_PHP)) {
+	else if (is_readable($f = $nom . '.php3')) {
 		include($f);
 		return true;
 	}
@@ -782,28 +782,15 @@ function get_spip_script($default='') {
 
 function generer_url_public($script, $args="", $no_entities=false) {
 
-	if (!$script) {
-		$action = get_spip_script();
-
-	} else {
-		// transition : s'agit-il d'un fichier existant ?
-		$fichier = $script . (ereg('[.]php[3]?$', $script) ? 
-		'' : _EXTENSION_PHP);
-		if (@file_exists(_DIR_RACINE . $fichier)) {
-			$action = $fichier;
-		}
-
-		// sinon utiliser _SPIP_SCRIPT?page=script
-		else {
-			$action = get_spip_script() . '?page=' . $script;
-		}
-	}
-
 	// si le script est une action (spip_pass, spip_inscription),
 	// utiliser generer_url_action [hack temporaire pour faire
 	// fonctionner #URL_PAGE{spip_pass} ]
 	if (preg_match(',^spip_(.*),', $script, $regs))
-		return generer_url_action($regs[1],$args,true);
+		return generer_url_action($regs[1],$args,true); # attention a la recursivite !!
+
+	$action = get_spip_script();
+	if ($script)
+		$action = parametre_url($action, 'page', $script, '&');
 
 	if ($args)
 		$action .=
@@ -934,9 +921,6 @@ function spip_initialisation() {
 	# le chemin php (absolu) vers les images standard (pour hebergement centralise)
 	define('_ROOT_IMG_PACK', (dirname(__FILE__) . '/img_pack/'));
 	define('_ROOT_IMG_ICONES_DIST', (dirname(__FILE__) . '/img_pack/icones/'));
-
-	// Fichiers de langue
-	define('_DIR_LANG', (_DIR_RESTREINT . 'lang/'));
 
 	// Le charset par defaut lors de l'installation
 	define('_DEFAULT_CHARSET', 'utf-8');
