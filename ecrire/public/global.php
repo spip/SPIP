@@ -42,7 +42,7 @@ function calcule_header_et_page ($fond) {
 	// afin que celle-ci contienne la signature
 
 	if ($_GET['var_confirm']) {
-		include_local(find_in_path('inc-formulaire_signature' . _EXTENSION_PHP));
+		include_spip('inc-formulaire_signature');
 		reponse_confirmation($_GET['id_article'], $var_confirm);
 	}
 
@@ -302,7 +302,7 @@ function message_erreur_404 ($erreur= "") {
 	return array('texte' => '<'.'?php
 			$contexte_inclus = array("fond" => 404,
  				"erreur" => _T("' . $erreur  . '"));
-			include(\'page' . _EXTENSION_PHP .'\'); ?'.'>',
+			include(\'spip.php\'); ?'.'>',
 		     'process_ins' => 'php');
 }
 

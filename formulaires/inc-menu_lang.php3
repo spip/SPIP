@@ -26,7 +26,7 @@ function balise_MENU_LANG_stat ($args, $filtres) {
 
 // normalement $opt sera toujours non vide suite au test ci-dessus
 function balise_MENU_LANG_dyn($menu_lang) {
-	include_local(find_in_path("inc-menu_lang_ecrire" . _EXTENSION_PHP));
+	include_spip('inc-menu_lang_ecrire');
 	return menu_lang_pour_tous('var_lang', $opt);
 }
 

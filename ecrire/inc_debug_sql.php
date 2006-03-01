@@ -449,7 +449,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
-	include_local(find_in_path('inc-formulaire_admin' . _EXTENSION_PHP));
+	include_spip('inc-formulaire_admin');
 	echo inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets)
 	);

@@ -169,9 +169,7 @@ function argumenter_squelette($v) {
 
 // verifier leurs arguments et filtres, et calculer le code a inclure
 function executer_balise_dynamique($nom, $args, $filtres, $lang, $ligne) {
-	if ($file = find_in_path('inc-' . strtolower($nom) . _EXTENSION_PHP))
-		include_local($file);
-	else
+	if (!include_spip('inc-' . strtolower($nom)))
 		die ("pas de balise dynamique pour #". strtolower($nom)." !");
 
 	// Y a-t-il une fonction de traitement filtres-arguments ?

@@ -1,0 +1,23 @@
+
+Mise a jour de votre site SPIP
+------------------------------
+
+La version 1.9 de SPIP n'offre plus les fichiers article.php3 etc, à la
+racine du site.
+
+Si vous laissez les anciens fichiers, ils continueront à fonctionner comme
+avant, grâce au fichier "fantôme" inc-public.php3
+
+Mais vous pouvez aussi, si votre hébergeur l'autorise, utiliser le fichier
+htaccess.txt, en le recopiant à la racine du site sous le nom ".htaccess".
+Ce fichier dira alors au serveur Web que les hits sur une adresse du type
+article.php3?id_article=1 doivent être traités par spip.php
+
+Par ailleurs, si vous aviez des fichiers personnalises (mes_options.php3,
+mes_fonctions.php3, fichiers de langue, ou balises dynamiques), il est temps
+de les renommer en ".php". En effet, cette version de transition (1.9) est
+encore compatible avec .php3, mais la prochaine (2.0) ne le sera pas.
+
+Pour en savoir plus :
+	http://www.spip.net/...
+
