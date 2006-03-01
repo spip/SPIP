@@ -33,7 +33,8 @@ define('CHAMP_ETENDU', '\[([^]\[]*)\(' . NOM_DE_CHAMP . '([^[)]*\)[^]\[]*)\]');
 
 define('BALISE_INCLURE','<INCLU[DR]E[[:space:]]*(\(([^)]*)\))?');
 
-define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)\(?([A-Za-z_.]*)\)?`?');
+define('SQL_ARGS', '(\([^)]*\))');
+define('CHAMP_SQL_PLUS_FONC', '`?([A-Za-z_][A-Za-z_0-9]*)' . SQL_ARGS . '?`?');
 
 function phraser_inclure($texte, $ligne, $result) {
 
