@@ -208,39 +208,54 @@ function ordonne_plugin(){
 function parse_plugin_xml($texte){
 	$out = array();
   // enlever les commentaires
-  $txt = preg_replace(',<!--(.*?)-->,is','',$texte);
+  $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
+  $txt = $texte;
 
 	// tant qu'il y a des tags
 	while(preg_match("{<([^>]*?)>}s",$txt)){
 		// tag ouvrant
-		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_OFFSET_CAPTURE|PREG_SPLIT_DELIM_CAPTURE);
+		$chars = preg_split("{<([^>]*?)>}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 	
 		// $before doit etre vide ou des espaces uniquements!
-		$before = trim($chars[0][0]);
+		$before = trim($chars[0]);
 
 		if (strlen($before)>0)
 			return $texte; // before non vide, donc on est dans du texte
 	
-		$tag = $chars[1][0];
-		$txt = $chars[2][0];
+		$tag = $chars[1];
+		$txt = $chars[2];
 	
 		// tag fermant
-		$chars = preg_split("{(</$tag>)}s",$txt,2,PREG_SPLIT_OFFSET_CAPTURE|PREG_SPLIT_DELIM_CAPTURE);
+		$chars = preg_split("{(</$tag>)}s",$txt,2,PREG_SPLIT_DELIM_CAPTURE);
 		if (!isset($chars[1])) { // tag fermant manquant
 			$out[$tag][]="erreur : tag fermant $tag manquant::$txt"; 
 			return $out;
 		}
-		$content = $chars[0][0];
-		$txt = trim($chars[2][0]);
+		$content = $chars[0];
+		$txt = trim($chars[2]);
 		$out[$tag][]=parse_plugin_xml($content);
 	}
-	if (count($out))
+	if (count($out)&&(strlen($txt)==0))
 		return $out;
-	else{
-		return $txt;
-	}
+	else
+		return $texte;
 }
 
+function applatit_arbre($arbre,$separateur = " "){
+	$s = "";
+	foreach($arbre as $tag=>$feuille){
+		if (is_array($feuille)){
+			if ($tag!==intval($tag))
+				$s.="<$tag>".applatit_arbre($feuille)."</$tag>";
+			else
+				$s.=applatit_arbre($feuille);
+			$s .= $separateur;
+		}				
+		else
+			$s.="$feuille$separateur";
+	}
+	return $s;
+}
 function chaines_lang($texte){
 	// TODO : prendre en charge le fichier langue specifique du plugin
 	// meme si pas encore charge
@@ -269,12 +284,12 @@ function plugin_get_infos($plug){
 
 		plugin_verifie_conformite($plug,$arbre);
 		
-		$ret['nom'] = trim(join(' ',$arbre['nom']));
+		$ret['nom'] = applatit_arbre($arbre['nom']);
 		$ret['version'] = trim(end($arbre['version']));
 		if (isset($arbre['auteur']))
-			$ret['auteur'] = trim(join(',',$arbre['auteur']));
+			$ret['auteur'] = applatit_arbre($arbre['auteur']);
 		if (isset($arbre['description']))
-			$ret['description'] = chaines_lang(join(' ',$arbre['description']));
+			$ret['description'] = chaines_lang(applatit_arbre($arbre['description']));
 		if (isset($arbre['lien']))
 			$ret['lien'] = join(' ',$arbre['lien']);
 		if (isset($arbre['etat']))
