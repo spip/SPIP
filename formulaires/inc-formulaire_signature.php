@@ -93,7 +93,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 
 	$id_article = intval($id_article);
 	if (!$var_confirm) return $confirm;
-	include_local(_FILE_CONNECT);
+	spip_connect();
 	if ($GLOBALS['db_ok']) {
 		include_spip('inc/texte');
 		include_spip('inc/filtres');

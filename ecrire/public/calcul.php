@@ -31,7 +31,7 @@ include_spip('public/calcul-outils');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
-if ($f = find_in_path("mes_fonctions" . _EXTENSION_PHP)) {
+if ($f = include_spip('mes_fonctions', false)) {
 	global $dossier_squelettes;
 	include ($f);
 }
@@ -48,7 +48,8 @@ function squelette_obsolete($skel, $squelette) {
 		($GLOBALS['var_mode'] AND $GLOBALS['var_mode']<>'calcul')
 		OR !@file_exists($skel)
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
-		OR (@filemtime('mes_fonctions' . _EXTENSION_PHP) > $date)
+		OR (@filemtime('mes_fonctions.php') > $date)
+		OR (@filemtime('mes_fonctions.php3') > $date)  # compatibilite
 		OR (@filemtime(_FILE_OPTIONS) > $date)
 	);
 }
@@ -92,7 +93,8 @@ function charger_squelette ($squelette) {
 	// Le point 2 exige qu'il soit lu apres inc-compilo
 	// (car celui-ci initialise $tables_principales) mais avant la compil
 
-	include_local($squelette . '_fonctions', true);
+	@include_once($squelette . '_fonctions'.'.php3');	# compatibilite
+	@include_once($squelette . '_fonctions'.'.php');
 
 	if (function_exists($nom)) return $nom;
 

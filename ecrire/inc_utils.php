@@ -18,34 +18,6 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $included_files = array();
 
-// inclure un fichier "local", signifie en general qu'on suit le chemin
-// depuis le repertoire courant. Mais si le fichier est redefini dans
-// spip_matrice, on prefere spip_matrice ; et s'il n'existe pas localement
-// on le find_in_path()
-function include_local ($file, $silence=false) {
-	$nom = preg_replace("/\.php[3]?$/",'', $file);
-#	spip_log("'$nom' '$file'");
-	if (@$GLOBALS['included_files'][$nom]++)
-		return true;
-	if (is_readable($f = $nom . '.php')) {
-		include($f);
-		return true;
-	}
-	else if (is_readable($f = $nom . '.php3')) {
-		include($f);
-		return true;
-	}
-/*	else if (is_readable($f = _DIR_INCLUDE. preg_replace(',^inc-,', 'public-', $nom) . '.php')) {
-		include($f);
-		return true;
-	}*/
-	else {
-		if (!$silence)
-			spip_log($file . " illisible");
-		return false;
-	}
-}
-
 function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -60,7 +32,7 @@ function include_ecrire($file, $silence=false) {
 
 	# fichiers old-style, ecrire/inc_truc.php
 	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
-		return include_local($f, $silence);
+		return include_once($f);
 }
 
 
@@ -101,7 +73,7 @@ function include_fonction($nom, $dossier='exec') {
 //
 function include_spip($f, $include = true) {
 	// deja charge (nom) ?
-	if (isset($GLOBALS['included_files'][$f]))
+	if ($GLOBALS['included_files'][$f])
 		return $GLOBALS['included_files'][$f];
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
@@ -227,6 +199,13 @@ function spip_log($message, $logname='spip') {
 
 
 // API d'appel a la base de donnees
+function spip_connect() {
+	static $t;
+	if ($t++) return;
+
+	include_once(_FILE_CONNECT);
+}
+
 function spip_query($query) {
 
 	// Remarque : si on est appele par l'install,
@@ -234,7 +213,8 @@ function spip_query($query) {
 	if (!$GLOBALS['db_ok']) {
 		// Essaie de se connecter
 		if (_FILE_CONNECT)
-			include_local(_FILE_CONNECT);
+			spip_connect();
+		# else ????
 	}
 
 	// Erreur de connexion
@@ -696,14 +676,12 @@ function charger_generer_url() {
 	// espace public
 	else {
 		// fichier inc-urls ? (old style)
-		include_local(_DIR_RACINE."inc-urls", true)
-		OR ((
-			$f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3')
-			// sinon fichier urls/xxx.php
-			OR
-			$f = find_in_path('urls/'.$GLOBALS['type_urls'].'.php',
-				_DIR_RESTREINT)
-		) AND include_local($f));
+		if (@file_exists($f = _DIR_RACINE.'inc-urls.php3')
+		OR @file_exists($f = _DIR_RACINE.'inc-urls.php')
+		OR $f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3')
+		OR $f = include_spip('urls/'.$GLOBALS['type_urls'], false)
+		)
+			include_once($f);
 	}
 }
 

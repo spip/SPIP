@@ -20,7 +20,7 @@ include_spip('inc/lang');
 include_spip('inc/mail');
 include_spip('inc/forum');
 include_ecrire("inc_abstract_sql");
-include_local(_FILE_CONNECT);
+spip_connect();
 
 charger_generer_url();
 

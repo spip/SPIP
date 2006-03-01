@@ -12,11 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_local(_FILE_CONNECT);
 include_ecrire("inc_meta");
 include_spip('inc/session');
 include_spip('inc/filtres');
 include_spip('inc/logos');
+spip_connect();
 
 global $balise_LOGIN_PUBLIC_collecte;
 $balise_LOGIN_PUBLIC_collecte = array('url');

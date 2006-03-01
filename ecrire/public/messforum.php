@@ -15,7 +15,7 @@ include_ecrire('inc_meta');
 include_spip('inc/forum');
 include_spip('inc/filtres');
 include_ecrire("inc_abstract_sql");
-include_local(_FILE_CONNECT);
+spip_connect();
 
 // Ce fichier inclus par inc-public a un comportement special
 // Voir commentaires dans celui-ci et dans inc-formulaire_forum
