@@ -50,7 +50,7 @@ function squelette_obsolete($skel, $squelette) {
 		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
 		OR (@filemtime('mes_fonctions.php') > $date)
 		OR (@filemtime('mes_fonctions.php3') > $date)  # compatibilite
-		OR (@filemtime(_FILE_OPTIONS) > $date)
+		OR (defined('_FILE_OPTIONS') AND @filemtime(_FILE_OPTIONS) > $date)
 	);
 }
 

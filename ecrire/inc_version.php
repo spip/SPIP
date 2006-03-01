@@ -211,19 +211,21 @@ $hash_recherche_strict = '';
 //
 // Inclure le fichier ecrire/mes_options (ou equivalent)
 //
-if(!defined('_FILE_OPTIONS')) {
-	# COMPATIBILITE .php3
-	if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
-		define('_FILE_OPTIONS',_DIR_RESTREINT . 'mes_options.php3');
+if (defined('_FILE_OPTIONS')) {
+	if (@file_exists(_FILE_OPTIONS)) {
 		include_once(_FILE_OPTIONS);
 	}
-	else {
+} else {
+	if (@file_exists(_DIR_RESTREINT . 'mes_options.php')) {
 		define('_FILE_OPTIONS',_DIR_RESTREINT . 'mes_options.php');
 		include_once(_FILE_OPTIONS);
 	}
-} else if (@file_exists(_FILE_OPTIONS))
-	include_once(_FILE_OPTIONS);
-
+	# COMPATIBILITE .php3
+	else if (@file_exists(_DIR_RESTREINT . 'mes_options.php3')) {
+		define('_FILE_OPTIONS', _DIR_RESTREINT . 'mes_options.php3');
+		include_once(_FILE_OPTIONS);
+	}
+}
 
 //
 // Definitions standards (charge aussi inc_flock)

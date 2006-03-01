@@ -72,9 +72,10 @@ function include_fonction($nom, $dossier='exec') {
 // une fonction destinee a remplacer include_ecrire, pour les surcharges
 //
 function include_spip($f, $include = true) {
+	static $included_files = array();
 	// deja charge (nom) ?
-	if ($GLOBALS['included_files'][$f])
-		return $GLOBALS['included_files'][$f];
+	if ($included_files[$f])
+		return $included_files[$f];
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
@@ -85,13 +86,13 @@ function include_spip($f, $include = true) {
 	// sinon, le fichier existe dans le repertoire ecrire ?
 	AND !is_readable($s = _DIR_INCLUDE . $f . '.php')
 	AND !is_readable($s = _DIR_INCLUDE . $f . '.php3'))
-		return $GLOBALS['included_files'][$f] = false;
+		return $included_files[$f] = false;
 
 	// deja charge (chemin complet) ?
-	if (isset($GLOBALS['included_files'][$s]))
-		return $GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s];
+	if (isset($included_files[$s]))
+		return $included_files[$f] = $included_files[$s];
 	else
-		$GLOBALS['included_files'][$f] = $GLOBALS['included_files'][$s] = $s;
+		$included_files[$f] = $included_files[$s] = $s;
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
