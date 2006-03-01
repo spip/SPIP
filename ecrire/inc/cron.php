@@ -59,7 +59,7 @@ function spip_cron($taches = array()) {
 	AND ($t - @filemtime(_FILE_MYSQL_OUT) < 300))
 		return;
 
-	include_ecrire("inc_meta");
+	include_spip('inc/meta');
 	// force un spip_query
 	lire_metas();
 
@@ -103,8 +103,11 @@ function spip_cron($taches = array()) {
 	if (spip_touch($lock, $taches[$tache])) {
 		// preparer la tache
 		spip_timer('tache');
-		include_ecrire('inc_' . $tache);
+
 		$fonction = 'cron_' . $tache;
+		if (!function_exists($fonction))
+			include_spip('inc/' . $tache);
+
 
 		// l'appeler
 		$code_de_retour = $fonction($last);
@@ -164,147 +167,12 @@ function taches_generales() {
 	return $taches_generales;
 }
 
-// Fonctions effectivement appelees.
-// Elles sont destinees a migrer dans leur fichier homonyme.
 
-function cron_rubriques($t) {
-	calculer_rubriques();
-	return 1;
-}
-
+// Cas particulier : optimiser est dans base/optimiser, et pas dans inc/
+// il faut donc definir la fonction _cron ici.
 function cron_optimiser($t) {
-	optimiser_base ();
-	return 1;
-}
-
-function cron_indexation($t) {
-	$c = count(effectuer_une_indexation());
-	// si des indexations ont ete effectuees, on passe la periode a 0 s
-	## note : (time() - 90) correspond en fait a :
-	## time() - $taches_generales['indexation']
-	if ($c)
-		return (0 - (time() - 90));
-	else
-		return 0;
-}
-
-function cron_syndic($t) {
-	$r = executer_une_syndication();
-	if (($GLOBALS['meta']['activer_moteur'] == 'oui') &&
-	    ($GLOBALS['meta']["visiter_sites"] == 'oui')) {
-		include_spip("inc/indexation");
-		$r2 = executer_une_indexation_syndic();
-		$r = $r && $r2;
-	}
-	return $r;
-}
-
-//
-// Calcule les stats en plusieurs etapes
-//
-function cron_visites($t) {
-	$encore = calculer_visites($t);
-
-	// Si ce n'est pas fini on redonne la meme date au fichier .lock
-	// pour etre prioritaire lors du cron suivant
-	if ($encore)
-		return (0 - $t);
-
-	return 1;
-}
-
-//
-// Applique la regle de decroissance des popularites
-//
-function cron_popularites($t) {
-	calculer_popularites();
-	return 1;
-}
-
-
-//
-// Mail des nouveautes
-//
-function cron_mail($t) {
-	$adresse_neuf = $GLOBALS['meta']['adresse_neuf'];
-	$jours_neuf = $GLOBALS['meta']['jours_neuf'];
-	// $t = 0 si le fichier de lock a ete detruit
-	if (!$t) $t = time() - (3600 * 24 * $jours_neuf);
-
-	include_spip('public/calcul');
-	$page= cherche_page('',
-			    array('date' => date('Y-m-d H:i:s', $t),
-				  'jours_neuf' => $jours_neuf),
-				'nouveautes',
-				'',
-				$GLOBALS['meta']['langue_site']);
-	$page = $page['texte'];
-	if (substr($page,0,5) == '<'.'?php') {
-# ancienne version: squelette en PHP avec affection des 2 variables ci-dessous
-# 1 passe de plus a la sortie
-				$mail_nouveautes = '';
-				$sujet_nouveautes = '';
-				$headers = '';
-				eval ('?' . '>' . $page);
-	} else {
-# nouvelle version en une seule passe avec un squelette textuel:
-# 1ere ligne = sujet
-# lignes suivantes jusqu'a la premiere blanche: headers SMTP
-
-				$page = stripslashes(trim($page));
-				$page = preg_replace(",\r\n?,", "\n", $page);
-				$p = strpos($page,"\n\n");
-				$s = strpos($page,"\n");
-				if ($p AND $s) {
-					if ($p>$s)
-						$headers = substr($page,$s+1,$p-$s);
-					$sujet_nouveautes = substr($page,0,$s);
-					$mail_nouveautes = trim(substr($page,$p+2));
-				}
-	}
-
-	if (strlen($mail_nouveautes) > 10)
-		envoyer_mail($adresse_neuf, $sujet_nouveautes, $mail_nouveautes, '', $headers);
-	else
-		spip_log("mail nouveautes : rien de neuf depuis $jours_neuf jours");
-	return 1;
-}
-
-function cron_ajax ($t) {
-	nettoyer_ajax();
-	return 1;
-}
-
-function cron_invalideur($t) {
-	//
-	// menage des vieux fichiers du cache
-	// marques par l'invalideur 't' = date de fin de fichier
-	//
-
-	retire_vieux_caches();
-
-	// En cas de quota sur le CACHE/, nettoyer les fichiers les plus vieux
-
-	// A revoir: il semble y avoir une desynchro ici.
-	
-		list ($total_cache) = spip_fetch_array(spip_query("SELECT SUM(taille)
-		FROM spip_caches WHERE type IN ('t', 'x')"));
-		spip_log("Taille du CACHE: $total_cache octets");
-
-		global $quota_cache;
-		$total_cache -= $quota_cache*1024*1024;
-		if ($quota_cache > 0 AND $total_cache > 0) {
-			$q = spip_query("SELECT id, taille FROM spip_caches
-			WHERE type IN ('t', 'x') ORDER BY id");
-			while ($r = spip_fetch_array($q)
-			AND ($total_cache > $taille_supprimee)) {
-				$date_limite = $r['id'];
-				$taille_supprimee += $r['taille'];
-			}
-			spip_log ("Quota cache: efface $taille_supprimee octets");
-			include_spip('inc/invalideur');
-			suivre_invalideur("id <= $date_limite AND type in ('t', 'x')");
-		}
+	include_spip('base/optimiser');
+	optimiser_base();
 	return 1;
 }
 

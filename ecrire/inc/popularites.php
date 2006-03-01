@@ -71,4 +71,13 @@ function calculer_popularites() {
 
 }
 
+//
+// Applique la regle de decroissance des popularites
+//
+function cron_popularites($t) {
+	calculer_popularites();
+	return 1;
+}
+
+
 ?>

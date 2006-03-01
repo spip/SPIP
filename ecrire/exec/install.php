@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INSTALL", "1");
 define('_FILE_TMP', '_install');
 include_spip('inc/minipres');
-include_ecrire ("inc_base");
+include_spip ('base/create');
 include_ecrire("inc_db_mysql");
 
 function exec_install_dist()

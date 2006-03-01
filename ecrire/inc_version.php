@@ -228,12 +228,12 @@ if (defined('_FILE_OPTIONS')) {
 }
 
 //
-// Definitions standards (charge aussi inc_flock)
+// Definitions standards (charge aussi inc/flock)
 //
 # on peut mettre ces deux lignes dans mes_options si on veut beneficier
 # des definitions (notamment de $auteur_session)
 define('_DIR_INCLUDE', _DIR_RESTREINT);
-require_once(_DIR_INCLUDE . 'inc_utils.php');
+require_once(_DIR_INCLUDE . 'inc/utils.php');
 
 
 // chargement des plugins : doit arriver en dernier
@@ -244,7 +244,7 @@ if (@is_readable(_DIR_SESSIONS."charger_plugins_options.php")){
 	// chargement optimise precompile
 	include_once(_DIR_SESSIONS."charger_plugins_options.php");
 } else {
-	include_ecrire('inc_plugin');
+	include_spip('inc/plugin');
 	// generer les fichiers php precompiles
 	// de chargement des plugins et des pipelines
 	verif_plugin();

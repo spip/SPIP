@@ -15,10 +15,10 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/acces');
-include_ecrire("inc_serialbase");
-include_ecrire("inc_auxbase");
-include_ecrire("inc_typebase");
-include_ecrire("inc_majbase");
+include_spip('base/serial');
+include_spip('base/aux');
+include_spip('base/typedoc');
+include_spip('base/upgrade');
 
 // Fonction de creation d'une table SQL nommee $nom
 // a partir de 2 tableaux PHP :

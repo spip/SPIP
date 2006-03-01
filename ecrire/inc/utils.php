@@ -672,7 +672,7 @@ function charger_generer_url() {
 
 	// espace prive
 	if (!_DIR_RESTREINT)
-		include_ecrire('inc_urls');
+		include_spip('inc/urls');
 
 	// espace public
 	else {
@@ -1004,7 +1004,7 @@ function spip_initialisation() {
 	//
 	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
 	//
-	include_ecrire('inc_flock');
+	include_spip('inc/flock');
 
 
 
@@ -1013,7 +1013,7 @@ function spip_initialisation() {
 		$GLOBALS['meta'] = @unserialize($meta);
 	// en cas d'echec refaire le fichier
 	if (!is_array($GLOBALS['meta']) AND _FILE_CONNECT) {
-		include_ecrire('inc_meta');
+		include_spip('inc/meta');
 		ecrire_metas();
 	}
 

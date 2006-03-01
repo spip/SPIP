@@ -66,7 +66,7 @@ function exec_upgrade_dist() {
 	debut_admin(generer_url_post_ecrire("upgrade"),
 		$upgrade_titre, $commentaire);
 
-	include_ecrire ("inc_base");
+	include_spip('base/create');
 	creer_base();
 	$ok = maj_base();
 
