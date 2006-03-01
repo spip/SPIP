@@ -628,11 +628,13 @@ function texte_script($texte) {
 
 function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 	static $autopath;
+	static $count=0; # nombre de plugins ; s'il change il faut refaire le path
 
 	// Chemin standard depuis l'espace public
 	if ($path == 'AUTO') {
-		if (!$autopath) {
-
+		if (!$autopath
+		OR ($count != ($c = count($GLOBALS['plugins'])))) {
+			$count = $c;
 			// Depuis l'espace prive, remonter d'un cran, sauf pour :
 			// - les absolus (/) ; - les locaux (./) ; les remontees (../)
 			if (_DIR_RACINE) {
