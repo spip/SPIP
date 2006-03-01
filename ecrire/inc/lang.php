@@ -17,11 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 //
 function chercher_module_lang($module, $lang) {
 	// 1) dans un repertoire nomme lang/ se trouvant sur le chemin
-	if ($f = find_in_path('lang/'.$module.'_'.$lang._EXTENSION_PHP))
+	if ($f = include_spip('lang/'.$module.'_'.$lang, false))
 		return $f;
 
-	// 2) directement dans le chemin, ou dans _DIR_LANG
-	return find_in_path($module.'_'.$lang._EXTENSION_PHP, _DIR_LANG);
+	// 2) directement dans le chemin (old style)
+	return include_spip($module.'_'.$lang);
 }
 
 function charger_langue($lang, $module = 'spip') {
@@ -135,7 +135,7 @@ function traduire_chaine($code, $args) {
 			charger_langue($spip_lang, $module);
 
 			// surcharge perso -- on cherche (lang/)local(_xx).php
-			if ($f = find_in_path('local' ._EXTENSION_PHP))
+			if ($f = include_spip('lang/local', false))
 				surcharger_langue($f);
 			if ($f = chercher_module_lang('local', $spip_lang))
 				surcharger_langue($f);
