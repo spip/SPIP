@@ -342,10 +342,11 @@ function safehtml($t) {
 		return str_replace("\x00", '', $t);
 
 	if (!$test) {
-		if ($f = include_spip('safehtml/classes/safehtml.php')) {
+		if ($f = include_spip('safehtml/classes/safehtml', false)) {
 			define('XML_HTMLSAX3', dirname($f).'/');
+			include($f);
 			$process = new safehtml();
-		}
+		} else die('pas de safe');
 		if ($process)
 			$test = 1; # ok
 		else
