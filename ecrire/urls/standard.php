@@ -47,7 +47,7 @@ function generer_url_document($id_document) {
 	return '';
 }
 
-function recuperer_parametres_url($fond, $url) {
+function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 
@@ -71,6 +71,15 @@ function recuperer_parametres_url($fond, $url) {
 			$contexte[id_table_objet($fond)] = $t['id'];
 	}
 	/* Fin du bloc compatibilite url-propres */
+
+	/* Compatibilite urls-page */
+	else if (preg_match(
+	',[?/&](article|breve|rubrique|mot|auteur|site)[=]([0-9]+),',
+	$url, $r)) {
+		$fond = $r[1];
+		$contexte[id_table_objet($r[1])] = $r[2];
+	}
+	/* Fin compatibilite urls-page */
 
 	return;
 }
