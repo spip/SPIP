@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
+include_spip('inc/presentation');
 charger_generer_url();
-include_ecrire("inc_acces"); // pour low_sec (iCal)
+include_spip('inc/acces'); // pour low_sec (iCal)
 
 function afficher_liens_calendrier($lien, $icone, $texte) {
 

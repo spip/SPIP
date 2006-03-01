@@ -139,7 +139,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 			while ($s = trim(fgets($f, 16384))) {
 				$headers .= $s."\n";
 				if (eregi('^Location: (.*)', $s, $r)) {
-					include_ecrire('inc_filtres');
+					include_spip('inc/filtres');
 					$location = suivre_lien($url, $r[1]);
 					spip_log("Location: $location");
 				}
@@ -174,7 +174,7 @@ function recuperer_page($url, $munge_charset=false, $get_headers=false, $taille_
 
 	// Faut-il l'importer dans notre charset local ?
 	if ($munge_charset) {
-		include_ecrire('inc_charsets');
+		include_spip('inc/charsets');
 		$result = transcoder_page ($result, $headers);
 	}
 

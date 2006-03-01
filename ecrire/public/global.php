@@ -22,11 +22,11 @@ function calcule_header_et_page ($fond) {
 
 	// multilinguisme
 	if ($forcer_lang AND ($forcer_lang!=='non') AND !count($_POST)) {
-		include_ecrire('inc_lang');
+		include_spip('inc/lang');
 		verifier_lang_url();
 	}
 	if ($_GET['lang']) {
-		include_ecrire('inc_lang');
+		include_spip('inc/lang');
 		lang_select($_GET['lang']);
 	}
 
@@ -211,7 +211,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	// - on n'y est pas, et alors il faut revenir dans la langue par defaut
 	if (($lang = $contexte_inclus['lang'])
 	|| ($GLOBALS['spip_lang'] != ($lang = $GLOBALS['meta']['langue_site']))) {
-		include_ecrire('inc_lang');
+		include_spip('inc/lang');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
 	}

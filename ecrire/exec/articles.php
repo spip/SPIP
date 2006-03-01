@@ -13,14 +13,14 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_texte");
-include_ecrire("inc_rubriques");
-include_ecrire ("inc_logos");
-include_ecrire ("inc_mots");
-include_ecrire ("inc_date");
+include_spip('inc/presentation');
+include_spip('inc/texte');
+include_spip('inc/rubriques');
+include_spip('inc/logos');
+include_spip('inc/mots');
+include_spip('inc/date');
 include_spip('inc/documents');
-include_ecrire ("inc_forum");
+include_spip('inc/forum');
 include_ecrire ("inc_abstract_sql");
 
   // 28 paremetres, qui dit mieux ?
@@ -499,7 +499,7 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 		// 'depublie' => invalider les caches
 		if ($ok_nouveau_statut AND $statut_article == 'publie' 
 		    AND $GLOBALS['invalider_caches']) {
-		  include_ecrire ("inc_invalideur");
+		  include_spip('inc/invalideur');
 		  suivre_invalideur("id='id_article/$id_article'");
 		}
 	}
@@ -518,17 +518,17 @@ function cron_articles($id_article, $statut, $statut_ancien)
 			include_spip("inc/indexation");
 			marquer_indexer('article', $id_article);
 		}
-		include_ecrire("inc_mail");
+		include_spip('inc/mail');
 		envoyer_mail_publication($id_article);
 	}
 
 	if ($statut_ancien == 'publie' AND $invalider_caches) {
-	  	include_ecrire ("inc_invalideur");
+	  	include_spip('inc/invalideur');
 		suivre_invalideur("id='id_article/$id_article'");
 	}
 
 	if ($statut == "prop" AND $statut_ancien != 'publie') {
-		include_ecrire("inc_mail");
+		include_spip('inc/mail');
 		envoyer_mail_proposition($id_article);
 	}
 }
@@ -1298,7 +1298,7 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 		}
 		
 		if ($champs_extra AND $extra) {
-			include_ecrire("inc_extra");
+			include_spip('inc/extra');
 			extra_affichage($extra, "articles");
 		}
 	}
@@ -1452,7 +1452,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
-		include_ecrire("inc_revisions");
+		include_spip('inc/revisions');
 		if  ($new != 'oui') {
 			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
 			if (!spip_num_rows(spip_query($query))) {
@@ -1472,7 +1472,7 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 	}
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		$champs_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
 	}
 

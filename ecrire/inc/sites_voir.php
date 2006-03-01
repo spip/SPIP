@@ -34,7 +34,7 @@ function afficher_sites($titre_table, $requete) {
 		$premier = true;
 		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-		if ($voir_logo) include_ecrire("inc_logos");
+		if ($voir_logo) include_spip('inc/logos');
 		
 		$compteur_liste = 0;
 		while ($row = spip_fetch_array($result)) {

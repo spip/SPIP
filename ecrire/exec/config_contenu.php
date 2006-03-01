@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_mail");
-include_ecrire ("inc_config");
+include_spip('inc/presentation');
+include_spip('inc/mail');
+include_spip('inc/config');
 
 function exec_config_contenu_dist()
 {

@@ -13,12 +13,12 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_ecrire('inc_meta');
-include_ecrire('inc_session');
-include_ecrire('inc_acces');
-include_ecrire('inc_texte');
-include_ecrire('inc_lang');
-include_ecrire('inc_mail');
-include_ecrire('inc_forum');
+include_spip('inc/session');
+include_spip('inc/acces');
+include_spip('inc/texte');
+include_spip('inc/lang');
+include_spip('inc/mail');
+include_spip('inc/forum');
 include_ecrire("inc_abstract_sql");
 include_local(_FILE_CONNECT);
 

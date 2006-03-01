@@ -20,13 +20,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_ecrire("inc_meta");
 include_spip("inc/indexation");
-include_ecrire("inc_texte");
-include_ecrire("inc_lang");
+include_spip('inc/texte');
+include_spip('inc/lang');
 include_spip('inc/documents');
 include_ecrire("inc_abstract_sql");
-include_ecrire("inc_forum");
+include_spip('inc/forum');
 include_ecrire("inc_debug_sql");
-include_ecrire("inc_distant");
+include_spip('inc/distant');
 include_spip('public/calcul-outils');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
@@ -233,7 +233,7 @@ function calculer_page_globale($cache, $fond) {
 		if ($art = sql_chapo($id_article)) {
 			$chapo = $art['chapo'];
 			if (substr($chapo, 0, 1) == '=') {
-				include_ecrire('inc_texte');
+				include_spip('inc/texte');
 				list(,$url) = extraire_lien(array('','','',
 				substr($chapo, 1)));
 				if ($url) { // sinon les navigateurs pataugent

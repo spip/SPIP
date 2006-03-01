@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_minipres');
+include_spip('inc/minipres');
 
 // Creer IMG/pdf/
 function creer_repertoire_documents($ext) {
@@ -24,7 +24,7 @@ function creer_repertoire_documents($ext) {
 	}
 
 	if ($GLOBALS['meta']["creer_htaccess"] == 'oui') {
-		include_ecrire('inc_acces');
+		include_spip('inc/acces');
 		verifier_htaccess($rep);
 	}
 
@@ -194,7 +194,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 // content-type est connu, et si possible recuperer la taille, voire plus.
 	spip_log ("ajout du document $nom_envoye  (M '$mode' T '$type_lien' L '$id_lien' D '$id_document')");
 	if ($mode == 'distant') {
-		include_ecrire('inc_distant');
+		include_spip('inc/distant');
 		if ($a = recuperer_infos_distantes($source)) {
 			# fichier local pour creer la vignette (!!),
 			# on retablira la valeur de l'url a la fin

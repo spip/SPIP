@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_charsets");	# pour le nom de fichier
+include_spip('inc/charsets');	# pour le nom de fichier
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
-include_ecrire('inc_getdocument');
+include_spip('inc/getdocument');
 
 function action_joindre_dist()
 {
@@ -27,9 +27,9 @@ function action_joindre_dist()
     $url, $chemin, $ancre, $type, $id, $id_document,
     $_FILES,  $HTTP_POST_FILES;
 
-	include_ecrire("inc_session");
+	include_spip('inc/session');
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
      // pas terrible, mais c'est le pb du bouton Submit qui retourne son texte,

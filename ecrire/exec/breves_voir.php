@@ -12,11 +12,11 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_rubriques");
-include_ecrire ("inc_logos");
-include_ecrire ("inc_mots");
-include_ecrire ("inc_date");
+include_spip('inc/presentation');
+include_spip('inc/rubriques');
+include_spip('inc/logos');
+include_spip('inc/mots');
+include_spip('inc/date');
 include_ecrire ("inc_abstract_sql");
 include_spip("inc/indexation");
 
@@ -189,7 +189,7 @@ if ($les_notes) {
 
 	// afficher les extra
 	if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_affichage($extra, "breves");
 	}
 
@@ -267,7 +267,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 
 	// recoller les champs du extra
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		$add_extra = ", extra = '".addslashes(extra_recup_saisie("breves"))."'";
 	} else
 		$add_extra = '';
@@ -276,7 +276,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 
 	// invalider et reindexer
 	if ($invalider_caches) {
-		include_ecrire ("inc_invalideur");
+		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_breve/$id_breve'");
 	}
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {

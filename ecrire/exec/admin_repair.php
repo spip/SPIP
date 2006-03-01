@@ -22,9 +22,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['connect_statut'] = '0minirezo';
 
-include_ecrire ("inc_admin");
-include_ecrire ("inc_texte");
-include_ecrire ("inc_minipres");
+include_spip('inc/admin');
+include_spip('inc/texte');
+include_spip('inc/minipres');
 
 
 function verifier_base() {

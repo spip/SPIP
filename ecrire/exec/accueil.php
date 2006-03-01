@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_texte");
+include_spip('inc/presentation');
+include_spip('inc/texte');
 charger_generer_url();
-include_ecrire("inc_rubriques");
+include_spip('inc/rubriques');
 
 function encours_accueil($vos_articles)
 {
@@ -47,7 +47,7 @@ afficher_breves(afficher_plus(generer_url_ecrire('breves'))._T('info_breves_vali
 	// Les sites references a valider
 	//
 if (afficher_plus(generer_url_ecrire('sites_tous')).$GLOBALS['meta']['activer_syndic'] != 'non') {
-		include_ecrire("inc_sites_voir");
+		include_spip('inc/sites_voir');
 		afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('info_site_valider'), "SELECT * FROM spip_syndic WHERE statut='prop' ORDER BY nom_site");
 	}
 
@@ -55,7 +55,7 @@ if (afficher_plus(generer_url_ecrire('sites_tous')).$GLOBALS['meta']['activer_sy
 	// Les sites a probleme
 	//
 if ($GLOBALS['meta']['activer_syndic'] != 'non' AND $connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
-		include_ecrire("inc_sites_voir");
+		include_spip('inc/sites_voir');
 		afficher_sites(afficher_plus(generer_url_ecrire('sites_tous'))._T('avis_sites_syndiques_probleme'), "SELECT * FROM spip_syndic WHERE (syndication='off' OR syndication='sus') AND statut='publie' ORDER BY nom_site");
 	}
 
@@ -301,7 +301,7 @@ if ($spip_display != 4) {
 	echo debut_cadre_relief("racine-site-24.gif", false, "", $nom_site_spip);
 
 	if ($spip_display != 1) {
-		include_ecrire('inc_logos');
+		include_spip('inc/logos');
 		if ($logo = baliser_logo("rub", 0, 170, 170,
 					 "text-align:center; margin-bottom: 5px;")) {
 		  echo "<a href='",
@@ -470,7 +470,7 @@ if ($vos_articles) $vos_articles = ' AND articles.id_article NOT IN ('.join($vos
 if ($options == 'avancees') {
 
 	// Dernieres modifications d'articles
-	include_ecrire("inc_suivi_versions");
+	include_spip('inc/suivi_versions');
 	afficher_suivi_versions (0, 0, false, "", true);
 }
 

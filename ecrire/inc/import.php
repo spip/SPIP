@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_acces");
-include_ecrire("inc_filtres");
+include_spip('inc/acces');
+include_spip('inc/filtres');
 
 function xml_fetch_tag($f, &$before, $gz=false) {
 	global $buf, $pos, $abs_pos;
@@ -428,7 +428,7 @@ function detruit_non_restaurees($my_date, $tables)
 
 function affiche_progression_javascript($abs_pos) {
 	global $affiche_progression_pourcent;
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 
 	flush();
 	echo "<script type='text/javascript'><!--\n";

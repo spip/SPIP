@@ -95,8 +95,8 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 	if (!$var_confirm) return $confirm;
 	include_local(_FILE_CONNECT);
 	if ($GLOBALS['db_ok']) {
-		include_ecrire("inc_texte");
-		include_ecrire("inc_filtres");
+		include_spip('inc/texte');
+		include_spip('inc/filtres');
 
 		// Eviter les doublons
 		$lock = "petition $id_article $var_confirm";
@@ -160,7 +160,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 					WHERE id_signature='$id_signature'";
 					$result = spip_query($query);
 					// invalider les pages ayant des boucles signatures
-					include_ecrire('inc_invalideur');
+					include_spip('inc/invalideur');
 					include_ecrire('inc_meta');
 					suivre_invalideur("id='varia/pet$id_article'");
 	
@@ -185,9 +185,9 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 function reponse_signature($id_article, $nom_email, $adresse_email, $message, $nom_site, $url_site, $url_page) {
 
 	if ($GLOBALS['db_ok']) {
-		include_ecrire("inc_texte");
-		include_ecrire("inc_filtres");
-		include_ecrire("inc_mail");
+		include_spip('inc/texte');
+		include_spip('inc/filtres');
+		include_spip('inc/mail');
 
 		// Eviter les doublons
 		$lock = "petition $id_article $adresse_email";
@@ -290,7 +290,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 
 
 function test_pass() {
-	include_ecrire("inc_acces");
+	include_spip('inc/acces');
 	for (;;) {
 		$passw = creer_pass_aleatoire();
 		$query = "SELECT statut FROM spip_signatures WHERE statut='$passw'";

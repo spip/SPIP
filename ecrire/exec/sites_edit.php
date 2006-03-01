@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire("inc_presentation");
+include_spip('inc/presentation');
 
 function exec_sites_edit_dist()
 {
@@ -116,7 +116,7 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 	debut_cadre_couleur("$logo_parent", false, "", _T('entree_interieur_rubrique'));
 
 	// selecteur de rubriques
-	include_ecrire('inc_rubriques');
+	include_spip('inc/rubriques');
 	$restreint = ($GLOBALS['statut'] == 'publie');
 	echo selecteur_rubrique($id_rubrique, 'site', $restreint);
 
@@ -182,7 +182,7 @@ else {
 
 
 if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_saisie($extra, 'sites', intval($id_secteur));
 	}
 

@@ -578,7 +578,7 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 
 	// Pre-traitement : reperer le charset du squelette, et le convertir
 	// Bonus : supprime le BOM
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	$squelette = transcoder_page($squelette);
 
 	// Phraser le squelette, selon sa grammaire

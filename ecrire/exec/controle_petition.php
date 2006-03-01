@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_signatures");
+include_spip('inc/presentation');
+include_spip('inc/signatures');
 
 function message_de_signature($row)
 {
@@ -61,7 +61,7 @@ if ($connect_statut == "0minirezo") {
 
 	// Invalider les pages ayant trait aux petitions
 	if ($id_signature = ($add_petition?$add_petition:$supp_petition)) {
-		include_ecrire('inc_invalideur');
+		include_spip('inc/invalideur');
 		list ($id_article) = spip_fetch_array(spip_query("SELECT id_article
 			FROM spip_signatures WHERE id_signature=$id_signature"));
 		suivre_invalideur("id='varia/pet$id_article'");

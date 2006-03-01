@@ -35,7 +35,7 @@ function affiche_boutons_admin($contenu) {
 	//
 	// Regler les boutons dans la langue de l'admin (sinon tant pis)
 	//
-	include_ecrire ("inc_lang");
+	include_spip('inc/lang');
 	$login = addslashes(ereg_replace('^@','',$GLOBALS['spip_admin']));
 	$s = spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'");
 	if ($row = spip_fetch_array($s))

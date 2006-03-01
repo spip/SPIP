@@ -165,11 +165,11 @@ function traduire_chaine($code, $args) {
 
 
 function traduire_nom_langue($lang) {
-	include_ecrire('inc_lang_liste');
+	include_spip('inc/lang_liste');
 	$r = $GLOBALS['codes_langues'][$lang];
 	if (!$r) $r = $lang;
 
-		include_ecrire("inc_charsets");
+		include_spip('inc/charsets');
 		$r = html2unicode($r);
 
 	return $r;
@@ -256,7 +256,7 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 		} else {
 			$cible = _DIR_RESTREINT_ABS . $lien;
 			if (_FILE_CONNECT) {
-				include_ecrire('inc_session');
+				include_spip('inc/session');
 				$args = "id_auteur=$connect_id_auteur&valeur=".calculer_action_auteur('var_lang_ecrire', $connect_id_auteur);
 			}
 		}

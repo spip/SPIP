@@ -15,9 +15,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function action_iconifier_dist()
 {
 	global $action, $arg, $hash, $id_auteur;
-	include_ecrire("inc_session");
+	include_spip('inc/session');
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') 
@@ -41,7 +41,7 @@ function action_spip_image_effacer_dist() {
 function action_spip_image_ajouter_dist() {
 	global $sousaction2, $source, $arg;
 
-	include_ecrire('inc_getdocument');
+	include_spip('inc/getdocument');
 	if (!$sousaction2) {
 		if (!$_FILES) $_FILES = $GLOBALS['HTTP_POST_FILES'];
 		$source = (is_array($_FILES) ? array_pop($_FILES) : "");

@@ -87,7 +87,7 @@ function include_fonction($nom, $dossier='exec') {
 	spip_log("fonction $nom indisponible" .
 		($inc ? "" : "(fichier $dossier/$nom absent)"));
 
-	include_ecrire('inc_minipres');
+	include_spip('inc/minipres');
 	install_debut_html(_T('forum_titre_erreur'));
 	echo '<p>' . _T('fichier_introuvable',
 		array('fichier'=> '<b>'.htmlentities("$dossier/$nom").'</b>'));
@@ -398,7 +398,7 @@ class Link {
 	//
 
 	function getForm($method = 'get', $query = '', $enctype = '') {
-		include_ecrire('inc_filtres');
+		include_spip('inc/filtres');
 
 		if (preg_match(',^[a-z],i', $query))
 			$action = $query;
@@ -429,10 +429,10 @@ function lire_meta($nom) {
 // Traduction des textes de SPIP
 //
 function _T($texte, $args = '') {
-	include_ecrire('inc_lang');
+	include_spip('inc/lang');
 	$text = traduire_chaine($texte, $args);
 	if (!empty($GLOBALS['xhtml'])) {
-		include_ecrire("inc_charsets");
+		include_spip('inc/charsets');
 		$text = html2unicode($text, true /* secure */);
 	}
 
@@ -547,7 +547,7 @@ function cron ($gourmand=false) {
 		// Faut-il travailler ? Pas tous en meme temps svp
 		// Au passage si on travaille on bloque les autres
 		if (spip_touch(_FILE_CRON_LOCK, 2)) {
-			include_ecrire('inc_cron');
+			include_spip('inc/cron');
 			spip_cron();
 		}
 	}
@@ -991,7 +991,7 @@ function spip_initialisation() {
 
 	// appliquer le cookie_prefix
 	if ($GLOBALS['cookie_prefix'] != 'spip') {
-		include_ecrire('inc_cookie');
+		include_spip('inc/cookie');
 		recuperer_cookies_spip($GLOBALS['cookie_prefix']);
 	}
 
@@ -1054,7 +1054,7 @@ function spip_initialisation() {
 
 	// Langue principale du site
 	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
-	if (!$GLOBALS['langue_site']) include_ecrire('inc_lang');
+	if (!$GLOBALS['langue_site']) include_spip('inc/lang');
 	$GLOBALS['spip_lang'] = $GLOBALS['langue_site'];
 
 	// Verifier le visiteur
@@ -1104,7 +1104,7 @@ function verifier_visiteur() {
 	define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
 	if ($_COOKIE['spip_session'] OR
 	($_SERVER['PHP_AUTH_USER']  AND !$GLOBALS['ignore_auth_http'])) {
-		include_ecrire ("inc_session");
+		include_spip('inc/session');
 		verifier_session_visiteur();
 	}
 }

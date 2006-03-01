@@ -20,7 +20,7 @@ $balise_MENU_LANG_ECRIRE_collecte = array('menu_lang');
 // s'il n'y a qu'une langue proposee eviter definitivement la balise ?php 
 function balise_MENU_LANG_ECRIRE_stat ($args, $filtres) {
 	global $all_langs;
-	include_ecrire('inc_lang');
+	include_spip('inc/lang');
 	if (strpos($all_langs,',') === false) return '';
 	return $args;
 }
@@ -32,7 +32,7 @@ function balise_MENU_LANG_ECRIRE_dyn($default) {
 }
 
 function menu_lang_pour_tous($nom, $opt) {
-	include_ecrire("inc_lang");
+	include_spip('inc/lang');
 
 	// Voir s'il y a une langue demandee par _request,
 	// ou une langue par defaut dans le contexte {menu_lang=xx}

@@ -174,7 +174,7 @@ function appliquer_modifs_config() {
 			echo _T('info_adresse_non_indiquee');
 			exit;
 		} else {
-			include_ecrire('inc_distant');
+			include_spip('inc/distant');
 			$page = recuperer_page($test_proxy, true);
 			if ($page)
 				echo "<pre>".entites_html($page)."</pre>";
@@ -261,7 +261,7 @@ function appliquer_modifs_config() {
 	if (isset($GLOBALS['accepter_inscriptions'])
 	AND ($GLOBALS['accepter_inscriptions']
 	!= $GLOBALS['meta']['accepter_inscriptions'])) {
-		include_ecrire('inc_invalideur');
+		include_spip('inc/invalideur');
 		suivre_invalideur("1"); # tout effacer
 	}
 
@@ -289,7 +289,7 @@ function appliquer_modifs_config() {
 			$modif_secu=true;
 	if ($modif_secu) {
 		$admin = _T('info_modification_parametres_securite');
-		include_ecrire ("inc_admin");
+		include_spip('inc/admin');
 		debut_admin(generer_url_post_ecrire($_POST['exec'], cache_post()),$admin);
 		reset($liste_meta);
 		while (list(,$i) = each($liste_meta))

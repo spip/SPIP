@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_minipres");
-include_ecrire ("inc_layer");
-include_ecrire ("inc_texte");
+include_spip('inc/minipres');
+include_spip('inc/layer');
+include_spip('inc/texte');
 
 /////////////////////////////
 // La frame de base
@@ -72,7 +72,7 @@ function fichier_aide($lang_aide = '') {
 		// en cache ?
 		if (!@file_exists($fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html")) {
 			if ($help_server) {
-				include_ecrire('inc_distant');
+				include_spip('inc/distant');
 				if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 				AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")))
 					ecrire_fichier ($fichier_aide, $contenu);
@@ -241,7 +241,7 @@ function help_img($regs) {
 	} else if (@file_exists($img = _DIR_RACINE . 'AIDE/aide-'.$cache)) {
 		readfile($img);
 	} else if ($help_server) {
-		include_ecrire('inc_distant');
+		include_spip('inc/distant');
 		if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
 		AND ($contenu =
 		recuperer_page("$help_server/$rep/$lang/$file"))) {

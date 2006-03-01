@@ -36,7 +36,7 @@ function exec_ajax_page_dist()
 		if ($flag_ob) {
 			$a = ob_get_contents();
 			ob_end_clean();
-			include_ecrire('inc_charsets');
+			include_spip('inc/charsets');
 			echo charset2unicode($a, 'AUTO', true);
 		}
 	}
@@ -57,7 +57,7 @@ function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 			$$i = $k;
 			
 		}
-		include_ecrire("inc_presentation");		
+		include_spip('inc/presentation');		
 		// Appliquer la fonction
 		if ($fonction == "afficher_articles") {
 			afficher_articles ($titre_table, $requete,
@@ -69,8 +69,8 @@ function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 				$afficher_visites, $afficher_auteurs);
 		}
 		elseif ($fonction == "afficher_groupe_mots") {
-			include_ecrire("inc_texte");
-			include_ecrire("inc_mots");
+			include_spip('inc/texte');
+			include_spip('inc/mots');
 			afficher_groupe_mots ($id_groupe);
 		}
 		
@@ -89,7 +89,7 @@ function ajax_page_test($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
 
-		include_ecrire("inc_texte");
+		include_spip('inc/texte');
 		$recherche = addslashes(str_replace("%","\%",$type));
 		$rech2 = split("[[:space:]]+", $recherche);
 		if ($rech2) {
@@ -104,7 +104,7 @@ function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 		}
 
 		if ($exclus) {
-			include_ecrire('inc_rubriques');
+			include_spip('inc/rubriques');
 			$where_exclus = " AND id_rubrique NOT IN (".calcul_branche($exclus).")";
 		} else
 			$where_exclus = '';
@@ -176,8 +176,8 @@ function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 function ajax_page_aff_rubrique($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
-		include_ecrire("inc_texte");
-		include_ecrire("inc_mini_nav");
+		include_spip('inc/texte');
+		include_spip('inc/mini_nav');
 		echo mini_nav ($id, "choix_parent", "this.form.id_rubrique.value=::sel::;this.form.titreparent.value='::sel2::';findObj('selection_rubrique').style.display='none';", $exclus, $rac);
 
 }
@@ -186,8 +186,8 @@ function ajax_page_aff_rubrique($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 function ajax_page_aff_rub($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
-		include_ecrire("inc_texte");
-		include_ecrire("inc_mini_nav");
+		include_spip('inc/texte');
+		include_spip('inc/mini_nav');
 		echo mini_afficher_rubrique ($id, 
 					     htmlentities($rac),
 					     "", $col, $exclus);
@@ -197,8 +197,8 @@ function ajax_page_aff_rub($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 
 function ajax_page_aff_nav_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
-	include_ecrire("inc_texte");
-	include_ecrire("inc_mini_nav");
+	include_spip('inc/texte');
+	include_spip('inc/mini_nav');
 	echo mini_nav ($id, "aff_nav_recherche", 
 			"document.location.href='" . generer_url_ecrire('naviguer', "id_rubrique=::sel::") .
 			"';", 0, true);
@@ -209,7 +209,7 @@ function ajax_page_aff_nav_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $
 function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
   global $couleur_foncee,$spip_display,$spip_lang_right ;
-		include_ecrire("inc_texte");
+		include_spip('inc/texte');
 		if ($type == "rubrique") {
 			$res = spip_query("SELECT titre, descriptif FROM spip_rubriques WHERE id_rubrique = $id");
 			if ($row = spip_fetch_array($res)) {
@@ -227,12 +227,12 @@ function ajax_page_aff_info($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 		echo "<input type='text' id='".$rac."_sel2' value=\"".entites_html($titre)."\" />";
 		echo "</div>";
 
-		include_ecrire ("inc_logos");
+		include_spip('inc/logos');
 
 
 		echo "<div class='arial2' style='padding: 5px; background-color: white; border: 1px solid $couleur_foncee; border-top: 0px;'>";
 		if ($type == "rubrique" AND $spip_display != 1 AND $spip_display!=4 AND $GLOBALS['meta']['image_process'] != "non") {
-			include_ecrire("inc_logos");
+			include_spip('inc/logos');
 			echo baliser_logo("rub",$id, 100, 48,"float: $spip_lang_right; margin-$spip_lang_right: -5px; margin-top: -5px;");
 		}
 

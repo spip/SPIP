@@ -12,10 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_config");
+include_spip('inc/config');
 include_ecrire ("inc_plugin");
-include_ecrire ("inc_presentation");
-include_ecrire ("inc_layer");
+include_spip('inc/presentation');
+include_spip('inc/layer');
 
 function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = false){
 		static $id_input=0;

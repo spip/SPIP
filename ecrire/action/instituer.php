@@ -18,9 +18,9 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function action_instituer_dist() {
 	global $action, $arg, $hash, $id_auteur;
-	include_ecrire("inc_session");
+	include_spip('inc/session');
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 
@@ -54,8 +54,8 @@ function instituer_forum($arg) {
 	$id_parent = $row['id_parent'];
 
 	// invalider les pages comportant ce forum
-	include_ecrire('inc_invalideur');
-	include_ecrire('inc_forum');
+	include_spip('inc/invalideur');
+	include_spip('inc/forum');
 	$index_forum = calcul_index_forum($row['id_article'], $row['id_breve'], $row['id_rubrique'], $row['id_syndic']);
 	suivre_invalideur("id='id_forum/$index_forum'");
 
@@ -95,8 +95,8 @@ function instituer_article($arg) {
 	if ($statut != $statut_ancien) {
 		spip_query("UPDATE spip_articles SET statut='$statut',
 		date=NOW() WHERE id_article=$id_article");
-		include_ecrire("inc_rubriques");
-		include_ecrire('inc_texte');
+		include_spip('inc/rubriques');
+		include_spip('inc/texte');
 		calculer_rubriques();
 
 		cron_articles($id_article, $statut, $statut_ancien);
@@ -118,7 +118,7 @@ function instituer_breve($arg) {
 		spip_query("UPDATE spip_breves SET date_heure=NOW(),
 		statut='$statut' WHERE id_breve=$id_breve");
 
-		include_ecrire("inc_rubriques");
+		include_spip('inc/rubriques');
 		calculer_rubriques();
 	}
 }

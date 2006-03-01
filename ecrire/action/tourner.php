@@ -12,16 +12,16 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_charsets");	# pour le nom de fichier
+include_spip('inc/charsets');	# pour le nom de fichier
 include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
 
 function action_tourner_dist() {
 	
 	global $var_rot, $convert_command, $redirect;
 	global $action, $arg, $hash, $id_auteur;
-	include_ecrire("inc_session");
+	include_spip('inc/session');
 	if (!verifier_action_auteur("$action $arg", $hash, $id_auteur)) {
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		minipres(_T('info_acces_interdit'));
 	}
 	$var_rot = intval($var_rot);
@@ -177,7 +177,7 @@ function creer_fichier_vignette($vignette, $test_cache_only=false) {
 		$ext = $regs[1];
 		$taille_preview = $GLOBALS['meta']["taille_preview"];
 		if ($taille_preview < 10) $taille_preview = 120;
-		include_ecrire('inc_logos');
+		include_spip('inc/logos');
 
 		if ($preview = creer_vignette($vignette, $taille_preview, $taille_preview, $ext, 'vignettes', basename($vignette).'-s', 'AUTO', false, $test_cache_only))
 		{

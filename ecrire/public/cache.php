@@ -47,7 +47,7 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
 	$subdir = sous_repertoire(_DIR_CACHE, substr($md_cache, 0, 1), true);
 
-	include_ecrire('inc_acces');
+	include_spip('inc/acces');
 	verifier_htaccess(_DIR_CACHE);
 
 	return $subdir.$fichier_cache;
@@ -207,7 +207,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 			$use_cache = 0 ;
 		else {
 			spip_log("Erreur base de donnees, impossible utiliser $chemin_cache");
-			include_ecrire('inc_minipres');
+			include_spip('inc/minipres');
 			minipres(_T('info_travaux_titre'),  _T('titre_probleme_technique'));
 		}
 	}
@@ -246,7 +246,7 @@ function creer_cache(&$page, &$chemin_cache, $duree) {
 		. $page['texte']);
 
 	// Inserer ses invalideurs
-	include_ecrire('inc_invalideur');
+	include_spip('inc/invalideur');
 	maj_invalideurs($chemin_cache, $page, $duree);
 
 }

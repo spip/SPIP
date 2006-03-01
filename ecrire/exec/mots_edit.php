@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire ("inc_logos");
+include_spip('inc/presentation');
+include_spip('inc/logos');
 include_ecrire ("inc_abstract_sql");
 
 function exec_mots_edit_dist()
@@ -81,7 +81,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 
 		// recoller les champs du extra
 		if ($champs_extra) {
-			include_ecrire("inc_extra");
+			include_spip('inc/extra');
 			$add_extra = ", extra = '".addslashes(extra_recup_saisie("mots"))."'";
 		} else
 			$add_extra = '';
@@ -221,7 +221,7 @@ if ($id_mot) {
 	"SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC");
 
-	include_ecrire("inc_sites_voir");
+	include_spip('inc/sites_voir');
 	afficher_sites(_T('info_sites_lies_mot'),
 	"SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot'
 	AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC");
@@ -303,7 +303,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 		echo "<input type='hidden' NAME='texte' VALUE=\"$texte\">";
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_saisie($extra, 'mots', $id_groupe);
 	}
 

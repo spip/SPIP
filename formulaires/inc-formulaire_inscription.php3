@@ -50,7 +50,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 	if (!$mail)
 		$message = '';
 	else {
-		include_ecrire('inc_filtres'); // pour email_valide
+		include_spip('inc/filtres'); // pour email_valide
 		$message = message_inscription($mail, $nom, false, $mode, $id_rubrique);
 		if (is_array($message)) {
 			if (function_exists('envoyer_inscription'))
@@ -158,7 +158,7 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 	  . "\n\n- "._T('form_forum_login')." " . $ids['login']
 	  . "\n- ".  _T('form_forum_pass'). " " . $ids['pass'] . "\n\n";
 
-	include_ecrire("inc_mail");
+	include_spip('inc/mail');
 	if (envoyer_mail($ids['email'],
 			 "[$nom_site_spip] "._T('form_forum_identifiants'),
 			 $message))
@@ -168,7 +168,7 @@ function envoyer_inscription_dist($ids, $nom, $mode, $id_rubrique) {
 }
 
 function test_login($nom, $mail) {
-	include_ecrire('inc_charsets');
+	include_spip('inc/charsets');
 	$nom = strtolower(translitteration($nom));
 	$login_base = ereg_replace("[^a-zA-Z0-9_]", "_", $nom);
 
@@ -197,7 +197,7 @@ function test_login($nom, $mail) {
 }
 
 function creer_pass_pour_auteur($id_auteur) {
-	include_ecrire("inc_acces");
+	include_spip('inc/acces');
 	$pass = creer_pass_aleatoire(8, $id_auteur);
 	$mdpass = md5($pass);
 	$htpass = generer_htpass($pass);

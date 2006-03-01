@@ -11,15 +11,15 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire("inc_presentation");
-include_ecrire("inc_sites_voir");
-include_ecrire("inc_syndic");
-include_ecrire("inc_rubriques");
-include_ecrire ("inc_logos");
-include_ecrire ("inc_mots");
-include_ecrire ("inc_date");
+include_spip('inc/presentation');
+include_spip('inc/sites_voir');
+include_spip('inc/syndic');
+include_spip('inc/rubriques');
+include_spip('inc/logos');
+include_spip('inc/mots');
+include_spip('inc/date');
 include_ecrire ("inc_abstract_sql");
-include_ecrire ("inc_config");
+include_spip('inc/config');
 
 function exec_sites_dist()
 {
@@ -164,7 +164,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	
 	// recoller les champs du extra
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		$add_extra = ", extra = '".addslashes(extra_recup_saisie("sites"))."'";
 	} else
 		$add_extra = '';
@@ -191,7 +191,7 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 	// invalider et reindexer
 	if ($statut == 'publie') {
 		if ($invalider_caches) {
-			include_ecrire ("inc_invalideur");
+			include_spip('inc/invalideur');
 			suivre_invalideur("id='id_syndic/$id_syndic'");
 		}
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
@@ -544,7 +544,7 @@ else if (preg_match(',^select: (.*),', trim($url_syndic), $regs)) {
 
 
 if ($champs_extra AND $extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_affichage($extra, "sites");
 	}
 
@@ -575,8 +575,8 @@ fin_page();
 }
 
 function analyser_site($url) {
-	include_ecrire("inc_filtres"); # pour filtrer_entites()
-	include_ecrire("inc_distant");
+	include_spip('inc/filtres'); # pour filtrer_entites()
+	include_spip('inc/distant');
 
 	// Accepter les URLs au format feed:// ou qui ont oublie le http://
 	$url = preg_replace(',^feed://,i', 'http://', $url);
@@ -625,7 +625,7 @@ function analyser_site($url) {
 			$result['descriptif'] = filtrer_entites(supprimer_tags($regs[3]));
 
 		// Cherchons quand meme un backend
-		include_ecrire('inc_distant');
+		include_spip('inc/distant');
 		include_spip('inc/feedfinder');
 		$feeds = get_feed_from_url($url, $texte);
 		if (count($feeds)>1) {

@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_rubriques");
+include_spip('inc/presentation');
+include_spip('inc/rubriques');
 include_spip('inc/documents');
 include_spip ('inc/barre');
 
@@ -256,7 +256,7 @@ echo "<P><HR><P>";
 	}
 
 	if ($champs_extra) {
-		include_ecrire("inc_extra");
+		include_spip('inc/extra');
 		extra_saisie($extra, 'articles', $id_secteur);
 	}
 

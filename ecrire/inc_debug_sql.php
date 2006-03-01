@@ -96,7 +96,7 @@ function erreur_requete_boucle($query, $id_boucle, $type, $errno, $erreur) {
 		. "</b></font><br />"
 		. "<blink>&lt;/BOUCLE".$id_boucle."&gt;</blink></tt>\n";
 
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		$retour .= aide('erreur_mysql');
 		spip_log("Erreur requete $id_boucle (".$GLOBALS['fond'].".html)");
 	}

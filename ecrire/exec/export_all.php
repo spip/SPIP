@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['version_archive'] = '1.2';
 
-include_ecrire('inc_admin');
+include_spip('inc/admin');
 
 function exec_export_all_dist()
 {

@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire("inc_suivi_versions");
+include_spip('inc/presentation');
+include_spip('inc/suivi_versions');
 
 function exec_suivi_revisions_dist()
 {

@@ -14,7 +14,7 @@
 //
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_acces");
+include_spip('inc/acces');
 include_ecrire("inc_serialbase");
 include_ecrire("inc_auxbase");
 include_ecrire("inc_typebase");

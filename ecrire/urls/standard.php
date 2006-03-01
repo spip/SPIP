@@ -80,7 +80,7 @@ function recuperer_parametres_url($fond, $url) {
 //
 
 function generer_url_forum($id_forum, $show_thread=false) {
-	include_ecrire('inc_forum');
+	include_spip('inc/forum');
 	return generer_url_forum_dist($id_forum, $show_thread);
 }
  }

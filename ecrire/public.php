@@ -43,7 +43,7 @@ if (defined("_INC_PUBLIC")) {
 	$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 
 	if ($var_preview AND $html) {
-		include_ecrire('inc_minipres');
+		include_spip('inc/minipres');
 		$page['texte'] .= afficher_bouton_preview();
 	}
 
@@ -103,7 +103,7 @@ if (defined("_INC_PUBLIC")) {
 
 	// Traiter var_recherche pour surligner les mots
 	if ($var_recherche) {
-		include_ecrire("inc_surligne");
+		include_spip('inc/surligne');
 		$page = surligner_mots($page, $var_recherche);
 	}
 

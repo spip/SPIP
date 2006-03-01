@@ -262,7 +262,7 @@ OR _request('action') == 'test_dirs')) {
 		redirige_par_entete(generer_url_ecrire("install"));
 	else if (defined("_INC_PUBLIC")) {
 	// Si on est dans le site public, dire que qq s'en occupe
-		include_ecrire ("inc_minipres");
+		include_spip('inc/minipres');
 		minipres(_T('info_travaux_titre'), "<p>"._T('info_travaux_texte')."</p>");
 	}
 	// autrement c'est une install ad hoc (spikini...), on sait pas faire

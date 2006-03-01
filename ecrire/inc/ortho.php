@@ -373,7 +373,7 @@ function ajouter_cache_ortho($tous, $mauvais, $lang) {
 // Cette fonction doit etre appelee pour reecrire le texte en utf-8 "propre"
 //
 function preparer_ortho($texte, $lang) {
-	include_ecrire("inc_charsets");
+	include_spip('inc/charsets');
 
 	$charset = $GLOBALS['meta']['charset'];
 
@@ -399,9 +399,9 @@ function afficher_ortho($texte) {
 // et retourne un tableau de mots mal orthographies associes chacun a un tableau de mots suggeres
 //
 function corriger_ortho($texte, $lang, $charset = 'AUTO') {
-	include_ecrire("inc_charsets");
+	include_spip('inc/charsets');
 	include_spip("inc/indexation");
-	include_ecrire("inc_filtres");
+	include_spip('inc/filtres');
 
 	$texte = preg_replace(',<code>.*?</code>,is', '', $texte);
 	$texte = preg_replace(',<cadre>.*?</cadre>,is', '', $texte);

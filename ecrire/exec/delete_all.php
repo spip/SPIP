@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_admin');
+include_spip('inc/admin');
 
 function exec_delete_all_dist()
 {

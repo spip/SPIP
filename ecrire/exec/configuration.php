@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
-include_ecrire ("inc_config");
+include_spip('inc/presentation');
+include_spip('inc/config');
 
 function exec_configuration_dist()
 {

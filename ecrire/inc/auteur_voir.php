@@ -124,7 +124,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 			echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
 
 			// selecteur de rubrique
-			include_ecrire('inc_rubriques');
+			include_spip('inc/rubriques');
 			echo selecteur_rubrique(0, 'auteur', false);
 
 			echo "</div>\n";

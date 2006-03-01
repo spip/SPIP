@@ -12,9 +12,9 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire("inc_presentation");
+include_spip('inc/presentation');
 charger_generer_url();
-include_ecrire('inc_forum');
+include_spip('inc/forum');
 
 function forum_parent($id_forum) {
 	$row=spip_fetch_array(spip_query("
