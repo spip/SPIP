@@ -246,10 +246,11 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
-	if ($b === '') {
+	spip_log("tb '$b'");
+	if ($b === '' || !isset($p->boucles[$b])) {
 		erreur_squelette(
 			_T('zbug_champ_hors_boucle',
-				array('champ' => '#TOTAL_BOUCLE')
+				array('champ' => "#$b" . 'TOTAL_BOUCLE')
 			), $p->id_boucle);
 		$p->code = "''";
 	} else {
