@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
-// Le format souhaite : "a/bout-d-url.md5(.gz)"
+// Le format souhaite : "a/bout-d-url.md5" (.gz s'ajoutera pour les gros caches)
 // Attention a modifier simultanement le sanity check de
 // la fonction retire_cache()
 //
@@ -39,9 +39,18 @@ function generer_nom_fichier_cache($contexte, $fond) {
 	if (!$fichier_cache)
 		$fichier_cache = 'INDEX-';
 
-	// morceau de md5 selon HOST, $dossier_squelettes & $fond
-	$md_cache = md5($fichier_requete . $_SERVER['HTTP_HOST']
-		. $fond . $GLOBALS['dossier_squelettes']);
+	// Morceau de md5 selon HOST, $dossier_squelettes, $fond et $marqueur
+	// permet de changer de chemin_cache si l'on change l'un de ces elements
+	// donc, par exemple, de gerer differents dossiers de squelettes
+	// en parallele, ou de la "personnalisation" via un marqueur (dont la
+	// composition est totalement libre...)
+	$md_cache = md5(
+		$fichier_requete . ' '
+		. $_SERVER['HTTP_HOST'] . ' '
+		. $fond . ' '
+		. $GLOBALS['dossier_squelettes'] . ' '
+		. $GLOBALS['marqueur']
+	);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
 	// Sous-repertoires 0...9a..f ; ne pas prendre la base _DIR_CACHE
