@@ -30,7 +30,7 @@ function action_inscription_dist() {
 <head><title>',
   _T('pass_vousinscrire'), 
   '</title>
-<link rel="stylesheet" type="text/css" href="spip_style.css" />
+<link rel="stylesheet" type="text/css" href="'.find_in_path('spip_style.css').'" />
 </head><body>';
 
 	inclure_balise_dynamique(balise_formulaire_inscription_dyn(_request('mode'), _request('focus'), _request('id_rubrique'))

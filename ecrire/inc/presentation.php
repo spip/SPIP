@@ -1738,7 +1738,7 @@ function envoi_link($nom_site_spip, $rubrique="") {
 
 	// CSS par defaut /spip_style.css
 	$res = '<link rel="stylesheet" type="text/css" href="'
-	. _DIR_RACINE . 'spip_style.css'.'" />'
+	. find_in_path('spip_style.css').'" />'
 
 	// CSS espace prive
 	. '<link rel="stylesheet" type="text/css" href="'
