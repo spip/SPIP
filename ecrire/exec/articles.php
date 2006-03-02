@@ -496,20 +496,16 @@ function   comparer_statut_articles($id_article, $statut_nouv, $statut_article, 
 		$ok_nouveau_statut =  ($statut_nouv != $statut_article);
 
 		// 'depublie' => invalider les caches
-		if ($ok_nouveau_statut AND $statut_article == 'publie' 
-		    AND $GLOBALS['invalider_caches']) {
-		  include_spip('inc/invalideur');
-		  suivre_invalideur("id='id_article/$id_article'");
+		if ($ok_nouveau_statut AND $statut_article == 'publie') {
+			include_spip('inc/invalideur');
+			suivre_invalideur("id='id_article/$id_article'");
 		}
 	}
 	return $ok_nouveau_statut ;
 }
 
 
-function cron_articles($id_article, $statut, $statut_ancien)
-{
-	global $invalider_caches;
-
+function cron_articles($id_article, $statut, $statut_ancien) {
 	calculer_rubriques();
 
 	if ($statut == 'publie') {
@@ -521,8 +517,8 @@ function cron_articles($id_article, $statut, $statut_ancien)
 		envoyer_mail_publication($id_article);
 	}
 
-	if ($statut_ancien == 'publie' AND $invalider_caches) {
-	  	include_spip('inc/invalideur');
+	if ($statut_ancien == 'publie') {
+		include_spip('inc/invalideur');
 		suivre_invalideur("id='id_article/$id_article'");
 	}
 

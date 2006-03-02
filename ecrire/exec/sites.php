@@ -32,7 +32,6 @@ global
   $connect_statut,
   $id_parent,
   $id_syndic,
-  $invalider_caches,
   $jour,
   $miroir,
   $moderation,
@@ -190,10 +189,9 @@ if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
 
 	// invalider et reindexer
 	if ($statut == 'publie') {
-		if ($invalider_caches) {
-			include_spip('inc/invalideur');
-			suivre_invalideur("id='id_syndic/$id_syndic'");
-		}
+		include_spip('inc/invalideur');
+		suivre_invalideur("id='id_syndic/$id_syndic'");
+
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
 			marquer_indexer('syndic', $id_syndic);
