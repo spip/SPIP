@@ -422,12 +422,10 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  if ($titre != 'validation') {
 	    $titre = 'zbug_' . $titre;
 	  }
-	  else {
-	      if ($sax = include_fonction('sax', 'inc');
-	      $res = $sax($texte);
-	      if (!$res)
-		$err = _T('impossible');
-	      elseif (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
+
+	  else if ($sax = include_fonction('sax', 'inc')
+	  AND $res = $sax($texte)) {
+	     if (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
 		$fermant = $r[2];
 		$ouvrant = $r[4];
 		$rf = reference_boucle_debug($fermant, $fonc, $self);
@@ -440,6 +438,9 @@ function debug_dumpfile ($texte, $fonc, $type) {
 		  $texte = $res;
 	      }
 	  }
+		else
+			$err = _T('impossible');
+
 	  echo "<div id=\"debug_boucle\"><fieldset><legend>",
 	    _T($titre),	       
 	    ' ',
