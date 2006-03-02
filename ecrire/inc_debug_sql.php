@@ -124,7 +124,7 @@ function erreur_squelette($message='', $lieu='') {
 		if ($_COOKIE['spip_admin'] OR
 		$auteur_session['statut'] == '0minirezo' OR
 		($GLOBALS['var_mode'] == 'debug')) {
-			include_ecrire('inc_headers');
+			include_spip('inc/headers');
 			lang_select($auteur_session['lang']);
 			http_no_cache();
 			echo _DOCTYPE_ECRIRE,
@@ -331,7 +331,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	// - ca fait 2 headers !
 	ob_end_clean();
 
-	include_ecrire('inc_headers');
+	include_spip('inc/headers');
 	http_no_cache();
 	lang_select($auteur_session['lang']);
 	echo _DOCTYPE_ECRIRE,
@@ -423,8 +423,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	    $titre = 'zbug_' . $titre;
 	  }
 	  else {
-	      include_ecrire("inc_spip_sax");
-	      $res = spip_sax($texte);
+	      if ($sax = include_fonction('sax', 'inc');
+	      $res = $sax($texte);
 	      if (!$res)
 		$err = _T('impossible');
 	      elseif (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {

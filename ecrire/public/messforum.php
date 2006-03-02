@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire('inc_meta');
+include_spip('inc/meta');
 include_spip('inc/forum');
 include_spip('inc/filtres');
 include_ecrire("inc_abstract_sql");

@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 define('_FILE_PLUGIN_CONFIG', "plugin.xml");
 
 // besoin de inc_meta
-include_ecrire ("inc_meta");
+include_spip('inc/meta');
 
 // lecture des sous repertoire plugin existants
 function liste_plugin_files(){

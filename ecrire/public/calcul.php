@@ -18,7 +18,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Ce fichier calcule une page en executant un squelette.
 //
 
-include_ecrire("inc_meta");
+include_spip('inc/meta');
 include_spip("inc/indexation");
 include_spip('inc/texte');
 include_spip('inc/lang');

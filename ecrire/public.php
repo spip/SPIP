@@ -33,7 +33,7 @@ if (defined("_INC_PUBLIC")) {
 	$page = calcule_header_et_page ($fond);
 
 	if ($page['status']) {
-			include_ecrire('inc_headers');
+			include_spip('inc/headers');
 			http_status($page['status']);
 	}
 

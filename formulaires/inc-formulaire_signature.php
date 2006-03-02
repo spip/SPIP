@@ -161,7 +161,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 					$result = spip_query($query);
 					// invalider les pages ayant des boucles signatures
 					include_spip('inc/invalideur');
-					include_ecrire('inc_meta');
+					include_spip('inc/meta');
 					suivre_invalideur("id='varia/pet$id_article'");
 	
 					$confirm= (_T('form_pet_signature_validee'));
@@ -231,7 +231,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 				if (!$nom_site) {
 					return _T('form_indiquer_nom_site');
 				}
-				include_ecrire("inc_sites");
+				include_spip('inc/sites');
 	
 				if (!recuperer_page($url_site)) {
 					return _T('form_pet_url_invalide');

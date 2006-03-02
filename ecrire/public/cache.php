@@ -181,7 +181,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
 	if ($GLOBALS['meta']['invalider'] AND $GLOBALS['db_ok']) {
-		include_ecrire('inc_meta');
+		include_spip('inc/meta');
 		lire_metas();
 		retire_caches($chemin_cache);
 	}

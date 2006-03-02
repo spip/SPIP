@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_ecrire('inc_meta');
+include_spip('inc/meta');
 include_spip('inc/session');
 include_spip('inc/acces');
 include_spip('inc/texte');

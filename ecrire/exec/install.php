@@ -127,7 +127,7 @@ function install_6()
 	# maintenant on connait le vrai charset du site s'il est deja configure
 	# sinon par defaut inc_meta reglera _DEFAULT_CHARSET
 	# (les donnees arrivent de toute facon postees en _DEFAULT_CHARSET)
-	include_ecrire ('inc_meta');
+	include_spip('inc/meta');
 	lire_metas();
 
 	if ($login) {
@@ -547,7 +547,7 @@ function install_ldap5()
 	install_debut_html();
 
 	include_once(_FILE_CONNECT_INS . _FILE_TMP . _EXTENSION_PHP);
-	include_ecrire('inc_meta');
+	include_spip('inc/meta');
 	ecrire_meta("ldap_statut_import", $statut_ldap);
 	ecrire_metas();
 

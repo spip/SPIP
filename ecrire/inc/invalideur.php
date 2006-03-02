@@ -13,7 +13,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire('inc_serialbase');
+include_spip('base/serial');
 
 function supprime_invalideurs() {
 	spip_query("DELETE FROM spip_caches");

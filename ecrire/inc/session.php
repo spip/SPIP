@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-include_ecrire ("inc_meta");
+include_spip('inc/meta');
 
 /*
  * Gestion de l'authentification par sessions

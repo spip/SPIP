@@ -2172,7 +2172,7 @@ function init_entete($titre, $rubrique, $css='') {
 		$nom_site_spip=  _T('info_mon_site_spip');
 
 	// envoi des en-tetes, du doctype et du <head><title...
-	include_ecrire('inc_headers');
+	include_spip('inc/headers');
 	http_no_cache();
 	$head = _DOCTYPE_ECRIRE
 		. "<html lang='".$GLOBALS['spip_lang']."' dir='"

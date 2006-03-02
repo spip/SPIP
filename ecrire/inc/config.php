@@ -12,7 +12,7 @@
 
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
-include_ecrire ("inc_meta");
+include_spip('inc/meta');
 
 //
 // Appliquer les valeurs par defaut pour les options non initialisees

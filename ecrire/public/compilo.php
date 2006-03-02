@@ -37,7 +37,7 @@ include_spip('public/balises');
 include_spip('public/compilo-api');
 
 # definition des tables
-include_ecrire('inc_serialbase');
+include_spip('base/serial');
 
 //
 // Calculer un <INCLURE()>
