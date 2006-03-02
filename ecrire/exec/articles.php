@@ -1363,7 +1363,7 @@ function afficher_statut_articles($id_article, $rubrique_article, $statut_articl
 
   if ($connect_statut == '0minirezo' AND acces_rubrique($rubrique_article)) {
   	
-    echo generer_url_post_ecrire("articles", "id_article=$id_article"),
+    echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$rubrique_article"),
 	  debut_cadre_relief("", true),
       "\n<center>", "<B>",_T('texte_article_statut'),"</B>",
 	  "\n<SELECT NAME='statut_nouv' SIZE='1' CLASS='fondl'\n",
