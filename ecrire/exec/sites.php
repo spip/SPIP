@@ -18,8 +18,8 @@ include_spip('inc/rubriques');
 include_spip('inc/logos');
 include_spip('inc/mots');
 include_spip('inc/date');
-include_ecrire ("inc_abstract_sql");
 include_spip('inc/config');
+include_spip('base/abstract_sql');
 
 function exec_sites_dist()
 {

@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/logos');
-include_ecrire ("inc_abstract_sql");
+include_spip('base/abstract_sql');
 
 function exec_mots_edit_dist()
 {

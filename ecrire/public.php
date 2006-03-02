@@ -12,7 +12,11 @@
 
 
 // Distinguer une inclusion d'un appel initial
-if (defined("_INC_PUBLIC")) {
+if (defined('_INC_PUBLIC')) {
+	// $fond passe par INCLURE(){fond=...}
+	if (isset($contexte_inclus['fond']))
+		$fond = $contexte_inclus['fond'];
+
 	$page = inclure_page($fond, $contexte_inclus);
 	if ($page['process_ins'] == 'html')
 		echo $page['texte'];
@@ -23,22 +27,64 @@ if (defined("_INC_PUBLIC")) {
 		lang_dselect();
 
 } else {
-	define ("_INC_PUBLIC", 1);
-	if (!function_exists('find_in_path')) { # cas du script page
-		include ("ecrire/inc_version.php");
-	}
-	include_spip('public/global');
+	define ('_INC_PUBLIC', 1);
 
+	//
+	// Dispatcher les appels
+	//
+
+	// Faut-il initialiser SPIP ? (oui dans le cas general)
+	if (defined('_DIR_RESTREINT_ABS') AND
+	@file_exists(_DIR_RESTREINT_ABS.'inc_version.php')) {
+		include _DIR_RESTREINT_ABS.'inc_version.php';
+	}
+	else
+		die('stupid death...');
+
+
+	// Est-ce une action ?
+	if ($action = _request('action')) {
+		$var_f = include_fonction($action, 'action');
+		$var_f();
+		if ($redirect) redirige_par_entete(urldecode($redirect));
+		exit;
+	}
+
+	// cas normal, $fond defini dans le fichier d'appel
+	// note : securise anti-injection par inc/utils.php
+	else if (isset($fond)) { }
+
+	// page=xxxx demandee par l'url
+	else if (isset($_GET['page'])) {
+		$fond = $_GET['page'];
+		// Securite
+		if (strstr($fond, '/'))
+			die (_L("Faut pas se gener"));
+
+	# par defaut, la globale
+	} else
+		tester_variable('fond', 'sommaire');
+
+	// Particularites de certains squelettes
+	if ($fond == 'login')
+		$forcer_lang = true;
+
+
+	//
+	// Aller chercher la page
+	//
+
+	include_spip('public/global');
 	$tableau_des_erreurs = array();
-	$page = calcule_header_et_page ($fond);
+	$page = calcule_header_et_page($fond);
 
 	if ($page['status']) {
-			include_spip('inc/headers');
-			http_status($page['status']);
+		include_spip('inc/headers');
+		http_status($page['status']);
 	}
 
 	foreach($page['entetes'] as $k => $v)
-		  { header("$k: $v");}
+		@header("$k: $v");
 
 	$html= preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
 
@@ -49,8 +95,8 @@ if (defined("_INC_PUBLIC")) {
 
 	// est-on admin ?
 	if ($affiche_boutons_admin = (
-	$_COOKIE['spip_admin'] 
-	AND ($html OR ($var_mode == 'debug'))
+	$_COOKIE['spip_admin']
+	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
 	))
 		include_spip('inc-formulaire_admin');
 
@@ -88,7 +134,7 @@ if (defined("_INC_PUBLIC")) {
 			// On ne revient pas ici si le nb d'erreurs > 4
 			if ($res === false AND $affiche_boutons_admin
 			AND $auteur_session['statut'] == '0minirezo') {
-				include_ecrire('inc_debug_sql');
+				include_spip('inc/debug');
 				erreur_squelette(_T('zbug_erreur_execution_page'));
 			}
 		}
@@ -96,11 +142,12 @@ if (defined("_INC_PUBLIC")) {
 
 	// Passer la main au debuggueur le cas echeant 
 	if ($var_mode == 'debug') {
-		include_ecrire("inc_debug_sql");
+		include_spip('inc/debug');
 		debug_dumpfile($var_mode_affiche== 'validation' ? $page :"",
 			       $var_mode_objet,$var_mode_affiche);
 	} 
-	if (count($tableau_des_erreurs) > 0 AND $affiche_boutons_admin)
+
+	if (count($tableau_des_erreurs) AND $affiche_boutons_admin)
 		$page = affiche_erreurs_page($tableau_des_erreurs) . $page;
 
 	// Traiter var_recherche pour surligner les mots

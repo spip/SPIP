@@ -21,14 +21,16 @@ function include_ecrire($file, $silence=false) {
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
-	# cas special inc/index => indexation
+	// Version new style, surchargeable
+	# cas speciaux inc/index => indexation ; inc_db_mysql => base/db_mysql
 	if ($r[3] == 'index') return include_spip('inc/indexation');
+	if ($r[3] == 'db_mysql') return include_spip('base/db_mysql');
 
-	# new style, surchargeable
+	# cas general
 	if ($f=include_spip('inc/'.$r[3]))
 		return $f;
 
-	# fichiers old-style, ecrire/inc_truc.php
+	// fichiers old-style, ecrire/inc_truc.php
 	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
 		return include_once($f);
 }
@@ -67,7 +69,7 @@ function include_fonction($nom, $dossier='exec') {
 }
 
 //
-// une fonction destinee a remplacer include_ecrire, pour les surcharges
+// une fonction remplacant include_ecrire, et autorisant les surcharges
 //
 function include_spip($f, $include = true) {
 	static $included_files = array();
@@ -858,9 +860,9 @@ function spip_initialisation() {
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 	define('_FILE_CONNECT',
-		(@is_readable(_FILE_CONNECT_INS . _EXTENSION_PHP) ?
-			(_FILE_CONNECT_INS . _EXTENSION_PHP)
-		 : false));
+		(@is_readable($f = _FILE_CONNECT_INS . '.php') ? $f
+	:	(@is_readable($f = _FILE_CONNECT_INS . '.php3') ? $f
+	:	false)));
 
 	// les repertoires annexes
 	define('_DIR_IMG', _DIR_RACINE ."IMG/");

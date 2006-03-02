@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/meta');
 include_spip('inc/forum');
 include_spip('inc/filtres');
-include_ecrire("inc_abstract_sql");
+include_spip('base/abstract_sql');
 spip_connect();
 
 // Ce fichier est inclus lorsqu'on appelle un script de l'espace public

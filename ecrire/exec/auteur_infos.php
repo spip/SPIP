@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/auteur_voir');
 include_spip('inc/acces');
-include_ecrire ("inc_abstract_sql");
+include_spip('base/abstract_sql');
 
 function exec_auteur_infos_dist()
 {
@@ -372,7 +372,7 @@ echo "<p />";
 
  if ($apparait) apparait_auteur_infos($id_auteur, $auteur);
 
-// Afficher le formulaire de changement de statut (cf. inc_acces)
+// Afficher le formulaire de changement de statut (cf. inc/acces)
 afficher_formulaire_statut_auteur ($id_auteur, $auteur['statut']);
 
 

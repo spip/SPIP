@@ -14,13 +14,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
 include_spip('inc/texte');
-charger_generer_url();
 include_spip('inc/rubriques');
 include_spip('inc/forum');
 include_spip('inc/logos');
 include_spip('inc/mots');
 include_spip('inc/documents');
-include_ecrire("inc_abstract_sql");
+include_spip('base/abstract_sql');
+charger_generer_url();
 
 function exec_naviguer_dist()
 {

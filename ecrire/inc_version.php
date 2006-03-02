@@ -14,7 +14,7 @@
 if (defined("_ECRIRE_INC_VERSION")) return;
 define("_ECRIRE_INC_VERSION", "1");
 
-@define('_EXTENSION_PHP', '.php3');
+@define('_EXTENSION_PHP', '.php');
 
 # le nom du repertoire ecrire/
 @define('_DIR_RESTREINT_ABS', 'ecrire/');
@@ -23,6 +23,7 @@ define("_ECRIRE_INC_VERSION", "1");
  (!@is_dir(_DIR_RESTREINT_ABS) ? "" : _DIR_RESTREINT_ABS));
 # ou inversement ?
 @define('_DIR_RACINE', _DIR_RESTREINT ? '' : '../');
+
 
 //
 // *** Parametrage par defaut de SPIP ***

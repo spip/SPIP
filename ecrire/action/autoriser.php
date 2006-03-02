@@ -14,7 +14,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/charsets');	# pour le nom de fichier
-include_ecrire("inc_abstract_sql");# spip_insert / spip_fetch...
+include_spip('base/abstract_sql');
 
 //  acces aux documents joints securise
 //  est appelee avec arg comme parametre CGI
@@ -89,7 +89,7 @@ breves.statut = 'publie' AND rel_breves.id_document ='".
     spip_log("Acces refuse ($refus) au document " . $arg . ': ' . $file);
     global $fond;
     $fond = 404;
-    include_ecrire('public');
+    include _DIR_INCLUDE.'public.php';
   }
   else
     {

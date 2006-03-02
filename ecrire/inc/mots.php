@@ -618,7 +618,7 @@ function afficher_groupe_mots($id_groupe) {
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 		} else  {
-			include_ecrire ("inc_abstract_sql");
+			include_spip('base/abstract_sql');
 			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
 		}
 		$tranches = ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);

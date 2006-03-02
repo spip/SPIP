@@ -47,7 +47,7 @@ function calculer_inclure($struct, $descr, &$boucles, $id_boucle) {
 
 	# raccourci <INCLURE{fond=xxx}> sans fichier .php
 	if (!strlen($fichier))
-		$path = _DIR_RESTREINT.'page.php';
+		$path = _DIR_RESTREINT.'public.php';
 
 	# sinon chercher le fichier, eventuellement en changeant.php3 => .php
 	else if (!($path = find_in_path($fichier))

@@ -19,13 +19,13 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function chercher_squelette($fond, $id_rubrique, $lang) {
 	$ext = $GLOBALS['extension_squelette'];
 
-	// Accrocher un squelette de base dans le chemin
+	// Accrocher un squelette de base dans le chemin, sinon erreur
 	if (!$base = find_in_path("$fond.$ext")) {
-		// erreur webmaster : $fond ne correspond a rien
+		include_spip('public/debug');
 		erreur_squelette(_T('info_erreur_squelette2',
-			 array('fichier'=>$fond)),
-			 $GLOBALS['dossier_squelettes']);
-		return '';
+			array('fichier'=>$fond)),
+			$GLOBALS['dossier_squelettes']);
+		return substr(find_in_path('404.html'), 0, -strlen(".$ext"));
 	}
 
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue

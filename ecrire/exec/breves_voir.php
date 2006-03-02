@@ -17,7 +17,7 @@ include_spip('inc/rubriques');
 include_spip('inc/logos');
 include_spip('inc/mots');
 include_spip('inc/date');
-include_ecrire ("inc_abstract_sql");
+include_spip('base/abstract_sql');
 include_spip("inc/indexation");
 
 function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot )
