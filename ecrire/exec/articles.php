@@ -121,12 +121,12 @@ debut_cadre_relief();
 // Titre, surtitre, sous-titre
 //
 
-$modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article);
+ $modif = titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique);
 
 
 echo "<div class='serif' align='$spip_lang_left'>";
 
-dates_articles($id_article, $flag_editable, $statut_article, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
+ dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date,$annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac);
 
 //
 // Liste des auteurs de l'article
@@ -144,7 +144,7 @@ debut_cadre_enfonce("auteur-24.gif", false, "", $bouton._T('texte_auteurs').aide
 // Recherche d'auteur
 //
 
-$supprimer_bouton_creer_auteur = rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur);
+ $supprimer_bouton_creer_auteur = rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur);
 
 //
 // Afficher les auteurs
@@ -156,7 +156,7 @@ $les_auteurs = afficher_auteurs_articles($id_article, $flag_editable);
 // Ajouter un auteur
 //
 
-ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur);
+ ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur);
 
 fin_cadre_enfonce(false);
 
@@ -165,7 +165,7 @@ fin_cadre_enfonce(false);
 //
 
 if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
-  formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("articles","id_article=$id_article"));
+  formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
 }
 
  langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad);
@@ -178,7 +178,7 @@ afficher_statut_articles($id_article, $rubrique_article, $statut_article);
 
 if ($flag_editable) {
 	echo "\n\n<div align='$spip_lang_right'><br />";
-	bouton_modifier_articles($id_article, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "");
+	bouton_modifier_articles($id_article, $id_rubrique, $modif,_T('texte_travail_article', $modif), "warning-24.gif", "");
 	echo "</div>";
 }
 
@@ -199,7 +199,7 @@ if ($flag_auteur AND $statut_article == 'prepa') {
 	echo	"<center>",
 		"<B>"._T('texte_proposer_publication')."</B>",
 		aide ("artprop"),
-		generer_url_post_ecrire("articles", "id_article=$id_article"),
+		generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique"),
 		"<input type='hidden' name='statut_nouv' value='prop' />\n",
 		"<input type='submit' class='fondo' value=\"", 
 		_T('bouton_demande_publication'),
@@ -214,7 +214,7 @@ echo "</div>";
 echo "</div>";
 fin_cadre_relief();
 
-affiche_forums_article($id_article, $titre, $debut);
+ affiche_forums_article($id_article, $id_rubrique, $titre, $debut);
 
 fin_page();
 
@@ -314,7 +314,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 	if ($nb_forums) {
 		echo "<br />\n";
-		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article"), "suivi-forum-24.gif", "");
+		icone_horizontale(_T('icone_suivi_forum', array('nb_forums' => $nb_forums)), generer_url_ecrire("articles_forum","id_article=$id_article&id_rubrique=$id_rubrique"), "suivi-forum-24.gif", "");
 	}
 
 	// Reglage existant
@@ -328,7 +328,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	}
 
 	// Afficher le formulaire de modification du reglage
-	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article"));
+	echo formulaire_modification_forums_publics($id_article, $forums_publics, generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
 
 
 	// Petitions
@@ -361,8 +361,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	$message=$petition["message"];
 	$texte_petition=$petition["texte"];
 
-	echo "\n<form action='".generer_url_ecrire("articles","id_article=$id_article")."' method='POST'>";
-	echo "\n<input type='hidden' name='id_article' value='$id_article'>";
+	echo generer_url_post_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique");
 
 	echo "<select name='change_petition'
 		class='fondl' style='font-size:10px;'
@@ -456,7 +455,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	else
 		echo debut_block_invisible("redirection");
 
-	echo generer_url_post_ecrire("articles", "id_article=$id_article");
+	echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");
 	echo "\n<INPUT TYPE='hidden' NAME='changer_virtuel' VALUE='oui'>";
 	$virtuelhttp = ($virtuel ? "" : "http://");
 
@@ -551,27 +550,27 @@ function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='art
 				if ($options == "avancees") {
 					$numero = "<div class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>"._T('info_numero_abbreviation')."$ze_article</b></div>";
 				}
-				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article") . "'>$numero$ze_titre</a>";
+				echo "<a class='$ze_statut' style='font-size: 10px;' href='" . generer_url_ecrire("articles","id_article=$ze_article&id_rubrique=$id_rubrique") . "'>$numero$ze_titre</a>";
 			}
 			echo "</div>";
 			echo "</div>";
 		}
 }
 
-function bouton_modifier_articles($id_article, $flag_modif, $mode, $ip, $im)
+function bouton_modifier_articles($id_article, $id_rubrique, $flag_modif, $mode, $ip, $im)
 {
 	if ($flag_modif) {
-	  icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), $ip, $im);
+	  icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article&id_rubrique=$id_rubrique"), $ip, $im);
 		echo "<font face='arial,helvetica,sans-serif' size='2'>$mode</font>";
 		echo aide("artmodif");
 	}
 	else {
-		icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article"), "article-24.gif", "edit.gif");
+		icone(_T('icone_modifier_article'), generer_url_ecrire("articles_edit","id_article=$id_article&id_rubrique=$id_rubrique"), "article-24.gif", "edit.gif");
 	}
 
 }
 
-function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article)
+function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descriptif, $url_site, $nom_site, $flag_editable, $id_article, $id_rubrique)
 {
 	global  $dir_lang, $spip_lang_left, $connect_id_auteur;
 
@@ -640,7 +639,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 				}
 			}
 		}
-		bouton_modifier_articles($id_article, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif");
+		bouton_modifier_articles($id_article, $id_rubrique, $modif, _T('avis_article_modifie', $modif), "article-24.gif", "edit.gif");
 	
 		echo "</td>";
 	 }
@@ -650,7 +649,7 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 }
 
 
-function dates_articles($id_article, $flag_editable, $statut_article, $date, $annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
+function dates_articles($id_article, $id_rubrique, $flag_editable, $statut_article, $date, $annee, $mois, $jour, $heure, $minute, $date_redac, $annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac)
 {
 
   global $spip_lang_left, $spip_lang_right, $options;
@@ -658,7 +657,7 @@ function dates_articles($id_article, $flag_editable, $statut_article, $date, $an
   if ($flag_editable AND $options == 'avancees') {
 	debut_cadre_couleur();
 
-	echo generer_url_post_ecrire("articles", "id_article=$id_article");
+	echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");
 
 	if ($statut_article == 'publie') {
 
@@ -848,7 +847,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 		// Afficher la liste des traductions
 		if ($id_trad != 0) {
-			$query_trad = "SELECT id_article, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad";
+			$query_trad = "SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad";
 			$result_trad = spip_query($query_trad);
 			
 			
@@ -856,6 +855,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			while ($row = spip_fetch_array($result_trad)) {
 				$vals = '';
 				$id_article_trad = $row["id_article"];
+				$id_rubrique_trad = $row["id_rubrique"];
 				$titre_trad = $row["titre"];
 				$lang_trad = $row["lang"];
 				$statut_trad = $row["statut"];
@@ -880,7 +880,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 				} else {
 				  if ($connect_statut=='0minirezo'
 				  AND $connect_toutes_rubriques)
-				  	$vals[] = "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad") . "'>". 
+				  	$vals[] = "<a href='" . generer_url_ecrire("articles","id_article=$id_article&id_trad_old=$id_trad&id_trad_new=$id_article_trad&id_rubrique=$id_rubrique_trad") . "'>". 
 				    http_img_pack('langues-off-12.gif', _T('trad_reference'), "width='12' height='12' border='0'", _T('trad_reference')) . "</a>";
 				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
 				}
@@ -889,7 +889,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 				$s = typo($titre_trad);
 				if ($id_article_trad != $id_article) 
-					$s = "<a href='" . generer_url_ecrire("articles","id_article=$id_article_trad") . "'>$s</a>";
+					$s = "<a href='" . generer_url_ecrire("articles","id_article=$id_article_trad&id_rubrique=$id_rubrique_trad") . "'>$s</a>";
 				if ($id_article_trad == $id_trad)
 					$s .= " "._T('trad_reference');
 
@@ -927,7 +927,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			// Formulaire pour lier a un article
 			echo "<td class='arial2' width='60%'>";
 
-			echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article") . "' method='post' style='margin:0px; padding:0px;'>";
+			echo "<form action='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique") . "' method='post' style='margin:0px; padding:0px;'>";
 			echo _T('trad_lier');
 			echo "<div align='$spip_lang_right'><input type='text' class='fondl' name='lier_trad' size='5'> <INPUT TYPE='submit' NAME='Valider' VALUE='"._T('bouton_valider')."' CLASS='fondl'></div>";
 			echo "</form>";
@@ -944,7 +944,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 			echo "<td background='" . _DIR_IMG_PACK . "tirets-separation.gif' width='2'>". http_img_pack('rien.gif', " ", "width='2' height='2'") . "</td>";
 			echo "<td background='' width='10'> &nbsp; </td>";
 			echo "<td>";
-			icone_horizontale(_T('trad_delier'), generer_url_ecrire("articles","id_article=$id_article&supp_trad=oui"), "traductions-24.gif", "supprimer.gif");
+			icone_horizontale(_T('trad_delier'), generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&supp_trad=oui"), "traductions-24.gif", "supprimer.gif");
 			echo "</td>\n";
 		}
 
@@ -965,7 +965,7 @@ function add_auteur_article($id_article, $nouv_auteur)
 		$result=spip_query($query);
 }
 
-function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur)
+function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur)
 {
   global $spip_lang_left;
 
@@ -1023,7 +1023,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 				echo "<li><b>".typo($nom_auteur)."</b>";
 
 				if ($email_auteur) echo " ($email_auteur)";
-				echo " | <A href='", generer_url_ecrire('articles', "id_article=$id_article&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs"),
+				echo " | <A href='", generer_url_ecrire('articles', "id_article=$id_article&id_rubrique=$id_rubrique&ajout_auteur=oui&nouv_auteur=$id_auteur#auteurs"),
 				  "'>",_T('lien_ajouter_auteur'),"</A>";
 
 				if (trim($bio_auteur)) {
@@ -1040,7 +1040,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $ajout_auteur
 
 	if ($GLOBALS['connect_statut'] == '0minirezo') {
 		echo "<div style='width: 200px;'>";
-		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
+		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
 		$titre = urlencode($cherche_auteur);
 		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&titre=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
@@ -1140,7 +1140,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 		else $vals[] =  "&nbsp;";
 
 		if ($flag_editable AND ($connect_id_auteur != $id_auteur OR $connect_statut == '0minirezo') AND $options == 'avancees') {
-		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
+		  $vals[] =  "<A href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&supp_auteur=$id_auteur#auteurs") . "'>"._T('lien_retirer_auteur')."&nbsp;". http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") . "</A>";
 		} else {
 			$vals[] = "";
 		}
@@ -1162,7 +1162,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 }
 
 
-function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur)
+function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur)
 {
 
 	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
@@ -1184,7 +1184,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 	    AND $options == "avancees"
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
-	$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
+	$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
 	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
@@ -1194,7 +1194,7 @@ function ajouter_auteurs_articles($id_article, $les_auteurs, $flag_editable, $ru
 
 
 	if (spip_num_rows($result) > 0) {
-		echo generer_url_post_ecrire("articles", "id_article=$id_article");;
+		echo generer_url_post_ecrire("articles", "id_article=$id_article&id_rubrique=$id_rubrique");;
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
@@ -1304,13 +1304,13 @@ function afficher_corps_articles($virtuel, $chapo, $texte, $ps,  $extra)
 	}
 }
 
-function affiche_forums_article($id_article, $titre, $debut, $mute=false)
+function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute=false)
 {
   global $spip_lang_left;
 
   echo "<BR><BR>";
 
-  $forum_retour = generer_url_ecrire("articles","id_article=$id_article", true);
+  $forum_retour = generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique", true);
   
   if (!$mute) {
     $tm = urlencode($titre);
@@ -1335,7 +1335,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
+			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&debut=$i") . "'>$i-$y</A>] ";
 	}
 	echo "</div>";
 }
@@ -1353,7 +1353,7 @@ function affiche_forums_article($id_article, $titre, $debut, $mute=false)
 		if ($i == $debut)
 			echo "<FONT SIZE=3><B>[$i-$y]</B></FONT> ";
 		else
-			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&debut=$i") . "'>$i-$y</A>] ";
+			echo "[<A href='" . generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique&debut=$i") . "'>$i-$y</A>] ";
 	  }
 	  echo "</div>";
 	}

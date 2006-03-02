@@ -1172,7 +1172,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$vals[] = puce_statut_breve($id_breve, $statut, 'breve', ($droit && acces_rubrique($id_rubrique)), $id_rubrique);
 
 			$s = "<div>";
-			$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve") . "' style=\"display:block;\">";
+			$s .= "<a href='" . generer_url_ecrire("breves_voir","id_breve=$id_breve&id_rubrique=$id_rubrique") . "' style=\"display:block;\">";
 
 			if ($voir_logo) $s .= baliser_logo("breve", $id_breve, 26, 20);
 			$s .= typo($titre);
@@ -2200,6 +2200,9 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='') {
 	global $options, $spip_display, $spip_ecran;
 	global $spip_lang, $spip_lang_rtl, $spip_lang_left, $spip_lang_right;
 	global $browser_verifForm;
+	global $id_rubrique;
+
+	$id_rubrique = intval($id_rubrique);
 
 	echo "<body ". _ATTRIBUTES_BODY
 		. 'onLoad="'
@@ -2336,7 +2339,6 @@ if (true /*$bandeau_colore*/) {
 //		echo "<a href='" . generer_url_ecrire("articles_tous","") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible');\">" .
 //		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 
-		$id_rubrique = $GLOBALS['id_rubrique'];
 		echo "<a href='" . generer_url_ecrire("articles_tous") . "' class='icone26' onMouseOver=\"changestyle('bandeautoutsite','visibility','visible'); charger_id_url_si_vide('" . generer_url_ecrire("ajax_page", "fonction=aff_nav_recherche&id=$id_rubrique", true) . "','nav-recherche');\">",
 		  http_img_pack("tout-site.png", "", "width='26' height='20' border='0'") . "</a>";
 		if ($id_rubrique > 0) echo "<a href='" . generer_url_ecrire("brouteur","id_rubrique=$id_rubrique") . "' class='icone26' onMouseOver=\"changestyle('bandeaunavrapide','visibility','visible');\">" .
@@ -2540,7 +2542,6 @@ if (true /*$gadgets*/) {
 		
 		if (spip_num_rows($result) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
-			$id_rubrique = $GLOBALS['id_rubrique'];
 			if ($id_rubrique > 0) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";

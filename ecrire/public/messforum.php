@@ -17,8 +17,9 @@ include_spip('inc/filtres');
 include_ecrire("inc_abstract_sql");
 spip_connect();
 
-// Ce fichier inclus par inc-public a un comportement special
-// Voir commentaires dans celui-ci et dans inc-formulaire_forum
+// Ce fichier est inclus lorsqu'on appelle un script de l'espace public
+// avec une variable d'URL nomme confirmer_forum 
+// Voir commentaires dans inc-formulaire_forum
 function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte, $titre, $statut) {
 	global $nom_site_forum, $url_site;
 	include_spip('inc/texte');
