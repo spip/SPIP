@@ -638,10 +638,11 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 		// Ajouter squelettes/
 		array_unshift($path, _DIR_RACINE.'squelettes/');
 
-		// Et le dossier des squelettes nomme
+		// Et le(s) dossier(s) des squelettes nommes
 		if ($GLOBALS['dossier_squelettes'])
-			array_unshift($path,
-			_DIR_RACINE.$GLOBALS['dossier_squelettes'].'/');
+			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
+				array_unshift($path,
+				_DIR_RACINE.$d.'/');
 	}
 
 	// Parcourir le chemin
