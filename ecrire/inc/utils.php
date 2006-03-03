@@ -84,10 +84,11 @@ function include_spip($f, $include = true) {
 
 	// une surcharge existe ?
 	if (!$s = find_in_path($f . '.php')
-	AND !$s = find_in_path($f . '.php3')
+	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))
 	// sinon, le fichier existe dans le repertoire ecrire ?
 	AND !is_readable($s = _DIR_INCLUDE . $f . '.php')
-	AND !is_readable($s = _DIR_INCLUDE . $f . '.php3'))
+	AND (!_EXTENSION_PHP OR !is_readable($s = _DIR_INCLUDE . $f . '.php3'))
+)
 		return $included_files[$f] = false;
 
 	// deja charge (chemin complet) ?
@@ -619,11 +620,11 @@ function texte_script($texte) {
 // find_in_path() : chercher un fichier nomme x selon le chemin rep1:rep2:rep3
 //
 
-function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
+function find_in_path ($filename) {
 
 	// Chemin standard depuis l'espace public
-	if ($path == 'AUTO') {
-		$path = defined('_SPIP_PATH') ? explode(':', _SPIP_PATH) : 
+
+	$path = defined('_SPIP_PATH') ? explode(':', _SPIP_PATH) : 
 			array(
 				_DIR_RACINE,
 				_DIR_RACINE.'dist/',
@@ -632,23 +633,16 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 			);
 
 		// Ajouter les repertoires des plugins
-		foreach ($GLOBALS['plugins'] as $plug)
+	foreach ($GLOBALS['plugins'] as $plug)
 			array_unshift($path, _DIR_PLUGINS.$plug.'/');
 
 		// Ajouter squelettes/
-		array_unshift($path, _DIR_RACINE.'squelettes/');
+	array_unshift($path, _DIR_RACINE.'squelettes/');
 
 		// Et le(s) dossier(s) des squelettes nommes
-		if ($GLOBALS['dossier_squelettes'])
-			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
-				array_unshift($path,
-				_DIR_RACINE.$d.'/');
-	}
-
-	// Parcourir le chemin
-	# Attention, dans l'espace prive on a parfois sinon='' pour _DIR_INCLUDE
-	if ($sinon !== NULL)
-		array_push($path, $sinon);
+	if ($GLOBALS['dossier_squelettes'])
+		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
+			array_unshift($path, _DIR_RACINE.$d.'/');
 
 	foreach ($path as $dir) {
 		// ajouter un / eventuellement manquant a la fin
@@ -658,7 +652,7 @@ function find_in_path ($filename, $sinon = NULL, $path='AUTO') {
 			return $f;
 		}
 	}
-#	spip_log("find_in_path n'a pas vu '$filename' dans $path");
+# spip_log("find_in_path n'a pas vu '$filename' dans " . join(',', $path));
 }
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
@@ -885,6 +879,7 @@ function spip_initialisation() {
 	define('_DIR_TRANSFERT', _DIR_RESTREINT . "upload/");
 	define('_DIR_PLUGINS', _DIR_RACINE . "plugins/");
 	define('_DIR_LOGOS', _DIR_RACINE ."IMG/");
+	define('_DIR_POLICES', _DIR_RESTREINT ."polices/");
 
 	// les fichiers qu'on y met, entre autres
 	define('_FILE_CRON_LOCK', _DIR_SESSIONS . 'cron.lock');
