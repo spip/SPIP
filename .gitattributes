@@ -3,6 +3,10 @@ IMG/logo_spip.jpg -text
 /INSTALL.txt -text
 /UPGRADE.txt -text
 dist/choix_mots.html -text
+dist/favicon.ico -text
+dist/puce.gif -text
+dist/puce_rtl.gif -text
+dist/rien.gif -text
 dist/style_prive.html -text
 ecrire/action/autoriser.php -text
 ecrire/action/ical.php -text
@@ -131,7 +135,6 @@ ecrire/img_pack/documents-48.png -text
 ecrire/img_pack/documents-48_rtl.png -text
 ecrire/img_pack/edit.gif -text
 ecrire/img_pack/effacer-cache-24.gif -text
-ecrire/img_pack/favicon.ico -text
 ecrire/img_pack/feed.png -text
 ecrire/img_pack/fiche-perso-24.gif -text
 ecrire/img_pack/fiche-perso.png -text
@@ -267,8 +270,6 @@ ecrire/img_pack/puce-rouge.gif -text
 ecrire/img_pack/puce-verte-anim.gif -text
 ecrire/img_pack/puce-verte-breve.gif -text
 ecrire/img_pack/puce-verte.gif -text
-ecrire/img_pack/puce.gif -text
-ecrire/img_pack/puce_rtl.gif -text
 ecrire/img_pack/racine-24.gif -text
 ecrire/img_pack/racine-site-12.gif -text
 ecrire/img_pack/racine-site-24.gif -text
@@ -375,7 +376,4 @@ ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
 /inc-public.php3 -text
 /index.php -text
-/puce.gif -text
-/puce_rtl.gif -text
-/rien.gif -text
 /spip.php -text

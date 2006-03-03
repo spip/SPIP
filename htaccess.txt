@@ -75,8 +75,10 @@ RewriteRule breve([0-9]+)\.html$	spip.php?page=breve&id_breve=$1 [QSA,L]
 RewriteRule mot([0-9]+)\.html$		spip.php?page=mot&id_mot=$1 [QSA,L]
 RewriteRule auteur([0-9]+)\.html$	spip.php?page=auteur&id_auteur=$1 [QSA,L]
 RewriteRule site([0-9]+)\.html$	spip.php?page=site&id_syndic=$1 [QSA,L]
-# Compatibilite avec les URLS "standard"
+# Compatibilite avec les anciennes URLS appelant directement des fichiers php
 RewriteRule ^(rubrique|article|breve|mot|auteur|site|agenda|backend|backend-breves|distrib|forum|ical|plan|recherche|resume|sommaire|sommaire_texte)\.php3?$	spip.php?page=$1 [QSA,L]
+RewriteRule ^spip_cal\.php3?$	spip.php?action=ical [QSA,L]
+RewriteRule ^spip_rss\.php3?$	spip.php?action=rss [QSA,L]
 # Fin compatibilite
 ###
 

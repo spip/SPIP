@@ -66,8 +66,7 @@ function balise_LANG_DIR_dist($p) {
 }
 
 function balise_PUCE_dist($p) {
-	$_lang = champ_sql('lang', $p);
-	$p->code = "((lang_dir(($_lang ? $_lang : \$GLOBALS['spip_lang']),false,true) && \$GLOBALS['puce_rtl']) ? \$GLOBALS['puce_rtl'] : \$GLOBALS['puce'])";
+	$p->code = "definir_puce()";
 	$p->interdire_scripts = false;
 	return $p;
 }

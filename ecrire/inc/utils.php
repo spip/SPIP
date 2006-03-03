@@ -16,15 +16,17 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Gestion des inclusions et infos repertoires
 //
 
+# fonction obsolete, assurant la compatilibite ascendante
 function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
 	// Version new style, surchargeable
-	# cas speciaux inc/index => indexation ; inc_db_mysql => base/db_mysql
+	# cas speciaux
 	if ($r[3] == 'index') return include_spip('inc/indexation');
 	if ($r[3] == 'db_mysql') return include_spip('base/db_mysql');
+	if ($r[3] == 'connect') { spip_connect(); return; }
 
 	# cas general
 	if ($f=include_spip('inc/'.$r[3]))
@@ -204,7 +206,27 @@ function spip_connect() {
 	static $t;
 	if ($t++) return;
 
+	include_spip('base/db_mysql');
 	include_once(_FILE_CONNECT);
+
+	// Version courante = 0.3
+	//
+	// les versions 0.1 et 0.2 fonctionnent toujours, meme si :
+	// - la version 0.1 est moins performante que la 0.2
+	// - la 0.2 fait un include_ecrire('inc_db_mysql.php3')
+	// En tout cas on ne force pas la mise a niveau
+	if ($GLOBALS['spip_connect_version'] >= 0.1)
+		return;
+
+	// La version 0.0 (non numerotee) doit etre refaite
+	if ($GLOBALS['spip_connect_version'] < 0.1) {
+		if (!_DIR_RESTREINT) {
+			$GLOBALS['db_ok'] = false;
+			return;
+		}
+		redirige_par_entete(
+			generer_url_ecrire('upgrade', 'reinstall=oui', true));
+	}
 }
 
 function spip_query($query) {
@@ -215,20 +237,10 @@ function spip_query($query) {
 		// Essaie de se connecter
 		if (_FILE_CONNECT)
 			spip_connect();
-		# else ????
-	}
 
-	// Erreur de connexion
-	if (!$GLOBALS['db_ok'])
-		return;
-
-	// Vieux format de fichier connexion
-	// Note: la version 0.1 est compatible avec la 0.2 (mais elle gere
-	// moins bien les erreurs timeout sur SQL), on ne force donc pas l'upgrade
-	if ($GLOBALS['spip_connect_version'] < 0.1) {
-		if (!_DIR_RESTREINT) {$GLOBALS['db_ok'] = false; return;}
-		redirige_par_entete(
-			generer_url_ecrire('upgrade', 'reinstall=oui', true));
+		// Erreur de connexion
+		if (!$GLOBALS['db_ok'])
+			return;
 	}
 
 	// Faire la requete

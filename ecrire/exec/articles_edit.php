@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('inc/presentation');
 include_spip('inc/rubriques');
 include_spip('inc/documents');
-include_spip ('inc/barre');
+include_spip('inc/barre');
 
 //
 // Gestion des textes trop longs (limitation brouteurs)
@@ -322,22 +322,10 @@ function exec_articles_edit_dist()
 // ESSAI pour "Joindre un document" depuis l'espace prive (UPLOAD_DIRECT)
 /*if ($GLOBALS['action'] AND $GLOBALS['doc']) {
 	global $action, $doc;
-
-	$var_nom = "spip_image";
-	$var_f = find_in_path('inc_' . $var_nom . '.php');
-	if ($var_f) 
-		include($var_f);
-	else include_ecrire('inc_' . $var_nom);
-
-	$var_nom .= '_' . $action;
-
-	if (function_exists($var_nom))
+	if ($var_nom = include_fonction($action, 'action'))
 		$var_nom($doc);
-	elseif (function_exists($var_f = $var_nom . '_dist'))
-		$var_f($doc);
 	else
 		spip_log("fonction $var_nom indisponible");
-
 #	return;
 }*/
 

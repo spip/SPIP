@@ -45,7 +45,7 @@ function definir_puce() {
 	if (!isset($les_puces[$p])) {
 		tester_variable($p, 'AUTO');
 		if ($GLOBALS[$p] == 'AUTO') {
-			$img = find_in_path($p.'.gif', _DIR_IMG_PACK);
+			$img = find_in_path($p.'.gif');
 			list(,,,$size) = @getimagesize($img);
 			$img = '<img src="'.$img.'" '
 				.$size.' alt="-" border="0" />';
