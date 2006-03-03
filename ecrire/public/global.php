@@ -33,8 +33,8 @@ function calcule_header_et_page ($fond) {
 
 	if (strlen($_POST['confirmer_forum']) > 0
 	    OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
-		include_spip('public/messforum');
-		redirige_par_entete(enregistre_forum());
+		$f = include_fonction('forum_insert', 'inc');
+		redirige_par_entete($f());
 	}
 
 	// si signature de petition, l'enregistrer avant d'afficher la page
