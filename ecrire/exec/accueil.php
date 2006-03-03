@@ -209,7 +209,7 @@ if ($spip_display == 4) {
 // Modification du cookie
 //
 
-if ($connect_statut == "0minirezo" AND $spip_display != 4) {
+if (/* $connect_statut == "0minirezo" AND */ $spip_display != 4) {
 	if (!$_COOKIE['spip_admin']) {
 		$gadget .= "<div>&nbsp;</div>".
 			"<table width=95%><tr>".
