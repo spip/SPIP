@@ -203,7 +203,7 @@ $extension_squelette = 'html';
 $spip_version = 1.907;
 
 // version de spip
-$spip_version_affichee = "1.9 alpha 3";
+$spip_version_affichee = '1.9 beta 1';
 
 // ** Securite **
 $auteur_session = '';
