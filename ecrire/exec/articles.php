@@ -1336,7 +1336,10 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 	echo "</div>";
 }
 
-	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC LIMIT $total_afficher OFFSET $debut");
+	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .
+#				   " LIMIT $total_afficher OFFSET $debut" # PG
+				   " LIMIT $debut,$total_afficher"
+				   ); 
 
 	afficher_forum($result_forum, $forum_retour, $mute);
 
