@@ -142,8 +142,11 @@ function critere_traduction_dist($idb, &$boucles, $crit) {
 // http://www.spip.net/@origine_traduction
 function critere_origine_traduction_dist($idb, &$boucles, $crit) {
 	$boucle = &$boucles[$idb];
-	$boucle->where[] = $boucle->id_table.".id_trad = "
+	$where = $boucle->id_table.".id_trad = "
 	  . $boucle->id_table . '.' . $boucle->primary;
+	if ($crit->not)
+		$where = "NOT($where)";
+	$boucle->where[] = $where;
 }
 
 
