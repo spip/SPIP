@@ -2168,7 +2168,29 @@ function abs_url($texte, $base='') {
 
 // Image typographique
 
-function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, $textSize, $align="left", $hauteur_ligne = 0) {
+function printWordWrapped($image, $top, $left, $maxWidth, $font, $couleur, $text, $textSize, $align="left", $hauteur_ligne = 0) {
+	
+	// calculer les couleurs ici, car fonctionnement different selon TTF ou PS
+	$black = imagecolorallocatealpha($image, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 0);
+	$grey2 = imagecolorallocatealpha($image, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 127);
+
+	// Gaffe, T1Lib ne fonctionne carrement pas bien des qu'on sort de ASCII
+	// C'est dommage, parce que la rasterisation des caracteres est autrement plus jolie qu'avec TTF.
+	// A garder sous le coude en attendant que ca ne soit plus une grosse bouse.
+	// Si police Postscript et que fonction existe...
+	if (ereg("\.pfb$", $font) AND function_exists("imagepstext") AND 1==2) {
+		// Traitement specifique pour polices PostScript (experimental)
+		$textSizePs = round(1.32 * $textSize);
+		if ($GLOBALS["font"]["$font"]) {
+			$fontps = $GLOBALS["font"]["$font"];
+		}
+		else  {
+			$fontps = imagepsloadfont($font);
+			// Est-ce qu'il faut reencoder? Pas testable proprement, alors... 
+			// imagepsencodefont( $fontps, find_in_path(_DIR_POLICES . "standard.enc") );
+			$GLOBALS["font"]["$font"] = $fontps;
+		}
+	}
 	$words = explode(' ', strip_tags($text)); // split the text into an array of single words
 	if ($hauteur_ligne == 0) 	$lineHeight = floor($textSize * 1.3);
 	else $lineHeight = $hauteur_ligne;
@@ -2196,7 +2218,13 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 		if ($align == "right") $left_pos = $maxWidth - $largeur_ligne;
 		else if ($align == "center") $left_pos = floor(($maxWidth - $largeur_ligne)/2);
 		else $left_pos = 0;
-		imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $color, $font, trim($line), array());
+		if ($fontps) {
+			$line = trim($line);
+			imagepstext ($image, "$line", $fontps, $textSizePs, $black, $grey2, $left + $left_pos, $top + $lineHeight * $i, 0, 0, 0, 16);
+		}
+		else imagefttext($image, $textSize, 0, $left + $left_pos, $top + $lineHeight * $i, $black, $font, trim($line), array());
+
+
 		$i++;
 	}
 	$retour["height"] = $height + round(0.3 * $hauteur_ligne);
@@ -2207,6 +2235,8 @@ function printWordWrapped($image, $top, $left, $maxWidth, $font, $color, $text, 
 	$retour["espace"] = $largeur_espace;
 	return $retour;
 }
+//array imagefttext ( resource image, float size, float angle, int x, int y, int col, string font_file, string text [, array extrainfo] )
+//array imagettftext ( resource image, float size, float angle, int x, int y, int color, string fontfile, string text )
 
 
 
@@ -2216,15 +2246,12 @@ function image_typo() {
 	
 	$texte : le texte a transformer; attention: c'est toujours le premier argument, et c'est automatique dans les filtres
 	$couleur : la couleur du texte dans l'image - pas de dieze
-	$fond: ne pas utiliser, puisque transparence du PNG
-	$ombre: la couleur de l'ombre
-	$ombrex, $ombrey: les decalages en pixels de l'ombre
-	$police: nom du fichier Truetype de la police
+	$police: nom du fichier de la police (inclure terminaison)
 	$largeur: la largeur maximale de l'image ; attention, l'image retournee a une largeur inferieure, selon les limites reelles du texte
 	$hauteur_ligne: la hauteur de chaque ligne de texte si texte sur plusieurs lignes
 	(equivalent a "line-height")
 	$alt: pour forcer l'affichage d'un alt; attention, comme utilisation d'un span invisible pour affiche le texte, generalement inutile
-
+	$padding: forcer de l'espace autour du placement du texte; necessaire pour polices a la con qui "depassent" beaucoup de leur boite 
 	*/
 
 
@@ -2252,17 +2279,8 @@ function image_typo() {
 	$couleur = $variable["couleur"];
 	if (strlen($couleur) < 6) $couleur = "000000";
 
-	$fond = $variable["fond"];
-	if (strlen($fond) < 6) $fond = "ffffff";
-	
 	$alt = $texte;
-	
-	$ombre = $variable["ombre"];
-	$ombrex = $variable["ombrex"];
-	$ombrey = $variable["ombrey"];
-	if (!$variable["ombrex"]) $ombrex = 1;
-	if (!$variable["ombrey"]) $ombrey = $ombrex;
-	
+		
 	$align = $variable["align"];
 	if (!$variable["align"]) $align="left";
 	 
@@ -2274,10 +2292,12 @@ function image_typo() {
 
 	if ($variable["hauteur_ligne"] > 0) $hauteur_ligne = $variable["hauteur_ligne"];
 	else $hauteur_ligne = 0;
+	if ($variable["padding"] > 0) $padding = $variable["padding"];
+	else $padding = 0;
 	
 
 
-	$string = "$text-$taille-$couleur-$fond-$ombre-$ombrex-$ombrey-$align-$police-$largeur-$hauteur_ligne";
+	$string = "$text-$taille-$couleur-$align-$police-$largeur-$hauteur_ligne-$padding";
 	$query = md5($string);
 	$dossier = sous_repertoire(_DIR_IMG, 'cache-texte');
 	$fichier = "$dossier$query.png";
@@ -2291,29 +2311,26 @@ function image_typo() {
 		$font = find_in_path(_DIR_POLICES . $police);
 
 		$imgbidon = imageCreateTrueColor($largeur, 45);
-		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $black, $text, $taille, 'left', $hauteur_ligne);
+		$retour = printWordWrapped($imgbidon, $taille+5, 0, $largeur, $font, $couleur, $text, $taille, 'left', $hauteur_ligne);
 		$hauteur = $retour["height"];
 		$largeur_reelle = $retour["width"];
 		$espace = $retour["espace"];
 		imagedestroy($imgbidon);
 		
-		$im = imageCreateTrueColor($largeur_reelle+$ombrex-$espace, $hauteur+5+$ombrey);
+		$im = imageCreateTrueColor($largeur_reelle-$espace+(2*$padding), $hauteur+5+(2*$padding));
 		imagealphablending ($im, FALSE );
 		imagesavealpha ( $im, TRUE );
 		
 		// Création de quelques couleurs
-		if (strlen($ombre) == 6) $grey = imagecolorallocatealpha($im, hexdec("0x{".substr($ombre, 0,2)."}"), hexdec("0x{".substr($ombre, 2,2)."}"), hexdec("0x{".substr($ombre, 4,2)."}"), 50);
-		$black = imagecolorallocatealpha($im, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 0);
-		$grey2 = imagecolorallocatealpha($im, hexdec("0x{".substr($fond, 0,2)."}"), hexdec("0x{".substr($fond, 2,2)."}"), hexdec("0x{".substr($fond, 4,2)."}"), 127);
 		
-		ImageFilledRectangle ($im,0,0,$largeur+$ombrex,$hauteur+5+$ombrey,$grey2);
+		$grey2 = imagecolorallocatealpha($im, hexdec("0x{".substr($couleur, 0,2)."}"), hexdec("0x{".substr($couleur, 2,2)."}"), hexdec("0x{".substr($couleur, 4,2)."}"), 127);
+		ImageFilledRectangle ($im,0,0,$largeur+(2*$padding),$hauteur+5+(2*$padding),$grey2);
 		
 		// Le texte à dessiner
 		// Remplacez le chemin par votre propre chemin de police
 		//global $text;
 				
-		if (strlen($ombre) == 6) printWordWrapped($im, $taille+$ombrey+5, $ombrex, $largeur, $font, $grey, $text, $taille, $align, $hauteur_ligne);
-		printWordWrapped($im, $taille+5, 0, $largeur, $font, $black, $text, $taille, $align, $hauteur_ligne);
+		printWordWrapped($im, $taille+5+$padding, $padding, $largeur, $font, $couleur, $text, $taille, $align, $hauteur_ligne);
 		
 		
 		// Utiliser imagepng() donnera un texte plus claire,
