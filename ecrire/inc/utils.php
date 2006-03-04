@@ -621,39 +621,53 @@ function texte_script($texte) {
 //
 
 function find_in_path ($filename) {
+	static $path_a = array();
+	static $c = '';
 
-	// Chemin standard depuis l'espace public
+	// on calcule le chemin si le nombre de plugins a change
+	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {
+		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
 
-	$path = defined('_SPIP_PATH') ? explode(':', _SPIP_PATH) : 
-			array(
-				_DIR_RACINE,
-				_DIR_RACINE.'dist/',
-				_DIR_RACINE.'formulaires/',
-				_DIR_RESTREINT
-			);
+		// Chemin standard depuis l'espace public
+		$path = defined('_SPIP_PATH') ? _SPIP_PATH : 
+			_DIR_RACINE.':'.
+			_DIR_RACINE.'dist/:'.
+			_DIR_RACINE.'formulaires/:'.
+			_DIR_RESTREINT;
 
-	// Ajouter les repertoires des plugins
-	foreach ($GLOBALS['plugins'] as $plug)
-		array_unshift($path, _DIR_PLUGINS.$plug.'/');
+		// Ajouter les repertoires des plugins
+		if ($GLOBALS['plugins'])
+			$path = _DIR_PLUGINS
+				. join(':'._DIR_PLUGINS, $GLOBALS['plugins'])
+				. ':' . $path;
 
-	// Ajouter squelettes/
-	array_unshift($path, _DIR_RACINE.'squelettes/');
+		// Ajouter squelettes/
+		$path = _DIR_RACINE.'squelettes/:' . $path;
 
-	// Et le(s) dossier(s) des squelettes nommes
-	if ($GLOBALS['dossier_squelettes'])
-		foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
-			array_unshift($path,
-				($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/');
+		// Et le(s) dossier(s) des squelettes nommes
+		if ($GLOBALS['dossier_squelettes'])
+			foreach (explode(':', $GLOBALS['dossier_squelettes']) as $d)
+				$path = 
+					($d[0] == '/' ? '' : _DIR_RACINE) . $d . '/:' . $path;
 
-	foreach ($path as $dir) {
-		// ajouter un / eventuellement manquant a la fin
-		if (strlen($dir) AND substr($dir,-1) != '/') $dir .= "/";
+		// nettoyer les / du path
+		$path_a = array();
+		foreach (explode(':', $path) as $dir) {
+			if (strlen($dir) AND substr($dir,-1) != '/')
+				$dir .= "/";
+			$path_a[] = $dir;
+		}
+	}
+
+	// Parcourir le chemin
+	foreach ($path_a as $dir) {
 		if (@is_readable($f = "$dir$filename")) {
-#			spip_log("find_in_path trouve $f");
+# spip_log("find_in_path trouve $f");
 			return $f;
 		}
 	}
-# spip_log("find_in_path n'a pas vu '$filename' dans " . join(',', $path));
+
+# spip_log("find_in_path n'a pas vu '$filename' dans " . $path);
 }
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
