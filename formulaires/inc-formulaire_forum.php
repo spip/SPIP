@@ -61,10 +61,6 @@ function balise_FORMULAIRE_FORUM_stat($args, $filtres) {
 
 	list ($titre, $table, $forums_publics) = $r;
 
-	// Attention id_rubrique est passe pour les articles => on n'en veut pas
-	if ($idr > 0 AND ($ida OR $idb OR $ids))
-		$idr = 0;
-
 	if (($GLOBALS['meta']["mots_cles_forums"] != "oui"))
 		$table = '';
 
@@ -92,10 +88,12 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				   'oubli' => generer_url_public('spip_pass')));
 	}
 
-// exclure des id_* postees du formulaire tout ce qui n'est pas nombre > 0. 
-// attention le calcul du hachage doit etre le meme ici et dans inc-messforum
-
+	// Calculer la signature de securite de ce forum ; attention le hachage
+	// doit etre le meme ici et dans inc/forum_insert
+	// id_rubrique est parfois passee pour les articles => on n'en veut pas
 	$ids = array();
+	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
+		$id_rubrique = 0;
 	foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
 		$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
 
