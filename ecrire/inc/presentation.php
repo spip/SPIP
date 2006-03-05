@@ -78,7 +78,6 @@ function hr($color, $retour = false) {
 //
 
 function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
-	global $browser_name;
 	global $spip_display, $spip_lang_left;
 	static $accesskey = 97; // a
 
@@ -391,7 +390,7 @@ function fin_raccourcis() {
 // Afficher un petit "+" pour lien vers autre page
 
 function afficher_plus($lien) {
-	global $options, $spip_lang_right, $browser_name;
+	global $options, $spip_lang_right, $spip_display, $browser_name;
 	
 	if ($options == "avancees" AND $spip_display != 4) {
 		if ($browser_name == "MSIE") 
@@ -410,7 +409,6 @@ function afficher_plus($lien) {
 //
 
 function afficher_liste($largeurs, $table, $styles = '') {
-	global $couleur_claire;
 	global $browser_name;
 	global $spip_display;
 	global $spip_lang_left;
@@ -561,7 +559,7 @@ function afficher_liste_fin_tableau() {
 
 
 function puce_statut_article($id, $statut, $id_rubrique) {
-	global $spip_lang_left, $dir_lang, $connect_statut, $options, $browser_name;
+	global $spip_lang_left, $dir_lang, $connect_statut, $options;
 	
 	switch ($statut) {
 	case 'publie':
@@ -695,9 +693,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	global $spip_lang_left, $spip_lang_right;
 
 
-
-
-	// Preparation pour basculter vers liens de traductions
+	// Preparation pour basculer vers liens de traductions
 	$afficher_trad = ($GLOBALS['meta']['gerer_trad'] == "oui");
 	if ($afficher_trad) {
 		$jjscript_trad["fonction"] = "afficher_articles_trad";
@@ -924,8 +920,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		$toujours_afficher = false, $afficher_cadre = true, $afficher_descriptif = true) {
 
 	global $connect_id_auteur, $connect_statut, $dir_lang;
-	global $options, $spip_display;
-	global $spip_lang_left, $spip_lang_right;
+	global $options, $spip_lang_left, $spip_lang_right;
 
 	$langues_site = explode(',', $GLOBALS['meta']['langues_multilingue']);
 
@@ -1122,8 +1117,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 //
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global $connect_id_auteur, $spip_lang_right, $spip_lang_left, $dir_lang, $couleur_claire, $couleur_foncee;
-	global $connect_statut, $options;	
+	global $connect_id_auteur, $spip_lang_right, $spip_lang_left, $dir_lang, $couleur_foncee, $spip_display, $connect_statut, $options;	
 
 
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
@@ -1398,7 +1392,7 @@ function afficher_auteurs ($titre_table, $requete) {
 function afficher_messages($titre_table, $query_message, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
 	global $messages_vus;
 	global $connect_id_auteur;
-	global $couleur_claire, $couleur_foncee;
+	global $couleur_foncee;
 	global $spip_lang_rtl, $spip_lang_left;
 
 	// Interdire l'affichage de message en double
@@ -1554,7 +1548,6 @@ function afficher_forum($request, $adresse_retour, $controle_id_article = false)
 	static $compteur_forum;
 	static $nb_forum;
 	static $i;
-	global $couleur_foncee;
 	global $connect_id_auteur;
 	global $mots_cles_forums;
 	global $spip_lang_rtl, $spip_lang_left, $spip_lang_right, $spip_display;
@@ -1828,14 +1821,12 @@ function debut_javascript($admin, $stat)
 // Fonctions onglets
 
 function onglet_relief_inter(){
-	global $spip_display;
 	
 	echo "<td>&nbsp;</td>";
 	
 }
 
 function debut_onglet(){
-	global $spip_display;
 
 	echo "\n\n";
 	echo "<div style='padding: 7px;'><table cellpadding='0' cellspacing='0' border='0' align='center'>";
@@ -1843,7 +1834,6 @@ function debut_onglet(){
 }
 
 function fin_onglet(){
-	global $spip_display;
 	echo "</tr>";
 	echo "</table></div>\n\n";
 }
@@ -1929,7 +1919,7 @@ function largeur_icone_bandeau_principal($texte) {
 }
 
 function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide", $rubrique = "", $lien_noscript = "", $sous_rubrique_icone = "", $sous_rubrique = ""){
-	global $spip_display, $spip_ecran, $couleur_foncee ;
+	global $spip_display, $spip_ecran;
 	global $menu_accesskey, $compteur_survol;
 
 	$largeur = largeur_icone_bandeau_principal($texte);
@@ -2043,7 +2033,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
-	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
+	global $spip_display, $compteur_survol;
 
 	if (strlen($fonction) < 3) $fonction = "rien.gif";
 	if (strlen($align) > 2) $aligner = " ALIGN='$align' ";
@@ -2096,7 +2086,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 }
 
 function icone_horizontale($texte, $lien, $fond = "", $fonction = "", $echo = true, $javascript='') {
-	global $spip_display, $couleur_claire, $couleur_foncee, $compteur_survol;
+	global $spip_display, $compteur_survol;
 
 	$retour = '';
 
@@ -3060,7 +3050,7 @@ function debloquer_article($arg, $texte)
 //
 
 function afficher_hierarchie($id_rubrique, $parents="") {
-	global $couleur_foncee, $spip_lang_left, $lang_dir;
+	global $spip_lang_left;
 
 	if ($id_rubrique) {
 		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
