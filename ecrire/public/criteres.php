@@ -564,7 +564,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
 	    if ($cle)
 		$col_table = "L$cle";
-	    else erreur_squelette(_T('zbug_info_erreur_squelette'), $cle);
+	    else erreur_squelette(_T('zbug_info_erreur_squelette'),
+				  _T('zbug_boucle') .
+				  " $idb " .
+				  _T('zbug_critere_inconnu', 
+				     array('critere' => $crit->op)));
+
 	  } // else: champ dans la table, c'est ok.
 	}
 
