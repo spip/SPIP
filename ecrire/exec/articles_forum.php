@@ -16,7 +16,7 @@ include_spip('inc/forum'); // pour boutons_controle_forum
 
 function exec_articles_forum_dist()
 {
-  global $connect_statut, $debut, $forum_retour, $id_article;
+  global $connect_statut, $debut, $id_article;
 
   $id_article = intval($id_article);
   $debut = intval($debut);
@@ -76,8 +76,6 @@ echo "<p>";
 if (! ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)))
 	return;
 
-echo "<div class='serif2'>";
-
 // reglages
 if (!$debut) $debut = 0;
 $pack = 5;		// nb de forums affiches par page
@@ -91,6 +89,9 @@ $result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$i
 			   ); 
 
 $i = $limitdeb;
+
+echo "<div class='serif2'>";
+
 if ($i>0)
 	echo "<A href='" . generer_url_ecrire("articles_forum","id_article=$id_article") . "'>0</A> ... | ";
 while ($row = spip_fetch_array($result_forum)) {
@@ -108,21 +109,24 @@ while ($row = spip_fetch_array($result_forum)) {
 
 	$i ++;
 }
-echo "<A href='" . generer_url_ecrire("articles_forum","id_article=$id_article&debut=$i") . "'>...</A>";
+
+ $forum_retour = generer_url_ecrire("articles_forum","id_article=$id_article&debut=$i");
+
+echo "<A href='$forum_retour'>...</A>";
 
 echo "</div>";
 
 if ($connect_statut == "0minirezo") {
-	$query_forum = "SELECT pied.*, max(thread.date_heure) AS date
+	$result_forum = spip_query("SELECT pied.*, max(thread.date_heure) AS date
 		FROM spip_forum AS pied, spip_forum AS thread
 		WHERE pied.id_article='$id_article'
 		AND pied.id_parent=0
 		AND pied.statut IN ('publie', 'off', 'prop')
 		AND thread.id_thread=pied.id_forum
 		GROUP BY id_thread
-		ORDER BY date DESC LIMIT $debut, $pack";
-	$result_forum = spip_query($query_forum);
-	afficher_forum($result_forum, $forum_retour, $id_article);
+		ORDER BY date DESC LIMIT $debut, $pack");
+
+	afficher_forum($result_forum,"", $id_article);
 }
 
 echo "</FONT>";
