@@ -4,7 +4,7 @@
 
 var supported = /MSIE (5\.5)|[6789]/.test(navigator.userAgent) && navigator.platform == "Win32";
 var realSrc;
-var blankSrc = "dist/rien.gif";
+var blankSrc = "rien.gif";
 
 if (supported) fixImage();
 
@@ -39,7 +39,7 @@ function fixImage() {
       element.src = blankSrc;
       // set filter
       element.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" +
-                                     src + "',sizingMethod='scale')";
+                                     src + "',sizingMethod='image')";
    }
 }
 

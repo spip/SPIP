@@ -169,7 +169,7 @@ input.formrecherche {
  *  Images typographiques (via image_typo)
  */
 .format_png {
-	behavior: url("win_png.htc");
+	behavior: url("dist/win_png.htc");
 }
 
 
