@@ -89,15 +89,19 @@ function retire_cache($cache) {
 // Supprimer les caches marques "x"
 function retire_caches($chemin = '') {
 
+	include_spip('base/abstract_sql');
 	// recuperer la liste des caches voues a la suppression
 	$suppr = array();
 
 	// En priorite le cache qu'on appelle maintenant
 	if ($chemin) {
-		$q = spip_query("SELECT fichier FROM spip_caches
-		WHERE fichier = '".addslashes($chemin)."' AND type='x' LIMIT 1");
-		if ($r = spip_fetch_array($q))
-			$suppr[$r['fichier']] = true;
+		list($f) = spip_abstract_fetsel(array("fichier"),
+				    array("spip_caches"),
+				    array("fichier = '".addslashes($chemin)."' ",  "type='x'"),
+				    "",
+				    array(),
+				    1);
+		if ($f)	$suppr[$f] = true;
 	}
 
 	// Et puis une centaine d'autres
@@ -106,8 +110,12 @@ function retire_caches($chemin = '') {
 		effacer_meta('invalider_caches'); # concurrence
 		ecrire_metas();
 
-		$q = spip_query("SELECT fichier FROM spip_caches
-		WHERE type='x' LIMIT 100");
+		$q = list($f) = spip_abstract_select(array("fichier"),
+				    array("spip_caches"),
+				    array("type='x'"),
+				    "",
+				    array(),
+				    100);
 		while ($r = spip_fetch_array($q)) {
 			$compte ++;	# compte le nombre de resultats vus (y compris doublons)
 			$suppr[$r['fichier']] = true;

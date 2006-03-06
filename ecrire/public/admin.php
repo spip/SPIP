@@ -37,18 +37,20 @@ function affiche_boutons_admin($contenu) {
 	// Regler les boutons dans la langue de l'admin (sinon tant pis)
 	//
 	include_spip('inc/lang');
-	$login = addslashes(ereg_replace('^@','',$GLOBALS['spip_admin']));
-	$s = spip_query("SELECT lang FROM spip_auteurs WHERE login='$login'");
-	if ($row = spip_fetch_array($s))
-		$lang = $row['lang'];
-	lang_select($lang);
+	include_spip('base/abstract_sql');
+	list($lang) = spip_abstract_fetsel(array('lang'),
+					array('spip_auteurs'),
+					array("login='" .
+					      addslashes(ereg_replace('^@','',$GLOBALS['spip_admin'])) .
+					      "'"));
+	if ($lang) lang_select($lang);
 
 	// Recuperer sans l'afficher la balise #FORMULAIRE_ADMIN, en float
 	$boutons_admin = inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float'),
 	false);
 
-	lang_dselect();
+	if ($lang) lang_dselect();
 
 	return $contenu.$boutons_admin.$suite;
 }

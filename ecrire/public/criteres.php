@@ -216,7 +216,7 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 		if ($par == 'hasard') {
 		// tester si cette version de MySQL accepte la commande RAND()
 		// sinon faire un gloubi-boulga maison avec de la mayonnaise.
-		  if (spip_query("SELECT RAND()"))
+		  if (spip_abstract_select(array("RAND()")))
 			$par = "RAND()";
 		  else
 			$par = "MOD(".$boucle->id_table.'.'.$boucle->primary
