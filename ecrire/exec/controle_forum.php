@@ -204,7 +204,7 @@ function exec_controle_forum_dist()
 
   debut_page(_T('titre_page_forum_suivi'), "redacteurs", "forum-controle");
 
-  if (!$page) $page = "public";
+  if (!preg_match('/^\w+$/', $page)) $page = "public";
 
   echo "<br><br><br>";
   gros_titre(_T('titre_forum_suivi'));
@@ -269,7 +269,7 @@ F.ip,
 F.id_auteur
 $query_forum ORDER BY F.date_heure DESC" .
 # LIMIT $limitnb OFFSET $limitdeb" #PG
-" LIMIT $limitnb, $limitdeb"
+" LIMIT $limitdeb, $limitnb"
 );
 
   debut_gauche();
