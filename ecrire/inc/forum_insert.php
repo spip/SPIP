@@ -143,8 +143,7 @@ function inc_forum_insert_dist() {
 		// doit etre le meme ici et dans formulaires/inc-formulaire-forum
 		// id_rubrique est parfois passee pour les articles => on n'en veut pas
 		$ids = array();
-		if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
-			$id_rubrique = 0;
+
 		foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
 			$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
 
