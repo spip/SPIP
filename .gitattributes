@@ -6,6 +6,7 @@ dist/choix_mots.html -text
 dist/favicon.ico -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
+dist/rien.gif -text
 dist/style_prive.html -text
 ecrire/action/autoriser.php -text
 ecrire/action/ical.php -text
