@@ -116,7 +116,13 @@ function verif_butineur() {
 	$browser_layer = '';
 	$browser_barre = '';
 
-	if (eregi("opera", $browser_description)) {
+	if (!eregi("opera", $browser_description)&&eregi("opera", $browser_name)) {
+		$browser_name = "Opera";
+		$browser_version = $match[2];
+		$browser_layer = (($browser_version < 7) ? '' :  http_script('', _DIR_IMG_PACK . 'layer.js',''));
+		$browser_barre = ($browser_version >= 8.5); 
+	}
+	else if (eregi("opera", $browser_description)) {
 		eregi("Opera ([^\ ]*)", $browser_description, $match);
 		$browser_name = "Opera";
 		$browser_version = $match[1];

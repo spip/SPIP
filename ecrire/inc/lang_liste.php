@@ -42,6 +42,7 @@ $GLOBALS['codes_langues'] = array(
 	'bn' => "Bengali; Bangla",
 	'bo' => "Tibetan",
 	'br' => "brezhoneg",
+	'bs' => "bosanski",
 	'ca' => "catal&#224;",
 	'co' => "corsu",
 	'cpf' => "Kr&eacute;ol r&eacute;yon&eacute;",
