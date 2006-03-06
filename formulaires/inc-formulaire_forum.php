@@ -88,15 +88,20 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 				   'oubli' => generer_url_public('spip_pass')));
 	}
 
-	// Calculer la signature de securite de ce forum ; attention le hachage
-	// doit etre le meme ici et dans inc/forum_insert
-	// id_rubrique est parfois passee pour les articles => on n'en veut pas
+	// Tableau des valeurs servant au calcul d'une signature de securite.
+	// Elles seront placees en Input Hidden pour que inc/forum_insert
+	// recalcule la meme chose et verifie l'identité des resultats.
+	// Donc ne pas changer la valeur de ce tableau entre le calcul de
+	// la signature et la fabrication des Hidden
+	// Faire attention aussi a 0 != ''
+
+	// id_rubrique est parfois passee pour les articles, on n'en veut pas
 	$ids = array();
 	if ($id_rubrique > 0 AND ($id_article OR $id_breve OR $id_syndic))
 		$id_rubrique = 0;
-	foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
-		$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
-
+	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
+		$ids[$o] = ($x = intval($$o)) ? $x : '';
+	}
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';

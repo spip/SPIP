@@ -118,11 +118,26 @@ function mots_du_forum($ajouter_mot, $id_message)
 }
 
 function inc_forum_insert_dist() {
-	global $auteur_session,
-		$afficher_texte, $ajouter_mot, $alea, $hash,
-		$auteur, $confirmer_forum, $email_auteur, $id_auteur,
-		$nom_site_forum, $retour_forum, $texte, $titre, $url_site,
-		$id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic;
+
+	  // Ne pas se laisser polluer par les pollueurs de globales
+	$id_article = _request('id_article');
+	$id_breve = _request('id_breve');
+	$id_forum = _request('id_forum');
+	$id_rubrique = _request('id_rubrique');
+	$id_syndic = _request('id_syndic');
+	$afficher_texte = _request('afficher_texte');
+	$ajouter_mot = _request('ajouter_mot');
+	$alea = _request('alea');
+	$hash = _request('hash');
+	$auteur = _request('auteur');
+	$confirmer_forum = _request('confirmer_forum');
+	$email_auteur = _request('email_auteur');
+	$id_auteur = _request('id_auteur');
+	$nom_site_forum = _request('nom_site_forum');
+	$retour_forum = _request('retour_forum');
+	$texte = _request('texte');
+	$titre = _request('titre');
+	$url_site = _request('url_site');
 
 	$retour_forum = rawurldecode($retour_forum);
 
@@ -133,19 +148,19 @@ function inc_forum_insert_dist() {
 	}
 	// initialisation de l'eventuel visiteur connecte
 	if (!($id_auteur = intval($id_auteur)))
-	$id_auteur = intval($auteur_session['id_auteur']);
+	$id_auteur = intval($GLOBALS['auteur_session']['id_auteur']);
 
 	// Verifier hash securite pour les forums avec previsu
 	if ($GLOBALS['afficher_texte'] <> 'non') {
 		include_spip('inc/session');
 
-		// Calculer la signature de securite de ce forum ; attention le hachage
-		// doit etre le meme ici et dans formulaires/inc-formulaire-forum
-		// id_rubrique est parfois passee pour les articles => on n'en veut pas
+// Recalcule la signature faite dans formulaires/inc-formulaire-forum
+// en fonction des input du formulaire
 		$ids = array();
 
-		foreach (array('article', 'breve', 'forum', 'rubrique', 'syndic') as $o)
-			$ids['id_'.$o] = ($x = intval(${'id_'.$o})) ? $x : '';
+		foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
+			$ids[$o] = ($x = intval($$o)) ? $x : '';
+		}
 
 		if (!verifier_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea,
 		$hash)) {
@@ -171,8 +186,8 @@ function inc_forum_insert_dist() {
 
 	// Ne pas autoriser de changement de nom si forum sur abonnement
 	if ($statut == 'abo') {
-		$auteur = $auteur_session['nom'];
-		$email_auteur = $auteur_session['email'];
+		$auteur = $GLOBALS['auteur_session']['nom'];
+		$email_auteur = $GLOBALS['auteur_session']['email'];
 	}
 
 	// trop court ?
