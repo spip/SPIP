@@ -82,12 +82,17 @@ $id_rubrique, $id_forum, $id_article, $id_breve, $id_syndic,
 $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 {
 	// verifier l'identite des posteurs pour les forums sur abo
-	if (($type == "abo") && (!$GLOBALS["auteur_session"])) {
-		return array('formulaire_login_forum', 0,
-			     array('inscription' => generer_url_public('spip_inscription'),
-				   'oubli' => generer_url_public('spip_pass')));
+	if ($type == "abo") {
+		if (!$GLOBALS["auteur_session"]) {
+			return array('formulaire_login_forum', 0,
+				array('inscription' => generer_url_public('spip_inscription'),
+					'oubli' => generer_url_public('spip_pass')));
+		} else {
+	  // forcer ces valeur
+		$auteur = $GLOBALS['auteur_session']['nom'];
+		$email_auteur = $GLOBALS['auteur_session']['email'];
+		}
 	}
-
 	// Tableau des valeurs servant au calcul d'une signature de securite.
 	// Elles seront placees en Input Hidden pour que inc/forum_insert
 	// recalcule la meme chose et verifie l'identité des resultats.
@@ -102,6 +107,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	foreach (array('id_article', 'id_breve', 'id_forum', 'id_rubrique', 'id_syndic') as $o) {
 		$ids[$o] = ($x = intval($$o)) ? $x : '';
 	}
+
 
 	// ne pas mettre '', sinon le squelette n'affichera rien.
 	$previsu = ' ';
@@ -118,16 +124,13 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 			// qu'en sortie, on inscrit donc une valeur absurde ("!")
 			$retour_forum = "!";
 			
-			// sauf si on a passe un parametre en argument (exemple : {#SELF})
-			if ($url_param_retour) {
-				$retour_forum = $url_param_retour;
-				$script = $retour_forum;
-			}
 		}
 		if (isset($_COOKIE['spip_forum_user'])
 		AND is_array($cookie_user = unserialize($_COOKIE['spip_forum_user']))) {
 			$auteur = $cookie_user['nom'];
 			$email_auteur = $cookie_user['email'];
+			$nom_site_forum = $cookie_user['nom_site_forum'];
+			$url_site = $cookie_user['url_site'];
 		} else {
 			$auteur = $GLOBALS['auteur_session']['nom'];
 			$email_auteur = $GLOBALS['auteur_session']['email'];
@@ -143,15 +146,25 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 		$nom_site_forum = _request('nom_site_forum');
 		$url_site = _request('url_site');
 
-		// cas du #FORMULAIRE_FORUM{#SELF} (??)
-		if ($retour_forum != "!") $script = $retour_forum;
-		
 		if ($afficher_texte != 'non') 
 			$previsu = inclure_previsu($texte, $titre, $email_auteur, $auteur, $url_site, $nom_site_forum, $ajouter_mot);
 
 		$alea = forum_fichier_tmp();
 
 		$hash = calculer_action_auteur('ajout_forum'.join(' ', $ids).' '.$alea);
+	}
+
+	// Poser un cookie pour ne pas retaper les infos invariables
+	include_spip('inc/cookie');
+	spip_setcookie('spip_forum_user',
+		       serialize(array('nom' => $auteur, 
+				       'email' => $email_auteur,
+				       'nom_site_forum' => $nom_site_forum,
+				       'url_site' => $url_site)));
+
+	// sauf si on a passe un parametre en argument (exemple : {#SELF})
+	if ($url_param_retour) {
+			$script = $url_param_retour;
 	}
 
 	// pour la chaine de hidden
