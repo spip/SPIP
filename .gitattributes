@@ -363,7 +363,6 @@ ecrire/lang/spip_ru.php -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
 ecrire/polices/dustismo_bold.ttf -text
-ecrire/rien.gif -text
 ecrire/safehtml/classes/HTMLSax3.php -text
 ecrire/safehtml/classes/HTMLSax3/Decorators.php -text
 ecrire/safehtml/classes/HTMLSax3/States.php -text
