@@ -69,13 +69,14 @@ function calculer_visites($t) {
 	$compteur = 100;
 	$date_init = time()-30*60;
 
-	while (--$compteur > 0
-	AND list(,$item) = each($sessions)) {
+	foreach ($sessions as $item) {
 		if (@filemtime($item) < $date_init) {
 			spip_log("traite la session $item");
 			compte_fichier_visite($item,
 				$visites, $visites_a, $referers, $referers_a, $articles);
 			@unlink($item);
+			if (--$compteur <= 0)
+				break;
 		}
 		#else spip_log("$item pas vieux");
 	}
