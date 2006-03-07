@@ -626,6 +626,14 @@ function find_in_path ($filename) {
 	static $path_a = array();
 	static $c = '';
 
+	// est-ce dans les chemins deja connus (optimises) ?
+	if (_DIR_RESTREINT) {
+		if (isset($GLOBALS['meta']['noyau'][$filename]))
+			return $GLOBALS['meta']['noyau'][$filename];
+		// sinon on se souvient qu'il faudra ecrire le noyau dans public/global
+		define('ecrire_noyau', 1);
+	}
+
 	// on calcule le chemin si le nombre de plugins a change
 	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {
 		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
@@ -666,11 +674,14 @@ function find_in_path ($filename) {
 	foreach ($path_a as $dir) {
 		if (@is_readable($f = "$dir$filename")) {
 # spip_log("find_in_path trouve $f");
+			if (_DIR_RESTREINT) $GLOBALS['meta']['noyau'][$filename] = $f;
 			return $f;
 		}
 	}
 
 # spip_log("find_in_path n'a pas vu '$filename' dans " . $path);
+	if (_DIR_RESTREINT) $GLOBALS['meta']['noyau'][$filename] = false;
+	return false;
 }
 
 // predicat sur les scripts de ecrire qui n'authentifient pas par cookie
@@ -1023,9 +1034,10 @@ function spip_initialisation() {
 
 	//
 	// Module de lecture/ecriture/suppression de fichiers utilisant flock()
-	//
-	include_spip('inc/flock');
-
+	// (non surchargeable en l'etat ; attention si on utilise include_spip()
+	// pour le rendre surchargeable, on va provoquer un reecriture
+	// systematique du noyau ou une baisse de perfs => a etudier)
+	include_once(_DIR_RESTREINT.'inc/flock.php');
 
 
 	// Lire les meta cachees

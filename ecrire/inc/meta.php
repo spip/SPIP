@@ -13,16 +13,23 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function lire_metas() {
-	global $meta;
+	// preserver le noyau, sauf si recalcul
+	if (_DIR_RESTREINT
+	AND !_request('var_mode'))
+		$noyau = $GLOBALS['meta']['noyau'];
+	else
+		$noyau = array();
 
-	$meta = array();
+	$GLOBALS['meta'] = array();
 	$result = spip_query('SELECT nom,valeur FROM spip_meta');
 	if($GLOBALS['db_ok']) {
 		while (list($nom,$valeur) = spip_fetch_array($result))
-			$meta[$nom] = $valeur;
+			$GLOBALS['meta'][$nom] = $valeur;
 	}
-	if (!$meta['charset'])
+	if (!$GLOBALS['meta']['charset'])
 		ecrire_meta('charset', _DEFAULT_CHARSET);
+
+	$GLOBALS['meta']['noyau'] = $noyau;
 }
 
 function ecrire_meta($nom, $valeur) {
@@ -40,12 +47,11 @@ function effacer_meta($nom) {
 // Ne pas oublier d'appeler cette fonction apres ecrire_meta() et effacer_meta() !
 //
 function ecrire_metas() {
-	global $meta;
 
 	lire_metas();
 
-	if (is_array($meta)) {
-		$ok = ecrire_fichier (_FILE_META, serialize($meta));
+	if (is_array($GLOBALS['meta'])) {
+		$ok = ecrire_fichier (_FILE_META, serialize($GLOBALS['meta']));
 		if (!$ok && $GLOBALS['connect_statut'] == '0minirezo') {
 			include_spip('inc/minipres');
 			minipres(_T('texte_inc_meta_2'), "<h4 font color=red>"
