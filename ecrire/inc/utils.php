@@ -76,19 +76,15 @@ function include_fonction($nom, $dossier='exec') {
 function include_spip($f, $include = true) {
 	static $included_files = array();
 	// deja charge (nom) ?
-	if ($included_files[$f])
+	if (isset($included_files[$f]))
 		return $included_files[$f];
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 
-	// une surcharge existe ?
+	// chercher le fichier dans le chemin (eventuellement, surcharge)
 	if (!$s = find_in_path($f . '.php')
-	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))
-	// sinon, le fichier existe dans le repertoire ecrire ?
-	AND !is_readable($s = _DIR_INCLUDE . $f . '.php')
-	AND (!_EXTENSION_PHP OR !is_readable($s = _DIR_INCLUDE . $f . '.php3'))
-)
+	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3')))
 		return $included_files[$f] = false;
 
 	// deja charge (chemin complet) ?
