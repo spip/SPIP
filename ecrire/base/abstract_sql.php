@@ -37,6 +37,9 @@ function spip_abstract_select (
 	$groupby = '', $orderby = array(), $limit = '',
 	$sousrequete = '', $cpt = '',
 	$table = '', $id = '', $serveur='') {
+
+	spip_connect();
+
 	if (!$serveur)
 	  // le serveur par defaut est celui de inc_connect.php
 	  // tout est deja pret, notamment la fonction suivante:
@@ -70,11 +73,10 @@ function spip_abstract_serveur($f, $serveur) {
 // Les 3 fonctions suivantes exploitent le resultat de la precedente,
 // si l'include ne les a pas definies, erreur immediate
 
-function spip_abstract_fetch($res, $serveur='')
-{
-  if (!$serveur) return spip_fetch_array($res);
-  $f = spip_abstract_serveur('spip_' . $serveur . '_fetch', $serveur);
-  return $f($res);
+function spip_abstract_fetch($res, $serveur='') {
+	if (!$serveur) return spip_fetch_array($res);
+	$f = spip_abstract_serveur('spip_' . $serveur . '_fetch', $serveur);
+	return $f($res);
 }
 
 function spip_abstract_count($res, $serveur='')
