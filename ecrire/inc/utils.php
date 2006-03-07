@@ -644,7 +644,8 @@ function find_in_path ($filename) {
 				. ':' . $path;
 
 		// Ajouter squelettes/
-		$path = _DIR_RACINE.'squelettes/:' . $path;
+		if (@is_dir(_DIR_RACINE.'squelettes'))
+			$path = _DIR_RACINE.'squelettes/:' . $path;
 
 		// Et le(s) dossier(s) des squelettes nommes
 		if ($GLOBALS['dossier_squelettes'])
