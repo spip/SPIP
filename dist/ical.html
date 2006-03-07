@@ -12,7 +12,7 @@ DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
 DTEND:[(#DATE|date_ical{60})]
 CATEGORIES:<:articles|filtrer_ical:>
-URL:#URL_SITE_SPIP/#URL_ARTICLE
+URL:[(#URL_ARTICLE|url_absolue)]
 STATUS:CONFIRMED
 END:VEVENT
 </BOUCLE_articles>
@@ -24,7 +24,7 @@ DTSTAMP:[(#DATE|date_ical)]
 DTSTART:[(#DATE|date_ical)]
 DTEND:[(#DATE|date_ical{60})]
 CATEGORIES:<:breves|filtrer_ical:>
-URL:#URL_SITE_SPIP/#URL_BREVE
+URL:[(#URL_BREVE|url_absolue)]
 STATUS:CONFIRMED
 END:VEVENT
 </BOUCLE_breves>

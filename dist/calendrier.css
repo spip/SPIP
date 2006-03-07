@@ -218,7 +218,8 @@ a.calendrier-annee:hover {
 .calendrier-png { 
 	width: 12px; 
 	height: 12px;
-	behavior: url(dist/win_png.htc);
+	/* URL a revoir */
+	behavior: url(spip.php?page=win_png);
 }
 
 .calendrier-icone { 

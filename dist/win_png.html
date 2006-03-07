@@ -1,4 +1,4 @@
-#CACHE{360*1000*0}
+#CACHE{3600*24}
 #HTTP_HEADER{Content-Type:text/x-component; charset=iso-8859-15}
 #HTTP_HEADER{Vary: Accept-Encoding}
 <public:component>
@@ -7,7 +7,7 @@
 
 var supported = /MSIE (5\.5)|[6789]/.test(navigator.userAgent) && navigator.platform == "Win32";
 var realSrc;
-var blankSrc = "#URL_SITE_SPIP/dist/rien.gif";
+var blankSrc = "[(#CHEMIN{rien.gif}|url_absolue)]";
 
 if (supported) fixImage();
 
