@@ -85,6 +85,29 @@ $ortho = "";
 // Affichage HTML
 //
 
+function debut_html($titre = "", $rubrique="") {
+	include_ecrire('inc_headers');
+
+	global $browser_verifForm;
+	$nom_site_spip = entites_html(textebrut(typo($GLOBALS['meta']["nom_site"])));
+	if (!$nom_site_spip) $nom_site_spip=  _T('info_mon_site_spip');
+	$titre = textebrut(typo($titre));
+
+	http_no_cache();
+	echo _DOCTYPE_ECRIRE .
+	  "<html lang='".$GLOBALS['spip_lang']."' dir='".($GLOBALS['spip_lang_rtl'] ? 'rtl' : 'ltr')."'>\n" .
+	  "<head>\n" .
+	  "<title>[$nom_site_spip] $titre</title>\n";
+	if (strpos($rubrique, 'script>'))
+	  echo  $rubrique, "\n";
+	echo envoi_link($nom_site_spip, $rubrique);
+	// Fin des entetes
+	echo "\n</head>\n";
+	echo "<body ",  _ATTRIBUTES_BODY, "
+	 onLoad=\"setActiveStyleSheet('invisible');$browser_verifForm\">";
+}
+
+
 // Gros hack IE pour le "position: fixed"
 $code_ie = "<!--[if IE]>
 <style type=\"text/css\" media=\"screen\">
