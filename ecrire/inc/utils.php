@@ -82,16 +82,39 @@ function include_spip($f, $include = true) {
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
 	define('_DIR_INCLUDE', _DIR_RESTREINT);
 
+
 	// chercher le fichier dans le chemin (eventuellement, surcharge)
-	if (!$s = find_in_path($f . '.php')
-	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3')))
+
+	// est-ce dans les chemins du noyau (optimises) ?
+	if (_DIR_RESTREINT) {
+		if (isset($GLOBALS['meta']['noyau'][$f])) {
+			$s = $GLOBALS['meta']['noyau'][$f];
+			if (!$s) return false;
+		}
+		// sinon on se souvient qu'il faudra ecrire le noyau dans public/global
+		else
+			define('ecrire_noyau', 1);
+	}
+
+	if (!isset($s)
+	AND !$s = find_in_path($f . '.php')
+	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
+		if (_DIR_RESTREINT)
+			$GLOBALS['meta']['noyau'][$f] = false;
 		return $included_files[$f] = false;
+	}
 
 	// deja charge (chemin complet) ?
-	if (isset($included_files[$s]))
+	if (isset($included_files[$s])) {
+		if (_DIR_RESTREINT)
+			$GLOBALS['meta']['noyau'][$f] = $included_files[$s];
 		return $included_files[$f] = $included_files[$s];
-	else
+	}
+	else {
+		if (_DIR_RESTREINT)
+			$GLOBALS['meta']['noyau'][$f] = $s;
 		$included_files[$f] = $included_files[$s] = $s;
+	}
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
@@ -626,14 +649,6 @@ function find_in_path ($filename) {
 	static $path_a = array();
 	static $c = '';
 
-	// est-ce dans les chemins deja connus (optimises) ?
-	if (_DIR_RESTREINT) {
-		if (isset($GLOBALS['meta']['noyau'][$filename]))
-			return $GLOBALS['meta']['noyau'][$filename];
-		// sinon on se souvient qu'il faudra ecrire le noyau dans public/global
-		define('ecrire_noyau', 1);
-	}
-
 	// on calcule le chemin si le nombre de plugins a change
 	if ($c != count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes']) {
 		$c = count($GLOBALS['plugins']).$GLOBALS['dossier_squelettes'];
@@ -674,13 +689,11 @@ function find_in_path ($filename) {
 	foreach ($path_a as $dir) {
 		if (@is_readable($f = "$dir$filename")) {
 # spip_log("find_in_path trouve $f");
-			if (_DIR_RESTREINT) $GLOBALS['meta']['noyau'][$filename] = $f;
 			return $f;
 		}
 	}
 
 # spip_log("find_in_path n'a pas vu '$filename' dans " . $path);
-	if (_DIR_RESTREINT) $GLOBALS['meta']['noyau'][$filename] = false;
 	return false;
 }
 
@@ -1049,6 +1062,11 @@ function spip_initialisation() {
 		ecrire_metas();
 	}
 
+	// supprimer le noyau si on recalcul
+	if ($_REQUEST['var_mode']) {
+		$GLOBALS['meta']['noyau'] = array();
+		define('ecrire_noyau', 1);
+	}
 
 	// Langue principale du site
 	$GLOBALS['langue_site'] = $GLOBALS['meta']['langue_site'];
