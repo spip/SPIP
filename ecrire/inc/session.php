@@ -56,12 +56,8 @@ function ajouter_session($auteur, $id_session) {
 	}
 	$texte .= "?".">\n";
 
-	if ($f = @fopen($fichier_session, "wb")) {
-		fputs($f, $texte);
- 		fclose($f);
-	} else {
-	  redirige_par_entete(generer_url_action('test_dirs','',true));
-	}
+	if (!ecrire_fichier($fichier_session, $texte))
+		redirige_par_entete(generer_url_action('test_dirs','',true));
 }
 
 //
