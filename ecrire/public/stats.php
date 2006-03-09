@@ -15,7 +15,6 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function ecrire_stats() {
-	global $contexte, $id_article, $id_breve, $id_rubrique;
 
 	// Rejet des robots (qui sont pourtant des humains comme les autres)
 	if (preg_match(
@@ -30,29 +29,20 @@ function ecrire_stats() {
 		return;
 
 
-		// traitement pour url_propre
-	if ($log_type = _request('page')) {
-		if ($log_type == "rubrique") $log_id_num = $id_rubrique;
-		else if ($log_type == "article") $log_id_num = $id_article;
-		else if ($log_type == "breve") $log_id_num = $id_breve;
-		else {
-			$log_type = "autre";
-		}
-	}
-	else {
-		
-		// Identification de l'element
-		if ($log_id_num = intval(_request('id_rubrique')))
-			$log_type = "rubrique";
-		else if ($log_id_num = intval(_request('id_article')))
-			$log_type = "article";
-		else if ($log_id_num = intval(_request('id_breve')))
-			$log_type = "breve";
-		else
-			$log_type = "autre";
-		
-	}
-		
+	// Identification de l'element
+	// Attention il s'agit bien des $GLOBALS, regles (dans le cas des urls
+	// personnalises), par la carte d'identite de la page... ne pas utiliser
+	// _request() ici !
+	if ($log_id_num = intval($GLOBALS['id_article']))
+		$log_type = "article";
+	else if ($log_id_num = intval($GLOBALS['id_breve']))
+		$log_type = "breve";
+	else if ($log_id_num = intval($GLOBALS['id_rubrique']))
+		$log_type = "rubrique";
+	else
+		$log_type = "autre";
+
+	// Identification du client
 	$client_id = substr(md5(
 		$GLOBALS['ip'] . $_SERVER['HTTP_USER_AGENT']
 		. $_SERVER['HTTP_ACCEPT'] . $_SERVER['HTTP_ACCEPT_LANGUAGE']
