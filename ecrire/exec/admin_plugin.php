@@ -29,8 +29,6 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 
 		$s = "";
 		$s .= "<div id='$plug_file'";
-		if ($surligne)
-			$s .= " style='background:$couleur_claire'";
 		$s .= ">";
 		if (isset($info['erreur'])){
 			$s .=  "<div style='background:$couleur_claire'>";
@@ -84,12 +82,15 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 
 		$s = "";
 		if ('O' == $plugok){
-			if ($id_input>0)
+			$vals[] = $s;
+			// Possibilité d'ordonner les plugins masquee pour le moment
+			// la fonction reste possible par l'url du type monter=forms,descendre=forms
+			/*if ($id_input>0)
 				$s = "<a href='".generer_url_ecrire('admin_plugin',"monter=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0'></a>";
 			$vals[] = $s;
 			$s = "";
 			if (!$last_actif)
-				$s = "<a href='".generer_url_ecrire('admin_plugin',"descendre=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0'></a>";
+				$s = "<a href='".generer_url_ecrire('admin_plugin',"descendre=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0'></a>";*/
 		}
 		else{
 			$vals[] = $s;
@@ -100,7 +101,10 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 		if (!$erreur){
 			$s .= "<input type='checkbox' name='statusplug_$plug_file' value='O' id='label_$id_input'";
 			$s .= ('O' == $plugok)?" checked='checked'":"";
-			$s .= " /> <label for='label_$id_input'><strong>"._T('activer_plugin')."</strong></label>";
+			$s .= " /> <label for='label_$id_input'";
+			if ($surligne)
+				$s .= " style='background:$couleur_claire'";
+			$s .= "><strong>"._T('activer_plugin')."</strong></label>";
 		}
 		$id_input++;
 		$vals[] = $s;
@@ -177,11 +181,11 @@ function exec_admin_plugin_dist(){
 	//
 	$plugins_actifs=liste_plugin_actifs();
 	$count = 0;
-	foreach ($plugins_actifs as $plug_file){
+	/*foreach ($plugins_actifs as $plug_file){
 		$tableau[] = ligne_plug($plug_file,$plugins_actifs,++$count==count($plugins_actifs),$surligne==$plug_file);
-	}
-	foreach (liste_plugin_inactifs() as $plug_file){
-		$tableau[] = ligne_plug($plug_file,$plugins_actifs,false);
+	}*/
+	foreach (liste_plugin_files() as $plug_file){
+		$tableau[] = ligne_plug($plug_file,$plugins_actifs,false,in_array($plug_file,$plugins_actifs));
 	}
 
 	$largeurs = array('','15px','20px','120px');
@@ -196,7 +200,15 @@ function exec_admin_plugin_dist(){
 
 	echo "\n<p>";
 	
-	echo "<div style='text-align:$spip_lang_right'><input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'></div>";
+	echo "<div style='text-align:$spip_lang_right'>";
+	echo "<input type='submit' name='Valider' value='"._T('bouton_valider')."' class='fondo'>";
+	echo "</div>";
+
+# ce bouton est trop laid :-)
+# a refaire en javascript, qui ne fasse que "decocher" les cases
+#	echo "<div style='text-align:$spip_lang_left'>";
+#	echo "<input type='submit' name='desactive_tous' value='"._T('bouton_desactive_tout')."' class='fondl'>";
+#	echo "</div>";
 
 	echo "</form></tr></table>\n";
 

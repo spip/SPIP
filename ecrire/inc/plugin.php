@@ -28,6 +28,7 @@ function liste_plugin_files(){
 		&& isset($infos['prefix']))
 			$plugin_files[]=substr(dirname($plugin), strlen(_DIR_PLUGINS));
 	}
+	sort($plugin_files);
 	return $plugin_files;
 }
 
@@ -180,9 +181,11 @@ function enregistre_modif_plugin(){
 	  $test["statusplug_$file"] = $file;
 	}
 	$plugin=array();
-	foreach($_POST as $choix=>$val){
-	  if (isset($test[$choix])&&$val=='O')
-			$plugin[]=$test[$choix];
+	if (!isset($_POST['desactive_tous'])){
+		foreach($_POST as $choix=>$val){
+			if (isset($test[$choix])&&$val=='O')
+				$plugin[]=$test[$choix];
+		}
 	}
 	ecrire_plugin_actifs($plugin);
 	ecrire_metas();
@@ -209,6 +212,7 @@ function parse_plugin_xml($texte){
 	$out = array();
   // enlever les commentaires
   $texte = preg_replace(',<!--(.*?)-->,is','',$texte);
+  $texte = preg_replace(',<\?(.*?)\?>,is','',$texte);
   $txt = $texte;
 
 	// tant qu'il y a des tags
