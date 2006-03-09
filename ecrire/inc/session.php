@@ -181,11 +181,12 @@ function zap_sessions ($id_auteur, $zap) {
 // reconnaitre un utilisateur authentifie en php_auth
 //
 function verifier_php_auth() {
-	global $_SERVER, $ignore_auth_http;
 	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
-	&& !$ignore_auth_http) {
+	&& !$GLOBALS['ignore_auth_http']) {
 		$login = addslashes($_SERVER['PHP_AUTH_USER']);
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='$login'");
+		if (!$GLOBALS['db_ok'])
+			return false;
 		$row = spip_fetch_array($result);
 		$auth_mdpass = md5($row['alea_actuel'] . $_SERVER['PHP_AUTH_PW']);
 		if ($auth_mdpass != $row['pass']) {
