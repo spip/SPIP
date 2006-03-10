@@ -15,15 +15,16 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 charger_generer_url();
 
-function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
+function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 	global $couleur_foncee;
 	
 	$where = tronconne_signatures($script, $id, $debut, $where, $limit);
 	$request = spip_query("SELECT * FROM spip_signatures " .
 			      ($where ? " WHERE $where" : "") .
 			      ($order ? " ORDER BY $order" : "") .
-			      " LIMIT " .
-			      (($debut ? "$debut," : "") . $limit) 
+			      ((!$limit AND !$debut) ? '' :
+			       (" LIMIT " .
+				(($debut ? "$debut," : "") . $limit) ))
 #				($limit . ($debut ? " OFFSET $debut" : "")); #PG
 			      );
 
@@ -99,18 +100,19 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit=10) {
 	}
 }
 
-function tronconne_signatures($script, $id_article, $debut, $where, $limit)
+function tronconne_signatures($script, $id_article, $debut, $where, $limit=10)
 {
+	$where .= ($where ? " AND " : "") . "date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)";
 	if ($id_article) { 
 		$args = "id_article=$id_article&";
-		$where .= ($where ? " AND " : "") . "id_article=$id_article";
+		$where .= " AND id_article=$id_article";
 	}
 	else $args = "";
 
-	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where AND date_time>DATE_SUB(NOW(),INTERVAL 180 DAY)ORDER BY date_time DESC");
+	$res = spip_query("SELECT date_time FROM spip_signatures WHERE $where ORDER BY date_time DESC");
 
 	while ($row = spip_fetch_array($res)) {
-		if($c++%10==0) {	
+		if($c++%$limit==0) {	
 			if ($c > 1) echo " | ";
 			$date = entites_html(affdate_court($row['date_time']));
 			if ($c == ($debut+1))
