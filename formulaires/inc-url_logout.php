@@ -24,12 +24,12 @@ function balise_URL_LOGOUT_dyn($cible) {
 	if (!$login = $GLOBALS['auteur_session']['login'])
 		return '';
 
-	if (!$cible) {
-		$link = new Link();
-		$cible = $link->getUrl();
-	}
+	if (!$cible)
+		$cible = self();
 
-	return generer_url_public('spip_cookie', "logout_public=$login&url=" . urlencode($cible));
+	return generer_url_public('spip_cookie',
+		"logout_public=".urlencode($login)."&amp;url=" . urlencode($cible)
+	);
 }
 
 ?>
