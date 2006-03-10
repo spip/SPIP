@@ -210,7 +210,7 @@ $auteur_session = '';
 $connect_statut = '';
 $hash_recherche = '';
 $hash_recherche_strict = '';
-
+$profondeur_url = 0;
 
 
 //
