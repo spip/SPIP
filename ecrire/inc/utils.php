@@ -693,7 +693,7 @@ function find_in_path ($filename) {
 		}
 	}
 
-# spip_log("find_in_path n'a pas vu '$filename' dans " . $path);
+# spip_log("find_in_path n'a pas vu '$filename' dans " . join(':',$path_a));
 	return false;
 }
 
