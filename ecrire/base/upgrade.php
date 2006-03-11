@@ -1158,6 +1158,15 @@ function maj_base() {
 		maj_version(1.907);
 	}
 
+	// Oups ! on stockait les tags de syndication sous la forme rel="category"
+	// au lieu de rel="directory" - http://microformats.org/wiki/rel-directory
+	if ($version_installee < 1.908) {
+		spip_query("UPDATE spip_syndic_articles
+		SET tags = REPLACE(tags, 'rel=\"category\">', 'rel=\"directory\">')
+		WHERE tags like '%category%'");
+		maj_version(1.908);
+	}
+
 
 	return true;
 }

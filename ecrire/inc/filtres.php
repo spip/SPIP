@@ -2420,7 +2420,7 @@ function afficher_enclosures($tags) {
 	}
 	return join('&nbsp;', $s);
 }
-function afficher_tags($tags, $rels='tag,category') {
+function afficher_tags($tags, $rels='tag,directory') {
 	$s = array();
 	foreach (extraire_tags($tags) as $tag) {
 		$rel = extraire_attribut($tag, 'rel');

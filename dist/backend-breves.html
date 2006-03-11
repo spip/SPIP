@@ -43,7 +43,7 @@
 	sous forme de "microformats"
 
 ]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
-[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="category"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
 </BOUCLE_rubrique_mf><B_mots_mf>
 / <BOUCLE_mots_mf(MOTS){id_breve}{", "}>
 [&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
