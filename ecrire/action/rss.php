@@ -189,7 +189,6 @@ function rss_suivi_versions($a) {
 // Suivi des forums
 function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 	$rss = array();
-	include_spip('inc/forum');
 
 	$result_forum = spip_query("
 	SELECT	* " . $query_forum . "
@@ -395,6 +394,7 @@ if (!verifier_low_sec ($id, $cle,
 switch($op) {
 	# forum public
 	case 'forum':
+		include_spip('inc/forum');
 		if ($id = intval($a['id_article'])) {
 			$critere = "statut='publie' AND id_article=$id";
 			$url = generer_url_article($id);
