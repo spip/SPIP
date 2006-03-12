@@ -574,13 +574,12 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 {
 	$cle = trouver_champ_exterieur($col, $boucle->jointures, $boucle);
-
 	if ($cle) {
 		$t = array_search($cle[0], $boucle->from);
 		if ($t) {
-			$tc = "^$t" . '.' . $col . " ";
+			$tc = '/\b' . $t  . ".$col" . '\b/';
 			foreach ($boucle->where as $v) {
-				if (ereg($tc,$v)) {$t = false; break;}
+				if (preg_match($tc,$v)) {$t = false; break;}
 			}
 			if ($t)	return $t;
 		}
@@ -645,7 +644,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
   list($dnom,$ddesc) = $depart;
   list($anom,$adesc) = $arrivee;
   $prim = $ddesc['key']['PRIMARY KEY'];
-  $v = array_intersect($prim ? split(',',$prim): $ddesc['key'], $adesc['key']);
+  $v = array_intersect($prim ? split(', *',$prim): $ddesc['key'], $adesc['key']);
   if ($v)
     return array(array($dnom, $arrivee, array_shift($v)));
    else    {
