@@ -169,7 +169,9 @@ if (!isset($reinstall)) {
 //
 // Controle d'interruption d'une longue restauration
 //
-if ($GLOBALS['_COOKIE']['spip_admin'] AND $GLOBALS['meta']["debut_restauration"])
+if ($GLOBALS['_COOKIE']['spip_admin']
+AND $GLOBALS['meta']["debut_restauration"]
+AND !($exec=='js_menu_rubriques'))
 	$exec = 'import_all';
 
 $var_f = include_fonction($exec);

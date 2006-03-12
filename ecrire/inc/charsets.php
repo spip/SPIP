@@ -489,6 +489,9 @@ function translitteration($texte, $charset='AUTO', $complexe='') {
 
 	$table_translit ='translit'.$complexe;
 
+	// 0. Supprimer les caracteres illegaux
+	$texte = corriger_caracteres($texte);
+
 	// 1. Passer le charset et les &eacute en utf-8
 	$texte = unicode_to_utf_8(html2unicode(charset2unicode($texte, $charset, true)));
 
@@ -597,6 +600,35 @@ function transcoder_page($texte, $headers='') {
 
 	return importer_charset($texte, $charset);
 }
+
+
+//
+// Gerer les outils mb_string
+//
+function spip_substr($c, $start=0, $end='') {
+	if (init_mb_string()) {
+		if ($end)
+			return mb_substr($c, $start, $end);
+		else
+			return mb_substr($c, $start);
+	}
+
+	// methode substr normale
+	else {
+		if ($end)
+			return substr($c, $start, $end);
+		else
+			return substr($c, $start);
+	}
+}
+
+function spip_strlen($c) {
+	if (init_mb_string())
+		return mb_strlen($c);
+	else
+		return strlen($c);
+}
+
 
 // Initialisation
 $GLOBALS['CHARSET'] = Array();
