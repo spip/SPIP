@@ -600,17 +600,22 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 
 function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
 {
+  static $num=0;
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
   if (!$res) return "";
-  $n = "";
+
   list($dnom,$ddesc) = $depart;
   $id_primary = $ddesc['key']['PRIMARY KEY'];
   $id_field = $dnom . '.' . $id_primary;
+  $id_table = "";
 
   foreach($res as $r) {
     list($d, $a, $j) = $r;
-    $n = calculer_critere_externe($boucle, ($n ? "L$n" : $d), $a[0], $j);
+    $num++;
+    $boucle->join[]= ($id_table ? $id_table : $d) . ".$j=L$num." . $j;
+    $boucle->from[$id_table = "L$num"] = $a[0];    
   }
+
   // pas besoin de group by 
   // si une seule jointure et sur une table primary key formee
   // de l'index principal et de l'index de jointure
@@ -631,7 +636,8 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
 	    $boucle->select[] = $id_field;
   }
 
-  return $n;
+  $boucle->lien = true;
+  return $num;
 }
 
 function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
@@ -721,25 +727,12 @@ function trouver_def_table($nom, &$boucle)
 function trouver_champ_exterieur($cle, $joints, &$boucle)
 {
   foreach($joints as $k => $join) {
-	spip_log("tce $cle $join");
     if ($join && $table = trouver_def_table($join, $boucle)) {
       if (array_key_exists($cle, $table[1]['field'])) 
 	return  $table;
     }
   }
   return "";
-}
-
-// traitement des relations externes par DES jointures.
-
-function calculer_critere_externe(&$boucle, $id_table, $lien, $join) {
-	static $num;
-	$id_field = $id_table . '.' . $join; 
-	$num++;
-	$boucle->lien = true;
-	$boucle->from["L$num"] = $lien;
-	$boucle->join[] = "$id_field=L$num." . $join;
-	return $num;
 }
 
 // determine l'operateur et les operandes
