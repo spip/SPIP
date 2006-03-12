@@ -1399,49 +1399,74 @@ function distance_pixel($xo, $yo, $x0, $y0) {
 
 function imageRotateBicubic($src_img, $angle, $bicubic=0) {
    
+   if (round($angle/90)*90 == $angle) {
+		$droit = true;
+   		if (round($angle/180)*180 == $angle) $rot = 180;
+   		else $rot = 90;
+   }
+   else $droit = false;
+   
   // convert degrees to radians
    $angle = $angle + 180;
    $angle = deg2rad($angle);
   
+
+
    $src_x = imagesx($src_img);
    $src_y = imagesy($src_img);
+   
   
-   $center_x = floor($src_x/2);
-   $center_y = floor($src_y/2);
+   $center_x = floor(($src_x-1)/2);
+   $center_y = floor(($src_y-1)/2);
 
    $cosangle = cos($angle);
    $sinangle = sin($angle);
 
-   $corners=array(array(0,0), array($src_x,0), array($src_x,$src_y), array(0,$src_y));
-
-   foreach($corners as $key=>$value) {
-     $value[0]-=$center_x;        //Translate coords to center for rotation
-     $value[1]-=$center_y;
-     $temp=array();
-     $temp[0]=$value[0]*$cosangle+$value[1]*$sinangle;
-     $temp[1]=$value[1]*$cosangle-$value[0]*$sinangle;
-     $corners[$key]=$temp;    
+	// calculer dimensions en simplifiant angles droits, ce qui evite "floutage"
+	// des rotations a angle droit
+	if (!$droit) {
+	   $corners=array(array(0,0), array($src_x,0), array($src_x,$src_y), array(0,$src_y));
+	
+	   foreach($corners as $key=>$value) {
+		 $value[0]-=$center_x;        //Translate coords to center for rotation
+		 $value[1]-=$center_y;
+		 $temp=array();
+		 $temp[0]=$value[0]*$cosangle+$value[1]*$sinangle;
+		 $temp[1]=$value[1]*$cosangle-$value[0]*$sinangle;
+		 $corners[$key]=$temp;    
+	   }
+	   
+	   $min_x=1000000000000000;
+	   $max_x=-1000000000000000;
+	   $min_y=1000000000000000;
+	   $max_y=-1000000000000000;
+	   
+	   foreach($corners as $key => $value) {
+		 if($value[0]<$min_x)
+		   $min_x=$value[0];
+		 if($value[0]>$max_x)
+		   $max_x=$value[0];
+	   
+		 if($value[1]<$min_y)
+		   $min_y=$value[1];
+		 if($value[1]>$max_y)
+		   $max_y=$value[1];
+	   }
+	
+	   $rotate_width=ceil($max_x-$min_x);
+	   $rotate_height=ceil($max_y-$min_y);
+   }
+   else {
+   	if ($rot == 180) {
+   		$rotate_height = $src_y;
+   		$rotate_width = $src_x;
+   	} else {
+   		$rotate_height = $src_x;
+   		$rotate_width = $src_y;
+   	}
+   	$bicubic = false;
    }
    
-   $min_x=1000000000000000;
-   $max_x=-1000000000000000;
-   $min_y=1000000000000000;
-   $max_y=-1000000000000000;
-   
-   foreach($corners as $key => $value) {
-     if($value[0]<$min_x)
-       $min_x=$value[0];
-     if($value[0]>$max_x)
-       $max_x=$value[0];
-   
-     if($value[1]<$min_y)
-       $min_y=$value[1];
-     if($value[1]>$max_y)
-       $max_y=$value[1];
-   }
-
-   $rotate_width=ceil($max_x-$min_x);
-   $rotate_height=ceil($max_y-$min_y);
    
    $rotate=imagecreatetruecolor($rotate_width,$rotate_height);
    imagealphablending($rotate, false);
@@ -1449,8 +1474,16 @@ function imageRotateBicubic($src_img, $angle, $bicubic=0) {
 
    $cosangle = cos($angle);
    $sinangle = sin($angle);
-   $newcenter_x = ($rotate_width)/2;
-   $newcenter_y = ($rotate_height)/2;
+   
+	// arrondir pour rotations angle droit (car cos et sin dans {-1,0,1})
+	if ($droit) {
+		$cosangle = round($cosangle);
+		$sinangle = round($sinangle);
+	}
+
+   $newcenter_x = ($rotate_width-1)/2;
+   $newcenter_y = ($rotate_height-1)/2;
+
    
    for ($y = 0; $y < $rotate_height; $y++) {
      for ($x = 0; $x < $rotate_width; $x++) {
@@ -1458,9 +1491,13 @@ function imageRotateBicubic($src_img, $angle, $bicubic=0) {
        $old_x = ((($newcenter_x-$x) * $cosangle + ($newcenter_y-$y) * $sinangle))
          + $center_x;
        $old_y = ((($newcenter_y-$y) * $cosangle - ($newcenter_x-$x) * $sinangle))
-         + $center_y;   
-   if ( $old_x >= 0 && ceil($old_x) < $src_x
-         && $old_y >= 0 && ceil($old_y) < $src_y ) {
+         + $center_y;  
+         
+         $old_x = ceil($old_x);
+         $old_y = ceil($old_y);
+         
+   if ( $old_x >= 0 && $old_x < $src_x
+         && $old_y >= 0 && $old_y < $src_y ) {
      if ($bicubic == true) {
        $xo = $old_x;
        $x0 = floor($xo);
@@ -2289,6 +2326,8 @@ function image_typo() {
 
 	// Construire requete et nom fichier
 	$text = ereg_replace("\&nbsp;", "~", $texte);	
+
+	if (strlen($text) == 0) return "";
 
 	$taille = $variable["taille"];
 	if ($taille < 1) $taille = 16;
