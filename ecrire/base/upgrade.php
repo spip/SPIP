@@ -11,7 +11,6 @@
 \***************************************************************************/
 
 
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function maj_version ($version, $test = true) {
@@ -1173,6 +1172,14 @@ function maj_base() {
 		spip_query("ALTER IGNORE TABLE spip_mots_forum ADD PRIMARY KEY (id_forum, id_mot)");
 		maj_version(1.909);
 	}
+
+	if ($version_installee < 1.910) {
+		spip_query("ALTER IGNORE TABLE spip_auteurs_articles ADD PRIMARY KEY (id_auteur, id_article)");
+		spip_query("ALTER IGNORE TABLE spip_auteurs_rubriques ADD PRIMARY KEY (id_auteur, id_rubrique)");
+		spip_query("ALTER IGNORE TABLE spip_auteurs_messages ADD PRIMARY KEY (id_auteur, id_message)");
+		maj_version(1.910);
+	}
+
 	return true;
 }
 

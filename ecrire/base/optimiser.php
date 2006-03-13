@@ -293,7 +293,7 @@ function optimiser_base() {
 		WHERE id_auteur=".$row['id_auteur']
 		." AND id_message=".$row['id_message']);
 
-	# les liens d'articles sur des auteurs effaces
+	# les liens de rubriques sur des auteurs effaces
 	$query = "SELECT auteurs_rubriques.id_auteur,auteurs_rubriques.id_rubrique
 		      FROM spip_auteurs_rubriques AS auteurs_rubriques
 		        LEFT JOIN spip_rubriques AS rubriques

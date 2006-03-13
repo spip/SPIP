@@ -46,12 +46,7 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	global $spip_lang_right;
 
 
-	// S'agit-il d'un admin restreint ?
-	if ($statut == '0minirezo') {
-		$query_admin = "SELECT lien.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique GROUP BY lien.id_rubrique";
-		$result_admin = spip_query($query_admin);
-		$admin_restreint = (spip_num_rows($result_admin) > 0);
-	}
+	if ($connect_statut != "0minirezo") return;
 
 	$droit = ( ($connect_toutes_rubriques OR $statut != "0minirezo")
 		   && ($connect_id_auteur != $id_auteur));
@@ -66,83 +61,73 @@ function afficher_formulaire_statut_auteur ($id_auteur, $statut, $post='') {
 	// les admins voient et peuvent modifier les droits
 	// les admins restreints les voient mais 
 	// ne peuvent les utiliser que pour mettre un auteur a la poubelle
-	if ($connect_statut == "0minirezo") {
-		debut_cadre_relief();
 
-		if ($droit) {
-		  /* Neutralisation momentanee des couches. A revoir.
-		  $couches = $admin_restreint ? 
-		    bouton_block_visible("statut$id_auteur") :
-		    bouton_block_invisible("statut$id_auteur");
-		  echo $couches;
-		  */
+	debut_cadre_relief();
+
+	if ($droit) {
 		  echo "<b>"._T('info_statut_auteur')." </b> ";
 		  echo choix_statut_auteur($statut);
-		}
+	}
 
-		// si pas admin au chargement, rien a montrer. 
-		echo "<div id='changer_statut_auteur'",
+	// si pas admin au chargement, rien a montrer. 
+	echo "<div id='changer_statut_auteur'",
 		  (($statut == '0minirezo') ? '' : " style='visibility: hidden'"),
 		  '>';
-
-		echo "\n<p /><div style='arial2'>";
-		// si pas admin restreint au chargement, rien a calculer
-		if (!$admin_restreint) {
-			if ($statut == '0minirezo') {
-				echo _T('info_admin_gere_toutes_rubriques');
-			}
-		} else {
-				echo _T('info_admin_gere_rubriques')."\n";
-				echo "<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
-				while ($row_admin = spip_fetch_array($result_admin)) {
-					$id_rubrique = $row_admin["id_rubrique"];
-					echo "<li><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>", typo($row_admin["titre"]), "</a>";
-
-					if ($connect_toutes_rubriques
-					AND $connect_id_auteur != $id_auteur) {
-					  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_url_ecrire($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), "'>",
-					    _T('lien_supprimer_rubrique'),
-					    "</a>]</font>";
-					}
-					echo '</li>';
-					$toutes_rubriques .= "$id_rubrique,";
-				}
-				$toutes_rubriques = ",$toutes_rubriques";
-
-				echo "</ul>";
-		}
-		echo "</div>\n";
+	auteur_voir_rubriques($id_auteur, $url_self);
 
 		// Ajouter une rubrique a un administrateur restreint
-		if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
-			echo debut_block_visible("statut$id_auteur");
-			echo "\n<div id='ajax_rubrique' class='arial1'><br />\n";
-			if (spip_num_rows($result_admin) == 0)
-				echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
-			else
-				echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
-			echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
+	if ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur) {
+		echo debut_block_visible("statut$id_auteur");
+		echo "\n<div id='ajax_rubrique' class='arial1'><br />\n";
+		if (spip_num_rows($result_admin) == 0)
+			echo "<b>"._T('info_restreindre_rubrique')."</b><br />";
+		else
+			echo "<b>"._T('info_ajouter_rubrique')."</b><br />";
+		echo "\n<input name='id_auteur' value='$id_auteur' TYPE='hidden' />";
+		include_spip('inc/rubriques');
+		echo selecteur_rubrique(0, 'auteur', false);
+		echo "</div>\n";
+		echo fin_block();
+	}
 
-			// selecteur de rubrique
-			include_spip('inc/rubriques');
-			echo selecteur_rubrique(0, 'auteur', false);
+	echo '</div>'; // fin de la balise a visibilite conditionnelle
 
-			echo "</div>\n";
-			echo fin_block();
-		}
-
-		echo '</div>'; // fin de la balise a visibilite conditionnelle
-
-		if ($post && $droit) {
-		  echo "<div align='",
+	if ($post && $droit) {
+		echo "<div align='",
 		    $spip_lang_right,
 		    "'><input type='submit' class='fondo' value=\"",
 		    _T('bouton_valider'),
 		    "\" /></div>",
 		    "</form>\n";
-		}
+	}
 
-		fin_cadre_relief();
+	fin_cadre_relief();
+}
+
+function auteur_voir_rubriques($id_auteur, $url_self)
+{
+	global $connect_toutes_rubriques, $connect_id_auteur;
+					 
+	$result_admin = spip_query("SELECT rubriques.id_rubrique, titre FROM spip_auteurs_rubriques AS lien, spip_rubriques AS rubriques WHERE lien.id_auteur=$id_auteur AND lien.id_rubrique=rubriques.id_rubrique");
+
+	if (!spip_num_rows($result_admin)) {
+		echo _T('info_admin_gere_toutes_rubriques');
+	} else {
+		$modif = ($connect_toutes_rubriques AND $connect_id_auteur != $id_auteur);
+		echo _T('info_admin_gere_rubriques');
+		echo "\n<ul style='list-style-image: url(" . _DIR_IMG_PACK . "rubrique-12.gif)'>";
+		while ($row_admin = spip_fetch_array($result_admin)) {
+			$id_rubrique = $row_admin["id_rubrique"];
+			echo "<li><a href='" . generer_url_ecrire("naviguer","id_rubrique=$id_rubrique") . "'>", typo($row_admin["titre"]), "</a>";
+			
+			if ($modif) {
+			  echo "&nbsp;&nbsp;&nbsp;&nbsp;<font size='1'>[<a href='", generer_url_ecrire($url_self, "id_auteur=$id_auteur&supp_rub=$id_rubrique"), "'>",
+					    _T('lien_supprimer_rubrique'),
+					    "</a>]</font>";
+			}
+			echo '</li>';
+		}
+		echo "</ul>";
 	}
 }
 
@@ -173,7 +158,7 @@ function modifier_statut_auteur (&$auteur, $statut, $add_rub='', $supp_rub='') {
 	// modif auteur restreint, seulement pour les admins
 	if ($connect_toutes_rubriques) {
 		if ($add_rub=intval($add_rub))
-			spip_query("INSERT INTO spip_auteurs_rubriques
+			spip_query("INSERT IGNORE INTO spip_auteurs_rubriques
 			(id_auteur,id_rubrique)
 			VALUES(".$auteur['id_auteur'].", $add_rub)");
 
