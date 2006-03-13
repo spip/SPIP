@@ -77,6 +77,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	$keywords = '';
 	$found = false;
 	
+	
 	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
 		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs))
 			$keywords = urldecode($regs[2]);
@@ -87,7 +88,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	} else
 	for ($cnt = 0; $cnt < sizeof($arr_engines) && !$found; $cnt++)
 	{
-		if ($found = (ereg($arr_engines[$cnt][2], $host)))
+		if ($found = (ereg($arr_engines[$cnt][2], $host)) OR $found = (ereg($arr_engines[$cnt][2], $path)))
 		{
 			$kw_referer_host = $arr_engines[$cnt][0];
 			
@@ -143,6 +144,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 // Afficher les referers d'un article (ou du site)
 //
 function aff_referers ($query, $limit=10, $plus) {
+	global $spip_lang_right;
 	// Charger les moteurs de recherche
 	$arr_engines = stats_load_engines();
 
@@ -194,11 +196,15 @@ function aff_referers ($query, $limit=10, $plus) {
 			if ($lesdomaines[$numero] == '') next;
 
 			$visites = pos($nbvisites);
-			$ret = "\n<li>";
+
+			$ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesdomaines[$numero]."\"><img src=\"http://open.thumbshots.org/image.pxf?url=http://".$lesdomaines[$numero]."\" style=\"float: $spip_lang_right;\" /></a>";
+
+			$ret .= "\n<li>";
 
 			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('info_visites')."</font> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
 			else $ret .= "<font color='#999999'>$visites "._T('info_visite')."</font> ";
+
 
 			if (count($lesreferers[$numero]) > 1) {
 				$referers = join ("</li><li>",$lesreferers[$numero]);

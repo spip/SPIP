@@ -61,6 +61,10 @@ s=
 (.*)\.nomade\.tiscali\.fr
 (.*)\.nomade\.aliceadsl\.fr
 
+[Alice]
+qs=
+\.aliceadsl\.
+
 [Lycos]
 query=
 search\.lycos\.com
@@ -163,6 +167,11 @@ www\.mongenie\.com
 searchfor=
 kx\.search\.need2find\.com
 
+[Exalead]
+q=
+www\.exalead\.fr
+www\.exalead\.com
+
 #
 # Dmoz
 #
@@ -184,3 +193,4 @@ courrielweb\.cmaisonneuve\.qc\.ca
 webmail([0-9]*)\.wanadoo\.fr
 www\.laposte\.net
 mail([0-9]*)\.voila\.fr
+\/(web)?mail\/
