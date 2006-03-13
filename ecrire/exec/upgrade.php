@@ -63,7 +63,7 @@ function exec_upgrade_dist() {
 	// On passe a l'upgrade
 	include_spip('inc/admin');
 
-	debut_admin(generer_url_post_ecrire("upgrade"),
+	debut_admin(generer_url_post_ecrire("upgrade", 'reinstall=non'),
 		$upgrade_titre, $commentaire);
 
 	include_spip('base/create');
