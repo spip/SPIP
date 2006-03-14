@@ -35,27 +35,38 @@ function exec_articles_forum_dist()
 
 	debut_page($titre, "documents", "articles");
 
-	articles_forum_cadres($id_article, $id_rubrique, $titre);
+	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article&id_rubrique=$id_rubrique");
 
 	if (! ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)))
 		return;
-	articles_forum_liens($id_article, $debut, $pack, $enplus);
 
-	$result_forum = spip_query("SELECT pied.*, max(thread.date_heure) AS date
+	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
+	$limitnb = $debut + $enplus - $limitdeb;
+
+	$result = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" .
+#	" LIMIT  $limitnb OFFSET $limitdeb" # PG
+	" LIMIT $limitdeb, $limitnb"
+			   ); 
+	articles_forum_liens(spip_num_rows($result), "articles_forum", "id_article=$id_article", $debut, $pack, $limitdeb);
+
+	$query = "SELECT pied.*, max(thread.date_heure) AS date
 		FROM spip_forum AS pied, spip_forum AS thread
 		WHERE pied.id_article='$id_article'
 		AND pied.id_parent=0
 		AND pied.statut IN ('publie', 'off', 'prop')
 		AND thread.id_thread=pied.id_forum
 		GROUP BY id_thread
-		ORDER BY date DESC LIMIT $debut, $pack");
+		ORDER BY date DESC 
+		LIMIT $debut, $pack";
 
-	afficher_forum($result_forum,"", $id_article);
+	$res = spip_query($query);
+
+	afficher_forum($res,"", $id_article);
 	
 	fin_page();
 }
 
-function articles_forum_cadres($id_article, $id_rubrique, $titre)
+function articles_forum_cadres($id_rubrique, $titre, $script, $args)
 {
 	debut_grand_cadre();
 
@@ -81,7 +92,7 @@ function articles_forum_cadres($id_article, $id_rubrique, $titre)
 	echo "<tr width='100%'>";
 	echo "<td>";
 	icone(_T('icone_retour'),
-		generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"),
+		generer_url_ecrire($script, $args),
 		"article-24.gif", "rien.gif");
 	echo "</td>";
 	echo "<td>" . http_img_pack('rien.gif', " ", "width='10'") ."</td>\n";
@@ -92,42 +103,29 @@ function articles_forum_cadres($id_article, $id_rubrique, $titre)
 	echo "<p>";
 }
 
-function articles_forum_liens($id_article, $debut, $pack, $enplus)
+function articles_forum_liens($n, $script, $args, $curseur, $pack, $i)
 {
-	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
-	$limitnb = $debut + $enplus - $limitdeb;
-
-	$result_forum = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" .
-#	" LIMIT  $limitnb OFFSET $limitdeb" # PG
-	" LIMIT $limitdeb, $limitnb"
-			   ); 
-
-	$i = $limitdeb;
-
 	echo "<div class='serif2'>";
 
 	if ($i>0)
-		echo "<A href='" . generer_url_ecrire("articles_forum","id_article=$id_article") . "'>0</A> ... | ";
-	while ($row = spip_fetch_array($result_forum)) {
+		echo "<a href='" . generer_url_ecrire($script,$args) . "'>0</a> ... | ";
+	for (;$n;$n--){
 
 	// barre de navigation
 		if ($i == $pack*floor($i/$pack)) {
-			if ($i == $debut)
-				echo "<FONT SIZE=3><B>$i</B></FONT>";
+			if ($i == $curseur)
+				echo "<font size='3'><b>$i</b></font>";
 			else
-				echo "<A href='" . generer_url_ecrire("articles_forum","id_article=$id_article&debut=$i") . "'>$i</A>";
+				echo "<a href='", generer_url_ecrire($script,"$args&debut=$i") , "'>$i</a>";
 			echo " | ";
 		}
 
 		$i ++;
 	}
 
-	echo "<A href='",
-		generer_url_ecrire("articles_forum","id_article=$id_article&debut=$i"),
-		"'>...</A>",
-		"</div>";
+	echo "<a href='", generer_url_ecrire($script,"$args&debut=$i") , "'>...</a>";
 
-	echo "</FONT>";
+	echo "</div>";
 }
 
 ?>
