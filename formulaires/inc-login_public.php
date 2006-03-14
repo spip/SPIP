@@ -33,39 +33,34 @@ function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
 
 function balise_LOGIN_PUBLIC_dyn($url, $login) {
 
-	if (!$url		# pas d'url passee en filtr eou dans le contexte
+	if (!$url 		# pas d'url passee en filtre ou dans le contexte
 	AND !$url = _request('url') # ni d'url passee par l'utilisateur
-	) {
-		$link = new Link();
-		$link->delVar('var_erreur');
-		$link->delVar('var_login');
-		$url = $link->getUrl();
-	}
+	)
+		$url = str_replace('&amp;', '&', self());
 	return login_explicite($login, $url);
 }
 
 function login_explicite($login, $cible) {
 	global $auteur_session;
-	$link = new Link();
-	$link->delVar('var_erreur');
-	$link->delVar('var_login');
-	$action = $link->getUrl();
+
+	$action = str_replace('&amp;', '&', self());
 
 	if ($cible) {
-	  $cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
-	  $cible = ereg_replace("[?&]var_login=[^&]*", '', $cible);
+		$cible = ereg_replace("[?&]var_erreur=[^&]*", '', $cible);
+		$cible = ereg_replace("[?&]var_login=[^&]*", '', $cible);
 	} else {
-	  if (ereg("[?&]url=([^&]*)", $action, $m))
-	    $cible = urldecode($m[1]);
-	  else
-	    $cible = _DIR_RESTREINT ;
+		if (ereg("[?&]url=([^&]*)", $action, $m))
+			$cible = urldecode($m[1]);
+		else
+			$cible = _DIR_RESTREINT ;
 	}
-	      
+
 	include_spip('inc/session');
 	verifier_visiteur();
 
 	if ($auteur_session AND 
-	($auteur_session['statut']=='0minirezo' OR $auteur_session['statut']=='1comite')) {
+	($auteur_session['statut']=='0minirezo'
+	OR $auteur_session['statut']=='1comite')) {
 		if (($cible != $action) && !headers_sent()
 		AND !$_GET['var_mode'])
 			redirige_par_entete($cible);
@@ -154,7 +149,7 @@ function login_pour_tous($login, $cible, $action) {
 					'echec_cookie' => ($echec_cookie ? ' ' : ''),
 					'login' => $login,
 					'login_alt' => ($login_alt ? $login_alt : $login),
-					'self' => $GLOBALS["clean_link"]->getUrl()
+					'self' => str_replace('&amp;', '&', self())
 					)
 				)
 			);
