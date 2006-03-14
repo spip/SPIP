@@ -428,24 +428,32 @@ function lire_meta($nom) {
 //
 // Traduction des textes de SPIP
 //
-function _T($texte, $args = '') {
+function _T($texte, $args=array()) {
 	# petite optimisation pour ne passer qu'une fois dans include_spip
 	static $c; $c OR $c = include_spip('inc/lang');
 
-	$text = traduire_chaine($texte, $args);
+	$text = traduire_chaine($texte);
 	if (!empty($GLOBALS['xhtml'])) {
 		include_spip('inc/charsets');
 		$text = html2unicode($text, true /* secure */);
 	}
 
-	return $text ? $text :
+	if (!$text) 
 		// pour les chaines non traduites
-		(($n = strpos($texte,':')) === false ? $texte :
-			substr($texte, $n+1));
+		$text =	str_replace('_', ' ',
+			 (($n = strpos($texte,':')) === false ? $texte :
+				substr($texte, $n+1)));
+
+	while (list($name, $value) = @each($args))
+		$text = str_replace ("@$name@", $value, $text);
+	return $text;
+
 }
 
 // chaines en cours de traduction
-function _L($text) {
+function _L($text, $args=array()) {
+	while (list($name, $value) = @each($args))
+		$text = str_replace ("@$name@", $value, $text);
 	if ($GLOBALS['test_i18n'])
 		return "<span style='color:red;'>$text</span>";
 	else
