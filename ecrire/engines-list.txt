@@ -76,16 +76,17 @@ recherche\.francite\.com
 
 [MSN]
 (q|s)=
-search(.*)\.msn\.([a-z]+)$
+search(.*)\.msn\.([a-z.]+)$
 leguide(.*)\.msn\.([a-z]+)$
 search\.ninemsn\.com\.au
 
 [Excite]
 search=
 www\.excite\.fr
+(.*)\.excite\.co\.jp
 
 [AOL France]
-(q|r)=
+(query|q|r)=
 (.*)recherche\.aol\.fr
 
 [AOLsearch]
@@ -171,6 +172,14 @@ kx\.search\.need2find\.com
 q=
 www\.exalead\.fr
 www\.exalead\.com
+
+[Virgilio.it]
+qs=
+search\.virgilio\.it
+
+[Libero.it]
+query=
+arianna\.libero\.it
 
 #
 # Dmoz
