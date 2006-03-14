@@ -51,7 +51,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 		$message = '';
 	else {
 		include_spip('inc/filtres'); // pour email_valide
-		$message = message_inscription($mail, $nom, false, $mode, $id_rubrique);
+		$message = message_inscription($mail, $nom, $mode, $id_rubrique);
 		if (is_array($message)) {
 			if (function_exists('envoyer_inscription'))
 				$f = 'envoyer_inscription';
@@ -74,6 +74,7 @@ function balise_FORMULAIRE_INSCRIPTION_dyn($mode, $focus, $id_rubrique=0) {
 // Retour: une chaine message d'erreur ou un tableau email/nom au minimum
 
 function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
+
 	if (!($nom = trim($nom))) return _T('ecrire:info_login_trop_court');
 	if (!$r = email_valide($mail)) return _T('info_email_invalide');
 	return array('email' => $r, 'nom' => $nom);
@@ -85,7 +86,7 @@ function test_inscription_dist($mode, $mail, $nom, $id_rubrique=0) {
 // et on lui envoie ses codes par email ; lors de
 // sa premiere connexion il obtiendra son statut final (auth->activer())
 
-function message_inscription($mail, $nom, $force, $mode, $id_rubrique=0) {
+function message_inscription($mail, $nom, $mode, $id_rubrique=0) {
 
 	if (function_exists('test_inscription'))
 		$f = 'test_inscription';
@@ -102,24 +103,19 @@ function message_inscription($mail, $nom, $force, $mode, $id_rubrique=0) {
 			"'");
 	$row = spip_fetch_array($s);
 	if (!$row) 
-	  // il n'existe pas, creer les identifiants  
+		// il n'existe pas, creer les identifiants  
 		return inscription_nouveau($declaration);
-	else {
-		// existant mais encore muet, ou ressucite: renvoyer les infos
-		if ((($row['statut'] == 'nouveau') && !$force) ||
-			(($row['statut'] == '5poubelle') && $force)) {
-			// recreer le pass
-			$row['pass'] = creer_pass_pour_auteur($row['id_auteur']);
-			return $row;
-		} else {
-			// irrecuperable
-			if ($row['statut'] == '5poubelle')
-				return _T('form_forum_access_refuse');
-			else
-				// deja inscrit
-				return _T('form_forum_email_deja_enregistre');
-		}
-	}
+	if (($row['statut'] == '5poubelle') AND !$declaration['pass'])
+		// irrecuperable
+		return _T('form_forum_access_refuse');
+
+	if (($row['statut'] != 'nouveau') AND !$declaration['pass'])
+		// deja inscrit
+		return _T('form_forum_email_deja_enregistre');
+
+	// existant mais encore muet, ou ressucite: renvoyer les infos
+	$row['pass'] = creer_pass_pour_auteur($row['id_auteur']);
+	return $row;
 }
 
 function inscription_nouveau($declaration)
