@@ -204,9 +204,14 @@ function aff_referers ($query, $limit=10, $plus) {
 			if ($visites > 5) $ret .= "<font color='red'>$visites "._T('info_visites')."</font> ";
 			else if ($visites > 1) $ret .= "$visites "._T('info_visites')." ";
 			else $ret .= "<font color='#999999'>$visites "._T('info_visite')."</font> ";
-
-
-			if (count($lesreferers[$numero]) > 1) {
+		
+		
+			if ($lesdomaines[$numero] == "(email)") {
+				$aff .= "<p />";
+				$aff .= $ret;
+				$aff .= "<b>".$lesdomaines[$numero]."</b>";
+			}
+			else if (count($lesreferers[$numero]) > 1) {
 				$referers = join ("</li><li>",$lesreferers[$numero]);
 				$aff .= "<p />";
 				$aff .= $ret;
