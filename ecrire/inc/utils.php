@@ -352,6 +352,9 @@ function self($root = false) {
 	// eviter les hacks
 	$url = htmlspecialchars($url);
 
+	// Si c'est vide, donner './'
+	$url = preg_replace(',^$,', './', $url);
+
 	return $url;
 }
 

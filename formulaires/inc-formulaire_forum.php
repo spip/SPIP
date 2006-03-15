@@ -37,6 +37,11 @@ charger_generer_url();
 global $balise_FORMULAIRE_FORUM_collecte;
 $balise_FORMULAIRE_FORUM_collecte = array('id_rubrique', 'id_forum', 'id_article', 'id_breve', 'id_syndic', 'ajouter_mot', 'ajouter_groupe', 'afficher_texte');
 
+// Ajouter l'invalideur forums sur les pages contenant ce formulaire
+function balise_FORMULAIRE_FORUM_traitement($p) {
+	$p->code = code_invalideur_forums($p, $p->code);
+	return $p;
+}
 
 // verification des droits a faire du forum
 function balise_FORMULAIRE_FORUM_stat($args, $filtres) {

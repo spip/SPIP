@@ -12,12 +12,6 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('inc/meta');
-include_spip('inc/session');
-include_spip('inc/filtres');
-include_spip('inc/logos');
-spip_connect();
-
 global $balise_LOGIN_PUBLIC_collecte;
 $balise_LOGIN_PUBLIC_collecte = array('url');
 
@@ -29,6 +23,17 @@ $balise_LOGIN_PUBLIC_collecte = array('url');
 
 function balise_LOGIN_PUBLIC_stat ($args, $filtres) {
 	return array($filtres[0] ? $filtres[0] : $args[0], $args[1], $args[2]);
+}
+
+// Cette balise necessite les entetes "flag_dynamique"
+// (attention, ne fonctionnera pas en INCLURE)
+function balise_LOGIN_PUBLIC_traitement($p) {
+	$p->code = '\'<'
+		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
+		.'><'
+		.'?php header("Pragma: no-cache"); ?'
+		.'>\'.' . $p->code;
+	return $p;
 }
 
 function balise_LOGIN_PUBLIC_dyn($url, $login) {
@@ -58,14 +63,20 @@ function login_explicite($login, $cible) {
 	include_spip('inc/session');
 	verifier_visiteur();
 
-	if ($auteur_session AND 
+	// Si on est connecte, envoyer vers la destination
+	// sauf si on y est deja
+	if ($auteur_session AND
 	($auteur_session['statut']=='0minirezo'
 	OR $auteur_session['statut']=='1comite')) {
-		if (($cible != $action) && !headers_sent()
-		AND !$_GET['var_mode'])
-			redirige_par_entete($cible);
-		include_spip('inc/minipres');
-		return http_href($cible, _T('login_par_ici'));
+		if ($cible != $action) {
+			if (!headers_sent() AND !$_GET['var_mode'])
+				redirige_par_entete($cible);
+			else {
+				include_spip('inc/minipres');
+				return http_href($cible, _T('login_par_ici'));
+			}
+		} else
+			return ''; # on est arrive on bon endroit, et logue'...
 	}
 	return login_pour_tous($login ? $login : _request('var_login'), $cible, $action);
 }
@@ -137,11 +148,15 @@ function login_pour_tous($login, $cible, $action) {
 	if (_request('var_erreur') == 'pass')
 		$erreur = _T('login_erreur_pass');
 
+	// le formulaire utilise le filtre |chercher_logo si un id_auteur est la...
+	include_spip('inc/logos');
+
+	// Appeler le squelette formulaire_login
 	return array('formulaire_login', $GLOBALS['delais'],
 		array_merge(
 				array_map('texte_script', $row),
 				array(
-				      'action2' => ($login ? $pose_cookie: $action),
+					'action2' => ($login ? $pose_cookie: $action),
 					'erreur' => $erreur,
 					'action' => $action,
 					'url' => $cible,

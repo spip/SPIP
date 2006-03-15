@@ -168,6 +168,11 @@ function calculer_balise($nom, $p) {
 		$f = $GLOBALS['balise_' . $nom . '_collecte'];
 		if (is_array($f)) {
 			$res = calculer_balise_dynamique($p, $nom, $f);
+
+			// ajouter un code particulier ?
+			if (function_exists('balise_' . $nom . '_traitement'))
+				$res = call_user_func('balise_' . $nom . '_traitement', $res);
+
 			if ($res !== NULL)
 				return $res;
 		}
@@ -240,10 +245,6 @@ function calculer_balise_dynamique($p, $nom, $l) {
 	$p->interdire_scripts = false;
 	$p->fonctions = array();
 	$p->param = array();
-
-	// Cas particulier de #FORMULAIRE_FORUM : inserer l'invalideur
-	if ($nom == 'FORMULAIRE_FORUM')
-		$p->code = code_invalideur_forums($p, $p->code);
 
 	return $p;
 }
