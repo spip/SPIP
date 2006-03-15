@@ -138,10 +138,10 @@ function statut_modifiable_auteur($id_auteur, $auteur)
 // on peut se changer soi-meme
 	  return  (($connect_id_auteur == $id_auteur) ||
   // sinon on doit etre admin
-  // et pas admin restreint pour changer un autre admin
+  // et pas admin restreint pour changer un autre admin ou creer qq
 		(($connect_statut == "0minirezo") &&
 		 ($connect_toutes_rubriques OR 
-		  ($auteur['statut'] != "0minirezo"))));
+		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 
 function modifier_statut_auteur (&$auteur, $statut, $add_rub='', $supp_rub='') {

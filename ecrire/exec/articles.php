@@ -1034,11 +1034,13 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		echo "<B>"._T('texte_trop_resultats_auteurs', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
 	}
 
-	if ($GLOBALS['connect_statut'] == '0minirezo') {
+	if ($GLOBALS['connect_statut'] == '0minirezo' 
+	AND $GLOBALS['connect_toutes_rubriques']) {
+
 		echo "<div style='width: 200px;'>";
 		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
 		$titre = urlencode($cherche_auteur);
-		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&nom=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
 
 		// message pour ne pas afficher le second bouton "creer un auteur"
@@ -1161,7 +1163,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur)
 {
 
-	global $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
+	global $connect_toutes_rubriques, $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
 
 	if (!($flag_editable AND $options == 'avancees')) return;
 
@@ -1176,12 +1178,12 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 	echo "<tr>";
 
 	if ($connect_statut == '0minirezo'
-	    AND acces_rubrique($rubrique_article)
+	    AND $connect_toutes_rubriques
 	    AND $options == "avancees"
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
 	$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"));
-	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","new=oui&ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
+	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
 	}
