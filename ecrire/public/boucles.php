@@ -169,8 +169,10 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	$boucle->where[]= "($id_table.taille > 0 OR $id_table.distant='oui')";
 
 	$jointure = array_search("spip_types_documents", $boucle->from);
-	if ($jointure)
-	  $boucle->where[] = $id_table . ".id_type=$jointure" . ".id_type";
+	if ($jointure) {
+	  $j = $id_table . ".id_type=$jointure" . ".id_type";
+	  if (!in_array($j, $boucle->join)) $boucle->join[]= $j;
+	}
 
 	return calculer_boucle($id_boucle, $boucles);
 }
