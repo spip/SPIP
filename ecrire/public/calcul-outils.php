@@ -543,4 +543,21 @@ function lang_parametres_forum($s) {
 	return $s;
 }
 
+// La fonction presente dans les squelettes compiles
+
+function spip_optim_select ($select = array(), $from = array(), 
+			    $where = array(), $join=array(),
+			    $groupby = '', $orderby = array(), $limit = '',
+			    $sousrequete = '', $cpt = '',
+			    $table = '', $id = '', $serveur='') {
+
+	foreach($where as $k => $v) { if (!$v) unset($where[$k]);}
+	$where = array_merge($where, $join);
+
+	return spip_abstract_select($select, $from, $where,
+		  $groupby, array_filter($orderby), $limit,
+		  $sousrequete, $cpt,
+		  $table, $id, $serveur);
+
+}
 ?>

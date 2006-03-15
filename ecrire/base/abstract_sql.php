@@ -54,7 +54,7 @@ function spip_abstract_select (
 		}
 	}
 	return $f($select, $from, $where,
-		  $groupby, array_filter($orderby), $limit,
+		  $groupby, $orderby, $limit,
 		  $sousrequete, $cpt,
 		  $table, $id, $serveur);
 }
