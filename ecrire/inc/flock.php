@@ -193,7 +193,7 @@ function creer_repertoire($base, $subdir) {
 // si $dir = 'rep/sous_rep_' au lieu de 'rep/sous_rep/' on scanne 'rep/' et on
 // applique un pattern '^rep/sous_rep_'
 //
-function preg_files($dir, $pattern=-1 /* AUTO */ ) {
+function preg_files($dir, $pattern=-1 /* AUTO */, $recurs=array()) {
 	if ($pattern == -1)
 		$pattern = "^$dir";
 	$fichiers = array();
@@ -212,9 +212,11 @@ function preg_files($dir, $pattern=-1 /* AUTO */ ) {
 				if (is_file("$dir/$f")) {
 					if (preg_match(",$pattern,i", "$dir/$f"))
 						$fichiers[] = "$dir/$f";
-				} else if (is_dir("$dir/$f")) {
+				} else if (is_dir("$dir/$f")
+				AND !in_array(realpath("$dir/$f"), $recurs)) {
+					array_push($recurs, realpath("$dir/$f"));
 					$beginning = $fichiers;
-					$end = preg_files("$dir/$f/", $pattern);
+					$end = preg_files("$dir/$f/", $pattern, $recurs);
 					$fichiers = array_merge((array)$beginning, (array)$end);
 				}
 			}
