@@ -35,7 +35,7 @@ function exec_articles_forum_dist()
 
 	debut_page($titre, "documents", "articles");
 
-	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article&id_rubrique=$id_rubrique");
+	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article");
 
 	if (! ($connect_statut=='0minirezo' AND acces_rubrique($id_rubrique)))
 		return;

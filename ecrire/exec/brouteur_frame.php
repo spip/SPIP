@@ -48,7 +48,7 @@ function exec_brouteur_frame_dist()
 				$id_rubrique=$row['id_rubrique'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article&id_rubrique=$id_rubrique"),"\"'>",$titre,"</a>";
+				echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
 			}
 			echo "</div>";
 		}
@@ -65,7 +65,7 @@ function exec_brouteur_frame_dist()
 				$id_rubrique=$row['id_rubrique'];
 				$titre = typo($row['titre']);
 				$statut = $row['statut'];
-				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article&id_rubrique=$id_rubrique"),"\"'>",$titre,"</a>";
+				echo "<a class='$statut' href='javascript:window.parent.location=\"", generer_url_ecrire('articles',"id_article=$id_article"),"\"'>",$titre,"</a>";
 			}
 			echo "</div>";
 		}
@@ -149,7 +149,7 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 					$id_rubrique=$row['id_rubrique'];
 					$titre = typo($row['titre']);
 					$statut = $row['statut'];
-					echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article&id_rubrique=$id_rubrique")."\"'>",$titre,"</a>";
+					echo "<a class='$statut' href='javascript:window.parent.location=\"" . generer_url_ecrire('articles',"id_article=$id_article")."\"'>",$titre,"</a>";
 				}
 				echo "</div>";
 			}

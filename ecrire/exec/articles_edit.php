@@ -113,8 +113,8 @@ function formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre,
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
 echo "<td>";
-	if ($lier_trad) icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad&id_rubrique=$id_rubrique"), "article-24.gif", "rien.gif");
-	else icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_article&id_rubrique=$id_rubrique"), "article-24.gif", "rien.gif");
+	if ($lier_trad) icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$lier_trad"), "article-24.gif", "rien.gif");
+	else icone(_T('icone_retour'), generer_url_ecrire("articles","id_article=$id_article"), "article-24.gif", "rien.gif");
 
 echo "</td>";
 echo "<td>". http_img_pack('rien.gif', " ", "width='10'") . "</td>\n";
@@ -137,7 +137,7 @@ echo "<P><HR><P>";
 	$texte = entites_html($texte);
 	$ps = entites_html($ps);
 
-	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article&id_rubrique=$id_rubrique" : ""),'formulaire');
+	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire');
 
 	if ($new == 'oui')
 		echo "<INPUT TYPE='Hidden' NAME='new' VALUE='oui'>";
