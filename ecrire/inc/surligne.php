@@ -68,7 +68,7 @@ function surligner_regexp_accents ($mot) {
 	$mot = surligner_sans_accents ($mot);
 	if ($GLOBALS['meta']['charset'] == 'utf-8') {
 		while(list($k,$s) = each ($accents_regexp)) {
-			$accents_regexp_utf8[$k] = "(".join("|", split_by_char(ereg_replace("\]|\[","",$accents_regexp[$k]))).")";
+			$accents_regexp_utf8[$k] = "(".join("|", split_by_char(preg_replace(',[\]\[],','',$accents_regexp[$k]))).")";
 		}
 		$mot = strtr(strtolower($mot), $accents_regexp_utf8);
 		$mot = importer_charset($mot, 'iso-8859-1');
@@ -86,9 +86,9 @@ function surligner_mots($page, $mots) {
 
 	// Remplacer les caracteres potentiellement accentues dans la chaine
 	// de recherche par les choix correspondants en syntaxe regexp (!)
-	$mots = split("[[:space:]]+", $mots);
+	$mots = preg_split(',\s+,ms', $mots);
 
-	while (list(, $mot) = each ($mots)) {
+	foreach ($mots as $mot) {
 		if (strlen($mot) >= 2) {
 			$mot = surligner_regexp_accents(preg_quote(str_replace('/', '', $mot)));
 			$mots_surligne[] = $mot;
@@ -97,9 +97,9 @@ function surligner_mots($page, $mots) {
 
 	if (!$mots_surligne) return $page;
 
-	$regexp = '/((^|>)([^<]*[^[:alnum:]_<])?)(('
+	$regexp = '/((^|>)([^<]*[^[:alnum:]_<\x80-\xFF])?)(('
 	. join('|', $mots_surligne)
-	. ')[[:alnum:]_]*?)/Uis';
+	. ')[[:alnum:]_\x80-\xFF]*?)/Uis';
 
 	// en cas de surlignement limite' (champs #SURLIGNE), 
 	// le compilateur a inse're' les balises de surlignement
