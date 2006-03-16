@@ -591,7 +591,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 			_T('zbug_boucle') .
 			" $idb " .
 			_T('zbug_critere_inconnu', 
-			    array('critere' => $crit->op)));
+			    array('critere' => $col)));
 }
 
 // deduction automatique des jointures 
@@ -611,7 +611,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
   foreach($res as $r) {
     list($d, $a, $j) = $r;
     $num++;
-    $boucle->join[]= ($id_table ? $id_table : $d) . ".$j=L$num." . $j;
+    $boucle->join[$num]= array(($id_table ? $id_table : $d), $j);
     $boucle->from[$id_table = "L$num"] = $a[0];    
   }
 
@@ -646,10 +646,9 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 
   $keys = $ddesc['key'];
 
-  if ($v = $keys['PRIMARY KEY']) {
-    unset($keys['PRIMARY KEY']);
-    $keys = array_merge(split(', *', $v), $keys);
-  }
+  // priorite a la primaire, qui peut etre multiple
+  if ($v = (split(', *', $keys['PRIMARY KEY'])))
+    $keys = $v;
   $v = array_intersect($keys, $adesc['key']); 
   if ($v)
     return array(array($dnom, $arrivee, array_shift($v)));
@@ -659,7 +658,7 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 	if ($v && (!in_array($v,$vu)) && 
 	    ($def = trouver_def_table($v, $boucle))) {
 	  list($table,$join) = $def;
-	  $milieu = array_intersect($keys, trouver_cles_table($join['key']));
+	  $milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
 	  foreach ($milieu as $k)
 	    {
 	      $new[] = $v;
