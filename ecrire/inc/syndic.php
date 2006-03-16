@@ -167,6 +167,7 @@ function analyser_backend($rss, $url_syndic='') {
 	//
 
 	if (!count($items)) return _T('avis_echec_syndication_01');
+
 	foreach ($items as $item) {
 		$data = array();
 
@@ -186,6 +187,9 @@ function analyser_backend($rss, $url_syndic='') {
 		else if (preg_match(',<guid.*>[[:space:]]*(https?:[^<]*)</guid>,Uims',
 		$item, $regs))
 			$data['url'] = $regs[1];
+		else if (preg_match(',<enclosure[^>]*>,ims', $item, $regs)
+		AND $url = extraire_attribut($regs[0], 'url'))
+			$data['url'] = $url;
 		else
 			$data['url'] = '';
 
