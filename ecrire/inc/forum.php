@@ -85,7 +85,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 	}
 
 	$link = new Link();
-	$link = _DIR_RESTREINT_ABS . $link->geturl() . "#id$id_forum";
+	$link = _DIR_RESTREINT_ABS . str_replace('&amp;', '&', self()) . "#id$id_forum";
 
 	if ($supprimer)
 	  $controle .= icone(_T('icone_supprimer_message'), generer_action_auteur('instituer', "forum $id_forum $supprimer", $link),
@@ -99,7 +99,7 @@ function boutons_controle_forum($id_forum, $forum_stat, $forum_id_auteur=0, $ref
 
 	if ($valider_repondre) {
 
-	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer', "forum $id_forum $valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . rawurlencode(str_replace('&amp;', '&', $link)), true)),
+	  $controle .= icone(_T('icone_valider_message') . " &amp; " .   _T('lien_repondre_message'), generer_action_auteur('instituer', "forum $id_forum $valider", generer_url_public('forum', "$ref&id_forum=$id_forum&retour=" . rawurlencode($link), true)),
 			     $logo,
 			     "creer.gif", 'right', 'non');
 	}
