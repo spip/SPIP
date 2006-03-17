@@ -144,9 +144,7 @@ function cherche_page ($cache, $contexte, $fond)  {
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 
-	if (!function_exists($f = 'chercher_squelette')) {
-                include_spip('public/trouver_squelette');
-	}
+	$f = include_fonction('trouver_squelette', 'public');
 	$skel = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
 	// Charger le squelette et recuperer sa fonction principale
