@@ -56,7 +56,7 @@ function public_trouver_squelette($fond, $id_rubrique, $lang) {
 			$squelette = $f;
 	}
 
-	return $squelette;
+	return array($squelette, $ext, $ext);
 }
 
 ?>
