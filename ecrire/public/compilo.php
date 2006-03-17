@@ -592,9 +592,9 @@ function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
 	$boucles = array();
 	spip_timer('calcul_skel');
 
-	include_spip('public/phraser_'.$gram);
+	$f = include_fonction('phraser_'.$gram, 'public');
 
-	$racine = phraser($squelette, '',$boucles, $nom);
+	$racine = $f($squelette, '',$boucles, $nom);
 
 	// tableau des informations sur le squelette
 	$descr = array('nom' => $nom, 'documents' => false, 'sourcefile' => $sourcefile);
