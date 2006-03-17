@@ -15,7 +15,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // Ce fichier doit imperativement definir la fonction ci-dessous:
 
-function public_trouver_squelette($fond, $id_rubrique, $lang) {
+function public_trouver_squelette_dist($fond, $id_rubrique, $lang) {
 	$ext = $GLOBALS['extension_squelette'];
 
 	// Accrocher un squelette de base dans le chemin, sinon erreur
@@ -24,7 +24,11 @@ function public_trouver_squelette($fond, $id_rubrique, $lang) {
 		erreur_squelette(_T('info_erreur_squelette2',
 			array('fichier'=>$fond)),
 			$GLOBALS['dossier_squelettes']);
-		return substr(find_in_path('404.html'), 0, -strlen(".$ext"));
+		$f = find_in_path('404.html');
+		return array(substr($f, 0, -strlen(".$ext")),
+			     $ext,
+			     $ext,
+			     $f);
 	}
 
 	// supprimer le ".html" pour pouvoir affiner par id_rubrique ou par langue
@@ -56,7 +60,6 @@ function public_trouver_squelette($fond, $id_rubrique, $lang) {
 			$squelette = $f;
 	}
 
-	return array($squelette, $ext, $ext);
+	return array($squelette, $ext, $ext, "$squelette.$ext");
 }
-
 ?>
