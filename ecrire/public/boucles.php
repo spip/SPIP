@@ -252,8 +252,10 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 		$boucle->where[] ="$id_table.statut IN ('publie','prop')";
 	else {
 		$jointure = array_search("spip_syndic", $boucle->from);
-		if (!$jointure)
+		if (!$jointure) {
 			$jointure = 'J' . count($boucle->from);
+			$boucle->from[$jointure] = 'spip_syndic';
+		}
 		$boucle->where[] = $id_table . ".statut='publie'";
 		$boucle->where[] = $jointure . ".statut='publie'";
 	}
