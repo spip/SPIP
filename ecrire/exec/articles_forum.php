@@ -33,7 +33,7 @@ function exec_articles_forum_dist()
 		$id_rubrique = $row["id_rubrique"];
 	}
 
-	debut_page($titre, "documents", "articles");
+	debut_page($titre, "documents", "articles", "", "", $id_rubrique);
 
 	articles_forum_cadres($id_rubrique, $titre, 'articles', "id_article=$id_article");
 

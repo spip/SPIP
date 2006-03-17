@@ -43,7 +43,7 @@ while ($row = spip_fetch_array($result)) {
 $flag_editable = (($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)) OR $statut == 'prop');
 
 
-debut_page("&laquo; $titre_breve &raquo;", "documents", "breves");
+debut_page("&laquo; $titre_breve &raquo;", "documents", "breves", "", "", $id_rubrique);
 
 debut_grand_cadre();
 

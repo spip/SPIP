@@ -77,11 +77,11 @@ if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)
 	$jour = $regs[3];
 	$heure = $regs[4];
 	$minute = $regs[5];
- }
+}
 
 
 
-debut_page("&laquo; $titre_article &raquo;", "documents", "articles");
+debut_page("&laquo; $titre_article &raquo;", "documents", "articles", "", "", $id_rubrique);
 
 debut_grand_cadre();
 

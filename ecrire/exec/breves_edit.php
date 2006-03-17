@@ -58,7 +58,7 @@ else {
 }
 
 
-debut_page(_T('titre_page_breves_edit', array('titre' => $titre)), "documents", "breves");
+debut_page(_T('titre_page_breves_edit', array('titre' => $titre)), "documents", "breves", "", "", $id_rubrique);
 
 
 debut_grand_cadre();
