@@ -168,10 +168,6 @@ function boucle_DOCUMENTS_dist($id_boucle, &$boucles) {
 	// sauf s'ils sont distants (taille inconnue)
 	$boucle->where[]= "($id_table.taille > 0 OR $id_table.distant='oui')";
 
-	$joint = substr(array_search("spip_types_documents", $boucle->from),1);
-	if ($joint AND !isset($boucle->join[$joint]))
-	    $boucle->join[$joint]= array($id_table, 'id_type');
-
 	return calculer_boucle($id_boucle, $boucles);
 }
 
@@ -258,10 +254,8 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 		$jointure = array_search("spip_syndic", $boucle->from);
 		if (!$jointure)
 			$jointure = 'J' . count($boucle->from);
-		$boucle->from[$jointure] = "spip_syndic";
 		$boucle->where[] = $id_table . ".statut='publie'";
 		$boucle->where[] = $jointure . ".statut='publie'";
-		$boucle->where[] = $id_table . ".id_syndic=$jointure" . ".id_syndic";
 	}
 
 	return calculer_boucle($id_boucle, $boucles);
