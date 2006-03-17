@@ -86,11 +86,11 @@ function ligne_plug($plug_file,&$plug_actifs,$last_actif = false,$surligne = fal
 			// Possibilité d'ordonner les plugins masquee pour le moment
 			// la fonction reste possible par l'url du type monter=forms,descendre=forms
 			/*if ($id_input>0)
-				$s = "<a href='".generer_url_ecrire('admin_plugin',"monter=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0'></a>";
+				$s = "<a href='".generer_url_ecrire('admin_plugin',"monter=".rawurlencode($plug_file))."'><img src='"._DIR_IMG_PACK."monter-16.png' style='border:0'></a>";
 			$vals[] = $s;
 			$s = "";
 			if (!$last_actif)
-				$s = "<a href='".generer_url_ecrire('admin_plugin',"descendre=".urlencode($plug_file))."'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0'></a>";*/
+				$s = "<a href='".generer_url_ecrire('admin_plugin',"descendre=".rawurlencode($plug_file))."'><img src='"._DIR_IMG_PACK."descendre-16.png' style='border:0'></a>";*/
 		}
 		else{
 			$vals[] = $s;
@@ -218,5 +218,4 @@ function exec_admin_plugin_dist(){
 	fin_page();
 
 }
-
 ?>

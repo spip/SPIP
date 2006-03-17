@@ -1038,8 +1038,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 	AND $GLOBALS['connect_toutes_rubriques']) {
 
 		echo "<div style='width: 200px;'>";
-		$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
-		$titre = urlencode($cherche_auteur);
+		$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
+		$titre = rawurlencode($cherche_auteur);
 		icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&nom=$titre&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 		echo "</div> ";
 
@@ -1182,7 +1182,7 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 	    AND $options == "avancees"
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
-	$retour = urlencode(generer_url_ecrire("articles","id_article=$id_article"));
+	$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
 	icone_horizontale(_T('icone_creer_auteur'), generer_url_ecrire("auteur_infos","ajouter_id_article=$id_article&redirect=$retour"), "redacteurs-24.gif", "creer.gif");
 	echo "</td>";
 	echo "<td width='20'>&nbsp;</td>";
@@ -1311,9 +1311,9 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
   $forum_retour = generer_url_ecrire("articles","id_article=$id_article", true);
   
   if (!$mute) {
-    $tm = urlencode($titre);
+    $tm = rawurlencode($titre);
     echo "\n<div align='center'>";
-    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=" . urlencode($forum_retour) . "&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
+    icone(_T('icone_poster_message'), generer_url_ecrire("forum_envoi","statut=prive&adresse_retour=" . rawurlencode($forum_retour) . "&id_article=$id_article&titre_message=$tm"), "forum-interne-24.gif", "creer.gif");
     echo "</div>";
   }
 

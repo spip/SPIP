@@ -80,7 +80,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 	
 	if (strpos('-'.$kw_referer, eregi_replace("^(https?:?/?/?)?(www\.)?", "",$url_site))) {
 		if (eregi("(s|search|r|recherche)=([^&]+)", $kw_referer, $regs))
-			$keywords = urldecode($regs[2]);
+			$keywords = rawurldecode($regs[2]);
 			
 			
 		else
@@ -100,7 +100,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 				// Si on a defini le nom de la variable en expression reguliere, chercher la bonne variable
 				if (! strlen($keywords) > 0) {
 					if (ereg($arr_engines[$cnt][1]."([^\&]*)", $query, $vals)) {
-						$keywords = urldecode($vals[2]);
+						$keywords = rawurldecode($vals[2]);
 					}
 				}
 			} else {
@@ -197,7 +197,7 @@ function aff_referers ($query, $limit=10, $plus) {
 
 			$visites = pos($nbvisites);
 
-			if (strlen($source_vignettes) > 0) $ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".urlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; border: 0; margin-bottom: 3px; margin-left: 3px;\" /></a>";
+			if (strlen($source_vignettes) > 0) $ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; border: 0; margin-bottom: 3px; margin-left: 3px;\" /></a>";
 
 			$ret .= "\n<li>";
 

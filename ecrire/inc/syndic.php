@@ -81,14 +81,14 @@ function ajouter_tags($matches, $item) {
 		else if (extraire_attribut($match[0], 'scheme') == 'urn:flickr:tags') {
 			foreach(explode(' ', $mot) as $petit)
 				if ($t = creer_tag($petit, $type,
-				'http://www.flickr.com/photos/tags/'.urlencode($petit).'/'))
+				'http://www.flickr.com/photos/tags/'.rawurlencode($petit).'/'))
 					$tags[] = $t;
 			$mot = '';
 		} else {
 			# type del.icio.us
 			foreach(explode(' ', $mot) as $petit)
 				if (preg_match(',<rdf[^>]* resource=["\']([^>]*/'
-				.preg_quote(urlencode($petit),',').')["\'],i',
+				.preg_quote(rawurlencode($petit),',').')["\'],i',
 				$item, $m)) {
 					$mot = '';
 					if ($t = creer_tag($petit, $type, $m[1]))

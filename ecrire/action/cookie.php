@@ -24,7 +24,7 @@ function auth_http($url, $essai_auth_http) {
 		else {
 			ask_php_auth(_T('login_connexion_refusee'),
 			_T('login_login_pass_incorrect'), _T('login_retour_site'),
-			"url=".urlencode($url), _T('login_nouvelle_tentative'),
+			"url=".rawurlencode($url), _T('login_nouvelle_tentative'),
 			(ereg(_DIR_RESTREINT_ABS, $url)));
 			exit;
 		}
@@ -125,7 +125,7 @@ if ($test_echec_cookie == 'oui') {
 	spip_setcookie('spip_session', 'test_echec_cookie');
 	redirige_par_entete(generer_url_public('login'),
 			    "var_echec_cookie=oui&url="
-			    . ($url ? urlencode($url) : _DIR_RESTREINT_ABS), true);
+			    . ($url ? rawurlencode($url) : _DIR_RESTREINT_ABS), true);
 }
 
 // Tentative de login
@@ -189,7 +189,7 @@ if ($essai_login == "oui") {
 				"var_login=$login", true);
 		if ($session_password || $session_password_md5)
 			$redirect .= '&var_erreur=pass';
-		$redirect .= '&url=' . urlencode($url);
+		$redirect .= '&url=' . rawurlencode($url);
 		spip_log("echec login: $login");
 	}
 	else
@@ -200,7 +200,7 @@ if ($essai_login == "oui") {
 if ($cookie_admin == "non") {
 	if (!$retour)
 		$retour = generer_url_public('login',
-			'url='.urlencode($url), true);
+			'url='.rawurlencode($url), true);
 
 	spip_setcookie('spip_admin', $spip_admin, time() - 3600 * 24);
 	$redirect = ereg_replace("([?&])var_login=[^&]*&?", '\1', $retour);

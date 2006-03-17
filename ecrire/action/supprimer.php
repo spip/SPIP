@@ -62,6 +62,6 @@ function action_supprimer_dist() {
 		}
 	}
 
-	redirige_par_entete(urldecode($redirect));
+	redirige_par_entete(rawurldecode($redirect));
 }
 ?>

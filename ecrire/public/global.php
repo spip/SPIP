@@ -51,7 +51,7 @@ function calcule_header_et_page ($fond) {
 			spip_log('debug !');
 		else
 			redirige_par_entete(generer_url_public('login',
-			'url='.urlencode(
+			'url='.rawurlencode(
 			parametre_url(self(), 'var_mode', 'debug', '&')
 			), true));
 	}

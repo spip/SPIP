@@ -46,7 +46,7 @@ if (defined('_INC_PUBLIC')) {
 	if ($action = _request('action')) {
 		$var_f = include_fonction($action, 'action');
 		$var_f();
-		if ($redirect) redirige_par_entete(urldecode($redirect));
+		if ($redirect) redirige_par_entete(rawurldecode($redirect));
 		exit;
 	}
 
