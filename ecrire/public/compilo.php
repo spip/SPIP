@@ -22,7 +22,7 @@ define('CODE_MONOTONE', "^(\n//[^\n]*\n)?\(?'([^'])*'\)?$");
 
 // Definition de la structure $p, et fonctions de recherche et de reservation
 // dans l'arborescence des boucles
-include_spip('public/compilo-index');  # index ? structure ? pile ?
+include_spip('public/references');
 
 // definition des boucles
 include_spip('public/boucles');
@@ -34,7 +34,7 @@ include_spip('public/criteres');
 include_spip('public/balises');
 
 // definition de l'API
-include_spip('public/compilo-api');
+include_spip('public/interfaces');
 
 # definition des tables
 include_spip('base/serial');

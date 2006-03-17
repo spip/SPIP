@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //
@@ -26,8 +24,8 @@ include_spip('inc/documents');
 include_spip('base/abstract_sql');
 include_spip('inc/forum');
 include_spip('public/debug');
+include_spip('public/executer_squelette');
 include_spip('inc/distant');
-include_spip('public/calcul-outils');
 
 // NB: Ce fichier peut initialiser $dossier_squelettes (old-style)
 // donc il faut l'inclure "en globals"
@@ -132,8 +130,6 @@ function charger_squelette ($squelette) {
 # (typiquement dans mes_fonctions.php)
 
 function cherche_page ($cache, $contexte, $fond)  {
-	if (!function_exists('chercher_squelette'))
-		include_spip('public/chercher-squelette');
 
 	// Choisir entre $fond-dist.html, $fond=7.html, etc?
 	$id_rubrique_fond = 0;
@@ -148,9 +144,10 @@ function cherche_page ($cache, $contexte, $fond)  {
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 
-	$skel = chercher_squelette($fond,
-		$id_rubrique_fond,
-		$GLOBALS['spip_lang']);
+	if (!function_exists($f = 'chercher_squelette')) {
+                include_spip('public/trouver_squelette');
+	}
+	$skel = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
 	// Charger le squelette et recuperer sa fonction principale
 	// (compilation automatique au besoin) et calculer
