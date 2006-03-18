@@ -4,7 +4,7 @@
 <input type='hidden' name='alea' value='(#ENV{alea})' />][
 <input type='hidden' name='hash' value='(#ENV{hash})' />][
 <input type='hidden' name='afficher_texte' value='(#ENV{afficher_texte})' />][
-<input type='hidden' name='retour_forum' value='(#ENV{retour_forum}|rawurlencode)' />][
+<input type='hidden' name='retour_forum' value='(#ENV*{retour_forum}|rawurlencode)' />][
 <p>(#ENV{modere})<:forum_info_modere:></p>
 ][(#ENV*{previsu})]
 <p>
