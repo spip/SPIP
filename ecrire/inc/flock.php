@@ -70,7 +70,7 @@ function lire_fichier ($fichier, &$contenu, $options=false) {
 // Ecrire un fichier de maniere un peu sure
 //
 // zippe les fichiers .gz
-function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false) {
+function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $truncate=true) {
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
@@ -93,7 +93,8 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false) {
 	// (on ouvre un nouveau pointeur sur le fichier, ce qui a l'avantage
 	// de le recreer si le locker qui nous precede l'avait supprime...)
 	if ($gzip) $contenu = gzencode($contenu);
-	@ftruncate($fp,0);
+	if ($truncate)
+		@ftruncate($fp,0);
 	$s = @fputs($fp, $contenu, $a = strlen($contenu));
 
 	$ok = ($s == $a);
@@ -193,31 +194,36 @@ function creer_repertoire($base, $subdir) {
 // si $dir = 'rep/sous_rep_' au lieu de 'rep/sous_rep/' on scanne 'rep/' et on
 // applique un pattern '^rep/sous_rep_'
 //
-function preg_files($dir, $pattern=-1 /* AUTO */, $recurs=array()) {
+function preg_files($dir, $pattern=-1 /* AUTO */, $maxfiles = 10000, $recurs=array()) {
+	$nbfiles = 0;
 	if ($pattern == -1)
 		$pattern = "^$dir";
 	$fichiers = array();
-
 	// revenir au repertoire racine si on a recu dossier/truc
 	// pour regarder dossier/truc/ ne pas oublier le / final
 	$dir = preg_replace(',/[^/]*$,', '', $dir);
 	if ($dir == '') $dir = '.';
 
 	if (@is_dir($dir) AND is_readable($dir) AND $d = @opendir($dir)) {
-		while (($f = readdir($d)) !== false) {
+		while (($f = readdir($d)) !== false && ($nbfiles<$maxfiles)) {
 			if ($f[0] != '.' # ignorer . .. .svn etc
 			AND $f != 'CVS'
 			AND $f != 'remove.txt'
 			AND is_readable("$dir/$f")) {
 				if (is_file("$dir/$f")) {
 					if (preg_match(",$pattern,i", "$dir/$f"))
+					{
 						$fichiers[] = "$dir/$f";
+						$nbfiles++;
+					}
 				} else if (is_dir("$dir/$f")
 				AND !in_array(realpath("$dir/$f"), $recurs)) {
 					array_push($recurs, realpath("$dir/$f"));
 					$beginning = $fichiers;
-					$end = preg_files("$dir/$f/", $pattern, $recurs);
+					$end = preg_files("$dir/$f/", $pattern,
+						$maxfiles-$nbfiles, $recurs);
 					$fichiers = array_merge((array)$beginning, (array)$end);
+					$nbfiles = count($fichiers);
 				}
 			}
 		}
