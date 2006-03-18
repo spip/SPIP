@@ -791,7 +791,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 	// Gerer les groupes de traductions
 	if ($GLOBALS['meta']['gerer_trad'] == 'oui') {
-		if ($flag_editable AND $supp_trad == 'oui') { // Ne plus lier a un groupe de trad
+		if ($flag_editable AND _request('supp_trad') == 'oui') { // Ne plus lier a un groupe de trad
 			spip_query("UPDATE spip_articles SET id_trad = '0' WHERE id_article = $id_article");
 
 			// Verifier si l'ancien groupe ne comporte plus qu'un seul article. Alors mettre a zero.
