@@ -2036,8 +2036,13 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	global $spip_display, $compteur_survol;
 
-	if (strlen($fonction) < 3) $fonction = "rien.gif";
-	if (strlen($align) > 2) $aligner = " ALIGN='$align' ";
+	$compteur_survol ++;
+	if ($fonction == "supprimer.gif") {
+		$style = '-danger';
+	} else {
+		$style = '';
+		if (strlen($fonction) < 3) $fonction = "rien.gif";
+	}
 
 	if ($spip_display == 1){
 		$hauteur = 20;
@@ -2056,29 +2061,23 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 		$alt = $texte;
 	}
 
-	if ($fonction == "supprimer.gif") {
-		$style = '-danger';
-	} else {
-		$style = '';
-	}
-
-	$compteur_survol ++;
-	$icone .= "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' $aligner width='$largeur'>";
-		$icone .= "<tr><td class='icone36$style' style='text-align:center;'><a href='$lien'>";
 	if ($spip_display != 1 AND $spip_display != 4){
 		if ($fonction != "rien.gif"){
-		  $icone .= http_img_pack($fonction, $alt, "$title width='24' height='24' border='0'" .
+		  $icone = http_img_pack($fonction, $alt, "$title width='24' height='24' border='0'" .
 					  http_style_background($fond, "no-repeat center center"));
 		}
 		else {
-			$icone .= http_img_pack($fond, $alt, "$title width='24' height='24' border='0'");
+			$icone = http_img_pack($fond, $alt, "$title width='24' height='24' border='0'");
 		}
-	}
+	} else $icone = '';
+
 	if ($spip_display != 3){
 		$icone .= "<span>$texte</span>";
 	}
-	$icone .= "</a></td></tr>";
-	$icone .= "</table>";
+	$icone = "\n<table cellpadding='0' class='pointeur' cellspacing='0' border='0' width='$largeur'" .
+	  ((strlen($align) > 2) ? " align='$align' " : '') .
+	">\n<tr><td class='icone36$style' style='text-align:center;'><a
+	href='$lien'>$icone</a></td>\n</tr></table>";
 
 	if ($afficher == 'oui')
 		echo $icone;
