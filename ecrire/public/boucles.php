@@ -255,11 +255,12 @@ function boucle_SYNDIC_ARTICLES_dist($id_boucle, &$boucles) {
 		if (!$jointure) {
 			$jointure = 'J' . count($boucle->from);
 			$boucle->from[$jointure] = 'spip_syndic';
+			$boucle->where[]= $id_table .'.id_syndic=' . $jointure . '.id_syndic';
 		}
 		$boucle->where[] = $id_table . ".statut='publie'";
 		$boucle->where[] = $jointure . ".statut='publie'";
-	}
 
+	}
 	return calculer_boucle($id_boucle, $boucles);
 }
 
