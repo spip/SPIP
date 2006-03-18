@@ -302,10 +302,8 @@ function nettoyer_petit_cache($prefix, $duree = 300) {
 	$dircache = sous_repertoire(_DIR_CACHE,$prefix);
 	if (spip_touch($dircache.'purger_'.$prefix, $duree, true)) {
 		foreach (preg_files("$dircache$prefix") as $f) {
-			if (time() - filemtime($f) > $duree) {
+			if (time() - @filemtime($f) > $duree)
 				@unlink($f);
-				@unlink("$f.err"); # pour tidy
-			}
 		}
 	}
 }

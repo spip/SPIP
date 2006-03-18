@@ -327,11 +327,6 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	if ($texte && ($var_mode_objet != $fonc || $var_mode_affiche != $type))
 		return;
 	if (!$fonc) $fonc = $debug_objets['principal'];
-	$link = new Link;
-	$link->delvar('var_mode_affiche');
-	$link->delvar('var_mode_objet');
-	$link->addvar('var_mode','debug');
-	$self = quote_amp($link->getUrl());
 
 	// en cas de squelette inclus,  virer le code de l'incluant:
 	// - il contient souvent une Div restreignant la largeur a 3 fois rien
@@ -357,9 +352,9 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	if ($var_mode_affiche !== 'validation') {
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
-		echo "\n<a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
-		echo "\n<a href='",$self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
-		echo "\n<a href='", $self, "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
+		echo "\n<a href='",self(), "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
+		echo "\n<a href='",self(), "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
+		echo "\n<a href='",self(), "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
 			echo afficher_debug_contexte($contexte);
@@ -378,19 +373,19 @@ function debug_dumpfile ($texte, $fonc, $type) {
 				  $colors[$i%2] .
 				  "'><td  align='right'>$i</td><td>\n" .
 				  "<a  class='debug_link_boucle' href='" .
-				  $self .
+				  self().
 				  "&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
 				  _T('zbug_boucle') .
 				  "</a></td><td>\n<a class='debug_link_boucle' href='" .
-				  $self .
+				  self().
 				  "&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
 				  _T('zbug_resultat') .
 				  "</a></td><td>\n<a class='debug_link_resultat' href='" .
-				  $self .
+				  self().
 				  "&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=code#$nom_skel'>" .
@@ -437,8 +432,8 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	     if (ereg("^[[:space:]]*([^<][^0-9]*)([0-9]*)(.*[^0-9])([0-9]*)$", $GLOBALS['xhtml_error'], $r)) {
 		$fermant = $r[2];
 		$ouvrant = $r[4];
-		$rf = reference_boucle_debug($fermant, $fonc, $self);
-		$ro = reference_boucle_debug($ouvrant, $fonc, $self);
+		$rf = reference_boucle_debug($fermant, $fonc, self());
+		$ro = reference_boucle_debug($ouvrant, $fonc, self());
 		$err = ": " . $r[1] .
 		  "<a href='#L" . $r[2] . "'>$r[2]</a>$rf" .
 		  $r[3] ."<a href='#L" . $r[4] . "'>$r[4]</a>$ro";
