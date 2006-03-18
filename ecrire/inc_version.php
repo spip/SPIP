@@ -200,10 +200,6 @@ $table_primary = array();
 $table_date = array();
 $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 
-/* ATTENTION CETTE VARIABLE NE FONCTIONNE PAS ENCORE */
-// Extension du fichier du squelette 
-$extension_squelette = 'html';
-/* / MERCI DE VOTRE ATTENTION */
 
 // Droits d'acces maximum par defaut
 @umask(0);
