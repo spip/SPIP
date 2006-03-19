@@ -137,7 +137,6 @@ function afficher_choix($nom, $valeur_actuelle, $valeurs, $sep = "<br />") {
 //
 
 function appliquer_modifs_config() {
-	global $clean_link;
 	global $adresse_site, $email_webmaster, $email_envoi, $post_dates, $tester_proxy, $test_proxy, $http_proxy, $activer_moteur;
 	global $forums_publics, $forums_publics_appliquer;
 	global $charset, $charset_custom, $langues_auth;
@@ -298,11 +297,10 @@ function appliquer_modifs_config() {
 		fin_admin($admin);
 	}
 
-	if ($purger_skel) {
-	  redirige_par_entete(generer_action_auteur('purger', 'squelettes',
-						    _DIR_RESTREINT_ABS . $clean_link->getUrl(), true));
+	if ($purger_skel)
+		redirige_par_entete(generer_action_auteur('purger', 'squelettes',
+			_DIR_RESTREINT_ABS . self(), true));
 
-	}
 }
 
 // faudrait essayer d'etre plus malin

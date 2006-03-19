@@ -231,10 +231,9 @@ while ($row = spip_fetch_array($result)) {
 	$titre_version = typo($row['titre_version']);
 	$titre_aff = $titre_version ? $titre_version : $date;
 	if ($version_aff != $id_version) {
-		$link = new Link();
-		$link->addVar('id_version', $version_aff);
-		$link->delVar('id_diff');
-		echo "<a href='".$link->getUrl('diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
+		$lien = parametre_url(self(), 'id_version', $version_aff);
+		$lien = parametre_url($lien, 'id_diff', '');
+		echo "<a href='".($lien.'#diff')."' title=\""._T('info_historique_affiche')."\">$titre_aff</a>";
 	}
 	else {
 		echo "<b>$titre_aff</b>";
@@ -252,10 +251,9 @@ while ($row = spip_fetch_array($result)) {
 			echo "<b>("._T('info_historique_comparaison').")</b>";
 		}
 		else {
-			$link = new Link();
-			$link->addVar('id_version', $id_version);
-			$link->addVar('id_diff', $version_aff);
-			echo "(<a href='".$link->getUrl('diff').
+			$lien = parametre_url(self(), 'id_version', $id_version);
+			$lien = parametre_url($lien, 'id_diff', $version_aff);
+			echo "(<a href='".($lien.'#diff').
 			"'>"._T('info_historique_comparaison')."</a>)";
 		}
 		echo "</span>";

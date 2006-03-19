@@ -20,13 +20,9 @@ include_spip('inc/boutons');
 
 function choix_couleur() {
 	global $couleurs_spip;
-	$link = new Link;
 	if ($couleurs_spip) {
-		while (list($key,$val) = each($couleurs_spip)) {
-			$link->delVar('set_couleur');
-			$link->addVar('set_couleur', $key);
-					
-			echo "<a href=\"".$link->getUrl()."\">" .
+		foreach ($couleurs_spip as $key => $val) {
+			echo "<a href=\"".parametre_url(self(), 'set_couleur', $key)."\">" .
 				http_img_pack("rien.gif", " ", "width='8' height='8' border='0' style='margin: 1px; background-color: ".$val['couleur_claire'].";' onMouseOver=\"changestyle('bandeauinterface','visibility', 'visible');\""). "</a>";
 		}
 	}
@@ -520,15 +516,14 @@ function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascrip
 		if ($deb_aff == -1) {
 			//$texte .= "<B>"._T('info_tout_afficher')."</B>";
 		} else {
-			$link = new Link;
-			$link->addVar($tmp_var, -1);
-				if ($javascript) {
-					$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
-					$texte .= "<a onClick=\"$jj; return false; \" href=\"".$link->getUrl()."#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
-				}
-				else  $texte .= "<A HREF=\"".$link->getUrl()."#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
+			$lien = parametre_url(self(), $tmp_var, -1);
+			if ($javascript) {
+				$jj = str_replace("::deb::", "&amp;$tmp_var=-1", $javascript);
+				$texte .= "<a onClick=\"$jj; return false; \" href=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></a>";
+			}
+			else
+				$texte .= "<A HREF=\"$lien#a$ancre\"><img src='". _DIR_IMG_PACK . "plus.gif' title='"._T('lien_tout_afficher')."' style='border: 0px;'></A>";
 		}
-
 
 		if ($spip_display != 4) $texte .= "</td>\n";
 		if ($spip_display != 4) $texte .= "</tr>\n";
@@ -2124,8 +2119,8 @@ function bandeau_barre_verticale(){
 
 // lien changement de couleur
 function lien_change_var($lien, $set, $couleur, $coords, $titre, $mouseOver="") {
-	$lien->addVar($set, $couleur);
-	return "\n<area shape='rect' href='". $lien->getUrl() ."' coords='$coords' title=\"$titre\" $mouseOver>";
+	$lien = parametre_url($lien, $set, $couleur);
+	return "\n<area shape='rect' href='$lien' coords='$coords' title=\"$titre\" $mouseOver>";
 }
 
 //
@@ -2204,11 +2199,10 @@ function init_body($rubrique='asuivre', $sous_rubrique='asuivre', $onLoad='', $i
 	if ($spip_ecran == "large") $largeur = 974;
 	else $largeur = 750;
 
-	$link = new Link();
 	echo "\n<map name='map_layout'>";
-	echo lien_change_var ($link, 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo lien_change_var ($link, 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
-	echo lien_change_var ($link, 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var (self(), 'set_disp', 1, '1,0,18,15', _T('lien_afficher_texte_seul'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var (self(), 'set_disp', 2, '19,0,40,15', _T('lien_afficher_texte_icones'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
+	echo lien_change_var (self(), 'set_disp', 3, '41,0,59,15', _T('lien_afficher_icones_seuls'), "onMouseOver=\"changestyle('bandeauvide','visibility', 'visible');\"");
 	echo "\n</map>";
 
 
@@ -2378,17 +2372,15 @@ if (true /*$bandeau_colore*/) {
 			// Choix display
 		//	echo"<img src=_DIR_IMG_PACK . 'rien.gif' width='10' />";
 			if ($options != "avancees") {
-				$lien = new Link;
-				$lien->addVar('set_options', 'avancees');
-				$simple = "<b>"._T('icone_interface_simple')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_complet')."</a>";
+				$lien = parametre_url(self(), 'set_options', 'avancees');
+				$simple = "<b>"._T('icone_interface_simple')."</b>/<a href='$lien' class='lien_sous'>"._T('icone_interface_complet')."</a>";
 				$icone = "interface-display-comp.png";
 			} else {
-				$lien = new Link;
-				$lien->addVar('set_options', 'basiques');
-				$simple = "<a href='".$lien->getUrl()."' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
+				$lien = parametre_url(self(), 'set_options', 'basiques');
+				$simple = "<a href='$lien' class='lien_sous'>"._T('icone_interface_simple')."</a>/<b>"._T('icone_interface_complet')."</b>";
 				$icone = "interface-display.png";
 			}
-			echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\">" .
+			echo "<a href='$lien' class='icone26' onMouseOver=\"changestyle('bandeaudisplay','visibility', 'visible');\">" .
 			  http_img_pack("$icone", "", "width='26' height='20' border='0'")."</a>";
 
 			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
@@ -2397,20 +2389,17 @@ if (true /*$bandeau_colore*/) {
 
 			echo http_img_pack("rien.gif", " ", "width='10' height='1'");
 			// grand ecran
-			$lien = new Link;
 			if ($spip_ecran == "large") {
-				$lien->addVar('set_ecran', 'etroit');
 				$i = _T('info_petit_ecran');
-				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
+				echo "<a href='". parametre_url(self(),'set_ecran', 'etroit') ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
 				  http_img_pack("set-ecran-etroit.png", $i, "width='26' height='20' border='0'") . "</a>";
-				$ecran = "<div><a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
+				$ecran = "<div><a href='".parametre_url(self(),'set_ecran', 'etroit')."' class='lien_sous'>"._T('info_petit_ecran')."</a>/<b>"._T('info_grand_ecran')."</b></div>";
 			}
 			else {
-				$lien->addVar('set_ecran', 'large');
 				$i = _T('info_grand_ecran');
-				echo "<a href='". $lien->getUrl() ."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
+				echo "<a href='".parametre_url(self(),'set_ecran', 'large')."' class='icone26' onMouseOver=\"changestyle('bandeauecran','visibility', 'visible');\" title=\"$i\">" .
 				  http_img_pack("set-ecran.png", $i, "width='26' height='20' border='0'") ."</a>";
-				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".$lien->getUrl()."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
+				$ecran = "<div><b>"._T('info_petit_ecran')."</b>/<a href='".parametre_url(self(),'set_ecran', 'large')."' class='lien_sous'>"._T('info_grand_ecran')."</a></div>";
 			}
 
 		echo "</td>";
@@ -3030,11 +3019,8 @@ function fin_page($credits='') {
 	fin_html();
 }
 
-function debloquer_article($arg, $texte)
-{
-	$lien = new Link;
-	$lien->addVar('debloquer_article', $arg);
-	$lien = (_DIR_RESTREINT_ABS . $lien->getUrl());
+function debloquer_article($arg, $texte) {
+	$lien = _DIR_RESTREINT_ABS . parametre_url(self(), 'debloquer_article', $arg, '&');
 	return "<a href='" . generer_action_auteur('instituer', "collaboration $arg", $lien) .
 	  "' title='" .
 	  addslashes($texte) .

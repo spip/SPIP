@@ -585,10 +585,9 @@ function panneau_ortho($ortho_result) {
 			echo "<i>"._T('ortho_aucune_suggestion')."</i>";
 		}
 		echo "<br />";
-		$link = new Link;
-		$link->delVar('supp_ortho');
-		$link->addVar('ajout_ortho', $mot);
-		icone_horizontale(_T('ortho_ajouter_ce_mot'), $link->getUrl(), "ortho-24.gif", "creer.gif");
+		$lien = parametre_url(self(), 'supp_ortho', '');
+		$lien = parametre_url($lien, 'ajout_ortho', $mot);
+		icone_horizontale(_T('ortho_ajouter_ce_mot'), $lien, "ortho-24.gif", "creer.gif");
 		echo "</div>\n";
 		echo "</div>\n\n";
 	}
@@ -602,10 +601,9 @@ function panneau_ortho($ortho_result) {
 		echo "<div class='detail'>\n";
 		echo "<i>"._T('ortho_ce_mot_connu')."</i>";
 		echo "<br />";
-		$link = new Link;
-		$link->delVar('ajout_ortho');
-		$link->addVar('supp_ortho', $mot);
-		icone_horizontale(_T('ortho_supprimer_ce_mot'), $link->getUrl(), "ortho-24.gif", "supprimer.gif");
+		$lien = parametre_url(self(), 'ajout_ortho', '');
+		$lien = parametre_url($lien, 'supp_ortho', $mot);
+		icone_horizontale(_T('ortho_supprimer_ce_mot'), $lien, "ortho-24.gif", "supprimer.gif");
 		echo "</div>\n";
 		echo "</div>\n";
 	}

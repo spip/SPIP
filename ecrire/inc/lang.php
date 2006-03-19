@@ -334,11 +334,10 @@ function verifier_lang_url() {
 	if (!($_GET['lang']<>'' AND $lang_demandee == $_GET['lang'])
 	AND !($_GET['lang']=='' AND $lang_demandee == $GLOBALS['meta']['langue_site']))
 	{
-		$destination = new Link;
-		$destination->addvar('lang', $lang_demandee);
+		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
 		if ($d = $GLOBALS['var_mode'])
-			$destination->addvar('var_mode', $d);
-		redirige_par_entete($destination->getUrl());
+			$destination = parametre_url($detination, 'var_mode', $d, '&');
+		redirige_par_entete($destination);
 	}
 
 	// Subtilite : si la langue demandee par cookie est la bonne
