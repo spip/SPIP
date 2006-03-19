@@ -279,9 +279,9 @@ function reference_boucle_debug($n, $nom, $self)
       (" (" .
        (($nom != $skel) ? _T('squelette_inclus_ligne') :
 	_T('squelette_ligne')) .
-	" <a href='$self&amp;var_mode_objet=$skel&amp;var_mode_affiche=squelette&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)");
+	" <a href='$self&amp;var_mode=debug&amp;var_mode_objet=$skel&amp;var_mode_affiche=squelette&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)");
   else {
-  $self .= "&amp;var_mode_objet=$skel$boucle&amp;var_mode_affiche=boucle";
+  $self .= "&amp;var_mode=debug&amp;var_mode_objet=$skel$boucle&amp;var_mode_affiche=boucle";
 
     return !$ligne ? " (boucle\n<a href='$self#$skel$boucle'>$boucle</a>)" :
       " (boucle $boucle ligne\n<a href='$self&amp;var_mode_ligne=$ligne#L$ligne'>$ligne</a>)";
@@ -352,9 +352,9 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	if ($var_mode_affiche !== 'validation') {
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
-		echo "\n<a href='",self(), "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
-		echo "\n<a href='",self(), "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
-		echo "\n<a href='",self(), "&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
+		echo "\n<a href='",self(), "&amp;var_mode=debug&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
+		echo "\n<a href='",self(), "&amp;var_mode=debug&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
+		echo "\n<a href='",self(), "&amp;var_mode=debug&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
 			echo afficher_debug_contexte($contexte);
@@ -374,19 +374,19 @@ function debug_dumpfile ($texte, $fonc, $type) {
 				  "'><td  align='right'>$i</td><td>\n" .
 				  "<a  class='debug_link_boucle' href='" .
 				  self().
-				  "&amp;var_mode_objet=" .
+				  "&amp;var_mode=debug&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=boucle#$nom_skel'>" .
 				  _T('zbug_boucle') .
 				  "</a></td><td>\n<a class='debug_link_boucle' href='" .
 				  self().
-				  "&amp;var_mode_objet=" .
+				  "&amp;var_mode=debug&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=resultat#$nom_skel'>" .
 				  _T('zbug_resultat') .
 				  "</a></td><td>\n<a class='debug_link_resultat' href='" .
 				  self().
-				  "&amp;var_mode_objet=" .
+				  "&amp;var_mode=debug&amp;var_mode_objet=" .
 				  $nom .
 				  "&amp;var_mode_affiche=code#$nom_skel'>" .
 				  _T('zbug_code') .
