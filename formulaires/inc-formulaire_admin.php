@@ -52,14 +52,6 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 	$dejafait = true;
 
-	// repartir de zero pour les boutons car clean_link a pu etre utilisee
-	$link = new Link();
-	$link->delVar('var_mode');
-	$link->delVar('var_mode_objet');
-	$link->delVar('var_mode_affiche');
-	$action = $link->getUrl();
-	$action = ($action . ((strpos($action, '?') === false) ? '?' : '&'));
-
 	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
 	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
 		$id_type = id_table_objet($type);
@@ -106,10 +98,11 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		) AND (
 			!$var_preview
 		)
-	) ? 'debug' : '';
+	) ? parametre_url(self(),'var_mode', 'debug', '&'): '';
 	$analyser = !$xhtml ? "" :
 		(($xhtml === 'spip_sax') ?
-		($action . "var_mode=debug&var_mode_affiche=validation") :
+		(parametre_url(self(), 'var_mode', 'debug', '&')
+			.'&var_mode_affiche=validation') :
 		('http://validator.w3.org/check?uri='
 		. urlencode("http://" . $_SERVER['HTTP_HOST'] . nettoyer_uri())));
 
@@ -141,7 +134,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 				(statut IN ('prop', 'prive'))
 				$postdates
 			)")))
-				$preview = 'preview';
+				$preview = true;
 	}
 
 	return array('formulaire_admin', 0, 
@@ -159,8 +152,8 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'voir_site' => generer_url_ecrire('sites', "id_syndic=$id_syndic", true),
 			'voir_auteur' => generer_url_ecrire('auteurs_edit', "id_auteur=$id_auteur", true),
 			'ecrire' => $ecrire,
-			'action' => $action,
-			'preview' => $preview,
+			'action' => self(),
+			'preview' => $preview?parametre_url(self(),'var_mode','preview'):'',
 			'debug' => $debug,
 			'popularite' => ceil($popularite),
 			'statistiques' => $statistiques,

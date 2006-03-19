@@ -7,8 +7,10 @@
 	<a href='[(#ENV{voir_site})]' class='spip-admin-boutons'><:icone_modifier_site:> ((#ENV{id_syndic}))</a>][
 	<a href='[(#ENV{voir_auteur})]' class='spip-admin-boutons'><:admin_modifier_auteur:> ((#ENV{id_auteur}))</a>][
 	<a href='(#ENV{ecrire})' class='spip-admin-boutons'><:espace_prive:></a>]
-	<a href='[(#ENV{action})]var_mode=recalcul' class='spip-admin-boutons'><:admin_recalculer:>[(#ENV{use_cache})]</a>[
+	<a href='[(#SELF|parametre_url{var_mode,recalcul})]' class='spip-admin-boutons'><:admin_recalculer:>[(#ENV{use_cache})]</a>[
 	<a href='(#ENV{statistiques})' class='spip-admin-boutons'>[<:info_visites:>&nbsp;(#ENV{visites})][;&nbsp;<:info_popularite_5:>&nbsp;(#ENV{popularite})]</a>][
-	<a href='[(#ENV{action})]var_mode=(#ENV{preview})' class='spip-admin-boutons'><:previsualisation:></a>][
-	<a href='[(#ENV{action})]var_mode=(#ENV{debug})' class='spip-admin-boutons'><:admin_debug:></a>]
+	<a href='(#ENV{preview})'
+class='spip-admin-boutons'><:previsualisation:></a>][
+	<a href='(#ENV{debug})'
+class='spip-admin-boutons'><:admin_debug:></a>]
 </div>
