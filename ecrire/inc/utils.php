@@ -33,7 +33,7 @@ function include_ecrire($file, $silence=false) {
 		return $f;
 
 	// fichiers old-style, ecrire/inc_truc.php
-	if (file_exists($f = _DIR_INCLUDE . $r[1] . '.php'))
+	if (is_readable($f = _DIR_INCLUDE . $r[1] . '.php'))
 		return include_once($f);
 }
 
@@ -182,7 +182,7 @@ function spip_log($message, $logname='spip') {
 		.preg_replace("/\n*$/", "\n", $message);
 
 	$logfile = _DIR_SESSIONS . $logname . '.log';
-	if (@file_exists($logfile)
+	if (@is_readable($logfile)
 	AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
@@ -445,7 +445,7 @@ function spip_timer($t='rien') {
 // et fait touch() sauf si ca n'est pas souhaite
 // (regle aussi le probleme des droits sur les fichiers touch())
 function spip_touch($fichier, $duree=0, $touch=true) {
-	if (!($exists = @file_exists($fichier))
+	if (!($exists = @is_readable($fichier))
 	|| ($duree == 0)
 	|| (@filemtime($fichier) < time() - $duree)) {
 		if ($touch) {
@@ -654,8 +654,8 @@ function charger_generer_url() {
 	// espace public
 	else {
 		// fichier inc-urls ? (old style)
-		if (@file_exists($f = _DIR_RACINE.'inc-urls.php3')
-		OR @file_exists($f = _DIR_RACINE.'inc-urls.php')
+		if (@is_readable($f = _DIR_RACINE.'inc-urls.php3')
+		OR @is_readable($f = _DIR_RACINE.'inc-urls.php')
 		OR $f = find_in_path('inc-urls-'.$GLOBALS['type_urls'].'.php3')
 		OR $f = include_spip('urls/'.$GLOBALS['type_urls'], false)
 		)
@@ -1036,7 +1036,7 @@ function tester_variable($var, $val){
 
 // Annuler les magic quotes \' sur GET POST COOKIE et GLOBALS ;
 // supprimer aussi les eventuels caracteres nuls %00, qui peuvent tromper
-// la commande file_exists('chemin/vers/fichier/interdit%00truc_normal')
+// la commande is_readable('chemin/vers/fichier/interdit%00truc_normal')
 function spip_desinfecte(&$t) {
 	static $magic_quotes;
 	if (!isset($magic_quotes))
