@@ -17,7 +17,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 function balise_FORMULAIRE_RECHERCHE ($p) 
 {
-	return calculer_balise_dynamique($p, 'FORMULAIRE_INSCRIPTION', array());
+	return calculer_balise_dynamique($p, 'FORMULAIRE_RECHERCHE', array());
 }
 
 function balise_FORMULAIRE_RECHERCHE_stat($args, $filtres) {
