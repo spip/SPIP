@@ -12,18 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-
-// Cette balise necessite les entetes "flag_dynamique"
-// (attention, ne fonctionnera pas en INCLURE)
-
 function balise_LOGIN_PUBLIC ($p, $nom='LOGIN_PUBLIC') {
-	$p = calculer_balise_dynamique($p, $nom, array('url'));
-	/*	$p->code = '\'<'
-		.'?php header("Cache-Control: no-store, no-cache, must-revalidate"); ?'
-		.'><'
-		.'?php header("Pragma: no-cache"); spip_log("envoi du pragma"); ?'
-		.'>\'.' . $p->code; */
-	return $p;
+	return calculer_balise_dynamique($p, $nom, array('url'));
 }
 
 # retourner:
