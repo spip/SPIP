@@ -98,7 +98,7 @@ if (defined('_INC_PUBLIC')) {
 	$_COOKIE['spip_admin']
 	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
 	))
-		include_spip('balises/formulaire_admin');
+		include_spip('balise/formulaire_admin');
 
 	// Execution de la page calculee
 

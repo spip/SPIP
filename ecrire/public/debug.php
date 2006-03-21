@@ -145,7 +145,7 @@ function erreur_squelette($message='', $lieu='') {
 // Le debusqueur version 3
 //
 
-// appelee a chaque sortie de boucle (inc-compilo) et a chaque requete
+// appelee a chaque sortie de boucle (cf compilo.php) et a chaque requete
 // dans ce derniers cas on n'a pas le nom du squelette
 
 function boucle_debug_resultat ($id, $type, $resultat) {
@@ -163,7 +163,7 @@ function boucle_debug_resultat ($id, $type, $resultat) {
 	}
 }
 
-// appelee a chaque sortie de sequence (inc-compilo)
+// appelee a chaque sortie de sequence (compilo.php)
 function debug_sequence($id, $nom, $niv, $sequence) {
 	global $debug_objets;
 
@@ -176,14 +176,14 @@ function debug_sequence($id, $nom, $niv, $sequence) {
 	return $res;	
 }
 
-// appelee a chaque compilation de boucle (inc-compilo)
+// appelee a chaque compilation de boucle (compilo.php)
 function boucle_debug_compile ($id, $nom, $code) {
 	global $debug_objets;
 
 	$debug_objets['code'][$nom.$id] = $code;
 }
 
-// appelee a chaque compilation de squelette (inc-compilo)
+// appelee a chaque compilation de squelette (compilo.php)
 function squelette_debug_compile($nom, $sourcefile, $code, $squelette) {
 	global $debug_objets;
 
@@ -457,7 +457,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  echo "</fieldset></div>";
 	}
 	echo "\n</div>";
-	include_spip('inc-formulaire_admin');
+	include_spip('balise/formulaire_admin');
 	echo inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float', $debug_objets)
 	);

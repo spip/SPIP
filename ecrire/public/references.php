@@ -138,49 +138,18 @@ function calculer_champ($p) {
 }
 
 // Cette fonction sert d'API pour demander une balise SPIP sans filtres.
-// Pour une balise nommmee NOM, elle essaye successivement d'appeler
-// des fonctions balise_NOM ou balise_NOM_dist, de faire le calcul via
-// un fichier inc-nom, de traiter le cas d'une balise LOGO ou de voir
-// si c'est une reference a une colonne de table connue
-// Pour chacune des premieres etapes, si la fonction existe mais qu'elle
-// retourne NULL, c'est qu'elle n'a pas traite la balise => on passe a la suite
-// comme si on n'avait rien trouve. Cela permet de ne surcharger une balise
-// que dans des cas precis.
+// Pour une balise nommmee NOM, elle demande a include_fonction de chercher
+// s'il existe une fonction balise_NOM ou balise_NOM_dist
+// eventuellement en chargeant le fichier balise/NOM.php.
+// Si ce n'est pas le cas, hormis le cas historique des balise LOGO_*,
+// elle estime que c'est une reference a une colonne de table connue.
+// Les surcharges via include_fonction sont donc possibles.
+
 function calculer_balise($nom, $p) {
 
-	// regarder s'il existe une fonction personnalisee balise_NOM()
-	$f = 'balise_' . $nom;
-	if (function_exists($f)) {
-		$res = $f($p);
-		if ($res !== NULL)
-			return $res;
-	}
+	$f = include_fonction($nom, 'balise', true);
 
-	// regarder s'il existe une fonction standard balise_NOM_dist()
-	$f = 'balise_' . $nom . '_dist';
-	if (function_exists($f)) {
-		$res = $f($p);
-		if ($res !== NULL)
-			return $res;
-	}
-
-	// regarder s'il existe un fichier d'inclusion au nom de la balise
-	// contenant une fonction balise_NOM_collecte
-	$file = 'balises/' . strtolower($nom);
-	if (include_spip($file)) {
-		# une globale ?? defined ou function_exists(..._dyn) serait mieux ?
-		$f = $GLOBALS['balise_' . $nom . '_collecte'];
-		if (is_array($f)) {
-			$res = calculer_balise_dynamique($p, $nom, $f);
-
-			// ajouter un code particulier ?
-			if (function_exists('balise_' . $nom . '_traitement'))
-				$res = call_user_func('balise_' . $nom . '_traitement', $res);
-
-			if ($res !== NULL)
-				return $res;
-		}
-	}
+	if ($f) return $f($p);
 
 	// S'agit-il d'un logo ? Une fonction speciale les traite tous
 	if (ereg('^LOGO_', $nom)) {
@@ -217,11 +186,27 @@ function calculer_balise($nom, $p) {
 	return $p;
 }
 
+function declencher_balise_dynamique($p, $nom)
+{
+	$f = $GLOBALS['balise_' . $nom . '_collecte'];
+
+	if (is_array($f)) {
+		$res = calculer_balise_dynamique($p, $nom, $f);
+
+			// ajouter un code particulier ?
+		if (function_exists('balise_' . $nom . '_traitement'))
+			$res = call_user_func('balise_' . $nom . '_traitement', $res);
+
+		if ($res !== NULL)
+		  return $res;
+	}
+}
+
 //
 // Traduction des balises dynamiques, notamment les "formulaire_*"
 // Inclusion du fichier associe a son nom.
 // Ca donne les arguments a chercher dans la pile,on compile leur localisation
-// Ensuite on delegue a une fonction generale definie dans inc-calcul-outils
+// Ensuite on delegue a une fonction generale definie dans executer_squelette
 // qui recevra a l'execution la valeur des arguments, 
 // ainsi que les pseudo filtres qui ne sont donc pas traites a la compil
 // mais on traite le vrai parametre si present.

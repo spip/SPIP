@@ -32,4 +32,6 @@ function balise_URL_LOGOUT_dyn($cible) {
 	);
 }
 
+
+function balise_URL_LOGOUT ($p) {return declencher_balise_dynamique($p,'URL_LOGOUT');}
 ?>

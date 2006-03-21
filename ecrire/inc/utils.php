@@ -41,10 +41,10 @@ function include_ecrire($file, $silence=false) {
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
 // ou de suffixe _dist
-function include_fonction($nom, $dossier='exec') {
+function include_fonction($nom, $dossier='exec', $continue=false) {
 
 	// Securite de base
-	if (!preg_match(',^[a-z0-9_-]+$,', $nom))
+	if (!preg_match(',^[\w-]+$,', $nom))
 		redirige_par_entete('./');
 
 	// Si la fonction existe deja (definie par mes_options, par exemple)
@@ -53,10 +53,13 @@ function include_fonction($nom, $dossier='exec') {
 		return $f;
 
 	// Sinon charger le fichier de declaration
-	$inc = include_spip($dossier.'/'.$nom);
+	$inc = include_spip($dossier.'/'. strtolower($nom));
+
 	if (function_exists($f = $dossier.'_'.$nom) # definition perso ?
 	OR function_exists($f = $dossier.'_'.$nom.'_dist')) # definition standard
 		return $f;
+
+	if ($continue) return false;
 
 	// Echec : message d'erreur
 	spip_log("fonction $nom indisponible" .

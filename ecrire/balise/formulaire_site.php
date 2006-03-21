@@ -59,4 +59,6 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 	return  _T('form_prop_enregistre');
 }
 
+
+function balise_FORMULAIRE_SITE ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_SITE');}
 ?>

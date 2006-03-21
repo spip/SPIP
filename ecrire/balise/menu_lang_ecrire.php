@@ -65,4 +65,6 @@ function menu_lang_pour_tous($nom, $opt) {
 	);
 }
 
+
+function balise_MENU_LANG_ECRIRE ($p) {return declencher_balise_dynamique($p,'MENU_LANG_ECRIRE');}
 ?>

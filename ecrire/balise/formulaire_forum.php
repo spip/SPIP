@@ -324,4 +324,6 @@ function sql_recherche_donnees_forum ($idr, $idf, $ida, $idb, $ids) {
 	return array ($titre, $table, $accepter_forum);
 }
 
+
+function balise_FORMULAIRE_FORUM ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_FORUM');}
 ?>

@@ -12,28 +12,22 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('balises/login_public'); 
+// Ce "menu_lang" collecte dans le contexte permet de forcer la langue
+// par defaut proposee dans le menu, en faisant une inclusion
+// <INCLURE(toto){menu_lang=xxx}> ; mais a quoi ca sert concretement ?
+global $balise_MENU_LANG_collecte;
+$balise_MENU_LANG_collecte = array('menu_lang');
 
-global $balise_LOGIN_PRIVE_collecte;
-$balise_LOGIN_PRIVE_collecte = array('url');
-
-# retourner:
-# 1. l'url collectee ci-dessus (args0) ou donnee en filtre (filtre0)
-# 2. l'eventuel parametre de la balise (args1) fournie par
-#    calculer_balise_dynamique, en l'occurrence le #LOGIN courant si l'on
-#    programme une <boucle(AUTEURS)>[(#LOGIN_PRIVE{#LOGIN})]
-
-function balise_LOGIN_PRIVE_stat ($args, $filtres) {
-	return array($args[1], ($filtres[0] ? $filtres[0] : $args[0]));
+// s'il n'y a qu'une langue eviter definitivement la balise ?php 
+function balise_MENU_LANG_stat ($args, $filtres) {
+	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
+	return $args;
 }
 
-function balise_LOGIN_PRIVE_dyn($login, $cible) {
-	return login_explicite($login, $cible);
+// normalement $opt sera toujours non vide suite au test ci-dessus
+function balise_MENU_LANG_dyn($menu_lang) {
+  include_spip('menu_lang_ecrire', 'balise');
+	return menu_lang_pour_tous('var_lang', $opt);
 }
-
-function balise_LOGIN_PRIVE_traitement($p) {
-	return balise_LOGIN_PUBLIC_traitement($p);
-}
-
 
 ?>

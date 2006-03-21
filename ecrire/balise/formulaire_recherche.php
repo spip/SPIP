@@ -40,4 +40,6 @@ function balise_FORMULAIRE_RECHERCHE_dyn($lien, $rech) {
 		));
 }
 
+
+function balise_FORMULAIRE_RECHERCHE ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_RECHERCHE');}
 ?>

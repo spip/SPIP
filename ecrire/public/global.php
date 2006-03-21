@@ -41,7 +41,7 @@ function calcule_header_et_page ($fond) {
 	// afin que celle-ci contienne la signature
 
 	if ($_GET['var_confirm']) {
-		include_spip('inc-formulaire_signature');
+		include_spip('balise/formulaire_signature');
 		reponse_confirmation($_GET['id_article'], $var_confirm);
 	}
 
