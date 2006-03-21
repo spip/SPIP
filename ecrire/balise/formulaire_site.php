@@ -13,8 +13,11 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // Le contexte indique dans quelle rubrique le visiteur peut proposer le site
-global $balise_FORMULAIRE_SITE_collecte;
-$balise_FORMULAIRE_SITE_collecte = array('id_rubrique');
+
+
+function balise_FORMULAIRE_SITE ($p) {
+  return calculer_balise_dynamique($p,'FORMULAIRE_SITE', array('id_rubrique'));
+}
 
 function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 
@@ -58,7 +61,4 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 
 	return  _T('form_prop_enregistre');
 }
-
-
-function balise_FORMULAIRE_SITE ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_SITE');}
 ?>

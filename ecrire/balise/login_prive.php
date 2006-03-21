@@ -14,8 +14,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 include_spip('balise/login_public'); 
 
-global $balise_LOGIN_PRIVE_collecte;
-$balise_LOGIN_PRIVE_collecte = array('url');
+
+function balise_LOGIN_PRIVE ($p) {
+
+	return balise_login_public($p,'LOGIN_PRIVE');
+}
 
 # retourner:
 # 1. l'url collectee ci-dessus (args0) ou donnee en filtre (filtre0)
@@ -30,11 +33,4 @@ function balise_LOGIN_PRIVE_stat ($args, $filtres) {
 function balise_LOGIN_PRIVE_dyn($login, $cible) {
 	return login_explicite($login, $cible);
 }
-
-function balise_LOGIN_PRIVE_traitement($p) {
-	return balise_LOGIN_PUBLIC_traitement($p);
-}
-
-function balise_LOGIN_PRIVE ($p) {return declencher_balise_dynamique($p,'LOGIN_PRIVE');}
-
 ?>

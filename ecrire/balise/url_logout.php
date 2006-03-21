@@ -12,8 +12,8 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-global $balise_URL_LOGOUT_collecte;
-$balise_URL_LOGOUT_collecte = array();
+function balise_URL_LOGOUT ($p) {return calculer_balise_dynamique($p,'URL_LOGOUT', array());
+}
 
 // filtres[0] = url destination apres logout [(#URL_LOGOUT|url)]
 function balise_URL_LOGOUT_stat ($args, $filtres) {
@@ -31,7 +31,4 @@ function balise_URL_LOGOUT_dyn($cible) {
 		"logout_public=".urlencode($login)."&amp;url=" . urlencode($cible)
 	);
 }
-
-
-function balise_URL_LOGOUT ($p) {return declencher_balise_dynamique($p,'URL_LOGOUT');}
 ?>

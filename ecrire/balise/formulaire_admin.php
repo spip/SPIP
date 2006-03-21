@@ -12,8 +12,10 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-global $balise_FORMULAIRE_ADMIN_collecte ;
-$balise_FORMULAIRE_ADMIN_collecte = array();
+
+function balise_FORMULAIRE_ADMIN ($p) {
+	return calculer_balise_dynamique($p,'FORMULAIRE_ADMIN', array());
+}
 
 # on ne peut rien dire au moment de l'execution du squelette
 
@@ -179,6 +181,4 @@ function afficher_raccourci_stats($id_article) {
 }
 
 
-
-function balise_FORMULAIRE_ADMIN ($p) {return declencher_balise_dynamique($p,'FORMULAIRE_ADMIN');}
 ?>
