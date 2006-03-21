@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
-include_spip('inc-login_public');
+include_spip('balises/login_public'); 
 
 global $balise_LOGIN_PRIVE_collecte;
 $balise_LOGIN_PRIVE_collecte = array('url');
