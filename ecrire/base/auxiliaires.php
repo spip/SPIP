@@ -334,42 +334,4 @@ $tables_auxiliaires['spip_ortho_cache'] = array(
 $tables_auxiliaires['spip_ortho_dico'] = array(
 	'field' => &$spip_ortho_dico,
 	'key' => &$spip_ortho_dico_key);
-
-global $tables_relations;
-$tables_relations['articles']['id_auteur'] = 'auteurs_articles';
-$tables_relations['auteurs']['id_article'] = 'auteurs_articles';
-
-$tables_relations['rubriques']['id_auteur'] = 'auteurs_rubriques';
-$tables_relations['auteurs']['id_rubrique'] = 'auteurs_rubriques';
-
-$tables_relations['messages']['id_auteur'] = 'auteurs_messages';
-$tables_relations['auteurs']['id_message'] = 'auteurs_messages';
-
-$tables_relations['documents']['id_article'] = 'documents_articles';
-$tables_relations['articles']['id_document'] = 'documents_articles';
-
-$tables_relations['documents']['id_rubrique'] = 'documents_rubriques';
-$tables_relations['rubriques']['id_document'] = 'documents_rubriques';
-
-$tables_relations['documents']['id_breve'] = 'documents_breves';
-$tables_relations['breves']['id_document'] = 'documents_breves';
-
-$tables_relations['mots']['id_article'] = 'mots_articles';
-$tables_relations['articles']['id_mot'] = 'mots_articles';
-
-$tables_relations['mots']['id_breve'] = 'mots_breves';
-$tables_relations['breves']['id_mot'] = 'mots_breves';
-
-$tables_relations['mots']['id_rubrique'] = 'mots_rubriques';
-$tables_relations['rubriques']['id_mot'] = 'mots_rubriques';
-
-$tables_relations['mots']['id_syndic'] = 'mots_syndic';
-$tables_relations['syndic']['id_mot'] = 'mots_syndic';
-
-$tables_relations['mots']['id_forum'] = 'mots_forum';
-$tables_relations['forum']['id_mot'] = 'mots_forum';
-
-$tables_relations['mots']['id_document'] = 'mots_documents';
-$tables_relations['documents']['id_mot'] = 'mots_documents';
-
 ?>

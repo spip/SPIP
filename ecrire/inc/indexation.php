@@ -15,6 +15,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 include_spip('base/create');
 include_spip('base/abstract_sql');
+include_spip('public/interfaces');
 
 // Quels formats sait-on extraire ?
 $GLOBALS['extracteur'] = array (
@@ -372,21 +373,22 @@ function indexer_les_champs(&$row,&$index_desc,$ponderation = 1){
 
 // Indexer les documents, auteurs, mots-cles associes a l'objet
 function indexer_elements_associes($table, $id_objet, $table_associe, $valeur) {
-	global $tables_relations;
-	global $INDEX_elements_associes;
+	global $INDEX_elements_associes, $tables_jointures, $tables_auxiliaires, $tables_principales;
 
 	if (isset($INDEX_elements_associes[$table_associe])){
 		$table_abreg = preg_replace("{^spip_}","",$table);
 		$col_id = primary_index_table($table);
 		$col_id_as = primary_index_table($table_associe);
-		$relation = $tables_relations[$table];
-		if (!$relation) $relation = $tables_relations[$table_abreg];
-		if ( ($relation)
-				&&(isset($relation[$col_id_as])) ){
-				
-			$table_rel = $relation[$col_id_as];
-		  $select="assoc.$col_id_as";
-		  foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
+		if (is_array($rel = $tables_jointures[$table])) {
+			foreach($rel as $joint) {
+				if (@in_array($col_id_as, $tables_auxiliaires['spip_' . $joint]['key']))
+				{$table_rel = $joint; break;}
+				if (@in_array($col_id_as, $tables_principales['spip_' . $joint]['key']))
+					{$table_rel = $joint; break;}
+			}
+
+			$select="assoc.$col_id_as";
+			foreach(array_keys($INDEX_elements_associes[$table_associe]) as $quoi)
 				$select.=',assoc.' . $quoi;
 			$q = "SELECT $select FROM $table_associe AS assoc,
 				spip_$table_rel AS lien
