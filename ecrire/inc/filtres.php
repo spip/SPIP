@@ -2581,17 +2581,17 @@ function boutonne($t, $n, $v, $a='') {
 // ATTENTION: cette barre injecte un script JS que le squelette doit accepter
 // donc ce filtre doit IMPERATIVEMENT assurer la securite a sa place
 
-function barre_textarea($texte, $rows, $cols) {
+function barre_textarea($texte, $rows, $cols, $lang='') {
 	static $num_textarea = 0;
-	include_spip('inc/layer');
-
+	include_spip('inc/layer'); // defini browser_barre
+	spip_log("entree dans barre_tex" . $GLOBALS['browser_barre']);
 	$texte = entites_html($texte);
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
 
 	$num_textarea++;
 	include_spip ('inc/barre');
-	return afficher_barre("document.getElementById('textarea_$num_textarea')", true) .
+	return afficher_barre("document.getElementById('textarea_$num_textarea')", true, $lang) .
 	  "
 <textarea name='texte' rows='$rows' class='forml' cols='$cols'
 id='textarea_$num_textarea'
