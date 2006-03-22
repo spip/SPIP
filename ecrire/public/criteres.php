@@ -298,7 +298,7 @@ function critere_par_jointure(&$boucle, $champ)
 
     $cle = trouver_champ_exterieur($champ, $boucle->jointures, $boucle);
     if ($cle) 
-      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle);
+      $cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, false);
     if ($cle) $t = "L$cle"; // sinon erreur
   }
   return "'" . $t . '.' . $champ . "'";
@@ -583,7 +583,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 			}
 			if ($t)	return $t;
 		}
-		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col);
+		$cle = calculer_jointure($boucle, array($boucle->id_table, $desc), $cle, $col, $crit->cond);
 		if ($cle) return "L$cle";
 	}
 
@@ -597,7 +597,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 // deduction automatique des jointures 
 // une jointure sur une table avec primary key doit se faire sur celle-ci. 
 
-function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
+function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
 {
   static $num=0;
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
@@ -607,7 +607,7 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
   $id_primary = $ddesc['key']['PRIMARY KEY'];
   $id_field = $dnom . '.' . $id_primary;
   $id_table = "";
-
+  spip_log("cj $col $id_primary");
   foreach($res as $r) {
     list($d, $a, $j) = $r;
     $num++;
@@ -617,10 +617,10 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='')
 
   // pas besoin de group by 
   // si une seule jointure et sur une table primary key formee
-  // de l'index principal et de l'index de jointure
+  // de l'index principal et de l'index de jointure (non conditionnel! [6031])
   // cf http://article.gmane.org/gmane.comp.web.spip.devel/30555
-  // 
-  if ($pk = (count($res) == 1)) {
+
+  if ($pk = (count($res) == 1) && !$cond) {
     if ($pk = $a[1]['key']['PRIMARY KEY']) {
 	$pk=preg_match("/^$id_primary, *$col$/", $pk) OR
 	  preg_match("/^$col, *$id_primary$/", $pk);
