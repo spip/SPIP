@@ -27,7 +27,7 @@
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><strong>#NOM_SITE_SPIP</strong></a>]
 	</li>
 	<li class="menu-item">
 	<a href="#URL_PAGE{plan}"><:plan_site:></a>
@@ -105,7 +105,7 @@
 <//B_forums_decompte>
 
 <BOUCLE_forums_liens(FORUMS){id_article}{par date}{inverse}{0,5}>
-	<li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
+	<li class="menu-item">[<em>(#DATE|affdate_court)</em>:]
 	<a href="#forum#ID_FORUM">#TITRE</a>
 	</li>
 </BOUCLE_forums_liens>
@@ -208,7 +208,7 @@
 <BOUCLE_documents_portfolio(DOCUMENTS){id_article}{mode=document}{extension==(png|jpg|gif)$}{doublons}>
 	<div style="float: left;">
 	[<a href="#URL_ARTICLE[(#URL_ARTICLE|strpos{?}|?{&amp;,?})]id_document=#ID_DOCUMENT">(#LOGO_DOCUMENT{0,60})</a>]
-[<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
+[<div style="clear: both;"><strong>(#TITRE)</strong></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_portfolio>
 </div>
@@ -219,7 +219,7 @@
 <div><hr />
 <BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {doublons}>
 	<div style="float: left;">
-	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><b>(#TITRE)</b></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
+	[(#LOGO_DOCUMENT|#URL_DOCUMENT)][<div style="clear: both;"><strong>(#TITRE)</strong></div>][<div style="clear: both;">(#DESCRIPTIF)</div>]
 	</div>
 </BOUCLE_documents_joints>
 </div>
@@ -257,7 +257,7 @@
 
 <!-- Forums -->
 
-[<div class="forum-repondre"><b><a  href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></b></div>]
+[<div class="forum-repondre"><strong><a  href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></strong></div>]
 <br />
 
 <B_forums>

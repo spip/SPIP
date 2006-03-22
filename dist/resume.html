@@ -27,7 +27,7 @@
 <div class="menu">
 <ul class="general">
 	<li class="menu-titre">
-	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><b>#NOM_SITE_SPIP</b></a>]
+	[<a href="(#URL_SITE_SPIP)" title="<:accueil_site:>"><strong>#NOM_SITE_SPIP</strong></a>]
 	</li>
 	<li class="menu-item">
 	<a href="#URL_PAGE{plan}"><:plan_site:></a>
@@ -56,7 +56,7 @@
 	</div>
 	<ul>
 <BOUCLE_forums_liens(FORUMS){plat}{par date}{inverse}{0,15}>
-        <li class="menu-item">[<i>(#DATE|affdate_court)</i>:]
+        <li class="menu-item">[<em>(#DATE|affdate_court)</em>:]
         <a href="#URL_FORUM">#TITRE</a>
         </li>
 </BOUCLE_forums_liens>
@@ -104,7 +104,7 @@
 		<ul>
 	<BOUCLE_syndic(SYNDIC_ARTICLES) {par date} {inverse} {0,15}>
 		<li class="menu-item">
-		[<i>(#DATE|affdate_court)</i>:]
+		[<em>(#DATE|affdate_court)</em>:]
 		<a href="#URL_ARTICLE">[(#TITRE*)]</a>
 		</li>
 	</BOUCLE_syndic>
