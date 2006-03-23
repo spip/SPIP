@@ -2583,8 +2583,8 @@ function boutonne($t, $n, $v, $a='') {
 
 function barre_textarea($texte, $rows, $cols, $lang='') {
 	static $num_textarea = 0;
-	include_spip('inc/layer'); // defini browser_barre
-	spip_log("entree dans barre_tex" . $GLOBALS['browser_barre']);
+	include_spip('inc/layer'); // definit browser_barre
+
 	$texte = entites_html($texte);
 	if (!$GLOBALS['browser_barre'])
 		return "<textarea name='texte' rows='$rows' class='forml' cols='$cols'>$texte</textarea>";
