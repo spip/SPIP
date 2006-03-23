@@ -50,7 +50,7 @@ debut_grand_cadre();
 afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
-
+if (!$id_rubrique) {echo _T('public:aucune_breve'); exit;}
 debut_gauche();
 
 debut_boite_info();

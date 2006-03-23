@@ -89,6 +89,8 @@ afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 
+if (!$id_rubrique) {echo _T('public:aucun_article'); exit;}
+
 //
 // Affichage de la colonne de gauche
 //
