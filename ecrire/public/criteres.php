@@ -539,11 +539,10 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 
 	// Cas particulier : expressions de date
 	else if ($table_date[$type]
-	AND preg_match(",^((age|jour|mois|annee)_relatif|"
-	."date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
+	AND preg_match(",^((age|jour|mois|annee)_relatif|date|mois|annee|jour|heure|age)(_[a-z]+)?$,",
 	$col, $regs)) {
 		list($col, $col_table) =
-		calculer_critere_infixe_date($idb, $boucles, $regs[1], $regs[3]);
+		calculer_critere_infixe_date($idb, $boucles, $regs);
 	}
 
 	// HACK : selection des documents selon mode 'image'
@@ -824,12 +823,12 @@ function calculer_vieux_in($params)
 	      return  $newp;
 }
 
-function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
+function calculer_critere_infixe_date($idb, &$boucles, $regs)
 {
 	global $table_date; 
 	$boucle = $boucles[$idb];
-
-	$date_orig = $table_date[$boucle->type_requete];
+	list(,$col, $rel, $suite) = $regs;
+	$date_orig = $pred = $table_date[$boucle->type_requete];
 
 	if ($suite) {
 	# NOTE : A transformer en recherche de l'existence du champ date_xxxx,
@@ -838,10 +837,11 @@ function calculer_critere_infixe_date($idb, &$boucles, $col, $suite)
 			$date_orig = 'date'.$suite;
 		else
 			$date_orig = substr($suite, 1);
-	}
+		$pred = $date_orig;
+	} else if ($rel) $pred = 'date';
 
 	$date_compare = '\'" . normaliser_date(' .
-	      calculer_argument_precedent($idb, $date_orig, $boucles) .
+	      calculer_argument_precedent($idb, $pred, $boucles) .
 	      ') . "\'';
 	$date_orig = $boucle->id_table . '.' . $date_orig;
 
