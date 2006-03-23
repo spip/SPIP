@@ -164,6 +164,9 @@ function install_6()
 	init_config();
 
 	include_spip('inc/acces');
+	$htpasswd = _DIR_SESSIONS . _AUTH_USER_FILE;
+	@unlink($htpasswd);
+	@unlink($htpasswd."-admin");
 	ecrire_acces();
 
 	if (!@rename(_FILE_CONNECT_INS . _FILE_TMP . '.php',
