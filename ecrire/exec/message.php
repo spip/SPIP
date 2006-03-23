@@ -331,7 +331,7 @@ function http_message_avec_participants($id_message, $statut, $forcer_dest, $nou
 
 function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, $total_dest, $titre, $rv, $date_heure, $date_fin, $cherche_auteur, $nouv_auteur, $forcer_dest)
 {
-	global $connect_id_auteur,$connect_statut;
+  global $connect_id_auteur,$connect_statut, $les_notes;
 
 	if ($type == 'normal') {
 		$le_type = _T('info_message_2').aide ("messut");
@@ -387,6 +387,14 @@ function http_affiche_message($id_message, $expediteur, $statut, $type, $texte, 
 	  "\n<table width='100%' cellpadding='0' cellspacing='0' border='0'>",
 	  "<tr><td>",
 	  "<div class='serif'><p>$texte</p></div>";
+
+	if ($les_notes) {
+			echo debut_cadre_relief();
+			echo "<div $dir_lang class='arial11'>";
+			echo justifier("<b>"._T('info_notes')."&nbsp;:</b> ".$les_notes);
+			echo "</div>";
+			echo fin_cadre_relief();
+	}
 
 	if ($expediteur == $connect_id_auteur AND $statut == 'redac') {
 	  if ($type == 'normal' AND $total_dest < 2){
