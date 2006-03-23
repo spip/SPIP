@@ -118,7 +118,7 @@ function afficher_barre($champ, $forum=false, $lang='') {
 		$ret .= "\n<tr>\n<td colspan='$col'><input disabled='disabled' type='text' id='barre_$num_barre' size='45' maxlength='100' style='width:100%; font-size:11px; color: black; background-color: #e4e4e4; border: 0px solid #dedede;'\nvalue=\"".attribut_html(_T('barre_aide'))."\" /></td></tr>";
 
 	$ret .= "</table>";
-	$num_barre++;
+
 	return $ret;
 }
 

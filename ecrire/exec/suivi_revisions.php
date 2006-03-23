@@ -125,9 +125,7 @@ fin_cadre_relief();
 
 debut_droite();
 
-afficher_suivi_versions ($debut, $id_secteur,
-	$uniq_auteur ? $connect_id_auteur : '',
-	$lang_choisie);
+ afficher_suivi_versions ($debut, $id_secteur, $id_auteur, $lang_choisie);
 
 fin_page();
 }

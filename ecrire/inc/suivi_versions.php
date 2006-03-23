@@ -28,15 +28,15 @@ function afficher_para_modifies ($texte, $court = false) {
 	return $texte;
 }
 
-function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = false, $lang = "", $court = false, $rss = false) {
+function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = false, $lang = "", $court = false, $rss = false) {
 	global $dir_lang;
 	
 	$nb_aff = 10;
 	$champs = array('surtitre', 'titre', 'soustitre', 'descriptif', 'nom_site', 'url_site', 'chapo', 'texte', 'ps');
 
-	if ($id_auteur) {
+	if ($uniq_auteur) {
 		$req_where = " AND articles.statut IN ('prepa','prop','publie')"; 
-		$req_where = " AND versions.id_auteur = $id_auteur";
+		$req_where .= " AND versions.id_auteur = $uniq_auteur";
 	} else {
 		$req_where = " AND articles.statut IN ('prop','publie')";
 	}
@@ -51,7 +51,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 		SELECT versions.*, articles.statut, articles.titre 
 		FROM spip_versions AS versions, spip_articles AS articles 
 		WHERE versions.id_article = articles.id_article AND versions.id_version > 1 $req_where ";
-	
+
 	$result = spip_query($query . " ORDER BY versions.date DESC LIMIT $debut, $nb_aff");
 	if (spip_num_rows($result) > 0) {
 
@@ -78,7 +78,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $id_auteur = fals
 					if ($i*$nb_aff == $debut) echo "<b>";
 					else {
 					  $next = ($i * $nb_aff);
-echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&uniq_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
+echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=$id_secteur&id_auteur=$uniq_auteur&lang_choisie=$lang"),"'>";
 					}
 					echo (($i * $nb_aff) + 1);
 					if ($i*$nb_aff == $debut) echo "</b>";
