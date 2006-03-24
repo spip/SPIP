@@ -54,32 +54,24 @@ if ($row = spip_fetch_array($result)) {
 	$extra = $row["extra"];
 	$id_trad = $row["id_trad"];
 	$id_version = $row["id_version"];
-}
 
-// pour l'affichage du virtuel
-unset($virtuel);
-if (substr($chapo, 0, 1) == '=') {
-	$virtuel = substr($chapo, 1);
-}
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
+		$annee_redac = $regs[1];
+		$mois_redac = $regs[2];
+		$jour_redac = $regs[3];
+		$heure_redac = $regs[4];
+		$minute_redac = $regs[5];
+		if ($annee_redac > 4000) $annee_redac -= 9000;
+	}
 
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date_redac, $regs)) {
-	$annee_redac = $regs[1];
-	$mois_redac = $regs[2];
-	$jour_redac = $regs[3];
-	$heure_redac = $regs[4];
-	$minute_redac = $regs[5];
-	if ($annee_redac > 4000) $annee_redac -= 9000;
-}
-
-if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
-	$annee = $regs[1];
-	$mois = $regs[2];
-	$jour = $regs[3];
-	$heure = $regs[4];
-	$minute = $regs[5];
-}
-
-
+	if (ereg("([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})", $date, $regs)) {
+		$annee = $regs[1];
+		$mois = $regs[2];
+		$jour = $regs[3];
+		$heure = $regs[4];
+		$minute = $regs[5];
+	}
+ }
 
 debut_page("&laquo; $titre_article &raquo;", "documents", "articles", "", "", $id_rubrique);
 
@@ -89,7 +81,7 @@ afficher_hierarchie($id_rubrique);
 
 fin_grand_cadre();
 
-if (!$id_rubrique) {echo _T('public:aucun_article'); exit;}
+if (!$row) {echo _T('public:aucun_article'); exit;}
 
 //
 // Affichage de la colonne de gauche
@@ -103,7 +95,14 @@ boite_info_articles($id_article, $statut_article, $visites, $id_version);
 // Logos de l'article et Boites de configuration avancee
 //
 
- boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
+
+// pour l'affichage du virtuel
+unset($virtuel);
+if (substr($chapo, 0, 1) == '=') {
+	$virtuel = substr($chapo, 1);
+}
+
+boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			  $change_accepter_forum, $change_petition,
 			  $email_unique, $site_obli, $site_unique,
 			  $message, $texte_petition,
