@@ -18,9 +18,9 @@ if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 # on peut indiquer '.html' pour faire joli
 define ('_terminaison_urls_page', '');
 # ici, ce qu'on veut ou presque (de preference pas de '/' ni de '.')
-# attention seul le '=' restera compatible avec les autres modes d'url
+# attention seuls '' et '=' sont compatibles avec les autres modes d'url
 # (sinon il faut aller y modifier le code de compatibilite)
-define ('_separateur_urls_page', '=');
+define ('_separateur_urls_page', '');
 # on peut indiquer '' si on a installe le .htaccess
 define ('_debut_urls_page', get_spip_script('./').'?');
 #######
@@ -69,14 +69,14 @@ function recuperer_parametres_url(&$fond, $url) {
 	global $contexte;
 
 	if (preg_match(
-	',.*([?]|/)(article|rubrique|breve|mot|site|auteur)'
-	.preg_quote(_separateur_urls_page).'([0-9]+),',
+	',.*([?]|/)(article|rubrique|breve|mot|site|auteur)('
+	.preg_quote(_separateur_urls_page).'|=)?([0-9]+),',
 	$url, $regs)) {
 		$fond = $regs[2];
 		if ($regs[2] == 'site')
-			$contexte['id_syndic'] = $regs[3];
+			$contexte['id_syndic'] = $regs[4];
 		else
-			$contexte['id_'.$fond] = $regs[3];
+			$contexte['id_'.$fond] = $regs[4];
 
 		return;
 	}
