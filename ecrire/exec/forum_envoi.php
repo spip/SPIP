@@ -164,7 +164,7 @@ else {
 	echo generer_url_post_ecrire('forum_envoi',"",'formulaire');
 }
 
-echo "<div>&nbsp;</div>";
+echo "<div id='formulaire'>&nbsp;</div>";
 
 debut_cadre_formulaire(($statut == 'privac') ? "" : 'background-color: #dddddd;');
 

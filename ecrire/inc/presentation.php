@@ -1656,7 +1656,7 @@ function afficher_forum_thread($row, $controle_id_article, $compteur_forum, $nb_
 
 	if (!$controle_id_article) {
 		echo "<div align='right' class='verdana1'>";
-		echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=" . rawurlencode($adresse_retour) . "&titre_message=".rawurlencode($titre)), 
+		echo "<b><a href='", generer_url_ecrire("forum_envoi","id_parent=$id_forum&adresse_retour=" . rawurlencode($adresse_retour) . "&titre_message=".rawurlencode($titre) .'#formulaire'), 
 		  "'>",
 		  _T('lien_repondre_message'),
 		  "</a></b></div>";
