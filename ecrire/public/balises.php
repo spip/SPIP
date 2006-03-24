@@ -245,7 +245,6 @@ function balise_COMPTEUR_BOUCLE_dist($p) {
 
 function balise_TOTAL_BOUCLE_dist($p) {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
-#	spip_log("tb '$b'");
 	if ($b === '' || !isset($p->boucles[$b])) {
 		erreur_squelette(
 			_T('zbug_champ_hors_boucle',
@@ -796,7 +795,6 @@ function balise_CHEMIN_dist($p) {
 // La syntaxe #ENV{toto, rempl} renverra 'rempl' si $toto est vide
 //
 function balise_ENV_dist($p, $src = NULL) {
-
 	// le tableau de base de la balise (cf #META ci-dessous)
 	if (!$src) $src = '$Pile[0]';
 
