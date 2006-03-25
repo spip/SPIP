@@ -14,27 +14,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return; // securiser
 if (!function_exists('generer_url_article')) { // si la place n'est pas prise
 
 function generer_url_article($id_article) {
-	return "spip.php?page=article&id_article=$id_article";
+	return "article.php3?id_article=$id_article";
 }
 
 function generer_url_rubrique($id_rubrique) {
-	return "spip.php?page=rubrique&id_rubrique=$id_rubrique";
+	return "rubrique.php3?id_rubrique=$id_rubrique";
 }
 
 function generer_url_breve($id_breve) {
-	return "spip.php?page=breve&id_breve=$id_breve";
+	return "breve.php3?id_breve=$id_breve";
 }
 
 function generer_url_mot($id_mot) {
-	return "spip.php?page=mot&id_mot=$id_mot";
+	return "mot.php3?id_mot=$id_mot";
 }
 
 function generer_url_site($id_syndic) {
-	return "spip.php?page=site&id_syndic=$id_syndic";
+	return "site.php3?id_syndic=$id_syndic";
 }
 
 function generer_url_auteur($id_auteur) {
-	return "spip.php?page=auteur&id_auteur=$id_auteur";
+	return "auteur.php3?id_auteur=$id_auteur";
 }
 
 function generer_url_document($id_document) {
