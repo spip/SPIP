@@ -554,7 +554,7 @@ if (flag_svg()) {
 				}
 			}
 			echo "</div>";
-	}		
+	}
 		//}
 
 		// cette ligne donne la moyenne depuis le debut
@@ -740,6 +740,17 @@ if (flag_svg()) {
 	/////
 		
 	fin_cadre_relief();
+
+
+	// Le bouton pour passer de svg a htm
+	if (flag_svg()) {
+		$lien = 'non'; $alter = 'HTML';
+	} else {
+		$lien = 'oui'; $alter = 'SVG';
+	}
+	echo "\n<div align='".$GLOBALS['spip_lang_right']."'>
+	<font face='arial,helvetica,sans-serif' size=1><a href='".
+	parametre_url(self(), 'var_svg', $lien)."'>$alter</a></font></div>\n";
 
 }
 

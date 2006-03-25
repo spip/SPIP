@@ -161,14 +161,28 @@ function verif_butineur() {
 
 
 function flag_svg() {
-	global $HTTP_USER_AGENT, $browser_name, $browser_version;
-	global $browser_description, $browser_rev, $browser_layer, $browser_barre;
-	if (!$browser_name) verif_butineur();
+	global $browser_name, $browser_rev;
 
-	$flag = false;
-	if ($browser_name == "Mozilla" AND $browser_rev >= 1.8) $flag = true;
-			
-	return $flag;
+	// SVG est une preference definie par le visiteur ?
+	if (_request('var_svg') == 'oui') {
+		include_spip('inc/cookie');
+		spip_setcookie('spip_svg', 'oui', time() + 365 * 24 * 3600);
+		return true;
+	}
+	if (_request('var_svg') == 'non') {
+		include_spip('inc/cookie');
+		spip_setcookie('spip_svg', 'non', time() + 365 * 24 * 3600);
+		return false;
+	}
+	if ($_COOKIE['spip_svg'] == 'oui')
+		return true;
+	if ($_COOKIE['spip_svg'] == 'non')
+		return false;
+
+	// Sinon, proceder a l'autodetection
+	if (!$browser_name)
+		verif_butineur();
+	return ($browser_name == "Mozilla" AND $browser_rev >= 1.8);
 }
 
 // Obsolete. Present pour compatibilite 
