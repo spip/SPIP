@@ -17,12 +17,11 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Attention a modifier simultanement le sanity check de
 // la fonction retire_cache()
 //
-function generer_nom_fichier_cache($contexte, $fond) {
+function generer_nom_fichier_cache($contexte) {
 
 	if ($contexte === NULL) {
 		$fichier_requete = nettoyer_uri();
 	} else {
-		$fichier_requete = $fond;
 		foreach ($contexte as $var=>$val)
 			$fichier_requete .= "&$var=$val";
 	}
@@ -177,7 +176,7 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 // > 0 s'il faut calculer la page et le mette en cache pendant N secondes
 //
 
-function determiner_cache(&$use_cache, $contexte, $fond) {
+function determiner_cache(&$use_cache, $contexte) {
 
 	// cas ignorant le cache car complement dynamique
 	if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -185,7 +184,7 @@ function determiner_cache(&$use_cache, $contexte, $fond) {
 		return array('','',0);
 	}
 
-	$chemin_cache = generer_nom_fichier_cache($contexte, $fond);
+	$chemin_cache = generer_nom_fichier_cache($contexte);
 	if ($GLOBALS['flag_gz'] AND @file_exists(_DIR_CACHE.$chemin_cache.'.gz'))
 		$chemin_cache .= '.gz';
 

@@ -90,7 +90,7 @@ function afficher_page_globale ($fond) {
 
 	// Peut-on utiliser un fichier cache ?
 	list($chemin_cache, $page, $lastmodified) = 
-		determiner_cache($use_cache, NULL, $fond);
+		determiner_cache($use_cache, NULL);
 
 	if (!$chemin_cache || !$lastmodified) $lastmodified = time();
 
@@ -137,11 +137,8 @@ function afficher_page_globale ($fond) {
 
 		if ($chemin_cache) $page['cache'] = $chemin_cache;
 
-		// compatibilite. devrait pouvoir sauter
-		if ($page['process_ins'] == 'php') {
-			auto_content_type($page['texte']);
-			auto_expire($page['texte']);
-		}
+		auto_content_type($page);
+		auto_expire($page);
 
 		$flag_preserver |=  (headers_sent());
 
@@ -149,11 +146,9 @@ function afficher_page_globale ($fond) {
 
 		if (!$flag_preserver) {
 
-			if (!isset($page['entetes']['Content-Type'])) {
-				$page['entetes']['Content-Type'] = 
+			$page['entetes']['Content-Type'] = 
 					"text/html; charset="
 					. $GLOBALS['meta']['charset'];
-			}
 			if ($flag_ob) {
 			// Si la page est vide, produire l'erreur 404
 				if (trim($page['texte']) === ''
@@ -181,18 +176,22 @@ function afficher_page_globale ($fond) {
 // 2 fonctions pour compatibilite arriere. Sont probablement superflues
 //
 
-function auto_content_type($code)
+function auto_content_type($page)
 {
 	global $flag_preserver;
 	if (!isset($flag_preserver))
-		$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$code);
+	  {
+		$flag_preserver = preg_match("/header\s*\(\s*.content\-type:/isx",$page['texte']) || (isset($page['entetes']['Content-Type']));
+	  }
 }
 
-function auto_expire($code)
+function auto_expire($page)
 {
 	global $flag_dynamique;
 	if (!isset($flag_dynamique)) {
-		if (preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$code, $r))
+		if (preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$page['texte'], $r))
+			$flag_dynamique = (intval($r[1]) === 0);
+		else	if (preg_match("/([\s\d])*.\s*\)/is",$page['entetes']['Expire'], $r))
 			$flag_dynamique = (intval($r[1]) === 0);
 	}
 }
@@ -202,7 +201,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 
 	// Peut-on utiliser un fichier cache ?
 	list($chemin_cache, $page, $lastinclude) = 
-		determiner_cache($use_cache, $contexte_inclus, $fond);
+		determiner_cache($use_cache, $contexte_inclus);
 
 	// Si on a inclus sans fixer le critere de lang, de deux choses l'une :
 	// - on est dans la langue du site, et pas besoin d'inclure inc_lang
