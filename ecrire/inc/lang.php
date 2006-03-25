@@ -336,7 +336,7 @@ function verifier_lang_url() {
 	{
 		$destination = parametre_url(self(),'lang', $lang_demandee, '&');
 		if ($d = $GLOBALS['var_mode'])
-			$destination = parametre_url($detination, 'var_mode', $d, '&');
+			$destination = parametre_url($destination, 'var_mode', $d, '&');
 		redirige_par_entete($destination);
 	}
 
