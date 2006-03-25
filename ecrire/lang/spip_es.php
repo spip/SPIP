@@ -9,7 +9,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 '0_URL' => 'http://listes.rezo.net/mailman/listinfo/spip-es',
 '0_langue' => 'espa&ntilde;ol [es]',
 '0_liste' => 'spip-es@rezo.net',
-'0_mainteneur' => 'spip-es@rezo.net',
+'0_mainteneur' => 'spip-dev@rezo.net',
 
 
 // A
@@ -34,7 +34,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'avis_erreur' => 'Error: ver aqui abajo',
 'avis_erreur_connexion' => 'Error de conexi&oacute;n',
 'avis_erreur_cookie' => 'problema de cookie ',
-'avis_erreur_fonction_contexte' => 'Error de programacion.  No se debe llamar esta funcion en este contexto.',
+'avis_erreur_fonction_contexte' => 'Error de programaci&oacute;n.  No se debe llamar esta funci&oacute;n en este contexto.',
 'avis_erreur_mysql' => 'Error MySQL',
 'avis_erreur_sauvegarde' => 'Error al hacer la copia de respaldo (@type@ @id_objet@)!',
 
@@ -81,6 +81,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_public' => 'El siguiente calendario le permite seguir la actividad p&uacute;blica de este sitio (art&iacute;culos y breves publicadas).',
 'calendrier_synchro_sync' => 'Sincronizar el archivo <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Cuidado, has pedido cambiar el estado de este elemento. &iquest;Deseas continuar?',
+'correcte' => 'correcta',
 
 
 // D
@@ -349,12 +350,13 @@ suministrado. Si no est&aacute;s inscrito/a, debes',
 'image_tourner_droite' => 'Rotaci&oacute;n de 90&deg; a la derecha',
 'image_tourner_gauche' => 'Rotaci&oacute;n de 90&deg; a la izquierda',
 'img_indisponible' => 'imagen indisponible',
+'impossible' => 'imposible',
 'info_a_suivre' => 'MIS TAREAS&nbsp;&raquo;',
 'info_a_valider' => '[a validar]',
 'info_acces_interdit' => 'Acceso prohibido',
 'info_acces_refuse' => 'Acceso rechazado',
 'info_action' => 'Acci&oacute;n : @action@',
-'info_administrer_rubriques' => 'Puedes administrar esta secciones y sus subsecciones',
+'info_administrer_rubriques' => 'Puedes administrar esta secci&oacute;n y sus subsecciones',
 'info_adresse_non_indiquee' => 'No has indicado la direcci&oacute;n a probar',
 'info_aide' => 'Ayuda :',
 'info_ajouter_mot' => 'A&ntilde;adir esta palabra',
@@ -631,6 +633,9 @@ volver a conectarte al sitio.
 
 
 // S
+'squelette' => 'esqueleto',
+'squelette_inclus_ligne' => 'esqueleto inclu&iacute;do, l&iacute;nea',
+'squelette_ligne' => 'esqueleto, l&iacute;nea',
 'stats_visites_et_popularite' => '@visites@ visitas; popularidad: @popularite@',
 'suivant' => 'siguiente',
 

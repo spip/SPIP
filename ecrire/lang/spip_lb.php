@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'Kalenner vum Mount',
 'cal_par_semaine' => 'Kalenner vun der Woch',
 'confirm_changer_statut' => 'Opgepasst, dir w&euml;llt de Status vun d&euml;sem Element &auml;nneren. W&euml;llt dir weiderfueren?',
+'correcte' => 'richteg',
 
 
 // D
@@ -337,6 +338,7 @@ Merci fir &auml;r Participatioun
 'image_tourner_droite' => '90&deg; no riets dr&eacute;ien',
 'image_tourner_gauche' => '90&deg; no l&eacute;nks dr&eacute;ien',
 'img_indisponible' => 'Bild fehlt',
+'impossible' => 'onm&eacute;iglech',
 'info_a_suivre' => 'AUFGABEN"',
 'info_a_valider' => '[ze valid&eacute;ieren]',
 'info_acces_interdit' => 'Zougang gespaart',
@@ -616,6 +618,9 @@ Dir k&euml;nnt do e neit Passwuert agin an Iech um Site umelden.
 
 
 // S
+'squelette' => 'Skelett',
+'squelette_inclus_ligne' => 'Skelett abegraff, Zeil',
+'squelette_ligne' => 'Skelett, Zeil',
 'stats_visites_et_popularite' => '@visites@ Visiten; Popularit&eacute;it: @popularite@',
 'suivant' => 'Weider',
 

@@ -62,6 +62,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'uma &uacute;nica assinatura por endere&ccedil;o de e-mail',
 'bouton_checkbox_signature_unique_site' => 'uma &uacute;nica assinatura por website',
 'bouton_demande_publication' => 'Solicitar a publica&ccedil;&atilde;o desta mat&eacute;ria',
+'bouton_desactive_tout' => 'Desativar tudo',
 'bouton_effacer_index' => 'Apagar os &iacute;ndices',
 'bouton_effacer_tout' => 'Apagar TUDO',
 'bouton_envoi_message_02' => 'ENVIAR UMA MENSAGEM',
@@ -967,15 +968,15 @@ neste caso, voc&ecirc; n&atilde;o poder&aacute; usar a sindica&ccedil;&atilde;o 
 
 
 // U
-'utf8_convert_attendez' => '<NEW>Attendez quelques instants et rechargez cette page.',
-'utf8_convert_avertissement' => '<NEW>Vous vous appr&ecirc;tez &agrave; convertir le contenu de votre base de donn&eacute;es (articles, br&egrave;ves, etc) du jeu de caract&egrave;res <b>@orig@</b> vers le jeu de caract&egrave;res <b>@charset@</b>.',
-'utf8_convert_backup' => '<NEW>N\'oubliez pas de faire auparavant une sauvegarde compl&egrave;te de votre site. Vous devrez aussi v&eacute;rifier que vos squelettes et fichiers de langue sont compatibles @charset@. D\'autre part le suivi des r&eacute;visions, s\'il est activ&eacute;, sera endommag&eacute;.',
-'utf8_convert_erreur_deja' => '<NEW>Votre site est d&eacute;j&agrave; en @charset@, inutile de le convertir...',
-'utf8_convert_erreur_orig' => '<NEW>Erreur&nbsp;: le jeu de caract&egrave;res @charset@ n\'est pas support&eacute;.',
-'utf8_convert_termine' => '<NEW>C\'est termin&eacute;&nbsp;!',
-'utf8_convert_timeout' => '<NEW><b>Important&nbsp;:</b> en cas de <i>timeout</i> du serveur, veuillez recharger la page jusqu\'&agrave; ce qu\'elle indique &laquo;&nbsp;termin&eacute;&nbsp;&raquo;.',
-'utf8_convert_verifier' => '<NEW>Vous devez maintenant aller vider le cache, et v&eacute;rifier que tout se passe bien sur les pages publiques du site. En cas de gros probl&egrave;me, une sauvegarde de vos donn&eacute;es a &eacute;t&eacute; r&eacute;alis&eacute;e (au format SQL) dans le r&eacute;pertoire @rep@.',
-'utf8_convertir_votre_site' => '<NEW>Convertir votre site en utf-8',
+'utf8_convert_attendez' => 'Aguarde alguns instantes e atualize esta p&aacute;gina.',
+'utf8_convert_avertissement' => 'Voc&ecirc; est&aacute; prestes a converter o conte&uacute;do da sua base de dados(mat&eacute;rias, notas etc) do conjunto de caracteres <b>@orig@</b> para o conjunto de caracteres <b>@charset@</b>.',
+'utf8_convert_backup' => 'N&atilde;o se esque&ccedil;a de fazer primeiro uma c&oacute;pia de seguran&ccedil;a completa do seu site. Voc&ecirc; deve tamb&eacute;m verificar se os seus esqueletos e arquivos de idioma s&atilde;o compat&iacute;veis com @charset@. Caso contr&aacute;rio, se o acompanhamento de revis&otilde;es estiver ativado, o mesmo poder&aacute; ser danificado.',
+'utf8_convert_erreur_deja' => 'O seu site j&aacute; est&aacute; em @charset@, a convers&atilde;o n&atilde;o ocorreu...',
+'utf8_convert_erreur_orig' => 'Erro: o conjunto de caracteres @charset@ n&atilde;o &eacute; suportado.',
+'utf8_convert_termine' => 'Terminou!',
+'utf8_convert_timeout' => '<b>Importante:</b> em caso de <i>timeout</i> do servidor, por favor,atualize a p&aacute;gina at&eacute; que ela indique que &laquo;terminou&raquo;.',
+'utf8_convert_verifier' => 'Voc&ecirc; deve agora esvaziar o cache, e verificar se est&aacute; tudo bem com as p&aacute;ginas p&uacute;blicas do site. No caso de apresentarem problemas, uma c&oacute;pia de seguran&ccedil;a dos seus dados foi feita (no formato SQL) no diret&oacute;rio @rep@.',
+'utf8_convertir_votre_site' => 'Converter o seu site para utf-8',
 
 
 // V

@@ -82,6 +82,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'calendrier_synchro_public' => 'Lo calendi&egrave;r seguent permet de seguir l\'activitat de l\'espaci public d\'aqueste sit (articles e br&egrave;vas publicats).',
 'calendrier_synchro_sync' => 'Sincronizar lo fichi&egrave;r <i>iCal</i><br> (Mozilla Calendar, Apple iCal...)',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz de contunhar? ',
+'correcte' => 'corr&egrave;cte',
 
 
 // D
@@ -349,6 +350,7 @@ Merc&eacute;s per v&ograve;stra participacion
 'image_tourner_droite' => 'Rotacion 90&deg; cap a drecha',
 'image_tourner_gauche' => 'Rotacion 90&deg; cap a esquerra',
 'img_indisponible' => 'imatge indisponible',
+'impossible' => 'impossible',
 'info_a_suivre' => 'DE SEGUIR&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
@@ -640,6 +642,9 @@ e vos tornar connectar al sit.
 
 
 // S
+'squelette' => 'esqueleta',
+'squelette_inclus_ligne' => 'esqueleta inclusa, linha',
+'squelette_ligne' => 'esqueleta, linha',
 'stats_visites_et_popularite' => '@visites@ vesitas; popularitat: @popularite@',
 'suivant' => 'seguent',
 

@@ -60,6 +60,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_checkbox_signature_unique_email' => 'unha soa sinatura por cada enderezo de correo-e',
 'bouton_checkbox_signature_unique_site' => 'unha soa sinatura por cada lugar web',
 'bouton_demande_publication' => 'Solicitar a publicaci&oacute;n deste artigo',
+'bouton_desactive_tout' => 'Desactivar todo',
 'bouton_effacer_index' => 'Borrar os &iacute;ndices',
 'bouton_effacer_tout' => 'Borrar TODO',
 'bouton_envoi_message_02' => 'ENVIAR UNHA MENSAXE',

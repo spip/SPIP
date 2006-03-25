@@ -6,7 +6,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 
 
 // A
+'activer_plugin' => 'Plugin\'i etkinle&#351;tir',
 'aide_non_disponible' => '&Ccedil;evrimi&ccedil;i yard&#305;m&#305;n bu k&#305;sm&#305; hen&uuml;z bu dile &ccedil;evrilmemi&#351;.',
+'auteur' => 'Yazar&nbsp;:',
 'avis_acces_interdit' => 'Eri&#351;im yasak.',
 'avis_article_modifie' => 'Dikkat, @nom_auteur_modif@ bu metin &uuml;zerinde @date_diff@ dakika &ouml;nce &ccedil;al&#305;&#351;t&#305;',
 'avis_aucun_resultat' => 'Hi&ccedil; sonu&ccedil; yok.',
@@ -57,6 +59,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_checkbox_signature_unique_email' => 'e-posta adresi ba&#351;&#305;na sadece bir imza',
 'bouton_checkbox_signature_unique_site' => 'site ba&#351;&#305;na sadece bir imza',
 'bouton_demande_publication' => 'Bu makalenin yay&#305;nlanmas&#305;n&#305; iste',
+'bouton_desactive_tout' => 'Hepsinin etkinli&#287;ini durdur ',
 'bouton_effacer_index' => 'Endeksleri sil',
 'bouton_effacer_tout' => 'HEPS&#304;N&#304; sil',
 'bouton_envoi_message_02' => '&#304;LET&#304; YOLLA',
@@ -83,10 +86,7 @@ Bu ithal istemini onaylamay&#305;n.
 'bouton_radio_non_apparaitre_liste_redacteurs_connectes' => 'Yazarlar listesinde g&ouml;r&uuml;nme',
 'bouton_radio_non_envoi_annonces_editoriales' => 'Edit&ouml;r duyurular&#305;n&#305; g&ouml;nderme',
 'bouton_radio_non_syndication' => 'Payla&#351;&#305;m (syndication) yok',
-'bouton_radio_occidental' => 'Bat&#305; alfabesi (<tt>iso-8859-1</tt>) : &ouml;zellikle Bat&#305; Avrupa dillerinin g&ouml;r&uuml;nt&uuml;lenmesine uygun (&#304;ngilizce, Frans&#305;zca, Almanca...); ancak SPIP di&#287;er dilleri de y&ouml;netebilir.',
 'bouton_radio_pas_petition' => 'Dilek&ccedil;e yok',
-'bouton_radio_personnalise' => 'Ki&#351;iselle&#351;tirilmi&#351; karakter dizisi&nbsp;: bu se&ccedil;ene&#287;i &ouml;zel bir karakter dizisi
- kullanmak istiyorsan&#305;z se&ccedil;in.',
 'bouton_radio_petition_activee' => 'Etkinle&#351;tirilmi&#351; dilek&ccedil;e',
 'bouton_radio_publication_immediate' => '&#304;letilerin an&#305;nda yay&#305;nlanmas&#305; 
 (kat&#305;l&#305;mlar g&ouml;nderildiklerinde an&#305;nda g&ouml;r&uuml;nt&uuml;lenir, y&ouml;neticiler onlar&#305; 
@@ -95,9 +95,6 @@ sonradan yok edebilir).',
 'bouton_radio_sauvegarde_non_compressee' => '<b>ecrire/data/dump.xml.gz</b> alt&#305;nda s&#305;k&#305;&#351;t&#305;r&#305;lmam&#305;&#351; olarak sakla',
 'bouton_radio_supprimer_petition' => 'Dilek&ccedil;eyi sil',
 'bouton_radio_syndication' => 'Payla&#351;&#305;m :',
-'bouton_radio_universel' => 'Evrensel alfabe&nbsp; (<tt>utf-8</tt>): t&uuml;m dilleri g&ouml;r&uuml;nt&uuml;lemeye yarar,
-          ancak &#351;ablonlar&#305;n&#305;z&#305; de&#287;i&#351;tirmek i&ccedil;in kulland&#305;&#287;&#305;n&#305;z yaz&#305;l&#305;mlarla ve de baz&#305; elektronik posta okuyucular&#305;yla
-   uyu&#351;mazl&#305;k sorunu &ccedil;&#305;karabilir',
 'bouton_redirection' => 'Y&Ouml;NLEND&#304;RME',
 'bouton_relancer_installation' => 'Kurulumu tekrar ba&#351;lat',
 'bouton_restaurer_base' => 'Veritaban&#305;n&#305;n geri y&uuml;klenmesi',
@@ -131,7 +128,7 @@ sonradan yok edebilir).',
 'email_2' => 'e-posta :',
 'entree_adresse_annuaire' => 'Rehber adresi',
 'entree_adresse_email' => 'E-posta adresiniz',
-'entree_adresse_fichier_syndication' => 'Payla&#351;&#305;m i&ccedil;in &laquo; backend &raquo; dosyas&#305;n&#305;n adresi :',
+'entree_adresse_fichier_syndication' => 'Payla&#351;&#305;m dosyas&#305;n&#305;n adresi :',
 'entree_adresse_site' => '<b>Site adresi</b> [Zorunlu]',
 'entree_base_donnee_1' => 'Veritaban&#305; adresi',
 'entree_base_donnee_2' => '(Bu adres &ccedil;o&#287;unlukla site adresinize kar&#351;&#305; d&uuml;&#351;er, bazen &laquo;localhost&raquo; ifadesine kar&#351;&#305; d&uuml;&#351;er, bazen tamamen bo&#351; b&#305;rak&#305;l&#305;r.)',
@@ -164,6 +161,13 @@ sonradan yok edebilir).',
 'entree_texte_breve' => 'K&#305;sa haber &ouml;zeti',
 'entree_titre_obligatoire' => '<B>Ba&#351;l&#305;k</B>  [Zorunlu]',
 'entree_url' => 'Sitenizin adresi (URL)',
+'erreur_plugin_fichier_absent' => 'Dosya eksik',
+'erreur_plugin_fichier_def_absent' => 'Tan&#305;mlama dosyas&#305; eksik',
+'erreur_plugin_nom_fonction_interdit' => 'Yasaklanm&#305;&#351; i&#351;lev ismi',
+'erreur_plugin_nom_manquant' => 'Plugin ismi eksik',
+'erreur_plugin_prefix_manquant' => 'Plugin isimlendirme alan&#305; tan&#305;mlanmam&#305;&#351;',
+'erreur_plugin_tag_plugin_absent' => 'Tan&#305;mlama dosyas&#305;nda &lt;plugin&gt; eksik',
+'erreur_plugin_version_manquant' => 'Plugin\'in uyarlamas&#305; eksik',
 
 
 // I
@@ -178,8 +182,9 @@ sonradan yok edebilir).',
 'ical_texte_rss' => 'Bu sitenin yeniliklerini herhangi bir XML/RSS (Rich Site Summary) format&#305;ndaki dosya okuyucusunda payla&#351;abilirsiniz. SPIP\'e uyumlu de&#287;i&#351;-toku&#351; format&#305; kullanan (payla&#351;&#305;ml&#305;)  ba&#351;ka sitelerde yay&#305;nlanan yenilikleri okuma olana&#287;&#305; veren de bu formatt&#305;r.',
 'ical_titre_js' => 'Javascript',
 'ical_titre_mailing' => 'E-posta listesi',
-'ical_titre_rss' => '&laquo; Backend &raquo; dosyalar&#305;',
+'ical_titre_rss' => 'Payla&#351;&#305;m dosyalar&#305;',
 'icone_activer_cookie' => 'Yaz&#305;&#351;ma &ccedil;erezini etkinle&#351;tir',
+'icone_admin_plugin' => 'Plugin\'lerin y&ouml;netimi',
 'icone_afficher_auteurs' => 'Yazarlar&#305; g&ouml;ster',
 'icone_afficher_visiteurs' => 'Ziyaret&ccedil;ileri g&ouml;r&uuml;nt&uuml;le',
 'icone_arret_discussion' => 'Art&#305;k bu sohbete kat&#305;lma',
@@ -553,6 +558,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_sous_titre' => 'Alt-ba&#351;l&#305;k :',
 'info_statut_administrateur' => 'Y&ouml;netici',
 'info_statut_auteur' => 'Bu yazar&#305;n stat&uuml;s&uuml; :',
+'info_statut_auteur_a_confirmer' => 'Onaylanacak kay&#305;t',
+'info_statut_auteur_autre' => 'Di&#287;er stat&uuml;&nbsp;:',
 'info_statut_efface' => 'Silindi',
 'info_statut_redacteur' => 'Yazar',
 'info_statut_site_1' => 'Bu site&nbsp;:',
@@ -564,6 +571,8 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_suivi_activite' => 'Yay&#305;n etkinliklerini izleme',
 'info_supprimer_mot' => 'Bu&nbsp;s&ouml;zc&uuml;&#287;&uuml;&nbsp;sil',
 'info_surtitre' => '&Uuml;st ba&#351;l&#305;k :',
+'info_syndication_integrale_1' => 'Siteniz payla&#351;&#305;m dosyalar&#305; &ouml;neriyor  (bkz &laquo;&nbsp;<a href="@url@">@titre@</a>&nbsp;&raquo;).',
+'info_syndication_integrale_2' => 'Makaleleri olduklar&#305; gibi mi iletmek isterseniz yoksa bir ka&ccedil; y&uuml;z s&ouml;zc&uuml;kl&uuml;k &ouml;zetlerini mi ?',
 'info_taille_maximale_vignette' => 'Sistem taraf&#305;ndan &uuml;retilen en b&uuml;y&uuml;k ikon boyutu&nbsp;:',
 'info_terminer_installation' => 'Art&#305;k standart kurulum i&#351;lemini bitirebilirsiniz.',
 'info_texte' => 'Metin',
@@ -593,7 +602,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'info_une_breve' => 'bir k&#305;sa haber,',
 'info_une_rubrique' => 'bir b&ouml;l&uuml;m,',
 'info_une_rubrique_02' => '1 b&ouml;l&uuml;m',
-'info_url' => 'URL  :',
+'info_url' => 'URL&nbsp;:',
 'info_url_site' => 'S&#304;TE\'nin URL\'si :',
 'info_urlref' => 'Hipermetin ba&#287;&#305;&nbsp;:',
 'info_utilisation_spip' => 'SPIP art&#305;k kullan&#305;lmaya haz&#305;rd&#305;r...',
@@ -616,6 +625,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_ajout_mots_cles' => 'Forumlara anahtar s&ouml;zc&uuml;k eklemeye izin ver',
 'item_autoriser_documents_joints' => 'Makalelere dok&uuml;man eklenmesine izin ver',
 'item_autoriser_documents_joints_rubriques' => 'B&ouml;l&uuml;mlerde dok&uuml;manlara izin ver',
+'item_autoriser_syndication_integrale' => 'Makaleleri payla&#351;&#305;m dosyalar&#305;nda olduklar&#305; gibi yay&#305;nla',
 'item_bloquer_liens_syndiques' => 'Payla&#351;&#305;ml&#305; ba&#287;lar&#305;n onay i&ccedil;in engellenmesi',
 'item_breve_refusee' => 'HAYIR - K&#305;sa haber reddedildi',
 'item_breve_validee' => 'EVET - K&#305;sa haber onayland&#305;',
@@ -641,6 +651,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'item_non_ajout_mots_cles' => 'Forumlarda anahtar s&ouml;zc&uuml;k kullan&#305;m&#305;n&#305; yasakla',
 'item_non_autoriser_documents_joints' => 'Makalelerde dok&uuml;mana izin verme',
 'item_non_autoriser_documents_joints_rubriques' => 'B&ouml;l&uuml;mlerde dok&uuml;manlara izin verme',
+'item_non_autoriser_syndication_integrale' => 'Sadece &ouml;zet yay&#305;nla',
 'item_non_bloquer_liens_syndiques' => 'Payla&#351;madan gelen ba&#287;lar&#305; engelleme',
 'item_non_creer_fichiers_authent' => 'Bu dosyalar&#305;n yaratma',
 'item_non_gerer_annuaire_site_web' => 'Web siteleri dizinini iptal et.',
@@ -731,6 +742,18 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'ortho_verifier' => 'Yaz&#305;m&#305; kontrol et',
 
 
+// P
+'plugin_etat_developpement' => 'geli&#351;tirme a&#351;amas&#305;nda',
+'plugin_etat_experimental' => 'deneysel',
+'plugin_etat_stable' => 'durgun ("stable")',
+'plugin_etat_test' => 'test a&#351;amas&#305;nda',
+'plugins_liste' => 'Plugin listesi',
+
+
+// R
+'repertoire_plugins' => 'Dizin&nbsp;:',
+
+
 // S
 'statut_admin_restreint' => '(s&#305;n&#305;rl&#305; y&ouml;netici)',
 'syndic_choix_moderation' => 'Bu siteden ileride gelecek ba&#287;lar&#305; ne yapmal&#305;&nbsp;?',
@@ -819,8 +842,11 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_informations_personnelles_1' => 'Sistem &#351;imdi size ki&#351;iselle&#351;tirilmi&#351; bir eri&#351;im (hesap) yaratacakt&#305;r.',
 'texte_informations_personnelles_2' => '(Not : e&#287;er yeniden kurulum s&ouml;zkonusu ise ve eri&#351;iminiz halen &ccedil;al&#305;&#351;&#305;yorsa, yapabilece&#287;iniz :',
 'texte_introductif_article' => '(Makalenin giri&#351; metni.)',
-'texte_jeu_caractere' => 'Bu se&ccedil;enek, e&#287;er siteniz Roman (ya da &laquo;&nbsp;Bat&#305;&nbsp;&raquo;) alfabesi ve t&uuml;revlerinden farkl&#305; alfabeler g&ouml;r&uuml;nt&uuml;leyecekse faydal&#305;d&#305;r. Bu durumda, uygun bir karakterler dizisi i&ccedil;in, varsay&#305;lan ayar&#305; de&#287;i&#351;tirmek daha faydal&#305; olabilir&nbsp;; her hal&uuml;karda size tavsiyemiz tatmin edici bir &ccedil;&ouml;z&uuml;m bulana kadar deneme yapman&#305;zd&#305;r.  Bu parametreyi de&#287;i&#351;tirdi&#287;iniz takdirde, kamu sitesini de buna uygun hale getirmeyi unutmay&#305;n&#305;z (#CHARSET etiketi)..',
-'texte_jeu_caractere_2' => 'Bu ayar&#305;n geriye d&ouml;n&uuml;k etkisi yoktur. Dolay&#305;s&#305;yla ayarda bir de&#287;i&#351;iklik yapt&#305;&#287;&#305;n&#305;zda daha &ouml;nce girilmi&#351; olan metinler yanl&#305;&#351; g&ouml;r&uuml;nt&uuml;lenebilir. Her hal&uuml;karda, bir zarar vermeden bir &ouml;nceki ayara d&ouml;nebilirsiniz.',
+'texte_jeu_caractere' => 'Sitenizde evrensel alfabe (<tt>utf-8</tt>)&nbsp; kullanman&#305;z &ouml;nerilir: bu alfabe metinlerin t&uuml;m dillerde g&ouml;r&uuml;nt&uuml;lenmesine olanak tan&#305;r ve  modern web taray&#305;c&#305;lar&#305;nda hi&ccedil; sorun yaratmaz.',
+'texte_jeu_caractere_2' => 'Dikkat : bu ayar veritaban&#305;na &ouml;nceden kaydedilmi&#351; metinleri d&ouml;n&uuml;&#351;t&uuml;rmez.',
+'texte_jeu_caractere_3' => 'Sitenizin &#351;u anda kurulu olan karakter seti&nbsp;:',
+'texte_jeu_caractere_4' => 'E&#287;er bu verilerinize uymazsa (&ouml;rne&#287;in bir veritaban&#305; kurtarma i&#351;leminden sonra)  veya <em>siteyi yeni kuruyorsan&#305;z</em> ve ba&#351;ka bir karakter setiyle devam etmek istiyorsan&#305;z bunu belirtmeyi unutmay&#305;n&#305;z&nbsp;:',
+'texte_jeu_caractere_conversion' => 'Not&nbsp;: t&uuml;m siteyi (makaleler, k&#305;sa haberler, forumlar vs.) <a href="@url@">utf-8\'e d&ouml;n&uuml;&#351;t&uuml;rme sayfas&#305;na giderek</a> bir kerede <tt>utf-8</tt>\'ye d&ouml;n&uuml;&#351;t&uuml;rmek isteyebilirsiniz.',
 'texte_lien_hypertexte' => '(E&#287;er iletiniz Web\'de yay&#305;nlanan bir makaleye, ya da daha fazla bilgi veren bir sayfaya at&#305;fta bulunuyorsa, l&uuml;tfen buraya sayfan&#305;n ba&#351;l&#305;&#287;&#305;n&#305; ve URL adresini belirtiniz.)',
 'texte_liens_sites_syndiques' => 'Payla&#351;&#305;ml&#305; sitelerden gelen ba&#287;lar &ouml;nceden engellenebilir&nbsp;; a&#351;a&#287;&#305;daki ayarlama yarat&#305;lmalar&#305;ndan sonra payla&#351;&#305;lan sitelerin varsay&#305;lan ayarlar&#305;n&#305; g&ouml;sterir. Sonradan her bir ba&#287;&#305;n engelini tek tek kald&#305;rmak ya da her site i&ccedil;in gelecekteki ba&#287;lar&#305; engellemeyi tek tek se&ccedil;mek olanakl&#305;d&#305;r.',
 'texte_login_ldap_1' => '(Ya anonim bir eri&#351;im i&ccedil;in bo&#351; b&#305;rak&#305;n&#305;z ya da t&uuml;m yolu belirtiniz, &ouml;rne&#287;in; &laquo;&nbsp;uid=dupont, ou=users, dc=mon-domaine, dc=com&nbsp;&raquo;.)',
@@ -846,6 +872,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_plus_trois_car' => '3 karakterden fazla',
 'texte_plusieurs_articles' => '"@cherche_auteur@" i&ccedil;in bir ka&ccedil; yazar bulundu : ',
 'texte_port_annuaire' => '(Genelde, varsay&#305;lan de&#287;er uygundur.) ',
+'texte_presente_plugin' => 'Bu sayfa sitedeki plugin\'leri listeler. Gerekli plugin\'leri uygun kutucuklar&#305; i&#351;aretleyerek etkinle&#351;tirebilirsiniz.',
 'texte_proposer_publication' => 'Makaleniz bitti&#287;inde, yay&#305;nlanmas&#305;n&#305; &ouml;nerebilirsiniz. ',
 'texte_proxy' => 'Baz&#305; durumlarda (intranet, korumal&#305; &#351;ebekeler...), sendikal&#305; sitelere ula&#351;mak i&ccedil;in bir HTTP vekili kullanmak gerekli olabilir. Gerekti&#287;i takdirde, a&#351;a&#287;&#305;ya adresini http://proxy:8080 &#351;eklinde belirtiniz. Genelde bu kutuyu bo&#351; b&#305;rak&#305;rs&#305;n&#305;z.',
 'texte_publication_articles_post_dates' => 'Yay&#305;nlanmas&#305; ileri bir tarihe saptanan makaleler kar&#351;&#305;s&#305;nda SPIP ne gibi bir tav&#305;r almal&#305; ?',
@@ -854,7 +881,7 @@ yaratabilir. Bu da otomatik olarak bir galeri
 'texte_recapitiule_liste_documents' => 'Bu sayfa b&ouml;l&uuml;mlere yerle&#351;tirdi&#287;iniz dok&uuml;manlar&#305;n listesini &ouml;zetler. Her bir dok&uuml;man&#305;n bilgilerini de&#287;i&#351;tirmek i&ccedil;in o b&ouml;l&uuml;m&uuml;n sayfas&#305;na giden ba&#287;&#305; izleyiniz. ',
 'texte_recuperer_base' => 'Veritaban&#305;n&#305; tamir et',
 'texte_reference_mais_redirige' => 'SPIP sitenizde at&#305;fta bulunulan ve ba&#351;ka bir URL\'ye y&ouml;nlendirilmi&#351; makale.',
-'texte_referencement_automatique' => '<b>Otomatik site referans&#305;</b> A&#351;a&#287;&#305;ya istenilen URL adresini vererek ya da backend dosyas&#305;n&#305;n adresini vererek bir Web sitesine h&#305;zla at&#305;fta bulunabilirsiniz. SPIP otomatik olarak bu siteyle ilgili bilgileri toplayacakt&#305;r (ba&#351;l&#305;k, tan&#305;mlama...).',
+'texte_referencement_automatique' => '<b>Otomatik site referans&#305;</b><br> A&#351;a&#287;&#305;ya URL adresini ya da payla&#351;&#305;m dosyas&#305;n&#305;n adresini belirterek bir Web sitesine h&#305;zla at&#305;fta bulunabilirsiniz. SPIP otomatik olarak bu siteyle ilgili bilgileri toplayacakt&#305;r (ba&#351;l&#305;k, tan&#305;mlama...).',
 'texte_requetes_echouent' => '<b>Baz&#305; MySQL talepleri sistematik olarak ve g&ouml;r&uuml;n&uuml;rde bir neden olmaks&#305;z&#305;n ba&#351;ar&#305;s&#305;z oluyorsa bunun nedeni veritaban&#305;n&#305;n kendisi olabilir.</b> <p />
 MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i vard&#305;r. Burada bu tamiri deneyebilirsiniz ; ba&#351;ar&#305;s&#305;zl&#305;k durumunda, g&ouml;r&uuml;nt&uuml;n&uuml;n bir kopyas&#305;n&#305; saklay&#305;n&#305;z, belki orada aksayan &#351;eylerin ipu&ccedil;lar&#305;n&#305; bulabilirsiniz... E&#287;er sorun devam ediyorsa servis sa&#287;lay&#305;c&#305;n&#305;zla temasa ge&ccedil;iniz.',
 'texte_restaurer_base' => 'Veritaban&#305; yede&#287;ini geri y&uuml;kle',
@@ -887,7 +914,7 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 'texte_travail_collaboratif' => 'Bir ka&ccedil; yazar&#305;n ayn&#305; makalede &ccedil;al&#305;&#351;&#305;yor olmas&#305; s&#305;k&ccedil;a rastlansa da, sistem e&#351;zamanl&#305; de&#287;i&#351;iklikleri &ouml;nlemek amac&#305;yla yeni &laquo;&nbsp;a&ccedil;&#305;lm&#305;&#351;&nbsp;&raquo; olan makaleleri g&ouml;r&uuml;nt&uuml;leyebilir.  Bu se&ccedil;enek ge&ccedil;ici uyar&#305; iletilerinin g&ouml;r&uuml;nt&uuml;lenmesine engel olmak &uuml;zere  ba&#351;lang&#305;&ccedil;ta engellenmi&#351;tir.',
 'texte_trop_resultats_auteurs' => '"@cherche_auteur@" i&ccedil;in fazla sonu&ccedil; &ccedil;&#305;kt&#305; ; l&uuml;tfen aramay&#305; detayland&#305;r&#305;n',
 'texte_unpack' => 'Son s&uuml;r&uuml;m&uuml;n indirilmesi',
-'texte_utilisation_moteur_syndiques' => 'SPIP\'le b&uuml;t&uuml;nle&#351;en arama motorunu kulland&#305;&#287;&#305;n&#305;zda payla&#351;&#305;ml&#305; site ve makalelerde aramalar&#305;n&#305;z&#305; iki farkl&#305; &#351;ekilde yapabilirsiniz.  En basiti sadece makalelerin ba&#351;l&#305;k ve tan&#305;mlar&#305;nda arama yapmakt&#305;r. Di&#287;er bir y&ouml;ntem ise &ccedil;ok daha g&uuml;&ccedil;l&uuml; olup, SPIP\'in at&#305;fta bulunmu&#351; olan sitelerin metinlerinde de arama yapmas&#305;n&#305; sa&#287;lar. E&#287;er bir siteye at&#305;fta bulunursan&#305;z, SPIP gidip o sitenin metninde arama yapacakt&#305;r. ',
+'texte_utilisation_moteur_syndiques' => 'SPIP\'le b&uuml;t&uuml;nle&#351;ik arama motorunu kulland&#305;&#287;&#305;n&#305;zda payla&#351;&#305;ml&#305; site ve makalelerde aramalar&#305;n&#305;z&#305; iki farkl&#305; &#351;ekilde yapabilirsiniz. <br> En basit y&ouml;ntem sadece makalelerin ba&#351;l&#305;k ve tan&#305;mlar&#305;nda arama yapmakt&#305;r. Di&#287;er bir y&ouml;ntem ise &ccedil;ok daha g&uuml;&ccedil;l&uuml; olup, SPIP\'in at&#305;fta bulunulan sitelerin metinlerinde de arama yapmas&#305;n&#305; sa&#287;lar. E&#287;er bir siteye at&#305;fta bulunursan&#305;z, SPIP aramay&#305; o sitenin metninde yapacakt&#305;r. ',
 'texte_utilisation_moteur_syndiques_2' => 'Bu y&ouml;ntem SPIP\'i at&#305;fta bulunulan sitelere d&uuml;zenli olarak ziyarette bulunmaya zorlar, bu da sizin kendi sitenizde hafif bir yava&#351;lamaya neden olabilir. ',
 'texte_vide' => 'Bo&#351; ',
 'texte_vider_cache' => '&Ouml;nbelle&#287;i bo&#351;alt',
@@ -974,7 +1001,20 @@ MySQL\'in, kazayla zarar g&ouml;ren tablolar&#305;n&#305; tamir yetene&#287;i va
 'trad_new' => 'Bu makalenin yeni bir &ccedil;evirisini yaz',
 
 
+// U
+'utf8_convert_attendez' => 'Bir s&uuml;re bekleyip sayfay&#305; yeniden y&uuml;kleyiniz.',
+'utf8_convert_avertissement' => 'Veritaban&#305;n&#305;z&#305;n i&ccedil;eri&#287;ini (makaleler, k&#305;sa haberler vs.) <b>@orig@</b> karakter setinden <b>@charset@</b> karakter setine d&ouml;n&uuml;&#351;t&uuml;rmektesiniz .',
+'utf8_convert_backup' => '&Ouml;nceden sitenizin tam bir yede&#287;ini almay&#305; unutmay&#305;n&#305;z. Ayr&#305;ca iskeletlerinizin ve dil dosyalar&#305;n&#305;z&#305;n @charset@ karakter setiyle uyumlu olup olmad&#305;&#287;&#305;n&#305; do&#287;rulamal&#305;s&#305;n&#305;z. Di&#287;er taraftan g&uuml;ncelleme takibi etkinse zarar g&ouml;recektir.',
+'utf8_convert_erreur_deja' => 'Siteniz zaten @charset@ karakter setinde, d&ouml;n&uuml;&#351;t&uuml;rmeniz gereksiz...',
+'utf8_convert_erreur_orig' => 'Hata&nbsp;: @charset@ karakter seti desteklenmiyor.',
+'utf8_convert_termine' => 'Tamamland&#305;&nbsp;!',
+'utf8_convert_timeout' => '<b>&Ouml;nemli&nbsp;:</b> sunucuda <i>zaman a&#351;&#305;m&#305;</i> olu&#351;ursa sayfay&#305; &laquo;&nbsp;tamamland&#305;&nbsp;&raquo; yazana kadar tekrar y&uuml;kleyiniz.',
+'utf8_convert_verifier' => '&#350;imdi &ouml;nbelle&#287;i bo&#351;altmal&#305; ve sitenin kamusal sayfalar&#305;nda her&#351;eyin yolunda oldu&#287;unu do&#287;rulamal&#305;s&#305;n&#305;z. B&uuml;y&uuml;k bir soun varsa, @rep@ dizininde verilerinizin bir yede&#287;i (SQL format&#305;nda) al&#305;nm&#305;&#351;t&#305;r.',
+'utf8_convertir_votre_site' => 'Sitenizi utf-8\'e d&ouml;n&uuml;&#351;t&uuml;rmek',
+
+
 // V
+'version' => 'S&uuml;r&uuml;m&nbsp;:',
 'version_initiale' => '&#304;lk s&uuml;r&uuml;m'
 
 );

@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'deiziataer miz-ha-miz',
 'cal_par_semaine' => 'deiziataer sizhun-ha-sizhun',
 'confirm_changer_statut' => 'Diwallit, goulennet ho peus ma vo kemmet statud an elfenn-ma&ntilde;. Ha c\'hoant ho peus da genderc\'hel ?',
+'correcte' => 'reizh',
 
 
 // D
@@ -215,10 +216,10 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 Goulennet ho peus sina&ntilde; ar sinadeg :
 @titre@.
 
-Roet ho peus an titouro&ugrave;-ma&ntilde; :
+An titouro&ugrave;-ma&ntilde; ho peus roet:
     Anv: @nom_email@
     Lec\'hienn: @nom_site@ - @url_site@
-
+@message@
 
 A-BOUEZ...
 Evit kadarnaat ho sinadur eo trawalc\'h deoc\'h mont d\'ar chomlec\'h ama&ntilde;-dindan
@@ -341,6 +342,7 @@ Trugarez da gemer perzh
 'image_tourner_droite' => 'Trei&ntilde; da 90 derez war an tu dehou',
 'image_tourner_gauche' => 'Trei&ntilde; da 90 derez war an tu-kleiz',
 'img_indisponible' => 'skeudenn dibosupl da gaout',
+'impossible' => 'dibosupl',
 'info_a_suivre' => 'DA GENDERC\'HEL&raquo;',
 'info_a_valider' => '[da wiria&ntilde;]',
 'info_acces_interdit' => 'Difennet eo dont-tre',
@@ -626,6 +628,9 @@ kevrea&ntilde; en-dro ouzh al lec\'hienn.
 
 
 // S
+'squelette' => 'framm',
+'squelette_inclus_ligne' => 'framm gann, linenn',
+'squelette_ligne' => 'framm, linenn',
 'stats_visites_et_popularite' => '@visites@ gweladenn&nbsp;; brud;&nbsp;: @popularite@',
 'suivant' => 'da heul',
 
