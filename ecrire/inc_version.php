@@ -64,8 +64,8 @@ $auto_compress = true;
 // 'html': article123.html
 // 'propres': Titre-de-l-article <http://lab.spip.net/spikini/UrlsPropres>
 // 'propres2' : Titre-de-l-article.html (base sur 'propres')
-// 'standard': article.php3?id_article=123
-$type_urls = 'page';
+// 'standard': spip.php?page=article&id_article=123
+$type_urls = 'standard';
 
 
 //
