@@ -86,9 +86,7 @@ function afficher_page_globale ($fond) {
 	global $flag_dynamique, $flag_ob, $flag_preserver,$lastmodified,
 		$use_cache, $var_mode, $var_preview;
 
-	include_spip('public/cache');
-	$fcache = 'public_utiliser_cache_dist';
-#	$fcache = include_fonction('utiliser_cache', 'public');
+	$fcache = include_fonction('utiliser_cache', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	$fcache(NULL, $use_cache, $chemin_cache, $page, $lastmodified);
 
@@ -199,9 +197,7 @@ function auto_expire($page)
 function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	global $lastmodified;
 
-	include_spip('public/cache');
-	$fcache = 'public_utiliser_cache_dist';
-#	$fcache = include_fonction('utiliser_cache', 'public');
+	$fcache = include_fonction('utiliser_cache', 'public');
 	// Garnir ces quatre parametres avec les infos sur le cache
 	$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastinclude);
 
