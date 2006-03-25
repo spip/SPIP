@@ -129,9 +129,7 @@ function afficher_page_globale ($fond) {
 		if (!$use_cache)
 			restaurer_globales($page['contexte']);
 		else {
-			include_spip('public/calcul');
-			$f = 'public_localiser_page_dist';
-#			$f = include_fonction('localiser_page', 'public');
+			$f = include_fonction('localiser_page', 'public');
 			$page = $f($fond, '', $chemin_cache);
 			if ($chemin_cache)
 				creer_cache($page, $chemin_cache, $use_cache);
@@ -226,9 +224,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 	if (!$use_cache) {
 		$lastmodified = max($lastmodified, $lastinclude);
 	} else {
-		include_spip('public/calcul');
-		$f = 'public_localiser_page_dist';
-#		$f = include_fonction('localiser_page', 'public');
+		$f = include_fonction('localiser_page', 'public');
 		$page = $f($fond, $contexte_inclus, $chemin_cache);
 		$lastmodified = time();
 		if ($chemin_cache) creer_cache($page, $chemin_cache, $use_cache);
