@@ -575,10 +575,9 @@ function code_boucle(&$boucles, $id, $nom)
 // - 'process_ins' => 'html' ou 'php' selon la pre'sence de PHP dynamique
 // - 'invalideurs' =>  de'pendances de cette page, pour invalider son cache.
 // - 'entetes' => tableau des entetes http
-// (voir son utilisation, optionnelle, dans invalideur.php)
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
-function calculer_squelette($squelette, $nom, $gram, $sourcefile) {
+function public_compiler_squelette_dist($squelette, $nom, $gram, $sourcefile) {
   global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales,
     $tables_jointures;
 

@@ -57,9 +57,10 @@ function squelette_obsolete($skel, $squelette) {
 # et retoune le nom de sa fonction principale, ou '' s'il est indefini
 # Charge egalement un fichier homonyme de celui du squelette
 # mais de suffixe '_fonctions.php' pouvant contenir:
-# - des filtres
-# - des fonctions de traduction de balise, de critere et de boucle
-# - des declaration de tables SQL supplementaires
+# 1. des filtres
+# 2. des fonctions de traduction de balise, de critere et de boucle
+# 3. des declaration de tables SQL supplementaires
+# Toutefois pour 2. et 3. preferer la technique de la surcharge
 
 function charger_squelette ($squelette, $mime_type, $gram, $sourcefile) {
 
@@ -71,34 +72,32 @@ function charger_squelette ($squelette, $mime_type, $gram, $sourcefile) {
 
 	$phpfile = sous_repertoire(_DIR_CACHE, 'skel') . $nom . '.php';
 
-	// le squelette est-il deja compile et perenne ?
+	// si squelette est deja compile et perenne, le charger
 	if (!squelette_obsolete($phpfile, $sourcefile)
 	AND lire_fichier ($phpfile, $contenu,
 	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
 		eval('?'.'>'.$contenu);
 
-	// sinon, charger le compilateur et verifier que le source est lisible
-	if (!function_exists($nom)) {
-		include_spip('public/compilo');
-		lire_fichier ($sourcefile, $skel);
-	}
-
-	// Le fichier suivant peut contenir entre autres:
-	// 1. les filtres utilises par le squelette
-	// 2. des ajouts au compilateur
-
-	@include_once($squelette . '_fonctions'.'.php3');	# compatibilite
+	@include_once($squelette . '_fonctions'.'.php3'); # compatibilite
 	@include_once($squelette . '_fonctions'.'.php');
+
+	// tester si le eval ci-dessus a mis le squelette en memoire
 
 	if (function_exists($nom)) return $nom;
 
-	$skel_code = calculer_squelette($skel, $nom, $gram, $sourcefile);
+	// charger le source, si possible 
+	if (lire_fichier ($sourcefile, $skel)) {
+		include_spip('public/compilo');
+		$f = 'public_compiler_squelette_dist';
+#	$f = include_fonction('compiler_squelette', 'public');
+		$skel_code = $f($skel, $nom, $gram, $sourcefile);
+	}
+
 	// Tester si le compilateur renvoie une erreur
 
 	if (is_array($skel_code))
 		erreur_squelette($skel_code[0], $skel_code[1]);
 	else {
-
 		if ($GLOBALS['var_mode'] == 'debug') {
 			debug_dumpfile ($skel_code, $nom, 'code');
 		}
@@ -245,9 +244,9 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	$f = include_fonction('trouver_squelette', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
-	// Compiler le squelette en specifiant les langages cibles et source
-	// (cette compilation n'intervient qu'en cas de modif du squelette)
-	// et appliquer sa fonction principale sur le contexte 
+	// Charge le squelette en specifiant les langages cibles et source
+	// au cas il faudrait le compiler (source posterieure au resultat)
+	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
 	$page = array();
