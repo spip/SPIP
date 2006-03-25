@@ -46,7 +46,7 @@ function generer_nom_fichier_cache($contexte) {
 	$md_cache = md5(
 		$fichier_requete . ' '
 		. $_SERVER['HTTP_HOST'] . ' '
-		. $fond . ' '
+		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
 		. $GLOBALS['marqueur']
 	);
