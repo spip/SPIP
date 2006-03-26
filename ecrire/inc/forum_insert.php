@@ -48,9 +48,9 @@ function prevenir_auteurs($auteur, $email_auteur, $id_forum, $id_article, $texte
 		"\n\n" .
 		_T('forum_poste_par', array('parauteur' => $parauteur)).
 		"\n"
-	  	. _T('forum_ne_repondez_pas')
-	  	. "\n"
-		. $url
+		. _T('forum_ne_repondez_pas')
+		. "\n"
+		. url_absolue($url)
 		. "\n\n\n".$titre."\n\n".textebrut(propre($texte))
 		. "\n\n$nom_site_forum\n$url_site\n";
 
