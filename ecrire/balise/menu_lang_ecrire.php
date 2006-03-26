@@ -50,14 +50,12 @@ function menu_lang_pour_tous($nom, $default) {
 		return '';
 
 	$cible = str_replace('&amp;', '&', parametre_url(self( /* racine */ true), 'lang' , '')); # lien a partir de /
-	$postcomplet = generer_url_action('cookie', 'url='.rawurlencode($cible), true);
+	$post = parametre_url(generer_url_action('cookie'), 'url', $cible, '&');
 
 	return array('formulaire_menu_lang',
 		3600,
 		array('nom' => $nom,
 			'url' => $post,
-			'cible' => $cible,
-			'retour' => $postcomplet,
 			'langues' => $opt
 		)
 	);

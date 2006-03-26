@@ -2623,8 +2623,8 @@ function form_hidden($action) {
 	$hidden = '';
 	if (false !== ($p = strpos($action, '?')))
 		foreach(preg_split('/&(amp;)?/',substr($action,$p+1)) as $c) {
-			$hidden .= "\n<input name='" . 
-				str_replace('=', "' value='", $c) .
+			$hidden .= "\n<input name='" .
+				entites_html(rawurldecode(str_replace('=', "' value='", $c))) .
 				"' type='hidden' />";
 	}
 	return $hidden;
