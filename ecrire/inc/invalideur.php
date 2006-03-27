@@ -19,16 +19,6 @@ function supprime_invalideurs() {
 	spip_query("DELETE FROM spip_caches");
 }
 
-
-// Compilateur : ajouter un invalideur "$type/$valeur" a un code donne
-// Attention le type est compile, pas forcement la valeur
-function ajouter_invalideur($type, $valeur, $code) {
-	return '
-	// invalideur '.$type.'
-	(!($Cache[\''.$type.'\']['.$valeur."]=1) ? '':\n\t" . $code .")\n";
-}
-
-
 //
 // Calcul des pages : noter dans la base les liens d'invalidation
 //

@@ -659,8 +659,6 @@ function public_compiler_squelette_dist($squelette, $nom, $gram, $sourcefile) {
 	// Calcul du corps de toutes les fonctions PHP,
 	// en particulier les requetes SQL et TOTAL_BOUCLE
 	// de'terminables seulement maintenant
-	//  Les 4 premiers parame`tres sont passe's par re'fe'rence
-	// (les 1er et 3e pour modif, les 2 et 4 pour gain de place)
 
 	foreach($boucles as $id => $boucle) {
 		// appeler la fonction de definition de la boucle
@@ -693,7 +691,7 @@ function public_compiler_squelette_dist($squelette, $nom, $gram, $sourcefile) {
 		.preg_replace(',\.html$,', '', $sourcefile)
 		."] ".creer_repertoire(_DIR_CACHE, 'skel')."$nom.php");
 
-	$squelette_compile = "<"."?php
+	$code = "<"."?php
 /*
  * Squelette : $sourcefile
  * Date :      ".http_gmoddate(@filemtime($sourcefile))." GMT
@@ -701,23 +699,25 @@ function public_compiler_squelette_dist($squelette, $nom, $gram, $sourcefile) {
  * " . (!$boucles ?  "Pas de boucle" :
 	("Boucles :   " . join (', ', array_keys($boucles)))) ."
  */ " .
-	  // ATTENTION, le calcul du l'expression $corps affectera $Cache
-	  // ==> l'affecter a une variable auxiliaire avant de referencer $Cache
-	  $code . "
+	  $code . '
 
 //
-// Fonction principale du squelette $sourcefile
+// Fonction principale du squelette ' . $sourcefile ."
 //
-function $nom (\$Cache, \$Pile, \$doublons=array(), \$Numrows='', \$SP=0) {
-	\$page = $corps;
+function " . $nom . '($Cache, $Pile, $doublons=array(), $Numrows=array(), $SP=0) {
+	$page = ' .
+	// ATTENTION, le calcul du l'expression $corps affectera 
+	// c'est pourquoi on l'affecte a cette variable auxiliaire
+	// avant de referencer $Cache
+	$corps . ";
 	return analyse_resultat_skel('$nom', \$Cache, \$page);
 }
 
 ?".">";
 
 	if ($GLOBALS['var_mode'] == 'debug')
-	  squelette_debug_compile($nom, $sourcefile, $squelette_compile, $squelette);
-	return $squelette_compile;
+		squelette_debug_compile($nom, $sourcefile, $code, $squelette);
+	return $code;
 
 }
 
