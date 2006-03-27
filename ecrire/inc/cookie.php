@@ -35,15 +35,16 @@ function spip_setcookie ($name='', $value='', $expire=0, $path='AUTO', $domain='
 
 function recuperer_cookies_spip($cookie_prefix) {
 	global $_COOKIE;
+	$prefix_long = strlen($cookie_prefix);
 
 	foreach ($_COOKIE as $name => $value) {
-		if (ereg('^spip_', $name)) {
+		if (substr($name,0,5)=='spip_' && substr($name,0,$prefix_long)!=$cookie_prefix) {
 			unset($_COOKIE[$name]);
 			unset($GLOBALS[$name]);
 		}
 	}
 	foreach ($_COOKIE as $name => $value) {
-		if (ereg('^'.$cookie_prefix.'_', $name)) {
+		if (substr($name,0,$prefix_long)==$cookie_prefix) {
 			$spipname = ereg_replace ('^'.$cookie_prefix.'_', 'spip_', $name);
 			$_COOKIE[$spipname] = $value;
 			$GLOBALS[$spipname] = $value;
