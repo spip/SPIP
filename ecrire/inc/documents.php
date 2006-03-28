@@ -411,7 +411,8 @@ function inserer_documents($letexte) {
 		$letexte, $mm, PREG_SET_ORDER)) {
 			foreach ($mm as $m) {
 				$url = extraire_attribut($m[0],'href');
-				$re = '<div onclick="document.location=\''.$url
+				$re = '<div style="cursor: pointer;" '
+					.'onclick="document.location=\''.$url
 					.'\'"'
 ##					.' href="'.$url.'"' # note: href deviendrait legal en XHTML2
 					.'>'
