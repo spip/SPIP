@@ -1071,7 +1071,7 @@ function image_masque($im, $masque, $pos="") {
 	// et evidemment cette image d'origine n'est pas redimensionnee
 
 	
-	$nom = ereg_replace("\.png", "", $masque);
+	$nom = ereg_replace("\.(png|jpg|gif)$", "", $masque);
 	$nom = ereg_replace("/","-",$nom);
 
 
@@ -2387,7 +2387,7 @@ function image_typo() {
 
 	// Construire requete et nom fichier
 	$text = ereg_replace("\&nbsp;", "~", $texte);	
-
+	$text = ereg_replace("(\r|\n)+", " ", $texte);
 	if (strlen($text) == 0) return "";
 
 	$taille = $variable["taille"];
