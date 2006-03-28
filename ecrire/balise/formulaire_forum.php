@@ -179,7 +179,7 @@ $ajouter_mot, $ajouter_groupe, $afficher_texte, $url_param_retour)
 	return array('formulaire_forum', 0,
 	array(
 		'auteur' => $auteur,
-		'disabled' => ($type == "abo")? "disabled" : '',
+		'readonly' => ($type == "abo")? "readonly" : '',
 		'email_auteur' => $email_auteur,
 		'modere' => (($type != 'pri') ? '' : ' '),
 		'nom_site_forum' => $nom_site_forum,
