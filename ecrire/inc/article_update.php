@@ -12,7 +12,7 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function article_update($id_article, $id_rubrique, $lier_trad, $new)
+function article_select($id_article, $id_rubrique, $lier_trad, $new)
 {
   global $connect_id_auteur, $spip_lang; 
   $id_article = intval($id_article);
@@ -55,12 +55,7 @@ else if ($new=='oui') {
 		$result = spip_query($query);
 	
 		if ($row = spip_fetch_array($result)) {
-			$titre = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
-
-			$id_rubrique_trad = $row["id_rubrique"];
-
-
-
+			$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
 
 		}
 		$langues_autorisees = $GLOBALS['meta']['langues_multilingue'];
