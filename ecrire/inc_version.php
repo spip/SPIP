@@ -176,7 +176,8 @@ $spip_pipeline = array(
 	'post_syndication' => '',
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',
-	'header_prive' => ''
+	'header_prive' => '',
+	'body_prive' => ''
 );
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();
