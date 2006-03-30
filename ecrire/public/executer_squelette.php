@@ -10,6 +10,84 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
+include_spip('inc/meta');
+include_spip("inc/indexation");
+include_spip('inc/texte');
+include_spip('inc/documents');
+include_spip('inc/forum');
+include_spip('inc/distant');
+include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
+
+# Charge un squelette (au besoin le compile) 
+# et retoune le nom de sa fonction principale, ou '' s'il est indefini
+# Charge egalement un fichier homonyme de celui du squelette
+# mais de suffixe '_fonctions.php' pouvant contenir:
+# 1. des filtres
+# 2. des fonctions de traduction de balise, de critere et de boucle
+# 3. des declaration de tables SQL supplementaires
+# Toutefois pour 2. et 3. preferer la technique de la surcharge
+
+function public_executer_squelette($squelette, $mime_type, $gram, $sourcefile) {
+
+	$nom = $mime_type . '_' . md5($squelette);
+
+	// si squelette est deja en memoire (INCLURE  a repetition)
+	if (function_exists($nom))
+		return $nom;
+
+	$phpfile = sous_repertoire(_DIR_CACHE, 'skel') . $nom . '.php';
+
+	// si squelette est deja compile et perenne, le charger
+	if (!squelette_obsolete($phpfile, $sourcefile)
+	AND lire_fichier ($phpfile, $contenu,
+	array('critique' => 'oui', 'phpcheck' => 'oui'))) 
+		eval('?'.'>'.$contenu);
+
+	@include_once($squelette . '_fonctions'.'.php3'); # compatibilite
+	@include_once($squelette . '_fonctions'.'.php');
+
+	// tester si le eval ci-dessus a mis le squelette en memoire
+
+	if (function_exists($nom)) return $nom;
+
+	// charger le source, si possible, et compiler 
+	if (lire_fichier ($sourcefile, $skel)) {
+		$f = include_fonction('compiler_squelette', 'public');
+		$skel_code = $f($skel, $nom, $gram, $sourcefile);
+	}
+
+	// Tester si le compilateur renvoie une erreur
+
+	if (is_array($skel_code))
+		erreur_squelette($skel_code[0], $skel_code[1]);
+	else {
+		if ($GLOBALS['var_mode'] == 'debug') {
+			include_spip('public/debug');
+			debug_dumpfile ($skel_code, $nom, 'code');
+		}
+		eval('?'.'>'.$skel_code);
+		if (function_exists($nom)) {
+			ecrire_fichier ($phpfile, $skel_code);
+			return $nom;
+		} else {
+			erreur_squelette($sourcefile, _L('Erreur de compilation'));
+		}
+	}
+}
+
+// Le squelette compile est-il trop vieux ?
+function squelette_obsolete($skel, $squelette) {
+	return (
+		($GLOBALS['var_mode'] AND $GLOBALS['var_mode']<>'calcul')
+		OR !@file_exists($skel)
+		OR (@filemtime($squelette) > ($date = @filemtime($skel)))
+		OR (@filemtime('mes_fonctions.php') > $date)
+		OR (@filemtime('mes_fonctions.php3') > $date)  # compatibilite
+		OR (defined('_FILE_OPTIONS') AND @filemtime(_FILE_OPTIONS) > $date)
+	);
+}
 
 //
 // Des fonctions diverses utilisees lors du calcul d'une page ; ces fonctions
@@ -19,20 +97,13 @@
 // definissant leur balise ???
 //
 
-// ON TROUVERA EN QUEUE DE FICHIER LES FONCTIONS FAISANT DES APPELS SQL
-
-
-if (!defined("_ECRIRE_INC_VERSION")) return;
-
-include_spip('inc/rubriques'); # pour calcul_branche()
-
 // Pour les documents comme pour les logos, le filtre |fichier donne
 // le chemin du fichier apres 'IMG/' ;  peut-etre pas d'une purete
 // remarquable, mais a conserver pour compatibilite ascendante.
 // -> http://www.spip.net/fr_article901.html
+
 function calcule_fichier_logo($on) {
-	$r = ereg_replace("^" . _DIR_IMG, "", $on);
-	return $r;
+	return ereg_replace("^" . _DIR_IMG, "", $on);
 }
 
 // Renvoie le code html pour afficher un logo, avec ou sans survol, lien, etc.
@@ -328,8 +399,7 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 
 	// flag_fichier : seul le fichier est demande
 	if ($flag_fichier)
-		# supprimer le IMG/
-		return calcule_fichier_logo(extraire_attribut($logo, 'src'));
+		return ereg_replace("^" . _DIR_IMG, "", (extraire_attribut($logo, 'src')));
 
 
 	// Calculer le code html complet (cf. calcule_logo)
@@ -382,147 +452,6 @@ function calculer_notes() {
 	$GLOBALS["compt_note"] = 0;
 	$GLOBALS["marqueur_notes"] ++;
 	return $r;
-}
-
-# retourne la profondeur d'une rubrique
-
-function sql_profondeur($id) {
-	$n = 0;
-	while ($id) {
-		$n++;
-		$id = sql_parent($id);
-	}
-	return $n;
-}
-
-
-function sql_parent($id_rubrique) {
-	list($id) = spip_abstract_fetsel(array(id_parent), 
-			array('spip_rubriques'), 
-			array("id_rubrique=" . intval($id_rubrique)));
-	return $id;
-}
-
-function sql_rubrique($id_article) {
-	$row = spip_abstract_fetsel(array('id_rubrique'),
-			array('spip_articles'),
-			array("id_article=" . intval($id_article)));
-	return $row['id_rubrique'];
-}
-
-function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
-	$auteurs = "";
-	if ($id_article) {
-		$result_auteurs = spip_abstract_select(
-			array('auteurs.id_auteur', 'auteurs.nom'),
-			array('spip_auteurs AS auteurs',
-				'spip_auteurs_articles AS lien'), 
-			array("lien.id_article=$id_article",
-				"auteurs.id_auteur=lien.id_auteur"),
-			'',array(),'','',1, 
-			$table, $id_boucle, $serveur);
-
-		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
-			$nom_auteur = typo($row_auteur['nom']);
-			$url_auteur = generer_url_auteur($row_auteur['id_auteur']);
-			if ($url_auteur) {
-				$auteurs[] = "<a href=\"mailto:$email_auteur\">$nom_auteur</a>";
-			} else {
-				$auteurs[] = "$nom_auteur";
-			}
-		}
-	}
-	return (!$auteurs) ? "" : join($auteurs, ", ");
-}
-
-function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
-	$retour = spip_abstract_fetsel(
-		array('texte'),
-		array('spip_petitions'),
-		array("id_article=".intval($id_article)),
-		'',array(),'','',1, 
-		$table, $id_boucle, $serveur);
-
-	if (!$retour) return '';
-	# cette page est invalidee par toute petition
-	$cache['varia']['pet'.$id_article] = 1;
-	# ne pas retourner '' car le texte sert aussi de presence
-	return ($retour['texte'] ? $retour['texte'] : ' ');
-}
-
-# retourne le chapeau d'un article, et seulement s'il est publie
-
-function sql_chapo($id_article) {
-	if ($id_article)
-	return spip_abstract_fetsel(array('chapo'),
-		array('spip_articles'),
-		array("id_article=".intval($id_article),
-		"statut='publie'"));
-}
-
-# retourne le champ 'accepter_forum' d'un article
-function sql_accepter_forum($id_article) {
-	static $cache = array();
-
-	if (!$id_article) return;
-
-	if (!isset($cache[$id_article])) {
-		$row = spip_abstract_fetsel(array('accepter_forum'),
-			array('spip_articles'),
-			array("id_article=".intval($id_article)));
-		$cache[$id_article] = $row['accepter_forum'];
-	}
-
-	return $cache[$id_article];
-}
-
-
-// Calcul de la rubrique associee a la requete
-// (selection de squelette specifique par id_rubrique & lang)
-
-function sql_rubrique_fond($contexte) {
-
-	if ($id = intval($contexte['id_rubrique'])) {
-		$row = spip_abstract_fetsel(array('lang'),
-					    array('spip_rubriques'),
-					    array("id_rubrique=$id"));
-		if ($row['lang'])
-			$lang = $row['lang'];
-		return array ($id, $lang);
-	}
-
-	if ($id  = intval($contexte['id_breve'])) {
-		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-			array('spip_breves'), 
-			array("id_breve=$id"));
-		$id_rubrique_fond = $row['id_rubrique'];
-		if ($row['lang'])
-			$lang = $row['lang'];
-		return array($id_rubrique_fond, $lang);
-	}
-
-	if ($id = intval($contexte['id_syndic'])) {
-		$row = spip_abstract_fetsel(array('id_rubrique'),
-			array('spip_syndic'),
-			array("id_syndic=$id"));
-		$id_rubrique_fond = $row['id_rubrique'];
-		$row = spip_abstract_fetsel(array('lang'),
-			array('spip_rubriques'),
-			array("id_rubrique='$id_rubrique_fond'"));
-		if ($row['lang'])
-			$lang = $row['lang'];
-		return array($id_rubrique_fond, $lang);
-	}
-
-	if ($id = intval($contexte['id_article'])) {
-		$row = spip_abstract_fetsel(array('id_rubrique', 'lang'),
-			array('spip_articles'),
-			array("id_article=$id"));
-		$id_rubrique_fond = $row['id_rubrique'];
-		if ($row['lang'])
-			$lang = $row['lang'];
-		return array($id_rubrique_fond, $lang);
-	}
 }
 
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site
