@@ -99,7 +99,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 //// a TESTER
 function formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
 {
- global   $champs_extra, $spip_lang, $options , $spip_ecran;
+  global   $champs_extra, $spip_lang, $options , $spip_ecran, $spip_display;
 
  $articles_surtitre = $champs_article['articles_surtitre'];
  $articles_soustitre = $champs_article['articles_soustitre'];
@@ -238,8 +238,8 @@ echo "<P><HR><P>";
 
 	echo $textes_supplement;
 
-	//echo "<BR>";
-	echo afficher_barre('document.formulaire.texte');
+	
+	if ($spip_display!=4) echo afficher_barre('document.formulaire.texte');
 	echo "<TEXTAREA id='text_area' NAME='texte' ".$GLOBALS['browser_caret']." CLASS='formo' ROWS='$rows' COLS='40' wrap=soft>";
 	echo $texte;
 	echo "</TEXTAREA>\n";
