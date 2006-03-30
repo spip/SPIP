@@ -240,22 +240,20 @@ if ($var_lang) {
 if ($var_lang_ecrire) {
 	include_spip('inc/lang');
 
-	if (changer_langue($var_lang_ecrire)) {
-		spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
-		spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
+	spip_setcookie('spip_lang_ecrire', $var_lang_ecrire, time() + 365 * 24 * 3600);
+	spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
-		if (_FILE_CONNECT AND $id_auteur) {
-			include_spip('inc/admin');
-			if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
-				spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
-				$auteur_session['lang'] = $var_lang_ecrire;
-				ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
-			}
+	if (_FILE_CONNECT AND $id_auteur) {
+		include_spip('inc/admin');
+		if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
+			spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
+			$auteur_session['lang'] = $var_lang_ecrire;
+			ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
 		}
-
-		$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
-		$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang_ecrire";
 	}
+
+	$redirect = ereg_replace("[?&]lang=[^&]*", '', $redirect);
+	$redirect .= (strpos($redirect, "?")!==false ? "&" : "?") . "lang=$var_lang_ecrire";
 }
 
 // Redirection
