@@ -666,6 +666,13 @@ function charger_generer_url() {
 	}
 }
 
+// Sur certains serveurs, la valeur 'Off' tient lieu de false dans certaines
+// variables d'environnement comme $_SERVER[HTTPS] ou ini_get(register_globals)
+function test_valeur_serveur($truc) {
+	if (!$truc) return false;
+	if (strtolower($truc) == 'off') return false;
+	return true;
+}
 
 //
 // Fonctions de fabrication des URL des scripts de Spip
@@ -687,7 +694,7 @@ function url_de_base() {
 
 	$http = (
 		substr($_SERVER["SCRIPT_URI"],0,5) == 'https'
-		OR $_SERVER['HTTPS']
+		OR test_valeur_serveur($_SERVER['HTTPS'])
 	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
 	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$REQUEST_URI;
@@ -809,7 +816,7 @@ function spip_register_globals() {
 
 	// Si les variables sont passees en global par le serveur, il faut
 	// faire quelques verifications de base
-	if (@ini_get('register_globals')) {
+	if (test_valeur_serveur(@ini_get('register_globals'))) {
 		foreach ($refuse_gpc as $var) {
 			if (isset($GLOBALS[$var])) {
 				if (
@@ -997,7 +1004,7 @@ function spip_initialisation() {
 	// (non surchargeable en l'etat ; attention si on utilise include_spip()
 	// pour le rendre surchargeable, on va provoquer un reecriture
 	// systematique du noyau ou une baisse de perfs => a etudier)
-	include_once(_DIR_RESTREINT.'inc/flock.php');
+	include_once _DIR_INCLUDE.'inc/flock.php';
 
 
 	// Lire les meta cachees
