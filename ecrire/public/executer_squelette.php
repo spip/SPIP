@@ -54,7 +54,7 @@ function public_executer_squelette($squelette, $mime_type, $gram, $sourcefile) {
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($sourcefile, $skel)) {
-		$f = include_fonction('compiler_squelette', 'public');
+		$f = charger_fonction('compiler_squelette', 'public');
 		$skel_code = $f($skel, $nom, $gram, $sourcefile);
 	}
 

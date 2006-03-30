@@ -41,7 +41,7 @@ function include_ecrire($file, $silence=false) {
 // charge un fichier perso ou, a defaut, standard
 // et retourne si elle existe le nom de la fonction homonyme (exec_$nom),
 // ou de suffixe _dist
-function include_fonction($nom, $dossier='exec', $continue=false) {
+function charger_fonction($nom, $dossier='exec', $continue=false) {
 
 	// Securite de base
 	if (!preg_match(',^[\w-]+$,', $nom))

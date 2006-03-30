@@ -22,7 +22,7 @@ function article_select($id_article, $id_rubrique, $lier_trad, $new)
 // ESSAI pour "Joindre un document" depuis l'espace prive (UPLOAD_DIRECT)
 /*if ($GLOBALS['action'] AND $GLOBALS['doc']) {
 	global $action, $doc;
-	if ($var_nom = include_fonction($action, 'action'))
+	if ($var_nom = charger_fonction($action, 'action'))
 		$var_nom($doc);
 	else
 		spip_log("fonction $var_nom indisponible");

@@ -267,7 +267,7 @@ function cron_mail($t) {
 	// $t = 0 si le fichier de lock a ete detruit
 	if (!$t) $t = time() - (3600 * 24 * $jours_neuf);
 
-	$f = include_fonction('localiser_page', 'public');
+	$f = charger_fonction('localiser_page', 'public');
 	$page = $f('nouveautes',
 			    array('date' => date('Y-m-d H:i:s', $t),
 				  'jours_neuf' => $jours_neuf));

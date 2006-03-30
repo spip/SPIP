@@ -305,7 +305,7 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 
-	$f = include_fonction('trouver_squelette', 'public');
+	$f = charger_fonction('trouver_squelette', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
 	// Charger le squelette en specifiant les langages cibles et source
@@ -313,7 +313,7 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
-	$f = include_fonction('executer_squelette', 'public');
+	$f = charger_fonction('executer_squelette', 'public');
 
 	if ($fonc = $f($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer('calcul page');
