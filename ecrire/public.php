@@ -74,9 +74,9 @@ if (defined('_INC_PUBLIC')) {
 	// Aller chercher la page
 	//
 
-	include_spip('public/global');
 	$tableau_des_erreurs = array();
-	$page = calcule_header_et_page($fond);
+	$f = charger_fonction('assembler', 'public');
+	$page = $f($fond);
 
 	if ($page['status']) {
 		include_spip('inc/headers');

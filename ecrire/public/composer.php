@@ -20,8 +20,8 @@ include_spip('inc/forum');
 include_spip('inc/distant');
 include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
 
-# Charge un squelette (au besoin le compile) 
-# et retoune le nom de sa fonction principale, ou '' s'il est indefini
+# Charge et retourne un composeur, i.e. la fonction principale d'un squelette
+# ou '' s'il est inconnu. Le compile au besoin
 # Charge egalement un fichier homonyme de celui du squelette
 # mais de suffixe '_fonctions.php' pouvant contenir:
 # 1. des filtres
@@ -29,7 +29,7 @@ include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
 # 3. des declaration de tables SQL supplementaires
 # Toutefois pour 2. et 3. preferer la technique de la surcharge
 
-function public_executer_squelette($squelette, $mime_type, $gram, $sourcefile) {
+function public_composer_dist($squelette, $mime_type, $gram, $sourcefile) {
 
 	$nom = $mime_type . '_' . md5($squelette);
 
@@ -54,7 +54,7 @@ function public_executer_squelette($squelette, $mime_type, $gram, $sourcefile) {
 
 	// charger le source, si possible, et compiler 
 	if (lire_fichier ($sourcefile, $skel)) {
-		$f = charger_fonction('compiler_squelette', 'public');
+		$f = charger_fonction('compiler', 'public');
 		$skel_code = $f($skel, $nom, $gram, $sourcefile);
 	}
 

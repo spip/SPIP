@@ -242,7 +242,7 @@ function sql_accepter_forum($id_article) {
 }
 
 # Determine les parametres d'URL (hors réécriture) et consorts
-# En deduit un contexte disant si la page est un rediction ou 
+# En deduit un contexte disant si la page est une rediction ou 
 # exige un squelette deductible de $fond et du contexte linguistique.
 # Aplique alors le squelette sur le contexte et le nom du cache.
 # Retourne un tableau de 3 elements:
@@ -251,7 +251,7 @@ function sql_accepter_forum($id_article) {
 # 'invalideurs' => les invalideurs de ce cache
 # En cas d'erreur process_ins est absent et texte est un tableau de 2 chaines
 
-function public_localiser_page_dist($fond, $local='', $cache='')  {
+function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	// distinguer le premier appel des appels par inclusion
 	if (!is_array($local)) { 
@@ -305,7 +305,7 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
 
-	$f = charger_fonction('trouver_squelette', 'public');
+	$f = charger_fonction('styliser', 'public');
 	list($skel,$mime_type, $gram, $sourcefile) = $f($fond, $id_rubrique_fond,$GLOBALS['spip_lang']);
 
 	// Charger le squelette en specifiant les langages cibles et source
@@ -313,7 +313,7 @@ function public_localiser_page_dist($fond, $local='', $cache='')  {
 	// et appliquer sa fonction principale sur le contexte.
 	// Passer le nom du cache pour produire sa destruction automatique
 
-	$f = charger_fonction('executer_squelette', 'public');
+	$f = charger_fonction('composer', 'public');
 
 	if ($fonc = $f($skel, $mime_type, $gram, $sourcefile)){
 		spip_timer('calcul page');

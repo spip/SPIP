@@ -564,8 +564,9 @@ function code_boucle(&$boucles, $id, $nom)
 }
 
 
-// Prend en argument le source d'un squelette, sa grammaire et un nom.
-// Retourne une fonction PHP/SQL portant ce nom et calculant une page HTML.
+// Prend en argument le texte d'un squelette (et son fichier d'origine)
+// sa grammaire et un nom.
+// Retourne une fonction PHP/SQL portant ce nom et calculant une page.
 // Pour appeler la fonction produite, lui fournir 2 tableaux de 1 e'le'ment:
 // - 1er: element 'cache' => nom (du fichier ou` mettre la page)
 // - 2e: element 0 contenant un environnement ('id_article => $id_article, etc)
@@ -577,7 +578,7 @@ function code_boucle(&$boucles, $id, $nom)
 // - 'entetes' => tableau des entetes http
 // En cas d'erreur, elle retourne un tableau des 2 premiers elements seulement
 
-function public_compiler_squelette_dist($squelette, $nom, $gram, $sourcefile) {
+function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
   global  $table_des_tables, $tables_des_serveurs_sql, $tables_principales,
     $tables_jointures;
 
