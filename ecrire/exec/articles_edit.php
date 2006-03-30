@@ -81,7 +81,7 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 	else {
 		echo "<HR>";
 
-		if (($articles_chapeau != "non") OR $chapo) {
+		if (($articles_chapeau) OR $chapo) {
 			if ($spip_ecran == "large") $rows = 8;
 			else $rows = 5;
 			echo "<B>"._T('info_chapeau')."</B>";
@@ -96,19 +96,20 @@ function chapo_articles_edit($chapo, $articles_chapeau)
 		}
 	}
 }
-//// a TESTER
-function formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article)
-{
+
+function formulaire_articles_edit($row, $lier_trad, $new, $champs_article) {
+
   global   $champs_extra, $spip_lang, $options , $spip_ecran, $spip_display;
 
- $articles_surtitre = $champs_article['articles_surtitre'];
- $articles_soustitre = $champs_article['articles_soustitre'];
- $articles_descriptif = $champs_article['articles_descriptif'];
- $articles_urlref = $champs_article['articles_urlref'];
- $articles_chapeau = $champs_article['articles_chapeau'];
- $articles_ps = $champs_article['articles_ps'];
- $articles_mots = $champs_article['articles_mots'];
- $articles_modif = $champs_article['articles_modif'];
+	$articles_surtitre = $champs_article['articles_surtitre'] != 'non';
+	$articles_soustitre = $champs_article['articles_soustitre'] != "non";
+	$articles_descriptif = $champs_article['articles_descriptif'] != "non";
+	$articles_urlref = $champs_article['articles_urlref'] != "non";
+	$articles_chapeau = $champs_article['articles_chapeau'] != "non";
+	$articles_ps = $champs_article['articles_ps']  != "non";
+
+	$id_article = $row['id_article'];
+	$titre = $row['titre'];
 
 echo "\n<table cellpadding=0 cellspacing=0 border=0 width='100%'>";
 echo "<tr width='100%'>";
@@ -126,15 +127,21 @@ echo "<p>";
 
 echo "<P><HR><P>";
 
-	$titre = entites_html($titre);
-	$soustitre = entites_html($soustitre);
-	$surtitre = entites_html($surtitre);
-	$descriptif = entites_html($descriptif);
-	$nom_site = entites_html($nom_site);
-	$url_site = entites_html($url_site);
-	$chapo = entites_html($chapo);
-	$texte = entites_html($texte);
-	$ps = entites_html($ps);
+	$titre = entites_html($row['titre']);
+	$soustitre = entites_html($row['soustitre']);
+	$surtitre = entites_html($row['surtitre']);
+	$descriptif = entites_html($row['descriptif']);
+	$nom_site = entites_html($row['nom_site']);
+	$url_site = entites_html($row['url_site']);
+	$chapo = entites_html($row['chapo']);
+	$texte = entites_html($row['texte']);
+	$ps = entites_html($row['ps']);
+
+	$id_rubrique = $row['id_rubrique'];
+	$id_secteur = $row['id_secteur'];
+	$date = $row['date'];
+	$extra = $row['extra'];
+	$onfocus = $row['onfocus'];
 
 	echo generer_url_post_ecrire("articles", ($id_article ? "id_article=$id_article" : ""),'formulaire');
 
@@ -146,7 +153,7 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='Hidden' NAME='changer_lang' VALUE='$spip_lang'>";
 	}
 
-	if (($options == "avancees" AND $articles_surtitre != "non") OR $surtitre) {
+	if (($options == "avancees" AND $articles_surtitre) OR $surtitre) {
 		echo "<B>"._T('texte_sur_titre')."</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='surtitre' CLASS='forml' VALUE=\"$surtitre\" SIZE='40'><P>";
@@ -159,7 +166,7 @@ echo "<P><HR><P>";
 	echo aide ("arttitre");
 	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
 
-	if (($articles_soustitre != "non") OR $soustitre) {
+	if (($articles_soustitre) OR $soustitre) {
 		echo "<B>"._T('texte_sous_titre')."</B>";
 		echo aide ("arttitre");
 		echo "<BR><INPUT TYPE='text' NAME='soustitre' CLASS='forml' VALUE=\"$soustitre\" SIZE='40'><br><br>";
@@ -168,46 +175,35 @@ echo "<P><HR><P>";
 		echo "<INPUT TYPE='hidden' NAME='soustitre' VALUE=\"$soustitre\">";
 	}
 
+	if ($id_rubrique == 0) $logo = "racine-site-24.gif";
+	elseif ($id_secteur == $id_rubrique) $logo = "secteur-24.gif";
+	else $logo = "rubrique-24.gif";
 
-	/// Dans la rubrique....
-	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
-	else {
-		$query = "SELECT id_parent, titre FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
-		$result=spip_query($query);
-		while($row=spip_fetch_array($result)){
-			$parent_parent=$row['id_parent'];
-			$titre_parent = $row["titre"];
-		}
-		if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
-		else $logo_parent = "rubrique-24.gif";
-	}
-	debut_cadre_couleur("$logo_parent", false, "", _T('titre_cadre_interieur_rubrique').aide ("artrub"));
+	debut_cadre_couleur($logo, false, "", _T('titre_cadre_interieur_rubrique'). aide("artrub"));
 
-	// appel du selecteur de rubrique
-	$restreint = ($GLOBALS['statut'] == 'publie');
-	echo selecteur_rubrique($id_rubrique, 'article', $restreint);
+	 echo selecteur_rubrique($id_rubrique, 'article', ($GLOBALS['statut'] == 'publie'));
 
 	fin_cadre_couleur();
 	
-	if ($new != 'oui') echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE=\"$id_rubrique\" >";
+	if ($new != 'oui') echo "<INPUT TYPE='hidden' NAME='id_rubrique_old' VALUE='$id_rubrique'>";
 
-	if (($options == "avancees" AND $articles_descriptif != "non") OR $descriptif) {
+	if (($options == "avancees" AND $articles_descriptif) OR $descriptif) {
 		echo "<P><B>"._T('texte_descriptif_rapide')."</B>";
 		echo aide ("artdesc");
-		echo "<BR>"._T('texte_contenu_article')."<BR>";
+		echo "</p><br />",_T('texte_contenu_article'),"<br />";
 		echo "<TEXTAREA NAME='descriptif' CLASS='forml' ROWS='2' COLS='40' wrap=soft>";
 		echo $descriptif;
-		echo "</TEXTAREA><P>\n";
+		echo "</TEXTAREA>\n";
 	}
 	else {
 		echo "<INPUT TYPE='hidden' NAME='descriptif' VALUE=\"$descriptif\">";
 	}
 
-	if (($options == "avancees" AND $articles_urlref != "non") OR $nom_site OR $url_site) {
-		echo _T('entree_liens_sites')."<br />\n";
-		echo _T('info_titre')." ";
+	if (($options == "avancees" AND $articles_urlref) OR $nom_site OR $url_site) {
+		echo _T('entree_liens_sites'),"<br />\n";
+		echo _T('info_titre')," ";
 		echo "<input type='text' name='nom_site' class='forml' width='40' value=\"$nom_site\"/><br />\n";
-		echo _T('info_url')." ";
+		echo _T('info_url')," ";
 		echo "<input type='text' name='url_site' class='forml' width='40' value=\"$url_site\"/>";
 	}
 
@@ -231,9 +227,9 @@ echo "<P><HR><P>";
 				$texte1 . "</TEXTAREA><P>\n";
 		}
 	}
-	echo "<B>"._T('info_texte')."</B>";
+	echo "<b>"._T('info_texte')."</b>";
 	echo aide ("arttexte");
-	echo "<br>"._T('texte_enrichir_mise_a_jour');
+	echo "<br />"._T('texte_enrichir_mise_a_jour');
 	echo aide("raccourcis");
 
 	echo $textes_supplement;
@@ -244,7 +240,7 @@ echo "<P><HR><P>";
 	echo $texte;
 	echo "</TEXTAREA>\n";
 
-	if (($articles_ps != "non" AND $options == "avancees") OR $ps) {
+	if (($articles_ps AND $options == "avancees") OR $ps) {
 		echo "<P><B>"._T('info_post_scriptum')."</B><BR>";
 		echo "<TEXTAREA NAME='ps' CLASS='forml' ROWS='5' COLS='40' wrap=soft>";
 		echo $ps;
@@ -270,38 +266,25 @@ echo "<P><HR><P>";
 	echo "</DIV></FORM>";
 }
 
+function exec_articles_edit_dist()
+{
+	$row = article_select(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), _request('new'));
 
-function exec_affiche_articles_edit_dist($row, $lier_trad, $new, $champs_article) {
-	global $champs_extra;
+	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
+
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
 	$titre = $row['titre'];
-	$soustitre = $row['soustitre'];
-	$surtitre = $row['surtitre'];
-	$descriptif = $row['descriptif'];
-	$chapo = $row['chapo'];
-	$texte = $row['texte'];
-	$ps = $row['ps'];
-	$nom_site = $row['nom_site'];
-	$url_site = $row['url_site'];
-	$extra = $row['extra'];
-	$id_secteur = $row['id_secteur'];
-	$date = $row['date'];
-	$onfocus = $row['onfocus'];
 
 	debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles", "hauteurTextarea();", "", $id_rubrique);
 
 	debut_grand_cadre();
-
 	afficher_hierarchie($id_rubrique);
-
 	fin_grand_cadre();
 
 	debut_gauche();
 
-//
-// Pave "documents associes a l'article"
-//
+	// Pave "documents associes a l'article"
 
 	if ($new != 'oui'){
 	# modifs de la description d'un des docs joints
@@ -312,22 +295,11 @@ function exec_affiche_articles_edit_dist($row, $lier_trad, $new, $champs_article
 	}
 	$GLOBALS['id_article_bloque'] = $id_article;	// globale dans debut_droite
 	debut_droite();
-	debut_cadre_formulaire();
 
-	formulaire_articles_edit($id_article, $id_rubrique, $titre, $soustitre, $surtitre, $descriptif, $chapo, $texte, $ps, $new, $nom_site, $url_site, $extra, $id_secteur, $date, $onfocus, $lier_trad, $champs_article);
+	debut_cadre_formulaire();
+	formulaire_articles_edit($row, $lier_trad, $new, $GLOBALS['meta']);
 	fin_cadre_formulaire();
 
 	fin_page();
 }
-
-
-function exec_articles_edit_dist()
-{
-	$row = article_select(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), _request('new'));
-
-	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
-
-	exec_affiche_articles_edit_dist($row, $lier_trad, $new,$GLOBALS['meta']);
-}
-
 ?>
