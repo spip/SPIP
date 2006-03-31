@@ -20,6 +20,7 @@ function exec_suivi_revisions_dist()
   global
     $connect_id_auteur,
     $connect_statut,
+    $debut,
     $id_auteur,
     $id_secteur,
     $lang_choisie,
