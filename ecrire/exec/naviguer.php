@@ -112,7 +112,8 @@ function exec_naviguer_dist()
 // Logos de la rubrique
 //
 		if ($flag_editable) 
-			logo_naviguer($id_rubrique);
+			afficher_boite_logo('rub', 'id_rubrique', $id_rubrique, ($id_rubrique ? _T('logo_rubrique') : _T('logo_standard_rubrique'))." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
+
 //
 // Afficher les boutons de creation d'article et de breve
 //
@@ -205,16 +206,6 @@ function infos_naviguer($id_rubrique, $statut)
 	}
 }
 
-function logo_naviguer($id_rubrique)
-{
-		if ($id_rubrique)
-			afficher_boite_logo('rub', 'id_rubrique', $id_rubrique,
-					    _T('logo_rubrique')." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
-		else
-			afficher_boite_logo('rub', 'id_rubrique', 0,
-			_T('logo_standard_rubrique')." ".aide ("rublogo"),
-					    _T('logo_survol'), 'naviguer');
-}
 
 function raccourcis_naviguer($id_rubrique, $id_parent)
 {
@@ -512,15 +503,6 @@ function enregistre_coloniser_naviguer($id_rubrique, $id_parent, $titre, $texte,
 		  }
 		}
 	return false;
-}
-
-function enregistre_calculer_rubriques_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)
-{
-	  // retour de spip_image
-	  // i.e. document/logo ajoute/supprime/tourne
-	  // suffit seulement de faire le calculer_rubriques() final
-	  // mais il faudrait s'en dispenser dans le cas "tourne" etc
-  return false;
 }
 
 function enregistre_creer_naviguer($id_rubrique, $id_parent, $titre, $texte, $descriptif, $changer_lang)

@@ -59,8 +59,11 @@ function action_joindre_dist()
      if ($ancre) {
 	$redirect .= '#' . $ancre;
      }
-
-     redirige_par_entete($redirect);
+     if ($type == 'rubrique') {
+	include_spip('inc/rubriques');
+	calculer_rubriques();
+     }
+	redirige_par_entete($redirect);
      ## redirection a supprimer si on veut poster dans l'espace prive directement (UPLOAD_DIRECT)
 }
 

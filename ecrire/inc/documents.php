@@ -566,10 +566,7 @@ $document=0) {
 
 	$res .= "</div>\n" . fin_block();
 
-	$redirect = generer_url_ecrire($GLOBALS['exec'],
-				       ("id_$type=$id" .
-					(($type == "rubrique") ?
-					 '&action=calculer_rubriques' : '')));
+	$redirect = generer_url_ecrire($GLOBALS['exec'], "id_$type=$id");
 
 	return construire_upload($res,
 				array(
@@ -779,11 +776,9 @@ function block_document($id, $id_document, $type, $titre, $descriptif, $date, $d
 	global $connect_statut, $couleur_foncee, $options;
 
 	if ($type == "rubrique") {
-	  $hidden = "<input type='hidden' name='action' value='calculer_rubriques' />";
 	  if ($script=="")
 	  	$script = 'naviguer';
 	} else {
-	  $hidden = "";
 	  if ($script=="")
 	  	$script = 'articles';
 	}
@@ -795,7 +790,6 @@ function block_document($id, $id_document, $type, $titre, $descriptif, $date, $d
 	echo "<input type='hidden' name='modif_document' value='oui' />";
 	echo "<input type='hidden' name='id_document' value='$id_document' />";
 	echo "<input type='hidden' name='show_docs' value='$id_document' />";
-	echo $hidden;
 
 	// modifier la date
 	if ( #$type == 'rubrique' AND  // (seulement dans les rubriques?)
