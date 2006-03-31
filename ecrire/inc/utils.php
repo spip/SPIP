@@ -638,7 +638,7 @@ function find_in_path ($filename) {
 
 function autoriser_sans_cookie($nom)
 {
-  static $autsanscookie = array('aide_index', 'install', 'admin_repair', 'spip_cookie');
+  static $autsanscookie = array('aide_index', 'install', 'admin_repair');
   $nom = preg_replace('/.php[3]?$/', '', basename($nom));
   return in_array($nom, $autsanscookie);
 }

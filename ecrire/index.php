@@ -78,15 +78,15 @@ if (!preg_match(',^[a-z][0-9a-z_]*$,i', $exec)) $exec = "accueil";
 // Authentification, redefinissable
 //
 
-$var_auth ="";
 if (autoriser_sans_cookie($exec)) {
 	if (!isset($reinstall)) $reinstall = 'non';
+	$var_auth = true;
 } else {
 	include_spip('inc/session');
 	$var_auth = charger_fonction('auth', 'inc');
 	$var_auth = $var_auth();
 	if ($var_auth) redirige_par_entete($var_auth);
-}
+ }
 
 //
 // Preferences de presentation
@@ -104,9 +104,8 @@ if ($set_options == 'avancees' OR $set_options == 'basiques') {
 	$prefs['options'] = $set_options;
 	$prefs_mod = true;
 }
-if ($prefs_mod) {
-	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $connect_id_auteur");
-}
+if ($prefs_mod AND !$var_auth)
+	update_prefs_session($prefs, $connect_id_auteur);
 
 if ($set_ecran) {
 	// Poser un cookie, car ce reglage depend plus du navigateur que de l'utilisateur
@@ -141,16 +140,12 @@ include_spip('inc/minipres');
 if ($spip_lang_ecrire = $GLOBALS['_COOKIE']['spip_lang_ecrire']) {
 
 	// si pas authentifie, changer juste pour cette execution
-	if (!$var_auth)
+	if ($var_auth)
 		changer_langue($spip_lang_ecrire);
 	// si authentifie, changer definitivement si ce n'est fait
 	else {	if (($spip_lang_ecrire <> $auteur_session['lang'])
 		AND changer_langue($spip_lang_ecrire)) {
-			spip_query ("UPDATE spip_auteurs SET lang = '".
-				addslashes($spip_lang_ecrire) .
-				"' WHERE id_auteur = $connect_id_auteur");
-			$auteur_session['lang'] = $spip_lang_ecrire;
-			ajouter_session($auteur_session, $spip_session);
+		ajouter_session($auteur_session, $spip_session, $spip_lang_ecrire);
 	       }
 	}
  }

@@ -221,9 +221,8 @@ if ($cookie_session) {
 
 	$prefs = ($row_auteur['prefs']) ? unserialize($row_auteur['prefs']) : array();
 	$prefs['cnx'] = ($session_remember == 'oui') ? 'perma' : '';
-	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = ".$row_auteur['id_auteur']);
-
-}
+	update_prefs_session($prefs, $row_auteur['id_auteur']);
+ }
 
 // changement de langue espace public
 if ($var_lang) {
@@ -244,11 +243,8 @@ if ($var_lang_ecrire) {
 	spip_setcookie('spip_lang', $var_lang_ecrire, time() + 365 * 24 * 3600);
 
 	if (_FILE_CONNECT AND $id_auteur) {
-		include_spip('inc/admin');
 		if (verifier_action_auteur('var_lang_ecrire', $valeur, $id_auteur)) {
-			spip_query ("UPDATE spip_auteurs SET lang = '".addslashes($var_lang_ecrire)."' WHERE id_auteur = ".$id_auteur);
-			$auteur_session['lang'] = $var_lang_ecrire;
-			ajouter_session($auteur_session, $spip_session);	// enregistrer dans le fichier de session
+			ajouter_session($auteur_session, $spip_session, $var_lang_ecrire);
 		}
 	}
 

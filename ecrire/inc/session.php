@@ -44,7 +44,16 @@ function fichier_session($id_session, $alea) {
 //
 // Ajouter une session pour l'auteur specifie
 //
-function ajouter_session($auteur, $id_session) {
+function ajouter_session($auteur, $id_session, $lang='') {
+
+	global $connect_id_auteur, $auteur_session;
+
+	if ($lang) {
+		spip_query ("UPDATE spip_auteurs SET lang = '".	addslashes($lang) .
+				"' WHERE id_auteur = $connect_id_auteur");
+		$auteur_session['lang'] = $lang;
+	}
+
 	renouvelle_alea();
 	$fichier_session = fichier_session($id_session, $GLOBALS['meta']['alea_ephemere']);
 	$vars = array('id_auteur', 'nom', 'login', 'email', 'statut', 'lang', 'ip_change', 'hash_env');
@@ -58,6 +67,11 @@ function ajouter_session($auteur, $id_session) {
 
 	if (!ecrire_fichier($fichier_session, $texte))
 		redirige_par_entete(generer_url_action('test_dirs','',true));
+}
+
+function update_prefs_session($prefs, $id_auteur)
+{
+	spip_query ("UPDATE spip_auteurs SET prefs = '".addslashes(serialize($prefs))."' WHERE id_auteur = $id_auteur");
 }
 
 //
@@ -236,7 +250,6 @@ function renouvelle_alea()
 {
 	if (abs(time() -  $GLOBALS['meta']['alea_ephemere_date']) > 2 * 24*3600) {
 	  	spip_log("renouvellement de l'alea_ephemere");
-		include_spip('inc/session');
 		$alea = md5(creer_uniqid());
 		ecrire_meta('alea_ephemere_ancien', $GLOBALS['meta']['alea_ephemere']);
 		ecrire_meta('alea_ephemere', $alea);
