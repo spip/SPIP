@@ -268,15 +268,22 @@ echo "<P><HR><P>";
 
 function exec_articles_edit_dist()
 {
-	$row = article_select(_request('id_article'), _request('id_rubrique'), _request('lier_trad'), _request('new'));
+	$id_article =_request('id_article');
+	$id_rubrique = _request('id_rubrique');
+	$lier_trad = _request('lier_trad');
+	$new = _request('new');
 
+	$row = article_select($id_article, $id_rubrique, $lier_trad, $new);
 	if (!$row) die ("<h3>"._T('info_acces_interdit')."</h3>");
 
 	$id_article = $row['id_article'];
 	$id_rubrique = $row['id_rubrique'];
 	$titre = $row['titre'];
 
-	debut_page(_T('titre_page_articles_edit', array('titre' => $titre)), "documents", "articles", "hauteurTextarea();", "", $id_rubrique);
+	debut_page(_T('titre_page_articles_edit', array('titre' => $titre)),
+		   "documents", "articles", "hauteurTextarea();", 
+		   "",
+		   $id_rubrique);
 
 	debut_grand_cadre();
 	afficher_hierarchie($id_rubrique);

@@ -88,6 +88,7 @@ else if ($new=='oui') {
 		// Nouvel article : titre par defaut
 		$row['titre'] = filtrer_entites(_T('info_nouvel_article'));
 		$row['onfocus'] = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
+		$row['id_rubrique'] = $id_rubrique;
 	}
 	if (!$row['id_secteur']) {
 		$row_rub = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
