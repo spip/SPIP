@@ -603,6 +603,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 	foreach($boucles as $idb => $boucle) {
 		if (($boucle->type_requete == 'documents') && $boucle->doublons)
 			{ $descr['documents'] = true; break; }
+		$boucles[$idb]->descr = &$descr;
 	}
 	// Commencer par reperer les boucles appelees explicitement 
 	// car elles indexent les arguments de maniere derogatoire

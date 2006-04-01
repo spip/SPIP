@@ -606,9 +606,10 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
   $id_primary = $ddesc['key']['PRIMARY KEY'];
   $id_field = $dnom . '.' . $id_primary;
   $id_table = "";
+  $cpt = &$num[$boucle->descr['nom']][$boucle->id_boucle];
   foreach($res as $r) {
     list($d, $a, $j) = $r;
-    $n=++$num[$boucle->id_boucle];
+    $n = ++$cpt;
     $boucle->join[$n]= array(($id_table ? $id_table : $d), $j);
     $boucle->from[$id_table = "L$n"] = $a[0];    
   }
