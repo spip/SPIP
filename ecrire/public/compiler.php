@@ -297,8 +297,8 @@ function calculer_dump_array($a)
 function calculer_from(&$boucle)
 {
   $res = "";
-  foreach($boucle->from as $k => $v) $res .= "\", \"$v AS `$k`";
-  return 'array(' . substr($res,3) . '")';
+  foreach($boucle->from as $k => $v) $res .= ",'$k' => '$v'";
+  return 'array(' . substr($res,1) . ')';
 }
 
 //

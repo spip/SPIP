@@ -483,26 +483,50 @@ function spip_optim_select ($select = array(), $from = array(),
 // retirer les criteres vides:
 // {X ?} avec X absent de l'URL
 // {par #ENV{X}} avec X absent de l'URL
-// IN sur collection vide
+// IN sur collection vide (ce dernier devrait pouvoir etre fait a la compil)
 
+	$menage = false;
 	foreach($where as $k => $v) { 
 		if ((!$v) OR ($v==1) OR ($v=='0=0')) {
 			unset($where[$k]);
+			$menage = true;
 		}
 	}
-// Construire les clauses determinant les jointures.
-// Il faudrait retirer celles seulement utiles aux criteres finalement absents
-// (et nettoyer $from en consequence)
-// mais la condition necessaire et suffisante n'est pas triviale
 
-	foreach($join as $k => $v) {
-		list($t,$c) = $v;
-		$where[]= "$t.$c=L$k.$c";
+// Installer les jointures.
+// Retirer celles seulement utiles aux criteres finalement absents mais
+// parcourir de la plus recente a la moins recente pour pouvoir eliminer Ln
+// si elle est seulement utile a Ln+1 elle meme inutile
+	
+	for($k = count($join); $k > 0; $k--) {
+		list($t,$c) = $join[$k];
+		$cle = "L$k";
+		if (!$menage OR spip_optim_joint($cle, $join, $where))
+			$where[]= "$t.$c=$cle.$c";
+		else { unset($from[$cle]); unset($join[$k]);}
 	}
-	return spip_abstract_select($select, $from, $where,
+
+	$fromas = array();
+	foreach($from as $k => $v) $fromas[]= "$v AS $k";
+
+	return spip_abstract_select($select, $fromas, $where,
 		  $groupby, array_filter($orderby), $limit,
 		  $sousrequete, $cpt,
 		  $table, $id, $serveur);
 
+}
+
+//condition suffisante (mais non necessaire) pour qu'une jointure soit inutile
+
+function spip_optim_joint($cle, $join, $where)
+{
+	foreach($where as $v) {
+		if (strpos($v, "$cle.") !== false) return true;
+	}
+	foreach($join as $k => $v) {
+		list($t,$c) = $v;
+		if ($t == $cle) return true;
+	}
+	return false;
 }
 ?>
