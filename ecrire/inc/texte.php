@@ -1001,6 +1001,16 @@ function traiter_raccourcis($letexte) {
 
 
 	//
+	// Raccourcis ancre [#ancre<-]
+	//
+	$regexp = "|\[#?([^][]*)<-\]|";
+	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
+	foreach ($matches as $regs)
+		$letexte = str_replace($regs[0],
+		'<a name="'.entites_html($regs[1]).'"></a>', $letexte);
+
+
+	//
 	// Raccourcis liens [xxx->url] (cf. fonction extraire_lien ci-dessus)
 	// Note : complique car c'est ici qu'on applique typo() !
 	//
