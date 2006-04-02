@@ -2571,7 +2571,7 @@ if (true /*$gadgets*/) {
 	echo "<div id='bandeaurecherche' class='bandeau_couleur_sous' style='width: 146px; $spip_lang_left: 60px;'>";
 	echo "<form method='get' style='margin: 0px; position: relative;' action='" . generer_url_ecrire("recherche") . "'>";
 	echo "<input type='hidden' name='exec' value='recherche' />";
-	echo "<input type=\"search\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\""._T('info_rechercher')."\" name=\"recherche\" onkeypress=\"t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" autocomplete=\"off\" class=\"formo\" accesskey=\"r\" ".$onfocus.">";
+	echo "<input type=\"search\" id=\"form_recherche\" style=\"width: 140px;\" size=\"10\" value=\""._T('info_rechercher')."\" name=\"recherche\" onkeypress=\"t=window.setTimeout('lancer_recherche(\'form_recherche\',\'resultats_recherche\')', 200);\" autocomplete=\"off\" class=\"formo\" accesskey=\"r\">";
 	echo "</form>";
 	echo "</div>";
 	// FIN GADGET recherche
