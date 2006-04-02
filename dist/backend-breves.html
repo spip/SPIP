@@ -27,9 +27,10 @@
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_BREVE|url_absolue)]</link>
+		[<guid isPermaLink="true">(#URL_BREVE|url_absolue)</guid>]
 		[<dc:date>(#DATE|date_iso)</dc:date>]
 		<dc:format>text/html</dc:format>
-		<dc:language>#LANG</dc:language>
+		[<dc:language>(#LANG)</dc:language>]
 		[(#REM)
 			Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS
 		]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_rss>
