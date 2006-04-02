@@ -198,16 +198,19 @@ if ($connect_statut=="0minirezo" AND acces_rubrique($id_rubrique) AND ($statut==
 	
 	echo "<table>";
 	echo "<td  align='right'>";
-	icone(_T('icone_publier_breve'), generer_url_ecrire("breves","id_breve=$id_breve&statut=publie"), "breve-24.gif", "racine-24.gif");
+	icone(_T('icone_publier_breve'), 
+	      generer_action_auteur('instituer', "breve $id_breve publie",
+				    generer_url_ecrire("breves_voir","id_breve=$id_breve", true)), "breve-24.gif", "racine-24.gif");
 	echo "</td>";
 	
 	echo "<td>", http_img_pack("rien.gif", ' ', "width='5'") ."</td>\n";
 	echo "<td  align='right'>";
-	icone(_T('icone_refuser_breve'), generer_url_ecrire("breves","id_breve=$id_breve&statut=refuse"), "breve-24.gif", "supprimer.gif");
+	icone(_T('icone_refuser_breve'), 
+	      generer_action_auteur('instituer', "breve $id_breve refuse",
+				    generer_url_ecrire("breves_voir","id_breve=$id_breve", true)), "breve-24.gif", "supprimer.gif");
 	echo "</td>";
-	
-
 	echo "</table>";	
+
 	echo "</div>";
 	
 }	
@@ -257,7 +260,8 @@ if (($id_breve == 0) AND ($new == "oui")) {
 		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', 'non')");
 }
 
-if (strval($titre)!='' AND $modifier_breve) {
+ if (($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") AND
+     strval($titre)) {
 	$titre = addslashes($titre);
 	$texte = addslashes($texte);
 	$lien_titre = addslashes($lien_titre);
@@ -282,7 +286,7 @@ if (strval($titre)!='' AND $modifier_breve) {
 		include_spip("inc/indexation");
 		marquer_indexer('breve', $id_breve);
 	}
-	calculer_rubriques();
+	$calculer_rubriques = true;
 	
 	
 	// Changer la langue heritee
@@ -303,13 +307,14 @@ if (strval($titre)!='' AND $modifier_breve) {
 	
 }
 
-
 if ($jour AND $connect_statut == '0minirezo') {
 	if ($annee == "0000") $mois = "00";
 	if ($mois == "00") $jour = "00";
 	spip_query("UPDATE spip_breves SET date_heure='$annee-$mois-$jour' WHERE id_breve=$id_breve");
-	calculer_rubriques();
+	$calculer_rubriques = true;
 }
+
+ if ($calculer_rubriques) calculer_rubriques();
 
  afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot);
 }
