@@ -36,8 +36,7 @@ function cherche_image_nommee($nom, $formats = array ('gif', 'jpg', 'png')) {
 function cherche_logo($id, $type, $mode, $formats = array ('gif', 'jpg', 'png')) {
 	# attention au cas $id = '0' pour LOGO_SITE_SPIP : utiliser intval()
 	$nom = $type . $mode . intval($id);
-	reset($formats);
-	while (list(, $format) = each($formats)) {
+	foreach ($formats as $format) {
 		if (@file_exists($d = (_DIR_LOGOS . $nom . '.' . $format)))
 			return array($d, _DIR_LOGOS, $nom, $format);
 	}
