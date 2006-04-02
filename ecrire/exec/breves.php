@@ -54,7 +54,7 @@ function exec_breves_dist()
 	global $connect_statut,$id_breve, $statut, $id_rubrique;
 	if ($statut AND $connect_statut == "0minirezo") {
 	 	$cond = "WHERE id_breve=" . intval($id_breve);
-		list($statut_ancien) = spip_fetch_array(spip_query("SELECT statut FROM spip_breves $cond"));
+		list($statut_ancien, $id_rubrique) = spip_fetch_array(spip_query("SELECT statut, id_rubrique FROM spip_breves $cond"));
 		if ($statut != $statut_ancien) {
 			spip_query("UPDATE spip_breves SET date_heure=NOW(), statut='$statut'" . $cond);
 			include_spip('inc/rubriques');
