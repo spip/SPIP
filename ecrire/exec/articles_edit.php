@@ -164,7 +164,7 @@ echo "<P><HR><P>";
 
 	echo _T('texte_titre_obligatoire');
 	echo aide ("arttitre");
-	echo "<BR><INPUT TYPE='text' NAME='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus><P>";
+	echo "\n<br /><INPUT TYPE='text' NAME='titre' style='font-weight: bold; font-size: 13px;' CLASS='formo' VALUE=\"$titre\" SIZE='40' $onfocus>\n<P>";
 
 	if (($articles_soustitre) OR $soustitre) {
 		echo "<B>"._T('texte_sous_titre')."</B>";

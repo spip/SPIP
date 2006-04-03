@@ -30,8 +30,7 @@ function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter
 {
   global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
 
 if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
@@ -157,7 +156,8 @@ $les_auteurs = afficher_auteurs_articles($id_article, $flag_editable);
 // Ajouter un auteur
 //
 
- ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur);
+if ($flag_editable AND $options == 'avancees') 
+	ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur);
 
 fin_cadre_enfonce(false);
 
@@ -283,16 +283,9 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	  debut_cadre_relief("forum-interne-24.gif");
 
 
-	list($nb_forums) = spip_fetch_array(spip_query(
-		"SELECT count(*) AS count FROM spip_forum
-		WHERE id_article=$id_article
-		AND statut IN ('publie', 'off', 'prop')"));
+	list($nb_forums) = spip_fetch_array(spip_query("SELECT count(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
-	list($nb_signatures) = spip_fetch_array(spip_query(
-		"SELECT COUNT(*) AS count FROM spip_signatures
-		WHERE id_article=$id_article
-		AND statut IN ('publie', 'poubelle')"));
-
+	list($nb_signatures) = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 
 	$visible = $change_accepter_forum || $change_petition
 		|| $nb_forums || $nb_signatures;
@@ -345,18 +338,14 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 
 			$texte_petition = addslashes($texte_petition);
 
-			$query_pet = "REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) ".
-				"VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')";
-			$result_pet = spip_query($query_pet);
+			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')");
 		}
 		else if ($change_petition == "off") {
-			$query_pet = "DELETE FROM spip_petitions WHERE id_article=$id_article";
-			$result_pet = spip_query($query_pet);
+			$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
 		}
 	}
 
-	$petition = spip_fetch_array(spip_query(
-		"SELECT * FROM spip_petitions WHERE id_article=$id_article"));
+	$petition = spip_fetch_array(spip_query("SELECT * FROM spip_petitions WHERE id_article=$id_article"));
 
 	$email_unique=$petition["email_unique"];
 	$site_obli=$petition["site_obli"];
@@ -568,8 +557,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	
 		// Recuperer les donnees de l'article
 		if ($GLOBALS['meta']['articles_modif'] != 'non') {
-			$query = "SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'";
-			$result = spip_query($query);
+			$result = spip_query("SELECT auteur_modif, UNIX_TIMESTAMP(date_modif) AS modification, UNIX_TIMESTAMP(NOW()) AS maintenant FROM spip_articles WHERE id_article='$id_article'");
+
 	
 			if ($row = spip_fetch_array($result)) {
 				$auteur_modif = $row["auteur_modif"];
@@ -579,8 +568,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 				$date_diff = floor(($maintenant - $modification)/60);
 	
 				if ($date_diff >= 0 AND $date_diff < 60 AND $auteur_modif > 0 AND $auteur_modif != $connect_id_auteur) {
-					$query_auteur = "SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'";
-					$result_auteur = spip_query($query_auteur);
+					$result_auteur = spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur='$auteur_modif'");
+
 					if ($row_auteur = spip_fetch_array($result_auteur)) {
 						$nom_auteur_modif = typo($row_auteur["nom"]);
 					}
@@ -767,8 +756,8 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 		}
 
 		if ($flag_editable AND $lier_trad > 0) { // Lier a un groupe de trad
-			$query_lier = "SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad";
-			$result_lier = spip_query($query_lier);
+			$result_lier = spip_query("SELECT id_trad FROM spip_articles WHERE id_article=$lier_trad");
+
 			if ($row = spip_fetch_array($result_lier)) {
 				$id_lier = $row['id_trad'];
 
@@ -796,9 +785,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 		// Afficher la liste des traductions
 		if ($id_trad != 0) {
-			$query_trad = "SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad";
-			$result_trad = spip_query($query_trad);
-			
+			$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
 			
 			$table='';
 			while ($row = spip_fetch_array($result_trad)) {
@@ -908,10 +895,9 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 function add_auteur_article($id_article, $nouv_auteur)
 {
-	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$nouv_auteur' AND id_article='$id_article'";
-		$result=spip_query($query);
-		$query="INSERT INTO spip_auteurs_articles (id_auteur,id_article) VALUES ('$nouv_auteur','$id_article')";
-		$result=spip_query($query);
+	$res = spip_query("SELECT id_article FROM spip_auteurs_articles WHERE id_auteur='$nouv_auteur' AND id_article='$id_article'");
+	if (!spip_num_rows($res))
+		spip_abstract_insert('spip_auteurs_articles', "(id_auteur,id_article)", "('$nouv_auteur','$id_article')");
 }
 
 function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique, $ajout_auteur, $flag_editable, $nouv_auteur, $supp_auteur)
@@ -922,8 +908,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 
   if ($cherche_auteur) {
 	echo "<P ALIGN='$spip_lang_left'>";
-	$query = "SELECT id_auteur, nom FROM spip_auteurs";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_auteur, nom FROM spip_auteurs");
 	$table_auteurs = array();
 	$table_ids = array();
 	while ($row = spip_fetch_array($result)) {
@@ -939,8 +924,7 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		$ajout_auteur = 'oui';
 		list(, $nouv_auteur) = each($resultat);
 		echo "<B>"._T('texte_ajout_auteur')."</B><BR>";
-		$query = "SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur=$nouv_auteur");
 		echo "<UL>";
 		while ($row = spip_fetch_array($result)) {
 			$id_auteur = $row['id_auteur'];
@@ -960,8 +944,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 		if ($les_auteurs) {
 			$les_auteurs = join(',', $les_auteurs);
 			echo "<B>"._T('texte_plusieurs_articles', array('cherche_auteur' => $cherche_auteur))."</B><BR>";
-			$query = "SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom";
-			$result = spip_query($query);
+			$result = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN ($les_auteurs) ORDER BY nom");
+
 			echo "<UL class='verdana1'>";
 			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row['id_auteur'];
@@ -1022,8 +1006,8 @@ function rechercher_auteurs_articles($cherche_auteur, $id_article, $id_rubrique,
 
 
   if ($supp_auteur && $flag_editable) {
-	$query="DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'";
-	$result=spip_query($query);
+	spip_query("DELETE FROM spip_auteurs_articles WHERE id_auteur='$supp_auteur' AND id_article='$id_article'");
+
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 		include_spip("inc/indexation");
 		marquer_indexer('article', $id_article);
@@ -1039,10 +1023,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 
 	$les_auteurs = array();
 
-	$query = "SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
-	"WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article ".
-	"GROUP BY auteurs.id_auteur ORDER BY auteurs.nom";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE auteurs.id_auteur=lien.id_auteur AND lien.id_article=$id_article GROUP BY auteurs.id_auteur ORDER BY auteurs.nom");
 
 	if (spip_num_rows($result)) {
 		echo "<div class='liste'>";
@@ -1064,11 +1045,8 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 			if ($connect_statut == "0minirezo") $aff_articles = "('prepa', 'prop', 'publie', 'refuse')";
 			else $aff_articles = "('prop', 'publie')";
 
-			$query2 = "SELECT COUNT(articles.id_article) AS compteur ".
-			"FROM spip_auteurs_articles AS lien, spip_articles AS articles ".
-			"WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article ".
-			"AND articles.statut IN $aff_articles GROUP BY lien.id_auteur";
-			$result2 = spip_query($query2);
+			$result2 = spip_query("SELECT COUNT(articles.id_article) AS compteur FROM spip_auteurs_articles AS lien, spip_articles AS articles WHERE lien.id_auteur=$id_auteur AND articles.id_article=lien.id_article AND articles.statut IN $aff_articles GROUP BY lien.id_auteur");
+
 			if ($result2) list($nombre_articles) = spip_fetch_array($result2);
 			else $nombre_articles = 0;
 
@@ -1115,24 +1093,13 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 
 function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag_editable, $rubrique_article, $supprimer_bouton_creer_auteur)
 {
-
-	global $connect_toutes_rubriques, $connect_statut, $options,$connect_id_auteur, $couleur_claire ;
-
-	if (!($flag_editable AND $options == 'avancees')) return;
+	global $connect_toutes_rubriques, $connect_statut, $couleur_claire ;
 
 	echo debut_block_invisible("auteursarticle");
-
-	$query = "SELECT * FROM spip_auteurs WHERE ";
-	if ($les_auteurs) $query .= "id_auteur NOT IN ($les_auteurs) AND ";
-	$query .= "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom";
-	$result = spip_query($query);
-	
-	echo "<table width='100%'>";
-	echo "<tr>";
+	echo "<table width='100%'><tr>";
 
 	if ($connect_statut == '0minirezo'
 	    AND $connect_toutes_rubriques
-	    AND $options == "avancees"
 	    AND !$supprimer_bouton_creer_auteur) {
 	echo "<td width='200'>";
 	$retour = rawurlencode(generer_url_ecrire("articles","id_article=$id_article"));
@@ -1143,13 +1110,17 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 
 	echo "<td>";
 
+	$result = spip_query("SELECT * FROM spip_auteurs WHERE " .
+			(!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") .
+			"statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
 
-	if (spip_num_rows($result) > 0) {
+	$num = spip_num_rows($result);
+	if ($num) {
 		echo generer_url_post_ecrire("articles", "id_article=$id_article");;
 		echo "<span class='verdana1'><B>"._T('titre_cadre_ajouter_auteur')."&nbsp; </B></span>\n";
 		echo "<DIV><INPUT TYPE='Hidden' NAME='id_article' VALUE=\"$id_article\">";
 
-		if (spip_num_rows($result) > 200) {
+		if ($num > 200) {
 			echo "<INPUT TYPE='text' NAME='cherche_auteur' onClick=\"setvisibility('valider_ajouter_auteur','visible');\" CLASS='fondl' VALUE='' SIZE='20'>";
 			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
 			echo " <INPUT TYPE='submit' NAME='Chercher' VALUE='"._T('bouton_chercher')."' CLASS='fondo'>";
@@ -1157,9 +1128,6 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 		} else {
 			echo "<INPUT TYPE='Hidden' NAME='ajout_auteur' VALUE='oui'>";
 			echo "<SELECT NAME='nouv_auteur' SIZE='1' STYLE='width:150px;' CLASS='fondl' onChange=\"setvisibility('valider_ajouter_auteur','visible');\">";
-			$group = false;
-			$group2 = false;
-
 			while ($row = spip_fetch_array($result)) {
 				$id_auteur = $row["id_auteur"];
 				$nom = $row["nom"];
@@ -1187,16 +1155,16 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 				  echo "\n<OPTION VALUE=\"x\">";
 				}
 
-				$texte_option = supprimer_tags(couper(typo("$nom$email"), 40));
-				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;$texte_option";
+				
+				echo "\n<OPTION VALUE=\"$id_auteur\">&nbsp;&nbsp;&nbsp;&nbsp;", supprimer_tags(couper(typo("$nom$email"), 40));
 				$statut_old = $statut;
 				$premiere_old = $premiere;
 			}
 			
-			echo "</SELECT>";
-			echo "<span  class='visible_au_chargement' id='valider_ajouter_auteur'>";
-			echo " <INPUT TYPE='submit' NAME='Ajouter' VALUE="._T('bouton_ajouter')." CLASS='fondo'>";
-			echo "</span>";
+			echo "</SELECT>",
+				"<span  class='visible_au_chargement' id='valider_ajouter_auteur'>",
+				" <input type='submit' value="._T('bouton_ajouter')." CLASS='fondo'>",
+				"</span>";
 		}
 		echo "</div></FORM>";
 	}
@@ -1387,8 +1355,7 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 
 function inclus_non_articles($id_article)
 {
-$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document";
-$result = spip_query($query);
+  $result = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document");
 
 while($row=spip_fetch_array($result)){
 	$ze_doc[]=$row['id_document'];
@@ -1409,19 +1376,16 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
 		include_spip('inc/revisions');
 		if  ($new != 'oui') {
-			$query = "SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1";
-			if (!spip_num_rows(spip_query($query))) {
-				spip_log("version initiale de l'article $id_article");
+			$query = spip_query("SELECT id_article FROM spip_versions WHERE id_article=$id_article LIMIT 1");
+			if (!spip_num_rows($query)) {
 				$select = join(", ", array_keys($champs));
-				$query = "SELECT $select FROM spip_articles WHERE id_article=$id_article";
-				$champs_originaux = spip_fetch_array(spip_query($query));
+				$query = spip_query("SELECT $select FROM spip_articles WHERE id_article=$id_article");
+				$champs_originaux = spip_fetch_array($query);
 				$id_version = ajouter_version($id_article, $champs_originaux, _T('version_initiale'), 0);
 
 				// Remettre une date un peu ancienne pour la version initiale 
 				if ($id_version == 1) // test inutile ?
-				spip_query("UPDATE spip_versions
-				SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR)
-				WHERE id_article=$id_article AND id_version=1");
+				spip_query("UPDATE spip_versions SET date=DATE_SUB(NOW(), INTERVAL 2 HOUR) WHERE id_article=$id_article AND id_version=1");
 			}
 		}
 	}
@@ -1504,6 +1468,7 @@ function exec_articles_dist()
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
  $id_parent = intval($id_parent);
+ $nouv_auteur = intval($nouv_auteur);
  if (!($id_article=intval($id_article))) {
    $id_article = insert_article($id_parent, $new);
    add_auteur_article($id_article, $connect_id_auteur);
