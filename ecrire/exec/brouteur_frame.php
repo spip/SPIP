@@ -38,8 +38,7 @@ function exec_brouteur_frame_dist()
 
 
 	if ($special == "redac") {
-		$query = "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
-		$result=spip_query($query);
+		$result=spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC");
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_cours_edition")."</b></div>";
 			echo "<div class='plan-articles'>";
@@ -55,8 +54,7 @@ function exec_brouteur_frame_dist()
 	
 	}
 	else if ($special == "valider") {
-		$query = "SELECT articles.id_article, article.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC";
-		$result=spip_query($query);
+		$result=spip_query("SELECT articles.id_article, article.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC");
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T("info_articles_proposes")."</b></div>";
 			echo "<div class='plan-articles'>";
@@ -70,8 +68,7 @@ function exec_brouteur_frame_dist()
 			echo "</div>";
 		}
 	
-		$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20";
-		$result=spip_query($query);
+		$result=spip_query("SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20");
 		if (spip_num_rows($result)>0) {
 			echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T("info_breves_valider")."</b></div>";
 			echo "<div class='plan-articles'>";
@@ -88,8 +85,7 @@ function exec_brouteur_frame_dist()
 	else {
 	  if ($id_rubrique !== "") {
 
-		$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre";
-		$result=spip_query($query);
+		$result=spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique' ORDER BY 0+titre, titre");
 		if ($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
 			$titre = typo($row['titre']);
@@ -108,8 +104,7 @@ function exec_brouteur_frame_dist()
 		}
 
 
-		$query = "SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre";
-		$result=spip_query($query);
+		$result=spip_query("SELECT * FROM spip_rubriques WHERE id_parent='$id_rubrique' ORDER BY 0+titre, titre");
 		while($row=spip_fetch_array($result)){
 			$ze_rubrique=$row['id_rubrique'];
 			$titre = typo($row['titre']);
@@ -138,9 +133,9 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 
 	
 		if ($id_rubrique > 0) {
-			if ($connect_statut == "0minirezo") $query = "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC";
-			else $query = "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC";
-			$result=spip_query($query);
+			if ($connect_statut == "0minirezo") $result=spip_query( "SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE id_rubrique=$id_rubrique ORDER BY date DESC");
+			else $result=spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_rubrique=$id_rubrique AND (articles.statut = 'publie' OR articles.statut = 'prop' OR (articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur)) GROUP BY id_article ORDER BY articles.date DESC");
+
 			if (spip_num_rows($result)>0) {
 				echo "<div style='padding-top: 6px; padding-bottom: 3px;'><b class='verdana2'>"._T('info_articles')."</b></div>";
 				echo "<div class='plan-articles'>";
@@ -154,8 +149,7 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 				echo "</div>";
 			}
 	
-			$query = "SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT  20";
-			$result=spip_query($query);
+			$result=spip_query("SELECT * FROM spip_breves WHERE id_rubrique=$id_rubrique ORDER BY date_heure DESC LIMIT  20");
 			if (spip_num_rows($result)>0) {
 				echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T('info_breves_02')."</b></div>";
 				echo "<div class='plan-articles'>";
@@ -173,8 +167,7 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 
 
 	
-			$query = "SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' ORDER BY nom_site";
-			$result=spip_query($query);
+			$result=spip_query("SELECT * FROM spip_syndic WHERE id_rubrique='$id_rubrique' AND statut!='refuse' ORDER BY nom_site");
 			if (spip_num_rows($result)>0) {
 				echo "<div style='padding-top: 6px;'><b class='verdana2'>"._T('icone_sites_references')."</b></div>";
 				while($row=spip_fetch_array($result)){
@@ -189,20 +182,17 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 		// en dernière colonnes, afficher articles et breves
 		if ($frame == 0 AND $id_rubrique==0) {
 
-			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC";
-			$result=spip_query($query);
+			$result=spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC");
 			if (spip_num_rows($result)>0) {
 			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
 			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",($frame+1),"'>",
 			    _T("info_cours_edition"),"</a></b></div>";
 			}
 			
-			$query = "SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC";
-			$result = spip_query($query);
+			$result = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC");
 			$total_articles = spip_num_rows($result);
 			
-			$query = "SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20";
-			$result=spip_query($query);
+			$result=spip_query("SELECT * FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20");
 			$total_breves = spip_num_rows($result);
 			
 			if ($total_articles + $total_breves > 0)
