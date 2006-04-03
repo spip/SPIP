@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/acces');
 include_spip('inc/filtres');
+include_spip('base/abstract_sql');
 
 function xml_fetch_tag($f, &$before, $gz=false) {
 	global $buf, $pos, $abs_pos;
@@ -150,8 +151,8 @@ function import_objet_1_2($f, $gz=false) {
 	}
 
 	$table = $tables[$type];
-	$query = "REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')';
-	if (!spip_query($query)) {
+	
+	if (!spip_query("REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')')) {
 		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
 		$GLOBALS['erreur_restauration'] = true;
 	}
@@ -188,8 +189,7 @@ function import_objet_1_2($f, $gz=false) {
 				else $table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
 			else
 				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
-			$query = "INSERT INTO $table_lien ($id, id_$type_lien) VALUES ".join(',', $t);
-			spip_query($query);
+			spip_abstract_insert($table_lien, "($id, id_$type_lien)", join(',', $t));
 		}
 	}
 
@@ -243,64 +243,56 @@ function import_objet_0_0($f, $gz=false) {
 
 	$table = "spip_$type";
 	if ($type != 'forum' AND $type != 'syndic') $table .= 's';
-	$query = "REPLACE $table (" . join(",", $cols) . ") VALUES (" . join(",", $values) . ")";
-	spip_query($query);
+	spip_query("REPLACE $table (" . join(",", $cols) . ") VALUES (" . join(",", $values) . ")");
 
 	if ($is_art && $id_article) {
-		$query = "DELETE FROM spip_auteurs_articles WHERE id_article=$id_article";
-		spip_query($query);
+		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_article");
 		if ($auteurs) {
 			reset ($auteurs);
 			while (list(, $auteur) = each($auteurs)) {
-				$query = "INSERT INTO spip_auteurs_articles (id_auteur, id_article) VALUES ($auteur, $id_article)";
-				spip_query($query);
+			  spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($auteur, $id_article)");
 			}
 		}
 	}
 	if ($is_mot && $id_mot) {
-		$query = "DELETE FROM spip_mots_articles WHERE id_mot=$id_mot";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_breves WHERE id_mot=$id_mot";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_forum WHERE id_mot=$id_mot";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot";
-		spip_query($query);
-		$query = "DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot";
-		spip_query($query);
+		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot");
+		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_mot");
+		spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot");
+		spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot");
+		spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot");
 		if ($articles) {
 			reset ($articles);
 			while (list(, $article) = each($articles)) {
-				$query = "INSERT INTO spip_mots_articles (id_mot, id_article) VALUES ($id_mot, $article)";
-				spip_query($query);
+				
+			  spip_abstract_insert("spip_mots_articles", "(id_mot, id_article)", "($id_mot, $article)");
 			}
 		}
 		if ($breves) {
 			reset ($breves);
 			while (list(, $breve) = each($breves)) {
-				$query = "INSERT INTO spip_mots_breves (id_mot, id_breve) VALUES ($id_mot, $breve)";
-				spip_query($query);
+				
+			  spip_abstract_insert("spip_mots_breves", "(id_mot, id_breve)", "($id_mot, $breve)");
 			}
 		}
 		if ($forums) {
 			reset ($forums);
 			while (list(, $forum) = each($forums)) {
-				$query = "INSERT INTO spip_mots_forum (id_mot, id_forum) VALUES ($id_mot, $forum)";
-				spip_query($query);
+				
+			  spip_abstract_insert("spip_mots_forum", "(id_mot, id_forum)", "($id_mot, $forum)");
 			}
 		}
 		if ($rubriques) {
 			reset ($rubriques);
 			while (list(, $rubrique) = each($rubriques)) {
-				$query = "INSERT INTO spip_mots_rubriques (id_mot, id_rubrique) VALUES ($id_mot, $id_rubrique)";
-				spip_query($query);
+				
+			  spip_abstract_insert("spip_mots_rubriques", "(id_mot, id_rubrique)", "($id_mot, $id_rubrique)");
 			}
 		}
 		if ($syndics) {
 			reset ($syndics);
 			while (list(, $syndic) = each($syndics)) {
-				$query = "INSERT INTO spip_mots_syndic (id_mot, id_syndic) VALUES ($id_mot, $syndic)";
-				spip_query($query);
+				
+			  spip_abstract_insert("spip_mots_syndic", "(id_mot, id_syndic)", "($id_mot, $syndic)");
 			}
 		}
 	}
@@ -350,8 +342,7 @@ function import_tables($f, $tables, $gz=false) {
 	include_spip('inc/meta');
 	lire_metas();
 
-	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d
-		FROM spip_meta WHERE nom='debut_restauration'");
+	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'");
 	list($my_date) = spip_fetch_array($s);
 
 	if (!$my_date) {
@@ -371,8 +362,8 @@ function import_tables($f, $tables, $gz=false) {
 		}
 		else {
 			// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-			$query = "UPDATE spip_auteurs SET id_auteur=0 WHERE id_auteur=$connect_id_auteur";
-			spip_query($query);
+			if (in_array('spip_auteurs', $tables))
+				spip_query("UPDATE spip_auteurs SET id_auteur=0 WHERE id_auteur=$connect_id_auteur");
 
 			$version_archive = $r[1]['version_archive'];
 			ecrire_meta('version_archive_restauration', $version_archive);
