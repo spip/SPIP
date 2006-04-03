@@ -70,9 +70,13 @@ if ($new=='oui') {
 	}
 
 	if ($type != "affich"){
-		spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$connect_id_auteur','$id_message','oui')");
+		spip_abstract_insert('spip_auteurs_messages',
+			"(id_auteur,id_message,vu)",
+			"('$connect_id_auteur','$id_message','oui')");
 		if ($dest) {
-			spip_query("INSERT INTO spip_auteurs_messages (id_auteur,id_message,vu) VALUES ('$dest','$id_message','non')");
+			spip_abstract_insert('spip_auteurs_messages',
+				"(id_auteur,id_message,vu)",
+				"('$dest','$id_message','non')");
 		}
 		else if ($type == 'normal') $ajouter_auteur = true;
 	}
@@ -131,8 +135,14 @@ debut_droite();
 	if ($ajouter_auteur) {
 		echo "</p><p><b>"._T('info_nom_destinataire')."</b><br />";
 		echo "<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
+	} else if ($dest) {
+		list($nom) = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
+		echo "</p><p><b>",
+		  _T('info_nom_destinataire'),
+		  "</b>&nbsp;:&nbsp;&nbsp; ",
+		  $nom,
+		  "<br /><br />";
 	}
-
 	echo "<p />";
 
 
