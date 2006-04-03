@@ -91,14 +91,14 @@ function aide($aide='') {
 }
 
 //
-// Mention, le cas echeant, de la revision SVN courante
-// (adressage bizarre pour que ca fonctionne en cas de mutualisation de code)
-function version_svn_courante() {
-	if (lire_fichier(_DIR_INCLUDE.'.svn/entries', $c1)
-	AND lire_fichier(_DIR_INCLUDE.'../.svn/entries', $c2)
-	AND preg_match_all(',committed-rev="([0-9]+)",', "$c1$c2",
-	$r, PREG_PATTERN_ORDER))
-		return max($r[1]);
+// Mention de la revision SVN courante de l'espace restreint standard
+// (numero non garanti pour l'espace public et en cas de mutualisation)
+function version_svn_courante($dir) {
+	if (!$dir) $dir = '.';
+	if (!lire_fichier($dir . '/.svn/entries', $c)) return 0;
+	preg_match_all(',committed-rev="([0-9]+)",', $c, $r1, PREG_PATTERN_ORDER);
+	preg_match_all(',name="([^"]+)[^>]*kind="dir",',$c, $r2, PREG_PATTERN_ORDER);
+	return max(max($r1[1]), @max(array_map('version_svn_courante', $r2[1])));
 }
 
 function info_copyright() {
@@ -109,7 +109,7 @@ function info_copyright() {
 	//
 	// Mention, le cas echeant, de la revision SVN courante
 	//
-	if ($svn_revision = version_svn_courante())
+	if ($svn_revision = version_svn_courante(_DIR_INCLUDE))
 		$version .= " SVN [<a href='http://trac.rezo.net/trac/spip/changeset/$svn_revision' target='_blank'>$svn_revision</a>]";
 
 	echo _T('info_copyright', 
