@@ -23,13 +23,14 @@ include_spip('base/abstract_sql');
 
 function exec_sites_dist()
 {
-global 
+  global   $connect_statut,   $options,   $spip_lang_left,  $spip_lang_right;
+
+  global
   $analyser_site,
   $ajouter_lien,
   $annee,
   $champs_extra,
   $cherche_mot,
-  $connect_statut,
   $descriptif,
   $id_parent,
   $id_syndic,
@@ -43,14 +44,11 @@ global
   $nouv_mot,
   $nouveau_statut,
   $old_syndic,
-  $options,
   $oubli,
   $redirect,
   $redirect_ok,
   $reload,
   $resume,
-  $spip_lang_left,
-  $spip_lang_right,
   $supp_mot,
   $supprimer_lien,
   $syndication,
@@ -362,7 +360,7 @@ if ($flag_editable AND ($options == 'avancees' OR $statut == 'publie')) {
 
 
 		debut_cadre_enfonce();
-		echo afficher_formulaire_date("sites", "id_syndic=$id_syndic&options=$options", _T('info_date_referencement'), $jour, $mois, $annee);
+		echo afficher_formulaire_date("sites", "id_syndic=$id_syndic", _T('info_date_referencement'), $jour, $mois, $annee);
 		fin_cadre_enfonce();	
 	}
 	else {
@@ -378,7 +376,7 @@ if ($flag_editable AND $options == 'avancees') {
 if ($flag_administrable) {
 	debut_cadre_relief("racine-site-24.gif");
 
-	echo generer_url_post_ecrire('sites', "id_syndic=$id_syndic&$id_parent=$id_rubrique"),
+	echo generer_url_post_ecrire('sites', "id_syndic=$id_syndic&id_parent=$id_rubrique"),
 	  "\n<center><b>",
 	  _T('info_statut_site_1'),
 	  "</b> &nbsp;&nbsp; \n",
