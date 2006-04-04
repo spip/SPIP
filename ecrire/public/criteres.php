@@ -596,7 +596,7 @@ function calculer_critere_externe_init(&$boucle, $col, $desc, $crit)
 // deduction automatique des jointures 
 // une jointure sur une table avec primary key doit se faire sur celle-ci. 
 
-function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond)
+function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 {
   static $num=array();
   $res = calculer_chaine_jointures($boucle, $depart, $arrivee);
