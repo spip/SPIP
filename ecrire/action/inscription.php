@@ -11,7 +11,7 @@
 \***************************************************************************/
 
 include_spip('balise/formulaire_inscription');
-include_spip('public/global'); 
+include_spip('public/assembler'); 
 include_spip('inc/lang');
 include_spip('inc/headers');
 
