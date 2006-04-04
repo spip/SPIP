@@ -13,16 +13,16 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/presentation');
+include_spip('inc/message_select');
 
 function exec_messagerie_dist()
 {
 
   global $connect_id_auteur, $connect_statut, $couleur_claire, $spip_lang_rtl;
-  global $detruire_message, $id_message, $supp_dest;
 
-  $id_message = intval($id_message);
-  $detruire_message = intval($detruire_message);
-  $supp_dest = intval($supp_dest);
+  $id_message = intval(_request('id_message'));
+  $detruire_message = intval(_request('detruire_message'));
+  $supp_dest = intval(_request('supp_dest'));
 
   if ($supp_dest) {
 	spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_message AND id_auteur=$supp_dest");
@@ -53,10 +53,7 @@ echo aide ("messpense");
 
 echo "<p>".http_img_pack("m_envoi_jaune$spip_lang_rtl.gif", 'J', "WIDTH='14' HEIGHT='7' BORDER='0'") .' ' . _T('info_symbole_jaune');
 
-
-
 fin_boite_info();
-
 
 creer_colonne_droite();
 
@@ -72,7 +69,7 @@ fin_cadre_relief();
 
 # Affiche l'encadre "lien iCal"
 
-echo
+ echo
     debut_cadre_enfonce('',true) .
     "<div class='verdana1'>"._T("calendrier_synchro") .
     "<a href='" . generer_url_ecrire("synchro","") . "' class='cellule-h'><table cellpadding='0' valign='middle'><tr>\n" .
@@ -85,26 +82,26 @@ echo
     fin_cadre_enfonce(true);
 
 
-debut_droite("messagerie");
+ debut_droite("messagerie");
 
 
-$messages_vus = '';
+ $messages_vus = array();
 
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
-afficher_messages(_T('infos_vos_pense_bete'), $query_message, false, true);
+ afficher_messages(_T('infos_vos_pense_bete'), $query_message, $messages_vus, false, true);
 
 
 $query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
 	"WHERE lien.id_auteur=$connect_id_auteur AND vu='non' ".
 	"AND statut='publie' AND lien.id_message=messages.id_message";
-afficher_messages(_T('info_nouveaux_message'), $query_message, true, true);
+afficher_messages(_T('info_nouveaux_message'), $query_message, $messages_vus,  true, true);
 
 
 $query_message = "SELECT * FROM spip_messages AS messages, spip_auteurs_messages AS lien ".
 	"WHERE lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message ".
 	"AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
-afficher_messages(_T('info_discussion_cours'), $query_message, true, false);
+afficher_messages(_T('info_discussion_cours'), $query_message,  $messages_vus, true, false);
 
 
 // Afficher le lien RSS
@@ -121,10 +118,8 @@ echo "<div style='text-align: "
 
 
 
-
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='redac'";
-afficher_messages(_T('info_message_en_redaction'), $query_message, true, false, false);
-
+afficher_messages(_T('info_message_en_redaction'), $query_message,  $messages_vus, true, false, false);
 
 
 $query = "SELECT auteurs.id_auteur, auteurs.nom, COUNT(*) AS total FROM spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien ".
@@ -162,11 +157,10 @@ if (spip_num_rows($result) > 0) {
 }
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'";
-afficher_messages(_T('info_pense_bete_ancien'), $query_message, false, false, false);
-
+afficher_messages(_T('info_pense_bete_ancien'), $query_message,  $messages_vus, false, false, false);
 
 $query_message = "SELECT * FROM spip_messages AS messages WHERE statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')";
-afficher_messages(_T('info_tous_redacteurs'), $query_message, false, false, false);
+afficher_messages(_T('info_tous_redacteurs'), $query_message,  $messages_vus, false, false, false);
 
 fin_page();
 
