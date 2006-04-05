@@ -63,11 +63,11 @@ function generer_url_ecrire_auteur($id_auteur, $statut='') {
 	else	return generer_url_ecrire('auteurs_edit',$args);
 }
 
-function generer_url_ecrire_forum($id_forum) {
+function generer_url_ecrire_forum($id_forum, $statut='') {
 	return generer_url_action('redirect', "id_forum=$id_forum");
 }
 
-function generer_url_ecrire_document($id_document) {
+function generer_url_ecrire_document($id_document, $statut='') {
 	if (intval($id_document) <= 0) 
 		return '';
 	if ($row = @spip_fetch_array(spip_query("SELECT fichier,distant
@@ -91,14 +91,29 @@ function generer_url_ecrire_statistiques($id_article) {
 // des URL publiques vers les URL privees en cas d'item non publies 
 
 if (!function_exists('generer_url_article')) {
-	$generer_url_article = 'generer_url_ecrire_article';
-	$generer_url_rubrique = 'generer_url_ecrire_rubrique';
-	$generer_url_breve = 'generer_url_ecrire_breve';
-	$generer_url_mot = 'generer_url_ecrire_mot';
-	$generer_url_site = 'generer_url_ecrire_site';
-	$generer_url_auteur = 'generer_url_ecrire_auteur';
-	$generer_url_forum = 'generer_url_ecrire_forum';
-	$generer_url_document = 'generer_url_ecrire_document';
+	function generer_url_article($id, $stat='')
+		{ return generer_url_ecrire_article($id, $stat);}
+
+	function generer_url_rubrique($id, $stat='')
+		{ return generer_url_ecrire_rubrique($id, $stat);}
+
+	function generer_url_breve($id, $stat='')
+		{ return generer_url_ecrire_breve($id, $stat);}
+
+	function generer_url_mot($id, $stat='')
+		{ return generer_url_ecrire_mot($id, $stat);}
+
+	function generer_url_site($id, $stat='')
+		{ return generer_url_ecrire_site($id, $stat);}
+
+	function generer_url_auteur($id, $stat='')
+		{ return generer_url_ecrire_auteur($id, $stat);}
+
+	function generer_url_forum($id, $stat='')
+		{ return generer_url_ecrire_forum($id, $stat);}
+
+	function generer_url_document($id, $stat='')
+		{ return generer_url_ecrire_document($id, $stat);}
  }
 
 ?>
