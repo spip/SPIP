@@ -178,6 +178,13 @@ function http_href_img($href, $img, $att, $title='', $style='', $class='', $evt=
 	return  http_href($href, http_img_pack($img, $title, $att), $title, $style, $class, $evt);
 }
 
+
+function http_style_background($img, $att='')
+{
+  return " style='background: url(\"" . _DIR_IMG_PACK . $img .  '")' .
+    ($att ? (' ' . $att) : '') . ";'";
+}
+
 // Pour les formulaires en methode POST,
 // mettre les arguments a la fois en input-hidden et dans le champ action:
 // 1) on peut ainsi memoriser le signet comme si c'etait un GET
