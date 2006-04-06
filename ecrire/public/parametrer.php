@@ -149,11 +149,11 @@ function sql_rubrique_fond($contexte) {
 # retourne le chapeau d'un article, et seulement s'il est publie
 
 function sql_chapo($id_article) {
-	if ($id_article)
-	return spip_abstract_fetsel(array('chapo'),
+	list ($chapo)= spip_abstract_fetsel(array('chapo'),
 		array('spip_articles'),
 		array("id_article=".intval($id_article),
 		"statut='publie'"));
+	return $chapo;
 }
 
 # retourne le parent d'une rubrique
@@ -277,8 +277,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 
 	if ($fond == 'article'
 	AND $id_article = intval($local['id_article'])) {
-		if ($art = sql_chapo($id_article)) {
-			$chapo = $art['chapo'];
+		if ($chapo = sql_chapo($id_article)) {
 			if (substr($chapo, 0, 1) == '=') {
 				include_spip('inc/texte');
 				list(,$url) = extraire_lien(array('','','',
