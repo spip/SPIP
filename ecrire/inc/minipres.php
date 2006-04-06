@@ -121,7 +121,7 @@ function info_copyright() {
 
 // normalement il faudrait definir inc_info.php, mais pour mettre juste ca:
 
-function info_dist() {
+function exec_info_dist() {
 	global $connect_statut;
 	if ($connect_statut == '0minirezo') phpinfo();
 }
