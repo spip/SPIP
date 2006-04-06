@@ -98,8 +98,6 @@ function changer_langue($lang) {
 // Regler la langue courante selon les infos envoyees par le brouteur
 //
 function regler_langue_navigateur() {
-	global $_SERVER, $_COOKIE;
-
 	$accept_langs = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 	if (is_array($accept_langs)) {
 		while(list(, $s) = each($accept_langs)) {

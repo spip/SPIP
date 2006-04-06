@@ -2472,9 +2472,25 @@ function image_typo() {
 
 }
 
+//
+// Quelques fonctions de calcul arithmetique
+//
+function plus($a,$b) {
+	return $a+$b;
+}
+function moins($a,$b) {
+	return $a-$b;
+}
+function mult($a,$b) {
+	return $a*$b;
+}
+function div($a,$b) {
+	return $b?$a/$b:0;
+}
 function modulo($nb, $mod, $add=0) {
 	return ($nb%$mod)+$add;
 }
+
 
 // Verifier la conformite d'une ou plusieurs adresses email
 //  retourne false ou la  normalisation de la derniere adresse donnee
