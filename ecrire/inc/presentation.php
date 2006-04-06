@@ -34,16 +34,14 @@ function bouton_imessage($destinataire, $row = '') {
 	// si on passe "force" au lieu de $row, on affiche l'icone sans verification
 	global $connect_id_auteur;
 	global $spip_lang_rtl;
-	global $couche_invisible;
-	$couche_invisible ++;
 
 	// verifier que ce n'est pas un auto-message
 	if ($destinataire == $connect_id_auteur)
 		return;
 	// verifier que le destinataire a un login
 	if ($row != "force") {
-		$login_req = "select login, messagerie from spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)";
-		$row = spip_fetch_array(spip_query($login_req));
+		$login_req = spip_query("SELECT login, messagerie FROM spip_auteurs where id_auteur=$destinataire AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 DAY)");
+		$row = spip_fetch_array($login_req);
 
 		if (($row['login'] == "") OR ($row['messagerie'] == "non")) {
 			return;
@@ -813,10 +811,8 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 			if ($afficher_auteurs) {
 				$les_auteurs = "";
-				$query2 = "SELECT auteurs.id_auteur, nom, messagerie, login, bio ".
-					"FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien ".
-					"WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur";
-				$result_auteurs = spip_query($query2);
+				$result_auteurs = spip_query("SELECT auteurs.id_auteur, nom, messagerie, login, bio FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
+
 
 				while ($row = spip_fetch_array($result_auteurs)) {
 					$id_auteur = $row['id_auteur'];
@@ -1531,8 +1527,7 @@ function afficher_forum_logo($statut, $titre_boite)
 
 function afficher_forum_mots($id_forum)
 {
-	$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
-	$result_mots = spip_query($query_mots);
+	$result_mots = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
 
 	echo '<ul>';
 	while ($row_mots = spip_fetch_array($result_mots)) {
@@ -2368,8 +2363,7 @@ if (true /*$gadgets*/) {
 		}
 
 
-		$query = "SELECT id_rubrique FROM spip_rubriques LIMIT 1";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_rubrique FROM spip_rubriques LIMIT 1");
 		
 		if (spip_num_rows($result) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
@@ -2592,8 +2586,8 @@ function debut_corps_page() {
 	}
 	
 			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
-				$query2 = "SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)";
-				$result_auteurs = spip_query($query2);
+				$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
+
 				$nb_connectes = spip_num_rows($result_auteurs);
 			}
 				
@@ -2710,12 +2704,6 @@ function debut_gauche($rubrique = "asuivre") {
 
 function creer_colonne_droite($rubrique=""){
 	global $deja_colonne_droite;
-	global $changer_config;
-	global $activer_imessage;
-	global $connect_activer_imessage;
-	global $connect_statut;
-	global $options;
-	global $connect_id_auteur, $spip_ecran;
 	global $flag_3_colonnes, $flag_centre_large;
 	global $spip_lang_rtl, $spip_lang_left;
 
@@ -2754,8 +2742,7 @@ function debut_droite($rubrique="") {
 	if ($options == "avancees") {
 		// liste des articles bloques
 		if ($GLOBALS['meta']["articles_modif"] != "non") {
-			$query = "SELECT id_article, titre, id_rubrique FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC";
-			$result = spip_query($query);
+			$result = spip_query("SELECT id_article, titre, id_rubrique FROM spip_articles WHERE auteur_modif = '$connect_id_auteur' AND date_modif > DATE_SUB(NOW(), INTERVAL 1 HOUR) ORDER BY date_modif DESC");
 			$num_articles_ouverts = spip_num_rows($result);
 			if ($num_articles_ouverts) {
 				echo "<p>";
@@ -2888,8 +2875,7 @@ function afficher_hierarchie($id_rubrique, $parents="") {
 	global $spip_lang_left;
 
 	if ($id_rubrique) {
-		$query = "SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_rubrique, id_parent, titre, lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique");
 
 		while ($row = spip_fetch_array($result)) {
 			$id_rubrique = $row['id_rubrique'];
