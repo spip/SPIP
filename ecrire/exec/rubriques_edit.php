@@ -41,8 +41,7 @@ if ($new == "oui") {
 }
 else {
 	$id_rubrique = intval($id_rubrique);
-	$query = "SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
 	while ($row = spip_fetch_array($result)) {
 		$id_parent = $row['id_parent'];
 		$titre = $row['titre'];
@@ -60,15 +59,11 @@ else $ze_logo = "rubrique-24.gif";
 
 if ($id_parent == 0) $logo_parent = "racine-site-24.gif";
 else {
-	$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_parent'";
- 	$result=spip_query($query);
-	while($row=spip_fetch_array($result)){
-		$parent_parent=$row['id_parent'];
-	}
-	if ($parent_parent == 0) $logo_parent = "secteur-24.gif";
-	else $logo_parent = "rubrique-24.gif";
+	list($id_secteur) = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique='$id_parent'"));
+	if ($id_parent_== $id_secteur)
+		$logo_parent = "secteur-24.gif";
+	else	$logo_parent = "rubrique-24.gif";
 }
-
 
 
 debut_grand_cadre();
@@ -119,9 +114,8 @@ echo selecteur_rubrique($id_parent, 'rubrique', $restreint, $id_rubrique);
 
 // si c'est une rubrique-secteur contenant des breves, demander la
 // confirmation du deplacement
-$query = "SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique'";
-$row = spip_fetch_array(spip_query($query));
-$contient_breves = $row['cnt'];
+ list($contient_breves) = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1"));
+
 if ($contient_breves > 0) {
 	$scb = ($contient_breves>1? 's':'');
 	echo "<div><font size='2'><input type='checkbox' name='confirme_deplace'
@@ -162,8 +156,8 @@ echo "</TEXTAREA>\n";
 		extra_saisie($extra, 'rubriques', $id_secteur);
 	}
 
-echo "<input type='hidden' name='action' value='",
-	  (($new == "oui") ? 'creer' : 'modifier'),
+echo "<input type='hidden' name='new' value='",
+	  (($new == "oui") ? 'oui' : 'non'),
 	  "' />";
 
 echo "\n<p align='right'><input type='submit' value='"._T('bouton_enregistrer')."' CLASS='fondo' />\n</p></form>";
