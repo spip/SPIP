@@ -60,34 +60,59 @@ function index_pile($idb, $nom_champ, &$boucles, $explicite='') {
 	return('$Pile[0][\''. strtolower($nom_champ) . '\']');
 }
 
-function index_tables_en_pile($idb, $nom_champ, &$boucles)
-{
-	global $exceptions_des_tables, $table_des_tables, $tables_des_serveurs_sql;
-	$r = $boucles[$idb]->type_requete;
-	$s = $boucles[$idb]->sql_serveur;
+/**
+ * de'termine le nom de la table associe'e a un type de boucle
+ * $r est le type de boucle et $s le serveur (issus de la structure boucles)
+ * retourne un tableau de deux entre'es : le nom reel de la table et celui
+ * sans le prefixe des tables spip (identiques pour les tables non-spip)
+ */
+function table_de_type_requete($r, $s) {
+	global $table_des_tables;
+
 	if (!$s) 
 		{ $s = 'localhost';
     // indirection (pour les rares cas ou le nom de la table!=type)
 		    $t = $table_des_tables[$r];
 		  }
 		// pour les tables non Spip
-	if (!$t) {$nom_table = $t = $r; } else $nom_table = 'spip_' . $t;
+	if (!$t)
+	  return array($r, $r);
+	else
+	  return array('spip_' . $t, $t);
+}
+
+/** retourne la description d'une table, telle qu'elle se pre'sente
+ * dans serial.php, ou de'termine'e automatiquement
+ * $nom_table et $t sont le nom de la table prefixe'e ou pas
+ * $s est le nom du serveur
+ */
+function description_table($nom_table, $t, $s) {
+	global $table_des_tables, $tables_des_serveurs_sql;
 
 	$desc = $tables_des_serveurs_sql[$s][$nom_table];
-#		spip_log("Go: idb='$idb' r='$r' nom='$nom_champ' s=$s t=$t desc=" . array_keys($desc));
 
 	if (!isset($desc['field'])) {
 		$desc = $table_des_tables[$r] ?  (($GLOBALS['table_prefix'] ? $GLOBALS['table_prefix'] : 'spip') . '_' . $t) : $nom_table;
 
-		$desc = spip_abstract_showtable($desc, $boucles[$idb]->sql_serveur);
+		$desc = spip_abstract_showtable($desc, $s);
 		if (!isset($desc['field'])) {
-			erreur_squelette(_T('zbug_table_inconnue', array('table' => $r)),
-					   "'$idb'");
+			erreur_squelette(_T('zbug_table_inconnue', array('table' => $nom_table)));
 # continuer pour chercher l'erreur suivante
-			return  array("'#" . $r . ':' . $nom_champ . "'",'');
+			return  array("'#" . $nom_table . " ?'",'');
 		}
 		$tables_des_serveurs_sql[$s][$nom_table] = $desc;
 	}
+	return $desc;
+}
+
+function index_tables_en_pile($idb, $nom_champ, &$boucles) {
+	global $exceptions_des_tables, $tables_des_serveurs_sql;
+
+	$r = $boucles[$idb]->type_requete;
+	$s = $boucles[$idb]->sql_serveur;
+
+	list($nom_table, $t)= table_de_type_requete($r, $s);
+	$desc= description_table($nom_table, $t, $s);
 	
 	$excep = $exceptions_des_tables[$r][$nom_champ];
 	if ($excep) {
