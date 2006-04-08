@@ -125,7 +125,7 @@ function afficher_sites($titre_table, $requete) {
 		
 		$largeurs = array('','','');
 		$styles = array('arial11', 'arial1', 'arial1');
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 		echo "</table>";
 		//fin_cadre_relief();
 		echo "</div>\n";
@@ -240,8 +240,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 
 			// $my_sites cache les resultats des requetes sur les sites
 			if (!$my_sites[$id_syndic])
-				$my_sites[$id_syndic] = spip_fetch_array(spip_query(
-					"SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
+				$my_sites[$id_syndic] = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE id_syndic=$id_syndic"));
 
 			if ($afficher_site) {
 				$aff = $my_sites[$id_syndic]['nom_site'];
@@ -292,7 +291,7 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			$styles[] = 'arial1';
 		}
 		
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		echo "</TABLE>";
 		//fin_cadre_relief();

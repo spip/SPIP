@@ -190,7 +190,7 @@ function exec_admin_plugin_dist(){
 
 	$largeurs = array('','15px','20px','120px');
 	$styles = array('arial11', 'arial1','arial1', 'arial1');
-	afficher_liste($largeurs, $tableau, $styles);
+	echo afficher_liste($largeurs, $tableau, $styles);
 	echo "</table>";
 	echo "</div>\n";
 	

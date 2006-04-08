@@ -402,17 +402,16 @@ function afficher_plus($lien) {
 //
 
 function afficher_liste($largeurs, $table, $styles = '') {
-	global $browser_name;
-	global $spip_display;
-	global $spip_lang_left;
+	global $browser_name, $spip_display, $spip_lang_left;
 
-	if (!is_array($table)) return;
+	if (!is_array($table)) return "";
 	reset($table);
-	echo "\n";
 	if ($spip_display != 4) {
+		$res = '';
 		while (list(, $t) = each($table)) {
-			if (eregi("msie", $browser_name)) $msover = " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"";
-			echo "<tr class='tr_liste'$msover>";
+			$res .= "\n<tr class='tr_liste'" .
+			  (eregi("msie", $browser_name) ? " onMouseOver=\"changeclass(this,'tr_liste_over');\" onMouseOut=\"changeclass(this,'tr_liste');\"" :'') .
+			  ">";
 			reset($largeurs);
 			if ($styles) reset($styles);
 			while (list(, $texte) = each($t)) {
@@ -420,17 +419,17 @@ function afficher_liste($largeurs, $table, $styles = '') {
 				list(, $largeur) = each($largeurs);
 				if ($styles) list(, $style) = each($styles);
 				if (!trim($texte)) $texte .= "&nbsp;";
-				echo "<td";
-				if ($largeur) echo " width=\"$largeur\"";
-				if ($style) echo " class=\"$style\"";
-				echo ">$texte</td>";
+				$res .= "<td" .
+				  ($largeur ? " width=\"$largeur\"" : '') .
+				  ($style ? " class=\"$style\"" : '') .
+				  ">$texte</td>";
 			}
-			echo "</tr>\n";
+			$res .= "</tr>\n";
 		}
 	} else {
-		echo "<ul style='text-align: $spip_lang_left;'>";
+	  	$res = "\n<ul style='text-align: $spip_lang_left;'>";
 		while (list(, $t) = each($table)) {
-			echo "<li>";
+			$res .= "<li>";
 			reset($largeurs);
 			if ($styles) reset($styles);
 			while (list(, $texte) = each($t)) {
@@ -438,14 +437,14 @@ function afficher_liste($largeurs, $table, $styles = '') {
 				list(, $largeur) = each($largeurs);
 				
 				if (!$largeur) {
-					echo $texte." ";
+					$res .= $texte." ";
 				}
 			}
-			echo "</li>\n";
+			$res .= "</li>\n";
 		}
-		echo "</ul>";
+		$res .= "</ul>\n";
 	}
-	echo "\n";
+	return $res;
 }
 
 function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascript=false, $nb_aff = 10) {
@@ -887,7 +886,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 				$styles = array('', 'arial2', 'arial1');
 			}
 		}
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		//echo "</table>";
 		echo afficher_liste_fin_tableau();
@@ -1085,7 +1084,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		$largeurs = array(11, 24, '', '1');
 		$styles = array('', 'arial1', 'arial1', '');
 
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		//echo "</table>";
 		echo afficher_liste_fin_tableau();
@@ -1197,7 +1196,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 			$styles = array('','arial11', 'arial1');
 		}
 
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		echo "</table></div>";
 		//fin_cadre_relief();
@@ -1268,7 +1267,7 @@ function afficher_rubriques($titre_table, $requete) {
 
 		$largeurs = array('12','', '');
 		$styles = array('', 'arial2', 'arial11');
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		echo "</TABLE>";
 		//fin_cadre_relief();
@@ -1366,7 +1365,7 @@ function afficher_auteurs ($titre_table, $requete) {
 
 		$largeurs = array('');
 		$styles = array('arial2');
-		afficher_liste($largeurs, $table, $styles);
+		echo afficher_liste($largeurs, $table, $styles);
 
 		if ($titre_table) echo "</TABLE></TD></TR>";
 		echo "</TABLE>";

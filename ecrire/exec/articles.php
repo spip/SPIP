@@ -846,7 +846,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 				$largeurs = array(7, 12, '', 100);
 				$styles = array('', '', 'arial2', 'arial2');
-				afficher_liste($largeurs, $table, $styles);
+				echo afficher_liste($largeurs, $table, $styles);
 
 				echo "</table>";
 				echo "</div>";
@@ -1080,7 +1080,7 @@ function afficher_auteurs_articles($id_article, $flag_editable)
 	
 	$largeurs = array('14', '', '', '', '', '', '');
 	$styles = array('arial11', 'arial2', 'arial11', 'arial11', 'arial11', 'arial11', 'arial1');
-	afficher_liste($largeurs, $table, $styles);
+	echo afficher_liste($largeurs, $table, $styles);
 
 	
 	echo "</table></div>\n";
@@ -1469,6 +1469,7 @@ global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_
 
  $id_parent = intval($id_parent);
  $nouv_auteur = intval($nouv_auteur);
+ $supp_mot = intval($supp_mot);
  if (!($id_article=intval($id_article))) {
    $id_article = insert_article($id_parent, $new);
    add_auteur_article($id_article, $connect_id_auteur);
