@@ -190,8 +190,8 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 	if ($id_article) {
 		$result_auteurs = spip_abstract_select(
 			array('auteurs.id_auteur', 'auteurs.nom'),
-			array('spip_auteurs AS auteurs',
-				'spip_auteurs_articles AS lien'), 
+			array('auteurs' => 'spip_auteurs',
+				'lien' => 'spip_auteurs_articles'), 
 			array("lien.id_article=$id_article",
 				"auteurs.id_auteur=lien.id_auteur"),
 			'',array(),'','','', 
