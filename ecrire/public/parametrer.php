@@ -194,7 +194,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 				'spip_auteurs_articles AS lien'), 
 			array("lien.id_article=$id_article",
 				"auteurs.id_auteur=lien.id_auteur"),
-			'',array(),'','',1, 
+			'',array(),'','','', 
 			$table, $id_boucle, $serveur);
 
 		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {
@@ -215,7 +215,7 @@ function sql_petitions($id_article, $table, $id_boucle, $serveur, &$cache) {
 		array('texte'),
 		array('spip_petitions'),
 		array("id_article=".intval($id_article)),
-		'',array(),'','',1, 
+		'',array(),'','','', 
 		$table, $id_boucle, $serveur);
 
 	if (!$retour) return '';

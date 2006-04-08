@@ -638,7 +638,7 @@ function public_compiler_dist($squelette, $nom, $gram, $sourcefile) {
 			// table non Spip.
 		    $boucles[$id]->id_table = $type;
 		    $serveur = $boucle->sql_serveur;
-		    $x = &$tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];		
+		    $x = $tables_des_serveurs_sql[$serveur ? $serveur : 'localhost'][$type]['key'];		
 		    $boucles[$id]->primary = ($x["PRIMARY KEY"] ? $x["PRIMARY KEY"] : $x["KEY"]);
 		  }
 		  if ($boucle->param) {
