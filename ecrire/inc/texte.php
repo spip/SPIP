@@ -67,7 +67,7 @@ function definir_puce() {
 
 // XHTML - Preserver les balises-bloc
 define('_BALISES_BLOCS',
-	'div|pre|ul|ol|li|blockquote|h[1-5r]|'
+	'div|pre|ul|ol|li|blockquote|h[1-6r]|'
 	.'t(able|[rdh]|body|foot|extarea)|'
 	.'form|object|center|marquee|address|'
 	.'d[ltd]|script|noscript|map|del|ins|button|fieldset');
