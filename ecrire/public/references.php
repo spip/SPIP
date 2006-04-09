@@ -101,7 +101,7 @@ function description_type_requete($type, $serveur) {
 }
 
 function index_tables_en_pile($idb, $nom_champ, &$boucles) {
-	global $exceptions_des_tables;
+	global $exceptions_des_tables, $tables_des_serveurs_sql;
 
 	$r = $boucles[$idb]->type_requete;
 	$s = $boucles[$idb]->sql_serveur;
