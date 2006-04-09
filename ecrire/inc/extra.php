@@ -88,7 +88,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // a partir de la liste des champs, generer la liste des input
 function extra_saisie($extra, $type, $ensemble='') {
-	if ($affiche = extra_form($extra, $type, $ensemble='')) {
+	if ($affiche = extra_form($extra, $type, $ensemble)) {
 		debut_cadre_enfonce();
 		echo $affiche;
 		fin_cadre_enfonce();
