@@ -119,24 +119,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 
 	$excep = $exceptions_des_tables[$r][$nom_champ];
 	if ($excep) {
-		// entite SPIP alias d'un champ SQL
-		if (is_array($excep)) {
-			// et meme d'un champ dans une jointure
-			list($e, $x) = $excep;#PHP4 affecte de gauche a droite
-			$excep = $x;		#PHP5 de droite a gauche !
-			// qu'il faut provoquer si ce n'est fait
-			if (!$t = array_search($e, $boucles[$idb]->from)) {
-				$t = 'J' . count($boucles[$idb]->from);
-				$boucles[$idb]->from[$t] = $e;
-				$j = $tables_des_serveurs_sql[$desc['serveur']][$e]['key']['PRIMARY KEY'];
-				$boucles[$idb]->where[]= $boucles[$idb]->id_table . ".$j=" . $t . ".$j";
-			}
-		}
-		// demander a SQL de gerer le synonyme
-		// ca permet que excep soit dynamique (Cedric, 2/3/06)
-		if ($excep != $nom_champ) $excep .= ' AS '. $nom_champ;
-		return array("$t.$excep", $nom_champ);
-
+	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
 	} else {
 		if ($desc['field'][$nom_champ])
 			return array("$t.$nom_champ", $nom_champ);
@@ -152,6 +135,32 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 		}
 	}
 }
+
+// Reference a une entite SPIP alias d'un champ SQL
+// Ca peut meme etre d'un champ dans une jointure
+// qu'il faut provoquer si ce n'est fait
+
+function index_exception(&$boucle, $desc, $nom_champ, $excep)
+{
+	global $tables_des_serveurs_sql;
+
+	if (is_array($excep)) {
+
+		list($e, $x) = $excep;	#PHP4 affecte de gauche a droite
+		$excep = $x;		#PHP5 de droite a gauche !
+		if (!$t = array_search($e, $boucle->from)) {
+			$t = 'J' . count($boucle->from);
+			$boucle->from[$t] = $e;
+			$j = $tables_des_serveurs_sql[$desc['serveur']][$e]['key']['PRIMARY KEY'];
+			$boucle->where[]= array('=', "'$boucle->id_table." . "$j'", "'$t.$j'");
+			}
+	} else $t = $desc['type'];
+	// demander a SQL de gerer le synonyme
+	// ca permet que excep soit dynamique (Cedric, 2/3/06)
+	if ($excep != $nom_champ) $excep .= ' AS '. $nom_champ;
+	return array("$t.$excep", $nom_champ);
+}
+
 
 // cette fonction sert d'API pour demander le champ '$champ' dans la pile
 function champ_sql($champ, $p) {
@@ -418,6 +427,15 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	$prec = $boucles[$idb]->id_parent;
 	return (($prec==="") ? ('$Pile[$SP][\''.$nom_champ.'\']') : 
 		index_pile($prec, $nom_champ, $boucles));
+}
+
+// Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
+
+function kwote($lisp)
+{
+	return preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r) ? 
+		($r[1] . "'\\'" . addslashes($r[2]) . "\\''") :
+		("'\\'' . addslashes(" . $lisp . ") . '\\''");
 }
 
 //

@@ -265,8 +265,7 @@ function calculer_requete_sql(&$boucle)
 		'"), # SELECT
 		' . calculer_from($boucle) .
 		', # FROM
-		array(' .
-		($boucle->where  ? ('"'. join('", "', $boucle->where) . '"') : '') .
+		array(' . join(",\n\t\t", array_map('calculer_where', $boucle->where)) .
 		'), # WHERE
 		' . calculer_dump_array($boucle->join)
 		. ', # WHERE pour jointure
@@ -299,6 +298,33 @@ function calculer_from(&$boucle)
   $res = "";
   foreach($boucle->from as $k => $v) $res .= ",'$k' => '$v'";
   return 'array(' . substr($res,1) . ')';
+}
+
+// Cette fonction est destinee a migrer dans base/db_mysql
+// afin d'etre clonee pour des portages autre que Mysql.
+// Auparavant il faudra traiter a part les criteres conditionnels.
+
+function calculer_where($v)
+{
+	if (!is_array($v)) return ($v);
+	$op = array_shift($v);
+	if (!($n=count($v)))
+	  return $op;
+	else {
+	  $arg = calculer_where(array_shift($v));
+	  if ($n==1)
+	    return "\"$op(" . $arg . ")\"";
+	  else {
+	    $arg2 = calculer_where(array_shift($v));
+	    if ($n==2) {
+	      $arg = (substr($arg,-1)!="'") ? ("$arg . '") : (substr($arg,0,-1));
+	      $arg2 = ($arg2[0]=="'") ? (' '. substr($arg2,1)) : (is_numeric($arg2) ? "$arg2'" : "' . $arg2");
+	      return "$arg $op $arg2";
+	    }
+	    else
+	      return "($arg ? ($arg2) : $v[0])";
+	  }
+	}
 }
 
 //
