@@ -769,8 +769,8 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    $desc = array('id_mere' => $idb);
 	    $parent = $boucles[$idb]->id_parent;
 	    foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
-	      $a = calculer_liste($p, $desc, $boucles, $parent);
-	      $val[] = $op =='IN' ? $a : kwote($a);
+		$a = calculer_liste($p, $desc, $boucles, $parent);
+		$val[]= ($op =='IN') ? $a  : kwote($a);
 	    }
 	}
 
