@@ -17,9 +17,7 @@ charger_generer_url();
 include_spip('inc/forum');
 
 function forum_parent($id_forum) {
-	$row=spip_fetch_array(spip_query("
-SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'
-"));
+	$row=spip_fetch_array(spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'"));
 	if (!$row) return '';
 	$id_forum=$row['id_forum'];
 	$forum_id_parent=$row['id_parent'];
@@ -30,8 +28,7 @@ SELECT * FROM spip_forum WHERE id_forum=$id_forum AND statut != 'redac'
 	$forum_stat=$row['statut'];
 
 	if ($forum_id_article > 0) {
-	  $row=spip_fetch_array(spip_query("
-SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_article'"));
+	  $row=spip_fetch_array(spip_query("SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_article'"));
 	  $id_article = $row['id_article'];
 	  $titre = $row['titre'];
 	  $statut = $row['statut'];
@@ -51,8 +48,7 @@ SELECT id_article, titre, statut FROM spip_articles WHERE id_article='$forum_id_
 	  }
 	}
 	else if ($forum_id_rubrique > 0) {
-	  $row = spip_fetch_array(spip_query("
-SELECT * FROM spip_rubriques WHERE id_rubrique='$forum_id_rubrique'"));
+	  $row = spip_fetch_array(spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$forum_id_rubrique'"));
 	  $id_rubrique = $row['id_rubrique'];
 	  $titre = $row['titre'];
 	  return array('pref' => _T('lien_reponse_rubrique'),
@@ -62,8 +58,7 @@ SELECT * FROM spip_rubriques WHERE id_rubrique='$forum_id_rubrique'"));
 		       'titre' => $titre);
 	}
 	else if ($forum_id_syndic > 0) {
-	  $row = spip_fetch_array(spip_query("
-SELECT * FROM spip_syndic WHERE id_syndic='$forum_id_syndic'"));
+	  $row = spip_fetch_array(spip_query("SELECT * FROM spip_syndic WHERE id_syndic='$forum_id_syndic'"));
 	  $id_syndic = $row['id_syndic'];
 	  $titre = $row['nom_site'];
 	  $statut = $row['statut'];
@@ -74,8 +69,7 @@ SELECT * FROM spip_syndic WHERE id_syndic='$forum_id_syndic'"));
 		       'titre' => $titre);
 	}
 	else if ($forum_id_breve > 0) {
-	  $row = spip_fetch_array(spip_query("
-SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
+	  $row = spip_fetch_array(spip_query("SELECT * FROM spip_breves WHERE id_breve='$forum_id_breve'"));
 	  $id_breve = $row['id_breve'];
 	  $date_heure = $row['date_heure'];
 	  $titre = $row['titre'];
@@ -176,8 +170,8 @@ function controle_un_forum($row, $rappel) {
 	$controle .= safehtml($suite);
 
 	if ($GLOBALS['meta']["mots_cles_forums"] == "oui") {
-		$query_mots = "SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot";
-		$result_mots = spip_query($query_mots);
+	  $result_mots = spip_query("SELECT * FROM spip_mots AS mots, spip_mots_forum AS lien WHERE lien.id_forum = '$id_forum' AND lien.id_mot = mots.id_mot");
+
 
 		while ($row_mots = spip_fetch_array($result_mots)) {
 			$titre_mot = propre($row_mots['titre']);
