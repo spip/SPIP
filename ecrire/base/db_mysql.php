@@ -124,7 +124,7 @@ function calculer_where($v)
 		} else {
 			$arg2 = calculer_where(array_shift($v));
 			if ($n==2) {
-				return "$arg $op $arg2";
+				return "($arg $op $arg2)";
 			} else return "($arg $op ($arg2) : $v[0])";
 		}
 	}
