@@ -836,9 +836,9 @@ function calculer_critere_infixe_date($idb, &$boucles, $regs)
 		$pred = $date_orig;
 	} else if ($rel) $pred = 'date';
 
-	$date_compare = '\'" . normaliser_date(' .
+	$date_compare = "\"' . normaliser_date(" .
 	      calculer_argument_precedent($idb, $pred, $boucles) .
-	      ') . "\'';
+	      ") . '\"";
 	$date_orig = $boucle->id_table . '.' . $date_orig;
 
 	if ($col == 'date') {
