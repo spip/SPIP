@@ -76,31 +76,33 @@ function spip_mysql_select($select, $from, $where,
 			   $sousrequete, $having,
 			   $table, $id, $serveur) {
 
-	$q = ($from ? ("\nFROM " . spip_select_as($from)) : '')
-		. ($where ? ("\nWHERE " . join("\n\tAND ", array_map('calculer_where', $where))) : '')
+	$query = (!$from ? '' :
+			("\nFROM " .
+			(!is_array($from) ? $from : spip_select_as($from))))
+		. (!$where ? '' : ("\nWHERE " . (!is_array($where) ? $where : (join("\n\tAND ", array_map('calculer_where', $where))))))
 		. ($groupby ? "\nGROUP BY $groupby" : '')
 		. ($having ? "\nHAVING $having" : '')
 		. ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
 		. ($limit ? "\nLIMIT $limit" : '');
 
 	if (!$sousrequete)
-		$q = "SELECT ". join(", ", $select) . $q;
+		$query = "SELECT ". (!is_array($select) ? $select : join(", ", $select)) . $query;
 	else
-		$q = "SELECT S_" . join(", S_", $select)
+		$query = "SELECT S_" . join(", S_", $select)
 		. " FROM (" . join(", ", $select)
-		. ", COUNT(" . $sousrequete . ") AS compteur " . $q
+		. ", COUNT(" . $sousrequete . ") AS compteur " . $query
 		. ") AS S_$table WHERE compteur=" . $cpt;
 
 	// Erreur ? C'est du debug de squelette, ou une erreur du serveur
 
 	if ($GLOBALS['var_mode'] == 'debug') {
 		include_spip('public/debug');
-		boucle_debug_resultat($id, 'requete', $q);
+		boucle_debug_resultat($id, 'requete', $query);
 	}
 
-	if (!($res = @spip_query($q))) {
+	if (!($res = @spip_query($query))) {
 		include_spip('public/debug');
-		erreur_requete_boucle($q, $id, $table,
+		erreur_requete_boucle($query, $id, $table,
 				      spip_sql_errno(),
 				      spip_sql_error());
 	}
