@@ -73,7 +73,7 @@ function spip_abstract_serveur($f, $serveur) {
 // si l'include ne les a pas definies, erreur immediate
 
 function spip_abstract_fetch($res, $serveur='') {
-	if (!$serveur) return spip_fetch_array($res);
+	if (!$serveur) return spip_fetch_array($res, SPIP_ASSOC);
 	$f = spip_abstract_serveur('spip_' . $serveur . '_fetch', $serveur);
 	return $f($res);
 }

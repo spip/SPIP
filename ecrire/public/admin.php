@@ -40,19 +40,19 @@ function affiche_boutons_admin($contenu) {
 	//
 	include_spip('inc/lang');
 	include_spip('base/abstract_sql');
-	list($lang) = spip_abstract_fetsel(array('lang'),
+	$lang = spip_abstract_fetsel(array('lang'),
 					array('spip_auteurs'),
 					array("login='" .
 					      addslashes(ereg_replace('^@','',$GLOBALS['spip_admin'])) .
 					      "'"));
-	if ($lang) lang_select($lang);
+	if ($lang['lang']) lang_select($lang['lang']);
 
 	// Recuperer sans l'afficher la balise #FORMULAIRE_ADMIN, en float
 	$boutons_admin = inclure_balise_dynamique(
 		balise_FORMULAIRE_ADMIN_dyn('spip-admin-float'),
 	false);
 
-	if ($lang) lang_dselect();
+	if ($lang['lang']) lang_dselect();
 
 	return $contenu.$boutons_admin.$suite;
 }

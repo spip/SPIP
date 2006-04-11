@@ -296,8 +296,8 @@ function calcul_exposer ($id, $type, $reference) {
 				list($table,$hierarchie) = $x;
 				$exposer[$element][$id_element] = true;
 				if ($hierarchie) {
-					list ($id_rubrique) = spip_abstract_fetsel(array('id_rubrique'), array($table), array("$element=$id_element"));
-				$hierarchie = calculer_hierarchie($id_rubrique);
+					 $row = spip_abstract_fetsel(array('id_rubrique'), array($table), array("$element=$id_element"));
+					$hierarchie = calculer_hierarchie($row['id_rubrique']);
 				foreach (split(',',$hierarchie) as $id_rubrique)
 					$exposer['id_rubrique'][$id_rubrique] = true;
 				}
@@ -329,7 +329,12 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		// pas de document. Ne devrait pas arriver
 		return ''; 
 
-	list($id_type, $id_vignette, $fichier, $mode) = spip_abstract_fetch($row);
+	$row = spip_abstract_fetch($row);
+	$id_type = $row['id_type'];
+	$id_vignette = $row['id_vignette'];
+	$fichier = $row['fichier'];
+	$mode = $row['mode'];
+
 	// Lien par defaut = l'adresse du document
 	## if (!$lien) $lien = $fichier;
 
@@ -338,8 +343,8 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 		if ($res = spip_abstract_select(array('fichier'),
 				array('spip_documents'),
 				array("id_document = $id_vignette"))) {
-			list($vignette) = spip_abstract_fetch($res);
-			if (@file_exists($vignette))
+			$vignette = spip_abstract_fetch($res);
+			if (@file_exists($vignette['fichier']))
 				$logo = generer_url_document($id_vignette);
 		}
 	} else if ($mode == 'vignette') {
@@ -362,10 +367,10 @@ function calcule_logo_document($id_document, $doubdoc, &$doublons, $flag_fichier
 	}
 	else {
 		// Retrouver l'extension
-		list($extension) =
-			spip_abstract_fetch(spip_abstract_select(array('extension'),
+		$extension = spip_abstract_fetch(spip_abstract_select(array('extension'),
 			array('spip_types_documents'),
 			array("id_type = " . intval($id_type))));
+		$extension = $extension['extension'];
 		if (!$extension) $extension = 'txt';
 
 		// Pas de vignette, mais un fichier image -- creer la vignette
@@ -457,13 +462,13 @@ function lang_parametres_forum($s) {
 	if (strstr($GLOBALS['meta']['langues_utilisees'], ',')
 	// chercher l'identifiant qui nous donnera la langue
 	AND preg_match(',(id_(article|breve|rubrique|syndic)=([0-9]+)),', $s, $r)){
-		list($lang) = spip_abstract_fetsel(array('lang'),
-						   array("spip_" . $r[2] .'s'),
-						   array($r[1]));
+		$lang = spip_abstract_fetsel(array('lang'),
+					   array("spip_" . $r[2] .'s'),
+					   array($r[1]));
 
 	// Si ce n'est pas la meme que celle du site, l'ajouter aux parametres
-		if ($lang AND $lang <> $GLOBALS['meta']['langue_site'])
-			return $s . "&lang=$lang";
+		if ($lang['lang'] AND $lang['lang'] <> $GLOBALS['meta']['langue_site'])
+			return "$s&lang=" . $lang['lang'];
 	}
 
 	return $s;

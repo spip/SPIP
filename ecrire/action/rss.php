@@ -201,10 +201,7 @@ function rss_suivi_versions($a) {
 function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
 	$rss = array();
 
-	$result_forum = spip_query("
-	SELECT	* " . $query_forum . "
-	ORDER BY date_heure DESC LIMIT 20"
-	);
+	$result_forum = spip_query("SELECT * $query_forum ORDER BY date_heure DESC LIMIT 20");
 
 	while ($t = spip_fetch_array($result_forum)) {
 		$item = array();
