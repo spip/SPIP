@@ -182,7 +182,7 @@ function sql_rubrique($id_article) {
 	$id_rubrique = spip_abstract_fetsel(array('id_rubrique'),
 			array('spip_articles'),
 			array("id_article=" . intval($id_article)));
-	return $id_rurbique['id_rubrique'];
+	return $id_rubrique['id_rubrique'];
 }
 
 function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
