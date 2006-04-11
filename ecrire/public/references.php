@@ -152,7 +152,7 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 			$t = 'J' . count($boucle->from);
 			$boucle->from[$t] = $e;
 			$j = $tables_des_serveurs_sql[$desc['serveur']][$e]['key']['PRIMARY KEY'];
-			$boucle->where[]= array('=', "'$boucle->id_table." . "$j'", "'$t.$j'");
+			$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
 			}
 	} else $t = $desc['type'];
 	// demander a SQL de gerer le synonyme

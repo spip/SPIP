@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 //constantes spip pour spip_fetch_array()
@@ -24,54 +22,54 @@ define('SPIP_NUM', MYSQL_NUM);
 //
 
 function spip_query_db($query) {
-	global $spip_mysql_link;
-	static $tt = 0;
-	$my_admin = (($GLOBALS['connect_statut'] == '0minirezo') OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'));
-	$my_profile = ($GLOBALS['mysql_profile'] AND $my_admin);
-	$my_debug = ($GLOBALS['mysql_debug'] AND $my_admin);
 
 	$query = traite_query($query);
 
-	#spip_log($query);
-	if ($my_profile)
-		$m1 = microtime();
+	$start = ($GLOBALS['mysql_profile'] AND (($GLOBALS['connect_statut'] == '0minirezo') OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) ? microtime() : 0;
 
-	if ($GLOBALS['mysql_rappel_connexion'] AND $spip_mysql_link)
-		$result = mysql_query($query, $spip_mysql_link);
-	else
-		$result = mysql_query($query);
+	return spip_mysql_trace($query, 
+				$start,
+		 (($GLOBALS['mysql_rappel_connexion'] AND $GLOBALS['spip_mysql_link']) ?
+			mysql_query($query, $GLOBALS['spip_mysql_link']) :
+			mysql_query($query)));
+}
 
-	if ($my_profile) {
-		$m2 = microtime();
-		list($usec, $sec) = explode(" ", $m1);
-		list($usec2, $sec2) = explode(" ", $m2);
-		$dt = $sec2 + $usec2 - $sec - $usec;
-		$tt += $dt;
-		echo "<small>".htmlentities($query);
-		echo " -> <font color='blue'>".sprintf("%3f", $dt)."</font> ($tt)</small><p>\n";
-
-	}
+function spip_mysql_trace($query, $start, $result)
+{
+	if ($start) spip_mysql_timing($start, microtime(), $query, $result);
 
 	if ($s = mysql_error()) {
-		if ($my_debug) {
+		if ($GLOBALS['mysql_debug']
+		AND (($GLOBALS['connect_statut'] == '0minirezo')
+		  OR ($GLOBALS['auteur_session']['statut'] == '0minirezo'))) {
 			include_spip('public/debug');
-			echo _T('info_erreur_requete')." ".htmlentities($query)."<br>";
-			echo "&laquo; ".htmlentities($s)." &raquo;<p>";
+			echo _T('info_erreur_requete'),
+			  " ",
+			  htmlentities($query),
+			  "<br>&laquo; ",
+			  htmlentities($result = $s),
+			  " &raquo;<p>";
 		}
 		spip_log($GLOBALS['REQUEST_METHOD'].' '.$GLOBALS['REQUEST_URI'], 'mysql');
-		spip_log("$s - $query", 'mysql');
+		spip_log("$result - $query", 'mysql');
 	}
-
-	# spip_log("$s - $query", 'mysql');
-
 	return $result;
 }
 
-// fonction appelant la precedente 
-// specifiquement pour les select des squelettes
-// c'est une instance de spip_abstract_select, voir ses specs dans inc_calcul
-// les \n et \t sont utiles au debusqueur
-// traite_query pourrait y est fait d'avance, à moindre cout
+function spip_mysql_timing($m1, $m2, $query, $result)
+{
+	static $tt = 0;
+	list($usec, $sec) = explode(" ", $m1);
+	list($usec2, $sec2) = explode(" ", $m2);
+ 	$dt = $sec2 + $usec2 - $sec - $usec;
+	$tt += $dt;
+	echo "<small>", htmlentities($query), " -> <font color='blue'>", sprintf("%3f", $dt),"</font> (", $tt, ")</small> $result<p>\n";
+}
+
+// fonction appelant la precedente  specifiquement pour l'espace public
+// c'est une instance de spip_abstract_select, voir ses specs dans abstract.php
+// traite_query pourrait y est fait d'avance, à moindre cout.
+// Les \n et \t sont utiles au debusqueur.
 
 function spip_mysql_select($select, $from, $where,
 			   $groupby, $orderby, $limit,
@@ -79,16 +77,16 @@ function spip_mysql_select($select, $from, $where,
 			   $table, $id, $serveur) {
 
 	$q = ($from ? ("\nFROM " . spip_select_as($from)) : '')
-		. ($where ? ("\nWHERE " . join("\n\tAND ", $where)) : '')
+		. ($where ? ("\nWHERE " . join("\n\tAND ", array_map('calculer_where', $where))) : '')
 		. ($groupby ? "\nGROUP BY $groupby" : '')
 		. ($having ? "\nHAVING $having" : '')
 		. ($orderby ? ("\nORDER BY " . join(", ", $orderby)) : '')
 		. ($limit ? "\nLIMIT $limit" : '');
 
 	if (!$sousrequete)
-		$q = " SELECT ". join(", ", $select) . $q;
+		$q = "SELECT ". join(", ", $select) . $q;
 	else
-		$q = " SELECT S_" . join(", S_", $select)
+		$q = "SELECT S_" . join(", S_", $select)
 		. " FROM (" . join(", ", $select)
 		. ", COUNT(" . $sousrequete . ") AS compteur " . $q
 		. ") AS S_$table WHERE compteur=" . $cpt;
@@ -106,8 +104,28 @@ function spip_mysql_select($select, $from, $where,
 				      spip_sql_errno(),
 				      spip_sql_error());
 	}
-#	 spip_log($serveur . spip_num_rows($res) . $q);
 	return $res;
+}
+
+function calculer_where($v)
+{
+	if (!is_array($v))
+	  return $v ;
+
+	$op = array_shift($v);
+	if (!($n=count($v)))
+		return $op;
+	else {
+		$arg = calculer_where(array_shift($v));
+		if ($n==1) {
+			  return "$op($arg)";
+		} else {
+			$arg2 = calculer_where(array_shift($v));
+			if ($n==2) {
+				return "$arg $op $arg2";
+			} else return "($arg $op ($arg2) : $v[0])";
+		}
+	}
 }
 
 function spip_select_as($args)
@@ -135,9 +153,7 @@ function traite_query($query) {
 		$suite = strstr($query, $regs[0]);
 		$query = substr($query, 0, -strlen($suite));
 	}
-	$query = preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
-
-	return $query;
+	return preg_replace('/([,\s])spip_/', '\1'.$db.$table_pref, $query) . $suite;
 }
 
 //
@@ -214,8 +230,7 @@ function spip_mysql_showtable($nom_table)
 //
 
 function spip_fetch_array($r, $t=SPIP_BOTH) {
-        if ($r)
-                return mysql_fetch_array($r, $t);
+	if ($r) return mysql_fetch_array($r, $t);
 }
 
 function spip_sql_error() {
