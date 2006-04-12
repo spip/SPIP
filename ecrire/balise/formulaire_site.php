@@ -29,6 +29,7 @@ function balise_FORMULAIRE_SITE_stat($args, $filtres) {
 					'motif' => 'RUBRIQUES')), '');
 
 	// Verifier que les visisteurs sont autorises a proposer un site
+
 	return (($GLOBALS['meta']["proposer_sites"] != 2) ? '' : $args);
 }
 
@@ -54,10 +55,10 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 	$nom_site = addslashes(_request('nom_site'));
 	$url_site = addslashes(_request('url_site'));
 	$description_site = addslashes(_request('description_site'));
-			
-	spip_query("INSERT INTO spip_syndic
-	(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)
-	VALUES ('$nom_site', '$url_site', $id_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')");
+
+	spip_abstract_insert('spip_syndic',
+		"(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)",
+		"('$nom_site', '$url_site', $id_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')");
 
 	return  _T('form_prop_enregistre');
 }
