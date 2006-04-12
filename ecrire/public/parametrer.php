@@ -201,7 +201,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 			$nom_auteur = typo($row_auteur['nom']);
 			$url_auteur = generer_url_auteur($row_auteur['id_auteur']);
 			if ($url_auteur) {
-				$auteurs[] = "<a href=\"mailto:$email_auteur\">$nom_auteur</a>";
+				$auteurs[] = "<a href=\"$url_auteur\">$nom_auteur</a>";
 			} else {
 				$auteurs[] = "$nom_auteur";
 			}
