@@ -149,16 +149,11 @@ function boucle_SIGNATURES_dist($id_boucle, &$boucles) {
 	$mstatut = $id_table .'.statut';
 
 	$boucle->from[$id_table] =  "spip_signatures";
-	$boucle->from["petitions"] =  "spip_petitions";
-	$boucle->from["articles"] =  "spip_articles";
-	$boucle->where[]= array("'='", "'petitions.id_article'", "'$id_table.id_article'");
-	$boucle->where[]= array("'='", "'petitions.id_article'", "'articles.id_article'");
 
 	// Restreindre aux elements publies
 	if (!$boucle->statut) {
 		$boucle->where[]= array("'='", "'$mstatut'", "'\"publie\"'");
 	}
-	$boucle->group[] =  $boucle->id_table . '.' . $boucle->primary;  
 	return calculer_boucle($id_boucle, $boucles); 
 }
 
