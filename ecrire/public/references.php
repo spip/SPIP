@@ -116,8 +116,8 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	}
 
 	$t= $desc['type'];
-
 	$excep = $exceptions_des_tables[$r][$nom_champ];
+
 	if ($excep) {
 	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
 	} else {
@@ -151,7 +151,9 @@ function index_exception(&$boucle, $desc, $nom_champ, $excep)
 		if (!$t = array_search($e, $boucle->from)) {
 			$t = 'J' . count($boucle->from);
 			$boucle->from[$t] = $e;
-			$j = $tables_des_serveurs_sql[$desc['serveur']][$e]['key']['PRIMARY KEY'];
+			$j = $tables_des_serveurs_sql[$desc['serveur']][$e];
+# essayer ca un jour: 	list($nom, $j) = trouver_def_table($e, $boucle);
+			$j = $j['key']['PRIMARY KEY'];
 			$boucle->where[]= array("'='", "'$boucle->id_table." . "$j'", "'$t.$j'");
 			}
 	} else $t = $desc['type'];
