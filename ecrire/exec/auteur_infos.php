@@ -161,7 +161,7 @@ if (strval($nom)!='') {
 				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
 		}
 
-		$query = "UPDATE spip_auteurs SET $query_pass
+		if (!spip_query("UPDATE spip_auteurs SET $query_pass
 			nom='".addslashes($auteur['nom'])."',
 			login='".addslashes($auteur['login'])."',
 			bio='".addslashes($auteur['bio'])."',
@@ -170,13 +170,13 @@ if (strval($nom)!='') {
 			url_site='".addslashes($auteur['url_site'])."',
 			pgp='".addslashes($auteur['pgp'])."'
 			$add_extra
-			WHERE id_auteur=".$auteur['id_auteur'];
-		spip_query($query) OR die($query);
+			WHERE id_auteur=".$auteur['id_auteur']))
+		  die($query);
 	}
  }
 
 // Appliquer des modifications de statut
-modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent'], $_GET['supp_rub']);
+modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent']);
 
 
 // Si on modifie la fiche auteur, reindexer et modifier htpasswd

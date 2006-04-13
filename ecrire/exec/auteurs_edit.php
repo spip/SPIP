@@ -27,7 +27,7 @@ function exec_auteurs_edit_dist()
 
 	if (!$auteur = spip_fetch_array($result)) die('erreur');
 
-	modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent'], $_GET['supp_rub']);
+	modifier_statut_auteur($auteur, $_POST['statut'], $_POST['id_parent']);
 
 	debut_page($auteur['nom'],  "auteurs",
 		   (($connect_id_auteur == $id_auteur) ? "perso" : "redacteurs"));
