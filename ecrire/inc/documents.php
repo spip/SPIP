@@ -141,11 +141,12 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 		}
 	}
 
-	$s = spip_query("SELECT * FROM spip_documents
-		WHERE id_document = " . intval($id_document));
-	if (!($row = spip_fetch_array($s))) 
+	$id_document = intval($id_document);
+
+	if (!$row = spip_abstract_fetsel('*', 'spip_documents',
+					 "id_document=$id_document"))
 		return '';
-	$id_document = $row['id_document'];
+
 	$id_type = $row['id_type'];
 	$titre = propre($row ['titre']);
 	$descriptif = propre($row['descriptif']);
@@ -155,8 +156,9 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 	$taille = $row['taille'];
 	$mode = $row['mode'];
 
-	$result_type = spip_query("SELECT * FROM spip_types_documents WHERE id_type=" . intval($id_type));
-	if ($row_type = @spip_fetch_array($result_type)) {
+	if ($row_type = @spip_abstract_fetsel('*', 'spip_types_documents',
+					      "id_type=" . intval($id_type)))
+	  {
 		$type = $row_type['titre'];
 		$inclus = $row_type['inclus'];
 		$extension = $row_type['extension'];
@@ -256,12 +258,11 @@ function embed_document($id_document, $les_parametres="", $afficher_titre=true) 
 function integre_image($id_document, $align, $type_aff) {
 	document_vu($id_document);
 	charger_generer_url();
+	$id_document = intval($id_document);
 
-	$s = spip_query("SELECT * FROM spip_documents
-		WHERE id_document = " . intval($id_document));
-	if (!($row = spip_fetch_array($s)))
-		return '';
-	$id_document = $row['id_document'];
+	$s = spip_abstract_fetsel('*', 'spip_documents', "id_document=$id_document");
+	if (!$s) return '';
+
 	$id_type = $row['id_type'];
 	$titre = typo($row['titre']);
 	$descriptif = propre($row['descriptif']);
@@ -274,9 +275,7 @@ function integre_image($id_document, $align, $type_aff) {
 	$id_vignette = $row['id_vignette'];
 
 	// on construira le lien en fonction du type de doc
-	if ($t = @spip_fetch_array(spip_query(
-	"SELECT titre,extension FROM spip_types_documents
-	WHERE id_type = $id_type"))) {
+	if ($t = @spip_abstract_fetsel("titre,extension", 'spip_types_documents', "id_type = $id_type")) {
 			$extension = $t['extension']; # jpg, tex
 			$type = $t['titre']; # JPEG, LaTeX
 	}
@@ -445,9 +444,8 @@ function texte_upload_manuel($dir, $inclus = '') {
 			$ext = strtolower($match[1]);
 			if (!$exts[$ext]) {
 				if ($ext == 'jpeg') $ext = 'jpg';
-				$req = "SELECT extension FROM spip_types_documents WHERE extension='$ext'";
-				if ($inclus) $req .= " AND inclus='$inclus'";
-				if (@spip_fetch_array(spip_query($req))) $exts[$ext] = 'oui';
+				if (@spip_abstract_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
+					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
 			}
 			
@@ -498,9 +496,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 
 	// Si on n'a pas le type_inclus, on va le chercher dans spip_types_documents
 	if ($type_inclus == 'AUTO'
-	AND $r = spip_query("SELECT * FROM spip_types_documents
-	WHERE id_type=".$document['id_type'])
-	AND $type = @spip_fetch_array($r))
+	AND $type = @spip_abstract_fetsel('inclus', 'spip_types_documents', "id_type=".$document['id_type']))
 			$type_inclus = $type['inclus'];
 
 	if (($type_inclus == "embed"  #meme pour le MP3 : "l x h pixels"? 
@@ -517,14 +513,7 @@ function afficher_formulaire_taille($document, $type_inclus='AUTO') {
 // Afficher un formulaire d'upload
 //
 
-function afficher_upload(
-$id, 
-$intitule, 
-$inclus = '', 
-$mode, 
-$type="", 
-$ancre='', 
-$document=0) {
+function afficher_upload($id, $intitule, $inclus = '', $mode, $type="", $ancre='', $document=0) {
   global $connect_statut, $connect_toutes_rubriques, $options, $spip_lang_right,$connect_id_auteur;
 	static $num_form = 0; $num_form ++;
 
@@ -917,19 +906,20 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	// Afficher portfolio
 	/////////
 
-	$query = "SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes ".
+	$doublons = document_vu();
+
+	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
 		"AND docs.mode='document'".
-		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')";
+		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')" .
 
-	if ($doublons = document_vu())
-		$query .= " AND docs.id_document NOT IN ($doublons) ";
-	$query .= " ORDER BY 0+docs.titre, docs.titre, docs.id_document";
+		(!$doublons ?'':" AND docs.id_document NOT IN ($doublons) ") .
+		" ORDER BY 0+docs.titre, docs.titre, docs.id_document");
 
 	//
 	// recuperer tout le tableau des images du portfolio
 	//
-	$images_liees = spip_query($query);
+
 	$documents = array();
 	while ($document = spip_fetch_array($images_liees))
 		$documents[] = $document;
@@ -945,17 +935,15 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 		echo "</table>\n";
 	}
 
+	$doublons = document_vu();
+
 	//// Documents associes
-	$query = "SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
+	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
 		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
-		"AND docs.mode='document'";
+		"AND docs.mode='document'" .
 
-	if ($doublons = document_vu())
-		$query .= " AND docs.id_document NOT IN ($doublons) ";
-
-	$query .= " ORDER BY 0+docs.titre, docs.titre, docs.id_document";
-
-	$documents_lies = spip_query($query);
+		(!$doublons ? '' : " AND docs.id_document NOT IN ($doublons) ") .
+		" ORDER BY 0+docs.titre, docs.titre, docs.id_document");
 
 	$documents = array();
 	while ($document = spip_fetch_array($documents_lies))
@@ -1009,11 +997,8 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 	fin_cadre_relief();
 
 	//// Documents associes
-	$query = "SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
-		"WHERE l.id_".$type."=$id AND l.id_document=docs.id_document ".
-		"AND docs.mode='document' ORDER BY docs.id_document";
+	$res = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_".$type."=$id AND l.id_document=docs.id_document AND docs.mode='document' ORDER BY docs.id_document");
 
-	$res = spip_query($query);
 	$documents_lies = array();
 	while ($row = spip_fetch_array($res))
 		$documents_lies[]= $row['id_document'];
@@ -1375,18 +1360,16 @@ function maj_documents ($id_objet, $type) {
 				$_POST['titre_document']));
 			$descriptif_document = addslashes(corriger_caracteres(
 				$_POST['descriptif_document']));
-			$query = "UPDATE spip_documents
-			SET titre='$titre_document', descriptif='$descriptif_document'";
 
 			// taille du document (cas des embed)
 			if ($largeur_document = intval($_POST['largeur_document'])
 			AND $hauteur_document = intval($_POST['hauteur_document']))
-				$query .= ", largeur='$largeur_document',
+				$wh = ", largeur='$largeur_document',
 					hauteur='$hauteur_document'";
+			else $wh = "";
 
-			$query .= " WHERE id_document=".$id_document;
-			spip_query($query);
-
+			spip_query("UPDATE spip_documents
+			SET titre='$titre_document', descriptif='$descriptif_document' $wh WHERE id_document=".$id_document);
 
 			// Date du document (uniquement dans les rubriques)
 			if ($_POST['jour_doc']) {

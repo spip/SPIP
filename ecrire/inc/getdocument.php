@@ -138,13 +138,8 @@ function check_upload_error($error, $msg='') {
 function accepte_fichier_upload ($f) {
 	if (!ereg(".*__MACOSX/", $f)
 	AND !ereg("^\.", basename($f))) {
-		$ext = substr(strrchr($f, "."), 1);
-		$result = spip_query("SELECT * FROM spip_types_documents
-		WHERE extension='"
-		. corriger_extension(addslashes(strtolower($ext)))
-		. "' AND upload='oui'");
-		if ($row = @spip_fetch_array($result))
-			return true;
+		$ext = corriger_extension(addslashes(strtolower(substr(strrchr($f, "."), 1))));
+		return  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext' AND upload='oui'"));
 	}
 }
 
@@ -229,16 +224,13 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		$ext = addslashes(corriger_extension(strtolower($match[1])));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
-		if (!$row = spip_fetch_array(spip_query(
-		"SELECT * FROM spip_types_documents
-		WHERE extension='$ext' AND upload='oui'"))) {
+		if (!$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'"))) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
 /*			$ext = 'bin';
 			$nom_envoye .= '.bin';
 			spip_log("Extension $ext");
-			if (!$row = spip_fetch_array(spip_query(
-			"SELECT * FROM spip_types_documents
+			if (!$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents
 			WHERE extension='bin' AND upload='oui'"))) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
@@ -248,9 +240,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .ZIP */
 			$ext = 'zip';
 
-			if (!$row = spip_fetch_array(spip_query(
-			"SELECT * FROM spip_types_documents
-			WHERE extension='zip' AND upload='oui'"))) {
+			if (!$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='zip' AND upload='oui'"))) {
 				spip_log("Extension $ext interdite a l'upload");
 				return;
 			}
@@ -316,9 +306,7 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 	$id_document=intval($id_document);
 	if ($mode == 'vignette' AND $id_document_lie = $id_document) {
 		# on force le statut "document" de ce fichier (inutile ?)
-		spip_query("UPDATE spip_documents
-			SET mode='document'
-			WHERE id_document=$id_document");
+		spip_query("UPDATE spip_documents SET mode='document' WHERE id_document=$id_document");
 		$id_document = 0;
 	}
 
@@ -334,11 +322,11 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 
 		if ($id_lien
 		AND preg_match('/^[a-z0-9_]+$/i', $type_lien) # securite
-		)
-			spip_query("INSERT INTO spip_documents_".$type_lien."s
-				(id_document, id_".$type_lien.")
-				VALUES ($id_document, $id_lien)");
-
+		    ) {
+		  spip_abstract_insert("spip_documents_".$type_lien."s",
+				       "(id_document, id_".$type_lien.")",
+				       "($id_document, $id_lien)");
+		}
 		// par defaut (upload ZIP ou ftp) integrer
 		// les images en mode 'vignette' et le reste en mode document
 		if (!$mode)

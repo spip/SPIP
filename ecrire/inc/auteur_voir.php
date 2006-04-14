@@ -151,7 +151,7 @@ function statut_modifiable_auteur($id_auteur, $auteur)
 		  ($id_auteur AND ($auteur['statut'] != "0minirezo")))));
 }
 
-function modifier_statut_auteur (&$auteur, $statut, $add_rub='', $supp_rub='') {
+function modifier_statut_auteur (&$auteur, $statut, $add_rub='') {
 	global $connect_statut, $connect_toutes_rubriques;
 	// changer le statut ?
 	$id_auteur= intval($auteur['id_auteur']);
@@ -219,8 +219,6 @@ function choix_statut_auteur($statut) {
 			">" .
 			_T('info_statut_auteur_autre').' '.htmlentities($statut).
 			'</option>';
-
-
 
 	$menu .= "\n<option" .
 		mySel("5poubelle",$statut) .
