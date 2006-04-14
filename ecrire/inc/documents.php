@@ -260,8 +260,8 @@ function integre_image($id_document, $align, $type_aff) {
 	charger_generer_url();
 	$id_document = intval($id_document);
 
-	$s = spip_abstract_fetsel('*', 'spip_documents', "id_document=$id_document");
-	if (!$s) return '';
+	$row = spip_abstract_fetsel('*', 'spip_documents', "id_document=$id_document");
+	if (!$row) return '';
 
 	$id_type = $row['id_type'];
 	$titre = typo($row['titre']);
