@@ -49,7 +49,7 @@ function exec_articles_forum_dist()
 			   ); 
 	articles_forum_liens(spip_num_rows($result), "articles_forum", "id_article=$id_article", $debut, $pack, $limitdeb);
 
-	$query = "SELECT pied.*, max(thread.date_heure) AS date
+	$res = spip_query("SELECT pied.*, max(thread.date_heure) AS date
 		FROM spip_forum AS pied, spip_forum AS thread
 		WHERE pied.id_article='$id_article'
 		AND pied.id_parent=0
@@ -58,8 +58,6 @@ function exec_articles_forum_dist()
 		GROUP BY id_thread
 		ORDER BY date DESC 
 		LIMIT $debut, $pack";
-
-	$res = spip_query($query);
 
 	afficher_forum($res,"", $id_article);
 	
