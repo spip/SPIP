@@ -35,8 +35,8 @@ if ($connect_statut == '0minirezo' AND $new == "oui") {
 	$acces_comite = 'oui';
 	$acces_forum = 'non';
 } else {
-	$query_groupes = "SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe";
-	$result_groupes = spip_query($query_groupes);
+	$result_groupes = spip_query("SELECT * FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
+
 	while($row = spip_fetch_array($result_groupes)) {
 		$id_groupe = $row['id_groupe'];
 		$type = $row['titre'];

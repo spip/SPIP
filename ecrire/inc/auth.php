@@ -111,8 +111,7 @@ function inc_auth_dist() {
 	//
 
 	$auth_login = addslashes($auth_login);
-	$query = "SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'";
-	$result = @spip_query($query);
+	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'");
 
 	if ($row = spip_fetch_array($result)) {
 		$connect_id_auteur = $row['id_auteur'];
@@ -149,8 +148,7 @@ function inc_auth_dist() {
 
 		// Si administrateur, recuperer les rubriques gerees par l'admin
 		if ($connect_statut == '0minirezo') {
-			$query_admin = "SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'";
-			$result_admin = spip_query($query_admin);
+			$result_admin = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=$connect_id_auteur AND id_rubrique!='0'");
 
 			$connect_toutes_rubriques = (@spip_num_rows($result_admin) == 0);
 			if ($connect_toutes_rubriques) {
@@ -166,8 +164,8 @@ function inc_auth_dist() {
 					}
 					if (!$r) break;
 					$r = join(',', $r);
-					$query_admin = "SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)";
-				 	$result_admin = spip_query($query_admin);
+				 	$result_admin = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r");
+
 				 }
 			}
 		}

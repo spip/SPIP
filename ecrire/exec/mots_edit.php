@@ -53,10 +53,8 @@ global
 //
 if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 	if ($supp_mot) {
-		$query = "DELETE FROM spip_mots WHERE id_mot=$supp_mot";
-		$result = spip_query($query);
-		$query = "DELETE FROM spip_mots_articles WHERE id_mot=$supp_mot";
-		$result = spip_query($query);
+		spip_query("DELETE FROM spip_mots WHERE id_mot=$supp_mot");
+		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$supp_mot");
 	}
 
 	if (strval($titre_mot)!='') {
@@ -87,8 +85,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		} else
 			$add_extra = '';
 
-		$query = "UPDATE spip_mots SET titre='$titre_mot', texte='$texte', descriptif='$descriptif', type='$type', id_groupe=$id_groupe $add_extra WHERE id_mot=$id_mot";
-		$result = spip_query($query);
+		spip_query("UPDATE spip_mots SET titre='$titre_mot', texte='$texte', descriptif='$descriptif', type='$type', id_groupe=$id_groupe $add_extra WHERE id_mot=$id_mot");
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
@@ -113,8 +110,7 @@ if ($redirect_ok == 'oui' && $redirect) {
 //
 // Recupere les donnees
 //
-$query = "SELECT * FROM spip_mots WHERE id_mot='$id_mot'";
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_mots WHERE id_mot='$id_mot'");
 
 if ($row = spip_fetch_array($result)) {
 	$id_mot = $row['id_mot'];
@@ -264,8 +260,8 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 	echo "<BR><input type='text' NAME='titre_mot' CLASS='formo' VALUE=\"$titre_mot\" SIZE='40' $onfocus />";
 
 	// dans le groupe...
-	$query_groupes = "SELECT id_groupe, titre FROM spip_groupes_mots ORDER BY titre";
-	$result = spip_query($query_groupes);
+	$result = spip_query("SELECT id_groupe, titre FROM spip_groupes_mots ORDER BY titre");
+
 	if (spip_num_rows($result)>1) {
 		debut_cadre_relief("groupe-mot-24.gif");
 		echo  _T('info_dans_groupe')."</label>\n";
