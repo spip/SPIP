@@ -780,7 +780,19 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    $val = array();
 	    $desc = array('id_mere' => $idb);
 	    $parent = $boucles[$idb]->id_parent;
-	    foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
+
+	    // Dans le cas {x=='#DATE'} etc, defaire le travail du phraseur, 
+	    // celui ne sachant pas ce qu'est un critere infixe
+	    // et a fortiori son 2e operande qu'entoure " ou '
+	    if (count($params)==1
+		AND count($params[0]==3)
+		AND $params[0][0]->type == 'texte' 
+		AND $params[0][2]->type == 'texte' 
+		AND ($p=$params[0][0]->texte) == $params[0][2]->texte
+		AND (($p == "'") OR ($p == '"'))
+ 		AND $params[0][1]->type == 'champ' )
+	      $val[]= "$p\\$p#" . $params[0][1]->nom_champ . "\\$p$p";
+	    else foreach ((($op != 'IN') ? $params : calculer_vieux_in($params)) as $p) {
 		$a = calculer_liste($p, $desc, $boucles, $parent);
 		$val[]= ($op =='IN') ? $a  : kwote($a);
 	    }
