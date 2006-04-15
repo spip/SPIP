@@ -17,8 +17,8 @@ function exec_sites_edit_dist()
 {
   global $champs_extra, $connect_statut, $descriptif, $id_rubrique, $id_secteur, $id_syndic, $new, $nom_site, $syndication, $url_site, $url_syndic;
 
-$query = "SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic);
-$result = spip_query($query);
+$result = spip_query("SELECT * FROM spip_syndic WHERE id_syndic=" . intval($id_syndic));
+
 if ($row = spip_fetch_array($result)) {
 	$id_syndic = $row["id_syndic"];
 	$id_rubrique = $row["id_rubrique"];
@@ -101,8 +101,8 @@ echo "<input type='text' class='formo' name='url_site' value=\"$url_site\" size=
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
-		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
-		$result=spip_query($query);
+		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
+
 		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}

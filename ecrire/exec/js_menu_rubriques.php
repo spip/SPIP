@@ -24,17 +24,11 @@ function extraire_article($id_p) {
 function gen_liste_rubriques() {
 	// se restreindre aux rubriques utilisees recemment +secteurs
 	$liste="0";
-	$s = spip_query("SELECT id_rubrique FROM spip_rubriques
-		ORDER BY id_parent=0 DESC, date DESC LIMIT 500");
+	$s = spip_query("SELECT id_rubrique FROM spip_rubriques ORDER BY id_parent=0 DESC, date DESC LIMIT 500");
 	while ($t = spip_fetch_array($s))
 		$liste .=",".$t['id_rubrique']; 
 	 
-	$q = "SELECT id_rubrique, id_parent, titre 
-		FROM spip_rubriques 
-		WHERE id_rubrique IN ($liste)
-		ORDER BY id_parent,0+titre,titre";
-
-	$res = spip_query($q);
+	$res = spip_query("SELECT id_rubrique, id_parent, titre FROM spip_rubriques WHERE id_rubrique IN ($liste) ORDER BY id_parent,0+titre,titre");
 
 	$GLOBALS['db_art_cache'] = array();
 	if (spip_num_rows($res) > 0) { 

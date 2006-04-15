@@ -76,16 +76,14 @@ echo '</defs>';
 		$where = "0=0";
 	}
 	
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table ".
-		"WHERE $where ORDER BY date LIMIT 1";
-	$result = spip_query($query);
+	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix FROM $table WHERE $where ORDER BY date LIMIT 1");
+
 	while ($row = spip_fetch_array($result)) {
 		$date_premier = $row['date_unix'];
 	}
 
-	$query="SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table ".
-		"WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date";
-	$result=spip_query($query);
+	$result = spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
+
 
 	while ($row = spip_fetch_array($result)) {
 		$date = $row['date_unix'];

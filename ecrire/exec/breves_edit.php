@@ -33,8 +33,8 @@ global
 $id_breve = intval($id_breve);
 
 if ($new != "oui") {
-	$query = "SELECT * FROM spip_breves WHERE id_breve=$id_breve";
-	$result = spip_query($query);
+	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve=$id_breve");
+
 	
 	if ($row=spip_fetch_array($result)) {
 		$id_breve=$row['id_breve'];
@@ -109,8 +109,8 @@ if ($connect_statut=="0minirezo" OR $statut=="prop" OR $new == "oui") {
 
 	if ($id_rubrique == 0) $logo_parent = "racine-site-24.gif";
 	else {
-		$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
-		$result=spip_query($query);
+		$result=spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
+
 		while($row=spip_fetch_array($result)){
 			$parent_parent=$row['id_parent'];
 		}
