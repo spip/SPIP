@@ -97,8 +97,8 @@ function changer_statut_articles_page($debloquer_article)
 	if ($debloquer_article) {
 		if ($debloquer_article <> 'tous')
 			$where_id = "AND id_article=".intval($debloquer_article);
-		$query = "UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$connect_id_auteur $where_id";
-		spip_query ($query);
+		spip_query("UPDATE spip_articles SET auteur_modif='0' WHERE auteur_modif=$connect_id_auteur $where_id");
+
 	}
 }
 

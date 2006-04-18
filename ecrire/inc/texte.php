@@ -527,32 +527,32 @@ function extraire_lien ($regs) {
 			case 'ru':
 				$lien_url = generer_url_rubrique($id_lien);
 				if (!$lien_texte) {
-					$req = "select titre from spip_rubriques where id_rubrique=$id_lien";
-					$row = @spip_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_rubriques WHERE id_rubrique=$id_lien"));
+
 					$lien_texte = $row['titre'];
 				}
 				break;
 			case 'br':
 				$lien_url = generer_url_breve($id_lien);
 				if (!$lien_texte) {
-					$req = "select titre from spip_breves where id_breve=$id_lien";
-					$row = @spip_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_breves WHERE id_breve=$id_lien"));
+
 					$lien_texte = $row['titre'];
 				}
 				break;
 			case 'au':
 				$lien_url = generer_url_auteur($id_lien);
 				if (!$lien_texte) {
-					$req = "select nom from spip_auteurs where id_auteur = $id_lien";
-					$row = @spip_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur = $id_lien"));
+
 					$lien_texte = $row['nom'];
 				}
 				break;
 			case 'mo':
 				$lien_url = generer_url_mot($id_lien);
 				if (!$lien_texte) {
-					$req = "select titre from spip_mots where id_mot=$id_lien";
-					$row = @spip_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_mots WHERE id_mot=$id_lien"));
+
 					$lien_texte = $row['titre'];
 				}
 				break;
@@ -560,9 +560,8 @@ function extraire_lien ($regs) {
 			case 'do':
 				$lien_url = generer_url_document($id_lien);
 				if (!$lien_texte) {
-					$req = "select titre,fichier from spip_documents
-					WHERE id_document=$id_lien";
-					$row = @spip_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(spip_query("SELECT titre,fichier FROM spip_documents WHERE id_document=$id_lien"));
+
 					$lien_texte = $row['titre'];
 					if (!$lien_texte)
 						$lien_texte = ereg_replace("^.*/","",$row['fichier']);
@@ -571,8 +570,7 @@ function extraire_lien ($regs) {
 			case 'si':
 				# attention dans le cas des sites le lien pointe non pas sur
 				# la page locale du site, mais directement sur le site lui-meme
-				$row = @spip_fetch_array(@spip_query("SELECT nom_site,url_site
-				FROM spip_syndic WHERE id_syndic=$id_lien"));
+				$row = @spip_fetch_array(spip_query("SELECT nom_site,url_site	FROM spip_syndic WHERE id_syndic=$id_lien"));
 				if ($row) {
 					$lien_url = $row['url_site'];
 					if (!$lien_texte)
@@ -582,8 +580,8 @@ function extraire_lien ($regs) {
 			default:
 				$lien_url = generer_url_article($id_lien);
 				if (!$lien_texte) {
-					$req = "select titre from spip_articles where id_article=$id_lien";
-					$row = @spip_fetch_array(@spip_query($req));
+					$row = @spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_lien"));
+
 					$lien_texte = $row['titre'];
 
 				}
