@@ -98,64 +98,60 @@ function maj_base() {
 
 	if ($version_installee < 0.99) {
 	
-		$query = "SELECT DISTINCT id_article FROM spip_forum WHERE id_article!=0 AND id_parent=0";
-		$result = spip_query($query);
+		$result = spip_query("SELECT DISTINCT id_article FROM spip_forum WHERE id_article!=0 AND id_parent=0");
+
 		while ($row = spip_fetch_array($result)) {
 			unset($forums_article);
 			$id_article = $row['id_article'];
-			$query2 = "SELECT id_forum FROM spip_forum WHERE id_article=$id_article";
+			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_article=$id_article");
 			for (;;) {
-				$result2 = spip_query($query2);
 				unset($forums);
 				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_article[] = $forums;
-				$query2 = "SELECT id_forum FROM spip_forum WHERE id_parent IN ($forums)";
+				$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($forums)");
 			}
 			$forums_article = join(',', $forums_article);
-			$query3 = "UPDATE spip_forum SET id_article=$id_article WHERE id_forum IN ($forums_article)";
-			spip_query($query3);
+			spip_query("UPDATE spip_forum SET id_article=$id_article WHERE id_forum IN ($forums_article)");
 		}
 	
-		$query = "SELECT DISTINCT id_breve FROM spip_forum WHERE id_breve!=0 AND id_parent=0";
-		$result = spip_query($query);
+		$result = spip_query("SELECT DISTINCT id_breve FROM spip_forum WHERE id_breve!=0 AND id_parent=0");
+
 		while ($row = spip_fetch_array($result)) {
 			unset($forums_breve);
 			$id_breve = $row['id_breve'];
-			$query2 = "SELECT id_forum FROM spip_forum WHERE id_breve=$id_breve";
+			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_breve=$id_breve");
 			for (;;) {
-				$result2 = spip_query($query2);
 				unset($forums);
 				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_breve[] = $forums;
-				$query2 = "SELECT id_forum FROM spip_forum WHERE id_parent IN ($forums)";
+				$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($forums)");
 			}
 			$forums_breve = join(',', $forums_breve);
-			$query3 = "UPDATE spip_forum SET id_breve=$id_breve WHERE id_forum IN ($forums_breve)";
-			spip_query($query3);
+			spip_query("UPDATE spip_forum SET id_breve=$id_breve WHERE id_forum IN ($forums_breve)");
 		}
 	
-		$query = "SELECT DISTINCT id_rubrique FROM spip_forum WHERE id_rubrique!=0 AND id_parent=0";
-		$result = spip_query($query);
+		$result = spip_query("SELECT DISTINCT id_rubrique FROM spip_forum WHERE id_rubrique!=0 AND id_parent=0");
+
 		while ($row = spip_fetch_array($result)) {
 			unset($forums_rubrique);
 			$id_rubrique = $row['id_rubrique'];
-			$query2 = "SELECT id_forum FROM spip_forum WHERE id_rubrique=$id_rubrique";
+			$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_rubrique=$id_rubrique");
 			for (;;) {
-				$result2 = spip_query($query2);
+
 				unset($forums);
 				while ($row2 = spip_fetch_array($result2)) $forums[] = $row2['id_forum'];
 				if (!$forums) break;
 				$forums = join(',', $forums);
 				$forums_rubrique[] = $forums;
-				$query2 = "SELECT id_forum FROM spip_forum WHERE id_parent IN ($forums)";
+				$result2 = spip_query("SELECT id_forum FROM spip_forum WHERE id_parent IN ($forums)");
 			}
 			$forums_rubrique = join(',', $forums_rubrique);
-			$query3 = "UPDATE spip_forum SET id_rubrique=$id_rubrique WHERE id_forum IN ($forums_rubrique)";
-			spip_query($query3);
+			spip_query("UPDATE spip_forum SET id_rubrique=$id_rubrique WHERE id_forum IN ($forums_rubrique)");
+
 		}
 		maj_version (0.99);
 	}
@@ -169,8 +165,8 @@ function maj_base() {
 		global $htsalt;
 		spip_query("ALTER TABLE spip_auteurs CHANGE pass pass tinyblob NOT NULL");
 		spip_query("ALTER TABLE spip_auteurs ADD htpass tinyblob NOT NULL");
-		$query = "SELECT id_auteur, pass FROM spip_auteurs WHERE pass!=''";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_auteur, pass FROM spip_auteurs WHERE pass!=''");
+
 		while (list($id_auteur, $pass) = spip_fetch_array($result)) {
 			$htpass = generer_htpass($pass);
 			$pass = md5($pass);
@@ -346,8 +342,8 @@ function maj_base() {
 
 	if ($version_installee < 1.408) {
 		// Images articles passent dans spip_documents
-		$query = "SELECT id_article, images FROM spip_articles WHERE LENGTH(images) > 0";
-		$result = spip_query($query);
+		$result = spip_query("SELECT id_article, images FROM spip_articles WHERE LENGTH(images) > 0");
+
 
 		$types = array('jpg' => 1, 'png' => 2, 'gif' => 3);
 
@@ -384,10 +380,10 @@ function maj_base() {
 			$replace_descriptif = ereg_replace('_orig_', 'descriptif', $replace);
 			$replace_texte = ereg_replace('_orig_', 'texte', $replace);
 			$replace_ps = ereg_replace('_orig_', 'ps', $replace);
-			$query = "UPDATE spip_articles ".
+			spip_query("UPDATE spip_articles ".
 				"SET chapo=$replace_chapo, descriptif=$replace_descriptif, texte=$replace_texte, ps=$replace_ps ".
-				"WHERE id_article=$id_article";
-			spip_query($query);
+				   "WHERE id_article=$id_article");
+
 		}
 		spip_query("ALTER TABLE spip_articles DROP images");
 		maj_version (1.408);
@@ -398,10 +394,10 @@ function maj_base() {
 		// -> non, prio (priori), pos (posteriori), abo (abonnement)
 		include_spip('inc/meta');
 		$accepter_forum = substr($GLOBALS['meta']["forums_publics"],0,3) ;
-		$query = "ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL";
-		$result = spip_query($query);
-		$query = "UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'";
-		$result = spip_query($query);
+		$result = spip_query("ALTER TABLE spip_articles CHANGE accepter_forum accepter_forum CHAR(3) NOT NULL");
+
+		$result = spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum' WHERE accepter_forum != 'non'");
+
 		maj_version (1.414);
 	}
 
@@ -418,8 +414,8 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.418) {
-		$query = "SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE statut = '0minirezo' AND email != '' ORDER BY id_auteur LIMIT 1");
+
 		if ($webmaster = spip_fetch_array($result)) {
 			include_spip('inc/meta');
 			ecrire_meta('email_webmaster', $webmaster['email']);
@@ -429,41 +425,32 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.419) {
-		$query = "ALTER TABLE spip_auteurs ADD alea_actuel TINYTEXT DEFAULT ''";
-		spip_query($query);
-		$query = "ALTER TABLE spip_auteurs ADD alea_futur TINYTEXT DEFAULT ''";
-		spip_query($query);
-		$query = "UPDATE spip_auteurs SET alea_futur = FLOOR(32000*RAND())";
-		spip_query($query);
+		spip_query("ALTER TABLE spip_auteurs ADD alea_actuel TINYTEXT DEFAULT ''");
+		spip_query("ALTER TABLE spip_auteurs ADD alea_futur TINYTEXT DEFAULT ''");
+		spip_query("UPDATE spip_auteurs SET alea_futur = FLOOR(32000*RAND())");
 		maj_version (1.419);
 	}
 
 	if ($version_installee < 1.420) {
-		$query = "UPDATE spip_auteurs SET alea_actuel='' WHERE statut='nouveau'";
-		spip_query($query);
+		spip_query("UPDATE spip_auteurs SET alea_actuel='' WHERE statut='nouveau'");
 		maj_version (1.420);
 	}
 	
 	if ($version_installee < 1.421) {
-		$query = "ALTER TABLE spip_articles ADD auteur_modif bigint(21) DEFAULT '0' NOT NULL";
-		spip_query($query);
-		$query = "ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
-		spip_query($query);
+		spip_query("ALTER TABLE spip_articles ADD auteur_modif bigint(21) DEFAULT '0' NOT NULL");
+		pip_query("ALTER TABLE spip_articles ADD date_modif datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		maj_version (1.421);
 	}
 
 	if ($version_installee < 1.432) {
 		spip_query("ALTER TABLE spip_articles DROP referers");
-		$query = "ALTER TABLE spip_articles ADD referers INTEGER DEFAULT '0' NOT NULL";
-		spip_query($query);
-		$query = "ALTER TABLE spip_articles ADD popularite INTEGER DEFAULT '0' NOT NULL";
-		spip_query($query);
+		spip_query("ALTER TABLE spip_articles ADD referers INTEGER DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_articles ADD popularite INTEGER DEFAULT '0' NOT NULL");
 		maj_version (1.432);
 	}
 
 	if ($version_installee < 1.436) {
-		$query = "ALTER TABLE spip_documents ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL";
-		spip_query($query);
+		spip_query("ALTER TABLE spip_documents ADD date datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		maj_version (1.436);
 	}
 
@@ -500,8 +487,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.442) {
-		$query = "ALTER TABLE spip_auteurs ADD prefs TINYTEXT NOT NULL";
-		spip_query($query);
+		spip_query("ALTER TABLE spip_auteurs ADD prefs TINYTEXT NOT NULL");
 		maj_version (1.442);
 	}
 

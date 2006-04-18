@@ -67,7 +67,7 @@ $textes = recuperer_version($id_article, $id_version);
 $id_diff = intval($id_diff);
 if (!$id_diff) {
 	$diff_auto = true;
-	$row = spip_fetch_array("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1");
+	$row = spip_fetch_array(spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 1"));
 	if ($row) $id_diff = $row['id_version'];
 }
 
