@@ -50,9 +50,8 @@ function action_supprimer_document($arg) {
 		@unlink($fichier);
 
 		if ($id_vignette > 0) {
-			$query = "SELECT id_vignette, fichier FROM spip_documents
-				WHERE id_document=$id_vignette";
-			$result = spip_query($query);
+			$result = spip_query("SELECT id_vignette, fichier FROM spip_documents	WHERE id_document=$id_vignette");
+
 			if ($row = spip_fetch_array($result)) {
 				$fichier = $row['fichier'];
 				@unlink($fichier);

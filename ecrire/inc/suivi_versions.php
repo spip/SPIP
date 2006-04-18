@@ -96,11 +96,8 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 			$id_article = $row['id_article'];
 			$statut = $row['statut'];
 			$titre = propre($row['titre']);
-			$query_auteur = "
-				SELECT nom,email
-				FROM spip_auteurs
-				WHERE id_auteur = $id_auteur";
-			$row_auteur = spip_fetch_array(spip_query($query_auteur));
+			$row_auteur = spip_fetch_array(spip_query("SELECT nom,email FROM spip_auteurs	WHERE id_auteur = $id_auteur"));
+
 			$nom = typo($row_auteur["nom"]);
 			$email = $row_auteur['email'];
 	
@@ -130,22 +127,14 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 			}
 
 			if (!$court) { 
-				$query_diff = "
-					SELECT id_version
-					FROM spip_versions
-					WHERE id_article=$id_article AND id_version<$id_version 
-					ORDER BY id_version DESC LIMIT 0,1";
-					if ($result_diff = spip_query($query_diff)) {
-						$row_diff = spip_fetch_array($result_diff);
-						$id_diff = $row_diff['id_version'];
+				$result_diff = spip_query("SELECT id_version FROM spip_versions WHERE id_article=$id_article AND id_version<$id_version ORDER BY id_version DESC LIMIT 0,1");
+				if ($result_diff) {
+					$row_diff = spip_fetch_array($result_diff);
+					$id_diff = $row_diff['id_version'];
 				}
 		
 		
-				$query_art = "
-					SELECT *
-					FROM spip_articles
-					WHERE id_article='$id_article'";
-				$result_art = spip_query($query_art);
+				$result_art = spip_query("SELECT * FROM spip_articles	WHERE id_article='$id_article'");
 				
 				if ($row_art = spip_fetch_array($result_art)) {
 					$id_article = $row_art["id_article"];

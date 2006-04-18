@@ -27,8 +27,8 @@ function action_tourner_dist() {
 	$var_rot = intval($var_rot);
 	$arg = intval($arg);
 
-	$query = "SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg";
-	$result = spip_query($query);
+	$result = spip_query("SELECT id_vignette, fichier FROM spip_documents WHERE id_document=$arg");
+
 	if ($row = spip_fetch_array($result)) {
 		$id_vignette = $row['id_vignette'];
 		$image = $row['fichier'];

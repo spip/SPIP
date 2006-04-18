@@ -10,6 +10,8 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
+if (!defined("_ECRIRE_INC_VERSION")) return;
+
 include_spip('balise/formulaire_inscription');
 include_spip('public/assembler'); 
 include_spip('inc/lang');

@@ -51,8 +51,7 @@ else if ($new=='oui') {
 		$changer_lang = '';
 
 		// Recuperer les donnees de la traduction
-		$query = "SELECT * FROM spip_articles WHERE id_article=$lier_trad";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_articles WHERE id_article=$lier_trad");
 	
 		if ($row = spip_fetch_array($result)) {
 			$row['titre'] = filtrer_entites(_T('info_nouvelle_traduction')).' '.$row["titre"];
@@ -72,12 +71,11 @@ else if ($new=='oui') {
 				if ($GLOBALS['meta']['multi_secteurs'] == 'oui') 
 					$id_parent = 0;
 				else {
-					$query = "SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique";
-					$row_rub = spip_fetch_array(spip_query($query));
+					$row_rub = spip_fetch_array(spip_query("SELECT id_parent FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+
 					$id_parent = $row_rub['id_parent'];
 				}
-				$query = "SELECT id_rubrique FROM spip_rubriques WHERE lang='$spip_lang' AND id_parent=$id_parent";
-				if ($row_rub = spip_fetch_array(spip_query($query))) {
+				if ($row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='$spip_lang' AND id_parent=$id_parent"))) {
 					$id_rubrique = $row['id_secteur'] = $row['id_rubrique'] = $row_rub['id_rubrique'];
 					$changer_lang = 'herit';
 				}

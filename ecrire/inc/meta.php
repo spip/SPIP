@@ -20,10 +20,10 @@ function lire_metas() {
 		$noyau = array();
 
 	$GLOBALS['meta'] = array();
-	$result = spip_query('SELECT nom,valeur FROM spip_meta');
+	$result = spip_query("SELECT nom,valeur FROM spip_meta");
 	if($GLOBALS['db_ok']) {
-		while (list($nom,$valeur) = spip_fetch_array($result))
-			$GLOBALS['meta'][$nom] = $valeur;
+		while ($row = spip_fetch_array($result))
+			$GLOBALS['meta'][$row['nom']] = $row['valeur'];
 	}
 	if (!$GLOBALS['meta']['charset'])
 		ecrire_meta('charset', _DEFAULT_CHARSET);
