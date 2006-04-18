@@ -254,3 +254,17 @@ function puce_statut(selection){
 		return "puce-poubelle.gif";
 	}
 }
+
+// lorsqu'on touche a un formulaire, desactiver les autres
+// (a voir : onchange=... fonctionne sous FF, mais pas Safari)
+function disable_other_forms(me) {
+	var items = document.getElementsByTagName('form');
+	for (var j = 0; j < items.length; j++) {
+		if (items[j] != me) {
+			var fields = items[j].getElementsByTagName('input');
+			for (var k = 0; k < fields.length; k++) {
+				fields[k].disabled=true;
+			}
+		}
+	}
+}
