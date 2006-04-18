@@ -7,7 +7,7 @@
 			name='ajouter_mot[]'
 		    	value='#ID_MOT'
 		    	id='mot#ID_MOT' 
-			[(#ID_MOT|in_any{#ENV*{ajouter_mot}, ''}|?
+			[(#ID_MOT|in_any{#ENV**{ajouter_mot}, ''}|?
 				{'checked="checked"',''})] />[
 		(#LOGO_MOT|lien)
 		<br />]
@@ -16,3 +16,4 @@
 (#COMPTEUR_BOUCLE|alterner{'',</tr>})]</BOUCLE_M>
 		  </table>
 </B_M>
+<br />
