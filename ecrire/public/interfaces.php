@@ -64,6 +64,7 @@ class Boucle {
 	var $default_order = array();
 	var $date = 'date' ;
 	var $hash = "" ;
+	var $in = "" ;
 	var $lien = false;
 	var $sous_requete = false;
 	var $hierarchie = '';
