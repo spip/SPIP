@@ -113,11 +113,9 @@ echo propre("<ul><cadre>" . generer_url_public('backend') . "</cadre></ul>");
 
 echo "<p>"._T("ical_texte_rss_articles2")."</p>";
 
+$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY 0+titre, titre");
 
-	$query = "SELECT * FROM spip_rubriques WHERE id_parent='0' ORDER BY 0+titre, titre";
-	$result = spip_query($query);
-
-	if (spip_num_rows($result) > 0) {
+if (spip_num_rows($result) > 0) {
 		echo "<ul>";
 
 		while($row=spip_fetch_array($result)){

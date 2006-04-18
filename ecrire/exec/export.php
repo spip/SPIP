@@ -54,10 +54,9 @@ function liste_rubriques($id_rubrique) {
 	global $maj;
 	static $rubriques = array();
 	if ($id_rubrique)
-		$query="SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'";
+		$result = spip_query("SELECT * FROM spip_rubriques WHERE id_rubrique='$id_rubrique'");
 	else
-		$query="SELECT * FROM spip_rubriques WHERE id_parent=0";
-	$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_rubriques WHERE id_parent=0");
 
 	if ($result) while ($row=spip_fetch_array($result)) {
 		$id_rubrique = $row['id_rubrique'];
@@ -75,8 +74,8 @@ function liste_rubriques($id_rubrique) {
 	spip_free_result($result);
  	if ($t_rubriques) {
  		$t_rubriques = join(",", $t_rubriques);
- 		$query = "SELECT * FROM spip_rubriques WHERE id_parent IN ($t_rubriques)";
-		liste_rubriques(spip_query($query));
+		liste_rubriques(spip_query("SELECT * FROM spip_rubriques WHERE id_parent IN ($t_rubriques)"));
+
 	}
 	return $rubriques;
 }

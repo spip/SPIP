@@ -187,84 +187,83 @@ function export_objets($query, $type, $file = 0, $gz = false, $etape_en_cours=""
 			}
 			// Exporter les relations
 			if ($type == 'article') {
-				$query = 'SELECT id_auteur FROM spip_auteurs_articles WHERE id_article='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_auteur FROM spip_auteurs_articles WHERE id_article=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:auteur>' . $row2['id_auteur'] . '</lien:auteur>' . "\n";
 				}
 				spip_free_result($res2);
-				$query = 'SELECT id_document FROM spip_documents_articles WHERE id_article='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_document FROM spip_documents_articles WHERE id_article=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:document>' . $row2['id_document'] . '</lien:document>' . "\n";
 				}
 				spip_free_result($res2);
 			}
 			else if ($type == 'message') {
-				$query = 'SELECT id_auteur FROM spip_auteurs_messages WHERE id_message='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_auteur FROM spip_auteurs_messages WHERE id_message=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:auteur>' . $row2['id_auteur'] . '</lien:auteur>' . "\n";
 				}
 				spip_free_result($res2);
 			}
 			else if ($type == 'breve') {
-				$query = 'SELECT id_document FROM spip_documents_breves WHERE id_breve='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_document FROM spip_documents_breves WHERE id_breve=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:document>' . $row2['id_document'] . '</lien:document>' . "\n";
 				}
 				spip_free_result($res2);
 			}
 			else if ($type == 'rubrique') {
-				$query = 'SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_document FROM spip_documents_rubriques WHERE id_rubrique=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:document>' . $row2['id_document'] . '</lien:document>' . "\n";
 				}
 				spip_free_result($res2);
-				$query = 'SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_rubrique='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_auteur FROM spip_auteurs_rubriques WHERE id_rubrique=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:auteur>' . $row2['id_auteur'] . '</lien:auteur>' . "\n";
 				}
 				spip_free_result($res2);
 			}
 			else if ($type == 'auteur') {
-				$query = 'SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_rubrique FROM spip_auteurs_rubriques WHERE id_auteur=".$row[0]);
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:rubrique>' . $row2['id_rubrique'] . '</lien:rubrique>' . "\n";
 				}
 				spip_free_result($res2);
 			}
 			else if ($type == 'mot') {
-				$query = 'SELECT id_article FROM spip_mots_articles WHERE id_mot='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_article FROM spip_mots_articles WHERE id_mot=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:article>' . $row2['id_article'] . '</lien:article>' . "\n";
 				}
 				spip_free_result($res2);
-				$query = 'SELECT id_breve FROM spip_mots_breves WHERE id_mot='.$row[0];
-				$res2 = spip_query($query);
+				$res2 = spip_query("SELECT id_breve FROM spip_mots_breves WHERE id_mot=".$row[0]);
+
 				while($row2 = spip_fetch_array($res2)) {
 					$string .= '<lien:breve>' . $row2['id_breve'] . '</lien:breve>' . "\n";
 				}
 				spip_free_result($res2);
-				$query = 'SELECT id_forum FROM spip_mots_forum WHERE id_mot='.$row[0];
-				$res3 = spip_query($query);
+				$res3 = spip_query("SELECT id_forum FROM spip_mots_forum WHERE id_mot=".$row[0]);
+
 				while($row3 = spip_fetch_array($res3)) {
 					$string .= '<lien:forum>' . $row3['id_forum'] . '</lien:forum>' . "\n";
 				}
 				spip_free_result($res3);
-				$query = 'SELECT id_rubrique FROM spip_mots_rubriques WHERE id_mot='.$row[0];
-				$res4 = spip_query($query);
+				$res4 = spip_query("SELECT id_rubrique FROM spip_mots_rubriques WHERE id_mot=".$row[0]);
+
 				while($row4 = spip_fetch_array($res4)) {
 					$string .= '<lien:rubrique>' . $row4['id_rubrique'] . '</lien:rubrique>' . "\n";
 				}
 				spip_free_result($res4);
-				$query = 'SELECT id_syndic FROM spip_mots_syndic WHERE id_mot='.$row[0];
-				$res4 = spip_query($query);
+				$res4 = spip_query("SELECT id_syndic FROM spip_mots_syndic WHERE id_mot=".$row[0]);
+
 				while($row4 = spip_fetch_array($res4)) {
 					$string .= '<lien:syndic>' . $row4['id_syndic'] . '</lien:syndic>' . "\n";
 				}

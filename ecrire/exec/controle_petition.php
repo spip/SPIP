@@ -50,20 +50,19 @@ if ($connect_statut == "0minirezo") {
 	gros_titre(_T('titre_suivi_petition'));
 
 	if ($supp_petition){
-		$query_forum = "UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$supp_petition";
- 		$result_forum = spip_query($query_forum);
+		$result_forum = spip_query("UPDATE spip_signatures SET statut='poubelle' WHERE id_signature=$supp_petition");
+
 	}
 
 	if ($add_petition){
-		$query_forum = "UPDATE spip_signatures SET statut='publie' WHERE id_signature=$add_petition";
- 		$result_forum = spip_query($query_forum);
+		$result_forum = spip_query("UPDATE spip_signatures SET statut='publie' WHERE id_signature=$add_petition");
+
 	}
 
 	// Invalider les pages ayant trait aux petitions
 	if ($id_signature = ($add_petition?$add_petition:$supp_petition)) {
 		include_spip('inc/invalideur');
-		list ($id_article) = spip_fetch_array(spip_query("SELECT id_article
-			FROM spip_signatures WHERE id_signature=$id_signature"));
+		list ($id_article) = spip_fetch_array(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id_signature"));
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
 

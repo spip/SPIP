@@ -42,8 +42,8 @@ function exec_articles_ortho_dist()
 //
   $id_article = intval($id_article);
 
-$query = "SELECT * FROM spip_articles WHERE id_article='$id_article'";
-$result = spip_query($query);
+  $result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
+
 
 if ($row = spip_fetch_array($result)) {
 	$id_article = $row["id_article"];
