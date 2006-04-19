@@ -574,23 +574,24 @@ function afficher_groupe_mots($id_groupe) {
 	global $connect_id_auteur, $connect_statut, $connect_toutes_rubriques;
 	global $spip_lang_right, $couleur_claire;
 
-	$query = "SELECT id_mot, titre, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
 
-	$jjscript["fonction"] = "afficher_groupe_mots";
-	$jjscript["id_groupe"] = $id_groupe;
+	$jjscript = array("fonction" => "afficher_groupe_mots",
+			  "id_groupe" => $id_groupe);
 	$jjscript = addslashes(serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr(md5($jjscript), 0, 4);
-	
 			
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", "fonction=sql&amp;id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
-	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
-	$occurrences = calculer_liens_mots();
 
-	$table = '';
+	$multi = creer_objet_multi ("titre", "$spip_lang");
+	$query = "SELECT id_mot, titre, $multi FROM spip_mots WHERE id_groupe = '$id_groupe' ORDER BY multi";
+
+	$tranches = afficher_tranches_requete($query, 3, $tmp_var, $javascript);
 
 	if (strlen($tranches)) {
 
+		$occurrences = calculer_liens_mots();
+		$table = '';
 		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
 			$id_ajax_fonc = $row["id_ajax_fonc"];
@@ -686,7 +687,7 @@ function afficher_groupe_mots($id_groupe) {
 		if (!$GLOBALS["t_$tmp_var"]) echo "</div>";
 
 		$supprimer_groupe = false;
-	} 
+	}
 	else
 		if ($connect_statut =="0minirezo")
 			$supprimer_groupe = true;

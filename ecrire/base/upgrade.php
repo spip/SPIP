@@ -545,8 +545,8 @@ function maj_base() {
 			if (! $vu[$titre] ) {
 				$vu[$titre] = true;
 				$id_groupe = $row['id_groupe'];
-				spip_query ("UPDATE spip_mots SET id_groupe=$id_groupe WHERE type='$titre'");
-				spip_query ("DELETE FROM spip_groupes_mots WHERE titre='$titre' AND id_groupe<>$id_groupe");
+				spip_query("UPDATE spip_mots SET id_groupe=$id_groupe WHERE type='$titre'");
+				spip_query("DELETE FROM spip_groupes_mots WHERE titre='$titre' AND id_groupe<>$id_groupe");
 			}
 		}
 		maj_version (1.460);
@@ -657,7 +657,7 @@ function maj_base() {
 			$prefs = unserialize($row['prefs']);
 			$l = $prefs['spip_lang'];
 			unset ($prefs['spip_lang']);
-			spip_query ("UPDATE spip_auteurs SET lang='".addslashes($l)."',
+			spip_query("UPDATE spip_auteurs SET lang='".addslashes($l)."',
 				prefs='".addslashes(serialize($prefs))."'
 				WHERE id_auteur=".$row['id_auteur']);
 		}
@@ -673,16 +673,16 @@ function maj_base() {
 
 		// recuperer les eventuels 'supplement' installes en 1.701
 		if ($version_installee == 1.701) {
-			spip_query ("UPDATE spip_articles SET extra = supplement");
-			spip_query ("ALTER TABLE spip_articles DROP supplement");
-			spip_query ("UPDATE spip_auteurs SET extra = supplement");
-			spip_query ("ALTER TABLE spip_auteurs DROP supplement");
-			spip_query ("UPDATE spip_breves SET extra = supplement");
-			spip_query ("ALTER TABLE spip_breves DROP supplement");
-			spip_query ("UPDATE spip_rubriques SET extra = supplement");
-			spip_query ("ALTER TABLE spip_rubriques DROP supplement");
-			spip_query ("UPDATE spip_mots SET extra = supplement");
-			spip_query ("ALTER TABLE spip_mots DROP supplement");
+			spip_query("UPDATE spip_articles SET extra = supplement");
+			spip_query("ALTER TABLE spip_articles DROP supplement");
+			spip_query("UPDATE spip_auteurs SET extra = supplement");
+			spip_query("ALTER TABLE spip_auteurs DROP supplement");
+			spip_query("UPDATE spip_breves SET extra = supplement");
+			spip_query("ALTER TABLE spip_breves DROP supplement");
+			spip_query("UPDATE spip_rubriques SET extra = supplement");
+			spip_query("ALTER TABLE spip_rubriques DROP supplement");
+			spip_query("UPDATE spip_mots SET extra = supplement");
+			spip_query("ALTER TABLE spip_mots DROP supplement");
 		}
 		maj_version (1.702,
 			spip_query("SELECT extra FROM spip_articles")
@@ -820,7 +820,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.732) {	// en correction d'un vieux truc qui avait fait sauter le champ inclus sur les bases version 1.415
-		spip_query ("ALTER TABLE spip_documents ADD inclus  VARCHAR(3) DEFAULT 'non'");
+		spip_query("ALTER TABLE spip_documents ADD inclus  VARCHAR(3) DEFAULT 'non'");
 		maj_version (1.732);
 	}
 

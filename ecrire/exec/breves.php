@@ -36,12 +36,9 @@ function exec_breves_dist()
 
 		$statuts = "'prop', 'publie'" . ($editatble ? ", 'refuse'": "");
 
-		$query = "SELECT id_rubrique, id_breve, date_heure, titre, statut FROM spip_breves ".
-			"WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC";
-		
 		debut_cadre_enfonce("secteur-24.gif", false, '', $titre.aide ("breves"));
-		afficher_breves('', $query);
-						 
+		afficher_breves('', "SELECT id_rubrique, id_breve, date_heure, titre, statut FROM spip_breves WHERE id_rubrique='$id_rubrique' AND statut IN ($statuts) ORDER BY date_heure DESC");
+		
 		if ($editable) {
 		  echo "<div align='$spip_lang_right'>";
 		  icone(_T('icone_nouvelle_breve'), generer_url_ecrire("breves_edit","new=oui&id_rubrique=$id_rubrique"), "breve-24.gif", "creer.gif");
