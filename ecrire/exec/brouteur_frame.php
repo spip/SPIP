@@ -174,22 +174,22 @@ onMouseOut=\"changeclass(this, 'brouteur_rubrique');\">";
 			}
 		}
 
-		// en dernière colonnes, afficher articles et breves
+		// en derniere colonne, afficher articles et breves
 		if ($frame == 0 AND $id_rubrique==0) {
 
-			$result=spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY id_article ORDER BY articles.date DESC");
-			if (spip_num_rows($result)>0) {
+			$cpt=spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.statut = 'prepa' AND articles.id_article = lien.id_article AND lien.id_auteur = $connect_id_auteur GROUP BY articles.id_article"));
+			if ($cpt['n']) {
+
 			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
 			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=redac&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",($frame+1),"'>",
 			    _T("info_cours_edition"),"</a></b></div>";
 			}
 			
-			list($tot_art) = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_articles AS articles WHERE articles.statut = 'prop' ORDER BY articles.date DESC"));
-			
-			list($tot_brev) = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE statut = 'prop' ORDER BY date_heure DESC LIMIT  20"));
-			
-			if ($tot_art + $tot_brev > 0)
-			  echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
+			$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_articles AS articles WHERE articles.statut = 'prop'"));
+			if (!$cpt['n'])
+				$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_breves WHERE statut = 'prop'"));
+			if ($cpt['n'])
+				echo "<div ", http_style_background('article-24.gif',  "$spip_lang_left center no-repeat; margin:3px; padding-top: 5px; padding-bottom: 5px; padding-$spip_lang_left: 28px"),
 			    "><b class='verdana2'><a href='", generer_url_ecrire('brouteur_frame', "special=valider&frame=".($frame+1)."&effacer_suivant=oui"), "' target='iframe",
 			    ($frame+1)."'>",
 			    _T("info_articles_proposes"),

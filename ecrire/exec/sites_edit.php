@@ -32,9 +32,10 @@ if ($row = spip_fetch_array($result)) {
 else {
 	$syndication = 'non';
 	$new = 'oui';
-	if (!intval($id_rubrique))
-		list($id_rubrique) = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 1"));
-
+	if (!intval($id_rubrique)) {
+		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent='0' ORDER BY titre LIMIT 1"));
+		$id_rubrique = $row['id_rubrique'];
+	}
 }
 
 debut_page(_T('info_site_reference_2'), "documents", "sites", "", "", $id_rubrique);
