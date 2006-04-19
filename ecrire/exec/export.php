@@ -29,10 +29,10 @@ function mysql_timestamp_to_time($maj)
 
 // Liste un sommaire d'objets de n'importe quel type
 // a la condition d'etre publics et plus recents que $maj
-function liste_objets($query, $type, $maj) {
+function liste_objets($result, $type, $maj) {
 
 	$res = array();
-	if ($result = spip_query($query)) 
+	if ($result)
 	  while ($row = spip_fetch_array($result)) {
 		$t_id = $row["id_$type"];
 		$t_statut = $row["statut"];
@@ -93,16 +93,16 @@ function exec_export_dist()
 	if ($rubriques) {
 		$rubriques = join(",", $rubriques);
 
-		$query = "SELECT id_article, statut, maj FROM spip_articles WHERE id_rubrique IN ($rubriques)";
+		$query = spip_query("SELECT id_article, statut, maj FROM spip_articles WHERE id_rubrique IN ($rubriques)");
 		$articles = liste_objets($query, "article", $maj);
 
-		$query = "SELECT id_breve, statut, maj FROM spip_breves WHERE id_rubrique IN ($rubriques)";
+		$query = spip_query("SELECT id_breve, statut, maj FROM spip_breves WHERE id_rubrique IN ($rubriques)");
 		liste_objets($query, "breve", $maj);
 
 		if ($articles) {
 			$articles = join(",", $articles);
 
-			$query = "SELECT DISTINCT id_auteur FROM spip_auteurs_articles  WHERE id_article IN ($articles)";
+			$query = spip_query("SELECT DISTINCT id_auteur FROM spip_auteurs_articles  WHERE id_article IN ($articles)");
 			liste_objets($query, "auteur", 0);
 		}
 	}

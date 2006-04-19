@@ -10,8 +10,6 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class Auth_ldap {
@@ -76,10 +74,10 @@ class Auth_ldap {
 		if (!$this->login) return false;
 
 		// Si l'auteur existe dans la base, y recuperer les infos
-		$query = "SELECT * FROM spip_auteurs WHERE login='".addslashes($this->login)."' AND source='ldap'";
-		$result = spip_query($query);
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($this->login)."' AND source='ldap'"));
 
-		if ($row = spip_fetch_array($result)) {
+
+		if ($row) {
 			$this->nom = $row['nom'];
 			$this->email = $row['email'];
 			$this->statut = $row['statut'];
@@ -132,15 +130,11 @@ class Auth_ldap {
 		if (!$statut) return false;
 
 		// Si l'auteur n'existe pas, l'inserer avec le statut par defaut (defini a l'install)
-		$query = "SELECT id_auteur FROM spip_auteurs WHERE login='$login'";
-		$result = spip_query($query);
-		if (spip_num_rows($result)) return false;
 
-		$query = "INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) ".
-			"VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')";
-		return spip_query($query);
+		if (spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'"))) return false;
+
+		return spip_query("INSERT IGNORE INTO spip_auteurs (source, nom, login, email, bio, statut, pass) VALUES ('ldap', '$nom', '$login', '$email', '$bio', '$statut', '')");
+
 	}
 }
-
-
 ?>

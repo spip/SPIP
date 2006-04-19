@@ -109,9 +109,8 @@ function _generer_url_propre($type, $id_objet) {
 	// Verifier les eventuels doublons et mettre a jour
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
-	$query = "SELECT $col_id FROM $table
-		WHERE url_propre='".addslashes($url)."' AND $col_id != $id_objet";
-	if (spip_num_rows(spip_query($query)) > 0) {
+
+	if (spip_num_rows(spip_query("SELECT $col_id FROM $table WHERE url_propre='".addslashes($url)."' AND $col_id != $id_objet")) > 0) {
 		$url = $url.','.$id_objet;
 	}
 
@@ -122,8 +121,8 @@ function _generer_url_propre($type, $id_objet) {
 		$url = $url.','.$id_objet;
 
 	// Mettre a jour dans la base
-	$query = "UPDATE $table SET url_propre='".addslashes($url)."' WHERE $col_id=$id_objet";
-	spip_query($query);
+	spip_query("UPDATE $table SET url_propre='".addslashes($url)."' WHERE $col_id=$id_objet");
+
 	spip_release_lock($lock);
 
 	spip_log("Creation de l'url propre '$url' pour $col_id=$id_objet");
@@ -284,9 +283,8 @@ function recuperer_parametres_url(&$fond, $url) {
 
 	$table = "spip_".table_objet($type);
 	$col_id = id_table_objet($type);
-	$query = "SELECT $col_id FROM $table
-		WHERE url_propre='".addslashes($url_propre)."'";
-	$result = spip_query($query);
+	$result = spip_query("SELECT $col_id FROM $table WHERE url_propre='".addslashes($url_propre)."'");
+
 	if ($row = spip_fetch_array($result)) {
 		$contexte[$col_id] = $row[$col_id];
 	}

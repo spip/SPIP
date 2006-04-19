@@ -161,22 +161,19 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 function extrait_article($row) {
 	include_spip('inc/texte');
 	
-	$id_article = $row[0];
-	$titre = $row[2];
-	$chapo = $row[6];
-	$texte = $row[7];
-	$date = $row[9];
-	$statut = $row[10];
+	$id_article = $row['id_article'];
+	$titre = $row['titre'];
+	$chapo = $row['chapo'];
+	$texte = $row['texte'];
+	$date = $row['date'];
+	$statut = $row['statut'];
 
 	$les_auteurs = "";
- 	$query = "SELECT auteurs.* FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur";
-	$result_auteurs = spip_query($query);
+	$result_auteurs = spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_articles AS lien WHERE lien.id_article=$id_article AND auteurs.id_auteur=lien.id_auteur");
 
 	while ($row = spip_fetch_array($result_auteurs)) {
-		$nom_auteur = trim(supprimer_tags(typo($row['nom'])));
-
 		if ($les_auteurs) $les_auteurs .= ', ';
-		$les_auteurs .= $nom_auteur;
+		$les_auteurs .= trim(supprimer_tags(typo($row['nom'])));
 	}
 
 	$extrait = "** $titre **\n";
@@ -201,8 +198,7 @@ function envoyer_mail_publication($id_article) {
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
-		$query = "SELECT * FROM spip_articles WHERE id_article = $id_article";
-		$result = spip_query($query);
+		$result = spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article");
 
 		if ($row = spip_fetch_array($result)) {
 

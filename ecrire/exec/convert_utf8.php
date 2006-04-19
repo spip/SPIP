@@ -161,12 +161,11 @@ function exec_convert_utf8_dist() {
 
 			// Mais on la transcode
 			if ($charset_source != 'utf-8') {
-				$query = unicode_to_utf_8(
-					charset2unicode($query, $charset_source));
-				spip_query($query
+				spip_query(unicode_to_utf_8(charset2unicode($query, $charset_source)) .
+
 					# eviter une double conversion
-					." AND $champ LIKE '<CONVERT %'"
-				);
+					" AND $champ LIKE '<CONVERT %'"
+					   );
 				echo '.           '; flush();
 			}
 		}
