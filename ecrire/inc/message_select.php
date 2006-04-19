@@ -12,19 +12,14 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function afficher_messages($titre_table, $query_message, &$messages_vus, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
+// $messages_vus en reference pour interdire l'affichage de message en double
+
+function afficher_messages($titre_table, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
-	// Interdire l'affichage de message en double
-	if ($messages_vus) {
-		$query_message .= ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')';
-	}
+	$query_message = "SELECT messages.* FROM spip_messages AS messages$from $where" . (!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')') . ' ORDER BY date_heure DESC';
 
-
-	if ($afficher_auteurs) $cols = 4;
-	else $cols = 2;
-	$query_message .= ' ORDER BY date_heure DESC';
-	$tranches = afficher_tranches_requete($query_message, $cols);
+	$tranches = afficher_tranches_requete($query_message, ($afficher_auteurs ? 4 : 2));
 
 	if ($tranches OR $obligatoire) {
 		if ($important) debut_cadre_couleur();
@@ -35,24 +30,19 @@ function afficher_messages($titre_table, $query_message, &$messages_vus, $affich
 		bandeau_titre_boite2($titre_table, "messagerie-24.gif", $couleur_foncee, "white");
 		echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
 
-
 		echo $tranches;
 
 		$result_message = spip_query($query_message);
-		$num_rows = spip_num_rows($result_message);
 
 		while($row = spip_fetch_array($result_message)) {
-			$vals = '';
+			$vals = array();
 
 			$id_message = $row['id_message'];
 			$date = $row["date_heure"];
 			$date_fin = $row["date_fin"];
 			$titre = sinon($row['titre'], _T('ecrire:info_sans_titre'));
 			$type = $row["type"];
-			$statut = $row["statut"];
-			$page = $row["page"];
 			$rv = $row["rv"];
-			$vu = $row["vu"];
 			$messages_vus[$id_message] = $id_message;
 
 			//
