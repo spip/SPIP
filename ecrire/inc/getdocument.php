@@ -224,7 +224,8 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		$ext = addslashes(corriger_extension(strtolower($match[1])));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
-		if (!$row = spip_fetch_array(spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'"))) {
+		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'");
+		if (!$row = spip_fetch_array($q)) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */
 /*			$ext = 'bin';
