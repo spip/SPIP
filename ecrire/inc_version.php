@@ -177,7 +177,12 @@ $spip_pipeline = array(
 	'ajouter_boutons' => '',
 	'ajouter_onglets' => '',
 	'header_prive' => '',
-	'body_prive' => ''
+	'body_prive' => '',
+	'exec_init' => '',
+	'affiche_gauche' => '',
+	'affiche_droite' => '',
+	'affiche_milieu' => '',
+
 );
 # la matrice standard (fichiers definissant les fonctions a inclure)
 $spip_matrice = array ();

@@ -107,9 +107,14 @@ boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			  $message, $texte_petition,
 			  $changer_virtuel, $virtuel);
  
+ echo pipeline('affiche_gauche',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
+
 //
 // Affichage de la colonne de droite
 //
+
+creer_colonne_droite();
+ echo pipeline('affiche_droite',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 debut_droite();
 
@@ -171,6 +176,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
 
  langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad);
 
+ echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 afficher_statut_articles($id_article, $rubrique_article, $statut_article);
 
@@ -1459,6 +1465,7 @@ function exec_articles_dist()
 {
 global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
 
+
  $id_parent = intval($id_parent);
  $nouv_auteur = intval($nouv_auteur);
  $supp_mot = intval($supp_mot);
@@ -1466,6 +1473,8 @@ global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_
    $id_article = insert_article($id_parent, $new);
    add_auteur_article($id_article, $connect_id_auteur);
  }
+
+ pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
 // aucun doc implicitement inclus au départ.
 
