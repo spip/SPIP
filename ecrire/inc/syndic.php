@@ -196,12 +196,12 @@ function analyser_backend($rss, $url_syndic='') {
 		$data['url'] = url_absolue(filtrer_entites($data['url']), $url_syndic);
 
 		// Titre (semi-obligatoire)
-		if (preg_match(",<title>(.*?)</title>,ims",$item,$match))
+		if (preg_match(",<title[^>]*>(.*?)</title>,ims",$item,$match))
 			$data['titre'] = $match[1];
-			else if (preg_match(',<link[[:space:]][^>]*>,Uims',$item,$mat)
-			AND $title = extraire_attribut($mat[0], 'title'))
-				$data['titre'] = $title; 
-		if (!$data['titre'] = trim($data['titre']))
+		else if (preg_match(',<link[[:space:]][^>]*>,Uims',$item,$mat)
+		AND $title = extraire_attribut($mat[0], 'title'))
+			$data['titre'] = $title; 
+		if (!strlen($data['titre'] = trim($data['titre'])))
 			$data['titre'] = _T('ecrire:info_sans_titre');
 
 		// Date
