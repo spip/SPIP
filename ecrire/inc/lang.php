@@ -285,10 +285,21 @@ function menu_langues($nom_select = 'var_lang', $default = '', $texte = '', $her
 function liste_options_langues($nom_select, $default='', $herit='') {
 
 	if ($default == '') $default = $GLOBALS['spip_lang'];
-	if ($nom_select == 'var_lang_ecrire')
-		$langues = explode(',', $GLOBALS['all_langs']);
-	else
-		$langues = explode(',', $GLOBALS['meta']['langues_multilingue']);
+	switch($nom_select) {
+		# menu de l'interface (privee, installation et panneau de login)
+		case 'var_lang_ecrire':
+			$langues = explode(',', $GLOBALS['all_langs']);
+			break;
+		# #MENU_LANG
+		case 'var_lang':
+			$langues = explode(',', $GLOBALS['meta']['langues_utilisees']);
+			break;
+		# menu de changement de la langue d'un article
+		case 'changer_lang':
+		default:
+			$langues = explode(',', $GLOBALS['meta']['langues_proposees']);
+			break;
+	}
 
 	if (count($langues) <= 1) return '';
 	$ret = '';
@@ -305,6 +316,37 @@ function liste_options_langues($nom_select, $default='', $herit='') {
 			$ret .= "<option class='maj-debut' value='$l'$selected>".traduire_nom_langue($l)."</option>\n";
 	}
 	return $ret;
+}
+
+// Cette fonction calcule la liste des langues reellement utilisees dans le
+// site public
+function calculer_langues_utilisees () {
+	$langues_utilisees = array();
+
+	$langues_utilisees[$GLOBALS['meta']['langue_site']] = 1;
+
+	$result = spip_query("SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'");
+	while ($row = spip_fetch_array($result)) {
+		$langues_utilisees[$row['lang']] = 1;
+	}
+
+	$result = spip_query("SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'");
+	while ($row = spip_fetch_array($result)) {
+		$langues_utilisees[$row['lang']] = 1;
+	}
+
+	$result = spip_query("SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'");
+	while ($row = spip_fetch_array($result)) {
+		$langues_utilisees[$row['lang']] = 1;
+	}
+
+	$langues_utilisees = array_filter(array_keys($langues_utilisees));
+	sort($langues_utilisees);
+	$langues_utilisees = join(',',$langues_utilisees);
+
+	include_spip('inc/meta');
+	ecrire_meta('langues_utilisees', $langues_utilisees);
+	ecrire_metas();
 }
 
 //
@@ -389,8 +431,7 @@ function init_langues() {
 	global $all_langs, $langue_site;
 	global $pile_langues, $lang_typo, $lang_dir;
 
-	$all_langs = $GLOBALS['meta']['langues_proposees']
-		.$GLOBALS['meta']['langues_proposees2'];
+	$all_langs = $GLOBALS['meta']['langues_proposees'];
 	$pile_langues = array();
 	$lang_typo = '';
 	$lang_dir = '';
@@ -416,16 +457,8 @@ function init_langues() {
 				if (function_exists('ecrire_meta'))
 					ecrire_meta('langue_site', $langue_site);
 			}
-				if (function_exists('ecrire_meta')) {
-				# sur spip.net le nombre de langues proposees fait exploser
-				# ce champ limite a 255 caracteres ; a revoir...
-				if (strlen($all_langs) <= 255) {
-					ecrire_meta('langues_proposees', $all_langs);
-					effacer_meta('langues_proposees2');
-				} else {
-					ecrire_meta('langues_proposees', substr($all_langs,0,255));
-					ecrire_meta('langues_proposees2', substr($all_langs,255));
-				}
+			if (function_exists('ecrire_meta')) {
+				ecrire_meta('langues_proposees', $all_langs);
 				ecrire_metas();
 			}
 		}

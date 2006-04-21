@@ -100,7 +100,12 @@ debut_cadre_couleur("traductions-24.gif", false, "", _T('info_multilinguisme'));
 
 fin_cadre_couleur();
 
-	if ($GLOBALS['meta']['multi_articles'] == "oui" OR $GLOBALS['meta']['multi_rubriques'] == "oui") {
+
+	calculer_langues_utilisees();
+
+	if ($GLOBALS['meta']['multi_articles'] == "oui"
+	OR $GLOBALS['meta']['multi_rubriques'] == "oui"
+	OR count(explode(',',$GLOBALS['meta']['langues_utilisees'])) > 1) {
 		echo "<p>";
 		debut_cadre_relief("langues-24.gif");
 		echo "<p class='verdana2'>";
@@ -122,27 +127,14 @@ fin_cadre_couleur();
 			$langues_auth[$l] = true;
 		}
 
-		$langues_bloquees[$GLOBALS['meta']['langue_site']] = 1;
-		$result = spip_query("SELECT DISTINCT lang FROM spip_articles WHERE statut='publie'");
-
-		while ($row = spip_fetch_array($result)) {
-			$langues_bloquees[$row['lang']] = 1;
-		}
-		$result = spip_query("SELECT DISTINCT lang FROM spip_breves WHERE statut='publie'");
-
-		while ($row = spip_fetch_array($result)) {
-			$langues_bloquees[$row['lang']] = 1;
-		}
-		$result = spip_query("SELECT DISTINCT lang FROM spip_rubriques WHERE statut='publie'");
-
-		while ($row = spip_fetch_array($result)) {
-			$langues_bloquees[$row['lang']] = 1;
+		$l_bloquees_tmp = explode(',',$GLOBALS['meta']['langues_utilisees']);
+		while (list(,$l) = each($l_bloquees_tmp)) {
+			$langues_bloquees[$l] = true;
 		}
 
 		echo "<table width = '100%' cellspacing='10'><tr><td width='50%' align='top' class='verdana1'>";
 
-		ksort($langues_bloquees);
-		while (list($code_langue, ) = each($langues_bloquees)) {
+		while (list($code_langue) = each($langues_bloquees)) {
 			$i++;
 			echo "<div>";
 			$nom_langue = $langues[$code_langue];

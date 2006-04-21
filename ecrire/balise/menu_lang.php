@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;	#securite
 
 // #MENU_LANG affiche le menu des langues de l'espace public
 // et preselectionne celle la globale $lang
-// ou de l'arguemnt fourni: #MENU_LANG_ECRIRE{#ENV{malangue}} 
+// ou de l'argument fourni: #MENU_LANG{#ENV{malangue}} 
 
 
 function balise_MENU_LANG ($p) {
@@ -23,7 +23,7 @@ function balise_MENU_LANG ($p) {
 
 // s'il n'y a qu'une langue eviter definitivement la balise ?php 
 function balise_MENU_LANG_stat ($args, $filtres) {
-	if (strpos($GLOBALS['meta']['langues_proposees'],',') === false) return '';
+	if (strpos($GLOBALS['meta']['langues_utilisees'],',') === false) return '';
 	return $filtres ? $filtres : $args;
 }
 

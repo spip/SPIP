@@ -108,6 +108,11 @@ function calculer_rubriques() {
 	// Sauver la date de la derniere mise a jour (pour menu_rubriques)
 	ecrire_meta("date_calcul_rubriques", date("U"));
 	ecrire_metas();
+
+	// Comme ce calcul est fait apres chaque publication on en profite
+	// pour recalculer les langues utilisees sur le site
+	include_spip('inc/lang');
+	calculer_langues_utilisees();
 }
 
 function propager_les_secteurs()
