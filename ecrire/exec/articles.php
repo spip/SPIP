@@ -1534,30 +1534,37 @@ if ($changer_virtuel) {
 	spip_query("UPDATE spip_articles SET chapo='$chapo', date_modif=NOW() WHERE id_article=$id_article");
 }
 
-if ($titre) {
+if (isset($_POST['titre'])) {
 
-  // prendre en compte le changement eventuel, et seulement si autorise
+	// prendre en compte le changement eventuel, et seulement si autorise
 	if ($id_parent AND ($flag_auteur OR acces_rubrique($id_parent))) {
 		$id_rubrique = $id_parent;
 	}
+
+	if (!strlen($titre_article=corriger_caracteres($titre)))
+		$titre_article = _T('info_sans_titre');
+
 	$champs = array(
-			'surtitre' => corriger_caracteres($surtitre),
-			'titre' => ($titre_article=corriger_caracteres($titre)),
-			'soustitre' => corriger_caracteres($soustitre),
-			'descriptif' => corriger_caracteres($descriptif),
-			'nom_site' => corriger_caracteres($nom_site),
-			'url_site' => corriger_caracteres($url_site),
-			'chapo' => corriger_caracteres($chapo),
-			'texte' => corriger_caracteres(trop_longs_articles($texte_plus) . $texte),
-			'ps' => corriger_caracteres($ps))  ;
+		'surtitre' => corriger_caracteres($surtitre),
+		'titre' => $titre_article,
+		'soustitre' => corriger_caracteres($soustitre),
+		'descriptif' => corriger_caracteres($descriptif),
+		'nom_site' => corriger_caracteres($nom_site),
+		'url_site' => corriger_caracteres($url_site),
+		'chapo' => corriger_caracteres($chapo),
+		'texte' => corriger_caracteres(
+			trop_longs_articles($texte_plus) . $texte),
+		'ps' => corriger_caracteres($ps))  ;
 
-	revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old,
-			    ($flag_auteur||$statut_rubrique),
-			    $new, $champs);
+	revisions_articles ($id_article, $id_secteur,
+		$id_rubrique, $id_rubrique_old,
+		($flag_auteur||$statut_rubrique),
+		$new, $champs);
+
 	$id_article_bloque = $id_article;   // message pour inc/presentation
+}
 
- }
- }
+}
 
 exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
