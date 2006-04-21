@@ -17,9 +17,14 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function afficher_messages($titre_table, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
-	$query_message = "SELECT messages.* FROM spip_messages AS messages$from $where" . (!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')') . ' ORDER BY date_heure DESC';
+	$from =  "spip_messages AS messages$from";
+	$where .= (!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')');
 
-	$tranches = afficher_tranches_requete($query_message, ($afficher_auteurs ? 4 : 2));
+	$requete = "SELECT messages.* FROM $from $where"  . ' ORDER BY date_heure DESC';
+	
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from $where"));
+	$cpt = $cpt['n'];
+	$tranches = afficher_tranches_requete($requete, $cpt, ($afficher_auteurs ? 4 : 2));
 
 	if ($tranches OR $obligatoire) {
 		if ($important) debut_cadre_couleur();
@@ -32,7 +37,7 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 
 		echo $tranches;
 
-		$result_message = spip_query($query_message);
+		$result_message = spip_query($requete);
 
 		while($row = spip_fetch_array($result_message)) {
 			$vals = array();

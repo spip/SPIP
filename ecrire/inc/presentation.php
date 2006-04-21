@@ -447,21 +447,9 @@ function afficher_liste($largeurs, $table, $styles = '') {
 	return $res;
 }
 
-function afficher_tranches_requete(&$query, $colspan, $tmp_var=false, $javascript=false, $nb_aff = 10) {
+function afficher_tranches_requete(&$query, $num_rows, $colspan, $tmp_var=false, $javascript=false, $nb_aff = 10) {
 	static $ancre = 0;
 	global $spip_lang_right, $spip_display;
-
-	$query = trim($query);
-	$query_count = $query;
-	if (preg_match('{GROUP[[:space:]]BY}',$query_count)==FALSE){
-		$query_count = eregi_replace('^(SELECT)[[:space:]].*[[:space:]](FROM)[[:space:]]', '\\1 COUNT(*) \\2 ', $query);
-	}
-	$query_count = eregi_replace('ORDER[[:space:]]+BY.*$', '', $query_count);
-
-	$res = spip_query($query_count);
-	$num_rows = spip_num_rows($res);
-	if ($num_rows == 1) // ca n'est pas une requete avec jointure
-		list($num_rows) = spip_fetch_array($res);
 
 	if (!$num_rows) return;
 
@@ -683,7 +671,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	global $options, $spip_display;
 	global $spip_lang_left, $spip_lang_right;
 
-
 	// Preparation pour basculer vers liens de traductions
 	$afficher_trad = ($GLOBALS['meta']['gerer_trad'] == "oui");
 	if ($afficher_trad) {
@@ -739,12 +726,18 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$jjscript = addslashes(serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 
-
-
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
-	$tranches = afficher_tranches_requete($requete, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
 
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/D',
+			$requete,
+		       $r)) {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+
+	  $tranches = afficher_tranches_requete($requete, $cpt, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript);
+
+	}
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
 	if (strlen($tranches) OR $toujours_afficher) {
@@ -956,7 +949,15 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$tmp_var = substr(md5($jjscript), 0, 4);
 	
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", 'fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
-	$tranches = afficher_tranches_requete($requete, 4, $tmp_var, $javascript);
+
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+
+	  $tranches = afficher_tranches_requete($requete, $cpt, 4, $tmp_var, $javascript);
+	}
 
 	$requete = str_replace("FROM spip_articles AS articles ", "FROM spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete);
 
@@ -1115,10 +1116,15 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
 	}
-	
-	if ($options == "avancees") $tranches = afficher_tranches_requete($requete, 4);
-	else  $tranches = afficher_tranches_requete($requete, 3);
 
+	if (preg_match('/(\bFROM\s+.*?)(\s+ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n $r[1]"));
+		$cpt = $cpt['n'];
+
+		$tranches = afficher_tranches_requete($requete, $cpt, ($options == "avancees") ? 4 : 3);
+	}
 	if (strlen($tranches)) {
 
 		//debut_cadre_relief("breve-24.gif");
@@ -1213,7 +1219,14 @@ function afficher_rubriques($titre_table, $requete) {
 	global $connect_id_auteur;
 	global $spip_lang_rtl;
 
-	$tranches = afficher_tranches_requete($requete, 3);
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+
+	  $tranches = afficher_tranches_requete($requete, $cpt, 3);
+	}
 
 	if (strlen($tranches)) {
 
@@ -1325,7 +1338,14 @@ function puce_statut($statut, $type='article') {
 
 
 function afficher_auteurs ($titre_table, $requete) {
-	$tranches = afficher_tranches_requete($requete, 2);
+	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
+			$requete,
+		       $r)) {
+
+	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
+	  $cpt = $cpt['n'];
+	  $tranches = afficher_tranches_requete($requete, $cpt, 2);
+	}
 
 	if (strlen($tranches)) {
 
