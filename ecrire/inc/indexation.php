@@ -227,8 +227,10 @@ function update_index_tables(){
 
 function liste_index_tables() {
 	$liste_tables = array();
-	if (!isset($GLOBALS['meta']['index_table']))
+	if (!isset($GLOBALS['meta']['index_table'])) {
+		include_spip('inc/meta');
 		lire_metas();
+	}
 	if (isset($GLOBALS['meta']['index_table']))
 		$liste_tables = unserialize($GLOBALS['meta']['index_table']);
 	return $liste_tables;
