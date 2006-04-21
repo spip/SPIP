@@ -217,8 +217,7 @@ if ($id_mot) {
 	afficher_breves(_T('info_breves_liees_mot'), "SELECT breves.* FROM spip_breves AS breves, spip_mots_breves AS lien WHERE lien.id_mot='$id_mot' AND lien.id_breve=breves.id_breve ORDER BY breves.date_heure DESC");
 
 	include_spip('inc/sites_voir');
-	afficher_sites(_T('info_sites_lies_mot'), "SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot'
-	AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC");
+	afficher_sites(_T('info_sites_lies_mot'), "SELECT syndic.* FROM spip_syndic AS syndic, spip_mots_syndic AS lien WHERE lien.id_mot='$id_mot' AND lien.id_syndic=syndic.id_syndic ORDER BY syndic.nom_site DESC");
 }
 
 fin_cadre_relief();

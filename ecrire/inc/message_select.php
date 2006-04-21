@@ -17,29 +17,32 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function afficher_messages($titre_table, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
+	$tmp_var = substr(md5($where.$from), 0, 4);
 	$from =  "spip_messages AS messages$from";
 	$where .= (!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')');
 
-	$requete = "SELECT messages.* FROM $from $where"  . ' ORDER BY date_heure DESC';
-	
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from $where"));
-	$cpt = $cpt['n'];
-	$tranches = afficher_tranches_requete($requete, $cpt, ($afficher_auteurs ? 4 : 2));
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from WHERE $where"));
+	if (! ($obligatoire OR ($cpt = $cpt['n']))) return ;
 
-	if ($tranches OR $obligatoire) {
-		if ($important) debut_cadre_couleur();
+	$nb_aff = 1.5 * _TRANCHES;
 
-		echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
-	//	bandeau_titre_boite($titre_table, $afficher_auteurs, $boite_importante);
-		bandeau_titre_boite2($titre_table, "messagerie-24.gif", $couleur_foncee, "white");
-		echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
+	if ($cpt > $nb_aff) {
+	  // 1er arg fictif ici
+		$tranches = afficher_tranches_requete($cpt, $cpt, ($afficher_auteurs ? 4 : 2), $tmp_var);
+		$nb_aff = (_TRANCHES); 
+	}
+	if ($important) debut_cadre_couleur();
 
-		echo $tranches;
+	echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
+//	bandeau_titre_boite($titre_table, $afficher_auteurs, $boite_importante);
+	bandeau_titre_boite2($titre_table, "messagerie-24.gif", $couleur_foncee, "white");
+	echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
+	echo $tranches;
 
-		$result_message = spip_query($requete);
-
-		while($row = spip_fetch_array($result_message)) {
+	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT  " . intval(_request('t_' .$tmp_var)) . ", $nb_aff")
+;
+	while($row = spip_fetch_array($result_message)) {
 			$vals = array();
 
 			$id_message = $row['id_message'];
@@ -149,7 +152,6 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 		echo "</div>\n\n";
 		spip_free_result($result_message);
 		if ($important) fin_cadre_couleur();
-	}
 }
 
 ?>

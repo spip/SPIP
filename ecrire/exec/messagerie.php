@@ -86,13 +86,13 @@ fin_cadre_relief();
 
  $messages_vus = array();
 
- afficher_messages(_T('infos_vos_pense_bete'), '', "WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true);
+ afficher_messages(_T('infos_vos_pense_bete'), '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')", $messages_vus, false, true);
 
 
- afficher_messages(_T('info_nouveaux_message'), ", spip_auteurs_messages AS lien", "WHERE lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true);
+ afficher_messages(_T('info_nouveaux_message'), ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND vu='non' AND statut='publie' AND lien.id_message=messages.id_message", $messages_vus,  true, true);
 
 
- afficher_messages(_T('info_discussion_cours'), ", spip_auteurs_messages AS lien", "WHERE lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false);
+ afficher_messages(_T('info_discussion_cours'), ", spip_auteurs_messages AS lien", "lien.id_auteur=$connect_id_auteur AND statut='publie' AND type='normal' AND lien.id_message=messages.id_message AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, true, false);
 
 
 // Afficher le lien RSS
@@ -109,7 +109,7 @@ echo "<div style='text-align: "
 
 
 
- afficher_messages(_T('info_message_en_redaction'), '', "WHERE id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false, false);
+ afficher_messages(_T('info_message_en_redaction'), '', "id_auteur=$connect_id_auteur AND statut='redac'",  $messages_vus, true, false, false);
 
 
 $result = spip_query("SELECT auteurs.id_auteur, auteurs.nom, COUNT(*) AS total FROM spip_auteurs AS auteurs,  spip_auteurs_messages AS lien2, spip_messages AS messages, spip_auteurs_messages AS lien ".
@@ -145,9 +145,9 @@ if (spip_num_rows($result) > 0) {
 	echo "</div>";
 }
 
- afficher_messages(_T('info_pense_bete_ancien'), '', "WHERE id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false, false);
+ afficher_messages(_T('info_pense_bete_ancien'), '', "id_auteur=$connect_id_auteur AND statut='publie' AND type='pb' AND rv!='oui'",  $messages_vus, false, false, false);
 
- afficher_messages(_T('info_tous_redacteurs'), '', "WHERE statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, false, false, false);
+ afficher_messages(_T('info_tous_redacteurs'), '', "statut='publie' AND type='affich' AND (date_fin > DATE_SUB(NOW(), INTERVAL 1 DAY) OR rv != 'oui')",  $messages_vus, false, false, false);
 
 fin_page();
 

@@ -454,7 +454,7 @@ function afficher_tranches_requete(&$query, $num_rows, $colspan, $tmp_var=false,
 	if (!$num_rows) return;
 
 	// Ne pas couper pour trop peu
-	if ($num_rows <= 1.5 * $nb_aff) $nb_aff = $num_rows;
+	$nb_aff = ($num_rows <= 1.5 * _TRANCHES) ?  $num_rows : _TRANCHES;
 	if (preg_match('/LIMIT .*(,|OFFSET) *([0-9]+)/', $query, $regs)) {
 		if ($num_rows > $regs[2]) $num_rows = $regs[2];
 	}
