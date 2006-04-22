@@ -463,7 +463,7 @@ function calculer_criteres ($idb, &$boucles) {
 function critere_IN_dist ($idb, &$boucles, $crit)
 {
 	static $cpt = 0;
-	list($col, $op, $val)= calculer_critere_infixe($idb, $boucles, $crit);
+	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
 
 	$var = '$in' . $cpt++;
 	$x= "\n\t$var = array();";
@@ -487,14 +487,14 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 
 	$boucles[$idb]->in .= $x;
 
-	$where = array("'IN'", "\"$col\"", "('(\''  . join(\"','\",$var) . '\')')");
+	$where = array("'IN'", "\"$arg\"", "('(\''  . join(\"','\",$var) . '\')')");
 
 	// inserer la negation (cf !...)
 	if ($crit->not) {
 			$where = array("'NOT'", $where);
 		} else {
 			$boucles[$idb]->default_order[] = "'cpt'";
-			$boucles[$idb]->select[]=  "FIND_IN_SET($col, '\" .
+			$boucles[$idb]->select[]=  "FIND_IN_SET($arg, '\" .
 			  join(',', $var) .\"') AS cpt";
 		}
 
@@ -512,9 +512,9 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 
 function calculer_critere_DEFAUT($idb, &$boucles, $crit)
 {
-	list($col, $op, $val)= calculer_critere_infixe($idb, $boucles, $crit);
+	list($arg, $op, $val, $col)= calculer_critere_infixe($idb, $boucles, $crit);
 
-	$where = array("'$op'", "'$col'", $val[0]);
+	$where = array("'$op'", "'$arg'", $val[0]);
 
 	// inserer la negation (cf !...)
 
@@ -589,14 +589,14 @@ function calculer_critere_infixe($idb, &$boucles, $crit) {
 	// inserer le nom de la table SQL devant le nom du champ
 	if ($table) {
 		if ($col[0] == "`") 
-		  $col = "$table." . substr($col,1,-1);
-		else $col = "$table.$col";
+		  $arg = "$table." . substr($col,1,-1);
+		else $arg = "$table.$col";
 	}
 
 	// inserer la fonction SQL
-	if ($fct) $col = "$fct($col$args_sql)";
+	if ($fct) $arg = "$fct($col$args_sql)";
 
-	return array($col, $op, $val);
+	return array($arg, $op, $val, $col);
 }
 
 // Champ hors table, ca ne peut etre qu'une jointure.
