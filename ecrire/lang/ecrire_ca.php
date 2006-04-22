@@ -781,9 +781,7 @@ la qual compren <i>tots</i> els accessos dels redactors i administradors. Despr&
 'texte_auteur_messagerie' => 'Aquest lloc us pot mostrar permanentment la llista dels redactors que estan connectats, permetent-vos intercanviar missatges en directe. Podeu decidir no apar&egrave;ixer en aquesta llista (i ser &laquo;invisibles&raquo; pels altres usuaris).',
 'texte_auteur_messagerie_1' => 'Aquest lloc permet l\'intercanvi de missatges i la constituci&oacute; de f&ograve;rums privats entre els participants. Podeu decidir no participar en aquests f&ograve;rums.',
 'texte_auteurs' => 'ELS AUTORS',
-'texte_breves' => 'Els breus son textes curts i simples que permeten de
- posar en l&iacute;nia r&agrave;pidament informacions consices, generar
-  una revista de premsa, un calendari d\'esveniments...',
+'texte_breves' => 'Les breus son textes curts i simples que permeten posar r&agrave;pidament en l&iacute;nia informacions concises, gestionar una revista de premsa, un calendari d\'esdeveniments...',
 'texte_choix_base_1' => 'Trie la seua base:',
 'texte_choix_base_2' => 'El servidor MySQL cont&eacute; diverses  bases de dades.',
 'texte_choix_base_3' => '<B>Seleccioneu</B> d\'aqu&iacute; sota quina us ha atribu&iuml;t el vostre prove&iuml;dor d\'hostatge:',
