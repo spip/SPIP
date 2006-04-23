@@ -18,8 +18,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function generer_url_ecrire_article($id_article, $statut='') {
 	$args = "id_article=" . intval($id_article);
 	if (!$statut)
-		list($statut) = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE $args"));
-	if ($statut == 'publie')
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_articles WHERE $args"));
+	if ($statut['statut'] == 'publie')
 		return generer_url_action('redirect', $args);
 	else	return generer_url_ecrire('articles', $args);
 }
@@ -27,8 +27,8 @@ function generer_url_ecrire_article($id_article, $statut='') {
 function generer_url_ecrire_rubrique($id_rubrique, $statut='') {
 	$args = "id_rubrique=" . intval($id_rubrique);
 	if (!$statut)
-		list($statut) = spip_fetch_array(spip_query("SELECT statut FROM spip_rubriques WHERE $args"));
-	if ($statut == 'publie')
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_rubriques WHERE $args"));
+	if ($statut['statut'] == 'publie')
 		return generer_url_action('redirect', $args);
 	else	return generer_url_ecrire('naviguer',$args);
 }
@@ -36,8 +36,8 @@ function generer_url_ecrire_rubrique($id_rubrique, $statut='') {
 function generer_url_ecrire_breve($id_breve, $statut='') {
 	$args = "id_breve=" . intval($id_breve);
 	if (!$statut)
-		list($statut) = spip_fetch_array(spip_query("SELECT statut FROM spip_breves WHERE $args"));
-	if ($statut == 'publie')
+		$statut = spip_fetch_array(spip_query("SELECT statut FROM spip_breves WHERE $args"));
+	if ($statut['statut'] == 'publie')
 		return generer_url_action('redirect', $args);
 	else	return generer_url_ecrire('breves_voir',$args);
 }
@@ -70,8 +70,8 @@ function generer_url_ecrire_forum($id_forum, $statut='') {
 function generer_url_ecrire_document($id_document, $statut='') {
 	if (intval($id_document) <= 0) 
 		return '';
-	if ($row = @spip_fetch_array(spip_query("SELECT fichier,distant
-	FROM spip_documents WHERE id_document = $id_document"))) {
+	$row = @spip_fetch_array(spip_query("SELECT fichier,distant	FROM spip_documents WHERE id_document = $id_document"));
+	  if ($row) {
 		if ($row['distant'] == 'oui') {
 			return $row['fichier'];
 		} else {

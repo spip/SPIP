@@ -36,8 +36,7 @@ function maj_invalideurs ($fichier, &$page, $duree) {
 	# entre un invalideur et un appel public de page
 	$bedtime = time() + $duree + 3600;
 	$taille = @filesize(_DIR_CACHE . $fichier);
-	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille)
-	VALUES ('".addslashes($fichier)."','$bedtime','t','$taille')");
+	spip_query("INSERT IGNORE INTO spip_caches (fichier,id,type,taille) VALUES ('".addslashes($fichier)."','$bedtime','t','$taille')");
 
 	// invalidations
 	insere_invalideur($page['invalideurs'], $fichier);
@@ -53,8 +52,7 @@ function insere_invalideur($inval, $fichier) {
 			$values = array();
 			foreach($a as $k => $v)
 				$values[] = "('$fichier', '$type/$k')";
-			spip_query("INSERT IGNORE INTO spip_caches
-				(fichier, id) VALUES " . join(", ", $values));
+			spip_query("INSERT IGNORE INTO spip_caches (fichier, id) VALUES " . join(", ", $values));
 		}
 	}
 }
@@ -92,8 +90,7 @@ function applique_invalideur($depart) {
 		$tous = "'".join("', '", $depart)."'";
 		spip_log("applique $tous");
 
-		spip_query("UPDATE spip_caches SET type='x'"
-		. ' WHERE ' . calcul_mysql_in('fichier', $tous));
+		spip_query("UPDATE spip_caches SET type='x' WHERE " . calcul_mysql_in('fichier', $tous));
 
 		// Demander a inc-public de retirer les caches
 		// invalides ;
@@ -162,15 +159,14 @@ function cron_invalideur($t) {
 
 	// A revoir: il semble y avoir une desynchro ici.
 	
-		list ($total_cache) = spip_fetch_array(spip_query("SELECT SUM(taille)
-		FROM spip_caches WHERE type IN ('t', 'x')"));
+		$t = spip_fetch_array(spip_query("SELECT SUM(taille) AS n FROM spip_caches WHERE type IN ('t', 'x')"));
+		$total_cache = $t['n'];
 		spip_log("Taille du CACHE: $total_cache octets");
 
 		global $quota_cache;
 		$total_cache -= $quota_cache*1024*1024;
 		if ($quota_cache > 0 AND $total_cache > 0) {
-			$q = spip_query("SELECT id, taille FROM spip_caches
-			WHERE type IN ('t', 'x') ORDER BY id");
+			$q = spip_query("SELECT id, taille FROM spip_caches WHERE type IN ('t', 'x') ORDER BY id");
 			while ($r = spip_fetch_array($q)
 			AND ($total_cache > $taille_supprimee)) {
 				$date_limite = $r['id'];

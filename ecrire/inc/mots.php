@@ -130,14 +130,13 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 		$url_base = "sites";
 	}
 
-	list($nombre_mots) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_mots AS mots, spip_mots_$table AS lien WHERE lien.$table_id=$id_objet AND mots.id_mot=lien.id_mot"));
 
-	if (!$nombre_mots) {
+	if (!($nombre_mots = $cpt['n'])) {
 		if (!$flag_editable) return;
-		list($nombre_groupes) = spip_fetch_array(spip_query("SELECT COUNT(*) FROM spip_groupes_mots WHERE $table = 'oui'
-		AND ".substr($connect_statut,1)." = 'oui'"));
+		$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_groupes_mots WHERE $table = 'oui'	AND ".substr($connect_statut,1)." = 'oui'"));
 
-		if (!$nombre_groupes) return;
+		if (!$cpt['n']) return;
 	}
 
 	echo "<a name='mots'></a>";
@@ -260,8 +259,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	}
 
 	if ($flag_editable && ($supp_mot = intval($supp_mot))) {
-		$result = spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . 
-				     (($supp_mot == -1) ?  "" :  " AND id_mot=$supp_mot"));
+		$result = spip_query("DELETE FROM spip_mots_$table WHERE $table_id=$id_objet" . (($supp_mot == -1) ?  "" :  " AND id_mot=$supp_mot"));
 
 		$reindexer = true;
 	}
@@ -419,10 +417,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 
 		echo "<table border='0' width='100%' style='text-align: $spip_lang_right'>";
 
-		$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE $table = 'oui'
-		AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR
-		(unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus)))
-		ORDER BY multi");
+		$result_groupes = spip_query("SELECT *, ".creer_objet_multi ("titre", "$spip_lang")." FROM spip_groupes_mots WHERE $table = 'oui' AND ".substr($connect_statut,1)." = 'oui' AND (unseul != 'oui'  OR (unseul = 'oui' AND id_groupe NOT IN ($id_groupes_vus))) ORDER BY multi");
 
 
 		// Afficher un menu par groupe de mots

@@ -227,7 +227,8 @@ function envoyer_mail_proposition($id_article) {
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
-		if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"))) {
+		$row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article = $id_article"));
+		if ($row) {
 
 			$lang_utilisateur = $GLOBALS['spip_lang'];
 			changer_langue($row['lang']);

@@ -156,8 +156,7 @@ function appliquer_modifs_config() {
 	// forums_publics_appliquer : futur, saufnon, tous
 	$accepter_forum = substr($forums_publics,0,3);
 	if ($forums_publics_appliquer == 'saufnon')
-	spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'
-		WHERE accepter_forum != 'non'");
+	spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'	WHERE accepter_forum != 'non'");
 	else if ($forums_publics_appliquer == 'tous')
 		spip_query("UPDATE spip_articles SET accepter_forum='$accepter_forum'");
 

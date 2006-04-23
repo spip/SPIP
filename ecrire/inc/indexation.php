@@ -305,8 +305,7 @@ function indexer_contenu_document ($row) {
 	global $extracteur;
 
 	if ($row['mode'] == 'vignette') return;
-	list($extension) = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = ".$row['id_type']
-	));
+	list($extension) = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type = ".$row['id_type']));
 
 	// Voir si on sait lire le contenu (eventuellement en chargeant le
 	// fichier extract/pdf.php dans find_in_path() )
@@ -463,12 +462,10 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 
 			// 3. marquer le thread comme "en cours d'indexation"
 			spip_log("-> indexation thread $thread");
-			spip_query("UPDATE spip_forum SET idx='idx'
-				WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+			spip_query("UPDATE spip_forum SET idx='idx' WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
 
 			// 4. Indexer le thread
-			$s = spip_query("SELECT * FROM spip_forum
-				WHERE id_forum IN ($thread) AND idx!='non'");
+			$s = spip_query("SELECT * FROM spip_forum WHERE id_forum IN ($thread) AND idx!='non'");
 			while ($row = spip_fetch_array($s)) {
 		    indexer_les_champs($row,$INDEX_elements_objet[$table]);
 		    if (isset($INDEX_objet_associes[$table]))
@@ -478,8 +475,7 @@ function indexer_objet($table, $id_objet, $forcer_reset = true) {
 			}
 
 			// 5. marquer le thread comme "indexe"
-			spip_query("UPDATE spip_forum SET idx='oui'
-				WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
+			spip_query("UPDATE spip_forum SET idx='oui' WHERE id_forum IN ($thread,$id_objet) AND idx!='non'");
 
 			// 6. Changer l'id_objet en id_forum de la racine du thread
 			$id_objet = $id_forum;
@@ -586,8 +582,7 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 		// (statut d'indexation inconnu), enfin les 'idx' (ceux dont
 		// l'indexation a precedemment echoue, p. ex. a cause d'un timeout)
 		foreach (array('1', '', 'idx') as $mode) {
-			$s = spip_query("SELECT $table_primary AS id FROM $table
-			WHERE idx='$mode' AND $critere LIMIT $limit");
+			$s = spip_query("SELECT $table_primary AS id FROM $table WHERE idx='$mode' AND $critere LIMIT $limit");
 			while ($t = spip_fetch_array($s)) {
 				$vu[$table] .= $t['id'].", ";
 				indexer_objet($table, $t['id'], $mode);
@@ -600,7 +595,8 @@ function effectuer_une_indexation($nombre_indexations = 1) {
 
 function executer_une_indexation_syndic() {
 	$id_syndic = 0;
-	if ($row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 1"))) {
+	$row = spip_fetch_array(spip_query("SELECT id_syndic FROM spip_syndic WHERE statut='publie' AND date_index < DATE_SUB(NOW(), INTERVAL 7 DAY) ORDER BY date_index LIMIT 1"));
+	if ($row) {
 		$id_syndic = $row['id_syndic'];
 		spip_query("UPDATE spip_syndic SET date_index=NOW() WHERE id_syndic=$id_syndic");
 		marquer_indexer('syndic', $id_syndic);
@@ -737,9 +733,7 @@ function prepare_recherche($recherche, $primary = 'id_article', $id_table='artic
 
 		$index_id_table = id_index_table($nom_table);
 		$points = array();
-		$s = spip_query("SELECT hash,points,id_objet as id
-			FROM spip_index
-			WHERE hash IN ($hash_recherche) AND id_table='$index_id_table'");
+		$s = spip_query("SELECT hash,points,id_objet as id FROM spip_index WHERE hash IN ($hash_recherche) AND id_table='$index_id_table'");
 			
 		while ($r = spip_fetch_array($s))
 			$points[$r['id']]

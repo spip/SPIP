@@ -2357,8 +2357,7 @@ if (true /*$gadgets*/) {
 	echo "</a>";
 
 	$gadget = '';
-		$vos_articles = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article ".
-			"AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5");
+		$vos_articles = spip_query("SELECT articles.id_article, articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles, spip_auteurs_articles AS lien WHERE articles.id_article=lien.id_article AND lien.id_auteur=$connect_id_auteur AND articles.statut='prepa' ORDER BY articles.date DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -2374,8 +2373,7 @@ if (true /*$gadgets*/) {
 			$gadget .= "</div>";
 		}
 	
-		$vos_articles = spip_query("SELECT articles.id_article,  articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut='prop' ".
-			" ORDER BY articles.date DESC LIMIT 5");
+		$vos_articles = spip_query("SELECT articles.id_article,  articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut='prop' ORDER BY articles.date DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -2392,8 +2390,7 @@ if (true /*$gadgets*/) {
 			$gadget .= "</div>";
 		}
 			
-		$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ".
-			" ORDER BY date_heure DESC LIMIT 5");
+		$vos_articles = spip_query("SELECT * FROM spip_breves WHERE statut='prop' ORDER BY date_heure DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -2973,8 +2970,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 	switch ($type) {
 		case 'article':
 			if ($statut == "publie" AND $GLOBALS['meta']["post_dates"] == 'non'
-			AND !spip_fetch_array(spip_query("SELECT id_article
-			FROM spip_articles WHERE id_article=$id AND date<=NOW()")))
+			AND !spip_fetch_array(spip_query("SELECT id_article FROM spip_articles WHERE id_article=$id AND date<=NOW()")))
 				$statut = 'prop';
 			if ($statut == 'publie')
 				$en_ligne = 'calcul';

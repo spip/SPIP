@@ -1074,10 +1074,7 @@ function calendrier_categories($table, $num, $objet)
     return generer_calendrier_class($table, $num, $objet);
   else {
     // cf calendrier.css
-    $result= spip_fetch_array(spip_query("SELECT " . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . "
-FROM	$table
-WHERE	$objet=$num
-"));
+    $result= spip_fetch_array(spip_query("SELECT " . (($objet != 'id_breve') ? 'id_secteur' : 'id_rubrique') . " FROM	$table WHERE	$objet=$num"));
     if ($result) $num = $result[0];
     return 'calendrier-couleur' . (($num%14)+1);
   }
@@ -1127,11 +1124,7 @@ function sql_calendrier_interval($limites) {
 
 function  sql_calendrier_interval_forums($limites, &$evenements) {
 	list($avant, $apres) = $limites;
-	$result=spip_query("SELECT DISTINCT titre, date_heure, id_forum FROM	spip_forum WHERE
-	date_heure >= $avant
- AND	date_heure < $apres
-ORDER BY date_heure
-");
+	$result=spip_query("SELECT DISTINCT titre, date_heure, id_forum FROM	spip_forum WHERE date_heure >= $avant  AND	date_heure < $apres ORDER BY date_heure");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
 		$id = $row['id_forum'];
@@ -1150,12 +1143,7 @@ ORDER BY date_heure
 
 function sql_calendrier_interval_articles($avant, $apres, &$evenements) {
 	
-	$result=spip_query("SELECT id_article, titre, date, descriptif, chapo FROM	spip_articles WHERE
-	statut='publie'
- AND	date >= $avant
- AND	date < $apres
-ORDER BY date
-");
+	$result=spip_query("SELECT id_article, titre, date, descriptif, chapo FROM	spip_articles WHERE statut='publie' AND	date >= $avant  AND	date < $apres ORDER BY date");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
 		$id = $row['id_article'];
@@ -1170,13 +1158,7 @@ ORDER BY date
 
 function sql_calendrier_interval_rubriques($avant, $apres, &$evenements) {
 	
-	$result=spip_query("SELECT DISTINCT R.id_rubrique, titre, descriptif, date FROM spip_rubriques AS R, spip_documents_rubriques AS L WHERE
-	statut='publie'
- AND	date >= $avant
- AND	date < $apres
- AND	R.id_rubrique = L.id_rubrique
-ORDER BY date
-");
+	$result=spip_query("SELECT DISTINCT R.id_rubrique, titre, descriptif, date FROM spip_rubriques AS R, spip_documents_rubriques AS L WHERE statut='publie' AND	date >= $avant AND	date < $apres AND	R.id_rubrique = L.id_rubrique ORDER BY date");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date']);
 		$id = $row['id_rubrique'];
@@ -1190,12 +1172,7 @@ ORDER BY date
 }
 
 function sql_calendrier_interval_breves($avant, $apres, &$evenements) {
-	$result=spip_query("SELECT id_breve, titre, date_heure, id_rubrique FROM spip_breves WHERE
-	statut='publie'
- AND	date_heure >= $avant
- AND	date_heure < $apres
-ORDER BY date_heure
-");
+	$result=spip_query("SELECT id_breve, titre, date_heure, id_rubrique FROM spip_breves WHERE	statut='publie'  AND	date_heure >= $avant AND	date_heure < $apres ORDER BY date_heure");
 	while($row=spip_fetch_array($result)){
 		$amj = date_anneemoisjour($row['date_heure']);
 		$id = $row['id_breve'];
@@ -1212,15 +1189,7 @@ function sql_calendrier_interval_rv($avant, $apres) {
 	global $connect_id_auteur;
 	$evenements= array();
 	if (!$connect_id_auteur) return $evenements;
-	$result=spip_query("SELECT messages.id_message, messages.titre, messages.texte, messages.date_heure, messages.date_fin, messages.type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE
-	((lien.id_auteur='$connect_id_auteur'
- AND	lien.id_message=messages.id_message) OR messages.type='affich')
- AND	messages.rv='oui' 
- AND	((messages.date_fin >= $avant OR messages.date_heure >= $avant) AND messages.date_heure <= $apres)
- AND	messages.statut='publie'
-GROUP BY messages.id_message
-ORDER BY messages.date_heure
-");
+	$result=spip_query("SELECT messages.id_message, messages.titre, messages.texte, messages.date_heure, messages.date_fin, messages.type FROM spip_messages AS messages, spip_auteurs_messages AS lien WHERE	((lien.id_auteur='$connect_id_auteur' AND	lien.id_message=messages.id_message) OR messages.type='affich') AND	messages.rv='oui'  AND	((messages.date_fin >= $avant OR messages.date_heure >= $avant) AND messages.date_heure <= $apres) AND	messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	while($row=spip_fetch_array($result)){
 		$date_heure=$row["date_heure"];
 		$date_fin=$row["date_fin"];
@@ -1238,10 +1207,7 @@ ORDER BY messages.date_heure
 		    else {
 		      $cat = 'calendrier-couleur9';
 		      $auteurs = array();
-		      $result_aut=spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE
-	(lien.id_message='$id_message' 
-  AND	(auteurs.id_auteur!='$connect_id_auteur'
-  AND	lien.id_auteur=auteurs.id_auteur))");
+		      $result_aut=spip_query("SELECT nom FROM spip_auteurs AS auteurs, spip_auteurs_messages AS lien WHERE	(lien.id_message='$id_message'  AND	(auteurs.id_auteur!='$connect_id_auteur'  AND	lien.id_auteur=auteurs.id_auteur))");
 			while($row_auteur=spip_fetch_array($result_aut)){
 				$auteurs[] = $row_auteur['nom'];
 			}
@@ -1312,17 +1278,7 @@ function sql_calendrier_taches_rv () {
 	global $connect_id_auteur;
 	$r = array();
 	if (!$connect_id_auteur) return $r;
-	$result = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE
-	((lien.id_auteur='$connect_id_auteur' 
-	AND lien.id_message=messages.id_message) 
-	OR messages.type='affich') 
-AND messages.rv='oui'
-AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) 
-	AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))
-	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() ))
-AND messages.statut='publie' 
-GROUP BY messages.id_message 
-ORDER BY messages.date_heure");
+	$result = spip_query("SELECT messages.* FROM spip_messages AS messages, spip_auteurs_messages AS lien  WHERE	((lien.id_auteur='$connect_id_auteur' AND lien.id_message=messages.id_message) OR messages.type='affich') AND messages.rv='oui' AND ( (messages.date_heure > DATE_SUB(NOW(), INTERVAL 1 DAY) AND messages.date_heure < DATE_ADD(NOW(), INTERVAL 1 MONTH))	OR (messages.date_heure < NOW() AND messages.date_fin > NOW() )) AND messages.statut='publie' GROUP BY messages.id_message ORDER BY messages.date_heure");
 	if (spip_num_rows($result) > 0){
 	  $r = array();
 	  while ($x = spip_fetch_array($result)) $r[] = $x;

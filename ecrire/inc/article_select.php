@@ -75,7 +75,8 @@ else if ($new=='oui') {
 
 					$id_parent = $row_rub['id_parent'];
 				}
-				if ($row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='$spip_lang' AND id_parent=$id_parent"))) {
+				$row_rub = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE lang='$spip_lang' AND id_parent=$id_parent"));
+				if ($row_rub) {
 					$id_rubrique = $row['id_secteur'] = $row['id_rubrique'] = $row_rub['id_rubrique'];
 					$changer_lang = 'herit';
 				}

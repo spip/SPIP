@@ -10,13 +10,10 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 function cron_ajax ($t) {
-	spip_query("DELETE FROM spip_ajax_fonc
-	WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)");
+	spip_query("DELETE FROM spip_ajax_fonc WHERE date < DATE_SUB(NOW(), INTERVAL 2 HOUR)");
 	return 1;
 }
 

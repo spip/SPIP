@@ -76,7 +76,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 
 		echo "<p>",message_de_signature($row),"</p>";
 		
-		list($titre) = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));	
+		$titre = spip_fetch_array(spip_query("SELECT titre FROM spip_articles WHERE id_article=$id_article"));	
 
 		if (!$id)
 		  echo "<span class='arial1' style='float: $spip_lang_right; color: black; padding-$spip_lang_left: 4px;'><b>",
@@ -89,7 +89,7 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 		   generer_url_action('redirect', "id_article=$id_article") :
 		   generer_url_ecrire('articles', "id_article=$id_article")),
 		  "'>",
-		  typo($titre),
+		  typo($titre['titre']),
 		  "</a>";
 
 		echo "</TD></TR></TABLE>";

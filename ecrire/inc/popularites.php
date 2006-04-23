@@ -45,8 +45,7 @@ function calculer_popularites() {
 	spip_query("UPDATE spip_articles SET maj=maj, popularite = popularite * $a");
 
 	// enregistrer les metas...
-	$row = spip_fetch_array(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"
-	));
+	$row = spip_fetch_array(spip_query("SELECT MAX(popularite) AS max, SUM(popularite) AS tot FROM spip_articles"));
 	ecrire_meta("popularite_max", $row['max']);
 	ecrire_meta("popularite_total", $row['tot']);
 
@@ -59,8 +58,7 @@ function calculer_popularites() {
 	$aujourdhui = date("Y-m-d");
 	if ($date = $GLOBALS['meta']['date_statistiques']
 	AND $date != $aujourdhui)
-		spip_query("UPDATE spip_referers
-		SET visites_veille=visites_jour, visites_jour=0");
+		spip_query("UPDATE spip_referers SET visites_veille=visites_jour, visites_jour=0");
 	ecrire_meta('date_statistiques', $aujourdhui);
 
 	// et c'est fini pour cette fois-ci

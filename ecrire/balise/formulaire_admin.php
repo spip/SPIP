@@ -58,13 +58,13 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	// Ne pas afficher le bouton 'Modifier ce...' si l'objet n'existe pas
 	foreach (array('article', 'breve', 'rubrique', 'mot', 'auteur', 'syndic') as $type) {
 		$id_type = id_table_objet($type);
-		if (!($$id_type = intval($$id_type)
-		AND $s = spip_query("SELECT $id_type FROM spip_".table_objet($type)."	WHERE $id_type=".$$id_type)
-		AND spip_num_rows($s)))
-			$$id_type='';
-		else {
-			$objet_affiche = $type;
-			break;
+		if ($n = intval($$id_type)) {
+			$s = spip_query("SELECT $id_type FROM spip_".table_objet($type)."	WHERE $id_type=".$$id_type);
+			if ($s AND spip_num_rows($s)) {
+				$$id_type = $n;
+				$objet_affiche = $type;
+				break;
+			}
 		}
 	}
 
@@ -111,26 +111,21 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 		$ecrire = _DIR_RESTREINT_ABS;
 
 	// Bouton "preview" si l'objet demande existe et est previsualisable
+	$preview = false;
+
 	if (!$GLOBALS['var_preview'] AND (
 	(($GLOBALS['meta']['preview']=='1comite'
 		AND $GLOBALS['auteur_session']['statut'] =='1comite')
 	OR ($GLOBALS['meta']['preview']<>''
 		AND $GLOBALS['auteur_session']['statut'] =='0minirezo'))
 	)) {
-		if ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui')
-			$postdates = "OR (statut='publie' AND date>NOW())";
+		$p = ($objet_affiche == 'article' AND $GLOBALS['meta']['post_dates'] != 'oui');
 
 		if ($objet_affiche == 'article'
 		OR $objet_affiche == 'breve'
 		OR $objet_affiche == 'rubrique'
 		OR $objet_affiche == 'syndic')
-			if (spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)."
-			WHERE ".id_table_objet($objet_affiche)."=".$$id_type."
-			AND (
-				(statut IN ('prop', 'prive'))
-				$postdates
-			)")))
-				$preview = true;
+		  $preview = spip_num_rows(spip_query("SELECT id_$objet_affiche FROM spip_".table_objet($objet_affiche)." WHERE ".id_table_objet($objet_affiche)."=".$$id_type." AND ((statut IN ('prop', 'prive')) " . (!$p ? '' : "OR (statut='publie' AND date>NOW())") .")"));
 	}
 
 	return array('formulaire_admin', 0, 

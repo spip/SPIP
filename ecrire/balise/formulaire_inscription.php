@@ -104,11 +104,8 @@ function message_inscription($mail, $nom, $mode, $id_rubrique=0) {
 	if (is_string($declaration))
 		return  $declaration;
 
-	$s = spip_query("SELECT statut, id_auteur, login, email
-		FROM spip_auteurs WHERE email='".
-			addslashes($declaration['email']) .
-			"'");
-	$row = spip_fetch_array($s);
+	$row = spip_fetch_array(spip_query("SELECT statut, id_auteur, login, email FROM spip_auteurs WHERE email='". addslashes($declaration['email']) .	"'"));
+
 	if (!$row) 
 		// il n'existe pas, creer les identifiants  
 		return inscription_nouveau($declaration);
@@ -192,8 +189,8 @@ function test_login($nom, $mail) {
 	$login = $login_base;
 
 	for ($i = 1; ; $i++) {
-	  if (!spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1")))
-			return $login;
+		$n = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login' LIMIT 1"));
+		if (!$n) return $login;
 		$login = $login_base.$i;
 	}
 }
@@ -203,9 +200,7 @@ function creer_pass_pour_auteur($id_auteur) {
 	$pass = creer_pass_aleatoire(8, $id_auteur);
 	$mdpass = md5($pass);
 	$htpass = generer_htpass($pass);
-	spip_query("UPDATE spip_auteurs
-		SET pass='$mdpass', htpass='$htpass'
-		WHERE id_auteur = ".intval($id_auteur));
+	spip_query("UPDATE spip_auteurs	SET pass='$mdpass', htpass='$htpass' WHERE id_auteur = ".intval($id_auteur));
 	ecrire_acces();
 	
 	return $pass;

@@ -62,8 +62,7 @@ class Auth_spip {
 			$connect_statut =
 			($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ?
 				'1comite' : '6forum';
-			spip_query("UPDATE spip_auteurs SET statut='$connect_statut'
-				WHERE login='".addslashes($this->login)."'");
+			spip_query("UPDATE spip_auteurs SET statut='$connect_statut' WHERE login='".addslashes($this->login)."'");
 		}
 		if ($this->md5next) {
 			include_spip('inc/session');

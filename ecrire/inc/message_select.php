@@ -25,7 +25,7 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return ;
 
 	$nb_aff = 1.5 * _TRANCHES;
-	$def_aff = intval(_request('t_' .$tmp_var));
+	$deb_aff = intval(_request('t_' .$tmp_var));
 
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
@@ -40,7 +40,7 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 	echo "<TABLE WIDTH='100%' CELLPADDING='2' CELLSPACING='0' BORDER='0'>";
 	echo $tranches;
 
-	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT  " . $deb_aff . ", $nb_aff")
+	$result_message = spip_query("SELECT messages.* FROM $from WHERE $where ORDER BY date_heure DESC LIMIT $deb_aff, $nb_aff");
 ;
 	while($row = spip_fetch_array($result_message)) {
 			$vals = array();

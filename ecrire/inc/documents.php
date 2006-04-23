@@ -83,12 +83,11 @@ function image_pattern($vignette) {
 
 function document_et_vignette($document, $url, $portfolio=false) {
 	// a supprimer avec spip_types_documents
-	list($extension) = spip_fetch_array(spip_query("SELECT extension FROM
-		spip_types_documents WHERE id_type=".$document['id_type']));
+	$extension = spip_fetch_array(spip_query("SELECT extension FROM	spip_types_documents WHERE id_type=".$document['id_type']));
+	$extension = $extension['extension'];
 
 	if ($document['id_vignette'] > 0
-	AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents
-	WHERE id_document = ".$document['id_vignette']))) {
+	AND $vignette = spip_fetch_array(spip_query("SELECT * FROM spip_documents WHERE id_document = ".$document['id_vignette']))) {
 		if (!$portfolio OR !($GLOBALS['meta']['creer_preview'] == 'oui')) {
 			$image = image_pattern($vignette);
 		} else {
@@ -909,13 +908,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 
 	$doublons = document_vu();
 
-	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes ".
-		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
-		"AND docs.mode='document'".
-		" AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')" .
-
-		(!$doublons ?'':" AND docs.id_document NOT IN ($doublons) ") .
-		" ORDER BY 0+docs.titre, docs.titre, docs.id_document");
+	$images_liees = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l, spip_types_documents AS lestypes WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document' AND docs.id_type=lestypes.id_type AND lestypes.extension IN ('gif', 'jpg', 'png')" . (!$doublons ?'':" AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.titre, docs.id_document");
 
 	//
 	// recuperer tout le tableau des images du portfolio
@@ -939,12 +932,7 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 	$doublons = document_vu();
 
 	//// Documents associes
-	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l ".
-		"WHERE l.id_$type=$id_article AND l.id_document=docs.id_document ".
-		"AND docs.mode='document'" .
-
-		(!$doublons ? '' : " AND docs.id_document NOT IN ($doublons) ") .
-		" ORDER BY 0+docs.titre, docs.titre, docs.id_document");
+	$documents_lies = spip_query("SELECT docs.*,l.id_$type FROM spip_documents AS docs, spip_documents_".$type."s AS l WHERE l.id_$type=$id_article AND l.id_document=docs.id_document AND docs.mode='document'" . (!$doublons ? '' : " AND docs.id_document NOT IN ($doublons) ") . " ORDER BY 0+docs.titre, docs.titre, docs.id_document");
 
 	$documents = array();
 	while ($document = spip_fetch_array($documents_lies))
@@ -1004,8 +992,7 @@ function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
 		$documents_lies[]= $row['id_document'];
 
 	if (count($documents_lies)) {
-		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents ".
-			"WHERE id_document in (".join(',', $documents_lies).")");
+		$res = spip_query("SELECT DISTINCT id_vignette FROM spip_documents WHERE id_document in (".join(',', $documents_lies).")");
 		while ($v = spip_fetch_array($res))
 			$vignettes[]= $v['id_vignette'];
 		$docs_exclus = ereg_replace('^,','',join(',', $vignettes).','.join(',', $documents_lies));
@@ -1352,9 +1339,7 @@ function maj_documents ($id_objet, $type) {
 	AND $_POST['modif_document'] == 'oui') {
 
 		// "securite" : verifier que le document est bien lie a l'objet
-		$result_doc = spip_query("SELECT * FROM spip_documents_".$type."s
-		WHERE id_document=".$id_document."
-		AND id_".$type." = $id_objet");
+		$result_doc = spip_query("SELECT * FROM spip_documents_".$type."s WHERE id_document=".$id_document."	AND id_".$type." = $id_objet");
 		if (spip_num_rows($result_doc) > 0) {
 			$titre_document = addslashes(corriger_caracteres(
 				$_POST['titre_document']));
@@ -1368,8 +1353,7 @@ function maj_documents ($id_objet, $type) {
 					hauteur='$hauteur_document'";
 			else $wh = "";
 
-			spip_query("UPDATE spip_documents
-			SET titre='$titre_document', descriptif='$descriptif_document' $wh WHERE id_document=".$id_document);
+			spip_query("UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document' $wh WHERE id_document=".$id_document);
 
 			// Date du document (uniquement dans les rubriques)
 			if ($_POST['jour_doc']) {
@@ -1381,9 +1365,7 @@ function maj_documents ($id_objet, $type) {
 				.$_POST['mois_doc'].'-'.$_POST['jour_doc'];
 
 				if (preg_match('/^[0-9-]+$/', $date)) {
-					spip_query("UPDATE spip_documents
-						SET date='$date'
-						WHERE id_document=$id_document");
+					spip_query("UPDATE spip_documents SET date='$date' WHERE id_document=$id_document");
 
 					// Changement de date, ce qui nous oblige a :
 					calculer_rubriques();
