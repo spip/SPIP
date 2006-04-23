@@ -16,7 +16,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 // Infos de mails sur l'hebergeur (tout ca est assez sale)
 //
 global $hebergeur;
-global $HTTP_X_HOST, $REQUEST_URI, $SERVER_NAME, $HTTP_HOST;
+global $HTTP_X_HOST, $SERVER_NAME;
 $hebergeur = '';
 
 // Lycos (ex-Multimachin)

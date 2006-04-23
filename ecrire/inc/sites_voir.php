@@ -16,35 +16,46 @@ function afficher_sites($titre_table, $requete) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 
-	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/', 
-			$requete,
-		       $r)) {
+	$tous_id = array();
 
-	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
-	  $cpt = $cpt['n'];
+	$from = $requete['FROM'];
+	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
 
-	  $tranches = afficher_tranches_requete($requete, $cpt, 3);
+	$cpt = "$from$where$group";
+	$tmp_var = substr(md5($cpt), 0, 4);
+
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+	if (! ($cpt = $cpt['n'])) return $tous_id ;
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	$nb_aff = 1.5 * _TRANCHES;
+	$deb_aff = intval(_request('t_' .$tmp_var));
+
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
 	}
-	if ($tranches) {
-//		debut_cadre_relief("site-24.gif");
-		if ($titre_table) echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
-		bandeau_titre_boite2($titre_table, "site-24.gif", $couleur_claire, "black");
-		echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 
-		echo $tranches;
+	if ($titre_table) echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
+	bandeau_titre_boite2($titre_table, "site-24.gif", $couleur_claire, "black");
+	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 
-	 	$result = spip_query($requete);
-		$num_rows = spip_num_rows($result);
+	echo $tranches;
 
-		$ifond = 0;
-		$premier = true;
-		$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+	$result = spip_query("SELECT * FROM $from$where$group$order LIMIT $deb_aff, $nb_aff");
+
+	$ifond = 0;
+	$premier = true;
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
 		
-		if ($voir_logo) include_spip('inc/logos');
+	if ($voir_logo) include_spip('inc/logos');
 		
-		$compteur_liste = 0;
-		while ($row = spip_fetch_array($result)) {
+	$compteur_liste = 0;
+	while ($row = spip_fetch_array($result)) {
 			$vals = '';
 			$id_syndic=$row["id_syndic"];
 			$id_rubrique=$row["id_rubrique"];
@@ -127,66 +138,66 @@ function afficher_sites($titre_table, $requete) {
 			//echo "</td>";					
 			//echo "</tr></n>";
 			$table[] = $vals;
-		}
-		spip_free_result($result);
-		
-		$largeurs = array('','','');
-		$styles = array('arial11', 'arial1', 'arial1');
-		echo afficher_liste($largeurs, $table, $styles);
-		echo "</table>";
-		//fin_cadre_relief();
-		echo "</div>\n";
 	}
+	spip_free_result($result);
+		
+	$largeurs = array('','','');
+	$styles = array('arial11', 'arial1', 'arial1');
+	echo afficher_liste($largeurs, $table, $styles);
+	echo "</table>";
+	echo "</div>\n";
 	return $tous_id;
 }
 
 function afficher_syndic_articles($titre_table, $requete, $afficher_site = false) {
-	global $connect_statut;
-	global $REQUEST_URI;
-	global $debut_liste_sites;
-	global $flag_editable;
-
-	static $n_liste_sites;
-	global $spip_lang_rtl, $spip_lang_right;
-
-	$adresse_page = substr($REQUEST_URI, strpos($REQUEST_URI, "/ecrire")+8, strlen($REQUEST_URI));
-	$adresse_page = ereg_replace("\&?debut\_liste\_sites\[$n_liste_sites\]\=[0-9]+","",$adresse_page);
-	$adresse_page = ereg_replace("\&?(ajouter\_lien|supprimer_lien)\=[0-9]+","",$adresse_page);
-
-	if (ereg("\?",$adresse_page)) $lien_url = "&";
-	else $lien_url = "?";
-
-	$lien_url .= "debut_liste_sites[".$n_liste_sites."]=".$debut_liste_sites[$n_liste_sites]."&";
+	global $connect_statut, $REQUEST_URI, $spip_lang_rtl, $spip_lang_right;
 
 	$cols = 2;
 	if ($connect_statut == '0minirezo') $cols ++;
 	if ($afficher_site) $cols ++;
 
-	if (preg_match('/(\s+FROM\s+.*?)(ORDER\s+BY\s+.*)?$/ms', 
-			$requete,
-		       $r)) {
-	  $cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n$r[1]"));
-	  $cpt = $cpt['n'];
-	  $tranches = afficher_tranches_requete($requete, $cpt, $cols);
+	$tous_id = array();
+
+	$from = $requete['FROM'] ? $requete['FROM'] : 'spip_syndic_articles';
+	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
+	$order = $requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '';
+	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
+	$limit = $requete['LIMIT'] ? (' LIMIT ' . $requete['LIMIT']) : '';
+
+	$cpt = "$from$where$group";
+	$tmp_var = substr(md5($cpt), 0, 4);
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	$nb_aff = 1.5 * _TRANCHES;
+	$deb_aff = intval(_request('t_' .$tmp_var));
+
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, $cols, $tmp_var, '', $nb_aff);
+
 	}
 
-	if (strlen($tranches)) {
-
-		if ($titre_table) echo "<div style='height: 12px;'></div>";
-		echo "<div class='liste'>";
+	if ($titre_table) echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
 		//debut_cadre_relief("rubrique-24.gif");
 
-		if ($titre_table) {
+	if ($titre_table) {
 			bandeau_titre_boite2($titre_table, "site-24.gif", "#999999", "white");
-		}
-		echo "<table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
+	}
+	echo "<table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
 
-		echo $tranches;
+	echo $tranches;
 
-		$result = spip_query($requete);
+	$result = spip_query("SELECT * FROM $from$where$group$order LIMIT $deb_aff, $nb_aff");
 
-		$table = '';
-		while ($row = spip_fetch_array($result)) {
+	$adresse_page = substr($REQUEST_URI, strpos($REQUEST_URI, "/ecrire")+8, strlen($REQUEST_URI));
+	$adresse_page = ereg_replace("\&?(ajouter\_lien|supprimer_lien)\=[0-9]+","",$adresse_page);
+	$adresse_page = ereg_replace("\&?(t_$tmp_var)\=[0-9]+","",$adresse_page);
+	$adresse_page .=  (ereg("\?",$adresse_page) ? "&" : "?") . 't_' .$tmp_var . '=' . $deb_aff . '&'; 
+	$table = '';
+	while ($row = spip_fetch_array($result)) {
 			$vals = '';
 
 			$id_syndic_article=$row["id_syndic_article"];
@@ -270,11 +281,11 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 			
 			if ($connect_statut == '0minirezo'){
 				if ($statut == "publie"){
-					$s =  "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
+					$s =  "[<a href='".$adresse_page."id_syndic=$id_syndic&supprimer_lien=$id_syndic_article'><font color='black'>"._T('info_bloquer_lien')."</font></a>]";
 				
 				}
 				else if ($statut == "refuse"){
-					$s =  "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_retablir_lien')."</a>]";
+					$s =  "[<a href='".$adresse_page."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_retablir_lien')."</a>]";
 				}
 				else if ($statut == "off"
 				AND $my_sites[$id_syndic]['miroir'] == 'oui') {
@@ -282,34 +293,34 @@ function afficher_syndic_articles($titre_table, $requete, $afficher_site = false
 				}
 				else /* 'dispo' ou 'off' (dans le cas ancien site 'miroir') */
 				{
-					$s = "[<a href='".$adresse_page.$lien_url."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_valider_lien')."</a>]";
+					$s = "[<a href='".$adresse_page."id_syndic=$id_syndic&ajouter_lien=$id_syndic_article'>"._T('info_valider_lien')."</a>]";
 				}
 				$vals[] = $s;
 			}
 					
 			$table[] = $vals;
 		}
-		spip_free_result($result);
+	spip_free_result($result);
 
 		
-		if ($afficher_site) {
+	if ($afficher_site) {
 			$largeurs = array(7, '', '100');
 			$styles = array('','arial11', 'arial1');
-		} else {
+	} else {
 			$largeurs = array(7, '');
 			$styles = array('','arial11');
-		}
-		if ($connect_statut == '0minirezo') {
+	}
+	if ($connect_statut == '0minirezo') {
 			$largeurs[] = '80';
 			$styles[] = 'arial1';
-		}
-		
-		echo afficher_liste($largeurs, $table, $styles);
-
-		echo "</TABLE>";
-		//fin_cadre_relief();
-		echo "</div>";
 	}
+		
+	echo afficher_liste($largeurs, $table, $styles);
+
+	echo "</TABLE>";
+	//fin_cadre_relief();
+	echo "</div>";
+
 	return $tous_id;
 }
 ?>
