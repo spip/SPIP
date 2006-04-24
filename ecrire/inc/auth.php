@@ -143,8 +143,7 @@ function inc_auth_dist() {
 		}
 
 		// Indiquer connexion
-		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW()
-		WHERE id_auteur='$connect_id_auteur'");
+		@spip_query("UPDATE spip_auteurs SET en_ligne=NOW() WHERE id_auteur='$connect_id_auteur'");
 
 		// Si administrateur, recuperer les rubriques gerees par l'admin
 		if ($connect_statut == '0minirezo') {
@@ -202,8 +201,7 @@ function inc_auth_dist() {
 	if ($connect_statut == 'nouveau') {
 		$connect_statut =
 		($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum';
-		spip_query("UPDATE spip_auteurs SET statut='$connect_statut'
-			WHERE id_auteur=$connect_id_auteur");
+		spip_query("UPDATE spip_auteurs SET statut='$connect_statut'	WHERE id_auteur=$connect_id_auteur");
 	}
 
 	return "";

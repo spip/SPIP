@@ -725,7 +725,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	}
 
-	$requete['FROM'] = str_replace("spip_articles AS articles ", "spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
+	$requete['FROM'] = str_replace("spip_articles AS articles", "spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
 	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
 	$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
@@ -768,7 +768,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), str_replace("::id_ajax_fonc::", $id_ajax_fonc, $tranches);
 
-	$result = spip_query("SELECT $select FROM $from$where$group$order LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . "$where$group$order LIMIT $deb_aff, $nb_aff");
 
 	while ($row = spip_fetch_array($result)) {
 			$vals = '';
@@ -956,7 +956,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		$tranches = afficher_tranches_requete($cpt,  4, $tmp_var, $javascript, $nb_aff);
 	}
 
-	$requete['FROM'] = str_replace("spip_articles AS articles ", "spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
+	$requete['FROM'] = str_replace("spip_articles AS articles", "spip_articles AS articles LEFT JOIN spip_petitions AS petitions USING (id_article)", $requete['FROM']);
 	$requete['SELECT'] .= ", petitions.id_article AS petition ";
 
 
@@ -990,7 +990,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
-	$result = spip_query("SELECT $select FROM $from$where$group$order LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . "$where$group$order LIMIT $deb_aff, $nb_aff");
 
 	while ($row = spip_fetch_array($result)) {
 			$vals = '';

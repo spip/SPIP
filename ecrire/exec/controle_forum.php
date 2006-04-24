@@ -217,12 +217,12 @@ function exec_controle_forum_dist()
     if (spip_fetch_array(spip_query("SELECT id_forum FROM spip_forum WHERE statut='publie' AND texte='' LIMIT 1")))
       onglet(_T('onglet_messages_vide'), generer_url_ecrire('controle_forum', $args . "vide"), "vide", $onglet);
 
-    if (spip_fetch_array(spip_query("SELECT F.id_forum " .
-				    critere_statut_controle_forum('prop', $id_rubrique) .
-				    " LIMIT 1")))
+    list($from,$where) = critere_statut_controle_forum('prop', $id_rubrique);
+    $f = spip_fetch_array(spip_query("SELECT F.id_forum FROM $from " . (!$where ? '' : "WHERE $where ") . " LIMIT 1"));
+    if ($f)
       onglet(_T('texte_statut_attente_validation'), generer_url_ecrire('controle_forum', $args . "prop"), "prop", $onglet);
 
-  fin_onglet();
+    fin_onglet();
 
   if (($connect_statut != "0minirezo") OR 
       (!$connect_toutes_rubriques AND
@@ -230,13 +230,13 @@ function exec_controle_forum_dist()
 	echo "<B>"._T('avis_non_acces_page')."</B>";
 	exit;
   }
-  $query_forum = critere_statut_controle_forum($page, $id_rubrique);
+  list($from,$where) = critere_statut_controle_forum($page, $id_rubrique);
+
 // Si un id_controle_forum est demande, on adapte le debut
-if ($debut_id_forum = intval($debut_id_forum)
-AND $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum
-WHERE id_forum=$debut_id_forum"))) {
-	$result_forum = spip_query("SELECT F.id_forum " . $query_forum . " AND F.date_heure > '".$d['date_heure']."'");
-	$debut = spip_num_rows($result_forum);
+  if ($debut_id_forum = intval($debut_id_forum)) {
+    $d = spip_fetch_array(spip_query("SELECT date_heure FROM spip_forum WHERE id_forum=$debut_id_forum"));
+    $debut = spip_query("SELECT COUNT(*) AS n FROM $from " . (!$where ? '' : "WHERE $where ") . (!$d ? '' : (" AND F.date_heure > '".$d['date_heure']."'")));
+    $debut = $debut['n'];
 }
  $debut= intval($debut);
 
@@ -245,26 +245,8 @@ WHERE id_forum=$debut_id_forum"))) {
  $limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
  $limitnb = $debut + $enplus - $limitdeb;
 
- $result_forum = spip_query("SELECT
-F.id_forum,
-F.id_parent,
-F.id_rubrique,
-F.id_article,
-F.id_breve,
-F.date_heure,
-F.titre,
-F.texte,
-F.auteur,
-F.email_auteur,
-F.nom_site,
-F.url_site,
-F.statut,
-F.ip,
-F.id_auteur
-$query_forum ORDER BY F.date_heure DESC" .
+ $result_forum = spip_query("SELECT F.id_forum, F.id_parent, F.id_rubrique, F.id_article, F.id_breve, F.date_heure, F.titre, F.texte, F.auteur, F.email_auteur, F.nom_site, F.url_site, F.statut, F.ip, F.id_auteur FROM $from " . (!$where ? '' : "WHERE $where ") . "ORDER BY F.date_heure DESC LIMIT $limitdeb, $limitnb");
 # LIMIT $limitnb OFFSET $limitdeb" #PG
-" LIMIT $limitdeb, $limitnb"
-);
 
   debut_gauche();
   debut_boite_info();

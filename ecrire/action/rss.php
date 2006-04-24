@@ -198,10 +198,10 @@ function rss_suivi_versions($a) {
 }
 
 // Suivi des forums
-function rss_suivi_forums($a, $query_forum='', $lien_moderation=false) {
+function rss_suivi_forums($a, $from, $where, $lien_moderation=false) {
 	$rss = array();
 
-	$result_forum = spip_query("SELECT * $query_forum ORDER BY date_heure DESC LIMIT 20");
+	$result_forum = spip_query("SELECT * FROM $from " . (!$where ? '' : " WHERE $where ") . "ORDER BY date_heure DESC LIMIT 20");
 
 	while ($t = spip_fetch_array($result_forum)) {
 		$item = array();
@@ -404,14 +404,14 @@ switch($op) {
 			$critere = "statut='publie' AND id_thread=$id";
 			$url = generer_url_forum($id);
 		}
-		if ($id) $rss = rss_suivi_forums($a, "FROM spip_forum WHERE $critere", false);
+		if ($id) $rss = rss_suivi_forums($a, "spip_forum", $critere, false);
 		$title = _T("ecrire:titre_page_forum_suivi");
 		break;
 	# suivi prive des forums
 	case 'forums':
 		include_spip('inc/forum');
-		$critere = critere_statut_controle_forum($a['page']);
-		$rss = rss_suivi_forums($a, $critere, true);
+		list($f,$w) = critere_statut_controle_forum($a['page']);
+		$rss = rss_suivi_forums($a, $f, $w, true);
 		$title = _T("ecrire:titre_page_forum_suivi")." (".$a['page'].")";
 		$url = generer_url_ecrire('controle_forum', 'page='.$a['page']);
 		break;
