@@ -709,7 +709,6 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	if (!$requete['FROM'])  $requete['FROM'] = 'spip_articles AS articles';
 	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
 	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
-
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . "$where$group"));
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
@@ -766,7 +765,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), str_replace("::id_ajax_fonc::", $id_ajax_fonc, $tranches);
 
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . "$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . "LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . "$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT $deb_aff, $nb_aff");
 
 	while ($row = spip_fetch_array($result)) {
 			$vals = '';
@@ -985,7 +984,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	//echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
 	echo afficher_liste_debut_tableau(), ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . "$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . "LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . "$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT $deb_aff, $nb_aff");
 
 	while ($row = spip_fetch_array($result)) {
 			$vals = '';
@@ -1138,7 +1137,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	echo $tranches;
 
 
-	$result = spip_query("SELECT $select FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . "LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT $select FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT $deb_aff, $nb_aff");
 
 	$table = '';
 	$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
@@ -1248,7 +1247,7 @@ function afficher_rubriques($titre_table, $requete) {
 
 	echo $tranches;
 
-	$result = spip_query("SELECT $select FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . "LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT $select FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT $deb_aff, $nb_aff");
 
 	$table = '';
 	while ($row = spip_fetch_array($result)) {
@@ -1382,7 +1381,7 @@ function afficher_auteurs ($titre_table, $requete) {
 
 	echo $tranches;
 
-	$result = spip_query("SELECT $select FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . "LIMIT $deb_aff, $nb_aff");
+	$result = spip_query("SELECT $select FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT $deb_aff, $nb_aff");
 
 	$table = '';
 	while ($row = spip_fetch_array($result)) {
