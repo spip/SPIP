@@ -32,23 +32,6 @@ function action_autoriser_dist()
     $refus = 1;
   else
   {
-
-	## code inutile ?? $auteur_session est connu des qu'on a charge inc_utils.
-    if ($cookie_session = $_COOKIE['spip_session']) 
-      {
-	include_spip('inc/session');
-	global $auteur_session;
-
-	if (verifier_session($cookie_session)) 
-	  {
-
-	    if ($auteur_session['statut'] == '0minirezo' 
-		OR $auteur_session['statut'] == '1comite') 
-	      $auth_login = $auteur_session['login'];
-	  }
-      }
-    ## /code inutile
-
     if (!$arg) {
       $arg = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents AS documents WHERE documents.fichier='". addslashes($file) ."'"));
 
@@ -64,25 +47,13 @@ function action_autoriser_dist()
   }
   spip_log("arg $arg $auth_login");
 if (!$auth_login && !$refus) { 
-    if (!spip_num_rows(spip_query("SELECT articles.id_article
-FROM spip_documents_articles AS rel_articles, spip_articles AS articles 
-WHERE rel_articles.id_article = articles.id_article AND
-articles.statut = 'publie' AND rel_articles.id_document ='".
-			       $arg .
-				"' LIMIT 1"))) {
-      if (!spip_num_rows(spip_query("SELECT rubriques.id_rubrique
-FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques 
-WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND
-rubriques.statut = 'publie' AND rel_rubriques.id_document ='".
-			       $arg .
-				  "' LIMIT 1"))) {
-	if (!spip_num_rows(spip_query("SELECT breves.id_breve
-FROM spip_documents_breves AS rel_breves, spip_breves AS breves
-WHERE rel_breves.id_breve = breves.id_breve AND
-breves.statut = 'publie' AND rel_breves.id_document ='".
-			       $arg .
-				  "' LIMIT 1")))
-	  $refus = 4; } } }
+  $n = spip_num_rows(spip_query("SELECT articles.id_article FROM spip_documents_articles AS rel_articles, spip_articles AS articles WHERE rel_articles.id_article = articles.id_article AND articles.statut = 'publie' AND rel_articles.id_document = $arg  LIMIT 1"));
+  if (!$n) {
+    $n = spip_num_rows(spip_query("SELECT rubriques.id_rubrique FROM spip_documents_rubriques AS rel_rubriques, spip_rubriques AS rubriques WHERE rel_rubriques.id_rubrique = rubriques.id_rubrique AND rubriques.statut = 'publie' AND rel_rubriques.id_document =  $arg  LIMIT 1"));
+    if (!$n) {
+      $n =spip_num_rows(spip_query("SELECT breves.id_breve FROM spip_documents_breves AS rel_breves, spip_breves AS breves WHERE rel_breves.id_breve = breves.id_breve AND breves.statut = 'publie' AND rel_breves.id_document =  $arg  LIMIT 1"));
+      if (!$n)
+	$refus = 4; } } }
 
   if (is_int($refus)) {
     spip_log("Acces refuse ($refus) au document " . $arg . ': ' . $file);

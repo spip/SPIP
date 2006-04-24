@@ -320,9 +320,7 @@ function maj_base() {
 		$result = spip_query("SELECT * FROM spip_mots GROUP BY type");
 		while($row = spip_fetch_array($result)) {
 				$type = addslashes($row['type']);
-				spip_query("INSERT INTO spip_groupes_mots 
-					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)
-					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
+				spip_query("INSERT INTO spip_groupes_mots 					(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)					VALUES (\"$type\", 'non', 'non', 'oui', 'oui', 'non', 'oui', 'oui', 'oui', 'non')");
 		}
 		spip_query("DELETE FROM spip_mots WHERE titre='kawax'");
 		maj_version (1.404);
@@ -380,9 +378,7 @@ function maj_base() {
 			$replace_descriptif = ereg_replace('_orig_', 'descriptif', $replace);
 			$replace_texte = ereg_replace('_orig_', 'texte', $replace);
 			$replace_ps = ereg_replace('_orig_', 'ps', $replace);
-			spip_query("UPDATE spip_articles ".
-				"SET chapo=$replace_chapo, descriptif=$replace_descriptif, texte=$replace_texte, ps=$replace_ps ".
-				   "WHERE id_article=$id_article");
+			spip_query("UPDATE spip_articles SET chapo=$replace_chapo, descriptif=$replace_descriptif, texte=$replace_texte, ps=$replace_ps WHERE id_article=$id_article");
 
 		}
 		spip_query("ALTER TABLE spip_articles DROP images");
@@ -521,8 +517,7 @@ function maj_base() {
 		$result = spip_query("SELECT type FROM spip_mots GROUP BY type");
 		while ($row = spip_fetch_array($result)) {
 			$type = addslashes($row['type']);
-			$res = spip_query("SELECT * FROM spip_groupes_mots
-				WHERE titre='$type'");
+			$res = spip_query("SELECT * FROM spip_groupes_mots WHERE titre='$type'");
 			if (spip_num_rows($res) == 0) {
 			  if ($id_groupe = spip_abstract_insert("spip_groupes_mots", 
 						       "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, 0minirezo, 1comite, 6forum)",
@@ -553,8 +548,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.462) {
-		spip_query("UPDATE spip_types_documents SET inclus='embed' WHERE inclus!='non' AND extension IN ".
-			"('aiff', 'asf', 'avi', 'mid', 'mov', 'mp3', 'mpg', 'ogg', 'qt', 'ra', 'ram', 'rm', 'swf', 'wav', 'wmv')");
+		spip_query("UPDATE spip_types_documents SET inclus='embed' WHERE inclus!='non' AND extension IN ('aiff', 'asf', 'avi', 'mid', 'mov', 'mp3', 'mpg', 'ogg', 'qt', 'ra', 'ram', 'rm', 'swf', 'wav', 'wmv')");
 		maj_version (1.462);
 	}
 
@@ -571,8 +565,7 @@ function maj_base() {
 		while ($row = spip_fetch_array($res)) {
 			$extension = $row['extension'];
 			$id_type = $row['id_type'];
-			spip_query("UPDATE spip_documents SET id_type=$id_type
-				WHERE fichier like '%.$extension'");
+			spip_query("UPDATE spip_documents SET id_type=$id_type	WHERE fichier like '%.$extension'");
 		}
 		maj_version (1.464);
 	}
@@ -657,11 +650,10 @@ function maj_base() {
 			$prefs = unserialize($row['prefs']);
 			$l = $prefs['spip_lang'];
 			unset ($prefs['spip_lang']);
-			spip_query("UPDATE spip_auteurs SET lang='".addslashes($l)."',
-				prefs='".addslashes(serialize($prefs))."'
-				WHERE id_auteur=".$row['id_auteur']);
+			spip_query("UPDATE spip_auteurs SET lang='".addslashes($l)."', prefs='".addslashes(serialize($prefs))."' WHERE id_auteur=".$row['id_auteur']);
 		}
-		maj_version (1.604, spip_query("SELECT lang FROM spip_auteurs"));
+		$u = spip_query("SELECT lang FROM spip_auteurs");
+		maj_version (1.604, $u);
 	}
 
 	if ($version_installee < 1.702) {
@@ -684,13 +676,13 @@ function maj_base() {
 			spip_query("UPDATE spip_mots SET extra = supplement");
 			spip_query("ALTER TABLE spip_mots DROP supplement");
 		}
-		maj_version (1.702,
-			spip_query("SELECT extra FROM spip_articles")
-			&& spip_query("SELECT extra FROM spip_auteurs")
-			&& spip_query("SELECT extra FROM spip_breves")
-			&& spip_query("SELECT extra FROM spip_rubriques")
-			&& spip_query("SELECT extra FROM spip_mots")
-			);
+		
+		$u = spip_query("SELECT extra FROM spip_articles");
+		$u&= spip_query("SELECT extra FROM spip_auteurs");
+		$u&= spip_query("SELECT extra FROM spip_breves");
+		$u&= spip_query("SELECT extra FROM spip_rubriques");
+		$u&= spip_query("SELECT extra FROM spip_mots");
+		maj_version (1.702,$u);
 	}
 
 	if ($version_installee < 1.703) {
@@ -839,9 +831,7 @@ function maj_base() {
 	#}
 
 	if ($version_installee < 1.801) {
-		spip_query("ALTER TABLE spip_rubriques
-			ADD statut_tmp VARCHAR(10) NOT NULL,
-			ADD date_tmp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
+		spip_query("ALTER TABLE spip_rubriques	ADD statut_tmp VARCHAR(10) NOT NULL,	ADD date_tmp datetime DEFAULT '0000-00-00 00:00:00' NOT NULL");
 		include_spip('inc/rubriques');
 		calculer_rubriques();
 		maj_version(1.801);
@@ -882,8 +872,7 @@ function maj_base() {
 	}
 
 	if ($version_installee < 1.805) {
-		spip_query("ALTER TABLE spip_forum
-		ADD id_thread bigint(21) DEFAULT '0' NOT NULL");
+		spip_query("ALTER TABLE spip_forum ADD id_thread bigint(21) DEFAULT '0' NOT NULL");
 		include_spip('inc/forum');
 		calculer_threads();
 		maj_version(1.805);
@@ -896,18 +885,15 @@ function maj_base() {
 	// URLs propres (inc_version = 0.12)
 	if ($version_installee < 1.807) {
 		foreach (array('articles', 'breves', 'rubriques', 'mots') as $objets) {
-			spip_query("ALTER TABLE spip_$objets
-				ADD url_propre VARCHAR(255) NOT NULL");
-			spip_query("ALTER TABLE spip_$objets
-				ADD INDEX url_propre (url_propre)");
+			spip_query("ALTER TABLE spip_$objets ADD url_propre VARCHAR(255) NOT NULL");
+			spip_query("ALTER TABLE spip_$objets ADD INDEX url_propre (url_propre)");
 		}
 		maj_version(1.807);
 	}
 
 	// referers de la veille
 	if ($version_installee < 1.808) {
-		spip_query("ALTER TABLE spip_referers
-		ADD visites_veille INT UNSIGNED NOT NULL");
+		spip_query("ALTER TABLE spip_referers ADD visites_veille INT UNSIGNED NOT NULL");
 		maj_version(1.808);
 	}
 
@@ -942,8 +928,7 @@ function maj_base() {
 	}
 	
 	if ($version_installee < 1.812) {
-		spip_query("ALTER TABLE spip_documents
-		ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_documents ADD idx ENUM('', '1', 'non', 'oui', 'idx') DEFAULT '' NOT NULL");
 		maj_version(1.812);
 	}
 
@@ -955,18 +940,15 @@ function maj_base() {
 
 	// URLs propres auteurs
 	if ($version_installee < 1.814) {
-		spip_query("ALTER TABLE spip_auteurs
-			ADD url_propre VARCHAR(255) NOT NULL");
-		spip_query("ALTER TABLE spip_auteurs
-			ADD INDEX url_propre (url_propre)");
+		spip_query("ALTER TABLE spip_auteurs ADD url_propre VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX url_propre (url_propre)");
 		maj_version(1.814);
 	}
 
 	// Mots-cles sur les documents
 	// + liens documents <-> sites et articles syndiques (podcasting)
 	if ($version_installee < 1.815) {
-		spip_query("ALTER TABLE spip_documents
-		ADD distant VARCHAR(3) DEFAULT 'non'");
+		spip_query("ALTER TABLE spip_documents	ADD distant VARCHAR(3) DEFAULT 'non'");
 		maj_version(1.815);
 	}
 
@@ -977,10 +959,8 @@ function maj_base() {
 
 	// Texte et descriptif des groupes de mots-cles
 	if ($version_installee < 1.817) {
-		spip_query("ALTER TABLE spip_groupes_mots
-		ADD descriptif text NOT NULL AFTER titre");
-		spip_query("ALTER TABLE spip_groupes_mots
-		ADD COLUMN texte longblob NOT NULL AFTER descriptif");
+		spip_query("ALTER TABLE spip_groupes_mots ADD descriptif text NOT NULL AFTER titre");
+		spip_query("ALTER TABLE spip_groupes_mots ADD COLUMN texte longblob NOT NULL AFTER descriptif");
 		maj_version(1.817);
 	}
 
@@ -994,10 +974,8 @@ function maj_base() {
 
 	// Options de syndication : miroir + oubli
 	if ($version_installee < 1.819) {
-		spip_query("ALTER TABLE spip_syndic
-			ADD miroir VARCHAR(3) DEFAULT 'non'");
-		spip_query("ALTER TABLE spip_syndic
-			ADD oubli VARCHAR(3) DEFAULT 'non'");
+		spip_query("ALTER TABLE spip_syndic ADD miroir VARCHAR(3) DEFAULT 'non'");
+		spip_query("ALTER TABLE spip_syndic ADD oubli VARCHAR(3) DEFAULT 'non'");
 		maj_version(1.819);
 	}
 
@@ -1036,33 +1014,25 @@ function maj_base() {
 
 	// Syndication : ajout de l'option resume=oui/non et de la langue
 	if ($version_installee < 1.901) {
-		spip_query("ALTER TABLE spip_syndic
-			ADD resume VARCHAR(3) DEFAULT 'oui'");
-		spip_query("ALTER TABLE spip_syndic_articles
-			ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic ADD resume VARCHAR(3) DEFAULT 'oui'");
+		spip_query("ALTER TABLE spip_syndic_articles ADD lang VARCHAR(10) DEFAULT '' NOT NULL");
 		maj_version(1.901);
 	}
 
 	// Syndication : ajout de source, url_source, tags
 	if ($version_installee < 1.902) {
-		spip_query("ALTER TABLE spip_syndic_articles
-			ADD url_source TINYTEXT DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_syndic_articles
-			ADD source TINYTEXT DEFAULT '' NOT NULL");
-		spip_query("ALTER TABLE spip_syndic_articles
-			ADD tags TEXT DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles ADD url_source TINYTEXT DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles ADD source TINYTEXT DEFAULT '' NOT NULL");
+		spip_query("ALTER TABLE spip_syndic_articles ADD tags TEXT DEFAULT '' NOT NULL");
 		maj_version(1.902);
 	}
 
 	// URLs propres des sites (sait-on jamais)
 	// + oubli des KEY url_propre sur les auteurs si installation neuve
 	if ($version_installee < 1.903) {
-		spip_query("ALTER TABLE spip_syndic
-			ADD url_propre VARCHAR(255) NOT NULL");
-		spip_query("ALTER TABLE spip_syndic
-			ADD INDEX url_propre (url_propre)");
-		spip_query("ALTER TABLE spip_auteurs
-			ADD INDEX url_propre (url_propre)");
+		spip_query("ALTER TABLE spip_syndic ADD url_propre VARCHAR(255) NOT NULL");
+		spip_query("ALTER TABLE spip_syndic ADD INDEX url_propre (url_propre)");
+		spip_query("ALTER TABLE spip_auteurs ADD INDEX url_propre (url_propre)");
 		maj_version(1.903);
 	}
 
@@ -1144,9 +1114,7 @@ function maj_base() {
 	// Oups ! on stockait les tags de syndication sous la forme rel="category"
 	// au lieu de rel="directory" - http://microformats.org/wiki/rel-directory
 	if ($version_installee < 1.908) {
-		spip_query("UPDATE spip_syndic_articles
-		SET tags = REPLACE(tags, 'rel=\"category\">', 'rel=\"directory\">')
-		WHERE tags like '%category%'");
+		spip_query("UPDATE spip_syndic_articles SET tags = REPLACE(tags, 'rel=\"category\">', 'rel=\"directory\">') WHERE tags like '%category%'");
 		maj_version(1.908);
 	}
 	if ($version_installee < 1.909) {
