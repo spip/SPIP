@@ -581,7 +581,6 @@ function afficher_groupe_mots($id_groupe) {
 	$select = 'id_mot, titre, ' . creer_objet_multi ("titre", $spip_lang);
 	$from = 'spip_mots';
 	$where = "id_groupe=$id_groupe" ;
-	$order = " ORDER BY multi";
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from WHERE $where"));
 
@@ -614,7 +613,7 @@ function afficher_groupe_mots($id_groupe) {
 
 	echo ereg_replace("\:\:id\_ajax\_fonc\:\:", $id_ajax_fonc, $tranches);
 
-	$result = spip_query("SELECT $select FROM $from WHERE $where $order LIMIT  $deb_aff, $nb_aff");
+	$result = spip_query("SELECT $select FROM $from WHERE $where ORDER BY multi LIMIT  $deb_aff, $nb_aff");
 	while ($row = spip_fetch_array($result)) {
 		
 			$vals = '';
