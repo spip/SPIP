@@ -120,6 +120,14 @@ function instituer_article($arg) {
 	}
 }
 
+function instituer_syndic_article($arg) {
+	list($id_syndic_article, $statut) = split(' ', $arg);
+
+	$id_syndic_article = intval($id_syndic_article);
+	spip_query("UPDATE spip_syndic_articles SET statut='$statut' WHERE id_syndic_article=$id_syndic_article");
+
+}
+
 function instituer_breve($arg) {
 	list($id_breve, $statut) = split(' ', $arg);
 
