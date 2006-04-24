@@ -30,9 +30,9 @@ function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter
 {
   global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
-$result = spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'");
+  $row = spip_fetch_array(spip_query("SELECT * FROM spip_articles WHERE id_article='$id_article'"));
 
-if ($row = spip_fetch_array($result)) {
+  if ($row) {
 	$id_article = $row["id_article"];
 	$surtitre = $row["surtitre"];
 	$titre = $row["titre"];
@@ -289,11 +289,13 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 	  debut_cadre_relief("forum-interne-24.gif");
 
 
-	list($nb_forums) = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
+	  $nb_forums = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_forum WHERE id_article=$id_article 	AND statut IN ('publie', 'off', 'prop')"));
 
-	list($nb_signatures) = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
+	  $nb_signatures = spip_fetch_array(spip_query("SELECT COUNT(*) AS count FROM spip_signatures WHERE id_article=$id_article AND statut IN ('publie', 'poubelle')"));
 
-	$visible = $change_accepter_forum || $change_petition
+	  $nb_forums = $nb_forums['count'];
+	  $nb_signatures = $nb_signatures['count'];
+	  $visible = $change_accepter_forum || $change_petition
 		|| $nb_forums || $nb_signatures;
 
 	echo "<div class='verdana1' style='text-align: center;'><b>";
@@ -708,8 +710,9 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
   if (($GLOBALS['meta']['multi_articles'] == 'oui')
 	OR (($GLOBALS['meta']['multi_rubriques'] == 'oui') AND ($GLOBALS['meta']['gerer_trad'] == 'oui'))) {
 
-	list($langue_article) = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
+	$langue_article = spip_fetch_array(spip_query("SELECT lang FROM spip_articles WHERE id_article=$id_article"));
 
+	$langue_article = $langue_article['lang'];
 	if ($GLOBALS['meta']['gerer_trad'] == 'oui')
 		$titre_barre = _T('titre_langue_trad_article');
 	else
@@ -1107,9 +1110,7 @@ function ajouter_auteurs_articles($id_article, $id_rubrique, $les_auteurs, $flag
 
 	echo "<td>";
 
-	$result = spip_query("SELECT * FROM spip_auteurs WHERE " .
-			(!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") .
-			"statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
+	$result = spip_query("SELECT * FROM spip_auteurs WHERE " . (!$les_auteurs ? '' : "id_auteur NOT IN ($les_auteurs) AND ") . "statut!='5poubelle' AND statut!='6forum' AND statut!='nouveau' ORDER BY statut, nom");
 
 	$num = spip_num_rows($result);
 	if ($num) {
@@ -1256,10 +1257,8 @@ function affiche_forums_article($id_article, $id_rubrique, $titre, $debut, $mute
 	echo "</div>";
 }
 
-	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .
+	$result_forum = spip_query("SELECT * FROM spip_forum WHERE statut='prive' AND id_article='$id_article' AND id_parent=0 ORDER BY date_heure DESC" .   " LIMIT $debut,$total_afficher"   ); 
 #				   " LIMIT $total_afficher OFFSET $debut" # PG
-				   " LIMIT $debut,$total_afficher"
-				   ); 
 
 	afficher_forum($result_forum, $forum_retour, $mute);
 
@@ -1337,8 +1336,8 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 
 // Appliquer la modification de langue
  if ($GLOBALS['meta']['multi_articles'] == 'oui') {
-	list($langue_parent) = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
-
+	$langue_parent = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
+	$langue_parent=$langue_parent['parent'];
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
 			spip_query("UPDATE spip_articles SET lang='".addslashes($changer_lang)."', langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
@@ -1504,8 +1503,7 @@ if ($flag_editable) {
 
 if ($jour) {
 	$date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
-	spip_query("UPDATE spip_articles SET date='$date', date_modif=NOW()
-		WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET date='$date', date_modif=NOW()	WHERE id_article=$id_article");
 	calculer_rubriques();
 }
 

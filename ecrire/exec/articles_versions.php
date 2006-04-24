@@ -213,10 +213,7 @@ echo "</tr></table>";
 
 debut_cadre_relief();
 
-$result = spip_query("SELECT id_version, titre_version, date, id_auteur
-	FROM spip_versions
-	WHERE id_article=$id_article
-	ORDER BY id_version DESC");
+$result = spip_query("SELECT id_version, titre_version, date, id_auteur	FROM spip_versions WHERE id_article=$id_article ORDER BY id_version DESC");
 
 echo "<ul class='verdana3'>";
 while ($row = spip_fetch_array($result)) {

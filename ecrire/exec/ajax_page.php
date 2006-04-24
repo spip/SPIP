@@ -47,9 +47,7 @@ function exec_ajax_page_dist()
 function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
 	global $connect_id_auteur;
-	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc ='"
-			  . addslashes($id_ajax_fonc) 
-			  . "' AND id_auteur=$connect_id_auteur");
+	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc ='"  . addslashes($id_ajax_fonc)   . "' AND id_auteur=$connect_id_auteur");
 	if ($row = spip_fetch_array($res)) {
 		
 		$variables = unserialize($row["variables"]);
