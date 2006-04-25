@@ -19,14 +19,9 @@ function controle_signatures($script, $id, $debut, $where, $order, $limit='') {
 	global $couleur_foncee;
 	
 	$where = tronconne_signatures($script, $id, $debut, $where, $limit);
-	$request = spip_query("SELECT * FROM spip_signatures " .
-			      ($where ? " WHERE $where" : "") .
-			      ($order ? " ORDER BY $order" : "") .
-			      ((!$limit AND !$debut) ? '' :
-			       (" LIMIT " .
-				(($debut ? "$debut," : "") . $limit) ))
-#				($limit . ($debut ? " OFFSET $debut" : "")); #PG
-			      );
+	$limit = (!$limit AND !$debut) ? '' : (($debut ? "$debut," : "") . $limit);
+#	($limit . ($debut ? " OFFSET $debut" : "")); #PG
+	$request = spip_query("SELECT * FROM spip_signatures " .  ($where ? " WHERE $where" : "") .  ($order ? " ORDER BY $order" : "") . (!$limit ? ''  : " LIMIT $limit"));
 
  	while($row=spip_fetch_array($request)){
 		$id_signature = $row['id_signature'];

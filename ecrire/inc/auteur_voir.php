@@ -190,10 +190,14 @@ function choix_statut_auteur($statut) {
 	// - l'auteur est visiteur
 	// - OU, on accepte les visiteurs (ou forums sur abonnement)
 	// - OU il y a des visiteurs dans la base
-	if (($statut == '6forum')
-	OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
-	OR ($GLOBALS['meta']['forums_publics'] == 'abo')
-	OR spip_num_rows(spip_query("SELECT statut FROM spip_auteurs WHERE statut='6forum'")))
+	$x = (($statut == '6forum')
+	      OR ($GLOBALS['meta']['accepter_visiteurs'] == 'oui')
+	      OR ($GLOBALS['meta']['forums_publics'] == 'abo'));
+	if (!$x) {
+	  $x = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs WHERE statut='6forum' LIMIT 1"));
+	  $x = $x['n'];
+	}
+	if ($x)
 		$menu .= "\n<option" .
 			mySel("6forum",$statut) .
 			">" .
