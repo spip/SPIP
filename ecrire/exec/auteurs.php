@@ -244,17 +244,17 @@ $sql_sel = '';
 // tri
 switch ($tri) {
 case 'nombre':
-	$sql_order = ' ORDER BY compteur DESC, unom';
+	$sql_order = ' compteur DESC, unom';
 	break;
 
 case 'statut':
-	$sql_order = ' ORDER BY statut, login = "", unom';
+	$sql_order = ' statut, login = "", unom';
 	break;
 
 case 'nom':
 default:
 	$sql_sel = ", ".creer_objet_multi ("nom", $spip_lang);
-	$sql_order = " ORDER BY multi";
+	$sql_order = " multi";
 }
 
 
@@ -263,24 +263,7 @@ default:
 // La requete de base est tres sympa
 //
 
-return spip_query("SELECT
-	aut.id_auteur AS id_auteur,
-	aut.statut AS statut,
-	aut.login AS login,
-	aut.nom AS nom,
-	aut.email AS email,
-	aut.url_site AS url_site,
-	aut.messagerie AS messagerie,
-	UPPER(aut.nom) AS unom,
-	count(lien.id_article) as compteur
-	$sql_sel
-FROM spip_auteurs as aut
-LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur
-LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)
-WHERE
-	$sql_visible
-GROUP BY aut.id_auteur
-$sql_order");
+ return spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.login AS login,								aut.nom AS nom,								aut.email AS email,								aut.url_site AS url_site,							aut.messagerie AS messagerie,							UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur						$sql_sel									FROM spip_auteurs as aut							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)		WHERE	$sql_visible								GROUP BY aut.id_auteur	 ORDER BY		$sql_order");
 }
 
 function afficher_n_auteurs($auteurs) {
