@@ -657,8 +657,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		$jjscript_trad["afficher_auteurs"] = $afficher_auteurs;
 		$jjscript_trad = addslashes(serialize($jjscript_trad));
 		$hash = "0x".substr(md5($connect_id_auteur.$jjscript_trad), 0, 16);
-	
-		$div_trad = substr(md5($requete), 0, 4);
+		$div_trad = substr($hash, 2, 6);
 
 		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
@@ -735,13 +734,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 
 	if (!$deb_aff) {
 
-			if ($afficher_trad) {
-				$tmp_trad = substr(md5($requete_trad), 0, 4);
-
-				echo "<div id='$div_trad'>";
-				
-			}
-
+			if ($afficher_trad) echo "<div id='$div_trad'>";
 			echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 
@@ -895,8 +888,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		$jjscript_trad["afficher_auteurs"] = $afficher_auteurs;
 		$jjscript_trad = addslashes(serialize($jjscript_trad));
 		$hash = "0x".substr(md5($connect_id_auteur.$jjscript_trad), 0, 16);
-	
-		$div_trad = substr(md5($requete), 0, 4);
+		$div_trad = substr($hash, 2, 6);
 
 		$res_proch = spip_query("SELECT id_ajax_fonc FROM spip_ajax_fonc WHERE hash=$hash AND id_auteur=$connect_id_auteur ORDER BY id_ajax_fonc DESC LIMIT 1");
 		if ($row = spip_fetch_array($res_proch)) {
@@ -963,9 +955,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		}
 
 	if (!$deb_aff) {
-
 			echo "<div id='$div_trad'>";
-
 			echo "<div style='height: 12px;'></div>";
 			echo "<div class='liste'>";
 
