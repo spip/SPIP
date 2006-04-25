@@ -324,8 +324,8 @@ function parametre_url($url, $c, $v=NULL, $sep='&amp;') {
 //
 function nettoyer_uri() {
 	return preg_replace
-		(',[?&](PHPSESSID|(var_[^=&]*))=[^&]*,i',
-		'', 
+		(',([?&])(PHPSESSID|(var_[^=&]*))=[^&]*(&|$),i',
+		'\1',
 		$GLOBALS['REQUEST_URI']);
 }
 
