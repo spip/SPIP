@@ -250,9 +250,8 @@ $id_breve = intval($id_breve);
 
 if (($id_breve == 0) AND ($new == "oui")) {
 	$id_rubrique = intval($id_parent);
-	$langue_new = '';
-	if ($row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique")))
-		$langue_new = $row["lang"];
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
+	$langue_new = $row ? $row["lang"] : "";
 	if (!$langue_new) $langue_new = $GLOBALS['meta']['langue_site'];
 
 	$id_breve = spip_abstract_insert("spip_breves",

@@ -208,7 +208,8 @@ function fichier_copie_locale($source) {
 	// Si l'extension n'est pas precisee, aller la chercher dans la table
 	// des documents -- si la source n'est pas dans la table des documents,
 	// on ne fait rien
-	if ($t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier='".addslashes($source)."' AND distant='oui'"))) {
+	$t = spip_fetch_array(spip_query("SELECT id_type FROM spip_documents WHERE fichier='".addslashes($source)."' AND distant='oui'"));
+	if ($t) {
 		$t = spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE id_type=".$t['id_type']));
 		if ($t)
 		  return nom_fichier_copie_locale($source, $t['extension']);
@@ -226,11 +227,13 @@ function recuperer_infos_distantes($source, $max=0) {
 	// ca echoue l'utilisateur devra les entrer...
 	if ($headers = recuperer_page($source, false, true, $max)) {
 		list($headers, $a['body']) = split("\n\n", $headers, 2);
-		if (preg_match(",\nContent-Type: *([^[:space:];]*),i",
-			"\n$headers", $regs)
-		AND $mime_type = addslashes(trim($regs[1]))
-		AND $s = spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type='$mime_type'")
-		AND $t = spip_fetch_array($s)) {
+		$t = preg_match(",\nContent-Type: *([^[:space:];]*),i",
+				"\n$headers", $regs);
+		if ($t) {
+		  $mime_type = addslashes(trim($regs[1]));
+		  $t = spip_fetch_array(spip_query("SELECT id_type,extension FROM spip_types_documents WHERE mime_type='$mime_type'"));
+		}
+		if ($t) {
 			spip_log("mime-type $mime_type ok");
 			$a['id_type'] = $t['id_type'];
 			$a['extension'] = $t['extension'];
