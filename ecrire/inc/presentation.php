@@ -2230,7 +2230,7 @@ if (true /*$bandeau_colore*/) {
 		else $largeur_nom= 110;
 		echo "<div style='width: ".$largeur_nom."px; height: 14px; overflow: hidden;'>";
 		// Redacteur connecte
-		echo typo($GLOBALS["connect_nom"]);
+		echo typo($GLOBALS['auteur_session']['nom']);
 		echo "</div>";
 	
 	echo "</td>";
@@ -2603,13 +2603,12 @@ function debut_corps_page() {
 	
 	global $changer_config;
 	global $activer_imessage;
-	global $connect_activer_imessage;
 
 	if ($changer_config!="oui"){
 		$activer_imessage = "oui";
 	}
 	
-			if ($activer_imessage != "non" AND ($connect_activer_imessage != "non" OR $connect_statut == "0minirezo")) {
+			if ($activer_imessage != "non") {
 				$result_auteurs = spip_query("SELECT id_auteur, nom FROM spip_auteurs WHERE id_auteur!=$connect_id_auteur AND imessage!='non' AND en_ligne>DATE_SUB(NOW(),INTERVAL 15 MINUTE)");
 
 				$nb_connectes = spip_num_rows($result_auteurs);

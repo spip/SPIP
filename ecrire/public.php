@@ -150,7 +150,7 @@ if (defined('_INC_PUBLIC')) {
 			. $page['texte'];
 
 	// Post-traitements et affichage final
-	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin, 
+	// (c'est ici qu'on fait var_recherche, tidy, boutons d'admin,
 	// cf. public/assembler.php)
 	echo pipeline('affichage_final', $page['texte']);
 

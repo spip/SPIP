@@ -245,8 +245,7 @@ echo "<div>&nbsp;</div>";
 
 function personnel_accueil()
 {
-  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_id_rubrique,
-$connect_nom, $connect_statut,  $partie_cal, $echelle;
+  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_id_rubrique, $connect_statut,  $partie_cal, $echelle;
 
 if ($spip_display != 4) {
 	
@@ -255,7 +254,7 @@ if ($spip_display != 4) {
 	//
 	
 	$titre_cadre = afficher_plus(generer_url_ecrire("auteurs_edit","id_auteur=$connect_id_auteur"));
-	$titre_cadre .= majuscules(typo($connect_nom));
+	$titre_cadre .= majuscules(typo($GLOBALS['auteur_session']['nom']));
 	
 	debut_cadre_relief("fiche-perso-24.gif", false, '',$titre_cadre);
 
@@ -298,7 +297,7 @@ if ($spip_display != 4) {
 
 function etat_base_accueil()
 {
-  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_nom, $connect_statut, $partie_cal, $echelle;
+  global $spip_display, $spip_lang_left, $connect_id_auteur, $connect_statut, $partie_cal, $echelle;
 
 if ($spip_display != 4) {
 

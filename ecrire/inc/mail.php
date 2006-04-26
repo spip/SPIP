@@ -162,7 +162,7 @@ function extrait_article($row) {
 	include_spip('inc/texte');
 	
 	$id_article = $row['id_article'];
-	$titre = $row['titre'];
+	$titre = nettoyer_titre_email($row['titre']);
 	$chapo = $row['chapo'];
 	$texte = $row['texte'];
 	$date = $row['date'];
@@ -192,9 +192,8 @@ function nettoyer_titre_email($titre) {
 }
 
 function envoyer_mail_publication($id_article) {
-	global $connect_nom;
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-	$nom_site_spip = $GLOBALS['meta']["nom_site"];
+	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
@@ -210,7 +209,9 @@ function envoyer_mail_publication($id_article) {
 
 			$sujet = _T('info_publie_1', array('nom_site_spip' => $nom_site_spip, 'titre' => $titre));
 			$courr = _T('info_publie_2')."\n\n";
-			$nom = trim(supprimer_tags(typo($connect_nom)));
+
+			$nom = $GLOBALS['auteur_session']['nom'];
+			$nom = trim(supprimer_tags(typo($nom)));
 			$courr .= _T('info_publie_01', array('titre' => $titre, 'connect_nom' => $nom))."\n\n\n";
 			$courr = $courr . extrait_article($row);
 			envoyer_mail($adresse_suivi, $sujet, $courr);
@@ -223,7 +224,7 @@ function envoyer_mail_publication($id_article) {
 
 function envoyer_mail_proposition($id_article) {
 	$adresse_suivi = $GLOBALS['meta']["adresse_suivi"];
-	$nom_site_spip = $GLOBALS['meta']["nom_site"];
+	$nom_site_spip = nettoyer_titre_email($GLOBALS['meta']["nom_site"]);
 	$suivi_edito = $GLOBALS['meta']["suivi_edito"];
 
 	if ($suivi_edito == "oui") {
