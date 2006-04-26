@@ -62,7 +62,8 @@ if ($connect_statut == "0minirezo") {
 	// Invalider les pages ayant trait aux petitions
 	if ($id_signature = ($add_petition?$add_petition:$supp_petition)) {
 		include_spip('inc/invalideur');
-		list ($id_article) = spip_fetch_array(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id_signature"));
+		$id_article = spip_fetch_array(spip_query("SELECT id_article FROM spip_signatures WHERE id_signature=$id_signature"));
+		$id_article = $id_article['id_article'];
 		suivre_invalideur("id='varia/pet$id_article'");
 	}
 

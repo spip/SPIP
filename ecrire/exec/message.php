@@ -48,10 +48,11 @@ $supp_dest = intval($supp_dest);
 $nouv_auteur = intval($nouv_auteur);
 charger_generer_url();
 
-if (!spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"))) {
+$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
 
-	$row = spip_fetch_array(spip_query("SELECT type FROM spip_messages WHERE id_message=$id_message"));
-	if ($row['type'] != "affich"){
+if ($row['type'] != "affich"){
+	$n = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_auteurs_messages WHERE id_auteur=$connect_id_auteur AND id_message=$id_message"));
+	if (!$n['n']) {
 		debut_page(_T('info_acces_refuse'));
 		debut_gauche();
 		debut_droite();
@@ -138,9 +139,8 @@ function http_auteurs_ressemblants($cherche_auteur, $id_message)
   }
   else if (count($resultat) < 16) {
     $res = '';
-    $query = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (" .
-			 join(',', $resultat) .
-			 ") ORDER BY nom");
+    $query = spip_query("SELECT * FROM spip_auteurs WHERE id_auteur IN (" . join(',', $resultat) . ") ORDER BY nom");
+
     while ($row = spip_fetch_array($query)) {
       $id_auteur = $row['id_auteur'];
       $nom_auteur = $row['nom'];
@@ -470,11 +470,11 @@ function change_date_message($id_message, $heures,$minutes,$mois, $jour, $annee,
 }
 
 
-
 function exec_affiche_message_dist($id_message, $cherche_auteur, $nouv_auteur, $forcer_dest)
 {
   global $connect_id_auteur, $echelle, $partie_cal;
-  if ($row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"))) {
+  $row = spip_fetch_array(spip_query("SELECT * FROM spip_messages WHERE id_message=$id_message"));
+  if ($row) {
 	$id_message = $row['id_message'];
 	$date_heure = $row["date_heure"];
 	$date_fin = $row["date_fin"];

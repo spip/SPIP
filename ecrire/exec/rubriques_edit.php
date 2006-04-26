@@ -59,7 +59,8 @@ else $ze_logo = "rubrique-24.gif";
 
 if ($id_parent == 0) $logo_parent = "racine-site-24.gif";
 else {
-	list($id_secteur) = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique='$id_parent'"));
+	$id_secteur = spip_fetch_array(spip_query("SELECT id_secteur FROM spip_rubriques WHERE id_rubrique='$id_parent'"));
+	$id_secteur = $id_secteur['id_secteur'];
 	if ($id_parent_== $id_secteur)
 		$logo_parent = "secteur-24.gif";
 	else	$logo_parent = "rubrique-24.gif";

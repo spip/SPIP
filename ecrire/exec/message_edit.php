@@ -136,11 +136,11 @@ debut_droite();
 		echo "</p><p><b>"._T('info_nom_destinataire')."</b><br />";
 		echo "<input type='text' class='formo' name='cherche_auteur' value='' size='40'/>";
 	} else if ($dest) {
-		list($nom) = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
+		$nom = spip_fetch_array(spip_query("SELECT nom FROM spip_auteurs WHERE id_auteur=$dest"));
 		echo "</p><p><b>",
 		  _T('info_nom_destinataire'),
 		  "</b>&nbsp;:&nbsp;&nbsp; ",
-		  $nom,
+		  $nom['nom'],
 		  "<br /><br />";
 	}
 	echo "<p />";
