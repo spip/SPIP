@@ -14,6 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/session'); // action_auteur
 include_spip('inc/date');
+include_spip('base/abstract_sql');
 
 //
 // Vignette pour les documents lies
@@ -436,14 +437,14 @@ function inserer_documents($letexte) {
 function texte_upload_manuel($dir, $inclus = '') {
 	$fichiers = preg_files($dir);
 	$exts = array();
-	$dirs = array();
+	$dirs = array(); 
 	foreach ($fichiers as $f) {
 		$f = preg_replace(",^$dir,",'',$f);
 		if (ereg("\.([^.]+)$", $f, $match)) {
 			$ext = strtolower($match[1]);
 			if (!$exts[$ext]) {
 				if ($ext == 'jpeg') $ext = 'jpg';
-				if (@spip_abstract_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
+				if (spip_abstract_fetsel('extension', 'spip_types_documents', "extension='$ext'" . (!$inclus ? '':  " AND inclus='$inclus'")))
 					$exts[$ext] = 'oui';
 				else $exts[$ext] = 'non';
 			}
@@ -470,7 +471,7 @@ function texte_upload_manuel($dir, $inclus = '') {
 			    $lefichier .
 			    "</option>";
 		}
-	}
+	} 
 
 	if ($texte_upload) {
 		$texte_upload = "\n<option value=\"/\" style='font-weight: bold;'>"
