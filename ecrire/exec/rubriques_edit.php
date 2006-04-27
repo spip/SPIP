@@ -115,7 +115,8 @@ echo selecteur_rubrique($id_parent, 'rubrique', $restreint, $id_rubrique);
 
 // si c'est une rubrique-secteur contenant des breves, demander la
 // confirmation du deplacement
- list($contient_breves) = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1"));
+ $contient_breves = spip_fetch_array(spip_query("SELECT COUNT(*) AS cnt FROM spip_breves WHERE id_rubrique='$id_rubrique' LIMIT 1"));
+ $contient_breves = $contient_breves['cnt'];
 
 if ($contient_breves > 0) {
 	$scb = ($contient_breves>1? 's':'');

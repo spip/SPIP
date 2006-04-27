@@ -202,8 +202,10 @@ function inc_forum_insert_dist() {
 	// Entrer le message dans la base
 	$id_message = spip_abstract_insert('spip_forum', '(date_heure)', '(NOW())');
 
-	if ($id_forum)
-		list($id_thread) = spip_fetch_array(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
+	if ($id_forum) {
+		$id_thread = spip_fetch_array(spip_query("SELECT id_thread FROM spip_forum WHERE id_forum = $id_forum"));
+		$id_thread = $id_thread['id_thread'];
+	}
 	else
 		$id_thread = $id_message; # id_thread oblige INSERT puis UPDATE.
 
