@@ -116,8 +116,8 @@ echo	"<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">",
 //
 
 if ($options == "avancees") {
-	$res = spip_query("SELECT version()");
-	if (($row = spip_fetch_array($res)) AND ($row[0] >= '3.23.14')) {
+	$res = spip_mysql_version();
+	if ($res >= '3.23.14') {
 		echo "<TABLE BORDER=0 CELLSPACING=1 CELLPADDING=8 WIDTH=\"100%\">";
 		echo "<TR><TD BGCOLOR='#EEEECC' BACKGROUND=''><B>";
 		echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=3 COLOR='#000000'>";

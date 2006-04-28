@@ -40,8 +40,8 @@ function copie_locale($source, $mode='auto') {
 				ecrire_fichier($local, $contenu);
 
 				// signaler au moteur de recherche qu'il peut reindexer ce doc
-				$a = spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($source)."'");
-				list($id_document) = spip_fetch_array($a);
+				$id_document = spip_fetch_array(spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($source)."'"));
+				$id_document = $id_document['id_document'];
 				if ($id_document) {
 					include_spip('inc/indexation');
 					marquer_indexer('document', $id_document);

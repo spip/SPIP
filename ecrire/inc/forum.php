@@ -157,14 +157,14 @@ function calculer_threads() {
 		$discussion = "0";
 		$precedent = 0;
 		$r = spip_query("SELECT fille.id_forum AS id,	maman.id_thread AS thread	FROM spip_forum AS fille, spip_forum AS maman	WHERE fille.id_parent = maman.id_forum AND fille.id_thread <> maman.id_thread	ORDER BY thread");
-		while (list($id, $thread) = spip_fetch_array($r)) {
-			if ($thread == $precedent)
-				$discussion .= ",$id";
+		while ($row = spip_fetch_array($r)) {
+			if ($row['thread'] == $precedent)
+				$discussion .= "," . $row['id'];
 			else {
 				if ($precedent)
 					spip_query("UPDATE spip_forum SET id_thread=$precedent WHERE id_forum IN ($discussion)");
-				$precedent = $thread;
-				$discussion = "$id";
+				$precedent = $row['thread'];
+				$discussion = $row['id'];
 			}
 		}
 		spip_query("UPDATE spip_forum SET id_thread=$precedent	WHERE id_forum IN ($discussion)");
