@@ -1134,7 +1134,20 @@ function maj_base() {
 		maj_version(1.910);
 	}
 
-	return true;
+	if ($version_installee < 1.911) {
+
+		spip_query("ALTER IGNORE TABLE spip_auteurs_articles DROP INDEX id_auteur");
+		spip_query("ALTER IGNORE TABLE spip_auteurs_rubriques DROP INDEX id_auteur");
+		spip_query("ALTER IGNORE TABLE spip_auteurs_messages DROP INDEX id_auteur");
+		spip_query("ALTER IGNORE TABLE spip_mots_articles DROP INDEX id_article");
+		spip_query("ALTER IGNORE TABLE spip_mots_breves DROP INDEX id_breve");
+		spip_query("ALTER IGNORE TABLE spip_mots_rubriques DROP INDEX id_rubrique");
+		spip_query("ALTER IGNORE TABLE spip_mots_syndic DROP INDEX id_syndic");
+		spip_query("ALTER IGNORE TABLE spip_mots_forum DROP INDEX id_forum");
+		spip_query("ALTER IGNORE TABLE spip_mots_documents DROP INDEX id_document");
+		spip_query("ALTER IGNORE TABLE spip_caches DROP	INDEX fichier");
+		maj_version(1.911);
+	}
 }
 
 ?>
