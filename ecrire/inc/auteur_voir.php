@@ -159,8 +159,10 @@ function modifier_statut_auteur (&$auteur, $statut, $add_rub='') {
 
 	// modif auteur restreint, seulement pour les admins
 	if ($connect_toutes_rubriques) {
-		if ($add_rub=intval($add_rub))
-		  spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur, $add_rub)");
+		if ($add_rub=intval($add_rub)) {
+			include_spip('base/abstract_sql');
+			spip_abstract_insert('spip_auteurs_rubriques', "(id_auteur,id_rubrique)", "($id_auteur, $add_rub)");
+	  }
 	}
 }
 
