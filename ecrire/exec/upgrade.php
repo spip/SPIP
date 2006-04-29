@@ -68,24 +68,17 @@ function exec_upgrade_dist() {
 
 	include_spip('base/create');
 	creer_base();
-	$ok = maj_base();
+	include_spip('base/upgrade');
+	maj_base();
 
-	if ($ok) {
-		include_spip('inc/acces');
-		include_spip('inc/config');
-		ecrire_acces();
-		init_config();
-	}
+	include_spip('inc/acces');
+	include_spip('inc/config');
+	ecrire_acces();
+	init_config();
 
 	fin_admin($upgrade_titre);
 
-	if ($ok)
-		redirige_par_entete(generer_action_auteur('purger', 'cache',
-		_DIR_RESTREINT_ABS, true));
-
-	else {
-		echo _T('alerte_maj_impossible', array('version' => $spip_version));
-	}
+	redirige_par_entete(generer_action_auteur('purger', 'cache', _DIR_RESTREINT_ABS, true));
 }
 
 ?>

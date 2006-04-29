@@ -10,15 +10,12 @@
  *  Pour plus de details voir le fichier COPYING.txt ou l'aide en ligne.   *
 \***************************************************************************/
 
-
-//
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 include_spip('inc/acces');
 include_spip('base/serial');
 include_spip('base/auxiliaires');
 include_spip('base/typedoc');
-include_spip('base/upgrade');
 
 // Fonction de creation d'une table SQL nommee $nom
 // a partir de 2 tableaux PHP :

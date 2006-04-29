@@ -142,7 +142,7 @@ function install_6()
 		$result = spip_query("SELECT id_auteur FROM spip_auteurs WHERE login='$login'");
 
 		unset($id_auteur);
-		while ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
+		if ($row = spip_fetch_array($result)) $id_auteur = $row['id_auteur'];
 
 		$mdpass = md5($pass);
 		$htpass = generer_htpass($pass);
@@ -274,14 +274,13 @@ function install_4()
 	spip_query("SELECT COUNT(*) FROM spip_meta");
 	$nouvelle = spip_sql_errno();
 	creer_base();
-
-	$maj_ok = maj_base();
+	include_spip('base/upgrade');
+	maj_base();
 
 	// Tester $mysql_rappel_nom_base
 	$GLOBALS['mysql_rappel_nom_base'] = true;
 	$GLOBALS['spip_mysql_db'] = $sel_db;
-	$ok_rappel_nom = spip_query("INSERT INTO spip_meta (nom,valeur)
-		VALUES ('mysql_rappel_nom_base', 'test')");
+	$ok_rappel_nom = spip_query("INSERT INTO spip_meta (nom,valeur) VALUES ('mysql_rappel_nom_base', 'test')");
 	if ($ok_rappel_nom) {
 		echo " (ok rappel nom base `$sel_db`.spip_meta) ";
 		$ligne_rappel = '';
@@ -302,10 +301,10 @@ function install_4()
 		$result = spip_query("SELECT COUNT(*) FROM spip_articles");
 		$result_ok = (spip_num_rows($result) > 0);
 	}
-	echo "($result_ok && $maj_ok) -->";
+	echo "($result_ok) -->";
 
 
-	if ($result_ok && $maj_ok) {
+	if ($result_ok) {
 		if (preg_match(',(.*):(.*),', $adresse_db, $r))
 			list(,$adresse_db, $port) = $r;
 		else
