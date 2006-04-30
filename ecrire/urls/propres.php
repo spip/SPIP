@@ -60,8 +60,7 @@ function _generer_url_propre($type, $id_objet) {
 		$statut = 'statut';
 
 	// D'abord, essayer de recuperer l'URL existante si possible
-	$result = spip_query("SELECT url_propre, $statut, $champ_titre
-	FROM $table WHERE $col_id=$id_objet");
+	$result = spip_query("SELECT url_propre, $statut, $champ_titre FROM $table WHERE $col_id=$id_objet");
 	if (!($row = spip_fetch_array($result))) return ""; # objet inexistant
 
 	// Si l'on n'est pas dans spip_redirect.php3 sur un objet non publie
@@ -110,7 +109,8 @@ function _generer_url_propre($type, $id_objet) {
 	$lock = "url $type $id_objet";
 	spip_get_lock($lock, 10);
 
-	if (spip_num_rows(spip_query("SELECT $col_id FROM $table WHERE url_propre='".addslashes($url)."' AND $col_id != $id_objet")) > 0) {
+	$n = spip_num_rows(spip_query("SELECT $col_id FROM $table WHERE url_propre='".addslashes($url)."' AND $col_id != $id_objet LIMIT 1"));
+	if ($n > 0) {
 		$url = $url.','.$id_objet;
 	}
 
@@ -184,12 +184,12 @@ function generer_url_site($id_syndic) {
 }
 
 function generer_url_document($id_document) {
-	if (intval($id_document) <= 0)
+	if (($id_document = intval($id_document)) <= 0)
 		return '';
 	if (($GLOBALS['meta']["creer_htaccess"]) == 'oui')
 		return generer_url_action('autoriser',"arg=$id_document");
-	if ($row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document")))
-		return ($row['fichier']);
+	$row = @spip_fetch_array(spip_query("SELECT fichier FROM spip_documents WHERE id_document = $id_document"));
+	if ($row) return ($row['fichier']);
 	return '';
 }
 
