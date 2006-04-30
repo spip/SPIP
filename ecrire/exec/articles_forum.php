@@ -43,9 +43,9 @@ function exec_articles_forum_dist()
 	$limitdeb = ($debut > $enplus) ? $debut-$enplus : 0;
 	$limitnb = $debut + $enplus - $limitdeb;
 
-	$result = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" . 	" LIMIT $limitdeb, $limitnb"); 
-
+	$result = spip_query("SELECT id_forum FROM spip_forum WHERE id_article='$id_article' AND id_parent=0 AND statut IN ('publie', 'off', 'prop')" . 	" LIMIT $limitdeb, $limitnb");
 #	" LIMIT  $limitnb OFFSET $limitdeb" # PG
+
 	articles_forum_liens(spip_num_rows($result), "articles_forum", "id_article=$id_article", $debut, $pack, $limitdeb);
 
 	$res = spip_query("SELECT pied.*, max(thread.date_heure) AS date FROM spip_forum AS pied, spip_forum AS thread WHERE pied.id_article='$id_article' AND pied.id_parent=0 AND pied.statut IN ('publie', 'off', 'prop') AND thread.id_thread=pied.id_forum	GROUP BY id_thread ORDER BY date DESC 	LIMIT $debut, $pack");

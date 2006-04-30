@@ -108,7 +108,8 @@ function export_objets($table, $type, $file = 0, $gz = false, $etape_en_cours=""
 		if ($etape_en_cours > 0){
 			if ($type == "forum"){
 				if ($total > 5000){
-					$result = spip_query("SELECT * FROM $table LIMIT  $debut_limit, 5000"); #" LIMIT  5000 OFFSET $debut_limit" # PG
+					$result = spip_query("SELECT * FROM $table LIMIT  $debut_limit, 5000");
+#" LIMIT  5000 OFFSET $debut_limit" # PG
 
 					$debut_limit = $debut_limit + 5000;
 					if ($debut_limit > $total) {
@@ -125,7 +126,8 @@ function export_objets($table, $type, $file = 0, $gz = false, $etape_en_cours=""
 			}
 			if ($type == "article"){
 				if ($total > 500){
-					$result = spip_query("SELECT * FROM $table  LIMIT  $debut_limit, 500"); #" LIMIT  500 OFFSET $debut_limit" # PG
+					$result = spip_query("SELECT * FROM $table  LIMIT  $debut_limit, 500");
+#" LIMIT  500 OFFSET $debut_limit" # PG
 
 					$debut_limit = $debut_limit + 500;
 					if ($debut_limit > $total) {
