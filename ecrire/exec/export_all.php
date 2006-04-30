@@ -14,11 +14,27 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 $GLOBALS['version_archive'] = '1.2';
 
+$GLOBALS['sauvegardes'] = array(
+	'rubrique' => _T('info_sauvegarde_rubriques'),
+	'auteur' => _T('info_sauvegarde_auteurs'),
+	'article' => _T('info_sauvegarde_articles'),
+	'type_document' => _T('info_sauvegarde_type_documents'),
+	'document' => _T('info_sauvegarde_documents'),
+	'mot' => _T('info_sauvegarde_mots_cles'),
+	'groupe_mots' => _T('info_sauvegarde_groupe_mots'),
+	'breve' => _T('info_sauvegarde_breves'),
+	'forum' => _T('info_sauvegarde_forums'),
+	'petition' => _T('info_sauvegarde_petitions'),
+	'signature' => _T('info_sauvegarde_signatures'),
+	'syndic' => _T('info_sauvegarde_sites_references'),
+	'syndic_article' => _T('info_sauvegarde_articles_sites_ref')
+	);
+
 include_spip('inc/admin');
 
 function exec_export_all_dist()
 {
-  global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive;
+  global $archive, $debut_limit, $etape, $gz, $spip_version, $spip_version_affichee, $version_archive, $sauvegardes;
 
 if (!$archive) {
 	if ($gz) $archive = "dump.xml.gz";
@@ -50,31 +66,14 @@ $_fputs = ($gz) ? gzputs : fputs;
 if ($etape < 2)
 	$_fputs($f, "<"."?xml version=\"1.0\" encoding=\"".$GLOBALS['meta']['charset']."\"?".">\n<SPIP version=\"$spip_version_affichee\" version_base=\"$spip_version\" version_archive=\"$version_archive\">\n\n");
 
-export_objets("spip_rubriques", "rubrique", $f, $gz, $etape, 1, _T('info_sauvegarde_rubriques'));
-
-export_objets("spip_auteurs", "auteur", $f, $gz, $etape, 2, _T('info_sauvegarde_auteurs'));
-
-export_objets("spip_articles", "article", $f, $gz, $etape, 3, _T('info_sauvegarde_articles'));
-
-export_objets("spip_types_documents", "type_document", $f, $gz, $etape, 4, _T('info_sauvegarde_type_documents'));
-
-export_objets("spip_documents", "document", $f, $gz, $etape, 5, _T('info_sauvegarde_documents'));
-
-export_objets("spip_mots", "mot", $f, $gz, $etape, 6, _T('info_sauvegarde_mots_cles'));
-
-export_objets("spip_groupes_mots", "groupe_mots", $f, $gz, $etape, 7, _T('info_sauvegarde_groupe_mots'));
-
-export_objets("spip_breves", "breve", $f, $gz, $etape, 8, _T('info_sauvegarde_breves'));
-
-export_objets("spip_forum", "forum", $f, $gz, $etape, 9, _T('info_sauvegarde_forums'));
-
-export_objets("spip_petitions", "petition", $f, $gz, $etape, 10, _T('info_sauvegarde_petitions'));
-
-export_objets("spip_signatures", "signature", $f, $gz, $etape, 11, _T('info_sauvegarde_signatures'));
-
-export_objets("spip_syndic", "syndic", $f, $gz, $etape, 12, _T('info_sauvegarde_sites_references'));
-
-export_objets("spip_syndic_articles", "syndic_article", $f, $gz, $etape, 13, _T('info_sauvegarde_articles_sites_ref'));
+$i = 0;
+foreach ($sauvegardes as $nom => $info) {
+	$i++;
+	$table = table_objet($nom);
+	$table = $table ? "spip_$table" : $nom;
+	$n = export_objets($table, $nom, $f, $gz, $etape, $i, $info);
+	spip_log("sauvegarde de $table: $n");
+ }
 
 if (!$etape OR $etape == 13){
 	$_fputs ($f, build_end_tag("SPIP")."\n");
@@ -105,10 +104,9 @@ function export_objets($table, $type, $file = 0, $gz = false, $etape_en_cours=""
 		}
 	
 		$result = spip_query("SELECT * FROM $table");
-
+		$total = spip_num_rows($result);
 		if ($etape_en_cours > 0){
 			if ($type == "forum"){
-				$total = spip_num_rows($result);
 				if ($total > 5000){
 					$result = spip_query("SELECT * FROM $table LIMIT  $debut_limit, 5000"); #" LIMIT  5000 OFFSET $debut_limit" # PG
 
@@ -126,7 +124,6 @@ function export_objets($table, $type, $file = 0, $gz = false, $etape_en_cours=""
 				}
 			}
 			if ($type == "article"){
-				$total = spip_num_rows($result);
 				if ($total > 500){
 					$result = spip_query("SELECT * FROM $table  LIMIT  $debut_limit, 500"); #" LIMIT  500 OFFSET $debut_limit" # PG
 
@@ -253,6 +250,7 @@ function export_objets($table, $type, $file = 0, $gz = false, $etape_en_cours=""
 	} else {
 		echo "<li> <font color='#999999'>$nom_etape</font>";
 	}
+	return $total;
 }
 
 function build_begin_tag($tag) {

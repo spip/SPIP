@@ -85,6 +85,8 @@ function import_debut($f, $gz=false) {
 //
 
 function import_objet_1_2($f, $gz=false) {
+	global $pos, $abs_pos;
+	static $prev_type, $total= array();
 	global $import_ok;
 	static $time_javascript;
 
@@ -93,27 +95,27 @@ function import_objet_1_2($f, $gz=false) {
 		$time_javascript = time();
 	}
 
-	
 	$b = '';
 	// Lire le type d'objet
 	if (!($type = xml_fetch_tag($f, $b, $gz))) return ($import_ok = false);
-	if ($type == '/SPIP') return !($import_ok = true);
-	return ($import_ok = import_objet_1_2_boucle($type, $f, $gz));
-}
-
-function import_objet_1_2_boucle($type, $f, $gz) {
-	global $pos, $abs_pos;
-
 	$id = "id_$type";
 	$id_objet = 0;
 	$liens = array();
-
+	if ($prev_type != $type) {
+		if ($prev_type)
+			spip_log("Importation $prev_type : " . $total[$prev_type]);
+		$prev_type = $type;
+	}
+	if ($type == '/SPIP') {$import_ok = true; return false;}
+	$total[$type]++;
 	// Lire les champs de l'objet
 	for (;;) {
-		if (!($col = xml_fetch_tag($f, $value, $gz))) return false;
+		if (!($col = xml_fetch_tag($f, $value, $gz)))
+		  return $import_ok = false;
 		if ($col == '/'.$type) break;
 		$value = '';
-		if (!xml_fetch_tag($f, $value, $gz)) return false;
+		if (!xml_fetch_tag($f, $value, $gz))
+		  return $import_ok = false;
 		if (substr($col, 0, 5) == 'lien:') {
 			$type_lien = substr($col, 5);
 			$liens[$type_lien][] = '('.$id_objet.','.$value.')';
@@ -141,10 +143,9 @@ function import_objet_1_2_boucle($type, $f, $gz) {
 	if ($table) 
 		$table = "spip_$table";
 	else {
-		$table = $type;
 		// Table non Spip, on accepte.
 		// Si c'est vraiment n'importe quoi le test suivant le dira
-		echo "\nTable externe: $type";
+		$table = $type;
 	}
 	$n = spip_query("REPLACE " . $table . "(" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')');
 	if(!$n) {
@@ -166,6 +167,7 @@ function import_objet_1_2_boucle($type, $f, $gz) {
 	
 	ecrire_meta("status_restauration", strval($pos + $abs_pos));
 
+	$import_ok = true;
 	return true;
 }
 

@@ -197,7 +197,6 @@ function spip_mysql_showtable($nom_table)
   if (!a) return "";
   if (!spip_fetch_array($a)) return "";
   list(,$a) = spip_fetch_array(spip_query("SHOW CREATE TABLE $nom_table"));
-
   if (!preg_match("/^[^(),]*\((([^()]*\([^()]*\)[^()]*)*)\)[^()]*$/", $a, $r))
     return "";
   else {
