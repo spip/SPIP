@@ -155,7 +155,7 @@ function inc_auth_dist() {
 					}
 					if (!$r) break;
 					$r = join(',', $r);
-				 	$result_admin = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r");
+				 	$result_admin = spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent IN ($r) AND id_rubrique NOT IN ($r)");
 
 				 }
 			}
