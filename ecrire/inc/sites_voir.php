@@ -16,18 +16,15 @@ function afficher_sites($titre_table, $requete) {
 	global $couleur_claire, $spip_lang_left, $spip_lang_right;
 	global $connect_id_auteur;
 
+	if (!$requete["SELECT"]) $requete["SELECT"].= "*";
+
 	$tous_id = array();
 
-	$from = $requete['FROM'];
-	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
-	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
-	$cpt = "$from$where$group";
-	$tmp_var = substr(md5($cpt), 0, 4);
-
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 	if (! ($cpt = $cpt['n'])) return $tous_id ;
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
+	$tmp_var = substr(md5(join('',$requete)), 0, 4);
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
 
@@ -43,7 +40,7 @@ function afficher_sites($titre_table, $requete) {
 
 	echo $tranches;
 
-	$result = spip_query("SELECT * FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
 
 	$ifond = 0;
 	$premier = true;
@@ -148,19 +145,15 @@ function afficher_sites($titre_table, $requete) {
 function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	global $connect_statut, $spip_lang_rtl, $spip_lang_right;
 
+	if (!$requete["SELECT"]) $requete["SELECT"].= "*";
+	if (!$requete['FROM']) $requete['FROM']= 'spip_syndic_articles';
 	$tous_id = array();
-
-	$from = $requete['FROM'] ? $requete['FROM'] : 'spip_syndic_articles';
-	$where = $requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '';
-	$group = $requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '';
-
-	$cpt = "$from$where$group";
-	$tmp_var = substr(md5($cpt), 0, 4);
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $cpt"));
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
 
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
+	$tmp_var = substr(md5(join('', $cpt)), 0, 4);
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
 
@@ -181,7 +174,7 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 
 	echo $tranches;
 
-	$result = spip_query("SELECT * FROM $from$where$group " . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
  
 	$table = '';
 	while ($row = spip_fetch_array($result)) {
