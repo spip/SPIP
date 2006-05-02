@@ -172,13 +172,13 @@ function aff_referers ($vis, $table, $where, $limit, $plus) {
 				if (strlen($buff["query"]) > 0) $tmp .= "?".$buff['query'];
 		
 				if (strlen($tmp) > 30)
-					$tmp = "/".quote_amp(substr($tmp, 0, 27))."...";
+					$tmp = "/".substr($tmp, 0, 27)."...";
 				else if (strlen($tmp) > 0)
-					$tmp = quote_amp("/$tmp");
+					$tmp = "/$tmp";
 			}
 
 			if ($tmp)
-				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>$tmp</a>" . (($visites > 1)?" ($visites)":"");
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>".quote_amp(urldecode($tmp))."</a>" . (($visites > 1)?" ($visites)":"");
 			else
 				$lesliensracine[$numero] += $visites;
 			$lesdomaines[$numero] = $buff["hostname"];
