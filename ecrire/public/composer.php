@@ -456,6 +456,13 @@ function calculer_notes() {
 	return $r;
 }
 
+// Renvoie le titre du "lien hypertexte"
+function construire_titre_lien($nom,$url) {
+	$result = extraire_lien(array(1=>$nom, 3=>$url));
+	preg_match("/>([^>]*)<\/a>/", $result[0], $matches);
+	return $matches[1];
+}
+
 // Ajouter "&lang=..." si la langue de base n'est pas celle du site
 function lang_parametres_forum($s) {
 	// ne pas se fatiguer si le site est unilingue (plus rapide)
