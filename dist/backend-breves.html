@@ -23,7 +23,8 @@
 	</image>
 ]
 
-<BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{par date}{inverse}{0,20}>
+<BOUCLE_breves(BREVES){id_rubrique ?}{lang ?}{id_mot ?}
+{par date}{inverse}{0,20}>
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_BREVE|url_absolue)]</link>
