@@ -72,14 +72,13 @@ if ($titre) $pourarticle = " "._T('info_pour')." &laquo; $titre &raquo;";
 
 if ($origine) {
 	debut_page(_T('titre_page_statistiques_referers'), "suivi", "statistiques");
-	echo "<br><br>";
+	echo "<br /><br />";
 	gros_titre(_T('titre_liens_entrants'));
 	barre_onglets("statistiques", "referers");
 
 	debut_gauche();
 	debut_boite_info();
-	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
-	echo "<P align=left>"._T('info_gauche_statistiques_referers')."</P></FONT>";
+	echo "<p align=left style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>"._T('info_gauche_statistiques_referers')."</p>";
 	fin_boite_info();
 	
 	debut_droite();
@@ -87,27 +86,27 @@ if ($origine) {
 }
 else {
 	debut_page(_T('titre_page_statistiques_visites').$pourarticle, "suivi", "statistiques");
-	echo "<br><br>";
+	echo "<br /><br />";
 	gros_titre(_T('titre_evolution_visite')."<html>".aide("confstat")."</html>");
 //	barre_onglets("statistiques", "evolution");
 	if ($titre) gros_titre($titre);
 
 	debut_gauche();
 
-	echo "<p>";
+	echo "<br />";
 
 	echo "<div class='iconeoff' style='padding: 5px;'>";
-	echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
+	echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 	echo typo(_T('info_afficher_visites'));
 	echo "<ul>";
 	if ($id_article>0) {
-		echo "<li><b><a href='" . generer_url_ecrire("statistiques_visites","") . "'>"._T('info_tout_site')."</a></b>";
+		echo "<li><b><a href='" . generer_url_ecrire("statistiques_visites","") . "'>"._T('info_tout_site')."</a></b></li>";
 	} else {
-		echo "<li><b>"._T('titre_page_articles_tous')."</b>";
+		echo "<li><b>"._T('titre_page_articles_tous')."</b></li>";
 	}
 
 		echo "</ul>";
-		echo "</font>";
+		echo "</div>";
 		echo "</div>";
 
 	
@@ -126,12 +125,11 @@ else {
 
 	$nombre_articles = spip_num_rows($result);
 	if ($nombre_articles > 0) {
-		echo "<p>\n";
+		echo "<br />\n";
 		echo "<div class='iconeoff' style='padding: 5px;'>\n";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
+		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo typo(_T('info_visites_plus_populaires'));
-		echo "<ol style='padding-left:25 px;'>\n";
-		echo "<font size=1 color='#666666'>";
+		echo "<ol style='padding-left:25px; font-size:x-small;color:#666666;'>";
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
@@ -157,7 +155,7 @@ else {
 
 		
 		if (spip_num_rows($result_suite) > 0) {
-			echo "<br><br>[...]<br><br>";
+			echo "<br /><br />[...]<br /><br />";
 			while ($row = spip_fetch_array($result_suite)) {
 				$titre = typo($row['titre']);
 				$l_article = $row['id_article'];
@@ -177,8 +175,8 @@ else {
 
 		echo "<b>"._T('info_comment_lire_tableau')."</b><br>"._T('texte_comment_lire_tableau');
 
-		echo "</font>";
-		echo "</font>";
+		echo "</div>";
+		echo "</div>";
 		echo "</div>";
 	}
 
@@ -190,11 +188,10 @@ else {
 	if (spip_num_rows($result) > 0) {
 		creer_colonne_droite();
 
-		echo "<p></p><div class='iconeoff' style='padding: 5px;'>\n";
-		echo "<font face='Verdana,Arial,Sans,sans-serif' size=2>";
+		echo "<br /><div class='iconeoff' style='padding: 5px;'>";
+		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo typo(_T('info_affichier_visites_articles_plus_visites'));
-		echo "<ol style='padding-left:25 px;'>";
-		echo "<font size=1 color='#666666'>";
+		echo "<ol style='padding-left:25px; font-size:x-small;color:#666666;'>";
 
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
@@ -210,9 +207,6 @@ else {
 				}
 		}
 		echo "</ol>";
-		echo "</font>";
-	
-		echo "</font>";
 		echo "</div>";
 	}
 
@@ -334,12 +328,12 @@ if (!$origine) {
 		if ($date_premier < $date_debut)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
 				     'loupe-moins.gif',
-				     "border='0' valign='center'",
+				     "border='0' style='vertical-align:center;'",
 				     _T('info_zoom'). '-'), "&nbsp;";
 		if ( (($date_today - $date_debut) / (24*3600)) > 30)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_moins$pour_article"), 
 				     'loupe-plus.gif',
-				     "border='0' valign='center'",
+				     "border='0' style='vertical-align:center;'",
 				     _T('info_zoom'). '+'), "&nbsp;";
 	
 	
@@ -353,7 +347,7 @@ if (flag_svg()) {
 } else {
 	
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
-			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
+			  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
 			echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
@@ -493,9 +487,9 @@ if (flag_svg()) {
 			echo "<td bgcolor='black'>",http_img_rien(1, 1),"</td>";
 			echo "</tr></table>";
 			echo "</td>",
-			  "<td background='", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
+			  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
 			echo "<td>", http_img_rien(5, 1),"</td>";
-			echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
+			echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 			echo "<table cellpadding=0 cellspacing=0 border=0>";
 			echo "<tr><td height=15 valign='top'>";		
 			echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
@@ -526,11 +520,9 @@ if (flag_svg()) {
 			echo "</td>";
 			
 			
-			echo "</table>";
-			echo "</font></td>";
-			echo "</td></tr></table>";
-			
-			
+			echo "</tr></table>";
+			echo "</div></td>";
+			echo "</tr></table>";
 			
 			echo "<div style='position: relative; height: 15px;'>";
 			$gauche_prec = -50;
@@ -559,18 +551,17 @@ if (flag_svg()) {
 		# $moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 
 		echo "<font face='arial,helvetica,sans-serif' size=1>"._T('texte_statistiques_visites')."</font>";
-		echo "<p><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr width='100%'>";
+		echo "<br /><table cellpadding=0 cellspacing=0 border=0 width='100%'><tr style='width:100%;'>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo _T('info_maximum')." ".$max;
 		echo "<br>"._T('info_moyenne')." ".round($moyenne);
-		echo "</td>";
+		echo "</font></td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
-		echo _T('info_aujourdhui').' '.$visites_today;
-
-		if ($val_prec > 0) echo "<br>"._T('info_hier').' '.$val_prec;
+		echo '<a href="' . generer_url_ecrire("statistiques_referers","").'" title="'._T('titre_liens_entrants').'">'._T('info_aujourdhui').'</a> '.$visites_today;
+		if ($val_prec > 0) echo '<br><a href="' . generer_url_ecrire("statistiques_referers","jour=veille").'"  title="'._T('titre_liens_entrants').'">'._T('info_hier').'</a> '.$val_prec;
 		if ($id_article) echo "<br>"._T('info_popularite_5').' '.$val_popularite;
 
-		echo "</td>";
+		echo "</font></td>";
 		echo "<td valign='top' width='33%'><font face='Verdana,Arial,Sans,sans-serif'>";
 		echo "<b>"._T('info_total')." ".$total_absolu."</b>";
 		
@@ -588,11 +579,11 @@ if (flag_svg()) {
 			echo ceil($GLOBALS['meta']['popularite_total']);
 			echo "</font>";
 		}
-		echo "</td></tr></table>";	
-	}
-
+		echo "</font></td></tr></table>";	
+	}		
+	
 	if (count($log) > 60) {
-		echo "<p>";
+		echo "<br />";
 		echo "<font face='verdana,arial,helvetica,sans-serif' size='2'><b>"._T('info_visites_par_mois')."</b></font>";
 
 		echo "<div align='left'>";
@@ -620,7 +611,7 @@ if (flag_svg()) {
 		}
 		
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
-		  "<td background='", _DIR_IMG_PACK, "fond-stats.gif'>";
+		  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif'>";
 		echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 		echo "<td bgcolor='black'>", http_img_rien(1, 200),"</td>";
 	
@@ -696,9 +687,9 @@ if (flag_svg()) {
 		echo "<td bgcolor='black'>", http_img_rien(1, 1),"</td>";
 		echo "</tr></table>";
 		echo "</td>",
-		  "<td background='", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
+		  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif' valign='bottom'>", http_img_rien(3, 1, 'background-color:black;'),"</td>";
 		echo "<td>", http_img_rien(5, 1),"</td>";
-		echo "<td valign='top'><font face='Verdana,Arial,Sans,sans-serif' size=2>";
+		echo "<td valign='top'><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo "<table cellpadding=0 cellspacing=0 border=0>";
 		echo "<tr><td height=15 valign='top'>";		
 		echo "<font face='arial,helvetica,sans-serif' size=1><b>".round($maxgraph)."</b></font>";
@@ -729,7 +720,7 @@ if (flag_svg()) {
 		echo "</td>";
 
 		echo "</tr></table>";
-		echo "</td></tr></table>";
+		echo "</div></td></tr></table>";
 		echo "</div>";
 	}
 	
@@ -744,9 +735,9 @@ if (flag_svg()) {
 	} else {
 		$lien = 'oui'; $alter = 'SVG';
 	}
-	echo "\n<div align='".$GLOBALS['spip_lang_right']."'>
-	<font face='arial,helvetica,sans-serif' size=1><a href='".
-	parametre_url(self(), 'var_svg', $lien)."'>$alter</a></font></div>\n";
+	echo "\n<div align='".$GLOBALS['spip_lang_right']."' style='font-family:Verdana,Arial,Sans,sans-serif; font-size:x-small;'>
+	<a href='".
+	parametre_url(self(), 'var_svg', $lien)."'>$alter</a></div>\n";
 
 }
 
@@ -769,14 +760,15 @@ if ($origine) {
 	$table_ref = "spip_referers";
 }
 
-echo "<br><br><br>";
+$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
+
+
+echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
 
-echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
- echo aff_referers ($vis, $table_ref, $where, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
-echo "</font></p>";	
-
-echo "</font>";
+echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'><br />";
+echo aff_referers ($vis, $table_ref, $where, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
+echo "<br /></div>";	
 
 fin_page();
      }

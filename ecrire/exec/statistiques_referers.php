@@ -43,8 +43,7 @@ echo "<br><br><br>";
 
 debut_gauche();
 debut_boite_info();
-echo "<FONT FACE='Verdana,Arial,Sans,sans-serif' SIZE=2>";
-echo "<P align=left>"._T('info_gauche_statistiques_referers')."</P></FONT>";
+echo "<p style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small; text-align:left;'>"._T('info_gauche_statistiques_referers')."</p>";
 fin_boite_info();
 
 debut_droite();
@@ -75,12 +74,11 @@ barre_onglets("stat_referers", $jour);
 $where = "visites_$jour>0";
 $vis = "visites_$jour";
 
-echo "<p><font face='Verdana,Arial,Sans,sans-serif' size=2>";
- echo aff_referers ($vis, 'spip_referers', $where, $limit, generer_url_ecrire('statistiques_referers', ('limit=' . strval($limit+200))));
 
-echo "</font></p>";	
+echo "<br /><div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
+echo aff_referers ($vis, 'spip_referers', $where, $limit, generer_url_ecrire('statistiques_referers', ('limit=' . strval($limit+200))));
 
-echo "</font>";
+echo "</div><br />";
 
 fin_page();
 }

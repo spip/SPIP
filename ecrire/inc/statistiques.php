@@ -133,7 +133,7 @@ function stats_show_keywords($kw_referer, $kw_referer_host) {
 			// supprimer l'eventuelle entite finale mal coupee
 			$keywords = preg_replace('/&#?[a-z0-9]*$/', '', $keywords);
 		}
-		$buffer["keywords"] = trim(entites_html(stripslashes($keywords)));
+		$buffer["keywords"] = trim(entites_html(urldecode(stripslashes($keywords))));
 	}
 
 	return $buffer;
@@ -172,13 +172,13 @@ function aff_referers ($vis, $table, $where, $limit, $plus) {
 				if (strlen($buff["query"]) > 0) $tmp .= "?".$buff['query'];
 		
 				if (strlen($tmp) > 30)
-					$tmp = "/".substr($tmp, 0, 27)."...";
+					$tmp = "/".quote_amp(substr($tmp, 0, 27))."...";
 				else if (strlen($tmp) > 0)
-					$tmp = "/$tmp";
+					$tmp = quote_amp("/$tmp");
 			}
 
 			if ($tmp)
-				$lesreferers[$numero][] = "<a href='$referer'>$tmp</a>" . (($visites > 1)?" ($visites)":"");
+				$lesreferers[$numero][] = "<a href='".quote_amp($referer)."'>$tmp</a>" . (($visites > 1)?" ($visites)":"");
 			else
 				$lesliensracine[$numero] += $visites;
 			$lesdomaines[$numero] = $buff["hostname"];
@@ -206,26 +206,26 @@ function aff_referers ($vis, $table, $where, $limit, $plus) {
 		
 		
 			if ($lesdomaines[$numero] == "(email)") {
-				$aff .= "<p />";
 				$aff .= $ret;
 				$aff .= "<b>".$lesdomaines[$numero]."</b>";
 			}
-			else if (count($lesreferers[$numero]) > 1) {
+			else if ((count($lesreferers[$numero]) > 1) || ((substr(supprimer_tags($lesreferers[$numero][0]),0,1) != '/') && (count($lesreferers[$numero]) > 0))) {
+				global $couleur_foncee;
 				$referers = join ("</li><li>",$lesreferers[$numero]);
-				$aff .= "<p />";
 				$aff .= $ret;
-				$aff .= "<a href='http://".$lesurls[$numero]."'><b><font color='$couleur_foncee'>".$lesdomaines[$numero]."</font></b></a>";
+				$aff .= "<a href='http://".quote_amp($lesurls[$numero])."'><b><font color='$couleur_foncee'>".$lesdomaines[$numero]."</font></b></a>";
 				if ($rac = $lesliensracine[$numero]) $aff .= " <font size='1'>($rac)</font>";
-				$aff .= "<ul><font size='1'><li>$referers</li></font></ul>";
-				$aff .= "</li><p />\n";
+				$aff .= "<ul style='font-size:x-small;'><li>$referers</li></ul>";
+				$aff .= "</li></ul><ul style='font-size:small;'>\n";
 			} else {
 				$aff .= $ret;
 				$lien = $lesreferers[$numero][0];
-				if (eregi("^(<a [^>]+>)([^ ]*)( \([0-9]+\))?", $lien, $regs))
-					$lien = $regs[1].$lesdomaines[$numero].$regs[2];
-				else
+				if (eregi("^(<a [^>]+>)([^ ]*)( \([0-9]+\))?", $lien, $regs)) {
+					$lien = quote_amp($regs[1]).$lesdomaines[$numero].$regs[2];
+					if (!strpos($lien, '</a>')) $lien .= '</a>';
+				} else
 					$lien = "<a href='http://".$lesdomaines[$numero]."'>".$lesdomaines[$numero]."</a>";
-				$aff .= "<b>$lien</b>";
+				$aff .= "<b>".quote_amp($lien)."</b>";
 				$aff .= "</li>\n";
 			}
 		}
