@@ -267,14 +267,18 @@ function calculer_hierarchie($id_rubrique, $exclure_feuille = false) {
 	if (!$id_rubrique = intval($id_rubrique))
 		return '0';
 
-	$hierarchie = ",$id_rubrique";
+	$hierarchie = array();
 
-	do {
-		$id_rubrique = sql_parent($id_rubrique);
-		$hierarchie = "," . $id_rubrique . $hierarchie;
-	} while ($id_rubrique);
+	if (!$exclure_feuille)
+		$hierarchie[] = $id_rubrique;
 
-	return substr($hierarchie,1);
+	while ($id_rubrique = sql_parent($id_rubrique))
+		array_unshift($hierarchie, $id_rubrique);
+
+	if (count($hierarchie))
+		return join(',', $hierarchie);
+	else
+		return '0';
 }
 
 
