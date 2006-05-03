@@ -78,6 +78,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'cal_par_mois' => 'calendier per mes',
 'cal_par_semaine' => 'calendier per setmana',
 'confirm_changer_statut' => 'Atencion, av&egrave;tz demandat de cambiar l\'estatut d\'aquel element. Desiratz continuar? ',
+'correcte' => '<NEW>correcte',
 
 
 // D
@@ -199,9 +200,9 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'form_forum_message_auto' => '(aqu&ograve;\'s un messatge automatic)',
 'form_forum_pass' => 'm&ograve;t de santa Clara :',
 'form_forum_probleme_mail' => 'Probl&egrave;ma d\'e-mail&nbsp;: si p&ograve;ut pas mandar l\'identificant.',
-'form_forum_voici1' => 'Vequ&iacute; lu voastres identificants per poder participar a la vida
+'form_forum_voici1' => 'V&egrave;tz lu voastres identificants per poder participar a la vida
 dau sit "@nom_site_spip@" (@adresse_site@) :',
-'form_forum_voici2' => 'Vequ&iacute; lu voastres identificants per prepauar d\'articles 
+'form_forum_voici2' => 'V&egrave;tz lu voastres identificants per prepauar d\'articles 
  sus lo sit "@nom_site_spip@" (@adresse_login@) :',
 'form_indiquer_email' => 'Vorgatz indicar la voastra adre&ccedil;a e-mail.',
 'form_indiquer_nom' => 'Vorgatz indicar lo voastre nom.',
@@ -212,12 +213,12 @@ dau sit "@nom_site_spip@" (@adresse_site@) :',
 'form_pet_deja_enregistre' => 'Aqueu sit es ja registrat',
 'form_pet_deja_signe' => 'Av&egrave;tz ja signat aqueu t&egrave;xt.',
 'form_pet_envoi_mail_confirmation' => 'Anatz recebre un corrier electronic de confirmacion. Per validar la voastra signatura, cau visitar l\'adre&ccedil;a web mencionada per aquest corrier.',
-'form_pet_mail_confirmation' => 'B&ograve;njorn,
+'form_pet_mail_confirmation' => 'Boanjorn,
 
-Av&egrave;tz demandat de signar la peticion :
+Av&egrave;tz demandat de signar la peticion:
 @titre@.
 
-Av&egrave;tz fornit li informacions seguenti&nbsp;:
+Av&egrave;tz fornit li informacions seguenti:
     Nom: @nom_email@
     Sit: @nom_site@ - @url_site@
 
@@ -345,6 +346,7 @@ Merc&eacute; de la voastra participacion
 'image_tourner_droite' => 'Rotacion 90&deg; a drecha',
 'image_tourner_gauche' => 'Rotacion 90&deg; a sen&egrave;ca',
 'img_indisponible' => 'imatge indisponible',
+'impossible' => '<NEW>impossible',
 'info_a_suivre' => 'DA SEGRE&nbsp;&gt;&gt;',
 'info_a_valider' => '[de validar]',
 'info_acces_interdit' => 'Acc&egrave;s pro&iuml;bit',
@@ -379,7 +381,7 @@ Merc&eacute; de la voastra participacion
 'info_copyright_gpl' => 'sota licen&ccedil;a GPL',
 'info_cours_edition' => 'Lu voastres articles en cors de redacion',
 'info_creer_repertoire' => 'Vorgatz crear un fichier &ograve; un repert&ograve;ri nomat',
-'info_creer_repertoire_2' => 'en dintre dau sosrepert&ograve;ri <b>@repertoire@</b>, pi&nbsp;:',
+'info_creer_repertoire_2' => 'en dintre dau sosrepert&ograve;ri <b>@repertoire@</b>, pi:',
 'info_creer_vignette' => 'creacion automatica de la vinheta',
 'info_deplier' => 'Desplegar',
 'info_descriptif_nombre' => 'descriptiu(s):',
@@ -607,7 +609,7 @@ Merc&eacute; de la voastra participacion
  vos registreretz lo c&ograve;up passat.
    Receberetz un e-mail que vos balhar&agrave; lo biais de
     tornar trobar lo voastre acc&egrave;s.',
-'pass_mail_passcookie' => '(aqu&ograve;\'s un messatge automatic)
+'pass_mail_passcookie' => '(aqu&ograve; es un messatge automatic)
 Per tornar trobar lo voastre acc&egrave;s au sit
 @nom_site_spip@ (@adresse_site@)
 
@@ -615,7 +617,7 @@ Vorgatz anar a l\'adre&ccedil;a seguenta:
 
     @sendcookie@
 
-Podretz intrar un nov&egrave;u m&ograve;t de santa Clara
+Podretz intrar un m&ograve;t de santa Clara nov&egrave;u
 e vos tornar connectar au sit.
 
 ',
@@ -636,6 +638,9 @@ e vos tornar connectar au sit.
 
 
 // S
+'squelette' => '<NEW>squelette',
+'squelette_inclus_ligne' => '<NEW>squelette inclus, ligne',
+'squelette_ligne' => '<NEW>squelette, ligne',
 'stats_visites_et_popularite' => '@visites@ visitas&nbsp;; popularitat&nbsp;: @popularite@',
 'suivant' => 'seguent',
 
@@ -662,7 +667,7 @@ e vos tornar connectar au sit.
  acostumat/ada au foncionament dau sistema SPIP. <p align="justify"><b>
  En generau, si conselha foart
  de laissar la carga d\'aquesti p&agrave;ginas au webm&egrave;stre principau dau voastre sit.</b>',
-'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat una error dins l\'escritura dau fichi&egrave;r <code>@fichier@</code>. Vorgatz, coma administrator dau sit,',
+'texte_inc_meta_1' => 'Lo sist&egrave;ma a rescontrat un error dins l\'escritura dau fichi&egrave;r <code>@fichier@</code>. Vorgatz, coma administrator/triz dau sit,',
 'texte_inc_meta_2' => 'verificar lu drechs d\'escritura',
 'texte_inc_meta_3' => 'sus lo repert&ograve;ri <code>@repertoire@</code>.',
 'texte_statut_en_cours_redaction' => 'en cors de redaccion',

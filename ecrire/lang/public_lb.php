@@ -18,7 +18,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'aucune_breve' => 'Et g&euml;tt keng Kuerzmeldung op d&euml;ser Adress',
 'aucune_rubrique' => 'Et g&euml;tt keng Rubrik op d&euml;ser Adress',
 'autres_breves' => 'Aner Kuerzmeldungen',
-'autres_groupes_mots_clefs' => 'Aner Schl&euml;sselwieder-Gruppen',
+'autres_groupes_mots_clefs' => 'Aner Schl&euml;sselwierder-Gruppen',
 'autres_sites' => 'Aner Siten',
 
 
@@ -67,8 +67,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'message' => 'Message',
 'messages_forum' => 'Messagen vum Forum',
 'messages_recents' => 'L&auml;scht Messagen aus de Forum\'en',
-'mots_clefs' => 'Schl&euml;sselwieder',
-'mots_clefs_meme_groupe' => 'Schl&euml;sselwieder vum selwechten Grupp',
+'mots_clefs' => 'Schl&euml;sselwierder',
+'mots_clefs_meme_groupe' => 'Schl&euml;sselwierder vum selwechten Grupp',
 
 
 // N
