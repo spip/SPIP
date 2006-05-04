@@ -687,11 +687,15 @@ function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
   list($anom,$adesc) = $arrivee;
 
   $keys = $ddesc['key'];
-
+  if ($v = $adesc['key']['PRIMARY KEY']) {
+    unset($adesc['key']['PRIMARY KEY']);
+    $akeys = array_merge(preg_split('/,\s*/', $v), $adesc['key']);
+  }
+  else $akeys = $adesc['key'];
   // priorite a la primaire, qui peut etre multiple
-  if ($v = (split(', *', $keys['PRIMARY KEY'])))
+  if ($v = (preg_split('/,\s*/', $keys['PRIMARY KEY'])))
     $keys = $v;
-  $v = array_intersect($keys, $adesc['key']); 
+  $v = array_intersect($keys, $akeys); 
   if ($v)
     return array(array($dnom, $arrivee, array_shift($v)));
    else    {

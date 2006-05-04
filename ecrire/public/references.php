@@ -101,7 +101,7 @@ function description_type_requete($type, $serveur='') {
 }
 
 function index_tables_en_pile($idb, $nom_champ, &$boucles) {
-	global $exceptions_des_tables, $tables_des_serveurs_sql;
+	global $exceptions_des_tables;
 
 	$r = $boucles[$idb]->type_requete;
 	$s = $boucles[$idb]->sql_serveur;
@@ -128,8 +128,11 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 		    $t = trouver_champ_exterieur($nom_champ, 
 						 $boucles[$idb]->jointures,
 						 $boucles[$idb]);
-		    if ($t) $t = array_search($t[0], $boucles[$idb]->from);
-		    if ($t) return array($t .'.' . $nom_champ, $nom_champ);
+		    if ($t) 
+			return index_exception($boucles[$idb], 
+					       $desc,
+					       $nom_champ,
+					       array($t[0], $nom_champ));
 		  }
 		  return array('','');
 		}
