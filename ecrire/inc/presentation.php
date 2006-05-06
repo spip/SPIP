@@ -656,7 +656,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 		$jjscript_trad["requete"] = $requete;
 		$jjscript_trad["afficher_visites"] = $afficher_visites;
 		$jjscript_trad["afficher_auteurs"] = $afficher_auteurs;
-		$jjscript_trad = addslashes(serialize($jjscript_trad));
+		$jjscript_trad = (serialize($jjscript_trad));
 		$hash = "0x".substr(md5($connect_id_auteur.$jjscript_trad), 0, 16);
 		$div_trad = substr($hash, 2, 6);
 
@@ -665,7 +665,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
 			include_spip ('base/abstract_sql');
-			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
+			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript_trad) . "', $hash, NOW())");
 		}
 	}
 
@@ -883,7 +883,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 		$jjscript_trad["requete"] = $requete;
 		$jjscript_trad["afficher_visites"] = $afficher_visites;
 		$jjscript_trad["afficher_auteurs"] = $afficher_auteurs;
-		$jjscript_trad = addslashes(serialize($jjscript_trad));
+		$jjscript_trad = (serialize($jjscript_trad));
 		$hash = "0x".substr(md5($connect_id_auteur.$jjscript_trad), 0, 16);
 		$div_trad = substr($hash, 2, 6);
 
@@ -892,7 +892,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			$id_ajax_trad = $row["id_ajax_fonc"];
 		} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript_trad', $hash, NOW())");
+			$id_ajax_trad = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript_trad) . "', $hash, NOW())");
 		}
 
 
@@ -914,7 +914,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript["requete"] = $requete;
 	$jjscript["afficher_visites"] = $afficher_visites;
 	$jjscript["afficher_auteurs"] = $afficher_auteurs;
-	$jjscript = addslashes(serialize($jjscript));
+	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
 	$tmp_var = substr(md5($jjscript), 0, 4);	
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", 'fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
@@ -941,7 +941,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 			$id_ajax_fonc = $row["id_ajax_fonc"];
 	} else  {
 			include_spip('base/abstract_sql');
-			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '$jjscript', $hash, NOW())");
+			$id_ajax_fonc = spip_abstract_insert("spip_ajax_fonc", "(id_auteur, variables, hash, date)", "($connect_id_auteur, '" . addslashes($jjscript) . "', $hash, NOW())");
 		}
 
 	if (!$deb_aff) {
@@ -2329,7 +2329,7 @@ if (true /*$gadgets*/) {
 			$gadget .= "</div>";
 		}
 	
-		$vos_articles = spip_query("SELECT articles.id_article,  articles.id_rubrique, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.statut='prop' ORDER BY articles.date DESC LIMIT 5");
+		$vos_articles = spip_query("SELECT id_article, id_rubrique, titre, statut FROM spip_articles WHERE statut='prop' ORDER BY date DESC LIMIT 5");
 		if (spip_num_rows($vos_articles) > 0) {
 			$gadget .= "<div>&nbsp;</div>";
 			$gadget .= "<div class='bandeau_rubriques' style='z-index: 1;'>";
