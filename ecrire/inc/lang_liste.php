@@ -107,6 +107,7 @@ $GLOBALS['codes_langues'] = array(
 	'lu' => "luba-katanga",
 	'lv' => "latvie&#353;u",
 	'man' => "mandingue", # a traduire en mandingue
+	'mfv' => "manjak", # ISO-639-3
 	'mg' => "Malagasy",
 	'mi' => "Maori",
 	'mk' => "&#1084;&#1072;&#1082;&#1077;&#1076;&#1086;&#1085;&#1089;&#1082;&#1080; &#1112;&#1072;&#1079;&#1080;&#1082;",
