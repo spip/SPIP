@@ -13,7 +13,7 @@
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
 class Auth_spip {
-	var $nom, $login, $email, $md5pass, $md5next, $alea_futur, $statut;
+	var $id_auteur, $nom, $login, $email, $md5pass, $md5next, $alea_futur, $statut, $bio;
 
 	function init() {
 		return true;
@@ -27,10 +27,12 @@ class Auth_spip {
 		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($login)."' AND pass='".addslashes($mdpass_actuel)."' AND statut<>'5poubelle'");
 
 		if ($row = spip_fetch_array($result)) {
+			$this->id_auteur = $row['id_auteur'];
 			$this->nom = $row['nom'];
 			$this->login = $row['login'];
 			$this->email = $row['email'];
 			$this->statut = $row['statut'];
+			$this->bio = $row['bio'];
 			$this->md5pass = $mdpass_actuel;
 			$this->md5next = $mdpass_futur;
 			return true;
@@ -58,19 +60,16 @@ class Auth_spip {
 	}
 
 	function activer() {
-		if ($this->statut == 'nouveau') { // nouvel inscrit
-			$connect_statut =
-			($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ?
-				'1comite' : '6forum';
-			spip_query("UPDATE spip_auteurs SET statut='$connect_statut' WHERE login='".addslashes($this->login)."'");
-		}
+		include_spip('inc/auth');
+		$this->statut = acces_statut($this->id_auteur, $this->statut, $this->bio);
 		if ($this->md5next) {
 			include_spip('inc/session');
 			// fait tourner le codage du pass dans la base
 			$nouvel_alea_futur = creer_uniqid();
-			@spip_query("UPDATE spip_auteurs SET alea_actuel = alea_futur, pass = '".addslashes($this->md5next)."', alea_futur = '$nouvel_alea_futur' WHERE login='".$this->login."'");
+			@spip_query("UPDATE spip_auteurs SET alea_actuel = alea_futur, pass = '".addslashes($this->md5next)."', alea_futur = '$nouvel_alea_futur' WHERE id_auteur=" . $this->id_auteur);
 
 		}
 	}
 }
+
 ?>

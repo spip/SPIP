@@ -32,6 +32,22 @@ function acces_restreint_rubrique($id_rubrique) {
 }
 
 
+// Un nouvel inscrit prend son statut definitif a la 1ere connexion
+// Le statut a ete memorise dans bio (cf formulaire_inscription)
+// Si vide se rabattre sur le mode d'inscription 
+// (compatibilite vieille version ou redac/forum etait mutuellement exclusif)
+
+function acces_statut($id_auteur, $statut, $bio)
+{
+	if ($statut == 'nouveau') {
+		$statut = ($bio ? ($bio == 'redac' ? '1comite' : '6forum'):
+			   (($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum'));
+		spip_query("UPDATE spip_auteurs SET bio='', statut='$statut'	WHERE id_auteur=$id_auteur");
+	}
+	return $statut;
+}
+
+
 function inc_auth_dist() {
 	global $_GET, $_COOKIE, $_SERVER;
 	global $auth_can_disconnect, $ignore_auth_http, $ignore_remote_user;
@@ -90,32 +106,28 @@ function inc_auth_dist() {
 		$auth_htaccess = true;
 	}
 
+	// pas authentifie par cookie ni rien: demander login / mdp
 
-	// pas authentifie,
-	// demander login / mdp et nettoyer en cas de login en echec
 	if (!$auth_login) {
-		if ($_GET['bonjour'] == 'oui') {
-			$erreurcookie = '&var_echec_cookie=true';
-		}
-
-		return (generer_url_public('login',
-			"url=".rawurlencode(str_replace('/./', '/',
-			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS)
-			. str_replace('&amp;', '&', self()))),true).$erreurcookie);
+		return auth_arefaire();
 	}
-
 	//
 	// Chercher le login dans la table auteurs
 	//
 
-	$auth_login = addslashes($auth_login);
-	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login='$auth_login' AND statut!='5poubelle' AND statut!='6forum'");
+	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login='" . addslashes($auth_login) . "' AND statut!='5poubelle'");
 
-	if ($row = spip_fetch_array($result)) {
+	if (!$row = spip_fetch_array($result)) {
+	  auth_areconnecter($auth_login);
+		exit;
+	}
+	elseif ($row['statut']=='6forum') 
+		return auth_arefaire();
+	else {
 		$connect_id_auteur = $row['id_auteur'];
 		$connect_login = $row['login'];
 		$connect_pass = $row['pass'];
-		$connect_statut = $row['statut'];
+		$connect_statut = acces_statut($connect_id_auteur, $row['statut'], $row['bio']);
 
 		// Special : si dans la fiche auteur on modifie les valeurs
 		// de messagerie, utiliser ces valeurs plutot que celle de la base.
@@ -165,37 +177,41 @@ function inc_auth_dist() {
 			$connect_toutes_rubriques = false;
 			$connect_id_rubrique = array();
 		}
-	} else {
-
-	  // l'auteur a ete identifie mais on n'a pas d'info sur lui
-	  // C'est soit parce que le serveur MySQL ne repond pas,
-	  // soit parce que la table des auteurs a changee (restauration etc)
-	  // Pas la peine d'insister.  Envoyer un message clair au client.
-
-		include_spip('inc/minipres');
-		if (!$GLOBALS['db_ok']) {
-			spip_log("Erreur base de donnees");
-
-			install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
-		} else {
-
-			install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  generer_url_public('spip_cookie',"logout=$auth_login"), "'>", _T('texte_inc_auth_2'), "</A>",_T('texte_inc_auth_3');install_fin_html();
-		}
-		exit;
 	}
 
 	if (!$auth_pass_ok)
 		return	generer_url_public('login', 'var_erreur=pass', true);
 
-	// un nouvel inscrit prend son statut definitif
-	// (en supposant que le mode d'inscription est toujours le meme!)
-
-	if ($connect_statut == 'nouveau') {
-		$connect_statut =
-		($GLOBALS['meta']['accepter_inscriptions'] == 'oui') ? '1comite' : '6forum';
-		spip_query("UPDATE spip_auteurs SET statut='$connect_statut'	WHERE id_auteur=$connect_id_auteur");
-	}
-
 	return "";
 }
+
+
+// Cas ou l'auteur a ete identifie mais on n'a pas d'info sur lui
+// C'est soit parce que le serveur MySQL ne repond pas,
+// soit parce que la table des auteurs a changee (restauration etc)
+// Pas la peine d'insister.  Envoyer un message clair au client.
+
+function auth_areconnecter($auth_login)
+{
+	include_spip('inc/minipres');
+	if (!$GLOBALS['db_ok']) {
+		spip_log("Erreur base de donnees");
+
+		install_debut_html(_T('info_travaux_titre')); echo _T('titre_probleme_technique'), "<p><tt>".spip_sql_errno()." ".spip_sql_error()."</tt></p>";install_fin_html();
+	} else {
+
+		install_debut_html(_T('avis_erreur_connexion')); echo "<br><br><p>", _T('texte_inc_auth_1', array('auth_login' => $auth_login)), " <a href='",  generer_url_public('spip_cookie',"logout=$auth_login"), "'>", _T('texte_inc_auth_2'), "</A>",_T('texte_inc_auth_3');install_fin_html();
+	}
+}
+
+// redemande login, avec nettoyage
+
+function auth_arefaire()
+{
+	$url = rawurlencode(str_replace('/./', '/',
+			(_DIR_RESTREINT ? "" : _DIR_RESTREINT_ABS) . str_replace('&amp;', '&', self()))); 
+	return generer_url_public('login', "url=$url" . ($_GET['bonjour'] == 'oui' ? '&var_echec_cookie=true' : ''),true);
+	  }
+
+
 ?>
