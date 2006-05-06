@@ -23,7 +23,7 @@ function afficher_sites($titre_table, $requete) {
 	if (! ($cpt = $cpt['n'])) return $tous_id ;
 	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
-	$tmp_var = substr(md5($requete), 0, 4);
+	$tmp_var = substr(md5(join(' ',$requete)), 0, 4);
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
 
