@@ -344,9 +344,7 @@ function boites_de_config_articles($id_article, $id_rubrique, $flag_editable,
 			if (!$site_unique) $site_unique = "non";
 			if (!$message) $message = "non";
 
-			$texte_petition = addslashes($texte_petition);
-
-			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '$texte_petition')");
+			$result_pet = spip_query("REPLACE spip_petitions (id_article, email_unique, site_obli, site_unique, message, texte) VALUES ($id_article, '$email_unique', '$site_obli', '$site_unique', '$message', '" . addslashes($texte_petition) . "')");
 		}
 		else if ($change_petition == "off") {
 			$result_pet = spip_query("DELETE FROM spip_petitions WHERE id_article=$id_article");
@@ -478,11 +476,11 @@ meme_rubrique_articles($id_rubrique, $id_article, $options);
 
 }
 
-function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='articles.date', $limit=30)
+function meme_rubrique_articles($id_rubrique, $id_article, $options, $order='date', $limit=30)
 {
 	global $spip_lang_right, $spip_lang_left;
 
-	$vos_articles = spip_query("SELECT articles.id_article, articles.titre, articles.statut FROM spip_articles AS articles WHERE articles.id_rubrique='$id_rubrique' AND (articles.statut = 'publie' OR articles.statut = 'prop') AND articles.id_article != '$id_article' ORDER BY $order DESC LIMIT $limit");
+	$vos_articles = spip_query("SELECT id_article, titre, statut FROM spip_articles WHERE id_rubrique=$id_rubrique AND (statut = 'publie' OR statut = 'prop') AND id_article != $id_article ORDER BY $order DESC LIMIT $limit");
 	if (spip_num_rows($vos_articles) > 0) {
 			echo "<div>&nbsp;</div>";
 			echo "<div class='bandeau_rubriques' style='z-index: 1;'>";
@@ -1367,9 +1365,22 @@ if (count($ze_doc)>0){
 
 }
 
-function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old, $change_rubrique, $new, $champs) {
+function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubrique_old, $change_rubrique, $titre_article) {
 {
-  global $connect_id_auteur, $flag_revisions, $champs_extra;
+	global $connect_id_auteur, $flag_revisions, $champs_extra;
+
+	$texte = trop_longs_articles(_request('texte_plus')) . _request('texte');
+	$new = _request('new');
+	$champs = array(
+		'surtitre' => corriger_caracteres(_request('surtitre')),
+		'titre' => $titre_article,
+		'soustitre' => corriger_caracteres(_request('soustitre')),
+		'descriptif' => corriger_caracteres(_request('descriptif')),
+		'nom_site' => corriger_caracteres(_request('nom_site')),
+		'url_site' => corriger_caracteres(_request('url_site')),
+		'chapo' => corriger_caracteres(_request('chapo')),
+		'texte' => corriger_caracteres($texte),
+		'ps' => corriger_caracteres(_request('ps')))  ;
 
 	// Stockage des versions : creer une premier version si non-existante
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1391,10 +1402,10 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
 
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		$champs_extra = ", extra = '".addslashes(extra_recup_saisie("articles", $id_secteur))."'";
+		$champs_extra = extra_recup_saisie("articles", $id_secteur);
 	}
 
-	spip_query("UPDATE spip_articles SET surtitre='" .			   addslashes($champs['surtitre']) .	   "', titre='" .			   addslashes($champs['titre']) .	"', soustitre='" .			   addslashes($champs['soustitre']) .	   "', id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif='" .			   addslashes($champs['descriptif']) .	   "', chapo='" .			   addslashes($champs['chapo']) .	   "', texte='" .			   addslashes($champs['texte']) .	   "', ps='" .				   addslashes($champs['ps']) .		   "', url_site='" .			   addslashes($champs['url_site']) .	   "', nom_site='" .			   addslashes($champs['nom_site']) .	   "', date_modif=NOW() $champs_extra WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET surtitre='" .			   addslashes($champs['surtitre']) .	   "', titre='" .			   addslashes($champs['titre']) .	"', soustitre='" .			   addslashes($champs['soustitre']) .	   "', id_rubrique=" .			   intval($id_rubrique) .		   ", descriptif='" .			   addslashes($champs['descriptif']) .	   "', chapo='" .			   addslashes($champs['chapo']) .	   "', texte='" .			   addslashes($champs['texte']) .	   "', ps='" .				   addslashes($champs['ps']) .		   "', url_site='" .			   addslashes($champs['url_site']) .	   "', nom_site='" .			   addslashes($champs['nom_site']) .	   "', date_modif=NOW() " . ($champs_extra ? (", extra = '".addslashes($champs_extra) . "'") : '') . " WHERE id_article=$id_article");
 
 	// Stockage des versions
 	if (($GLOBALS['meta']["articles_versions"]=='oui') && $flag_revisions) {
@@ -1422,9 +1433,8 @@ function revisions_articles ($id_article, $id_secteur, $id_rubrique, $id_rubriqu
  }
 }
 
-function insert_article($id_parent, $new)
+function insert_article($id_parent)
 {
-	if ($new!='oui')  redirige_par_entete("./");
 	// Avec l'Ajax parfois id_rubrique vaut 0... ne pas l'accepter
 	if (!$id_rubrique = intval($id_parent)) {
 		$row = spip_fetch_array(spip_query("SELECT id_rubrique FROM spip_rubriques WHERE id_parent=0 ORDER by 0+titre,titre LIMIT 1"));
@@ -1446,15 +1456,17 @@ function insert_article($id_parent, $new)
 
 function exec_articles_dist()
 {
-global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $descriptif, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nom_site, $nouv_auteur, $nouv_mot, $ps, $row, $site_obli, $site_unique, $soustitre, $supp_auteur, $supp_mot, $surtitre, $texte, $texte_petition, $texte_plus, $titre, $titre_article, $url_site, $virtuel; 
+global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre, $titre_article, $virtuel; 
 
 
  $id_parent = intval($id_parent);
  $nouv_auteur = intval($nouv_auteur);
  $supp_mot = intval($supp_mot);
+ $supp_auteur = intval($supp_auteur);
  if (!($id_article=intval($id_article))) {
-   $id_article = insert_article($id_parent, $new);
-   add_auteur_article($id_article, $connect_id_auteur);
+	if ($new!='oui')  redirige_par_entete("./");
+	$id_article = insert_article($id_parent);
+	add_auteur_article($id_article, $connect_id_auteur);
  }
 
  pipeline('exec_init',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
@@ -1462,7 +1474,6 @@ global $ajout_auteur, $annee, $annee_redac, $avec_redac, $champs_extra, $change_
 // aucun doc implicitement inclus au départ.
 
 inclus_non_articles($id_article);
-
 
  $row = spip_fetch_array(spip_query("SELECT statut, titre, id_rubrique FROM spip_articles WHERE id_article=$id_article"));
  if ($row) {
@@ -1486,8 +1497,7 @@ $flag_auteur = spip_num_rows(spip_query("SELECT id_auteur FROM spip_auteurs_arti
 if ($flag_editable) {
 
 if ($jour) {
-	$date = format_mysql_date($annee, $mois, $jour, $heure, $minute);
-	spip_query("UPDATE spip_articles SET date='$date', date_modif=NOW()	WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET date='" . format_mysql_date($annee, $mois, $jour, $heure, $minute) ."', date_modif=NOW()	WHERE id_article=$id_article");
 	calculer_rubriques();
 }
 
@@ -1495,13 +1505,9 @@ if ($jour_redac) {
 	if ($annee_redac<>'' AND $annee_redac < 1001) $annee_redac += 9000;
 
 	if ($avec_redac == 'non')
-		$date_redac = format_mysql_date();
-	else
-		$date_redac = format_mysql_date(
-			$annee_redac, $mois_redac, $jour_redac,
-			$heure_redac, $minute_redac);
+		$annee_redac = $mois_redac = $jour_redac = $heure_redac = $minute_redac = 0;
 
-	spip_query("UPDATE spip_articles SET date_redac='$date_redac',  date_modif=NOW() WHERE id_article=$id_article");
+	spip_query("UPDATE spip_articles SET date_redac='" . format_mysql_date($annee_redac, $mois_redac, $jour_redac, $heure_redac, $minute_redac) ."',  date_modif=NOW() WHERE id_article=$id_article");
 }
 
 
@@ -1510,10 +1516,9 @@ modif_langue_articles($id_article, $id_rubrique, $changer_lang);
 maj_documents($id_article, 'article');
 
 if ($changer_virtuel) {
-	$virtuel = eregi_replace("^http://$", "", trim($virtuel));
-	if ($virtuel) $chapo = addslashes(corriger_caracteres("=$virtuel"));
-	else $chapo = "";
-	spip_query("UPDATE spip_articles SET chapo='$chapo', date_modif=NOW() WHERE id_article=$id_article");
+	if ($virtuel = eregi_replace("^http://$", "", trim($virtuel)))
+		$chapo = corriger_caracteres("=$virtuel");
+	spip_query("UPDATE spip_articles SET chapo='" . addslashes($chapo) . "', date_modif=NOW() WHERE id_article=$id_article");
 }
 
 if (isset($_POST['titre'])) {
@@ -1526,27 +1531,15 @@ if (isset($_POST['titre'])) {
 	if (!strlen($titre_article=corriger_caracteres($titre)))
 		$titre_article = _T('info_sans_titre');
 
-	$champs = array(
-		'surtitre' => corriger_caracteres($surtitre),
-		'titre' => $titre_article,
-		'soustitre' => corriger_caracteres($soustitre),
-		'descriptif' => corriger_caracteres($descriptif),
-		'nom_site' => corriger_caracteres($nom_site),
-		'url_site' => corriger_caracteres($url_site),
-		'chapo' => corriger_caracteres($chapo),
-		'texte' => corriger_caracteres(
-			trop_longs_articles($texte_plus) . $texte),
-		'ps' => corriger_caracteres($ps))  ;
-
 	revisions_articles ($id_article, $id_secteur,
 		$id_rubrique, $id_rubrique_old,
 		($flag_auteur||$statut_rubrique),
-		$new, $champs);
+		$titre_article);
 
 	$id_article_bloque = $id_article;   // message pour inc/presentation
-}
+ }
 
-}
+ }
 
 exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
 
