@@ -503,7 +503,6 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=fa
 
 function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $deb_aff, $titre, $force, $largeurs, $styles, $skel, $own='')
 {
-  spip_log("$requete, $icone, $col, $fg, $bg, $tmp_var, $deb_aff, $titre, $force, $largeurs, $styles, $skel, $own=''");
 	global $spip_display ;
 
 	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
