@@ -306,21 +306,11 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 		}
 		// gd ou gd2
 		else if ($process == 'gd1' OR $process == 'gd2') {
-
-			// Recuperer l'image d'origine
-			if ($format == "jpg") {
-				$srcImage = @ImageCreateFromJPEG($image);
-			}
-			else if ($format == "gif"){
-				$srcImage = @ImageCreateFromGIF($image);
-			}
-			else if ($format == "png"){
-				$srcImage = @ImageCreateFromPNG($image);
-			}
-			if (!$srcImage) {
-				spip_log("echec gd1/gd2");
+			if (_IMG_GD_MAX_PIXELS && $srcWidth*$srcHeight>_IMG_GD_MAX_PIXELS){
+				spip_log("vignette gd1/gd2 impossible : ".$srcWidth*$srcHeight."pixels");
 				return;
 			}
+
 			// Choisir le format destination
 			// - on sauve de preference en JPEG (meilleure compression)
 			// - pour le GIF : les GD recentes peuvent le lire mais pas l'ecrire
@@ -340,31 +330,57 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 				return;
 			}
 
-			// Initialisation de l'image destination
-			if ($process == 'gd2' AND $destFormat != "gif")
-				$destImage = ImageCreateTrueColor($destWidth, $destHeight);
-			if (!$destImage)
-				$destImage = ImageCreate($destWidth, $destHeight);
-
-			// Recopie de l'image d'origine avec adaptation de la taille
-			$ok = false;
-			if (($process == 'gd2') AND function_exists('ImageCopyResampled')) {
-				if ($format == "gif") {
-					// Si un GIF est transparent,
-					// fabriquer un PNG transparent 
-					$transp = imagecolortransparent($srcImage);
-					if ($transp > 0) $destFormat = "png";
-				}
-				if ($destFormat == "png") {
-					// Conserver la transparence
-					if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true);
-					@imagealphablending($destImage, false);
-         			@imagesavealpha($destImage,true);
-				}
-				$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			$memoryNeeded = round(($srcsize[0] * $srcsize[1] * $srcsize['bits'] * $srcsize['channels'] / 8 + 65536) * 1.65); 
+			#spip_log("GD : memory need $memoryNeeded");
+			#if (function_exists('memory_get_usage'))
+				#spip_log("GD : memory usage ".memory_get_usage());
+			#spip_log("GD : memory_limit ".ini_get('memory_limit'));
+			if (function_exists('memory_get_usage') && memory_get_usage() + $memoryNeeded > (integer) ini_get('memory_limit') * 1048576){
+				spip_log("vignette gd1/gd2 impossible : memoire insuffisante $memoryNeeded necessaire");
+				return;
 			}
-			if (!$ok)
-				$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			else{ 
+				// Recuperer l'image d'origine 
+				if ($format == "jpg") { 
+					$srcImage = @ImageCreateFromJPEG($image);
+				}
+				else if ($format == "gif"){ 
+					$srcImage = @ImageCreateFromGIF($image); 				
+				}
+				else if ($format == "png"){ 
+					$srcImage = @ImageCreateFromPNG($image); 
+				} 
+				if (!$srcImage) { 
+					spip_log("echec gd1/gd2"); 
+					return; 
+				} 
+
+				// Initialisation de l'image destination 
+ 				if ($process == 'gd2' AND $destFormat != "gif") 
+					$destImage = ImageCreateTrueColor($destWidth, $destHeight); 
+				if (!$destImage) 
+					$destImage = ImageCreate($destWidth, $destHeight); 
+
+				// Recopie de l'image d'origine avec adaptation de la taille 
+				$ok = false; 
+				if (($process == 'gd2') AND function_exists('ImageCopyResampled')) { 
+					if ($format == "gif") { 
+						// Si un GIF est transparent, 
+						// fabriquer un PNG transparent  
+						$transp = imagecolortransparent($srcImage); 
+						if ($transp > 0) $destFormat = "png"; 
+					}
+					if ($destFormat == "png") { 
+						// Conserver la transparence 
+						if (function_exists("imageAntiAlias")) imageAntiAlias($destImage,true); 
+						@imagealphablending($destImage, false); 
+						@imagesavealpha($destImage,true); 
+					}
+					$ok = @ImageCopyResampled($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+				}
+				if (!$ok)
+					$ok = ImageCopyResized($destImage, $srcImage, 0, 0, 0, 0, $destWidth, $destHeight, $srcWidth, $srcHeight);
+			}
 
 			// Sauvegarde de l'image destination
 			$vignette = "$destination.$destFormat";
@@ -376,7 +392,8 @@ function creer_vignette($image, $maxWidth, $maxHeight, $format, $destdir, $destf
 			else if ($destFormat == "png")
 				ImagePNG($destImage, $vignette);
 
-			ImageDestroy($srcImage);
+			if ($srcImage)
+				ImageDestroy($srcImage);
 			ImageDestroy($destImage);
 		}
 	}

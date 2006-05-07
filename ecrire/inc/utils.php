@@ -883,6 +883,8 @@ function spip_initialisation() {
 	define('_IMG_MAX_WIDTH', 0); # largeur en pixels
 	define('_IMG_MAX_HEIGHT', 0); # hauteur en pixels
 
+	define('_IMG_GD_MAX_PIXELS', 0); # nombre de pixels maxi pour calcul de la vignette avec gd
+	
 	// Le fichier de connexion a la base de donnees
 	define('_FILE_CONNECT_INS', (_DIR_RESTREINT . "inc_connect"));
 	define('_FILE_CONNECT',
