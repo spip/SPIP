@@ -1333,7 +1333,7 @@ function afficher_auteurs ($titre_table, $requete) {
 
 	$table = array();
 	while ($row = spip_fetch_array($result)) {
-		$table[]= affiche_auteur_boucle($row, &$tous_id);
+		$table[]= affiche_auteur_boucle($row, $tous_id);
 	}
 	spip_free_result($result);
 	$largeurs = array('');

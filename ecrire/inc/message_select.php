@@ -14,7 +14,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 
 // $messages_vus en reference pour interdire l'affichage de message en double
 
-function afficher_messages($titre_table, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false, $boite_importante = true, $obligatoire = false) {
+function afficher_messages($titre_table, $from, $where, &$messages_vus, $afficher_auteurs = true, $important = false) {
 	global $connect_id_auteur, $couleur_foncee, $spip_lang_rtl, $spip_lang_left;
 
 	$tmp_var = substr(md5($where.$from), 0, 4);
@@ -22,7 +22,7 @@ function afficher_messages($titre_table, $from, $where, &$messages_vus, $affiche
 	$where .= (!$messages_vus ? '' : ' AND messages.id_message NOT IN ('.join(',', $messages_vus).')');
 
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM $from WHERE $where"));
-	if (! ($obligatoire OR ($cpt = $cpt['n']))) return ;
+	if (!($cpt = $cpt['n'])) return ;
 
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
