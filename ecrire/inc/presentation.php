@@ -501,6 +501,50 @@ function afficher_tranches_requete($num_rows, $colspan, $tmp_var, $javascript=fa
 }
 
 
+function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $deb_aff, $titre, $force, $largeurs, $styles, $skel, $own='')
+{
+  spip_log("$requete, $icone, $col, $fg, $bg, $tmp_var, $deb_aff, $titre, $force, $largeurs, $styles, $skel, $own=''");
+	global $spip_display ;
+
+	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
+	if ($voir_logo) include_spip('inc/logos');
+
+	$tous_id = array();
+
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+	if (! ($obligatoire OR ($cpt = $cpt['n']))) return  ;
+
+	if (!$requete["SELECT"]) $requete["SELECT"]= "*";
+	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+
+	$nb_aff = 1.5 * _TRANCHES;
+	if ($cpt > $nb_aff) {
+		$nb_aff = (_TRANCHES); 
+		$tranches = afficher_tranches_requete($cpt, $col, $tmp_var, '', $nb_aff);
+	}
+
+	if ($titre) echo "<div style='height: 12px;'></div>";
+	echo "<div class='liste'>";
+	echo bandeau_titre_boite2($titre, $icone, $fg, $bg, false);
+	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
+
+	echo $tranches;
+
+	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
+
+	$table = array();
+	while ($row = spip_fetch_array($result)) {
+		$table[]= $skel($row, $tous_id, $voir_logo, $own);
+	}
+	spip_free_result($result);
+		
+	echo afficher_liste($largeurs, $table, $styles);
+	echo "</table>";
+	echo "</div>\n";
+	return $tous_id;
+}
+
+
 function afficher_liste_debut_tableau() {
 	global $spip_display;
 
@@ -1080,7 +1124,7 @@ function afficher_articles_trad_boucle($row, &$tous_id, $afficher_langue, $langu
 //
 
 function afficher_breves($titre_table, $requete, $affrub=false) {
-	global $connect_id_auteur, $spip_lang_right, $spip_lang_left, $dir_lang, $couleur_foncee, $spip_display, $connect_statut, $options;	
+	global  $couleur_foncee, $options;	
  
 	if (($GLOBALS['meta']['multi_rubriques'] == 'oui'
 		AND $GLOBALS['id_rubrique'] == 0)
@@ -1091,45 +1135,10 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
 	}
 
-	if (!$requete['SELECT'])  $requete['SELECT'] = '*';
-
-	$tous_id = array();
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($cpt = $cpt['n'])) return $tous_id ;
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
 
 	$tmp_var = substr(md5(join('', $requete)), 0, 4);
-	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
-
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt,  ($options == "avancees") ? 4 : 3, $tmp_var, '', $nb_aff);
-	}
-
-	if ($titre_table) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-
-	if ($titre_table) {
-		bandeau_titre_boite2($titre_table, "breve-24.gif", $couleur_foncee, "white");
-	}
-
-	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0' background=''>";
-
-	echo $tranches;
-
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-		
-	if ($voir_logo) include_spip('inc/logos');
-
-	$table = array();
-	while ($row = spip_fetch_array($result)) {
-		$table[]= afficher_breves_boucle($row, $tous_id, $afficher_langue, $affrub, $langue_defaut, $voir_logo);
-		}
-	spip_free_result($result);
-
+	$col = ($options == "avancees") ? 4 : 3;
 	if ($options == "avancees") {
 		if ($affrub) $largeurs = array('7', '', '188', '35');
 		else  $largeurs = array('7','', '100', '35');
@@ -1140,17 +1149,15 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 		$styles = array('','arial11', 'arial1');
 	}
 
-	echo afficher_liste($largeurs, $table, $styles);
+	return affiche_tranche_bandeau($requete, "breve-24.gif", 3, $couleur_foncee, "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_breves_boucle', array( $afficher_langue, $affrub, $langue_defaut));
 
-	echo "</table></div>";
-	//fin_cadre_relief();
-	return $tous_id;
 }
 
-function afficher_breves_boucle($row, &$tous_id, $afficher_langue, $affrub, $langue_defaut, $voir_logo)
+function afficher_breves_boucle($row, &$tous_id,  $voir_logo, $own)
 {
 	global  $dir_lang, $options, $connect_statut;
 	$droit = ($connect_statut == '0minirezo' && $options == 'avancees');
+	list($afficher_langue, $affrub, $langue_defaut) = $own;
 	$vals = '';
 
 	$id_breve = $row['id_breve'];
@@ -1199,53 +1206,14 @@ function afficher_breves_boucle($row, &$tous_id, $afficher_langue, $affrub, $lan
 //
 
 function afficher_rubriques($titre_table, $requete) {
-	global $connect_id_auteur;
-	global $spip_lang_rtl;
+	global $options;
 
-	if (!$requete['SELECT']) $requete['SELECT'] = '*' ;
-
-	$tous_id = array();
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($cpt = $cpt['n'])) return $tous_id ;
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
-
-	$tmp_var = substr(md5(join('', $requete)), 0, 4);
-	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
-
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt,  ($options == "avancees") ? 4 : 3, $tmp_var, '', $nb_aff);
-	}
-
-	if ($titre_table) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-		//debut_cadre_relief("rubrique-24.gif");
-
-	if ($titre_table) {
-			bandeau_titre_boite2($titre_table, "rubrique-24.gif", "#999999", "white");
-		}
-	echo "<table width=100% cellpadding=3 cellspacing=0 border=0 background=''>";
-
-	echo $tranches;
-
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-
-	$table = array();
-	while ($row = spip_fetch_array($result)) {
-	  $table[]=afficher_rubriques_boucle($row, $tous_id);
-	}
-	spip_free_result($result);
-
+        $tmp_var = substr(md5(join('', $requete)), 0, 4);
+        $deb_aff = intval(_request('t_' .$tmp_var));
+	$col = ($options == "avancees") ? 4 : 3;
 	$largeurs = array('12','', '');
 	$styles = array('', 'arial2', 'arial11');
-	echo afficher_liste($largeurs, $table, $styles);
-
-	echo "</TABLE>";
-	//fin_cadre_relief();
-	echo "</div>";
-
-	return $tous_id;
+	return affiche_tranche_bandeau($requete, "rubrique-24.gif", $col, "#999999", "white", $tmp_var, $deb_aff, $titre_table, false, $largeurs, $styles, 'afficher_rubriques_boucle');
 }
 
 function afficher_rubriques_boucle($row, &$tous_id)

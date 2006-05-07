@@ -12,54 +12,17 @@
 
 if (!defined("_ECRIRE_INC_VERSION")) return;
 
-function afficher_sites($titre_table, $requete) {
-	global $couleur_claire, $connect_id_auteur;
-
-	if (!$requete["SELECT"]) $requete["SELECT"].= "*";
-
-	$tous_id = array();
-
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($cpt = $cpt['n'])) return $tous_id ;
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+function afficher_sites($titre_table, $requete)
+{
+	global $couleur_claire, $connect_id_auteur, $spip_display ;
 
 	$tmp_var = substr(md5(join(' ',$requete)), 0, 4);
-	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
 
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, 3, $tmp_var, '', $nb_aff);
-	}
-
-	if ($titre_table) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-	bandeau_titre_boite2($titre_table, "site-24.gif", $couleur_claire, "black");
-	echo "<table width='100%' cellpadding='2' cellspacing='0' border='0'>";
-
-	echo $tranches;
-
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
-
-	$voir_logo = ($spip_display != 1 AND $spip_display != 4 AND $GLOBALS['meta']['image_process'] != "non");
-		
-	if ($voir_logo) include_spip('inc/logos');
-
-	$table = array();
-	while ($row = spip_fetch_array($result)) {
-		$table[]= afficher_sites_boucle($row, $tous_id);
-	}
-	spip_free_result($result);
-		
-	$largeurs = array('','','');
-	$styles = array('arial11', 'arial1', 'arial1');
-	echo afficher_liste($largeurs, $table, $styles);
-	echo "</table>";
-	echo "</div>\n";
-	return $tous_id;
+	return affiche_tranche_bandeau($requete, "site-24.gif", 3, $couleur_claire, "black", $tmp_var, $deb_aff, $titre_table, false,  array('','',''), array('arial11', 'arial1', 'arial1'), 'afficher_sites_boucle');
 }
 
-function afficher_sites_boucle($row, &$tous_id)
+function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 {
 	$vals = '';
 	$id_syndic=$row["id_syndic"];
@@ -75,9 +38,6 @@ function afficher_sites_boucle($row, &$tous_id)
 			
 	$tous_id[] = $id_syndic;
 
-			//echo "<tr bgcolor='$couleur'>";
-
-			//echo "<td class='arial2'>";
 	switch ($statut) {
 		case 'publie':
 				if (acces_restreint_rubrique($id_rubrique))
@@ -117,10 +77,8 @@ function afficher_sites_boucle($row, &$tous_id)
 	$s .= "</a> &nbsp;&nbsp; <font size='1'>[<a href='$url_site'>"._T('lien_visite_site')."</a>]</font>";
 	$vals[] = $s;
 			
-			//echo "</td>";
-
 	$s = "";
-			//echo "<td class='arial1' align='right'> &nbsp;";
+
 	if ($syndication == 'off' OR $syndication == 'sus') {
 				$s .= "<font color='red'>"._T('info_probleme_grave')." </font>";
 	}
@@ -128,8 +86,6 @@ function afficher_sites_boucle($row, &$tous_id)
 			$s .= "<font color='red'>"._T('info_syndication')."</font>";
 	}
 	$vals[] = $s;
-			//echo "</td>";					
-			//echo "<td class='arial1'>";
 
 	if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
 		$total_art = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM spip_syndic_articles WHERE id_syndic='$id_syndic'"));
@@ -138,54 +94,19 @@ function afficher_sites_boucle($row, &$tous_id)
 			$s = "&nbsp;";
 	}
 	$vals[] = $s;
-			//echo "</td>";					
-			//echo "</tr></n>";
+
 	return $vals;
 }
 
 function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 	global $connect_statut, $spip_lang_right;
 
-	if (!$requete["SELECT"]) $requete["SELECT"].= "*";
+	$col = (($connect_statut == '0minirezo') ? 3 :  2) + ($id==0);
+	$tmp_var = substr(md5(join(' ',$requete)), 0, 4);
+	$deb_aff = intval(_request('t_' .$tmp_var));
+	$redirect = generer_url_ecrire($GLOBALS['exec'], ('t_' .$tmp_var . '=' . $deb_aff) . (!$id ? '' : "&id_syndic=$id"), true);
 	if (!$requete['FROM']) $requete['FROM']= 'spip_syndic_articles';
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($obligatoire OR ($cpt = $cpt['n']))) return  ;
-
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
-
-	$tmp_var = substr($requete, 0, 4);
-	$nb_aff = 1.5 * _TRANCHES;
-	$deb_aff = intval(_request('t_' .$tmp_var));
-
-	if ($cpt > $nb_aff) {
-		$nb_aff = (_TRANCHES); 
-		$tranches = afficher_tranches_requete($cpt, (($connect_statut == '0minirezo') ? 3 :  2) + ($id==0), $tmp_var, '', $nb_aff);
-
-	}
-
-	if ($titre_table) echo "<div style='height: 12px;'></div>";
-	echo "<div class='liste'>";
-		//debut_cadre_relief("rubrique-24.gif");
-
-	if ($titre_table) {
-			bandeau_titre_boite2($titre_table, "site-24.gif", "#999999", "white");
-	}
-	echo "<table width='100%' cellpadding='3' cellspacing='0' border='0' background=''>";
-
-	echo $tranches;
-
-	$result = spip_query("SELECT " . $requete['SELECT'] . " FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '') . ($requete['ORDER BY'] ? (' ORDER BY ' . $requete['ORDER BY']) : '') . " LIMIT " . ($deb_aff >= 0 ? "$deb_aff, $nb_aff" : ($requete['LIMIT'] ? $requete['LIMIT'] : "99999")));
- 
-	$redirect = generer_url_ecrire($GLOBALS['exec'], ('t_' .$tmp_var . '=' . $deb_aff) . (!$id ? '' : "&id_syndic=$id"), true);
-
-	$my_sites = array();
-	$table = array();
-	while ($row = spip_fetch_array($result)) {
-	  $table[]= afficher_syndic_articles_boucle($row, $my_sites, $redirect);
-	}
-	spip_free_result($result);
-		
 	if (!$id) {
 			$largeurs = array(7, '', '100');
 			$styles = array('','arial11', 'arial1');
@@ -197,15 +118,11 @@ function afficher_syndic_articles($titre_table, $requete, $id = 0) {
 			$largeurs[] = '80';
 			$styles[] = 'arial1';
 	}
-		
-	echo afficher_liste($largeurs, $table, $styles);
 
-	echo "</TABLE>";
-	//fin_cadre_relief();
-	echo "</div>";
+	return affiche_tranche_bandeau($requete, "site-24.gif", $col, "#999999", "white", $tmp_var, $deb_aff, $titre_table, $obligatoire, $largeurs, $styles, 'afficher_syndic_articles_boucle', $redirect);
 }
 
-function afficher_syndic_articles_boucle($row, &$my_sites, $redirect)
+function afficher_syndic_articles_boucle($row, &$my_sites, $bof, $redirect)
 {
 	global  $connect_statut, $spip_lang_right;
 
