@@ -449,7 +449,7 @@ function htpasswd_config()
 
 	$creer_htpasswd = $GLOBALS['meta']["creer_htpasswd"];
 
-	echo "<div class='verdana2'>", _T('texte_fichier_authent'), "</div>";
+	echo "<div class='verdana2'>", _T('texte_fichier_authent', array('dossier' => '<tt>'._DIR_SESSIONS.'</tt>')), "</div>";
 
 	echo "<div class='verdana2'>";
 	afficher_choix('creer_htpasswd', $creer_htpasswd,
