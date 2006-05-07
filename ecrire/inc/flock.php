@@ -74,8 +74,10 @@ function ecrire_fichier ($fichier, $contenu, $ecrire_quand_meme = false, $trunca
 
 	// Ne rien faire si on est en preview, debug, ou si une erreur
 	// grave s'est presentee (compilation du squelette, MySQL, etc)
-	if (($GLOBALS['var_preview'] OR ($GLOBALS['var_mode'] == 'debug')
-	OR defined('spip_interdire_cache'))
+	if ((
+		(isset($GLOBALS['var_preview'])&&$GLOBALS['var_preview'])
+		OR (isset($GLOBALS['var_mode'])&&($GLOBALS['var_mode'] == 'debug'))
+		OR defined('spip_interdire_cache'))
 	AND !$ecrire_quand_meme)
 		return;
 
