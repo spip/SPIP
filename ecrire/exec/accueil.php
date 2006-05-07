@@ -311,14 +311,8 @@ if ($spip_display != 4) {
 
 	if ($spip_display != 1) {
 		include_spip('inc/logos');
-		if ($logo = baliser_logo("rub", 0, 170, 170,
-					 "text-align:center; margin-bottom: 5px;")) {
-		  echo "<a href='",
-		    generer_url_ecrire("naviguer",""),
-		    "'>",
-		    $logo,
-		    "</a>";
-		}
+		echo baliser_logo("site", 0, 170, 170,
+			"text-align:center; margin-bottom: 5px;");
 	}
 	echo "<div class='verdana1'>";
 
