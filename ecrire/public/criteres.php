@@ -324,7 +324,7 @@ function critere_inverse_dist($idb, &$boucles, $crit) {
 	    if ($n)
 	      $boucle->order[$n-1] .= " . $order";
 	    else
-	      $boucle->default_order[] =  $order;
+	      $boucle->default_order[] =  ' DESC';
 	  }
 }
 
