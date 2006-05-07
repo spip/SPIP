@@ -242,6 +242,16 @@ function couper($texte, $taille=50) {
 	// supprimer les tableaux
 	$texte = ereg_replace("(^|\r)\|.*\|\r", "\r", $texte);
 
+	// corriger la longueur de coupe 
+	// en fonction de la presence de caracteres utf
+	if ($GLOBALS['meta']['charset']=='utf-8'){
+		$long = charset2unicode($texte);
+		$long = spip_substr($long, 0, max($taille,1));
+		$nbcharutf = preg_match_all("/(&#[0-9]{3,5};)/",$long,$matches);
+		$taille += $nbcharutf;
+	}
+	
+	
 	// couper au mot precedent
 	$long = spip_substr($texte, 0, max($taille-4,1));
 	$court = ereg_replace("([^[:space:]][[:space:]]+)[^[:space:]]*\n?$", "\\1", $long);
