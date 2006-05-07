@@ -492,7 +492,7 @@ exige d\'avoir un acc&egrave;s FTP au site Web.',
 'info_procedez_par_etape' => 'proc&eacute;dez &eacute;tape par &eacute;tape',
 'info_procedure_maj_version' => 'la proc&eacute;dure de mise &agrave; jour doit &ecirc;tre lanc&eacute;e afin d\'adapter
 	la base de donn&eacute;es &agrave; la nouvelle version de SPIP.',
-'info_ps' => 'P.-S.',
+'info_ps' => 'P.S.',
 'info_publier' => 'publier',
 'info_publies' => 'Vos articles publi&eacute;s en ligne',
 'info_question_accepter_visiteurs' => 'Si les squelettes de votre site pr&eacute;voient l\'enregistrement de visiteurs sans acc&egrave;s &agrave; l\'espace priv&eacute;, veuillez activer l\'option ci-dessous&nbsp;:',
