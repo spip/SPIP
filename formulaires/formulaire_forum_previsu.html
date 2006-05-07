@@ -4,7 +4,7 @@
 
 <p />
 
-[<b><a[ href="mailto:(#ENV{email_auteur})"]>(#ENV*{auteur})</a></b>]
+[<strong><a[ href="mailto:(#ENV{email_auteur})"]>(#ENV*{auteur})</a></strong>]
 
 [<p />(#ENV*{texte})]
 
@@ -13,12 +13,12 @@
 <B_M>
  <p><:forum_avez_selectionne:></p><ul>
 <BOUCLE_M(MOTS){id_mot IN #ENV**{ajouter_mot}}{par num type}{par type}{par num titre}{par titre}>
-<li style='font-size: 80%;'>#TYPE&nbsp;: <b>#TITRE</b></li>
+<li style='font-size: 80%;'>#TYPE&nbsp;: <strong>#TITRE</strong></li>
 </BOUCLE_M>
 </ul>
 </B_M>
 
-[<p align='right' style='color: red;'>(#ENV*{erreur})</p>]
+[<p align="right" class="reponse_formulaire">(#ENV*{erreur})</p>]
 
 [<div align='right'><input type='submit' name='confirmer_forum' class='spip_bouton' value="(#ENV*{bouton})" /></div>]
 
