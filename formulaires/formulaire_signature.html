@@ -1,3 +1,6 @@
+<div class="formulaire_spip formulaire_signature">
+<a name="formulaire_signature" id="formulaire_signature"></a>
+
 <form method="post" action="[(#ENV{self})][#sp(#ENV{id_article})]">
 <input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
 
@@ -20,15 +23,17 @@
 	<p><label><:form_pet_nom_site2:></label>
 	<input type="text" class="forml" name="signature_nom_site" value="" size="20" /></p>
 	<p><label><:form_pet_adresse_site:></label>
-		<input type="text" class="forml" name="signature_url_site" value="http://" size="20" style="text-align: left;" /></p>
+		<input type="text" class="forml" name="signature_url_site" style="text-align: left;" value="http://" size="20" /></p>
 </fieldset>
 
 [(#ENV{message})
 	<fieldset class="spip_encadrer">
 		<legend><:form_pet_message_commentaire:></legend>
 		<p><label><:info_texte_message:></label>
-		<textarea name="message" rows="3" class="forml" cols="20"></textarea></p>
+		<textarea class="forml" name="message" rows="3" cols="20"></textarea></p>
 	</fieldset>]
 
 <input type="submit" class="spip_bouton" value="<:bouton_valider:>" />
 </form>
+
+</div>

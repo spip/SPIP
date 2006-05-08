@@ -1,13 +1,14 @@
-<form action='#ENV{url}' method='post' style='margin:0px; padding:0px;'>
-<div>
+<div class="formulaire_spip formulaire_menu_lang">
+<a name="formulaire_menu_lang" id="formulaire_menu_lang"></a>
+
+<form action="#ENV{url}" method="post">
 	[(#ENV{url}|form_hidden)]
-	<select name='#ENV{nom}' class='forml'
-	style='vertical-align:top; max-height:24px; margin-bottom:5px; width:120px;'
-onchange="document.location.href='#ENV{url}&amp;#ENV{nom}='+this.options[this.selectedIndex].value">
+	<select class="forml" name="#ENV{nom}" onchange="document.location.href='#ENV{url}&amp;#ENV{nom}='+this.options[this.selectedIndex].value">
 	#ENV*{langues}
 	</select>
 	<noscript>
-		<div style='display: inline;'><input type='submit' value='&gt;&gt;' class="spip_bouton" /></div>
+	<input type="submit" value="&gt;&gt;" class="spip_bouton" />
 	</noscript>
-</div>
 </form>
+
+</div>

@@ -1,21 +1,16 @@
-<!-- Formulaire de connexion pour les forums sur abonnement
-	appele dans formulaire_forum.php 
--->
+[(#REM) Formulaire de connexion pour les forums sur abonnement appele dans formulaire_forum.php ]
 
-<p><:forum_vous_enregistrer:> <:forum_vous_inscrire:></p>
+<fieldset class="reponse_formulaire">
+<legend><:forum_vous_inscrire:></legend>
+<:forum_vous_enregistrer:> <:forum_vous_inscrire:>
+</fieldset>
 
 #LOGIN_PUBLIC
 
-<div align='center' style='font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;'>
+<p align="center">
 
-&#91;<a [href='(#ENV{inscription})&amp;mode=forum[(&amp;id_rubrique=(#ENV{id_rubrique})]&amp;focus=nom_inscription']
-	target="spip_pass"
-	onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;
+&#91;<a[ href="(#ENV{inscription})&amp;mode=forum[(&amp;id_rubrique=(#ENV{id_rubrique})]&amp;focus=nom_inscription"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;
 
-&#91;<a
-		[href="(#ENV{oubli})"]
-		target="spip_pass" 
-		onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
+&#91;<a[ href="(#ENV{oubli})"] target="spip_pass" onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 
-</div>
-<br />
+</p>

@@ -94,13 +94,13 @@ form, fieldset, legend, label, input, textarea, select, option {
     margin: 4px 0;  
     padding: 0; }
 
-.spip_encadrer {
+.formulaire_spip fieldset, .spip_encadrer {
     display: block;
 	background: #FAFAFA;
 	margin: 8px 0;
 	padding: 8px;
 	border: 1px solid #CCCCCC; }
-.spip_encadrer legend { font-weight: bold; }
+.formulaire_spip legend { font-weight: bold; }
 
 .spip_sanscadre { border: 0; } /* inutile : a supprimer */
 
@@ -122,6 +122,7 @@ input.spip_bouton {
 	color: #FFFFFF;
 	float: right; }
 
+/* * Reponse du formulaire (erreur) */
 .reponse_formulaire {
 	font-weight: bold;
 	color: #FF0000; }
@@ -130,6 +131,17 @@ fieldset.reponse_formulaire {
 	border: 1px solid #FF6666; }
 fieldset.reponse_formulaire legend { font-weight: normal; }
 fieldset.reponse_formulaire p { padding: 4px; }
+
+/* * Previsualisation du message */
+.previsu {  
+	background: #FFFFFF;  
+	margin-bottom: 16px;  
+	padding: 12px;  
+	border: 1px solid #666666;  
+	color: #000000; } 
+.previsu .titre {  
+	font-weight: bold;  
+	font-size: 1.18em; } 
 
 /* * Barre de raccourcis */
 a.spip_barre img {
@@ -145,25 +157,24 @@ a.spip_barre:hover img {
 	padding: 3px;
 	background: #F8F8F4; }
 
+/* Formulaire de forum
+----------------------------------------------- */
 /* * Choix des mots-clefs */
-div.choix_mots { width: 47%; float:left} 
+div.choix_mots { width: 47%; float: left; } 
 div.choix_mots label { display: inline; }
 
 /* Formulaire de recherche
 ----------------------------------------------- */
-input#formulaire_recherche {
+.formulaire_recherche {
 	float: right;
 	text-align: left;
-	width: 12em;
-	background: #FCFCF0;
-	padding: 1px;
-	border: 1px solid #666666;
-	color: #000000; }
+	width: 12em; }
 
 .spip_surligne { background: #FFFF66; }
 
-/* Couleurs des liens
------------------------------------------------ */
+/*  ------------------------------------------ */
+/*  Couleurs des liens
+/*  ------------------------------------------ */
 a { text-decoration: none; color: #333333; }
 a.on { font-weight: bold; }
 a:hover { text-decoration: underline; color: #000000; }
