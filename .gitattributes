@@ -4,6 +4,11 @@ IMG/logo_spip.jpg -text
 /UPGRADE.txt -text
 dist/choix_mots.html -text
 dist/favicon.ico -text
+dist/inc-entete.html -text
+dist/inc-forum.html -text
+dist/inc-petition.html -text
+dist/inc-pied.html -text
+dist/inc-rubriques.html -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/rien.gif -text

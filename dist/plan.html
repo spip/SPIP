@@ -1,125 +1,128 @@
 #CACHE{7200}
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html dir="#LANG_DIR" lang="#LANG">
 <head>
-<title>[#NOM_SITE_SPIP]</title>
-<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	<title><:plan_site:> - [(#NOM_SITE_SPIP|textebrut)]</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+	[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|attribut_html)" />]
+	<meta name="robots" content="none" />
+	<meta name="generator" content="SPIP" />
 
-<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
-<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
+	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
 
-<!-- Les feuilles de style specifiques aux presents squelettes -->
-<link rel="stylesheet" href="#CHEMIN{typographie.css}" type="text/css" />
+	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
+	<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="all" />
 
-<!-- media="..." permet de ne pas utiliser ce style sous Netscape 4 (sinon plantage) -->
-<link rel="stylesheet" href="#CHEMIN{habillage.css}" type="text/css" media="print, projection, screen, tv" />
-[	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
-]</head>
+	<!-- Feuille de styles CSS pour l'impression -->
+	<link rel="stylesheet" href="#CHEMIN{impression.css}" type="text/css" media="print" />
+
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+</head>
 
 <body>
+	<div id="page">
 
+		[(#REM) Entete de la page + titre du site ]
+		<INCLURE{fond=inc-entete}{lang}>
 
-<!-- Plan du site -->
+		[(#REM) Fil d'Ariane ]
+		<div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a> &gt; <:plan_site:></div>
 
-<div id="plan" class="contenu">
+		<div id="conteneur">
 
-<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
+			[(#REM) Le plan de site ci-dessous est a adapter selon les besoins. En particulier, on n'aura pas necessairement besoin de tous les elements (sous-rubriques, articles, breves et sites) ]
 
-<div class="plan-secteur">
+			<div id="contenu" class="plan">
 
-	[(#LOGO_RUBRIQUE|left)]<h1><a href="#URL_RUBRIQUE">#TITRE</a></h1>
+				<h2 class="invisible"><:plan_site:></h2>
 
-	<div class="encart">
+				<BOUCLE_secteurs(RUBRIQUES) {racine} {par titre}>
 
-	<!-- Breves -->
+				<h3><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
 
-	<h2 class="structure"><:breves:></h2>
+				[(#REM) Articles et sous-rubriques ]
 
-	<B_breves>
-	<div class="menu">
-	<div class="breves">
-		<div class="menu-titre">
-		<:breves:>
-		</div>
-		<ul>
-	<BOUCLE_breves(BREVES) {id_secteur} {par date} {inverse} {0,15}>
-		<li class="menu-item">
-		<em>[(#DATE|affdate_court)]</em>:
-		<a href="#URL_BREVE">#TITRE</a>
-		</li>
-	</BOUCLE_breves>
-		</ul>
-	</div>
-	</div>
-	</B_breves>
+				<div class="contre-encart">
 
-	<!-- Sur le Web -->
+					<B_articles_racine>
+					<h4 class="invisible"><:articles:></h4>
+					<ul>
+						<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
+						<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_articles_racine>
+					</ul>
+					</B_articles_racine>
 
-	<h2 class="structure"><:sites_web:></h2>
+					<B_rubriques>
+					<ul>
+						<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
+						<li><strong><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></strong>
 
-	<B_sites>
-	<div class="menu">
-	<div class="divers">
-		<div class="menu-titre">
-		<:sur_web:>
-		</div>
-		<ul>
-	<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
-		<li class="menu-item">
-		<a href="#URL_SITE">#NOM_SITE</a>
-		</li>
-	</BOUCLE_sites>
-		</ul>
-	</div>
-	</div>
-	</B_sites>
+							<B_articles>
+							<ul>
+								<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
+								<li><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+								</BOUCLE_articles>
+							</ul>
+							</B_articles>
 
-	</div>
+							<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
 
-<!-- Articles et sous-rubriques -->
+						</li>
+						</BOUCLE_rubriques>
 
-<h2 class="structure"><:articles:></h2>
+					</ul>
+					</B_rubriques>
 
-<B_articles_racine>
-<ul class="plan-articles">
+				</div><!-- fin contre-encart -->
 
-<BOUCLE_articles_racine(ARTICLES) {id_rubrique} {par titre}>
-<li class="plan-article"><a href="#URL_ARTICLE">#TITRE</a></li>
-</BOUCLE_articles_racine>
+				<div class="encart">
 
-</ul>
-</B_articles_racine>
+				[(#REM) Breves ]
+				<B_breves>
+				<div class="breves">
+					<h4 class="titre"><:breves:></h4>
+					<ul>
+						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse}>
+						<li><a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_breves>
+					</ul>
+				</div>
+				</B_breves>
 
-<B_rubriques>
+				[(#REM) Sur le Web ]
+				<B_sites>
+				<div class="syndic">
+					<h4 class="titre"><:sites_web:></h4>
+					<ul>
+						<BOUCLE_sites(SITES) {id_secteur} {par nom_site}>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_sites>
+					</ul>
+				</div>
+				</B_sites>
 
-<ul class="plan-rubriques">
+				</div>
 
-<BOUCLE_rubriques(RUBRIQUES) {id_parent} {par titre}>
-<li>
-<div class="plan-rubrique"><a href="#URL_RUBRIQUE">#TITRE</a></div>
+				</BOUCLE_secteurs>
 
-	<B_articles>
-	<ul class="plan-articles">
-	<BOUCLE_articles(ARTICLES) {id_rubrique} {par titre}>
-	<li class="plan-article"><a href="#URL_ARTICLE">#TITRE</a></li>
-	</BOUCLE_articles>
-	</ul>
-	</B_articles>
+			</div><!-- fin contenu -->
 
-	<BOUCLE_sous_rubriques(BOUCLE_rubriques)></BOUCLE_sous_rubriques>
+			[(#REM) Menu de navigation laterale ]
+			<div id="navigation">
+				<h2 class="invisible"><:navigation:></h2>
 
-</li>
-</BOUCLE_rubriques>
+				[(#REM) Menu de navigation par rubriques ]
+				<INCLURE{fond=inc-rubriques}{lang}>
 
-</ul>
-</B_rubriques>
+			</div><!-- fin navigation -->
 
+		</div><!-- fin conteneur -->
 
-</div>
+		[(#REM) Pied de page ]
+		<INCLURE{fond=inc-pied}{lang}>
 
-</BOUCLE_secteurs>
-
-</div>
-
+	</div><!-- fin page -->
 </body>
 </html>

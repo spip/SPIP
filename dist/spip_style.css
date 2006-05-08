@@ -1,197 +1,162 @@
-a {
-	text-decoration: none;
-}
+/*  ------------------------------------------ */
+/*  Styles pour le code genere par SPIP
+/*  ------------------------------------------ */
 
-a:hover {
-	color:#ff9900;
-	text-decoration: underline;
-}
 
-a.spip_url { }
-a.spip_in { }
-a.spip_out { }
-a.spip_glossaire { }
+/* Spip Styles : intertitre, citations, cadre, etc...
+----------------------------------------------- */
+b.spip {}
+i.spip {}
+strong.spip {}
+em.spip {}
+hr.spip {}
 
-img {
-	border: 0px;
-}
-
-.spip_code {
-	font-family: monospace;
-}
-
-p.spip_note { }
+.spip_puce { list-style-position: outside; border: 0; }
+li.spip { margin-left: 0.8em; list-style: square; list-style-position: outside; }
 
 h3.spip {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-weight: bold;
-	font-size: 120%;
-	text-align: center;
-	margin-top : 40px;
-	margin-bottom : 40px;
-	padding: 0em;
-	clear: both;
-}
+    clear: both;
+	text-align: center; 
+	margin-top: 2em; 
+	margin-bottom: 1.4em; 
+	font-size: 1.15em; 
+	font-weight: bold; }
 
-.spip_puce {
-	list-style-position: inside;
-	border-width: 0px;
-}
-.spip_documents{
-	font-family: Verdana,Arial,Helvetica,sans-serif;
-	font-size : 70%;
-}
+p.spip {}
+p.spip_note {} /* inutile : a supprimer */
 
-.spip_documents_center {
-	margin: auto;
-	text-align: center;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
+blockquote.spip {}
 
-.spip_documents_left{
-	float: left;
-	margin-right: 15px; 
-	text-align: center;
-}
+.spip_poesie { 
+	margin-bottom: 5px; 
+	margin: 10px 20px; 
+	padding-left: 10px; 
+	border-left: 1px solid #CCCCCC;
+	font-family: Georgia, Garamond, Times, serif; }
+.spip_poesie div { text-indent: -60px; margin-left: 60px; }
+	
+.spip_serif { font-family: Georgia, Garamond, Times, serif; }
 
-.spip_documents_right{
-	float: right;
-	margin-left: 15px; 
-	text-align: center;
-}
+.spip_code, .spip_cadre { font-family: monospace; font-style: normal; font-size: 1.1em; }
+.spip_cadre { width: 100%; border: 1px solid #CCCCCC; }
 
-table.spip {
-	margin-left: auto;
-	margin-right: auto;
-	border: 1px solid #999999;
-	border-collapse:collapse;
-}
-
-table.spip caption{
+/*  Tableaux
+---------------------------------------------- */
+table.spip { 
+	margin: 0 auto; 
+	width: 100%;
+	border: 1px solid #333333; 
+	border-collapse: collapse; 
+	font: 0.88em Verdana, Arial, Helvetica, sans-serif; }
+	
+table.spip caption { 
 	caption-side: top; /* bottom pas pris en compte par IE */
-	text-align: center;
-	margin-left: auto;                                                       
-	margin-right: auto;
-	padding: 3px;
-	font-weight: bold;
-	font-family: Verdana,Arial,Sans,sans-serif;
-	font-size : 70%;
-}
+	margin: 0 auto; 
+	padding: 3px; 
+	text-align: center; 
+	font-weight: bold; }
+	
+table.spip tr.row_first { background: #F8F8E8; text-align: center; font-size: 1em; }
+table.spip tr.row_odd { background: #F0F0F0; font-size: 1em; }
+table.spip tr.row_even { background: #FAFAFA; font-size: 1em; }
+table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
-table.spip tr.row_first {
-	background-color: #fcf4d0;
-}
+/*  Logos et documents
+---------------------------------------------- */
+img.spip_logos { margin: 0; padding: 0; border: 0; }
 
-table.spip tr.row_odd {
-	background-color: #d0d0d0;
-}
+.spip_documents { font-family: Verdana, Arial, Helvetica, sans-serif; }
+.spip_documents_center { margin: auto; text-align: center; width: 80%; }
+.spip_documents_left { float: left; margin-right: 15px; text-align: left; }
+.spip_documents_right { float: right; margin-left: 15px; text-align: right; }
+.spip_doc_titre { font-weight: bold; text-align: center; font-size: 0.88em; }
+.spip_doc_descriptif { clear: both; font-size: 0.82em; }
 
-table.spip tr.row_even {
-	background-color: #f0f0f0;
-}
+/* *  Images typographiques (via image_typo), URL a revoir... */
+/* .format_png { behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]); } */
 
-table.spip td {
-	padding: 3px;
-	text-align: left;
-	vertical-align: middle;
-}
+/*  ------------------------------------------ */
+/*  Habillage des formulaires 
+/*  ------------------------------------------ */
 
-hr.spip { }
-b.spip { }
-i.spip { }
-blockquote.spip {
-	margin-left : 40px;
-	margin-top : 10px;
-	margin-bottom : 10px;
-	margin-right: 0px;
-	border : solid 1px #aaaaaa;
-	background-color: #ffffff;
-	padding-left: 10px;
-	padding-right: 10px;
-}
+/* Correction des styles HTML par defaut
+----------------------------------------------- */
+form, fieldset, legend, label, input, textarea, select, option {
+	margin: 0; padding: 0; border: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif; }
 
-.forml { width: 100% ; background-color: #ffddaa;}
+/* Styles de Spip
+----------------------------------------------- */
+.formulaire_spip {}
 
 .spip_encadrer {
-	font-family: helvetica, arial, sans-serif;
-	width : 95%;
-	background-color: #ffffff;
-	padding: 5px;
-	border: 1px #666666 solid;
-}
+    display: block;
+	background: #FAFAFA;
+	margin: 8px 0;
+	padding: 8px;
+	border: 1px solid #CCCCCC; }
 
-.spip_sanscadre {
-	border: 0px;
+.spip_sanscadre { border: 0; } /* inutile : a supprimer */
+
+.forml {
+	width: 99%;
+	background: #FCFCF0;
+	padding: 1px;
+	border: 1px solid #666666;
+	color: #000000;
+    font-size: 1em; }
+
+input.spip_bouton {
+	width: auto;
+	background: #666666;
+	margin: 3px 0;
+	padding: 1px 2px;
+	border: 2px outset #666666;
 	font-weight: bold;
-}
-
-.spip_serif {
-	font-family: Georgia, Garamond, Times New Roman, serif;
-}
-
-.spip_cadre {
-	width : 95%;
-	background-color: #ffffff;
-	padding: 5px;
-	margin-top: 10px;
-}
-
-div.spip_poesie {
-	margin-bottom: 5px;
-	margin-left: 10px;
-	padding-left: 10px;
-	border-left: 1px solid #999999;
-}
-div.spip_poesie div {
-	text-indent: -60px;
-	margin-left: 60px;
-}
-
-.spip_bouton { background-color: #ffcc00;}
-
-form.formrecherche { 
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-input.formrecherche {
-	width: 95%;
-	background-color: #ffddaa;
-}
+	color: #FFFFFF;
+	float: right; }
 
 .reponse_formulaire {
-	font-family: Verdana,Arial,Helvetica,sans-serif;
 	font-weight: bold;
-	font-size: 110%;
-	color: red;
-}
+	color: #FF0000; }
 
-.spip_surligne { background-color: #ffff66; }
-
-
-/*
- *  Images typographiques (via image_typo), URL a revoir...
- */
-.format_png {
-	behavior: url(spip.php?page=win_png);
-}
-
-
-/*
- * Barre de raccourcis
- */
-
+/* * Barre de raccourcis */
 a.spip_barre img {
-	border-left: 1px solid #ffffff;
-	border-top: 1px solid #ffffff;
-	border-right: 1px solid #aa9966;
-	border-bottom: 1px solid #aa9966;
+	border-left: 1px solid #FFFFFF;
+	border-top: 1px solid #FFFFFF;
+	border-right: 1px solid #AA9966;
+	border-bottom: 1px solid #AA9966;
 	padding: 3px;
-	background-color: #ffddaa;
-}
+	background: #FFDDAA; }
+
 a.spip_barre:hover img {
 	border: 1px solid #808080;
 	padding: 3px;
-	background-color: #f8f8f4;
-}
+	background: #F8F8F4; }
 
+/* * Choix des mots-clefs */
+div.choix_mots { width: 47%; float:left} 
+div.choix_mots label { display: inline; }
+
+/* Formulaire de recherche
+----------------------------------------------- */
+input#formulaire_recherche {
+	float: right;
+	text-align: left;
+	width: 12em;
+	background: #FCFCF0;
+	padding: 1px;
+	border: 1px solid #666666;
+	color: #000000; }
+
+.spip_surligne { background: #FFFF66; }
+
+/* Couleurs des liens
+----------------------------------------------- */
+a { text-decoration: none; color: #333333; }
+a.on { font-weight: bold; }
+a:hover { text-decoration: underline; color: #000000; }
+a.spip_in { color: #A02020; } /* liens internes */
+a.spip_out { color: #2020A0; } /* liens sortants */
+a.spip_url { color: #2020A0; } /* liens url sortants */
+a.spip_glossaire { color: #20A020; } /* liens vers encyclopedie */
