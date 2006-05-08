@@ -12,10 +12,7 @@
 <div>
 [(#ENV{texte}|nl2br)]
 </div>
-<div style="text-align:#LANG_RIGHT;">
-	<input type="submit"  class="spip_bouton" name="confirmer#ENV{id}"
-		 value="(#ENV{boutonconfirmation})" />
-</div>
+<input type="submit" class="spip_bouton" name="confirmer#ENV{id}" value="(#ENV{boutonconfirmation})" />
 </div>
 ]
 
@@ -27,8 +24,5 @@
 <p>
 <textarea name="texte_message_auteur#ENV{id}" rows='10' class='forml' cols='40'>#ENV{texte}</textarea>
 </p>
-<div style="text-align:#LANG_RIGHT;">
-<input type="submit"  class="spip_bouton" name="valide" value="#ENV{bouton}" />
-</div>
-
+<input type="submit" class="spip_bouton" name="valide" value="#ENV{bouton}" />
 </form>
