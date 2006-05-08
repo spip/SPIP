@@ -107,7 +107,7 @@ echo "<a href='", generer_url_ecrire('suivi_revisions', "debut=$next&id_secteur=
 	
 				echo "<span class='arial2'>";
 				if (!$court) echo bouton_block_visible("$id_version-$id_article-$id_auteur");
-				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' border='0'>&nbsp;";
+				echo "<img src='" . _DIR_IMG_PACK . "$logo_statut' />&nbsp;";
 				echo "<a class='$statut' style='font-weight: bold;' href='" . generer_url_ecrire("articles_versions","id_article=$id_article") . "'>$titre</a>";
 				echo "</span>";
 				echo "<span class='arial1'$dir_lang>";

@@ -196,7 +196,7 @@ function aff_referers ($vis, $table, $where, $limit, $plus) {
 
 			$visites = pos($nbvisites);
 
-			if (strlen($source_vignettes) > 0) $ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; border: 0; margin-bottom: 3px; margin-left: 3px;\" /></a>";
+			if (strlen($source_vignettes) > 0) $ret = "\n<div style='clear: $spip_lang_right;'></div><a href=\"http://".$lesurls[$numero]."\"><img src=\"$source_vignettes".rawurlencode($lesurls[$numero])."\" style=\"float: $spip_lang_right; margin-bottom: 3px; margin-left: 3px;\" /></a>";
 
 			$ret .= "\n<li>";
 

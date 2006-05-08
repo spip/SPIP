@@ -86,7 +86,7 @@ function aide($aide='') {
 		. "height=580'); return false;\">"
 		. http_img_pack("aide".aide_lang_dir($spip_lang,$spip_lang_rtl).".gif",
 			_T('info_image_aide'), "title=\""._T('titre_image_aide')
-			. "\" width=\"12\" height=\"12\" border=\"0\" align=\"middle\"")
+			. "\" width=\"12\" height=\"12\" align=\"middle\"")
 		. "</a>";
 }
 

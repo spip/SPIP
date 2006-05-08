@@ -321,7 +321,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			$url = "href='" . generer_url_ecrire('mots_edit', "id_mot=$id_mot&redirect=".rawurlencode(generer_url_ecrire($url_base, "$table_id=$id_objet#mots"))) . "'";
 
-			$vals[] = "<A $url>" . http_img_pack('petite-cle.gif', "", "width='23' height='12' border='0'") ."</A>";
+			$vals[] = "<A $url>" . http_img_pack('petite-cle.gif', "", "width='23' height='12'") ."</A>";
 			
 	
 			// Changer
@@ -354,7 +354,7 @@ function formulaire_mots($table, $id_objet, $nouv_mot, $supp_mot, $cherche_mot, 
 	
 			if ($flag_editable){
 				if ($flag_groupe)
-				  $s = "<A href='" . generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' border='0' align='middle'") ."</A>";
+				  $s = "<A href='" . generer_url_ecrire($url_base, "$table_id=$id_objet&supp_mot=$id_mot#mots") . "'>"._T('info_retirer_mot')."&nbsp;" . http_img_pack('croix-rouge.gif', "X", "width='7' height='7' align='middle'") ."</A>";
 				else $s = "&nbsp;";
 				$vals[] = $s;
 			} else $vals[]= "";
@@ -606,7 +606,7 @@ function afficher_groupe_mots($id_groupe) {
 
 	if (!$deb_aff) echo "<div id='$tmp_var' style='position: relative;'>";
 
-	echo http_img_pack("searching.gif", "*", "style='border: 0px; visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id = 'img_$tmp_var'");
+	echo http_img_pack("searching.gif", "*", "style='visibility: hidden; position: absolute; $spip_lang_right: 0px; top: -20px;' id = 'img_$tmp_var'");
 
 	echo "<div class='liste'>";
 	echo "<table border=0 cellspacing=0 cellpadding=3 width=\"100%\">";
@@ -667,7 +667,7 @@ function afficher_groupe_mots($id_groupe) {
 
 
 				if ($connect_statut=="0minirezo"  AND $connect_toutes_rubriques) {
-					$vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' border='0' align='bottom' /></a></div>";
+					$vals[] = "<div style='text-align:right;'><a href='" . generer_url_ecrire("mots_tous","conf_mot=$id_mot") . "'>"._T('info_supprimer_mot')."&nbsp;<img src='" . _DIR_IMG_PACK . "croix-rouge.gif' alt='X' width='7' height='7' align='bottom' /></a></div>";
 				} 
 
 				$table[] = $vals;			

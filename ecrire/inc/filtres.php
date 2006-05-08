@@ -1438,7 +1438,7 @@ function image_flou($im,$niveau=3)
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
 //	$style = $image["style"]; // on force le remplacement par nouvelles valeurs...
-	$style = "border: 0px; height: ".($y_i+$niveau)."px; width: ".($x_i+$niveau)."px;";
+	$style = "height: ".($y_i+$niveau)."px; width: ".($x_i+$niveau)."px;";
 	if (strlen($style) > 1) $tags="$tags style='$style'";
 	
 	return "<img src='$dest'$tags />";
@@ -1661,7 +1661,7 @@ function image_rotation($im, $angle, $crop=false)
 	if (strlen($class) > 1) $tags=" class='$class'";
 	$tags = "$tags alt='".$image["alt"]."'";
 //	$style = $image["style"]; // on force le remplacement par nouvelles valeurs...
-	$style = "border: 0px; height: ".$src_y."px; width: ".$src_x."px;";
+	$style = "height: ".$src_y."px; width: ".$src_x."px;";
 	if (strlen($style) > 1) $tags="$tags style='$style'";
 	
 	return "<img src='$dest'$tags />";
@@ -2468,7 +2468,7 @@ function image_typo() {
 		$dimensions = getimagesize($image);
 		$largeur = $dimensions[0];
 		$hauteur = $dimensions[1];
-		return inserer_attribut("<img src='$image' style='border: 0px; width: ".$largeur."px; height: ".$hauteur.px."' class='format_png' />", 'alt', $alt);
+		return inserer_attribut("<img src='$image' style='width: ".$largeur."px; height: ".$hauteur.px."' class='format_png' />", 'alt', $alt);
 	} else {
 		return $texte;
 	}
@@ -2533,7 +2533,7 @@ function afficher_enclosures($tags) {
 			include_spip('inc/minipres'); #pour http_href_img (quel bazar)
 			$s[] = http_href_img($t,
 				'attachment.gif',
-				'height="15" width="15" border="0"',
+				'height="15" width="15"',
 				entites_html($t));
 		}
 	}
