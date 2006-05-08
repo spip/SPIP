@@ -20,20 +20,15 @@
 ]
 
 [(#REM) Formulaire normal   ]
-<p><label><:form_pet_votre_email:><br />
-<input type="text" class="forml" name="email_message_auteur#ENV{id}"
-	value="#ENV{mail}" size="30" />
-</label></p>
-<p><label><:form_prop_sujet:><br />
-<input type="text" class="forml" name="sujet_message_auteur#ENV{id}"
-	value="#ENV{sujet}" size="30" />
-</label></p>
+<p><label><:form_pet_votre_email:></label>
+<input type="text" class="forml" name="email_message_auteur#ENV{id}" value="#ENV{mail}" size="30" /></p>
+<p><label><:form_prop_sujet:></label>
+<input type="text" class="forml" name="sujet_message_auteur#ENV{id}" value="#ENV{sujet}" size="30" /></p>
 <p>
 <textarea name="texte_message_auteur#ENV{id}" rows='10' class='forml' cols='40'>#ENV{texte}</textarea>
 </p>
 <div style="text-align:#LANG_RIGHT;">
-	<input type="submit"  class="spip_bouton" name="valide"
-		 value="#ENV{bouton}" />
+<input type="submit"  class="spip_bouton" name="valide" value="#ENV{bouton}" />
 </div>
 
 </form>

@@ -12,14 +12,10 @@
 <form	id="inscription" method='post' action="[(#ENV{self})]">
 	<fieldset class='spip_sanscadre'>
 		<legend><:form_forum_identifiants:></legend>
-		<label>
-		  <:form_pet_votre_nom:>
-		  <input type="text" class="forml" name="nom_inscription" value="" size="30" />
-		</label>
-		<label>
-		  <:form_pet_votre_email:>
-		  <input type="text" class="forml" name="mail_inscription" value="" size="30" />
-		</label>
+		<p><label><:form_pet_votre_nom:></label>
+		  <input type="text" class="forml" name="nom_inscription" value="" size="30" /></p>
+		<p><label><:form_pet_votre_email:></label>
+		  <input type="text" class="forml" name="mail_inscription" value="" size="30" /></p>
 	</fieldset>
 	<div align="right">
 		<input type="submit" class="spip_bouton" value="<:bouton_valider:>" />

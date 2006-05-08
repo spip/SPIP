@@ -29,9 +29,7 @@
 (#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 		<fieldset class="spip_encadrer">
 		<legend><strong><:forum_titre:></strong></legend>
-		<label><input type="text" name="titre" 
-			[value="(#ENV{titre})" ]class="forml" size="40" />
-		</label>
+		<p><label><:forum_titre:></label><input type="text" name="titre" [value="(#ENV{titre})" ]class="forml" size="40" /></p>
 		</fieldset>
 		<br />
 		<fieldset class="spip_encadrer">
@@ -43,29 +41,22 @@
 		<fieldset class="spip_encadrer">
 			<legend><:forum_lien_hyper:></legend>
 			<p><:forum_page_url:></p>
-			<p><label><:forum_titre:>
-				<input type="text" name="nom_site_forum" class="forml" size="40"
-					value="[(#ENV{nom_site_forum})]" />
-			</label></p>
-			<p><label><:forum_url:>
-			<input type="text" name="url_site" class="forml" size="40"
-				value="[(#ENV{url_site})]" />
-			</label></p>
+			<p><label><:forum_titre:></label>
+				<input type="text" name="nom_site_forum" class="forml" size="40" value="[(#ENV{nom_site_forum})]" /></p>
+			<p><label><:forum_url:></label>
+			<input type="text" name="url_site" class="forml" size="40" value="[(#ENV{url_site})]" /></p>
 		</fieldset>
 		<br />
 		<fieldset class="spip_encadrer">
 			<legend><:forum_qui_etes_vous:></legend>
-			<p><label><:forum_votre_nom:>
-				<input type="text" name="auteur" value="[(#ENV{auteur})]"
-					class="forml" size="40"[
-					readonly='(#ENV{readonly})'] />
-			</label></p>
-			<p><label><:forum_votre_email:>
+			<p><label><:forum_votre_nom:></label>
+				<input type="text" name="auteur" value="[(#ENV{auteur})]" class="forml" size="40"[
+					readonly='(#ENV{readonly})'] /></p>
+			<p><label><:forum_votre_email:></label>
 				<input type="text" name="email_auteur"
 				value="[(#ENV{email_auteur})]"
 				class="forml" size="40" [
-				readonly='(#ENV{readonly})'] />
-			</label></p>
+				readonly='(#ENV{readonly})'] /></p>
 		</fieldset>
 
 		<div align="#LANG_RIGHT">

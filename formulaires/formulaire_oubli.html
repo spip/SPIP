@@ -7,15 +7,13 @@
 	<fieldset class='spip_sanscadre'>
 	<legend><:pass_nouveau_pass:></legend>[
 	<input type='hidden' name="p" value="(#ENV{p})" />
-	<label>
-	    <:pass_choix_pass:>
+	<label><:pass_choix_pass:></label>
 	    <input type="password" name="oubli" />
-	</label>][
+	][
 	(#ENV{p}|?{'',' '})
-	<label>
-	  <:pass_indiquez_cidessous:>
+	<label><:pass_indiquez_cidessous:></label>
 	  <input type="text" name="oubli" />
-	</label>]
+	]
 	<input type="submit" class="fondl" value="<:pass_ok:>" />
       </fieldset>
 </form>

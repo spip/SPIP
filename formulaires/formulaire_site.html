@@ -2,22 +2,13 @@
       <br />
       <fieldset	class='spip_encadrer' style='color: black; font-size: 90%'>
 	<legend><:info_site:></legend>
-	<label>
-	  <:form_prop_nom_site:>
+	<p><label><:form_prop_nom_site:></label><br />
+	  <input type="text" class="forml" name="nom_site" value="" size="30" /></p><br />
+	<p><label><:form_prop_url_site:></label><br />
+	  <input type="text" class="forml" name="url_site" value="" size="30" /></p>
 	<br />
-	  <input type="text" class="forml" name="nom_site" value="" size="30" />
-	</label>
-	<br />
-	<label>
-	  <:form_prop_url_site:>
-	<br />
-	  <input type="text" class="forml" name="url_site" value="" size="30" />
-	</label>
-	<br />
-	<label><:form_prop_description:>
-	<br />
-	  <textarea name='description_site' rows='5' class='forml' cols='40'></textarea>
-	</label>
+	<p><label><:form_prop_description:></label><br />
+	  <textarea name='description_site' rows='5' class='forml' cols='40'></textarea></p>
 	<div align="left"><input type="submit" class="spip_bouton" value="<:bouton_valider:>" /></div>
       </fieldset>
 </form>

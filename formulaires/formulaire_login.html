@@ -19,9 +19,9 @@
 		<div class="spip_encadrer" style="[(#URL_SITE_SPIP|style_align)]">[
 			<div class="reponse_formulaire">(#ENV*{erreur})<br /><br /></div>
 ][
-			<label for='var_login'><strong><:login_login2:></strong><br />(#ENV{login}|?{'',' '})
+			<label for='var_login'><strong><:login_login2:></strong></label><br />(#ENV{login}|?{'',' '})
 			<input type="text" id='var_login' name="var_login" class="forml" value="" size="40" />
-			</label>
+			
 ][
 <div>
 [<div style="float: #LANG_RIGHT; padding-#LANG_LEFT: 10px;">(#LOGO_AUTEUR||reduire_image{100,80}|inserer_attribut{alt,#ENV{login_alt}})</div>]
@@ -37,16 +37,14 @@ document.write("<:login_login:>&nbsp;<strong>[(#ENV{login_alt})]<" + "/strong><b
 		<:login_non_securise:>
 		<a href="[(#ENV{action})]"><:login_recharger:></a>.
 	</p>
-	<label><strong><:login_login2:></strong><br />
+	<label><strong><:login_login2:></strong></label><br />
 	<input type='text' name='session_login' class='forml' [value="(#ENV{login})" ]size='40' />
-	</label>
 </noscript>
 
 </div>
 <p>
-		<label><strong><:login_pass2:></strong>&nbsp;
+		<label><strong><:login_pass2:></strong></label>&nbsp;
 		<input type="password" name="session_password"[ id="var_login_(#ENV{login})"] class="forml" style="width: 140px;" value="" size="20" />
-		</label>	
 		<br />&nbsp;&nbsp;&nbsp;&nbsp;<input type="checkbox"
 			 name="session_remember"
 			 id="session[_(#ENV{login})]"
