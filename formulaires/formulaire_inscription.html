@@ -1,8 +1,11 @@
-<p><:participer_site:></p>
 [(#ENV*{message})]
 [(#ENV*{message}|?{'',' '})
 [<p class="reponse_formulaire">(#ENV{message})</p>]
-[(#ENV{mode}|=={redac}|?{' ',''})<:pass_espace_prive_bla:><br /><br />]
+[<fieldset class="spip_encadrer">
+<legend><:pass_vousinscrire:></legend>
+<p><:participer_site:></p>
+<p>(#ENV{mode}|=={redac}|?{' ',''})<:pass_espace_prive_bla:></p>
+</fieldset>]
 <form id="inscription" method='post' action="[(#ENV{self})]">
 	<fieldset class="spip_encadrer">
 		<legend><:form_forum_identifiants:></legend>

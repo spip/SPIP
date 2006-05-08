@@ -87,7 +87,8 @@ form, fieldset, legend, label, input, textarea, select, option {
 
 /* Styles de Spip
 ----------------------------------------------- */
-.formulaire_spip {}
+.formulaire_spip {
+	text-align: left; }
 
 .formulaire_spip form p {  
     margin: 4px 0;  
