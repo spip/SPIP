@@ -19,7 +19,7 @@ include_spip('inc/documents');
 include_spip('inc/forum');
 include_spip('inc/distant');
 include_spip('inc/rubriques'); # pour calcul_branche (cf critere branche)
-include_spip('public/debug'); # toujours prévoir le pire
+include_spip('public/debug'); # toujours prevoir le pire
 
 # Charge et retourne un composeur, i.e. la fonction principale d'un squelette
 # ou '' s'il est inconnu. Le compile au besoin
@@ -311,6 +311,27 @@ function calcul_exposer ($id, $type, $reference) {
 
 	// And the winner is...
 	return $exposer[$type][$id];
+}
+
+function lister_objets_avec_logos ($type) {
+	$type_logos = array(
+	'hierarchie' => 'rub',
+	'rubriques' => 'rub',
+	'articles' => 'art',
+	'breves' => 'breve',
+	'mots' => 'mot',
+	'sites' => 'site',
+	'auteurs' => 'aut'
+	);
+
+	$logos = array();
+	if ($type = $type_logos[$type]) {
+		$a = preg_files(_DIR_IMG.$type.'on[0-9]+\.(gif|png|jpg)$');
+		foreach ($a as $f)
+			$logos[] = intval(substr($f, strlen(_DIR_IMG.$type.'on')));
+	}
+
+	return join(',',$logos);
 }
 
 function table_from_primary($id) {
