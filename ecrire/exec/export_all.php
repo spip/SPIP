@@ -115,7 +115,7 @@ function exec_export_all_dist()
 		else fclose($f);
 	}
 	else{
-		echo _T("info_sauvegarde")._L(" en cours : Etape ".$status_dump[2]." ligne ".$status_dump[3])."<br/>";
+		echo _T("info_sauvegarde"). " (" . $status_dump[2] . ", " . $status_dump[3] . ")<br/>";
 		$f = ($gz) ? gzopen(_DIR_SESSIONS . $archive, "ab") : fopen(_DIR_SESSIONS . $archive, "ab");
 		if (!$f) {
 			echo _T('avis_erreur_sauvegarde', array('type'=>'.', 'id_objet'=>'. .'));
@@ -187,7 +187,7 @@ function exec_export_all_dist()
 
 	if ($etape >= count($tables_for_dump)){
 		foreach($tables_for_dump as $i=>$table){
-			export_objets($table, primary_index_table($table), $tables_for_link[$table],$fpart, false, $i, _T("info_sauvegarde")._L(", table $table"));
+			export_objets($table, primary_index_table($table), $tables_for_link[$table],$fpart, false, $i, _T("info_sauvegarde").", $table");
 		}
 
 		ob_flush();flush();
@@ -212,7 +212,7 @@ function exec_export_all_dist()
 		$paquets = 400; // nombre d'enregistrements dans chaque paquet
 		foreach($tables_for_dump as $i=>$table){
 			// par paquets
-			list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde")._L(", table $table"),$paquets);
+			list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
 		  while ($string!=''){
 				if ($cpt == 0)
 					ramasse_parties(_DIR_SESSIONS . $archive, $gz, _DIR_SESSIONS . $partfile);
@@ -224,7 +224,7 @@ function exec_export_all_dist()
 				$cpt ++;
 				ecrire_meta("status_dump", implode("::",$status_dump));
 				#lire_metas();
-				list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde")._L(", table $table"),$paquets);
+				list($string,$status_dump)=export_objets($table, primary_index_table($table), $tables_for_link[$table],0, false, $i, _T("info_sauvegarde").", $table",$paquets);
 			}
 			ecrire_meta("status_dump", implode("::",$status_dump));
 			#lire_metas();
