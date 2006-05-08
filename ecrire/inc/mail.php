@@ -129,7 +129,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 		# un bug de mb_string casse mb_encode_mimeheader si l'encoding interne
 		# est UTF-8 et le charset iso-8859-1 (constate php5-mac ; php4.3-debian)
 		mb_internal_encoding($charset);
-		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q');
+		$sujet = mb_encode_mimeheader($sujet, $charset, 'Q', "\n");
 		mb_internal_encoding('utf-8');
 	}
 
@@ -139,6 +139,7 @@ function envoyer_mail($email, $sujet, $texte, $from = "", $headers = "") {
 	if (os_serveur == 'windows') {
 		$texte = ereg_replace ("\r*\n","\r\n", $texte);
 		$headers = ereg_replace ("\r*\n","\r\n", $headers);
+		$sujet = ereg_replace ("\r*\n","\r\n", $sujet);
 	}
 
 	switch($hebergeur) {
