@@ -88,7 +88,11 @@ form, fieldset, legend, label, input, textarea, select, option {
 /* Styles de Spip
 ----------------------------------------------- */
 .formulaire_spip {
-	text-align: left; }
+	text-align: left;
+	font-family: Verdana, Arial, Helvetica, sans-serif; }
+
+#contenu .formulaire_spip *{ font-size: 0.71em; }
+#contenu .formulaire_spip * *{ font-size: 1em; }
 
 .formulaire_spip p {  
     margin: 4px 0;  
@@ -102,7 +106,8 @@ form, fieldset, legend, label, input, textarea, select, option {
 	border: 1px solid #CCCCCC; }
 .formulaire_spip legend { font-weight: bold; }
 
-.spip_sanscadre { border: 0; } /* inutile : a supprimer */
+.spip_sanscadre { border: 0; }
+.spip_sanscadre legend { display: none; }
 
 .forml {
 	width: 99%;
