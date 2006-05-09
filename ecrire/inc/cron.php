@@ -164,7 +164,7 @@ function taches_generales() {
 	// ajax
 		$taches_generales['ajax'] = 3600 * 2;
 
-	return $taches_generales;
+	return pipeline('taches_generales_cron',$taches_generales);
 }
 
 
