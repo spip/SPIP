@@ -22,9 +22,9 @@ function bouton_barre_racc($action, $img, $help, $champhelp) {
 		."\" class='spip_barre' tabindex='1000'\ntitle=\""
 		. $a
 		."\"" 
-		.(!_DIR_RESTREINT ? '' :  "\nonMouseOver=\"helpline('"
+		.(!_DIR_RESTREINT ? '' :  "\nonmouseover=\"helpline('"
 		  .addslashes($a)
-		  ."',$champhelp)\"\nonMouseOut=\"helpline('"
+		  ."',$champhelp)\"\nonmouseout=\"helpline('"
 		  .attribut_html(_T('barre_aide'))
 		  ."', $champhelp)\"")
 		."><img\nsrc='"
