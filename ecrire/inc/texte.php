@@ -221,7 +221,7 @@ function couper($texte, $taille=50) {
 	$texte .= "\n";	// marquer la fin
 
 	// travailler en accents charset
-	$texte = filtrer_entites($texte);
+	$texte = unicode2charset(html2unicode($texte, /* secure */ true));
 
 	// remplacer les liens
 	if (preg_match_all(',[[]([^][]*)->(>?)([^][]*)[]],', $texte, $regs, PREG_SET_ORDER))
