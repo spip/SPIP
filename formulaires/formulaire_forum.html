@@ -14,6 +14,7 @@
 </fieldset>]
 
 [(#ENV*{previsu})]
+
 <BOUCLE_G(GROUPES_MOTS){forum=oui}{articles==(#ENV{table}|choixsiegal{articles,'oui','.*'})}{breves==(#ENV{table}|choixsiegal{breves,'oui','.*'})}{rubriques==(#ENV{table}|choixsiegal{rubriques,'oui','.*'})}{syndic==(#ENV{table}|choixsiegal{syndic,'oui','.*'})}
 >
 [(#ID_GROUPE|in_any{#ENV**{ajouter_groupe},' '})
@@ -30,7 +31,7 @@
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
 		<fieldset class="spip_encadrer">
-		<legend><:envoyer_message:></legend>
+		<legend><:form_pet_message_commentaire:></legend>
 		<p><label for="titre"><:forum_titre:></label>
 			<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
 
@@ -55,6 +56,8 @@
 			<p><label for="email_auteur"><:forum_votre_email:></label>
 				<input type="text" class="forml" name="email_auteur" id="email_auteur" value="[(#ENV{email_auteur})]" size="40" [readonly="(#ENV{readonly})"] /></p>
 		</fieldset>
+
+
 
 		<input type="submit" class="spip_bouton" value="<:forum_voir_avant:>" />
 ]

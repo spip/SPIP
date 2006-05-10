@@ -104,7 +104,7 @@ form, fieldset, legend, label, input, textarea, select, option {
 	margin: 8px 0;
 	padding: 8px;
 	border: 1px solid #CCCCCC; }
-.formulaire_spip legend { font-weight: bold; }
+.formulaire_spip legend { font-weight: bold; padding: 0 0.5em; }
 
 .spip_sanscadre { border: 0; }
 .spip_sanscadre legend { display: none; }
