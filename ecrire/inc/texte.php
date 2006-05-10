@@ -105,9 +105,10 @@ function code_echappement($rempl, $source='') {
 
 // - pour $source voir commentaire infra (echappe_retour)
 // - pour $no_transform voir le filtre post_autobr dans inc_filtres.php3
-function echappe_html($letexte, $source='', $no_transform=false) {
+function echappe_html($letexte, $source='', $no_transform=false,
+$preg=',<(html|code|cadre|frame)>(.*)</\1>,Uims') {
 	if (preg_match_all(
-	',<(html|code|cadre|frame)>(.*)</\1>,Uims',
+	$preg,
 	$letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
 
