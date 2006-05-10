@@ -30,13 +30,11 @@
 [(#ENV**{afficher_texte}|choixsiegal{'non', '',' '})
 
 		<fieldset class="spip_encadrer">
-		<legend><:forum_titre:></legend>
+		<legend><:envoyer_message:></legend>
 		<p><label for="titre"><:forum_titre:></label>
 			<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
-		</fieldset>
-		
-		<fieldset class="spip_encadrer">
-		<legend><:forum_texte:></legend>
+
+		<label><:forum_texte:></label>
 		<p><:info_creation_paragraphe:></p>
 		[(#ENV**{texte}|barre_textarea{12,40})]
 		</fieldset>
