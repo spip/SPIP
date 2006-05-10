@@ -705,42 +705,40 @@ function calculer_jointure(&$boucle, $depart, $arrivee, $col='', $cond=false)
 
 function calculer_chaine_jointures(&$boucle, $depart, $arrivee, $vu=array())
 {
-  list($dnom,$ddesc) = $depart;
-  list($anom,$adesc) = $arrivee;
+	list($dnom,$ddesc) = $depart;
+	list($anom,$adesc) = $arrivee;
 
-  $keys = $ddesc['key'];
-  if ($v = $adesc['key']['PRIMARY KEY']) {
-    unset($adesc['key']['PRIMARY KEY']);
-    $akeys = array_merge(preg_split('/,\s*/', $v), $adesc['key']);
-  }
-  else $akeys = $adesc['key'];
-  // priorite a la primaire, qui peut etre multiple
-  if ($v = (preg_split('/,\s*/', $keys['PRIMARY KEY'])))
-    $keys = $v;
-  $v = array_intersect($keys, $akeys); 
-  if ($v)
-    return array(array($dnom, $arrivee, array_shift($v)));
-   else    {
-      $new = $vu;
-      foreach($boucle->jointures as $v) {
-	if ($v && (!in_array($v,$vu)) && 
-	    ($def = trouver_def_table($v, $boucle))) {
-	  list($table,$join) = $def;
-	  $milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
-	  foreach ($milieu as $k)
-	    {
-	      $new[] = $v;
-	      $r = calculer_chaine_jointures($boucle, array($table, $join), $arrivee, $new);
-	      if ($r)
-		{
-		  array_unshift($r, array($dnom, $def, $k));
-		  return $r;
-		}
-	    }
+	$keys = $ddesc['key'];
+	if ($v = $adesc['key']['PRIMARY KEY']) {
+		unset($adesc['key']['PRIMARY KEY']);
+		$akeys = array_merge(preg_split('/,\s*/', $v), $adesc['key']);
 	}
-      }
-    }
-  return array();
+	else $akeys = $adesc['key'];
+	// priorite a la primaire, qui peut etre multiple
+	if ($v = (preg_split('/,\s*/', $keys['PRIMARY KEY'])))
+		$keys = $v;
+	$v = array_intersect($keys, $akeys); 
+	if ($v)
+		return array(array($dnom, $arrivee, array_shift($v)));
+	else    {
+		$new = $vu;
+		foreach($boucle->jointures as $v) {
+			if ($v && (!in_array($v,$vu)) && 
+			    ($def = trouver_def_table($v, $boucle))) {
+				list($table,$join) = $def;
+				$milieu = array_intersect($ddesc['key'], trouver_cles_table($join['key']));
+				foreach ($milieu as $k)	{
+					$new[] = $v;
+					$r = calculer_chaine_jointures($boucle, array($table, $join), $arrivee, $new);
+					if ($r)	{
+						array_unshift($r, array($dnom, $def, $k));
+						return $r;
+					}
+				}
+			}
+		}
+	}
+	return array();
 }
 
 // applatit les cles multiples
