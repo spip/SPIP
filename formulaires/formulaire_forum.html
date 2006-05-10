@@ -1,8 +1,8 @@
 <div class="formulaire_spip formulaire_forum">
 
-<a id="formulaire" name="formulaire"></a>
+<a id="formulaire_forum" name="formulaire_forum"></a>
 
-<form action="[(#ENV{url})][(#ENV**{previsu}|?{'#formulaire',''})]" method="post">
+<form action="#ENV{url}#formulaire_forum" method="post">
 [(#ENV{url_post}|form_hidden)]
 [<input type="hidden" name="alea" value="(#ENV{alea})" />]
 [<input type="hidden" name="hash" value="(#ENV{hash})" />]
@@ -35,7 +35,7 @@
 			<input type="text" class="forml" name="titre" id="titre"[ value="(#ENV{titre})"] size="40" /></p>
 
 		<label><:forum_texte:></label>
-		<p><:info_creation_paragraphe:></p>
+		<p><small><:info_creation_paragraphe:></small></p>
 		[(#ENV**{texte}|barre_textarea{12,40})]
 		</fieldset>
 		
