@@ -3,11 +3,12 @@
 
 <form action="#ENV{url}" method="post">
 	[(#ENV{url}|form_hidden)]
-	<select class="forml" name="#ENV{nom}" onchange="document.location.href='#ENV{url}&amp;#ENV{nom}='+this.options[this.selectedIndex].value">
+	<label for="#ENV{nom}"><:info_langues:></label>
+	<select class="forml" name="#ENV{nom}" id="#ENV{nom}" onchange="document.location.href='#ENV{url}&amp;#ENV{nom}='+this.options[this.selectedIndex].value">
 	#ENV*{langues}
 	</select>
 	<noscript>
-	<input type="submit" value="&gt;&gt;" class="spip_bouton" />
+		<input type="submit" value="&gt;&gt;" class="spip_bouton" />
 	</noscript>
 </form>
 
