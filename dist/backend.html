@@ -1,7 +1,10 @@
 #CACHE{3600}
 [(#HTTP_HEADER{Content-type: text/xml[; charset=(#CHARSET)]})]
 <?php echo '<' ?>?xml version="1.0"[ encoding="(#CHARSET)"]?>
-<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+<rss version="2.0"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:content="http://purl.org/rss/1.0/modules/content/"
+>
 
 <channel>
 	<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
@@ -10,140 +13,16 @@
 	<language>#LANG</language>
 	<generator>SPIP - www.spip.net</generator>
 
-	[<image>
+[	<image>
 		<title>[(#NOM_SITE_SPIP|texte_backend)]</title>
 		<url>(#LOGO_SITE_SPIP||extraire_attribut{src}|url_absolue|texte_backend)</url>
 		<link>#URL_SITE_SPIP/</link>
 		[<height>(#LOGO_SITE_SPIP||extraire_attribut{height})</height>]
 		[<width>(#LOGO_SITE_SPIP||extraire_attribut{width})</width>]
-	</image>]
+	</image>
+]
 
-
-<BOUCLE_articles(ARTICLES){lang ?}{id_rubrique ?}{id_mot ?}{age<180}{par date}{inverse}{0,10}>
-	<item>
-		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
-		<link>[(#URL_ARTICLE|url_absolue)]</link>
-		[<guid isPermaLink="true">(#URL_ARTICLE|url_absolue)</guid>]
-		[<dc:date>(#DATE|date_iso)</dc:date>]
-		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG)</dc:language>]
-		[<dc:creator>(#LESAUTEURS|supprimer_numero|supprimer_tags|texte_backend)</dc:creator>]
-
-		[(#REM) Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS ]
-		<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_rss>
-		<BOUCLE_mots_rss(MOTS){id_article}>
-		[<dc:subject>(#TITRE|supprimer_numero|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
-
-		<description>
-		[(#INTRODUCTION|texte_backend)]
-
-		[(#REM) Le bloc qui suit diffuse la rubrique et les mots-cles sous forme de "microformats" ]
-		<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
-		[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
-		</BOUCLE_rubrique_mf>
-		<B_mots_mf>/ <BOUCLE_mots_mf(MOTS){id_article}{", "}>
-		[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
-		</BOUCLE_mots_mf>
-
-		</description>
-
-[(#REM) Le bloc qui suit diffuse aussi le texte integral de l'article, ce qui permet une syndication plus riche (mais plus "lourde"). Fonction desactivable depuis les reglages du site. ]
-[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})
-<content:encoded>
-[(#LOGO_ARTICLE|right||texte_backend)]
-[&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;]
-[&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;]
-[&lt;hr /&gt;
-		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
-[&lt;div class='rss_ps'&gt;(#PS|texte_backend)&lt;/div&gt;]
-</content:encoded>]
-
-
-[(#REM) Le bloc qui suit diffuse l'adresse des documents associes aux articles ; ajouter par ex. {extension=mp3} pour limiter a un certain type de document. ]
-<BOUCLE_documents(DOCUMENTS){id_article}{mode=document}{doublons}>
-[<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
-</BOUCLE_documents>
-
-	</item>
-</BOUCLE_articles>
-
-
-<BOUCLE_breves(BREVES){lang ?}{id_rubrique ?}{id_mot ?}{age<180}{par date}{inverse}{0,10}>
-	<item>
-		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
-		<link>[(#URL_BREVE|url_absolue)]</link>
-		[<guid isPermaLink="true">(#URL_BREVE|url_absolue)</guid>]
-		[<dc:date>(#DATE|date_iso)</dc:date>]
-		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG)</dc:language>]
-
-		[(#REM) Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS ]
-		<BOUCLE_rubrique_breve_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_breve_rss>
-		<BOUCLE_mots_breve_rss(MOTS){id_breve}>
-		[<dc:subject>(#TITRE|supprimer_numero|texte_backend)</dc:subject>]</BOUCLE_mots_breve_rss>
-
-		<description>
-		[(#INTRODUCTION|texte_backend)]
-
-		[(#REM) Le bloc qui suit diffuse la rubrique et les mots-cles sous forme de "microformats" ]
-		<BOUCLE_rubrique_breve_mf(RUBRIQUES){id_rubrique}>-
-		[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
-		</BOUCLE_rubrique_breve_mf>
-		<B_mots_breve_mf>/ <BOUCLE_mots_breve_mf(MOTS){id_breve}{", "}>
-		[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
-		</BOUCLE_mots_breve_mf>
-
-		</description>
-
-[(#REM) Le bloc qui suit diffuse aussi le texte integral de la breve, ce qui permet une syndication plus riche (mais plus "lourde"). Fonction desactivable depuis les reglages du site. ]
-[(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})
-<content:encoded>
-[(#LOGO_BREVE|right||texte_backend)]
-[&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;]
-[&lt;hr /&gt;
-		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;]
-</content:encoded>]
-
-	</item>
-</BOUCLE_breves>
-
-
-[(#REM) Commentaires des forums ]
-<BOUCLE_commentaires(FORUMS){lang ?}{id_rubrique ?}{id_mot ?}{plat}{age<180}{par date}{inverse}{0,10}>
-	<item>
-		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
-		<link>[(#URL_FORUM|url_absolue)]</link>
-		[<guid isPermaLink="true">(#URL_FORUM|url_absolue)</guid>]
-		[<dc:date>(#DATE|date_iso)</dc:date>]
-		<dc:format>text/html</dc:format>
-		[<dc:language>(#LANG)</dc:language>]
-		[<dc:creator>(#NOM|supprimer_numero|supprimer_tags|texte_backend)</dc:creator>]
-
-		[(#REM) Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS ]
-		<BOUCLE_rubrique_forum_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_forum_rss>
-		<BOUCLE_mots_forum_rss(MOTS){id_forum}>
-		[<dc:subject>(#TITRE|supprimer_numero|texte_backend)</dc:subject>]</BOUCLE_mots_forum_rss>
-
-		<description>
-		[(#TEXTE|texte_backend)]
-
-		[(#REM) Le bloc qui suit diffuse la rubrique et les mots-cles sous forme de "microformats" ]
-		<BOUCLE_rubrique_forum_mf(RUBRIQUES){id_rubrique}>-
-		[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
-		</BOUCLE_rubrique_forum_mf>
-		<B_mots_forum_mf>/ <BOUCLE_mots_forum_mf(MOTS){id_forum}{", "}>
-		[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
-		</BOUCLE_mots_forum_mf>
-
-		</description>
-
-	</item>
-</BOUCLE_commentaires>
-
-
-[(#REM) Articles de certains sites syndiques ]
-<BOUCLE_sites(SITES){id_mot=1}>
-<BOUCLE_syndic(SYNDIC_ARTICLES){id_syndic}{age<180}{!par date}{0,3}>
+	<BOUCLE_un_article(ARTICLES){id_article}>
 	<item>
 		<title>[(#TITRE|supprimer_numero|texte_backend)]</title>
 		<link>[(#URL_ARTICLE|url_absolue)]</link>
@@ -152,12 +31,61 @@
 		<dc:format>text/html</dc:format>
 		[<dc:language>(#LANG)</dc:language>]
 		[<dc:creator>(#LESAUTEURS|supprimer_tags|texte_backend)</dc:creator>]
-		[<category domain="#URL_SITE">(#NOM_SITE|texte_backend)</category>]
-		[<dc:subject>(#TAGS|texte_backend)</dc:subject>]
-		<description>[(#DESCRIPTIF|texte_backend)]</description>
+
+[(#REM)
+	Le bloc qui suit diffuse diffuse la rubrique et les mots-cles a la mode RSS
+
+]<BOUCLE_rubrique_rss(RUBRIQUES){id_rubrique}>[<category[ domain="(#URL_RUBRIQUE|url_absolue)"]>(#TITRE|supprimer_numero|texte_backend)</category>]</BOUCLE_rubrique_rss>
+<BOUCLE_mots_rss(MOTS){id_article}>
+		[<dc:subject>(#TITRE|texte_backend)</dc:subject>]</BOUCLE_mots_rss>
+
+		<description>[(#INTRODUCTION|texte_backend)]
+
+[(#REM)
+	Le bloc qui suit diffuse la rubrique et les mots-cles
+	sous forme de "microformats"
+
+]<BOUCLE_rubrique_mf(RUBRIQUES){id_rubrique}>-
+[&lt;a href="[(#URL_RUBRIQUE|url_absolue)]" rel="directory"&gt;(#TITRE|supprimer_numero|texte_backend)&lt;/a&gt;]
+</BOUCLE_rubrique_mf><B_mots_mf>
+/ <BOUCLE_mots_mf(MOTS){id_article}{", "}>
+[&lt;a href="[(#URL_MOT|url_absolue)]" rel="tag"&gt;(#TITRE|texte_backend)&lt;/a&gt;]</BOUCLE_mots_mf>
+
+		</description>
+
+[(#REM)
+	Le bloc qui suit diffuse aussi le texte integral de l'article,
+	ce qui permet une syndication plus riche (mais plus "lourde").
+	Fonction desactivable depuis les reglages du site.
+][
+(#CONFIG{syndication_integrale}|=={oui}|?{' ',''})<content:encoded>[(#LOGO_ARTICLE|right||texte_backend)
+		][&lt;div class='rss_chapo'&gt;(#CHAPO|texte_backend)&lt;/div&gt;
+		][&lt;div class='rss_texte'&gt;(#TEXTE|texte_backend)&lt;/div&gt;
+		][&lt;hr /&gt;
+		&lt;div class='rss_notes'&gt;(#NOTES|texte_backend)&lt;/div&gt;
+		][&lt;div class='rss_ps'&gt;(#PS|texte_backend)&lt;/div&gt;]
+		</content:encoded>
+]
+
+[(#REM)
+	Le bloc qui suit diffuse l'adresse des documents associes aux articles ;
+	ajouter par ex. {extension=mp3} pour limiter a un certain type de document.
+]		<BOUCLE_documents(DOCUMENTS){id_article}{mode=document}{doublons}>[
+		<enclosure url="(#URL_DOCUMENT|url_absolue|unique)"[ length="(#TAILLE)"][ type="(#MIME_TYPE)"] />]
+		</BOUCLE_documents>
+
 	</item>
-</BOUCLE_syndic>
-</BOUCLE_sites>
+</BOUCLE_un_article>
+
+<BOUCLE_10recents(ARTICLES) {lang ?}{branche ?}{id_mot ?}
+	{par date}{inverse}{0,10}{unique}>
+<BOUCLE_a(BOUCLE_un_article)></BOUCLE_a>
+</BOUCLE_10recents>
+
+<BOUCLE_tres_recents(ARTICLES){lang ?}{branche ?}{id_mot ?}
+	{par date}{inverse}{age<3}{unique}>
+<BOUCLE_b(BOUCLE_un_article)></BOUCLE_b>
+</BOUCLE_tres_recents>
 
 </channel>
 
