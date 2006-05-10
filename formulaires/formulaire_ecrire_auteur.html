@@ -1,9 +1,15 @@
-<div class="formulaire_spip">
+<div class="formulaire_spip formulaire_ecrire_auteur">
+<a id="formulaire_ecrire_auteur#ENV{id}" name="formulaire_ecrire_auteur#ENV{id}"></a>
 
-[<p class="reponse_formulaire">(#ENV*{sujetko})<:form_prop_indiquer_sujet:></p>]
-[<p class="reponse_formulaire">(#ENV*{mailko})<:form_prop_indiquer_email:></p>]
+[<p class="reponse_formulaire">(#ENV*{sujetko})</p>]
+[<p class="reponse_formulaire">(#ENV*{mailko})</p>]
 
-<form action="#SELF" method="post">
+[<p class="reponse_formulaire">(#ENV*{mailenvoye})</p>]
+
+
+[(#ENV**{mailenvoye}|?{'',' '})
+
+<form action="#SELF#formulaire_ecrire_auteur#ENV{id}" method="post">
 
 [(#REM) Previsualisation... ]
 [<input type="hidden" name="num_formulaire_ecrire_auteur" value="(#ENV{valide})" />]
@@ -27,5 +33,6 @@
 </fieldset>
 
 </form>
+]
 
 </div>
