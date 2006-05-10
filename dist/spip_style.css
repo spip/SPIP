@@ -63,7 +63,7 @@ table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
 /*  Logos et documents
 ---------------------------------------------- */
-img, img.spip_logos { margin: 0; padding: 0; border: 0; }
+img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
 .spip_documents { font-family: Verdana, Arial, Helvetica, sans-serif; }
 .spip_documents_center { margin: auto; text-align: center; width: 80%; }
@@ -118,14 +118,14 @@ form, fieldset, legend, label, input, textarea, select, option {
     font-size: 1em; }
 
 input.spip_bouton {
-	width: auto;
+	float: right;
+	/*width: auto;*/
 	background: #666666;
 	margin: 3px 0;
 	padding: 1px 2px;
 	border: 2px outset #666666;
 	font-weight: bold;
-	color: #FFFFFF;
-	float: right; }
+	color: #FFFFFF; }
 
 /* * Reponse du formulaire (erreur) */
 .reponse_formulaire {
@@ -174,8 +174,24 @@ div.choix_mots label { display: inline; }
 	float: right;
 	text-align: left;
 	width: 12em; }
+.formulaire_recherche label { display: none; }
 
 .spip_surligne { background: #FFFF66; }
+
+/* Formulaire menu de langues
+----------------------------------------------- */
+.formulaire_menu_lang {
+	float: right;
+	text-align: left;
+	width: 12em;
+	font-size: 0.71em; }
+.formulaire_menu_lang label { display: none; }
+
+/* Formulaire de login
+----------------------------------------------- */
+.formulaire_login { clear: both; font-size: 0.88em; }
+.formulaire_login .forml { width: 12em; }
+.formulaire_login .spip_logos { float: right; padding-left: 10px; }
 
 /*  ------------------------------------------ */
 /*  Couleurs des liens

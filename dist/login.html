@@ -10,40 +10,37 @@
 	<title><:login_acces_prive:></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
 	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" />
-	<link rel="stylesheet" href="#CHEMIN{typographie.css}" type="text/css" />
 [	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
 ]</head>
-<body>
+<body style="background: white; text-align: center;">
 
-<div style='text-align: center; margin: auto; width: 400px'>
-<br /><br /><br />
-      <table width="100%"><tr><td>
-	<div style="float: center">
+<div style="width: 400px; margin: auto; padding: 3em 0;">
+
 		<h3 class="spip">#NOM_SITE_SPIP<br />
 		  <small><:login_acces_prive:></small>
 		</h3>
-		<div style="text-align: #LANG_RIGHT">#MENU_LANG_ECRIRE</div>
-	</div>
 
-#LOGIN_PRIVE
+		[(#MENU_LANG_ECRIRE)]
 
-	      <div style='text-align: center;font-family: Verdana,arial,helvetica,sans-serif; font-size: 12px;'>
+		[(#LOGIN_PRIVE)]
 
-[&#91;<a style='color: #e86519'
-	href='#URL_PAGE{spip_inscription,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{mode_inscription})'
+	    <p>
+
+[&#91;<a style="color: #e86519"
+	href="#URL_PAGE{spip_inscription,focus=nom_inscription}&amp;mode=(#URL_SITE_SPIP|tester_config{mode_inscription})"
 	target="spip_pass"
 	onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=500'); return false;"><:login_sinscrire:></a>&#93;]
 
-&#91;<a style='color: #e86519'
+&#91;<a style="color: #e86519"
 	href="#URL_PAGE{spip_pass}"
 	target="spip_pass" 
 	onclick="javascript:window.open(this.href, 'spip_pass', 'scrollbars=yes, resizable=yes, width=480, height=280'); return false;"><:login_motpasseoublie:></a>&#93;
 
-&#91;<a style='color: #e86519' href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+&#91;<a style="color: #e86519" href="#URL_SITE_SPIP/"><:login_retoursitepublic:></a>&#93;
+
+	    </p>
 
 </div>
-
-</td></tr></table></div>
 
 </body>
 </html>
