@@ -1,7 +1,8 @@
 <div id="entete">
 
-[(#REM) Afficher le logo du site, sinon le titre du site ]
-<h1>[<a rel="start" href="#URL_SITE_SPIP/">(#LOGO_SITE_SPIP||reduire_image{770,200}|inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]}|inserer_attribut{title,[(#NOM_SITE_SPIP|textebrut)]}|sinon{#NOM_SITE_SPIP})</a>]</h1>
+[(#REM) Afficher le logo et le titre du site ]
+[<a rel="start" href="#URL_SITE_SPIP/" title="<:accueil_site:>">(#LOGO_SITE_SPIP||reduire_image{770,200}|inserer_attribut{alt,[(#NOM_SITE_SPIP|textebrut)]})</a>]
+<h1[ style="margin-#LANG_LEFT: (#LOGO_SITE_SPIP||reduire_image{770,200}|largeur)px;"]>[<a rel="start" href="#URL_SITE_SPIP/">(#NOM_SITE_SPIP)</a>]</h1>
 
 [(#REM) Formulaire de recherche ]
 [(#FORMULAIRE_RECHERCHE)]
