@@ -1,6 +1,6 @@
 /* Les boutons d'admin survolent la page (sauf #FORMULAIRE_ADMIN) */
 .spip-admin-float {
-	top: 0px;
+	top: 0;
 	right: 20px;
 	position: absolute;
 	background-color: transparent;
@@ -32,7 +32,7 @@ a:hover.spip-admin-boutons {
 }
 
 a:active.spip-admin-boutons {
-	background-color: #ccc;
+	background-color: #CCCCCC;
 	border-bottom: 2px solid #f00;
 }
 
@@ -98,7 +98,7 @@ a:active.spip-admin-boutons {
 	overflow: -moz-scrollbars-vertical;
 	overflow-y: auto;
 	border-top: 1px solid #3399FF;
-	border-bottom: 2px solid #666666;
+	border-bottom: 2px solid #666;
 }
 
 .spip-env fieldset {

@@ -15,12 +15,12 @@
 #HTTP_HEADER{Vary: Accept-Encoding}
 body { 
 	font-family: Verdana,Arial,Sans,sans-serif; 
-	border: 0px;
-	scrollbar-face-color: white;
-	scrollbar-shadow-color: white;
-	scrollbar-highlight-color: white;
+	border: 0;
+	scrollbar-face-color: #FFF;
+	scrollbar-shadow-color: #FFF;
+	scrollbar-highlight-color: #FFF;
 	scrollbar-3dlight-color: ##ENV{couleur_claire,edf3fe};
-	scrollbar-darkshadow-color: white;
+	scrollbar-darkshadow-color: #FFF;
 	scrollbar-track-color: ##ENV{couleur_foncee,3874b0};
 	scrollbar-arrow-color: ##ENV{couleur_foncee,3874b0};
 }
@@ -47,7 +47,7 @@ td {
 	width: 100%; 
 	display: block;
 	padding: 3px; 
-	background-color: white; 
+	background-color: #FFF; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; float: none; 
 	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
@@ -64,17 +64,17 @@ td {
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
 .fondo { background-color: ##ENV{couleur_foncee,3874b0}; 
-	background-position: center bottom; float: none; color: #ffffff;
+	background-position: center bottom; float: none; color: #FFF;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 	font-weight: bold;
 }
-.fondf { background-color: #ffffff; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; 
+.fondf { background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; 
 }
 
 
 select.fondl {
-	padding: 0px;
+	padding: 0;
 }
 .maj-debut:first-letter { text-transform: uppercase; }
 
@@ -84,25 +84,25 @@ select.fondl {
  */
 
 .bandeau-principal {
-	background-color: white;
-	margin: 0px;
-	padding: 0px;
+	background-color: #FFF;
+	margin: 0;
+	padding: 0;
 	border-bottom: 1px solid black;
 }
 
 .bandeau-icones {
-	background-color: white;
-	margin: 0px;
-	padding: 0px;
+	background-color: #FFF;
+	margin: 0;
+	padding: 0;
 	padding-bottom: 2px; 
 	padding-top: 4px;
 }
 
 .bandeau_sec .gauche {
-	margin-top: 0px;
+	margin-top: 0;
 	padding: 2px;
-	padding-top: 0px;
-	background-color: white;
+	padding-top: 0;
+	background-color: #FFF;
 	border-bottom: 1px solid black;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
@@ -115,8 +115,8 @@ select.fondl {
 	vertical-align: middle;
 	height: 100%;
 	width: 11px;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	background: url(#EVAL{_DIR_IMG_PACK}tirets-separation.gif);
 	background-position: 5px 0px;
 }
@@ -125,7 +125,7 @@ select.fondl {
 	padding-left: 4px;
 	font-family: verdana, helvetica, arial, sans;
 	font-size: 11px;
-	color: black;
+	color: #000;
 	text-align: center;
 	font-weight: bold;
 	height: 22px;
@@ -134,9 +134,9 @@ select.fondl {
 .bandeau_couleur_sous {
 	position: absolute; 
 	visibility: hidden;
-	top: 0px; 
+	top: 0; 
 	background-color: ##ENV{couleur_claire,edf3fe}; 
-	color: black;
+	color: #000;
 	padding: 5px;
 	padding-top: 2px;
 	font-family: verdana, helvetica, arial, sans;
@@ -148,10 +148,10 @@ select.fondl {
 }
 
 a.lien_sous {
-	color: #666666;
+	color: #666;
 }
 a.lien_sous:hover {
-	color: black;
+	color: #000;
 }
 
 
@@ -165,15 +165,15 @@ a.bandeau_rub {
 	padding: 2px;
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 13px;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 16px;
-	color: #666666;
+	color: #666;
 	text-decoration: none;
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 1px solid #CCCCCC;
 	background-repeat: no-repeat;
 	background-position: [(#ENV{ltr}|choixsiegal{left,1,99})%] center;
 	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
 }
 a.bandeau_rub:hover {
-	background-color: white;
+	background-color: #FFF;
 	text-decoration: none;
 	color: #333333;
 	background-repeat: no-repeat;
@@ -184,7 +184,7 @@ div.bandeau_rub {
 	top: 4px;
 	[(#ENV{ltr}|choixsiegal{left,left,right})]: 120px;
 	background-color: #eeeeee;
-	padding: 0px;
+	padding: 0;
 	border: 1px solid #555555;
 	visibility: hidden;
 	width:100%;
@@ -219,7 +219,7 @@ a.icone26 {
 	font-family: verdana, helvetica, arial, sans;
 	font-size: 11px;
 	font-weight: bold;
-	color: black;
+	color: #000;
 	text-decoration: none;
 	padding: 1px; 
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 2px;
@@ -239,8 +239,8 @@ a.icone26:hover img {
 
 .icone36, icone36-danger {
 	border: none;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	text-align: center;
 	vertical-align: top;
 	text-align: center;
@@ -250,7 +250,7 @@ a.icone26:hover img {
 	text-decoration: none;
 }
 .icone36 a img {
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 4px;
 	background-color: #eeeeee;
@@ -258,26 +258,26 @@ a.icone26:hover img {
 	-moz-border-radius: 5px;
 }
 .icone36 a:hover img {
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 4px;
-	background-color: white;
-	border: 2px solid #666666;
+	background-color: #FFF;
+	border: 2px solid #666;
 	-moz-border-radius: 5px;
 }
 .icone36-danger a img {
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background-color: white;
+	background-color: #FFF;
 	border: 2px solid #ff9999;
 	-moz-border-radius: 5px;
 }
 .icone36-danger a:hover img {
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background-color: white;
+	background-color: #FFF;
 	border: 2px solid red;
 	-moz-border-radius: 5px;
 }
@@ -301,7 +301,7 @@ a.icone26:hover img {
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-weight: bold;
 	font-size: 10px;
-	color: #000000; display: block; margin: 2px;
+	color: #000; display: block; margin: 2px;
 	width: 100%;
 }
 
@@ -310,7 +310,7 @@ a.icone26:hover img {
 
 .cellule36, .cellule48 {
 	border: none;
-	padding: 0px;
+	padding: 0;
 	text-align: center;
 	vertical-align: top;
 	font-family: Verdana, Arial, Sans, sans-serif;
@@ -319,7 +319,7 @@ a.icone26:hover img {
 	text-decoration: none;
 }
 .cellule36 {
-	margin: 0px;
+	margin: 0;
 	font-size: 10px;
 }
 .cellule48 {
@@ -338,45 +338,45 @@ a.icone26:hover img {
 	behavior: url(#URL_PAGE{win_png});
 	display: inline;
 	margin: 4px;
-	padding: 0px;
-	border: 0px;
+	padding: 0;
+	border: 0;
 	background-color: ##ENV{couleur_claire,edf3fe};
 }
 
 .cellule48 a.selection img {
 	display: inline;
 	margin: 4px;
-	padding: 0px;
-	border: 0px;
+	padding: 0;
+	border: 0;
 	background-color: #999999;
 }
 .cellule48 a:hover img {
 	display: inline;
 	margin: 4px;
-	padding: 0px;
-	border: 0px;
+	padding: 0;
+	border: 0;
 	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 }
 
 
 .cellule36 a img {
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 3px;
-	border: 0px;
+	border: 0;
 	border: 1px solid white;
 	-moz-border-radius: 5px;
 }
 .cellule36 a.selection img{
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background-color: white;
+	background-color: #FFF;
 	border: 1px solid #aaaaaa;
 	-moz-border-radius: 5px;
 }
 .cellule36 a:hover img {
-	margin: 0px; 
+	margin: 0; 
 	display: inline;
 	padding: 3px;
 	background-color: #e4e4e4;
@@ -385,35 +385,35 @@ a.icone26:hover img {
 	-moz-border-radius: 5px;
 }
 .cellule36 a span, .cellule48 a span {
-	color: #666666; display: block; margin: 1px;
+	color: #666; display: block; margin: 1px;
 	width: 100%;
 }
 .cellule36 a:hover span, .cellule48 a:hover span {
-	color: #000000; display: block; margin: 1px;
+	color: #000; display: block; margin: 1px;
 	width: 100%;
 }
 .cellule36 a.selection span, .cellule48 a.selection span {
-	color: #000000; display: block; margin: 1px;
+	color: #000; display: block; margin: 1px;
 	width: 100%;
 }
 
 .cellule36 a.aide, .cellule36 a.aide:hover {
 	display: inline;
 	background: none;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 .cellule36 a.aide img {
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 }
 
 /* Navigation texte */
 
 .cellule-texte {
 	border: none;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 	text-align: center;
 	vertical-align: top;
 	font-family: Verdana, Arial, Sans, sans-serif;
@@ -427,7 +427,7 @@ a.icone26:hover img {
 	display: block;
 }
 .cellule-texte a {
-	padding: 4px; margin: 1px; border: 0px;
+	padding: 4px; margin: 1px; border: 0;
 	color: #606060;
 }
 .cellule-texte a.selection {
@@ -435,12 +435,12 @@ a.icone26:hover img {
 	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
 	background-color: ##ENV{couleur_claire,edf3fe};
 	-moz-border-radius: 5px;
-	color: #000000;
+	color: #000;
 }
 .cellule-texte a:hover {
 	padding: 3px; margin: 1px; 
 	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
-	background-color: white;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
 	color: #333333;
 }
@@ -450,7 +450,7 @@ a.icone26:hover img {
 	display: inline;
 }
 .cellule-texte a.aide img {
-	margin: 0px;
+	margin: 0;
 }
 
 
@@ -467,7 +467,7 @@ a.cellule-h {
 	font-size: 10px;
 	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 	text-decoration: none; 
-	color: #666666;
+	color: #666;
 }
 a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover {
 	font-family: Verdana, Arial, Sans, sans-serif;
@@ -475,28 +475,28 @@ a.cellule-h:hover, a.cellule-h:hover a.cellule-h, a.cellule-h a.cellule-h:hover 
 	font-size: 10px;
 	text-align: [(#ENV{ltr}|choixsiegal{left,left,right})];
 	text-decoration: none; 
-	color: #000000;
+	color: #000;
 }
 a.cellule-h div.cell-i {
-	padding: 0px;
+	padding: 0;
 	border: 1px solid white;
 	-moz-border-radius: 5px;
-	margin: 0px;
+	margin: 0;
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 }
 a.cellule-h:hover div.cell-i {
-	padding: 0px;
+	padding: 0;
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	-moz-border-radius: 5px;
-	margin: 0px;
+	margin: 0;
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 }
 
 a.cellule-h table {
 	border: none;
-	padding: 0px;
-	margin: 0px;
+	padding: 0;
+	margin: 0;
 }
 
 a.cellule-h img {
@@ -534,11 +534,11 @@ a.cellule-h-texte {
 }
 a.cellule-h-texte:hover {
 	text-decoration: none;
-	color: black;
+	color: #000;
 	border-right: solid 1px white;
 	border-bottom: solid 1px white;
-	border-left: solid 1px #666666;
-	border-top: solid 1px #666666;
+	border-left: solid 1px #666;
+	border-top: solid 1px #666;
 	background-color: #eeeeee;
 }
 
@@ -553,7 +553,7 @@ a.cellule-h-texte:hover {
 	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; 
 }
 .fondgrison2 {
-	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: white;
+	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #FFF;
 }
 .bouton36gris {
 	padding: 6px;
@@ -566,14 +566,14 @@ a.cellule-h-texte:hover {
 	padding: 6px;
 	margin-top: 2px;
 	border: 1px solid #999999;
-	background-color: white;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
 }
 .bouton36rouge {
 	padding: 6px;
 	margin-top: 2px;
 	border: 1px solid red;
-	background-color: white;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
 }
 .bouton36off {
@@ -590,7 +590,7 @@ div.onglet {
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
-	background-color: white;
+	background-color: #FFF;
 }
 div.onglet a {
 	color: ##ENV{couleur_foncee,3874b0};
@@ -618,7 +618,7 @@ div.onglet_off {
 	margin-right: 3px;
 	padding: 5px;
 	background-color: ##ENV{couleur_foncee,3874b0};
-	color: white;
+	color: #FFF;
 }
 
 
@@ -633,7 +633,7 @@ div.onglet_off {
 	padding: 3px; margin: 1px; border: 1px dashed #aaaaaa; background-color: #f0f0f0;
 }
 .iconeon {
-	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
+	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666; border-top: solid 1px #666; background-color: #eeeeee;
 }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black;
 	background: url(#EVAL{_DIR_IMG_PACK}rayures-sup.gif);
@@ -663,7 +663,7 @@ a.icone:hover { text-decoration: none; }
 
 .ortho {
 	background: #ffe0e0;
-	margin: 0px;
+	margin: 0;
 	margin-bottom: -2px;
 	border-bottom: 2px dashed red;
 	color: inherit;
@@ -677,7 +677,7 @@ a.ortho:hover {
 }
 .ortho-dico {
 	background: #e0f4d0;
-	margin: 0px;
+	margin: 0;
 	margin-bottom: -2px;
 	border-bottom: 2px dashed #a0b890;
 	color: inherit;
@@ -691,10 +691,10 @@ a.ortho-dico:hover {
 }
 
 #ortho-fixed {
-	position: fixed; top: 0px; [(#ENV{ltr}|choixsiegal{left,right,left})]: 0px; width: 25%; padding: 15px; margin: 0px;
+	position: fixed; top: 0; [(#ENV{ltr}|choixsiegal{left,right,left})]: 0; width: 25%; padding: 15px; margin: 0;
 }
 .ortho-content {
-	position: absolute; top: 0px; width: 70%; padding: 15px; margin: 0px;
+	position: absolute; top: 0; width: 70%; padding: 15px; margin: 0;
 }
 .suggest-actif, .suggest-inactif {
 	font-family: "Trebuchet Sans MS", Verdana, Arial, sans-serif;
@@ -717,8 +717,8 @@ a.ortho-dico:hover {
 .suggest-actif .detail ul, .suggest-inactif .detail ul {
 	 list-style-image: url(#EVAL{_DIR_IMG_PACK}puce.gif);
 	background: #f3f2f3;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	padding-left: 25px;
 }
 .suggest-actif {
@@ -741,7 +741,7 @@ a.ortho-dico:hover {
 }
 .diff-para-ajoute {
 	background: #d0ffc0;
-	color: #000000;
+	color: #000;
 }
 .diff-para-supprime {
 	background: #ffd0c0;
@@ -788,18 +788,18 @@ table.spip_barre td {
 
 a.spip_barre img {
 	padding: 3px;
-	margin: 0px;
+	margin: 0;
 	background-color: #eeeeee;
 	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 a.spip_barre:hover img {
-	background-color: white;
+	background-color: #FFF;
 }
 
 td.icone table {
 }
 td.icone a {
-	color: black;
+	color: #000;
 	text-decoration: none;
 	font-family: Verdana,Arial,Sans,sans-serif;
 	font-size: 10px;
@@ -809,7 +809,7 @@ td.icone a:hover {
 	text-decoration: none;
 }
 td.icone a img {
-	border: 0px;
+	border: 0;
 }
 
 a.bouton_rotation img, div.bouton_rotation img {
@@ -848,13 +848,13 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-gris-fonce {
-	background-color: #666666;
+	background-color: #666;
 	-moz-border-radius: 8px;
 }
 
 .cadre-gris-clair {
 	border: 1px solid #aaaaaa;
-	background-color: #cccccc;
+	background-color: #CCCCCC;
 	-moz-border-radius: 8px;
 }
 
@@ -867,7 +867,7 @@ a.bouton_rotation:hover img {
 	-moz-border-radius-topright: 8px;
 	background: ##ENV{couleur_foncee,3874b0};
 	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
-	color: white;	
+	color: #FFF;	
 }
 
 .cadre-couleur-foncee {
@@ -875,33 +875,33 @@ a.bouton_rotation:hover img {
 	-moz-border-radius: 8px;
 }
 .cadre-couleur-foncee div.cadre-titre {
-	color: white;	
+	color: #FFF;	
 }
 
 
 
 .cadre-trait-couleur {
-	background-color: white;
+	background-color: #FFF;
 	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 .cadre-trait-couleur div.cadre-titre {
 	background: ##ENV{couleur_foncee,3874b0};
 	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
-	color: white;	
+	color: #FFF;	
 }
 
 .cadre-r {
-	background-color: white;
-	border: 1px solid #666666;
+	background-color: #FFF;
+	border: 1px solid #666;
 	-moz-border-radius: 8px;
 }
 
 
 .cadre-r div.cadre-titre {
 	background: #aaaaaa;
-	border-bottom: 1px solid #666666;
-	color: black;	
+	border-bottom: 1px solid #666;
+	color: #000;	
 }
 
 .cadre-e {
@@ -915,29 +915,29 @@ a.bouton_rotation:hover img {
 
 .cadre-e div.cadre-titre {
 	background: ##ENV{couleur_claire,edf3fe};
-	border-bottom: 1px solid #666666;
-	color: black;	
+	border-bottom: 1px solid #666;
+	color: #000;	
 }
 
 .cadre-e-noir {
-	border: 1px solid #666666;
+	border: 1px solid #666;
 	-moz-border-radius: 8px;
 }
 
 .cadre-forum {
-	background-color: white;
+	background-color: #FFF;
 	border: 1px solid #aaaaaa;
 	-moz-border-radius-top[(#ENV{ltr}|choixsiegal{left,left,right})]: 8px;
 }
 .cadre-forum div.cadre-titre {
 	background: ##ENV{couleur_claire,edf3fe};
 	border-bottom: 1px solid #aaaaaa;
-	color: black;	
+	color: #000;	
 }
 
 .cadre-sous_rub {
-	background-color: white;
-	border: 1px solid #666666;
+	background-color: #FFF;
+	border: 1px solid #666;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
 	-moz-border-radius-top[(#ENV{ltr}|choixsiegal{left,left,right})]: 8px;
@@ -946,16 +946,16 @@ a.bouton_rotation:hover img {
 
 .cadre-thread-forum {
 	background-color: #eeeeee;
-	border: 1px solid #cccccc;
-	border-top: 0px;
+	border: 1px solid #CCCCCC;
+	border-top: 0;
 }
 .cadre-thread-forum div.cadre-titre {
-	background: #cccccc;
-	color: black;	
+	background: #CCCCCC;
+	color: #000;	
 }
 
 .cadre-info{
-	background-color: white;
+	background-color: #FFF;
 	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	padding: 5px;
 	-moz-border-radius: 8px;
@@ -989,15 +989,15 @@ a.bouton_rotation:hover img {
 }
  
 .plan-articles {
-	border-top: 1px solid #cccccc;
-	border-left: 1px solid #cccccc;
-	border-right: 1px solid #cccccc;
+	border-top: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	border-right: 1px solid #CCCCCC;
 }
 .plan-articles a {
 	display: block;
 	padding: 2px;
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 18px;
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 1px solid #CCCCCC;
 	 background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
 	background-color: #e0e0e0;
 	font-family: Verdana, Arial, Sans, sans-serif;
@@ -1005,7 +1005,7 @@ a.bouton_rotation:hover img {
 	text-decoration: none;
 }
 .plan-articles a:hover {
-	background-color: white; 
+	background-color: #FFF; 
 	text-decoration: none;
 }
 .plan-articles .publie {
@@ -1028,10 +1028,10 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 	display: inline;
 	float: none;
 	padding: 2px;
-	margin: 0px;
+	margin: 0;
 	margin-left: 1px;
 	margin-right: 1px;
-	border: 0px;
+	border: 0;
 	font-family: Arial, Helvetica, Sans, sans-serif;
 	font-size: 9px;
 	text-decoration: none;
@@ -1040,7 +1040,7 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 }
 a.foncee, a.foncee:hover {
 	background-color: ##ENV{couleur_foncee,3874b0};
-	color: white;
+	color: #FFF;
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 a.claire, a.claire:hover {
@@ -1049,14 +1049,14 @@ a.claire, a.claire:hover {
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 span.lang_base {
-	color: #666666;
-	border: 1px solid #666666;
+	color: #666;
+	border: 1px solid #666;
 	background-color: #eeeeee;
 }
 span.creer {
 	color: #333333;
 	border: 1px solid #333333;
-	background-color: white;
+	background-color: #FFF;
 }
 .trad_float {
 	float: [(#ENV{ltr}|choixsiegal{left,right,left})];
@@ -1079,11 +1079,11 @@ a.liste-mot {
 	background-color: #eeeeee;
 }
 .tr_liste_over, .tr_liste:hover {
-	background-color: white;
+	background-color: #FFF;
 }
 
 .tr_liste td, .tr_liste:hover td, .tr_liste_over td {
-	border-bottom: 1px solid #cccccc;
+	border-bottom: 1px solid #CCCCCC;
 }
 
 .tr_liste td div.liste_clip {
@@ -1114,15 +1114,15 @@ div.puce_article_fixe, div.puce_breve_fixe {
 div.puce_article_popup, div.puce_breve_popup {
 	position: absolute;
 	visibility: hidden;
-	margin-top: -1px; top: 0px; 
-	border: 1px solid #666666; 
+	margin-top: -1px; top: 0; 
+	border: 1px solid #666; 
 	background-color: 
-	#cccccc; z-index: 10; 
+	#CCCCCC; z-index: 10; 
 	-moz-border-radius: 3px;
 }
 div.puce_article_popup img, div.puce_breve_popup img {
 	padding: 1px;
-	border: 0px;
+	border: 0;
 }
 
 div.puce_article_popup {
@@ -1143,7 +1143,7 @@ div.brouteur_rubrique {
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
 	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
-	background-color: white;
+	background-color: #FFF;
 }
 
 div.brouteur_rubrique_on {
@@ -1178,12 +1178,12 @@ div.brouteur_rubrique div a {
 }
 
 div.brouteur_rubrique_on div a {
-	color: black;
+	color: #000;
 }
 
 .iframe-bouteur {
 	background-color: #eeeeee; 
-	border: 0px;
+	border: 0;
 	z-index: 1;
 }
 
@@ -1225,23 +1225,23 @@ a.spip_glossaire:hover {
 	font-size: 10px;
 	border: 1px solid white;
 	background-color: ##ENV{couleur_foncee,3874b0};
-	color: white;
+	color: #FFF;
 }
 .spip_cadre {
 	width: 100%;
 	background-color: #eeeeee;
 	margin-top: 10px;
 	padding: 5px;
-	border: 1px solid #666666;
+	border: 1px solid #666;
 	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
 }
 blockquote.spip {
 	margin-[(#ENV{ltr}|choixsiegal{left,left,right})]: 40px;
-	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 0px;
+	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 0;
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border: solid 1px #aaaaaa;
-	background-color: #ffffff;
+	background-color: #FFF;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -1293,19 +1293,19 @@ a.triangle_block:hover {
 	margin-[(#ENV{ltr}|choixsiegal{left,right,left})]: 3px;
 	padding-[(#ENV{ltr}|choixsiegal{left,right,left})]: 4px;
 	line-height: 12px;
-	color: #666666; 
+	color: #666; 
  }
 
  div.highlight {
-  	color: black;
+  	color: #000;
  	background-color: ##ENV{couleur_claire,edf3fe};
  }
   div.highlight, div.pashighlight {
-  	color: #666666;
+  	color: #666;
   	padding: 2px;
   }
   div.highlight:hover, div.pashighlight:hover {
-  	color: black;
+  	color: #000;
   	cursor: pointer;
   }
 

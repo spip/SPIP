@@ -24,15 +24,15 @@
 /*  Correction des styles HTML par defaut
 /*  ------------------------------------------ */
 body { 
-	background: #FFFFFF; 
+	background: #FFF; 
 	margin: 1.5em;
-	font: 1em "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif; 
 	text-align: center;
+	font-family: "Trebuchet MS", Tahoma, Arial, Helvetica, sans-serif;
+	font-size: 1em;
 	color: #333333;
-	font-size: 100%;
 }
 
-img { margin: 0; padding: 0; border: 0; }
+img, table { margin: 0; padding: 0; border: 0; }
 ul, ol, li { margin: 0; padding: 0; list-style: none; }
 h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: normal; }
 
@@ -54,7 +54,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	width: 33em;
 }
 
-
 #conteneur #navigation { 
 	float: right;
 	width: 12em;
@@ -75,12 +74,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	margin-bottom: 1em;
 }
 
-#contenu .encart div h3 {
-	font-size: 1.2em;
-	font-weight: bold;	
-}
-
-
 /*  Entete et pied de page
 ---------------------------------------------- */
 
@@ -89,13 +82,11 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	width: 100%;
 	position: relative;
 	font-size: 0.77em; }
-	
 #entete h1 {
 	position: absolute;
 	bottom: 0;
 	font-weight: bold;
 	font-size: 1.5em; }
-
 #entete a { text-decoration: none; }
 #entete a .spip_logos { display: block; float: left; }
 
@@ -106,16 +97,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	border-top: 2px solid #333333;	
 	font-size: 0.77em; }
 
-
 /* * Pied de page */
 #pied { 
 	clear: both;
 	width: 100%;
-	margin-top: 2em;
+	margin-top: 32em;
 	border-top: 1px dotted #CCCCCC;
 	padding: 2px;
 	text-align: center; }
-	
 #pied small { font-size: 0.77em; }
 
 /*  ------------------------------------------
@@ -128,8 +117,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 #contenu .encart *{ font-size: 0.71em; }
 #contenu .encart * *{ font-size: 1em; }
+#contenu .encart div h3 { font-size: 1.2em; font-weight: bold; }
 
-/*  Habillage commun des menus
+/*  Habillage general des menus de navigation
 ---------------------------------------------- */
 .rubriques, .breves, .syndic, .forums, .divers { 
 	text-align: left; 
@@ -186,7 +176,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .cartouche .titre { 
 	font-size: 1.27em; 
 	font-weight: bold; 
-	color: #000000; }
+	color: #000; }
 
 .cartouche .spip_logos {
 	float: right;
@@ -197,9 +187,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 
 .cartouche .traductions { font-size: 0.71em; }
 .cartouche .traductions p { float: left; }
-.cartouche .traductions li {
-	float: left;
-	margin-left: 1em; }
+.cartouche .traductions li { float: left; margin-left: 1em; }
 
 #contenu .surtitre, #contenu .soustitre { 
 	font-size: 0.82em; 
@@ -219,13 +207,12 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	background: #FAFAFA;
 	margin: 1em;
 	margin-bottom: 1.5em;
-	padding: 8px;
+	padding: 0.82em;
 	border: 1px solid #CCCCCC;
-	font-size: 0.9em;
+	font-size: 0.82em;
 	font-weight: bold; }
 	
-.texte { color: #000000; }
-	
+.texte { color: #000; }
 .texte *{ font-size: 1em; }
 
 .ps, .notes {
@@ -234,16 +221,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	border-top: 2px solid #CCCCCC; }
 .ps { font-size: 0.82em; }
 .notes { clear: both; font-size: 0.77em; }
-
 .ps h3, .notes h3 { font-size: 1.19em; font-weight: bold; }
-
-/* * Citations */
-q, blockquote { font-family: Georgia, Garamond, Times, serif; }
-blockquote { 
-	margin: 10px 20px; 
-	padding: 0em 1em; 
-	border: 1px dotted #CCCCCC; }
-
 
 /*  Portfolio
 ---------------------------------------------- */
@@ -253,7 +231,7 @@ blockquote {
 	padding-top: 2px;
 	border-top: 2px solid #CCCCCC;
 	padding-top: 1em; }
-  
+
 #document_actif { 
 	clear: both;
 	margin-top: 1em;
@@ -277,9 +255,9 @@ blockquote {
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
-.extrait { margin-bottom: 16px; padding-top: 0.3em; }
+.extrait { margin-bottom: 1em; padding-top: 0.3em; }
 
-.extrait .titre a { 
+.extrait .titre { 
 	font-size: 1.03em; 
 	font-weight: bold; }
 	
@@ -324,20 +302,19 @@ blockquote {
 	font-weight: bold; 
 	text-align: center; }
 	
-#contenu.plan ul { 
+#contenu.plan .contre-encart ul { 
 	display: block; 
 	clear: left; 
 	margin-left: 16px; 
 	margin-bottom: 16px; }
 	
-#contenu.plan li { list-style: square; }
-#contenu.plan .encart ul, #contenu.plan .encart li { margin: 0; list-style: none; }
+#contenu.plan .contre-encart li { list-style: square; }
 
 /*  ------------------------------------------
 /*  Habillage des forums
 /*  ------------------------------------------ */
 
-#contenu .repondre {
+#contenu .repondre, .forum-decompte {
 	clear: both;
 	margin-top: 2.5em;
 	padding-top: 2px;
@@ -358,7 +335,7 @@ ul.forum { display: block; clear: both; margin: 0; padding: 0; }
 
 /* Boite d'un forum : eclaircissement progressif des bords */
 
-ul .message { border: 1px solid #666666; margin: 0; padding: 0; margin-bottom: 1em; }
+ul .message { border: 1px solid #666; margin: 0; padding: 0; margin-bottom: 1em; }
 ul ul .message { border: 1px solid #A4A4A4; }
 ul ul ul .message { border: 1px solid #B8B8B8; }
 ul ul ul ul .message { border: 1px solid #CCCCCC; }
@@ -371,7 +348,7 @@ ul .forum-chapo { border: 0; border-bottom: 1px dashed #B8B8B8; margin: 0; paddi
 ul ul .forum-chapo { background: #D4E8E8; }
 ul ul ul .forum-chapo { background: #E4F0F0; }
 ul ul ul ul .forum-chapo { background: #F4F8F8; }
-ul ul ul ul ul .forum-chapo { background: #FFFFFF; }
+ul ul ul ul ul .forum-chapo { background: #FFF; }
 
 /*  ------------------------------------------
 /*  Habillage des petitions
@@ -387,7 +364,6 @@ ul ul ul ul ul .forum-chapo { background: #FFFFFF; }
 
 #signatures table { width: 100%; margin: 1em 0; }
 #signatures thead { display: none; } /* On n'affiche pas les titres du tableau */
-#signatures td {}
 
 #signatures td.signature-date {
 	background: #E4F0F0;
@@ -409,4 +385,4 @@ ul ul ul ul ul .forum-chapo { background: #FFFFFF; }
 /*  Divers
 /*  ------------------------------------------ */
 .invisible { position: absolute; top: -3000em; height: 1%; }
-.nettoyeur { clear: both;  margin: 0; padding: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }
+.nettoyeur { clear: both; margin: 0; padding: 0; height: 0; line-height: 1px; font-size: 1px; overflow: hidden; }

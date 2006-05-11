@@ -21,19 +21,19 @@
 .calendrier-helvetica16 {
 	font-family: arial,helvetica,sans-serif;
 	font-size: 16px; 
-	color: black;
+	color: #000;
 }
 
 div.navigation-calendrier {
-	color: white;
-	background-color: #cccccc;
+	color: #FFF;
+	background-color: #CCCCCC;
 	font-family: verdana, arial, sans,sans-serif;
 	font-weight: bold;
 	font-size: 14px;
 }
 
 div.navigation-calendrier img {
-	border: 0px;
+	border: 0;
 	vertical-align: middle;
 	margin: 1px;
 }
@@ -45,22 +45,22 @@ a.calendrier-annee {
 	font-family: verdana, arial, sans,sans-serif;
 	font-size: 10px;
 	font-weight: bold;
-	color: white;
+	color: #FFF;
 	-moz-border-radius: 5px;
 }
 
 a.calendrier-annee:hover {
-	color: black;
-	background-color: white;
+	color: #000;
+	background-color: #FFF;
 }
 
 .calendrier-table-large { 
-	border: 0px;
+	border: 0;
 	width: 900px;
  }
 
 .calendrier-table-etroit { 
-	border: 0px;
+	border: 0;
 	width: 750px;
  }
 
@@ -87,11 +87,11 @@ a.calendrier-annee:hover {
  }
 
 .calendrier-th a { 
-  color: black;
+  color: #000;
 }
 
 .calendrier-table-etroit  .calendrier-td-gauche {
-	width: 0px;
+	width: 0;
   	vertical-align: top;
  }
 
@@ -113,7 +113,7 @@ a.calendrier-annee:hover {
 .calendrier-jour {
 	position: relative; 
 	color: #999999;
-	background-color: white;
+	background-color: #FFF;
 	border: 1px solid #aaaaaa;
 }
 
@@ -122,16 +122,16 @@ a.calendrier-annee:hover {
 	margin-top: 1px;
 	padding: 1px;
 	text-align: center; 
-	background-color: white;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
  }
 
 .calendrier-demiagenda { 
-	margin-left: 0px;
-	margin-top: 0px;
-	padding: 0px;
+	margin-left: 0;
+	margin-top: 0;
+	padding: 0;
 	text-align: center; 
-	background-color: white;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
  }
 
@@ -147,8 +147,8 @@ a.calendrier-annee:hover {
 	position: absolute; 
 	padding-top: 5px;
 	padding-bottom: 5px;
-	border: 0px;
-	background-color: white;
+	border: 0;
+	background-color: #FFF;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
  }
@@ -168,7 +168,7 @@ a.calendrier-annee:hover {
 	position: absolute;
 	margin-left: 2px;
 	margin-right: 2px;
-	border-top: 1px solid #cccccc;
+	border-top: 1px solid #CCCCCC;
 	font-weight: bold;
  }
 
@@ -176,7 +176,7 @@ a.calendrier-annee:hover {
 	position: absolute;
 	margin-left: 2px;
 	margin-right: 2px;
-	border-top: 1px solid #cccccc;
+	border-top: 1px solid #CCCCCC;
  }
 
 .calendrier-mozleft { 
@@ -225,17 +225,17 @@ a.calendrier-annee:hover {
 .calendrier-icone { 
 	width: 14px;
 	height: 7px;
-	border: 0px;
+	border: 0;
 }
 
 .calendrier-noir  { 		/*  style anar */
-	color: black;
+	color: #000;
 }
 
 .calendrier-nb  { 		/*  style cinemat(yp)ographe */
-	background-color: white;
+	background-color: #FFF;
 	border: 1px solid black;
-	color: black;
+	color: #000;
 }
 
 .calendrier-couleur1 { 		/* Fushia */
@@ -351,11 +351,11 @@ a.calendrier-annee:hover {
 .calendrier-couleur12 { 
 		background-color: #aaaaaa;
 		border: 1px solid black;
-		color: black;
+		color: #000;
 
 }
 .calendrier-couleur12i {
-		background-color: black;
+		background-color: #000;
 		border: 1px solid #aaaaaa;
 		color: #aaaaaa}
 .calendrier-couleur13 {
