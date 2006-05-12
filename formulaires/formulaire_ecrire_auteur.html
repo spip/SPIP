@@ -4,7 +4,12 @@
 [<p class="reponse_formulaire">(#ENV*{sujetko})</p>]
 [<p class="reponse_formulaire">(#ENV*{mailko})</p>]
 
-[<p class="reponse_formulaire">(#ENV*{mailenvoye})</p>]
+[
+<fieldset class="spip_encadrer">
+<legend><:envoyer_message:></legend>
+<p class="reponse_formulaire">(#ENV*{mailenvoye})</p>
+</fieldset>
+]
 
 
 [(#ENV**{mailenvoye}|?{'',' '})
@@ -20,7 +25,8 @@
 <input type="submit" class="spip_bouton" name="confirmer#ENV{id}" value="(#ENV{boutonconfirmation})" />
 </fieldset>]
 
-[(#REM) Formulaire normal ]
+[(#REM) Sinon, formulaire normal ]
+
 <fieldset class="spip_encadrer">
 <legend><:envoyer_message:></legend>
 <p><label for="email_message_auteur#ENV{id}"><:form_pet_votre_email:></label>
@@ -29,7 +35,8 @@
 <input type="text" class="forml" name="sujet_message_auteur#ENV{id}" id="sujet_message_auteur#ENV{id}" value="#ENV{sujet}" size="30" /></p>
 <p><label for="texte_message_auteur#ENV{id}"><:info_texte_message:></label>
 <textarea class="forml" name="texte_message_auteur#ENV{id}" id="texte_message_auteur#ENV{id}" rows="10" cols="40">#ENV{texte}</textarea></p>
-<input type="submit" class="spip_bouton" name="valide" value="#ENV{bouton}" />
+
+[<input type="submit" class="spip_bouton" name="valide" value="(#ENV{bouton})" />]
 </fieldset>
 
 </form>

@@ -92,11 +92,9 @@ function balise_FORMULAIRE_ECRIRE_AUTEUR_dyn($id_auteur, $id_article, $mail) {
 			'mailenvoye' => $mailenvoye,
 			'sujet' => $sujet,
 			'texte' => $texte,
-			'valide' => ($validable ? $id : ''),
-			'bouton' => (_T('form_prop_envoyer')),
-			'boutonconfirmation' => ($validable ?
-				_T('form_prop_confirmer_envoi') :
-				'')
+			'valide' => $validable ? $id : '',
+			'bouton' => $validable ? '' : _T('form_prop_envoyer'),
+			'boutonconfirmation' => $validable ? _T('form_prop_confirmer_envoi') : ''
 			)
 		);
 }
