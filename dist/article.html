@@ -29,7 +29,7 @@
     <INCLURE{fond=inc-entete}{lang}>
 
     [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
 
 
     <div id="conteneur">
@@ -107,7 +107,7 @@
 
             [<div class="notes"><h3><:info_notes:></h3>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
 
-            [(#REM) Forums ]
+            [(#REM) Forum de l'article ]
             [<h3 class="invisible"><:Forum:></h3>
             <p class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:repondre_article:></a></p>]
             <INCLURE{fond=inc-forum}{id_article}>
