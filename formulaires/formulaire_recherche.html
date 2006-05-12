@@ -4,7 +4,7 @@
 <form action="[(#ENV{lien})]" method="get">
 	[(#ENV{lien}|form_hidden)]
 	<label for="recherche"><:info_rechercher:></label>
-	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>})]" />
+	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche})]" onfocus="this.value=''" />
 </form>
 
 </div>
