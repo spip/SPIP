@@ -37,14 +37,16 @@
         <div id="contenu">
 
             [<div class="cartouche">
-                <h2 class="surtitre"><:resultats_recherche:></h2>
+                <h1 class="surtitre"><:resultats_recherche:></h1>
                 <p class="titre">&#171;&nbsp;(#RECHERCHE)&nbsp;&#187;</p>
             </div>]
 
             <div class="contre-encart">
 
                 [(#REM) Articles trouves ]
-                <B_articles><ol>
+                <B_articles>
+                <h2 class="invisible"><:articles:></h2>
+                <ol>
                     <BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {0,10}>
                     <li class="extrait">
                     <h3><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
@@ -60,7 +62,7 @@
                 [(#REM) Rubriques trouvees ]
                 <B_rubriques>
                 <div class="rubriques">
-                    <h3 class="titre"><:rubriques:></h3>
+                    <h2 class="titre"><:rubriques:></h2>
                     <ul>
                         <BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {0,5}>
                         <li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
@@ -72,7 +74,7 @@
                 [(#REM) Mots-cles trouves ]
                 <B_mots>
                 <div class="divers">
-                    <h3 class="titre"><:mots_clefs:></h3>
+                    <h2 class="titre"><:mots_clefs:></h2>
                     <ul>
                         <BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {0,5}>
                         <li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>
@@ -84,7 +86,7 @@
                 [(#REM) Breves trouvees ]
                 <B_breves>
                 <div class="breves">
-                    <h3 class="titre"><:breves:></h3>
+                    <h2 class="titre"><:breves:></h2>
                     <ul>
                         <BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {0,5}>
                         <li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
@@ -96,7 +98,7 @@
                 [(#REM) Messages trouves ]
                 <B_messages>
                 <div class="forums">
-                    <h3 class="titre"><:messages_forum:></h3>
+                    <h2 class="titre"><:messages_forum:></h2>
                     <ul>
                         <BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {0,5}>
                         <li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
@@ -108,7 +110,7 @@
                 [(#REM) Sites web trouves ]
                 <B_sites>
                 <div class="syndic">
-                    <h3 class="titre"><:sites_web:></h3>
+                    <h2 class="titre"><:sites_web:></h2>
                     <ul>
                         <BOUCLE_sites(SITES) {recherche} {par points}{inverse} {0,5}>
                         <li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
@@ -123,7 +125,7 @@
 
         [(#REM) Menu de navigation laterale ]
         <div id="navigation">
-            <h2 class="invisible"><:navigation:></h2>
+            <h1 class="invisible"><:navigation:></h1>
 
             [(#REM) Menu de navigation par rubriques ]
             <INCLURE{fond=inc-rubriques}{lang}>

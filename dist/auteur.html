@@ -37,7 +37,7 @@
 
 			<div class="cartouche">
 				[(#LOGO_AUTEUR||reduire_image{200,200})]
-				<h2 class="titre">[(#NOM|supprimer_numero)]</h2>
+				<h1 class="titre">[(#NOM|supprimer_numero)]</h1>
 				[<div class="soustitre"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></div>]
 			</div>
 
@@ -52,23 +52,23 @@
 			[(#REM) Articles de l'auteur ]
 			<B_articles>
 			<div class="contre-encart">
-				<h3 class="invisible"><:articles_auteur:></h3>
+				<h2 class="invisible"><:articles_auteur:></h2>
 				<ul>
 					<BOUCLE_articles(ARTICLES) {id_auteur} {par date}{inverse}>
-					<li class="extrait"><h4 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h4>
+					<li class="extrait"><h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
 					<small>[(#DATE|affdate)]</small></li>
 					</BOUCLE_articles>
 				</ul>
 			</div><!-- fin contre-encart -->
 			</B_articles>
 
-			[<div class="notes"><h3><:info_notes:></h3>(#NOTES)</div>]
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
 		</div><!-- fin contenu -->
 
 		[(#REM) Menu de navigation laterale ]
 		<div id="navigation">
-		<h2 class="invisible"><:navigation:></h2>
+		<h1 class="invisible"><:navigation:></h1>
 
 		[(#REM) Menu de navigation par rubriques ]
 		<INCLURE{fond=inc-rubriques}{lang}>
@@ -76,7 +76,7 @@
 		[(#REM) Autres auteurs ]
 		<B_auteurs>
 		<div class="forums">
-			<h3 class="titre"><:info_auteurs:></h3>
+			<h2 class="titre"><:info_auteurs:></h2>
 			<ul>
 				<BOUCLE_auteurs(AUTEURS)>
 				<li><a href="#URL_AUTEUR"[ class="(#EXPOSE)"]>[(#NOM|supprimer_numero|couper{80})]</a></li>

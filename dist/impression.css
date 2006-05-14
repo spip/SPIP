@@ -61,7 +61,7 @@ h3.spip { text-align: center; font-weight: bold; margin: 1.4em; font-size: 1.15e
 	border-top: 2pt solid #CCCCCC;
 	font-size: 0.82em;
 }
-.ps h3, .notes h3, .forum-decompte, #documents_joints h3 { font-weight: bold; clear: both; }
+.ps h2, .notes h2, .forum-decompte, #documents_joints h2 { font-weight: bold; clear: both; }
 
 /*  Citations, tableaux, etc...
 ---------------------------------------------- */
@@ -97,6 +97,6 @@ ul .message { background: #FAFAFA; border: 1pt solid #CCCCCC; padding: 1em; marg
 
 /*  Plan du site
 ---------------------------------------------- */
-#contenu.plan h3 { font-size: 1.15em; font-weight: bold; }
+#contenu.plan h2 { font-size: 1.15em; font-weight: bold; }
 #contenu.plan ul { margin-left: 1em; margin-bottom: 1em; }
 #contenu.plan li { list-style: square; }

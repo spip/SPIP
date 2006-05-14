@@ -71,11 +71,11 @@
 
 			<div id="contenu">
 
-				<h2 class="invisible"><:poster_message:></h2>
+				<h1 class="invisible"><:poster_message:></h1>
 
 				<BOUCLE_forum_parent(FORUMS) {id_forum}>
 				<div class="extrait">
-					<h3 class="surtitre"><:en_reponse:></h3>
+					<h2 class="surtitre"><:en_reponse:></h2>
 					<p class="titre"><a href="#URL_FORUM">[(#TITRE|supprimer_numero|couper{80})]</a></p>
 					<small>[(#DATE|affdate)][&nbsp;(#DATE|heures)][:(#DATE|minutes)][, <:par_auteur:> (#NOM)]</small>
 					[<div class="texte">(#INTRODUCTION|lignes_longues)</div>]
@@ -84,7 +84,7 @@
 
 				<BOUCLE_article(ARTICLES) {id_article}>
 				<div class="extrait">
-					<h3 class="surtitre"><:en_reponse:></h3>
+					<h2 class="surtitre"><:en_reponse:></h2>
 					[(#LOGO_ARTICLE||reduire_image{120,120})]
 					<p class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></p>
 					<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}><a href="#URL_AUTEUR">[(#NOM|supprimer_numero|couper{80})]</a></BOUCLE_auteurs></small>
@@ -94,7 +94,7 @@
 
 				<BOUCLE_breve(BREVES) {id_breve}>
 				<div class="extrait">
-					<h3 class="surtitre"><:en_reponse:></h3>
+					<h2 class="surtitre"><:en_reponse:></h2>
 					[(#LOGO_BREVE||reduire_image{120,120})]
 					<p class="titre"><a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></p>
 					<small>[(#DATE|affdate)]</small>
@@ -104,7 +104,7 @@
 
 				<BOUCLE_rubrique(RUBRIQUES) {id_rubrique}>
 				<div class="extrait">
-					<h3 class="surtitre"><:en_reponse:></h3>
+					<h2 class="surtitre"><:en_reponse:></h2>
 					<p class="titre"><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></p>
 					[<div class="texte">(#TEXTE|lignes_longues)</div>]
 				</div>
@@ -112,7 +112,7 @@
 
 				<BOUCLE_syndic(SITES) {id_syndic}>
 				<div class="extrait">
-					<h3 class="surtitre"><:en_reponse:></h3>
+					<h2 class="surtitre"><:en_reponse:></h2>
 					<p class="titre"><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></p>
 					[<div class="texte">(#DESCRIPTIF|lignes_longues)</div>]
 				</div>
@@ -121,14 +121,14 @@
 
 				<//B_forum_parent>
 
-				[<h3 class="spip"><:envoyer_message:></h3>
+				[<h3 class="spip"><:envoyer_message:></h2>
 				(#FORMULAIRE_FORUM)]
 
 			</div><!-- fin contenu -->
 
 			[(#REM) Menu de navigation laterale ]
 			<div id="navigation">
-				<h2 class="invisible"><:navigation:></h2>
+				<h1 class="invisible"><:navigation:></h1>
 
 				[(#REM) Menu de navigation par rubriques ]
 				<INCLURE{fond=inc-rubriques}{lang}>
