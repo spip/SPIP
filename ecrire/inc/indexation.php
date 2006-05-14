@@ -225,7 +225,9 @@ function update_index_tables(){
 		if (	(!in_array($new_table,$INDEX_tables_interdites))
 				&&(!in_array($new_table,$liste_tables))
 				&&($id_autres<254) ){
-			$desc = spip_abstract_showtable($new_table);
+			// on utilise abstract_showtable car cela permet d'activer l'indexation
+			// en ajoutant simplement le champ idx, sans toucher au core
+			$desc = spip_abstract_showtable($new_table, '', true);
 			if (isset($desc['field']['idx'])){
 			  // la table a un champ idx pour gerer l'indexation
 			  if ( 	(isset($rev_old_liste_tables[$new_table]))

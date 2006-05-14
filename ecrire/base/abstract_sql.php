@@ -99,8 +99,14 @@ function spip_abstract_insert($table, $noms, $valeurs, $serveur='')
   return $f($table, $noms, $valeurs);
 }
 
-function spip_abstract_showtable($table, $serveur='')
+function spip_abstract_showtable($table, $serveur='', $table_spip = false)
 {
+	if ($table_spip){
+		if ($GLOBALS['table_prefix']) $table_pref = $GLOBALS['table_prefix']."_";
+		else $table_pref = "";
+		$table = preg_replace('/^spip_/', $table_pref, $table);
+	}
+	
   $f = (!$serveur ? 'spip_mysql_showtable' :
 	spip_abstract_serveur('spip_' . $serveur . '_showtable', $serveur));
   return $f($table);
