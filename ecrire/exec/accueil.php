@@ -86,7 +86,8 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 		echo " ",_T('info_liens_syndiques_7'),",</a></small>";
 		}
  }
-if ($flag_ob) {
+ $non_affiche = false;
+ if ($flag_ob) {
 	$a = ob_get_contents();
 	ob_end_clean();
 	if ($a) {
@@ -150,7 +151,7 @@ if ($spip_display == 4) {
 	if ($id_rubrique > 0) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
-			}
+	} else $dans_rub = $dans_parent = '';
 	if ($connect_statut == "0minirezo") {
 			$gadget .= "<td>";
 			$gadget .= icone_horizontale(_T('icone_creer_rubrique'), generer_url_ecrire("rubriques_edit","new=oui"), "rubrique-24.gif", "creer.gif", false);
@@ -484,7 +485,7 @@ fin_page("jimmac");
 // Symetrique du debut: apres restauration ou MAJ, recalculer les rubriques
 //
 
-	if ($GLOBALS['meta']['calculer_rubriques'] == 'oui') {
+	if (isset($GLOBALS['meta']['calculer_rubriques'])) {
 		calculer_rubriques();
 		effacer_meta('calculer_rubriques');
 		ecrire_metas();

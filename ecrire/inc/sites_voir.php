@@ -30,7 +30,6 @@ function afficher_sites_boucle($row, &$tous_id, $voir_logo, $bof)
 	$nom_site=sinon(typo($row["nom_site"]), _T('info_sans_titre'));
 	$url_site=$row["url_site"];
 	$url_syndic=$row["url_syndic"];
-	$description=propre($row["description"]);
 	$syndication=$row["syndication"];
 	$statut=$row["statut"];
 	$date=$row["date"];

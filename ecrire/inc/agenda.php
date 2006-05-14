@@ -24,7 +24,7 @@ charger_generer_url();
 // annee, mois, jour, echelle, partie_cal, script, ancre
 // ceux-ci apparaissent TOUJOURS dans cet ordre 
 
-define(DEFAUT_D_ECHELLE,120); # 1 pixel = 2 minutes
+define('DEFAUT_D_ECHELLE',120); # 1 pixel = 2 minutes
 
 // 
 // Utilitaires sans html ni sql
@@ -1044,7 +1044,7 @@ function http_calendrier_agenda_rv ($annee, $mois, $les_rv, $fclic, $perso='',
 				$style = "#ffffff";
 				$couleur = "#aaaaaa";
 			}
-			if ($les_rv[$j] > 0) {
+			if (isset($les_rv[$j])) {
 			  $style = "#ffffff";
 			  $couleur = "black";
 			}

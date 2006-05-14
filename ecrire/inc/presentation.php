@@ -77,14 +77,14 @@ function debut_cadre($style, $icone = "", $fonction = "", $titre = "") {
 	if ($spip_display != 1 AND $spip_display != 4 AND strlen($icone) > 1) {
 		$style_gauche = " padding-$spip_lang_left: 38px;";
 		$style_cadre = " style='margin-top: 14px;'";
-	}
+	} else $style_cadre = $style_gauche = '';
 	
 	// accesskey pour accessibilite espace prive
 	if ($accesskey <= 122) // z
 	{
 		$accesskey_c = chr($accesskey++);
 		$ret = "<a name='access-$accesskey_c' href='#access-$accesskey_c' accesskey='$accesskey_c'></a>";
-	}
+	} else $ret ='';
 
 	if ($style == "e") {
 		$ret .= "<div class='cadre-e-noir'$style_cadre><div class='cadre-$style'>";
@@ -504,13 +504,16 @@ function affiche_tranche_bandeau($requete, $icone, $col, $fg, $bg, $tmp_var, $de
 
 	$tous_id = array();
 
-	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
-	if (! ($obligatoire OR ($cpt = $cpt['n']))) return  array();
+	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 
-	if (!$requete["SELECT"]) $requete["SELECT"]= "*";
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
+	if (! ($force OR ($cpt = $cpt['n']))) return  array();
+
+	if (!isset($requete["SELECT"])) $requete["SELECT"]= "*";
+	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$nb_aff = 1.5 * _TRANCHES;
+	$tranches = '';
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt, $col, $tmp_var, '', $nb_aff);
@@ -683,7 +686,7 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	global $options, $spip_display;
 	global $spip_lang_left, $spip_lang_right;
 
-	if (!$requete['FROM'])  $requete['FROM'] = 'spip_articles AS articles';
+	if (!isset($requete['FROM']))  $requete['FROM'] = 'spip_articles AS articles';
 	// Preparation pour basculer vers liens de traductions
 	$afficher_trad = ($GLOBALS['meta']['gerer_trad'] == "oui");
 
@@ -710,12 +713,12 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$afficher_visites = ($afficher_visites AND $connect_statut == "0minirezo" AND $activer_statistiques != "non");
 
 	// Preciser la requete (alleger les requetes)
-	if (!$requete['SELECT']) {
+	if (!isset($requete['SELECT'])) {
 		$requete['SELECT'] = "articles.id_article, articles.titre, articles.id_rubrique, articles.statut, articles.date";
 
 		if (($GLOBALS['meta']['multi_rubriques'] == 'oui' AND $GLOBALS['id_rubrique'] == 0) OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 			$afficher_langue = true;
-			if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
+			if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
 			else $langue_defaut = $GLOBALS['meta']['langue_site'];
 			$requete['SELECT'] .= ", articles.lang";
 		}
@@ -739,14 +742,15 @@ function afficher_articles($titre_table, $requete, $afficher_visites = false, $a
 	$tmp_var = substr($hash, 2, 6);
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page","fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::", true) . "','$tmp_var')";
 
+	if (!isset($requete['GROUP BY'])) $requete['GROUP BY'] = '';
 	$tous_id = array();
 	$cpt = spip_fetch_array(spip_query("SELECT COUNT(*) AS n FROM " . $requete['FROM'] . ($requete['WHERE'] ? (' WHERE ' . $requete['WHERE']) : '') . ($requete['GROUP BY'] ? (' GROUP BY ' . $requete['GROUP BY']) : '')));
 	if (! ($obligatoire OR ($cpt = $cpt['n']))) return $tous_id ;
-	if ($requete['LIMIT']) $cpt = min($requete['LIMIT'], $cpt);
+	if (isset($requete['LIMIT'])) $cpt = min($requete['LIMIT'], $cpt);
 
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
-
+	$tranches = '';
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt, $afficher_auteurs ? 4 + $ajout_col : 3 + $ajout_col, $tmp_var, $javascript, $nb_aff);
@@ -845,9 +849,7 @@ function afficher_articles_boucle($row, &$tous_id, $afficher_auteurs, $afficher_
 	$id_rubrique = $row['id_rubrique'];
 	$date = $row['date'];
 	$statut = $row['statut'];
-	$visites = $row['visites'];
 	if ($lang = $row['lang']) changer_typo($lang);
-	$popularite = ceil(min(100,100 * $row['popularite'] / max(1, 0 + $GLOBALS['meta']['popularite_max'])));
 	$descriptif = $row['descriptif'];
 	if ($descriptif) $descriptif = ' title="'.attribut_html(typo($descriptif)).'"';
 	$petition = $row['petition'];
@@ -961,7 +963,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 	$jjscript["afficher_auteurs"] = $afficher_auteurs;
 	$jjscript = (serialize($jjscript));
 	$hash = "0x".substr(md5($connect_id_auteur.$jjscript), 0, 16);
-	$tmp_var = substr(md5($jjscript), 0, 4);	
+	$tmp_var = substr($hash, 2, 6);	
 	$javascript = "charger_id_url('" . generer_url_ecrire("ajax_page", 'fonction=sql&id_ajax_fonc=::id_ajax_fonc::::deb::') . "','$tmp_var')";
 
 	$tous_id = array();
@@ -971,7 +973,7 @@ function afficher_articles_trad($titre_table, $requete, $afficher_visites = fals
 
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
-
+	$tranches = '';
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt,  4, $tmp_var, $javascript, $nb_aff);
@@ -1124,7 +1126,7 @@ function afficher_breves($titre_table, $requete, $affrub=false) {
 	OR $GLOBALS['meta']['multi_articles'] == 'oui') {
 		$afficher_langue = true;
 
-		if ($GLOBALS['langue_rubrique']) $langue_defaut = $GLOBALS['langue_rubrique'];
+		if (isset($GLOBALS['langue_rubrique'])) $langue_defaut = $GLOBALS['langue_rubrique'];
 		else $langue_defaut = $GLOBALS['meta']['langue_site'];
 	}
 
@@ -1302,7 +1304,7 @@ function afficher_auteurs ($titre_table, $requete) {
 	$tmp_var = substr(md5(join('', $requete)), 0, 4);
 	$nb_aff = 1.5 * _TRANCHES;
 	$deb_aff = intval(_request('t_' .$tmp_var));
-
+	$tranches = '';
 	if ($cpt > $nb_aff) {
 		$nb_aff = (_TRANCHES); 
 		$tranches = afficher_tranches_requete($cpt,  ($options == "avancees") ? 4 : 3, $tmp_var, '', $nb_aff);
@@ -1775,7 +1777,7 @@ function icone_bandeau_principal($texte, $lien, $fond, $rubrique_icone = "vide",
 		$menu_accesskey++;
 	}
 
-	if ($sous_rubrique_icone == $sous_rubrique) $class_select = " class='selection'";
+	$class_select = ($sous_rubrique_icone == $sous_rubrique) ? " class='selection'" : '';
 
 	if (eregi("^javascript:",$lien)) {
 		$a_href = "<a$accesskey onClick=\"$lien; return false;\" href='$lien_noscript' target='spip_aide'$class_select>";
@@ -1806,6 +1808,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 
 	$alt = '';
 	$title = '';
+	$accesskey = '';
 	if ($spip_display == 1) {
 		//$hauteur = 20;
 		$largeur = 80;
@@ -1839,7 +1842,7 @@ function icone_bandeau_secondaire($texte, $lien, $fond, $rubrique_icone = "vide"
 	}
 	if ($spip_display == 3) $accesskey_icone = $accesskey;
 
-	if ($rubrique_icone == $rubrique) $class_select = " class='selection'";
+	$class_select =  ($rubrique_icone != $rubrique) ? '' : " class='selection'";
 	$compteur_survol ++;
 
 	$a_href = "<a$accesskey href=\"$lien\"$class_select>";
@@ -1982,7 +1985,7 @@ function debut_page($titre = "", $rubrique = "asuivre", $sous_rubrique = "asuivr
 	init_entete($titre, $rubrique, $css);
 	definir_barre_boutons();
 	init_body($rubrique, $sous_rubrique, $onLoad, $id_rubrique);
-	debut_corps_page();
+	debut_corps_page($rubrique);
 }
  
 function init_entete($titre, $rubrique, $css='') {
@@ -2354,7 +2357,7 @@ if (true /*$gadgets*/) {
 			if ($id_rubrique > 0) {
 				$dans_rub = "&id_rubrique=$id_rubrique";
 				$dans_parent = "&id_parent=$id_rubrique";
-			}
+			} else $dans_rub = $dans_parent = '';
 			if ($connect_statut == "0minirezo") {	
 				$gadget .= "<div style='width: 140px; float: $spip_lang_left;'>";
 				if ($id_rubrique > 0)
@@ -2541,7 +2544,7 @@ if (true /*$gadgets*/) {
 	
 }
 
-function debut_corps_page() {
+function debut_corps_page($rubrique='') {
 	global $couleur_foncee;
 	global $connect_id_auteur;
   
@@ -2670,6 +2673,7 @@ function debut_gauche($rubrique = "asuivre") {
 	}
 	else {
 		$largeur_ecran = 750;
+		$rspan = '';
 	}
 
 	echo "<br><table width='$largeur_ecran' cellpadding='0' cellspacing='0' border='0'>
@@ -2957,6 +2961,7 @@ function voir_en_ligne ($type, $id, $statut=false, $image='racine-24.gif') {
 function bouton_spip_rss($op, $args, $fmt='rss') {
 
 	include_spip('inc/acces');
+	$a = '';
 	if (is_array($args))
 		foreach ($args as $val => $var)
 			if ($var) $a .= ':' . $val.'-'.$var;
@@ -3018,6 +3023,7 @@ function http_calendrier_rv($messages, $type) {
 				(($date_jour == $date_rv) ? '' :
 				"<div  class='calendrier-arial11'><b>$date_jour</b></div>") .
 				"</td></tr>";
+			$date_rv = $date_jour;
 			$rv =
 		((affdate($date) == affdate($date_fin)) ?
 		 ("<div class='calendrier-arial9 fond-agenda'>"
@@ -3042,8 +3048,6 @@ function http_calendrier_rv($messages, $type) {
 		"</b></div>" .
 		"</td>" .
 		"</tr>\n";
-
-		$date_rv = $date_jour;
 	}
 
 	if ($type == 'annonces') {

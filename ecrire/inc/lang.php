@@ -139,7 +139,7 @@ function traduire_chaine($code) {
 			$code = $regs[2];
 		}
 	}
-
+	$text = '';
 	// parcourir tous les modules jusqu'a ce qu'on trouve
 	foreach ($modules as $module) {
 		$var = "i18n_".$module."_".$spip_lang;
@@ -153,10 +153,11 @@ function traduire_chaine($code) {
 			if ($f = chercher_module_lang('local'))
 				surcharger_langue($f);
 		}
-		if (isset($GLOBALS[$var][$code])) break;
+		if (isset($GLOBALS[$var][$code])) {
+			$text = $GLOBALS[$var][$code];
+			break;
+		}
 	}
-
-	$text = $GLOBALS[$var][$code];
 
 	// fallback langues pas finies ou en retard (eh oui, c'est moche...)
 	if ($spip_lang<>'fr') {

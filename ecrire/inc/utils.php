@@ -19,7 +19,8 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 # fonction obsolete, assurant la compatilibite ascendante
 function include_ecrire($file, $silence=false) {
 # Hack pour etre compatible avec les mes_options qui appellent cette fonction
-	define('_DIR_INCLUDE', _DIR_RESTREINT);
+	if (!defined('_DIR_INCLUDE'))
+		define('_DIR_INCLUDE', _DIR_RESTREINT);
 	preg_match('/^((inc_)?([^.]*))(\.php[3]?)?$/', $file, $r);
 
 	// Version new style, surchargeable
@@ -88,7 +89,8 @@ function include_spip($f, $include = true) {
 	}
 
 	// Hack pour pouvoir appeler cette fonction depuis mes_options.
-	define('_DIR_INCLUDE', _DIR_RESTREINT);
+	if (!defined('_DIR_INCLUDE'))
+		define('_DIR_INCLUDE', _DIR_RESTREINT);
 
 	if (!$s = find_in_path($f . '.php')
 	AND (!_EXTENSION_PHP OR !$s = find_in_path($f . '.php3'))) {
@@ -96,7 +98,8 @@ function include_spip($f, $include = true) {
 	}
 
 	$GLOBALS['meta']['noyau'][_DIR_RESTREINT][$f] = $s;
-	define('ecrire_noyau', 1);
+	if (!defined('ecrire_noyau'))
+		define('ecrire_noyau', 1);
 
 	// alors on le charge (sauf si on ne voulait que son chemin)
 	if ($include) {
@@ -138,16 +141,16 @@ function pipeline($action,$val) {
 
 	// chargement initial des fonctions mises en cache, ou generation du cache
 	if (!$charger) {
-		if (!@is_readable($charger = _DIR_SESSIONS."charger_pipelines.php")) {
+		if (!($ok = @is_readable($charger = _DIR_SESSIONS."charger_pipelines.php"))) {
 			include_spip('inc/plugin');
 			// generer les fichiers php precompiles
 			// de chargement des plugins et des pipelines
 			verif_plugin();
-			if ($bug = !@is_readable($charger))
+			if (!($ok = @is_readable($charger)))
 				spip_log("fichier $charger pas cree");
 		}
 
-		if (!$bug)
+		if ($ok)
 			include_once $charger;
 	}
 
@@ -189,7 +192,7 @@ function spip_log($message, $logname='spip') {
 	AND (!$s = @filesize($logfile) OR $s > 10*1024)) {
 		$rotate = true;
 		$message .= "[-- rotate --]\n";
-	}
+	} else $rotate = '';
 	$f = @fopen($logfile, "ab");
 	if ($f) {
 		fputs($f, htmlspecialchars($message));
@@ -535,8 +538,9 @@ function http_gmoddate($lastmodified) {
 
 function http_last_modified($lastmodified, $expire = 0) {
 	if (!$lastmodified) return false;
+	$headers_only = false;
 	$gmoddate = http_gmoddate($lastmodified);
-	if ($_SERVER['HTTP_IF_MODIFIED_SINCE']
+	if (isset($_SERVER['HTTP_IF_MODIFIED_SINCE'])
 	AND !preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) # MSoft IIS is dumb
 	{
 		$if_modified_since = preg_replace('/;.*/', '',
@@ -707,8 +711,10 @@ function url_de_base() {
 		return $url;
 
 	$http = (
-		substr($_SERVER["SCRIPT_URI"],0,5) == 'https'
-		OR test_valeur_serveur($_SERVER['HTTPS'])
+		(isset($_SERVER["SCRIPT_URI"]) AND
+			substr($_SERVER["SCRIPT_URI"],0,5) == 'https')
+		OR (isset($_SERVER['HTTPS']) AND
+		    test_valeur_serveur($_SERVER['HTTPS']))
 	) ? 'https' : 'http';
 	# note : HTTP_HOST contient le :port si necessaire
 	$myself = $http.'://'.$_SERVER['HTTP_HOST'].$REQUEST_URI;
@@ -734,25 +740,17 @@ function url_de_base() {
 // http://httpd.apache.org/docs/2.0/mod/mod_dir.html
 
 function generer_url_ecrire($script, $args="", $no_entities=false, $rel=false) {
-
 	if (!$rel)
-		$ecrire = url_de_base() . _DIR_RESTREINT_ABS;
+		$rel = url_de_base() . _DIR_RESTREINT_ABS;
 	else
-		$ecrire = _DIR_RESTREINT ? _DIR_RESTREINT : './';
+		$rel = _DIR_RESTREINT ? _DIR_RESTREINT : './';
 
-	if ($script AND $script<>'accueil')
-		$exec = "exec=$script";
+	if ($script AND $script<>'accueil') 
+		$args = "?exec=$script" . (!$args ? '' : "&$args");
+	elseif ($args)
+		$args ="?$args";
 
-	if ($args AND $exec)
-		$args = "?$exec&$args";
-	else if ($args)
-		$args = "?$args";
-	else if ($exec)
-		$args = "?$exec";
-
-	if (!$no_entities) $args = str_replace('&', '&amp;', $args);
-
-	return "$ecrire$args";
+	return $rel . ($no_entities ? $args : str_replace('&', '&amp;', $args));
 }
 
 //
@@ -1006,6 +1004,7 @@ function spip_initialisation() {
 
 	if (strpos($_SERVER['SERVER_SOFTWARE'], '(Win') !== false)
 		define ('os_serveur', 'windows');
+	else	define ('os_serveur', '');
 
 	//
 	// Infos sur le fichier courant
@@ -1042,9 +1041,10 @@ function spip_initialisation() {
 	}
 
 	// supprimer le noyau si on recalcul
-	if ($_REQUEST['var_mode']) {
+	if (isset($_REQUEST['var_mode'])) {
 		$GLOBALS['meta']['noyau'] = array();
-		define('ecrire_noyau', 1);
+		if (!defined('ecrire_noyau'))
+			define('ecrire_noyau', 1);
 	}
 
 	// Langue principale du site
@@ -1066,7 +1066,7 @@ function tester_variable($var, $val){
 		$GLOBALS[$var] = $val;
 
 	if (
-		$_REQUEST[$var] !== NULL
+		isset($_REQUEST[$var])
 		AND $GLOBALS[$var] == $_REQUEST[$var]
 	)
 		die ("tester_variable: $var interdite");
@@ -1096,7 +1096,8 @@ function spip_desinfecte(&$t) {
 // Rq: pour que cette fonction marche depuis mes_options elle a besoin
 // que quelques petites constantes soient deja initialisees
 function verifier_visiteur() {
-	define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
+	if (!defined('_DIR_SESSIONS'))
+		define('_DIR_SESSIONS', _DIR_RESTREINT . "data/");
 	if ($_COOKIE['spip_session'] OR
 	($_SERVER['PHP_AUTH_USER']  AND !$GLOBALS['ignore_auth_http'])) {
 		include_spip('inc/session');

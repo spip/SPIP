@@ -922,6 +922,7 @@ function traiter_raccourcis($letexte) {
 	//
 	// Notes de bas de page
 	//
+	$mes_notes = '';
 	$regexp = ', *\[\[(.*?)\]\],ms';
 	if (preg_match_all($regexp, $letexte, $matches, PREG_SET_ORDER))
 	foreach ($matches as $regs) {
@@ -1070,6 +1071,7 @@ function traiter_raccourcis($letexte) {
 	// Puce
 	if (strpos($letexte, "\n- ") !== false)
 		$puce = definir_puce();
+	else $puce = '';
 
 	// autres raccourcis
 	$cherche1 = array(

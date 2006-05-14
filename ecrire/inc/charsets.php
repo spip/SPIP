@@ -24,7 +24,7 @@ function load_charset ($charset = 'AUTO', $langue_site = 'AUTO') {
 	if ($charset == 'AUTO')
 		$charset = $GLOBALS['meta']['charset'];
 	$charset = trim(strtolower($charset));
-	if (is_array($GLOBALS['CHARSET'][$charset]))
+	if (isset($GLOBALS['CHARSET'][$charset]))
 		return $charset;
 
 	if ($langue_site == 'AUTO')
@@ -428,34 +428,33 @@ function caractere_utf_8($num) {
 }
 
 function unicode_to_utf_8($texte) {
-	$vu = array();
 
 	// 1. Entites &#128; et suivantes
+	$vu = array();
 	if (preg_match_all(',&#0*([1-9][0-9][0-9]+);,',
 	$texte, $regs, PREG_SET_ORDER))
 	foreach ($regs as $reg) {
-		if ($reg[1]>127 AND !$vu[$reg[0]]++) {
-			$s = caractere_utf_8($reg[1]);
-			$texte = str_replace($reg[0], $s, $texte);
-		}
+		if ($reg[1]>127 AND !isset($vu[$reg[0]]))
+			$vu[$reg[0]] = caractere_utf_8($reg[1]);
 	}
+	$texte = str_replace(array_keys($vu), $vu, $texte);
 
 	// 2. Entites > &#xFF;
+	$vu = array();
 	if (preg_match_all(',&#x0*([1-9a-f][0-9a-f][0-9a-f]+);,i',
 	$texte, $regs, PREG_SET_ORDER))
 	foreach ($regs as $reg) {
-		if (!$vu[$reg[0]]++) {
-			$s = caractere_utf_8(hexdec($reg[1]));
-			$texte = str_replace($reg[0], $s, $texte);
-		}
+		if (!isset($vu[$reg[0]]))
+			$vu[$reg[0]] = caractere_utf_8(hexdec($reg[1]));
 	}
+	return str_replace(array_keys($vu), $vu, $texte);
 
-	return $texte;
 }
 
 // convertit les &#264; en \u0108
 function unicode_to_javascript($texte) {
-	while (preg_match(',&#0*([0-9]+);,', $texte, $regs) AND !$vu[$regs[1]]) {
+	$vu = array();
+	while (preg_match(',&#0*([0-9]+);,', $texte, $regs) AND !isset($vu[$regs[1]])) {
 		$num = $regs[1];
 		$vu[$num] = true;
 		$s = '\u'.sprintf("%04x", $num);
