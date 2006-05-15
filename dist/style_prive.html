@@ -35,7 +35,7 @@ td {
 	width: 100%;
 	display: block;
 	padding: 3px; 
-	background: #e4e4e4; 
+	background-color: #e4e4e4; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
@@ -47,7 +47,7 @@ td {
 	width: 100%; 
 	display: block;
 	padding: 3px; 
-	background: #FFF; 
+	background-color: #FFF; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; float: none; 
 	behavior: url([(#CHEMIN{win_width.htc}|url_absolue)]);
@@ -56,20 +56,20 @@ td {
 }
 .fondl { 
 	padding: 3px; 
-	background: #e4e4e4; 
+	background-color: #e4e4e4; 
 	border: 1px solid ##ENV{couleur_claire,edf3fe}; 
 	background-position: center bottom; 
 	float: none;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 }
-.fondo { background: ##ENV{couleur_foncee,3874b0}; 
+.fondo { background-color: ##ENV{couleur_foncee,3874b0}; 
 	background-position: center bottom; float: none; color: #FFF;
  	font-size: 11px;
 	font-family: Verdana,Arial,Sans,sans-serif; 
 	font-weight: bold;
 }
-.fondf { background: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; 
+.fondf { background-color: #FFF; border-style: solid ; border-width: 1px; border-color: #e86519; color: #e86519; 
 }
 
 
@@ -84,14 +84,14 @@ select.fondl {
  */
 
 .bandeau-principal {
-	background: #FFF;
+	background-color: #FFF;
 	margin: 0;
 	padding: 0;
 	border-bottom: 1px solid black;
 }
 
 .bandeau-icones {
-	background: #FFF;
+	background-color: #FFF;
 	margin: 0;
 	padding: 0;
 	padding-bottom: 2px; 
@@ -102,7 +102,7 @@ select.fondl {
 	margin-top: 0;
 	padding: 2px;
 	padding-top: 0;
-	background: #FFF;
+	background-color: #FFF;
 	border-bottom: 1px solid black;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
@@ -135,7 +135,7 @@ select.fondl {
 	position: absolute; 
 	visibility: hidden;
 	top: 0; 
-	background: ##ENV{couleur_claire,edf3fe}; 
+	background-color: ##ENV{couleur_claire,edf3fe}; 
 	color: #000;
 	padding: 5px;
 	padding-top: 2px;
@@ -156,7 +156,7 @@ a.lien_sous:hover {
 
 
 div.bandeau_rubriques {
-	background: #eeeeee; 
+	background-color: #eeeeee; 
 	border: 1px solid #555555;
 }
 a.bandeau_rub {
@@ -173,7 +173,7 @@ a.bandeau_rub {
 	background-image: url(#EVAL{_DIR_IMG_PACK}rubrique-12.gif);
 }
 a.bandeau_rub:hover {
-	background: #FFF;
+	background-color: #FFF;
 	text-decoration: none;
 	color: #333333;
 	background-repeat: no-repeat;
@@ -183,7 +183,7 @@ div.bandeau_rub {
 	position: absolute;
 	top: 4px;
 	[(#ENV{ltr}|choixsiegal{left,left,right})]: 120px;
-	background: #eeeeee;
+	background-color: #eeeeee;
 	padding: 0;
 	border: 1px solid #555555;
 	visibility: hidden;
@@ -230,7 +230,7 @@ a.icone26:hover {
 a.icone26 img {
 	vertical-align: middle;
 	behavior: url(#URL_PAGE{win_png});
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 }
 a.icone26:hover img {
 	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
@@ -253,7 +253,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 4px;
-	background: #eeeeee;
+	background-color: #eeeeee;
 	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
 }
@@ -261,7 +261,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 4px;
-	background: #FFF;
+	background-color: #FFF;
 	border: 2px solid #666666;
 	-moz-border-radius: 5px;
 }
@@ -269,7 +269,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background: #FFF;
+	background-color: #FFF;
 	border: 2px solid #ff9999;
 	-moz-border-radius: 5px;
 }
@@ -277,7 +277,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background: #FFF;
+	background-color: #FFF;
 	border: 2px solid red;
 	-moz-border-radius: 5px;
 }
@@ -340,7 +340,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0;
 	border: 0;
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 }
 
 .cellule48 a.selection img {
@@ -348,7 +348,7 @@ a.icone26:hover img {
 	margin: 4px;
 	padding: 0;
 	border: 0;
-	background: #999999;
+	background-color: #999999;
 }
 .cellule48 a:hover img {
 	display: inline;
@@ -371,7 +371,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background: #FFF;
+	background-color: #FFF;
 	border: 1px solid #AAAAAA;
 	-moz-border-radius: 5px;
 }
@@ -379,7 +379,7 @@ a.icone26:hover img {
 	margin: 0; 
 	display: inline;
 	padding: 3px;
-	background: #e4e4e4;
+	background-color: #e4e4e4;
 	background: url(#EVAL{_DIR_IMG_PACK}fond-gris-anim.gif);
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 5px;
@@ -433,14 +433,14 @@ a.icone26:hover img {
 .cellule-texte a.selection {
 	padding: 3px; margin: 1px; 
 	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 	-moz-border-radius: 5px;
 	color: #000;
 }
 .cellule-texte a:hover {
 	padding: 3px; margin: 1px; 
 	border: 1px solid ##ENV{couleur_foncee,3874b0}; 
-	background: #FFF;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
 	color: #333333;
 }
@@ -525,7 +525,7 @@ a.cellule-h-texte {
 	margin: 3px;
 	border: 1px solid #dddddd;
 	-moz-border-radius: 5px;
-	background: #F0F0F0;
+	background-color: #f0f0f0;
 	width: 92%;
 }
 .danger a.cellule-h-texte {
@@ -539,7 +539,7 @@ a.cellule-h-texte:hover {
 	border-bottom: solid 1px white;
 	border-left: solid 1px #666666;
 	border-top: solid 1px #666666;
-	background: #eeeeee;
+	background-color: #eeeeee;
 }
 
 
@@ -550,30 +550,30 @@ a.cellule-h-texte:hover {
 
 .fondgris { cursor: pointer; padding: 4px; margin: 1px; }
 .fondgrison {
-	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background: #e4e4e4; 
+	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #e4e4e4; 
 }
 .fondgrison2 {
-	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background: #FFF;
+	cursor: pointer; padding: 3px; margin: 1px; border: 1px dashed #999999; background-color: #FFF;
 }
 .bouton36gris {
 	padding: 6px;
 	margin-top: 2px;
 	border: 1px solid #AAAAAA;
-	background: #eeeeee;
+	background-color: #eeeeee;
 	-moz-border-radius: 5px;
 }
 .bouton36blanc {
 	padding: 6px;
 	margin-top: 2px;
 	border: 1px solid #999999;
-	background: #FFF;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
 }
 .bouton36rouge {
 	padding: 6px;
 	margin-top: 2px;
 	border: 1px solid red;
-	background: #FFF;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
 }
 .bouton36off {
@@ -590,7 +590,7 @@ div.onglet {
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
-	background: #FFF;
+	background-color: #FFF;
 }
 div.onglet a {
 	color: ##ENV{couleur_foncee,3874b0};
@@ -603,7 +603,7 @@ div.onglet_on {
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 }
 div.onglet_on a, div.onglet_on a:hover {
 	color: ##ENV{couleur_foncee,3874b0};
@@ -617,7 +617,7 @@ div.onglet_off {
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 	margin-right: 3px;
 	padding: 5px;
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	color: #FFF;
 }
 
@@ -630,10 +630,10 @@ div.onglet_off {
 	 background-image: url(#EVAL{_DIR_IMG_PACK}barre-noir.gif);
 }
 .iconeoff {
-	padding: 3px; margin: 1px; border: 1px dashed #AAAAAA; background: #F0F0F0;
+	padding: 3px; margin: 1px; border: 1px dashed #AAAAAA; background-color: #f0f0f0;
 }
 .iconeon {
-	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background: #eeeeee;
+	cursor: pointer; padding: 3px; margin: 1px;  border-right: solid 1px white; border-bottom: solid 1px white; border-left: solid 1px #666666; border-top: solid 1px #666666; background-color: #eeeeee;
 }
 .iconedanger { padding: 3px; margin: 1px; border: 1px dashed black;
 	background: url(#EVAL{_DIR_IMG_PACK}rayures-sup.gif);
@@ -789,11 +789,11 @@ table.spip_barre td {
 a.spip_barre img {
 	padding: 3px;
 	margin: 0;
-	background: #eeeeee;
+	background-color: #eeeeee;
 	border-[(#ENV{ltr}|choixsiegal{left,right,left})]: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 a.spip_barre:hover img {
-	background: #FFF;
+	background-color: #FFF;
 }
 
 td.icone table {
@@ -815,7 +815,7 @@ td.icone a img {
 a.bouton_rotation img, div.bouton_rotation img {
 	padding: 1px;
 	margin-bottom: 1px;
-	background: #eeeeee;
+	background-color: #eeeeee;
 	border: 1px solid ##ENV{couleur_claire,edf3fe};
 }
 
@@ -843,7 +843,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-fonce {
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 
@@ -854,24 +854,24 @@ a.bouton_rotation:hover img {
 
 .cadre-gris-clair {
 	border: 1px solid #AAAAAA;
-	background: #CCCCCC;
+	background-color: #CCCCCC;
 	-moz-border-radius: 8px;
 }
 
 .cadre-couleur {
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 	-moz-border-radius: 8px;
 }
 .cadre-couleur div.cadre-titre {
 	-moz-border-radius-topleft: 8px;
 	-moz-border-radius-topright: 8px;
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
 	color: #FFF;	
 }
 
 .cadre-couleur-foncee {
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 .cadre-couleur-foncee div.cadre-titre {
@@ -881,31 +881,31 @@ a.bouton_rotation:hover img {
 
 
 .cadre-trait-couleur {
-	background: #FFF;
+	background-color: #FFF;
 	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	-moz-border-radius: 8px;
 }
 .cadre-trait-couleur div.cadre-titre {
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	border-bottom: 2px solid ##ENV{couleur_foncee,3874b0};
 	color: #FFF;	
 }
 
 .cadre-r {
-	background: #FFF;
+	background-color: #FFF;
 	border: 1px solid #666666;
 	-moz-border-radius: 8px;
 }
 
 
 .cadre-r div.cadre-titre {
-	background: #AAAAAA;
+	background-color: #AAAAAA;
 	border-bottom: 1px solid #666666;
 	color: #000;	
 }
 
 .cadre-e {
-	background: #dddddd;
+	background-color: #dddddd;
 	border-top: 1px solid #AAAAAA;
 	border-left: 1px solid #AAAAAA;
 	border-bottom: 1px solid white;
@@ -914,7 +914,7 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-e div.cadre-titre {
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 	border-bottom: 1px solid #666666;
 	color: #000;	
 }
@@ -925,18 +925,18 @@ a.bouton_rotation:hover img {
 }
 
 .cadre-forum {
-	background: #FFF;
+	background-color: #FFF;
 	border: 1px solid #AAAAAA;
 	-moz-border-radius-top[(#ENV{ltr}|choixsiegal{left,left,right})]: 8px;
 }
 .cadre-forum div.cadre-titre {
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 	border-bottom: 1px solid #AAAAAA;
 	color: #000;	
 }
 
 .cadre-sous_rub {
-	background: #FFF;
+	background-color: #FFF;
 	border: 1px solid #666666;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
@@ -945,17 +945,17 @@ a.bouton_rotation:hover img {
 
 
 .cadre-thread-forum {
-	background: #eeeeee;
+	background-color: #eeeeee;
 	border: 1px solid #CCCCCC;
 	border-top: 0;
 }
 .cadre-thread-forum div.cadre-titre {
-	background: #CCCCCC;
+	background-color: #CCCCCC;
 	color: #000;	
 }
 
 .cadre-info{
-	background: #FFF;
+	background-color: #FFF;
 	border: 2px solid ##ENV{couleur_foncee,3874b0};
 	padding: 5px;
 	-moz-border-radius: 8px;
@@ -964,7 +964,7 @@ a.bouton_rotation:hover img {
 
 .cadre-formulaire {
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
-	background: #dddddd;
+	background-color: #dddddd;
 	padding: 5px;
 	color: #444444;
 	font-family: verdana, arial, helvetica, sans;
@@ -999,13 +999,13 @@ a.bouton_rotation:hover img {
 	padding-[(#ENV{ltr}|choixsiegal{left,left,right})]: 18px;
 	border-bottom: 1px solid #CCCCCC;
 	 background: [(#ENV{ltr}|choixsiegal{left,1,99})%] no-repeat;
-	background: #e0e0e0;
+	background-color: #e0e0e0;
 	font-family: Verdana, Arial, Sans, sans-serif;
 	font-size: 11px;
 	text-decoration: none;
 }
 .plan-articles a:hover {
-	background: #FFF; 
+	background-color: #FFF; 
 	text-decoration: none;
 }
 .plan-articles .publie {
@@ -1039,24 +1039,24 @@ a.foncee, a.foncee:hover, a.claire, a.claire:hover, span.creer, span.lang_base {
 
 }
 a.foncee, a.foncee:hover {
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	color: #FFF;
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 a.claire, a.claire:hover {
-	background: ##ENV{couleur_claire,edf3fe};
+	background-color: ##ENV{couleur_claire,edf3fe};
 	color: ##ENV{couleur_foncee,3874b0};
 	border: 1px solid ##ENV{couleur_foncee,3874b0};
 }
 span.lang_base {
 	color: #666666;
 	border: 1px solid #666666;
-	background: #eeeeee;
+	background-color: #eeeeee;
 }
 span.creer {
 	color: #333333;
 	border: 1px solid #333333;
-	background: #FFF;
+	background-color: #FFF;
 }
 .trad_float {
 	float: [(#ENV{ltr}|choixsiegal{left,right,left})];
@@ -1076,10 +1076,10 @@ a.liste-mot {
 }
 
 .tr_liste {
-	background: #eeeeee;
+	background-color: #eeeeee;
 }
 .tr_liste_over, .tr_liste:hover {
-	background: #FFF;
+	background-color: #FFF;
 }
 
 .tr_liste td, .tr_liste:hover td, .tr_liste_over td {
@@ -1116,8 +1116,7 @@ div.puce_article_popup, div.puce_breve_popup {
 	visibility: hidden;
 	margin-top: -1px; top: 0; 
 	border: 1px solid #666666; 
-	background: 
-	#CCCCCC; z-index: 10; 
+	background-color: #CCCCCC; z-index: 10; 
 	-moz-border-radius: 3px;
 }
 div.puce_article_popup img, div.puce_breve_popup img {
@@ -1143,7 +1142,7 @@ div.brouteur_rubrique {
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
 	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif)[(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
-	background: #FFF;
+	background-color: #FFF;
 }
 
 div.brouteur_rubrique_on {
@@ -1155,11 +1154,11 @@ div.brouteur_rubrique_on {
 	border-left: 1px solid ##ENV{couleur_foncee,3874b0};
 	border-right: 1px solid ##ENV{couleur_foncee,3874b0};
 	background: url(#EVAL{_DIR_IMG_PACK}triangle-droite[(#ENV{ltr}|choixsiegal{left,'',_rtl})].gif) [(#ENV{ltr}|choixsiegal{left,right,left})] center no-repeat;
-	background: #e0e0e0;
+	background-color: #e0e0e0;
 }
 
 xdiv.brouteur_rubrique:hover {
-	background: #e0e0e0;
+	background-color: #e0e0e0;
 }
 
 div.brouteur_rubrique div, div.brouteur_rubrique_on div  {
@@ -1182,7 +1181,7 @@ div.brouteur_rubrique_on div a {
 }
 
 .iframe-bouteur {
-	background: #eeeeee; 
+	background-color: #eeeeee; 
 	border: 0;
 	z-index: 1;
 }
@@ -1213,7 +1212,7 @@ a.spip_out {
 }
 
 a.spip_note {
-	background:#eeeeee;
+	background-color: #eeeeee;
 }
 a.spip_glossaire:hover {
 	text-decoration: underline overline;
@@ -1224,12 +1223,12 @@ a.spip_glossaire:hover {
 	width: 100%; 
 	font-size: 10px;
 	border: 1px solid white;
-	background: ##ENV{couleur_foncee,3874b0};
+	background-color: ##ENV{couleur_foncee,3874b0};
 	color: #FFF;
 }
 .spip_cadre {
 	width: 100%;
-	background: #eeeeee;
+	background-color: #eeeeee;
 	margin-top: 10px;
 	padding: 5px;
 	border: 1px solid #666666;
@@ -1241,7 +1240,7 @@ blockquote.spip {
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border: solid 1px #AAAAAA;
-	background: #FFF;
+	background-color: #FFF;
 	padding-left: 10px;
 	padding-right: 10px;
 }
@@ -1298,7 +1297,7 @@ a.triangle_block:hover {
 
  div.highlight {
   	color: #000;
- 	background: ##ENV{couleur_claire,edf3fe};
+ 	background-color: ##ENV{couleur_claire,edf3fe};
  }
   div.highlight, div.pashighlight {
   	color: #666666;

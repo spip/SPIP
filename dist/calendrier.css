@@ -26,7 +26,7 @@
 
 div.navigation-calendrier {
 	color: #FFF;
-	background: #CCCCCC;
+	background-color: #CCCCCC;
 	font-family: verdana, arial, sans,sans-serif;
 	font-weight: bold;
 	font-size: 14px;
@@ -51,7 +51,7 @@ a.calendrier-annee {
 
 a.calendrier-annee:hover {
 	color: #000;
-	background: #FFF;
+	background-color: #FFF;
 }
 
 .calendrier-table-large { 
@@ -113,7 +113,7 @@ a.calendrier-annee:hover {
 .calendrier-jour {
 	position: relative; 
 	color: #999999;
-	background: #FFF;
+	background-color: #FFF;
 	border: 1px solid #AAAAAA;
 }
 
@@ -122,7 +122,7 @@ a.calendrier-annee:hover {
 	margin-top: 1px;
 	padding: 1px;
 	text-align: center; 
-	background: #FFF;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
  }
 
@@ -131,7 +131,7 @@ a.calendrier-annee:hover {
 	margin-top: 0;
 	padding: 0;
 	text-align: center; 
-	background: #FFF;
+	background-color: #FFF;
 	-moz-border-radius: 5px;
  }
 
@@ -148,7 +148,7 @@ a.calendrier-annee:hover {
 	padding-top: 5px;
 	padding-bottom: 5px;
 	border: 0;
-	background: #FFF;
+	background-color: #FFF;
 	-moz-border-radius-bottomleft: 8px;
 	-moz-border-radius-bottomright: 8px;
  }
@@ -233,7 +233,7 @@ a.calendrier-annee:hover {
 }
 
 .calendrier-nb  { 		/*  style cinemat(yp)ographe */
-	background: #FFF;
+	background-color: #FFF;
 	border: 1px solid black;
 	color: #000;
 }
