@@ -70,7 +70,7 @@ function _generer_url_propre($type, $id_objet) {
 	// 1) il n'existe pas, ou
 	// 2) l'objet n'est pas 'publie' et on est admin connecte, ou
 	// 3) on le demande explicitement (preview) et on est admin connecte
-	if (function_exists('spip_action_redirect_dist') AND
+	if (function_exists('action_redirect_dist') AND
 	($GLOBALS['preview'] OR ($row['statut'] <> 'publie'))
 	AND $GLOBALS['auteur_session']['statut'] == '0minirezo')
 		$modif_url_propre = true;
