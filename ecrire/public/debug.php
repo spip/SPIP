@@ -172,7 +172,7 @@ function debug_sequence($id, $nom, $niv, $sequence) {
 	    $debug_objets['sequence'][$nom.$id] = $sequence;
 	  }
 	$res = "";
-	foreach($sequence as $v) $res .= $v[2];
+	foreach($sequence as $v) if (is_array($v)) $res .= $v[2];
 	return $res;	
 }
 

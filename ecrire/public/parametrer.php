@@ -66,7 +66,7 @@ function signaler_squelette($contexte)
 	foreach(array('id_parent', 'id_rubrique', 'id_article', 'id_auteur',
 	'id_breve', 'id_forum', 'id_secteur', 'id_syndic', 'id_syndic_article',
 	'id_mot', 'id_groupe', 'id_document') as $val) {
-		if ($contexte[$val])
+		if (isset($contexte[$val]))
 			$signal['contexte'][$val] = intval($contexte[$val]);
 	}
 
@@ -297,10 +297,13 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 	// Chercher le fond qui va servir de squelette
 	if ($r = sql_rubrique_fond($local))
 		list($id_rubrique_fond, $lang) = $r;
+
+	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
+	if (isset($local['lang']))
+		$lang = $local['lang'];
+
 	if (!$lang)
 		$lang = $GLOBALS['meta']['langue_site'];
-	// Si inc-urls ou un appel dynamique veut fixer la langue, la recuperer
-	$lang = $local['lang'];
 
 	if (!$GLOBALS['forcer_lang'])
 		lang_select($lang);
@@ -330,7 +333,7 @@ function public_parametrer_dist($fond, $local='', $cache='')  {
 		include_spip('public/debug');
 		debug_dumpfile ($page['texte'], $fonc, 'resultat');
 	}
-	if (!is_array($signal)) $page['signal'] = signaler_squelette($local);
+	$page['signal'] = signaler_squelette($local);
 	return $page;
 }
 ?>

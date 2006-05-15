@@ -22,6 +22,7 @@ function generer_nom_fichier_cache($contexte) {
 	if ($contexte === NULL) {
 		$fichier_requete = nettoyer_uri();
 	} else {
+		$fichier_requete = '';
 		foreach ($contexte as $var=>$val)
 			$fichier_requete .= "&$var=$val";
 	}
@@ -48,7 +49,7 @@ function generer_nom_fichier_cache($contexte) {
 		. $_SERVER['HTTP_HOST'] . ' '
 		. $GLOBALS['fond'] . ' '
 		. $GLOBALS['dossier_squelettes'] . ' '
-		. $GLOBALS['marqueur']
+		. (isset($GLOBALS['marqueur']) ?  $GLOBALS['marqueur'] : '')
 	);
 	$fichier_cache .= '.'.substr($md_cache, 1, 8);
 
@@ -154,7 +155,8 @@ function cache_valide_autodetermine($chemin_cache, $page, $date) {
 
 	if (!$page) return 1;
 
-	if (strlen($duree = $page['entetes']['X-Spip-Cache'])) {
+	if (isset($page['entetes']['X-Spip-Cache'])) {
+		$duree = $page['entetes']['X-Spip-Cache'];
 		if ($duree == 0)  #CACHE{0}
 			return -1;
 		else if ($date + intval($duree) < time())
@@ -217,10 +219,9 @@ function restaurer_meta_donnees ($contenu) {
 				$page[$var] = $val;
 			}
 		}
+		$page['texte'] = substr($contenu, strlen($match[0]));
+	} else	$page['texte'] = $contenu;
 
-	}
-
-	$page['texte'] = substr($contenu, strlen($match[0]));
 	return $page;
 }
 
@@ -276,7 +277,7 @@ function public_cacher_dist($contexte, &$use_cache, &$chemin_cache, &$page, &$la
 	}
 
 	// Faut-il effacer des pages invalidees (en particulier ce cache-ci) ?
-	if ($GLOBALS['meta']['invalider']) {
+	if (isset($GLOBALS['meta']['invalider'])) {
 		// tester si la base est dispo
 		spip_connect();
 		if ($GLOBALS['db_ok']) {

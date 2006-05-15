@@ -24,15 +24,15 @@ function public_assembler_dist($fond) {
 		include_spip('inc/lang');
 		verifier_lang_url();
 	}
-	if ($_GET['lang']) {
+	if (isset($_GET['lang'])) {
 		include_spip('inc/lang');
 		lang_select($_GET['lang']);
 	}
 
 	// Si envoi pour un forum, enregistrer puis rediriger
 
-	if (strlen($_POST['confirmer_forum']) > 0
-	    OR ($GLOBALS['afficher_texte']=='non' AND $_POST['ajouter_mot'])) {
+	if (isset($_POST['confirmer_forum'])
+	OR (isset($_POST['ajouter_mot']) AND $GLOBALS['afficher_texte']=='non')) {
 		$f = charger_fonction('forum_insert', 'inc');
 		redirige_par_entete($f());
 	}
@@ -40,7 +40,7 @@ function public_assembler_dist($fond) {
 	// si signature de petition, l'enregistrer avant d'afficher la page
 	// afin que celle-ci contienne la signature
 
-	if ($_GET['var_confirm']) {
+	if (isset($_GET['var_confirm'])) {
 		include_spip('balise/formulaire_signature');
 		reponse_confirmation($_GET['id_article'], $var_confirm);
 	}
@@ -106,14 +106,14 @@ function assembler_page ($fond) {
 
 	// une perennite valide a meme reponse qu'une requete HEAD
 
-	if ($GLOBALS['HTTP_IF_MODIFIED_SINCE'] AND !$var_mode
+	if (isset($GLOBALS['HTTP_IF_MODIFIED_SINCE']) AND !$var_mode
 	AND $chemin_cache AND !$flag_dynamique) {
 		if (!preg_match(',IIS/,', $_SERVER['SERVER_SOFTWARE'])) {
 			$since = preg_replace('/;.*/', '',
 				$GLOBALS['HTTP_IF_MODIFIED_SINCE']);
 			$since = str_replace('GMT', '', $since);
 			if (trim($since) == http_gmoddate($lastmodified)) {
-				$status = 304;
+				$page['status'] = $status;
 				$headers_only = true;
 			}
 		}
@@ -154,7 +154,7 @@ function assembler_page ($fond) {
 				if (trim($page['texte']) === ''
 				    AND $var_mode != 'debug') {
 					$page = message_erreur_404();
-					$status = 404;
+					$page['status'] = $status;
 					$flag_dynamique = true;
 				}
 	// pas de cache client en mode 'observation (ou si deja indique)
@@ -168,8 +168,7 @@ function assembler_page ($fond) {
 
 	if ($lastmodified)
 		$page['entetes']["Last-Modified"]=http_gmoddate($lastmodified)." GMT";
-	if ($status)
-		$page['status'] = $status;
+		
 
 	return $page;
 }
@@ -213,7 +212,7 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		include_spip('inc/lang');
 		lang_select($lang);
 		$lang_select = true; // pour lang_dselect en sortie
-	}
+	} else $lang_select = false;
 
 	// Une fois le chemin-cache decide, on ajoute la date (et date_redac)
 	// dans le contexte inclus, pour que les criteres {age} etc fonctionnent
@@ -232,7 +231,6 @@ function inclure_page($fond, $contexte_inclus, $cache_incluant='') {
 		if ($chemin_cache) 
 			$fcache($contexte_inclus, $use_cache, $chemin_cache, $page, $lastmodified);
 	}
-
 	$page['lang_select'] = $lang_select;
 
 	return $page;
@@ -250,7 +248,7 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 
 		list($fond, $delainc, $contexte_inclus) = $texte;
 
-		if ((!$contexte_inclus['lang']) AND
+		if ((!isset($contexte_inclus['lang'])) AND
 		($GLOBALS['spip_lang'] != $GLOBALS['meta']['langue_site']))
 			$contexte_inclus['lang'] = $GLOBALS['spip_lang'];
 
@@ -258,7 +256,6 @@ function inclure_balise_dynamique($texte, $echo=true, $ligne=0) {
 		$GLOBALS['delais'] = $delainc;
 		$page = inclure_page($fond, $contexte_inclus);
 		$GLOBALS['delais'] = $d;
-
 		if (is_array($page['entetes']))
 			foreach($page['entetes'] as $k => $v) {
 			  // ceci se discute

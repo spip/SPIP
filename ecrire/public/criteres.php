@@ -862,7 +862,7 @@ function calculer_critere_infixe_ops($idb, &$boucles, $crit)
 	    }
 	}
 
-	$fct = $args = '';
+	$fct = $args_sql = '';
 	// fonction SQL ?
 	if (preg_match('/^(.*)' . SQL_ARGS . '$/', $col, $m)) {
 	  $fct = $m[1];

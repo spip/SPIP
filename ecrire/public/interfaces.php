@@ -41,7 +41,7 @@ class Boucle {
 	var $avant, $milieu, $apres, $altern;
 	var $lang_select;
 	var $type_requete;
-	var $sql_serveur;
+	var $sql_serveur = '';
 	var $param = array();
 	var $criteres = array();
 	var $separateur = array();

@@ -33,7 +33,7 @@ function affiche_boutons_admin($contenu) {
 		$split = explode($regs[0], $contenu, 2);
 		$contenu = $split[0];
 		$suite = $regs[0].$split[1];
-	}
+	} else $suite ='';
 
 	//
 	// Regler les boutons dans la langue de l'admin (sinon tant pis)

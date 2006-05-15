@@ -69,6 +69,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	}
 
 	// Bouton statistiques
+	$visites = $popularite = $statistiques = '';
 	if ($GLOBALS['meta']["activer_statistiques"] != "non" 
 	AND $id_article
 	AND !$var_preview) {
@@ -109,7 +110,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 	// Pas de "modifier ce..." ? -> donner "acces a l'espace prive"
 	if (!($id_article || $id_rubrique || $id_auteur || $id_breve || $id_mot || $id_syndic))
 		$ecrire = _DIR_RESTREINT_ABS;
-
+	else $ecrire = '';
 	// Bouton "preview" si l'objet demande existe et est previsualisable
 	$preview = false;
 
@@ -146,7 +147,7 @@ function balise_FORMULAIRE_ADMIN_dyn($float='', $debug='') {
 			'action' => self(),
 			'preview' => $preview?parametre_url(self(),'var_mode','preview','&'):'',
 			'debug' => $debug,
-			'popularite' => ceil($popularite),
+			'popularite' => ($popularite),
 			'statistiques' => $statistiques,
 			'visites' => $visites,
 			'use_cache' => ($use_cache ? '' : ' *'),
