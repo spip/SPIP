@@ -151,9 +151,8 @@ if (strval($nom)!='') {
 	if ($champs_extra) {
 		include_spip('inc/extra');
 		$extra = extra_recup_saisie("auteurs");
-		$add_extra = ", extra = '".addslashes($extra)."'";
 	} else
-		$add_extra = '';
+		$extra = '';
 
 	// l'entrer dans la base
 	if (!$echec) {
@@ -164,7 +163,7 @@ if (strval($nom)!='') {
 				spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($id_auteur, $ajouter_id_article)");
 		}
 
-		$n = spip_query("UPDATE spip_auteurs SET $query_pass		nom='".addslashes($auteur['nom'])."',						login='".addslashes($auteur['login'])."',					bio='".addslashes($auteur['bio'])."',						email='".addslashes($auteur['email'])."',					nom_site='".addslashes($auteur['nom_site'])."',				url_site='".addslashes($auteur['url_site'])."',				pgp='".addslashes($auteur['pgp'])."'						$add_extra WHERE id_auteur=".$auteur['id_auteur']);
+		$n = spip_query("UPDATE spip_auteurs SET $query_pass		nom='".addslashes($auteur['nom'])."',						login='".addslashes($auteur['login'])."',					bio='".addslashes($auteur['bio'])."',						email='".addslashes($auteur['email'])."',					nom_site='".addslashes($auteur['nom_site'])."',				url_site='".addslashes($auteur['url_site'])."',				pgp='".addslashes($auteur['pgp'])."'" .					(!$extra ? '' : (", extra = '".addslashes($extra)."'")) .			" WHERE id_auteur=".$auteur['id_auteur']);
 		if (!$n) die('UPDATE');
 	}
  }
@@ -194,7 +193,7 @@ exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_
 
 function exec_affiche_auteur_info_dist($id_auteur, $auteur,  $echec, $redirect, $ajouter_id_article, $onfocus)
 {
-  global $connect_id_auteur, $extra;
+  global $connect_id_auteur;
 
   if ($connect_id_auteur == $id_auteur)
 	debut_page($auteur['nom'], "auteurs", "perso");

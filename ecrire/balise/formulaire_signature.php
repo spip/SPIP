@@ -133,8 +133,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 				}
 	
 				if ($email_unique == "oui") {
-					$email = addslashes($adresse_email);
-					$result = spip_abstract_select('ad_email', 'spip_signatures', "id_article=$id_article AND ad_email='$email' AND statut='publie'");
+					$result = spip_abstract_select('ad_email', 'spip_signatures', "id_article=$id_article AND ad_email='" . addslashes($adresse_email) . "' AND statut='publie'");
 					if (spip_num_rows($result) > 0) {
 						$confirm= (_T('form_pet_deja_signe'));
 						$refus = "oui";
@@ -142,8 +141,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 				}
 	
 				if ($site_unique == "oui") {
-					$site = addslashes($url_site);
-					$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site='$site' AND statut='publie'");
+					$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site='" . addslashes($url_site) . "' AND statut='publie'");
 					if (spip_num_rows($result) > 0) {
 						$confirm= (_T('form_pet_deja_enregistre'));
 						$refus = "oui";
@@ -210,8 +208,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 		$texte = _T('form_email_non_valide');
 	else {
 		if ($email_unique == "oui") {
-			$email = addslashes($adresse_email);
-			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND ad_email='$email' AND statut='publie'");
+			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND ad_email='" . addslashes($adresse_email) . "' AND statut='publie'");
 			if (spip_num_rows($result) > 0) 
 				$texte = _T('form_pet_deja_signe');
 		}
@@ -225,8 +222,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 			$texte = _T('form_pet_url_invalide');
 		}
 		if (!$texte AND $site_unique == "oui") {
-			$site = addslashes($url_site);
-			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site='$site' AND (statut='publie' OR statut='poubelle')");
+			$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site='" . addslashes($url_site) . "' AND (statut='publie' OR statut='poubelle')");
 			if (spip_num_rows($result) > 0) {
 				$texte = _T('form_pet_site_deja_enregistre');
 			}
@@ -241,13 +237,7 @@ function reponse_signature($id_article, $nom_email, $adresse_email, $message, $n
 		$messagex = _T('form_pet_mail_confirmation', array('titre' => $titre, 'nom_email' => $nom_email, 'nom_site' => $nom_site, 'url_site' => $url_site, 'url' => $url, 'message' => $message));
 
 		if (envoyer_mail($adresse_email, _T('form_pet_confirmation')." ".$titre, $messagex)) {
-			$nom_email = addslashes($nom_email);
-			$adresse_email = addslashes($adresse_email);
-			$nom_site = addslashes($nom_site);
-			$url_site = addslashes($url_site);
-			$message = addslashes($message);
-
-			spip_abstract_insert('spip_signatures', "(id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut)", "($id_article, NOW(), '$nom_email', '$adresse_email', '$nom_site', '$url_site', '$message', '$passw')");
+			spip_abstract_insert('spip_signatures', "(id_article, date_time, nom_email, ad_email, nom_site, url_site, message, statut)", "($id_article, NOW(), '" . addslashes($nom_email) . "', '" . addslashes($adresse_email) . "', '" . addslashes($nom_site) . "', '" . addslashes($url_site) . "', '" . addslashes($message) ."', '$passw')");
 			$texte = _T('form_pet_envoi_mail_confirmation');
 		}
 		else {

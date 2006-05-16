@@ -51,14 +51,8 @@ function balise_FORMULAIRE_SITE_dyn($id_rubrique) {
 		return _T('form_pet_url_invalide');
 
 	// Integrer a la base de donnees
-	$id_rubrique = intval($id_rubrique);
-	$nom_site = addslashes(_request('nom_site'));
-	$url_site = addslashes(_request('url_site'));
-	$description_site = addslashes(_request('description_site'));
 
-	spip_abstract_insert('spip_syndic',
-		"(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)",
-		"('$nom_site', '$url_site', $id_rubrique, '$description_site', NOW(), NOW(), 'prop', 'non')");
+	spip_abstract_insert('spip_syndic', "(nom_site, url_site, id_rubrique, descriptif, date, date_syndic, statut, syndication)", "('" . addslashes(_request('nom_site')) . "', '" . addslashes(_request('url_site')). "', " . intval($id_rubrique) .", '" . addslashes(_request('description_site')) . "', NOW(), NOW(), 'prop', 'non')");
 
 	return  _T('form_prop_enregistre');
 }
