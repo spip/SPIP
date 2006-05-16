@@ -138,8 +138,8 @@ function check_upload_error($error, $msg='') {
 function accepte_fichier_upload ($f) {
 	if (!ereg(".*__MACOSX/", $f)
 	AND !ereg("^\.", basename($f))) {
-		$ext = corriger_extension(addslashes(strtolower(substr(strrchr($f, "."), 1))));
-		$row =  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='$ext' AND upload='oui'"));
+		$ext = corriger_extension((strtolower(substr(strrchr($f, "."), 1))));
+		$row =  @spip_fetch_array(spip_query("SELECT extension FROM spip_types_documents WHERE extension='" . addslashes($ext) . "' AND upload='oui'"));
 		return $row;
 	}
 }
@@ -222,10 +222,10 @@ function ajouter_un_document ($source, $nom_envoye, $type_lien, $id_lien, $mode,
 		// - quel numero dans spip_types_documents ?  =-(
 		// - est-ce "inclus" comme une image ?
 		ereg("\.([^.]+)$", $nom_envoye, $match);
-		$ext = addslashes(corriger_extension(strtolower($match[1])));
+		$ext = (corriger_extension(strtolower($match[1])));
 
 		// Si le fichier est de type inconnu, on va le stocker en .zip
-		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension='$ext' AND upload='oui'");
+		$q = spip_query("SELECT * FROM spip_types_documents WHERE extension='" . addslashes($ext) . "' AND upload='oui'");
 		if (!$row = spip_fetch_array($q)) {
 
 /* STOCKER LES DOCUMENTS INCONNUS AU FORMAT .BIN */

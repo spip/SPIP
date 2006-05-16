@@ -54,18 +54,7 @@ if ($valider_forum AND ($statut!='')) {
 	$titre_message = corriger_caracteres($titre_message);
 	$texte = corriger_caracteres($texte);
 
-	spip_abstract_insert('spip_forum',
-		"(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,	id_message, id_syndic)",
-		"('".addslashes($titre_message)."',
-	'".addslashes($texte)."', NOW(),
-	'".addslashes($nom_site)."',
-	'".addslashes($url_site)."',
-	'".addslashes($statut)."',
-	$connect_id_auteur,
-	'".addslashes($GLOBALS['auteur_session']['nom'])."',
-	'".addslashes($GLOBALS['auteur_session']['email'])."',
-	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',
-	'$id_message', '$id_syndic')");
+	spip_abstract_insert('spip_forum', "(titre, texte, date_heure, nom_site, url_site, statut, id_auteur,	auteur, email_auteur, id_rubrique, id_parent, id_article, id_breve,	id_message, id_syndic)", "('".addslashes($titre_message)."', '".addslashes($texte)."', NOW(), '".addslashes($nom_site)."', '".addslashes($url_site)."', '".addslashes($statut)."', $connect_id_auteur, '".addslashes($GLOBALS['auteur_session']['nom'])."', '".addslashes($GLOBALS['auteur_session']['email'])."',	'$id_rubrique', '$id_parent', '$id_article', '$id_breve',	'$id_message', '$id_syndic')");
 
 	calculer_threads();
 
@@ -143,12 +132,12 @@ if ($modif_forum == "oui") {
 
 	fin_cadre_thread_forum();
 	if ($titre_parent) {
-		echo "</td></tr><tr>";
-		echo "<td width=10 valign='top' background='" . _DIR_IMG_PACK . "rien.gif'>",
-		  http_img_pack("forum-droite$spip_lang_rtl.gif",
-				addslashes($titre_parent),
-				"width='10' height='13' border='0'"), "</td>\n";
-		echo "</tr></table>";
+		echo "</td></tr><tr>",
+		  "<td width=10 valign='top' background='",
+		  _DIR_IMG_PACK ,
+		  "rien.gif'>",
+		  http_img_pack("forum-droite$spip_lang_rtl.gif", $titre_parent, "width='10' height='13' border='0'"),
+		  "</td>\n</tr></table>";
 	}
 }
 else {

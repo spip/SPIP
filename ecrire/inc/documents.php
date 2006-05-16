@@ -1346,9 +1346,9 @@ function maj_documents ($id_objet, $type) {
 		// "securite" : verifier que le document est bien lie a l'objet
 		$result_doc = spip_query("SELECT * FROM spip_documents_".$type."s WHERE id_document=".$id_document."	AND id_".$type." = $id_objet");
 		if (spip_num_rows($result_doc) > 0) {
-			$titre_document = addslashes(corriger_caracteres(
+			$titre_document = (corriger_caracteres(
 				$_POST['titre_document']));
-			$descriptif_document = addslashes(corriger_caracteres(
+			$descriptif_document = (corriger_caracteres(
 				$_POST['descriptif_document']));
 
 			// taille du document (cas des embed)
@@ -1358,7 +1358,7 @@ function maj_documents ($id_objet, $type) {
 					hauteur='$hauteur_document'";
 			else $wh = "";
 
-			spip_query("UPDATE spip_documents SET titre='$titre_document', descriptif='$descriptif_document' $wh WHERE id_document=".$id_document);
+			spip_query("UPDATE spip_documents SET titre='" . addslashes($titre_document) . "', descriptif='" . addslashes($descriptif_document) . "' $wh WHERE id_document=".$id_document);
 
 			// Date du document (uniquement dans les rubriques)
 			if ($_POST['jour_doc']) {

@@ -168,7 +168,7 @@ function http_href($href, $clic, $title='', $style='', $class='', $evt='') {
 function http_img_pack($img, $alt, $att, $title='') {
 	return "<img src='" . _DIR_IMG_PACK . $img
 	  . ("'\nalt=\"" .
-	     ($alt ? $alt : ($title ? $title : ereg_replace('\..*$','',$img)))
+	     ($alt ? str_replace('"','',$alt) : ($title ? $title : ereg_replace('\..*$','',$img)))
 	     . '" ')
 	  . ($title ? " title=\"$title\"" : '')
 	  . $att . " />";
