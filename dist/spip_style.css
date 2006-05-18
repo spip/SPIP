@@ -12,7 +12,9 @@ em.spip {}
 hr.spip {}
 
 .spip_puce { list-style-position: outside; border: 0; }
-li.spip { margin-left: 0.8em; list-style: square; list-style-position: outside; }
+li.spip { margin-left: 0.8em; list-style-position: outside; }
+ul.spip li.spip { list-style: square; }
+ol.spip li.spip { list-style: decimal; }
 
 h3.spip {
     clear: both;
@@ -61,7 +63,7 @@ table.spip caption {
 	font-weight: bold; }
 	
 table.spip tr.row_first { background: #F8F8E8; text-align: center; }
-table.spip tr.row_odd { background: #f0f0f0; }
+table.spip tr.row_odd { background: #F0F0F0; }
 table.spip tr.row_even { background: #FAFAFA; }
 table.spip td { padding: 3px; text-align: left; vertical-align: middle; }
 
