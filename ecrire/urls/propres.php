@@ -211,7 +211,7 @@ function recuperer_parametres_url(&$fond, $url) {
 
 	/* Compatibilite urls-page */
 	else if (preg_match(
-	',[?/&](article|breve|rubrique|mot|auteur|site)[=]([0-9]+),',
+	',[?/&](article|breve|rubrique|mot|auteur|site)[=]?([0-9]+),',
 	$url, $regs)) {
 		$type = $regs[1];
 		$id_objet = $regs[2];
