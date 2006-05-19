@@ -83,7 +83,8 @@ if (defined('_INC_PUBLIC')) {
 		http_status($page['status']);
 	}
 
-	$html = preg_match(',^\s*text/html,',$page['entetes']['Content-Type']);
+	$html = $page['entetes'];
+	$html = (!isset($html['Content-Type']) ? '' : preg_match(',^\s*text/html,',$html['Content-Type']));
 
 	if ($var_preview AND $html) {
 		include_spip('inc/minipres');
@@ -92,7 +93,7 @@ if (defined('_INC_PUBLIC')) {
 
 	// est-on admin ?
 	if ($affiche_boutons_admin = (
-	$_COOKIE['spip_admin'] 
+	isset($_COOKIE['spip_admin']) 
 	AND !$flag_preserver
 	AND ($html OR ($var_mode == 'debug') OR count($tableau_des_erreurs))
 	))

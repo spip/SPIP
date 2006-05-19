@@ -313,14 +313,14 @@ function champs_traitements ($p) {
 	// une fonction de remplissage du tableau des doublons -- mais seulement
 	// si on rencontre le filtre propre (qui traite les
 	// raccourcis <docXX> qui nous interessent)
-	if ($p->descr['documents']
+	if (isset($p->descr['documents'])
 	AND preg_match(',propre,', $ps))
 		$ps = 'traiter_doublons_documents($doublons, '.$ps.')';
 
 	// De meme, en cas de sql_serveur, on supprime les < IMGnnn > tant
 	// qu'on ne rapatrie pas les documents distants joints..
 	// il faudrait aussi corriger les raccourcis d'URL locales
-	if ($p->boucles[$p->id_boucle]->sql_serveur)
+	if ($p->id_boucle  AND $p->boucles[$p->id_boucle]->sql_serveur)
 		$p->code = 'supprime_img(' . $p->code . ')';
 
 

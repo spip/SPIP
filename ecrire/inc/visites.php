@@ -110,7 +110,6 @@ function calculer_visites($t) {
 		}
 		$tous = calcul_mysql_in('id_article', join(',', $tous));
 		$sum = '';
-		$in = array();
 		foreach ($ar as $num => $liste)
 			$sum .= ' + '.$num.'*'
 				. calcul_mysql_in('id_article', join(',',$liste));

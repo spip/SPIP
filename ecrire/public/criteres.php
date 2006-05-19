@@ -266,8 +266,8 @@ function critere_parinverse($idb, &$boucles, $crit, $sens) {
 			$boucle->plat = true;
 		}
 	// par titre_mot ou type_mot voire d'autres
-		else if ($m = ($exceptions_des_jointures[$par])) {
-		  $order = critere_par_jointure($boucle, $m);
+		else if (isset($exceptions_des_jointures[$par])) {
+			$order = critere_par_jointure($boucle, $exceptions_des_jointures[$par]);
 			 }
 		else if ($par == 'date'
 		AND isset($GLOBALS['table_date'][$boucle->type_requete])) {
@@ -910,15 +910,15 @@ function calculer_vieux_in($params)
 
 function calculer_critere_infixe_date($idb, &$boucles, $regs)
 {
-	global $table_date; 
+  global $table_date, $table_des_tables, $tables_principales; 
 	$boucle = $boucles[$idb];
 	list(,$col, $rel, $suite) = $regs;
 	$date_orig = $pred = $table_date[$boucle->type_requete];
-
 	if ($suite) {
-	# NOTE : A transformer en recherche de l'existence du champ date_xxxx,
+	# Recherche de l'existence du champ date_xxxx,
 	# si oui choisir ce champ, sinon choisir xxxx
-		if ($suite =='_redac' OR $suite=='_modif')
+		list(,$t)= trouver_def_table($boucle->type_requete, $boucle);
+		if ($t['field']["date$suite"])
 			$date_orig = 'date'.$suite;
 		else
 			$date_orig = substr($suite, 1);
