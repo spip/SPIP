@@ -168,10 +168,8 @@ function calculer_langues_rubriques_etape() {
 		AND mere.lang<>fille.lang");
 
 	while ($row = spip_fetch_array($s)) {
-		$lang = addslashes($row['lang']);
 		$id_rubrique = $row['id_rubrique'];
-		$t = spip_query("UPDATE spip_rubriques
-		SET lang='$lang', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
+		$t = spip_query("UPDATE spip_rubriques	SET lang='". addslashes($row['lang']) . "', langue_choisie='non' WHERE id_rubrique=$id_rubrique");
 	}
 
 	return $t;
@@ -180,10 +178,7 @@ function calculer_langues_rubriques_etape() {
 function calculer_langues_rubriques() {
 
 	// rubriques (recursivite)
-	$langue_site = addslashes($GLOBALS['meta']['langue_site']);
-	spip_query("UPDATE spip_rubriques
-	SET lang='$langue_site', langue_choisie='non'
-	WHERE id_parent=0 AND langue_choisie != 'oui'");
+	spip_query("UPDATE spip_rubriques SET lang='" . addslashes($GLOBALS['meta']['langue_site']) ."', langue_choisie='non'	WHERE id_parent=0 AND langue_choisie != 'oui'");
 	while (calculer_langues_rubriques_etape());
 
 	// articles
@@ -193,10 +188,8 @@ function calculer_langues_rubriques() {
 		AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'')
 		AND mere.lang<>fils.lang");
 	while ($row = spip_fetch_array($s)) {
-		$lang = addslashes($row['lang']);
 		$id_article = $row['id_article'];
-		spip_query("UPDATE spip_articles
-		SET lang='$lang', langue_choisie='non' WHERE id_article=$id_article");
+		spip_query("UPDATE spip_articles SET lang='" . addslashes($row['lang']) . "', langue_choisie='non' WHERE id_article=$id_article");
 	}
 
 	// breves
@@ -206,10 +199,8 @@ function calculer_langues_rubriques() {
 		AND fils.langue_choisie != 'oui' AND (fils.lang='' OR mere.lang<>'')
 		AND mere.lang<>fils.lang");
 	while ($row = spip_fetch_array($s)) {
-		$lang = addslashes($row['lang']);
 		$id_breve = $row['id_breve'];
-		spip_query("UPDATE spip_breves
-		SET lang='$lang', langue_choisie='non' WHERE id_breve=$id_breve");
+		spip_query("UPDATE spip_breves SET lang='" . addslashes($row['lang']) . "', langue_choisie='non' WHERE id_breve=$id_breve");
 	}
 
 	if ($GLOBALS['meta']['multi_rubriques'] == 'oui') {

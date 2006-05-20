@@ -220,8 +220,7 @@ function verifier_langue_miroir($url, $lang) {
 // Gestion du dictionnaire local
 //
 function suggerer_dico_ortho(&$mots, $lang) {
-	$lang = addslashes($lang);
-	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang='$lang' AND mot IN ('".join("', '", array_map('addslashes', $mots))."')");
+	$result = spip_query("SELECT mot FROM spip_ortho_dico WHERE lang='" . addslashes($lang) . "' AND mot IN ('".join("', '", array_map('addslashes', $mots))."')");
 
 	$mots = array_flip($mots);
 	$bons = array();
@@ -242,17 +241,12 @@ function suggerer_dico_ortho(&$mots, $lang) {
 function ajouter_dico_ortho($mot, $lang) {
 	global $connect_id_auteur;
 
-	$lang = addslashes($lang);
-	$mot = addslashes($mot);
-	$id_auteur = intval($connect_id_auteur);
-	spip_query("INSERT IGNORE INTO spip_ortho_dico (lang, mot, id_auteur)  VALUES ('$lang', '$mot', '$id_auteur')");
+	spip_query("INSERT IGNORE INTO spip_ortho_dico (lang, mot, id_auteur)  VALUES ('" . addslashes($lang) . "', '" . addslashes($mot) . "', $connect_id_auteur)");
 
 }
 
 function supprimer_dico_ortho($mot, $lang) {
-	$lang = addslashes($lang);
-	$mot = addslashes($mot);
-	spip_query("DELETE FROM spip_ortho_dico WHERE lang='$lang' AND mot='$mot'");
+	spip_query("DELETE FROM spip_ortho_dico WHERE lang='" . addslashes($lang) . "' AND mot='" . addslashes($mot) . "'");
 
 }
 
@@ -273,8 +267,7 @@ function gerer_dico_ortho($lang) {
 function suggerer_cache_ortho(&$mots, $lang) {
 	global $duree_cache_ortho;
 
-	$lang = addslashes($lang);
-	$result = spip_query("SELECT mot, ok, suggest FROM spip_ortho_cache WHERE lang='$lang' AND mot IN ('".join("', '", array_map('addslashes', $mots))."') AND maj > FROM_UNIXTIME(".(time() - $duree_cache_ortho).")");
+	$result = spip_query("SELECT mot, ok, suggest FROM spip_ortho_cache WHERE lang='" . addslashes($lang) . "' AND mot IN ('".join("', '", array_map('addslashes', $mots))."') AND maj > FROM_UNIXTIME(".(time() - $duree_cache_ortho).")");
 
 	
 	$mots = array_flip($mots);

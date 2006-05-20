@@ -272,7 +272,7 @@ function apparier_paras($src, $dest, $flou = true) {
 	foreach($t1 as $key => $val) $md1[$key] = md5($val);
 	foreach($t2 as $key => $val) $md2[md5($val)][$key] = $key;
 	foreach($md1 as $key1 => $h) {
-		if (count($md2[$h])) {
+		if (isset($md2[$h])) {
 			$key2 = reset($md2[$h]);
 			if ($t1[$key1] == $t2[$key2]) {
 				$src_dest[$key1] = $key2;
@@ -411,15 +411,14 @@ function ajouter_version($id_article, $champs, $titre_version = "", $id_auteur) 
 	// Enregistrer les modifications
 	ajouter_fragments($id_article, $id_version_new, $fragments);
 	if (!$codes) $codes = array();
-	$codes = addslashes(serialize($codes));
+	$codes = (serialize($codes));
 	$permanent = empty($titre_version) ? 'non' : 'oui';
-	$titre_version = addslashes($titre_version);
 	if ($nouveau) {
-		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, '$titre_version', '$permanent', NOW(), '$id_auteur', '$codes')");
+		spip_query("INSERT spip_versions (id_article, id_version, titre_version, permanent, date, id_auteur, champs) VALUES ($id_article, $id_version_new, '" . addslashes($titre_version) . "', '$permanent', NOW(), '$id_auteur', '" . addslashes($codes) . "')");
 
 	}
 	else {
-		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs='$codes', permanent='$permanent', titre_version='$titre_version' WHERE id_article=$id_article AND id_version=$id_version");
+		spip_query("UPDATE spip_versions SET date=NOW(), id_auteur=$id_auteur, champs='" . addslashes($codes) . "', permanent='$permanent', titre_version='" . addslashes($titre_version) . "' WHERE id_article=$id_article AND id_version=$id_version");
 
 	}
 	spip_query("UPDATE spip_articles SET id_version=$id_version_new WHERE id_article=$id_article");

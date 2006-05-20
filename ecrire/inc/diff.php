@@ -62,7 +62,7 @@ function lcs($s, $t) {
 
 	foreach ($s as $x => $c) {
 		$c = trim($c);
-		if (!$t_pos[$c]) continue;
+		if (!isset($t_pos[$c])) continue;
 		krsort($t_pos[$c]);
 		foreach ($t_pos[$c] as $y) {
 			for ($len = $max_len; $len > 0; $len--) {
