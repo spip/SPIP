@@ -42,6 +42,7 @@ global
   $type;
 
  $id_groupe = intval($id_groupe);
+ $supp_mot = intval($supp_mot);
  $id_mot = intval($id_mot);
 //
 // modifications mot
@@ -65,22 +66,18 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 			}
 		}
 
-		$titre_mot = addslashes($titre_mot);
-		$texte = addslashes($texte);
-		$descriptif = addslashes($descriptif);
-		$type = addslashes(corriger_caracteres($type));
-		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe='$id_groupe'");
+		$result = spip_query("SELECT titre FROM spip_groupes_mots WHERE id_groupe=$id_groupe");
 		if ($row = spip_fetch_array($result))
-			$type = addslashes(corriger_caracteres($row['titre']));
-
+			$type = (corriger_caracteres($row['titre']));
+		else $type = (corriger_caracteres($type));
 		// recoller les champs du extra
 		if ($champs_extra) {
 			include_spip('inc/extra');
-			$add_extra = ", extra = '".addslashes(extra_recup_saisie("mots"))."'";
+			$add_extra = extra_recup_saisie("mots");
 		} else
 			$add_extra = '';
 
-		spip_query("UPDATE spip_mots SET titre='$titre_mot', texte='$texte', descriptif='$descriptif', type='$type', id_groupe=$id_groupe $add_extra WHERE id_mot=$id_mot");
+		spip_query("UPDATE spip_mots SET titre='" . addslashes($titre_mot) ."', texte='" . addslashes($texte) ."', descriptif='" . addslashes($descriptif) ."', type='" . addslashes($type) ."', id_groupe=$id_groupe" . (!$add_extra ? '' : (", extra = '".addslashes($extra) . "'")) . " WHERE id_mot=$id_mot");
 
 		if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
@@ -93,7 +90,7 @@ if ($connect_statut == '0minirezo' AND $connect_toutes_rubriques) {
 			$onfocus = " onfocus=\"if(!antifocus){this.value='';antifocus=true;}\"";
 		}
 	}
-}
+ }
 
 //
 // redirection ou affichage
@@ -265,12 +262,7 @@ if ($connect_statut =="0minirezo"  AND $connect_toutes_rubriques){
 		$row_groupes = spip_fetch_array($result);
 		if (!$row_groupes) {
 			// il faut creer un groupe de mots (cas d'un mot cree depuis le script articles)
-		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots",
-			"(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)",
-			"('" . 
-			addslashes(_T('info_mot_sans_groupe')) .
-			"', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'" .
-			")");
+		  $row_groupes['id_groupe'] = spip_abstract_insert("spip_groupes_mots", "(titre, unseul, obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "('" . addslashes(_T('info_mot_sans_groupe')) . "', 'non',  'non', 'oui', 'oui', 'non', 'oui', 'oui', 'non', 'non'" . ")");
 		}
 		echo "<input type='hidden' name='id_groupe' value='".$row_groupes['id_groupe']."'>";
 	}
