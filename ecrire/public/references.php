@@ -116,7 +116,9 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	}
 
 	$t= $desc['type'];
-	$excep = $exceptions_des_tables[$r][$nom_champ];
+	$excep = isset($exceptions_des_tables[$r]) ? $exceptions_des_tables[$r] : '';
+	if ($excep)
+		$excep = isset($excep[$nom_champ]) ? $excep[$nom_champ] : '';
 
 	if ($excep) {
 	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
@@ -283,7 +285,7 @@ function collecter_balise_dynamique($l, &$p, $nom) {
 
 function balise_distante_interdite($p) {
 	$nom = $p->id_boucle;
-	if ($p->boucles[$nom]->sql_serveur) {
+	if ($nom AND $p->boucles[$nom]->sql_serveur) {
 		erreur_squelette($p->nom_champ .' '._T('zbug_distant_interdit'), $nom);
 	}
 }
@@ -296,6 +298,8 @@ function balise_distante_interdite($p) {
 function champs_traitements ($p) {
 	global $table_des_traitements;
 
+	if (!isset($table_des_traitements[$p->nom_champ]))
+		return $p->code;
 	$ps = $table_des_traitements[$p->nom_champ];
 	if (is_array($ps)) {
 	  // new style
@@ -430,15 +434,6 @@ function calculer_argument_precedent($idb, $nom_champ, &$boucles) {
 	$prec = $boucles[$idb]->id_parent;
 	return (($prec==="") ? ('$Pile[$SP][\''.$nom_champ.'\']') : 
 		index_pile($prec, $nom_champ, $boucles));
-}
-
-// Madeleine de Proust, revision MIT-1958 sqq, revision CERN-1989
-
-function kwote($lisp)
-{
-	return preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r) ? 
-		($r[1] . "'\\'" . addslashes($r[2]) . "\\''") :
-		("'\\'' . addslashes(" . $lisp . ") . '\\''");
 }
 
 //

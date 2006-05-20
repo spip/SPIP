@@ -40,11 +40,8 @@ function affiche_boutons_admin($contenu) {
 	//
 	include_spip('inc/lang');
 	include_spip('base/abstract_sql');
-	$lang = spip_abstract_fetsel(array('lang'),
-					array('spip_auteurs'),
-					array("login='" .
-					      addslashes(ereg_replace('^@','',$GLOBALS['spip_admin'])) .
-					      "'"));
+	$login = ereg_replace('^@','',$GLOBALS['spip_admin']);
+	$lang = spip_abstract_fetsel(array('lang'), array('spip_auteurs'), array("login='" . addslashes($login) . "'"));
 	if ($lang['lang']) lang_select($lang['lang']);
 
 	// Recuperer sans l'afficher la balise #FORMULAIRE_ADMIN, en float

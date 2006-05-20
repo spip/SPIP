@@ -119,13 +119,13 @@ function affiche_logos($logos, $lien, $align) {
 	}
 
 	if ($artoff)
-		$mouseover = " onmouseover=\"this.src='$artoff'\" "
+		$artoff = " onmouseover=\"this.src='$artoff'\" "
 			."onmouseout=\"this.src='$arton'\"";
 
 	$milieu = "<img src=\"$arton\" alt=\"\""
 		. ($align ? " align=\"$align\"" : '') 
 		. $taille
-		. $mouseover
+		. $artoff
 		. ' style="border-width: 0px;" class="spip_logos" />';
 
 	return (!$lien ? $milieu :

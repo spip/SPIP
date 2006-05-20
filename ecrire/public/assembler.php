@@ -60,16 +60,6 @@ function public_assembler_dist($fond) {
 }
 
 
-// Remplir les globals pour les boutons d'admin
-
-function restaurer_globales ($contexte) {
-	if (is_array($contexte)) {
-		foreach ($contexte as $var=>$val) {
-			$GLOBALS[$var] = $val;
-		}
-	}
-}
-
 function is_preview()
 {
 	global $var_mode;
@@ -126,9 +116,11 @@ function assembler_page ($fond) {
 		$page['entetes']["Connection"] = "close";
 		$page['texte'] = "";
 	} else {
-		if (!$use_cache)
-			restaurer_globales($page['contexte']);
-		else {
+		if (!$use_cache && isset($page['contexte'])) {
+// Remplir les globals pour les boutons d'admin
+			foreach ($contexte as $var=>$val)
+				$GLOBALS[$var] = $val;
+		} else {
 			$f = charger_fonction('parametrer', 'public');
 			$page = $f($fond, '', $chemin_cache);
 			if ($chemin_cache)
@@ -192,7 +184,7 @@ function auto_expire($page)
 	if (!isset($flag_dynamique)) {
 		if (preg_match("/header\s*\(\s*.Expire:([\s\d])*.\s*\)/is",$page['texte'], $r))
 			$flag_dynamique = (intval($r[1]) === 0);
-		else	if (preg_match("/([\s\d])*.\s*\)/is",$page['entetes']['Expire'], $r))
+		else	if (isset($page['entetes']['Expire']) AND preg_match("/([\s\d])*.\s*\)/is",$page['entetes']['Expire'], $r))
 			$flag_dynamique = (intval($r[1]) === 0);
 	}
 }
