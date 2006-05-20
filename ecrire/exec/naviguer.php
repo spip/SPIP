@@ -68,7 +68,7 @@ function exec_naviguer_dist()
 		$texte=$row['texte'];
 		$statut = $row['statut'];
 		$extra = $row["extra"];
-	}
+	} else $statut = $titre = $descriptif = $texte = $extra = '';
 
 	if ($id_rubrique ==  0) $ze_logo = "racine-site-24.gif";
 	else if ($id_parent == 0) $ze_logo = "secteur-24.gif";
@@ -189,7 +189,6 @@ function infos_naviguer($id_rubrique, $statut)
 
 			  echo 
 				http_img_pack('admin-12.gif','',''),
-				$logo,
 			    " <a href='", generer_url_ecrire('auteurs_edit', "id_auteur=$id"),
 				"'>",
 				extraire_multi($row['nom']),
@@ -489,10 +488,11 @@ function enregistre_modifier_naviguer($id_rubrique, $id_parent, $titre, $texte, 
 
 	if ($GLOBALS['champs_extra']) {
 			include_spip('inc/extra');
-			$extra = ", extra = '"
-				.addslashes(extra_recup_saisie("rubriques"))."'";
-		}
-	spip_query("UPDATE spip_rubriques SET " .  (acces_rubrique($id_parent) ? "id_parent=$id_parent," : "") . "titre='" . addslashes($titre) ."', descriptif='" . addslashes($descriptif) . "', texte='" . addslashes($texte) . "' $extra WHERE id_rubrique=$id_rubrique");
+			$extra = extra_recup_saisie("rubriques");
+	}
+	else $extra = '';
+
+	spip_query("UPDATE spip_rubriques SET " .  (acces_rubrique($id_parent) ? "id_parent=$id_parent," : "") . "titre='" . addslashes($titre) ."', descriptif='" . addslashes($descriptif) . "', texte='" . addslashes($texte) . "'" . (!$extra ? '' :  ", extra = '" .addslashes($extra) . "'") . "WHERE id_rubrique=$id_rubrique");
 	if ($GLOBALS['meta']['activer_moteur'] == 'oui') {
 			include_spip("inc/indexation");
 			marquer_indexer('rubrique', $id_rubrique);

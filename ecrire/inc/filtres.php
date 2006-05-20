@@ -773,23 +773,20 @@ function agenda_affiche($i)
 function reduire_une_image($img, $taille, $taille_y) {
 	include_spip('inc/logos');
 
-	// Cas du mouseover genere par les logos de survol de #LOGO_ARTICLE
-	if (eregi("onmouseover=\"this\.src=\'([^']+)\'\"", $img, $match)) {
-		$mouseover = extraire_attribut(
-			reduire_image_logo($match[1], $taille, $taille_y),
-			'src');
-	}
-
 	$image = reduire_image_logo($img, $taille, $taille_y);
 
-	if ($mouseover) {
-		$mouseout = extraire_attribut($image, 'src');
-		$js_mouseover = "onmouseover=\"this.src='$mouseover'\""
-			." onmouseout=\"this.src='$mouseout'\" />";
-		$image = preg_replace(",( /)?".">,", $js_mouseover, $image);
-	}
+	// Cas du mouseover genere par les logos de survol de #LOGO_ARTICLE
+	if (!eregi("onmouseover=\"this\.src=\'([^']+)\'\"", $img, $match))
+		return $image;
+	
+	$mouseover = extraire_attribut(
+			reduire_image_logo($match[1], $taille, $taille_y),
+			'src');
 
-	return $image;
+	$mouseout = extraire_attribut($image, 'src');
+	$js_mouseover = "onmouseover=\"this.src='$mouseover'\""
+			." onmouseout=\"this.src='$mouseout'\" />";
+	return preg_replace(",( /)?".">,", $js_mouseover, $image);
 }
 
 // accepte en entree un texte complet, un img-log (produit par #LOGO_XX),

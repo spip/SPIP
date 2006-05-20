@@ -551,17 +551,16 @@ function ratio_image($logo, $nom, $format, $taille, $taille_y, $attributs)
 		$preview = creer_vignette($logo, $taille, $taille_y,
 					  $format, ('cache'.$suffixe), $nom.$suffixe);
 		if ($preview) {
-					$logo = $preview['fichier'];
-					$destWidth = $preview['width'];
-					$destHeight = $preview['height'];
-				}
+			$logo = $preview['fichier'];
+			$destWidth = $preview['width'];
+			$destHeight = $preview['height'];
+		}
 
 		// dans l'espace prive mettre un timestamp sur l'adresse 
 		// de l'image, de facon a tromper le cache du navigateur
 		// quand on fait supprimer/reuploader un logo
 		// (pas de filemtime si SAFE MODE)
-		if (!_DIR_RESTREINT)
-				$date = '?date='.@filemtime($logo);
+		$date = _DIR_RESTREINT ? '' : '?date='.@filemtime($logo);
 		return "<img src='$logo$date' width='$destWidth' height='$destHeight'$attributs />";
 	}
 }

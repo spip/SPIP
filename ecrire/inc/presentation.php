@@ -1877,7 +1877,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	if ($spip_display == 1){
 		$hauteur = 20;
 		$largeur = 100;
-		$alt = "";
+		$title = $alt = "";
 	}
 	else if ($spip_display == 3){
 		$hauteur = 30;
@@ -1888,6 +1888,7 @@ function icone($texte, $lien, $fond, $fonction="", $align="", $afficher='oui'){
 	else {
 		$hauteur = 70;
 		$largeur = 100;
+		$title = '';
 		$alt = $texte;
 	}
 
