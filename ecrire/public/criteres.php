@@ -487,7 +487,7 @@ function calculer_criteres ($idb, &$boucles) {
 function kwote($lisp)
 {
 	return preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r) ? 
-		($r[1] . spip_abstract_quote($r[2])) :
+		($r[1] . "\"" . spip_abstract_quote($r[2]) . "\"" ) :
 		"spip_abstract_quote($lisp)"; 
 }
 
