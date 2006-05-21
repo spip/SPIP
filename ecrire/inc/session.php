@@ -49,7 +49,7 @@ function ajouter_session($auteur, $id_session, $lang='') {
 	global $connect_id_auteur, $auteur_session;
 
 	if ($lang) {
-		spip_query("UPDATE spip_auteurs SET lang = '". addslashes($lang) . "' WHERE id_auteur = $connect_id_auteur");
+		spip_query("UPDATE spip_auteurs SET lang = " . spip_abstract_quote($lang) . " WHERE id_auteur = $connect_id_auteur");
 		$auteur_session['lang'] = $lang;
 	}
 
@@ -70,7 +70,7 @@ function ajouter_session($auteur, $id_session, $lang='') {
 function update_prefs_session($prefs, $id_auteur)
 {
   $prefs = serialize($prefs);
-	spip_query("UPDATE spip_auteurs SET prefs = '". addslashes($prefs). "' WHERE id_auteur = $id_auteur");
+	spip_query("UPDATE spip_auteurs SET prefs = " . spip_abstract_quote($prefs) . " WHERE id_auteur = $id_auteur");
 }
 
 //
@@ -192,7 +192,7 @@ function zap_sessions ($id_auteur, $zap) {
 function verifier_php_auth() {
 	if ($_SERVER['PHP_AUTH_USER'] && $_SERVER['PHP_AUTH_PW']
 	&& !$GLOBALS['ignore_auth_http']) {
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='" . addslashes($_SERVER['PHP_AUTH_USER']) . "'");
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($_SERVER['PHP_AUTH_USER']));
 		if (!$GLOBALS['db_ok'])
 			return false;
 		$row = spip_fetch_array($result);

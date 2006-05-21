@@ -487,8 +487,8 @@ function calculer_criteres ($idb, &$boucles) {
 function kwote($lisp)
 {
 	return preg_match(",^(\n//[^\n]*\n)? *'(.*)' *$,", $lisp, $r) ? 
-		($r[1] . "'\\'" . addslashes($r[2]) . "\\''") :
-		("'\\'' . addslashes(" . $lisp . ") . '\\''");
+		($r[1] . spip_abstract_quote($r[2])) :
+		"spip_abstract_quote($lisp)"; 
 }
 
 function critere_IN_dist ($idb, &$boucles, $crit)
@@ -504,29 +504,28 @@ function critere_IN_dist ($idb, &$boucles, $crit)
 			if (is_numeric($r[2]))
 				$x .= "\n\t$var" . "[]= $r[2];";
 			else
-				$x .= "\n\t$var" . "[]= '".addslashes($r[2])."';";
+				$x .= "\n\t$var" . "[]= " . spip_abstract_quote($r[2]) . ";";
 		} else {
 		  // Pour permettre de passer des tableaux de valeurs
 		  // on repere l'utilisation brute de #ENV**{X}, 
 		  // c'est-a-dire sa  traduction en ($PILE[0][X]).
 		  // et on deballe mais en rajoutant l'anti XSS
 		  $t = preg_match(",^(\n//.*\n)?\\\$Pile.0,", $v) ? 
-		    "array_map('addslashes', $v)" : $v;
-		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= addslashes($v);\n\telse $var = array_merge($var, $t);";
+		    "array_map('spip_abstract_quote', $v)" : $v;
+		  $x .= "\n\tif (!(is_array($v)))\n\t\t$var" ."[]= spip_abstract_quote($v);\n\telse $var = array_merge($var, $t);";
 		}
 	}
 
 	$boucles[$idb]->in .= $x;
 
-	$where = array("'IN'", "\"$arg\"", "('(\''  . join(\"','\",$var) . '\')')");
+	$where = array("'IN'", "\"$arg\"", "'('  . join(',',$var) . ')'");
 
 	// inserer la negation (cf !...)
 	if ($crit->not) {
 			$where = array("'NOT'", $where);
 		} else {
 			$boucles[$idb]->default_order[] = "'cpt'";
-			$boucles[$idb]->select[]=  "FIND_IN_SET($arg, '\" .
-			  join(',', $var) .\"') AS cpt";
+			$boucles[$idb]->select[]=  "FIELD($arg,\" . join(',',$var) . \") AS cpt";
 		}
 
 	 // inserer la condition (cf {lang?}) et c'est fini

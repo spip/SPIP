@@ -42,7 +42,7 @@ function afficher_suivi_versions ($debut = 0, $id_secteur = 0, $uniq_auteur = fa
 	}
 	
 	if (strlen($lang) > 0)
-		$req_where .= " AND articles.lang='".addslashes($lang)."'";
+		$req_where .= " AND articles.lang=" . spip_abstract_quote($lang);
 
 	if ($id_secteur > 0)
 		$req_where .= " AND articles.id_secteur = ".intval($id_secteur);

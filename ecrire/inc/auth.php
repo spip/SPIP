@@ -115,7 +115,7 @@ function inc_auth_dist() {
 	// Chercher le login dans la table auteurs
 	//
 
-	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login='" . addslashes($auth_login) . "' AND statut!='5poubelle'");
+	$result = @spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($auth_login) . " AND statut!='5poubelle'");
 
 	if (!$row = spip_fetch_array($result)) {
 	  auth_areconnecter($auth_login);

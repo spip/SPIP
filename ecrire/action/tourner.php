@@ -207,7 +207,7 @@ function inserer_vignette_base($image, $vignette) {
 
 	$vignette = str_replace(_DIR_RACINE, '', $vignette);
 
-	$t = spip_query("SELECT id_document FROM spip_documents WHERE fichier='".addslashes($image)."'");
+	$t = spip_query("SELECT id_document FROM spip_documents WHERE fichier=" . spip_abstract_quote($image));
 	spip_log("creation vignette($image) -> $vignette $t");
 	if ($t) {
 		if ($row = spip_fetch_array($t)) {

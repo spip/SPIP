@@ -62,13 +62,13 @@ if ($connect_statut == '0minirezo'  AND $connect_toutes_rubriques) {
 		$descriptif = (corriger_caracteres($descriptif));
 
 		if (!$new) {	// modif groupe
-			spip_query("UPDATE spip_mots SET type='" . addslashes($change_type) . "' WHERE id_groupe=$id_groupe");
+			spip_query("UPDATE spip_mots SET type=" . spip_abstract_quote($change_type) . " WHERE id_groupe=$id_groupe");
 
 
-			spip_query("UPDATE spip_groupes_mots SET titre='" . addslashes($change_type) . "', texte='" . addslashes($texte) . "', descriptif='" . addslashes($descriptif) . "', unseul='" . addslashes($unseul) . "', obligatoire='" . addslashes($obligatoire) . "', articles='" . addslashes($articles) . "', breves='" . addslashes($breves) . "', rubriques='" . addslashes($rubriques) . "', syndic='" . addslashes($syndic) . "',	minirezo='" . addslashes($acces_minirezo) . "', comite='" . addslashes($acces_comite) . "', forum='" . addslashes($acces_forum) . "' WHERE id_groupe=$id_groupe");
+			spip_query("UPDATE spip_groupes_mots SET titre=" . spip_abstract_quote($change_type) . ", texte=" . spip_abstract_quote($texte) . ", descriptif=" . spip_abstract_quote($descriptif) . ", unseul=" . spip_abstract_quote($unseul) . ", obligatoire=" . spip_abstract_quote($obligatoire) . ", articles=" . spip_abstract_quote($articles) . ", breves=" . spip_abstract_quote($breves) . ", rubriques=" . spip_abstract_quote($rubriques) . ", syndic=" . spip_abstract_quote($syndic) . ",	minirezo=" . spip_abstract_quote($acces_minirezo) . ", comite=" . spip_abstract_quote($acces_comite) . ", forum=" . spip_abstract_quote($acces_forum) . " WHERE id_groupe=$id_groupe");
 
 		} else {	// creation groupe
-		  spip_abstract_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "('" . addslashes($change_type) . "', '" . addslashes($texte) . "' , '" . addslashes($descriptif) . "' , '" . addslashes($unseul) . "' , '" . addslashes($obligatoire) . "' , '" . addslashes($articles) . "' ,'" . addslashes($breves) . "' , '" . addslashes($rubriques) . "' , '" . addslashes($syndic) . "' , '" . addslashes($acces_minirezo) . "' ,  '" . addslashes($acces_comite) . "' , '" . addslashes($acces_forum) . "' )");
+		  spip_abstract_insert('spip_groupes_mots', "(titre, texte, descriptif, unseul,  obligatoire, articles, breves, rubriques, syndic, minirezo, comite, forum)", "(" . spip_abstract_quote($change_type) . ", " . spip_abstract_quote($texte) . " , " . spip_abstract_quote($descriptif) . " , " . spip_abstract_quote($unseul) . " , " . spip_abstract_quote($obligatoire) . " , " . spip_abstract_quote($articles) . " ," . spip_abstract_quote($breves) . " , " . spip_abstract_quote($rubriques) . " , " . spip_abstract_quote($syndic) . " , " . spip_abstract_quote($acces_minirezo) . " ,  " . spip_abstract_quote($acces_comite) . " , " . spip_abstract_quote($acces_forum) . " )");
 		}
 	}
 	if ($supp_group){

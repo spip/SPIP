@@ -19,16 +19,14 @@ function exec_recherche_dist()
 {
 	global $couleur_foncee, $recherche;
 
-	$recherche = addslashes(entites_html($recherche));
+	$recherche_aff = entites_html($recherche);
 
-
-	debut_page(_T('titre_page_recherche', array('recherche' => $recherche)));
+	debut_page(_T('titre_page_recherche', array('recherche' => $recherche_aff)));
  
 	debut_gauche();
 
 	if ($recherche) {
-	  $recherche_aff = $recherche;
-	  $onfocus = "this.value='$recherche';";
+	  $onfocus = "this.value='" . addslashes($recherche) . "';";
 	} else {
 	  $recherche_aff = _T('info_rechercher');
 	  $onfocus = "this.value='';";
@@ -43,7 +41,7 @@ function exec_recherche_dist()
 	if (strlen($recherche) > 0) {
 
 	echo "<FONT FACE='Verdana,Arial,Sans,sans-serif'><B>"._T('info_resultat_recherche')."</B><BR>";
-	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>$recherche</B></FONT><p>";
+	echo "<FONT SIZE=5 COLOR='$couleur_foncee'><B>$recherche_aff</B></FONT><p>";
 
 	$query_articles['FROM'] = 'spip_articles AS articles';
 	$query_breves['FROM'] = 'spip_breves';
@@ -52,12 +50,16 @@ function exec_recherche_dist()
 	$testnum = ereg("^[0-9]+$", $recherche);
 
 	// Eviter les symboles '%', caracteres SQL speciaux
-	$recherche1 = str_replace("%","\%",$recherche);
-	$where = split("[[:space:]]+", $recherche1);
-	if ($where)
+
+	$where = split("[[:space:]]+", $recherche);
+	if ($where) {
+		foreach ($where as $k => $v) 
+		  $where[$k] = "'%" . substr(str_replace("%","\%", spip_abstract_quote($v)),1,-1) . "%'";
 		$where = ($testnum ? "OR " : '') .
-		  "(titre LIKE '%".join("%' AND titre LIKE '%", $where)."%') ";
-	$query_articles['WHERE']= ($testnum ? "(id_article = $recherche)" :'') . $where;
+		  ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
+	}
+
+	$query_articles['WHERE']= ($testnum ? "(articles.id_article = $recherche)" :'') . $where;
 	$query_breves['WHERE']= ($testnum ? "(id_breve = $recherche)" : '') . $where;
 	$query_rubriques['WHERE']= ($testnum ? "(id_rubrique = $recherche)" : '') . $where;
 	$query_sites['WHERE']= ($testnum ? "(id_syndic = $recherche)" : '') . ereg_replace("titre LIKE", "nom_site LIKE",$where);
@@ -70,7 +72,7 @@ function exec_recherche_dist()
 	$activer_moteur = ($GLOBALS['meta']['activer_moteur'] == 'oui');
 	if ($activer_moteur) {	// texte integral
 		include_spip('inc/indexation');
-		list($hash_recherche,) = requete_hash($recherche1);
+		list($hash_recherche,) = requete_hash(str_replace("%","\%",$recherche));
 		$query_articles_int = requete_txt_integral('spip_articles', $hash_recherche);
 		$query_breves_int = requete_txt_integral('spip_breves', $hash_recherche);
 		$query_rubriques_int = requete_txt_integral('spip_rubriques', $hash_recherche);

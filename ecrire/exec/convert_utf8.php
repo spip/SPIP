@@ -146,7 +146,7 @@ function exec_convert_utf8_dist() {
 				if (is_numeric($v))
 					$query[] = "$c=$v";
 				else
-					$query[] = "$c='".addslashes($v)."'";
+					$query[] = "$c=" . spip_abstract_quote($v);
 			}
 
 			$set = join(', ', $query);

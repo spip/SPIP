@@ -169,7 +169,7 @@ if ($essai_login == "oui") {
 		// On est connecte : recuperer les donnees auteurs
 		// poser le cookie session, puis le cas echeant
 		// verifier que le statut correspond au minimum requis,
-		$result = spip_query("SELECT * FROM spip_auteurs WHERE login='".addslashes($auth->login)."'");
+		$result = spip_query("SELECT * FROM spip_auteurs WHERE login=" . spip_abstract_quote($auth->login));
 
 		if ($row_auteur = spip_fetch_array($result)) {
 			$cookie_session = creer_cookie_session($row_auteur);

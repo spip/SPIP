@@ -47,7 +47,7 @@ function exec_ajax_page_dist()
 function ajax_page_sql($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
 	global $connect_id_auteur;
-	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc ='"  . addslashes($id_ajax_fonc)   . "' AND id_auteur=$connect_id_auteur");
+	$res = spip_query("SELECT variables FROM spip_ajax_fonc	WHERE id_ajax_fonc =" . spip_abstract_quote($id_ajax_fonc) . " AND id_auteur=$connect_id_auteur");
 	if ($row = spip_fetch_array($res)) {
 		
 		$variables = unserialize($row["variables"]);
@@ -87,13 +87,20 @@ function ajax_page_test($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 function ajax_page_recherche($id, $exclus, $col, $id_ajax_fonc, $type, $rac)
 {
 
-		include_spip('inc/texte');
-		$recherche = addslashes(str_replace("%","\%",$type));
+	include_spip('inc/texte');
+	$where = split("[[:space:]]+", $recherche);
+	if ($where) {
+		foreach ($where as $k => $v) 
+		  $where[$k] = "'%" . substr(str_replace("%","\%", spip_abstract_quote($v)),1,-1) . "%'";
+		$where = ($testnum ? "OR " : '') .
+		  ("(titre LIKE " . join(" AND titre LIKE ", $where) . ")");
+	}
 		$rech2 = split("[[:space:]]+", $recherche);
 		if ($rech2) {
-			$where_titre = " (titre LIKE '%".join("%' AND titre LIKE '%", $rech2)."%') ";
-			$where_desc = " (descriptif LIKE '%".join("%' AND descriptif LIKE '%", $rech2)."%') ";
-			$where_id = " (id_rubrique = '".join("' AND id_rubrique = '", $rech2)."') ";
+			$where_titre = " (titre LIKE ".join(" AND titre LIKE ", $where).") ";
+			$where_desc = " (descriptif LIKE ".join(" AND descriptif LIKE ", $where).") ";
+			// ?????
+			$where_id = " (id_rubrique = ".join(" AND id_rubrique = ", $where).") ";
 		}
 		else {
 			$where_titre = " 1=2";
