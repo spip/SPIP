@@ -34,7 +34,7 @@ function exec_breves_dist()
 		$editable = ($GLOBALS['connect_statut'] == "0minirezo")
 		  && acces_rubrique($id_rubrique);
 
-		$statuts = "'prop', 'publie'" . ($editatble ? ", 'refuse'": "");
+		$statuts = "'prop', 'publie'" . ($editable ? ", 'refuse'": "");
 
 		debut_cadre_enfonce("secteur-24.gif", false, '', $titre.aide ("breves"));
 

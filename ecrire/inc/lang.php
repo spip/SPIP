@@ -175,13 +175,8 @@ function traduire_chaine($code) {
 
 function traduire_nom_langue($lang) {
 	include_spip('inc/lang_liste');
-	$r = $GLOBALS['codes_langues'][$lang];
-	if (!$r) $r = $lang;
-
-		include_spip('inc/charsets');
-		$r = html2unicode($r);
-
-	return $r;
+	include_spip('inc/charsets');
+	return html2unicode(isset($GLOBALS['codes_langues'][$lang]) ? $GLOBALS['codes_langues'][$lang] : $lang);
 }
 
 //

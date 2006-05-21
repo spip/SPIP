@@ -263,7 +263,7 @@ default:
 // La requete de base est tres sympa
 //
 
- $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.login AS login,								aut.nom AS nom,								aut.email AS email,								aut.url_site AS url_site,							aut.messagerie AS messagerie,							UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur						$sql_sel									FROM spip_auteurs as aut							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)		WHERE	$sql_visible								GROUP BY aut.id_auteur	 ORDER BY		$sql_order");
+ $row = spip_query("SELECT							aut.id_auteur AS id_auteur,							aut.statut AS statut,								aut.login AS login,								aut.nom AS nom,								aut.email AS email,								aut.source AS source,								aut.pass AS pass,								aut.url_site AS url_site,							aut.messagerie AS messagerie,							UPPER(aut.nom) AS unom,							count(lien.id_article) as compteur						$sql_sel									FROM spip_auteurs as aut							LEFT JOIN spip_auteurs_articles AS lien ON aut.id_auteur=lien.id_auteur	LEFT JOIN spip_articles AS art ON (lien.id_article = art.id_article)		WHERE	$sql_visible								GROUP BY aut.id_auteur	 ORDER BY		$sql_order");
  return $row;
 }
 
@@ -282,7 +282,7 @@ function afficher_n_auteurs($auteurs) {
 	echo "</td><td class='verdana11' style='border-top: 1px solid #cccccc;'>";
 	echo "<a href='", generer_url_ecrire('auteurs_edit',"id_auteur=".$row['id_auteur']), "'>",typo($row['nom']),'</a>';
 
-	if ($connect_statut == '0minirezo' AND $row['restreint'])
+	if (isset($row['restreint']) AND $row['restreint'])
 		echo " &nbsp;<small>"._T('statut_admin_restreint')."</small>";
 
 
