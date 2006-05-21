@@ -289,9 +289,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Habillage specifique du plan du site
 /*  ------------------------------------------ */
 
-#contenu.plan {}
+#page_plan #contenu {}
 
-#contenu.plan h2 {
+#page_plan #contenu h2 {
 	clear: both;
 	background: #e0ffe0;
 	border: 1px solid #CCCCCC;
@@ -300,13 +300,13 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-weight: bold; 
 	text-align: center; }
 	
-#contenu.plan .contre-encart ul { 
+#page_plan #contenu .contre-encart ul { 
 	display: block; 
 	clear: left; 
 	margin-left: 16px; 
 	margin-bottom: 16px; }
 	
-#contenu.plan .contre-encart li { list-style: square; }
+#page_plan #contenu .contre-encart li { list-style: square; }
 
 /*  ------------------------------------------
 /*  Habillage des forums
