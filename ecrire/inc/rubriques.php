@@ -57,7 +57,7 @@ function calculer_rubriques() {
 	GROUP BY rub.id_rubrique");
 	while ($row = spip_fetch_array($r))
 		spip_query("UPDATE spip_rubriques
-		SET statut_tmp='publie', date_tmp='".$row['date']."'
+		SET statut_tmp='publie', date_tmp='".$row['date_h']."'
 		WHERE id_rubrique=".$row['id']);
 	
 	// Publier et dater les rubriques qui ont un site publie

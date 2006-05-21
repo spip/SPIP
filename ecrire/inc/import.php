@@ -234,7 +234,7 @@ function import_objet_1_2($f, $gz=false) {
 			}
 			else {
 				$cols[] = $col;
-				$values[] = '"'.addslashes($value).'"';
+				$values[] = "'" . addslashes($value) ."'";
 				if ($col == $id) $id_objet = $value;
 			}
 		}
@@ -326,7 +326,7 @@ function import_objet_0_0($f, $gz=false) {
 		}
 		else if ($col != 'maj') {
 			$cols[] = $col;
-			$values[] = '"'.addslashes($value).'"';
+			$values[] = "'" . addslashes($value) ."'";
 			if ($is_art && ($col == 'id_article')) $id_article = $value;
 			if ($is_mot && ($col == 'id_mot')) $id_mot = $value;
 		}

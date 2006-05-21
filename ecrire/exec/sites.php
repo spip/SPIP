@@ -102,19 +102,17 @@ if ($analyser_site == 'oui' AND $flag_editable) {
 	$v = analyser_site($url);
 
 	if ($v) {
-		$nom_site = addslashes($v['nom_site']);
-		$url_site = addslashes($v['url_site']);
+		$nom_site = ($v['nom_site']);
 		if (!$nom_site) $nom_site = $url_site;
-		$url_syndic = trim(addslashes($v['url_syndic']));
-		$descriptif = addslashes($v['descriptif']);
+		$url_syndic = trim($v['url_syndic']);
+		$descriptif = $v['descriptif'];
 		$syndication = $v[syndic] ? 'oui' : 'non';
-		$result = spip_query("UPDATE spip_syndic SET nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic', descriptif='$descriptif', syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
+		$result = spip_query("UPDATE spip_syndic SET nom_site='" . addslashes($nom_site) . "', url_site='" . addslashes($url_site) . "', url_syndic='" . addslashes($url_syndic) . "', descriptif='" . addslashes($descriptif) . "', syndication='$syndication', statut='$statut' WHERE id_syndic=$id_syndic");
 		if ($syndication == 'oui') syndic_a_jour($id_syndic);
 		$redirect = generer_url_ecrire('sites',("id_syndic=$id_syndic". ($redirect ?  "&redirect=$redirect" : "")), true);
 		$redirect_ok = 'oui';
 	}
 }
-
 
 //
 // Ajout et suppression syndication
@@ -136,22 +134,17 @@ if ($nouveau_statut AND $flag_administrable) {
 }
 
 if (strval($nom_site)!='' AND $modifier_site == 'oui' AND $flag_editable) {
-	$nom_site = addslashes($nom_site);
-	$url_site = addslashes($url_site);
-	$descriptif = addslashes($descriptif);
 	if (strlen($url_syndic) < 8) $syndication = "non";
-	$url_syndic = trim(addslashes($url_syndic));
+	$url_syndic = trim($url_syndic);
 	
 	// recoller les champs du extra
 	if ($champs_extra) {
 		include_spip('inc/extra');
-		$add_extra = ", extra = '".addslashes(extra_recup_saisie("sites"))."'";
+		$add_extra = extra_recup_saisie("sites");
 	} else
 		$add_extra = '';
 	
-	
-	
-	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site='$nom_site', url_site='$url_site', url_syndic='$url_syndic',	descriptif='$descriptif', syndication='$syndication', statut='$statut' $add_extra WHERE id_syndic=$id_syndic");
+	spip_query("UPDATE spip_syndic SET id_rubrique='$id_rubrique',	nom_site='" . addslashes($nom_site) . "', url_site='" . addslashes($url_site) . "', url_syndic='" . addslashes($url_syndic) . "',	descriptif='" . addslashes($descriptif) . "', syndication='$syndication', statut='$statut'". (!$add_extra ? '' :  (", extra = '".addslashes($add_extra)."'")) . " WHERE id_syndic=$id_syndic");
 
 	propager_les_secteurs();
 

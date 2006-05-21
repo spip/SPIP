@@ -118,7 +118,8 @@ function balise_DATE_NOUVEAUTES_dist($p) {
 }
 
 function balise_DOSSIER_SQUELETTE_dist($p) {
-	$p->code = "'" . addslashes(dirname($p->descr['sourcefile'])) . "'" ;
+	$code = addslashes(dirname($p->descr['sourcefile']));
+	$p->code = "'$code'" . 
 	$p->interdire_scripts = false;
 	return $p;
 }
@@ -790,14 +791,6 @@ function balise_CHEMIN_dist($p) {
 					$p->boucles,
 					$p->id_boucle);
 
-		$args =  calculer_liste($p->param[0][2],
-					$p->descr,
-					$p->boucles,
-					$p->id_boucle);
-
-		if ($args != "''")
-			$p->code .= ','.$args;
-
 		// autres filtres (???)
 		array_shift($p->param);
 	}
@@ -838,7 +831,7 @@ function balise_ENV_dist($p, $src = NULL) {
 		$p->code = 'serialize('.$src.')';
 	} else {
 		// admet deux arguments : nom de variable, valeur par defaut si vide
-		$p->code = $src.'["' . addslashes($nom) . '"]';
+		$p->code = $src.'[\'' . addslashes($nom) . '\']';
 		if ($sinon)
 			$p->code = 'sinon('. 
 				$p->code
