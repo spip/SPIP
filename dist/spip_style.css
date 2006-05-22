@@ -12,9 +12,11 @@ em.spip {}
 hr.spip {}
 
 .spip_puce { list-style-position: outside; border: 0; }
+
+ul.spip { list-style: disc; }
+ol.spip { list-style: decimal; }
+ul.spip li, ol.spip li { list-style: inherit; }
 li.spip { margin-left: 0.8em; list-style-position: outside; }
-ul.spip li.spip { list-style: square; }
-ol.spip li.spip { list-style: decimal; }
 
 h3.spip {
     clear: both;

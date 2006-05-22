@@ -127,8 +127,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 }
 	
 .rubriques .titre, .breves .titre, .syndic .titre, .forums .titre, .divers .titre { 
-	padding: 3px 4px 2px 4px; 
-	border-bottom: 1px dotted #CCCCCC; 
+	padding: 3px 4px 2px 4px;
+	border-bottom: 1px dotted #CCCCCC;
 	text-align: center;
 	font-weight: bold;
 }
@@ -137,14 +137,11 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	
 .rubriques ul, .breves ul, .syndic ul, .forums ul, .divers ul { 
 	display: block;
-	padding: 2px 0;  
-	padding-right: 0.7em; 
+	padding: 2px 0;
+	padding-right: 0.7em;
 }
 	
-.rubriques li, .breves li, .syndic li, .forums li, .divers li { 
-	list-style: none; 
-	padding-left: 0.7em;
-} 
+.rubriques li, .breves li, .syndic li, .forums li, .divers li { padding-left: 0.7em; } 
 
 /*  Des couleurs specifiques selon les types de menus
 ---------------------------------------------- */
@@ -304,9 +301,9 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	display: block; 
 	clear: left; 
 	margin-left: 16px; 
-	margin-bottom: 16px; }
-	
-#page_plan #contenu .contre-encart li { list-style: square; }
+	margin-bottom: 16px;
+	list-style: square; }
+#page_plan #contenu .contre-encart li { list-style: inherit; }
 
 /*  ------------------------------------------
 /*  Habillage des forums
