@@ -116,13 +116,14 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 .spip_sanscadre legend { display: none; }
 
 .formulaire_spip label {}
-.forml {
+.formulaire_spip .forml {
 	width: 99%;
 	background: #FCFCF0;
 	padding: 1px;
 	border: 1px solid #666666;
-	color: #333333; }
-.forml:focus { background: #FFF; border: 1px solid #000; color: #000; }
+	color: #333333;
+	font-family: inherit; }
+.formulaire_spip .forml:focus { background: #FFF; border: 1px solid #000; color: #000; }
 
 input.spip_bouton {
 	float: right;
