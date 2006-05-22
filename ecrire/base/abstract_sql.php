@@ -123,4 +123,28 @@ $select, $from, $where,	$groupby, $orderby, $limit,
 $sousrequete, $cpt, $table, $id, $serveur),
 				   $serveur);
 }
+
+
+//
+// IN (...) est limite a 255 elements, d'ou cette fonction assistante
+//
+function calcul_mysql_in($val, $valeurs, $not='') {
+	if (!$valeurs) return ($not ? "0=0" : '0=1');
+
+	$n = $i = 0;
+	$in_sql ="";
+	while ($n = strpos($valeurs, ',', $n+1)) {
+	  if ((++$i) >= 255) {
+			$in_sql .= "($val $not IN (" .
+			  substr($valeurs, 0, $n) .
+			  "))\n" .
+			  ($not ? "AND\t" : "OR\t");
+			$valeurs = substr($valeurs, $n+1);
+			$i = $n = 0;
+		}
+	}
+	$in_sql .= "($val $not IN ($valeurs))";
+
+	return "($in_sql)";
+}
 ?>
