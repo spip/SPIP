@@ -90,7 +90,6 @@ function import_debut($f, $gz=false) {
 	return false;
 }
 
-
 //
 // $f = handle fichier
 // $gz = flag utilisation zlib
@@ -102,301 +101,6 @@ function import_debut($f, $gz=false) {
 // de table eventuelles
 $tables_trans = array(
 );
-
-function import_objet_1_3($f, $gz=false, $tag_fermant='SPIP', $tables, $phpmyadmin=false) {
-	global $import_ok, $pos, $abs_pos;
-	static $time_javascript;
-
-	global $tables_trans;
-	static $primary_table;
-	static $relation_liste;
-	global $tables_principales;
-	global $tables_auxiliaires;
-
-	$import_ok = false;
-	$b = '';
-	// Lire le type d'objet
-	if (!($table = xml_fetch_tag($f, $b, $gz))) return false;
-	if ($table == ('/'.$tag_fermant)) return !($import_ok = true);
-	#spip_log("import_objet_1_3 : table $table");
-	if (!isset($primary_table[$table]))
-		$primary_table[$table]=primary_index_table($table);
-
-	$primary = $primary_table[$table];
-	$id_objet = 0;
-	$liens = array();
-
-	// Lire les champs de l'objet
-	for (;;) {
-		$b = '';
-		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
-		if ($col == '/'.$table) break;
-		if (substr($col,0,1) == '/')
-		{ // tag fermant ici : probleme erreur de format
-			spip_log('restauration : table $table tag fermanr $col innatendu');
-		  break;
-		}
-		$value = '';
-		if (!xml_fetch_tag($f, $value, $gz)) return false;
-
-		if ($col != 'maj') {
-			if ($phpmyadmin)
-				$value = str_replace(array('&quot;','&gt;'),array('"','>'),$value);
-			$cols[] = $col;
-			$values[] = spip_abstract_quote($value);
-			if ($col == $primary) $id_objet = $value;
-		}
-	}
-	
-	if (isset($tables_trans[$table])) $table = $tables_trans[$table];
-	if (in_array($table,$tables)){
-
-		#spip_log("import_objet_1_3 : query $query");
-		if (!spip_query("REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')')) {
-			echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
-			$GLOBALS['erreur_restauration'] = true;
-		}
-	}
-
-	$p = $pos + $abs_pos;
-	// on se contente d'une ecriture en bdd car sinon le temps de backup
-	// est double. Il faut juste faire attention a bien lire_metas()
-	// au debut de la restauration
-	ecrire_meta("status_restauration", "$p");
-	#ecrire_metas(); 
-
-	if (time() - $time_javascript > 3) {	// 3 secondes
-		affiche_progression_javascript($abs_pos,$table);
-		$time_javascript = time();
-	}
-
-	return $import_ok = true;
-}
-
-// pour le support des vieux dump
-function import_objet_1_2($f, $gz=false) {
-	global $import_ok, $pos, $abs_pos;
-	static $time_javascript;
-
-	if (time() - $time_javascript > 3) {	// 3 secondes
-		affiche_progression_javascript($abs_pos);
-		$time_javascript = time();
-	}
-
-	static $tables;
-	if (!$tables) $tables = array(
-		'article' => 'spip_articles',
-		'auteur' => 'spip_auteurs',
-		'breve' => 'spip_breves',
-		'document' => 'spip_documents',
-		'forum' => 'spip_forum',
-		'groupe_mots' => 'spip_groupes_mots',
-		'message' => 'spip_messages',
-		'mot' => 'spip_mots',
-		'petition' => 'spip_petitions',
-		'rubrique' => 'spip_rubriques',
-		'signature' => 'spip_signatures',
-		'syndic' => 'spip_syndic',
-		'syndic_article' => 'spip_syndic_articles',
-		'type_document' => 'spip_types_documents'
-	);
-
-	$import_ok = false;
-	$b = '';
-	// Lire le type d'objet
-	if (!($type = xml_fetch_tag($f, $b, $gz))) return false;
-	if ($type == '/SPIP') return !($import_ok = true);
-	$id = "id_$type";
-	$id_objet = 0;
-
-	// Lire les champs de l'objet
-	for (;;) {
-		$b = '';
-		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
-		if ($col == '/'.$type) break;
-		$value = '';
-		if (!xml_fetch_tag($f, $value, $gz)) return false;
-		if (substr($col, 0, 5) == 'lien:') {
-			$type_lien = substr($col, 5);
-			$liens[$type_lien][] = '('.$id_objet.','.$value.')';
-		}
-		else if ($col != 'maj') {
-			// tentative de restauration d'une base sauvegardee avec le champ 'images' ; d'experience, ca arrive...
-			// mieux vaut accepter que canner silencieusement...
-			if (($type == 'article') && ($col == 'images'))
-			{
-				if ($value) {		// ne pas afficher de message si on a un champ suppl mais vide
-					echo "--><br><font color='red'><b>"._T('avis_erreur_sauvegarde', array('type' => $type, 'id_objet' => $id_objet))."</b></font>\n<font color='black'>"._T('avis_colonne_inexistante', array('col' => $col));
-					if ($col == 'images') echo _T('info_verifier_image');
-					echo "</font>\n<!--";
-					$GLOBALS['erreur_restauration'] = true;
-				}
-			}
-			else {
-				$cols[] = $col;
-				$values[] = spip_abstract_quote($value);
-				if ($col == $id) $id_objet = $value;
-			}
-		}
-	}
-
-	$table = $tables[$type];
-	if (!spip_query("REPLACE $table (" . join(',', $cols) . ') VALUES (' . join(',', $values) . ')')) {
-		echo "--><br><font color='red'><b>"._T('avis_erreur_mysql')."</b></font>\n<font color='black'><tt>".spip_sql_error()."</tt></font>\n<!--";
-		$GLOBALS['erreur_restauration'] = true;
-	}
-
-	if ($type == 'article') {
-		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_objet");
-		spip_query("DELETE FROM spip_documents_articles WHERE id_article=$id_objet");
-	}
-	else if ($type == 'rubrique') {
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_rubrique=$id_objet");
-		spip_query("DELETE FROM spip_documents_rubriques WHERE id_rubrique=$id_objet");
-	}
-	else if ($type == 'breve') {
-		spip_query("DELETE FROM spip_documents_breves WHERE id_breve=$id_objet");
-	}
-	else if ($type == 'mot') {
-		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_objet");
-		spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_objet");
-	}
-	else if ($type == 'auteur') {
-		spip_query("DELETE FROM spip_auteurs_rubriques WHERE id_auteur=$id_objet");
-	}
-	else if ($type == 'message') {
-		spip_query("DELETE FROM spip_auteurs_messages WHERE id_message=$id_objet");
-	}
-	if ($liens) {
-		reset($liens);
-		while (list($type_lien, $t) = each($liens)) {
-			if ($type == 'auteur' OR $type == 'mot' OR $type == 'document')
-				if ($type_lien == 'syndic' OR $type_lien == 'forum') $table_lien = 'spip_'.$type.'s_'.$type_lien;
-				else $table_lien = 'spip_'.$type.'s_'.$type_lien.'s';
-			else
-				$table_lien = 'spip_'.$type_lien.'s_'.$type.'s';
-			spip_abstract_insert($table_lien, "($id, id_$type_lien)", join(',', $t));
-		}
-	}
-
-	$p = $pos + $abs_pos;
-	ecrire_meta("status_restauration", "$p");
-
-	return $import_ok = true;
-}
-
-
-// pour le support des vieux dump
-// pff ou vous l'avez trouve ce dump ?
-function import_objet_0_0($f, $gz=false) {
-	global $import_ok, $pos, $abs_pos;
-
-	$import_ok = false;
-	$b = '';
-	if (!($type = xml_fetch_tag($f, $b, $gz))) return false;
-	if ($type == '/SPIP') return !($import_ok = true);
-	$is_art = ($type == 'article');
-	$is_mot = ($type == 'mot');
-	for (;;) {
-		$b = '';
-		if (!($col = xml_fetch_tag($f, $b, $gz))) return false;
-		if ($col == ("/$type")) break;
-		$value = '';
-		if (!xml_fetch_tag($f, $value, $gz)) return false;
-		if ($is_art AND $col == 'id_auteur') {
-			$auteurs[] = $value;
-		}
-		else if ($is_mot AND $col == 'id_article') {
-			$articles[] = $value;
-		}
-		else if ($is_mot AND $col == 'id_breve') {
-			$breves[] = $value;
-		}
-		else if ($is_mot AND $col == 'id_forum') {
-			$forums[] = $value;
-		}
-		else if ($is_mot AND $col == 'id_rubrique') {
-			$rubriques[] = $value;
-		}
-		else if ($is_mot AND $col == 'id_syndic') {
-			$syndics[] = $value;
-		}
-		else if ($col != 'maj') {
-			$cols[] = $col;
-			$values[] = spip_abstract_quote($value);
-			if ($is_art && ($col == 'id_article')) $id_article = $value;
-			if ($is_mot && ($col == 'id_mot')) $id_mot = $value;
-		}
-	}
-
-	$table = "spip_$type";
-	if ($type != 'forum' AND $type != 'syndic') $table .= 's';
-	spip_query("REPLACE $table (" . join(",", $cols) . ") VALUES (" . join(",", $values) . ")");
-
-	if ($is_art && $id_article) {
-		spip_query("DELETE FROM spip_auteurs_articles WHERE id_article=$id_article");
-		if ($auteurs) {
-			reset ($auteurs);
-			while (list(, $auteur) = each($auteurs)) {
-			  spip_abstract_insert("spip_auteurs_articles", "(id_auteur, id_article)", "($auteur, $id_article)");
-			}
-		}
-	}
-	if ($is_mot && $id_mot) {
-		spip_query("DELETE FROM spip_mots_articles WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_breves WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_forum WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_rubriques WHERE id_mot=$id_mot");
-		spip_query("DELETE FROM spip_mots_syndic WHERE id_mot=$id_mot");
-		if ($articles) {
-			reset ($articles);
-			while (list(, $article) = each($articles)) {
-
-				spip_abstract_insert("spip_mots_articles", "(id_mot, id_article)", "($id_mot, $article)");
-			}
-		}
-		if ($breves) {
-			reset ($breves);
-			while (list(, $breve) = each($breves)) {
-
-				spip_abstract_insert("spip_mots_breves", "(id_mot, id_breve)", "($id_mot, $breve)");
-			}
-		}
-		if ($forums) {
-			reset ($forums);
-			while (list(, $forum) = each($forums)) {
-
-				spip_abstract_insert("spip_mots_forum", "(id_mot, id_forum)", "($id_mot, $forum)");
-			}
-		}
-		if ($rubriques) {
-			reset ($rubriques);
-			while (list(, $rubrique) = each($rubriques)) {
-
-				spip_abstract_insert("spip_mots_rubriques", "(id_mot, id_rubrique)", "($id_mot, $id_rubrique)");
-			}
-		}
-		if ($syndics) {
-			reset ($syndics);
-			while (list(, $syndic) = each($syndics)) {
-
-				spip_abstract_insert("spip_mots_syndic", "(id_mot, id_syndic)", "($id_mot, $syndic)");
-			}
-		}
-	}
-
-	$p = $pos + $abs_pos;
-	ecrire_meta("status_restauration", "$p");
-
-	return $import_ok = true;
-}
-
-function import_objet($f, $gz = false) {
-	return import_objet_1_2($f, $gz);
-}
 
 function import_fin() {
 	// Effacer l'ancien acces admin
@@ -430,104 +134,99 @@ function import_abandon() {
 	ecrire_metas();
 }
 
-function import_tables($f, $tables, $gz=false) {
-	global $IMPORT_tables_noerase;
-	global $import_ok;
-	global $auth_htaccess;
-	global $connect_id_auteur;
-	$_fseek = ($gz) ? gzseek : fseek;
+function import_init_tables()
+{
+  global $IMPORT_tables_noerase, $connect_id_auteur;
+	// grand menage
+	// on vide toutes les tables dont la restauration est demandee
+	$tables = import_table_choix();
+	foreach($tables as $table){
 
-	$s = spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'");
-	list($my_date) = spip_fetch_array($s);
+		if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase)))
+			spip_query("DELETE FROM $table");
+	}
+
+	// Bidouille pour garder l'acces admin actuel pendant toute la restauration
+	spip_query("UPDATE spip_auteurs SET id_auteur=0 WHERE id_auteur=$connect_id_auteur");
+	spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
+
+	return $tables;
+}
+
+function import_tables($f, $gz=false) {
+	global $import_ok, $my_pos;
+	static $time_javascript;
+
+	list($my_date) = spip_fetch_array(spip_query("SELECT UNIX_TIMESTAMP(maj) AS d FROM spip_meta WHERE nom='debut_restauration'"));
+
 	if (!$my_date) return false;
 
-	$my_pos = 0;
-	if (isset($GLOBALS['meta']["status_restauration"]))
-		$my_pos = $GLOBALS['meta']["status_restauration"];
-
+	$my_pos = (!isset($GLOBALS['meta']["status_restauration"])) ? 0 :
+		$GLOBALS['meta']["status_restauration"];
 	if ($my_pos==0) {
 		// Debut de l'importation
+		$fimport = false;
+		if ($r = import_debut($f, $gz)) {
+// tag ouvrant :
+// 'SPIP' pour un dump xml spip, nom de la base source pour un dump phpmyadmin
+			$tag_archive = $r[0];
+			$version_archive = $r[1]['version_archive'];
+			$fimport = import_charge_version($version_archive);
+		}
+		// Normalement c'est controle par import_all auparavant
+		if (!$fimport) {
+			return _T('avis_archive_incorrect');
+		}
+
 		ecrire_meta('charset_restauration', 'iso-8859-1');
-		if (!($r = import_debut($f, $gz))) {
-			ecrire_meta("erreur", _T('avis_archive_incorrect'));
-			return false;
-		}
-
-		// grand menage
-		// on vide toutes les tables dont la restauration est demandee
-		foreach($tables as $table){
-			$name = preg_replace("{^spip_}","",$table);
-			if (($table!='spip_auteurs')&&(!in_array($table,$IMPORT_tables_noerase))){
-				spip_query("DELETE FROM $table");
-			}
-		}
-
-		if (in_array("spip_auteurs",$tables)){
-			// Bidouille pour garder l'acces admin actuel pendant toute la restauration
-			spip_query("UPDATE spip_auteurs SET id_auteur=0 WHERE id_auteur=$connect_id_auteur");
-			spip_query("DELETE FROM spip_auteurs WHERE id_auteur!=0");
-		}
-		// tag ouvrant :
-		// 'SPIP' pour un dump xml spip, nom de la base source pour un dump phpmyadmin
-		$tag_archive = $r[0];
-		$version_archive = $r[1]['version_archive'];
 		ecrire_meta('version_archive_restauration', $version_archive);
 		ecrire_meta('tag_archive_restauration', $tag_archive);
-		#ecrire_metas();
-
-	}
-	else {
+		ecrire_metas();
+	} else {
 		// Reprise de l'importation
+		$_fseek = ($gz) ? gzseek : fseek;
 		$_fseek($f, $my_pos);
 		$version_archive = $GLOBALS['meta']['version_archive_restauration'];
 		$tag_archive = $GLOBALS['meta']['tag_archive_restauration'];
+		$fimport = import_charge_version($version_archivee);
+		$tables = import_table_choix();
 	}
 
-	// Restauration des entrees du fichier
-	if (preg_match("{^phpmyadmin::}is",$version_archive)){
-		#spip_log("restauration phpmyadmin : version $version_archive tag $tag_archive");
-		while (import_objet_1_3($f, $gz, $tag_archive, $tables, true));
-	}
-	else{
-		switch ($version_archive) {
-			case '1.3':
-				while (import_objet_1_3($f, $gz, $tag_archive, $tables));
-				break;
-			case '1.2':
-				while (import_objet_1_2($f, $gz));
-				break;
-			default:
-				while (import_objet_0_0($f, $gz));
-				break;
+	while ($table = $fimport($f, $gz)) {
+		$p = $pos + $abs_pos;
+	// Pas d'ecriture SQL car sinon le temps double.
+	// Il faut juste faire attention a bien lire_metas()
+	// au debut de la restauration
+		ecrire_meta("status_restauration", "$p");
+
+		if (time() - $time_javascript > 3) {	// 3 secondes
+			affiche_progression_javascript($abs_pos,$table);
+			$time_javascript = time();
 		}
+
+		$my_pos = true;
 	}
-	if (!$import_ok) {
-		ecrire_meta("erreur", _T('avis_archive_invalide'));
-		return false;
-	}
+
+	if (!$import_ok) return  _T('avis_archive_invalide');
 
 	// Mise a jour du fichier htpasswd
 
 	ecrire_acces();
 
-	// Destruction des entrees non restaurees
-
-	detruit_non_restaurees($mydate, $tables);
+	detruit_restaurateur();
 
 	import_fin();
 
 	affiche_progression_javascript('100 %');
 
-	return true;
+	return false;
 }
 
 // Destruction des entrees non restaurees
 
-function detruit_non_restaurees($mydate, $tables)
+function detruit_restaurateur()
 {
 	spip_query("DELETE FROM spip_auteurs WHERE id_auteur=0");
-	//foreach ($tables as $v) 
-	//  spip_query("DELETE FROM $v WHERE UNIX_TIMESTAMP(maj) < $my_date");
 }
 
 
@@ -548,7 +247,7 @@ function affiche_progression_javascript($abs_pos,$table="") {
 		echo ("<script language=\"JavaScript\" type=\"text/javascript\">window.setTimeout('location.href=\"".self()."\";',0);</script>\n");
 	}
 	else {
-		if ($table!="")
+		if (trim($table))
 			echo "document.progression.recharge.value='$table';\n";
 		if (! $affiche_progression_pourcent)
 			$taille = ereg_replace("&nbsp;", " ", taille_en_octets($abs_pos));
@@ -561,10 +260,71 @@ function affiche_progression_javascript($abs_pos,$table="") {
 	ob_flush();flush();
 }
 
-function import_all_continue($tables)
+
+function import_table_choix()
 {
-	global $meta, $flag_gz, $buf, $pos, $abs_pos;
-  global $affiche_progression_pourcent;
+	// construction de la liste des tables pour le dump :
+	// toutes les tables principales
+	// + toutes les tables auxiliaires hors relations
+	// + les tables relations dont les deux tables liees sont dans la liste
+	$tables_for_dump = array();
+	$tables_pointees = array();
+	global $IMPORT_tables_noimport;
+	global $tables_principales;
+	global $tables_auxiliaires;
+	global $table_des_tables;
+	global $tables_jointures;
+
+	// on construit un index des tables de liens
+	// pour les ajouter SI les deux tables qu'ils connectent sont sauvegardees
+	$tables_for_link = array();
+	foreach($tables_jointures as $table=>$liste_relations)
+		if (is_array($liste_relations))
+		{
+			$nom = $table;
+			if (!isset($tables_auxiliaires[$nom])&&!isset($tables_principales[$nom]))
+				$nom = "spip_$table";
+			if (isset($tables_auxiliaires[$nom])||isset($tables_principales[$nom])){
+				foreach($liste_relations as $link_table){
+					if (isset($tables_auxiliaires[$link_table])/*||isset($tables_principales[$link_table])*/){
+						$tables_for_link[$link_table][] = $nom;
+					}
+					else if (isset($tables_auxiliaires["spip_$link_table"])/*||isset($tables_principales["spip_$link_table"])*/){
+						$tables_for_link["spip_$link_table"][] = $nom;
+					}
+				}
+			}
+		}
+	
+	$liste_tables = array_merge(array_keys($tables_principales),array_keys($tables_auxiliaires));
+	foreach($liste_tables as $table){
+		$name = preg_replace("{^spip_}","",$table);
+		if (		!isset($tables_pointees[$table]) 
+				&&	!in_array($table,$IMPORT_tables_noimport)
+				&&	!isset($tables_for_link[$table])){
+			$tables_for_dump[] = $table;
+			$tables_pointees[$table] = 1;
+		}
+	}
+	foreach ($tables_for_link as $link_table =>$liste){
+		$connecte = true;
+		foreach($liste as $connect_table)
+			if (!in_array($connect_table,$tables_for_dump))
+				$connecte = false;
+		if ($connecte)
+			# on ajoute les liaisons en premier
+			# si une restauration est interrompue, cela se verra mieux si il manque des objets
+			# que des liens
+			array_unshift($tables_for_dump,$link_table);
+	}
+	return $tables_for_dump;
+}	
+
+
+function import_all_continue()
+{
+  global $meta, $flag_gz, $buf, $pos, $abs_pos, $my_pos;
+	global $affiche_progression_pourcent;
 	ini_set("zlib.output_compression","0"); // pour permettre l'affichage au fur et a mesure
 	// utiliser une version fraiche des metas (ie pas le cache)
 	include_spip('inc/meta');
@@ -633,8 +393,11 @@ function import_all_continue($tables)
 	$f = $_fopen($archive, "rb");
 	$pos = 0;
 	$buf = "";
-	if (!import_tables($f, $tables, $gz))
+	$r = import_tables($f, $gz);
+	if ($r) {
+		spip_log("Erreur: $r");
 		import_abandon();
+	}
 	else	import_fin();
 }
 
