@@ -1,6 +1,8 @@
-/*
- * Styles du calendrier
- */
+/*  ------------------------------------------ */
+/*  Styles pour le calendrier
+/*  ------------------------------------------ */
+
+body { background: #FFF; }
  
 .calendrier-arial9 { 
 	font-family: Arial, Sans, sans-serif; font-size: 9px;
@@ -134,7 +136,6 @@ a.calendrier-annee:hover {
 	background-color: #FFF;
 	-moz-border-radius: 5px;
  }
-
 
 .calendrier-tripleagenda { 
 	vertical-align: top;
@@ -352,16 +353,15 @@ a.calendrier-annee:hover {
 		background: #AAAAAA;
 		border: 1px solid black;
 		color: #000;
-
 }
 .calendrier-couleur12i {
 		background: #000;
 		border: 1px solid #AAAAAA;
 		color: #AAAAAA}
-.calendrier-couleur13 {
+.calendrier-couleur13 { 		/* Caca d'oie */
 		background: #FFFFE0;
 		border: 1px solid #666500;
-		color: #666500; /* Caca d'oie */
+		color: #666500;
 }
 .calendrier-couleur13i { 		/* Caca d'oie */
 		background: #666500;

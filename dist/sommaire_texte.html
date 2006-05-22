@@ -7,14 +7,14 @@
 // des 3 articles les plus recents.
 -->
 <head>
-	<title>
-		#NOM_SITE_SPIP
-	</title>
+	<title>[(#NOM_SITE_SPIP|textebrut)]</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
-	<meta http-equiv="AUTHOR" content="[(#NOM_SITE_SPIP|entites_html)]" />
-	<meta http-equiv="DESCRIPTION" content="Edition en mode texte de [(#NOM_SITE_SPIP|entites_html)]" />
-[	<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />
-]</head>
+	<meta http-equiv="author" content="[(#NOM_SITE_SPIP|entites_html)]" />
+	<meta http-equiv="description" content="Edition en mode texte de [(#NOM_SITE_SPIP|entites_html)]" />
+	<meta name="robots" content="none" />
+	<meta name="generator" content="SPIP" />
+	[<link rel="shortcut icon" href="(#CHEMIN{favicon.ico})" />]
+</head>
 <body>
 	<hr />
 	<:edition_mode_texte:> <a href="#URL_SITE_SPIP/">{#NOM_SITE_SPIP}</a>
