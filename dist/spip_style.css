@@ -193,15 +193,16 @@ div.choix_mots label { display: inline; }
 	width: 12em;
 	/*font-size: 0.71em;*/ }
 .formulaire_menu_lang label { display: none; }
-.formulaire_menu_lang select { padding: 0; margin: 0; }
+.formulaire_menu_lang select.forml { padding: 0; margin: 0; }
 
 /* Formulaire de login
 ----------------------------------------------- */
-.formulaire_login { clear: both; font-size: 0.90em; text-align: center; width: 400px; margin: 0 auto; padding: 3em 0; }
-.formulaire_login fieldset { width: 100%; clear: both; text-align: left; }
-.formulaire_login .forml, .formulaire_login_forum .forml { width: 12em; }
-.formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
-.formulaire_login a { color: #e86519; }
+#page_login .formulaire_login { clear: both; font-size: 0.90em; text-align: center; width: 400px; margin: 0 auto; padding: 3em 0; }
+#page_login .formulaire_login fieldset { width: 100%; clear: both; text-align: left; }
+#page_login .formulaire_login label, .formulaire_login_forum label, .formulaire_oubli label { display: block; }
+#page_login .formulaire_login .forml, .formulaire_login_forum .forml { width: 12em; }
+#page_login .formulaire_login .spip_logos, .formulaire_login_forum .spip_logos { float: right; padding-left: 10px; }
+#page_login a { color: #e86519; }
 
 /*  ------------------------------------------ */
 /*  Couleurs des liens
