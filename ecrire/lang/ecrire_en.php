@@ -67,7 +67,7 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_effacer_tout' => 'Delete ALL',
 'bouton_envoi_message_02' => 'SEND A MESSAGE',
 'bouton_envoyer_message' => 'Final message: send',
-'bouton_forum_petition' => 'FORUM & PETITION',
+'bouton_forum_petition' => 'FORUM &amp; PETITION',
 'bouton_modifier' => 'Modify',
 'bouton_pense_bete' => 'PERSONAL MEMO',
 'bouton_radio_activer_messagerie' => 'Enable internal messaging',
@@ -98,8 +98,8 @@ $GLOBALS[$GLOBALS['idx_lang']] = array(
 'bouton_radio_publication_immediate' => 'Immediate publication of messages
  (contributions will be shown as soon as they are sent, administrators can
  then delete them).',
-'bouton_radio_sauvegarde_compressee' => 'save as compressed in <b>ecrire/data/dump.xml.gz</b>',
-'bouton_radio_sauvegarde_non_compressee' => 'save as uncompressed in <b>ecrire/data/dump.xml</b>',
+'bouton_radio_sauvegarde_compressee' => 'save as compressed in @fichier@',
+'bouton_radio_sauvegarde_non_compressee' => 'save as uncompressed in @fichier@',
 'bouton_radio_supprimer_petition' => 'Delete the petition',
 'bouton_radio_syndication' => 'Syndication:',
 'bouton_redirection' => 'REDIRECT',
@@ -545,7 +545,7 @@ requiring an FTP access to the Web site.',
 'info_sauvegarde_petitions' => 'Backup the petitions',
 'info_sauvegarde_refers' => 'Backup the referrers',
 'info_sauvegarde_reussi_01' => 'Backup successful.',
-'info_sauvegarde_reussi_02' => 'The database has been saved in <b>ecrire/data/@archive@</b>. You can',
+'info_sauvegarde_reussi_02' => 'The database has been saved in @archive@. You can',
 'info_sauvegarde_reussi_03' => 'return to the management',
 'info_sauvegarde_reussi_04' => 'of your site.',
 'info_sauvegarde_rubriques' => 'Backup the sections',
@@ -784,8 +784,8 @@ in a colour indicating their status:',
 
 // T
 'taille_cache_image' => 'The images calculated automatically by SPIP (thumbnails, titles transformed into graphics, mathematical formulae in TeX format, etc.) take up a total of @taille@ in the @dir@ directory.',
-'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the <code>CACHE/</code> directory.',
-'taille_cache_maxi' => 'SPIP will try to limit the size of the <code>CACHE/</code> directory to approximately <b>@octets@</b> of data.',
+'taille_cache_infinie' => 'This site does not have any fixed limit for the size of the cache directory.',
+'taille_cache_maxi' => 'SPIP is trying to limit the size of the cache directory to approximately <b>@octets@</b> of data.',
 'taille_cache_octets' => 'The size of the cache is currently @octets@.',
 'taille_cache_vide' => 'The cache is empty.',
 'taille_repertoire_cache' => 'Current size of the cache',
@@ -794,10 +794,7 @@ in a colour indicating their status:',
 'texte_admin_effacer_01' => 'This command deletes <i>all</i> the content of the database,
 including <i>all</i> the access parameters for editors and administrators. After executing it, you should
 reinstall SPIP in order to recreate a new database and the first administrator\'s access.',
-'texte_admin_tech_01' => 'This option allows you to save 
-the content of the database in a file stored in the directory <i>ecrire/data/</i>.
-Also remember to retrieve the whole <i>IMG/</i>, directory, which contains
-the images and the documents used in the articles and sections.',
+'texte_admin_tech_01' => 'This option allows you to save the content of the database in a file stored in the directory @dossier@. Also, remember to retrieve the whole <i>IMG/</i>, directory, which contains the images and the documents used in the articles and sections.',
 'texte_admin_tech_02' => 'Warning: this backup can ONLY be restored in a site installed under the same version of SPIP. You should certainly not "empty the database" and expect to re-install the backup after the upgrade... For more information refer to <a href=\'http://www.spip.net/en_article2428.html\'>SPIP documentation</a>.',
 'texte_admin_tech_03' => 'You can choose to save the file in a compressed form, to 
 	speed up its transfer to your machine or to a backup server and save some disk space.',
@@ -858,13 +855,13 @@ the images and the documents used in the articles and sections.',
 'texte_en_cours_validation' => 'The following articles and news are submitted for publication. Do not hesitate to give your opinion through the forums attached to them.',
 'texte_enrichir_mise_a_jour' => 'You can enrich the layout of your text by using &laquo;typographical shortcuts&raquo;.',
 'texte_fichier_authent' => '<b>Should SPIP create the <tt>.htpasswd</tt>
-  and <tt>.htpasswd-admin</tt> files in the directory <tt>ecrire/data/</tt>?</b><p />
+  and <tt>.htpasswd-admin</tt> files in the directory @dossier@?</b><p />
   These files can be used to restrict access to authors
   and administrators in other parts of your site
   (for instance, external statistical programme).<p />
-  If you have not used such files before you can leave this option
-  with its default value (no creation 
-  of files).',
+  If you have no need of such files, you can leave this option
+  with its default value (no files 
+  creation).',
 'texte_informations_personnelles_1' => 'The system will provide you now with a custom access to the site.',
 'texte_informations_personnelles_2' => '(Note: if it is a reinstallation, and your access is still working, you can',
 'texte_introductif_article' => '(Introductory Text to the article.)',
@@ -945,12 +942,12 @@ to refresh only one page, you would rather do it from the public area and use th
 'texte_restaurer_base' => 'Restore the content of the database backup',
 'texte_restaurer_sauvegarde' => 'This option allows you to restore a previous
 backup of the database. To achieve this, the file containing the backup should have been
-stored in the directory <i>ecrire/data/</i>.
-Be careful with this feature: <b>Any potential modifications or losses are
+stored in the directory @dossier@.
+Be catious with this feature: <b>Any potential modifications or losses are
 irreversible.</b>',
 'texte_sauvegarde' => 'Backup the content of the database',
 'texte_sauvegarde_base' => 'Backup the database',
-'texte_sauvegarde_compressee' => 'Backup will be done in the uncompressed file <b>ecrire/data/dump.xml</b>.',
+'texte_sauvegarde_compressee' => 'Backup will be stored in the uncompressed file @fichier@.',
 'texte_selection_langue_principale' => 'You can select below the "main language" of the site. Luckily, this choice does not constrain your articles to be written in the selected language, but allows to determine
 
 <ul><li> the default format of the dates in the public site</li>
