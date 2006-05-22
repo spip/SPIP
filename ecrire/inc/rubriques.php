@@ -341,6 +341,7 @@ function afficher_enfant_rub($id_rubrique, $afficher_bouton_creer=false) {
 }
 
 function calcul_generation ($generation) {
+	include_spip('base/abstract_sql');
 	$lesfils = array();
 	$result = spip_abstract_select(array('id_rubrique'),
 				array('spip_rubriques AS rubriques'),
