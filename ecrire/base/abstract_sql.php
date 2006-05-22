@@ -35,7 +35,7 @@ if (!defined("_ECRIRE_INC_VERSION")) return;
 function spip_abstract_select (
 	$select = array(), $from = array(), $where = array(),
 	$groupby = '', $orderby = array(), $limit = '',
-	$sousrequete = '', $cpt = '',
+	$sousrequete = '', $having = array(),
 	$table = '', $id = '', $serveur='') {
 
 	if (!$serveur)
@@ -55,7 +55,7 @@ function spip_abstract_select (
 	}
 	return $f($select, $from, $where,
 		  $groupby, $orderby, $limit,
-		  $sousrequete, $cpt,
+		  $sousrequete, $having,
 		  $table, $id, $serveur);
 }
 
