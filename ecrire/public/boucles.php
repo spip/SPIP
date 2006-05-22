@@ -209,8 +209,8 @@ function boucle_HIERARCHIE_dist($id_boucle, &$boucles) {
 	. ($boucle->tout ? 'false' : 'true')
 	. ');';
 
-	$boucle->where[]= array("'IN'", "'$id_table" . ".id_rubrique'", '"($hierarchie)"');
-	$boucle->select[]= "FIND_IN_SET($id_table" . '.id_rubrique, \'$hierarchie\') AS rang';
+	$boucle->having[]= array("'<>'", "rang", 0);
+	$boucle->select[]= "FIELD($id_table" . '.id_rubrique, $hierarchie) AS rang';
 
 	if ($boucle->default_order[0] != " DESC")
 		$boucle->default_order[] = "'rang'" ;
