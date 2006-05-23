@@ -141,10 +141,12 @@ function balise_URL_ARTICLE_dist($p) {
 
 	// Cas general : chercher un id_article dans la pile
 	else {
-		$_id_article = 0;
+		$_id_article = '';
 		if ($p->param && !$p->param[0][0]){
-			$quoi =  $p->param[0][1];
-			$_id_article = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+			$_id_article =  calculer_liste($p->param[0][1],
+								$p->descr,
+								$p->boucles,
+								$p->id_boucle);
 		}
 		if (!$_id_article)
 			$_id_article = champ_sql('id_article', $p);
@@ -159,10 +161,12 @@ function balise_URL_ARTICLE_dist($p) {
 }
 
 function balise_URL_RUBRIQUE_dist($p) {
-	$_id_rubrique = 0;
+	$_id_rubrique = '';
 	if ($p->param && !$p->param[0][0]){
-		$quoi =  $p->param[0][1];
-		$_id_rubrique = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		$_id_rubrique =  calculer_liste($p->param[0][1],
+							$p->descr,
+							$p->boucles,
+							$p->id_boucle);
 	}
 	if (!$_id_rubrique)
 		$_id_rubrique = champ_sql('id_rubrique',$p);
@@ -176,10 +180,12 @@ function balise_URL_RUBRIQUE_dist($p) {
 }
 
 function balise_URL_BREVE_dist($p) {
-	$_id_breve = 0;
+	$_id_breve = '';
 	if ($p->param && !$p->param[0][0]){
-		$quoi =  $p->param[0][1];
-		$_id_breve = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		$_id_breve =  calculer_liste($p->param[0][1],
+							$p->descr,
+							$p->boucles,
+							$p->id_boucle);
 	}
 	if (!$_id_breve)
 		$_id_breve = champ_sql('id_breve',$p);
@@ -193,10 +199,12 @@ function balise_URL_BREVE_dist($p) {
 }
 
 function balise_URL_MOT_dist($p) {
-	$_id_mot = 0;
+	$_id_mot = '';
 	if ($p->param && !$p->param[0][0]){
-		$quoi =  $p->param[0][1];
-		$_id_mot = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		$_id_mot =  calculer_liste($p->param[0][1],
+							$p->descr,
+							$p->boucles,
+							$p->id_boucle);
 	}
 	if (!$_id_mot)
 		$_id_mot = champ_sql('id_mot',$p);
@@ -229,10 +237,12 @@ function balise_NOM_SITE_dist($p) {
 # a part [(#ID_SYNDIC|generer_url_site)]
 
 function balise_URL_FORUM_dist($p) {
-	$_id_forum = 0;
+	$_id_forum = '';
 	if ($p->param && !$p->param[0][0]){
-		$quoi =  $p->param[0][1];
-		$_id_forum = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		$_id_forum =  calculer_liste($p->param[0][1],
+							$p->descr,
+							$p->boucles,
+							$p->id_boucle);
 	}
 	if (!$_id_forum)
 		$_id_forum = champ_sql('id_forum',$p);
@@ -246,10 +256,12 @@ function balise_URL_FORUM_dist($p) {
 }
 
 function balise_URL_DOCUMENT_dist($p) {
-	$_id_document = 0;
+	$_id_document = '';
 	if ($p->param && !$p->param[0][0]){
-		$quoi =  $p->param[0][1];
-		$_id_document = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		$_id_document =  calculer_liste($p->param[0][1],
+							$p->descr,
+							$p->boucles,
+							$p->id_boucle);
 	}
 	if (!$_id_document)
 		$_id_document = champ_sql('id_document',$p);
@@ -260,10 +272,12 @@ function balise_URL_DOCUMENT_dist($p) {
 }
 
 function balise_URL_AUTEUR_dist($p) {
-	$_id_auteur = 0;
+	$_id_auteur = '';
 	if ($p->param && !$p->param[0][0]){
-		$quoi =  $p->param[0][1];
-		$_id_auteur = ($quoi[0]->type=='texte') ? intval($quoi[0]->texte) : 0;
+		$_id_auteur =  calculer_liste($p->param[0][1],
+							$p->descr,
+							$p->boucles,
+							$p->id_boucle);
 	}
 	if (!$_id_auteur)
 		$_id_auteur = champ_sql('id_auteur',$p);
