@@ -61,24 +61,26 @@ function decrire_logo($type, $mode, $id, $width, $height, $titre="", $redirect="
 	if (!$img = cherche_logo($id, $type, $mode)) 	return '';
 	list($fid, $dir, $nom, $format) = $img;
 
-	if ($taille = @getimagesize($fid))
-		$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
-
 	$res = ratio_image($fid, $nom, $format, $width, $height, "alt=''");
 	if (!$titre)
-	  return $res;
-	else return "<p><center><div><a href='" .
+		return $res;
+	else {
+		if ($taille = @getimagesize($fid))
+			$xy = _T('info_largeur_vignette', array('largeur_vignette' => $taille[0], 'hauteur_vignette' => $taille[1]));
+		return "<p><center><div><a href='" .
 		$fid .
 		"'>$res</a></div>" .
 		debut_block_invisible(md5($titre)) .
+		"<font size='1'>" .
 		$xy .
 		"\n<br />[<a href='" .
 		generer_action_auteur("iconifier", "$nom.$format", $redirect) .
 		"'>".
 		_T('lien_supprimer') .
-		"</a>]" .
+		"</a>]</font>" .
 		fin_block() .
 		"</center></p>";
+	}
 }
 
 function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script) {
@@ -110,11 +112,7 @@ function afficher_boite_logo($type, $id_objet, $id, $texteon, $texteoff, $script
 function afficher_logo($racine, $titre, $type, $mode, $id, $redirect) {
 	global $connect_id_auteur;
 
-	echo "<b>";
-	echo bouton_block_invisible(md5($titre));
-	echo $titre;
-	echo "</b>";
-	echo "<font size=1>";
+	echo bouton_block_invisible(md5($titre)), "<b>", $titre, "</b>";
 
 	$logo = decrire_logo($type,$mode,$id, 170, 170, $titre, $redirect);
 
@@ -166,7 +164,7 @@ function afficher_logo($racine, $titre, $type, $mode, $id, $redirect) {
 		echo "</div></FORM>\n";
 	}
 
-	echo "</font>";
+
 	return $logo;
 }
 

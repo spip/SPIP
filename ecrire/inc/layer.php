@@ -33,14 +33,13 @@ function debut_block_invisible($nom_block){
 	
 	return http_script("vis['".$numero_block[$nom_block]."'] = 'hide';
 document.write('<div id=\"Layer".$numero_block[$nom_block]."\" style=\"display: none; margin-top: 1px;\">');",
-			      '',
-			   "<div id='Layer".$numero_block[$nom_block]."' style='display: block;'>");
-
+			   '',
+			   "");
 }
 
 function fin_block() {
 	if ($GLOBALS['browser_layer'])
-		return "<div style='clear: both;'></div>".http_script("document.write('</div>');","","</div>");
+		return "<div style='clear: both;'></div>".http_script("document.write('</div>');","","");
 }
 
 function bouton_block_invisible($nom_block, $icone='') {
