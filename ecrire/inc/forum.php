@@ -174,7 +174,7 @@ function calculer_threads() {
 // Calculs des URLs des forums (pour l'espace public)
 function racine_forum($id_forum){
 	if (!$id_forum = intval($id_forum)) return;
-	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve FROM spip_forum WHERE id_forum=".$id_forum);
+	$result = spip_query("SELECT id_parent, id_rubrique, id_article, id_breve, id_syndic FROM spip_forum WHERE id_forum=".$id_forum);
 
 	if($row = spip_fetch_array($result)){
 		if($row['id_parent']) {
@@ -184,6 +184,7 @@ function racine_forum($id_forum){
 			if($row['id_rubrique']) return array('rubrique',$row['id_rubrique'], $id_forum);
  			if($row['id_article']) return array('article',$row['id_article'], $id_forum);
 			if($row['id_breve']) return array('breve',$row['id_breve'], $id_forum);
+			if($row['id_syndic']) return array('site',$row['id_syndic'], $id_forum);
 		}
 	}
 } 
