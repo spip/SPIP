@@ -12,7 +12,7 @@
 	<!-- Lien vers le backend pour navigateurs eclaires -->
 	<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="#URL_PAGE{backend,id_rubrique=#ID_RUBRIQUE}" />
 
-	<!-- Ceci est la feuille de style par defaut pour les types internes a SPIP -->
+	<!-- Ceci est la feuille de style par defaut pour le code genere par SPIP -->
 	<link rel="stylesheet" href="#CHEMIN{spip_style.css}" type="text/css" media="projection, screen, tv" />
 
 	<!-- Feuille de styles CSS pour l'affichage du site sur ecran -->
@@ -121,7 +121,7 @@
 
 			[(#REM) Forum de la rubrique
 			NB : pour desactiver les forums de rubrique, supprimez simplement les lignes ci-dessous ]
-			[<h2 class="repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:form_pet_message_commentaire:></a></h2>]
+			[<h2 class="forum-repondre"><a href="(#PARAMETRES_FORUM|url_reponse_forum)"><:form_pet_message_commentaire:></a></h2>]
 			<INCLURE{fond=inc-forum}{id_rubrique}>
 
         </div><!-- fin contenu -->
