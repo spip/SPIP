@@ -70,12 +70,19 @@ function fichier_aide($lang_aide = '') {
 	// Aide internet
 	else {
 		// en cache ?
-		if (!@file_exists($fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html")) {
+		if (!@file_exists(
+		$fichier_aide = _DIR_CACHE . "aide-$lang_aide-aide.html")) {
 			if ($help_server) {
 				include_spip('inc/distant');
-				if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")
-				AND ($contenu = recuperer_page("$help_server/$lang_aide-aide.html")))
-					ecrire_fichier ($fichier_aide, $contenu);
+				if (ecrire_fichier(_DIR_CACHE . 'aide-test', "test")) {
+						if ($contenu =
+						recuperer_page("$help_server/$lang_aide-aide.html"))
+							ecrire_fichier ($fichier_aide, $contenu);
+						else {
+							erreur_aide_indisponible();
+							return false;
+						}
+				}
 			}
 		}
 
@@ -84,9 +91,7 @@ function fichier_aide($lang_aide = '') {
 		if (strlen($contenu) > 500) {
 			return array($contenu, $lang_aide);
 		}
-		
-		// Pas d'aide meme sur internet : n'existe pas dans la langue
-		erreur_aide_indisponible();
+
 	}
 
 	return false;
@@ -441,7 +446,7 @@ function analyse_aide($html, $aide=false) {
 //
 function exec_aide_index_dist()
 {
-global $img, $frame, $aide, $var_lang, $lang;
+global $img, $frame, $aide, $var_lang, $lang, $help_server;
 // Eviter les calculs evitables (surtout en client/serveur sans cache !)
 
  if (http_last_modified(filemtime(_DIR_INCLUDE . 'inc_version.php'), time() + 24 * 3600))
@@ -461,7 +466,7 @@ else {
 	if (!$html) {
 		// Renvoyer sur l'aide en ligne du serveur externe
 		if ($help_server)
-			redirige_par_entete("$help_server/?lang=$spip_lang");
+			redirige_par_entete("$help_server/?lang=$var_lang&aide=$aide");
 		// Sinon message d'erreur
 		else {
 			erreur_aide_indisponible();
