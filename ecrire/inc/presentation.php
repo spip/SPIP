@@ -1558,9 +1558,9 @@ function envoi_link($nom_site_spip, $rubrique="") {
 		'&ltr=' . 
 		$GLOBALS['spip_lang_left'];
 
-	// CSS par defaut /spip_style.css
-	$res = '<link rel="stylesheet" type="text/css" href="'
-	. find_in_path('spip_style.css').'" />'  . "\n"
+	// CSS pour le code genere par Spip
+	$res = '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
+	. 'spip_style.css" />'  . "\n"
 
 	// CSS de secours en cas de non fonct de la suivante
 	. '<link rel="stylesheet" type="text/css" href="' . _DIR_IMG_PACK
