@@ -171,6 +171,7 @@ $spip_pipeline = array(
 	'post_typo' => '|quote_amp',
 	'pre_propre' => '|extraire_multi',
 	'post_propre' => '',
+	'nettoyer_raccourcis_typo' => '',
 	'pre_indexation' => '',
 	'pre_syndication' => '',
 	'post_syndication' => '',
