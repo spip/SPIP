@@ -416,6 +416,13 @@ function _L($text, $args=array()) {
 		return $text;
 }
 
+// Afficher "ecrire/data/" au lieu de "data/" dans les messages
+function joli_repertoire($rep) {
+	$a = substr($rep,0,1);
+	if ($a<>'.' AND $a<>'/')
+		$rep = _DIR_RESTREINT.$rep;
+	return $rep;
+}
 
 // Nommage bizarre des tables d'objets
 function table_objet($type) {

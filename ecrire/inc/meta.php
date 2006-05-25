@@ -59,7 +59,8 @@ function ecrire_metas() {
 			. " <a href='". generer_url_action('test_dirs'). "'>"
 			. _T('texte_inc_meta_2')
 			. "</a> "
-			. _T('texte_inc_meta_3', array('repertoire' => _DIR_SESSIONS))
+			. _T('texte_inc_meta_3',
+				array('repertoire' => joli_repertoire(_DIR_SESSIONS)))
 			. "</h4>\n");
 		}
 	}

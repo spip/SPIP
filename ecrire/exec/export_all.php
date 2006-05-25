@@ -200,7 +200,7 @@ function exec_export_all_dist()
 		
 		effacer_meta("status_dump");
 		ecrire_metas();
-		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => '<b>'._DIR_SESSIONS.$archive.'</b>'))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
+		echo "<p>"._T('info_sauvegarde_reussi_01')."</b><p>"._T('info_sauvegarde_reussi_02', array('archive' => '<b>'.joli_repertoire(_DIR_SESSIONS.$archive).'</b>'))." <a href='./'>"._T('info_sauvegarde_reussi_03')."</a> "._T('info_sauvegarde_reussi_04')."\n";
 	}
 	else{
 		if (!($timeout = ini_get('max_execution_time')*1000));
