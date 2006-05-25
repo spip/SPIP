@@ -203,7 +203,14 @@ function echappe_retour($letexte, $source='') {
 
 
 function couper($texte, $taille=50) {
-	$texte = substr($texte, 0, 400 + 2*$taille); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
+	$offset = 400 + 2*$taille;
+	if (	$offset<strlen($texte)
+			&& ($p_tag_ouvrant = strpos($texte,'<',$offset))!==NULL){
+		$p_tag_fermant = strpos($texte,'>',$offset);
+		if ($p_tag_fermant<$p_tag_ouvrant)
+			$offset += $p_tag_fermant; // prolonger la coupe jusqu'au tag fermant suivant eventuel
+	}
+	$texte = substr($texte, 0, $offset); /* eviter de travailler sur 10ko pour extraire 150 caracteres */
 
 	// on utilise les \r pour passer entre les gouttes
 	$texte = str_replace("\r\n", "\n", $texte);
