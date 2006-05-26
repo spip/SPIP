@@ -48,6 +48,8 @@ function exec_statistiques_visites_dist()
     $spip_lang_left;
 
 
+  $titre = $pourarticle = "";
+
 if ($id_article = intval($id_article)){
 	$result = spip_query("SELECT titre, visites, popularite FROM spip_articles WHERE statut='publie' AND id_article=$id_article");
 
@@ -119,9 +121,9 @@ else {
 	}
 	$articles_recents = join($articles_recents, ",");
 		
+
 	// Par popularite
 	$result = spip_query("SELECT id_article, titre, popularite, visites FROM spip_articles WHERE statut='publie' AND popularite > 0 ORDER BY popularite DESC");
-
 
 	$nombre_articles = spip_num_rows($result);
 	if ($nombre_articles > 0) {
@@ -130,6 +132,7 @@ else {
 		echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'>";
 		echo typo(_T('info_visites_plus_populaires'));
 		echo "<ol style='padding-left:25px; font-size:x-small;color:#666666;'>";
+		$liste = 0;
 		while ($row = spip_fetch_array($result)) {
 			$titre = typo($row['titre']);
 			$l_article = $row['id_article'];
@@ -236,16 +239,11 @@ if ($connect_statut != '0minirezo') {
 }
 
 
-
-
 //////
 
  if (!($aff_jours = intval($aff_jours))) $aff_jours = 105;
 
-if (!$origine) {
-
-
-
+ if (!$origine) {
 
 	if ($id_article) {
 		$table = "spip_visites_articles";
@@ -265,13 +263,12 @@ if (!$origine) {
 
 	$result=spip_query("SELECT UNIX_TIMESTAMP(date) AS date_unix, visites FROM $table WHERE $where AND date > DATE_SUB(NOW(),INTERVAL $aff_jours DAY) ORDER BY date");
 
+	$date_debut = '';
+	$log = array();
 	while ($row = spip_fetch_array($result)) {
 		$date = $row['date_unix'];
-		$visites = $row['visites'];
-
-		$log[$date] = $visites;
-		if ($i == 0) $date_debut = $date;
-		$i++;
+		if (!$date_debut) $date_debut = $date;
+		$log[$date] = $row['visites'];
 	}
 
 
@@ -323,7 +320,7 @@ if (!$origine) {
 			$aff_jours_moins = 420 * ((1/$largeur_abs) - 1);
 		}
 		
-		if ($id_article) $pour_article="&id_article=$id_article";
+		$pour_article = $id_article ? "&id_article=$id_article" : '';
 		
 		if ($date_premier < $date_debut)
 		  echo http_href_img(generer_url_ecrire("statistiques_visites","aff_jours=$aff_jours_plus$pour_article"),
@@ -346,30 +343,30 @@ if (flag_svg()) {
 	$moyenne =  round($total_absolu / ((date("U")-$date_premier)/(3600*24)));
 } else {
 	
-			echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
-			  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif'>";
-			echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
+	echo "<table cellpadding=0 cellspacing=0 border=0><tr>",
+	  "<td style='background-image:", _DIR_IMG_PACK, "fond-stats.gif'>";
+	echo "<table cellpadding=0 cellspacing=0 border=0><tr>";
 	
-			echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
+	echo "<td bgcolor='black'>", http_img_rien(1,200), "</td>";
 	
-			// Presentation graphique (rq: on n'affiche pas le jour courant)
-			foreach ($log as $key => $value) {
-				# quand on atteint aujourd'hui, stop
-				if ($key == $date_today) break; 
+	$test_agreg = $decal = $jour_prec = $val_prec = $total_loc =0;
 
-				$test_agreg ++;
+	// Presentation graphique (rq: on n'affiche pas le jour courant)
+	foreach ($log as $key => $value) {
+		# quand on atteint aujourd'hui, stop
+		if ($key == $date_today) break; 
+
+		$test_agreg ++;
 		
-				if ($test_agreg == $agreg) {	
+		if ($test_agreg == $agreg) {	
 				
-				$test_agreg = 0;
-				$n++;
+			$test_agreg = 0;
 			
-				if ($decal == 30) $decal = 0;
-				$decal ++;
-				$tab_moyenne[$decal] = $value;
-			
-				// Inserer des jours vides si pas d'entrees	
-				if ($jour_prec > 0) {
+			if ($decal == 30) $decal = 0;
+			$decal ++;
+			$tab_moyenne[$decal] = $value;
+			// Inserer des jours vides si pas d'entrees	
+			if ($jour_prec > 0) {
 					$ecart = floor(($key-$jour_prec)/((3600*24)*$agreg)-1);
 		
 					for ($i=0; $i < $ecart; $i++){
@@ -400,7 +397,6 @@ if (flag_svg()) {
 						echo 
 						    http_img_rien($largeur,1,'background-color:black;', $tagtitle);
 						echo "</td>";
-						$n++;
 					}
 				}
 	
@@ -616,12 +612,10 @@ if (flag_svg()) {
 		echo "<td bgcolor='black'>", http_img_rien(1, 200),"</td>";
 	
 		// Presentation graphique
-		$n = 0;
 		$decal = 0;
 		$tab_moyenne = "";
 			
 		while (list($key, $value) = each($entrees)) {
-			$n++;
 			
 			$mois = affdate_mois_annee($key);
 
@@ -760,14 +754,15 @@ if ($origine) {
 	$table_ref = "spip_referers";
 }
 
-$query = "SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY $vis DESC";
 
+$result = spip_query("SELECT referer, $vis AS vis FROM $table_ref WHERE $where ORDER BY vis DESC LIMIT $limit");
+	
 
 echo "<br /><br /><br />";
 gros_titre(_T("onglet_origine_visites"));
 
 echo "<div style='font-family:Verdana,Arial,Sans,sans-serif; font-size:small;'><br />";
-echo aff_referers ($vis, $table_ref, $where, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
+echo aff_referers ($result, $limit, generer_url_ecrire('statistiques_visites', ('limit=' . strval($limit+200))));
 echo "<br /></div>";	
 
 fin_page();
