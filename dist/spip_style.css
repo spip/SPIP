@@ -92,12 +92,15 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 	text-align: left;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 0.77em; }
+.formulaire_spip p {  
+    margin: 0.5em 0;  
+    padding: 0; }
 
 .formulaire_spip fieldset, .spip_encadrer {
     display: block;
 	margin: 8px 0;
 	padding: 8px;
-	border: 1px solid; }
+	border: 1px dotted; }
 .formulaire_spip legend {
     font-weight: bold;
     padding-left: 0.5em; 
@@ -125,7 +128,6 @@ input.spip_bouton {
 .reponse_formulaire { font-weight: bold; color: #FF0000; }
 fieldset.reponse_formulaire { border: 1px solid; }
 fieldset.reponse_formulaire legend { font-weight: normal; }
-fieldset.reponse_formulaire p { /*padding: 4px;*/ }
 
 /* * Previsualisation du message */
 fieldset.previsu {  
