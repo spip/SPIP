@@ -75,7 +75,7 @@
             </B_documents_portfolio>
             <BOUCLE_afficher_document(DOCUMENTS) {id_document} {mode=document}{extension==(png|jpg|gif)$}>
             <div class="spip_documents" id="document_actif">
-                [(#EMBED_DOCUMENT)]
+                #EMBED_DOCUMENT
                 [<div class="spip_doc_titre">(#TITRE)</div>]
                 [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
             </div>
