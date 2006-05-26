@@ -216,8 +216,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	clear: both;
 	margin-top: 1.4em;
 	padding-top: 2px;
-	border-top: 2px solid #CCCCCC;
-	padding-top: 1em; }
+	border-top: 2px solid #CCCCCC; }
+#documents_portfolio h2 { font-size: 0.88em; font-weight: bold; }
 
 #document_actif { 
 	clear: both;
@@ -231,7 +231,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	margin-top: 1.4em;
 	padding-top: 2px;
 	border-top: 2px solid #CCCCCC; }
-#documents_joints h2 { margin-bottom: 0.4em; font-weight: bold; font-size: 0.88em; }
+#documents_joints h2 { margin-bottom: 0.4em; font-size: 0.88em; font-weight: bold; }
 #documents_joints li { margin-bottom: 0.4em; }
 #documents_joints li .spip_doc_titre { text-align: left; }
 #documents_joints li .spip_doc_titre small { font-weight: normal; }
