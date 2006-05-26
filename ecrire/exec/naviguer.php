@@ -239,7 +239,10 @@ if ($id_rubrique>0 AND $GLOBALS['meta']['multi_rubriques'] == 'oui' AND ($GLOBAL
 		$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_parent"));
 		$langue_parent = $row['lang'];
 	}
-	else $langue_parent = $GLOBALS['meta']['langue_site'];
+	if (!$langue_parent)
+		$langue_parent = $GLOBALS['meta']['langue_site'];
+	if (!$langue_rubrique)
+		$langue_rubrique = $langue_parent;
 
 	debut_cadre_enfonce('langues-24.gif');
 	echo "<TABLE BORDER=0 CELLSPACING=0 CELLPADDING=3 WIDTH=100% BACKGROUND=''><TR><TD BGCOLOR='#EEEECC' class='serif2'>";
