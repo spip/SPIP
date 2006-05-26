@@ -107,14 +107,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 /*  Habillage des menus et de navigation
 /*  ------------------------------------------ */
 
-#navigation *{ font-size: 0.77em; }
-#navigation * *{ font-size: 1em; }
-#navigation div .titre { font-size: 1.2em; }
-
-#contenu .encart *{ font-size: 0.71em; }
-#contenu .encart * *{ font-size: 1em; }
-#contenu .encart div .titre { font-size: 1.2em; }
-
 /*  Habillage general des menus de navigation
 ---------------------------------------------- */
 .rubriques, .breves, .syndic, .forums, .divers { 
@@ -122,12 +114,14 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	border: 1px solid #CCCCCC; 
 	margin-bottom: 16px;
 	min-width: 10em;
+	font-size: 0.77em;
 }
 	
 .rubriques .titre, .breves .titre, .syndic .titre, .forums .titre, .divers .titre { 
 	padding: 3px 4px 2px 4px;
 	border-bottom: 1px dotted #CCCCCC;
 	text-align: center;
+	font-size: 1.2em;
 	font-weight: bold;
 }
 
@@ -207,7 +201,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	font-weight: bold; }
 	
 .texte { color: #000; font-size: 1em; }
-/*.texte *{ font-size: 1em; }*/
 
 .ps, .notes {
 	margin-top: 1.4em;
@@ -243,7 +236,6 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #documents_joints li .spip_doc_titre { text-align: left; }
 #documents_joints li .spip_doc_titre small { font-weight: normal; }
 #documents_joints li .spip_doc_descriptif {}
-
 
 /* Listes d'articles et extraits introductifs
 ----------------------------------------------- */
