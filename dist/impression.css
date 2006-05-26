@@ -69,7 +69,6 @@ q, blockquote, .spip_poesie { font-family: Georgia, Garamond, Times, serif; }
 .spip_code, .spip_cadre { font-family: monospace; }
 
 .lien, blockquote, .spip_poesie, .spip_cadre, .extrait .texte {
- 	background: #FFF;
 	margin: 1em;
 	padding: 1em;
 	border: 1pt dotted #CCCCCC; }
