@@ -22,8 +22,7 @@ include_spip("inc/indexation");
 
 function afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot )
 {
-	global $champs_extra, $options, $connect_statut, $les_notes;
-
+	global $champs_extra, $options, $connect_statut, $les_notes,$spip_display;
 	$result = spip_query("SELECT * FROM spip_breves WHERE id_breve='$id_breve'");
 
 
@@ -69,8 +68,8 @@ fin_boite_info();
 // Logos de la breve
 //
 
-if ($id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
-	afficher_boite_logo('breve', 'id_breve', $id_breve,
+if (($spip_display != 4) AND $id_breve>0 AND ($connect_statut == '0minirezo' AND acces_rubrique($id_rubrique)))
+	afficher_boite_logo('id_breve', $id_breve,
 			    _T('logo_breve').aide ("breveslogo"),
 			    _T('logo_survol'), 'breves_voir'); 
 
@@ -245,17 +244,13 @@ $id_breve = intval($id_breve);
 
 if (($id_breve == 0) AND ($new == "oui")) {
 	$id_rubrique = intval($id_parent);
-	$row = spip_fetch_array(spip_query("SELECT lang, id_secteur FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
-	$id_rubrique = $row['id_secteur'];
-	if (!$id_rubrique) die('erreur pas de rubrique definie'); # pas normal ca !
-
+	$row = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=$id_rubrique"));
 	$langue_new = $row ? $row["lang"] : "";
 	if (!$langue_new) $langue_new = $GLOBALS['meta']['langue_site'];
 
 	$id_breve = spip_abstract_insert("spip_breves",
 		"(titre, date_heure, id_rubrique, statut, lang, langue_choisie)", 
 		"('"._T('item_nouvelle_breve')."', NOW(), '$id_rubrique', 'refuse', '$langue_new', 'non')");
-
 }
 
  $calculer_rubriques = false;
@@ -314,7 +309,6 @@ if ($jour AND $connect_statut == '0minirezo') {
 	if ($new == 'oui')
 		redirige_par_entete(
 			generer_url_ecrire('breves_voir', 'id_breve='.$id_breve, '&'));
-
  afficher_breves_voir($id_breve, $changer_lang, $cherche_mot, $supp_mot, $nouv_mot);
 }
 ?>

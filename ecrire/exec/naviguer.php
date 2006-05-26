@@ -104,8 +104,8 @@ function exec_naviguer_dist()
 //
 // Logos de la rubrique
 //
-		if ($flag_editable) 
-			afficher_boite_logo('rub', 'id_rubrique', $id_rubrique, ($id_rubrique ? _T('logo_rubrique') : _T('logo_standard_rubrique'))." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
+		if ($flag_editable AND ($spip_display != 4)) 
+			afficher_boite_logo('id_rubrique', $id_rubrique, ($id_rubrique ? _T('logo_rubrique') : _T('logo_standard_rubrique'))." ".aide ("rublogo"), _T('logo_survol'), 'naviguer');
 
 //
 // Afficher les boutons de creation d'article et de breve

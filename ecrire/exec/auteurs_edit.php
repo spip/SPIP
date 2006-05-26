@@ -19,7 +19,7 @@ include_spip('inc/message_select');
 
 function exec_auteurs_edit_dist()
 {
-	global $connect_id_auteur;
+  global $connect_id_auteur, $spip_display;
 
 	$id_auteur = intval(_request('id_auteur'));
 	pipeline('exec_init',array('args'=>array('exec'=>'auteur_edit','$id_auteur'=>$id_auteur),'data'=>''));
@@ -39,8 +39,8 @@ function exec_auteurs_edit_dist()
 
 	cadre_auteur_infos($id_auteur, $auteur);
 
-	if (statut_modifiable_auteur($id_auteur, $auteur)) {
-		afficher_boite_logo('aut', 'id_auteur', $id_auteur,
+	if (statut_modifiable_auteur($id_auteur, $auteur) AND ($spip_display != 4)) {
+		afficher_boite_logo('id_auteur', $id_auteur,
 				    _T('logo_auteur').aide ("logoart"), _T('logo_survol'), 'auteurs_edit');
 	}
 

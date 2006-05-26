@@ -138,8 +138,8 @@ if ($id_mot) {
 // Logos du mot-clef
 //
 
-if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques)
-  afficher_boite_logo('mot', 'id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
+if ($id_mot > 0 AND $connect_statut == '0minirezo'  AND $connect_toutes_rubriques AND ($spip_display != 4))
+  afficher_boite_logo('id_mot', $id_mot, _T('logo_mot_cle').aide("breveslogo"), _T('logo_survol'), 'mots_edit');
 
 
 //

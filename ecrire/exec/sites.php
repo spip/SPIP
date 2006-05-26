@@ -48,6 +48,7 @@ function exec_sites_dist()
   $redirect_ok,
   $reload,
   $resume,
+  $spip_display,
   $supp_mot,
   $syndication,
   $syndication_old,
@@ -263,7 +264,7 @@ echo "<p><center>";
 	icone (_T('icone_voir_sites_references'), generer_url_ecrire("sites_tous",""), "site-24.gif","rien.gif");
 echo "</center>";
 
-if ($id_syndic AND $flag_administrable)
+if ($id_syndic AND $flag_administrable AND ($spip_display != 4))
   afficher_boite_logo('site', 'id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'sites');
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
