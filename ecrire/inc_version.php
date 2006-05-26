@@ -220,7 +220,7 @@ $tables_des_serveurs_sql['localhost'] =  &$tables_principales;
 $spip_version = 1.912;
 
 // version de spip
-$spip_version_affichee = '1.9 beta 1';
+$spip_version_affichee = '1.9 beta 2';
 
 // ** Securite **
 $auteur_session = '';
