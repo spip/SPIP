@@ -12,38 +12,38 @@ var blankSrc = "[(#CHEMIN{rien.gif}|url_absolue)]";
 if (supported) fixImage();
 
 function propertyChanged() {
-   if (!supported) return;
-   
-   var pName = event.propertyName;
-   if (pName != "src") return;
-   // if not set to blank
-   if ( ! new RegExp(blankSrc).test(src))
-      fixImage();
+	if (!supported) return;
+
+	var pName = event.propertyName;
+	if (pName != "src") return;
+	// if not set to blank
+	if ( ! new RegExp(blankSrc).test(src))
+		fixImage();
 };
 
 function fixImage() {
-   // get src
-   var src = element.src;
-   
-   // check for real change
-   if (src == realSrc) {
-      element.src = blankSrc;
-      return;
-   }
+	// get src
+	var src = element.src;
 
-   if ( ! new RegExp(blankSrc).test(src)) {
-      // backup old src
-      realSrc = src;
-   }
-   
-   // test for png
-   if ( /\.png$/.test( realSrc.toLowerCase() ) ) {
-      // set blank image
-      element.src = blankSrc;
-      // set filter
-      element.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" +
-                                     src + "',sizingMethod='image')";
-   }
+	// check for real change
+	if (src == realSrc) {
+		element.src = blankSrc;
+		return;
+	}
+
+	if ( ! new RegExp(blankSrc).test(src)) {
+		// backup old src
+		realSrc = src;
+	}
+
+	// test for png
+	if ( /\.png$/.test( realSrc.toLowerCase() ) ) {
+		// set blank image
+		element.src = blankSrc;
+		// set filter
+		element.runtimeStyle.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='" +
+			src + "',sizingMethod='image')";
+	}
 }
 
 </script>

@@ -23,122 +23,122 @@
 <body id="page_rubrique">
 <div id="page">
 
-    [(#REM) Entete de la page + titre du site ]
-    <INCLURE{fond=inc-entete}{lang}>
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc-entete}{lang}>
 
-    [(#REM) Fil d'Ariane ]
-    <div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
+	[(#REM) Fil d'Ariane ]
+	<div id="hierarchie"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|supprimer_numero|couper{80})]</div>
 
-    <div id="conteneur">
+	<div id="conteneur">
 
-        [(#REM) Contenu principal : contenu de la rubrique ]
+		[(#REM) Contenu principal : contenu de la rubrique ]
 
-        <div id="contenu">
-            <div class="cartouche">
-                [(#LOGO_RUBRIQUE||reduire_image{200,200})]
-                <h1 class="titre">[(#TITRE|supprimer_numero)]</h1>
-                <small><:dernier_ajout:> : [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
-            </div>
+		<div id="contenu">
+			<div class="cartouche">
+				[(#LOGO_RUBRIQUE||reduire_image{200,200})]
+				<h1 class="titre">[(#TITRE|supprimer_numero)]</h1>
+				<small><:dernier_ajout:> : [(#DATE|nom_jour) ][(#DATE|affdate).]</small>
+			</div>
 
-            [<div class="chapo">(#TEXTE)</div>]
+			[<div class="chapo">(#TEXTE)</div>]
 
-            <br class="nettoyeur" />
+			<br class="nettoyeur" />
 
-            <div class="contre-encart">
+			<div class="contre-encart">
 
-                [(#REM) Articles de la rubrique ]
-                <B_articles>
-                <h2 class="invisible"><:articles_rubrique:></h2>
-                <ul>
-                    <BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse}>
-                    <li class="extrait">
-                    <h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
-                    <small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
-                    </li>
-                    </BOUCLE_articles>
-                </ul>
-                </B_articles>
+				[(#REM) Articles de la rubrique ]
+				<B_articles>
+				<h2 class="invisible"><:articles_rubrique:></h2>
+				<ul>
+					<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse}>
+					<li class="extrait">
+					<h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
+					<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
+					</li>
+					</BOUCLE_articles>
+				</ul>
+				</B_articles>
 
-                [(#REM) Documents joints a la rubrique ]
-                <B_documents_joints>
-                <div id="documents_joints">
-			        <h2><:titre_documents_joints:></h2>
-                    <ul>
-                        <BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par date} {doublons}>
-                        <li>
-                        <div class="spip_doc_titre">[<a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">(#TITRE|sinon{<:info_document:>})</a> ]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
-                        [<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
-                        </BOUCLE_documents_joints>
-                    </ul>
+				[(#REM) Documents joints a la rubrique ]
+				<B_documents_joints>
+				<div id="documents_joints">
+					<h2><:titre_documents_joints:></h2>
+					<ul>
+						<BOUCLE_documents_joints(DOCUMENTS) {id_rubrique} {mode=document} {par date} {doublons}>
+						<li>
+						<div class="spip_doc_titre">[<a href="#URL_DOCUMENT" title="<:bouton_telecharger:>">(#TITRE|sinon{<:info_document:>})</a> ]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]</li>
+						</BOUCLE_documents_joints>
+					</ul>
 
-                </div>
-                </B_documents_joints>
+				</div>
+				</B_documents_joints>
 
-            </div><!-- fin contre-encart -->
+			</div><!-- fin contre-encart -->
 
-            <div class="encart">
+			<div class="encart">
 
-                [(#REM) Breves du secteur ]
-                <B_breves_rubrique>
-                <div class="breves">
-                    <h2 class="titre"><:breves:></h2>
-                    <ul>
-                        <BOUCLE_breves_rubrique(BREVES) {id_secteur} {par date}{inverse} {0,5}>
-                        <li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
-                        </BOUCLE_breves_rubrique>
-                    </ul>
-                </div>
-                </B_breves_rubrique>
+				[(#REM) Breves du secteur ]
+				<B_breves_rubrique>
+				<div class="breves">
+					<h2 class="titre"><:breves:></h2>
+					<ul>
+						<BOUCLE_breves_rubrique(BREVES) {id_secteur} {par date}{inverse} {0,5}>
+						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+						</BOUCLE_breves_rubrique>
+					</ul>
+				</div>
+				</B_breves_rubrique>
 
-                [(#REM) Sites de la rubrique ]
-                <B_sites>
-                <div class="syndic">
-                    <h2 class="titre"><:sur_web:></h2>
-                    <ul>
-                        <BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
-                        <li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a>
-                            <B_syndic>
-                            <ul>
-                                <BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
-                                <li><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></li>
-                                </BOUCLE_syndic>
-                            </ul>
-                            </B_syndic>
-                        </li>
-                        </BOUCLE_sites>
-                    </ul>
-                </div>
-                </B_sites>
+				[(#REM) Sites de la rubrique ]
+				<B_sites>
+				<div class="syndic">
+					<h2 class="titre"><:sur_web:></h2>
+					<ul>
+						<BOUCLE_sites(SITES) {id_rubrique} {par nom_site}>
+						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a>
+							<B_syndic>
+							<ul>
+								<BOUCLE_syndic(SYNDIC_ARTICLES) {id_syndic} {age<180} {par date}{inverse} {0,3}>
+								<li><a href="#URL_ARTICLE" class="spip_out">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+								</BOUCLE_syndic>
+							</ul>
+							</B_syndic>
+						</li>
+						</BOUCLE_sites>
+					</ul>
+				</div>
+				</B_sites>
 
-                [(#REM) Proposer un site ]
-                #FORMULAIRE_SITE
+				[(#REM) Proposer un site ]
+				#FORMULAIRE_SITE
 
-            </div>
+			</div>
 
-            [<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
+			[<div class="notes"><h2><:info_notes:></h2>(#NOTES)</div>]
 
-        </div><!-- fin contenu -->
+		</div><!-- fin contenu -->
 
-        [(#REM) Menu de navigation laterale ]
-        <div id="navigation">
-            <h1 class="invisible"><:navigation:></h1>
+		[(#REM) Menu de navigation laterale ]
+		<div id="navigation">
+			<h1 class="invisible"><:navigation:></h1>
 
-            [(#REM) Menu de navigation par rubriques ]
-            <INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
+			[(#REM) Menu de navigation par rubriques ]
+			<INCLURE{fond=inc-rubriques}{lang}{id_rubrique}>
 
-            [(#REM) Menu de navigation mots-cles ]
-            <B_mots>
-            <div class="divers">
-                <h2 class="titre"><:mots_clefs:></h2>
-                <ul>
-                    <BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
-                    <li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
-                    </BOUCLE_mots>
-                </ul>
-            </div>
-            </B_mots>
+			[(#REM) Menu de navigation mots-cles ]
+			<B_mots>
+			<div class="divers">
+				<h2 class="titre"><:mots_clefs:></h2>
+				<ul>
+					<BOUCLE_mots(MOTS) {id_rubrique} {par titre}>
+					<li><a href="#URL_MOT" rel="tag">[(#TITRE|supprimer_numero|couper{80})]</a></li>
+					</BOUCLE_mots>
+				</ul>
+			</div>
+			</B_mots>
 
-        </div><!-- fin navigation -->        
+		</div><!-- fin navigation -->
 
 </div><!-- fin conteneur -->
 
