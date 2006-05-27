@@ -26,7 +26,7 @@ include_spip('base/abstract_sql');
   // 28 paremetres, qui dit mieux ?
   // moi ! elle en avait 61 en premiere approche
 
-function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad)
+function exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $rubrique_article, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad,  $id_trad_new)
 {
   global $options, $spip_display, $spip_lang_left, $spip_lang_right, $dir_lang;
 
@@ -96,7 +96,7 @@ boite_info_articles($id_article, $statut_article, $visites, $id_version);
 
 
 // pour l'affichage du virtuel
-unset($virtuel);
+$virtuel = '';
 if (substr($chapo, 0, 1) == '=') {
 	$virtuel = substr($chapo, 1);
 }
@@ -174,7 +174,7 @@ if ($options == 'avancees' AND $GLOBALS['meta']["articles_mots"] != 'non') {
   formulaire_mots('articles', $id_article, $nouv_mot, $supp_mot, $cherche_mot, $flag_editable, generer_url_ecrire("articles","id_article=$id_article"));
 }
 
- langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad);
+ langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad,  $id_trad_new);
 
  echo pipeline('affiche_milieu',array('args'=>array('exec'=>'articles','id_article'=>$id_article),'data'=>''));
 
@@ -553,7 +553,8 @@ function titres_articles($titre, $statut_article,$surtitre, $soustitre, $descrip
 	echo "</td>";
 	
 	$flag_modif = false;
-	
+	$modif = array();
+
 	if ($flag_editable) {
 		echo "<td>". http_img_pack('rien.gif', " ", "width='5'") . "</td>\n";
 		echo "<td align='center'>";
@@ -697,7 +698,7 @@ else {
 }
 
 
-function langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad)
+function langues_articles($id_article, $langue_article, $flag_editable, $id_rubrique, $id_trad, $dir_lang, $nom_select, $lier_trad,  $id_trad_new)
 {
 
   global $connect_statut, $couleur_claire, $options, $connect_toutes_rubriques, $spip_lang_right;
@@ -1339,7 +1340,7 @@ function modif_langue_articles($id_article, $id_rubrique, $changer_lang)
 // Appliquer la modification de langue
  if ($GLOBALS['meta']['multi_articles'] == 'oui') {
 	$langue_parent = spip_fetch_array(spip_query("SELECT lang FROM spip_rubriques WHERE id_rubrique=" . $id_rubrique));
-	$langue_parent=$langue_parent['parent'];
+	$langue_parent=$langue_parent['lang'];
 	if ($changer_lang) {
 		if ($changer_lang != "herit")
 			spip_query("UPDATE spip_articles SET lang=" . spip_abstract_quote($changer_lang) . ", langue_choisie='oui', date_modif=NOW() WHERE id_article=$id_article");
@@ -1356,7 +1357,8 @@ function inclus_non_articles($id_article)
 {
   $result = spip_query("SELECT docs.id_document FROM spip_documents AS docs, spip_documents_articles AS lien WHERE lien.id_article=$id_article AND lien.id_document=docs.id_document");
 
-while($row=spip_fetch_array($result)){
+  $ze_doc = array();
+  while($row=spip_fetch_array($result)){
 	$ze_doc[]=$row['id_document'];
 }
 
@@ -1458,7 +1460,7 @@ function insert_article($id_parent)
 
 function exec_articles_dist()
 {
-global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre, $titre_article, $virtuel; 
+  global $ajout_auteur, $annee, $annee_redac, $avec_redac, $change_accepter_forum, $change_petition, $changer_lang, $changer_virtuel, $chapo, $cherche_auteur, $cherche_mot, $connect_id_auteur, $date, $date_redac, $debut, $email_unique, $heure, $heure_redac, $id_article, $id_article_bloque, $id_parent, $id_rubrique_old, $id_secteur, $id_trad_new, $jour, $jour_redac, $langue_article, $lier_trad, $message, $minute, $minute_redac, $mois, $mois_redac, $new, $nom_select, $nouv_auteur, $nouv_mot, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre, $titre_article, $virtuel; 
 
 
  $id_parent = intval($id_parent);
@@ -1548,7 +1550,7 @@ if (isset($_POST['titre'])) {
 		redirige_par_entete(
 			generer_url_ecrire('articles', 'id_article='.$id_article, '&'));
 
-exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad);
+	exec_affiche_articles_dist($id_article, $ajout_auteur, $change_accepter_forum, $change_petition, $changer_virtuel, $cherche_auteur, $cherche_mot, $debut, $email_unique, $flag_auteur, $flag_editable, $langue_article, $message, $nom_select, $nouv_auteur, $nouv_mot, $id_rubrique, $site_obli, $site_unique, $supp_auteur, $supp_mot, $texte_petition, $titre_article, $lier_trad, $id_trad_new);
 
 }
 ?>
