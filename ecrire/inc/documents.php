@@ -60,6 +60,14 @@ function document_vu($id_document=0) {
 	}
 }
 
+# Affecter les document_vu() utilises dans afficher_case_document 
+# utile pour un affichage differencie des image "libres" et des images
+# integrees via <imgXX|left> dans le texte
+
+function document_a_voir($texte) {
+	preg_match_all(__preg_img, $texte, $matches, PREG_SET_ORDER);
+	foreach ($matches as $match) document_vu($match[2]);
+}
 
 //
 // Affiche le document avec sa vignette par defaut
@@ -971,14 +979,8 @@ function afficher_documents_non_inclus($id_article, $type = "article", $flag_mod
 //
 
 function afficher_documents_colonne($id, $type="article", $flag_modif = true) {
-	global $connect_id_auteur, $connect_statut, $options;
-	global $id_doc_actif;
+	global $connect_id_auteur, $connect_statut, $options, $id_doc_actif;
 
-	# HACK!!! simule une mise en page pour affecter les document_vu()
-	# utilises dans afficher_case_document appelee plus loin :
-	# utile pour un affichage differencie des image "libres" et des images
-	# integrees via <imgXX|left> dans le texte
-	propre($GLOBALS['descriptif']." ".$GLOBALS['texte']." ".$GLOBALS['chapo']);
 	/// Ajouter nouvelle image
 	echo "<a name='images'></a>\n";
 	$titre_cadre = _T('bouton_ajouter_image').aide("ins_img");

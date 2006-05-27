@@ -70,7 +70,7 @@ else debut_page(_T('titre_page_forum_envoi'), "redacteurs");
 debut_gauche();
 debut_droite();
 
-
+ $titre_parent = '';
 if ($id_parent) {
 	$result = spip_query("SELECT * FROM spip_forum WHERE id_forum=$id_parent");
 	if ($row = spip_fetch_array($result)) {
@@ -88,9 +88,8 @@ if ($id_parent) {
 		$nom_site_parent = $row['nom_site'];
 		$url_site_parent = $row['url_site'];
 	}
-}
 
-if ($titre_parent) {
+    if ($titre_parent) {
 	debut_cadre_forum("forum-interne-24.gif", false, "", typo($titre_parent));
 	echo "<span class='arial2'>$date_heure_parent</span>";
 	echo " ".typo($auteur_parent);
@@ -115,7 +114,8 @@ if ($titre_parent) {
 		  "</td>\n";
 		echo "\n<td width=100% valign='top' rowspan='2'>";
 	}
-}
+    }
+ }
 
 
 if ($modif_forum == "oui") {
