@@ -764,7 +764,7 @@ function traiter_tableau($bloc) {
 //
 function traiter_listes ($texte) {
 	$parags = preg_split(",\n[[:space:]]*\n,", $texte);
-	unset($texte);
+	$texte ='';
 
 	// chaque paragraphe est traite a part
 	while (list(,$para) = each($parags)) {
@@ -776,13 +776,13 @@ function traiter_listes ($texte) {
 		$texte .= $debut;
 
 		// chaque item a sa profondeur = nb d'etoiles
-		unset ($type);
+		$type ='';
 		while (list(,$item) = each($lignes)) {
 			preg_match(",^([*]*|[#]*)([^*#].*)$,s", $item, $regs);
 			$profond = strlen($regs[1]);
 
 			if ($profond > 0) {
-				unset ($ajout);
+				$ajout='';
 
 				// changement de type de liste au meme niveau : il faut
 				// descendre un niveau plus bas, fermer ce niveau, et
@@ -824,7 +824,7 @@ function traiter_listes ($texte) {
 		}
 
 		// retour sur terre
-		unset ($ajout);
+		$ajout = '';
 		while ($niveau > 0) {
 			$ajout .= $pile_li[$niveau];
 			$ajout .= $pile_type[$niveau];
@@ -977,7 +977,7 @@ function traiter_raccourcis($letexte) {
 			// on l'echappe
 			$insert = code_echappement($insert);
 
-			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\">$num_note</a>$ferme_note";
+			$appel = "$ouvre_note<a href=\"#nh$ancre\" name=\"nb$ancre\" class=\"spip_note\" title=\"" . _T('info_notes') . " $ancre\">$num_note</a>$ferme_note";
 		} else {
 			$insert = '';
 			$appel = '';
