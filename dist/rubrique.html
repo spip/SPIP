@@ -79,16 +79,16 @@
 			<div class="encart">
 
 				[(#REM) Breves du secteur ]
-				<B_breves_rubrique>
+				<B_breves>
 				<div class="breves">
 					<h2 class="titre"><:breves:></h2>
 					<ul>
-						<BOUCLE_breves_rubrique(BREVES) {id_secteur} {par date}{inverse} {0,5}>
+						<BOUCLE_breves(BREVES) {id_secteur} {par date}{inverse} {0,5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
-						</BOUCLE_breves_rubrique>
+						</BOUCLE_breves>
 					</ul>
 				</div>
-				</B_breves_rubrique>
+				</B_breves>
 
 				[(#REM) Sites de la rubrique ]
 				<B_sites>
