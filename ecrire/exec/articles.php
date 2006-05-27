@@ -794,6 +794,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 
 
 		// Afficher la liste des traductions
+		$ret = false;
 		if ($id_trad != 0) {
 			$result_trad = spip_query("SELECT id_article, id_rubrique, titre, lang, statut FROM spip_articles WHERE id_trad = $id_trad");
 			
@@ -831,7 +832,7 @@ function langues_articles($id_article, $langue_article, $flag_editable, $id_rubr
 				  else $vals[] = http_img_pack('langues-off-12.gif', "", "width='12' height='12' border='0'");
 				}
 
-				$ret .= "</td>";
+				$ret = true;
 
 				$s = typo($titre_trad);
 				if ($id_article_trad != $id_article) 

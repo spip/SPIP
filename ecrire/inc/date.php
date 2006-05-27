@@ -69,6 +69,7 @@ function afficher_jour($jour, $attributs, $autre=false){
 }
 
 function afficher_heure($heure, $attributs, $autre=false){
+	$res = '';
 	for($i=0;$i<=23;$i++){
 		$aff = sprintf("%02s", $i);
 		$res .= my_sel($i,$aff,$heure);
@@ -77,6 +78,7 @@ function afficher_heure($heure, $attributs, $autre=false){
 }
 
 function afficher_minute($minute, $attributs, $autre=false){
+	$res = '';
 	for($i=0;$i<=59;$i+=5){
 		$aff = sprintf("%02s", $i);
 		$res .= my_sel($i,$aff,$minute);
