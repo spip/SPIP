@@ -268,3 +268,15 @@ function disable_other_forms(me) {
 		}
 	}
 }
+
+// Pour ne pas fermer le formulaire de recherche pendant qu'on l'edite	
+
+function recherche_desesperement()
+{
+	if (findObj('bandeaurecherche') && findObj('bandeaurecherche').style.visibility == 'visible') 
+		{ ouvrir_recherche = true; } 
+	else { ouvrir_recherche = false; } 
+	changestyle('bandeauvide', 'visibility', 'hidden'); 
+	if (ouvrir_recherche == true) 
+		{ changestyle('bandeaurecherche','visibility','visible'); }
+}

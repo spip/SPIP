@@ -1117,6 +1117,20 @@ function verifier_visiteur() {
 	}
 }
 
+function determine_upload()
+{
+	global $connect_toutes_rubriques, $connect_login, $connect_statut ;
+
+	if (!$GLOBALS['flag_upload']) return false;
+	if (!$connect_statut) {
+		$var_auth = charger_fonction('auth', 'inc');
+		$var_auth = $var_auth();
+	}
+	if ($connect_statut != '0minirezo') return false;
+ 	return _DIR_TRANSFERT . 
+	  ($connect_toutes_rubriques ? '' : ($connect_login . '/'));
+}
+
 
 //
 // INITIALISER LES CONSTANTES ET LES VARIABLES SYSTEMES DE SPIP
