@@ -122,7 +122,7 @@
 			[(#REM) Articles dans la meme rubrique ]
 			<B_articles_rubrique>
 			<div class="breves">
-				<h2 class="titre"><a href="[(#URL_RUBRIQUE|supprimer_numero)]"><:meme_rubrique:></a></h2>
+				<h2 class="titre"><a href="#URL_RUBRIQUE"><:meme_rubrique:></a></h2>
 				<ul>
 					<BOUCLE_articles_rubrique(ARTICLES) {id_rubrique} {par date}{inverse}>
 					<li><a href="#URL_ARTICLE"[ class="(#EXPOSE)"]>[(#TITRE|supprimer_numero|couper{80})]</a></li>

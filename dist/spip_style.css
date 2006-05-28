@@ -17,7 +17,6 @@ ul.spip li, ol.spip li { list-style: inherit; }
 li.spip { margin-left: 0.8em; list-style-position: outside; }
 
 h3.spip {
-    clear: both;
 	text-align: center; 
 	margin-top: 2em; 
 	margin-bottom: 1.4em; 
