@@ -108,7 +108,7 @@ function exec_brouteur_dist()
 		echo "\n<td valign='top' width='$largeur_col'>";
 		
 		echo "<iframe width='100%' id='iframe$i' name='iframe$i'",
-		  "src='", generer_url_ecrire('brouteur_frame',"id_rubrique=".$dest[$i]."&frame=$i"), "' class='iframe-bouteur' height='",
+		  "src='", generer_url_ecrire('brouteur_frame',"rubrique=".$dest[$i]."&frame=$i"), "' class='iframe-bouteur' height='",
 		  $hauteur_table,
 		  "'></iframe>";
 		
