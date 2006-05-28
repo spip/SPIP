@@ -292,7 +292,7 @@ function calculer_dump_array($a)
 {
   if (!is_array($a)) return $a ;
   $res = "";
-  if ($a[0] == "'?'") 
+  if ($a AND $a[0] == "'?'") 
     return ("(" . calculer_dump_array($a[1]) .
 	    " ? " . calculer_dump_array($a[2]) .
 	    " : " . calculer_dump_array($a[3]) .
