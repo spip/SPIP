@@ -542,6 +542,7 @@ function spip_optim_select ($select = array(), $from = array(),
 		list($t,$c) = $join[$k];
 		$cle = "L$k";
 		if (!$menage
+		OR spip_optim_joint($cle, $select)
 		OR spip_optim_joint($cle, $join)
 		OR spip_optim_joint($cle, $where))
 			$where[]= "$t.$c=$cle.$c";
