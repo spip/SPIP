@@ -85,10 +85,10 @@ function phraser_polyglotte($texte,$ligne, $result) {
 			$champ->texte = $debut;
 			$champ->ligne = $ligne;
 			$result[] = $champ;
+			$ligne += substr_count($champ->texte, "\n");
 		}
 
 		$champ = new Polyglotte;
-		$ligne += substr_count($champ->texte, "\n");
 		$champ->ligne = $ligne;
 		$ligne += substr_count($match[0], "\n");
 		$lang = '';
