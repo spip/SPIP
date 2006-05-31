@@ -97,13 +97,10 @@ img, .spip_logos { margin: 0; padding: 0; border: 0; }
 
 .formulaire_spip fieldset, .spip_encadrer {
     display: block;
-	margin: 8px 0;
-	padding: 8px;
+	margin: 0.77em 0;
+	padding: 0.77em;
 	border: 1px dotted; }
-.formulaire_spip legend {
-    font-weight: bold;
-    padding-left: 0.5em; 
-    padding-right: 0.5em; }
+.formulaire_spip legend { font-weight: bold; }
 
 .spip_sanscadre { border: 0; }
 .spip_sanscadre legend { display: none; }
@@ -125,12 +122,11 @@ input.spip_bouton {
 
 /* * Reponse du formulaire (erreur) */
 .reponse_formulaire { font-weight: bold; color: #FF0000; }
-fieldset.reponse_formulaire { border: 1px dotted; }
-fieldset.reponse_formulaire legend { font-weight: normal; }
+fieldset.reponse_formulaire { border: 1px dotted; font-weight: normal; }
 
 /* * Previsualisation du message */
 fieldset.previsu {
-	padding: 12px;
+	padding: 1em;
 	border: 1px solid; }
 
 /* * Barre de raccourcis */

@@ -112,7 +112,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 .rubriques, .breves, .syndic, .forums, .divers { 
 	text-align: left; 
 	border: 1px solid #CCCCCC; 
-	margin-bottom: 16px;
+	margin-bottom: 1em;
 	min-width: 10em;
 	font-size: 0.77em;
 }
@@ -276,16 +276,16 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	clear: both;
 	background: #e0ffe0;
 	border: 1px solid #CCCCCC;
-	padding: 8px;
-	margin-bottom: 16px; 
+	padding: 0.5em;
+	margin-bottom: 1em; 
 	font-weight: bold; 
 	text-align: center; }
 	
 #page_plan #contenu .contre-encart ul { 
 	display: block; 
 	clear: left; 
-	margin-left: 16px; 
-	margin-bottom: 16px;
+	margin-left: 1em; 
+	margin-bottom: 1em;
 	list-style: square; }
 #page_plan #contenu .contre-encart li { list-style: inherit; }
 
