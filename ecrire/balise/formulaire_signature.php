@@ -60,7 +60,7 @@ function balise_FORMULAIRE_SIGNATURE_stat($args, $filtres) {
 function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_obli, $message) {
 
 	if (_request('var_confirm')) # _GET
-		$reponse = reponse_confirmation($id_article);
+		$reponse = reponse_confirmation();  # calculee plus tot: assembler.php
 
 	else if (_request('nom_email') AND _request('adresse_email')) # _POST
 		$reponse = reponse_signature($id_article,
@@ -88,18 +88,18 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 // Sinon, c'est l'execution du formulaire et on retourne le message 
 // de confirmation ou d'erreur construit lors de l'appel par assembler.php
 
-function reponse_confirmation($id_article, $var_confirm = '') {
-	static $confirm = '';
+function reponse_confirmation($var_confirm = '') {
 
-	$id_article = intval($id_article);
+	static $confirm = '';
 	if (!$var_confirm) return $confirm;
+
 	spip_connect();
 	if ($GLOBALS['db_ok']) {
 		include_spip('inc/texte');
 		include_spip('inc/filtres');
 
 		// Eviter les doublons
-		$lock = "petition $id_article $var_confirm";
+		$lock = "petition $var_confirm";
 		if (!spip_get_lock($lock, 5)) {
 			$confirm= _T('form_pet_probleme_technique');
 		}
@@ -118,7 +118,6 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 					$message = $row['message'];
 					$statut = $row['statut'];
 				}
-	
 				$result_petition = spip_abstract_select('*', 'spip_petitions', "id_article=$id_article");
 
 	
@@ -134,7 +133,7 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 				if ($email_unique == "oui") {
 					$result = spip_abstract_select('ad_email', 'spip_signatures', "id_article=$id_article AND ad_email=" . spip_abstract_quote($adresse_email) . " AND statut='publie'");
 					if (spip_num_rows($result) > 0) {
-						$confirm= (_T('form_pet_deja_signe'));
+						$confirm= _T('form_pet_deja_signe');
 						$refus = "oui";
 					}
 				}
@@ -142,13 +141,13 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 				if ($site_unique == "oui") {
 					$result = spip_abstract_select('statut', 'spip_signatures', "id_article=$id_article AND url_site=" . spip_abstract_quote($url_site) . " AND statut='publie'");
 					if (spip_num_rows($result) > 0) {
-						$confirm= (_T('form_pet_deja_enregistre'));
+						$confirm= _T('form_pet_deja_enregistre');
 						$refus = "oui";
 					}
 				}
 	
 				if ($refus == "oui") {
-					$confirm= (_T('form_deja_inscrit'));
+					$confirm= _T('form_deja_inscrit');
 				}
 				else {
 					spip_query("UPDATE spip_signatures SET statut='publie', date_time=NOW() WHERE id_signature='$id_signature'");
@@ -158,11 +157,11 @@ function reponse_confirmation($id_article, $var_confirm = '') {
 					include_spip('inc/meta');
 					suivre_invalideur("id='varia/pet$id_article'");
 	
-					$confirm= (_T('form_pet_signature_validee'));
+					$confirm= _T('form_pet_signature_validee');
 				}
 			}
 			else {
-				$confirm= (_T('form_pet_aucune_signature'));
+				$confirm= _T('form_pet_aucune_signature');
 			}
 			spip_release_lock($lock);
 		}

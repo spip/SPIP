@@ -39,10 +39,9 @@ function public_assembler_dist($fond) {
 
 	// si signature de petition, l'enregistrer avant d'afficher la page
 	// afin que celle-ci contienne la signature
-
 	if (isset($_GET['var_confirm'])) {
 		include_spip('balise/formulaire_signature');
-		reponse_confirmation($_GET['id_article'], $var_confirm);
+		reponse_confirmation($var_confirm);
 	}
 
 	//  refus du debug si l'admin n'est pas connecte
