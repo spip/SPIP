@@ -1,12 +1,14 @@
 <div class="formulaire_spip formulaire_signature">
-<a name="formulaire_signature" id="formulaire_signature"></a>
+<a name="sp#ENV{id_article}" id="sp#ENV{id_article}"></a>
 
-<form method="post" action="[(#ENV{self})][#sp(#ENV{id_article})]">
+[<p class="reponse_formulaire">(#ENV*{reponse})</p>]
+
+[<form method="post" action="(#ENV{self})[#sp(#ENV{id_article})]">
 <input type="hidden" name="url_page" value="#URL_SITE_SPIP/#SELF" />
 
 [<fieldset class="spip_encadrer">
 	<legend><:info_descriptif:></legend>
-	<p>(#ENV*{texte}|propre)</p>
+	(#ENV*{texte}|propre)
 </fieldset>]
 
 <fieldset class="spip_encadrer">
@@ -35,5 +37,7 @@
 
 <input type="submit" class="spip_bouton" value="<:bouton_valider:>" />
 </form>
+]
+
 
 </div>
