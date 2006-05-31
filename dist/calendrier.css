@@ -220,7 +220,7 @@ a.calendrier-annee:hover {
 	width: 12px; 
 	height: 12px;
 	/* URL a revoir */
-	behavior: url(spip.php?page=win_png);
+	behavior: url(win_png.htc);
 }
 
 .calendrier-icone { 

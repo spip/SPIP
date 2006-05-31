@@ -10,7 +10,6 @@ dist/inc-pied.html -text
 dist/inc-rubriques.html -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
-dist/rien.gif -text
 dist/style_prive.html -text
 dist/win_png.html -text
 dist/win_width.htc -text
@@ -383,6 +382,7 @@ ecrire/lang/spip_ru.php -text
 ecrire/polices/dustismo-license.txt -text svneol=unset#application/octet-stream
 ecrire/polices/dustismo.ttf -text
 ecrire/polices/dustismo_bold.ttf -text
+ecrire/rien.gif -text
 ecrire/safehtml/classes/HTMLSax3.php -text
 ecrire/safehtml/classes/HTMLSax3/Decorators.php -text
 ecrire/safehtml/classes/HTMLSax3/States.php -text
@@ -392,7 +392,10 @@ ecrire/safehtml/readme-SPIP.txt -text
 ecrire/safehtml/readme.txt -text
 ecrire/urls/page.php -text
 ecrire/urls/propres-qs.php -text
+ecrire/win_png.htc -text
 formulaires/choix_mots.html -text
 /inc-public.php3 -text
 /index.php -text
+/rien.gif -text
 /spip.php -text
+/win_png.htc -text
