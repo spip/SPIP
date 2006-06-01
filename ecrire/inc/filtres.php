@@ -2648,6 +2648,51 @@ function form_hidden($action) {
 	return $hidden;
 }
 
+function pagination($total, $debut, $pas) {
+	global $pagination_item_avant, $pagination_item_apres, $pagination_separateur;
+	global $pagination_max, $pagination_max_texte;
+	tester_variable('pagination_separateur', '&nbsp;| ');
+	tester_variable('pagination_max_texte', '...');
+
+	$pagination = array(
+		'lien_base' => self(),
+		'total' => $total,
+		'position' => intval(_request($debut)),
+		'pas' => $pas,
+		'nombre_pages' => floor(($total-1)/$pas)+1,
+		'page_courante' => floor(intval(_request($debut))/$pas)+1,
+		'lien_pagination' => '<a href="@url@">@item@</a>'
+	);
+
+	if($pagination_max == 0 OR $pagination_max>=$pagination['nombre_pages']) {
+		$premiere = 1;
+		$derniere = $pagination['nombre_pages'];
+		$texte_avant = '';
+		$texte_apres = '';
+	}
+	else {
+		$premiere = max(1, $pagination['page_courante']-floor($pagination_max/2));
+		$derniere = min($pagination['nombre_pages'], $premiere+$pagination_max-1);
+		$premiere = $derniere == $pagination['nombre_pages'] ? $derniere-$pagination_max+1 : $premiere;
+		$texte_avant = $premiere>1 ? $pagination_max_texte.' ' : '';
+		$texte_apres = $derniere<$pagination['nombre_pages'] ? ' '.$pagination_max_texte : '';
+	}
+
+	$texte = '';
+	if($pagination['nombre_pages']>1) {
+		for($i = $premiere;$i<=$derniere;$i++) {
+			$url = parametre_url($pagination['lien_base'], $debut, strval(($i-1)*$pas));
+			$_item = strval($i);
+			$item = ($i != $pagination['page_courante']) ?
+				preg_replace(array(',@url@,', ',@item@,'), array($url, $_item), $pagination['lien_pagination']) :
+				$_item;
+			$texte .= $pagination_item_avant.$item.$pagination_item_apres;
+			if($i<$pagination['nombre_pages']) $texte .= $pagination_separateur;
+		}
+		return $texte_avant.$texte.$texte_apres;
+	}
+	return '';
+}
 
 ### fonction depreciee, laissee ici pour compat ascendante 1.9
 function entites_unicode($texte) { return charset2unicode($texte); }

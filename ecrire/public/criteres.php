@@ -90,6 +90,15 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 	  $crit->param[1][0]->texte .
 	  '"' ;
 }
+// {pagination}
+// http://www.spip.net/@pagination
+function critere_pagination_dist($idb, &$boucles, $crit) {
+ $pas = _PAS>0 ? _PAS : 10;
+	$boucle = &$boucles[$idb];
+	$boucle->limit = 'intval($GLOBALS["debut'.$idb.'"]) . ",'.$pas.'"';
+}
+
+
 
 // {recherche}
 // http://www.spip.net/@recherche

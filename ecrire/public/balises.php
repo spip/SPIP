@@ -556,6 +556,40 @@ function balise_POPULARITE_dist ($p) {
 	return $p;
 }
 
+// #PAGINATION
+// http://www.spip.net/fr_articleXXXX.html
+function balise_PAGINATION_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b === '') {
+		erreur_squelette(
+			_T('zbug_champ_hors_boucle',
+				array('champ' => "#$b" . 'PAGINATION')
+			), $p->id_boucle);
+		$p->code = "''";
+	}
+	elseif (!$p->param || $p->param[0][0]) {
+		erreur_squelette(
+			/*_T('zbug_champ_manquant',
+				array('champ' => '#PAGINATION')*/
+			_L('param&eacute;tre manquant pour #PAGINATION')
+			, $p->id_boucle);
+		$p->code = "''";
+	}
+	else {
+		$nom_boucle = calculer_liste($p->param[0][1],
+					$p->descr,
+					$p->boucles,
+					$p->id_boucle);
+  $nom_boucle = str_replace("'", '', $nom_boucle);
+  $pas = _PAS>0 ? _PAS : 10;
+  
+		$p->boucles[$b]->numrows = true;
+		$p->code = "pagination(\$Numrows['$b']['total'],'debut".$nom_boucle."',".$pas.")";
+	}
+
+	$p->interdire_scripts = true;
+	return $p;
+}
 
 //
 // Fonction commune aux balises #LOGO_XXXX
