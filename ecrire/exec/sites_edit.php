@@ -130,14 +130,16 @@ $activer_syndic = $GLOBALS['meta']["activer_syndic"];
 echo "\n<input type='hidden' name='syndication_old' value=\"$syndication\">";
 
 if ($activer_syndic != "non") {
-	debut_cadre_enfonce();
+	debut_cadre_enfonce('feed.png');
 	if ($syndication == "non") {
 		echo "\n<input type='radio' name='syndication' value='non' id='syndication_non' CHECKED>";
 	}
 	else {
 		echo "\n<input type='radio' name='syndication' value='non' id='syndication_non'>";
 	}
-	echo " <b><label for='syndication_non'>"._T('bouton_radio_non_syndication')."</label></b>\n<p>";
+	echo " <b><label for='syndication_non'>",
+		_T('bouton_radio_non_syndication'),
+		"</label></b>\n<p>";
 
 	if ($syndication == "non") {
 		echo "<INPUT TYPE='radio' NAME='syndication' VALUE='oui' id='syndication_oui'>";

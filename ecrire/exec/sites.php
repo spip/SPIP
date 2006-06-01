@@ -265,7 +265,7 @@ echo "<p><center>";
 echo "</center>";
 
 if ($id_syndic AND $flag_administrable AND ($spip_display != 4))
-  afficher_boite_logo('site', 'id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'sites');
+  afficher_boite_logo('id_syndic', $id_syndic, _T('logo_site')." ".aide ("rublogo"), _T('logo_survol'), 'sites');
 
 echo pipeline('affiche_gauche',array('args'=>array('exec'=>'sites','id_syndic'=>$id_syndic),'data'=>''));
 
@@ -367,7 +367,12 @@ if ($flag_administrable) {
 }
 
 if ($syndication == "oui" OR $syndication == "off" OR $syndication == "sus") {
-	echo "<p><font size=3 face='Verdana,Arial,Sans,sans-serif'><b>"._T('info_site_syndique')."</b></font>";
+	echo "<p><font size=3 face='Verdana,Arial,Sans,sans-serif'>",
+	"<a href='".htmlspecialchars($url_syndic)."'>",
+	http_img_pack('feed.png', 'RSS', ''),
+	'</a> ',
+	'<b>'._T('info_site_syndique').'</b>',
+	'</font>';
 
 	if ($erreur_syndic)
 		echo "<p><font color=red><b>$erreur_syndic</b></font>";
