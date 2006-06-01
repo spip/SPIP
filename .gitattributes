@@ -11,7 +11,6 @@ dist/inc-rubriques.html -text
 dist/puce.gif -text
 dist/puce_rtl.gif -text
 dist/style_prive.html -text
-dist/win_png.html -text
 dist/win_width.htc -text
 ecrire/action/autoriser.php -text
 ecrire/action/ical.php -text
