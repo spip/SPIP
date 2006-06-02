@@ -43,8 +43,9 @@
 				[(#REM) Articles trouves ]
 				<B_articles>
 				<h2 class="invisible"><:articles:></h2>
+				#PAGINATION
 				<ol>
-					<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {0,10}>
+					<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination 10}>
 					<li class="extrait">
 					<h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
 					<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
@@ -60,8 +61,9 @@
 				<B_rubriques>
 				<div class="rubriques">
 					<h2 class="titre"><:rubriques:></h2>
+					#PAGINATION
 					<ul>
-						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {0,5}>
+						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_rubriques>
 					</ul>
@@ -72,8 +74,9 @@
 				<B_mots>
 				<div class="divers">
 					<h2 class="titre"><:mots_clefs:></h2>
+					#PAGINATION
 					<ul>
-						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {0,5}>
+						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_mots>
 					</ul>
@@ -84,8 +87,9 @@
 				<B_breves>
 				<div class="breves">
 					<h2 class="titre"><:breves:></h2>
+					#PAGINATION
 					<ul>
-						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {0,5}>
+						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_breves>
 					</ul>
@@ -96,8 +100,9 @@
 				<B_messages>
 				<div class="forums">
 					<h2 class="titre"><:messages_forum:></h2>
+					#PAGINATION
 					<ul>
-						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {0,5}>
+						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
 						</BOUCLE_messages>
 					</ul>
@@ -108,8 +113,9 @@
 				<B_sites>
 				<div class="syndic">
 					<h2 class="titre"><:sites_web:></h2>
+					#PAGINATION
 					<ul>
-						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {0,5}>
+						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_sites>
 					</ul>

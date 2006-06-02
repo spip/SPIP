@@ -131,8 +131,8 @@ function calculer_boucle_nonrec($id_boucle, &$boucles) {
 
 	if ($boucle->mode_partie)
 		$corps .= "
-		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle
-		AND \$Numrows['$id_boucle']['compteur_boucle']-1 <= \$fin_boucle) {";
+		if (\$Numrows['$id_boucle']['compteur_boucle']-1 >= \$debut_boucle) {
+		if (\$Numrows['$id_boucle']['compteur_boucle']-1 > \$fin_boucle) break;\n";
 	
 	// Calculer les invalideurs si c'est une boucle non constante et si on
 	// souhaite invalider ces elements
@@ -481,7 +481,7 @@ function compile_cas($tableau, $descr, &$boucles, $id_boucle) {
 			$newdescr['id_mere'] = $nom;
 			$newdescr['niv']++;
 			$code = 'BOUCLE' .
-			  ereg_replace("-","_", $nom) . $descr['nom'] .
+			  str_replace("-","_", $nom) . $descr['nom'] .
 			  '($Cache, $Pile, $doublons, $Numrows, $SP)';
 			$commentaire= "?$nom";
 			$avant = calculer_liste($p->avant,
