@@ -2710,7 +2710,7 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 				$pagination['lien_pagination']) :
 			$_item;
 		$texte .= $item;
-		if($i<$pagination['nombre_pages']) $texte .= $separateur;
+		if($i<$derniere) $texte .= $separateur;
 	}
 	return $bloc_ancre.$texte;
 }
