@@ -2648,6 +2648,19 @@ function form_hidden($action) {
 	return $hidden;
 }
 
+function calcul_bornes_pagination($max, $nombre, $courante) {
+	if (function_exists("bornes_pagination"))
+		return bornes_pagination($max, $nombre, $courante);
+
+	if($max<=0 OR $max>=$nombre)
+		return array(1, $nombre);
+
+	$premiere = max(1, $courante-floor($max/2));
+	$derniere = min($nombre, $premiere+$max-1);
+	$premiere = $derniere == $nombre ? $derniere-$max+1 : $premiere;
+	return array($premiere, $derniere);
+}
+
 //
 // fonction standard de calcul de la balise #PAGINATION
 // on peut la surcharger en definissant dans mes_fonctions :
@@ -2657,10 +2670,11 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	if (function_exists("pagination"))
 		return pagination($total, $nom, $pas, $liste);
 
-	global $pagination_item_avant, $pagination_item_apres, $pagination_separateur;
-	global $pagination_max, $pagination_max_texte;
-	tester_variable('pagination_separateur', '&nbsp;| ');
-	tester_variable('pagination_max_texte', '...');
+	$pagination_separateur = '&nbsp;| ';
+
+	global $pagination_max;
+	tester_variable($pagination_max, 10);
+	$pagination_max = intval($pagination_max);
 
 	$debut = 'debut'.$nom;
 
@@ -2677,21 +2691,6 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	$ancre='pagination'.$nom;
 	$bloc_ancre = unique("<a name='$ancre' id='$ancre'></a>");
 
-	if($pagination_max == 0 OR $pagination_max>=$pagination['nombre_pages']) {
-		$premiere = 1;
-		$derniere = $pagination['nombre_pages'];
-		$texte_avant = '';
-		$texte_apres = '';
-	}
-	else {
-		$premiere = max(1, $pagination['page_courante']-floor($pagination_max/2));
-		$derniere = min($pagination['nombre_pages'], $premiere+$pagination_max-1);
-		$premiere = $derniere == $pagination['nombre_pages'] ? $derniere-$pagination_max+1 : $premiere;
-		$texte_avant = $premiere>1 ? $pagination_max_texte.' ' : '';
-		$texte_apres = $derniere<$pagination['nombre_pages'] ? ' '.$pagination_max_texte : '';
-	}
-
-
 	// Pas de pagination
 	if($pagination['nombre_pages']<=1)
 		return '';
@@ -2699,6 +2698,8 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 	// liste = false : on ne veut que l'ancre
 	if (!$liste)
 		return $bloc_ancre;
+
+	list($premiere, $derniere) = calcul_bornes_pagination($pagination_max, $pagination['nombre_pages'], $pagination['page_courante']);
 
 	// liste  = true : on retourne tout (ancre + bloc de navigation)
 	$texte = '';
@@ -2711,10 +2712,10 @@ function calcul_pagination($total, $nom, $pas, $liste = true) {
 				array($url.'#'.$ancre, $_item),
 				$pagination['lien_pagination']) :
 			$_item;
-		$texte .= $pagination_item_avant.$item.$pagination_item_apres;
+		$texte .= $item;
 		if($i<$pagination['nombre_pages']) $texte .= $pagination_separateur;
 	}
-	return $bloc_ancre.$texte_avant.$texte.$texte_apres;
+	return $bloc_ancre.$texte;
 }
 
 ### fonction depreciee, laissee ici pour compat ascendante 1.9
