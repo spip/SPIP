@@ -2648,7 +2648,15 @@ function form_hidden($action) {
 	return $hidden;
 }
 
-function pagination($total, $nom, $pas, $liste = true) {
+//
+// fonction standard de calcul de la balise #PAGINATION
+// on peut la surcharger en definissant dans mes_fonctions :
+// function pagination($total, $nom, $pas, $liste) {...}
+//
+function calcul_pagination($total, $nom, $pas, $liste = true) {
+	if (function_exists("pagination"))
+		return pagination($total, $nom, $pas, $liste);
+
 	global $pagination_item_avant, $pagination_item_apres, $pagination_separateur;
 	global $pagination_max, $pagination_max_texte;
 	tester_variable('pagination_separateur', '&nbsp;| ');
