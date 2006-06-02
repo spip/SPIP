@@ -76,7 +76,7 @@ function balise_FORMULAIRE_SIGNATURE_dyn($id_article, $petition, $texte, $site_o
 		'texte' => $texte,
 		'site_obli' => $site_obli,
 		'message' => $message,
-		'self' => $reponse ? '' : str_replace('&amp;', '&', self()),
+		'self' => $reponse ?'':parametre_url(self(),'debut_signatures','', '&'),
 		'reponse' => $reponse
 	));
 }

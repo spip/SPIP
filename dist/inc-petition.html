@@ -19,7 +19,7 @@
 		</tr>
 	</thead>
 	<tbody>
-<BOUCLE_signatures(SIGNATURES) {id_article} {par date} {inverse} {pagination}>
+<BOUCLE_signatures(SIGNATURES){id_article} {par date}{inverse} {pagination 20}>
 		<tr>
 		<td class="signature-date">[(#DATE|affdate)]</td>
 		<td class="signature-nom">#NOM[<br /><a href="(#URL_SITE)" class="spip_out"><small>[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})</small>]</a>]</td>

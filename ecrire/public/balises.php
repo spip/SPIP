@@ -577,7 +577,6 @@ function balise_PAGINATION_dist($p, $liste='true') {
 		$option = str_replace("'", '', $option);
 	}
 
-	$pas = _PAS > 0 ? _PAS : 10;
 	$p->boucles[$b]->numrows = true;
 
 	if ($option)
@@ -588,7 +587,9 @@ function balise_PAGINATION_dist($p, $liste='true') {
 	$p->code = "pagination(
 	(isset(\$Numrows['$b']['grand_total']) ?
 		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
-	), '$nom_boucle', $pas, $liste)";
+	), '$nom_boucle', "
+	. $p->boucles[$b]->total_parties
+	. ", $liste)";
 
 	$p->interdire_scripts = false;
 	return $p;
