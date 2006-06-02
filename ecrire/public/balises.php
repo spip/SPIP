@@ -575,7 +575,7 @@ function balise_PAGINATION_dist($p, $liste='true') {
 			$p->boucles,
 			$p->id_boucle);
 		$option = str_replace("'", '', $option);
-	}
+	} else  $option = '';
 
 	$p->boucles[$b]->numrows = true;
 

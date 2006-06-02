@@ -198,7 +198,7 @@ function sql_auteurs($id_article, $table, $id_boucle, $serveur='') {
 				'lien' => 'spip_auteurs_articles'), 
 			array("lien.id_article=$id_article",
 				"auteurs.id_auteur=lien.id_auteur"),
-			'',array(),'','','', 
+			'',array(),'','', array(),
 			$table, $id_boucle, $serveur);
 
 		while($row_auteur = spip_abstract_fetch($result_auteurs, $serveur)) {

@@ -123,7 +123,7 @@ function index_tables_en_pile($idb, $nom_champ, &$boucles) {
 	if ($excep) {
 	  return index_exception($boucles[$idb], $desc, $nom_champ, $excep);
 	} else {
-		if ($desc['field'][$nom_champ])
+		if (isset($desc['field'][$nom_champ]))
 			return array("$t.$nom_champ", $nom_champ);
 		else {
 		  if ($boucles[$idb]->jointures_explicites) {
