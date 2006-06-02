@@ -340,7 +340,7 @@ function calculer_parties($boucles, $id_boucle) {
 		$boucle->sql_serveur .
 		'");';
 
-	ereg("([+-/])([+-/])?", $mode_partie, $regs);
+	ereg("([+-/p])([+-/])?", $mode_partie, $regs);
 	list(,$op1,$op2) = $regs;
 
 	// {1/3}
@@ -365,6 +365,12 @@ function calculer_parties($boucles, $id_boucle) {
 		$retour .= "\n	"
 			. '$debut_boucle = $nombre_boucle - ' . $partie . ';';
 	}
+	// {pagination}
+	elseif ($op1 == 'p') {
+		$retour .= "\n	"
+			. '$debut_boucle = ' . $partie . ';';
+	}
+
 	// {x,1}
 	if ($op2 == '+') {
 		$fin = '$debut_boucle'
@@ -385,6 +391,8 @@ function calculer_parties($boucles, $id_boucle) {
 
 	// calcul du total boucle final
 	$retour .= "\n	"
+		.'$Numrows[\''.$id_boucle.'\']["grand_total"] = $nombre_boucle;'
+		. "\n	"
 		.'$Numrows[\''.$id_boucle.'\']["total"] = max(0,$fin_boucle - $debut_boucle + 1);';
 
 	return $retour;

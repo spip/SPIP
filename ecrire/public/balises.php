@@ -558,8 +558,9 @@ function balise_POPULARITE_dist ($p) {
 
 // #PAGINATION
 // http://www.spip.net/fr_articleXXXX.html
-function balise_PAGINATION_dist($p) {
+function balise_PAGINATION_dist($p, $liste='true') {
 	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+
 	if ($b === '') {
 		erreur_squelette(
 			_T('zbug_champ_hors_boucle',
@@ -567,27 +568,55 @@ function balise_PAGINATION_dist($p) {
 			), $p->id_boucle);
 		$p->code = "''";
 	}
-	elseif (!$p->param || $p->param[0][0]) {
-		erreur_squelette(
-			/*_T('zbug_champ_manquant',
-				array('champ' => '#PAGINATION')*/
-			_L('param&eacute;tre manquant pour #PAGINATION')
-			, $p->id_boucle);
-		$p->code = "''";
-	}
-	else {
-		$nom_boucle = calculer_liste($p->param[0][1],
-					$p->descr,
-					$p->boucles,
-					$p->id_boucle);
-  $nom_boucle = str_replace("'", '', $nom_boucle);
-  $pas = _PAS>0 ? _PAS : 10;
-  
-		$p->boucles[$b]->numrows = true;
-		$p->code = "pagination(\$Numrows['$b']['total'],'debut".$nom_boucle."',".$pas.")";
+
+	if ($p->param) {
+		$option = calculer_liste($p->param[0][1],
+			$p->descr,
+			$p->boucles,
+			$p->id_boucle);
+		$option = str_replace("'", '', $option);
 	}
 
-	$p->interdire_scripts = true;
+	$pas = _PAS > 0 ? _PAS : 10;
+	$p->boucles[$b]->numrows = true;
+
+	if ($option)
+		$nom_boucle = $option;
+	else
+		$nom_boucle = $b;
+
+	$p->code = "pagination(
+	(isset(\$Numrows['$b']['grand_total']) ?
+		\$Numrows['$b']['grand_total'] : \$Numrows['$b']['total']
+	), '$nom_boucle', $pas, $liste)";
+
+	$p->interdire_scripts = false;
+	return $p;
+}
+
+// N'afficher que les ancres de la pagination (au-dessus, par exemple, alors
+// qu'on mettra les liens en-dessous de la liste paginee)
+function balise_ANCRES_PAGINATION_dist($p) {
+	$p = balise_PAGINATION_dist($p, $liste='false');
+	return $p;
+}
+
+// equivalent a #TOTAL_BOUCLE sauf pour les boucles paginees, ou elle
+// indique le nombre total d'articles repondant aux criteres hors pagination
+function balise_GRAND_TOTAL_dist($p) {
+	$b = $p->nom_boucle ? $p->nom_boucle : $p->descr['id_mere'];
+	if ($b === '' || !isset($p->boucles[$b])) {
+		erreur_squelette(
+			_T('zbug_champ_hors_boucle',
+				array('champ' => "#$b" . 'TOTAL_BOUCLE')
+			), $p->id_boucle);
+		$p->code = "''";
+	} else {
+		$p->code = "(isset(\$Numrows['$b']['grand_total'])
+			? \$Numrows['$b']['grand_total'] : \$Numrows['$b']['total'])";
+		$p->boucles[$b]->numrows = true;
+		$p->interdire_scripts = false;
+	}
 	return $p;
 }
 

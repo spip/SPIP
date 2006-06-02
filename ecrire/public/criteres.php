@@ -93,9 +93,11 @@ function critere_debut_dist($idb, &$boucles, $crit) {
 // {pagination}
 // http://www.spip.net/@pagination
 function critere_pagination_dist($idb, &$boucles, $crit) {
- $pas = _PAS>0 ? _PAS : 10;
+	$pas = _PAS>0 ? _PAS : 10;
 	$boucle = &$boucles[$idb];
-	$boucle->limit = 'intval($GLOBALS["debut'.$idb.'"]) . ",'.$pas.'"';
+	$boucle->mode_partie = 'p+';
+	$boucle->partie = 'intval(_request("debut'.$idb.'"))';
+	$boucle->total_parties = $pas;
 }
 
 
