@@ -104,7 +104,7 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 #pied small { font-size: 0.77em; }
 
 /*  ------------------------------------------
-/*  Habillage des menus et de navigation
+/*  Habillage des menus et de la navigation
 /*  ------------------------------------------ */
 
 /*  Habillage general des menus de navigation
@@ -265,6 +265,8 @@ h1, h2, h3, h4, h5, h6 { margin: 0; padding: 0; font-size: 1em; font-weight: nor
 	padding: 0.9em; 
 	font-size: 0.82em; 
 	line-height: 1.4em; }
+
+.pagination { font-size: 0.71em; margin-top: 0; padding-top: 0; }
 
 /*  ------------------------------------------
 /*  Habillage specifique du plan du site
