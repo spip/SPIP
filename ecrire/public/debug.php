@@ -338,8 +338,7 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	http_no_cache();
 	lang_select($auteur_session['lang']);
 	$self = str_replace("\\'", '&#39;', self());
-	$self .= ((strpos($self, '?') !== false) ? '&amp;' : '?') . 
-	  'var_mode=debug';
+	$self = parametre_url($self,'var_mode', 'debug');
 	echo _DOCTYPE_ECRIRE,
 	  "<html lang='".$GLOBALS['spip_lang']."' dir='ltr'>\n" .
 	  "<head>\n<title>",
@@ -353,11 +352,12 @@ function debug_dumpfile ($texte, $fonc, $type) {
 	  "\n<div id='spip-debug' style='position: absolute; top: 22px; z-index: 1000;height:97%;left:10px;right:10px;'><div id='spip-boucles'>\n"; 
 
 	if ($var_mode_affiche !== 'validation') {
+		$self = parametre_url($self,'var_mode', 'debug');
 	  foreach ($debug_objets['sourcefile'] as $nom_skel => $sourcefile) {
 		echo "<fieldset><legend>",$sourcefile,"&nbsp;: ";
 		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=squelette#$nom_skel'>"._T('squelette')."</a>";
-		echo "\n<a href='$self&amp;var_mode=debug&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
-		echo "\n<a href='$self&amp;var_mode=debug&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
+		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=resultat#$nom_skel'>"._T('zbug_resultat')."</a>";
+		echo "\n<a href='$self&amp;var_mode_objet=$nom_skel&amp;var_mode_affiche=code#$nom_skel'>"._T('zbug_code')."</a></legend>";
 
 		if (is_array($contexte = $debug_objets['contexte'][$nom_skel]))
 			echo afficher_debug_contexte($contexte);
