@@ -949,6 +949,7 @@ function spip_initialisation() {
 	// qq chaines standard
 	define('_ACCESS_FILE_NAME', '.htaccess');
 	define('_AUTH_USER_FILE', '.htpasswd');
+	define('_SPIP_DUMP', 'dump.xml');
 
 	define('_DOCTYPE_ECRIRE', "<!DOCTYPE HTML PUBLIC '-//W3C//DTD HTML 4.01 Transitional//EN' 'http://www.w3.org/TR/html4/loose.dtd'>\n");
 

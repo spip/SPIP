@@ -20,12 +20,13 @@ include_spip('inc/presentation');
 include_spip('inc/config');
 include_spip('inc/logos');
 
-if ($connect_statut != '0minirezo' OR !$connect_toutes_rubriques) {
+ if ($connect_statut != '0minirezo') {
 	echo _T('avis_non_acces_page');
 	fin_page();
 	exit;
 }
 
+if (!$connect_toutes_rubriques) redirige_par_entete(generer_url_ecrire('admin_tech','',true));
 
 //
 // Modifications
