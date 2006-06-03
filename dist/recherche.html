@@ -42,16 +42,19 @@
 
 				[(#REM) Articles trouves ]
 				<B_articles>
+				#ANCRE_PAGINATION
 				<h2 class="invisible"><:articles:></h2>
-				#PAGINATION
-				<ol>
+
+				<ul>
 					<BOUCLE_articles(ARTICLES) {recherche} {par points}{inverse} {pagination 10}>
 					<li class="extrait">
 					<h3 class="titre"><a href="#URL_ARTICLE">[(#TITRE|supprimer_numero|couper{80})]</a></h3>
 					<small>[(#DATE|affdate)]<B_auteurs>, <:par_auteur:> <BOUCLE_auteurs(AUTEURS) {id_article} {", "}>[(#NOM|supprimer_numero)]</BOUCLE_auteurs></small>
 					</li>
 					</BOUCLE_articles>
-				</ol></B_articles>
+				</ul>
+				[<p class="pagination">(#PAGINATION)</p>]
+				</B_articles>
 
 			</div><!-- fin contre-encart -->
 
@@ -60,65 +63,70 @@
 				[(#REM) Rubriques trouvees ]
 				<B_rubriques>
 				<div class="rubriques">
+					#ANCRE_PAGINATION
 					<h2 class="titre"><:rubriques:></h2>
-					#PAGINATION
 					<ul>
 						<BOUCLE_rubriques(RUBRIQUES) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="#URL_RUBRIQUE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_rubriques>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_rubriques>
 
 				[(#REM) Mots-cles trouves ]
 				<B_mots>
 				<div class="divers">
+					#ANCRE_PAGINATION
 					<h2 class="titre"><:mots_clefs:></h2>
-					#PAGINATION
 					<ul>
 						<BOUCLE_mots(MOTS) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="#URL_MOT">[(#TITRE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_mots>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_mots>
 
 				[(#REM) Breves trouvees ]
 				<B_breves>
 				<div class="breves">
+					#ANCRE_PAGINATION
 					<h2 class="titre"><:breves:></h2>
-					#PAGINATION
 					<ul>
 						<BOUCLE_breves(BREVES) {recherche} {par points}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_BREVE">[(#TITRE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_breves>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_breves>
 
 				[(#REM) Messages trouves ]
 				<B_messages>
 				<div class="forums">
+					#ANCRE_PAGINATION
 					<h2 class="titre"><:messages_forum:></h2>
-					#PAGINATION
 					<ul>
 						<BOUCLE_messages(FORUMS) {recherche} {par points}{inverse} {pagination 5}>
 						<li>[(#DATE|affdate_court) : ]<a href="#URL_FORUM">#TITRE</a></li>
 						</BOUCLE_messages>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_messages>
 
 				[(#REM) Sites web trouves ]
 				<B_sites>
 				<div class="syndic">
+					#ANCRE_PAGINATION
 					<h2 class="titre"><:sites_web:></h2>
-					#PAGINATION
 					<ul>
 						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
 						<li><a href="[(#ID_SYNDIC|generer_url_site)]">[(#NOM_SITE|supprimer_numero|couper{80})]</a></li>
 						</BOUCLE_sites>
 					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
 				</div>
 				</B_sites>
 
